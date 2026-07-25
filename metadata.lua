@@ -48,6 +48,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_PayloadTemplateRefill.lua",
 		"Code/Fix_AsteroidLanderAvailable.lua",
 		"Code/Fix_ShuttleHubOffAvailable.lua",
+		"Code/Fix_FreedHousingNotice.lua",
 	},
 	'TagGameplay', true,
 })

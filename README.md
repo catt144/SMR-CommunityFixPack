@@ -52,6 +52,7 @@ and can be individually disabled.
 | PayloadTemplateRefill | Edit Payload keeps the amounts you set instead of refilling emptied rows from the flight-policy template |
 | AsteroidLanderAvailable | "No available Asteroid Landers" is no longer shown while an unassigned lander is sitting on the pad |
 | ShuttleHubOffAvailable | Switching a Shuttle Hub off actually removes it from the colony's transport planning instead of leaving colonists waiting for shuttles that never launch |
+| FreedHousingNotice | A home falling vacant is offered to the dome's homeless immediately instead of after their next update (up to 12 hours in a big colony) |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

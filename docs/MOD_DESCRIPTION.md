@@ -99,6 +99,11 @@ come back.
   dome is reachable, and that cache never noticed new shuttles — so colonists
   stayed homeless (and seniors stayed put) even after you built the hub that
   would have moved them.
+- A home that falls vacant is offered to the dome's homeless straight away. The
+  game only ever re-checked the homeless when YOU made housing available — built
+  a residence, switched one back on. A bed emptied by a death, a retirement or a
+  colonist moving out was invisible until each homeless colonist's own periodic
+  update came round, which is once every 12 hours in a colony past 3600 people.
 - Switching a Shuttle Hub off now actually takes it out of service. A hub you had
   turned off still counted as "shuttle transport available" for the whole colony,
   even though nothing will ever launch a shuttle from a hub that is switched off —

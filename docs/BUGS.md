@@ -71,7 +71,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F56 | Auto RC Transports never offload rockets                 | P2  | high | todo   |
 | F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
-| F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | todo   |
+| F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | todo   |
 | F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | fixed  |
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | todo   |
@@ -665,11 +665,25 @@ the Homeless label (`Colonist.lua:2284`). Devs shipped a reserved-list fixup alr
 a >50% vacant dome". **Fix:** cancel reservation in `UpdateResidence` when not actively en
 route; sol-tick sweep of stale `reserved` entries; show `#reserved` in infopanel.
 
-### F59 — Freed housing never notifies homeless (P2, med)
+### F59 — Freed housing never notifies homeless (P2, med)  `[fixed*: Code/Fix_FreedHousingNotice.lua — the RemoveResident half; the CancelResidenceReservation site is deliberately not hooked, see below]`
 `RemoveResident` (`Residence.lua:83-90`) and `CancelResidenceReservation` (:353-365) never
 call `CheckHomeForHomeless`; homeless rely on Idle heavy-update throttled to 12 game hours
 at 3600+ pop (`City.lua:118-120`). **Fix:** post-hook `RemoveResident` →
 `CheckHomeForHomeless()`.
+*Implemented one level up, on better evidence:* the post-hook is on
+`Colonist:SetResidence` (`Colonist.lua:2291-2307`), the only caller of `RemoveResident`.
+Same event, but the notification then runs when the move is FINISHED. `RemoveResident` is
+called from the MIDDLE of `SetResidence`, before `home:AddResident(self)` and before
+`self.residence` is updated; waking the homeless there lets one of them take the slot the
+colonist in hand is about to occupy, and the next shipped statement is
+`assert(self:GetFreeSpace() > 0)` followed by an unconditional insert (`Residence.lua:
+74-77`) — assert does not unwind in this engine, so that is an over-capacity residence.
+The hook no-ops unless a home was actually left and `GetFreeSpace() > 0` in it.
+*Open half:* `Residence:CancelResidenceReservation` is NOT hooked. `Residence:AddResident`
+releases the incoming colonist's reservation (`:74`) one line before the same
+`assert(self:GetFreeSpace() > 0)`, so a notification from there reintroduces exactly that
+race. The reservation case is instead bounded by F58's daily stale-reservation sweep plus
+the normal heavy update. Probe: `FreedHousingNotice` in `30_Probes_Wave3.lua`.
 
 ### F60 — Dome free-space uses `working`, assignment uses `ui_working` (P2, med)
 `Dome:RefreshFreeLivingSpaces` (`Dome.lua:2832-2834`) omits `player_enabled` →
