@@ -52,10 +52,12 @@ tested. Nothing ships as "verified" on probe evidence alone.
    the minutes before the first cheat.
 5. If a step's setup fails, write that down. "Could not set this up" is a valid and
    useful result.
-6. **If Enter opens no console** in a loaded colony (the Test Kit's auto-enable has
-   failed once, from the main menu): try Alt-Shift-C; failing that, launch a **Mod
-   Editor test session** (modding tools active → console granted unconditionally).
-   Report it either way so the Test Kit can grow a retry.
+6. **The console AUTO-OPENS ~2 s after a colony loads** (Test Kit, verified on
+   retail 2026-07-26). If closed, reopen with **Ctrl-Alt-C** (the kit's own
+   binding, rebuild-proof) or Enter / Alt-Shift-C (the shipped binding — worked
+   in the same verification, but one earlier session had it inexplicably dead,
+   hence the fallbacks). Last resort: a Mod Editor test session grants the
+   console unconditionally.
 
 ### Cheating without contaminating results
 
@@ -236,10 +238,12 @@ continuing IS the "fix didn't kill spawns" proof). Then build the 3 Sensor
 Towers and let 2 more strikes pass: warnings arrive earlier, gaps unchanged.
 Variant A (above) remains the quick check for any save; either variant alone is
 a valid PASS, B is preferred for the record.
+Landed at 1 SOL
+First strike No towers SOL 
 
 `Result:` _____________________________________________  (PASS / FAIL / notes / date)
 
-Starting at SOL 3
+Starting log at SOL 2.5
 
 ---
 
