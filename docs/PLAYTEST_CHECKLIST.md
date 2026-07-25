@@ -218,7 +218,28 @@ let 2 more strikes pass, and compare the gaps. Sensor Towers add warning time
 
 Turn the logger off (`SMRTest.Log.Meteors(false)`) and restore speed when done.
 
+**Timing fact (explains a quiet start):** the fix restarts the Meteors thread on
+every save **load** (by design — a running save would otherwise resume the old
+broken thread), and a restart re-rolls the full interval from that moment. First
+natural strike lands `spawntime`..`spawntime+random` game hours after the LAST
+load/new-game: Very Low 90–140h, Low 65–90h, High 50–75h, Very High 35–60h
+(`Data/MapSettings-Meteor.lua`, hours = value / 30000). Five quiet sols on Low
+with a reload in the middle is on schedule. To re-roll NOW with edited values:
+`RestartGlobalGameTimeThread("Meteors")` — same restart the fix does on load.
+
+**Variant B — natural cadence on a high-threat map (better evidence, no console
+edits):** start a throwaway colony on a landing spot with **maximum meteor
+threat** (Very High → first strike sol 1.5–2.5, then every 35–60h). Logger on
+from sol 0, ultra speed, let 3–4 natural strikes accumulate — gaps must sit in
+the 35–60h band (never collapse toward 6h, never stop entirely; strikes
+continuing IS the "fix didn't kill spawns" proof). Then build the 3 Sensor
+Towers and let 2 more strikes pass: warnings arrive earlier, gaps unchanged.
+Variant A (above) remains the quick check for any save; either variant alone is
+a valid PASS, B is preferred for the record.
+
 `Result:` _____________________________________________  (PASS / FAIL / notes / date)
+
+Starting at SOL 3
 
 ---
 
