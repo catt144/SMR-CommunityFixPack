@@ -522,8 +522,12 @@ distance even if NOT walkable; `ChooseDome` (:426-441) falls back to it; `Coloni
 (`Colonist.lua:1293-1297`) sends `TransportByFoot` unconditionally, and drops colonists at
 the `Colonistout` spot with no passable-point search (:1280-1291; contrast
 `CargoTransporterNew:EjectColonists` which uses `GetRandomPassableAroundOnMap`). Explains
-rocket→dome deaths and "stuck on Universal Depots". **Fix:** wrap `Arrive`: snap drop pos
-passable; if dest not walkable and no route, wait near rocket + retry dome selection.
+rocket→dome deaths and "stuck on Universal Depots". **Fix:** replace `Arrive`: snap drop pos
+passable; re-check the destination only when it is neither in walking distance nor reachable
+through the elevator assigned with it (`RocketBase.lua:2068-2071` → `TransportByFoot`,
+`Colonist.lua:2724-2737`; cross-map pairs are never "in walking dist", `Dome.lua:248-251`).
+On re-check take both `ChooseDome` returns and write `emigration_elevator` back, else wait
+near rocket under "Confused Colonists" + retry dome selection.
 
 ### F54 — Switched-off shuttle hubs count as transport available (P2, med-high)
 `IsLRTransportAvailable` (`ShuttleHub.lua:350-359`) counts hubs with
