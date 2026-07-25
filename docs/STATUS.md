@@ -4,7 +4,10 @@ Updated: 2026-07-25. This is the handoff snapshot; BUGS.md is the canonical
 defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the dev/test/release
 process, RESEARCH.md the lead catalog (incl. ChatGPT dossier cross-check),
 MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix list in the
-same commit that implements a fix; only `tested` fixes ship in the final text).
+same commit that implements a fix; only `tested` fixes ship in the final text),
+TESTING.md the force-the-bug test plan (script probes + cheat scenarios + the
+SMRTest companion-mod spec — build the test kit early in the build-out leg;
+its RunAll() before/after pair is the acceptance gate for `tested` status).
 
 ## What this project is
 
