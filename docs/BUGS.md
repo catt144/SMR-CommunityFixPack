@@ -62,6 +62,14 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | todo   |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | todo   |
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | todo   |
+| F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | todo   |
+| F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | todo   |
+| F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | todo   |
+| F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | todo   |
+| F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | todo   |
+| F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | todo   |
+| F56 | Auto RC Transports never offload rockets                 | P2  | high | todo   |
+| F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -462,6 +470,88 @@ Destroyed stations leaving undeletable track: addressed (`TrainTransport.lua:14-
 lingering reports likely F45. "Won't connect to stations": strict geometric rules with
 zero feedback, no coding error found (F48 for migrated saves). "Rebuild blocked by raised
 terrain": design (endpoint/turn `max_z_delta` check, `Tracks.lua:35-65,281-284`).
+
+### F50 — Auto-rockets kick approaching drones to Idle every hour (P1, high)
+`UniversalRocketBase:HourlyUpdate` (`UniversalRocket.lua:1357-1370`) → `CreateAutoCargoRequest`
+→ `SetCargoRequest` → `UpdateCargoResourceRequests` (`CargoTransporterNew.lua:1238-1271`)
+does `DisconnectFromCommandCenters()` + reconnect EVERY HOUR while landed;
+`DroneControl:OnRemoveBuilding` (`DroneControl.lua:720-729`) sets every drone heading
+there to `Idle`. Trips > 1 game hour can never complete; priority irrelevant. Aggravators:
+`starting_drones = 0`, `exclude_from_lr_transportation = true` (shuttles never help).
+Explains "drones ignore rocket cargo". **Fix:** wrap `UpdateCargoResourceRequests` to
+suppress the disconnect/reconnect churn (requests mutate in place via
+`TaskRequester:AddRequest`); one-time connect if never connected.
+
+### F51 — Transport-mode cache never sees new shuttles (P1, high)
+`Colonist.lua:2504-2537` caches `(community,pos) → mode` incl. `false`, but
+`shuttles_available` is not in the key and cache only flushes on train/passage events
+(:2480-2488). Building/refueling a Shuttle Hub never flushes → `FindEmigrationDome`
+(:2657-2698) skips domes forever. Explains homeless-despite-free-housing and cross-dome
+seniors. **Fix:** wrap `FindTransportationModeToCommunity` to key on shuttle flag + flush
+cache on ConstructionComplete/TTL.
+
+### F52 — Colonists still walk ≤400m in vacuum past passages (P1, high)
+`FindTransportationModeToCommunity_BeforeTrains` (`Colonist.lua:2467-2476`) returns "walk"
+whenever ≤400m (`ColonistMaxDomeWalkDist`, `_GameConst.lua:133`); `TryToEmigrateToDome`
+(:1555-1575) only computes passage path when `transport_mode_dist > min_dist` — walk mode
+guarantees it isn't. 400m ≈ 100s walk vs `OxygenMaxOutsideTime` 120s (`__const.lua:1604`)
+— exit/queue/detours push it over. The original long-walk bug, still present. **Fix:**
+override `TryToEmigrateToDome`: in non-breathable atmosphere always try passage path
+first; cap raw outside walks to an oxygen budget; else shuttle/stay.
+
+### F53 — Arrivals hike to unreachable "safety dome" and die (P1, high)
+`GetDomesReachableByColonists` (`_GameUtils.lua:346-395`): `safety_dome` = nearest by
+distance even if NOT walkable; `ChooseDome` (:426-441) falls back to it; `Colonist:Arrive`
+(`Colonist.lua:1293-1297`) sends `TransportByFoot` unconditionally, and drops colonists at
+the `Colonistout` spot with no passable-point search (:1280-1291; contrast
+`CargoTransporterNew:EjectColonists` which uses `GetRandomPassableAroundOnMap`). Explains
+rocket→dome deaths and "stuck on Universal Depots". **Fix:** wrap `Arrive`: snap drop pos
+passable; if dest not walkable and no route, wait near rocket + retry dome selection.
+
+### F54 — Switched-off shuttle hubs count as transport available (P2, med-high)
+`IsLRTransportAvailable` (`ShuttleHub.lua:350-359`) counts hubs with
+`GetWorkNotPermittedReason()` truthy (= player toggled OFF) as available, but
+`SendOutShuttles` only runs when `working`. All-hubs-off (late-game power saving) →
+colonists queue on pickup spots outside for shuttles that never come; walkability logic
+also skewed (`Dome.lua:256-259`). **Fix:** predicate counts only self-lifting suspensions.
+
+### F55 — Open domes: drone access lost + unreachable-forever cache (P1, med — matches report exactly)
+(1) Open-air skin swaps dome entity with `skin[2] = empty_table`
+(`OpenAirBuilding.lua:216-237`) → `Dome_Entrance` attaches destroyed
+(`Building.lua:2409-2430`) → their PF tunnels (only drone routes in,
+`Dome_Entrance.lua:15-16`) removed (`Movable.lua:602-605`). (2) Same moment, inside
+buildings START needing maintenance (`OpenDome_Maintenance`, `OpenAirBuilding.lua:114-123`).
+(3) Failed approaches cached `GameTime() + max_int` = unreachable forever
+(`Drone.lua:819-849`), only reset by passability edits, then re-fail. (4) `Drone:GoHome`
+filters park spots by `GetPointOutsideDomesIn` (`Dome.lua:2505-2507`) → fleet clusters
+just outside the dome. Caveat: final passability of `*_Open` entities is engine data —
+unverifiable from Lua. **Fix:** override `Dome:CalcOpenAirSkin` to preserve entrance
+attaches; override approach-failure cache to store `GameTime()` so `CleanUnreachables`
+retires entries.
+
+### F56 — Auto RC Transports never offload rockets (P2, high)
+`RCTransport.lua`: `Automation_Gather` (:884-908) sources only surface deposits;
+`Automation_Unload` (:910-941) excludes rockets as destinations. Manual load/routes work —
+players correctly perceive AUTO as broken. Combined with F50 + shuttle exclusion, remote
+rockets have no automated unloader at all. **Fix:** extend `ProcAutomation`: when empty,
+seek landed `UniversalRocketBase` with status "unloading", `TransferAllResources`.
+
+### F57 — Drone/transport minors bundle (P3, med)
+(a) `DroneControl:UpdateRocketsInternal` (`DroneControl.lua:613-639`) clears only
+`r_t.Fuel`, writes `r_t[r.FuelResource]` — stale restrictor for non-"Fuel" rockets (latent);
+(b) `OnMsg.OnPassabilityChanged` (`Drone.lua:851-864`) rebuilds unreachable table without
+weak-keys meta and doesn't recompute count; (c) `recursive_enum_dome_workplaces`
+(`Dome.lua:674-675`) skips quarantine check, saved only by `Workplace:IsSuitable` re-check.
+
+### Assignment systems: investigated, no single defect (leads recorded)
+- "Unemployed every sol": no smoking gun; three verified contributing mechanisms —
+  (1) Open-domes cross-dome employment uses DAILY-recomputed 400m walk distances
+  (`Dome.lua:203-238,910-914`) — boundary flips fire commuters (`Colonist.lua:1498-1499`);
+  (2) `Dome:OnSupplyInterrupted` (`Dome.lua:1584-1618`) fires all cross-dome commuters
+  after 1 sol of any supply interruption; (3) re-employment throttled to 12h at ≥3600
+  colonists (`City.lua:118-120`). Needs a repro save.
+- Same-dome seniors→retirement: working as designed (comfort scoring, `Residence.lua:382-423`);
+  cross-dome is F51.
 
 ## Candidates under investigation
 
