@@ -244,11 +244,18 @@ that loads before this one.
 
 ### Optional module (off by default)
 
-**Classic rocket behavior** [DRAFT NOTE: implement as D01]: the remaster
-intentionally changed rockets to not auto-refuel or auto-load Rare Metals
-while idle — that's a design decision, not a bug, so it's not part of the
-standard pack. This optional module restores the original game's behavior for
-players who want it. Off unless you turn it on.
+**Classic rocket behavior** (`ClassicRockets`): the remaster intentionally
+changed rockets to not auto-refuel or auto-load Rare Metals while idle — that's
+a design decision, not a bug, so it is not part of the standard pack. Switch this
+module on and a rocket parked at your colony keeps its launch fuel requested even
+before you have picked a destination, so drones top it up while it waits instead
+of only starting once you have chosen where it is going.
+
+Turn it on with `SMRFixPack_Optional = { ClassicRockets = true }` in the console
+or in a tiny mod that loads before this one. Off unless you turn it on.
+
+[DRAFT NOTE: the standing Rare Metals export half of this module is not written
+yet — see the D01 entry in docs/BUGS.md. Do not promise it in the released text.]
 
 ### Reporting bugs
 

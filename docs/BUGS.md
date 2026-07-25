@@ -867,6 +867,25 @@ Automated Mode + per-resource `export_above` thresholds (:1727-1766, defaults `f
 $1000M funding floor (:1399,1762-1765). Community hates it → ship an OPT-IN "classic
 rocket behavior" fix (disabled by default per policy §4): standing PreciousMetals demand +
 fuel request while landed/manual; document the gates in README either way.
+*Half shipped, opt-in: `Code/Opt_ClassicRockets.lua`* (id `ClassicRockets`, enabled with
+`SMRFixPack_Optional = { ClassicRockets = true }` before the mod loads; the `Opt_` filename
+prefix marks it as not-a-fix). It ships the **fuel half**: a chained wrapper on
+`GetFuelResourceRequest` that, only where the shipped function already answers 0, keeps the
+launch ration requested for a player-controlled rocket parked at the colony with no
+destination. Verified the mechanism end to end —
+`CargoTransporterNew:UpdateCargoResourceRequests` feeds
+`additional_amount = is_refuel_resource and self:GetFuelResourceRequest()` straight into the
+drone demand (`CargoTransporterNew.lua:1249-1265`), and neither notification branch fires in
+this state because both require `arrival_loc` (`UniversalRocket.lua:1308-1314`), so there is
+no refuel spam. F69's asteroid-lander reserve is untouched — the wrapper only acts when the
+chain below it returned 0.
+*Export half deliberately NOT shipped.* "Standing PreciousMetals demand" is a gameplay
+system rather than a hook: the modern request is driven by `SetCargoRequest`, the payload
+dialog and Automated Mode's `export_above` thresholds, so injecting a permanent demand
+means editing the same machinery as F50, F68, F70 and F71 — with no way to test the result
+in-game from the build seat, and for a change that is by this entry's own verdict not a
+defect. It needs a design decision (what threshold? which resources? what interaction with
+Automated Mode?) plus a playtest before it is written.
 
 ### F64 — Station demolition permanently leaks train prefabs ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
 Trains are a colony-counted resource (`city.available_prefabs["Train"]`, `City.lua:433-440`)

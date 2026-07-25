@@ -69,7 +69,25 @@ mod that loads before this one containing e.g.
 `SMRFixPack_Disabled = { CaveInsNoDisasters = true }`, or run it in the console.
 Console command `SMRFixPack.ListFixes()` shows what's active.
 
-Removing the mod is always safe — it stores nothing in your savegames.
+Removing the mod is always safe. It writes almost nothing into your savegames,
+and what it does write is inert without it: a few `SMRFixPack_*` bookkeeping
+fields (a timestamp on a housing reservation, a "the player has set this payload"
+flag on a rocket) whose absence simply means the pre-fix behaviour, and — where a
+save-repair pass restored a bonus a broken patch migration dropped — an ordinary
+label modifier the game handles like any other.
+
+### Optional modules (off by default)
+
+Some things players ask for are deliberate design changes rather than bugs, so
+they ship switched off and are enabled explicitly:
+
+```lua
+SMRFixPack_Optional = { ClassicRockets = true }
+```
+
+| Module | What it changes |
+|--------|-----------------|
+| ClassicRockets | A rocket parked at the colony keeps its launch fuel requested even before you pick a destination, so drones refuel it while it waits. Vanilla asks for no fuel at all until a destination is selected. |
 
 ## For modders
 
