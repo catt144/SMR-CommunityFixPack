@@ -190,7 +190,23 @@ notification suppression, F33/F34 landscape nil guards. Then
   checks for it at apply time.
 - Sample mod format in `<game>\ModTools\Samples\Mods`; docs in `ModTools\Docs\index.md.html`.
 
-## First automated A/B RunAll pair — DONE (2026-07-25, retail Mars.exe)
+## FINAL A/B RunAll pair (repaired TestKit) — CLEAN SWEEP (2026-07-25)
+
+Re-run after the TestKit repairs (WithGlobals now writes real globals; sentinel
+SKIPs; probe fixes). Logs: Mars.exe-20260725-14.17.33 (baseline) / -14.20.37
+(fixed). **19/19 discriminating probes flipped FAIL→PASS; zero FAILs remain;
+all 30 fixes `applied`.** Probe-verified fixes: F03, F04, F07, F08, F09, F11,
+F13, F14, F15, F50, F51*, F52, F55, F58, F61, F67, F68, F69, F73, F06.
+Not discriminated on a virgin colony: F10 (funding table non-nil → PASS both),
+F51 probe PASSed both runs (cache re-evaluated even unfixed in this synthetic
+scenario — probe may need a stricter setup). 10 [install] probes SKIP on retail
+(sandbox); run the pair once under MarsDebug.exe for that coverage. F73's Idle
+wrapper half also needs the debug-exe run (PASS was the IsSuitable half).
+`tested` status remains reserved for scenario/manual verification per
+TESTING.md — probe-verified ≠ full in-game scenario pass, but the wiring and
+regression harness are now proven.
+
+## Superseded: first pair (buggy TestKit) — kept for the record
 
 Unattended harness works end-to-end (TestKit 95_AutoRun, `-smrautorun` via Steam
 relaunch; Steam DRM blocks direct Mars.exe launch — bootstrap exits in 28ms).
