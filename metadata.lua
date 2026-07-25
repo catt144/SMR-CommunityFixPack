@@ -37,6 +37,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_LowStorageWarning.lua",
 		"Code/Fix_CommandCenterNumbers.lua",
 		"Code/Fix_DomeOverviewHighlight.lua",
+		"Code/Fix_TrainCargoDumping.lua",
 	},
 	'TagGameplay', true,
 })

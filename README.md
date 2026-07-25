@@ -41,6 +41,7 @@ and can be individually disabled.
 | LowStorageWarning | The "Insufficient Resources" warning fires again for Food and maintenance resources |
 | CommandCenterNumbers | Command Center resource rows show their numbers again instead of being blank |
 | DomeOverviewHighlight | Domes Overview marks a dome's low colonist stats in red again |
+| TrainCargoDumping | Trains stop unloading at stations where you switched that resource off (and hauling it back out again next trip) |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

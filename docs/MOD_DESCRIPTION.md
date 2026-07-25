@@ -99,6 +99,10 @@ come back.
   piece of internal bookkeeping that made every salvage attempt on that track
   fail silently — including via Ctrl+click and the Salvage button. Tracks
   already damaged in your save are repaired when you load it.
+- Trains respect the resource switches on a station. Unloading ignored them
+  completely, so a train would drop Waste Rock at a station you had told not to
+  store Waste Rock — and the cargo planner would then send another train to haul
+  it back out. The same resource ping-ponged up and down the line forever.
 - Demolishing a train station no longer permanently deletes the trains that
   were docked there (or mid-trip from it). They are properly stored and can
   be redeployed — previously your colony's train count silently shrank until
