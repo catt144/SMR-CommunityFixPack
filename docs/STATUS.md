@@ -180,6 +180,33 @@ notification suppression, F33/F34 landscape nil guards. Then
   checks for it at apply time.
 - Sample mod format in `<game>\ModTools\Samples\Mods`; docs in `ModTools\Docs\index.md.html`.
 
+## First automated A/B RunAll pair — DONE (2026-07-25, retail Mars.exe)
+
+Unattended harness works end-to-end (TestKit 95_AutoRun, `-smrautorun` via Steam
+relaunch; Steam DRM blocks direct Mars.exe launch — bootstrap exits in 28ms).
+Baseline = fix pack metadata `code` emptied; B = full pack. **All 30 fixes
+report `applied`** (no inactive/error self-checks). Results:
+- **FAIL→PASS (10):** UpgradeModifierLeak, TouristApplicants, LanderEmptyLaunch,
+  LanderReturnFuel, RocketDroneChurn, StaleReservations, CrystalMysteryHang,
+  TouristSatisfaction, TrainPlatformWedge, CommandCenterNumbers.
+- **Applied but probe still FAILs (4) — diagnose fix-vs-probe:** WispPower (nil
+  power units both runs), LanderCargoRatchet (request still drops to 0 with
+  cargo aboard), HomeDomeMigrationGate (same fail text both runs),
+  DomeOverviewHighlight (baseline "renders as 0", B "renders as table:0x…" —
+  behavior changed, probe may mis-parse a T() value).
+- **Probe/tooling casualties:** 10 [install] probes ERROR both runs — the
+  no-introspection sentinel itself crashes (00_TestCore.lua:76 indexes nil
+  'lib'); ShelterReflex ERROR in B (same crash via its wrapper check);
+  VacuumWalks SKIP in B ("unexpected route value: unset").
+- **Non-discriminating on a virgin colony:** FactionFundingCheck PASS both
+  (funding table not nil on fresh game); NightShiftWork/WispResearch/
+  ShuttleTransportCache/DroneUnreachableForever SKIP both (need colonists/
+  mystery/shuttle state).
+- Full logs: %AppData%\Surviving Mars Relaunched\logs\Mars.exe-20260725-13.56.49
+  (baseline) and -13.58.35 (fixed).
+- For [install] coverage: run the pair under MarsDebug.exe (console/asserts
+  build un-sandboxes introspection; auto-bridge then fires).
+
 ## Waiting on the user
 
 1. Launch the game once with BOTH mods enabled, confirm `SMRFixPack.ListFixes()`
