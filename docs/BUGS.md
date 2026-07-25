@@ -688,7 +688,7 @@ exotics, dumps them back, leaves with junk/nothing". **Fix:** in override, add o
 back before threshold compare; never lower `requested` below `cargo[res].amount` on the
 automode target loc.
 
-### F69 — Manual landing dumps the return fuel (P1, high)
+### F69 — Manual landing dumps the return fuel (P1, high)  `[fixed: Code/Fix_LanderReturnFuel.lua]`
 `CmdLand` (`UniversalRocket.lua:414`) clears `arrival_loc` in manual mode →
 `GetFuelResourceRequest` (:1639-1642) returns 0 → `CmdUnload` (:486-494) posts the
 reserved return fuel (asteroid policy keeps half, `FlightPolicyDef.lua:208-211`,

@@ -18,6 +18,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_FactionFundingCheck.lua",
 		"Code/Fix_LanderEmptyLaunch.lua",
 		"Code/Fix_LanderCargoRatchet.lua",
+		"Code/Fix_LanderReturnFuel.lua",
 	},
 	'TagGameplay', true,
 })
