@@ -14,8 +14,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | ID  | Title                                                    | Sev | Conf | Status |
 |-----|----------------------------------------------------------|-----|------|--------|
 | F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | fixed  |
-| F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | todo   |
-| F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | todo   |
+| F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | fixed  |
+| F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | fixed* |
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | todo   |
 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | todo   |
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | todo   |
@@ -85,7 +85,7 @@ Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbe
 DustStorm.lua:413, DustDevils.lua:189, surface quake Marsquake.lua:43). Matches live
 Paradox-forum report. **Fix:** wrap FUNC slot (index 3) of `PeriodicRepeatInfo["UndergroundMarsquake"]`.
 
-### F02 — Meteors strike ~every 6h instead of 35–115h
+### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed: Code/Fix_MeteorFrequency.lua — replaces GlobalGameTimeThreadFuncs.Meteors + restart on LoadGame]`
 `Lua\Meteors.lua:277-292` — the long wait `spawn_time - warning_time` was mangled into a
 dead `if` (`GameTime() - start_time > ...` evaluated immediately after `start_time = GameTime()`,
 always false); only remaining wait is `Sleep(Min(spawn_time, warning_time))` where
@@ -97,7 +97,7 @@ survives in `DustDevils.lua:168-173` and the MeteorStorm thread (`Meteors.lua:32
 (`while GameTime() - start_time < spawn_time - warning_time do Sleep(5000) end`).
 Check how `GlobalGameTimeThread` re-registration behaves; may need thread deletion + respawn on load.
 
-### F03 — Upgrade buffs leak & stack after salvage/demolish
+### F03 — Upgrade buffs leak & stack after salvage/demolish  `[fixed*: Code/Fix_UpgradeModifierLeak.lua stops new leaks; one-shot savegame cleanup sweep for already-leaked modifiers still TODO]`
 `Lua\Buildings\Building.lua:1268-1274` — `StopUpgradeModifiers` iterates `upgrade_modifiers`
 with `ipairs`, but the table is string-keyed (`ApplyUpgrade`, lines 1168-1170) → `TurnOff()`
 never runs. Self-targeted modifiers die with the building; **LabelModifiers on other
