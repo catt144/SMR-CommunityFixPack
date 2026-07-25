@@ -53,6 +53,9 @@ come back.
 - Automatic rockets and asteroid landers no longer take off with nothing
   aboard. They wait for cargo as intended instead of burning fuel on endless
   empty round trips.
+- Automatic rockets no longer load cargo and then dump it straight back out.
+  Their hourly cargo recalculation used to "forget" whatever was already in the
+  hold, so drones spent the day carrying the same resources up and down the ramp.
 
 **Story & milestones**
 - Completing all milestones no longer breaks in games using the
@@ -64,10 +67,9 @@ come back.
   wisps and nothing visible for others).
 
 ### [DRAFT NOTE] Planned next — move up as they're implemented
-- Asteroid landers: no more loading cargo and dumping it back out, no more
-  stranding themselves by unloading their own return fuel, payload settings
-  that stick, valuables prioritized over waste rock, and "no available landers"
-  no longer shown while a lander sits on the pad.
+- Asteroid landers: no more stranding themselves by unloading their own return
+  fuel, payload settings that stick, valuables prioritized over waste rock, and
+  "no available landers" no longer shown while a lander sits on the pad.
 - Asteroid colonists seek shelter before suffocating and can move into
   habitats that had a momentary power blip.
 - Track salvage: deleting one hex no longer deletes your entire track (and

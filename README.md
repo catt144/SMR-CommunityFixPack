@@ -21,6 +21,7 @@ and can be individually disabled.
 | FactionFundingCheck | Faction goals based on recent export/tourism income can actually trigger |
 | TrainsToVoid | Demolishing a station stores its trains instead of permanently deleting them from the colony |
 | LanderEmptyLaunch | Automatic rockets and asteroid landers wait for cargo instead of taking off empty and coming straight back |
+| LanderCargoRatchet | Automatic rockets stop unloading the cargo they just loaded (the hourly request no longer shrinks by what is aboard) |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

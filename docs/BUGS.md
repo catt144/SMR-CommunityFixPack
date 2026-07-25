@@ -678,7 +678,7 @@ Endless empty round trips ~70 fuel each. **Fix:** wrap `IsCargoReady`: in auto m
 CheckAutoDepart true and no non-fuel payload requested, return false (1-sol timer still
 exits cleanly).
 
-### F68 — Hourly auto-request ratchet unloads the lander's own cargo (P1, high)
+### F68 — Hourly auto-request ratchet unloads the lander's own cargo (P1, high)  `[fixed: Code/Fix_LanderCargoRatchet.lua]`
 `CreateAutoCargoRequest` (`UniversalRocket.lua:1742-1755`, hourly): `to_transfer =
 GetTotalCargoAvailable(...) - threshold`, but loaded cargo is NOT "available" — every
 hour the request shrinks by what was just loaded; `requested` drops below what's aboard →
