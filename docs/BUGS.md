@@ -74,8 +74,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
 | F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | fixed  |
-| F62 | Services reach 1 passage hop only, never trains          | P2  | high | blocked|
-| F63 | Universities invisible to emigration (no students)       | P2  | high | blocked|
+| F62 | Services reach 1 passage hop only, never trains          | P2  | high | wontfix|
+| F63 | Universities invisible to emigration (no students)       | P2  | high | wontfix|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | D02 | Dismissing "not working" warnings only silences them 2min| dsgn| med  | planned opt-in |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
@@ -849,7 +849,7 @@ stops residents shopping/working/training through passages; target-dome checks a
 and correct (`Dome.lua:2880-2882`). Best match for "refuse to shop through a passage".
 **Fix:** override the four sites, dropping home-side `accept_colonists` from the condition.
 
-### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)  `[blocked — the mechanism is confirmed, the remedy is a behavior change; see below]`
+### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)  `[wontfix — carried-forward design, verified identical to the original game]`
 `GetService` iterates `GetConnectedDomes()` = direct adjacency refcounts (`Dome.lua:619-644`,
 `Passage.lua:1237-1247`), not the transitive `dome_networks` (`Passage.lua:1096-1119`);
 workplace search additionally enumerates train-reachable domes (`Dome.lua:646-690`).
@@ -885,8 +885,12 @@ SAME two callers (walkability `Dome.lua:251`, pathing `Passage.lua:1097`). Relau
 version is a cosmetic refactor with identical reach: one-hop service is a carried-forward
 design across both games, not a regression. Any change here is a mod feature by
 definition.
+**CLOSED `wontfix` 2026-07-26 (user decision):** not breaking anything, not making play
+extremely hard, and original to the devs' vision in both games. No opt-in module planned;
+the recorded internal inconsistencies (walkability-vs-service, permitted-vs-offered
+training) stay on this entry for the record.
 
-### F63 — Universities invisible to emigration (P2, high)  `[blocked — same reason as F62; see below]`
+### F63 — Universities invisible to emigration (P2, high)  `[wontfix — carried-forward design, verified identical to the original game]`
 Training is pull-only from student side, 1 hop, F61-gated (`Colonist.lua:1505-1507`,
 `Dome.lua:2945-2955`); `FindEmigrationDome` scores only `labels.Workplace`
 (`Colonist.lua:2644,2672`, `Workforce.lua:53-64`) — `TrainingBuilding` is a different label
@@ -917,6 +921,7 @@ paths (repo-wide grep), and no `TrainingEval` existed there either. Its training
 (`Colonist.lua:1122-1131` + `Workplace.lua:841-881`) is the same own-dome-then-one-hop
 walk Relaunched hoisted onto `Dome:ChooseTraining`. Nobody could ever emigrate to study,
 in either game. Adding it is a new mechanic, not a repair.
+**CLOSED `wontfix` 2026-07-26 (user decision), same grounds as F62.**
 
 ### D01 — Rockets don't auto-refuel / auto-export rare metals — INTENTIONAL REDESIGN (verdict)
 Not a bug: legacy always-on PreciousMetals loader exists only in dead legacy class
