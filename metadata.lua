@@ -49,6 +49,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_AsteroidLanderAvailable.lua",
 		"Code/Fix_ShuttleHubOffAvailable.lua",
 		"Code/Fix_FreedHousingNotice.lua",
+		"Code/Fix_DomeFreeSpaceMismatch.lua",
 	},
 	'TagGameplay', true,
 })

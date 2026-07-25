@@ -53,6 +53,7 @@ and can be individually disabled.
 | AsteroidLanderAvailable | "No available Asteroid Landers" is no longer shown while an unassigned lander is sitting on the pad |
 | ShuttleHubOffAvailable | Switching a Shuttle Hub off actually removes it from the colony's transport planning instead of leaving colonists waiting for shuttles that never launch |
 | FreedHousingNotice | A home falling vacant is offered to the dome's homeless immediately instead of after their next update (up to 12 hours in a big colony) |
+| DomeFreeSpaceMismatch | A dome's free-housing figure counts the same residences the game actually assigns colonists to, so a power dip no longer makes a dome read as full |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

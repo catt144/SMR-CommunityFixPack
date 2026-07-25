@@ -99,6 +99,11 @@ come back.
   dome is reachable, and that cache never noticed new shuttles — so colonists
   stayed homeless (and seniors stayed put) even after you built the hub that
   would have moved them.
+- A dome no longer reads as "full" while its power is out. The free-housing
+  figure that births and immigration are gated on counted only residences that
+  were running at that instant, while the code that actually moves colonists in
+  counted every residence you had switched on — so a power or air dip made a
+  dome look full even though homes were being assigned inside it.
 - A home that falls vacant is offered to the dome's homeless straight away. The
   game only ever re-checked the homeless when YOU made housing available — built
   a residence, switched one back on. A bed emptied by a death, a retirement or a

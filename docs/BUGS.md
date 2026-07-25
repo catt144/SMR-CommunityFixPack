@@ -72,7 +72,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
-| F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | todo   |
+| F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
 | F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | fixed  |
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | todo   |
 | F63 | Universities invisible to emigration (no students)       | P2  | high | todo   |
@@ -685,11 +685,23 @@ releases the incoming colonist's reservation (`:74`) one line before the same
 race. The reservation case is instead bounded by F58's daily stale-reservation sweep plus
 the normal heavy update. Probe: `FreedHousingNotice` in `30_Probes_Wave3.lua`.
 
-### F60 — Dome free-space uses `working`, assignment uses `ui_working` (P2, med)
+### F60 — Dome free-space uses `working`, assignment uses `ui_working` (P2, med)  `[fixed: Code/Fix_DomeFreeSpaceMismatch.lua]`
 `Dome:RefreshFreeLivingSpaces` (`Dome.lua:2832-2834`) omits `player_enabled` →
 `GatherFreeLivingSpaces` counts by `working` (`_GameUtils.lua:475-483`); unpowered
 residences count 0 for births/immigration gates while `ChooseResidence` (:412) still
 assigns to them. Power flicker desyncs the two views. **Fix:** pass consistent member.
+*Implemented as sketched* — a full replacement of the two-line method passing
+`player_enabled`; there is nothing to wrap, the fix IS the argument. Which member is the
+intended one is settled three ways: `ChooseResidence` (`Residence.lua:404-412`) and
+`Colonist:UpdateResidence` (`Colonist.lua:2309-2316`) both gate on `ui_working`, and the
+two functions immediately above `GatherFreeLivingSpaces` in the same file —
+`GetFreeWorkplacesAround` (`:443-455`) and `GetFreeWorkplaces` (`:457-473`) — tally
+capacity on `b.ui_working` unconditionally. The `player_enabled` parameter has no caller
+anywhere in Src, so nothing else changes meaning.
+*Deliberately not touched:* `MicroGHabitatBase:RefreshFreeLivingSpaces`
+(`MicroGHabitat.lua:42-44`) has the identical omission, but a habitat's `working` state is
+its life support — F73's subject, not this defect.
+Probe: `DomeFreeSpaceMismatch` in `30_Probes_Wave3.lua`.
 
 ### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)  `[fixed: Code/Fix_HomeDomeMigrationGate.lua]`
 `Dome:GetService` (`Dome.lua:2900-2916`; same at 2927/2947/2959, `ShiftsBuilding.lua:250-254`):
