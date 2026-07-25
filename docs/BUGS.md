@@ -18,7 +18,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | fixed* |
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | fixed  |
-| F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | todo   |
+| F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | fixed  |
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
 | F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | todo   |
@@ -144,7 +144,7 @@ NoTerraforming (9 milestones) / NoPolitics (Independence), so completing the las
 milestone errors and the "AllMilestonesCompleted" popup is lost. **Fix:** the eval fn is a
 local — override global `CompleteMilestone` with a copy using `(milestone:GetScore() or 0)`.
 
-### F06 — Philosopher's Stone mystery can hang forever
+### F06 — Philosopher's Stone mystery can hang forever  `[fixed: Code/Fix_CrystalMysteryHang.lua]`
 `Lua\Mysteries\Crystals.lua:67-70` — composed crystal emits `Msg("CrystalFlyAway")` exactly
 once (1 sol after completion; the `CrystalForceFlyAway` escape hatch has **no emitter
 anywhere** in Src). Scenario (`Lua\Scenario\Mystery 10.generated.lua:232,243,271`) first

@@ -107,6 +107,9 @@ come back.
   habitat permanently.
 
 **Story & milestones**
+- The Philosopher's Stone mystery no longer gets stuck at the finale. If you left
+  its Epilogue popup minimised for more than a sol, the crystal's departure was
+  announced while nothing was listening and the mystery never completed.
 - Completing all milestones no longer breaks in games using the
   No Terraforming or No Politics rules (the completion popup was lost to a
   hidden error).
@@ -119,7 +122,6 @@ come back.
 - Asteroid landers: payload settings that stick, valuables prioritized over
   waste rock, and "no available landers" no longer shown while a lander sits on
   the pad.
-- The Philosopher's Stone mystery can no longer hang forever at the finale.
 - The "Low Storage" warning fires for Food and spare parts (it mathematically
   never could); Command Center resource numbers display again; dome overview
   stat warnings turn red as intended.
