@@ -48,6 +48,42 @@ verified against Relaunched source unless promoted into BUGS.md.
   cleared after demolition).
 - Colonists teleporting; new save has no rainfall (terraforming).
 
+## Review-sourced reports (added 2026-07, from Steam reviews via user)
+
+- **Late-game drone collapse with open domes**: drones stop maintaining buildings
+  *inside* opened domes, cluster stuck right outside, colony decays. → Sweep
+  `Buildings\DroneControl.lua` + dome open/passability interaction with drone
+  work-request gathering.
+- **Citizens stuck on terrain/Universal Depots and die walking rocket→dome** →
+  pathing/passability around depots; possibly same family as long-walk suffocation.
+- **Colonists suffocate walking between distant domes** → the original
+  `AreDomesConnectedWithPassage` daily-interest/long-walk bug class; verify in
+  Relaunched.
+- **Citizens go unemployed every sol despite free worksites** → workplace
+  auto-assignment (`UpdateWorkplaces` family), not yet swept.
+- **Citizens homeless despite free housing in own + adjacent domes** → residence
+  auto-assignment; related report: seniors not moving to retirement homes.
+- **Large Wind Turbines unaffected by tech that names them** (Frictionless
+  Composites not applying post-hotfix; also couldn't be rotated) → check the
+  tech's modifier target label vs the LargeWindTurbine template/class label —
+  same verification style as our F03/F18 work; very targeted, do early.
+- **Asteroids routinely get cave-ins** (reviewer believes cave-map-only intended)
+  → VERIFIED NOT from the underground marsquake repeat (its condition requires
+  `Environment == "Underground"`; asteroids are `"Asteroid"` — Marsquake.lua:324,
+  Asteroids.lua:459). Something else triggers them on asteroid maps — find it
+  (asteroid map generation? scenario? a different caller of TriggerCaveIn?).
+- **Artificial lake entombs rovers/drones** placed-over units die under lake;
+  dismissal of the warning notification immediately re-triggers it → Landscape/
+  lakes not yet swept; also check notification re-trigger loop.
+- **"Lakes causing crashes"** (vague but repeated) → Landscape sweep target.
+- **Inspiring Architecture freezing glitch, "present in the original"** →
+  find original fix/mod references; sweep the InspiringArchitecture trait/dome
+  interaction.
+- **Trains: deleting one wrong hex of track deletes the entire track** →
+  Martian Express track editing; LukeH's original patches are prior art.
+- **UI buttons misaligned** → XTemplates layout; cosmetic, likely fixable via
+  template patch; collect concrete screens/cases first.
+
 ## Original-game fix list highlights to re-verify in Relaunched source
 
 Drones/rovers: malfunctioning drones stuck at hub (`InvalidPos`), drones stuck in

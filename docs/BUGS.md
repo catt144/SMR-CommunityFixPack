@@ -278,8 +278,22 @@ excess :676-681).
 
 - `Lua\Buildings\DroneControl.lua`, `ShuttleHub.lua` — drone/shuttle task assignment.
   Prime suspect for live reports: "drones ignore rocket cargo at high priority",
-  "RC transports don't auto-offload rockets".
-- `Landscape\` (terraforming), `RandomMap\`, `Construction\` beyond what F-items cover.
+  "RC transports don't auto-offload rockets", "late-game drones stop maintaining
+  inside open domes / cluster stuck outside" (review-sourced).
+- Colonist auto-assignment: workplaces (`UpdateWorkplaces` family — "unemployed
+  every sol"), residences ("homeless despite free housing", "seniors don't move"),
+  dome-to-dome walking/passage checks (`AreDomesConnectedWithPassage` — suffocation
+  on long walks; stuck on Universal Depots).
+- `Landscape\` (terraforming) — "lakes causing crashes", artificial lake entombing
+  rovers + notification retrigger loop.
+- Asteroid cave-in trigger — NOT the underground marsquake repeat (asteroids are
+  `Environment == "Asteroid"`, gate requires `"Underground"`); find actual source.
+- Martian Express track editing (single-hex delete removes whole track) — LukeH
+  prior art.
+- Large Wind Turbine tech modifiers not applying (Frictionless Composites) —
+  targeted label/template check, do early.
+- Inspiring Architecture freeze (also in original); `RandomMap\`; `Construction\`
+  beyond F-items; UI XTemplate layout (misaligned buttons — cosmetic).
 - Remaster player-report list (see `docs/RESEARCH.md`) — several reports not yet mapped
   to code: seniors not auto-moving to retirement homes, mysteries not starting
   (Inner Light), no cold waves/dust storms triggering, asteroid lander launching empty,
