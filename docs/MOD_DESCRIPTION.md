@@ -48,6 +48,10 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- Turning off "accept colonists" on a dome no longer stops its own residents from
+  shopping, working and studying in the domes next door. That switch is the
+  migration policy — whether outsiders may move in — but it was also being used to
+  decide whether your own residents were allowed to leave through a passage.
 - Housing reserved for a colonist who never turns up is released again. Those
   reservations are invisible in the UI and had no expiry at all, which is why a
   dome could sit half empty and still refuse to house anybody.
@@ -115,9 +119,6 @@ come back.
 - Asteroid landers: payload settings that stick, valuables prioritized over
   waste rock, and "no available landers" no longer shown while a lander sits on
   the pad.
-- Colonists: turning off "accept colonists" no longer
-  secretly stops your residents from shopping through passages; drones keep
-  servicing opened domes.
 - The Philosopher's Stone mystery can no longer hang forever at the finale.
 - The "Low Storage" warning fires for Food and spare parts (it mathematically
   never could); Command Center resource numbers display again; dome overview

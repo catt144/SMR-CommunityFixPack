@@ -593,7 +593,7 @@ at 3600+ pop (`City.lua:118-120`). **Fix:** post-hook `RemoveResident` →
 residences count 0 for births/immigration gates while `ChooseResidence` (:412) still
 assigns to them. Power flicker desyncs the two views. **Fix:** pass consistent member.
 
-### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)
+### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)  `[fixed: Code/Fix_HomeDomeMigrationGate.lua]`
 `Dome:GetService` (`Dome.lua:2900-2916`; same at 2927/2947/2959, `ShiftsBuilding.lua:250-254`):
 outbound cross-dome access requires `self.accept_colonists` — the HOME dome's
 "accept colonists" MIGRATION policy. Turning it off on a residential dome (routine) silently

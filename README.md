@@ -34,6 +34,7 @@ and can be individually disabled.
 | ArrivalDeaths | New arrivals stop marching to a dome they cannot reach, and no longer disembark into impassable ground |
 | DroneUnreachableForever | A drone that once failed to reach a building tries again later instead of ignoring it for the rest of the game |
 | StaleReservations | Housing reserved for colonists who never arrive is released again instead of being held forever |
+| HomeDomeMigrationGate | Turning off "accept colonists" no longer stops a dome's own residents from shopping, working and training next door |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).
