@@ -42,7 +42,22 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | todo   |
 | F28 | `Research:ReplaceTech` crashes (latent, mod-facing)      | P3  | high | todo   |
 | F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | todo |
+| F30 | Lake placement entombs RC builder + drones               | P1  | high | todo   |
+| F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | todo   |
+| F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | todo   |
+| F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | todo   |
+| F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | todo   |
+| F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | todo   |
+| F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | todo   |
+| F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | todo   |
+| F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | todo   |
+| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | todo   |
+| F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | todo   |
+| F41 | Gene Forging tech has no effect                          | P2  | high | todo   |
+| F42 | Buildings placeable on active dust devils                | P3  | high | todo   |
+| F43 | Layout construction bypasses tech locks                  | P3  | high | todo   |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
+| C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -262,6 +277,125 @@ branch with `if g_TechFieldResearchedCount[field_id] == 0 then ... = nil end`.
    the workshift wait (`==` should be `~=` vs interpreted `StopWait` :2626). No shipped user.
 3. `Lua\Mysteries\Diggers.lua:91-95` — broken two-variable swap; unreachable with shipped
    defaults, bites subclasses. **Fix:** all three are small overrides; ship for modder benefit.
+
+## Phase 2 findings — details (2026-07-24)
+
+### F30 — Lake placement entombs RC builder + drones (P1, high)
+Two-part defect. (a) `ConstructionSite:ScatterUnitsUnderneath` (`ConstructionSite.lua:1722-1737`)
+exempts the RC Constructor building the site. (b) Scatter runs at `Complete` (:1574-1580)
+BEFORE `LandscapeLake:GameInit` digs the basin (`LandscapeLake.lua:32-35,215-292`);
+`Unit:ExitImpassable` (`Units\Unit.lua:642-649`) no-ops while ground is still passable, so
+even scattered drones stay; terrain then drops + `RebuildPassability` seals them. Drones
+drain battery → Freeze (`Drone.lua:1478-1524`), read as dead. Devs ship a partial rescue
+fixup for rovers only (`BaseRover.lua:736-745`). **Fix:** wrap `LandscapeLake:PlacePrefab` —
+after its `RebuildPassability`, sweep units in bbox with `not map:IsPassable(unit)` →
+`SetCommand("ExitImpassable")` / teleport to `GetPassablePointNearby`.
+
+### F31 — Anomaly cave-in hardcodes UndergroundMap (P2, med)
+`Scenario\UndergroundAnomalies.generated.lua:240` (same in Cave_Of_Wonders data):
+`TriggerCaveIn(UndergroundMap, anomaly_pos)` while every sibling action uses the
+sequence-local `map` (sequence runs on the anomaly's own map, `Anomaly.lua:293-303`).
+Wrong-map rubble; crash risk if `UndergroundMap` false (`CaveInRubble.lua:101`).
+**Fix:** wrap `TriggerCaveIn(map, pos)`: reject `map.mapdata.Environment ~= "Underground"`.
+
+### F32 — Dismissed warnings re-add instantly (P2, med mechanism-certain)
+Object-status notifications (`NotWorkingBuildings`, `DestroyedInfrastructure`,
+`RoverDamaged`) are not `Suppressable` (`Data\NotificationPreset.lua:771-781`); any
+`SetWorking()` on any building re-creates them (`BaseBuilding.lua:165-169` →
+`Notifications.lua:231-236`). Dismissal while a persistent bad state exists → instant
+re-add. Matches lake-victim report. **Fix:** set `Suppressable = true` +
+`SuppressTime = const.DayDuration` on those presets (data patch, very compat-friendly).
+
+### F33 — Drone crash on small landscaping sites (P2, high)
+`Landscape\LandscapeConstructionSiteBase.lua:186-190`: `for i = 1, top_count do
+top_dests[i] = dests[i].dest` — nil-index when site periphery has < 5 hexes (tiny
+clear/paint blobs) → error in drone command thread. **Fix:** `Min(top_count, #dests)`.
+
+### F34 — Landscape nil-guard bundle (P3, med/latent)
+(a) `ClearWasteRockConstructionSite:GameInit` (`:60-63`) unguarded `Landscapes[self.mark]`;
+(b) `LandscapeMarkEnd` (`Landscaping.lua:200-206`) unguarded nil mark;
+(c) lake `landscape_grid` overlap only assert-guarded (`LandscapeConstructionController.lua:502-507`,
+release asserts stripped → silent corruption);
+(d) `LandscapeForEachUnit` dead embark filter (`Landscaping.lua:455-469`).
+
+### F35 — Large Wind Turbine buff lost in old saves (P2, high)
+Current `FrictionlessComposites` data is CORRECT (`Data\TechPreset.lua:796-821` targets
+WindTurbine, WindTurbine_Large, WindTurbine_Diffuser). But the migration fixup
+`SavegameFixups.WindTurbine_Large_ReapplyModifiers` (`Buildings\WindTurbine.lua:78-88`)
+only reapplies the `WindTurbine_Diffuser` label — never `WindTurbine_Large`. Saves that
+researched the tech pre-hotfix keep unbuffed Large Turbines forever. Matches review
+report ("polymer upgrade works now, frictionless doesn't"). Rotation lock is by design
+(`can_rotate_during_placement = false`). **Fix:** one-shot LoadGame sweep: if tech
+researched and no colony label-modifier for `WindTurbine_Large.electricity_production`,
+add it (mirror the fixup, corrected).
+
+### F36 — Universities overtrain geologists (P2, high behavior-confirmed)
+`City:GetNeededSpecialist` (`City.lua:561-593`) counts every `ui_working` workplace incl.
+extractors (`specialist="geologist"`, `max_workers=4`); ExtractorAI only sets
+`g_ExtractorAIResearched`, used solely to silence a construction warning
+(`BaseExtractor.lua:60-68`) — worker demand never zeroed. Auto-mode universities
+(`MartianUniversity.lua:24-29`) keep producing geologists for unmanned extractors.
+**Fix:** wrap `GetNeededSpecialist`: skip extractor workplaces when ExtractorAI researched
+(match its actual gameplay meaning).
+
+### F37 — Ghost farm oxygen survives salvage (P1, high)
+`FarmBase:ApplyOxygenProductionMod` (`Farm.lua:561-571`) puts negative `air_consumption`
+modifier on `parent_dome` keyed `farm_id`; no `FarmBase:Done`, `Building:Done`/`SetDome(false)`
+never clear it, and demolish path skips `UpdateWorking(false)` for non-`use_demolished_state`
+buildings (`Building.lua:1457-1483`, `Demolishable.lua:139`). Dome keeps phantom O2 forever.
+**Fix:** wrap `FarmBase` delete path (post-hook `Done` via class or `OnMsg` on demolish) to
+remove the dome modifier; one-shot LoadGame sweep for orphaned `farm_id` modifiers.
+
+### F38 — Destroyed tunnels rejoin pathfinding after load (P2, high)
+`Tunnel:OnDestroyed` correctly calls `RemovePFTunnel` (`Tunnel.lua:153-155`), but
+`OnMsg.LoadGame` (:264-266) re-adds PF tunnels for ALL `TunnelBase` with no `destroyed`
+check (`AddPFTunnel` :197-209 checks only `IsValid(linked_obj)`; ruins are valid).
+`TraverseTunnel` (:215-262) same. Rovers path through dead tunnels after any save/load.
+**Fix:** wrap `Tunnel.AddPFTunnel`: bail if `self.destroyed or (self.linked_obj and
+self.linked_obj.destroyed)`; on load also `RemovePFTunnel` for destroyed ones.
+
+### F39 — Second Artificial Sun ignored (P2, high)
+`SolarPanelBase:GameInit` (`SolarPanel.lua:8-14`): only `labels.ArtificialSun[1]` tested
+with `TestSunPanelRange`. Panel built in range of sun #2 only never registers (reverse
+direction works, `ArtificialSun.lua:35-47`). **Fix:** wrap GameInit: iterate the whole
+label, register first sun in range.
+
+### F40 — Dust Sickness infects Biorobots (P2, high)
+`Data\StoryBit\DustSickness*.lua` filters exclude only `Child`; `Android` trait not
+excluded, `DustSickness.incompatible = {}`; androids bleed Health every dust storm via
+`daily_update_func` until cure tech. (Same trait also hit by F17 randomization bug.)
+**Fix:** data patch: add Android to the storybit filters / trait incompatibility.
+
+### F41 — Gene Forging tech has no effect (P2, high)
+`Colonist:GetRareTraitChance` (`Colonist.lua:3541-3550`) reads only
+`TechDef.GeneSelection.param1`; `GeneForging` (`TechPreset.lua:1556-1564`, param1=50)
+referenced nowhere in gameplay code. **Fix:** wrap `GetRareTraitChance`: add GeneForging
+param when researched (ChoGGi's original approach: bump GeneSelection.param1 to 150).
+
+### F42 — Buildings placeable on active dust devils (P3, high)
+`AreThereBlockingUnitsUnderneath` (`Construction.lua:1895-1914`) queries only
+Drone/BaseRover; `BaseDustDevil` inherits `Object` (`DustDevils.lua:245-247`) — never
+checked anywhere in Construction\. **Fix:** wrap `ConstructionController:UpdateConstructionStatuses`-
+family to add a dust-devil proximity check (or extend the blocking query).
+
+### F43 — Layout construction bypasses tech locks (P3, high)
+`LayoutConstructionController:Activate` (`LayoutConstruction.lua:231-263`): tech-locked
+building with no prefab item → `require_prefab=false` → `add=true`, sub-controller
+placed with no research gate. **Fix:** wrap `Activate`: filter items where
+`not tech_enabled and not self.prefab`.
+
+### Verified FIXED in remaster (do not fix; note in release credits/research)
+- Schools training already-owned perks (`FilterCompatibleTraitsWith`, `Traits.lua:1051-1074`).
+- Unrepairable building at 0 accumulated maintenance (malfunction paths force-fill points,
+  `RequiresMaintenance.lua:230-262`).
+- Colonists suffocating in domes wearing suits (outside-state reworked to recompute on
+  every stop, `Colonist.lua:2152-2155`).
+- Eureka storybit wrong tech category (`Boost9_Eureka.lua:79-167` now 5 weighted outcomes).
+- Inspiring Architecture freeze (stateless recompute now; savegame fixups clean old saves —
+  `Dome.lua:3222-3256`, `_fixup.lua:1905-1930`).
+- `CargoTransporter:SpawnRovers` typo (per ChoGGi's own SMR note).
+- Sol 2983 GameTime overflow: indeterminate from Lua (engine-side); circumstantial evidence
+  of 64-bit time. Park unless players report it.
 
 ## Candidates under investigation
 
