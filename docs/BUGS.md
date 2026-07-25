@@ -83,7 +83,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed  |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
-| F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed* |
+| F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed  |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | fixed  |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
@@ -955,7 +955,7 @@ stranded forever ("no fuel, no drones, can't send another lander"). **Fix:** ove
 `GetFuelResourceRequest`: lander type with no destination departing an asteroid keeps
 `FuelResourceAmount` requested.
 
-### F70 — Edit Payload silently refills from the policy template (P2, med-high)  `[fixed*: Code/Fix_PayloadTemplateRefill.lua — CargoRequestNew half done; the legacy LanderRocketCargoRequest guard is still open, see below]`
+### F70 — Edit Payload silently refills from the policy template (P2, med-high)  `[fixed: Code/Fix_PayloadTemplateRefill.lua — the legacy LanderRocketCargoRequest copy is unreachable in Relaunched, see below]`
 `CargoRequestNew:RetrieveRequests` (`CargoRequestNew.lua:194-212`): rows with stored
 request 0 are refilled from the flight-policy cargo template every dialog open (template
 suppressed only during `CmdLoad`; every landing zeroes requests via `CmdUnload`). Mars→
@@ -970,13 +970,26 @@ template read gated on a new `transporter.SMRFixPack_payload_set`, plus a pre-wr
 `resolve_loc_cargo_template` (:166-177) had to be reproduced — a file-local is unreachable
 — and the shipped `assert(transporter, ...)` on :181 is dropped, since assert does not
 unwind in mod code and the very next line already returns.
-*Open half:* the legacy `LanderRocketCargoRequest:RetrieveRequests` (`:94-129`) has its own
-copy of the same defect — its guard reads `self.initial_landing_completed` where `self` is
-the DIALOG, while the flag lives on the rocket (`LanderRocket.lua:16,1081-1082`), so it is
-always nil and the template always refills. That dialog is opened only by the legacy
-`LanderRocket` class (`LanderRocket.lua:502,1295`); the one-word correction
-(`self.transporter.initial_landing_completed`) is queued rather than shipped, because
-whether that class is reachable in Relaunched has not been established.
+*Second copy of the defect, resolved as NOT ACTIONABLE 2026-07-25 (wave 3).* The legacy
+`LanderRocketCargoRequest:RetrieveRequests` (`:94-129`) has the same bug — its guard reads
+`self.initial_landing_completed` where `self` is the DIALOG, while the flag lives on the
+rocket (`LanderRocket.lua:16,1081-1082`), so it is always nil and the template always
+refills. The queued question was whether the legacy class is reachable in Relaunched at
+all. It is not, on three independent counts:
+* that dialog is constructed only from `LanderRocket.lua:502` and `:1295`, both methods of
+  `LanderRocketBase`;
+* no new `LanderRocketBase` can be built — `OnMsg.NewGame` locks BOTH lander buildings
+  (`LanderRocket.lua:1129-1132`) and only `UniversalLanderRocketBuilding` is ever unlocked
+  again (`Asteroids.lua:406-411`, on AdvancedPassengerModule + MicroGLanders).
+  `LockBuilding("LanderRocketBuilding")` has no matching `UnlockBuilding` anywhere in Src;
+* any legacy lander in an old save is migrated away before it can be used —
+  `SavegameFixups.UpdateOldRockets` → `convert_lander_rocket` →
+  `rocket:ChangeClass("UniversalLanderRocket")` (`RocketCompatibility.lua:627-637`, :972).
+  Nothing places the legacy class directly; even the Space Miner commander's free lander is
+  a `UniversalLanderRocket` (`CommanderProfilePreset.lua:54`).
+So the one-word correction would patch a dialog no reachable object can open. Not shipped —
+patching dead code costs compatibility and buys nothing (FIX_POLICY §4). F70 is therefore
+complete, not partial.
 
 ### F71 — Auto-export allocates capacity alphabetically (P2, med)  `[fixed: Code/Fix_LanderCargoRatchet.lua — folded into the F68 replacement of the same function]`
 `CreateAutoCargoRequest` iterates `sorted_pairs` (`UniversalRocket.lua:1736-1758`) —
