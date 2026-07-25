@@ -19,15 +19,15 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | fixed  |
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | todo   |
-| F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | todo   |
-| F08 | Tourist star-rating applicant bonus inverted             | P1  | high | todo   |
+| F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
+| F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | todo   |
 | F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | todo |
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | todo   |
 | F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | todo   |
 | F13 | Command Center resource rows show no numbers             | P2  | high | todo   |
 | F14 | Domes Overview red low-stat highlight dead               | P2  | high | todo   |
-| F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | todo   |
+| F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | todo   |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | todo   |
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | todo   |
@@ -77,6 +77,9 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | todo   |
 | F63 | Universities invisible to emigration (no students)       | P2  | high | todo   |
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
+| F64 | Station demolition permanently leaks train prefabs       | P1  | high | todo   |
+| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
+| F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | todo   |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -618,6 +621,45 @@ Automated Mode + per-resource `export_above` thresholds (:1727-1766, defaults `f
 $1000M funding floor (:1399,1762-1765). Community hates it → ship an OPT-IN "classic
 rocket behavior" fix (disabled by default per policy §4): standing PreciousMetals demand +
 fuel request while landed/manual; document the gates in README either way.
+
+### F64 — Station demolition permanently leaks train prefabs ("trains go to void") (P1, high)
+Trains are a colony-counted resource (`city.available_prefabs["Train"]`, `City.lua:433-440`)
+— consumed on deploy (`Track.lua:428-457`), refunded ONLY via `Train:OnDemolish`
+(`Train.lua:205-209`), which only runs through `Demolishable:DoDemolish`. Bare
+`DoneObject(train)` never refunds. The bug: `OnMsg.BuildingDemolished` handler
+(`Station.lua:163-171`) hard-`DoneObject`s every train with `current_station == station`
+— synchronously BEFORE `Station:Done`'s proper storing loop (`Station.lua:145-149`,
+`DestroySilent` = refund + notification), which then finds nothing (dead code on demolish
+path). Aggravators: `current_station` stays = departure station all trip (`Train.lua:164-166`)
+so mid-transit trains elsewhere vaporize too; no notification. At counter 0: "Send out
+Train" disabled at every station (`Station.lua:653-660`), `AssignTrain` early-outs —
+permanent, survives rebuilding everything. Matches "trains go to void" exactly. Recovery
+in vanilla: construct new trains for Metals+Electronics (`Station.lua:573-611`) — players
+don't know the stored ones are gone. **Fix:** pre-hook `Station:OnDemolish` to
+`DestroySilent` docked/registered trains BEFORE the message fires; belt-and-braces
+`Train.Done` refund guard; compensation prefabs for corrupted saves not exactly
+recoverable (count unrecorded).
+
+### F65 — Station attached to a train tunnel never bridges the power grid (P2, med)
+`TrackTunnel` description promises power transfer (`Data\BuildingTemplate\TrackTunnel.lua:17`);
+class machinery identical to working `Tunnel`. Defect: `OnMsg.StationsConnected`
+(`Track.lua:668-680`) skips `ConnectToGrids()` when `#track.elements <= 2` ("adjacent
+anyway" assumption) — station attached directly to tunnel connects via exactly 2 connector
+elements → supply tunnel never created, no power link. Caveat: TrainTunnel entity spot
+data is binary, unverifiable from Lua. **Fix:** additional `OnMsg.StationsConnected`
+handler: if 2-element track touches a `TrackTunnelBase`, call `track:ConnectToGrids()`;
+LoadGame pass re-asserting masks/merges.
+
+### F66 — Station↔tunnel connector hex ping-pong (P2, med-high)
+With a 1-hex gap, both buildings project their connector element onto the SAME hex;
+`TrackConnectedObjBase:CreateConnectorElements` (`TrainTransport.lua:126-130`) deletes the
+other's element (assert assumes never two live owners) → victim's `Done` reschedules its
+own `CreateConnectorElements` → infinite steal loop; whichever lacks the element fails
+`GetConnectedTrack`/`GetDestStation` (`Track.lua:320-355`) → no route ever forms. Also:
+double-turn constraint refuses connections silently (`TrackElement.lua:336-345`).
+Workaround: ≥2-hex gap. **Fix:** patch `CreateConnectorElements` to not delete elements
+owned by a live non-destructing building (breaks ping-pong); full shared-hex support more
+invasive.
 
 ## Candidates under investigation
 
