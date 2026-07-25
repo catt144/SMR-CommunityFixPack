@@ -74,8 +74,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
 | F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | fixed  |
-| F62 | Services reach 1 passage hop only, never trains          | P2  | high | todo   |
-| F63 | Universities invisible to emigration (no students)       | P2  | high | todo   |
+| F62 | Services reach 1 passage hop only, never trains          | P2  | high | blocked|
+| F63 | Universities invisible to emigration (no students)       | P2  | high | blocked|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
@@ -711,14 +711,34 @@ stops residents shopping/working/training through passages; target-dome checks a
 and correct (`Dome.lua:2880-2882`). Best match for "refuse to shop through a passage".
 **Fix:** override the four sites, dropping home-side `accept_colonists` from the condition.
 
-### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)
+### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)  `[blocked — the mechanism is confirmed, the remedy is a behavior change; see below]`
 `GetService` iterates `GetConnectedDomes()` = direct adjacency refcounts (`Dome.lua:619-644`,
 `Passage.lua:1237-1247`), not the transitive `dome_networks` (`Passage.lua:1096-1119`);
 workplace search additionally enumerates train-reachable domes (`Dome.lua:646-690`).
 Hub-and-spoke: spoke→spoke shops invisible. **Fix:** extend service search to the passage
 network (and optionally train-reachable domes) — flag as behavior change, default on.
+*Blocked 2026-07-25 (wave 3), after reading the code.* Everything in the entry re-verified
+and correct: `Dome:GetService` (`:2900-2941`) and `Dome:ChooseTraining` (`:2945-2955`) walk
+`GetConnectedDomes()` only, and `Dome:GetCommutableWorkplaces` (`:682-689`) reaches two dome
+levels plus train-reachable stations at each. What did NOT survive contact is the premise
+that one-hop is a mistake:
+* the codebase uses direct adjacency for cross-dome work AND service **consistently** —
+  `AreDomesConnected` (`Dome.lua:356-358`) is `connected_domes[bld2]`, direct only, and it
+  is what gates `ShiftsBuilding:CanWorkTrainHereDomeCheck` (`:252`),
+  `Colonist:CheckForcedWorkplace` (`:2351`), `Colonist:UpdateWorkplace` (`:1485`) and
+  `Workplace.lua:567`. The transitive `AreDomesConnectedWithPassage` has exactly two
+  callers in all of Src (`Dome.lua:258` walkability, `Passage.lua:1144` pathing);
+* so there is no "the same author wrote it correctly elsewhere" proof of intent
+  (FIX_POLICY §4) — extending the service search would be a design change with balance and
+  performance consequences (the service search runs constantly), which the sketch itself
+  already conceded by asking for it to be "flagged as a behavior change".
+The one genuine internal inconsistency worth recording: `IsInWalkingDistDome`
+(`Dome.lua:244-261`) answers TRUE for any two domes in the same passage network, so the
+walkability model says A↔C is walkable while the service model says C is invisible from A.
+**To unblock:** a decision that this is in scope. If taken, it belongs in an opt-in module
+alongside D01, not in the default pack.
 
-### F63 — Universities invisible to emigration (P2, high)
+### F63 — Universities invisible to emigration (P2, high)  `[blocked — same reason as F62; see below]`
 Training is pull-only from student side, 1 hop, F61-gated (`Colonist.lua:1505-1507`,
 `Dome.lua:2945-2955`); `FindEmigrationDome` scores only `labels.Workplace`
 (`Colonist.lua:2644,2672`, `Workforce.lua:53-64`) — `TrainingBuilding` is a different label
@@ -726,6 +746,21 @@ Training is pull-only from student side, 1 hop, F61-gated (`Colonist.lua:1505-15
 university sits empty forever. Only unspecialized colonists qualify
 (`MartianUniversity.lua:65-67`). **Fix:** include free training slots (colonist `CanTrain`)
 in emigration scoring; walk full passage network in `ChooseTraining`.
+*Blocked 2026-07-25 (wave 3), after reading the code.* Both halves confirmed and both are
+additions rather than repairs:
+* emigration scoring really does read only `labels.Workplace`
+  (`Workforce:HasFreeWorkplacesAroundForSpecialist` / `WorkplacesEval`,
+  `Workforce.lua:53-64`, `:66`), and `TrainingBuilding` really is its own label
+  (`TrainingBuilding.lua:26,38`). But there is no broken hookup to repair — there is no
+  `TrainingEval` anywhere, dead or alive, next to `WorkplacesEval` and
+  `Community:ResidencesEval` (`Community.lua:489`). Training was never a term in the
+  emigration score, so adding one is a new feature and a balance change (FIX_POLICY §4);
+* "walk full passage network in ChooseTraining" is the same behavior change as F62.
+Recorded for the record, since it IS an inconsistency: `ShiftsBuilding:CanWorkTrainHereDomeCheck`
+falls through to `GetTransportRoute(his_dome, self)` (`ShiftsBuilding.lua:253`), so a
+colonist is PERMITTED to train at a train-reachable school that `Dome:ChooseTraining` will
+never offer them.
+**To unblock:** same decision as F62 — an opt-in module, not the default pack.
 
 ### D01 — Rockets don't auto-refuel / auto-export rare metals — INTENTIONAL REDESIGN (verdict)
 Not a bug: legacy always-on PreciousMetals loader exists only in dead legacy class
