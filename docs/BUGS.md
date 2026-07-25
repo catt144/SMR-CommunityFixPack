@@ -44,7 +44,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | todo |
 | F30 | Lake placement entombs RC builder + drones               | P1  | high | fixed  |
 | F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | todo   |
-| F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | todo   |
+| F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | blocked|
 | F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | todo   |
 | F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | todo   |
 | F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | todo   |
@@ -347,13 +347,33 @@ sequence-local `map` (sequence runs on the anomaly's own map, `Anomaly.lua:293-3
 Wrong-map rubble; crash risk if `UndergroundMap` false (`CaveInRubble.lua:101`).
 **Fix:** wrap `TriggerCaveIn(map, pos)`: reject `map.mapdata.Environment ~= "Underground"`.
 
-### F32 — Dismissed warnings re-add instantly (P2, med mechanism-certain)
+### F32 — Dismissed warnings re-add instantly (P2, med mechanism-certain)  `[blocked — the shipped data no longer matches this entry; see below]`
 Object-status notifications (`NotWorkingBuildings`, `DestroyedInfrastructure`,
 `RoverDamaged`) are not `Suppressable` (`Data\NotificationPreset.lua:771-781`); any
 `SetWorking()` on any building re-creates them (`BaseBuilding.lua:165-169` →
 `Notifications.lua:231-236`). Dismissal while a persistent bad state exists → instant
 re-add. Matches lake-victim report. **Fix:** set `Suppressable = true` +
 `SuppressTime = const.DayDuration` on those presets (data patch, very compat-friendly).
+*Blocked 2026-07-25 (wave 3) — code re-read, entry no longer matches:*
+* **`NotWorkingBuildings` already carries the fix.** `Data\NotificationPreset.lua:636-655`
+  now has `Suppressable = true` and `SuppressTime = 120000`. This is the one preset the
+  described mechanism actually applies to — `BaseBuilding:SetWorking` →
+  `UpdateNotWorkingBuildingsNotification` (`:137-139`) → `UpdateObjectInNotification`
+  re-adds it on every working-state change — and the game has hotfixed it. Suppression
+  works exactly as the entry assumed: `TryDismiss` (`NotificationUI.lua:67-75`) sets
+  `dismissed` then removes, `RemoveNotification` (`Notifications.lua:87`) opens the
+  suppression window, and `AddNotification` (`:41-43`) refuses while it is open.
+* **The other two are not re-added at all.** `DestroyedInfrastructure` is added once, at
+  the moment of destruction, behind a flag that is cleared in the same statement
+  (`Building.lua:1474-1478`; also `DestroyBuildingImmediate` :1377 and `BaseRover` :342),
+  and removed on rebuild/demolish. `RoverDamaged` is added from
+  `BaseRover:MalfunctionNotification` (`:216-218`) and removed by the malfunction
+  destructor (`:246-248`). Both are one-shot event adds with no periodic path, so a
+  dismissal holds until a genuinely new event — which is the correct behaviour. Making
+  them `Suppressable` would suppress *new* destructions and malfunctions for the window,
+  i.e. hide real events, with no defect to justify it (FIX_POLICY §4).
+**Disposition:** most likely `wontfix` — but that is the user's call, so it is parked as
+`blocked` rather than closed unilaterally.
 
 ### F33 — Drone crash on small landscaping sites (P2, high)
 `Landscape\LandscapeConstructionSiteBase.lua:186-190`: `for i = 1, top_count do
