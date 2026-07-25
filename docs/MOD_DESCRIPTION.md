@@ -152,6 +152,10 @@ come back.
 - The Philosopher's Stone mystery no longer gets stuck at the finale. If you left
   its Epilogue popup minimised for more than a sol, the crystal's departure was
   announced while nothing was listening and the mystery never completed.
+- A finished Mirror Sphere excavation no longer accepts more work. The lockout
+  compared progress against 100 on a scale that runs to four million, so it never
+  triggered — and "Pierce the Shell" would happily tie up your drones on a site
+  that was already done.
 - Completing all milestones no longer breaks in games using the
   No Terraforming or No Politics rules (the completion popup was lost to a
   hidden error).

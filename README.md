@@ -48,6 +48,7 @@ and can be individually disabled.
 | DustSicknessBiorobots | Biorobots stop catching Dust Sickness (and are cured of it when you load an affected save) |
 | DustSicknessDamage | Dust Sickness does its intended 5-14 Health damage per sol instead of a flat maximum |
 | GeneForging | The Gene Forging tech raises the rare-trait chance instead of doing nothing at all |
+| MirrorSphereSite | A finished Mirror Sphere excavation stops accepting drone work it can no longer use |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

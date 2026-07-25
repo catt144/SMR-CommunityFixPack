@@ -44,6 +44,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DustSicknessBiorobots.lua",
 		"Code/Fix_DustSicknessDamage.lua",
 		"Code/Fix_GeneForging.lua",
+		"Code/Fix_MirrorSphereSite.lua",
 	},
 	'TagGameplay', true,
 })

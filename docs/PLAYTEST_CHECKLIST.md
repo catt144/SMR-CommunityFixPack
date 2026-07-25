@@ -922,6 +922,29 @@ pre-research batch. Statistical, so only note it if it looks obviously wrong.
 
 ---
 
+## PT-30 — Finished Mirror Sphere site · covers **F16**
+
+**Setup:** a game running the **Mirror Sphere** mystery (pick it at new-game setup;
+`CheatStartMystery` is gated on `Platform.cheats` — see the note under PT-15). Play or
+fast-forward until you have a **scanned excavation site** with a Drone Hub in range.
+
+**Trigger:**
+1. While the site is part-way done, confirm its actions (**Pierce the Shell**,
+   **Communicate**, **Feed Power**) can be started — this is the control.
+2. Let the excavation run to **100%** — the sphere launches and detaches.
+3. Now open the finished site's infopanel and try each action again. If you have not
+   used all three, at least one should still be un-completed.
+
+- **BROKEN looks like:** the finished site still offers and accepts actions.
+  "Pierce the Shell" connects it to your drone commanders and drones start walking
+  over to work an excavation that cannot progress.
+- **FIXED looks like:** the finished site starts nothing. Cancelling an action that was
+  already running still works.
+
+`Result:` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

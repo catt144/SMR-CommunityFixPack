@@ -28,7 +28,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F13 | Command Center resource rows show no numbers             | P2  | high | fixed  |
 | F14 | Domes Overview red low-stat highlight dead               | P2  | high | fixed  |
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
-| F16 | Mirror Sphere site usable after completion               | P2  | med  | todo   |
+| F16 | Mirror Sphere site usable after completion               | P2  | med  | fixed  |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | todo   |
 | F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | todo   |
@@ -225,11 +225,17 @@ wisps caught AFTER the mode was set to "destroy" are drained one at a time and s
 silently (no per-wisp notification). That is a UI addition rather than a defect repair
 (FIX_POLICY §4), so it is deliberately not shipped.
 
-### F16 — Mirror Sphere site usable after completion
+### F16 — Mirror Sphere site usable after completion  `[fixed: Code/Fix_MirrorSphereSite.lua]`
 `Lua\Mysteries\MirrorSphere.lua:823` — guard `self.progress == 100`, but scale is
 0..`max_progress` (2^22; see :724-726, :734) → lockout never triggers; players can waste
 drone work on finished site. **Fix:** override `StartAction`-holder method, compare
 `self.progress >= self.max_progress`.
+*Implemented as sketched* (pre-wrapper on `MirrorSphereBuildingBase:StartAction`, declared
+at :813-870), with one correction: `MirrorSphereBuildingBase` has no `max_progress` member
+— the file-local constant is published only on the `MirrorSphere` unit class (`:69`), so
+the fix reads `MirrorSphere.max_progress` and deactivates if that is gone. Cancelling a
+running action (`self.action == action`) is still let through, since that branch is a
+`StopAction` and is unrelated to progress.
 
 ### F17 — Dust Sickness damage not randomized  `[fixed: Code/Fix_DustSicknessDamage.lua]`
 `Data\TraitPreset.lua:87-91` — `local change = 5 + colonist:Random(trait.param)` dead;
