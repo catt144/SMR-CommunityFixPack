@@ -23,10 +23,10 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | fixed  |
 | F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | fixed |
-| F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | todo   |
-| F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | todo   |
-| F13 | Command Center resource rows show no numbers             | P2  | high | todo   |
-| F14 | Domes Overview red low-stat highlight dead               | P2  | high | todo   |
+| F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | fixed  |
+| F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | fixed  |
+| F13 | Command Center resource rows show no numbers             | P2  | high | fixed  |
+| F14 | Domes Overview red low-stat highlight dead               | P2  | high | fixed  |
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | todo   |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | todo   |
@@ -49,31 +49,31 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | todo   |
 | F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | todo   |
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | todo   |
-| F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | todo   |
+| F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | todo   |
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | todo   |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | todo   |
 | F41 | Gene Forging tech has no effect                          | P2  | high | todo   |
 | F42 | Buildings placeable on active dust devils                | P3  | high | todo   |
 | F43 | Layout construction bypasses tech locks                  | P3  | high | todo   |
-| F44 | One-hex track salvage can delete the entire track        | P1  | high | todo   |
-| F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | todo   |
+| F44 | One-hex track salvage can delete the entire track        | P1  | high | fixed  |
+| F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | fixed  |
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | todo   |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | todo   |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | todo   |
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | todo   |
-| F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | todo   |
-| F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | todo   |
-| F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | todo   |
-| F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | todo   |
+| F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | fixed  |
+| F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | fixed  |
+| F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | fixed* |
+| F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
 | F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | todo   |
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
 | F56 | Auto RC Transports never offload rockets                 | P2  | high | todo   |
 | F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
-| F58 | Invisible residence reservations never expire            | P1  | high | todo   |
+| F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | todo   |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | todo   |
-| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | todo   |
+| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | fixed  |
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | todo   |
 | F63 | Universities invisible to emigration (no students)       | P2  | high | todo   |
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
@@ -81,12 +81,12 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | todo   |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
-| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | todo   |
-| F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | todo   |
+| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed  |
+| F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | todo   |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | todo   |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | todo   |
-| F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | todo   |
+| F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
