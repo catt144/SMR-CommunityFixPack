@@ -310,7 +310,7 @@ thousand words.
 - Everyone reporting bugs on the Paradox forums and Steam discussions —
   many fixes here started as your reports.
 
-[DRAFT NOTE — before publishing: delete draft notes; fill author name; sync
-the fix list with BUGS.md statuses (only `tested` fixes go in the shipped
-list); add Workshop/Paradox-appropriate formatting; screenshot of
-ListFixes() output.]
+[DRAFT NOTE — before publishing: delete draft notes; sync the fix list with
+BUGS.md statuses (only `tested` fixes go in the shipped list); add
+Workshop/Paradox-appropriate formatting; screenshot of ListFixes() output.
+Author name is set (catt144, 2026-07-26).]

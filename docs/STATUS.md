@@ -1,9 +1,14 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-25 (QA session 5 — wave-3 A/B pair run CLEAN, audits done; see the
-"QA session (wave 3)" section). The wave-3 build handoff prompt was
-`docs/FABLE_QA_PROMPT.md`; the next build leg (wave 4) starts from
-`docs/OPUS_BUILD_PROMPT.md` updated for the wave-4 queue below. BUGS.md is
+Updated: 2026-07-26 (QA session 5 wrap-up — wave-3 A/B CLEAN, all tracker decisions
+made, session prompts staged). **Three prompts, three triggers:**
+- `docs/OPUS_BUILD_PROMPT.md` — Opus wave-4 build leg. Safe to run DURING the user's
+  playtest: it works on `wave4` branches in separate worktrees and never touches the
+  junctioned main trees the game loads from.
+- `docs/FABLE_PLAYTEST_PROMPT.md` — processes the user's manual playtest report
+  (PASS→`tested` flips, FAIL→new findings, the PT-36/37/38 decision gates).
+- `docs/FABLE_QA_PROMPT.md` — wave-4 QA leg, AFTER both of the above: merges `wave4`
+  to main, runs the A/B pair, audits divergences. BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
 cross-check), MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix
@@ -443,8 +448,7 @@ that "passed" or SKIPped were not testing what they claimed.
    (30/30 applied, 19/19 FAIL→PASS). Remaining variant: one pair under
    MarsDebug.exe (debugging launch option) for [install]-probe + F73-wrapper
    coverage — fully automated, just needs the two Steam "Continue" clicks.
-2. Author name/handle for metadata.lua (placeholder TBD_SET_BEFORE_RELEASE), in
-   both mods.
+2. DONE 2026-07-26 — author set to **catt144** in both mods' metadata.lua.
 3. For the save-failure lead: logs from `%AppData%\Surviving Mars Relaunched\logs`
    and Ctrl+F1 reports from affected players would pin it.
 4. An in-game observation for F55: do drones still enter a dome after the roof is
