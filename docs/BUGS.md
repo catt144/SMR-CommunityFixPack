@@ -441,7 +441,7 @@ destroys all assigned trains. Element salvage is instant, no countdown (`:259-26
 trimming only the short side (delete elements individually + `UpdateEndElements()`);
 never touch the viable side.
 
-### F45 — Damaged tracks can't be salvaged at all (P1, high)
+### F45 — Damaged tracks can't be salvaged at all (P1, high)  `[fixed: Code/Fix_BrokenTrackSalvage.lua — wrapper + LoadGame sweep for existing saves]`
 `TrackBase:BreakTrackElement` (`Track.lua:618-659`) copies element params to the repair
 site but NOT `node_idx` → stays `false` (`TrackElement.lua:164`). Every salvage path then
 hits `table.sort(all_elements, function(a,b) return a.node_idx < b.node_idx end)`

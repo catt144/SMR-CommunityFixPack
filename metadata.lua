@@ -20,6 +20,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_LanderCargoRatchet.lua",
 		"Code/Fix_LanderReturnFuel.lua",
 		"Code/Fix_ShelterReflex.lua",
+		"Code/Fix_BrokenTrackSalvage.lua",
 	},
 	'TagGameplay', true,
 })
