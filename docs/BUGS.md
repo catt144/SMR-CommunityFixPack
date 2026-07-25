@@ -66,7 +66,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | fixed  |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | fixed* |
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
-| F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | todo   |
+| F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | fixed  |
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
 | F56 | Auto RC Transports never offload rockets                 | P2  | high | todo   |
 | F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
@@ -594,12 +594,27 @@ through the elevator assigned with it (`RocketBase.lua:2068-2071` → `Transport
 On re-check take both `ChooseDome` returns and write `emigration_elevator` back, else wait
 near rocket under "Confused Colonists" + retry dome selection.
 
-### F54 — Switched-off shuttle hubs count as transport available (P2, med-high)
+### F54 — Switched-off shuttle hubs count as transport available (P2, med-high)  `[fixed: Code/Fix_ShuttleHubOffAvailable.lua]`
 `IsLRTransportAvailable` (`ShuttleHub.lua:350-359`) counts hubs with
 `GetWorkNotPermittedReason()` truthy (= player toggled OFF) as available, but
 `SendOutShuttles` only runs when `working`. All-hubs-off (late-game power saving) →
 colonists queue on pickup spots outside for shuttles that never come; walkability logic
 also skewed (`Dome.lua:256-259`). **Fix:** predicate counts only self-lifting suspensions.
+*Implemented as sketched*, as a full replacement of the global with one added term
+(`hub.ui_working`), because the defect is mid-condition and the function returns a single
+colony-wide boolean — a wrapper that sees `true` cannot tell which hub produced it.
+Verified both ends of the sketch: `SendOutShuttles` is reached only from
+`ShuttleHubBase:BuildingUpdate` under `if self.working` (`:1622-1630`) and from
+`CargoShuttle:LaunchDstr` under `if hub.working` (`:509-513`), so a switched-off hub
+never dispatches. Enumerating what the shipped second clause actually admits (permission
+reason set, no physical reason) gives exactly four states: `"TurnedOff"` (`ui_working`
+false — the player's switch, not self-lifting), `"DomeNotWorking"` (`Building.lua:591-596`
+— also a player switch, but unreachable for a Shuttle Hub, which is an outside building
+with no parent dome), `"ExceptionalCircumstancesDisabled"` (`BaseBuilding.lua:359`) and
+`"ExceptionalCircumstancesMaintenance"` (`RequiresMaintenance.lua:129-133`). The last two
+are set and cleared by the game itself, so they are kept; only the player's switch is
+excluded, which `hub.ui_working` expresses directly and without matching reason strings.
+Probe: `ShuttleHubOffAvailable` in the Test Kit's `30_Probes_Wave3.lua`.
 
 ### F55 — Open domes: drone access lost + unreachable-forever cache (P1, med — matches report exactly)  `[fixed*: Code/Fix_DroneUnreachableForever.lua — the unreachable-forever cache (3) is fixed; the open-air entrance half (1) is NOT actionable, see below]`
 (1) Open-air skin swaps dome entity with `skin[2] = empty_table`

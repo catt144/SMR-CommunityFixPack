@@ -99,6 +99,11 @@ come back.
   dome is reachable, and that cache never noticed new shuttles — so colonists
   stayed homeless (and seniors stayed put) even after you built the hub that
   would have moved them.
+- Switching a Shuttle Hub off now actually takes it out of service. A hub you had
+  turned off still counted as "shuttle transport available" for the whole colony,
+  even though nothing will ever launch a shuttle from a hub that is switched off —
+  so colonists queued outside for a ride that was never coming. Suspensions the
+  game imposes on itself still count, as before.
 - Universities stop training geologists nobody needs. Once Extractor AI lets your
   Metals and Rare Metals Extractors run without colonists, those posts still counted
   as vacancies waiting to be filled — so an "auto" university kept churning out
