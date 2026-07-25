@@ -976,6 +976,43 @@ automatic), with an asteroid destination selected. `dbg_ToggleRocketInstantTrave
 
 ---
 
+## PT-32 — Auto-export loads the valuables first · covers **F71**
+
+The probe proves the allocation order in isolation; only play shows what actually
+ends up in the hold when drones, stock levels and the one-sol departure timer all
+compete. Do this straight after PT-17 — same save, same lander.
+
+**Setup:** SAVE-E, lander on an **asteroid** in **Automated Mode**.
+`SMRTest.Log.AutoCargo(true)`.
+
+**Trigger:**
+1. Make sure the asteroid has a large stock of a **bulk** resource (Waste Rock,
+   Concrete or Metals) *and* a smaller stock of **Rare Metals / Exotic Minerals**.
+   `CheatFillAllStorages()` on the asteroid side is the quick way.
+2. Set export thresholds so **both** the bulk resource and the valuables are
+   exported (threshold 0 / "export anything above" on each).
+3. Read the next `CreateAutoCargoRequest(...) request{...}` line, then let the
+   lander load and depart.
+
+- **BROKEN looks like:** the request is dominated by whichever resource comes
+  first **alphabetically** — Concrete/Metals ahead of PreciousMetals and
+  PreciousMinerals, and Waste Rock still getting a share. The lander leaves on the
+  one-sol timer full of bulk while the valuables sit on the ground.
+- **FIXED looks like:** the request lists **PreciousMinerals, Electronics,
+  PreciousMetals, MachineParts** first and only spends what is left on Polymers,
+  Food, Fuel, Metals, Concrete and finally Waste Rock. The lander arrives on Mars
+  carrying the valuables.
+
+> Not over-broad: with the hold big enough for everything, **every** configured
+> export must still appear in the request. A resource that disappears entirely is
+> a FAIL.
+
+`Result (order):` _____________________________________________
+
+`Result (nothing dropped when there is room for all?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

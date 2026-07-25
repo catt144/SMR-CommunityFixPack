@@ -84,7 +84,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed  |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed* |
-| F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | todo   |
+| F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | fixed  |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | todo   |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
@@ -789,12 +789,35 @@ always nil and the template always refills. That dialog is opened only by the le
 (`self.transporter.initial_landing_completed`) is queued rather than shipped, because
 whether that class is reachable in Relaunched has not been established.
 
-### F71 — Auto-export allocates capacity alphabetically (P2, med)
+### F71 — Auto-export allocates capacity alphabetically (P2, med)  `[fixed: Code/Fix_LanderCargoRatchet.lua — folded into the F68 replacement of the same function]`
 `CreateAutoCargoRequest` iterates `sorted_pairs` (`UniversalRocket.lua:1736-1758`) —
 alphabetical: Concrete..Metals..Polymers before PreciousMetals/PreciousMinerals; WasteRock
 is a legal export (`FlightPolicyDef.lua:393,401`). 80,000kg budget consumed by bulk before
 valuables; 1-sol forced depart (`AutoDepartTimerSols`, :1773-1775) ships whatever loaded
 first. **Fix:** value-ordered allocation (resupply price descending) in override.
+*Implemented differently, on better evidence:* no price sort is needed — the game already
+publishes the intended order, and does so per flight policy. Every
+`GetAutoModeAllowedResources` returns the same value-descending list —
+`{ PreciousMinerals, Electronics, PreciousMetals, MachineParts, Polymers, Food, Fuel,
+Metals, Concrete, WasteRock }` (`FlightPolicyDef.lua:133-141`, `:232-240`, `:390-396`;
+`Seeds` last where it appears) — and `UniversalRocketBase:GetAllowedResources` (`:649-658`)
+already calls that very function for this rocket, discarding the order only because it
+wants a set (`table.invert`). The fix therefore walks the threshold table in the policy's
+own order and falls back to the shipped `sorted_pairs` order for anything the policy does
+not list (including the `return -- all` policies), so the SET of resources considered is
+unchanged and only the sequence moves. A resupply-price sort would additionally have been
+wrong for the asteroid→Mars leg, where the Earth import price is not what the cargo is
+worth. The policy lookup is wrapped in `pcall`: the policy functions read back from the
+rocket (`GetDepartureLocType`), so an unexpected rocket state degrades to the shipped
+order instead of erroring.
+*Scope note:* the reordering also covers the import direction (`import_below`) — it is the
+same loop and the same shared weight budget, and importing Concrete ahead of Electronics
+wastes the hold the same way.
+*Folded into `Fix_LanderCargoRatchet.lua`* rather than shipped as its own file, because F68
+already fully replaces `CreateAutoCargoRequest` and two independent replacements of one
+function cannot coexist. The shipped `assert(res_type == "Resource")` is dropped from the
+copy in the same pass (assert does not unwind in mod code; it would only add log noise).
+Probe: `AutoExportPriority` in the Test Kit's `30_Probes_Wave3.lua`.
 
 ### F72 — "No available Asteroid Landers" with a lander on the pad (P2, med)
 `PlanetaryAsteroidVisitPossible` (`PlanetaryView.lua:433-444`) and

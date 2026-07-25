@@ -140,6 +140,11 @@ come back.
 - Automatic rockets no longer load cargo and then dump it straight back out.
   Their hourly cargo recalculation used to "forget" whatever was already in the
   hold, so drones spent the day carrying the same resources up and down the ramp.
+- An automatic lander fills up with the valuable cargo first. It used to allocate
+  its weight limit in alphabetical order, so Concrete, Metals and Polymers took
+  the hold before Rare Metals and Exotic Minerals were even considered — and the
+  one-sol departure timer shipped whatever had loaded first. It now follows the
+  order the flight policy itself lists, valuables first and Waste Rock last.
 - Edit Payload remembers what you told it. Any row you emptied was quietly filled
   back in from the flight policy's default cargo list every single time you opened
   the dialog — and since every landing clears the payload, that was every trip. The
@@ -169,9 +174,8 @@ come back.
   wisps and nothing visible for others).
 
 ### [DRAFT NOTE] Planned next — move up as they're implemented
-- Asteroid landers: payload settings that stick, valuables prioritized over
-  waste rock, and "no available landers" no longer shown while a lander sits on
-  the pad.
+- Asteroid landers: "no available landers" no longer shown while a lander sits
+  on the pad.
 - A save-repair pass (see below).
 
 ### Fixing your already-broken save

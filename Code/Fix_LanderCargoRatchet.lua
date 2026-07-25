@@ -18,18 +18,49 @@
 -- target location it compares against stock at the REMOTE location, which
 -- loading here does not change.
 --
+-- F71 (same function, folded in here rather than replacing it twice): the loop
+-- below hands the weight budget out in the order `sorted_pairs` yields, i.e.
+-- ALPHABETICALLY — Concrete, Electronics, Food, Fuel, MachineParts, Metals,
+-- Polymers, PreciousMetals, PreciousMinerals, WasteRock. `cargo_capacity` is
+-- decremented as it goes, so bulk that happens to sort early eats the 80,000kg
+-- hold before the valuables are ever considered, and the 1-sol forced departure
+-- (AutoDepartTimerSols, :1773-1775) ships whatever got in first. WasteRock is a
+-- legal auto-export from an asteroid (FlightPolicyDef.lua:393), so a lander can
+-- fill up on tailings and leave the exotic minerals on the ground.
+--
+-- The game already states the intended order, in every flight policy:
+--     GetAutoModeAllowedResources -> { "PreciousMinerals", "Electronics",
+--         "PreciousMetals", "MachineParts", "Polymers", "Food", "Fuel",
+--         "Metals", "Concrete", "WasteRock" }
+-- (FlightPolicyDef.lua:133-141, :232-240, :390-396 — value-descending, WasteRock
+-- last, identical in all three policies). That is the same function
+-- UniversalRocketBase:GetAllowedResources already calls for this rocket
+-- (:649-658); it only throws the order away because it wants a set
+-- (table.invert). So the fix is to walk the thresholds in the policy's own
+-- order, and fall back to the shipped alphabetical order for anything the
+-- policy does not list (including "return -- all", where it lists nothing).
+--
 -- Patch approach: the defect is mid-function and unhookable, so this is a full
 -- replacement of the method — a copy of Lua\UniversalRocket.lua:1727-1766
--- (shipped Src, 2026-07) with two changes, both marked -- FIX and both confined
--- to the export direction:
---   1. count the rocket's own load as still being "here" before comparing to the
---      threshold, so the requested amount stays put instead of ratcheting down;
---   2. belt and braces, never let the final request for an exported resource sit
---      below what is already aboard (the capacity split can still starve a
---      resource that came earlier in the loop).
+-- (shipped Src, 2026-07) with three changes, all marked -- FIX:
+--   1. (F68) count the rocket's own load as still being "here" before comparing
+--      to the threshold, so the requested amount stays put instead of ratcheting
+--      down;
+--   2. (F68) belt and braces, never let the final request for an exported
+--      resource sit below what is already aboard (the capacity split can still
+--      starve a resource that came earlier in the loop);
+--   3. (F71) iterate the thresholds in flight-policy order instead of
+--      alphabetically.
+-- The shipped `assert(res_type == "Resource")` on :1738 is dropped: assert does
+-- not unwind mod code (it prints and execution continues), so keeping it would
+-- only add log noise on a resource the policy allows but we did not expect.
+--
+-- Change 3 applies to the import direction as well as the export one — it is the
+-- same loop and the same shared budget, and importing Concrete ahead of
+-- Electronics wastes the hold exactly the same way.
 
 SMRFixPack.Register("LanderCargoRatchet", {
-	title = "Automatic rockets stop unloading the cargo they just loaded",
+	title = "Automatic rockets stop unloading the cargo they just loaded, and fill up with the valuable resources first",
 	apply = function()
 		local R = rawget(_G, "UniversalRocketBase")
 		if type(R) ~= "table" or type(R.CreateAutoCargoRequest) ~= "function" then
@@ -55,6 +86,41 @@ SMRFixPack.Register("LanderCargoRatchet", {
 			end
 		end
 
+		-- FIX (F71): the order the weight budget is handed out in. The flight
+		-- policy for this rocket's destination lists the resources it allows,
+		-- best first; anything it does not mention keeps the shipped
+		-- alphabetical order behind them, so the SET of resources considered is
+		-- unchanged and only the sequence moves. Called defensively — the policy
+		-- function reads back from the rocket (GetDepartureLocType), so a rocket
+		-- in an unexpected state must degrade to the shipped order, not error.
+		local function priority_order(rocket, thresholds)
+			local order = empty_table
+			local get_policy = rawget(_G, "GetFlightPolicy")
+			if type(get_policy) == "function" then
+				local ok, policy = pcall(get_policy, rocket)
+				local fn = ok and type(policy) == "table" and policy.GetAutoModeAllowedResources or nil
+				if type(fn) == "function" then
+					local listed
+					ok, listed = pcall(fn, policy, rocket)
+					if ok and type(listed) == "table" then order = listed end
+				end
+			end
+			local out, seen = {}, {}
+			for _, res in ipairs(order) do
+				if thresholds[res] ~= nil and not seen[res] then
+					seen[res] = true
+					out[#out + 1] = res
+				end
+			end
+			for res in sorted_pairs(thresholds) do
+				if not seen[res] then
+					seen[res] = true
+					out[#out + 1] = res
+				end
+			end
+			return out
+		end
+
 		function R:CreateAutoCargoRequest()
 			if self:IsSpecialAutomode() or not self:IsAutoModeEnabled() or not self.arrival_loc or not self.departure_loc then return end
 
@@ -64,9 +130,14 @@ SMRFixPack.Register("LanderCargoRatchet", {
 
 			local request = {}
 			local cargo_capacity = self:GetCargoWeightCapacity()
-			for res, threshold in sorted_pairs(is_on_automode_target_loc and self.export_above or self.import_below) do
+			-- FIX (F71): was `sorted_pairs(...)` — alphabetical, so bulk that sorts
+			-- early (Concrete, Metals) spent the hold before PreciousMinerals and
+			-- PreciousMetals were ever reached. `or empty_table`: both threshold
+			-- tables default to false (:178-179), which sorted_pairs tolerated.
+			local thresholds = (is_on_automode_target_loc and self.export_above or self.import_below) or empty_table
+			for _, res in ipairs(priority_order(self, thresholds)) do
+				local threshold = thresholds[res]
 				local res_type = GetCargoType(res)
-				assert(res_type == "Resource")
 				local target_map = automode_target_loc and automode_target_loc.map
 				target_map = not IsKindOf(target_map, "MapDescriptor") and target_map or (target_map and target_map.map)
 				local target_city = target_map and target_map.City

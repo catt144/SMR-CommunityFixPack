@@ -21,7 +21,7 @@ and can be individually disabled.
 | FactionFundingCheck | Faction goals based on recent export/tourism income can actually trigger |
 | TrainsToVoid | Demolishing a station stores its trains instead of permanently deleting them from the colony |
 | LanderEmptyLaunch | Automatic rockets and asteroid landers wait for cargo instead of taking off empty and coming straight back |
-| LanderCargoRatchet | Automatic rockets stop unloading the cargo they just loaded (the hourly request no longer shrinks by what is aboard) |
+| LanderCargoRatchet | Automatic rockets stop unloading the cargo they just loaded (the hourly request no longer shrinks by what is aboard), and fill the hold with the valuable resources first instead of in alphabetical order |
 | LanderReturnFuel | Asteroid landers keep the fuel reserved for the trip home instead of dumping it on the asteroid |
 | ShelterReflex | Colonists idling outdoors in vacuum head home before they suffocate; a habitat power blip no longer evicts its residents |
 | BrokenTrackSalvage | Meteor-damaged tracks can be salvaged again (and existing damaged tracks in your save are repaired on load) |
