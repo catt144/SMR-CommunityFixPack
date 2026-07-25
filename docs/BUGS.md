@@ -56,6 +56,12 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F41 | Gene Forging tech has no effect                          | P2  | high | todo   |
 | F42 | Buildings placeable on active dust devils                | P3  | high | todo   |
 | F43 | Layout construction bypasses tech locks                  | P3  | high | todo   |
+| F44 | One-hex track salvage can delete the entire track        | P1  | high | todo   |
+| F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | todo   |
+| F46 | Trains dump cargo at stations with resource disabled     | P2  | high | todo   |
+| F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | todo   |
+| F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | todo   |
+| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | todo   |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -396,6 +402,66 @@ placed with no research gate. **Fix:** wrap `Activate`: filter items where
 - `CargoTransporter:SpawnRovers` typo (per ChoGGi's own SMR note).
 - Sol 2983 GameTime overflow: indeterminate from Lua (engine-side); circumstantial evidence
   of 64-bit time. Park unless players report it.
+
+### F44 — One-hex track salvage can delete the entire track (P1, high)
+Per-segment removal exists (`Construction.lua:2910-2911` → `TrackElement.lua:444-578`
+`DemolishAndSplitTrack`), but: (a) click snaps up to ±5 hexes to nearest pillared element
+(`SelectionPropagate`, `TrackElement.lua:281-307`); (b) deletion zone expands to nearest
+"pillared AND straight" element each side (:479-486) — curves are pillared-but-never-
+straight, so whole curved sections go; (c) remainder-viability fallbacks (:503-530) call
+`track_obj:OnDemolish()` — ENTIRE track — whenever one side is too short (any ≤5-element
+track, clicks near ends, curve-heavy tracks). `OnDemolish` (`Track.lua:248-284`) also
+destroys all assigned trains. Element salvage is instant, no countdown (`:259-261`).
+**Fix:** override `DemolishAndSplitTrack`: replace both whole-track fallbacks with
+trimming only the short side (delete elements individually + `UpdateEndElements()`);
+never touch the viable side.
+
+### F45 — Damaged tracks can't be salvaged at all (P1, high)
+`TrackBase:BreakTrackElement` (`Track.lua:618-659`) copies element params to the repair
+site but NOT `node_idx` → stays `false` (`TrackElement.lua:164`). Every salvage path then
+hits `table.sort(all_elements, function(a,b) return a.node_idx < b.node_idx end)`
+(`TrackElement.lua:458-464`) → boolean<number comparison error BEFORE any deletion; click
+silently does nothing. Affects salvage click, Ctrl+click, infopanel Salvage button, and
+clicking the repair site. Meteors routinely break tracks → matches "can't salvage /
+undeletable track" reports (incl. after station destruction). **Fix:** wrap
+`BreakTrackElement` to stamp `element.broken.node_idx = element.node_idx`; belt-and-braces
+tolerant sort + LoadGame sweep stamping existing repair sites.
+
+### F46 — Trains dump cargo at stations with the resource disabled (P2, high)
+`Train:UnloadAll` (`Train.lua:783-803`) unloads everything with room, no
+`station:IsResourceEnabled(res)` check (disable only removes the demand from
+task_requests, `StorageDepot.lua:583-587,641-668`). Cargo planner then treats it as
+"forbidden" stock and dispatches trains to haul it back out (`Train.lua:868,905-939`) —
+resource ping-pong. **Fix:** override `UnloadAll` with enabled-check (allow dump if no
+station on route accepts, to avoid stranding).
+
+### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)
+`TrackBase:GetRefundResources` (`Track.lua:286-307`) reads cost from ONE element (last);
+`construction_cost_at_completion` set only on FIRST element (`Track.lua:524-525`) —
+first/last mismatch; `DemolishAndSplitTrack` uses bare `DoneObject`, no refund (contrast
+`Passage.lua:1217-1222`). Track cost 200 Metals/hex. **Fix:** multiply by `#self.elements`;
+place return stockpile on partial salvage.
+
+### F48 — Station-connector savegame fixup no-op (P3, high defect / low impact)
+`Station.lua:1346`: `ProcessTrackElements(ResolveMap(track, track.elements))` — paren
+misplaced, should be `ProcessTrackElements(ResolveMap(track), track.elements)`; migration
+no-ops (may contribute to "tracks won't connect" on old saves). **Fix:** re-run corrected
+pass in one-shot LoadGame sweep.
+
+### F49 — Train minors bundle (P3, med)
+(a) instant-built tracks use pipes palette (`Tracks.lua:385` vs `TrackElement.lua:791`);
+(b) `DemolishAndSplitTrack` ignores `assigned_vehicles` — mid-transit trains silently
+stored/self-destruct (`Train.lua:249-251,535-541`); (c) salvage click on invisible
+connector hexes propagates to the STATION (`TrackElement.lua:299-300`); (d) `max_vehicles`
+never recomputed after merge/split (`Track.lua:64-65`); (e) dead validation
+(`TrackRequiresTwoStations` never inserted; `CanContinueTrack` never called).
+
+### Trains: verified fixed / working-as-designed
+Trains blocking demolition: FIXED (trains stored as prefabs, `Track.lua:159-166`).
+Destroyed stations leaving undeletable track: addressed (`TrainTransport.lua:14-35`) —
+lingering reports likely F45. "Won't connect to stations": strict geometric rules with
+zero feedback, no coding error found (F48 for migrated saves). "Rebuild blocked by raised
+terrain": design (endpoint/turn `max_z_delta` check, `Tracks.lua:35-65,281-284`).
 
 ## Candidates under investigation
 
