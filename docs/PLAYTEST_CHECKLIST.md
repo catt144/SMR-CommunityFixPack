@@ -7,11 +7,15 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 
 ## Why this document exists
 
-All **30 fixes already passed the automated script probes** — the final A/B RunAll
-pair flipped **19/19 discriminating probes FAIL→PASS** with zero FAILs and all 30
-fixes reporting `applied` (STATUS.md → "FINAL A/B RunAll pair"). That proves the
+The **30 wave-1/wave-2 fixes already passed the automated script probes** — the final
+A/B RunAll pair flipped **19/19 discriminating probes FAIL→PASS** with zero FAILs and all
+30 fixes reporting `applied` (STATUS.md → "FINAL A/B RunAll pair"). That proves the
 *wiring*: the patched functions are installed and return the right values when
 driven with synthetic input.
+
+The **9 wave-3 fixes (PT-23 … PT-31, group 6)** have probes but **no A/B run yet**, so for
+those this checklist is the first real evidence of anything. Run `SMRTest.RunAll` once
+before starting group 6 and note any FAIL/ERROR lines.
 
 It does **not** prove any of the things only a human at the keyboard can see:
 
@@ -1048,7 +1052,7 @@ confirm with `SMRFixPack.ListFixes` (all should say `applied`).
 2. Any **`[LUA ERROR]`** block whose stack mentions a file under `SMR-BugFixPack\Code\`.
 3. Any `[LUA ERROR]` in shipped game code that you did **not** see in a vanilla session
    — note the file:line even if it looks unrelated to us.
-4. `SMRFixPack.ListFixes` output at load: **all 30 should say `applied`**. Any
+4. `SMRFixPack.ListFixes` output at load: **all 39 should say `applied`**. Any
    `inactive` line means a fix silently self-deactivated (its apply() self-check failed)
    — that is a FAIL and needs reporting with the reason string.
 

@@ -1,6 +1,6 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-25 (build-out session 2). This is the handoff snapshot; BUGS.md is
+Updated: 2026-07-25 (build-out session 3, wave 3). This is the handoff snapshot; BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
 cross-check), MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix
@@ -32,13 +32,13 @@ the Lua console at load and carries observability loggers and state reports.
   Last War mystery import lock at 54%, game-stops-saving. Plus smaller new leads
   from the ChatGPT dossier cross-check (top of RESEARCH.md).
 
-## Implementation: 30 fixes DONE (probe-verified in-game 2026-07-25; scenario `tested` passes still pending)
+## Implementation: 39 fixes DONE (30 probe-verified in-game 2026-07-25; the 9 wave-3 fixes have probes but NO A/B run yet)
 
 Wave 1 (earlier session): F01 cave-ins/NoDisasters, F02 meteor frequency,
 F03* upgrade-modifier leak, F04 night shift, F05 milestone crash, F07+F15* wisp
 power/rewards, F08 tourist applicants, F10 faction funding, F64 trains-to-void.
 
-Wave 2 (this session, in queue order): F67 lander empty launch, F68 lander cargo
+Wave 2 (earlier session, in queue order): F67 lander empty launch, F68 lander cargo
 ratchet, F69 lander return fuel, F73 shelter reflex, F45 broken-track salvage,
 F44 track salvage wipe, F30 lake entombment, F37 ghost farm oxygen, F50 rocket
 drone churn, F51 shuttle transport cache, F52* vacuum walks, F53 arrival deaths,
@@ -47,6 +47,22 @@ gate, F06 crystal mystery hang, F09 tourist satisfaction, F11 train platform
 wedge, F12 low-storage warning, F13 Command Center numbers, F14 Domes Overview
 highlight.
 (* = partial; the remaining half is recorded on the BUGS.md entry.)
+
+Wave 3 (this session, in queue order): F46 train cargo dumping, F36 university
+overtraining, F38 destroyed tunnels, F39 second artificial sun, F40 Dust Sickness on
+Biorobots, F17 Dust Sickness randomization, F41 Gene Forging, F16 Mirror Sphere site,
+F70* Edit Payload template refill.
+(* = partial; the remaining half is recorded on the BUGS.md entry.)
+
+**Wave-3 fixes have not been run in-game at all.** Each ships with a probe in the Test
+Kit's new `Code/30_Probes_Wave3.lua` (registered in its metadata), but no RunAll A/B pair
+has been executed since wave 2. That pair is the first thing the next QA leg should do.
+
+Three wave-3 fixes add their own `OnMsg.LoadGame` repair pass: F38 (close destroyed
+tunnels left open in pathfinding), F39 (reconnect solar panels to a sun in range), F40
+(clear Dust Sickness from already-infected Biorobots). F70 introduces the pack's first
+persisted member, `transporter.SMRFixPack_payload_set` (a single boolean, absence = the
+pre-fix behaviour, so removing the mod is still safe).
 
 Six fixes carry a one-shot `OnMsg.LoadGame` / `OnMsg.NewDay` repair pass for state
 already baked into savegames: F02 (thread restart), F45 (stamp repair sites),
@@ -119,15 +135,28 @@ F44 curve-ended track visual check, wave-1 heading tags.
   repo before relying on it. Retail exe ignores -save/-map (goldmaster-gated,
   autorun.lua:126-144); Mars.exe launches directly, no external Paradox launcher.
 
-## Next up
+## Next up — wave-3 queue, resume here
 
-P2/P3 backlog in BUGS.md, roughly by value: F46 train cargo dumping, F36
-university overtraining, F38 destroyed tunnels, F39 second artificial sun, F40
-Dust Sickness on Biorobots, F41 Gene Forging, F17 Dust Sickness randomization,
-F35 turbine buff sweep, F16 Mirror Sphere, F70/F71/F72 remaining lander issues,
-F54 switched-off shuttle hubs, F59/F60/F62/F63 housing/service reach, F32
-notification suppression, F33/F34 landscape nil guards. Then
-`Code/90_SaveSanitizer.lua` and the D01 opt-in classic-rockets module.
+The wave-3 leg stopped after F70. Remaining, in order:
+
+1. **F71** auto-export allocates capacity alphabetically. Careful: the target
+   (`CreateAutoCargoRequest`, `UniversalRocket.lua:1736-1758`) is already replaced by
+   wave 2's `Fix_LanderCargoRatchet.lua` — F71 must be folded into that file's copy or
+   layered on top of it, not written as a second independent replacement.
+2. **F72** "No available Asteroid Landers" while one sits on the pad
+   (`PlanetaryView.lua:433-444`, `PlanetUI.lua:1623-1651`).
+3. **F54** switched-off shuttle hubs count as transport available.
+4. **F59/F60/F62/F63** housing/service reach bundle.
+5. **F32** notification suppression (data patch on three NotificationPresets).
+6. **F33/F34** landscape nil guards.
+7. **`Code/90_SaveSanitizer.lua`** — the consolidated savegame sweeps: **F35**
+   (turbine buff; skipped in step 1 deliberately because it is a pure LoadGame sweep
+   with no live half), **F03** (leaked upgrade modifiers), **F48** (station connectors).
+8. **D01** opt-in classic-rockets module.
+9. Test Kit side-task: give the F51 shuttle-cache probe a scenario strict enough to
+   discriminate (it PASSes even unfixed on a fresh colony).
+10. Also queued from F70: the legacy `LanderRocketCargoRequest:RetrieveRequests`
+    one-word guard correction — see the F70 entry in BUGS.md.
 
 ## Key technical facts (hard-won, do not re-derive)
 
@@ -311,7 +340,8 @@ that "passed" or SKIPped were not testing what they claimed.
 4. An in-game observation for F55: do drones still enter a dome after the roof is
    opened? The Lua half of that report turned out not to be actionable (see the
    F55 entry) — only play can tell us whether the entity data is at fault.
-5. Manual playtest per `docs/PLAYTEST_CHECKLIST.md` (22 tests, no third-party mods;
+5. Manual playtest per `docs/PLAYTEST_CHECKLIST.md` (31 tests — PT-23..PT-31 are the
+   new wave-3 group 6; no third-party mods;
    covers what scripts can't: feel, visuals, UI, long-running behavior). Results
    reported back flip each covered fix's BUGS.md status to `tested` — see that
    file's "Reporting protocol" section for the exact follow-up workflow.
