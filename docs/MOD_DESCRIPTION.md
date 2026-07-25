@@ -65,9 +65,14 @@ come back.
 - A second Artificial Sun works. Panels only ever checked the *first* one you
   built, so everything you put up around sun number two produced as if the sun
   were not there. Panels in an existing save are reconnected when you load it.
+- Large Wind Turbines get their Frictionless Composites bonus back. The patch
+  migration that was supposed to re-apply that breakthrough to existing saves only
+  ever restored it to Shrouded turbines, so a colony that researched it before
+  that patch ran its Large turbines unbuffed forever. Repaired when you load.
 - Salvaging an upgraded building now removes its dome-wide and colony-wide
   upgrade bonuses. Previously these leaked forever and could be stacked
   infinitely by rebuilding (this silently corrupted long-running colonies).
+  Bonuses already leaked into your save are cleaned up when you load it.
 - Faction storylines that check your recent export or tourism income
   (Blue Sun, Brazil, Russia) can now actually progress — the income check
   crashed internally on any hour you earned nothing.
@@ -202,9 +207,6 @@ come back.
   exactly the research the notification says (it secretly paid double for some
   wisps and nothing visible for others).
 
-### [DRAFT NOTE] Planned next — move up as they're implemented
-- A save-repair pass (see below).
-
 ### Fixing your already-broken save
 
 Be aware of what a mod can and cannot do for damage that already happened:
@@ -212,11 +214,16 @@ Be aware of what a mod can and cannot do for damage that already happened:
 - **Most fixes help immediately.** Anything about ongoing behavior — drones,
   colonists, schedulers, rockets — starts working correctly the moment you
   load your save. A colony that was falling apart should stop deteriorating.
-- **Some damage needs active repair, which this pack includes.** [DRAFT NOTE:
-  reword when sanitizer ships] Leaked upgrade bonuses already baked into your
-  save, phantom oxygen from long-deleted farms, invisible housing
-  reservations, mysteries frozen mid-sequence — the pack's save-repair pass
-  detects and cleans these on load.
+- **Some damage needs active repair, which this pack includes.** Every time you
+  load, the pack looks for damage that is already sitting in your save and undoes
+  it: upgrade bonuses left behind by buildings you salvaged long ago, Large Wind
+  Turbines that lost their Frictionless Composites bonus to a faulty patch
+  migration, phantom oxygen from deleted farms, housing held for colonists who
+  never arrived, tunnels destroyed but still routed through, solar panels beside a
+  second Artificial Sun, Biorobots infected with Dust Sickness, meteor-damaged
+  track that could not be salvaged, and mysteries frozen mid-sequence. Each pass
+  is conservative — it changes something only when it can positively identify what
+  went wrong — and re-running it does nothing.
 - **Some history is gone for good.** Colonists who already died stay dead,
   destroyed buildings stay destroyed, expeditions lost to the lander bugs are
   lost. Trains that were voided by the station bug can't be counted or

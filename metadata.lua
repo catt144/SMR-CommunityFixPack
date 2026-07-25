@@ -52,6 +52,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DomeFreeSpaceMismatch.lua",
 		"Code/Fix_SmallLandscapeSites.lua",
 		"Code/Fix_LandscapeUnitFilter.lua",
+		"Code/90_SaveSanitizer.lua",
 	},
 	'TagGameplay', true,
 })

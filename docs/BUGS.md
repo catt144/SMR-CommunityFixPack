@@ -15,7 +15,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 |-----|----------------------------------------------------------|-----|------|--------|
 | F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | fixed  |
 | F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | fixed  |
-| F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | fixed* |
+| F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | fixed  |
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | fixed  |
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | fixed  |
@@ -47,7 +47,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | blocked|
 | F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | fixed  |
 | F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | fixed* |
-| F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | todo   |
+| F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | fixed  |
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | fixed  |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
@@ -60,7 +60,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | fixed  |
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | fixed  |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | todo   |
-| F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | todo   |
+| F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | todo   |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | fixed  |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | fixed  |
@@ -114,7 +114,7 @@ survives in `DustDevils.lua:168-173` and the MeteorStorm thread (`Meteors.lua:32
 (`while GameTime() - start_time < spawn_time - warning_time do Sleep(5000) end`).
 Check how `GlobalGameTimeThread` re-registration behaves; may need thread deletion + respawn on load.
 
-### F03 — Upgrade buffs leak & stack after salvage/demolish  `[fixed*: Code/Fix_UpgradeModifierLeak.lua stops new leaks; one-shot savegame cleanup sweep for already-leaked modifiers still TODO]`
+### F03 — Upgrade buffs leak & stack after salvage/demolish  `[fixed: Code/Fix_UpgradeModifierLeak.lua stops new leaks; Code/90_SaveSanitizer.lua clears the ones already in a save]`
 `Lua\Buildings\Building.lua:1268-1274` — `StopUpgradeModifiers` iterates `upgrade_modifiers`
 with `ipairs`, but the table is string-keyed (`ApplyUpgrade`, lines 1168-1170) → `TurnOff()`
 never runs. Self-targeted modifiers die with the building; **LabelModifiers on other
@@ -126,6 +126,15 @@ Modifiers.lua:277, is the only remover). **Fix:** replace `Building.StopUpgradeM
 with corrected iteration (`pairs` outer, `ipairs` inner, honoring `only_for_object`).
 Consider optional one-shot savegame sweep for already-leaked modifiers (id pattern
 `"%d+_upgrade%d_mod_%d"` with no live building).
+*Sweep implemented* in `Code/90_SaveSanitizer.lua` (LoadGame), on exactly that id pattern.
+`ApplyUpgrade` mints the id as `string.format("%s_upgrade%d_mod_%d", self.handle, tier, i)`
+(`Building.lua:1155`), so the handle in the id is the OWNING building's and nothing else in
+the game writes ids of that shape — an entry whose handle no longer resolves to a live
+object is by construction a leak. Containers swept: `UIColony`, every city, and every dome
+(the three things `ApplyUpgrade` can target, `:1152`). Conservative: a handle that still
+resolves to anything valid is left alone even though handles can in principle be recycled —
+a missed leak is cheap, stripping a live building's bonus is not. Idempotent.
+Probe: `SaveSanitizerUpgradeLeak` in `30_Probes_Wave3.lua`.
 
 ### F04 — Night-shift workers never return to work after midnight  `[fixed: Code/Fix_NightShiftWork.lua]`
 `Lua\Units\Colonist.lua:1758-1768` — `ShouldLeaveForWork` window for shift 3
@@ -424,7 +433,7 @@ merely a nil guard:*
   hole; refuse the placement, and the player loses an action that works today). That is a
   behavior change, not a nil guard (FIX_POLICY §4). Left recorded.
 
-### F35 — Large Wind Turbine buff lost in old saves (P2, high)
+### F35 — Large Wind Turbine buff lost in old saves (P2, high)  `[fixed: Code/90_SaveSanitizer.lua]`
 Current `FrictionlessComposites` data is CORRECT (`Data\TechPreset.lua:796-821` targets
 WindTurbine, WindTurbine_Large, WindTurbine_Diffuser). But the migration fixup
 `SavegameFixups.WindTurbine_Large_ReapplyModifiers` (`Buildings\WindTurbine.lua:78-88`)
@@ -434,6 +443,17 @@ report ("polymer upgrade works now, frictionless doesn't"). Rotation lock is by 
 (`can_rotate_during_placement = false`). **Fix:** one-shot LoadGame sweep: if tech
 researched and no colony label-modifier for `WindTurbine_Large.electricity_production`,
 add it (mirror the fixup, corrected).
+*Implemented as sketched*, in the consolidated sanitizer, and generalised one step: the
+pass is driven by the tech preset's OWN `Effect_ModifyLabel` entries rather than a
+hard-coded label list, so it restores whatever the tech says it grants (today: all three of
+WindTurbine / WindTurbine_Large / WindTurbine_Diffuser at +100% `electricity_production`)
+and does nothing if a game update changes them. Confirmed the three labels are disjoint —
+a building is added to a label named after its own class (`Building:AddToCityLabels`,
+`Building.lua:427-443`), and the three turbine templates are separate classes — so nothing
+else was covering Large turbines. Conservative: any existing percent modifier for that
+property on that label counts as "already buffed" and the label is skipped, so the pass
+cannot double-buff, and it is idempotent across loads.
+Probe: `SaveSanitizerTurbineBuff` in `30_Probes_Wave3.lua`.
 
 ### F36 — Universities overtrain geologists (P2, high behavior-confirmed)  `[fixed: Code/Fix_UniversityOvertraining.lua]`
 `City:GetNeededSpecialist` (`City.lua:561-593`) counts every `ui_working` workplace incl.
@@ -589,11 +609,28 @@ first/last mismatch; `DemolishAndSplitTrack` uses bare `DoneObject`, no refund (
 `Passage.lua:1217-1222`). Track cost 200 Metals/hex. **Fix:** multiply by `#self.elements`;
 place return stockpile on partial salvage.
 
-### F48 — Station-connector savegame fixup no-op (P3, high defect / low impact)
+### F48 — Station-connector savegame fixup no-op (P3, high defect / low impact)  `[blocked — the corrected pass is too invasive to ship untested; see below]`
 `Station.lua:1346`: `ProcessTrackElements(ResolveMap(track, track.elements))` — paren
 misplaced, should be `ProcessTrackElements(ResolveMap(track), track.elements)`; migration
 no-ops (may contribute to "tracks won't connect" on old saves). **Fix:** re-run corrected
 pass in one-shot LoadGame sweep.
+*Blocked 2026-07-25 (wave 3), during the sanitizer build.* The defect is confirmed exactly
+as written — `ResolveMap(track, track.elements)` returns one value, `elements` arrives nil,
+`#elements == 0` is true for nil in this engine (`Tracks.lua:808`) and the function returns
+immediately, so `SavegameFixups.A_StationConnectorElements3` (`Station.lua:1341-1354`)
+re-orders nothing. What blocks the repair is what the corrected call actually does:
+`ProcessTrackElements` → `OrderTrackElements` (`Tracks.lua:520-624`) **clears and rebuilds
+`el.connections` and rewrites `node_idx` on every element**, then the caller repositions
+every element in Z and recomputes pillars and sections (`:840-900`). Its only failure
+handling is `assert(false, "unable to find the expected number of track elements")`, and
+assert does not unwind in this engine — so a track it cannot walk (a broken element, a
+repair site — i.e. exactly F45's situation) has its connections half-rewritten and
+execution continues. Running that over every track of every save on load, with no way to
+test it in-game from this seat, risks more than the P3 it repairs.
+**To unblock:** an in-game test on a save with (a) a healthy multi-station network and
+(b) a meteor-damaged track, comparing `track.start_el`/`end_el` and route formation before
+and after. If it holds up, the pass belongs in `90_SaveSanitizer.lua` behind a one-shot
+`SMRFixPack_*` flag on `UIColony` so it cannot re-run every load.
 
 ### F49 — Train minors bundle (P3, med)
 (a) instant-built tracks use pipes palette (`Tracks.lua:385` vs `TrackElement.lua:791`);

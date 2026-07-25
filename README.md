@@ -56,6 +56,7 @@ and can be individually disabled.
 | DomeFreeSpaceMismatch | A dome's free-housing figure counts the same residences the game actually assigns colonists to, so a power dip no longer makes a dome read as full |
 | SmallLandscapeSites | Small landscaping jobs (a few hexes of clearing, painting or levelling) get worked instead of stalling the drone sent to them |
 | LandscapeUnitFilter | Landscaping over a rocket, train or shuttle boarding point no longer drags the colonists who are boarding it back out |
+| SaveSanitizer | Repairs two things already baked into existing saves when you load them: Large Wind Turbines that lost their Frictionless Composites bonus, and upgrade bonuses left behind by buildings you salvaged long ago |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

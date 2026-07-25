@@ -1092,6 +1092,51 @@ housing.
 
 ---
 
+## PT-35 — Save sanitizer passes · covers **F35, F03 (sweep half)**
+
+Both passes only act on damage that is *already* in a save, so a fresh colony
+proves nothing about them beyond "they ran and broke nothing". Treat the first
+two steps as the real test and the third as the only one that needs a fixture.
+
+**Setup:** any save. The pack's passes run automatically on load; the two are also
+callable by hand from the console:
+`SMRFixPack.Sanitizer.RepairTurbineBuff()` and
+`SMRFixPack.Sanitizer.RepairLeakedUpgradeModifiers()` — each returns how many
+things it repaired.
+
+**Trigger — case A (does no harm):**
+1. Load a healthy save with at least one Large Wind Turbine and one upgraded
+   Medical Center in a dome. Note the turbine's Power production and the dome's
+   birth-comfort figure.
+2. Run both console calls. Both should return **0** and nothing on screen should
+   change.
+3. Save, reload, check again — still unchanged. (Running twice must never stack a
+   bonus; that is the failure this checks for.)
+
+**Trigger — case B (F03 sweep, forced):**
+4. Follow PT-02 to build + upgrade + salvage a Medical Center **with the fix pack
+   disabled**, so a bonus really leaks. Save.
+5. Re-enable the pack and load that save. The dome's birth-comfort bonus should
+   drop back to its unbuffed value, and the log should carry
+   `SaveSanitizer: removed N leaked upgrade modifier(s)`.
+
+**Trigger — case C (F35, needs a fixture — skip if unavailable):**
+6. A save that researched **Frictionless Composites before the game patched the
+   tech** is the only true fixture. If a community save is donated, load it and
+   check a Large Wind Turbine's Power production against a Shrouded one: unfixed
+   the Large one is missing the +100%; fixed they match.
+
+- ⚠️ If step 3 shows a bonus that grew on the second run, that is a FAIL and the
+  pass is not idempotent — record the exact figures.
+
+`Result (case A no-op):` _____________________________________________
+
+`Result (case B leak cleared):` _____________________________________________
+
+`Result (case C, or "no fixture"):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
