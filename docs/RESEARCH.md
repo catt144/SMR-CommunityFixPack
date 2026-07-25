@@ -1,5 +1,57 @@
 # Community Bug Catalog (research notes)
 
+## Cross-check vs ChatGPT deep-research dossier (2026-07-25)
+
+Source: `ChatGPT-deep-research-report.md` (same folder) — patch-history research
+(1.0.1–1.0.7 + Linux update) + 52-item bug-candidate net. Key takeaways after
+cross-checking against our source-verified tracker (BUGS.md):
+
+**1. Our findings are post-patch.** The `ModTools\Src` tree we audited ships with
+the CURRENT build (post-1.0.7), so everything we confirmed in code is broken NOW
+despite patch notes claiming fixes in the same areas. Concrete collisions where
+patch notes say "fixed" but the current source still contains the defect —
+strong evidence the official fixes were partial:
+- 1.0.4 "fixed colonist homelessness/unemployment/suffocation" → F51, F52, F58,
+  F59, F60 still in source. 1.0.7 "fixed commute suffocation + reachability" →
+  F52's ≤400m vacuum walk still unconditional.
+- 1.0.4 "stopped drones endlessly moving resources between Landers" → F68's
+  hourly ratchet is in current source; 1.0.5 "landing site reservation" fixed
+  but F72's availability filter still blocks second landers.
+- 1.0.4/1.0.6 "train power transfer, station connections, undemolishable tracks"
+  → F44, F45, F64, F65, F66 all in current source.
+- 1.0.6 "fixed mystery sequence triggers" + **"existing games retain old mystery
+  sequences in the save"** (official!) → explains "mysteries not starting" on
+  old saves even where new-game code is fixed; our F06-style re-broadcast fixes
+  are the right medicine for save-baked sequences.
+- 1.0.1 fixed Inspiring Architecture freeze → matches our verified-fixed list. ✔
+
+**2. Corroborations of our unique findings:** ChoGGi's "Fix Landscaping Freeze"
+(landscape-mark overflow) corroborates our F34(b) `LandscapeMarkEnd` nil on mark
+exhaustion; "destroyed tunnels still valid" = our F38; "farm oxygen persists" =
+our F37; "broken buildings no repair" = verified FIXED by devs (our checklist).
+
+**3. New leads from the dossier not yet in our tracker:**
+- Research screen softlock + research progress >100% (1.0.5 claimed fixes —
+  regression-test; check current source).
+- Underground pipes damaged by surface dust storms (cross-map disaster leak).
+- Colonists repeatedly visiting already-satisfied interest buildings (ChoGGi).
+- Colonist assigned to multiple workplaces simultaneously (Tremualin's fix).
+- Manual workplace assignment immediately discarded.
+- Rare-metal extractor perpetual smoke after refab (we have the old ChoGGi note;
+  dossier says still reported post-1.0.7); depots/anomalies vanish at zoom
+  (likely engine); Asteroid Catcher / passenger-rocket challenge cases.
+- Ctrl+F1 in-game bug reporter; logs at `%AppData%\Surviving Mars Relaunched\logs`
+  (useful for our save-failure lead and user testing).
+
+**4. Strategy validation:** the dossier independently converges on our plan
+(subsystem fixes for mysteries/rockets/trains/colonists + compat wrappers), and
+adds one architectural recommendation we ADOPT: a distinct **load-time save
+sanitizer layer** (ChoGGi's proven pattern) alongside the runtime guardrails —
+several of our fixes already have "one-shot LoadGame sweep" TODOs (F03, F35,
+F37, F45, F48); collect them into a dedicated `Code/90_SaveSanitizer.lua` module,
+off-by-default per fix policy §3, each sweep individually gated. Its "12-18
+repairs for first release" scoping matches our P1 queue size.
+
 Compiled 2026-07-24 from community fix mods for the original Surviving Mars and
 live Relaunched player reports. Use as a lead list: entries here are NOT
 verified against Relaunched source unless promoted into BUGS.md.

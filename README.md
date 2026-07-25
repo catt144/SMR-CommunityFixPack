@@ -11,10 +11,18 @@ and can be individually disabled.
 
 | Fix | What it does |
 |-----|--------------|
-| CaveInsNoDisasters | Cave-ins no longer occur when the "No Disasters" game rule is active. The underground marsquake scheduler was missing the rule check that every other disaster has. |
+| CaveInsNoDisasters | Cave-ins no longer occur when the "No Disasters" game rule is active |
+| MeteorFrequency | Meteors strike on their designed 35–115h schedule instead of ~every 6 hours (and Sensor Towers help again) |
+| UpgradeModifierLeak | Salvaging an upgraded building removes its dome/colony-wide bonuses instead of leaking them forever |
+| NightShiftWork | Night-shift colonists return to work after midnight instead of skipping the rest of their shift |
+| MilestoneCrash | Completing all milestones no longer errors in No Terraforming / No Politics games |
+| WispRewards | Mystery 11: "free the wisps" produces real power; destroyed-wisp research rewards match the notification |
+| TouristApplicants | Higher tourist star ratings correctly give more bonus applicants (the chance roll was inverted) |
+| FactionFundingCheck | Faction goals based on recent export/tourism income can actually trigger |
+| TrainsToVoid | Demolishing a station stores its trains instead of permanently deleting them from the colony |
 
-The full defect tracker (29 verified findings and counting) lives in
-[docs/BUGS.md](docs/BUGS.md).
+The full defect tracker (73 verified findings and counting) lives in
+[docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).
 
 ## For players
 
