@@ -21,7 +21,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | fixed  |
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
 | F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
-| F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | todo   |
+| F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | fixed  |
 | F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | fixed |
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | todo   |
 | F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | todo   |
@@ -167,7 +167,7 @@ As shipped, 2-star tourists yield fewer applicants than 1-star. Codebase idiom e
 Called from RocketBase.lua:818, UniversalRocket.lua:2014. **Fix:** override
 `HolidayRating.RewardApplicants`, flip to `<`.
 
-### F09 — Tourist Satisfaction drifts down (asymmetric threshold crossings)
+### F09 — Tourist Satisfaction drifts down (asymmetric threshold crossings)  `[fixed: Code/Fix_TouristSatisfaction.lua]`
 `Lua\Units\Colonist.lua:4014-4031` (`UpdateSatisfaction`) — down-crossings cumulative,
 up-crossings exclusive (`+low` requires `new_value < high`; `+high` requires `< 100`).
 Two-tier jumps are routine (service visits set Comfort directly; StressedOut recovery +50

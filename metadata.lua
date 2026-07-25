@@ -32,6 +32,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_StaleReservations.lua",
 		"Code/Fix_HomeDomeMigrationGate.lua",
 		"Code/Fix_CrystalMysteryHang.lua",
+		"Code/Fix_TouristSatisfaction.lua",
 	},
 	'TagGameplay', true,
 })

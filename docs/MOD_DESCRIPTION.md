@@ -48,6 +48,10 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- Tourist Satisfaction stops sliding downwards. A tourist's stat climbing past two
+  thresholds at once only ever collected one bonus, while falling back charged
+  both — so satisfaction (and your holiday income) drifted down no matter how well
+  you treated them.
 - Turning off "accept colonists" on a dome no longer stops its own residents from
   shopping, working and studying in the domes next door. That switch is the
   migration policy — whether outsiders may move in — but it was also being used to
