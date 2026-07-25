@@ -46,6 +46,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_GeneForging.lua",
 		"Code/Fix_MirrorSphereSite.lua",
 		"Code/Fix_PayloadTemplateRefill.lua",
+		"Code/Fix_AsteroidLanderAvailable.lua",
 	},
 	'TagGameplay', true,
 })

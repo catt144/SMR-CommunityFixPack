@@ -149,6 +149,11 @@ come back.
   back in from the flight policy's default cargo list every single time you opened
   the dialog — and since every landing clears the payload, that was every trip. The
   defaults still prefill a payload you have never configured.
+- "No available Asteroid Landers" is no longer shown while a lander is standing
+  on the pad. The Planetary View asked a stricter question than the lander list
+  it was about to open: a lander that had not finished unloading, or was waiting
+  for maintenance parts, was refused even though it was free and would have been
+  offered in the list.
 - Asteroid landers no longer strand themselves. Landing manually made the lander
   treat the fuel reserved for the trip home as surplus and unload it — on an
   asteroid with no drones and no fuel production, that was permanent.
@@ -174,8 +179,6 @@ come back.
   wisps and nothing visible for others).
 
 ### [DRAFT NOTE] Planned next — move up as they're implemented
-- Asteroid landers: "no available landers" no longer shown while a lander sits
-  on the pad.
 - A save-repair pass (see below).
 
 ### Fixing your already-broken save

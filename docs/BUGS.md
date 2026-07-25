@@ -85,7 +85,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed* |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | fixed  |
-| F72 | "No available landers" while a lander sits on the pad    | P2  | med  | todo   |
+| F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
@@ -819,13 +819,43 @@ function cannot coexist. The shipped `assert(res_type == "Resource")` is dropped
 copy in the same pass (assert does not unwind in mod code; it would only add log noise).
 Probe: `AutoExportPriority` in the Test Kit's `30_Probes_Wave3.lua`.
 
-### F72 — "No available Asteroid Landers" with a lander on the pad (P2, med)
+### F72 — "No available Asteroid Landers" with a lander on the pad (P2, med)  `[fixed: Code/Fix_AsteroidLanderAvailable.lua]`
 `PlanetaryAsteroidVisitPossible` (`PlanetaryView.lua:433-444`) and
 `GetRocketsForExpedition` (`PlanetUI.lua:1623-1651`) exclude any lander that is busy
 (CmdLoad/CmdUnload) or has stale `arrival_loc` (payload dialog Cancel skips CancelFlight
 during CmdLoad, `CargoRequestNew.lua:389-399`). No per-asteroid occupancy lock exists
 (`IsDifferentAsteroidLocation` compares Map to MapDescriptor — never false,
 `PlanetUI.lua:1696-1699`). **Fix:** accept landed re-targetable landers in both checks.
+*Implemented as the gate half only, on better evidence.* The two functions are not
+equally at fault — they DISAGREE, and only one of them blocks the player:
+* `GetRocketsForExpedition` (`PlanetUI.lua:1623-1635`) keeps every non-supply-pod
+  `UniversalRocketBase` with `departure_loc == OurColony`, no `arrival_loc`, and the
+  selected spot among its available destinations. It never looks at `command`.
+* `PlanetaryAsteroidVisitPossible` — the gate the VISIT ASTEROID action consults before
+  opening that list (`PlanetaryViewAsteroidResources.generated.lua:37-41`) — additionally
+  demands `command == "CmdWaitOrder"`.
+So a lander parked at the colony with nothing assigned but running any other command is
+offered by the list and refused by the gate. The everyday case is `CmdUnload`
+(`UniversalRocket.lua:478-510`), which lasts as long as the drones take to empty the hold
+and forever when there are no drones or nowhere to put the cargo; `CmdWaitMaintenance`
+(`:586-630`) is the other. The fix is a chained post-wrapper on the gate (permissive only:
+the shipped predicate runs first and its every acceptance is preserved) whose extra scan
+mirrors the list builder's predicate, supply-pod exclusion included. `GetRocketsForExpedition`
+itself is left alone — it is the more correct of the two and needs no widening.
+*Not actionable as stated:* the "stale `arrival_loc`" half. `UICancelManualModeRequest`
+(`CargoRequestNew.lua:389-399`) does skip `CancelFlight` while the rocket is in `CmdLoad`,
+but the resulting state is a rocket genuinely committed to a destination and loading for
+it, not a stale flag — both the gate and the list are right to exclude it, and the player
+cancels that flight from the rocket's own infopanel. Changing the dialog's Cancel
+semantics would be a redesign, not a defect repair (FIX_POLICY §4).
+*Observed, deliberately not touched* (both are permissive failures, neither blocks):
+(a) the gate's legacy `LanderRocketBase` branch mis-associates — `IsKindOf(rocket,
+"LanderRocketBase") and rocket.command == "Refuel" or rocket.command == "WaitLaunchOrder"
+or (...)` parses as `(A and B) or C or D`, so the class test guards only the first term;
+(b) `IsDifferentAsteroidLocation` (`PlanetUI.lua:1696-1699`) compares `city:GetMap()` with
+`selected_spot.map`, which is a MapDescriptor on an asteroid spot, so it always answers
+"different" and the action's disable branch never fires.
+Probe: `AsteroidLanderAvailable` in the Test Kit's `30_Probes_Wave3.lua`.
 
 ### F73 — Asteroid colonists idle outdoors; nothing shelters the suffocating (P1, med-high)  `[fixed: Code/Fix_ShelterReflex.lua]`
 Chain: `MicroGHabitatAutoResolve:IsSuitable` requires `GetScoreFor > 0` ≈ `HasLifeSupport()`

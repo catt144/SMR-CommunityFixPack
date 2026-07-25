@@ -50,6 +50,7 @@ and can be individually disabled.
 | GeneForging | The Gene Forging tech raises the rare-trait chance instead of doing nothing at all |
 | MirrorSphereSite | A finished Mirror Sphere excavation stops accepting drone work it can no longer use |
 | PayloadTemplateRefill | Edit Payload keeps the amounts you set instead of refilling emptied rows from the flight-policy template |
+| AsteroidLanderAvailable | "No available Asteroid Landers" is no longer shown while an unassigned lander is sitting on the pad |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).
