@@ -44,6 +44,11 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- New arrivals no longer set off for a dome they cannot actually reach. When
+  nothing walkable was available the game picked the nearest dome by straight-line
+  distance and sent them anyway, which is why rocket loads of colonists died on
+  the surface. They now wait by the rocket instead, and they no longer disembark
+  into ground they cannot walk out of.
 - Colonists moving between two nearby domes now use the passage you built. Below
   400m the game never even looked for a passage route and marched them across the
   surface instead — a walk that fits into their oxygen supply only if nothing
@@ -106,7 +111,7 @@ come back.
 - Colonists: homeless colonists find the housing that's actually free (invisible
   stale reservations were eating it); turning off "accept colonists" no longer
   secretly stops your residents from shopping through passages; drones keep
-  servicing opened domes; new arrivals stop hiking to unreachable domes.
+  servicing opened domes.
 - The Philosopher's Stone mystery can no longer hang forever at the finale.
 - The "Low Storage" warning fires for Food and spare parts (it mathematically
   never could); Command Center resource numbers display again; dome overview

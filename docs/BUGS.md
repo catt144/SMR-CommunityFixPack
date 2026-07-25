@@ -516,7 +516,7 @@ guarantees it isn't. 400m ≈ 100s walk vs `OxygenMaxOutsideTime` 120s (`__const
 override `TryToEmigrateToDome`: in non-breathable atmosphere always try passage path
 first; cap raw outside walks to an oxygen budget; else shuttle/stay.
 
-### F53 — Arrivals hike to unreachable "safety dome" and die (P1, high)
+### F53 — Arrivals hike to unreachable "safety dome" and die (P1, high)  `[fixed: Code/Fix_ArrivalDeaths.lua]`
 `GetDomesReachableByColonists` (`_GameUtils.lua:346-395`): `safety_dome` = nearest by
 distance even if NOT walkable; `ChooseDome` (:426-441) falls back to it; `Colonist:Arrive`
 (`Colonist.lua:1293-1297`) sends `TransportByFoot` unconditionally, and drops colonists at

@@ -27,6 +27,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_RocketDroneChurn.lua",
 		"Code/Fix_ShuttleTransportCache.lua",
 		"Code/Fix_VacuumWalks.lua",
+		"Code/Fix_ArrivalDeaths.lua",
 	},
 	'TagGameplay', true,
 })
