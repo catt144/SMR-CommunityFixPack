@@ -1,6 +1,8 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-25 (build-out session 4, wave 3 COMPLETE). This is the handoff snapshot; BUGS.md is
+Updated: 2026-07-25 (build-out session 4, wave 3 COMPLETE). This is the handoff snapshot;
+**the next session is a QA leg — its kickoff prompt is `docs/FABLE_QA_PROMPT.md`**
+(`docs/OPUS_BUILD_PROMPT.md` is the build-leg equivalent). BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
 cross-check), MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix
