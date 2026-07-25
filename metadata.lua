@@ -16,6 +16,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_TouristApplicants.lua",
 		"Code/Fix_TrainsToVoid.lua",
 		"Code/Fix_FactionFundingCheck.lua",
+		"Code/Fix_LanderEmptyLaunch.lua",
 	},
 	'TagGameplay', true,
 })

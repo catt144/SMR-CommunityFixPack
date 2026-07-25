@@ -49,6 +49,11 @@ come back.
   be redeployed — previously your colony's train count silently shrank until
   no station could ever send out a train again.
 
+**Asteroids & rockets**
+- Automatic rockets and asteroid landers no longer take off with nothing
+  aboard. They wait for cargo as intended instead of burning fuel on endless
+  empty round trips.
+
 **Story & milestones**
 - Completing all milestones no longer breaks in games using the
   No Terraforming or No Politics rules (the completion popup was lost to a
@@ -59,10 +64,10 @@ come back.
   wisps and nothing visible for others).
 
 ### [DRAFT NOTE] Planned next — move up as they're implemented
-- Asteroid landers: no more empty launches, no more loading cargo and dumping
-  it back out, no more stranding themselves by unloading their own return fuel,
-  payload settings that stick, valuables prioritized over waste rock, and
-  "no available landers" no longer shown while a lander sits on the pad.
+- Asteroid landers: no more loading cargo and dumping it back out, no more
+  stranding themselves by unloading their own return fuel, payload settings
+  that stick, valuables prioritized over waste rock, and "no available landers"
+  no longer shown while a lander sits on the pad.
 - Asteroid colonists seek shelter before suffocating and can move into
   habitats that had a momentary power blip.
 - Track salvage: deleting one hex no longer deletes your entire track (and

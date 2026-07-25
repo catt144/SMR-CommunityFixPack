@@ -80,7 +80,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | todo   |
-| F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | todo   |
+| F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | todo   |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | todo   |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | todo   |
@@ -668,7 +668,7 @@ Workaround: ≥2-hex gap. **Fix:** patch `CreateConnectorElements` to not delete
 owned by a live non-destructing building (breaks ping-pong); full shared-hex support more
 invasive.
 
-### F67 — Auto-lander launches empty and ping-pongs (P1, high)
+### F67 — Auto-lander launches empty and ping-pongs (P1, high)  `[fixed: Code/Fix_LanderEmptyLaunch.lua]`
 `UniversalRocketBase:IsCargoReady` (`UniversalRocket.lua:455-472`): `CheckAutoDepart()`
 ("wait for cargo") only yields the NON-blocking `"waiting_cargo"` issue
 (`GetLaunchIssue` :883-885 returns no blocker); with an empty auto request
