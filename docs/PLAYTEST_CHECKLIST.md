@@ -48,6 +48,31 @@ tested. Nothing ships as "verified" on probe evidence alone.
    not a bug.
 5. If a step's setup fails, write that down. "Could not set this up" is a valid and
    useful result.
+6. **If Enter opens no console** in a loaded colony (the Test Kit's auto-enable has
+   failed once, from the main menu): try Alt-Shift-C; failing that, launch a **Mod
+   Editor test session** (modding tools active → console granted unconditionally).
+   Report it either way so the Test Kit can grow a retry.
+
+### Cheating without contaminating results
+
+Cheat the **setup**, never the **mechanism under observation**. The fixes patch
+decision logic; cheats inject state (money, goods, people, buildings) — state
+injection is exactly what the scenarios need. Each PT's Setup line names its
+cheats; when one must stay OFF, the PT says so. Standing accelerators — use
+freely: `CheatAddFunding`, `CheatCompleteAllConstructions`, `CheatFillAllStorages`,
+`CheatResearchAll`, `CheatSpawnNColonists`, `CheatUpdateAllWorkplaces`,
+`dbg_ToggleRocketInstantTravel`, `CheatToggleInfopanelCheats`, `MultiCheat`.
+Four specific cautions:
+
+- **PT-38** runs on **wall-clock time** — game speed does not shorten the 2-minute
+  suppression window. Run another test while you wait.
+- **PT-36**: run its three console calls **before** any `CheatAddFunding` in that
+  sitting — cheat funding flows through the income-recording path the test reads.
+- **PT-17/PT-32**: fill storages / instant travel freely (both prescribed), but do
+  not hand-edit the lander's cargo request mid-observation — the request math IS
+  the test subject.
+- **PT-10 / F55**: use `OpenAllDomes()`, not `CheatOpenAllDomes()` — the Cheat
+  variant also maxes terraforming params and muddies the observation.
 
 ### Console: what works and what silently does nothing
 
