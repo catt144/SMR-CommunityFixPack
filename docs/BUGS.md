@@ -191,6 +191,17 @@ where the per-hour table only exists for hours with positive gain (`ChangeFundin
 → `pairs(nil)` error for most hours. Breaks `Data\FactionDef\BlueSun.lua:34,54`,
 `Brazil.lua:42`, `Russia.lua:84` (export/tourism income gates never evaluate true).
 **Fix:** redefine `Funding.GetLastSolsFundingByType` with `or empty_table` guards.
+*QA audit 2026-07-25 — the premise is falsified in this engine build:* the wave-3 A/B
+baseline drove the SHIPPED body with a stand-in whose per-hour tables were all nil (240
+`pairs(nil)` iterations) and it returned 0 without erroring — this engine tolerates
+`pairs(nil)` exactly as it tolerates `next(nil)`/`ipairs(false)` (the engine-facts list;
+that tolerance was established AFTER this wave-1 fix was written). There is no observable
+defect for the fix to repair, and its probe (`FactionFundingCheck`) can therefore never
+discriminate: it PASSes in both A/B halves and is not evidence. The wrapper is harmless
+(same values, `empty_table` instead of nil). **Decision for the user:** retire the fix
+(preferred — one fewer full replacement to maintain) or keep it as hardening; either way
+the faction-gate symptom this entry attributed to the error needs a different explanation
+if it recurs.
 
 ### F11 — Train wedges at platform (`table.remove` misuse)  `[fixed: Code/Fix_TrainPlatformWedge.lua]`
 `Lua\Units\ColonistTransport.lua:541-547` (`ExitVehicle` stale-passenger guard) —
@@ -453,6 +464,19 @@ a building is added to a label named after its own class (`Building:AddToCityLab
 else was covering Large turbines. Conservative: any existing percent modifier for that
 property on that label counts as "already buffed" and the label is skipped, so the pass
 cannot double-buff, and it is idempotent across loads.
+*QA audit 2026-07-25 — one HIGH defect found and repaired:* the pass originally hooked
+`OnMsg.LoadGame`, but `UnpersistGame` fires `Msg("LoadGame")` BEFORE `FixupSavegame`
+(`CommonLua\Savegame.lua:810-813`). On the first load of a save the shipped
+`WindTurbine_Large_ReapplyModifiers` fixup had not yet been applied to, the pass ran ahead
+of it, saw the Diffuser label bare, buffed it — and then the fixup unconditionally added
+its own +100% (`WindTurbine.lua:80-87` has no already-buffed check): +200% baked into the
+save permanently. Repair: the handler now hooks `OnMsg.PostLoadGame`, which fires after
+fixups (`Savegame.lua:813`); the "any percent modifier → skip" guard then holds in every
+ordering. Also hardened while in there (latent, dormant today): `amount` is now scaled via
+`GetModifiablePropScale(prop)` the way the live tech apply scales it (`Tech.lua:298-301`) —
+all three shipped effects have Amount 0, but the pass is preset-driven by design. The
+LoadGame-vs-fixup ordering cannot be discriminated by the probe (it drives the pass
+directly); PT-35 case C remains the only true fixture.
 Probe: `SaveSanitizerTurbineBuff` in `30_Probes_Wave3.lua`.
 
 ### F36 — Universities overtrain geologists (P2, high behavior-confirmed)  `[fixed: Code/Fix_UniversityOvertraining.lua]`

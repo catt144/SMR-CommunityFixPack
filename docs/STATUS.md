@@ -1,8 +1,9 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-25 (build-out session 4, wave 3 COMPLETE). This is the handoff snapshot;
-**the next session is a QA leg — its kickoff prompt is `docs/FABLE_QA_PROMPT.md`**
-(`docs/OPUS_BUILD_PROMPT.md` is the build-leg equivalent). BUGS.md is
+Updated: 2026-07-25 (QA session 5 — wave-3 A/B pair run CLEAN, audits done; see the
+"QA session (wave 3)" section). The wave-3 build handoff prompt was
+`docs/FABLE_QA_PROMPT.md`; the next build leg (wave 4) starts from
+`docs/OPUS_BUILD_PROMPT.md` updated for the wave-4 queue below. BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
 cross-check), MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix
@@ -34,7 +35,7 @@ the Lua console at load and carries observability loggers and state reports.
   Last War mystery import lock at 54%, game-stops-saving. Plus smaller new leads
   from the ChatGPT dossier cross-check (top of RESEARCH.md).
 
-## Implementation: 48 tracked defects DONE across 47 registered modules (30 probe-verified in-game 2026-07-25; the 18 wave-3 fixes have probes but NO A/B run yet)
+## Implementation: 48 tracked defects DONE across 47 registered modules (ALL probe-verified in-game 2026-07-25 — wave-3 A/B pair clean, see the QA session section; F10's premise falsified, retirement pending user decision)
 
 Wave 1 (earlier session): F01 cave-ins/NoDisasters, F02 meteor frequency,
 F03* upgrade-modifier leak, F04 night shift, F05 milestone crash, F07+F15* wisp
@@ -67,9 +68,10 @@ Wave 3, second leg (session 4, in queue order): **F71** auto-export capacity pri
 **The whole wave-3 queue is now done.** Nothing from the session-3 handoff list is left
 except the four entries deliberately parked as `blocked` (see below).
 
-**Wave-3 fixes have not been run in-game at all.** Each ships with a probe in the Test
-Kit's `Code/30_Probes_Wave3.lua` (19 probes, registered in its metadata), but no RunAll A/B
-pair has been executed since wave 2. That pair is the first thing the next QA leg should do.
+**Wave-3 fixes are now probe-verified in-game (2026-07-25 QA session):** the RunAll A/B
+pair ran clean — every armed probe flipped FAIL→PASS, 46 fixes + sanitizer `applied`,
+ClassicRockets `inactive` by default and `applied`+PASS in the opt-in leg. Full results
+in the "QA session (wave 3)" section below.
 
 Three first-leg fixes add their own `OnMsg.LoadGame` repair pass: F38 (close destroyed
 tunnels left open in pathfinding), F39 (reconnect solar panels to a sun in range), F40
@@ -78,9 +80,13 @@ tunnels left open in pathfinding), F39 (reconnect solar panels to a sun in range
 `Code/90_SaveSanitizer.lua` now exists and carries the remaining consolidated sweeps:
 **F35** (restore the Frictionless Composites label modifiers the shipped migration fixup
 dropped) and **F03** (remove upgrade modifiers orphaned by salvaged buildings). Both are
-idempotent, both run on `OnMsg.LoadGame`, and both are exposed on `SMRFixPack.Sanitizer`
-so QA can re-run them from the console (`RepairTurbineBuff` / `RepairLeakedUpgradeModifiers`,
-each returns a repair count). **F48 is NOT in it** — see its BUGS.md entry.
+idempotent, both run on **`OnMsg.PostLoadGame`** (NOT LoadGame — the QA audit found that
+`Msg("LoadGame")` fires BEFORE `FixupSavegame`, `Savegame.lua:810-813`, so a LoadGame-time
+F35 pass raced the shipped turbine fixup and could bake +200% onto Shrouded turbines on a
+never-patched save's first load; see the F35 entry), and both are exposed on
+`SMRFixPack.Sanitizer` so QA can re-run them from the console (`RepairTurbineBuff` /
+`RepairLeakedUpgradeModifiers`, each returns a repair count). **F48 is NOT in it** — see
+its BUGS.md entry.
 
 Other fixes carrying their own one-shot `OnMsg.LoadGame` / `OnMsg.NewDay` pass for state
 already baked into savegames: F02 (thread restart), F45 (stamp repair sites), F37 (remove
@@ -103,6 +109,63 @@ Files use an `Opt_` prefix instead of `Fix_` to mark them as not-bug-fixes.
   parked at the colony keeps its launch ration requested even with no destination selected,
   so drones refuel it while it waits. Only the fuel half of D01; the standing Rare Metals
   export half is deliberately unwritten (see the D01 entry).
+
+## QA session (wave 3) — Fable, 2026-07-25 evening: A/B pair CLEAN, audits done
+
+All four RunAll legs unattended via `-smrautorun` (Steam `-applaunch 3215050`); a
+Python `luaparser` pre-pass first proved all 57 mod Lua files parse (no file-level
+load failures possible). Logs in `%AppData%\Surviving Mars Relaunched\logs`:
+
+| Leg | Log (Mars.exe-20260725-…) | Result |
+|-----|--------------------------|--------|
+| Baseline (pack code list emptied) | 16.19.54 | 1 PASS, **38 FAIL**, 11 SKIP, 0 ERROR — every armed probe FAILs, all discriminate |
+| Full pack | 16.22.38 | **39 PASS, 0 FAIL**, 11 SKIP — 46/47 active + ClassicRockets `inactive` (expected); found the ModLog `%` defect (below) |
+| Opt-in (`SMRFixPack_Optional.ClassicRockets`) | 16.28.35 | **40 PASS, 0 FAIL**, 10 SKIP — ClassicRockets `applied`, its probe asserts; F69 chain intact |
+| Final verification (default config, repairs in) | 16.31.30 | **39 PASS, 0 FAIL**, 11 SKIP, zero errors from our code |
+
+(The ~49 `[LUA ERROR] Flight.lua objects_to_mark` blocks per leg are engine noise on
+the synthetic map — present in the baseline too, not ours.)
+
+**Defects found and repaired this session (all verified by the later legs):**
+1. **HIGH — SaveSanitizer fixup race** (subagent audit, verified first-hand): pass moved
+   `OnMsg.LoadGame` → `OnMsg.PostLoadGame`; see the F35 BUGS entry. Not probe-coverable
+   (needs a real never-patched save — PT-35 case C).
+2. **ModLog re-formats its message**: `ModPrint` is a printf-style `CreatePrint`
+   (Mod.lua:109-113 + lib.lua:164-174), so a literal `%` in an already-formatted message
+   raises `[LUA ERROR] string.format` — three per fixed leg (sanitizer "+100%" lines,
+   TurbineBuff PASS line). All four log helpers now escape `%` for the second pass
+   (fix pack 00_Core + 90_SaveSanitizer; TestKit 00_TestCore + 95_AutoRun, whose
+   "ModLog is %-safe" comment was WRONG — corrected). **Engine-facts correction.**
+3. **F35 amount now scaled** via `GetModifiablePropScale` (dormant hardening, matches
+   Tech.lua:298-301).
+
+**Spot-audits of the six highest-risk wave-3 divergences (subagent fan-out, each
+verified against Src):** F59 CLEAN (ordering + assert-race claims true; recursion
+bounded — homeless have `residence == false`), F71/F68 CLEAN (body diff exact; pcall
+degrades to shipped alphabetical order; reorder provably cannot drop or starve a
+resource), F72 CLEAN (strict pass-through; scan is an exact subset of
+GetRocketsForExpedition incl. supply-pod exclusion), F54 CLEAN (full reason-state
+enumeration found a FIFTH string `ExceptionalCircumstancesMalafunction` (sic) —
+provably never admitted, malfunction forces GetWorkNotPossibleReason truthy), F34(d)
+CLEAN (params table matches shipped; engine never mutates it; per-call dedup),
+SaveSanitizer = the HIGH defect above, now repaired. Recurring minor: header/BUGS
+line-number drift (off-by-ones, catalogued in the session transcript — cosmetic).
+
+**Probe-discrimination sweep (Task 2):** ground truth from the pair — every armed
+probe FAILed baseline and PASSed fixed except **F10 `FactionFundingCheck`**, which is
+**fundamentally non-discriminating**: the baseline drove the shipped body over 240 nil
+hours and it returned 0 — **this engine tolerates `pairs(nil)`** (new engine fact,
+consistent with the `next(nil)` tolerance). F10's defect premise is falsified; entry
+updated, probe PASS message now says "not evidence". Decision for the user below.
+The rewritten F51 probe now discriminates (FAIL→PASS observed). 10 `[install]` probes
+still SKIP on retail — the MarsDebug.exe pair remains the missing coverage.
+
+**D01/ClassicRockets (Task 4):** default-off / opt-on / no-spam claims all verified;
+the no-spam citation in the Opt file pointed at the wrong file (the `arrival_loc`
+gates live in the UniversalRocketBase override, UniversalRocket.lua:1687-1692) —
+corrected; a third benign `Msg("RocketRefueled")` path via DroneUnloadResource is
+now documented in the file. MOD_DESCRIPTION wording tightened so the module text
+cannot be read as promising the unwritten Rare Metals half.
 
 ## QA session snapshot (Fable, 2026-07-25) — kept for the audit record
 
@@ -392,8 +455,16 @@ that "passed" or SKIPped were not testing what they claimed.
    covers what scripts can't: feel, visuals, UI, long-running behavior). Results
    reported back flip each covered fix's BUGS.md status to `tested` — see that
    file's "Reporting protocol" section for the exact follow-up workflow.
-6. **Four decisions, not code** — the wave-3 blocked table above: close F32 as `wontfix`?
-   in-game test to unblock F48? are F62/F63 in scope at all, and if so as an opt-in module?
+6. **Five decisions, not code** — the wave-3 blocked table above plus one from QA:
+   close F32 as `wontfix`? in-game test to unblock F48? are F62/F63 in scope at all,
+   and if so as an opt-in module? and **retire F10** (its `pairs(nil)` premise is
+   falsified in this engine — see the F10 entry; QA recommends retiring)?
+8. **TestKit remote** — the Test Kit repo has no remote and sits on `master` (49 local
+   commits). Options: (a) its own GitHub repo (recommended — keeps the shipped repo's
+   history clean and the "never upload the kit" rule structural), or (b) an orphan
+   branch on SMR-CommunityFixPack. `gh` is not installed, so creating a new repo needs
+   the user on github.com either way; wiring the remote + push is one command once it
+   exists.
 7. A donated save that researched **Frictionless Composites before the game patched the
    tech** is the only true fixture for the F35 sanitizer pass (PT-35 case C). Everything
    else about that pass is probe-covered.
