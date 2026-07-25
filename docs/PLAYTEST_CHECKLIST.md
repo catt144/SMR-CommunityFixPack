@@ -1137,6 +1137,43 @@ things it repaired.
 
 ---
 
+## PT-36 — F10 retirement check · confirms **F10** is safe to close `wontfix`
+
+F10 (faction funding conditions "always error") is **retiring**: the QA A/B baseline
+proved the shipped `GetLastSolsFundingByType` tolerates its `pairs(nil)` hours in this
+engine, so the fix repairs nothing. The fix is already commented out of `metadata.lua`.
+This check confirms that finding on a **real** save's organic income history — the one
+thing the synthetic baseline could not cover — and is the gate for closing the entry.
+
+**Setup:** your longest-running real save (SAVE-B or better; a donated community save
+is ideal). Fix pack loaded as normal — the retired fix is simply absent, so the
+console drives the SHIPPED function. Two minutes.
+
+**Trigger:**
+1. Open the console (Enter / Alt-Shift-C — the Test Kit enables it) and run, one at
+   a time:
+   `UIColony.funds:GetLastSolsFundingByType(10, "Exports")`
+   `UIColony.funds:GetLastSolsFundingByType(10, "Tourist Profits")`
+   `UIColony.funds:GetLastSolsFundingByType(10, "Exports + Tourist Profits")`
+2. Play (or fast-forward) a few game hours with **no export/tourism income**, then
+   run all three again — this maximises the nil per-hour entries the old entry
+   claimed would crash.
+3. Skim the session log for any new `[LUA ERROR]` mentioning `Funding.lua`.
+
+- **RETIREMENT CONFIRMED looks like:** every call prints a **number** (0 is fine, and
+  expected with no recent income) and the log stays clean → report PASS; F10 closes
+  as `wontfix` and `Fix_FactionFundingCheck.lua` is deleted from the repo.
+- **ROLLBACK looks like:** any call errors (`pairs`/nil in `Funding.lua:110`) → report
+  FAIL with the exact error text and your save's sol count; re-add the
+  `Fix_FactionFundingCheck.lua` line in `metadata.lua` and the F10 entry reopens.
+- Bonus, if the save's sponsor has faction goals: open the faction/goals screen and
+  confirm the "made profits from exports/tourism in the last 10 sols" conditions
+  render and evaluate (either state) without errors.
+
+`Result:` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

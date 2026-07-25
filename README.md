@@ -18,7 +18,6 @@ and can be individually disabled.
 | MilestoneCrash | Completing all milestones no longer errors in No Terraforming / No Politics games |
 | WispRewards | Mystery 11: "free the wisps" produces real power; destroyed-wisp research rewards match the notification |
 | TouristApplicants | Higher tourist star ratings correctly give more bonus applicants (the chance roll was inverted) |
-| FactionFundingCheck | Faction goals based on recent export/tourism income can actually trigger |
 | TrainsToVoid | Demolishing a station stores its trains instead of permanently deleting them from the colony |
 | LanderEmptyLaunch | Automatic rockets and asteroid landers wait for cargo instead of taking off empty and coming straight back |
 | LanderCargoRatchet | Automatic rockets stop unloading the cargo they just loaded (the hourly request no longer shrinks by what is aboard), and fill the hold with the valuable resources first instead of in alphabetical order |

@@ -73,9 +73,6 @@ come back.
   upgrade bonuses. Previously these leaked forever and could be stacked
   infinitely by rebuilding (this silently corrupted long-running colonies).
   Bonuses already leaked into your save are cleaned up when you load it.
-- Faction storylines that check your recent export or tourism income
-  (Blue Sun, Brazil, Russia) can now actually progress — the income check
-  crashed internally on any hour you earned nothing.
 
 **Colonists**
 - The **Gene Forging** research does something. The tech promises a higher chance

@@ -35,7 +35,7 @@ the Lua console at load and carries observability loggers and state reports.
   Last War mystery import lock at 54%, game-stops-saving. Plus smaller new leads
   from the ChatGPT dossier cross-check (top of RESEARCH.md).
 
-## Implementation: 48 tracked defects DONE across 47 registered modules (ALL probe-verified in-game 2026-07-25 — wave-3 A/B pair clean, see the QA session section; F10's premise falsified, retirement pending user decision)
+## Implementation: 47 tracked defects DONE across 46 registered modules (ALL probe-verified in-game 2026-07-25 — wave-3 A/B pair clean, see the QA session section; F10 retirement STAGED 2026-07-26, premise falsified, final wontfix gated on PT-36)
 
 Wave 1 (earlier session): F01 cave-ins/NoDisasters, F02 meteor frequency,
 F03* upgrade-modifier leak, F04 night shift, F05 milestone crash, F07+F15* wisp
@@ -455,10 +455,12 @@ that "passed" or SKIPped were not testing what they claimed.
    covers what scripts can't: feel, visuals, UI, long-running behavior). Results
    reported back flip each covered fix's BUGS.md status to `tested` — see that
    file's "Reporting protocol" section for the exact follow-up workflow.
-6. **Five decisions, not code** — the wave-3 blocked table above plus one from QA:
-   close F32 as `wontfix`? in-game test to unblock F48? are F62/F63 in scope at all,
-   and if so as an opt-in module? and **retire F10** (its `pairs(nil)` premise is
-   falsified in this engine — see the F10 entry; QA recommends retiring)?
+6. **Four decisions, not code** — the wave-3 blocked table above: close F32 as
+   `wontfix`? in-game test to unblock F48? are F62/F63 in scope at all, and if so as
+   an opt-in module? (F10's decision is made: **retirement STAGED 2026-07-26** — the
+   fix is commented out of `metadata.lua`, the registered set is now **46 modules /
+   45 active + ClassicRockets inactive**, and the final `wontfix` + file deletion is
+   gated on the new **PT-36** console check; rollback is one metadata line.)
 8. **TestKit remote** — the Test Kit repo has no remote and sits on `master` (49 local
    commits). Options: (a) its own GitHub repo (recommended — keeps the shipped repo's
    history clean and the "never upload the kit" rule structural), or (b) an orphan

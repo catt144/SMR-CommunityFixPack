@@ -22,7 +22,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
 | F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | fixed  |
-| F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | fixed |
+| F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | retiring |
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | fixed  |
 | F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | fixed  |
 | F13 | Command Center resource rows show no numbers             | P2  | high | fixed  |
@@ -185,7 +185,7 @@ payouts. Visible as 2 red rows down / 1 green row up in the satisfaction log. **
 replace `Colonist.UpdateSatisfaction` (self-contained) with symmetric tier-based version
 (tiers: <low / [low,high) / [high,100) / 100; apply signed sum of awards between tiers).
 
-### F10 — Faction funding conditions always error  `[fixed: Code/Fix_FactionFundingCheck.lua]`
+### F10 — Faction funding conditions always error  `[retiring — premise falsified; final wontfix gated on PT-36]`
 `Lua\Funding.lua:104-117` (`GetLastSolsFundingByType`) — `pairs(funding_gain_last_hours[hour])`
 where the per-hour table only exists for hours with positive gain (`ChangeFunding` :52-65)
 → `pairs(nil)` error for most hours. Breaks `Data\FactionDef\BlueSun.lua:34,54`,
@@ -202,6 +202,12 @@ discriminate: it PASSes in both A/B halves and is not evidence. The wrapper is h
 (preferred — one fewer full replacement to maintain) or keep it as hardening; either way
 the faction-gate symptom this entry attributed to the error needs a different explanation
 if it recurs.
+*Planned retire, 2026-07-26:* `Fix_FactionFundingCheck.lua` is commented out of
+`metadata.lua` (the file stays in the repo; rollback = re-add one line). Final `wontfix`
+is gated on **PT-36** — an in-person console check on a real long-running save that the
+SHIPPED function returns a number over empty income hours, confirming the synthetic
+baseline evidence on organic save state. If PT-36 ever errors, re-enable the fix and
+reopen this entry.
 
 ### F11 — Train wedges at platform (`table.remove` misuse)  `[fixed: Code/Fix_TrainPlatformWedge.lua]`
 `Lua\Units\ColonistTransport.lua:541-547` (`ExitVehicle` stale-passenger guard) —
