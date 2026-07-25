@@ -155,6 +155,16 @@ notification suppression, F33/F34 landscape nil guards. Then
   `SMRFixPack`/`SMRTest` are cross-mod and console visible; `Msg`/`OnMsg` are
   filtered only for persist/debug messages. The fix pack Code/ uses no
   blacklisted API (verified) — sandbox- and console-clean.
+- **`error()` and `assert()` do NOT unwind mod code — they report and execution
+  continues** with the next statement (LuaExports.lua:567 "asserts pop instead of
+  being printed out"). Never use them for control flow; `pcall` still catches
+  genuine runtime errors. Cost us four bogus FAILs and ten ERRORs in the first
+  A/B pair (see the diagnosis section).
+- **`rawset(_G, k, v)` from mod code writes only into the mod's own env table**
+  (`_G` IS that table, Mod.lua:1603; `rawset` is the real rawset, only `rawget`
+  is replaced at :1606). To write a global the game can see, assign it —
+  `_G[k] = v` goes through `ModEnvMeta.__newindex` (:1557-1563) into the real
+  `_G`. `rawget(_G, "X")` for READS is fine (safe_rawget falls through, :1577).
 - **CORRECTION of an earlier "fact": `debug.getinfo` is NOT available in mod
   code** (debug is blacklisted). The Test Kit's install probes
   (00_TestCore.lua:37) break under the sandbox; repair in progress — bridge
