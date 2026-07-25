@@ -165,6 +165,27 @@ updated, probe PASS message now says "not evidence". Decision for the user below
 The rewritten F51 probe now discriminates (FAIL→PASS observed). 10 `[install]` probes
 still SKIP on retail — the MarsDebug.exe pair remains the missing coverage.
 
+**MarsDebug [install] pass (2026-07-26, attended) — FULL COVERAGE, 49 PASS / 0 FAIL /
+0 ERROR** (1 SKIP = ClassicRockets opt-in, verified separately in the opt-in leg). Logs:
+MarsDebug.exe-20260725-17.40.38 (baseline, installs SKIP — see below) and -17.46.04
+(fixed, attended). All 10 `[install]` probes PASS with real verdicts, and **F73's Idle
+pre-wrapper half is verified** ("Idle carries the shelter branch") — the last unverified
+wiring in the pack. Install-probe baselines are FAIL-by-construction (they test function
+provenance), so the attended fixed leg alone completes the coverage.
+Three facts corrected/learned doing it:
+- **The mod sandbox applies on ALL builds including MarsDebug.exe** — the wave-2
+  assumption that an asserts build un-sandboxes mod code is WRONG. An asserts build
+  unsandboxes the CONSOLE (g_ConsoleFENV reads real `_G`, console.lua:36-44), and
+  `ConsoleExec` is on the ModEnvBlacklist (Mod.lua:1285), so the introspection bridge
+  cannot be automated — it is typed: `SMRTest.EnableIntrospection(debug)` then
+  `SMRTest.RunAll()`.
+- The TestKit autorun now has a flag-gated **SetupOnly mode** (95_AutoRun +
+  96_AutoRunFlag comment) that builds the colony and hands the session to the human —
+  the attended-leg harness.
+- **The debug build pops MODAL dialogs for asserts** — the first is the known vanilla
+  `Flight.lua:465 objects_to_mark` noise; click **Ignore All** or the run blocks (and
+  the 8-min watchdog can then expire; harmless, relaunch).
+
 **D01/ClassicRockets (Task 4):** default-off / opt-on / no-spam claims all verified;
 the no-spam citation in the Opt file pointed at the wrong file (the `arrival_loc`
 gates live in the UniversalRocketBase override, UniversalRocket.lua:1687-1692) —
@@ -444,10 +465,10 @@ that "passed" or SKIPped were not testing what they claimed.
 
 ## Waiting on the user
 
-1. DONE 2026-07-25 — both mods enabled, automated A/B RunAll pair ran clean
-   (30/30 applied, 19/19 FAIL→PASS). Remaining variant: one pair under
-   MarsDebug.exe (debugging launch option) for [install]-probe + F73-wrapper
-   coverage — fully automated, just needs the two Steam "Continue" clicks.
+1. DONE 2026-07-25/26 — retail A/B pairs clean AND the MarsDebug [install] pass is
+   complete (49 PASS / 0 FAIL, F73 fully verified — see the QA session section).
+   **Automated + attended probe coverage is now 100%**; nothing further is owed to
+   the harness. All that remains is the human playtest.
 2. DONE 2026-07-26 — author set to **catt144** in both mods' metadata.lua.
 3. For the save-failure lead: logs from `%AppData%\Surviving Mars Relaunched\logs`
    and Ctrl+F1 reports from affected players would pin it.
