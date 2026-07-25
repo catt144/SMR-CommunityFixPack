@@ -47,7 +47,7 @@ The game's Lua source (read-only, NEVER modify) is at
 4. Same commit: BUGS.md index status → `fixed` (+ tag on the detail heading),
    add a player-language line to README's fix table and MOD_DESCRIPTION.md's
    "fixes right now" section (move it out of the planned list).
-5. Commit with `git -c user.name="SMR-BugFixPack" -c user.email="stkotor2@gmail.com"`,
+5. Commit with `git -c user.name="SMR-BugFixPack" -c user.email="154917955+catt144@users.noreply.github.com"`,
    message: `Implement F## (<short name>)`. One fix per commit.
 
 **Hard rules:**

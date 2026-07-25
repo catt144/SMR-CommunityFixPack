@@ -145,9 +145,22 @@ notification suppression, F33/F34 landscape nil guards. Then
   code paths) but NOT boolean relational compares — don't report/fix nil-iteration
   as crashes. `/` truncates (integer division); that is what makes F12's
   `a*24/v*24` unsatisfiable.
-- `debug.getinfo` is available — the Test Kit uses `.source` to tell whether a
-  function now comes from the fix pack. `GetStaticMsgNames()` lists every message
-  with a static handler, which is how the F06 probe proves a handler exists.
+- **Mods run in a sandbox (LuaModEnv) on ALL platforms**, including unpacked dev
+  mods (Mod.lua:1730/:1750; blacklist at :1267-1428). Key facts: `debug`, `io`,
+  `package`, `lfs`, all `Async*` file ops, load/dofile/require are BLACKLISTED;
+  `os` is `{time}` only; `setmetatable` is available (:1408 commented out);
+  `rawget` is a safe wrapper that reaches real `_G` for non-blacklisted names —
+  the pack's `rawget(_G, "X")` pattern works; `_G` maps to the env, but NEW
+  globals created at load are rawset into the REAL `_G` (:1557-1563), so
+  `SMRFixPack`/`SMRTest` are cross-mod and console visible; `Msg`/`OnMsg` are
+  filtered only for persist/debug messages. The fix pack Code/ uses no
+  blacklisted API (verified) — sandbox- and console-clean.
+- **CORRECTION of an earlier "fact": `debug.getinfo` is NOT available in mod
+  code** (debug is blacklisted). The Test Kit's install probes
+  (00_TestCore.lua:37) break under the sandbox; repair in progress — bridge
+  real `debug` via a console-exec path or SKIP install probes with a
+  `SMRTest.debug = debug` console instruction. `GetStaticMsgNames()` (F06 probe)
+  is a real global and still fine.
 - Patch points that work: `PeriodicRepeatInfo[name]` slots (THREAD/SLEEP/FUNC/COND
   = 1..4, CommonLua\Core\lib.lua:1538+), `GlobalGameTimeThreadFuncs[name]` +
   `RestartGlobalGameTimeThread(name)` on LoadGame (Lua\Config\_fixup.lua),
