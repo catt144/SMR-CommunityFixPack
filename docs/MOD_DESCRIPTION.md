@@ -44,6 +44,10 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- Colonists moving between two nearby domes now use the passage you built. Below
+  400m the game never even looked for a passage route and marched them across the
+  surface instead — a walk that fits into their oxygen supply only if nothing
+  delays them.
 - Building a Shuttle Hub actually helps. The game caches its verdict on whether a
   dome is reachable, and that cache never noticed new shuttles — so colonists
   stayed homeless (and seniors stayed put) even after you built the hub that
@@ -99,8 +103,7 @@ come back.
 - Asteroid landers: payload settings that stick, valuables prioritized over
   waste rock, and "no available landers" no longer shown while a lander sits on
   the pad.
-- Colonists: no more suffocating on "short" walks between domes when passages
-  exist; homeless colonists find the housing that's actually free (invisible
+- Colonists: homeless colonists find the housing that's actually free (invisible
   stale reservations were eating it); turning off "accept colonists" no longer
   secretly stops your residents from shopping through passages; drones keep
   servicing opened domes; new arrivals stop hiking to unreachable domes.

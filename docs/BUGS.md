@@ -507,7 +507,7 @@ suppress the disconnect/reconnect churn (requests mutate in place via
 seniors. **Fix:** wrap `FindTransportationModeToCommunity` to key on shuttle flag + flush
 cache on ConstructionComplete/TTL.
 
-### F52 — Colonists still walk ≤400m in vacuum past passages (P1, high)
+### F52 — Colonists still walk ≤400m in vacuum past passages (P1, high)  `[fixed*: Code/Fix_VacuumWalks.lua — passage route now always looked up in vacuum; the surface walk is still allowed when NO passage route exists (refusing it would strand colonists on shuttle-less maps) — that half stays open]`
 `FindTransportationModeToCommunity_BeforeTrains` (`Colonist.lua:2467-2476`) returns "walk"
 whenever ≤400m (`ColonistMaxDomeWalkDist`, `_GameConst.lua:133`); `TryToEmigrateToDome`
 (:1555-1575) only computes passage path when `transport_mode_dist > min_dist` — walk mode
