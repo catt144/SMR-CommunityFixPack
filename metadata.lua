@@ -10,6 +10,8 @@ return PlaceObj('ModDef', {
 		"Code/Fix_CaveInsNoDisasters.lua",
 		"Code/Fix_MeteorFrequency.lua",
 		"Code/Fix_UpgradeModifierLeak.lua",
+		"Code/Fix_NightShiftWork.lua",
+		"Code/Fix_MilestoneCrash.lua",
 	},
 	'TagGameplay', true,
 })

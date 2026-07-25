@@ -16,8 +16,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | fixed  |
 | F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | fixed  |
 | F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | fixed* |
-| F04 | Night-shift workers never return to work after midnight  | P1  | high | todo   |
-| F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | todo   |
+| F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
+| F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | fixed  |
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | todo   |
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | todo   |
 | F08 | Tourist star-rating applicant bonus inverted             | P1  | high | todo   |
@@ -70,6 +70,13 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | todo   |
 | F56 | Auto RC Transports never offload rockets                 | P2  | high | todo   |
 | F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
+| F58 | Invisible residence reservations never expire            | P1  | high | todo   |
+| F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | todo   |
+| F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | todo   |
+| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | todo   |
+| F62 | Services reach 1 passage hop only, never trains          | P2  | high | todo   |
+| F63 | Universities invisible to emigration (no students)       | P2  | high | todo   |
+| D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -552,6 +559,65 @@ weak-keys meta and doesn't recompute count; (c) `recursive_enum_dome_workplaces`
   colonists (`City.lua:118-120`). Needs a repro save.
 - Same-dome seniors→retirement: working as designed (comfort scoring, `Residence.lua:382-423`);
   cross-dome is F51.
+
+### F58 — Invisible residence reservations never expire (P1, high)
+`Residence:GetFreeSpace` (`Residence.lua:198-200`) subtracts `#self.reserved`, but the UI
+(`GetUICapacity`/`GetUIResidentsCount`, :374-380) never shows reservations. Emigration
+reserves slots (`Colonist.lua:1571-1589` → `Dome.lua:2840-2851`) cleared only on arrival/
+death/re-home — NO timeout (only user_forced has one, `Colonist.lua:2329-2342`). Colonists
+stuck waiting for shuttles (F51/F54!) hold destination slots forever AND are excluded from
+the Homeless label (`Colonist.lua:2284`). Devs shipped a reserved-list fixup already
+(`Residence.lua:591-599`) — the list drifts in production. Explains "can't find houses in
+a >50% vacant dome". **Fix:** cancel reservation in `UpdateResidence` when not actively en
+route; sol-tick sweep of stale `reserved` entries; show `#reserved` in infopanel.
+
+### F59 — Freed housing never notifies homeless (P2, med)
+`RemoveResident` (`Residence.lua:83-90`) and `CancelResidenceReservation` (:353-365) never
+call `CheckHomeForHomeless`; homeless rely on Idle heavy-update throttled to 12 game hours
+at 3600+ pop (`City.lua:118-120`). **Fix:** post-hook `RemoveResident` →
+`CheckHomeForHomeless()`.
+
+### F60 — Dome free-space uses `working`, assignment uses `ui_working` (P2, med)
+`Dome:RefreshFreeLivingSpaces` (`Dome.lua:2832-2834`) omits `player_enabled` →
+`GatherFreeLivingSpaces` counts by `working` (`_GameUtils.lua:475-483`); unpowered
+residences count 0 for births/immigration gates while `ChooseResidence` (:412) still
+assigns to them. Power flicker desyncs the two views. **Fix:** pass consistent member.
+
+### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)
+`Dome:GetService` (`Dome.lua:2900-2916`; same at 2927/2947/2959, `ShiftsBuilding.lua:250-254`):
+outbound cross-dome access requires `self.accept_colonists` — the HOME dome's
+"accept colonists" MIGRATION policy. Turning it off on a residential dome (routine) silently
+stops residents shopping/working/training through passages; target-dome checks are separate
+and correct (`Dome.lua:2880-2882`). Best match for "refuse to shop through a passage".
+**Fix:** override the four sites, dropping home-side `accept_colonists` from the condition.
+
+### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)
+`GetService` iterates `GetConnectedDomes()` = direct adjacency refcounts (`Dome.lua:619-644`,
+`Passage.lua:1237-1247`), not the transitive `dome_networks` (`Passage.lua:1096-1119`);
+workplace search additionally enumerates train-reachable domes (`Dome.lua:646-690`).
+Hub-and-spoke: spoke→spoke shops invisible. **Fix:** extend service search to the passage
+network (and optionally train-reachable domes) — flag as behavior change, default on.
+
+### F63 — Universities invisible to emigration (P2, high)
+Training is pull-only from student side, 1 hop, F61-gated (`Colonist.lua:1505-1507`,
+`Dome.lua:2945-2955`); `FindEmigrationDome` scores only `labels.Workplace`
+(`Colonist.lua:2644,2672`, `Workforce.lua:53-64`) — `TrainingBuilding` is a different label
+(`TrainingBuilding.lua:26,38`) = zero score. Nobody relocates to study; shuttle-only
+university sits empty forever. Only unspecialized colonists qualify
+(`MartianUniversity.lua:65-67`). **Fix:** include free training slots (colonist `CanTrain`)
+in emigration scoring; walk full passage network in `ChooseTraining`.
+
+### D01 — Rockets don't auto-refuel / auto-export rare metals — INTENTIONAL REDESIGN (verdict)
+Not a bug: legacy always-on PreciousMetals loader exists only in dead legacy class
+(`RocketBase.lua:1730-1734`; `RocketCompatibility.lua:58-59,97-98` nils old fields).
+UniversalRocket: `auto_mode_on = false` default (`UniversalRocket.lua:113`); manual mode
+requests cargo only via payload dialog; `GetFuelResourceRequest` returns 0 with no
+`arrival_loc` (:1639-1642) — idle rockets request NO fuel until a destination is picked
+(slow self-synthesis :1621-1637 fills only existing demand). Old behavior gated behind
+Automated Mode + per-resource `export_above` thresholds (:1727-1766, defaults `false`) +
+$1000M funding floor (:1399,1762-1765). Community hates it → ship an OPT-IN "classic
+rocket behavior" fix (disabled by default per policy §4): standing PreciousMetals demand +
+fuel request while landed/manual; document the gates in README either way.
 
 ## Candidates under investigation
 
