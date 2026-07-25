@@ -1,0 +1,8 @@
+# Mod Editor / game-generated artifacts (if the game writes into the mod folder)
+*.log
+ModContent.hpk
+Previews/
+
+# OS
+Thumbs.db
+Desktop.ini
