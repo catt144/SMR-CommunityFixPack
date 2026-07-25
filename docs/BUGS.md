@@ -30,7 +30,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | fixed  |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
-| F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | todo   |
+| F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | fixed* |
 | F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | fixed  |
 | F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | fixed  |
 | F21 | Train travel-time penalty includes station waiting       | P2  | med  | fixed  |
@@ -279,12 +279,30 @@ computes (5 + `colonist:Random(param)` = 5-14 for param 10). Note the mod sandbo
 introspection, so an already-hotfixed `daily_update_func` cannot be told from the broken
 one; the fix deactivates only if the preset or its `param` is missing.
 
-### F18 — Independence terraforming tech gives 10% not 20%
+### F18 — Independence terraforming tech gives 10% not 20%  `[fixed*: Code/Fix_IndependenceTerraforming.lua — the preset half; already-researched saves keep 10%, see below]`
 `Data\TechPreset.lua:4798-4812` — `param1 = 20` ("decrease percent") but
 `Effect_ModifyLabel Amount = -10` on `Consts.SpecialProjectResourcesModifier` (100-based,
 consumed `Lua\SpecialProjects.lua:105`). All sibling Independence techs have param == amount.
 **Fix:** patch the effect's `Amount = -20` before research (ClassesPostprocess), only if
 tech not yet researched — else apply delta modifier.
+*Sibling evidence enumerated:* `Independence_Adaptivity` param1 5 / Amount -5;
+`Independence_MartianbornPerformance` param1 5 / Percent 5; `Independence_RocketCapacity`
+param1 30000 / Amount 30000; `Independence_Research` param1 20 / Amount 20. Only
+`Independence_TerraformingProjects` disagrees with itself.
+*Implemented as the preset half only.* The patch runs from `OnMsg.DataLoaded` (+
+`DataChanged`) and finds the effect by what it does (Label "Consts", Prop
+"SpecialProjectResourcesModifier"), not by index; an Amount already at -20 leaves the fix
+inactive.
+*Open half — saves where the tech is ALREADY researched keep the 10%.*
+`Effect_ModifyLabel:OnApplyEffect` (`Lua\MarsGameEffects.lua:161-178`) computes
+`amount = self.Amount * scale` at research time and stores a Modifier on the colony keyed by
+the effect object; that stored Modifier is what the save carries, and correcting the preset
+afterwards does not touch it. A repair would be idempotent (same key, so re-applying
+replaces rather than stacks), but `OnApplyEffect`'s `parent` argument also determines the
+Modifier's `id`, and getting that wrong would leave an unidentifiable modifier in every
+affected save. Deferred to a later sanitizer pass rather than shipped untested for a
+10-point discount.
+Probe: `IndependenceTerraforming` in `40_Probes_Wave4.lua`.
 
 ### F19 — Graphs "Consumed" caption omits maintenance  `[fixed: Code/Fix_GraphConsumedCaption.lua]`
 `Lua\X\ColonyControlCenter.lua:180-188` vs `ResourceTracking.lua:162` — caption uses

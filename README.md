@@ -55,6 +55,7 @@ and can be individually disabled.
 | DomeFreeSpaceMismatch | A dome's free-housing figure counts the same residences the game actually assigns colonists to, so a power dip no longer makes a dome read as full |
 | SmallLandscapeSites | Small landscaping jobs (a few hexes of clearing, painting or levelling) get worked instead of stalling the drone sent to them |
 | LandscapeUnitFilter | Landscaping over a rocket, train or shuttle boarding point no longer drags the colonists who are boarding it back out |
+| IndependenceTerraforming | The Independent Terraforming technology discounts terraforming special projects by the 20% its own description parameter names, instead of 10% (applies to games where you research it after installing the pack) |
 | FounderTraitNotification | You are told again when one of your Founders picks up a new trait — the check that decided whether to notify could never succeed |
 | DomePipeMoveInside | When a dome grows to swallow a building, that building's old pipe connections are cleaned up properly instead of being torn down against the dome, which left stale plumbing behind on every load |
 | StorageRateModifiers | Modifiers that change how fast a battery or tank charges and discharges actually reach the grid (nothing in the base game uses these yet — this keeps mods and future updates working) |
