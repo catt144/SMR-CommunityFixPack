@@ -207,6 +207,65 @@ report `applied`** (no inactive/error self-checks). Results:
 - For [install] coverage: run the pair under MarsDebug.exe (console/asserts
   build un-sandboxes introspection; auto-bridge then fires).
 
+### Diagnosis of the four "applied but still FAIL" probes — ALL FOUR FIXES ARE SOUND
+
+Every one of the four was a Test Kit defect; **no fix pack code changed**. Two
+engine facts (both now recorded in the Test Kit sources) explain all of them plus
+the tooling casualties:
+
+1. **`error()` does not unwind mod code.** It REPORTS (the `[LUA ERROR]` block
+   with stack + locals) and execution continues with the next statement — the
+   same treatment `assert` gets ("asserts pop instead of being printed out",
+   LuaExports.lua:567). So `SourceOf`'s sentinel printed a stack and then ran the
+   line it was guarding (00_TestCore.lua:76 → ERROR, not SKIP), and
+   `WithGlobals`' `if not ok then error(res, 0) end` swallowed every error raised
+   inside a probe's driven code — the probe carried on with a nil result and
+   reported FAIL. Never use `error()` for control flow in mod code.
+2. **`rawset(_G, k, v)` from mod code writes nothing the game can see.** In the
+   sandbox `_G` IS the mod's own env table (Mod.lua:1603) and `rawset` is the
+   real rawset (only `rawget` is replaced, :1606), so the Test Kit's fake globals
+   were shadows in the Test Kit's env — invisible to shipped code (real `_G`) and
+   to the fix pack (its own env). Plain assignment `_G[k] = v` goes through
+   `ModEnvMeta.__newindex` (:1557-1563), which rawsets the REAL `_G`; that is the
+   write a probe needs. **Every `WithGlobals` probe in the pair was therefore
+   driving the real globals**, which is why the numbers looked absurd.
+
+Per item, with the evidence that settled it:
+- **WispPower (F07) — probe.** The fake `MainCity.labels.LightTrap` was invisible,
+  so `SetLightTrapMode` iterated the live (empty) label and never called
+  `el_prod_modifier:Change` → `granted` stayed nil in BOTH runs. The `* 1000` fix
+  (Fix_WispRewards.lua:49) matches the sibling call sites exactly.
+- **LanderCargoRatchet (F68) — probe.** The fixed method ran; the fake
+  `GetTotalCargoAvailable` was invisible, so the real one crashed on the
+  synthetic city (`[LUA ERROR] Lua/ResourceOverview.lua:30: attempt to call a nil
+  value (method 'GetMap')`, raised from WithGlobals) and the swallowed error left
+  `captured` nil → "request dropped to 0". The requested-floor block is intact
+  and would have engaged (`is_on_automode_target_loc` true, `export_above.Metals`
+  set, 300k aboard). The separate audit finding stands and is NOT this:
+  the floor still does not debit hold capacity — verify in-game with multiple
+  exports.
+- **HomeDomeMigrationGate (F61) — probe.** Proof the fix worked: the fake global
+  `ChooseWorkplace` was invisible, so the *real* one ran on the synthetic
+  colonist and crashed (`Lua/Buildings/Workplace.lua:1095: attempt to index a nil
+  value (local 'traits')`) — which it can only have been handed after
+  `GetCommutableWorkplaces` produced the connected list, i.e. after the
+  `accept_colonists` gate was gone. No fifth ungated call path is involved.
+- **DomeOverviewHighlight (F14) — probe.** The fix is right and the shipped UI
+  wants exactly what it now passes: a T value is a TABLE in this engine
+  (`Untranslated(s)` → `T{s, untranslated = true}`, localization.lua:343) and the
+  shipped sibling paths hand the same kind of table to the same `SetText`
+  (ColonyControlCenter.lua:502-507). The probe `tostring()`ed it and saw
+  `table: 0x…`; it now reads the literal out of the T.
+- **VacuumWalks (F52) — probe** (same root cause; the fixed run's "unset" meant
+  `SetCommand` was never reached because the real `GetDomesPassagePath` answered).
+
+Test Kit repairs (repo `C:\Dev\SMR-BugFixPack-TestKit`): deferred-verdict
+mechanism replacing the raise (657b668), WithGlobals write-through (413d87c),
+F73 partial PASS (57139f5), F14 T reader (3f1abb4), F52 message (77fdb72),
+AutoRun `wait_for` timeout (d2636b7), Meteors logger global swap (42d9f43).
+**The A/B pair must be re-run** — with the fakes finally visible, several probes
+that "passed" or SKIPped were not testing what they claimed.
+
 ## Waiting on the user
 
 1. Launch the game once with BOTH mods enabled, confirm `SMRFixPack.ListFixes()`
