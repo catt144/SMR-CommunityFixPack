@@ -34,7 +34,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | todo   |
 | F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | todo   |
 | F21 | Train travel-time penalty includes station waiting       | P2  | med  | todo   |
-| F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | todo   |
+| F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | todo   |
 | F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | todo   |
 | F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | todo   |
@@ -89,6 +89,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | fixed  |
+| F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -304,11 +305,32 @@ platform, never reset at boarding; Comfort "travel time" penalty and train/track
 station stat); partially bypasses LuxuriousTrains. **Fix:** post-hook `Colonist.BoardVehicle`
 to reset `transport_ticket.start_wait = GameTime()`.
 
-### F22 — `GetGridGlobalStorage` breaks Last Transmission gates
+### F22 — `GetGridGlobalStorage` breaks Last Transmission gates  `[fixed: Code/Fix_GridGlobalStorage.lua]`
 `Lua\ResourceOverview.lua:880-899` — zero-demand map returns sentinel `1000 sols` and
 per-map sols are **summed**; once Underground loads, `== 0` conditions in
 `Data\FactionDef\LastTransmission.lua:103-184` unsatisfiable, `> 2 sols` always true.
 **Fix:** redefine: zero-demand map contributes 0; combine with Min (or demand-weighted).
+*Correction to the entry:* the sentinel is `1000 * const.HourDuration` — 1000 **hours**,
+not sols (`const.HourDuration` = 30000ms; `const.DayDuration` = 720000, and the shipped
+"2 sols" threshold is 1440000 = 48 hours, `ClassDef-Conditions.generated.lua:2030-2031,
+:2044`). It is ~41 sols, still ~20x the threshold, so the conclusion stands.
+*Implemented as demand-weighted (the entry's own second option), not "contributes 0".*
+The replacement aggregates the INPUTS — sum stored and sum required across the two cities
+the shipped function names — and takes a single ratio. Three deliberate properties:
+`stored == 0` returns 0 (this is what makes `== 0` reachable, and it is literally true);
+the "unlimited" sentinel survives for the case it was written for, a colony with real
+storage and no demand anywhere; and `GetGridGlobalStorageInSols` is left untouched, since
+its per-city semantics are self-consistent and it is a public global. Arithmetic is copied
+exactly, truncating `/` included, so a single-map colony faces the identical threshold.
+Asteroid maps are deliberately NOT added to the aggregate — that would change how hard the
+shipped conditions are to satisfy (FIX_POLICY §4). Replacing the global works because
+`ModEnvMeta.__newindex` rawsets into the real `_G` (`Mod.lua:1557-1563`) and the callers
+are generated closures resolving the name at call time; apply() reads the global back to
+confirm the write landed.
+*What fixing this exposed:* the six Last Transmission conditions this entry names are ALSO
+broken by a second, independent defect that this fix alone would not have cured — filed and
+fixed as **F75** below.
+Probe: `GridGlobalStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
 
 ## P3 — cosmetic / latent / mod-facing
 
@@ -1283,6 +1305,45 @@ resulting behaviour is permissive (a manual unload into a player rocket that is 
 exporting is allowed where the original demanded a matching export request), and permissive
 failures do not block a player. Recorded here so a later pass does not "fix" it blind.
 Probe: `RocketInteractGuard` in the Test Kit's `40_Probes_Wave4.lua`. Playtest: PT-39.
+
+### F75 — Six Last Transmission storage opinions never count; one reads the wrong grid (P2, high)  `[fixed: Code/Fix_LastTransmissionStorage.lua]`
+*Found by implementing F22, which names these conditions as its victims — repairing F22
+alone would not have made any of them work.*
+
+**(a) inert.** `FactionLikeGlobalCondition:Eval`
+(`Lua\ClassDefs\ClassDef-Factions.generated.lua:843-849`) consults exactly one property:
+`if not self.Condition or not self.Condition.eval(UIColony) then return 0 end`. The six
+storage entries in `Data\FactionDef\LastTransmission.lua:94-192` —
+`TLEPowerStorage2Sols`, `TLENoPowerStorage`, `TLEWaterStorage2Sols`, `TLENoWaterStorage`,
+`TLEOxygenStorage2Sols`, `TLENoOxygenStorage` — put their `ScriptConditionList` on
+**`Prerequisite`** instead. `Prerequisite` is real but is only a gate:
+`FactionLikeBase:EvalPreconditions` (`:672-688`) calls it to decide whether the like is
+considered, and `FactionDef:EvalApproval` (`:190-197`) then adds `like:Eval()` — which is 0
+forever. The slip is local to these six: the other seven `FactionLikeGlobalCondition`s in
+the same file set `Condition` (`:208, :224, :240, :256, :281, :298, :313`) and the one at
+`:266-292` sets BOTH, so the distinction was understood; a sweep of all 29 shipped
+FactionDefs found the pattern nowhere else. Not a quiet failure either — `EvalApproval`
+(`:181-187`) surfaces the `HowTo` of any positive like that evaluated to 0 as an
+outstanding goal, so Last Transmission permanently advertises "Have Power for more than 2
+sols stored", the player does it, and nothing happens.
+
+**(b) wrong grid.** `TLEOxygenStorage2Sols` (`:160-175`) measures POWER. Explanation, HowTo
+and Id all say Oxygen, but its nested `ScriptCheckGridGlobalStorage` never sets `GridType`,
+which defaults to `"Power"` (`ClassDef-Conditions.generated.lua:2034-2035`), and the
+generated `eval` faithfully reads `GetGridGlobalStorage("Power")`. Its negative twin
+`TLENoOxygenStorage` sets `GridType = "Oxygen"`, as do both Water entries — only this one
+was missed.
+
+**Fix:** preset data patch (FIX_POLICY §1.1) from `OnMsg.DataLoaded` (+ `DataChanged`):
+(a) move the condition list from `Prerequisite` to `Condition`, leaving `Prerequisite`
+false — the same test, in the place `Eval` reads, leaving the entries structurally
+identical to their working siblings; (b) set the missing `GridType` and rebuild only that
+entry's `eval` from the corrected fields, mirroring the shipped CodeTemplate
+`"GetGridGlobalStorage(self.GridType) $self.Condition $self.Value"`
+(`ClassDef-Conditions.generated.lua:2040`). Every other entry keeps its shipped eval. An
+entry that already carries a `Condition` is left exactly as found, so a game hotfix simply
+deactivates the fix.
+Probe: `LastTransmissionStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
 
 ## Candidates under investigation
 

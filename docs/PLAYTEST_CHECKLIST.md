@@ -1379,6 +1379,41 @@ only one or two tiles long.
 
 ---
 
+## PT-42 — Last Transmission notices your reserves · covers **F22, F75**
+
+Probes prove the presets are wired correctly and the reserve maths is right;
+only play can show the approval actually moving and the UI goal clearing.
+
+**Setup:** a game where **Last Transmission** is an active faction, ideally with
+the Underground map opened (that is what made the old maths hopeless). Open the
+faction panel and note the current approval and the listed "How to achieve"
+goals.
+
+**Steps:**
+1. Look for goals like "Have Power for more than 2 sols stored", "Have Water for
+   more than 2 sols stored", "Have Oxygen for more than 2 sols stored".
+2. Build up **Power** storage until you comfortably hold more than 2 sols'
+   worth, and let a day pass.
+   - **EXPECTED:** the Power goal stops being listed as outstanding and the
+     faction's approval rises; the reason appears in the approval breakdown.
+   - **SURPRISE looks like:** the goal stays listed forever no matter how much
+     you bank (that is the old behaviour).
+3. Repeat for **Water**, then for **Oxygen**. The Oxygen one is the important
+   check — it used to be satisfied by having Power stored.
+   - **EXPECTED:** stocking Oxygen (and only Oxygen) clears the Oxygen goal.
+4. Now drain one of them to zero — switch off or salvage the storage.
+   - **EXPECTED:** the matching penalty ("No Power stored" etc.) appears and
+     approval falls. Before the fix this was unreachable once a second map was
+     loaded.
+5. Check the log for `GridGlobalStorage: applied` and
+   `LastTransmissionStorage: ... storage condition(s) made effective`.
+
+`Result (goals clear when stocked?):` _____________________________________________
+
+`Result (Oxygen goal needs Oxygen / penalties reachable at zero?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

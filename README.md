@@ -55,6 +55,8 @@ and can be individually disabled.
 | DomeFreeSpaceMismatch | A dome's free-housing figure counts the same residences the game actually assigns colonists to, so a power dip no longer makes a dome read as full |
 | SmallLandscapeSites | Small landscaping jobs (a few hexes of clearing, painting or levelling) get worked instead of stalling the drone sent to them |
 | LandscapeUnitFilter | Landscaping over a rocket, train or shuttle boarding point no longer drags the colonists who are boarding it back out |
+| GridGlobalStorage | "Power/Water/Oxygen stored for N sols" is measured across the whole colony as one figure again, instead of adding up each map's separately — an idle second map used to make every such check permanently true |
+| LastTransmissionStorage | The Last Transmission faction actually reacts to your power, water and oxygen reserves. Six of its opinions were wired to a property the game never reads, so they scored nothing however well you stocked up, and its Oxygen goal was measuring Power |
 | TrackConnectorPingPong | A station and a train tunnel (or two stations) one hex apart stop deleting each other's track connector over and over, which is why some track layouts would never connect |
 | TrackTunnelPowerBridge | A station attached directly to a train tunnel — or to another station a short track away — carries power across again, as the Train Tunnel's description says it should |
 | RocketInteractGuard | RC Transports refuse to load from or unload into trade and refugee rockets again — the game's own rule for that stopped matching when the rocket classes were rebuilt for Relaunched |

@@ -187,6 +187,16 @@ come back.
   colonist idling in vacuum now heads home before the oxygen runs out — and a
   brief power or air interruption no longer throws every resident out of a
   habitat permanently.
+- The Last Transmission faction notices your reserves. Six of its opinions —
+  power, water and oxygen storage, praise and complaint alike — were attached to
+  a field the game never reads, so they scored nothing no matter how well you
+  stocked up, while the UI kept listing them as goals to achieve. Its Oxygen
+  goal was also measuring Power. Both are fixed.
+- "Stored for more than 2 sols" checks look at the whole colony as one figure.
+  They used to add each map's reserve up separately, and a map with nothing
+  running counted as roughly 41 sols on its own, so once the Underground existed
+  those checks were permanently satisfied — and "nothing stored" became
+  impossible to reach.
 - Tracks connect to stations and tunnels again. When two train buildings sit one
   hex apart, both want the same connector tile — and the game let them delete
   each other's, endlessly, so neither ever held a working connection. Now the

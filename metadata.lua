@@ -55,6 +55,8 @@ return PlaceObj('ModDef', {
 		"Code/Fix_RocketInteractGuard.lua",
 		"Code/Fix_TrackConnectorPingPong.lua",
 		"Code/Fix_TrackTunnelPowerBridge.lua",
+		"Code/Fix_GridGlobalStorage.lua",
+		"Code/Fix_LastTransmissionStorage.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",
