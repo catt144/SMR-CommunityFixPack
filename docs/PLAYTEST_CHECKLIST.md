@@ -1221,6 +1221,40 @@ works. Console open (Enter / Alt-Shift-C).
 
 ---
 
+## PT-38 — Dismissed "Building Not Working" cadence · gates **D02** (planned opt-in)
+
+Nothing to fix here — this measures the SHIPPED behavior that D02 (per-building
+acknowledged warnings, planned opt-in module) is designed to answer. F32 closed
+`wontfix` because the game hotfixed the actual defect; the claim left to verify is
+that a permanently broken building re-nags every **2 minutes of real time** after
+each dismissal.
+
+**Setup:** any save. Make one building permanently not-working — cut its power and
+leave it, or use a building that genuinely cannot recover (a lake-entombed one, per
+F30, is the archetype). Wall clock or phone timer handy; leave game speed at normal.
+
+**Trigger:**
+1. Wait for the "Building Not Working" notification, then **dismiss** it. Note the
+   real-world time.
+2. Do not fix the building. Watch for the notification to return.
+3. When it returns, dismiss again and time the second interval too.
+4. Bonus: while inside the quiet window, break a SECOND building (cut its power).
+   Note whether its warning is also swallowed until the window ends — that is the
+   per-category (not per-building) suppression D02 also addresses.
+
+- **EXPECTED (design confirmed):** the warning returns ~2 real minutes after each
+  dismissal, forever, and a second breakage inside the window stays silent until
+  the window closes. Record the measured intervals → D02 proceeds as specced.
+- **SURPRISE looks like:** it stays away much longer / for good (then D02 is
+  unnecessary — record what actually happened), or it returns in seconds (then the
+  F32 close needs a re-read — record the exact timing).
+
+`Result (interval 1 / interval 2):` _____________________________________________
+
+`Result (second breakage hidden in window?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

@@ -44,7 +44,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | todo |
 | F30 | Lake placement entombs RC builder + drones               | P1  | high | fixed  |
 | F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | todo   |
-| F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | blocked|
+| F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | wontfix|
 | F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | fixed  |
 | F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | fixed* |
 | F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | fixed  |
@@ -77,6 +77,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | blocked|
 | F63 | Universities invisible to emigration (no students)       | P2  | high | blocked|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
+| D02 | Dismissing "not working" warnings only silences them 2min| dsgn| med  | planned opt-in |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | todo   |
@@ -373,7 +374,7 @@ sequence-local `map` (sequence runs on the anomaly's own map, `Anomaly.lua:293-3
 Wrong-map rubble; crash risk if `UndergroundMap` false (`CaveInRubble.lua:101`).
 **Fix:** wrap `TriggerCaveIn(map, pos)`: reject `map.mapdata.Environment ~= "Underground"`.
 
-### F32 — Dismissed warnings re-add instantly (P2, med mechanism-certain)  `[blocked — the shipped data no longer matches this entry; see below]`
+### F32 — Dismissed warnings re-add instantly (P2, med mechanism-certain)  `[wontfix — the game hotfixed the one defective mechanism; the residual UX gap is D02]`
 Object-status notifications (`NotWorkingBuildings`, `DestroyedInfrastructure`,
 `RoverDamaged`) are not `Suppressable` (`Data\NotificationPreset.lua:771-781`); any
 `SetWorking()` on any building re-creates them (`BaseBuilding.lua:165-169` →
@@ -398,8 +399,17 @@ re-add. Matches lake-victim report. **Fix:** set `Suppressable = true` +
   dismissal holds until a genuinely new event — which is the correct behaviour. Making
   them `Suppressable` would suppress *new* destructions and malfunctions for the window,
   i.e. hide real events, with no defect to justify it (FIX_POLICY §4).
-**Disposition:** most likely `wontfix` — but that is the user's call, so it is parked as
-`blocked` rather than closed unilaterally.
+**Disposition — CLOSED `wontfix` 2026-07-26 (user decision).** As a defect there is
+nothing left: the reported mechanism is hotfixed by the game, and the other two presets
+work as designed. What remains is a real but *by-design* annoyance for PERMANENTLY broken
+buildings, fully traced this session: the suppression window is **2 minutes of REAL time**
+(`SuppressTime = 120000`, preset sets no `GameTime` so `NotificationPreset:GetTime()`
+→ `RealTime()`, `NotificationPreset.lua:126-128`), suppression is **per-notification-id**
+(the whole category goes quiet, including genuinely new breakages,
+`Notifications.lua:41-43/141-146`), and there is no per-building "I know" — so an
+unfixable building (the F30 lake-entombment case) re-nags every 2 real minutes forever.
+That gap is filed as **D02** (per-object acknowledgment, planned opt-in module) — see its
+entry; cadence verification is **PT-38**.
 
 ### F33 — Drone crash on small landscaping sites (P2, high)  `[fixed: Code/Fix_SmallLandscapeSites.lua]`
 `Landscape\LandscapeConstructionSiteBase.lua:186-190`: `for i = 1, top_count do
@@ -928,8 +938,9 @@ destination. Verified the mechanism end to end —
 `CargoTransporterNew:UpdateCargoResourceRequests` feeds
 `additional_amount = is_refuel_resource and self:GetFuelResourceRequest()` straight into the
 drone demand (`CargoTransporterNew.lua:1249-1265`), and neither notification branch fires in
-this state because both require `arrival_loc` (`UniversalRocket.lua:1308-1314`), so there is
-no refuel spam. F69's asteroid-lander reserve is untouched — the wrapper only acts when the
+this state because both require `arrival_loc` — they live in the
+`UniversalRocketBase:UpdateCargoResourceRequests` override (`UniversalRocket.lua:1687-1692`;
+citation corrected by the QA audit 2026-07-25) — so there is no refuel spam. F69's asteroid-lander reserve is untouched — the wrapper only acts when the
 chain below it returned 0.
 *Export half deliberately NOT shipped.* "Standing PreciousMetals demand" is a gameplay
 system rather than a hook: the modern request is driven by `SetCargoRequest`, the payload
@@ -939,7 +950,34 @@ in-game from the build seat, and for a change that is by this entry's own verdic
 defect. It needs a design decision (what threshold? which resources? what interaction with
 Automated Mode?) plus a playtest before it is written.
 
-### F64 — Station demolition permanently leaks train prefabs ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
+### D02 — Dismissing a "Building Not Working" warning only silences it for 2 real minutes — BY DESIGN, feels like a bug (planned opt-in)
+Spun out of F32's close (2026-07-26, user decision) — read that entry for the full trace.
+Not a defect: the shipped suppression machinery works exactly as designed
+(`Notifications.lua:41-43`, `:86-88`, `:141-146`). The design just has no answer for a
+PERMANENTLY broken building: the window is 2 REAL minutes (`SuppressTime = 120000`, real
+time — the preset sets no `GameTime`, `NotificationPreset.lua:126-128`), it silences the
+whole notification id (new breakages included) rather than the acknowledged building, and
+there is no per-building acknowledgment at all. An unfixable building — F30's
+lake-entombed case is the archetype — re-nags every 2 real minutes for the rest of the
+game. **Players read this as "dismiss is broken"; it is not — it is a design gap.** The
+released mod description must carry that explanation (a dedicated note exists in
+`MOD_DESCRIPTION.md`), both so players stop reporting it as a bug and so the module below
+is understood as a preference, not a repair.
+**Planned remedy — `Opt_AcknowledgedWarnings` (opt-in module, NOT the default pack, per
+FIX_POLICY §4):** per-object acknowledgment. On dismissal of `NotWorkingBuildings`,
+snapshot the buildings it contained (`notification.objects` is an `array_set`; dismissal
+is cleanly detectable — `SuppressNotification` runs only under `notification.dismissed`,
+`Notifications.lua:86-88`; `Msg("AddNotificationObject")` / `Msg("RemoveNotificationObject")`
+fire per object, `:247/:283`). Filter acknowledged buildings out of re-adds until the
+building recovers (`ShouldShowNotWorkingNotification()` false, `BaseBuilding.lua:134`) —
+recovery resets it, so a LATER breakage of the same building notifies again; new buildings
+always notify immediately. Strictly better than the shipped window on both axes: the
+acknowledged wreck stays quiet forever, new events are never hidden even for 2 minutes.
+Ack set persisted as an absent-tolerant `SMRFixPack_*` handle set (policy §3).
+`DestroyedInfrastructure` / `RoverDamaged` are deliberately untouched — one-shot adds
+where dismissal already holds (F32 trace).
+**Gate:** PT-38 first (verify the 2-real-minute cadence in play — the design assumption
+this module answers), then build + probe in a wave-4+ leg.
 Trains are a colony-counted resource (`city.available_prefabs["Train"]`, `City.lua:433-440`)
 — consumed on deploy (`Track.lua:428-457`), refunded ONLY via `Train:OnDemolish`
 (`Train.lua:205-209`), which only runs through `Demolishable:DoDemolish`. Bare

@@ -255,6 +255,44 @@ or in a tiny mod that loads before this one. Off unless you turn it on.
 [DRAFT NOTE: the standing Rare Metals export half of this module is not written
 yet — see the D01 entry in docs/BUGS.md. Do not promise it in the released text.]
 
+### Looks like a bug, but isn't: dismissed warnings that come back
+
+You dismiss a **"Building Not Working"** warning. Two minutes later it's back.
+Dismiss, return, dismiss, return — it feels exactly like a broken dismiss button,
+and it gets reported as one constantly. We investigated it for this pack, expecting
+to fix it. Here is what we found:
+
+**Dismissal genuinely works — it's just designed to be temporary.** The game
+deliberately silences that warning for a fixed quiet window after you dismiss it,
+and then allows it back if the problem still exists. That's a defensible design:
+the game refuses to let you *permanently* silence a warning about something that's
+still wrong, because a dismissed-forever warning is how you lose a colony to a
+problem you forgot about. (An earlier version of the game really did have a bug
+here — dismissal did nothing at all — but the developers have already fixed that.
+What you see now is the intended behavior.)
+
+**Why it still drives you up the wall:** the design has no answer for a building
+that can *never* recover — say, one entombed by a landscaping lake. You've seen the
+warning. You can't do anything about it. And it will re-surface every couple of
+minutes for the rest of the game, because the game can't tell "unacknowledged
+problem" apart from "problem the player has understood and accepted". There's a
+second wrinkle, too: the quiet window silences the whole warning *category*, so for
+those couple of minutes a **freshly** broken building is also kept quiet — arguably
+the opposite of what you'd want.
+
+So: not technically a bug, and this pack only ships bug fixes by default — which is
+why you won't find a "fix" for this in the list above. But because the annoyance is
+real, we're building an **optional module** that changes dismissal to mean "I've
+seen *these particular buildings*": the ones you dismissed stay quiet until they
+actually recover (if they later break again, that's news and you'll be told), while
+newly broken buildings always warn immediately. Off by default, like every opinion
+in this pack.
+
+[DRAFT NOTE: the AcknowledgedWarnings module is NOT written yet — see the D02
+entry in docs/BUGS.md, gated on PT-38. When it ships, add its opt-in instructions
+(`SMRFixPack_Optional`) to this section and to the Optional-modules section above.
+Until then this section must promise only that it is planned.]
+
 ### Reporting bugs
 
 Found something broken? Tell us: what happened, roughly when it started, and

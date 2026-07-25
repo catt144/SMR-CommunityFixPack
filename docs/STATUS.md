@@ -238,7 +238,7 @@ matches the tracker.
 
 | ID | Why it is parked | What would unblock it |
 |----|------------------|------------------------|
-| **F32** | The shipped data already carries the fix. `NotWorkingBuildings` — the one preset the described re-add mechanism applies to — now has `Suppressable = true` / `SuppressTime = 120000`. The other two (`DestroyedInfrastructure`, `RoverDamaged`) are one-shot event adds with no re-add path, so suppressing them would hide real events. | A decision to close it as `wontfix`. |
+| **F32** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** The shipped data already carries the fix (`NotWorkingBuildings` is now `Suppressable`); the other two presets are one-shot adds. The residual by-design annoyance (2-real-minute window, per-category suppression, no per-building ack) is spun out as **D02** — a planned `Opt_AcknowledgedWarnings` module, gated on **PT-38**; MOD_DESCRIPTION carries a player-facing "looks like a bug, isn't" explainer. | — done. D02 build belongs to a wave-4+ leg after PT-38. |
 | **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
 | **F62** | Services really do reach one passage hop. But the codebase uses direct adjacency for cross-dome work **and** service consistently (`AreDomesConnected` is `connected_domes[b]`); the transitive variant has only two callers in all of Src, both walkability/pathing. **Verified 2026-07-26 against the original game's official source: SAME AS ORIGINAL** — same algorithm, same one-hop reach, same two transitive-predicate callers. A carried-forward design, not a regression. | A decision that it is in scope *as a mod feature*. If yes → opt-in module, not the default pack. |
 | **F63** | Same shape. There is no broken hookup: no `TrainingEval` exists anywhere next to `WorkplacesEval` / `ResidencesEval`, so training was never a term in the emigration score. Adding one is a feature. **Verified 2026-07-26: SAME AS ORIGINAL** — the original's emigration score was trait filter + housing + `labels.Workplace` only; no training term ever existed in either game. | Same decision as F62. |
@@ -455,12 +455,13 @@ that "passed" or SKIPped were not testing what they claimed.
    covers what scripts can't: feel, visuals, UI, long-running behavior). Results
    reported back flip each covered fix's BUGS.md status to `tested` — see that
    file's "Reporting protocol" section for the exact follow-up workflow.
-6. **Four decisions, not code** — the wave-3 blocked table above: close F32 as
-   `wontfix`? in-game test to unblock F48? are F62/F63 in scope at all, and if so as
-   an opt-in module? (F10's decision is made: **retirement STAGED 2026-07-26** — the
-   fix is commented out of `metadata.lua`, the registered set is now **46 modules /
-   45 active + ClassicRockets inactive**, and the final `wontfix` + file deletion is
-   gated on the new **PT-36** console check; rollback is one metadata line.)
+6. **One decision left, plus playtest gates.** DECIDED: F32 closed `wontfix` → D02
+   filed (planned `Opt_AcknowledgedWarnings`, gated on PT-38); F10 retirement STAGED
+   (fix commented out of `metadata.lua`, 46 modules / 45 active, final `wontfix`
+   gated on PT-36; rollback is one metadata line); F48 rides on PT-37; TestKit stays
+   local-only. STILL OPEN: are **F62/F63** in scope as a mod *feature* (both verified
+   identical to the original game — any change is a feature, not a repair)? If yes →
+   opt-in module in a later wave; if no → close `wontfix`.
 8. ~~TestKit remote~~ **DECIDED 2026-07-26: local-only, by design.** The kit was never
    meant to ship publicly, so no remote is created. Note the consequence: the repo's
    51 commits exist in exactly one place — if a local backup is ever wanted,
