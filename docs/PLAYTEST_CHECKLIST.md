@@ -750,6 +750,44 @@ so the dump is deliberately allowed) rather than sitting loaded forever.
 
 ---
 
+## PT-24 — Universities after Extractor AI · covers **F36**
+
+**Setup:** SAVE-A. You need **Metals Extractors on the map** (not Mines — the tech
+targets `MetalsExtractor` / `PreciousMetalsExtractor`) and a **Martian University**.
+
+1. `CheatMapExplore("deep scanned")`, build 2–3 **Metals Extractors** on deposits and
+   `CheatCompleteAllConstructions()`. Leave them **staffed and working** for a sol so
+   they are `ui_working`.
+2. Build a **Martian University**, set specialization to **Auto** and training policy
+   to **"train as needed"**. Feed it unspecialized colonists (`CheatSpawnNColonists(20)`).
+3. Read the university's infopanel **needed-specializations list** and note it.
+4. Now research the **Extractor AI** breakthrough. On a retail build the simplest route
+   is `CheatResearchAll()` (it grants breakthroughs too); confirm afterwards that the
+   extractors show **Automation** in their infopanel and keep working with their
+   workers removed.
+5. Re-read the university's needed-specializations list, then run 3–4 sols at
+   `SetGameSpeedState("ultra")` and watch what it graduates.
+
+- **BROKEN looks like:** after Extractor AI the extractors run themselves, but the
+  university's list still shows a large **geologist** demand (4 per shift per
+  extractor) and "auto" keeps graduating geologists — while the specialists you are
+  actually short of never get trained.
+- **FIXED looks like:** geologist demand from the automated extractors **drops out of
+  the list** the moment the tech lands, and "auto" starts training whatever the colony
+  is genuinely short of. Manned workplaces (medics for the Medical Centre, botanists
+  for farms, and geologists for ordinary **Mines**, which are not automated) still
+  appear in the list normally.
+
+> Sanity check on over-reach: with Extractor AI researched, an **unstaffed** extractor
+> must NOT raise a "needs workers" warning, and a Mine (no automation) must still ask
+> for geologists.
+
+`Result (geologist demand gone?):` _____________________________________________
+
+`Result (other specialists still trained?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

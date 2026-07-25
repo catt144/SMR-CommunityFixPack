@@ -81,6 +81,10 @@ come back.
   dome is reachable, and that cache never noticed new shuttles — so colonists
   stayed homeless (and seniors stayed put) even after you built the hub that
   would have moved them.
+- Universities stop training geologists nobody needs. Once Extractor AI lets your
+  Metals and Rare Metals Extractors run without colonists, those posts still counted
+  as vacancies waiting to be filled — so an "auto" university kept churning out
+  geologists for jobs that no longer exist, instead of the specialists you were short of.
 - Night-shift workers who were busy at shift start (eating, resting, seeing a
   doctor) now go to work after midnight instead of skipping the rest of their
   shift. Your night-shift buildings were quietly running understaffed.

@@ -48,7 +48,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | todo   |
 | F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | todo   |
 | F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | todo   |
-| F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | todo   |
+| F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | fixed  |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | todo   |
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | todo   |
@@ -365,7 +365,7 @@ report ("polymer upgrade works now, frictionless doesn't"). Rotation lock is by 
 researched and no colony label-modifier for `WindTurbine_Large.electricity_production`,
 add it (mirror the fixup, corrected).
 
-### F36 — Universities overtrain geologists (P2, high behavior-confirmed)
+### F36 — Universities overtrain geologists (P2, high behavior-confirmed)  `[fixed: Code/Fix_UniversityOvertraining.lua]`
 `City:GetNeededSpecialist` (`City.lua:561-593`) counts every `ui_working` workplace incl.
 extractors (`specialist="geologist"`, `max_workers=4`); ExtractorAI only sets
 `g_ExtractorAIResearched`, used solely to silence a construction warning
@@ -373,6 +373,17 @@ extractors (`specialist="geologist"`, `max_workers=4`); ExtractorAI only sets
 (`MartianUniversity.lua:24-29`) keep producing geologists for unmanned extractors.
 **Fix:** wrap `GetNeededSpecialist`: skip extractor workplaces when ExtractorAI researched
 (match its actual gameplay meaning).
+*Implemented differently, on better evidence:* `g_ExtractorAIResearched` is the wrong key —
+its only use in the whole codebase is silencing that construction warning. The tech's real
+effect is `Effect_ModifyLabel automation = 1` / `auto_performance = 50` on the
+MetalsExtractor and PreciousMetalsExtractor labels (`Data\TechPreset.lua:1050-1075`), and
+`automation > 0` makes `Workplace:GetWorkshiftPerformance` return `auto_performance`
+regardless of staffing (`Workplace.lua:197-199`). The fix therefore excludes any workplace
+with `automation > 0` from the demand tally — precise, and correct for automated workplaces
+generally. Full replacement of `City:GetNeededSpecialist` (the gate is inside the
+accumulation loop). Fixing this one function covers all three consumers: `CanTrain`'s
+"train as needed" policy, the auto specialization pick on graduation, and the infopanel
+list.
 
 ### F37 — Ghost farm oxygen survives salvage (P1, high)  `[fixed: Code/Fix_GhostFarmOxygen.lua — SetDome hook + LoadGame sweep]`
 `FarmBase:ApplyOxygenProductionMod` (`Farm.lua:561-571`) puts negative `air_consumption`
