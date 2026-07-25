@@ -16,8 +16,25 @@ of preference:
 
 ## The Test Kit (companion mod — never shipped to players)
 
-Build a second mod folder `C:\Dev\SMR-BugFixPack-TestKit` (junction it like the
-main mod, keep it out of any upload). Contents:
+**BUILT** — `C:\Dev\SMR-BugFixPack-TestKit` (own git repo; see its README).
+Junction it like the main mod and keep it out of any upload. It enables the Lua
+console at load (`ConsoleSetEnabled(true)` + `ReloadShortcuts()`; open with Enter
+or Alt-Shift-C) and provides `SMRTest.RunAll()`, `SMRTest.List()`,
+`SMRTest.<ProbeId>()`, the `SMRTest.Log.*` toggles and the `SMRTest.Report*`
+state dumps. Probes are tagged by kind:
+
+| Kind | Meaning |
+|------|---------|
+| `behavior` | drives the patched code with synthetic input — a real fixed/unfixed discriminator, no gameplay needed |
+| `install` | asserts the patched function now comes from the fix pack (used where calling the real code would fire a disaster, complete a milestone, demolish a track…) |
+| `state` | inspects the loaded savegame; SKIPs when the save has no relevant objects |
+| `manual` | always SKIPs, with setup steps |
+
+`install` probes work by reading `debug.getinfo(fn).source`; the F06 probe instead
+uses `GetStaticMsgNames()`, since the shipped game registers no `CrystalFlyAway`
+handler at all.
+
+Original spec, for reference:
 
 - `SMRTest.RunAll()` — console smoke suite: runs every script probe below,
   prints one PASS/FAIL/SKIP line per fix id. Run it (a) with fix pack disabled
@@ -30,11 +47,11 @@ main mod, keep it out of any upload). Contents:
   each auto-cargo request the lander computes). Enable per-test, print to
   console/log with a `[SMRTest]` prefix.
 - First build task: inventory `Cheats.lua` + `GameCheatShortcuts.generated.lua`
-  and note the useful entries (instant build, complete construction, spawn
-  colonist/applicants, start mystery, research tech, time scale). Anything
-  marked "verify" below gets resolved in that pass. Also confirm how the dev
-  console is enabled in Relaunched (check `ModTools\Docs\index.md.html` and
-  Samples — the Mod Editor ecosystem implies console access; verify exact key).
+  — **DONE**, see `docs/CHEATS_INVENTORY.md`. It also answers the console
+  question (Enter / Alt-Shift-C, gated on `AreCheatsEnabled() or ConsoleEnabled`;
+  a Mod Editor test session grants it for free) and records which `Cheat*`
+  functions self-gate on `Platform.cheats` (only `CheatStartMystery` and
+  `CheatChangeMap`).
 
 ## Script probes (no gameplay; go straight in RunAll)
 
@@ -52,6 +69,35 @@ main mod, keep it out of any upload). Contents:
 | F58* | Sweep `MainCity.labels.Residence`: sum `#r.reserved` vs colonists actually en route | phantom reservations / zero stale entries |
 
 (*probes for queued fixes — write them now, they become the acceptance test.)
+
+### Wave-2 probes (all written; `SMRTest.List()` for the current set)
+
+| Fix | Probe id | Kind | What it proves |
+|-----|----------|------|----------------|
+| F67 | `LanderEmptyLaunch` | behavior | an auto rocket with an empty hold is not "ready", a loaded one still is |
+| F68 | `LanderCargoRatchet` | behavior | the hourly request never falls below what is aboard |
+| F69 | `LanderReturnFuel` | behavior | a lander parked on an asteroid keeps a fuel ration requested |
+| F73 | `ShelterReflex` | behavior | a habitat with life support down still accepts residents; Idle carries the shelter branch |
+| F45 | `BrokenTrackSalvage` | install + state | BreakTrackElement stamps node_idx; no repair site in the save lacks it |
+| F44 | `TrackSalvageWipe` | install | DemolishAndSplitTrack replaced |
+| F30 | `LakeEntombment` | install + state | PlacePrefab sweeps; counts units currently on impassable ground |
+| F37 | `GhostFarmOxygen` | install + state | SetDome hooked; no dome carries a farm modifier with no live farm |
+| F50 | `RocketDroneChurn` | behavior | a steady-state refresh does not cycle command centers; a new request still does |
+| F51 | `ShuttleTransportCache` | behavior | the cached verdict changes when shuttles appear |
+| F52 | `VacuumWalks` | behavior | a 300m move in vacuum looks up a passage route; breathable maps do not |
+| F53 | `ArrivalDeaths` | install | Arrive replaced |
+| F55 | `DroneUnreachableForever` | behavior | a failed approach is stamped now, not max_int in the future |
+| F58 | `StaleReservations` | behavior + state | reservations are timestamped; reports stale slots in the save |
+| F61 | `HomeDomeMigrationGate` | behavior | connected-dome workplaces are offered with migration closed |
+| F06 | `CrystalMysteryHang` | install | a static CrystalFlyAway handler exists (vanilla has none) |
+| F09 | `TouristSatisfaction` | behavior | 0→100 pays exactly what 100→0 charges |
+| F11 | `TrainPlatformWedge` | behavior | dropping an absent passenger does not raise |
+| F12 | `LowStorageWarning` | install | hourly update wrapped; prints the shipped vs correct Food window |
+| F13 | `CommandCenterNumbers` | behavior | all 11 `GetAvailable*` getters exist and agree with `GetAvailable` |
+| F14 | `DomeOverviewHighlight` | behavior | a below-threshold stat renders with its `<red>` tag |
+
+Probes needing a loaded game SKIP without one (`g_Consts` is a GameVar), so run
+`RunAll()` from inside a colony, not the main menu.
 
 ## Cheat-triggered scenarios
 
