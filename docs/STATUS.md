@@ -1,7 +1,9 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-26 (QA session 5 wrap-up — wave-3 A/B CLEAN, all tracker decisions
-made, session prompts staged). **Three prompts, three triggers:**
+Updated: 2026-07-26 (**wave-4 BUILD leg done — 14 new fix modules on the `wave4`
+branch, NOT merged to main**; see "Wave 4" below. Prior entry: QA session 5 wrap-up —
+wave-3 A/B CLEAN, all tracker decisions made, session prompts staged).
+**Three prompts, three triggers:**
 - `docs/OPUS_BUILD_PROMPT.md` — Opus wave-4 build leg. Safe to run DURING the user's
   playtest: it works on `wave4` branches in separate worktrees and never touches the
   junctioned main trees the game loads from.
@@ -276,23 +278,51 @@ walkability says A↔C is walkable while services say C is invisible from A;
 `and`/`or` precedence slip; `IsDifferentAsteroidLocation` comparing a map to a
 MapDescriptor. All are permissive failures — none blocks a player.
 
-## Next up — wave 4 (nothing from wave 3 is left)
+## Wave 4 — build leg DONE (branch `wave4`, NOT merged, NOT probe-run)
 
-21 tracked entries are still `todo`: F18, F19, F20, F21, F22, F23, F24, F25, F26, F27, F28,
-F29, F31, F42, F43, F47, F49, F56, F57, F65, F66. Six entries are `fixed*` partials whose
-open half is recorded on the entry: F15, F34, F52, F55, F58, F59.
+**14 new fix modules, 13 new probes, 6 new playtest items (PT-39..PT-44).** Everything
+lives on the `wave4` branch in `C:\Dev\SMR-BugFixPack-wave4` and
+`C:\Dev\SMR-BugFixPack-TestKit-wave4`; main is untouched, the game was never launched, and
+**no probe has been run** — the A/B pair belongs to the wave-4 QA leg
+(`docs/FABLE_QA_PROMPT.md`), which also performs the merge.
 
-Suggested order for the next build leg (largest player impact first):
+Implemented, in queue order:
 
-1. **F56** Auto RC Transports never offload rockets (P2, high) — completes the
-   F50/F68/F71 rocket-logistics family.
-2. **F65/F66** station↔tunnel power bridge and connector hex ping-pong (P2, med+) —
-   the "tracks won't connect" family, and the last big train items.
-3. **F22** `GetGridGlobalStorage` breaking Last Transmission gates (P2, med).
-4. **F19/F20/F21** the numbers/tooltip trio (P2) — small, self-contained, low risk.
-5. **F23/F24/F27/F28/F29** the latent / mod-facing bundle (P3) — cheap, ships for
-   modder benefit.
-6. **F42/F43/F47/F49/F57/F31/F18/F25/F26** the remaining P2/P3 tail.
+| ID | Module | Note |
+|----|--------|------|
+| **F74** *(new)* | `Fix_RocketInteractGuard` | found by screening F56; the shipped guard at `RCTransport.lua:341` names only the pre-Relaunched trade/refugee classes |
+| **F66** | `Fix_TrackConnectorPingPong` | enforces the invariant the shipped assert only states |
+| **F65** | `Fix_TrackTunnelPowerBridge` | bridges only when the two stations demonstrably sit on different grids; PostLoadGame sweep |
+| **F22** | `Fix_GridGlobalStorage` | one ratio over summed inputs instead of a sum of ratios plus a sentinel |
+| **F75** *(new)* | `Fix_LastTransmissionStorage` | found by implementing F22; six conditions were on `Prerequisite`, which `Eval` never reads, and the Oxygen one measured Power |
+| **F19** | `Fix_GraphConsumedCaption` | caption counts maintenance, like the bar |
+| **F20** | `Fix_MoraleComfortTooltip` | hides the one row `UpdateMorale` no longer grants |
+| **F21** | `Fix_TrainWaitTime` | full replacement — `BoardVehicle` blocks for the whole ride |
+| **F23** | `Fix_FounderTraitNotification` | additive handler beside the dead one |
+| **F24** | `Fix_DomePipeMoveInside` | `dome` → `self`; no probe, PT-44 covers it |
+| **F27** | `Fix_StorageRateModifiers` | three post-wrappers |
+| **F28** | `Fix_ReplaceTechCount` | entry title corrected: no crash is claimed, only that the line is wrong either way |
+| **F29** | `Fix_SequenceLatents` | `fixed*` — items 1 and 3; item 2 is a Mod Editor code generator, deliberately left |
+| **F18** | `Fix_IndependenceTerraforming` | `fixed*` — preset half; already-researched saves keep 10% |
+
+**Blocked, needs a decision (not a defect):** **F56** — screened before implementing and
+found to be designed scope, not a defect (`GetAutoGatherDeposits` is a declared accessor;
+the `Automation_Unload` rocket exclusion uses the Relaunched `IsRocketClass` shim, i.e.
+maintained intent; auto mode promises only "gather resources"). Same shape as F62/F63:
+`wontfix` or a wave-5 opt-in `Opt_AutoRocketOffload`. Full write-up on the entry.
+
+**Still `todo` after wave 4 — eight entries, the P2/P3 tail:** F25, F26, F31, F42, F43,
+F47, F49, F57. Suggested order for a wave-5 build leg (largest first): **F47** track
+salvage refunds, **F42/F43** placement/tech-lock bypasses, **F49** train minors bundle,
+**F57** drone/transport minors bundle, **F31** anomaly cave-in map, then **F25/F26** (both
+cosmetic/legacy-only). Seven entries are `fixed*` partials whose open half is recorded on
+the entry: F15, F18, F29, F34, F52, F55, F58, F59.
+
+**Every wave-4 fix is unverified in-game.** The four full replacements (F66
+`CreateConnectorElements`, F21 `BoardVehicle`, F24 `MoveInside`, F28 `ReplaceTech`) and the
+one global-function replacement (F22 `GetGridGlobalStorage`) are the highest-risk items for
+the QA audit; F20's per-call instance `GetProperty` override and F65's PostLoadGame sweep
+are the two most unusual techniques in the pack and deserve a look.
 
 ## Key technical facts (hard-won, do not re-derive)
 
@@ -360,6 +390,22 @@ Suggested order for the next build leg (largest player impact first):
   defined nowhere in Src — an engine export or an fpk-only function. F12's fix
   checks for it at apply time.
 - Sample mod format in `<game>\ModTools\Samples\Mods`; docs in `ModTools\Docs\index.md.html`.
+- **Replacing an EXISTING global from mod code works**: `ModEnvMeta.__newindex`
+  (`Mod.lua:1557-1563`) rawsets any non-blacklisted key into the real `_G`, and the
+  "attempt to create a new global" assert only fires for names that do not already
+  exist there. Generated closures (script conditions, sequence code) resolve the name
+  at call time, so they pick the replacement up. Read the name back with
+  `rawget(_G, ...)` in apply() to confirm the write landed — F22 does.
+- **`OnMsg` is additive, confirmed structurally**: four shipped files each define
+  `OnMsg.StationsConnected` (`Station.lua:1213`, `Track.lua:668`,
+  `TrainTransport.lua:357`, `UnderconstructionSign.lua:87`) and all four must run.
+- **TOOLING: never round-trip a doc through PowerShell 5.1 `Get-Content -Raw` +
+  `WriteAllText`.** `Get-Content` without `-Encoding` decodes UTF-8 files as cp1252, so
+  every `—`, `↔`, `≤` comes back double-encoded and the whole file shows as changed.
+  It happened to `BUGS.md` in the wave-4 session and was reversed with
+  `Encoding.GetEncoding(1252).GetBytes(UTF8.GetString(bytes))`; nothing was committed
+  corrupted. Use the editor's own file tools for docs, or pass `-Encoding UTF8` on
+  BOTH ends.
 
 ## FINAL A/B RunAll pair (repaired TestKit) — CLEAN SWEEP (2026-07-25)
 
