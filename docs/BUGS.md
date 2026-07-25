@@ -661,6 +661,10 @@ test it in-game from this seat, risks more than the P3 it repairs.
 (b) a meteor-damaged track, comparing `track.start_el`/`end_el` and route formation before
 and after. If it holds up, the pass belongs in `90_SaveSanitizer.lua` behind a one-shot
 `SMRFixPack_*` flag on `UIColony` so it cannot re-run every load.
+*2026-07-26: that test is now written up as **PT-37** in `docs/PLAYTEST_CHECKLIST.md`
+(exact console commands for both cases) and sits on the user's in-person list. PASS on
+both cases → implement in the sanitizer, skipping tracks that carry repair sites; a dirty
+FAIL on the damaged-track case → close `wontfix — repair riskier than the defect`.*
 
 ### F49 — Train minors bundle (P3, med)
 (a) instant-built tracks use pipes palette (`Tracks.lua:385` vs `TrackElement.lua:791`);
@@ -861,6 +865,16 @@ The one genuine internal inconsistency worth recording: `IsInWalkingDistDome`
 walkability model says A↔C is walkable while the service model says C is invisible from A.
 **To unblock:** a decision that this is in scope. If taken, it belongs in an opt-in module
 alongside D01, not in the default pack.
+*Verified against the ORIGINAL game 2026-07-26 (official `HaemimontGames/SurvivingMars`
+source release): SAME AS ORIGINAL.* The original's `Dome:GetService`
+(`Lua/Buildings/Dome.lua:2817-2857`) is the same algorithm — own dome, then one
+`GetConnectedDomes()` hop gated on `allow_service_in_connected` — and its
+`connected_domes` is the same per-pair passage refcount
+(`Lua/Passage.lua:998-1013`). Even `AreDomesConnectedWithPassage` existed there with the
+SAME two callers (walkability `Dome.lua:251`, pathing `Passage.lua:1097`). Relaunched's
+version is a cosmetic refactor with identical reach: one-hop service is a carried-forward
+design across both games, not a regression. Any change here is a mod feature by
+definition.
 
 ### F63 — Universities invisible to emigration (P2, high)  `[blocked — same reason as F62; see below]`
 Training is pull-only from student side, 1 hop, F61-gated (`Colonist.lua:1505-1507`,
@@ -885,6 +899,14 @@ falls through to `GetTransportRoute(his_dome, self)` (`ShiftsBuilding.lua:253`),
 colonist is PERMITTED to train at a train-reachable school that `Dome:ChooseTraining` will
 never offer them.
 **To unblock:** same decision as F62 — an opt-in module, not the default pack.
+*Verified against the ORIGINAL game 2026-07-26: SAME AS ORIGINAL.* The original's
+`FindEmigrationDome` (`Lua/Units/Colonist.lua:1987-2064`) scores exactly trait filter +
+free housing + `HasFreeWorkplacesAround` — which reads only `labels.Workplace`
+(`:1960-1977`); no training/university term exists anywhere in the original's emigration
+paths (repo-wide grep), and no `TrainingEval` existed there either. Its training search
+(`Colonist.lua:1122-1131` + `Workplace.lua:841-881`) is the same own-dome-then-one-hop
+walk Relaunched hoisted onto `Dome:ChooseTraining`. Nobody could ever emigrate to study,
+in either game. Adding it is a new mechanic, not a repair.
 
 ### D01 — Rockets don't auto-refuel / auto-export rare metals — INTENTIONAL REDESIGN (verdict)
 Not a bug: legacy always-on PreciousMetals loader exists only in dead legacy class

@@ -239,9 +239,9 @@ matches the tracker.
 | ID | Why it is parked | What would unblock it |
 |----|------------------|------------------------|
 | **F32** | The shipped data already carries the fix. `NotWorkingBuildings` — the one preset the described re-add mechanism applies to — now has `Suppressable = true` / `SuppressTime = 120000`. The other two (`DestroyedInfrastructure`, `RoverDamaged`) are one-shot event adds with no re-add path, so suppressing them would hide real events. | A decision to close it as `wontfix`. |
-| **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | An in-game test on a save with a healthy network **and** a meteor-damaged track. Then it goes in the sanitizer behind a one-shot flag. |
-| **F62** | Services really do reach one passage hop. But the codebase uses direct adjacency for cross-dome work **and** service consistently (`AreDomesConnected` is `connected_domes[b]`); the transitive variant has only two callers in all of Src, both walkability/pathing. Extending it is a behavior + performance change — which the sketch itself conceded. | A decision that it is in scope. If yes → opt-in module, not the default pack. |
-| **F63** | Same shape. There is no broken hookup: no `TrainingEval` exists anywhere next to `WorkplacesEval` / `ResidencesEval`, so training was never a term in the emigration score. Adding one is a feature. | Same decision as F62. |
+| **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
+| **F62** | Services really do reach one passage hop. But the codebase uses direct adjacency for cross-dome work **and** service consistently (`AreDomesConnected` is `connected_domes[b]`); the transitive variant has only two callers in all of Src, both walkability/pathing. **Verified 2026-07-26 against the original game's official source: SAME AS ORIGINAL** — same algorithm, same one-hop reach, same two transitive-predicate callers. A carried-forward design, not a regression. | A decision that it is in scope *as a mod feature*. If yes → opt-in module, not the default pack. |
+| **F63** | Same shape. There is no broken hookup: no `TrainingEval` exists anywhere next to `WorkplacesEval` / `ResidencesEval`, so training was never a term in the emigration score. Adding one is a feature. **Verified 2026-07-26: SAME AS ORIGINAL** — the original's emigration score was trait filter + housing + `labels.Workplace` only; no training term ever existed in either game. | Same decision as F62. |
 
 Recorded on those entries but deliberately untouched (real inconsistencies, no action):
 walkability says A↔C is walkable while services say C is invisible from A;
@@ -461,12 +461,11 @@ that "passed" or SKIPped were not testing what they claimed.
    fix is commented out of `metadata.lua`, the registered set is now **46 modules /
    45 active + ClassicRockets inactive**, and the final `wontfix` + file deletion is
    gated on the new **PT-36** console check; rollback is one metadata line.)
-8. **TestKit remote** — the Test Kit repo has no remote and sits on `master` (49 local
-   commits). Options: (a) its own GitHub repo (recommended — keeps the shipped repo's
-   history clean and the "never upload the kit" rule structural), or (b) an orphan
-   branch on SMR-CommunityFixPack. `gh` is not installed, so creating a new repo needs
-   the user on github.com either way; wiring the remote + push is one command once it
-   exists.
+8. ~~TestKit remote~~ **DECIDED 2026-07-26: local-only, by design.** The kit was never
+   meant to ship publicly, so no remote is created. Note the consequence: the repo's
+   51 commits exist in exactly one place — if a local backup is ever wanted,
+   `git -C C:\Dev\SMR-BugFixPack-TestKit bundle create <somewhere-else>\testkit.bundle --all`
+   is the one-liner (a bundle is a single file that `git clone` accepts).
 7. A donated save that researched **Frictionless Composites before the game patched the
    tech** is the only true fixture for the F35 sanitizer pass (PT-35 case C). Everything
    else about that pass is probe-covered.

@@ -1174,6 +1174,53 @@ console drives the SHIPPED function. Two minutes.
 
 ---
 
+## PT-37 — F48 unblock test · decides whether the **F48** repair can ship
+
+F48 is **not implemented** — this test is what decides whether it can be. The shipped
+migration fixup (`Station.lua:1339-1355`) mis-parenthesises one call, so it re-orders
+nothing; the *corrected* call runs `OrderTrackElements`, which rebuilds every element's
+`connections` and `node_idx` on the track it is given, with a non-unwinding `assert` as
+its only failure handling. Before that ever ships in the sanitizer, it has to be seen
+behaving on a real save — both on a healthy network and on the one thing most likely to
+break it: a meteor-damaged track.
+
+**Setup:** a save with **two or more stations** connected by track, at least one route
+with a running train, **and** one track broken by a meteor (trigger one via
+`CheatTriggerMarsquake()` near a track, or play until one lands). Extending SAVE-A
+works. Console open (Enter / Alt-Shift-C).
+
+**Trigger — case A (healthy track):**
+1. Pick an intact track and note its endpoints:
+   `qa_t = MainCity.labels.TrackBase[1]`
+   `print(qa_t.start_el, qa_t.end_el, #qa_t.elements)`
+2. Run the CORRECTED call the F48 repair would ship:
+   `ProcessTrackElements(ResolveMap(qa_t), qa_t.elements)`
+   `qa_t.start_el = qa_t.elements[1]  qa_t.end_el = qa_t.elements[#qa_t.elements]`
+3. Re-print the endpoints; check the route still forms, the train still runs, and
+   nothing visual changed. **Save, reload, check again.**
+
+**Trigger — case B (the damaged track — the risky one):**
+4. Repeat steps 1-3 with `qa_t` set to the meteor-damaged track (pick the right
+   index from `MainCity.labels.TrackBase`). Expect the console to print the
+   "unable to find the expected number of track elements" assert — that is fine
+   *if nothing corrupts*: after it, check the repair site is still salvageable
+   (F45), the rest of the network still routes, and a **save + reload** comes back
+   clean.
+
+- **UNBLOCKS F48 looks like:** case A is a stable no-op-or-better and case B fails
+  *cleanly* (assert printed, network intact after reload) → the repair ships in
+  `90_SaveSanitizer.lua` behind a one-shot flag, skipping tracks that carry repair
+  sites.
+- **CONFIRMS THE BLOCK looks like:** case B leaves a track that will not route, a
+  train stuck, or a save that reloads broken → F48 closes as
+  `wontfix — repair riskier than the defect`, record exactly what broke.
+
+`Result (case A healthy):` _____________________________________________
+
+`Result (case B damaged):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
