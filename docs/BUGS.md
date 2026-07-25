@@ -68,7 +68,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
 | F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | fixed  |
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
-| F56 | Auto RC Transports never offload rockets                 | P2  | high | todo   |
+| F56 | Auto RC Transports never offload rockets                 | P2  | high | blocked|
 | F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
@@ -88,6 +88,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | fixed  |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
+| F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | fixed  |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -768,12 +769,36 @@ unverifiable from Lua. **Fix:** override `Dome:CalcOpenAirSkin` to preserve entr
 attaches; override approach-failure cache to store `GameTime()` so `CleanUnreachables`
 retires entries.
 
-### F56 — Auto RC Transports never offload rockets (P2, high)
+### F56 — Auto RC Transports never offload rockets (P2, high)  `[blocked — screened wave 4: the cited code is a designed scope, not a defect; needs a decision]`
 `RCTransport.lua`: `Automation_Gather` (:884-908) sources only surface deposits;
 `Automation_Unload` (:910-941) excludes rockets as destinations. Manual load/routes work —
 players correctly perceive AUTO as broken. Combined with F50 + shuttle exclusion, remote
 rockets have no automated unloader at all. **Fix:** extend `ProcAutomation`: when empty,
 seek landed `UniversalRocketBase` with status "unloading", `TransferAllResources`.
+
+*Screened before implementing (wave 4) — the code matches the entry, but the remedy is a
+feature, not a repair.* Three findings, in order of weight:
+1. `Automation_Gather` sources `self:GetAutoGatherDeposits()` (:880-882), a method that
+   returns exactly the four `SurfaceDeposit*` classes. A named, overridable accessor is a
+   declared scope, not a forgotten case.
+2. The rocket exclusion in `Automation_Unload` is `not IsRocketClass(d, "UniversalRocketBase")`
+   (:916). `IsRocketClass` is the Relaunched compatibility shim
+   (`RocketCompatibility.lua:1037-1046`) that matches BOTH the legacy `RocketBase` family
+   and the new `UniversalRocketBase` one — i.e. a Relaunched developer deliberately
+   re-stated this exclusion for the new class tree. Maintained intent, not an oversight.
+3. The feature's own promise is narrow: the auto-mode rollover reads "the RC Transport
+   will **gather resources** automatically" (`RCTransport.lua:1697`) — no rocket claim.
+   The manual paths that DO service rockets exist and work, exactly as the entry says
+   (`CanLoad` :310-324 admits `UniversalRocketBase`; `InteractWithObject` :419-429 opens
+   the resource selector on one; `TransferAllResources` :1217-1300 is class-agnostic).
+Adding rocket pickup to automation is therefore new capability — FIX_POLICY §4 territory,
+the same class as D01/D02. **Decision needed:** `wontfix` (carried-forward design, as with
+F62/F63) or a wave-5 opt-in `Opt_AutoRocketOffload` module. Not implemented either way.
+*Origin note:* the player report behind this entry is recorded in `RESEARCH.md` as
+"**Drones** ignore rocket cargo even at high priority; RC Transports don't auto-offload
+rockets". The drone half is the load-bearing complaint and is already addressed by F50.
+*What screening DID find:* three rocket tests in the same file were never converted to the
+Relaunched classes — filed and fixed as **F74** below. That is the real defect in this area.
 
 ### F57 — Drone/transport minors bundle (P3, med)
 (a) `DroneControl:UpdateRocketsInternal` (`DroneControl.lua:613-639`) clears only
@@ -1164,6 +1189,54 @@ applies damage, `StatusEffects.lua:140-160`). Workers are safe inside the mine d
 shifts; they die during idle stretches next to it. **Fix:** (a) habitat accepts residents
 regardless of momentary life support; (b) Idle wrapper: outside > half of
 OxygenMaxOutsideTime in vacuum → `SetCommand("Rest")`.
+
+### F74 — RC Transports can be ordered onto trade / refugee rockets (P2, high)  `[fixed: Code/Fix_RocketInteractGuard.lua]`
+*Found by screening F56 in wave 4.* `RCTransport:CanInteractWithObject`
+(`Lua\Units\RCTransport.lua:338-385`) opens with a hard refusal —
+`if IsKindOfClasses(obj, "TradeRocketBase", "RefugeeRocketBase") then return false end`
+(:341) — that no Relaunched rocket can match. Trade and refugee rockets are now
+`UniversalTradeRocket` / `UniversalRefugeeRocket`, generated with
+`__parents = { "UniversalRocketBase" }`
+(`Lua\BuildingTemplate\UniversalTradeRocket.generated.lua:4-5`,
+`UniversalRefugeeRocket.generated.lua:4-5`), whereas the named classes sit on the other
+branch: TradeRocketBase/RefugeeRocketBase → `SupplyRocketBase` → `RocketBase`
+(`RocketTrade.lua:1-2`, `RocketRefugee.lua:1-2`, `SupplyRocket.lua:1-2`), and
+`UniversalRocketBase` is not a `RocketBase` (`UniversalRocket.lua:28-40`). The guard is
+dead in every Relaunched game, not only converted saves: new event rockets are placed as
+the Universal classes (`SA_Gameplay.lua:2788`, `:2929`;
+`ClassDef-Effects.generated.lua:154`, `:3134`) and old saves are converted to them on load
+(`RocketCompatibility.lua:522`, `:964`, `:1050`).
+
+Conversion slip, not a design change — five sibling rocket tests in the SAME file were
+updated to name both families and only this one was missed: `:314`, `:421`, `:731`,
+`:1137` (all `IsKindOfClasses(x, "SupplyRocketBase", "UniversalRocketBase")`) and `:916`
+(the `IsRocketClass` shim, `RocketCompatibility.lua:1037-1046`). FIX_POLICY §4's
+"the same author wrote it correctly elsewhere" test, five times over.
+
+Player-visible: the RC Transport load/unload cursor accepts an event rocket, so cargo can
+be pushed into or pulled out of a rocket with no player cargo bookkeeping. Matches the
+Relaunched report "rival colony rockets glitch permanently if refilled from RC Transport
+(1.07)" in `RESEARCH.md`.
+
+**Fix:** pre-wrappers (FIX_POLICY §1.4) on `CanInteractWithObject` and — belt-and-braces —
+`InteractWithObject`, restating the shipped rule for the Relaunched class names before
+deferring to the original. The gate is complete on its own: `UnitDirectionModeDialog`
+stores an interaction target only when `CanInteractWithObject` answers truthy
+(`UnitControl.lua:470-471`, `:488`), and both the direct-order path (`:401`) and the
+transport-route path (`TransportRouteInteractionHandler.lua:50`) act on that stored target.
+Wrapping the class field also covers `RCHarvester` (`:127`, `:139`) and `RCConstructorBase`
+(`:353`), which call these through the class table.
+
+*Two sibling stale reads found and deliberately NOT changed:* `CanUnloadAt` (`:265`) and
+`FullAndCanUnload` (`:285`) still test `IsKindOf(depot, "SupplyRocketBase")`, so their
+export-request-aware rocket branch is likewise dead for Universal rockets and both fall
+through to the generic depot branch. Restoring those would REMOVE a capability Relaunched
+clearly intends — `CanLoad` (`:314`) and `TransferResources` (`:1137`) were converted
+precisely so an RC Transport can service a lander, which is core asteroid play. The
+resulting behaviour is permissive (a manual unload into a player rocket that is not
+exporting is allowed where the original demanded a matching export request), and permissive
+failures do not block a player. Recorded here so a later pass does not "fix" it blind.
+Probe: `RocketInteractGuard` in the Test Kit's `40_Probes_Wave4.lua`. Playtest: PT-39.
 
 ## Candidates under investigation
 

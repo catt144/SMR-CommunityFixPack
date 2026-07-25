@@ -52,6 +52,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DomeFreeSpaceMismatch.lua",
 		"Code/Fix_SmallLandscapeSites.lua",
 		"Code/Fix_LandscapeUnitFilter.lua",
+		"Code/Fix_RocketInteractGuard.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",

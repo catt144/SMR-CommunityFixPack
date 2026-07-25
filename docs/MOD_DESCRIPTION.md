@@ -187,6 +187,10 @@ come back.
   colonist idling in vacuum now heads home before the oxygen runs out — and a
   brief power or air interruption no longer throws every resident out of a
   habitat permanently.
+- RC Transports keep their hands off trade and refugee rockets. The game already
+  forbids that, but the rule stopped matching anything when the rocket classes
+  were rebuilt for Relaunched, so an RC Transport could be sent to load from or
+  unload into a visiting rocket and leave it in a state nothing else understood.
 
 **Story & milestones**
 - The Philosopher's Stone mystery no longer gets stuck at the finale. If you left

@@ -1280,6 +1280,41 @@ F30, is the archetype). Wall clock or phone timer handy; leave game speed at nor
 
 ---
 
+# Group 8 — wave-4 fixes
+
+## PT-39 — RC Transport vs. a visiting rocket · covers **F74**
+
+Probes prove the guard refuses a trade rocket; only play can show the cursor and
+the order behave as they should, and that nothing ELSE the RC Transport does got
+caught by the same net.
+
+**Setup:** a save where a trade rocket or a refugee rocket is landed (rival-colony
+trade offer, or the refugee story event). Have an RC Transport with some cargo
+aboard and some free space, parked near it.
+
+**Steps:**
+1. Select the RC Transport and hover the cursor over the landed **trade/refugee**
+   rocket, both in plain move mode and with the Load and Unload interaction modes.
+   - **EXPECTED:** no "Load Resource" / "Unload Resource" prompt appears, and
+     clicking does not send the rover to the rocket (it should read as ordinary
+     terrain — a move order, or nothing).
+   - **SURPRISE looks like:** the prompt still appears, or the rover drives over
+     and starts a transfer.
+2. Try to start a **transport route** whose source or destination is that rocket.
+   - **EXPECTED:** the rocket cannot be picked as either end.
+3. **Control test — this must still work.** Hover the same RC Transport over a
+   normal **player** rocket or asteroid lander that is landed with cargo, and over
+   an ordinary Universal Storage Depot.
+   - **EXPECTED:** Load/Unload prompts appear as before and the transfer runs.
+     If this broke, the fix is over-broad — report it, it is worse than the bug.
+4. Check the log for `[CommunityFixPack] RocketInteractGuard: applied`.
+
+`Result (trade/refugee rocket refused?):` _____________________________________________
+
+`Result (control test — player rocket + depot still work?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
