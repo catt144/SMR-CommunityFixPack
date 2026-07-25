@@ -32,10 +32,18 @@ SMRFixPack.Register("LanderEmptyLaunch", {
 		if type(R) ~= "table" or type(R.IsCargoReady) ~= "function" then
 			return "UniversalRocketBase.IsCargoReady not found (game update changed it?)"
 		end
-		for _, name in ipairs{ "CheckAutoDepart", "IsAutoModeEnabled", "IsSpecialAutomode", "IsPlayerControlled" } do
+		-- NB: mod code loads before the classes are built (autorun.lua:423 vs
+		-- OnMsg.Autorun in classes.lua:980), so these tables are still the CLASS
+		-- DEFS — only members declared by the class itself are visible here.
+		-- IsAutoModeEnabled comes from the AutoMode mixin, so check it there.
+		for _, name in ipairs{ "CheckAutoDepart", "IsSpecialAutomode", "IsPlayerControlled" } do
 			if type(R[name]) ~= "function" then
 				return "UniversalRocketBase." .. name .. " not found (game update changed it?)"
 			end
+		end
+		local AutoMode = rawget(_G, "AutoMode")
+		if type(AutoMode) ~= "table" or type(AutoMode.IsAutoModeEnabled) ~= "function" then
+			return "AutoMode.IsAutoModeEnabled not found (game update changed it?)"
 		end
 
 		-- Would this rocket take off carrying nothing at all? Fuel does not count:

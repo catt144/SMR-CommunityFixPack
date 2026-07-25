@@ -50,18 +50,20 @@ SMRFixPack.Register("ShelterReflex", {
 
 		-- (b) seek shelter before the oxygen timer runs out
 		local C = rawget(_G, "Colonist")
+		-- NB: g_Consts is a GameVar (Modifiers.lua:427) and does not exist yet while
+		-- mod code loads, so the oxygen budget is read inside the wrapper, not here.
 		if type(C) == "table" and type(C.Idle) == "function"
-				and type(rawget(_G, "GetAtmosphereBreathable")) == "function"
-				and g_Consts and g_Consts.OxygenMaxOutsideTime then
+				and type(rawget(_G, "GetAtmosphereBreathable")) == "function" then
 			local orig_idle = C.Idle
 			function C:Idle(...)
 				-- FIX (F73b): the shipped Idle has no seek-shelter branch at all.
 				local outside_start = self.outside_start
-				if outside_start and IsValid(self.residence) and self.residence.working
+				local max_outside = g_Consts and g_Consts.OxygenMaxOutsideTime
+				if max_outside and outside_start and IsValid(self.residence) and self.residence.working
 						and not self.transport_task and not self:IsDying() then
 					local now = GameTime()
 					local last_try = self.SMRFixPack_shelter_try
-					if now - outside_start >= g_Consts.OxygenMaxOutsideTime / 2
+					if now - outside_start >= max_outside / 2
 							and (not last_try or now - last_try >= const.HourDuration)
 							and not GetAtmosphereBreathable(self:GetMap()) then
 						self.SMRFixPack_shelter_try = now

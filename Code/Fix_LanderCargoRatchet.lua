@@ -35,11 +35,19 @@ SMRFixPack.Register("LanderCargoRatchet", {
 		if type(R) ~= "table" or type(R.CreateAutoCargoRequest) ~= "function" then
 			return "UniversalRocketBase.CreateAutoCargoRequest not found (game update changed it?)"
 		end
-		for _, name in ipairs{ "ResolveAutoModeTarget", "IsOnAutoModeTargetLocation",
-				"GetCargoWeightCapacity", "SetCargoRequest", "IsSpecialAutomode" } do
+		-- NB: mod code loads before the classes are built (autorun.lua:423 vs
+		-- OnMsg.Autorun in classes.lua:980), so these tables are still the CLASS
+		-- DEFS — only members the class declares itself are visible. The cargo
+		-- plumbing lives on the CargoTransporterNew parent.
+		for _, name in ipairs{ "ResolveAutoModeTarget", "IsOnAutoModeTargetLocation", "IsSpecialAutomode" } do
 			if type(R[name]) ~= "function" then
 				return "UniversalRocketBase." .. name .. " not found (game update changed it?)"
 			end
+		end
+		local CT = rawget(_G, "CargoTransporterNew")
+		if type(CT) ~= "table" or type(CT.GetCargoWeightCapacity) ~= "function"
+				or type(CT.SetCargoRequest) ~= "function" then
+			return "CargoTransporterNew cargo-request methods not found (game update changed them?)"
 		end
 		for _, name in ipairs{ "GetCargoType", "GetTotalCargoAvailable", "GetResupplyItem", "GetResupplyItemWeight" } do
 			if type(rawget(_G, name)) ~= "function" then

@@ -12,31 +12,43 @@
 -- counter hits 0, "Send out Train" is disabled at every station forever
 -- (Station.lua:653-660), even after rebuilding all rail.
 --
--- Patch approach: pre-hook Station:OnDemolish (chained wrapper). We store the
+-- Patch approach: pre-hook the demolition path (chained wrapper). We store the
 -- affected trains via their legitimate DestroySilent path (prefab refund + the
 -- "A Train was stored" notification) BEFORE Building:OnDemolish broadcasts
 -- BuildingDemolished — so the vanilla deleting handler finds no matching trains
 -- and becomes a harmless no-op. The vanilla handler itself stays untouched
 -- (OnMsg handlers are additive and can't be safely removed).
+--
+-- The hook goes on Building.OnDemolish (Building.lua:873-883), gated to Stations:
+-- Station does not declare OnDemolish of its own, and mod code runs before the
+-- classes are built (autorun.lua:423 vs OnMsg.Autorun in classes.lua:980), so at
+-- this point Station is still a classdef and nothing is inherited into it yet.
+-- Demolishable:OnDemolish (Demolishable.lua:157) is empty and OnDemolish is not
+-- an auto-resolved method, so Building's is the only implementation in the chain.
 
 SMRFixPack.Register("TrainsToVoid", {
 	title = "Demolishing a station stores its trains instead of permanently deleting them",
 	apply = function()
-		local Station = rawget(_G, "Station")
-		if not Station or type(Station.OnDemolish) ~= "function" then
-			return "Station.OnDemolish not found (game update changed it?)"
+		local Building = rawget(_G, "Building")
+		if not Building or type(Building.OnDemolish) ~= "function" then
+			return "Building.OnDemolish not found (game update changed it?)"
+		end
+		if not rawget(_G, "Station") then
+			return "Station class not found (game update changed it?)"
 		end
 		if not (rawget(_G, "Train") and type(Train.DestroySilent) == "function") then
 			return "Train.DestroySilent not found (game update changed it?)"
 		end
 
-		local orig = Station.OnDemolish
-		function Station:OnDemolish(...)
-			local trains = self.city and self.city.labels and self.city.labels.Train
-			for i = #(trains or empty_table), 1, -1 do
-				local train = trains[i]
-				if IsValid(train) and train.current_station == self then
-					train:DestroySilent("station", self) -- refunds the prefab + shows "stored" notification
+		local orig = Building.OnDemolish
+		function Building:OnDemolish(...)
+			if IsKindOf(self, "Station") then
+				local trains = self.city and self.city.labels and self.city.labels.Train
+				for i = #(trains or empty_table), 1, -1 do
+					local train = trains[i]
+					if IsValid(train) and train.current_station == self then
+						train:DestroySilent("station", self) -- refunds the prefab + shows "stored" notification
+					end
 				end
 			end
 			return orig(self, ...)
