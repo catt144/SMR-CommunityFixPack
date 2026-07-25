@@ -28,6 +28,10 @@ come back.
   delay strikes instead of accidentally making things worse.
 
 **Buildings & economy**
+- Salvaging a farm now removes the oxygen it was giving its dome. Every farm you
+  ever removed was still supplying air to that dome forever, and each rebuild
+  added another invisible supply on top. Existing phantom oxygen is cleaned out
+  of your save when you load it.
 - Building an artificial lake no longer entombs the RC Constructor that built it,
   along with any drones nearby. The basin is dug after the site clears units out,
   so anything still standing there was sealed under the new terrain and quietly

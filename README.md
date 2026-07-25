@@ -27,6 +27,7 @@ and can be individually disabled.
 | BrokenTrackSalvage | Meteor-damaged tracks can be salvaged again (and existing damaged tracks in your save are repaired on load) |
 | TrackSalvageWipe | Salvaging a single track piece trims the track instead of deleting the whole line and every train assigned to it |
 | LakeEntombment | Building an artificial lake frees the RC Constructor and drones the new basin would otherwise seal in |
+| GhostFarmOxygen | Salvaging a farm removes the oxygen it supplied to its dome (and existing phantom oxygen is cleaned up on load) |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

@@ -369,7 +369,7 @@ extractors (`specialist="geologist"`, `max_workers=4`); ExtractorAI only sets
 **Fix:** wrap `GetNeededSpecialist`: skip extractor workplaces when ExtractorAI researched
 (match its actual gameplay meaning).
 
-### F37 — Ghost farm oxygen survives salvage (P1, high)
+### F37 — Ghost farm oxygen survives salvage (P1, high)  `[fixed: Code/Fix_GhostFarmOxygen.lua — SetDome hook + LoadGame sweep]`
 `FarmBase:ApplyOxygenProductionMod` (`Farm.lua:561-571`) puts negative `air_consumption`
 modifier on `parent_dome` keyed `farm_id`; no `FarmBase:Done`, `Building:Done`/`SetDome(false)`
 never clear it, and demolish path skips `UpdateWorking(false)` for non-`use_demolished_state`

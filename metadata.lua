@@ -23,6 +23,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_BrokenTrackSalvage.lua",
 		"Code/Fix_TrackSalvageWipe.lua",
 		"Code/Fix_LakeEntombment.lua",
+		"Code/Fix_GhostFarmOxygen.lua",
 	},
 	'TagGameplay', true,
 })
