@@ -895,6 +895,33 @@ and look at the pattern rather than exact numbers.)
 
 ---
 
+## PT-29 — Gene Forging · covers **F41**
+
+**Setup:** SAVE-A. This one is mostly a console read — the effect is statistical and
+not worth grinding out by eye.
+
+**Trigger (console), before researching anything:**
+```
+*r local u = MainCity.labels.Colonist[1] ConsolePrint("rare bonus: " .. tostring(GetRareTraitChance(u)))
+```
+Then grant **Gene Forging** on its own — `UIColony:SetTechResearched("GeneForging")`
+(`Lua/Research.lua:276`) — and re-run the line. Then grant `"GeneSelection"` as well and
+re-run it a third time. (`CheatResearchAll()` would grant both at once and hide the
+isolated reading.)
+
+- **BROKEN looks like:** `rare bonus: nil` with Gene Forging researched, and `100` once
+  Gene Selection is researched no matter what else you have.
+- **FIXED looks like:** `50` for Gene Forging alone, `100` for Gene Selection alone,
+  `150` with both.
+
+**Optional feel check:** with both researched, generate a big applicant batch
+(`CheatGenerateApplicants(100)`) and eyeball how many carry rare traits versus a
+pre-research batch. Statistical, so only note it if it looks obviously wrong.
+
+`Result:` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

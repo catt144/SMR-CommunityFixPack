@@ -64,6 +64,9 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- The **Gene Forging** research does something. The tech promises a higher chance
+  of rare traits and defines the bonus, but no part of the game ever read it — only
+  its sibling Gene Selection was wired up. Both now add together as the numbers say.
 - Dust Sickness does the damage it was designed to do. The code rolls a random
   5-14 Health loss per sol and then throws the roll away, dealing a flat 10 to
   everybody instead.

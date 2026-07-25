@@ -47,6 +47,7 @@ and can be individually disabled.
 | SecondArtificialSun | Solar panels built near a second Artificial Sun get its bonus (only the first sun was ever checked) |
 | DustSicknessBiorobots | Biorobots stop catching Dust Sickness (and are cured of it when you load an affected save) |
 | DustSicknessDamage | Dust Sickness does its intended 5-14 Health damage per sol instead of a flat maximum |
+| GeneForging | The Gene Forging tech raises the rare-trait chance instead of doing nothing at all |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

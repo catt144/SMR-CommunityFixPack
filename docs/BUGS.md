@@ -53,7 +53,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed  |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
-| F41 | Gene Forging tech has no effect                          | P2  | high | todo   |
+| F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
 | F42 | Buildings placeable on active dust devils                | P3  | high | todo   |
 | F43 | Layout construction bypasses tech locks                  | P3  | high | todo   |
 | F44 | One-hex track salvage can delete the entire track        | P1  | high | fixed  |
@@ -441,11 +441,20 @@ change nothing. Four `ForEachExecuteEffects` hand out the trait — two in
 than index. LoadGame pass removes the trait (and the paired
 `StatusEffect_UnableToWork`) from biorobots already infected in a save.
 
-### F41 — Gene Forging tech has no effect (P2, high)
+### F41 — Gene Forging tech has no effect (P2, high)  `[fixed: Code/Fix_GeneForging.lua]`
 `Colonist:GetRareTraitChance` (`Colonist.lua:3541-3550`) reads only
 `TechDef.GeneSelection.param1`; `GeneForging` (`TechPreset.lua:1556-1564`, param1=50)
 referenced nowhere in gameplay code. **Fix:** wrap `GetRareTraitChance`: add GeneForging
 param when researched (ChoGGi's original approach: bump GeneSelection.param1 to 150).
+*Implemented as an additive sum, not the param1 bump:* bumping GeneSelection only pays out
+when that OTHER tech is researched, so Gene Forging on its own would still do nothing.
+The value is a percentage bonus on the rare traits' draw weight (`GetRandomTrait` does
+`rare_weight_mod = 100 + (rare_weight_mod or 0)`, `Traits.lua:1001-1022`), which is why
+GeneSelection's 100 reads as "double" — so the two techs add: Forging alone +50, both +150.
+Note `GetRareTraitChance` is a global function, not a Colonist method as this entry said.
+Scope: only the "have" half. Rare traits GAINED later (schools, sanity breakdowns) call
+`GetRandomTrait` with no `rare_weight_mod` at all, so neither tech has ever affected them
+— separate defect, not touched.
 
 ### F42 — Buildings placeable on active dust devils (P3, high)
 `AreThereBlockingUnitsUnderneath` (`Construction.lua:1895-1914`) queries only
