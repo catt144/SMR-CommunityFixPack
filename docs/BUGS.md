@@ -46,7 +46,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | todo   |
 | F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | blocked|
 | F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | fixed  |
-| F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | todo   |
+| F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | fixed* |
 | F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | todo   |
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | fixed  |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
@@ -388,12 +388,41 @@ The shipped `assert(self.drone_dests_cache)` is dropped from the copy (assert do
 unwind in mod code); with the clamp, a missing cache yields an empty list, which
 `drone:Goto` already handles. Probe: `SmallLandscapeSites` in `30_Probes_Wave3.lua`.
 
-### F34 — Landscape nil-guard bundle (P3, med/latent)
+### F34 — Landscape nil-guard bundle (P3, med/latent)  `[fixed*: Code/Fix_LandscapeUnitFilter.lua — item (d) only; (a)(b)(c) verified NOT actionable, see below]`
 (a) `ClearWasteRockConstructionSite:GameInit` (`:60-63`) unguarded `Landscapes[self.mark]`;
 (b) `LandscapeMarkEnd` (`Landscaping.lua:200-206`) unguarded nil mark;
 (c) lake `landscape_grid` overlap only assert-guarded (`LandscapeConstructionController.lua:502-507`,
 release asserts stripped → silent corruption);
 (d) `LandscapeForEachUnit` dead embark filter (`Landscaping.lua:455-469`).
+*Re-read 2026-07-25 (wave 3). Only (d) is a defect that reaches the player, and it is not
+merely a nil guard:*
+* **(d) — FIXED.** The local `filter_embark` is built and then `callback` is handed to
+  `Landscape_ForEachObject` instead. That it is a copy-paste slip and not a decision is
+  settled twice over: `LandscapeForEachStockpile` immediately above (`:436-451`) is written
+  identically and DOES pass its `filter_parent`; and the ordinary construction site applies
+  exactly the same Embark rule to exactly the same question —
+  `ConstructionSite:GetUnitsUnderneath` passes `exit_impassable_filter` = `obj.command ~=
+  "Embark"` (`ConstructionSite.lua:1713-1720`). Two things were lost: the Embark exclusion
+  and the `passed` de-duplication every sibling keeps. Live consumer:
+  `LandscapeConstructionSite:GetUnitsUnderneath` (`LandscapeConstructionSite.lua:21-27`) →
+  `ScatterUnitsUnderneath` (`ConstructionSite.lua:1722-1740`) →
+  `SetCommand("ExitImpassable")`, so landscaping over a boarding point drags colonists out
+  of the vehicle they are entering, repeatedly for any duplicate. Full replacement of the
+  global, reproducing the file-local `foreach_params_unit`.
+  Probe: `LandscapeUnitFilter` in `30_Probes_Wave3.lua`.
+* **(a) — not actionable.** Unreachable as written: `GameInit` is a combined method
+  (`DefineCombinedMethod("GameInit", "procall", "Object")`), so even if `Landscapes[self.mark]`
+  were nil the error is swallowed by `procall`; and no shipped path creates the site without
+  its mark. Adding a guard means replacing a method for no player-visible effect.
+* **(b) — not actionable.** Both shipped callers are already guarded:
+  `LandscapeConstructionController:Deactivate` returns early on `not landscape`
+  (`:242-246`) before reaching `LandscapeMarkEnd` (`:251`), and `:515` runs only after
+  `LandscapeMarkStart` returned a landscape (`:493-496`). Latent / mod-facing only.
+* **(c) — not a guard, a redesign.** `assert(landscape_grid:get(sx, sy) == 0)` followed by
+  an unconditional `set` means an overlapping mark is silently overwritten. Making it safe
+  requires deciding what to do with the contested hexes (skip them, and the site has a
+  hole; refuse the placement, and the player loses an action that works today). That is a
+  behavior change, not a nil guard (FIX_POLICY §4). Left recorded.
 
 ### F35 — Large Wind Turbine buff lost in old saves (P2, high)
 Current `FrictionlessComposites` data is CORRECT (`Data\TechPreset.lua:796-821` targets

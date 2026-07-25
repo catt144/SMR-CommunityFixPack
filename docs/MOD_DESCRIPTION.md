@@ -53,6 +53,11 @@ come back.
   along with any drones nearby. The basin is dug after the site clears units out,
   so anything still standing there was sealed under the new terrain and quietly
   ran out of power.
+- Starting a landscaping job over a boarding point no longer interrupts the
+  colonists boarding there. The sweep that clears units off a new landscaping
+  area was supposed to leave anyone mid-boarding alone — the game builds that
+  exclusion and then forgets to use it, so boarding colonists were pulled back
+  out (sometimes more than once).
 - Small landscaping jobs actually get done. A clear, paint or levelling area only
   a few hexes across gave the approaching drone fewer destinations than the game
   unconditionally read back, which errored and dropped whatever the drone was

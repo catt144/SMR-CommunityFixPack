@@ -55,6 +55,7 @@ and can be individually disabled.
 | FreedHousingNotice | A home falling vacant is offered to the dome's homeless immediately instead of after their next update (up to 12 hours in a big colony) |
 | DomeFreeSpaceMismatch | A dome's free-housing figure counts the same residences the game actually assigns colonists to, so a power dip no longer makes a dome read as full |
 | SmallLandscapeSites | Small landscaping jobs (a few hexes of clearing, painting or levelling) get worked instead of stalling the drone sent to them |
+| LandscapeUnitFilter | Landscaping over a rocket, train or shuttle boarding point no longer drags the colonists who are boarding it back out |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).
