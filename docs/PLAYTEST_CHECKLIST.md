@@ -1463,6 +1463,40 @@ and a few sols of history.
 
 ---
 
+## PT-44 — Founder trait notice and dome pipe cleanup · covers **F23, F24**
+
+**F23 — Founder gains a trait.** Probes cover the wiring; play confirms the
+notification renders and reads correctly.
+1. Play until one of your **Founders** gains a trait (age, a story event, or the
+   Gene Forging / trait-granting paths).
+   - **EXPECTED:** a "Founder gains trait" notification appears, naming the
+     colonist and the trait, and clicking it selects them.
+   - **SURPRISE looks like:** nothing appears (the old behaviour), or two
+     notifications appear for the same event.
+
+`Result (notification appears once, names the right trait?):` _____________________________________________
+
+**F24 — dome absorbing a pipe-connected building.** This one has no probe: it
+needs a real dome and real pipes.
+2. Build a life-support building **outside** a dome and connect it with pipes
+   (Water Extractor, Moisture Vaporator, Water Tank, or an Oxygen tank).
+3. Now build or upgrade a **dome** so that the building ends up **inside** the
+   dome's footprint (the game moves it "inside" the dome's grid).
+   - **EXPECTED:** the pipe stubs and connection graphics at the old boundary
+     disappear cleanly; the building keeps working on the dome's grid; no
+     orphaned plug graphics are left floating.
+4. **Save, quit to the menu, and reload.** The repair sweep that runs on load
+   exercises the same code path.
+   - **EXPECTED:** still clean — no stale pipe visuals reappear, and pipes can
+     still be connected in that area afterwards.
+   - **SURPRISE looks like:** leftover plugs/pipe ends, or a spot where new pipe
+     refuses to connect.
+5. Check the log for errors mentioning `DestroyConnection` or `LifeSupportGrid`.
+
+`Result (clean at absorption / clean after reload / pipes still connectable?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

@@ -60,6 +60,11 @@ return PlaceObj('ModDef', {
 		"Code/Fix_GraphConsumedCaption.lua",
 		"Code/Fix_MoraleComfortTooltip.lua",
 		"Code/Fix_TrainWaitTime.lua",
+		"Code/Fix_FounderTraitNotification.lua",
+		"Code/Fix_DomePipeMoveInside.lua",
+		"Code/Fix_StorageRateModifiers.lua",
+		"Code/Fix_ReplaceTechCount.lua",
+		"Code/Fix_SequenceLatents.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",

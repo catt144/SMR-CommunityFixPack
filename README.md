@@ -55,6 +55,11 @@ and can be individually disabled.
 | DomeFreeSpaceMismatch | A dome's free-housing figure counts the same residences the game actually assigns colonists to, so a power dip no longer makes a dome read as full |
 | SmallLandscapeSites | Small landscaping jobs (a few hexes of clearing, painting or levelling) get worked instead of stalling the drone sent to them |
 | LandscapeUnitFilter | Landscaping over a rocket, train or shuttle boarding point no longer drags the colonists who are boarding it back out |
+| FounderTraitNotification | You are told again when one of your Founders picks up a new trait — the check that decided whether to notify could never succeed |
+| DomePipeMoveInside | When a dome grows to swallow a building, that building's old pipe connections are cleaned up properly instead of being torn down against the dome, which left stale plumbing behind on every load |
+| StorageRateModifiers | Modifiers that change how fast a battery or tank charges and discharges actually reach the grid (nothing in the base game uses these yet — this keeps mods and future updates working) |
+| ReplaceTechCount | Swapping one researched technology for another (used by mods and story events) keeps the research counters correct instead of corrupting them |
+| SequenceLatents | Two scripting-system bugs modders can hit: "pick N random objects with this label" returned all of them, and the Alien Digger timing swap left both values the same |
 | GraphConsumedCaption | The Command Center graph caption for "Consumed" counts maintenance, so the number finally matches the bar it sits next to (Machine Parts and Electronics used to read as almost nothing beside a full-height bar) |
 | MoraleComfortTooltip | A colonist's Morale tooltip stops promising a bonus for high Comfort that the game no longer grants, so the listed effects add up to the Morale shown |
 | TrainWaitTime | Time spent waiting on a train platform is no longer charged a second time as time spent riding — it stopped costing extra Comfort and stopped inflating train and track travel statistics |

@@ -35,13 +35,13 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | fixed  |
 | F21 | Train travel-time penalty includes station waiting       | P2  | med  | fixed  |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
-| F23 | Founder-gains-trait notification never fires             | P3  | high | todo   |
-| F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | todo   |
+| F23 | Founder-gains-trait notification never fires             | P3  | high | fixed  |
+| F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | fixed  |
 | F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | todo   |
 | F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | todo   |
-| F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | todo   |
-| F28 | `Research:ReplaceTech` crashes (latent, mod-facing)      | P3  | high | todo   |
-| F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | todo |
+| F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | fixed  |
+| F28 | `Research:ReplaceTech` crashes (latent, mod-facing)      | P3  | high | fixed  |
+| F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | fixed*|
 | F30 | Lake placement entombs RC builder + drones               | P1  | high | fixed  |
 | F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | todo   |
 | F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | wontfix|
@@ -367,17 +367,36 @@ Probe: `GridGlobalStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
 
 ## P3 — cosmetic / latent / mod-facing
 
-### F23 — Founder-gains-trait notification never fires
+### F23 — Founder-gains-trait notification never fires  `[fixed: Code/Fix_FounderTraitNotification.lua]`
 `Lua\ColonyViability.lua:282-295` — array `FounderGainsTraitCategories` indexed with group
 string → always nil. Handler can't be replaced (OnMsg is additive; original is dead and
 harmless). **Fix:** add our own `OnMsg.ColonistAddTrait` with a proper set
 (`{Positive=true,Negative=true,Specialization=true}`) + dedupe via existing-notification check.
+*Implemented exactly as sketched.* Conditions copied verbatim from the shipped handler,
+`init` guard and single-notification guard included. Handlers run in registration order and
+the shipped one is registered first, so a future game hotfix that repairs the array makes
+the shipped handler add the notification and its own `not FindNotification(...)` guard is
+then what stops ours from adding a second.
+Probe: `FounderTraitNotification` in `40_Probes_Wave4.lua`. Playtest: PT-44.
 
-### F24 — Dome pipe visuals corrupt on load (`MoveInside` copy-paste)
+### F24 — Dome pipe visuals corrupt on load (`MoveInside` copy-paste)  `[fixed: Code/Fix_DomePipeMoveInside.lua]`
 `Lua\LifeSupportGrid.lua:304` — passes `dome` where electricity twin
 (`ElectricityGrid.lua:291`) passes `self` to `DestroyConnection`. Triggered from
 `Dome:OnLoad` (Dome.lua:896-899) repair sweep; stale plugs/connections block future
 `ConnectPipe` visuals. **Fix:** override `LifeSupportGridObject.MoveInside`, `dome`→`self`.
+*Confirmed:* `WaterGrid.DestroyConnection(pt1, pt2, building1, building2, test)`
+(`LifeSupportGrid.lua:157-161`) takes the owner of `pt1` as `building1`, and the two loops
+are otherwise line-for-line identical. So the moving building is never told its own
+connection at `pt` is gone and the dome is told about a hex it does not own.
+*Implemented as a full replacement of `LifeSupportGridObject:MoveInside`
+(`:282-316`)*, byte-identical except the one argument: the call is inside a loop in the
+middle of the function, so no wrapper position reaches it, and wrapping
+`WaterGrid.DestroyConnection` instead cannot work — a wrapper there has no way to know
+which caller handed it the wrong owner. The shipped `assert(IsKindOf(dome, "Dome"))` is
+dropped from the copy (asserts do not unwind; the statements after it already require a
+real dome).
+Probe: `[install]`-free — the fix is verified through F24's own playtest, PT-44, because
+the behaviour needs a real dome absorbing a real pipe-connected building.
 
 ### F25 — Tech description names wrong building (pre-1.0.6 saves only)
 `Data\TechPreset.lua:1486` (`UndergroundLargeDome`, gated `not UndergroundRework106`) —
@@ -389,26 +408,59 @@ description says "Jumbo Cave Reinforcements", tech unlocks `UndergroundDomeMediu
 `dir` (compare Meteors.lua:106-107). Mystery 7 bombardments look uniform. **Fix:** override
 `WaitBombard`, use `GenerateDir(dir, angle)` in `spawn_pos`.
 
-### F27 — Storage charge/discharge rate modifiers ignored (latent)
+### F27 — Storage charge/discharge rate modifiers ignored (latent)  `[fixed: Code/Fix_StorageRateModifiers.lua]`
 `Lua\ElectricityStorage.lua:47-63`, `Lua\LifeSupportStorage.lua:25-42,131-148` —
 `OnModifiableValueChanged` fires for `max_*_charge/discharge` but never copies to
 `element.max_charge/max_discharge` (read in SupplyGrid.lua:164-170). No vanilla modifier
 touches rates; breaks the documented modding surface. **Fix:** post-hook the three
 `OnModifiableValueChanged`s, copy both fields before `UpdateStorage()`.
+*Implemented as sketched, with the copy AFTER the shipped body rather than before it* — the
+shipped body ends with its own `element:UpdateStorage()`, so a post-wrapper that copies the
+rates and calls `UpdateStorage()` again is the smallest change that gets the new rates into
+the same pass. Exact fields confirmed: `NewSupplyGridStorage` (`SupplyGrid.lua:64-76`) seeds
+`max_charge`/`max_discharge` once at creation and `SupplyGridElement:UpdateStorage`
+(`:167-168`) is what reads them every tick. The wrapper no-ops unless the property that
+changed is one of the two rates, and each of the three classes is wrapped independently, so
+one missing target cannot take the other two down.
+Probe: `StorageRateModifiers` in `40_Probes_Wave4.lua`.
 
-### F28 — `Research:ReplaceTech` crashes for researched techs (latent)
+### F28 — `Research:ReplaceTech` mishandles the field counter (latent)  `[fixed: Code/Fix_ReplaceTechCount.lua]`
 `Lua\Research.lua:715` — `if not next(g_TechFieldResearchedCount[field_id] == 0)` →
-`next(boolean)` error; replacement effects never apply. No vanilla caller; hits
-mods/storybits/console. Correct pattern at :246-249. **Fix:** override `Research.ReplaceTech`
+`next()` applied to a boolean. No vanilla caller; hits mods/storybits/console. Correct
+pattern at :246-249. **Fix:** override `Research.ReplaceTech`
 branch with `if g_TechFieldResearchedCount[field_id] == 0 then ... = nil end`.
+*Title corrected — the pack does not claim a crash it has not observed (the F10 lesson).*
+Either `next(false)` raises, in which case the function dies before the very next line's
+`self:SetTechResearched(tech_id_new, "notify")` and the replacement tech is never marked
+researched; or this engine tolerates it as it tolerates `next(nil)`, in which case it
+returns nil, `not nil` is true, and the field's counter entry is dropped even while techs in
+that field are still researched. Both are wrong; both are repaired by writing the comparison
+`Research:SetTechUndiscovered` (`:246-249`) already writes. The probe reports whichever it
+observes. Implemented as a full replacement of `ReplaceTech` (`:684-720`) since the defect is
+mid-function; the three shipped `assert` lines are dropped from the copy (they cannot unwind,
+and `if not status then return end` right after the first is the real guard).
+Probe: `ReplaceTechCount` in `40_Probes_Wave4.lua`.
 
-### F29 — Sequence-system latents (mod-facing bundle)
+### F29 — Sequence-system latents (mod-facing bundle)  `[fixed*: Code/Fix_SequenceLatents.lua — items 1 and 3; item 2 deliberately not fixed, see below]`
 1. `Lua\Sequences\SA_Filters.lua:30-40` — `SA_GetLabelToRegister` ignores
    `random_count`/`random_percent` (returns full list after shuffle). No shipped user.
 2. `Lua\Sequences\SA_Gameplay.lua:2705` — `SA_WaitMarsTime` *generated-code* path inverts
    the workshift wait (`==` should be `~=` vs interpreted `StopWait` :2626). No shipped user.
 3. `Lua\Mysteries\Diggers.lua:91-95` — broken two-variable swap; unreachable with shipped
    defaults, bites subclasses. **Fix:** all three are small overrides; ship for modder benefit.
+*Item 1 fixed:* the shipped body computes `count`, shuffles (which exists only to make a
+truncation fair) and then returns the whole list — `count` is dead. The action's own editor
+text advertises both parameters (`:20-27`). The replacement truncates to `count`.
+*Item 3 fixed:* `local t` is saved and never read, so `self.pre_hit_ground_t_2 =
+self.pre_hit_ground_t` copies the value the line above just overwrote and both fields end up
+holding the LARGER one. The replacement assigns `t`.
+*Item 2 deliberately NOT fixed.* It is real — the generator emits `while CurrentWorkshift ==
+target_workshift ...`, the inverse of the interpreted `StopWait` (`:2617-2631`) — but it is a
+CODE GENERATOR: it runs when a sequence is compiled in the Mod Editor, not while playing,
+and mod code cannot regenerate sequences that were already compiled. Repairing it would mean
+replacing the whole multi-branch generator for a path with no shipped user and no runtime
+effect. Revisit only if a scenario author reports it.
+Probe: `SequenceLatents` in `40_Probes_Wave4.lua` (covers items 1 and 3).
 
 ## Phase 2 findings — details (2026-07-24)
 
