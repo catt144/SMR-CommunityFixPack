@@ -28,6 +28,7 @@ and can be individually disabled.
 | TrackSalvageWipe | Salvaging a single track piece trims the track instead of deleting the whole line and every train assigned to it |
 | LakeEntombment | Building an artificial lake frees the RC Constructor and drones the new basin would otherwise seal in |
 | GhostFarmOxygen | Salvaging a farm removes the oxygen it supplied to its dome (and existing phantom oxygen is cleaned up on load) |
+| RocketDroneChurn | Landed rockets stop sending their delivery drones back to Idle every game hour |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

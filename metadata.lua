@@ -24,6 +24,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_TrackSalvageWipe.lua",
 		"Code/Fix_LakeEntombment.lua",
 		"Code/Fix_GhostFarmOxygen.lua",
+		"Code/Fix_RocketDroneChurn.lua",
 	},
 	'TagGameplay', true,
 })

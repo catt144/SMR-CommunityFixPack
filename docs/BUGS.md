@@ -488,7 +488,7 @@ lingering reports likely F45. "Won't connect to stations": strict geometric rule
 zero feedback, no coding error found (F48 for migrated saves). "Rebuild blocked by raised
 terrain": design (endpoint/turn `max_z_delta` check, `Tracks.lua:35-65,281-284`).
 
-### F50 — Auto-rockets kick approaching drones to Idle every hour (P1, high)
+### F50 — Auto-rockets kick approaching drones to Idle every hour (P1, high)  `[fixed: Code/Fix_RocketDroneChurn.lua]`
 `UniversalRocketBase:HourlyUpdate` (`UniversalRocket.lua:1357-1370`) → `CreateAutoCargoRequest`
 → `SetCargoRequest` → `UpdateCargoResourceRequests` (`CargoTransporterNew.lua:1238-1271`)
 does `DisconnectFromCommandCenters()` + reconnect EVERY HOUR while landed;

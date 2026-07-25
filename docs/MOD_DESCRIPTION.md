@@ -65,6 +65,9 @@ come back.
   no station could ever send out a train again.
 
 **Asteroids & rockets**
+- Drones can finally deliver to rockets. A landed rocket was cancelling the
+  orders of every drone walking towards it, once per game hour, so any trip
+  longer than an hour could never finish no matter what priority you set.
 - Automatic rockets and asteroid landers no longer take off with nothing
   aboard. They wait for cargo as intended instead of burning fuel on endless
   empty round trips.
@@ -96,8 +99,7 @@ come back.
   exist; homeless colonists find the housing that's actually free (invisible
   stale reservations were eating it); turning off "accept colonists" no longer
   secretly stops your residents from shopping through passages; drones keep
-  servicing opened domes; rockets stop yanking their delivery drones away
-  every hour.
+  servicing opened domes.
 - The Philosopher's Stone mystery can no longer hang forever at the finale.
 - The "Low Storage" warning fires for Food and spare parts (it mathematically
   never could); Command Center resource numbers display again; dome overview
