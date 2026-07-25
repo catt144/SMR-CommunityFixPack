@@ -1,6 +1,6 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-25 (build-out session 3, wave 3). This is the handoff snapshot; BUGS.md is
+Updated: 2026-07-25 (build-out session 4, wave 3 COMPLETE). This is the handoff snapshot; BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
 cross-check), MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix
@@ -32,7 +32,7 @@ the Lua console at load and carries observability loggers and state reports.
   Last War mystery import lock at 54%, game-stops-saving. Plus smaller new leads
   from the ChatGPT dossier cross-check (top of RESEARCH.md).
 
-## Implementation: 39 fixes DONE (30 probe-verified in-game 2026-07-25; the 9 wave-3 fixes have probes but NO A/B run yet)
+## Implementation: 48 tracked defects DONE across 47 registered modules (30 probe-verified in-game 2026-07-25; the 18 wave-3 fixes have probes but NO A/B run yet)
 
 Wave 1 (earlier session): F01 cave-ins/NoDisasters, F02 meteor frequency,
 F03* upgrade-modifier leak, F04 night shift, F05 milestone crash, F07+F15* wisp
@@ -48,29 +48,59 @@ wedge, F12 low-storage warning, F13 Command Center numbers, F14 Domes Overview
 highlight.
 (* = partial; the remaining half is recorded on the BUGS.md entry.)
 
-Wave 3 (this session, in queue order): F46 train cargo dumping, F36 university
+Wave 3, first leg (session 3, in queue order): F46 train cargo dumping, F36 university
 overtraining, F38 destroyed tunnels, F39 second artificial sun, F40 Dust Sickness on
 Biorobots, F17 Dust Sickness randomization, F41 Gene Forging, F16 Mirror Sphere site,
-F70* Edit Payload template refill.
+F70 Edit Payload template refill.
+
+Wave 3, second leg (session 4, in queue order): **F71** auto-export capacity priority
+(folded into `Fix_LanderCargoRatchet.lua` — F68 already replaced that function),
+**F72** asteroid-lander availability gate, **F54** switched-off shuttle hubs,
+**F59*** freed housing notifies the homeless, **F60** dome free-space member mismatch,
+**F33** small landscaping site drone crash, **F34*** landscape units-underneath filter,
+**F35 + F03 sweep** in the new `Code/90_SaveSanitizer.lua`, and **D01** as the opt-in
+`Code/Opt_ClassicRockets.lua` (fuel half only).
 (* = partial; the remaining half is recorded on the BUGS.md entry.)
 
+**The whole wave-3 queue is now done.** Nothing from the session-3 handoff list is left
+except the four entries deliberately parked as `blocked` (see below).
+
 **Wave-3 fixes have not been run in-game at all.** Each ships with a probe in the Test
-Kit's new `Code/30_Probes_Wave3.lua` (registered in its metadata), but no RunAll A/B pair
-has been executed since wave 2. That pair is the first thing the next QA leg should do.
+Kit's `Code/30_Probes_Wave3.lua` (19 probes, registered in its metadata), but no RunAll A/B
+pair has been executed since wave 2. That pair is the first thing the next QA leg should do.
 
-Three wave-3 fixes add their own `OnMsg.LoadGame` repair pass: F38 (close destroyed
+Three first-leg fixes add their own `OnMsg.LoadGame` repair pass: F38 (close destroyed
 tunnels left open in pathfinding), F39 (reconnect solar panels to a sun in range), F40
-(clear Dust Sickness from already-infected Biorobots). F70 introduces the pack's first
-persisted member, `transporter.SMRFixPack_payload_set` (a single boolean, absence = the
-pre-fix behaviour, so removing the mod is still safe).
+(clear Dust Sickness from already-infected Biorobots).
 
-Six fixes carry a one-shot `OnMsg.LoadGame` / `OnMsg.NewDay` repair pass for state
-already baked into savegames: F02 (thread restart), F45 (stamp repair sites),
-F37 (remove phantom farm oxygen), F58 (release stale reservations), F06 (restart
-the crystal repeater), plus F55's expiry which self-heals. The consolidated
-`Code/90_SaveSanitizer.lua` module is still a later phase — the remaining sweeps
-it was to collect are F03 (leaked modifiers), F35 (turbine buff) and F48
-(connectors).
+`Code/90_SaveSanitizer.lua` now exists and carries the remaining consolidated sweeps:
+**F35** (restore the Frictionless Composites label modifiers the shipped migration fixup
+dropped) and **F03** (remove upgrade modifiers orphaned by salvaged buildings). Both are
+idempotent, both run on `OnMsg.LoadGame`, and both are exposed on `SMRFixPack.Sanitizer`
+so QA can re-run them from the console (`RepairTurbineBuff` / `RepairLeakedUpgradeModifiers`,
+each returns a repair count). **F48 is NOT in it** — see its BUGS.md entry.
+
+Other fixes carrying their own one-shot `OnMsg.LoadGame` / `OnMsg.NewDay` pass for state
+already baked into savegames: F02 (thread restart), F45 (stamp repair sites), F37 (remove
+phantom farm oxygen), F58 (release stale reservations), F06 (restart the crystal repeater),
+plus F55's expiry which self-heals.
+
+**Savegame footprint** (FIX_POLICY §3 — all absent-tolerant): `colonist.SMRFixPack_reserved_at`
+(F58), `transporter.SMRFixPack_payload_set` (F70), an entry keyed `smr_shuttles` on a
+transport-cache entry (F51, a hash key that does not affect `table.unpack`), and — only
+where the sanitizer repaired one — a label modifier under `SMRFixPack_F35_<label>` (F35).
+README's old "stores nothing in your savegames" claim has been corrected accordingly.
+
+## Optional modules (new in session 4)
+
+Off by default, enabled with `SMRFixPack_Optional = { <Id> = true }` before the mod loads;
+`SMRFixPack.ListFixes()` reports them as `inactive` with the opt-in reason until then.
+Files use an `Opt_` prefix instead of `Fix_` to mark them as not-bug-fixes.
+
+- **ClassicRockets** (D01, `Code/Opt_ClassicRockets.lua`) — a player-controlled rocket
+  parked at the colony keeps its launch ration requested even with no destination selected,
+  so drones refuel it while it waits. Only the fuel half of D01; the standing Rare Metals
+  export half is deliberately unwritten (see the D01 entry).
 
 ## QA session snapshot (Fable, 2026-07-25) — kept for the audit record
 
@@ -135,28 +165,43 @@ F44 curve-ended track visual check, wave-1 heading tags.
   repo before relying on it. Retail exe ignores -save/-map (goldmaster-gated,
   autorun.lua:126-144); Mars.exe launches directly, no external Paradox launcher.
 
-## Next up — wave-3 queue, resume here
+## Blocked in wave 3 — four entries needing a decision, not more code
 
-The wave-3 leg stopped after F70. Remaining, in order:
+Each has a full write-up on its BUGS.md entry. None is blocked on effort; all four are
+blocked because the remedy is not a defect repair, or because the shipped code no longer
+matches the tracker.
 
-1. **F71** auto-export allocates capacity alphabetically. Careful: the target
-   (`CreateAutoCargoRequest`, `UniversalRocket.lua:1736-1758`) is already replaced by
-   wave 2's `Fix_LanderCargoRatchet.lua` — F71 must be folded into that file's copy or
-   layered on top of it, not written as a second independent replacement.
-2. **F72** "No available Asteroid Landers" while one sits on the pad
-   (`PlanetaryView.lua:433-444`, `PlanetUI.lua:1623-1651`).
-3. **F54** switched-off shuttle hubs count as transport available.
-4. **F59/F60/F62/F63** housing/service reach bundle.
-5. **F32** notification suppression (data patch on three NotificationPresets).
-6. **F33/F34** landscape nil guards.
-7. **`Code/90_SaveSanitizer.lua`** — the consolidated savegame sweeps: **F35**
-   (turbine buff; skipped in step 1 deliberately because it is a pure LoadGame sweep
-   with no live half), **F03** (leaked upgrade modifiers), **F48** (station connectors).
-8. **D01** opt-in classic-rockets module.
-9. Test Kit side-task: give the F51 shuttle-cache probe a scenario strict enough to
-   discriminate (it PASSes even unfixed on a fresh colony).
-10. Also queued from F70: the legacy `LanderRocketCargoRequest:RetrieveRequests`
-    one-word guard correction — see the F70 entry in BUGS.md.
+| ID | Why it is parked | What would unblock it |
+|----|------------------|------------------------|
+| **F32** | The shipped data already carries the fix. `NotWorkingBuildings` — the one preset the described re-add mechanism applies to — now has `Suppressable = true` / `SuppressTime = 120000`. The other two (`DestroyedInfrastructure`, `RoverDamaged`) are one-shot event adds with no re-add path, so suppressing them would hide real events. | A decision to close it as `wontfix`. |
+| **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | An in-game test on a save with a healthy network **and** a meteor-damaged track. Then it goes in the sanitizer behind a one-shot flag. |
+| **F62** | Services really do reach one passage hop. But the codebase uses direct adjacency for cross-dome work **and** service consistently (`AreDomesConnected` is `connected_domes[b]`); the transitive variant has only two callers in all of Src, both walkability/pathing. Extending it is a behavior + performance change — which the sketch itself conceded. | A decision that it is in scope. If yes → opt-in module, not the default pack. |
+| **F63** | Same shape. There is no broken hookup: no `TrainingEval` exists anywhere next to `WorkplacesEval` / `ResidencesEval`, so training was never a term in the emigration score. Adding one is a feature. | Same decision as F62. |
+
+Recorded on those entries but deliberately untouched (real inconsistencies, no action):
+walkability says A↔C is walkable while services say C is invisible from A;
+`CanWorkTrainHereDomeCheck` permits training at a train-reachable school that
+`ChooseTraining` never offers; the `PlanetaryAsteroidVisitPossible` legacy branch's
+`and`/`or` precedence slip; `IsDifferentAsteroidLocation` comparing a map to a
+MapDescriptor. All are permissive failures — none blocks a player.
+
+## Next up — wave 4 (nothing from wave 3 is left)
+
+21 tracked entries are still `todo`: F18, F19, F20, F21, F22, F23, F24, F25, F26, F27, F28,
+F29, F31, F42, F43, F47, F49, F56, F57, F65, F66. Six entries are `fixed*` partials whose
+open half is recorded on the entry: F15, F34, F52, F55, F58, F59.
+
+Suggested order for the next build leg (largest player impact first):
+
+1. **F56** Auto RC Transports never offload rockets (P2, high) — completes the
+   F50/F68/F71 rocket-logistics family.
+2. **F65/F66** station↔tunnel power bridge and connector hex ping-pong (P2, med+) —
+   the "tracks won't connect" family, and the last big train items.
+3. **F22** `GetGridGlobalStorage` breaking Last Transmission gates (P2, med).
+4. **F19/F20/F21** the numbers/tooltip trio (P2) — small, self-contained, low risk.
+5. **F23/F24/F27/F28/F29** the latent / mod-facing bundle (P3) — cheap, ships for
+   modder benefit.
+6. **F42/F43/F47/F49/F57/F31/F18/F25/F26** the remaining P2/P3 tail.
 
 ## Key technical facts (hard-won, do not re-derive)
 
@@ -340,19 +385,24 @@ that "passed" or SKIPped were not testing what they claimed.
 4. An in-game observation for F55: do drones still enter a dome after the roof is
    opened? The Lua half of that report turned out not to be actionable (see the
    F55 entry) — only play can tell us whether the entity data is at fault.
-5. Manual playtest per `docs/PLAYTEST_CHECKLIST.md` (31 tests — PT-23..PT-31 are the
-   new wave-3 group 6; no third-party mods;
+5. Manual playtest per `docs/PLAYTEST_CHECKLIST.md` (35 tests — PT-23..PT-35 are the
+   wave-3 group 6; no third-party mods;
    covers what scripts can't: feel, visuals, UI, long-running behavior). Results
    reported back flip each covered fix's BUGS.md status to `tested` — see that
    file's "Reporting protocol" section for the exact follow-up workflow.
+6. **Four decisions, not code** — the wave-3 blocked table above: close F32 as `wontfix`?
+   in-game test to unblock F48? are F62/F63 in scope at all, and if so as an opt-in module?
+7. A donated save that researched **Frictionless Composites before the game patched the
+   tech** is the only true fixture for the F35 sanitizer pass (PT-35 case C). Everything
+   else about that pass is probe-covered.
 
 ## Save-rescue expectations (for release messaging + sanitizer design)
 
 ~60% of fixes help broken saves IMMEDIATELY (behavioral code re-evaluated every
 tick/cycle: drones, colonists, schedulers — F02 pattern of thread-restart on
-LoadGame where needed). ~25% need active repair; six of those passes now ship
-(see above), the rest are queued for the sanitizer module (F03 leaked modifiers,
-F35 turbine buff, F48 connectors). ~15% is irreversible history (dead colonists,
+LoadGame where needed). ~25% need active repair; those passes now ship — eight in
+their own fix files plus F03 and F35 in `Code/90_SaveSanitizer.lua`. Only F48
+remains queued, and it is blocked on an in-game test (see the blocked table). ~15% is irreversible history (dead colonists,
 lost expeditions; F64 voided trains have no recorded count — heuristic
 compensation option at best, and document the vanilla train re-purchase at
 stations, Station.lua:573-611). Save rescue is the headline differentiator vs
@@ -382,3 +432,6 @@ Real author + version bump in metadata.lua; player-facing fix list in README +
 mod description; upload via in-game Mod Editor (check docs/.git exclusion; the
 Test Kit must NOT be uploaded); credit ChoGGi (Fix Bugs) + LukeH (Martian
 Express) as prior art; keep per-fix disable instructions in the description.
+Three `[DRAFT NOTE]` markers remain in `MOD_DESCRIPTION.md` (lines ~6, ~257, ~277) and are
+deleted before the text ships. The one at ~257 is load-bearing: do NOT promise the
+ClassicRockets module's unwritten Rare Metals export half.
