@@ -67,7 +67,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | todo   |
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | todo   |
 | F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | todo   |
-| F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | todo   |
+| F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
 | F56 | Auto RC Transports never offload rockets                 | P2  | high | todo   |
 | F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
 | F58 | Invisible residence reservations never expire            | P1  | high | todo   |
@@ -532,7 +532,7 @@ passable; if dest not walkable and no route, wait near rocket + retry dome selec
 colonists queue on pickup spots outside for shuttles that never come; walkability logic
 also skewed (`Dome.lua:256-259`). **Fix:** predicate counts only self-lifting suspensions.
 
-### F55 — Open domes: drone access lost + unreachable-forever cache (P1, med — matches report exactly)
+### F55 — Open domes: drone access lost + unreachable-forever cache (P1, med — matches report exactly)  `[fixed*: Code/Fix_DroneUnreachableForever.lua — the unreachable-forever cache (3) is fixed; the open-air entrance half (1) is NOT actionable, see below]`
 (1) Open-air skin swaps dome entity with `skin[2] = empty_table`
 (`OpenAirBuilding.lua:216-237`) → `Dome_Entrance` attaches destroyed
 (`Building.lua:2409-2430`) → their PF tunnels (only drone routes in,

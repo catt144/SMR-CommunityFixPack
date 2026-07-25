@@ -28,6 +28,10 @@ come back.
   delay strikes instead of accidentally making things worse.
 
 **Buildings & economy**
+- A drone that fails to reach a building once no longer ignores it for the rest of
+  the game. The game has a five-sol "try again" timer for this, but the failure was
+  recorded so far in the future that the timer could never fire — so drones quietly
+  stopped servicing buildings that were briefly blocked.
 - Salvaging a farm now removes the oxygen it was giving its dome. Every farm you
   ever removed was still supplying air to that dome forever, and each rebuild
   added another invisible supply on top. Existing phantom oxygen is cleaned out

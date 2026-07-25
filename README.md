@@ -32,6 +32,7 @@ and can be individually disabled.
 | ShuttleTransportCache | Building a Shuttle Hub is noticed: colonists stop being stuck on a cached "there is no route" verdict |
 | VacuumWalks | Colonists moving between nearby domes in an unbreathable atmosphere use the passages instead of walking across the surface |
 | ArrivalDeaths | New arrivals stop marching to a dome they cannot reach, and no longer disembark into impassable ground |
+| DroneUnreachableForever | A drone that once failed to reach a building tries again later instead of ignoring it for the rest of the game |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).
