@@ -55,7 +55,11 @@ The game's Lua source (read-only, NEVER modify) is at
      to deactivate gracefully. Never error, never assume.
 3. Add the file to `metadata.lua`'s `code` list (order matters: 00_Core first).
 4. Same commit: BUGS.md index status → `fixed` (+ tag on the detail heading),
-   player-language line in README's fix table and MOD_DESCRIPTION.md.
+   player-language line in README's fix table and MOD_DESCRIPTION.md. If the fix
+   has an aspect script probes cannot verify (visuals, UI feel, long-running
+   behavior), also append a PT-entry to `docs\PLAYTEST_CHECKLIST.md` in the
+   existing format (reuse its save fixtures; verify any console command against
+   `ModTools\Src` — the checklist documents which cheats are retail-dead).
 5. Commit with `git -c user.name="SMR-BugFixPack"
    -c user.email="154917955+catt144@users.noreply.github.com"`,
    message: `Implement F## (<short name>)`. One fix per commit. Push to origin
