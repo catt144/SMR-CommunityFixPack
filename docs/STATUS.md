@@ -521,8 +521,16 @@ official patches ("new games only") — lead with it.
   (Mod.lua:180-201). Default ignore_files already excludes *.git/*.
 - Public repo: github.com/catt144/SMR-CommunityFixPack (main). Commit identity
   is the GitHub noreply address — never commit with a real email again.
-- Achievements are disabled while any mod is active (ModManager.lua:78) —
-  mention in the mod description.
+- **CORRECTED 2026-07-26 (user unlocked one in play):** achievements are NOT
+  disabled by mods on PC/Steam. `DoModsBlockAchievements()` returns
+  `Platform.playstation or Platform.xbox or Platform.windows_store`
+  (Achievement.lua:61-63) — the ModManager.lua:78 string is warning TEXT shown
+  only behind that gate. Mods block achievements on console/MS Store ONLY.
+  Separately, cheat use is logged per save (`LogCheatUsed` → persisted
+  `CheatsUsed`, Network.lua:241-255) and adds "cheats used" to the
+  unlock-refusal reasons on retail — so cheated fixture saves self-block their
+  achievements. Mod description: say achievements keep working on PC, are
+  disabled on consoles.
 
 ## Release checklist (when fixes are tested)
 

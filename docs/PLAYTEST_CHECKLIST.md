@@ -44,8 +44,12 @@ tested. Nothing ships as "verified" on probe evidence alone.
    disables *the fix pack only* and keeps the Test Kit on.
 3. **The Test Kit must NEVER be uploaded anywhere** — not Workshop, not Paradox Mods,
    not the public repo release. It is a dev-only companion.
-4. **Achievements are off** while any mod is active (`ModManager.lua:78`) — expected,
-   not a bug.
+4. **Achievements stay ON with mods on PC** (they are mod-blocked only on
+   console/MS Store — `DoModsBlockAchievements()`, `Achievement.lua:61-63`), so an
+   unlock during playtesting is normal. Cheat use is logged per save and blocks
+   that save's further unlocks on retail (`Network.lua:241-255`) — so cheated
+   fixture saves police themselves; you may still pop legitimate achievements in
+   the minutes before the first cheat.
 5. If a step's setup fails, write that down. "Could not set this up" is a valid and
    useful result.
 6. **If Enter opens no console** in a loaded colony (the Test Kit's auto-enable has

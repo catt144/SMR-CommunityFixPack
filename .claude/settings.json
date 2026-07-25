@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git -C C:\\\\Dev\\\\SMR-BugFixPack worktree list)",
+      "PowerShell(git -C C:\\\\Dev\\\\SMR-BugFixPack branch -a)",
+      "PowerShell(git -C C:\\\\Dev\\\\SMR-BugFixPack-TestKit worktree list)",
+      "PowerShell(git -C C:\\\\Dev\\\\SMR-BugFixPack-TestKit branch -a)"
+    ]
+  }
+}

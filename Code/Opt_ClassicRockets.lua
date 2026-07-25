@@ -35,9 +35,12 @@
 -- `arrival_loc` (UniversalRocket.lua:1687-1692) — so there is no "refuelled"
 -- spam and no entry in g_LandedRocketsInNeedOfFuel. (A third path,
 -- DroneUnloadResource's Msg("RocketRefueled") at CargoTransporterNew.lua:1367-1371,
--- can fire when the ration tops off, but its only listeners no-op here:
--- RocketRefueledInADay is gated on arrival_loc, UniversalRocket.lua:1790, and
--- the achievement event is moot while mods are active, ModManager.lua:78.)
+-- can fire when the ration tops off, but its listeners are benign here:
+-- RocketRefueledInADay is gated on arrival_loc (UniversalRocket.lua:1790), and
+-- the remaining listener is a refuel achievement event (Achievement.lua:263) —
+-- live on PC (mods only block achievements on console, Achievement.lua:61-63),
+-- but a parked rocket topping off its ration IS a refuel, so crediting it is
+-- defensible.)
 --
 -- Chained wrapper, and only when the shipped answer is 0 — every case the game
 -- already answers, including F69's asteroid-lander reserve, falls through
