@@ -4,13 +4,15 @@ Updated: 2026-07-26 (**wave-4 BUILD leg done — 14 new fix modules on the `wave
 branch, NOT merged to main**; see "Wave 4" below. Prior entry: QA session 5 wrap-up —
 wave-3 A/B CLEAN, all tracker decisions made, session prompts staged).
 **Three prompts, three triggers:**
-- `docs/OPUS_BUILD_PROMPT.md` — Opus wave-4 build leg. Safe to run DURING the user's
-  playtest: it works on `wave4` branches in separate worktrees and never touches the
-  junctioned main trees the game loads from.
+- `docs/OPUS_BUILD_PROMPT.md` — Opus **wave-5** build leg (the eight-entry P2/P3 tail).
+  Safe to run DURING the user's playtest: it CONTINUES on the existing `wave4` branch
+  in the `-wave4` worktrees and never touches the junctioned main trees the game loads
+  from. It must not branch off main — wave 4 is unmerged, so main lacks the 14 modules
+  wave 5 builds on top of.
 - `docs/FABLE_PLAYTEST_PROMPT.md` — processes the user's manual playtest report
   (PASS→`tested` flips, FAIL→new findings, the PT-36/37/38 decision gates).
-- `docs/FABLE_QA_PROMPT.md` — wave-4 QA leg, AFTER both of the above: merges `wave4`
-  to main, runs the A/B pair, audits divergences. BUGS.md is
+- `docs/FABLE_QA_PROMPT.md` — QA leg, AFTER both of the above: merges `wave4`
+  to main and runs the A/B pair over waves 4 AND 5 together, audits divergences. BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
 cross-check), MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix
@@ -116,6 +118,11 @@ Files use an `Opt_` prefix instead of `Fix_` to mark them as not-bug-fixes.
   parked at the colony keeps its launch ration requested even with no destination selected,
   so drones refuel it while it waits. Only the fuel half of D01; the standing Rare Metals
   export half is deliberately unwritten (see the D01 entry).
+  **This module is also where F56 would land** if the closed-`wontfix` auto-offload
+  decision is ever reopened (user decision 2026-07-26): auto-offload and the export half
+  are the same "rockets should load and unload themselves like they used to" request over
+  the same machinery, so they ship together behind this one flag or not at all. Do not
+  create an `Opt_AutoRocketOffload`.
 
 ## QA session (wave 3) — Fable, 2026-07-25 evening: A/B pair CLEAN, audits done
 
@@ -258,14 +265,15 @@ F44 curve-ended track visual check, wave-1 heading tags.
   repo before relying on it. Retail exe ignores -save/-map (goldmaster-gated,
   autorun.lua:126-144); Mars.exe launches directly, no external Paradox launcher.
 
-## Blocked in wave 3 — four entries needing a decision, not more code
+## Parked by decision, not by effort — one entry left open (F48)
 
-Each has a full write-up on its BUGS.md entry. None is blocked on effort; all four are
-blocked because the remedy is not a defect repair, or because the shipped code no longer
-matches the tracker.
+Each has a full write-up on its BUGS.md entry. None was parked for effort; each was parked
+because the remedy is not a defect repair, or because the shipped code no longer matches
+the tracker. **Only F48 is still open** — the other four are closed.
 
 | ID | Why it is parked | What would unblock it |
 |----|------------------|------------------------|
+| **F56** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds as F62/F63.** Screened in the wave-4 build leg: the cited code is designed scope (`GetAutoGatherDeposits` is a declared accessor; the `Automation_Unload` rocket exclusion goes through the Relaunched `IsRocketClass` shim, i.e. maintained intent; auto mode promises only "gather resources"). **No standalone opt-in** — if revisited it belongs in `Opt_ClassicRockets` beside D01's unwritten export half, never in an `Opt_AutoRocketOffload` of its own. | — done. Rides on whatever design decision D01's export half gets, or stays closed. |
 | **F32** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** The shipped data already carries the fix (`NotWorkingBuildings` is now `Suppressable`); the other two presets are one-shot adds. The residual by-design annoyance (2-real-minute window, per-category suppression, no per-building ack) is spun out as **D02** — a planned `Opt_AcknowledgedWarnings` module, gated on **PT-38**; MOD_DESCRIPTION carries a player-facing "looks like a bug, isn't" explainer. | — done. D02 build belongs to a wave-4+ leg after PT-38. |
 | **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
 | **F62** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** Verified identical to the original game (same one-hop algorithm, same two transitive-predicate callers): carried-forward dev vision in both games, breaks nothing. No opt-in module planned. | — done. |
@@ -305,11 +313,15 @@ Implemented, in queue order:
 | **F29** | `Fix_SequenceLatents` | `fixed*` — items 1 and 3; item 2 is a Mod Editor code generator, deliberately left |
 | **F18** | `Fix_IndependenceTerraforming` | `fixed*` — preset half; already-researched saves keep 10% |
 
-**Blocked, needs a decision (not a defect):** **F56** — screened before implementing and
-found to be designed scope, not a defect (`GetAutoGatherDeposits` is a declared accessor;
-the `Automation_Unload` rocket exclusion uses the Relaunched `IsRocketClass` shim, i.e.
-maintained intent; auto mode promises only "gather resources"). Same shape as F62/F63:
-`wontfix` or a wave-5 opt-in `Opt_AutoRocketOffload`. Full write-up on the entry.
+**Screened and CLOSED `wontfix` (user decision 2026-07-26): F56.** Screening before
+implementing found designed scope, not a defect — `GetAutoGatherDeposits` is a declared
+accessor, the `Automation_Unload` rocket exclusion goes through the Relaunched
+`IsRocketClass` shim (i.e. a developer consciously re-stated it for the new class tree),
+and auto mode promises only "gather resources". Closed on the same grounds as F62/F63:
+deliberately maintained design, breaks nothing. **No standalone opt-in is planned** — if it
+is ever revisited it belongs in `Opt_ClassicRockets` beside D01's unwritten Rare Metals
+export half, not in a module of its own (same request, same machinery, and shipping them
+apart would let a player enable emptying without refilling). Full write-up on both entries.
 
 **Still `todo` after wave 4 — eight entries, the P2/P3 tail:** F25, F26, F31, F42, F43,
 F47, F49, F57. Suggested order for a wave-5 build leg (largest first): **F47** track

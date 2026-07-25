@@ -68,7 +68,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
 | F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | fixed  |
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
-| F56 | Auto RC Transports never offload rockets                 | P2  | high | blocked|
+| F56 | Auto RC Transports never offload rockets                 | P2  | high | wontfix|
 | F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
@@ -894,7 +894,7 @@ unverifiable from Lua. **Fix:** override `Dome:CalcOpenAirSkin` to preserve entr
 attaches; override approach-failure cache to store `GameTime()` so `CleanUnreachables`
 retires entries.
 
-### F56 — Auto RC Transports never offload rockets (P2, high)  `[blocked — screened wave 4: the cited code is a designed scope, not a defect; needs a decision]`
+### F56 — Auto RC Transports never offload rockets  `[wontfix — user decision 2026-07-26: deliberately maintained design, breaks nothing; same grounds as F62/F63]`
 `RCTransport.lua`: `Automation_Gather` (:884-908) sources only surface deposits;
 `Automation_Unload` (:910-941) excludes rockets as destinations. Manual load/routes work —
 players correctly perceive AUTO as broken. Combined with F50 + shuttle exclusion, remote
@@ -917,8 +917,24 @@ feature, not a repair.* Three findings, in order of weight:
    (`CanLoad` :310-324 admits `UniversalRocketBase`; `InteractWithObject` :419-429 opens
    the resource selector on one; `TransferAllResources` :1217-1300 is class-agnostic).
 Adding rocket pickup to automation is therefore new capability — FIX_POLICY §4 territory,
-the same class as D01/D02. **Decision needed:** `wontfix` (carried-forward design, as with
-F62/F63) or a wave-5 opt-in `Opt_AutoRocketOffload` module. Not implemented either way.
+the same class as D01/D02.
+
+**CLOSED `wontfix` 2026-07-26 (user decision), on the same grounds as F62/F63:**
+deliberately maintained design, breaks nothing. The rocket exclusion was consciously
+carried into Relaunched (point 2 above is the proof — a developer re-stated it through the
+new compatibility shim), and the manual paths the entry itself credits are the intended
+way to service a rocket with an RC Transport.
+
+*If it is ever revisited, it does NOT get a standalone module.* An auto-offload option
+belongs **alongside D01's unwritten Rare Metals export half**, in `Opt_ClassicRockets`, not
+in an `Opt_AutoRocketOffload` of its own. Both are the same request wearing two hats —
+"make rockets load and unload themselves again, the way the original game did" — both are
+opinions about rocket logistics rather than repairs, and both touch the same machinery
+(`SetCargoRequest`, the payload dialog, Automated Mode's `export_above` thresholds, and the
+F50/F68/F70/F71 request path). Shipping them separately would let a player enable half a
+behaviour and get a colony where rockets are emptied but never refilled. So this rides on
+whatever design decision D01's export half eventually gets — same module, same opt-in flag,
+same playtest — or it stays closed.
 *Origin note:* the player report behind this entry is recorded in `RESEARCH.md` as
 "**Drones** ignore rocket cargo even at high priority; RC Transports don't auto-offload
 rockets". The drone half is the load-bearing complaint and is already addressed by F50.
@@ -1104,6 +1120,13 @@ means editing the same machinery as F50, F68, F70 and F71 — with no way to tes
 in-game from the build seat, and for a change that is by this entry's own verdict not a
 defect. It needs a design decision (what threshold? which resources? what interaction with
 Automated Mode?) plus a playtest before it is written.
+*The export half now also owns F56.* F56 (auto RC Transports never offload rockets) closed
+`wontfix` 2026-07-26 on the same "deliberately maintained design" grounds, with the note
+that if it is ever revisited it belongs in THIS module rather than in one of its own — same
+request ("rockets should load and unload themselves like they used to"), same machinery,
+and shipping the two separately would let a player enable an emptying behaviour without the
+refilling one. So whenever the export half gets its design decision, decide auto-offload in
+the same pass and behind the same `ClassicRockets` flag.
 
 ### D02 — Dismissing a "Building Not Working" warning only silences it for 2 real minutes — BY DESIGN, feels like a bug (planned opt-in)
 Spun out of F32's close (2026-07-26, user decision) — read that entry for the full trace.
