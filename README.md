@@ -37,6 +37,7 @@ and can be individually disabled.
 | HomeDomeMigrationGate | Turning off "accept colonists" no longer stops a dome's own residents from shopping, working and training next door |
 | CrystalMysteryHang | The Philosopher's Stone mystery finishes even if you leave its Epilogue popup unread for a sol |
 | TouristSatisfaction | Tourist satisfaction stops drifting downwards — a stat rising past two thresholds now pays as much as falling back charges |
+| TrainPlatformWedge | A passenger who is no longer aboard no longer wedges the train at the platform forever |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

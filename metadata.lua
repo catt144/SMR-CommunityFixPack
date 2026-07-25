@@ -33,6 +33,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_HomeDomeMigrationGate.lua",
 		"Code/Fix_CrystalMysteryHang.lua",
 		"Code/Fix_TouristSatisfaction.lua",
+		"Code/Fix_TrainPlatformWedge.lua",
 	},
 	'TagGameplay', true,
 })

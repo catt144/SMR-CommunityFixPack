@@ -183,7 +183,7 @@ where the per-hour table only exists for hours with positive gain (`ChangeFundin
 `Brazil.lua:42`, `Russia.lua:84` (export/tourism income gates never evaluate true).
 **Fix:** redefine `Funding.GetLastSolsFundingByType` with `or empty_table` guards.
 
-### F11 — Train wedges at platform (`table.remove` misuse)
+### F11 — Train wedges at platform (`table.remove` misuse)  `[fixed: Code/Fix_TrainPlatformWedge.lua]`
 `Lua\Units\ColonistTransport.lua:541-547` (`ExitVehicle` stale-passenger guard) —
 `table.remove(vehicle.units, self)` needs an integer pos; intended API is
 `table.remove_entry`. When the guard fires (dev comment: CargoTransporter abduction),

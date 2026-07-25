@@ -80,6 +80,9 @@ come back.
   5-star ones.
 
 **Trains**
+- Trains no longer park at a platform forever. If a passenger stopped being aboard
+  mid-journey, unloading hit an internal error and the train sat waiting for
+  someone who could never get off, blocking the line.
 - Salvaging a single track piece no longer deletes the entire line — and the
   trains assigned to it. Curved sections and short tracks were the worst
   offenders, and salvage is instant with no confirmation.
