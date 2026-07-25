@@ -127,7 +127,7 @@ with corrected iteration (`pairs` outer, `ipairs` inner, honoring `only_for_obje
 Consider optional one-shot savegame sweep for already-leaked modifiers (id pattern
 `"%d+_upgrade%d_mod_%d"` with no live building).
 
-### F04 — Night-shift workers never return to work after midnight
+### F04 — Night-shift workers never return to work after midnight  `[fixed: Code/Fix_NightShiftWork.lua]`
 `Lua\Units\Colonist.lua:1758-1768` — `ShouldLeaveForWork` window for shift 3
 (`DefaultWorkshifts = {{6,14},{14,22},{22,6}}`, `_GameConst.lua:370`) evaluates as
 `hour >= 21 and hour <= 25`; hours 0-1 unreachable (hour is 0-23, no wrap). Shift-1/2 get a
@@ -136,7 +136,7 @@ Only gate that sends colonists to work (`Colonist:Idle` :1911). **Fix:** overrid
 `Colonist.ShouldLeaveForWork` using modular distance `(hour - start) % 24`, incl. the
 `leave_early_for_work` branch.
 
-### F05 — Milestone completion crashes (NoTerraforming/NoPolitics)
+### F05 — Milestone completion crashes (NoTerraforming/NoPolitics)  `[fixed: Code/Fix_MilestoneCrash.lua]`
 `Lua\Milestones.lua:87-100` — hidden-but-uncompleted milestones fall through to
 `score_sum + milestone:GetScore()`; `GetScore()` returns nil when uncompleted (:23-28) →
 arithmetic-on-nil inside `CompleteMilestone`. Hidden milestones are guaranteed under
@@ -153,13 +153,13 @@ is missed → mystery never completes, `Msg("MysteryEnd")` never fires. **Fix:**
 `OnMsg.CrystalFlyAway` sets a persistent flag + game-time thread re-broadcasting until the
 mystery ends, so late listeners catch it.
 
-### F07 — St. Elmo's Fire "free wisps" gives ~1/1000 power
+### F07 — St. Elmo's Fire "free wisps" gives ~1/1000 power  `[fixed: Code/Fix_WispRewards.lua]`
 `Lua\Mysteries\Fireflies.lua:692` — `trap.el_prod_modifier:Change(#trap.fireflies)` missing
 `* 1000`; sibling paths :346 and :479 have it. `ObjectModifier:Change` sets absolutely
 (Modifiers.lua:321-331), so the broken value persists until wisp count changes (typically
 next 4 AM). **Fix:** override `SetLightTrapMode`; in "free" branch multiply by 1000.
 
-### F08 — Tourist star-rating applicant bonus inverted
+### F08 — Tourist star-rating applicant bonus inverted  `[fixed: Code/Fix_TouristApplicants.lua]`
 `Lua\HolidayRating.lua:77` — `if Random(0,100) > bonus_chance` grants the bonus with
 probability ~(100 − chance); rewards table (:2-11) is plainly a monotonic progression.
 As shipped, 2-star tourists yield fewer applicants than 1-star. Codebase idiom elsewhere:
@@ -176,7 +176,7 @@ payouts. Visible as 2 red rows down / 1 green row up in the satisfaction log. **
 replace `Colonist.UpdateSatisfaction` (self-contained) with symmetric tier-based version
 (tiers: <low / [low,high) / [high,100) / 100; apply signed sum of awards between tiers).
 
-### F10 — Faction funding conditions always error
+### F10 — Faction funding conditions always error  `[fixed: Code/Fix_FactionFundingCheck.lua]`
 `Lua\Funding.lua:104-117` (`GetLastSolsFundingByType`) — `pairs(funding_gain_last_hours[hour])`
 where the per-hour table only exists for hours with positive gain (`ChangeFunding` :52-65)
 → `pairs(nil)` error for most hours. Breaks `Data\FactionDef\BlueSun.lua:34,54`,
@@ -212,13 +212,18 @@ missed). Nil → `FormatResource` renders empty. **Fix:** define 11 shims
 `win.idLabel:SetText(v)`. **Fix:** override `Community.UICommandCenterStatUpdate`, end with
 `SetText(tv)`.
 
-### F15 — Mystery 11 wisp RP rewards double/silent
+### F15 — Mystery 11 wisp RP rewards double/silent  `[fixed*: Code/Fix_WispRewards.lua — double-grant removed so display == granted; the "silent" half stays open, see below]`
 `Lua\Mysteries\Fireflies.lua:466-469` — code after `SetCommand("Die")` unreachable
 (`DoSetCommand` kills current thread, CommonLua\Classes\CommandObject.lua:340-378); actual
 RP from Die destructor (:540-542). Batch destroy path (:676-688) grants again → trapped
 wisps pay 200 RP each while notification says 100; later catches pay 100 silently. **Fix:**
 patch `Firefly.Drain` to notify/grant before `SetCommand("Die")` and remove the destructor
 double-grant (or drop batch grant) so display == granted.
+*Implemented half:* the batch grant is dropped, leaving the Die destructor as the single
+payer — every wisp is now worth exactly the 100 RP the notification claims. *Open half:*
+wisps caught AFTER the mode was set to "destroy" are drained one at a time and still pay
+silently (no per-wisp notification). That is a UI addition rather than a defect repair
+(FIX_POLICY §4), so it is deliberately not shipped.
 
 ### F16 — Mirror Sphere site usable after completion
 `Lua\Mysteries\MirrorSphere.lua:823` — guard `self.progress == 100`, but scale is
@@ -633,7 +638,7 @@ $1000M funding floor (:1399,1762-1765). Community hates it → ship an OPT-IN "c
 rocket behavior" fix (disabled by default per policy §4): standing PreciousMetals demand +
 fuel request while landed/manual; document the gates in README either way.
 
-### F64 — Station demolition permanently leaks train prefabs ("trains go to void") (P1, high)
+### F64 — Station demolition permanently leaks train prefabs ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
 Trains are a colony-counted resource (`city.available_prefabs["Train"]`, `City.lua:433-440`)
 — consumed on deploy (`Track.lua:428-457`), refunded ONLY via `Train:OnDemolish`
 (`Train.lua:205-209`), which only runs through `Demolishable:DoDemolish`. Bare
