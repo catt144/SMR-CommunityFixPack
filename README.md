@@ -39,6 +39,8 @@ and can be individually disabled.
 | TouristSatisfaction | Tourist satisfaction stops drifting downwards — a stat rising past two thresholds now pays as much as falling back charges |
 | TrainPlatformWedge | A passenger who is no longer aboard no longer wedges the train at the platform forever |
 | LowStorageWarning | The "Insufficient Resources" warning fires again for Food and maintenance resources |
+| CommandCenterNumbers | Command Center resource rows show their numbers again instead of being blank |
+| DomeOverviewHighlight | Domes Overview marks a dome's low colonist stats in red again |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

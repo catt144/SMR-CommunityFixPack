@@ -200,14 +200,14 @@ Grid branches (:259-303) are correct. Consts: `_GameConst.lua:4,10-11`. **Fix:**
 `ResourceTracking.GatheredResourcesOnHourlyUpdate`: `MulDivRound(supply, HoursPerDay, v)`
 vs `MinDays* × HoursPerDay`.
 
-### F13 — Command Center resource rows show no numbers
+### F13 — Command Center resource rows show no numbers  `[fixed: Code/Fix_CommandCenterNumbers.lua]`
 `Data\XDef\CommandCenterCategories.lua:226-328` (+ generated twin) — 11 tags like
 `<metals(AvailableMetals)>` reference getters that don't exist (remaster refactored to
 `GetAvailable("X")`, `ResourceOverview.lua:144`; other call sites converted, this preset
 missed). Nil → `FormatResource` renders empty. **Fix:** define 11 shims
 `ResourceOverview.GetAvailableX = function(self) return self:GetAvailable("X") end`.
 
-### F14 — Domes Overview red low-stat highlight dead
+### F14 — Domes Overview red low-stat highlight dead  `[fixed: Code/Fix_DomeOverviewHighlight.lua]`
 `Lua\X\ColonyControlCenter.lua:1309-1320` — builds red-tagged `tv`, then calls
 `win.idLabel:SetText(v)`. **Fix:** override `Community.UICommandCenterStatUpdate`, end with
 `SetText(tv)`.

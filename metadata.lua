@@ -35,6 +35,8 @@ return PlaceObj('ModDef', {
 		"Code/Fix_TouristSatisfaction.lua",
 		"Code/Fix_TrainPlatformWedge.lua",
 		"Code/Fix_LowStorageWarning.lua",
+		"Code/Fix_CommandCenterNumbers.lua",
+		"Code/Fix_DomeOverviewHighlight.lua",
 	},
 	'TagGameplay', true,
 })

@@ -27,6 +27,12 @@ come back.
   instead of striking about every 6 hours — and Sensor Towers now genuinely
   delay strikes instead of accidentally making things worse.
 
+**Interface**
+- The Command Center's resource rows show their numbers again — eleven of them
+  rendered as blank space.
+- The Domes Overview marks low colonist stats in red again, so you can see at a
+  glance which dome is in trouble.
+
 **Buildings & economy**
 - You get warned before running out of Food, Machine Parts or Electronics again.
   The calculation behind that warning could only ever produce a value outside the
@@ -132,8 +138,6 @@ come back.
 - Asteroid landers: payload settings that stick, valuables prioritized over
   waste rock, and "no available landers" no longer shown while a lander sits on
   the pad.
-- Command Center resource numbers display again; dome overview stat warnings
-  turn red as intended.
 - A save-repair pass (see below).
 
 ### Fixing your already-broken save
