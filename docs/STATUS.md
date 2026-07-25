@@ -65,14 +65,43 @@ it was to collect are F03 (leaked modifiers), F35 (turbine buff) and F48
   not actionable" verdict was re-verified and is CORRECT (CalcOpenAirSkin only
   empties skin[2] configurable attaches; Dome_Entrance is entity-spot auto-attach
   data, Dome.lua:404 — not patchable from Lua). F55 drone half diffs clean.
-- Spot-audit (partial): **F61 CLEAN** (faithful 4-site replacement, correct
-  declaring-class self-checks; minor: header line-number drift, apply() doesn't
-  pre-check all runtime symbols). **F12 ISSUE (moderate)**: implemented as a
-  post-wrapper, but the shipped dead branch still removes the notification hourly
-  and the wrapper re-adds it → destroy/recreate churn with FX replay every game
-  hour while active, and dismiss/suppression semantics differ. BUGS.md/FIX_POLICY
-  prescribe full replacement for F12 — consider reworking before release. Audits
-  of F44/F53/F68/F73 did not complete this session — re-run them.
+- Spot-audit of 6 fixes (F61, F12, F44, F53, F68, F73) — full reports in the
+  session transcript; summary:
+  * **F53 CRITICAL — rework before release.** The `not IsInWalkingDist` gate in
+    Fix_ArrivalDeaths.lua is always true for cross-map elevator destinations
+    (IsInWalkingDistDome returns false when maps differ, Dome.lua:248-251), so
+    every legitimate elevator arrival triggers the re-choose; the re-choose
+    discards ChooseDome's elevator return and never clears stale
+    self.emigration_elevator → TransportByFoot rides the stale elevator, fails
+    the map-slot check (Colonist.lua:2731) → SetCommand("Abandoned"). Repair:
+    skip the gate when ValidateBuilding(self.emigration_elevator) routes to
+    dome; on re-choice take BOTH returns and assign emigration_elevator.
+  * **F12 MODERATE — rework.** Post-wrapper leaves shipped dead branch removing
+    the notification hourly, wrapper re-adds → destroy/recreate churn + FX replay
+    every game hour while active; dismiss/suppression semantics differ. Docs
+    prescribe full replacement — do that instead.
+  * **F68 MODERATE — verify in-game.** The requested-floor (belt-and-braces
+    block) doesn't debit hold capacity: with multiple exports, an alphabetically
+    earlier resource's request can exceed remaining capacity → status stuck
+    "loading", automode rocket sits on pad (departure gate needs "ready").
+    Consider capping the floor against remaining capacity.
+  * **F61 CLEAN**, **F44 CLEAN** (in-game check: curve-ended remainder track
+    visuals; F45-comparator fold-in disclosed), **F73 CLEAN** (note:
+    IsSuitable is AutoResolveMethods "and"-combined with Residence.IsSuitable —
+    correct today, document it; partial-application isn't reported in the log).
+  * Recurring minor: header/BUGS line-number drift (off-by-ones); apply()
+    self-checks don't pre-check every runtime symbol.
+- AccountStorage research (for the RunAll pair): enabled mods live in
+  AccountStorage.LoadMods (plain array of metadata.lua `id` strings), persisted
+  in `%AppData%\Surviving Mars Relaunched\<SteamID64>\account.dat` — an
+  in-memory HPK (magic BPUL) containing `account.lua`, AES-encrypted+HMAC with
+  key SHA256(GetAppId()..config.ProjectKey), compressed. BUT the loader is
+  best-effort: a plaintext `return {...}` account.lua inside the container still
+  loads (lib.lua:2187-2216). Edit only with the game closed; ids for missing/
+  too-old mods are auto-stripped at menu (Mod.lua:2033-2059). Escape hatch:
+  `AccountStorage.LoadAllMods = true` loads every discovered mod, bypassing the
+  list. Unpacked mods in Mods\ need metadata.lua with `id` + `lua_revision` ≥
+  350453. No Paradox cloud sync of account.dat (CloudSavesAllowed() = false).
 - RunAll before/after pair NOT run: the Relaunched profile has never been created
   (%AppData%\Surviving Mars Relaunched\ has only Mods; no saves/logs/AccountStorage;
   no Steam userdata for appid 3215050) and mods can't be enabled until first launch.
