@@ -54,6 +54,7 @@ and can be individually disabled.
 | ShuttleHubOffAvailable | Switching a Shuttle Hub off actually removes it from the colony's transport planning instead of leaving colonists waiting for shuttles that never launch |
 | FreedHousingNotice | A home falling vacant is offered to the dome's homeless immediately instead of after their next update (up to 12 hours in a big colony) |
 | DomeFreeSpaceMismatch | A dome's free-housing figure counts the same residences the game actually assigns colonists to, so a power dip no longer makes a dome read as full |
+| SmallLandscapeSites | Small landscaping jobs (a few hexes of clearing, painting or levelling) get worked instead of stalling the drone sent to them |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

@@ -45,7 +45,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F30 | Lake placement entombs RC builder + drones               | P1  | high | fixed  |
 | F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | todo   |
 | F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | blocked|
-| F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | todo   |
+| F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | fixed  |
 | F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | todo   |
 | F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | todo   |
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | fixed  |
@@ -375,10 +375,18 @@ re-add. Matches lake-victim report. **Fix:** set `Suppressable = true` +
 **Disposition:** most likely `wontfix` — but that is the user's call, so it is parked as
 `blocked` rather than closed unilaterally.
 
-### F33 — Drone crash on small landscaping sites (P2, high)
+### F33 — Drone crash on small landscaping sites (P2, high)  `[fixed: Code/Fix_SmallLandscapeSites.lua]`
 `Landscape\LandscapeConstructionSiteBase.lua:186-190`: `for i = 1, top_count do
 top_dests[i] = dests[i].dest` — nil-index when site periphery has < 5 hexes (tiny
 clear/paint blobs) → error in drone command thread. **Fix:** `Min(top_count, #dests)`.
+*Implemented as sketched*, as a full replacement of `GetClosestDests` (`:178-192`) — the
+fault is inside the loop, so neither a pre- nor a post-wrapper can reach it. Confirmed
+`drone_dests_cache` holds only PERIPHERY hexes (`GameInit` :47-64, `if border then`), which
+is what makes a small blob fall under five, and that the sole caller is `DroneApproach`
+(`:194-205`), running in the drone's own command thread — so the raise kills that thread.
+The shipped `assert(self.drone_dests_cache)` is dropped from the copy (assert does not
+unwind in mod code); with the clamp, a missing cache yields an empty list, which
+`drone:Goto` already handles. Probe: `SmallLandscapeSites` in `30_Probes_Wave3.lua`.
 
 ### F34 — Landscape nil-guard bundle (P3, med/latent)
 (a) `ClearWasteRockConstructionSite:GameInit` (`:60-63`) unguarded `Landscapes[self.mark]`;

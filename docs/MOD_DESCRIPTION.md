@@ -53,6 +53,10 @@ come back.
   along with any drones nearby. The basin is dug after the site clears units out,
   so anything still standing there was sealed under the new terrain and quietly
   ran out of power.
+- Small landscaping jobs actually get done. A clear, paint or levelling area only
+  a few hexes across gave the approaching drone fewer destinations than the game
+  unconditionally read back, which errored and dropped whatever the drone was
+  doing — so tiny terraforming touch-ups sat there unworked.
 - A second Artificial Sun works. Panels only ever checked the *first* one you
   built, so everything you put up around sun number two produced as if the sun
   were not there. Panels in an existing save are reconnected when you load it.

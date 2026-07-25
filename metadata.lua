@@ -50,6 +50,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_ShuttleHubOffAvailable.lua",
 		"Code/Fix_FreedHousingNotice.lua",
 		"Code/Fix_DomeFreeSpaceMismatch.lua",
+		"Code/Fix_SmallLandscapeSites.lua",
 	},
 	'TagGameplay', true,
 })
