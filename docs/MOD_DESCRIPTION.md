@@ -59,6 +59,10 @@ come back.
 - Asteroid landers no longer strand themselves. Landing manually made the lander
   treat the fuel reserved for the trip home as surplus and unload it — on an
   asteroid with no drones and no fuel production, that was permanent.
+- Asteroid colonists no longer stand around outside until they suffocate. A
+  colonist idling in vacuum now heads home before the oxygen runs out — and a
+  brief power or air interruption no longer throws every resident out of a
+  habitat permanently.
 
 **Story & milestones**
 - Completing all milestones no longer breaks in games using the
@@ -73,8 +77,6 @@ come back.
 - Asteroid landers: payload settings that stick, valuables prioritized over
   waste rock, and "no available landers" no longer shown while a lander sits on
   the pad.
-- Asteroid colonists seek shelter before suffocating and can move into
-  habitats that had a momentary power blip.
 - Track salvage: deleting one hex no longer deletes your entire track (and
   your trains with it); meteor-damaged tracks become salvageable again.
 - Colonists: no more suffocating on "short" walks between domes when passages

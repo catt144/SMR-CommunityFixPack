@@ -721,7 +721,7 @@ during CmdLoad, `CargoRequestNew.lua:389-399`). No per-asteroid occupancy lock e
 (`IsDifferentAsteroidLocation` compares Map to MapDescriptor — never false,
 `PlanetUI.lua:1696-1699`). **Fix:** accept landed re-targetable landers in both checks.
 
-### F73 — Asteroid colonists idle outdoors; nothing shelters the suffocating (P1, med-high)
+### F73 — Asteroid colonists idle outdoors; nothing shelters the suffocating (P1, med-high)  `[fixed: Code/Fix_ShelterReflex.lua]`
 Chain: `MicroGHabitatAutoResolve:IsSuitable` requires `GetScoreFor > 0` ≈ `HasLifeSupport()`
 (`MicroGHabitat.lua:154-156`, `Community.lua:367-398`) — any momentary life-support gap or
 full habitat → colonist keeps `residence == false`; `Roam` (`Colonist.lua:1186-1205`) then
