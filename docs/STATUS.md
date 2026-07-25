@@ -32,7 +32,7 @@ the Lua console at load and carries observability loggers and state reports.
   Last War mystery import lock at 54%, game-stops-saving. Plus smaller new leads
   from the ChatGPT dossier cross-check (top of RESEARCH.md).
 
-## Implementation: 30 fixes DONE (none in-game tested yet)
+## Implementation: 30 fixes DONE (probe-verified in-game 2026-07-25; scenario `tested` passes still pending)
 
 Wave 1 (earlier session): F01 cave-ins/NoDisasters, F02 meteor frequency,
 F03* upgrade-modifier leak, F04 night shift, F05 milestone crash, F07+F15* wisp
@@ -56,7 +56,13 @@ the crystal repeater), plus F55's expiry which self-heals. The consolidated
 it was to collect are F03 (leaked modifiers), F35 (turbine buff) and F48
 (connectors).
 
-## QA session snapshot (Fable, 2026-07-25) — partial, session cut short
+## QA session snapshot (Fable, 2026-07-25) — kept for the audit record
+
+**NOTE — everything actionable below is RESOLVED:** the F53 and F12 reworks
+LANDED (commits aa980e7 / 40d5a73) and survived the final A/B pair; the autorun
+harness IS committed (TestKit); the RunAll pair HAS run clean — see the FINAL
+A/B section above. Still open from this section: F68 capacity-cap in-game check,
+F44 curve-ended track visual check, wave-1 heading tags.
 
 - BUGS.md index was stale (16 wave-2 rows said `todo` despite tagged headings) —
   synced in commit 0ef4e7c. README/MOD_DESCRIPTION verified complete. Follow-up:
@@ -294,10 +300,10 @@ that "passed" or SKIPped were not testing what they claimed.
 
 ## Waiting on the user
 
-1. Launch the game once with BOTH mods enabled, confirm `SMRFixPack.ListFixes()`
-   shows 30 fixes active (any `inactive`/`error` line is a self-check that needs
-   revisiting), then run `SMRTest.RunAll()` — this is the packaging + wiring
-   validation for the whole pack.
+1. DONE 2026-07-25 — both mods enabled, automated A/B RunAll pair ran clean
+   (30/30 applied, 19/19 FAIL→PASS). Remaining variant: one pair under
+   MarsDebug.exe (debugging launch option) for [install]-probe + F73-wrapper
+   coverage — fully automated, just needs the two Steam "Continue" clicks.
 2. Author name/handle for metadata.lua (placeholder TBD_SET_BEFORE_RELEASE), in
    both mods.
 3. For the save-failure lead: logs from `%AppData%\Surviving Mars Relaunched\logs`
