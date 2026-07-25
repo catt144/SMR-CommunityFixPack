@@ -53,6 +53,9 @@ come back.
   along with any drones nearby. The basin is dug after the site clears units out,
   so anything still standing there was sealed under the new terrain and quietly
   ran out of power.
+- A second Artificial Sun works. Panels only ever checked the *first* one you
+  built, so everything you put up around sun number two produced as if the sun
+  were not there. Panels in an existing save are reconnected when you load it.
 - Salvaging an upgraded building now removes its dome-wide and colony-wide
   upgrade bonuses. Previously these leaked forever and could be stacked
   infinitely by rebuilding (this silently corrupted long-running colonies).

@@ -51,7 +51,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | fixed  |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
-| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | todo   |
+| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed  |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | todo   |
 | F41 | Gene Forging tech has no effect                          | P2  | high | todo   |
 | F42 | Buildings placeable on active dust devils                | P3  | high | todo   |
@@ -407,11 +407,18 @@ with it, :33-38) — the LoadGame sweep is the only leak. Repair is unaffected:
 `Building:Rebuild` (`Building.lua:1655`) yields a NEW object whose `GameInit` registers
 normally.
 
-### F39 — Second Artificial Sun ignored (P2, high)
+### F39 — Second Artificial Sun ignored (P2, high)  `[fixed: Code/Fix_SecondArtificialSun.lua]`
 `SolarPanelBase:GameInit` (`SolarPanel.lua:8-14`): only `labels.ArtificialSun[1]` tested
 with `TestSunPanelRange`. Panel built in range of sun #2 only never registers (reverse
 direction works, `ArtificialSun.lua:35-47`). **Fix:** wrap GameInit: iterate the whole
 label, register first sun in range.
+*Implemented as sketched* (post-wrapper; the shipped body runs first and we only act if it
+left `artificial_sun` false, handing the sun to the shipped `SetArtificialSun` so production
+refreshes). `GameInit` is a combined method (`DefineCombinedMethod("GameInit", "procall",
+"Object")`, `CommonLua\Classes\_object.lua:22`) assembled from the classdefs when classes
+are built — after mod load — so writing onto `SolarPanelBase` reaches every panel class and
+RCSolar. Added a LoadGame sweep: `artificial_sun` is persisted and never re-evaluated, so
+panels already built beside sun #2 stay dark in existing saves without one.
 
 ### F40 — Dust Sickness infects Biorobots (P2, high)
 `Data\StoryBit\DustSickness*.lua` filters exclude only `Child`; `Android` trait not
