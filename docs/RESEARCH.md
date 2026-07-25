@@ -125,6 +125,52 @@ NEW leads (not yet traced — priority targets for next session):
 - **Light sources stop working underground** — likely engine/rendering side;
   check Lua light-attach logic underground before writing it off as unfixable.
 
+## Review batch 3 (added 2026-07-25)
+
+Mapped to existing findings:
+- "Trains swap random resources back and forth fully stacked, no readable sense"
+  → F46 (dump-at-disabled-stations + forbidden-stock re-haul ping-pong) is very
+  likely the whole story.
+- "Rockets stuck in load/unload loop" (B&B asteroids) → F50 (hourly
+  drone-churn/auto-cargo-request loop) + F56.
+- "Colonists don't move for jobs cross-dome even with passages" → F51/F52/F54
+  cluster + unemployment mechanisms.
+- Popup notifications yank you out of the build GUI → UX design gripe; check if
+  popups force-close the build dialog in Lua (may be patchable).
+- "Old-timer died" spam every few minutes → QoL: make death-of-old-age
+  notification suppressable/aggregated — same preset surgery as F32.
+
+NEW leads:
+- **Rockets no longer auto-refuel / auto-load Rare Metals** ("BIGGEST issue",
+  community-hated). Determine design-change vs bug: check `UniversalRocketBase`
+  auto/export logic, `CreateAutoCargoRequest` rare-metal handling, refuel request
+  wiring (F50's neighborhood). If design change: candidate opt-in restore fix.
+- **Asteroid lander cluster (B&B "unusable")**: (a) loads what it wants — edit
+  payload ignored; (b) prioritizes WASTE ROCK over everything; (c) unloads
+  everything, launches empty, returns to ASTEROID instead of Mars (fuel wasted,
+  expedition lost); (d) sometimes loads nothing at all — refuels and sits (no
+  drones/resources), stranding landers; (e) can't send second lander to rescue.
+  Sweep the CargoTransporter/lander payload+destination state machine.
+- **Colonists on asteroid don't use habitat, suffocate in the mine** — asteroid
+  residence/oxygen assignment.
+- **Same-dome housing failure**: can't find houses in a dome with >50% vacancy
+  (NOT explained by F51 which is cross-dome) — sweep same-dome residence
+  assignment for filter bugs.
+- **University in separate dome never gets students** — student recruitment is
+  cross-dome-gated? Check against F51 cache + student-specific path.
+- **Colonists refuse to shop through passages** — service-seeking
+  passage-connectivity check (original long-walk bug family, service branch).
+- **Train tunnel doesn't transfer electricity despite description** — check
+  tunnel template grid elements vs description text.
+- **Post-1.01 "trains go to void"**: destroying station/track WITH trains on it
+  permanently breaks ALL trains — can't assign trains to new tracks/stations
+  even after full rebuild. A community micro-mod reportedly fixes it — find it
+  for reference. Our F44/F49(b) territory: `DestroyAssignedTrains` stores trains
+  as prefabs — suspect the stored-prefab/global-registry restore path corrupts
+  (e.g. stored count never decremented, or train prefab list pinned to dead
+  track). HIGH priority.
+- Surface/underground UI "bouncing" — vague; park.
+
 ## Original-game fix list highlights to re-verify in Relaunched source
 
 Drones/rovers: malfunctioning drones stuck at hub (`InvalidPos`), drones stuck in
