@@ -14,6 +14,8 @@ return PlaceObj('ModDef', {
 		"Code/Fix_MilestoneCrash.lua",
 		"Code/Fix_WispRewards.lua",
 		"Code/Fix_TouristApplicants.lua",
+		"Code/Fix_TrainsToVoid.lua",
+		"Code/Fix_FactionFundingCheck.lua",
 	},
 	'TagGameplay', true,
 })

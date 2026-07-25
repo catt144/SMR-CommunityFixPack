@@ -22,7 +22,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
 | F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | todo   |
-| F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | todo |
+| F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | fixed |
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | todo   |
 | F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | todo   |
 | F13 | Command Center resource rows show no numbers             | P2  | high | todo   |
@@ -77,7 +77,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | todo   |
 | F63 | Universities invisible to emigration (no students)       | P2  | high | todo   |
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
-| F64 | Station demolition permanently leaks train prefabs       | P1  | high | todo   |
+| F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | todo   |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
