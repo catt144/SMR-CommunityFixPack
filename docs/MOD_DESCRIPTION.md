@@ -44,6 +44,10 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- Building a Shuttle Hub actually helps. The game caches its verdict on whether a
+  dome is reachable, and that cache never noticed new shuttles — so colonists
+  stayed homeless (and seniors stayed put) even after you built the hub that
+  would have moved them.
 - Night-shift workers who were busy at shift start (eating, resting, seeing a
   doctor) now go to work after midnight instead of skipping the rest of their
   shift. Your night-shift buildings were quietly running understaffed.
@@ -99,7 +103,7 @@ come back.
   exist; homeless colonists find the housing that's actually free (invisible
   stale reservations were eating it); turning off "accept colonists" no longer
   secretly stops your residents from shopping through passages; drones keep
-  servicing opened domes.
+  servicing opened domes; new arrivals stop hiking to unreachable domes.
 - The Philosopher's Stone mystery can no longer hang forever at the finale.
 - The "Low Storage" warning fires for Food and spare parts (it mathematically
   never could); Command Center resource numbers display again; dome overview

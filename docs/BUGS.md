@@ -499,7 +499,7 @@ Explains "drones ignore rocket cargo". **Fix:** wrap `UpdateCargoResourceRequest
 suppress the disconnect/reconnect churn (requests mutate in place via
 `TaskRequester:AddRequest`); one-time connect if never connected.
 
-### F51 — Transport-mode cache never sees new shuttles (P1, high)
+### F51 — Transport-mode cache never sees new shuttles (P1, high)  `[fixed: Code/Fix_ShuttleTransportCache.lua]`
 `Colonist.lua:2504-2537` caches `(community,pos) → mode` incl. `false`, but
 `shuttles_available` is not in the key and cache only flushes on train/passage events
 (:2480-2488). Building/refueling a Shuttle Hub never flushes → `FindEmigrationDome`
