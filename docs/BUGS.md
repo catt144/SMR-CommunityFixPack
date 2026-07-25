@@ -52,7 +52,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed  |
-| F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | todo   |
+| F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | todo   |
 | F42 | Buildings placeable on active dust devils                | P3  | high | todo   |
 | F43 | Layout construction bypasses tech locks                  | P3  | high | todo   |
@@ -420,11 +420,19 @@ are built — after mod load — so writing onto `SolarPanelBase` reaches every 
 RCSolar. Added a LoadGame sweep: `artificial_sun` is persisted and never re-evaluated, so
 panels already built beside sun #2 stay dark in existing saves without one.
 
-### F40 — Dust Sickness infects Biorobots (P2, high)
+### F40 — Dust Sickness infects Biorobots (P2, high)  `[fixed: Code/Fix_DustSicknessBiorobots.lua]`
 `Data\StoryBit\DustSickness*.lua` filters exclude only `Child`; `Android` trait not
 excluded, `DustSickness.incompatible = {}`; androids bleed Health every dust storm via
 `daily_update_func` until cure tech. (Same trait also hit by F17 randomization bug.)
 **Fix:** data patch: add Android to the storybit filters / trait incompatibility.
+*Implemented as the filter half only, on evidence:* `Colonist:AddTrait`
+(`Colonist.lua:426-453`) never consults `incompatible`, so the incompatibility half would
+change nothing. Four `ForEachExecuteEffects` hand out the trait — two in
+`DustSickness.lua` (:63-77, :103-117, one per outcome) and one each in
+`DustSickness_GeneratSick.lua`/`_GeneratSickNotWorking.lua` (:5-26) — and the fix appends
+`HasTrait{Trait="Android", Negate=true}` to each filter list, found by structure rather
+than index. LoadGame pass removes the trait (and the paired
+`StatusEffect_UnableToWork`) from biorobots already infected in a save.
 
 ### F41 — Gene Forging tech has no effect (P2, high)
 `Colonist:GetRareTraitChance` (`Colonist.lua:3541-3550`) reads only

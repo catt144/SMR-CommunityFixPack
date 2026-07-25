@@ -45,6 +45,7 @@ and can be individually disabled.
 | TrainCargoDumping | Trains stop unloading at stations where you switched that resource off (and hauling it back out again next trip) |
 | DestroyedTunnels | A destroyed tunnel stays closed after you reload instead of silently becoming a working shortcut again |
 | SecondArtificialSun | Solar panels built near a second Artificial Sun get its bonus (only the first sun was ever checked) |
+| DustSicknessBiorobots | Biorobots stop catching Dust Sickness (and are cured of it when you load an affected save) |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

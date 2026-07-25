@@ -64,6 +64,11 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- Biorobots no longer catch Dust Sickness. The event that hands out the illness
+  excluded children and nobody else, so your synthetic colonists lost Health in
+  every dust storm — and on the "they shouldn't work" branch were barred from
+  working until the cure was researched. Biorobots already suffering from it are
+  cured when you load the save.
 - Tourist Satisfaction stops sliding downwards. A tourist's stat climbing past two
   thresholds at once only ever collected one bonus, while falling back charged
   both — so satisfaction (and your holiday income) drifted down no matter how well

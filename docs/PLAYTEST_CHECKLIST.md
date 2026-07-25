@@ -850,6 +850,33 @@ solar panel(s)` in the log — those panels should start producing immediately.
 
 ---
 
+## PT-27 — Dust Sickness does not infect Biorobots · covers **F40**
+
+**Setup:** SAVE-A. You need **Biorobots** and a **dust storm**. Biorobots come from
+the Biorobots tech/resupply — `CheatResearchAll()` then spawn a batch and check the
+colonist list for the **Biorobot** trait; if you cannot get any, write "could not set
+up" and skip the F40 half.
+
+**Trigger:**
+1. Note which colonists are Biorobots.
+2. Wait for (or wait out) a **dust storm** with the "Dust Sickness" event active —
+   the game rule **Dust In The Wind** is a prerequisite, so this needs a save started
+   with that rule if the event has not fired yet.
+3. When the Dust Sickness event resolves, list who caught it.
+
+- **BROKEN looks like:** Biorobots appear in the list of the newly sick, lose Health
+  in every subsequent storm, and (on the "shouldn't work" answer) are flagged unable
+  to work until the cure tech lands.
+- **FIXED looks like:** only organic colonists catch it. Children are still excluded
+  as before.
+- **Existing-save check:** load a save where Biorobots are already sick and look for
+  `[CommunityFixPack] DustSicknessBiorobots: cleared Dust Sickness from N Biorobot(s)`
+  in the log; those colonists should lose the trait and the "unable to work" flag.
+
+`Result (Biorobots spared?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
