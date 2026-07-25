@@ -48,6 +48,9 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- Housing reserved for a colonist who never turns up is released again. Those
+  reservations are invisible in the UI and had no expiry at all, which is why a
+  dome could sit half empty and still refuse to house anybody.
 - New arrivals no longer set off for a dome they cannot actually reach. When
   nothing walkable was available the game picked the nearest dome by straight-line
   distance and sent them anyway, which is why rocket loads of colonists died on
@@ -112,8 +115,7 @@ come back.
 - Asteroid landers: payload settings that stick, valuables prioritized over
   waste rock, and "no available landers" no longer shown while a lander sits on
   the pad.
-- Colonists: homeless colonists find the housing that's actually free (invisible
-  stale reservations were eating it); turning off "accept colonists" no longer
+- Colonists: turning off "accept colonists" no longer
   secretly stops your residents from shopping through passages; drones keep
   servicing opened domes.
 - The Philosopher's Stone mystery can no longer hang forever at the finale.

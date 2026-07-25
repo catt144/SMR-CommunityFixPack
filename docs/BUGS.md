@@ -570,7 +570,7 @@ weak-keys meta and doesn't recompute count; (c) `recursive_enum_dome_workplaces`
 - Same-dome seniors→retirement: working as designed (comfort scoring, `Residence.lua:382-423`);
   cross-dome is F51.
 
-### F58 — Invisible residence reservations never expire (P1, high)
+### F58 — Invisible residence reservations never expire (P1, high)  `[fixed*: Code/Fix_StaleReservations.lua — timestamp + daily stale sweep using g_Consts.ForcedByUserLockTimeout; the infopanel display of #reserved is deliberately NOT added (UI addition, FIX_POLICY §4)]`
 `Residence:GetFreeSpace` (`Residence.lua:198-200`) subtracts `#self.reserved`, but the UI
 (`GetUICapacity`/`GetUIResidentsCount`, :374-380) never shows reservations. Emigration
 reserves slots (`Colonist.lua:1571-1589` → `Dome.lua:2840-2851`) cleared only on arrival/

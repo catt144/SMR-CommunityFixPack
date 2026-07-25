@@ -29,6 +29,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_VacuumWalks.lua",
 		"Code/Fix_ArrivalDeaths.lua",
 		"Code/Fix_DroneUnreachableForever.lua",
+		"Code/Fix_StaleReservations.lua",
 	},
 	'TagGameplay', true,
 })
