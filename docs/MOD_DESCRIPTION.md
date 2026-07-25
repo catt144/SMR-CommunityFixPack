@@ -44,6 +44,9 @@ come back.
   5-star ones.
 
 **Trains**
+- Salvaging a single track piece no longer deletes the entire line — and the
+  trains assigned to it. Curved sections and short tracks were the worst
+  offenders, and salvage is instant with no confirmation.
 - Meteor-damaged track can be salvaged again. Damaged pieces were missing a
   piece of internal bookkeeping that made every salvage attempt on that track
   fail silently — including via Ctrl+click and the Salvage button. Tracks
@@ -81,8 +84,6 @@ come back.
 - Asteroid landers: payload settings that stick, valuables prioritized over
   waste rock, and "no available landers" no longer shown while a lander sits on
   the pad.
-- Track salvage: deleting one hex no longer deletes your entire track (and
-  your trains with it).
 - Colonists: no more suffocating on "short" walks between domes when passages
   exist; homeless colonists find the housing that's actually free (invisible
   stale reservations were eating it); turning off "accept colonists" no longer

@@ -25,6 +25,7 @@ and can be individually disabled.
 | LanderReturnFuel | Asteroid landers keep the fuel reserved for the trip home instead of dumping it on the asteroid |
 | ShelterReflex | Colonists idling outdoors in vacuum head home before they suffocate; a habitat power blip no longer evicts its residents |
 | BrokenTrackSalvage | Meteor-damaged tracks can be salvaged again (and existing damaged tracks in your save are repaired on load) |
+| TrackSalvageWipe | Salvaging a single track piece trims the track instead of deleting the whole line and every train assigned to it |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

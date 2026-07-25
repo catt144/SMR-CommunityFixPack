@@ -428,7 +428,7 @@ placed with no research gate. **Fix:** wrap `Activate`: filter items where
 - Sol 2983 GameTime overflow: indeterminate from Lua (engine-side); circumstantial evidence
   of 64-bit time. Park unless players report it.
 
-### F44 — One-hex track salvage can delete the entire track (P1, high)
+### F44 — One-hex track salvage can delete the entire track (P1, high)  `[fixed: Code/Fix_TrackSalvageWipe.lua]`
 Per-segment removal exists (`Construction.lua:2910-2911` → `TrackElement.lua:444-578`
 `DemolishAndSplitTrack`), but: (a) click snaps up to ±5 hexes to nearest pillared element
 (`SelectionPropagate`, `TrackElement.lua:281-307`); (b) deletion zone expands to nearest
