@@ -57,6 +57,9 @@ return PlaceObj('ModDef', {
 		"Code/Fix_TrackTunnelPowerBridge.lua",
 		"Code/Fix_GridGlobalStorage.lua",
 		"Code/Fix_LastTransmissionStorage.lua",
+		"Code/Fix_GraphConsumedCaption.lua",
+		"Code/Fix_MoraleComfortTooltip.lua",
+		"Code/Fix_TrainWaitTime.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",

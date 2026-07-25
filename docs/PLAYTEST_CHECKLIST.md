@@ -1414,6 +1414,55 @@ goals.
 
 ---
 
+## PT-43 — Numbers and tooltips trio · covers **F19, F20, F21**
+
+Three small, independent reads. Any established colony will do — one with trains
+and a few sols of history.
+
+**F19 — Command Center graph caption.**
+1. Open the **Command Center**, switch to the **Machine Parts** graph (Electronics
+   works too), and look at the "Produced ... and Consumed ..." caption above it.
+   - **EXPECTED:** the Consumed figure is in the same ballpark as the height of
+     the Consumed bar — it now includes maintenance, which is most of your
+     Machine Parts usage.
+   - **SURPRISE looks like:** a near-zero figure beside a tall bar (the old
+     behaviour), or a figure that is now clearly larger than the bar.
+2. Sanity-check **Food**, where consumption is real and maintenance is nil — the
+   number should be essentially unchanged from before.
+
+`Result (Machine Parts caption vs bar / Food unchanged?):` _____________________________________________
+
+**F20 — Morale tooltip.**
+3. Find a colonist whose **Comfort** is high (green, at or above the high mark).
+   Select them and hover the **Morale** stat.
+   - **EXPECTED:** no "+Comfort" style bonus row is listed, and the rows shown
+     add up to the Morale value in the title.
+   - **SURPRISE looks like:** the bonus row is still there, or a row that SHOULD
+     be there is gone.
+4. Find a colonist whose **Comfort is low** (red) and hover Morale.
+   - **EXPECTED:** the Comfort PENALTY row is still listed — that one is real.
+     If it disappeared, the fix is over-broad; report it.
+5. Hover Morale on a colonist with high **Health** or **Sanity**.
+   - **EXPECTED:** those bonus rows are untouched.
+
+`Result (high-Comfort row gone / low-Comfort row kept / Health+Sanity intact?):` _____________________________________________
+
+**F21 — Train waiting time.**
+6. Pick a station where colonists queue for a while. Select a colonist about to
+   travel, note their **Comfort**, and watch them wait, board, ride and arrive.
+   - **EXPECTED:** the Comfort drop on arrival reflects the ride, not the wait.
+     A long wait followed by a short hop should cost little.
+   - **SURPRISE looks like:** a big Comfort hit after a long wait and a one-stop
+     ride.
+7. Open the **train's** and the **track's** infopanels and check the travel/spent
+   time statistics over a few sols.
+   - **EXPECTED:** they no longer include platform waiting (the station's own
+     waiting statistic still does, and should be unchanged).
+
+`Result (Comfort hit matches the ride / train+track stats exclude waiting?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

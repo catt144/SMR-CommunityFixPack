@@ -187,6 +187,17 @@ come back.
   colonist idling in vacuum now heads home before the oxygen runs out — and a
   brief power or air interruption no longer throws every resident out of a
   habitat permanently.
+- Command Center graphs stop lying about consumption. The "Consumed" figure in
+  the caption left out maintenance, so Machine Parts and Electronics read as
+  almost nothing next to a full-height bar. The caption now counts what the bar
+  counts.
+- A colonist's Morale tooltip adds up again. It listed a bonus for high Comfort
+  that the game deliberately stopped applying, so the effects shown never
+  matched the Morale above them. The penalty for LOW Comfort is real and is
+  still listed.
+- Waiting on a train platform is not charged twice. The wait was counted again
+  as riding time — costing extra Comfort on arrival and inflating the travel
+  statistics on the train and the track.
 - The Last Transmission faction notices your reserves. Six of its opinions —
   power, water and oxygen storage, praise and complaint alike — were attached to
   a field the game never reads, so they scored nothing no matter how well you

@@ -1,4 +1,4 @@
-﻿# Bug Tracker — Surviving Mars: Relaunched Community Fix Pack
+# Bug Tracker — Surviving Mars: Relaunched Community Fix Pack
 
 Canonical record of every defect found in the game's shipped Lua source
 (`<game>\ModTools\Src`), its evidence, and its fix status. **Update this file in
@@ -31,9 +31,9 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | fixed  |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | todo   |
-| F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | todo   |
-| F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | todo   |
-| F21 | Train travel-time penalty includes station waiting       | P2  | med  | todo   |
+| F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | fixed  |
+| F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | fixed  |
+| F21 | Train travel-time penalty includes station waiting       | P2  | med  | fixed  |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | todo   |
 | F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | todo   |
@@ -286,24 +286,57 @@ consumed `Lua\SpecialProjects.lua:105`). All sibling Independence techs have par
 **Fix:** patch the effect's `Amount = -20` before research (ClassesPostprocess), only if
 tech not yet researched — else apply delta modifier.
 
-### F19 — Graphs "Consumed" caption omits maintenance
+### F19 — Graphs "Consumed" caption omits maintenance  `[fixed: Code/Fix_GraphConsumedCaption.lua]`
 `Lua\X\ColonyControlCenter.lua:180-188` vs `ResourceTracking.lua:162` — caption uses
 consumption only; plotted series adds maintenance. Near-zero caption next to a tall bar for
 Machine Parts/Electronics/Metals/Polymers. **Fix:** wrap `City.GetColonyStatsButtons`,
 correct the caption closure.
+*Implemented as sketched.* Post-wrapper on `City:GetColonyStatsButtons`; the shipped
+function builds the whole descriptor table and the wrapper rewrites only the caption
+closure of the stockpile-resource produced/consumed panels. The panel is found by
+STRUCTURE — its `data[2]` must be `city.ts_resources[id].consumed`, the very series the
+caption describes — so a rearranged UI fails to match and deactivates the fix instead of
+relabelling the wrong graph. The replacement keeps the shipped translation (T id 8979) and
+sums the two raw accumulators before scaling once, which is what the plotted series does
+(it passes raw values with `scale = const.ResourceScale`).
+Probe: `GraphConsumedCaption` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
-### F20 — Morale tooltip shows unapplied +Comfort bonus
+### F20 — Morale tooltip shows unapplied +Comfort bonus  `[fixed: Code/Fix_MoraleComfortTooltip.lua]`
 `Lua\Units\Colonist.lua:2983-3007` (tooltip) vs :3963-3969 (`UpdateMorale`, bonus
 deliberately commented out: "remove for comfort policy to work") — tooltip still lists
 "Living in luxury +5" for Comfort ≥ 70; listed effects don't sum to shown Morale. **Fix:**
 override `Colonist.UIStatUpdate`; skip `value >= high` row for Comfort only.
+*Confirmed and narrowed:* `UpdateMorale` keeps the LOW-Comfort penalty (`:3967-3969`) and
+drops only the high-Comfort bonus (`:3963-3966`), while the tooltip loop (`:2985-3008`)
+prints a row for every stat on `value < low or value >= high` alike. Exactly one row is
+wrong. The shipped comment names the removal as intentional, so only the tooltip is
+changed and no Morale number moves.
+*Implemented differently, on better evidence:* the sketch's "override `UIStatUpdate` and
+skip the row" is not reachable — the row is built inside the ~130-line `win.GetRolloverText`
+closure the shipped function installs, and the `low`/`high` bounds it compares against are
+read once for all stats (`:2983-2984`), so there is no per-stat seam to hook. Instead the
+fix post-wraps `UIStatUpdate`, then wraps the closure it just installed, and answers the one
+comparison the row hinges on: for the duration of that call the colonist carries an
+instance-level `GetProperty` reporting Comfort as one below the high mark when it is at or
+above it. The value only ever moves DOWN to just under the threshold, so the low-Comfort
+penalty row is untouched, no other stat is affected, the override is removed in the same
+call under `pcall`, nothing in the builder yields, and only Morale tooltips are wrapped.
+Probe: `MoraleComfortTooltip` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
-### F21 — Train travel-time penalty includes station waiting
+### F21 — Train travel-time penalty includes station waiting  `[fixed: Code/Fix_TrainWaitTime.lua]`
 `Lua\Units\ColonistTransport.lua:493,511,551-569` — `ticket.start_wait` set on reaching
 platform, never reset at boarding; Comfort "travel time" penalty and train/track
 "spent time" stats (TransportStatistics.lua:31-45) count waiting (double-counted vs
 station stat); partially bypasses LuxuriousTrains. **Fix:** post-hook `Colonist.BoardVehicle`
 to reset `transport_ticket.start_wait = GameTime()`.
+*Implemented as a full replacement, not a post-hook, because a post-hook cannot run in
+time:* `Colonist:BoardVehicle` (`:503-528`) ends with `while self.holder == vehicle do
+self:PlayPrg(...) end`, which blocks for the entire journey — a post-wrapper would restamp
+after the ride, and a pre-wrapper would erase the wait before `:511` credits it to the
+station. The copy is byte-identical except the one added line, placed immediately after the
+station is paid, so the station keeps the full wait and only the boundary between "waiting"
+and "travelling" moves to where the colonist actually boards.
+Probe: `TrainWaitTime` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
 ### F22 — `GetGridGlobalStorage` breaks Last Transmission gates  `[fixed: Code/Fix_GridGlobalStorage.lua]`
 `Lua\ResourceOverview.lua:880-899` — zero-demand map returns sentinel `1000 sols` and
