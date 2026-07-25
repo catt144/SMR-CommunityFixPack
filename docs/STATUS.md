@@ -56,6 +56,34 @@ the crystal repeater), plus F55's expiry which self-heals. The consolidated
 it was to collect are F03 (leaked modifiers), F35 (turbine buff) and F48
 (connectors).
 
+## QA session snapshot (Fable, 2026-07-25) — partial, session cut short
+
+- BUGS.md index was stale (16 wave-2 rows said `todo` despite tagged headings) —
+  synced in commit 0ef4e7c. README/MOD_DESCRIPTION verified complete. Follow-up:
+  wave-1 detail headings (F04/05/07/08/10/15/64) lack the `[fixed]` tag.
+- Nothing was marked `blocked` in the build session. F55's "open-air entrance half
+  not actionable" verdict was re-verified and is CORRECT (CalcOpenAirSkin only
+  empties skin[2] configurable attaches; Dome_Entrance is entity-spot auto-attach
+  data, Dome.lua:404 — not patchable from Lua). F55 drone half diffs clean.
+- Spot-audit (partial): **F61 CLEAN** (faithful 4-site replacement, correct
+  declaring-class self-checks; minor: header line-number drift, apply() doesn't
+  pre-check all runtime symbols). **F12 ISSUE (moderate)**: implemented as a
+  post-wrapper, but the shipped dead branch still removes the notification hourly
+  and the wrapper re-adds it → destroy/recreate churn with FX replay every game
+  hour while active, and dismiss/suppression semantics differ. BUGS.md/FIX_POLICY
+  prescribe full replacement for F12 — consider reworking before release. Audits
+  of F44/F53/F68/F73 did not complete this session — re-run them.
+- RunAll before/after pair NOT run: the Relaunched profile has never been created
+  (%AppData%\Surviving Mars Relaunched\ has only Mods; no saves/logs/AccountStorage;
+  no Steam userdata for appid 3215050) and mods can't be enabled until first launch.
+  TestKit is now junctioned next to the fix pack. An opt-in autorun harness
+  (TestKit Code\95_AutoRun.lua: flag-file gated, auto new game via
+  NewGame/InitNewGameMissionParams/LoadLastNewGameSettings + fill g_CurrentMapParams
+  + GenerateCurrentRandomMap, then RunAll with [SMRAUTO] markers, watchdog, quit())
+  was being built when the session ended — it is NOT committed; check the TestKit
+  repo before relying on it. Retail exe ignores -save/-map (goldmaster-gated,
+  autorun.lua:126-144); Mars.exe launches directly, no external Paradox launcher.
+
 ## Next up
 
 P2/P3 backlog in BUGS.md, roughly by value: F46 train cargo dumping, F36
