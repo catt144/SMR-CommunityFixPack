@@ -42,6 +42,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DestroyedTunnels.lua",
 		"Code/Fix_SecondArtificialSun.lua",
 		"Code/Fix_DustSicknessBiorobots.lua",
+		"Code/Fix_DustSicknessDamage.lua",
 	},
 	'TagGameplay', true,
 })

@@ -64,6 +64,9 @@ come back.
   crashed internally on any hour you earned nothing.
 
 **Colonists**
+- Dust Sickness does the damage it was designed to do. The code rolls a random
+  5-14 Health loss per sol and then throws the roll away, dealing a flat 10 to
+  everybody instead.
 - Biorobots no longer catch Dust Sickness. The event that hands out the illness
   excluded children and nobody else, so your synthetic colonists lost Health in
   every dust storm — and on the "they shouldn't work" branch were barred from

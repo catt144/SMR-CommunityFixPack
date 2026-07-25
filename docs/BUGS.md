@@ -29,7 +29,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F14 | Domes Overview red low-stat highlight dead               | P2  | high | fixed  |
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | todo   |
-| F17 | Dust Sickness damage not randomized                      | P2  | med+ | todo   |
+| F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | todo   |
 | F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | todo   |
 | F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | todo   |
@@ -231,11 +231,18 @@ silently (no per-wisp notification). That is a UI addition rather than a defect 
 drone work on finished site. **Fix:** override `StartAction`-holder method, compare
 `self.progress >= self.max_progress`.
 
-### F17 — Dust Sickness damage not randomized
+### F17 — Dust Sickness damage not randomized  `[fixed: Code/Fix_DustSicknessDamage.lua]`
 `Data\TraitPreset.lua:87-91` — `local change = 5 + colonist:Random(trait.param)` dead;
 always deals flat `trait.param` (10)/sol instead of 5-14. **Fix:** patch
 `TraitPresets.DustSickness.daily_update_func` (data patch at ClassesPostprocess — very
 mod-friendly).
+*Implemented as sketched*, but hooked on `DataLoaded`/`DataChanged` rather than
+`ClassesPostprocess`: presets are read from `Data\` during `LoadData`
+(`CommonLua\Dlc.lua:640-662`), after mod code has loaded, so the preset does not exist
+at `ClassesPostprocess`. The corrected body uses the `change` the shipped code already
+computes (5 + `colonist:Random(param)` = 5-14 for param 10). Note the mod sandbox has no
+introspection, so an already-hotfixed `daily_update_func` cannot be told from the broken
+one; the fix deactivates only if the preset or its `param` is missing.
 
 ### F18 — Independence terraforming tech gives 10% not 20%
 `Data\TechPreset.lua:4798-4812` — `param1 = 20` ("decrease percent") but

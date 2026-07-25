@@ -877,6 +877,24 @@ up" and skip the F40 half.
 
 ---
 
+## PT-28 — Dust Sickness damage spread · covers **F17**
+
+**Setup:** SAVE-A, during an active dust storm with several colonists carrying the
+**Dust Sickness** trait (see PT-27 for how to get there).
+
+**Trigger:** pick 4-5 sick colonists, write down each one's Health, run **one sol** at
+`SetGameSpeedState("ultra")`, and compare the drops. (Health also moves for other
+reasons — food, medical care — so use colonists in the same dome doing the same thing,
+and look at the pattern rather than exact numbers.)
+
+- **BROKEN looks like:** every sick colonist loses **exactly the same** Health per sol
+  (a flat 10) — the damage roll the code computes is discarded.
+- **FIXED looks like:** the per-colonist losses **differ**, spread over 5-14.
+
+`Result:` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
