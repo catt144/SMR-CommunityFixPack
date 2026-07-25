@@ -43,6 +43,7 @@ and can be individually disabled.
 | DomeOverviewHighlight | Domes Overview marks a dome's low colonist stats in red again |
 | UniversityOvertraining | Universities stop graduating geologists for extractors that Extractor AI made self-sufficient |
 | TrainCargoDumping | Trains stop unloading at stations where you switched that resource off (and hauling it back out again next trip) |
+| DestroyedTunnels | A destroyed tunnel stays closed after you reload instead of silently becoming a working shortcut again |
 
 The full defect tracker (73 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).

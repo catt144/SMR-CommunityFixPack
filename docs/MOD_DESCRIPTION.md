@@ -45,6 +45,10 @@ come back.
   ever removed was still supplying air to that dome forever, and each rebuild
   added another invisible supply on top. Existing phantom oxygen is cleaned out
   of your save when you load it.
+- A destroyed tunnel stays destroyed. Loading a save handed every tunnel its
+  pathfinding shortcut back without checking whether it was still standing, so
+  rovers and colonists kept routing through a ruin until you repaired it. Existing
+  saves are corrected the moment you load them.
 - Building an artificial lake no longer entombs the RC Constructor that built it,
   along with any drones nearby. The basin is dug after the site clears units out,
   so anything still standing there was sealed under the new terrain and quietly

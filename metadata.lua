@@ -39,6 +39,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DomeOverviewHighlight.lua",
 		"Code/Fix_TrainCargoDumping.lua",
 		"Code/Fix_UniversityOvertraining.lua",
+		"Code/Fix_DestroyedTunnels.lua",
 	},
 	'TagGameplay', true,
 })

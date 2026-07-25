@@ -788,6 +788,38 @@ targets `MetalsExtractor` / `PreciousMetalsExtractor`) and a **Martian Universit
 
 ---
 
+## PT-25 — Destroyed tunnel after a reload · covers **F38**
+
+**Setup:** SAVE-B (or any save with underground access — `UIColony:UnlockUnderground()`
+then `CheatRevealDarkness()`). Build a **tunnel pair** across an obstacle so that the
+tunnel is the *short* route between two points, and park an **RC Rover** on one side
+with an errand on the other (a deposit to mine, a building to service). Watch it use
+the tunnel once so you know the route.
+
+**Trigger:**
+1. Destroy the tunnel. `CheatToggleInfopanelCheats()` gives you a per-building
+   **break/destroy** button in the infopanel; a meteor strike on it works too
+   (`CheatMeteors("single")` with the camera on the tunnel). Confirm both ends now
+   show as **destroyed ruins**.
+2. Send the rover across again. It should now take the long way round (or refuse).
+3. **Save, quit to menu, and load that save.** This is the step that mattered.
+4. Send the rover across again and watch its path.
+
+- **BROKEN looks like:** after the reload the rover walks straight at the ruin and
+  teleports through it as if the tunnel were intact — the shortcut came back on load.
+- **FIXED looks like:** the rover takes the same long route after the reload as it did
+  before it. The log shows a `[CommunityFixPack] DestroyedTunnels: closed N destroyed
+  tunnel(s)` line if the save already had the bad state baked in.
+
+**Then repair it** (the ruin's Rebuild button) and confirm the tunnel **works again** —
+this is the check that the fix does not lock a repaired tunnel out permanently.
+
+`Result (still closed after reload?):` _____________________________________________
+
+`Result (works again after repair?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
