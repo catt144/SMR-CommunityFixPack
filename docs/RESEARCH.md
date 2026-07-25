@@ -84,6 +84,47 @@ verified against Relaunched source unless promoted into BUGS.md.
 - **UI buttons misaligned** → XTemplates layout; cosmetic, likely fixable via
   template patch; collect concrete screens/cases first.
 
+## High-upvote review reports (added 2026-07, 100+ upvotes each)
+
+Mapped to existing findings:
+- "Domes with plenty of jobs/vacancy but homeless and unemployment notifications"
+  → F51 (shuttle transport cache), F54 (off hubs count as transport), plus the
+  three documented "unemployed every sol" mechanisms under F50-F57 notes.
+- "All non-specialists stop working their jobs randomly" → same unemployment
+  cluster; ALSO check by-design specialist displacement (workplaces evict
+  non-specialists when specialists apply) misfiring with F36's inflated
+  specialist demand. Needs repro save.
+
+NEW leads (not yet traced — priority targets for next session):
+- **Deterministic freeze near 90% breathable atmosphere** (reproduces at same
+  point across reloads). Prime suspect: the Open Domes / breathability threshold
+  transition (`OpenAirBuilding.lua` skin-swap and transition loops, terraforming
+  threshold Msg handlers, rainfall). A same-point lockup smells like an infinite
+  loop in a game-time thread triggered by a terraforming param crossing a
+  threshold. HIGH priority — hard lock + likely widespread late-game.
+- **The Last War mystery freezes at 54%, permanently blocking ALL imports** —
+  the mystery presumably disables resupply during a sequence and hangs before
+  re-enabling (same one-shot-Msg hang class as F06/Crystals). Sweep the Last War
+  scenario/sequence files for import-lock set/clear pairing and WaitMsg hangs.
+  HIGH priority — permanent economy kill.
+- **Game stops saving entirely (auto + manual)** — classic symptom of a Lua
+  error during savegame persistence (one corrupt/unpersistable object aborts
+  the save). Cross-check against our corruption-leaving bugs (F03 leaked
+  modifiers, F30 entombed units, F45 broken-track repair sites with false
+  node_idx...). Need a player log/save to pin. HIGH priority.
+- **Colonists disappear from dome UI lists while still working** — label
+  registration desync (dome/city labels lose the colonist). Original game had
+  exactly this class (cf. `SavegameFixups.ColonistsOutsideLabelsAfterInspiringArchitecture`,
+  B&B wrong-map label counts). Find what de-registers without re-registering.
+- **Rocket transporting tourists home disappears mid-flight** — tourist
+  departure path (`RocketBase.lua:818` / `UniversalRocket.lua:2014` area, F08's
+  neighborhood); check the depart/travel state machine for a Done() without
+  respawn on the tourists-aboard path.
+- **Train stations don't connect when attached to a train tunnel** — extend F48/
+  AutoConnectTracks constraint analysis to tunnel connector elements.
+- **Light sources stop working underground** — likely engine/rendering side;
+  check Lua light-attach logic underground before writing it off as unfixable.
+
 ## Original-game fix list highlights to re-verify in Relaunched source
 
 Drones/rovers: malfunctioning drones stuck at hub (`InvalidPos`), drones stuck in
