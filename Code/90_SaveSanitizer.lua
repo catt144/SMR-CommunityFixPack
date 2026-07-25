@@ -11,8 +11,9 @@
 --   F03  upgrade modifiers leaked onto domes and the colony by salvaged buildings
 --
 -- Both passes are read-only until they find something they can positively
--- identify as wrong, run on every LoadGame, and are idempotent — a second run
--- finds nothing.
+-- identify as wrong, run on every PostLoadGame (after the shipped savegame
+-- fixups — see the note on the handler below), and are idempotent — a second
+-- run finds nothing.
 --
 -- NOT included, deliberately: F48 (station-connector fixup). See its BUGS.md
 -- entry — the "corrected pass" re-runs OrderTrackElements, which rebuilds
@@ -25,7 +26,11 @@ local FIX_ID = "SaveSanitizer"
 
 local function log(fmt, ...)
 	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog(msg) else print(msg) end
+	-- ModLog's ModPrint output path re-formats the message (printf-style
+	-- CreatePrint, Mod.lua:109-132 + lib.lua:164-174), so a literal '%' — as in
+	-- this file's "+100% electricity_production" lines — must be escaped or the
+	-- second format raises. Caught by the 2026-07-25 A/B pair.
+	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 end
 
 --------------------------------------------------------------------------------
@@ -83,8 +88,12 @@ local function repair_turbine_buff()
 				-- Same shape the shipped fixup uses (WindTurbine.lua:81-86); a
 				-- stable SMRFixPack_* id instead of its throwaway table, so this
 				-- pass can recognise its own work on the next load.
+				-- Amount is scaled the way the live tech apply scales it
+				-- (Tech.lua:298-301); dormant today — all three effects ship with
+				-- Amount 0 — but this pass is preset-driven by design.
+				local scale = rawget(_G, "GetModifiablePropScale")
 				colony:SetLabelModifier(label, "SMRFixPack_F35_" .. label, {
-					amount = (effect.Amount or 0),
+					amount = (effect.Amount or 0) * (scale and scale(prop) or 1),
 					percent = percent,
 					prop = prop,
 					id = "GameEffect",
@@ -193,7 +202,17 @@ SMRFixPack.Register(FIX_ID, {
 	end,
 })
 
-function OnMsg.LoadGame()
+-- PostLoadGame, NOT LoadGame: UnpersistGame fires Msg("LoadGame"), then runs
+-- FixupSavegame, then fires Msg("PostLoadGame") (CommonLua\Savegame.lua:810-813).
+-- The F35 pass compensates for SavegameFixups.WindTurbine_Large_ReapplyModifiers,
+-- and on the FIRST load of a save that fixup has not yet been applied to, a
+-- LoadGame-time pass would run before it: the pass would see the Diffuser label
+-- bare and buff it, then the shipped fixup would unconditionally add its own
+-- +100% (WindTurbine.lua:80-87 has no already-buffed check) — +200% baked into
+-- the save permanently. After fixups the pass sees the world post-migration and
+-- the "any percent modifier present → skip" guard holds. (Found by the wave-3
+-- QA audit, 2026-07-25.)
+function OnMsg.PostLoadGame()
 	local fix = SMRFixPack.fixes[FIX_ID]
 	if not (fix and fix.status == "active") then return end
 

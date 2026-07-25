@@ -17,7 +17,11 @@ SMRFixPack = rawget(_G, "SMRFixPack") or {
 
 local function log(fmt, ...)
 	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog(msg) else print(msg) end
+	-- ModLog stores the message unformatted, but its ModPrint output path is a
+	-- printf-style CreatePrint (Mod.lua:109-132, lib.lua:164-174) that formats the
+	-- single argument AGAIN — a literal '%' in an already-formatted message raises
+	-- "bad argument #2" there. Escape it for the second pass.
+	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 end
 
 -- Register and immediately apply a fix.

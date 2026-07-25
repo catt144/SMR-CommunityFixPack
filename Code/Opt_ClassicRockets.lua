@@ -30,9 +30,14 @@
 --
 -- With this module on, a player-controlled rocket parked at the colony with no
 -- destination keeps its launch ration requested, and drones top it up while it
--- waits. Neither notification branch in UpdateCargoResourceRequests fires in that
--- state (both require `arrival_loc`, :1308-1314), so there is no "refuelled" spam
--- and no entry in g_LandedRocketsInNeedOfFuel.
+-- waits. Neither notification branch fires in that state — they live in the
+-- UniversalRocketBase:UpdateCargoResourceRequests OVERRIDE and both require
+-- `arrival_loc` (UniversalRocket.lua:1687-1692) — so there is no "refuelled"
+-- spam and no entry in g_LandedRocketsInNeedOfFuel. (A third path,
+-- DroneUnloadResource's Msg("RocketRefueled") at CargoTransporterNew.lua:1367-1371,
+-- can fire when the ration tops off, but its only listeners no-op here:
+-- RocketRefueledInADay is gated on arrival_loc, UniversalRocket.lua:1790, and
+-- the achievement event is moot while mods are active, ModManager.lua:78.)
 --
 -- Chained wrapper, and only when the shipped answer is 0 — every case the game
 -- already answers, including F69's asteroid-lander reserve, falls through
