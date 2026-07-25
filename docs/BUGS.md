@@ -1,4 +1,4 @@
-# Bug Tracker — Surviving Mars: Relaunched Community Fix Pack
+﻿# Bug Tracker — Surviving Mars: Relaunched Community Fix Pack
 
 Canonical record of every defect found in the game's shipped Lua source
 (`<game>\ModTools\Src`), its evidence, and its fix status. **Update this file in
@@ -79,8 +79,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | D02 | Dismissing "not working" warnings only silences them 2min| dsgn| med  | planned opt-in |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
-| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
-| F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | todo   |
+| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
+| F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | fixed  |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed  |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
@@ -1025,7 +1025,7 @@ don't know the stored ones are gone. **Fix:** pre-hook `Station:OnDemolish` to
 `Train.Done` refund guard; compensation prefabs for corrupted saves not exactly
 recoverable (count unrecorded).
 
-### F65 — Station attached to a train tunnel never bridges the power grid (P2, med)
+### F65 — Station attached to a train tunnel never bridges the power grid (P2, med)  `[fixed: Code/Fix_TrackTunnelPowerBridge.lua]`
 `TrackTunnel` description promises power transfer (`Data\BuildingTemplate\TrackTunnel.lua:17`);
 class machinery identical to working `Tunnel`. Defect: `OnMsg.StationsConnected`
 (`Track.lua:668-680`) skips `ConnectToGrids()` when `#track.elements <= 2` ("adjacent
@@ -1034,8 +1034,33 @@ elements → supply tunnel never created, no power link. Caveat: TrainTunnel ent
 data is binary, unverifiable from Lua. **Fix:** additional `OnMsg.StationsConnected`
 handler: if 2-element track touches a `TrackTunnelBase`, call `track:ConnectToGrids()`;
 LoadGame pass re-asserting masks/merges.
+*Confirmed against the code, and the shortcut's premise is checkable:* a 2-element track's
+two elements ARE the two buildings' connector elements (`TrackBase:GetSupplyTunnelElement`,
+`Track.lua:567-574`, returns `elements[1]` and `elements[#elements]`), and a connector
+element sits on a hex OUTSIDE its building — `OrientConnectorElements` records the
+connection back toward the building at `conq - dq, conr - dr` (`TrainTransport.lua:91-100`).
+So when the shortcut fires the buildings are two hexes apart with the connector hexes
+between them, and track elements carry no power (`TrackBase.ApplyToGrids = empty_func`,
+`:663`; "Since we're not an ElectricityGridObject", `:98`). The description promise is
+real and literal: "connect tracks **and power grids** at different locations and different
+elevations" (`Data\BuildingTemplate\TrackTunnel.lua:17`).
+*Implemented differently, on better evidence:* whether the two buildings genuinely end up
+adjacent is entity spot geometry — binary data, unreadable from Lua, exactly the caveat
+above. So the fix does not assume: the added `OnMsg.StationsConnected` handler bridges only
+when the two stations demonstrably sit on **different live electricity grids** after the
+shipped handler has run. If the shortcut's premise holds they already share a grid and the
+fix is a no-op. That runtime test also removes the reason to restrict it to
+`TrackTunnelBase` — the same shortcut fails identically for two stations a short track
+apart — so the scope is any ≤2-element track; the tunnel is just the case with a written
+promise attached. On success the handler clears `stations_connected` so the track's state
+matches a >2-element track's exactly (`Track.lua:506`, `:511`, `:682-684`,
+`Station.lua:1224-1234`). The savegame pass runs on **`OnMsg.PostLoadGame`**, not LoadGame:
+`Msg("LoadGame")` fires before `FixupSavegame` (`Savegame.lua:810-813`) and the shipped
+`SavegameFixups.ConvertTrackPowerLinks` (`Station.lua:1395-1420`) tears down and rebuilds
+these very links — a LoadGame-time pass would race it (the F35 lesson).
+Probe: `TrackTunnelPowerBridge` in `40_Probes_Wave4.lua`. Playtest: PT-40.
 
-### F66 — Station↔tunnel connector hex ping-pong (P2, med-high)
+### F66 — Station↔tunnel connector hex ping-pong (P2, med-high)  `[fixed: Code/Fix_TrackConnectorPingPong.lua]`
 With a 1-hex gap, both buildings project their connector element onto the SAME hex;
 `TrackConnectedObjBase:CreateConnectorElements` (`TrainTransport.lua:126-130`) deletes the
 other's element (assert assumes never two live owners) → victim's `Done` reschedules its
@@ -1045,6 +1070,27 @@ double-turn constraint refuses connections silently (`TrackElement.lua:336-345`)
 Workaround: ≥2-hex gap. **Fix:** patch `CreateConnectorElements` to not delete elements
 owned by a live non-destructing building (breaks ping-pong); full shared-hex support more
 invasive.
+*Confirmed, and the loop's return leg is now pinned down:* `TrackGridElement:Done`
+(`TrackElement.lua:193-199`) spawns a game-time thread calling
+`station:CreateConnectorElements()` for any still-live `self.station`, so destroying a
+neighbour's connector is precisely what makes the neighbour rebuild it and take the hex
+back. The shipped `assert(not IsValid(el.station) or IsBeingDestructed(el.station))`
+(`TrainTransport.lua:127`) already STATES the invariant the loop violates — and asserts do
+not unwind in this engine, so it is a log line and the steal proceeds anyway. The fix is
+therefore to enforce the shipped assert's own condition, nothing more: a hex whose element
+belongs to a different building that is alive and not being destructed is left alone.
+Implemented as a full replacement of `CreateConnectorElements` (`TrainTransport.lua:114-154`)
+because the decision is inside the per-spot loop; the copy is byte-identical except that one
+condition, and the assert line is dropped (it cannot unwind, its condition is now enforced,
+and keeping it would print on every legitimate clear of an abandoned element). Ordinary
+clears are untouched: a plain track element on the hex has `station == false`, so
+`IsValid(el.station)` is false and it is still removed, and `force` still rebuilds the
+building's own element. The second building then simply gets no connector on that hex — the
+same outcome as the ≥2-hex-gap workaround, without the fight. Genuinely sharing one hex
+between two owners is a redesign of the connector model, not a defect repair (FIX_POLICY §4).
+The "double-turn constraint refuses connections silently" half (`TrackElement.lua:336-345`)
+is NOT addressed — it is a separate placement rule, not part of this loop.
+Probe: `TrackConnectorPingPong` in `40_Probes_Wave4.lua`. Playtest: PT-41.
 
 ### F67 — Auto-lander launches empty and ping-pongs (P1, high)  `[fixed: Code/Fix_LanderEmptyLaunch.lua]`
 `UniversalRocketBase:IsCargoReady` (`UniversalRocket.lua:455-472`): `CheckAutoDepart()`

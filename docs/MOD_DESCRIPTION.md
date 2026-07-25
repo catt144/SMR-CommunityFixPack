@@ -187,6 +187,15 @@ come back.
   colonist idling in vacuum now heads home before the oxygen runs out — and a
   brief power or air interruption no longer throws every resident out of a
   habitat permanently.
+- Tracks connect to stations and tunnels again. When two train buildings sit one
+  hex apart, both want the same connector tile — and the game let them delete
+  each other's, endlessly, so neither ever held a working connection. Now the
+  first one keeps it.
+- A train tunnel really does carry power. The tunnel's description promises it
+  connects power grids across the map, but a station attached directly to the
+  entrance (or to another station a short track away) was skipped by that
+  wiring. It now bridges whenever the two ends genuinely sit on separate grids,
+  including in saves where the link is already missing.
 - RC Transports keep their hands off trade and refugee rockets. The game already
   forbids that, but the rule stopped matching anything when the rocket classes
   were rebuilt for Relaunched, so an RC Transport could be sent to load from or

@@ -1315,6 +1315,70 @@ aboard and some free space, parked near it.
 
 ---
 
+## PT-40 — Train tunnel carries power · covers **F65**
+
+The fix only acts when the two ends really are on different power grids, so this
+test has to create that situation deliberately.
+
+**Setup:** two separate power grids with no cable between them. On grid 1, a
+Station; on grid 2 (far away, e.g. across terrain a cable can't cross), the other
+end. Build a **Train Tunnel** pair linking the two areas and attach a station
+**directly** to the tunnel entrance — close enough that the connecting track is
+only one or two tiles long.
+
+**Steps:**
+1. Before completing the short track, note each side's power surplus/deficit
+   (select a building on each grid; the two must read as separate grids).
+2. Complete the short track so the station and tunnel connect.
+   - **EXPECTED:** the two grids become one — the surplus/deficit numbers merge,
+     and a shortage on one side is now fed by the other.
+   - **SURPRISE looks like:** the track connects for trains but the grids stay
+     separate.
+3. Now **salvage the short track** again.
+   - **EXPECTED:** the grids split back apart cleanly, no error in the log, no
+     building left permanently unpowered that has its own supply.
+4. Repeat step 2 with a **long** track (10+ tiles) between two stations — this is
+   the path the game already handled; it must be unchanged.
+5. Save, quit to menu, reload the save.
+   - **EXPECTED:** the grids are still merged, and the log shows no errors from
+     our PostLoadGame pass.
+
+`Result (grids merge on connect?):` _____________________________________________
+
+`Result (split cleanly on salvage / survive reload?):` _____________________________________________
+
+---
+
+## PT-41 — Two train buildings one hex apart · covers **F66**
+
+**Setup:** open ground with room for a station and a train tunnel entrance.
+
+**Steps:**
+1. Place a **Station**. Then place a **Train Tunnel** entrance so that exactly
+   **one hex** separates them — the layout that used to refuse to connect.
+2. Watch the connector tiles between them for a minute of game time.
+   - **EXPECTED:** the connector tile settles on ONE owner and stays there. No
+     flicker, no track piece appearing and vanishing repeatedly.
+   - **SURPRISE looks like:** the piece keeps blinking in and out, or the log
+     fills with repeated track-element messages.
+3. Try to complete a route through that pair.
+   - **EXPECTED:** either it connects, or it plainly does not — but the game is
+     stable and the infopanel is consistent. (One of the two buildings not
+     getting a connector on the shared hex is the intended outcome; the endless
+     fight was the bug.)
+4. **Control:** build a station where a plain, unowned track tile already lies on
+   its connector hex.
+   - **EXPECTED:** the station still claims that tile normally. If it can't, the
+     fix is over-broad — report it.
+5. Demolish one of the two buildings.
+   - **EXPECTED:** the survivor picks up the freed hex within a few seconds.
+
+`Result (flicker stopped?):` _____________________________________________
+
+`Result (control — station still claims a plain track tile / survivor claims the freed hex?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
