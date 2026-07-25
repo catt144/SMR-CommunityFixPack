@@ -28,6 +28,10 @@ come back.
   delay strikes instead of accidentally making things worse.
 
 **Buildings & economy**
+- Building an artificial lake no longer entombs the RC Constructor that built it,
+  along with any drones nearby. The basin is dug after the site clears units out,
+  so anything still standing there was sealed under the new terrain and quietly
+  ran out of power.
 - Salvaging an upgraded building now removes its dome-wide and colony-wide
   upgrade bonuses. Previously these leaked forever and could be stacked
   infinitely by rebuilding (this silently corrupted long-running colonies).

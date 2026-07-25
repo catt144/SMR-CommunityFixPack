@@ -22,6 +22,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_ShelterReflex.lua",
 		"Code/Fix_BrokenTrackSalvage.lua",
 		"Code/Fix_TrackSalvageWipe.lua",
+		"Code/Fix_LakeEntombment.lua",
 	},
 	'TagGameplay', true,
 })

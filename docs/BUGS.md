@@ -42,7 +42,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | todo   |
 | F28 | `Research:ReplaceTech` crashes (latent, mod-facing)      | P3  | high | todo   |
 | F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | todo |
-| F30 | Lake placement entombs RC builder + drones               | P1  | high | todo   |
+| F30 | Lake placement entombs RC builder + drones               | P1  | high | fixed  |
 | F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | todo   |
 | F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | todo   |
 | F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | todo   |
@@ -311,7 +311,7 @@ branch with `if g_TechFieldResearchedCount[field_id] == 0 then ... = nil end`.
 
 ## Phase 2 findings — details (2026-07-24)
 
-### F30 — Lake placement entombs RC builder + drones (P1, high)
+### F30 — Lake placement entombs RC builder + drones (P1, high)  `[fixed: Code/Fix_LakeEntombment.lua]`
 Two-part defect. (a) `ConstructionSite:ScatterUnitsUnderneath` (`ConstructionSite.lua:1722-1737`)
 exempts the RC Constructor building the site. (b) Scatter runs at `Complete` (:1574-1580)
 BEFORE `LandscapeLake:GameInit` digs the basin (`LandscapeLake.lua:32-35,215-292`);
