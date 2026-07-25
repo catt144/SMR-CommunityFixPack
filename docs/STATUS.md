@@ -206,6 +206,24 @@ compensation option at best, and document the vanilla train re-purchase at
 stations, Station.lua:573-611). Save rescue is the headline differentiator vs
 official patches ("new games only") — lead with it.
 
+## Distribution facts (researched 2026-07-25, source-verified)
+
+- BOTH Steam Workshop AND Paradox Mods are supported; the in-game Mod Editor has
+  upload buttons for each (ModEditor.lua:78/:115). Steam Workshop reaches PC
+  only; **Paradox Mods is the only channel that reaches Xbox/PS5** — platform
+  fan-out is automatic on the backend, no platform fields, no modder-side
+  signing (PS5 signatures are created client-side at install, Mod.lua:49-95).
+  Console loads packed Lua code mods fine; no engine restriction found.
+- PDX upload hard-requires: title, short_description (≤200 chars), description,
+  preview image, lua_revision; last_changes on every update; ≤10 tags
+  (ParadoxMods.lua:13-54, Mod.lua:410). GitHub repo link goes in metadata
+  `external_links` — "github" is a supported LinkType shown on the PDX portal
+  (Mod.lua:180-201). Default ignore_files already excludes *.git/*.
+- Public repo: github.com/catt144/SMR-CommunityFixPack (main). Commit identity
+  is the GitHub noreply address — never commit with a real email again.
+- Achievements are disabled while any mod is active (ModManager.lua:78) —
+  mention in the mod description.
+
 ## Release checklist (when fixes are tested)
 
 Real author + version bump in metadata.lua; player-facing fix list in README +
