@@ -80,6 +80,13 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | todo   |
+| F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | todo   |
+| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | todo   |
+| F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | todo   |
+| F70 | Edit Payload silently refills from policy template       | P2  | med+ | todo   |
+| F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | todo   |
+| F72 | "No available landers" while a lander sits on the pad    | P2  | med  | todo   |
+| F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | todo   |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -660,6 +667,70 @@ double-turn constraint refuses connections silently (`TrackElement.lua:336-345`)
 Workaround: ≥2-hex gap. **Fix:** patch `CreateConnectorElements` to not delete elements
 owned by a live non-destructing building (breaks ping-pong); full shared-hex support more
 invasive.
+
+### F67 — Auto-lander launches empty and ping-pongs (P1, high)
+`UniversalRocketBase:IsCargoReady` (`UniversalRocket.lua:455-472`): `CheckAutoDepart()`
+("wait for cargo") only yields the NON-blocking `"waiting_cargo"` issue
+(`GetLaunchIssue` :883-885 returns no blocker); with an empty auto request
+(nothing above export / below import threshold) every entry is 0 → status "ready" →
+departs empty. Only mitigation: 1-hour sleep on asteroids (:227-229), none on Mars.
+Endless empty round trips ~70 fuel each. **Fix:** wrap `IsCargoReady`: in auto mode with
+CheckAutoDepart true and no non-fuel payload requested, return false (1-sol timer still
+exits cleanly).
+
+### F68 — Hourly auto-request ratchet unloads the lander's own cargo (P1, high)
+`CreateAutoCargoRequest` (`UniversalRocket.lua:1742-1755`, hourly): `to_transfer =
+GetTotalCargoAvailable(...) - threshold`, but loaded cargo is NOT "available" — every
+hour the request shrinks by what was just loaded; `requested` drops below what's aboard →
+status "unloading" → drones haul the just-loaded cargo back out. Worst phase: request
+collapses to {} with cargo aboard → full unload → F67 empty launch. Explains "loads
+exotics, dumps them back, leaves with junk/nothing". **Fix:** in override, add own cargo
+back before threshold compare; never lower `requested` below `cargo[res].amount` on the
+automode target loc.
+
+### F69 — Manual landing dumps the return fuel (P1, high)
+`CmdLand` (`UniversalRocket.lua:414`) clears `arrival_loc` in manual mode →
+`GetFuelResourceRequest` (:1639-1642) returns 0 → `CmdUnload` (:486-494) posts the
+reserved return fuel (asteroid policy keeps half, `FlightPolicyDef.lua:208-211`,
+`ConsumeFuel` :1664-1673) as EXCESS → drones unload it. No drones/hub on the asteroid →
+stranded forever ("no fuel, no drones, can't send another lander"). **Fix:** override
+`GetFuelResourceRequest`: lander type with no destination departing an asteroid keeps
+`FuelResourceAmount` requested.
+
+### F70 — Edit Payload silently refills from the policy template (P2, med-high)
+`CargoRequestNew:RetrieveRequests` (`CargoRequestNew.lua:194-212`): rows with stored
+request 0 are refilled from the flight-policy cargo template every dialog open (template
+suppressed only during `CmdLoad`; every landing zeroes requests via `CmdUnload`). Mars→
+asteroid template: 5 Drones, 20 Metals, 5 Polymers, 5 MachineParts, 5 Electronics, 3
+extractor prefabs (`FlightPolicyDef.lua:93-131`). Legacy first-trip guard also broken
+(`LanderRocketCargoRequest.lua:116` checks flag on wrong object). "Loads what it wants."
+**Fix:** first-use flag on the transporter gating `resolve_loc_cargo_template`.
+
+### F71 — Auto-export allocates capacity alphabetically (P2, med)
+`CreateAutoCargoRequest` iterates `sorted_pairs` (`UniversalRocket.lua:1736-1758`) —
+alphabetical: Concrete..Metals..Polymers before PreciousMetals/PreciousMinerals; WasteRock
+is a legal export (`FlightPolicyDef.lua:393,401`). 80,000kg budget consumed by bulk before
+valuables; 1-sol forced depart (`AutoDepartTimerSols`, :1773-1775) ships whatever loaded
+first. **Fix:** value-ordered allocation (resupply price descending) in override.
+
+### F72 — "No available Asteroid Landers" with a lander on the pad (P2, med)
+`PlanetaryAsteroidVisitPossible` (`PlanetaryView.lua:433-444`) and
+`GetRocketsForExpedition` (`PlanetUI.lua:1623-1651`) exclude any lander that is busy
+(CmdLoad/CmdUnload) or has stale `arrival_loc` (payload dialog Cancel skips CancelFlight
+during CmdLoad, `CargoRequestNew.lua:389-399`). No per-asteroid occupancy lock exists
+(`IsDifferentAsteroidLocation` compares Map to MapDescriptor — never false,
+`PlanetUI.lua:1696-1699`). **Fix:** accept landed re-targetable landers in both checks.
+
+### F73 — Asteroid colonists idle outdoors; nothing shelters the suffocating (P1, med-high)
+Chain: `MicroGHabitatAutoResolve:IsSuitable` requires `GetScoreFor > 0` ≈ `HasLifeSupport()`
+(`MicroGHabitat.lua:154-156`, `Community.lua:367-398`) — any momentary life-support gap or
+full habitat → colonist keeps `residence == false`; `Roam` (`Colonist.lua:1186-1205`) then
+idles them OUTSIDE in vacuum; `CanService` requires residence == self (`MicroGHabitat.lua:130-132`);
+and `Colonist:Idle` has NO seek-shelter branch on the oxygen timer (suffocation only
+applies damage, `StatusEffects.lua:140-160`). Workers are safe inside the mine during
+shifts; they die during idle stretches next to it. **Fix:** (a) habitat accepts residents
+regardless of momentary life support; (b) Idle wrapper: outside > half of
+OxygenMaxOutsideTime in vacuum → `SetCommand("Rest")`.
 
 ## Candidates under investigation
 
