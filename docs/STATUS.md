@@ -66,6 +66,18 @@ Then: `Code/90_SaveSanitizer.lua` module collecting the one-shot LoadGame sweeps
 3. For the save-failure lead: logs from `%AppData%\Surviving Mars Relaunched\logs`
    and Ctrl+F1 reports from affected players would pin it.
 
+## Save-rescue expectations (for release messaging + sanitizer design)
+
+~60% of fixes help broken saves IMMEDIATELY (behavioral code re-evaluated every
+tick/cycle: drones, colonists, schedulers — F02 pattern of thread-restart on
+LoadGame where needed). ~25% need the planned sanitizer module (baked state:
+F03 leaked modifiers, F37 ghost O2, F58 stale reservations, F35 turbine buff,
+F48 connectors; also detect-and-force-finish hung mysteries). ~15% is
+irreversible history (dead colonists, lost expeditions; F64 voided trains have
+no recorded count — heuristic compensation option at best, and document the
+vanilla train re-purchase at stations, Station.lua:573-611). Save rescue is the
+headline differentiator vs official patches ("new games only") — lead with it.
+
 ## Release checklist (when fixes are tested)
 
 Real author + version bump in metadata.lua; player-facing fix list in README +
