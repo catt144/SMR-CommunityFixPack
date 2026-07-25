@@ -193,7 +193,7 @@ the error aborts before `DiscardTransportTicket`; `Train:UnloadTrain`
 
 ## P2 — wrong numbers / notable misbehavior
 
-### F12 — "Low Storage" warning never fires for Food/maintenance resources
+### F12 — "Low Storage" warning never fires for Food/maintenance resources  `[fixed: Code/Fix_LowStorageWarning.lua]`
 `Lua\ResourceTracking.lua:218-224, 229-234` — `supply*24/v*24` = `((supply*24)/v)*24`,
 always 0 or ≥24 under integer division, guard requires `0 < x < 3` → unsatisfiable.
 Grid branches (:259-303) are correct. Consts: `_GameConst.lua:4,10-11`. **Fix:** replace

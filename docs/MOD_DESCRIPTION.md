@@ -28,6 +28,9 @@ come back.
   delay strikes instead of accidentally making things worse.
 
 **Buildings & economy**
+- You get warned before running out of Food, Machine Parts or Electronics again.
+  The calculation behind that warning could only ever produce a value outside the
+  range that triggers it, so it had never fired since the remaster.
 - A drone that fails to reach a building once no longer ignores it for the rest of
   the game. The game has a five-sol "try again" timer for this, but the failure was
   recorded so far in the future that the timer could never fire — so drones quietly
@@ -129,9 +132,8 @@ come back.
 - Asteroid landers: payload settings that stick, valuables prioritized over
   waste rock, and "no available landers" no longer shown while a lander sits on
   the pad.
-- The "Low Storage" warning fires for Food and spare parts (it mathematically
-  never could); Command Center resource numbers display again; dome overview
-  stat warnings turn red as intended.
+- Command Center resource numbers display again; dome overview stat warnings
+  turn red as intended.
 - A save-repair pass (see below).
 
 ### Fixing your already-broken save

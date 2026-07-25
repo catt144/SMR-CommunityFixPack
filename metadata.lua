@@ -34,6 +34,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_CrystalMysteryHang.lua",
 		"Code/Fix_TouristSatisfaction.lua",
 		"Code/Fix_TrainPlatformWedge.lua",
+		"Code/Fix_LowStorageWarning.lua",
 	},
 	'TagGameplay', true,
 })
