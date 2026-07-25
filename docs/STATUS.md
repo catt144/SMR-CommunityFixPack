@@ -311,6 +311,10 @@ that "passed" or SKIPped were not testing what they claimed.
 4. An in-game observation for F55: do drones still enter a dome after the roof is
    opened? The Lua half of that report turned out not to be actionable (see the
    F55 entry) — only play can tell us whether the entity data is at fault.
+5. Manual playtest per `docs/PLAYTEST_CHECKLIST.md` (22 tests, no third-party mods;
+   covers what scripts can't: feel, visuals, UI, long-running behavior). Results
+   reported back flip each covered fix's BUGS.md status to `tested` — see that
+   file's "Reporting protocol" section for the exact follow-up workflow.
 
 ## Save-rescue expectations (for release messaging + sanitizer design)
 
