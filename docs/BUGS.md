@@ -83,7 +83,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed  |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
-| F70 | Edit Payload silently refills from policy template       | P2  | med+ | todo   |
+| F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed* |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | todo   |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | todo   |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
@@ -766,7 +766,7 @@ stranded forever ("no fuel, no drones, can't send another lander"). **Fix:** ove
 `GetFuelResourceRequest`: lander type with no destination departing an asteroid keeps
 `FuelResourceAmount` requested.
 
-### F70 — Edit Payload silently refills from the policy template (P2, med-high)
+### F70 — Edit Payload silently refills from the policy template (P2, med-high)  `[fixed*: Code/Fix_PayloadTemplateRefill.lua — CargoRequestNew half done; the legacy LanderRocketCargoRequest guard is still open, see below]`
 `CargoRequestNew:RetrieveRequests` (`CargoRequestNew.lua:194-212`): rows with stored
 request 0 are refilled from the flight-policy cargo template every dialog open (template
 suppressed only during `CmdLoad`; every landing zeroes requests via `CmdUnload`). Mars→
@@ -774,6 +774,20 @@ asteroid template: 5 Drones, 20 Metals, 5 Polymers, 5 MachineParts, 5 Electronic
 extractor prefabs (`FlightPolicyDef.lua:93-131`). Legacy first-trip guard also broken
 (`LanderRocketCargoRequest.lua:116` checks flag on wrong object). "Loads what it wants."
 **Fix:** first-use flag on the transporter gating `resolve_loc_cargo_template`.
+*Implemented as sketched* for `CargoRequestNew` (the dialog `UniversalRocketBase` opens,
+`UniversalRocket.lua:2232`): full replacement of `RetrieveRequests` (:179-221) with the
+template read gated on a new `transporter.SMRFixPack_payload_set`, plus a pre-wrapper on
+`CargoRequestNew:Apply` (:341-355, the payload-confirm path) that sets it. The file-local
+`resolve_loc_cargo_template` (:166-177) had to be reproduced — a file-local is unreachable
+— and the shipped `assert(transporter, ...)` on :181 is dropped, since assert does not
+unwind in mod code and the very next line already returns.
+*Open half:* the legacy `LanderRocketCargoRequest:RetrieveRequests` (`:94-129`) has its own
+copy of the same defect — its guard reads `self.initial_landing_completed` where `self` is
+the DIALOG, while the flag lives on the rocket (`LanderRocket.lua:16,1081-1082`), so it is
+always nil and the template always refills. That dialog is opened only by the legacy
+`LanderRocket` class (`LanderRocket.lua:502,1295`); the one-word correction
+(`self.transporter.initial_landing_completed`) is queued rather than shipped, because
+whether that class is reachable in Relaunched has not been established.
 
 ### F71 — Auto-export allocates capacity alphabetically (P2, med)
 `CreateAutoCargoRequest` iterates `sorted_pairs` (`UniversalRocket.lua:1736-1758`) —

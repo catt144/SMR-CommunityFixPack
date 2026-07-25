@@ -140,6 +140,10 @@ come back.
 - Automatic rockets no longer load cargo and then dump it straight back out.
   Their hourly cargo recalculation used to "forget" whatever was already in the
   hold, so drones spent the day carrying the same resources up and down the ramp.
+- Edit Payload remembers what you told it. Any row you emptied was quietly filled
+  back in from the flight policy's default cargo list every single time you opened
+  the dialog — and since every landing clears the payload, that was every trip. The
+  defaults still prefill a payload you have never configured.
 - Asteroid landers no longer strand themselves. Landing manually made the lander
   treat the fuel reserved for the trip home as surplus and unload it — on an
   asteroid with no drones and no fuel production, that was permanent.

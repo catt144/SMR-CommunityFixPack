@@ -945,6 +945,33 @@ fast-forward until you have a **scanned excavation site** with a Drone Hub in ra
 
 ---
 
+## PT-31 — Edit Payload sticks · covers **F70**
+
+**Setup:** SAVE-E. An **Asteroid Lander** on the Mars pad, in **manual** mode (not
+automatic), with an asteroid destination selected. `dbg_ToggleRocketInstantTravel()`.
+
+**Trigger:**
+1. Open **Edit Payload**. A brand-new lander should show the policy defaults
+   (roughly 5 Drones, 20 Metals, 5 Polymers, 5 Machine Parts, 5 Electronics and a
+   few extractor prefabs) — that prefill is intended and must still happen.
+2. Set **Metals to 0** and everything else to whatever you actually want. Confirm.
+3. **Re-open Edit Payload immediately.** Metals must still be 0.
+4. Let the lander fly, land and unload. Open **Edit Payload** again.
+
+- **BROKEN looks like:** Metals is back at 20 in step 3 — and after step 4 the whole
+  policy template has reappeared, so the lander loads a cargo you never asked for.
+- **FIXED looks like:** what you set is what you see, in step 3 and after the round
+  trip in step 4.
+
+> Note the intended prefill in step 1 is the check that this fix is not over-broad —
+> if a *fresh* lander shows an all-zero payload, that is a FAIL too.
+
+`Result (row stays empty?):` _____________________________________________
+
+`Result (fresh lander still prefilled?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
