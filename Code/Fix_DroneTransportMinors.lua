@@ -127,6 +127,16 @@ SMRFixPack.Register("DroneTransportMinors", {
 			return
 		end
 
+		-- FIX (F57a, QA): in the shipped file rfRestrictorRocket is a FILE-LOCAL
+		-- (DroneControl.lua:12, `local rfRestrictorRocket = const.rfRestrictorRocket`)
+		-- — a verbatim copy reading it as a global breaks every call. Capture the
+		-- constant here; `const` is populated at mod-load time.
+		local rfRestrictorRocket = const.rfRestrictorRocket
+		if type(rfRestrictorRocket) ~= "number" then
+			SMRFixPack.DroneTransportMinors.rockets = "const.rfRestrictorRocket not found"
+			return
+		end
+
 		-- Source: Lua\Buildings\DroneControl.lua:613-639 (post-1.0.7 ModTools\Src).
 		function DC:UpdateRocketsInternal()
 			local r_t = self.restrictor_tables[rfRestrictorRocket]
