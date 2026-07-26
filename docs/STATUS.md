@@ -117,6 +117,14 @@ retry (checklist procedure; the sweep line should report both counts on load);
 PT-41 (F66 reclaim); rest of the merged-pack checklist; PT-36/37/38 gates;
 MarsDebug attended [install] pass for wave-4/5.
 
+**User decision 2026-07-26 (D01 export half): match the ORIGINAL game, not a new
+design.** Spec = the legacy loader (RocketBase.lua:1729-1736: standing
+PreciousMetals demand to max_export_storage, any-drone flags, per-rocket
+allow_export toggle). Build queued for a build leg with three research items
+(toggle mapping onto UniversalRocket, modern sell-on-arrival path, whether the
+original auto-offloaded RC transports — decides if F56's behavior rides along);
+own probe + playtest item; same ClassicRockets flag. Details on the D01 entry.
+
 ## QA session (waves 4+5) — Fable, 2026-07-25 evening: merge + audits + A/B CLEAN
 
 **Task 0 — merge:** `wave4` merged to main in BOTH repos with zero conflicts (fix pack

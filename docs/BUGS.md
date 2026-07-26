@@ -1529,6 +1529,23 @@ means editing the same machinery as F50, F68, F70 and F71 — with no way to tes
 in-game from the build seat, and for a change that is by this entry's own verdict not a
 defect. It needs a design decision (what threshold? which resources? what interaction with
 Automated Mode?) plus a playtest before it is written.
+
+**Design decision (user, 2026-07-26): the export half MATCHES THE ORIGINAL GAME —
+no invented thresholds or knobs.** The module exists because the original had this
+behavior and Relaunched redesigned it away; fidelity to the original is the whole
+point and also the only evidence-driven spec. The original's behavior is readable in
+the dead legacy loader (`RocketBase:CreateExportRequests`, RocketBase.lua:1729-1736):
+every landed rocket carries a standing `PreciousMetals` demand request up to its
+`max_export_storage`, flags 0 (any drone serves it), gated by a per-rocket
+`allow_export` toggle; fuel is the sibling standing request (the shipped half).
+Build-leg research before writing it: (1) how the per-rocket `allow_export` toggle
+maps onto UniversalRocket's UI/state; (2) whether the modern Earth-arrival path
+sells metals that are aboard without a payload request (the legacy sell path is
+also compatibility-nilled); (3) what the ORIGINAL did about RC-transport
+auto-offload into rockets — that answer decides whether F56's behavior rides
+along (original had it → ClassicRockets gets it) or stays closed (it did not).
+Needs its own probe + a playtest item when built; stays behind the same
+`ClassicRockets` flag as the fuel half.
 *The export half now also owns F56.* F56 (auto RC Transports never offload rockets) closed
 `wontfix` 2026-07-26 on the same "deliberately maintained design" grounds, with the note
 that if it is ever revisited it belongs in THIS module rather than in one of its own — same
