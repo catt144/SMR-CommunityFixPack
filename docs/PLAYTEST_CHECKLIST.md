@@ -241,7 +241,7 @@ a valid PASS, B is preferred for the record.
 Landed at 1 SOL
 First strike No towers SOL 
 
-`Result:` _____________________________________________  (PASS / FAIL / notes / date)
+`Result:` ____________Fail ended test at SOL 36 still no meteor strike after =57 mark_________________________________  (PASS / FAIL / notes / date)
 
 Starting log at SOL 2.5
 Meteor strike around 5.5 SOL
@@ -387,7 +387,7 @@ result. Ultra speed is fine once the drones are en route.
 
 Turn the logger off afterwards.
 
-`Result:` _____________________________________________
+`Result:` __________________Passed no issues, smooth unloading and unloading, no logs___________________________
 
 ---
 
