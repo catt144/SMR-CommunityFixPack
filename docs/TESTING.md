@@ -130,10 +130,15 @@ Probes needing a loaded game SKIP without one (`g_Consts` is a GameVar), so run
 - **F73 shelter reflex**: asteroid save, power off the habitat briefly so a
   colonist loses residence, fast-forward; unfixed: colonist idles outside past
   the oxygen timer and bleeds health; fixed: forced Rest/shelter before damage.
-- **F50 rocket drone churn**: landed auto-rocket with cargo, drone hub ~1.5+
-  game-hours away (or throttle drone speed via modifier for the test); logger on
-  `SetCommand("Idle")` calls for drones targeting the rocket. Unfixed: hourly
-  wave of aborts. Fixed: none from the reconnect path.
+- **F50 rocket drone churn**: landed auto-rocket with cargo, and a drone hub whose
+  service circle covers the rocket **near its outer edge** — NOT "far away". Drones
+  only service what is inside `work_radius` (`const.CommandCenterDefaultRadius` = 35
+  hexes; `DroneControl.lua:1019`) and the rocket carries none of its own
+  (`starting_drones = 0`), so a hub placed out of range dispatches nothing and the test
+  silently proves nothing. The kick hits whichever drones are walking to the rocket when
+  the hourly update fires, so what matters is having many drones in transit, not a long
+  trip. Logger on `SetCommand("Idle")` calls for drones targeting the rocket. Unfixed:
+  hourly wave of aborts. Fixed: none from the reconnect path. Full procedure: PT-04.
 - **F51 shuttle cache**: two far domes, no shuttles, homeless colonist in A,
   free housing in B → let one emigration eval fail → build+fuel Shuttle Hub →
   unfixed: still homeless indefinitely (cache); fixed: emigrates within the next

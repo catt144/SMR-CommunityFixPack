@@ -244,6 +244,13 @@ First strike No towers SOL
 `Result:` _____________________________________________  (PASS / FAIL / notes / date)
 
 Starting log at SOL 2.5
+Meteor strike around 5.5 SOL
+2nd Sol 7.5 (printed =60 game hours)
+3rd Sol 8.4 ish (Printer =39 game hours)
+4th sol 10.3 ish (printed =39 game hours) 
+-build 3 sensor towers at around sol 10.5
+rec meteor warning
+meteor strike sol 12.5 (printed =57 game hours) 
 
 ---
 
@@ -273,7 +280,7 @@ Starting log at SOL 2.5
 > not swept yet (that's the queued `90_SaveSanitizer.lua`). Test on a save built with
 > the pack active.
 
-`Result:` _____________________________________________
+`Result:` ____________PASS_________________________________
 
 ---
 
@@ -309,9 +316,9 @@ visual the audit specifically flagged). `CheatCompleteAllConstructions()`.
 - **FIXED looks like:** report shows **0** bad sites, and the broken element salvages
   like any other.
 
-`Result (F44 trim):` _____________________________________________
+`Result (F44 trim):` _________________Seemed fine____________________________
 
-`Result (F44 curve visual):` _____________________________________________
+`Result (F44 curve visual):` __________Broke its self, became immune, multiple warnings, screenshots ___________________________________
 
 `Result (F45 broken salvage):` _____________________________________________
 
@@ -319,22 +326,53 @@ visual the audit specifically flagged). `CheatCompleteAllConstructions()`.
 
 ## PT-04 — Rocket drone churn · covers **F50**
 
-**Setup:** SAVE-A with a **landed rocket carrying cargo** and a **Drone Hub placed far
-from it** — far enough that a drone's one-way trip takes more than a game hour (drop
-the hub at the far edge of the buildable area; if drones still arrive too fast, use
-ultra speed only *after* the drones are en route so you can watch them).
+> **Setup corrected 2026-07-26.** An earlier version of this test said to put the
+> Drone Hub "far from the rocket, at the far edge of the buildable area". That does
+> not work and would have produced a false PASS: drones only ever service what is
+> **inside** their command centre's `work_radius` (`const.CommandCenterDefaultRadius`
+> = **35 hexes**, +15 with Signal Boosters; the gate is
+> `HexAxialDistance(center, pt) <= center.work_radius`, `DroneControl.lua:1019`).
+> A rocket outside that circle gets **no drones at all**, so nothing is ever kicked and
+> the log stays empty whether the fix is present or not. The rocket brings none of its
+> own either — `starting_drones = 0` (`UniversalRocket.lua:74`). The maximum drone trip
+> is therefore capped by the hub radius, and no placement can extend it.
+>
+> The test does not need a long trip. The kick fires on the hourly update against
+> **every drone that happens to be walking to the rocket at that moment**, so what you
+> actually need is *drones in transit when the hour ticks* — which means many drones and
+> a decent distance **within** the circle, not a long one outside it.
+
+**Setup:** SAVE-A with a **landed rocket carrying cargo to unload**, and a **Drone Hub
+positioned so the rocket sits near the outer edge of the hub's service circle but
+clearly inside it** (the circle is drawn while you place the hub). Give the hub a full
+complement of drones — the more that are in transit at any moment, the more obvious the
+effect. Make sure **no second hub** also covers the rocket, or its drones will quietly
+take over the hauling and mask the kicks.
+
+**Precondition check — do this before you start, or the result is meaningless:**
+watch for a few seconds and confirm drones really are walking to and from the rocket. If
+nothing moves, the rocket is outside the hub's radius and the test proves nothing.
 
 **Trigger:**
 ```
 SMRTest.Log.DroneChurn(true)
 ```
 Let 3+ game hours pass with drones actively hauling from the rocket. Watch the console.
+The logger only prints when it has something to report, so an empty log is a real
+result. Ultra speed is fine once the drones are en route.
 
-- **BROKEN looks like:** every game hour a batch of drones heading for the rocket
-  suddenly stops, turns around and goes idle — the rocket never gets unloaded, and the
-  log fills with `OnRemoveBuilding(...) -> N drone(s) sent to Idle`.
-- **FIXED looks like:** no hourly `-> N drone(s) sent to Idle` lines from the rocket
-  path; drones keep walking and the cargo actually moves.
+- **BROKEN looks like:** once per game hour, a batch of drones heading for the rocket
+  stops, turns around and goes idle, and the log gets a
+  `DroneControl:OnRemoveBuilding(...) -> N drone(s) sent to Idle` line. Unloading still
+  limps along — **do not read slow progress as a PASS.** The hourly line is the finding.
+  (The extreme case, where the haul can never finish at all, needs a trip longer than a
+  game hour; whether the 35-hex cap allows that is a question for the in-game clock, not
+  for this test.)
+- **FIXED looks like:** **no** `-> N drone(s) sent to Idle` lines naming the rocket, for
+  the whole run; drones keep walking and the cargo moves without interruption.
+
+> Lines naming some *other* building are not this bug — the fix only suppresses the
+> rocket's hourly cargo-request churn. Check the class name the logger prints.
 
 Turn the logger off afterwards.
 
