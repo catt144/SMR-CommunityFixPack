@@ -315,19 +315,36 @@ that loads before this one.
 
 ### Optional module (off by default)
 
-**Classic rocket behavior** (`ClassicRockets`): the remaster intentionally
-changed rockets to not auto-refuel or auto-load Rare Metals while idle — that's
-a design decision, not a bug, so it is not part of the standard pack. This module
-restores the refuelling part: switch it on and a rocket parked at your colony
-keeps its launch fuel requested even before you have picked a destination, so
-drones top it up while it waits instead of only starting once you have chosen
-where it is going. (It does not auto-load Rare Metals.)
+**Classic rocket behavior** (`ClassicRockets`). This one is not a bug fix, and we
+want to be completely transparent about what it changes and what the game offers
+instead:
+
+- **In the original Surviving Mars,** a rocket parked at your colony took care of
+  itself: drones automatically kept it fuelled for launch, and automatically
+  loaded it with Rare Metals for export (with a per-rocket switch to say "not
+  this one").
+- **Relaunched intentionally removed that.** An idle rocket requests nothing —
+  fuel arrives only after you pick a destination, and exporting is something you
+  set up yourself, either through the payload dialog per trip or through the new
+  **Automated Mode**, where you tell each rocket which resources to export and
+  above what stockpile level. That is the developers' intended replacement, it
+  works, and if you like managing rockets that way you do not want this module.
+- **This module restores the original behavior for those who miss it.** It is a
+  preference, not a repair — which is why it ships off by default and lives
+  apart from the fixes. Currently it restores the refuelling half: a parked
+  rocket with no destination keeps its launch fuel requested, so drones top it
+  up while it waits. It changes nothing about Automated Mode or the payload
+  dialog — rockets you automate behave exactly as Relaunched intends, module on
+  or off.
 
 Turn it on with `SMRFixPack_Optional = { ClassicRockets = true }` in the console
 or in a tiny mod that loads before this one. Off unless you turn it on.
 
-[DRAFT NOTE: the standing Rare Metals export half of this module is not written
-yet — see the D01 entry in docs/BUGS.md. Do not promise it in the released text.]
+[DRAFT NOTE: the standing Rare Metals export half is DECIDED (user, 2026-07-26:
+match the original game exactly — the legacy loader is the spec, see the D01
+entry in docs/BUGS.md) but NOT YET WRITTEN. Do not promise it in released text;
+when it ships, extend the third bullet with the export half — including the
+per-rocket "allow export" toggle — and keep this side-by-side format.]
 
 ### Looks like a bug, but isn't: dismissed warnings that come back
 
