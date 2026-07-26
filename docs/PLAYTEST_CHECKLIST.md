@@ -1725,7 +1725,14 @@ running on it**. Console open (Enter / Alt-Shift-C) for the counts.
 5. Look at any track placed instantly by the map (not built by drones): it should be
    the same colour as track you built yourself, not pipe-coloured.
 
-`Result (b — train accounted for after split / after platform split):` _____________________________________________
+`Result (b — train accounted for after split / after platform split):` PASS —
+2026-07-25/26 (user report): across multiple sittings, deleting track on an
+ACTIVE line stored the train back as a prefab, the train count stayed accurate,
+and no train ever vanished — the benign outcome, observed repeatedly across the
+build/salvage/rebuild cycles. F49(b) resolved: nothing to fix (the engine's
+storage path handles a train on a removed element correctly). Steps 4-5
+(max_vehicles recompute, instant-track palette) not separately exercised —
+fold into a later sitting if desired.
 
 `Result (d — cap follows length):` _____________________________________________
 

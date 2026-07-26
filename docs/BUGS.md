@@ -1133,14 +1133,12 @@ nothing, so a merged/extended track's cap can stay stale in-session until the ne
 load's sweep. The fix never sets a wrong value; it just doesn't catch every change
 point yet.*
 
-**(b) NOT FIXED — mechanism confirmed, consequence not establishable from source.**
-Nothing in any of the three partial branches of `DemolishAndSplitTrack` reads or writes
-`assigned_vehicles`; the surviving `track_obj` keeps its whole train list while its
-element set shrinks, and the `new_track` that takes the other half is created with none.
-The whole-track branch is fine — `TrackBase:OnDemolish` → `DestroyAssignedTrains`
-(`Track.lua:159-166`) handles it, and trains are stored as prefabs rather than lost. What
-a train physically standing on a removed or re-homed element then does cannot be read off
-the source. **Playtest item PT-46.**
+**(b) RESOLVED — no defect (PT-46 PASS, 2026-07-25/26).** Mechanism confirmed as
+tracked (no branch of `DemolishAndSplitTrack` touches `assigned_vehicles`), but the
+consequence is benign: the user repeatedly deleted track on ACTIVE lines across two
+sittings — the train is stored back as a prefab, the count stays accurate, nothing
+vanishes. The engine's storage path handles a train on a removed element correctly;
+there is nothing to fix.
 
 **(c) FIXED (user decision 2026-07-25: "the click does nothing").** The mechanism is real:
 `TrackGridElement:SelectionPropagate` returns `self.station` for a connector element
