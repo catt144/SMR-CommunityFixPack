@@ -18,8 +18,10 @@ playtest questions; queued build work is listed at the end).
 **First, read (in order) from `C:\Dev\SMR-BugFixPack`:**
 1. `docs\STATUS.md` — "Follow-up session — Fable, 2026-07-26" AND the whole
    engine-facts list.
-2. `docs\PLAYTEST_CHECKLIST.md` — the tests, their save fixtures, the user's
-   inline result notes, and the "Reporting protocol" section at the end.
+2. `docs\PLAYTEST_CHECKLIST.md` — the un-run tests, their save fixtures, and the
+   "Reporting protocol" section at the end. Completed tests + their result
+   evidence live in `docs\PLAYTEST_ARCHIVE.md` (completed sections move there,
+   protocol step 8).
 3. `docs\BUGS.md` — the tracker you will be updating.
 4. `docs\FIX_POLICY.md` — binding rules for any code you write.
 
