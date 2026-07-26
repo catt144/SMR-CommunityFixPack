@@ -938,9 +938,27 @@ in demolish mode is simply deleted; (2) the comparator rework — stamp a repair
 partial salvage before deleting anything (the shipped abort point, minus its raise);
 (3) post-split orphan sweep + `IsValid` guards on the `UpdateEndElements` /
 `UpdatePos` / `ProcessTrackElements` tail; (4) a `LoadGame` sweep that removes
-orphaned elements already baked into a save. **Needs a fresh PT-03 run** — including
-on the damaged save, which should log
-`TrackSalvageWipe: removed N orphaned track element(s)` on load.
+orphaned elements already baked into a save.
+
+**PT-03 re-run (2026-07-26): the F44 halves PASS** — orphan sweep removed the 40
+debris elements on load; repeated build → salvage → rebuild cycles on straight AND
+curve-ended tracks clean, train survives, partial-salvage Metals refund observed
+(F47). **New finding during the F45 attempt, repaired same day: the split branch's
+blind seeds crash on a dead element.** Destroying a repair site inside the deletion
+zone ALSO destroys its broken twin (`TrackGridElement:Done`,
+`TrackElement.lua:200-201`); the twin shares the site's `node_idx`, so it can sit
+just outside the zone at the seed index, and the shipped
+`el1, el2 = all_elements[last], all_elements[first]` then feeds a destroyed element
+to `ExpandTrackFromElement`, which dereferences its map (`TrackElement.lua:718-719`,
+`map` nil — the user's mod-flagged MouseEvent error; unreachable in the shipped game
+because broken tracks could not be salvaged at all before F45). Repairs: each side
+now seeds from its first still-VALID survivor (walking outward), a side with no
+survivor is tolerated (the just-created empty `new_track` is destroyed; the debris
+sweep handles stragglers), and the `LoadGame` sweep additionally purges DESTROYED
+entries left inside track arrays by a pre-repair aborted split (the log line now
+reports both counts). A/B re-verified same night (baseline 1/58/11, fixed
+59/0/11, 0 ERROR). **F45's salvage step still needs its clean run** (the crash
+aborted it) — retry procedure in the checklist under PT-03.
 
 ### F45 — Damaged tracks can't be salvaged at all (P1, high)  `[fixed: Code/Fix_BrokenTrackSalvage.lua — wrapper + LoadGame sweep for existing saves]`
 `TrackBase:BreakTrackElement` (`Track.lua:618-659`) copies element params to the repair

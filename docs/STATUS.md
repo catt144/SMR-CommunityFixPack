@@ -78,14 +78,44 @@ install-SKIP to a discriminating behavior probe, so 12 SKIP → 11, 57 FAIL → 
 | Fixed #1 (F02+F66 in) | 00.08.03 | **59 PASS, 0 FAIL, 11 SKIP, 0 ERROR** — watchdog exercised end-to-end in-log |
 | Baseline #2 (after F47 + version tags) | 00.11.46 | 1 PASS, 58 FAIL, 11 SKIP, 0 ERROR |
 | Fixed #2 (everything in) | 00.13.02 | **59 PASS, 0 FAIL, 11 SKIP, 0 ERROR**, 66/67 active (ClassicRockets opt-in) |
+| Baseline #3 (after the seed-crash repair) | 00.48.22 | 1 PASS, 58 FAIL, 11 SKIP, 0 ERROR |
+| Fixed #3 (seed repair + sweep extension in) | 00.50.08 | **59 PASS, 0 FAIL, 11 SKIP, 0 ERROR**, 66/67 active |
 
 Parse sweep: every .lua in both mods parses (python luaparser).
 
-**Open for the user after this session:** PT-01 re-run — load the sol-36 save first
-(the LoadGame necropsy line answers dead-vs-stuck immediately) and play a fresh
-stretch; PT-03 re-run (F44 rework + orphan-sweep log line); PT-41 (F66 reclaim);
-rest of the merged-pack checklist; PT-36/37/38 gates; MarsDebug attended [install]
-pass for wave-4/5.
+**Live playtest, same night (user on the sol-36 save, results processed live):**
+- **F02 necropsy answered: the wedged Meteors thread was ALIVE** — "persisted
+  Meteors thread on load was alive" — a live thread whose wake-up never came
+  (scheduler/persist side), not a dead one. Post-load natural gaps **+49h and
+  +40h**, both in band; >42h is impossible under the broken code with 3 towers, so
+  the cadence+towers check is satisfied on real play. Watchdog reported `healthy`.
+  Also confirmed: single meteors get NO tower-scaled warning banner in the shipped
+  game (the singles thread posts no notification; only the ~30 s Predict marker,
+  and only with objects in the blast area) — the PT-01 checklist expectation was
+  corrected accordingly (towers' lead shows in the STORM countdown).
+- **PT-03 F44 halves PASS:** the load sweep removed the 40 orphaned elements from
+  the first attempt; repeated build → salvage → rebuild cycles on straight AND
+  curved tracks clean; train survives; **partial-salvage Metals refund observed
+  live** (F47's half B).
+- **New defect found during the F45 attempt, repaired same night (seed crash):**
+  destroying a repair site in the deletion zone ALSO destroys its broken twin
+  (TrackGridElement:Done, TrackElement.lua:200-201); the twin shares the site's
+  node_idx and can sit just outside the zone at the seed index, and the shipped
+  blind seeds (`all_elements[last]`/`[first]`) then crash ExpandTrackFromElement
+  on a dead element (TrackElement.lua:718-719, `map` nil — mod-flagged MouseEvent
+  error; unreachable in vanilla because broken tracks were unsalvageable before
+  F45). Repair in Fix_TrackSalvageWipe.lua: seeds walk outward to the first
+  still-VALID survivor, a side with no survivor is tolerated (empty new_track
+  destroyed), and the LoadGame sweep now ALSO purges destroyed entries left
+  inside track arrays by the aborted split (log line reports both counts —
+  expect it on the user's save). **F45's salvage step remains the open PT-03
+  item** (retry procedure written into the checklist).
+
+**Open for the user after this session:** PT-01 longer silence-watch (cadence and
+necropsy already good; the watchdog self-reports if the wedge recurs); PT-03 F45
+retry (checklist procedure; the sweep line should report both counts on load);
+PT-41 (F66 reclaim); rest of the merged-pack checklist; PT-36/37/38 gates;
+MarsDebug attended [install] pass for wave-4/5.
 
 ## QA session (waves 4+5) — Fable, 2026-07-25 evening: merge + audits + A/B CLEAN
 

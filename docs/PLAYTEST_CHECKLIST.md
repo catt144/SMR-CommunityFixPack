@@ -235,7 +235,15 @@ threat** (Very High → first strike sol 1.5–2.5, then every 35–60h). Logger
 from sol 0, ultra speed, let 3–4 natural strikes accumulate — gaps must sit in
 the 35–60h band (never collapse toward 6h, never stop entirely; strikes
 continuing IS the "fix didn't kill spawns" proof). Then build the 3 Sensor
-Towers and let 2 more strikes pass: warnings arrive earlier, gaps unchanged.
+Towers and let 2 more strikes pass: **gaps stay in the 35–60h band and do NOT
+lock to ≤42h** — under the broken code with 3 towers the gap is
+`Min(spawn, 42h)` and can never exceed 42h, so any gap over 42h is by itself
+proof the repaired wait is running. (CORRECTED 2026-07-26: do NOT expect an
+earlier warning banner for single strikes — the shipped singles thread posts no
+disaster notification at all; the only per-meteor warning is the impact marker
+~30 s before impact, and only when something sits in the blast area. The
+towers' +12h/tower lead shows up in the Meteor STORM countdown banner, not on
+single meteors.)
 Variant A (above) remains the quick check for any save; either variant alone is
 a valid PASS, B is preferred for the record.
 Landed at 1 SOL
@@ -252,6 +260,21 @@ Meteor strike around 5.5 SOL
 rec meteor warning
 meteor strike sol 12.5 (printed =57 game hours) 
 
+
+
+2nd Pass meteors at t=26423435
+meteor =49 game hours t=27910297
+
+> Second pass, 2026-07-26 (sol-36 save, watchdog build): on load the necropsy
+> printed "persisted Meteors thread on load was **alive**" — the PT-01 wedge was a
+> live thread whose wake-up never came (scheduler/persist side), NOT a dead thread.
+> Natural gaps this pass: **+49h, +40h** (t=26423435 → 27910297 → 29120125), both in
+> the 35–60h band — and >42h is impossible under the broken code with 3 towers, so
+> the cadence direction check is satisfied. `SMRFixPack.MeteorsWatchdogCheck()`
+> reported `healthy`. Later `MeteorsDisaster` prints from the forced F45 meteors
+> (t=30146007 onward) are console-triggered — do not count them as cadence. PT-01
+> verdict pending only a longer silence-watch; the watchdog self-reports if the
+> wedge recurs.
 ---
 
 ## PT-02 — Upgrade-modifier leak across build → upgrade → salvage → rebuild · covers **F03**
@@ -316,11 +339,33 @@ visual the audit specifically flagged). `CheatCompleteAllConstructions()`.
 - **FIXED looks like:** report shows **0** bad sites, and the broken element salvages
   like any other.
 
-`Result (F44 trim):` _________________Seemed fine____________________________
+`Result (F44 trim):` PASSs
 
-`Result (F44 curve visual):` __________Broke its self, became immune, multiple warnings, screenshots ___________________________________
+`Result (F44 curve visual):` PASS
+
+> Re-run 2026-07-26 on the sol-36 save (rework a38cbf2 + F47 composition d3fbf54;
+> the load's orphan sweep removed the 40 debris elements from the first attempt):
+> repeated build → salvage → rebuild cycles on BOTH straight and curve-ended
+> tracks, multiple times — trim takes only the clicked segment, the train
+> survives and keeps running, no immune debris, no warning spam, curve visuals
+> clean. **Metals refund stockpile confirmed on partial salvage** (the F47
+> partial-refund half observed live). First-attempt FAIL notes preserved in git
+> history (09af088 era) — that state is what the orphan sweep cleans.
 
 `Result (F45 broken salvage):` _____________________________________________
+
+> F45 retry procedure (2026-07-26 — the first attempt crashed mid-split on the
+> shipped blind-seed bug, repaired same day; the fix is active from your next
+> game launch):
+> 1. Load the save — the sweep line should report BOTH counts:
+>    `removed N orphaned track element(s) and M dead track-list entr(y/ies)`.
+> 2. Turn the Drone Hub OFF (so repairs don't race you).
+> 3. Select a mid-track hex (away from station/dome), console:
+>    `CreateGameTimeThread(function() MeteorsDisaster(GetMeteorsDescr(), "single", SelectedObj:GetPos(), "force") end)`
+> 4. When the wrench/repair site appears: `SMRTest.ReportBrokenTrack` → want **0**
+>    non-numeric node_idx.
+> 5. Salvage the broken element — should salvage instantly like any piece, with a
+>    refund drop. Turn the Drone Hub back on when done.
 
 ---
 

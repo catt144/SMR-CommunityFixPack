@@ -1,8 +1,11 @@
-# Fable continuation prompt — after the F02/F66/F47 follow-up leg (2026-07-26)
+# Fable continuation prompt — after the F02/F66/F47 follow-up leg + live playtest (2026-07-26)
 
 Paste everything below into a fresh Claude Code session (Fable). The 2026-07-26
 follow-up leg is DONE (F02 hunt + watchdog rework, F66 reclaim trigger, F47
-composition repairs, version tags, two clean A/B pairs — full record in STATUS.md
+composition repairs, version tags, clean A/B pairs), and the same night's LIVE
+playtest confirmed the F02 necropsy (**the wedged thread was ALIVE — stuck, not
+dead**), passed PT-03's F44 halves (+ the F47 refund observed), and surfaced +
+same-night-repaired the split-branch **seed crash** (details below and in STATUS.md
 "Follow-up session — Fable, 2026-07-26"). What remains is playtest-gated: there is
 no queued build work, so this session starts from whatever the user's playtests
 turn up.
@@ -26,41 +29,37 @@ edit that the game could load mid-session.
 
 ## The F02 situation (the one live investigation)
 
-PT-01 regressed: on the user's max-threat run, the fixed Meteors thread struck 5×
-on the designed cadence, then went silent for 24+ sols in one uninterrupted session.
-The 2026-07-26 hunt FALSIFIED every static explanation (no thread error logged, no
-mid-session load, bounded wait math even with towers, descriptor-nil needs 80%
-atmosphere, nothing deletes the thread; the first MeteorStorm went quiet in the SAME
-window — mechanism is outside both loop bodies). The fix now carries a heartbeat +
-daily watchdog + LoadGame necropsy designed to capture the culprit live:
-
-- When the user LOADS their sol-36 PT-01 save, the log prints
-  `MeteorFrequency: persisted Meteors thread on load was <alive|DEAD|not created>`
-  — that single line answers dead-vs-stuck for the wedged thread.
-- If the stall recurs in play, the watchdog prints
-  `WATCHDOG — Meteors thread silent for N game hours (last phase 'X', thread
-  ALIVE but stuck|DEAD); restarting` and self-heals. The `last phase` value pins
-  WHERE the loop stopped (rolled / long-sleep-done / striking / struck /
-  descriptor-wait / …).
-
-When those log lines come back: alive-but-stuck in a Sleep phase points at the
-scheduler/persist layer (check how the save chain interacts with persisted
-game-time threads); DEAD with no error points at a silent kill. Phase "striking"
-means MeteorsDisaster never returned — walk its internals with the descriptor the
-log implies. Design the real repair from that evidence; the watchdog stays either
-way as defense-in-depth.
+PT-01 regressed: the fixed Meteors thread struck 5× on the designed cadence, then
+went silent for 24+ sols in one uninterrupted session. The 2026-07-26 hunt
+FALSIFIED every static explanation (no thread error logged, no mid-session load,
+bounded wait math even with towers, descriptor-nil needs 80% atmosphere, nothing
+deletes the thread; the first MeteorStorm went quiet in the SAME window). **The
+live necropsy has since ANSWERED the first question: the wedged thread was ALIVE
+— a live coroutine whose wake-up never came (scheduler/persist side), not a dead
+one.** Post-load cadence is healthy (+49h, +40h with 3 towers; >42h is impossible
+under the broken code). Remaining F02 work if the wedge recurs: the watchdog will
+print `WATCHDOG — Meteors thread silent for N game hours (last phase 'X', thread
+ALIVE but stuck|DEAD); restarting` — the phase pins WHERE the loop stopped; an
+alive-stuck Sleep phase points at how the save/persist chain re-schedules
+persisted game-time thread wake-ups (the MeteorStorm thread — NOT restarted by
+our fix — wedged identically, so compare both). The watchdog stays either way as
+defense-in-depth.
 
 ## Open user items (playtest-gated)
 
-- **PT-01 re-run (F02):** load the sol-36 save FIRST (necropsy line), then a fresh
-  no-reload stretch on the same map; collect the log.
-- **PT-03 re-run (F44 rework):** the damaged save should print
-  `TrackSalvageWipe: removed N orphaned track element(s)` on load; then the curve
-  trim per the checklist.
-- **PT-41 (F66):** two-building contested hex; demolish the winner; the loser must
-  rebuild its connector within a tick (the new reclaim trigger).
-- Track salvage refunds (F47): partial trims now refund; a trim that deletes the
-  last elements must ALSO refund (the composition fix) — worth an eye during PT-03.
+- **PT-01 tail:** cadence + towers verified on real play; only a longer
+  silence-watch remains. If the watchdog line ever appears, THAT log is the
+  root-cause evidence — pull last phase + alive/dead and design the real repair.
+- **PT-03 / F45 retry (the one aborted step):** the first F45 attempt crashed
+  mid-split on the shipped blind-seed bug (repaired same night — seeds now walk
+  to the first still-valid survivor; LoadGame sweep also purges destroyed
+  entries from track arrays). On load the user's save should print the sweep
+  line with BOTH counts. Retry procedure is written into the checklist under
+  PT-03 (drone hub off; forced meteor via
+  `MeteorsDisaster(GetMeteorsDescr(), "single", SelectedObj:GetPos(), "force")`
+  in a game-time thread; ReportBrokenTrack = 0; salvage the broken element).
+- **PT-41 (F66):** two-building contested hex; demolish the winner; the loser
+  must rebuild its connector within a tick (the reclaim trigger).
 - Rest of the merged-pack playtest checklist; PT-36/37/38 gates.
 - MarsDebug attended `[install]` pass for the wave-4/5 fixes (SetupOnly mode; see
   the wave-3 QA section for procedure and the modal-dialog warning).
