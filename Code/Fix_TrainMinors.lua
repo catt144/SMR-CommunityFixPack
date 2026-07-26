@@ -55,25 +55,30 @@
 -- `SavegameFixups.RemoveTrackDoubleTurns`, TrackElement.lua:839-843, re-processes
 -- track elements).
 --
+---- (c) a salvage click on a station's connector hex reached the STATION ----
+-- Mechanism: `TrackGridElement:SelectionPropagate` returns `self.station`
+-- (TrackElement.lua:297-300), `SelectionMouseObj` runs every candidate through
+-- it (SelectionModeDialog.lua:44-50), and both shipped demolish-mode guards
+-- test only `TrackBase` (:54-56 discards, :84-88 substitutes the element) — a
+-- Station is neither, so the salvage toggle landed on the whole station. The
+-- two guards prescribe different remedies, so this was screened as a design
+-- decision; **the user chose "the click does nothing" (2026-07-25)**. Patch:
+-- a pre-guard on `SelectionPropagate` — in demolish mode a station-owned
+-- element propagates to nothing. Every other mode keeps the shipped behavior
+-- (clicking a connector selects its station), and the station itself is still
+-- salvageable by clicking the station's own footprint.
+--
 ---- screened, NOT fixed here (full write-ups on the BUGS.md entry) ----------
 -- (b) `DemolishAndSplitTrack` never touches `assigned_vehicles`: mechanism
 --     confirmed, consequence not establishable from source alone — playtest
 --     item PT-46.
--- (c) a salvage click on a station's connector hex reaches the STATION:
---     mechanism confirmed (`TrackGridElement:SelectionPropagate` returns
---     `self.station`, TrackElement.lua:298-300, and `SelectionMouseObj` runs
---     every candidate through it, SelectionModeDialog.lua:44-50). Not fixed
---     because the two shipped demolish-mode guards beside it disagree about the
---     remedy — one discards the object (:54-56), the other substitutes the
---     element (:84-88) — and picking between them is a design decision, not a
---     repair.
 -- (e) `GridConstructionController:CanContinueTrack` (GridConstruction.lua:478-491)
 --     is dead code and `ConstructionStatus.TrackRequiresTwoStations` is only
 --     read by it. Wiring it up would mean inventing both the call site and the
 --     condition that inserts the status — a redesign, not a fix.
 
 SMRFixPack.Register("TrainMinors", {
-	title = "Instant track is painted like track, and a track's train cap follows its length",
+	title = "Instant-track paint, train cap follows length, connector-hex salvage click neutralized",
 	apply = function()
 		local TE = rawget(_G, "TrackGridElement")
 		if type(TE) ~= "table" or type(TE.GameInit) ~= "function" then
@@ -91,6 +96,10 @@ SMRFixPack.Register("TrainMinors", {
 		local expand = rawget(_G, "ExpandTrackFromElement")
 		if type(expand) ~= "function" then
 			return "ExpandTrackFromElement not found (game update changed it?)"
+		end
+		if type(TE.SelectionPropagate) ~= "function"
+			or type(rawget(_G, "GetInGameInterfaceMode")) ~= "function" then
+			return "SelectionPropagate/GetInGameInterfaceMode not found (game update changed it?)"
 		end
 
 		---- (a) ---------------------------------------------------------------
@@ -127,6 +136,18 @@ SMRFixPack.Register("TrainMinors", {
 			local res = orig_update_end(self, ...)
 			pcall(recompute_max_vehicles, self)
 			return res
+		end
+
+		---- (c) ---------------------------------------------------------------
+		-- In demolish mode a station-owned connector element propagates to
+		-- nothing (user decision — see header). All other modes fall through
+		-- to the shipped body untouched.
+		local orig_prop = TE.SelectionPropagate
+		function TE:SelectionPropagate(...)
+			if self.station and GetInGameInterfaceMode() == "demolish" then
+				return nil
+			end
+			return orig_prop(self, ...)
 		end
 
 		-- ExpandTrackFromElement(track, element) — a global, so replace it in the

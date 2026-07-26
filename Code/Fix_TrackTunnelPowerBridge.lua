@@ -53,6 +53,27 @@
 -- set, stations_connected false) and the shipped teardown paths — Track.lua:506,
 -- :511, :682-684 and Station.lua:1224-1234 — see the state they expect.
 --
+-- *Teardown (QA audit 2026-07-25):* one deletion path does NOT run the grid
+-- teardown — the special case for a 2-element both-stationed track in
+-- `TrackConnectedObjBase:Done` (TrainTransport.lua:24-27) DoneObjects the track
+-- directly, and `TrackBase:Done` (Track.lua:69-76) never calls
+-- `DisconnectFromGrids` (only `OnDemolish`, Track.lua:273-276, does). Shipped
+-- code never creates a BRIDGED 2-element track, so that path never needed it;
+-- this fix is what creates them, and without a repair, demolishing either
+-- endpoint building leaked the tunnel mask + adjacency (persisted, survives
+-- uninstall) and skipped the grid-split walk. So this fix also pre-wraps
+-- `TrackBase:Done`: any deletion of a `supply_tunnel_set` track runs the
+-- shipped `DisconnectFromGrids` first. That inverse is built for exactly this
+-- moment — it tolerates a dead endpoint ("we don't require two working
+-- stations", Track.lua:139-149) and `RemoveSupplyTunnel` clears the flag, so
+-- the demolish path (which already disconnected) makes the wrap a no-op.
+--
+-- Known scope limit (recorded, accepted): the different-grids test runs once,
+-- at StationsConnected time. If the two stations happened to share a grid via
+-- cables right then, the fix declines, and nothing re-checks when those cables
+-- are later removed — until the next load's sweep. The every-load sweep is the
+-- deliberate mitigation.
+--
 -- Existing saves: a `PostLoadGame` pass re-checks every track once, because
 -- StationsConnected does not fire again on load. It is PostLoadGame and not
 -- LoadGame deliberately — `Msg("LoadGame")` fires BEFORE `FixupSavegame`
@@ -67,6 +88,9 @@ SMRFixPack.Register("TrackTunnelPowerBridge", {
 		if type(T) ~= "table" or type(T.ConnectToGrids) ~= "function"
 			or type(T.GetStartStation) ~= "function" or type(T.GetEndStation) ~= "function" then
 			return "TrackBase.ConnectToGrids/GetStartStation/GetEndStation not found (game update changed it?)"
+		end
+		if type(T.Done) ~= "function" or type(T.DisconnectFromGrids) ~= "function" then
+			return "TrackBase.Done/DisconnectFromGrids not found (game update changed it?)"
 		end
 		if type(rawget(_G, "IsBeingDestructed")) ~= "function" then
 			return "IsBeingDestructed not found (game update changed it?)"
@@ -110,6 +134,18 @@ SMRFixPack.Register("TrackTunnelPowerBridge", {
 		end
 
 		SMRFixPack.TrackPowerBridge = { BridgeIfNeeded = bridge_if_needed }
+
+		-- FIX (QA 2026-07-25): tear the tunnel down on ANY deletion of a bridged
+		-- track — see the "Teardown" note in the header. DisconnectFromGrids
+		-- guards on supply_tunnel_set (cleared by RemoveSupplyTunnel), so paths
+		-- that already disconnected (OnDemolish) no-op here.
+		local orig_done = T.Done
+		function T:Done(done_map, ...)
+			if not done_map and self.supply_tunnel_set then
+				pcall(self.DisconnectFromGrids, self)
+			end
+			return orig_done(self, done_map, ...)
+		end
 
 		OnMsg.StationsConnected = function(s1, s2, track)
 			pcall(bridge_if_needed, track)
