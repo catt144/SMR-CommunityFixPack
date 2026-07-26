@@ -71,6 +71,8 @@ return PlaceObj('ModDef', {
 		"Code/Fix_TrainMinors.lua",
 		"Code/Fix_DroneTransportMinors.lua",
 		"Code/Fix_AnomalyCaveInMap.lua",
+		"Code/Fix_TechDescriptionBuilding.lua",
+		"Code/Fix_BombardmentSpread.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",

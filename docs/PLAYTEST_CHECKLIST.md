@@ -1581,6 +1581,40 @@ running on it**. Console open (Enter / Alt-Shift-C) for the counts.
 
 ---
 
+## PT-47 — Bombardment volley shape · covers **F26**
+
+The probe can prove the game computes a different direction per missile; only eyes
+can confirm the volley looks like a scatter rather than a rank. This fix is the
+pack's largest copied function (100 lines of `WaitBombard`), so the point of this
+test is as much "nothing else about a bombardment broke" as it is the spread.
+
+**Setup:** a Mystery 7 bombardment, or force one from the console:
+`StartBombard(UIColony:GetCityAtMap(MainMap), 40*guim, 8, 500, 1500)`
+(any valid object or point works as the first argument; 8 missiles makes the shape
+obvious). Watch from a low camera angle so the incoming trails are visible.
+
+**Trigger:**
+1. Watch a volley arrive.
+   - **EXPECTED:** the missiles come in from visibly different angles — a scatter,
+     not a rank of parallel trails.
+   - **SURPRISE looks like:** still perfectly parallel (the old behaviour).
+2. Check that everything else about the volley still works, because the whole
+   function was replaced:
+   - impacts leave scorch decals that fade out;
+   - a missile that hits a dome cracks it instead of exploding on the ground;
+   - the "Incoming Missile" notification appears and clears;
+   - missiles shot down by defences explode in the air;
+   - the bombardment ENDS (the sequence continues afterwards) — if the volley
+     never finishes, that is a FAIL and the fix should be reverted.
+3. Check the log for errors mentioning `Bombardment`, `BombardMissile` or
+   `WaitBombard`.
+
+`Result (spread visible?):` _____________________________________________
+
+`Result (decals / dome hits / notification / interception / volley ends?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

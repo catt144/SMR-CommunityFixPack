@@ -37,8 +37,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | fixed  |
 | F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | fixed  |
-| F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | todo   |
-| F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | todo   |
+| F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | fixed  |
+| F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | fixed  |
 | F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | fixed  |
 | F28 | `Research:ReplaceTech` crashes (latent, mod-facing)      | P3  | high | fixed  |
 | F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | fixed*|
@@ -416,15 +416,50 @@ real dome).
 Probe: `[install]`-free — the fix is verified through F24's own playtest, PT-44, because
 the behaviour needs a real dome absorbing a real pipe-connected building.
 
-### F25 — Tech description names wrong building (pre-1.0.6 saves only)
+### F25 — Tech description names wrong building (pre-1.0.6 saves only)  `[fixed: Code/Fix_TechDescriptionBuilding.lua]`
 `Data\TechPreset.lua:1486` (`UndergroundLargeDome`, gated `not UndergroundRework106`) —
 description says "Jumbo Cave Reinforcements", tech unlocks `UndergroundDomeMedium`.
 **Fix:** ClassesPostprocess description patch. Low priority (legacy saves only).
 
-### F26 — Bombardment missiles fly parallel (cosmetic)
+Confirmed, and which half is wrong is unambiguous: the preset's own `display_name` is
+"Underground Medium Dome" (`:1487`), its single unlock is
+`Effect_TechUnlockBuilding{ Building = "UndergroundDomeMedium" }` (`:1491-1493`), that
+building's own display_name is "Underground Medium Dome"
+(`Data\BuildingTemplate\UndergroundDomeMedium.lua:22`), the `<buildinginfo('UndergroundDomeMedium')>`
+tag in the same sentence is correct, and the rest of the sentence ("A medium-sized Dome")
+describes the unlocked building. Only the bolded name is wrong.
+
+Patched from `OnMsg.DataLoaded` (+ `DataChanged` for editor reloads) rather than
+ClassesPostprocess — presets do not exist when mod code loads.
+
+**Localisation note (deliberate):** the replacement is `T(841885693955, "<corrected
+English>")` — the *same* translation id. A localised build resolves the id in its own
+translation table and is completely unaffected; only an English build, which falls back to
+the literal, sees the correction. Minting a fresh T would have replaced every translated
+description with an English paragraph — a worse regression in every other language than the
+one wrong word. The fix declines (with a reason) if the literal it expects is not there.
+
+### F26 — Bombardment missiles fly parallel (cosmetic)  `[fixed: Code/Fix_BombardmentSpread.lua]`
 `Lua\Bombardment.lua:82-83` — deviated `spawn_dir` computed, then `spawn_pos` uses base
 `dir` (compare Meteors.lua:106-107). Mystery 7 bombardments look uniform. **Fix:** override
 `WaitBombard`, use `GenerateDir(dir, angle)` in `spawn_pos`.
+
+Confirmed exactly as tracked. `spawn_dir` is assigned at `:82` and never read again
+anywhere in the 100-line function; `GenerateDir(dir, angle)` exists solely to jitter the
+elevation by up to ±10° around the volley angle (`:38-50`), so the intent of `:82` is
+unambiguous and `:83` names the wrong variable.
+
+*Cost recorded honestly:* this needed the pack's sixth full replacement, and it is the
+largest — 100 lines — for its least valuable defect. There is no seam: by the time any
+hook can reach the missile, `missile:SetPos(spawn_pos)` has already placed it (`:85`) and
+the visual axis is derived from the same local (`:93-96`), so a post-hoc correction would
+leave a missile flying along one line while pointing down another. Two file-locals had to
+be copied in as well — `GenerateDir` (`:38-50`, verbatim, so it consumes the same
+`SessionRandom` draws in the same order and volleys stay deterministic) and `travel_dist`
+(`:53`). One deliberate divergence: the shipped `assert(false, "Failed to find bombard
+pos!")` at `:59` is dropped, since `assert` does not unwind mod code — the `return false`
+beside it is what handles the case and is kept. **Re-verify this copy on every game
+update** (FIX_POLICY §1.5).
 
 ### F27 — Storage charge/discharge rate modifiers ignored (latent)  `[fixed: Code/Fix_StorageRateModifiers.lua]`
 `Lua\ElectricityStorage.lua:47-63`, `Lua\LifeSupportStorage.lua:25-42,131-148` —

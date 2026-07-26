@@ -204,6 +204,12 @@ come back.
   pipe connections were being torn down against the dome instead of against the
   building, leaving stale plumbing behind that a repair pass re-ran on every
   load.
+- Bombardment missiles come in from spread directions instead of arriving as a
+  parallel rank. The game was already picking a separate angle for each missile
+  and then launching them all along the same one.
+- The Underground Medium Dome technology describes the building it unlocks rather
+  than naming an unrelated one. Only visible in saves from before the 1.0.6
+  underground rework.
 - Story steps that collapse a cave can no longer take the whole story with them.
   Eight places in the underground anomaly and Buried Wonder sequences ask for a
   cave-in on the underground map by name rather than on the map they are running
