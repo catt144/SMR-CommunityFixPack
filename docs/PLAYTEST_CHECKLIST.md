@@ -353,6 +353,17 @@ take over the hauling and mask the kicks.
 watch for a few seconds and confirm drones really are walking to and from the rocket. If
 nothing moves, the rocket is outside the hub's radius and the test proves nothing.
 
+> **Do you need a Drone Hub Extender?** No. It does work — an extender is a `DroneNode`,
+> so a rocket inside *its* circle connects fine, and `GetCommandCenter()` chains up to the
+> uplink hub (`DroneHubExtender.lua:155-159`), which is what still owns the drones and
+> still gets the `OnRemoveBuilding` call. So the bug reproduces through one. It just buys
+> you nothing here and adds two ways to get a silent false PASS: an extender with no power
+> or an out-of-range uplink returns no command centre at all
+> (`GetWorkNotPossibleReason`, `:192-201`), and extenders carry their own recharge
+> stations, so drones drift out to them and the extra walking distance you built it for
+> partly evaporates. Skip it unless you already have one — and if you do use one, make
+> sure it is linked to **the hub you are watching**, not a second one.
+
 **Trigger:**
 ```
 SMRTest.Log.DroneChurn(true)
