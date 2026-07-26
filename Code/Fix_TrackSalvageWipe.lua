@@ -179,14 +179,35 @@ SMRFixPack.Register("TrackSalvageWipe", {
 				table.clear(track_obj.elements_under_construction)
 
 				-- seed the tracks with the last elements on either side
+				-- FIX (F44/F45 interplay, playtest 2026-07-26): deleting a repair
+				-- site in the zone ALSO destroys its broken twin element
+				-- (TrackGridElement:Done, TrackElement.lua:200-201), and the twin —
+				-- sharing the site's node_idx — can sit just OUTSIDE the zone at
+				-- the seed index. The shipped blind seeds then crash
+				-- ExpandTrackFromElement on the dead element (TrackElement.lua:
+				-- 718-719, `map` is nil). Seed each side with its first still-valid
+				-- survivor instead, and tolerate a side with none.
 				local new_track = PlaceObjectIn("TrackBase", map)
-				local el1, el2 = all_elements[last], all_elements[first]
-				el1.track_obj = track_obj
-				el2.track_obj = new_track
-				table.insert(el1.is_construction_site and track_obj.elements_under_construction or track_obj.elements, el1)
-				table.insert(el2.is_construction_site and new_track.elements_under_construction or new_track.elements, el2)
-				ExpandTrackFromElement(track_obj, el1)
-				ExpandTrackFromElement(new_track, el2)
+				local el1, el2
+				for i = last, 1, -1 do
+					if IsValid(all_elements[i]) then el1 = all_elements[i] break end
+				end
+				for i = first, n do
+					if IsValid(all_elements[i]) then el2 = all_elements[i] break end
+				end
+				if el1 then
+					el1.track_obj = track_obj
+					table.insert(el1.is_construction_site and track_obj.elements_under_construction or track_obj.elements, el1)
+					ExpandTrackFromElement(track_obj, el1)
+				end
+				if el2 then
+					el2.track_obj = new_track
+					table.insert(el2.is_construction_site and new_track.elements_under_construction or new_track.elements, el2)
+					ExpandTrackFromElement(new_track, el2)
+				else
+					DoneObject(new_track) -- just created, still empty, no trains assigned
+					new_track = false
+				end
 
 				-- FIX (F44, playtest PT-03 2026-07-25): every survivor must have
 				-- been reclaimed by one of the two expansions; anything still
@@ -247,8 +268,24 @@ function OnMsg.LoadGame()
 			removed = removed + 1
 		end
 	end)
-	if removed > 0 then
-		local msg = string.format("[CommunityFixPack] TrackSalvageWipe: removed %d orphaned track element(s) left behind by a corrupted salvage", removed)
+	-- A salvage aborted mid-split (the pre-2026-07-26 seed crash) can also leave
+	-- a DESTROYED element sitting inside a track's arrays; purge those entries so
+	-- end-element updates and daily walks stop tripping over them.
+	local purged = 0
+	AllMapsForEach(true, "TrackBase", function(track)
+		for _, t in ipairs({ track.elements, track.elements_under_construction }) do
+			if type(t) == "table" then
+				for i = #t, 1, -1 do
+					if not IsValid(t[i]) then
+						table.remove(t, i)
+						purged = purged + 1
+					end
+				end
+			end
+		end
+	end)
+	if removed > 0 or purged > 0 then
+		local msg = string.format("[CommunityFixPack] TrackSalvageWipe: removed %d orphaned track element(s) and %d dead track-list entr(y/ies) left behind by a corrupted salvage", removed, purged)
 		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 	end
 end
