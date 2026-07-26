@@ -6,7 +6,7 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
-far: PT-01, PT-02, PT-03, PT-04, PT-41, PT-45, and PT-46's F49(b) half. This
+far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-41, PT-45, and PT-46's F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -200,36 +200,10 @@ SAVE-E is the expensive one; do it last and do all four of its tests in one sitt
 
 # Group 1 — SAVE-A (sandbox colony)
 
-> PT-01..PT-04 are DONE and archived in PLAYTEST_ARCHIVE.md. PT-01's passive
+> PT-01..PT-05 are DONE and archived in PLAYTEST_ARCHIVE.md. PT-01's passive
 > silence-watch continues in the background — the watchdog self-reports
 > (`WATCHDOG — Meteors thread silent …`) if the meteor wedge ever recurs; if
 > you see that line in the log, report it verbatim.
-
-## PT-05 — Milestone completion popup · covers **F05**
-
-**Setup:** **A new game started with the `NoTerraforming` game rule** (this is what
-guarantees hidden-but-uncompleted milestones — 9 of them). One dome, minimal colony.
-This is a 5-minute throwaway save; you do not need SAVE-A for it.
-
-**Trigger:** complete the visible milestones from the console, leaving one for last:
-```
-CompleteMilestone("ScanAnomaly", true)
-CompleteMilestone("ConstructDome", true)
-CompleteMilestone("FirstHumanOnMars", true)
-```
-…and so on through the visible list (ids are in `Data/Milestone.lua`: `ScanAnomaly`,
-`ReturnRocket`, `FindWater`, `ConstructDome`, `FirstHumanOnMars`, `Martianborn`,
-`ProduceFood`, `ResearchBreakthrough`, `SponsorGoals`, `ScanAllSectors`,
-`Population100`, …). Complete the **last** one and watch.
-
-- **BROKEN looks like:** the final milestone silently does nothing — no celebration
-  popup — and the log shows an "attempt to perform arithmetic on a nil value" error.
-- **FIXED looks like:** the "all milestones completed" popup appears, and the log is
-  clean.
-
-`Result:` _____________________________________________
-
----
 
 ## PT-06 — Five-star tourist applicant jump · covers **F08**
 

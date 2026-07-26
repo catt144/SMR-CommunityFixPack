@@ -17,7 +17,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | fixed  |
 | F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | tested |
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
-| F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | fixed  |
+| F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | tested |
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | fixed  |
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
 | F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
@@ -195,7 +195,7 @@ Only gate that sends colonists to work (`Colonist:Idle` :1911). **Fix:** overrid
 `Colonist.ShouldLeaveForWork` using modular distance `(hour - start) % 24`, incl. the
 `leave_early_for_work` branch.
 
-### F05 — Milestone completion crashes (NoTerraforming/NoPolitics)  `[fixed: Code/Fix_MilestoneCrash.lua]`
+### F05 — Milestone completion crashes (NoTerraforming/NoPolitics)  `[tested: Code/Fix_MilestoneCrash.lua — PT-05 PASS 2026-07-26 ("A dream fulfilled" popup at 18/18 with 9 terraforming milestones hidden; zero LUA errors in-log)]`
 `Lua\Milestones.lua:87-100` — hidden-but-uncompleted milestones fall through to
 `score_sum + milestone:GetScore()`; `GetScore()` returns nil when uncompleted (:23-28) →
 arithmetic-on-nil inside `CompleteMilestone`. Hidden milestones are guaranteed under

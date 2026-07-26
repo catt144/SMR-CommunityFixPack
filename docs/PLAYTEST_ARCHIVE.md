@@ -8,9 +8,10 @@ the checklist — consult it before re-running anything here.
 
 Archived 2026-07-26: PT-01 (F02 cadence + tower lead verified live; the
 passive silence-watch continues via the watchdog), PT-02 (F03 → tested),
-PT-03 (F44/F45 → tested), PT-04 (F50 → tested), PT-41 (F66 → tested),
-PT-45 (F47 → tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail
-remains in the checklist as un-run).
+PT-03 (F44/F45 → tested), PT-04 (F50 → tested), PT-05 (F05 → tested — the
+"A dream fulfilled" popup at 18/18), PT-41 (F66 → tested), PT-45 (F47 →
+tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail remains in
+the checklist as un-run).
 
 ---
 
@@ -268,6 +269,41 @@ result. Ultra speed is fine once the drones are en route.
 Turn the logger off afterwards.
 
 `Result:` __________________Passed no issues, smooth unloading and unloading, no logs___________________________
+
+---
+
+## PT-05 — Milestone completion popup · covers **F05**
+
+**Setup:** **A new game started with the `NoTerraforming` game rule** (this is what
+guarantees hidden-but-uncompleted milestones — 9 of them). One dome, minimal colony.
+This is a 5-minute throwaway save; you do not need SAVE-A for it.
+
+**Trigger:** complete the visible milestones from the console, leaving one for last:
+```
+CompleteMilestone("ScanAnomaly", true)
+CompleteMilestone("ConstructDome", true)
+CompleteMilestone("FirstHumanOnMars", true)
+```
+…and so on through the visible list (ids are in `Data/Milestone.lua`: `ScanAnomaly`,
+`ReturnRocket`, `FindWater`, `ConstructDome`, `FirstHumanOnMars`, `Martianborn`,
+`ProduceFood`, `ResearchBreakthrough`, `SponsorGoals`, `ScanAllSectors`,
+`Population100`, …). Complete the **last** one and watch.
+
+- **BROKEN looks like:** the final milestone silently does nothing — no celebration
+  popup — and the log shows an "attempt to perform arithmetic on a nil value" error.
+- **FIXED looks like:** the "all milestones completed" popup appears, and the log is
+  clean.
+
+`Result:` PASS — 2026-07-26. Run on the live Paradox playtest save rather than a
+fresh NoTerraforming throwaway — valid fixture regardless: 27 presets, 18 shown,
+so the 9 terraforming milestones were hidden-but-uncompleted (exactly the F05
+crash condition). Setup wrinkle worth keeping: ScanAnomaly had been FAILED by
+the rival colony ("Scan an Anomaly — Japan", red X) which permanently blocks
+the popup, and `CompleteMilestone` refuses failed milestones — recovered from
+console with `MilestoneCompleted.ScanAnomaly = nil` then re-completing it. On
+the final completion (18/18, score 83,420) the **"A dream fulfilled" popup
+appeared immediately** (screenshots taken); log Mars.exe-20260726-15.03.01 has
+**zero [LUA ERROR]** — no "arithmetic on a nil value" anywhere.
 
 ---
 

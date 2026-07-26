@@ -69,7 +69,12 @@ always safe; A/B legs need the game to be free).
   the 11.48.31 log); demolishing one building left the connector "its own node
   but stayed connected to the remaining building with no weird visuals" — the
   reclaim repair; plain-tile control clean.
-- **Everything else is un-run:** PT-05..PT-19 (fixture saves B/C/D/E per the
+- **PT-05 PASS (2026-07-26 later): F05 is `tested`** — "A dream fulfilled"
+  popup at 18/18 on the Paradox save (9 terraforming milestones hidden = the
+  crash condition), zero LUA errors in-log. Setup wrinkle recorded in the
+  archived PT-05: a rival-FAILED milestone permanently blocks the popup;
+  recover with `MilestoneCompleted.<id> = nil` + re-complete.
+- **Everything else is un-run:** PT-06..PT-19 (fixture saves B/C/D/E per the
   checklist's fixture table), PT-23..35 (wave-3), PT-36/37/38 (gates, attended),
   PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)
   train cap follows length, F49(a) instant-track palette), PT-20/21/22
