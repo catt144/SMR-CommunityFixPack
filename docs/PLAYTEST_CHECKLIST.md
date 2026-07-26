@@ -57,12 +57,14 @@ tested. Nothing ships as "verified" on probe evidence alone.
    the minutes before the first cheat.
 5. If a step's setup fails, write that down. "Could not set this up" is a valid and
    useful result.
-6. **The console AUTO-OPENS ~2 s after a colony loads** (Test Kit, verified on
-   retail 2026-07-26). If closed, reopen with **Ctrl-Alt-C** (the kit's own
-   binding, rebuild-proof) or Enter / Alt-Shift-C (the shipped binding — worked
-   in the same verification, but one earlier session had it inexplicably dead,
-   hence the fallbacks). Last resort: a Mod Editor test session grants the
-   console unconditionally.
+6. **The console AUTO-OPENS shortly after a colony is up — loads AND new
+   games** (Test Kit; the 2026-07-26 build waits for the loading screen to
+   close, fixing the dead console every NEW save used to get — takes effect
+   from the next game launch). If closed, reopen with **Ctrl-Alt-C** (the
+   kit's own binding, rebuild-proof) or Enter / Alt-Shift-C (the shipped
+   binding — worked in the same verification, but one earlier session had it
+   inexplicably dead, hence the fallbacks). Last resort: a Mod Editor test
+   session grants the console unconditionally.
 
 ### Cheating without contaminating results
 

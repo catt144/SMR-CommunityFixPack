@@ -126,6 +126,18 @@ the index rows; the rows were synced in the follow-up doc-sync commit.
 connector churn in the 11.48.31 log; demolishing one building left the survivor
 connected ("became its own node but stayed connected … no weird visuals" — the
 reclaim repair); plain-tile control clean.
+**TestKit console repair (2026-07-26 later, user report: console dead on every
+NEW save, fine on loads):** root cause — `Msg("CityStart")` fires from
+`OnMsg.NewMap` DURING map generation (`Lua/_init.lua:18-26`), so the kit's fixed
+2 s sleep auto-opened the console into a desktop the loading flow then replaced.
+Repair in TestKit 00_TestCore.lua: also hook **`InGameInterfaceCreated`** (end
+of `InGameInterface:Open`, `Lua/UI/InGameInterface.lua:388` — fires on BOTH new
+games and loads, guarantees the UI exists), the open thread now waits on
+`WaitLoadingScreenClose()` (`CommonLua/UI/LoadingScreen.lua:374`) instead of
+guessing, and auto-open arms once per session entry so mid-session interface
+reopens re-assert enable+shortcut without popping the console again. **Engine
+fact: CityStart is a map-generation-time message, NOT a UI-ready message — use
+InGameInterfaceCreated for anything that needs the in-game UI.**
 
 **F18 open half CLOSED (2026-07-26, user-driven):** the user asked whether
 resetting the tech was the easy fix; the investigation it prompted found better —
