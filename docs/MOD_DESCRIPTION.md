@@ -204,7 +204,12 @@ come back.
   pipe connections were being torn down against the dome instead of against the
   building, leaving stale plumbing behind that a repair pass re-ran on every
   load.
-- Four more repairs are aimed at other mods and future updates rather than at
+- Drones keep an accurate list of the places they could not reach. Every change to
+  the map's passability — a building completed, terrain reshaped, a route opened —
+  rebuilt that list in a way that clung to buildings you had already salvaged and
+  left its own tally wrong, and the wrong tally is what the drone hub reads when it
+  decides whether there is anything worth doing.
+- Five more repairs are aimed at other mods and future updates rather than at
   anything you can see today: battery and tank charge-rate modifiers now reach
   the power grid, swapping one researched technology for another keeps the
   research counters straight, two scripting-system helpers do what their own

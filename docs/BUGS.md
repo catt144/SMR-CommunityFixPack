@@ -69,7 +69,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | fixed  |
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
 | F56 | Auto RC Transports never offload rockets                 | P2  | high | wontfix|
-| F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
+| F57 | Drone/transport minors bundle                            | P3  | med  | fixed* |
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
@@ -1102,12 +1102,56 @@ rockets". The drone half is the load-bearing complaint and is already addressed 
 *What screening DID find:* three rocket tests in the same file were never converted to the
 Relaunched classes — filed and fixed as **F74** below. That is the real defect in this area.
 
-### F57 — Drone/transport minors bundle (P3, med)
+### F57 — Drone/transport minors bundle (P3, med)  `[fixed*: Code/Fix_DroneTransportMinors.lua — items (a) and (b); (c) deliberately not fixed, see below]`
 (a) `DroneControl:UpdateRocketsInternal` (`DroneControl.lua:613-639`) clears only
 `r_t.Fuel`, writes `r_t[r.FuelResource]` — stale restrictor for non-"Fuel" rockets (latent);
 (b) `OnMsg.OnPassabilityChanged` (`Drone.lua:851-864`) rebuilds unreachable table without
 weak-keys meta and doesn't recompute count; (c) `recursive_enum_dome_workplaces`
 (`Dome.lua:674-675`) skips quarantine check, saved only by `Workplace:IsSuitable` re-check.
+
+**Screened item by item in the wave-5 build leg.**
+
+**(b) FIXED — and it is the biggest of the three.** Both halves confirmed. The handler
+builds `local unreachable = {}` (`:855`) and assigns it at `:862`, so the table loses the
+`weak_keys_meta` every other creation site gives it (`Drone:ApproachWrapper` `:826`,
+`Drone:ResetUnreachablesTable` `:875`) — from the first passability change onward each
+drone holds a **strong** reference to every building it once failed to reach, keeping
+salvaged and destroyed buildings alive and still yielding them from `pairs` in
+`CleanUnreachables` (`:890`) and the recharger scan (`:1281`). And
+`unreachable_buildings_count` is never recomputed although the table just shrank; that
+number gates the eviction path (`:827-838`, against `const.MaxUnreachablesInTable`) and
+the DroneControl idle clock (`:630`), and `CleanUnreachables` then decrements the stale
+value further (`:893`). **The F10 screen was applied and does not bite:** no
+nil-iteration crash is claimed here — `unreachable_buildings` can legitimately be `false`
+and this engine tolerates `pairs(false)`. The defect is the state left behind, not a
+raise. Fixed with an additional `OnMsg.OnPassabilityChanged` (OnMsg is additive; ours
+runs after the shipped one) that re-applies `weak_keys_meta` and recounts with
+`table.count`, exactly as `ApproachWrapper` recounts at `:841`.
+
+**(a) FIXED, latent.** Confirmed: `r_t.Fuel = nil` clears one key while the Relaunched
+branch writes `r_t[r.FuelResource]` (`:634`), so any fuel resource other than the literal
+`"Fuel"` is never cleared and a departed rocket's request restricts drone work forever.
+Latency stated for the record: `FuelResource` has **no assignment anywhere in
+`ModTools\Src`** (only `FuelResourceAmount` is set per template, e.g.
+`Lua\BuildingTemplate\UniversalRocket.generated.lua:29`), and the legacy `RocketBase`
+branch hardcodes `"Fuel"` — so on shipped data the two keys coincide and nothing leaks.
+Fixed for the F27/F28 reason: a mod or a future rocket with its own fuel resource
+inherits the leak. The replacement also clears the key it wrote last time, remembered in
+an absent-tolerant `SMRFixPack_rocket_fuel_key` field on the DroneControl.
+
+**(c) NOT FIXED — fixing it would undo F61.** The mechanism is exactly as tracked:
+`can_work_here = work_or_train or (cdome == colonist.dome)` (`Dome.lua:674`) short-circuits
+the quarantine test away for reason "work" and "training", even though the function it
+skips is named `CanColonistsFromDifferentDomesWorkServiceTrainHere` and the service path
+calls it with the comment `--quarantine` (`Dome.lua:2907`). But that function is
+`self.accept_colonists and not self.supply_interrupted and self.ui_working`
+(`Dome.lua:2880-2882`), and **`accept_colonists` is the exact property F61 exists to stop
+gating outbound work, shopping and training on**. Adding the check here would re-impose
+one level up the block F61 removes, and the two fixes would fight over the same flag. The
+tracked mitigation also holds — the enumeration only produces candidates and
+`Workplace:IsSuitable` re-checks before anyone is assigned — so nothing reaches the
+player. Left as a recorded inconsistency, like the four in the STATUS.md "recorded but
+deliberately untouched" list.
 
 ### Assignment systems: investigated, no single defect (leads recorded)
 - "Unemployed every sol": no smoking gun; three verified contributing mechanisms —
