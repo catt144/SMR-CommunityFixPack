@@ -996,7 +996,7 @@ accepts the resource, and always when `is_stopping` (a refabbed train destroys i
 `dest:IsResourceEnabled`, `Train.lua:905-912,930-939`), so undeliverable cargo only arises
 when something changes mid-trip.
 
-### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)  `[fixed: Code/Fix_TrackSalvageRefund.lua]`
+### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)  `[tested: Code/Fix_TrackSalvageRefund.lua — PT-45 PASS 2026-07-26 (refund = stamped sections × 100 on live colony tracks; partial-salvage stockpiles observed)]`
 `TrackBase:GetRefundResources` (`Track.lua:286-307`) reads cost from ONE element (last);
 `construction_cost_at_completion` set only on FIRST element (`Track.lua:524-525`) —
 first/last mismatch; `DemolishAndSplitTrack` uses bare `DoneObject`, no refund (contrast

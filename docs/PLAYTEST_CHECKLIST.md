@@ -1636,17 +1636,29 @@ ground, and that the figure the Salvage button advertises is the figure you get.
 stations, the longer the better (a 20-30 hex line makes the difference obvious).
 Note that track is built in sections of up to 5 hexes, and the whole line cost
 roughly 200 Metals per section.
+**The track MUST be drone-built with real Metals (2026-07-26):** refunds pay back
+recorded spending, and `CheatCompleteAllConstructions()` / Quick Build completes
+sections without ever paying — an instantly-built line carries no cost records,
+reads an empty/flat refund, and CANNOT show the scaling (that is the designed
+fallback for free track, not a FAIL). Drag the line, deliver the Metals, let
+drones finish it; speeding time is fine.
 
 **Trigger — case A (whole track):**
-1. Select the track (click the line, not a station) and read the refund figure on
-   the Salvage button before clicking.
-   - **EXPECTED:** it scales with the length of the line — a 25-hex track should
-     advertise roughly 5× what a 5-hex stub does, not the same ~100 Metals.
-   - **SURPRISE looks like:** a long line and a short stub advertising the same
-     number (the old behaviour), or a figure far larger than the track cost.
+1. Select the track (click the rail line between pillars, not a station — the
+   panel that lists Stations/Trains/Passengers is the whole-track selection).
+   **CORRECTED 2026-07-26:** the Salvage tooltip shows NO refund figure in
+   Relaunched, so read it from the refund function directly (console, with the
+   track selected):
+   `*r local t = SelectedObj:GetRefundResources() for _, r in ipairs(t) do ConsolePrint(r.resource .. " " .. r.amount) end`
+   - **EXPECTED:** the figure scales with the length of the line — a 25-hex track
+     reads roughly 5× what a 5-hex stub does (≈100 Metals per built section),
+     not the same ~100 for both.
+   - **SURPRISE looks like:** a long line and a short stub reading the same
+     number (the old behaviour), or a figure larger than half the track's cost.
 2. Salvage it and watch the ground.
-   - **EXPECTED:** Metals stockpiles appear near the track, totalling the
-     advertised figure, and drones start collecting them.
+   - **EXPECTED:** Metals stockpiles appear near the track, totalling roughly the
+     figure read in step 1, and drones start collecting them. The assigned train
+     returns to the train pool (F64's live check rides along here).
 
 **Trigger — case B (partial salvage):**
 3. On another long track, Ctrl+click (or use the Salvage button on a single track
@@ -1663,9 +1675,21 @@ roughly 200 Metals per section.
    sane — the pieces already refunded must not be paid for a second time.
 5. Check the log for errors mentioning `Track`, `Demolish` or `ResourceStockpile`.
 
-`Result (case A figure scales / stockpiles arrive):` _____________________________________________
+`Result (case A figure scales / stockpiles arrive):` PASS — 2026-07-26: map-wide
+console read printed `track 1: 22 elements, 6 stamped, refund Metals 600` /
+`track 2: 47 elements, 9 stamped, refund Metals 900` — exactly stamps × 100
+(half of each section's 200-Metal cost), scaling with paid sections where the
+old code advertised ~100 flat for any length. Whole-line salvage earlier the
+same sitting dropped stockpiles that drones collected into storage. (Selection
+gotcha for next time: the infopanel can show "Track" while `SelectedObj` is a
+node — the map-wide `MapForEach("map","TrackBase",…)` read is the reliable way.)
 
-`Result (case B partial refund / no double pay):` _____________________________________________
+`Result (case B partial refund / no double pay):` PASS — 2026-07-26: partial
+salvage drops a Metals stockpile where the removed piece stood (observed across
+repeated build/salvage/rebuild cycles); zero refund on unstamped picks is the
+designed per-section bookkeeping; totals stayed sane across cycles (no double
+pay, no refund for surviving hexes); log clean of Track/Demolish/
+ResourceStockpile errors all session.
 
 ---
 
