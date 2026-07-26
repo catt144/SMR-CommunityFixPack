@@ -147,6 +147,11 @@ come back.
   piece of internal bookkeeping that made every salvage attempt on that track
   fail silently — including via Ctrl+click and the Salvage button. Tracks
   already damaged in your save are repaired when you load it.
+- Salvaging track pays back what the track actually cost. Track is built in
+  sections, and the refund only ever counted one of them, so a long line handed
+  back the same few Metals as the shortest possible stub. Salvaging part of a
+  track returned nothing at all — now those pieces come back as a stockpile
+  where they stood.
 - Trains respect the resource switches on a station. Unloading ignored them
   completely, so a train would drop Waste Rock at a station you had told not to
   store Waste Rock — and the cargo planner would then send another train to haul

@@ -1497,6 +1497,50 @@ needs a real dome and real pipes.
 
 ---
 
+# Group 9 — wave-5 fixes
+
+## PT-45 — Track salvage refund · covers **F47**
+
+Probes prove the arithmetic; only play can show the Metals actually arriving on the
+ground, and that the figure the Salvage button advertises is the figure you get.
+
+**Setup:** a save with a **long** track — more than about 6 hexes between two
+stations, the longer the better (a 20-30 hex line makes the difference obvious).
+Note that track is built in sections of up to 5 hexes, and the whole line cost
+roughly 200 Metals per section.
+
+**Trigger — case A (whole track):**
+1. Select the track (click the line, not a station) and read the refund figure on
+   the Salvage button before clicking.
+   - **EXPECTED:** it scales with the length of the line — a 25-hex track should
+     advertise roughly 5× what a 5-hex stub does, not the same ~100 Metals.
+   - **SURPRISE looks like:** a long line and a short stub advertising the same
+     number (the old behaviour), or a figure far larger than the track cost.
+2. Salvage it and watch the ground.
+   - **EXPECTED:** Metals stockpiles appear near the track, totalling the
+     advertised figure, and drones start collecting them.
+
+**Trigger — case B (partial salvage):**
+3. On another long track, Ctrl+click (or use the Salvage button on a single track
+   piece) to remove **a few hexes in the middle**, splitting the line in two.
+   - **EXPECTED:** the removed section leaves a Metals stockpile behind where it
+     stood — it used to leave nothing at all. The amount may be zero for some
+     picks (only one hex per built section carries the section's cost record);
+     over the whole line it can never add up to more than half of what the line
+     cost.
+   - **SURPRISE looks like:** a refund appearing for hexes that were NOT removed,
+     the same section paying out twice, or a stockpile appearing when a train
+     station is built over track (that is not a salvage and must stay silent).
+4. Salvage what is left of that track afterwards and confirm the totals still look
+   sane — the pieces already refunded must not be paid for a second time.
+5. Check the log for errors mentioning `Track`, `Demolish` or `ResourceStockpile`.
+
+`Result (case A figure scales / stockpiles arrive):` _____________________________________________
+
+`Result (case B partial refund / no double pay):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

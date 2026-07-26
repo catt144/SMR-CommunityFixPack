@@ -66,6 +66,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_ReplaceTechCount.lua",
 		"Code/Fix_SequenceLatents.lua",
 		"Code/Fix_IndependenceTerraforming.lua",
+		"Code/Fix_TrackSalvageRefund.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",

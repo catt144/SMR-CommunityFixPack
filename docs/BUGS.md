@@ -59,7 +59,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F44 | One-hex track salvage can delete the entire track        | P1  | high | fixed  |
 | F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | fixed  |
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | fixed  |
-| F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | todo   |
+| F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | fixed  |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | todo   |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | fixed  |
@@ -768,12 +768,53 @@ accepts the resource, and always when `is_stopping` (a refabbed train destroys i
 `dest:IsResourceEnabled`, `Train.lua:905-912,930-939`), so undeliverable cargo only arises
 when something changes mid-trip.
 
-### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)
+### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)  `[fixed: Code/Fix_TrackSalvageRefund.lua]`
 `TrackBase:GetRefundResources` (`Track.lua:286-307`) reads cost from ONE element (last);
 `construction_cost_at_completion` set only on FIRST element (`Track.lua:524-525`) —
 first/last mismatch; `DemolishAndSplitTrack` uses bare `DoneObject`, no refund (contrast
 `Passage.lua:1217-1222`). Track cost 200 Metals/hex. **Fix:** multiply by `#self.elements`;
 place return stockpile on partial salvage.
+
+*Implemented differently, on better evidence:* the sketch's cost model is wrong in both
+halves, and following it would have refunded up to five times what a track cost.
+Screening the real code found:
+1. **Track hexes are not billed per hex.** They are built in construction GROUPS of at
+   most `const.ConstructiongGridElementsGroupSize` = 5 elements (`Tracks.lua:359`, `:426`;
+   `_GameConst.lua:480`), and the group leader is charged
+   `construction_cost_multiplier` × one element's cost — which `Tracks.lua:463` leaves at
+   100, i.e. **200 Metals per group, not per hex** (contrast `Passage.lua:1969`, which
+   sets `(#construction_group - 1) * 100`, and `LifeSupportGrid.lua:1426`'s 0.2/pipe).
+   So a 30-hex track costs six groups' worth, and `#self.elements * 200` would refund 30.
+2. **`Track.lua:524-525` is not where the stamp comes from.** That line only runs under
+   the `FreeConstruction` game rule, and it stamps `Concrete` — which a track does not
+   cost — so its value is 0. The real stamp is written by
+   `ConstructionGroupLeader:Complete`, which suppresses every member's own
+   `MarkSpentResources` (`ConstructionSite.lua:2469`) and then stamps the group's whole
+   spend onto the element it completed LAST (`:2479-2489`, comment: "mark spent resources
+   in 1 building so refunds would be correct"). One stamp per group, each holding that
+   group's real expenditure. There is no first/last mismatch — a track of ≤5 hexes is one
+   group whose stamp does land on `elements[#elements]`, and its refund is already exactly
+   right.
+3. **The defect is therefore a missing sum, not a missing multiplier.** `Track.lua:291`
+   reads one element's stamp, so every construction group before the last one is
+   uncounted; the refund does not grow with the track at all. The fix sums
+   `construction_cost_at_completion` over all `self.elements`. Because each stamp is a
+   recorded expenditure, the total is exactly what was spent and can never exceed the
+   shipped 50%. When no element carries a positive stamp (Free Construction, instant
+   tracks) the shipped estimate-from-one-element fallback runs unchanged.
+4. **Partial salvage** is fixed as sketched but hooked one level up: a chained wrapper on
+   `TrackGridElement:Demolish` (the player-salvage entry point — `ToggleDemolish`,
+   `TrackElement.lua:259-261`, and the mass-salvage tool, `Construction.lua:2911`) snapshots
+   the stamped elements, calls the original, and refunds the stamps of the elements the
+   call actually destroyed. Observing the outcome avoids re-deriving the three deletion
+   branches. `DemolishAndSplitTrack` itself is deliberately not wrapped: its other caller
+   (`Construction.lua:1574`, track erased from under a newly placed station) is not a
+   salvage. Whole-track demolition is skipped by the wrapper — `OnDemolish` clears
+   `track.elements` to false (`Track.lua:190`) after it has already refunded through the
+   replaced getter — so no refund is ever paid twice, and a stamp dies with its element.
+
+**Existing saves:** fully retroactive. The stamps are already in every save; only the
+reading of them changes.
 
 ### F48 — Station-connector savegame fixup no-op (P3, high defect / low impact)  `[blocked — the corrected pass is too invasive to ship untested; see below]`
 `Station.lua:1346`: `ProcessTrackElements(ResolveMap(track, track.elements))` — paren

@@ -69,6 +69,7 @@ and can be individually disabled.
 | TrackConnectorPingPong | A station and a train tunnel (or two stations) one hex apart stop deleting each other's track connector over and over, which is why some track layouts would never connect |
 | TrackTunnelPowerBridge | A station attached directly to a train tunnel — or to another station a short track away — carries power across again, as the Train Tunnel's description says it should |
 | RocketInteractGuard | RC Transports refuse to load from or unload into trade and refugee rockets again — the game's own rule for that stopped matching when the rocket classes were rebuilt for Relaunched |
+| TrackSalvageRefund | Salvaging a track pays back half of what the whole track cost, not half of one short section of it — long lines used to refund the same handful of Metals as a six-hex stub. Salvaging part of a track returns that part's Metals too, instead of nothing at all |
 | SaveSanitizer | Repairs two things already baked into existing saves when you load them: Large Wind Turbines that lost their Frictionless Composites bonus, and upgrade bonuses left behind by buildings you salvaged long ago |
 
 The full defect tracker (73 verified findings and counting) lives in
