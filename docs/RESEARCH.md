@@ -74,6 +74,11 @@ verified against Relaunched source unless promoted into BUGS.md.
 - Drones ignore rocket cargo even at high priority; RC Transports don't
   auto-offload rockets (`RCTransport:TransferResources` family) — sweep
   `DroneControl.lua`/`ShuttleHub.lua`.
+  *(Resolved 2026-07-26. The RC Transport half was F56 and is closed `wontfix` —
+  auto mode never covered rockets, by maintained design. The load-bearing drone
+  half is F50. Screening this report also turned up **F74**, a real defect in the
+  same file: the guard forbidding RC Transports from touching trade and refugee
+  rockets was never converted to the Relaunched classes.)*
 - Seniors don't auto-move to retirement homes.
 - Mysteries not starting (Inner Light; also general reports) — old "Asylum never
   starts" class.
@@ -184,7 +189,9 @@ Mapped to existing findings:
   → F46 (dump-at-disabled-stations + forbidden-stock re-haul ping-pong) is very
   likely the whole story.
 - "Rockets stuck in load/unload loop" (B&B asteroids) → F50 (hourly
-  drone-churn/auto-cargo-request loop) + F56.
+  drone-churn/auto-cargo-request loop). F56 was the other half of this mapping and
+  closed `wontfix` 2026-07-26 (auto RC Transport rocket handling is designed scope,
+  not a defect), so F50 carries it alone.
 - "Colonists don't move for jobs cross-dome even with passages" → F51/F52/F54
   cluster + unemployment mechanisms.
 - Popup notifications yank you out of the build GUI → UX design gripe; check if

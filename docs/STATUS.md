@@ -1,14 +1,17 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-26 (QA session 5 wrap-up — wave-3 A/B CLEAN, all tracker decisions
-made, session prompts staged). **Three prompts, three triggers:**
-- `docs/OPUS_BUILD_PROMPT.md` — Opus wave-4 build leg. Safe to run DURING the user's
-  playtest: it works on `wave4` branches in separate worktrees and never touches the
-  junctioned main trees the game loads from.
+Updated: 2026-07-26 (**wave-5 BUILD leg done — the tracker's `todo` queue is now EMPTY.
+21 new fix modules total on the `wave4` branch, NOT merged to main**; see "Wave 5" and
+"Wave 4" below. Prior entry: QA session 5 wrap-up — wave-3 A/B CLEAN).
+**Two prompts left, two triggers:**
+- ~~`docs/OPUS_BUILD_PROMPT.md` — Opus wave-5 build leg~~ **DONE.** Nothing is queued for
+  a wave-6 build leg: every tracked entry is `fixed`, `fixed*`, `tested`, `wontfix`, or
+  parked on a named playtest gate. The prompt file is stale and should be rewritten only
+  if the playtest produces new findings.
 - `docs/FABLE_PLAYTEST_PROMPT.md` — processes the user's manual playtest report
   (PASS→`tested` flips, FAIL→new findings, the PT-36/37/38 decision gates).
-- `docs/FABLE_QA_PROMPT.md` — wave-4 QA leg, AFTER both of the above: merges `wave4`
-  to main, runs the A/B pair, audits divergences. BUGS.md is
+- `docs/FABLE_QA_PROMPT.md` — QA leg, AFTER the playtest: merges `wave4`
+  to main and runs the A/B pair over waves 4 AND 5 together, audits divergences. BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
 cross-check), MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix
@@ -114,6 +117,11 @@ Files use an `Opt_` prefix instead of `Fix_` to mark them as not-bug-fixes.
   parked at the colony keeps its launch ration requested even with no destination selected,
   so drones refuel it while it waits. Only the fuel half of D01; the standing Rare Metals
   export half is deliberately unwritten (see the D01 entry).
+  **This module is also where F56 would land** if the closed-`wontfix` auto-offload
+  decision is ever reopened (user decision 2026-07-26): auto-offload and the export half
+  are the same "rockets should load and unload themselves like they used to" request over
+  the same machinery, so they ship together behind this one flag or not at all. Do not
+  create an `Opt_AutoRocketOffload`.
 
 ## QA session (wave 3) — Fable, 2026-07-25 evening: A/B pair CLEAN, audits done
 
@@ -256,15 +264,17 @@ F44 curve-ended track visual check, wave-1 heading tags.
   repo before relying on it. Retail exe ignores -save/-map (goldmaster-gated,
   autorun.lua:126-144); Mars.exe launches directly, no external Paradox launcher.
 
-## Blocked in wave 3 — four entries needing a decision, not more code
+## Parked by decision, not by effort — one entry left open (F48)
 
-Each has a full write-up on its BUGS.md entry. None is blocked on effort; all four are
-blocked because the remedy is not a defect repair, or because the shipped code no longer
-matches the tracker.
+Each has a full write-up on its BUGS.md entry. None was parked for effort; each was parked
+because the remedy is not a defect repair, or because the shipped code no longer matches
+the tracker. **Only F48 is still open** — the other four are closed.
 
 | ID | Why it is parked | What would unblock it |
 |----|------------------|------------------------|
+| **F56** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds as F62/F63.** Screened in the wave-4 build leg: the cited code is designed scope (`GetAutoGatherDeposits` is a declared accessor; the `Automation_Unload` rocket exclusion goes through the Relaunched `IsRocketClass` shim, i.e. maintained intent; auto mode promises only "gather resources"). **No standalone opt-in** — if revisited it belongs in `Opt_ClassicRockets` beside D01's unwritten export half, never in an `Opt_AutoRocketOffload` of its own. | — done. Rides on whatever design decision D01's export half gets, or stays closed. |
 | **F32** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** The shipped data already carries the fix (`NotWorkingBuildings` is now `Suppressable`); the other two presets are one-shot adds. The residual by-design annoyance (2-real-minute window, per-category suppression, no per-building ack) is spun out as **D02** — a planned `Opt_AcknowledgedWarnings` module, gated on **PT-38**; MOD_DESCRIPTION carries a player-facing "looks like a bug, isn't" explainer. | — done. D02 build belongs to a wave-4+ leg after PT-38. |
+| **F42** | **NEW, wave-5 screening.** `blocked` — wontfix candidate. The tracked observation is entirely correct and does not add up to a defect: the guard it names exists to stop units being entombed, a dust devil has no footprint to be entombed in, the omission sits in declared overridable class members, no shipped text promises the block, and the game's one weather-gated placement rule (`RocketLandingDustStorm`) is implemented and working. Full write-up on the entry. | **A user decision.** Recommend `wontfix` on the F56/F62/F63 grounds. |
 | **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
 | **F62** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** Verified identical to the original game (same one-hop algorithm, same two transitive-predicate callers): carried-forward dev vision in both games, breaks nothing. No opt-in module planned. | — done. |
 | **F63** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds** — no training term ever existed in either game's emigration score. | — done. |
@@ -276,23 +286,112 @@ walkability says A↔C is walkable while services say C is invisible from A;
 `and`/`or` precedence slip; `IsDifferentAsteroidLocation` comparing a map to a
 MapDescriptor. All are permissive failures — none blocks a player.
 
-## Next up — wave 4 (nothing from wave 3 is left)
+## Wave 4 — build leg DONE (branch `wave4`, NOT merged, NOT probe-run)
 
-21 tracked entries are still `todo`: F18, F19, F20, F21, F22, F23, F24, F25, F26, F27, F28,
-F29, F31, F42, F43, F47, F49, F56, F57, F65, F66. Six entries are `fixed*` partials whose
-open half is recorded on the entry: F15, F34, F52, F55, F58, F59.
+**14 new fix modules, 13 new probes, 6 new playtest items (PT-39..PT-44).** Everything
+lives on the `wave4` branch in `C:\Dev\SMR-BugFixPack-wave4` and
+`C:\Dev\SMR-BugFixPack-TestKit-wave4`; main is untouched, the game was never launched, and
+**no probe has been run** — the A/B pair belongs to the wave-4 QA leg
+(`docs/FABLE_QA_PROMPT.md`), which also performs the merge.
 
-Suggested order for the next build leg (largest player impact first):
+Implemented, in queue order:
 
-1. **F56** Auto RC Transports never offload rockets (P2, high) — completes the
-   F50/F68/F71 rocket-logistics family.
-2. **F65/F66** station↔tunnel power bridge and connector hex ping-pong (P2, med+) —
-   the "tracks won't connect" family, and the last big train items.
-3. **F22** `GetGridGlobalStorage` breaking Last Transmission gates (P2, med).
-4. **F19/F20/F21** the numbers/tooltip trio (P2) — small, self-contained, low risk.
-5. **F23/F24/F27/F28/F29** the latent / mod-facing bundle (P3) — cheap, ships for
-   modder benefit.
-6. **F42/F43/F47/F49/F57/F31/F18/F25/F26** the remaining P2/P3 tail.
+| ID | Module | Note |
+|----|--------|------|
+| **F74** *(new)* | `Fix_RocketInteractGuard` | found by screening F56; the shipped guard at `RCTransport.lua:341` names only the pre-Relaunched trade/refugee classes |
+| **F66** | `Fix_TrackConnectorPingPong` | enforces the invariant the shipped assert only states |
+| **F65** | `Fix_TrackTunnelPowerBridge` | bridges only when the two stations demonstrably sit on different grids; PostLoadGame sweep |
+| **F22** | `Fix_GridGlobalStorage` | one ratio over summed inputs instead of a sum of ratios plus a sentinel |
+| **F75** *(new)* | `Fix_LastTransmissionStorage` | found by implementing F22; six conditions were on `Prerequisite`, which `Eval` never reads, and the Oxygen one measured Power |
+| **F19** | `Fix_GraphConsumedCaption` | caption counts maintenance, like the bar |
+| **F20** | `Fix_MoraleComfortTooltip` | hides the one row `UpdateMorale` no longer grants |
+| **F21** | `Fix_TrainWaitTime` | full replacement — `BoardVehicle` blocks for the whole ride |
+| **F23** | `Fix_FounderTraitNotification` | additive handler beside the dead one |
+| **F24** | `Fix_DomePipeMoveInside` | `dome` → `self`; no probe, PT-44 covers it |
+| **F27** | `Fix_StorageRateModifiers` | three post-wrappers |
+| **F28** | `Fix_ReplaceTechCount` | entry title corrected: no crash is claimed, only that the line is wrong either way |
+| **F29** | `Fix_SequenceLatents` | `fixed*` — items 1 and 3; item 2 is a Mod Editor code generator, deliberately left |
+| **F18** | `Fix_IndependenceTerraforming` | `fixed*` — preset half; already-researched saves keep 10% |
+
+**Screened and CLOSED `wontfix` (user decision 2026-07-26): F56.** Screening before
+implementing found designed scope, not a defect — `GetAutoGatherDeposits` is a declared
+accessor, the `Automation_Unload` rocket exclusion goes through the Relaunched
+`IsRocketClass` shim (i.e. a developer consciously re-stated it for the new class tree),
+and auto mode promises only "gather resources". Closed on the same grounds as F62/F63:
+deliberately maintained design, breaks nothing. **No standalone opt-in is planned** — if it
+is ever revisited it belongs in `Opt_ClassicRockets` beside D01's unwritten Rare Metals
+export half, not in a module of its own (same request, same machinery, and shipping them
+apart would let a player enable emptying without refilling). Full write-up on both entries.
+
+**Still `todo` after wave 4 — eight entries, the P2/P3 tail:** F25, F26, F31, F42, F43,
+F47, F49, F57. ~~Suggested order for a wave-5 build leg~~ **All eight were taken in wave 5
+— seven implemented, F42 screened to `blocked`. Nothing is `todo` any more.** The `fixed*`
+partials whose open half is recorded on the entry are now: F15, F18, F29, F34, F49, F52,
+F55, F57, F58, F59.
+
+**Every wave-4 fix is unverified in-game.** The four full replacements (F66
+`CreateConnectorElements`, F21 `BoardVehicle`, F24 `MoveInside`, F28 `ReplaceTech`) and the
+one global-function replacement (F22 `GetGridGlobalStorage`) are the highest-risk items for
+the QA audit; F20's per-call instance `GetProperty` override and F65's PostLoadGame sweep
+are the two most unusual techniques in the pack and deserve a look.
+
+## Wave 5 — build leg DONE (branch `wave4`, NOT merged, NOT probe-run)
+
+**7 new fix modules, 7 new probes, 3 new playtest items (PT-45..PT-47).** Everything lives
+on the `wave4` branch beside wave 4's; main is untouched, the game was never launched, and
+**no probe has been run** — the A/B pair belongs to the QA leg, which covers waves 4 and 5
+together. **The BUGS.md `todo` queue is now empty.**
+
+| ID | Module | Note |
+|----|--------|------|
+| **F47** | `Fix_TrackSalvageRefund` | sums every construction group's stamp instead of reading one; + partial-salvage refund |
+| **F43** | `Fix_LayoutTechLock` | latent — no shipped layout has a tech-gated entry |
+| **F49** | `Fix_TrainMinors` | `fixed*` — items (a) palette and (d) train cap; (b)(c)(e) screened, see the entry |
+| **F57** | `Fix_DroneTransportMinors` | `fixed*` — (a) latent restrictor leak and (b) the unreachables table; (c) would undo F61 |
+| **F31** | `Fix_AnomalyCaveInMap` | guards the argument, not the environment — the sketch's test would have killed marsquake cave-ins |
+| **F25** | `Fix_TechDescriptionBuilding` | preset patch reusing the original translation id, so localised builds are untouched |
+| **F26** | `Fix_BombardmentSpread` | the pack's **sixth and largest full replacement** (100 lines) |
+
+**Screened and NOT implemented — one entry needs a user decision:**
+- **F42** (buildings placeable on active dust devils) → **`blocked`, wontfix candidate.**
+  Every factual claim in the entry is true and none of it adds up to a defect: the guard it
+  names exists to stop units being *entombed*, a dust devil has no footprint and cannot be
+  trapped, the omission is in declared overridable class members, no shipped text promises
+  the block, and the one weather-gated placement rule the game does model
+  (`RocketLandingDustStorm`) is implemented and working. Recommend closing `wontfix` on the
+  F56/F62/F63 grounds. **Awaiting the user's decision.**
+- **F49(c)** (a salvage click on a station's connector hex reaches the station) — mechanism
+  confirmed and nasty, but the two shipped demolish-mode guards beside it prescribe
+  *different* remedies, so choosing one is a design decision. **Worth a user decision;** if
+  the answer is "the click does nothing", the fix is four lines.
+
+**Every wave-5 fix is unverified in-game.** Highest-risk items for the QA audit, in order:
+**F26** (100-line copy of `WaitBombard` — mechanically diffed against the shipped body,
+identical apart from the function header, the dropped non-unwinding `assert`, and the one
+`-- FIX:` line, but it replaces a whole disaster path); **F47's** partial-salvage wrapper on
+`TrackGridElement:Demolish` (places resource stockpiles from a before/after snapshot);
+**F49's** replacement of the global `ExpandTrackFromElement`; and **F43's** teardown of
+live construction controllers inside a post-wrapper on `Activate`.
+
+**New engine facts learned this leg (do not re-derive):**
+- **Track is billed per construction GROUP, not per hex.** Groups hold at most
+  `const.ConstructiongGridElementsGroupSize` = 5 elements (`_GameConst.lua:480`), and
+  `Tracks.lua:463` leaves the leader's `construction_cost_multiplier` at 100 — one
+  element's cost per group. Passages do it the other way (`Passage.lua:1969`).
+- **`ConstructionGroupLeader:Complete` stamps the group's whole spend onto exactly ONE
+  finished element** — the last it completed — after suppressing every member's own
+  `MarkSpentResources` (`ConstructionSite.lua:2469`, `:2479-2489`). So
+  `construction_cost_at_completion` is one stamp per group, spread along a track. This is
+  what F47 turns on.
+- **A T can be corrected without breaking translations** by rebuilding it with the SAME
+  translation id: localised builds resolve the id and never see the literal, English builds
+  fall back to it. Minting a fresh T would push English text into every language (F25).
+- **`UndergroundMap` is a GameVar defaulting to `false`** (`RandomMapGenerator_Picard.lua:263`)
+  and stays false under the "No Underground and Asteroids" rule — eight scenario call sites
+  hand it straight to `TriggerCaveIn`, which indexes it unguarded (F31).
+- **Verify every full replacement mechanically.** F26's 100-line copy was diffed against
+  `ModTools\Src` with a throwaway Python script that strips comments and whitespace; it
+  caught nothing this time, but it is the only way to be sure a copy that large is faithful.
 
 ## Key technical facts (hard-won, do not re-derive)
 
@@ -360,6 +459,22 @@ Suggested order for the next build leg (largest player impact first):
   defined nowhere in Src — an engine export or an fpk-only function. F12's fix
   checks for it at apply time.
 - Sample mod format in `<game>\ModTools\Samples\Mods`; docs in `ModTools\Docs\index.md.html`.
+- **Replacing an EXISTING global from mod code works**: `ModEnvMeta.__newindex`
+  (`Mod.lua:1557-1563`) rawsets any non-blacklisted key into the real `_G`, and the
+  "attempt to create a new global" assert only fires for names that do not already
+  exist there. Generated closures (script conditions, sequence code) resolve the name
+  at call time, so they pick the replacement up. Read the name back with
+  `rawget(_G, ...)` in apply() to confirm the write landed — F22 does.
+- **`OnMsg` is additive, confirmed structurally**: four shipped files each define
+  `OnMsg.StationsConnected` (`Station.lua:1213`, `Track.lua:668`,
+  `TrainTransport.lua:357`, `UnderconstructionSign.lua:87`) and all four must run.
+- **TOOLING: never round-trip a doc through PowerShell 5.1 `Get-Content -Raw` +
+  `WriteAllText`.** `Get-Content` without `-Encoding` decodes UTF-8 files as cp1252, so
+  every `—`, `↔`, `≤` comes back double-encoded and the whole file shows as changed.
+  It happened to `BUGS.md` in the wave-4 session and was reversed with
+  `Encoding.GetEncoding(1252).GetBytes(UTF8.GetString(bytes))`; nothing was committed
+  corrupted. Use the editor's own file tools for docs, or pass `-Encoding UTF8` on
+  BOTH ends.
 
 ## FINAL A/B RunAll pair (repaired TestKit) — CLEAN SWEEP (2026-07-25)
 

@@ -1,19 +1,25 @@
-# Fable QA-session prompt — after wave 4
+# Fable QA-session prompt — after waves 4 and 5
 
-Paste everything below into a fresh Claude Code session (Fable) AFTER the Opus
-wave-4 build leg finishes (it worked on `wave4` branches in worktrees) and the
-user's playtest of the wave-3 pack is done or paused. The wave-3 version of this
-prompt is in git history; its session record is in STATUS.md ("QA session
-(wave 3)").
+Paste everything below into a fresh Claude Code session (Fable) AFTER **both**
+Opus build legs finish — wave 4 (done) and wave 5 (the eight-entry P2/P3 tail) —
+and the user's playtest of the wave-3 pack is done or paused. Both legs work on
+the SAME `wave4` branch in the `-wave4` worktrees, so there is one merge, not two.
+The wave-3 version of this prompt is in git history; its session record is in
+STATUS.md ("QA session (wave 3)").
 
 ---
 
 You are doing the **QA leg** for the Surviving Mars: Relaunched "Community Fix
-Pack", covering the wave-4 implementation. The wave-4 fixes live on `wave4`
-branches (worktrees at `C:\Dev\SMR-BugFixPack-wave4` and
+Pack", covering the wave-4 **and wave-5** implementations. Both live on the
+`wave4` branch (worktrees at `C:\Dev\SMR-BugFixPack-wave4` and
 `C:\Dev\SMR-BugFixPack-TestKit-wave4`) and have never been run in-game. Your job:
 merge, prove every module loads and applies, prove every probe discriminates,
 and audit the riskiest divergences.
+
+**Read "wave 4" below as "waves 4 and 5" throughout** — same branch, same merge,
+one A/B pair covering both. Wave 5's probes live in `Code\50_Probes_Wave5.lua`
+alongside wave 4's `Code\40_Probes_Wave4.lua`, and its playtest items continue
+from PT-45. If wave 5 has not been run yet, QA wave 4 alone and say so.
 
 **First, read these (in order) from `C:\Dev\SMR-BugFixPack`:**
 1. `docs\STATUS.md` — snapshot, engine facts (the WHOLE list), and the "QA
@@ -22,7 +28,8 @@ and audit the riskiest divergences.
 3. `docs\BUGS.md` — the tracker; wave-4 entries carry "*Implemented
    differently*" / "*Blocked*" paragraphs — those claims are what you audit
 4. `docs\TESTING.md` + both Test Kit trees (conventions in
-   `Code\00_TestCore.lua`, wave-4 probes in `Code\40_Probes_Wave4.lua`)
+   `Code\00_TestCore.lua`, wave-4 probes in `Code\40_Probes_Wave4.lua`, wave-5
+   probes in `Code\50_Probes_Wave5.lua` if that leg ran)
 
 Game source (read-only, NEVER modify):
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`.
@@ -58,11 +65,19 @@ Then the pair, using the procedure proven in the wave-3 QA session:
   ERROR]` blocks: ~49 `Flight.lua objects_to_mark` errors per leg are known
   engine noise on the synthetic map; anything mentioning `SMR` files is OURS
   and is a finding.
-- Expected: every wave-4 module `applied` (plus the wave-3 set: 45 active,
-  ClassicRockets `inactive`, F10 absent unless PT-36 rolled it back); every
-  armed wave-4 probe FAIL in baseline → PASS in B. A missing id in ListFixes
-  means the FILE never loaded (parse error); an `error` status means apply()
-  raised — both are findings.
+- Expected after wave 4 alone: **61 code entries in metadata**, 59 `Fix_*` +
+  `90_SaveSanitizer` + `Opt_ClassicRockets`, with **59 `applied`**,
+  ClassicRockets `inactive` (opt-in), and F10 absent unless PT-36 rolled it back.
+  Wave 5 adds to that count — recompute from `metadata.lua` rather than trusting
+  this number. Every armed probe FAILs in baseline → PASSes in B. A missing id in
+  ListFixes means the FILE never loaded (parse error); an `error` status means
+  apply() raised — both are findings.
+- Four wave-4 modules can legitimately report `inactive`, and each says why in
+  its detail string: `LastTransmissionStorage` and `IndependenceTerraforming`
+  (preset patches — inactive if the shipped data is already correct),
+  `GraphConsumedCaption` (inactive if no stockpile panel matched), and
+  `SequenceLatents` (partial if only one of its two targets exists). An
+  `inactive` with any OTHER reason is a finding.
 - If any fix repairs something a shipped savegame fixup also touches, verify it
   hooks `OnMsg.PostLoadGame` (the F35 lesson — LoadGame fires BEFORE
   FixupSavegame, Savegame.lua:810-813).
@@ -85,6 +100,16 @@ told to be adversarial and cite file:line. Verify their HIGH findings yourself
 before acting (the wave-3 audit's one HIGH — the sanitizer fixup race — was
 real and shipped a repair). Full replacements and anything that WRITES to
 savegames get audited even without a divergence paragraph.
+
+**Wave 4's priority audit list** (the build leg flagged these itself):
+- the four full replacements — F66 `CreateConnectorElements`, F21 `BoardVehicle`,
+  F24 `MoveInside`, F28 `ReplaceTech` — diff each against Src line by line;
+- F22, the only fix that replaces a **global function** rather than a method;
+- F20's per-call instance `GetProperty` override (does it always restore? can
+  anything yield inside the tooltip builder?);
+- F65's `PostLoadGame` sweep and its "different live grids" test;
+- F74/F75, both filed DURING the build leg, so neither entry has ever been read
+  by a second pair of eyes.
 
 ## Task 4 — regression spot-checks
 

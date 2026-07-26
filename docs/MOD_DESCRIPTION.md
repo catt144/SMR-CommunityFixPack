@@ -147,6 +147,17 @@ come back.
   piece of internal bookkeeping that made every salvage attempt on that track
   fail silently — including via Ctrl+click and the Salvage button. Tracks
   already damaged in your save are repaired when you load it.
+- Salvaging track pays back what the track actually cost. Track is built in
+  sections, and the refund only ever counted one of them, so a long line handed
+  back the same few Metals as the shortest possible stub. Salvaging part of a
+  track returned nothing at all — now those pieces come back as a stockpile
+  where they stood.
+- A track's train limit follows its real length. It was worked out once, when the
+  track was first laid, and never again — so salvaging a long line down to a stub,
+  or cutting one in two, left the pieces carrying the original's limit. Existing
+  saves are corrected on load.
+- Track placed instantly (map setup and similar) is coloured like track rather
+  than like pipes. It used to correct itself only if you changed colour scheme.
 - Trains respect the resource switches on a station. Unloading ignored them
   completely, so a train would drop Waste Rock at a station you had told not to
   store Waste Rock — and the cargo planner would then send another train to haul
@@ -187,6 +198,69 @@ come back.
   colonist idling in vacuum now heads home before the oxygen runs out — and a
   brief power or air interruption no longer throws every resident out of a
   habitat permanently.
+- You hear about it when a Founder gains a trait again. The notification's own
+  eligibility check could never come out true, so it never fired once.
+- Domes clean up properly when they grow over a building. The building's old
+  pipe connections were being torn down against the dome instead of against the
+  building, leaving stale plumbing behind that a repair pass re-ran on every
+  load.
+- Bombardment missiles come in from spread directions instead of arriving as a
+  parallel rank. The game was already picking a separate angle for each missile
+  and then launching them all along the same one.
+- The Underground Medium Dome technology describes the building it unlocks rather
+  than naming an unrelated one. Only visible in saves from before the 1.0.6
+  underground rework.
+- Story steps that collapse a cave can no longer take the whole story with them.
+  Eight places in the underground anomaly and Buried Wonder sequences ask for a
+  cave-in on the underground map by name rather than on the map they are running
+  on, and if that map does not exist — the "No Underground and Asteroids" rule —
+  the request errors out and the sequence stops where it stands. It now declines
+  quietly and the story continues.
+- Drones keep an accurate list of the places they could not reach. Every change to
+  the map's passability — a building completed, terrain reshaped, a route opened —
+  rebuilt that list in a way that clung to buildings you had already salvaged and
+  left its own tally wrong, and the wrong tally is what the drone hub reads when it
+  decides whether there is anything worth doing.
+- Five more repairs are aimed at other mods and future updates rather than at
+  anything you can see today: battery and tank charge-rate modifiers now reach
+  the power grid, swapping one researched technology for another keeps the
+  research counters straight, two scripting-system helpers do what their own
+  descriptions promise, and pre-set building layouts check your research before
+  handing you a building.
+- Command Center graphs stop lying about consumption. The "Consumed" figure in
+  the caption left out maintenance, so Machine Parts and Electronics read as
+  almost nothing next to a full-height bar. The caption now counts what the bar
+  counts.
+- A colonist's Morale tooltip adds up again. It listed a bonus for high Comfort
+  that the game deliberately stopped applying, so the effects shown never
+  matched the Morale above them. The penalty for LOW Comfort is real and is
+  still listed.
+- Waiting on a train platform is not charged twice. The wait was counted again
+  as riding time — costing extra Comfort on arrival and inflating the travel
+  statistics on the train and the track.
+- The Last Transmission faction notices your reserves. Six of its opinions —
+  power, water and oxygen storage, praise and complaint alike — were attached to
+  a field the game never reads, so they scored nothing no matter how well you
+  stocked up, while the UI kept listing them as goals to achieve. Its Oxygen
+  goal was also measuring Power. Both are fixed.
+- "Stored for more than 2 sols" checks look at the whole colony as one figure.
+  They used to add each map's reserve up separately, and a map with nothing
+  running counted as roughly 41 sols on its own, so once the Underground existed
+  those checks were permanently satisfied — and "nothing stored" became
+  impossible to reach.
+- Tracks connect to stations and tunnels again. When two train buildings sit one
+  hex apart, both want the same connector tile — and the game let them delete
+  each other's, endlessly, so neither ever held a working connection. Now the
+  first one keeps it.
+- A train tunnel really does carry power. The tunnel's description promises it
+  connects power grids across the map, but a station attached directly to the
+  entrance (or to another station a short track away) was skipped by that
+  wiring. It now bridges whenever the two ends genuinely sit on separate grids,
+  including in saves where the link is already missing.
+- RC Transports keep their hands off trade and refugee rockets. The game already
+  forbids that, but the rule stopped matching anything when the rocket classes
+  were rebuilt for Relaunched, so an RC Transport could be sent to load from or
+  unload into a visiting rocket and leave it in a state nothing else understood.
 
 **Story & milestones**
 - The Philosopher's Stone mystery no longer gets stuck at the finale. If you left

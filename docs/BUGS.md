@@ -30,20 +30,20 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | fixed  |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
-| F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | todo   |
-| F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | todo   |
-| F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | todo   |
-| F21 | Train travel-time penalty includes station waiting       | P2  | med  | todo   |
-| F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | todo   |
-| F23 | Founder-gains-trait notification never fires             | P3  | high | todo   |
-| F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | todo   |
-| F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | todo   |
-| F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | todo   |
-| F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | todo   |
-| F28 | `Research:ReplaceTech` crashes (latent, mod-facing)      | P3  | high | todo   |
-| F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | todo |
+| F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | fixed* |
+| F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | fixed  |
+| F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | fixed  |
+| F21 | Train travel-time penalty includes station waiting       | P2  | med  | fixed  |
+| F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
+| F23 | Founder-gains-trait notification never fires             | P3  | high | fixed  |
+| F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | fixed  |
+| F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | fixed  |
+| F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | fixed  |
+| F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | fixed  |
+| F28 | `Research:ReplaceTech` crashes (latent, mod-facing)      | P3  | high | fixed  |
+| F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | fixed*|
 | F30 | Lake placement entombs RC builder + drones               | P1  | high | fixed  |
-| F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | todo   |
+| F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | fixed  |
 | F32 | Dismissed warnings re-add instantly (not suppressable)   | P2  | med  | wontfix|
 | F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | fixed  |
 | F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | fixed* |
@@ -54,22 +54,22 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed  |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
-| F42 | Buildings placeable on active dust devils                | P3  | high | todo   |
-| F43 | Layout construction bypasses tech locks                  | P3  | high | todo   |
+| F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
+| F43 | Layout construction bypasses tech locks                  | P3  | high | fixed  |
 | F44 | One-hex track salvage can delete the entire track        | P1  | high | fixed  |
 | F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | fixed  |
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | fixed  |
-| F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | todo   |
+| F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | fixed  |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
-| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | todo   |
+| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | fixed  |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | fixed  |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | fixed* |
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
 | F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | fixed  |
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
-| F56 | Auto RC Transports never offload rockets                 | P2  | high | todo   |
-| F57 | Drone/transport minors bundle                            | P3  | med  | todo   |
+| F56 | Auto RC Transports never offload rockets                 | P2  | high | wontfix|
+| F57 | Drone/transport minors bundle                            | P3  | med  | fixed* |
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
@@ -79,8 +79,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | D02 | Dismissing "not working" warnings only silences them 2min| dsgn| med  | planned opt-in |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
-| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | todo   |
-| F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | todo   |
+| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
+| F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | fixed  |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed  |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
@@ -88,6 +88,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | fixed  |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
+| F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | fixed  |
+| F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -277,82 +279,241 @@ computes (5 + `colonist:Random(param)` = 5-14 for param 10). Note the mod sandbo
 introspection, so an already-hotfixed `daily_update_func` cannot be told from the broken
 one; the fix deactivates only if the preset or its `param` is missing.
 
-### F18 — Independence terraforming tech gives 10% not 20%
+### F18 — Independence terraforming tech gives 10% not 20%  `[fixed*: Code/Fix_IndependenceTerraforming.lua — the preset half; already-researched saves keep 10%, see below]`
 `Data\TechPreset.lua:4798-4812` — `param1 = 20` ("decrease percent") but
 `Effect_ModifyLabel Amount = -10` on `Consts.SpecialProjectResourcesModifier` (100-based,
 consumed `Lua\SpecialProjects.lua:105`). All sibling Independence techs have param == amount.
 **Fix:** patch the effect's `Amount = -20` before research (ClassesPostprocess), only if
 tech not yet researched — else apply delta modifier.
+*Sibling evidence enumerated:* `Independence_Adaptivity` param1 5 / Amount -5;
+`Independence_MartianbornPerformance` param1 5 / Percent 5; `Independence_RocketCapacity`
+param1 30000 / Amount 30000; `Independence_Research` param1 20 / Amount 20. Only
+`Independence_TerraformingProjects` disagrees with itself.
+*Implemented as the preset half only.* The patch runs from `OnMsg.DataLoaded` (+
+`DataChanged`) and finds the effect by what it does (Label "Consts", Prop
+"SpecialProjectResourcesModifier"), not by index; an Amount already at -20 leaves the fix
+inactive.
+*Open half — saves where the tech is ALREADY researched keep the 10%.*
+`Effect_ModifyLabel:OnApplyEffect` (`Lua\MarsGameEffects.lua:161-178`) computes
+`amount = self.Amount * scale` at research time and stores a Modifier on the colony keyed by
+the effect object; that stored Modifier is what the save carries, and correcting the preset
+afterwards does not touch it. A repair would be idempotent (same key, so re-applying
+replaces rather than stacks), but `OnApplyEffect`'s `parent` argument also determines the
+Modifier's `id`, and getting that wrong would leave an unidentifiable modifier in every
+affected save. Deferred to a later sanitizer pass rather than shipped untested for a
+10-point discount.
+Probe: `IndependenceTerraforming` in `40_Probes_Wave4.lua`.
 
-### F19 — Graphs "Consumed" caption omits maintenance
+### F19 — Graphs "Consumed" caption omits maintenance  `[fixed: Code/Fix_GraphConsumedCaption.lua]`
 `Lua\X\ColonyControlCenter.lua:180-188` vs `ResourceTracking.lua:162` — caption uses
 consumption only; plotted series adds maintenance. Near-zero caption next to a tall bar for
 Machine Parts/Electronics/Metals/Polymers. **Fix:** wrap `City.GetColonyStatsButtons`,
 correct the caption closure.
+*Implemented as sketched.* Post-wrapper on `City:GetColonyStatsButtons`; the shipped
+function builds the whole descriptor table and the wrapper rewrites only the caption
+closure of the stockpile-resource produced/consumed panels. The panel is found by
+STRUCTURE — its `data[2]` must be `city.ts_resources[id].consumed`, the very series the
+caption describes — so a rearranged UI fails to match and deactivates the fix instead of
+relabelling the wrong graph. The replacement keeps the shipped translation (T id 8979) and
+sums the two raw accumulators before scaling once, which is what the plotted series does
+(it passes raw values with `scale = const.ResourceScale`).
+Probe: `GraphConsumedCaption` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
-### F20 — Morale tooltip shows unapplied +Comfort bonus
+### F20 — Morale tooltip shows unapplied +Comfort bonus  `[fixed: Code/Fix_MoraleComfortTooltip.lua]`
 `Lua\Units\Colonist.lua:2983-3007` (tooltip) vs :3963-3969 (`UpdateMorale`, bonus
 deliberately commented out: "remove for comfort policy to work") — tooltip still lists
 "Living in luxury +5" for Comfort ≥ 70; listed effects don't sum to shown Morale. **Fix:**
 override `Colonist.UIStatUpdate`; skip `value >= high` row for Comfort only.
+*Confirmed and narrowed:* `UpdateMorale` keeps the LOW-Comfort penalty (`:3967-3969`) and
+drops only the high-Comfort bonus (`:3963-3966`), while the tooltip loop (`:2985-3008`)
+prints a row for every stat on `value < low or value >= high` alike. Exactly one row is
+wrong. The shipped comment names the removal as intentional, so only the tooltip is
+changed and no Morale number moves.
+*Implemented differently, on better evidence:* the sketch's "override `UIStatUpdate` and
+skip the row" is not reachable — the row is built inside the ~130-line `win.GetRolloverText`
+closure the shipped function installs, and the `low`/`high` bounds it compares against are
+read once for all stats (`:2983-2984`), so there is no per-stat seam to hook. Instead the
+fix post-wraps `UIStatUpdate`, then wraps the closure it just installed, and answers the one
+comparison the row hinges on: for the duration of that call the colonist carries an
+instance-level `GetProperty` reporting Comfort as one below the high mark when it is at or
+above it. The value only ever moves DOWN to just under the threshold, so the low-Comfort
+penalty row is untouched, no other stat is affected, the override is removed in the same
+call under `pcall`, nothing in the builder yields, and only Morale tooltips are wrapped.
+Probe: `MoraleComfortTooltip` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
-### F21 — Train travel-time penalty includes station waiting
+### F21 — Train travel-time penalty includes station waiting  `[fixed: Code/Fix_TrainWaitTime.lua]`
 `Lua\Units\ColonistTransport.lua:493,511,551-569` — `ticket.start_wait` set on reaching
 platform, never reset at boarding; Comfort "travel time" penalty and train/track
 "spent time" stats (TransportStatistics.lua:31-45) count waiting (double-counted vs
 station stat); partially bypasses LuxuriousTrains. **Fix:** post-hook `Colonist.BoardVehicle`
 to reset `transport_ticket.start_wait = GameTime()`.
+*Implemented as a full replacement, not a post-hook, because a post-hook cannot run in
+time:* `Colonist:BoardVehicle` (`:503-528`) ends with `while self.holder == vehicle do
+self:PlayPrg(...) end`, which blocks for the entire journey — a post-wrapper would restamp
+after the ride, and a pre-wrapper would erase the wait before `:511` credits it to the
+station. The copy is byte-identical except the one added line, placed immediately after the
+station is paid, so the station keeps the full wait and only the boundary between "waiting"
+and "travelling" moves to where the colonist actually boards.
+Probe: `TrainWaitTime` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
-### F22 — `GetGridGlobalStorage` breaks Last Transmission gates
+### F22 — `GetGridGlobalStorage` breaks Last Transmission gates  `[fixed: Code/Fix_GridGlobalStorage.lua]`
 `Lua\ResourceOverview.lua:880-899` — zero-demand map returns sentinel `1000 sols` and
 per-map sols are **summed**; once Underground loads, `== 0` conditions in
 `Data\FactionDef\LastTransmission.lua:103-184` unsatisfiable, `> 2 sols` always true.
 **Fix:** redefine: zero-demand map contributes 0; combine with Min (or demand-weighted).
+*Correction to the entry:* the sentinel is `1000 * const.HourDuration` — 1000 **hours**,
+not sols (`const.HourDuration` = 30000ms; `const.DayDuration` = 720000, and the shipped
+"2 sols" threshold is 1440000 = 48 hours, `ClassDef-Conditions.generated.lua:2030-2031,
+:2044`). It is ~41 sols, still ~20x the threshold, so the conclusion stands.
+*Implemented as demand-weighted (the entry's own second option), not "contributes 0".*
+The replacement aggregates the INPUTS — sum stored and sum required across the two cities
+the shipped function names — and takes a single ratio. Three deliberate properties:
+`stored == 0` returns 0 (this is what makes `== 0` reachable, and it is literally true);
+the "unlimited" sentinel survives for the case it was written for, a colony with real
+storage and no demand anywhere; and `GetGridGlobalStorageInSols` is left untouched, since
+its per-city semantics are self-consistent and it is a public global. Arithmetic is copied
+exactly, truncating `/` included, so a single-map colony faces the identical threshold.
+Asteroid maps are deliberately NOT added to the aggregate — that would change how hard the
+shipped conditions are to satisfy (FIX_POLICY §4). Replacing the global works because
+`ModEnvMeta.__newindex` rawsets into the real `_G` (`Mod.lua:1557-1563`) and the callers
+are generated closures resolving the name at call time; apply() reads the global back to
+confirm the write landed.
+*What fixing this exposed:* the six Last Transmission conditions this entry names are ALSO
+broken by a second, independent defect that this fix alone would not have cured — filed and
+fixed as **F75** below.
+Probe: `GridGlobalStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
 
 ## P3 — cosmetic / latent / mod-facing
 
-### F23 — Founder-gains-trait notification never fires
+### F23 — Founder-gains-trait notification never fires  `[fixed: Code/Fix_FounderTraitNotification.lua]`
 `Lua\ColonyViability.lua:282-295` — array `FounderGainsTraitCategories` indexed with group
 string → always nil. Handler can't be replaced (OnMsg is additive; original is dead and
 harmless). **Fix:** add our own `OnMsg.ColonistAddTrait` with a proper set
 (`{Positive=true,Negative=true,Specialization=true}`) + dedupe via existing-notification check.
+*Implemented exactly as sketched.* Conditions copied verbatim from the shipped handler,
+`init` guard and single-notification guard included. Handlers run in registration order and
+the shipped one is registered first, so a future game hotfix that repairs the array makes
+the shipped handler add the notification and its own `not FindNotification(...)` guard is
+then what stops ours from adding a second.
+Probe: `FounderTraitNotification` in `40_Probes_Wave4.lua`. Playtest: PT-44.
 
-### F24 — Dome pipe visuals corrupt on load (`MoveInside` copy-paste)
+### F24 — Dome pipe visuals corrupt on load (`MoveInside` copy-paste)  `[fixed: Code/Fix_DomePipeMoveInside.lua]`
 `Lua\LifeSupportGrid.lua:304` — passes `dome` where electricity twin
 (`ElectricityGrid.lua:291`) passes `self` to `DestroyConnection`. Triggered from
 `Dome:OnLoad` (Dome.lua:896-899) repair sweep; stale plugs/connections block future
 `ConnectPipe` visuals. **Fix:** override `LifeSupportGridObject.MoveInside`, `dome`→`self`.
+*Confirmed:* `WaterGrid.DestroyConnection(pt1, pt2, building1, building2, test)`
+(`LifeSupportGrid.lua:157-161`) takes the owner of `pt1` as `building1`, and the two loops
+are otherwise line-for-line identical. So the moving building is never told its own
+connection at `pt` is gone and the dome is told about a hex it does not own.
+*Implemented as a full replacement of `LifeSupportGridObject:MoveInside`
+(`:282-316`)*, byte-identical except the one argument: the call is inside a loop in the
+middle of the function, so no wrapper position reaches it, and wrapping
+`WaterGrid.DestroyConnection` instead cannot work — a wrapper there has no way to know
+which caller handed it the wrong owner. The shipped `assert(IsKindOf(dome, "Dome"))` is
+dropped from the copy (asserts do not unwind; the statements after it already require a
+real dome).
+Probe: `[install]`-free — the fix is verified through F24's own playtest, PT-44, because
+the behaviour needs a real dome absorbing a real pipe-connected building.
 
-### F25 — Tech description names wrong building (pre-1.0.6 saves only)
+### F25 — Tech description names wrong building (pre-1.0.6 saves only)  `[fixed: Code/Fix_TechDescriptionBuilding.lua]`
 `Data\TechPreset.lua:1486` (`UndergroundLargeDome`, gated `not UndergroundRework106`) —
 description says "Jumbo Cave Reinforcements", tech unlocks `UndergroundDomeMedium`.
 **Fix:** ClassesPostprocess description patch. Low priority (legacy saves only).
 
-### F26 — Bombardment missiles fly parallel (cosmetic)
+Confirmed, and which half is wrong is unambiguous: the preset's own `display_name` is
+"Underground Medium Dome" (`:1487`), its single unlock is
+`Effect_TechUnlockBuilding{ Building = "UndergroundDomeMedium" }` (`:1491-1493`), that
+building's own display_name is "Underground Medium Dome"
+(`Data\BuildingTemplate\UndergroundDomeMedium.lua:22`), the `<buildinginfo('UndergroundDomeMedium')>`
+tag in the same sentence is correct, and the rest of the sentence ("A medium-sized Dome")
+describes the unlocked building. Only the bolded name is wrong.
+
+Patched from `OnMsg.DataLoaded` (+ `DataChanged` for editor reloads) rather than
+ClassesPostprocess — presets do not exist when mod code loads.
+
+**Localisation note (deliberate):** the replacement is `T(841885693955, "<corrected
+English>")` — the *same* translation id. A localised build resolves the id in its own
+translation table and is completely unaffected; only an English build, which falls back to
+the literal, sees the correction. Minting a fresh T would have replaced every translated
+description with an English paragraph — a worse regression in every other language than the
+one wrong word. The fix declines (with a reason) if the literal it expects is not there.
+
+### F26 — Bombardment missiles fly parallel (cosmetic)  `[fixed: Code/Fix_BombardmentSpread.lua]`
 `Lua\Bombardment.lua:82-83` — deviated `spawn_dir` computed, then `spawn_pos` uses base
 `dir` (compare Meteors.lua:106-107). Mystery 7 bombardments look uniform. **Fix:** override
 `WaitBombard`, use `GenerateDir(dir, angle)` in `spawn_pos`.
 
-### F27 — Storage charge/discharge rate modifiers ignored (latent)
+Confirmed exactly as tracked. `spawn_dir` is assigned at `:82` and never read again
+anywhere in the 100-line function; `GenerateDir(dir, angle)` exists solely to jitter the
+elevation by up to ±10° around the volley angle (`:38-50`), so the intent of `:82` is
+unambiguous and `:83` names the wrong variable.
+
+*Cost recorded honestly:* this needed the pack's sixth full replacement, and it is the
+largest — 100 lines — for its least valuable defect. There is no seam: by the time any
+hook can reach the missile, `missile:SetPos(spawn_pos)` has already placed it (`:85`) and
+the visual axis is derived from the same local (`:93-96`), so a post-hoc correction would
+leave a missile flying along one line while pointing down another. Two file-locals had to
+be copied in as well — `GenerateDir` (`:38-50`, verbatim, so it consumes the same
+`SessionRandom` draws in the same order and volleys stay deterministic) and `travel_dist`
+(`:53`). One deliberate divergence: the shipped `assert(false, "Failed to find bombard
+pos!")` at `:59` is dropped, since `assert` does not unwind mod code — the `return false`
+beside it is what handles the case and is kept. **Re-verify this copy on every game
+update** (FIX_POLICY §1.5).
+
+### F27 — Storage charge/discharge rate modifiers ignored (latent)  `[fixed: Code/Fix_StorageRateModifiers.lua]`
 `Lua\ElectricityStorage.lua:47-63`, `Lua\LifeSupportStorage.lua:25-42,131-148` —
 `OnModifiableValueChanged` fires for `max_*_charge/discharge` but never copies to
 `element.max_charge/max_discharge` (read in SupplyGrid.lua:164-170). No vanilla modifier
 touches rates; breaks the documented modding surface. **Fix:** post-hook the three
 `OnModifiableValueChanged`s, copy both fields before `UpdateStorage()`.
+*Implemented as sketched, with the copy AFTER the shipped body rather than before it* — the
+shipped body ends with its own `element:UpdateStorage()`, so a post-wrapper that copies the
+rates and calls `UpdateStorage()` again is the smallest change that gets the new rates into
+the same pass. Exact fields confirmed: `NewSupplyGridStorage` (`SupplyGrid.lua:64-76`) seeds
+`max_charge`/`max_discharge` once at creation and `SupplyGridElement:UpdateStorage`
+(`:167-168`) is what reads them every tick. The wrapper no-ops unless the property that
+changed is one of the two rates, and each of the three classes is wrapped independently, so
+one missing target cannot take the other two down.
+Probe: `StorageRateModifiers` in `40_Probes_Wave4.lua`.
 
-### F28 — `Research:ReplaceTech` crashes for researched techs (latent)
+### F28 — `Research:ReplaceTech` mishandles the field counter (latent)  `[fixed: Code/Fix_ReplaceTechCount.lua]`
 `Lua\Research.lua:715` — `if not next(g_TechFieldResearchedCount[field_id] == 0)` →
-`next(boolean)` error; replacement effects never apply. No vanilla caller; hits
-mods/storybits/console. Correct pattern at :246-249. **Fix:** override `Research.ReplaceTech`
+`next()` applied to a boolean. No vanilla caller; hits mods/storybits/console. Correct
+pattern at :246-249. **Fix:** override `Research.ReplaceTech`
 branch with `if g_TechFieldResearchedCount[field_id] == 0 then ... = nil end`.
+*Title corrected — the pack does not claim a crash it has not observed (the F10 lesson).*
+Either `next(false)` raises, in which case the function dies before the very next line's
+`self:SetTechResearched(tech_id_new, "notify")` and the replacement tech is never marked
+researched; or this engine tolerates it as it tolerates `next(nil)`, in which case it
+returns nil, `not nil` is true, and the field's counter entry is dropped even while techs in
+that field are still researched. Both are wrong; both are repaired by writing the comparison
+`Research:SetTechUndiscovered` (`:246-249`) already writes. The probe reports whichever it
+observes. Implemented as a full replacement of `ReplaceTech` (`:684-720`) since the defect is
+mid-function; the three shipped `assert` lines are dropped from the copy (they cannot unwind,
+and `if not status then return end` right after the first is the real guard).
+Probe: `ReplaceTechCount` in `40_Probes_Wave4.lua`.
 
-### F29 — Sequence-system latents (mod-facing bundle)
+### F29 — Sequence-system latents (mod-facing bundle)  `[fixed*: Code/Fix_SequenceLatents.lua — items 1 and 3; item 2 deliberately not fixed, see below]`
 1. `Lua\Sequences\SA_Filters.lua:30-40` — `SA_GetLabelToRegister` ignores
    `random_count`/`random_percent` (returns full list after shuffle). No shipped user.
 2. `Lua\Sequences\SA_Gameplay.lua:2705` — `SA_WaitMarsTime` *generated-code* path inverts
    the workshift wait (`==` should be `~=` vs interpreted `StopWait` :2626). No shipped user.
 3. `Lua\Mysteries\Diggers.lua:91-95` — broken two-variable swap; unreachable with shipped
    defaults, bites subclasses. **Fix:** all three are small overrides; ship for modder benefit.
+*Item 1 fixed:* the shipped body computes `count`, shuffles (which exists only to make a
+truncation fair) and then returns the whole list — `count` is dead. The action's own editor
+text advertises both parameters (`:20-27`). The replacement truncates to `count`.
+*Item 3 fixed:* `local t` is saved and never read, so `self.pre_hit_ground_t_2 =
+self.pre_hit_ground_t` copies the value the line above just overwrote and both fields end up
+holding the LARGER one. The replacement assigns `t`.
+*Item 2 deliberately NOT fixed.* It is real — the generator emits `while CurrentWorkshift ==
+target_workshift ...`, the inverse of the interpreted `StopWait` (`:2617-2631`) — but it is a
+CODE GENERATOR: it runs when a sequence is compiled in the Mod Editor, not while playing,
+and mod code cannot regenerate sequences that were already compiled. Repairing it would mean
+replacing the whole multi-branch generator for a path with no shipped user and no runtime
+effect. Revisit only if a scenario author reports it.
+Probe: `SequenceLatents` in `40_Probes_Wave4.lua` (covers items 1 and 3).
 
 ## Phase 2 findings — details (2026-07-24)
 
@@ -367,12 +528,44 @@ fixup for rovers only (`BaseRover.lua:736-745`). **Fix:** wrap `LandscapeLake:Pl
 after its `RebuildPassability`, sweep units in bbox with `not map:IsPassable(unit)` →
 `SetCommand("ExitImpassable")` / teleport to `GetPassablePointNearby`.
 
-### F31 — Anomaly cave-in hardcodes UndergroundMap (P2, med)
+### F31 — Anomaly cave-in hardcodes UndergroundMap (P2, med)  `[fixed: Code/Fix_AnomalyCaveInMap.lua]`
 `Scenario\UndergroundAnomalies.generated.lua:240` (same in Cave_Of_Wonders data):
 `TriggerCaveIn(UndergroundMap, anomaly_pos)` while every sibling action uses the
 sequence-local `map` (sequence runs on the anomaly's own map, `Anomaly.lua:293-303`).
 Wrong-map rubble; crash risk if `UndergroundMap` false (`CaveInRubble.lua:101`).
 **Fix:** wrap `TriggerCaveIn(map, pos)`: reject `map.mapdata.Environment ~= "Underground"`.
+
+Confirmed, and **wider than recorded — eight call sites, not two**:
+`UndergroundAnomalies.generated.lua:240`, `BuriedWonder_Jumbo_Cave.generated.lua:340,539,769`,
+`BuriedWonder_Jumbo_Cave_106.generated.lua:339,538,768`, and
+`BuriedWonder_Cave_Of_Wonders.generated.lua:430` (which passes the global twice — also to
+`FindCaveInLocation`). The engine's own callers do it correctly: `Marsquake.lua:266`
+passes the local `map`, `:287` passes `CurrentMap`.
+
+The crash risk is confirmed and named: `UndergroundMap` is a **GameVar defaulting to
+`false`** (`RandomMapGenerator_Picard.lua:263`) which stays false whenever the underground
+map was never generated — `GenerateAdditionalMaps` returns immediately under the "No
+Underground and Asteroids" game rule (`:266`). `TriggerCaveIn` guards its `pos` argument
+(`CaveInRubble.lua:95-98`) and then calls `map:MapFindNearest` (`:101`) with no check at
+all; handed `false` that raises, and the raise takes the running anomaly sequence with it.
+Same shape as F66: the function states the invariant for one argument and does not enforce
+it for the other.
+
+*Implemented differently, on better evidence:* the sketch's environment test would break
+the game's own cave-ins — `Marsquake.lua:266,287` trigger them on whatever map the quake is
+on, so rejecting non-`Underground` environments there would silently cancel every marsquake
+cave-in. The defect is an unchecked argument, not a wrong environment, so the fix checks
+only the argument: a chained wrapper on the global `TriggerCaveIn` that declines a map it
+cannot use, exactly as the shipped body declines a missing `pos`. When the map is real,
+nothing changes.
+
+**Not fixable from Lua, recorded:** the wrong-map half. Those eight calls are baked into
+generated sequence code (`Data\Scenario\*.lua` `'expression'` strings, e.g.
+`UndergroundAnomalies.lua:195`) compiled when the scenario preset loads, with no hook for
+the map argument; and `TriggerCaveIn` cannot recover the sequence's map from the inside,
+since it receives only a position and positions carry no map. The wrapper deliberately does
+**not** substitute `CurrentMap` — rubble on the wrong map is a worse failure than no
+rubble, and guessing is not licensed by FIX_POLICY §4.
 
 ### F32 — Dismissed warnings re-add instantly (P2, med mechanism-certain)  `[wontfix — the game hotfixed the one defective mechanism; the residual UX gap is D02]`
 Object-status notifications (`NotWorkingBuildings`, `DestroyedInfrastructure`,
@@ -579,17 +772,74 @@ Scope: only the "have" half. Rare traits GAINED later (schools, sanity breakdown
 `GetRandomTrait` with no `rare_weight_mod` at all, so neither tech has ever affected them
 — separate defect, not touched.
 
-### F42 — Buildings placeable on active dust devils (P3, high)
+### F42 — Buildings placeable on active dust devils (P3, high)  `[blocked — wontfix candidate: screened, no defect found; user decision needed]`
 `AreThereBlockingUnitsUnderneath` (`Construction.lua:1895-1914`) queries only
 Drone/BaseRover; `BaseDustDevil` inherits `Object` (`DustDevils.lua:245-247`) — never
 checked anywhere in Construction\. **Fix:** wrap `ConstructionController:UpdateConstructionStatuses`-
 family to add a dust-devil proximity check (or extend the blocking query).
 
-### F43 — Layout construction bypasses tech locks (P3, high)
+*Screened in the wave-5 build leg — the observation is correct, the verdict is not.*
+Every factual claim in the entry holds: `ConstructionController.BlockingUnitClasses` really
+is `{"Unit"}` (`Construction.lua:1905`), `BlockingUnitsFilter` really admits only disabled
+Drones and BaseRovers (`:1895-1897`), `BaseDustDevil` really is a plain `Object`, and
+`Construction\` really never mentions a dust devil. What is missing is any evidence that
+it was ever supposed to. Weighing the F56 signals:
+* **The guard has a different job.** It exists to stop a unit being entombed under a new
+  building — hence *disabled* Drones (the ones that cannot walk away) and BaseRovers.
+  A dust devil has no hex footprint, no collision and no grid presence; it follows a
+  trajectory (`DustDevils.lua:326`) and deletes itself on a watchdog (`:312`). It can be
+  neither trapped nor harmed, so the guard's purpose does not reach it. Compare F30, where
+  entombment of a real rover *was* the defect.
+* **The omission is named and overridable.** `BlockingUnitClasses` and
+  `BlockingUnitsFilter` are declared class members, exactly the shape the F56 screen calls
+  "designed scope, stated in a place a modder can change".
+* **No shipped text promises it.** There is no dust-devil `ConstructionStatus`; the only
+  "can't build here" weather text, `DontBuildHere` — *"Can't build on dust geysers"*
+  (`Construction.lua:62`) — is about static geyser terrain (`Geysers.lua:1-26`, marked into
+  the object hex grid at map load) and is implemented and working.
+* **The sibling does it the other way, deliberately.** The game models exactly one
+  weather-gated placement rule — `RocketLandingDustStorm`, *"Rockets can't land during
+  Dust Storms"* (`Construction.lua:85`) — and implements it. Building through meteors,
+  cold waves, dust storms and dust devils is otherwise normal play: a devil passing over a
+  new site dusts it, which is what dust devils are for.
+
+Adding a placement block would be a new rule, not a repair — FIX_POLICY §4. Recommend
+closing `wontfix` on the same grounds as F56/F62/F63. **No fix written; awaiting the
+user's decision.**
+
+### F43 — Layout construction bypasses tech locks (P3, high)  `[fixed: Code/Fix_LayoutTechLock.lua — latent in the shipped game, see below]`
 `LayoutConstructionController:Activate` (`LayoutConstruction.lua:231-263`): tech-locked
 building with no prefab item → `require_prefab=false` → `add=true`, sub-controller
 placed with no research gate. **Fix:** wrap `Activate`: filter items where
 `not tech_enabled and not self.prefab`.
+
+Confirmed against the shipped body: `tech_enabled` is computed at `:238` and consulted
+only through `require_prefab` at `:241`, which covers one case — "locked but purchasable
+as a resupply prefab". Locked-and-unobtainable has no branch and falls through the `or`
+at `:242` into `add = true`. Outside a layout the tech gate is the build menu
+(`GetBuildingTechsStatus`, `X\BuildMenu.lua:321-356`), which a layout entry never passes
+through, so nothing else catches it.
+
+**Latent — reachability stated for the record:** exactly one layout ships,
+`SelfSufficientDome` (`Data\LayoutConstruction.lua:3-54`, used by
+`Data\BuildingTemplate\SelfSufficientDome.lua:16`), and none of its seven entries carries
+a `BuildingTechRequirements` row, so no vanilla layout can reach the hole. Fixed on the
+same grounds as F27/F29 — the next layout, from a mod or a future update, inherits it. On
+the shipped data the fix is a provable no-op.
+
+*Implemented slightly differently:* the sketch's filter (`not tech_enabled and not
+self.prefab`) drops entries the shipped code deliberately keeps — those covered by a
+prefab the colony already owns, which `:244-248` re-enables through a stateful
+`prefab_counters` handout. The wrapper instead re-reads what the shipped loop recorded
+(`self.prefab_items[entry]`, `self.prefab`, `self.skip_items[entry]`), so the extra
+condition is exactly `tech_enabled or self.prefab or an owned prefab`, and the counter
+never has to be re-derived. Dropped controllers get the same teardown
+`LayoutConstructionController:Deactivate` (`:310-317`) uses, and are marked in
+`skip_items`, which is what `PlaceCursors` (`:341-342`) consults.
+
+Deliberately untouched: `GetLayoutConstructionBuildingCost` (`:469-491`) and the
+description builder (`:570-584`) walk the whole preset and already ignore `skip_items`
+for the shipped prefab skip too — a separate cosmetic inconsistency, not this defect.
 
 ### Verified FIXED in remaster (do not fix; note in release credits/research)
 - Schools training already-owned perks (`FilterCompatibleTraitsWith`, `Traits.lua:1051-1074`).
@@ -642,12 +892,53 @@ accepts the resource, and always when `is_stopping` (a refabbed train destroys i
 `dest:IsResourceEnabled`, `Train.lua:905-912,930-939`), so undeliverable cargo only arises
 when something changes mid-trip.
 
-### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)
+### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)  `[fixed: Code/Fix_TrackSalvageRefund.lua]`
 `TrackBase:GetRefundResources` (`Track.lua:286-307`) reads cost from ONE element (last);
 `construction_cost_at_completion` set only on FIRST element (`Track.lua:524-525`) —
 first/last mismatch; `DemolishAndSplitTrack` uses bare `DoneObject`, no refund (contrast
 `Passage.lua:1217-1222`). Track cost 200 Metals/hex. **Fix:** multiply by `#self.elements`;
 place return stockpile on partial salvage.
+
+*Implemented differently, on better evidence:* the sketch's cost model is wrong in both
+halves, and following it would have refunded up to five times what a track cost.
+Screening the real code found:
+1. **Track hexes are not billed per hex.** They are built in construction GROUPS of at
+   most `const.ConstructiongGridElementsGroupSize` = 5 elements (`Tracks.lua:359`, `:426`;
+   `_GameConst.lua:480`), and the group leader is charged
+   `construction_cost_multiplier` × one element's cost — which `Tracks.lua:463` leaves at
+   100, i.e. **200 Metals per group, not per hex** (contrast `Passage.lua:1969`, which
+   sets `(#construction_group - 1) * 100`, and `LifeSupportGrid.lua:1426`'s 0.2/pipe).
+   So a 30-hex track costs six groups' worth, and `#self.elements * 200` would refund 30.
+2. **`Track.lua:524-525` is not where the stamp comes from.** That line only runs under
+   the `FreeConstruction` game rule, and it stamps `Concrete` — which a track does not
+   cost — so its value is 0. The real stamp is written by
+   `ConstructionGroupLeader:Complete`, which suppresses every member's own
+   `MarkSpentResources` (`ConstructionSite.lua:2469`) and then stamps the group's whole
+   spend onto the element it completed LAST (`:2479-2489`, comment: "mark spent resources
+   in 1 building so refunds would be correct"). One stamp per group, each holding that
+   group's real expenditure. There is no first/last mismatch — a track of ≤5 hexes is one
+   group whose stamp does land on `elements[#elements]`, and its refund is already exactly
+   right.
+3. **The defect is therefore a missing sum, not a missing multiplier.** `Track.lua:291`
+   reads one element's stamp, so every construction group before the last one is
+   uncounted; the refund does not grow with the track at all. The fix sums
+   `construction_cost_at_completion` over all `self.elements`. Because each stamp is a
+   recorded expenditure, the total is exactly what was spent and can never exceed the
+   shipped 50%. When no element carries a positive stamp (Free Construction, instant
+   tracks) the shipped estimate-from-one-element fallback runs unchanged.
+4. **Partial salvage** is fixed as sketched but hooked one level up: a chained wrapper on
+   `TrackGridElement:Demolish` (the player-salvage entry point — `ToggleDemolish`,
+   `TrackElement.lua:259-261`, and the mass-salvage tool, `Construction.lua:2911`) snapshots
+   the stamped elements, calls the original, and refunds the stamps of the elements the
+   call actually destroyed. Observing the outcome avoids re-deriving the three deletion
+   branches. `DemolishAndSplitTrack` itself is deliberately not wrapped: its other caller
+   (`Construction.lua:1574`, track erased from under a newly placed station) is not a
+   salvage. Whole-track demolition is skipped by the wrapper — `OnDemolish` clears
+   `track.elements` to false (`Track.lua:190`) after it has already refunded through the
+   replaced getter — so no refund is ever paid twice, and a stamp dies with its element.
+
+**Existing saves:** fully retroactive. The stamps are already in every save; only the
+reading of them changes.
 
 ### F48 — Station-connector savegame fixup no-op (P3, high defect / low impact)  `[blocked — the corrected pass is too invasive to ship untested; see below]`
 `Station.lua:1346`: `ProcessTrackElements(ResolveMap(track, track.elements))` — paren
@@ -676,13 +967,91 @@ and after. If it holds up, the pass belongs in `90_SaveSanitizer.lua` behind a o
 both cases → implement in the sanitizer, skipping tracks that carry repair sites; a dirty
 FAIL on the damaged-track case → close `wontfix — repair riskier than the defect`.*
 
-### F49 — Train minors bundle (P3, med)
+### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — items (a) and (d); (b)(c)(e) screened and deliberately not fixed, see below]`
 (a) instant-built tracks use pipes palette (`Tracks.lua:385` vs `TrackElement.lua:791`);
 (b) `DemolishAndSplitTrack` ignores `assigned_vehicles` — mid-transit trains silently
 stored/self-destruct (`Train.lua:249-251,535-541`); (c) salvage click on invisible
 connector hexes propagates to the STATION (`TrackElement.lua:299-300`); (d) `max_vehicles`
 never recomputed after merge/split (`Track.lua:64-65`); (e) dead validation
 (`TrackRequiresTwoStations` never inserted; `CanContinueTrack` never called).
+
+**Screened item by item in the wave-5 build leg. Two fixed, three not — and none of
+the three is a no-op waiting to be written.**
+
+**(a) FIXED.** Confirmed: `Tracks.lua:385` captures `GetPipesPalette()` and `:412`
+applies it to every element the instant `place_track` path creates. Every other track
+path uses `GetTracksPalette()` — the completed-construction path
+(`TrackElement.lua:791`), the construction cursor (`GridConstruction.lua:220`) and,
+decisively, the colony colour-scheme refresh, which repaints *every* `TrackGridElement`
+on every map with it (`ColonyColorScheme.lua:120-121`). The palettes really do differ
+(`ColonyColorScheme.lua:69-77`). Consequence: instant track is pipe-coloured until the
+player changes colour scheme, at which point it silently corrects itself — which is also
+why the scheme refresh is the authority on the right answer. Fixed with a post-wrapper on
+`TrackGridElement:GameInit` applying exactly what the refresh applies; construction sites
+are skipped, as the shipped GameInit skips them.
+
+**(d) FIXED.** Confirmed and slightly worse than tracked: `Track.lua:65` is the **only**
+assignment to `max_vehicles` anywhere in the game (elsewhere it is read only, via
+`StationsLink:GetMaxVehicles` → `CanAddVehicle`, `StationsLink.lua:28-32`; class default
+2, `:8`), and it runs once, in `TrackBase:GameInit`. Salvage shortens or splits a track
+(`TrackElement.lua:503-541`), and the `new_track` created at `:547` runs its GameInit
+*before* `ExpandTrackFromElement` (`:553-554`) gives it any elements at all. Fixed by
+recomputing with the shipped formula at the two points that mark an element-set change —
+`TrackBase:UpdateEndElements` (called from all three partial-salvage branches, `:516`,
+`:530`, `:556-557`, always after the arrays are repopulated) and `ExpandTrackFromElement`
+(the merge/expand path) — plus a `PostLoadGame` sweep for saves already carrying a stale
+cap (PostLoadGame, not LoadGame: `SavegameFixups.RemoveTrackDoubleTurns`,
+`TrackElement.lua:839-843`, re-processes track elements after `Msg("LoadGame")`).
+
+**(b) NOT FIXED — mechanism confirmed, consequence not establishable from source.**
+Nothing in any of the three partial branches of `DemolishAndSplitTrack` reads or writes
+`assigned_vehicles`; the surviving `track_obj` keeps its whole train list while its
+element set shrinks, and the `new_track` that takes the other half is created with none.
+The whole-track branch is fine — `TrackBase:OnDemolish` → `DestroyAssignedTrains`
+(`Track.lua:159-166`) handles it, and trains are stored as prefabs rather than lost. What
+a train physically standing on a removed or re-homed element then does cannot be read off
+the source. **Playtest item PT-46.**
+
+**(c) NOT FIXED — a design decision, not a repair.** The mechanism is real:
+`TrackGridElement:SelectionPropagate` returns `self.station` for a connector element
+(`TrackElement.lua:298-300`), and `SelectionMouseObj` runs every candidate through
+`SelectionPropagate` (`SelectionModeDialog.lua:44-50`), so in demolish mode the object
+handed to `DemolishModeDialog:OnMouseButtonDown` can be the station, which is a Building
+and gets `ToggleDemolish()` (`Construction.lua:2903-2906`). The reason to stop is that the
+shipped code contains **two** demolish-mode guards against exactly this class of
+propagation and they prescribe *different* remedies: `:54-56` throws the object away
+(`precise, terrain_cursor_obj = false, false`) while `:84-88` substitutes the underlying
+element. Both are about `TrackBase`; neither covers the station. Choosing which one the
+station case should follow — click does nothing, or click salvages the connector element
+and thereby splits a track — is a gameplay decision with real consequences either way, and
+FIX_POLICY §4 does not let us invent it. **Worth a user decision;** if the answer is
+"nothing happens", the fix is four lines shaped like `:54-56`.
+
+**(e) NOT FIXED — dead code whose revival is a redesign.**
+`GridConstructionController:CanContinueTrack` (`GridConstruction.lua:478-491`) is never
+called from anywhere (its passage twin `CanContinuePassage` is, at `:449`), and
+`ConstructionStatus.TrackRequiresTwoStations` is referenced only from inside it — so the
+authored error "The Track must start and end at a Station." can never appear. Notable
+detail: the shipped file marks its three sibling statuses `-- unused` and leaves this one
+unmarked (`TrackGridConstruction.lua:1-27`), i.e. the author believed it live. Reviving it
+needs BOTH an invented call site in the drag/placement flow AND an invented condition that
+inserts the status (without which `CanContinueTrack` returns false forever). That is two
+pieces of new design, not a repair.
+
+### Recorded latent (wave-5 screening, no fix): `DivRound(cost, res)` in `BreakTrackElement`
+`Track.lua:643-652` — under the SafeTransport tech the repair-cost loop reads
+`reduced_costs[res] = DivRound(cost, res)`, dividing by the **resource-id string** instead
+of by 2. It is a real typo and would raise (arithmetic on a string) if it ever ran, but it
+does not: the loop only runs when `cgl.construction_costs_at_start` is a non-empty table,
+and it never is at that point. `BreakTracks` (`Meteors.lua:599-613`) reuses one
+`broken_cg` across every element of a track in a strike, so the first call finds the leader's
+`construction_costs_at_start` still `false` (the group was just created) and assigns `{}`,
+and every later call in the same synchronous loop iterates that empty table.
+`GatherConstructionResources` cannot populate it in between — nothing yields. A second
+strike starts a fresh group. **Also checked and NOT a defect:** the halving above it does
+not compound across calls, because `:642` reassigns `construction_cost_multiplier` from
+`(#cg - 1) * 100` absolutely before each halving. No entry filed and no fix written — the
+line is unreachable, and writing a fix for it would be the F10 mistake.
 
 ### Trains: verified fixed / working-as-designed
 Trains blocking demolition: FIXED (trains stored as prefabs, `Track.lua:159-166`).
@@ -768,19 +1137,103 @@ unverifiable from Lua. **Fix:** override `Dome:CalcOpenAirSkin` to preserve entr
 attaches; override approach-failure cache to store `GameTime()` so `CleanUnreachables`
 retires entries.
 
-### F56 — Auto RC Transports never offload rockets (P2, high)
+### F56 — Auto RC Transports never offload rockets  `[wontfix — user decision 2026-07-26: deliberately maintained design, breaks nothing; same grounds as F62/F63]`
 `RCTransport.lua`: `Automation_Gather` (:884-908) sources only surface deposits;
 `Automation_Unload` (:910-941) excludes rockets as destinations. Manual load/routes work —
 players correctly perceive AUTO as broken. Combined with F50 + shuttle exclusion, remote
 rockets have no automated unloader at all. **Fix:** extend `ProcAutomation`: when empty,
 seek landed `UniversalRocketBase` with status "unloading", `TransferAllResources`.
 
-### F57 — Drone/transport minors bundle (P3, med)
+*Screened before implementing (wave 4) — the code matches the entry, but the remedy is a
+feature, not a repair.* Three findings, in order of weight:
+1. `Automation_Gather` sources `self:GetAutoGatherDeposits()` (:880-882), a method that
+   returns exactly the four `SurfaceDeposit*` classes. A named, overridable accessor is a
+   declared scope, not a forgotten case.
+2. The rocket exclusion in `Automation_Unload` is `not IsRocketClass(d, "UniversalRocketBase")`
+   (:916). `IsRocketClass` is the Relaunched compatibility shim
+   (`RocketCompatibility.lua:1037-1046`) that matches BOTH the legacy `RocketBase` family
+   and the new `UniversalRocketBase` one — i.e. a Relaunched developer deliberately
+   re-stated this exclusion for the new class tree. Maintained intent, not an oversight.
+3. The feature's own promise is narrow: the auto-mode rollover reads "the RC Transport
+   will **gather resources** automatically" (`RCTransport.lua:1697`) — no rocket claim.
+   The manual paths that DO service rockets exist and work, exactly as the entry says
+   (`CanLoad` :310-324 admits `UniversalRocketBase`; `InteractWithObject` :419-429 opens
+   the resource selector on one; `TransferAllResources` :1217-1300 is class-agnostic).
+Adding rocket pickup to automation is therefore new capability — FIX_POLICY §4 territory,
+the same class as D01/D02.
+
+**CLOSED `wontfix` 2026-07-26 (user decision), on the same grounds as F62/F63:**
+deliberately maintained design, breaks nothing. The rocket exclusion was consciously
+carried into Relaunched (point 2 above is the proof — a developer re-stated it through the
+new compatibility shim), and the manual paths the entry itself credits are the intended
+way to service a rocket with an RC Transport.
+
+*If it is ever revisited, it does NOT get a standalone module.* An auto-offload option
+belongs **alongside D01's unwritten Rare Metals export half**, in `Opt_ClassicRockets`, not
+in an `Opt_AutoRocketOffload` of its own. Both are the same request wearing two hats —
+"make rockets load and unload themselves again, the way the original game did" — both are
+opinions about rocket logistics rather than repairs, and both touch the same machinery
+(`SetCargoRequest`, the payload dialog, Automated Mode's `export_above` thresholds, and the
+F50/F68/F70/F71 request path). Shipping them separately would let a player enable half a
+behaviour and get a colony where rockets are emptied but never refilled. So this rides on
+whatever design decision D01's export half eventually gets — same module, same opt-in flag,
+same playtest — or it stays closed.
+*Origin note:* the player report behind this entry is recorded in `RESEARCH.md` as
+"**Drones** ignore rocket cargo even at high priority; RC Transports don't auto-offload
+rockets". The drone half is the load-bearing complaint and is already addressed by F50.
+*What screening DID find:* three rocket tests in the same file were never converted to the
+Relaunched classes — filed and fixed as **F74** below. That is the real defect in this area.
+
+### F57 — Drone/transport minors bundle (P3, med)  `[fixed*: Code/Fix_DroneTransportMinors.lua — items (a) and (b); (c) deliberately not fixed, see below]`
 (a) `DroneControl:UpdateRocketsInternal` (`DroneControl.lua:613-639`) clears only
 `r_t.Fuel`, writes `r_t[r.FuelResource]` — stale restrictor for non-"Fuel" rockets (latent);
 (b) `OnMsg.OnPassabilityChanged` (`Drone.lua:851-864`) rebuilds unreachable table without
 weak-keys meta and doesn't recompute count; (c) `recursive_enum_dome_workplaces`
 (`Dome.lua:674-675`) skips quarantine check, saved only by `Workplace:IsSuitable` re-check.
+
+**Screened item by item in the wave-5 build leg.**
+
+**(b) FIXED — and it is the biggest of the three.** Both halves confirmed. The handler
+builds `local unreachable = {}` (`:855`) and assigns it at `:862`, so the table loses the
+`weak_keys_meta` every other creation site gives it (`Drone:ApproachWrapper` `:826`,
+`Drone:ResetUnreachablesTable` `:875`) — from the first passability change onward each
+drone holds a **strong** reference to every building it once failed to reach, keeping
+salvaged and destroyed buildings alive and still yielding them from `pairs` in
+`CleanUnreachables` (`:890`) and the recharger scan (`:1281`). And
+`unreachable_buildings_count` is never recomputed although the table just shrank; that
+number gates the eviction path (`:827-838`, against `const.MaxUnreachablesInTable`) and
+the DroneControl idle clock (`:630`), and `CleanUnreachables` then decrements the stale
+value further (`:893`). **The F10 screen was applied and does not bite:** no
+nil-iteration crash is claimed here — `unreachable_buildings` can legitimately be `false`
+and this engine tolerates `pairs(false)`. The defect is the state left behind, not a
+raise. Fixed with an additional `OnMsg.OnPassabilityChanged` (OnMsg is additive; ours
+runs after the shipped one) that re-applies `weak_keys_meta` and recounts with
+`table.count`, exactly as `ApproachWrapper` recounts at `:841`.
+
+**(a) FIXED, latent.** Confirmed: `r_t.Fuel = nil` clears one key while the Relaunched
+branch writes `r_t[r.FuelResource]` (`:634`), so any fuel resource other than the literal
+`"Fuel"` is never cleared and a departed rocket's request restricts drone work forever.
+Latency stated for the record: `FuelResource` has **no assignment anywhere in
+`ModTools\Src`** (only `FuelResourceAmount` is set per template, e.g.
+`Lua\BuildingTemplate\UniversalRocket.generated.lua:29`), and the legacy `RocketBase`
+branch hardcodes `"Fuel"` — so on shipped data the two keys coincide and nothing leaks.
+Fixed for the F27/F28 reason: a mod or a future rocket with its own fuel resource
+inherits the leak. The replacement also clears the key it wrote last time, remembered in
+an absent-tolerant `SMRFixPack_rocket_fuel_key` field on the DroneControl.
+
+**(c) NOT FIXED — fixing it would undo F61.** The mechanism is exactly as tracked:
+`can_work_here = work_or_train or (cdome == colonist.dome)` (`Dome.lua:674`) short-circuits
+the quarantine test away for reason "work" and "training", even though the function it
+skips is named `CanColonistsFromDifferentDomesWorkServiceTrainHere` and the service path
+calls it with the comment `--quarantine` (`Dome.lua:2907`). But that function is
+`self.accept_colonists and not self.supply_interrupted and self.ui_working`
+(`Dome.lua:2880-2882`), and **`accept_colonists` is the exact property F61 exists to stop
+gating outbound work, shopping and training on**. Adding the check here would re-impose
+one level up the block F61 removes, and the two fixes would fight over the same flag. The
+tracked mitigation also holds — the enumeration only produces candidates and
+`Workplace:IsSuitable` re-checks before anyone is assigned — so nothing reaches the
+player. Left as a recorded inconsistency, like the four in the STATUS.md "recorded but
+deliberately untouched" list.
 
 ### Assignment systems: investigated, no single defect (leads recorded)
 - "Unemployed every sol": no smoking gun; three verified contributing mechanisms —
@@ -954,6 +1407,13 @@ means editing the same machinery as F50, F68, F70 and F71 — with no way to tes
 in-game from the build seat, and for a change that is by this entry's own verdict not a
 defect. It needs a design decision (what threshold? which resources? what interaction with
 Automated Mode?) plus a playtest before it is written.
+*The export half now also owns F56.* F56 (auto RC Transports never offload rockets) closed
+`wontfix` 2026-07-26 on the same "deliberately maintained design" grounds, with the note
+that if it is ever revisited it belongs in THIS module rather than in one of its own — same
+request ("rockets should load and unload themselves like they used to"), same machinery,
+and shipping the two separately would let a player enable an emptying behaviour without the
+refilling one. So whenever the export half gets its design decision, decide auto-offload in
+the same pass and behind the same `ClassicRockets` flag.
 
 ### D02 — Dismissing a "Building Not Working" warning only silences it for 2 real minutes — BY DESIGN, feels like a bug (planned opt-in)
 Spun out of F32's close (2026-07-26, user decision) — read that entry for the full trace.
@@ -1000,7 +1460,7 @@ don't know the stored ones are gone. **Fix:** pre-hook `Station:OnDemolish` to
 `Train.Done` refund guard; compensation prefabs for corrupted saves not exactly
 recoverable (count unrecorded).
 
-### F65 — Station attached to a train tunnel never bridges the power grid (P2, med)
+### F65 — Station attached to a train tunnel never bridges the power grid (P2, med)  `[fixed: Code/Fix_TrackTunnelPowerBridge.lua]`
 `TrackTunnel` description promises power transfer (`Data\BuildingTemplate\TrackTunnel.lua:17`);
 class machinery identical to working `Tunnel`. Defect: `OnMsg.StationsConnected`
 (`Track.lua:668-680`) skips `ConnectToGrids()` when `#track.elements <= 2` ("adjacent
@@ -1009,8 +1469,33 @@ elements → supply tunnel never created, no power link. Caveat: TrainTunnel ent
 data is binary, unverifiable from Lua. **Fix:** additional `OnMsg.StationsConnected`
 handler: if 2-element track touches a `TrackTunnelBase`, call `track:ConnectToGrids()`;
 LoadGame pass re-asserting masks/merges.
+*Confirmed against the code, and the shortcut's premise is checkable:* a 2-element track's
+two elements ARE the two buildings' connector elements (`TrackBase:GetSupplyTunnelElement`,
+`Track.lua:567-574`, returns `elements[1]` and `elements[#elements]`), and a connector
+element sits on a hex OUTSIDE its building — `OrientConnectorElements` records the
+connection back toward the building at `conq - dq, conr - dr` (`TrainTransport.lua:91-100`).
+So when the shortcut fires the buildings are two hexes apart with the connector hexes
+between them, and track elements carry no power (`TrackBase.ApplyToGrids = empty_func`,
+`:663`; "Since we're not an ElectricityGridObject", `:98`). The description promise is
+real and literal: "connect tracks **and power grids** at different locations and different
+elevations" (`Data\BuildingTemplate\TrackTunnel.lua:17`).
+*Implemented differently, on better evidence:* whether the two buildings genuinely end up
+adjacent is entity spot geometry — binary data, unreadable from Lua, exactly the caveat
+above. So the fix does not assume: the added `OnMsg.StationsConnected` handler bridges only
+when the two stations demonstrably sit on **different live electricity grids** after the
+shipped handler has run. If the shortcut's premise holds they already share a grid and the
+fix is a no-op. That runtime test also removes the reason to restrict it to
+`TrackTunnelBase` — the same shortcut fails identically for two stations a short track
+apart — so the scope is any ≤2-element track; the tunnel is just the case with a written
+promise attached. On success the handler clears `stations_connected` so the track's state
+matches a >2-element track's exactly (`Track.lua:506`, `:511`, `:682-684`,
+`Station.lua:1224-1234`). The savegame pass runs on **`OnMsg.PostLoadGame`**, not LoadGame:
+`Msg("LoadGame")` fires before `FixupSavegame` (`Savegame.lua:810-813`) and the shipped
+`SavegameFixups.ConvertTrackPowerLinks` (`Station.lua:1395-1420`) tears down and rebuilds
+these very links — a LoadGame-time pass would race it (the F35 lesson).
+Probe: `TrackTunnelPowerBridge` in `40_Probes_Wave4.lua`. Playtest: PT-40.
 
-### F66 — Station↔tunnel connector hex ping-pong (P2, med-high)
+### F66 — Station↔tunnel connector hex ping-pong (P2, med-high)  `[fixed: Code/Fix_TrackConnectorPingPong.lua]`
 With a 1-hex gap, both buildings project their connector element onto the SAME hex;
 `TrackConnectedObjBase:CreateConnectorElements` (`TrainTransport.lua:126-130`) deletes the
 other's element (assert assumes never two live owners) → victim's `Done` reschedules its
@@ -1020,6 +1505,27 @@ double-turn constraint refuses connections silently (`TrackElement.lua:336-345`)
 Workaround: ≥2-hex gap. **Fix:** patch `CreateConnectorElements` to not delete elements
 owned by a live non-destructing building (breaks ping-pong); full shared-hex support more
 invasive.
+*Confirmed, and the loop's return leg is now pinned down:* `TrackGridElement:Done`
+(`TrackElement.lua:193-199`) spawns a game-time thread calling
+`station:CreateConnectorElements()` for any still-live `self.station`, so destroying a
+neighbour's connector is precisely what makes the neighbour rebuild it and take the hex
+back. The shipped `assert(not IsValid(el.station) or IsBeingDestructed(el.station))`
+(`TrainTransport.lua:127`) already STATES the invariant the loop violates — and asserts do
+not unwind in this engine, so it is a log line and the steal proceeds anyway. The fix is
+therefore to enforce the shipped assert's own condition, nothing more: a hex whose element
+belongs to a different building that is alive and not being destructed is left alone.
+Implemented as a full replacement of `CreateConnectorElements` (`TrainTransport.lua:114-154`)
+because the decision is inside the per-spot loop; the copy is byte-identical except that one
+condition, and the assert line is dropped (it cannot unwind, its condition is now enforced,
+and keeping it would print on every legitimate clear of an abandoned element). Ordinary
+clears are untouched: a plain track element on the hex has `station == false`, so
+`IsValid(el.station)` is false and it is still removed, and `force` still rebuilds the
+building's own element. The second building then simply gets no connector on that hex — the
+same outcome as the ≥2-hex-gap workaround, without the fight. Genuinely sharing one hex
+between two owners is a redesign of the connector model, not a defect repair (FIX_POLICY §4).
+The "double-turn constraint refuses connections silently" half (`TrackElement.lua:336-345`)
+is NOT addressed — it is a separate placement rule, not part of this loop.
+Probe: `TrackConnectorPingPong` in `40_Probes_Wave4.lua`. Playtest: PT-41.
 
 ### F67 — Auto-lander launches empty and ping-pongs (P1, high)  `[fixed: Code/Fix_LanderEmptyLaunch.lua]`
 `UniversalRocketBase:IsCargoReady` (`UniversalRocket.lua:455-472`): `CheckAutoDepart()`
@@ -1164,6 +1670,93 @@ applies damage, `StatusEffects.lua:140-160`). Workers are safe inside the mine d
 shifts; they die during idle stretches next to it. **Fix:** (a) habitat accepts residents
 regardless of momentary life support; (b) Idle wrapper: outside > half of
 OxygenMaxOutsideTime in vacuum → `SetCommand("Rest")`.
+
+### F74 — RC Transports can be ordered onto trade / refugee rockets (P2, high)  `[fixed: Code/Fix_RocketInteractGuard.lua]`
+*Found by screening F56 in wave 4.* `RCTransport:CanInteractWithObject`
+(`Lua\Units\RCTransport.lua:338-385`) opens with a hard refusal —
+`if IsKindOfClasses(obj, "TradeRocketBase", "RefugeeRocketBase") then return false end`
+(:341) — that no Relaunched rocket can match. Trade and refugee rockets are now
+`UniversalTradeRocket` / `UniversalRefugeeRocket`, generated with
+`__parents = { "UniversalRocketBase" }`
+(`Lua\BuildingTemplate\UniversalTradeRocket.generated.lua:4-5`,
+`UniversalRefugeeRocket.generated.lua:4-5`), whereas the named classes sit on the other
+branch: TradeRocketBase/RefugeeRocketBase → `SupplyRocketBase` → `RocketBase`
+(`RocketTrade.lua:1-2`, `RocketRefugee.lua:1-2`, `SupplyRocket.lua:1-2`), and
+`UniversalRocketBase` is not a `RocketBase` (`UniversalRocket.lua:28-40`). The guard is
+dead in every Relaunched game, not only converted saves: new event rockets are placed as
+the Universal classes (`SA_Gameplay.lua:2788`, `:2929`;
+`ClassDef-Effects.generated.lua:154`, `:3134`) and old saves are converted to them on load
+(`RocketCompatibility.lua:522`, `:964`, `:1050`).
+
+Conversion slip, not a design change — five sibling rocket tests in the SAME file were
+updated to name both families and only this one was missed: `:314`, `:421`, `:731`,
+`:1137` (all `IsKindOfClasses(x, "SupplyRocketBase", "UniversalRocketBase")`) and `:916`
+(the `IsRocketClass` shim, `RocketCompatibility.lua:1037-1046`). FIX_POLICY §4's
+"the same author wrote it correctly elsewhere" test, five times over.
+
+Player-visible: the RC Transport load/unload cursor accepts an event rocket, so cargo can
+be pushed into or pulled out of a rocket with no player cargo bookkeeping. Matches the
+Relaunched report "rival colony rockets glitch permanently if refilled from RC Transport
+(1.07)" in `RESEARCH.md`.
+
+**Fix:** pre-wrappers (FIX_POLICY §1.4) on `CanInteractWithObject` and — belt-and-braces —
+`InteractWithObject`, restating the shipped rule for the Relaunched class names before
+deferring to the original. The gate is complete on its own: `UnitDirectionModeDialog`
+stores an interaction target only when `CanInteractWithObject` answers truthy
+(`UnitControl.lua:470-471`, `:488`), and both the direct-order path (`:401`) and the
+transport-route path (`TransportRouteInteractionHandler.lua:50`) act on that stored target.
+Wrapping the class field also covers `RCHarvester` (`:127`, `:139`) and `RCConstructorBase`
+(`:353`), which call these through the class table.
+
+*Two sibling stale reads found and deliberately NOT changed:* `CanUnloadAt` (`:265`) and
+`FullAndCanUnload` (`:285`) still test `IsKindOf(depot, "SupplyRocketBase")`, so their
+export-request-aware rocket branch is likewise dead for Universal rockets and both fall
+through to the generic depot branch. Restoring those would REMOVE a capability Relaunched
+clearly intends — `CanLoad` (`:314`) and `TransferResources` (`:1137`) were converted
+precisely so an RC Transport can service a lander, which is core asteroid play. The
+resulting behaviour is permissive (a manual unload into a player rocket that is not
+exporting is allowed where the original demanded a matching export request), and permissive
+failures do not block a player. Recorded here so a later pass does not "fix" it blind.
+Probe: `RocketInteractGuard` in the Test Kit's `40_Probes_Wave4.lua`. Playtest: PT-39.
+
+### F75 — Six Last Transmission storage opinions never count; one reads the wrong grid (P2, high)  `[fixed: Code/Fix_LastTransmissionStorage.lua]`
+*Found by implementing F22, which names these conditions as its victims — repairing F22
+alone would not have made any of them work.*
+
+**(a) inert.** `FactionLikeGlobalCondition:Eval`
+(`Lua\ClassDefs\ClassDef-Factions.generated.lua:843-849`) consults exactly one property:
+`if not self.Condition or not self.Condition.eval(UIColony) then return 0 end`. The six
+storage entries in `Data\FactionDef\LastTransmission.lua:94-192` —
+`TLEPowerStorage2Sols`, `TLENoPowerStorage`, `TLEWaterStorage2Sols`, `TLENoWaterStorage`,
+`TLEOxygenStorage2Sols`, `TLENoOxygenStorage` — put their `ScriptConditionList` on
+**`Prerequisite`** instead. `Prerequisite` is real but is only a gate:
+`FactionLikeBase:EvalPreconditions` (`:672-688`) calls it to decide whether the like is
+considered, and `FactionDef:EvalApproval` (`:190-197`) then adds `like:Eval()` — which is 0
+forever. The slip is local to these six: the other seven `FactionLikeGlobalCondition`s in
+the same file set `Condition` (`:208, :224, :240, :256, :281, :298, :313`) and the one at
+`:266-292` sets BOTH, so the distinction was understood; a sweep of all 29 shipped
+FactionDefs found the pattern nowhere else. Not a quiet failure either — `EvalApproval`
+(`:181-187`) surfaces the `HowTo` of any positive like that evaluated to 0 as an
+outstanding goal, so Last Transmission permanently advertises "Have Power for more than 2
+sols stored", the player does it, and nothing happens.
+
+**(b) wrong grid.** `TLEOxygenStorage2Sols` (`:160-175`) measures POWER. Explanation, HowTo
+and Id all say Oxygen, but its nested `ScriptCheckGridGlobalStorage` never sets `GridType`,
+which defaults to `"Power"` (`ClassDef-Conditions.generated.lua:2034-2035`), and the
+generated `eval` faithfully reads `GetGridGlobalStorage("Power")`. Its negative twin
+`TLENoOxygenStorage` sets `GridType = "Oxygen"`, as do both Water entries — only this one
+was missed.
+
+**Fix:** preset data patch (FIX_POLICY §1.1) from `OnMsg.DataLoaded` (+ `DataChanged`):
+(a) move the condition list from `Prerequisite` to `Condition`, leaving `Prerequisite`
+false — the same test, in the place `Eval` reads, leaving the entries structurally
+identical to their working siblings; (b) set the missing `GridType` and rebuild only that
+entry's `eval` from the corrected fields, mirroring the shipped CodeTemplate
+`"GetGridGlobalStorage(self.GridType) $self.Condition $self.Value"`
+(`ClassDef-Conditions.generated.lua:2040`). Every other entry keeps its shipped eval. An
+entry that already carries a `Condition` is left exactly as found, so a game hotfix simply
+deactivates the fix.
+Probe: `LastTransmissionStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
 
 ## Candidates under investigation
 

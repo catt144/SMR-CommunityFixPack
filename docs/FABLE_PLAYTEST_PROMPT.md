@@ -1,7 +1,10 @@
 # Fable playtest-report prompt
 
 Paste everything below into a fresh Claude Code session (Fable) when the user
-reports manual playtest results (`docs/PLAYTEST_CHECKLIST.md`, PT-01..PT-38).
+reports manual playtest results (`docs/PLAYTEST_CHECKLIST.md`, PT-01..PT-38 on
+main; PT-39..PT-44 exist on the unmerged `wave4` branch and only become reportable
+after the QA leg's merge, so a report covering them means the merge already
+happened — check before assuming).
 Partial reports are fine — process what was reported, leave the rest untouched.
 
 ---
@@ -85,11 +88,15 @@ FAIL→PASS flips count as probe verification (record in STATUS), but still not
 
 ## Coordination
 
-The Opus wave-4 leg may have run concurrently on `wave4` branches (worktrees).
-Do NOT merge them here — that is the wave-4 QA leg's Task 0
-(`docs/FABLE_QA_PROMPT.md`). Commit playtest processing to `main`; the QA leg
-merges on top of it, and tracker statuses from THIS session win over the build
-leg's in any conflict.
+The Opus build legs (wave 4, done; wave 5, the P2/P3 tail) run concurrently on the
+`wave4` branch in worktrees. Do NOT merge them here — that is the QA leg's Task 0
+(`docs/FABLE_QA_PROMPT.md`), and it merges both waves in one go. Commit playtest
+processing to `main`; the QA leg merges on top of it, and tracker statuses from
+THIS session win over the build legs' in any conflict.
+
+Note the build legs also close and file tracker entries: wave 4 closed **F56**
+`wontfix` and filed **F74**/**F75**. If a playtest report contradicts one of
+those, say so rather than silently reopening — the closes were user decisions.
 
 ## Hard rules
 

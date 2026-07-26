@@ -1358,6 +1358,341 @@ F30, is the archetype). Wall clock or phone timer handy; leave game speed at nor
 
 ---
 
+# Group 8 — wave-4 fixes
+
+## PT-39 — RC Transport vs. a visiting rocket · covers **F74**
+
+Probes prove the guard refuses a trade rocket; only play can show the cursor and
+the order behave as they should, and that nothing ELSE the RC Transport does got
+caught by the same net.
+
+**Setup:** a save where a trade rocket or a refugee rocket is landed (rival-colony
+trade offer, or the refugee story event). Have an RC Transport with some cargo
+aboard and some free space, parked near it.
+
+**Steps:**
+1. Select the RC Transport and hover the cursor over the landed **trade/refugee**
+   rocket, both in plain move mode and with the Load and Unload interaction modes.
+   - **EXPECTED:** no "Load Resource" / "Unload Resource" prompt appears, and
+     clicking does not send the rover to the rocket (it should read as ordinary
+     terrain — a move order, or nothing).
+   - **SURPRISE looks like:** the prompt still appears, or the rover drives over
+     and starts a transfer.
+2. Try to start a **transport route** whose source or destination is that rocket.
+   - **EXPECTED:** the rocket cannot be picked as either end.
+3. **Control test — this must still work.** Hover the same RC Transport over a
+   normal **player** rocket or asteroid lander that is landed with cargo, and over
+   an ordinary Universal Storage Depot.
+   - **EXPECTED:** Load/Unload prompts appear as before and the transfer runs.
+     If this broke, the fix is over-broad — report it, it is worse than the bug.
+4. Check the log for `[CommunityFixPack] RocketInteractGuard: applied`.
+
+`Result (trade/refugee rocket refused?):` _____________________________________________
+
+`Result (control test — player rocket + depot still work?):` _____________________________________________
+
+---
+
+## PT-40 — Train tunnel carries power · covers **F65**
+
+The fix only acts when the two ends really are on different power grids, so this
+test has to create that situation deliberately.
+
+**Setup:** two separate power grids with no cable between them. On grid 1, a
+Station; on grid 2 (far away, e.g. across terrain a cable can't cross), the other
+end. Build a **Train Tunnel** pair linking the two areas and attach a station
+**directly** to the tunnel entrance — close enough that the connecting track is
+only one or two tiles long.
+
+**Steps:**
+1. Before completing the short track, note each side's power surplus/deficit
+   (select a building on each grid; the two must read as separate grids).
+2. Complete the short track so the station and tunnel connect.
+   - **EXPECTED:** the two grids become one — the surplus/deficit numbers merge,
+     and a shortage on one side is now fed by the other.
+   - **SURPRISE looks like:** the track connects for trains but the grids stay
+     separate.
+3. Now **salvage the short track** again.
+   - **EXPECTED:** the grids split back apart cleanly, no error in the log, no
+     building left permanently unpowered that has its own supply.
+4. Repeat step 2 with a **long** track (10+ tiles) between two stations — this is
+   the path the game already handled; it must be unchanged.
+5. Save, quit to menu, reload the save.
+   - **EXPECTED:** the grids are still merged, and the log shows no errors from
+     our PostLoadGame pass.
+
+`Result (grids merge on connect?):` _____________________________________________
+
+`Result (split cleanly on salvage / survive reload?):` _____________________________________________
+
+---
+
+## PT-41 — Two train buildings one hex apart · covers **F66**
+
+**Setup:** open ground with room for a station and a train tunnel entrance.
+
+**Steps:**
+1. Place a **Station**. Then place a **Train Tunnel** entrance so that exactly
+   **one hex** separates them — the layout that used to refuse to connect.
+2. Watch the connector tiles between them for a minute of game time.
+   - **EXPECTED:** the connector tile settles on ONE owner and stays there. No
+     flicker, no track piece appearing and vanishing repeatedly.
+   - **SURPRISE looks like:** the piece keeps blinking in and out, or the log
+     fills with repeated track-element messages.
+3. Try to complete a route through that pair.
+   - **EXPECTED:** either it connects, or it plainly does not — but the game is
+     stable and the infopanel is consistent. (One of the two buildings not
+     getting a connector on the shared hex is the intended outcome; the endless
+     fight was the bug.)
+4. **Control:** build a station where a plain, unowned track tile already lies on
+   its connector hex.
+   - **EXPECTED:** the station still claims that tile normally. If it can't, the
+     fix is over-broad — report it.
+5. Demolish one of the two buildings.
+   - **EXPECTED:** the survivor picks up the freed hex within a few seconds.
+
+`Result (flicker stopped?):` _____________________________________________
+
+`Result (control — station still claims a plain track tile / survivor claims the freed hex?):` _____________________________________________
+
+---
+
+## PT-42 — Last Transmission notices your reserves · covers **F22, F75**
+
+Probes prove the presets are wired correctly and the reserve maths is right;
+only play can show the approval actually moving and the UI goal clearing.
+
+**Setup:** a game where **Last Transmission** is an active faction, ideally with
+the Underground map opened (that is what made the old maths hopeless). Open the
+faction panel and note the current approval and the listed "How to achieve"
+goals.
+
+**Steps:**
+1. Look for goals like "Have Power for more than 2 sols stored", "Have Water for
+   more than 2 sols stored", "Have Oxygen for more than 2 sols stored".
+2. Build up **Power** storage until you comfortably hold more than 2 sols'
+   worth, and let a day pass.
+   - **EXPECTED:** the Power goal stops being listed as outstanding and the
+     faction's approval rises; the reason appears in the approval breakdown.
+   - **SURPRISE looks like:** the goal stays listed forever no matter how much
+     you bank (that is the old behaviour).
+3. Repeat for **Water**, then for **Oxygen**. The Oxygen one is the important
+   check — it used to be satisfied by having Power stored.
+   - **EXPECTED:** stocking Oxygen (and only Oxygen) clears the Oxygen goal.
+4. Now drain one of them to zero — switch off or salvage the storage.
+   - **EXPECTED:** the matching penalty ("No Power stored" etc.) appears and
+     approval falls. Before the fix this was unreachable once a second map was
+     loaded.
+5. Check the log for `GridGlobalStorage: applied` and
+   `LastTransmissionStorage: ... storage condition(s) made effective`.
+
+`Result (goals clear when stocked?):` _____________________________________________
+
+`Result (Oxygen goal needs Oxygen / penalties reachable at zero?):` _____________________________________________
+
+---
+
+## PT-43 — Numbers and tooltips trio · covers **F19, F20, F21**
+
+Three small, independent reads. Any established colony will do — one with trains
+and a few sols of history.
+
+**F19 — Command Center graph caption.**
+1. Open the **Command Center**, switch to the **Machine Parts** graph (Electronics
+   works too), and look at the "Produced ... and Consumed ..." caption above it.
+   - **EXPECTED:** the Consumed figure is in the same ballpark as the height of
+     the Consumed bar — it now includes maintenance, which is most of your
+     Machine Parts usage.
+   - **SURPRISE looks like:** a near-zero figure beside a tall bar (the old
+     behaviour), or a figure that is now clearly larger than the bar.
+2. Sanity-check **Food**, where consumption is real and maintenance is nil — the
+   number should be essentially unchanged from before.
+
+`Result (Machine Parts caption vs bar / Food unchanged?):` _____________________________________________
+
+**F20 — Morale tooltip.**
+3. Find a colonist whose **Comfort** is high (green, at or above the high mark).
+   Select them and hover the **Morale** stat.
+   - **EXPECTED:** no "+Comfort" style bonus row is listed, and the rows shown
+     add up to the Morale value in the title.
+   - **SURPRISE looks like:** the bonus row is still there, or a row that SHOULD
+     be there is gone.
+4. Find a colonist whose **Comfort is low** (red) and hover Morale.
+   - **EXPECTED:** the Comfort PENALTY row is still listed — that one is real.
+     If it disappeared, the fix is over-broad; report it.
+5. Hover Morale on a colonist with high **Health** or **Sanity**.
+   - **EXPECTED:** those bonus rows are untouched.
+
+`Result (high-Comfort row gone / low-Comfort row kept / Health+Sanity intact?):` _____________________________________________
+
+**F21 — Train waiting time.**
+6. Pick a station where colonists queue for a while. Select a colonist about to
+   travel, note their **Comfort**, and watch them wait, board, ride and arrive.
+   - **EXPECTED:** the Comfort drop on arrival reflects the ride, not the wait.
+     A long wait followed by a short hop should cost little.
+   - **SURPRISE looks like:** a big Comfort hit after a long wait and a one-stop
+     ride.
+7. Open the **train's** and the **track's** infopanels and check the travel/spent
+   time statistics over a few sols.
+   - **EXPECTED:** they no longer include platform waiting (the station's own
+     waiting statistic still does, and should be unchanged).
+
+`Result (Comfort hit matches the ride / train+track stats exclude waiting?):` _____________________________________________
+
+---
+
+## PT-44 — Founder trait notice and dome pipe cleanup · covers **F23, F24**
+
+**F23 — Founder gains a trait.** Probes cover the wiring; play confirms the
+notification renders and reads correctly.
+1. Play until one of your **Founders** gains a trait (age, a story event, or the
+   Gene Forging / trait-granting paths).
+   - **EXPECTED:** a "Founder gains trait" notification appears, naming the
+     colonist and the trait, and clicking it selects them.
+   - **SURPRISE looks like:** nothing appears (the old behaviour), or two
+     notifications appear for the same event.
+
+`Result (notification appears once, names the right trait?):` _____________________________________________
+
+**F24 — dome absorbing a pipe-connected building.** This one has no probe: it
+needs a real dome and real pipes.
+2. Build a life-support building **outside** a dome and connect it with pipes
+   (Water Extractor, Moisture Vaporator, Water Tank, or an Oxygen tank).
+3. Now build or upgrade a **dome** so that the building ends up **inside** the
+   dome's footprint (the game moves it "inside" the dome's grid).
+   - **EXPECTED:** the pipe stubs and connection graphics at the old boundary
+     disappear cleanly; the building keeps working on the dome's grid; no
+     orphaned plug graphics are left floating.
+4. **Save, quit to the menu, and reload.** The repair sweep that runs on load
+   exercises the same code path.
+   - **EXPECTED:** still clean — no stale pipe visuals reappear, and pipes can
+     still be connected in that area afterwards.
+   - **SURPRISE looks like:** leftover plugs/pipe ends, or a spot where new pipe
+     refuses to connect.
+5. Check the log for errors mentioning `DestroyConnection` or `LifeSupportGrid`.
+
+`Result (clean at absorption / clean after reload / pipes still connectable?):` _____________________________________________
+
+---
+
+# Group 9 — wave-5 fixes
+
+## PT-45 — Track salvage refund · covers **F47**
+
+Probes prove the arithmetic; only play can show the Metals actually arriving on the
+ground, and that the figure the Salvage button advertises is the figure you get.
+
+**Setup:** a save with a **long** track — more than about 6 hexes between two
+stations, the longer the better (a 20-30 hex line makes the difference obvious).
+Note that track is built in sections of up to 5 hexes, and the whole line cost
+roughly 200 Metals per section.
+
+**Trigger — case A (whole track):**
+1. Select the track (click the line, not a station) and read the refund figure on
+   the Salvage button before clicking.
+   - **EXPECTED:** it scales with the length of the line — a 25-hex track should
+     advertise roughly 5× what a 5-hex stub does, not the same ~100 Metals.
+   - **SURPRISE looks like:** a long line and a short stub advertising the same
+     number (the old behaviour), or a figure far larger than the track cost.
+2. Salvage it and watch the ground.
+   - **EXPECTED:** Metals stockpiles appear near the track, totalling the
+     advertised figure, and drones start collecting them.
+
+**Trigger — case B (partial salvage):**
+3. On another long track, Ctrl+click (or use the Salvage button on a single track
+   piece) to remove **a few hexes in the middle**, splitting the line in two.
+   - **EXPECTED:** the removed section leaves a Metals stockpile behind where it
+     stood — it used to leave nothing at all. The amount may be zero for some
+     picks (only one hex per built section carries the section's cost record);
+     over the whole line it can never add up to more than half of what the line
+     cost.
+   - **SURPRISE looks like:** a refund appearing for hexes that were NOT removed,
+     the same section paying out twice, or a stockpile appearing when a train
+     station is built over track (that is not a salvage and must stay silent).
+4. Salvage what is left of that track afterwards and confirm the totals still look
+   sane — the pieces already refunded must not be paid for a second time.
+5. Check the log for errors mentioning `Track`, `Demolish` or `ResourceStockpile`.
+
+`Result (case A figure scales / stockpiles arrive):` _____________________________________________
+
+`Result (case B partial refund / no double pay):` _____________________________________________
+
+---
+
+## PT-46 — Splitting a track under a running train · covers **F49(b)**, checks **F49(a)/(d)**
+
+F49(b) is **not fixed** — this test is what decides whether there is anything to fix.
+Nothing in any of the three partial-salvage branches of `DemolishAndSplitTrack` reads
+or writes the track's `assigned_vehicles`, so the surviving track keeps its whole train
+list while its elements shrink, and the new half is created with none. What a train
+standing on a removed or re-homed element actually does cannot be read off the source.
+
+**Setup:** a long track (20+ hexes) between two stations with **at least one train
+running on it**. Console open (Enter / Alt-Shift-C) for the counts.
+
+**Trigger:**
+1. With a train **mid-journey, out on the open track**, salvage a few hexes in the
+   middle so the line splits in two.
+   - **EXPECTED (the benign outcome):** the train is stored back as a prefab, or it
+     re-routes; either way you can account for every train you owned.
+   - **SURPRISE looks like:** the train vanishes with no notification, sits frozen
+     on a dead stub forever, drives through the gap, or the log shows a
+     `[LUA ERROR]` mentioning `Train`, `Track` or `RebuildTrainRoutes`.
+2. Count them: before and after, run
+   `local n = 0 for _, t in ipairs(MainCity.labels.TrackBase) do n = n + #t.assigned_vehicles end print(n)`
+   and compare with the trains you can actually see plus your stored train prefabs.
+3. Repeat with the train **stopped at a platform** rather than out on the line.
+
+**While you are here — the two halves of F49 that ARE fixed:**
+4. `print(MainCity.labels.TrackBase[1].max_vehicles)` on a track before and after
+   you salvage most of it away. **EXPECTED:** the number drops (1 for a track under
+   30 hexes, 0 for an empty one). Confirm you can still assign trains up to that
+   number and no further.
+5. Look at any track placed instantly by the map (not built by drones): it should be
+   the same colour as track you built yourself, not pipe-coloured.
+
+`Result (b — train accounted for after split / after platform split):` _____________________________________________
+
+`Result (d — cap follows length):` _____________________________________________
+
+`Result (a — instant track colour):` _____________________________________________
+
+---
+
+## PT-47 — Bombardment volley shape · covers **F26**
+
+The probe can prove the game computes a different direction per missile; only eyes
+can confirm the volley looks like a scatter rather than a rank. This fix is the
+pack's largest copied function (100 lines of `WaitBombard`), so the point of this
+test is as much "nothing else about a bombardment broke" as it is the spread.
+
+**Setup:** a Mystery 7 bombardment, or force one from the console:
+`StartBombard(UIColony:GetCityAtMap(MainMap), 40*guim, 8, 500, 1500)`
+(any valid object or point works as the first argument; 8 missiles makes the shape
+obvious). Watch from a low camera angle so the incoming trails are visible.
+
+**Trigger:**
+1. Watch a volley arrive.
+   - **EXPECTED:** the missiles come in from visibly different angles — a scatter,
+     not a rank of parallel trails.
+   - **SURPRISE looks like:** still perfectly parallel (the old behaviour).
+2. Check that everything else about the volley still works, because the whole
+   function was replaced:
+   - impacts leave scorch decals that fade out;
+   - a missile that hits a dome cracks it instead of exploding on the ground;
+   - the "Incoming Missile" notification appears and clears;
+   - missiles shot down by defences explode in the air;
+   - the bombardment ENDS (the sequence continues afterwards) — if the volley
+     never finishes, that is a FAIL and the fix should be reverted.
+3. Check the log for errors mentioning `Bombardment`, `BombardMissile` or
+   `WaitBombard`.
+
+`Result (spread visible?):` _____________________________________________
+
+`Result (decals / dome hits / notification / interception / volley ends?):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

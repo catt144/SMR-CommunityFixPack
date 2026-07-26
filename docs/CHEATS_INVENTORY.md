@@ -85,7 +85,7 @@ latter, and restores it).
 | `CheatSpawnPlanetaryAnomalies()` / `CheatBatchSpawnPlanetaryAnomalies()` | planetary anomalies (C01) |
 | `CheatUnlockBreakthroughs()` | resolves every map breakthrough anomaly |
 
-### Rockets (F50, F56, F67-F72)
+### Rockets (F50, F67-F72, F74; F56 closed `wontfix`)
 - `dbg_ToggleRocketInstantTravel()` (`RocketUtilities.lua:451`) flips
   `config.RocketInstantTravel` — collapses flight time so a Mars↔asteroid round
   trip is seconds. Essential for the lander trio.
