@@ -875,6 +875,26 @@ destroys all assigned trains. Element salvage is instant, no countdown (`:259-26
 trimming only the short side (delete elements individually + `UpdateEndElements()`);
 never touch the viable side.
 
+**PLAYTEST FAIL (PT-03 curve visual, 2026-07-25) → REWORKED same day.** The user's
+curve-end salvage left the track "broke itself, became immune, multiple warnings"
+(screenshots on file): the session log shows `Fix_TrackSalvageWipe.lua:60: attempt to
+index a boolean value (local 'track_obj')` on every later click, plus a shipped
+`Track.lua:556` raise on a dead track. Diagnosis: the split branch clears every
+element's `track_obj` and relies on two `ExpandTrackFromElement` walks to reclaim
+survivors; when the sorted order diverges from physical order (possible exactly when a
+`node_idx` is non-numeric — the state the old "tolerant" comparator sorted as -1 and
+CARRIED ON with), the deletion zone lands on physically scattered elements and strands
+fragments no seed can reach. Those orphans sit in no track's arrays, render as debris,
+and raise on every salvage click. Repairs (all in the fix file): (1) an orphan clicked
+in demolish mode is simply deleted; (2) the comparator rework — stamp a repair site's
+`node_idx` from its broken element, and if anything is STILL non-numeric, decline the
+partial salvage before deleting anything (the shipped abort point, minus its raise);
+(3) post-split orphan sweep + `IsValid` guards on the `UpdateEndElements` /
+`UpdatePos` / `ProcessTrackElements` tail; (4) a `LoadGame` sweep that removes
+orphaned elements already baked into a save. **Needs a fresh PT-03 run** — including
+on the damaged save, which should log
+`TrackSalvageWipe: removed N orphaned track element(s)` on load.
+
 ### F45 — Damaged tracks can't be salvaged at all (P1, high)  `[fixed: Code/Fix_BrokenTrackSalvage.lua — wrapper + LoadGame sweep for existing saves]`
 `TrackBase:BreakTrackElement` (`Track.lua:618-659`) copies element params to the repair
 site but NOT `node_idx` → stays `false` (`TrackElement.lua:164`). Every salvage path then

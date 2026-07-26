@@ -49,6 +49,14 @@ SMRFixPack.Register("TrackSalvageWipe", {
 
 		function E:DemolishAndSplitTrack(mass_delete, skip_track_process)
 			local track_obj = self.track_obj
+			-- FIX (F44, playtest PT-03 2026-07-25): an element orphaned by an
+			-- earlier corrupted split has track_obj == false, and the shipped
+			-- body then raises on every click — the debris becomes immune to
+			-- salvage. Treat it as the loose piece it is: delete just it.
+			if not track_obj then
+				DoneObject(self)
+				return
+			end
 			-- Repair construction sites (with a broken real element) delegate to demolishing the real element
 			if self.is_construction_site and IsValid(self.broken) and table.find(track_obj.elements, self.broken) then
 				return self.broken:Demolish(mass_delete)
@@ -63,9 +71,27 @@ SMRFixPack.Register("TrackSalvageWipe", {
 			for _, el in ipairs(track_obj.elements_under_construction) do
 				all_elements[#all_elements + 1] = el
 			end
-			-- FIX (F45): tolerate a repair site whose node_idx was never stamped; the
-			-- shipped comparator raised on `false < number` before anything happened.
-			table.sort(all_elements, function(a, b) return (a.node_idx or -1) < (b.node_idx or -1) end)
+			-- FIX (F44/F45 rework, playtest PT-03 2026-07-25): the earlier
+			-- comparator sorted a never-stamped node_idx as -1 and CARRIED ON —
+			-- but the zone math below assumes sorted order == physical order, so
+			-- proceeding with a scrambled list deletes a physically scattered
+			-- zone and strands fragments no seed can reach (the corrupted-track
+			-- report from the playtest). Stamp what can be stamped, and if any
+			-- element still has no numeric node_idx, decline the partial salvage
+			-- entirely — the shipped code's abort point, minus its raise. Nothing
+			-- is deleted on the decline path.
+			for _, el in ipairs(all_elements) do
+				if type(el.node_idx) ~= "number" and el.is_construction_site
+						and IsValid(el.broken) and type(el.broken.node_idx) == "number" then
+					el.node_idx = el.broken.node_idx
+				end
+			end
+			for _, el in ipairs(all_elements) do
+				if type(el.node_idx) ~= "number" then
+					return
+				end
+			end
+			table.sort(all_elements, function(a, b) return a.node_idx < b.node_idx end)
 
 			local idx = table.find(all_elements, self)
 			if mass_delete or not idx then
@@ -162,21 +188,38 @@ SMRFixPack.Register("TrackSalvageWipe", {
 				ExpandTrackFromElement(track_obj, el1)
 				ExpandTrackFromElement(new_track, el2)
 
-				track_obj:UpdateEndElements()
-				new_track:UpdateEndElements()
-				track_obj:UpdatePos()
-				new_track:UpdatePos()
+				-- FIX (F44, playtest PT-03 2026-07-25): every survivor must have
+				-- been reclaimed by one of the two expansions; anything still
+				-- carrying track_obj == false is debris no track can reach —
+				-- delete it now instead of leaving immune, half-rendered pieces.
+				for _, el in ipairs(all_elements) do
+					if IsValid(el) and not el.track_obj then
+						DoneObject(el)
+					end
+				end
+				-- FIX (F44, same playtest): guard the tail — an expansion that
+				-- came up empty auto-deletes its track (TrackElement.lua:203-205),
+				-- and the shipped calls then raised on the dead object
+				-- (Track.lua:556 in the playtest log).
+				if IsValid(track_obj) then
+					track_obj:UpdateEndElements()
+					track_obj:UpdatePos()
+				end
+				if IsValid(new_track) then
+					new_track:UpdateEndElements()
+					new_track:UpdatePos()
+				end
 				if not skip_track_process then
-					if #new_track.elements_under_construction == 0 then
+					if IsValid(new_track) and #new_track.elements_under_construction == 0 then
 						ProcessTrackElements(map, new_track.elements)
 					end
-					if #track_obj.elements_under_construction == 0 then
+					if IsValid(track_obj) and #track_obj.elements_under_construction == 0 then
 						ProcessTrackElements(map, track_obj.elements)
 					end
-					if #new_track.elements == 0 then
+					if IsValid(new_track) and #new_track.elements == 0 then
 						ProcessTrackElements(map, new_track.elements_under_construction)
 					end
-					if #track_obj.elements == 0 then
+					if IsValid(track_obj) and #track_obj.elements == 0 then
 						ProcessTrackElements(map, track_obj.elements_under_construction)
 					end
 				end
@@ -187,3 +230,25 @@ SMRFixPack.Register("TrackSalvageWipe", {
 		end
 	end,
 })
+
+-- Debris repair (playtest PT-03 2026-07-25): a save written after a corrupted
+-- split can contain elements with track_obj == false that sit in no track's
+-- arrays — invisible to every track system and, before this session's click
+-- guard, immune to salvage. Sweep them out once per load; a healthy save has
+-- none (every live element belongs to a track).
+function OnMsg.LoadGame()
+	local fix = SMRFixPack.fixes.TrackSalvageWipe
+	if not (fix and fix.status == "active") then return end
+	if type(rawget(_G, "AllMapsForEach")) ~= "function" then return end
+	local removed = 0
+	AllMapsForEach(true, "TrackGridElement", function(el)
+		if IsValid(el) and not el.track_obj and not IsBeingDestructed(el) then
+			DoneObject(el)
+			removed = removed + 1
+		end
+	end)
+	if removed > 0 then
+		local msg = string.format("[CommunityFixPack] TrackSalvageWipe: removed %d orphaned track element(s) left behind by a corrupted salvage", removed)
+		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
+	end
+end
