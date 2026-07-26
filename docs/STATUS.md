@@ -22,6 +22,71 @@ list in the same commit that implements a fix; only `tested` fixes ship in the
 final text), TESTING.md the force-the-bug test plan, CHEATS_INVENTORY.md the
 shipped cheat/debug surface the tests drive.
 
+## Follow-up session — Fable, 2026-07-26: F02 hunt + watchdog, F66 reclaim, F47 composition, version tags — A/B CLEAN
+
+**Task 1 — F02 regression hunt (PT-01 FAIL, no reloads).** Every static explanation
+was FALSIFIED against the playtest log (Mars.exe-20260725-19.04.10) — full record on
+the F02 entry. Established: one uninterrupted session (single `Load Game:` marker,
+day counters monotonic to 36, wave-3 roster); no `[LUA ERROR]` anywhere near the
+stall; the tower wait-math is bounded (warning = Min(6h+12h·3, 75h) = 42h, two sleeps
+total ≤ spawn+1s ≤ 60h on Meteor_VeryHigh); the descriptor-nil day-loop needs
+Atmosphere > the **80%** MeteorStormStop threshold (TerraformingDisasters.lua:69,
+TerraformingParam.lua:80-84) — impossible at sol 12; nothing in Src or either mod
+deletes/restarts the thread mid-game; the PT-03 track debris postdates the silence.
+Bonus finding: the first MeteorStorm (birth_hour = 250h + 0..25h) was due in the SAME
+window and never visibly fired — BOTH disaster threads went quiet at t≈8.2-8.3M, so
+the mechanism sits outside both loop bodies (scheduler/persist side) and needs a live
+capture. **Root cause NOT pinned; the rework captures it next time:** heartbeat
+phases in the thread body (zero closure upvalues — the persisted thread keeps the
+engine-proven persistence shape), loud top-of-body exits, a daily OnMsg.NewDay
+watchdog (`SMRFixPack.MeteorsWatchdogCheck`, threshold spawn+random+75h+1 sol, gives
+up loudly after 3 restarts, respects the fix's status — F75 lesson) that logs
+**thread ALIVE-but-stuck vs DEAD + last phase** before restarting, and a LoadGame
+necropsy of the persisted thread — loading the user's sol-36 save answers
+dead-vs-stuck directly. Probe reworked install→behavior (drives the watchdog with a
+synthetic stale heartbeat; discriminates in the retail sandbox instead of SKIPping).
+
+**Task 2 — F66 rebuild trigger (user decision: repair).** Landed in
+Fix_TrackConnectorPingPong.lua: post-wrap of `TrackConnectedObjBase:Done` (declaring
+class; destructor, not command-killed) records the dying building's connector hexes
+before the shipped body runs, then `SMRFixPack.TrackConnectorReclaim` queries each
+hex with `map:MapForEach(pos, "hex", 3, "TrackConnectedObjBase", …)` (spots reach
+≤ ~2 hexes; no global rebuild) and schedules the engine's own deferred idiom with
+in-thread revalidation (TrackElement.lua:194-198) for every other live,
+non-destructing candidate; guarded CreateConnectorElements makes re-runs idempotent;
+done_map early-returns. Probe extended: exactly one rebuild scheduled (live
+neighbour), dying self + destructing excluded, hexes deduplicated.
+
+**Task 3 — F47 composition under-refunds (both audit MEDIUMs).** Landed in
+Fix_TrackSalvageRefund.lua: the stand-down test is now the `demolishing` stamp
+`TrackBase:OnDemolish` writes (Track.lua:250 — survives object death), so a
+trim-to-empty (dies via CanDelete→DoneObject, no OnDemolish) refunds instead of
+being misread as "already handled"; map/drop-pos captured pre-orig. The
+construction-site early-return is narrowed to the repair-site delegation only —
+plain sites fall through and their zone's stamped completed elements are accounted
+(no double-refund: sites never carry stamps). Details on the F47 entry.
+
+**Release item:** all full-replacement headers now name the game version the copy
+came from — **game 1.0.7.396349** (was "shipped Src, 2026-07" / "post-1.0.7").
+
+**A/B pairs (both clean; probe-count change is by design: the F02 probe moved from
+install-SKIP to a discriminating behavior probe, so 12 SKIP → 11, 57 FAIL → 58):**
+
+| Leg | Log (Mars.exe-20260726-…) | Result |
+|-----|---------------------------|--------|
+| Baseline #1 (pack emptied) | 00.06.11 | 1 PASS, 58 FAIL, 11 SKIP, 0 ERROR |
+| Fixed #1 (F02+F66 in) | 00.08.03 | **59 PASS, 0 FAIL, 11 SKIP, 0 ERROR** — watchdog exercised end-to-end in-log |
+| Baseline #2 (after F47 + version tags) | 00.11.46 | 1 PASS, 58 FAIL, 11 SKIP, 0 ERROR |
+| Fixed #2 (everything in) | 00.13.02 | **59 PASS, 0 FAIL, 11 SKIP, 0 ERROR**, 66/67 active (ClassicRockets opt-in) |
+
+Parse sweep: every .lua in both mods parses (python luaparser).
+
+**Open for the user after this session:** PT-01 re-run — load the sol-36 save first
+(the LoadGame necropsy line answers dead-vs-stuck immediately) and play a fresh
+stretch; PT-03 re-run (F44 rework + orphan-sweep log line); PT-41 (F66 reclaim);
+rest of the merged-pack checklist; PT-36/37/38 gates; MarsDebug attended [install]
+pass for wave-4/5.
+
 ## QA session (waves 4+5) — Fable, 2026-07-25 evening: merge + audits + A/B CLEAN
 
 **Task 0 — merge:** `wave4` merged to main in BOTH repos with zero conflicts (fix pack

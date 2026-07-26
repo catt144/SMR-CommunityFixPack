@@ -105,18 +105,54 @@ Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbe
 DustStorm.lua:413, DustDevils.lua:189, surface quake Marsquake.lua:43). Matches live
 Paradox-forum report. **Fix:** wrap FUNC slot (index 3) of `PeriodicRepeatInfo["UndergroundMarsquake"]`.
 
-### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed*: Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL 2026-07-25: meteors STOPPED entirely, regression hunt queued]`
+### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed*: Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL; REWORKED 2026-07-26 with a stall watchdog + forensics; root cause NOT yet pinned, PT-01 re-run will capture it]`
 
 **PT-01 FAIL (2026-07-25, user confirmed NO reloads):** Variant B, max-threat map.
 Natural strikes at ~sol 5.5, 7.5 (+60h), 8.4 (+39h), 10.3 (+39h); 3 Sensor Towers built
 ~sol 10.5; warning received; strike at sol 12.5 (logger printed "+57 game hours") — then
 **nothing through sol 36** (~560+ game hours of silence, band is 35-60h) with no reload
 to re-roll the interval. The logger prints per MeteorsDisaster call, so silence = the
-thread stopped calling, not a logging gap. Suspects for the next session: the fixed
-thread's loop dying after a strike (check the playtest logs Mars.exe-20260725-18.34.12 /
-19.04.10 for a [LUA ERROR] near the last strike), the Sensor-Tower warning path
-(towers went up between strikes 4 and 5), or the descriptor re-read. Investigation
-speced in docs/FABLE_NEXT_PROMPT.md.
+thread stopped calling, not a logging gap.
+
+**Regression hunt (2026-07-26) — every static explanation FALSIFIED against the
+playtest log (Mars.exe-20260725-19.04.10):**
+- The session is one uninterrupted run: exactly one `Load Game:` marker (log:141) at
+  boot, day counters monotonic 22→36 in the daily errors, wave-3 roster (the merge
+  and all wave-4/5 fixes postdate the playtest). The load-time re-roll story is dead.
+- No `[LUA ERROR]` anywhere near the stall (silent window ~0:45–1:11 real time shows
+  story bits and Quick Builds but zero errors) — thread errors always log, so the
+  loop did NOT die of an error. All logged errors are the PT-03 track-debris family,
+  and the debris was created at day ~21, AFTER the silence began (due ≤ day ~14).
+- The tower math is bounded: with 3 towers `GetDisasterWarningTime` = Min(6h+12h·3,
+  75h) = 42h (`MapSettings.lua:94-98`, `_GameConst.lua:125-126`) and the fixed body's
+  two sleeps total `Max(spawn−warning,1s) + Min(spawn,warning)` ≤ spawn+1s ≤ 60h on
+  Meteor_VeryHigh (spawntime 1.05M+0..750k ms). It cannot oversleep.
+- The descriptor re-read cannot go silently nil at sol 12: the only nil paths are
+  mapdata `"disabled"` (strikes happened) and `OverrideDisasterDescriptor` returning
+  nil past the **80%** Atmosphere `MeteorStormStop` threshold
+  (`TerraformingDisasters.lua:69`, `TerraformingParam.lua:80-84`).
+- Nothing in Src or either mod deletes/restarts the thread mid-game (the only
+  `RestartGlobalGameTimeThread` callers are `_fixup.lua` PostNewGame and the fix's
+  own LoadGame handler; `OnMsg.DoneGame` fires only when leaving the game).
+- The first MeteorStorm was due in the SAME window (`birth_hour` = 250h + 0..25h,
+  `Meteors.lua:316`; the tower-lengthened 42h warning also explains the "warning
+  received ~sol 10.5" as the storm countdown) and no 1-3-sol storm was ever observed
+  — so BOTH disaster threads went quiet around t≈8.2-8.3M. Whatever stopped them is
+  outside both loop bodies (scheduler/persist side) and is only capturable live.
+
+**Rework (2026-07-26):** the fixed body now heartbeats a phase marker
+(`SMRFixPack.MeteorsBeat`, session-local, zero closure upvalues so the persisted
+thread keeps the engine-proven persistence shape); the silent top-of-body exit logs;
+a daily `OnMsg.NewDay` watchdog (`SMRFixPack.MeteorsWatchdogCheck`) restarts a
+provably overdue thread — threshold spawntime+random+75h+1 sol, so no false
+positives — and logs the pre-death state (**thread ALIVE-but-stuck vs DEAD** + last
+phase), giving up loudly after 3 restarts; the LoadGame restart now logs a necropsy
+of the persisted thread it replaces — loading the user's sol-36 save answers
+dead-vs-stuck for the wedged thread directly. Probe reworked to `behavior` kind
+(drives the watchdog with a synthetic descriptor + fabricated stale heartbeat, so it
+discriminates in the retail sandbox instead of SKIPping as `[install]`).
+**PT-01 re-run needed:** meteors resume on load; if the stall recurs, the watchdog
+line names the phase and state — that IS the diagnosis.
 `Lua\Meteors.lua:277-292` — the long wait `spawn_time - warning_time` was mangled into a
 dead `if` (`GameTime() - start_time > ...` evaluated immediately after `start_time = GameTime()`,
 always false); only remaining wait is `Sleep(Min(spawn_time, warning_time))` where
@@ -979,6 +1015,24 @@ Screening the real code found:
 **Existing saves:** fully retroactive. The stamps are already in every save; only the
 reading of them changes.
 
+**Composition repairs (2026-07-26; the two wave-4/5-audit MEDIUMs, both under-refunds):**
+1. *Trim-to-empty lost the refund.* Half B's stand-down test was `IsValid(track) and
+   elements is a table`, which also stood down when the F44 trim EMPTIED the track —
+   an emptied track dies through `CanDelete` → `DoneObject`
+   (`TrackElement.lua:203-205`) WITHOUT running `OnDemolish`, so nothing had refunded
+   the trimmed stamps. `TrackBase:OnDemolish` stamps `demolishing = true` on the track
+   first (`Track.lua:250`), a Lua-side field that survives the object's destruction —
+   half B now stands down on that stamp alone, and captures the map and drop position
+   before the original runs (both the element and the track can be dead afterwards).
+2. *Construction-site early-return was broader than its reason.* The early-return
+   existed for the repair-site delegation (`TrackElement.lua:451-453`, which re-enters
+   the wrapper through the broken element), but it also swallowed clicks on PLAIN
+   under-construction elements — whose deletion zone can contain stamped COMPLETED
+   elements (`DemolishAndSplitTrack` sorts both arrays into one physical line). Only
+   the delegation case returns early now; a plain site falls through and is
+   snapshotted. Its own spend is returned by the construction machinery and never
+   carries a completion stamp, so accounting the zone cannot double-refund.
+
 ### F48 — Station-connector savegame fixup no-op (P3, high defect / low impact)  `[blocked — the corrected pass is too invasive to ship untested; see below]`
 `Station.lua:1346`: `ProcessTrackElements(ResolveMap(track, track.elements))` — paren
 misplaced, should be `ProcessTrackElements(ResolveMap(track), track.elements)`; migration
@@ -1579,22 +1633,28 @@ between two owners is a redesign of the connector model, not a defect repair (FI
 The "double-turn constraint refuses connections silently" half (`TrackElement.lua:336-345`)
 is NOT addressed — it is a separate placement rule, not part of this loop.
 
-**Recovery-gap repair QUEUED (user decision 2026-07-25: "rebuild instead of half
-baking it").** The QA audit found that when the guard declines, the guarded building
-owns no element on the contested hex, and after the WINNING building is demolished
-nothing reschedules the survivor's rebuild — every engine trigger notifies only the
-dying element's own station (`TrackElement.lua:193-199`; `Track.lua:179-183`;
+**Recovery-gap repair LANDED (2026-07-26; user decision 2026-07-25: "rebuild instead
+of half baking it").** The QA audit found that when the guard declines, the guarded
+building owns no element on the contested hex, and after the WINNING building is
+demolished nothing reschedules the survivor's rebuild — every engine trigger notifies
+only the dying element's own station (`TrackElement.lua:193-199`; `Track.lua:179-183`;
 `Msg("TrackDemolished")` only fires from player track demolition → global rebuild,
-`TrainTransport.lua:156-159`) — so the survivor stays connectorless until any track
-demolish or a re-place. The user chose the REPAIR over accept-and-document: add a
-rebuild trigger to the demolition path — wrap `TrackConnectedObjBase:Done`
-(declaring class, TrainTransport.lua:14) to, after the shipped body runs, find nearby
-`TrackConnectedObjBase` objects (connector spots reach ≤ ~2 hexes) that are valid and
-not being destructed, and `CreateGameTimeThread(o.CreateConnectorElements, o)` for
-each — the same deferred pattern the engine itself uses (`Track.lua:181-183`), and the
-F66-guarded `CreateConnectorElements` makes the rebuild idempotent for buildings that
-already own their elements. Spec + verification plan in docs/FABLE_NEXT_PROMPT.md.
-Probe: `TrackConnectorPingPong` in `40_Probes_Wave4.lua`. Playtest: PT-41.
+`TrainTransport.lua:156-159`) — so the survivor stayed connectorless until any track
+demolish or a re-place. Implemented in the same fix file: post-wrap of
+`TrackConnectedObjBase:Done` (declaring class, TrainTransport.lua:14 — an object
+destructor, not a command method, so the post half runs). The wrap records the dying
+building's connector hexes BEFORE the shipped body tears them down, runs the shipped
+body, then `SMRFixPack.TrackConnectorReclaim` queries each contested hex with the
+sandbox-safe `map:MapForEach(pos, "hex", 3, "TrackConnectedObjBase", …)` (connector
+spots reach ≤ ~2 hexes, radius 3 covers every possible loser; NOT a global rebuild)
+and schedules `CreateGameTimeThread` + in-thread revalidation — the engine's own
+deferred idiom copied from `TrackElement.lua:194-198` — for every other live,
+non-destructing candidate; the F66-guarded `CreateConnectorElements` makes re-runs
+idempotent for buildings that already own their elements, and `done_map` teardown
+early-returns exactly like the shipped body. Probe `TrackConnectorPingPong`
+(`40_Probes_Wave4.lua`) extended: drives the exposed reclaim helper with a synthetic
+map — exactly one rebuild scheduled (live neighbour), dying self and destructing
+neighbours excluded, hexes deduplicated. Playtest: PT-41.
 
 ### F67 — Auto-lander launches empty and ping-pongs (P1, high)  `[fixed: Code/Fix_LanderEmptyLaunch.lua]`
 `UniversalRocketBase:IsCargoReady` (`UniversalRocket.lua:455-472`): `CheckAutoDepart()`
