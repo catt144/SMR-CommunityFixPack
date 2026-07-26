@@ -326,7 +326,7 @@ computes (5 + `colonist:Random(param)` = 5-14 for param 10). Note the mod sandbo
 introspection, so an already-hotfixed `daily_update_func` cannot be told from the broken
 one; the fix deactivates only if the preset or its `param` is missing.
 
-### F18 — Independence terraforming tech gives 10% not 20%  `[fixed*: Code/Fix_IndependenceTerraforming.lua — the preset half; already-researched saves keep 10%, see below]`
+### F18 — Independence terraforming tech gives 10% not 20%  `[fixed: Code/Fix_IndependenceTerraforming.lua — preset half + savegame sweep for already-researched saves (2026-07-26)]`
 `Data\TechPreset.lua:4798-4812` — `param1 = 20` ("decrease percent") but
 `Effect_ModifyLabel Amount = -10` on `Consts.SpecialProjectResourcesModifier` (100-based,
 consumed `Lua\SpecialProjects.lua:105`). All sibling Independence techs have param == amount.
@@ -340,16 +340,27 @@ param1 30000 / Amount 30000; `Independence_Research` param1 20 / Amount 20. Only
 `DataChanged`) and finds the effect by what it does (Label "Consts", Prop
 "SpecialProjectResourcesModifier"), not by index; an Amount already at -20 leaves the fix
 inactive.
-*Open half — saves where the tech is ALREADY researched keep the 10%.*
-`Effect_ModifyLabel:OnApplyEffect` (`Lua\MarsGameEffects.lua:161-178`) computes
-`amount = self.Amount * scale` at research time and stores a Modifier on the colony keyed by
-the effect object; that stored Modifier is what the save carries, and correcting the preset
-afterwards does not touch it. A repair would be idempotent (same key, so re-applying
-replaces rather than stacks), but `OnApplyEffect`'s `parent` argument also determines the
-Modifier's `id`, and getting that wrong would leave an unidentifiable modifier in every
-affected save. Deferred to a later sanitizer pass rather than shipped untested for a
-10-point discount.
-Probe: `IndependenceTerraforming` in `40_Probes_Wave4.lua`.
+*Formerly-open half — saves where the tech was ALREADY researched kept the 10% —
+CLOSED 2026-07-26 with a LoadGame sweep (design prompted by the user's "reset the
+tech" suggestion, minus the reset).* `Effect_ModifyLabel:OnApplyEffect`
+(`Lua\MarsGameEffects.lua:161-178`) stores the research-time Modifier on the colony
+**keyed by the effect object** (`colony:SetLabelModifier(self.Label, self, …)`), so
+the stale -10 modifier is directly addressable — no id reconstruction. The recorded
+risk (the `parent` argument decides the Modifier's `id`) dissolved on reading the
+shipped applier: `GameEffectsContainer:EffectsApply(player)` passes the CONTAINER
+(the tech preset) as parent (`CommonLua\Classes\GameEffect.lua:36-40`), so the
+sweep's `effect:OnApplyEffect(UIColony, tech)` is argument-identical to research
+and replaces the stored modifier under the same key with the corrected -20.
+Positive identification before acting: fix active, preset in its corrected state,
+tech researched, stored modifier present and carrying exactly the old -10×scale —
+anything else is left alone (unexpected amounts loudly). Idempotent by state, no
+first-load flag needed; the engine's own
+`SavegameFixups.Move_Effect_ModifyLabel_FromCitiesBackToColony` is precedent for
+surgery on these tables. Exposed as `SMRFixPack.IndependenceTerraformingSweep`
+(probe test hook takes a synthetic colony).
+Probe: `IndependenceTerraforming` in `40_Probes_Wave4.lua` — preset check + drives
+the sweep both ways (stale modifier replaced through the effect's own
+OnApplyEffect; correct one untouched).
 
 ### F19 — Graphs "Consumed" caption omits maintenance  `[fixed: Code/Fix_GraphConsumedCaption.lua]`
 `Lua\X\ColonyControlCenter.lua:180-188` vs `ResourceTracking.lua:162` — caption uses

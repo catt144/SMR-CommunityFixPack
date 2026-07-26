@@ -80,6 +80,8 @@ install-SKIP to a discriminating behavior probe, so 12 SKIP → 11, 57 FAIL → 
 | Fixed #2 (everything in) | 00.13.02 | **59 PASS, 0 FAIL, 11 SKIP, 0 ERROR**, 66/67 active (ClassicRockets opt-in) |
 | Baseline #3 (after the seed-crash repair) | 00.48.22 | 1 PASS, 58 FAIL, 11 SKIP, 0 ERROR |
 | Fixed #3 (seed repair + sweep extension in) | 00.50.08 | **59 PASS, 0 FAIL, 11 SKIP, 0 ERROR**, 66/67 active |
+| Baseline #4 (after the F18 savegame sweep) | 11.33.34 | 1 PASS, 58 FAIL, 11 SKIP, 0 ERROR |
+| Fixed #4 (F18 sweep in) | 11.34.58 | **59 PASS, 0 FAIL, 11 SKIP, 0 ERROR** — F18 probe verifies the sweep both ways |
 
 Parse sweep: every .lua in both mods parses (python luaparser).
 
@@ -116,6 +118,15 @@ necropsy already good; the watchdog self-reports if the wedge recurs); PT-03 F45
 retry (checklist procedure; the sweep line should report both counts on load);
 PT-41 (F66 reclaim); rest of the merged-pack checklist; PT-36/37/38 gates;
 MarsDebug attended [install] pass for wave-4/5.
+
+**F18 open half CLOSED (2026-07-26, user-driven):** the user asked whether
+resetting the tech was the easy fix; the investigation it prompted found better —
+the stored modifier is keyed by the effect object and the shipped applier passes
+the tech preset as parent (`GameEffect.lua:36-40`), so a LoadGame sweep re-runs
+`effect:OnApplyEffect(UIColony, tech)` argument-identically to research and
+replaces the stale -10 with -20 in place. No reset, no re-research, no first-load
+flag (state-detected, idempotent). Probe extended to drive the sweep both ways.
+F18 status is now plain `fixed`.
 
 **User decision 2026-07-26 (D01 export half): match the ORIGINAL game, not a new
 design.** Spec = the legacy loader (RocketBase.lua:1729-1736: standing
