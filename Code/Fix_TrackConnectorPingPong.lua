@@ -28,7 +28,7 @@
 -- gap of at least two hexes.
 --
 -- Patch approach: full replacement of CreateConnectorElements — a copy of
--- Lua\TrainTransport.lua:114-154 (shipped Src, 2026-07) with one condition
+-- Lua\TrainTransport.lua:114-154 (shipped Src, game 1.0.7.396349) with one condition
 -- widened, marked -- FIX. Replacement rather than a wrapper because the decision
 -- is inside the per-spot loop: a pre-wrapper cannot see it and a post-wrapper
 -- runs after the element has already been destroyed and replaced.
@@ -54,16 +54,26 @@
 -- print is a `force` rebuild of the building's own live element, e.g. the
 -- savegame fixup's CreateConnectorElements(true), Station.lua:1352.)
 --
--- Known recovery gap (QA audit, recorded — repair pending a user decision):
--- when the guard declines, this building owns no element on the contested hex,
--- and after the OTHER building is later demolished nothing reschedules our
--- rebuild — every engine trigger notifies only the dying element's own station
+-- Recovery gap + repair (user decision 2026-07-25: repair, not document): when
+-- the guard declines, this building owns no element on the contested hex, and
+-- after the OTHER building is later demolished nothing reschedules our rebuild —
+-- every engine trigger notifies only the dying element's own station
 -- (TrackElement.lua:193-199; Track.lua:179-183; TrainTransport.lua:24-26 needs
 -- a 2-element both-stationed track; Msg("TrackDemolished") fires only from
--- player track demolition). The building stays connectorless until any track
--- demolish triggers the global rebuild (TrainTransport.lua:156-159) or it is
--- re-placed. Under the shipped (buggy) code it recovered via the ping-pong
--- steal. Player-recoverable, not save-breaking.
+-- player track demolition, TrainTransport.lua:156-159). Repair below: post-wrap
+-- the declaring class's destructor, TrackConnectedObjBase:Done
+-- (TrainTransport.lua:14 — an object destructor, not a command method, so a
+-- post-wrapper does run). The wrap records the dying building's connector hexes
+-- BEFORE the shipped body tears them down, lets the shipped body run, then
+-- schedules a guarded CreateConnectorElements for every OTHER live, non-
+-- destructing TrackConnectedObjBase near those hexes — the engine's own deferred
+-- pattern, including the in-thread revalidation (TrackElement.lua:194-198).
+-- Connector spots reach <= ~2 hexes from a building's centre, so a 3-hex query
+-- around each contested hex covers every possible loser; re-running the guarded
+-- CreateConnectorElements on an unaffected building is a no-op (its elements
+-- exist and el.station == self), so overshooting the radius costs nothing and
+-- there is no global rebuild. done_map teardown early-returns exactly like the
+-- shipped body.
 
 SMRFixPack.Register("TrackConnectorPingPong", {
 	title = "A station and a tunnel one hex apart stop stealing each other's track connector",
@@ -72,8 +82,12 @@ SMRFixPack.Register("TrackConnectorPingPong", {
 		if type(B) ~= "table" or type(B.CreateConnectorElements) ~= "function" then
 			return "TrackConnectedObjBase.CreateConnectorElements not found (game update changed it?)"
 		end
+		if type(B.Done) ~= "function" then
+			return "TrackConnectedObjBase.Done not found (game update changed it?)"
+		end
 		for _, name in ipairs({ "HexGetTrackGridElement", "TrackGridElement", "PlaceObjectIn",
-			"ResolveMap", "WorldToHex", "HexToWorld", "HexGetDirection", "IsBeingDestructed" }) do
+			"ResolveMap", "WorldToHex", "HexToWorld", "HexGetDirection", "IsBeingDestructed",
+			"CreateGameTimeThread" }) do
 			if rawget(_G, name) == nil then
 				return name .. " not found (game update changed it?)"
 			end
@@ -123,6 +137,53 @@ SMRFixPack.Register("TrackConnectorPingPong", {
 						el:AutoConnectTracks("start element")
 					end
 				end
+			end
+		end
+
+		-- Recovery-gap repair (see header): when a track-connected building dies,
+		-- give its neighbours a chance to reclaim the hexes it was holding.
+		-- Exposed on SMRFixPack so the TestKit can drive it with synthetic objects.
+		function SMRFixPack.TrackConnectorReclaim(map, hexes, dying)
+			local seen = {}
+			for _, h in ipairs(hexes) do
+				local x, y = HexToWorld(h.q, h.r)
+				map:MapForEach(point(x, y), "hex", 3, "TrackConnectedObjBase", function(o)
+					if o ~= dying and not seen[o] and IsValid(o) and not IsBeingDestructed(o) then
+						seen[o] = true
+						-- the engine's own deferred-rebuild idiom, in-thread
+						-- revalidation included (TrackElement.lua:194-198)
+						CreateGameTimeThread(function(station)
+							if IsValid(station) and not IsBeingDestructed(station) then
+								station:CreateConnectorElements()
+							end
+						end, o)
+					end
+				end)
+			end
+		end
+
+		local orig_done = B.Done
+		function B:Done(done_map)
+			if done_map then
+				-- map teardown: no reclaim work, exactly like the shipped early-return
+				return orig_done(self, done_map)
+			end
+			-- collect this building's connector hexes BEFORE the shipped body
+			-- destroys the elements standing on them (same spot reads it does)
+			local map = ResolveMap(self)
+			local hexes = {}
+			if map then
+				for i = 0, 4 do
+					local conspot = self:GetSpotBeginIndex("Trackconnector" .. i)
+					if conspot >= 0 then
+						local q, r = self:GetSpotPosHex(conspot)
+						hexes[#hexes + 1] = { q = q, r = r }
+					end
+				end
+			end
+			orig_done(self, done_map)
+			if map and #hexes > 0 then
+				SMRFixPack.TrackConnectorReclaim(map, hexes, self)
 			end
 		end
 	end,
