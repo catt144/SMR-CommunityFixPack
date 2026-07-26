@@ -63,10 +63,30 @@
 --
 -- No double refunds: when the whole track goes, the shipped path runs
 -- `TrackBase:OnDemolish` -> `ReturnResources` -> the replaced
--- `GetRefundResources` above, and clears `track.elements` to false — half B
--- checks for exactly that and stands down. A stamp lives on one element and
--- dies with it, so each group's spend can be refunded at most once over the
--- whole life of the track.
+-- `GetRefundResources` above — and OnDemolish stamps `demolishing = true` on
+-- the track first (Track.lua:250), a Lua-side field that survives the object's
+-- destruction. Half B stands down exactly when that stamp is present. A stamp
+-- lives on one element and dies with it, so each group's spend can be refunded
+-- at most once over the whole life of the track.
+--
+-- QA F47 composition repairs (2026-07-26, both under-refunds found by the
+-- wave-4/5 audit):
+--   * The stand-down test used to be `IsValid(track) and elements is a table`,
+--     which also stood down when the F44 trim EMPTIED the track — an emptied
+--     track dies through CanDelete -> DoneObject (TrackElement.lua:203-205)
+--     WITHOUT running OnDemolish, so nothing had refunded the trimmed stamps.
+--     The `demolishing` stamp separates the two deaths; the map and drop
+--     position are captured before the originals run, since both the element
+--     and the track can be dead by the time the refund is placed.
+--   * The construction-site early-return was broader than the repair-site
+--     delegation it existed for: clicking a PLAIN under-construction element
+--     still deletes a zone that can contain stamped COMPLETED elements
+--     (DemolishAndSplitTrack sorts both arrays into one line), and the early
+--     return threw those stamps away. Only the repair-site delegation
+--     (TrackElement.lua:451-453) returns early now — its inner re-entry does
+--     the accounting; a plain site falls through and is snapshotted. The
+--     site's OWN spend is returned by the construction machinery and never
+--     carries a completion stamp, so accounting the zone cannot double-refund.
 
 SMRFixPack.Register("TrackSalvageRefund", {
 	title = "Salvaging a track refunds what the whole track cost, not one hex",
@@ -98,7 +118,7 @@ SMRFixPack.Register("TrackSalvageRefund", {
 		end
 
 		---- half A -------------------------------------------------------------
-		-- Source: Lua\Buildings\Track.lua:286-307 (post-1.0.7 ModTools\Src).
+		-- Source: Lua\Buildings\Track.lua:286-307 (ModTools\Src, game 1.0.7.396349).
 		function TB:GetRefundResources()
 			local refund = {}
 			if not self.elements or #self.elements == 0 then
@@ -171,18 +191,24 @@ SMRFixPack.Register("TrackSalvageRefund", {
 
 		local orig_demolish = TE.Demolish
 		function TE:Demolish(mass_delete, ...)
+			local track = self.track_obj
 			-- A repair construction site delegates to its broken real element
 			-- (TrackElement.lua:451-453), which re-enters this method; let the
 			-- inner call do the accounting so a refund is never counted twice.
-			-- Construction sites are refunded by ConstructionSite:ReturnResources
-			-- anyway and never carry a completion stamp.
-			if self.is_construction_site then
+			-- A PLAIN construction site falls through (F47 composition repair):
+			-- its zone can still delete stamped completed elements, its own
+			-- spend is returned by the construction machinery, and it never
+			-- carries a completion stamp — so snapshotting cannot double-count.
+			if self.is_construction_site and IsValid(self.broken)
+				and type(track) == "table" and type(track.elements) == "table"
+				and table.find(track.elements, self.broken) then
 				return orig_demolish(self, mass_delete, ...)
 			end
 
-			local track = self.track_obj
-			local snapshot
+			local snapshot, map
 			if type(track) == "table" and type(track.elements) == "table" then
+				-- captured now: both self and the track can be dead afterwards
+				map = self:GetMap()
 				for _, el in ipairs(track.elements) do
 					local costs = el and el.construction_cost_at_completion
 					if costs then
@@ -202,13 +228,17 @@ SMRFixPack.Register("TrackSalvageRefund", {
 
 			local res = orig_demolish(self, mass_delete, ...)
 
-			if snapshot and IsValid(track) and type(track.elements) == "table" then
-				-- `elements` is still a table, so TrackBase:OnDemolish did not run
-				-- (it sets it to false, Track.lua:190) and has not already refunded
-				-- the whole track through the replacement above.
+			if snapshot and not track.demolishing then
+				-- TrackBase:OnDemolish stamps `demolishing` (Track.lua:250) before
+				-- refunding the whole track through the replacement above — stand
+				-- down then. Every OTHER outcome that destroyed stamped elements
+				-- has not refunded them: trims, splits, and (F47 composition
+				-- repair) a trim that emptied the track, whose death runs through
+				-- CanDelete -> DoneObject (TrackElement.lua:203-205) with no
+				-- OnDemolish — the old `IsValid(track)` test read that death as
+				-- "already handled" and lost the refund.
 				local ok, refund, pos, angle = pcall(collect_refund, track, snapshot)
-				if ok and pos then
-					local map = track:GetMap()
+				if ok and pos and map then
 					for _, item in ipairs(refund) do
 						PlaceResourceStockpile_Delayed(pos, map, item.resource, item.amount, angle or 0, true)
 					end
