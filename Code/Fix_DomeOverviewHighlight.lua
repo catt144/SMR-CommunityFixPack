@@ -11,7 +11,7 @@
 -- Health, Sanity, Comfort or Morale.
 --
 -- Patch approach: replacement of the small method — a copy of
--- Lua\X\ColonyControlCenter.lua:1308-1320 (shipped Src, 2026-07) with the display
+-- Lua\X\ColonyControlCenter.lua:1308-1320 (shipped Src, game 1.0.7.396349) with the display
 -- value actually used. Change marked -- FIX.
 
 SMRFixPack.Register("DomeOverviewHighlight", {

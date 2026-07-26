@@ -13,7 +13,7 @@
 -- platform for good.
 --
 -- Patch approach: full replacement of the method — a copy of
--- Lua\Units\ColonistTransport.lua:540-570 (shipped Src, 2026-07) with the one call
+-- Lua\Units\ColonistTransport.lua:540-570 (shipped Src, game 1.0.7.396349) with the one call
 -- corrected. The file-local stat_scale is recreated (ColonistTransport.lua:1).
 -- Change marked -- FIX.
 

@@ -31,7 +31,7 @@
 -- other automated workplace (and for mods that automate one).
 --
 -- Patch approach: full replacement of City:GetNeededSpecialist — a copy of
--- Lua\City.lua:561-593 (shipped Src, 2026-07) with one clause added to the
+-- Lua\City.lua:561-593 (shipped Src, game 1.0.7.396349) with one clause added to the
 -- existing gate, marked -- FIX. Replacement because the decision is inside the
 -- accumulation loop: a pre-wrapper cannot reach it and a post-wrapper would have
 -- to reconstruct and unpick the Max(0, …) clamp on line 587.

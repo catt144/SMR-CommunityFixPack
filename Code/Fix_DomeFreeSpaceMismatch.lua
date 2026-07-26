@@ -26,7 +26,7 @@
 -- on assigning colonists into those very residences.
 --
 -- Patch approach: full replacement of Dome:RefreshFreeLivingSpaces — a copy of
--- Lua\Buildings\Dome.lua:2832-2834 (shipped Src, 2026-07) passing the argument
+-- Lua\Buildings\Dome.lua:2832-2834 (shipped Src, game 1.0.7.396349) passing the argument
 -- the shipped function already provides for, marked -- FIX. There is nothing to
 -- wrap: the method is two lines and the fix IS the argument.
 --

@@ -23,7 +23,7 @@
 -- this transporter, an empty row means empty.
 --
 -- Patch approach: full replacement of CargoRequestNew:RetrieveRequests — a copy of
--- Lua\CargoRequestNew.lua:179-221 (shipped Src, 2026-07) with one line gated,
+-- Lua\CargoRequestNew.lua:179-221 (shipped Src, game 1.0.7.396349) with one line gated,
 -- marked -- FIX; the file-local resolve_loc_cargo_template (:166-177) is
 -- reproduced verbatim because a file-local cannot be reached. Plus a pre-wrapper
 -- on CargoRequestNew:Apply — the payload-confirm path (:341-355, reached from

@@ -21,8 +21,8 @@
 -- its own +/- entry with the same reason string, so the satisfaction log is
 -- unchanged in form; single-threshold moves behave exactly as they do today. Only
 -- multi-threshold moves change, and only to pay symmetrically. Nothing is awarded
--- when the tier does not change. Source: Lua\Units\Colonist.lua:4006-4032 (shipped
--- Src, 2026-07); the file-local stat_scale is recreated (Colonist.lua:1).
+-- when the tier does not change. Source: Lua\Units\Colonist.lua:4006-4032 (shipped Src,
+-- game 1.0.7.396349); the file-local stat_scale is recreated (Colonist.lua:1).
 
 SMRFixPack.Register("TouristSatisfaction", {
 	title = "Tourist satisfaction stops drifting down (threshold awards are now symmetric)",

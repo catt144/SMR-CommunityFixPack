@@ -25,7 +25,7 @@
 -- AddNotification at :233-235) — FX replay and reset dismiss/suppression state once per
 -- game hour. Taking the add branch in the first place is the only correct repair.
 --
--- So: a copy of Lua\ResourceTracking.lua:204-316 (shipped Src, 2026-07), byte-identical
+-- So: a copy of Lua\ResourceTracking.lua:204-316 (shipped Src, game 1.0.7.396349), byte-identical
 -- but for the four lines marked `-- FIX (F12):` — the two num_hours expressions and
 -- their two comparisons. Two notes on the copy:
 --   * the file-locals the shipped function closes over (GetGridObj and the reused

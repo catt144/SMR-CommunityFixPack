@@ -17,7 +17,7 @@
 -- retirement dome" report.
 --
 -- Patch approach: full replacement of the one caching function — a copy of
--- Lua\Units\Colonist.lua:2504-2537 (shipped Src, 2026-07) that records which
+-- Lua\Units\Colonist.lua:2504-2537 (shipped Src, game 1.0.7.396349) that records which
 -- shuttle availability each cached answer was computed under and recomputes when
 -- it differs. The flag is stored on a NON-array key of the existing entry, so the
 -- entry still unpacks to exactly (mode, dist, elevator) — a save made with this

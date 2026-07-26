@@ -19,7 +19,7 @@
 -- and the little landscaping job never gets worked.
 --
 -- Patch approach: full replacement of GetClosestDests — a copy of
--- Lua\Landscape\LandscapeConstructionSiteBase.lua:178-192 (shipped Src, 2026-07)
+-- Lua\Landscape\LandscapeConstructionSiteBase.lua:178-192 (shipped Src, game 1.0.7.396349)
 -- with the loop bound clamped, marked -- FIX. Replacement rather than a wrapper
 -- because the fault is inside the loop: a pre-wrapper cannot prevent it and a
 -- post-wrapper never runs.

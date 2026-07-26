@@ -23,7 +23,7 @@
 --     so the colony's transport numbers double-count every platform wait.
 --
 -- Patch approach: full replacement of `Colonist:BoardVehicle` — a copy of
--- ColonistTransport.lua:503-528 (shipped Src, 2026-07) with one line added,
+-- ColonistTransport.lua:503-528 (shipped Src, game 1.0.7.396349) with one line added,
 -- marked -- FIX. Replacement rather than a wrapper because the restamp has to
 -- happen mid-function: it must come AFTER the station is credited with the wait
 -- at :511 and BEFORE the `while self.holder == vehicle` loop at :525, which

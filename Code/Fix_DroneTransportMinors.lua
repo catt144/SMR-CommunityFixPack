@@ -140,7 +140,7 @@ SMRFixPack.Register("DroneTransportMinors", {
 			return
 		end
 
-		-- Source: Lua\Buildings\DroneControl.lua:613-639 (post-1.0.7 ModTools\Src).
+		-- Source: Lua\Buildings\DroneControl.lua:613-639 (ModTools\Src, game 1.0.7.396349).
 		function DC:UpdateRocketsInternal()
 			local r_t = self.restrictor_tables[rfRestrictorRocket]
 			r_t.Fuel = nil

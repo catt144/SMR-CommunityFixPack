@@ -16,7 +16,7 @@
 -- and cluster outside" report.
 --
 -- Patch approach: full replacement of the small method — a copy of
--- Lua\Units\Drone.lua:818-848 (shipped Src, 2026-07) storing the actual failure
+-- Lua\Units\Drone.lua:818-848 (shipped Src, game 1.0.7.396349) storing the actual failure
 -- time, so the shipped 5-sol expiry does what it was written to do. Nothing else
 -- changes: the table, its cap, the eviction of the oldest entry and the
 -- version-based reset are all untouched.

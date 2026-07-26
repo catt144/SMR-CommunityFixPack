@@ -42,7 +42,7 @@
 --
 -- Patch approach: the defect is mid-function and unhookable, so this is a full
 -- replacement of the method — a copy of Lua\UniversalRocket.lua:1727-1766
--- (shipped Src, 2026-07) with three changes, all marked -- FIX:
+-- (shipped Src, game 1.0.7.396349) with three changes, all marked -- FIX:
 --   1. (F68) count the rocket's own load as still being "here" before comparing
 --      to the threshold, so the requested amount stays put instead of ratcheting
 --      down;

@@ -34,7 +34,7 @@
 -- boarding it, and does so repeatedly for any unit the sweep reports twice.
 --
 -- Patch approach: full replacement of the global LandscapeForEachUnit — a copy of
--- Lua\Landscape\Landscaping.lua:455-469 (shipped Src, 2026-07) with the argument
+-- Lua\Landscape\Landscaping.lua:455-469 (shipped Src, game 1.0.7.396349) with the argument
 -- corrected, marked -- FIX. The file-local `foreach_params_unit` (:452-454) is
 -- reproduced verbatim, a file-local being unreachable from here. Replacement
 -- rather than a wrapper because the wrong argument is the whole defect.

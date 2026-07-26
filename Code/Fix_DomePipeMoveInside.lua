@@ -21,7 +21,7 @@
 -- variable in scope to `self`.
 --
 -- Patch approach: full replacement of `LifeSupportGridObject:MoveInside` — a
--- copy of LifeSupportGrid.lua:282-316 (shipped Src, 2026-07) with one argument
+-- copy of LifeSupportGrid.lua:282-316 (shipped Src, game 1.0.7.396349) with one argument
 -- corrected, marked -- FIX. Replacement because the call is inside a loop in the
 -- middle of the function: there is no wrapper position that can reach it, and
 -- `WaterGrid.DestroyConnection` cannot be patched instead because a wrapper

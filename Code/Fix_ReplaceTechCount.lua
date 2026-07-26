@@ -30,7 +30,7 @@
 -- mod-facing rather than a gameplay fix.
 --
 -- Patch approach: full replacement of `Research:ReplaceTech` — a copy of
--- Research.lua:684-720 (shipped Src, 2026-07) with one line corrected, marked
+-- Research.lua:684-720 (shipped Src, game 1.0.7.396349) with one line corrected, marked
 -- -- FIX. Replacement because the defect is a statement in the middle of the
 -- function, with the call that matters on the very next line.
 --

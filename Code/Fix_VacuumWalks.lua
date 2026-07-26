@@ -16,7 +16,7 @@
 -- original long-walk suffocation bug, still present.
 --
 -- Patch approach: full replacement of the method — a copy of
--- Lua\Units\Colonist.lua:1545-1590 (shipped Src, 2026-07) with one change: in a
+-- Lua\Units\Colonist.lua:1545-1590 (shipped Src, game 1.0.7.396349) with one change: in a
 -- non-breathable atmosphere look for a passage route for ANY distance. The walk
 -- branch below already forwards `passage_path` to TransportByFoot, so the
 -- colonist simply uses the passages that exist. Breathable maps keep the shipped

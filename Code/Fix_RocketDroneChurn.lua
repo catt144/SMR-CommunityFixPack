@@ -21,7 +21,7 @@
 -- on requests that already exist, which command centers re-read in place.
 --
 -- Patch approach: full replacement of the method — a copy of
--- Lua\CargoTransporterNew.lua:1238-1271 (shipped Src, 2026-07) that decides up
+-- Lua\CargoTransporterNew.lua:1238-1271 (shipped Src, game 1.0.7.396349) that decides up
 -- front whether any request is actually missing and only then does the
 -- disconnect/reconnect dance. A transporter that somehow has no command centers
 -- still gets its one-time connect. Changes marked -- FIX.

@@ -28,7 +28,7 @@
 -- apply here: a Shuttle Hub is an outside building and has no parent dome.)
 --
 -- Patch approach: full replacement of the global IsLRTransportAvailable — a copy
--- of Lua\Buildings\ShuttleHub.lua:350-359 (shipped Src, 2026-07) with one added
+-- of Lua\Buildings\ShuttleHub.lua:350-359 (shipped Src, game 1.0.7.396349) with one added
 -- term, marked -- FIX. Replacement rather than a wrapper because the repair makes
 -- the predicate STRICTER: the shipped function returns a single boolean for the
 -- whole colony, so a wrapper that sees `true` cannot tell which hub produced it.

@@ -18,7 +18,7 @@
 --
 -- Patch approach: the defect is mid-function, so this is a full replacement of
 -- the method — a copy of Lua\Buildings\TrackElement.lua:448-578 (shipped Src,
--- 2026-07) with three changes, all marked -- FIX:
+-- game 1.0.7.396349) with three changes, all marked -- FIX:
 --   1. when no pillared+straight anchor exists, the deletion zone stops at the
 --      clicked element's neighbour instead of running off the array. A curved
 --      track then loses exactly the hex that was clicked.

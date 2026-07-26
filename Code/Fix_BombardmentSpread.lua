@@ -22,7 +22,7 @@
 -- already placed it at `spawn_pos` (:85) and the visual axis at :93-96 is derived
 -- from the same local, so correcting the object after the fact would leave a
 -- missile flying along one line while pointing down another. The body below is a
--- copy of Bombardment.lua:55-154 (shipped Src, post-1.0.7), byte-identical except
+-- copy of Bombardment.lua:55-154 (shipped Src, game 1.0.7.396349), byte-identical except
 -- the single line marked `-- FIX:`.
 --
 -- `GenerateDir` (Bombardment.lua:38-50) and `travel_dist` (:53) are file-locals
@@ -85,7 +85,7 @@ SMRFixPack.Register("BombardmentSpread", {
 
 		SMRFixPack.BombardmentSpread = { GenerateDir = GenerateDir }
 
-		-- Source: Lua\Bombardment.lua:55-154 (post-1.0.7 ModTools\Src).
+		-- Source: Lua\Bombardment.lua:55-154 (ModTools\Src, game 1.0.7.396349).
 		-- `StartBombard` (:156-161) resolves this name at call time, so it picks
 		-- the replacement up.
 		local replacement

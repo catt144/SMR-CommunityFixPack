@@ -39,7 +39,7 @@
 -- SetCommand("Abandoned") (:2736).
 --
 -- Patch approach: full replacement of the method — a copy of
--- Lua\Units\Colonist.lua:1254-1300 (shipped Src, 2026-07) with two changes,
+-- Lua\Units\Colonist.lua:1254-1300 (shipped Src, game 1.0.7.396349) with two changes,
 -- marked -- FIX:
 --   1. snap the disembark position to a passable point when the spot itself is not;
 --   2. before walking, check the destination really is reachable — on foot, or

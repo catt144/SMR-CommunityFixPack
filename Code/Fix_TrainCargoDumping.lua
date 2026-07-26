@@ -23,7 +23,7 @@
 -- demolished, the train was re-assigned).
 --
 -- Patch approach: full replacement of Train:UnloadAll — a copy of
--- Lua\Units\Train.lua:783-803 (shipped Src, 2026-07) with one guard added,
+-- Lua\Units\Train.lua:783-803 (shipped Src, game 1.0.7.396349) with one guard added,
 -- marked -- FIX. Replacement rather than a wrapper because the decision is
 -- mid-loop: a pre-wrapper cannot see it and a post-wrapper runs after the
 -- resources have already moved.
