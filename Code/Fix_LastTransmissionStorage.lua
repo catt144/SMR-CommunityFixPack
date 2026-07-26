@@ -95,6 +95,7 @@ end
 
 local patched = false        -- a full pass ran since the last (re)load of the presets
 local ever_changed = false   -- some pass this session actually moved/retargeted entries
+local data_loaded = false    -- DataLoaded has fired at least once
 
 local function patch()
 	if patched then return end
@@ -104,20 +105,23 @@ local function patch()
 	local disabled = rawget(_G, "SMRFixPack_Disabled")
 	if type(disabled) == "table" and disabled[FIX_ID] then return end
 	local defs = rawget(_G, "FactionDefs")
-	if type(defs) ~= "table" then return end   -- presets not loaded yet
-	local faction = defs.LastTransmission
+	local faction = type(defs) == "table" and defs.LastTransmission
 	local likes = type(faction) == "table" and faction.likes
 	if type(likes) ~= "table" then
-		-- Presets ARE loaded but the faction (or its likes list) is gone — a
-		-- future update removed the target. Say so instead of staying "active"
-		-- forever with zero effect (QA 2026-07-25).
-		patched = true
-		local entry = SMRFixPack.fixes[FIX_ID]
-		if entry then
-			entry.status = "inactive"
-			entry.detail = "FactionDefs.LastTransmission not found (game update changed it?)"
+		-- Before DataLoaded this just means "presets not loaded yet" — the
+		-- GlobalMap table exists EMPTY at mod-load time, so it must not be
+		-- read as evidence of anything (the first B leg latched a false
+		-- "inactive: not found" here, QA 2026-07-25). Only after DataLoaded
+		-- does a missing faction mean a future update removed the target.
+		if data_loaded then
+			patched = true
+			local entry = SMRFixPack.fixes[FIX_ID]
+			if entry then
+				entry.status = "inactive"
+				entry.detail = "FactionDefs.LastTransmission not found (game update changed it?)"
+			end
+			log("%s: inactive (FactionDefs.LastTransmission not found)", FIX_ID)
 		end
-		log("%s: inactive (FactionDefs.LastTransmission not found)", FIX_ID)
 		return
 	end
 
@@ -154,6 +158,12 @@ local function patch()
 	local entry = SMRFixPack.fixes[FIX_ID]
 	if stats.moved > 0 or stats.retargeted > 0 then
 		ever_changed = true
+		-- restore the status too: an earlier pass may have mislabeled the fix
+		-- before the presets were loaded (QA 2026-07-25)
+		if entry then
+			entry.status = "active"
+			entry.detail = nil
+		end
 		log("%s: %d storage condition(s) made effective, %d retargeted", FIX_ID, stats.moved, stats.retargeted)
 	elseif ever_changed then
 		-- FIX (QA 2026-07-25): the engine posts Msg("DataChanged", false) right
@@ -186,6 +196,7 @@ SMRFixPack.Register(FIX_ID, {
 })
 
 function OnMsg.DataLoaded()
+	data_loaded = true
 	patch()
 end
 

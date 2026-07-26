@@ -50,6 +50,7 @@ local function log(fmt, ...)
 end
 
 local patched = false
+local ever_changed = false   -- some pass this session actually changed the preset
 
 local function patch()
 	if patched then return end
@@ -71,21 +72,34 @@ local function patch()
 	patched = true
 
 	local entry = SMRFixPack.fixes[FIX_ID]
-	if found == 0 then
+	if changed > 0 then
+		ever_changed = true
+		-- restore the status too, in case an earlier pass mislabeled it
+		if entry then
+			entry.status = "active"
+			entry.detail = nil
+		end
+		log("%s: %s now discounts special projects by %d%% as its param1 says",
+			FIX_ID, TECH_ID, -WANTED)
+	elseif ever_changed then
+		-- FIX (QA 2026-07-25, same defect as F75): the engine posts
+		-- DataChanged(false) right after DataLoaded, rerunning this pass over
+		-- the preset it just corrected. Finding nothing left to change then is
+		-- SUCCESS — without this branch the fix relabeled itself
+		-- "inactive: already matches" on every boot (seen in the first B leg).
+		return
+	elseif found == 0 then
 		if entry then
 			entry.status = "inactive"
 			entry.detail = TECH_ID .. " no longer modifies " .. PROP
 		end
 		log("%s: inactive (%s no longer modifies %s)", FIX_ID, TECH_ID, PROP)
-	elseif changed == 0 then
+	else
 		if entry then
 			entry.status = "inactive"
 			entry.detail = "the shipped tech already matches its own param1"
 		end
 		log("%s: inactive (the shipped tech already matches its own param1)", FIX_ID)
-	else
-		log("%s: %s now discounts special projects by %d%% as its param1 says",
-			FIX_ID, TECH_ID, -WANTED)
 	end
 	SMRFixPack.IndependenceTerraforming = { found = found, changed = changed }
 end
