@@ -1,23 +1,153 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-26 (**wave-5 BUILD leg done — the tracker's `todo` queue is now EMPTY.
-21 new fix modules total on the `wave4` branch, NOT merged to main**; see "Wave 5" and
-"Wave 4" below. Prior entry: QA session 5 wrap-up — wave-3 A/B CLEAN).
-**Two prompts left, two triggers:**
-- ~~`docs/OPUS_BUILD_PROMPT.md` — Opus wave-5 build leg~~ **DONE.** Nothing is queued for
-  a wave-6 build leg: every tracked entry is `fixed`, `fixed*`, `tested`, `wontfix`, or
-  parked on a named playtest gate. The prompt file is stale and should be rewritten only
-  if the playtest produces new findings.
+Updated: 2026-07-25 late (**wave-4/5 QA leg DONE — merged to main, A/B pair CLEAN
+(58 PASS / 0 FAIL / 0 ERROR, 66/67 active), 14-audit fan-out done, 7 repair commits
+landed** — see "QA session (waves 4+5)" below. Prior entry: wave-5 build leg wrap-up).
+**One prompt left, one trigger:**
 - `docs/FABLE_PLAYTEST_PROMPT.md` — processes the user's manual playtest report
-  (PASS→`tested` flips, FAIL→new findings, the PT-36/37/38 decision gates).
-- `docs/FABLE_QA_PROMPT.md` — QA leg, AFTER the playtest: merges `wave4`
-  to main and runs the A/B pair over waves 4 AND 5 together, audits divergences. BUGS.md is
+  (PASS→`tested` flips, FAIL→new findings, the PT-36/37/38 decision gates). The
+  playtest RESUMES on the merged wave-4/5 pack; PT-01 FAIL and PT-03 FAIL from the
+  first sitting are already diagnosed/repaired (see the QA session section) — PT-03
+  needs a re-run, PT-01 needs the user's reload-frequency answer first.
+- ~~`docs/OPUS_BUILD_PROMPT.md`~~ done; ~~`docs/FABLE_QA_PROMPT.md`~~ done (this session).
+BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
 cross-check), MOD_DESCRIPTION.md the player-facing mod-page draft (update its fix
 list in the same commit that implements a fix; only `tested` fixes ship in the
 final text), TESTING.md the force-the-bug test plan, CHEATS_INVENTORY.md the
 shipped cheat/debug surface the tests drive.
+
+## QA session (waves 4+5) — Fable, 2026-07-25 evening: merge + audits + A/B CLEAN
+
+**Task 0 — merge:** `wave4` merged to main in BOTH repos with zero conflicts (fix pack
+2f09133, TestKit 17f7b3c), worktrees removed, branches deleted, fix pack pushed. The
+commented-out F10 metadata line survived. 21 new modules → 68 metadata entries,
+67 registered modules.
+
+**Task 1 — parse sweep + A/B pair:** all 80 Lua files in both mods parse. Logs in
+`%AppData%\Surviving Mars Relaunched\logs`:
+
+| Leg | Log (Mars.exe-20260725-…) | Result |
+|-----|---------------------------|--------|
+| Baseline (pack code list emptied) | 22.46.34 | 1 PASS, **57 FAIL**, 12 SKIP, 0 ERROR — every armed probe FAILs |
+| Full pack | 22.48.50 | **58 PASS, 0 FAIL**, 12 SKIP — exposed the F75/F18 status-relabel defects (fixed, cdff2ce) |
+| Verification (status repairs in) | 22.52.57 | **66/67 active** (ClassicRockets opt-in inactive), **58 PASS, 0 FAIL, 12 SKIP, 0 ERROR** |
+
+The 12 SKIPs: 10 `[install]` probes (retail sandbox — MarsDebug pass covers them),
+ClassicRockets (opt-in, verified separately in the wave-3 opt-in leg), and
+TechDescriptionBuilding (below). Non-Flight `[LUA ERROR]`s present in BOTH legs are
+synthetic-map GameInit noise in shipped files (BuildingWayPoints/TaskRequest/GridObject);
+nothing names an SMR file. A `[mod] Error in mod … Test Kit` line at quit time is a
+shutdown artifact (fires at the harness's own `quit()`, exit code 0, results complete).
+
+**The two wedged legs (21.01.55 and 22.29.10) were a TestKit probe defect, not the
+game:** the TrainWaitTime probe faked the sleeping `PlayPrg` as a no-op, so the shipped
+`while self.holder == vehicle do self:PlayPrg() end` ride loop span without yielding and
+starved EVERY Lua thread — including the harness watchdog (why it never fired) and the
+log writer (why the logs looked empty; the buffer only flushes at exit). Repairs
+(TestKit bafbd61 + 80de593): the fake now ends the ride; the harness flushes the log
+per line so a killed run keeps its evidence; `ShowStartGamePopup` is neutered when the
+autorun is armed (the "Welcome to Mars, Commander!" popup was on screen but was NOT the
+wedge); watchdog raised to 15 min. **Engine-fact lesson: a probe must never fake a
+blocking primitive as a no-op inside a driven loop.**
+
+**Task 2 — probe discrimination:** 19/20 wave-4/5 probes FAILed baseline → PASSed
+fixed: RocketInteractGuard, TrackConnectorPingPong, TrackTunnelPowerBridge,
+GridGlobalStorage, LastTransmissionStorage, TrainWaitTime, GraphConsumedCaption,
+MoraleComfortTooltip, ReplaceTechCount, StorageRateModifiers, SequenceLatents,
+FounderTraitNotification, IndependenceTerraforming, TrackSalvageRefund, LayoutTechLock,
+TrainMinors, DroneTransportMinors, AnomalyCaveInMap, BombardmentSpread. **Not
+discriminating: TechDescriptionBuilding** — SKIPs both legs ("the tech has no
+description T": the probe finds `TechDef.UndergroundLargeDome.description` is not a
+table at probe time). F25 is therefore NOT probe-verified; its playtest item is the
+evidence path (or a console read of the description). F24 has no probe by design
+(PT-44). FactionFundingCheck PASSes both legs as always (F10 retired, PT-36 gate).
+
+**Task 3 — audit fan-out (14 read-only subagents, every verdict verified before
+action):** CLEAN: F20, F21, F22, F24, F74 (premises held; only LOWs). Findings that
+led to repairs, all landed and covered by the final A/B:
+- **F57a HIGH (live game-breaker):** `rfRestrictorRocket` is a FILE-LOCAL
+  (DroneControl.lua:12); the replacement read it as a global and raised on every
+  rocket-restrictor update → drones would stop servicing rockets. Repaired 493f054.
+- **F28 MEDIUM:** the dropped `assert(tech_def.group == status.field)` was load-bearing
+  through its ARGUMENT (raises on unknown tech_id_new BEFORE mutation); the copy mutated
+  first. Guard restored b66995f.
+- **F26 HIGH (dead fix):** preflight checked BombardMissile for methods declared on
+  BaseMeteor (invisible pre-flattening — the F64 lesson AGAIN) and required the
+  SessionRandom GameVar at apply time; the fix could never activate. Repaired 11ecd22.
+- **F75 HIGH + F18 sibling:** preset-patch fixes relabeled themselves
+  "inactive: already correct" when the engine's post-DataLoaded `DataChanged(false)`
+  reran them over their own corrections; F75 also bypassed the SMRFixPack_Disabled veto
+  in its OnMsg path and misread the EMPTY pre-DataLoaded GlobalMap as a vanished
+  target. Repaired 11ecd22 + cdff2ce. **Engine fact: `Msg("DataChanged", false)` fires
+  right after every DataLoaded (Dlc.lua:715-717, :680-685); FactionDefs/TechDef
+  GlobalMap tables exist EMPTY before DataLoaded.**
+- **F43 HIGH (latent):** `IsValid()` on pure-Lua InitDone controllers is always falsy
+  (C-side check; cf. RealTimeCommandObject's own override) — the teardown was dead code
+  and would have leaked the cursor object when a tech-gated layout entry ever goes
+  live. Guard dropped 11ecd22. **Engine fact: IsValid() rejects pure-Lua objects, not
+  just probe stand-ins.**
+- **F31 MEDIUMs:** the divergence paragraph's marsquake claim was FALSE (every engine
+  TriggerCaveIn call is already Underground-gated, Marsquake.lua:285/:294/:323-325) —
+  corrected in place; and the 8th call site crashes inside `FindCaveInLocation`
+  (CaveInRubble.lua:27) before the wrapper — a second decline-wrapper now covers it
+  (11ecd22, 8/8 sites).
+- **F49:** (d)'s rationale was backwards (GameInit is DEFERRED, _object.lua:187-192 —
+  the surviving track is the real defect, which the fix covers) and coverage gaps via
+  AutoConnectTracks/instant-build reuse are recorded as accepted (sweep corrects on
+  load); (c) implemented per the user's decision (below); (b)(e) screenings verified
+  sound. F20/F74 wrappers got vararg pass-throughs (§1.4).
+- **F65 HIGH:** the 2-element special deletion path (TrackConnectedObjBase:Done,
+  TrainTransport.lua:24-27) DoneObjects the track with NO DisconnectFromGrids — and
+  only F65 ever creates a bridged 2-element track, so demolishing an endpoint leaked
+  tunnel mask/adjacency into the save. Repaired 8e0b177: TrackBase:Done is pre-wrapped
+  to run the shipped DisconnectFromGrids (tolerates a dead endpoint by design;
+  RemoveSupplyTunnel clears the flag so demolish-path double-calls no-op). The
+  MEDIUM (different-grids test is one-shot; cable-topology declines re-check only on
+  next load's sweep) is documented as accepted in the fix header.
+- **F47 MEDIUMs (recorded, NOT yet repaired — both under-refunds, no over-refund/save
+  hazard):** F44's trim-to-empty exit skips the refund (composition gap), and the
+  construction-site early-return is broader than repair sites. On the list for a
+  future leg.
+- **F66 MEDIUM (recorded, awaiting user decision):** after the blocking neighbour is
+  demolished, the guarded building never reclaims the connector hex (no rebuild
+  trigger reaches it) until any track demolish fires the global rebuild or it is
+  re-placed. Options given to the user: accept+document vs a demolition-path rebuild
+  trigger.
+- Recurring minors: full-replacement headers date the copy instead of naming the game
+  version (FIX_POLICY §1.5) — release-checklist item; assorted citation drift fixed.
+
+**User decisions recorded this session:** F42 CLOSED `wontfix`; F49(c) = "the click
+does nothing", implemented.
+
+**Playtest findings processed live (first sitting, wave-3 pack):** PT-02 PASS, PT-04
+PASS (status flips belong to the playtest-report session). **PT-03 F44 curve FAIL →
+diagnosed and REWORKED (a38cbf2):** the split branch could delete a physically
+scattered zone whenever sorted order diverged from physical order (exactly the
+non-numeric node_idx state the old comparator sorted as -1 and carried on with),
+stranding orphaned elements (track_obj == false) that raise on every later click —
+the user's "broke itself, became immune" with screenshots. Now: orphan clicks delete
+the debris, the salvage declines BEFORE deleting anything when order can't be trusted,
+the split tail is IsValid-guarded, and a LoadGame sweep removes orphans already baked
+into saves (the user's playtest save will log `TrackSalvageWipe: removed N orphaned
+track element(s)`). **PT-03 needs a re-run.** PT-01 (meteors stopped after sol ~12.5,
+FAIL) is NOT yet diagnosed — first question is whether the user reloaded during the
+quiet stretch (every load re-rolls the 65-90h Low-threat interval; frequent reloads
+legitimately push strikes out). If they didn't reload, F02 has a real regression to
+find.
+
+**Commits this session (fix pack):** 2f09133 merge, b66995f F28, 493f054 F57a,
+09af088 playtest notes, 11ecd22 audit repairs, 8e0b177 F49c+F65, 75c54f6 doc
+corrections + F42 (NOTE: accidentally committed the baseline's emptied metadata via
+`commit -a`; restored in 1321795 — never use `-a` while an A/B leg's metadata edit is
+in the working tree), a38cbf2 F44 rework, cdff2ce F75/F18 status. TestKit: 80de593
+harness hardening, bafbd61 probe wedge fix + 15-min watchdog.
+
+**Open after this session:** F66 decision (user); PT-01 reload answer (user); PT-03
+re-run; F47 composition under-refunds (future leg); MarsDebug [install] pass for the
+wave-4/5 fixes' install halves (attended, SetupOnly mode); game-version tags on
+full-replacement headers (release checklist).
 
 ## What this project is
 
@@ -352,18 +482,14 @@ together. **The BUGS.md `todo` queue is now empty.**
 | **F25** | `Fix_TechDescriptionBuilding` | preset patch reusing the original translation id, so localised builds are untouched |
 | **F26** | `Fix_BombardmentSpread` | the pack's **sixth and largest full replacement** (100 lines) |
 
-**Screened and NOT implemented — one entry needs a user decision:**
-- **F42** (buildings placeable on active dust devils) → **`blocked`, wontfix candidate.**
-  Every factual claim in the entry is true and none of it adds up to a defect: the guard it
-  names exists to stop units being *entombed*, a dust devil has no footprint and cannot be
-  trapped, the omission is in declared overridable class members, no shipped text promises
-  the block, and the one weather-gated placement rule the game does model
-  (`RocketLandingDustStorm`) is implemented and working. Recommend closing `wontfix` on the
-  F56/F62/F63 grounds. **Awaiting the user's decision.**
-- **F49(c)** (a salvage click on a station's connector hex reaches the station) — mechanism
-  confirmed and nasty, but the two shipped demolish-mode guards beside it prescribe
-  *different* remedies, so choosing one is a design decision. **Worth a user decision;** if
-  the answer is "the click does nothing", the fix is four lines.
+**Screened items — both user decisions made 2026-07-25 (wave-4/5 QA session):**
+- **F42** (buildings placeable on active dust devils) → **CLOSED `wontfix`** on the
+  F56/F62/F63 grounds: the guard it names exists to stop units being *entombed*, a dust
+  devil has no footprint and cannot be trapped, the omission is in declared overridable
+  class members, and no shipped text promises the block.
+- **F49(c)** (a salvage click on a station's connector hex reaches the station) →
+  **user chose "the click does nothing"; IMPLEMENTED** in `Fix_TrainMinors.lua` as a
+  demolish-mode pre-guard on `TrackGridElement:SelectionPropagate`.
 
 **Every wave-5 fix is unverified in-game.** Highest-risk items for the QA audit, in order:
 **F26** (100-line copy of `WaitBombard` — mechanically diffed against the shipped body,
