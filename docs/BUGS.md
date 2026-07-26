@@ -54,8 +54,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed  |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
-| F42 | Buildings placeable on active dust devils                | P3  | high | todo   |
-| F43 | Layout construction bypasses tech locks                  | P3  | high | todo   |
+| F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
+| F43 | Layout construction bypasses tech locks                  | P3  | high | fixed  |
 | F44 | One-hex track salvage can delete the entire track        | P1  | high | fixed  |
 | F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | fixed  |
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | fixed  |
@@ -705,17 +705,74 @@ Scope: only the "have" half. Rare traits GAINED later (schools, sanity breakdown
 `GetRandomTrait` with no `rare_weight_mod` at all, so neither tech has ever affected them
 — separate defect, not touched.
 
-### F42 — Buildings placeable on active dust devils (P3, high)
+### F42 — Buildings placeable on active dust devils (P3, high)  `[blocked — wontfix candidate: screened, no defect found; user decision needed]`
 `AreThereBlockingUnitsUnderneath` (`Construction.lua:1895-1914`) queries only
 Drone/BaseRover; `BaseDustDevil` inherits `Object` (`DustDevils.lua:245-247`) — never
 checked anywhere in Construction\. **Fix:** wrap `ConstructionController:UpdateConstructionStatuses`-
 family to add a dust-devil proximity check (or extend the blocking query).
 
-### F43 — Layout construction bypasses tech locks (P3, high)
+*Screened in the wave-5 build leg — the observation is correct, the verdict is not.*
+Every factual claim in the entry holds: `ConstructionController.BlockingUnitClasses` really
+is `{"Unit"}` (`Construction.lua:1905`), `BlockingUnitsFilter` really admits only disabled
+Drones and BaseRovers (`:1895-1897`), `BaseDustDevil` really is a plain `Object`, and
+`Construction\` really never mentions a dust devil. What is missing is any evidence that
+it was ever supposed to. Weighing the F56 signals:
+* **The guard has a different job.** It exists to stop a unit being entombed under a new
+  building — hence *disabled* Drones (the ones that cannot walk away) and BaseRovers.
+  A dust devil has no hex footprint, no collision and no grid presence; it follows a
+  trajectory (`DustDevils.lua:326`) and deletes itself on a watchdog (`:312`). It can be
+  neither trapped nor harmed, so the guard's purpose does not reach it. Compare F30, where
+  entombment of a real rover *was* the defect.
+* **The omission is named and overridable.** `BlockingUnitClasses` and
+  `BlockingUnitsFilter` are declared class members, exactly the shape the F56 screen calls
+  "designed scope, stated in a place a modder can change".
+* **No shipped text promises it.** There is no dust-devil `ConstructionStatus`; the only
+  "can't build here" weather text, `DontBuildHere` — *"Can't build on dust geysers"*
+  (`Construction.lua:62`) — is about static geyser terrain (`Geysers.lua:1-26`, marked into
+  the object hex grid at map load) and is implemented and working.
+* **The sibling does it the other way, deliberately.** The game models exactly one
+  weather-gated placement rule — `RocketLandingDustStorm`, *"Rockets can't land during
+  Dust Storms"* (`Construction.lua:85`) — and implements it. Building through meteors,
+  cold waves, dust storms and dust devils is otherwise normal play: a devil passing over a
+  new site dusts it, which is what dust devils are for.
+
+Adding a placement block would be a new rule, not a repair — FIX_POLICY §4. Recommend
+closing `wontfix` on the same grounds as F56/F62/F63. **No fix written; awaiting the
+user's decision.**
+
+### F43 — Layout construction bypasses tech locks (P3, high)  `[fixed: Code/Fix_LayoutTechLock.lua — latent in the shipped game, see below]`
 `LayoutConstructionController:Activate` (`LayoutConstruction.lua:231-263`): tech-locked
 building with no prefab item → `require_prefab=false` → `add=true`, sub-controller
 placed with no research gate. **Fix:** wrap `Activate`: filter items where
 `not tech_enabled and not self.prefab`.
+
+Confirmed against the shipped body: `tech_enabled` is computed at `:238` and consulted
+only through `require_prefab` at `:241`, which covers one case — "locked but purchasable
+as a resupply prefab". Locked-and-unobtainable has no branch and falls through the `or`
+at `:242` into `add = true`. Outside a layout the tech gate is the build menu
+(`GetBuildingTechsStatus`, `X\BuildMenu.lua:321-356`), which a layout entry never passes
+through, so nothing else catches it.
+
+**Latent — reachability stated for the record:** exactly one layout ships,
+`SelfSufficientDome` (`Data\LayoutConstruction.lua:3-54`, used by
+`Data\BuildingTemplate\SelfSufficientDome.lua:16`), and none of its seven entries carries
+a `BuildingTechRequirements` row, so no vanilla layout can reach the hole. Fixed on the
+same grounds as F27/F29 — the next layout, from a mod or a future update, inherits it. On
+the shipped data the fix is a provable no-op.
+
+*Implemented slightly differently:* the sketch's filter (`not tech_enabled and not
+self.prefab`) drops entries the shipped code deliberately keeps — those covered by a
+prefab the colony already owns, which `:244-248` re-enables through a stateful
+`prefab_counters` handout. The wrapper instead re-reads what the shipped loop recorded
+(`self.prefab_items[entry]`, `self.prefab`, `self.skip_items[entry]`), so the extra
+condition is exactly `tech_enabled or self.prefab or an owned prefab`, and the counter
+never has to be re-derived. Dropped controllers get the same teardown
+`LayoutConstructionController:Deactivate` (`:310-317`) uses, and are marked in
+`skip_items`, which is what `PlaceCursors` (`:341-342`) consults.
+
+Deliberately untouched: `GetLayoutConstructionBuildingCost` (`:469-491`) and the
+description builder (`:570-584`) walk the whole preset and already ignore `skip_items`
+for the shipped prefab skip too — a separate cosmetic inconsistency, not this defect.
 
 ### Verified FIXED in remaster (do not fix; note in release credits/research)
 - Schools training already-owned perks (`FilterCompatibleTraitsWith`, `Traits.lua:1051-1074`).

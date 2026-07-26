@@ -198,11 +198,12 @@ come back.
   pipe connections were being torn down against the dome instead of against the
   building, leaving stale plumbing behind that a repair pass re-ran on every
   load.
-- Three more repairs are aimed at other mods and future updates rather than at
+- Four more repairs are aimed at other mods and future updates rather than at
   anything you can see today: battery and tank charge-rate modifiers now reach
   the power grid, swapping one researched technology for another keeps the
-  research counters straight, and two scripting-system helpers do what their own
-  descriptions promise.
+  research counters straight, two scripting-system helpers do what their own
+  descriptions promise, and pre-set building layouts check your research before
+  handing you a building.
 - Command Center graphs stop lying about consumption. The "Consumed" figure in
   the caption left out maintenance, so Machine Parts and Electronics read as
   almost nothing next to a full-height bar. The caption now counts what the bar
