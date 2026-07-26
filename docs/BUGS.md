@@ -1565,6 +1565,10 @@ Ack set persisted as an absent-tolerant `SMRFixPack_*` handle set (policy §3).
 where dismissal already holds (F32 trace).
 **Gate:** PT-38 first (verify the 2-real-minute cadence in play — the design assumption
 this module answers), then build + probe in a wave-4+ leg.
+
+### F64 — Demolishing a station vaporizes its trains ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
+*(Header restored 2026-07-26 — it was lost in an earlier doc edit; the entry body below
+was always here, sandwiched between D02 and F65.)*
 Trains are a colony-counted resource (`city.available_prefabs["Train"]`, `City.lua:433-440`)
 — consumed on deploy (`Track.lua:428-457`), refunded ONLY via `Train:OnDemolish`
 (`Train.lua:205-209`), which only runs through `Demolishable:DoDemolish`. Bare
