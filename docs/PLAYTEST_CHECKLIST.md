@@ -275,6 +275,15 @@ meteor =49 game hours t=27910297
 > (t=30146007 onward) are console-triggered — do not count them as cadence. PT-01
 > verdict pending only a longer silence-watch; the watchdog self-reports if the
 > wedge recurs.
+> **Tower warning lead VERIFIED (2026-07-26):** storm schedule shortened to 45h
+> via the descriptor + `RestartGlobalGameTimeThread("MeteorStorm")` (game's own
+> thread, real warning machinery) → countdown banner "Meteor Storm — Starts in
+> 1 Sol 17 h" appeared ~3h in — the full ~42h tower-extended lead (6h + 12h×3,
+> matching the Sensor Tower panel's "Disaster Early Warning: 1 Sol 18h"); stock
+> lead without towers would read "Starts in 6 h". Towers lengthen WARNING, not
+> gaps — the PT-01 direction check is closed on live evidence. (Storm timings
+> restored to stock afterwards; the storm's own MeteorsDisaster logger print is
+> console-triggered — not cadence.)
 ---
 
 ## PT-02 — Upgrade-modifier leak across build → upgrade → salvage → rebuild · covers **F03**
