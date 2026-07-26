@@ -1541,6 +1541,46 @@ roughly 200 Metals per section.
 
 ---
 
+## PT-46 — Splitting a track under a running train · covers **F49(b)**, checks **F49(a)/(d)**
+
+F49(b) is **not fixed** — this test is what decides whether there is anything to fix.
+Nothing in any of the three partial-salvage branches of `DemolishAndSplitTrack` reads
+or writes the track's `assigned_vehicles`, so the surviving track keeps its whole train
+list while its elements shrink, and the new half is created with none. What a train
+standing on a removed or re-homed element actually does cannot be read off the source.
+
+**Setup:** a long track (20+ hexes) between two stations with **at least one train
+running on it**. Console open (Enter / Alt-Shift-C) for the counts.
+
+**Trigger:**
+1. With a train **mid-journey, out on the open track**, salvage a few hexes in the
+   middle so the line splits in two.
+   - **EXPECTED (the benign outcome):** the train is stored back as a prefab, or it
+     re-routes; either way you can account for every train you owned.
+   - **SURPRISE looks like:** the train vanishes with no notification, sits frozen
+     on a dead stub forever, drives through the gap, or the log shows a
+     `[LUA ERROR]` mentioning `Train`, `Track` or `RebuildTrainRoutes`.
+2. Count them: before and after, run
+   `local n = 0 for _, t in ipairs(MainCity.labels.TrackBase) do n = n + #t.assigned_vehicles end print(n)`
+   and compare with the trains you can actually see plus your stored train prefabs.
+3. Repeat with the train **stopped at a platform** rather than out on the line.
+
+**While you are here — the two halves of F49 that ARE fixed:**
+4. `print(MainCity.labels.TrackBase[1].max_vehicles)` on a track before and after
+   you salvage most of it away. **EXPECTED:** the number drops (1 for a track under
+   30 hexes, 0 for an empty one). Confirm you can still assign trains up to that
+   number and no further.
+5. Look at any track placed instantly by the map (not built by drones): it should be
+   the same colour as track you built yourself, not pipe-coloured.
+
+`Result (b — train accounted for after split / after platform split):` _____________________________________________
+
+`Result (d — cap follows length):` _____________________________________________
+
+`Result (a — instant track colour):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**

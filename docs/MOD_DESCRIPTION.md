@@ -152,6 +152,12 @@ come back.
   back the same few Metals as the shortest possible stub. Salvaging part of a
   track returned nothing at all — now those pieces come back as a stockpile
   where they stood.
+- A track's train limit follows its real length. It was worked out once, when the
+  track was first laid, and never again — so salvaging a long line down to a stub,
+  or cutting one in two, left the pieces carrying the original's limit. Existing
+  saves are corrected on load.
+- Track placed instantly (map setup and similar) is coloured like track rather
+  than like pipes. It used to correct itself only if you changed colour scheme.
 - Trains respect the resource switches on a station. Unloading ignored them
   completely, so a train would drop Waste Rock at a station you had told not to
   store Waste Rock — and the cargo planner would then send another train to haul

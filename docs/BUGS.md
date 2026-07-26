@@ -61,7 +61,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | fixed  |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | fixed  |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
-| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | todo   |
+| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | fixed  |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | fixed  |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | fixed* |
@@ -900,13 +900,76 @@ and after. If it holds up, the pass belongs in `90_SaveSanitizer.lua` behind a o
 both cases → implement in the sanitizer, skipping tracks that carry repair sites; a dirty
 FAIL on the damaged-track case → close `wontfix — repair riskier than the defect`.*
 
-### F49 — Train minors bundle (P3, med)
+### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — items (a) and (d); (b)(c)(e) screened and deliberately not fixed, see below]`
 (a) instant-built tracks use pipes palette (`Tracks.lua:385` vs `TrackElement.lua:791`);
 (b) `DemolishAndSplitTrack` ignores `assigned_vehicles` — mid-transit trains silently
 stored/self-destruct (`Train.lua:249-251,535-541`); (c) salvage click on invisible
 connector hexes propagates to the STATION (`TrackElement.lua:299-300`); (d) `max_vehicles`
 never recomputed after merge/split (`Track.lua:64-65`); (e) dead validation
 (`TrackRequiresTwoStations` never inserted; `CanContinueTrack` never called).
+
+**Screened item by item in the wave-5 build leg. Two fixed, three not — and none of
+the three is a no-op waiting to be written.**
+
+**(a) FIXED.** Confirmed: `Tracks.lua:385` captures `GetPipesPalette()` and `:412`
+applies it to every element the instant `place_track` path creates. Every other track
+path uses `GetTracksPalette()` — the completed-construction path
+(`TrackElement.lua:791`), the construction cursor (`GridConstruction.lua:220`) and,
+decisively, the colony colour-scheme refresh, which repaints *every* `TrackGridElement`
+on every map with it (`ColonyColorScheme.lua:120-121`). The palettes really do differ
+(`ColonyColorScheme.lua:69-77`). Consequence: instant track is pipe-coloured until the
+player changes colour scheme, at which point it silently corrects itself — which is also
+why the scheme refresh is the authority on the right answer. Fixed with a post-wrapper on
+`TrackGridElement:GameInit` applying exactly what the refresh applies; construction sites
+are skipped, as the shipped GameInit skips them.
+
+**(d) FIXED.** Confirmed and slightly worse than tracked: `Track.lua:65` is the **only**
+assignment to `max_vehicles` anywhere in the game (elsewhere it is read only, via
+`StationsLink:GetMaxVehicles` → `CanAddVehicle`, `StationsLink.lua:28-32`; class default
+2, `:8`), and it runs once, in `TrackBase:GameInit`. Salvage shortens or splits a track
+(`TrackElement.lua:503-541`), and the `new_track` created at `:547` runs its GameInit
+*before* `ExpandTrackFromElement` (`:553-554`) gives it any elements at all. Fixed by
+recomputing with the shipped formula at the two points that mark an element-set change —
+`TrackBase:UpdateEndElements` (called from all three partial-salvage branches, `:516`,
+`:530`, `:556-557`, always after the arrays are repopulated) and `ExpandTrackFromElement`
+(the merge/expand path) — plus a `PostLoadGame` sweep for saves already carrying a stale
+cap (PostLoadGame, not LoadGame: `SavegameFixups.RemoveTrackDoubleTurns`,
+`TrackElement.lua:839-843`, re-processes track elements after `Msg("LoadGame")`).
+
+**(b) NOT FIXED — mechanism confirmed, consequence not establishable from source.**
+Nothing in any of the three partial branches of `DemolishAndSplitTrack` reads or writes
+`assigned_vehicles`; the surviving `track_obj` keeps its whole train list while its
+element set shrinks, and the `new_track` that takes the other half is created with none.
+The whole-track branch is fine — `TrackBase:OnDemolish` → `DestroyAssignedTrains`
+(`Track.lua:159-166`) handles it, and trains are stored as prefabs rather than lost. What
+a train physically standing on a removed or re-homed element then does cannot be read off
+the source. **Playtest item PT-46.**
+
+**(c) NOT FIXED — a design decision, not a repair.** The mechanism is real:
+`TrackGridElement:SelectionPropagate` returns `self.station` for a connector element
+(`TrackElement.lua:298-300`), and `SelectionMouseObj` runs every candidate through
+`SelectionPropagate` (`SelectionModeDialog.lua:44-50`), so in demolish mode the object
+handed to `DemolishModeDialog:OnMouseButtonDown` can be the station, which is a Building
+and gets `ToggleDemolish()` (`Construction.lua:2903-2906`). The reason to stop is that the
+shipped code contains **two** demolish-mode guards against exactly this class of
+propagation and they prescribe *different* remedies: `:54-56` throws the object away
+(`precise, terrain_cursor_obj = false, false`) while `:84-88` substitutes the underlying
+element. Both are about `TrackBase`; neither covers the station. Choosing which one the
+station case should follow — click does nothing, or click salvages the connector element
+and thereby splits a track — is a gameplay decision with real consequences either way, and
+FIX_POLICY §4 does not let us invent it. **Worth a user decision;** if the answer is
+"nothing happens", the fix is four lines shaped like `:54-56`.
+
+**(e) NOT FIXED — dead code whose revival is a redesign.**
+`GridConstructionController:CanContinueTrack` (`GridConstruction.lua:478-491`) is never
+called from anywhere (its passage twin `CanContinuePassage` is, at `:449`), and
+`ConstructionStatus.TrackRequiresTwoStations` is referenced only from inside it — so the
+authored error "The Track must start and end at a Station." can never appear. Notable
+detail: the shipped file marks its three sibling statuses `-- unused` and leaves this one
+unmarked (`TrackGridConstruction.lua:1-27`), i.e. the author believed it live. Reviving it
+needs BOTH an invented call site in the drag/placement flow AND an invented condition that
+inserts the status (without which `CanContinueTrack` returns false forever). That is two
+pieces of new design, not a repair.
 
 ### Trains: verified fixed / working-as-designed
 Trains blocking demolition: FIXED (trains stored as prefabs, `Track.lua:159-166`).
