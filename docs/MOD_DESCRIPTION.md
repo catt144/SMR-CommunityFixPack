@@ -204,6 +204,12 @@ come back.
   pipe connections were being torn down against the dome instead of against the
   building, leaving stale plumbing behind that a repair pass re-ran on every
   load.
+- Story steps that collapse a cave can no longer take the whole story with them.
+  Eight places in the underground anomaly and Buried Wonder sequences ask for a
+  cave-in on the underground map by name rather than on the map they are running
+  on, and if that map does not exist — the "No Underground and Asteroids" rule —
+  the request errors out and the sequence stops where it stands. It now declines
+  quietly and the story continues.
 - Drones keep an accurate list of the places they could not reach. Every change to
   the map's passability — a building completed, terrain reshaped, a route opened —
   rebuilt that list in a way that clung to buildings you had already salvaged and
