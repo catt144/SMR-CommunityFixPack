@@ -34,10 +34,15 @@
 -- -- FIX. Replacement because the defect is a statement in the middle of the
 -- function, with the call that matters on the very next line.
 --
--- The three shipped `assert` lines are dropped from the copy: asserts do not
+-- The four shipped `assert` lines are dropped from the copy: asserts do not
 -- unwind in this engine, so they are log lines rather than guards, and the
 -- `if not status then return end` immediately after the first one is the real
--- check.
+-- check. One of them was load-bearing anyway: `assert(tech_def.group ==
+-- status.field)` (:690) INDEXES tech_def while evaluating its argument, so an
+-- unknown `tech_id_new` raises there — before any state is mutated. The copy
+-- keeps that ordering with an explicit guard (QA audit, 2026-07-25): without
+-- it, the raise moved to after the `tech_status` swap and left the table
+-- holding an entry under a nonexistent id with the queued tech dropped.
 
 SMRFixPack.Register("ReplaceTechCount", {
 	title = "Research:ReplaceTech keeps the per-field researched counter honest",
@@ -56,6 +61,10 @@ SMRFixPack.Register("ReplaceTechCount", {
 			if not status then return end
 
 			local tech_def = TechDef[tech_id_new]
+			-- FIX (F28, QA): shipped raises here via its assert's argument
+			-- (`tech_def.group`) when tech_id_new is unknown — before mutating
+			-- anything. Keep that ordering; don't corrupt tech_status first.
+			if not tech_def then return end
 
 			local is_queued = self:TechQueueIndex(tech_id)
 			if is_queued then
