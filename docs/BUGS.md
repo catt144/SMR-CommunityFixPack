@@ -105,7 +105,18 @@ Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbe
 DustStorm.lua:413, DustDevils.lua:189, surface quake Marsquake.lua:43). Matches live
 Paradox-forum report. **Fix:** wrap FUNC slot (index 3) of `PeriodicRepeatInfo["UndergroundMarsquake"]`.
 
-### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed: Code/Fix_MeteorFrequency.lua — replaces GlobalGameTimeThreadFuncs.Meteors + restart on LoadGame]`
+### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed*: Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL 2026-07-25: meteors STOPPED entirely, regression hunt queued]`
+
+**PT-01 FAIL (2026-07-25, user confirmed NO reloads):** Variant B, max-threat map.
+Natural strikes at ~sol 5.5, 7.5 (+60h), 8.4 (+39h), 10.3 (+39h); 3 Sensor Towers built
+~sol 10.5; warning received; strike at sol 12.5 (logger printed "+57 game hours") — then
+**nothing through sol 36** (~560+ game hours of silence, band is 35-60h) with no reload
+to re-roll the interval. The logger prints per MeteorsDisaster call, so silence = the
+thread stopped calling, not a logging gap. Suspects for the next session: the fixed
+thread's loop dying after a strike (check the playtest logs Mars.exe-20260725-18.34.12 /
+19.04.10 for a [LUA ERROR] near the last strike), the Sensor-Tower warning path
+(towers went up between strikes 4 and 5), or the descriptor re-read. Investigation
+speced in docs/FABLE_NEXT_PROMPT.md.
 `Lua\Meteors.lua:277-292` — the long wait `spawn_time - warning_time` was mangled into a
 dead `if` (`GameTime() - start_time > ...` evaluated immediately after `start_time = GameTime()`,
 always false); only remaining wait is `Sleep(Min(spawn_time, warning_time))` where
@@ -1567,6 +1578,22 @@ same outcome as the ≥2-hex-gap workaround, without the fight. Genuinely sharin
 between two owners is a redesign of the connector model, not a defect repair (FIX_POLICY §4).
 The "double-turn constraint refuses connections silently" half (`TrackElement.lua:336-345`)
 is NOT addressed — it is a separate placement rule, not part of this loop.
+
+**Recovery-gap repair QUEUED (user decision 2026-07-25: "rebuild instead of half
+baking it").** The QA audit found that when the guard declines, the guarded building
+owns no element on the contested hex, and after the WINNING building is demolished
+nothing reschedules the survivor's rebuild — every engine trigger notifies only the
+dying element's own station (`TrackElement.lua:193-199`; `Track.lua:179-183`;
+`Msg("TrackDemolished")` only fires from player track demolition → global rebuild,
+`TrainTransport.lua:156-159`) — so the survivor stays connectorless until any track
+demolish or a re-place. The user chose the REPAIR over accept-and-document: add a
+rebuild trigger to the demolition path — wrap `TrackConnectedObjBase:Done`
+(declaring class, TrainTransport.lua:14) to, after the shipped body runs, find nearby
+`TrackConnectedObjBase` objects (connector spots reach ≤ ~2 hexes) that are valid and
+not being destructed, and `CreateGameTimeThread(o.CreateConnectorElements, o)` for
+each — the same deferred pattern the engine itself uses (`Track.lua:181-183`), and the
+F66-guarded `CreateConnectorElements` makes the rebuild idempotent for buildings that
+already own their elements. Spec + verification plan in docs/FABLE_NEXT_PROMPT.md.
 Probe: `TrackConnectorPingPong` in `40_Probes_Wave4.lua`. Playtest: PT-41.
 
 ### F67 — Auto-lander launches empty and ping-pongs (P1, high)  `[fixed: Code/Fix_LanderEmptyLaunch.lua]`

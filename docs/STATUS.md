@@ -3,13 +3,17 @@
 Updated: 2026-07-25 late (**wave-4/5 QA leg DONE — merged to main, A/B pair CLEAN
 (58 PASS / 0 FAIL / 0 ERROR, 66/67 active), 14-audit fan-out done, 7 repair commits
 landed** — see "QA session (waves 4+5)" below. Prior entry: wave-5 build leg wrap-up).
-**One prompt left, one trigger:**
+**Two prompts, two triggers:**
+- `docs/FABLE_NEXT_PROMPT.md` — the NEXT Fable work session: the F02 regression hunt
+  (PT-01 FAILed with NO reloads — user confirmed — so the meteor thread genuinely
+  stopped) and the F66 rebuild-trigger repair (user decision 2026-07-25: "rebuild
+  instead of half baking it"), plus the queued tail (F47 under-refunds, §1.5 version
+  tags, MarsDebug install pass).
 - `docs/FABLE_PLAYTEST_PROMPT.md` — processes the user's manual playtest report
   (PASS→`tested` flips, FAIL→new findings, the PT-36/37/38 decision gates). The
-  playtest RESUMES on the merged wave-4/5 pack; PT-01 FAIL and PT-03 FAIL from the
-  first sitting are already diagnosed/repaired (see the QA session section) — PT-03
-  needs a re-run, PT-01 needs the user's reload-frequency answer first.
-- ~~`docs/OPUS_BUILD_PROMPT.md`~~ done; ~~`docs/FABLE_QA_PROMPT.md`~~ done (this session).
+  playtest RESUMES on the merged wave-4/5 pack; PT-03 needs a re-run (F44 rework);
+  PT-01 needs a fresh run once F02 is repaired.
+- ~~`docs/OPUS_BUILD_PROMPT.md`~~ done; ~~`docs/FABLE_QA_PROMPT.md`~~ done (2026-07-25).
 BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
@@ -144,10 +148,15 @@ corrections + F42 (NOTE: accidentally committed the baseline's emptied metadata 
 in the working tree), a38cbf2 F44 rework, cdff2ce F75/F18 status. TestKit: 80de593
 harness hardening, bafbd61 probe wedge fix + 15-min watchdog.
 
-**Open after this session:** F66 decision (user); PT-01 reload answer (user); PT-03
-re-run; F47 composition under-refunds (future leg); MarsDebug [install] pass for the
-wave-4/5 fixes' install halves (attended, SetupOnly mode); game-version tags on
-full-replacement headers (release checklist).
+**Open after this session (both user answers now in, 2026-07-25 late):**
+- **PT-01: NO reloads** → F02 is genuinely regressed (meteors stopped for 560+ game
+  hours on a max-threat map after Sensor Towers went up) — REOPENED `fixed*`,
+  investigation speced in docs/FABLE_NEXT_PROMPT.md Task 1.
+- **F66: user chose the rebuild-trigger repair** over accept-and-document — spec on
+  the F66 entry + docs/FABLE_NEXT_PROMPT.md Task 2.
+- PT-03 re-run (user, next sitting); F47 composition under-refunds; MarsDebug
+  [install] pass for wave-4/5 (attended, SetupOnly); game-version tags on
+  full-replacement headers (release checklist).
 
 ## What this project is
 
