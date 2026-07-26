@@ -1038,6 +1038,21 @@ needs BOTH an invented call site in the drag/placement flow AND an invented cond
 inserts the status (without which `CanContinueTrack` returns false forever). That is two
 pieces of new design, not a repair.
 
+### Recorded latent (wave-5 screening, no fix): `DivRound(cost, res)` in `BreakTrackElement`
+`Track.lua:643-652` — under the SafeTransport tech the repair-cost loop reads
+`reduced_costs[res] = DivRound(cost, res)`, dividing by the **resource-id string** instead
+of by 2. It is a real typo and would raise (arithmetic on a string) if it ever ran, but it
+does not: the loop only runs when `cgl.construction_costs_at_start` is a non-empty table,
+and it never is at that point. `BreakTracks` (`Meteors.lua:599-613`) reuses one
+`broken_cg` across every element of a track in a strike, so the first call finds the leader's
+`construction_costs_at_start` still `false` (the group was just created) and assigns `{}`,
+and every later call in the same synchronous loop iterates that empty table.
+`GatherConstructionResources` cannot populate it in between — nothing yields. A second
+strike starts a fresh group. **Also checked and NOT a defect:** the halving above it does
+not compound across calls, because `:642` reassigns `construction_cost_multiplier` from
+`(#cg - 1) * 100` absolutely before each halving. No entry filed and no fix written — the
+line is unreachable, and writing a fix for it would be the F10 mistake.
+
 ### Trains: verified fixed / working-as-designed
 Trains blocking demolition: FIXED (trains stored as prefabs, `Track.lua:159-166`).
 Destroyed stations leaving undeletable track: addressed (`TrainTransport.lua:14-35`) —

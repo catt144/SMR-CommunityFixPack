@@ -1,17 +1,16 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-26 (**wave-4 BUILD leg done — 14 new fix modules on the `wave4`
-branch, NOT merged to main**; see "Wave 4" below. Prior entry: QA session 5 wrap-up —
-wave-3 A/B CLEAN, all tracker decisions made, session prompts staged).
-**Three prompts, three triggers:**
-- `docs/OPUS_BUILD_PROMPT.md` — Opus **wave-5** build leg (the eight-entry P2/P3 tail).
-  Safe to run DURING the user's playtest: it CONTINUES on the existing `wave4` branch
-  in the `-wave4` worktrees and never touches the junctioned main trees the game loads
-  from. It must not branch off main — wave 4 is unmerged, so main lacks the 14 modules
-  wave 5 builds on top of.
+Updated: 2026-07-26 (**wave-5 BUILD leg done — the tracker's `todo` queue is now EMPTY.
+21 new fix modules total on the `wave4` branch, NOT merged to main**; see "Wave 5" and
+"Wave 4" below. Prior entry: QA session 5 wrap-up — wave-3 A/B CLEAN).
+**Two prompts left, two triggers:**
+- ~~`docs/OPUS_BUILD_PROMPT.md` — Opus wave-5 build leg~~ **DONE.** Nothing is queued for
+  a wave-6 build leg: every tracked entry is `fixed`, `fixed*`, `tested`, `wontfix`, or
+  parked on a named playtest gate. The prompt file is stale and should be rewritten only
+  if the playtest produces new findings.
 - `docs/FABLE_PLAYTEST_PROMPT.md` — processes the user's manual playtest report
   (PASS→`tested` flips, FAIL→new findings, the PT-36/37/38 decision gates).
-- `docs/FABLE_QA_PROMPT.md` — QA leg, AFTER both of the above: merges `wave4`
+- `docs/FABLE_QA_PROMPT.md` — QA leg, AFTER the playtest: merges `wave4`
   to main and runs the A/B pair over waves 4 AND 5 together, audits divergences. BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier
@@ -275,6 +274,7 @@ the tracker. **Only F48 is still open** — the other four are closed.
 |----|------------------|------------------------|
 | **F56** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds as F62/F63.** Screened in the wave-4 build leg: the cited code is designed scope (`GetAutoGatherDeposits` is a declared accessor; the `Automation_Unload` rocket exclusion goes through the Relaunched `IsRocketClass` shim, i.e. maintained intent; auto mode promises only "gather resources"). **No standalone opt-in** — if revisited it belongs in `Opt_ClassicRockets` beside D01's unwritten export half, never in an `Opt_AutoRocketOffload` of its own. | — done. Rides on whatever design decision D01's export half gets, or stays closed. |
 | **F32** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** The shipped data already carries the fix (`NotWorkingBuildings` is now `Suppressable`); the other two presets are one-shot adds. The residual by-design annoyance (2-real-minute window, per-category suppression, no per-building ack) is spun out as **D02** — a planned `Opt_AcknowledgedWarnings` module, gated on **PT-38**; MOD_DESCRIPTION carries a player-facing "looks like a bug, isn't" explainer. | — done. D02 build belongs to a wave-4+ leg after PT-38. |
+| **F42** | **NEW, wave-5 screening.** `blocked` — wontfix candidate. The tracked observation is entirely correct and does not add up to a defect: the guard it names exists to stop units being entombed, a dust devil has no footprint to be entombed in, the omission sits in declared overridable class members, no shipped text promises the block, and the game's one weather-gated placement rule (`RocketLandingDustStorm`) is implemented and working. Full write-up on the entry. | **A user decision.** Recommend `wontfix` on the F56/F62/F63 grounds. |
 | **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
 | **F62** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** Verified identical to the original game (same one-hop algorithm, same two transitive-predicate callers): carried-forward dev vision in both games, breaks nothing. No opt-in module planned. | — done. |
 | **F63** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds** — no training term ever existed in either game's emigration score. | — done. |
@@ -324,17 +324,74 @@ export half, not in a module of its own (same request, same machinery, and shipp
 apart would let a player enable emptying without refilling). Full write-up on both entries.
 
 **Still `todo` after wave 4 — eight entries, the P2/P3 tail:** F25, F26, F31, F42, F43,
-F47, F49, F57. Suggested order for a wave-5 build leg (largest first): **F47** track
-salvage refunds, **F42/F43** placement/tech-lock bypasses, **F49** train minors bundle,
-**F57** drone/transport minors bundle, **F31** anomaly cave-in map, then **F25/F26** (both
-cosmetic/legacy-only). Seven entries are `fixed*` partials whose open half is recorded on
-the entry: F15, F18, F29, F34, F52, F55, F58, F59.
+F47, F49, F57. ~~Suggested order for a wave-5 build leg~~ **All eight were taken in wave 5
+— seven implemented, F42 screened to `blocked`. Nothing is `todo` any more.** The `fixed*`
+partials whose open half is recorded on the entry are now: F15, F18, F29, F34, F49, F52,
+F55, F57, F58, F59.
 
 **Every wave-4 fix is unverified in-game.** The four full replacements (F66
 `CreateConnectorElements`, F21 `BoardVehicle`, F24 `MoveInside`, F28 `ReplaceTech`) and the
 one global-function replacement (F22 `GetGridGlobalStorage`) are the highest-risk items for
 the QA audit; F20's per-call instance `GetProperty` override and F65's PostLoadGame sweep
 are the two most unusual techniques in the pack and deserve a look.
+
+## Wave 5 — build leg DONE (branch `wave4`, NOT merged, NOT probe-run)
+
+**7 new fix modules, 7 new probes, 3 new playtest items (PT-45..PT-47).** Everything lives
+on the `wave4` branch beside wave 4's; main is untouched, the game was never launched, and
+**no probe has been run** — the A/B pair belongs to the QA leg, which covers waves 4 and 5
+together. **The BUGS.md `todo` queue is now empty.**
+
+| ID | Module | Note |
+|----|--------|------|
+| **F47** | `Fix_TrackSalvageRefund` | sums every construction group's stamp instead of reading one; + partial-salvage refund |
+| **F43** | `Fix_LayoutTechLock` | latent — no shipped layout has a tech-gated entry |
+| **F49** | `Fix_TrainMinors` | `fixed*` — items (a) palette and (d) train cap; (b)(c)(e) screened, see the entry |
+| **F57** | `Fix_DroneTransportMinors` | `fixed*` — (a) latent restrictor leak and (b) the unreachables table; (c) would undo F61 |
+| **F31** | `Fix_AnomalyCaveInMap` | guards the argument, not the environment — the sketch's test would have killed marsquake cave-ins |
+| **F25** | `Fix_TechDescriptionBuilding` | preset patch reusing the original translation id, so localised builds are untouched |
+| **F26** | `Fix_BombardmentSpread` | the pack's **sixth and largest full replacement** (100 lines) |
+
+**Screened and NOT implemented — one entry needs a user decision:**
+- **F42** (buildings placeable on active dust devils) → **`blocked`, wontfix candidate.**
+  Every factual claim in the entry is true and none of it adds up to a defect: the guard it
+  names exists to stop units being *entombed*, a dust devil has no footprint and cannot be
+  trapped, the omission is in declared overridable class members, no shipped text promises
+  the block, and the one weather-gated placement rule the game does model
+  (`RocketLandingDustStorm`) is implemented and working. Recommend closing `wontfix` on the
+  F56/F62/F63 grounds. **Awaiting the user's decision.**
+- **F49(c)** (a salvage click on a station's connector hex reaches the station) — mechanism
+  confirmed and nasty, but the two shipped demolish-mode guards beside it prescribe
+  *different* remedies, so choosing one is a design decision. **Worth a user decision;** if
+  the answer is "the click does nothing", the fix is four lines.
+
+**Every wave-5 fix is unverified in-game.** Highest-risk items for the QA audit, in order:
+**F26** (100-line copy of `WaitBombard` — mechanically diffed against the shipped body,
+identical apart from the function header, the dropped non-unwinding `assert`, and the one
+`-- FIX:` line, but it replaces a whole disaster path); **F47's** partial-salvage wrapper on
+`TrackGridElement:Demolish` (places resource stockpiles from a before/after snapshot);
+**F49's** replacement of the global `ExpandTrackFromElement`; and **F43's** teardown of
+live construction controllers inside a post-wrapper on `Activate`.
+
+**New engine facts learned this leg (do not re-derive):**
+- **Track is billed per construction GROUP, not per hex.** Groups hold at most
+  `const.ConstructiongGridElementsGroupSize` = 5 elements (`_GameConst.lua:480`), and
+  `Tracks.lua:463` leaves the leader's `construction_cost_multiplier` at 100 — one
+  element's cost per group. Passages do it the other way (`Passage.lua:1969`).
+- **`ConstructionGroupLeader:Complete` stamps the group's whole spend onto exactly ONE
+  finished element** — the last it completed — after suppressing every member's own
+  `MarkSpentResources` (`ConstructionSite.lua:2469`, `:2479-2489`). So
+  `construction_cost_at_completion` is one stamp per group, spread along a track. This is
+  what F47 turns on.
+- **A T can be corrected without breaking translations** by rebuilding it with the SAME
+  translation id: localised builds resolve the id and never see the literal, English builds
+  fall back to it. Minting a fresh T would push English text into every language (F25).
+- **`UndergroundMap` is a GameVar defaulting to `false`** (`RandomMapGenerator_Picard.lua:263`)
+  and stays false under the "No Underground and Asteroids" rule — eight scenario call sites
+  hand it straight to `TriggerCaveIn`, which indexes it unguarded (F31).
+- **Verify every full replacement mechanically.** F26's 100-line copy was diffed against
+  `ModTools\Src` with a throwaway Python script that strips comments and whitespace; it
+  caught nothing this time, but it is the only way to be sure a copy that large is faithful.
 
 ## Key technical facts (hard-won, do not re-derive)
 
