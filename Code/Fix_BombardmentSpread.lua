@@ -42,14 +42,23 @@ SMRFixPack.Register("BombardmentSpread", {
 		if type(rawget(_G, "WaitBombard")) ~= "function" then
 			return "WaitBombard not found (game update changed it?)"
 		end
-		local BM = rawget(_G, "BombardMissile")
-		if type(BM) ~= "table" or type(BM.HitsDome) ~= "function"
-			or type(BM.GetTimeToImpact) ~= "function" then
-			return "BombardMissile.HitsDome/GetTimeToImpact not found (game update changed it?)"
+		if type(rawget(_G, "BombardMissile")) ~= "table" then
+			return "BombardMissile not found (game update changed it?)"
 		end
-		if type(rawget(_G, "SetLen")) ~= "function" or type(rawget(_G, "sincos")) ~= "function"
-			or type(rawget(_G, "SessionRandom")) ~= "table" then
-			return "SetLen/sincos/SessionRandom not found (game update changed it?)"
+		-- FIX (QA 2026-07-25): HitsDome/GetTimeToImpact are declared on
+		-- BaseMeteor (Meteors.lua:443/:453), not on BombardMissile — at apply
+		-- time classes are not flattened, so checking BombardMissile finds nil
+		-- and deactivated this fix on every launch (the F64 lesson). Check the
+		-- DECLARING class. SessionRandom is a GameVar (Lua\_init.lua:5) and does
+		-- not exist at apply time either — the body reads it at call time, which
+		-- is fine, so it is not preflighted at all.
+		local BMet = rawget(_G, "BaseMeteor")
+		if type(BMet) ~= "table" or type(BMet.HitsDome) ~= "function"
+			or type(BMet.GetTimeToImpact) ~= "function" then
+			return "BaseMeteor.HitsDome/GetTimeToImpact not found (game update changed it?)"
+		end
+		if type(rawget(_G, "SetLen")) ~= "function" or type(rawget(_G, "sincos")) ~= "function" then
+			return "SetLen/sincos not found (game update changed it?)"
 		end
 		if type(rawget(_G, "GetRandomPassableAroundOnMap")) ~= "function"
 			or type(rawget(_G, "AddObjectToNotification")) ~= "function" then

@@ -112,19 +112,22 @@ SMRFixPack.Register("RocketInteractGuard", {
 		end
 		SMRFixPack.IsEventRocket = is_event_rocket   -- exposed for the probe
 
+		-- (QA 2026-07-25) both wrappers pass varargs through: the UnitController
+		-- call site hands a third argument (UnitControl.lua:649-653) that the
+		-- shipped body ignores today — FIX_POLICY §1.4.
 		local orig_can = RC.CanInteractWithObject
-		function RC:CanInteractWithObject(obj, interaction_mode)
+		function RC:CanInteractWithObject(obj, interaction_mode, ...)
 			-- FIX (F74): the shipped guard at RCTransport.lua:341 names only the
 			-- pre-Relaunched classes; restate it for the Universal ones.
 			if is_event_rocket(obj) then return false end
-			return orig_can(self, obj, interaction_mode)
+			return orig_can(self, obj, interaction_mode, ...)
 		end
 
 		local orig_interact = RC.InteractWithObject
-		function RC:InteractWithObject(obj, interaction_mode)
+		function RC:InteractWithObject(obj, interaction_mode, ...)
 			-- FIX (F74): same rule on the action itself (belt-and-braces).
 			if is_event_rocket(obj) then return false end
-			return orig_interact(self, obj, interaction_mode)
+			return orig_interact(self, obj, interaction_mode, ...)
 		end
 	end,
 })

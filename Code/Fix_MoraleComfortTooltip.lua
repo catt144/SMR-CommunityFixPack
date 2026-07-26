@@ -57,8 +57,11 @@ SMRFixPack.Register("MoraleComfortTooltip", {
 		local hidden = 0
 
 		local orig_update = C.UIStatUpdate
-		function C:UIStatUpdate(win)
-			orig_update(self, win)
+		-- (QA 2026-07-25) pass varargs and returns through: the live caller hands
+		-- a second argument (ipColonist.lua:134) that the shipped body ignores
+		-- today — FIX_POLICY §1.4 says don't truncate what we don't consume.
+		function C:UIStatUpdate(win, ...)
+			orig_update(self, win, ...)
 
 			if type(win) ~= "table" then return end
 			local progress = win.idProgress

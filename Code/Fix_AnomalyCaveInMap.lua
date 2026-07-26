@@ -36,11 +36,14 @@
 --
 -- *Implemented differently, on better evidence:* the tracked sketch was "wrap
 -- `TriggerCaveIn(map, pos)`: reject `map.mapdata.Environment ~= "Underground"`".
--- That would break the game's own cave-in callers — `Marsquake.lua:266,287`
--- trigger cave-ins on whatever map the quake is on, and rejecting non-Underground
--- environments there would silently cancel every marsquake cave-in. The defect is
--- an unchecked argument, not a wrong environment, so only the argument is
--- checked. The scenario data itself cannot be corrected from Lua: those calls are
+-- (CORRECTED by the QA audit 2026-07-25: an earlier version of this paragraph
+-- claimed the sketch would cancel marsquake cave-ins — false; every engine
+-- caller is already Underground-gated, Marsquake.lua:285/:294/:323-325, so the
+-- environment test would have been a no-op for them.) The real problem with the
+-- sketch is that `map.mapdata` on the very value this bug is about — `false` —
+-- raises inside the wrapper itself, merely relocating the crash into mod code.
+-- The defect is an unchecked argument, not a wrong environment, so only the
+-- argument is checked. The scenario data itself cannot be corrected from Lua: those calls are
 -- baked into generated sequence code (`Data\Scenario\*.lua` `'expression'`
 -- strings, e.g. UndergroundAnomalies.lua:195), which is compiled when the
 -- scenario preset loads and holds no hook for the map argument. Redirecting the
@@ -87,6 +90,29 @@ SMRFixPack.Register("AnomalyCaveInMap", {
 		TriggerCaveIn = wrapped
 		if rawget(_G, "TriggerCaveIn") ~= wrapped then
 			return "could not install the TriggerCaveIn wrapper"
+		end
+
+		-- FIX (QA 2026-07-25): the Cave_Of_Wonders site calls
+		-- `TriggerCaveIn(UndergroundMap, FindCaveInLocation(UndergroundMap, ...))`
+		-- — the INNER call evaluates first and indexes `map.object_hex_grid`
+		-- unguarded (CaveInRubble.lua:27), so it raised before the wrapper above
+		-- was ever entered. Same decline treatment for it: returning nil hands
+		-- TriggerCaveIn a nil pos, which its own shipped guard already handles.
+		local orig_find = rawget(_G, "FindCaveInLocation")
+		if type(orig_find) == "function" then
+			local wrapped_find = function(map, pos, radius, ...)
+				if not is_usable_map(map) then
+					local state = SMRFixPack.AnomalyCaveInMap
+					state.declined = state.declined + 1
+					state.last = tostring(map)
+					return nil
+				end
+				return orig_find(map, pos, radius, ...)
+			end
+			FindCaveInLocation = wrapped_find
+			if rawget(_G, "FindCaveInLocation") ~= wrapped_find then
+				return "could not install the FindCaveInLocation wrapper"
+			end
 		end
 	end,
 })

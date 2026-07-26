@@ -93,14 +93,33 @@ local function find_grid_check(list)
 	return nil
 end
 
-local patched = false
+local patched = false        -- a full pass ran since the last (re)load of the presets
+local ever_changed = false   -- some pass this session actually moved/retargeted entries
 
 local function patch()
 	if patched then return end
+	-- FIX (QA 2026-07-25): honor the per-fix veto here too — these OnMsg
+	-- handlers are installed unconditionally, and Register's veto only skips
+	-- apply(), so without this check a disabled fix still mutated the presets.
+	local disabled = rawget(_G, "SMRFixPack_Disabled")
+	if type(disabled) == "table" and disabled[FIX_ID] then return end
 	local defs = rawget(_G, "FactionDefs")
-	local faction = type(defs) == "table" and defs.LastTransmission
+	if type(defs) ~= "table" then return end   -- presets not loaded yet
+	local faction = defs.LastTransmission
 	local likes = type(faction) == "table" and faction.likes
-	if type(likes) ~= "table" then return end   -- presets not loaded yet
+	if type(likes) ~= "table" then
+		-- Presets ARE loaded but the faction (or its likes list) is gone — a
+		-- future update removed the target. Say so instead of staying "active"
+		-- forever with zero effect (QA 2026-07-25).
+		patched = true
+		local entry = SMRFixPack.fixes[FIX_ID]
+		if entry then
+			entry.status = "inactive"
+			entry.detail = "FactionDefs.LastTransmission not found (game update changed it?)"
+		end
+		log("%s: inactive (FactionDefs.LastTransmission not found)", FIX_ID)
+		return
+	end
 
 	local stats = { seen = 0, moved = 0, retargeted = 0 }
 	for _, like in ipairs(likes) do
@@ -133,20 +152,28 @@ local function patch()
 	patched = true
 
 	local entry = SMRFixPack.fixes[FIX_ID]
-	if stats.seen == 0 then
+	if stats.moved > 0 or stats.retargeted > 0 then
+		ever_changed = true
+		log("%s: %d storage condition(s) made effective, %d retargeted", FIX_ID, stats.moved, stats.retargeted)
+	elseif ever_changed then
+		-- FIX (QA 2026-07-25): the engine posts Msg("DataChanged", false) right
+		-- after every DataLoaded (Dlc.lua:715-717), which reruns this pass over
+		-- the presets it just corrected. Finding nothing left to do then is
+		-- SUCCESS, not "shipped data already correct" — without this branch the
+		-- fix relabeled itself inactive on every normal boot.
+		return
+	elseif stats.seen == 0 then
 		if entry then
 			entry.status = "inactive"
 			entry.detail = "Last Transmission has no storage conditions any more"
 		end
 		log("%s: inactive (Last Transmission has no storage conditions any more)", FIX_ID)
-	elseif stats.moved == 0 and stats.retargeted == 0 then
+	else
 		if entry then
 			entry.status = "inactive"
 			entry.detail = "the shipped presets are already correct"
 		end
 		log("%s: inactive (the shipped presets are already correct)", FIX_ID)
-	else
-		log("%s: %d storage condition(s) made effective, %d retargeted", FIX_ID, stats.moved, stats.retargeted)
 	end
 	SMRFixPack.LastTransmissionStorage = stats
 end

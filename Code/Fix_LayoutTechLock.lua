@@ -94,8 +94,15 @@ SMRFixPack.Register("LayoutTechLock", {
 				if ok and locked then
 					self.skip_items[entry] = true
 					controllers[entry] = nil
-					-- same teardown as LayoutConstructionController:Deactivate
-					if IsValid(controller) then
+					-- same teardown as LayoutConstructionController:Deactivate.
+					-- FIX (QA 2026-07-25): no IsValid() here — sub-controllers are
+					-- pure-Lua InitDone objects and the C-side IsValid rejects
+					-- non-CObjects (cf. RealTimeCommandObject's own override,
+					-- CommandObject.lua:101-114), so the guard made this teardown
+					-- unreachable and leaked the controller + its cursor object.
+					-- The shipped teardown (LayoutConstruction.lua:310-317) has no
+					-- such guard.
+					if controller then
 						pcall(controller.Deactivate, controller)
 						if controller.is_grid_controller then
 							pcall(controller.Deactivate, controller)
