@@ -113,11 +113,17 @@ Parse sweep: every .lua in both mods parses (python luaparser).
   expect it on the user's save). **F45's salvage step remains the open PT-03
   item** (retry procedure written into the checklist).
 
-**Open for the user after this session:** PT-01 longer silence-watch (cadence and
-necropsy already good; the watchdog self-reports if the wedge recurs); PT-03 F45
-retry (checklist procedure; the sweep line should report both counts on load);
-PT-41 (F66 reclaim); rest of the merged-pack checklist; PT-36/37/38 gates;
-MarsDebug attended [install] pass for wave-4/5.
+**Open for the user after this session (updated 2026-07-26 late):** PT-01 longer
+silence-watch only (cadence, tower warning lead AND necropsy all verified live;
+the watchdog self-reports if the wedge recurs); **PT-41 result recording** (the
+sitting happened per the user, but no checklist result line was written — get the
+observation, then flip F66); rest of the merged-pack checklist; PT-36/37/38
+gates; MarsDebug attended [install] pass for wave-4/5.
+**DONE since this record was written (commits 4310fb2..bc4e828, same day):**
+PT-03 F45 retry PASS → F03/F44/F45/F50 `tested`; PT-45 PASS → F47 `tested`;
+PT-46 PASS → F49(b) resolved no-defect; PT-01 tower-extended ~42h storm warning
+banner verified live. Those commits flipped the BUGS.md detail headings but not
+the index rows; the rows were synced in the follow-up doc-sync commit.
 
 **F18 open half CLOSED (2026-07-26, user-driven):** the user asked whether
 resetting the tech was the easy fix; the investigation it prompted found better —

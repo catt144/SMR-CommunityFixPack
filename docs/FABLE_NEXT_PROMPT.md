@@ -49,23 +49,29 @@ always safe; A/B legs need the game to be free).
 
 ## Playtest state as of 2026-07-26 (see checklist for the user's own notes)
 
-- **Done:** PT-02 PASS, PT-04 PASS, PT-03's F44 halves PASS (repeated
-  build/salvage/rebuild cycles both shapes, refund observed). PT-01 cadence +
-  towers verified on real play (+49h/+40h post-load, >42h impossible under the
-  broken code); necropsy answered: the wedged thread was **ALIVE-stuck**
-  (scheduler/persist side). Only a longer silence-watch remains — the watchdog
-  self-reports (`WATCHDOG — Meteors thread silent … last phase 'X', thread
-  ALIVE|DEAD`) and THAT log line is the root-cause evidence if it ever fires.
-- **In flight on the user's current (sol-36+) save:** PT-03's **F45 retry**
-  (step-by-step procedure is in the checklist under PT-03; expect the load-time
-  sweep line with BOTH counts — orphans + dead track-list entries), **PT-41**
-  (F66 reclaim: two train buildings one hex apart, demolish the winner, loser
-  must rebuild within a tick), **PT-45** partial (refund stockpile already
-  observed; case A figure-scaling still open), and the passive PT-01 watch.
+- **Done:** PT-02 PASS, PT-04 PASS, **PT-03 PASS in full** (F44 halves + the F45
+  retry — load sweep reported both counts, broken element salvaged cleanly),
+  **PT-45 PASS** (refund = stamped sections × 100, scales with length; partial
+  stockpiles observed), **PT-46 PASS** (F49(b) resolved as no-defect — the
+  engine stores a train on a removed element correctly). Status flips landed:
+  **F03/F44/F45/F50/F47 are `tested`** (commits 4310fb2/73406ff; index rows
+  synced 2026-07-26 late). PT-01 cadence + towers verified on real play
+  (+49h/+40h post-load, >42h impossible under the broken code); the ~42h
+  tower-extended STORM warning banner verified live (bc4e828); necropsy
+  answered: the wedged thread was **ALIVE-stuck** (scheduler/persist side).
+  Only a longer silence-watch remains — the watchdog self-reports
+  (`WATCHDOG — Meteors thread silent … last phase 'X', thread ALIVE|DEAD`) and
+  THAT log line is the root-cause evidence if it ever fires.
+- **Played but NOT recorded — get the user's observation first:** **PT-41**
+  (F66 reclaim: two train buildings one hex apart, demolish one, survivor must
+  claim the freed hex within a few seconds). The user says the sitting happened
+  (2026-07-26) but the checklist's two `Result:` lines are blank and F66 is
+  still `fixed` — record their verbatim result, then flip F66 if it PASSed.
 - **Everything else is un-run:** PT-05..PT-19 (fixture saves B/C/D/E per the
   checklist's fixture table), PT-23..35 (wave-3), PT-36/37/38 (gates, attended),
-  PT-39..44 (wave-4), PT-45/46 (wave-5), PT-20/21/22 (uninstall / soak / log
-  hygiene). The F18 savegame sweep announces itself on load of an affected save
+  PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)
+  train cap follows length, F49(a) instant-track palette), PT-20/21/22
+  (uninstall / soak / log hygiene). The F18 savegame sweep announces itself on load of an affected save
   (`corrected the already-researched tech's stored discount from 10% to 20%`) —
   worth capturing when it happens.
 

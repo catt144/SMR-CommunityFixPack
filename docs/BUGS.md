@@ -15,7 +15,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 |-----|----------------------------------------------------------|-----|------|--------|
 | F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | fixed  |
 | F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | fixed  |
-| F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | fixed  |
+| F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | tested |
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | fixed  |
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | fixed  |
@@ -56,13 +56,13 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
 | F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
 | F43 | Layout construction bypasses tech locks                  | P3  | high | fixed  |
-| F44 | One-hex track salvage can delete the entire track        | P1  | high | fixed  |
-| F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | fixed  |
+| F44 | One-hex track salvage can delete the entire track        | P1  | high | tested |
+| F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | tested |
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | fixed  |
-| F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | fixed  |
+| F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | tested |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* |
-| F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | fixed  |
+| F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | tested |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | fixed  |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | fixed* |
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
