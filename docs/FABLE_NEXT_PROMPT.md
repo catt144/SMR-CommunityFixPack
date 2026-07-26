@@ -62,11 +62,11 @@ always safe; A/B legs need the game to be free).
   Only a longer silence-watch remains — the watchdog self-reports
   (`WATCHDOG — Meteors thread silent … last phase 'X', thread ALIVE|DEAD`) and
   THAT log line is the root-cause evidence if it ever fires.
-- **Played but NOT recorded — get the user's observation first:** **PT-41**
-  (F66 reclaim: two train buildings one hex apart, demolish one, survivor must
-  claim the freed hex within a few seconds). The user says the sitting happened
-  (2026-07-26) but the checklist's two `Result:` lines are blank and F66 is
-  still `fixed` — record their verbatim result, then flip F66 if it PASSed.
+- **PT-41 PASS (recorded 2026-07-26 late): F66 is `tested`.** Shared hex stayed
+  stable ("could not determine which building owned it", no connector churn in
+  the 11.48.31 log); demolishing one building left the connector "its own node
+  but stayed connected to the remaining building with no weird visuals" — the
+  reclaim repair; plain-tile control clean.
 - **Everything else is un-run:** PT-05..PT-19 (fixture saves B/C/D/E per the
   checklist's fixture table), PT-23..35 (wave-3), PT-36/37/38 (gates, attended),
   PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)

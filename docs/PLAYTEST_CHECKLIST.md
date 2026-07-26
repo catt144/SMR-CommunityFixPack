@@ -1510,9 +1510,17 @@ only one or two tiles long.
 5. Demolish one of the two buildings.
    - **EXPECTED:** the survivor picks up the freed hex within a few seconds.
 
-`Result (flicker stopped?):` _____________________________________________
+`Result (flicker stopped?):` PASS — 2026-07-26 (user): "It stayed stable, I
+could not determine which building owned it no matter how I clicked on it."
+Log check same sitting (Mars.exe-20260726-11.48.31): zero connector/track-element
+churn lines — the old bug would have filled the log.
 
-`Result (control — station still claims a plain track tile / survivor claims the freed hex?):` _____________________________________________
+`Result (control — station still claims a plain track tile / survivor claims the freed hex?):` PASS —
+2026-07-26 (user): demolished one of the pair and the connector "became its own
+node but stayed connected to the remaining building with no weird visuals" —
+the survivor held the link without any other demolish or re-place (the F66
+reclaim repair working). Control also run: a station placed where a plain,
+unowned track tile lies on its connector hex still claims it.
 
 ---
 

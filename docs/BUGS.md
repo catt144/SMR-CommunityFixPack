@@ -80,7 +80,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D02 | Dismissing "not working" warnings only silences them 2min| dsgn| med  | planned opt-in |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
-| F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | fixed  |
+| F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed  |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
@@ -1647,7 +1647,7 @@ matches a >2-element track's exactly (`Track.lua:506`, `:511`, `:682-684`,
 these very links — a LoadGame-time pass would race it (the F35 lesson).
 Probe: `TrackTunnelPowerBridge` in `40_Probes_Wave4.lua`. Playtest: PT-40.
 
-### F66 — Station↔tunnel connector hex ping-pong (P2, med-high)  `[fixed: Code/Fix_TrackConnectorPingPong.lua]`
+### F66 — Station↔tunnel connector hex ping-pong (P2, med-high)  `[tested: Code/Fix_TrackConnectorPingPong.lua — PT-41 PASS 2026-07-26 (shared hex stable, survivor reclaimed the link after demolition, plain-tile control clean)]`
 With a 1-hex gap, both buildings project their connector element onto the SAME hex;
 `TrackConnectedObjBase:CreateConnectorElements` (`TrainTransport.lua:126-130`) deletes the
 other's element (assert assumes never two live owners) → victim's `Done` reschedules its
