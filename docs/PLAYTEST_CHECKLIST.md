@@ -352,7 +352,12 @@ visual the audit specifically flagged). `CheatCompleteAllConstructions()`.
 > partial-refund half observed live). First-attempt FAIL notes preserved in git
 > history (09af088 era) — that state is what the orphan sweep cleans.
 
-`Result (F45 broken salvage):` _____________________________________________
+`Result (F45 broken salvage):` PASS — 2026-07-26: forced meteor broke the track
+(repair site, "Outside Drone Commander range" so nothing repaired it);
+`SMRTest.ReportBrokenTrack` printed **7 track repair site(s); 0 with a
+non-numeric node_idx**; the broken element salvaged instantly and the split
+completed cleanly — proper end pillars both sides, no debris, no errors (the
+same click that no-op'd in the shipped game and crashed the split pre-seed-repair).
 
 > F45 retry procedure (2026-07-26 — the first attempt crashed mid-split on the
 > shipped blind-seed bug, repaired same day; the fix is active from your next

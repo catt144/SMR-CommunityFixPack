@@ -164,7 +164,7 @@ survives in `DustDevils.lua:168-173` and the MeteorStorm thread (`Meteors.lua:32
 (`while GameTime() - start_time < spawn_time - warning_time do Sleep(5000) end`).
 Check how `GlobalGameTimeThread` re-registration behaves; may need thread deletion + respawn on load.
 
-### F03 — Upgrade buffs leak & stack after salvage/demolish  `[fixed: Code/Fix_UpgradeModifierLeak.lua stops new leaks; Code/90_SaveSanitizer.lua clears the ones already in a save]`
+### F03 — Upgrade buffs leak & stack after salvage/demolish  `[tested: Code/Fix_UpgradeModifierLeak.lua stops new leaks; Code/90_SaveSanitizer.lua clears the ones already in a save — PT-02 PASS 2026-07-25]`
 `Lua\Buildings\Building.lua:1268-1274` — `StopUpgradeModifiers` iterates `upgrade_modifiers`
 with `ipairs`, but the table is string-keyed (`ApplyUpgrade`, lines 1168-1170) → `TurnOff()`
 never runs. Self-targeted modifiers die with the building; **LabelModifiers on other
@@ -920,7 +920,7 @@ for the shipped prefab skip too — a separate cosmetic inconsistency, not this 
 - Sol 2983 GameTime overflow: indeterminate from Lua (engine-side); circumstantial evidence
   of 64-bit time. Park unless players report it.
 
-### F44 — One-hex track salvage can delete the entire track (P1, high)  `[fixed: Code/Fix_TrackSalvageWipe.lua]`
+### F44 — One-hex track salvage can delete the entire track (P1, high)  `[tested: Code/Fix_TrackSalvageWipe.lua — PT-03 PASS 2026-07-26 (trim + curve visuals + repeated rebuild cycles), post-rework]`
 Per-segment removal exists (`Construction.lua:2910-2911` → `TrackElement.lua:444-578`
 `DemolishAndSplitTrack`), but: (a) click snaps up to ±5 hexes to nearest pillared element
 (`SelectionPropagate`, `TrackElement.lua:281-307`); (b) deletion zone expands to nearest
@@ -971,7 +971,7 @@ reports both counts). A/B re-verified same night (baseline 1/58/11, fixed
 59/0/11, 0 ERROR). **F45's salvage step still needs its clean run** (the crash
 aborted it) — retry procedure in the checklist under PT-03.
 
-### F45 — Damaged tracks can't be salvaged at all (P1, high)  `[fixed: Code/Fix_BrokenTrackSalvage.lua — wrapper + LoadGame sweep for existing saves]`
+### F45 — Damaged tracks can't be salvaged at all (P1, high)  `[tested: Code/Fix_BrokenTrackSalvage.lua — wrapper + LoadGame sweep; PT-03 PASS 2026-07-26 (ReportBrokenTrack 7 sites / 0 bad; broken element salvaged cleanly)]`
 `TrackBase:BreakTrackElement` (`Track.lua:618-659`) copies element params to the repair
 site but NOT `node_idx` → stays `false` (`TrackElement.lua:164`). Every salvage path then
 hits `table.sort(all_elements, function(a,b) return a.node_idx < b.node_idx end)`
@@ -1189,7 +1189,7 @@ lingering reports likely F45. "Won't connect to stations": strict geometric rule
 zero feedback, no coding error found (F48 for migrated saves). "Rebuild blocked by raised
 terrain": design (endpoint/turn `max_z_delta` check, `Tracks.lua:35-65,281-284`).
 
-### F50 — Auto-rockets kick approaching drones to Idle every hour (P1, high)  `[fixed: Code/Fix_RocketDroneChurn.lua]`
+### F50 — Auto-rockets kick approaching drones to Idle every hour (P1, high)  `[tested: Code/Fix_RocketDroneChurn.lua — PT-04 PASS 2026-07-25 (smooth loading/unloading, no churn)]`
 `UniversalRocketBase:HourlyUpdate` (`UniversalRocket.lua:1357-1370`) → `CreateAutoCargoRequest`
 → `SetCargoRequest` → `UpdateCargoResourceRequests` (`CargoTransporterNew.lua:1238-1271`)
 does `DisconnectFromCommandCenters()` + reconnect EVERY HOUR while landed;
