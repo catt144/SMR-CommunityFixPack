@@ -68,14 +68,17 @@
 -- so for reason "work" or "training" the quarantine test short-circuits away,
 -- although the function it skips is named for exactly those cases and is
 -- commented `--quarantine` where the service path calls it (Dome.lua:2907).
--- The test is `self.accept_colonists and not self.supply_interrupted and
--- self.ui_working` (Dome.lua:2880-2882) — and `accept_colonists` is the property
--- **F61 exists to stop gating outbound work, shopping and training on**. Adding
--- the check here would re-impose, one level up, the block F61 removes; the two
--- fixes would fight over the same flag. The tracked mitigation also holds: the
--- enumeration only produces candidates, and `Workplace:IsSuitable` re-checks
--- before anyone is actually assigned, so nothing reaches the player. Recorded on
--- the BUGS entry; not fixed.
+-- (RATIONALE CORRECTED by the QA audit 2026-07-25: an earlier version said
+-- fixing this "would undo F61" — wrong. The skipped check is on `cdome`, the
+-- TARGET dome; F61 removes the HOME dome's own `accept_colonists` term and
+-- deliberately KEEPS the target-side check at assignment time,
+-- Fix_HomeDomeMigrationGate.lua:71/:93/:113/:142. No conflict exists.) The
+-- screening outcome stands on the grounds that do hold: the enumeration only
+-- produces candidates, `Workplace:IsSuitable`/`TrainingBuilding:IsSuitable`
+-- re-run `CanWorkTrainHereDomeCheck` before anyone is assigned (so an
+-- enumeration-time check adds only redundancy), and fixing it would need a
+-- §1.5 full replacement of `GetCommutableWorkplaces` recreating the file-local
+-- `recursive_enum_dome_workplaces`. Recorded on the BUGS entry; not fixed.
 
 SMRFixPack.Register("DroneTransportMinors", {
 	title = "A passability change no longer corrupts each drone's unreachable-buildings table",

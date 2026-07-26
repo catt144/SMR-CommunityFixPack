@@ -46,9 +46,24 @@
 -- a single hex genuinely serve two owners is a redesign of the connector model,
 -- not a defect repair (FIX_POLICY §4).
 --
--- The shipped `assert` line is dropped from the copy: it cannot unwind, its
--- condition is now enforced by the guard above it, and leaving it in would print
--- on every legitimate destroy of a dead owner's element.
+-- The shipped `assert` line is dropped from the copy: it cannot unwind, and its
+-- other-owner condition is now enforced by the guard above it. (CORRECTED by the
+-- QA audit 2026-07-25: an earlier version claimed keeping it "would print on
+-- every legitimate destroy of a dead owner's element" — false; the assert is
+-- TRUE, i.e. silent, for a dead or destructing owner. The case where it would
+-- print is a `force` rebuild of the building's own live element, e.g. the
+-- savegame fixup's CreateConnectorElements(true), Station.lua:1352.)
+--
+-- Known recovery gap (QA audit, recorded — repair pending a user decision):
+-- when the guard declines, this building owns no element on the contested hex,
+-- and after the OTHER building is later demolished nothing reschedules our
+-- rebuild — every engine trigger notifies only the dying element's own station
+-- (TrackElement.lua:193-199; Track.lua:179-183; TrainTransport.lua:24-26 needs
+-- a 2-element both-stationed track; Msg("TrackDemolished") fires only from
+-- player track demolition). The building stays connectorless until any track
+-- demolish triggers the global rebuild (TrainTransport.lua:156-159) or it is
+-- re-placed. Under the shipped (buggy) code it recovered via the ping-pong
+-- steal. Player-recoverable, not save-breaking.
 
 SMRFixPack.Register("TrackConnectorPingPong", {
 	title = "A station and a tunnel one hex apart stop stealing each other's track connector",

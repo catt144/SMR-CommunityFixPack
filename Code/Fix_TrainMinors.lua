@@ -35,11 +35,14 @@
 -- (elsewhere it is only read, via `StationsLink:GetMaxVehicles` ->
 -- `CanAddVehicle`, StationsLink.lua:28-32; the class default is 2, :8). A
 -- track's element count changes throughout its life: salvaging a piece shortens
--- it or splits it in two (`TrackElement.lua:503-541`), and the halves are
--- re-seeded and re-expanded — the NEW track object created at :547 runs its
--- GameInit before `ExpandTrackFromElement` (:553-554) gives it any elements at
--- all. So a track can keep the vehicle cap of a length it no longer has, and a
--- freshly split-off track can be left holding the count it was born with.
+-- it or splits it in two (`TrackElement.lua:503-541`). (Corrected by the QA
+-- audit 2026-07-25: GameInit is deferred to a game-time thread,
+-- _object.lua:187-192, so the split-off track's cap IS computed correctly once
+-- its elements are in; the residual defect is the SURVIVING track, which never
+-- re-runs GameInit and keeps the cap of a length it no longer has.) Known
+-- accepted gap: the AutoConnectTracks merge path (TrackElement.lua:381-409) and
+-- instant-build track_obj reuse recompute nothing in-session; the PostLoadGame
+-- sweep corrects them on the next load, and no path ever sets a WRONG value.
 --
 -- Patch approach: recompute with the shipped formula whenever the element set
 -- changes, at the two points that mark exactly that:

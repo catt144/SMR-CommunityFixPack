@@ -345,13 +345,16 @@ Probe: `MoraleComfortTooltip` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 `Lua\Units\ColonistTransport.lua:493,511,551-569` — `ticket.start_wait` set on reaching
 platform, never reset at boarding; Comfort "travel time" penalty and train/track
 "spent time" stats (TransportStatistics.lua:31-45) count waiting (double-counted vs
-station stat); partially bypasses LuxuriousTrains. **Fix:** post-hook `Colonist.BoardVehicle`
-to reset `transport_ticket.start_wait = GameTime()`.
-*Implemented as a full replacement, not a post-hook, because a post-hook cannot run in
-time:* `Colonist:BoardVehicle` (`:503-528`) ends with `while self.holder == vehicle do
-self:PlayPrg(...) end`, which blocks for the entire journey — a post-wrapper would restamp
-after the ride, and a pre-wrapper would erase the wait before `:511` credits it to the
-station. The copy is byte-identical except the one added line, placed immediately after the
+station stat). *(QA audit 2026-07-25 struck the "partially bypasses LuxuriousTrains"
+claim — the tech gates the ENTIRE ChangeComfort at :555-557, so nothing bypasses it;
+post-research the comfort half is simply moot.)* **Fix:** reset
+`transport_ticket.start_wait = GameTime()` at boarding.
+*Implemented as a full replacement, not a wrapper, because no wrapper can run in
+time:* `Colonist:BoardVehicle` (`:503-528`) is issued as a command
+(`Train.lua:967`) and the ride ends with `SetCommand("ExitVehicle")` killing the
+thread inside the blocking loop — a post-wrapper would never run at all (the
+command-method rule), and a pre-wrapper would erase the wait before `:511` credits
+it to the station. The copy is byte-identical except the one added line, placed immediately after the
 station is paid, so the station keeps the full wait and only the boundary between "waiting"
 and "travelling" moves to where the colonist actually boards.
 Probe: `TrainWaitTime` in `40_Probes_Wave4.lua`. Playtest: PT-43.
@@ -490,8 +493,12 @@ returns nil, `not nil` is true, and the field's counter entry is dropped even wh
 that field are still researched. Both are wrong; both are repaired by writing the comparison
 `Research:SetTechUndiscovered` (`:246-249`) already writes. The probe reports whichever it
 observes. Implemented as a full replacement of `ReplaceTech` (`:684-720`) since the defect is
-mid-function; the three shipped `assert` lines are dropped from the copy (they cannot unwind,
-and `if not status then return end` right after the first is the real guard).
+mid-function; the FOUR shipped `assert` lines (`:686/:690/:711/:713` — an earlier count of
+three missed one) are dropped from the copy (they cannot unwind, and `if not status then
+return end` right after the first is the real guard). *(QA repair 2026-07-25: the `:690`
+assert was load-bearing through its ARGUMENT — `tech_def.group` raises on an unknown
+`tech_id_new` BEFORE any state mutation; the copy now keeps that ordering with an explicit
+`if not tech_def then return end` guard.)*
 Probe: `ReplaceTechCount` in `40_Probes_Wave4.lua`.
 
 ### F29 — Sequence-system latents (mod-facing bundle)  `[fixed*: Code/Fix_SequenceLatents.lua — items 1 and 3; item 2 deliberately not fixed, see below]`
@@ -772,7 +779,7 @@ Scope: only the "have" half. Rare traits GAINED later (schools, sanity breakdown
 `GetRandomTrait` with no `rare_weight_mod` at all, so neither tech has ever affected them
 — separate defect, not touched.
 
-### F42 — Buildings placeable on active dust devils (P3, high)  `[blocked — wontfix candidate: screened, no defect found; user decision needed]`
+### F42 — Buildings placeable on active dust devils (P3, high)  `[wontfix — user decision 2026-07-25, F56/F62/F63 grounds: designed scope, not a defect]`
 `AreThereBlockingUnitsUnderneath` (`Construction.lua:1895-1914`) queries only
 Drone/BaseRover; `BaseDustDevil` inherits `Object` (`DustDevils.lua:245-247`) — never
 checked anywhere in Construction\. **Fix:** wrap `ConstructionController:UpdateConstructionStatuses`-
@@ -803,9 +810,10 @@ it was ever supposed to. Weighing the F56 signals:
   cold waves, dust storms and dust devils is otherwise normal play: a devil passing over a
   new site dusts it, which is what dust devils are for.
 
-Adding a placement block would be a new rule, not a repair — FIX_POLICY §4. Recommend
-closing `wontfix` on the same grounds as F56/F62/F63. **No fix written; awaiting the
-user's decision.**
+Adding a placement block would be a new rule, not a repair — FIX_POLICY §4.
+**CLOSED `wontfix` 2026-07-25 (user decision, wave-4/5 QA session)** on the same
+grounds as F56/F62/F63: deliberately maintained design, breaks nothing, no shipped
+text promises the block. No opt-in module planned.
 
 ### F43 — Layout construction bypasses tech locks (P3, high)  `[fixed: Code/Fix_LayoutTechLock.lua — latent in the shipped game, see below]`
 `LayoutConstructionController:Activate` (`LayoutConstruction.lua:231-263`): tech-locked
@@ -967,7 +975,7 @@ and after. If it holds up, the pass belongs in `90_SaveSanitizer.lua` behind a o
 both cases → implement in the sanitizer, skipping tracks that carry repair sites; a dirty
 FAIL on the damaged-track case → close `wontfix — repair riskier than the defect`.*
 
-### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — items (a) and (d); (b)(c)(e) screened and deliberately not fixed, see below]`
+### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — items (a), (c) and (d); (b)(e) screened and deliberately not fixed, see below]`
 (a) instant-built tracks use pipes palette (`Tracks.lua:385` vs `TrackElement.lua:791`);
 (b) `DemolishAndSplitTrack` ignores `assigned_vehicles` — mid-transit trains silently
 stored/self-destruct (`Train.lua:249-251,535-541`); (c) salvage click on invisible
@@ -994,14 +1002,22 @@ are skipped, as the shipped GameInit skips them.
 assignment to `max_vehicles` anywhere in the game (elsewhere it is read only, via
 `StationsLink:GetMaxVehicles` → `CanAddVehicle`, `StationsLink.lua:28-32`; class default
 2, `:8`), and it runs once, in `TrackBase:GameInit`. Salvage shortens or splits a track
-(`TrackElement.lua:503-541`), and the `new_track` created at `:547` runs its GameInit
-*before* `ExpandTrackFromElement` (`:553-554`) gives it any elements at all. Fixed by
-recomputing with the shipped formula at the two points that mark an element-set change —
-`TrackBase:UpdateEndElements` (called from all three partial-salvage branches, `:516`,
-`:530`, `:556-557`, always after the arrays are repopulated) and `ExpandTrackFromElement`
-(the merge/expand path) — plus a `PostLoadGame` sweep for saves already carrying a stale
-cap (PostLoadGame, not LoadGame: `SavegameFixups.RemoveTrackDoubleTurns`,
-`TrackElement.lua:839-843`, re-processes track elements after `Msg("LoadGame")`).
+(`TrackElement.lua:503-541`). *(Corrected by the QA audit 2026-07-25: an earlier version
+of this paragraph claimed the split-off `new_track` runs GameInit before it has elements
+— backwards; GameInit is deferred to a game-time thread (`_object.lua:187-192`), so the
+split-off track's cap is computed correctly. The residual defect is the SURVIVING track,
+which never re-runs GameInit — and that is what the fix covers.)* Fixed by recomputing
+with the shipped formula on element-set changes — `TrackBase:UpdateEndElements` (called
+from all three partial-salvage branches, `:516`, `:530`, `:556-557`, always after the
+arrays are repopulated) and `ExpandTrackFromElement` (the merge/expand path) — plus a
+`PostLoadGame` sweep for saves already carrying a stale cap (PostLoadGame, not LoadGame:
+`SavegameFixups.RemoveTrackDoubleTurns`, `TrackElement.lua:839-843`, re-processes track
+elements after `Msg("LoadGame")`). *Known coverage gap (QA audit, accepted): the
+`TrackGridElement:AutoConnectTracks` merge path (`TrackElement.lua:381-409`) and
+instant-build reuse of an existing `track_obj` (`Tracks.lua:307/:318/:327`) recompute
+nothing, so a merged/extended track's cap can stay stale in-session until the next
+load's sweep. The fix never sets a wrong value; it just doesn't catch every change
+point yet.*
 
 **(b) NOT FIXED — mechanism confirmed, consequence not establishable from source.**
 Nothing in any of the three partial branches of `DemolishAndSplitTrack` reads or writes
@@ -1012,20 +1028,19 @@ The whole-track branch is fine — `TrackBase:OnDemolish` → `DestroyAssignedTr
 a train physically standing on a removed or re-homed element then does cannot be read off
 the source. **Playtest item PT-46.**
 
-**(c) NOT FIXED — a design decision, not a repair.** The mechanism is real:
+**(c) FIXED (user decision 2026-07-25: "the click does nothing").** The mechanism is real:
 `TrackGridElement:SelectionPropagate` returns `self.station` for a connector element
-(`TrackElement.lua:298-300`), and `SelectionMouseObj` runs every candidate through
+(`TrackElement.lua:297-300`), and `SelectionMouseObj` runs every candidate through
 `SelectionPropagate` (`SelectionModeDialog.lua:44-50`), so in demolish mode the object
-handed to `DemolishModeDialog:OnMouseButtonDown` can be the station, which is a Building
-and gets `ToggleDemolish()` (`Construction.lua:2903-2906`). The reason to stop is that the
-shipped code contains **two** demolish-mode guards against exactly this class of
-propagation and they prescribe *different* remedies: `:54-56` throws the object away
-(`precise, terrain_cursor_obj = false, false`) while `:84-88` substitutes the underlying
-element. Both are about `TrackBase`; neither covers the station. Choosing which one the
-station case should follow — click does nothing, or click salvages the connector element
-and thereby splits a track — is a gameplay decision with real consequences either way, and
-FIX_POLICY §4 does not let us invent it. **Worth a user decision;** if the answer is
-"nothing happens", the fix is four lines shaped like `:54-56`.
+handed to `DemolishModeDialog:OnMouseButtonDown` could be the station, which is a Building
+and gets `ToggleDemolish()` (`Construction.lua:2903-2906`). The shipped code contains
+**two** demolish-mode guards against exactly this class of propagation and they prescribe
+*different* remedies: `:54-56` throws the object away (`precise, terrain_cursor_obj =
+false, false`) while `:84-88` substitutes the underlying element — both about `TrackBase`,
+neither covering the station — so the choice was screened to the user, who picked the
+`:54-56` shape. Implemented as a pre-guard on `SelectionPropagate`: in demolish mode a
+station-owned element propagates to nothing. Normal-mode selection (connector click
+selects the station) and salvaging the station via its own footprint are unchanged.
 
 **(e) NOT FIXED — dead code whose revival is a redesign.**
 `GridConstructionController:CanContinueTrack` (`GridConstruction.lua:478-491`) is never
@@ -1221,19 +1236,23 @@ Fixed for the F27/F28 reason: a mod or a future rocket with its own fuel resourc
 inherits the leak. The replacement also clears the key it wrote last time, remembered in
 an absent-tolerant `SMRFixPack_rocket_fuel_key` field on the DroneControl.
 
-**(c) NOT FIXED — fixing it would undo F61.** The mechanism is exactly as tracked:
-`can_work_here = work_or_train or (cdome == colonist.dome)` (`Dome.lua:674`) short-circuits
-the quarantine test away for reason "work" and "training", even though the function it
-skips is named `CanColonistsFromDifferentDomesWorkServiceTrainHere` and the service path
-calls it with the comment `--quarantine` (`Dome.lua:2907`). But that function is
-`self.accept_colonists and not self.supply_interrupted and self.ui_working`
-(`Dome.lua:2880-2882`), and **`accept_colonists` is the exact property F61 exists to stop
-gating outbound work, shopping and training on**. Adding the check here would re-impose
-one level up the block F61 removes, and the two fixes would fight over the same flag. The
-tracked mitigation also holds — the enumeration only produces candidates and
-`Workplace:IsSuitable` re-checks before anyone is assigned — so nothing reaches the
-player. Left as a recorded inconsistency, like the four in the STATUS.md "recorded but
-deliberately untouched" list.
+**(c) NOT FIXED — redundant with the assignment-time check, and a §1.5 replacement to
+reach.** The mechanism is exactly as tracked: `can_work_here = work_or_train or (cdome ==
+colonist.dome)` (`Dome.lua:674`) short-circuits the quarantine test away for reason
+"work" and "training", even though the function it skips is named
+`CanColonistsFromDifferentDomesWorkServiceTrainHere` and the service path calls it with
+the comment `--quarantine` (`Dome.lua:2907`). *(Rationale corrected by the QA audit
+2026-07-25: an earlier version claimed fixing this "would undo F61" — wrong. The skipped
+check sits on `cdome`, the TARGET dome; F61 removes the HOME dome's own
+`accept_colonists` term and deliberately keeps the target-side check at assignment time,
+`Fix_HomeDomeMigrationGate.lua:71/:93/:113/:142`. No conflict.)* The screening outcome
+stands on the grounds that do hold: the enumeration only produces candidates,
+`Workplace:IsSuitable`/`TrainingBuilding:IsSuitable` re-run `CanWorkTrainHereDomeCheck`
+before anyone is assigned (`Workplace.lua:493-494`, `TrainingBuilding.lua:137-138`), so
+an enumeration-time check adds only redundancy — and implementing it would need a §1.5
+full replacement of `GetCommutableWorkplaces` recreating the file-local
+`recursive_enum_dome_workplaces`. Left as a recorded inconsistency, like the four in the
+STATUS.md "recorded but deliberately untouched" list.
 
 ### Assignment systems: investigated, no single defect (leads recorded)
 - "Unemployed every sol": no smoking gun; three verified contributing mechanisms —
@@ -1515,9 +1534,12 @@ not unwind in this engine, so it is a log line and the steal proceeds anyway. Th
 therefore to enforce the shipped assert's own condition, nothing more: a hex whose element
 belongs to a different building that is alive and not being destructed is left alone.
 Implemented as a full replacement of `CreateConnectorElements` (`TrainTransport.lua:114-154`)
-because the decision is inside the per-spot loop; the copy is byte-identical except that one
-condition, and the assert line is dropped (it cannot unwind, its condition is now enforced,
-and keeping it would print on every legitimate clear of an abandoned element). Ordinary
+because the decision is inside the per-spot loop; the copy is token-identical except that one
+condition, and the assert line is dropped (it cannot unwind, and its other-owner condition is
+now enforced by the guard. *Corrected by the QA audit 2026-07-25: an earlier version said
+keeping it "would print on every legitimate clear of an abandoned element" — false; the
+assert is TRUE (silent) for a dead or destructing owner. The case where it would print is a
+`force` rebuild of the building's own live element, e.g. Station.lua:1352.*). Ordinary
 clears are untouched: a plain track element on the hex has `station == false`, so
 `IsValid(el.station)` is false and it is still removed, and `force` still rebuilds the
 building's own element. The second building then simply gets no connector on that hex — the
@@ -1737,8 +1759,11 @@ the same file set `Condition` (`:208, :224, :240, :256, :281, :298, :313`) and t
 `:266-292` sets BOTH, so the distinction was understood; a sweep of all 29 shipped
 FactionDefs found the pattern nowhere else. Not a quiet failure either — `EvalApproval`
 (`:181-187`) surfaces the `HowTo` of any positive like that evaluated to 0 as an
-outstanding goal, so Last Transmission permanently advertises "Have Power for more than 2
-sols stored", the player does it, and nothing happens.
+outstanding goal. *(Wording corrected by the QA audit 2026-07-25: the `Prerequisite`
+gate (`:682`) HIDES the like while storage is low, so the goal appears only AFTER the
+player satisfies it — the like is shown as unmet precisely while it is met, and
+disappears again when storage drops. Same defect, perverse in the opposite direction
+from the earlier "permanently advertises" phrasing.)*
 
 **(b) wrong grid.** `TLEOxygenStorage2Sols` (`:160-175`) measures POWER. Explanation, HowTo
 and Id all say Oxygen, but its nested `ScriptCheckGridGlobalStorage` never sets `GridType`,
