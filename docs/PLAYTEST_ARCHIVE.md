@@ -16,8 +16,11 @@ PT-08 (F13 → tested — all 11 resource
 rows show numbers, HUD cross-checked), PT-12 (F51 → tested — cached mode=false
 recomputed to "shuttle" when the hub went live), PT-13 (F52 → tested* — passage
 used in vacuum; surface walk correctly resumed once the passage was destroyed),
-PT-41 (F66 → tested), PT-45 (F47 → tested), PT-46 (F49(b) resolved as
-no-defect; its (d)/(a) tail remains in the checklist as un-run).
+PT-38 (D02 gate DONE 2026-07-27 — cadence measured and CORRECTED to 120,000
+GAME-ms = 4 game hours, not wall-clock; per-id suppression confirmed;
+Opt_AcknowledgedWarnings build unblocked), PT-41 (F66 → tested), PT-45 (F47 →
+tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail remains in the
+checklist as un-run).
 
 ---
 
@@ -444,6 +447,66 @@ make sure both worked." Both halves observed on the live colony: with the
 passage standing, the colonist routed through it in vacuum (the F52 fix); with
 the passage destroyed, the surface walk resumed — the designed no-passage
 fallback (kept so shuttle-less maps cannot strand colonists), NOT a failure.
+
+---
+
+## PT-38 — Dismissed "Building Not Working" cadence · gates **D02** (planned opt-in)
+
+Nothing to fix here — this measures the SHIPPED behavior that D02 (per-building
+acknowledged warnings, planned opt-in module) is designed to answer. F32 closed
+`wontfix` because the game hotfixed the actual defect; the claim left to verify is
+that a permanently broken building re-nags every **2 minutes of real time** after
+each dismissal.
+
+**Setup:** any save. Make one building permanently not-working — cut its power and
+leave it, or use a building that genuinely cannot recover (a lake-entombed one, per
+F30, is the archetype). Wall clock or phone timer handy; leave game speed at normal.
+
+**Trigger:**
+1. Wait for the "Building Not Working" notification, then **dismiss** it. Note the
+   real-world time.
+2. Do not fix the building. Watch for the notification to return.
+3. When it returns, dismiss again and time the second interval too.
+4. Bonus: while inside the quiet window, break a SECOND building (cut its power).
+   Note whether its warning is also swallowed until the window ends — that is the
+   per-category (not per-building) suppression D02 also addresses.
+
+- **EXPECTED (design confirmed):** the warning returns ~2 real minutes after each
+  dismissal, forever, and a second breakage inside the window stays silent until
+  the window closes. Record the measured intervals → D02 proceeds as specced.
+- **SURPRISE looks like:** it stays away much longer / for good (then D02 is
+  unnecessary — record what actually happened), or it returns in seconds (then the
+  F32 close needs a re-read — record the exact timing).
+
+`Result (interval 1 / interval 2):` MEASURED, with a premise correction —
+2026-07-27, Stargazer save; fixture = a Triboelectric Scrubber + a Concrete
+Extractor, both maintenance-failed OUT of drone repair range (genuinely
+unrecoverable). By feel first: "slightly longer than 2 mins" at normal speed,
+then "~45 seconds" at higher speed — the speed-dependence prompted console
+timestamp wrappers (game + real stamps on AddNotification/RemoveNotification).
+Three dismissal→return pairs: **148,805 / 161,755 / 132,056 game-ms** — each
+exactly **120,000 game-ms (4 game hours) + time to the next re-add attempt** —
+with every in-window attempt printing `attempt BLOCKED (suppressed)` and the
+first post-expiry attempt creating. Real-time deltas ~30/32/26 s at the user's
+accelerated speed. **The window is GAME time, not wall-clock** (the caution
+above and D02's premise were corrected): `GetTime()` = `GameTime()` because the
+preset leaves `GameTime` at its true default (`NotificationPreset.lua:65-66,
+:126-128`). At ultra the re-nag returns every few REAL seconds — D02's case is
+stronger than premised. Also: pausing freezes the window and the re-add (both
+game-time), and the infopanel cheat-button/pause gotchas found en route are in
+the command table.
+
+`Result (second breakage hidden in window?):` YES for the same id, NO across
+ids — 2026-07-27. Cross-id: a happy accident ran fuel-starvation warnings for
+the Shuttle Hub + factories concurrently; dismissing those never touched the
+"Building Not Working" cycle ("the issues are tracked separately" — user) —
+suppression is stored per notification id (`SuppressedNotifications[id]`).
+Same-id: both broken buildings rode ONE notification, and the wrapper showed
+EVERY re-add attempt for the id blocked during the window — a new same-id
+breakage inside the window is swallowed with it (`AddNotification`
+early-returns while suppressed, `Notifications.lua:52-54`). Exactly the
+per-category gap Opt_AcknowledgedWarnings addresses → **D02 build proceeds,
+with the corrected 4-game-hour spec.**
 
 ---
 

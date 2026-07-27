@@ -6,8 +6,8 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
-far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-07, PT-08, PT-12, PT-13, PT-41,
-PT-45, and PT-46's F49(b) half. This
+far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-07, PT-08, PT-12, PT-13, PT-38,
+PT-41, PT-45, and PT-46's F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -78,8 +78,10 @@ freely: `CheatAddFunding`, `CheatCompleteAllConstructions`, `CheatFillAllStorage
 `dbg_ToggleRocketInstantTravel`, `CheatToggleInfopanelCheats`, `MultiCheat`.
 Four specific cautions:
 
-- **PT-38** runs on **wall-clock time** — game speed does not shorten the 2-minute
-  suppression window. Run another test while you wait.
+- **PT-38** ~~runs on wall-clock time~~ **CORRECTED 2026-07-27 (measured live):** the
+  dismissal window is **120,000 GAME-ms = 4 game hours** (`GameTime` defaults true on
+  the preset), so it only *looks like* 2 real minutes at normal speed — higher game
+  speed SHORTENS the wait (seconds at ultra).
 - **PT-36**: run its three console calls **before** any `CheatAddFunding` in that
   sitting — cheat funding flows through the income-recording path the test reads.
 - **PT-17/PT-32**: fill storages / instant travel freely (both prescribed), but do
@@ -1020,40 +1022,6 @@ works. Console open (Enter / Alt-Shift-C).
 `Result (case A healthy):` _____________________________________________
 
 `Result (case B damaged):` _____________________________________________
-
----
-
-## PT-38 — Dismissed "Building Not Working" cadence · gates **D02** (planned opt-in)
-
-Nothing to fix here — this measures the SHIPPED behavior that D02 (per-building
-acknowledged warnings, planned opt-in module) is designed to answer. F32 closed
-`wontfix` because the game hotfixed the actual defect; the claim left to verify is
-that a permanently broken building re-nags every **2 minutes of real time** after
-each dismissal.
-
-**Setup:** any save. Make one building permanently not-working — cut its power and
-leave it, or use a building that genuinely cannot recover (a lake-entombed one, per
-F30, is the archetype). Wall clock or phone timer handy; leave game speed at normal.
-
-**Trigger:**
-1. Wait for the "Building Not Working" notification, then **dismiss** it. Note the
-   real-world time.
-2. Do not fix the building. Watch for the notification to return.
-3. When it returns, dismiss again and time the second interval too.
-4. Bonus: while inside the quiet window, break a SECOND building (cut its power).
-   Note whether its warning is also swallowed until the window ends — that is the
-   per-category (not per-building) suppression D02 also addresses.
-
-- **EXPECTED (design confirmed):** the warning returns ~2 real minutes after each
-  dismissal, forever, and a second breakage inside the window stays silent until
-  the window closes. Record the measured intervals → D02 proceeds as specced.
-- **SURPRISE looks like:** it stays away much longer / for good (then D02 is
-  unnecessary — record what actually happened), or it returns in seconds (then the
-  F32 close needs a re-read — record the exact timing).
-
-`Result (interval 1 / interval 2):` _____________________________________________
-
-`Result (second breakage hidden in window?):` _____________________________________________
 
 ---
 

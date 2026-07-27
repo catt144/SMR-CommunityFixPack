@@ -46,8 +46,10 @@ always safe; A/B legs need the game to be free).
   * **PT-36** → F10's final `wontfix` (delete the commented metadata line).
   * **PT-37** → F48: PASS = build the corrected fixup behind a one-shot flag;
     FAIL = `wontfix`.
-  * **PT-38** → D02: confirms the 2-real-minute cadence, then build
-    `Opt_AcknowledgedWarnings` (+probe) in a build leg.
+  * ~~**PT-38** → D02~~ **DONE 2026-07-27: cadence measured and CORRECTED —
+    the window is 120,000 GAME-ms (4 game hours), not wall-clock; per-id
+    suppression confirmed. Build `Opt_AcknowledgedWarnings` (+probe) in the
+    next build leg with the corrected spec (D02 entry has the numbers).**
 
 ## Playtest state as of 2026-07-26 (see checklist for the user's own notes)
 
@@ -99,9 +101,13 @@ always safe; A/B legs need the game to be free).
   gotchas recorded in the checklist command table: infopanel cheat buttons
   need `Platform.cheats = true` AND ride the game-time sync queue (dead-looking
   while paused; `ObjCheat <method>` console print = delivered).
+- **PT-38 DONE (2026-07-27): D02 unblocked, premise corrected** — the dismissal
+  window is 120,000 GAME-ms = 4 game hours (not wall-clock; live-measured with
+  timestamp wrappers, three pairs, every in-window re-add attempt BLOCKED);
+  suppression is per notification id. Build leg item: `Opt_AcknowledgedWarnings`.
 - **Everything else is un-run:** PT-06, PT-09..PT-11, PT-14..PT-19 (fixture
   saves per the
-  checklist's fixture table), PT-23..35 (wave-3), PT-36/37/38 (gates, attended),
+  checklist's fixture table), PT-23..35 (wave-3), PT-36/37 (gates, attended),
   PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)
   train cap follows length, F49(a) instant-track palette), PT-20/21/22
   (uninstall / soak / log hygiene). The F18 savegame sweep announces itself on load of an affected save

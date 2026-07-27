@@ -139,7 +139,22 @@ Mars.exe-20260727-11.45.34 = 1 PASS / 58 FAIL / 11 SKIP / 0 ERROR; fixed
 -11.47.09 = **59 PASS / 0 FAIL / 11 SKIP / 0 ERROR**, 66/67 active,
 LowStorageWarning applied, zero errors from our files. Repair landed. **Open:
 the user re-runs PT-07 on the repaired build (warning fires AND sits steady +
-the Machine Parts half).**
+the Machine Parts half).** → **DONE 2026-07-27: PT-07 PASS in full, F12 `tested`**
+(fires once / steady a sol / silent organic clear, both branches; see the
+checklist archive).
+**PT-38 DONE (2026-07-27) — D02's premise measured and CORRECTED; build
+unblocked.** The dismissal window is **120,000 GAME-ms = 4 game hours**, NOT 2
+real minutes: `GetTime()` = `GameTime()` because `GameTime` defaults true and
+the NotWorkingBuildings preset doesn't override it (`NotificationPreset.lua:65-66,
+:126-128`). Live timestamp wrappers measured three dismissal→return pairs at
+148,805 / 161,755 / 132,056 game-ms — each 120,000 + time-to-next-attempt, every
+in-window attempt observed BLOCKED. At ultra the re-nag is every few REAL
+seconds — D02's case is stronger than premised. Suppression is per notification
+id (fuel warnings independent — user-observed). **D02 (`Opt_AcknowledgedWarnings`
++ probe) is now buildable in the next build leg with the corrected spec.** Two
+engine facts from the sitting: infopanel cheat buttons need `Platform.cheats =
+true` (ObjCheat gate, `Network.lua:218-219`) AND their presses ride the
+game-time sync queue — dead-looking while paused, firing on unpause.
 **TestKit console repair (2026-07-26 later, user report: console dead on every
 NEW save, fine on loads):** root cause — `Msg("CityStart")` fires from
 `OnMsg.NewMap` DURING map generation (`Lua/_init.lua:18-26`), so the kit's fixed

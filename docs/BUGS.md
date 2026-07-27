@@ -77,7 +77,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | wontfix|
 | F63 | Universities invisible to emigration (no students)       | P2  | high | wontfix|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
-| D02 | Dismissing "not working" warnings only silences them 2min| dsgn| med  | planned opt-in |
+| D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | planned opt-in (PT-38 done, build unblocked) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -1589,16 +1589,24 @@ and shipping the two separately would let a player enable an emptying behaviour 
 refilling one. So whenever the export half gets its design decision, decide auto-offload in
 the same pass and behind the same `ClassicRockets` flag.
 
-### D02 — Dismissing a "Building Not Working" warning only silences it for 2 real minutes — BY DESIGN, feels like a bug (planned opt-in)
+### D02 — Dismissing a "Building Not Working" warning only silences it ~4 game hours — BY DESIGN, feels like a bug (planned opt-in)
 Spun out of F32's close (2026-07-26, user decision) — read that entry for the full trace.
 Not a defect: the shipped suppression machinery works exactly as designed
 (`Notifications.lua:41-43`, `:86-88`, `:141-146`). The design just has no answer for a
-PERMANENTLY broken building: the window is 2 REAL minutes (`SuppressTime = 120000`, real
-time — the preset sets no `GameTime`, `NotificationPreset.lua:126-128`), it silences the
-whole notification id (new breakages included) rather than the acknowledged building, and
-there is no per-building acknowledgment at all. An unfixable building — F30's
-lake-entombed case is the archetype — re-nags every 2 real minutes for the rest of the
-game. **Players read this as "dismiss is broken"; it is not — it is a design gap.** The
+PERMANENTLY broken building: the window is **120,000 GAME-ms = 4 game hours**
+(`SuppressTime = 120000`; **CORRECTED by PT-38, 2026-07-27** — the entry previously
+claimed 2 REAL minutes, backwards: `GetTime()` resolves `self.GameTime and GameTime()
+or RealTime()` and `GameTime` DEFAULTS TRUE, which the preset does not override,
+`NotificationPreset.lua:65-66, :126-128`. Verified live with game/real timestamp
+wrappers: three dismissal→return pairs measured 148,805 / 161,755 / 132,056 game-ms —
+each exactly 120,000 + time-to-the-next re-add attempt, with every in-window attempt
+observed BLOCKED; real-time durations varied with game speed, ~2 min at 1×, ~30 s at
+the user's accelerated speed). It silences the whole notification id (new breakages
+included) rather than the acknowledged building, and there is no per-building
+acknowledgment at all. An unfixable building — F30's lake-entombed case is the
+archetype — re-nags every 4 game hours for the rest of the game, which at ultra speed
+is **every few real seconds** — the annoyance premise is STRONGER than originally
+recorded, not weaker. **Players read this as "dismiss is broken"; it is not — it is a design gap.** The
 released mod description must carry that explanation (a dedicated note exists in
 `MOD_DESCRIPTION.md`), both so players stop reporting it as a bug and so the module below
 is understood as a preference, not a repair.
@@ -1615,8 +1623,10 @@ acknowledged wreck stays quiet forever, new events are never hidden even for 2 m
 Ack set persisted as an absent-tolerant `SMRFixPack_*` handle set (policy §3).
 `DestroyedInfrastructure` / `RoverDamaged` are deliberately untouched — one-shot adds
 where dismissal already holds (F32 trace).
-**Gate:** PT-38 first (verify the 2-real-minute cadence in play — the design assumption
-this module answers), then build + probe in a wave-4+ leg.
+**Gate:** ~~PT-38 first~~ **DONE 2026-07-27 — cadence verified (and corrected to 4
+game hours, above); per-id suppression confirmed live (independent fuel-warning ids
+untouched by dismissal; every same-id re-add attempt inside the window observed
+BLOCKED). Build + probe unblocked for the next build leg.**
 
 ### F64 — Demolishing a station vaporizes its trains ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
 *(Header restored 2026-07-26 — it was lost in an earlier doc edit; the entry body below
