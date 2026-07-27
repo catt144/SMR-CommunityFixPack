@@ -353,7 +353,9 @@ old churn repeated hourly, so 24+ quiet hours is decisive); cleared
 farms turned back on — no cheat fill); a re-drain re-announced exactly once.
 **Machine Parts half:** maintenance consumption generated via forced turbine
 malfunctions, drained under 3 sols → warning fired naming Machine Parts
-("Less than 1 Sols, 12h of storage remain"), sane figure, **no repeats**.
+("Less than 1 Sols, 12h of storage remain"), sane figure, **no repeats**;
+refilled via supply pods → the Machine Parts warning also **cleared
+automatically and silently** (both branches confirmed on the recovery side).
 Setup discoveries recorded in the command table: infopanel cheat buttons
 no-op on retail without `Platform.cheats = true`, and their presses queue on
 the game-time sync — they look dead while PAUSED and fire on unpause (the
