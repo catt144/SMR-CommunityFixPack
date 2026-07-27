@@ -48,7 +48,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F33 | Drone crash on small landscaping sites (nil-index)       | P2  | high | fixed  |
 | F34 | Landscape nil-guard bundle (latent crash paths)          | P3  | med  | fixed* |
 | F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | fixed  |
-| F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | fixed  |
+| F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | tested |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed  |
@@ -792,7 +792,7 @@ LoadGame-vs-fixup ordering cannot be discriminated by the probe (it drives the p
 directly); PT-35 case C remains the only true fixture.
 Probe: `SaveSanitizerTurbineBuff` in `30_Probes_Wave3.lua`.
 
-### F36 — Universities overtrain geologists (P2, high behavior-confirmed)  `[fixed: Code/Fix_UniversityOvertraining.lua]`
+### F36 — Universities overtrain geologists (P2, high behavior-confirmed)  `[tested: Code/Fix_UniversityOvertraining.lua — PT-24 PASS 2026-07-27, both halves]`
 `City:GetNeededSpecialist` (`City.lua:561-593`) counts every `ui_working` workplace incl.
 extractors (`specialist="geologist"`, `max_workers=4`); ExtractorAI only sets
 `g_ExtractorAIResearched`, used solely to silence a construction warning

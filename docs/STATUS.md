@@ -1,8 +1,9 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-27 (**playtest marathon DONE — 13 fixes carry playtest status,
-F10 retired+deleted, 2 of 3 gates cleared, one new F12 defect found live +
-repaired + A/B-verified same day** — see "Playtest marathon" below).
+Updated: 2026-07-27 (**playtest marathon DONE — 14 fixes carry playtest status,
+F10 retired+deleted, F61 closed wontfix → D03 filed, 2 of 3 gates cleared, one
+new F12 defect found live + repaired + A/B-verified same day** — see "Playtest
+marathon" below).
 
 ## Playtest marathon — Fable, 2026-07-26/27: 12 PTs resolved, F10 retired, D02 unblocked
 
@@ -72,6 +73,18 @@ one-line summary here:
   Lua class building rows imperatively — verified), gating
   `Community:CanAcceptNewColonists` + the arrival path, quarantine untouched.
   Full spec on the D03 entry; build queued for a game-free leg alongside D02.
+- **PT-24 (2026-07-27, later): F36 → `tested`, both halves.** Geologist demand
+  went **11 → 0 at the ExtractorAI grant with every other row identical**
+  (before/after screenshots — the user reloaded a pre-tech save for the
+  baseline, which also disproves over-exclusion since the pack was active both
+  sides); multiple `CheatCompleteTraining` rounds across two universities
+  graduated **38 engineers + 2 medics, zero geologists** (tallies from the
+  universities' `trained_specialists`, captured in log
+  Mars.exe-20260727-15.19.26). Setup gotcha found live and corrected in the
+  checklist command table: **`CheatResearchAll()` skips undiscovered
+  breakthroughs** (`Cheats.lua:84` discoverable-or-discovered gate) — grant
+  directly via `UIColony:SetTechResearched("<Id>")`; PT-27's Biorobots route
+  corrected to `ThePositronicBrain` in the same pass.
 **Two prompts, two triggers:**
 - `docs/FABLE_NEXT_PROMPT.md` — the NEXT Fable work session: the F02 regression hunt
   (PT-01 FAILed with NO reloads — user confirmed — so the meteor thread genuinely

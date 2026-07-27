@@ -5,7 +5,8 @@ live prompt: the old OPUS_BUILD / FABLE_QA / FABLE_PLAYTEST prompts are retired
 (git history has them). Build state: **67 registered modules, 66/67 active
 (ClassicRockets opt-in), F10 retired and deleted, latest clean A/B pair
 2026-07-27 (logs 11.45.34 / 11.47.09), everything pushed.** The 2026-07-26/27
-sessions were a long live-playtest run: 13 fixes now carry playtest status,
+sessions were a long live-playtest run: 14 fixes now carry playtest status
+(F36 via PT-24 post-wrap; F61 closed wontfix → D03 filed same day),
 two of the three decision gates are cleared, and one new defect (F12's
 "Food"-key collision) was found live, repaired, and A/B-verified same day.
 What remains is playtest-driven plus one unblocked build item (D02).
@@ -56,10 +57,14 @@ always safe; A/B legs need the game to be free).
 ## Playtest state as of 2026-07-27 (evidence in PLAYTEST_ARCHIVE.md)
 
 - **Done → `tested`:** F03 (PT-02), F05 (PT-05), F12 (PT-07 — whose FIRST run
-  caught a second F12 defect, repaired + A/B same day), F13 (PT-08), F44+F45
+  caught a second F12 defect, repaired + A/B same day), F13 (PT-08),
+  F36 (PT-24 — geologist demand 11→0 on the ExtractorAI grant; 38 engineers +
+  2 medics + zero geologists graduated), F44+F45
   (PT-03), F47 (PT-45), F50 (PT-04), F51 (PT-12), F54 (PT-34), F66 (PT-41);
   F52 `tested*` (PT-13). F49(b) resolved as no-defect (PT-46). F10 CLOSED
-  `wontfix` (PT-36, both-ways evidence incl. a real $544.5M read). D02 gate
+  `wontfix` (PT-36, both-ways evidence incl. a real $544.5M read). F61 CLOSED
+  `wontfix` (PT-14 — quarantine by design; deletion staged, ask re-filed as
+  D03). D02 gate
   done (PT-38): the dismiss window is **120,000 GAME-ms = 4 game hours**, not
   wall-clock — corrected in the checklist cautions and the D02 entry.
 - **In flight — PT-06 (F08), the 5-star half is BANKED:** a pampered 10-tourist
@@ -81,7 +86,8 @@ always safe; A/B legs need the game to be free).
   already-researched tech's stored discount from 10% to 20%`) — worth capturing.
 - **Everything else is un-run:** PT-09..PT-11, PT-15..PT-19 (fixture saves
   B/D/E per the checklist's fixture table; PT-14 DONE 2026-07-27 — premise
-  falsified, see the F61 gate above), PT-23..33 + PT-35 (wave-3),
+  falsified, see the F61 gate above), PT-23 + PT-25..33 + PT-35 (wave-3;
+  PT-24 DONE 2026-07-27 → F36 `tested`),
   PT-37 (last gate, attended), PT-39/40/42/43/44 (wave-4), PT-47 (wave-5),
   PT-46's untested tail (F49(d) train cap, F49(a) instant-track palette),
   PT-20/21/22 (uninstall / soak / log hygiene).
