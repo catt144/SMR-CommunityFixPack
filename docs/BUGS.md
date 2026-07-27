@@ -66,7 +66,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | tested |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | tested*|
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
-| F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | fixed  |
+| F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | tested |
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
 | F56 | Auto RC Transports never offload rockets                 | P2  | high | wontfix|
 | F57 | Drone/transport minors bundle                            | P3  | med  | fixed* |
@@ -1254,7 +1254,7 @@ through the elevator assigned with it (`RocketBase.lua:2068-2071` → `Transport
 On re-check take both `ChooseDome` returns and write `emigration_elevator` back, else wait
 near rocket under "Confused Colonists" + retry dome selection.
 
-### F54 — Switched-off shuttle hubs count as transport available (P2, med-high)  `[fixed: Code/Fix_ShuttleHubOffAvailable.lua]`
+### F54 — Switched-off shuttle hubs count as transport available (P2, med-high)  `[tested: Code/Fix_ShuttleHubOffAvailable.lua — PT-34 PASS 2026-07-27 (hubs off: homeless stayed put inside, nobody waited outdoors; hubs back on: emigration resumed immediately)]`
 `IsLRTransportAvailable` (`ShuttleHub.lua:350-359`) counts hubs with
 `GetWorkNotPermittedReason()` truthy (= player toggled OFF) as available, but
 `SendOutShuttles` only runs when `working`. All-hubs-off (late-game power saving) →

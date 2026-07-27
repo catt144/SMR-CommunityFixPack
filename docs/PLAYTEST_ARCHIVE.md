@@ -16,7 +16,8 @@ PT-08 (F13 → tested — all 11 resource
 rows show numbers, HUD cross-checked), PT-12 (F51 → tested — cached mode=false
 recomputed to "shuttle" when the hub went live), PT-13 (F52 → tested* — passage
 used in vacuum; surface walk correctly resumed once the passage was destroyed),
-PT-38 (D02 gate DONE 2026-07-27 — cadence measured and CORRECTED to 120,000
+PT-34 (F54 → tested — hubs off: homeless stayed put inside; hubs on:
+emigration resumed), PT-38 (D02 gate DONE 2026-07-27 — cadence measured and CORRECTED to 120,000
 GAME-ms = 4 game hours, not wall-clock; per-id suppression confirmed;
 Opt_AcknowledgedWarnings build unblocked), PT-41 (F66 → tested), PT-45 (F47 →
 tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail remains in the
@@ -447,6 +448,52 @@ make sure both worked." Both halves observed on the live colony: with the
 passage standing, the colonist routed through it in vacuum (the F52 fix); with
 the passage destroyed, the surface walk resumed — the designed no-passage
 fallback (kept so shuttle-less maps cannot strand colonists), NOT a failure.
+
+---
+
+## PT-34 — Shuttle Hub switched off · covers **F54**
+
+The probe proves the predicate; only play shows what the colony then does with
+the answer.
+
+**Setup:** SAVE-C (the two-dome colony) with a **Shuttle Hub built, fuelled and
+holding at least one shuttle** — PT-12 already has you build one, so run this
+straight after it. Dome A has residents and no spare housing, dome B has free
+housing.
+
+**Trigger:**
+1. With the hub **on**, confirm shuttle transport works — the colonist is picked
+   up and moved.
+2. Now **switch every Shuttle Hub off** from its infopanel.
+3. Create the same demand again (make a colonist homeless in A with housing only
+   in B). Let a few sols pass.
+
+- **BROKEN looks like:** the colony still behaves as though shuttles were
+  available — the colonist is marked for a shuttle ride and stands on a pickup
+  spot outside, waiting indefinitely for a shuttle that no switched-off hub will
+  ever launch.
+- **FIXED looks like:** with all hubs off, the colony treats shuttle transport as
+  unavailable — the colonist stays inside / uses a walkable or passage route, or
+  simply stays put, rather than waiting outdoors.
+
+**Trigger — not over-broad:**
+4. Switch a hub back **on** and confirm shuttle rides resume normally.
+
+> Second, harder-to-see effect: with hubs off, dome-to-dome **walkability**
+> (`Dome.lua:256-259`) is also re-evaluated. Watch for colonists suddenly using
+> passages they previously ignored — that is the fix working, not a new bug.
+
+`Result (all hubs off):` PASS — 2026-07-27 (Stargazer save, reusing the PT-12
+infrastructure). Hubs switched off, an apartment destroyed to create homeless
+with free housing only in shuttle-reachable domes (no passage/tunnel access):
+"they just got the homeless tag and did not go outside, they just stayed put" —
+nobody committed to a ride or stood at an outdoor pickup spot. Under the
+shipped predicate the hub's mere existence would have marooned them outside.
+
+`Result (hub back on):` PASS — 2026-07-27: "once I started shuttle hub up
+again people started moving out" — rides resumed within a cycle, homeless
+emigrated to the free housing. Not over-broad: re-enabled hubs re-qualify
+immediately.
 
 ---
 

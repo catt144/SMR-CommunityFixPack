@@ -6,8 +6,8 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
-far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-07, PT-08, PT-12, PT-13, PT-38,
-PT-41, PT-45, and PT-46's F49(b) half. This
+far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-07, PT-08, PT-12, PT-13, PT-34,
+PT-38, PT-41, PT-45, and PT-46's F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -855,44 +855,6 @@ Planetary View.
 `Result (case B maintenance):` _____________________________________________
 
 `Result (case C committed lander / no lander still refused?):` _____________________________________________
-
----
-
-## PT-34 — Shuttle Hub switched off · covers **F54**
-
-The probe proves the predicate; only play shows what the colony then does with
-the answer.
-
-**Setup:** SAVE-C (the two-dome colony) with a **Shuttle Hub built, fuelled and
-holding at least one shuttle** — PT-12 already has you build one, so run this
-straight after it. Dome A has residents and no spare housing, dome B has free
-housing.
-
-**Trigger:**
-1. With the hub **on**, confirm shuttle transport works — the colonist is picked
-   up and moved.
-2. Now **switch every Shuttle Hub off** from its infopanel.
-3. Create the same demand again (make a colonist homeless in A with housing only
-   in B). Let a few sols pass.
-
-- **BROKEN looks like:** the colony still behaves as though shuttles were
-  available — the colonist is marked for a shuttle ride and stands on a pickup
-  spot outside, waiting indefinitely for a shuttle that no switched-off hub will
-  ever launch.
-- **FIXED looks like:** with all hubs off, the colony treats shuttle transport as
-  unavailable — the colonist stays inside / uses a walkable or passage route, or
-  simply stays put, rather than waiting outdoors.
-
-**Trigger — not over-broad:**
-4. Switch a hub back **on** and confirm shuttle rides resume normally.
-
-> Second, harder-to-see effect: with hubs off, dome-to-dome **walkability**
-> (`Dome.lua:256-259`) is also re-evaluated. Watch for colonists suddenly using
-> passages they previously ignored — that is the fix working, not a new bug.
-
-`Result (all hubs off):` _____________________________________________
-
-`Result (hub back on):` _____________________________________________
 
 ---
 
