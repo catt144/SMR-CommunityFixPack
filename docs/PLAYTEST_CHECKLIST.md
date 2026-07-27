@@ -126,7 +126,7 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatFillAllStorages()` | `Lua/Buildings/StorageDepot.lua:2020` | fill every depot |
 | `CheatAddFunding(n)` | `Lua/Cheats.lua:132` | funding |
 | `CheatUnlockAllBuildings()` / `CheatUnlockAllSponsorBuildings()` | `CommonLua/Features/LockablePreset.lua:626` / `Lua/Cheats.lua:337` | ignore build-menu locks |
-| `CheatResearchAll()` | `Lua/Cheats.lua:78` | grant all techs |
+| `CheatResearchAll()` | `Lua/Cheats.lua:78` | grant all techs — **EXCEPT undiscovered breakthroughs** (the loop skips non-`discoverable` fields unless the tech is already discovered, `Cheats.lua:84`; verified live 2026-07-27). Grant a specific breakthrough directly: `UIColony:SetTechResearched("<Id>")` (discovers it itself, `Research.lua:285`); or `CheatUnlockAllBreakthroughs()` first, THEN `CheatResearchAll()` |
 | `MultiCheat()` | `Lua/Cheats.lua:328` | unlock all + deep scan + research all |
 | `CheatSpawnNColonists(n, age_trait, backstory)` | `Lua/Cheats.lua:225` | spawn into selected dome, else spread |
 | `CheatGenerateApplicants(n)` | `Lua/ApplicantsPool.lua:210` | applicant pool |
@@ -545,8 +545,10 @@ targets `MetalsExtractor` / `PreciousMetalsExtractor`) and a **Martian Universit
 2. Build a **Martian University**, set specialization to **Auto** and training policy
    to **"train as needed"**. Feed it unspecialized colonists (`CheatSpawnNColonists(20)`).
 3. Read the university's infopanel **needed-specializations list** and note it.
-4. Now research the **Extractor AI** breakthrough. On a retail build the simplest route
-   is `CheatResearchAll()` (it grants breakthroughs too); confirm afterwards that the
+4. Now research the **Extractor AI** breakthrough:
+   `UIColony:SetTechResearched("ExtractorAI")` — **NOT `CheatResearchAll()`**, which
+   skips undiscovered breakthroughs (corrected 2026-07-27, found live in this test;
+   see the command-table row). Confirm afterwards that the
    extractors show **Automation** in their infopanel and keep working with their
    workers removed.
 5. Re-read the university's needed-specializations list, then run 3–4 sols at
@@ -637,9 +639,11 @@ solar panel(s)` in the log — those panels should start producing immediately.
 ## PT-27 — Dust Sickness does not infect Biorobots · covers **F40**
 
 **Setup:** SAVE-A. You need **Biorobots** and a **dust storm**. Biorobots come from
-the Biorobots tech/resupply — `CheatResearchAll()` then spawn a batch and check the
-colonist list for the **Biorobot** trait; if you cannot get any, write "could not set
-up" and skip the F40 half.
+the **The Positronic Brain** breakthrough —
+`UIColony:SetTechResearched("ThePositronicBrain")` (NOT `CheatResearchAll()`, which
+skips undiscovered breakthroughs — see the command table), then spawn a batch and
+check the colonist list for the **Biorobot** trait; if you cannot get any, write
+"could not set up" and skip the F40 half.
 
 **Trigger:**
 1. Note which colonists are Biorobots.
