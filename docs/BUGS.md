@@ -22,7 +22,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
 | F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | fixed  |
-| F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | retiring |
+| F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | wontfix |
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | fixed  |
 | F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | tested |
 | F13 | Command Center resource rows show no numbers             | P2  | high | tested |
@@ -235,7 +235,7 @@ payouts. Visible as 2 red rows down / 1 green row up in the satisfaction log. **
 replace `Colonist.UpdateSatisfaction` (self-contained) with symmetric tier-based version
 (tiers: <low / [low,high) / [high,100) / 100; apply signed sum of awards between tiers).
 
-### F10 — Faction funding conditions always error  `[retiring — premise falsified; final wontfix gated on PT-36]`
+### F10 — Faction funding conditions always error  `[CLOSED wontfix 2026-07-27 — PT-36 PASS on a real save; premise falsified twice over]`
 `Lua\Funding.lua:104-117` (`GetLastSolsFundingByType`) — `pairs(funding_gain_last_hours[hour])`
 where the per-hour table only exists for hours with positive gain (`ChangeFunding` :52-65)
 → `pairs(nil)` error for most hours. Breaks `Data\FactionDef\BlueSun.lua:34,54`,
@@ -258,6 +258,18 @@ is gated on **PT-36** — an in-person console check on a real long-running save
 SHIPPED function returns a number over empty income hours, confirming the synthetic
 baseline evidence on organic save state. If PT-36 ever errors, re-enable the fix and
 reopen this entry.
+**PT-36 PASS (2026-07-27, Stargazer save, sol 45+):** all three
+`GetLastSolsFundingByType(10, …)` calls printed `0` cleanly over a real save's
+income history — a maximally nil-heavy window (the colony had idled past the
+12-sol retention ring, `Funding.lua:86`, so nearly every hour entry was nil) —
+with zero `Funding.lua` errors in the log. The `pairs(nil)` tolerance holds on
+organic state. **CLOSED `wontfix`; `Fix_FactionFundingCheck.lua` deleted from
+the repo and its commented metadata line removed** (rollback if ever needed =
+restore both from git history, commit 40f51da or earlier). The TestKit
+`FactionFundingCheck` probe is deliberately KEPT: it drives the SHIPPED
+function and PASSes both A/B legs (it is the baseline's expected "1 PASS"), so
+it now serves as a standing canary that a future game patch hasn't broken the
+shipped body — expected A/B numbers stay unchanged.
 
 ### F11 — Train wedges at platform (`table.remove` misuse)  `[fixed: Code/Fix_TrainPlatformWedge.lua]`
 `Lua\Units\ColonistTransport.lua:541-547` (`ExitVehicle` stale-passenger guard) —

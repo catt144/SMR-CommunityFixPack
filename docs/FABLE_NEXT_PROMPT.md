@@ -43,7 +43,11 @@ always safe; A/B legs need the game to be free).
   before touching code (the F02 hunt in STATUS is the worked example). Mechanical
   repairs land with a re-verified A/B pair; redesigns go to the user.
 - **Three checklist items are decision gates that trigger real work:**
-  * **PT-36** → F10's final `wontfix` (delete the commented metadata line).
+  * ~~**PT-36** → F10~~ **DONE 2026-07-27: F10 CLOSED `wontfix`** — three
+    funding calls returned 0 cleanly over a maximally nil organic history;
+    `Fix_FactionFundingCheck.lua` deleted + commented metadata line removed
+    (restore from git history to roll back). TestKit probe kept as a canary —
+    expected A/B numbers unchanged (it is the baseline's "1 PASS").
   * **PT-37** → F48: PASS = build the corrected fixup behind a one-shot flag;
     FAIL = `wontfix`.
   * ~~**PT-38** → D02~~ **DONE 2026-07-27: cadence measured and CORRECTED —
@@ -110,7 +114,7 @@ always safe; A/B legs need the game to be free).
   immediately. Ran on the PT-12 infrastructure.
 - **Everything else is un-run:** PT-06, PT-09..PT-11, PT-14..PT-19 (fixture
   saves per the
-  checklist's fixture table), PT-23..33 + PT-35 (wave-3), PT-36/37 (gates, attended),
+  checklist's fixture table), PT-23..33 + PT-35 (wave-3), PT-37 (last gate, attended),
   PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)
   train cap follows length, F49(a) instant-track palette), PT-20/21/22
   (uninstall / soak / log hygiene). The F18 savegame sweep announces itself on load of an affected save

@@ -15,7 +15,6 @@ return PlaceObj('ModDef', {
 		"Code/Fix_WispRewards.lua",
 		"Code/Fix_TouristApplicants.lua",
 		"Code/Fix_TrainsToVoid.lua",
-		-- "Code/Fix_FactionFundingCheck.lua",  -- F10 RETIRING: premise falsified (engine tolerates pairs(nil)); re-add this line to roll back. Final wontfix gated on PT-36.
 		"Code/Fix_LanderEmptyLaunch.lua",
 		"Code/Fix_LanderCargoRatchet.lua",
 		"Code/Fix_LanderReturnFuel.lua",

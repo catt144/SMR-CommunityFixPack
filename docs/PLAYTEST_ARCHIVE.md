@@ -17,7 +17,9 @@ rows show numbers, HUD cross-checked), PT-12 (F51 → tested — cached mode=fal
 recomputed to "shuttle" when the hub went live), PT-13 (F52 → tested* — passage
 used in vacuum; surface walk correctly resumed once the passage was destroyed),
 PT-34 (F54 → tested — hubs off: homeless stayed put inside; hubs on:
-emigration resumed), PT-38 (D02 gate DONE 2026-07-27 — cadence measured and CORRECTED to 120,000
+emigration resumed), PT-36 (F10 gate DONE 2026-07-27 — three funding calls
+returned 0 cleanly over a maximally nil real-save history; F10 CLOSED wontfix,
+fix file deleted, TestKit probe kept as canary), PT-38 (D02 gate DONE 2026-07-27 — cadence measured and CORRECTED to 120,000
 GAME-ms = 4 game hours, not wall-clock; per-id suppression confirmed;
 Opt_AcknowledgedWarnings build unblocked), PT-41 (F66 → tested), PT-45 (F47 →
 tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail remains in the
@@ -494,6 +496,52 @@ shipped predicate the hub's mere existence would have marooned them outside.
 again people started moving out" — rides resumed within a cycle, homeless
 emigrated to the free housing. Not over-broad: re-enabled hubs re-qualify
 immediately.
+
+---
+
+## PT-36 — F10 retirement check · confirms **F10** is safe to close `wontfix`
+
+F10 (faction funding conditions "always error") is **retiring**: the QA A/B baseline
+proved the shipped `GetLastSolsFundingByType` tolerates its `pairs(nil)` hours in this
+engine, so the fix repairs nothing. The fix is already commented out of `metadata.lua`.
+This check confirms that finding on a **real** save's organic income history — the one
+thing the synthetic baseline could not cover — and is the gate for closing the entry.
+
+**Setup:** your longest-running real save (SAVE-B or better; a donated community save
+is ideal). Fix pack loaded as normal — the retired fix is simply absent, so the
+console drives the SHIPPED function. Two minutes.
+
+**Trigger:**
+1. Open the console (Enter / Alt-Shift-C — the Test Kit enables it) and run, one at
+   a time:
+   `UIColony.funds:GetLastSolsFundingByType(10, "Exports")`
+   `UIColony.funds:GetLastSolsFundingByType(10, "Tourist Profits")`
+   `UIColony.funds:GetLastSolsFundingByType(10, "Exports + Tourist Profits")`
+2. Play (or fast-forward) a few game hours with **no export/tourism income**, then
+   run all three again — this maximises the nil per-hour entries the old entry
+   claimed would crash.
+3. Skim the session log for any new `[LUA ERROR]` mentioning `Funding.lua`.
+
+- **RETIREMENT CONFIRMED looks like:** every call prints a **number** (0 is fine, and
+  expected with no recent income) and the log stays clean → report PASS; F10 closes
+  as `wontfix` and `Fix_FactionFundingCheck.lua` is deleted from the repo.
+- **ROLLBACK looks like:** any call errors (`pairs`/nil in `Funding.lua:110`) → report
+  FAIL with the exact error text and your save's sol count; re-add the
+  `Fix_FactionFundingCheck.lua` line in `metadata.lua` and the F10 entry reopens.
+- Bonus, if the save's sponsor has faction goals: open the faction/goals screen and
+  confirm the "made profits from exports/tourism in the last 10 sols" conditions
+  render and evaluate (either state) without errors.
+
+`Result:` PASS — 2026-07-27, Stargazer save (sol 45+, long-idled at high speed).
+All three calls printed **0** with no error text and no `Funding.lua` entries in
+the log — and this history was maximally hostile: the colony had run past the
+12-sol retention ring (`Funding.lua:86` prunes hourly entries), so nearly every
+hour the loop touched was nil. The shipped `pairs(nil)` tolerance holds on
+organic save state, matching the synthetic A/B baseline. **F10 CLOSED `wontfix`;
+`Fix_FactionFundingCheck.lua` deleted; commented metadata line removed** (both
+restorable from git history). The TestKit `FactionFundingCheck` probe stays as
+a canary on the shipped function — expected A/B numbers unchanged (it is the
+baseline's "1 PASS").
 
 ---
 
