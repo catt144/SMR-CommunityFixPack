@@ -64,7 +64,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | tested |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | tested |
-| F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | fixed* |
+| F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | tested*|
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
 | F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | fixed  |
 | F55 | Open domes: drone access lost + unreachable-forever cache| P1  | med  | fixed* |
@@ -1206,7 +1206,7 @@ suppress the disconnect/reconnect churn (requests mutate in place via
 seniors. **Fix:** wrap `FindTransportationModeToCommunity` to key on shuttle flag + flush
 cache on ConstructionComplete/TTL.
 
-### F52 — Colonists still walk ≤400m in vacuum past passages (P1, high)  `[fixed*: Code/Fix_VacuumWalks.lua — passage route now always looked up in vacuum; the surface walk is still allowed when NO passage route exists (refusing it would strand colonists on shuttle-less maps) — that half stays open]`
+### F52 — Colonists still walk ≤400m in vacuum past passages (P1, high)  `[tested*: Code/Fix_VacuumWalks.lua — PT-13 PASS 2026-07-26 (colonist used the passage; after the passage was destroyed the surface walk correctly resumed — the designed fallback). The no-passage surface walk stays allowed by design (refusing it would strand colonists on shuttle-less maps) — that half stays open]`
 `FindTransportationModeToCommunity_BeforeTrains` (`Colonist.lua:2467-2476`) returns "walk"
 whenever ≤400m (`ColonistMaxDomeWalkDist`, `_GameConst.lua:133`); `TryToEmigrateToDome`
 (:1555-1575) only computes passage path when `transport_mode_dist > min_dist` — walk mode

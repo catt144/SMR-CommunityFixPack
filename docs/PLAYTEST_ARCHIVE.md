@@ -10,9 +10,10 @@ Archived 2026-07-26: PT-01 (F02 cadence + tower lead verified live; the
 passive silence-watch continues via the watchdog), PT-02 (F03 → tested),
 PT-03 (F44/F45 → tested), PT-04 (F50 → tested), PT-05 (F05 → tested — the
 "A dream fulfilled" popup at 18/18), PT-12 (F51 → tested — cached mode=false
-recomputed to "shuttle" when the hub went live), PT-41 (F66 → tested),
-PT-45 (F47 → tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail
-remains in the checklist as un-run).
+recomputed to "shuttle" when the hub went live), PT-13 (F52 → tested* — passage
+used in vacuum; surface walk correctly resumed once the passage was destroyed),
+PT-41 (F66 → tested), PT-45 (F47 → tested), PT-46 (F49(b) resolved as
+no-defect; its (d)/(a) tail remains in the checklist as un-run).
 
 ---
 
@@ -334,6 +335,37 @@ every #1506 pair flipped to `mode=shuttle, cached with shuttles=true`, and the
 user's observation: "They have all transported out from what I can tell" — the
 homeless emigrated. The smr_shuttles stamp mismatch forcing the recompute is
 the fix's mechanism working as designed; screenshots of both dumps taken.
+
+---
+
+## PT-13 — Vacuum walk routing · covers **F52**
+
+**Setup:** SAVE-C — domes A and B ~350 m apart (**under** the 400 m
+`const.ColonistMaxDomeWalkDist`, `Lua/_GameConst.lua:133`) **joined by a passage**,
+with the direct outdoor route also open. Atmosphere must be **non-breathable**: check
+`GetTerraformParamPct("Atmosphere")` is low; if you terraformed by accident, use
+`SetTerraformParamPct("Atmosphere", 5)`.
+
+**Trigger:** force a colonist to move between the domes — set dome A to not accept
+residents / turn off its life support briefly, or use a workplace in B. Then **follow a
+colonist with the camera** for the whole trip.
+
+- **BROKEN looks like:** the colonist strolls out the airlock and hikes across open
+  vacuum between the domes, with the suffocation timer ticking — and some of them die
+  en route.
+- **FIXED looks like:** the colonist uses the **passage** (goes through the tube, no
+  outdoor stretch) — or waits/refuses rather than walking exposed.
+
+> Known partial: if there is **no** passage route at all, an outdoor walk is still
+> allowed by design (refusing it would strand colonists on shuttle-less maps). Only the
+> "passage exists but is ignored" case is a FAIL.
+
+`Result:` PASS — 2026-07-26 (user, confirmed 2026-07-27): "I watched them do it
+in a passage and I destroyed the passage and watched them do a space walk to
+make sure both worked." Both halves observed on the live colony: with the
+passage standing, the colonist routed through it in vacuum (the F52 fix); with
+the passage destroyed, the surface walk resumed — the designed no-passage
+fallback (kept so shuttle-less maps cannot strand colonists), NOT a failure.
 
 ---
 

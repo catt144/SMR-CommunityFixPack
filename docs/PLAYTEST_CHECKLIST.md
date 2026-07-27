@@ -6,8 +6,8 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
-far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-12, PT-41, PT-45, and PT-46's F49(b)
-half. This
+far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-12, PT-13, PT-41, PT-45, and
+PT-46's F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -358,32 +358,6 @@ Let **20+ game hours** pass. Then save, reload, and let another 20 pass.
 ---
 
 # Group 3 — SAVE-C (two-dome colony)
-
-## PT-13 — Vacuum walk routing · covers **F52**
-
-**Setup:** SAVE-C — domes A and B ~350 m apart (**under** the 400 m
-`const.ColonistMaxDomeWalkDist`, `Lua/_GameConst.lua:133`) **joined by a passage**,
-with the direct outdoor route also open. Atmosphere must be **non-breathable**: check
-`GetTerraformParamPct("Atmosphere")` is low; if you terraformed by accident, use
-`SetTerraformParamPct("Atmosphere", 5)`.
-
-**Trigger:** force a colonist to move between the domes — set dome A to not accept
-residents / turn off its life support briefly, or use a workplace in B. Then **follow a
-colonist with the camera** for the whole trip.
-
-- **BROKEN looks like:** the colonist strolls out the airlock and hikes across open
-  vacuum between the domes, with the suffocation timer ticking — and some of them die
-  en route.
-- **FIXED looks like:** the colonist uses the **passage** (goes through the tube, no
-  outdoor stretch) — or waits/refuses rather than walking exposed.
-
-> Known partial: if there is **no** passage route at all, an outdoor walk is still
-> allowed by design (refusing it would strand colonists on shuttle-less maps). Only the
-> "passage exists but is ignored" case is a FAIL.
-
-`Result:` _____________________PASS________________________
-
----
 
 ## PT-14 — Cross-dome shopping with migration off · covers **F61**
 

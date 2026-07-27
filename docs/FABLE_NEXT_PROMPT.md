@@ -78,7 +78,10 @@ always safe; A/B legs need the game to be free).
   building the Shuttle Hub on the live colony: every isolated-dome pair flipped
   `mode=false, shuttles=false` → `mode=shuttle, shuttles=true` and the homeless
   emigrated (dumps + user quote in the archived PT-12).
-- **Everything else is un-run:** PT-06..PT-11, PT-13..PT-19 (fixture saves per the
+- **PT-13 PASS (confirmed 2026-07-27): F52 is `tested*`** — colonist used the
+  passage in vacuum; user destroyed the passage and the surface walk correctly
+  resumed (the designed no-passage fallback; that half stays open by design).
+- **Everything else is un-run:** PT-06..PT-11, PT-14..PT-19 (fixture saves per the
   checklist's fixture table), PT-23..35 (wave-3), PT-36/37/38 (gates, attended),
   PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)
   train cap follows length, F49(a) instant-track palette), PT-20/21/22
