@@ -251,6 +251,16 @@ maintenance consumption.
   visibly flicker / replay its alert sound every game hour? (The F12 rework was
   specifically about killing that churn.) **The warning should be steady.**
 
+> First run 2026-07-27 (Stargazer save): the Food warning FIRED correctly
+> ("2 Sols, 22h" — that half works) but the steadiness check FAILED — user:
+> "I get a flash and a voice over the says 'warning insufficient resources' on
+> repeat every hour or so". Diagnosed live via console instrumentation to a
+> "Food"-key collision between the maintenance loop and the food branch inside
+> the fixed updater (full record on the F12 entry); repaired same day in
+> Fix_LowStorageWarning.lua. **Re-run this test from scratch on the repaired
+> build (next game launch): expect the warning to fire AND sit steady, plus the
+> Machine Parts half.**
+
 `Result:` _____________________________________________
 
 ---

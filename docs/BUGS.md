@@ -276,6 +276,32 @@ Grid branches (:259-303) are correct. Consts: `_GameConst.lua:4,10-11`. **Fix:**
 `ResourceTracking.GatheredResourcesOnHourlyUpdate`: `MulDivRound(supply, HoursPerDay, v)`
 vs `MinDays* × HoursPerDay`.
 
+**Second defect found live in PT-07 (2026-07-27) — maintenance/food "Food"-key
+collision; REPAIRED same day, A/B pending.** With the warning finally able to
+fire, the user reported a flash + the "Warning! Insufficient resources" voice
+replaying every game hour. Console instrumentation (wrapping AddNotification /
+RemoveNotification / RemoveObjectFromNotification, then per-city tick markers)
+pinned it: the notification was destroyed and recreated once per hour INSIDE the
+surface city's own tick — remove first, add after. Root cause: `"Food"` appears
+in `maintenance_resources_consumed_yesterday` too, and the maintenance loop and
+the dedicated food branch write the SAME `"Food"` object key on the SAME
+`InsufficientResources` notification. The maintenance loop runs first, computes
+maintenance-based hours (guard fails for Food), takes its else-path and
+`RemoveObjectFromNotification("Food", …)` — deleting the food branch's entry;
+as the only object, that destroys the whole notification, and the food branch
+recreates it a line later → FX + voice replay hourly (voice plays only on
+whole-notification creation: `VoicePerObject` is false on this preset,
+`NotificationUI.lua:197-207`). Latent in the shipped body — with the broken math
+neither branch could ever add, so there was no entry to fight over. Diagnostic
+red herrings ruled out on the way: user dismissal (the `dismissed` flag was
+false on every destroy; the 2-real-minute `SuppressTime` re-nag is D02's
+territory, not this), threshold flapping (reproduced with farms OFF, monotonic
+70h < 72h), object validation (`IsObjValid`/`IsValidMapObject` both pass string
+keys), and a second stale body (City and ResourceTracking dispatch the same
+function address). **Repair:** the maintenance loop now skips `k == "Food"` —
+the food branch owns that key (`-- FIX (F12, second defect)` block in the fix
+file). PT-07 re-run + fresh A/B pair pending.
+
 ### F13 — Command Center resource rows show no numbers  `[tested: Code/Fix_CommandCenterNumbers.lua — PT-08 PASS 2026-07-27 (all 11 previously-blank rows show numbers; cross-checked against the HUD bar, exact match modulo live-sim drift)]`
 `Data\XDef\CommandCenterCategories.lua:226-328` (+ generated twin) — 11 tags like
 `<metals(AvailableMetals)>` reference getters that don't exist (remaster refactored to

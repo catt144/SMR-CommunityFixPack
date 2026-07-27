@@ -126,6 +126,20 @@ the index rows; the rows were synced in the follow-up doc-sync commit.
 connector churn in the 11.48.31 log; demolishing one building left the survivor
 connected ("became its own node but stayed connected … no weird visuals" — the
 reclaim repair); plain-tile control clean.
+**PT-07 first run FAILED the steadiness half (2026-07-27) → F12 second defect
+found + repaired, A/B PENDING:** the Food warning fired correctly but the
+notification was destroyed/recreated hourly (flash + voice replay). Live console
+instrumentation attributed it to the surface city's own tick: the maintenance
+loop and the food branch share the `"Food"` object key, and the maintenance
+else-path deleted the food branch's entry each hour (voice plays only on
+whole-notification creation — VoicePerObject false). Repair: maintenance loop
+skips `"Food"` (the food branch owns the key). Full forensic record on the F12
+entry. **A/B pair re-verified clean same day (2026-07-27):** baseline
+Mars.exe-20260727-11.45.34 = 1 PASS / 58 FAIL / 11 SKIP / 0 ERROR; fixed
+-11.47.09 = **59 PASS / 0 FAIL / 11 SKIP / 0 ERROR**, 66/67 active,
+LowStorageWarning applied, zero errors from our files. Repair landed. **Open:
+the user re-runs PT-07 on the repaired build (warning fires AND sits steady +
+the Machine Parts half).**
 **TestKit console repair (2026-07-26 later, user report: console dead on every
 NEW save, fine on loads):** root cause — `Msg("CityStart")` fires from
 `OnMsg.NewMap` DURING map generation (`Lua/_init.lua:18-26`), so the kit's fixed

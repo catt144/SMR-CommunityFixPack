@@ -84,6 +84,14 @@ always safe; A/B legs need the game to be free).
 - **PT-08 PASS (2026-07-27): F13 is `tested`** — all 11 previously-blank
   Command Center rows show numbers, cross-checked against the HUD bar (six
   exact, rest live-sim drift).
+- **PT-07 first run found + fixed an F12 second defect (2026-07-27):** the
+  warning fired ("2 Sols, 22h") but a "Food"-key collision between the
+  maintenance loop and the food branch destroyed/recreated the notification
+  hourly (flash + voice). Repaired (maintenance loop skips "Food"; forensics on
+  the F12 entry), **A/B pair clean same day** (11.45.34 / 11.47.09: 1/58/11/0 →
+  59/0/11/0, 66/67 active). **PT-07 re-run is open**: warning must fire AND sit
+  steady over 2-3 game hours, plus the Machine Parts half. TestKit gained
+  `SMRTest.Cls` (clears the on-screen console overlay).
 - **Everything else is un-run:** PT-06/07, PT-09..PT-11, PT-14..PT-19 (fixture
   saves per the
   checklist's fixture table), PT-23..35 (wave-3), PT-36/37/38 (gates, attended),

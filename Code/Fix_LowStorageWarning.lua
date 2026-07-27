@@ -72,6 +72,18 @@ SMRFixPack.Register("LowStorageWarning", {
 			local resource_overview = GetCityResourceOverview(self)	
 			GatherTransportableResources(transportable_resources, self)
 			for k,v in pairs(maintenance_resources) do
+				-- FIX (F12, second defect — found live in playtest PT-07, 2026-07-27):
+				-- "Food" can appear in the maintenance-consumed table too, and BOTH this
+				-- loop and the dedicated food branch below write the SAME "Food" object
+				-- key on the SAME notification. This loop's hours are maintenance-based,
+				-- so its guard fails for Food and its else-path deleted the entry the
+				-- food branch had added — destroying the (single-object) notification
+				-- and forcing a recreate one line later, replaying the FX and the
+				-- "Warning! Insufficient resources" voice every game hour. The food
+				-- branch owns the "Food" key; skip it here. Latent in the shipped body:
+				-- with the broken math neither branch could ever add, so the collision
+				-- had no visible effect.
+				if k ~= "Food" then
 				-- FIX (F12): the shipped `a*const.HoursPerDay / v*const.HoursPerDay` parses as
 				-- `((a*24)/v)*24`, and `/` truncates here: the result is 0 or >= 24, so the
 				-- `0 < num_hours < 3` guard below can never hold and the warning is dead.
@@ -84,6 +96,7 @@ SMRFixPack.Register("LowStorageWarning", {
 					AddObjectToNotification(k, { resource = k, hours = num_hours, expiration = num_hours*const.HourDuration }, "InsufficientResources", map)
 				else
 					RemoveObjectFromNotification(k, notification)
+				end
 				end
 			end
 
