@@ -41,13 +41,15 @@ one-line summary here:
   seconds — D02's case is STRONGER. `Opt_AcknowledgedWarnings` build unblocked.
 - **PT-06 (F08) DONE 2026-07-27 (later) → F08 `tested`:** 5★ 10-tourist
   departure paid at Earth ARRIVAL "+23 applicants, $544.5M" (2.3/head =
-  top-tier); the tanked half (fresh group into a stripped dome — homeless,
-  services off, three fled Earthsick at sol 1-5) paid "+7 applicants, $94.5M".
-  23 vs 7 = the clear split. Mechanics confirmed from Src during the run:
-  departure rewards walk every boarded Tourist with no sols/reason filter
-  (early leavers count); any stat < 30 caps the rating at the 2★ tier
-  (`HolidayStatCapRating`); ~0.7 applicants/head at ≤2★ matches the corrected
-  roll (shipped inverted math would average ~0.2). Two cosmetic vanilla quirks
+  top-tier); the tanked half (a 25-tourist group into a stripped dome —
+  homeless, services off, Earthsick early leavers) paid "+7 applicants,
+  $94.5M" = **0.28 applicants/$3.78M per head — an 8× per-head split**.
+  Mechanics confirmed from Src during the run: departure rewards walk every
+  boarded Tourist with no sols/reason filter (early leavers count); any stat
+  < 30 caps the rating at the 2★ tier (`HolidayStatCapRating`); 7-from-25 is
+  in band for the corrected mostly-1★ roll (~10 expected) and ~3σ below the
+  shipped inverted roll (~15 expected) — corroborating evidence, not noise.
+  Two cosmetic vanilla quirks
   recorded in the archive entry (overstay-cycle button no-ops silently on an
   empty sol-10+ bucket and only cycles the current map; sols-based tooltip
   labels early-leavers "Enjoying their holiday").
