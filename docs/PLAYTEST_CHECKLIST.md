@@ -6,7 +6,7 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
-far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-12, PT-13, PT-41, PT-45, and
+far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-08, PT-12, PT-13, PT-41, PT-45, and
 PT-46's F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
@@ -250,23 +250,6 @@ maintenance consumption.
 - **Also check:** while the warning is active, does it sit there quietly, or does it
   visibly flicker / replay its alert sound every game hour? (The F12 rework was
   specifically about killing that churn.) **The warning should be steady.**
-
-`Result:` _____________________________________________
-
----
-
-## PT-08 — Command Center resource rows · covers **F13**
-
-**Setup:** SAVE-A with a real economy (some Metals, Concrete, Polymers, Food, Water,
-Electronics, Machine Parts, Rare Metals in stock).
-
-**Trigger:** `OpenCommandCenter()` (or the in-game button). Go to the resource
-overview and read every resource row.
-
-- **BROKEN looks like:** the resource rows show icons and labels but the **numbers are
-  blank** — you cannot tell how much of anything you have from this screen.
-- **FIXED looks like:** all 11 resource rows show numbers, and those numbers match what
-  the HUD/resource overview says.
 
 `Result:` _____________________________________________
 

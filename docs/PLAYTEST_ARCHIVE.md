@@ -9,7 +9,8 @@ the checklist — consult it before re-running anything here.
 Archived 2026-07-26: PT-01 (F02 cadence + tower lead verified live; the
 passive silence-watch continues via the watchdog), PT-02 (F03 → tested),
 PT-03 (F44/F45 → tested), PT-04 (F50 → tested), PT-05 (F05 → tested — the
-"A dream fulfilled" popup at 18/18), PT-12 (F51 → tested — cached mode=false
+"A dream fulfilled" popup at 18/18), PT-08 (F13 → tested — all 11 resource
+rows show numbers, HUD cross-checked), PT-12 (F51 → tested — cached mode=false
 recomputed to "shuttle" when the hub went live), PT-13 (F52 → tested* — passage
 used in vacuum; surface walk correctly resumed once the passage was destroyed),
 PT-41 (F66 → tested), PT-45 (F47 → tested), PT-46 (F49(b) resolved as
@@ -306,6 +307,30 @@ console with `MilestoneCompleted.ScanAnomaly = nil` then re-completing it. On
 the final completion (18/18, score 83,420) the **"A dream fulfilled" popup
 appeared immediately** (screenshots taken); log Mars.exe-20260726-15.03.01 has
 **zero [LUA ERROR]** — no "arithmetic on a nil value" anywhere.
+
+---
+
+## PT-08 — Command Center resource rows · covers **F13**
+
+**Setup:** SAVE-A with a real economy (some Metals, Concrete, Polymers, Food, Water,
+Electronics, Machine Parts, Rare Metals in stock).
+
+**Trigger:** `OpenCommandCenter()` (or the in-game button). Go to the resource
+overview and read every resource row.
+
+- **BROKEN looks like:** the resource rows show icons and labels but the **numbers are
+  blank** — you cannot tell how much of anything you have from this screen.
+- **FIXED looks like:** all 11 resource rows show numbers, and those numbers match what
+  the HUD/resource overview says.
+
+`Result:` PASS — 2026-07-27 (Stargazer save, sol 33, 101 colonists). All 11 rows
+that render blank in the shipped game showed numbers: Metals 424, Concrete 592,
+Food 117, Rare Metals 240, Polymers 221, Machine Parts 407, Fuel 408,
+Electronics 341, Seeds 60, Exotic Minerals 60, Waste Rock 921. Cross-checked
+against the HUD bar moments later: six exact matches (424 / 240 / 60 / 221 /
+408 / 60), the rest off by single digits in consuming directions (Food 117→104,
+Waste Rock 921→903 etc.) — live-sim drift between screenshots, same source
+values. Screenshots of both screens taken.
 
 ---
 

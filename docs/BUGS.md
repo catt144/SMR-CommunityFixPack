@@ -25,7 +25,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | retiring |
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | fixed  |
 | F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | fixed  |
-| F13 | Command Center resource rows show no numbers             | P2  | high | fixed  |
+| F13 | Command Center resource rows show no numbers             | P2  | high | tested |
 | F14 | Domes Overview red low-stat highlight dead               | P2  | high | fixed  |
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | fixed  |
@@ -276,7 +276,7 @@ Grid branches (:259-303) are correct. Consts: `_GameConst.lua:4,10-11`. **Fix:**
 `ResourceTracking.GatheredResourcesOnHourlyUpdate`: `MulDivRound(supply, HoursPerDay, v)`
 vs `MinDays* × HoursPerDay`.
 
-### F13 — Command Center resource rows show no numbers  `[fixed: Code/Fix_CommandCenterNumbers.lua]`
+### F13 — Command Center resource rows show no numbers  `[tested: Code/Fix_CommandCenterNumbers.lua — PT-08 PASS 2026-07-27 (all 11 previously-blank rows show numbers; cross-checked against the HUD bar, exact match modulo live-sim drift)]`
 `Data\XDef\CommandCenterCategories.lua:226-328` (+ generated twin) — 11 tags like
 `<metals(AvailableMetals)>` reference getters that don't exist (remaster refactored to
 `GetAvailable("X")`, `ResourceOverview.lua:144`; other call sites converted, this preset
