@@ -1,13 +1,14 @@
-# Fable continuation prompt — playtest reports / playtest QA (written 2026-07-26)
+# Fable continuation prompt — playtest reports / playtest QA (rewritten 2026-07-27)
 
 Paste everything below into a fresh Claude Code session (Fable). This is the ONE
 live prompt: the old OPUS_BUILD / FABLE_QA / FABLE_PLAYTEST prompts are retired
-(git history has them). The build state is: 67 registered modules, 66/67 active,
-four clean A/B pairs on 2026-07-26, everything pushed. The session before this
-one closed F18's open half (savegame sweep), landed the F44/F45 seed-crash
-repair, the F66 reclaim trigger, the F47 composition repairs, the F02 stall
-watchdog, and recorded the D01 export-half design decision. What remains is
-playtest-driven.
+(git history has them). Build state: **67 registered modules, 66/67 active
+(ClassicRockets opt-in), F10 retired and deleted, latest clean A/B pair
+2026-07-27 (logs 11.45.34 / 11.47.09), everything pushed.** The 2026-07-26/27
+sessions were a long live-playtest run: 13 fixes now carry playtest status,
+two of the three decision gates are cleared, and one new defect (F12's
+"Food"-key collision) was found live, repaired, and A/B-verified same day.
+What remains is playtest-driven plus one unblocked build item (D02).
 
 ---
 
@@ -16,8 +17,8 @@ session is most likely **processing the user's playtest reports** (or answering
 playtest questions; queued build work is listed at the end).
 
 **First, read (in order) from `C:\Dev\SMR-BugFixPack`:**
-1. `docs\STATUS.md` — "Follow-up session — Fable, 2026-07-26" AND the whole
-   engine-facts list.
+1. `docs\STATUS.md` — the "Playtest marathon — 2026-07-26/27" section AND the
+   whole engine-facts list.
 2. `docs\PLAYTEST_CHECKLIST.md` — the un-run tests, their save fixtures, and the
    "Reporting protocol" section at the end. Completed tests + their result
    evidence live in `docs\PLAYTEST_ARCHIVE.md` (completed sections move there,
@@ -37,104 +38,71 @@ always safe; A/B legs need the game to be free).
 - The playtest is the ONLY thing that flips a fix from `fixed` (probe-verified)
   to `tested` (ships in the release text). Partial reports are fine — process
   what was reported, leave the rest untouched. Record results in the checklist
-  (preserve the user's own words; add dated evidence notes), flip BUGS statuses,
-  and keep STATUS's session record current.
+  (preserve the user's own words; add dated evidence notes), flip BUGS statuses
+  in BOTH places (index row + heading tag), move the completed section to
+  `PLAYTEST_ARCHIVE.md`, and keep STATUS's session record current.
 - FAILs: diagnose from the logs in `%AppData%\Surviving Mars Relaunched\logs`
-  before touching code (the F02 hunt in STATUS is the worked example). Mechanical
+  before touching code — and when the log can't see it, instrument LIVE from
+  the console by wrapping the relevant globals with ConsolePrint taps (the F12
+  churn hunt in the archived PT-07 + the F12 BUGS entry is the worked example:
+  five wrong hypotheses were killed by timestamps, not speculation). Mechanical
   repairs land with a re-verified A/B pair; redesigns go to the user.
-- **Three checklist items are decision gates that trigger real work:**
-  * ~~**PT-36** → F10~~ **DONE 2026-07-27: F10 CLOSED `wontfix`** — three
-    funding calls returned 0 cleanly over a maximally nil organic history;
-    `Fix_FactionFundingCheck.lua` deleted + commented metadata line removed
-    (restore from git history to roll back). TestKit probe kept as a canary —
-    expected A/B numbers unchanged (it is the baseline's "1 PASS").
+- **One decision gate remains:**
   * **PT-37** → F48: PASS = build the corrected fixup behind a one-shot flag;
-    FAIL = `wontfix`.
-  * ~~**PT-38** → D02~~ **DONE 2026-07-27: cadence measured and CORRECTED —
-    the window is 120,000 GAME-ms (4 game hours), not wall-clock; per-id
-    suppression confirmed. Build `Opt_AcknowledgedWarnings` (+probe) in the
-    next build leg with the corrected spec (D02 entry has the numbers).**
+    FAIL = `wontfix`. (PT-36 → F10 CLOSED `wontfix` + file deleted 2026-07-27;
+    PT-38 → D02 measured, corrected, and unblocked 2026-07-27.)
 
-## Playtest state as of 2026-07-26 (see checklist for the user's own notes)
+## Playtest state as of 2026-07-27 (evidence in PLAYTEST_ARCHIVE.md)
 
-- **Done:** PT-02 PASS, PT-04 PASS, **PT-03 PASS in full** (F44 halves + the F45
-  retry — load sweep reported both counts, broken element salvaged cleanly),
-  **PT-45 PASS** (refund = stamped sections × 100, scales with length; partial
-  stockpiles observed), **PT-46 PASS** (F49(b) resolved as no-defect — the
-  engine stores a train on a removed element correctly). Status flips landed:
-  **F03/F44/F45/F50/F47 are `tested`** (commits 4310fb2/73406ff; index rows
-  synced 2026-07-26 late). PT-01 cadence + towers verified on real play
-  (+49h/+40h post-load, >42h impossible under the broken code); the ~42h
-  tower-extended STORM warning banner verified live (bc4e828); necropsy
-  answered: the wedged thread was **ALIVE-stuck** (scheduler/persist side).
-  Only a longer silence-watch remains — the watchdog self-reports
-  (`WATCHDOG — Meteors thread silent … last phase 'X', thread ALIVE|DEAD`) and
-  THAT log line is the root-cause evidence if it ever fires.
-- **PT-41 PASS (recorded 2026-07-26 late): F66 is `tested`.** Shared hex stayed
-  stable ("could not determine which building owned it", no connector churn in
-  the 11.48.31 log); demolishing one building left the connector "its own node
-  but stayed connected to the remaining building with no weird visuals" — the
-  reclaim repair; plain-tile control clean.
-- **PT-05 PASS (2026-07-26 later): F05 is `tested`** — "A dream fulfilled"
-  popup at 18/18 on the Paradox save (9 terraforming milestones hidden = the
-  crash condition), zero LUA errors in-log. Setup wrinkle recorded in the
-  archived PT-05: a rival-FAILED milestone permanently blocks the popup;
-  recover with `MilestoneCompleted.<id> = nil` + re-complete.
-- **PT-12 PASS (2026-07-26 later): F51 is `tested`** — cache dumped before/after
-  building the Shuttle Hub on the live colony: every isolated-dome pair flipped
-  `mode=false, shuttles=false` → `mode=shuttle, shuttles=true` and the homeless
-  emigrated (dumps + user quote in the archived PT-12).
-- **PT-13 PASS (confirmed 2026-07-27): F52 is `tested*`** — colonist used the
-  passage in vacuum; user destroyed the passage and the surface walk correctly
-  resumed (the designed no-passage fallback; that half stays open by design).
-- **PT-08 PASS (2026-07-27): F13 is `tested`** — all 11 previously-blank
-  Command Center rows show numbers, cross-checked against the HUD bar (six
-  exact, rest live-sim drift).
-- **PT-07 first run found + fixed an F12 second defect (2026-07-27):** the
-  warning fired ("2 Sols, 22h") but a "Food"-key collision between the
-  maintenance loop and the food branch destroyed/recreated the notification
-  hourly (flash + voice). Repaired (maintenance loop skips "Food"; forensics on
-  the F12 entry), **A/B pair clean same day** (11.45.34 / 11.47.09: 1/58/11/0 →
-  59/0/11/0, 66/67 active). **PT-07 re-run is open**: warning must fire AND sit
-  steady over 2-3 game hours, plus the Machine Parts half. TestKit gained
-  `SMRTest.Cls` (clears the on-screen console overlay).
-- **PT-07 re-run PASS (2026-07-27 later): F12 is `tested`.** Food: fires once,
-  steady a full sol, clears silently on organic recovery (supply pod + farms),
-  re-fires once on re-drain. Machine Parts: forced turbine malfunctions →
-  consumption recorded → "Less than 1 Sols, 12h", no repeats. Two retail
-  gotchas recorded in the checklist command table: infopanel cheat buttons
-  need `Platform.cheats = true` AND ride the game-time sync queue (dead-looking
-  while paused; `ObjCheat <method>` console print = delivered).
-- **PT-38 DONE (2026-07-27): D02 unblocked, premise corrected** — the dismissal
-  window is 120,000 GAME-ms = 4 game hours (not wall-clock; live-measured with
-  timestamp wrappers, three pairs, every in-window re-add attempt BLOCKED);
-  suppression is per notification id. Build leg item: `Opt_AcknowledgedWarnings`.
-- **PT-34 PASS (2026-07-27): F54 is `tested`** — hubs off: the newly homeless
-  stayed put inside (no outdoor shuttle wait); hubs back on: emigration resumed
-  immediately. Ran on the PT-12 infrastructure.
-- **Everything else is un-run:** PT-06, PT-09..PT-11, PT-14..PT-19 (fixture
-  saves per the
-  checklist's fixture table), PT-23..33 + PT-35 (wave-3), PT-37 (last gate, attended),
-  PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)
-  train cap follows length, F49(a) instant-track palette), PT-20/21/22
-  (uninstall / soak / log hygiene). The F18 savegame sweep announces itself on load of an affected save
-  (`corrected the already-researched tech's stored discount from 10% to 20%`) —
-  worth capturing when it happens.
+- **Done → `tested`:** F03 (PT-02), F05 (PT-05), F12 (PT-07 — whose FIRST run
+  caught a second F12 defect, repaired + A/B same day), F13 (PT-08), F44+F45
+  (PT-03), F47 (PT-45), F50 (PT-04), F51 (PT-12), F54 (PT-34), F66 (PT-41);
+  F52 `tested*` (PT-13). F49(b) resolved as no-defect (PT-46). F10 CLOSED
+  `wontfix` (PT-36, both-ways evidence incl. a real $544.5M read). D02 gate
+  done (PT-38): the dismiss window is **120,000 GAME-ms = 4 game hours**, not
+  wall-clock — corrected in the checklist cautions and the D02 entry.
+- **In flight — PT-06 (F08), the 5-star half is BANKED:** a pampered 10-tourist
+  group departed and paid at Earth ARRIVAL (arrival-time on Relaunched
+  universal rockets): "Tourism: $544.5 M, **+23 applicants**" (2.3/head = top
+  tier; the reward table IS the rating readout). **Open: the 1-star half** —
+  tank a group's stay (rating also caps if Health/Sanity/Comfort dip), bump
+  their `sols` past `TouristSolsOnMarsMax`, screenshot the rocket infopanel's
+  Tourist Overview button (landed + boarded only — there is NO automatic
+  popup), depart, expect ~0-4 applicants from 10. Clear 5★ > 1★ = PASS.
+  Tourist how-to (archived + command table): tourists are 5% of applicants
+  (`tourist_arrival_chance`, crank + `CheatGenerateApplicants`), the passenger
+  filter EXCLUDES the Tourist trait by default (flip it manually), stay is
+  5-10 sols (`TouristSolsOnMarsMin/Max`, `c.sols` bump to force leaving).
+- **Passive:** PT-01's silence-watch — the watchdog self-reports (`WATCHDOG —
+  Meteors thread silent … last phase 'X', thread ALIVE|DEAD`); THAT log line is
+  the F02 root-cause evidence if it ever fires. The F18 savegame sweep
+  announces itself on load of an affected save (`corrected the
+  already-researched tech's stored discount from 10% to 20%`) — worth capturing.
+- **Everything else is un-run:** PT-09..PT-11, PT-14..PT-19 (fixture saves
+  B/C/D/E per the checklist's fixture table), PT-23..33 + PT-35 (wave-3),
+  PT-37 (last gate, attended), PT-39/40/42/43/44 (wave-4), PT-47 (wave-5),
+  PT-46's untested tail (F49(d) train cap, F49(a) instant-track palette),
+  PT-20/21/22 (uninstall / soak / log hygiene).
 
 ## Queued build work (each unblocks on its trigger)
 
+- **D02 `Opt_AcknowledgedWarnings` — UNBLOCKED, next build leg.** Spec on the
+  D02 entry with the corrected cadence (4 game hours; at ultra the nag is every
+  few REAL seconds, so the case is stronger than premised). Per-object
+  acknowledgment, opt-in module, own probe; suppression is per notification id
+  (`SuppressedNotifications[id]`) — verified live.
 - **F02 root cause:** if the watchdog line ever appears, pull last-phase +
   alive/dead from the log and design the real repair (an alive-stuck Sleep
   points at how save/persist re-schedules persisted game-time thread wake-ups;
   the MeteorStorm thread — NOT restarted by our fix — wedged identically).
-- **D01 export half** (user decision recorded 2026-07-26: match the ORIGINAL
-  game; the legacy loader `RocketBase.lua:1729-1736` is the spec — standing
+- **D01 export half** (user decision 2026-07-26: match the ORIGINAL game; the
+  legacy loader `RocketBase.lua:1729-1736` is the spec — standing
   PreciousMetals demand to `max_export_storage`, any-drone flags, per-rocket
   `allow_export` toggle). Three research items on the D01 entry, incl. whether
   the original auto-offloaded RC transports (decides if F56 rides along). Own
   probe + playtest item; same `ClassicRockets` flag; extend MOD_DESCRIPTION's
   side-by-side when it ships.
-- **F48 / D02** per their gates above.
+- **F48** per PT-37's gate above.
 - MarsDebug attended `[install]` pass for the wave-4/5 fixes (SetupOnly mode;
   procedure + modal-dialog warning in STATUS's wave-3 QA section).
 - Release checklist (STATUS): statuses to `tested` as reports come in, fpk
@@ -150,13 +118,24 @@ always safe; A/B legs need the game to be free).
 - Baseline = overwrite fix pack `metadata.lua` with an emptied `code` list;
   restore with `git checkout -- metadata.lua`. **NEVER `git commit -a` while
   that edit is in the working tree.**
-- Expected healthy numbers (2026-07-26): baseline **1 PASS / 58 FAIL / 11 SKIP /
-  0 ERROR**; full pack **59 PASS / 0 FAIL / 11 SKIP / 0 ERROR**, 66/67 active
-  (ClassicRockets opt-in inactive). The 11 SKIPs: 9 `[install]` probes,
-  ClassicRockets, TechDescriptionBuilding (F25 rides its playtest item).
-  Synthetic-map noise unchanged: ~49 Flight.lua `objects_to_mark` errors + a few
-  GameInit `attempt to call a nil value` lines in BOTH legs; a `[mod] Error in
-  mod … Test Kit` line at quit is a shutdown artifact.
+- Expected healthy numbers (2026-07-27, unchanged by the F10 deletion — its
+  probe stays as a canary on the shipped function and is the baseline's 1
+  PASS): baseline **1 PASS / 58 FAIL / 11 SKIP / 0 ERROR**; full pack
+  **59 PASS / 0 FAIL / 11 SKIP / 0 ERROR**, 66/67 active (ClassicRockets
+  opt-in inactive). The 11 SKIPs: 9 `[install]` probes, ClassicRockets,
+  TechDescriptionBuilding (F25 rides its playtest item). Synthetic-map noise
+  unchanged: ~49 Flight.lua `objects_to_mark` errors + a few GameInit `attempt
+  to call a nil value` lines in BOTH legs; a `[mod] Error in mod … Test Kit`
+  line at quit is a shutdown artifact.
+- **Retail console gotchas (cost us a day — in the checklist command table):**
+  infopanel cheat buttons render but NO-OP without `Platform.cheats = true`
+  (`NetSyncEvents.ObjCheat` gate), their presses ride the game-time sync queue
+  (dead-looking while PAUSED, fire on unpause; `ObjCheat <method>` console
+  print = delivered), and direct `SelectedObj:Cheat*()` calls bypass all of it.
+  `SMRTest.Cls` wipes the on-screen console overlay. The TestKit console
+  auto-enable works on NEW games too since the 2026-07-26 repair
+  (InGameInterfaceCreated + WaitLoadingScreenClose; CityStart fires at map-GEN
+  time and must not be used for UI-ready work).
 - Parse sweep: python + luaparser,
   `ast.parse(open(f,encoding='utf-8-sig').read())`.
 - Docs tooling: never round-trip a doc through PowerShell 5.1 `Get-Content`

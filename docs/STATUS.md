@@ -1,8 +1,57 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-25 late (**wave-4/5 QA leg DONE — merged to main, A/B pair CLEAN
-(58 PASS / 0 FAIL / 0 ERROR, 66/67 active), 14-audit fan-out done, 7 repair commits
-landed** — see "QA session (waves 4+5)" below. Prior entry: wave-5 build leg wrap-up).
+Updated: 2026-07-27 (**playtest marathon DONE — 13 fixes carry playtest status,
+F10 retired+deleted, 2 of 3 gates cleared, one new F12 defect found live +
+repaired + A/B-verified same day** — see "Playtest marathon" below).
+
+## Playtest marathon — Fable, 2026-07-26/27: 12 PTs resolved, F10 retired, D02 unblocked
+
+One long interactive run with the user at the keyboard and this session driving
+console instrumentation. Full per-test evidence is in `docs/PLAYTEST_ARCHIVE.md`
+(new file — completed checklist sections move there, reporting-protocol step 8);
+one-line summary here:
+
+- **Flipped `tested`:** F03 (PT-02), F05 (PT-05), F12 (PT-07), F13 (PT-08),
+  F44+F45 (PT-03), F47 (PT-45), F50 (PT-04), F51 (PT-12), F54 (PT-34),
+  F66 (PT-41); **F52 `tested*`** (PT-13). F49(b) resolved no-defect (PT-46).
+- **F12 second defect — the session's big catch (PT-07 first run):** the fixed
+  updater's maintenance loop and food branch share the `"Food"` object key on
+  the SAME notification; the maintenance else-path deleted the food branch's
+  entry hourly → notification destroyed/recreated with FX + voice every game
+  hour (voice plays only on whole-notification creation; VoicePerObject false).
+  Latent in vanilla (broken math meant nothing could ever be added). Diagnosed
+  by live console wrappers after five falsified hypotheses (dismissal cycle,
+  threshold flap, object validation, stale second body, cross-city removal —
+  full trail on the F12 entry). Repair: maintenance loop skips `"Food"`.
+  **A/B clean 2026-07-27:** baseline 11.45.34 = 1/58/11/0; fixed 11.47.09 =
+  59/0/11/0, 66/67 active. Re-run PASSed all behaviors incl. silent organic
+  clears on both branches.
+- **F10 CLOSED `wontfix` + DELETED (PT-36):** the three funding calls returned
+  0 cleanly over a maximally nil organic history, and later read a real
+  $544.5M tourist payout correctly — premise dead both ways.
+  `Fix_FactionFundingCheck.lua` and its commented metadata line removed
+  (git history restores both); the TestKit probe stays as a canary (it is the
+  baseline's expected "1 PASS" — documented A/B numbers unchanged).
+- **D02 gate DONE with a premise CORRECTION (PT-38):** the dismiss window is
+  **120,000 GAME-ms = 4 game hours**, not 2 real minutes (`GameTime` defaults
+  true; three live timestamped dismissal→return pairs = 120,000 +
+  time-to-next-attempt, every in-window re-add attempt observed BLOCKED;
+  suppression is per notification id). At ultra the re-nag is every few REAL
+  seconds — D02's case is STRONGER. `Opt_AcknowledgedWarnings` build unblocked.
+- **PT-06 (F08) half-banked:** 5★ 10-tourist departure paid at Earth ARRIVAL
+  (arrival-time on Relaunched universal rockets) — "+23 applicants, $544.5M"
+  (2.3/head = top-tier by the reward table). 1★ half open.
+- **Engine/tooling facts learned (also in the prompt + command table):**
+  infopanel cheat buttons need `Platform.cheats = true` AND ride the game-time
+  sync queue (dead while paused); tourists are 5% of applicants and the
+  passenger filter EXCLUDES the Tourist trait by default (`initial_filter`);
+  tourist stay is 5-10 sols; tourism rewards fire at Earth arrival; funding
+  history is a 12-sol ring (`Funding.lua:86`); `CityStart` fires at
+  map-generation time — use `InGameInterfaceCreated` for UI-ready work (TestKit
+  console repair 2026-07-26); TestKit gained `SMRTest.Cls`.
+- **Docs restructure:** completed playtests + evidence now live in
+  `docs/PLAYTEST_ARCHIVE.md`; the checklist carries only un-run work
+  (reporting protocol step 8 keeps it that way).
 **Two prompts, two triggers:**
 - `docs/FABLE_NEXT_PROMPT.md` — the NEXT Fable work session: the F02 regression hunt
   (PT-01 FAILed with NO reloads — user confirmed — so the meteor thread genuinely
