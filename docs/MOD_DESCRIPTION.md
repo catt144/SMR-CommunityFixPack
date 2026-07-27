@@ -62,7 +62,13 @@ come back.
   a few hexes across gave the approaching drone fewer destinations than the game
   unconditionally read back, which errored and dropped whatever the drone was
   doing — so tiny terraforming touch-ups sat there unworked.
-- A second Artificial Sun works. Panels only ever checked the *first* one you
+- [DRAFT NOTE — F39 → D04 (2026-07-27): the unmodded game cannot build a second
+  Artificial Sun (build-once wonder), so this bullet must NOT ship as a bug fix.
+  The fix moves into the opt-in `Opt_MultipleSuns` module (lifts the build limit
+  AND makes panels bind to any sun in range); rewrite this as that module's
+  feature blurb when D04 ships, and drop the "second Artificial Sun" phrase from
+  the save-rescue sweep list below (~line 290) in the same pass.] A second
+  Artificial Sun works. Panels only ever checked the *first* one you
   built, so everything you put up around sun number two produced as if the sun
   were not there. Panels in an existing save are reconnected when you load it.
 - Large Wind Turbines get their Frictionless Composites bonus back. The patch

@@ -81,8 +81,9 @@ always safe; A/B legs need the game to be free).
   already-researched tech's stored discount from 10% to 20%`) — worth capturing.
 - **Everything else is un-run:** PT-09..PT-11, PT-15..PT-19 (fixture saves
   B/D/E per the checklist's fixture table; PT-14 DONE 2026-07-27 — premise
-  falsified, see the F61 gate above), PT-23 + PT-25..33 + PT-35 (wave-3;
-  PT-24 DONE 2026-07-27 → F36 `tested`),
+  falsified, see the F61 gate above), PT-23 + PT-25 + PT-27..33 + PT-35
+  (wave-3; PT-24 DONE 2026-07-27 → F36 `tested`; PT-26 resolved-unrunnable →
+  D04 filed),
   PT-37 (last gate, attended), PT-39/40/42/43/44 (wave-4), PT-47 (wave-5),
   PT-46's untested tail (F49(d) train cap, F49(a) instant-track palette),
   PT-20/21/22 (uninstall / soak / log hygiene).
@@ -104,6 +105,15 @@ always safe; A/B legs need the game to be free).
   `SMRFixPack_closed_to_new_residents` on the Dome object, gates on
   `Community:CanAcceptNewColonists` + the arrival path; quarantine untouched.
   Full spec + the move-in-path survey list on the D03 entry.
+- **D04 `Opt_MultipleSuns` (user decision 2026-07-27, build queued, same leg):**
+  PT-26 found F39's second sun is impossible in the unmodded game (build-once
+  wonder, colony-wide). The module lifts the limit
+  (`BuildingTemplates.ArtificialSun.build_once = false`, preset-patch timing)
+  and absorbs `Fix_SecondArtificialSun.lua` unchanged; the standalone fix file
+  is deleted in the same leg and its probe reworked to the ClassicRockets
+  SKIP-unless-opted pattern (expected A/B numbers shift again — combine with
+  the F61 renumbering). Spec on the D04 entry; single-sun baseline for its
+  future playtest is in the PT-26 archive section.
 - **F02 root cause:** if the watchdog line ever appears, pull last-phase +
   alive/dead from the log and design the real repair (an alive-stuck Sleep
   points at how save/persist re-schedules persisted game-time thread wake-ups;

@@ -53,6 +53,19 @@ one-line summary here:
   recorded in the archive entry (overstay-cycle button no-ops silently on an
   empty sol-10+ bucket and only cycles the current map; sols-based tooltip
   labels early-leavers "Enjoying their holiday").
+- **PT-26 (2026-07-27, later): F39's premise UNREACHABLE in the unmodded game →
+  D04 filed (user decision).** The Artificial Sun is a `build_once` wonder
+  enforced colony-wide incl. construction sites (`BuildMenu.lua:711-719`
+  counting `UIColony.labels`; the tester's build menu refused sun #2 with sun
+  #1 standing) — two suns can never coexist, so the F39 fix is latent hardening
+  vanilla can never exercise. Resolution: **D04 `Opt_MultipleSuns`** — opt-in
+  module that lifts the limit (`BuildingTemplates.ArtificialSun.build_once =
+  false`, read live by the menu — verified in-session) AND absorbs the F39
+  binding fix, so the pack provides the condition its fix needs and spares
+  players a third-party limit mod that would hit the vanilla `[1]` bug.
+  Single-sun baseline banked (night production at −21% atmospheric beside the
+  lit sun). Standalone fix file deletion + module build queued for the
+  game-free leg. Spec on the D04 entry.
 - **Engine/tooling facts learned (also in the prompt + command table):**
   infopanel cheat buttons need `Platform.cheats = true` AND ride the game-time
   sync queue (dead while paused); tourists are 5% of applicants and the

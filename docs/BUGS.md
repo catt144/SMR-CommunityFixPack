@@ -51,7 +51,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | tested |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
-| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed  |
+| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed — latent, moving into D04 opt-in (unreachable in unmodded game: build-once wonder) |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
 | F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
@@ -79,6 +79,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | planned opt-in (PT-38 done, build unblocked) |
 | D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | planned opt-in (user decision 2026-07-27; supersedes F61's fix) |
+| D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | planned opt-in (user decision 2026-07-27; absorbs F39's fix) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -834,7 +835,7 @@ with it, :33-38) — the LoadGame sweep is the only leak. Repair is unaffected:
 `Building:Rebuild` (`Building.lua:1655`) yields a NEW object whose `GameInit` registers
 normally.
 
-### F39 — Second Artificial Sun ignored (P2, high)  `[fixed: Code/Fix_SecondArtificialSun.lua]`
+### F39 — Second Artificial Sun ignored (P2, high)  `[fixed — LATENT (PT-26, 2026-07-27: unreachable in unmodded game); moving into the D04 opt-in: Code/Fix_SecondArtificialSun.lua → Opt_MultipleSuns]`
 `SolarPanelBase:GameInit` (`SolarPanel.lua:8-14`): only `labels.ArtificialSun[1]` tested
 with `TestSunPanelRange`. Panel built in range of sun #2 only never registers (reverse
 direction works, `ArtificialSun.lua:35-47`). **Fix:** wrap GameInit: iterate the whole
@@ -846,6 +847,25 @@ refreshes). `GameInit` is a combined method (`DefineCombinedMethod("GameInit", "
 are built — after mod load — so writing onto `SolarPanelBase` reaches every panel class and
 RCSolar. Added a LoadGame sweep: `artificial_sun` is persisted and never re-evaluated, so
 panels already built beside sun #2 stay dark in existing saves without one.
+**PT-26 (2026-07-27) — premise UNREACHABLE in the unmodded game.** The Artificial Sun
+template is `build_once` + `wonder`, enforced colony-wide across all maps including
+construction sites (`Building.lua:3691`, `BuildMenu.lua:711-719` counting
+`UIColony.labels`; the tester's build menu showed the "You can build this building only
+once" refusal with sun #1 standing — screenshot on file). Two suns can never coexist, so
+`labels.ArtificialSun[1]` is always the only sun and the broken branch cannot be taken.
+The fix is pure latent hardening in vanilla — harmless (the wrapper acts only when the
+shipped body left a panel unlit AND a second in-range sun exists) but unverifiable by
+play, and the original report almost certainly came from a modded or B&B-era game. The
+tester banked the single-sun vanilla baseline while investigating: panels beside the lit
+sun produce at night at −21% atmospheric effect (3.6 vs 4 daylight small, 9 vs 10 large).
+Key portability fact: however a mod lifts the limit, the resulting state is identical —
+two suns in `city.labels.ArtificialSun` — and that state is all the fix reads, so the
+hardening works for any limit-lifting mechanism.
+**RESOLVED — user decision 2026-07-27: fold the fix into a new opt-in module (D04
+`Opt_MultipleSuns`)** so the pack itself provides the condition the fix needs (build
+limit lifted) instead of shipping a default-pack fix for an unreachable bug. See the D04
+entry for the spec; the standalone `Fix_SecondArtificialSun.lua` is deleted in the same
+game-free leg that builds the module.
 
 ### F40 — Dust Sickness infects Biorobots (P2, high)  `[fixed: Code/Fix_DustSicknessBiorobots.lua]`
 `Data\StoryBit\DustSickness*.lua` filters exclude only `Child`; `Android` trait not
@@ -1748,6 +1768,39 @@ and its tooltip says setting it REMOVES a quarantine), or turning off residences
   (explicitly: quarantine still exists and still means quarantine).
 **Status: build queued for a game-free leg (can share the leg with D02's
 `Opt_AcknowledgedWarnings` and the F61 fix deletion).**
+
+### D04 — Multiple Artificial Suns — planned opt-in (`Opt_MultipleSuns`), absorbs F39
+Filed 2026-07-27 (user decision, out of PT-26/F39's premise finding — read F39 first).
+The shipped game hard-limits the Artificial Sun to one per colony (`build_once` wonder,
+enforced colony-wide incl. construction sites, `BuildMenu.lua:711-719`), which makes
+F39's second-sun binding fix unreachable dead code in the default pack — but players DO
+run "allow multiple wonders" mods, and any such mod walks straight into the vanilla
+`labels.ArtificialSun[1]` panel-binding bug. This module makes the pack's story honest:
+**it lifts the limit AND ships the fix that makes the lifted limit work**, saving users
+a third-party mod.
+**Design — strictly additive, off by default (`SMRFixPack_Optional.MultipleSuns`,
+FIX_POLICY §4, ClassicRockets precedent):**
+* **Limit lift:** set `BuildingTemplates.ArtificialSun.build_once = false` (preset
+  patch — template tables exist only after DataLoaded; the build menu re-reads
+  `CanBuildOnlyOnce()` live so no UI refresh is needed; verified live 2026-07-27 via a
+  console toggle of the same flag). `wonder` stays true (sight category, placement-close
+  behavior untouched).
+* **Binding fix:** the whole of `Fix_SecondArtificialSun.lua` moves in unchanged — the
+  `SolarPanelBase:GameInit` post-wrapper (walk the whole label, hand the first in-range
+  sun to shipped `SetArtificialSun`) plus the LoadGame sweep for panels already dark
+  beside a second sun in modded saves. With the module OFF, vanilla is untouched in both
+  directions (the bug is unreachable without the lift).
+* Probe: rework the existing SecondArtificialSun probe to the ClassicRockets pattern —
+  SKIP with an opt-in reason unless the flag is set, assert both halves when it is.
+  Default-pack expected A/B numbers change (one fewer armed probe) — land in the same
+  game-free leg as the F61 deletion so the renumbering happens once.
+* Own playtest item when built (reworked PT-26): enable the module, build sun #2 far
+  from #1 through the NORMAL build menu, ignite, build panels AFTER it, night check for
+  the −21%-atmospheric/night-production signature vs the banked single-sun baseline
+  (archived PT-26); confirm the build menu allows repeat placement and the once-only
+  refusal returns with the module off.
+* MOD_DESCRIPTION gets a module section when it ships (feature framing, not bug-fix
+  framing; note it exists because limit-lifting mods hit the vanilla binding bug).
 
 ### F64 — Demolishing a station vaporizes its trains ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
 *(Header restored 2026-07-26 — it was lost in an earlier doc edit; the entry body below

@@ -37,7 +37,12 @@ the ExtractorAI grant with all other rows identical, before/after screenshots;
 rounds on two universities; also caught the CheatResearchAll
 breakthrough-skip gotcha, command table corrected), PT-06 (F08 → tested —
 5★ departure +23 applicants/$544.5M vs tanked ≤2★ group +7/$94.5M, the clear
-split; early Earthsick leavers confirmed counted by the departure reward).
+split; early Earthsick leavers confirmed counted by the departure reward),
+PT-26 (RESOLVED-UNRUNNABLE — the unmodded game cannot build a second
+Artificial Sun (build-once wonder, colony-wide incl. sites), so F39's fix is
+latent; user decision: fold it into the new D04 `Opt_MultipleSuns` opt-in that
+lifts the limit AND ships the binding fix; single-sun night-production
+baseline banked for the module's future playtest).
 
 ---
 
@@ -608,6 +613,49 @@ Mars.exe-20260727-15.19.26 at Lua 2:35): **38 engineers + 2 medics, ZERO
 geologists** — auto training follows the colony's genuine shortages (engineers
 topped demand at 47; the two medic picks show the auto choice moving when the
 per-moment demand ordering shifted). Both halves PASS → F36 `tested`.
+
+---
+
+## PT-26 — Second Artificial Sun · covers **F39**
+
+**Setup:** SAVE-A with `MultiCheat()` + `CheatAddFunding(500000000)` (the Artificial
+Sun is a late-game building and needs Water).
+
+**Trigger:**
+1. Build **Artificial Sun #1** somewhere, and a Solar Panel next to it.
+   `CheatCompleteAllConstructions()`. Confirm the panel's infopanel shows the
+   Artificial Sun bonus (its power output is higher than a panel out in the dark,
+   and it keeps producing at night).
+2. Build **Artificial Sun #2** far away, out of range of everything.
+3. Now build **new Solar Panels around sun #2** and complete them. **Order matters** —
+   the panels must be built *after* the sun.
+4. Compare a panel next to sun #2 with a panel next to sun #1, and with one in
+   neither's range. Night is the clearest comparison.
+
+- **BROKEN looks like:** the panels around sun #2 behave as if there were no sun at
+  all — no bonus, no night production — while the identical panels around sun #1 are
+  fine. (Panels that were *already standing* when sun #2 was built do work; that
+  direction was never broken.)
+- **FIXED looks like:** panels around sun #2 produce exactly like panels around sun #1.
+
+**Existing-save check:** if you have a save that already has this problem, load it with
+the pack enabled and look for `[CommunityFixPack] SecondArtificialSun: reconnected N
+solar panel(s)` in the log — those panels should start producing immediately.
+
+`Result:` RESOLVED-UNRUNNABLE — 2026-07-27 (user): **the unmodded game cannot
+build a second Artificial Sun.** The template is a `build_once` wonder enforced
+colony-wide across all maps including construction sites (`Building.lua:3691`,
+`BuildMenu.lua:711-719`); with sun #1 standing the build menu refuses with "You
+can build this building only once" (screenshot on file) — the tester raised the
+premise question after igniting sun #1. F39's fix is latent hardening in
+vanilla. **Single-sun baseline banked while investigating:** panels beside the
+lit sun keep producing at night with a −21% atmospheric effect (small panel 3.6
+vs 4 daylight, large 9 vs 10) — reference numbers for the D04 module's future
+playtest. **Resolution (user decision, same day): D04 `Opt_MultipleSuns`** —
+opt-in module that lifts the build limit AND carries the F39 binding fix, so
+the condition the fix needs is provided by the pack itself. Console fact
+verified live: toggling `BuildingTemplates.ArtificialSun.build_once` is read by
+the build menu immediately (the D04 patch mechanism).
 
 ---
 

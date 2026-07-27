@@ -543,36 +543,6 @@ this is the check that the fix does not lock a repaired tunnel out permanently.
 
 ---
 
-## PT-26 — Second Artificial Sun · covers **F39**
-
-**Setup:** SAVE-A with `MultiCheat()` + `CheatAddFunding(500000000)` (the Artificial
-Sun is a late-game building and needs Water).
-
-**Trigger:**
-1. Build **Artificial Sun #1** somewhere, and a Solar Panel next to it.
-   `CheatCompleteAllConstructions()`. Confirm the panel's infopanel shows the
-   Artificial Sun bonus (its power output is higher than a panel out in the dark,
-   and it keeps producing at night).
-2. Build **Artificial Sun #2** far away, out of range of everything.
-3. Now build **new Solar Panels around sun #2** and complete them. **Order matters** —
-   the panels must be built *after* the sun.
-4. Compare a panel next to sun #2 with a panel next to sun #1, and with one in
-   neither's range. Night is the clearest comparison.
-
-- **BROKEN looks like:** the panels around sun #2 behave as if there were no sun at
-  all — no bonus, no night production — while the identical panels around sun #1 are
-  fine. (Panels that were *already standing* when sun #2 was built do work; that
-  direction was never broken.)
-- **FIXED looks like:** panels around sun #2 produce exactly like panels around sun #1.
-
-**Existing-save check:** if you have a save that already has this problem, load it with
-the pack enabled and look for `[CommunityFixPack] SecondArtificialSun: reconnected N
-solar panel(s)` in the log — those panels should start producing immediately.
-
-`Result:` _____________________________________________
-
----
-
 ## PT-27 — Dust Sickness does not infect Biorobots · covers **F40**
 
 **Setup:** SAVE-A. You need **Biorobots** and a **dust storm**. Biorobots come from
