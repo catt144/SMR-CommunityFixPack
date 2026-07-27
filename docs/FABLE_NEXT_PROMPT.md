@@ -74,7 +74,11 @@ always safe; A/B legs need the game to be free).
   crash condition), zero LUA errors in-log. Setup wrinkle recorded in the
   archived PT-05: a rival-FAILED milestone permanently blocks the popup;
   recover with `MilestoneCompleted.<id> = nil` + re-complete.
-- **Everything else is un-run:** PT-06..PT-19 (fixture saves B/C/D/E per the
+- **PT-12 PASS (2026-07-26 later): F51 is `tested`** — cache dumped before/after
+  building the Shuttle Hub on the live colony: every isolated-dome pair flipped
+  `mode=false, shuttles=false` → `mode=shuttle, shuttles=true` and the homeless
+  emigrated (dumps + user quote in the archived PT-12).
+- **Everything else is un-run:** PT-06..PT-11, PT-13..PT-19 (fixture saves per the
   checklist's fixture table), PT-23..35 (wave-3), PT-36/37/38 (gates, attended),
   PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)
   train cap follows length, F49(a) instant-track palette), PT-20/21/22

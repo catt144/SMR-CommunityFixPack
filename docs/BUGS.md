@@ -63,7 +63,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | tested |
-| F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | fixed  |
+| F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | tested |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | fixed* |
 | F53 | Arrivals hike to unreachable "safety dome" and die       | P1  | high | fixed  |
 | F54 | Switched-off shuttle hubs count as transport available   | P2  | med+ | fixed  |
@@ -1198,7 +1198,7 @@ Explains "drones ignore rocket cargo". **Fix:** wrap `UpdateCargoResourceRequest
 suppress the disconnect/reconnect churn (requests mutate in place via
 `TaskRequester:AddRequest`); one-time connect if never connected.
 
-### F51 — Transport-mode cache never sees new shuttles (P1, high)  `[fixed: Code/Fix_ShuttleTransportCache.lua]`
+### F51 — Transport-mode cache never sees new shuttles (P1, high)  `[tested: Code/Fix_ShuttleTransportCache.lua — PT-12 PASS 2026-07-26 (cached mode=false verdicts recomputed to "shuttle" when the hub went live, homeless emigrated; cache dumps before/after in the archived PT-12)]`
 `Colonist.lua:2504-2537` caches `(community,pos) → mode` incl. `false`, but
 `shuttles_available` is not in the key and cache only flushes on train/passage events
 (:2480-2488). Building/refueling a Shuttle Hub never flushes → `FindEmigrationDome`

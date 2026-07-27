@@ -9,9 +9,10 @@ the checklist — consult it before re-running anything here.
 Archived 2026-07-26: PT-01 (F02 cadence + tower lead verified live; the
 passive silence-watch continues via the watchdog), PT-02 (F03 → tested),
 PT-03 (F44/F45 → tested), PT-04 (F50 → tested), PT-05 (F05 → tested — the
-"A dream fulfilled" popup at 18/18), PT-41 (F66 → tested), PT-45 (F47 →
-tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail remains in
-the checklist as un-run).
+"A dream fulfilled" popup at 18/18), PT-12 (F51 → tested — cached mode=false
+recomputed to "shuttle" when the hub went live), PT-41 (F66 → tested),
+PT-45 (F47 → tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail
+remains in the checklist as un-run).
 
 ---
 
@@ -304,6 +305,35 @@ console with `MilestoneCompleted.ScanAnomaly = nil` then re-completing it. On
 the final completion (18/18, score 83,420) the **"A dream fulfilled" popup
 appeared immediately** (screenshots taken); log Mars.exe-20260726-15.03.01 has
 **zero [LUA ERROR]** — no "arithmetic on a nil value" anywhere.
+
+---
+
+## PT-12 — Shuttle-cache emigration · covers **F51**
+
+**Setup:** SAVE-C. Dome **A** has homeless colonists and no spare housing; dome **B**
+is **far away (out of walking range, no passage to A)** with plenty of free housing.
+**No Shuttle Hub anywhere.** Let at least one full emigration evaluation cycle run at
+ultra speed so the "no transport available" verdict gets cached — you should see
+colonists stay homeless in A.
+
+**Trigger:** now build and **fuel** a Shuttle Hub (`CheatCompleteAllConstructions()`,
+`CheatFillAllStorages()`), then wait 1–2 game hours at ultra speed.
+
+- **BROKEN looks like:** you build a Shuttle Hub, shuttles fly, and the homeless
+  colonists in dome A *still* never move to the empty houses in dome B — the game
+  decided once that there was no transport and never re-checked.
+- **FIXED looks like:** within a cycle or two of the hub going live, homeless colonists
+  start emigrating to dome B and the Homeless count drops.
+
+`Result:` PASS — 2026-07-26. Run on the live playtest colony (three domes) rather
+than SAVE-C; DomeBasic#1506 was the isolated dome. Cache dump BEFORE the hub:
+every #1506 pair `mode=false, cached with shuttles=false` — the "no transport"
+verdict confirmed cached. Built + fuelled the Shuttle Hub (no station/elevator
+changes mid-test, so no wholesale cache flush could fake the pass). Dump AFTER:
+every #1506 pair flipped to `mode=shuttle, cached with shuttles=true`, and the
+user's observation: "They have all transported out from what I can tell" — the
+homeless emigrated. The smr_shuttles stamp mismatch forcing the recompute is
+the fix's mechanism working as designed; screenshots of both dumps taken.
 
 ---
 

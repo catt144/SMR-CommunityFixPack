@@ -6,7 +6,8 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
-far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-41, PT-45, and PT-46's F49(b) half. This
+far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-12, PT-41, PT-45, and PT-46's F49(b)
+half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -358,27 +359,6 @@ Let **20+ game hours** pass. Then save, reload, and let another 20 pass.
 
 # Group 3 — SAVE-C (two-dome colony)
 
-## PT-12 — Shuttle-cache emigration · covers **F51**
-
-**Setup:** SAVE-C. Dome **A** has homeless colonists and no spare housing; dome **B**
-is **far away (out of walking range, no passage to A)** with plenty of free housing.
-**No Shuttle Hub anywhere.** Let at least one full emigration evaluation cycle run at
-ultra speed so the "no transport available" verdict gets cached — you should see
-colonists stay homeless in A.
-
-**Trigger:** now build and **fuel** a Shuttle Hub (`CheatCompleteAllConstructions()`,
-`CheatFillAllStorages()`), then wait 1–2 game hours at ultra speed.
-
-- **BROKEN looks like:** you build a Shuttle Hub, shuttles fly, and the homeless
-  colonists in dome A *still* never move to the empty houses in dome B — the game
-  decided once that there was no transport and never re-checked.
-- **FIXED looks like:** within a cycle or two of the hub going live, homeless colonists
-  start emigrating to dome B and the Homeless count drops.
-
-`Result:` _____________________________________________
-
----
-
 ## PT-13 — Vacuum walk routing · covers **F52**
 
 **Setup:** SAVE-C — domes A and B ~350 m apart (**under** the 400 m
@@ -401,7 +381,7 @@ colonist with the camera** for the whole trip.
 > allowed by design (refusing it would strand colonists on shuttle-less maps). Only the
 > "passage exists but is ignored" case is a FAIL.
 
-`Result:` _____________________________________________
+`Result:` _____________________PASS________________________
 
 ---
 
