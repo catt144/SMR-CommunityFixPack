@@ -47,16 +47,11 @@ always safe; A/B legs need the game to be free).
   churn hunt in the archived PT-07 + the F12 BUGS entry is the worked example:
   five wrong hypotheses were killed by timestamps, not speculation). Mechanical
   repairs land with a re-verified A/B pair; redesigns go to the user.
-- **Two decision gates remain:**
+- **One decision gate remains:**
   * **PT-37** → F48: PASS = build the corrected fixup behind a one-shot flag;
     FAIL = `wontfix`. (PT-36 → F10 CLOSED `wontfix` + file deleted 2026-07-27;
-    PT-38 → D02 measured, corrected, and unblocked 2026-07-27.)
-  * **F61 disposition** (new 2026-07-27, PT-14): premise falsified — the
-    accept-colonists toggle is a QUARANTINE by design ("not allowed to enter or
-    leave", enforced in `Colonist:FindEmigrationDome`), and the shipped fix
-    half-subverts it. Retirement + `wontfix` proposed (F10 precedent: delete
-    `Fix_HomeDomeMigrationGate.lua`, drop/repurpose the probe, game-free A/B
-    with shifted expected numbers). Evidence on the F61 entry.
+    PT-38 → D02 measured, corrected, and unblocked 2026-07-27; PT-14 → F61
+    CLOSED `wontfix` 2026-07-27, deletion staged, ask re-filed as D03.)
 
 ## Playtest state as of 2026-07-27 (evidence in PLAYTEST_ARCHIVE.md)
 
@@ -98,6 +93,16 @@ always safe; A/B legs need the game to be free).
   few REAL seconds, so the case is stronger than premised). Per-object
   acknowledgment, opt-in module, own probe; suppression is per notification id
   (`SuppressedNotifications[id]`) — verified live.
+- **F61 retirement mechanics (decision DONE 2026-07-27, same leg):** delete
+  `Code/Fix_HomeDomeMigrationGate.lua` + its metadata line, drop/repurpose the
+  TestKit probe, re-verify A/B (expected numbers shift by one probe; F10
+  precedent — the doc side is already recorded).
+- **D03 `Opt_ResidencyControl` (user decision 2026-07-27, build queued):** new
+  per-dome "closed to new residents" policy — UI row appended by post-wrapping
+  `sectionDome:Init` (+ `sectionMicroGHabitat:Init`), flag
+  `SMRFixPack_closed_to_new_residents` on the Dome object, gates on
+  `Community:CanAcceptNewColonists` + the arrival path; quarantine untouched.
+  Full spec + the move-in-path survey list on the D03 entry.
 - **F02 root cause:** if the watchdog line ever appears, pull last-phase +
   alive/dead from the log and design the real repair (an alive-stuck Sleep
   points at how save/persist re-schedules persisted game-time thread wake-ups;

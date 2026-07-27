@@ -52,18 +52,26 @@ one-line summary here:
 - **Docs restructure:** completed playtests + evidence now live in
   `docs/PLAYTEST_ARCHIVE.md`; the checklist carries only un-run work
   (reporting protocol step 8 keeps it that way).
-- **PT-14 (2026-07-27, after the session wrap): F61's premise FALSIFIED — new
-  decision gate.** The accept-colonists toggle is a **quarantine**: its OFF
-  state is titled "Quarantined" and the rollover promises "Colonists are not
-  allowed to enter or leave" (reused original-game T-ids — carried-forward
-  wording); `Colonist:FindEmigrationDome` enforces it with the literal comment
+- **PT-14 (2026-07-27, after the session wrap): F61's premise FALSIFIED →
+  CLOSED `wontfix` (user decision same day), community ask re-filed as D03.**
+  The accept-colonists toggle is a **quarantine**: its OFF state is titled
+  "Quarantined" and the rollover promises "Colonists are not allowed to enter
+  or leave" (reused original-game T-ids — carried-forward wording);
+  `Colonist:FindEmigrationDome` enforces it with the literal comment
   "quarantine, no one enters or leaves" (`Colonist.lua:2632-2634`). The lockdown
-  the tester observed is designed behavior, and the shipped fix half-SUBVERTS it
-  (quarantined residents can still be offered outbound work/services through
-  passages). **Retirement + `wontfix` proposed (F10 precedent) — awaiting the
-  user**; evidence on the F61 entry + the PT-14 archive section. The
-  migration-independent commute controls PT-14 wanted already exist ("Use
-  Passages for work/services" toggles + the dome trait filter).
+  the tester observed is designed behavior, and the shipped fix half-SUBVERTED
+  it — worse, a use-case survey found scripted content that depends on the seal
+  (Wildfire's dome-local infection spread `Traits.lua:1155-1173`; the RogueDome
+  story bit FORCE-quarantines a renegade dome via `SetBuildingRogueState` →
+  `Dome:SetUIInteractionState`; arrival routing's `is_welcoming_community`).
+  **Resolution: `Fix_HomeDomeMigrationGate.lua` deletion STAGED (F10 precedent;
+  needs a game-free leg, A/B numbers shift by one probe), and the real community
+  ask — block move-ins WITHOUT locking commute/services — is filed as D03
+  `Opt_ResidencyControl`:** a new per-dome "closed to new residents" policy row
+  appended by post-wrapping `sectionDome:Init` (the infopanel section is a plain
+  Lua class building rows imperatively — verified), gating
+  `Community:CanAcceptNewColonists` + the arrival path, quarantine untouched.
+  Full spec on the D03 entry; build queued for a game-free leg alongside D02.
 **Two prompts, two triggers:**
 - `docs/FABLE_NEXT_PROMPT.md` — the NEXT Fable work session: the F02 regression hunt
   (PT-01 FAILed with NO reloads — user confirmed — so the meteor thread genuinely

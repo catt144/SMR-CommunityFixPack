@@ -90,14 +90,6 @@ come back.
   thresholds at once only ever collected one bonus, while falling back charged
   both — so satisfaction (and your holiday income) drifted down no matter how well
   you treated them.
-- [DRAFT NOTE — F61 RETIREMENT PROPOSED (PT-14, 2026-07-27): this bullet's premise
-  is falsified — the toggle is a quarantine by design ("Colonists are not allowed to
-  enter or leave quarantined Domes"). Delete this bullet if the user confirms the
-  retirement; see the F61 BUGS.md entry.] Turning off "accept colonists" on a dome no
-  longer stops its own residents from
-  shopping, working and studying in the domes next door. That switch is the
-  migration policy — whether outsiders may move in — but it was also being used to
-  decide whether your own residents were allowed to leave through a passage.
 - Housing reserved for a colonist who never turns up is released again. Those
   reservations are invisible in the UI and had no expiry at all, which is why a
   dome could sit half empty and still refuse to house anybody.

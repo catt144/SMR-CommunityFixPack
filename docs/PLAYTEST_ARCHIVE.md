@@ -29,8 +29,9 @@ Archived 2026-07-27 (later): PT-14 (DONE — **premise falsified**: the
 accept-colonists toggle is a **quarantine** — its OFF state is titled
 "Quarantined" and the rollover promises "Colonists are not allowed to enter or
 leave" — so the lockdown the tester observed is designed behavior, not F61's
-defect; F61 retirement + `wontfix` proposed, user decision pending — full
-evidence on the F61 BUGS.md entry).
+defect; F61 CLOSED `wontfix` same day by user decision, fix deletion staged,
+community ask re-filed as D03 `Opt_ResidencyControl` — full evidence on the
+F61 + D03 BUGS.md entries).
 
 ---
 
@@ -494,10 +495,10 @@ for exist as their own toggles — "Use Passages for work" /
 "Use Passages for services" (`allow_work_in_connected` /
 `allow_service_in_connected`) — and the dome trait filter covers
 "stop move-ins without a lockdown" (its tooltip even says setting it removes a
-quarantine, T363). **Follow-up filed on the F61 entry: retirement + `wontfix`
-proposed** (the shipped fix half-subverts the quarantine promise by letting a
-quarantined dome's residents still be offered outbound work/services), awaiting
-the user's decision.
+quarantine, T363). **Resolution (user decision, same day): F61 CLOSED `wontfix`,
+fix deletion staged, and the underlying community ask filed as D03
+(`Opt_ResidencyControl` — a NEW "closed to new residents" dome policy that
+leaves quarantine intact).** See the F61 + D03 BUGS.md entries.
 
 ---
 

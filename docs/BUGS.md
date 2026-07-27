@@ -73,11 +73,12 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
-| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | fixed — retire? (PT-14: toggle is a QUARANTINE by design; user decision) |
+| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | wontfix — superseded by D03 (PT-14: toggle is a quarantine by design); fix deletion staged |
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | wontfix|
 | F63 | Universities invisible to emigration (no students)       | P2  | high | wontfix|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | planned opt-in (PT-38 done, build unblocked) |
+| D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | planned opt-in (user decision 2026-07-27; supersedes F61's fix) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -1463,7 +1464,7 @@ anywhere in Src, so nothing else changes meaning.
 its life support — F73's subject, not this defect.
 Probe: `DomeFreeSpaceMismatch` in `30_Probes_Wave3.lua`.
 
-### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)  `[fixed: Code/Fix_HomeDomeMigrationGate.lua — RETIREMENT PROPOSED (PT-14, 2026-07-27)]`
+### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)  `[wontfix (user decision 2026-07-27, PT-14) — superseded by D03; Fix_HomeDomeMigrationGate.lua deletion STAGED for the next game-free leg]`
 `Dome:GetService` (`Dome.lua:2900-2916`; same at 2927/2947/2959, `ShiftsBuilding.lua:250-254`):
 outbound cross-dome access requires `self.accept_colonists` — the HOME dome's
 "accept colonists" MIGRATION policy. Turning it off on a residential dome (routine) silently
@@ -1504,12 +1505,43 @@ That violates the tooltip's "not allowed to leave" half. The entry's "proof"
 (`HasFreeWorkplacesAround` walks connected workplaces without the flag) is the same
 class of permissive advisory-function inconsistency recorded on F62/F63, not evidence
 of intent.
-**Proposed resolution (F10 precedent): delete `Fix_HomeDomeMigrationGate.lua`** (git
-history restores it), close F61 `wontfix` as deliberate design correctly labeled in the
-UI, and drop/repurpose the TestKit probe — needs a game-free leg (expected A/B numbers
-shift by one probe). If the user instead wants "quarantined domes still commute" as a
-preference, it belongs in an `Opt_` module per FIX_POLICY §4, not in the default pack.
-**Awaiting the user's decision.**
+**Quarantine's designed consumers (surveyed 2026-07-27 at the user's question "is the
+plague its only use case?" — it is not):**
+* **Wildfire mystery (Mystery 8 / TheMarsBug):** infection spread is dome-local — each
+  infected colonist daily has a 30% chance to infect a random resident of THEIR OWN
+  dome (`InfectedDailyUpdate`, `Traits.lua:1155-1173`, reads
+  `colonist.dome.labels.Colonist`; vaccination flips `g_StartVaccinating` off it).
+  Cross-dome carriage happens only when an infected colonist RESETTLES (their `.dome`
+  changes) — exactly the vector quarantine's `FindEmigrationDome` gate closes. A
+  scripted background drip also seeds one random colonist colony-wide every ~5 sols
+  (`SA_AddTrait` on the city "Colonist" label, `Scenario/Mystery 8.generated.lua:291-306`),
+  so containment is partial by design. NOTE: commuting does NOT carry infection in
+  code (labels are residency-based), so the shipped fix doesn't break Wildfire's math —
+  it breaks the visible promise (quarantined residents strolling out mid-plague).
+* **TheRogueDome story bit (Renegades) — the strongest case, and MECHANICAL:** a dome
+  declares independence, every resident becomes a Renegade, and the
+  `SetBuildingRogueState` effect calls `Dome:SetUIInteractionState(false)`
+  (`ClassDef-Effects.generated.lua:2790`), which FORCE-toggles `accept_colonists` off
+  (`Dome.lua:1495-1498`); the event text announces "The Dome has become Quarantined."
+  The seal on a hostile splinter state is meant to be total (the dome can't even be
+  interacted with) — but with the home-side commute gates removed by this fix, the
+  rogue dome's renegade residents can still be offered work/services/training in the
+  player's own domes through connecting passages.
+* **Arrival routing:** `is_welcoming_community` (`_GameUtils.lua:342-344`) requires
+  `accept_colonists` — quarantined domes are excluded from
+  `GetDomesReachableByColonists`, i.e. new arrivals are never routed into one.
+* Narrative-only mentions: MedSt_Disease's "Seal the gates and establish quarantine"
+  reply (scripted morale/standing costs) and DataDealer's computer-virus flavor.
+**RESOLVED — user decision 2026-07-27: CLOSED `wontfix`, superseded by D03.** The user's
+grounds: the underlying community ask ("shut down migration to a dome but keep
+services/commuting") is one of the most-requested behaviors in the game, but it must not
+come at quarantine's expense — the events above depend on the lockdown. Resolution:
+**delete `Fix_HomeDomeMigrationGate.lua`** (git history restores it; deletion + metadata
+line + probe rework + re-verified A/B are STAGED for the next game-free leg — F10
+precedent; expected numbers shift by one probe) and **build the ask properly as D03**
+(`Opt_ResidencyControl`, a NEW per-dome "closed to new residents" policy that leaves
+`accept_colonists`/quarantine untouched — see the D03 entry). MOD_DESCRIPTION's F61
+bullet is removed in the same change.
 
 ### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)  `[wontfix — carried-forward design, verified identical to the original game]`
 `GetService` iterates `GetConnectedDomes()` = direct adjacency refcounts (`Dome.lua:619-644`,
@@ -1679,6 +1711,43 @@ where dismissal already holds (F32 trace).
 game hours, above); per-id suppression confirmed live (independent fuel-warning ids
 untouched by dismissal; every same-id re-add attempt inside the window observed
 BLOCKED). Build + probe unblocked for the next build leg.**
+
+### D03 — No way to block dome move-ins short of a full quarantine — planned opt-in (`Opt_ResidencyControl`)
+Filed 2026-07-27 (user decision, out of PT-14/F61's close — read that entry first). The
+community's long-standing ask: **stop new residents from moving into a dome while its
+residents keep commuting and using services normally.** The shipped game offers only the
+blunt instruments: full quarantine (`accept_colonists` off — blocks enter AND leave;
+load-bearing for Wildfire/RogueDome, see F61), the trait filter (indirect, trait-based,
+and its tooltip says setting it REMOVES a quarantine), or turning off residences.
+**Design — strictly additive, quarantine untouched:**
+* **Flag:** `SMRFixPack_closed_to_new_residents` set directly on the Dome object —
+  persists with the save, absent-tolerant (nil = vanilla = accepts), uninstall-clean
+  (policy §3). Default off; every dome behaves 100% vanilla until the player flips it.
+* **UI:** post-wrap `sectionDome:Init` (`Lua/XDef/sectionDome.generated.lua:16` — the
+  infopanel section is a plain Lua class building its policy rows imperatively via
+  `InfopanelActiveSection:new`, one call per row in a VList) to append a new
+  "Accepts new residents / Closed to new residents" row cloned from the shipped
+  accept-colonists row pattern: icon + title + rollover (`Untranslated`), left-click
+  toggle, Ctrl+click broadcast, `RebuildInfopanel`. Same wrap for
+  `sectionMicroGHabitat:Init` (asteroid habitats); the Command Center dome-overview row
+  grid is optional follow-up. Icons: reuse shipped section icons or ship two PNGs.
+* **Gates:** post-wrapper on `Community:CanAcceptNewColonists` (`Community.lua:62`) —
+  shipped result AND NOT flag — closes voluntary resettlement (its caller
+  `Colonist:FindEmigrationDome` filters candidates on it, `Colonist.lua:2658`).
+* **Build-time survey (the real design work):** enumerate the remaining move-in paths
+  and decide per-path — rocket/elevator ARRIVALS choosing a first home
+  (`GetDomesReachableByColonists` filters on the file-local `is_welcoming_community`,
+  `_GameUtils.lua:342-344` — file-local, so arrivals need their own patch point if the
+  flag should block them; recommend it should), MANUAL player relocation (deliberately
+  stays allowed — the player's own override), tourists/hotel-seeking (leave alone),
+  births (in-dome, leave alone), homeless within their own dome (not a move-in, leave
+  alone). Verify no other `CanAcceptNewColonists` callers exist.
+* Own probe (drive `FindEmigrationDome`/`CanAcceptNewColonists` with the flag both
+  ways), own playtest item, opt-in via `SMRFixPack_Optional.ResidencyControl`
+  (FIX_POLICY §4, ClassicRockets precedent), MOD_DESCRIPTION section when it ships
+  (explicitly: quarantine still exists and still means quarantine).
+**Status: build queued for a game-free leg (can share the leg with D02's
+`Opt_AcknowledgedWarnings` and the F61 fix deletion).**
 
 ### F64 — Demolishing a station vaporizes its trains ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
 *(Header restored 2026-07-26 — it was lost in an earlier doc edit; the entry body below
