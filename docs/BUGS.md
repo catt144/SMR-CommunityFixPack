@@ -73,7 +73,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
-| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | fixed  |
+| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | fixed — retire? (PT-14: toggle is a QUARANTINE by design; user decision) |
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | wontfix|
 | F63 | Universities invisible to emigration (no students)       | P2  | high | wontfix|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
@@ -1463,13 +1463,53 @@ anywhere in Src, so nothing else changes meaning.
 its life support — F73's subject, not this defect.
 Probe: `DomeFreeSpaceMismatch` in `30_Probes_Wave3.lua`.
 
-### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)  `[fixed: Code/Fix_HomeDomeMigrationGate.lua]`
+### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)  `[fixed: Code/Fix_HomeDomeMigrationGate.lua — RETIREMENT PROPOSED (PT-14, 2026-07-27)]`
 `Dome:GetService` (`Dome.lua:2900-2916`; same at 2927/2947/2959, `ShiftsBuilding.lua:250-254`):
 outbound cross-dome access requires `self.accept_colonists` — the HOME dome's
 "accept colonists" MIGRATION policy. Turning it off on a residential dome (routine) silently
 stops residents shopping/working/training through passages; target-dome checks are separate
 and correct (`Dome.lua:2880-2882`). Best match for "refuse to shop through a passage".
 **Fix:** override the four sites, dropping home-side `accept_colonists` from the condition.
+
+**PT-14 (2026-07-27) — premise FALSIFIED; retirement + `wontfix` proposed (user
+decision pending).** The live run answered a third way: the observed behavior is the
+DESIGNED behavior, and this entry's premise — that `accept_colonists` is only a
+"whether outsiders may move IN" migration policy — is wrong. Evidence:
+* The toggle's OFF state is titled **"Quarantined"** and its rollover promises exactly
+  the observed lockdown: "Set the Immigration policy for this Dome. **Colonists are not
+  allowed to enter or leave quarantined Domes.**"
+  (`Data/XDef/sectionDome.lua:176-208` — icon off at :183, title at :185, rollover
+  T365 at :208; same text on MicroG habitats and the Command Center dome rows). The
+  blocking is neither silent nor unexplained — the UI states it. The low translation
+  ids (T365/T7660/T8736) are reused original-game ids, i.e. the quarantine wording is
+  carried forward, not new.
+* The engine enforces the same reading everywhere else: `Colonist:FindEmigrationDome`
+  returns early with the literal comment "quarantine, no one enters or leaves"
+  (`Colonist.lua:2632-2634`), and the target-side gate carries a `--quarantine` comment
+  (`Dome.lua:2907`). The controls PT-14's FIXED case was looking for exist as their own
+  per-dome toggles — `allow_work_in_connected` ("Use Passages for work") and
+  `allow_service_in_connected` ("Use Passages for services") — and the dome trait
+  filter covers blocking move-ins WITHOUT a lockdown (its tooltip says setting it
+  removes a quarantine, T363).
+* Tester's verbatim observation (toggle off on a live dome, fix pack active): "As soon
+  as I turned off accept colonists no one could work there[,] people slow[ly] left jobs
+  and services as they finished shifts, no one could enter or leave anymore" — the
+  promised lockdown, delivered by the untouched target-side gate (`Dome.lua:2881`) and
+  the FindEmigrationDome resettle gate.
+**The shipped fix actively subverts that design:** with the home-side `accept_colonists`
+term removed from the four commute gates, a QUARANTINED dome's residents can still be
+offered — and assigned — work/services/training through passages (no other home-side
+check exists on the outbound commute path; FindEmigrationDome only gates resettlement).
+That violates the tooltip's "not allowed to leave" half. The entry's "proof"
+(`HasFreeWorkplacesAround` walks connected workplaces without the flag) is the same
+class of permissive advisory-function inconsistency recorded on F62/F63, not evidence
+of intent.
+**Proposed resolution (F10 precedent): delete `Fix_HomeDomeMigrationGate.lua`** (git
+history restores it), close F61 `wontfix` as deliberate design correctly labeled in the
+UI, and drop/repurpose the TestKit probe — needs a game-free leg (expected A/B numbers
+shift by one probe). If the user instead wants "quarantined domes still commute" as a
+preference, it belongs in an `Opt_` module per FIX_POLICY §4, not in the default pack.
+**Awaiting the user's decision.**
 
 ### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)  `[wontfix — carried-forward design, verified identical to the original game]`
 `GetService` iterates `GetConnectedDomes()` = direct adjacency refcounts (`Dome.lua:619-644`,

@@ -25,6 +25,13 @@ Opt_AcknowledgedWarnings build unblocked), PT-41 (F66 → tested), PT-45 (F47 �
 tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail remains in the
 checklist as un-run).
 
+Archived 2026-07-27 (later): PT-14 (DONE — **premise falsified**: the
+accept-colonists toggle is a **quarantine** — its OFF state is titled
+"Quarantined" and the rollover promises "Colonists are not allowed to enter or
+leave" — so the lockdown the tester observed is designed behavior, not F61's
+defect; F61 retirement + `wontfix` proposed, user decision pending — full
+evidence on the F61 BUGS.md entry).
+
 ---
 
 ## PT-01 — Meteor cadence + Sensor Tower direction · covers **F02**
@@ -450,6 +457,47 @@ make sure both worked." Both halves observed on the live colony: with the
 passage standing, the colonist routed through it in vacuum (the F52 fix); with
 the passage destroyed, the surface walk resumed — the designed no-passage
 fallback (kept so shuttle-less maps cannot strand colonists), NOT a failure.
+
+---
+
+## PT-14 — Cross-dome shopping with migration off · covers **F61**
+
+**Setup:** SAVE-C — dome **A** (residents, no shop/diner) connected by **passage** to
+dome **B** (has the shop/diner/university). Both domes healthy.
+
+**Trigger:** on dome **A**, turn **"Accept Colonists" OFF** (the migration toggle in the
+dome infopanel — `Community:ToggleAcceptColonists`, `Lua/Buildings/Community.lua:106`).
+Leave dome B's toggle alone. Run 1–2 sols at ultra speed and watch A's residents.
+
+- **BROKEN looks like:** switching off *migration* on the home dome also silently stops
+  its residents from shopping, working or training in the connected dome — comfort and
+  service satisfaction slide with no explanation.
+- **FIXED looks like:** residents of A keep walking through the passage to shop/work/
+  train in B; only actual **immigration into A** is blocked.
+
+Also confirm dome **B** with its own toggle off still correctly **refuses** incoming
+colonists — the fix must not open the wrong gate.
+
+`Result:` DONE 2026-07-27 — **neither BROKEN nor FIXED: the test's premise is
+falsified.** Tester (toggle off on a live dome, fix pack active, screenshot on
+file): "As soon as I turned off accept colonists no one could work there[,]
+people slow[ly] left jobs and services as they finished shifts, no one could
+enter or leave anymore." That full lockdown is the game's DOCUMENTED design,
+not a defect: the toggle's OFF state is titled **"Quarantined"** (visible in
+the tester's screenshot and in `Data/XDef/sectionDome.lua:185`, T8736) and its
+rollover says outright "Colonists are not allowed to enter or leave quarantined
+Domes" (T365). The engine enforces the same reading in
+`Colonist:FindEmigrationDome` ("quarantine, no one enters or leaves",
+`Colonist.lua:2632-2634`) and in the target-side gate the fix never touched
+(`Dome.lua:2881`). The migration-independent commute controls PT-14 was looking
+for exist as their own toggles — "Use Passages for work" /
+"Use Passages for services" (`allow_work_in_connected` /
+`allow_service_in_connected`) — and the dome trait filter covers
+"stop move-ins without a lockdown" (its tooltip even says setting it removes a
+quarantine, T363). **Follow-up filed on the F61 entry: retirement + `wontfix`
+proposed** (the shipped fix half-subverts the quarantine promise by letting a
+quarantined dome's residents still be offered outbound work/services), awaiting
+the user's decision.
 
 ---
 

@@ -191,7 +191,7 @@ doesn't cost you the setup.
 |---|---|---|
 | **SAVE-A — Sandbox colony** | New game, any sponsor, **default game rules** (disasters ON, meteors at least "Low"), Mars surface. Land, build one dome with ~20 colonists, a Medical Center, a Martian Express station with a short track, and a landed rocket. `MultiCheat()` + `CheatAddFunding(500000000)` to remove build gating. | PT-01 … PT-10 |
 | **SAVE-B — No-Disasters underground** | New game, tick the **No Disasters** game rule at setup (it cannot be added later). Then in-colony: `UIColony:UnlockUnderground()` and `CheatRevealDarkness()`, build a small underground presence. | PT-11 |
-| **SAVE-C — Two-dome colony** | New game (any). Build **dome A** and **dome B ~350 m apart, joined by a passage**. Give A residents but **no** spare housing; give B **free housing and a shop/diner**. Keep atmosphere non-breathable (do NOT terraform). No Shuttle Hub yet. | PT-12 … PT-14 |
+| **SAVE-C — Two-dome colony** | New game (any). Build **dome A** and **dome B ~350 m apart, joined by a passage**. Give A residents but **no** spare housing; give B **free housing and a shop/diner**. Keep atmosphere non-breathable (do NOT terraform). No Shuttle Hub yet. | PT-12 … PT-14 (all DONE — archived) |
 | **SAVE-D — St. Elmo's Fire mystery** | Easiest: start a **new game and pick "The Power of Three / St. Elmo's Fire" (`LightsMystery`) as the mystery at setup**, then play/skip forward until Light Traps are buildable and have caught wisps. (Console alternative in PT-15.) | PT-15 |
 | **SAVE-E — Frontier save (underground elevator + asteroid)** | From a healthy mid-game colony: `UIColony:UnlockUnderground()`, `CheatRevealDarkness()`, build an **Elevator** and an **underground dome with free housing**; then `UIColony:OnDiscoveryCompleted("Asteroid", false, true)` and build/land an **Asteroid Lander** with a **MicroG Habitat** and a couple of colonists on the asteroid. `dbg_ToggleRocketInstantTravel()` when running lander tests. | PT-16 … PT-19 |
 | **SAVE-F — Uninstall-safety copy** | Just a save made *while the fix pack is enabled* — copy of SAVE-A after ~1 sol of play is fine. | PT-20 |
@@ -311,30 +311,6 @@ Let **20+ game hours** pass. Then save, reload, and let another 20 pass.
 > Expected and **not** a failure: `CheatTriggerUndergroundMarsquake()` still fires a
 > quake. It bypasses the scheduler on purpose; the fix gates the scheduler only
 > (`Lua/Marsquake.lua:292`).
-
-`Result:` _____________________________________________
-
----
-
-# Group 3 — SAVE-C (two-dome colony)
-
-## PT-14 — Cross-dome shopping with migration off · covers **F61**
-
-**Setup:** SAVE-C — dome **A** (residents, no shop/diner) connected by **passage** to
-dome **B** (has the shop/diner/university). Both domes healthy.
-
-**Trigger:** on dome **A**, turn **"Accept Colonists" OFF** (the migration toggle in the
-dome infopanel — `Community:ToggleAcceptColonists`, `Lua/Buildings/Community.lua:106`).
-Leave dome B's toggle alone. Run 1–2 sols at ultra speed and watch A's residents.
-
-- **BROKEN looks like:** switching off *migration* on the home dome also silently stops
-  its residents from shopping, working or training in the connected dome — comfort and
-  service satisfaction slide with no explanation.
-- **FIXED looks like:** residents of A keep walking through the passage to shop/work/
-  train in B; only actual **immigration into A** is blocked.
-
-Also confirm dome **B** with its own toggle off still correctly **refuses** incoming
-colonists — the fix must not open the wrong gate.
 
 `Result:` _____________________________________________
 

@@ -47,10 +47,16 @@ always safe; A/B legs need the game to be free).
   churn hunt in the archived PT-07 + the F12 BUGS entry is the worked example:
   five wrong hypotheses were killed by timestamps, not speculation). Mechanical
   repairs land with a re-verified A/B pair; redesigns go to the user.
-- **One decision gate remains:**
+- **Two decision gates remain:**
   * **PT-37** → F48: PASS = build the corrected fixup behind a one-shot flag;
     FAIL = `wontfix`. (PT-36 → F10 CLOSED `wontfix` + file deleted 2026-07-27;
     PT-38 → D02 measured, corrected, and unblocked 2026-07-27.)
+  * **F61 disposition** (new 2026-07-27, PT-14): premise falsified — the
+    accept-colonists toggle is a QUARANTINE by design ("not allowed to enter or
+    leave", enforced in `Colonist:FindEmigrationDome`), and the shipped fix
+    half-subverts it. Retirement + `wontfix` proposed (F10 precedent: delete
+    `Fix_HomeDomeMigrationGate.lua`, drop/repurpose the probe, game-free A/B
+    with shifted expected numbers). Evidence on the F61 entry.
 
 ## Playtest state as of 2026-07-27 (evidence in PLAYTEST_ARCHIVE.md)
 
@@ -78,8 +84,9 @@ always safe; A/B legs need the game to be free).
   the F02 root-cause evidence if it ever fires. The F18 savegame sweep
   announces itself on load of an affected save (`corrected the
   already-researched tech's stored discount from 10% to 20%`) — worth capturing.
-- **Everything else is un-run:** PT-09..PT-11, PT-14..PT-19 (fixture saves
-  B/C/D/E per the checklist's fixture table), PT-23..33 + PT-35 (wave-3),
+- **Everything else is un-run:** PT-09..PT-11, PT-15..PT-19 (fixture saves
+  B/D/E per the checklist's fixture table; PT-14 DONE 2026-07-27 — premise
+  falsified, see the F61 gate above), PT-23..33 + PT-35 (wave-3),
   PT-37 (last gate, attended), PT-39/40/42/43/44 (wave-4), PT-47 (wave-5),
   PT-46's untested tail (F49(d) train cap, F49(a) instant-track palette),
   PT-20/21/22 (uninstall / soak / log hygiene).

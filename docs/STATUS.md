@@ -52,6 +52,18 @@ one-line summary here:
 - **Docs restructure:** completed playtests + evidence now live in
   `docs/PLAYTEST_ARCHIVE.md`; the checklist carries only un-run work
   (reporting protocol step 8 keeps it that way).
+- **PT-14 (2026-07-27, after the session wrap): F61's premise FALSIFIED — new
+  decision gate.** The accept-colonists toggle is a **quarantine**: its OFF
+  state is titled "Quarantined" and the rollover promises "Colonists are not
+  allowed to enter or leave" (reused original-game T-ids — carried-forward
+  wording); `Colonist:FindEmigrationDome` enforces it with the literal comment
+  "quarantine, no one enters or leaves" (`Colonist.lua:2632-2634`). The lockdown
+  the tester observed is designed behavior, and the shipped fix half-SUBVERTS it
+  (quarantined residents can still be offered outbound work/services through
+  passages). **Retirement + `wontfix` proposed (F10 precedent) — awaiting the
+  user**; evidence on the F61 entry + the PT-14 archive section. The
+  migration-independent commute controls PT-14 wanted already exist ("Use
+  Passages for work/services" toggles + the dome trait filter).
 **Two prompts, two triggers:**
 - `docs/FABLE_NEXT_PROMPT.md` — the NEXT Fable work session: the F02 regression hunt
   (PT-01 FAILed with NO reloads — user confirmed — so the meteor thread genuinely
