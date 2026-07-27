@@ -568,7 +568,16 @@ targets `MetalsExtractor` / `PreciousMetalsExtractor`) and a **Martian Universit
 > must NOT raise a "needs workers" warning, and a Mine (no automation) must still ask
 > for geologists.
 
-`Result (geologist demand gone?):` _____________________________________________
+`Result (geologist demand gone?):` PASS — 2026-07-27 (user, screenshots both ways):
+before ExtractorAI the university's list read **Geologists 11** (Engineers 47,
+Medics 5, Officers 5); the user reloaded a pre-tech save to capture it after the
+post-tech reading showed **Geologists 0 with every other row identical**. The
+delta is exactly the automated extractors' posts dropping out. Bonus: the fix
+pack was active in the before-save, so the fix provably does NOT over-exclude —
+non-automated extractors still contribute geologist demand (the 11). Setup note:
+`CheatResearchAll()` does NOT grant undiscovered breakthroughs — the direct
+grant `UIColony:SetTechResearched("ExtractorAI")` was used (command table
+corrected same day).
 
 `Result (other specialists still trained?):` _____________________________________________
 
