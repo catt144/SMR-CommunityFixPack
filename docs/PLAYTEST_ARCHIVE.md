@@ -542,6 +542,11 @@ organic save state, matching the synthetic A/B baseline. **F10 CLOSED `wontfix`;
 restorable from git history). The TestKit `FactionFundingCheck` probe stays as
 a canary on the shipped function — expected A/B numbers unchanged (it is the
 baseline's "1 PASS").
+**Both-ways bonus (same day, later):** after a 10-tourist group departed and
+paid out at Earth arrival ("Tourism: $544.5 M, +23 applicants"),
+`GetLastSolsFundingByType(10, "Tourist Profits")` printed **544500000** — the
+shipped function reads real NONZERO income correctly too, not just the
+nil-tolerant zero case. Retirement evidence complete in both directions.
 
 ---
 
