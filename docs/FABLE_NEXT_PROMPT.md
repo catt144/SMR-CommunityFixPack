@@ -5,8 +5,9 @@ live prompt: the old OPUS_BUILD / FABLE_QA / FABLE_PLAYTEST prompts are retired
 (git history has them). Build state: **67 registered modules, 66/67 active
 (ClassicRockets opt-in), F10 retired and deleted, latest clean A/B pair
 2026-07-27 (logs 11.45.34 / 11.47.09), everything pushed.** The 2026-07-26/27
-sessions were a long live-playtest run: 14 fixes now carry playtest status
-(F36 via PT-24 post-wrap; F61 closed wontfix → D03 filed same day),
+sessions were a long live-playtest run: 15 fixes now carry playtest status
+(F36 via PT-24 and F08 via PT-06 post-wrap; F61 closed wontfix → D03 filed
+same day),
 two of the three decision gates are cleared, and one new defect (F12's
 "Food"-key collision) was found live, repaired, and A/B-verified same day.
 What remains is playtest-driven plus one unblocked build item (D02).
@@ -56,7 +57,8 @@ always safe; A/B legs need the game to be free).
 
 ## Playtest state as of 2026-07-27 (evidence in PLAYTEST_ARCHIVE.md)
 
-- **Done → `tested`:** F03 (PT-02), F05 (PT-05), F12 (PT-07 — whose FIRST run
+- **Done → `tested`:** F03 (PT-02), F05 (PT-05), F08 (PT-06 — 5★ +23/$544.5M
+  vs tanked ≤2★ +7/$94.5M), F12 (PT-07 — whose FIRST run
   caught a second F12 defect, repaired + A/B same day), F13 (PT-08),
   F36 (PT-24 — geologist demand 11→0 on the ExtractorAI grant; 38 engineers +
   2 medics + zero geologists graduated), F44+F45
@@ -67,18 +69,11 @@ always safe; A/B legs need the game to be free).
   D03). D02 gate
   done (PT-38): the dismiss window is **120,000 GAME-ms = 4 game hours**, not
   wall-clock — corrected in the checklist cautions and the D02 entry.
-- **In flight — PT-06 (F08), the 5-star half is BANKED:** a pampered 10-tourist
-  group departed and paid at Earth ARRIVAL (arrival-time on Relaunched
-  universal rockets): "Tourism: $544.5 M, **+23 applicants**" (2.3/head = top
-  tier; the reward table IS the rating readout). **Open: the 1-star half** —
-  tank a group's stay (rating also caps if Health/Sanity/Comfort dip), bump
-  their `sols` past `TouristSolsOnMarsMax`, screenshot the rocket infopanel's
-  Tourist Overview button (landed + boarded only — there is NO automatic
-  popup), depart, expect ~0-4 applicants from 10. Clear 5★ > 1★ = PASS.
-  Tourist how-to (archived + command table): tourists are 5% of applicants
-  (`tourist_arrival_chance`, crank + `CheatGenerateApplicants`), the passenger
-  filter EXCLUDES the Tourist trait by default (flip it manually), stay is
-  5-10 sols (`TouristSolsOnMarsMin/Max`, `c.sols` bump to force leaving).
+- **PT-06 (F08) DONE 2026-07-27 → `tested`:** 5★ half "+23 applicants,
+  $544.5M"; tanked half (stripped dome, Earthsick early leavers counted)
+  "+7 applicants, $94.5M" — the clear split. Evidence + the Src mechanics
+  notes (no sols/reason filter on departure rewards; stat<30 caps rating at
+  the 2★ tier) are in the PT-06 archive section and on the F08 entry.
 - **Passive:** PT-01's silence-watch — the watchdog self-reports (`WATCHDOG —
   Meteors thread silent … last phase 'X', thread ALIVE|DEAD`); THAT log line is
   the F02 root-cause evidence if it ever fires. The F18 savegame sweep

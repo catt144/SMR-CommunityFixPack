@@ -1,6 +1,6 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-27 (**playtest marathon DONE — 14 fixes carry playtest status,
+Updated: 2026-07-27 (**playtest marathon DONE — 15 fixes carry playtest status,
 F10 retired+deleted, F61 closed wontfix → D03 filed, 2 of 3 gates cleared, one
 new F12 defect found live + repaired + A/B-verified same day** — see "Playtest
 marathon" below).
@@ -39,9 +39,18 @@ one-line summary here:
   time-to-next-attempt, every in-window re-add attempt observed BLOCKED;
   suppression is per notification id). At ultra the re-nag is every few REAL
   seconds — D02's case is STRONGER. `Opt_AcknowledgedWarnings` build unblocked.
-- **PT-06 (F08) half-banked:** 5★ 10-tourist departure paid at Earth ARRIVAL
-  (arrival-time on Relaunched universal rockets) — "+23 applicants, $544.5M"
-  (2.3/head = top-tier by the reward table). 1★ half open.
+- **PT-06 (F08) DONE 2026-07-27 (later) → F08 `tested`:** 5★ 10-tourist
+  departure paid at Earth ARRIVAL "+23 applicants, $544.5M" (2.3/head =
+  top-tier); the tanked half (fresh group into a stripped dome — homeless,
+  services off, three fled Earthsick at sol 1-5) paid "+7 applicants, $94.5M".
+  23 vs 7 = the clear split. Mechanics confirmed from Src during the run:
+  departure rewards walk every boarded Tourist with no sols/reason filter
+  (early leavers count); any stat < 30 caps the rating at the 2★ tier
+  (`HolidayStatCapRating`); ~0.7 applicants/head at ≤2★ matches the corrected
+  roll (shipped inverted math would average ~0.2). Two cosmetic vanilla quirks
+  recorded in the archive entry (overstay-cycle button no-ops silently on an
+  empty sol-10+ bucket and only cycles the current map; sols-based tooltip
+  labels early-leavers "Enjoying their holiday").
 - **Engine/tooling facts learned (also in the prompt + command table):**
   infopanel cheat buttons need `Platform.cheats = true` AND ride the game-time
   sync queue (dead while paused); tourists are 5% of applicants and the

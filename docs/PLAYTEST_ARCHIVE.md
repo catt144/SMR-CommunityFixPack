@@ -35,7 +35,9 @@ F61 + D03 BUGS.md entries), PT-24 (F36 → tested — geologist demand 11 → 0 
 the ExtractorAI grant with all other rows identical, before/after screenshots;
 38 engineers + 2 medics + zero geologists across multiple cheat-graduation
 rounds on two universities; also caught the CheatResearchAll
-breakthrough-skip gotcha, command table corrected).
+breakthrough-skip gotcha, command table corrected), PT-06 (F08 → tested —
+5★ departure +23 applicants/$544.5M vs tanked ≤2★ group +7/$94.5M, the clear
+split; early Earthsick leavers confirmed counted by the departure reward).
 
 ---
 
@@ -328,6 +330,49 @@ console with `MilestoneCompleted.ScanAnomaly = nil` then re-completing it. On
 the final completion (18/18, score 83,420) the **"A dream fulfilled" popup
 appeared immediately** (screenshots taken); log Mars.exe-20260726-15.03.01 has
 **zero [LUA ERROR]** — no "arithmetic on a nil value" anywhere.
+
+---
+
+## PT-06 — Five-star tourist applicant jump · covers **F08**
+
+**Setup:** SAVE-A. You need a tourist-carrying rocket to **depart**. Build a Hotel/
+Spacebar so tourists arrive; ensure high Comfort so the group rates 5 stars (open the
+infopanel and check the rating before departure). `CheatToggleInfopanelCheats()` gives
+you per-building levers if you need to force a state.
+
+**Trigger:**
+1. Before the tourist rocket departs, note the **applicant pool size** (Colony
+   Control Center → Applicants, or `#UIColony.applicants_pool`).
+2. Let the rocket depart. Note the pool again.
+3. Repeat once with a **deliberately bad (1-star)** tourist group (turn off the Hotel's
+   power / let comfort tank).
+
+- **BROKEN looks like:** the miserable 1-star tourist group brings you *more* new
+  applicants than the delighted 5-star group — the reward is upside-down.
+- **FIXED looks like:** the 5-star departure gives a clearly bigger applicant bump than
+  the 1-star one.
+
+`Result:` PASS — 2026-07-27 (user, two departures, screenshots):
+**5★ half (2026-07-27 early):** 10 pampered tourists paid at Earth arrival
+"Tourism: $544.5 M, **+23 applicants**" (2.3/head = the top reward tier).
+**Tanked half (same day, later):** a fresh ~9-tourist group landed into a
+stripped dome (hotels + services off) — homeless, Stressed Out; three fled
+Earthsick at sol 1-5 ("Leaving the Colony" — early leavers ARE counted: the
+reward walks every boarded Tourist at departure, `RocketBase.lua:815-855`, no
+sols/reason filter). Payout: "Tourism: **$94.5 M, +7 applicants**" —
+**23 vs 7 applicants, $544.5M vs $94.5M: the clear 5★ > tanked split the test
+demands.** Interpretation notes: with sanity/comfort in the red every head is
+capped at the 2★ tier (`HolidayStatCapRating` = 2 whenever any of
+health/sanity/comfort < `HolidayCapThreshold` 30, `HolidayRating.lua:43-55`),
+and full-health tourists accrue daily high-stat satisfaction, so the group sat
+in the 1★/2★ bands rather than pure 1★ (why the pre-test "~0-4 from 10" was
+slightly undershot); ~0.7 applicants/head at ≤2★ matches the CORRECTED roll
+(2★ = 80% bonus chance; the shipped inverted roll would average ~0.2/head).
+Side observations, both by-design/cosmetic: the infobar "Cycle overstaying
+Tourists" button silently no-ops when the sol-10+ bucket is empty (list from
+`sols >= TouristSolsOnMarsMax` only, `Infobar.lua:452-466`; cycles the current
+map only), and the sols-based tooltip buckets label early-leavers "Enjoying
+their holiday (sol 1-5)" while they walk to the rocket.
 
 ---
 

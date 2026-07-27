@@ -20,7 +20,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | tested |
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | fixed  |
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
-| F08 | Tourist star-rating applicant bonus inverted             | P1  | high | fixed  |
+| F08 | Tourist star-rating applicant bonus inverted             | P1  | high | tested |
 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | fixed  |
 | F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | wontfix |
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | fixed  |
@@ -219,7 +219,7 @@ mystery ends, so late listeners catch it.
 (Modifiers.lua:321-331), so the broken value persists until wisp count changes (typically
 next 4 AM). **Fix:** override `SetLightTrapMode`; in "free" branch multiply by 1000.
 
-### F08 — Tourist star-rating applicant bonus inverted  `[fixed: Code/Fix_TouristApplicants.lua]`
+### F08 — Tourist star-rating applicant bonus inverted  `[tested: Code/Fix_TouristApplicants.lua — PT-06 PASS 2026-07-27, 5★ +23/$544.5M vs tanked ≤2★ +7/$94.5M]`
 `Lua\HolidayRating.lua:77` — `if Random(0,100) > bonus_chance` grants the bonus with
 probability ~(100 − chance); rewards table (:2-11) is plainly a monotonic progression.
 As shipped, 2-star tourists yield fewer applicants than 1-star. Codebase idiom elsewhere:

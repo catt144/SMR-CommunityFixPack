@@ -208,29 +208,6 @@ SAVE-E is the expensive one; do it last and do all four of its tests in one sitt
 > (`WATCHDOG — Meteors thread silent …`) if the meteor wedge ever recurs; if
 > you see that line in the log, report it verbatim.
 
-## PT-06 — Five-star tourist applicant jump · covers **F08**
-
-**Setup:** SAVE-A. You need a tourist-carrying rocket to **depart**. Build a Hotel/
-Spacebar so tourists arrive; ensure high Comfort so the group rates 5 stars (open the
-infopanel and check the rating before departure). `CheatToggleInfopanelCheats()` gives
-you per-building levers if you need to force a state.
-
-**Trigger:**
-1. Before the tourist rocket departs, note the **applicant pool size** (Colony
-   Control Center → Applicants, or `#UIColony.applicants_pool`).
-2. Let the rocket depart. Note the pool again.
-3. Repeat once with a **deliberately bad (1-star)** tourist group (turn off the Hotel's
-   power / let comfort tank).
-
-- **BROKEN looks like:** the miserable 1-star tourist group brings you *more* new
-  applicants than the delighted 5-star group — the reward is upside-down.
-- **FIXED looks like:** the 5-star departure gives a clearly bigger applicant bump than
-  the 1-star one.
-
-`Result:` _____________________________________________
-
----
-
 ## PT-09 — Domes Overview red low-stat column · covers **F14**
 
 **Setup:** SAVE-A. Drive one dome's **average Health (or Comfort / Sanity / Morale)
