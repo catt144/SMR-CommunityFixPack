@@ -24,7 +24,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | P1  | high | fixed  |
 | F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | P1 | high | retiring |
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | fixed  |
-| F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | fixed  |
+| F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | tested |
 | F13 | Command Center resource rows show no numbers             | P2  | high | tested |
 | F14 | Domes Overview red low-stat highlight dead               | P2  | high | fixed  |
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
@@ -269,7 +269,7 @@ the error aborts before `DiscardTransportTicket`; `Train:UnloadTrain`
 
 ## P2 — wrong numbers / notable misbehavior
 
-### F12 — "Low Storage" warning never fires for Food/maintenance resources  `[fixed: Code/Fix_LowStorageWarning.lua]`
+### F12 — "Low Storage" warning never fires for Food/maintenance resources  `[tested: Code/Fix_LowStorageWarning.lua — PT-07 PASS 2026-07-27 on the repaired build: Food fires once/steady a sol/clears silently on organic recovery; Machine Parts fires once ("1 Sols, 12h") after forced-malfunction consumption; first run caught the second defect below]`
 `Lua\ResourceTracking.lua:218-224, 229-234` — `supply*24/v*24` = `((supply*24)/v)*24`,
 always 0 or ≥24 under integer division, guard requires `0 < x < 3` → unsatisfiable.
 Grid branches (:259-303) are correct. Consts: `_GameConst.lua:4,10-11`. **Fix:** replace

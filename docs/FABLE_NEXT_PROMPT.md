@@ -92,7 +92,14 @@ always safe; A/B legs need the game to be free).
   59/0/11/0, 66/67 active). **PT-07 re-run is open**: warning must fire AND sit
   steady over 2-3 game hours, plus the Machine Parts half. TestKit gained
   `SMRTest.Cls` (clears the on-screen console overlay).
-- **Everything else is un-run:** PT-06/07, PT-09..PT-11, PT-14..PT-19 (fixture
+- **PT-07 re-run PASS (2026-07-27 later): F12 is `tested`.** Food: fires once,
+  steady a full sol, clears silently on organic recovery (supply pod + farms),
+  re-fires once on re-drain. Machine Parts: forced turbine malfunctions →
+  consumption recorded → "Less than 1 Sols, 12h", no repeats. Two retail
+  gotchas recorded in the checklist command table: infopanel cheat buttons
+  need `Platform.cheats = true` AND ride the game-time sync queue (dead-looking
+  while paused; `ObjCheat <method>` console print = delivered).
+- **Everything else is un-run:** PT-06, PT-09..PT-11, PT-14..PT-19 (fixture
   saves per the
   checklist's fixture table), PT-23..35 (wave-3), PT-36/37/38 (gates, attended),
   PT-39/40/42/43/44 (wave-4), PT-47 (wave-5), PT-46's untested tail (F49(d)

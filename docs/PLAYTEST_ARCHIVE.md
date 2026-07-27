@@ -9,7 +9,10 @@ the checklist — consult it before re-running anything here.
 Archived 2026-07-26: PT-01 (F02 cadence + tower lead verified live; the
 passive silence-watch continues via the watchdog), PT-02 (F03 → tested),
 PT-03 (F44/F45 → tested), PT-04 (F50 → tested), PT-05 (F05 → tested — the
-"A dream fulfilled" popup at 18/18), PT-08 (F13 → tested — all 11 resource
+"A dream fulfilled" popup at 18/18), PT-07 (F12 → tested 2026-07-27 — fires
+once, steady a sol, silent organic clear; Machine Parts half via forced
+malfunctions; its first run caught and fixed the F12 "Food"-key collision),
+PT-08 (F13 → tested — all 11 resource
 rows show numbers, HUD cross-checked), PT-12 (F51 → tested — cached mode=false
 recomputed to "shuttle" when the hub went live), PT-13 (F52 → tested* — passage
 used in vacuum; surface walk correctly resumed once the passage was destroyed),
@@ -307,6 +310,54 @@ console with `MilestoneCompleted.ScanAnomaly = nil` then re-completing it. On
 the final completion (18/18, score 83,420) the **"A dream fulfilled" popup
 appeared immediately** (screenshots taken); log Mars.exe-20260726-15.03.01 has
 **zero [LUA ERROR]** — no "arithmetic on a nil value" anywhere.
+
+---
+
+## PT-07 — Low-food warning · covers **F12**
+
+**Setup:** SAVE-A with a colony that actually **consumes food** (colonists eating,
+farms producing, at least one full sol of consumption history — the check reads
+"consumed yesterday", `Lua/ResourceTracking.lua:228`). Threshold is 3 sols
+(`const.MinDaysFoodSupplyBeforeNotification = 3`, `Lua/_GameConst.lua:11`).
+
+**Trigger:** drain the Food stock below ~3 sols of consumption — salvage the food
+depot contents, or dump food by demolishing storage. Then wait ≤1 game hour at
+`SetGameSpeedState("ultra")`.
+
+Repeat for a maintenance resource (Machine Parts): let stock drop under 3 sols of
+maintenance consumption.
+
+- **BROKEN looks like:** food (and Machine Parts) run down to nothing with **no warning
+  at all** — the "insufficient resources" notification simply never fires for them.
+- **FIXED looks like:** the low-supply notification appears within a game hour of
+  crossing the 3-sol line, naming Food (and Machine Parts), with a sane hours estimate.
+- **Also check:** while the warning is active, does it sit there quietly, or does it
+  visibly flicker / replay its alert sound every game hour? (The F12 rework was
+  specifically about killing that churn.) **The warning should be steady.**
+
+> First run 2026-07-27 (Stargazer save): the Food warning FIRED correctly
+> ("2 Sols, 22h" — that half works) but the steadiness check FAILED — user:
+> "I get a flash and a voice over the says 'warning insufficient resources' on
+> repeat every hour or so". Diagnosed live via console instrumentation to a
+> "Food"-key collision between the maintenance loop and the food branch inside
+> the fixed updater (full record on the F12 entry); repaired same day in
+> Fix_LowStorageWarning.lua. **Re-run this test from scratch on the repaired
+> build (next game launch): expect the warning to fire AND sit steady, plus the
+> Machine Parts half.**
+
+`Result:` PASS — 2026-07-27, re-run on the repaired build (post-35f7246).
+**Food half:** warning fired at the 3-sol crossing, announced exactly ONCE, then
+sat steady with the warning active for "maybe at least one full sol" (user; the
+old churn repeated hourly, so 24+ quiet hours is decisive); cleared
+**automatically and silently** on an organic recovery (food supply pod fired +
+farms turned back on — no cheat fill); a re-drain re-announced exactly once.
+**Machine Parts half:** maintenance consumption generated via forced turbine
+malfunctions, drained under 3 sols → warning fired naming Machine Parts
+("Less than 1 Sols, 12h of storage remain"), sane figure, **no repeats**.
+Setup discoveries recorded in the command table: infopanel cheat buttons
+no-op on retail without `Platform.cheats = true`, and their presses queue on
+the game-time sync — they look dead while PAUSED and fire on unpause (the
+`ObjCheat <method>` console print is the tell).
 
 ---
 

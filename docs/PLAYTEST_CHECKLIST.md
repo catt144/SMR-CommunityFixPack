@@ -6,8 +6,8 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
-far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-08, PT-12, PT-13, PT-41, PT-45, and
-PT-46's F49(b) half. This
+far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-07, PT-08, PT-12, PT-13, PT-41,
+PT-45, and PT-46's F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -130,7 +130,7 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatGenerateApplicants(n)` | `Lua/ApplicantsPool.lua:210` | applicant pool |
 | `CheatUpdateAllWorkplaces()` | `Lua/Cheats.lua:210` | re-run job assignment now |
 | `CheatToggleAllShifts()` | `Lua/Cheats.lua:192` | open/close every shift |
-| `CheatToggleInfopanelCheats()` | `Lua/Cheats.lua:290` | shows per-building cheat buttons — ⚠️ **on retail the buttons render but silently NO-OP** (they dispatch `NetSyncEvents.ObjCheat`, gated `AreCheatsEnabled()`, `Network.lua:218-219`; found live 2026-07-27). Either run `Platform.cheats = true` first (buttons work; set false after), or skip the panel and call the method directly on the selection: `SelectedObj:CheatMalfunction()` / `CheatAddMaintenancePnts()` / `CheatCleanAndFix()` (`Building.lua:1813-1849`) |
+| `CheatToggleInfopanelCheats()` | `Lua/Cheats.lua:290` | shows per-building cheat buttons — ⚠️ **on retail the buttons render but silently NO-OP** (they dispatch `NetSyncEvents.ObjCheat`, gated `AreCheatsEnabled()`, `Network.lua:218-219`; found live 2026-07-27). Either run `Platform.cheats = true` first (buttons work; set false after), or skip the panel and call the method directly on the selection: `SelectedObj:CheatMalfunction()` / `CheatAddMaintenancePnts()` / `CheatCleanAndFix()` (`Building.lua:1813-1849`). Second gotcha (2026-07-27): button presses ride the game-time sync queue (`ScheduleOfflineSyncEvent`) — they look DEAD while the game is paused and fire on unpause; the `ObjCheat <method>` console print confirms delivery |
 | `CheatMeteors("single"\|"multispawn"\|"storm", setting, pos)` | `Lua/Cheats.lua:62` | meteor strike at the camera look-at |
 | `CheatTriggerMarsquake(settings_name)` | `Lua/Marsquake.lua:223` | surface quake |
 | `CheatTriggerUndergroundMarsquake()` | `Lua/Marsquake.lua:292` | underground quake (**bypasses** the scheduler — see PT-11) |
@@ -224,42 +224,6 @@ you per-building levers if you need to force a state.
   applicants than the delighted 5-star group — the reward is upside-down.
 - **FIXED looks like:** the 5-star departure gives a clearly bigger applicant bump than
   the 1-star one.
-
-`Result:` _____________________________________________
-
----
-
-## PT-07 — Low-food warning · covers **F12**
-
-**Setup:** SAVE-A with a colony that actually **consumes food** (colonists eating,
-farms producing, at least one full sol of consumption history — the check reads
-"consumed yesterday", `Lua/ResourceTracking.lua:228`). Threshold is 3 sols
-(`const.MinDaysFoodSupplyBeforeNotification = 3`, `Lua/_GameConst.lua:11`).
-
-**Trigger:** drain the Food stock below ~3 sols of consumption — salvage the food
-depot contents, or dump food by demolishing storage. Then wait ≤1 game hour at
-`SetGameSpeedState("ultra")`.
-
-Repeat for a maintenance resource (Machine Parts): let stock drop under 3 sols of
-maintenance consumption.
-
-- **BROKEN looks like:** food (and Machine Parts) run down to nothing with **no warning
-  at all** — the "insufficient resources" notification simply never fires for them.
-- **FIXED looks like:** the low-supply notification appears within a game hour of
-  crossing the 3-sol line, naming Food (and Machine Parts), with a sane hours estimate.
-- **Also check:** while the warning is active, does it sit there quietly, or does it
-  visibly flicker / replay its alert sound every game hour? (The F12 rework was
-  specifically about killing that churn.) **The warning should be steady.**
-
-> First run 2026-07-27 (Stargazer save): the Food warning FIRED correctly
-> ("2 Sols, 22h" — that half works) but the steadiness check FAILED — user:
-> "I get a flash and a voice over the says 'warning insufficient resources' on
-> repeat every hour or so". Diagnosed live via console instrumentation to a
-> "Food"-key collision between the maintenance loop and the food branch inside
-> the fixed updater (full record on the F12 entry); repaired same day in
-> Fix_LowStorageWarning.lua. **Re-run this test from scratch on the repaired
-> build (next game launch): expect the warning to fire AND sit steady, plus the
-> Machine Parts half.**
 
 `Result:` _____________________________________________
 
