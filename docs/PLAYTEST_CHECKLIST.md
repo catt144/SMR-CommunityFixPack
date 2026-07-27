@@ -130,7 +130,7 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatGenerateApplicants(n)` | `Lua/ApplicantsPool.lua:210` | applicant pool |
 | `CheatUpdateAllWorkplaces()` | `Lua/Cheats.lua:210` | re-run job assignment now |
 | `CheatToggleAllShifts()` | `Lua/Cheats.lua:192` | open/close every shift |
-| `CheatToggleInfopanelCheats()` | `Lua/Cheats.lua:290` | per-building break/repair/malfunction buttons in the infopanel |
+| `CheatToggleInfopanelCheats()` | `Lua/Cheats.lua:290` | shows per-building cheat buttons — ⚠️ **on retail the buttons render but silently NO-OP** (they dispatch `NetSyncEvents.ObjCheat`, gated `AreCheatsEnabled()`, `Network.lua:218-219`; found live 2026-07-27). Either run `Platform.cheats = true` first (buttons work; set false after), or skip the panel and call the method directly on the selection: `SelectedObj:CheatMalfunction()` / `CheatAddMaintenancePnts()` / `CheatCleanAndFix()` (`Building.lua:1813-1849`) |
 | `CheatMeteors("single"\|"multispawn"\|"storm", setting, pos)` | `Lua/Cheats.lua:62` | meteor strike at the camera look-at |
 | `CheatTriggerMarsquake(settings_name)` | `Lua/Marsquake.lua:223` | surface quake |
 | `CheatTriggerUndergroundMarsquake()` | `Lua/Marsquake.lua:292` | underground quake (**bypasses** the scheduler — see PT-11) |
