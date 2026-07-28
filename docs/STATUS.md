@@ -1,6 +1,6 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-27 (**playtest marathon DONE — 15 fixes carry playtest status,
+Updated: 2026-07-27 (**playtest marathon DONE — 16 fixes carry playtest status,
 F10 retired+deleted, F61 closed wontfix → D03 filed, 2 of 3 gates cleared, one
 new F12 defect found live + repaired + A/B-verified same day** — see "Playtest
 marathon" below).
@@ -83,6 +83,15 @@ one-line summary here:
   **User's release warning, recorded: this WILL draw false bug reports against
   the pack** — MOD_DESCRIPTION carries a draft-note for a "known vanilla
   issue" explainer (D02 precedent). Full forensics on the F76 entry.
+- **PT-39 (2026-07-27, later): F74 → `tested`.** A landed TRADE rocket was
+  fully refused by the RC Transport cursor ("treats it like normal terrain")
+  AND by the route path — the route endpoint fell back to a ground position
+  and the cargo was dumped at the pad, rocket untouched (the route handler
+  only stores targets the guarded interaction check approves). Controls
+  clean: ground-pile pickup + depot loading via route mode both work (the
+  route path skips F76's broken picker for single-resource depots,
+  `RCTransport.lua:466-476`). Cosmetic aside recorded: rovers clip through
+  the landed event rocket's model.
 - **Engine/tooling facts learned (also in the prompt + command table):**
   infopanel cheat buttons need `Platform.cheats = true` AND ride the game-time
   sync queue (dead while paused); tourists are 5% of applicants and the

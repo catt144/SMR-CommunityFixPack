@@ -5,9 +5,9 @@ live prompt: the old OPUS_BUILD / FABLE_QA / FABLE_PLAYTEST prompts are retired
 (git history has them). Build state: **67 registered modules, 66/67 active
 (ClassicRockets opt-in), F10 retired and deleted, latest clean A/B pair
 2026-07-27 (logs 11.45.34 / 11.47.09), everything pushed.** The 2026-07-26/27
-sessions were a long live-playtest run: 15 fixes now carry playtest status
-(F36 via PT-24 and F08 via PT-06 post-wrap; F61 closed wontfix → D03 filed
-same day),
+sessions were a long live-playtest run: 16 fixes now carry playtest status
+(F36, F08, F74 via PT-24/06/39 post-wrap; F61 closed wontfix → D03 filed
+same day; NEW vanilla F76 found live — depot resource picker off-cursor),
 two of the three decision gates are cleared, and one new defect (F12's
 "Food"-key collision) was found live, repaired, and A/B-verified same day.
 What remains is playtest-driven plus one unblocked build item (D02).
@@ -60,6 +60,7 @@ always safe; A/B legs need the game to be free).
 - **Done → `tested`:** F03 (PT-02), F05 (PT-05), F08 (PT-06 — 5★ +23/$544.5M
   vs tanked ≤2★ +7/$94.5M), F12 (PT-07 — whose FIRST run
   caught a second F12 defect, repaired + A/B same day), F13 (PT-08),
+  F74 (PT-39 — trade rocket refused by cursor AND route; found F76 en route),
   F36 (PT-24 — geologist demand 11→0 on the ExtractorAI grant; 38 engineers +
   2 medics + zero geologists graduated), F44+F45
   (PT-03), F47 (PT-45), F50 (PT-04), F51 (PT-12), F54 (PT-34), F66 (PT-41);
@@ -84,7 +85,8 @@ always safe; A/B legs need the game to be free).
   falsified, see the F61 gate above), PT-23 + PT-25 + PT-27..33 + PT-35
   (wave-3; PT-24 DONE 2026-07-27 → F36 `tested`; PT-26 resolved-unrunnable →
   D04 filed),
-  PT-37 (last gate, attended), PT-39/40/42/43/44 (wave-4), PT-47 (wave-5),
+  PT-37 (last gate, attended), PT-40/42/43/44 (wave-4; PT-39 DONE 2026-07-27
+  → F74 `tested`), PT-47 (wave-5),
   PT-46's untested tail (F49(d) train cap, F49(a) instant-track palette),
   PT-20/21/22 (uninstall / soak / log hygiene).
 

@@ -42,7 +42,11 @@ PT-26 (RESOLVED-UNRUNNABLE — the unmodded game cannot build a second
 Artificial Sun (build-once wonder, colony-wide incl. sites), so F39's fix is
 latent; user decision: fold it into the new D04 `Opt_MultipleSuns` opt-in that
 lifts the limit AND ships the binding fix; single-sun night-production
-baseline banked for the module's future playtest).
+baseline banked for the module's future playtest), PT-39 (F74 → tested —
+landed trade rocket refused by cursor AND by route (route endpoint fell back
+to a ground position, cargo dumped at the pad, rocket untouched); controls
+clean; the setup's depot half surfaced the NEW vanilla F76 finding, tracked
+separately).
 
 ---
 
@@ -813,6 +817,69 @@ breakage inside the window is swallowed with it (`AddNotification`
 early-returns while suppressed, `Notifications.lua:52-54`). Exactly the
 per-category gap Opt_AcknowledgedWarnings addresses → **D02 build proceeds,
 with the corrected 4-game-hour spec.**
+
+---
+
+## PT-39 — RC Transport vs. a visiting rocket · covers **F74**
+
+Probes prove the guard refuses a trade rocket; only play can show the cursor and
+the order behave as they should, and that nothing ELSE the RC Transport does got
+caught by the same net.
+
+**Setup:** a save where a trade rocket or a refugee rocket is landed (rival-colony
+trade offer, or the refugee story event). Have an RC Transport with some cargo
+aboard and some free space, parked near it.
+
+**Steps:**
+1. Select the RC Transport and hover the cursor over the landed **trade/refugee**
+   rocket, both in plain move mode and with the Load and Unload interaction modes.
+   - **EXPECTED:** no "Load Resource" / "Unload Resource" prompt appears, and
+     clicking does not send the rover to the rocket (it should read as ordinary
+     terrain — a move order, or nothing).
+   - **SURPRISE looks like:** the prompt still appears, or the rover drives over
+     and starts a transfer.
+2. Try to start a **transport route** whose source or destination is that rocket.
+   - **EXPECTED:** the rocket cannot be picked as either end.
+3. **Control test — this must still work.** Hover the same RC Transport over a
+   normal **player** rocket or asteroid lander that is landed with cargo, and over
+   an ordinary Universal Storage Depot.
+   - **EXPECTED:** Load/Unload prompts appear as before and the transfer runs.
+     If this broke, the fix is over-broad — report it, it is worse than the bug.
+   - **CAUTION (2026-07-27, F76 — vanilla, NOT the pack):** clicking a depot in
+     Load mode opens a resource-picker dialog that on scaled/wide displays
+     renders as a giant detached hex far from the cursor and cannot be clicked
+     (clicks fall through to the map). The depot half of this control was run
+     live and is BLOCKED on F76 — the prompt appears (guard not over-broad ✓),
+     the picker opens (proven by instrumentation), but the pick can't be made
+     by mouse. Use a ground pile for the "transfer runs" half, or the direct
+     command: `rc:SetCommand("TransferResources", depot, "load", "<Res>",
+     30000, true)`. Full trail on the F76 entry.
+4. Check the log for `[CommunityFixPack] RocketInteractGuard: applied`.
+
+`Result (trade/refugee rocket refused?):` PASS — 2026-07-27 (user, landed TRADE
+rocket): "it ignores it completely[,] it treats it like normal terrain and
+drives right through it" — no Load/Unload prompt, the click was a plain move
+order, no transfer. Exactly the EXPECTED refusal. (Cosmetic aside, not F74's
+scope: the rover clips through the landed rocket's model while driving past —
+possible missing obstruction footprint on Universal event rockets, noted only.)
+Refugee rocket not separately exercised (same class family + same guard, probe-
+verified). **Step-2 route check PASS (same sitting):** "if I create a transport
+route to the rocket it just dumps them on the ground" — the route handler only
+stores targets the interaction check approves, so the refused rocket silently
+became a ground POSITION endpoint and the route dumped at the pad instead of
+feeding the rocket (screenshots: loaded transport at the depot; pile on the
+ground beside the rocket, rocket cargo untouched). Exactly the guard holding on
+the route path.
+
+`Result (control test — player rocket + depot still work?):` PASS (with the F76
+caveat) — 2026-07-27: ground-pile pickup works (direct `PickupResource` path);
+the depot Load prompt appears (guard not over-broad); depot LOADING verified
+via route mode — the transport loaded Machine Parts from the depot normally
+(route path skips the F76-broken picker for single-resource depots,
+`RCTransport.lua:466-476`; cursor-load stays blocked by vanilla F76, tracked
+separately). Player-rocket half not separately exercised (exact 4-class guard
++ probe cover it). Bonus observation recorded on the result above: rover
+clips through the landed event rocket's model (cosmetic, vanilla).
 
 ---
 

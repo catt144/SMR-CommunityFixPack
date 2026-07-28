@@ -90,7 +90,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | fixed  |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
-| F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | fixed  |
+| F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
@@ -2059,7 +2059,7 @@ shifts; they die during idle stretches next to it. **Fix:** (a) habitat accepts 
 regardless of momentary life support; (b) Idle wrapper: outside > half of
 OxygenMaxOutsideTime in vacuum → `SetCommand("Rest")`.
 
-### F74 — RC Transports can be ordered onto trade / refugee rockets (P2, high)  `[fixed: Code/Fix_RocketInteractGuard.lua]`
+### F74 — RC Transports can be ordered onto trade / refugee rockets (P2, high)  `[tested: Code/Fix_RocketInteractGuard.lua — PT-39 PASS 2026-07-27: cursor + route both refused a landed trade rocket; controls clean (F76 caveat on the entry)]`
 *Found by screening F56 in wave 4.* `RCTransport:CanInteractWithObject`
 (`Lua\Units\RCTransport.lua:338-385`) opens with a hard refusal —
 `if IsKindOfClasses(obj, "TradeRocketBase", "RefugeeRocketBase") then return false end`
