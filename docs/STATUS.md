@@ -65,9 +65,11 @@ tonight". Full spec + Src evidence on the **D05** BUGS entry; summary:
   persistence-across-restart + log check remain). **Also observed live: an RC
   Terraformer (dozer) + waste-rock heap showed the F76 detached-hex picker
   rendering — Load-on-WasteRock is vanilla dozer behavior (RCTerraformer.lua:33,
-  :224-237; pack ruled out, F74 wrappers refuse-only), but the picker surface
-  may extend to the dozer path; F76 addendum pending the click-vs-hover
-  detail.**
+  :224-237; pack ruled out, F74 wrappers refuse-only), and the picker surface
+  DOES extend to the dozer path (user confirmed: hex appeared on CLICK) — F76
+  addendum filed: any vehicle whose click-load reaches a storage-depot-class
+  object is affected; loose rubble piles safe; the same TransferResources
+  command workaround applies.**
 
 ## Build leg — Fable, 2026-07-27 late: F61 deletion + D02/D03/D04 built, A/B renumbered
 

@@ -2346,6 +2346,26 @@ precedent) whether or not the fix ships in the same release.
 **Process decision: NO further live UI-internals prototyping on play sessions** — the
 F76 repair is an attended, game-free build-leg task (MarsDebug or throwaway retail
 session) where a lockup costs nothing.
+**Surface extension (2026-07-27 late, found live in the Group 8 sitting): the RC
+Terraformer (in-game "RC Dozer") hits the same broken picker.** Clicking a
+waste-rock storage heap in Load mode opened the picker as a giant detached
+"Waste Rock" hex near the top of the screen (screenshot on file — the exact
+PT-39 rendering signature, one item). Path: the dozer's Load-on-WasteRock
+interaction is VANILLA and intended (`RCTerraformer.storable_resources =
+{"WasteRock"}`, `RCTerraformer.lua:33`; its CanInteractWithObject allows only
+WasteRock piles, `:224-237`) and routes through `RCConstructorBase`'s static
+calls into `RCTransport.InteractWithObject` (`RCTransport.lua:353` family) —
+the same storage branch → `OpenResourceSelector` that every affected surface
+shares. So the fix target is unchanged (`ResourceItems`/UpdateLayout — one
+repair covers this too), but the affected-surfaces list is wider than
+transports: **any vehicle whose click-load reaches a storage-depot-class
+object**, dozer included. Loose rubble piles remain safe (direct
+PickupResource, no picker). Command workaround works the same way on the dozer
+(it has TransferResources — its own DumpCargo uses it):
+`rc:SetCommand("TransferResources", <heap>, "load", "WasteRock", <amount*1000>, true)`.
+Pack ruled out for this sighting explicitly: the F74 wrappers in that chain are
+refuse-only (both early-return false for event rockets, everything else defers
+to the shipped body) — verified in-session before filing.
 
 ## Candidates under investigation
 
