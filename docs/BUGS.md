@@ -2410,6 +2410,15 @@ excess :676-681).
   ever scan for work themselves, and what in the per-tick request matching is
   O(range × drones). Distinct from F55 (unreachable-forever cache) — these
   drones CAN reach the work; they are never assigned it.
+  **Live console reads (same sitting):** the FOUR closest drones to the
+  serviced-too-slowly area each read `command = "Idle"` — genuinely idle in
+  the assignment layer, not wedged mid-command and not F55-cached; and a
+  PolymerPlant was caught at `performance = 0` with `auto_performance = 50`
+  (the transient disable the user reported), its maintenance/repair requests
+  showing `target:0` at read time (the far fleet does service things —
+  slowly). Open question for the sweep: which hub OWNS the idle drones
+  (`drone.command_center`) vs which hub's queue held the starved requests —
+  the crux of whether requests bind to the noticing hub's fleet.
 - Colonist auto-assignment: workplaces (`UpdateWorkplaces` family — "unemployed
   every sol"), residences ("homeless despite free housing", "seniors don't move"),
   dome-to-dome walking/passage checks (`AreDomesConnectedWithPassage` — suffocation
