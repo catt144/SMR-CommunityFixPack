@@ -54,6 +54,14 @@ tonight". Full spec + Src evidence on the **D05** BUGS entry; summary:
   D05 entry). Both writers now use `""`, ListFixes nil-tolerant. Takes effect
   on the user's next relaunch; **A/B pair re-verify queued for the next
   game-free window** (cosmetic to the probes — nothing reads ListFixes).
+- **PT-51 COMPLETE, same night → D05 `tested` (archived):** all four toggles
+  + tooltips good; live both ways proven twice (ClassicRockets on
+  mid-session, MultipleSuns off/on vs the build menu); full shutdown +
+  relaunch kept every toggle and the startup log shows all four modules
+  self-activating from saved values; ListFixes printed 2×68 clean lines
+  post-repair; log swept clean twice. **The PT-49 row reposition is also
+  verified** ("UI good for dome" — the policy row now sits with the toggle
+  group).
 - **PT-49 first sitting, same night: core behavior PASSing** (closed
   high-comfort dome: zero move-ins, commute/services normal — screenshots).
   Cosmetic finding repaired same day: the policy row now inserts directly

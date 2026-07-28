@@ -1083,3 +1083,33 @@ play-verified.**
 
 ---
 
+## PT-51 — Mod Options page · covers **D05** (the enable step for the optional modules)
+
+The pack's entry on the game's own Options screen — first release-facing UI
+the pack has ever added there.
+
+**Checks:** (1) page lists the pack with exactly four toggles, defaults off,
+sane tooltips; (2) toggles wire to the registry (`ListFixes` tracks); (3) live
+toggle both directions; (4) settings survive a full restart, modules
+self-activate; (5) log clean.
+
+`Result (page+tooltips / live both ways / survives restart / log clean?):` **PASS
+in full — 2026-07-27 late, the D05 build's first sitting.** (1) All four
+toggles present, off by default, tooltips read sensibly (tester). (2) The
+three Group 8 modules enabled via the page came up `active`; the first
+`ListFixes()` call hit the LATENT nil-detail crash (pre-D05 bug, found by this
+step, repaired same day — trail on the D05 entry); post-repair the listing
+printed 2×68 clean lines, zero inactive/error, all four opt-ins `active`.
+(3) Live BOTH ways proven twice: ClassicRockets toggled ON mid-session →
+activated immediately (auto-refuel then observed working in play, D01 note);
+MultipleSuns toggled OFF → build menu's "only once" refusal returned
+instantly, ON → lifted again (screenshots). (4) Full game shutdown + relaunch:
+all toggles still ON, and the startup log shows all four modules `applied` at
+code load purely from the saved values — no console, no flag file. (5) Log
+swept twice: zero `[LUA ERROR]`, zero apply failures (the known transient
+MultipleSuns pre-DataLoaded line logged once and self-cleared, as designed).
+**D05 → tested. The Mod Options page is the release enable path (PC + the
+console platforms Paradox Mods delivers to).**
+
+---
+

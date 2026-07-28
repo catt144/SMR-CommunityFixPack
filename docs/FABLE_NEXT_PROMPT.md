@@ -24,9 +24,9 @@ the 2026-07-26/27 marathon model. Your jobs, in the order they usually come up:
    setup using the checklist's own steps and the verified command table
    (`PLAYTEST_CHECKLIST.md`); hand them exact console lines to paste. Group 8
    (the opt-in modules) is enabled in **Options → Mod Options → Community Fix
-   Pack** (main menu or pause menu; toggles apply live — that UI itself is
-   PT-51, run it first); in-colony `SMRFixPack.ListFixes()` must then show the
-   three modules `active`.
+   Pack** (main menu or pause menu; toggles apply live — PT-51 verified the
+   whole surface); in-colony `SMRFixPack.ListFixes()` must then show the
+   enabled modules `active`.
 2. **Process results as they arrive** — reporting protocol at the bottom of
    `PLAYTEST_CHECKLIST.md`: PASS → status flips in BOTH BUGS.md places (index
    row + heading tag; for D-entries flip the "built" wording to tested), the
@@ -61,9 +61,10 @@ silent.
 ## The board (user picks; suggested order)
 
 - **Group 8 — the opt-in modules (one sitting, all toggles on):**
-  - **PT-51 FIRST** — D05 Mod Options page eyes-on (it IS the enable step):
-    four toggles present with sane tooltips, live flip both ways (MultipleSuns
-    off/on against the build menu), settings survive a full restart.
+  - ~~PT-51~~ **DONE 2026-07-27 late — PASS in full, D05 `tested`** (four
+    toggles + tooltips good, live both ways twice over, full-restart
+    persistence with startup self-activation, ListFixes 2×68 clean post-repair,
+    log clean; archived).
   - **PT-48** AcknowledgedWarnings — dismiss sticks per-building, new breakage
     still warns, re-break re-warns, stamp survives reload.
   - **PT-49** ResidencyControl — **the pack's first added infopanel row: look

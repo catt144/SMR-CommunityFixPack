@@ -80,7 +80,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | built 2026-07-27: `Opt_AcknowledgedWarnings` (opt-in, probe PASS in the opt-in leg; PT-48) |
 | D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | built 2026-07-27: `Opt_ResidencyControl` (opt-in, probe PASS in the opt-in leg; PT-49) |
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
-| D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | built 2026-07-27 late: native Mod Options toggles (items.lua + 00_Core bridge, live both ways; probe OptionsMenu; PT-51) |
+| D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -1879,7 +1879,7 @@ binding behavior — PASS in the opt-in leg ("Artificial Sun build-once limit li
 logged at DataLoaded). Playtest: PT-50 (night-production signature vs the PT-26 banked
 single-sun baseline).
 
-### D05 — Optional modules had no player-usable enable surface  `[built 2026-07-27 late: items.lua Mod Options toggles + metadata default_options + 00_Core bridge; probe OptionsMenu PASS in all armed legs; PT-51]`
+### D05 — Optional modules had no player-usable enable surface  `[tested 2026-07-27 late (PT-51 PASS in full, archive): items.lua Mod Options toggles + metadata default_options + 00_Core bridge; probe OptionsMenu PASS in all armed legs; live both ways, restart-persistent, log clean]`
 Found live 2026-07-27 late, when the user sat down to run Group 8: the briefed
 enable route — "type `SMRFixPack_Optional = {...}` in the MAIN MENU console" —
 was **falsified twice over**. (1) The user has no main-menu console (the TestKit

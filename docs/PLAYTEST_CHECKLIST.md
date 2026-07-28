@@ -7,8 +7,8 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
 far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-06, PT-07, PT-08, PT-12, PT-13,
-PT-14, PT-24, PT-26, PT-34, PT-36, PT-38, PT-39, PT-41, PT-45, PT-50, and
-PT-46's F49(b) half. This
+PT-14, PT-24, PT-26, PT-34, PT-36, PT-38, PT-39, PT-41, PT-45, PT-50, PT-51,
+and PT-46's F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -1061,39 +1061,6 @@ advertised", plus the usual "nothing else broke".
 (Fallback if the page ever misbehaves: the dev flag file mechanism — a temp
 `Code/97_OptInLeg.lua` in the fix pack, see STATUS.md harness facts.)
 
-## PT-51 — Mod Options page · covers **D05** (do this FIRST — it is the enable step)
-
-The pack's entry on the game's own Options screen — first release-facing UI
-the pack has ever added there. Look at it critically.
-
-**Trigger:**
-1. Main menu → Options → **Mod Options**. The page must list **Community Fix
-   Pack** with exactly four toggles: Classic rockets — refuel while parked /
-   Acknowledged warnings / Residency control / Multiple Artificial Suns, all
-   OFF on first view. Hover each: the tooltip must describe the module
-   sensibly (no raw ids, no clipped text).
-2. Switch the three Group 8 toggles ON, Apply, load your save. In the console:
-   `SMRFixPack.ListFixes()` → the three show `active`, ClassicRockets stays
-   `inactive`.
-3. Live toggle both ways, in-game: open the pause menu → Options → Mod
-   Options, switch **Multiple Artificial Suns OFF**, Apply, and check the
-   build menu refuses a second sun again ("only once" refusal returns —
-   existing suns unharmed). Switch it back ON, Apply — the menu allows it
-   again. (`ListFixes` should track: `inactive (turned off in Mod Options)` ↔
-   `active`.)
-4. Persistence: quit the game fully, relaunch, straight to Options → Mod
-   Options — the three toggles must still be ON; load a save and confirm the
-   modules came up `active` on their own.
-5. Log check: no `[LUA ERROR]` mentioning ApplyModOptions or our files.
-
-- **BROKEN looks like:** the pack missing from the page, a toggle that doesn't
-  stick after Apply/restart, a toggle whose flip does nothing live, or errors
-  on Apply.
-- **FIXED looks like:** all four toggles present with sane text, flips take
-  effect immediately both directions, and settings survive a full restart.
-
-`Result (page+tooltips / live both ways / survives restart / log clean?):` _____________________________________________
-
 ## PT-48 — Acknowledged warnings · covers **D02 `Opt_AcknowledgedWarnings`**
 
 Dismissal now means "I've seen THESE buildings" instead of "silence the whole
@@ -1166,10 +1133,10 @@ Store, Grocer, Open Air Gym all showing active visitors — screenshots on file)
 Tester's one complaint, cosmetic: the row rendered at the BOTTOM of the dome
 section (below the stat bars) instead of with the policy toggle group.
 **Repaired same day** (row now inserts directly after the shipped
-accept-colonists toggle — array reposition in append_policy_row); **verify the
-new position after the next relaunch**, then continue with arrivals, manual
-relocation, tourists, quarantine independence, the MicroG row and the
-uninstall shape.
+accept-colonists toggle — array reposition in append_policy_row); **position
+VERIFIED after the relaunch** ("UI good for dome", 2026-07-27 late). Remaining:
+arrivals, manual relocation, tourists, quarantine independence, the MicroG
+row and the uninstall shape.
 
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
 
