@@ -88,7 +88,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | tested — PT-17 complete 2026-07-28 incl. the attended capacity-edge re-run post-repair (ground settled AT the threshold) |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
-| F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed  |
+| F70 | Edit Payload silently refills from policy template       | P2  | med+ | tested — PT-31 PASS 2026-07-28 incl. round trip + prefill negative (entry) |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested 2026-07-28 (PT-32: live two-resource priority inversion + probe order coverage) |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | tested — PT-33 PASS 2026-07-28, all three cases (entry) |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | tested — PT-19 PASS 2026-07-28 (both gap shapes; entry) |
@@ -2149,7 +2149,15 @@ stranded forever ("no fuel, no drones, can't send another lander"). **Fix:** ove
 `GetFuelResourceRequest`: lander type with no destination departing an asteroid keeps
 `FuelResourceAmount` requested.
 
-### F70 — Edit Payload silently refills from the policy template (P2, med-high)  `[fixed: Code/Fix_PayloadTemplateRefill.lua — the legacy LanderRocketCargoRequest copy is unreachable in Relaunched, see below]`
+### F70 — Edit Payload silently refills from the policy template (P2, med-high)  `[tested: Code/Fix_PayloadTemplateRefill.lua — PT-31 PASS 2026-07-28; the legacy LanderRocketCargoRequest copy is unreachable in Relaunched, see below]`
+**PT-31 PASS — 2026-07-28, live colony: brand-new lander (Galileo #1),
+brand-new asteroid destination (Kayra AL10), manual mode.** The fresh lander
+showed the FULL policy prefill on first Edit Payload (20 Metals / 5 Polymers
+/ 5 MachineParts / 5 Electronics / 5 Drones + 3 extractor prefabs — the
+not-over-broad half). Metals set to 0 and confirmed: immediate re-open read
+Metals 0 with everything else exactly as configured (26,000 KG); after the
+full round trip (launch, land on the asteroid, unload) Edit Payload STILL
+showed no Metals and no template resurrection. Both faces of the bug gone.
 `CargoRequestNew:RetrieveRequests` (`CargoRequestNew.lua:194-212`): rows with stored
 request 0 are refilled from the flight-policy cargo template every dialog open (template
 suppressed only during `CmdLoad`; every landing zeroes requests via `CmdUnload`). Mars→

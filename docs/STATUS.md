@@ -42,7 +42,8 @@ sitting → F73 `tested`, archived (residence held through both gap shapes);
 PT-33 PASS same sitting → F72 `tested`, archived (all three cases incl.
 both not-over-broad negatives); PT-40 PASS same sitting → F65 `tested`,
 archived (merge both geometries, clean salvage split, long-track control,
-reload, log clean).**
+reload, log clean); PT-31 PASS same sitting → F70 `tested`, archived
+(round trip held, prefill negative intact — fifth flip of the sitting).**
 Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
 
