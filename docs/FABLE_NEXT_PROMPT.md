@@ -199,6 +199,15 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   `*r for _, id in ipairs(SMRFixPack.order) do local f = SMRFixPack.fixes[id] ConsolePrint(id .. " [" .. f.status .. "]") end`
 - The log buffer only flushes at exit — `FlushLogFile()` forces it
   mid-session (always do this before reading the log).
+- **The on-screen console echo can silently die mid-session** (observed
+  2026-07-28 after Mars↔asteroid map hops): commands still execute, prints
+  still reach the log, only the display overlay (`dlgConsoleLog`) is gone.
+  Recovery: type `ShowConsoleLog(true)` blind (uiConsoleLog.lua:88) — no
+  restart needed.
+- **Runtime console wrappers must target the LEAF class** (STATUS engine
+  facts, flattening corollary 2026-07-28): wrapping a base class at runtime
+  does nothing for already-built subclasses — e.g. lander taps go on
+  `UniversalLanderRocket`, not `UniversalRocketBase`.
 - Bare console expressions echo on-screen only (NOT logged); `print(...)`
   goes to the log — use `print` when output must be retrievable.
 - Infopanel cheat buttons need `Platform.cheats = true` AND ride the

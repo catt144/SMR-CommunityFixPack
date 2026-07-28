@@ -378,6 +378,12 @@ Run `dbg_ToggleRocketInstantTravel()` once at the start of PT-16/PT-17.
 
 **Setup:** SAVE-E, lander on an **asteroid** in Automated Mode, with resources
 available to export. `SMRTest.Log.AutoCargo(true)`.
+> ⚠️ **2026-07-28: `SMRTest.Log.AutoCargo` is BLIND to real landers** — it
+> wraps `UniversalRocketBase` at runtime, but the live lander class
+> `UniversalLanderRocket` carries its own baked copy of the method (STATUS
+> engine facts, flattening corollary), so no request lines are ever logged.
+> Until the TestKit logger gets the leaf-class repair, use the console tap on
+> `UniversalLanderRocket` (session notes / STATUS) — same output format.
 
 **Trigger — the ratchet:**
 1. Set **one** export threshold (say Metals) so the lander loads cargo.

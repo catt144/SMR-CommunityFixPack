@@ -1142,6 +1142,18 @@ live construction controllers inside a post-wrapper on `Activate`.
     Checking `Station.OnDemolish` (declared on Building), or
     `UniversalRocketBase.IsAutoModeEnabled` (declared on the AutoMode mixin),
     finds nil and silently deactivates the fix. F64 shipped broken this way and
+  * **the flattening cuts BOTH ways at runtime (proven live 2026-07-28):** once
+    classes are built, each class carries its own baked copy of every method —
+    so a RUNTIME patch on a base class (console wrapper, TestKit logger toggle)
+    is INVISIBLE to already-built derived classes. Live proof:
+    `rawget(UniversalLanderRocket, "CreateAutoCargoRequest")` resolves to
+    `Fix_LanderCargoRatchet.lua(124)` (the pack's pre-build replacement, baked
+    in — the live lander RUNS the fix), while the TestKit `AutoCargo` logger's
+    runtime wrap of `UniversalRocketBase` never fired across a full load cycle.
+    Rule: pre-build (mod-load) patches on the declaring class propagate;
+    runtime instrumentation must target the LEAF class the instances actually
+    use (e.g. `UniversalLanderRocket`, not `UniversalRocketBase`). TestKit's
+    AutoCargo logger needs the leaf-class repair (game-free item, queued).
     was corrected this session.
 - `g_Consts` is a **GameVar** (`Lua\Modifiers.lua:427`) and does not exist while
   mods load — read it inside the patched function, never in apply(). `const` IS
