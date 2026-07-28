@@ -92,6 +92,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | fixed  |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
+| F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -2147,6 +2148,55 @@ entry's `eval` from the corrected fields, mirroring the shipped CodeTemplate
 entry that already carries a `Condition` is left exactly as found, so a game hotfix simply
 deactivates the fix.
 Probe: `LastTransmissionStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
+
+### F76 — RC Transport depot resource picker renders far from the cursor and cannot be clicked (P1, high) `[todo — found live 2026-07-27 during PT-39 setup; wave-6 build candidate]`
+**Player-visible symptom (how it was reported):** "I tried to take the transport to load
+a resource — I get the icon but just a noise when I go to the depot to load machine
+parts. It won't actually load them." Loading from GROUND piles works (that path issues
+`PickupResource` directly); loading from any **StorageDepot** silently does nothing.
+**What actually happens (live forensic session, all steps in the console log):**
+clicking a depot in Load mode is SUPPOSED to open the `ResourceItems` picker at the
+mouse position (`RCTransport:InteractWithObject` storage branch →
+`OpenResourceSelector`, `RCTransport.lua:419-428`; pick a resource in it → the real
+`TransferResources` command). On the tester's machine (ultrawide, ~3751px-wide window)
+the picker:
+* **opens and stays alive** — instrumented `OpenResourceSelector` fired; a delayed
+  probe 2s later read `dialog ALIVE box=(886,13)-(1054,442) items=1` — but **renders as
+  one giant detached hex button near the top of the screen**, nowhere near the cursor
+  (screenshot on file: huge "Machine Parts" hex the tester described as "this giant
+  machine parts logo isn't normal");
+* **cannot be clicked where it is drawn** — clicks on the visual pass through to the
+  WORLD (console trail: `SelectionChange → LifeSupportGridElement / StorageMachineParts
+  / RCTransport` as the clicks selected the pipe/depot/transport behind it), and each
+  selection change closes the picker via its own `OnMsg.SelectionChange` handler
+  (`ResourceItems.lua:198-200`) — `dialog DEAD` on the follow-up probe.
+**Suspected mechanism (to pin in the build leg):** coordinate-space mismatch.
+`ResourceItems:Init` anchors at `terminal:GetMousePos()` (terminal pixels,
+`ResourceItems.lua:11`) and `UpdateLayout` (:45-71) consumes that anchor in the scaled
+UI/desktop space; the dialog's logical box lands at anchor/scale — the observed box ×
+the tester's ~1.88 display scale maps back to the true mouse position. Visual placement
+and hit-testing diverge from the cursor (and evidently from each other) whenever
+terminal resolution ≠ UI space; at 1080p/scale≈1 the error is small enough to pass QA,
+which is why this shipped. Data still to capture: `terminal.desktop.box`,
+`terminal.desktop.scale`, game resolution + UI scale setting.
+**Ruled out:** the fix pack (every wrapper tap was pass-through on this path — F74's
+guard only matches the four trade/refugee rocket classes); data layer (12 selector items
+built, gate inputs healthy: `hasM=true`, supply request live, `stored=164000`); pause
+queue (reproduced unpaused); Lua errors (zero in the session log).
+**Not just this dialog?** `OpenResourceSelector` also serves the multi-resource UNLOAD
+path and transport-ROUTE resource choice (`RCTransport.lua:456/:468`) — all cursor
+workflows through `ResourceItems` are equally affected. The `ItemMenuBase` siblings that
+anchor the same way should be surveyed in the build leg.
+**Workaround (verified live):** issue the picker's command directly —
+`rc:SetCommand("TransferResources", depot, "load", "<Resource>", <amount*1000>, true)`.
+**Fix sketch (wave-6):** convert the anchor into the layout's coordinate space in
+`ResourceItems:Init` (or override `GetItemsRolloverAnchor`/layout to use the desktop-
+space mouse position), leaving gamepad mode (`desktop.box:Center()`) untouched. Own
+probe + playtest item on a scaled display.
+**Release-messaging note (user, 2026-07-27): this WILL generate false reports against
+the pack** — "transports can't load from depots" reads as a mod bug to anyone testing
+with the pack installed. MOD_DESCRIPTION needs a "known vanilla issue" explainer (D02
+precedent) whether or not the fix ships in the same release.
 
 ## Candidates under investigation
 

@@ -126,6 +126,11 @@ always safe; A/B legs need the game to be free).
   probe + playtest item; same `ClassicRockets` flag; extend MOD_DESCRIPTION's
   side-by-side when it ships.
 - **F48** per PT-37's gate above.
+- **F76 (NEW 2026-07-27, wave-6 candidate): depot resource picker off-cursor +
+  unclickable** — vanilla P1 found live in PT-39 setup; full forensics + fix
+  sketch (anchor-space conversion in `ResourceItems:Init`) on the entry. Still
+  to capture from the user: `terminal.desktop.box`/`scale`, resolution + UI
+  scale. MOD_DESCRIPTION false-report explainer flagged (draft note in place).
 - MarsDebug attended `[install]` pass for the wave-4/5 fixes (SetupOnly mode;
   procedure + modal-dialog warning in STATUS's wave-3 QA section).
 - Release checklist (STATUS): statuses to `tested` as reports come in, fpk

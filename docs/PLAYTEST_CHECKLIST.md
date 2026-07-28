@@ -864,6 +864,15 @@ aboard and some free space, parked near it.
    an ordinary Universal Storage Depot.
    - **EXPECTED:** Load/Unload prompts appear as before and the transfer runs.
      If this broke, the fix is over-broad — report it, it is worse than the bug.
+   - **CAUTION (2026-07-27, F76 — vanilla, NOT the pack):** clicking a depot in
+     Load mode opens a resource-picker dialog that on scaled/wide displays
+     renders as a giant detached hex far from the cursor and cannot be clicked
+     (clicks fall through to the map). The depot half of this control was run
+     live and is BLOCKED on F76 — the prompt appears (guard not over-broad ✓),
+     the picker opens (proven by instrumentation), but the pick can't be made
+     by mouse. Use a ground pile for the "transfer runs" half, or the direct
+     command: `rc:SetCommand("TransferResources", depot, "load", "<Res>",
+     30000, true)`. Full trail on the F76 entry.
 4. Check the log for `[CommunityFixPack] RocketInteractGuard: applied`.
 
 `Result (trade/refugee rocket refused?):` _____________________________________________

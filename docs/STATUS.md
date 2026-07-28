@@ -66,6 +66,23 @@ one-line summary here:
   Single-sun baseline banked (night production at −21% atmospheric beside the
   lit sun). Standalone fix file deletion + module build queued for the
   game-free leg. Spec on the D04 entry.
+- **F76 NEW FINDING (2026-07-27, found live during PT-39 setup): the RC
+  Transport depot resource picker renders far from the cursor and cannot be
+  clicked** (vanilla, P1). "Load from depot" looks completely broken — icon +
+  noise, nothing loads — while ground piles work (no picker on that path). Live
+  instrumentation proved the `ResourceItems` dialog opens and STAYS ALIVE
+  (`box=(886,13)-(1054,442)`, 1 item) but draws as a giant detached hex near
+  the top of the screen, and clicks on it fall through to the map (selection
+  churn then closes it via its own `OnMsg.SelectionChange`). Suspected
+  `terminal:GetMousePos()` vs scaled-UI coordinate mismatch (~1.88 display
+  scale maps the box back onto the true cursor position); 1080p error is small
+  enough that it passed QA. Pack ruled out (all wrappers pass-through). Also
+  affects the multi-resource unload and route pickers. Command-level workaround
+  verified. **Wave-6 build candidate** (`Fix_ResourcePickerAnchor`); PT-39's
+  depot control half is blocked on it (trade-rocket half unaffected).
+  **User's release warning, recorded: this WILL draw false bug reports against
+  the pack** — MOD_DESCRIPTION carries a draft-note for a "known vanilla
+  issue" explainer (D02 precedent). Full forensics on the F76 entry.
 - **Engine/tooling facts learned (also in the prompt + command table):**
   infopanel cheat buttons need `Platform.cheats = true` AND ride the game-time
   sync queue (dead while paused); tourists are 5% of applicants and the

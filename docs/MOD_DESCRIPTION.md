@@ -96,6 +96,12 @@ come back.
   thresholds at once only ever collected one bonus, while falling back charged
   both — so satisfaction (and your holiday income) drifted down no matter how well
   you treated them.
+- [DRAFT NOTE — F76 (2026-07-27): before release, add a "known vanilla issue we did
+  NOT cause" explainer (D02-precedent) for the RC Transport depot resource picker:
+  on scaled/wide displays it renders far from the cursor and can't be clicked, so
+  "transports won't load from depots" reads as a mod bug and will generate false
+  reports. If the wave-6 Fix_ResourcePickerAnchor ships, this becomes its fix
+  bullet instead.]
 - Housing reserved for a colonist who never turns up is released again. Those
   reservations are invisible in the UI and had no expiry at all, which is why a
   dome could sit half empty and still refuse to house anybody.
