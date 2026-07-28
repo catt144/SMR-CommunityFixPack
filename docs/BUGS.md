@@ -1658,9 +1658,13 @@ Automated Mode + per-resource `export_above` thresholds (:1727-1766, defaults `f
 $1000M funding floor (:1399,1762-1765). Community hates it → ship an OPT-IN "classic
 rocket behavior" fix (disabled by default per policy §4): standing PreciousMetals demand +
 fuel request while landed/manual; document the gates in README either way.
-*Half shipped, opt-in: `Code/Opt_ClassicRockets.lua`* (id `ClassicRockets`, enabled with
-`SMRFixPack_Optional = { ClassicRockets = true }` before the mod loads; the `Opt_` filename
-prefix marks it as not-a-fix). It ships the **fuel half**: a chained wrapper on
+*Half shipped, opt-in: `Code/Opt_ClassicRockets.lua`* (id `ClassicRockets`, enabled in
+Options → Mod Options since D05, or via the pre-load `SMRFixPack_Optional` override; the
+`Opt_` filename prefix marks it as not-a-fix). **Fuel half PLAY-VERIFIED 2026-07-27
+late:** the user toggled the module on LIVE via Mod Options mid-session (the D05
+activation path) and confirmed auto-refuel working on a parked rocket — informal
+observation, no formal PT item; behavior matched spec with nothing beyond refuel,
+as designed. It ships the **fuel half**: a chained wrapper on
 `GetFuelResourceRequest` that, only where the shipped function already answers 0, keeps the
 launch ration requested for a player-controlled rocket parked at the colony with no
 destination. Verified the mechanism end to end —
