@@ -37,11 +37,11 @@ leg, all committed):
   the **console-echo death + `ShowConsoleLog(true)` recovery**, and the
   first-landing-is-manual lander behavior (reserved sites auto-land after).
 Prior state stands: D05 tested (PT-51), D04 tested (PT-50), F76 dozer
-surface filed. **Build queue: ONE game-free TestKit item — the map-switch
-console-death repair (see the console facts below; isolated 2026-07-28
-late, save/reload workaround documented).** Beyond that, new work comes
-only from playtest FAILs, live findings, the F76 attended sitting, or D06
-iteration decisions (user decision, knobs first).
+surface filed. **The build queue is EMPTY again — the map-switch
+console-death repair is BUILT (TestKit, validation pending: see console
+facts below; first thing next sitting, switch to the asteroid and press
+Enter).** New work comes only from playtest FAILs, live findings, the F76
+attended sitting, or D06 iteration decisions (user decision, knobs first).
 
 **NO PRE-FLIGHT NEEDED** — the A/B pair above is fresher than every code
 change. The user's stated next goal: **close out the asteroid section** —
@@ -236,11 +236,16 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   command cannot be typed (chicken-and-egg). **Workaround: quicksave +
   reload ON the map you need** — the reload re-runs the TestKit colony-up
   hook and restores the console there; it dies again on the next switch, so
-  batch console work per visit. **QUEUED TestKit repair (game-free): re-run
-  `SMRTest.EnableConsole` + auto-open on the map-change message; while in
-  there, find what exactly resets the gate (suspect the DestroyConsole path,
-  uiConsole.lua:410-414).** If only the ECHO is gone but typing works, the
-  lighter recovery is `ShowConsoleLog(true)` blind (uiConsoleLog.lua:88).
+  batch console work per visit. **TestKit repair BUILT same evening
+  (00_TestCore `OnMsg.CurrentMapChangeDone` — the switch machinery's own
+  completion signal, map.lua:372/:404 — re-asserts gate + shortcuts after a
+  1s settle; no auto-open on switches; the pre-existing
+  InGameInterfaceCreated re-assert demonstrably did NOT cover this).
+  VALIDATION PENDING: first thing next sitting, switch to the asteroid and
+  press Enter — if the console still dies, the save/reload workaround stands
+  and the teardown needs live instrumentation.** If only the ECHO is gone
+  but typing works, the lighter recovery is `ShowConsoleLog(true)` blind
+  (uiConsoleLog.lua:88).
 - **Runtime console wrappers must target the LEAF class** (STATUS engine
   facts, flattening corollary 2026-07-28): wrapping a base class at runtime
   does nothing for already-built subclasses — e.g. lander taps go on
