@@ -1145,8 +1145,16 @@ in-dome birth, the designed exemption (engine stores NO parent link —
 proof was indirect: dome `born_children` = 14, colonist age 1 at ultra speed,
 and `CanAcceptNewColonists()` read **false** live on the closed dome, so the
 voluntary-move-in path was structurally shut — gate 1 confirmed enforcing,
-births the only open path). Remaining: arrivals, tourists, quarantine
-independence, the MicroG row and the uninstall shape.
+births the only open path).
+**Arrivals + tourists VERIFIED (same sitting, deliberately adversarial
+setup):** tester built a NEW landing pad right beside the closed dome to make
+it the most likely candidate, then landed a rocket carrying both applicants
+and tourists — every colonist bypassed the adjacent closed dome and walked to
+the farther open dome (steps 2 arrivals PASS, screenshot on file); the
+tourists made a beeline INTO the closed dome and checked into its active
+hotel (step 5 PASS — the traits.Tourist exemption behaves exactly as
+designed). Remaining: quarantine independence, the MicroG row and the
+uninstall shape.
 
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
 
