@@ -414,31 +414,6 @@ path is exactly the case that was broken. Test that path deliberately.
 
 ---
 
-## PT-19 — Shelter reflex on an asteroid · covers **F73**
-
-**Setup:** SAVE-E, on the **asteroid**: a **MicroG Habitat** with 2–4 colonists living
-in it, and a mine they work.
-
-**Trigger:**
-1. `CheatToggleInfopanelCheats()` to get per-building levers.
-2. **Cut the habitat's life support / power briefly** (a few game minutes), so colonists
-   momentarily lose their residence, then restore it.
-3. Run 1–2 sols at ultra speed and watch the colonists during their **idle** stretches
-   (not their shifts — they're safe inside the mine while working).
-
-- **BROKEN looks like:** after a momentary life-support blip the colonists are
-  permanently homeless, wander around **outside on the asteroid surface**, and bleed
-  health past the oxygen timer until they die — while an empty habitat sits right there.
-- **FIXED looks like:** (a) the habitat **takes them back** as residents even though its
-  life support had a gap, and (b) if a colonist is still outside past half the oxygen
-  budget in vacuum, they **head indoors to rest** instead of loitering.
-
-`Result (a — habitat re-accepts):` _____________________________________________
-
-`Result (b — seeks shelter):` _____________________________________________
-
----
-
 # Group 6 — wave-3 fixes
 
 ## PT-23 — Station resource switches vs. train unloading · covers **F46**

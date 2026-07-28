@@ -1347,3 +1347,43 @@ running = settled AT the 140 threshold and re-accumulating (the pre-repair
 run drained 60 below). F68 → `tested`; section archived.**
 
 ---
+
+## PT-19 — Shelter reflex on an asteroid · covers **F73**
+
+**Setup:** SAVE-E, on the **asteroid**: a **MicroG Habitat** with 2–4 colonists living
+in it, and a mine they work.
+
+**Trigger:**
+1. `CheatToggleInfopanelCheats()` to get per-building levers.
+2. **Cut the habitat's life support / power briefly** (a few game minutes), so colonists
+   momentarily lose their residence, then restore it.
+3. Run 1–2 sols at ultra speed and watch the colonists during their **idle** stretches
+   (not their shifts — they're safe inside the mine while working).
+
+- **BROKEN looks like:** after a momentary life-support blip the colonists are
+  permanently homeless, wander around **outside on the asteroid surface**, and bleed
+  health past the oxygen timer until they die — while an empty habitat sits right there.
+- **FIXED looks like:** (a) the habitat **takes them back** as residents even though its
+  life support had a gap, and (b) if a colonist is still outside past half the oxygen
+  budget in vacuum, they **head indoors to rest** instead of loitering.
+
+`Result (a — habitat re-accepts):` **PASS — 2026-07-28, live colony
+(Douglasjay MicroG Habitat, 9 residents; mine on an independent power
+grid). Two gap shapes tested: habitat toggled OFF, and habitat's power
+supply cut with the building on — identical result both times: residence
+NEVER dropped (stronger than re-accept — the panel showed Residence =
+Micro-G Habitat throughout), no homeless flag, clean recovery on restore.
+Vanilla observation (not the pack): workers inside the independently-powered
+mine flagged Suffocating/Freezing/Dehydrated while the habitat's life
+support was down — the status effects read the residence's supply, not the
+occupied building; recorded on the F73 entry.**
+
+`Result (b — seeks shelter):` **PASS — 2026-07-28. Watched through shift
+end: workers routed straight back into the habitat, nobody idled on the
+asteroid surface at any point — the death-spiral precondition (homeless →
+Roam outside) never arises since residence never detaches. The Rest-reflex
+safety net itself was not observably triggered (nobody stayed outside past
+the threshold); its wrapper half is fully probe-verified (MarsDebug pass
+2026-07-25/26).**
+
+---

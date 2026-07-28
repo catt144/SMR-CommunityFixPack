@@ -91,7 +91,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed  |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested 2026-07-28 (PT-32: live two-resource priority inversion + probe order coverage) |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
-| F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
+| F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | tested — PT-19 PASS 2026-07-28 (both gap shapes; entry) |
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
@@ -2242,7 +2242,7 @@ or (...)` parses as `(A and B) or C or D`, so the class test guards only the fir
 "different" and the action's disable branch never fires.
 Probe: `AsteroidLanderAvailable` in the Test Kit's `30_Probes_Wave3.lua`.
 
-### F73 — Asteroid colonists idle outdoors; nothing shelters the suffocating (P1, med-high)  `[fixed: Code/Fix_ShelterReflex.lua]`
+### F73 — Asteroid colonists idle outdoors; nothing shelters the suffocating (P1, med-high)  `[tested: Code/Fix_ShelterReflex.lua — PT-19 PASS 2026-07-28]`
 Chain: `MicroGHabitatAutoResolve:IsSuitable` requires `GetScoreFor > 0` ≈ `HasLifeSupport()`
 (`MicroGHabitat.lua:154-156`, `Community.lua:367-398`) — any momentary life-support gap or
 full habitat → colonist keeps `residence == false`; `Roam` (`Colonist.lua:1186-1205`) then
@@ -2252,6 +2252,22 @@ applies damage, `StatusEffects.lua:140-160`). Workers are safe inside the mine d
 shifts; they die during idle stretches next to it. **Fix:** (a) habitat accepts residents
 regardless of momentary life support; (b) Idle wrapper: outside > half of
 OxygenMaxOutsideTime in vacuum → `SetCommand("Rest")`.
+**PT-19 PASS — 2026-07-28, live colony (Douglasjay MicroG Habitat, 9
+residents + Micro-G Metals Mining Station, independent power grids).** Gap
+shape 1 (habitat toggled OFF a few game minutes) and gap shape 2 (habitat's
+power supply cut, building on): identical result both times — **residence
+never dropped** (panel showed Residence = Micro-G Habitat throughout), no
+homeless flag, clean recovery on restore. Watch through shift end: workers
+routed straight back INTO the habitat, nobody idled on the surface — the
+vanilla death spiral (permanent homeless → Roam outside → suffocation) is
+gone at its root since the residence never detaches. The (b) Rest-reflex
+safety net was not observably triggered (nobody stayed outside long enough)
+— its wrapper half is fully probe-verified (MarsDebug pass, 2026-07-25/26).
+**Vanilla observation recorded, NOT a pack issue:** while the habitat's life
+support was cut, colonists WORKING in the independently-powered mine flagged
+Suffocating/Freezing/Dehydrated (+ Hypothermia notification) — the status
+effects read the RESIDENCE's life-support state, not the building the
+colonist occupies; cleared instantly on restore.
 
 ### F74 — RC Transports can be ordered onto trade / refugee rockets (P2, high)  `[tested: Code/Fix_RocketInteractGuard.lua — PT-39 PASS 2026-07-27: cursor + route both refused a landed trade rocket; controls clean (F76 caveat on the entry)]`
 *Found by screening F56 in wave 4.* `RCTransport:CanInteractWithObject`

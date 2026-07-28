@@ -37,7 +37,9 @@ LANDED the same evening (F68 over-draw + TestKit logger — see the repair-leg
 section) with a fresh A/B pair; the build queue is EMPTY again.** PT-17
 stays un-archived pending an attended capacity-edge re-run — **DONE 2026-07-28
 next sitting: re-run PASS (ground settled AT the threshold, request tracked
-instead of ratcheting) → F68 `tested`, PT-17 archived.** Also proven this
+instead of ratcheting) → F68 `tested`, PT-17 archived; PT-19 PASS same
+sitting → F73 `tested`, archived (residence held through both gap shapes).**
+Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
 
 ## F68 over-draw repair leg — Fable, 2026-07-28 (game-free, post-playtest): same-day mechanical repair + fresh A/B pair

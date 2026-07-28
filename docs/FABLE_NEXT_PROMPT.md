@@ -64,12 +64,11 @@ change. **Session-start sequence (in order, ~2 min):**
 4. Fresh `SMRFixPack.DroneReport` baseline (D06 counters reset every launch).
 The user's stated next goal: **close out the asteroid section** — un-run
 there: PT-16 (F67 empty launch + F69 return fuel — the F69 half wants an
-asteroid with NO drones/hub, use a fresh one), PT-19 (F73 shelter reflex —
-the Douglasjay MicroG habitat with 9 residents is ideal), PT-31 (F70 Edit
+asteroid with NO drones/hub, use a fresh one), PT-31 (F70 Edit
 Payload, Mars side, manual mode), PT-33 (F72 — needs EXACTLY one lander,
 manual, no destination; the user has exactly one: Sphinx #2), plus the **F78
-disaster-silence investigation** (on the board below; the PT-17 capacity-edge
-re-run PASSed and archived 2026-07-28).
+disaster-silence investigation** (on the board below). **PT-17 AND PT-19
+both PASSed and archived 2026-07-28 next sitting** (F68 + F73 `tested`).
 
 ---
 
@@ -139,13 +138,14 @@ silent.
   self-heal, dismiss the warning: acked buildings stay quiet; a THIRD breakage
   warns promptly and lists only itself; repair + re-break re-warns; stamp
   survives reload; other warning types behave vanilla.
-- **Asteroid closeout (user's stated next goal):** PT-19 (shelter reflex —
-  the standing MicroG habitat is ideal), PT-16 (F67 all-Ignore sit-on-pad +
-  F69 manual landing on a FRESH no-infrastructure asteroid), PT-31 (Edit
-  Payload, Mars side), PT-33 (exactly one lander, manual, no destination —
-  holds true now). **The PT-17 capacity-edge re-run PASSed 2026-07-28 →
-  F68 `tested`, PT-17 archived** (ground settled AT the threshold; the
-  repaired AutoCargo logger validated live in the same run).
+- **Asteroid closeout (user's stated next goal):** PT-16 (F67 all-Ignore
+  sit-on-pad + F69 manual landing on a FRESH no-infrastructure asteroid),
+  PT-31 (Edit Payload, Mars side), PT-33 (exactly one lander, manual, no
+  destination — holds true now). **DONE 2026-07-28 next sitting: PT-17
+  capacity-edge re-run PASS → F68 `tested` (ground settled AT the threshold;
+  repaired AutoCargo logger validated live) and PT-19 PASS → F73 `tested`
+  (residence held through both gap shapes — habitat off AND supply cut;
+  vanilla status-reads-residence observation on the entry).**
 - **F78 — NEW P1 INVESTIGATION (user-reported, watchdog-confirmed): the live
   save has seen ZERO disasters in 194 sols and no weather at all.** The PT-01
   meteor watchdog caught the mechanism live: the Meteors thread hangs INSIDE
@@ -163,8 +163,8 @@ silent.
   it bridges whenever the two ends read as different live grids).
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
-- Un-run: PT-09..11, PT-15..19 (fixtures B/D/E; 16/19 also on the asteroid
-  bullet above), PT-23, PT-25, PT-27..31, PT-33, PT-35 (PT-27's Biorobots
+- Un-run: PT-09..11, PT-15, PT-16, PT-18 (fixtures B/D/E; 16 also on the
+  asteroid bullet above), PT-23, PT-25, PT-27..31, PT-33, PT-35 (PT-27's Biorobots
   grant is `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
   breakthroughs — grant directly via `UIColony:SetTechResearched("<Id>")`),
   PT-42/43/44, PT-47,
