@@ -31,7 +31,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | fixed  |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | fixed* |
-| F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | fixed  |
+| F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | tested — PT-43 F19 read PASS 2026-07-28 (MP caption ≈ bars, Food sane) |
 | F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | fixed  |
 | F21 | Train travel-time penalty includes station waiting       | P2  | med  | fixed  |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
@@ -407,7 +407,7 @@ Probe: `IndependenceTerraforming` in `40_Probes_Wave4.lua` — preset check + dr
 the sweep both ways (stale modifier replaced through the effect's own
 OnApplyEffect; correct one untouched).
 
-### F19 — Graphs "Consumed" caption omits maintenance  `[fixed: Code/Fix_GraphConsumedCaption.lua]`
+### F19 — Graphs "Consumed" caption omits maintenance  `[tested: Code/Fix_GraphConsumedCaption.lua — PT-43 F19 read PASS 2026-07-28: Machine Parts caption "Consumed (4)" tracked the ~4-6 per-sol bars (maintenance included; old behavior was near-zero beside them), Food caption "Consumed (116)" vs ~100-104 bars = real consumption unchanged, not over-broad]`
 `Lua\X\ColonyControlCenter.lua:180-188` vs `ResourceTracking.lua:162` — caption uses
 consumption only; plotted series adds maintenance. Near-zero caption next to a tall bar for
 Machine Parts/Electronics/Metals/Polymers. **Fix:** wrap `City.GetColonyStatsButtons`,

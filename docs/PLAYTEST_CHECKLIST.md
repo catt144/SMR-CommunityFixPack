@@ -688,7 +688,13 @@ and a few sols of history.
 2. Sanity-check **Food**, where consumption is real and maintenance is nil — the
    number should be essentially unchanged from before.
 
-`Result (Machine Parts caption vs bar / Food unchanged?):` _____________________________________________
+`Result (Machine Parts caption vs bar / Food unchanged?):` **PASS —
+2026-07-28, live colony (Command Center graphs). Machine Parts: caption
+"Consumed (4)" beside per-sol consumed bars of ~4-6 (Sol 221 tooltip 6/4)
+— maintenance now included, no near-zero caption. Food sanity check:
+"Consumed (116)" vs bars ~100-104 (Sol 223 tooltip 60/104) — real
+consumption unchanged; not over-broad. F19 → tested; F20/F21 reads still
+un-run, section stays.**
 
 **F20 — Morale tooltip.**
 3. Find a colonist whose **Comfort** is high (green, at or above the high mark).
