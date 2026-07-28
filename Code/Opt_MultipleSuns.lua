@@ -1,9 +1,12 @@
 -- D04 — OPTIONAL module, OFF BY DEFAULT. Not a bug fix.
 --
--- Enable it by setting, before this mod loads (console on the main menu, or a
--- tiny mod that loads first):
---     SMRFixPack_Optional = { MultipleSuns = true }
--- `SMRFixPack.ListFixes()` reports it as inactive with the reason until you do.
+-- Enable it in-game: Options → Mod Options → Community Fix Pack (D05; toggles
+-- take effect immediately, both directions — the build menu re-reads
+-- CanBuildOnlyOnce() live, so on_activate/on_deactivate below flip the
+-- template flag on the spot; existing suns are ordinary buildings and keep
+-- working either way). Other mods / power users can also pre-seed
+-- SMRFixPack_Optional = { MultipleSuns = true } before this mod loads.
+-- `SMRFixPack.ListFixes()` reports it as inactive until enabled.
 --
 -- Why it exists: the shipped game hard-limits the Artificial Sun to ONE per
 -- colony — it is a `build_once` wonder, enforced colony-wide including
@@ -79,11 +82,20 @@ local function find_sun_in_range(panel)
 	end
 end
 
+-- forward locals — defined below, captured by the Register def's callbacks
+local lift_build_limit, restore_build_limit
+
 SMRFixPack.Register(FIX_ID, {
 	title = "OPTIONAL: build more than one Artificial Sun (and panels bind to any sun in range)",
+	optional = true,
+	-- Mod Options live-toggle hooks (D05): the wrappers gate themselves on
+	-- registry status, but the template flag is state, not a call path — flip
+	-- it explicitly when the toggle changes mid-session.
+	on_activate = function() lift_build_limit() end,
+	on_deactivate = function() restore_build_limit() end,
 	apply = function()
-		if not SMRFixPack_Optional.MultipleSuns then
-			return "opt-in module, off by default — set SMRFixPack_Optional = { MultipleSuns = true } before this mod loads"
+		if not SMRFixPack.OptionEnabled("MultipleSuns") then
+			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 
 		-- the binding-fix half installs now; the limit lift waits for DataLoaded
@@ -100,8 +112,9 @@ SMRFixPack.Register(FIX_ID, {
 		function SP:GameInit(...)
 			local r = orig(self, ...)
 			-- FIX (F39, absorbed): the shipped body only ever tested
-			-- labels.ArtificialSun[1].
-			if not self.artificial_sun then
+			-- labels.ArtificialSun[1]. module_active makes the Mod Options
+			-- toggle live: off = exact vanilla behavior.
+			if module_active() and not self.artificial_sun then
 				local sun = find_sun_in_range(self)
 				if sun then self:SetArtificialSun(sun) end
 			end
@@ -115,20 +128,30 @@ SMRFixPack.Register(FIX_ID, {
 -- opt-in flag and the SMRFixPack_Disabled veto (a vetoed fix never reaches
 -- "active"), which OnMsg handlers must re-check themselves (the F75 lesson).
 local lifted_logged = false
-local function lift_build_limit()
+local we_lifted = false
+local data_loaded = false
+function lift_build_limit()
 	if not module_active() then return end
 	local templates = rawget(_G, "BuildingTemplates")
 	local sun = type(templates) == "table" and templates.ArtificialSun
 	if type(sun) ~= "table" then
+		-- Before DataLoaded this miss is EXPECTED (the GlobalMap exists empty;
+		-- an early DataChanged can land here) — only a post-DataLoaded miss is
+		-- a real "game update renamed it" signal worth surfacing.
 		local fix = SMRFixPack.fixes[FIX_ID]
-		if fix and fix.detail == "" then
+		if data_loaded and fix and fix.detail == "" then
 			fix.detail = "BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)"
 			log("%s: %s", FIX_ID, fix.detail)
 		end
 		return
 	end
+	local fix = SMRFixPack.fixes[FIX_ID]
+	if fix and fix.detail ~= "" and fix.detail:find("ArtificialSun not found", 1, true) then
+		fix.detail = ""   -- clear a transient pre-DataLoaded miss
+	end
 	if sun.build_once then
 		sun.build_once = false
+		we_lifted = true
 		if not lifted_logged then
 			lifted_logged = true
 			log("%s: Artificial Sun build-once limit lifted", FIX_ID)
@@ -136,7 +159,22 @@ local function lift_build_limit()
 	end
 end
 
+-- Mod Options live-off (D05): put the limit back — but only if WE lifted it,
+-- so a third-party limit mod's own lift is never stomped.
+function restore_build_limit()
+	if not we_lifted then return end
+	local templates = rawget(_G, "BuildingTemplates")
+	local sun = type(templates) == "table" and templates.ArtificialSun
+	if type(sun) == "table" and not sun.build_once then
+		sun.build_once = true
+		we_lifted = false
+		lifted_logged = false
+		log("%s: Artificial Sun build-once limit restored (module turned off)", FIX_ID)
+	end
+end
+
 function OnMsg.DataLoaded()
+	data_loaded = true
 	lift_build_limit()
 end
 

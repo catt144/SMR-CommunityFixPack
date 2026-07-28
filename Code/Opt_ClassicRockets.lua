@@ -1,9 +1,9 @@
 -- D01 — OPTIONAL module, OFF BY DEFAULT. Not a bug fix.
 --
--- Enable it by setting, before this mod loads (console on the main menu, or a
--- tiny mod that loads first):
---     SMRFixPack_Optional = { ClassicRockets = true }
--- `SMRFixPack.ListFixes()` reports it as inactive with the reason until you do.
+-- Enable it in-game: Options → Mod Options → Community Fix Pack (D05; toggles
+-- take effect immediately, both directions). Other mods / power users can also
+-- pre-seed SMRFixPack_Optional = { ClassicRockets = true } before this mod
+-- loads. `SMRFixPack.ListFixes()` reports it as inactive until enabled.
 --
 -- Why it exists: the remaster deliberately changed rocket logistics, and the
 -- BUGS.md D01 entry records the verdict that this is a redesign and NOT a defect
@@ -58,9 +58,10 @@ SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 
 SMRFixPack.Register("ClassicRockets", {
 	title = "OPTIONAL: rockets refuel while parked, without a destination selected",
+	optional = true,
 	apply = function()
-		if not SMRFixPack_Optional.ClassicRockets then
-			return "opt-in module, off by default — set SMRFixPack_Optional = { ClassicRockets = true } before this mod loads"
+		if not SMRFixPack.OptionEnabled("ClassicRockets") then
+			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 
 		local R = rawget(_G, "UniversalRocketBase")
@@ -85,8 +86,10 @@ SMRFixPack.Register("ClassicRockets", {
 			local amount, reserve = orig(self, ...)
 			-- D01: parked at the colony with nowhere to go. The shipped answer is 0
 			-- only because no destination is selected; keep the launch ration
-			-- requested so drones fuel it while it waits.
-			if (amount or 0) <= 0 and not self.arrival_loc
+			-- requested so drones fuel it while it waits. The IsActive check makes
+			-- the Mod Options toggle live: off = shipped answer, always.
+			if (amount or 0) <= 0 and SMRFixPack.IsActive("ClassicRockets")
+					and not self.arrival_loc
 					and self:IsPlayerControlled()
 					and self:GetDepartureLocType() == "our_colony" then
 				return Max(0, self.FuelResourceAmount or 0), reserve

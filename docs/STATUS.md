@@ -1,10 +1,53 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-27 late (**BUILD LEG DONE — F61 fix deleted, F39 folded into
-D04, three new opt-in modules shipped (D02 `Opt_AcknowledgedWarnings`, D03
-`Opt_ResidencyControl`, D04 `Opt_MultipleSuns`), A/B + opt-in legs clean with
-the NEW baseline numbers: 1/56/14/0 · 57/0/14/0 (64/68 active) · opt-in
-60/0/11/0 (67/68)** — see "Build leg" below; playtest-marathon record follows).
+Updated: 2026-07-27 late, second build leg (**D05 SHIPPED — the optional
+modules are now enabled in-game via Options → Mod Options (native engine
+toggles, live both directions); the old main-menu-console instruction was
+falsified live and is retired. 72 probes; legs clean: baseline 1/57/14/0 ·
+fixed 58/0/14/0 (64/68 active) · opt-in 61/0/11/0 (67/68)** — see "Mod
+Options build leg" below; the earlier same-day build leg and the
+playtest-marathon record follow).
+
+## Mod Options build leg (D05) — Fable, 2026-07-27 late: in-game enable surface for the optional modules
+
+Triggered live: the user sat down for Group 8 and had **no main-menu console**
+— and the briefed console route was falsified outright (the Opt_ gates run at
+mod code load during startup, BEFORE the main menu; that is why the A/B
+harness always needed the `97_OptInLeg.lua` flag FILE). Release context made
+it a blocker: Steam Workshop + Paradox Mods, and **Paradox delivers PS/Xbox,
+which have no console at all**. User picked "build now" over "temp file for
+tonight". Full spec + Src evidence on the **D05** BUGS entry; summary:
+
+- **items.lua (new):** four `ModItemOptionToggle`s (names == registry ids) put
+  the pack on **Options → Mod Options** (main menu and pause menu, gamepad
+  capable). **metadata.lua** gains the matching `default_options` table (what
+  `HasOptions()` reads — without it the page ignores the pack).
+- **00_Core:** `SMRFixPack.OptionEnabled(id)` (pre-load `SMRFixPack_Optional`
+  OR the saved toggle — the values load before mod code, `CurrentModOptions`),
+  `SMRFixPack.IsActive(id)`, defs retained, and an `OnMsg.ApplyModOptions`
+  reconciler: ON = re-arm installed hooks or apply now (+`on_activate`); OFF =
+  registry status flip (+`on_deactivate`). **Every optional module's wrappers
+  consult IsActive per call**, so toggles are live in both directions with no
+  unhooking. D04 flips the `build_once` template flag in its callbacks
+  (restore guarded so a third-party limit mod is never stomped).
+- **D04 cosmetic repair (pre-existing, exposed by the leg):** the transient
+  pre-DataLoaded "ArtificialSun not found" detail no longer sticks on
+  `ListFixes`; miss only recorded post-DataLoaded, cleared when the template
+  appears. Engine fact: **DataLoaded fires more than once during startup; a
+  template can miss the first pass.**
+- **TestKit:** new probe `OptionsMenu` (60_Probes_Opt.lua) asserts the wiring
+  in EVERY leg — metadata defaults, the four toggle items, the 00_Core bridge
+  — and FAILs discriminatingly in baseline (registry absent). **72 probes.**
+- **Legs (2026-07-27, logs Mars.exe-20260727-…):** parse sweep 82 files/0
+  failures; baseline 21.20.32 = 1/**57**/14/0; fixed 21.21.51 = **58/0/14/0**
+  (64/68); opt-in 21.34.28 = **61/0/11/0** (67/68) — all module probes +
+  OptionsMenu PASS; gates log the new "enable it in Options → Mod Options"
+  reason.
+- **Docs same-commit:** D05 entry + index row, **PT-51** (Mod Options page
+  eyes-on — now the FIRST step of the Group 8 sitting, since it is the enable
+  mechanism), Group 8 preamble rewritten, MOD_DESCRIPTION optional-modules
+  enable text now points at Mod Options (console-only instructions removed
+  from player-facing text).
 
 ## Build leg — Fable, 2026-07-27 late: F61 deletion + D02/D03/D04 built, A/B renumbered
 
@@ -619,9 +662,12 @@ README's old "stores nothing in your savegames" claim has been corrected accordi
 
 ## Optional modules (new in session 4)
 
-Off by default, enabled with `SMRFixPack_Optional = { <Id> = true }` before the mod loads;
-`SMRFixPack.ListFixes()` reports them as `inactive` with the opt-in reason until then.
-Files use an `Opt_` prefix instead of `Fix_` to mark them as not-bug-fixes.
+Off by default. **Players enable them in Options → Mod Options (D05,
+2026-07-27 late — live toggles, both directions);** the pre-load
+`SMRFixPack_Optional = { <Id> = true }` table remains as the override surface
+for other mods and the test harness. `SMRFixPack.ListFixes()` reports them as
+`inactive` with the opt-in reason until enabled. Files use an `Opt_` prefix
+instead of `Fix_` to mark them as not-bug-fixes.
 
 - **ClassicRockets** (D01, `Code/Opt_ClassicRockets.lua`) — a player-controlled rocket
   parked at the colony keeps its launch ration requested even with no destination selected,

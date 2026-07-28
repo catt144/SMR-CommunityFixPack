@@ -1,13 +1,15 @@
-# Fable continuation prompt — PLAYTEST STANDBY (rewritten 2026-07-27 late)
+# Fable continuation prompt — PLAYTEST STANDBY (rewritten 2026-07-27 late, post-D05)
 
 Paste everything below into a fresh Claude Code session (Fable). This is the ONE
 live prompt. Build state: **68 registered modules, 64/68 active by default
 (4 opt-in: ClassicRockets, AcknowledgedWarnings, ResidencyControl,
-MultipleSuns), 16 fixes carry playtest status, latest clean legs 2026-07-27
-(logs 20.38.21 / 20.39.59 / 20.41.49: baseline 1/56/14/0, fixed 57/0/14/0,
-opt-in 60/0/11/0 at 67/68), everything pushed.** The 2026-07-27 build leg
-deleted the F61 fix, folded F39 into D04, and shipped the three opt-in modules
-D02/D03/D04 with probes and playtest items (**PT-48/49/50, checklist Group 8**).
+MultipleSuns), 16 fixes carry playtest status, 72 probes, latest clean legs
+2026-07-27 late (logs 21.20.32 / 21.21.51 / 21.34.28: baseline 1/57/14/0,
+fixed 58/0/14/0, opt-in 61/0/11/0 at 67/68), everything pushed.** The second
+2026-07-27 build leg shipped **D05: the opt-in modules are enabled in-game via
+Options → Mod Options** (native toggles, live both directions; the old
+main-menu-console route was falsified — it never worked, gates run at startup)
+— eyes-on test is **PT-51**, now the FIRST step of Group 8 (PT-48/49/50/51).
 **The build queue is EMPTY** — new work only comes from playtest FAILs, live
 findings, or the F76 attended sitting.
 
@@ -21,9 +23,10 @@ the 2026-07-26/27 marathon model. Your jobs, in the order they usually come up:
 1. **Set tests up** — for whichever PT item the user picks, walk them through
    setup using the checklist's own steps and the verified command table
    (`PLAYTEST_CHECKLIST.md`); hand them exact console lines to paste. Group 8
-   (the new opt-in modules) needs its flag set at the MAIN MENU console first:
-   `SMRFixPack_Optional = { AcknowledgedWarnings = true, ResidencyControl = true, MultipleSuns = true }`
-   then load/start; `SMRFixPack.ListFixes()` must show all three `applied`.
+   (the opt-in modules) is enabled in **Options → Mod Options → Community Fix
+   Pack** (main menu or pause menu; toggles apply live — that UI itself is
+   PT-51, run it first); in-colony `SMRFixPack.ListFixes()` must then show the
+   three modules `active`.
 2. **Process results as they arrive** — reporting protocol at the bottom of
    `PLAYTEST_CHECKLIST.md`: PASS → status flips in BOTH BUGS.md places (index
    row + heading tag; for D-entries flip the "built" wording to tested), the
@@ -57,7 +60,10 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **Group 8 — the three new opt-in modules (one sitting, all flags on):**
+- **Group 8 — the opt-in modules (one sitting, all toggles on):**
+  - **PT-51 FIRST** — D05 Mod Options page eyes-on (it IS the enable step):
+    four toggles present with sane tooltips, live flip both ways (MultipleSuns
+    off/on against the build menu), settings survive a full restart.
   - **PT-48** AcknowledgedWarnings — dismiss sticks per-building, new breakage
     still warns, re-break re-warns, stamp survives reload.
   - **PT-49** ResidencyControl — **the pack's first added infopanel row: look
@@ -134,10 +140,11 @@ F76 entry. During play sessions:
   PACK listed right after 00_Core, setting the `SMRFixPack_Optional` table
   (TestKit-vs-fix-pack load order is not guaranteed — the flag file must live
   in the fix pack). Delete it after the leg.
-- **Expected numbers (current, 71 probes):** baseline 1 PASS / 56 FAIL /
-  14 SKIP / 0 ERROR; fixed 57/0/14/0 (64/68 active); opt-in (three modules)
-  60/0/11/0 (67/68). Baseline's 1 PASS = FactionFundingCheck canary;
-  default-leg 14 SKIP = 10 [install] + 4 opt-in.
+- **Expected numbers (current, 72 probes):** baseline 1 PASS / 57 FAIL /
+  14 SKIP / 0 ERROR; fixed 58/0/14/0 (64/68 active); opt-in (three modules)
+  61/0/11/0 (67/68). Baseline's 1 PASS = FactionFundingCheck canary;
+  default-leg 14 SKIP = 10 [install] + 4 opt-in; the OptionsMenu probe (D05)
+  asserts in every leg and FAILs baseline by design.
 - Synthetic-map noise unchanged: ~49 Flight.lua `objects_to_mark` errors + a
   few GameInit nil-call lines in BOTH legs; a `[mod] Error in mod … Test Kit`
   line at quit is a shutdown artifact.

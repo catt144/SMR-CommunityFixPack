@@ -10,10 +10,16 @@
 
 SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
 
+-- Pre-load override surface for the optional modules (kept for other mods and
+-- power users; regular players use Options → Mod Options — see OptionEnabled).
+SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
+
 SMRFixPack = rawget(_G, "SMRFixPack") or {
-	fixes = {},        -- id -> { title, status, detail }
+	fixes = {},        -- id -> { title, status, detail, installed }
 	order = {},        -- registration order, for ListFixes()
+	defs = {},         -- id -> the Register def (for Mod Options reconciliation)
 }
+SMRFixPack.defs = SMRFixPack.defs or {}
 
 local function log(fmt, ...)
 	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
@@ -24,23 +30,30 @@ local function log(fmt, ...)
 	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 end
 
--- Register and immediately apply a fix.
---   id:    stable identifier, matches the Fix_<id>.lua filename
---   def:   { title = <string>, apply = <function> }
--- The apply function runs right away (mod code loads after game code, before
--- any map/savegame). It should return nil/true on success, or a string
--- explaining why it deactivated itself (not an error — e.g. "already fixed").
-function SMRFixPack.Register(id, def)
-	local entry = { title = def.title, status = "pending", detail = "" }
-	SMRFixPack.fixes[id] = entry
-	SMRFixPack.order[#SMRFixPack.order + 1] = id
+-- Is a fix currently active? Optional modules' wrappers consult this at CALL
+-- time, so a Mod Options toggle takes effect live in both directions — the
+-- installed hooks simply pass through while the module reads inactive.
+function SMRFixPack.IsActive(id)
+	local f = SMRFixPack.fixes[id]
+	return f ~= nil and f.status == "active"
+end
 
-	if SMRFixPack_Disabled[id] then
-		entry.status = "disabled"
-		log("%s: disabled by user/mod setting", id)
-		return
-	end
+-- Is an optional module enabled? Two surfaces, either wins:
+--   * SMRFixPack_Optional[id] — the pre-load override table (console, or a
+--     tiny mod that loads first);
+--   * the player's saved Mod Options toggle. The engine loads those values
+--     BEFORE mod code and exposes them env-side as CurrentModOptions
+--     (Mod.lua:2128-2131; values rawset directly onto the object, :679-683,
+--     so plain indexing is the intended read).
+function SMRFixPack.OptionEnabled(id)
+	if SMRFixPack_Optional[id] then return true end
+	local opts = CurrentModOptions
+	return type(opts) == "table" and opts[id] and true or false
+end
 
+-- Shared apply runner: Register and the Mod Options reconciliation both route
+-- through here so the verdict handling stays identical.
+local function run_apply(id, def, entry)
 	local ok, res = pcall(def.apply)
 	if not ok then
 		entry.status = "error"
@@ -52,7 +65,71 @@ function SMRFixPack.Register(id, def)
 		log("%s: inactive (%s)", id, res)
 	else
 		entry.status = "active"
+		entry.detail = ""
+		entry.installed = true
 		log("%s: applied", id)
+	end
+end
+
+-- Register and immediately apply a fix.
+--   id:    stable identifier, matches the Fix_<id>.lua / Opt_<id>.lua filename
+--   def:   { title = <string>, apply = <function>,
+--            -- optional-module extras (D05):
+--            optional = <bool>,            -- reconciled with Mod Options
+--            on_activate = <function>,     -- after a LIVE activation
+--            on_deactivate = <function> }  -- after a LIVE deactivation
+-- The apply function runs right away (mod code loads after game code, before
+-- any map/savegame). It should return nil/true on success, or a string
+-- explaining why it deactivated itself (not an error — e.g. "already fixed").
+function SMRFixPack.Register(id, def)
+	local entry = { title = def.title, status = "pending", detail = "" }
+	SMRFixPack.fixes[id] = entry
+	SMRFixPack.defs[id] = def
+	SMRFixPack.order[#SMRFixPack.order + 1] = id
+
+	if SMRFixPack_Disabled[id] then
+		entry.status = "disabled"
+		log("%s: disabled by user/mod setting", id)
+		return
+	end
+
+	run_apply(id, def, entry)
+end
+
+-- Live reconciliation with Options → Mod Options (D05). The engine fires this
+-- when it loads our saved options during startup AND every time the player
+-- hits Apply on the page (Mod.lua:746, :2170) — CurrentModOptions already
+-- holds the new values at that point. Turning a module ON either re-arms its
+-- already-installed hooks or runs its apply now; turning it OFF flips the
+-- registry status, which every optional module's hooks consult per call
+-- (IsActive), so installed wrappers become pass-throughs immediately.
+function OnMsg.ApplyModOptions(mod_id)
+	if mod_id ~= "SMR_CommunityFixPack" then return end
+	for _, id in ipairs(SMRFixPack.order) do
+		local def, entry = SMRFixPack.defs[id], SMRFixPack.fixes[id]
+		if def and entry and def.optional
+				and entry.status ~= "disabled" and entry.status ~= "error" then
+			local want = SMRFixPack.OptionEnabled(id)
+			local active = entry.status == "active"
+			if want and not active then
+				if entry.installed then
+					entry.status, entry.detail = "active", ""
+					log("%s: re-activated via Mod Options", id)
+				else
+					run_apply(id, def, entry)
+				end
+				if entry.status == "active" and type(def.on_activate) == "function" then
+					pcall(def.on_activate)
+				end
+			elseif not want and active then
+				entry.status = "inactive"
+				entry.detail = "turned off in Mod Options"
+				log("%s: deactivated via Mod Options (installed hooks now pass through)", id)
+				if type(def.on_deactivate) == "function" then
+					pcall(def.on_deactivate)
+				end
+			end
+		end
 	end
 end
 

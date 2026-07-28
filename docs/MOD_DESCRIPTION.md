@@ -316,9 +316,11 @@ that loads before this one.
 
 Everything above this line is a bug fix and ships on. The modules in this
 section are **preferences and features** — they change designed behavior, so
-every one of them is **off until you turn it on**, with its own switch:
-`SMRFixPack_Optional = { ModuleIdHere = true }` in the console or in a tiny mod
-that loads before this one (list several to enable several).
+every one of them is **off until you turn it on**, with its own switch in
+**Options → Mod Options → Community Fix Pack** (main menu or in-game; works
+with a controller). Toggles take effect immediately — no restart needed.
+(Modders: the pre-load `SMRFixPack_Optional = { ModuleIdHere = true }` table
+still works as an override.)
 
 **Acknowledged warnings** (`AcknowledgedWarnings`). Changes what dismissing a
 **"Building Not Working"** warning means: instead of silencing the whole warning
@@ -384,8 +386,8 @@ instead:
   dialog — rockets you automate behave exactly as Relaunched intends, module on
   or off.
 
-Turn it on with `SMRFixPack_Optional = { ClassicRockets = true }` in the console
-or in a tiny mod that loads before this one. Off unless you turn it on.
+Turn it on in **Options → Mod Options → Community Fix Pack** ("Classic rockets
+— refuel while parked"). Off unless you turn it on.
 
 [DRAFT NOTE: the standing Rare Metals export half is DECIDED (user, 2026-07-26:
 match the original game exactly — the legacy loader is the spec, see the D01
@@ -425,8 +427,8 @@ real, the pack carries an **optional module** for it: **Acknowledged warnings**
 dismissal to mean "I've seen *these particular buildings*" — the ones you dismissed
 stay quiet until they actually recover (if they later break again, that's news and
 you'll be told), while newly broken buildings always warn immediately. Off by
-default, like every opinion in this pack:
-`SMRFixPack_Optional = { AcknowledgedWarnings = true }`.
+default, like every opinion in this pack — turn it on in **Options → Mod
+Options → Community Fix Pack**.
 
 ### Reporting bugs
 

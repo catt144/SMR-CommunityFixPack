@@ -1,9 +1,11 @@
 -- D02 — OPTIONAL module, OFF BY DEFAULT. Not a bug fix.
 --
--- Enable it by setting, before this mod loads (console on the main menu, or a
--- tiny mod that loads first):
---     SMRFixPack_Optional = { AcknowledgedWarnings = true }
--- `SMRFixPack.ListFixes()` reports it as inactive with the reason until you do.
+-- Enable it in-game: Options → Mod Options → Community Fix Pack (D05; toggles
+-- take effect immediately, both directions — the wrappers below consult
+-- SMRFixPack.IsActive per call and pass through while off). Other mods /
+-- power users can also pre-seed SMRFixPack_Optional = { AcknowledgedWarnings
+-- = true } before this mod loads. `SMRFixPack.ListFixes()` reports it as
+-- inactive until enabled.
 --
 -- Why it exists: dismissing a "Building Not Working" warning only silences the
 -- whole notification id for 120,000 GAME-ms = 4 game hours (SuppressTime, with
@@ -65,11 +67,16 @@ SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 local ID = "NotWorkingBuildings"
 local FLAG = "SMRFixPack_ack_notworking"
 
+local function module_active()
+	return SMRFixPack.IsActive("AcknowledgedWarnings")
+end
+
 SMRFixPack.Register("AcknowledgedWarnings", {
 	title = 'OPTIONAL: dismissing "Building Not Working" acknowledges those buildings until they recover',
+	optional = true,
 	apply = function()
-		if not SMRFixPack_Optional.AcknowledgedWarnings then
-			return "opt-in module, off by default — set SMRFixPack_Optional = { AcknowledgedWarnings = true } before this mod loads"
+		if not SMRFixPack.OptionEnabled("AcknowledgedWarnings") then
+			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 
 		for _, name in ipairs{ "SuppressNotification", "AddObjectToNotification",
@@ -84,7 +91,7 @@ SMRFixPack.Register("AcknowledgedWarnings", {
 
 		local orig_suppress = SuppressNotification
 		local function suppress(notification, ...)
-			if notification and notification.id == ID and notification.dismissed then
+			if module_active() and notification and notification.id == ID and notification.dismissed then
 				-- D02: dismissal = per-object acknowledgment. Stamp what the
 				-- player looked at; skip the shipped whole-id quiet window so a
 				-- NEW breakage still warns immediately.
@@ -100,7 +107,7 @@ SMRFixPack.Register("AcknowledgedWarnings", {
 
 		local orig_add = AddObjectToNotification
 		local function add(object, object_params, id, ...)
-			if id == ID and type(object) == "table" and object[FLAG] then
+			if module_active() and id == ID and type(object) == "table" and object[FLAG] then
 				-- acknowledged and still broken: stay quiet. Mirror the shipped
 				-- "nothing to do" answer (the existing notification, if any).
 				return FindNotification(id, ...)
@@ -110,7 +117,7 @@ SMRFixPack.Register("AcknowledgedWarnings", {
 
 		local orig_remove = RemoveObjectFromNotification
 		local function remove(object, id, ...)
-			if id == ID and type(object) == "table" and object[FLAG] then
+			if module_active() and id == ID and type(object) == "table" and object[FLAG] then
 				-- the building recovered (or was destroyed): re-arm its warnings
 				object[FLAG] = nil
 			end

@@ -1048,14 +1048,51 @@ obvious). Watch from a low camera angle so the incoming trails are visible.
 
 ---
 
-# Group 8 — optional modules (2026-07-27 build leg; each needs its opt-in flag)
+# Group 8 — optional modules (2026-07-27 build leg; enable via Mod Options)
 
-Enable all three at once for one sitting — console on the MAIN MENU (before any
-game is loaded), then start/load normally:
-`SMRFixPack_Optional = { AcknowledgedWarnings = true, ResidencyControl = true, MultipleSuns = true }`
-`SMRFixPack.ListFixes()` must show all three `applied`. These are FEATURES, not
-fixes — the question is "does it behave as advertised", plus the usual "nothing
-else broke".
+**Enable route (D05, 2026-07-27 late — the old main-menu-console instruction
+was falsified and is retired):** open **Options → Mod Options → Community Fix
+Pack** (works at the main menu AND from the in-game pause menu) and switch ON
+**Acknowledged warnings**, **Residency control** and **Multiple Artificial
+Suns** for one sitting. Toggles take effect immediately when you hit Apply —
+no restart. Then, in-colony, `SMRFixPack.ListFixes()` must show all three
+`active`. These are FEATURES, not fixes — the question is "does it behave as
+advertised", plus the usual "nothing else broke".
+(Fallback if the page ever misbehaves: the dev flag file mechanism — a temp
+`Code/97_OptInLeg.lua` in the fix pack, see STATUS.md harness facts.)
+
+## PT-51 — Mod Options page · covers **D05** (do this FIRST — it is the enable step)
+
+The pack's entry on the game's own Options screen — first release-facing UI
+the pack has ever added there. Look at it critically.
+
+**Trigger:**
+1. Main menu → Options → **Mod Options**. The page must list **Community Fix
+   Pack** with exactly four toggles: Classic rockets — refuel while parked /
+   Acknowledged warnings / Residency control / Multiple Artificial Suns, all
+   OFF on first view. Hover each: the tooltip must describe the module
+   sensibly (no raw ids, no clipped text).
+2. Switch the three Group 8 toggles ON, Apply, load your save. In the console:
+   `SMRFixPack.ListFixes()` → the three show `active`, ClassicRockets stays
+   `inactive`.
+3. Live toggle both ways, in-game: open the pause menu → Options → Mod
+   Options, switch **Multiple Artificial Suns OFF**, Apply, and check the
+   build menu refuses a second sun again ("only once" refusal returns —
+   existing suns unharmed). Switch it back ON, Apply — the menu allows it
+   again. (`ListFixes` should track: `inactive (turned off in Mod Options)` ↔
+   `active`.)
+4. Persistence: quit the game fully, relaunch, straight to Options → Mod
+   Options — the three toggles must still be ON; load a save and confirm the
+   modules came up `active` on their own.
+5. Log check: no `[LUA ERROR]` mentioning ApplyModOptions or our files.
+
+- **BROKEN looks like:** the pack missing from the page, a toggle that doesn't
+  stick after Apply/restart, a toggle whose flip does nothing live, or errors
+  on Apply.
+- **FIXED looks like:** all four toggles present with sane text, flips take
+  effect immediately both directions, and settings survive a full restart.
+
+`Result (page+tooltips / live both ways / survives restart / log clean?):` _____________________________________________
 
 ## PT-48 — Acknowledged warnings · covers **D02 `Opt_AcknowledgedWarnings`**
 

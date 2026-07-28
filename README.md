@@ -99,7 +99,9 @@ the game handles like any other.
 ### Optional modules (off by default)
 
 Some things players ask for are deliberate design changes rather than bugs, so
-they ship switched off and are enabled explicitly:
+they ship switched off. Enable them in **Options → Mod Options → Community Fix
+Pack** (main menu or pause menu; toggles take effect immediately, both
+directions). Other mods can pre-seed the override table before this mod loads:
 
 ```lua
 SMRFixPack_Optional = { ClassicRockets = true, AcknowledgedWarnings = true }

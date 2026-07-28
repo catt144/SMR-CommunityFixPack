@@ -5,6 +5,16 @@ return PlaceObj('ModDef', {
 	'author', "catt144",
 	'version', 1,
 	'lua_revision', 350453,
+	-- Mod Options defaults (D05): must mirror items.lua's ModItemOptionToggle
+	-- names, all false. This field is what makes Options → Mod Options list the
+	-- pack (ModDef:HasOptions reads it, Mod.lua:473-475), and the engine seeds
+	-- CurrentModOptions from it before our code loads.
+	'default_options', {
+		ClassicRockets = false,
+		AcknowledgedWarnings = false,
+		ResidencyControl = false,
+		MultipleSuns = false,
+	},
 	'code', {
 		"Code/00_Core.lua",
 		"Code/Fix_CaveInsNoDisasters.lua",

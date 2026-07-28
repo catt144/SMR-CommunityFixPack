@@ -80,6 +80,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | built 2026-07-27: `Opt_AcknowledgedWarnings` (opt-in, probe PASS in the opt-in leg; PT-48) |
 | D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | built 2026-07-27: `Opt_ResidencyControl` (opt-in, probe PASS in the opt-in leg; PT-49) |
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | built 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix, probe PASS in the opt-in leg; PT-50) |
+| D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | built 2026-07-27 late: native Mod Options toggles (items.lua + 00_Core bridge, live both ways; probe OptionsMenu; PT-51) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -1852,6 +1853,64 @@ deleted. Probe `MultipleSuns` (TestKit `60_Probes_Opt.lua`) asserts
 binding behavior — PASS in the opt-in leg ("Artificial Sun build-once limit lifted"
 logged at DataLoaded). Playtest: PT-50 (night-production signature vs the PT-26 banked
 single-sun baseline).
+
+### D05 — Optional modules had no player-usable enable surface  `[built 2026-07-27 late: items.lua Mod Options toggles + metadata default_options + 00_Core bridge; probe OptionsMenu PASS in all armed legs; PT-51]`
+Found live 2026-07-27 late, when the user sat down to run Group 8: the briefed
+enable route — "type `SMRFixPack_Optional = {...}` in the MAIN MENU console" —
+was **falsified twice over**. (1) The user has no main-menu console (the TestKit
+auto-open fires in-colony, and the shipped console binding is not active at the
+menu). (2) It could never have worked anyway: every Opt_ module's gate runs
+inside `SMRFixPack.Register`'s immediate `apply`, at **mod code load during game
+startup — before the main menu exists** — which is exactly why the A/B harness
+needed the temporary `97_OptInLeg.lua` flag FILE. The instruction was never
+tested against the load order. Release context makes this a blocker, not a
+nicety: the pack targets Steam Workshop AND Paradox Mods, and **Paradox Mods
+delivers to PS/Xbox, which have no Lua console at all.**
+**Resolution — the engine's native Mod Options (all verified in Src):**
+* `ModItemOptionToggle` items in a new `items.lua` (loaded by `ModDef:LoadItems`,
+  `Mod.lua:590-604`) put the pack on **Options → Mod Options** (page def
+  `options.lua:775-776`, shown whenever an installed mod `HasOptions()`;
+  gamepad-capable — the console-platform path). Four toggles, `name` ==
+  registry id: ClassicRockets, AcknowledgedWarnings, ResidencyControl,
+  MultipleSuns.
+* `default_options` table added to metadata.lua (the field `HasOptions()` reads,
+  `Mod.lua:473-475` — it is what makes the page list the pack; normally written
+  by the Mod Editor at save time, `Mod.lua:970`).
+* Values persist per-account in `AccountStorage.ModOptions[mod.id]` and are
+  loaded BEFORE mod code so gates can read them (`Mod.lua:2128-2131`; on cold
+  start `WaitLoadAccountStorage()` precedes `LoadDlcs()` → mods,
+  `autorun.lua:435-436`). Exposed env-side as `CurrentModOptions`
+  (`Mod.lua:1621`), values rawset directly for plain indexing (`:679-683`).
+* **00_Core bridge (D05):** `SMRFixPack.OptionEnabled(id)` = pre-load
+  `SMRFixPack_Optional[id]` OR the saved toggle — the gate line in all four
+  Opt_ files. `SMRFixPack.IsActive(id)` — consulted by every optional module's
+  wrappers PER CALL, so toggles are live in BOTH directions (off = installed
+  hooks pass through; no unhooking needed). `OnMsg.ApplyModOptions` (fired on
+  option load and every user Apply, `Mod.lua:746/:2170`) reconciles: turning ON
+  re-arms installed hooks or runs the apply now (+ `def.on_activate`); turning
+  OFF flips the registry status (+ `def.on_deactivate`). D04 uses the callbacks
+  to flip `BuildingTemplates.ArtificialSun.build_once` on the spot (restore
+  guarded by a we-lifted-it flag so a third-party limit mod is never stomped).
+* Register defs gain optional extras: `optional`, `on_activate`,
+  `on_deactivate`; defs now retained in `SMRFixPack.defs` for reconciliation.
+**Also repaired in the same leg (found by the leg, pre-existing):** D04's
+`lift_build_limit` wrote a scary "ArtificialSun not found — build limit NOT
+lifted" detail when an early `DataChanged`/first `DataLoaded` fired before the
+template existed, and the detail never cleared — `ListFixes` showed it forever
+on an ACTIVE module. Now the miss is only recorded after DataLoaded has fired
+AND the transient detail is cleared once the template is found. (Engine fact
+observed: DataLoaded fires more than once during startup; the template can miss
+the first pass and appear on a later one.)
+**Verification (2026-07-27 late, logs Mars.exe-20260727-…):** parse sweep 82
+files / 0 failures; baseline 21.20.32 = 1 PASS / **57 FAIL** / 14 SKIP / 0
+ERROR (the new `OptionsMenu` probe FAILs discriminatingly — registry absent);
+fixed 21.21.51 = **58/0/14/0**, 64/68 active, OptionsMenu PASS, all four gates
+log the new "enable it in Options → Mod Options" reason; opt-in (re-run after
+the detail repair) 21.34.28 = **61/0/11/0**, 67/68 active, all three module
+probes + OptionsMenu PASS. **72 probes total now.**
+**Playtest: PT-51** — the Mod Options page itself needs eyes-on (row rendering,
+tooltips, live toggle both ways, persistence across restart) — first thing in
+the Group 8 sitting, since it is now also the Group 8 enable mechanism.
 
 ### F64 — Demolishing a station vaporizes its trains ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
 *(Header restored 2026-07-26 — it was lost in an earlier doc edit; the entry body below

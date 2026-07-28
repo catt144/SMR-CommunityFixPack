@@ -1,9 +1,11 @@
 -- D03 — OPTIONAL module, OFF BY DEFAULT. Not a bug fix.
 --
--- Enable it by setting, before this mod loads (console on the main menu, or a
--- tiny mod that loads first):
---     SMRFixPack_Optional = { ResidencyControl = true }
--- `SMRFixPack.ListFixes()` reports it as inactive with the reason until you do.
+-- Enable it in-game: Options → Mod Options → Community Fix Pack (D05; toggles
+-- take effect immediately, both directions — the gates below consult
+-- SMRFixPack.IsActive per call and pass through while off; the infopanel row
+-- stops being appended to newly opened panels). Other mods / power users can
+-- also pre-seed SMRFixPack_Optional = { ResidencyControl = true } before this
+-- mod loads. `SMRFixPack.ListFixes()` reports it as inactive until enabled.
 --
 -- Why it exists: the community's long-standing ask — stop new residents from
 -- moving into a dome while its CURRENT residents keep commuting and using
@@ -56,6 +58,10 @@
 SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 
 local FLAG = "SMRFixPack_closed_to_new_residents"
+
+local function module_active()
+	return SMRFixPack.IsActive("ResidencyControl")
+end
 
 local function is_closed(dome)
 	return type(dome) == "table" and dome[FLAG] and true or false
@@ -113,9 +119,10 @@ end
 
 SMRFixPack.Register("ResidencyControl", {
 	title = 'OPTIONAL: per-dome "closed to new residents" policy — no quarantine involved',
+	optional = true,
 	apply = function()
-		if not SMRFixPack_Optional.ResidencyControl then
-			return "opt-in module, off by default — set SMRFixPack_Optional = { ResidencyControl = true } before this mod loads"
+		if not SMRFixPack.OptionEnabled("ResidencyControl") then
+			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 
 		local C = rawget(_G, "Community")
@@ -135,10 +142,11 @@ SMRFixPack.Register("ResidencyControl", {
 			return "sectionDome/sectionMicroGHabitat Init not found (game update changed the infopanel?)"
 		end
 
-		-- gate 1: voluntary resettlement (FindEmigrationDome's candidate filter)
+		-- gate 1: voluntary resettlement (FindEmigrationDome's candidate filter).
+		-- module_active makes the Mod Options toggle live: off = shipped answer.
 		local orig_can = C.CanAcceptNewColonists
 		function C:CanAcceptNewColonists(...)
-			if self[FLAG] then
+			if module_active() and self[FLAG] then
 				return false
 			end
 			return orig_can(self, ...)
@@ -149,7 +157,7 @@ SMRFixPack.Register("ResidencyControl", {
 		-- tourists keep the vanilla choice.
 		local orig_choose = ChooseDome
 		local function choose(traits, domes, safety_dome, dome_elevators, ...)
-			if type(domes) == "table" and not (traits and traits.Tourist) then
+			if module_active() and type(domes) == "table" and not (traits and traits.Tourist) then
 				local filtered
 				for i, dome in ipairs(domes) do
 					if is_closed(dome) then
@@ -172,11 +180,14 @@ SMRFixPack.Register("ResidencyControl", {
 			return "could not install the ChooseDome wrapper (sandbox change?)"
 		end
 
-		-- UI: append the policy row after the shipped rows (VList order)
+		-- UI: append the policy row after the shipped rows (VList order). The
+		-- module_active check keeps the row out of newly opened infopanels when
+		-- the Mod Options toggle is off (a panel already open when the toggle
+		-- flips rebuilds on the next selection).
 		local orig_sd_init = SD.Init
 		function SD:Init(parent, context)
 			local r = orig_sd_init(self, parent, context)
-			if IsContextOfKind(context, "Dome") then
+			if module_active() and IsContextOfKind(context, "Dome") then
 				pcall(append_policy_row, self, context)
 			end
 			return r
@@ -184,7 +195,7 @@ SMRFixPack.Register("ResidencyControl", {
 		local orig_sm_init = SM.Init
 		function SM:Init(parent, context)
 			local r = orig_sm_init(self, parent, context)
-			if IsContextOfKind(context, "MicroGHabitatBase") then
+			if module_active() and IsContextOfKind(context, "MicroGHabitatBase") then
 				pcall(append_policy_row, self, context)
 			end
 			return r
