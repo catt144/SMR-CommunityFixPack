@@ -81,6 +81,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | built 2026-07-27: `Opt_ResidencyControl` (opt-in, probe PASS in the opt-in leg; PT-49) |
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
+| D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; PT pending (attended, multi-iteration) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -94,7 +95,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
-| F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | todo (traced 2026-07-27; build = user decision) |
+| F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed (built 2026-07-28 with the D06 core; PT pending) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -2393,7 +2394,7 @@ Pack ruled out for this sighting explicitly: the F74 wrappers in that chain are
 refuse-only (both early-return false for event rockets, everything else defers
 to the shipped body) — verified in-session before filing.
 
-### F77 — Extender working-flap tears down and rebuilds the entire uplink hub; fleet-wide Idle churn (P2, med-high)  `[todo — traced in the 2026-07-27 game-free drone investigation leg; build = user decision]`
+### F77 — Extender working-flap tears down and rebuilds the entire uplink hub; fleet-wide Idle churn (P2, med-high)  `[fixed: Code/Fix_ExtenderFlapChurn.lua — chained wrapper on UpdateUplinkRequesters, rebuild deferred 2s + coalesced per root hub (chains resolved); built 2026-07-28 with the D06 core, PT pending. Accepted trade-off: registration stale up to ~2s during the window — the shipped flow already defers reconnects (SetWorkRadius uses DelayedCall(300)). Debounce thread is a mod game-time thread = not persisted (F06 precedent), so a save inside the window is clean]`
 `DroneHubExtenderBase:OnSetWorking` (`DroneHubExtender.lua:171-178`) calls
 `UpdateUplinkRequesters` (:109-112) on EVERY working transition, in BOTH directions
 (off AND back on), and that helper is not incremental: it runs
@@ -2430,6 +2431,42 @@ the churn; savegame-neutral, no persisted state);
 Risk note: the wrap point is narrow (extender class only), but the effect surface is
 every `DroneControl` descendant serviced by the uplink hub — must pass the F50
 rocket-churn and F55 unreachable scenarios in playtest before shipping.
+
+### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); PT pending — attended, multi-iteration]`
+The design defect behind the 2026-07-27 live report (four idle drones parked beside a
+malfunctioning building while a far hub serviced everything slowly): assignment is
+pull-only and own-hub-only, requests sit in every covering hub's queues, claims are
+first-poller-wins held through the whole approach, repair requests are max_units=1,
+and no handoff/steal/distance-tiebreak exists anywhere. Full trace on the "Not yet
+swept" DroneControl bullet; the option analysis (A-H, feasibility/risk/reward) is
+`docs/DRONE_OVERHAUL_OPTIONS.md`. **Core v1 ships three parts** (all
+per-call-gated on `IsActive`, hooks installed at classdef time; NO persisted state —
+saves made with it load identically without it):
+1. **Closest-fleet-first claim gate** — chained wrapper on `TaskRequestHub:FindTask`
+   (`_TaskRequest.lua:72-83`; sole caller is the drone auto-Idle path, so player
+   orders are structurally untouched). A repair/clean WORK request offered to a hub
+   that is not the building's closest covering Drone Hub — extender-aware, reach-
+   guarded — is withheld for that poll while the closest hub is working with idle
+   drones. Per-request strike counter (4 polls, 30s decay) makes starvation
+   impossible: if the near fleet doesn't claim, the far fleet serves.
+2. **Repair moonlighting** — chained POST-wrapper on `Drone:Idle` (the body falls
+   through exactly when no work was found, so the hook fires only for genuinely
+   workless drones): scan other working hubs that are SATURATED (zero idle drones)
+   for unclaimed repair/clean work within 30 hexes of the drone and inside its own
+   movement restriction; take it exactly like the shipped own-hub maintenance branch
+   (`Drone.lua:602-605`). Covers the ground the claim gate can't: buildings covered
+   ONLY by the far hub.
+3. **Telemetry** — `SMRFixPack.DroneReport()` (always available, module on or off):
+   per-hub working/drones/idle/broken, lap-time load class, per-priority queue
+   depths, work-request and unclaimed counts, extender chains, plus the module's
+   vetoed/expired/moonlighted counters.
+Out of scope v1 (deliberate): PickUp/Deliver hauling (H-v2/B in the options doc),
+construction work (swarming desirable), rover/rocket fleets, the registration layer
+(vanilla redundancy intact — toggling off is instant and complete). Tunables at the
+top of the file (strike cap/TTL, moonlight radius, cache TTLs) are the playtest
+iteration knobs. Shipped alongside: **F77**'s `Fix_ExtenderFlapChurn` (default-on
+repair) so extender power flickers stop Idle-kicking whole fleets and muddying the
+overhaul's observability.
 
 ## Candidates under investigation
 

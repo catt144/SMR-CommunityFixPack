@@ -11,8 +11,48 @@ prompt.** 72 probes; last legs clean: baseline 1/57/14/0 · fixed 58/0/14/0
 session's pre-flight** (two mechanical repairs landed after the last pair —
 expected numbers unchanged). See "Mod Options build leg" below; the earlier
 same-day build leg and the playtest-marathon record follow). **2026-07-28:
-the drone task-assignment static investigation leg is DONE — see the section
-directly below.**
+the drone task-assignment static investigation leg is DONE (section below),
+and the user-greenlit D06 overhaul core + F77 fix are BUILT the same day —
+see the build-leg section directly below. PT-52 (attended, multi-iteration)
+is the next sitting's centerpiece.**
+
+## D06 build leg — Fable, 2026-07-28: drone dispatch overhaul core v1 + F77 fix (user-greenlit, PT-52 pending)
+
+Built same-day on the investigation verdict and the user's design review
+(their proximity-cascade idea became option H in the study; the shipped claim
+gate is its veto variant — reversible and orphan-proof, chosen for v1).
+
+- **`Code/Opt_DroneOverhaul.lua`** (opt-in, off by default, Mod Options
+  toggle "Drone dispatch overhaul (experimental)"; hooks installed at
+  classdef time, gated per call on IsActive; NO persisted state):
+  1. closest-fleet-first claim gate — chained wrapper on
+     `TaskRequestHub:FindTask` (sole caller = drone auto-Idle, so player
+     orders untouched): repair/clean work offered to a non-closest covering
+     hub is withheld while the closest hub has idle drones; per-request
+     strike cap (4 polls / 30s decay) makes starvation impossible;
+  2. repair moonlighting — chained POST-wrapper on `Drone:Idle` (the body
+     falls through exactly when workless — verified engine fact): workless
+     drones take unclaimed repair/clean work of SATURATED neighbor hubs
+     within 30 hexes and their own restrict area, vanilla-style SetCommand;
+  3. `SMRFixPack.DroneReport()` telemetry (always on, read-only): per-hub
+     state + module counters vetoed/veto_expired/moonlighted.
+- **`Code/Fix_ExtenderFlapChurn.lua`** (F77, default-on fix): extender
+  working-flaps now debounce+coalesce the whole-hub rebuild (2s, per root
+  hub, chains resolved) instead of tearing it down twice per blip.
+- Wire-up: items.lua toggle + metadata `default_options.DroneOverhaul` +
+  code list. Parse sweep: all 4 touched files pass (python luaparser).
+- Scope guards worth knowing when judging PT-52: rockets/rovers/construction/
+  hauling all exempted by design; the claim gate cannot veto player orders
+  structurally (FindTask is not on that path); toggling off restores vanilla
+  instantly (registration layer untouched).
+- Docs: D06 entry + index row (BUGS), F77 flipped to `fixed` (row + tag),
+  options doc carries the build note, **PT-52 watch-and-judge brief with
+  success/failure signatures and iteration knobs is on the
+  FABLE_NEXT_PROMPT board** — the user expects multiple iterations, knob
+  changes get recorded on the D06 entry.
+- Testing debt, stated: no TestKit probes for the module yet (attended
+  playtest is the v1 validation instrument; probes come with the iteration
+  that stabilizes the design).
 
 ## Drone task-assignment investigation leg — Fable, 2026-07-28 (game-free, docs-only): verdict in
 

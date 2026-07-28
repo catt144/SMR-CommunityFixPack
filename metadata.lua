@@ -14,6 +14,7 @@ return PlaceObj('ModDef', {
 		AcknowledgedWarnings = false,
 		ResidencyControl = false,
 		MultipleSuns = false,
+		DroneOverhaul = false,
 	},
 	'code', {
 		"Code/00_Core.lua",
@@ -80,12 +81,14 @@ return PlaceObj('ModDef', {
 		"Code/Fix_AnomalyCaveInMap.lua",
 		"Code/Fix_TechDescriptionBuilding.lua",
 		"Code/Fix_BombardmentSpread.lua",
+		"Code/Fix_ExtenderFlapChurn.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",
 		"Code/Opt_AcknowledgedWarnings.lua",
 		"Code/Opt_ResidencyControl.lua",
 		"Code/Opt_MultipleSuns.lua",
+		"Code/Opt_DroneOverhaul.lua",
 	},
 	'TagGameplay', true,
 })

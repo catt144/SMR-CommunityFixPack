@@ -44,4 +44,10 @@ return {
 		'Help', "Lets you build more than one Artificial Sun, and fixes the base-game bug where solar panels only ever check the first sun for night-time light. Turning it off restores the one-per-colony limit (existing suns keep working).",
 		'DefaultValue', false,
 	}),
+	PlaceObj('ModItemOptionToggle', {
+		'name', "DroneOverhaul",
+		'DisplayName', "Drone dispatch overhaul (experimental)",
+		'Help', "With overlapping Drone Hub coverage, the base game lets a far-away hub's drone claim a repair that idle drones are parked next to. This makes the CLOSEST hub's fleet get first claim on repair and cleaning jobs (a far fleet still serves if the near one doesn't respond within seconds), and lets idle drones help a neighboring OVERLOADED hub with nearby repairs. Player orders, hauling, construction and RC rovers are untouched.",
+		'DefaultValue', false,
+	}),
 }

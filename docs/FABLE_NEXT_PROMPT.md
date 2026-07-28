@@ -97,27 +97,47 @@ silent.
   PT-46 tail (F49(d) cap, F49(a) palette), PT-20/21/22 (cross-cutting, last).
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.
-- **Drone-assignment: verdict is IN (static leg done 2026-07-28) — two items
-  ride this board now:**
-  1. **LIVE HALF (attended, high value if the starvation recurs): run the
-     R1-R7 console reads** on the BUGS DroneControl bullet ("Not yet swept"
-     section) at a starvation moment — R1 (who covers the starving building)
-     and R3 (is its request in hub 2608's queues) alone discriminate the two
-     open hypotheses (registration gap vs claim lockout); R6 arms a
-     `RequestAssignUnit` claim tap (verified console-safe); R7 is the
-     controlled hub-A/hub-B/extender repro with `CheatMalfunction`. All
-     snippets are ready to paste from the bullet.
-  2. **USER-DECISION (never queue yourself): build choices from the verdict**
-     — F77 debounce wrapper (plain repair, entry has the sketch); the
-     locality levers (cross-hub idle-pull vs near-idle claim veto — which one
-     is right depends on the R1/R3 answer, and both are assignment-POLICY
-     changes, D-item territory). Nothing is built until the user says so.
-     **The full overhaul-toggle feasibility study is in
-     `docs/DRONE_OVERHAUL_OPTIONS.md`** (2026-07-28, user-commissioned):
-     options A-G ranked by feasibility/risk/reward with a recommended build
-     order (telemetry → repair moonlighting → migration balancer; D/E gated
-     on the R1/R3 answer). If the user greenlights a subset, that spec is
-     the build brief.
+- **PT-52 — D06 Drone dispatch overhaul, FIRST SITTING (built 2026-07-28,
+  user-greenlit; this is a WATCH-AND-JUDGE item across the whole session,
+  not a 15-minute test — expect multiple iterations across sittings):**
+  * **Setup:** enable "Drone dispatch overhaul (experimental)" in Options →
+    Mod Options (D05 surface; live both directions). `SMRFixPack.ListFixes()`
+    should show `DroneOverhaul [active]` and `ExtenderFlapChurn [active]`
+    (the F77 debounce is a default-on fix riding along — vetoable via
+    `SMRFixPack_Disabled` if a confound is suspected).
+  * **The measuring stick:** `SMRFixPack.DroneReport()` in the console —
+    per-hub working/drones/idle/broken, lap load class, queue depths,
+    unclaimed work count, extender chains, and the module counters
+    `vetoed / veto_expired / moonlighted`. Run it at session start (baseline)
+    and at every suspicious moment; the counters are the ground truth for
+    whether the module is actually intervening.
+  * **What SUCCESS looks like:** repairs near an idle cluster get claimed by
+    that cluster within seconds (watch the wrench icons); `vetoed` climbs
+    while `veto_expired` stays LOW (near fleets are actually taking the
+    yielded work — a HIGH expired share means the strike window is too short
+    or near fleets can't respond → tune); `moonlighted` > 0 near saturated
+    hubs; no repair ever sits unclaimed longer than vanilla would leave it.
+  * **What FAILURE looks like (watch for):** wrench icons lingering longer
+    than vanilla (veto starving work — the strike cap should make this
+    impossible; if seen, capture DroneReport + the building via R1/R2 reads
+    from the DroneControl bullet immediately); drones ping-ponging between
+    hubs; far fleets going fully idle while work exists (over-suppression);
+    any log error mentioning FindTask/Idle/UpdateUplinkRequesters.
+  * **Iteration knobs** (top of `Code/Opt_DroneOverhaul.lua`; changes take
+    effect on relaunch): STRIKES_MAX/STRIKE_TTL (veto patience),
+    MOONLIGHT_MAX_HEXES (help radius), HUB_MISS_TTL/COVER_CACHE_TTL (scan
+    cadence). Record every knob change + observed effect on the D06 entry.
+  * **Regression watch (shared machinery):** rocket loading/unloading (F50
+    territory — the claim gate exempts rockets by class, but verify drones
+    still service rockets normally), rover fleets (exempted — verify),
+    construction sites (unfiltered — verify swarming still happens), and
+    extender link/unlink UX (F77 defers the rebuild ~2s — coverage updates
+    should feel instant-ish still).
+  * The R1-R7 forensic reads on the DroneControl bullet remain valid and are
+    now also the debug kit for judging the module; R7's controlled repro
+    (hub A + hub B + extender, `CheatMalfunction` in A's yard) is the
+    cleanest A/B demonstration of the claim gate working — run it once with
+    the toggle OFF and once ON, same colony, and compare which fleet answers.
 
 ## F76 — READ THIS BEFORE THE USER TOUCHES AN RC TRANSPORT **OR DOZER** (vanilla P1, unfixed)
 

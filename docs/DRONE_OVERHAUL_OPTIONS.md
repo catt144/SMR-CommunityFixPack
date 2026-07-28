@@ -1,4 +1,13 @@
-# D06 candidate — drone assignment overhaul, feasibility study (2026-07-28, game-free)
+# D06 — drone assignment overhaul, feasibility study (2026-07-28, game-free)
+
+> **BUILD STATUS (2026-07-28, same day):** the user greenlit the core — **core v1
+> is BUILT**: `Code/Opt_DroneOverhaul.lua` (closest-fleet-first claim gate on
+> `TaskRequestHub:FindTask` — the veto variant of H, chosen over registration-H
+> for v1 because it is instantly and completely reversible via the toggle and
+> cannot orphan a request — plus option A repair moonlighting and the G
+> telemetry `SMRFixPack.DroneReport()`), and `Code/Fix_ExtenderFlapChurn.lua`
+> (F77, default-on). See the D06 entry in BUGS.md. Registration-H, H-v2
+> (demand), B, C, E remain future iterations per the plan below.
 
 Commissioned by the user after the 2026-07-28 static investigation verdict (BUGS
 DroneControl bullet + F77): *"what is even feasible if we want an optional overhaul
