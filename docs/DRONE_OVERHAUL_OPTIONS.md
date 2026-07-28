@@ -182,6 +182,57 @@ reports as a perf problem), and rots on every game patch. All of A-E get the
 locality wins without owning the matcher. Rejected on FIX_POLICY grounds
 (full replacement of engine-opaque machinery, maximum rot surface).
 
+### H. Closest-hub-first registration with overload escalation — the proximity cascade (added 2026-07-28 after user design review)
+**What the user asked for:** "request tries the closest hub; if it's overloaded, try
+the next closest." Requests are passive so they cannot poll — but the same result is
+achievable by INVERTING it: control which hubs a request is VISIBLE to. The hook
+exists and is Lua-owned: `building:ShouldAddRequestToCommandCenter(request, hub,
+resource)` is consulted per-request per-hub at every connect
+(`DroneControl.lua:692`), default `return_true` (`_TaskRequest.lua:192`), replaceable
+at the declaring class (F64 apply-check lesson applies).
+**Mechanism:**
+* **Tier 0:** the filter answers true only for the CLOSEST covering `DroneHubBase`
+  (rank by `HexAxialDistance(hub, building)` among working hubs with usable drones —
+  an extender-carried far hub correctly ranks FAR, because the fleet lives at the
+  hub). Far fleets never see the request, so the "far drone claimed first and hauls
+  across the map" scene — the user's stated biggest issue — is structurally
+  impossible in tier 0, at any load level, with no saturation precondition and no
+  race to lose.
+* **Escalation:** a slow watchdog (~30s cadence) spots requests still unclaimed after
+  a threshold (near fleet overloaded / broken / drained) and re-runs the building's
+  registration (`DisconnectFromCommandCenters` + `ConnectToCommandCenters` — vanilla
+  primitives) with the filter widened for that building (next-closest, then all
+  covering hubs) for a bounded window. Transient ledger only; savegame-clean.
+**Scope control (the important caveats, found in this pass):**
+* **v1 filters repair/clean WORK requests only.** Demand-request filtering ripples
+  into the per-hub `deficit_table` that shuttle logic reads (`Request_UpdateDeficits`,
+  `DroneControl.lua:107-123`) — spatially arguably MORE accurate, but it needs its
+  own assessment; v2 behind its own consideration. Supply/storage requests are NEVER
+  filtered (FindTask pairs demand+supply within ONE hub's queues — filtering supply
+  would break deliveries outright). Construction work stays unfiltered on purpose:
+  multi-fleet swarming on a build site is desirable; repair can't swarm anyway
+  (max_units=1).
+* The class gate (`IsKindOf(hub, "DroneHubBase")`) confines the filter: the OTHER
+  consumer of the same hook (`LRManager.lua:58`, shuttle side) and the elevator
+  override (`MapSharedDepot`, `Elevator.lua:178`) pass different center classes and
+  are untouched; rover/rocket fleets untouched.
+* Delivery legs: with v1 (work-only), the maintenance DEMAND phase (fetch Electronics
+  from a depot → deliver) is still claimable by far fleets. Note the locality prize
+  there is double — a claiming drone pairs the supply from ITS OWN hub's queues, so a
+  far claim often means a far DEPOT too (two long legs). If live data shows the
+  delivery leg dominates, that's the v2 demand filter or a PickUp-scoped claim veto.
+**Feasibility: HIGH** — one class-method replacement + a watchdog + a coverage-rank
+helper (extender-aware per ground rule 8, cached per building with TTL; connect-time
+code, not a hot path).
+**Risk: LOW-MEDIUM.** Redundancy shrinks by design in tier 0 (a request waits out the
+escalation threshold before other fleets may help — bounded, tunable, and exactly the
+trade the user described wanting); reconnect storms re-run the filter idempotently;
+no persisted state.
+**Reward: HIGH — this is the structural fix for hypothesis (b)** and the closest
+implementation of the user's intended behavior; it also makes option D (claim veto)
+largely obsolete: D *predicts* a nearer drone will claim, H *guarantees* only nearer
+drones can.
+
 ### G. Supporting acts (cheap, mostly independent of the toggle)
 * **F77 debounce** (extender flap churn) — a plain repair, ships as `Fix_*` regardless
   of the overhaul decision; sketch on the F77 entry. Without it, any overhaul fights
@@ -195,24 +246,34 @@ locality wins without owning the matcher. Rejected on FIX_POLICY grounds
   hubs' empty-queue throttle when a new request posts: shaves up to ~1s off reaction
   time. Trivial, marginal, fold into the module if built.
 
-## Recommended shape (user decision)
+## Recommended shape (user decision; revised 2026-07-28 after user design review added H)
 
 **Build order for an `Opt_DroneOverhaul` module (each independently toggleable in
 spirit, one Mod Options switch in practice):**
 1. **G-telemetry (`DroneReport`)** — before anything, so the next sitting quantifies
    the problem and every later change has a before/after.
-2. **A (repair moonlighting)** — highest reward/risk ratio in the set; directly kills
-   the observed four-idle-drones-next-to-a-wrench scene under hypothesis (a).
-3. **C (migration balancer)** — the strategic half; conservative thresholds,
-   sol-scale cadence.
-4. **B (full moonlighting)** — upgrade A's find step if starved haulage shows up.
-5. **D / E** — only if the R1-R7 live reads confirm (b) claim lockout; D first
-   (repair-only), E as the last resort.
-6. **F77 fix** — separate `Fix_`, ships with the next wave independent of all above.
+2. **H (closest-first registration + escalation, repair/clean work only)** — the
+   centerpiece: structural fix for far-fleet capture, the user's intended cascade
+   semantics, no saturation precondition, no race.
+3. **A (repair moonlighting)** — the complement H cannot cover: hypothesis (a)
+   ground (building covered ONLY by the far hub — H then ranks the far hub closest
+   covering, unchanged from vanilla) and the escalation window. A's saturation gate
+   is fine THERE because that scenario is precisely "owner fleet has no idle drones".
+   H and A compose: tier-0 work is only in the near queue, which is where the near
+   idle drones already look.
+4. **C (migration balancer)** — the strategic half; conservative thresholds,
+   sol-scale cadence; automates the drone-count balancing the user otherwise does by
+   hand (H's escalation makes imbalance survivable; C makes it self-correcting).
+5. **H-v2 (demand filter) or B (full moonlighting)** — only if live data shows the
+   DELIVERY leg (depot → building) still dominating; H-v2 needs the shuttle
+   deficit-table ripple assessed first.
+6. **D / E** — largely superseded by H (D predicted what H guarantees); E stays the
+   last resort for claims that predate escalation.
+7. **F77 fix** — separate `Fix_`, ships with the next wave independent of all above.
 
-**What still gates this:** the R1/R3 reads at a live starvation moment. They cost two
-console pastes and decide whether the (b)-targeted options (D/E) are needed at all —
-worth doing before committing to anything past step 3.
+**What still gates this:** the R1/R3 reads at a live starvation moment remain
+worthwhile (they tune H's escalation threshold and decide whether v2/B are needed),
+but H + A no longer DEPEND on the (a)-vs-(b) answer — the pair covers both.
 
 **Global risk statement (unchanged from the verdict):** this is the deepest shared
 machinery in the game — hubs, rovers, and the rocket cargo path (F50/F68/F70/F71) all
