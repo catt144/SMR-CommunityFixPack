@@ -29,7 +29,6 @@ return PlaceObj('ModDef', {
 		"Code/Fix_ArrivalDeaths.lua",
 		"Code/Fix_DroneUnreachableForever.lua",
 		"Code/Fix_StaleReservations.lua",
-		"Code/Fix_HomeDomeMigrationGate.lua",
 		"Code/Fix_CrystalMysteryHang.lua",
 		"Code/Fix_TouristSatisfaction.lua",
 		"Code/Fix_TrainPlatformWedge.lua",
@@ -39,7 +38,6 @@ return PlaceObj('ModDef', {
 		"Code/Fix_TrainCargoDumping.lua",
 		"Code/Fix_UniversityOvertraining.lua",
 		"Code/Fix_DestroyedTunnels.lua",
-		"Code/Fix_SecondArtificialSun.lua",
 		"Code/Fix_DustSicknessBiorobots.lua",
 		"Code/Fix_DustSicknessDamage.lua",
 		"Code/Fix_GeneForging.lua",
@@ -75,6 +73,9 @@ return PlaceObj('ModDef', {
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",
+		"Code/Opt_AcknowledgedWarnings.lua",
+		"Code/Opt_ResidencyControl.lua",
+		"Code/Opt_MultipleSuns.lua",
 	},
 	'TagGameplay', true,
 })

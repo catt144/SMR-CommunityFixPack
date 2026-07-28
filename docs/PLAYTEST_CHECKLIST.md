@@ -6,8 +6,9 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
-far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-07, PT-08, PT-12, PT-13, PT-34,
-PT-36, PT-38, PT-41, PT-45, and PT-46's F49(b) half. This
+far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-06, PT-07, PT-08, PT-12, PT-13,
+PT-14, PT-24, PT-26, PT-34, PT-36, PT-38, PT-39, PT-41, PT-45, and PT-46's
+F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -1044,6 +1045,114 @@ obvious). Watch from a low camera angle so the incoming trails are visible.
 `Result (spread visible?):` _____________________________________________
 
 `Result (decals / dome hits / notification / interception / volley ends?):` _____________________________________________
+
+---
+
+# Group 8 — optional modules (2026-07-27 build leg; each needs its opt-in flag)
+
+Enable all three at once for one sitting — console on the MAIN MENU (before any
+game is loaded), then start/load normally:
+`SMRFixPack_Optional = { AcknowledgedWarnings = true, ResidencyControl = true, MultipleSuns = true }`
+`SMRFixPack.ListFixes()` must show all three `applied`. These are FEATURES, not
+fixes — the question is "does it behave as advertised", plus the usual "nothing
+else broke".
+
+## PT-48 — Acknowledged warnings · covers **D02 `Opt_AcknowledgedWarnings`**
+
+Dismissal now means "I've seen THESE buildings" instead of "silence the whole
+category for 4 game hours".
+
+**Setup:** break two buildings in ways that won't self-heal (e.g. turn off their
+power supply, or use a permanently entombed/unsupplied building if the save has
+one). Wait for the "Building Not Working" notification listing both.
+
+**Trigger:**
+1. Dismiss the notification (right-click it / its dismiss control).
+   - **EXPECTED:** it goes away and STAYS away — play several game hours at high
+     speed; the two acknowledged wrecks never re-nag (vanilla re-nags every 4
+     game hours ≈ every few real seconds at ultra).
+2. While it is quiet, break a THIRD building.
+   - **EXPECTED:** a new "Building Not Working" notification appears promptly
+     for the new one — no 4-hour category silence (this is the module's other
+     half; vanilla would keep it quiet for the rest of the window).
+   - The new notification lists only the new building, not the acknowledged two.
+3. Repair one of the acknowledged buildings, let it run, then break it AGAIN.
+   - **EXPECTED:** it notifies again — recovery re-arms the warning.
+4. Save, reload, and confirm the still-broken acknowledged building stays quiet
+   after the load (the stamp persists).
+5. Other warnings (fuel, DestroyedInfrastructure, rover damage) must behave
+   exactly as vanilla — dismiss one and confirm nothing odd.
+
+`Result (acked stay quiet / new one warns / re-break warns / survives reload?):` _____________________________________________
+
+## PT-49 — Closed to new residents · covers **D03 `Opt_ResidencyControl`**
+
+A new per-dome policy row: block move-ins WITHOUT quarantining. The UI row is
+the pack's first added infopanel row — look at it critically.
+
+**Setup:** a colony with ≥2 connected domes (passage) plus spare housing in
+both, and a rocket of applicants on the way (or use the sponsor resupply).
+
+**Trigger:**
+1. Select a dome → the dome infopanel. At the bottom of the policy rows there
+   should be a new row: **"Accepts new residents"** (green). Click it.
+   - **EXPECTED:** flips to **"Closed to new residents"** (yellow, limit-style
+     back — visually distinct from the red "Quarantined" row), FX plays,
+     rollover text explains the policy. Ctrl+click broadcasts to all domes —
+     verify on a second dome, then Ctrl+click back to open everywhere except
+     the test dome.
+2. With the test dome CLOSED and clearly the better home (more free housing,
+   services), let colonists look for homes:
+   - land new arrivals → **EXPECTED:** everyone routes to OTHER domes; nobody
+     moves into the closed one.
+   - wait a few sols of voluntary resettlement → **EXPECTED:** the closed
+     dome's population never grows from move-ins.
+3. The point of the module — the closed dome's OWN residents keep living
+   normally: they still commute out through the passage to work/shop/train
+   (watch a shift change), services stay available, nobody is locked in or out.
+   - **BROKEN looks like:** any F61-style lockdown symptom (residents stuck,
+     jobs across the passage abandoned).
+4. Manual relocation INTO the closed dome (select a colonist → relocate) —
+   **EXPECTED:** still works; the player's own order overrides the policy.
+5. If the save has a hotel in the closed dome: tourists still check in.
+6. The quarantine toggle still works independently: quarantine the closed dome,
+   un-quarantine it, confirm both rows keep their own state.
+7. MicroG habitat (asteroid): confirm the row appears on its infopanel too.
+8. Uninstall shape: save with a closed dome, disable the module (or the pack),
+   reload — **EXPECTED:** the dome accepts residents again, nothing errors.
+
+`Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
+
+## PT-50 — Multiple Artificial Suns · covers **D04 `Opt_MultipleSuns`** (absorbs F39)
+
+Reworked PT-26: the module lifts the build-once limit AND ships the panel
+binding fix that makes sun #2 actually light panels. The single-sun baseline
+for comparison is banked in the PT-26 archive section: night production beside
+the lit sun at −21% atmospheric was small 3.6 (vs 4 daylight), large 9 (vs 10).
+
+**Setup:** module on; a colony with one Artificial Sun already lit (SAVE from
+PT-26 works). Research/cheat whatever the second sun needs
+(`UIColony:SetTechResearched` for its tech if not already there; cheat-fund the
+build).
+
+**Trigger:**
+1. Open the build menu with sun #1 standing.
+   - **EXPECTED:** the Artificial Sun is offered normally — no "You can build
+     this building only once" refusal.
+2. Build sun #2 FAR from #1 (out of #1's range) through the normal build menu,
+   fuel and ignite it.
+3. Build solar panels AFTER it, in range of sun #2 only.
+   - **EXPECTED:** at night those panels produce at the banked signature
+     (≈ −10% of daylight at the PT-26 map's −21% atmospheric: 3.6/9-style
+     numbers), i.e. sun #2 lights them exactly like sun #1 lights its own.
+   - **SURPRISE looks like:** panels beside sun #2 dead at night (the vanilla
+     F39 binding bug — the absorbed fix failed).
+4. Save with both suns + panels, reload — panels stay lit (the LoadGame sweep
+   and persistence both fine).
+5. Turn the module OFF (fresh session, no opt-in flag), load a NO-second-sun
+   save: the build menu refuses a second sun again (limit restored).
+
+`Result (menu allows #2 / #2 lights its panels / survives reload / off restores limit?):` _____________________________________________
 
 ---
 

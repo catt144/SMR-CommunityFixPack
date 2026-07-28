@@ -1,9 +1,79 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-27 (**playtest marathon DONE — 16 fixes carry playtest status,
-F10 retired+deleted, F61 closed wontfix → D03 filed, 2 of 3 gates cleared, one
-new F12 defect found live + repaired + A/B-verified same day** — see "Playtest
-marathon" below).
+Updated: 2026-07-27 late (**BUILD LEG DONE — F61 fix deleted, F39 folded into
+D04, three new opt-in modules shipped (D02 `Opt_AcknowledgedWarnings`, D03
+`Opt_ResidencyControl`, D04 `Opt_MultipleSuns`), A/B + opt-in legs clean with
+the NEW baseline numbers: 1/56/14/0 · 57/0/14/0 (64/68 active) · opt-in
+60/0/11/0 (67/68)** — see "Build leg" below; playtest-marathon record follows).
+
+## Build leg — Fable, 2026-07-27 late: F61 deletion + D02/D03/D04 built, A/B renumbered
+
+The queued game-free build leg, executed as speced (all specs were on the BUGS
+entries). Game never touched a save; three unattended `-smrautorun` legs only.
+
+- **F61 retirement mechanics DONE:** `Code/Fix_HomeDomeMigrationGate.lua` + its
+  metadata line deleted (git history restores them); the TestKit
+  `HomeDomeMigrationGate` probe deleted with it (it tested the removed behavior —
+  not an F10-style canary).
+- **D02 `Opt_AcknowledgedWarnings` BUILT** (opt-in, off by default): dismissal of
+  `NotWorkingBuildings` stamps every listed building
+  (`SMRFixPack_ack_notworking`, absent-tolerant) and SKIPS the shipped
+  4-game-hour whole-id window; stamped buildings' re-adds are dropped until
+  recovery clears the stamp. Three chained wrappers on the notification helper
+  GLOBALS (`SuppressNotification` — sole caller runs only under `dismissed`, so
+  it IS the dismissal hook; `AddObjectToNotification`;
+  `RemoveObjectFromNotification` — none is file-local in Notifications.lua, F22
+  precedent). Only that one id is touched.
+- **D03 `Opt_ResidencyControl` BUILT** (opt-in): new per-dome/habitat "closed to
+  new residents" policy (`SMRFixPack_closed_to_new_residents` on the Dome,
+  absent-tolerant). Gates: post-wrap `Community:CanAcceptNewColonists`
+  (voluntary resettlement — only Src caller is FindEmigrationDome's filter) +
+  post-wrap the global **`ChooseDome`** for arrivals. Build-time survey
+  refinement: `GetDomesReachableByColonists` was rejected as the arrival patch
+  point — it also feeds construction range display and worker checks, which must
+  keep seeing closed domes; `ChooseDome` is the single choose-a-new-home funnel
+  (rockets ×3, landers ×3, factory androids, stranded re-homing). `safety_dome`
+  passes through unfiltered (no suffocation), `traits.Tourist` exempt (hotels).
+  UI: post-wraps on `sectionDome:Init`/`sectionMicroGHabitat:Init` append the
+  row; the toggle rides shipped `Community:TogglePolicy`/`SetPolicyState`
+  (FX, Ctrl+click broadcast, rogue-dome UI lock for free). Closed state styled
+  yellow/limit so it cannot be read as the red quarantine row.
+- **D04 `Opt_MultipleSuns` BUILT** (opt-in): lifts
+  `BuildingTemplates.ArtificialSun.build_once` from OnMsg.DataLoaded/DataChanged
+  (handlers gate on registry status = opt-in + veto covered, F75 lesson; menu
+  re-reads `CanBuildOnlyOnce()` live) AND absorbs the F39 wrapper + LoadGame
+  sweep unchanged. `Fix_SecondArtificialSun.lua` DELETED; its probe reworked to
+  the ClassicRockets SKIP-unless-opted pattern.
+- **TestKit:** new `Code/60_Probes_Opt.lua` carries the three module probes
+  (each SKIPs with the opt-in reason unless active); the two retired probes
+  removed in place with dated tombstone comments.
+- **Parse sweep:** 81 Lua files across both mods, 0 failures.
+- **A/B pair + opt-in leg (2026-07-27, all clean, NEW EXPECTED NUMBERS —
+  71 probes total now):**
+
+| Leg | Log (Mars.exe-20260727-…) | Result |
+|-----|---------------------------|--------|
+| Baseline (pack emptied) | 20.38.21 | 1 PASS, **56 FAIL**, 14 SKIP, 0 ERROR |
+| Fixed (default config) | 20.39.59 | **57 PASS, 0 FAIL, 14 SKIP, 0 ERROR** — 64/68 active (4 opt-in inactive) |
+| Opt-in (three new modules on via temp flag file) | 20.41.49 | **60 PASS, 0 FAIL, 11 SKIP, 0 ERROR** — 67/68 active; all three new probes PASS incl. the live template lift |
+
+  Renumbering from the old 1/58/11 · 59/0/11 (70 probes): −1 armed probe (F61
+  deleted), F39's probe moved to opt-in SKIP, +2 new opt-in SKIPs (D02, D03).
+  The 14 default-leg SKIPs = 10 [install] + 4 opt-in modules. Baseline's 1 PASS
+  is still the FactionFundingCheck canary. Log noise unchanged (synthetic-map
+  Flight.lua blocks in both legs; the quit-time TestKit mod-error artifact).
+  Opt-in mechanism for the leg: temporary `Code/97_OptInLeg.lua` in the FIX
+  PACK's code list right after 00_Core (set `SMRFixPack_Optional` before the
+  Opt_ files load) — deleted after the leg; TestKit autorun flag line reverted.
+- **Registered modules now 68** (67 − 2 deleted + 3 new); 64 active by default.
+- **Docs same-commit:** BUGS index rows + heading tags (F39, F61, D02, D03,
+  D04), MOD_DESCRIPTION Optional-modules section rewritten with the three new
+  module blurbs (feature framing; F39 bug-fix bullet removed, sweep-list phrase
+  dropped, D02 draft note resolved), PLAYTEST_CHECKLIST gains **Group 8:
+  PT-48 (D02), PT-49 (D03 — first added infopanel row, needs eyes-on),
+  PT-50 (D04, reworked PT-26 vs the banked single-sun baseline)**.
+- **F76 was deliberately NOT touched** — attended sitting only (hard-lock
+  vector; see the F76 entry and the prompt).
 
 ## Playtest marathon — Fable, 2026-07-26/27: 12 PTs resolved, F10 retired, D02 unblocked
 
@@ -560,6 +630,15 @@ Files use an `Opt_` prefix instead of `Fix_` to mark them as not-bug-fixes.
   parked at the colony keeps its launch ration requested even with no destination selected,
   so drones refuel it while it waits. Only the fuel half of D01; the standing Rare Metals
   export half is deliberately unwritten (see the D01 entry).
+- **AcknowledgedWarnings** (D02, `Code/Opt_AcknowledgedWarnings.lua`, added 2026-07-27) —
+  dismissing "Building Not Working" acknowledges the listed buildings until they recover;
+  new breakages always warn immediately. See the build-leg section above / D02 entry.
+- **ResidencyControl** (D03, `Code/Opt_ResidencyControl.lua`, added 2026-07-27) —
+  per-dome/habitat "closed to new residents" policy row; quarantine untouched. See the
+  build-leg section above / D03 entry.
+- **MultipleSuns** (D04, `Code/Opt_MultipleSuns.lua`, added 2026-07-27) — lifts the
+  Artificial Sun build-once limit and carries the absorbed F39 panel-binding fix. See the
+  build-leg section above / D04 entry.
   **This module is also where F56 would land** if the closed-`wontfix` auto-offload
   decision is ever reopened (user decision 2026-07-26): auto-offload and the export half
   are the same "rockets should load and unload themselves like they used to" request over
@@ -1092,6 +1171,6 @@ Real author + version bump in metadata.lua; player-facing fix list in README +
 mod description; upload via in-game Mod Editor (check docs/.git exclusion; the
 Test Kit must NOT be uploaded); credit ChoGGi (Fix Bugs) + LukeH (Martian
 Express) as prior art; keep per-fix disable instructions in the description.
-Three `[DRAFT NOTE]` markers remain in `MOD_DESCRIPTION.md` (lines ~6, ~257, ~277) and are
-deleted before the text ships. The one at ~257 is load-bearing: do NOT promise the
+Four `[DRAFT NOTE]` markers remain in `MOD_DESCRIPTION.md` (lines ~6, ~90 F76 explainer, ~390 ClassicRockets export half, ~448 final) and are
+deleted before the text ships. The export-half one is load-bearing: do NOT promise the
 ClassicRockets module's unwritten Rare Metals export half.

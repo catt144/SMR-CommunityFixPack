@@ -51,7 +51,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | tested |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
-| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | fixed — latent, moving into D04 opt-in (unreachable in unmodded game: build-once wonder) |
+| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | folded into D04 `Opt_MultipleSuns` 2026-07-27 (latent in unmodded game: build-once wonder; standalone fix deleted) |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
 | F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
@@ -73,13 +73,13 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
-| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | wontfix — superseded by D03 (PT-14: toggle is a quarantine by design); fix deletion staged |
+| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | wontfix — superseded by D03 (PT-14: toggle is a quarantine by design); fix DELETED 2026-07-27 |
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | wontfix|
 | F63 | Universities invisible to emigration (no students)       | P2  | high | wontfix|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
-| D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | planned opt-in (PT-38 done, build unblocked) |
-| D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | planned opt-in (user decision 2026-07-27; supersedes F61's fix) |
-| D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | planned opt-in (user decision 2026-07-27; absorbs F39's fix) |
+| D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | built 2026-07-27: `Opt_AcknowledgedWarnings` (opt-in, probe PASS in the opt-in leg; PT-48) |
+| D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | built 2026-07-27: `Opt_ResidencyControl` (opt-in, probe PASS in the opt-in leg; PT-49) |
+| D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | built 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix, probe PASS in the opt-in leg; PT-50) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -836,7 +836,7 @@ with it, :33-38) — the LoadGame sweep is the only leak. Repair is unaffected:
 `Building:Rebuild` (`Building.lua:1655`) yields a NEW object whose `GameInit` registers
 normally.
 
-### F39 — Second Artificial Sun ignored (P2, high)  `[fixed — LATENT (PT-26, 2026-07-27: unreachable in unmodded game); moving into the D04 opt-in: Code/Fix_SecondArtificialSun.lua → Opt_MultipleSuns]`
+### F39 — Second Artificial Sun ignored (P2, high)  `[folded into D04 (2026-07-27): the fix now ships inside Code/Opt_MultipleSuns.lua; standalone Fix_SecondArtificialSun.lua DELETED (latent in unmodded game, PT-26)]`
 `SolarPanelBase:GameInit` (`SolarPanel.lua:8-14`): only `labels.ArtificialSun[1]` tested
 with `TestSunPanelRange`. Panel built in range of sun #2 only never registers (reverse
 direction works, `ArtificialSun.lua:35-47`). **Fix:** wrap GameInit: iterate the whole
@@ -867,6 +867,10 @@ hardening works for any limit-lifting mechanism.
 limit lifted) instead of shipping a default-pack fix for an unreachable bug. See the D04
 entry for the spec; the standalone `Fix_SecondArtificialSun.lua` is deleted in the same
 game-free leg that builds the module.
+**DONE (2026-07-27 build leg):** `Fix_SecondArtificialSun.lua` deleted, the wrapper +
+LoadGame sweep moved unchanged into `Code/Opt_MultipleSuns.lua`, probe reworked to the
+opt-in SKIP-unless-opted pattern (now in TestKit `60_Probes_Opt.lua`), and the A/B
+numbers renumbered in the same leg (see the D04 entry).
 
 ### F40 — Dust Sickness infects Biorobots (P2, high)  `[fixed: Code/Fix_DustSicknessBiorobots.lua]`
 `Data\StoryBit\DustSickness*.lua` filters exclude only `Child`; `Android` trait not
@@ -1485,7 +1489,7 @@ anywhere in Src, so nothing else changes meaning.
 its life support — F73's subject, not this defect.
 Probe: `DomeFreeSpaceMismatch` in `30_Probes_Wave3.lua`.
 
-### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)  `[wontfix (user decision 2026-07-27, PT-14) — superseded by D03; Fix_HomeDomeMigrationGate.lua deletion STAGED for the next game-free leg]`
+### F61 — Home dome's migration toggle blocks outbound shopping/work/training (P1, med-high)  `[wontfix (user decision 2026-07-27, PT-14) — superseded by D03; Fix_HomeDomeMigrationGate.lua DELETED 2026-07-27 (git history restores it)]`
 `Dome:GetService` (`Dome.lua:2900-2916`; same at 2927/2947/2959, `ShiftsBuilding.lua:250-254`):
 outbound cross-dome access requires `self.accept_colonists` — the HOME dome's
 "accept colonists" MIGRATION policy. Turning it off on a residential dome (routine) silently
@@ -1563,6 +1567,10 @@ precedent; expected numbers shift by one probe) and **build the ask properly as 
 (`Opt_ResidencyControl`, a NEW per-dome "closed to new residents" policy that leaves
 `accept_colonists`/quarantine untouched — see the D03 entry). MOD_DESCRIPTION's F61
 bullet is removed in the same change.
+**Deletion DONE (2026-07-27 build leg):** `Fix_HomeDomeMigrationGate.lua` + its metadata
+line removed; the TestKit `HomeDomeMigrationGate` probe DELETED too (it tested the
+removed behavior — not an F10-style canary). A/B re-verified: baseline 1/56/14/0, fixed
+57/0/14/0, 64/68 active.
 
 ### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)  `[wontfix — carried-forward design, verified identical to the original game]`
 `GetService` iterates `GetConnectedDomes()` = direct adjacency refcounts (`Dome.lua:619-644`,
@@ -1694,7 +1702,7 @@ and shipping the two separately would let a player enable an emptying behaviour 
 refilling one. So whenever the export half gets its design decision, decide auto-offload in
 the same pass and behind the same `ClassicRockets` flag.
 
-### D02 — Dismissing a "Building Not Working" warning only silences it ~4 game hours — BY DESIGN, feels like a bug (planned opt-in)
+### D02 — Dismissing a "Building Not Working" warning only silences it ~4 game hours — BY DESIGN, feels like a bug  `[built 2026-07-27: Code/Opt_AcknowledgedWarnings.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-48]`
 Spun out of F32's close (2026-07-26, user decision) — read that entry for the full trace.
 Not a defect: the shipped suppression machinery works exactly as designed
 (`Notifications.lua:41-43`, `:86-88`, `:141-146`). The design just has no answer for a
@@ -1732,8 +1740,19 @@ where dismissal already holds (F32 trace).
 game hours, above); per-id suppression confirmed live (independent fuel-warning ids
 untouched by dismissal; every same-id re-add attempt inside the window observed
 BLOCKED). Build + probe unblocked for the next build leg.**
+**BUILT (2026-07-27 build leg): `Code/Opt_AcknowledgedWarnings.lua`.** Implemented as
+three chained wrappers on the notification helper globals (none is file-local in
+Notifications.lua, so replacements are seen — F22 precedent): `SuppressNotification`
+(the dismissal hook — its only caller runs under `notification.dismissed`) stamps every
+listed building with `SMRFixPack_ack_notworking = true` and SKIPS the shipped whole-id
+window for this one id; `AddObjectToNotification` drops re-adds of stamped buildings;
+`RemoveObjectFromNotification` clears the stamp (recovery/destruction re-arms warnings).
+Only `NotWorkingBuildings` is touched. Savegame footprint: the per-building flag,
+absent-tolerant both ways (policy §3). Probe `AcknowledgedWarnings` (TestKit
+`60_Probes_Opt.lua`) drives all three wrappers with stand-ins — PASS in the opt-in leg,
+SKIP-with-reason otherwise. Playtest: PT-48.
 
-### D03 — No way to block dome move-ins short of a full quarantine — planned opt-in (`Opt_ResidencyControl`)
+### D03 — No way to block dome move-ins short of a full quarantine  `[built 2026-07-27: Code/Opt_ResidencyControl.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-49]`
 Filed 2026-07-27 (user decision, out of PT-14/F61's close — read that entry first). The
 community's long-standing ask: **stop new residents from moving into a dome while its
 residents keep commuting and using services normally.** The shipped game offers only the
@@ -1767,10 +1786,31 @@ and its tooltip says setting it REMOVES a quarantine), or turning off residences
   ways), own playtest item, opt-in via `SMRFixPack_Optional.ResidencyControl`
   (FIX_POLICY §4, ClassicRockets precedent), MOD_DESCRIPTION section when it ships
   (explicitly: quarantine still exists and still means quarantine).
-**Status: build queued for a game-free leg (can share the leg with D02's
-`Opt_AcknowledgedWarnings` and the F61 fix deletion).**
+**BUILT (2026-07-27 build leg): `Code/Opt_ResidencyControl.lua`.** The move-in-path
+survey resolved as speced, with one refinement found at build time:
+* Voluntary resettlement: post-wrapper on `Community:CanAcceptNewColonists`
+  (`Community.lua:61-63`) — verified its ONLY Src caller is `Colonist:FindEmigrationDome`'s
+  candidate filter (`Colonist.lua:2658`).
+* Arrivals: the patch point is the global **`ChooseDome`** (`_GameUtils.lua:426-446`),
+  NOT `GetDomesReachableByColonists` — the reachability list also feeds
+  construction-placement range display and worker checks, which must NOT see closed
+  domes (existing residents still commute). `ChooseDome` is the single
+  choose-a-new-home funnel (rocket arrivals ×3, lander/transporter ×3, factory-born
+  androids, stranded colonists re-homing). The wrapper filters closed domes from the
+  candidate list only; the `safety_dome` argument passes through untouched (a stranded
+  colonist's last resort survives), and `traits.Tourist` skips the filter entirely
+  (hotels untouched).
+* UI: post-wraps on `sectionDome:Init` + `sectionMicroGHabitat:Init` append the policy
+  row via the shipped `InfopanelActiveSection` pattern; the toggle rides the shipped
+  `Community:TogglePolicy`/`SetPolicyState` machinery (`Community.lua:77-100`) — FX,
+  Ctrl+click broadcast and the rogue-dome UI-interaction lock all come free. Closed
+  state styled yellow/limit so it cannot be mistaken for the red quarantine row.
+* Flag `SMRFixPack_closed_to_new_residents` on the Dome object, absent-tolerant (§3).
+Probe `ResidencyControl` (TestKit `60_Probes_Opt.lua`) asserts both gates plus the
+tourist and safety-fallback exemptions — PASS in the opt-in leg. Playtest: PT-49 (the
+UI row needs eyes-on — it is the pack's first added infopanel row).
 
-### D04 — Multiple Artificial Suns — planned opt-in (`Opt_MultipleSuns`), absorbs F39
+### D04 — Multiple Artificial Suns — absorbs F39  `[built 2026-07-27: Code/Opt_MultipleSuns.lua (opt-in, off by default); probe PASS in the opt-in leg incl. the live template lift; PT-50]`
 Filed 2026-07-27 (user decision, out of PT-26/F39's premise finding — read F39 first).
 The shipped game hard-limits the Artificial Sun to one per colony (`build_once` wonder,
 enforced colony-wide incl. construction sites, `BuildMenu.lua:711-719`), which makes
@@ -1802,6 +1842,16 @@ FIX_POLICY §4, ClassicRockets precedent):**
   refusal returns with the module off.
 * MOD_DESCRIPTION gets a module section when it ships (feature framing, not bug-fix
   framing; note it exists because limit-lifting mods hit the vanilla binding bug).
+**BUILT (2026-07-27 build leg): `Code/Opt_MultipleSuns.lua`.** Limit lift runs from
+`OnMsg.DataLoaded`/`OnMsg.DataChanged` (templates exist only after DataLoaded; the
+re-fired `DataChanged(false)` re-asserts idempotently — F75 lesson; the handlers gate on
+the registry status, which covers both the opt-in flag and the `SMRFixPack_Disabled`
+veto). The F39 wrapper + LoadGame sweep moved in unchanged; `Fix_SecondArtificialSun.lua`
+deleted. Probe `MultipleSuns` (TestKit `60_Probes_Opt.lua`) asserts
+`BuildingTemplates.ArtificialSun.build_once == false` on the live template AND the
+binding behavior — PASS in the opt-in leg ("Artificial Sun build-once limit lifted"
+logged at DataLoaded). Playtest: PT-50 (night-production signature vs the PT-26 banked
+single-sun baseline).
 
 ### F64 — Demolishing a station vaporizes its trains ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
 *(Header restored 2026-07-26 — it was lost in an earlier doc edit; the entry body below

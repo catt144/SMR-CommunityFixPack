@@ -62,15 +62,6 @@ come back.
   a few hexes across gave the approaching drone fewer destinations than the game
   unconditionally read back, which errored and dropped whatever the drone was
   doing — so tiny terraforming touch-ups sat there unworked.
-- [DRAFT NOTE — F39 → D04 (2026-07-27): the unmodded game cannot build a second
-  Artificial Sun (build-once wonder), so this bullet must NOT ship as a bug fix.
-  The fix moves into the opt-in `Opt_MultipleSuns` module (lifts the build limit
-  AND makes panels bind to any sun in range); rewrite this as that module's
-  feature blurb when D04 ships, and drop the "second Artificial Sun" phrase from
-  the save-rescue sweep list below (~line 290) in the same pass.] A second
-  Artificial Sun works. Panels only ever checked the *first* one you
-  built, so everything you put up around sun number two produced as if the sun
-  were not there. Panels in an existing save are reconnected when you load it.
 - Large Wind Turbines get their Frictionless Composites bonus back. The patch
   migration that was supposed to re-apply that breakthrough to existing saves only
   ever restored it to Shrouded turbines, so a colony that researched it before
@@ -298,8 +289,8 @@ Be aware of what a mod can and cannot do for damage that already happened:
   it: upgrade bonuses left behind by buildings you salvaged long ago, Large Wind
   Turbines that lost their Frictionless Composites bonus to a faulty patch
   migration, phantom oxygen from deleted farms, housing held for colonists who
-  never arrived, tunnels destroyed but still routed through, solar panels beside a
-  second Artificial Sun, Biorobots infected with Dust Sickness, meteor-damaged
+  never arrived, tunnels destroyed but still routed through, Biorobots infected
+  with Dust Sickness, meteor-damaged
   track that could not be salvaged, and mysteries frozen mid-sequence. Each pass
   is conservative — it changes something only when it can positively identify what
   went wrong — and re-running it does nothing.
@@ -321,7 +312,55 @@ Want to disable a single fix? Every fix has an ID (console:
 `SMRFixPack_Disabled = { FixIdHere = true }` in the console or in a tiny mod
 that loads before this one.
 
-### Optional module (off by default)
+### Optional modules (off by default)
+
+Everything above this line is a bug fix and ships on. The modules in this
+section are **preferences and features** — they change designed behavior, so
+every one of them is **off until you turn it on**, with its own switch:
+`SMRFixPack_Optional = { ModuleIdHere = true }` in the console or in a tiny mod
+that loads before this one (list several to enable several).
+
+**Acknowledged warnings** (`AcknowledgedWarnings`). Changes what dismissing a
+**"Building Not Working"** warning means: instead of silencing the whole warning
+category for a fixed window (after which the same wrecks re-nag — see the
+"Looks like a bug, but isn't" section below), dismissal now means *"I've seen
+these particular buildings."*
+
+- The buildings listed on the warning you dismiss stay quiet **until they
+  actually recover** — a permanently broken building never nags again.
+- If an acknowledged building recovers and later breaks again, that's news —
+  you'll be warned again.
+- A **newly** broken building always warns immediately, even right after you
+  dismissed others — the old category-wide quiet window no longer hides it.
+- Only the "Building Not Working" warning changes. Every other notification
+  keeps its normal behavior.
+
+**Residency control** (`ResidencyControl`). Adds the dome policy the game never
+had: **"Closed to new residents"** — stop colonists from moving into a dome
+*without* quarantining it. (The accept-colonists toggle is a full quarantine by
+design: nobody enters *or leaves*, and story events rely on that. This module
+leaves quarantine exactly as it is.)
+
+- A new toggle row on every dome and asteroid habitat infopanel (Ctrl+click
+  applies it to all domes at once).
+- A closed dome takes no new residents: colonists looking to resettle skip it,
+  and new arrivals from rockets and elevators are routed elsewhere.
+- Its **current** residents notice nothing: they keep commuting, working,
+  shopping and training through passages exactly as before.
+- You stay in charge: manually relocating a colonist into a closed dome still
+  works, tourists still check into its hotels, and births are unaffected.
+- A colonist stranded outside with nowhere else to go will still be let in —
+  the policy never suffocates anyone.
+
+**Multiple Artificial Suns** (`MultipleSuns`). The game hard-limits the
+Artificial Sun to one per colony. This module lifts that limit — and ships the
+repair that makes a second sun actually work. The vanilla game has a real bug
+here: solar panels only ever check the *first* sun you built, so panels around
+sun #2 would produce as if it weren't there. Players who lift the limit with a
+generic "multiple wonders" mod walk straight into that bug; this module fixes
+the panel binding at the same time (including panels already dark beside a
+second sun in an existing save). With the module off, the game's one-sun limit
+applies untouched.
 
 **Classic rocket behavior** (`ClassicRockets`). This one is not a bug fix, and we
 want to be completely transparent about what it changes and what the game offers
@@ -381,16 +420,13 @@ the opposite of what you'd want.
 
 So: not technically a bug, and this pack only ships bug fixes by default — which is
 why you won't find a "fix" for this in the list above. But because the annoyance is
-real, we're building an **optional module** that changes dismissal to mean "I've
-seen *these particular buildings*": the ones you dismissed stay quiet until they
-actually recover (if they later break again, that's news and you'll be told), while
-newly broken buildings always warn immediately. Off by default, like every opinion
-in this pack.
-
-[DRAFT NOTE: the AcknowledgedWarnings module is NOT written yet — see the D02
-entry in docs/BUGS.md, gated on PT-38. When it ships, add its opt-in instructions
-(`SMRFixPack_Optional`) to this section and to the Optional-modules section above.
-Until then this section must promise only that it is planned.]
+real, the pack carries an **optional module** for it: **Acknowledged warnings**
+(`AcknowledgedWarnings`, described in the Optional-modules section above) changes
+dismissal to mean "I've seen *these particular buildings*" — the ones you dismissed
+stay quiet until they actually recover (if they later break again, that's news and
+you'll be told), while newly broken buildings always warn immediately. Off by
+default, like every opinion in this pack:
+`SMRFixPack_Optional = { AcknowledgedWarnings = true }`.
 
 ### Reporting bugs
 
