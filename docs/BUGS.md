@@ -2395,6 +2395,21 @@ excess :676-681).
   Prime suspect for live reports: "drones ignore rocket cargo at high priority",
   "RC transports don't auto-offload rockets", "late-game drones stop maintaining
   inside open domes / cluster stuck outside" (review-sourced).
+  **FIRST-HAND EVIDENCE (user, 2026-07-27 late, screenshot on file — raise this
+  to the top of the sweep):** with a large-range hub plus many drones and
+  OVERLAPPING hub ranges, (a) **task assignment ignores locality across hubs** —
+  a cluster of idle drones parked nearest a malfunctioning building (wrench
+  icon up) and a Polymer storage did nothing while a hub near the SECOND dome,
+  much farther away, serviced everything; work backed up and buildings sat
+  disabled for short stretches; (b) **performance tanks** as hub range/drone
+  count grows, worse with multiple hubs in range of each other — the user saw
+  the same pattern in the ORIGINAL game, so the mechanism likely survived into
+  Relaunched. Investigation angles when swept: how tasks are queued per-hub vs
+  globally (does a request bind to the hub that noticed it rather than the
+  nearest?), whether overlapping hubs share/steal work, whether idle drones
+  ever scan for work themselves, and what in the per-tick request matching is
+  O(range × drones). Distinct from F55 (unreachable-forever cache) — these
+  drones CAN reach the work; they are never assigned it.
 - Colonist auto-assignment: workplaces (`UpdateWorkplaces` family — "unemployed
   every sol"), residences ("homeless despite free housing", "seniors don't move"),
   dome-to-dome walking/passage checks (`AreDomesConnectedWithPassage` — suffocation
