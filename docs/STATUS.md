@@ -214,17 +214,14 @@ one-line summary here:
   breakthroughs** (`Cheats.lua:84` discoverable-or-discovered gate) — grant
   directly via `UIColony:SetTechResearched("<Id>")`; PT-27's Biorobots route
   corrected to `ThePositronicBrain` in the same pass.
-**Two prompts, two triggers:**
-- `docs/FABLE_NEXT_PROMPT.md` — the NEXT Fable work session: the F02 regression hunt
-  (PT-01 FAILed with NO reloads — user confirmed — so the meteor thread genuinely
-  stopped) and the F66 rebuild-trigger repair (user decision 2026-07-25: "rebuild
-  instead of half baking it"), plus the queued tail (F47 under-refunds, §1.5 version
-  tags, MarsDebug install pass).
-- `docs/FABLE_PLAYTEST_PROMPT.md` — processes the user's manual playtest report
-  (PASS→`tested` flips, FAIL→new findings, the PT-36/37/38 decision gates). The
-  playtest RESUMES on the merged wave-4/5 pack; PT-03 needs a re-run (F44 rework);
-  PT-01 needs a fresh run once F02 is repaired.
-- ~~`docs/OPUS_BUILD_PROMPT.md`~~ done; ~~`docs/FABLE_QA_PROMPT.md`~~ done (2026-07-25).
+**ONE live prompt (updated 2026-07-27 late):**
+- `docs/FABLE_NEXT_PROMPT.md` — playtest-standby assistance: the user plays, the
+  session drives console instrumentation and processes results live (the
+  2026-07-26/27 marathon model). Also carries the F76 attended-sitting spec for
+  when the user wants that instead. The build queue is EMPTY.
+- Retired prompt files (each done and deleted/superseded):
+  ~~OPUS_BUILD_PROMPT~~, ~~FABLE_QA_PROMPT~~ (2026-07-25),
+  ~~FABLE_PLAYTEST_PROMPT~~ (merged into the one live prompt).
 BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier

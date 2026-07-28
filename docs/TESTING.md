@@ -88,7 +88,6 @@ Original spec, for reference:
 | F53 | `ArrivalDeaths` | install | Arrive replaced |
 | F55 | `DroneUnreachableForever` | behavior | a failed approach is stamped now, not max_int in the future |
 | F58 | `StaleReservations` | behavior + state | reservations are timestamped; reports stale slots in the save |
-| F61 | `HomeDomeMigrationGate` | behavior | connected-dome workplaces are offered with migration closed |
 | F06 | `CrystalMysteryHang` | install | a static CrystalFlyAway handler exists (vanilla has none) |
 | F09 | `TouristSatisfaction` | behavior | 0→100 pays exactly what 100→0 charges |
 | F11 | `TrainPlatformWedge` | behavior | dropping an absent passenger does not raise |
@@ -154,7 +153,8 @@ Probes needing a loaded game SKIP without one (`g_Consts` is a GameVar), so run
 - **F12* (when implemented)**: set Food stock to <3 sols of consumption → warning appears within an hour.
 - **F13***: open Command Center → resource rows show numbers.
 - **F14***: dome with average health < 30 → red column in Domes Overview.
-- **F61***: dome A `accept_colonists = off`, shop in dome B via passage → residents still shop in B.
+- ~~F61~~ (fix deleted 2026-07-27 — the toggle is a quarantine by design; the
+  community ask ships as the opt-in `ResidencyControl` module, PT-49).
 - Log hygiene after every session: no `[CommunityFixPack]` errors, no new engine errors in `%AppData%\Surviving Mars Relaunched\logs`.
 
 ## Standard test matrix (per release)

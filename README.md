@@ -33,7 +33,6 @@ and can be individually disabled.
 | ArrivalDeaths | New arrivals stop marching to a dome they cannot reach, and no longer disembark into impassable ground |
 | DroneUnreachableForever | A drone that once failed to reach a building tries again later instead of ignoring it for the rest of the game |
 | StaleReservations | Housing reserved for colonists who never arrive is released again instead of being held forever |
-| HomeDomeMigrationGate | Turning off "accept colonists" no longer stops a dome's own residents from shopping, working and training next door |
 | CrystalMysteryHang | The Philosopher's Stone mystery finishes even if you leave its Epilogue popup unread for a sol |
 | TouristSatisfaction | Tourist satisfaction stops drifting downwards — a stat rising past two thresholds now pays as much as falling back charges |
 | TrainPlatformWedge | A passenger who is no longer aboard no longer wedges the train at the platform forever |
@@ -43,7 +42,6 @@ and can be individually disabled.
 | UniversityOvertraining | Universities stop graduating geologists for extractors that Extractor AI made self-sufficient |
 | TrainCargoDumping | Trains stop unloading at stations where you switched that resource off (and hauling it back out again next trip) |
 | DestroyedTunnels | A destroyed tunnel stays closed after you reload instead of silently becoming a working shortcut again |
-| SecondArtificialSun | Solar panels built near a second Artificial Sun get its bonus (only the first sun was ever checked) |
 | DustSicknessBiorobots | Biorobots stop catching Dust Sickness (and are cured of it when you load an affected save) |
 | DustSicknessDamage | Dust Sickness does its intended 5-14 Health damage per sol instead of a flat maximum |
 | GeneForging | The Gene Forging tech raises the rare-trait chance instead of doing nothing at all |
@@ -92,9 +90,11 @@ Console command `SMRFixPack.ListFixes()` shows what's active.
 Removing the mod is always safe. It writes almost nothing into your savegames,
 and what it does write is inert without it: a few `SMRFixPack_*` bookkeeping
 fields (a timestamp on a housing reservation, a "the player has set this payload"
-flag on a rocket) whose absence simply means the pre-fix behaviour, and — where a
-save-repair pass restored a bonus a broken patch migration dropped — an ordinary
-label modifier the game handles like any other.
+flag on a rocket, and — from the optional modules — an acknowledgment stamp on a
+dismissed building warning and a "closed to new residents" flag on a dome) whose
+absence simply means the pre-fix behaviour, and — where a save-repair pass
+restored a bonus a broken patch migration dropped — an ordinary label modifier
+the game handles like any other.
 
 ### Optional modules (off by default)
 
@@ -102,12 +102,15 @@ Some things players ask for are deliberate design changes rather than bugs, so
 they ship switched off and are enabled explicitly:
 
 ```lua
-SMRFixPack_Optional = { ClassicRockets = true }
+SMRFixPack_Optional = { ClassicRockets = true, AcknowledgedWarnings = true }
 ```
 
 | Module | What it changes |
 |--------|-----------------|
 | ClassicRockets | A rocket parked at the colony keeps its launch fuel requested even before you pick a destination, so drones refuel it while it waits. Vanilla asks for no fuel at all until a destination is selected. |
+| AcknowledgedWarnings | Dismissing a "Building Not Working" warning acknowledges those particular buildings until they recover, instead of silencing the whole category for 4 game hours and then re-nagging forever. Newly broken buildings always warn immediately. |
+| ResidencyControl | A new per-dome policy row: "Closed to new residents" — no one new moves in, while current residents keep commuting, working and using services through passages. Quarantine (the accept-colonists toggle) is untouched. Manual relocation and tourists still work. |
+| MultipleSuns | Lifts the one-Artificial-Sun-per-colony build limit, and ships the panel-binding repair that makes a second sun actually light the panels built around it (vanilla only ever checks the first sun — a real bug that generic "multiple wonders" mods run straight into). |
 
 ## For modders
 
