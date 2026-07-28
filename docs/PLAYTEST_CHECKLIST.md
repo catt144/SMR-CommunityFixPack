@@ -1191,6 +1191,12 @@ boot log correctly showed `inactive` from before the flip). First DroneReport
 vetoed claims picked up by the near fleet inside the strike window);
 `moonlighted=0` consistent with the one saturated hub (1078: 24 drones,
 0 idle) having no unclaimed work for neighbors to take.
+**Second reading (same sitting, ~end of the lander leg):** `vetoed=10 /
+veto_expired=1 / moonlighted=0` — vetoed climbing with expiries staying low
+(9 of 10 yielded claims taken by the near fleet inside the strike window =
+the healthy signature holding); `unclaimed=0` on all six hubs throughout;
+hub 1078 recovered from saturated to 7 idle. No starvation indicators all
+sitting.
 
 `Result (near fleet claims near work?):` _____________________________________________
 
