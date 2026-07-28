@@ -22,10 +22,11 @@ leg, all committed):
   double-counted aboard cargo (`GetTotalCargoAvailable` already counts a
   landed rocket's hold — new engine fact) and over-exported 60 units below
   the player's GET-WHEN-ABOVE threshold. Repaired by deleting the
-  aboard-into-ground addition; the explicit floor carries the fix. **PT-17
-  stays un-archived: an ATTENDED capacity-edge re-run (two exports +
-  replenishing stock; expect ground to settle AT the threshold) is on the
-  board.** Full trail on the F68 entry.
+  aboard-into-ground addition; the explicit floor carries the fix. **The
+  attended capacity-edge re-run PASSed 2026-07-28 (next sitting): request
+  tracked aboard + surplus, ground settled AT the threshold (146 with miners
+  running vs threshold 140) → F68 `tested`, PT-17 ARCHIVED.** Full trail on
+  the F68 entry.
 - **PT-52 first sitting: HEALTHY.** D06 live-enable bridge verified; two
   DroneReport readings (`vetoed 4→10, veto_expired 0→1, moonlighted 0`,
   `unclaimed=0` on all six hubs all sitting). The watch continues every
@@ -66,9 +67,9 @@ there: PT-16 (F67 empty launch + F69 return fuel — the F69 half wants an
 asteroid with NO drones/hub, use a fresh one), PT-19 (F73 shelter reflex —
 the Douglasjay MicroG habitat with 9 residents is ideal), PT-31 (F70 Edit
 Payload, Mars side, manual mode), PT-33 (F72 — needs EXACTLY one lander,
-manual, no destination; the user has exactly one: Sphinx #2), plus the PT-17
-attended capacity-edge re-run and the **F78 disaster-silence investigation**
-(both on the board below).
+manual, no destination; the user has exactly one: Sphinx #2), plus the **F78
+disaster-silence investigation** (on the board below; the PT-17 capacity-edge
+re-run PASSed and archived 2026-07-28).
 
 ---
 
@@ -102,11 +103,9 @@ Your jobs, in the order they usually come up:
    facts").
 2. `docs\PLAYTEST_CHECKLIST.md` — ground rules, the verified command table,
    **the PT-52 procedure** (what the D06 module CAN and CANNOT do — judge it
-   only on the CAN list) with its two progress notes, **the PT-17 section**
-   (results filled; only the attended capacity-edge re-run remains), the
-   reporting protocol.
-3. `docs\BUGS.md` — the entries the sitting touches (**F68 for the PT-17
-   re-run — read its FINDING/REPAIR trail first**; F67/F69 for PT-16, F73
+   only on the CAN list) with its two progress notes, the reporting
+   protocol. (PT-17 is complete and archived 2026-07-28.)
+3. `docs\BUGS.md` — the entries the sitting touches (F67/F69 for PT-16, F73
    for PT-19, F70 for PT-31, F72 for PT-33; D06 + F77 for the PT-52 watch;
    D02 for PT-48; F65 for PT-40; **F76 before ANY depot-picker
    interaction**; F48 before PT-37). For any drone anomaly, the DroneControl
@@ -144,10 +143,9 @@ silent.
   the standing MicroG habitat is ideal), PT-16 (F67 all-Ignore sit-on-pad +
   F69 manual landing on a FRESH no-infrastructure asteroid), PT-31 (Edit
   Payload, Mars side), PT-33 (exactly one lander, manual, no destination —
-  holds true now), **PT-17 attended capacity-edge RE-RUN** (two exports +
-  replenishing stock; PASS = asteroid ground settles AT the GET-WHEN-ABOVE
-  threshold, still no unload flip — then F68's finding closes and PT-17
-  archives).
+  holds true now). **The PT-17 capacity-edge re-run PASSed 2026-07-28 →
+  F68 `tested`, PT-17 archived** (ground settled AT the threshold; the
+  repaired AutoCargo logger validated live in the same run).
 - **F78 — NEW P1 INVESTIGATION (user-reported, watchdog-confirmed): the live
   save has seen ZERO disasters in 194 sols and no weather at all.** The PT-01
   meteor watchdog caught the mechanism live: the Meteors thread hangs INSIDE

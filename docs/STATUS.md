@@ -35,7 +35,9 @@ root cause + repair sketch on the F68 entry (the fix double-implements the
 anti-churn floor; delete the aboard-into-ground half). **BOTH queued repairs
 LANDED the same evening (F68 over-draw + TestKit logger — see the repair-leg
 section) with a fresh A/B pair; the build queue is EMPTY again.** PT-17
-stays un-archived pending an attended capacity-edge re-run. Also proven this
+stays un-archived pending an attended capacity-edge re-run — **DONE 2026-07-28
+next sitting: re-run PASS (ground settled AT the threshold, request tracked
+instead of ratcheting) → F68 `tested`, PT-17 archived.** Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
 
 ## F68 over-draw repair leg — Fable, 2026-07-28 (game-free, post-playtest): same-day mechanical repair + fresh A/B pair
@@ -66,9 +68,14 @@ repair landed the same evening once the user closed the game.
   set). The LanderCargoRatchet probe passes through the floor path
   (`request 300000 >= 300000 aboard`) — the probe needed no change, by
   design of the repair.
-- **Validation debt:** PT-17's capacity-edge leg needs an ATTENDED re-run
-  (two exports + replenishing stock) to confirm ground now settles AT the
-  threshold; PT-17 stays un-archived until then.
+- **Validation debt: CLEARED 2026-07-28 (next sitting).** The attended
+  capacity-edge re-run PASSed on the live colony: Concrete above 0 + Rare
+  Metals above 140 with extractors replenishing mid-load; request tracked
+  `aboard + surplus` (PreciousMetals 90000→92000, creeping only by the mined
+  amount) instead of ratcheting; ground after departure 146 with miners
+  running = settled AT the threshold. The repaired TestKit AutoCargo logger
+  did the capture — its first live validation. **F68 → `tested`; PT-17
+  archived.**
 
 ## D06 build leg — Fable, 2026-07-28: drone dispatch overhaul core v1 + F77 fix (user-greenlit, PT-52 pending)
 

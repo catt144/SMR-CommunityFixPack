@@ -86,7 +86,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
-| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed — over-draw REPAIRED same day 2026-07-28, A/B re-verified; PT-17 capacity-edge re-run pending (entry) |
+| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | tested — PT-17 complete 2026-07-28 incl. the attended capacity-edge re-run post-repair (ground settled AT the threshold) |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed  |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested 2026-07-28 (PT-32: live two-resource priority inversion + probe order coverage) |
@@ -2077,7 +2077,7 @@ Endless empty round trips ~70 fuel each. **Fix:** wrap `IsCargoReady`: in auto m
 CheckAutoDepart true and no non-fuel payload requested, return false (1-sol timer still
 exits cleanly).
 
-### F68 — Hourly auto-request ratchet unloads the lander's own cargo (P1, high)  `[fixed: Code/Fix_LanderCargoRatchet.lua]`
+### F68 — Hourly auto-request ratchet unloads the lander's own cargo (P1, high)  `[tested: Code/Fix_LanderCargoRatchet.lua — PT-17 complete 2026-07-28, incl. attended capacity-edge re-run post-repair]`
 `CreateAutoCargoRequest` (`UniversalRocket.lua:1742-1755`, hourly): `to_transfer =
 GetTotalCargoAvailable(...) - threshold`, but loaded cargo is NOT "available" — every
 hour the request shrinks by what was just loaded; `requested` drops below what's aboard →
@@ -2115,6 +2115,19 @@ pack errors); the LanderCargoRatchet probe passes through the floor path
 (`request 300000 >= 300000 aboard`).** PT-17 stays un-archived until an attended
 re-run of the capacity-edge leg (two exports + replenishing stock) confirms the
 threshold holds live.
+**RE-RUN CONFIRMED — 2026-07-28, attended, live colony (Sphinx #2, fresh
+relaunch with the repair loaded, repaired TestKit AutoCargo logger doing the
+capture — no console tap needed):** Concrete above 0 (ground 210) + Rare
+Metals above 140 (ground 222), extractors actively replenishing mid-load. The
+request TRACKED instead of ratcheting: PreciousMetals req 90000→91000→92000
+(creeping only by what the miners added; aboard 10000→89000 underneath),
+Concrete req 8000→7000 settling equal to aboard — `req` never below `have`
+anywhere, no unload flip, load completed and departed on schedule. Ground
+after departure read **146 with miners still running = settled AT the 140
+threshold and re-accumulating** (the old over-draw drained 60 BELOW). The
+observed numbers match `aboard + current surplus above threshold` exactly —
+the repaired single-floor implementation verified end-to-end. **F68 CLOSED
+`tested`; PT-17 archived.**
 
 ### F69 — Manual landing dumps the return fuel (P1, high)  `[fixed: Code/Fix_LanderReturnFuel.lua]`
 `CmdLand` (`UniversalRocket.lua:414`) clears `arrival_loc` in manual mode →

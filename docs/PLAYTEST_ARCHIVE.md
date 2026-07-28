@@ -1257,3 +1257,93 @@ only load with Rare Metals ground at 84 < 144 — correct exclusion, verified
 by the payload delivered).**
 
 ---
+
+## PT-17 — Lander cargo ratchet + the capacity edge case · covers **F68**
+
+**Setup:** SAVE-E, lander on an **asteroid** in Automated Mode, with resources
+available to export. `SMRTest.Log.AutoCargo(true)`.
+> ⚠️ **2026-07-28: `SMRTest.Log.AutoCargo` is BLIND to real landers** — it
+> wraps `UniversalRocketBase` at runtime, but the live lander class
+> `UniversalLanderRocket` carries its own baked copy of the method (STATUS
+> engine facts, flattening corollary), so no request lines are ever logged.
+> **Both flaws REPAIRED 2026-07-28 (same day, game-free leg):** the logger now
+> wraps `UniversalLanderRocket` and reads `self.cargo[res].requested` after the
+> call (output `res=req:N/have:M`); a second flaw — printing `request{}` from
+> the method's always-nil RETURN value — fixed in the same pass. From the next
+> relaunch `SMRTest.Log.AutoCargo(true)` works on real landers; no console tap
+> needed.
+
+**Trigger — the ratchet:**
+1. Set **one** export threshold (say Metals) so the lander loads cargo.
+2. Let drones load the hold to roughly half.
+3. Watch the `CreateAutoCargoRequest(...) request{...} aboard{...}` lines over
+   2–3 game hours.
+
+- **BROKEN looks like:** every hour the lander asks for *less* than it is already
+  carrying, flips to "unloading", and drones haul the cargo it just loaded back out —
+  it loads exotics then dumps them and leaves with junk or nothing.
+- **FIXED looks like:** the `request{}` figures **never fall below** the matching
+  `aboard{}` figures; the hold only fills.
+
+**Trigger — the capacity edge (the specific thing the audit flagged as unverified):**
+4. Now set **two or more** export thresholds — deliberately pick resources whose names
+   sort so that an **alphabetically earlier** one is present in bulk (e.g. **Concrete**
+   *and* **Metals**, or **Electronics** *and* **PreciousMetals**).
+5. Load the hold **to capacity** (`CheatFillAllStorages()` on the asteroid side helps).
+6. Watch the lander's **status** and whether it ever departs.
+
+- **BROKEN looks like:** with the hold full and two exports configured, the lander gets
+  stuck reading **"loading" forever** and the automated rocket just sits on the pad and
+  never departs.
+- **FIXED looks like:** the hold fills, the status advances to **"ready"**, and the
+  lander departs on schedule.
+- ⚠️ **This is the known-suspect case** (the requested floor may not debit remaining
+  hold capacity, so an alphabetically-earlier resource's request can exceed what's
+  left). **If it sticks at "loading", that is a real FAIL and needs a code change** —
+  record the exact export pair, the hold contents and the status text.
+
+`Result (ratchet):` **PASS — 2026-07-28, live colony (not SAVE-E), single
+Waste Rock export on the purchased lander Sphinx #2 (class confirmed
+`UniversalLanderRocket`; the pack's replacement confirmed in the live
+dispatch path via `rawget` → `Fix_LanderCargoRatchet.lua(124)`). Via the
+leaf-class console tap (TestKit logger blind, see warning above): across 4
+automated Mars↔asteroid cycles the asteroid-side request held PINNED at the
+full-hold 80000 through every hourly recompute while aboard climbed
+monotonically (0→11000→33000→59000→78000→79000) — req never below have, no
+unloading flip, departure on schedule every cycle; request zeroes only at
+load-complete and the intended Mars unload leg. Reserved-site auto-landing
+also verified across all cycles after the one vanilla-required manual first
+landing.**
+
+`Result (capacity edge):` **Wedge criterion PASS / NEW FINDING on the fix —
+2026-07-28.** Two-export co-fill leg (Concrete above 0 + Rare Metals above
+144, stock 184): both resources allocated together (PreciousMetals 40000 +
+Concrete 48000), status advanced and the lander departed on schedule — no
+stuck-"loading" wedge in either two-export leg. BUT the request ratcheted
+monotonically to the hold cap as extractors replenished stock mid-load and
+the lander drained the asteroid to 84 — sixty units BELOW the player's
+keep-threshold. Full forensics + root cause (the fix's aboard-into-ground
+addition at Fix_LanderCargoRatchet.lua:145-151 double-implements the
+anti-churn floor) + repair sketch on the F68 entry. **F68 NOT flipped.
+REPAIR LANDED same day (2026-07-28, game-free leg, A/B re-verified —
+baseline 1/57/14/0, all-five-toggles 62/0/10/0, 70/70 applied): the
+aboard-into-ground addition deleted, the explicit floor carries the fix
+(full trail on the F68 entry). This section stays un-archived until an
+ATTENDED re-run of this capacity-edge leg (two exports + replenishing
+stock) confirms the threshold holds live — expected post-repair: request
+stays at aboard + current ground surplus, asteroid ground settles AT the
+threshold, still no unload flip.**
+
+`Result (capacity edge, attended re-run):` **PASS — 2026-07-28, live colony,
+Sphinx #2, fresh relaunch with the repair loaded; captured by the repaired
+TestKit AutoCargo logger (first live use — logger validated, no console tap
+needed). Setup: Concrete above 0 (ground 210) + Rare Metals above 140
+(ground 222), extractors actively replenishing mid-load. The request TRACKED
+instead of ratcheting — PreciousMetals req 90000→91000→92000 (creeping only
+by what the miners added, aboard 10000→89000 underneath), Concrete req
+8000→7000 settling equal to aboard; `req` never below `have`, no unload
+flip, departure on schedule. Ground after departure: 146 with miners still
+running = settled AT the 140 threshold and re-accumulating (the pre-repair
+run drained 60 below). F68 → `tested`; section archived.**
+
+---
