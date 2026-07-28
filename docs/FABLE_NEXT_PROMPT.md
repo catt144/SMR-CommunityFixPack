@@ -77,16 +77,21 @@ Your jobs, in the order they usually come up:
    (identity below), pushed. Docs never lag play.
 
 **First, read (in order) from `C:\Dev\SMR-BugFixPack`:**
-1. `docs\STATUS.md` — the "D06 build leg" section (newest) AND the whole
-   engine-facts list ("Key technical facts").
+1. `docs\STATUS.md` — the "F68 over-draw repair leg" + "D06 build leg"
+   sections (newest two) AND the whole engine-facts list ("Key technical
+   facts").
 2. `docs\PLAYTEST_CHECKLIST.md` — ground rules, the verified command table,
    **the PT-52 procedure** (what the D06 module CAN and CANNOT do — judge it
-   only on the CAN list), the reporting protocol.
-3. `docs\BUGS.md` — the entries the sitting touches (**D06 + F77 for PT-52**;
-   D02 for PT-48; D03 for PT-49's tail; F65 for PT-40; **F76 before ANY
-   depot-picker interaction**; F48 before PT-37). For any drone anomaly, the
-   DroneControl bullet in "Not yet swept" carries the full assignment-
-   machinery trace and the R1-R7 paste-ready console forensics.
+   only on the CAN list) with its two progress notes, **the PT-17 section**
+   (results filled; only the attended capacity-edge re-run remains), the
+   reporting protocol.
+3. `docs\BUGS.md` — the entries the sitting touches (**F68 for the PT-17
+   re-run — read its FINDING/REPAIR trail first**; F67/F69 for PT-16, F73
+   for PT-19, F70 for PT-31, F72 for PT-33; D06 + F77 for the PT-52 watch;
+   D02 for PT-48; F65 for PT-40; **F76 before ANY depot-picker
+   interaction**; F48 before PT-37). For any drone anomaly, the DroneControl
+   bullet in "Not yet swept" carries the full assignment-machinery trace and
+   the R1-R7 paste-ready console forensics.
 4. `docs\FIX_POLICY.md` — binding rules for any code you write.
 5. Only if D06 needs design iteration (not just knob tuning):
    `docs\DRONE_OVERHAUL_OPTIONS.md` — the shipped core is the veto variant of
@@ -102,14 +107,15 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **PT-52 — D06 Drone dispatch overhaul + F77, FIRST SITTING — the
-  centerpiece.** Full procedure (CAN/CANNOT lists, Triggers A/B/C, result
-  lines) is the PT-52 section of `PLAYTEST_CHECKLIST.md`; briefing notes
-  below the board. It runs as a WATCH-AND-JUDGE layer across the WHOLE
-  session while other PT items are played — enable the toggle at session
-  start, run `SMRFixPack.DroneReport` as baseline, keep half an eye on
-  drones all session. Not a 15-minute test; the user expects multiple
-  iterations across sittings.
+- **PT-52 — D06 Drone dispatch overhaul + F77, CONTINUING watch (sitting 1
+  was healthy).** Full procedure is the PT-52 section of
+  `PLAYTEST_CHECKLIST.md` (two progress notes recorded); briefing notes
+  below the board. The user's toggle is ON and account-persistent — verify
+  `DroneOverhaul [active]` at session start, take a fresh
+  `SMRFixPack.DroneReport` baseline (counters are NOT persisted — they
+  restart at 0 every game launch), keep half an eye on drones all session.
+  **Trigger B (controlled off/on CheatMalfunction A/B demo + the F77
+  extender-flap check) is still un-run** — the natural next PT-52 step.
 - **PT-48** AcknowledgedWarnings (D02) — break two buildings so they won't
   self-heal, dismiss the warning: acked buildings stay quiet; a THIRD breakage
   warns promptly and lists only itself; repair + re-break re-warns; stamp
@@ -130,22 +136,26 @@ silent.
   it bridges whenever the two ends read as different live grids).
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
-- Un-run: PT-09..11, PT-15..19 (fixtures B/D/E), PT-23, PT-25, PT-27..33,
-  PT-35 (PT-27's Biorobots grant is `ThePositronicBrain`;
-  `CheatResearchAll()` SKIPS undiscovered breakthroughs — grant directly via
-  `UIColony:SetTechResearched("<Id>")`; PT-32 is DONE/archived), PT-42/43/44,
-  PT-47,
+- Un-run: PT-09..11, PT-15..19 (fixtures B/D/E; 16/19 also on the asteroid
+  bullet above), PT-23, PT-25, PT-27..31, PT-33, PT-35 (PT-27's Biorobots
+  grant is `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
+  breakthroughs — grant directly via `UIColony:SetTechResearched("<Id>")`),
+  PT-42/43/44, PT-47,
   PT-46 tail (F49(d) cap, F49(a) palette), PT-20/21/22 (cross-cutting, last).
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.
 ## PT-52 briefing notes (D06 + F77 — read WITH the checklist's PT-52 section)
 
 The checklist section is the procedure; these are the assistant-side facts:
-- **Setup check:** after the toggle, `SMRFixPack.ListFixes` (log) or the
-  on-screen loop must show `DroneOverhaul [active]` AND
-  `ExtenderFlapChurn [active]` (F77 rides along as a default-on fix —
-  vetoable via `SMRFixPack_Disabled["ExtenderFlapChurn"] = true` pre-load if
-  a confound is suspected).
+- **Setup check (each sitting):** the toggle persists, but confirm
+  `DroneOverhaul [active]` AND `ExtenderFlapChurn [active]` via the
+  on-screen loop or `SMRFixPack.fixes.DroneOverhaul.status` (bare
+  expression). F77 rides along default-on — vetoable via
+  `SMRFixPack_Disabled["ExtenderFlapChurn"] = true` pre-load if a confound
+  is suspected. **Counters are NOT persisted** (zero-persisted-state design)
+  — they restart at 0 each game launch, so take the sitting's baseline
+  DroneReport right after load. Sitting-1 reference: healthy at
+  `vetoed=10 / veto_expired=1 / moonlighted=0` over a full evening.
 - **`SMRFixPack.DroneReport` prints ON-SCREEN (ConsolePrint) AND to the log
   (ModLog)** — unlike ListFixes, no FlushLogFile dance needed live; the log
   copy is the evidence trail.
@@ -234,7 +244,7 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
 - Cheat use is logged per save and blocks that save's achievements — fixture
   saves only.
 
-## Harness facts (for the pre-flight A/B and any same-day repair)
+## Harness facts (for any A/B pair / same-day repair — none queued; last pair 2026-07-28 late)
 
 - Launch: `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050 -smrautorun`.
   A leg takes ~75 s; Mars.exe may take minutes to appear. **Never kill on a
