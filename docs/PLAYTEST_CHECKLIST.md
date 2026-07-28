@@ -603,47 +603,6 @@ automatic), with an asteroid destination selected. `dbg_ToggleRocketInstantTrave
 
 ---
 
-## PT-33 — "No available Asteroid Landers" with a lander on the pad · covers **F72**
-
-This one is pure UI flow — the probe proves the predicate, only play proves the
-button behaves.
-
-**Setup:** SAVE-E. **Exactly one** Asteroid Lander, on the Mars pad, **manual**
-mode, **no destination assigned**, and a scanned asteroid available in the
-Planetary View.
-
-**Trigger — case A (the reported case):**
-1. Land the lander with cargo aboard and **do not let it finish unloading** —
-   pause, or take the drones away so unloading stalls. Its status should read
-   *unloading*.
-2. Open **Planetary View → the asteroid → VISIT ASTEROID**.
-
-- **BROKEN looks like:** the "No available Asteroid Landers" popup, offering to
-  open the Resupply screen — while the lander is visibly parked on the pad.
-- **FIXED looks like:** the rocket picker opens and the lander is in the list.
-
-**Trigger — case B (maintenance):**
-3. Let a landed lander fall due for maintenance (or wait for one to). With its
-   status showing it is waiting for parts, repeat step 2.
-- Same expectation as case A.
-
-**Trigger — case C (not over-broad — the important negative):**
-4. Assign the lander a destination and confirm a payload so it is **loading for a
-   flight**. Repeat step 2.
-- **Expected:** you still get "No available Asteroid Landers" (or an empty list).
-  A rocket already committed to a flight must NOT be offered for a second
-  expedition. If it is, that is a FAIL.
-5. With **no lander at all** (send it away, or a save that has none), repeat
-   step 2 — the popup must still appear.
-
-`Result (case A unloading):` _____________________________________________
-
-`Result (case B maintenance):` _____________________________________________
-
-`Result (case C committed lander / no lander still refused?):` _____________________________________________
-
----
-
 ## PT-35 — Save sanitizer passes · covers **F35, F03 (sweep half)**
 
 Both passes only act on damage that is *already* in a save, so a fresh colony

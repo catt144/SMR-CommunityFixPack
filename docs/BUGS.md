@@ -90,7 +90,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed  |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested 2026-07-28 (PT-32: live two-resource priority inversion + probe order coverage) |
-| F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
+| F72 | "No available landers" while a lander sits on the pad    | P2  | med  | tested — PT-33 PASS 2026-07-28, all three cases (entry) |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | tested — PT-19 PASS 2026-07-28 (both gap shapes; entry) |
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
@@ -2204,7 +2204,7 @@ function cannot coexist. The shipped `assert(res_type == "Resource")` is dropped
 copy in the same pass (assert does not unwind in mod code; it would only add log noise).
 Probe: `AutoExportPriority` in the Test Kit's `30_Probes_Wave3.lua`.
 
-### F72 — "No available Asteroid Landers" with a lander on the pad (P2, med)  `[fixed: Code/Fix_AsteroidLanderAvailable.lua]`
+### F72 — "No available Asteroid Landers" with a lander on the pad (P2, med)  `[tested: Code/Fix_AsteroidLanderAvailable.lua — PT-33 PASS 2026-07-28, all three cases incl. the not-over-broad negatives]`
 `PlanetaryAsteroidVisitPossible` (`PlanetaryView.lua:433-444`) and
 `GetRocketsForExpedition` (`PlanetUI.lua:1623-1651`) exclude any lander that is busy
 (CmdLoad/CmdUnload) or has stale `arrival_loc` (payload dialog Cancel skips CancelFlight
@@ -2241,6 +2241,19 @@ or (...)` parses as `(A and B) or C or D`, so the class test guards only the fir
 `selected_spot.map`, which is a MapDescriptor on an asteroid spot, so it always answers
 "different" and the action's disable branch never fires.
 Probe: `AsteroidLanderAvailable` in the Test Kit's `30_Probes_Wave3.lua`.
+**PT-33 PASS — 2026-07-28, live colony, Sphinx #2 (the spare lander deleted
+for isolation off a quicksave).** Case A (stalled unload: cargo aboard, no
+drones, "No destination set"): VISIT ASTEROID opened the picker with the
+lander listed "Ready" — the vanilla refusal is gone. Case B (maintenance
+due, waiting for parts): same, picker offered it. Case C negatives BOTH
+refused: committed to another site (PREPARE done) → picker empty, the
+committed rocket NOT offered for a second expedition; departed/no lander at
+the colony → same empty refusal. Fix confirmed permissive-only, not
+over-broad. Live observation matching the entry's recorded vanilla quirk
+(a): the refusal presented as an EMPTY picker rather than the popup — the
+mis-parenthesized legacy `WaitLaunchOrder` branch lets the gate answer
+"possible" while the (untouched, more-correct) list builder rightly excludes
+the committed rocket; harmless, deliberately not touched.
 
 ### F73 — Asteroid colonists idle outdoors; nothing shelters the suffocating (P1, med-high)  `[tested: Code/Fix_ShelterReflex.lua — PT-19 PASS 2026-07-28]`
 Chain: `MicroGHabitatAutoResolve:IsSuitable` requires `GetScoreFor > 0` ≈ `HasLifeSupport()`

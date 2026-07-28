@@ -65,10 +65,9 @@ change. **Session-start sequence (in order, ~2 min):**
 The user's stated next goal: **close out the asteroid section** — un-run
 there: PT-16 (F67 empty launch + F69 return fuel — the F69 half wants an
 asteroid with NO drones/hub, use a fresh one), PT-31 (F70 Edit
-Payload, Mars side, manual mode), PT-33 (F72 — needs EXACTLY one lander,
-manual, no destination; the user has exactly one: Sphinx #2), plus the **F78
-disaster-silence investigation** (on the board below). **PT-17 AND PT-19
-both PASSed and archived 2026-07-28 next sitting** (F68 + F73 `tested`).
+Payload, Mars side, manual mode), plus the **F78 disaster-silence
+investigation** (on the board below). **PT-17, PT-19 AND PT-33 all PASSed
+and archived 2026-07-28 next sitting** (F68 + F73 + F72 `tested`).
 
 ---
 
@@ -105,7 +104,7 @@ Your jobs, in the order they usually come up:
    only on the CAN list) with its two progress notes, the reporting
    protocol. (PT-17 is complete and archived 2026-07-28.)
 3. `docs\BUGS.md` — the entries the sitting touches (F67/F69 for PT-16, F73
-   for PT-19, F70 for PT-31, F72 for PT-33; D06 + F77 for the PT-52 watch;
+   for PT-19, F70 for PT-31; D06 + F77 for the PT-52 watch;
    D02 for PT-48; F65 for PT-40; **F76 before ANY depot-picker
    interaction**; F48 before PT-37). For any drone anomaly, the DroneControl
    bullet in "Not yet swept" carries the full assignment-machinery trace and
@@ -140,12 +139,13 @@ silent.
   survives reload; other warning types behave vanilla.
 - **Asteroid closeout (user's stated next goal):** PT-16 (F67 all-Ignore
   sit-on-pad + F69 manual landing on a FRESH no-infrastructure asteroid),
-  PT-31 (Edit Payload, Mars side), PT-33 (exactly one lander, manual, no
-  destination — holds true now). **DONE 2026-07-28 next sitting: PT-17
+  PT-31 (Edit Payload, Mars side). **DONE 2026-07-28 next sitting: PT-17
   capacity-edge re-run PASS → F68 `tested` (ground settled AT the threshold;
-  repaired AutoCargo logger validated live) and PT-19 PASS → F73 `tested`
+  repaired AutoCargo logger validated live); PT-19 PASS → F73 `tested`
   (residence held through both gap shapes — habitat off AND supply cut;
-  vanilla status-reads-residence observation on the entry).**
+  vanilla status-reads-residence observation on the entry); PT-33 PASS →
+  F72 `tested` (all three cases; refusal presents as an empty picker via
+  the documented vanilla gate quirk — entry observation (a)).**
 - **F78 — NEW P1 INVESTIGATION (user-reported, watchdog-confirmed): the live
   save has seen ZERO disasters in 194 sols and no weather at all.** The PT-01
   meteor watchdog caught the mechanism live: the Meteors thread hangs INSIDE
@@ -164,7 +164,7 @@ silent.
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
 - Un-run: PT-09..11, PT-15, PT-16, PT-18 (fixtures B/D/E; 16 also on the
-  asteroid bullet above), PT-23, PT-25, PT-27..31, PT-33, PT-35 (PT-27's Biorobots
+  asteroid bullet above), PT-23, PT-25, PT-27..31, PT-35 (PT-27's Biorobots
   grant is `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
   breakthroughs — grant directly via `UIColony:SetTechResearched("<Id>")`),
   PT-42/43/44, PT-47,
