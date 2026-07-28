@@ -1197,6 +1197,16 @@ session baseline (counters start at 0).
 - PT-20-style uninstall shape at session end: save with the toggle ON, flip
   it OFF (or disable the pack), reload — everything vanilla, no errors.
 
+**Progress (2026-07-28, first sitting):** module enabled LATE in the session
+via Mod Options — **the first-ever live enable of D06, bridge VERIFIED**
+(`SMRFixPack.fixes.DroneOverhaul.status` → `active` right after the toggle;
+boot log correctly showed `inactive` from before the flip). First DroneReport
+(6 hubs, screenshot on file): `unclaimed=0` on every hub, counters
+`vetoed=4 / veto_expired=0 / moonlighted=0` — the healthy signature (all four
+vetoed claims picked up by the near fleet inside the strike window);
+`moonlighted=0` consistent with the one saturated hub (1078: 24 drones,
+0 idle) having no unclaimed work for neighbors to take.
+
 `Result (near fleet claims near work?):` _____________________________________________
 
 `Result (counters healthy? vetoed/expired/moonlighted):` _____________________________________________
