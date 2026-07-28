@@ -709,7 +709,16 @@ un-run, section stays.**
 5. Hover Morale on a colonist with high **Health** or **Sanity**.
    - **EXPECTED:** those bonus rows are untouched.
 
-`Result (high-Comfort row gone / low-Comfort row kept / Health+Sanity intact?):` _____________________________________________
+`Result (high-Comfort row gone / low-Comfort row kept / Health+Sanity intact?):`
+**PASS all three — 2026-07-28, live colony. High-Comfort colonist (Hugo
+Fifth, Health/Sanity/Comfort all ≥ high): tooltip listed ONLY "+5 (Health)"
+and "+5 (Sanity)" — no phantom Comfort bonus — and summed exactly (40 base
++ 5 + 5 = 50 title). Low-Comfort negative (Obi Jetson, Comfort driven to 0
+via the ChangeComfort console line, reason logged in the stat tooltip):
+"I can't live like this -10 (Comfort)" STILL listed — the real penalty
+kept, fix not over-broad — alongside "+5 (Health)" and "Severely stressed
+-10 (Sanity)", proving both directions of the other stats intact. F20 →
+tested; only the F21 train-waiting read remains.**
 
 **F21 — Train waiting time.**
 6. Pick a station where colonists queue for a while. Select a colonist about to

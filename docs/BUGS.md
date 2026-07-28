@@ -32,7 +32,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | fixed* |
 | F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | tested — PT-43 F19 read PASS 2026-07-28 (MP caption ≈ bars, Food sane) |
-| F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | fixed  |
+| F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | tested — PT-43 F20 read PASS 2026-07-28, all three checks (entry) |
 | F21 | Train travel-time penalty includes station waiting       | P2  | med  | fixed  |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | fixed  |
@@ -422,7 +422,7 @@ sums the two raw accumulators before scaling once, which is what the plotted ser
 (it passes raw values with `scale = const.ResourceScale`).
 Probe: `GraphConsumedCaption` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
-### F20 — Morale tooltip shows unapplied +Comfort bonus  `[fixed: Code/Fix_MoraleComfortTooltip.lua]`
+### F20 — Morale tooltip shows unapplied +Comfort bonus  `[tested: Code/Fix_MoraleComfortTooltip.lua — PT-43 F20 read PASS 2026-07-28: high-Comfort colonist showed NO phantom "Living in luxury" row with rows summing to the title (base 40 + 5 Health + 5 Sanity = 50 exact); a Comfort-0 colonist (driven low via ChangeComfort console line, logged reason) still showed the REAL penalty row "I cant live like this -10 (Comfort)" alongside +5 Health / -10 Sanity — penalty kept, fix not over-broad, Health/Sanity rows intact in both directions]`
 `Lua\Units\Colonist.lua:2983-3007` (tooltip) vs :3963-3969 (`UpdateMorale`, bonus
 deliberately commented out: "remove for comfort policy to work") — tooltip still lists
 "Living in luxury +5" for Comfort ≥ 70; listed effects don't sum to shown Morale. **Fix:**
