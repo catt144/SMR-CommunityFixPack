@@ -38,9 +38,10 @@ leg, all committed):
   mechanism live (Meteors thread hangs INSIDE shipped `MeteorsDisaster`,
   restarted repeatedly); sibling disaster threads may be wedging invisibly.
   Board item below; evidence + plan on the F78 entry.
-- **Map-switch console-death repair BUILT** (TestKit
-  `OnMsg.CurrentMapChangeDone` re-assert) — **VALIDATE FIRST THING**: switch
-  to the asteroid, press Enter. Details in the console facts below.
+- **Map-switch console-death repair VALIDATED 2026-07-28 (next sitting):**
+  the console now survives Mars↔asteroid switches (TestKit
+  `OnMsg.CurrentMapChangeDone` re-assert). Details in the console facts
+  below.
 - New hard-won facts recorded: the **class-flattening runtime corollary**
   (runtime instrumentation must target the LEAF class; STATUS Key facts),
   the **console-death-on-map-switch bug + recovery**, and the
@@ -56,11 +57,10 @@ attended sitting, or D06 iteration decisions (user decision, knobs first).
 change. **Session-start sequence (in order, ~2 min):**
 1. Game relaunched fresh (the F68 repair + both TestKit repairs only exist
    on disk until then).
-2. **Console-repair validation:** switch to the asteroid map, press Enter —
-   console MUST open (if not: save/reload workaround stands, note the FAIL,
-   live instrumentation goes on the queue).
-3. Re-arm `SMRTest.Log.AutoCargo(true)` (runtime-only; now works on real
-   landers — no console taps needed).
+2. ~~Console-repair validation~~ **DONE 2026-07-28: VALIDATED** (console
+   survives map switches; workaround retired).
+3. Re-arm `SMRTest.Log.AutoCargo(true)` AND `SMRTest.Log.CargoReady(true)`
+   (runtime-only; both leaf-class now — no console taps needed).
 4. Fresh `SMRFixPack.DroneReport` baseline (D06 counters reset every launch).
 The user's stated next goal: **close out the asteroid section** — un-run
 there: PT-16 (F67 empty launch + F69 return fuel — the F69 half wants an
@@ -264,9 +264,9 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   completion signal, map.lua:372/:404 — re-asserts gate + shortcuts after a
   1s settle; no auto-open on switches; the pre-existing
   InGameInterfaceCreated re-assert demonstrably did NOT cover this).
-  VALIDATION PENDING: first thing next sitting, switch to the asteroid and
-  press Enter — if the console still dies, the save/reload workaround stands
-  and the teardown needs live instrumentation.** If only the ECHO is gone
+  VALIDATED 2026-07-28 next sitting: console opened normally after repeated
+  Mars↔asteroid switches across a full live session — the workaround is
+  retired.** If only the ECHO is gone
   but typing works, the lighter recovery is `ShowConsoleLog(true)` blind
   (uiConsoleLog.lua:88).
 - **Runtime console wrappers must target the LEAF class** (STATUS engine
