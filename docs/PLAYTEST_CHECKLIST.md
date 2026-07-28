@@ -875,7 +875,15 @@ aboard and some free space, parked near it.
      30000, true)`. Full trail on the F76 entry.
 4. Check the log for `[CommunityFixPack] RocketInteractGuard: applied`.
 
-`Result (trade/refugee rocket refused?):` _____________________________________________
+`Result (trade/refugee rocket refused?):` PASS — 2026-07-27 (user, landed TRADE
+rocket): "it ignores it completely[,] it treats it like normal terrain and
+drives right through it" — no Load/Unload prompt, the click was a plain move
+order, no transfer. Exactly the EXPECTED refusal. (Cosmetic aside, not F74's
+scope: the rover clips through the landed rocket's model while driving past —
+possible missing obstruction footprint on Universal event rockets, noted only.)
+Refugee rocket not separately exercised (same class family + same guard, probe-
+verified). **Open: the step-2 route check** (rocket as route source/dest must be
+unpickable).
 
 `Result (control test — player rocket + depot still work?):` _____________________________________________
 
