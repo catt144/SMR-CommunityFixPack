@@ -221,6 +221,34 @@ at the declaring class (F64 apply-check lesson applies).
   there is double — a claiming drone pairs the supply from ITS OWN hub's queues, so a
   far claim often means a far DEPOT too (two long legs). If live data shows the
   delivery leg dominates, that's the v2 demand filter or a PickUp-scoped claim veto.
+**Registration-guards audit (2026-07-28, user question — what vanilla does and
+doesn't guarantee, and what H hardens):**
+* Vanilla's out-of-range guard is geometry at CONNECT TIME ONLY, and it lives in the
+  two search paths (`FindTaskRequesters` hub-side, `FindDroneNodes` building-side) —
+  NOT in the API: `TaskRequester:AddCommandCenter` accepts any center
+  (`CommonLua\TaskRequest.lua:147-160`, only `accept_requester_connects` checked).
+* **Dome-inherit hole:** an in-dome building copies the DOME's `command_centers`
+  wholesale with no per-building distance check
+  (`ConnectToBuildingCommandCenters`, `_TaskRequest.lua:263-271`) — a hub clipping
+  one edge of a large dome holds requests for EVERY building in it, including ones
+  outside its circle. H's rank measures hub distance to the BUILDING itself, so for
+  filtered requests H quietly repairs this.
+* **Reach hole:** nothing aligns registration with `DroneRestrictRadius` (100 hexes
+  around the hub) — a post-SignalBoosters extender CHAIN can register buildings the
+  hub's drones cannot legally reach. H tier-0/escalation additionally EXCLUDES any
+  hub farther than DroneRestrictRadius (with margin) from the building, neutralizing
+  the registered-but-unreachable pathology for filtered requests as a side effect.
+* **Battery:** no battery-vs-trip-length guard exists anywhere in vanilla — Idle
+  checks only the emergency threshold BEFORE seeking work (`Drone.lua:608-610`); a
+  claim by a dying drone is recovered (not prevented) when the battery command
+  switch runs the destructors and releases the request. H/A do not change this;
+  their distance bounds merely correlate claims with feasible trips.
+* **Extenders hold nothing** (re-confirmed for this audit): an extender is a
+  `DroneNode`, not a `TaskRequestHub` — no queues, no drones, absent from every
+  request structure; both connect directions resolve to the uplink HUB. It is a
+  registration-footprint booster plus attached recharge stations
+  (`Drone.lua:2341-2345`), nothing more — so every option in this document
+  correctly targets hubs only.
 **Feasibility: HIGH** — one class-method replacement + a watchdog + a coverage-rank
 helper (extender-aware per ground rule 8, cached per building with TTL; connect-time
 code, not a hot path).
