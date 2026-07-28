@@ -2556,6 +2556,29 @@ on the wrong map); check the sibling disaster threads for the same shape;
 (2) attended: console heartbeat taps on the sibling threads +
 `SMRFixPack.MeteorsWatchdogCheck()` / `SMRFixPack.MeteorsBeat` reads at a
 stall moment; (3) fix decision per FIX_POLICY once the stall line is known.
+**TRACE DONE (2026-07-28 game-free, mid-sitting): PRIME SUSPECT ISOLATED.**
+`MeteorsDisaster`'s final wait loop (`Meteors.lua:238-241`) runs
+`table.validate(spawned)` — but `spawned` holds plain DESCRIPTOR tables
+(`{meteor=obj, start=pt, pause=n}`, built by `SpawnMeteor` at `:109`), not
+the meteor objects. The check the code needs is on `descr.meteor`. If the
+C-side `table.validate` leaves non-object entries intact (its documented
+sibling `table.validate_map` explicitly does, `CommonLua\LuaExportedDocs\
+Global\table.lua:319`), `#spawned` can NEVER reach zero and the thread
+spins on the 3s `WaitMsg` tick forever after its FIRST strike — matching
+the watchdog exactly (phase `striking`, alive-but-stuck, silent 183h,
+re-wedges after every restart; the meteors themselves fall in independent
+`fall_thread`s at `:481-503`, so the first strike may even land visibly
+while the scheduler never returns). **One-line live discriminator (run
+next session):** `*r local t = { {meteor=1} } table.validate(t)
+print("validate kept:", #t)` — `1` = confirmed (the loop is statically
+un-exitable; fix = full replacement of the global `MeteorsDisaster`, F12
+precedent, with `table.validate(spawned, function(d) return
+IsValid(d.meteor) end)`); `0` = hypothesis dead, fall back to live console
+taps on `SpawnMeteor`/`PlayStartMeteorStormFX` to bracket the stall. Note:
+only Meteors.lua uses `table.validate` among the disaster files (grep
+2026-07-28) — the sibling threads do NOT share this defect, so the
+no-weather-at-all half of this report still needs its own trace (dust
+storms/devils/cold waves/rains; separate leg).
 Cross-refs: F02 (the scheduler fix + watchdog), PT-01 (the passive watch
 that caught this — record the catch on its line when the checklist is next
 touched).
