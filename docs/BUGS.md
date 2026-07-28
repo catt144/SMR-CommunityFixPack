@@ -1683,6 +1683,16 @@ in-game from the build seat, and for a change that is by this entry's own verdic
 defect. It needs a design decision (what threshold? which resources? what interaction with
 Automated Mode?) plus a playtest before it is written.
 
+**UI research fact (found live 2026-07-27 late, user asked where auto-export
+went):** the Automated Mode toggle is HIDDEN — not disabled — on any rocket
+without an assigned destination: `UIToggleAutoMode_Update` gates
+`SetVisible` on `arrival_loc AND IsRocketLanded()` (+ IsAutoModeEditable =
+player-controlled + destination flight policy allows automation,
+`UniversalRocket.lua:2259-2264, :1826-1833`). So the vanilla replacement
+automation is invisible in exactly the parked-no-destination state where the
+original's auto behaviors used to act — strengthening this module's rationale,
+and a constraint for the export-half build: the module must act (like the fuel
+half) WITHOUT the vanilla automation UI being reachable in that state.
 **Design decision (user, 2026-07-26): the export half MATCHES THE ORIGINAL GAME —
 no invented thresholds or knobs.** The module exists because the original had this
 behavior and Relaunched redesigned it away; fidelity to the original is the whole
