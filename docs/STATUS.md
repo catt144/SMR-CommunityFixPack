@@ -83,6 +83,15 @@ one-line summary here:
   **User's release warning, recorded: this WILL draw false bug reports against
   the pack** — MOD_DESCRIPTION carries a draft-note for a "known vanilla
   issue" explainer (D02 precedent). Full forensics on the F76 entry.
+  **Escalations (same day, later):** the multi-resource UNLOAD surface confirmed
+  by play; environment pinned (fullscreen 3840×2160, UI Scale ~80-85%); and the
+  broken picker can **HARD-LOCK the UI** (every MouseEvent erroring on a
+  destroyed window in the modal/anim chain, `XWindow.lua:1154` — Alt-F4
+  required, session lost). Live prototyping also established the dialog's own
+  scale is applied AFTER Init (Init-time anchor conversion is a no-op — the
+  repair belongs in/around UpdateLayout). **Process decision: no further live
+  UI-internals prototyping on play sessions; F76 repair is an attended
+  game-free leg task.**
 - **PT-39 (2026-07-27, later): F74 → `tested`.** A landed TRADE rocket was
   fully refused by the RC Transport cursor ("treats it like normal terrain")
   AND by the route path — the route endpoint fell back to a ground position

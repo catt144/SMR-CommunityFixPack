@@ -2197,6 +2197,31 @@ probe + playtest item on a scaled display.
 the pack** — "transports can't load from depots" reads as a mod bug to anyone testing
 with the pack installed. MOD_DESCRIPTION needs a "known vanilla issue" explainer (D02
 precedent) whether or not the fix ships in the same release.
+**Later same day — three escalations from the continued live session:**
+* **Unload surface CONFIRMED by play** (was predicted above): with multiple resource
+  types aboard, the unload click "just makes the sound and nothing unloads" — the
+  multi-resource unload path opens the same broken picker; single-type unloads bypass
+  it and work.
+* **Environment pinned:** fullscreen 3840×2160, UI Scale slider ~80-85% (screenshot on
+  file). No windowed resize involved.
+* **The broken picker can HARD-LOCK the UI (Alt-F4 required) — severity carries a
+  data-loss vector.** During a live-prototype attempt (an `Init` post-wrapper
+  re-anchoring `align_pos`), the session locked with every mouse event erroring:
+  `Error calling Lua function "MouseEvent" from C: CommonLua/X/XWindow.lua:1154:
+  attempt to index a boolean value (local 'desktop')` — `XWindow:SetVisibleInstant`
+  running on a DESTROYED window (`self.desktop == false`) still referenced by the
+  modal/animation chain (the picker's open/close interpolations +
+  `SetModal`/`RestoreModalWindow` teardown racing). Whether the wrapper contributed or
+  only witnessed it, the teardown fragility is real.
+* **Prototype learning that redirects the fix:** at `Init` time the dialog's own
+  `self.scale` still reads `(1000,1000)` — the actual UI scale is applied by the
+  parent AFTER Init — so converting the anchor in `Init` is a NO-OP. The repair must
+  convert in/around `UpdateLayout` (use-time), or anchor from a value already in the
+  layout's space. Anchor captured correctly: `(1731,665)` = true mouse on the
+  4K desktop.
+**Process decision: NO further live UI-internals prototyping on play sessions** — the
+F76 repair is an attended, game-free build-leg task (MarsDebug or throwaway retail
+session) where a lockup costs nothing.
 
 ## Candidates under investigation
 

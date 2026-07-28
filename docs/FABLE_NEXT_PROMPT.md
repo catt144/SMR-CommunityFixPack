@@ -129,10 +129,15 @@ always safe; A/B legs need the game to be free).
   side-by-side when it ships.
 - **F48** per PT-37's gate above.
 - **F76 (NEW 2026-07-27, wave-6 candidate): depot resource picker off-cursor +
-  unclickable** — vanilla P1 found live in PT-39 setup; full forensics + fix
-  sketch (anchor-space conversion in `ResourceItems:Init`) on the entry. Still
-  to capture from the user: `terminal.desktop.box`/`scale`, resolution + UI
-  scale. MOD_DESCRIPTION false-report explainer flagged (draft note in place).
+  unclickable + can HARD-LOCK the UI** — vanilla P1 found live in PT-39 setup;
+  full forensics on the entry. Environment: fullscreen 3840×2160, UI Scale
+  ~80-85%. Key repair facts already learned: the dialog's `self.scale` is
+  applied AFTER Init (anchor conversion in Init is a NO-OP — fix belongs
+  in/around `UpdateLayout`); true mouse anchor was captured correctly; the
+  teardown can leave a destroyed window in the modal/anim chain → every
+  MouseEvent errors (`XWindow.lua:1154`), Alt-F4 required. **Attended
+  game-free leg task — do NOT prototype UI internals on live play sessions
+  again.** MOD_DESCRIPTION false-report explainer flagged (draft note).
 - MarsDebug attended `[install]` pass for the wave-4/5 fixes (SetupOnly mode;
   procedure + modal-dialog warning in STATUS's wave-3 QA section).
 - Release checklist (STATUS): statuses to `tested` as reports come in, fpk
