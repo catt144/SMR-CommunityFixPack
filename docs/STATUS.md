@@ -45,11 +45,22 @@ gate is its veto variant — reversible and orphan-proof, chosen for v1).
   hauling all exempted by design; the claim gate cannot veto player orders
   structurally (FindTask is not on that path); toggling off restores vanilla
   instantly (registration layer untouched).
-- Docs: D06 entry + index row (BUGS), F77 flipped to `fixed` (row + tag),
-  options doc carries the build note, **PT-52 watch-and-judge brief with
-  success/failure signatures and iteration knobs is on the
-  FABLE_NEXT_PROMPT board** — the user expects multiple iterations, knob
-  changes get recorded on the D06 entry.
+- Docs (full pass, same day): D06 entry + index row (BUGS), F77 flipped to
+  `fixed` (row + tag), options doc carries the build note. **PT-52 is a full
+  checklist procedure now** (PLAYTEST_CHECKLIST, optional-modules group):
+  CAN/CANNOT-do lists, Trigger A passive watch, Trigger B controlled off/on
+  A/B demo, Trigger C regression watch, result lines, knob log line.
+  MOD_DESCRIPTION got the player-facing F77 bullet (Buildings & economy) and
+  the "Drone dispatch overhaul — experimental" module block.
+  FABLE_NEXT_PROMPT rewritten post-build (PT-52 centerpiece + assistant
+  briefing notes, 65/70 module counts, D06 read-list pointers);
+  DRONE_INVESTIGATION_PROMPT retired/deleted. `DroneReport` upgraded to
+  print ON-SCREEN (ConsolePrint) AND to the log — the ListFixes lesson,
+  applied before it bit.
+- The user expects multiple iterations across sittings; knob changes get
+  recorded on the D06 entry (mechanical, assistant may land same-day);
+  design-level changes (H-v2, registration-H, balancer C) stay user
+  decisions per the options doc.
 - Testing debt, stated: no TestKit probes for the module yet (attended
   playtest is the v1 validation instrument; probes come with the iteration
   that stabilizes the design).
@@ -409,21 +420,19 @@ one-line summary here:
   breakthroughs** (`Cheats.lua:84` discoverable-or-discovered gate) — grant
   directly via `UIColony:SetTechResearched("<Id>")`; PT-27's Biorobots route
   corrected to `ThePositronicBrain` in the same pass.
-**ONE live prompt (updated 2026-07-28 — drone static leg done):**
+**ONE live prompt (updated 2026-07-28 — post-D06 build):**
 - `docs/FABLE_NEXT_PROMPT.md` — playtest-standby assistance: the user plays,
   the session drives console instrumentation and processes results live.
-  Carries the queued A/B re-verify as pre-flight, the F76 avoidance rules
-  (now incl. the dozer surface) and the attended-sitting spec. The build
-  queue is EMPTY; the board now also carries the drone R1-R7 starvation
-  reads and the F77/locality USER-DECISION item.
-- `docs/DRONE_INVESTIGATION_PROMPT.md` — **COMPLETED 2026-07-28** (the
-  game-free static leg it commissioned): verdict + full trace + R1-R7
-  instrumentation plan recorded on the BUGS DroneControl bullet; F77 filed.
-  Only the LIVE half remains (console reads at a starvation moment), and
-  that rides the playtest prompt's board — the kickoff prompt is spent.
+  Rewritten 2026-07-28: PT-52 (D06 overhaul watch-and-judge) is the board
+  centerpiece with assistant-side briefing notes; carries the queued A/B
+  re-verify as pre-flight (module counts moved to 65/70 — probe numbers
+  unchanged), the F76 avoidance rules, and the attended-sitting spec.
 - Retired prompt files (each done and deleted/superseded):
   ~~OPUS_BUILD_PROMPT~~, ~~FABLE_QA_PROMPT~~ (2026-07-25),
-  ~~FABLE_PLAYTEST_PROMPT~~ (merged into the one live prompt).
+  ~~FABLE_PLAYTEST_PROMPT~~ (merged into the one live prompt),
+  ~~DRONE_INVESTIGATION_PROMPT~~ (2026-07-28 — its verdict, F77, and the
+  D06 build all landed; the R1-R7 forensics it produced live on the BUGS
+  DroneControl bullet, and PT-52 carries the live half).
 BUGS.md is
 the canonical defect tracker, FIX_POLICY.md the patching rules, WORKFLOW.md the
 dev/test/release process, RESEARCH.md the lead catalog (incl. ChatGPT dossier

@@ -236,9 +236,18 @@ if not install_error then
 end -- install guard
 
 -- Part 3: telemetry (always available, read-only) ----------------------------
+-- Output goes BOTH on-screen (ConsolePrint, so a live playtest sees it
+-- immediately — the ListFixes lesson) and to the log (ModLog, so it is
+-- retrievable evidence after FlushLogFile()).
 local function say(fmt, ...)
 	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
+	local cp = rawget(_G, "ConsolePrint")
+	if cp then cp(msg) end
+	if rawget(_G, "ModLog") then
+		ModLog((msg:gsub("%%", "%%%%")))
+	elseif not cp then
+		print(msg)
+	end
 end
 
 function SMRFixPack.DroneReport()

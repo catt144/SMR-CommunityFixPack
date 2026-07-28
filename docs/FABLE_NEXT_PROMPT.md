@@ -1,30 +1,43 @@
-# Fable continuation prompt — PLAYTEST STANDBY (rewritten 2026-07-27 night, post-Group-8 sitting 1)
+# Fable continuation prompt — PLAYTEST STANDBY (rewritten 2026-07-28, post-D06 build)
 
 Paste everything below into a fresh Claude Code session (Fable). This is the
-playtest prompt; a **separate** game-free investigation prompt
-(`docs/DRONE_INVESTIGATION_PROMPT.md`, drone task assignment / Hub Extender)
-may run in another session — **start with `git log --oneline -5` + `git pull`**
-so you build on whatever the other thread landed.
+ONE live prompt (the drone investigation prompt is retired — its verdict and
+build landed). **Start with `git log --oneline -5` + `git pull`** in case
+another session ran since this prompt was written.
 
-Build state: **68 registered modules, 64/68 active by default (4 opt-in via
-Options → Mod Options — D05, `tested`), 72 probes, 16 fixes + 2 modules (D04,
-D05) carry playtest status, everything pushed.** Last verified legs 2026-07-27
-(logs 21.20.32 / 21.21.51 / 21.34.28: baseline 1/57/14/0, fixed 58/0/14/0,
-opt-in 61/0/11/0 at 67/68). The 2026-07-27 late sitting: D05 built+tested
-(PT-51 archived), PT-50 PASS in full (D04 `tested`), PT-49 core behavior
-passing + row reposition verified, ClassicRockets fuel half play-verified,
-F76 dozer surface extension filed, drone-assignment investigate item stocked
-with live evidence. **The build queue is EMPTY** — new work only comes from
-playtest FAILs, live findings, the F76 attended sitting, or the drone
-investigation's verdict (user decision).
+Build state: **70 registered modules, 65/70 active by default (5 opt-in via
+Options → Mod Options — D05, `tested`), 72 probes, everything pushed.**
+NEW since the last sitting (2026-07-28, all committed):
+- **D06 `Opt_DroneOverhaul` core v1 BUILT** (user-greenlit): closest-fleet-
+  first claim gate + repair moonlighting + `SMRFixPack.DroneReport()`
+  telemetry. Opt-in toggle "Drone dispatch overhaul (experimental)".
+  **PT-52 is this sitting's centerpiece** — full procedure in
+  `PLAYTEST_CHECKLIST.md`, briefing notes on the board below.
+- **F77 `Fix_ExtenderFlapChurn` BUILT** (default-on): extender working-flaps
+  debounce+coalesce the whole-hub rebuild instead of Idle-kicking the fleet
+  twice per blip.
+- Full design context if anything needs iterating:
+  `docs/DRONE_OVERHAUL_OPTIONS.md` (options A-H, what shipped and why, what
+  the future iterations are — H-v2 demand filter, B full moonlighting,
+  C migration balancer). The investigation trace + R1-R7 console forensics
+  live on the BUGS.md DroneControl bullet ("Not yet swept" section).
+Prior state stands: D05 tested (PT-51), D04 tested (PT-50), PT-49 core
+passing, F76 dozer surface filed. **The build queue is EMPTY** — new work
+comes only from playtest FAILs, live findings, the F76 attended sitting, or
+D06 iteration decisions (user decision, knobs first).
 
-**PRE-FLIGHT (game-free, ~5 min, do BEFORE the user starts playing):** an A/B
-pair re-verify is QUEUED — two mechanical repairs landed after the last pair
-(the ListFixes nil-detail crash repair and the D03 policy-row reposition;
-trails on the D05/D03 entries). Expected numbers UNCHANGED: baseline
-1/57/14/0, fixed 58/0/14/0. Harness facts below. If the user is already at
-the keyboard wanting to play, ask whether to run it first or at the session
-end — it must land before the next release-facing milestone.
+**PRE-FLIGHT (game-free, ~5 min, do BEFORE the user starts playing):** the
+QUEUED A/B pair re-verify is now MORE important — since the last verified
+pair, two mechanical repairs (ListFixes nil-detail, D03 row reposition) AND
+two new code files (D06 core, F77) landed. **Expected PROBE numbers
+unchanged** (no new probes yet — stated testing debt): baseline 1/57/14/0,
+fixed 58/0/14/0; module counts shift to **65/70 active** in the fixed leg
+(ExtenderFlapChurn active, DroneOverhaul inactive-until-toggled; the OLD
+expectations said 64/68). Watch the fixed-leg log specifically for
+`ExtenderFlapChurn: applied` and `DroneOverhaul: inactive (opt-in module...)`
+— an `error` status on either is a same-day repair item. Harness facts
+below. If the user is already at the keyboard wanting to play, ask whether
+to run it first or at session end.
 
 ---
 
@@ -53,14 +66,20 @@ Your jobs, in the order they usually come up:
    (identity below), pushed. Docs never lag play.
 
 **First, read (in order) from `C:\Dev\SMR-BugFixPack`:**
-1. `docs\STATUS.md` — the "Mod Options build leg" section AND the whole
+1. `docs\STATUS.md` — the "D06 build leg" section (newest) AND the whole
    engine-facts list ("Key technical facts").
 2. `docs\PLAYTEST_CHECKLIST.md` — ground rules, the verified command table,
-   the open board, the reporting protocol.
-3. `docs\BUGS.md` — the entries the sitting touches (D02 for PT-48; D03 for
-   PT-49's tail; F65 for PT-40; **F76 before ANY depot-picker interaction**;
-   F48 before PT-37).
+   **the PT-52 procedure** (what the D06 module CAN and CANNOT do — judge it
+   only on the CAN list), the reporting protocol.
+3. `docs\BUGS.md` — the entries the sitting touches (**D06 + F77 for PT-52**;
+   D02 for PT-48; D03 for PT-49's tail; F65 for PT-40; **F76 before ANY
+   depot-picker interaction**; F48 before PT-37). For any drone anomaly, the
+   DroneControl bullet in "Not yet swept" carries the full assignment-
+   machinery trace and the R1-R7 paste-ready console forensics.
 4. `docs\FIX_POLICY.md` — binding rules for any code you write.
+5. Only if D06 needs design iteration (not just knob tuning):
+   `docs\DRONE_OVERHAUL_OPTIONS.md` — the shipped core is the veto variant of
+   option H + option A; the upgrade paths (H-v2, B, C) are speced there.
 
 Game source (read-only, NEVER modify):
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`.
@@ -72,6 +91,14 @@ silent.
 
 ## The board (user picks; suggested order)
 
+- **PT-52 — D06 Drone dispatch overhaul + F77, FIRST SITTING — the
+  centerpiece.** Full procedure (CAN/CANNOT lists, Triggers A/B/C, result
+  lines) is the PT-52 section of `PLAYTEST_CHECKLIST.md`; briefing notes
+  below the board. It runs as a WATCH-AND-JUDGE layer across the WHOLE
+  session while other PT items are played — enable the toggle at session
+  start, run `SMRFixPack.DroneReport` as baseline, keep half an eye on
+  drones all session. Not a 15-minute test; the user expects multiple
+  iterations across sittings.
 - **PT-48** AcknowledgedWarnings (D02) — break two buildings so they won't
   self-heal, dismiss the warning: acked buildings stay quiet; a THIRD breakage
   warns promptly and lists only itself; repair + re-break re-warns; stamp
@@ -97,47 +124,43 @@ silent.
   PT-46 tail (F49(d) cap, F49(a) palette), PT-20/21/22 (cross-cutting, last).
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.
-- **PT-52 — D06 Drone dispatch overhaul, FIRST SITTING (built 2026-07-28,
-  user-greenlit; this is a WATCH-AND-JUDGE item across the whole session,
-  not a 15-minute test — expect multiple iterations across sittings):**
-  * **Setup:** enable "Drone dispatch overhaul (experimental)" in Options →
-    Mod Options (D05 surface; live both directions). `SMRFixPack.ListFixes()`
-    should show `DroneOverhaul [active]` and `ExtenderFlapChurn [active]`
-    (the F77 debounce is a default-on fix riding along — vetoable via
-    `SMRFixPack_Disabled` if a confound is suspected).
-  * **The measuring stick:** `SMRFixPack.DroneReport()` in the console —
-    per-hub working/drones/idle/broken, lap load class, queue depths,
-    unclaimed work count, extender chains, and the module counters
-    `vetoed / veto_expired / moonlighted`. Run it at session start (baseline)
-    and at every suspicious moment; the counters are the ground truth for
-    whether the module is actually intervening.
-  * **What SUCCESS looks like:** repairs near an idle cluster get claimed by
-    that cluster within seconds (watch the wrench icons); `vetoed` climbs
-    while `veto_expired` stays LOW (near fleets are actually taking the
-    yielded work — a HIGH expired share means the strike window is too short
-    or near fleets can't respond → tune); `moonlighted` > 0 near saturated
-    hubs; no repair ever sits unclaimed longer than vanilla would leave it.
-  * **What FAILURE looks like (watch for):** wrench icons lingering longer
-    than vanilla (veto starving work — the strike cap should make this
-    impossible; if seen, capture DroneReport + the building via R1/R2 reads
-    from the DroneControl bullet immediately); drones ping-ponging between
-    hubs; far fleets going fully idle while work exists (over-suppression);
-    any log error mentioning FindTask/Idle/UpdateUplinkRequesters.
-  * **Iteration knobs** (top of `Code/Opt_DroneOverhaul.lua`; changes take
-    effect on relaunch): STRIKES_MAX/STRIKE_TTL (veto patience),
-    MOONLIGHT_MAX_HEXES (help radius), HUB_MISS_TTL/COVER_CACHE_TTL (scan
-    cadence). Record every knob change + observed effect on the D06 entry.
-  * **Regression watch (shared machinery):** rocket loading/unloading (F50
-    territory — the claim gate exempts rockets by class, but verify drones
-    still service rockets normally), rover fleets (exempted — verify),
-    construction sites (unfiltered — verify swarming still happens), and
-    extender link/unlink UX (F77 defers the rebuild ~2s — coverage updates
-    should feel instant-ish still).
-  * The R1-R7 forensic reads on the DroneControl bullet remain valid and are
-    now also the debug kit for judging the module; R7's controlled repro
-    (hub A + hub B + extender, `CheatMalfunction` in A's yard) is the
-    cleanest A/B demonstration of the claim gate working — run it once with
-    the toggle OFF and once ON, same colony, and compare which fleet answers.
+## PT-52 briefing notes (D06 + F77 — read WITH the checklist's PT-52 section)
+
+The checklist section is the procedure; these are the assistant-side facts:
+- **Setup check:** after the toggle, `SMRFixPack.ListFixes` (log) or the
+  on-screen loop must show `DroneOverhaul [active]` AND
+  `ExtenderFlapChurn [active]` (F77 rides along as a default-on fix —
+  vetoable via `SMRFixPack_Disabled["ExtenderFlapChurn"] = true` pre-load if
+  a confound is suspected).
+- **`SMRFixPack.DroneReport` prints ON-SCREEN (ConsolePrint) AND to the log
+  (ModLog)** — unlike ListFixes, no FlushLogFile dance needed live; the log
+  copy is the evidence trail.
+- **Counter interpretation** (the module's ground truth): `vetoed` climbing +
+  `veto_expired` staying low = near fleets are taking the yielded work
+  (healthy). `veto_expired` ≈ `vetoed` = strike window too short or near
+  fleets can't respond → knob-tune or investigate. `moonlighted` > 0 near
+  saturated hubs. All three flat at 0 with the toggle on = the module never
+  intervenes — either the colony has no overlap contention this session
+  (fine) or something is wrong (check ListFixes status + log).
+- **Starvation is the one theoretical risk the design accepts a window for**
+  (max ~4 far-fleet polls ≈ 10-15s before the veto expires). If a wrench
+  icon ever visibly outlives vanilla expectations: DroneReport + the R1/R2
+  reads on the building IMMEDIATELY, then toggle off and watch whether
+  vanilla clears it. That capture is a same-day knob/logic decision.
+- **Iteration knobs** (top of `Code/Opt_DroneOverhaul.lua`, relaunch to take
+  effect): STRIKES_MAX/STRIKE_TTL (veto patience), MOONLIGHT_MAX_HEXES (help
+  radius), HUB_MISS_TTL/COVER_CACHE_TTL (scan cadence). Record every change
+  + observed effect on the D06 entry. Knob changes are mechanical (assistant
+  may land them same-day, committed); DESIGN changes (H-v2 demand filter,
+  registration-H, balancer C) are user decisions per the options doc.
+- **Scope guards to lean on when diagnosing:** the claim gate cannot touch
+  player orders (FindTask is only called by auto-Idle); rockets, rovers,
+  construction, and all hauling are exempt by class/type; toggling off is
+  instant-and-complete vanilla. If a hauling or construction anomaly shows
+  up, it is NOT this module — investigate it as its own finding.
+- R1-R7 forensics (DroneControl bullet) double as the module debug kit; R7
+  (hub A + hub B + extender + `CheatMalfunction`) is the cleanest off/on
+  demonstration of the claim gate.
 
 ## F76 — READ THIS BEFORE THE USER TOUCHES AN RC TRANSPORT **OR DOZER** (vanilla P1, unfixed)
 
@@ -209,11 +232,14 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   the four opt-ins active (then expect 62/0/10/0-style shifts and document).
   Simplest: run legs with the toggles as-is and compare against the matching
   expectation.
-- **Expected numbers (current, 72 probes, opt-in toggles OFF):** baseline
-  1 PASS / 57 FAIL / 14 SKIP / 0 ERROR; fixed 58/0/14/0 (64/68 active);
-  opt-in (three modules) 61/0/11/0 (67/68); all four toggles on = 62/0/10/0
-  (68/68). Baseline's 1 PASS = FactionFundingCheck canary; the OptionsMenu
-  probe (D05) asserts in every leg and FAILs baseline by design.
+- **Expected numbers (current, 72 probes — none for D06/F77 yet, opt-in
+  toggles OFF):** baseline 1 PASS / 57 FAIL / 14 SKIP / 0 ERROR; fixed
+  58/0/14/0 (**65/70 active** — ExtenderFlapChurn joins the default-on set,
+  DroneOverhaul reads `inactive (opt-in...)`); opt-in (three modules)
+  61/0/11/0 (68/70); all five toggles on = 62/0/10/0 (70/70). Baseline's 1
+  PASS = FactionFundingCheck canary; the OptionsMenu probe (D05) asserts in
+  every leg and FAILs baseline by design. Pre-D06 records said /68 — the
+  denominator moved, the probe numbers did not.
 - Synthetic-map noise unchanged: ~49 Flight.lua `objects_to_mark` errors +
   a few GameInit nil-call lines in BOTH legs; a `[mod] Error in mod … Test
   Kit` line at quit is a shutdown artifact. The MultipleSuns

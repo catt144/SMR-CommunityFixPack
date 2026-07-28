@@ -41,6 +41,12 @@ come back.
   the game. The game has a five-sol "try again" timer for this, but the failure was
   recorded so far in the future that the timer could never fire — so drones quietly
   stopped servicing buildings that were briefly blocked.
+- A Drone Hub Extender losing or regaining power no longer recalls the whole
+  hub's fleet. Every flicker of an extender — brownout, malfunction, repair,
+  even toggling it yourself — made its hub drop and re-scan everything it
+  services, twice, kicking every drone that was en route to anything back to
+  Idle. The rebuild is now bundled into a single short deferred pass, so a
+  dusty night of power cuts doesn't repeatedly paralyze your logistics.
 - Salvaging a farm now removes the oxygen it was giving its dome. Every farm you
   ever removed was still supplying air to that dome forever, and each rebuild
   added another invisible supply on top. Existing phantom oxygen is cleaned out
@@ -363,6 +369,29 @@ generic "multiple wonders" mod walk straight into that bug; this module fixes
 the panel binding at the same time (including panels already dark beside a
 second sun in an existing save). With the module off, the game's one-sun limit
 applies untouched.
+
+**Drone dispatch overhaul — experimental** (`DroneOverhaul`). In a colony with
+overlapping Drone Hub coverage (especially with Hub Extenders), the base game
+happily lets a hub on the other side of the map claim a repair that idle
+drones are parked right next to — task assignment has no idea of distance
+across hubs, first claimant wins, and the near fleet then isn't even allowed
+to help. This module makes dispatch care about proximity:
+
+- **Repair and cleaning jobs go to the closest hub's fleet first.** A farther
+  fleet only steps in if the near one doesn't respond within a few seconds —
+  so a broken-down near fleet never means the job goes undone.
+- **Idle drones pitch in next door.** A drone with nothing to do will take a
+  nearby repair from a neighboring hub whose own drones are all busy.
+- **Your orders always win.** Directly commanding a drone is untouched —
+  the module only steers the automatic assignment.
+- Deliberately untouched: resource hauling, construction sites (multiple
+  fleets swarming a build is good), RC rover fleets, rockets and shuttles.
+- It doesn't move drones between hubs — balancing fleet sizes is still your
+  call; the module just stops distance-blind claims and lets idle neighbors
+  help.
+- Marked **experimental** while it's being play-tuned. Turning it off restores
+  the game's stock behavior instantly and completely, and saves made with it
+  on are unaffected without it.
 
 **Classic rocket behavior** (`ClassicRockets`). This one is not a bug fix, and we
 want to be completely transparent about what it changes and what the game offers

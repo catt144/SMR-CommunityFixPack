@@ -1140,6 +1140,116 @@ row and the uninstall shape.
 
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
 
+## PT-52 — Drone dispatch overhaul · covers **D06 `Opt_DroneOverhaul` core v1 + F77 `Fix_ExtenderFlapChurn`** (built 2026-07-28)
+
+**This is NOT a 15-minute test.** It is a watch-and-judge item that runs in the
+background of the WHOLE session (and future sessions) while other PT items are
+played, plus one controlled A/B demonstration. Expect multiple iterations —
+tuning knobs live at the top of `Code/Opt_DroneOverhaul.lua` (changes need a
+relaunch); record every knob change and its observed effect on the D06 entry.
+
+**What the module CAN do (judge it on these):**
+- Repair and cleaning jobs in OVERLAPPING hub coverage go to the CLOSEST hub's
+  fleet first; a far fleet only serves if the near one doesn't respond within
+  a few of its polls (~10-15s worst case, by the strike cap).
+- Idle drones help a NEIGHBORING hub that is saturated (zero idle drones of
+  its own) with repair/clean jobs within 30 hexes of the drone.
+- `SMRFixPack.DroneReport()` (console, works even with the toggle OFF): per-hub
+  working/drones/idle/broken, lap load class, per-priority queue depths, work +
+  unclaimed counts, extender chains, and the module counters
+  `vetoed / veto_expired / moonlighted`.
+- F77 (default-on fix, separate from the toggle): an extender power flicker /
+  malfunction / repair no longer tears down and rebuilds the whole uplink
+  hub's registration twice — one coalesced rebuild ~2s later instead. Fleet
+  drones no longer ALL kick to Idle on every extender blip.
+
+**What it CANNOT do (do not judge it on these — all deliberate v1 scope):**
+- Resource HAULING (PickUp/Deliver, incl. the maintenance "fetch Electronics
+  from a depot" leg) is untouched — a far drone can still win a delivery.
+  If the delivery leg dominates the pain, that is the H-v2/B iteration
+  (docs/DRONE_OVERHAUL_OPTIONS.md), not a bug in this one.
+- Construction work is untouched (multi-fleet swarming on a site is wanted).
+- RC rover fleets, rockets, shuttles: untouched by design.
+- It does not MOVE drones between hubs (that is option C, the migration
+  balancer) — a chronically under-drone'd hub still needs the player (or a
+  future iteration) to rebalance; the module only redirects CLAIMS and lets
+  idle neighbors help nearby.
+- It cannot override or delay a PLAYER-ordered drone command (structurally —
+  the claim gate sits on FindTask, which only the auto-Idle path calls).
+- Toggling it OFF restores vanilla behavior instantly and completely
+  (registration untouched, no persisted state; saves made with it ON load
+  identically without it).
+
+**Setup:** a colony with ≥2 Drone Hubs with overlapping coverage (the user's
+live colony is ideal — it has the original symptom), extenders present, work
+happening. Enable **Options → Mod Options → "Drone dispatch overhaul
+(experimental)"**. `SMRFixPack.ListFixes` must show `DroneOverhaul [active]`
+and `ExtenderFlapChurn [active]`. Run `SMRFixPack.DroneReport` once as the
+session baseline (counters start at 0).
+
+**Trigger A — passive watch (all session, while playing other PT items):**
+1. Whenever a wrench/malfunction icon appears near parked idle drones, watch
+   who answers. **EXPECTED:** the nearby fleet claims within seconds. Vanilla
+   (the 2026-07-27 screenshots) was: near drones stay Idle, far fleet crawls
+   over.
+2. `SMRFixPack.DroneReport` at every suspicious moment and every ~30 min.
+   **HEALTHY:** `vetoed` climbing while `veto_expired` stays LOW relative to
+   it (near fleets actually take the yielded work); `moonlighted` > 0 if any
+   hub saturates; `unclaimed` per hub not building up.
+   **UNHEALTHY:** `veto_expired` ≈ `vetoed` (strike window too short or near
+   fleets can't respond — raise STRIKES_MAX/STRIKE_TTL or investigate why the
+   near fleet is dead); any hub's `unclaimed` growing over consecutive
+   reports (possible starvation — capture DroneReport + the R1/R2 reads from
+   the BUGS DroneControl bullet on the starving building IMMEDIATELY, then
+   toggle the module off and watch whether vanilla clears it).
+3. **BROKEN looks like:** wrench icons lingering LONGER than vanilla; drones
+   ping-ponging between two jobs or two hubs; a far fleet fully idle while
+   visible work exists beyond the near fleet's capacity; any log error
+   mentioning `FindTask`, `Idle`, `UpdateUplinkRequesters`, or
+   `[CommunityFixPack]`.
+
+**Trigger B — controlled A/B demonstration (10 min, once per iteration):**
+1. Pick (or build) hub A and hub B far apart, with an extender bridging B's
+   coverage into A's yard. Both hubs need idle drones.
+2. Toggle the module OFF. `Platform.cheats = true`, select a building in A's
+   yard, `SelectedObj:CheatMalfunction()`. Watch which fleet answers and how
+   long the wrench lasts. (This reproduces the vanilla far-capture when the
+   race falls that way — it may take a few tries; the R6 claim tap from the
+   BUGS bullet prints the claiming drone's hub if eyes aren't enough.)
+3. Repair, toggle the module ON, repeat on the same building.
+   **EXPECTED:** A's fleet answers every time; `vetoed` ticks up if B's fleet
+   polled first and was held.
+4. Extender flap check (F77): toggle the extender off and on (or let a dust
+   storm brown it out). **EXPECTED:** B's drones do NOT all flash to Idle;
+   coverage through the extender resumes within ~2-3s of the flap settling.
+   **BROKEN looks like:** fleet-wide Idle flash on each flap edge (the fix
+   isn't engaging) or extender coverage permanently lost after a flap
+   (debounce dropped a rebuild — capture the log).
+
+**Trigger C — regression watch (shared machinery; spread across the session):**
+- Rockets: drones still load/unload landed rockets normally (F50 territory —
+  rockets are class-exempt from the claim gate, verify by watching one cargo
+  cycle).
+- Rovers: an RC Commander's drones behave vanilla (exempt).
+- Construction: multiple fleets still swarm a construction site (work type
+  exempt).
+- A dome with in-dome maintenance: repairs still happen (dome-inherited
+  registrations defer to vanilla in the closest-hub computation).
+- PT-20-style uninstall shape at session end: save with the toggle ON, flip
+  it OFF (or disable the pack), reload — everything vanilla, no errors.
+
+`Result (near fleet claims near work?):` _____________________________________________
+
+`Result (counters healthy? vetoed/expired/moonlighted):` _____________________________________________
+
+`Result (A/B demo, which fleet answered off vs on?):` _____________________________________________
+
+`Result (F77 flap: no fleet Idle-flash?):` _____________________________________________
+
+`Result (regressions: rockets/rovers/construction clean?):` _____________________________________________
+
+`Knob changes made + effect:` _____________________________________________
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
