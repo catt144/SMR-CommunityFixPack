@@ -32,9 +32,17 @@ leg, all committed):
   sitting; F77 flap check (Trigger B) still un-run.
 - **TestKit AutoCargo logger repaired** (leaf-class wrap + reads
   `cargo[res].requested`; the old one was structurally blind to landers).
+- **NEW F78 (P1, investigating): the live save has had ZERO disasters in 194
+  sols and no weather at all** — the PT-01 meteor watchdog caught the
+  mechanism live (Meteors thread hangs INSIDE shipped `MeteorsDisaster`,
+  restarted repeatedly); sibling disaster threads may be wedging invisibly.
+  Board item below; evidence + plan on the F78 entry.
+- **Map-switch console-death repair BUILT** (TestKit
+  `OnMsg.CurrentMapChangeDone` re-assert) — **VALIDATE FIRST THING**: switch
+  to the asteroid, press Enter. Details in the console facts below.
 - New hard-won facts recorded: the **class-flattening runtime corollary**
   (runtime instrumentation must target the LEAF class; STATUS Key facts),
-  the **console-echo death + `ShowConsoleLog(true)` recovery**, and the
+  the **console-death-on-map-switch bug + recovery**, and the
   first-landing-is-manual lander behavior (reserved sites auto-land after).
 Prior state stands: D05 tested (PT-51), D04 tested (PT-50), F76 dozer
 surface filed. **The build queue is EMPTY again — the map-switch
@@ -44,13 +52,23 @@ Enter).** New work comes only from playtest FAILs, live findings, the F76
 attended sitting, or D06 iteration decisions (user decision, knobs first).
 
 **NO PRE-FLIGHT NEEDED** — the A/B pair above is fresher than every code
-change. The user's stated next goal: **close out the asteroid section** —
-un-run there: PT-16 (F67 empty launch + F69 return fuel — the F69 half wants
-an asteroid with NO drones/hub, use a fresh one), PT-19 (F73 shelter reflex —
+change. **Session-start sequence (in order, ~2 min):**
+1. Game relaunched fresh (the F68 repair + both TestKit repairs only exist
+   on disk until then).
+2. **Console-repair validation:** switch to the asteroid map, press Enter —
+   console MUST open (if not: save/reload workaround stands, note the FAIL,
+   live instrumentation goes on the queue).
+3. Re-arm `SMRTest.Log.AutoCargo(true)` (runtime-only; now works on real
+   landers — no console taps needed).
+4. Fresh `SMRFixPack.DroneReport` baseline (D06 counters reset every launch).
+The user's stated next goal: **close out the asteroid section** — un-run
+there: PT-16 (F67 empty launch + F69 return fuel — the F69 half wants an
+asteroid with NO drones/hub, use a fresh one), PT-19 (F73 shelter reflex —
 the Douglasjay MicroG habitat with 9 residents is ideal), PT-31 (F70 Edit
 Payload, Mars side, manual mode), PT-33 (F72 — needs EXACTLY one lander,
 manual, no destination; the user has exactly one: Sphinx #2), plus the PT-17
-attended capacity-edge re-run above.
+attended capacity-edge re-run and the **F78 disaster-silence investigation**
+(both on the board below).
 
 ---
 
