@@ -10,7 +10,67 @@ prompt.** 72 probes; last legs clean: baseline 1/57/14/0 · fixed 58/0/14/0
 (64/68) · opt-in 61/0/11/0 (67/68); **an A/B re-verify is QUEUED as the next
 session's pre-flight** (two mechanical repairs landed after the last pair —
 expected numbers unchanged). See "Mod Options build leg" below; the earlier
-same-day build leg and the playtest-marathon record follow).
+same-day build leg and the playtest-marathon record follow). **2026-07-28:
+the drone task-assignment static investigation leg is DONE — see the section
+directly below.**
+
+## Drone task-assignment investigation leg — Fable, 2026-07-28 (game-free, docs-only): verdict in
+
+The `DRONE_INVESTIGATION_PROMPT.md` kickoff, executed as specced (no game, no
+loadable-code edits, Src read-only). Full verdict + trace + instrumentation
+plan live on the BUGS "Not yet swept" DroneControl bullet; **F77** filed
+(index row + entry). Headlines:
+
+- **Architecture verdict: working-as-coded, but with NO cross-hub locality
+  anywhere.** Assignment is PULL and own-hub-only — `Drone:Idle`
+  (`Drone.lua:564-641`) polls `command_center:FindTask(self)` (`:621`), the
+  single FindTask call site in Src; the match itself is the C-side
+  `Request_FindTask` over the hub's own queues (ordering/distance policy
+  engine-internal — recorded as unverifiable from Lua). A building in overlap
+  registers with EVERY covering hub and its (shared, C-side) request objects
+  sit in every such hub's queues; the claim is first-poller-wins at command
+  start and **held through the whole approach** (`Drone:Work`,
+  `Drone.lua:898-924`); maintenance repair requests are **max_units = 1**
+  (`RequiresMaintenance.lua:82`), so one far drone locks out a fleet parked
+  next to the job. No handoff, stealing, or rebalancing exists anywhere.
+- **Extender transparency CONFIRMED** (the user's hypothesis): both connect
+  directions register the far HUB itself on the building
+  (`DroneHubExtender.lua:156-160` building-side recursion;
+  `DroneControl.lua:315-325` hub-side recursion) — extender-mediated coverage
+  is indistinguishable from native in every match structure. Extenders do NOT
+  extend drone movement: `const.DroneRestrictRadius` (100 hexes-worth) is
+  anchored on the HUB position (`Drone.lua:227-230`, `_GameConst.lua:71`);
+  post-SignalBoosters a 2-extender chain can register buildings a hub's
+  drones can never legally reach (suspected F55-feeder, engine-side check —
+  flagged for live).
+- **NEW F77 (defect, provable):** every extender working transition (power
+  blip, malfunction, repair, toggle — both edges) triggers a FULL
+  disconnect+reconnect of the entire uplink hub's requester set
+  (`DroneHubExtender.lua:171-178` → `DroneControl.lua:441-450`), Idle-kicking
+  every drone en route to any connected building (`:720-729`) and burning
+  O(B×D) + queue-rebuild work per flap. Reproduces both observed halves on
+  its own. Fix sketch: debounce wrapper (user decision).
+- **The live starvation stays two-hypothesis** until one attended sitting:
+  (a) registration gap (starving buildings outside hub 2608's circle, inside
+  the far hub's extender-stretched coverage — pure design) vs (b) claim
+  lockout (in both queues, far fleet wins the claim race every chunk). The
+  banked `target:0` read is consistent with both. **R1-R7 console reads** (on
+  the bullet; sandbox-verified, incl. a `RequestAssignUnit` claim tap — no
+  file-local alias in Drone.lua, so a console global wrapper is seen) settle
+  it; R7 is the hub-A/hub-B/extender repro with `CheatMalfunction`.
+- **Performance answer (the user's second observation):** per-idle-drone
+  FindTask polls scan the hub's full queue set every ~3s and overlap
+  multiplies queue content (k-hub overlap ≈ k× colony-wide scan work); the 1s
+  empty-queue throttle can't engage while any drone holds unreachable-cache
+  entries (`Drone.lua:630`); reconnect storms (radius change, F77 flaps, and
+  `OnMsg.DepositsSpawned` reconnecting EVERY hub at once,
+  `DroneHub.lua:188-199`) are O(B×D)-grade each. Range × drones × requests,
+  exactly as reported.
+- **Nothing was built** (per spec). Build decisions for the user: F77
+  debounce (plain repair), and the locality levers — cross-hub idle-pull
+  pre-wrap on `Drone:Idle` for (a) vs near-idle claim veto on
+  `Drone:Work`/`PickUp` for (b) — which are assignment-POLICY changes
+  (D-item territory). All sketches + risk statements on the bullet/F77 entry.
 
 ## Mod Options build leg (D05) — Fable, 2026-07-27 late: in-game enable surface for the optional modules
 
@@ -298,17 +358,18 @@ one-line summary here:
   breakthroughs** (`Cheats.lua:84` discoverable-or-discovered gate) — grant
   directly via `UIColony:SetTechResearched("<Id>")`; PT-27's Biorobots route
   corrected to `ThePositronicBrain` in the same pass.
-**TWO live prompts (updated 2026-07-27 night):**
+**ONE live prompt (updated 2026-07-28 — drone static leg done):**
 - `docs/FABLE_NEXT_PROMPT.md` — playtest-standby assistance: the user plays,
   the session drives console instrumentation and processes results live.
   Carries the queued A/B re-verify as pre-flight, the F76 avoidance rules
   (now incl. the dozer surface) and the attended-sitting spec. The build
-  queue is EMPTY.
-- `docs/DRONE_INVESTIGATION_PROMPT.md` — game-free static-analysis kickoff
-  for the drone task-assignment / Hub Extender issue (evidence package on the
-  BUGS "Not yet swept" DroneControl bullet). Docs-only commits; any fix is a
-  user decision after the verdict. Both prompts warn about each other —
-  sessions must `git pull` first.
+  queue is EMPTY; the board now also carries the drone R1-R7 starvation
+  reads and the F77/locality USER-DECISION item.
+- `docs/DRONE_INVESTIGATION_PROMPT.md` — **COMPLETED 2026-07-28** (the
+  game-free static leg it commissioned): verdict + full trace + R1-R7
+  instrumentation plan recorded on the BUGS DroneControl bullet; F77 filed.
+  Only the LIVE half remains (console reads at a starvation moment), and
+  that rides the playtest prompt's board — the kickoff prompt is spent.
 - Retired prompt files (each done and deleted/superseded):
   ~~OPUS_BUILD_PROMPT~~, ~~FABLE_QA_PROMPT~~ (2026-07-25),
   ~~FABLE_PLAYTEST_PROMPT~~ (merged into the one live prompt).

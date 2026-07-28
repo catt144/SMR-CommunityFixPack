@@ -97,9 +97,21 @@ silent.
   PT-46 tail (F49(d) cap, F49(a) palette), PT-20/21/22 (cross-cutting, last).
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.
-- **Drone-assignment investigation verdict** (if the other session has run):
-  any build work it proposes is a USER-DECISION item — never queue it
-  yourself.
+- **Drone-assignment: verdict is IN (static leg done 2026-07-28) — two items
+  ride this board now:**
+  1. **LIVE HALF (attended, high value if the starvation recurs): run the
+     R1-R7 console reads** on the BUGS DroneControl bullet ("Not yet swept"
+     section) at a starvation moment — R1 (who covers the starving building)
+     and R3 (is its request in hub 2608's queues) alone discriminate the two
+     open hypotheses (registration gap vs claim lockout); R6 arms a
+     `RequestAssignUnit` claim tap (verified console-safe); R7 is the
+     controlled hub-A/hub-B/extender repro with `CheatMalfunction`. All
+     snippets are ready to paste from the bullet.
+  2. **USER-DECISION (never queue yourself): build choices from the verdict**
+     — F77 debounce wrapper (plain repair, entry has the sketch); the
+     locality levers (cross-hub idle-pull vs near-idle claim veto — which one
+     is right depends on the R1/R3 answer, and both are assignment-POLICY
+     changes, D-item territory). Nothing is built until the user says so.
 
 ## F76 — READ THIS BEFORE THE USER TOUCHES AN RC TRANSPORT **OR DOZER** (vanilla P1, unfixed)
 
