@@ -20,7 +20,18 @@ proven against an adversarial pad-beside-the-closed-dome setup, an
 unexpected child resident forensically cleared as in-dome birth, MicroG row
 verified on an asteroid habitat and KEPT there by user decision (two real
 auto-move-in paths exist: inter-habitat resettlement and stranded
-re-homing).**
+re-homing).** **Same sitting, lander leg: PT-17 ratchet PASS (request pinned
+at the hold across 4 automated cycles, no unload flip) and PT-32 PASS in
+full → F71 `tested` (archived) — live two-resource priority inversion,
+valuables first, nothing dropped. Capacity-edge leg: no wedge, BUT a NEW
+FINDING on the F68 fix — request over-draws below the GET-WHEN-ABOVE
+threshold under active mining (asteroid drained to 84 vs threshold 144);
+root cause + repair sketch on the F68 entry (the fix double-implements the
+anti-churn floor; delete the aboard-into-ground half). **Build queue is no
+longer empty: (1) F68 over-draw repair (mechanical, game-free + A/B),
+(2) TestKit AutoCargo logger leaf-class + requested-field repair.** PT-17
+stays un-archived pending the repair re-run. Also proven this sitting: the
+class-flattening runtime corollary (Key technical facts).**
 
 ## D06 build leg — Fable, 2026-07-28: drone dispatch overhaul core v1 + F77 fix (user-greenlit, PT-52 pending)
 

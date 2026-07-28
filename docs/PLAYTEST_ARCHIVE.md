@@ -1206,3 +1206,54 @@ and the niche is real on multi-habitat asteroids.
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` **PASS in full — steps 1-3 on the 2026-07-27 first sitting (incl. the same-day row-reposition repair, re-verified), steps 4-8 on 2026-07-28 (PT-52 sitting), every step exercised against a deliberately adversarial setup where applicable. D03 → tested; section archived 2026-07-28.**
 
 ---
+
+## PT-32 — Auto-export loads the valuables first · covers **F71**
+
+The probe proves the allocation order in isolation; only play shows what actually
+ends up in the hold when drones, stock levels and the one-sol departure timer all
+compete. Do this straight after PT-17 — same save, same lander.
+
+**Setup:** SAVE-E, lander on an **asteroid** in **Automated Mode**.
+`SMRTest.Log.AutoCargo(true)`.
+
+**Trigger:**
+1. Make sure the asteroid has a large stock of a **bulk** resource (Waste Rock,
+   Concrete or Metals) *and* a smaller stock of **Rare Metals / Exotic Minerals**.
+   `CheatFillAllStorages()` on the asteroid side is the quick way.
+2. Set export thresholds so **both** the bulk resource and the valuables are
+   exported (threshold 0 / "export anything above" on each).
+3. Read the next `CreateAutoCargoRequest(...) request{...}` line, then let the
+   lander load and depart.
+
+- **BROKEN looks like:** the request is dominated by whichever resource comes
+  first **alphabetically** — Concrete/Metals ahead of PreciousMetals and
+  PreciousMinerals, and Waste Rock still getting a share. The lander leaves on the
+  one-sol timer full of bulk while the valuables sit on the ground.
+- **FIXED looks like:** the request lists **PreciousMinerals, Electronics,
+  PreciousMetals, MachineParts** first and only spends what is left on Polymers,
+  Food, Fuel, Metals, Concrete and finally Waste Rock. The lander arrives on Mars
+  carrying the valuables.
+
+> Not over-broad: with the hold big enough for everything, **every** configured
+> export must still appear in the request. A resource that disappears entirely is
+> a FAIL.
+
+`Result (order):` **PASS — 2026-07-28, live colony (via the leaf-class TAP2
+console tap; TestKit logger blind, see PT-17 warning). Two-export leg:
+PreciousMetals allocated its FULL exportable stock first, Concrete
+(alphabetically earlier — the resource vanilla would have favored) got only
+the remainder; when mid-load replenishment grew the valuable's claim to the
+whole hold, Concrete was the one squeezed (48000 → 38000 → floor), never the
+valuable. Both delivered to Mars (Mars Rare Metals +~100). The single-export
+legs corroborate: a valuables-only request correctly saturated the hold at
+100 units. Four-class order (PreciousMinerals/Electronics/PreciousMetals/
+MachineParts) additionally probe-verified in isolation.**
+
+`Result (nothing dropped when there is room for all?):` **PASS — the initial
+co-fill allocation carried BOTH configured exports in full (PreciousMetals
+40000 + Concrete 48000, hold had room); a resource only ever left the
+request when its stock sat below the player's threshold (next-leg Concrete-
+only load with Rare Metals ground at 84 < 144 — correct exclusion, verified
+by the payload delivered).**
+
+---

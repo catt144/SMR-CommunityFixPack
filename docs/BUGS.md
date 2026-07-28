@@ -86,10 +86,10 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
-| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed  |
+| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed — over-draw finding 2026-07-28, mechanical repair queued (entry) |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed  |
-| F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | fixed  |
+| F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested 2026-07-28 (PT-32: live two-resource priority inversion + probe order coverage) |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | fixed  |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | fixed  |
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested |
@@ -2085,6 +2085,26 @@ collapses to {} with cargo aboard → full unload → F67 empty launch. Explains
 exotics, dumps them back, leaves with junk/nothing". **Fix:** in override, add own cargo
 back before threshold compare; never lower `requested` below `cargo[res].amount` on the
 automode target loc.
+**FINDING (2026-07-28, PT-17 capacity-edge leg, live colony): the fix OVER-DRAWS
+below the player's GET-WHEN-ABOVE threshold under active mining.** Observed via the
+leaf-class TAP2 console tap: Rare Metals threshold 144, ground stock 184 (~40 units
+exportable) — but the request ratcheted 40000 → 52000 → 72000 → 98000 → 100000 (the
+hold cap) across the hourly recomputes as extractors replenished stock mid-load, and
+the lander ultimately drained the asteroid to **84, sixty units below the keep-
+threshold**. No churn, no dump, both resources delivered to Mars, the next leg
+correctly excluded the now-below-threshold resource — the anti-churn ratchet itself
+held (`req` never below `have` throughout). **Root cause: the fix implements the
+anti-churn floor TWICE.** (1) `Fix_LanderCargoRatchet.lua:145-151` adds the aboard
+amount into `amount_on_target_loc` before the threshold compare — so any bookkeeping
+lag between ground totals and hold totals (drone-carried units, reservations, fresh
+mining) inflates `to_transfer` every recompute and the request ratchets monotonically
+to the hold cap; (2) `:169-174` is the clean post-hoc floor (`requested` never below
+aboard) which alone prevents the unload flip. **Repair sketch (mechanical, queued —
+game-free + re-verified A/B):** delete the (1) aboard-into-ground addition and let
+the (2) explicit floor carry the whole F68 fix; expected behavior after: request =
+max(aboard, current ground surplus) — no churn AND no over-draw (equilibrium lands
+ground exactly at the threshold). PT-17 stays un-archived until the repair re-runs
+the capacity-edge leg.
 
 ### F69 — Manual landing dumps the return fuel (P1, high)  `[fixed: Code/Fix_LanderReturnFuel.lua]`
 `CmdLand` (`UniversalRocket.lua:414`) clears `arrival_loc` in manual mode →
@@ -2131,7 +2151,7 @@ So the one-word correction would patch a dialog no reachable object can open. No
 patching dead code costs compatibility and buys nothing (FIX_POLICY §4). F70 is therefore
 complete, not partial.
 
-### F71 — Auto-export allocates capacity alphabetically (P2, med)  `[fixed: Code/Fix_LanderCargoRatchet.lua — folded into the F68 replacement of the same function]`
+### F71 — Auto-export allocates capacity alphabetically (P2, med)  `[tested 2026-07-28: Code/Fix_LanderCargoRatchet.lua — folded into the F68 replacement of the same function. PT-32 live proof: two-export leg allocated PreciousMetals its full exportable stock FIRST and gave Concrete (alphabetically earlier) only the remainder, both delivered to Mars; when the valuable later grew to saturate the hold, Concrete was correctly squeezed to zero, never the valuable. Nothing-dropped check: both resources present in full in the initial allocation when the hold had room. Four-class order additionally probe-verified in isolation]`
 `CreateAutoCargoRequest` iterates `sorted_pairs` (`UniversalRocket.lua:1736-1758`) —
 alphabetical: Concrete..Metals..Polymers before PreciousMetals/PreciousMinerals; WasteRock
 is a legal export (`FlightPolicyDef.lua:393,401`). 80,000kg budget consumed by bulk before
