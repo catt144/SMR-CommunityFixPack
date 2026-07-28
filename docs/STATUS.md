@@ -14,7 +14,13 @@ same-day build leg and the playtest-marathon record follow). **2026-07-28:
 the drone task-assignment static investigation leg is DONE (section below),
 and the user-greenlit D06 overhaul core + F77 fix are BUILT the same day —
 see the build-leg section directly below. PT-52 (attended, multi-iteration)
-is the next sitting's centerpiece.**
+is the next sitting's centerpiece.** **2026-07-28 PT-52 sitting (live):
+PT-49 COMPLETED in full → D03 `tested` (archived) — arrivals + tourists
+proven against an adversarial pad-beside-the-closed-dome setup, an
+unexpected child resident forensically cleared as in-dome birth, MicroG row
+verified on an asteroid habitat and KEPT there by user decision (two real
+auto-move-in paths exist: inter-habitat resettlement and stranded
+re-homing).**
 
 ## D06 build leg — Fable, 2026-07-28: drone dispatch overhaul core v1 + F77 fix (user-greenlit, PT-52 pending)
 

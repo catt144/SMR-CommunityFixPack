@@ -78,7 +78,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F63 | Universities invisible to emigration (no students)       | P2  | high | wontfix|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | built 2026-07-27: `Opt_AcknowledgedWarnings` (opt-in, probe PASS in the opt-in leg; PT-48) |
-| D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | built 2026-07-27: `Opt_ResidencyControl` (opt-in, probe PASS in the opt-in leg; PT-49) |
+| D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | tested 2026-07-28: `Opt_ResidencyControl` (opt-in; probe PASS + PT-49 PASS in full, archived) |
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; PT pending (attended, multi-iteration) |
@@ -1769,7 +1769,7 @@ absent-tolerant both ways (policy §3). Probe `AcknowledgedWarnings` (TestKit
 `60_Probes_Opt.lua`) drives all three wrappers with stand-ins — PASS in the opt-in leg,
 SKIP-with-reason otherwise. Playtest: PT-48.
 
-### D03 — No way to block dome move-ins short of a full quarantine  `[built 2026-07-27: Code/Opt_ResidencyControl.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-49]`
+### D03 — No way to block dome move-ins short of a full quarantine  `[tested 2026-07-28: Code/Opt_ResidencyControl.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-49 PASS in full (archived) — arrivals/tourists proven against an adversarial pad-beside-the-closed-dome setup, quarantine independence, MicroG row (kept on asteroid habitats by user decision), uninstall shape live + reload]`
 Filed 2026-07-27 (user decision, out of PT-14/F61's close — read that entry first). The
 community's long-standing ask: **stop new residents from moving into a dome while its
 residents keep commuting and using services normally.** The shipped game offers only the
