@@ -382,12 +382,12 @@ available to export. `SMRTest.Log.AutoCargo(true)`.
 > wraps `UniversalRocketBase` at runtime, but the live lander class
 > `UniversalLanderRocket` carries its own baked copy of the method (STATUS
 > engine facts, flattening corollary), so no request lines are ever logged.
-> Until the TestKit logger gets the leaf-class repair, use the console tap on
-> `UniversalLanderRocket` (session notes / STATUS) — same output format.
-> **Second logger flaw (same sitting):** the logger prints `request{}` from
-> the method's RETURN value, which is always nil — the real request lives in
-> `self.cargo[res].requested` after the call. The leaf-class repair must read
-> that (the TAP2 console variant proves the shape: `res=req:N/have:M`).
+> **Both flaws REPAIRED 2026-07-28 (same day, game-free leg):** the logger now
+> wraps `UniversalLanderRocket` and reads `self.cargo[res].requested` after the
+> call (output `res=req:N/have:M`); a second flaw — printing `request{}` from
+> the method's always-nil RETURN value — fixed in the same pass. From the next
+> relaunch `SMRTest.Log.AutoCargo(true)` works on real landers; no console tap
+> needed.
 
 **Trigger — the ratchet:**
 1. Set **one** export threshold (say Metals) so the lander loads cargo.
@@ -440,9 +440,15 @@ monotonically to the hold cap as extractors replenished stock mid-load and
 the lander drained the asteroid to 84 — sixty units BELOW the player's
 keep-threshold. Full forensics + root cause (the fix's aboard-into-ground
 addition at Fix_LanderCargoRatchet.lua:145-151 double-implements the
-anti-churn floor) + repair sketch on the F68 entry. **F68 NOT flipped;
-mechanical repair queued (game-free + A/B); this section stays un-archived
-until the repair re-runs this leg.**
+anti-churn floor) + repair sketch on the F68 entry. **F68 NOT flipped.
+REPAIR LANDED same day (2026-07-28, game-free leg, A/B re-verified —
+baseline 1/57/14/0, all-five-toggles 62/0/10/0, 70/70 applied): the
+aboard-into-ground addition deleted, the explicit floor carries the fix
+(full trail on the F68 entry). This section stays un-archived until an
+ATTENDED re-run of this capacity-edge leg (two exports + replenishing
+stock) confirms the threshold holds live — expected post-repair: request
+stays at aboard + current ground surplus, asteroid ground settles AT the
+threshold, still no unload flip.**
 
 ---
 

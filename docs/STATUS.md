@@ -1,6 +1,11 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-27 night, session wrap (**D05 SHIPPED AND TESTED same
+Updated: **2026-07-28 session wrap — the PT-52 live sitting (D03 tested,
+F71 tested, PT-52 telemetry healthy, F68 over-draw caught) + the same-day
+game-free F68 repair leg with a FRESH A/B pair (baseline 1/57/14/0 ·
+all-five-toggles 62/0/10/0, 70/70 — no pre-flight queued for the next
+session). See the two 2026-07-28 leg sections below and the header
+additions.** Prior wrap follows: 2026-07-27 night (**D05 SHIPPED AND TESTED same
 night — optional modules enable in-game via Options → Mod Options, live both
 directions, restart-persistent (PT-51 archived); PT-50 PASS in full → D04
 tested; PT-49 core passing + row reposition verified; ListFixes crash found
@@ -27,11 +32,43 @@ valuables first, nothing dropped. Capacity-edge leg: no wedge, BUT a NEW
 FINDING on the F68 fix — request over-draws below the GET-WHEN-ABOVE
 threshold under active mining (asteroid drained to 84 vs threshold 144);
 root cause + repair sketch on the F68 entry (the fix double-implements the
-anti-churn floor; delete the aboard-into-ground half). **Build queue is no
-longer empty: (1) F68 over-draw repair (mechanical, game-free + A/B),
-(2) TestKit AutoCargo logger leaf-class + requested-field repair.** PT-17
-stays un-archived pending the repair re-run. Also proven this sitting: the
-class-flattening runtime corollary (Key technical facts).**
+anti-churn floor; delete the aboard-into-ground half). **BOTH queued repairs
+LANDED the same evening (F68 over-draw + TestKit logger — see the repair-leg
+section) with a fresh A/B pair; the build queue is EMPTY again.** PT-17
+stays un-archived pending an attended capacity-edge re-run. Also proven this
+sitting: the class-flattening runtime corollary (Key technical facts).**
+
+## F68 over-draw repair leg — Fable, 2026-07-28 (game-free, post-playtest): same-day mechanical repair + fresh A/B pair
+
+The PT-52 sitting's lander leg (PT-17 capacity edge) caught the pack's own
+F68 fix over-exporting below the player's GET-WHEN-ABOVE threshold; the
+repair landed the same evening once the user closed the game.
+
+- **Root cause, live-proven before touching code:** the TAP2 console-tap
+  arithmetic matched `ground + 2×aboard − threshold` EXACTLY at every
+  recompute (52/72/98 at aboard 12/32/58; final ground 184−100=84) —
+  **`GetTotalCargoAvailable` already counts a landed rocket's own hold**, so
+  the v1 fix's aboard-into-ground addition double-counted every unit aboard
+  and the request ratcheted monotonically to the hold cap. New engine fact,
+  recorded here.
+- **Repair (`Code/Fix_LanderCargoRatchet.lua`):** the addition
+  (old :145-151) DELETED; the explicit request-floor block (never ask below
+  aboard) now carries the whole F68 anti-churn fix. Header comment documents
+  the discovery + repair. Parse clean.
+- **TestKit AutoCargo logger repaired in the same leg** (local commit): two
+  live-proven flaws — wraps the leaf class `UniversalLanderRocket` now (the
+  flattening corollary made the old base-class runtime wrap structurally
+  blind to real landers), and reads `self.cargo[res].requested` post-call
+  (the return value it used to print is always nil).
+- **A/B pair, fresh (also clears the queued pre-flight):** baseline
+  1/57/14/0 · all-five-toggles 62/0/10/0 (**70/70 applied**, user's Mod
+  Options toggles all on, zero pack errors, noise = the known synthetic-map
+  set). The LanderCargoRatchet probe passes through the floor path
+  (`request 300000 >= 300000 aboard`) — the probe needed no change, by
+  design of the repair.
+- **Validation debt:** PT-17's capacity-edge leg needs an ATTENDED re-run
+  (two exports + replenishing stock) to confirm ground now settles AT the
+  threshold; PT-17 stays un-archived until then.
 
 ## D06 build leg — Fable, 2026-07-28: drone dispatch overhaul core v1 + F77 fix (user-greenlit, PT-52 pending)
 

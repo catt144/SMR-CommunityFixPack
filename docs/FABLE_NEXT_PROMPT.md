@@ -1,43 +1,54 @@
-# Fable continuation prompt — PLAYTEST STANDBY (rewritten 2026-07-28, post-D06 build)
+# Fable continuation prompt — PLAYTEST STANDBY (rewritten 2026-07-28 late, post-PT-52-sitting + F68-repair leg)
 
 Paste everything below into a fresh Claude Code session (Fable). This is the
-ONE live prompt (the drone investigation prompt is retired — its verdict and
-build landed). **Start with `git log --oneline -5` + `git pull`** in case
+ONE live prompt. **Start with `git log --oneline -5` + `git pull`** in case
 another session ran since this prompt was written.
 
 Build state: **70 registered modules, 65/70 active by default (5 opt-in via
-Options → Mod Options — D05, `tested`), 72 probes, everything pushed.**
-NEW since the last sitting (2026-07-28, all committed):
-- **D06 `Opt_DroneOverhaul` core v1 BUILT** (user-greenlit): closest-fleet-
-  first claim gate + repair moonlighting + `SMRFixPack.DroneReport()`
-  telemetry. Opt-in toggle "Drone dispatch overhaul (experimental)".
-  **PT-52 is this sitting's centerpiece** — full procedure in
-  `PLAYTEST_CHECKLIST.md`, briefing notes on the board below.
-- **F77 `Fix_ExtenderFlapChurn` BUILT** (default-on): extender working-flaps
-  debounce+coalesce the whole-hub rebuild instead of Idle-kicking the fleet
-  twice per blip.
-- Full design context if anything needs iterating:
-  `docs/DRONE_OVERHAUL_OPTIONS.md` (options A-H, what shipped and why, what
-  the future iterations are — H-v2 demand filter, B full moonlighting,
-  C migration balancer). The investigation trace + R1-R7 console forensics
-  live on the BUGS.md DroneControl bullet ("Not yet swept" section).
-Prior state stands: D05 tested (PT-51), D04 tested (PT-50), PT-49 core
-passing, F76 dozer surface filed. **The build queue is EMPTY** — new work
-comes only from playtest FAILs, live findings, the F76 attended sitting, or
-D06 iteration decisions (user decision, knobs first).
+Options → Mod Options — D05, `tested`), 72 probes, everything pushed.
+A/B pair is FRESH (2026-07-28 late, post-F68-repair): baseline 1/57/14/0 ·
+all-five-toggles 62/0/10/0 (70/70 applied) — NO pre-flight queued.**
+NEW since the last rewrite (2026-07-28 PT-52 sitting + same-evening repair
+leg, all committed):
+- **PT-49 COMPLETE → D03 `tested` (archived).** Adversarial arrivals proof,
+  tourists exemption, quarantine independence, MicroG row (KEPT on asteroid
+  habitats by user decision), uninstall shape, and a child-in-closed-dome
+  sighting forensically cleared as in-dome birth.
+- **PT-32 COMPLETE → F71 `tested` (archived).** Live two-resource priority
+  inversion via console taps: valuables allocated first, bulk the remainder,
+  nothing dropped, below-threshold resources correctly excluded.
+- **PT-17: ratchet half PASS; capacity-edge leg caught a REAL pack defect —
+  and its repair LANDED the same evening (A/B re-verified).** The v1 F68 fix
+  double-counted aboard cargo (`GetTotalCargoAvailable` already counts a
+  landed rocket's hold — new engine fact) and over-exported 60 units below
+  the player's GET-WHEN-ABOVE threshold. Repaired by deleting the
+  aboard-into-ground addition; the explicit floor carries the fix. **PT-17
+  stays un-archived: an ATTENDED capacity-edge re-run (two exports +
+  replenishing stock; expect ground to settle AT the threshold) is on the
+  board.** Full trail on the F68 entry.
+- **PT-52 first sitting: HEALTHY.** D06 live-enable bridge verified; two
+  DroneReport readings (`vetoed 4→10, veto_expired 0→1, moonlighted 0`,
+  `unclaimed=0` on all six hubs all sitting). The watch continues every
+  sitting; F77 flap check (Trigger B) still un-run.
+- **TestKit AutoCargo logger repaired** (leaf-class wrap + reads
+  `cargo[res].requested`; the old one was structurally blind to landers).
+- New hard-won facts recorded: the **class-flattening runtime corollary**
+  (runtime instrumentation must target the LEAF class; STATUS Key facts),
+  the **console-echo death + `ShowConsoleLog(true)` recovery**, and the
+  first-landing-is-manual lander behavior (reserved sites auto-land after).
+Prior state stands: D05 tested (PT-51), D04 tested (PT-50), F76 dozer
+surface filed. **The build queue is EMPTY** — new work comes only from
+playtest FAILs, live findings, the F76 attended sitting, or D06 iteration
+decisions (user decision, knobs first).
 
-**PRE-FLIGHT (game-free, ~5 min, do BEFORE the user starts playing):** the
-QUEUED A/B pair re-verify is now MORE important — since the last verified
-pair, two mechanical repairs (ListFixes nil-detail, D03 row reposition) AND
-two new code files (D06 core, F77) landed. **Expected PROBE numbers
-unchanged** (no new probes yet — stated testing debt): baseline 1/57/14/0,
-fixed 58/0/14/0; module counts shift to **65/70 active** in the fixed leg
-(ExtenderFlapChurn active, DroneOverhaul inactive-until-toggled; the OLD
-expectations said 64/68). Watch the fixed-leg log specifically for
-`ExtenderFlapChurn: applied` and `DroneOverhaul: inactive (opt-in module...)`
-— an `error` status on either is a same-day repair item. Harness facts
-below. If the user is already at the keyboard wanting to play, ask whether
-to run it first or at session end.
+**NO PRE-FLIGHT NEEDED** — the A/B pair above is fresher than every code
+change. The user's stated next goal: **close out the asteroid section** —
+un-run there: PT-16 (F67 empty launch + F69 return fuel — the F69 half wants
+an asteroid with NO drones/hub, use a fresh one), PT-19 (F73 shelter reflex —
+the Douglasjay MicroG habitat with 9 residents is ideal), PT-31 (F70 Edit
+Payload, Mars side, manual mode), PT-33 (F72 — needs EXACTLY one lander,
+manual, no destination; the user has exactly one: Sphinx #2), plus the PT-17
+attended capacity-edge re-run above.
 
 ---
 
@@ -103,12 +114,14 @@ silent.
   self-heal, dismiss the warning: acked buildings stay quiet; a THIRD breakage
   warns promptly and lists only itself; repair + re-break re-warns; stamp
   survives reload; other warning types behave vanilla.
-- **PT-49 tail** (D03; core behavior + row position already verified —
-  progress note in the section): arrivals routed away from the closed dome,
-  MANUAL relocation into it still works, tourists still check into its
-  hotels, quarantine toggles independently, the MicroG habitat row appears on
-  asteroid habitats, uninstall shape (save with a closed dome → module off →
-  reload → accepts again, no errors).
+- **Asteroid closeout (user's stated next goal):** PT-19 (shelter reflex —
+  the standing MicroG habitat is ideal), PT-16 (F67 all-Ignore sit-on-pad +
+  F69 manual landing on a FRESH no-infrastructure asteroid), PT-31 (Edit
+  Payload, Mars side), PT-33 (exactly one lander, manual, no destination —
+  holds true now), **PT-17 attended capacity-edge RE-RUN** (two exports +
+  replenishing stock; PASS = asteroid ground settles AT the GET-WHEN-ABOVE
+  threshold, still no unload flip — then F68's finding closes and PT-17
+  archives).
 - **PT-40** train tunnel power (F65) — **use a NORMAL station for the
   short-track half**: the fix triggers only on 2-element tracks (station
   snugged directly to the tunnel entrance); a large station's footprint tends
@@ -120,7 +133,8 @@ silent.
 - Un-run: PT-09..11, PT-15..19 (fixtures B/D/E), PT-23, PT-25, PT-27..33,
   PT-35 (PT-27's Biorobots grant is `ThePositronicBrain`;
   `CheatResearchAll()` SKIPS undiscovered breakthroughs — grant directly via
-  `UIColony:SetTechResearched("<Id>")`), PT-42/43/44, PT-47,
+  `UIColony:SetTechResearched("<Id>")`; PT-32 is DONE/archived), PT-42/43/44,
+  PT-47,
   PT-46 tail (F49(d) cap, F49(a) palette), PT-20/21/22 (cross-cutting, last).
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.

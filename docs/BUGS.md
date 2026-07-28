@@ -86,7 +86,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
-| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed — over-draw finding 2026-07-28, mechanical repair queued (entry) |
+| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | fixed — over-draw REPAIRED same day 2026-07-28, A/B re-verified; PT-17 capacity-edge re-run pending (entry) |
 | F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | fixed  |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested 2026-07-28 (PT-32: live two-resource priority inversion + probe order coverage) |
@@ -2099,12 +2099,21 @@ amount into `amount_on_target_loc` before the threshold compare — so any bookk
 lag between ground totals and hold totals (drone-carried units, reservations, fresh
 mining) inflates `to_transfer` every recompute and the request ratchets monotonically
 to the hold cap; (2) `:169-174` is the clean post-hoc floor (`requested` never below
-aboard) which alone prevents the unload flip. **Repair sketch (mechanical, queued —
-game-free + re-verified A/B):** delete the (1) aboard-into-ground addition and let
-the (2) explicit floor carry the whole F68 fix; expected behavior after: request =
-max(aboard, current ground surplus) — no churn AND no over-draw (equilibrium lands
-ground exactly at the threshold). PT-17 stays un-archived until the repair re-runs
-the capacity-edge leg.
+aboard) which alone prevents the unload flip. **REPAIRED same day (2026-07-28, game-free leg):**
+the (1) aboard-into-ground addition DELETED; the (2) explicit floor now carries
+the whole F68 anti-churn fix. The live TAP2 arithmetic sharpened the root cause
+first: the observed requests matched `ground + 2×aboard − threshold` EXACTLY
+(52/72/98 at aboard 12/32/58, final ground 184−100=84, zero mining assumptions),
+proving **`GetTotalCargoAvailable` already counts the landed rocket's own hold**
+— the addition double-counted every unit aboard. Post-repair the shipped
+`available − threshold` is already aboard + ground surplus on the live path
+(equilibrium lands ground exactly at the threshold), and the floor guarantees no
+unload flip on any path where the hold is not counted. **A/B re-verified
+2026-07-28: baseline 1/57/14/0, all-five-toggles 62/0/10/0 (70/70 applied, zero
+pack errors); the LanderCargoRatchet probe passes through the floor path
+(`request 300000 >= 300000 aboard`).** PT-17 stays un-archived until an attended
+re-run of the capacity-edge leg (two exports + replenishing stock) confirms the
+threshold holds live.
 
 ### F69 — Manual landing dumps the return fuel (P1, high)  `[fixed: Code/Fix_LanderReturnFuel.lua]`
 `CmdLand` (`UniversalRocket.lua:414`) clears `arrival_loc` in manual mode →

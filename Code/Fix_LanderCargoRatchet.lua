@@ -42,15 +42,24 @@
 --
 -- Patch approach: the defect is mid-function and unhookable, so this is a full
 -- replacement of the method — a copy of Lua\UniversalRocket.lua:1727-1766
--- (shipped Src, game 1.0.7.396349) with three changes, all marked -- FIX:
---   1. (F68) count the rocket's own load as still being "here" before comparing
---      to the threshold, so the requested amount stays put instead of ratcheting
---      down;
---   2. (F68) belt and braces, never let the final request for an exported
---      resource sit below what is already aboard (the capacity split can still
---      starve a resource that came earlier in the loop);
---   3. (F71) iterate the thresholds in flight-policy order instead of
+-- (shipped Src, game 1.0.7.396349) with two changes, all marked -- FIX:
+--   1. (F68) never let the final request for an exported resource sit below
+--      what is already aboard — that is the flip that turns a loaded rocket
+--      into an unloading one;
+--   2. (F71) iterate the thresholds in flight-policy order instead of
 --      alphabetically.
+--
+-- REPAIRED 2026-07-28 (PT-17 capacity-edge finding, F68 entry): v1 of this fix
+-- ALSO added the aboard amount into `amount_on_target_loc` before the threshold
+-- compare. Live TAP2 forensics proved `GetTotalCargoAvailable` already counts
+-- the landed rocket's own hold (the observed request tracked
+-- ground + 2×aboard − threshold EXACTLY, and the asteroid drained to
+-- threshold − 60), so that addition double-counted every unit aboard and the
+-- request ratcheted monotonically to the hold cap — over-exporting far below
+-- the player's GET-WHEN-ABOVE threshold. Deleted: on the live path the shipped
+-- `available − threshold` is already aboard + ground surplus (equilibrium lands
+-- ground exactly at the threshold), and the change-1 floor below still
+-- guarantees no unload flip on any path where the hold is not counted.
 -- The shipped `assert(res_type == "Resource")` on :1738 is dropped: assert does
 -- not unwind mod code (it prints and execution continues), so keeping it would
 -- only add log noise on a resource the policy allows but we did not expect.
@@ -142,13 +151,6 @@ SMRFixPack.Register("LanderCargoRatchet", {
 				target_map = not IsKindOf(target_map, "MapDescriptor") and target_map or (target_map and target_map.map)
 				local target_city = target_map and target_map.City
 				local amount_on_target_loc = target_city and GetTotalCargoAvailable(target_city, "Resource", res) or 0
-				if is_on_automode_target_loc then
-					-- FIX (F68): what we already loaded here is still "here" as far as
-					-- this decision goes; without this the request ratchets down by
-					-- exactly the amount loaded each hour and flips to "unloading".
-					local aboard = table.get(self, "cargo", res, "amount") or 0
-					amount_on_target_loc = amount_on_target_loc + aboard / const.ResourceScale
-				end
 				local to_transfer
 				if is_on_automode_target_loc then
 					to_transfer = amount_on_target_loc - threshold
