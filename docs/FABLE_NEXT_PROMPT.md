@@ -37,9 +37,11 @@ leg, all committed):
   the **console-echo death + `ShowConsoleLog(true)` recovery**, and the
   first-landing-is-manual lander behavior (reserved sites auto-land after).
 Prior state stands: D05 tested (PT-51), D04 tested (PT-50), F76 dozer
-surface filed. **The build queue is EMPTY** — new work comes only from
-playtest FAILs, live findings, the F76 attended sitting, or D06 iteration
-decisions (user decision, knobs first).
+surface filed. **Build queue: ONE game-free TestKit item — the map-switch
+console-death repair (see the console facts below; isolated 2026-07-28
+late, save/reload workaround documented).** Beyond that, new work comes
+only from playtest FAILs, live findings, the F76 attended sitting, or D06
+iteration decisions (user decision, knobs first).
 
 **NO PRE-FLIGHT NEEDED** — the A/B pair above is fresher than every code
 change. The user's stated next goal: **close out the asteroid section** —
@@ -223,11 +225,22 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   `*r for _, id in ipairs(SMRFixPack.order) do local f = SMRFixPack.fixes[id] ConsolePrint(id .. " [" .. f.status .. "]") end`
 - The log buffer only flushes at exit — `FlushLogFile()` forces it
   mid-session (always do this before reading the log).
-- **The on-screen console echo can silently die mid-session** (observed
-  2026-07-28 after Mars↔asteroid map hops): commands still execute, prints
-  still reach the log, only the display overlay (`dlgConsoleLog`) is gone.
-  Recovery: type `ShowConsoleLog(true)` blind (uiConsoleLog.lua:88) — no
-  restart needed.
+- **Mars↔asteroid map switches KILL the console** (isolated 2026-07-28 late:
+  switch to the asteroid → console won't open on ANY binding, and stays dead
+  after switching back; the earlier "echo died after map hops" was the same
+  bug's milder face). Root: the Enter/Alt-Shift-C/Ctrl-Alt-C shortcuts only
+  EXIST while the `ShowConsole` gate holds (uiConsole.lua:429-431 +
+  CommonShortcuts.generated.lua:174-186); the TestKit enables the gate and
+  rebuilds shortcuts once at load (00_TestCore.lua:288-306), and the asteroid
+  switch tears that state down — with every binding gone, the re-enable
+  command cannot be typed (chicken-and-egg). **Workaround: quicksave +
+  reload ON the map you need** — the reload re-runs the TestKit colony-up
+  hook and restores the console there; it dies again on the next switch, so
+  batch console work per visit. **QUEUED TestKit repair (game-free): re-run
+  `SMRTest.EnableConsole` + auto-open on the map-change message; while in
+  there, find what exactly resets the gate (suspect the DestroyConsole path,
+  uiConsole.lua:410-414).** If only the ECHO is gone but typing works, the
+  lighter recovery is `ShowConsoleLog(true)` blind (uiConsoleLog.lua:88).
 - **Runtime console wrappers must target the LEAF class** (STATUS engine
   facts, flattening corollary 2026-07-28): wrapping a base class at runtime
   does nothing for already-built subclasses — e.g. lander taps go on
