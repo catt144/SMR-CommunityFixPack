@@ -2423,6 +2423,21 @@ excess :676-681).
   sweep, only observable AT a starvation moment: which hub's queue holds a
   request while hub-2608's drones idle — i.e. whether requests bind to the
   noticing/registering hub's fleet with no cross-hub handoff.
+  **User hypothesis (prior-game experience, same sitting): the REPEATER is the
+  trigger** — in the original game the misassignment/performance pattern
+  became prevalent once Drone Hub Extenders entered the colony, and this
+  colony DOES run them (a DroneHubExtender maintenance request appeared in the
+  same dump batch). Plausible mechanism to check in the sweep: an extender
+  stretches a distant hub's effective service area over ground a nearer hub
+  already covers, and whatever request→hub matching runs is
+  extender-transparent (distance/priority measured hub-to-target, or
+  first-registered-wins) so the extended far hub captures work the near fleet
+  should take. Sweep pointers: extender machinery is in `DroneControl.lua`
+  itself + `Drone.lua` (both already in this bullet) and
+  `BuildingTemplate\DroneHubExtender.generated.lua` /
+  `XDef\customDroneHubExtender.generated.lua`. Repro recipe for the sweep:
+  hub A + hub B far apart, extender bridging B's range into A's area, break
+  something in A's yard, watch which fleet answers.
 - Colonist auto-assignment: workplaces (`UpdateWorkplaces` family — "unemployed
   every sol"), residences ("homeless despite free housing", "seniors don't move"),
   dome-to-dome walking/passage checks (`AreDomesConnectedWithPassage` — suffocation
