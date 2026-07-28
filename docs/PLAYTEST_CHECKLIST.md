@@ -1134,9 +1134,12 @@ Tester's one complaint, cosmetic: the row rendered at the BOTTOM of the dome
 section (below the stat bars) instead of with the policy toggle group.
 **Repaired same day** (row now inserts directly after the shipped
 accept-colonists toggle — array reposition in append_policy_row); **position
-VERIFIED after the relaunch** ("UI good for dome", 2026-07-27 late). Remaining:
-arrivals, manual relocation, tourists, quarantine independence, the MicroG
-row and the uninstall shape.
+VERIFIED after the relaunch** ("UI good for dome", 2026-07-27 late).
+**Progress (2026-07-28, PT-52 sitting):** manual relocation VERIFIED both
+directions — the player's own relocate order moves colonists INTO the closed
+dome (policy override works, step 4 PASS) and OUT of it as normal. Remaining:
+arrivals, tourists, quarantine independence, the MicroG row and the uninstall
+shape.
 
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
 
