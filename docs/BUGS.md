@@ -2637,6 +2637,13 @@ excess :676-681).
     rocket cargo path of F50/F68/F70/F71) runs through these queues. Any claim-path
     change must re-pass the F50 rocket-churn and F55 unreachable scenarios in
     playtest before shipping.
+  * **Follow-up (2026-07-28, user-commissioned): full overhaul-toggle feasibility
+    study in `docs/DRONE_OVERHAUL_OPTIONS.md`** — options A-G (repair moonlighting,
+    full moonlighting, migration balancer, claim veto, true handoff, Lua-matcher
+    rewrite [rejected], telemetry/F77/throttle supporting acts) ranked by
+    feasibility/risk/reward with verified patch points and a recommended build
+    order. Supersedes the two fix-direction sketches above as the design reference;
+    still a USER DECISION.
 - Colonist auto-assignment: workplaces (`UpdateWorkplaces` family — "unemployed
   every sol"), residences ("homeless despite free housing", "seniors don't move"),
   dome-to-dome walking/passage checks (`AreDomesConnectedWithPassage` — suffocation

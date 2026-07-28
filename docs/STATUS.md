@@ -71,6 +71,17 @@ plan live on the BUGS "Not yet swept" DroneControl bullet; **F77** filed
   pre-wrap on `Drone:Idle` for (a) vs near-idle claim veto on
   `Drone:Work`/`PickUp` for (b) — which are assignment-POLICY changes
   (D-item territory). All sketches + risk statements on the bullet/F77 entry.
+- **Follow-up same leg (user-commissioned): `docs/DRONE_OVERHAUL_OPTIONS.md`**
+  — the D06-candidate feasibility study for an optional overhaul toggle.
+  Options A-G with verified patch points; key new engine findings:
+  `Drone:Idle` falls through (returns) exactly when no work was found, so a
+  chained POST-wrapper is a legal dispatch hook (the F73 pre-wrap-only rule
+  is for command bodies that always SetCommand); `Drone:Work`/
+  `ApproachWrapper` never consult `command_center` (cross-hub execution is
+  clean); `Drone:SetCommandCenterUser` (`Drone.lua:2687-2694`) is the
+  vanilla migration path. Recommended order: telemetry → repair
+  moonlighting → migration balancer; claim-veto/handoff gated on the R1/R3
+  live answer. USER DECISION before any build.
 
 ## Mod Options build leg (D05) — Fable, 2026-07-27 late: in-game enable surface for the optional modules
 

@@ -112,6 +112,12 @@ silent.
      locality levers (cross-hub idle-pull vs near-idle claim veto — which one
      is right depends on the R1/R3 answer, and both are assignment-POLICY
      changes, D-item territory). Nothing is built until the user says so.
+     **The full overhaul-toggle feasibility study is in
+     `docs/DRONE_OVERHAUL_OPTIONS.md`** (2026-07-28, user-commissioned):
+     options A-G ranked by feasibility/risk/reward with a recommended build
+     order (telemetry → repair moonlighting → migration balancer; D/E gated
+     on the R1/R3 answer). If the user greenlights a subset, that spec is
+     the build brief.
 
 ## F76 — READ THIS BEFORE THE USER TOUCHES AN RC TRANSPORT **OR DOZER** (vanilla P1, unfixed)
 
