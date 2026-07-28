@@ -1137,9 +1137,16 @@ accept-colonists toggle — array reposition in append_policy_row); **position
 VERIFIED after the relaunch** ("UI good for dome", 2026-07-27 late).
 **Progress (2026-07-28, PT-52 sitting):** manual relocation VERIFIED both
 directions — the player's own relocate order moves colonists INTO the closed
-dome (policy override works, step 4 PASS) and OUT of it as normal. Remaining:
-arrivals, tourists, quarantine independence, the MicroG row and the uninstall
-shape.
+dome (policy override works, step 4 PASS) and OUT of it as normal.
+Also that sitting: an unexpected child resident (Martianborn, age 1) appeared
+in the closed dome's full Smart Apartment — investigated and CLEARED as
+in-dome birth, the designed exemption (engine stores NO parent link —
+`GenerateColonistData` rolls children fresh, so no UI can show parentage;
+proof was indirect: dome `born_children` = 14, colonist age 1 at ultra speed,
+and `CanAcceptNewColonists()` read **false** live on the closed dome, so the
+voluntary-move-in path was structurally shut — gate 1 confirmed enforcing,
+births the only open path). Remaining: arrivals, tourists, quarantine
+independence, the MicroG row and the uninstall shape.
 
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
 
