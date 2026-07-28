@@ -105,7 +105,7 @@ Your jobs, in the order they usually come up:
    protocol. (PT-17 is complete and archived 2026-07-28.)
 3. `docs\BUGS.md` — the entries the sitting touches (F67/F69 for PT-16, F73
    for PT-19, F70 for PT-31; D06 + F77 for the PT-52 watch;
-   D02 for PT-48; F65 for PT-40; **F76 before ANY depot-picker
+   D02 for PT-48; **F76 before ANY depot-picker
    interaction**; F48 before PT-37). For any drone anomaly, the DroneControl
    bullet in "Not yet swept" carries the full assignment-machinery trace and
    the R1-R7 paste-ready console forensics.
@@ -155,12 +155,9 @@ silent.
   path; check sibling disaster threads for the same shape; multi-map is the
   prime suspect). Sits well alongside the asteroid closeout since the save
   is already multi-map.
-- **PT-40** train tunnel power (F65) — **use a NORMAL station for the
-  short-track half**: the fix triggers only on 2-element tracks (station
-  snugged directly to the tunnel entrance); a large station's footprint tends
-  to force a longer track, which is the already-working case and proves
-  nothing. Station size is otherwise irrelevant (the fix is class-agnostic —
-  it bridges whenever the two ends read as different live grids).
+- **PT-40 DONE 2026-07-28 → F65 `tested` (archived):** full procedure PASS —
+  merge in both geometries (snug + couple-tracks), clean salvage split,
+  long-track control unchanged, reload persistence, log clean.
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
 - Un-run: PT-09..11, PT-15, PT-16, PT-18 (fixtures B/D/E; 16 also on the

@@ -1439,3 +1439,45 @@ F72 entry observation (a)); the list builder correctly excludes, so nothing
 blocks and nothing is wrongly offered.**
 
 ---
+
+## PT-40 — Train tunnel carries power · covers **F65**
+
+The fix only acts when the two ends really are on different power grids, so this
+test has to create that situation deliberately.
+
+**Setup:** two separate power grids with no cable between them. On grid 1, a
+Station; on grid 2 (far away, e.g. across terrain a cable can't cross), the other
+end. Build a **Train Tunnel** pair linking the two areas and attach a station
+**directly** to the tunnel entrance — close enough that the connecting track is
+only one or two tiles long.
+
+**Steps:**
+1. Before completing the short track, note each side's power surplus/deficit
+   (select a building on each grid; the two must read as separate grids).
+2. Complete the short track so the station and tunnel connect.
+   - **EXPECTED:** the two grids become one — the surplus/deficit numbers merge,
+     and a shortage on one side is now fed by the other.
+   - **SURPRISE looks like:** the track connects for trains but the grids stay
+     separate.
+3. Now **salvage the short track** again.
+   - **EXPECTED:** the grids split back apart cleanly, no error in the log, no
+     building left permanently unpowered that has its own supply.
+4. Repeat step 2 with a **long** track (10+ tiles) between two stations — this is
+   the path the game already handled; it must be unchanged.
+5. Save, quit to menu, reload the save.
+   - **EXPECTED:** the grids are still merged, and the log shows no errors from
+     our PostLoadGame pass.
+
+`Result (grids merge on connect?):` **PASS — 2026-07-28, live colony.
+Two-grid setup with grid 2 having NO active source; normal station, both
+geometries (snugged directly to the tunnel entrance AND a couple of track
+pieces between): a fresh consumer (MDS Laser, 10 power) attached to the
+sourceless side ran off the far grid's supply through the tunnel.**
+
+`Result (split cleanly on salvage / survive reload?):` **PASS — 2026-07-28.
+Salvaging the short track split the grids cleanly (far consumer went dark,
+nothing self-supplied stranded); long-track control unchanged; save → quit
+→ reload kept the merge. Log swept same session: `TrackTunnelPowerBridge:
+applied` and zero errors incl. the reload's PostLoadGame pass.**
+
+---

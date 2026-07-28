@@ -83,7 +83,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; PT pending (attended, multi-iteration) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
-| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
+| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28, full procedure (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | tested — PT-17 complete 2026-07-28 incl. the attended capacity-edge re-run post-repair (ground settled AT the threshold) |
@@ -1975,7 +1975,7 @@ don't know the stored ones are gone. **Fix:** pre-hook `Station:OnDemolish` to
 `Train.Done` refund guard; compensation prefabs for corrupted saves not exactly
 recoverable (count unrecorded).
 
-### F65 — Station attached to a train tunnel never bridges the power grid (P2, med)  `[fixed: Code/Fix_TrackTunnelPowerBridge.lua]`
+### F65 — Station attached to a train tunnel never bridges the power grid (P2, med)  `[tested: Code/Fix_TrackTunnelPowerBridge.lua — PT-40 PASS 2026-07-28, full procedure incl. salvage split, long-track control, reload]`
 `TrackTunnel` description promises power transfer (`Data\BuildingTemplate\TrackTunnel.lua:17`);
 class machinery identical to working `Tunnel`. Defect: `OnMsg.StationsConnected`
 (`Track.lua:668-680`) skips `ConnectToGrids()` when `#track.elements <= 2` ("adjacent
@@ -2009,6 +2009,17 @@ matches a >2-element track's exactly (`Track.lua:506`, `:511`, `:682-684`,
 `SavegameFixups.ConvertTrackPowerLinks` (`Station.lua:1395-1420`) tears down and rebuilds
 these very links — a LoadGame-time pass would race it (the F35 lesson).
 Probe: `TrackTunnelPowerBridge` in `40_Probes_Wave4.lua`. Playtest: PT-40.
+**PT-40 PASS — 2026-07-28, live colony.** Deliberate two-grid setup (grid 1
+powered, grid 2 with NO active source), normal station at the tunnel, both
+geometries: snugged directly against the entrance AND a couple of track
+pieces between. Merge verified functionally — a fresh consumer (MDS Laser,
+10 power) attached to the sourceless far grid ran off the near grid's
+supply through the tunnel. Salvaging the short track split the grids
+cleanly (far consumer went dark, nothing self-supplied stranded); the
+long-track control (the already-working path) behaved unchanged; save →
+quit → reload kept the merge. Log swept clean the same session:
+`TrackTunnelPowerBridge: applied` at load and ZERO errors incl. through the
+reload's PostLoadGame pass.
 
 ### F66 — Station↔tunnel connector hex ping-pong (P2, med-high)  `[tested: Code/Fix_TrackConnectorPingPong.lua — PT-41 PASS 2026-07-26 (shared hex stable, survivor reclaimed the link after demolition, plain-tile control clean)]`
 With a 1-hex gap, both buildings project their connector element onto the SAME hex;

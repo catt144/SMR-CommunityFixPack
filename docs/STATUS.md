@@ -40,7 +40,9 @@ next sitting: re-run PASS (ground settled AT the threshold, request tracked
 instead of ratcheting) → F68 `tested`, PT-17 archived; PT-19 PASS same
 sitting → F73 `tested`, archived (residence held through both gap shapes);
 PT-33 PASS same sitting → F72 `tested`, archived (all three cases incl.
-both not-over-broad negatives).**
+both not-over-broad negatives); PT-40 PASS same sitting → F65 `tested`,
+archived (merge both geometries, clean salvage split, long-track control,
+reload, log clean).**
 Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
 
