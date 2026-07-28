@@ -54,6 +54,20 @@ tonight". Full spec + Src evidence on the **D05** BUGS entry; summary:
   D05 entry). Both writers now use `""`, ListFixes nil-tolerant. Takes effect
   on the user's next relaunch; **A/B pair re-verify queued for the next
   game-free window** (cosmetic to the probes — nothing reads ListFixes).
+- **PT-50 PASS in full, same night (the Group 8 sitting, running on the new
+  Mod Options toggles) → D04 `tested`, F39's absorbed fix play-verified:**
+  sun #2 built through the normal menu multiple sectors from #1; night
+  production beside a sun matched the banked PT-26 signature exactly (3.6/9 @
+  −21%; other sector 10 @ 0% — no atmospheric penalty there); sunless panels
+  closed to 0 at night (not over-broad); save/reload clean; limit off/on
+  verified LIVE via the toggle (doubles as PT-51 live-toggle evidence).
+  Section archived. PT-51 partials recorded (page + live both ways verified;
+  persistence-across-restart + log check remain). **Also observed live: an RC
+  Terraformer (dozer) + waste-rock heap showed the F76 detached-hex picker
+  rendering — Load-on-WasteRock is vanilla dozer behavior (RCTerraformer.lua:33,
+  :224-237; pack ruled out, F74 wrappers refuse-only), but the picker surface
+  may extend to the dozer path; F76 addendum pending the click-vs-hover
+  detail.**
 
 ## Build leg — Fable, 2026-07-27 late: F61 deletion + D02/D03/D04 built, A/B renumbered
 

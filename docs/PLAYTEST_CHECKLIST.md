@@ -7,8 +7,8 @@ next Claude session *"read PLAYTEST_CHECKLIST.md results"*). See
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so
 far: PT-01, PT-02, PT-03, PT-04, PT-05, PT-06, PT-07, PT-08, PT-12, PT-13,
-PT-14, PT-24, PT-26, PT-34, PT-36, PT-38, PT-39, PT-41, PT-45, and PT-46's
-F49(b) half. This
+PT-14, PT-24, PT-26, PT-34, PT-36, PT-38, PT-39, PT-41, PT-45, PT-50, and
+PT-46's F49(b) half. This
 file carries only un-run work; when a test completes, its whole section (with
 the result notes) moves to the archive.
 
@@ -1159,39 +1159,6 @@ both, and a rocket of applicants on the way (or use the sponsor resupply).
    reload — **EXPECTED:** the dome accepts residents again, nothing errors.
 
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
-
-## PT-50 — Multiple Artificial Suns · covers **D04 `Opt_MultipleSuns`** (absorbs F39)
-
-Reworked PT-26: the module lifts the build-once limit AND ships the panel
-binding fix that makes sun #2 actually light panels. The single-sun baseline
-for comparison is banked in the PT-26 archive section: night production beside
-the lit sun at −21% atmospheric was small 3.6 (vs 4 daylight), large 9 (vs 10).
-
-**Setup:** module on; a colony with one Artificial Sun already lit (SAVE from
-PT-26 works). Research/cheat whatever the second sun needs
-(`UIColony:SetTechResearched` for its tech if not already there; cheat-fund the
-build).
-
-**Trigger:**
-1. Open the build menu with sun #1 standing.
-   - **EXPECTED:** the Artificial Sun is offered normally — no "You can build
-     this building only once" refusal.
-2. Build sun #2 FAR from #1 (out of #1's range) through the normal build menu,
-   fuel and ignite it.
-3. Build solar panels AFTER it, in range of sun #2 only.
-   - **EXPECTED:** at night those panels produce at the banked signature
-     (≈ −10% of daylight at the PT-26 map's −21% atmospheric: 3.6/9-style
-     numbers), i.e. sun #2 lights them exactly like sun #1 lights its own.
-   - **SURPRISE looks like:** panels beside sun #2 dead at night (the vanilla
-     F39 binding bug — the absorbed fix failed).
-4. Save with both suns + panels, reload — panels stay lit (the LoadGame sweep
-   and persistence both fine).
-5. Turn the module OFF (fresh session, no opt-in flag), load a NO-second-sun
-   save: the build menu refuses a second sun again (limit restored).
-
-`Result (menu allows #2 / #2 lights its panels / survives reload / off restores limit?):` _____________________________________________
-
----
 
 # Group 7 — cross-cutting (do these last, every session)
 

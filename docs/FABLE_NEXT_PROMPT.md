@@ -70,9 +70,9 @@ silent.
     at it critically** (position, icons, yellow-vs-red distinction from
     quarantine, rollover text). Then: arrivals + resettlement blocked, commute/
     services intact, manual relocation + tourists work, MicroG habitat row too.
-  - **PT-50** MultipleSuns — menu allows sun #2, its panels produce at night
-    (banked PT-26 baseline: −21% atmospheric → small 3.6 vs 4, large 9 vs 10),
-    survives reload, limit returns with the module off.
+  - ~~PT-50~~ **DONE 2026-07-27 late — PASS in full, D04 `tested`** (night
+    signature matched both sectors, sunless panels 0 at night, reload clean,
+    limit off/on live via the Mod Options toggle; archived).
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
 - Un-run: PT-09..11, PT-15..19 (fixtures B/D/E), PT-23, PT-25, PT-27..33,

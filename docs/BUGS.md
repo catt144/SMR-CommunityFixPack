@@ -51,7 +51,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | tested |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
-| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | folded into D04 `Opt_MultipleSuns` 2026-07-27 (latent in unmodded game: build-once wonder; standalone fix deleted) |
+| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | folded into D04 `Opt_MultipleSuns` 2026-07-27 (latent in unmodded game; standalone fix deleted); absorbed fix play-verified — PT-50 PASS |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
 | F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
@@ -79,7 +79,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
 | D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | built 2026-07-27: `Opt_AcknowledgedWarnings` (opt-in, probe PASS in the opt-in leg; PT-48) |
 | D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | built 2026-07-27: `Opt_ResidencyControl` (opt-in, probe PASS in the opt-in leg; PT-49) |
-| D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | built 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix, probe PASS in the opt-in leg; PT-50) |
+| D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | built 2026-07-27 late: native Mod Options toggles (items.lua + 00_Core bridge, live both ways; probe OptionsMenu; PT-51) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | fixed  |
@@ -837,7 +837,7 @@ with it, :33-38) — the LoadGame sweep is the only leak. Repair is unaffected:
 `Building:Rebuild` (`Building.lua:1655`) yields a NEW object whose `GameInit` registers
 normally.
 
-### F39 — Second Artificial Sun ignored (P2, high)  `[folded into D04 (2026-07-27): the fix now ships inside Code/Opt_MultipleSuns.lua; standalone Fix_SecondArtificialSun.lua DELETED (latent in unmodded game, PT-26)]`
+### F39 — Second Artificial Sun ignored (P2, high)  `[folded into D04 (2026-07-27): the fix now ships inside Code/Opt_MultipleSuns.lua; standalone Fix_SecondArtificialSun.lua DELETED (latent in unmodded game, PT-26); the absorbed binding fix is play-verified — PT-50 PASS 2026-07-27]`
 `SolarPanelBase:GameInit` (`SolarPanel.lua:8-14`): only `labels.ArtificialSun[1]` tested
 with `TestSunPanelRange`. Panel built in range of sun #2 only never registers (reverse
 direction works, `ArtificialSun.lua:35-47`). **Fix:** wrap GameInit: iterate the whole
@@ -1811,7 +1811,7 @@ Probe `ResidencyControl` (TestKit `60_Probes_Opt.lua`) asserts both gates plus t
 tourist and safety-fallback exemptions — PASS in the opt-in leg. Playtest: PT-49 (the
 UI row needs eyes-on — it is the pack's first added infopanel row).
 
-### D04 — Multiple Artificial Suns — absorbs F39  `[built 2026-07-27: Code/Opt_MultipleSuns.lua (opt-in, off by default); probe PASS in the opt-in leg incl. the live template lift; PT-50]`
+### D04 — Multiple Artificial Suns — absorbs F39  `[tested 2026-07-27 (PT-50 PASS in full, archive): Code/Opt_MultipleSuns.lua (opt-in, off by default); night signature matched the banked baseline both sectors, sunless panels 0 at night, reload clean, limit off/on live via the D05 Mod Options toggle]`
 Filed 2026-07-27 (user decision, out of PT-26/F39's premise finding — read F39 first).
 The shipped game hard-limits the Artificial Sun to one per colony (`build_once` wonder,
 enforced colony-wide incl. construction sites, `BuildMenu.lua:711-719`), which makes

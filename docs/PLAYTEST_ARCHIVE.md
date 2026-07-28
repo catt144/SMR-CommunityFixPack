@@ -1034,3 +1034,52 @@ fold into a later sitting if desired.
 
 ---
 
+## PT-50 — Multiple Artificial Suns · covers **D04 `Opt_MultipleSuns`** (absorbs F39)
+
+Reworked PT-26: the module lifts the build-once limit AND ships the panel
+binding fix that makes sun #2 actually light panels. The single-sun baseline
+for comparison is banked in the PT-26 archive section: night production beside
+the lit sun at −21% atmospheric was small 3.6 (vs 4 daylight), large 9 (vs 10).
+
+**Setup:** module on; a colony with one Artificial Sun already lit (SAVE from
+PT-26 works). Research/cheat whatever the second sun needs
+(`UIColony:SetTechResearched` for its tech if not already there; cheat-fund the
+build).
+
+**Trigger:**
+1. Open the build menu with sun #1 standing.
+   - **EXPECTED:** the Artificial Sun is offered normally — no "You can build
+     this building only once" refusal.
+2. Build sun #2 FAR from #1 (out of #1's range) through the normal build menu,
+   fuel and ignite it.
+3. Build solar panels AFTER it, in range of sun #2 only.
+   - **EXPECTED:** at night those panels produce at the banked signature
+     (≈ −10% of daylight at the PT-26 map's −21% atmospheric: 3.6/9-style
+     numbers), i.e. sun #2 lights them exactly like sun #1 lights its own.
+   - **SURPRISE looks like:** panels beside sun #2 dead at night (the vanilla
+     F39 binding bug — the absorbed fix failed).
+4. Save with both suns + panels, reload — panels stay lit (the LoadGame sweep
+   and persistence both fine).
+5. Turn the module OFF (fresh session, no opt-in flag), load a NO-second-sun
+   save: the build menu refuses a second sun again (limit restored).
+
+`Result (menu allows #2 / #2 lights its panels / survives reload / off restores limit?):` **PASS
+in full — 2026-07-27 late (the module's first sitting, enabled through the new
+D05 Mod Options toggles).** (1) Build menu offered the sun normally with #1
+standing; sun #2 built through the normal menu, **multiple map sectors away**
+from #1 (sector-map screenshot on file). (2) Night production beside a sun
+matched the banked PT-26 signature exactly: small panel **3.6 @ −21%
+atmospheric**, large **9 @ −21%** (vs 4/10 daylight); the other sector's
+sun-side large panel read **10 @ 0% atmospheric** (different map, no
+atmospheric penalty there — full-rate night production, consistent).
+(3) Control held — panels **away from any sun closed and dropped to 0** when
+night fell, so the binding fix is not over-broad. (4) **Save → reload: both
+sets of panels working correctly** (tester verbatim). (5) The off-restores-limit
+half was verified LIVE mid-session via the Mod Options toggle: switching the
+module off brought back the "You can build this building only once" refusal
+instantly, switching it on lifted it again (screenshot on file; also part of
+PT-51's live-toggle evidence). **D04 → tested; the absorbed F39 binding fix is
+play-verified.**
+
+---
+
