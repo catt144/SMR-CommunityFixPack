@@ -1810,6 +1810,17 @@ survey resolved as speced, with one refinement found at build time:
 Probe `ResidencyControl` (TestKit `60_Probes_Opt.lua`) asserts both gates plus the
 tourist and safety-fallback exemptions — PASS in the opt-in leg. Playtest: PT-49 (the
 UI row needs eyes-on — it is the pack's first added infopanel row).
+**PT-49 first sitting (2026-07-27 late): core behavior PASSing** — closed
+high-comfort dome took zero move-ins while commute/services ran normally
+(evidence in the checklist section). **One cosmetic finding, repaired same
+day:** the appended row rendered at the section's END (below the stat bars)
+because sectionDome:Init builds toggles first, then the Colonists/stat
+InfopanelSections, and a post-wrap append lands last. Repair: after creation
+the row is repositioned to just before the first plain InfopanelSection child
+(= directly after the shipped accept-colonists toggle) — children are the
+parent's array part and VList renders array order (XWindow.lua:719-739 is the
+engine's own array-reorder precedent); falls back to end-of-section if the
+shape ever differs. Position eyes-on re-check after the next relaunch.
 
 ### D04 — Multiple Artificial Suns — absorbs F39  `[tested 2026-07-27 (PT-50 PASS in full, archive): Code/Opt_MultipleSuns.lua (opt-in, off by default); night signature matched the banked baseline both sectors, sunless panels 0 at night, reload clean, limit off/on live via the D05 Mod Options toggle]`
 Filed 2026-07-27 (user decision, out of PT-26/F39's premise finding — read F39 first).

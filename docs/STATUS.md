@@ -54,6 +54,13 @@ tonight". Full spec + Src evidence on the **D05** BUGS entry; summary:
   D05 entry). Both writers now use `""`, ListFixes nil-tolerant. Takes effect
   on the user's next relaunch; **A/B pair re-verify queued for the next
   game-free window** (cosmetic to the probes — nothing reads ListFixes).
+- **PT-49 first sitting, same night: core behavior PASSing** (closed
+  high-comfort dome: zero move-ins, commute/services normal — screenshots).
+  Cosmetic finding repaired same day: the policy row now inserts directly
+  after the shipped accept-colonists toggle instead of below the stat bars
+  (array reposition; trail on the D03 entry). Position re-check + the
+  remaining PT-49 steps (arrivals, manual relocation, tourists, quarantine
+  independence, MicroG row, uninstall) continue after the next relaunch.
 - **PT-50 PASS in full, same night (the Group 8 sitting, running on the new
   Mod Options toggles) → D04 `tested`, F39's absorbed fix play-verified:**
   sun #2 built through the normal menu multiple sectors from #1; night

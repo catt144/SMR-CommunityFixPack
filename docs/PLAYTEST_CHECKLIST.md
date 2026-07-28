@@ -1158,6 +1158,19 @@ both, and a rocket of applicants on the way (or use the sponsor resupply).
 8. Uninstall shape: save with a closed dome, disable the module (or the pack),
    reload — **EXPECTED:** the dome accepts residents again, nothing errors.
 
+**Progress (2026-07-27 late, first sitting):** core behavior PASSing — a
+prepped high-comfort dome (Smart Apartment 0/20, comfort 70) closed to new
+residents took ZERO move-ins over the observation window while its
+commuters/visitors carried on normally (workers present; Mega Mall, Electronics
+Store, Grocer, Open Air Gym all showing active visitors — screenshots on file).
+Tester's one complaint, cosmetic: the row rendered at the BOTTOM of the dome
+section (below the stat bars) instead of with the policy toggle group.
+**Repaired same day** (row now inserts directly after the shipped
+accept-colonists toggle — array reposition in append_policy_row); **verify the
+new position after the next relaunch**, then continue with arrivals, manual
+relocation, tourists, quarantine independence, the MicroG row and the
+uninstall shape.
+
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
 
 # Group 7 — cross-cutting (do these last, every session)

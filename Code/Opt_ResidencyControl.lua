@@ -71,8 +71,23 @@ end
 -- (Lua\XDef\sectionDome.generated.lua:177-217): InfopanelActiveSection with
 -- everything set in OnContextUpdate. Yellow/limit styling on the closed state
 -- so it cannot be mistaken for the red quarantine row above it.
+--
+-- Placement (playtest feedback, PT-49 first sitting 2026-07-27): the row must
+-- sit WITH the policy toggle group (right after the shipped accept-colonists
+-- row), not at the section's end below the stat bars. The section is a VList
+-- whose children render in array order (XWindow children ARE the array part;
+-- the engine itself reorders them with plain array ops, XWindow.lua:719-739),
+-- and sectionDome:Init builds the toggle rows first, then the plain
+-- InfopanelSection blocks (Colonists count, stats). So: create the row (lands
+-- last), then move it to just before the FIRST plain InfopanelSection child —
+-- i.e. directly after the last shipped toggle. Class test is unambiguous:
+-- InfopanelActiveSection and InfopanelSection are siblings (both XSection).
+-- If no such child exists (e.g. a differently-shaped habitat section), the
+-- row simply stays at the end — the pre-feedback behavior. Init-time move:
+-- the first measure/layout pass runs after Init, so no invalidation is
+-- strictly needed; the InvalidateMeasure is belt-and-braces for rebuilds.
 local function append_policy_row(section, context)
-	InfopanelActiveSection:new({
+	local row = InfopanelActiveSection:new({
 		OnContextUpdate = function(self, context, ...)
 			local dome = ResolvePropObj(context)
 			local closed = is_closed(dome)
@@ -115,6 +130,21 @@ local function append_policy_row(section, context)
 			end
 		end,
 	}, section, context)
+
+	local target
+	for i, child in ipairs(section) do
+		if child ~= row and IsKindOf(child, "InfopanelSection")
+				and not IsKindOf(child, "InfopanelActiveSection") then
+			target = i
+			break
+		end
+	end
+	local from = table.find(section, row)
+	if target and from and from > target then
+		table.remove(section, from)
+		table.insert(section, target, row)
+		section:InvalidateMeasure()
+	end
 end
 
 SMRFixPack.Register("ResidencyControl", {
