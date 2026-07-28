@@ -85,9 +85,9 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28, full procedure (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
-| F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | fixed  |
+| F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | tested — PT-16 PASS 2026-07-28, full-sol asteroid hold logged (entry) |
 | F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | tested — PT-17 complete 2026-07-28 incl. the attended capacity-edge re-run post-repair (ground settled AT the threshold) |
-| F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | fixed  |
+| F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | tested — PT-16 PASS 2026-07-28, ration kept + flew home (entry) |
 | F70 | Edit Payload silently refills from policy template       | P2  | med+ | tested — PT-31 PASS 2026-07-28 incl. round trip + prefill negative (entry) |
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested 2026-07-28 (PT-32: live two-resource priority inversion + probe order coverage) |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | tested — PT-33 PASS 2026-07-28, all three cases (entry) |
@@ -2078,7 +2078,21 @@ early-returns exactly like the shipped body. Probe `TrackConnectorPingPong`
 map — exactly one rebuild scheduled (live neighbour), dying self and destructing
 neighbours excluded, hexes deduplicated. Playtest: PT-41.
 
-### F67 — Auto-lander launches empty and ping-pongs (P1, high)  `[fixed: Code/Fix_LanderEmptyLaunch.lua]`
+### F67 — Auto-lander launches empty and ping-pongs (P1, high)  `[tested: Code/Fix_LanderEmptyLaunch.lua — PT-16 PASS 2026-07-28]`
+**PT-16 PASS — 2026-07-28, live colony, Galileo #1, automated mode with a
+deliberately unsatisfiable GET rule (Metals get-when-above 100, Kayra AL10
+stock 0; all else Ignore).** The repaired leaf-class CargoReady logger
+captured its first live verdicts. Asteroid side — the spot where vanilla's
+only brake was the 1-hour sleep: the gate held `IsCargoReady -> false`
+through **~20 hourly empty recomputes (a full sol's dwell)**, then the
+designed `AutoDepartTimerSols` forced exit flipped it true and the lander
+flew home. Cadence: one round trip per sol-plus, no hourly fuel-burning
+ping-pong. Mars-side observation (new engine fact, recorded): the quick
+fueled departure with no SEND rules is DESIGNED — `CheckAutoDepart`
+(`UniversalRocket.lua:1777-1781`) consults only the CURRENT side's rule set
+(`import_below` on Mars, `export_above` on the target), so an empty
+side-set means "nothing will ever load here — fly out and collect"; the fix
+correctly defers to that (its gate only closes inside the wait window).
 `UniversalRocketBase:IsCargoReady` (`UniversalRocket.lua:455-472`): `CheckAutoDepart()`
 ("wait for cargo") only yields the NON-blocking `"waiting_cargo"` issue
 (`GetLaunchIssue` :883-885 returns no blocker); with an empty auto request
@@ -2140,7 +2154,7 @@ observed numbers match `aboard + current surplus above threshold` exactly —
 the repaired single-floor implementation verified end-to-end. **F68 CLOSED
 `tested`; PT-17 archived.**
 
-### F69 — Manual landing dumps the return fuel (P1, high)  `[fixed: Code/Fix_LanderReturnFuel.lua]`
+### F69 — Manual landing dumps the return fuel (P1, high)  `[tested: Code/Fix_LanderReturnFuel.lua — PT-16 PASS 2026-07-28]`
 `CmdLand` (`UniversalRocket.lua:414`) clears `arrival_loc` in manual mode →
 `GetFuelResourceRequest` (:1639-1642) returns 0 → `CmdUnload` (:486-494) posts the
 reserved return fuel (asteroid policy keeps half, `FlightPolicyDef.lua:208-211`,
@@ -2148,6 +2162,21 @@ reserved return fuel (asteroid policy keeps half, `FlightPolicyDef.lua:208-211`,
 stranded forever ("no fuel, no drones, can't send another lander"). **Fix:** override
 `GetFuelResourceRequest`: lander type with no destination departing an asteroid keeps
 `FuelResourceAmount` requested.
+**PT-16 PASS — 2026-07-28, live colony: Galileo #1, MANUAL mode, no
+destination at any point, landed on bare Kayra AL10 (no drones, no hub).**
+Post-unload panel: Destination None, general fuel request 0/0, **"Return
+trip fuel 15/15" held in reserve, nothing offered as excess** — then
+launched home on that reserve and landed on Mars. The vanilla stranding
+(fuel posted as excess on the drone-less rock) is gone. Method note: a
+FIRST attempt via automated-mode landing was correctly discarded as
+non-discriminating — auto mode retains `arrival_loc`, so vanilla keeps fuel
+there too; only the manual-mode landing exercises the bug path. Adjacent
+vanilla hazard recorded during the earlier attempt: the `RoughTouchDown`
+storybit (RocketUnloaded trigger, asteroid environment) can malfunction a
+lander into a 25-Metals repair on a rock with no metals and no drones — a
+by-design permanent stranding untouched by `CleanAndFix`; verified console
+recovery: `SelectedObj.maintenance_request:SetAmount(0)` (the same
+`SetAmount` the shipped repair path uses, `UniversalRocket.lua:600/:614`).
 
 ### F70 — Edit Payload silently refills from the policy template (P2, med-high)  `[tested: Code/Fix_PayloadTemplateRefill.lua — PT-31 PASS 2026-07-28; the legacy LanderRocketCargoRequest copy is unreachable in Relaunched, see below]`
 **PT-31 PASS — 2026-07-28, live colony: brand-new lander (Galileo #1),

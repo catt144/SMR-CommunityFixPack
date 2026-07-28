@@ -341,39 +341,6 @@ a bonus observation).
 Do all four of these in one sitting — SAVE-E is the expensive fixture.
 Run `dbg_ToggleRocketInstantTravel()` once at the start of PT-16/PT-17.
 
-## PT-16 — Asteroid lander: empty launch + return fuel · covers **F67, F69**
-
-**Setup:** SAVE-E. An **Asteroid Lander** on the pad. `dbg_ToggleRocketInstantTravel()`.
-
-**Trigger — F67 (empty launch):**
-1. Enable **Automated Mode** on the lander and set **every** export/import threshold to
-   "ignore" (so the auto request computes to nothing).
-2. `SMRTest.Log.CargoReady(true)` and `SMRTest.Log.AutoCargo(true)`.
-3. Run 1–2 sols at ultra speed.
-
-- **BROKEN looks like:** the lander takes off with an empty hold and ping-pongs
-  Mars↔asteroid forever, burning ~70 fuel a trip and delivering nothing.
-- **FIXED looks like:** the lander **sits on the pad** while its cargo request is empty
-  (`IsCargoReady -> false` in the log); it only launches once it has something to carry
-  (or when the 1-sol auto-depart timer legitimately expires).
-
-**Trigger — F69 (return fuel):**
-4. Manually fly the lander to the asteroid and **land it manually** (no return
-   destination set). Make sure there are **no drones and no drone hub** on the asteroid.
-5. Watch the lander's fuel and its resource requests after `CmdUnload`.
-
-- **BROKEN looks like:** on landing the lander dumps its reserved return fuel onto the
-  ground as "excess" — with no drones there to put it back, the lander is stranded on
-  the asteroid permanently.
-- **FIXED looks like:** the lander **keeps a fuel ration requested/reserved** (≥ its
-  `FuelResourceAmount`) and can fly home.
-
-`Result (F67):` _____________________________________________
-
-`Result (F69):` _____________________________________________
-
----
-
 ## PT-18 — Arrival deaths, including the elevator / multi-map path · covers **F53**
 
 This is the fix that was **reworked after the audit found it broken**, and the elevator

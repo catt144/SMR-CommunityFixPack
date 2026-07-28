@@ -43,7 +43,9 @@ PT-33 PASS same sitting → F72 `tested`, archived (all three cases incl.
 both not-over-broad negatives); PT-40 PASS same sitting → F65 `tested`,
 archived (merge both geometries, clean salvage split, long-track control,
 reload, log clean); PT-31 PASS same sitting → F70 `tested`, archived
-(round trip held, prefill negative intact — fifth flip of the sitting).**
+(round trip held, prefill negative intact); PT-16 PASS same sitting →
+F67 + F69 `tested`, archived — **the ASTEROID SECTION is COMPLETE; seven
+flips in one sitting (F68, F73, F72, F65, F70, F67, F69).**
 Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
 
