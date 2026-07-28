@@ -94,6 +94,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
+| F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | todo (traced 2026-07-27; build = user decision) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -2392,6 +2393,44 @@ Pack ruled out for this sighting explicitly: the F74 wrappers in that chain are
 refuse-only (both early-return false for event rockets, everything else defers
 to the shipped body) — verified in-session before filing.
 
+### F77 — Extender working-flap tears down and rebuilds the entire uplink hub; fleet-wide Idle churn (P2, med-high)  `[todo — traced in the 2026-07-27 game-free drone investigation leg; build = user decision]`
+`DroneHubExtenderBase:OnSetWorking` (`DroneHubExtender.lua:171-178`) calls
+`UpdateUplinkRequesters` (:109-112) on EVERY working transition, in BOTH directions
+(off AND back on), and that helper is not incremental: it runs
+`uplink:DisconnectTaskRequesters()` + `ConnectTaskRequesters()` — a full teardown and
+rebuild of the WHOLE far hub's requester set, not just the extender's own slice
+(`DroneControl.lua:441-450`, `:327-360`). The teardown walks every connected
+requester: each `RemoveCommandCenter` → `DroneControl:RemoveBuilding` (`:731-757`) →
+`OnRemoveBuilding` (`:720-729`), which scans the hub's whole drone list per building
+and kicks every drone whose goto target is that building to `Idle` (aborting the trip
+and, via the command destructors, releasing any held request claim). Consequences per
+extender power-loss/restore, malfunction, repair completion, or manual toggle:
+(a) every in-flight trip of the entire far fleet to ANY connected building is aborted
+— F50's churn signature, but triggered by the extender and fired on BOTH edges of the
+flap (two full cycles per blip); (b) O(B×D) drone-kick scans plus O(B×P) linear
+`remove_entry` queue removals plus a full `MapGet` radius rescan on reconnect —
+per flap, per extender; (c) requests vanish from the hub's queues for the window, so
+drones that poll during it stamp the empty-queue throttle. Extenders are
+maintenance-consuming, powered buildings (`maintenance_resource_type = "Electronics"`,
+`electricity_consumption = 2000`, `DroneHubExtender.generated.lua:17,38`), so dust
+storms, battery brownouts and ordinary malfunction cycles flap them in exactly the
+big-colony scenarios where the far hub serves the most ground. This alone reproduces
+both halves of the live 2026-07-27 report (drones dropping to Idle + degraded
+throughput) whenever an extender flaps — no additional defect required — though the
+cross-hub locality gap traced on the sweep bullet is a separate, co-existing mechanism.
+**Fix sketch (FIX_POLICY §1 ranking; NOT built — user decision):**
+(1) chained wrapper on `DroneHubExtenderBase:OnSetWorking` that debounces the
+`UpdateUplinkRequesters` half — coalesce transitions within a few seconds into one
+delayed reconnect thread per uplink (risk: a short stale-coverage window where
+extender-only buildings stay registered while the extender is down — benign next to
+the churn; savegame-neutral, no persisted state);
+(2) diff-based reconnect (disconnect only requesters no longer covered by
+`FindTaskRequesters`) — better endgame but full-replacement scale surgery on shared
+`DroneControl` machinery (F50/F68/F70/F71 territory), not the first move.
+Risk note: the wrap point is narrow (extender class only), but the effect surface is
+every `DroneControl` descendant serviced by the uplink hub — must pass the F50
+rocket-churn and F55 unreachable scenarios in playtest before shipping.
+
 ## Candidates under investigation
 
 ### C01 — `BreakthroughOrder` rebuilt+reshuffled on every map load
@@ -2406,6 +2445,9 @@ excess :676-681).
 ## Not yet swept (follow-up targets)
 
 - `Lua\Buildings\DroneControl.lua`, `ShuttleHub.lua` — drone/shuttle task assignment.
+  **(DroneControl half SWEPT — static source leg 2026-07-27 late; full verdict + trace
+  + instrumentation plan appended at the end of this bullet. `ShuttleHub.lua` remains
+  unswept.)**
   Prime suspect for live reports: "drones ignore rocket cargo at high priority",
   "RC transports don't auto-offload rockets", "late-game drones stop maintaining
   inside open domes / cluster stuck outside" (review-sourced).
@@ -2452,6 +2494,149 @@ excess :676-681).
   `XDef\customDroneHubExtender.generated.lua`. Repro recipe for the sweep:
   hub A + hub B far apart, extender bridging B's range into A's area, break
   something in A's yard, watch which fleet answers.
+
+  **INVESTIGATION VERDICT (game-free source leg, 2026-07-27 late).** The assignment
+  architecture is **working-as-coded but has NO cross-hub locality anywhere**; the
+  extender-transparency hypothesis is **CONFIRMED**; one adjacent provable defect was
+  filed (**F77**, extender working-flap churn); the exact starvation trigger needs one
+  attended console sitting to discriminate two proven-possible mechanisms (reads below).
+  Trace, against the six kickoff questions:
+
+  1. **Pull model, own-hub-only, engine-matched.** An idle drone polls ONLY its own
+     hub: `Drone:Idle` (`Drone.lua:564-641`) calls `command_center:FindTask(self)`
+     (`:621`) — the sole `FindTask` call site in the entire Src tree (grep-verified).
+     `TaskRequestHub:FindTask` (`_TaskRequest.lua:72-83`) hands the hub's OWN
+     priority/supply/demand queues to the C-side `Request_FindTask`; the match
+     order/distance policy inside it is engine-internal and NOT visible in Src (no doc
+     either — recorded as an engine-side unknown). The only distance knob visible from
+     Lua is per-request `supply_dist_modifier` (`_TaskRequest.lua:96`) — distance is
+     weighed when pairing supplies WITHIN a hub, but nothing weighs locality across
+     fleets. Queues are per-hub Lua tables of shared C request objects, appended in
+     insertion order (`CommonLua\TaskRequest.lua:242-256` queue layout;
+     `DroneControl.lua:685-718` `AddBuilding`). Poll cadence ≈3s per idle drone
+     (Sleeps inside Idle), gated on `hub.working` (`Drone.lua:612`) and on a 1s
+     per-HUB empty-queue throttle `no_requests_time` (`:620,:631` — stamped only by a
+     drone with zero unreachable-cache entries; reset only by `InterruptDrones`,
+     `_TaskRequest.lua:301`).
+  2. **Overlap = the same C request object sits in EVERY covering hub's queues; claim
+     is first-poller-wins and held through travel; no handoff, no stealing, no
+     rebalance exists.** A building registers with every hub whose radius covers it
+     (`TaskRequester:AddCommandCenter`, `CommonLua\TaskRequest.lua:147-160`; both
+     connect directions), and every new request posts into every registered center
+     (`AddRequest`, `:123-137`). The claim happens when the winning drone's command
+     starts, not at match time: `Drone:Work` calls `RequestAssignUnit` BEFORE the
+     approach (`Drone.lua:898-924` — claim at `:901`, fulfil only on arrival `:920`),
+     so the slot is locked for the entire trip. Maintenance repair requests are
+     created with **max_units = 1** (`RequiresMaintenance.lua:82` —
+     `AddWorkRequest("repair", 0, 0, 1)`): ONE claiming drone, however far, locks out
+     every other fleet. The only cross-hub drone code in the game is refab gathering
+     (`DroneHub.lua:53-74`) and orphan adoption — nothing load- or distance-based.
+  3. **Extender transparency CONFIRMED in both connect directions.** Building-side:
+     `FindDroneNodes` (`_TaskRequest.lua:251-257`) returns any `DroneNode` covering
+     the building; an extender's `GetCommandCenter()` recurses to its uplink HUB
+     (`DroneHubExtender.lua:156-160`), so the building registers the far hub ITSELF.
+     Hub-side: `FindTaskRequesters` (`DroneControl.lua:315-325`) recurses through
+     working linked extenders and connects finds to the hub. Extender-mediated
+     coverage is structurally identical to native coverage in every queue — the
+     extender leaves no trace on the request. What extenders do NOT extend: drone
+     movement. `Drone:SetCommandCenter` restricts each drone to
+     `const.DroneRestrictRadius` = 100 hexes-worth of world distance AROUND THE HUB
+     POSITION (`Drone.lua:227-230`, `_GameConst.lua:71`). Post-SignalBoosters (hub
+     +15 → 50, extender +15 → 50; `TechPreset.lua:3455-3482`) one max-stretched
+     extender reaches exactly that boundary; a chain of two EXCEEDS it — buildings
+     can be REGISTERED with a hub whose drones can never legally reach them
+     (suspected F55-feeder: approach fails → unreachable-forever cache; `RestrictArea`
+     enforcement is engine-side, unverifiable statically — flagged for the live
+     sitting).
+  4. **Idle drones never look for work themselves.** The Idle body is the only work
+     search a drone performs, own hub only (plus special cases: own-hub repair,
+     broken-drone repair, emergency power — `Drone.lua:593-618`). If its hub's queues
+     don't hold the request, or the request is claim-locked, a drone parked ON TOP of
+     the work idles forever, by construction.
+  5. **Hot loops (the performance half).** (i) Every idle drone × every ≈3s × a
+     C-side scan over its hub's full queue set; queue size grows with range² ×
+     building density AND with overlap multiplicity — every shared building's
+     requests appear in every covering hub's queues, so k-fold overlap ≈ k× the
+     colony-wide scan work. The 1s empty-queue throttle cannot engage while any
+     polling drone holds an unreachable-cache entry (`Drone.lua:630`) — i.e. exactly
+     in cluttered late-game colonies. (ii) Reconnect storms: `SetWorkRadius`
+     (`DroneControl.lua:760-777`), every extender working-flap (→ **F77**), and
+     `OnMsg.DepositsSpawned` reconnecting EVERY hub in the city at once
+     (`DroneHub.lua:188-199`). Each reconnect = per-building drone-kick scans
+     (O(B×D), `OnRemoveBuilding` `:720-729`) + linear `remove_entry` over 5-priority
+     queues + a full `MapGet` radius rescan. That is the reported range × drones ×
+     requests degradation, and overlap worsens every term.
+  6. **Reconciliation.** The observed picture (near fleet Idle, far fleet slowly
+     servicing, transient `performance = 0` disables, requests reading `target:0`)
+     is reproduced by the traced machinery under either of two mechanisms — the
+     banked console evidence cannot yet discriminate:
+     **(a) registration gap** — the starving buildings sit OUTSIDE hub 2608's
+     35-50-hex circle while INSIDE the far hub's extender-stretched coverage. Then
+     2608's queues never hold the requests and its drones idle legitimately (drones
+     parked near the buildings prove nothing about the hub's circle — `GoHome` parks
+     them relative to the HUB, `Drone.lua:636-638,643-674`). Everything runs
+     as-coded; the failure is pure design — the extender grants the FAR fleet ground
+     the NEAR fleet doesn't own.
+     **(b) claim lockout** — the requests ARE in both hubs' queues; far drones claim
+     first (max_units=1 + claim-held-through-travel) and the near fleet re-loses the
+     race on every work chunk. The live `target:0` read is consistent with (b) at the
+     read instant, but also with (a)+far-claim.
+     **F77's flap churn additionally reproduces both observed halves on its own**
+     whenever an extender flaps — and this colony runs extenders with a pending
+     extender maintenance request in the same dump batch.
+
+  **Live instrumentation plan (next attended sitting; F12/PT-38 timestamped-wrapper
+  pattern; every name verified against Src and console-sandbox-safe — `HexAxialDistance`,
+  `HandleToObject`, `ConsolePrint`, `MainCity`, `GameTime`, `guim` all non-blacklisted;
+  `Drone.lua` holds no file-local alias of `RequestAssignUnit`, so a console global
+  wrapper IS seen by drone code):**
+  * **R1 — registration + geometry** (select the starving building first). Answers
+    (a) instantly — is 2608 listed, and is `d ≤ radius`?
+    `*r local b=SelectedObj local s={} for _,cc in ipairs(b.command_centers or empty_table) do s[#s+1]=cc.class..":"..cc.handle.." d="..HexAxialDistance(cc,b).."/"..cc.work_radius.." w="..tostring(cc.working) end ConsolePrint("[SMR reg] "..b.class..":"..b.handle.." -> "..table.concat(s," | "))`
+  * **R2 — who holds the repair claim** (building still selected):
+    `*r local b=SelectedObj local r=b.maintenance_work_request ConsolePrint("[SMR req] target="..r:GetTargetAmount().." actual="..r:GetActualAmount().." can="..tostring(r:CanAssignUnit())) for _,d in ipairs(b:GetMap().City.labels.Drone) do if d.w_request==r or d.d_request==r or d.s_request==r then ConsolePrint("[SMR holder] "..d.handle.." cmd="..tostring(d.command).." hub="..(IsValid(d.command_center) and d.command_center.handle or 0).." dist="..(d:GetDist2D(b)/guim).."m") end end`
+  * **R3 — is the request in hub 2608's queues** (building selected; work requests
+    are rfPostInQueue via the Mars `AddWorkRequest`, `_TaskRequest.lua:118-121`, so
+    the priority_queue is the right place to look):
+    `*r local h=HandleToObject[2608] local b=SelectedObj local n=0 for p=-1,3 do for i,r in ipairs(h.priority_queue[p]) do if r:GetSource()==b then n=n+1 ConsolePrint("[SMR q] prio="..p.." idx="..i) end end end ConsolePrint("[SMR q] hits="..n)`
+  * **R4 — hub state**:
+    `*r local h=HandleToObject[2608] ConsolePrint("[SMR hub] w="..tostring(h.working).." idle="..h:GetIdleDronesCount().."/"..#h.drones.." lap="..h:CalcLapTime().." nrt="..(GameTime()-h.no_requests_time))`
+  * **R5 — extender chain map** (uplink chains + working states):
+    `*r for _,e in ipairs(MainCity.labels.DroneHubExtender or empty_table) do local c={e.class..":"..e.handle} local cur=e.uplink while cur do c[#c+1]=cur.class..":"..cur.handle cur=cur:HasMember("uplink") and cur.uplink or nil end ConsolePrint("[SMR ext] "..table.concat(c," -> ").." w="..tostring(e.working)) end`
+  * **R6 — live claim tap** (the timestamped wrapper; repair-only filter to bound
+    spam; arm once per session, cleared by reload):
+    `*r local orig=RequestAssignUnit RequestAssignUnit=function(req,unit,amount) local ok=orig(req,unit,amount) if ok and IsValid(unit) and unit.class=="Drone" and tostring(req:GetResource())=="repair" then ConsolePrint("[SMR "..GameTime().."] claim "..unit.handle.." hub="..(IsValid(unit.command_center) and unit.command_center.handle or 0).." src="..tostring(req:GetSource() and req:GetSource().handle)) end return ok end ConsolePrint("[SMR] claim tap armed")`
+  * **R7 — controlled repro** (the banked recipe): hub A + hub B far apart, extender
+    bridging B into A's yard. Arm R6; `Platform.cheats = true` then
+    `SelectedObj:CheatMalfunction()` on a building in A's yard (verified command
+    table); watch which hub's drone claims, then re-run R1-R4 at the claim moment.
+    A-covered building claimed by a B drone while A idles = (b) proven; building
+    missing from A's `command_centers` = (a) proven.
+
+  **Fix directions (NOT built this leg — user decision; FIX_POLICY §1 ranking; the
+  locality items are assignment-POLICY changes — D-item territory — while F77 is a
+  plain repair):**
+  * **If (a) — registration gap:** the least-dishonest mod-side lever is a cross-hub
+    idle-pull: PRE-wrap `Drone:Idle` (must be pre — command methods kill post-wrappers,
+    F73/STATUS fact) so that after the own-hub `FindTask` misses, the drone polls
+    OTHER working hubs whose `work_radius` covers the DRONE's position. Requests are
+    hub-agnostic C objects, so cross-hub execution is mechanically clean, and
+    `RestrictArea` keeps the drone local anyway. Risks: lap-time/heavy-load
+    accounting attributes foreign work to the wrong hub; battery/GoHome interplay;
+    claim races (already atomic via `AssignUnit`).
+  * **If (b) — claim lockout:** a near-idle-yield — chained pre-claim veto in
+    `Drone:Work`/`Drone:PickUp`: skip claiming (the shipped miss path: Sleep +
+    return) when the request's source building has a CLOSER working center with idle
+    drones and the building inside that center's radius; yield-once-per-request memo
+    (TTL) so a request whose near fleet can't actually serve is never starved. The
+    match ORDER itself cannot be touched — `Request_FindTask` is C; only its Lua
+    callers are patchable — so a veto+retry is the least-invasive lever that exists.
+  * **F77 (independent of (a)/(b)):** debounce wrapper — see the F77 entry.
+  * **Shared-machinery risk, stated per the kickoff:** this is the deepest shared
+    machinery in the game — every `DroneControl` descendant (hubs, RCRovers, the
+    rocket cargo path of F50/F68/F70/F71) runs through these queues. Any claim-path
+    change must re-pass the F50 rocket-churn and F55 unreachable scenarios in
+    playtest before shipping.
 - Colonist auto-assignment: workplaces (`UpdateWorkplaces` family — "unemployed
   every sol"), residences ("homeless despite free housing", "seniors don't move"),
   dome-to-dome walking/passage checks (`AreDomesConnectedWithPassage` — suffocation
