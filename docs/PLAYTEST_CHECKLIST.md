@@ -1153,8 +1153,16 @@ and tourists — every colonist bypassed the adjacent closed dome and walked to
 the farther open dome (steps 2 arrivals PASS, screenshot on file); the
 tourists made a beeline INTO the closed dome and checked into its active
 hotel (step 5 PASS — the traits.Tourist exemption behaves exactly as
-designed). Remaining: quarantine independence, the MicroG row and the
-uninstall shape.
+designed).
+**Quarantine independence VERIFIED (same sitting):** quarantining the closed
+dome triggered full vanilla seal behavior — commuter workers immediately left
+their jobs and vacated the dome — while both policy rows kept their own state
+(step 6 PASS; the D03 row and quarantine are demonstrably separate
+mechanisms). **Uninstall shape VERIFIED (same sitting):** module toggled off
+→ the dome accepts residents again, and the save reloads cleanly with
+identical behavior — no errors either way (step 8 PASS, live toggle AND
+reload both exercised). Remaining: the MicroG habitat row (step 7) — needs an
+asteroid habitat; ONLY gate left before D03 flips to tested.
 
 `Result (row looks right / arrivals+resettle blocked / commute+services intact / manual+tourists work?):` _____________________________________________
 
