@@ -1911,6 +1911,21 @@ probes + OptionsMenu PASS. **72 probes total now.**
 **Playtest: PT-51** — the Mod Options page itself needs eyes-on (row rendering,
 tooltips, live toggle both ways, persistence across restart) — first thing in
 the Group 8 sitting, since it is now also the Group 8 enable mechanism.
+**PT-51 first sitting (2026-07-27 late) — LATENT PACK BUG found at step 2 and
+repaired same day:** `SMRFixPack.ListFixes()` crashed ("attempt to concatenate
+a nil value (field 'detail')", 00_Core.lua:140). Root cause predates D05: the
+2026-07-25 F75/F18 status-relabel repairs clear their entry detail with
+`entry.detail = nil` on every DataLoaded
+(Fix_IndependenceTerraforming.lua:88, Fix_LastTransmissionStorage.lua:165),
+and ListFixes concatenated `f.detail` after a `~= ""` check that nil passes —
+so the console helper has been crash-primed in EVERY session since; tonight's
+PT-51 step 2 was simply the first in-colony ListFixes call since then (the
+autorun harness and the probes use their own counters/FixStatus, which is why
+no leg ever caught it). Repair: both writers now clear with `""`, and
+ListFixes tolerates nil defensively (other mods can write these entries).
+Parse-checked; takes effect on the next game launch. **A/B pair re-verify
+queued for the next game-free window** (no probe reads ListFixes, so the
+numbers cannot shift — the pair is policy hygiene).
 
 ### F64 — Demolishing a station vaporizes its trains ("trains go to void") (P1, high)  `[fixed: Code/Fix_TrainsToVoid.lua]`
 *(Header restored 2026-07-26 — it was lost in an earlier doc edit; the entry body below

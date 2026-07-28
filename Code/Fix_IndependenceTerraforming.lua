@@ -85,7 +85,7 @@ local function patch()
 		-- restore the status too, in case an earlier pass mislabeled it
 		if entry then
 			entry.status = "active"
-			entry.detail = nil
+			entry.detail = ""   -- "" not nil: ListFixes concatenates it (PT-51 crash)
 		end
 		log("%s: %s now discounts special projects by %d%% as its param1 says",
 			FIX_ID, TECH_ID, -WANTED)

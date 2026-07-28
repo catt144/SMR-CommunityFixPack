@@ -48,6 +48,12 @@ tonight". Full spec + Src evidence on the **D05** BUGS entry; summary:
   mechanism), Group 8 preamble rewritten, MOD_DESCRIPTION optional-modules
   enable text now points at Mod Options (console-only instructions removed
   from player-facing text).
+- **PT-51 first sitting, same night: `ListFixes()` crash found live and
+  repaired** — latent since the 2026-07-25 F75/F18 status repairs
+  (`entry.detail = nil` writers vs a concat in ListFixes; full trail on the
+  D05 entry). Both writers now use `""`, ListFixes nil-tolerant. Takes effect
+  on the user's next relaunch; **A/B pair re-verify queued for the next
+  game-free window** (cosmetic to the probes — nothing reads ListFixes).
 
 ## Build leg — Fable, 2026-07-27 late: F61 deletion + D02/D03/D04 built, A/B renumbered
 

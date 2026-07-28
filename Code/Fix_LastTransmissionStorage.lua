@@ -162,7 +162,7 @@ local function patch()
 		-- before the presets were loaded (QA 2026-07-25)
 		if entry then
 			entry.status = "active"
-			entry.detail = nil
+			entry.detail = ""   -- "" not nil: ListFixes concatenates it (PT-51 crash)
 		end
 		log("%s: %d storage condition(s) made effective, %d retargeted", FIX_ID, stats.moved, stats.retargeted)
 	elseif ever_changed then

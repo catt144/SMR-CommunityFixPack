@@ -137,6 +137,9 @@ end
 function SMRFixPack.ListFixes()
 	for _, id in ipairs(SMRFixPack.order) do
 		local f = SMRFixPack.fixes[id]
-		log("%s [%s] %s%s", id, f.status, f.title, f.detail ~= "" and (" — " .. f.detail) or "")
+		-- tolerate nil detail: fixes historically cleared it with nil (PT-51
+		-- crash, 2026-07-27), and other mods may write these entries too
+		local detail = f.detail or ""
+		log("%s [%s] %s%s", id, f.status, f.title, detail ~= "" and (" — " .. detail) or "")
 	end
 end
