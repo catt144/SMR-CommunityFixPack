@@ -96,6 +96,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed (built 2026-07-28 with the D06 core; PT pending) |
+| F78 | MeteorsDisaster hangs mid-strike (multi-map save?); disasters never land | P1 | high | investigating (filed 2026-07-28 — PT-01 watchdog caught it live, evidence on entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -2460,6 +2461,43 @@ the churn; savegame-neutral, no persisted state);
 Risk note: the wrap point is narrow (extender class only), but the effect surface is
 every `DroneControl` descendant serviced by the uplink hub — must pass the F50
 rocket-churn and F55 unreachable scenarios in playtest before shipping.
+
+### F78 — MeteorsDisaster hangs mid-strike; the colony never sees a meteor — and possibly no disaster/weather at all (P1, high)  `[investigating — filed 2026-07-28 from the PT-01 watchdog's live catches + user report]`
+**User report (2026-07-28, save TEST 2G):** minimal-but-nonzero disaster map
+settings, 194 sols played, ZERO disasters ever seen, and no weather effects at
+all despite terraforming progressing well into the range where toxic rains
+should occur. Save context: 3 maps loaded (surface `BlankBigCanyonCMix_09`,
+underground, asteroid), `active_game_rules = {}` (verified from the save
+header — NoDisasters is NOT set).
+**Hard evidence (the PT-01 meteor silence-watch doing its job):** the F02
+watchdog fired on the LIVE save repeatedly —
+`WATCHDOG — Meteors thread silent for 183 game hours (last phase 'striking',
+thread ALIVE but stuck); restarting` (log 2026-07-27 13:18), again at 182h
+(15:19 same day), and `MeteorsWatchdog = { restarts = 1 }` in the 2026-07-28
+live session. The watchdog's own preconditions rule out designed silence (it
+checks the descriptor exists and is not forbidden before arming), and the
+`striking` heartbeat is set IMMEDIATELY before the call into the shipped
+`MeteorsDisaster(meteors, meteors_type)` (`Fix_MeteorFrequency.lua:105-106`,
+placed there precisely to make this identifiable) — so **the hang is INSIDE
+the vanilla strike routine** (`Lua\Meteors.lua`): the scheduler rolls and
+waits correctly, enters the strike, and never returns (no `struck` heartbeat,
+no visible meteors). The F02 fix machinery is working as designed — without
+its restarts the thread would simply be dead with no trace.
+**Scope suspicion:** the user reports ALL disaster/weather types silent, not
+just meteors. The sibling disaster threads (dust storms, cold waves, dust
+devils, the terraforming rains) have NO heartbeats — if they wedge the same
+way they die invisibly. Multi-map is the prime suspect axis (strike target
+selection / map iteration on a save with underground + asteroid maps loaded).
+**Investigation plan (next session):** (1) game-free trace of
+`MeteorsDisaster` (`Lua\Meteors.lua`) — find the non-returning path (loops
+over target/sector selection, WaitMsg that can never fire, map-bound MapGet
+on the wrong map); check the sibling disaster threads for the same shape;
+(2) attended: console heartbeat taps on the sibling threads +
+`SMRFixPack.MeteorsWatchdogCheck()` / `SMRFixPack.MeteorsBeat` reads at a
+stall moment; (3) fix decision per FIX_POLICY once the stall line is known.
+Cross-refs: F02 (the scheduler fix + watchdog), PT-01 (the passive watch
+that caught this — record the catch on its line when the checklist is next
+touched).
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); PT pending — attended, multi-iteration]`
 The design defect behind the 2026-07-27 live report (four idle drones parked beside a

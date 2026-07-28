@@ -130,6 +130,15 @@ silent.
   replenishing stock; PASS = asteroid ground settles AT the GET-WHEN-ABOVE
   threshold, still no unload flip — then F68's finding closes and PT-17
   archives).
+- **F78 — NEW P1 INVESTIGATION (user-reported, watchdog-confirmed): the live
+  save has seen ZERO disasters in 194 sols and no weather at all.** The PT-01
+  meteor watchdog caught the mechanism live: the Meteors thread hangs INSIDE
+  the shipped `MeteorsDisaster` call ('striking' heartbeat, 182-183h silent,
+  restarted repeatedly). Full evidence + investigation plan on the F78 BUGS
+  entry — start game-free (trace `Lua\Meteors.lua` for the non-returning
+  path; check sibling disaster threads for the same shape; multi-map is the
+  prime suspect). Sits well alongside the asteroid closeout since the save
+  is already multi-map.
 - **PT-40** train tunnel power (F65) — **use a NORMAL station for the
   short-track half**: the fix triggers only on 2-element tracks (station
   snugged directly to the tunnel entrance); a large station's footprint tends
