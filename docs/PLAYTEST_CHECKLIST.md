@@ -418,7 +418,18 @@ available to export. `SMRTest.Log.AutoCargo(true)`.
   left). **If it sticks at "loading", that is a real FAIL and needs a code change** —
   record the exact export pair, the hold contents and the status text.
 
-`Result (ratchet):` _____________________________________________
+`Result (ratchet):` **PASS — 2026-07-28, live colony (not SAVE-E), single
+Waste Rock export on the purchased lander Sphinx #2 (class confirmed
+`UniversalLanderRocket`; the pack's replacement confirmed in the live
+dispatch path via `rawget` → `Fix_LanderCargoRatchet.lua(124)`). Via the
+leaf-class console tap (TestKit logger blind, see warning above): across 4
+automated Mars↔asteroid cycles the asteroid-side request held PINNED at the
+full-hold 80000 through every hourly recompute while aboard climbed
+monotonically (0→11000→33000→59000→78000→79000) — req never below have, no
+unloading flip, departure on schedule every cycle; request zeroes only at
+load-complete and the intended Mars unload leg. Reserved-site auto-landing
+also verified across all cycles after the one vanilla-required manual first
+landing.**
 
 `Result (capacity edge):` _____________________________________________
 
