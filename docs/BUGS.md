@@ -2416,9 +2416,13 @@ excess :676-681).
   PolymerPlant was caught at `performance = 0` with `auto_performance = 50`
   (the transient disable the user reported), its maintenance/repair requests
   showing `target:0` at read time (the far fleet does service things —
-  slowly). Open question for the sweep: which hub OWNS the idle drones
-  (`drone.command_center`) vs which hub's queue held the starved requests —
-  the crux of whether requests bind to the noticing hub's fleet.
+  slowly). Ownership answered: an idle drone's `command_center` read
+  **`DroneHub`, handle 2608** — a regular hub (near the idle cluster), so the
+  drones are correctly parented, and the user verified **no RC commander was
+  nearby broadcasting a zone** (rover niche ruled out). Remaining crux for the
+  sweep, only observable AT a starvation moment: which hub's queue holds a
+  request while hub-2608's drones idle — i.e. whether requests bind to the
+  noticing/registering hub's fleet with no cross-hub handoff.
 - Colonist auto-assignment: workplaces (`UpdateWorkplaces` family — "unemployed
   every sol"), residences ("homeless despite free housing", "seniors don't move"),
   dome-to-dome walking/passage checks (`AreDomesConnectedWithPassage` — suffocation
