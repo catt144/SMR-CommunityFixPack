@@ -384,6 +384,10 @@ available to export. `SMRTest.Log.AutoCargo(true)`.
 > engine facts, flattening corollary), so no request lines are ever logged.
 > Until the TestKit logger gets the leaf-class repair, use the console tap on
 > `UniversalLanderRocket` (session notes / STATUS) — same output format.
+> **Second logger flaw (same sitting):** the logger prints `request{}` from
+> the method's RETURN value, which is always nil — the real request lives in
+> `self.cargo[res].requested` after the call. The leaf-class repair must read
+> that (the TAP2 console variant proves the shape: `res=req:N/have:M`).
 
 **Trigger — the ratchet:**
 1. Set **one** export threshold (say Metals) so the lander loads cargo.
