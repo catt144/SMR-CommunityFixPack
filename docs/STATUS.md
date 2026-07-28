@@ -1,12 +1,16 @@
 # Project Status — read this first in a new session
 
-Updated: 2026-07-27 late, second build leg (**D05 SHIPPED — the optional
-modules are now enabled in-game via Options → Mod Options (native engine
-toggles, live both directions); the old main-menu-console instruction was
-falsified live and is retired. 72 probes; legs clean: baseline 1/57/14/0 ·
-fixed 58/0/14/0 (64/68 active) · opt-in 61/0/11/0 (67/68)** — see "Mod
-Options build leg" below; the earlier same-day build leg and the
-playtest-marathon record follow).
+Updated: 2026-07-27 night, session wrap (**D05 SHIPPED AND TESTED same
+night — optional modules enable in-game via Options → Mod Options, live both
+directions, restart-persistent (PT-51 archived); PT-50 PASS in full → D04
+tested; PT-49 core passing + row reposition verified; ListFixes crash found
+by play and repaired; F76 surface widened to the dozer path; the drone
+task-assignment investigate item is fully stocked and has its own kickoff
+prompt.** 72 probes; last legs clean: baseline 1/57/14/0 · fixed 58/0/14/0
+(64/68) · opt-in 61/0/11/0 (67/68); **an A/B re-verify is QUEUED as the next
+session's pre-flight** (two mechanical repairs landed after the last pair —
+expected numbers unchanged). See "Mod Options build leg" below; the earlier
+same-day build leg and the playtest-marathon record follow).
 
 ## Mod Options build leg (D05) — Fable, 2026-07-27 late: in-game enable surface for the optional modules
 
@@ -294,11 +298,17 @@ one-line summary here:
   breakthroughs** (`Cheats.lua:84` discoverable-or-discovered gate) — grant
   directly via `UIColony:SetTechResearched("<Id>")`; PT-27's Biorobots route
   corrected to `ThePositronicBrain` in the same pass.
-**ONE live prompt (updated 2026-07-27 late):**
-- `docs/FABLE_NEXT_PROMPT.md` — playtest-standby assistance: the user plays, the
-  session drives console instrumentation and processes results live (the
-  2026-07-26/27 marathon model). Also carries the F76 attended-sitting spec for
-  when the user wants that instead. The build queue is EMPTY.
+**TWO live prompts (updated 2026-07-27 night):**
+- `docs/FABLE_NEXT_PROMPT.md` — playtest-standby assistance: the user plays,
+  the session drives console instrumentation and processes results live.
+  Carries the queued A/B re-verify as pre-flight, the F76 avoidance rules
+  (now incl. the dozer surface) and the attended-sitting spec. The build
+  queue is EMPTY.
+- `docs/DRONE_INVESTIGATION_PROMPT.md` — game-free static-analysis kickoff
+  for the drone task-assignment / Hub Extender issue (evidence package on the
+  BUGS "Not yet swept" DroneControl bullet). Docs-only commits; any fix is a
+  user decision after the verdict. Both prompts warn about each other —
+  sessions must `git pull` first.
 - Retired prompt files (each done and deleted/superseded):
   ~~OPUS_BUILD_PROMPT~~, ~~FABLE_QA_PROMPT~~ (2026-07-25),
   ~~FABLE_PLAYTEST_PROMPT~~ (merged into the one live prompt).
