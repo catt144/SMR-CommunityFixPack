@@ -17,8 +17,16 @@ kept-but-demoted; the overhaul will ship Mod Options STAT DIALS (speed
 `DRONE_OVERHAUL_OPTIONS.md`); the user's colony was measured at the vanilla
 stat ceiling (2304 = +60% speed, 2× carry), so the structural choice (priority
 escalation vs D08 dispatcher) is gated on the request-lifecycle
-instrumentation — `HARNESS_REVIEW_PROMPT.md` is armed and is the next
-fresh-session fire.** Prior wrap: **2026-07-29 (live disaster leg — see the
+instrumentation — **BUILT 2026-07-29 (stress harness v2, TestKit
+`91_Stress.lua`: per-request lifecycle tracing via RequestAssignUnit/
+RequestUnitFulfill + StartDemandPhase/StartWorkPhase/Repair wrappers, gate
+scored on the FindTask-decided cohort only, run-conditions header, stat-dial
+legs first-class; `HARNESS_REVIEW_PROMPT.md` executed and deleted). Two new
+Src facts recorded on D06: SetCommandKeepQueue preempts immediately (the ~57m
+work→claim was NOT the deliverer handoff) and SHUTTLE deliveries misfire the
+handoff (CargoShuttle has no Work method) so shuttle-hauled repairs DO go
+through FindTask. The PT-52 B2 re-run with the v2 harness is the next live
+gate.** Prior wrap: **2026-07-29 (live disaster leg — see the
 section directly below): TWO P1 defects found. F81 CONFIRMED LIVE — a single
 stranded `g_DisastersPredicted` flag was gating the colony's ENTIRE weather
 system, and clearing it started rain instantly; the leak that strands it is

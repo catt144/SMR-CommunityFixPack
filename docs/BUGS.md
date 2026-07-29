@@ -3193,7 +3193,44 @@ capability verified, `Mod.lua:2708-2771`) as player-facing relief; the
 structural choice (maintenance priority escalation vs D08 layer-1 dispatcher)
 is gated on the request-lifecycle instrumentation. Full record: the DECISION
 section in `DRONE_OVERHAUL_OPTIONS.md`; instrument work:
-`HARNESS_REVIEW_PROMPT.md`.
+`HARNESS_REVIEW_PROMPT.md` (executed and deleted — see the rebuild note below).
+**INSTRUMENT REBUILT (v2) + TWO NEW STRUCTURAL FINDINGS (2026-07-29, harness
+repair session).** `TestKit/Code/91_Stress.lua` was rebuilt around per-request
+lifecycle tracing exactly as the QA review recommended: run-scoped chained
+wrappers on the bare globals `RequestAssignUnit`/`RequestUnitFulfill`
+(`_TaskRequest.lua:352,412` — ALL drone/rover/shuttle claim+fulfill traffic
+routes through them, no caller aliases them) plus classdef-time chained
+wrappers on `StartDemandPhase`/`StartWorkPhase`/`Repair`. Every repair now
+decomposes into haul queue / haul exec / claim wait / travel / repair; the
+closest-hub score is computed only over the FindTask-decided cohort; every
+summary prints a run-conditions header (module, speed, live drone stats,
+per-hub idle, shuttle fleet, pre-surge depot availability); stat-dial legs are
+first-class (`label=`, condition-mismatch warnings in `Compare()`). Two source
+facts found during the rebuild **change how the first run's numbers read**:
+1. **`SetCommandKeepQueue` preempts immediately** (terminates the current
+   command, keeps the queue — `CommonLua\Classes\CommandObject.lua:564-569`),
+   so a successful deliverer handoff claims the repair within seconds of
+   unload. **The near-uniform ~57m work→claim measured in BOTH legs therefore
+   CANNOT have been the handoff** — the "26/27 claims ≈ deliverer performed
+   the repair" reading above is inconsistent with a 57m gap. Something else
+   produced it (candidate below; v1's poll-resolution anchors could not tell).
+2. **Shuttle deliveries MISFIRE the handoff** — `ShuttleHub.lua:1014` passes
+   the CargoShuttle itself to `DroneUnloadResource` → `StartWorkPhase(shuttle)`
+   → `shuttle:SetCommandKeepQueue("Work", …)`, but `CargoShuttle` has **no
+   `Work` method anywhere in its ancestry** (only `Drone:Work` and
+   `BaseRover:Work` exist tree-wide). The repair request falls back into the
+   normal hub queues, where `FindTask` — and therefore the claim gate — DOES
+   arbitrate it. On a colony with 2 shuttle hubs and min-balance depots (this
+   one), the gate may be far less bypassed than the null result implied; it
+   also means **which unit type hauls decides whether the gate ever sees the
+   claim**. (Also a vanilla defect candidate in its own right — a
+   shuttle-delivered malfunction always takes the slow claim path, and likely
+   logs an engine error per misfire; consider filing as its own entry.)
+   The v2 harness records deliverer identity, handoff capability, and
+   misfire counts per target, so the next run settles which story the 57m
+   belongs to — and whether `vetoed +1` was "nothing to arbitrate" (all
+   handoffs) or "gate conditions never matched" (FindTask claims the gate
+   declined to veto).
 The design defect behind the 2026-07-27 live report (four idle drones parked beside a
 malfunctioning building while a far hub serviced everything slowly): assignment is
 pull-only and own-hub-only, requests sit in every covering hub's queues, claims are

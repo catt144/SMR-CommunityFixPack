@@ -8,8 +8,12 @@
 >    `Fix_MeteorStormWedge`, `Fix_RainsDeadlock` — PT-54 is the live gate and
 >    an A/B RunAll pair is queued as the next session's pre-flight.
 > 2. The stress A/B **HAS RUN** (null result for the claim gate; metric flaw
->    confirmed) — see D06 in `BUGS.md`; the instrument redesign is queued via
->    `HARNESS_REVIEW_PROMPT.md`, which is the NEXT session to fire.
+>    confirmed) — see D06 in `BUGS.md`; the instrument redesign **HAS NOW ALSO
+>    RUN (2026-07-29, harness repair session): stress harness v2 is BUILT and
+>    committed in the TestKit** (per-request lifecycle tracing; two new Src
+>    facts on the D06 entry — SetCommandKeepQueue preempts, shuttle handoff
+>    misfires). `HARNESS_REVIEW_PROMPT.md` is executed and DELETED. The next
+>    live step is the PT-52 B2 re-run with the v2 harness.
 > 3. "Src ≠ shipped Lua.fpk" is **WITHDRAWN** — full fpk extraction proved the
 >    shipped build IS Src (2250/2256 byte-identical, build 1.0.7.396349); see
 >    STATUS.md key facts. Keep apply-time self-checks anyway.
@@ -174,15 +178,19 @@ silent.
 
 - ~~**QA REVIEW — fire `docs/QA_REVIEW_PROMPT.md` in a FRESH session.**~~
   **DONE 2026-07-29 late** — verdict folded into BUGS.md/STATUS; the disaster
-  fixes are built (wave 6, PT-54 gates them); the next fresh-session fire is
-  **`docs/HARNESS_REVIEW_PROMPT.md`** (instrument redesign; the Track B
-  structural choice is gated on it).
-- **PT-52 STRESS A/B — built, never run.** Quicksave → `SMRTest.Stress.Targets`
-  dry run → D06 OFF → `Break{scope="overlap", n=25, seed=1}` → reload → D06 ON →
-  same call → `Compare()`. Headline metric is **closest-hub first claims %**;
-  do NOT read total clearance time as a D06 score (the hauling leg is untouched
-  — see the checklist's stress-harness notes). Reload-based protocols do NOT
-  re-poison a save (tested).
+  fixes are built (wave 6, PT-54 gates them). ~~Next fire:
+  `docs/HARNESS_REVIEW_PROMPT.md`.~~ **ALSO DONE 2026-07-29 (harness repair
+  session): stress harness v2 built + committed in the TestKit; prompt
+  executed and deleted; two new Src facts on the D06 entry.**
+- **PT-52 STRESS A/B — re-run with the v2 harness (the v1 run's metric was
+  invalid).** Protocol is Trigger B2 in `PLAYTEST_CHECKLIST.md` (updated for
+  v2): quicksave → `Targets` dry run (check `pure_only=true` cohort size too)
+  → D06 OFF → `Break{scope="overlap", n=25, seed=1}` → reload → D06 ON → same
+  call → `Compare()` → repeat seeds 2-3. Read the **GATE-DECIDED first
+  claims** line (closest-hub % over FindTask-decided claims only) and the
+  lifecycle deltas (haul queue vs exec vs claim wait vs travel — this is what
+  gates the Track B structural choice). Do NOT read total clearance time as a
+  D06 score. Reload-based protocols do NOT re-poison a save (tested).
 - **F81 / F78 disaster fixes — speced, not built, QA-gated.** Package and the
   open dangers are in STATUS "Waiting on the user" item 10. Live recovery for a
   poisoned save meanwhile:

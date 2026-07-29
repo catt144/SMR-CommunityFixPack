@@ -409,7 +409,12 @@ session):**
 escalation (vanilla precedent: cables/passages repair at forced priority 3,
 `SupplyGridBreakable.lua:48-56`) vs the D08 layer-1 dispatcher — waits on the
 request-lifecycle decomposition (queue-latency vs travel). That instrument is
-the subject of `HARNESS_REVIEW_PROMPT.md`, which carries this plan.
+**BUILT (2026-07-29, stress harness v2 in the TestKit — per-request lifecycle
+tracing; `HARNESS_REVIEW_PROMPT.md` executed and deleted)**; the decomposition
+is now measurable and the next PT-52 B2 run supplies the data. Note from the
+rebuild: shuttle deliveries misfire the deliverer handoff (no
+`CargoShuttle:Work`), so on shuttle-served colonies the claim gate sees more
+of the repair traffic than the v1 null result implied — see the D06 entry.
 
 # D08 — Drone Hub Extender overhaul + Command Center (2026-07-29 design session, game-free)
 

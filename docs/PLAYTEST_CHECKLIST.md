@@ -208,18 +208,22 @@ with `ConsoleSetEnabled(true)` + `ReloadShortcuts()`.)
 | `SMRTest.RunAll` | re-run the whole probe suite (sanity check before/after a session) |
 | `SMRFixPack.ListFixes` | confirm all 30 fixes report `applied` (`Code/00_Core.lua:56`) |
 
-**Drone dispatch STRESS HARNESS** (`Code/91_Stress.lua`, added 2026-07-29 — turns
-PT-52 from watch-and-judge into a measured A/B). Breaks a **deterministic**
-seeded set of buildings and records, per building and per claim, which hub's
-drone answered and how long each leg took. Reload the same save, flip the D06
-toggle, run the identical call, and the two legs cover the identical targets.
+**Drone dispatch STRESS HARNESS** (`Code/91_Stress.lua`, added 2026-07-29;
+**v2 lifecycle-tracing rebuild 2026-07-29** after the first run proved the v1
+headline metric scored deliveries, not claims — turns PT-52 from
+watch-and-judge into a measured A/B). Breaks a **deterministic** seeded set of
+buildings and traces each one's FULL request lifecycle via chained wrappers on
+`RequestAssignUnit`/`RequestUnitFulfill` plus
+`StartDemandPhase`/`StartWorkPhase`/`Repair` timestamps. Reload the same save,
+flip ONE variable (the D06 toggle, or one stat dial), run the identical call,
+and the two legs cover the identical targets.
 
 | Call | What it does |
 |---|---|
 | `SMRTest.Stress.Targets{scope=, n=, seed=}` | dry run — what WOULD be broken, breaks nothing |
-| `SMRTest.Stress.Break{scope=, n=, seed=}` | break the set and start watching (defaults `scope="overlap"`, `n=25`, `seed=1`) |
+| `SMRTest.Stress.Break{scope=, n=, seed=}` | break the set and start watching (defaults `scope="overlap"`, `n=25`, `seed=1`; also `pure_only=` no-resource targets only, `label=` free text stamped on the run, e.g. `"speed1.5x"` for a stat-dial leg) |
 | `SMRTest.Stress.Report()` | current or last summary (also prints itself when a run ends) |
-| `SMRTest.Stress.Compare()` | last two runs side by side — **the A/B verdict** |
+| `SMRTest.Stress.Compare()` | last two runs side by side + deltas — **the A/B verdict** (`Compare{a=,b=}` picks other history entries; keeps 6) |
 | `SMRTest.Stress.HealAll()` | panic button: repair everything, end the run |
 | `SMRTest.Stress.Stop()` | end early, keep the numbers |
 
@@ -227,16 +231,25 @@ Scopes: `overlap` (default — only buildings covered by 2+ hubs, the population
 the claim gate arbitrates), `hub` (selected hub's coverage), `dome`, `radius`,
 `all`. Protected classes are never broken unless `include_all = true`: drone
 hubs AND extenders (never break the system under test), domes, life support,
-power. Buildings with no covering hub are counted and skipped.
+power. Buildings with no covering hub — or maintenance-prevented (rubble) —
+are counted and skipped. A save load mid-run aborts the run cleanly (history
+kept — that is what makes the cross-reload `Compare()` work).
 
-**Reading the report — the headline metric is CLOSEST-HUB first claims (%).**
-The total clearance time is NOT a D06 score: a malfunction runs two legs, and a
-drone must first HAUL the maintenance resource in (untouched by D06) before the
-repair work request opens. The report splits `break→work` (untouched) from
-`work→first claim` (the leg the gate arbitrates). `MaintenanceDroneUnload` also
-hands the first repair tick straight to the *delivering* drone, bypassing
-`FindTask` — so `no_resource`-maintenance buildings are counted separately as
-the purest signal.
+**Reading the report (v2).** Every repair decomposes into
+`haul queue` (demand posted → first haul claim — dispatch latency) ·
+`haul exec` (claim → delivered) · `claim wait` (work posted → first repair
+claim) · `travel` (claim → repairer arrived) · `repair`. The gate verdict is
+the **GATE-DECIDED first claims** line: closest-hub share computed ONLY over
+claims that actually went through `FindTask`. Deliverer **handoffs** (a drone
+that delivered takes the first repair tick directly, bypassing FindTask —
+`claim wait` ≈ 0) and handoff **MISFIRES** (a SHUTTLE delivered;
+`CargoShuttle` has no `Work` command, so `StartWorkPhase(shuttle)` fizzles
+and the claim falls back to FindTask — verified vs Src 2026-07-29) are
+counted separately, with the deliverer mix. Every summary carries a
+**run-conditions header** (module state, game speed, live drone
+move_speed/carry, per-hub idle counts, shuttle fleet, pre-surge depot
+availability) — per the EXTERNAL VALIDITY rule, never read a run's numbers
+without it. Total clearance time is still NOT a D06 score.
 
 Turn loggers **off** when a test is done — they print every tick and will bury the log.
 
@@ -900,12 +913,11 @@ session baseline (counters start at 0).
    isn't engaging) or extender coverage permanently lost after a flap
    (debounce dropped a rebuild — capture the log).
 
-**Trigger B2 — the MEASURED stress A/B (the real verdict; ~30 min).**
+**Trigger B2 — the MEASURED stress A/B (the real verdict; ~30 min per pair).**
 Supersedes Trigger B's eyeball demo. Uses `SMRTest.Stress` (Test Kit helpers
-section above). **Review `91_Stress.lua` before its first ever run** —
-`docs/HARNESS_REVIEW_PROMPT.md`. Run at **normal to 3× speed, not ultra**:
-timings are measured in game time so speed does not change the numbers, but
-ultra stresses the sim and adds artifacts.
+section above — **v2 lifecycle tracing, rebuilt 2026-07-29**). Run at
+**normal to 3× speed, not ultra**: timings are measured in game time so speed
+does not change the numbers, but ultra stresses the sim and adds artifacts.
 
 1. Confirm the harness loaded — `SMRTest.Stress ~= nil` must print `true`.
 2. Clean the colony so both legs start identical (clears any pre-existing
@@ -915,7 +927,10 @@ ultra stresses the sim and adds artifacts.
 4. Dry run — see the target set without breaking anything:
    `SMRTest.Stress.Targets{scope = "overlap", n = 25}`
    If it reports far fewer than 25 eligible, widen the scope (`hub`, `radius`,
-   `all`) and note which you used.
+   `all`) and note which you used. **Also check the pure cohort:**
+   `SMRTest.Stress.Targets{scope = "overlap", n = 25, pure_only = true}` —
+   no-resource targets skip the haul leg and the deliverer handoff entirely,
+   so they are the purest gate signal; if there are ≥10, run a pure pair too.
 5. Toggle D06 **OFF** (Options → Mod Options). Verify:
    `SMRFixPack.fixes.DroneOverhaul.status` → must read `inactive`.
 6. **LEG A:** `SMRTest.Stress.Break{scope = "overlap", n = 25, seed = 1}`
@@ -923,12 +938,25 @@ ultra stresses the sim and adds artifacts.
 7. **Reload the quicksave** — identical colony state, identical target set.
 8. Toggle D06 **ON**. Verify `SMRFixPack.fixes.DroneOverhaul.status` → `active`.
 9. **LEG B:** the *exact same call* as step 6 — same scope, same n, same seed.
-10. `SMRTest.Stress.Compare()` — prints both runs side by side.
+10. `SMRTest.Stress.Compare()` — both runs + deltas, with conditions headers.
 11. `FlushLogFile()` and keep the log: the per-building trail is the evidence.
+12. **One pair is not a verdict at n=25** — repeat with `seed = 2` and
+    `seed = 3` before believing any delta; the harness keeps 6 runs
+    (`Compare{a=, b=}` to pair them up).
 
-**Read the result on `CLOSEST-HUB first claims (%)`** — that is the only line
-that scores what the module claims to do. Do NOT read total clearance time as a
-D06 score (the hauling leg is untouched; see the harness notes above).
+**STAT-DIAL legs (drone overhaul ships with Mod Options stat dials):** same
+protocol, but the ONE variable flipped between legs is a single dial (e.g.
+speed 1.0x vs 1.5x, module state identical). Stamp each leg:
+`Break{scope="overlap", n=25, seed=1, label="speed1.5x"}`. The conditions
+header live-reads drone move_speed/carry, so the dial's actual effect is
+recorded with the numbers; `Compare()` flags condition mismatches itself.
+
+**Read the result on the `GATE-DECIDED first claims` line** — closest-hub
+share over FindTask-decided claims is the only number that scores what the
+claim gate claims to do. The lifecycle deltas (`haul queue` vs `haul exec` vs
+`claim wait` vs `travel`) are what settle the D06/D08 structural question:
+queue-latency dominance points at dispatch/priority logic, travel dominance at
+stat/depot levers. Do NOT read total clearance time as a D06 score.
 A reload-based protocol does **not** re-poison a save with a stranded disaster
 flag — tested 2026-07-29, F81 — so no cleanup is owed afterwards.
 
