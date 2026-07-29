@@ -2623,16 +2623,28 @@ only Meteors.lua uses `table.validate` among the disaster files (grep
 2026-07-28) — the sibling threads do NOT share this defect, so the
 no-weather-at-all half of this report still needs its own trace (dust
 storms/devils/cold waves/rains; separate leg).
-**NEW LIVE OBSERVATION (2026-07-29, user):** **two single meteor strikes
-(not a storm) finally seen in play** — the first meteors this save has ever
-produced. Consistent with the wedge + the F02 watchdog working as designed:
-each restart of the stuck thread yields a strike before it re-wedges, so the
-count of visible strikes should track the count of
-`WATCHDOG — Meteors thread silent …` restarts. **Cheap check next session:**
-`FlushLogFile()` then count watchdog lines vs strikes seen, and read
-`SMRFixPack.MeteorsWatchdog` — a match is strong corroboration that every
-meteor this save gets comes from a watchdog restart, i.e. the scheduler never
-completes a cycle on its own.
+**SCOPE NARROWED TO STORMS — measured live 2026-07-29.** Two natural single
+strikes were seen in play, and the console read that followed settles which
+thread is sick: `phase=long-sleep-done age=1h restarts=0`. **Zero watchdog
+restarts** — so the strikes were genuine, the pack's repaired scheduler is
+running its designed cycle, and the earlier guess that each strike came from a
+watchdog restart is WRONG. The pack's thread only ever calls
+`MeteorsDisaster(meteors, "single"|"multispawn")`
+(`Fix_MeteorFrequency.lua:96-106`) and that path is demonstrably healthy.
+**The wedge therefore lives in the vanilla `MeteorStormThread`
+(`Meteors.lua:318-346`, calls `MeteorsDisaster(meteors, "storm")` at :346),
+which carries no heartbeat and dies invisibly.** Consequences for this entry:
+(1) the live repro must fire **`CheatMeteors("storm")`**, not `"single"` — the
+single path will never reproduce it; (2) the storm branch is the only one that
+adds the duration notification at :179, which is what strands the prediction
+flag — see F81, where that stranding was CONFIRMED live and clearing it
+restored weather instantly.
+**Still unexplained by this entry:** why the storm thread wedges at all.
+Hypothesis 1 (the `table.validate` descriptor loop) was refuted live
+(`kept: 0`), so the :238-241 wait is NOT statically un-exitable; the stall line
+is still unbracketed and the storm-targeted repro above is the way to find it.
+Note the dust-storm half of the original report is CLOSED: `GetDustStormDescr()`
+returns nil at the save's terraforming level — designed silence, no defect.
 **The "no weather at all" half is now EXPLAINED and split off — see F81**
 (2026-07-29 trace): `RainsDisasterLoop` deadlocks permanently on an untimed
 `WaitMsg("RainDisasterEnd")` the first time a rain roll collides with any
@@ -2700,7 +2712,43 @@ over track REACHABILITY with no regard for train SERVICE — colonists queue
 indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
 PT-43 F21.
 
-### F81 — The rains disaster loop deadlocks permanently on its first collision; toxic rain never fires again (P1, high)  `[confirmed by trace 2026-07-29 — static, fully bracketed; fix is a user decision]`
+### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[CONFIRMED LIVE 2026-07-29 — root cause reproduced, recovery demonstrated on the user's save; fix is a user decision]`
+**LIVE CONFIRMATION (2026-07-29, the user's 194-sol save) — the whole chain,
+end to end, in four console reads.** The prediction dump returned exactly what
+the static trace predicted:
+`DisasterMeteorStorm = true` / `predicted entries: 1`, with
+`towers=6 warning=75h active=false rain=false` — **a stranded flag for a meteor
+storm that is not running and has not run for a very long time.** Then the
+decisive act: `RemoveDisasterNotifications("DisasterMeteorStorm", MainMap)`
+→ `predicted entries: 0` → **rain began IMMEDIATELY** (console:
+`CloudSeeding POI starts normal rain`; the user: "as soon as I unblocked it
+started raining"). One stuck table entry had been suppressing every weather and
+disaster system on that save. **This is no longer a hypothesis — the root
+cause, the mechanism, and the recovery are all demonstrated.**
+Supporting reads from the same sitting:
+- **The pack's meteor thread is HEALTHY** — `phase=long-sleep-done age=1h
+  restarts=0`, and the user saw two NATURAL single strikes. So the wedge is
+  NOT in the single/multispawn path the pack's F02 scheduler drives
+  (`Fix_MeteorFrequency.lua:96-106`); it is in the **vanilla
+  `MeteorStormThread`** (`Meteors.lua:318-346`), which has no heartbeat and
+  therefore died invisibly — exactly the blind spot F78 named. **F78's live
+  repro must use `CheatMeteors("storm")`, not `"single"`.**
+- **Dust storms are designed-off at this terraforming level** —
+  `GetDustStormDescr()` returned nil while `GetColdWaveDescr()` did not. So the
+  dust-storm silence needed no bug at all (the user called this correctly);
+  cold waves were possible all along and were blocked purely by the flag.
+- **Sensor towers at the cap made it near-certain**: 6 towers →
+  `GetDisasterWarningTime()` pinned at the 75h maximum, i.e. every disaster
+  cycle carried a 3+ sol predicted window.
+- **Rain thresholds at the time** (`A 57 need 25-55 | T 51 need 25-55 |
+  W 14 need 0-5`) and `RainsDisasterThreads type=table keys=2` with BOTH
+  entries empty — the "fill in non-activated rains" placeholders from :453-456,
+  i.e. no activation threads existed. Consistent with `process()` early-return
+  for the bands whose end thresholds all three params had passed. **Corollary
+  worth keeping:** because no activation thread existed, the DEADLOCK described
+  below had not yet bitten this particular save — the flag alone accounted for
+  the observed silence. The deadlock remains a real latent defect (static proof
+  below) that will bite any save whose rain bands ARE in range.
 **User report that opened it (2026-07-29, live, same save as F78):** two single
 meteor strikes finally seen — but still no other disaster and **no weather
 effect of any kind**, and specifically **no toxic rain after BOTH greenhouse-gas
