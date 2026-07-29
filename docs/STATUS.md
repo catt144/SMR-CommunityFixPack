@@ -122,9 +122,11 @@ on the entries; this is the index.
   distance**; graduation drain confirmed (with a transient homeless flicker that
   is the designed shape, recorded so it is not mistaken for a defect). Bonus:
   children reached services **via passages**, live corroboration of F79's
-  passage-only service search. **Not flipped to `tested`** — the do-no-harm
-  triggers (employed-senior exemption, no-churn when slots are full, uninstall
-  shape) are still unreported.
+  passage-only service search. **No-churn also PASSED organically** — where
+  cohort housing ran short those colonists simply stayed put with no hiccups,
+  which is the "completely untouched when no slot exists" design confirmed at
+  colony scale. **3 of 5 triggers pass; not flipped to `tested`** — the
+  employed-senior exemption (A) and precedence/uninstall (E) are still owed.
 
 ## D07 build leg + two more flips — Fable, 2026-07-28 late (mixed live/game-free)
 

@@ -999,8 +999,8 @@ everything is instantly vanilla; save with it ON, reload with it OFF —
 clean load, no errors (zero persisted state).
 
 **Progress (2026-07-29, first live enable — user verdict: "it worked
-wonderfully").** Triggers **B and D PASS**; A/C/E still to run. Full record on
-the D07 entry. Cross-dome moves happened from EVERY dome, for children and
+wonderfully").** Triggers **B, C and D PASS**; only **A and E** still to run.
+Full record on the D07 entry. Cross-dome moves happened from EVERY dome, for children and
 seniors, over **trains, passages and shuttles chosen by distance**. Graduating
 children **briefly showed as homeless** before moving out — designed shape, not
 a defect, but expect a transient Homeless spike on graduation waves. Bonus:
@@ -1011,7 +1011,7 @@ corroboration of F79 (service search is passage-only, never trains).
 
 `Result (B cross-dome move):` **PASS 2026-07-29** — every dome fed the cohort domes; trains, passages and shuttles all used by distance; no ping-pong, nobody stuck mid-trip
 
-`Result (C leave-alone, no churn):` _____ NOT YET RUN — fill every cohort slot (or toggle the buildings off); cohort members in normal housing must stay put, no repeated move attempts
+`Result (C leave-alone, no churn):` **PASS 2026-07-29 (observed organically)** — where cohort housing ran short, those colonists stayed in their previous residence "with no hiccups": no repeated move attempts, no emigration churn, no log noise. Confirmed at colony scale rather than by deliberately filling slots
 
 `Result (D graduation drain):` **PASS 2026-07-29** — Age-up freed the Nursery slot, brief transient homelessness, then drained out of the dome
 

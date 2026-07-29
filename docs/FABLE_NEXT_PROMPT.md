@@ -172,13 +172,15 @@ silent.
   clears with `*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end`.
 - **F82** — split-grid notification lingers ~a sol; machinery located, updater
   cadence still to trace (own entry).
-- **PT-53 — D07 `Opt_CohortHousing`, PARTIAL PASS 2026-07-29; three triggers
-  left.** First live enable worked ("wonderfully"): cross-dome consolidation from
-  every dome over trains/passages/shuttles, and graduation drain, both PASS.
-  **Still owed before it can flip to `tested` — all do-no-harm checks:**
-  (A-negative) an EMPLOYED senior must NOT move; (C) fill every cohort slot →
-  no churn; (E) manual residence assignment wins, toggle off = instantly
-  vanilla, save-ON/reload-OFF loads clean. Cheap to run in any sitting.
+- **PT-53 — D07 `Opt_CohortHousing`, 3-of-5 PASS 2026-07-29; TWO triggers left.**
+  First live enable worked ("wonderfully"): cross-dome consolidation from every
+  dome over trains/passages/shuttles (B), graduation drain (D), and organic
+  no-churn where cohort housing ran short (C) all PASS. **Only two left before
+  it flips to `tested`, both cheap:** **(A)** an unemployed Senior re-homes to a
+  free Retirement Home slot in the SAME dome, and — the half that matters — an
+  **EMPLOYED** Senior in that dome does NOT move; **(E)** manual residence
+  assignment wins, toggle off = instantly vanilla, save-ON/reload-OFF loads
+  clean. A is a two-minute infopanel read.
   Original procedure below for reference:
 - **PT-53 — D07 `Opt_CohortHousing` (original brief).** The
   checklist section has the full procedure: five triggers (in-dome move +

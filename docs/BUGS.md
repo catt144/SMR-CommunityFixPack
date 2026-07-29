@@ -82,7 +82,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; PT pending (attended, multi-iteration) |
-| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28; **PT-53 PARTIAL PASS 2026-07-29** — cross-dome moves (trains/passages/shuttles by distance) and graduation drain both confirmed live, "worked wonderfully"; employed-senior exemption, no-churn and uninstall shape still unreported, so NOT yet `tested` (entry) |
+| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28; **PT-53 3-of-5 PASS 2026-07-29** — cross-dome moves (trains/passages/shuttles by distance), graduation drain, and organic no-churn-when-no-slots all confirmed live, "worked wonderfully"; only the employed-senior exemption (A) and precedence/uninstall (E) still owed, so NOT yet `tested` (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28, full procedure (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -3096,12 +3096,21 @@ disaster sitting): "it worked wonderfully."**
   service-seeking works over passages and never over trains. It also confirms
   the D07 scope note that a cohort dome still needs services reachable by
   passage or staffed locally.
+- **Trigger C (leave-alone / no churn) — PASS, and observed ORGANICALLY.** Where
+  there was not enough cohort housing, those colonists "continued staying in
+  their previous residence with no hiccups." This is stronger evidence than the
+  scripted version of the test: rather than deliberately filling every slot, the
+  shortage arose naturally across a large multi-dome colony and the module
+  simply went quiet — no repeated move attempts, no emigration churn, no log
+  noise. That is the designed "completely untouched when no cohort slot exists"
+  behaviour, confirmed at colony scale.
 **STILL UNREPORTED — this is why the status is PARTIAL, not `tested`:**
-Trigger A's negative half (an EMPLOYED senior must stay put), Trigger C
-(fill every cohort slot → no churn, no repeated move attempts), and Trigger E
-(manual residence assignment must win; toggle off = instantly vanilla; save
-with it ON and reload with it OFF loads clean). Those are the do-no-harm checks;
-the positive cases are proven.
+Trigger A (an unemployed Senior re-homing to a free Retirement Home slot in the
+SAME dome, and — the important half — an **EMPLOYED** Senior in that same dome
+NOT moving), and Trigger E (manual residence assignment must win; toggle off =
+instantly vanilla; save with it ON and reload with it OFF loads clean).
+Everything reported so far is either a positive case or the do-nothing case;
+what remains is the "never moves someone it shouldn't" pair.
 **The want (user, 2026-07-28, after building a live retirement dome):** a
 dome whose PRIMARY role is absorbing a non-worker cohort (seniors, and
 separately children with their schools/playgrounds) out of the production
