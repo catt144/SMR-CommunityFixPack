@@ -8,7 +8,7 @@ file goes stale the moment another session commits. (The filename keeps its
 historical FABLE_ prefix so existing references stay valid — nothing in it is
 model-specific.)
 
-## Where the project stands (2026-07-29, end of the audit session)
+## Where the project stands (2026-07-29, end of the audit-REMEDIATION session — AUDIT_FINDINGS Phases 1-3 all landed)
 
 **Build state: 74 registered modules — 68 active by default, 6 opt-in via
 Options → Mod Options (D05, `tested`). Everything committed and pushed.**
@@ -19,8 +19,11 @@ last fresh pair (2026-07-28 late, post-D07, 73 probes) was baseline
 1/57/15/0 · all-six-toggles 63/0/10/0 at 71/71 applied; wave 6 adds three
 modules (denominators move to /74) and the wave-6 probes
 (`SMRTest.DisasterPredictionLeak` / `MeteorStormWedge` / `RainsDeadlock`, the
-rains one needs a loaded colony) — record the fresh pair's numbers in STATUS
-and update the expected-numbers bullet below when it runs.
+rains one needs a loaded colony) — record the fresh pair's numbers in the
+STATUS header + a SESSION_LOG leg and update the expected-numbers bullet
+below when it runs. Note the audit remediation touched Code/ (veto re-checks,
+Opt_ file-scope installs, 00_Core reconciler, MeteorStormWedge flag clear) —
+all parse-swept, none probe-run yet, one more reason the pair comes first.
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
@@ -53,6 +56,8 @@ AUDIT_FINDINGS); D06 iteration beyond knobs (design changes are user calls;
 the stat-dials decision — speed ×1.0/1.5/2.0, carry +0/+1/+2 as Mod Options
 dials — is recorded in `DRONE_OVERHAUL_OPTIONS.md` DECISION, build not
 started). D08 (extender overhaul) is speced there too, nothing built.
+Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
+/ Steam ≤1 MB), screenshots, Paradox portal console-publishing rules.
 
 **Session-start sequence (~2 min):**
 1. `git log --oneline -5` + `git pull` (see above).
@@ -272,8 +277,9 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
 - **Runtime console wrappers must target the LEAF class** (engine-facts
   flattening corollary): wrapping a base class at runtime does nothing for
   already-built subclasses — e.g. lander taps go on `UniversalLanderRocket`,
-  not `UniversalRocketBase`. (The same fact is why the audit's opt-module
-  first-enable caveat exists.)
+  not `UniversalRocketBase`. (The same fact is why the opt-module
+  first-enable defect existed — fixed by audit 1.3's file-scope installs;
+  human re-verify is PT-55.)
 - Bare console expressions echo on-screen only (NOT logged); `print(...)`
   goes to the log — use `print` when output must be retrievable.
 - Infopanel cheat buttons need `Platform.cheats = true` AND ride the
@@ -334,7 +340,7 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
 
 ## Hard rules
 
-STATUS.md engine facts govern (until ENGINE_FACTS.md exists — then that):
+`docs/ENGINE_FACTS.md` governs (the facts moved there from STATUS 2026-07-29):
 sandbox on all platforms; `error()`/`assert()` report-and-continue;
 self-checks read the DECLARING class; presets only after DataLoaded
 (GlobalMaps exist EMPTY before it; DataChanged(false) re-fires right after;
