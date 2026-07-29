@@ -1,15 +1,37 @@
-# ONE-OFF PROMPT — review the drone stress harness BEFORE its first run
+# ONE-OFF PROMPT — repair the drone stress harness after its first run exposed a metric flaw
 
 **Paste everything below into a FRESH session (any model).** One-off; delete it
-once the harness has been vetted and its first A/B has run.
+once the harness has been repaired.
 
 **Fire this with the game CLOSED** — the review is read-only, but any fix touches
 loadable Lua, which does nothing until the next game launch.
 
+**SEQUENCING: fire `docs/QA_REVIEW_PROMPT.md` FIRST.** That review may conclude
+the feature this harness was built to measure is not worth keeping in its
+current form, which would change what the instrument should measure. Come back
+here with that verdict in hand.
+
+> **STATUS UPDATE — this prompt was written before the first run; the run has
+> now happened (2026-07-29) and CONFIRMED the top concern in §2.** The A/B
+> executed cleanly end to end — no crashes, deterministic target set, both legs
+> completed, output readable — so the harness *works mechanically*. But it
+> returned a **null result** for the module under test and the run revealed
+> **the headline metric is measuring the wrong thing**. Full numbers and
+> analysis are on the **D06 entry** in `C:\Dev\SMR-BugFixPack\docs\BUGS.md`;
+> read that first. Summary: with the module ON the claim gate fired **once**
+> (`vetoed +1`) across 25 simultaneous malfunctions, the leg it arbitrates moved
+> 58m → 57m, and **0 of 25 targets were `no_resource` maintenance** — so
+> `MaintenanceDroneUnload` → `StartWorkPhase(drone)` handed the first repair
+> tick to the **delivering** drone every time, bypassing `FindTask`. The metric
+> counted **which hub delivered the resource**, not which hub won a claim.
+> **Your job is therefore less "find bugs before first use" and more "make this
+> instrument capable of scoring what it claims to score" — plus the ordinary
+> correctness review below, which has still never been done.**
+
 ---
 
-You are reviewing a **brand-new, never-executed** test instrument before it is
-used to make an engineering decision. It is
+You are reviewing a test instrument that has been run exactly once and is used
+to make engineering decisions. It is
 `C:\Dev\SMR-BugFixPack-TestKit\Code\91_Stress.lua` in the Surviving Mars:
 Relaunched "Community Fix Pack" project (`C:\Dev\SMR-BugFixPack`, with a
 local-only TestKit companion repo at `C:\Dev\SMR-BugFixPack-TestKit`).
@@ -90,13 +112,23 @@ This matters more than whether it runs. Specific questions:
   drone hauls the maintenance resource in — untouched by the module) and then a
   WORK leg (the repair request — what the module arbitrates), and reports them
   separately. Verify against `RequiresMaintenance.lua`.
-- **The delivering-drone shortcut.** It claims `MaintenanceDroneUnload` →
-  `StartWorkPhase(drone)` hands the first repair tick straight to the delivering
-  drone via `SetCommandKeepQueue`, bypassing `FindTask` entirely — which would
-  mean most first claims never go through the mechanism under test, and only
-  `no_resource`-maintenance buildings give a clean signal. **If that is true, is
-  the headline metric measuring the module at all, or mostly measuring hauling?**
-  This is the single most important question in this review.
+- **The delivering-drone shortcut — CONFIRMED, this is now the main work item.**
+  `MaintenanceDroneUnload` → `StartWorkPhase(drone)` hands the first repair tick
+  straight to the delivering drone via `SetCommandKeepQueue`, bypassing
+  `FindTask`. The first run proved it empirically (0 of 25 targets were
+  `no_resource`; 26 claims for 25 buildings; near-uniform ~57m "work→claim" in
+  BOTH legs = a handoff, not a race). **So the headline metric scores which hub
+  DELIVERED.** Verify the mechanism yourself, then answer: **what should the
+  metric be instead?** Candidates already on the table — deliberately sample
+  `no_resource`-maintenance buildings and dust/clean work (the only populations
+  where the gate can act); instrument `TaskRequestHub:FindTask` outcomes
+  directly rather than inferring from `Drone:Work`; or report the gate's own
+  `vetoed`/`veto_expired` against offered-claim counts. Propose the one you
+  would trust, and say what it would have shown on the run just completed.
+- **Should the harness measure the HAULING leg instead or as well?** The run
+  found hauling is **3h03m of a 3h27m total — 88% of elapsed time** — and it is
+  the leg D08's proposed dispatcher would act on. An instrument that scores only
+  the 12% may be aimed at the wrong target entirely.
 - **Observer effect.** The wrap adds work to a hot path. Breaking 25 buildings at
   once is a demand *surge*, not steady state — is surge behaviour representative
   of the problem the module exists to fix?
