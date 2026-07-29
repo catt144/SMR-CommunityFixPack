@@ -29,65 +29,42 @@ Build state: **71 registered modules, 65/71 active by default (6 opt-in via
 Options → Mod Options — D05, `tested`), 73 probes, everything pushed.
 A/B pair is FRESH (2026-07-28 late, post-D07-build): baseline 1/57/15/0 ·
 all-SIX-toggles 63/0/10/0 (71/71 applied) — NO pre-flight queued.**
-NEW since the last rewrite (2026-07-28 PT-52 sitting + same-evening repair
-leg, all committed):
-- **PT-49 COMPLETE → D03 `tested` (archived).** Adversarial arrivals proof,
-  tourists exemption, quarantine independence, MicroG row (KEPT on asteroid
-  habitats by user decision), uninstall shape, and a child-in-closed-dome
-  sighting forensically cleared as in-dome birth.
-- **PT-32 COMPLETE → F71 `tested` (archived).** Live two-resource priority
-  inversion via console taps: valuables allocated first, bulk the remainder,
-  nothing dropped, below-threshold resources correctly excluded.
-- **PT-17: ratchet half PASS; capacity-edge leg caught a REAL pack defect —
-  and its repair LANDED the same evening (A/B re-verified).** The v1 F68 fix
-  double-counted aboard cargo (`GetTotalCargoAvailable` already counts a
-  landed rocket's hold — new engine fact) and over-exported 60 units below
-  the player's GET-WHEN-ABOVE threshold. Repaired by deleting the
-  aboard-into-ground addition; the explicit floor carries the fix. **The
-  attended capacity-edge re-run PASSed 2026-07-28 (next sitting): request
-  tracked aboard + surplus, ground settled AT the threshold (146 with miners
-  running vs threshold 140) → F68 `tested`, PT-17 ARCHIVED.** Full trail on
-  the F68 entry.
-- **PT-52 first sitting: HEALTHY.** D06 live-enable bridge verified; two
-  DroneReport readings (`vetoed 4→10, veto_expired 0→1, moonlighted 0`,
-  `unclaimed=0` on all six hubs all sitting). The watch continues every
-  sitting; F77 flap check (Trigger B) still un-run.
-- **TestKit AutoCargo logger repaired** (leaf-class wrap + reads
-  `cargo[res].requested`; the old one was structurally blind to landers).
-- **NEW F78 (P1, investigating): the live save has had ZERO disasters in 194
-  sols and no weather at all** — the PT-01 meteor watchdog caught the
-  mechanism live (Meteors thread hangs INSIDE shipped `MeteorsDisaster`,
-  restarted repeatedly); sibling disaster threads may be wedging invisibly.
-  Board item below; evidence + plan on the F78 entry.
-- **Map-switch console-death repair VALIDATED 2026-07-28 (next sitting):**
-  the console now survives Mars↔asteroid switches (TestKit
-  `OnMsg.CurrentMapChangeDone` re-assert). Details in the console facts
-  below.
-- New hard-won facts recorded: the **class-flattening runtime corollary**
-  (runtime instrumentation must target the LEAF class; STATUS Key facts),
-  the **console-death-on-map-switch bug + recovery**, and the
-  first-landing-is-manual lander behavior (reserved sites auto-land after).
-Prior state stands: D05 tested (PT-51), D04 tested (PT-50), F76 dozer
-surface filed. **The build queue is EMPTY again — the map-switch
-console-death repair is BUILT (TestKit, validation pending: see console
-facts below; first thing next sitting, switch to the asteroid and press
-Enter).** New work comes only from playtest FAILs, live findings, the F76
-attended sitting, or D06 iteration decisions (user decision, knobs first).
+NEW since the last rewrite (2026-07-28 LATE leg — live PT-23/PT-09 reads,
+then the user-authorized unattended D07 build, all committed and pushed):
+- **D07 `Opt_CohortHousing` BUILT** (full record on the entry; summary in
+  the header above). Its gate to `tested` is **PT-53** (checklist section
+  written, five triggers). The module only exists on disk until the next
+  game launch.
+- **PT-23 PASS → F46 `tested` (archived), PT-09 PASS → F14 `tested`
+  (archived)** — twelve flips on 2026-07-28 total. New facts from the
+  reads, all recorded on entries/archive: trains dump-not-strand proven in
+  the all-stations-forbidden case (isolated no-drone stations keeping
+  forbidden stock = expected statics); the peril statuses carry a 12-36h
+  per-colonist grace window before Health damage (StatusEffects.lua:93-98);
+  the Domes Overview fifth column is SATISFACTION (tourist-rating stat) and
+  its red 0 on mature colonies is vanilla-intended.
+- **TestKit: CohortHousing probe added (8 stand-in cases) + OptionsMenu
+  wiring probe now asserts all six toggles.** Probe-craft corollary from
+  the leg is in the expected-numbers bullet below (load-time-localized
+  globals defeat WithGlobals).
+Prior state stands: the TEN-FLIP sitting earlier the same day (asteroid
+section + PT-43 complete and archived), D03/D04/D05 tested, PT-52
+sitting 2 healthy, F76 dozer surface filed, map-switch console repair
+validated (workaround retired). **The build queue is EMPTY.** New work
+comes only from playtest FAILs, live findings, the F76 attended sitting,
+the F79 decision, or D06 iteration decisions (user decision, knobs first).
 
-**NO PRE-FLIGHT NEEDED** — the A/B pair above is fresher than every code
-change. **Session-start sequence (in order, ~2 min):**
-1. Game relaunched fresh (the F68 repair + both TestKit repairs only exist
-   on disk until then).
-2. ~~Console-repair validation~~ **DONE 2026-07-28: VALIDATED** (console
-   survives map switches; workaround retired).
-3. Re-arm `SMRTest.Log.AutoCargo(true)` AND `SMRTest.Log.CargoReady(true)`
-   (runtime-only; both leaf-class now — no console taps needed).
-4. Fresh `SMRFixPack.DroneReport` baseline (D06 counters reset every launch).
-**THE ASTEROID SECTION IS COMPLETE (2026-07-28 next sitting): PT-17, PT-19,
-PT-33, PT-40, PT-31 AND PT-16 all PASSed and archived** — F68, F73, F72,
-F65, F70, F67 and F69 all `tested` (seven flips in one sitting). The
-remaining P1 there is the **F78 disaster-silence investigation** (board
-below; hypothesis 1 refuted live, on-demand repro plan ready).
+**NO PRE-FLIGHT NEEDED** — the A/B pair above postdates every code change.
+**Session-start sequence (in order, ~2 min):**
+1. Game relaunched fresh (the D07 module only exists on disk until then).
+2. **Enable the new toggle: Options → Mod Options → "Cohort housing —
+   Seniors & Children"**, then verify `CohortHousing [active]` (on-screen
+   ListFixes loop or `SMRFixPack.fixes.CohortHousing.status`).
+3. Fresh `SMRFixPack.DroneReport` baseline (D06 counters reset every
+   launch; the PT-52 passive watch continues every sitting).
+4. Optional (only if a lander/cargo read is planned): re-arm
+   `SMRTest.Log.AutoCargo(true)` + `SMRTest.Log.CargoReady(true)`
+   (runtime-only, reset every launch).
 
 ---
 
@@ -144,31 +121,23 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **PT-52 — D06 Drone dispatch overhaul + F77, CONTINUING watch (sitting 1
-  was healthy).** Full procedure is the PT-52 section of
-  `PLAYTEST_CHECKLIST.md` (two progress notes recorded); briefing notes
-  below the board. The user's toggle is ON and account-persistent — verify
+- **PT-53 — D07 `Opt_CohortHousing`, NEW (attended, first enable).** The
+  checklist section has the full procedure: five triggers (in-dome move +
+  employed exemption, cross-dome move, leave-alone/no-churn, graduation
+  drain via Age1Year, precedence + uninstall shape). Enable the toggle in
+  Mod Options (session-start step 2), verify `CohortHousing [active]`.
+  Trigger A is a two-minute read on any dome with an unemployed senior in
+  a normal residence + a free Retirement Home slot. Cheap to interleave
+  with PT-52's passive watch.
+- **PT-52 — D06 Drone dispatch overhaul + F77, CONTINUING watch (sittings
+  1 and 2 both healthy).** Full procedure is the PT-52 section of
+  `PLAYTEST_CHECKLIST.md` (progress notes recorded); briefing notes below
+  the board. The user's toggle is ON and account-persistent — verify
   `DroneOverhaul [active]` at session start, take a fresh
   `SMRFixPack.DroneReport` baseline (counters are NOT persisted — they
   restart at 0 every game launch), keep half an eye on drones all session.
   **Trigger B (controlled off/on CheatMalfunction A/B demo + the F77
   extender-flap check) is still un-run** — the natural next PT-52 step.
-- **PT-48** AcknowledgedWarnings (D02) — break two buildings so they won't
-  self-heal, dismiss the warning: acked buildings stay quiet; a THIRD breakage
-  warns promptly and lists only itself; repair + re-break re-warns; stamp
-  survives reload; other warning types behave vanilla.
-- **Asteroid closeout: COMPLETE.** PT-16 PASS 2026-07-28 → F67 + F69
-  `tested` (full-sol asteroid hold logged by the repaired CargoReady
-  logger; manual-landing fuel ration kept and flown home; CheckAutoDepart
-  side-rule engine fact + RoughTouchDown stranding hazard recorded on the
-  entries). **Earlier same sitting: PT-17
-  capacity-edge re-run PASS → F68 `tested` (ground settled AT the threshold;
-  repaired AutoCargo logger validated live); PT-19 PASS → F73 `tested`
-  (residence held through both gap shapes — habitat off AND supply cut;
-  vanilla status-reads-residence observation on the entry); PT-33 PASS →
-  F72 `tested` (all three cases; refusal presents as an empty picker via
-  the documented vanilla gate quirk — entry observation (a)); PT-31 PASS →
-  F70 `tested` (round trip held, prefill negative intact).**
 - **F78 — P1 INVESTIGATION, next step is the LIVE REPRO (5 min):**
   hypothesis 1 (descriptor-validate loop) REFUTED live 2026-07-28
   (`kept: 0`); on VeryLow the strike routine is statically seconds-bounded,
@@ -176,19 +145,15 @@ silent.
   session: arm the bracket taps from the F78 entry (MeteorsDisaster
   ENTER/EXIT + SpawnMeteor), aim at empty ground, `CheatMeteors("single")`
   — ENTER-without-EXIT reproduces the wedge on demand and the last print
-  brackets the stall line.
-- **PT-53 — D07 `Opt_CohortHousing`, NEW (attended, first enable).** The
-  checklist section has the full procedure: five triggers (in-dome move +
-  employed exemption, cross-dome move, leave-alone/no-churn, graduation
-  drain via Age1Year, precedence + uninstall shape). Enable the toggle in
-  Mod Options, verify `CohortHousing [active]`. Cheap to interleave with
-  PT-52's passive watch.
+  brackets the stall line. **Also unblocks PT-27/28** (they need dust
+  storms the live save never produces).
+- **PT-48** AcknowledgedWarnings (D02) — break two buildings so they won't
+  self-heal, dismiss the warning: acked buildings stay quiet; a THIRD breakage
+  warns promptly and lists only itself; repair + re-break re-warns; stamp
+  survives reload; other warning types behave vanilla.
 - **DECISIONS:** D07 was built 2026-07-28 late (user go). Still owed:
   whether F79 (trains never serve service trips — confirmed vanilla gap)
   gets a feature-completion D-item.
-- **PT-40 DONE 2026-07-28 → F65 `tested` (archived):** full procedure PASS —
-  merge in both geometries (snug + couple-tracks), clean salvage split,
-  long-track control unchanged, reload persistence, log clean.
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
 - Un-run: PT-10, PT-11, PT-15, PT-18 (fixtures B/D/E), PT-25, PT-27..30, PT-35 (PT-27's Biorobots

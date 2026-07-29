@@ -1512,6 +1512,10 @@ that "passed" or SKIPped were not testing what they claimed.
 7. A donated save that researched **Frictionless Composites before the game patched the
    tech** is the only true fixture for the F35 sanitizer pass (PT-35 case C). Everything
    else about that pass is probe-covered.
+9. **OPEN (2026-07-28): the F79 decision** — trains never carry service seekers
+   (confirmed vanilla gap, entry has the fix sketch). Feature-completion D-item or
+   leave as documented vanilla behavior? This is the only decision currently owed.
+   (D07 was decided AND built 2026-07-28 — see the build-leg section.)
 
 ## Save-rescue expectations (for release messaging + sanitizer design)
 
