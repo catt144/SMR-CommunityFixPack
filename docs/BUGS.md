@@ -97,10 +97,10 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed (built 2026-07-28 with the D06 core; PT pending) |
-| F78 | MeteorsDisaster hangs mid-strike (multi-map save?); meteors never land | P1 | high | investigating (filed 2026-07-28 — PT-01 watchdog caught it live; hypothesis 1 refuted live same day; 2026-07-29 two strikes seen = likely watchdog restarts, and the weather half split off to F81) |
+| F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | **fixed: Code/Fix_MeteorStormWedge.lua** (built 2026-07-29 post-QA — hourly watchdog on the wedge signature + RestartGlobalGameTimeThread heal + guarded stop pulse; PT pending) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | confirmed vanilla gap 2026-07-28 — fix would be feature-completion, D-item decision (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating (observed live 2026-07-28; mitigated by adding trains; forensic trail + tap on entry) |
-| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **CONFIRMED LIVE 2026-07-29** — stale `DisasterMeteorStorm` found on the user's save; clearing it started rain instantly. Root cause + recovery demonstrated; fix is a USER DECISION |
+| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **fixed: Code/Fix_DisasterPredictionLeak.lua + Code/Fix_RainsDeadlock.lua** (built 2026-07-29 post-QA — additive MeteorStormEnded removal + PostLoadGame flag reconciliation; bounded rains wait + persisted-loop refresh; PT pending) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 from live observation; notification machinery located, updater cadence still to trace (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
@@ -2568,7 +2568,7 @@ Risk note: the wrap point is narrow (extender class only), but the effect surfac
 every `DroneControl` descendant serviced by the uplink hub — must pass the F50
 rocket-churn and F55 unreachable scenarios in playtest before shipping.
 
-### F78 — MeteorsDisaster hangs mid-strike; the colony never sees a meteor — and possibly no disaster/weather at all (P1, high)  `[investigating — filed 2026-07-28 from the PT-01 watchdog's live catches + user report]`
+### F78 — MeteorsDisaster hangs mid-strike; the colony never sees a meteor — and possibly no disaster/weather at all (P1, high)  `[fixed: Code/Fix_MeteorStormWedge.lua — built 2026-07-29 after the QA review superseded the full-replacement plan: hourly watchdog detects the wedge signature (g_MeteorStorm set + no DisasterMeteorStorm notification + nothing falling, sustained 1h), heals via RestartGlobalGameTimeThread("MeteorStorm") + a guarded g_MeteorStormStop pulse + forced-state cleanup; 3 heals/session then loud give-up (F02 pattern); PT pending. Wave-6 probe in TestKit 55_Probes_Wave6.lua]`
 **User report (2026-07-28, save TEST 2G):** minimal-but-nonzero disaster map
 settings, 194 sols played, ZERO disasters ever seen, and no weather effects at
 all despite terraforming progressing well into the range where toxic rains
@@ -2773,7 +2773,7 @@ over track REACHABILITY with no regard for train SERVICE — colonists queue
 indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
 PT-43 F21.
 
-### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[CONFIRMED LIVE 2026-07-29 — root cause reproduced, recovery demonstrated on the user's save; fix is a user decision]`
+### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[fixed: Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (RainsDisasterLoop replaced with a bounded WaitMsg — timeout > max warning+duration so healthy cycles are untouched — plus a PostLoadGame pass that swaps persisted old-body loop threads for fixed ones, marked SMRFixPack_fixed_loop so reloads do not re-roll cycles). Built 2026-07-29 post-QA; PT pending; wave-6 probes in TestKit 55_Probes_Wave6.lua]`
 **LIVE CONFIRMATION (2026-07-29, the user's 194-sol save) — the whole chain,
 end to end, in four console reads.** The prediction dump returned exactly what
 the static trace predicted:
