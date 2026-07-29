@@ -79,7 +79,7 @@ Verified in the game source:
   GedModEditor.lua:716-732) — so `docs/` (~788 KB incl. BUGS.md and the prompt
   docs), `README.md`, `.gitignore`, `.claude/settings.json` all ship in the .hpk.
 
-### A4. Consoles: any loaded mod silently disables ALL achievements — undisclosed `[ ]`
+### A4. Consoles: any loaded mod silently disables ALL achievements — undisclosed `[x — disclosed 2026-07-29, plan 2.3]`
 `DoModsBlockAchievements()` returns true on PlayStation, Xbox, and Microsoft
 Store, and any loaded mod then blocks every unlock (Achievement.lua:61-63,
 :77-79 — verified). Steam/PC unaffected. Neither MOD_DESCRIPTION.md nor
@@ -107,7 +107,7 @@ Only cross-fix functional coupling found in the pack.
 siblings got the latch (Fix_LastTransmissionStorage.lua:96-125). Reporting
 integrity only.
 
-### B4. "Every fix can be individually disabled" (metadata.lua:3) oversells `[ ]`
+### B4. "Every fix can be individually disabled" (metadata.lua:3) oversells `[x — fixed 2026-07-29, plans 2.1/2.3: metadata description qualified, MOD_DESCRIPTION carries the PC-only caveat + console reporting variant]`
 For the 68 default fixes the only surface is `SMRFixPack_Disabled` set BEFORE
 mod code loads — realistic via a two-line companion mod on PC, **nonexistent on
 Xbox/PS** (no console, no file access, Paradox-Mods-only installs). 00_Core's
@@ -297,7 +297,7 @@ and needs a separate go-decision.
   in EXACTLY the current metadata.lua `code` order (00_Core first,
   90_SaveSanitizer before the Opt_ block), so an editor round-trip regenerates
   the same list. Verify names/order against metadata.lua:20-97 after writing.
-- `[ ]` **2.3 (A4/B4/D2)** MOD_DESCRIPTION.md: add the CohortHousing module
+- `[x]` **2.3 (A4/B4/D2)** MOD_DESCRIPTION.md: add the CohortHousing module
   block; replace the "stores nothing in your savegame" claim with README's
   honest wording; add the console achievements disclosure (Xbox/PS/MS Store);
   add console-appropriate variants for per-fix disable honesty and bug

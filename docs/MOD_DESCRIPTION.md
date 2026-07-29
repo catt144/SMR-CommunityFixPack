@@ -16,8 +16,20 @@ them, we fix that. If we merely disagreed with a design choice, it's not in
 this pack (with one clearly-labeled optional exception below).
 
 **Works with your existing saves. Safe to add or remove at any time.** The mod
-stores nothing in your savegame — removing it simply lets the original bugs
-come back.
+writes almost nothing into your savegame, and what it does write is inert
+without it: a few `SMRFixPack_*` bookkeeping fields (a timestamp on a housing
+reservation, a "the player has set this payload" flag on a rocket, and — from
+the optional modules — an acknowledgment stamp on a dismissed building warning
+and a "closed to new residents" flag on a dome) whose absence simply means the
+pre-fix behavior, and — where a save-repair pass restored a bonus a broken
+patch migration dropped — an ordinary label modifier the game handles like any
+other. Removing the mod simply lets the original bugs come back.
+
+**Playing on Xbox, PlayStation, or the Microsoft Store version?** One platform
+rule to know before you install — it applies to every mod, not just this one:
+**while any mod is enabled, the game does not unlock achievements on Xbox,
+PlayStation, or the Microsoft Store.** Steam and other PC versions are not
+affected — achievements keep unlocking normally there with mods enabled.
 
 ### What this fixes right now
 
@@ -329,7 +341,10 @@ deactivates itself automatically instead of fighting it.
 Want to disable a single fix? Every fix has an ID (console:
 `SMRFixPack.ListFixes()` shows them and their status). Set
 `SMRFixPack_Disabled = { FixIdHere = true }` in the console or in a tiny mod
-that loads before this one.
+that loads before this one. **This per-fix switch is PC-only** — it needs the
+developer console or a companion mod, neither of which exists on Xbox or
+PlayStation. The optional modules are different: their toggles live in
+Options → Mod Options and work on every platform, controller included.
 
 ### Optional modules (off by default)
 
@@ -406,6 +421,27 @@ to help. This module makes dispatch care about proximity:
   the game's stock behavior instantly and completely, and saves made with it
   on are unaffected without it.
 
+**Cohort housing — Seniors & Children** (`CohortHousing`). Nurseries and
+Retirement Homes never fill on their own: the game only ever relocates a
+housed colonist for a strictly better home, so Seniors and Children settled in
+normal housing stay put and your cohort buildings sit empty unless you
+micromanage trait filters. With this module on:
+
+- Seniors and Children living in normal housing automatically move into free
+  Retirement Home / Nursery slots — in their own dome first, then in any
+  reachable dome (walk, passage, shuttle, train or elevator, using the game's
+  own migration rules).
+- When no such slot exists anywhere, they are left completely alone.
+- Employed Seniors keep their jobs and are not moved.
+- Your manual residence and dome assignments always win; quarantined domes and
+  domes closed to new residents (the Residency-control module) are respected;
+  tourists are ignored entirely.
+- When a Child comes of age, the Nursery slot frees up immediately instead of
+  at the next housing shuffle.
+- No dome designation needed: put the cohort buildings where you want the
+  cohort to live, and the colonists follow. It stores nothing in your save —
+  turning it off (or removing the pack) simply stops the moves.
+
 **Classic rocket behavior** (`ClassicRockets`). This one is not a bug fix, and we
 want to be completely transparent about what it changes and what the game offers
 instead:
@@ -475,10 +511,13 @@ Options → Community Fix Pack**.
 ### Reporting bugs
 
 Found something broken? Tell us: what happened, roughly when it started, and
-whether it survives a save/load. For crashes and save failures, the game's
-logs live in `%AppData%\Surviving Mars Relaunched\logs`, and Ctrl+F1 opens the
-official bug reporter. A save file where the bug reliably happens is worth a
-thousand words.
+whether it survives a save/load. On PC, the game's logs live in
+`%AppData%\Surviving Mars Relaunched\logs` (crashes and save failures show up
+there), and Ctrl+F1 opens the official bug reporter. A save file where the bug
+reliably happens is worth a thousand words. On Xbox and PlayStation there are
+no log files or console commands to collect — a plain description (platform,
+what happened, when it started, whether it survives a save/load) is still
+plenty useful.
 
 ### Credits
 
