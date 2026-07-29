@@ -2736,14 +2736,64 @@ settings.id` (:412) — **a thread blocked in `WaitMsg` is perfectly valid**, so
 the wedged loop is preserved, not replaced. A new loop is only ever created
 when the settings *id* changes (crossing into a different strength band). This
 is exactly why importing greenhouse gases twice produced no rain.
-**Sibling disasters are written CORRECTLY — this is isolated.** Dust storms and
-cold waves poll with TIMED waits and retry:
+**Sibling disasters cannot deadlock this way — but they ARE gated on the same
+flag (correction to this entry's first draft, which called them unrelated).**
+Dust storms and cold waves poll with TIMED, retrying waits and so never wedge:
 `while IsDisasterActive() do WaitMsg("TriggerDustStorm", 5000) end`
-(`DustStorm.lua:481-488`, `ColdWave.lua:243-250`). They cannot deadlock this
-way. So F81 explains the **rain/weather** half of the F78 report and nothing
-else — the dust-storm/cold-wave silence on that save still needs its own
-explanation (map settings are the first thing to rule out), and meteors remain
-F78's own wedge.
+(`DustStorm.lua:481-488`, `ColdWave.lua:243-250`). **However**, both scheduler
+loops also spin on `IsDisasterPredicted()` — `DustStorm.lua:439-446` and
+`ColdWave.lua:208-215` — and while it is true their helper simply pushes
+`wait_time` forward by the elapsed delta each poll (`DustStorm.lua:464-465`,
+`ColdWave.lua:228-229`). A permanently-true prediction flag therefore defers
+them FOREVER without deadlocking anything. Same flag, two different failure
+modes: rains deadlock, storms/waves starve.
+**THE UNIFYING CANDIDATE — one stale flag would explain the entire report.**
+`AddDisasterNotification` sets `g_DisastersPredicted[base_id] = true` for ANY
+notification, warning or duration alike (`MapSettings.lua:169`), and only
+`RemoveDisasterNotifications` clears it (:176). Inside `MeteorsDisaster` the
+**storm** branch adds a `DisasterMeteorStorm` DURATION notification
+(`Meteors.lua:179`) whose only removal sits in the `g_MeteorStormStop` break
+branch (:227) — the scheduler's own removal at :344 has already run *before*
+the call. So a meteor STORM that wedges in the F78 loop (:238-241) strands
+`g_DisastersPredicted["DisasterMeteorStorm"] = true` permanently, which would
+starve dust storms and cold waves AND trigger this entry's rains deadlock on
+the very next rain roll: **one root cause, three dead systems.**
+**Caveat that keeps this a candidate rather than a conclusion:** the pack's own
+meteor scheduler passes only `"multispawn"` or `"single"`
+(`Fix_MeteorFrequency.lua:96-106`) — neither reaches the :179 notification. The
+stale flag therefore requires the *vanilla* `MeteorStormThread` (:318-346, no
+heartbeat, invisible if it wedges) to have wedged on a storm. Unproven.
+**ONE COMMAND DECIDES IT (run in-colony, nothing else needed):**
+`*r for k, v in pairs(g_DisastersPredicted) do ConsolePrint(tostring(k) .. " = " .. tostring(v)) end`
+A `true` with no matching disaster on screen = the unified root cause is real
+and this entry is downstream of it. An EMPTY table = the systems failed
+independently, rains by this deadlock and the dust-storm/cold-wave silence by
+something still unfound (rule out map settings first).
+**SENSOR TOWERS ARE A DIRECT AGGRAVATING FACTOR (user's question, 2026-07-29).**
+`GetDisasterWarningTime(disaster)` returns
+`Min(base_warning + const.SensorTowerPredictionAddTime * towers,
+const.SensorTowerPredictionMaxTime)` = `Min(base + 12h * towers, 75h)`
+(`MapSettings.lua:94-97`, `_GameConst.lua:125-126`). The prediction flag is set
+for the WHOLE warning window (`AddDisasterNotification` … `Sleep(warning_time)`
+… remove — e.g. `RainsDisasterActivation` :300-302), so each tower adds 12 game
+hours during which `IsDisasterPredicted()` is true. At the 75h cap that is more
+than THREE SOLS of "predicted" per disaster cycle, and every rain roll landing
+in one of those windows deadlocks the rains loop permanently. A heavily
+tower'd colony therefore hits this bug early and reliably — which fits a save
+that has never once seen weather. Note this is the same inverted-role trap F02
+documented for meteor intervals, in a different system.
+**But removing towers is NOT a diagnostic and NOT a cure**: it cannot wake a
+thread already blocked in `WaitMsg`, nor clear a stale predicted flag, so a
+teardown would return an uninformative null while costing the buildings. If
+tower count is ever reduced as a MITIGATION, note `GetNumberOfSensorTowers`
+(:100-109) still counts a tower switched off within the last 12h
+(`tower.turn_off_time - prediction_add_time_ago > 0`) — turning towers off
+works but lags ~12 game hours; demolition is immediate.
+**Manual recovery if a stale flag is found:**
+`RemoveDisasterNotifications("<stale id>", MainMap)` clears it and lets dust
+storms and cold waves resume on their own. Rains need that AND the
+`CheatRainsDisaster` release below — their loop is already stuck in `WaitMsg`
+and clearing the flag alone will not wake it.
 **Live discriminator + player workaround (same command, run in-colony):**
 `CheatRainsDisaster("<RainsDisaster settings id>")` (:491) runs `RainProcedure`
 directly on a fresh thread, bypassing the activation gate. It both PROVES the
