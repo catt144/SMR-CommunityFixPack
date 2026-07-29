@@ -36,7 +36,7 @@ Fix_LastTransmissionStorage.lua:102-106 — applied to one file of four, never
 propagated. Found independently by two reviewers; verified. FIX_POLICY §2
 violation.
 
-### A2. First mid-session enable of three optional modules is silently dead (or half-dead) until restart `[ ]`
+### A2. First mid-session enable of three optional modules is silently dead (or half-dead) until restart `[x — fixed 2026-07-29, plan 1.3; live first-enable confirmation still owed to playtest]`
 Per the project's own live-proven engine fact (STATUS "Key technical facts":
 runtime patches on a base class are invisible to already-flattened derived
 classes), an option OFF at load installs nothing; the first in-game toggle runs
@@ -263,7 +263,7 @@ and needs a separate go-decision.
   (pattern: Fix_LastTransmissionStorage / Fix_IndependenceTerraforming's
   `ever_changed` + DataLoaded bookkeeping): if the target is still absent once
   DataLoaded has fired, flip the entry to `inactive` with a reason string.
-- `[ ]` **1.3 (A2)** Rework Opt_ClassicRockets (GetFuelResourceRequest wrap),
+- `[x]` **1.3 (A2)** Rework Opt_ClassicRockets (GetFuelResourceRequest wrap),
   Opt_ResidencyControl (CanAcceptNewColonists wrap only), Opt_MultipleSuns
   (SolarPanelBase.GameInit wrap only) to the Opt_DroneOverhaul pattern:
   file-scope install (classdef time, guarded by target-existence checks) +

@@ -1,9 +1,16 @@
 -- D01 — OPTIONAL module, OFF BY DEFAULT. Not a bug fix.
 --
 -- Enable it in-game: Options → Mod Options → Community Fix Pack (D05; toggles
--- take effect immediately, both directions). Other mods / power users can also
--- pre-seed SMRFixPack_Optional = { ClassicRockets = true } before this mod
--- loads. `SMRFixPack.ListFixes()` reports it as inactive until enabled.
+-- take effect immediately, both directions — including the FIRST mid-session
+-- enable: the hook is installed at FILE SCOPE (classdef time, so it propagates
+-- through class flattening) and gates per call on SMRFixPack.IsActive, the
+-- Opt_DroneOverhaul pattern; the Register apply() only validates targets /
+-- reports the opt-in status. (Before the 2026-07-29 audit fix the wrap was
+-- installed from apply(), which on a first in-game enable ran AFTER class
+-- flattening — invisible to the derived rocket classes until restart.) Other
+-- mods / power users can also pre-seed SMRFixPack_Optional = { ClassicRockets
+-- = true } before this mod loads. `SMRFixPack.ListFixes()` reports it as
+-- inactive until enabled.
 --
 -- Why it exists: the remaster deliberately changed rocket logistics, and the
 -- BUGS.md D01 entry records the verdict that this is a redesign and NOT a defect
@@ -56,45 +63,59 @@
 
 SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 
-SMRFixPack.Register("ClassicRockets", {
-	title = "OPTIONAL: rockets refuel while parked, without a destination selected",
-	optional = true,
-	apply = function()
-		if not SMRFixPack.OptionEnabled("ClassicRockets") then
-			return "opt-in module, off by default — enable it in Options → Mod Options"
-		end
-
-		local R = rawget(_G, "UniversalRocketBase")
-		if type(R) ~= "table" or type(R.GetFuelResourceRequest) ~= "function" then
-			return "UniversalRocketBase.GetFuelResourceRequest not found (game update changed it?)"
-		end
+-- Validate every target before installing anything; apply() reports failures.
+local install_error
+do
+	local R = rawget(_G, "UniversalRocketBase")
+	if type(R) ~= "table" or type(R.GetFuelResourceRequest) ~= "function" then
+		install_error = "UniversalRocketBase.GetFuelResourceRequest not found (game update changed it?)"
+	else
 		-- Both declared on UniversalRocketBase itself (:826 and :2140), so this
 		-- lookup is valid even though mod code loads before the classes are
 		-- flattened and only self-declared members are visible.
 		for _, name in ipairs{ "GetDepartureLocType", "IsPlayerControlled" } do
 			if type(R[name]) ~= "function" then
-				return "UniversalRocketBase." .. name .. " not found (game update changed it?)"
+				install_error = "UniversalRocketBase." .. name .. " not found (game update changed it?)"
 			end
 		end
-		local CT = rawget(_G, "CargoTransporterNew")
-		if type(CT) ~= "table" or type(CT.UpdateCargoResourceRequests) ~= "function" then
-			return "CargoTransporterNew.UpdateCargoResourceRequests not found (game update changed it?)"
-		end
+	end
+	local CT = rawget(_G, "CargoTransporterNew")
+	if not install_error
+			and (type(CT) ~= "table" or type(CT.UpdateCargoResourceRequests) ~= "function") then
+		install_error = "CargoTransporterNew.UpdateCargoResourceRequests not found (game update changed it?)"
+	end
+end
 
-		local orig = R.GetFuelResourceRequest
-		function R:GetFuelResourceRequest(...)
-			local amount, reserve = orig(self, ...)
-			-- D01: parked at the colony with nowhere to go. The shipped answer is 0
-			-- only because no destination is selected; keep the launch ration
-			-- requested so drones fuel it while it waits. The IsActive check makes
-			-- the Mod Options toggle live: off = shipped answer, always.
-			if (amount or 0) <= 0 and SMRFixPack.IsActive("ClassicRockets")
-					and not self.arrival_loc
-					and self:IsPlayerControlled()
-					and self:GetDepartureLocType() == "our_colony" then
-				return Max(0, self.FuelResourceAmount or 0), reserve
-			end
-			return amount, reserve
+if not install_error then
+
+	local R = UniversalRocketBase
+	local orig = R.GetFuelResourceRequest
+	function R:GetFuelResourceRequest(...)
+		local amount, reserve = orig(self, ...)
+		-- D01: parked at the colony with nowhere to go. The shipped answer is 0
+		-- only because no destination is selected; keep the launch ration
+		-- requested so drones fuel it while it waits. The IsActive check makes
+		-- the Mod Options toggle live: off = shipped answer, always.
+		if (amount or 0) <= 0 and SMRFixPack.IsActive("ClassicRockets")
+				and not self.arrival_loc
+				and self:IsPlayerControlled()
+				and self:GetDepartureLocType() == "our_colony" then
+			return Max(0, self.FuelResourceAmount or 0), reserve
+		end
+		return amount, reserve
+	end
+
+end -- install guard
+
+SMRFixPack.Register("ClassicRockets", {
+	title = "OPTIONAL: rockets refuel while parked, without a destination selected",
+	optional = true,
+	apply = function()
+		if install_error then
+			return install_error
+		end
+		if not SMRFixPack.OptionEnabled("ClassicRockets") then
+			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 	end,
 })

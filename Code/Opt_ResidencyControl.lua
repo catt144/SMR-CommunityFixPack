@@ -3,9 +3,16 @@
 -- Enable it in-game: Options → Mod Options → Community Fix Pack (D05; toggles
 -- take effect immediately, both directions — the gates below consult
 -- SMRFixPack.IsActive per call and pass through while off; the infopanel row
--- stops being appended to newly opened panels). Other mods / power users can
--- also pre-seed SMRFixPack_Optional = { ResidencyControl = true } before this
--- mod loads. `SMRFixPack.ListFixes()` reports it as inactive until enabled.
+-- stops being appended to newly opened panels). Gate 1 (the class-method wrap
+-- on Community:CanAcceptNewColonists) is installed at FILE SCOPE, classdef
+-- time, so it propagates through class flattening and the FIRST mid-session
+-- enable works too — an apply()-time install ran after flattening and left
+-- that gate silently dead until restart (audit A2, fixed 2026-07-29; the
+-- Opt_DroneOverhaul pattern). The ChooseDome global wrap and the two UI Init
+-- wraps resolve at call time and stay in apply() — they are live-enable-safe
+-- as installed. Other mods / power users can also pre-seed
+-- SMRFixPack_Optional = { ResidencyControl = true } before this mod loads.
+-- `SMRFixPack.ListFixes()` reports it as inactive until enabled.
 --
 -- Why it exists: the community's long-standing ask — stop new residents from
 -- moving into a dome while its CURRENT residents keep commuting and using
@@ -65,6 +72,26 @@ end
 
 local function is_closed(dome)
 	return type(dome) == "table" and dome[FLAG] and true or false
+end
+
+-- gate 1: voluntary resettlement (FindEmigrationDome's candidate filter).
+-- Installed at FILE SCOPE (audit A2, 2026-07-29) so the wrap is baked into the
+-- flattened Community subclasses; guarded by the same existence checks apply()
+-- runs, so a missing target degrades to apply()'s reason string instead of
+-- erroring at load. module_active makes the Mod Options toggle live: off =
+-- shipped answer.
+do
+	local C = rawget(_G, "Community")
+	if type(C) == "table" and type(C.CanAcceptNewColonists) == "function"
+			and type(C.TogglePolicy) == "function" then
+		local orig_can = C.CanAcceptNewColonists
+		function C:CanAcceptNewColonists(...)
+			if module_active() and self[FLAG] then
+				return false
+			end
+			return orig_can(self, ...)
+		end
+	end
 end
 
 -- One infopanel row, cloned from the shipped accept-colonists row pattern
@@ -172,15 +199,8 @@ SMRFixPack.Register("ResidencyControl", {
 			return "sectionDome/sectionMicroGHabitat Init not found (game update changed the infopanel?)"
 		end
 
-		-- gate 1: voluntary resettlement (FindEmigrationDome's candidate filter).
-		-- module_active makes the Mod Options toggle live: off = shipped answer.
-		local orig_can = C.CanAcceptNewColonists
-		function C:CanAcceptNewColonists(...)
-			if module_active() and self[FLAG] then
-				return false
-			end
-			return orig_can(self, ...)
-		end
+		-- gate 1 (the CanAcceptNewColonists wrap) is installed at file scope
+		-- above — see the header; apply() only validates its targets.
 
 		-- gate 2: arrivals / first-home choice. Filter the candidate list only;
 		-- safety_dome passes through untouched (last-resort survival), and

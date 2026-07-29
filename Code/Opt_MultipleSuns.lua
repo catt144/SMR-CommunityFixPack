@@ -4,7 +4,12 @@
 -- take effect immediately, both directions — the build menu re-reads
 -- CanBuildOnlyOnce() live, so on_activate/on_deactivate below flip the
 -- template flag on the spot; existing suns are ordinary buildings and keep
--- working either way). Other mods / power users can also pre-seed
+-- working either way). The binding-fix half (the SolarPanelBase.GameInit
+-- wrap) is installed at FILE SCOPE, classdef time, so it propagates through
+-- class flattening and the FIRST mid-session enable binds new panels too —
+-- an apply()-time install ran after flattening and left that half silently
+-- dead until restart (audit A2, fixed 2026-07-29; the Opt_DroneOverhaul
+-- pattern). Other mods / power users can also pre-seed
 -- SMRFixPack_Optional = { MultipleSuns = true } before this mod loads.
 -- `SMRFixPack.ListFixes()` reports it as inactive until enabled.
 --
@@ -82,6 +87,31 @@ local function find_sun_in_range(panel)
 	end
 end
 
+-- Binding-fix half, installed at FILE SCOPE (audit A2, 2026-07-29) so the
+-- wrap is part of the classdef when GameInit's combined method is assembled
+-- and reaches every panel class and RCSolar even on a first mid-session
+-- enable. Guarded by the same existence checks apply() runs, so a missing
+-- target degrades to apply()'s reason string instead of erroring at load.
+do
+	local SP = rawget(_G, "SolarPanelBase")
+	if type(SP) == "table" and type(SP.GameInit) == "function"
+			and type(SP.SetArtificialSun) == "function"
+			and type(rawget(_G, "TestSunPanelRange")) == "function" then
+		local orig = SP.GameInit
+		function SP:GameInit(...)
+			local r = orig(self, ...)
+			-- FIX (F39, absorbed): the shipped body only ever tested
+			-- labels.ArtificialSun[1]. module_active makes the Mod Options
+			-- toggle live: off = exact vanilla behavior.
+			if module_active() and not self.artificial_sun then
+				local sun = find_sun_in_range(self)
+				if sun then self:SetArtificialSun(sun) end
+			end
+			return r
+		end
+	end
+end
+
 -- forward locals — defined below, captured by the Register def's callbacks
 local lift_build_limit, restore_build_limit
 
@@ -98,7 +128,8 @@ SMRFixPack.Register(FIX_ID, {
 			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 
-		-- the binding-fix half installs now; the limit lift waits for DataLoaded
+		-- the binding-fix wrap is installed at file scope above — see the
+		-- header; the limit lift waits for DataLoaded. apply() only validates.
 		local SP = rawget(_G, "SolarPanelBase")
 		if type(SP) ~= "table" or type(SP.GameInit) ~= "function"
 				or type(SP.SetArtificialSun) ~= "function" then
@@ -106,19 +137,6 @@ SMRFixPack.Register(FIX_ID, {
 		end
 		if type(rawget(_G, "TestSunPanelRange")) ~= "function" then
 			return "TestSunPanelRange not found (game update changed it?)"
-		end
-
-		local orig = SP.GameInit
-		function SP:GameInit(...)
-			local r = orig(self, ...)
-			-- FIX (F39, absorbed): the shipped body only ever tested
-			-- labels.ArtificialSun[1]. module_active makes the Mod Options
-			-- toggle live: off = exact vanilla behavior.
-			if module_active() and not self.artificial_sun then
-				local sun = find_sun_in_range(self)
-				if sun then self:SetArtificialSun(sun) end
-			end
-			return r
 		end
 	end,
 })
