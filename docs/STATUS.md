@@ -116,6 +116,15 @@ on the entries; this is the index.
   observation that extenders make the D06 problem worse. Nothing built.
 - **`QA_REVIEW_PROMPT.md` written** — a one-off adversarial review prompt for a
   fresh session to QA both tracks before anything is implemented.
+- **PT-53 PARTIAL PASS — D07 `Opt_CohortHousing` enabled live for the first time
+  and works** ("it worked wonderfully"). Cross-dome consolidation confirmed from
+  EVERY dome for both cohorts, over **trains, passages and shuttles chosen by
+  distance**; graduation drain confirmed (with a transient homeless flicker that
+  is the designed shape, recorded so it is not mistaken for a defect). Bonus:
+  children reached services **via passages**, live corroboration of F79's
+  passage-only service search. **Not flipped to `tested`** — the do-no-harm
+  triggers (employed-senior exemption, no-churn when slots are full, uninstall
+  shape) are still unreported.
 
 ## D07 build leg + two more flips — Fable, 2026-07-28 late (mixed live/game-free)
 

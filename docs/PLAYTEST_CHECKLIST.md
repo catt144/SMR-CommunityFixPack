@@ -998,15 +998,24 @@ normal residence (player order) — they must STAY. Toggle the module off —
 everything is instantly vanilla; save with it ON, reload with it OFF —
 clean load, no errors (zero persisted state).
 
-`Result (A in-dome move + employed exemption):` _____________________________________________
+**Progress (2026-07-29, first live enable — user verdict: "it worked
+wonderfully").** Triggers **B and D PASS**; A/C/E still to run. Full record on
+the D07 entry. Cross-dome moves happened from EVERY dome, for children and
+seniors, over **trains, passages and shuttles chosen by distance**. Graduating
+children **briefly showed as homeless** before moving out — designed shape, not
+a defect, but expect a transient Homeless spike on graduation waves. Bonus:
+children reached the retirement dome's services **via passages**, live
+corroboration of F79 (service search is passage-only, never trains).
 
-`Result (B cross-dome move):` _____________________________________________
+`Result (A in-dome move + employed exemption):` _____ NOT YET RUN — need: an unemployed Senior in a normal residence in a dome that also has a free Retirement Home slot (must move), AND an EMPLOYED Senior in the same dome (must NOT move)
 
-`Result (C leave-alone, no churn):` _____________________________________________
+`Result (B cross-dome move):` **PASS 2026-07-29** — every dome fed the cohort domes; trains, passages and shuttles all used by distance; no ping-pong, nobody stuck mid-trip
 
-`Result (D graduation drain):` _____________________________________________
+`Result (C leave-alone, no churn):` _____ NOT YET RUN — fill every cohort slot (or toggle the buildings off); cohort members in normal housing must stay put, no repeated move attempts
 
-`Result (E precedence + uninstall):` _____________________________________________
+`Result (D graduation drain):` **PASS 2026-07-29** — Age-up freed the Nursery slot, brief transient homelessness, then drained out of the dome
+
+`Result (E precedence + uninstall):` _____ NOT YET RUN — manual residence assignment must win; toggle off = instantly vanilla; save ON / reload OFF must load clean
 
 ---
 

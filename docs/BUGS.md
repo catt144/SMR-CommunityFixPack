@@ -82,7 +82,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; PT pending (attended, multi-iteration) |
-| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 (user go same evening): `Code/Opt_CohortHousing.lua`, opt-in Mod Options toggle "Cohort housing — Seniors & Children"; A/B clean (baseline 1/57/15/0 · all-six 63/0/10/0, 71/71); PT-53 pending (entry) |
+| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28; **PT-53 PARTIAL PASS 2026-07-29** — cross-dome moves (trains/passages/shuttles by distance) and graduation drain both confirmed live, "worked wonderfully"; employed-senior exemption, no-churn and uninstall shape still unreported, so NOT yet `tested` (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28, full procedure (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -3073,7 +3073,35 @@ iteration knobs. Shipped alongside: **F77**'s `Fix_ExtenderFlapChurn` (default-o
 repair) so extender power flickers stop Idle-kicking whole fleets and muddying the
 overhaul's observability.
 
-### D07 — Cohort domes: no way to consolidate seniors/children without filter micromanagement (design, med)  `[built 2026-07-28: Code/Opt_CohortHousing.lua (opt-in, off by default, Mod Options toggle "Cohort housing — Seniors & Children") — user go given the same evening after config confirmation; A/B pair clean; PT-53 (attended) pending]`
+### D07 — Cohort domes: no way to consolidate seniors/children without filter micromanagement (design, med)  `[built 2026-07-28: Code/Opt_CohortHousing.lua (opt-in, off by default, Mod Options toggle "Cohort housing — Seniors & Children") — user go given the same evening after config confirmation; A/B pair clean; PT-53 PARTIAL PASS 2026-07-29 — triggers B and D confirmed live, A/C/E not yet reported]`
+**FIRST LIVE ENABLE — PT-53 partial, 2026-07-29 (user, unprompted during the
+disaster sitting): "it worked wonderfully."**
+- **Trigger B (cross-dome move) — PASS, and stronger than the test asked for.**
+  Children travelled from **every** dome to the children's dome, and seniors
+  likewise, **using multiple transport modes — trains, passages, and shuttles —
+  chosen by distance.** That exercises the whole cross-dome path: the
+  `FindEmigrationDome` post-wrap picking the nearest reachable cohort slot, the
+  tie rule bypassed, and the shipped trip machinery carrying them by whatever
+  mode fits. No ping-ponging or stuck-mid-trip reported.
+- **Trigger D (graduation drain) — PASS.** Children ageing up **briefly became
+  homeless and then moved out of the dome**. That is the designed shape: the
+  `ColonistBecameYouth` nudge frees the Nursery slot, the colonist is
+  momentarily unhoused, and vanilla's need-work migration drains them toward
+  production domes. **Recorded as an observation, not a defect** — a player
+  watching the Homeless counter will see a transient spike on every graduation
+  wave, and that is expected.
+- **Bonus finding — live corroboration of F79.** Children in the cohort dome
+  **used PASSAGES to reach the retirement dome for services.** That is exactly
+  the mechanism F79 describes: `Dome:GetService` is passage-only, so
+  service-seeking works over passages and never over trains. It also confirms
+  the D07 scope note that a cohort dome still needs services reachable by
+  passage or staffed locally.
+**STILL UNREPORTED — this is why the status is PARTIAL, not `tested`:**
+Trigger A's negative half (an EMPLOYED senior must stay put), Trigger C
+(fill every cohort slot → no churn, no repeated move attempts), and Trigger E
+(manual residence assignment must win; toggle off = instantly vanilla; save
+with it ON and reload with it OFF loads clean). Those are the do-no-harm checks;
+the positive cases are proven.
 **The want (user, 2026-07-28, after building a live retirement dome):** a
 dome whose PRIMARY role is absorbing a non-worker cohort (seniors, and
 separately children with their schools/playgrounds) out of the production
