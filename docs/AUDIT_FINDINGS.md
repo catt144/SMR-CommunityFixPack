@@ -93,7 +93,7 @@ The `OnMsg.ApplyModOptions` reconciler excludes `"error"` entries forever
 (00_Core.lua:110-111) and logs nothing on the attempt — a dead checkbox until
 restart. (`on_activate`/`on_deactivate` failures are also swallowed, :122/:129.)
 
-### B2. F78↔F81 hidden coupling degrades per-fix disable `[ ]`
+### B2. F78↔F81 hidden coupling degrades per-fix disable `[x — fixed 2026-07-29, plan 1.5]`
 Fix_MeteorStormWedge's pulse-release heal path relies on
 Fix_DisasterPredictionLeak's `MeteorStormEnded` handler to clear
 `g_DisastersPredicted.DisasterMeteorStorm` (Fix_MeteorStormWedge.lua:142-163 vs
@@ -273,7 +273,7 @@ and needs a separate go-decision.
   entries in `"error"` (treat like `inactive`+not-installed); log a line
   whenever reconciliation skips or a retry fails, so a dead checkbox is at
   least diagnosable on PC.
-- `[ ]` **1.5 (B2)** Fix_MeteorStormWedge: after the vanilla-path release
+- `[x]` **1.5 (B2)** Fix_MeteorStormWedge: after the vanilla-path release
   (heal step "released through the vanilla end path"), clear
   `g_DisastersPredicted.DisasterMeteorStorm` itself if still set — idempotent
   alongside F81, self-sufficient without it.

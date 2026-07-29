@@ -161,6 +161,19 @@ function SMRFixPack.StormWedgeHeal()
 		SMRFixPack.StormWedgeNote("MeteorStormWedge: forced storm state clean (%d stray meteor object(s) removed)", removed)
 	else
 		SMRFixPack.StormWedgeNote("MeteorStormWedge: wedged storm released through the vanilla end path")
+		-- FIX (audit 2026-07-29, B2): the vanilla end path clears the prediction
+		-- flag only via Fix_DisasterPredictionLeak's MeteorStormEnded handler —
+		-- with that fix individually disabled, a released storm stranded
+		-- g_DisastersPredicted.DisasterMeteorStorm (the exact leak it exists to
+		-- fix). Clear the flag here too if it is still set and no live storm
+		-- notification is behind it; idempotent beside F81 (both nil the same
+		-- entry, and a new storm's AddDisasterNotification re-sets it).
+		local flags = rawget(_G, "g_DisastersPredicted")
+		if type(flags) == "table" and flags.DisasterMeteorStorm
+				and not FindNotification("DisasterMeteorStorm") then
+			flags.DisasterMeteorStorm = nil
+			SMRFixPack.StormWedgeNote("MeteorStormWedge: cleared the stranded meteor prediction flag itself (DisasterPredictionLeak handler not active)")
+		end
 	end
 	g_MeteorStormStop = false -- never leave a stray stop signal for the next storm
 	SMRFixPack.StormWedge.healing = false
