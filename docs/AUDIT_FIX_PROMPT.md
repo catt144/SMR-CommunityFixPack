@@ -109,8 +109,9 @@ if the code contradicts a finding, stop and flag it instead of forcing the fix.
 - **3.7** is mechanical: index rows become `status (+ date + PT ref)`; the
   prose you remove from a row must already exist in (or be moved into) the
   entry — never delete information outright.
-- FABLE_NEXT_PROMPT (3.1): per its own convention, prefer rewriting the stale
-  blocks over stacking more banner corrections.
+- FABLE_NEXT_PROMPT is NOT in your 3.1 scope — it was fully rewritten in the
+  audit session (2026-07-29). Touch it only to update its read-list pointers
+  after 3.2/3.3 relocate the engine facts and STATUS legs (it says so itself).
 
 ## Deliver
 

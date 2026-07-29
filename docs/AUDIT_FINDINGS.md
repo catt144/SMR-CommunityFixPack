@@ -194,7 +194,9 @@ Concrete drift (all verified):
   D06/F77 probes" → wave-6 probes exist); read-list points at the wrong
   "newest" STATUS section and disagrees with its own banner; stale session
   sequence (D07 "only exists on disk" — it was live-tested); duplicate PT-53
-  board bullets. `[ ]`
+  board bullets. `[x — fully rewritten 2026-07-29 (audit session): current
+  counts, restructured-checklist read-list, audit items on the board,
+  opt-module first-enable caveat in the briefing]`
 - **D6** Structure: STATUS.md's reference-grade content ("What this project
   is", "Key technical facts") is buried under ~1,300 lines of session legs
   behind a five-deep "Prior wrap" paragraph stack; a stale headline ("47
@@ -313,8 +315,9 @@ and needs a separate go-decision.
   row; D06 index row carries the null-result pointer; the two un-withdrawn
   fpk-doctrine copies (STATUS.md:126-128, DRONE_OVERHAUL_OPTIONS.md:619-621)
   corrected + stale framing at BUGS.md:6 and WORKFLOW.md:33 pointed at the
-  parity proof; FABLE_NEXT_PROMPT counts/read-list/session-sequence/duplicate
-  PT-53 bullet fixed (or the doc rewritten per its own convention).
+  parity proof. (FABLE_NEXT_PROMPT is already DONE — rewritten 2026-07-29 in
+  the audit session; do not re-edit it here except to update its read-list
+  pointers after 3.2/3.3 move things.)
 - `[ ]` **3.2 (D6)** Extract STATUS.md "Key technical facts" into
   `docs/ENGINE_FACTS.md` (sole authoritative home; STATUS keeps a one-line
   pointer; update the readers: FABLE_NEXT read-list, checklist references).

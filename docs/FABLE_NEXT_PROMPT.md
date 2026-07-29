@@ -1,125 +1,68 @@
-# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (updated 2026-07-29, post-disaster-leg)
+# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-29, post-audit)
 
-> ⚠️ **STALENESS BANNER (2026-07-29, later the same day — QA session).** Three
-> statements below are now WRONG; trust the pointed-to docs over this file:
-> 1. The QA review (`QA_REVIEW_PROMPT.md`) **has been fired and reported** —
->    verdict on the D06 entry in `BUGS.md`; the revised Track A plan is now
->    **BUILT** (wave 6, 2026-07-29 late): `Fix_DisasterPredictionLeak`,
->    `Fix_MeteorStormWedge`, `Fix_RainsDeadlock` — PT-54 is the live gate and
->    an A/B RunAll pair is queued as the next session's pre-flight.
-> 2. The stress A/B **HAS RUN** (null result for the claim gate; metric flaw
->    confirmed) — see D06 in `BUGS.md`; the instrument redesign **HAS NOW ALSO
->    RUN (2026-07-29, harness repair session): stress harness v2 is BUILT and
->    committed in the TestKit** (per-request lifecycle tracing; two new Src
->    facts on the D06 entry — SetCommandKeepQueue preempts, shuttle handoff
->    misfires). `HARNESS_REVIEW_PROMPT.md` is executed and DELETED. The next
->    live step is the PT-52 B2 re-run with the v2 harness.
-> 3. "Src ≠ shipped Lua.fpk" is **WITHDRAWN** — full fpk extraction proved the
->    shipped build IS Src (2250/2256 byte-identical, build 1.0.7.396349); see
->    STATUS.md key facts. Keep apply-time self-checks anyway.
-> Also new since this file was written: the user decided the overhaul ships
-> with Mod Options **stat dials** (speed ×1.0/1.5/2.0, carry +0/+1/+2) — see
-> the DECISION section in `DRONE_OVERHAUL_OPTIONS.md`.
+Paste everything below into a fresh Claude Code session — **any Claude model;
+the user picks the model per task and everything here works identically on
+either.** This is the ONE live prompt. **Start with `git log --oneline -5` +
+`git pull`** in case another session ran since this prompt was written — this
+file goes stale the moment another session commits. (The filename keeps its
+historical FABLE_ prefix so existing references stay valid — nothing in it is
+model-specific.)
 
-**NEWEST FIRST (2026-07-29 — read the "Disaster-system leg" STATUS section
-first. `docs/QA_REVIEW_PROMPT.md` was a one-off, now fired and DELETED — its
-verdict lives in BUGS.md D06/F78/F81 and the STATUS wrap).**
+## Where the project stands (2026-07-29, end of the audit session)
 
-**The session's headline: TWO P1 defects, one proven live end to end.**
-**F81** — a single stranded `g_DisastersPredicted["DisasterMeteorStorm"]` flag
-was gating the user's ENTIRE weather system for 194 sols; clearing it started
-rain within seconds. The leak that strands it is **unconditional** — only three
-code paths ever remove that notification and the normal completion path of
-`MeteorsDisaster` is not one of them, so **the first meteor storm on any map
-with storms enabled permanently kills that colony's cold waves and rains**.
-**F78** — reproduced on demand and localized to the unbounded drain loop at
-`Meteors.lua:238-241` (two meteors never go invalid, `#spawned` never hits 0).
-New hazard: **two storms wedged at once** and `g_MeteorStormStop` is a shared
-global, so any bound must be per-invocation. **F82** filed (split-grid
-notification lingers ~a sol). One confident theory (save/load stranding) was
-DISPROVED by test — recorded so it is not re-derived. Also proven: **Src ≠
-shipped `Lua.fpk`** (`GetCameraLookAtPassable` is absent at runtime), so treat
-Src-only reasoning as provisional and self-check everything at apply time.
+**Build state: 74 registered modules — 68 active by default, 6 opt-in via
+Options → Mod Options (D05, `tested`). Everything committed and pushed.**
+Wave 6 (2026-07-29 post-QA: `Fix_DisasterPredictionLeak`,
+`Fix_MeteorStormWedge`, `Fix_RainsDeadlock`) postdates the last A/B pair, so
+**a pre-flight A/B RunAll pair IS owed** before any further code lands. The
+last fresh pair (2026-07-28 late, post-D07, 73 probes) was baseline
+1/57/15/0 · all-six-toggles 63/0/10/0 at 71/71 applied; wave 6 adds three
+modules (denominators move to /74) and the wave-6 probes
+(`SMRTest.DisasterPredictionLeak` / `MeteorStormWedge` / `RainsDeadlock`, the
+rains one needs a loaded colony) — record the fresh pair's numbers in STATUS
+and update the expected-numbers bullet below when it runs.
 
-**THREE THINGS ARE QUEUED AND NONE ARE STARTED:**
-1. ~~**`docs/QA_REVIEW_PROMPT.md`** — a one-off adversarial review prompt the user
-   intends to fire in a FRESH session to QA both tracks before anything is
-   implemented. **Do not implement the disaster or D08 fixes until that verdict
-   is in**, unless the user says otherwise.~~ **RESOLVED (see banner): fired,
-   verdict folded, file deleted, disaster fixes BUILT (wave 6).**
-2. ~~**The drone stress A/B is UN-RUN.**~~ **RESOLVED TWICE (see banner): the
-   A/B ran 2026-07-29 (null result; the v1 metric was proven invalid — it
-   scored deliveries), and the harness was REBUILT (v2, lifecycle tracing,
-   2026-07-29 harness repair session). The B2 RE-RUN with the v2 harness is
-   now the natural centrepiece of the next live sitting** — protocol in
-   `PLAYTEST_CHECKLIST.md` Trigger B2 (updated), findings on the D06 entry.
-3. **D08** — the extender overhaul, five layers speced in
-   `DRONE_OVERHAUL_OPTIONS.md`, nothing built.
+**A whole-mod audit ran 2026-07-29 (fresh-context, four parallel reviews).**
+Its findings + remediation plan live in `docs/AUDIT_FINDINGS.md`; the one-off
+`docs/AUDIT_FIX_PROMPT.md` implements Phases 1-3 (code defects, packaging
+blockers, docs restructure). Two consequences for playtest sessions NOW:
 
-**Prior state (2026-07-28 late):** **D07 `Opt_CohortHousing` is BUILT** (user confirmed the config
-AND gave the go the same evening; unattended leg while they were off-game):
-colonist/housing-level rule, zero persisted state — in-dome
-UpdateResidence pass, cross-dome FindEmigrationDome pass (nearest
-reachable cohort slot, tie rule bypassed), ColonistBecameYouth nudge,
-Mod Options toggle #6 "Cohort housing — Seniors & Children". **A/B pair
-FRESH and CLEAN (73 probes): baseline 1/57/15/0 · all-six-toggles
-63/0/10/0 (71/71 applied)** — NO pre-flight owed. **PT-53 (attended) is
-the new checklist item** — first enable + five triggers. Two more flips
-same day before the build: **PT-23 → F46 `tested`** (trains dump rather
-than strand; isolated no-drone stations keeping forbidden stock =
-expected statics, on the entry) and **PT-09 → F14 `tested`** (red
-low-stat cell both directions; the all-red Satisfaction column =
-vanilla-intended, tourist-rating stat — on the entry). That makes TWELVE
-flips on 2026-07-28. Earlier the same day: the TEN-FLIP sitting (asteroid
-section + PT-43 complete), F78 hypothesis 1 refuted (repro plan banked),
-F79 confirmed / F80 investigating. **ONE USER DECISION PENDING: whether
-F79 (trains never serve service trips) gets a D-item fix.** PT-52 sitting
-2 healthy; **Trigger B STILL un-run.**
+1. **Until audit fix 1.3 lands: the FIRST mid-session enable of
+   ClassicRockets, ResidencyControl (its dome-gate half) or MultipleSuns
+   (its panel-binding half) silently does nothing until a game relaunch** —
+   the toggle reports `active` but the base-class hooks were installed after
+   class flattening. If the user playtests those toggles, have them enable,
+   relaunch once, then judge. (DroneOverhaul, CohortHousing and
+   AcknowledgedWarnings are NOT affected.) Do not misread a dead first-enable
+   as a module FAIL.
+2. **Do not run AUDIT_FIX_PROMPT concurrently with a play-assist session** —
+   both edit BUGS/STATUS/MOD_DESCRIPTION and will collide. It wants its own
+   fresh session.
 
-Paste everything below into a fresh Claude Code session — **any Claude model
-(Opus or Fable alike); the user picks the model per task and everything here
-works identically on either.** This is the ONE live prompt. **Start with
-`git log --oneline -5` + `git pull`** in case another session ran since this
-prompt was written. (The filename keeps its historical FABLE_ prefix so
-existing references stay valid — nothing in it is model-specific.)
+**Playtest state:** PT-53 (D07 CohortHousing) is 3-of-5 PASS ("worked
+wonderfully") — only triggers A and E left. PT-52 (D06 DroneOverhaul + F77)
+has three healthy passive sittings; the controlled Trigger B demo is un-run
+and the **B2 stress A/B re-run with the v2 harness is the natural centrepiece
+of the next live sitting** (the v1 run was a null result with a proven-invalid
+metric; harness rebuilt same day). PT-54 gates the wave-6 disaster fixes.
+`docs/PLAYTEST_CHECKLIST.md` was **restructured 2026-07-29** — see the
+read-list below for its new layout.
 
-Build state: **71 registered modules, 65/71 active by default (6 opt-in via
-Options → Mod Options — D05, `tested`), 73 probes, everything pushed.
-A/B pair is FRESH (2026-07-28 late, post-D07-build): baseline 1/57/15/0 ·
-all-SIX-toggles 63/0/10/0 (71/71 applied) — NO pre-flight queued.**
-NEW since the last rewrite (2026-07-28 LATE leg — live PT-23/PT-09 reads,
-then the user-authorized unattended D07 build, all committed and pushed):
-- **D07 `Opt_CohortHousing` BUILT** (full record on the entry; summary in
-  the header above). Its gate to `tested` is **PT-53** (checklist section
-  written, five triggers). The module only exists on disk until the next
-  game launch.
-- **PT-23 PASS → F46 `tested` (archived), PT-09 PASS → F14 `tested`
-  (archived)** — twelve flips on 2026-07-28 total. New facts from the
-  reads, all recorded on entries/archive: trains dump-not-strand proven in
-  the all-stations-forbidden case (isolated no-drone stations keeping
-  forbidden stock = expected statics); the peril statuses carry a 12-36h
-  per-colonist grace window before Health damage (StatusEffects.lua:93-98);
-  the Domes Overview fifth column is SATISFACTION (tourist-rating stat) and
-  its red 0 on mature colonies is vanilla-intended.
-- **TestKit: CohortHousing probe added (8 stand-in cases) + OptionsMenu
-  wiring probe now asserts all six toggles.** Probe-craft corollary from
-  the leg is in the expected-numbers bullet below (load-time-localized
-  globals defeat WithGlobals).
-Prior state stands: the TEN-FLIP sitting earlier the same day (asteroid
-section + PT-43 complete and archived), D03/D04/D05 tested, PT-52
-sitting 2 healthy, F76 dozer surface filed, map-switch console repair
-validated (workaround retired). **The build queue is EMPTY.** New work
-comes only from playtest FAILs, live findings, the F76 attended sitting,
-the F79 decision, or D06 iteration decisions (user decision, knobs first).
+**Open decisions on the user (nothing blocks on you):** F79 D-item or not
+(trains never serve service trips — confirmed vanilla gap); audit Phase 4
+go/no-go (core-helper extraction + module merges — deferred, see
+AUDIT_FINDINGS); D06 iteration beyond knobs (design changes are user calls;
+the stat-dials decision — speed ×1.0/1.5/2.0, carry +0/+1/+2 as Mod Options
+dials — is recorded in `DRONE_OVERHAUL_OPTIONS.md` DECISION, build not
+started). D08 (extender overhaul) is speced there too, nothing built.
 
-**NO PRE-FLIGHT NEEDED** — the A/B pair above postdates every code change.
-**Session-start sequence (in order, ~2 min):**
-1. Game relaunched fresh (the D07 module only exists on disk until then).
-2. **Enable the new toggle: Options → Mod Options → "Cohort housing —
-   Seniors & Children"**, then verify `CohortHousing [active]` (on-screen
-   ListFixes loop or `SMRFixPack.fixes.CohortHousing.status`).
-3. Fresh `SMRFixPack.DroneReport` baseline (D06 counters reset every
-   launch; the PT-52 passive watch continues every sitting).
+**Session-start sequence (~2 min):**
+1. `git log --oneline -5` + `git pull` (see above).
+2. Verify the pack loaded clean: on-screen status loop (below) — all 68
+   default fixes `active`, plus whichever opt-in toggles the user runs
+   (their toggles are account-persistent).
+3. Fresh `SMRFixPack.DroneReport` baseline if D06 is on (counters reset
+   every launch; the PT-52 passive watch continues every sitting).
 4. Optional (only if a lander/cargo read is planned): re-arm
    `SMRTest.Log.AutoCargo(true)` + `SMRTest.Log.CargoReady(true)`
    (runtime-only, reset every launch).
@@ -135,14 +78,16 @@ Your jobs, in the order they usually come up:
    setup using the checklist's own steps and the verified command table
    (`PLAYTEST_CHECKLIST.md`); hand them exact console lines to paste. The
    opt-in modules are enabled in **Options → Mod Options → Community Fix
-   Pack** (main menu or pause menu; toggles apply live both directions —
-   PT-51 verified the whole surface; the user's toggles are ON and persist).
+   Pack** (main menu or pause menu; PT-51 verified the surface — but see the
+   first-enable caveat above for the three affected modules).
 2. **Process results as they arrive** — reporting protocol at the bottom of
    `PLAYTEST_CHECKLIST.md`: PASS → status flips in BOTH BUGS.md places (index
    row + heading tag; for D-entries flip the "built" wording to tested), the
-   completed section moves to `PLAYTEST_ARCHIVE.md`; FAIL → diagnose live if
-   possible (console wrappers, timestamped logging — the F12 pattern), file
-   the finding on the BUGS entry with the full forensic trail.
+   completed section moves to `PLAYTEST_ARCHIVE.md` (partially-passed tests
+   stay in the checklist with their passed triggers recorded); FAIL →
+   diagnose live if possible (console wrappers, timestamped logging — the
+   F12 pattern), file the finding on the BUGS entry with the full forensic
+   trail.
 3. **Diagnose surprises** — anything odd the user reports mid-play gets the
    live-instrumentation treatment. New defects get a new F-number, entry, and
    severity call. Mechanical repairs may land same day WITH a re-verified A/B
@@ -151,23 +96,30 @@ Your jobs, in the order they usually come up:
    (identity below), pushed. Docs never lag play.
 
 **First, read (in order) from `C:\Dev\SMR-BugFixPack`:**
-1. `docs\STATUS.md` — the **"TEN-FLIP playtest sitting"** section (newest)
-   + the "F68 over-draw repair leg" and "D06 build leg" sections AND the
-   whole engine-facts list ("Key technical facts").
-2. `docs\PLAYTEST_CHECKLIST.md` — ground rules, the verified command table,
-   **the PT-52 procedure** (what the D06 module CAN and CANNOT do — judge it
-   only on the CAN list) with its two progress notes, the reporting
-   protocol. (PT-17 is complete and archived 2026-07-28.)
-3. `docs\BUGS.md` — the entries the sitting touches (D06 + F77 for the
-   PT-52 watch;
-   D02 for PT-48; **F76 before ANY depot-picker
+1. `docs\STATUS.md` — the newest legs at the top of the file (the 2026-07-29
+   disaster/QA, harness-v2 and audit sessions) down through the D06 build
+   leg, AND the whole engine-facts section (**"Key technical facts"** —
+   AUDIT_FIX_PROMPT will eventually move it to `docs/ENGINE_FACTS.md`; read
+   it wherever it lives).
+2. `docs\PLAYTEST_CHECKLIST.md` — **restructured 2026-07-29**: toolbox/
+   reference first (ground rules, verified command table, stress harness),
+   then §1 standing watches (log hygiene, meteor watchdog, PT-52 passive),
+   §2 owed halves (PT-53 A/E, PT-52 Trigger B + B2 re-run, PT-46 tail),
+   §3 wave-6 PT-54, §4 fixture sittings, §5 cross-cutting (PT-20/21).
+   The PT-52 section still carries the CAN/CANNOT lists — judge the module
+   only on the CAN list.
+3. `docs\BUGS.md` — the entries the sitting touches (D06 + F77 for the PT-52
+   watch; D07 for PT-53; F78/F81 for PT-54; **F76 before ANY depot-picker
    interaction**; F48 before PT-37). For any drone anomaly, the DroneControl
    bullet in "Not yet swept" carries the full assignment-machinery trace and
    the R1-R7 paste-ready console forensics.
 4. `docs\FIX_POLICY.md` — binding rules for any code you write.
-5. Only if D06 needs design iteration (not just knob tuning):
-   `docs\DRONE_OVERHAUL_OPTIONS.md` — the shipped core is the veto variant of
-   option H + option A; the upgrade paths (H-v2, B, C) are speced there.
+5. Only when relevant: `docs\AUDIT_FINDINGS.md` (audit findings + the
+   Phase 1-4 plan — the source of truth for what AUDIT_FIX_PROMPT will
+   change); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
+   iteration, not just knob tuning — the shipped core is the veto variant of
+   option H + option A; upgrade paths H-v2/B/C and the DECISION section are
+   there).
 
 Game source (read-only, NEVER modify):
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`.
@@ -179,81 +131,63 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- ~~**QA REVIEW — fire `docs/QA_REVIEW_PROMPT.md` in a FRESH session.**~~
-  **DONE 2026-07-29 late** — verdict folded into BUGS.md/STATUS; the disaster
-  fixes are built (wave 6, PT-54 gates them). ~~Next fire:
-  `docs/HARNESS_REVIEW_PROMPT.md`.~~ **ALSO DONE 2026-07-29 (harness repair
-  session): stress harness v2 built + committed in the TestKit; prompt
-  executed and deleted; two new Src facts on the D06 entry.**
+- **PRE-FLIGHT A/B RunAll pair (unattended, ~5 min)** — wave 6 postdates the
+  last pair. Run it before any further code lands; record fresh numbers
+  (expect /74 denominators + the wave-6 probes) in STATUS and update this
+  prompt's expected-numbers bullet.
+- **AUDIT_FIX_PROMPT (fresh session, NOT concurrent with play)** — implements
+  AUDIT_FINDINGS Phases 1-3: the three veto-bypass fixes, the opt-module
+  first-enable repair, the error-status dead checkbox, F78/F81 decoupling,
+  the four upload blockers + ignore_files, MOD_DESCRIPTION corrections
+  (CohortHousing block, savegame claim, console achievements disclosure),
+  README sync, ENGINE_FACTS extraction + STATUS restructure. After it runs,
+  the three affected opt-modules' live-toggle behavior needs a human re-test
+  (both directions, mid-session first enable) — add it to the relevant PT
+  sections when processing.
 - **PT-52 STRESS A/B — re-run with the v2 harness (the v1 run's metric was
-  invalid).** Protocol is Trigger B2 in `PLAYTEST_CHECKLIST.md` (updated for
-  v2): quicksave → `Targets` dry run (check `pure_only=true` cohort size too)
-  → D06 OFF → `Break{scope="overlap", n=25, seed=1}` → reload → D06 ON → same
-  call → `Compare()` → repeat seeds 2-3. Read the **GATE-DECIDED first
-  claims** line (closest-hub % over FindTask-decided claims only) and the
-  lifecycle deltas (haul queue vs exec vs claim wait vs travel — this is what
-  gates the Track B structural choice). Do NOT read total clearance time as a
-  D06 score. Reload-based protocols do NOT re-poison a save (tested).
-- **F81 / F78 disaster fixes — speced, not built, QA-gated.** Package and the
-  open dangers are in STATUS "Waiting on the user" item 10. Live recovery for a
-  poisoned save meanwhile:
-  `*r for k, v in pairs(g_DisastersPredicted) do ConsolePrint(tostring(k) .. " = " .. tostring(v)) end`
-  then `RemoveDisasterNotifications("<stale id>", MainMap)`; a wedged storm
-  clears with `*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end`.
-- **F82** — split-grid notification lingers ~a sol; machinery located, updater
-  cadence still to trace (own entry).
-- **PT-53 — D07 `Opt_CohortHousing`, 3-of-5 PASS 2026-07-29; TWO triggers left.**
-  First live enable worked ("wonderfully"): cross-dome consolidation from every
-  dome over trains/passages/shuttles (B), graduation drain (D), and organic
-  no-churn where cohort housing ran short (C) all PASS. **Only two left before
-  it flips to `tested`, both cheap:** **(A)** an unemployed Senior re-homes to a
-  free Retirement Home slot in the SAME dome, and — the half that matters — an
-  **EMPLOYED** Senior in that dome does NOT move; **(E)** manual residence
-  assignment wins, toggle off = instantly vanilla, save-ON/reload-OFF loads
-  clean. A is a two-minute infopanel read.
-  Original procedure below for reference:
-- **PT-53 — D07 `Opt_CohortHousing` (original brief).** The
-  checklist section has the full procedure: five triggers (in-dome move +
-  employed exemption, cross-dome move, leave-alone/no-churn, graduation
-  drain via Age1Year, precedence + uninstall shape). Enable the toggle in
-  Mod Options (session-start step 2), verify `CohortHousing [active]`.
-  Trigger A is a two-minute read on any dome with an unemployed senior in
-  a normal residence + a free Retirement Home slot. Cheap to interleave
-  with PT-52's passive watch.
-- **PT-52 — D06 Drone dispatch overhaul + F77, CONTINUING watch (sittings
-  1 and 2 both healthy).** Full procedure is the PT-52 section of
-  `PLAYTEST_CHECKLIST.md` (progress notes recorded); briefing notes below
-  the board. The user's toggle is ON and account-persistent — verify
-  `DroneOverhaul [active]` at session start, take a fresh
-  `SMRFixPack.DroneReport` baseline (counters are NOT persisted — they
-  restart at 0 every game launch), keep half an eye on drones all session.
-  **Trigger B (controlled off/on CheatMalfunction A/B demo + the F77
-  extender-flap check) is still un-run** — the natural next PT-52 step.
-- **F78 — P1 INVESTIGATION, next step is the LIVE REPRO (5 min):**
-  hypothesis 1 (descriptor-validate loop) REFUTED live 2026-07-28
-  (`kept: 0`); on VeryLow the strike routine is statically seconds-bounded,
-  so the 183h alive-but-stuck stall contradicts static analysis. Next
-  session: arm the bracket taps from the F78 entry (MeteorsDisaster
-  ENTER/EXIT + SpawnMeteor), aim at empty ground, `CheatMeteors("single")`
-  — ENTER-without-EXIT reproduces the wedge on demand and the last print
-  brackets the stall line. **Also unblocks PT-27/28** (they need dust
-  storms the live save never produces).
-- **PT-48** AcknowledgedWarnings (D02) — break two buildings so they won't
-  self-heal, dismiss the warning: acked buildings stay quiet; a THIRD breakage
-  warns promptly and lists only itself; repair + re-break re-warns; stamp
-  survives reload; other warning types behave vanilla.
-- **DECISIONS:** D07 was built 2026-07-28 late (user go). Still owed:
-  whether F79 (trains never serve service trips — confirmed vanilla gap)
-  gets a feature-completion D-item.
+  invalid).** Protocol is Trigger B2 in the checklist (§2): quicksave →
+  `Targets` dry run (check the `pure_only=true` cohort size too) → D06 OFF →
+  `Break{scope="overlap", n=25, seed=1}` → reload → D06 ON → same call →
+  `Compare()` → repeat seeds 2-3. Read the **GATE-DECIDED first claims** line
+  (closest-hub % over FindTask-decided claims only) and the lifecycle deltas
+  (haul queue vs exec vs claim wait vs travel — this is what gates the
+  Track B structural choice). Do NOT read total clearance time as a D06
+  score. Reload-based protocols do NOT re-poison a save (tested, F81).
+- **PT-54 — wave-6 disaster fixes live gate** (checklist §3): stranded-flag
+  reconcile, live-warning-never-cleared, wedge self-heal, reschedule-after-
+  heal, rains survive collisions. The live 194-sol save is the fixture.
+- **PT-53 — D07 CohortHousing, TWO cheap triggers left** (checklist §2):
+  **(A)** unemployed Senior re-homes in-dome, EMPLOYED Senior does NOT move
+  (two-minute infopanel read); **(E)** manual assignment wins, toggle-off =
+  instantly vanilla, save-ON/reload-OFF loads clean. Then it flips `tested`.
+- **PT-52 Trigger B — controlled off/on CheatMalfunction A/B demo + F77
+  extender-flap check** (checklist §2) — still un-run; cheap once hub A/B +
+  extender geometry exists.
+- **F82** — split-grid notification lingers ~a sol; machinery located,
+  updater cadence still to trace (own entry). **F80** — trains skip valid
+  waiting passengers; investigating, forensic tap on the entry.
+- **F76 REPAIR — separate attended, game-free sitting** (vanilla P1,
+  unfixed): fix belongs in/around `ResourceItems:UpdateLayout`
+  (`ResourceItems.lua:45-71`); Init-time anchor conversion is a proven NO-OP;
+  tier-2 fallback = bypass the picker. The F76 entry + section below are the
+  whole brief.
+- **PT-48** AcknowledgedWarnings (D02, checklist §4) — break two buildings so
+  they won't self-heal, dismiss: acked stay quiet; a THIRD breakage warns
+  promptly; repair + re-break re-warns; stamp survives reload.
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
-- Un-run: PT-10, PT-11, PT-15, PT-18 (fixtures B/D/E), PT-25, PT-27..30, PT-35 (PT-27's Biorobots
-  grant is `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
+- Un-run fixture PTs (checklist §4-5): PT-10, PT-11, PT-15, PT-18 (fixtures
+  A/B/D/E), PT-25, PT-27..30 (PT-27's Biorobots grant is
+  `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
   breakthroughs — grant directly via `UIColony:SetTechResearched("<Id>")`),
-  PT-42/44, PT-47,
-  PT-46 tail (F49(d) cap, F49(a) palette), PT-20/21/22 (cross-cutting, last).
+  PT-35, PT-42, PT-44, PT-46 tail (F49(d) cap, F49(a) palette), PT-47,
+  PT-20/21/22 (cross-cutting, last — PT-20's save should post-date wave 6 so
+  the cycle covers the new persisted state).
+- **DECISIONS owed (user):** F79 D-item or not; audit Phase 4 go/no-go;
+  stat-dials build timing; D08.
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.
+
 ## PT-52 briefing notes (D06 + F77 — read WITH the checklist's PT-52 section)
 
 The checklist section is the procedure; these are the assistant-side facts:
@@ -264,8 +198,10 @@ The checklist section is the procedure; these are the assistant-side facts:
   `SMRFixPack_Disabled["ExtenderFlapChurn"] = true` pre-load if a confound
   is suspected. **Counters are NOT persisted** (zero-persisted-state design)
   — they restart at 0 each game launch, so take the sitting's baseline
-  DroneReport right after load. Sitting-1 reference: healthy at
-  `vetoed=10 / veto_expired=1 / moonlighted=0` over a full evening.
+  DroneReport right after load. Reference: three sittings healthy, peak
+  `vetoed=10 / veto_expired=1 / moonlighted=0`, nine hubs integrated,
+  `unclaimed=0` throughout including right after a marsquake mass-damage
+  event.
 - **`SMRFixPack.DroneReport` prints ON-SCREEN (ConsolePrint) AND to the log
   (ModLog)** — unlike ListFixes, no FlushLogFile dance needed live; the log
   copy is the evidence trail.
@@ -273,9 +209,10 @@ The checklist section is the procedure; these are the assistant-side facts:
   `veto_expired` staying low = near fleets are taking the yielded work
   (healthy). `veto_expired` ≈ `vetoed` = strike window too short or near
   fleets can't respond → knob-tune or investigate. `moonlighted` > 0 near
-  saturated hubs. All three flat at 0 with the toggle on = the module never
-  intervenes — either the colony has no overlap contention this session
-  (fine) or something is wrong (check ListFixes status + log).
+  saturated hubs (it only fires for a neighbour hub with ZERO idle drones —
+  0 is CORRECT when every hub has idle drones). All three flat at 0 with the
+  toggle on = the module never intervenes — either no overlap contention this
+  session (fine) or something is wrong (check status + log).
 - **Starvation is the one theoretical risk the design accepts a window for**
   (max ~4 far-fleet polls ≈ 10-15s before the veto expires). If a wrench
   icon ever visibly outlives vanilla expectations: DroneReport + the R1/R2
@@ -314,12 +251,8 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   (select the vehicle, `rc = SelectedObj`; depot via `~` inspector or
   selection).
 - **NO live UI-internals prototyping in a play session** — hard rule since
-  the lock-up. The F76 REPAIR is a separate attended, game-free sitting: fix
-  belongs in/around `ResourceItems:UpdateLayout` (`ResourceItems.lua:45-71`)
-  — Init-time anchor conversion is a proven NO-OP (scale applied post-Init);
-  tier-2 fallback = bypass the picker; survey the `ItemMenuBase` siblings
-  while in there. If the user asks for this sitting, that spec + the F76
-  entry are the whole brief.
+  the lock-up. The F76 REPAIR is a separate attended, game-free sitting (see
+  the board).
 - It WILL draw false reports against the pack — the MOD_DESCRIPTION explainer
   note covers it.
 
@@ -333,31 +266,17 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   `*r for _, id in ipairs(SMRFixPack.order) do local f = SMRFixPack.fixes[id] ConsolePrint(id .. " [" .. f.status .. "]") end`
 - The log buffer only flushes at exit — `FlushLogFile()` forces it
   mid-session (always do this before reading the log).
-- **Mars↔asteroid map switches KILL the console** (isolated 2026-07-28 late:
-  switch to the asteroid → console won't open on ANY binding, and stays dead
-  after switching back; the earlier "echo died after map hops" was the same
-  bug's milder face). Root: the Enter/Alt-Shift-C/Ctrl-Alt-C shortcuts only
-  EXIST while the `ShowConsole` gate holds (uiConsole.lua:429-431 +
-  CommonShortcuts.generated.lua:174-186); the TestKit enables the gate and
-  rebuilds shortcuts once at load (00_TestCore.lua:288-306), and the asteroid
-  switch tears that state down — with every binding gone, the re-enable
-  command cannot be typed (chicken-and-egg). **Workaround: quicksave +
-  reload ON the map you need** — the reload re-runs the TestKit colony-up
-  hook and restores the console there; it dies again on the next switch, so
-  batch console work per visit. **TestKit repair BUILT same evening
-  (00_TestCore `OnMsg.CurrentMapChangeDone` — the switch machinery's own
-  completion signal, map.lua:372/:404 — re-asserts gate + shortcuts after a
-  1s settle; no auto-open on switches; the pre-existing
-  InGameInterfaceCreated re-assert demonstrably did NOT cover this).
-  VALIDATED 2026-07-28 next sitting: console opened normally after repeated
-  Mars↔asteroid switches across a full live session — the workaround is
-  retired.** If only the ECHO is gone
-  but typing works, the lighter recovery is `ShowConsoleLog(true)` blind
+- **Mars↔asteroid map switches used to KILL the console** — TestKit repair
+  BUILT and VALIDATED 2026-07-28 (`OnMsg.CurrentMapChangeDone` re-asserts
+  gate + shortcuts; console opened normally across repeated switches; the
+  quicksave+reload workaround is retired). If only the ECHO is gone but
+  typing works, the lighter recovery is `ShowConsoleLog(true)` blind
   (uiConsoleLog.lua:88).
-- **Runtime console wrappers must target the LEAF class** (STATUS engine
-  facts, flattening corollary 2026-07-28): wrapping a base class at runtime
-  does nothing for already-built subclasses — e.g. lander taps go on
-  `UniversalLanderRocket`, not `UniversalRocketBase`.
+- **Runtime console wrappers must target the LEAF class** (engine-facts
+  flattening corollary): wrapping a base class at runtime does nothing for
+  already-built subclasses — e.g. lander taps go on `UniversalLanderRocket`,
+  not `UniversalRocketBase`. (The same fact is why the audit's opt-module
+  first-enable caveat exists.)
 - Bare console expressions echo on-screen only (NOT logged); `print(...)`
   goes to the log — use `print` when output must be retrievable.
 - Infopanel cheat buttons need `Platform.cheats = true` AND ride the
@@ -370,7 +289,7 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
 - Cheat use is logged per save and blocks that save's achievements — fixture
   saves only.
 
-## Harness facts (for any A/B pair / same-day repair — none queued; last pair 2026-07-28 late)
+## Harness facts (for the queued pre-flight pair / any same-day repair)
 
 - Launch: `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050 -smrautorun`.
   A leg takes ~75 s; Mars.exe may take minutes to appear. **Never kill on a
@@ -386,32 +305,26 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   PACK listed right after 00_Core, setting the `SMRFixPack_Optional` table
   (the OptionEnabled bridge ORs it with the saved Mod Options toggles).
   Delete it after the leg. NOTE: the user's own Mod Options toggles are
-  account-persistent and will ALSO be on during legs — for a true default-
-  config leg numbers, either ask the user to toggle them off first or accept
-  the four opt-ins active (then expect 62/0/10/0-style shifts and document).
-  Simplest: run legs with the toggles as-is and compare against the matching
-  expectation.
-- **TestKit gained `Code/91_Stress.lua` (2026-07-29, local commit; REBUILT v2
-  same day — per-request lifecycle tracing)** — the drone stress harness. It
-  registers NO probes; v2 does install permanent classdef-time wraps on
-  `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but they
-  gate on an active stress run and pass straight through otherwise, so
-  **expected numbers below are unchanged** and no A/B pair was owed.
-- **Expected numbers (current, 73 probes — none for D06/F77 yet; D07 has
-  one, SKIPs unless its toggle is on):** baseline 1 PASS / 57 FAIL /
-  15 SKIP / 0 ERROR; fixed default 58/0/15/0 (**65/71 active** — the six
-  opt-ins read `inactive (opt-in...)`); all SIX toggles on = 63/0/10/0
-  (71/71). Baseline's 1 PASS = FactionFundingCheck canary; the OptionsMenu
-  probe (D05) asserts in every leg (now covers all six toggle wirings) and
-  FAILs baseline by design. Older records with /70 and /72 denominators
-  predate D07.
-- **TestKit stand-in probe corollary (learned in the D07 leg):** WithGlobals
-  stubs CANNOT reach a game file that localizes the global at load time
-  (`local IsValid = IsValid`, Colonist.lua:5) — a probe driving shipped
-  code with plain-table stand-ins must assert on the MODULE's own action
-  (its move happened / didn't), never on vanilla bookkeeping around the
-  stand-ins; and a fake colonist run through the shipped
-  FindEmigrationDome tail needs a PickEmigrationCommunity stub.
+  account-persistent and will ALSO be on during legs — either ask the user to
+  toggle them off first for a true default-config leg, or run with toggles
+  as-is and compare against the matching expectation.
+- **TestKit `Code/91_Stress.lua` (v2, lifecycle tracing)** — the drone stress
+  harness. It registers NO probes; v2 installs permanent classdef-time wraps
+  on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
+  they gate on an active stress run and pass straight through otherwise.
+- **Expected numbers — STALE, refresh with the queued pre-flight pair:** the
+  last recorded pair (73 probes, pre-wave-6) was baseline 1/57/15/0 · fixed
+  default 58/0/15/0 (65/71 active) · all six toggles 63/0/10/0 (71/71).
+  Wave 6 moves denominators to /74 (68 default-active) and adds the wave-6
+  probes; the rains probe needs a loaded colony and may SKIP in the synthetic
+  legs. Baseline's 1 PASS = FactionFundingCheck canary; the OptionsMenu
+  probe (D05) asserts all six toggle wirings and FAILs baseline by design.
+- **TestKit stand-in probe corollary (D07 leg):** WithGlobals stubs CANNOT
+  reach a game file that localizes the global at load time
+  (`local IsValid = IsValid`, Colonist.lua:5) — a probe driving shipped code
+  with plain-table stand-ins must assert on the MODULE's own action, never on
+  vanilla bookkeeping around the stand-ins; a fake colonist through the
+  shipped FindEmigrationDome tail needs a PickEmigrationCommunity stub.
 - Synthetic-map noise unchanged: ~49 Flight.lua `objects_to_mark` errors +
   a few GameInit nil-call lines in BOTH legs; a `[mod] Error in mod … Test
   Kit` line at quit is a shutdown artifact. The MultipleSuns
@@ -419,23 +332,26 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
 - Parse sweep: python + luaparser, `ast.parse(open(f,encoding='utf-8-sig').read())`.
 - Docs tooling: never round-trip a doc through PowerShell 5.1 `Get-Content`
   without `-Encoding UTF8` both ends; prefer the editor's file tools. Git
-  commit messages via single-quoted here-strings; **no embedded double
-  quotes** (a quote in the message breaks the here-string — proven again
-  2026-07-27).
+  commit messages via single-quoted here-strings or `git commit -F <file>`;
+  **no embedded double quotes** (proven again 2026-07-27).
 
 ## Hard rules
 
-Same as ever (STATUS.md engine facts govern): sandbox on all platforms;
-`error()`/`assert()` report-and-continue; self-checks read the DECLARING
-class; presets only after DataLoaded (GlobalMaps exist EMPTY before it;
-DataChanged(false) re-fires right after; DataLoaded can fire MORE THAN ONCE —
-a template can miss the first pass); GameVars only inside patched functions;
-post-wrappers on command methods never run; `IsValid()` is falsy for ALL
-pure-Lua objects; never modify the game directory; only the playtest flips
-statuses to `tested`; mechanical repairs land with a re-verified A/B,
-redesigns go to the user; **no live UI-internals prototyping on the user's
-play sessions** (F76 lesson). Commit with
+STATUS.md engine facts govern (until ENGINE_FACTS.md exists — then that):
+sandbox on all platforms; `error()`/`assert()` report-and-continue;
+self-checks read the DECLARING class; presets only after DataLoaded
+(GlobalMaps exist EMPTY before it; DataChanged(false) re-fires right after;
+DataLoaded can fire MORE THAN ONCE — a template can miss the first pass);
+GameVars only inside patched functions; post-wrappers on command methods
+never run; `IsValid()` is falsy for ALL pure-Lua objects; **the shipped build
+IS Src** (full fpk extraction, 2250/2256 byte-identical, build 1.0.7.396349 —
+keep apply-time self-checks anyway, they guard future patches); never modify
+the game directory; only the playtest flips statuses to `tested`; mechanical
+repairs land with a re-verified A/B, redesigns go to the user; **no live
+UI-internals prototyping on the user's play sessions** (F76 lesson). Commit
+with
 `git -c user.name="SMR-BugFixPack" -c user.email="154917955+catt144@users.noreply.github.com"`,
 push the fix pack (TestKit stays local-only).
 
-**End of session:** update STATUS.md and this prompt, commit, push, summarize.
+**End of session:** update STATUS.md and this prompt (rewrite stale blocks —
+no banner stacking), commit, push, summarize.
