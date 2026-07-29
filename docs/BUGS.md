@@ -2777,8 +2777,13 @@ only vanilla escapes are force-stopping a storm or terraforming past 80%
 Atmosphere. This is almost certainly why the user's save saw no weather for its
 entire recorded history (Atmosphere 57%, no force-stop, storms enabled on
 `Meteor_High`).
-**ROOT MECHANISM PROVEN (2026-07-29, Repro A — and it needs NO thread wedge).**
-The stranding is a plain save/load persistence mismatch:
+**SUPERSEDED HYPOTHESIS — kept for the record (Repro A, 2026-07-29).** This
+block argued the stranding was a save/load persistence mismatch. **It was
+tested and disproved the same sitting** — see "TESTED AND DISPROVED" below;
+the notification and its thread both survive a reload. The real mechanism is
+the unconditional leak documented above (no removal on any normal path). The
+original reasoning, and its flaw, follow:
+The stranding was thought to be a plain save/load persistence mismatch:
 - `g_DisastersPredicted` is a **GameVar** (`MapSettings.lua:131`) — it is saved
   and restored with the game.
 - The notification that would clear it is **not** restorable. The engine says so
@@ -2812,20 +2817,33 @@ save's entire history, and the toxic band matched `Toxic_High` exactly as the
 threshold reads predicted. **It also corroborates the sensor-tower maths
 precisely: a 3-sol warning is ~72h against the measured
 `GetDisasterWarningTime() = 75h` cap from 6 towers.**
-**AND IT IMMEDIATELY RE-ARMS THE BUG.** For those 3 sols
-`g_DisastersPredicted["DisasterToxicRains"] = true` (set at
-`TerraformingDisasters.lua:300`, cleared at :302 only after the `Sleep`). Per
-the mechanism proven above, **any save/load inside that 3-sol window strands
-`DisasterToxicRains` permanently** and kills the colony's weather again — and
-`SavegameFixups.DisasterNotifications` (`MapSettings.lua:186`) names
-RainDisaster alongside MeteorStorm as un-restorable. So the warning window is
-not just a collision surface for the rains deadlock; it is a 3-sol-wide
-stranding window in its own right. **This is the natural, non-synthetic version
-of Repro A** — quicksave inside the warning, reload, and the flag comes back
-with no notification behind it. Practical consequence recorded for playtests:
-**any protocol that reloads a save (e.g. the PT-52 stress A/B) will re-poison a
-colony if run inside a disaster warning window** — dump `g_DisastersPredicted`
-and clear stragglers afterwards.
+**TESTED AND DISPROVED (2026-07-29): save/load is NOT a stranding path.** I
+predicted that a quicksave+reload inside the 3-sol toxic-rain warning window
+would strand `DisasterToxicRains` the way `DisasterMeteorStorm` was stranded.
+The user ran it: after the reload the **toxic-rain notification was still on
+screen and still counting down** ("Starts in 2 Sols 7 h") with
+`DisasterToxicRains = true` — i.e. a completely healthy predicted state, not a
+stranded one. Both the notification and its owning activation thread survive a
+normal save/load (game-time threads are persisted — cf. the zero-upvalue
+requirement in `Fix_MeteorFrequency.lua`), so `RainsDisasterActivation` resumes
+its `Sleep` and clears the flag properly at
+`TerraformingDisasters.lua:302`.
+**Where I went wrong:** `SavegameFixups.DisasterNotifications`
+(`MapSettings.lua:179-187`) is a **one-time legacy migration** that runs only
+when loading a save older than the revision that added it — its
+"RainDisaster and MetheorStorm cannot be restored" comment describes that
+migration's limitation, NOT routine save/load semantics. I read it as the
+latter. Consequently **Repro A proved only that a hand-planted GameVar entry
+survives a save**, which is trivially true and is not evidence of any
+real-world stranding mechanism. Downgraded accordingly.
+**Two practical consequences:** (1) a reload-based playtest protocol (the PT-52
+stress A/B) does **not** re-poison a colony — no cleanup needed; (2) the real
+mechanism is narrower and cleaner than the save/load story, and is the one
+documented immediately above: `MeteorsDisaster` adds the storm DURATION
+notification at `Meteors.lua:179` and no normal path ever removes it. The
+notification's own `expiration` makes it vanish from the UI while
+`g_DisastersPredicted` keeps the flag forever — which is exactly the
+flag-true-with-nothing-on-screen state found on this save.
 Supporting reads from the same sitting:
 - **The pack's meteor thread is HEALTHY** — `phase=long-sleep-done age=1h
   restarts=0`, and the user saw two NATURAL single strikes. So the wedge is
