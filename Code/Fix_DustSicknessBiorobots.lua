@@ -87,6 +87,11 @@ local patched = false
 
 local function patch()
 	if patched then return end
+	-- FIX (audit 2026-07-29, A1): honor the per-fix veto here too — these OnMsg
+	-- handlers are installed unconditionally, and Register's veto only skips
+	-- apply(), so without this check a disabled fix still mutated the presets.
+	local disabled = rawget(_G, "SMRFixPack_Disabled")
+	if type(disabled) == "table" and disabled[FIX_ID] then return end
 	local storybits = rawget(_G, "StoryBits")
 	if type(storybits) ~= "table" or type(rawget(_G, "HasTrait")) ~= "table" then return end
 	local present = false

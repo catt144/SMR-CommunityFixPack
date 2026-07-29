@@ -62,6 +62,12 @@ local ever_changed = false   -- some pass this session actually changed the pres
 
 local function patch()
 	if patched then return end
+	-- FIX (audit 2026-07-29, A1): honor the per-fix veto here too — these OnMsg
+	-- handlers are installed unconditionally, and Register's veto only skips
+	-- apply(), so without this check a disabled fix still rewrote the tech
+	-- effect AND re-armed the status-gated LoadGame sweep via the heal below.
+	local disabled = rawget(_G, "SMRFixPack_Disabled")
+	if type(disabled) == "table" and disabled[FIX_ID] then return end
 	local defs = rawget(_G, "TechDef")
 	local tech = type(defs) == "table" and defs[TECH_ID]
 	if type(tech) ~= "table" then return end   -- presets not loaded yet
@@ -82,8 +88,10 @@ local function patch()
 	local entry = SMRFixPack.fixes[FIX_ID]
 	if changed > 0 then
 		ever_changed = true
-		-- restore the status too, in case an earlier pass mislabeled it
-		if entry then
+		-- restore the status too, in case an earlier pass mislabeled it.
+		-- FIX (audit 2026-07-29, A1): heal ONLY an "inactive" mislabel — never
+		-- overwrite "disabled" (the user veto) or any other state.
+		if entry and (entry.status == "active" or entry.status == "inactive") then
 			entry.status = "active"
 			entry.detail = ""   -- "" not nil: ListFixes concatenates it (PT-51 crash)
 		end

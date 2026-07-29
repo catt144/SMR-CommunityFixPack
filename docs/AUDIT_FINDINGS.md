@@ -18,7 +18,7 @@ Statuses: `[ ]` open · `[x]` fixed/done · `[~]` deliberately deferred/declined
 
 ## Severity A — would ship broken behavior or block upload
 
-### A1. Per-fix disable veto bypassed by three data-patch fixes `[ ]`
+### A1. Per-fix disable veto bypassed by three data-patch fixes `[x — fixed 2026-07-29, plan 1.1]`
 `SMRFixPack_Disabled[id]` only skips `apply()` (00_Core.lua:90-94), but these
 install file-scope `OnMsg.DataLoaded`/`DataChanged` handlers that mutate presets
 regardless of the veto:
@@ -254,7 +254,7 @@ and needs a separate go-decision.
 
 ## Phase 1 — code defects (minimal diffs; no refactors; each item independently testable)
 
-- `[ ]` **1.1 (A1)** Add the veto re-check (pattern:
+- `[x]` **1.1 (A1)** Add the veto re-check (pattern:
   Fix_LastTransmissionStorage.lua:102-106) to `patch()` in
   Fix_DustSicknessDamage, Fix_DustSicknessBiorobots, Fix_IndependenceTerraforming.
   In IndependenceTerraforming, additionally guard the status heal so it never
