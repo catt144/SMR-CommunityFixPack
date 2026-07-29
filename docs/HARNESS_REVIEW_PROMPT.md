@@ -6,10 +6,23 @@ once the harness has been repaired.
 **Fire this with the game CLOSED** — the review is read-only, but any fix touches
 loadable Lua, which does nothing until the next game launch.
 
-**SEQUENCING: fire `docs/QA_REVIEW_PROMPT.md` FIRST.** That review may conclude
-the feature this harness was built to measure is not worth keeping in its
-current form, which would change what the instrument should measure. Come back
-here with that verdict in hand.
+**SEQUENCING: the QA review (`docs/QA_REVIEW_PROMPT.md`) has now RUN
+(2026-07-29, fresh-context session) — its verdict is in hand and it changes
+this review's aim.** The claim gate is kept but demoted ("component under
+evaluation" — do not invest further until the instrument can score it), and
+the instrument's redesign is now the front line: the QA verdict's central
+finding is that **nothing in Track B should be built until the hauling leg is
+decomposed into queue latency (demand posted → first supply claim) vs
+execution (claim → pickup → unload)** — those imply opposite remedies
+(dispatch/priority logic vs stat/depot levers). The recommended mechanism,
+with every patch point verified against Src: chained wrappers on
+`RequestAssignUnit` / `RequestUnitFulfill` (bare globals, `_TaskRequest.lua:352,412`;
+`Drone.lua` holds no file-local alias) plus `StartDemandPhase` /
+`StartWorkPhase` / `Repair` timestamps — TestKit-only, so no A/B pair owed.
+Two more QA facts to carry in: the delivering-drone handoff is verified
+structural (`RequiresMaintenance.lua:418-426` → `:190-198`
+`SetCommandKeepQueue`), and `TaskRequestHub:FindTask` has exactly ONE caller
+tree-wide (`Drone.lua:621`), so wrapping either end captures every claim.
 
 > **STATUS UPDATE — this prompt was written before the first run; the run has
 > now happened (2026-07-29) and CONFIRMED the top concern in §2.** The A/B
@@ -36,10 +49,12 @@ to make engineering decisions. It is
 Relaunched "Community Fix Pack" project (`C:\Dev\SMR-BugFixPack`, with a
 local-only TestKit companion repo at `C:\Dev\SMR-BugFixPack-TestKit`).
 
-It was written in a single pass, has **never been run**, and its output is about
-to be used to judge whether an optional gameplay module works and to settle
-design questions in a larger proposal. **A flaw in the instrument would quietly
-corrupt every conclusion drawn from it.** That is what you are here to prevent.
+It was written in a single pass and has now been run **exactly once** (the
+2026-07-29 A/B — see the status update above); its output is used to judge
+whether an optional gameplay module works and to settle design questions in a
+larger proposal. **A flaw in the instrument would quietly corrupt every
+conclusion drawn from it.** That is what you are here to prevent — and one
+such flaw has already been confirmed by the first run.
 
 ## What it is for
 
@@ -95,9 +110,17 @@ this project printed nothing at all because `IsValidThread(nil)` raised inside a
 loop body and every iteration's print was skipped. That failure mode is easy to
 mistake for "no results".
 
-**Also note a proven hazard:** `ModTools\Src` is NOT the shipping build. The game
-runs `Packs\Lua.fpk`. This was proven live — `GetCameraLookAtPassable` exists in
-Src and does not exist at runtime. Any global the harness calls could be absent.
+**CORRECTED (2026-07-29 QA session): the shipped build IS Src.** The shipped
+`Packs\Lua.fpk` was extracted in full and diffed against `ModTools\Src`:
+**2,250 of 2,256 shipped Lua files are byte-identical**, including every
+drone/maintenance/task-request file this harness touches; the only 5
+divergences are engine/tooling files (camera state, GED stubs, async/sound/
+xinput wrappers). Shipped build: `1.0.7.396349`. The earlier
+"`GetCameraLookAtPassable` does not exist at runtime" proof was a misreading —
+it is a **`local function`** (`Cheats.lua:42`), invisible from the console *by
+design*, in Src and shipped alike. So: trust Src line numbers, but keep the
+engine-behaviour cautions above (`error()` reports-and-continues, sandbox
+blacklist) — those are real and unchanged.
 
 ### 2. Does it measure the right thing?
 
@@ -123,12 +146,37 @@ This matters more than whether it runs. Specific questions:
   `no_resource`-maintenance buildings and dust/clean work (the only populations
   where the gate can act); instrument `TaskRequestHub:FindTask` outcomes
   directly rather than inferring from `Drone:Work`; or report the gate's own
-  `vetoed`/`veto_expired` against offered-claim counts. Propose the one you
-  would trust, and say what it would have shown on the run just completed.
+  `vetoed`/`veto_expired` against offered-claim counts. **The QA review's
+  recommended shape (2026-07-29): per-request lifecycle tracing** — timestamps
+  at demand-posted, first `RequestAssignUnit`, unload/`RequestUnitFulfill`,
+  work claim, and `Repair`, so every repair decomposes into queue-latency vs
+  travel vs work; the no_resource/dust cohort then scores the gate on top of
+  the same log. Propose the design you would trust, and say what it would have
+  shown on the run just completed.
+- **Explain the ~57m "work→first claim" figure.** If the delivering-drone
+  handoff is immediate (`SetCommandKeepQueue` at `RequiresMaintenance.lua:198`),
+  a near-uniform ~57m from "work phase" to "claim" in both legs is suspicious —
+  it likely means the harness's event anchors measure from malfunction (or the
+  drone finishes its queued commands first), not from work-request fill. Pin
+  down the exact event semantics; they decide what every published number
+  meant.
+- **Record run conditions with the results.** The 2026-07-29 run's colony was
+  at the vanilla drone-stat ceiling — +60% move speed (Low-G Drive + Advanced
+  Drone Drive, live-read 2304 vs base 1440) and 2× carry (Artificial Muscles) —
+  on top of full depots and 14-24 idle drones per hub. Per the EXTERNAL
+  VALIDITY rule in `PLAYTEST_CHECKLIST.md`, the harness output should state
+  such conditions itself (a conditions header in `Compare()` would do) so no
+  future run's numbers are read without them.
 - **Should the harness measure the HAULING leg instead or as well?** The run
-  found hauling is **3h03m of a 3h27m total — 88% of elapsed time** — and it is
-  the leg D08's proposed dispatcher would act on. An instrument that scores only
-  the 12% may be aimed at the wrong target entirely.
+  found hauling is **3h03m of a 3h27m total — 88% of elapsed time**. Yes — but
+  note the QA review's caution against the easy inference: the run's targets
+  were `overlap`-scope (already registered to multiple hubs, all with idle
+  drones), so **the 88% does NOT by itself promote D08's registration
+  dispatcher** — awareness wasn't the shortage in that run. What the 88% needs
+  is the decomposition above: queue-latency dominance points at dispatch/
+  priority logic (e.g. the maintenance priority-escalation option — vanilla
+  precedent `SupplyGridBreakable.lua:48-56`), travel dominance at stat/depot
+  levers. The instrument's job is to make that split measurable.
 - **Observer effect.** The wrap adds work to a hot path. Breaking 25 buildings at
   once is a demand *surge*, not steady state — is surge behaviour representative
   of the problem the module exists to fix?
