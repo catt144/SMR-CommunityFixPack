@@ -322,7 +322,7 @@ and needs a separate go-decision.
   the audit session; do not re-edit it here except to update its read-list
   pointers after 3.2/3.3 move things.) *Done 2026-07-29; the D06 index row
   already agreed with its heading (fixed by the pre-audit staleness sweep).*
-- `[ ]` **3.2 (D6)** Extract STATUS.md "Key technical facts" into
+- `[x]` **3.2 (D6)** Extract STATUS.md "Key technical facts" into
   `docs/ENGINE_FACTS.md` (sole authoritative home; STATUS keeps a one-line
   pointer; update the readers: FABLE_NEXT read-list, checklist references).
 - `[ ]` **3.3 (D6)** STATUS.md: replace the "Prior wrap" paragraph stack with
