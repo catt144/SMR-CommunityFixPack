@@ -33,7 +33,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | fixed* |
 | F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | tested — PT-43 F19 read PASS 2026-07-28 (MP caption ≈ bars, Food sane) |
 | F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | tested — PT-43 F20 read PASS 2026-07-28, all three checks (entry) |
-| F21 | Train travel-time penalty includes station waiting       | P2  | med  | fixed  |
+| F21 | Train travel-time penalty includes station waiting       | P2  | med  | tested — PT-43 F21 read PASS 2026-07-28 (17h wait, zero penalty; stats ride-scale) |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | fixed  |
 | F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | fixed  |
@@ -446,7 +446,7 @@ penalty row is untouched, no other stat is affected, the override is removed in 
 call under `pcall`, nothing in the builder yields, and only Morale tooltips are wrapped.
 Probe: `MoraleComfortTooltip` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
-### F21 — Train travel-time penalty includes station waiting  `[fixed: Code/Fix_TrainWaitTime.lua]`
+### F21 — Train travel-time penalty includes station waiting  `[tested: Code/Fix_TrainWaitTime.lua — PT-43 F21 read PASS 2026-07-28: a 17+ hour platform wait produced ZERO travel Comfort entries; a migrant with a 16-hour total trip arrived at Comfort 99 (vanilla would have billed ~-16); the train's "Travel time (rolling average)" read 4.15 hours against riders with 16-17h queue-inclusive trips — the stats and the penalty both exclude waiting, one shared start_wait mechanism verified end-to-end. Setup detour surfaced F79 + F80 (entries)]`
 `Lua\Units\ColonistTransport.lua:493,511,551-569` — `ticket.start_wait` set on reaching
 platform, never reset at boarding; Comfort "travel time" penalty and train/track
 "spent time" stats (TransportStatistics.lua:31-45) count waiting (double-counted vs

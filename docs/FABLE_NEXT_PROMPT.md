@@ -165,7 +165,7 @@ silent.
 - Un-run: PT-09..11, PT-15, PT-18 (fixtures B/D/E), PT-23, PT-25, PT-27..30, PT-35 (PT-27's Biorobots
   grant is `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
   breakthroughs — grant directly via `UIColony:SetTechResearched("<Id>")`),
-  PT-42/43/44, PT-47,
+  PT-42/44, PT-47,
   PT-46 tail (F49(d) cap, F49(a) palette), PT-20/21/22 (cross-cutting, last).
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.

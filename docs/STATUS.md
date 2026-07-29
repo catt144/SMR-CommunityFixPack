@@ -44,8 +44,12 @@ both not-over-broad negatives); PT-40 PASS same sitting → F65 `tested`,
 archived (merge both geometries, clean salvage split, long-track control,
 reload, log clean); PT-31 PASS same sitting → F70 `tested`, archived
 (round trip held, prefill negative intact); PT-16 PASS same sitting →
-F67 + F69 `tested`, archived — **the ASTEROID SECTION is COMPLETE; seven
-flips in one sitting (F68, F73, F72, F65, F70, F67, F69).**
+F67 + F69 `tested`, archived — **the ASTEROID SECTION is COMPLETE.** PT-43
+PASS in full same sitting → F19 + F20 + F21 `tested`, archived — **TEN
+status flips in one sitting (F68, F73, F72, F65, F70, F67, F69, F19, F20,
+F21), plus two NEW vanilla findings from the PT-43 setup (F79 trains-never-
+serve-services, confirmed; F80 trains-skip-waiting-passengers,
+investigating).**
 Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
 

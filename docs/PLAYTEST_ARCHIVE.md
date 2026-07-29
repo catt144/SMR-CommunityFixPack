@@ -1563,3 +1563,79 @@ arrival_loc — non-discriminating); RoughTouchDown storybit hazard +
 verified console recovery recorded on the F69 entry.**
 
 ---
+
+## PT-43 — Numbers and tooltips trio · covers **F19, F20, F21**
+
+Three small, independent reads. Any established colony will do — one with trains
+and a few sols of history.
+
+**F19 — Command Center graph caption.**
+1. Open the **Command Center**, switch to the **Machine Parts** graph (Electronics
+   works too), and look at the "Produced ... and Consumed ..." caption above it.
+   - **EXPECTED:** the Consumed figure is in the same ballpark as the height of
+     the Consumed bar — it now includes maintenance, which is most of your
+     Machine Parts usage.
+   - **SURPRISE looks like:** a near-zero figure beside a tall bar (the old
+     behaviour), or a figure that is now clearly larger than the bar.
+2. Sanity-check **Food**, where consumption is real and maintenance is nil — the
+   number should be essentially unchanged from before.
+
+`Result (Machine Parts caption vs bar / Food unchanged?):` **PASS —
+2026-07-28, live colony (Command Center graphs). Machine Parts: caption
+"Consumed (4)" beside per-sol consumed bars of ~4-6 (Sol 221 tooltip 6/4)
+— maintenance now included, no near-zero caption. Food sanity check:
+"Consumed (116)" vs bars ~100-104 (Sol 223 tooltip 60/104) — real
+consumption unchanged; not over-broad. F19 → tested; F20/F21 reads still
+un-run, section stays.**
+
+**F20 — Morale tooltip.**
+3. Find a colonist whose **Comfort** is high (green, at or above the high mark).
+   Select them and hover the **Morale** stat.
+   - **EXPECTED:** no "+Comfort" style bonus row is listed, and the rows shown
+     add up to the Morale value in the title.
+   - **SURPRISE looks like:** the bonus row is still there, or a row that SHOULD
+     be there is gone.
+4. Find a colonist whose **Comfort is low** (red) and hover Morale.
+   - **EXPECTED:** the Comfort PENALTY row is still listed — that one is real.
+     If it disappeared, the fix is over-broad; report it.
+5. Hover Morale on a colonist with high **Health** or **Sanity**.
+   - **EXPECTED:** those bonus rows are untouched.
+
+`Result (high-Comfort row gone / low-Comfort row kept / Health+Sanity intact?):`
+**PASS all three — 2026-07-28, live colony. High-Comfort colonist (Hugo
+Fifth, Health/Sanity/Comfort all ≥ high): tooltip listed ONLY "+5 (Health)"
+and "+5 (Sanity)" — no phantom Comfort bonus — and summed exactly (40 base
++ 5 + 5 = 50 title). Low-Comfort negative (Obi Jetson, Comfort driven to 0
+via the ChangeComfort console line, reason logged in the stat tooltip):
+"I can't live like this -10 (Comfort)" STILL listed — the real penalty
+kept, fix not over-broad — alongside "+5 (Health)" and "Severely stressed
+-10 (Sanity)", proving both directions of the other stats intact. F20 →
+tested; only the F21 train-waiting read remains.**
+
+**F21 — Train waiting time.**
+6. Pick a station where colonists queue for a while. Select a colonist about to
+   travel, note their **Comfort**, and watch them wait, board, ride and arrive.
+   - **EXPECTED:** the Comfort drop on arrival reflects the ride, not the wait.
+     A long wait followed by a short hop should cost little.
+   - **SURPRISE looks like:** a big Comfort hit after a long wait and a one-stop
+     ride.
+7. Open the **train's** and the **track's** infopanels and check the travel/spent
+   time statistics over a few sols.
+   - **EXPECTED:** they no longer include platform waiting (the station's own
+     waiting statistic still does, and should be unchanged).
+
+`Result (Comfort hit matches the ride / train+track stats exclude waiting?):`
+**PASS — 2026-07-28, live colony (5-station network built for the test).
+Comfort half: a colonist queued 17+ game hours logged ZERO travel Comfort
+entries while waiting; a migrant whose total trip ran 16 hours arrived at
+Comfort 99 (the vanilla -1/hour-incl-waiting math would have billed ~-16).
+Stats half: the train's "Travel time (rolling average)" read 4.15 hours
+against riders with 16-17h queue-inclusive trips — ride-scale, waiting
+excluded; the track stat reads the same per-trip start_wait accounting
+(TransportStatistics), verified via the entry's mechanism. Setup notes for
+posterity: service-seeking colonists will NEVER ride (F79 — vanilla
+service search is passage-only; use WORK commuters or migrants as
+subjects), and an under-served network can strand valid passengers
+indefinitely (F80) — both found and filed during this read's setup.**
+
+---
