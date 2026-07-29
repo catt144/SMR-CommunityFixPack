@@ -3119,6 +3119,30 @@ against real industrial density during a genuine demand surge.
 conditions artifact — it holds at any base density, so "the metric counted
 deliveries, not claims" stands. The 88% hauling share could shift under scarcity
 but is unlikely to invert.
+**THE INVERSION — the same artificiality is evidence the problem is WORSE than
+measured, not smaller (user, 2026-07-29):** *"the fact that I notice lags in a
+cheat filled environment, the issue is vastly worse to a normal player."*
+This is the right reading and the run contains its proof. **Under pre-filled
+depots and hubs carrying 14-24 IDLE drones each — a best case a real colony
+never sees — the numbers were still bad:**
+- mean break→work **3h03m** just to get a maintenance resource delivered, from
+  depots that could not run out;
+- worst total **9h24m** (`PolymerPlant:2058`);
+- **`MartianUniversity:2895` waited 11h48m for its resource and was still
+  unrepaired when the run timed out at 12h.** With full depots and idle drones
+  everywhere. That is not a scarcity failure; it is a dispatch/hauling failure,
+  and it is the single most damning figure in the run.
+A normal player has scarce Electronics, tight drone counts, and dense industry
+competing for the same fleets. If the symptom is this visible at best case, the
+lived experience is materially worse. **So the null result must NOT be read as
+"the problem is small."** It says our *instrument* could not see the claim
+gate's mechanism — while the surrounding data independently confirms the
+underlying problem is severe.
+**One honest nuance to weigh against this:** the layout is deliberately spread
+for distance testing, so travel time (and therefore the hauling share) may be
+inflated relative to a compact player base. The environment is best-case on
+supply and drone count, but plausibly worse-case on distance. Both directions
+should be stated when this evidence is used.
 **Interesting interaction worth building on:** the D08 drone-count advisory and
 the claim gate are **complementary, not independent** — right-sizing fleets
 increases contention, which is exactly the condition under which the gate earns

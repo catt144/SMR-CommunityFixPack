@@ -296,6 +296,34 @@ Two things we believe survive the objection regardless, but check them: the
 delivering-drone handoff is **structural** (holds at any base density), and the
 88% hauling share could shift under scarcity but seems unlikely to invert.
 
+### The inversion — the artificiality also argues the problem is WORSE than measured
+
+Do not read the null result as "the problem is small." Under **pre-filled
+depots and hubs carrying 14-24 idle drones each** — a best case no real colony
+sees — the run still produced:
+
+- mean **3h03m** just to deliver a maintenance resource from depots that could
+  not run out;
+- worst total **9h24m**;
+- **one building (`MartianUniversity:2895`) waited 11h48m for its resource and
+  was still unrepaired when the run timed out at 12h.**
+
+That is not scarcity failing; it is dispatch/hauling failing under ideal supply.
+A normal player has scarce Electronics, tight drone counts and dense industry
+competing for the same fleets. **If the symptom is this visible at best case,
+the lived experience is materially worse** — which is an argument that something
+should be built, even though this particular run could not score the thing we
+built.
+
+Honest nuance to weigh both ways: the layout is deliberately spread for distance
+testing, so travel time (and the hauling share) may be inflated relative to a
+compact player base. Best-case on supply and drone count; plausibly worse-case
+on distance.
+
+**Question for you:** is that reading sound? And does it change what should be
+built — i.e. should the target be the pathological tail (the 9h/12h outliers a
+player actually notices and rages about) rather than the mean?
+
 ## THE MANDATE HAS BEEN WIDENED — this is new and it matters
 
 The user's stated goal, verbatim: *"The overall goal of this opt-in is not to be
