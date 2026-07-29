@@ -100,6 +100,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F78 | MeteorsDisaster hangs mid-strike (multi-map save?); meteors never land | P1 | high | investigating (filed 2026-07-28 — PT-01 watchdog caught it live; hypothesis 1 refuted live same day; 2026-07-29 two strikes seen = likely watchdog restarts, and the weather half split off to F81) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | confirmed vanilla gap 2026-07-28 — fix would be feature-completion, D-item decision (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating (observed live 2026-07-28; mitigated by adding trains; forensic trail + tap on entry) |
+| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 from live observation; notification machinery located, updater cadence still to trace (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **CONFIRMED LIVE 2026-07-29** — stale `DisasterMeteorStorm` found on the user's save; clearing it started rain instantly. Root cause + recovery demonstrated; fix is a USER DECISION |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
@@ -2639,10 +2640,43 @@ single path will never reproduce it; (2) the storm branch is the only one that
 adds the duration notification at :179, which is what strands the prediction
 flag — see F81, where that stranding was CONFIRMED live and clearing it
 restored weather instantly.
-**Still unexplained by this entry:** why the storm thread wedges at all.
-Hypothesis 1 (the `table.validate` descriptor loop) was refuted live
-(`kept: 0`), so the :238-241 wait is NOT statically un-exitable; the stall line
-is still unbracketed and the storm-targeted repro above is the way to find it.
+**WEDGE REPRODUCED ON DEMAND AND LOCALIZED TO THREE LINES (2026-07-29).**
+Driven directly past the broken `CheatMeteors` entry point with
+`CreateGameTimeThread(function() MeteorsDisaster(Presets.MapSettings.Meteor
+["Meteor_High"], "storm", GetRandomPassable(MainMap)) end)` under console taps
+on `MeteorsDisaster` / `SpawnMeteor` / `PlayStart|EndMeteorStormFX`:
+```
+ENTER MeteorsDisaster type=storm
+spawned 25 / spawned 50 / StartFX after 73 spawns
+(no EXIT, ever)          g_MeteorStorm=true stop=false
+validate #10 n=2 … #140 n=2      DisasterMeteorStorm = true
+```
+**The stall is the drain loop, `Meteors.lua:238-241`:**
+```lua
+while not g_MeteorStormStop and #spawned > 0 do
+    WaitMsg("MeteorDone", delta)      -- delta = 3000, so it spins every 3s
+    table.validate(spawned)
+end
+```
+`table.validate` is doing its job — 73 descriptors fell to **2** — but those
+last two never go invalid, so `#spawned` never reaches 0 and the loop spins
+forever. **Hypothesis 1 is therefore half right and half wrong:** the loop is
+not statically un-exitable (validate DOES clear entries, matching the earlier
+`kept: 0` probe), but it is unbounded, so a single meteor that never becomes
+invalid wedges the whole storm permanently. Why two meteors stay valid is not
+yet known (fall thread dying, MDS interception, an off-map impact are the
+candidates) — **and the fix does not need that answer**: the loop simply must
+not be unbounded, and the tail already does `DoneObject(descr.meteor)` on
+whatever survives.
+**Two control results from the same sitting:** `CheatMeteors("single")` printed
+ENTER *and* EXIT (the single path completes cleanly, matching the healthy
+scheduler), and the spawn loop terminated normally at 73 — killing the
+unbounded-spawn hypothesis.
+**Tooling fact worth keeping:** `GetCameraLookAtPassable` **does not exist at
+runtime** — `CheatMeteors` calls it at `Cheats.lua:63` in Src, so a bare
+`CheatMeteors("storm")` silently no-ops (the body is `if pos then … end` with
+no else). The shipped `Lua.fpk` clearly differs from Src here. Always pass an
+explicit position, or drive `MeteorsDisaster` directly as above.
 Note the dust-storm half of the original report is CLOSED: `GetDustStormDescr()`
 returns nil at the save's terraforming level — designed silence, no defect.
 **The "no weather at all" half is now EXPLAINED and split off — see F81**
@@ -2725,6 +2759,24 @@ decisive act: `RemoveDisasterNotifications("DisasterMeteorStorm", MainMap)`
 started raining"). One stuck table entry had been suppressing every weather and
 disaster system on that save. **This is no longer a hypothesis — the root
 cause, the mechanism, and the recovery are all demonstrated.**
+**THE LEAK IS UNIVERSAL — EVERY COMPLETED METEOR STORM STRANDS THE FLAG
+(2026-07-29, source-exhaustive).** A grep of the whole Lua tree finds exactly
+three removals of `DisasterMeteorStorm`:
+- `Meteors.lua:227` — only inside the `g_MeteorStormStop` **break** branch
+  (i.e. only when a storm is force-stopped, e.g. `CheatStopDisaster`);
+- `Meteors.lua:344` — in `MeteorStormThread`, **before** the disaster runs
+  (that one clears the *warning* notification);
+- `TerraformingDisasters.lua:27` — `OnMsg.TerraformThresholdPassed`, when
+  terraforming pushes Atmosphere past the "meteor storms end" threshold (80%).
+**The normal completion path (`Meteors.lua:242-251`) never removes it.** It
+plays the end FX, sends `MeteorStormEnded` and clears `g_MeteorStorm` — and
+leaves `g_DisastersPredicted["DisasterMeteorStorm"] = true` set forever. So on
+any map with meteor storms enabled, **the FIRST storm to run — wedged or
+perfectly healthy — permanently kills that colony's cold waves and rains.** The
+only vanilla escapes are force-stopping a storm or terraforming past 80%
+Atmosphere. This is almost certainly why the user's save saw no weather for its
+entire recorded history (Atmosphere 57%, no force-stop, storms enabled on
+`Meteor_High`).
 **ROOT MECHANISM PROVEN (2026-07-29, Repro A — and it needs NO thread wedge).**
 The stranding is a plain save/load persistence mismatch:
 - `g_DisastersPredicted` is a **GameVar** (`MapSettings.lua:131`) — it is saved
@@ -2897,6 +2949,30 @@ or a loaded save) keep running the OLD body, so the fix needs a one-shot
 `UpdateRainsThreads` does. Savegame discipline: zero new persisted state.
 Cross-refs: F78 (same save, same report — this is the weather half), F02 (the
 meteor scheduler watchdog precedent for exactly this class of thread wedge).
+
+### F82 — Split power/life-support grid notification lingers ~a sol after the grid is rejoined (P3, med)  `[filed 2026-07-29 from live observation — needs its own trace]`
+**User observation (2026-07-29, live, while running the F78 storm repro):**
+"All notifications I have seen dismiss themselves after their issue is fixed,
+except for split power grids — they do dismiss eventually but it takes a MUCH
+longer time, close to an entire sol." Noted as felt-wrong even at ultra speed;
+at normal or fast speed it would read as a stuck notification. Every other
+notification type they have watched clears promptly on resolution.
+**What the source says so far (not yet a diagnosis):** the notifications are
+`PowerGridProblem` / `LifeSupportGridProblem`, registered at
+`SupplyGrid.lua:1348-1349` via
+`FixupObjectNotification("PowerGridProblem", "g_SplitSupplyGridPositions",
+"SplitPowerGridNotif", empty_func)`. Those two lines are the ONLY references to
+`g_SplitSupplyGridPositions` anywhere in `ModTools\Src` — i.e. they are legacy
+savegame-fixup registrations for a variable the live code no longer uses, so
+the actual add/remove path for the split-grid notification lives elsewhere
+(shipped `Lua.fpk`, or a periodic sweep that has not been located yet).
+**Next step:** find what re-evaluates split grids and on what cadence. A
+once-per-sol periodic re-check would explain the observation exactly. Compare
+against a notification that clears promptly to isolate whether the difference
+is cadence or a missing on-rejoin removal call. Cheap live tap once the updater
+is found. Related in kind (not in mechanism) to F81/F78, where a notification
+that is never removed gates whole systems — the recurring theme is that this
+codebase clears notifications from specific code paths rather than from state.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); PT pending — attended, multi-iteration]`
 The design defect behind the 2026-07-27 live report (four idle drones parked beside a

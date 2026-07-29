@@ -874,6 +874,18 @@ veto_expired 0→1 / moonlighted 0`, `unclaimed=0` on all SEVEN hubs (new hub
 session log swept clean. **Trigger B still un-run — remains the next PT-52
 step.**
 
+**Sitting 3 (2026-07-29): healthy under a real stress event.** DroneReport
+taken deliberately right after a **marsquake damaged several buildings** —
+the closest thing to an unplanned mass-repair test so far. **NINE hubs**
+(1078, 1457, 2074, 2608, 3564, 4230, 4967, 6619, 4078 — three more than
+sitting 2, all integrated cleanly), `unclaimed=0` on EVERY hub with work
+counts up to 120, every lap class `low`, counters
+`vetoed=3 / veto_expired=0 / moonlighted=0`. Reads as the healthy signature
+under load: all three yielded claims taken by the near fleet inside the
+strike window, zero expiries, and `moonlighted=0` is CORRECT here rather
+than suspicious — moonlighting only fires for a neighbour hub with ZERO
+idle drones, and every hub in this report has idle drones (lowest 4/6).
+
 `Result (near fleet claims near work?):` _____________________________________________
 
 `Result (counters healthy? vetoed/expired/moonlighted):` _____________________________________________
