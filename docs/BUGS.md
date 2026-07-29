@@ -29,14 +29,14 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | fixed  |
 | F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | tested |
 | F13 | Command Center resource rows show no numbers             | P2  | high | tested |
-| F14 | Domes Overview red low-stat highlight dead               | P2  | high | tested (PT-09 PASS 2026-07-28: red at 0, white on recovery, per-cell; Satisfaction-column red 0 everywhere = vanilla-intended, see entry) |
+| F14 | Domes Overview red low-stat highlight dead               | P2  | high | tested — PT-09 PASS 2026-07-28 (entry) |
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | fixed  |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | fixed* |
-| F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | tested — PT-43 F19 read PASS 2026-07-28 (MP caption ≈ bars, Food sane) |
-| F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | tested — PT-43 F20 read PASS 2026-07-28, all three checks (entry) |
-| F21 | Train travel-time penalty includes station waiting       | P2  | med  | tested — PT-43 F21 read PASS 2026-07-28 (17h wait, zero penalty; stats ride-scale) |
+| F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | tested — PT-43 PASS 2026-07-28 (entry) |
+| F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | tested — PT-43 PASS 2026-07-28 (entry) |
+| F21 | Train travel-time penalty includes station waiting       | P2  | med  | tested — PT-43 PASS 2026-07-28 (entry) |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | fixed  |
 | F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | fixed  |
@@ -54,14 +54,14 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | tested |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
-| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | folded into D04 `Opt_MultipleSuns` 2026-07-27 (latent in unmodded game; standalone fix deleted); absorbed fix play-verified — PT-50 PASS |
+| F39 | Second Artificial Sun ignored by solar panels            | P2  | high | folded into D04 2026-07-27 — PT-50 PASS (entry) |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
 | F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
 | F43 | Layout construction bypasses tech locks                  | P3  | high | fixed  |
 | F44 | One-hex track salvage can delete the entire track        | P1  | high | tested |
 | F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | tested |
-| F46 | Trains dump cargo at stations with resource disabled     | P2  | high | tested (PT-23 PASS 2026-07-28: forbidden stock drained to 0 and stayed; all-stations-forbidden leg — trains dump rather than strand, no loaded roaming) |
+| F46 | Trains dump cargo at stations with resource disabled     | P2  | high | tested — PT-23 PASS 2026-07-28 (entry) |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | tested |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* |
@@ -76,35 +76,35 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F58 | Invisible residence reservations never expire            | P1  | high | fixed* |
 | F59 | Freed housing never notifies homeless (12h retry lag)    | P2  | med  | fixed* |
 | F60 | Dome free-space uses `working`, assignment `ui_working`  | P2  | med  | fixed  |
-| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | wontfix — superseded by D03 (PT-14: toggle is a quarantine by design); fix DELETED 2026-07-27 |
+| F61 | Home dome's migration toggle blocks outbound shopping    | P1  | med+ | wontfix 2026-07-27 — superseded by D03, PT-14 (entry) |
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | wontfix|
 | F63 | Universities invisible to emigration (no students)       | P2  | high | wontfix|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
-| D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | built 2026-07-27: `Opt_AcknowledgedWarnings` (opt-in, probe PASS in the opt-in leg; PT-48) |
-| D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | tested 2026-07-28: `Opt_ResidencyControl` (opt-in; probe PASS + PT-49 PASS in full, archived) |
-| D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
-| D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
-| D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; first A/B 2026-07-29 NULL (v1 metric invalid — scored deliveries); stress harness REBUILT v2 (lifecycle tracing) 2026-07-29; B2 re-run pending (attended) |
-| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28; **PT-53 3-of-5 PASS 2026-07-29** — cross-dome moves (trains/passages/shuttles by distance), graduation drain, and organic no-churn-when-no-slots all confirmed live, "worked wonderfully"; only the employed-senior exemption (A) and precedence/uninstall (E) still owed, so NOT yet `tested` (entry) |
+| D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | built 2026-07-27 — PT-48 (entry) |
+| D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | tested — PT-49 PASS 2026-07-28 (entry) |
+| D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested — PT-50 PASS 2026-07-27 (entry) |
+| D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested — PT-51 PASS 2026-07-27 (entry) |
+| D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28 — first A/B NULL 2026-07-29, B2 re-run pending (entry) |
+| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 — PT-53 3-of-5 PASS 2026-07-29, A/E owed (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
-| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28, full procedure (entry) |
+| F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
-| F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | tested — PT-16 PASS 2026-07-28, full-sol asteroid hold logged (entry) |
-| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | tested — PT-17 complete 2026-07-28 incl. the attended capacity-edge re-run post-repair (ground settled AT the threshold) |
-| F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | tested — PT-16 PASS 2026-07-28, ration kept + flew home (entry) |
-| F70 | Edit Payload silently refills from policy template       | P2  | med+ | tested — PT-31 PASS 2026-07-28 incl. round trip + prefill negative (entry) |
-| F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested 2026-07-28 (PT-32: live two-resource priority inversion + probe order coverage) |
-| F72 | "No available landers" while a lander sits on the pad    | P2  | med  | tested — PT-33 PASS 2026-07-28, all three cases (entry) |
-| F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | tested — PT-19 PASS 2026-07-28 (both gap shapes; entry) |
+| F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | tested — PT-16 PASS 2026-07-28 (entry) |
+| F68 | Hourly auto-request ratchet unloads lander's own cargo   | P1  | high | tested — PT-17 complete 2026-07-28 (entry) |
+| F69 | Manual landing dumps the return fuel (stranded landers)  | P1  | high | tested — PT-16 PASS 2026-07-28 (entry) |
+| F70 | Edit Payload silently refills from policy template       | P2  | med+ | tested — PT-31 PASS 2026-07-28 (entry) |
+| F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested — PT-32 PASS 2026-07-28 (entry) |
+| F72 | "No available landers" while a lander sits on the pad    | P2  | med  | tested — PT-33 PASS 2026-07-28 (entry) |
+| F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | tested — PT-19 PASS 2026-07-28 (entry) |
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
-| F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
-| F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed (built 2026-07-28 with the D06 core; PT pending) |
-| F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | **fixed: Code/Fix_MeteorStormWedge.lua** (built 2026-07-29 post-QA — hourly watchdog on the wedge signature + RestartGlobalGameTimeThread heal + guarded stop pulse; PT pending) |
-| F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | confirmed vanilla gap 2026-07-28 — fix would be feature-completion, D-item decision (entry) |
-| F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating (observed live 2026-07-28; mitigated by adding trains; forensic trail + tap on entry) |
-| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **fixed: Code/Fix_DisasterPredictionLeak.lua + Code/Fix_RainsDeadlock.lua** (built 2026-07-29 post-QA — additive MeteorStormEnded removal + PostLoadGame flag reconciliation; bounded rains wait + persisted-loop refresh; PT pending) |
-| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 from live observation; notification machinery located, updater cadence still to trace (entry) |
+| F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo — found 2026-07-27, wave-6 candidate (entry) |
+| F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed 2026-07-28 — PT pending (entry) |
+| F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | fixed 2026-07-29 — PT-54 pending (entry) |
+| F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | confirmed vanilla gap 2026-07-28 — D-item decision owed (entry) |
+| F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
+| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
+| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |

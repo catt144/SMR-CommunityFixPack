@@ -350,7 +350,7 @@ and needs a separate go-decision.
   assert/error report-and-continue semantics; T()/Untranslated stance;
   "reconstruction" replacement category; global-function replacement as its
   own technique rank; console-platform constraints note.
-- `[ ]` **3.7 (D4 prevention)** Slim BUGS.md index rows to
+- `[x]` **3.7 (D4 prevention)** Slim BUGS.md index rows to
   `status + date + PT ref` (result prose lives in the entry; heading tag
   stays the summary) — mechanical, one pass.
 
