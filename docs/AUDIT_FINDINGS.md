@@ -340,7 +340,7 @@ and needs a separate go-decision.
   leads to C-rows in BUGS.md first), TESTING.md (move the four-kinds probe
   table to the TestKit first), CHEATS_INVENTORY.md (fold anything not already
   in the checklist's verified table).
-- `[ ]` **3.5 (D6)** Rewrite WORKFLOW.md: keep the true mechanics (junction/
+- `[x]` **3.5 (D6)** Rewrite WORKFLOW.md: keep the true mechanics (junction/
   install, fpk extraction-diff verification as a release gate, release steps),
   point at ENGINE_FACTS/STATUS/BUGS as the reading path, drop the dead
   discovery-era loop.
