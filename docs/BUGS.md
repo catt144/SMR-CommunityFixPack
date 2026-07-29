@@ -3086,6 +3086,44 @@ from speculation to evidence-backed**, because **registration determines which
 hubs can deliver** — so the dispatcher acts on the 88%, while the claim gate
 acts on a 12% slice that is already decided by the deliverer handoff.
 
+**EXTERNAL-VALIDITY CAVEAT — the strongest objection to this whole result, and
+it comes from the user (2026-07-29):** *"We are speed testing bug fixes in a
+manner not what an organic player would be experiencing. We fill resource depots
+with resources, we space things out to test distances. And because of that we
+don't meticulously build bases or major industry domes with 100s of workers,
+dozens of factories, and layers of extractors. Under that lens we could be
+saying our complex dispatcher is worthless but in a real world with no magic
+storage refilling it may be a very different situation."*
+This is correct and it is a serious qualification. The A/B was **internally**
+valid (tight controls, identical seeded set, same save, same speed) but its
+conditions are **not representative of deployment**:
+- **Depots were deliberately pre-filled**, removing resource scarcity and
+  depot-choice contention entirely — the two things most likely to dominate
+  hauling in a real base with no magic refills.
+- **Layout is spread for distance testing**, not built the way a player builds.
+- **The colony is massively over-provisioned with drones.** The DroneReport in
+  the same sitting shows hubs at 24-25 drones with 14-24 IDLE. **The claim gate
+  only acts under contention** — it withholds work from a far hub while the near
+  hub has idle drones — so a colony where nearly every hub always has spare
+  idle drones has almost no races left to arbitrate. **That plausibly explains
+  `vetoed +1` far better than "the gate does not work":** the near fleet was
+  already winning on its own, so there was nothing to veto. The original symptom
+  that motivated D06 (four idle drones parked while a far hub crawled over) was
+  observed in ORGANIC play, not in a cheat-prepared colony.
+**Consequence:** this run may have engineered away the very phenomenon it was
+built to measure. A representative re-test would right-size drone counts toward
+the advisory's suggestion (raising contention), NOT pre-fill depots, and run
+against real industrial density during a genuine demand surge.
+**What survives the objection regardless:** the delivering-drone handoff
+(`StartWorkPhase(drone)` → `SetCommandKeepQueue`) is **structural**, not a
+conditions artifact — it holds at any base density, so "the metric counted
+deliveries, not claims" stands. The 88% hauling share could shift under scarcity
+but is unlikely to invert.
+**Interesting interaction worth building on:** the D08 drone-count advisory and
+the claim gate are **complementary, not independent** — right-sizing fleets
+increases contention, which is exactly the condition under which the gate earns
+its keep. Over-provisioning is how players hide the dispatch problem, and it is
+also how this test hid it.
 **Caveats, stated so this is not over-read:** n=25 with a single run per leg, so
 the +2 on closest-hub is well inside noise. Leg A contains one pathological
 outlier (`MartianUniversity:2895`, break→work 11h48m, never repaired, run timed

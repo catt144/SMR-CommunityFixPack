@@ -261,6 +261,41 @@ total — 88% of elapsed time** — and the module exempts hauling by design.
 Read that as: **we spent the effort optimising 12% of the problem.** Any
 proposal you make should be judged against the 88%.
 
+## …but treat that data sceptically, because the test conditions are artificial
+
+The user's own objection, verbatim, and we think it is correct: *"We are speed
+testing bug fixes in a manner not what an organic player would be experiencing.
+We fill resource depots with resources, we space things out to test distances.
+And because of that we don't meticulously build bases or major industry domes
+with 100s of workers, dozens of factories, and layers of extractors. Under that
+lens we could be saying our complex dispatcher is worthless but in a real world
+with no magic storage refilling it may be a very different situation."*
+
+The A/B was **internally** valid (identical seeded set, same save reloaded, same
+speed, storages equalised) but its conditions are **not representative of
+deployment**:
+- Depots were **pre-filled by cheat**, removing scarcity and depot-choice
+  contention — the two things most likely to dominate hauling in a real colony.
+- Layout is **spread for distance testing**, not built as a player builds.
+- The colony is **massively over-provisioned with drones** — the same sitting's
+  DroneReport shows hubs at 24-25 drones with **14-24 idle**. The claim gate
+  only acts *under contention*; a colony where every hub always has spare idle
+  drones has almost no races to arbitrate. **That may explain `vetoed +1` far
+  better than "the gate doesn't work"** — the near fleet was already winning
+  unaided. Note the original symptom that motivated D06 (idle drones parked
+  while a far hub crawled over) was seen in **organic play**, not here.
+
+**So a central question for you: did this experiment engineer away the very
+phenomenon it was built to measure?** If so, what would a representative test
+look like — and is there a cheap way to run one before committing to any design?
+(Our own hypothesis: right-size drone counts to raise contention, do not
+pre-fill depots, use real industrial density, measure during a genuine surge.
+Challenge that too.)
+
+Two things we believe survive the objection regardless, but check them: the
+delivering-drone handoff is **structural** (holds at any base density), and the
+88% hauling share could shift under scarcity but seems unlikely to invert.
+
 ## THE MANDATE HAS BEEN WIDENED — this is new and it matters
 
 The user's stated goal, verbatim: *"The overall goal of this opt-in is not to be
