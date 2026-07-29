@@ -38,10 +38,11 @@ shipped `Lua.fpk`** (`GetCameraLookAtPassable` is absent at runtime), so treat
 Src-only reasoning as provisional and self-check everything at apply time.
 
 **THREE THINGS ARE QUEUED AND NONE ARE STARTED:**
-1. **`docs/QA_REVIEW_PROMPT.md`** — a one-off adversarial review prompt the user
+1. ~~**`docs/QA_REVIEW_PROMPT.md`** — a one-off adversarial review prompt the user
    intends to fire in a FRESH session to QA both tracks before anything is
    implemented. **Do not implement the disaster or D08 fixes until that verdict
-   is in**, unless the user says otherwise.
+   is in**, unless the user says otherwise.~~ **RESOLVED (see banner): fired,
+   verdict folded, file deleted, disaster fixes BUILT (wave 6).**
 2. **The drone stress A/B is UN-RUN.** The harness is built
    (`TestKit/Code/91_Stress.lua`, local-only) but the two legs have never been
    executed. This is the natural centrepiece of the next live sitting.
@@ -171,11 +172,11 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **QA REVIEW — fire `docs/QA_REVIEW_PROMPT.md` in a FRESH session.** The user's
-  stated plan: a fresh-context adversarial pass over the 2026-07-29 disaster
-  findings AND the D08 design, hunting hidden dangers and better approaches,
-  reporting a finalized plan before implementation. Everything below in the
-  disaster/D08 space is gated on it.
+- ~~**QA REVIEW — fire `docs/QA_REVIEW_PROMPT.md` in a FRESH session.**~~
+  **DONE 2026-07-29 late** — verdict folded into BUGS.md/STATUS; the disaster
+  fixes are built (wave 6, PT-54 gates them); the next fresh-session fire is
+  **`docs/HARNESS_REVIEW_PROMPT.md`** (instrument redesign; the Track B
+  structural choice is gated on it).
 - **PT-52 STRESS A/B — built, never run.** Quicksave → `SMRTest.Stress.Targets`
   dry run → D06 OFF → `Break{scope="overlap", n=25, seed=1}` → reload → D06 ON →
   same call → `Compare()`. Headline metric is **closest-hub first claims %**;

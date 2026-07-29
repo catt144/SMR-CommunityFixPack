@@ -144,7 +144,9 @@ on the entries; this is the index.
   layers with a risk table and five open questions. Origin: the user's live
   observation that extenders make the D06 problem worse. Nothing built.
 - **`QA_REVIEW_PROMPT.md` written** — a one-off adversarial review prompt for a
-  fresh session to QA both tracks before anything is implemented.
+  fresh session to QA both tracks before anything is implemented. *(Fired
+  2026-07-29 late; verdict folded; file deleted per its own rule — see the
+  newest wrap at the top of this document.)*
 - **PT-53 PARTIAL PASS — D07 `Opt_CohortHousing` enabled live for the first time
   and works** ("it worked wonderfully"). Cross-dome consolidation confirmed from
   EVERY dome for both cohorts, over **trains, passages and shuttles chosen by
@@ -1639,6 +1641,9 @@ that "passed" or SKIPped were not testing what they claimed.
    danger is how to distinguish a stranded flag from a legitimate warning in (b)
    without suppressing a real disaster warning, plus whether a watchdog (F02
    precedent) beats a full-body replacement that rots on game patches.
+   *(Review since fired and both questions answered: `FindNotification` +
+   Dismissable=false makes the stranded/legit test sound, and the watchdog DID
+   beat the replacement — wave 6 built 2026-07-29 late, PT-54 gates it.)*
 11. **OPEN (2026-07-29): D08 — the extender overhaul**, five layers speced in
    `DRONE_OVERHAUL_OPTIONS.md` with a risk table. Recommended order is
    dispatcher → Command Center tab + advisory → cluster scoping → adjustable
