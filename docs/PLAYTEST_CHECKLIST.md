@@ -383,37 +383,6 @@ path is exactly the case that was broken. Test that path deliberately.
 
 # Group 6 — wave-3 fixes
 
-## PT-23 — Station resource switches vs. train unloading · covers **F46**
-
-**Setup:** SAVE-A. Build a **three-station Martian Express line** A — B — C on one
-track (`CheatCompleteAllConstructions()`), assign 1–2 trains, and let the line run
-for a sol so routes are established. Then:
-
-1. `CheatFillAllStorages()` — every depot **and station** now holds everything.
-2. Open **station B**'s infopanel and switch **Metals OFF** (the per-resource
-   accept toggles). Leave Metals **on** at A and C.
-3. Note B's Metals stock, then run 3–4 sols at `SetGameSpeedState("ultra")`.
-
-- **BROKEN looks like:** B's Metals count never settles. Trains haul the forbidden
-  Metals out (correct) and then **bring Metals straight back in** at the next stop,
-  because unloading ignores the switch entirely. The count sawtooths up and down
-  for the rest of the game and the line is permanently busy moving one resource in
-  circles.
-- **FIXED looks like:** B's Metals drains to **0 and stays there**. Trains still
-  carry Metals *through* B on their way to A/C, they just don't drop it off.
-
-**Stranding check (the thing this fix could plausibly break):** while the line runs,
-watch for a train **parked at a platform with cargo it never unloads**. Select a
-train and read its cargo. Also switch Metals **off at all three stations** for one
-sol — a train holding Metals must still be able to empty itself (nowhere accepts it,
-so the dump is deliberately allowed) rather than sitting loaded forever.
-
-`Result (ping-pong stopped?):` _____________________________________________
-
-`Result (no stuck loaded trains?):` _____________________________________________
-
----
-
 ## PT-25 — Destroyed tunnel after a reload · covers **F38**
 
 **Setup:** SAVE-B (or any save with underground access — `UIColony:UnlockUnderground()`

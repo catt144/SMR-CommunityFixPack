@@ -58,7 +58,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F43 | Layout construction bypasses tech locks                  | P3  | high | fixed  |
 | F44 | One-hex track salvage can delete the entire track        | P1  | high | tested |
 | F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | tested |
-| F46 | Trains dump cargo at stations with resource disabled     | P2  | high | fixed  |
+| F46 | Trains dump cargo at stations with resource disabled     | P2  | high | tested (PT-23 PASS 2026-07-28: forbidden stock drained to 0 and stayed; all-stations-forbidden leg — trains dump rather than strand, no loaded roaming) |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | tested |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
 | F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* |
@@ -1053,7 +1053,7 @@ undeletable track" reports (incl. after station destruction). **Fix:** wrap
 `BreakTrackElement` to stamp `element.broken.node_idx = element.node_idx`; belt-and-braces
 tolerant sort + LoadGame sweep stamping existing repair sites.
 
-### F46 — Trains dump cargo at stations with the resource disabled (P2, high)  `[fixed: Code/Fix_TrainCargoDumping.lua]`
+### F46 — Trains dump cargo at stations with the resource disabled (P2, high)  `[tested: Code/Fix_TrainCargoDumping.lua — PT-23 PASS 2026-07-28 both halves on the live 5-station network; archived]`
 `Train:UnloadAll` (`Train.lua:783-803`) unloads everything with room, no
 `station:IsResourceEnabled(res)` check (disable only removes the demand from
 task_requests, `StorageDepot.lua:583-587,641-668`). Cargo planner then treats it as
@@ -1066,6 +1066,11 @@ accepts the resource, and always when `is_stopping` (a refabbed train destroys i
 `Train.lua:85-86,457-458`). Loading was already correct (both paths check
 `dest:IsResourceEnabled`, `Train.lua:905-912,930-939`), so undeliverable cargo only arises
 when something changes mid-trip.
+*PT-23 observation (2026-07-28):* with the resource forbidden at EVERY station and no
+drone coverage, an isolated station's forbidden stock stays put indefinitely — loading
+only targets accepting destinations, so the stock has no train exit; drones are the only
+mover. Expected statics, vanilla-consistent, not the fix; trains verifiably dump their
+carried load (the designed branch) instead of stranding.
 
 ### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)  `[tested: Code/Fix_TrackSalvageRefund.lua — PT-45 PASS 2026-07-26 (refund = stamped sections × 100 on live colony tracks; partial-salvage stockpiles observed)]`
 `TrackBase:GetRefundResources` (`Track.lua:286-307`) reads cost from ONE element (last);
