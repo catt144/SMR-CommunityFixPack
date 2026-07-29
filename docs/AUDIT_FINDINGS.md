@@ -153,7 +153,7 @@ load-order sensitivity beyond core-first; the only same-function double patch
 (`GetFuelResourceRequest`: F69 pre-wrap + D01 post-wrap) verified correct in
 both orders and under any single disable.**
 
-### C4. Consistency drift + policy gaps `[ ]` (cheap parts in Phase 1/3)
+### C4. Consistency drift + policy gaps `[x — cheap parts fixed 2026-07-29 (plan 1.6: loggers/stamps/comment) + policy gaps closed (plan 3.6); deeper early-file self-checks remain Phase 4]` (cheap parts in Phase 1/3)
 Late files are strictly better (build-stamped provenance, deeper self-checks,
 policy citations); lessons never flowed backward: 6 unescaped loggers, early
 headers cite "shipped Src 2026-07" instead of the build (F05, F08, F07/F15;
@@ -344,7 +344,7 @@ and needs a separate go-decision.
   install, fpk extraction-diff verification as a release gate, release steps),
   point at ENGINE_FACTS/STATUS/BUGS as the reading path, drop the dead
   discovery-era loop.
-- `[ ]` **3.6 (C4)** FIX_POLICY.md additions: declaring-class self-check rule;
+- `[x]` **3.6 (C4)** FIX_POLICY.md additions: declaring-class self-check rule;
   OnMsg handlers re-check status AND veto; optional-modules section
   (file-scope install + per-call gate, on_activate/on_deactivate contract);
   assert/error report-and-continue semantics; T()/Untranslated stance;
