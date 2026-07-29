@@ -1,4 +1,19 @@
-# Fable continuation prompt — PLAYTEST STANDBY (rewritten 2026-07-28 late, post-PT-52-sitting + F68-repair leg)
+# Fable continuation prompt — PLAYTEST STANDBY (updated 2026-07-28 night, post-TEN-FLIP sitting)
+
+**NEWEST FIRST (2026-07-28 evening sitting — read the "TEN-FLIP playtest
+sitting" STATUS section before anything):** ten `tested` flips in one
+sitting (F68, F73, F72, F65, F70, F67, F69, F19, F20, F21) — **the
+ASTEROID SECTION and PT-43 are COMPLETE and archived**; the map-switch
+console repair + BOTH leaf-class loggers validated live; F78 hypothesis 1
+REFUTED live (on-demand repro plan on the entry: bracket taps +
+`CheatMeteors("single")` at empty ground); **NEW F79 confirmed** (trains
+never carry service seekers — fix would be feature-completion),
+**NEW F80 investigating** (trains skip valid waiting passengers), **NEW D07
+speced** (`Opt_CohortHousing` — cohort members in normal housing move to
+free Retirement Home/Nursery slots anywhere, in-dome first, untouched when
+none exist; no dome UI). **TWO USER DECISIONS PENDING: D07 build
+go/no-go, and whether F79 gets a D-item fix.** Zero pack code changed —
+no pre-flight owed. PT-52 sitting 2 healthy; **Trigger B STILL un-run.**
 
 Paste everything below into a fresh Claude Code session (Fable). This is the
 ONE live prompt. **Start with `git log --oneline -5` + `git pull`** in case
@@ -95,9 +110,9 @@ Your jobs, in the order they usually come up:
    (identity below), pushed. Docs never lag play.
 
 **First, read (in order) from `C:\Dev\SMR-BugFixPack`:**
-1. `docs\STATUS.md` — the "F68 over-draw repair leg" + "D06 build leg"
-   sections (newest two) AND the whole engine-facts list ("Key technical
-   facts").
+1. `docs\STATUS.md` — the **"TEN-FLIP playtest sitting"** section (newest)
+   + the "F68 over-draw repair leg" and "D06 build leg" sections AND the
+   whole engine-facts list ("Key technical facts").
 2. `docs\PLAYTEST_CHECKLIST.md` — ground rules, the verified command table,
    **the PT-52 procedure** (what the D06 module CAN and CANNOT do — judge it
    only on the CAN list) with its two progress notes, the reporting
@@ -148,15 +163,18 @@ silent.
   F72 `tested` (all three cases; refusal presents as an empty picker via
   the documented vanilla gate quirk — entry observation (a)); PT-31 PASS →
   F70 `tested` (round trip held, prefill negative intact).**
-- **F78 — NEW P1 INVESTIGATION (user-reported, watchdog-confirmed): the live
-  save has seen ZERO disasters in 194 sols and no weather at all.** The PT-01
-  meteor watchdog caught the mechanism live: the Meteors thread hangs INSIDE
-  the shipped `MeteorsDisaster` call ('striking' heartbeat, 182-183h silent,
-  restarted repeatedly). Full evidence + investigation plan on the F78 BUGS
-  entry — start game-free (trace `Lua\Meteors.lua` for the non-returning
-  path; check sibling disaster threads for the same shape; multi-map is the
-  prime suspect). Sits well alongside the asteroid closeout since the save
-  is already multi-map.
+- **F78 — P1 INVESTIGATION, next step is the LIVE REPRO (5 min):**
+  hypothesis 1 (descriptor-validate loop) REFUTED live 2026-07-28
+  (`kept: 0`); on VeryLow the strike routine is statically seconds-bounded,
+  so the 183h alive-but-stuck stall contradicts static analysis. Next
+  session: arm the bracket taps from the F78 entry (MeteorsDisaster
+  ENTER/EXIT + SpawnMeteor), aim at empty ground, `CheatMeteors("single")`
+  — ENTER-without-EXIT reproduces the wedge on demand and the last print
+  brackets the stall line.
+- **DECISIONS the user owes (no build until given):** D07
+  `Opt_CohortHousing` go/no-go (full revised spec on the entry), and
+  whether F79 (trains never serve service trips — confirmed vanilla gap)
+  gets a feature-completion D-item.
 - **PT-40 DONE 2026-07-28 → F65 `tested` (archived):** full procedure PASS —
   merge in both geometries (snug + couple-tracks), clean salvage split,
   long-track control unchanged, reload persistence, log clean.

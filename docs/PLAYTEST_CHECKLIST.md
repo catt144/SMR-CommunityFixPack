@@ -916,6 +916,12 @@ veto_expired=1 / moonlighted=0` — vetoed climbing with expiries staying low
 the healthy signature holding); `unclaimed=0` on all six hubs throughout;
 hub 1078 recovered from saturated to 7 idle. No starvation indicators all
 sitting.
+**Sitting 2 (2026-07-28 evening): healthy again.** Readings `vetoed 1→9 /
+veto_expired 0→1 / moonlighted 0`, `unclaimed=0` on all SEVEN hubs (new hub
+4230 integrated cleanly); counters correctly survived a save reload
+(process memory) and correctly reset on the mid-session relaunch. Full
+session log swept clean. **Trigger B still un-run — remains the next PT-52
+step.**
 
 `Result (near fleet claims near work?):` _____________________________________________
 

@@ -82,6 +82,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; PT pending (attended, multi-iteration) |
+| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | speced 2026-07-28 (user-commissioned, revised same day): `Opt_CohortHousing` — cohort members in normal housing move to free Retirement Home/Nursery slots anywhere (in-dome first), untouched when none exist; no dome UI, zero persisted state; build awaits user go (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28, full procedure (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -2703,6 +2704,56 @@ top of the file (strike cap/TTL, moonlight radius, cache TTLs) are the playtest
 iteration knobs. Shipped alongside: **F77**'s `Fix_ExtenderFlapChurn` (default-on
 repair) so extender power flickers stop Idle-kicking whole fleets and muddying the
 overhaul's observability.
+
+### D07 — Cohort domes: no way to consolidate seniors/children without filter micromanagement (design, med)  `[speced 2026-07-28, user-commissioned — build awaits user go-ahead in a game-free leg]`
+**The want (user, 2026-07-28, after building a live retirement dome):** a
+dome whose PRIMARY role is absorbing a non-worker cohort (seniors, and
+separately children with their schools/playgrounds) out of the production
+domes — without making cohort housing mandatory colony-wide, and without
+banning normal residents (service workers live there too). Vanilla's only
+lever is trait-filter micromanagement, and the emigration eval's
+strict-inequality rule (`FindEmigrationDome`, `Colonist.lua:2680` — ties
+never move) means comfortable cohort members simply stay put even with
+space available; the classic original-game frustration, mechanics
+unchanged in Relaunched.
+**Spec REVISED same day (user refinement): COLONIST/HOUSING-level rule, no
+dome designation at all — `Opt_CohortHousing` (opt-in module, off by
+default, one Mod Options toggle).** The rule: a cohort member living in
+NON-cohort housing gets moved into cohort-specific housing (Retirement
+Home / Nursery classes) wherever it has a free slot — same dome (plain
+residence reassignment) or cross-dome (emigration); **left completely
+alone when no cohort slot exists anywhere.** The "retirement dome" emerges
+from where the player concentrates the cohort buildings; no UI to build,
+ZERO persisted state.
+- **Forced migration (cross-dome half):** post-wrap
+  `Colonist:FindEmigrationDome` (plain method, single Src definition).
+  Senior-trait colonists (EXEMPT if employed — Forever Young seniors keep
+  their jobs) and Child-trait colonists route to the nearest reachable
+  dome whose COHORT housing has a free slot — bypassing the tie rule —
+  IFF it passes `CanAcceptNewColonists` (quarantine + D03 closed-toggle
+  compose automatically) and a transport mode exists
+  (`FindTransportationModeToCommunity` — walk/passage/shuttle/train all
+  work, `MigrateByTrain` live-proven 2026-07-28). Player-forced domes
+  (`CheckForcedDome`) keep absolute precedence. Cohort members already IN
+  cohort housing are never touched.
+- **In-dome half:** a periodic pass (or a hook on the residence
+  re-evaluation) moves cohort members from normal residences into a free
+  cohort slot in the SAME dome first — cheapest move wins; only when the
+  local cohort housing is full does the cross-dome branch look further.
+- **Graduation is free:** when the Child trait drops at age-up the pin
+  releases and the now-jobless worker hits the vanilla `better_home_work`
+  branch (need-work migration bypasses the tie rule) and drains to the
+  production domes naturally. Optional polish: additive OnMsg on the
+  age-group transition for an immediate re-eval instead of the periodic
+  pass.
+- **Player-facing caveat for the description:** a children's dome still
+  needs staffed services unless designed serviceless — commuting adults
+  cover it (work commutes are unaffected by F79; only service-seeking
+  trips don't ride).
+All patch points verified in Src this session; zero persisted state beyond
+the two dome flags. Cross-refs: D03 (UI + policy pattern, closed-toggle
+composition), F79/F80 (train findings from the same sitting), the
+FindEmigrationDome walkthrough in the 2026-07-28 session record.
 
 ## Candidates under investigation
 

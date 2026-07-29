@@ -53,6 +53,52 @@ investigating).**
 Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
 
+## TEN-FLIP playtest sitting — Fable, 2026-07-28 evening (live, the project's most productive sitting)
+
+One long attended session; full per-test evidence in `PLAYTEST_ARCHIVE.md`,
+forensic trails on the entries. Zero pack code changed (no A/B owed).
+
+- **Ten `tested` flips:** F68 (PT-17 capacity-edge re-run — ground settled AT
+  the threshold), F73 (PT-19, both life-support gap shapes), F72 (PT-33, all
+  three cases), F65 (PT-40 full procedure), F70 (PT-31 round trip), F67+F69
+  (PT-16 — full-sol asteroid hold logged; manual-landing fuel ration kept and
+  flown home), F19+F20+F21 (PT-43 in full). **The ASTEROID SECTION is
+  COMPLETE.**
+- **Validated live:** the map-switch console-death repair (workaround
+  retired), the repaired AutoCargo logger (first live capture drove the F68
+  re-run), the repaired CargoReady logger (leaf-class + change-only, repaired
+  mid-session in a game-free break, first verdicts drove the F67 read).
+- **F78:** hypothesis 1 (descriptor-validate infinite loop) REFUTED live
+  (`table.validate` removes plain tables — `kept: 0`); on VeryLow the strike
+  routine is statically seconds-bounded, so the 183h stall contradicts static
+  analysis → on-demand repro plan banked on the entry (bracket taps +
+  `CheatMeteors("single")` at empty ground).
+- **NEW F79 (confirmed):** colonists never use trains for services —
+  `Dome:GetService` is passage-only while the train-aware reachability serves
+  only Workplace/Training/Residence. Fix = feature-completion, D-item, USER
+  DECISION pending. **NEW F80 (investigating):** trains stopped 4+ times and
+  skipped ~19 valid waiting passengers (full config-exonerating forensics on
+  the entry; direction-blind-spot suspicion; mitigated by adding trains 2→5).
+- **NEW D07 speced (user-commissioned, revised same day):
+  `Opt_CohortHousing`** — colonist/housing-level rule, NO dome designation:
+  cohort members in normal housing move to free Retirement Home/Nursery
+  slots anywhere (in-dome reassignment first, cross-dome emigration
+  second), completely untouched when no cohort slot exists; employed
+  seniors exempt; graduation drains naturally; zero persisted state. Build
+  awaits user go.
+- **PT-52 sitting 2: healthy.** Readings `vetoed 1→9 / veto_expired 0→1 /
+  moonlighted 0`, `unclaimed=0` on all seven hubs throughout (new hub 4230
+  integrated); counters correctly survived a save reload and correctly reset
+  on the mid-session relaunch. **Trigger B still un-run.** Log hygiene: the
+  full session log swept — ZERO Lua/mod errors.
+- New engine facts recorded on entries: `CheckAutoDepart` consults only the
+  CURRENT side's rule set (empty side-set = designed collect-trip);
+  `RoughTouchDown` storybit can strand a lander on a bare asteroid
+  (`maintenance_request:SetAmount(0)` is the verified recovery);
+  `Colonist:ChangeComfort(amount, reason)` is the clean stat-injection path;
+  trains carry workers/trainees/migrants only (F79); the trip planner books
+  tickets with no regard for actual train service.
+
 ## F68 over-draw repair leg — Fable, 2026-07-28 (game-free, post-playtest): same-day mechanical repair + fresh A/B pair
 
 The PT-52 sitting's lander leg (PT-17 capacity edge) caught the pack's own
