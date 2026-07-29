@@ -1512,6 +1512,14 @@ that "passed" or SKIPped were not testing what they claimed.
 7. A donated save that researched **Frictionless Composites before the game patched the
    tech** is the only true fixture for the F35 sanitizer pass (PT-35 case C). Everything
    else about that pass is probe-covered.
+10. **OPEN (2026-07-29): the F81 decision** — the rains disaster loop deadlocks
+   permanently on an untimed `WaitMsg` the first time a rain roll collides with
+   any active or predicted disaster (fully traced, static; explains the
+   never-any-toxic-rain half of the F78 report). Fix = replace the global
+   `RainsDisasterLoop` with a bounded wait + a one-shot LoadGame pass that
+   recreates already-wedged activation threads. P1 for anyone terraforming.
+   Build it, or leave it documented? (`CheatRainsDisaster` is a live workaround
+   that also un-wedges the loop.)
 9. **OPEN (2026-07-28): the F79 decision** — trains never carry service seekers
    (confirmed vanilla gap, entry has the fix sketch). Feature-completion D-item or
    leave as documented vanilla behavior? This is the only decision currently owed.

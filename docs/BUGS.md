@@ -97,9 +97,10 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed (built 2026-07-28 with the D06 core; PT pending) |
-| F78 | MeteorsDisaster hangs mid-strike (multi-map save?); disasters never land | P1 | high | investigating (filed 2026-07-28 — PT-01 watchdog caught it live, evidence on entry; hypothesis 1 refuted live same day) |
+| F78 | MeteorsDisaster hangs mid-strike (multi-map save?); meteors never land | P1 | high | investigating (filed 2026-07-28 — PT-01 watchdog caught it live; hypothesis 1 refuted live same day; 2026-07-29 two strikes seen = likely watchdog restarts, and the weather half split off to F81) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | confirmed vanilla gap 2026-07-28 — fix would be feature-completion, D-item decision (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating (observed live 2026-07-28; mitigated by adding trains; forensic trail + tap on entry) |
+| F81 | Rains disaster loop deadlocks forever on the first collision; toxic rain never returns | P1 | high | confirmed by trace 2026-07-29 (static, fully bracketed; live discriminator + cheat workaround on entry) — fix is a USER DECISION |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -2622,9 +2623,28 @@ only Meteors.lua uses `table.validate` among the disaster files (grep
 2026-07-28) — the sibling threads do NOT share this defect, so the
 no-weather-at-all half of this report still needs its own trace (dust
 storms/devils/cold waves/rains; separate leg).
-Cross-refs: F02 (the scheduler fix + watchdog), PT-01 (the passive watch
-that caught this — record the catch on its line when the checklist is next
-touched).
+**NEW LIVE OBSERVATION (2026-07-29, user):** **two single meteor strikes
+(not a storm) finally seen in play** — the first meteors this save has ever
+produced. Consistent with the wedge + the F02 watchdog working as designed:
+each restart of the stuck thread yields a strike before it re-wedges, so the
+count of visible strikes should track the count of
+`WATCHDOG — Meteors thread silent …` restarts. **Cheap check next session:**
+`FlushLogFile()` then count watchdog lines vs strikes seen, and read
+`SMRFixPack.MeteorsWatchdog` — a match is strong corroboration that every
+meteor this save gets comes from a watchdog restart, i.e. the scheduler never
+completes a cycle on its own.
+**The "no weather at all" half is now EXPLAINED and split off — see F81**
+(2026-07-29 trace): `RainsDisasterLoop` deadlocks permanently on an untimed
+`WaitMsg("RainDisasterEnd")` the first time a rain roll collides with any
+active OR merely predicted disaster, and terraforming changes do not restart
+it. That is a SEPARATE defect from this one — meteors are not even part of
+`IsDisasterActive()` — so F78 keeps only the meteor wedge. Note this also
+means the two reports were never one root cause. Still unexplained by either
+entry: the absence of dust storms and cold waves, whose loops use timed,
+retrying waits and cannot deadlock this way (rule out map settings first).
+Cross-refs: F02 (the scheduler fix + watchdog), F81 (the weather half of the
+original report), PT-01 (the passive watch that caught this — record the
+catch on its line when the checklist is next touched).
 
 ### F79 — Colonists never use trains for services; the service search is passage-only (P3, high confidence)  `[confirmed vanilla gap 2026-07-28 — any fix is feature-completion, D-item decision]`
 **Live observation (2026-07-28, F21 setup):** a dome stripped of services, with
@@ -2679,6 +2699,71 @@ recurs. Related vanilla wart, same session: the trip planner books tickets
 over track REACHABILITY with no regard for train SERVICE — colonists queue
 indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
 PT-43 F21.
+
+### F81 — The rains disaster loop deadlocks permanently on its first collision; toxic rain never fires again (P1, high)  `[confirmed by trace 2026-07-29 — static, fully bracketed; fix is a user decision]`
+**User report that opened it (2026-07-29, live, same save as F78):** two single
+meteor strikes finally seen — but still no other disaster and **no weather
+effect of any kind**, and specifically **no toxic rain after BOTH greenhouse-gas
+terraforming import events**, whose descriptions promise exactly that.
+**The defect (a three-line deadlock, `Lua\TerraformingDisasters.lua`):**
+```lua
+function RainsDisasterLoop(settings)          -- :310-316
+    while true do
+        Sleep(settings.spawntime + AsyncRand(settings.spawntime_random))
+        CreateGameTimeThread(RainsDisasterActivation, settings)
+        WaitMsg("RainDisasterEnd")            -- :314  NO TIMEOUT
+    end
+end
+```
+`RainsDisasterActivation` (:276-308) opens with
+`if IsDisasterActive() or IsDisasterPredicted() then return end` — it returns
+**without starting a rain**, so `FinishRainProcedure`'s
+`Msg("RainDisasterEnd")` (:268) never fires, and the untimed `WaitMsg` at :314
+blocks **forever**. One collision kills that rain type for the rest of the save.
+**The collision window is wide, not rare.** `IsDisasterActive()`
+(`MapSettings.lua:127`) is true during any cold wave, dust storm, mystery dream
+or other rain; `IsDisasterPredicted()` (:189) is true during the WARNING phase
+of *any* disaster — `AddDisasterNotification` sets
+`g_DisastersPredicted[base_id] = true` (:169) and only
+`RemoveDisasterNotifications` clears it (:176). On a map with any disaster type
+enabled, a rain roll landing inside some other disaster's warning window is a
+matter of time; at 194 sols it is a near certainty.
+**Nothing ever rescues it — including the user's terraforming events.**
+`UpdateRainsThreads` (:340, fired via `OnMsg.TerraformParamChanged` :486-489 on
+every Atmosphere/Temperature/Water change) REUSES the existing activation
+thread whenever `IsValidThread(old_data.activation_thread) and old_data.id ==
+settings.id` (:412) — **a thread blocked in `WaitMsg` is perfectly valid**, so
+the wedged loop is preserved, not replaced. A new loop is only ever created
+when the settings *id* changes (crossing into a different strength band). This
+is exactly why importing greenhouse gases twice produced no rain.
+**Sibling disasters are written CORRECTLY — this is isolated.** Dust storms and
+cold waves poll with TIMED waits and retry:
+`while IsDisasterActive() do WaitMsg("TriggerDustStorm", 5000) end`
+(`DustStorm.lua:481-488`, `ColdWave.lua:243-250`). They cannot deadlock this
+way. So F81 explains the **rain/weather** half of the F78 report and nothing
+else — the dust-storm/cold-wave silence on that save still needs its own
+explanation (map settings are the first thing to rule out), and meteors remain
+F78's own wedge.
+**Live discriminator + player workaround (same command, run in-colony):**
+`CheatRainsDisaster("<RainsDisaster settings id>")` (:491) runs `RainProcedure`
+directly on a fresh thread, bypassing the activation gate. It both PROVES the
+rain machinery itself is healthy and — because `FinishRainProcedure` ends with
+`Msg("RainDisasterEnd")` — **releases the stuck `WaitMsg`**, restarting the
+loop until the next collision. Read the stale prediction state first:
+`*r for k, v in pairs(g_DisastersPredicted) do ConsolePrint(tostring(k) .. " = " .. tostring(v)) end`
+(a lingering `true` with no disaster on screen is itself a second finding).
+**Fix sketch (NOT built — user decision).** Least-invasive is a replacement of
+the global `RainsDisasterLoop` (globals are replaceable from mod code — F22/F12
+precedent) that bounds the wait, so a rain that never started costs one cycle
+instead of the save: `WaitMsg("RainDisasterEnd", <timeout>)`. Two caveats that
+make this more than a one-liner: (a) threads already created (from `CityStart`
+or a loaded save) keep running the OLD body, so the fix needs a one-shot
+`OnMsg.LoadGame` pass that recreates the activation threads from
+`RainsDisasterThreads[rain_type].id`; (b) that pass must respect
+`IsGameRuleActive("NoDisasters")` and the in-band threshold checks the way
+`UpdateRainsThreads` does. Savegame discipline: zero new persisted state.
+Cross-refs: F78 (same save, same report — this is the weather half), F02 (the
+meteor scheduler watchdog precedent for exactly this class of thread wedge).
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); PT pending — attended, multi-iteration]`
 The design defect behind the 2026-07-27 live report (four idle drones parked beside a
