@@ -176,11 +176,12 @@ Concrete drift (all verified):
 - **D1** README.md two waves stale: fix table missing ExtenderFlapChurn,
   DisasterPredictionLeak, MeteorStormWedge, RainsDeadlock; optional-modules
   table missing DroneOverhaul + CohortHousing; "73 verified findings" vs 91
-  index rows. `[ ]`
+  index rows. `[x — fixed 2026-07-29, plan 2.4]`
 - **D2** MOD_DESCRIPTION.md missing the CohortHousing module entirely
   (same-commit-rule violation, never remediated) and claims "**the mod stores
   nothing in your savegame**" — **false** (seven `SMRFixPack_*` persisted
-  fields + F35 modifiers; README.md:90-97 has the honest wording). `[ ]`
+  fields + F35 modifiers; README.md:90-97 has the honest wording). `[x — fixed
+  2026-07-29, plan 2.3]`
 - **D3** The withdrawn fpk-divergence doctrine still asserted as proven in
   STATUS.md:126-128 and DRONE_OVERHAUL_OPTIONS.md:619-621; stale framing at
   BUGS.md:6 and WORKFLOW.md:33 — the "withdrawn in all four places it lived"
@@ -302,7 +303,7 @@ and needs a separate go-decision.
   honest wording; add the console achievements disclosure (Xbox/PS/MS Store);
   add console-appropriate variants for per-fix disable honesty and bug
   reporting (no %AppData%, no console commands).
-- `[ ]` **2.4 (D1)** README.md: sync the fix table (4 missing), the
+- `[x]` **2.4 (D1)** README.md: sync the fix table (4 missing), the
   optional-modules table (2 missing) and the findings count.
 - `[ ]` **2.5 — OWNER TASKS (not for the implementing session):** thumbnail
   image (PDX ≤2 MB / Steam ≤1 MB), screenshots, check Paradox Mods portal

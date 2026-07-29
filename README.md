@@ -74,9 +74,13 @@ and can be individually disabled.
 | DroneTransportMinors | Drones keep an accurate list of places they couldn't reach. Every time the map's passability changed — a building finished, a wall went up, terrain was reshaped — that list was rebuilt in a way that held onto buildings you had already salvaged and left its own tally wrong, which quietly throttled drone work |
 | TrainMinors | Track that was placed instantly is coloured like track instead of like pipes, and a track's train limit follows its actual length — salvaging a long line down to a stub, or splitting one in two, used to leave the halves with the limit the original had |
 | LayoutTechLock | Pre-set building layouts respect research locks, so a layout can't hand you a building you haven't unlocked (nothing in the base game triggers this yet — it keeps mods and future updates honest) |
+| ExtenderFlapChurn | A Drone Hub Extender's power flicker no longer tears down and rebuilds its whole hub's task registration, which sent the entire fleet back to Idle every time |
+| DisasterPredictionLeak | A finished meteor storm no longer switches off your weather forever — the game kept treating the storm as "still being predicted" after it ended, which silently blocked rains, cold waves and dust storms (existing saves are healed on load) |
+| MeteorStormWedge | A meteor storm that wedges mid-drain is detected and released instead of blocking every future storm for the rest of the game |
+| RainsDeadlock | A rain that collides with another disaster retries later instead of never raining again |
 | SaveSanitizer | Repairs two things already baked into existing saves when you load them: Large Wind Turbines that lost their Frictionless Composites bonus, and upgrade bonuses left behind by buildings you salvaged long ago |
 
-The full defect tracker (73 verified findings and counting) lives in
+The full defect tracker (91 verified findings and counting) lives in
 [docs/BUGS.md](docs/BUGS.md); project snapshot in [docs/STATUS.md](docs/STATUS.md).
 
 ## For players
@@ -113,6 +117,8 @@ SMRFixPack_Optional = { ClassicRockets = true, AcknowledgedWarnings = true }
 | AcknowledgedWarnings | Dismissing a "Building Not Working" warning acknowledges those particular buildings until they recover, instead of silencing the whole category for 4 game hours and then re-nagging forever. Newly broken buildings always warn immediately. |
 | ResidencyControl | A new per-dome policy row: "Closed to new residents" — no one new moves in, while current residents keep commuting, working and using services through passages. Quarantine (the accept-colonists toggle) is untouched. Manual relocation and tourists still work. |
 | MultipleSuns | Lifts the one-Artificial-Sun-per-colony build limit, and ships the panel-binding repair that makes a second sun actually light the panels built around it (vanilla only ever checks the first sun — a real bug that generic "multiple wonders" mods run straight into). |
+| DroneOverhaul | Experimental: repair and cleaning jobs go to the closest hub's fleet first (a far fleet still serves if the near one doesn't respond within seconds), and idle drones help a neighboring overloaded hub with nearby repairs. Player orders, hauling, construction and RC rovers untouched. |
+| CohortHousing | Seniors and Children living in normal housing automatically move into free Retirement Home / Nursery slots — own dome first, any reachable dome second — and are left alone when no such slot exists. Employed Seniors stay put; manual assignments always win; quarantine and closed domes respected. |
 
 ## For modders
 
