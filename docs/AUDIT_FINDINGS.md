@@ -88,7 +88,7 @@ README.md mentions it. The single most important storefront disclosure for a
 
 ## Severity B — real defects, low blast radius
 
-### B1. Optional module in `status="error"` is permanently untoggleable, silently `[ ]`
+### B1. Optional module in `status="error"` is permanently untoggleable, silently `[x — fixed 2026-07-29, plan 1.4]`
 The `OnMsg.ApplyModOptions` reconciler excludes `"error"` entries forever
 (00_Core.lua:110-111) and logs nothing on the attempt — a dead checkbox until
 restart. (`on_activate`/`on_deactivate` failures are also swallowed, :122/:129.)
@@ -269,7 +269,7 @@ and needs a separate go-decision.
   file-scope install (classdef time, guarded by target-existence checks) +
   per-call `SMRFixPack.IsActive` gate; `apply()` keeps only the self-checks;
   headers updated to describe the real first-enable semantics.
-- `[ ]` **1.4 (B1)** 00_Core reconciler: on toggle-ON, retry `run_apply` for
+- `[x]` **1.4 (B1)** 00_Core reconciler: on toggle-ON, retry `run_apply` for
   entries in `"error"` (treat like `inactive`+not-installed); log a line
   whenever reconciliation skips or a retry fails, so a dead checkbox is at
   least diagnosable on PC.

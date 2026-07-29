@@ -107,26 +107,47 @@ function OnMsg.ApplyModOptions(mod_id)
 	if mod_id ~= "SMR_CommunityFixPack" then return end
 	for _, id in ipairs(SMRFixPack.order) do
 		local def, entry = SMRFixPack.defs[id], SMRFixPack.fixes[id]
-		if def and entry and def.optional
-				and entry.status ~= "disabled" and entry.status ~= "error" then
+		if def and entry and def.optional then
 			local want = SMRFixPack.OptionEnabled(id)
 			local active = entry.status == "active"
-			if want and not active then
-				if entry.installed then
+			if entry.status == "disabled" then
+				-- FIX (audit 2026-07-29, B1): reconciliation skips vetoed
+				-- entries by design, but say so when the player flips the
+				-- checkbox, so the dead toggle is diagnosable.
+				if want then
+					log("%s: Mod Options toggle ignored — vetoed via SMRFixPack_Disabled", id)
+				end
+			elseif want and not active then
+				-- FIX (audit 2026-07-29, B1): "error" entries used to be
+				-- excluded here forever, silently — a permanently dead
+				-- checkbox until restart. Retry them like an inactive entry
+				-- whose hooks never installed, and log a failed attempt.
+				if entry.installed and entry.status ~= "error" then
 					entry.status, entry.detail = "active", ""
 					log("%s: re-activated via Mod Options", id)
 				else
 					run_apply(id, def, entry)
+					if entry.status ~= "active" then
+						log("%s: Mod Options toggle could not activate it (status: %s)", id, entry.status)
+					end
 				end
 				if entry.status == "active" and type(def.on_activate) == "function" then
-					pcall(def.on_activate)
+					local ok, err = pcall(def.on_activate)
+					if not ok then
+						-- FIX (audit 2026-07-29, B1): don't swallow the hook error
+						log("%s: on_activate failed: %s", id, tostring(err))
+					end
 				end
 			elseif not want and active then
 				entry.status = "inactive"
 				entry.detail = "turned off in Mod Options"
 				log("%s: deactivated via Mod Options (installed hooks now pass through)", id)
 				if type(def.on_deactivate) == "function" then
-					pcall(def.on_deactivate)
+					local ok, err = pcall(def.on_deactivate)
+					if not ok then
+						-- FIX (audit 2026-07-29, B1): don't swallow the hook error
+						log("%s: on_deactivate failed: %s", id, tostring(err))
+					end
 				end
 			end
 		end
