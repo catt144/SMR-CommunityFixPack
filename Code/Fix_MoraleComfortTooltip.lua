@@ -57,9 +57,13 @@ SMRFixPack.Register("MoraleComfortTooltip", {
 		local hidden = 0
 
 		local orig_update = C.UIStatUpdate
-		-- (QA 2026-07-25) pass varargs and returns through: the live caller hands
-		-- a second argument (ipColonist.lua:134) that the shipped body ignores
-		-- today — FIX_POLICY §1.4 says don't truncate what we don't consume.
+		-- (QA 2026-07-25) pass varargs through: the live caller hands a second
+		-- argument (ipColonist.lua:134) that the shipped body ignores today —
+		-- FIX_POLICY §1.4 says don't truncate what we don't consume. Return
+		-- values are NOT forwarded (audit 2026-07-29, C4 comment fix): the
+		-- shipped UIStatUpdate returns nothing (verified 1.0.7.396349 — every
+		-- `return` in its body sits inside the closures it installs), so there
+		-- is nothing to forward; re-verify if a game update changes that.
 		function C:UIStatUpdate(win, ...)
 			orig_update(self, win, ...)
 

@@ -67,6 +67,7 @@ function OnMsg.LoadGame()
 
 	if closed > 0 then
 		local msg = string.format("[CommunityFixPack] DestroyedTunnels: closed %d destroyed tunnel(s) left open in pathfinding", closed)
-		if rawget(_G, "ModLog") then ModLog(msg) else print(msg) end
+		-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
+		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 	end
 end

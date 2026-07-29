@@ -86,6 +86,7 @@ function OnMsg.LoadGame()
 
 	if cleaned > 0 then
 		local msg = string.format("[CommunityFixPack] GhostFarmOxygen: removed %d phantom farm oxygen modifier(s)", cleaned)
-		if rawget(_G, "ModLog") then ModLog(msg) else print(msg) end
+		-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
+		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 	end
 end

@@ -28,8 +28,9 @@
 -- already in order), but any subclass or preset that sets them the other way
 -- around loses the smaller timing entirely.
 --
--- Patch approach: two independent method replacements, each tiny, each
--- self-checked separately so one missing target cannot take the other down.
+-- Patch approach: two independent method replacements (copies from shipped
+-- Src, game 1.0.7.396349), each tiny, each self-checked separately so one
+-- missing target cannot take the other down.
 --
 -- *Deliberately NOT fixed — the third item on the tracker entry.*
 -- `SA_WaitMarsTime:GenerateSequenceCode` (`Lua\Sequences\SA_Gameplay.lua:2705`)

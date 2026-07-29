@@ -10,8 +10,9 @@
 -- popup is lost.
 --
 -- Patch approach: the eval function is a file-local, so we replace the global
--- CompleteMilestone with a copy (of Lua\Milestones.lua:108-142, shipped Src
--- 2026-07) whose completion check is inlined and nil-safe. Changes marked -- FIX.
+-- CompleteMilestone with a copy (of Lua\Milestones.lua:108-142, shipped Src,
+-- game 1.0.7.396349) whose completion check is inlined and nil-safe. Changes
+-- marked -- FIX.
 
 SMRFixPack.Register("MilestoneCrash", {
 	title = "Completing all milestones no longer errors in No Terraforming / No Politics games",

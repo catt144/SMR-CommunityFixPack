@@ -93,6 +93,7 @@ function OnMsg.NewDay()
 
 	if released > 0 then
 		local msg = string.format("[CommunityFixPack] StaleReservations: released %d stale housing reservation(s)", released)
-		if rawget(_G, "ModLog") then ModLog(msg) else print(msg) end
+		-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
+		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 	end
 end

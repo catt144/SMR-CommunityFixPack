@@ -41,7 +41,8 @@ local STORYBIT_IDS = { "DustSickness", "DustSickness_GeneratSick", "DustSickness
 
 local function log(fmt, ...)
 	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog(msg) else print(msg) end
+	-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
+	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 end
 
 local function adds_dust_sickness(effects)

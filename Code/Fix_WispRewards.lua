@@ -14,8 +14,8 @@
 --   each while the notification claimed 100.
 --
 -- Patch approach: both defects live in the same small global function, so this
--- file replaces SetLightTrapMode once (copy of Fireflies.lua:674-701, shipped Src
--- 2026-07). Changes marked -- FIX. The destructor's +100 (the consistent payer for
+-- file replaces SetLightTrapMode once (copy of Fireflies.lua:674-701, shipped Src,
+-- game 1.0.7.396349). Changes marked -- FIX. The destructor's +100 (the consistent payer for
 -- wisps caught later) is kept as the single source of RP; the batch branch keeps
 -- its notification so the player still sees the total.
 

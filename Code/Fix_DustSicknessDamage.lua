@@ -27,7 +27,8 @@ local FIX_ID = "DustSicknessDamage"
 
 local function log(fmt, ...)
 	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog(msg) else print(msg) end
+	-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
+	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 end
 
 -- The shipped body with the one line corrected, marked -- FIX.

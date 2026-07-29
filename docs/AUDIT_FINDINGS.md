@@ -277,7 +277,7 @@ and needs a separate go-decision.
   (heal step "released through the vanilla end path"), clear
   `g_DisastersPredicted.DisasterMeteorStorm` itself if still set — idempotent
   alongside F81, self-sufficient without it.
-- `[ ]` **1.6 (C4 cheap parts)** Add `%%` escaping to the 6 unescaped local
+- `[x]` **1.6 (C4 cheap parts)** Add `%%` escaping to the 6 unescaped local
   loggers (Fix_DestroyedTunnels.lua:70, Fix_BrokenTrackSalvage.lua:66,
   Fix_DustSicknessDamage.lua:30, Fix_DustSicknessBiorobots.lua:44,
   Fix_GhostFarmOxygen.lua:89, Fix_StaleReservations.lua:96) and the 4

@@ -10,7 +10,7 @@
 -- Runs on every tourist departure (RocketBase.lua:818, UniversalRocket.lua:2014).
 --
 -- Patch approach: replacement of the one small method (copy of
--- Lua\HolidayRating.lua:73-91, shipped Src 2026-07); change marked -- FIX.
+-- Lua\HolidayRating.lua:73-91, shipped Src, game 1.0.7.396349); change marked -- FIX.
 
 SMRFixPack.Register("TouristApplicants", {
 	title = "Higher tourist ratings now correctly give more bonus applicants (roll was inverted)",
