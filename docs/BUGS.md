@@ -96,7 +96,9 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo (found live 2026-07-27; wave-6) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed (built 2026-07-28 with the D06 core; PT pending) |
-| F78 | MeteorsDisaster hangs mid-strike (multi-map save?); disasters never land | P1 | high | investigating (filed 2026-07-28 — PT-01 watchdog caught it live, evidence on entry) |
+| F78 | MeteorsDisaster hangs mid-strike (multi-map save?); disasters never land | P1 | high | investigating (filed 2026-07-28 — PT-01 watchdog caught it live, evidence on entry; hypothesis 1 refuted live same day) |
+| F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | confirmed vanilla gap 2026-07-28 — fix would be feature-completion, D-item decision (entry) |
+| F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating (observed live 2026-07-28; mitigated by adding trains; forensic trail + tap on entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
@@ -2611,6 +2613,60 @@ storms/devils/cold waves/rains; separate leg).
 Cross-refs: F02 (the scheduler fix + watchdog), PT-01 (the passive watch
 that caught this — record the catch on its line when the checklist is next
 touched).
+
+### F79 — Colonists never use trains for services; the service search is passage-only (P3, high confidence)  `[confirmed vanilla gap 2026-07-28 — any fix is feature-completion, D-item decision]`
+**Live observation (2026-07-28, F21 setup):** a dome stripped of services, with
+a working 5-station train network to three service-rich domes, produced ZERO
+service riders — colonists roamed their own dome "looking for places to shop"
+indefinitely while trains ran outside. **Root, code-confirmed:** service
+selection funnels solely through `Dome:GetService` (`Dome.lua:2900-2943`),
+whose cross-dome branch walks only `GetConnectedDomes()` (`:619-630`) =
+passage-connected domes (plus physically-in-range domes once the map is
+open-air breathable). Stations/trains appear nowhere on that path. The
+train-aware reachability that DOES exist — `Colonist:CanReachDomeForBuilding`
+(`Colonist.lua:3207`, consults `GetTransportRoute`) — is consulted by
+`Workplace.lua:522`, `TrainingBuilding.lua:148`, and `Residence.lua:292`
+only: **trains carry workers, trainees, and migrants — never shoppers.** The
+transport layer itself fully supports service trips (ticket commands, the
+`CanColonistsFromDifferentDomesWorkServiceTrainHere` gate, boarding), so the
+gap is precisely that `GetService` was never taught about stations. Player
+impact: "build a leisure dome and connect it by rail" — a natural Martian
+Express colony shape — silently does nothing for service needs; unserviced
+colonists roam and bleed Comfort. **Fix sketch (D-item, user decision per
+FIX_POLICY §4 — this is feature-completion, not defect repair):** post-wrap
+`Dome:GetService` to, on in-dome + passage failure, enumerate train-reachable
+domes (the same station walk `recursive_enum_dome_workplaces` uses,
+`Dome.lua:646-687`) gated on `allow_service_in_connected` + the
+WorkServiceTrain gate, returning a service the transport layer can already
+ticket. Cross-refs: F80 (boarding anomaly found in the same session), PT-43
+F21 (the test whose setup surfaced this).
+
+### F80 — Trains stop at a platform and skip valid waiting passengers (P2, med)  `[investigating — observed live 2026-07-28; mitigated by adding trains; unexplained]`
+**Observed (2026-07-28, live):** a colonist with a fully valid transport
+ticket (`stage = Waiting`, both stations valid) sat at a station for 17+
+game hours while at least four trains stopped, exchanged cargo, and left
+without boarding anyone — with ~19 colonists in `waiting_for_train` at that
+station and ZERO "full train" Comfort penalties logged (so the capacity
+branch never ran either). Forensics that ruled out config: every one of the
+five track routes contained BOTH her src and dst stations (console sweep);
+every track's `transport_mode` read `all`; she was verifiably present in
+`src_station.waiting_for_train` (index 19); stations working. **Suspected
+mechanism (untested):** the stop-processing walk (`Train:TransferCargo` →
+`ForEachStationAlongTrack(station, track, 0, ...)`, `Train.lua:882`) derives
+its enumeration direction from the TRACK's canonical orientation at that
+station (`TrainTransport.lua:371`) — NOT the train's travel direction — and
+with flags 0 it neither wraps nor reverses; a destination lying "behind"
+that fixed direction would be structurally unenumerable at that stop, in
+both travel directions, forever (`ticket_dest == dest` can never match,
+`Train.lua:962`). **Adding 3 more trains (2→5) got passengers moving**,
+which is consistent with the theory (other tracks' orientations cover the
+missing directions) but does not prove it. A ready console tap on the
+global `ForEachStationAlongTrack` (prints each stop's enumerated dest set —
+in the session log 2026-07-28) brackets it definitively if the symptom
+recurs. Related vanilla wart, same session: the trip planner books tickets
+over track REACHABILITY with no regard for train SERVICE — colonists queue
+indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
+PT-43 F21.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); PT pending — attended, multi-iteration]`
 The design defect behind the 2026-07-27 live report (four idle drones parked beside a
