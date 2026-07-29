@@ -98,10 +98,11 @@ Your jobs, in the order they usually come up:
 **First, read (in order) from `C:\Dev\SMR-BugFixPack`:**
 1. `docs\ENGINE_FACTS.md` — the whole file (the engine behaviors that will
    otherwise mislead you; moved out of STATUS.md 2026-07-29). Then
-   `docs\STATUS.md` — the current-state header and the newest legs (the
-   2026-07-29 disaster/QA, harness-v2, audit and audit-fix sessions) down
-   through the D06 build leg; older legs live in
-   `docs\archive\SESSION_LOG.md` if you need history.
+   `docs\STATUS.md` — now a compact current-state doc: header (counts, open
+   decisions, next gates) + reference sections. Session legs all live in
+   `docs\archive\SESSION_LOG.md` (newest first) — read the newest ones (the
+   2026-07-29 audit-remediation and disaster/QA legs) down through the D06
+   build leg.
 2. `docs\PLAYTEST_CHECKLIST.md` — **restructured 2026-07-29**: toolbox/
    reference first (ground rules, verified command table, stress harness),
    then §1 standing watches (log hygiene, meteor watchdog, PT-52 passive),

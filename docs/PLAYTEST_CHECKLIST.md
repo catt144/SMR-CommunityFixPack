@@ -16,7 +16,7 @@ the two the archived run left "not separately exercised".)
 
 ## What a pass here means
 
-The automated A/B probe runs (STATUS.md) prove the *wiring* across all waves:
+The automated A/B probe runs (docs/archive/SESSION_LOG.md) prove the *wiring* across all waves:
 patched functions install and return the right values under synthetic input.
 This checklist is the **human-eyes half** — the things probes cannot see:
 
@@ -1227,11 +1227,12 @@ Everything else prescribed in this document was verified to exist in
      an appended note on the existing entry if it's a regression of that same fix),
    - set the affected fix back to `todo`/`blocked` as appropriate with the tester's
      verbatim observation quoted,
-   - add it to the "Next up" queue in `docs/STATUS.md`.
+   - add it to the "Next gates" line in `docs/STATUS.md`'s header.
 5. For **PT-10 (F55)**, whichever way it lands, record the observation on the F55 BUGS.md
    entry and resolve the open question in STATUS.md's "Waiting on the user" item.
-6. Update STATUS.md's current-state section (tested counts / next gates) to
-   reflect the new results.
+6. Update STATUS.md's current-state header (counts / next gates) to reflect
+   the new results, and append the sitting as a new leg at the top of
+   `docs/archive/SESSION_LOG.md`.
 7. Commit everything in one change, with the playtest date in the message.
 8. Move each completed test's section — test text plus the filled-in results —
    from this file into `docs/PLAYTEST_ARCHIVE.md`, so this checklist only

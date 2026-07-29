@@ -325,7 +325,7 @@ and needs a separate go-decision.
 - `[x]` **3.2 (D6)** Extract STATUS.md "Key technical facts" into
   `docs/ENGINE_FACTS.md` (sole authoritative home; STATUS keeps a one-line
   pointer; update the readers: FABLE_NEXT read-list, checklist references).
-- `[ ]` **3.3 (D6)** STATUS.md: replace the "Prior wrap" paragraph stack with
+- `[x]` **3.3 (D6)** STATUS.md: replace the "Prior wrap" paragraph stack with
   a ~40-line rewritten-in-place current-state header (build counts — stated
   here and NOWHERE else — open user decisions, next gates, pointer to newest
   leg); move the session legs + superseded A/B tables to
