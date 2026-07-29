@@ -2804,6 +2804,28 @@ FIX_POLICY §3 one-shot-sweep shape, needs zero persisted state, and is
 self-healing on every subsequent load. The `MeteorsDisaster` in-flight leak
 (below) remains a real second stranding path worth closing, but it is no longer
 the only — or even the likely — cause.
+**FULL RECOVERY OBSERVED (2026-07-29, same sitting):** after the flag was
+cleared the user received a **"Toxic rain approaching — starts in 3 Sols"**
+notification. That is the complete chain working again — `RainsDisasterLoop`
+rolled, `RainsDisasterActivation` passed the gate it had been failing for the
+save's entire history, and the toxic band matched `Toxic_High` exactly as the
+threshold reads predicted. **It also corroborates the sensor-tower maths
+precisely: a 3-sol warning is ~72h against the measured
+`GetDisasterWarningTime() = 75h` cap from 6 towers.**
+**AND IT IMMEDIATELY RE-ARMS THE BUG.** For those 3 sols
+`g_DisastersPredicted["DisasterToxicRains"] = true` (set at
+`TerraformingDisasters.lua:300`, cleared at :302 only after the `Sleep`). Per
+the mechanism proven above, **any save/load inside that 3-sol window strands
+`DisasterToxicRains` permanently** and kills the colony's weather again — and
+`SavegameFixups.DisasterNotifications` (`MapSettings.lua:186`) names
+RainDisaster alongside MeteorStorm as un-restorable. So the warning window is
+not just a collision surface for the rains deadlock; it is a 3-sol-wide
+stranding window in its own right. **This is the natural, non-synthetic version
+of Repro A** — quicksave inside the warning, reload, and the flag comes back
+with no notification behind it. Practical consequence recorded for playtests:
+**any protocol that reloads a save (e.g. the PT-52 stress A/B) will re-poison a
+colony if run inside a disaster warning window** — dump `g_DisastersPredicted`
+and clear stragglers afterwards.
 Supporting reads from the same sitting:
 - **The pack's meteor thread is HEALTHY** — `phase=long-sleep-done age=1h
   restarts=0`, and the user saw two NATURAL single strikes. So the wedge is
