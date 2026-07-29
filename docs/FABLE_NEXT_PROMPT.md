@@ -11,8 +11,11 @@ never carry service seekers — fix would be feature-completion),
 **NEW F80 investigating** (trains skip valid waiting passengers), **NEW D07
 speced** (`Opt_CohortHousing` — cohort members in normal housing move to
 free Retirement Home/Nursery slots anywhere, in-dome first, untouched when
-none exist; no dome UI). **TWO USER DECISIONS PENDING: D07 build
-go/no-go, and whether F79 gets a D-item fix.** Zero pack code changed —
+none exist; no dome UI). **DECISION UPDATE 2026-07-28 late: D07 config
+CONFIRMED by the user (in-dome-first + cross-dome, Seniors+Children one
+toggle — the spec as written) but build HELD — do not build until an
+explicit go. Still pending: whether F79 gets a D-item fix.** Zero pack
+code changed —
 no pre-flight owed. PT-52 sitting 2 healthy; **Trigger B STILL un-run.**
 
 Paste everything below into a fresh Claude Code session (Fable). This is the
@@ -171,10 +174,11 @@ silent.
   ENTER/EXIT + SpawnMeteor), aim at empty ground, `CheatMeteors("single")`
   — ENTER-without-EXIT reproduces the wedge on demand and the last print
   brackets the stall line.
-- **DECISIONS the user owes (no build until given):** D07
-  `Opt_CohortHousing` go/no-go (full revised spec on the entry), and
-  whether F79 (trains never serve service trips — confirmed vanilla gap)
-  gets a feature-completion D-item.
+- **DECISIONS:** D07 `Opt_CohortHousing` config CONFIRMED 2026-07-28 late
+  (in-dome-first + cross-dome, Seniors+Children one toggle) but build
+  HELD — no code until an explicit user go. Still owed: whether F79
+  (trains never serve service trips — confirmed vanilla gap) gets a
+  feature-completion D-item.
 - **PT-40 DONE 2026-07-28 → F65 `tested` (archived):** full procedure PASS —
   merge in both geometries (snug + couple-tracks), clean salvage split,
   long-track control unchanged, reload persistence, log clean.
