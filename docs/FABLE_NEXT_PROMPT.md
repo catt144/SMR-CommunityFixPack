@@ -1,4 +1,4 @@
-# Fable continuation prompt — PLAYTEST STANDBY (updated 2026-07-28 LATE, post-D07-build)
+# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (updated 2026-07-28 LATE, post-D07-build)
 
 **NEWEST FIRST (2026-07-28 late — read the "D07 build leg" STATUS section
 first):** **D07 `Opt_CohortHousing` is BUILT** (user confirmed the config
@@ -21,9 +21,12 @@ F79 confirmed / F80 investigating. **ONE USER DECISION PENDING: whether
 F79 (trains never serve service trips) gets a D-item fix.** PT-52 sitting
 2 healthy; **Trigger B STILL un-run.**
 
-Paste everything below into a fresh Claude Code session (Fable). This is the
-ONE live prompt. **Start with `git log --oneline -5` + `git pull`** in case
-another session ran since this prompt was written.
+Paste everything below into a fresh Claude Code session — **any Claude model
+(Opus or Fable alike); the user picks the model per task and everything here
+works identically on either.** This is the ONE live prompt. **Start with
+`git log --oneline -5` + `git pull`** in case another session ran since this
+prompt was written. (The filename keeps its historical FABLE_ prefix so
+existing references stay valid — nothing in it is model-specific.)
 
 Build state: **71 registered modules, 65/71 active by default (6 opt-in via
 Options → Mod Options — D05, `tested`), 73 probes, everything pushed.
