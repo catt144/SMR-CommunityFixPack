@@ -130,7 +130,9 @@ on the entries; this is the index.
   A/B owed): `SMRTest.Stress.Break/Targets/Report/Compare/HealAll/Stop`. Breaks a
   seeded deterministic set so the same save reloaded gives a true controlled A/B;
   captures every repair claim via a leaf-class pre-wrap on `Drone:Work` and
-  reports **closest-hub first claims %** as the headline.
+  reports **closest-hub first claims %** as the headline. *(That v1 metric was
+  invalidated by the run below and the harness was REBUILT v2 on 2026-07-29 —
+  see the header wrap and the D06 entry.)*
 - **THE A/B RAN (2026-07-29) — NULL RESULT for D06's claim gate, and it exposed
   why.** Controlled: same quicksave reloaded, identical seeded set, both legs at
   normal speed, storages equalised. With the module ON the gate intervened

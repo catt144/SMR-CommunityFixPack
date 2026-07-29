@@ -81,7 +81,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | tested 2026-07-28: `Opt_ResidencyControl` (opt-in; probe PASS + PT-49 PASS in full, archived) |
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
-| D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; PT pending (attended, multi-iteration) |
+| D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; first A/B 2026-07-29 NULL (v1 metric invalid — scored deliveries); stress harness REBUILT v2 (lifecycle tracing) 2026-07-29; B2 re-run pending (attended) |
 | D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28; **PT-53 3-of-5 PASS 2026-07-29** — cross-dome moves (trains/passages/shuttles by distance), graduation drain, and organic no-churn-when-no-slots all confirmed live, "worked wonderfully"; only the employed-senior exemption (A) and precedence/uninstall (E) still owed, so NOT yet `tested` (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28, full procedure (entry) |
@@ -3041,7 +3041,7 @@ is found. Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
 
-### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below]`
+### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit) — B2 re-run pending]`
 **FIRST MEASURED A/B — PT-52 Trigger B2, 2026-07-29.** Controlled run on the
 user's live 9-hub colony: same quicksave reloaded between legs, identical seeded
 target set (`scope="overlap"`, `n=25`, `seed=1`), **both legs at NORMAL speed**,

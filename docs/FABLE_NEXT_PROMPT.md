@@ -47,9 +47,12 @@ Src-only reasoning as provisional and self-check everything at apply time.
    implemented. **Do not implement the disaster or D08 fixes until that verdict
    is in**, unless the user says otherwise.~~ **RESOLVED (see banner): fired,
    verdict folded, file deleted, disaster fixes BUILT (wave 6).**
-2. **The drone stress A/B is UN-RUN.** The harness is built
-   (`TestKit/Code/91_Stress.lua`, local-only) but the two legs have never been
-   executed. This is the natural centrepiece of the next live sitting.
+2. ~~**The drone stress A/B is UN-RUN.**~~ **RESOLVED TWICE (see banner): the
+   A/B ran 2026-07-29 (null result; the v1 metric was proven invalid — it
+   scored deliveries), and the harness was REBUILT (v2, lifecycle tracing,
+   2026-07-29 harness repair session). The B2 RE-RUN with the v2 harness is
+   now the natural centrepiece of the next live sitting** — protocol in
+   `PLAYTEST_CHECKLIST.md` Trigger B2 (updated), findings on the D06 entry.
 3. **D08** — the extender overhaul, five layers speced in
    `DRONE_OVERHAUL_OPTIONS.md`, nothing built.
 
@@ -388,9 +391,12 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   the four opt-ins active (then expect 62/0/10/0-style shifts and document).
   Simplest: run legs with the toggles as-is and compare against the matching
   expectation.
-- **TestKit gained `Code/91_Stress.lua` (2026-07-29, local commit)** — the drone
-  stress harness. It registers NO probes (function definitions only, inert at
-  load), so **expected numbers below are unchanged** and no A/B pair was owed.
+- **TestKit gained `Code/91_Stress.lua` (2026-07-29, local commit; REBUILT v2
+  same day — per-request lifecycle tracing)** — the drone stress harness. It
+  registers NO probes; v2 does install permanent classdef-time wraps on
+  `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but they
+  gate on an active stress run and pass straight through otherwise, so
+  **expected numbers below are unchanged** and no A/B pair was owed.
 - **Expected numbers (current, 73 probes — none for D06/F77 yet; D07 has
   one, SKIPs unless its toggle is on):** baseline 1 PASS / 57 FAIL /
   15 SKIP / 0 ERROR; fixed default 58/0/15/0 (**65/71 active** — the six
