@@ -320,6 +320,43 @@ claim/execute, migration hysteresis) in the A/B harness before it ships.
 
 ---
 
+# MANDATE CHANGE — 2026-07-29, read before D06 options A–H or D08 below
+
+**The user widened the brief after the first measured A/B**, verbatim: *"The
+overall goal of this opt-in is not to be 100% true to the base game, it's to
+make this issue that is highly frustrating to end-game players workable. So if
+that means we also need to tweak drone speed instead of just logic, I am open to
+that."*
+
+Everything below was written under the older, tighter assumption that only
+**dispatch logic** was in scope. That is no longer the constraint. **Stat
+changes are admissible** in an `Opt_*` module:
+- `Drone.move_speed = 1440` (`Lua\Units\Drone.lua:26`), applied via
+  `SetMoveSpeed` (`:85`).
+- `g_Consts.DroneResourceCarryAmount` (`Lua\__const.lua:639`) feeds
+  `UpdateDroneResourceUnits` (`Drone.lua:707-723`), rebuilt on
+  `OnMsg.ConstValueChanged` / `NewMap` / `PostLoadGame` — a clean hook, and the
+  AncientArtifactInterface upgrade already modifies this property, so there is
+  in-game precedent.
+- Repair/work chunk sizes via `DroneResourceUnits`.
+
+**What still binds:** opt-in only; toggling off restores vanilla completely;
+save-safety per FIX_POLICY §3 and the D08 risk table. FIX_POLICY §4's "no
+balance changes" governs `Fix_*` modules — it never governed `Opt_*` D-items,
+which are behavioural overhauls by definition.
+
+**Empirical caution to weigh, not to obey:** the save that produced the A/B has
+**all techs researched plus a drone-carry breakthrough**, and hauling was still
+**88% of elapsed repair time**. That is evidence throughput buffs may hit
+diminishing returns and the real bottleneck is structural — trip count, trip
+distance, depot choice, drone assignment. Stat levers are nonetheless simple,
+robust, and immune to the scheduler quirks that made the claim gate inert.
+
+**Also note the A/B verdict itself (D06 entry, BUGS.md): the shipped claim gate
+fired ONCE across 25 simultaneous malfunctions and moved its own leg by one
+minute.** Options A–H and the D08 layers below were all designed before that
+was known. Re-read them as hypotheses, not as a plan.
+
 # D08 — Drone Hub Extender overhaul + Command Center (2026-07-29 design session, game-free)
 
 Origin: the user observed live that **Drone Hub Extenders make the D06 problem

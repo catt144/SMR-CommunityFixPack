@@ -227,11 +227,78 @@ no bug.
 
 ---
 
-# TRACK B — the D08 drone design
+# TRACK B — drone dispatch: OPEN QUESTION, NOT A PLAN TO VALIDATE
 
-**Read `docs/DRONE_OVERHAUL_OPTIONS.md` § D08 in full.** It contains the verified
-fact table, five proposed layers, a risk table, and five open questions. Summary
-of what most needs challenge:
+**Read this framing before anything else in Track B.**
+
+The user's instruction, verbatim: *"I want the review to neutrally look at all
+options, I want to ask it what we should do basically, take our data with fresh
+eyes and give us a fresh perspective."*
+
+**So do NOT treat our proposals as the menu.** Everything in
+`DRONE_OVERHAUL_OPTIONS.md` (options A–H for D06, five layers for D08) is
+**what we happened to think of**, not a shortlist to pick from. We have already
+been wrong twice this session in ways that testing caught. Start from the
+problem and the data, and if the right answer is something none of us
+considered — or "do nothing, the current module is enough" — say that.
+
+## The problem, stated without our solutions attached
+
+A large end-game colony's drone logistics become badly frustrating: work near
+idle drones goes unserved while distant fleets crawl over, and the player ends
+up micromanaging hub ranges, drone counts and extender links to compensate.
+Originally observed as four idle drones parked beside a malfunctioning building
+while a far hub serviced it slowly.
+
+## The data we have (and it reframes the problem)
+
+The first controlled A/B ran 2026-07-29 — full numbers on the **D06 entry** in
+`docs/BUGS.md`. The headline is that **the shipped module's claim gate is
+close to inert**: it fired once across 25 simultaneous malfunctions, and the
+leg it arbitrates moved 58m → 57m. Meanwhile **hauling was 3h03m of a 3h27m
+total — 88% of elapsed time** — and the module exempts hauling by design.
+
+Read that as: **we spent the effort optimising 12% of the problem.** Any
+proposal you make should be judged against the 88%.
+
+## THE MANDATE HAS BEEN WIDENED — this is new and it matters
+
+The user's stated goal, verbatim: *"The overall goal of this opt-in is not to be
+100% true to the base game, it's to make this issue that is highly frustrating
+to end-game players workable. So if that means we also need to tweak drone speed
+instead of just logic, I am open to that."*
+
+**Stat changes are therefore ON the table**, not just dispatch logic. Relevant
+verified knobs:
+- `Drone.move_speed = 1440` (`Lua\Units\Drone.lua:26`), applied via
+  `SetMoveSpeed` at `:85`.
+- `g_Consts.DroneResourceCarryAmount` (`Lua\__const.lua:639`) feeds
+  `UpdateDroneResourceUnits` (`Drone.lua:707-723`), which rebuilds on
+  `OnMsg.ConstValueChanged` / `NewMap` / `PostLoadGame` — a clean hook. The
+  AncientArtifactInterface upgrade already modifies this property, so there is
+  in-game precedent for changing it.
+- Repair/work chunk sizes via `DroneResourceUnits`.
+
+**One empirical caution to weigh, not to obey:** the user's save has **all techs
+researched plus a drone-carry breakthrough** (they believe it also raises
+speed — worth verifying what it actually does), and hauling is *still* 88% of
+elapsed time. That is evidence that raw throughput buffs may have diminishing
+returns and the bottleneck is structural — trip count, trip distance, which
+depot is chosen, which drone is assigned — rather than drone stats. Weigh that
+against the fact that stat levers are simple, robust and immune to the engine's
+scheduling quirks. Your call.
+
+**Constraints that still bind even with the widened mandate:** it stays an
+opt-in module (`Opt_*`), toggling off must restore vanilla completely, and
+save-safety rules are unchanged — see the risk table in D08 and FIX_POLICY §3.
+
+## What we came up with — for information, NOT as a shortlist
+
+`docs/DRONE_OVERHAUL_OPTIONS.md` holds a verified fact table (worth reading —
+the consts and call sites are checked), options A–H from the original D06 study,
+and five D08 layers. Treat the **facts** as reliable and the **conclusions** as
+suspect. The specific things most in need of challenge if you do engage with
+them:
 
 - **The leash argument** — `Drone:RestrictArea(const.DroneRestrictRadius, ...)`
   (`Drone.lua:227-231`) means jobs cannot be relayed and the candidate set must
@@ -253,6 +320,16 @@ of what most needs challenge:
   will it mislead?
 - **Layer 5 (a new building)** — the only layer with real save risk; gated on a
   PT-20 uninstall test. Is our read of the uninstall failure mode right?
+
+## Track B deliverable
+
+Not "approve or reject our layers." Answer: **given the problem and the 88%
+finding, what should be built, and why that rather than the alternatives?**
+Include at least one option we did not propose, even if you end up rejecting it.
+Say explicitly whether the shipped D06 claim gate should be **kept, reworked, or
+removed** — it is opt-in and unreleased, so removing it is a real option with no
+user cost. And state what evidence would change your recommendation, so we know
+what to measure next.
 
 ---
 
