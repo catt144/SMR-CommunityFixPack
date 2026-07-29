@@ -26,6 +26,19 @@ come back.
 - Meteors now follow their intended schedule (roughly every 35–115 hours)
   instead of striking about every 6 hours — and Sensor Towers now genuinely
   delay strikes instead of accidentally making things worse.
+- A finished meteor storm no longer switches off your weather forever. The
+  game kept treating the storm as "still being predicted" after it ended,
+  which silently blocked rains, cold waves, dust storms, some special-project
+  rewards and one mystery — for the rest of the colony's life. Colonies
+  already affected are healed the moment you load them: if your long-running
+  save has mysteriously never seen rain, this is why.
+- A meteor storm that stalls mid-run is now detected and wound down, so
+  future storms keep coming. One stuck storm used to mean no meteor storm
+  would ever be scheduled again on that save.
+- Rain that collided with another disaster comes back. If a rain tried to
+  start during any other disaster (or even during another disaster's warning),
+  that rain type died permanently for the rest of the save — now it simply
+  tries again a few sols later.
 
 **Interface**
 - The Command Center's resource rows show their numbers again — eleven of them

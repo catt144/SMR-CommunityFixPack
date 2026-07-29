@@ -164,7 +164,7 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatUpdateAllWorkplaces()` | `Lua/Cheats.lua:210` | re-run job assignment now |
 | `CheatToggleAllShifts()` | `Lua/Cheats.lua:192` | open/close every shift |
 | `CheatToggleInfopanelCheats()` | `Lua/Cheats.lua:290` | shows per-building cheat buttons — ⚠️ **on retail the buttons render but silently NO-OP** (they dispatch `NetSyncEvents.ObjCheat`, gated `AreCheatsEnabled()`, `Network.lua:218-219`; found live 2026-07-27). Either run `Platform.cheats = true` first (buttons work; set false after), or skip the panel and call the method directly on the selection: `SelectedObj:CheatMalfunction()` / `CheatAddMaintenancePnts()` / `CheatCleanAndFix()` (`Building.lua:1813-1849`). Second gotcha (2026-07-27): button presses ride the game-time sync queue (`ScheduleOfflineSyncEvent`) — they look DEAD while the game is paused and fire on unpause; the `ObjCheat <method>` console print confirms delivery |
-| `CheatMeteors("single"\|"multispawn"\|"storm", setting, pos)` | `Lua/Cheats.lua:62` | meteor strike. ⚠️ **RE-CORRECTED 2026-07-29 (QA session):** with no explicit `pos` it can silently do NOTHING — but the mechanism recorded earlier was wrong. `GetCameraLookAtPassable` is a **file-local helper** (`local function`, `Cheats.lua:42`) — invisible from the console *by design*, which is what the `attempt to call a nil value` probe actually proved; the shipped `Cheats.lua` is byte-identical to Src (full fpk diff, see STATUS key facts). The real no-op path: the helper returns nil when no passable point exists within 100m of the camera look-at, and the body is `if pos then … end` with no else. **Always pass a position**, or drive the disaster directly: `*r local d = Presets.MapSettings.Meteor["Meteor_High"] local p = GetRandomPassable(MainMap) CreateGameTimeThread(function() MeteorsDisaster(d, "storm", p) end)`. Note `"storm"` reliably WEDGES (F78) — recover with `*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end` |
+| `CheatMeteors("single"\|"multispawn"\|"storm", setting, pos)` | `Lua/Cheats.lua:62` | meteor strike. ⚠️ **RE-CORRECTED 2026-07-29 (QA session):** with no explicit `pos` it can silently do NOTHING — but the mechanism recorded earlier was wrong. `GetCameraLookAtPassable` is a **file-local helper** (`local function`, `Cheats.lua:42`) — invisible from the console *by design*, which is what the `attempt to call a nil value` probe actually proved; the shipped `Cheats.lua` is byte-identical to Src (full fpk diff, see STATUS key facts). The real no-op path: the helper returns nil when no passable point exists within 100m of the camera look-at, and the body is `if pos then … end` with no else. **Always pass a position**, or drive the disaster directly: `*r local d = Presets.MapSettings.Meteor["Meteor_High"] local p = GetRandomPassable(MainMap) CreateGameTimeThread(function() MeteorsDisaster(d, "storm", p) end)`. Note `"storm"` reliably WEDGES (F78) — with the pack loaded, `Fix_MeteorStormWedge` heals it automatically ~2 game hours after the storm notification expires (PT-54); manual recovery remains `*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end` |
 | `CheatTriggerMarsquake(settings_name)` | `Lua/Marsquake.lua:223` | surface quake |
 | `CheatTriggerUndergroundMarsquake()` | `Lua/Marsquake.lua:292` | underground quake (**bypasses** the scheduler — see PT-11) |
 | `CheatTriggerUndergroundCaveIn(pos)` | `Lua/Marsquake.lua:284` | cave-in at a position |
@@ -1080,6 +1080,75 @@ corroboration of F79 (service search is passage-only, never trains).
 `Result (D graduation drain):` **PASS 2026-07-29** — Age-up freed the Nursery slot, brief transient homelessness, then drained out of the dome
 
 `Result (E precedence + uninstall):` _____ NOT YET RUN — manual residence assignment must win; toggle off = instantly vanilla; save ON / reload OFF must load clean
+
+---
+
+# Group 10 — wave-6 fixes (disaster systems, built 2026-07-29 post-QA)
+
+## PT-54 — Disaster prediction leak, storm wedge, rains deadlock · covers **F78 `Fix_MeteorStormWedge`, F81 `Fix_DisasterPredictionLeak` + `Fix_RainsDeadlock`**
+
+These three ship together and share machinery, so one PT covers them. The
+wave-6 probes (`SMRTest.DisasterPredictionLeak()`, `SMRTest.MeteorStormWedge()`,
+`SMRTest.RainsDeadlock()` — the rains one needs a loaded colony) assert the
+mechanisms; this PT is the live half. The flag dump used throughout:
+`*r for k, v in pairs(g_DisastersPredicted) do ConsolePrint(tostring(k) .. " = " .. tostring(v)) end`
+(an empty print = no flags set).
+
+**Setup:** the live 194-sol save (or any save with meteor storms enabled).
+`SMRFixPack.ListFixes` must show `DisasterPredictionLeak`, `MeteorStormWedge`
+and `RainsDeadlock` all `active`.
+
+**Trigger A — reconciliation heals a stranded flag.** Hand-plant one
+(`g_DisastersPredicted["DisasterMeteorStorm"] = true`, nothing on screen),
+quicksave, reload.
+   - **EXPECTED:** a `DisasterPredictionLeak: cleared stranded prediction flag`
+     log line on load; the flag dump is clean.
+   - **SURPRISE looks like:** the flag survives the reload (sweep did not run —
+     check fix status first).
+
+**Trigger B — a genuine warning is NEVER cleared.** Wait for (or reach) any
+disaster warning countdown (toxic rain works — 3-sol window with 6 towers),
+quicksave mid-countdown, reload.
+   - **EXPECTED:** the notification is still on screen still counting AND its
+     flag still reads `true` in the dump. The sweep must keep it.
+   - **SURPRISE looks like:** flag cleared while the countdown is visible —
+     that is a FAIL of the sweep's liveness test; report immediately.
+
+**Trigger C — the wedge heals itself.** Drive a storm:
+`*r local d = Presets.MapSettings.Meteor["Meteor_High"] local p = GetRandomPassable(MainMap) CreateGameTimeThread(function() MeteorsDisaster(d, "storm", p) end)`
+Let it run to its wedge (validate-style stall after the last strikes; the
+duration notification eventually expires). While the storm is HEALTHY
+(notification visible), `SMRFixPack.StormWedgeCheck` must read
+`storm notification live (healthy)` — the watchdog must never touch a live
+storm. After the notification expires with the wedge in place:
+   - **EXPECTED:** within ~2 game hours, `MeteorStormWedge: WEDGE confirmed …
+     healing`, then either `released through the vanilla end path` (plus
+     Fix_DisasterPredictionLeak's `storm ended` line) or `forced storm state
+     clean`; the flag dump is clean afterwards; `g_MeteorStorm` reads false.
+   - **SURPRISE looks like:** `StormWedgeCheck` stuck on `signature armed`
+     forever, repeated heals (`restarts` climbing to give-up), or a healthy
+     storm getting cut short.
+
+**Trigger D — storms keep scheduling after a heal.** After Trigger C, confirm
+the scheduler is alive: `IsValidThread(MeteorStorm)` reads true, and over a
+long soak a NATURAL storm warning eventually appears (the pre-fix failure mode
+was: never again).
+
+**Trigger E — rains survive collisions.** On load expect
+`RainsDeadlock: … rain loop moved onto the bounded body` lines IF the save had
+live rain loops (zero lines is normal when the bands had no loops — e.g. after
+the manual 2026-07-29 recovery). Over the soak: rain must occur again within a
+few sols of a rain roll colliding with a warning window (pre-fix: that rain
+type died permanently). Cheap forced check: while any warning countdown is up,
+rains rolling during it must NOT kill later rains — watch for normal/toxic rain
+in the sols after the warning resolves.
+
+Log hygiene: no `[LUA ERROR]` mentioning `DisasterPredictionLeak`,
+`MeteorStormWedge`, `RainsDeadlock`, `RainsDisasterLoop` or `StormWedgeHeal`.
+
+`Result (A reconcile / B warning kept):` _____________________________________________
+
+`Result (C heal / D reschedule / E rains):` _____________________________________________
 
 ---
 

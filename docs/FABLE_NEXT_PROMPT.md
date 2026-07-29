@@ -3,8 +3,10 @@
 > ⚠️ **STALENESS BANNER (2026-07-29, later the same day — QA session).** Three
 > statements below are now WRONG; trust the pointed-to docs over this file:
 > 1. The QA review (`QA_REVIEW_PROMPT.md`) **has been fired and reported** —
->    verdict on the D06 entry in `BUGS.md`; Track A fix plan revised to an
->    additive/watchdog shape (no full replacement).
+>    verdict on the D06 entry in `BUGS.md`; the revised Track A plan is now
+>    **BUILT** (wave 6, 2026-07-29 late): `Fix_DisasterPredictionLeak`,
+>    `Fix_MeteorStormWedge`, `Fix_RainsDeadlock` — PT-54 is the live gate and
+>    an A/B RunAll pair is queued as the next session's pre-flight.
 > 2. The stress A/B **HAS RUN** (null result for the claim gate; metric flaw
 >    confirmed) — see D06 in `BUGS.md`; the instrument redesign is queued via
 >    `HARNESS_REVIEW_PROMPT.md`, which is the NEXT session to fire.

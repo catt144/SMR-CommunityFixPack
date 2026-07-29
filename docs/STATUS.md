@@ -1,15 +1,31 @@
 # Project Status — read this first in a new session
 
-Updated: **2026-07-29 (live disaster leg — see the section directly below):
-TWO P1 defects found. F81 CONFIRMED LIVE — a single stranded
-`g_DisastersPredicted` flag was gating the colony's ENTIRE weather system, and
-clearing it started rain instantly; the leak that strands it is UNCONDITIONAL
-(every completed meteor storm does it). F78 reproduced on demand and localized
-to the unbounded drain loop at `Meteors.lua:238-241`. F82 filed. Drone stress
-harness built (TestKit, local-only) — its A/B is UN-RUN and is the next
-session's centrepiece. D08 extender overhaul designed, nothing built.
-`QA_REVIEW_PROMPT.md` is queued for a fresh-context adversarial review before
-any of it is implemented.** Prior wrap: **2026-07-28 LATE (post-D07-build): D07 `Opt_CohortHousing` BUILT
+Updated: **2026-07-29 LATE (QA-review session + wave-6 build): the
+fresh-context QA review RAN and reported — every Track A/B claim verified at
+source, the fpk-divergence doctrine WITHDRAWN (full `Lua.fpk` extraction:
+2250/2256 files byte-identical to Src, build `1.0.7.396349` — see Key
+technical facts), and the Track A plan was revised to an additive/watchdog
+shape. That plan is now BUILT (user go, unattended leg): **F78 + F81 fixed** —
+`Fix_DisasterPredictionLeak` (additive MeteorStormEnded removal + PostLoadGame
+flag reconciliation), `Fix_MeteorStormWedge` (hourly wedge watchdog, heal via
+RestartGlobalGameTimeThread + guarded stop pulse), `Fix_RainsDeadlock`
+(bounded rains wait + persisted-loop refresh) — wave-6 probes in the TestKit
+(`55_Probes_Wave6.lua`), **PT-54 is the live gate and an A/B RunAll pair is
+QUEUED as the next session's pre-flight**. Track B decisions: claim gate
+kept-but-demoted; the overhaul will ship Mod Options STAT DIALS (speed
+×1.0/1.5/2.0, carry +0/+1/+2 — DECISION section in
+`DRONE_OVERHAUL_OPTIONS.md`); the user's colony was measured at the vanilla
+stat ceiling (2304 = +60% speed, 2× carry), so the structural choice (priority
+escalation vs D08 dispatcher) is gated on the request-lifecycle
+instrumentation — `HARNESS_REVIEW_PROMPT.md` is armed and is the next
+fresh-session fire.** Prior wrap: **2026-07-29 (live disaster leg — see the
+section directly below): TWO P1 defects found. F81 CONFIRMED LIVE — a single
+stranded `g_DisastersPredicted` flag was gating the colony's ENTIRE weather
+system, and clearing it started rain instantly; the leak that strands it is
+UNCONDITIONAL (every completed meteor storm does it). F78 reproduced on demand
+and localized to the unbounded drain loop at `Meteors.lua:238-241`. F82 filed.
+Drone stress harness built (TestKit, local-only) — its A/B has now RUN (null
+result; see D06). D08 extender overhaul designed, nothing built.** Prior wrap: **2026-07-28 LATE (post-D07-build): D07 `Opt_CohortHousing` BUILT
 (user-authorized unattended leg) with a FRESH A/B pair — 73 probes, baseline
 1/57/15/0 · all-six-toggles 63/0/10/0 (71/71) — plus PT-23 → F46 and PT-09 →
 F14 flips (twelve flips total on the day). See the "D07 build leg" section
