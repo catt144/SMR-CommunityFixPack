@@ -3037,7 +3037,65 @@ is found. Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
 
-### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); PT pending — attended, multi-iteration]`
+### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below]`
+**FIRST MEASURED A/B — PT-52 Trigger B2, 2026-07-29.** Controlled run on the
+user's live 9-hub colony: same quicksave reloaded between legs, identical seeded
+target set (`scope="overlap"`, `n=25`, `seed=1`), **both legs at NORMAL speed**,
+supply storages deliberately filled and spaced identically for both legs. Log
+flushed and kept.
+
+| Metric | Leg A (module OFF) | Leg B (module ACTIVE) | Δ |
+|---|---|---|---|
+| CLOSEST-HUB first claims | 8/25 (32%) | 10/25 (40%) | +2 buildings |
+| **work→first claim** — *the only leg the gate arbitrates* | **58m** | **57m** | **−1m** |
+| break→work (hauling; D06-exempt by design) | 3h03m | 2h05m | −58m |
+| total | 3h27m | 2h53m | −34m |
+| **`vetoed` delta** | +0 | **+1** | gate fired ONCE |
+| repaired | 24/25 (12h timeout) | 25/25 (6h) | — |
+| no-resource subset | **0 targets** | **0 targets** | — |
+| repair claims / 25 buildings | 26 | 27 | ~1 each |
+
+**Verdict: the claim gate did essentially nothing, and the run explains why.**
+It intervened exactly once across 25 simultaneous malfunctions, and the leg it
+can influence moved by one minute. A single veto cannot shift a mean by 34
+minutes, so the total-time difference lives in the leg D06 does not touch —
+i.e. it is colony variance, not treatment.
+
+**Root cause of the inertness, visible in the data:** `no-resource subset: 0` —
+every one of the 25 targets required a maintenance resource, so every one ran
+demand → delivery → work, and `MaintenanceDroneUnload` → `StartWorkPhase(drone)`
+(`RequiresMaintenance.lua:423,190`) hands the first repair tick straight to the
+**delivering** drone via `SetCommandKeepQueue`, **bypassing `FindTask`
+entirely**. The claim totals confirm it — 26 and 27 claims for 25 buildings, so
+the deliverer performed the whole repair. The near-uniform ~57m "work→claim" in
+BOTH legs is that handoff, not a race being won.
+**Consequence for the instrument:** the harness's headline metric is measuring
+**which hub delivered the resource**, not which hub won a repair claim. This was
+flagged as the top risk in `HARNESS_REVIEW_PROMPT.md` §2 before the run and is
+now confirmed empirically. The metric needs redesign before it can score the
+gate (candidates: sample `no_resource`-maintenance buildings and dust/clean work
+specifically; or instrument `TaskRequestHub:FindTask` outcomes directly rather
+than inferring from `Drone:Work`).
+
+**THE FINDING THAT MATTERS IS BIGGER THAN THE NULL RESULT.** Hauling is
+**3h03m of a 3h27m total — 88% of the elapsed time**, and D06 exempts hauling by
+design. This document's own escalation condition is therefore met: *"If the
+delivery leg dominates the pain, that is the H-v2/B iteration"* (see
+`DRONE_OVERHAUL_OPTIONS.md`). It also promotes **D08 layer 1 (the dispatcher)
+from speculation to evidence-backed**, because **registration determines which
+hubs can deliver** — so the dispatcher acts on the 88%, while the claim gate
+acts on a 12% slice that is already decided by the deliverer handoff.
+
+**Caveats, stated so this is not over-read:** n=25 with a single run per leg, so
+the +2 on closest-hub is well inside noise. Leg A contains one pathological
+outlier (`MartianUniversity:2895`, break→work 11h48m, never repaired, run timed
+out at 12h) which alone inflates its hauling mean — excluding it moves 3h03m to
+roughly 2h41m and shrinks the headline gap considerably. The legs also ended on
+different conditions (timeout vs all-repaired). **This run does NOT prove the
+module is useless** — it proves this test cannot measure it, and that the
+post-malfunction repair path it targets is mostly bypassed when maintenance
+requires resources. Dust/clean work and `no_resource` buildings were not sampled
+at all (0 of 25).
 The design defect behind the 2026-07-27 live report (four idle drones parked beside a
 malfunctioning building while a far hub serviced everything slowly): assignment is
 pull-only and own-hub-only, requests sit in every covering hub's queues, claims are

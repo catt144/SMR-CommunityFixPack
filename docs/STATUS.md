@@ -106,8 +106,21 @@ on the entries; this is the index.
   A/B owed): `SMRTest.Stress.Break/Targets/Report/Compare/HealAll/Stop`. Breaks a
   seeded deterministic set so the same save reloaded gives a true controlled A/B;
   captures every repair claim via a leaf-class pre-wrap on `Drone:Work` and
-  reports **closest-hub first claims %** as the headline. **The A/B itself is
-  still UN-RUN** — it is the next session's centrepiece.
+  reports **closest-hub first claims %** as the headline.
+- **THE A/B RAN (2026-07-29) — NULL RESULT for D06's claim gate, and it exposed
+  why.** Controlled: same quicksave reloaded, identical seeded set, both legs at
+  normal speed, storages equalised. With the module ON the gate intervened
+  **once** (`vetoed +1`) across 25 simultaneous malfunctions and the leg it
+  arbitrates moved **58m → 57m**; the 34m total gain sits in the **hauling** leg
+  D06 exempts by design, so it is variance. Cause: **0 of 25 targets were
+  `no_resource` maintenance**, so `MaintenanceDroneUnload` → `StartWorkPhase(drone)`
+  gave the first repair tick to the **delivering** drone every time, bypassing
+  `FindTask` — **the metric measured which hub DELIVERED, not which won a
+  claim** (the exact risk `HARNESS_REVIEW_PROMPT.md` §2 was written to catch).
+  **Bigger finding: hauling is 3h03m of a 3h27m total — 88% of elapsed time**,
+  which meets the options doc's own escalation condition and promotes D08's
+  dispatcher (registration determines who can deliver) from speculation to
+  evidence-backed. Full numbers and caveats on the D06 entry.
 - **PT-52 sitting 3: healthy under real load** — DroneReport taken right after a
   marsquake damaged several buildings: nine hubs, `unclaimed=0` on every one,
   all laps `low`, `vetoed=3 / veto_expired=0 / moonlighted=0`.

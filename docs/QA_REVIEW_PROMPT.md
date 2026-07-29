@@ -46,12 +46,29 @@ later disproved by test. Assume more are wrong.
   file here**; it has its own one-off prompt
   (`docs/HARNESS_REVIEW_PROMPT.md`) which runs before its first A/B, so that a
   flaw in the instrument is caught before its numbers are trusted.
-  **What matters for you:** if the A/B has already run by the time you read
-  this, ask the user for the `Compare()` output and reason from real numbers.
-  If it has not, several Track B open questions (queue bloat, polling cost,
-  whether the claim gate measurably changes closest-hub service) remain
-  speculation — say so explicitly in your verdict rather than guessing, and flag
-  which of your conclusions would change if the data came back either way.
+  **THE A/B HAS NOW RUN (2026-07-29) AND IT RETURNED A NULL RESULT FOR THE
+  CLAIM GATE.** Full numbers, analysis and caveats are on the **D06 entry** in
+  `docs/BUGS.md` — read that before forming any Track B opinion. Headline:
+  across 25 simultaneous malfunctions with the module ON, `vetoed` was **+1**
+  (it intervened once), the leg the gate arbitrates moved **58m → 57m**, and the
+  34-minute total-time gain sits entirely in the **hauling** leg that D06
+  exempts by design — i.e. variance, not treatment. The cause is visible in the
+  data: **0 of 25 targets were `no_resource` maintenance**, so
+  `MaintenanceDroneUnload` → `StartWorkPhase(drone)` handed the first repair
+  tick to the **delivering** drone every time, bypassing `FindTask`. **The
+  harness's headline metric was therefore measuring which hub DELIVERED, not
+  which hub won a claim.**
+  **What this means for your review — treat it as a live question, not settled:**
+  (a) is that interpretation correct, or is there a reading of the data we
+  missed? (b) **hauling was 3h03m of a 3h27m total — 88%** — does that make
+  D08's dispatcher (which changes registration, hence who can deliver) the
+  priority over anything touching the claim gate? (c) is D06's claim gate worth
+  keeping at all in its current form, given it appears nearly inert for
+  resource-requiring maintenance? (d) what SHOULD the metric be — sampling
+  `no_resource` buildings and dust/clean work, instrumenting
+  `TaskRequestHub:FindTask` outcomes directly, something else? Note the run's
+  own caveats: n=25, one run per leg, and a single pathological outlier in
+  leg A that inflates its hauling mean.
 - Do NOT trust this document's claims. It is a summary written by the session
   that made the mistakes.
 
