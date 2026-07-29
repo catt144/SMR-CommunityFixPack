@@ -317,3 +317,221 @@ machinery in the game — hubs, rovers, and the rocket cargo path (F50/F68/F70/F
 run through these queues. Whatever subset is approved must re-pass the F50
 rocket-churn and F55 unreachable scenarios, plus a new probe set (moonlight
 claim/execute, migration hysteresis) in the A/B harness before it ships.
+
+---
+
+# D08 — Drone Hub Extender overhaul + Command Center (2026-07-29 design session, game-free)
+
+Origin: the user observed live that **Drone Hub Extenders make the D06 problem
+worse, not better** — a large base ends up with overlapping-upon-overlapping
+unadjustable coverage blobs. This section is the full design record of that
+session. **Nothing here is built. Every layer is a user decision.**
+
+## The foundational constraint — the leash
+
+**Drone service is a DISTANCE relation, not a connectivity relation.**
+`Drone:RestrictArea(const.DroneRestrictRadius, command_center_pos)`
+(`Lua\Units\Drone.lua:227-231`) is a hard engine-level movement restriction: a
+drone physically cannot leave a circle centred on its own hub. Jobs therefore
+**cannot be relayed** — you can pass a job's *description* any distance, but the
+worker that must fly there is chained to its hub.
+
+Consequence, and the single most important thing in this section: **any scheme
+that propagates work along a topology (a "mesh"/relay of extenders and hubs) can
+manufacture registrations that no drone can legally serve.** The correct
+candidate set for "which hubs could serve this building" is a one-line geometric
+test, not a graph walk:
+
+```
+GetDist2D(hub, building) <= const.DroneRestrictRadius
+```
+
+A graph walk is strictly worse: it produces false positives (candidates too far
+to serve — the exact blind spot described below) and false negatives (hubs
+geometrically in range but not "connected"). **Do not re-propose job relaying.**
+
+## Verified facts this design rests on (all read 2026-07-29)
+
+| Fact | Source |
+|---|---|
+| `work_radius` is a **modifiable** property on `DroneNode`, default `CommandCenterDefaultRadius` | `DroneControl.lua:40` |
+| Hub range slider is UI-only, `min=CommandCenterMinRadius`, **`max=CommandCenterDefaultRadius`** — you can only ever SHRINK below default | `DroneControl.lua:76` |
+| `CommandCenterDefaultRadius = 35`, `CommandCenterMaxRadius = 50`, `CommandCenterMinRadius = 5`, `SignalBoostersBuff = 15` (35+15 = exactly the 50 ceiling) | `_GameConst.lua:62-64,72` |
+| `DroneRestrictRadius = CommandCenterMaxRadius * 2 * GridSpacing` — travel cap is *derived* as 2× the coverage ceiling | `_GameConst.lua:71` |
+| Extender inherits the same default radius (template overrides nothing) | `BuildingTemplate\DroneHubExtender.generated.lua` |
+| `FindTaskRequesters(node)` = requesters in the node's radius **plus recursively** every working linked extender's | `DroneControl.lua:315-324` |
+| An extender must be placed **inside its uplink's radius** — coverage is already contiguous | `DroneHubExtender.lua:66` |
+| `extender:GetCommandCenter()` hard-returns **the uplink's** hub | `DroneHubExtender.lua:156-160` |
+| `TaskRequester.command_centers` is a **LIST** — buildings already register to every covering node's centre | `_TaskRequest.lua:266-278` |
+| Buildings inside a dome inherit the dome's centres and **return early** — no own node search | `_TaskRequest.lua:266-271` |
+| `DroneControl:ReconnectTaskRequesters` exists — vanilla rebuilds registrations routinely | `DroneControl.lua:779-785` |
+| `CalcLapTime()` = time for one pass over the hub's queue; vanilla classifies it against `DroneLoadLowThreshold` (h/3), `DroneLoadMediumThreshold` (3h), and warns via `UpdateHeavyLoadNotification` after `DroneLoadMediumThresholdNotification` (6h) sustained | `DroneControl.lua:955-971`, `_GameConst.lua:83-85` |
+| `UseDronePrefab(bulk)` / `ConvertDroneToPrefab(bulk)` are the +/- actions; `bulk` truthy = 5. UI calls them **DIRECTLY — no NetSyncEvent, no cheat gate** | `DroneControl.lua:825,861`; `Data\XDef\CommandCenterTransportationOverviewRow.lua:159,167,225,233` |
+| A vanilla **Command Center → Transportation** overview already lists hubs as rows **with the +/- buttons wired in** | `Data\XDef\CommandCenterTransportationOverview(Row).lua` |
+| Command Center graph sections are a plain **Lua table built by a function** (ids `colonists`/`transportation`/`buildings`) — wrappable in pure Lua | `Lua\X\ColonyControlCenter.lua:10-65` |
+
+## The defect being fixed
+
+Every building under an extender is registered to **exactly one hub, arbitrarily
+far away** (`GetCommandCenter` → uplink). That is precisely the pathology D06
+exists to fight, manufactured by design.
+
+Worse: D06's `closest_covering_hub` excludes hubs beyond `DroneRestrictRadius`
+of the building, so a building covered only via a long extender chain can have
+**no legal covering hub at all** in the module's view — the claim gate abstains
+entirely and vanilla's race decides. Extenders don't merely cause far-fleet
+claims; they create a blind spot in the existing fix.
+
+**And the claim gate can only WITHHOLD work from a far hub — it cannot GIVE it to
+a near hub that isn't registered.** Under an extender the near hub usually isn't
+registered, so vetoing accomplishes nothing and the job just waits. Moonlighting
+is the only escape and only fires when the neighbour is fully saturated — which
+is why live reports keep showing `moonlighted=0`. **Awareness and eligibility
+must widen together, or a wider veto starves the building.**
+
+## Layer 1 — Dispatcher (recommended first)
+
+Extender-covered requesters register to **every hub within legal drone reach**,
+not just the uplink. Then D06's existing claim gate arbitrates by distance and
+idle state — no new scoring system.
+
+- **Implementation:** chained wrapper on `TaskRequester:ConnectTaskRequesters`;
+  when a covering node is an extender, add the geometric candidate set instead
+  of only `node:GetCommandCenter()`.
+- **Why it's small:** many-to-many registration is already stock vanilla; the
+  extender is the *only* node type that collapses to one hub.
+- **Save risk: none.** Every added entry references an existing vanilla hub
+  object. No new class, no new GameVar, no new persisted property. Worst case
+  after uninstall is over-registration, which self-heals on the next
+  `ReconnectTaskRequesters` (hub toggle, extender flap, radius change,
+  nearby placement).
+- **Risks to test:** queue bloat (live hubs already show `p2:261`) and the
+  per-`FindTask` polling cost; the dome early-return path; `auto_connect` and
+  `ConstructionSite` special-casing in `DroneControl:ConnectTaskRequesters`;
+  `are_requesters_connected` guard semantics. Debounce rebuilds using the F77
+  pattern.
+
+## Layer 2 — Cluster scoping (the user's "mesh", correctly scoped)
+
+The mesh is **wrong for transporting jobs** (see the leash) but **right as a
+player-authored grouping**: candidate set = `within drone reach AND in the same
+extender-linked cluster`. Strictly a subset of the geometric set, so it can never
+create an unservable assignment, and it gives the player a scope control the base
+game has no concept of — "these hubs are one logistics zone, those are another."
+This is the "cross-dispatch without cross-contamination" half of the idea.
+Save risk: none (runtime only).
+
+## Layer 3 — Adjustable extender radius (the user's original proposal)
+
+Extenders stop projecting their own fixed blob; an extender in range of a hub
+raises that hub's **user-assignable maximum** instead. Player regains control,
+overlap becomes chosen rather than forced, and multiple hubs can benefit from one
+extender (gated by having to be in its range).
+
+- **Numbers:** hub 50 (with SignalBoosters) + extender 35 = 85 combined. That is
+  **inside** the 100-hex travel cap, so nothing breaks structurally — but it is
+  70% past the engine's own coverage ceiling of 50, and the cost lands as **lap
+  time**, which `DroneReport` already measures. Consider capping the combined max
+  (50? 65?) once lap data exists. User's stated intent: mostly ~75%, occasional
+  temporary max for a niche corner during terraforming.
+- **Counter-argument on record:** today's extender gives *directional* reach; a
+  concentric boost must cover everything at that distance in all directions, so
+  raw overlap could rise. The rebuttal is that overlap becomes *chosen*.
+- **Costs:** the slider max is class-level property metadata → patch at
+  `ClassesPostprocess` and clamp per-hub. **This is the only layer with save
+  residue:** modifiers are stored on the object, so an uninstall leaves hubs
+  permanently boosted. Must clear on toggle-off. Radius changes also trigger
+  re-registration → F77 debounce.
+
+## Layer 4 — Command Center drone tab (recommended second; zero save risk)
+
+A **dedicated tab**, not columns bolted onto Transportation — that tab already
+carries rockets, trains, rovers and shuttle hubs, and a robust drone view would
+swamp it. A separate tab is also **safer**: editing the vanilla row means a game
+patch or another UI mod can break us inside a screen used for other things,
+whereas our own template fails in isolation and deactivates via the standard
+apply-time self-check.
+
+Contents: per-hub rows (fleet size, avg lap over the last sol, idle %, suggested
+range, unclaimed, bottleneck rank), extender/cluster topology, the module
+counters (`vetoed / veto_expired / moonlighted`), colony prefab pool, and the
++/- actions inline so advice is one click from action.
+
+### 4a — Drone-count advisory (high value, cheap)
+
+**Vanilla already tells you when you need MORE drones (`UpdateHeavyLoadNotification`)
+and has NO signal for having too many.** Fill the other half of a comparison the
+game already makes — so this reports against the game's own thresholds rather
+than inventing balance opinions (FIX_POLICY §4).
+
+- Sample per hub hourly: lap time, fleet size, idle count, unclaimed. Rolling
+  24-sample (one sol) window, **module-local and weak-keyed — runtime only, like
+  the existing counters**, so zero save impact. Show "sampling… N/24h" before it
+  is meaningful.
+- Mean lap far below `DroneLoadLowThreshold` + high idle → over-provisioned.
+  Mean at/above medium → under-provisioned, quantified. **Peak** lap over the
+  window drives build-out padding (construction is exempt from the claim gate =
+  pure extra demand).
+- `target ≈ current × (current_lap / target_lap)` is an approximation (travel
+  time doesn't scale linearly, there's a floor) → present a **range with the
+  inputs visible**, never a single authoritative number, never auto-act.
+- **Strategic value:** over-provisioning is how players *hide* dispatch problems.
+  This turns the overhaul into a bankable saving in prefabs and power — and is
+  the honest self-check: if nobody's suggested count ever drops after the
+  dispatcher ships, the dispatcher didn't work.
+
+## Layer 5 — "Drone Command Center" building (optional, last, gated on PT-20)
+
+User idea: a unique building that owns dispatch. **Feasible** — `items.lua`
+already ships `PlaceObj` mod items, a vanilla entity can be reused, no custom
+art. It would add a power cost, a real failure mode (malfunction/power loss
+degrades dispatch to vanilla — free, since hooks already gate per call on
+`IsActive`), and an in-world home.
+
+**It is the only layer with genuine save risk**: a placed object of a
+mod-defined class. On uninstall the class is gone — outcome unknown, ranging
+from "object dropped with log errors" to a load failure. **This is measurable,
+not arguable: PT-20 is exactly that test.** Mitigations: keep it a **leaf in the
+object graph** (nothing else stores a reference; look it up on demand), minimal
+persisted members, and graceful degradation while installed.
+
+**It adds no capability** — the module already has total global awareness
+(`DroneReport` walks every map, city, hub, extender and queue). The building is a
+*gate* and a *cost*, not an enabler. Note also that layer 4 delivers the "one
+place that shows everything, with bottlenecks and controls" experience with zero
+save risk, which is most of what the building was wanted for.
+
+## Risk table
+
+| Layer | Save risk | Notes |
+|---|---|---|
+| 1 Dispatcher | **none** | references to vanilla hubs only; self-heals |
+| 2 Cluster scoping | **none** | runtime only |
+| 4 Command Center tab + advisory | **none** | UI templates are not persisted; own template = isolated failure |
+| 3 Adjustable radius | **mild residue** | modifiers persist on the object; clear on toggle-off |
+| 5 Building | **real, testable** | mod-defined persisted class; PT-20 verdict decides |
+
+## Open questions — resolve BEFORE building
+
+1. **Is `command_centers` persisted, or rebuilt on load?** If rebuilt, layer 1's
+   residue is zero rather than merely harmless. Not verified — do not assume.
+2. Queue-size/perf impact of many-to-many registration on a 9-hub, 437-building
+   colony. Measure with the stress harness (`SMRTest.Stress`).
+3. Does the dome early-return path (`_TaskRequest.lua:266-271`) need the same
+   treatment, or is dome-inherited registration already correct?
+4. Combined-radius cap for layer 3 — pick from live lap data, not from theory.
+5. **Src vs shipped `Lua.fpk` divergence** — proven real this session
+   (`GetCameraLookAtPassable` exists in Src, does not exist at runtime). Every
+   layer needs an apply-time self-check against the *shipped* shape.
+
+## Recommended order
+
+1. **Dispatcher** — the actual behaviour win, near-zero risk, measurable with the
+   stress harness.
+2. **Command Center tab + advisory** — zero risk, delivers the framing the user
+   wants, and quantifies whether step 1 worked.
+3. **Cluster scoping** — once dispatch is proven and grouping is wanted.
+4. **Adjustable radius** — after dispatch stops being the bottleneck; the
+   pressure to grow radii should be lower by then.
+5. **Building** — only behind a PT-20 verdict, purely as gate + cost + failure
+   mode. Nothing from 1-4 is wasted if it is rejected.

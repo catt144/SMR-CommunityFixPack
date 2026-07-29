@@ -1,7 +1,36 @@
-# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (updated 2026-07-28 LATE, post-D07-build)
+# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (updated 2026-07-29, post-disaster-leg)
 
-**NEWEST FIRST (2026-07-28 late — read the "D07 build leg" STATUS section
-first):** **D07 `Opt_CohortHousing` is BUILT** (user confirmed the config
+**NEWEST FIRST (2026-07-29 — read the "Disaster-system leg" STATUS section
+first, then `docs/QA_REVIEW_PROMPT.md`).**
+
+**The session's headline: TWO P1 defects, one proven live end to end.**
+**F81** — a single stranded `g_DisastersPredicted["DisasterMeteorStorm"]` flag
+was gating the user's ENTIRE weather system for 194 sols; clearing it started
+rain within seconds. The leak that strands it is **unconditional** — only three
+code paths ever remove that notification and the normal completion path of
+`MeteorsDisaster` is not one of them, so **the first meteor storm on any map
+with storms enabled permanently kills that colony's cold waves and rains**.
+**F78** — reproduced on demand and localized to the unbounded drain loop at
+`Meteors.lua:238-241` (two meteors never go invalid, `#spawned` never hits 0).
+New hazard: **two storms wedged at once** and `g_MeteorStormStop` is a shared
+global, so any bound must be per-invocation. **F82** filed (split-grid
+notification lingers ~a sol). One confident theory (save/load stranding) was
+DISPROVED by test — recorded so it is not re-derived. Also proven: **Src ≠
+shipped `Lua.fpk`** (`GetCameraLookAtPassable` is absent at runtime), so treat
+Src-only reasoning as provisional and self-check everything at apply time.
+
+**THREE THINGS ARE QUEUED AND NONE ARE STARTED:**
+1. **`docs/QA_REVIEW_PROMPT.md`** — a one-off adversarial review prompt the user
+   intends to fire in a FRESH session to QA both tracks before anything is
+   implemented. **Do not implement the disaster or D08 fixes until that verdict
+   is in**, unless the user says otherwise.
+2. **The drone stress A/B is UN-RUN.** The harness is built
+   (`TestKit/Code/91_Stress.lua`, local-only) but the two legs have never been
+   executed. This is the natural centrepiece of the next live sitting.
+3. **D08** — the extender overhaul, five layers speced in
+   `DRONE_OVERHAUL_OPTIONS.md`, nothing built.
+
+**Prior state (2026-07-28 late):** **D07 `Opt_CohortHousing` is BUILT** (user confirmed the config
 AND gave the go the same evening; unattended leg while they were off-game):
 colonist/housing-level rule, zero persisted state — in-dome
 UpdateResidence pass, cross-dome FindEmigrationDome pass (nearest
@@ -124,6 +153,25 @@ silent.
 
 ## The board (user picks; suggested order)
 
+- **QA REVIEW — fire `docs/QA_REVIEW_PROMPT.md` in a FRESH session.** The user's
+  stated plan: a fresh-context adversarial pass over the 2026-07-29 disaster
+  findings AND the D08 design, hunting hidden dangers and better approaches,
+  reporting a finalized plan before implementation. Everything below in the
+  disaster/D08 space is gated on it.
+- **PT-52 STRESS A/B — built, never run.** Quicksave → `SMRTest.Stress.Targets`
+  dry run → D06 OFF → `Break{scope="overlap", n=25, seed=1}` → reload → D06 ON →
+  same call → `Compare()`. Headline metric is **closest-hub first claims %**;
+  do NOT read total clearance time as a D06 score (the hauling leg is untouched
+  — see the checklist's stress-harness notes). Reload-based protocols do NOT
+  re-poison a save (tested).
+- **F81 / F78 disaster fixes — speced, not built, QA-gated.** Package and the
+  open dangers are in STATUS "Waiting on the user" item 10. Live recovery for a
+  poisoned save meanwhile:
+  `*r for k, v in pairs(g_DisastersPredicted) do ConsolePrint(tostring(k) .. " = " .. tostring(v)) end`
+  then `RemoveDisasterNotifications("<stale id>", MainMap)`; a wedged storm
+  clears with `*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end`.
+- **F82** — split-grid notification lingers ~a sol; machinery located, updater
+  cadence still to trace (own entry).
 - **PT-53 — D07 `Opt_CohortHousing`, NEW (attended, first enable).** The
   checklist section has the full procedure: five triggers (in-dome move +
   employed exemption, cross-dome move, leave-alone/no-churn, graduation
@@ -303,6 +351,9 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   the four opt-ins active (then expect 62/0/10/0-style shifts and document).
   Simplest: run legs with the toggles as-is and compare against the matching
   expectation.
+- **TestKit gained `Code/91_Stress.lua` (2026-07-29, local commit)** — the drone
+  stress harness. It registers NO probes (function definitions only, inert at
+  load), so **expected numbers below are unchanged** and no A/B pair was owed.
 - **Expected numbers (current, 73 probes — none for D06/F77 yet; D07 has
   one, SKIPs unless its toggle is on):** baseline 1 PASS / 57 FAIL /
   15 SKIP / 0 ERROR; fixed default 58/0/15/0 (**65/71 active** — the six

@@ -2672,6 +2672,29 @@ whatever survives.
 ENTER *and* EXIT (the single path completes cleanly, matching the healthy
 scheduler), and the spawn loop terminated normally at 73 — killing the
 unbounded-spawn hypothesis.
+**TWO STORMS WERE WEDGED AT ONCE — and `g_MeteorStormStop` is a SHARED GLOBAL
+(2026-07-29, observed live; this constrains any fix).** Setting
+`g_MeteorStormStop = true` once released ONE thread (`EndFX` printed) while the
+`validate n=2` traffic kept climbing; a `*g` loop pulsing the flag ten times
+released a SECOND (`EndFX` **and** `EXIT`), after which validate traffic stopped
+completely. So the user-triggered storm and a natural scheduled storm (the
+"Meteor Storm 8h → 1h" countdown seen earlier the same sitting) were both stuck
+in the drain loop simultaneously. Because `Meteors.lua:242` resets
+`g_MeteorStormStop = false` immediately after the loop, **the first thread to
+wake consumes the stop signal** and any concurrent storm keeps spinning.
+**Consequences for the repair:** (a) the drain-loop bound must be
+**per-invocation** (a local deadline), never a shared global; (b) the fix must
+assume concurrent storms are possible rather than treating one storm as a
+singleton; (c) `g_MeteorStorm` / `g_MeteorStormStop` are both process-global
+state that concurrent invocations trample — worth auditing every other consumer
+before replacing the function. The stop-flag pulse also doubles as the **live
+recovery** for a wedged storm:
+`*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end`.
+**Side finding, resolved:** the first released thread printed `EndFX` with no
+`EXIT`, which briefly looked like a second wedge inside
+`Msg("MeteorStormEnded")`. The second thread printed `EndFX` **and** `EXIT`
+back-to-back, so `Msg` does NOT block — the missing line was lost in the
+validate spam. No defect there.
 **Tooling fact worth keeping:** `GetCameraLookAtPassable` **does not exist at
 runtime** — `CheatMeteors` calls it at `Cheats.lua:63` in Src, so a bare
 `CheatMeteors("storm")` silently no-ops (the body is `if pos then … end` with

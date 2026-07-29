@@ -134,7 +134,7 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatUpdateAllWorkplaces()` | `Lua/Cheats.lua:210` | re-run job assignment now |
 | `CheatToggleAllShifts()` | `Lua/Cheats.lua:192` | open/close every shift |
 | `CheatToggleInfopanelCheats()` | `Lua/Cheats.lua:290` | shows per-building cheat buttons — ⚠️ **on retail the buttons render but silently NO-OP** (they dispatch `NetSyncEvents.ObjCheat`, gated `AreCheatsEnabled()`, `Network.lua:218-219`; found live 2026-07-27). Either run `Platform.cheats = true` first (buttons work; set false after), or skip the panel and call the method directly on the selection: `SelectedObj:CheatMalfunction()` / `CheatAddMaintenancePnts()` / `CheatCleanAndFix()` (`Building.lua:1813-1849`). Second gotcha (2026-07-27): button presses ride the game-time sync queue (`ScheduleOfflineSyncEvent`) — they look DEAD while the game is paused and fire on unpause; the `ObjCheat <method>` console print confirms delivery |
-| `CheatMeteors("single"\|"multispawn"\|"storm", setting, pos)` | `Lua/Cheats.lua:62` | meteor strike at the camera look-at |
+| `CheatMeteors("single"\|"multispawn"\|"storm", setting, pos)` | `Lua/Cheats.lua:62` | meteor strike. ⚠️ **CORRECTED 2026-07-29 (live):** with no explicit `pos` it silently does NOTHING — the Src body calls `GetCameraLookAtPassable()` (`Cheats.lua:63`), and **that global does not exist at runtime** (console: `attempt to call a nil value`), leaving `pos` nil inside an `if pos then … end` with no else. The shipped `Lua.fpk` differs from Src here — the clearest proof yet that Src is not the shipping build. **Always pass a position**, or drive the disaster directly: `*r local d = Presets.MapSettings.Meteor["Meteor_High"] local p = GetRandomPassable(MainMap) CreateGameTimeThread(function() MeteorsDisaster(d, "storm", p) end)`. Note `"storm"` reliably WEDGES (F78) — recover with `*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end` |
 | `CheatTriggerMarsquake(settings_name)` | `Lua/Marsquake.lua:223` | surface quake |
 | `CheatTriggerUndergroundMarsquake()` | `Lua/Marsquake.lua:292` | underground quake (**bypasses** the scheduler — see PT-11) |
 | `CheatTriggerUndergroundCaveIn(pos)` | `Lua/Marsquake.lua:284` | cave-in at a position |
@@ -177,6 +177,36 @@ with `ConsoleSetEnabled(true)` + `ReloadShortcuts()`.)
 | `SMRTest.ReportTrains` | stored train prefabs vs trains on the map — **PT-21** |
 | `SMRTest.RunAll` | re-run the whole probe suite (sanity check before/after a session) |
 | `SMRFixPack.ListFixes` | confirm all 30 fixes report `applied` (`Code/00_Core.lua:56`) |
+
+**Drone dispatch STRESS HARNESS** (`Code/91_Stress.lua`, added 2026-07-29 — turns
+PT-52 from watch-and-judge into a measured A/B). Breaks a **deterministic**
+seeded set of buildings and records, per building and per claim, which hub's
+drone answered and how long each leg took. Reload the same save, flip the D06
+toggle, run the identical call, and the two legs cover the identical targets.
+
+| Call | What it does |
+|---|---|
+| `SMRTest.Stress.Targets{scope=, n=, seed=}` | dry run — what WOULD be broken, breaks nothing |
+| `SMRTest.Stress.Break{scope=, n=, seed=}` | break the set and start watching (defaults `scope="overlap"`, `n=25`, `seed=1`) |
+| `SMRTest.Stress.Report()` | current or last summary (also prints itself when a run ends) |
+| `SMRTest.Stress.Compare()` | last two runs side by side — **the A/B verdict** |
+| `SMRTest.Stress.HealAll()` | panic button: repair everything, end the run |
+| `SMRTest.Stress.Stop()` | end early, keep the numbers |
+
+Scopes: `overlap` (default — only buildings covered by 2+ hubs, the population
+the claim gate arbitrates), `hub` (selected hub's coverage), `dome`, `radius`,
+`all`. Protected classes are never broken unless `include_all = true`: drone
+hubs AND extenders (never break the system under test), domes, life support,
+power. Buildings with no covering hub are counted and skipped.
+
+**Reading the report — the headline metric is CLOSEST-HUB first claims (%).**
+The total clearance time is NOT a D06 score: a malfunction runs two legs, and a
+drone must first HAUL the maintenance resource in (untouched by D06) before the
+repair work request opens. The report splits `break→work` (untouched) from
+`work→first claim` (the leg the gate arbitrates). `MaintenanceDroneUnload` also
+hands the first repair tick straight to the *delivering* drone, bypassing
+`FindTask` — so `no_resource`-maintenance buildings are counted separately as
+the purest signal.
 
 Turn loggers **off** when a test is done — they print every tick and will bury the log.
 

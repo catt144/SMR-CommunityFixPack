@@ -1,6 +1,15 @@
 # Project Status — read this first in a new session
 
-Updated: **2026-07-28 LATE (post-D07-build): D07 `Opt_CohortHousing` BUILT
+Updated: **2026-07-29 (live disaster leg — see the section directly below):
+TWO P1 defects found. F81 CONFIRMED LIVE — a single stranded
+`g_DisastersPredicted` flag was gating the colony's ENTIRE weather system, and
+clearing it started rain instantly; the leak that strands it is UNCONDITIONAL
+(every completed meteor storm does it). F78 reproduced on demand and localized
+to the unbounded drain loop at `Meteors.lua:238-241`. F82 filed. Drone stress
+harness built (TestKit, local-only) — its A/B is UN-RUN and is the next
+session's centrepiece. D08 extender overhaul designed, nothing built.
+`QA_REVIEW_PROMPT.md` is queued for a fresh-context adversarial review before
+any of it is implemented.** Prior wrap: **2026-07-28 LATE (post-D07-build): D07 `Opt_CohortHousing` BUILT
 (user-authorized unattended leg) with a FRESH A/B pair — 73 probes, baseline
 1/57/15/0 · all-six-toggles 63/0/10/0 (71/71) — plus PT-23 → F46 and PT-09 →
 F14 flips (twelve flips total on the day). See the "D07 build leg" section
@@ -56,6 +65,57 @@ serve-services, confirmed; F80 trains-skip-waiting-passengers,
 investigating).**
 Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
+
+## Disaster-system leg + drone stress harness + D08 design — 2026-07-29 (live, the project's biggest single-defect find)
+
+One long attended session. **Two P1 defects found and one of them proven live,
+end to end, with the recovery demonstrated on the user's save.** Full forensics
+on the entries; this is the index.
+
+- **F81 CONFIRMED LIVE (P1) — one stranded prediction flag was gating the
+  colony's entire weather system.** `g_DisastersPredicted["DisasterMeteorStorm"]`
+  sat `true` with no storm running; `IsDisasterPredicted()` therefore blocked
+  rains (early-return in `RainsDisasterActivation`) and starved dust storms and
+  cold waves (both scheduler loops push `wait_time` forward while it is true).
+  `RemoveDisasterNotifications("DisasterMeteorStorm", MainMap)` → **rain started
+  immediately**, then a toxic-rain warning, then a marsquake. 194 sols of "no
+  weather ever" explained and fixed by one console line.
+- **The leak is UNCONDITIONAL (grep-verified):** only three code paths ever
+  remove that notification, and **the normal completion path of `MeteorsDisaster`
+  is not one of them** (`Meteors.lua:242-251`). So on any map with storms
+  enabled, the FIRST storm — wedged or perfectly healthy — permanently kills that
+  colony's cold waves and rains. Highest-impact finding the project has made.
+- **F78 REPRODUCED ON DEMAND AND LOCALIZED TO THREE LINES.** The stall is the
+  unbounded drain loop `Meteors.lua:238-241`: `table.validate` works (73
+  descriptors → 2) but two meteors never go invalid, so `#spawned` never reaches
+  0. Hypothesis 1 was half right — not un-exitable, just unbounded. Controls:
+  `single` completes cleanly; the spawn loop terminates normally.
+- **New hazard for the repair: TWO storms wedged simultaneously**, and
+  `g_MeteorStormStop` is a **shared global** consumed by whichever thread wakes
+  first. Any bound must be per-invocation, and the fix must assume concurrency.
+- **One confident theory DISPROVED by test** — we predicted a save/load inside a
+  warning window would strand the flag; it does not (notification and thread both
+  survive). `SavegameFixups.*` is a one-time legacy migration, not routine load
+  behaviour. Recorded on the entry so it is not re-derived.
+- **F82 filed (P3):** split power/life-support grid notification lingers ~a sol
+  after the grid is rejoined; machinery located, updater cadence still to trace.
+- **Src ≠ shipped `Lua.fpk`, proven:** `GetCameraLookAtPassable` exists in Src and
+  **not at runtime**, which is why bare `CheatMeteors("storm")` silently no-ops.
+  Command table corrected. Treat all Src-only reasoning as provisional.
+- **Drone stress harness BUILT** (`TestKit/Code/91_Stress.lua`, local-only, no
+  A/B owed): `SMRTest.Stress.Break/Targets/Report/Compare/HealAll/Stop`. Breaks a
+  seeded deterministic set so the same save reloaded gives a true controlled A/B;
+  captures every repair claim via a leaf-class pre-wrap on `Drone:Work` and
+  reports **closest-hub first claims %** as the headline. **The A/B itself is
+  still UN-RUN** — it is the next session's centrepiece.
+- **PT-52 sitting 3: healthy under real load** — DroneReport taken right after a
+  marsquake damaged several buildings: nine hubs, `unclaimed=0` on every one,
+  all laps `low`, `vetoed=3 / veto_expired=0 / moonlighted=0`.
+- **D08 designed** (`DRONE_OVERHAUL_OPTIONS.md`) — extender overhaul in five
+  layers with a risk table and five open questions. Origin: the user's live
+  observation that extenders make the D06 problem worse. Nothing built.
+- **`QA_REVIEW_PROMPT.md` written** — a one-off adversarial review prompt for a
+  fresh session to QA both tracks before anything is implemented.
 
 ## D07 build leg + two more flips — Fable, 2026-07-28 late (mixed live/game-free)
 
@@ -1359,6 +1419,12 @@ live construction controllers inside a post-wrapper on `Activate`.
   console status.
 - All line numbers reference `ModTools\Src`; the game executes `Packs\Lua.fpk`
   (slightly newer date) — runtime self-checks in apply() are the guard.
+  **PROVEN DIVERGENT 2026-07-29, not just theoretically:** `CheatMeteors` in Src
+  calls `GetCameraLookAtPassable()` (`Cheats.lua:63`) and **that global does not
+  exist at runtime** — the console returns `attempt to call a nil value`, so the
+  shipped `CheatMeteors` is a different function body. Consequence: a bare
+  `CheatMeteors("storm")` silently no-ops (`if pos then … end`, no else). Treat
+  every Src-only conclusion as provisional and self-check the SHIPPED shape.
   `GatherTransportableResources` (`ResourceTracking.lua:216`) is *called* but
   defined nowhere in Src — an engine export or an fpk-only function. F12's fix
   checks for it at apply time.
@@ -1512,14 +1578,21 @@ that "passed" or SKIPped were not testing what they claimed.
 7. A donated save that researched **Frictionless Composites before the game patched the
    tech** is the only true fixture for the F35 sanitizer pass (PT-35 case C). Everything
    else about that pass is probe-covered.
-10. **OPEN (2026-07-29): the F81 decision** — the rains disaster loop deadlocks
-   permanently on an untimed `WaitMsg` the first time a rain roll collides with
-   any active or predicted disaster (fully traced, static; explains the
-   never-any-toxic-rain half of the F78 report). Fix = replace the global
-   `RainsDisasterLoop` with a bounded wait + a one-shot LoadGame pass that
-   recreates already-wedged activation threads. P1 for anyone terraforming.
-   Build it, or leave it documented? (`CheatRainsDisaster` is a live workaround
-   that also un-wedges the loop.)
+10. **OPEN (2026-07-29): the F81/F78 disaster fix — scope decision.** F81 is
+   CONFIRMED LIVE and the leak is unconditional (every completed meteor storm
+   strands the flag and kills that colony's weather). Proposed package:
+   (a) replace the global `MeteorsDisaster` with a **per-invocation** bounded
+   drain loop + guaranteed notification removal on every exit path; (b) a
+   one-shot `OnMsg.LoadGame` reconciliation clearing stranded predicted flags,
+   which is what heals saves already poisoned; (c) a bounded `WaitMsg` in
+   `RainsDisasterLoop`. **Gated on the `QA_REVIEW_PROMPT.md` review** — the open
+   danger is how to distinguish a stranded flag from a legitimate warning in (b)
+   without suppressing a real disaster warning, plus whether a watchdog (F02
+   precedent) beats a full-body replacement that rots on game patches.
+11. **OPEN (2026-07-29): D08 — the extender overhaul**, five layers speced in
+   `DRONE_OVERHAUL_OPTIONS.md` with a risk table. Recommended order is
+   dispatcher → Command Center tab + advisory → cluster scoping → adjustable
+   radius → building (last, gated on PT-20). Also gated on the QA review.
 9. **OPEN (2026-07-28): the F79 decision** — trains never carry service seekers
    (confirmed vanilla gap, entry has the fix sketch). Feature-completion D-item or
    leave as documented vanilla behavior? This is the only decision currently owed.
