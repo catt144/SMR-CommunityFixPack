@@ -107,6 +107,15 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 from live observation; notification machinery located, updater cadence still to trace (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
+| C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
+| C04 | Surface dust storms damage underground pipes (cross-map leak) | ? | cand | investigate |
+| C05 | Colonists repeatedly visit already-satisfied interest buildings | ? | cand | investigate |
+| C06 | Colonist assigned to multiple workplaces simultaneously  | ?   | cand | investigate |
+| C07 | Manual workplace assignment immediately discarded        | ?   | cand | investigate |
+| C08 | Rare-metal extractor smokes forever after refab          | ?   | cand | investigate |
+| C09 | Deterministic freeze near 90% breathable atmosphere      | ?   | cand | investigate (HIGH) |
+| C10 | Last War mystery freezes at 54%; permanently blocks ALL imports | ? | cand | investigate (HIGH) |
+| C11 | Game stops saving entirely (auto + manual)               | ?   | cand | needs a player log/save (HIGH) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -1403,7 +1412,7 @@ F50/F68/F70/F71 request path). Shipping them separately would let a player enabl
 behaviour and get a colony where rockets are emptied but never refilled. So this rides on
 whatever design decision D01's export half eventually gets — same module, same opt-in flag,
 same playtest — or it stays closed.
-*Origin note:* the player report behind this entry is recorded in `RESEARCH.md` as
+*Origin note:* the player report behind this entry is recorded in `docs/archive/RESEARCH.md` as
 "**Drones** ignore rocket cargo even at high priority; RC Transports don't auto-offload
 rockets". The drone half is the load-bearing complaint and is already addressed by F50.
 *What screening DID find:* three rocket tests in the same file were never converted to the
@@ -2386,7 +2395,7 @@ updated to name both families and only this one was missed: `:314`, `:421`, `:73
 Player-visible: the RC Transport load/unload cursor accepts an event rocket, so cargo can
 be pushed into or pulled out of a rocket with no player cargo bookkeeping. Matches the
 Relaunched report "rival colony rockets glitch permanently if refilled from RC Transport
-(1.07)" in `RESEARCH.md`.
+(1.07)" in `docs/archive/RESEARCH.md`.
 
 **Fix:** pre-wrappers (FIX_POLICY §1.4) on `CanInteractWithObject` and — belt-and-braces —
 `InteractWithObject`, restating the shipped rule for the Relaunched class names before
@@ -3398,6 +3407,43 @@ markers/planetary anomalies consume the order; whether reshuffle causes duplicat
 breakthroughs. Surface call also `DoneObject`s markers (planetary reservation :667-674,
 excess :676-681).
 
+### C03–C11 — leads promoted from RESEARCH.md before its archiving (2026-07-29, audit remediation 3.4)
+
+None are source-verified yet; each needs its own sweep before any becomes an
+F-row. Provenance and the fuller lead lists live in
+`docs/archive/RESEARCH.md`.
+
+- **C03 — Research screen softlock; research progress >100%.** From the
+  ChatGPT dossier. 1.0.5 patch notes claimed fixes in this area — regression-
+  check the current source (the project's other "patch notes said fixed"
+  collisions all turned out real).
+- **C04 — Surface dust storms damage underground pipes.** Cross-map disaster
+  leak: a surface disaster's damage pass reaching objects on the underground
+  map. Sweep the dust-storm damage iteration for a map filter.
+- **C05 — Colonists repeatedly visit already-satisfied interest buildings.**
+  ChoGGi fixed this class in the original game — check whether the interest-
+  satisfaction check survived into Relaunched.
+- **C06 — Colonist assigned to multiple workplaces simultaneously.**
+  Tremualin's original-game fix is prior art; sweep the workplace-assignment
+  transaction for a missing un-assign.
+- **C07 — Manual workplace assignment immediately discarded.** The
+  auto-assignment pass may not respect a fresh `user_forced_workplace`; same
+  family as the F61 forced-residence precedence work.
+- **C08 — Rare-metal extractor smokes forever after refab.** Old ChoGGi note;
+  dossier says still reported post-1.0.7. FX stop pass on refab.
+- **C09 — Deterministic freeze near 90% breathable atmosphere (HIGH).**
+  Reproduces at the same point across reloads — smells like an infinite loop
+  in a game-time thread on a terraforming-threshold crossing (Open Domes /
+  breathability transition, `OpenAirBuilding.lua` skin swaps, rainfall).
+- **C10 — Last War mystery freezes at 54%, permanently blocking ALL imports
+  (HIGH).** Same one-shot-Msg hang class as F06/Crystals: the mystery
+  presumably disables resupply during a sequence and hangs before re-enabling.
+  Sweep the Last War sequence files for import-lock set/clear pairing.
+- **C11 — Game stops saving entirely, auto + manual (HIGH).** Classic symptom
+  of a Lua error during savegame persistence (one unpersistable object aborts
+  the save). Cross-check against the pack's corruption-leaving families (F03,
+  F30, F45); needs a player log/save to pin.
+
 ## Not yet swept (follow-up targets)
 
 - `Lua\Buildings\DroneControl.lua`, `ShuttleHub.lua` — drone/shuttle task assignment.
@@ -3614,7 +3660,7 @@ excess :676-681).
   targeted label/template check, do early.
 - Inspiring Architecture freeze (also in original); `RandomMap\`; `Construction\`
   beyond F-items; UI XTemplate layout (misaligned buttons — cosmetic).
-- Remaster player-report list (see `docs/RESEARCH.md`) — several reports not yet mapped
+- Remaster player-report list (see `docs/archive/RESEARCH.md`) — several reports not yet mapped
   to code: seniors not auto-moving to retirement homes, mysteries not starting
   (Inner Light), no cold waves/dust storms triggering, asteroid lander launching empty,
   auto asteroid miners missing from build menu, Martian Express track salvage issues,

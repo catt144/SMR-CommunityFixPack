@@ -175,6 +175,23 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `OpenCommandCenter()` / `CloseCommandCenter()` | `Lua/X/ColonyControlCenter.lua:1614` / `:1630` | Command Center UI |
 | `SetGameSpeedState("ultra")` | `Lua/X/HUD.lua:528` | 20× (`const.ultraGameSpeed = 20`, `Lua/_GameConst.lua:28`) |
 | `UIColony:SetGameSpeed(n)` | `Lua/Colony.lua:564` | arbitrary factor; `n = 20` == ultra. Higher values work (clamped at `const.MaxTimeFactor`) but stress the sim — prefer 20 |
+| `CheatRemoveAllFunding()` | `Lua/Cheats.lua:144` | zero the funding (poverty setups) |
+| `CheatUnlockAllTech()` / `CheatUnlockAllBreakthroughs()` | `Lua/Cheats.lua:166` / `:281` | discovery only, no research points granted |
+| `CheatUnlockBreakthroughs()` | `Lua/Cheats.lua:264` | resolves every breakthrough anomaly on the map |
+| `CheatClearForcedWorkplaces()` | `Lua/Cheats.lua:214` | drops every `user_forced_workplace` |
+| `CheatDustDevil(major, setting)` | `Lua/Cheats.lua:47` | dust devil at the camera look-at |
+| `CheatFinishMystery(id)` | `Lua/Mysteries/Mysteries.lua:142` | complete the running mystery. Mystery class ids (from the DevMenu tree): `AIUprisingMystery`, `UnitedEarthMystery`, `DreamMystery`, `MarsgateMystery`, `MetatronMystery`, `CrystalsMystery` (Philosopher's Stone — F06), `MirrorSphereMystery` (F16), `LightsMystery` (St. Elmo's Fire — F07/F15), `DiggersMystery`, `BlackCubeMystery`, `TheMarsBug`. Starting a mystery while one runs auto-finishes the old one |
+| `CheatSpawnPlanetaryAnomalies()` / `CheatBatchSpawnPlanetaryAnomalies()` | `Lua/Cheats.lua:26` / `:38` | planetary anomalies (C01 material) |
+| `CheatChangeTerraformingParamPct(param, delta)` / `GetTerraformParamPct(param)` | `Lua/Cheats.lua:343` / `Lua/Terraforming.lua:219` | relative terraforming nudge / read-back |
+| `g_Consts.MarsquakeSpawnTime = 1` + `g_Consts.MarsquakeRandomTime = 1` | `Lua/Marsquake.lua` scheduler consts | compress the underground-quake schedule (PT-11 setup) |
+| DevMenu "Max All Stats (Temp)" equivalent | inline per colonist | set comfort/health/sanity to `100*const.Scale.Stat` directly — the satisfaction lever for F08/F09 setups |
+
+**No cheat exists** (inventoried 2026-07; do not look again) for: forcing a
+specific colonist command, teleporting units, setting a colonist's
+residence/workplace directly, spawning a disaster on a *chosen* object, or
+fast-forwarding game time by an interval. For those, manipulate state directly
+(`SetCommand`, `g_Consts` edits, label surgery — the TestKit's
+`Code/90_Loggers.lua` has patterns).
 
 ⚠️ **The cheat keyboard shortcuts (Alt-B, Alt-Shift-A, …) do NOT exist on a retail
 build** — the whole DevMenu shortcut tree is gated on `local cond = Platform.cheats`
@@ -1187,14 +1204,14 @@ read `inactive` unless you enabled them).
 
 ---
 
-## Commands cited in TESTING.md that could NOT be verified — do not use
+## Commands cited in the archived TESTING.md that could NOT be verified — do not use
 
 | Cited as | Verdict |
 |---|---|
-| **`hr.TimeScale`** (TESTING.md, F02 scenario: "set game speed high (cheat/`hr.TimeScale` — verify name)") | ❌ **UNVERIFIED / does not exist.** No `hr.TimeScale` anywhere in `ModTools\Src`. Use the verified `SetGameSpeedState("ultra")` (`Lua/X/HUD.lua:528`) or `UIColony:SetGameSpeed(20)` (`Lua/Colony.lua:564`) instead. |
-| **Cheat keyboard shortcuts** (Alt-B for complete-all-constructions, Alt-Shift-A for asteroid unlock, etc., as listed in CHEATS_INVENTORY.md) | ⚠️ **Real in source but NOT bound on retail** — the whole shortcut tree is behind `local cond = Platform.cheats` (`Lua/XDef/GameCheatShortcuts.generated.lua:19-20`). Type the function call in the console instead. Every command in the reference table above is a verified callable function. |
+| **`hr.TimeScale`** (archived TESTING.md, F02 scenario: "set game speed high (cheat/`hr.TimeScale` — verify name)") | ❌ **UNVERIFIED / does not exist.** No `hr.TimeScale` anywhere in `ModTools\Src`. Use the verified `SetGameSpeedState("ultra")` (`Lua/X/HUD.lua:528`) or `UIColony:SetGameSpeed(20)` (`Lua/Colony.lua:564`) instead. |
+| **Cheat keyboard shortcuts** (Alt-B for complete-all-constructions, Alt-Shift-A for asteroid unlock, etc., as listed in the archived CHEATS_INVENTORY.md) | ⚠️ **Real in source but NOT bound on retail** — the whole shortcut tree is behind `local cond = Platform.cheats` (`Lua/XDef/GameCheatShortcuts.generated.lua:19-20`). Type the function call in the console instead. Every command in the reference table above is a verified callable function. |
 | **`CheatStartMystery(id)`** | ⚠️ **Real (`Lua/Mysteries/Mysteries.lua:91`) but self-gated** on `Platform.cheats` (`Lua/Cheats.lua:1-3`). Use the new-game mystery pick, or the explicit `Platform.cheats` flip documented in PT-15. |
-| **"Fast-forward game time by an interval"** | ❌ No such cheat exists (confirmed in CHEATS_INVENTORY.md "Not found — do not look again"). Use `SetGameSpeedState("ultra")` and wait. |
+| **"Fast-forward game time by an interval"** | ❌ No such cheat exists (confirmed in the archived CHEATS_INVENTORY.md "Not found — do not look again"). Use `SetGameSpeedState("ultra")` and wait. |
 
 Everything else prescribed in this document was verified to exist in
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src` at the file:line cited.

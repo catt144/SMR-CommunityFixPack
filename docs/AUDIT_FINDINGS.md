@@ -331,7 +331,11 @@ and needs a separate go-decision.
   leg); move the session legs + superseded A/B tables to
   `docs/archive/SESSION_LOG.md` (append-only, newest first); delete the stale
   mid-file headline.
-- `[ ]` **3.4 (D6)** Archive sediment to `docs/archive/`:
+- `[x]` **3.4 (D6)** Archive sediment to `docs/archive/`: *(done 2026-07-29;
+  §3 leads promoted as C03-C08 plus the three HIGH untraced leads as C09-C11;
+  the probe-kinds table was already in the TestKit README — its stale doc
+  pointers fixed instead; CHEATS_INVENTORY's missing commands + "no cheat
+  exists" list folded into the checklist's verified table)*
   ChatGPT-deep-research-report.md, RESEARCH.md (promote its §3 unpromoted
   leads to C-rows in BUGS.md first), TESTING.md (move the four-kinds probe
   table to the TestKit first), CHEATS_INVENTORY.md (fold anything not already

@@ -35,7 +35,7 @@
 -- trade or refugee rocket, so its cargo can be pushed into or pulled out of an
 -- event rocket that has no player cargo bookkeeping. Matches the Relaunched
 -- report "rival colony rockets glitch permanently if refilled from RC Transport"
--- (docs\RESEARCH.md).
+-- (docs\archive\RESEARCH.md).
 --
 -- Patch approach: pre-wrapper (FIX_POLICY §1.4) on CanInteractWithObject that
 -- restates the shipped rule for the Relaunched class names, then defers to the
