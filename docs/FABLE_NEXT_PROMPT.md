@@ -184,7 +184,7 @@ silent.
   long-track control unchanged, reload persistence, log clean.
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
-- Un-run: PT-09..11, PT-15, PT-18 (fixtures B/D/E), PT-25, PT-27..30, PT-35 (PT-27's Biorobots
+- Un-run: PT-10, PT-11, PT-15, PT-18 (fixtures B/D/E), PT-25, PT-27..30, PT-35 (PT-27's Biorobots
   grant is `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
   breakthroughs — grant directly via `UIColony:SetTechResearched("<Id>")`),
   PT-42/44, PT-47,

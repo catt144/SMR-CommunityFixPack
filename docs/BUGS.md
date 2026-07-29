@@ -26,7 +26,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F11 | Train wedges at platform (`table.remove` misuse)         | P1  | high | fixed  |
 | F12 | "Low Storage" warning never fires for Food/maintenance   | P2  | high | tested |
 | F13 | Command Center resource rows show no numbers             | P2  | high | tested |
-| F14 | Domes Overview red low-stat highlight dead               | P2  | high | fixed  |
+| F14 | Domes Overview red low-stat highlight dead               | P2  | high | tested (PT-09 PASS 2026-07-28: red at 0, white on recovery, per-cell; Satisfaction-column red 0 everywhere = vanilla-intended, see entry) |
 | F15 | Mystery 11 wisp RP rewards double/silent                 | P2  | high | fixed* |
 | F16 | Mirror Sphere site usable after completion               | P2  | med  | fixed  |
 | F17 | Dust Sickness damage not randomized                      | P2  | med+ | fixed  |
@@ -331,10 +331,16 @@ file). PT-07 re-run + fresh A/B pair pending.
 missed). Nil → `FormatResource` renders empty. **Fix:** define 11 shims
 `ResourceOverview.GetAvailableX = function(self) return self:GetAvailable("X") end`.
 
-### F14 — Domes Overview red low-stat highlight dead  `[fixed: Code/Fix_DomeOverviewHighlight.lua]`
+### F14 — Domes Overview red low-stat highlight dead  `[tested: Code/Fix_DomeOverviewHighlight.lua — PT-09 PASS 2026-07-28; archived]`
 `Lua\X\ColonyControlCenter.lua:1309-1320` — builds red-tagged `tv`, then calls
 `win.idLabel:SetText(v)`. **Fix:** override `Community.UICommandCenterStatUpdate`, end with
 `SetText(tv)`.
+*PT-09 observation (2026-07-28):* with the highlight restored, the overview's fifth stat
+column (**Satisfaction**) reads red 0 on every dome of a mature colony — correct and
+vanilla-intended: Satisfaction is the tourist-rating stat (`Colonist:ChangeSatisfaction`,
+`Colonist.lua:3905-3918`, zeroes positive gains past the tourist sol window), so
+long-resident populations average ~0 and the below-30 rule paints the column. The bug had
+hidden that red along with the real ones; a vanilla design wart exposed, not caused.
 
 ### F15 — Mystery 11 wisp RP rewards double/silent  `[fixed*: Code/Fix_WispRewards.lua — double-grant removed so display == granted; the "silent" half stays open, see below]`
 `Lua\Mysteries\Fireflies.lua:466-469` — code after `SetCommand("Die")` unreachable

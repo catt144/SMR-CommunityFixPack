@@ -209,24 +209,6 @@ SAVE-E is the expensive one; do it last and do all four of its tests in one sitt
 > (`WATCHDOG — Meteors thread silent …`) if the meteor wedge ever recurs; if
 > you see that line in the log, report it verbatim.
 
-## PT-09 — Domes Overview red low-stat column · covers **F14**
-
-**Setup:** SAVE-A. Drive one dome's **average Health (or Comfort / Sanity / Morale)
-below the low threshold** — cut its life support / medical building, or spawn a batch
-of colonists into a dome with no services:
-`CheatSpawnNColonists(30)` with that dome selected, then let a sol pass at ultra speed.
-
-**Trigger:** `OpenCommandCenter()` → **Domes Overview** tab. Look at that dome's row.
-
-- **BROKEN looks like:** the failing stat is rendered in ordinary white text, exactly
-  like a healthy one — nothing on the overview tells you which dome is in trouble.
-- **FIXED looks like:** the below-threshold value is highlighted **red** in its column,
-  and normal values stay unhighlighted.
-
-`Result:` _____________________________________________
-
----
-
 ## PT-10 — Open-roof drone observation · covers **F55** ❓ **OPEN QUESTION**
 
 **This test has no expected answer.** The Lua half of F55 (the unreachable-forever

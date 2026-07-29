@@ -1687,3 +1687,37 @@ dumped carried Metals rather than stranding, the fix's designed
 no-accepting-station dump branch observed live.**
 
 ---
+
+## PT-09 — Domes Overview red low-stat column · covers **F14**  `[ARCHIVED 2026-07-28 — PASS, F14 → tested]`
+
+**Setup:** SAVE-A. Drive one dome's **average Health (or Comfort / Sanity / Morale)
+below the low threshold** — cut its life support / medical building, or spawn a batch
+of colonists into a dome with no services:
+`CheatSpawnNColonists(30)` with that dome selected, then let a sol pass at ultra speed.
+
+**Trigger:** `OpenCommandCenter()` → **Domes Overview** tab. Look at that dome's row.
+
+- **BROKEN looks like:** the failing stat is rendered in ordinary white text, exactly
+  like a healthy one — nothing on the overview tells you which dome is in trouble.
+- **FIXED looks like:** the below-threshold value is highlighted **red** in its column,
+  and normal values stay unhighlighted.
+
+`Result:` **PASS — 2026-07-28, live colony (Hoover #1 driven down by cutting the
+dome's utilities, finished with the verified ChangeComfort console loop). The
+below-threshold cell rendered RED (Comfort 0 in red while the same row's
+Sanity 66 and Morale 49 stayed white — per-CELL highlight, not per-row) and
+every healthy dome's values stayed plain white; on recovery (Comfort back to
+high 80s) the cell returned to white. Setup notes: the peril statuses
+(Suffocating/Freezing/Dehydrated/Starving) share a 12-36 game-hour per-colonist
+GRACE window (StatusEffects.lua:93-98) before any Health damage — cutting
+utilities moves nothing for at least half a sol; the ChangeComfort loop is the
+fast, casualty-free path. OBSERVATION, researched and resolved same session:
+the fifth overview column (Satisfaction) reads red 0 for EVERY dome in a
+mature colony — correct data, vanilla-intended red. Satisfaction is the
+tourist-rating stat: Colonist:ChangeSatisfaction (Colonist.lua:3905-3918)
+zeroes all positive gains once a colonist is past the tourist sol window, so
+long-resident populations sit at the 0 default and the restored below-30
+highlight paints the whole column red permanently. A vanilla design wart the
+fix EXPOSED, not caused; the header icons having no rollover is also vanilla.**
+
+---
