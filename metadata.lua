@@ -15,6 +15,7 @@ return PlaceObj('ModDef', {
 		ResidencyControl = false,
 		MultipleSuns = false,
 		DroneOverhaul = false,
+		CohortHousing = false,
 	},
 	'code', {
 		"Code/00_Core.lua",
@@ -89,6 +90,7 @@ return PlaceObj('ModDef', {
 		"Code/Opt_ResidencyControl.lua",
 		"Code/Opt_MultipleSuns.lua",
 		"Code/Opt_DroneOverhaul.lua",
+		"Code/Opt_CohortHousing.lua",
 	},
 	'TagGameplay', true,
 })

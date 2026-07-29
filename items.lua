@@ -50,4 +50,10 @@ return {
 		'Help', "With overlapping Drone Hub coverage, the base game lets a far-away hub's drone claim a repair that idle drones are parked next to. This makes the CLOSEST hub's fleet get first claim on repair and cleaning jobs (a far fleet still serves if the near one doesn't respond within seconds), and lets idle drones help a neighboring OVERLOADED hub with nearby repairs. Player orders, hauling, construction and RC rovers are untouched.",
 		'DefaultValue', false,
 	}),
+	PlaceObj('ModItemOptionToggle', {
+		'name', "CohortHousing",
+		'DisplayName', "Cohort housing — Seniors & Children",
+		'Help', "Seniors and Children living in normal housing automatically move into free Retirement Home / Nursery slots — in their own Dome first, in any reachable Dome second — and are left completely alone when no such slot exists. Employed Seniors stay put; your manual residence and Dome assignments always win; quarantine and closed Domes are respected. No dome designation needed: concentrate the cohort buildings where you want the cohort to live.",
+		'DefaultValue', false,
+	}),
 }

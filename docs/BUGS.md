@@ -82,7 +82,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested 2026-07-27: `Opt_MultipleSuns` (opt-in, absorbs F39's fix) — PT-50 PASS in full incl. reload + live limit off/on |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested 2026-07-27 late: native Mod Options toggles (live both ways, restart-persistent) — PT-51 PASS in full |
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28: `Opt_DroneOverhaul` core v1 (opt-in) — closest-fleet-first claim gate + repair moonlighting + DroneReport telemetry; PT pending (attended, multi-iteration) |
-| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | speced 2026-07-28 (user-commissioned, revised same day): `Opt_CohortHousing` — cohort members in normal housing move to free Retirement Home/Nursery slots anywhere (in-dome first), untouched when none exist; no dome UI, zero persisted state; config CONFIRMED by user 2026-07-28 (in-dome-first + cross-dome, Seniors+Children one toggle) — build HELD, awaits explicit go (entry) |
+| D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 (user go same evening): `Code/Opt_CohortHousing.lua`, opt-in Mod Options toggle "Cohort housing — Seniors & Children"; A/B clean (baseline 1/57/15/0 · all-six 63/0/10/0, 71/71); PT-53 pending (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28, full procedure (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -2716,7 +2716,7 @@ iteration knobs. Shipped alongside: **F77**'s `Fix_ExtenderFlapChurn` (default-o
 repair) so extender power flickers stop Idle-kicking whole fleets and muddying the
 overhaul's observability.
 
-### D07 — Cohort domes: no way to consolidate seniors/children without filter micromanagement (design, med)  `[speced 2026-07-28, user-commissioned — config CONFIRMED by user 2026-07-28 (in-dome-first + cross-dome reach, Seniors+Children under one toggle, per the spec below); build HELD — awaits explicit go in a game-free leg]`
+### D07 — Cohort domes: no way to consolidate seniors/children without filter micromanagement (design, med)  `[built 2026-07-28: Code/Opt_CohortHousing.lua (opt-in, off by default, Mod Options toggle "Cohort housing — Seniors & Children") — user go given the same evening after config confirmation; A/B pair clean; PT-53 (attended) pending]`
 **The want (user, 2026-07-28, after building a live retirement dome):** a
 dome whose PRIMARY role is absorbing a non-worker cohort (seniors, and
 separately children with their schools/playgrounds) out of the production
@@ -2765,6 +2765,26 @@ All patch points verified in Src this session; zero persisted state beyond
 the two dome flags. Cross-refs: D03 (UI + policy pattern, closed-toggle
 composition), F79/F80 (train findings from the same sitting), the
 FindEmigrationDome walkthrough in the 2026-07-28 session record.
+**BUILT as speced 2026-07-28 (game-free leg, user go given after confirming
+the config: in-dome-first + cross-dome reach, Seniors+Children one toggle).**
+Implementation notes (`Code/Opt_CohortHousing.lua`): in-dome pass =
+post-wrapper on `Colonist:UpdateResidence` (declared on Colonist,
+Colonist.lua:2309 — runs from the Idle heavy update, so no new scheduling);
+cross-dome pass = post-wrapper on `Colonist:FindEmigrationDome` picking the
+NEAREST reachable community with a free cohort slot (reuses the shipped
+candidate gathering incl. elevator-linked cities and
+FindTransportationModeToCommunity; overpopulated communities skipped,
+mirroring HasFreeLivingSpaceFor's gate); graduation nudge = additive
+`OnMsg.ColonistBecameYouth` (Colonist.lua:1751) triggering an immediate
+UpdateResidence. ZERO persisted state (the earlier "two dome flags" wording
+predates the housing-level revision — the built module writes nothing to any
+object). Cohort detection = `residence.exclusive_trait` ("Child" via
+children_only, Residence.lua:26-28; "Senior" from the SeniorsResidence
+template). Employed-senior exemption reads IsValid(workplace) OR a pending
+user_forced_workplace. TestKit probe drives both wrappers with stand-ins
+(8 cases: both moves, tie-bypass, employed/forced/no-slot/quarantine/
+non-cohort negatives). A/B 2026-07-28 late: baseline 1/57/15/0 ·
+all-six-toggles 63/0/10/0 (71/71 applied), zero errors. PT-53 pending.
 
 ## Candidates under investigation
 

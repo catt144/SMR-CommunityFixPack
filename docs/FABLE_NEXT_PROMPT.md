@@ -1,31 +1,34 @@
-# Fable continuation prompt — PLAYTEST STANDBY (updated 2026-07-28 night, post-TEN-FLIP sitting)
+# Fable continuation prompt — PLAYTEST STANDBY (updated 2026-07-28 LATE, post-D07-build)
 
-**NEWEST FIRST (2026-07-28 evening sitting — read the "TEN-FLIP playtest
-sitting" STATUS section before anything):** ten `tested` flips in one
-sitting (F68, F73, F72, F65, F70, F67, F69, F19, F20, F21) — **the
-ASTEROID SECTION and PT-43 are COMPLETE and archived**; the map-switch
-console repair + BOTH leaf-class loggers validated live; F78 hypothesis 1
-REFUTED live (on-demand repro plan on the entry: bracket taps +
-`CheatMeteors("single")` at empty ground); **NEW F79 confirmed** (trains
-never carry service seekers — fix would be feature-completion),
-**NEW F80 investigating** (trains skip valid waiting passengers), **NEW D07
-speced** (`Opt_CohortHousing` — cohort members in normal housing move to
-free Retirement Home/Nursery slots anywhere, in-dome first, untouched when
-none exist; no dome UI). **DECISION UPDATE 2026-07-28 late: D07 config
-CONFIRMED by the user (in-dome-first + cross-dome, Seniors+Children one
-toggle — the spec as written) but build HELD — do not build until an
-explicit go. Still pending: whether F79 gets a D-item fix.** Zero pack
-code changed —
-no pre-flight owed. PT-52 sitting 2 healthy; **Trigger B STILL un-run.**
+**NEWEST FIRST (2026-07-28 late — read the "D07 build leg" STATUS section
+first):** **D07 `Opt_CohortHousing` is BUILT** (user confirmed the config
+AND gave the go the same evening; unattended leg while they were off-game):
+colonist/housing-level rule, zero persisted state — in-dome
+UpdateResidence pass, cross-dome FindEmigrationDome pass (nearest
+reachable cohort slot, tie rule bypassed), ColonistBecameYouth nudge,
+Mod Options toggle #6 "Cohort housing — Seniors & Children". **A/B pair
+FRESH and CLEAN (73 probes): baseline 1/57/15/0 · all-six-toggles
+63/0/10/0 (71/71 applied)** — NO pre-flight owed. **PT-53 (attended) is
+the new checklist item** — first enable + five triggers. Two more flips
+same day before the build: **PT-23 → F46 `tested`** (trains dump rather
+than strand; isolated no-drone stations keeping forbidden stock =
+expected statics, on the entry) and **PT-09 → F14 `tested`** (red
+low-stat cell both directions; the all-red Satisfaction column =
+vanilla-intended, tourist-rating stat — on the entry). That makes TWELVE
+flips on 2026-07-28. Earlier the same day: the TEN-FLIP sitting (asteroid
+section + PT-43 complete), F78 hypothesis 1 refuted (repro plan banked),
+F79 confirmed / F80 investigating. **ONE USER DECISION PENDING: whether
+F79 (trains never serve service trips) gets a D-item fix.** PT-52 sitting
+2 healthy; **Trigger B STILL un-run.**
 
 Paste everything below into a fresh Claude Code session (Fable). This is the
 ONE live prompt. **Start with `git log --oneline -5` + `git pull`** in case
 another session ran since this prompt was written.
 
-Build state: **70 registered modules, 65/70 active by default (5 opt-in via
-Options → Mod Options — D05, `tested`), 72 probes, everything pushed.
-A/B pair is FRESH (2026-07-28 late, post-F68-repair): baseline 1/57/14/0 ·
-all-five-toggles 62/0/10/0 (70/70 applied) — NO pre-flight queued.**
+Build state: **71 registered modules, 65/71 active by default (6 opt-in via
+Options → Mod Options — D05, `tested`), 73 probes, everything pushed.
+A/B pair is FRESH (2026-07-28 late, post-D07-build): baseline 1/57/15/0 ·
+all-SIX-toggles 63/0/10/0 (71/71 applied) — NO pre-flight queued.**
 NEW since the last rewrite (2026-07-28 PT-52 sitting + same-evening repair
 leg, all committed):
 - **PT-49 COMPLETE → D03 `tested` (archived).** Adversarial arrivals proof,
@@ -174,11 +177,15 @@ silent.
   ENTER/EXIT + SpawnMeteor), aim at empty ground, `CheatMeteors("single")`
   — ENTER-without-EXIT reproduces the wedge on demand and the last print
   brackets the stall line.
-- **DECISIONS:** D07 `Opt_CohortHousing` config CONFIRMED 2026-07-28 late
-  (in-dome-first + cross-dome, Seniors+Children one toggle) but build
-  HELD — no code until an explicit user go. Still owed: whether F79
-  (trains never serve service trips — confirmed vanilla gap) gets a
-  feature-completion D-item.
+- **PT-53 — D07 `Opt_CohortHousing`, NEW (attended, first enable).** The
+  checklist section has the full procedure: five triggers (in-dome move +
+  employed exemption, cross-dome move, leave-alone/no-churn, graduation
+  drain via Age1Year, precedence + uninstall shape). Enable the toggle in
+  Mod Options, verify `CohortHousing [active]`. Cheap to interleave with
+  PT-52's passive watch.
+- **DECISIONS:** D07 was built 2026-07-28 late (user go). Still owed:
+  whether F79 (trains never serve service trips — confirmed vanilla gap)
+  gets a feature-completion D-item.
 - **PT-40 DONE 2026-07-28 → F65 `tested` (archived):** full procedure PASS —
   merge in both geometries (snug + couple-tracks), clean salvage split,
   long-track control unchanged, reload persistence, log clean.
@@ -328,14 +335,21 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   the four opt-ins active (then expect 62/0/10/0-style shifts and document).
   Simplest: run legs with the toggles as-is and compare against the matching
   expectation.
-- **Expected numbers (current, 72 probes — none for D06/F77 yet, opt-in
-  toggles OFF):** baseline 1 PASS / 57 FAIL / 14 SKIP / 0 ERROR; fixed
-  58/0/14/0 (**65/70 active** — ExtenderFlapChurn joins the default-on set,
-  DroneOverhaul reads `inactive (opt-in...)`); opt-in (three modules)
-  61/0/11/0 (68/70); all five toggles on = 62/0/10/0 (70/70). Baseline's 1
-  PASS = FactionFundingCheck canary; the OptionsMenu probe (D05) asserts in
-  every leg and FAILs baseline by design. Pre-D06 records said /68 — the
-  denominator moved, the probe numbers did not.
+- **Expected numbers (current, 73 probes — none for D06/F77 yet; D07 has
+  one, SKIPs unless its toggle is on):** baseline 1 PASS / 57 FAIL /
+  15 SKIP / 0 ERROR; fixed default 58/0/15/0 (**65/71 active** — the six
+  opt-ins read `inactive (opt-in...)`); all SIX toggles on = 63/0/10/0
+  (71/71). Baseline's 1 PASS = FactionFundingCheck canary; the OptionsMenu
+  probe (D05) asserts in every leg (now covers all six toggle wirings) and
+  FAILs baseline by design. Older records with /70 and /72 denominators
+  predate D07.
+- **TestKit stand-in probe corollary (learned in the D07 leg):** WithGlobals
+  stubs CANNOT reach a game file that localizes the global at load time
+  (`local IsValid = IsValid`, Colonist.lua:5) — a probe driving shipped
+  code with plain-table stand-ins must assert on the MODULE's own action
+  (its move happened / didn't), never on vanilla bookkeeping around the
+  stand-ins; and a fake colonist run through the shipped
+  FindEmigrationDome tail needs a PickEmigrationCommunity stub.
 - Synthetic-map noise unchanged: ~49 Flight.lua `objects_to_mark` errors +
   a few GameInit nil-call lines in BOTH legs; a `[mod] Error in mod … Test
   Kit` line at quit is a shutdown artifact. The MultipleSuns

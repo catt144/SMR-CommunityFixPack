@@ -1,6 +1,10 @@
 # Project Status — read this first in a new session
 
-Updated: **2026-07-28 session wrap — the PT-52 live sitting (D03 tested,
+Updated: **2026-07-28 LATE (post-D07-build): D07 `Opt_CohortHousing` BUILT
+(user-authorized unattended leg) with a FRESH A/B pair — 73 probes, baseline
+1/57/15/0 · all-six-toggles 63/0/10/0 (71/71) — plus PT-23 → F46 and PT-09 →
+F14 flips (twelve flips total on the day). See the "D07 build leg" section
+directly below.** Prior wrap: **2026-07-28 session wrap — the PT-52 live sitting (D03 tested,
 F71 tested, PT-52 telemetry healthy, F68 over-draw caught) + the same-day
 game-free F68 repair leg with a FRESH A/B pair (baseline 1/57/14/0 ·
 all-five-toggles 62/0/10/0, 70/70 — no pre-flight queued for the next
@@ -52,6 +56,45 @@ serve-services, confirmed; F80 trains-skip-waiting-passengers,
 investigating).**
 Also proven this
 sitting: the class-flattening runtime corollary (Key technical facts).**
+
+## D07 build leg + two more flips — Fable, 2026-07-28 late (mixed live/game-free)
+
+Same calendar day as the ten-flip sitting; a short live leg (user at keyboard)
+followed by a user-authorized unattended build leg while they were away.
+
+- **PT-23 PASS → F46 `tested` (archived), eleventh flip.** Both halves on the
+  live 5-station network: forbidden Metals drained to 0/60 and STAYED; the
+  all-five-stations-forbidden + drones-off leg proved trains dump rather than
+  strand (zero loaded roamers). Isolated no-drone stations keeping stock =
+  expected statics, recorded as an observation on the entry.
+- **PT-09 PASS → F14 `tested` (archived), twelfth flip.** Red low-stat cell
+  verified per-CELL both directions (red at Comfort 0, white on recovery).
+  Two researched facts recorded: the peril statuses share a 12-36h
+  per-colonist GRACE window before Health damage (StatusEffects.lua:93-98,
+  then avg ~2x base rate, stacking); the fifth overview column is
+  SATISFACTION (tourist-rating stat, ChangeSatisfaction zeroes gains past
+  the tourist sol window) — its red 0 on every mature dome is CORRECT
+  vanilla-intended rendering the F14 bug had been hiding.
+- **D07 `Opt_CohortHousing` BUILT (user gave config + go the same evening:
+  in-dome-first + cross-dome, Seniors+Children one toggle, then "start
+  working on it" for the unattended window).** Colonist/housing-level rule,
+  zero persisted state, all hooks per-call-gated: UpdateResidence post-wrap
+  (in-dome move), FindEmigrationDome post-wrap (nearest-reachable cohort
+  slot, tie rule bypassed; quarantine/D03/forced-dome/overpopulation
+  respected), ColonistBecameYouth nudge. Mod Options toggle #6. Full notes
+  on the D07 entry; PT-53 written into the checklist (5 triggers).
+- **A/B pair FRESH (2026-07-28 late, 73 probes):** baseline **1/57/15/0** ·
+  all-SIX-toggles **63/0/10/0 (71/71 applied)**, zero errors, both legs on
+  predicted numbers. NO pre-flight owed. Two probe-side lessons from the
+  leg (module itself never wrong): (a) **WithGlobals stubs cannot reach a
+  game file that localizes the global at load time** — Colonist.lua:5 does
+  `local IsValid = IsValid`, so stand-in probes must assert on the MODULE's
+  action (absence/presence of its move), not on vanilla bookkeeping around
+  plain-table stand-ins; (b) a fake colonist driven through the shipped
+  FindEmigrationDome tail needs a PickEmigrationCommunity stub.
+- Housekeeping: D07 config decision recorded on the entry when given
+  (commit 6ca11a1); prompt un-run list updated (PT-09/PT-23 gone, PT-53
+  added); Satisfaction/grace observations archived with their PTs.
 
 ## TEN-FLIP playtest sitting — Fable, 2026-07-28 evening (live, the project's most productive sitting)
 

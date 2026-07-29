@@ -886,6 +886,88 @@ step.**
 
 `Knob changes made + effect:` _____________________________________________
 
+## PT-53 — Cohort housing · covers **D07 `Opt_CohortHousing`** (built 2026-07-28)
+
+Colonist/housing-level rule, NO dome designation: a Senior or Child living in
+normal housing moves into a free Retirement Home / Nursery slot — own dome
+first, any reachable dome second — and is left completely alone when no slot
+exists. The moves ride the shipped machinery (residence reassignment +
+emigration), so everything observable is ordinary game behavior.
+
+**What the module CAN do (judge it on these):**
+- An UNEMPLOYED Senior (or any Child) in a normal residence relocates to a
+  free working Retirement Home / Nursery in the SAME dome within a heavy
+  update (minutes of game time at normal speed).
+- With no local cohort slot, the colonist emigrates to the NEAREST reachable
+  dome that has one (walk/passage/shuttle/train/elevator all valid) — even
+  when vanilla would never move them (the tie rule is bypassed).
+- When no cohort slot exists anywhere: nothing happens, no churn, no log
+  noise. Fill all cohort housing and the module goes silent.
+- Graduation: the moment a Child becomes Youth, their Nursery slot frees and
+  the vanilla need-work migration drains them toward production domes.
+
+**What it CANNOT do (deliberate v1 scope — do not judge it on these):**
+- EMPLOYED Seniors stay put (Forever Young seniors keep their jobs); a
+  player-forced workplace also counts as employed.
+- Tourists are never touched (hotels, not residency).
+- Player orders always win: manual residence assignment and forced-dome
+  moves override the rule; quarantine ("no one enters or leaves") and the
+  D03 closed-to-new-residents policy both seal a dome against cohort moves.
+- It does not build, staff, or prioritize services in the cohort dome — a
+  children's dome still needs staffed services (commuting adults cover it;
+  work commutes ride trains fine — only service-seeking trips don't, F79).
+- Arrival housing at the destination dome is the shipped machinery: a
+  redirected colonist may sit in normal housing for one heavy update before
+  the in-dome pass slots them into the cohort building. Transient, by design.
+
+**Setup:** enable **Options → Mod Options → "Cohort housing — Seniors &
+Children"**; `SMRFixPack.ListFixes` (or the on-screen loop) must show
+`CohortHousing [active]`. A colony with a Retirement Home and/or Nursery
+with free slots, plus cohort members housed in normal residences.
+`CheatSpawnNColonists(30)` fills a dome fast; a colonist's Age1Year
+infopanel cheat ages Children on demand.
+
+**Trigger A — in-dome move:** find (or spawn) an unemployed Senior housed in
+a normal residence in a dome that also has a free Retirement Home slot.
+- **EXPECTED:** within a heavy update they re-home to the Retirement Home
+  (watch the Residence line of their infopanel). An EMPLOYED Senior in the
+  same dome does NOT move.
+
+**Trigger B — cross-dome move:** a dome with cohort members in normal
+housing and NO local cohort slot; another dome (reachable — passage, walk,
+shuttle, or train) with a free Retirement Home / Nursery.
+- **EXPECTED:** they emigrate there (the normal walk/shuttle/train trip) and
+  end up in the cohort building within a heavy update of arriving.
+- **BROKEN looks like:** ping-ponging between domes, colonists stuck
+  mid-trip, or a move into a quarantined/closed/overpopulated dome.
+
+**Trigger C — leave-alone:** fill every cohort slot (or toggle every
+Retirement Home/Nursery off).
+- **EXPECTED:** cohort members in normal housing stay exactly where they
+  are. No repeated move attempts, no emigration churn.
+
+**Trigger D — graduation:** age a Nursery Child up (Age1Year cheat).
+- **EXPECTED:** the Youth leaves the Nursery promptly (slot frees) and
+  later drains to work like any jobless colonist; the freed slot accepts
+  the next Child.
+
+**Trigger E — precedence + uninstall shape:** manually assign a Senior to a
+normal residence (player order) — they must STAY. Toggle the module off —
+everything is instantly vanilla; save with it ON, reload with it OFF —
+clean load, no errors (zero persisted state).
+
+`Result (A in-dome move + employed exemption):` _____________________________________________
+
+`Result (B cross-dome move):` _____________________________________________
+
+`Result (C leave-alone, no churn):` _____________________________________________
+
+`Result (D graduation drain):` _____________________________________________
+
+`Result (E precedence + uninstall):` _____________________________________________
+
+---
+
 # Group 7 — cross-cutting (do these last, every session)
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
