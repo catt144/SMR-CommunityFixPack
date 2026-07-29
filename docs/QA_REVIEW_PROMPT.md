@@ -96,20 +96,21 @@ VALIDITY". **If you think any conclusion we reached is an artifact of test
 conditions rather than a property of the game, say so — that judgement is
 explicitly part of what we are asking you for.**
 
-## THE META-DANGER — read this before evaluating anything
+## THE META-DANGER — RESOLVED BY THE QA REVIEW (2026-07-29), kept for the record
 
-**All static analysis in this project is done against `ModTools\Src`, but the
-game executes `Packs\Lua.fpk`, which is NOT identical.** This was proven live
-this session: `CheatMeteors` calls `GetCameraLookAtPassable()` at
-`Lua\Cheats.lua:63` in Src, and that global **does not exist at runtime** — the
-console returns `attempt to call a nil value`. The shipped `CheatMeteors` is a
-different function from the one in Src.
+This section originally claimed the shipped `Packs\Lua.fpk` was proven
+non-identical to `ModTools\Src`. **The QA review disproved that:** the full
+fpk was extracted and diffed — 2,250 of 2,256 shipped Lua files are
+byte-identical to Src (the 5 divergences are engine/tooling files, zero
+gameplay logic; shipped build `1.0.7.396349`). The "proof" —
+`GetCameraLookAtPassable` returning `attempt to call a nil value` in the
+console — was a misreading: it is a **`local function`** (`Cheats.lua:42`),
+invisible to console code by design, identical in both trees.
 
-Every conclusion below derived purely from Src reading is therefore provisional,
-and every fix needs an **apply-time self-check against the shipped shape** that
-returns a reason string rather than patching blind (FIX_POLICY §2). Please
-actively look for other places where our Src-based reasoning may not match the
-shipping build.
+Apply-time self-checks (FIX_POLICY §2) remain mandatory — they guard *future*
+game patches — and the extraction diff should be re-run after every game
+update. But Src-based conclusions in this document are no longer provisional
+on fpk-divergence grounds.
 
 ---
 

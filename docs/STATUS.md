@@ -1441,17 +1441,27 @@ live construction controllers inside a post-wrapper on `Activate`.
   (Code/00_Core.lua); apply self-checks the target and returns a reason string to
   deactivate gracefully; `SMRFixPack_Disabled` = user veto; `SMRFixPack.ListFixes()`
   console status.
-- All line numbers reference `ModTools\Src`; the game executes `Packs\Lua.fpk`
-  (slightly newer date) — runtime self-checks in apply() are the guard.
-  **PROVEN DIVERGENT 2026-07-29, not just theoretically:** `CheatMeteors` in Src
-  calls `GetCameraLookAtPassable()` (`Cheats.lua:63`) and **that global does not
-  exist at runtime** — the console returns `attempt to call a nil value`, so the
-  shipped `CheatMeteors` is a different function body. Consequence: a bare
-  `CheatMeteors("storm")` silently no-ops (`if pos then … end`, no else). Treat
-  every Src-only conclusion as provisional and self-check the SHIPPED shape.
+- All line numbers reference `ModTools\Src`; the game executes `Packs\Lua.fpk`.
+  **PARITY PROVEN 2026-07-29 (QA session): the shipped build IS Src.** The full
+  `Lua.fpk` was extracted (FLPK container, zstd per file) and diffed:
+  **2,250 of 2,256 shipped Lua files are byte-identical to Src**; the only 5
+  divergences are engine/tooling files (Camera state, GED Stubs, asyncop/sound/
+  xinput API wrappers) — zero gameplay logic. Shipped build stamp:
+  `1.0.7.396349` (`_LuaRevision.lua`, fpk-only). Keep apply() self-checks — they
+  guard *future* patches — and re-run the extraction diff after every game
+  update.
+  **The earlier "PROVEN DIVERGENT" fact recorded here was a misreading and is
+  WITHDRAWN:** `GetCameraLookAtPassable` is a **`local function` in Cheats.lua
+  (`:42`)** — a file-local upvalue, never a global, identical in Src and
+  shipped. Probing it from the console returns `attempt to call a nil value`
+  *by design* (console code cannot see file locals). The bare
+  `CheatMeteors("storm")` no-op has a mundane explanation: the helper returns
+  nil when no passable point exists within 100m of the camera look-at
+  (`Cheats.lua:44`), and the body is `if pos then … end` with no else — so
+  "always pass an explicit position" remains the right practice.
   `GatherTransportableResources` (`ResourceTracking.lua:216`) is *called* but
-  defined nowhere in Src — an engine export or an fpk-only function. F12's fix
-  checks for it at apply time.
+  defined in neither Src nor the shipped Lua (verified in the extraction) — a
+  genuine engine C export. F12's fix checks for it at apply time.
 - Sample mod format in `<game>\ModTools\Samples\Mods`; docs in `ModTools\Docs\index.md.html`.
 - **Replacing an EXISTING global from mod code works**: `ModEnvMeta.__newindex`
   (`Mod.lua:1557-1563`) rawsets any non-blacklisted key into the real `_G`, and the

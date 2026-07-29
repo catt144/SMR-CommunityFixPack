@@ -2695,11 +2695,15 @@ recovery** for a wedged storm:
 `Msg("MeteorStormEnded")`. The second thread printed `EndFX` **and** `EXIT`
 back-to-back, so `Msg` does NOT block — the missing line was lost in the
 validate spam. No defect there.
-**Tooling fact worth keeping:** `GetCameraLookAtPassable` **does not exist at
-runtime** — `CheatMeteors` calls it at `Cheats.lua:63` in Src, so a bare
-`CheatMeteors("storm")` silently no-ops (the body is `if pos then … end` with
-no else). The shipped `Lua.fpk` clearly differs from Src here. Always pass an
-explicit position, or drive `MeteorsDisaster` directly as above.
+**Tooling fact worth keeping (RE-CORRECTED 2026-07-29 QA session):**
+`GetCameraLookAtPassable` is a **file-local helper** (`local function`,
+`Cheats.lua:42`) — the console's `attempt to call a nil value` proved only that
+locals are invisible to console code, NOT that the shipped build differs (the
+shipped `Cheats.lua` is byte-identical to Src; full fpk diff on the STATUS key
+facts). A bare `CheatMeteors("storm")` can still silently no-op — the helper
+returns nil when no passable point exists within 100m of the camera look-at,
+and the body is `if pos then … end` with no else. Always pass an explicit
+position, or drive `MeteorsDisaster` directly as above.
 Note the dust-storm half of the original report is CLOSED: `GetDustStormDescr()`
 returns nil at the save's terraforming level — designed silence, no defect.
 **The "no weather at all" half is now EXPLAINED and split off — see F81**
