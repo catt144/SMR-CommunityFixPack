@@ -18,7 +18,8 @@
 > the DECISION section in `DRONE_OVERHAUL_OPTIONS.md`.
 
 **NEWEST FIRST (2026-07-29 — read the "Disaster-system leg" STATUS section
-first, then `docs/QA_REVIEW_PROMPT.md`).**
+first. `docs/QA_REVIEW_PROMPT.md` was a one-off, now fired and DELETED — its
+verdict lives in BUGS.md D06/F78/F81 and the STATUS wrap).**
 
 **The session's headline: TWO P1 defects, one proven live end to end.**
 **F81** — a single stranded `g_DisastersPredicted["DisasterMeteorStorm"]` flag
