@@ -357,6 +357,60 @@ fired ONCE across 25 simultaneous malfunctions and moved its own leg by one
 minute.** Options A–H and the D08 layers below were all designed before that
 was known. Re-read them as hypotheses, not as a plan.
 
+# DECISION — 2026-07-29 (post-QA review): the overhaul ships with player-facing STAT DIALS
+
+**User decision, made after the fresh-context QA review reported:** stop
+treating speed as a diagnosis question. The overhaul module will EXPOSE the two
+stat levers as Mod Options dials and move on; the structural work stays gated
+on instrumentation (below).
+
+**The UI capability is verified** (QA session, `CommonLua\Classes\Mod.lua`):
+Mod Options is NOT toggle-only. Three widget types exist —
+`ModItemOptionToggle` (bool), `ModItemOptionNumber` (integer slider,
+min/max/step, `:2728-2750`), `ModItemOptionChoice` (dropdown over a string
+list, `:2752-2771`). Planned surface:
+
+- **Drone speed** — choice `1.0x (base) / 1.5x / 2.0x` → module-owned modifier
+  (own id) on `move_speed`, percent +0/+50/+100 on top of whatever techs the
+  save has. Choice values arrive as STRINGS (the choice text IS the value,
+  `:2767-2769`) — map them in code.
+- **Drone carry** — choice `+0 (base) / +1 / +2` → module-owned modifier on
+  `g_Consts.DroneResourceCarryAmount` (base 1; Artificial Muscles +1 and the
+  Artifact Interface upgrade's `upgrade1_add_value_1 = 1` stack the same way —
+  plain addition on one global; consumed at `Drone.lua:719`, auto-rebuilt via
+  `OnMsg.ConstValueChanged`). There is no per-tier "recorded ability" anywhere.
+- Reads via `CurrentModOptions` (already used, `00_Core.lua:48-52`); live
+  re-apply in the existing `OnMsg.ApplyModOptions` handler (`00_Core.lua:106`).
+
+**Facts recorded with the decision (all source- or live-verified in the QA
+session):**
+- The user's colony was already AT the vanilla stat ceiling during the first
+  A/B: live read `GetMoveSpeed() = 2304` = 1440 × 1.6 — Low-G Drive (+20%)
+  **plus the Advanced Drone Drive breakthrough (+40%)**, percents stacking
+  additively on base (`Modifiers.lua:100,112-113`); carry 2× via Artificial
+  Muscles. **This corrects the mandate note below: the user has BOTH
+  breakthroughs; the carry breakthrough has no speed component.**
+- Hauling was 88% of elapsed repair time AT that ceiling — so the dials are
+  player-facing relief and breakthrough-lottery insurance (most saves never
+  draw either breakthrough), NOT the fix for the structural problem. Set
+  expectations accordingly in the mod description.
+- **No drone speed cap exists in the game's Lua** — no clamp constant, no
+  min/max metadata on the property; the modifier pipeline clamps only to int64
+  (`Modifiers.lua:100-101`); the game itself runs units at 2× through passages
+  via raw `SetMoveSpeed` (`Passage.lua:1046-1056`). A C-side clamp can't be
+  ruled out statically — one-liner check queued for the next live sitting:
+  `SelectedObj:SetMoveSpeed(10000)` then read back.
+- Save-safety (FIX_POLICY §3): modifiers persist on objects/save. Toggle-off or
+  selecting "base" must remove the module's modifiers **by id**; uninstalling
+  the mod with a dial active leaves a benign vanilla `Modifier` residue
+  (documented, loads clean without the mod).
+
+**What stays data-gated:** the structural choice — maintenance priority
+escalation (vanilla precedent: cables/passages repair at forced priority 3,
+`SupplyGridBreakable.lua:48-56`) vs the D08 layer-1 dispatcher — waits on the
+request-lifecycle decomposition (queue-latency vs travel). That instrument is
+the subject of `HARNESS_REVIEW_PROMPT.md`, which carries this plan.
+
 # D08 — Drone Hub Extender overhaul + Command Center (2026-07-29 design session, game-free)
 
 Origin: the user observed live that **Drone Hub Extenders make the D06 problem

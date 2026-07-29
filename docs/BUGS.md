@@ -3176,6 +3176,24 @@ module is useless** — it proves this test cannot measure it, and that the
 post-malfunction repair path it targets is mostly bypassed when maintenance
 requires resources. Dust/clean work and `no_resource` buildings were not sampled
 at all (0 of 25).
+**QA REVIEW VERDICT + USER DECISION (2026-07-29, fresh-context session).** The
+QA review verified every load-bearing claim above at source level (delivering-
+drone handoff structural, `RequiresMaintenance.lua:418-426`/`:190-198`;
+`FindTask` sole caller `Drone.lua:621`) and added two corrections: (1) the run's
+colony was at the **vanilla drone-stat ceiling** — live `GetMoveSpeed() = 2304`
+= 1440 × (+20% Low-G Drive, +40% Advanced Drone Drive breakthrough, additive),
+2× carry via Artificial Muscles — so the 88% hauling share stands *despite*
+maxed stats; (2) **the 88% does NOT by itself promote the D08 dispatcher** —
+the targets were overlap-scope with idle drones at every covering hub, so
+awareness was not the shortage; the number needs decomposing into queue-latency
+vs travel before any structural build. **Decision:** the claim gate is kept but
+demoted (no further investment until the instrument can score it); the overhaul
+will ship **Mod Options stat dials** (speed ×1.0/1.5/2.0, carry +0/+1/+2 —
+capability verified, `Mod.lua:2708-2771`) as player-facing relief; the
+structural choice (maintenance priority escalation vs D08 layer-1 dispatcher)
+is gated on the request-lifecycle instrumentation. Full record: the DECISION
+section in `DRONE_OVERHAUL_OPTIONS.md`; instrument work:
+`HARNESS_REVIEW_PROMPT.md`.
 The design defect behind the 2026-07-27 live report (four idle drones parked beside a
 malfunctioning building while a far hub serviced everything slowly): assignment is
 pull-only and own-hub-only, requests sit in every covering hub's queues, claims are

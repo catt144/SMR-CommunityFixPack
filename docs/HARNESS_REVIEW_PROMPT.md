@@ -24,6 +24,30 @@ structural (`RequiresMaintenance.lua:418-426` → `:190-198`
 `SetCommandKeepQueue`), and `TaskRequestHub:FindTask` has exactly ONE caller
 tree-wide (`Drone.lua:621`), so wrapping either end captures every claim.
 
+**PLAN CONTEXT (user decision, 2026-07-29, after the QA verdict) — the
+instrument you are redesigning has a second customer now.** The overhaul will
+ship with **Mod Options STAT DIALS** — drone speed `1.0x/1.5x/2.0x` and carry
+`+0/+1/+2` (capability verified: `ModItemOptionChoice`/`Number`,
+`Mod.lua:2708-2771`; full decision record in the DECISION section of
+`DRONE_OVERHAUL_OPTIONS.md`). Consequences for this review:
+
+1. **The harness must be able to run a STAT-DIAL leg** as cleanly as a logic
+   leg — same seeded set, the only variable being one dial — because the
+   decomposition (queue-latency vs travel vs work) is what shows what each
+   dial setting actually buys. Design the metric so that comparison is native,
+   not an afterthought.
+2. **`Compare()` must print a run-conditions header**: dial settings, the
+   save's tech-derived drone stats (the 2026-07-29 run's colony was already at
+   the vanilla ceiling — +60% speed, 2× carry — which reframes every number it
+   produced), depot fill state, and per-hub idle counts. No future run's
+   numbers should be readable without their conditions.
+3. **The structural decision is gated on this instrument.** Maintenance
+   priority escalation (vanilla precedent `SupplyGridBreakable.lua:48-56`) vs
+   the D08 layer-1 dispatcher will be decided by whether queue-latency or
+   travel dominates the hauling leg. This makes the redesign the pack's single
+   highest-leverage piece of work — treat it as the primary deliverable, with
+   the correctness review in its service.
+
 > **STATUS UPDATE — this prompt was written before the first run; the run has
 > now happened (2026-07-29) and CONFIRMED the top concern in §2.** The A/B
 > executed cleanly end to end — no crashes, deterministic target set, both legs

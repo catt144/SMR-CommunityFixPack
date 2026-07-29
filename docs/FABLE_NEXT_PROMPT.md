@@ -1,5 +1,20 @@
 # Continuation prompt (model-agnostic) — PLAYTEST STANDBY (updated 2026-07-29, post-disaster-leg)
 
+> ⚠️ **STALENESS BANNER (2026-07-29, later the same day — QA session).** Three
+> statements below are now WRONG; trust the pointed-to docs over this file:
+> 1. The QA review (`QA_REVIEW_PROMPT.md`) **has been fired and reported** —
+>    verdict on the D06 entry in `BUGS.md`; Track A fix plan revised to an
+>    additive/watchdog shape (no full replacement).
+> 2. The stress A/B **HAS RUN** (null result for the claim gate; metric flaw
+>    confirmed) — see D06 in `BUGS.md`; the instrument redesign is queued via
+>    `HARNESS_REVIEW_PROMPT.md`, which is the NEXT session to fire.
+> 3. "Src ≠ shipped Lua.fpk" is **WITHDRAWN** — full fpk extraction proved the
+>    shipped build IS Src (2250/2256 byte-identical, build 1.0.7.396349); see
+>    STATUS.md key facts. Keep apply-time self-checks anyway.
+> Also new since this file was written: the user decided the overhaul ships
+> with Mod Options **stat dials** (speed ×1.0/1.5/2.0, carry +0/+1/+2) — see
+> the DECISION section in `DRONE_OVERHAUL_OPTIONS.md`.
+
 **NEWEST FIRST (2026-07-29 — read the "Disaster-system leg" STATUS section
 first, then `docs/QA_REVIEW_PROMPT.md`).**
 
