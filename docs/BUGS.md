@@ -3138,11 +3138,25 @@ lived experience is materially worse. **So the null result must NOT be read as
 "the problem is small."** It says our *instrument* could not see the claim
 gate's mechanism — while the surrounding data independently confirms the
 underlying problem is severe.
-**One honest nuance to weigh against this:** the layout is deliberately spread
-for distance testing, so travel time (and therefore the hauling share) may be
-inflated relative to a compact player base. The environment is best-case on
-supply and drone count, but plausibly worse-case on distance. Both directions
-should be stated when this evidence is used.
+**CORRECTION (2026-07-29, same sitting): the "layout may be inflating distance"
+caveat is WITHDRAWN — the evidence contradicts it.** It was written on the
+assumption that test spacing had spread the colony out. Screenshots of the
+actual base show the opposite, and the user confirms the layout is deliberately
+optimised for drone access:
+- domes **clustered tightly and passage-linked**, not scattered;
+- **depot and stockpile arrays sited directly against the dome perimeters**,
+  with extractors and factories ringed close in — short haul legs by design;
+- **depots run min-balance thresholds so shuttles rebalance them**, plus
+  **2 shuttle hubs**, so stock is actively kept where it is needed;
+- **paths built over passages** specifically so drones navigate cleanly.
+So distance is **not** an aggravating artifact here — it is another axis on
+which this colony is BETTER than a typical player's, alongside supply, drone
+count and tech. **That makes the inversion argument stronger, not weaker:** the
+3h03m mean delivery, the 9h24m worst case, and `MartianUniversity`'s 11h48m
+unrepaired timeout all happened in a colony deliberately engineered to make
+drone logistics easy. There is no remaining "the test was unfair to the drones"
+explanation. Every environmental axis we can identify is favourable, and the
+numbers are still bad.
 **Interesting interaction worth building on:** the D08 drone-count advisory and
 the claim gate are **complementary, not independent** — right-sizing fleets
 increases contention, which is exactly the condition under which the gate earns

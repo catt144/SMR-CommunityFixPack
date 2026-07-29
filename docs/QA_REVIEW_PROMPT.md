@@ -315,10 +315,20 @@ the lived experience is materially worse** — which is an argument that somethi
 should be built, even though this particular run could not score the thing we
 built.
 
-Honest nuance to weigh both ways: the layout is deliberately spread for distance
-testing, so travel time (and the hauling share) may be inflated relative to a
-compact player base. Best-case on supply and drone count; plausibly worse-case
-on distance.
+**A caveat we WITHDREW after checking — do not resurrect it.** We initially
+recorded that the layout might be spread out for distance testing, inflating the
+hauling share. Screenshots of the actual colony refute that: domes are clustered
+tight and passage-linked, **depot and stockpile arrays sit directly against the
+dome perimeters**, extractors and factories ring close in, depots run
+min-balance thresholds with **2 shuttle hubs** rebalancing them, and paths are
+built over passages specifically so drones navigate cleanly. **The layout is
+deliberately optimised for drone access.**
+
+So distance joins supply, drone count and tech as an axis on which this colony
+is **better** than a typical player's. **There is no remaining "the test was
+unfair to the drones" explanation** — every environmental axis we can identify
+is favourable, and a maintenance resource still took 3h03m on average to arrive,
+9h24m at worst, and 11h48m in the case that never completed.
 
 **Question for you:** is that reading sound? And does it change what should be
 built — i.e. should the target be the pathological tail (the 9h/12h outliers a
