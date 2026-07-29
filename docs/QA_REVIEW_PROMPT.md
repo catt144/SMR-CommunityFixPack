@@ -38,6 +38,15 @@ later disproved by test. Assume more are wrong.
   rules + verified command table.
 - **Check the game is not running** (`tasklist` for `Mars.exe`) before touching
   loadable code. Edits to loaded Lua do nothing until relaunch.
+- **There is a measurement instrument you can ask for, and it has never been
+  run.** `C:\Dev\SMR-BugFixPack-TestKit\Code\91_Stress.lua` (local-only repo,
+  built 2026-07-29) breaks a deterministic seeded set of buildings and records
+  which hub's drone answered each repair and how long each leg took — see the
+  stress-harness table in `docs/PLAYTEST_CHECKLIST.md`. **Its A/B has not been
+  executed**, so several D08 open questions (queue bloat, polling cost, whether
+  the claim gate measurably changes closest-hub service) are currently
+  speculation that this tool could settle. If your review would benefit from
+  real numbers, say so — the user can run it.
 - Do NOT trust this document's claims. It is a summary written by the session
   that made the mistakes.
 
