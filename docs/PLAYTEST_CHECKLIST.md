@@ -870,6 +870,40 @@ session baseline (counters start at 0).
    isn't engaging) or extender coverage permanently lost after a flap
    (debounce dropped a rebuild — capture the log).
 
+**Trigger B2 — the MEASURED stress A/B (the real verdict; ~30 min).**
+Supersedes Trigger B's eyeball demo. Uses `SMRTest.Stress` (Test Kit helpers
+section above). **Review `91_Stress.lua` before its first ever run** —
+`docs/HARNESS_REVIEW_PROMPT.md`. Run at **normal to 3× speed, not ultra**:
+timings are measured in game time so speed does not change the numbers, but
+ultra stresses the sim and adds artifacts.
+
+1. Confirm the harness loaded — `SMRTest.Stress ~= nil` must print `true`.
+2. Clean the colony so both legs start identical (clears any pre-existing
+   malfunctions that would skew the target pool and add background repair
+   traffic): `SMRTest.Stress.HealAll()`
+3. **QUICKSAVE.** This one save is the anchor for BOTH legs.
+4. Dry run — see the target set without breaking anything:
+   `SMRTest.Stress.Targets{scope = "overlap", n = 25}`
+   If it reports far fewer than 25 eligible, widen the scope (`hub`, `radius`,
+   `all`) and note which you used.
+5. Toggle D06 **OFF** (Options → Mod Options). Verify:
+   `SMRFixPack.fixes.DroneOverhaul.status` → must read `inactive`.
+6. **LEG A:** `SMRTest.Stress.Break{scope = "overlap", n = 25, seed = 1}`
+   Let it run to `RUN ENDED` — it prints its own summary. `HealAll()` aborts.
+7. **Reload the quicksave** — identical colony state, identical target set.
+8. Toggle D06 **ON**. Verify `SMRFixPack.fixes.DroneOverhaul.status` → `active`.
+9. **LEG B:** the *exact same call* as step 6 — same scope, same n, same seed.
+10. `SMRTest.Stress.Compare()` — prints both runs side by side.
+11. `FlushLogFile()` and keep the log: the per-building trail is the evidence.
+
+**Read the result on `CLOSEST-HUB first claims (%)`** — that is the only line
+that scores what the module claims to do. Do NOT read total clearance time as a
+D06 score (the hauling leg is untouched; see the harness notes above).
+A reload-based protocol does **not** re-poison a save with a stranded disaster
+flag — tested 2026-07-29, F81 — so no cleanup is owed afterwards.
+
+`Result (B2 stress A/B — closest-hub % off vs on):` _____________________________________________
+
 **Trigger C — regression watch (shared machinery; spread across the session):**
 - Rockets: drones still load/unload landed rockets normally (F50 territory —
   rockets are class-exempt from the claim gate, verify by watching one cargo
