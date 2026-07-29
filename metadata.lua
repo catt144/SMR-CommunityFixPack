@@ -1,10 +1,30 @@
 return PlaceObj('ModDef', {
 	'title', "Community Fix Pack",
-	'description', "Fixes bugs in Surviving Mars: Relaunched gameplay code. Every fix targets a verified defect in the game's Lua source, patches at runtime in a mod-compatible way (no game files are modified), and can be individually disabled. See the mod page for the full list of fixes.",
+	'description', "Fixes bugs in Surviving Mars: Relaunched gameplay code. Every fix targets a verified defect in the game's Lua source and patches at runtime in a mod-compatible way (no game files are modified). The six optional modules can be toggled in-game via Mod Options on every platform; individual bug fixes can additionally be disabled on PC (via the console or a companion mod). See the mod page for the full list of fixes.",
+	'short_description', "Dozens of verified bug fixes for Surviving Mars: Relaunched, applied at runtime in a mod-compatible way — no game files modified. Plus six optional quality-of-life modules, all off by default.",
+	'last_changes', "Initial release: 68 bug fixes plus 6 optional modules (toggle in Mod Options).",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	'version', 1,
+	'version_major', 1,
+	'version_minor', 0,
 	'lua_revision', 350453,
+	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
+	-- nag players who removed it with the missing-mods prompt
+	'optional_mod', true,
+	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
+	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
+	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.
+	'ignore_files', {
+		"*.git/*",
+		"*.svn/*",
+		"*/Source/*",
+		"*/SourceData/*",
+		"*/docs/*",
+		"*/.claude/*",
+		"*README.md",
+		"*.gitignore",
+	},
 	-- Mod Options defaults (D05): must mirror items.lua's ModItemOptionToggle
 	-- names, all false. This field is what makes Options → Mod Options list the
 	-- pack (ModDef:HasOptions reads it, Mod.lua:473-475), and the engine seeds

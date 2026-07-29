@@ -19,7 +19,317 @@
 --   * Toggling takes effect immediately (00_Core's OnMsg.ApplyModOptions
 --     reconciliation activates/deactivates the module live); the tooltips
 --     stay behavior-only.
+--
+-- ModItemCode entries (audit 2026-07-29, A3): the Mod Editor's SaveDef
+-- regenerates metadata.lua's `code` list SOLELY from these items
+-- (Mod.lua:960-974 via UpdateCode :816-840) — without them an editor
+-- round-trip (and the editor upload flow, which saves-if-dirty) would write
+-- `code = false` and publish a mod that loads NO code at all. ORDER IS
+-- LOAD-BEARING: the entries below must stay in exactly metadata.lua's
+-- current `code` order (00_Core first, 90_SaveSanitizer after the last
+-- Fix_, then the six Opt_ in their current order), or a round-trip
+-- reorders the load sequence.
 return {
+	PlaceObj('ModItemCode', {
+		'name', "00_Core",
+		'CodeFileName', "Code/00_Core.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_CaveInsNoDisasters",
+		'CodeFileName', "Code/Fix_CaveInsNoDisasters.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_MeteorFrequency",
+		'CodeFileName', "Code/Fix_MeteorFrequency.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_UpgradeModifierLeak",
+		'CodeFileName', "Code/Fix_UpgradeModifierLeak.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_NightShiftWork",
+		'CodeFileName', "Code/Fix_NightShiftWork.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_MilestoneCrash",
+		'CodeFileName', "Code/Fix_MilestoneCrash.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_WispRewards",
+		'CodeFileName', "Code/Fix_WispRewards.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TouristApplicants",
+		'CodeFileName', "Code/Fix_TouristApplicants.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrainsToVoid",
+		'CodeFileName', "Code/Fix_TrainsToVoid.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LanderEmptyLaunch",
+		'CodeFileName', "Code/Fix_LanderEmptyLaunch.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LanderCargoRatchet",
+		'CodeFileName', "Code/Fix_LanderCargoRatchet.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LanderReturnFuel",
+		'CodeFileName', "Code/Fix_LanderReturnFuel.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_ShelterReflex",
+		'CodeFileName', "Code/Fix_ShelterReflex.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_BrokenTrackSalvage",
+		'CodeFileName', "Code/Fix_BrokenTrackSalvage.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrackSalvageWipe",
+		'CodeFileName', "Code/Fix_TrackSalvageWipe.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LakeEntombment",
+		'CodeFileName', "Code/Fix_LakeEntombment.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_GhostFarmOxygen",
+		'CodeFileName', "Code/Fix_GhostFarmOxygen.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_RocketDroneChurn",
+		'CodeFileName', "Code/Fix_RocketDroneChurn.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_ShuttleTransportCache",
+		'CodeFileName', "Code/Fix_ShuttleTransportCache.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_VacuumWalks",
+		'CodeFileName', "Code/Fix_VacuumWalks.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_ArrivalDeaths",
+		'CodeFileName', "Code/Fix_ArrivalDeaths.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DroneUnreachableForever",
+		'CodeFileName', "Code/Fix_DroneUnreachableForever.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_StaleReservations",
+		'CodeFileName', "Code/Fix_StaleReservations.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_CrystalMysteryHang",
+		'CodeFileName', "Code/Fix_CrystalMysteryHang.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TouristSatisfaction",
+		'CodeFileName', "Code/Fix_TouristSatisfaction.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrainPlatformWedge",
+		'CodeFileName', "Code/Fix_TrainPlatformWedge.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LowStorageWarning",
+		'CodeFileName', "Code/Fix_LowStorageWarning.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_CommandCenterNumbers",
+		'CodeFileName', "Code/Fix_CommandCenterNumbers.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DomeOverviewHighlight",
+		'CodeFileName', "Code/Fix_DomeOverviewHighlight.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrainCargoDumping",
+		'CodeFileName', "Code/Fix_TrainCargoDumping.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_UniversityOvertraining",
+		'CodeFileName', "Code/Fix_UniversityOvertraining.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DestroyedTunnels",
+		'CodeFileName', "Code/Fix_DestroyedTunnels.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DustSicknessBiorobots",
+		'CodeFileName', "Code/Fix_DustSicknessBiorobots.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DustSicknessDamage",
+		'CodeFileName', "Code/Fix_DustSicknessDamage.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_GeneForging",
+		'CodeFileName', "Code/Fix_GeneForging.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_MirrorSphereSite",
+		'CodeFileName', "Code/Fix_MirrorSphereSite.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_PayloadTemplateRefill",
+		'CodeFileName', "Code/Fix_PayloadTemplateRefill.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_AsteroidLanderAvailable",
+		'CodeFileName', "Code/Fix_AsteroidLanderAvailable.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_ShuttleHubOffAvailable",
+		'CodeFileName', "Code/Fix_ShuttleHubOffAvailable.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_FreedHousingNotice",
+		'CodeFileName', "Code/Fix_FreedHousingNotice.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DomeFreeSpaceMismatch",
+		'CodeFileName', "Code/Fix_DomeFreeSpaceMismatch.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_SmallLandscapeSites",
+		'CodeFileName', "Code/Fix_SmallLandscapeSites.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LandscapeUnitFilter",
+		'CodeFileName', "Code/Fix_LandscapeUnitFilter.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_RocketInteractGuard",
+		'CodeFileName', "Code/Fix_RocketInteractGuard.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrackConnectorPingPong",
+		'CodeFileName', "Code/Fix_TrackConnectorPingPong.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrackTunnelPowerBridge",
+		'CodeFileName', "Code/Fix_TrackTunnelPowerBridge.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_GridGlobalStorage",
+		'CodeFileName', "Code/Fix_GridGlobalStorage.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LastTransmissionStorage",
+		'CodeFileName', "Code/Fix_LastTransmissionStorage.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_GraphConsumedCaption",
+		'CodeFileName', "Code/Fix_GraphConsumedCaption.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_MoraleComfortTooltip",
+		'CodeFileName', "Code/Fix_MoraleComfortTooltip.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrainWaitTime",
+		'CodeFileName', "Code/Fix_TrainWaitTime.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_FounderTraitNotification",
+		'CodeFileName', "Code/Fix_FounderTraitNotification.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DomePipeMoveInside",
+		'CodeFileName', "Code/Fix_DomePipeMoveInside.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_StorageRateModifiers",
+		'CodeFileName', "Code/Fix_StorageRateModifiers.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_ReplaceTechCount",
+		'CodeFileName', "Code/Fix_ReplaceTechCount.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_SequenceLatents",
+		'CodeFileName', "Code/Fix_SequenceLatents.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_IndependenceTerraforming",
+		'CodeFileName', "Code/Fix_IndependenceTerraforming.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrackSalvageRefund",
+		'CodeFileName', "Code/Fix_TrackSalvageRefund.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LayoutTechLock",
+		'CodeFileName', "Code/Fix_LayoutTechLock.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TrainMinors",
+		'CodeFileName', "Code/Fix_TrainMinors.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DroneTransportMinors",
+		'CodeFileName', "Code/Fix_DroneTransportMinors.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_AnomalyCaveInMap",
+		'CodeFileName', "Code/Fix_AnomalyCaveInMap.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_TechDescriptionBuilding",
+		'CodeFileName', "Code/Fix_TechDescriptionBuilding.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_BombardmentSpread",
+		'CodeFileName', "Code/Fix_BombardmentSpread.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_ExtenderFlapChurn",
+		'CodeFileName', "Code/Fix_ExtenderFlapChurn.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DisasterPredictionLeak",
+		'CodeFileName', "Code/Fix_DisasterPredictionLeak.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_MeteorStormWedge",
+		'CodeFileName', "Code/Fix_MeteorStormWedge.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_RainsDeadlock",
+		'CodeFileName', "Code/Fix_RainsDeadlock.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "90_SaveSanitizer",
+		'CodeFileName', "Code/90_SaveSanitizer.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Opt_ClassicRockets",
+		'CodeFileName', "Code/Opt_ClassicRockets.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Opt_AcknowledgedWarnings",
+		'CodeFileName', "Code/Opt_AcknowledgedWarnings.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Opt_ResidencyControl",
+		'CodeFileName', "Code/Opt_ResidencyControl.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Opt_MultipleSuns",
+		'CodeFileName', "Code/Opt_MultipleSuns.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Opt_DroneOverhaul",
+		'CodeFileName', "Code/Opt_DroneOverhaul.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Opt_CohortHousing",
+		'CodeFileName', "Code/Opt_CohortHousing.lua",
+	}),
 	PlaceObj('ModItemOptionToggle', {
 		'name', "ClassicRockets",
 		'DisplayName', "Classic rockets — refuel while parked",

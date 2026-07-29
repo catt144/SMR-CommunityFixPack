@@ -59,7 +59,7 @@ Opt_DroneOverhaul.lua:74-76; applied to one module of six.
 globals — both live-enable-safe.) *Static inference from the proven engine
 fact; one live confirmation still worthwhile (see UNVERIFIED).*
 
-### A3. Packaging: four hard upload blockers + the ignore-list gap `[ ]`
+### A3. Packaging: four hard upload blockers + the ignore-list gap `[x — fixed 2026-07-29, plans 2.1/2.2, EXCEPT the preview image (owner task 2.5)]`
 Verified in the game source:
 - `short_description` missing → **Paradox Mods upload hard-rejected**
   (ParadoxMods.lua:29-32).
@@ -287,13 +287,13 @@ and needs a separate go-decision.
 
 ## Phase 2 — packaging & storefront layer
 
-- `[ ]` **2.1 (A3/B4)** metadata.lua: add `ignore_files` (defaults +
+- `[x]` **2.1 (A3/B4)** metadata.lua: add `ignore_files` (defaults +
   `*/docs/*`, `*/.claude/*`, `*README.md`, `*.gitignore` — LICENSE ships),
   `short_description`, `last_changes`, `optional_mod = true`; keep
   `lua_revision` (correct as-is); qualify the description's "individually
   disabled" sentence (PC surface only, all six optional modules toggleable
   everywhere via Mod Options); consider `version_major/version_minor`.
-- `[ ]` **2.2 (A3)** items.lua: add one `ModItemCode` entry per `Code/` file,
+- `[x]` **2.2 (A3)** items.lua: add one `ModItemCode` entry per `Code/` file,
   in EXACTLY the current metadata.lua `code` order (00_Core first,
   90_SaveSanitizer before the Opt_ block), so an editor round-trip regenerates
   the same list. Verify names/order against metadata.lua:20-97 after writing.
