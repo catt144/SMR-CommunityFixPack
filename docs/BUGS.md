@@ -2725,6 +2725,33 @@ decisive act: `RemoveDisasterNotifications("DisasterMeteorStorm", MainMap)`
 started raining"). One stuck table entry had been suppressing every weather and
 disaster system on that save. **This is no longer a hypothesis — the root
 cause, the mechanism, and the recovery are all demonstrated.**
+**ROOT MECHANISM PROVEN (2026-07-29, Repro A — and it needs NO thread wedge).**
+The stranding is a plain save/load persistence mismatch:
+- `g_DisastersPredicted` is a **GameVar** (`MapSettings.lua:131`) — it is saved
+  and restored with the game.
+- The notification that would clear it is **not** restorable. The engine says so
+  itself, in `SavegameFixups.DisasterNotifications` (:179-187): it reopens dust
+  storm and cold wave notifications and then states
+  `-- RainDisaster and MetheorStorm cannot be restored because they don't save
+  their start/end times`.
+- Nothing anywhere reconciles the table against live notifications on load.
+**Live proof:** the user set `g_DisastersPredicted["DisasterMeteorStorm"] = true`
+by hand (no notification, no meteors, no storm), quicksaved, reloaded — and the
+dump came back `DisasterMeteorStorm = true / predicted entries: 1` with nothing
+on screen. **A save/load inside a meteor-storm WARNING window is therefore
+sufficient to gate that colony's entire weather system permanently**, and with
+sensor towers pinning the warning window at 75 game hours (3+ sols) saving
+inside one is close to unavoidable. The user's map is `Meteor_High`
+(`MainMap.mapdata.MapSettings_Meteor`), so natural storms — and their warnings
+— are enabled; only `Meteor_VeryLow` sets `storm_forbidden`
+(`Data\MapSettings-Meteor.lua:10`).
+**This simplifies the fix and decouples it from F78.** No wedge is required, so
+the repair is a one-shot `OnMsg.LoadGame` reconciliation: clear any
+`g_DisastersPredicted[id]` that has no live notification behind it. That is the
+FIX_POLICY §3 one-shot-sweep shape, needs zero persisted state, and is
+self-healing on every subsequent load. The `MeteorsDisaster` in-flight leak
+(below) remains a real second stranding path worth closing, but it is no longer
+the only — or even the likely — cause.
 Supporting reads from the same sitting:
 - **The pack's meteor thread is HEALTHY** — `phase=long-sleep-done age=1h
   restarts=0`, and the user saw two NATURAL single strikes. So the wedge is
@@ -2737,6 +2764,14 @@ Supporting reads from the same sitting:
   `GetDustStormDescr()` returned nil while `GetColdWaveDescr()` did not. So the
   dust-storm silence needed no bug at all (the user called this correctly);
   cold waves were possible all along and were blocked purely by the flag.
+  **Corroborated from the in-game Atmosphere thresholds panel** (user
+  screenshot, same sitting): "Dust storms end 50%" against a live Atmosphere of
+  57.38% — over. The same panel independently confirms the rest of the picture:
+  "Meteor storms end 80%" (so storms and their warnings are very much live at
+  57%, as the user pointed out), "Toxic rains end 55%/55%/5%" against
+  57.4/51.9/17.2 — NOT all three past their end, so toxic rain is still legal —
+  and "Clear-water rains 40%/40%/10%", all three satisfied, which is exactly the
+  normal rain that fired the moment the flag was cleared.
 - **Sensor towers at the cap made it near-certain**: 6 towers →
   `GetDisasterWarningTime()` pinned at the 75h maximum, i.e. every disaster
   cycle carried a 3+ sol predicted window.
