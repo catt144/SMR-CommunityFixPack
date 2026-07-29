@@ -100,7 +100,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F78 | MeteorsDisaster hangs mid-strike (multi-map save?); meteors never land | P1 | high | investigating (filed 2026-07-28 — PT-01 watchdog caught it live; hypothesis 1 refuted live same day; 2026-07-29 two strikes seen = likely watchdog restarts, and the weather half split off to F81) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | confirmed vanilla gap 2026-07-28 — fix would be feature-completion, D-item decision (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating (observed live 2026-07-28; mitigated by adding trains; forensic trail + tap on entry) |
-| F81 | Rains disaster loop deadlocks forever on the first collision; toxic rain never returns | P1 | high | confirmed by trace 2026-07-29 (static, fully bracketed; live discriminator + cheat workaround on entry) — fix is a USER DECISION |
+| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **CONFIRMED LIVE 2026-07-29** — stale `DisasterMeteorStorm` found on the user's save; clearing it started rain instantly. Root cause + recovery demonstrated; fix is a USER DECISION |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 
