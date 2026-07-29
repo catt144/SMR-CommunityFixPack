@@ -22,22 +22,20 @@ modules (denominators move to /74) and the wave-6 probes
 rains one needs a loaded colony) — record the fresh pair's numbers in STATUS
 and update the expected-numbers bullet below when it runs.
 
-**A whole-mod audit ran 2026-07-29 (fresh-context, four parallel reviews).**
-Its findings + remediation plan live in `docs/AUDIT_FINDINGS.md`; the one-off
-`docs/AUDIT_FIX_PROMPT.md` implements Phases 1-3 (code defects, packaging
-blockers, docs restructure). Two consequences for playtest sessions NOW:
+**A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
+(same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
+ticked) live in `docs/AUDIT_FINDINGS.md`; Phase 4 (core helpers, merges,
+deactivation surface) stays deferred pending a user go-decision. Playtest
+consequences NOW:
 
-1. **Until audit fix 1.3 lands: the FIRST mid-session enable of
-   ClassicRockets, ResidencyControl (its dome-gate half) or MultipleSuns
-   (its panel-binding half) silently does nothing until a game relaunch** —
-   the toggle reports `active` but the base-class hooks were installed after
-   class flattening. If the user playtests those toggles, have them enable,
-   relaunch once, then judge. (DroneOverhaul, CohortHousing and
-   AcknowledgedWarnings are NOT affected.) Do not misread a dead first-enable
-   as a module FAIL.
-2. **Do not run AUDIT_FIX_PROMPT concurrently with a play-assist session** —
-   both edit BUGS/STATUS/MOD_DESCRIPTION and will collide. It wants its own
-   fresh session.
+1. **The opt-module first-enable defect is FIXED (audit 1.3):** a first
+   mid-session enable of ClassicRockets / ResidencyControl / MultipleSuns now
+   works without a relaunch — hooks install at file scope. The human
+   re-verify is **PT-55** in the checklist (§2); until it passes, treat an
+   apparent dead first-enable as a PT-55 FAIL to report, not as legacy
+   behavior.
+2. The audit-era warning about running the fix prompt concurrently is
+   obsolete — that one-off executed and deleted itself 2026-07-29.
 
 **Playtest state:** PT-53 (D07 CohortHousing) is 3-of-5 PASS ("worked
 wonderfully") — only triggers A and E left. PT-52 (D06 DroneOverhaul + F77)
@@ -116,9 +114,9 @@ Your jobs, in the order they usually come up:
    bullet in "Not yet swept" carries the full assignment-machinery trace and
    the R1-R7 paste-ready console forensics.
 4. `docs\FIX_POLICY.md` — binding rules for any code you write.
-5. Only when relevant: `docs\AUDIT_FINDINGS.md` (audit findings + the
-   Phase 1-4 plan — the source of truth for what AUDIT_FIX_PROMPT will
-   change); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
+5. Only when relevant: `docs\AUDIT_FINDINGS.md` (audit findings + the plan —
+   Phases 1-3 implemented 2026-07-29, Phase 4 awaiting the user's
+   go-decision); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
    iteration, not just knob tuning — the shipped core is the veto variant of
    option H + option A; upgrade paths H-v2/B/C and the DECISION section are
    there).
@@ -137,15 +135,12 @@ silent.
   last pair. Run it before any further code lands; record fresh numbers
   (expect /74 denominators + the wave-6 probes) in STATUS and update this
   prompt's expected-numbers bullet.
-- **AUDIT_FIX_PROMPT (fresh session, NOT concurrent with play)** — implements
-  AUDIT_FINDINGS Phases 1-3: the three veto-bypass fixes, the opt-module
-  first-enable repair, the error-status dead checkbox, F78/F81 decoupling,
-  the four upload blockers + ignore_files, MOD_DESCRIPTION corrections
-  (CohortHousing block, savegame claim, console achievements disclosure),
-  README sync, ENGINE_FACTS extraction + STATUS restructure. After it runs,
-  the three affected opt-modules' live-toggle behavior needs a human re-test
-  (both directions, mid-session first enable) — add it to the relevant PT
-  sections when processing.
+- **~~AUDIT_FIX_PROMPT~~ DONE 2026-07-29** — AUDIT_FINDINGS Phases 1-3 all
+  landed (veto bypasses, opt-module first-enable repair, error-status
+  checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
+  MOD_DESCRIPTION/README corrections, ENGINE_FACTS + STATUS/SESSION_LOG
+  restructure). What it left for humans: **PT-55** (opt-module live-toggle
+  re-verify, checklist §2) and the **Phase 4 go-decision** (user).
 - **PT-52 STRESS A/B — re-run with the v2 harness (the v1 run's metric was
   invalid).** Protocol is Trigger B2 in the checklist (§2): quicksave →
   `Targets` dry run (check the `pure_only=true` cohort size too) → D06 OFF →

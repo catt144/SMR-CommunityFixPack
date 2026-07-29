@@ -6,7 +6,9 @@ four independent fresh-context reviews (full patch-target map over all 75
 distribution readiness verified against the game source), top findings
 spot-verified against the actual files before recording. **Nothing was modified
 by the audit itself.** Remediation is tracked in the PLAN section at the bottom;
-docs/AUDIT_FIX_PROMPT.md is the one-off that implements it.
+Phases 1-3 were implemented 2026-07-29 by the one-off AUDIT_FIX_PROMPT.md
+(executed and deleted per its own rule; the work is in the "Audit fix"
+commit series and the SESSION_LOG leg). Phase 4 awaits a user go-decision.
 
 Ground truth: `Code/` = **75 files** (67 `Fix_` + 6 `Opt_` + 00_Core +
 90_SaveSanitizer) = **74 registered modules, 68 default-active**. Several docs'
@@ -206,7 +208,9 @@ Concrete drift (all verified):
   tracked defects DONE across 46 registered modules", ~:1042) sits mid-file
   styled as current. WORKFLOW.md describes a dead workflow (lists 3 docs of
   14). TESTING.md is era-2 sediment the live checklist carries a warning label
-  about. `[ ]`
+  about. `[x — fixed 2026-07-29, plans 3.2-3.5: ENGINE_FACTS extracted,
+  STATUS rebuilt as a current-state doc with legs in archive/SESSION_LOG.md,
+  WORKFLOW rewritten, sediment archived]`
 - **D7** PLAYTEST_CHECKLIST.md: fossilized preamble (30-fix/wave-3 era), stale
   archive list (missing 11 archived PTs), "all 30"/"all 39" fix counts,
   reporting-protocol step 6 pointing at a STATUS header string that no longer
@@ -251,9 +255,9 @@ authoritative home plus pointers** — that is the structural lesson.
 
 # REMEDIATION PLAN
 
-Playtesting items are excluded (owner runs those). Phases 1-3 are implemented
-by the one-off **docs/AUDIT_FIX_PROMPT.md**; Phase 4 is deliberately deferred
-and needs a separate go-decision.
+Playtesting items are excluded (owner runs those). Phases 1-3 were
+implemented 2026-07-29 (the one-off AUDIT_FIX_PROMPT session — since
+deleted); Phase 4 is deliberately deferred and needs a separate go-decision.
 
 ## Phase 1 — code defects (minimal diffs; no refactors; each item independently testable)
 

@@ -8,6 +8,88 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## Audit remediation session — 2026-07-29 (game-free, one-off AUDIT_FIX_PROMPT executed and deleted)
+
+AUDIT_FINDINGS.md Phases 1-3 implemented in full, one commit per plan item
+("Audit fix N.N" series, 88c2f08..HEAD). Parse sweep clean on every touched
+Lua file; every patch target re-verified against Src before editing.
+
+**Phase 1 (code):**
+- 1.1 (A1) veto re-check in DustSicknessDamage / DustSicknessBiorobots /
+  IndependenceTerraforming patch() (LastTransmissionStorage donor pattern);
+  IndependenceTerraforming's status heal gated to never overwrite "disabled".
+- 1.2 (B3) data_loaded latch in the DustSickness pair — absent targets after
+  DataLoaded now latch `inactive` with a reason instead of reporting active
+  forever.
+- 1.3 (A2) file-scope install + per-call IsActive gate (Opt_DroneOverhaul
+  donor) for Opt_ClassicRockets (whole fuel wrap), Opt_ResidencyControl
+  (ONLY the CanAcceptNewColonists gate) and Opt_MultipleSuns (ONLY the
+  GameInit binding wrap) — first mid-session enable now works; apply() keeps
+  its self-checks and reason strings; headers tell the truth.
+- 1.4 (B1) reconciler retries "error" entries on toggle-ON, logs every
+  skip/failed retry and vetoed-toggle attempt, and surfaces
+  on_activate/on_deactivate errors.
+- 1.5 (B2) MeteorStormWedge's vanilla-release path clears
+  g_DisastersPredicted.DisasterMeteorStorm itself (guarded on no live
+  notification) — self-sufficient with F81 disabled, idempotent beside it.
+- 1.6 (C4) %% escaping on all 6 remaining unescaped ModLog sites (the plan's
+  "6 local + 4 inline" double-counted — grep proved exactly 6 existed);
+  MoraleComfortTooltip's false returns-pass-through comment corrected
+  (shipped UIStatUpdate verified to return nothing); build stamp
+  1.0.7.396349 added to F05/F08/F07+F15/F29 headers.
+
+**Phase 2 (packaging/storefront):**
+- 2.1 metadata.lua: short_description (192 chars), last_changes,
+  optional_mod=true, version 1.0, ignore_files (defaults + docs/.claude/
+  README/.gitignore; LICENSE ships), description's per-fix-disable claim
+  qualified. lua_revision confirmed and kept.
+- 2.2 items.lua: 75 ModItemCode entries script-generated from metadata.lua
+  and diff-verified identical order — the editor round-trip / upload flow no
+  longer regenerates `code = false`. Toggles untouched.
+- 2.3 MOD_DESCRIPTION.md: CohortHousing block (name verified in-game:
+  "Retirement Home"); honest savegame-footprint wording replaces the false
+  "stores nothing" claim; console achievements disclosure (Xbox/PS/MS Store
+  blocked, Steam/PC not); PC-only per-fix-disable caveat; console
+  bug-reporting variant.
+- 2.4 README.md: 4 missing fixes + 2 missing modules added; findings count
+  73 → 91. (2.5 preview image / screenshots / portal rules = owner tasks,
+  still open.)
+
+**Phase 3 (docs):**
+- 3.1 F02 heading + RESOLUTION note (root cause pinned to F78/F81); D07
+  heading matched to its index row; withdrawn fpk-divergence doctrine
+  corrected in its last two live copies + BUGS/WORKFLOW framing now cites
+  the 2,250/2,256 parity proof. (D06's index/heading already agreed.)
+- 3.2 ENGINE_FACTS.md extracted verbatim from STATUS "Key technical facts"
+  (sole authoritative home); pointers updated.
+- 3.3 STATUS.md rebuilt as a ~225-line current-state doc (header with
+  authoritative counts / open decisions / next gates + reference sections);
+  all legs, wave records and superseded A/B tables moved verbatim to THIS
+  file; stale "47 tracked defects" headline no longer styled as current.
+- 3.4 sediment archived (ChatGPT report, RESEARCH, TESTING,
+  CHEATS_INVENTORY) with promotions first: RESEARCH §3 leads → C03-C08,
+  PLUS its three HIGH untraced leads → C09-C11 (small scope extension so
+  archiving didn't bury them); CHEATS_INVENTORY's 11 missing commands +
+  negative-knowledge list folded into the checklist's verified table (Src
+  lines re-verified); TestKit README's probe table was already in place —
+  its two stale pointers fixed (one docs-only TestKit commit, 39ecdba).
+- 3.5 WORKFLOW.md rewritten (reading path, per-fix discipline, fpk
+  extraction diff as an explicit release gate, post-audit release steps).
+- 3.6 FIX_POLICY: global-replacement rank 4b, reconstruction sub-category,
+  declaring-class rule, OnMsg status+veto rule, data_loaded-latch rule, new
+  optional-modules / engine-semantics / console-platforms sections.
+- 3.7 28 BUGS.md index rows slimmed to status + date + PT ref (prose
+  verified present in entries first).
+
+**Found beyond the audit:** nothing contradicting a finding; two counting
+nits (the 1.6 "6+4" double-count; D06's 3.1 half already fixed pre-audit).
+PT-55 added to the checklist for the owed human re-verify.
+
+**Owed to humans:** PT-55 (three reworked opt-modules' live toggles, both
+directions, mid-session FIRST enable); a PT-20-shaped save/remove/load cycle
+covering wave-6 persisted state; the pre-flight A/B RunAll pair (still owed
+since wave 6); owner tasks 2.5; the Phase 4 go-decision.
+
 ## Superseded rolling wrap (the pre-restructure STATUS header, through 2026-07-29)
 
 Updated: **2026-07-29 LATE (QA-review session + wave-6 build): the

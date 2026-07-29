@@ -39,9 +39,8 @@ watchdog; PT-52 Trigger B + the B2 re-run on the v2 stress harness; PT-53
 A/E halves; PT-46 tail; PT-20 save/remove/load incl. wave-6 persisted
 state; PT-21.
 
-**Newest leg:** `docs/archive/SESSION_LOG.md` → the 2026-07-29
-disaster-system leg (the audit-remediation leg lands above it when this
-session wraps).
+**Newest leg:** `docs/archive/SESSION_LOG.md` → "Audit remediation session —
+2026-07-29" (the disaster-system leg sits below it).
 
 ## What this project is
 

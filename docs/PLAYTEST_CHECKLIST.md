@@ -327,6 +327,29 @@ healthy = `vetoed` climbing, `veto_expired` low, `unclaimed` not building up.
 
 # 2 · In progress — owed halves of partially-passed tests
 
+## PT-55 — Opt-module live-toggle re-verify · covers **audit fix 1.3 (2026-07-29)**
+
+The audit rework moved ClassicRockets' fuel wrap, ResidencyControl's dome
+gate and MultipleSuns' panel-binding wrap to file-scope installs, so a FIRST
+mid-session Mod Options enable now works without a relaunch (previously
+silently dead until restart). One sitting, any healthy save, per module:
+
+1. Start the session with the module **OFF**. Mid-session, toggle it **ON**
+   (no relaunch) and confirm the behavior engages: ClassicRockets — a parked,
+   destination-less player rocket starts requesting launch fuel;
+   ResidencyControl — a closed dome stops voluntary move-ins (the infopanel
+   row appears on the next panel open); MultipleSuns — a NEW panel built
+   beside sun #2 binds to it (the limit lift itself was already live-safe).
+2. Toggle **OFF** again: behavior reverts immediately (vanilla answers).
+3. `SMRFixPack.ListFixes()` agrees with the toggle at each step; log clean
+   (PT-22 rules).
+
+PASS flips nothing on its own (the modules keep their D-entry gates) — it
+retires the audit's A2 "live confirmation still worthwhile" caveat; record
+the result on the D01/D03/D04 entries.
+
+`Result:` _____________________________________________
+
 ## PT-53 — Cohort housing · covers **D07 `Opt_CohortHousing`** (built 2026-07-28)
 
 Colonist/housing-level rule, NO dome designation: a Senior or Child living in
