@@ -84,6 +84,7 @@ local function patch_node(node, seen, depth, stats)
 end
 
 local patched = false
+local data_loaded = false   -- DataLoaded has fired at least once
 
 local function patch()
 	if patched then return end
@@ -93,15 +94,31 @@ local function patch()
 	local disabled = rawget(_G, "SMRFixPack_Disabled")
 	if type(disabled) == "table" and disabled[FIX_ID] then return end
 	local storybits = rawget(_G, "StoryBits")
-	if type(storybits) ~= "table" or type(rawget(_G, "HasTrait")) ~= "table" then return end
 	local present = false
-	for _, id in ipairs(STORYBIT_IDS) do
-		if storybits[id] then
-			present = true
-			break
+	if type(storybits) == "table" and type(rawget(_G, "HasTrait")) == "table" then
+		for _, id in ipairs(STORYBIT_IDS) do
+			if storybits[id] then
+				present = true
+				break
+			end
 		end
 	end
-	if not present then return end   -- presets not loaded yet; try again on DataLoaded
+	if not present then
+		-- Before DataLoaded this just means "presets not loaded yet". Only after
+		-- DataLoaded does an absent storybit mean a future update removed the
+		-- target — latch inactive then instead of reporting active forever
+		-- (audit 2026-07-29, B3; pattern: Fix_LastTransmissionStorage).
+		if data_loaded then
+			patched = true
+			local entry = SMRFixPack.fixes[FIX_ID]
+			if entry then
+				entry.status = "inactive"
+				entry.detail = "the Dust Sickness storybits are gone (game update changed them?)"
+			end
+			log("%s: inactive (the Dust Sickness storybits are gone)", FIX_ID)
+		end
+		return
+	end
 
 	local stats = { found = 0, patched = 0 }
 	for _, id in ipairs(STORYBIT_IDS) do
@@ -128,6 +145,7 @@ SMRFixPack.Register(FIX_ID, {
 })
 
 function OnMsg.DataLoaded()
+	data_loaded = true
 	patch()
 end
 

@@ -39,6 +39,7 @@ local function dust_sickness_daily_update(colonist, trait)
 end
 
 local patched = false
+local data_loaded = false   -- DataLoaded has fired at least once
 
 local function patch()
 	if patched then return end
@@ -49,7 +50,22 @@ local function patch()
 	if type(disabled) == "table" and disabled[FIX_ID] then return end
 	local presets = rawget(_G, "TraitPresets")
 	local trait = presets and presets.DustSickness
-	if type(trait) ~= "table" then return end
+	if type(trait) ~= "table" then
+		-- Before DataLoaded this just means "presets not loaded yet". Only after
+		-- DataLoaded does a missing preset mean a future update removed the
+		-- target — latch inactive then instead of reporting active forever
+		-- (audit 2026-07-29, B3; pattern: Fix_LastTransmissionStorage).
+		if data_loaded then
+			patched = true
+			local entry = SMRFixPack.fixes[FIX_ID]
+			if entry then
+				entry.status = "inactive"
+				entry.detail = "TraitPresets.DustSickness not found (game update changed it?)"
+			end
+			log("%s: inactive (TraitPresets.DustSickness not found)", FIX_ID)
+		end
+		return
+	end
 	if type(trait.param) ~= "number" or type(trait.daily_update_func) ~= "function" then
 		local entry = SMRFixPack.fixes[FIX_ID]
 		if entry then
@@ -76,6 +92,7 @@ SMRFixPack.Register(FIX_ID, {
 })
 
 function OnMsg.DataLoaded()
+	data_loaded = true
 	patch()
 end
 

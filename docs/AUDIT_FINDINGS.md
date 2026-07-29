@@ -101,7 +101,7 @@ Fix_DisasterPredictionLeak.lua:75-85). With F81 individually disabled, a
 pulse-released storm strands the prediction flag — the exact leak F81 fixes.
 Only cross-fix functional coupling found in the pack.
 
-### B3. DustSickness pair reports `active` forever if a future patch removes its targets `[ ]`
+### B3. DustSickness pair reports `active` forever if a future patch removes its targets `[x — fixed 2026-07-29, plan 1.2]`
 `patch()` returns silently with no data-loaded latch
 (Fix_DustSicknessDamage.lua:45-47, Fix_DustSicknessBiorobots.lua:90-99); their
 siblings got the latch (Fix_LastTransmissionStorage.lua:96-125). Reporting
@@ -259,7 +259,7 @@ and needs a separate go-decision.
   Fix_DustSicknessDamage, Fix_DustSicknessBiorobots, Fix_IndependenceTerraforming.
   In IndependenceTerraforming, additionally guard the status heal so it never
   overwrites `"disabled"` (heal only an `"inactive"` mislabel).
-- `[ ]` **1.2 (B3)** Add the data-loaded latch to the DustSickness pair
+- `[x]` **1.2 (B3)** Add the data-loaded latch to the DustSickness pair
   (pattern: Fix_LastTransmissionStorage / Fix_IndependenceTerraforming's
   `ever_changed` + DataLoaded bookkeeping): if the target is still absent once
   DataLoaded has fired, flip the entry to `inactive` with a reason string.
