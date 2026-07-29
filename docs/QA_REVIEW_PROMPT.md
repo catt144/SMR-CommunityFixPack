@@ -72,6 +72,30 @@ later disproved by test. Assume more are wrong.
 - Do NOT trust this document's claims. It is a summary written by the session
   that made the mistakes.
 
+## SECOND META-DANGER — all our evidence comes from unrepresentative conditions
+
+This applies **project-wide**, not just to the drone work. Every playtest result
+in this project comes from either purpose-built fixture saves or a live colony
+with **all techs researched, cheat-filled depots, heavily over-provisioned drone
+fleets, and layouts arranged for whatever test was being run** (domes positioned
+to exercise migration, distances set to exercise range logic, and so on). That
+is the efficient way to force a scenario; it is not how anyone plays.
+
+Use this split when weighing any claim we make:
+- **Correctness claims generalise** — a dead `if`, an unremoved notification, an
+  unbounded loop is wrong at any base size. Track A is almost entirely in this
+  class.
+- **Behavioural / timing claims do not** — anything about speed, contention,
+  throughput or assignment quality depends on scarcity, fleet size, density and
+  layout, all of which our conditions distort. Track B is almost entirely in
+  *this* class, which is why its headline result needs the scepticism described
+  below.
+
+The full statement of this is in `docs/PLAYTEST_CHECKLIST.md` under "EXTERNAL
+VALIDITY". **If you think any conclusion we reached is an artifact of test
+conditions rather than a property of the game, say so — that judgement is
+explicitly part of what we are asking you for.**
+
 ## THE META-DANGER — read this before evaluating anything
 
 **All static analysis in this project is done against `ModTools\Src`, but the

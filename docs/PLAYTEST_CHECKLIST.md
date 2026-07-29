@@ -68,6 +68,36 @@ tested. Nothing ships as "verified" on probe evidence alone.
    inexplicably dead, hence the fallbacks). Last resort: a Mod Editor test
    session grants the console unconditionally.
 
+### ⚠️ EXTERNAL VALIDITY — how far our results generalise (added 2026-07-29)
+
+**Everything in this document is tested under conditions no ordinary player
+experiences**, and that needs saying once, plainly, so no result is over-read.
+Our evidence comes from either (a) purpose-built fixture saves, or (b) a live
+colony with **all techs researched, cheat-filled depots, heavily over-provisioned
+drone fleets, and layouts arranged for the test at hand** — e.g. domes placed to
+exercise cross-dome migration, distances set up to exercise range logic. That is
+the right way to force a scenario quickly; it is not the way anyone plays.
+
+**Read results through this split:**
+- **Correctness claims generalise.** A nil-iteration bug, a dead `if`, an
+  unremoved notification, an unbounded loop — these are condition-independent.
+  If the code path is wrong it is wrong at any base size. Most `Fix_*` modules
+  are in this class and their `tested` flags mean what they say.
+- **Behavioural and timing claims do NOT generalise automatically.** Anything
+  about speed, contention, throughput, assignment quality or "does the player
+  notice" depends on scarcity, fleet size, density and layout — all of which our
+  test conditions distort. **State the conditions whenever such a result is
+  recorded**, and treat the result as a measurement of *that* colony, not of the
+  game.
+
+**Worked example, D06 (2026-07-29):** the drone A/B returned a null result for
+the claim gate — but the colony had pre-filled depots and 14-24 idle drones per
+hub, i.e. almost no contention for the gate to arbitrate. The measurement was
+internally valid and externally misleading. The same sitting's numbers
+nonetheless showed severe hauling delays *despite* every environmental axis
+being favourable, which is a condition-independent signal pointing the other
+way. Full analysis on the D06 entry — it is the model for how to write these up.
+
 ### Cheating without contaminating results
 
 Cheat the **setup**, never the **mechanism under observation**. The fixes patch
