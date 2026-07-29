@@ -616,9 +616,13 @@ save risk, which is most of what the building was wanted for.
 3. Does the dome early-return path (`_TaskRequest.lua:266-271`) need the same
    treatment, or is dome-inherited registration already correct?
 4. Combined-radius cap for layer 3 — pick from live lap data, not from theory.
-5. **Src vs shipped `Lua.fpk` divergence** — proven real this session
-   (`GetCameraLookAtPassable` exists in Src, does not exist at runtime). Every
-   layer needs an apply-time self-check against the *shipped* shape.
+5. ~~**Src vs shipped `Lua.fpk` divergence** — proven real this session
+   (`GetCameraLookAtPassable` exists in Src, does not exist at runtime).~~
+   **[WITHDRAWN 2026-07-29 — misreading: that function is a Cheats.lua
+   file-local, console-invisible by design; the full extraction diff proved
+   the shipped build IS Src (2,250/2,256 byte-identical, divergences
+   engine/tooling only) — see ENGINE_FACTS.md.]** Apply-time self-checks stay
+   for every layer regardless: they guard future game updates.
 
 ## Recommended order
 

@@ -29,9 +29,12 @@ In-game checks: console `SMRFixPack.ListFixes()` prints each fix's status
 
 ## fpk verification (required per fix, before release)
 
-All BUGS.md line numbers come from `ModTools\Src`, but the game executes
-`Packs\Lua.fpk` + `Data.fpk`, whose file dates are slightly newer than the Src
-tree. A fix that assumes un-hotfixed code must verify its target. Options:
+All BUGS.md line numbers come from `ModTools\Src`; the game executes
+`Packs\Lua.fpk` + `Data.fpk`. **Parity is PROVEN for the current build
+(1.0.7.396349, extraction diff 2026-07-29): 2,250/2,256 shipped Lua files are
+byte-identical to Src, the 5 divergences engine/tooling only.** The discipline
+below stays because it guards *future* game updates — re-run the extraction
+diff after every patch. Options:
 1. Runtime check inside `apply` (preferred, already policy): confirm the
    function/table still exhibits the bug shape before patching; bail with a
    reason string otherwise.

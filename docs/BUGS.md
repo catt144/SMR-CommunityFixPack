@@ -3,9 +3,12 @@
 Canonical record of every defect found in the game's shipped Lua source
 (`<game>\ModTools\Src`), its evidence, and its fix status. **Update this file in
 the same change that adds or edits a fix.** All line numbers refer to the
-shipped source tree; the game executes `Packs\Lua.fpk` (dated slightly newer),
-so each fix must spot-verify its target function wasn't hotfixed (see
-`WORKFLOW.md` → "fpk verification").
+shipped source tree; the game executes `Packs\Lua.fpk`, **proven byte-identical
+to Src for all gameplay Lua** (2,250/2,256 files, build 1.0.7.396349 — the
+2026-07-29 extraction diff; the 5 divergences are engine/tooling only). Each
+fix still self-checks its target at apply time — that guards *future* game
+updates — and the extraction diff is re-run after every game update
+(see `WORKFLOW.md`).
 
 Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `wontfix` | `blocked`.
 
@@ -117,7 +120,7 @@ Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbe
 DustStorm.lua:413, DustDevils.lua:189, surface quake Marsquake.lua:43). Matches live
 Paradox-forum report. **Fix:** wrap FUNC slot (index 3) of `PeriodicRepeatInfo["UndergroundMarsquake"]`.
 
-### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed*: Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL; REWORKED 2026-07-26 with a stall watchdog + forensics; root cause NOT yet pinned, PT-01 re-run will capture it]`
+### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed: Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL; REWORKED 2026-07-26 with a stall watchdog + forensics; PT-01 silence ROOT CAUSE PINNED 2026-07-29 to F78 (wedged storm held the scheduler) + F81 (stranded prediction flag gated all weather), wave-6 fixes shipped — see the resolution note at the entry's end]`
 
 **PT-01 FAIL (2026-07-25, user confirmed NO reloads):** Variant B, max-threat map.
 Natural strikes at ~sol 5.5, 7.5 (+60h), 8.4 (+39h), 10.3 (+39h); 3 Sensor Towers built
@@ -175,6 +178,17 @@ survives in `DustDevils.lua:168-173` and the MeteorStorm thread (`Meteors.lua:32
 **Fix:** re-register `GlobalGameTimeThread("Meteors", ...)` with repaired wait
 (`while GameTime() - start_time < spawn_time - warning_time do Sleep(5000) end`).
 Check how `GlobalGameTimeThread` re-registration behaves; may need thread deletion + respawn on load.
+
+**RESOLUTION (2026-07-29): the PT-01 silence root cause is PINNED — and it was
+never this fix's loop.** The live sitting traced it to the meteor STORM side:
+a wedged MeteorStorm drain loop held the scheduler thread forever (F78), and
+the ended storm's stranded `g_DisastersPredicted` flag gated the entire
+weather system (F81) — "BOTH disaster threads went quiet" above was exactly
+that. The F02 watchdog's silence-watch captured the evidence as designed.
+Wave-6 fixes shipped: `Fix_MeteorStormWedge` (F78) +
+`Fix_DisasterPredictionLeak` (F81) — full trace and evidence live on those
+two entries. The F02 watchdog stays as a standing safety net.
+Cross-refs: F78, F81.
 
 ### F03 — Upgrade buffs leak & stack after salvage/demolish  `[tested: Code/Fix_UpgradeModifierLeak.lua stops new leaks; Code/90_SaveSanitizer.lua clears the ones already in a save — PT-02 PASS 2026-07-25]`
 `Lua\Buildings\Building.lua:1268-1274` — `StopUpgradeModifiers` iterates `upgrade_modifiers`
@@ -3266,7 +3280,7 @@ iteration knobs. Shipped alongside: **F77**'s `Fix_ExtenderFlapChurn` (default-o
 repair) so extender power flickers stop Idle-kicking whole fleets and muddying the
 overhaul's observability.
 
-### D07 — Cohort domes: no way to consolidate seniors/children without filter micromanagement (design, med)  `[built 2026-07-28: Code/Opt_CohortHousing.lua (opt-in, off by default, Mod Options toggle "Cohort housing — Seniors & Children") — user go given the same evening after config confirmation; A/B pair clean; PT-53 PARTIAL PASS 2026-07-29 — triggers B and D confirmed live, A/C/E not yet reported]`
+### D07 — Cohort domes: no way to consolidate seniors/children without filter micromanagement (design, med)  `[built 2026-07-28: Code/Opt_CohortHousing.lua (opt-in, off by default, Mod Options toggle "Cohort housing — Seniors & Children") — user go given the same evening after config confirmation; A/B pair clean; PT-53 3-of-5 PASS 2026-07-29 — cross-dome moves (trains/passages/shuttles by distance), graduation drain, and organic no-churn-when-no-slots all confirmed live, "worked wonderfully"; only the employed-senior exemption (A) and precedence/uninstall (E) still owed, so NOT yet tested]`
 **FIRST LIVE ENABLE — PT-53 partial, 2026-07-29 (user, unprompted during the
 disaster sitting): "it worked wonderfully."**
 - **Trigger B (cross-dome move) — PASS, and stronger than the test asked for.**

@@ -123,9 +123,15 @@ on the entries; this is the index.
   behaviour. Recorded on the entry so it is not re-derived.
 - **F82 filed (P3):** split power/life-support grid notification lingers ~a sol
   after the grid is rejoined; machinery located, updater cadence still to trace.
-- **Src ≠ shipped `Lua.fpk`, proven:** `GetCameraLookAtPassable` exists in Src and
+- ~~**Src ≠ shipped `Lua.fpk`, proven:** `GetCameraLookAtPassable` exists in Src and
   **not at runtime**, which is why bare `CheatMeteors("storm")` silently no-ops.
-  Command table corrected. Treat all Src-only reasoning as provisional.
+  Command table corrected. Treat all Src-only reasoning as provisional.~~
+  **[WITHDRAWN 2026-07-29 — this was a misreading.** `GetCameraLookAtPassable`
+  is a `local function` in Cheats.lua, invisible to the console *by design*,
+  identical in Src and shipped. The full `Lua.fpk` extraction diff proved the
+  shipped build IS Src: 2,250/2,256 files byte-identical, the 5 divergences
+  engine/tooling only. The command-table correction stands on its own merits
+  (always pass an explicit position). See ENGINE_FACTS.md → parity.]
 - **Drone stress harness BUILT** (`TestKit/Code/91_Stress.lua`, local-only, no
   A/B owed): `SMRTest.Stress.Break/Targets/Report/Compare/HealAll/Stop`. Breaks a
   seeded deterministic set so the same save reloaded gives a true controlled A/B;

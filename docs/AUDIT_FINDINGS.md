@@ -185,12 +185,14 @@ Concrete drift (all verified):
 - **D3** The withdrawn fpk-divergence doctrine still asserted as proven in
   STATUS.md:126-128 and DRONE_OVERHAUL_OPTIONS.md:619-621; stale framing at
   BUGS.md:6 and WORKFLOW.md:33 — the "withdrawn in all four places it lived"
-  sweep missed places five and six. `[ ]`
+  sweep missed places five and six. `[x — fixed 2026-07-29, plan 3.1]`
 - **D4** F02 tells three stories (index `fixed`, heading "root cause NOT yet
   pinned", reality: pinned to F78/F81 2026-07-29 with wave-6 fixes shipped; no
   cross-ref). D07 heading contradicts its index row (heading says B/D
   confirmed; index says 3-of-5 with A/E owed — index is right). D06 index row
-  understates (heading carries the 2026-07-29 null-result verdict). `[ ]`
+  understates (heading carries the 2026-07-29 null-result verdict). `[x —
+  fixed 2026-07-29, plan 3.1; the D06 half was already fixed pre-audit by the
+  staleness sweep]`
 - **D5** FABLE_NEXT_PROMPT: counts stale ("71 modules, 65/71" → 74/68; "no
   D06/F77 probes" → wave-6 probes exist); read-list points at the wrong
   "newest" STATUS section and disagrees with its own banner; stale session
@@ -311,14 +313,15 @@ and needs a separate go-decision.
 
 ## Phase 3 — documentation
 
-- `[ ]` **3.1 (D3/D4/D5)** Mechanical drift fixes: F02 index+heading updated
+- `[x]` **3.1 (D3/D4/D5)** Mechanical drift fixes: F02 index+heading updated
   with the F78/F81 resolution + cross-refs; D07 heading matched to its index
   row; D06 index row carries the null-result pointer; the two un-withdrawn
   fpk-doctrine copies (STATUS.md:126-128, DRONE_OVERHAUL_OPTIONS.md:619-621)
   corrected + stale framing at BUGS.md:6 and WORKFLOW.md:33 pointed at the
   parity proof. (FABLE_NEXT_PROMPT is already DONE — rewritten 2026-07-29 in
   the audit session; do not re-edit it here except to update its read-list
-  pointers after 3.2/3.3 move things.)
+  pointers after 3.2/3.3 move things.) *Done 2026-07-29; the D06 index row
+  already agreed with its heading (fixed by the pre-audit staleness sweep).*
 - `[ ]` **3.2 (D6)** Extract STATUS.md "Key technical facts" into
   `docs/ENGINE_FACTS.md` (sole authoritative home; STATUS keeps a one-line
   pointer; update the readers: FABLE_NEXT read-list, checklist references).
