@@ -220,7 +220,11 @@ silent.
   consumption_amount PAIRED — the pairing keeps per-worker cost vanilla).
   Adds PT-57 (~7 min) at build time. Seniors-in-workshops deliberately
   deferred (D07 interaction — own decision).
-- **DECISIONS owed (user):** F79 D-item or not; audit Phase 4 go/no-go; D08.
+- **DECISIONS owed (user):** F79 D-item or not; audit Phase 4 go/no-go; D08;
+  seniors-in-workshops (D10 deferral); **D11 shuttle same-pair passenger
+  batching — feasibility is on the BUGS entry but it is NOT approved: ask
+  fresh before any build (user's explicit instruction 2026-07-30); multi-hop
+  passenger routing is REJECTED, do not re-propose.**
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.
 

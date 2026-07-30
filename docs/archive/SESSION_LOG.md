@@ -42,6 +42,20 @@ answered from Src with community cross-checks; ended in a new speced D-item.
   **Build gated on PT-56 PASS** (same machinery, first live check first).
   Seniors-in-workshops deferred as its own decision (D07 employed-senior
   exemption interaction). Full spec: BUGS.md D10.
+- **Shuttle-limits research (same sitting, follow-up curiosity):** three
+  separate limits — cargo 3/shuttle (modifiable, +3 from HighPoweredJets =
+  the game's only cargo buff), 10 shuttles/hub (+6 CompactHangars),
+  passengers **1/trip structurally** (one vanilla task per colonist; the "1"
+  is architecture, not a number). No breakthrough touches shuttles; fuel is
+  the only shuttle law. Leftover cargo chains one extra hop or gets DUMPED
+  as a ground pile (shipped comment: "noone wants this..dump it and go
+  home"). Full reference on the new BUGS.md D11 entry.
+- **D11 FILED AS CANDIDATE, NOT APPROVED (user's explicit framing):**
+  same-pair passenger batching is feasible (task objects already carry the
+  dome pair; hold fits 3-6 colonists; risks = boarding sync ×N, cancellation
+  granularity, mod-removed-mid-flight landing). **The filing is for the
+  record only — re-ask the user before any build. Multi-hop passenger
+  routing REJECTED the same day.**
 
 ---
 

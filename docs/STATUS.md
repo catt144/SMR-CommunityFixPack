@@ -41,7 +41,10 @@ deactivation surface — AUDIT_FINDINGS.md PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
 overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
 BUILT (D09); the structural choice stays gated on the B2 re-run); F79
-D-item or not; D08; seniors-in-workshops (deferred from D10, own decision).
+D-item or not; D08; seniors-in-workshops (deferred from D10, own decision);
+**D11 shuttle same-pair passenger batching — candidate with feasibility on
+file (BUGS.md entry), explicitly NOT green-lit: re-ask the user before any
+build; multi-hop passenger routing REJECTED outright.**
 **Decided, build queued:** D10 workshops module (speced + user-approved
 2026-07-30, BUGS.md entry — text repairs + capacity dial; build gated on
 PT-56 PASS). Unfiled candidate: Universal Tunnel description omits its

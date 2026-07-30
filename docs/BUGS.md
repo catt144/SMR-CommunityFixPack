@@ -88,6 +88,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 — PT-53 3-of-5 PASS 2026-07-29, A/E owed (entry) |
 | D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | built 2026-07-29 — PT-56 owed (entry) |
 | D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30 — build gated on PT-56 (entry) |
+| D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -3546,6 +3547,54 @@ reads (T1); dial infopanel check on a live workshop (slots and consumption
 shift together, +50%/+100%); dial-down mid-shift → excess workers unassigned
 cleanly; stale-save reconcile (PT-56 step-4 shape). Estimated one ~7-minute
 sitting.
+
+### D11 — Shuttles fly ONE passenger per trip, even when several colonists share the same dome pair (design, low)  `[candidate 2026-07-30 — feasibility research ON FILE, **NOT GREEN-LIT: the user explicitly directed that this filing is NOT approval. Before ANY build work, ASK the user fresh and get an explicit go.** Multi-hop passenger routing was REJECTED by the user the same day — do not re-propose it]`
+**Shuttle-limits reference (research 2026-07-30, all source-verified):**
+- Three separate limits: cargo/shuttle = `max_shared_storage` **3**
+  (`ShuttleHub.lua:415`, modifiable); passengers/shuttle = **1, structural**
+  (one `ColonistTransportTask` per colonist; `transport_task.colonist`
+  singular, `TransportColonist` `ShuttleHub.lua:635+`); shuttles/hub =
+  `max_shuttles` **10** (`ShuttleHub.lua:1335`, modifiable).
+- Buffs that exist: **HighPoweredJets** +3 cargo (the game's ONLY cargo buff,
+  `TechPreset.lua:3977-3992`); **CompactHangars** +6 shuttles/hub;
+  **MartianAerodynamics** +33% speed; storybit-granted **ShuttleAfterburners
+  1/2** +10%/+25% speed at +50%/+100% hub fuel + temperature per flight;
+  Relaunched law **Policy_ShuttleFuelEfficiency** -20% fuel (-10% more w/
+  ministry). **NO breakthrough touches shuttles**; no law touches shuttle
+  cargo (trains got +50% via `TrainCargoStandards`, same prop name).
+- Trip shape: task atom = `{prio, supply_req, demand_req, resource}` — one
+  source, one destination, ONE resource type; load =
+  min(capacity, supply, demand) (`ShuttleHub.lua:857`). Leftovers chain a
+  SECOND destination for the same resource or get DUMPED as a ground pile
+  (`ShuttleHub.lua:1185-1200` — shipped comment: "noone wants this..dump it
+  and go home"). Colonists debit the hold 1 unit each (`ShuttleHub.lua:652`);
+  dispatcher round-robins people/cargo so neither starves
+  (`LRManager.lua:148-150`). `GetMaxCargoShuttleCapacity` sums colony label
+  modifiers on the `CargoShuttle` label (`ShuttleHub.lua:1686-1699`) — the
+  engine expects external capacity modifiers (D09/D10 machinery).
+
+**Feasibility sketch — same-pair passenger batching (the tractable variant):**
+- Grouping is a filter, not new bookkeeping: `ColonistTransportTask` already
+  carries `colonist`/`source_dome`/`dest_dome`/`source_landing_site`
+  (`LRTransport.lua:91-96`); co-travelers = same dome pair + `CanExecute()`
+  over `lr_manager.colonist_transport_tasks`.
+- Hold fits N passengers natively (1 unit each → 3 base / 6 with Jets; scales
+  with any capacity modifier for free).
+- Save-safety shape: each passenger KEEPS their vanilla task object; the
+  shuttle claims several, extras tracked in an `SMRFixPack_*` field (no
+  modded classes in the save — D07/D09 pattern).
+- **The hard 20%:** (1) boarding synchronization — the single-passenger flow
+  already interrupts/waits/revalidates constantly; N-way needs per-passenger
+  timeouts + depart-with-whoever-boarded + release-the-rest; (2) cancellation
+  — task removal wakes the shuttle and aborts the trip
+  (`LRTransport.lua:68-72`); batched, losing one passenger must NOT abort the
+  flight; (3) mod-removed-mid-flight — extra attached colonists with
+  unclaimed tasks need a DESIGNED landing per FIX_POLICY §3 (narrow window,
+  flights are seconds).
+- Scale: medium D-item (> D09/D10 stat work — this rewires a command thread;
+  < D06). Synergy: D07 cohort waves generate exactly the same-pair bursts
+  this optimizes. Honest ceiling: wave speed + fuel, not a systemic fix —
+  the round-robin already prevents passenger starvation.
 
 ## Candidates under investigation
 
