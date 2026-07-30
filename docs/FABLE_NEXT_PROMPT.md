@@ -284,6 +284,19 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   human re-verify is PT-55.)
 - Bare console expressions echo on-screen only (NOT logged); `print(...)`
   goes to the log — use `print` when output must be retrievable.
+- **`not understood` = the console could not COMPILE the line** (`console.lua:24`
+  — no rule in `ConsoleRules` produced a loadable chunk). Overwhelmingly the
+  cause is a `--` comment inside a `*r` / `*g` snippet: those rules splice your
+  code into `CreateRealTimeThread(function() %s end) return` **on one line**
+  (`uiConsole.lua:360-361`), so the comment eats the closing `end) return`.
+  **Never write a console snippet with a trailing comment or a `--> value`
+  annotation** — hand the user paste-safe lines, one command per line, because
+  the console input is a SINGLE line and a pasted block silently concatenates
+  (proven 2026-07-29: `--> nil` + the next line arrived as `--> nilUIColony:…`).
+- For a simple read prefer a **bare expression** over `*r ConsolePrint(...)`:
+  rule `{ "(.*)", "ConsolePrint(print_format(%s))" }` (`uiConsole.lua:363`)
+  wraps anything that compiles as an expression, so `GetRareTraitChance()`
+  prints itself. Reserve `*r`/`*g` for multi-statement snippets.
 - Infopanel cheat buttons need `Platform.cheats = true` AND ride the
   game-time sync queue (dead while paused; fire on unpause). Direct
   `SelectedObj:Cheat*()` bypasses both.

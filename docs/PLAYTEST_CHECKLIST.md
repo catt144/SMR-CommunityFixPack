@@ -136,6 +136,22 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
   | `*r <code>` | runs `<code>` in a **real-time thread** (use for multi-statement snippets) |
   | `*g <code>` | runs `<code>` in a **game-time thread** (use when you need `Sleep`) |
   | `~<expr>` | opens the object inspector on `<expr>` |
+- ⚠️ **NEVER put a `--` comment in a `*r` / `*g` snippet** (found the hard way
+  2026-07-29). Those rules splice your code into a template **on one line**:
+  `CreateRealTimeThread(function() %s end) return` (`uiConsole.lua:360`). A
+  trailing comment therefore swallows the closing `end) return`, the chunk will
+  not compile, no rule matches, and the console answers **`not understood`**
+  (`console.lua:24`). The same goes for annotations like `--> nil` pasted from
+  documentation.
+- ⚠️ **The console input is ONE LINE.** Pasting a multi-line block concatenates
+  the lines into a single command — e.g. `... --> nil` + `UIColony:Set...` came
+  through as `--> nilUIColony:Set...`. Paste one command at a time. Write
+  snippets in docs WITHOUT trailing comments so they stay paste-safe.
+- **Prefer a bare expression over `*r ConsolePrint(...)` for a simple read.**
+  Rule `{ "(.*)", "ConsolePrint(print_format(%s))" }` (`uiConsole.lua:363`)
+  wraps ANY input that compiles as an expression, so typing
+  `GetRareTraitChance()` prints its value by itself. `*r` is only needed for
+  multi-statement snippets or ones that must not block.
 - `g_Consts` is a **GameVar** — it does not exist at the main menu. Run everything
   from inside a loaded colony.
 
@@ -761,22 +777,49 @@ and look at the pattern rather than exact numbers.)
 
 ### PT-29 — Gene Forging · covers **F41**
 
-**Setup:** SAVE-A. This one is mostly a console read — the effect is statistical and
-not worth grinding out by eye.
+**Setup:** any colony — **no colonists needed, and it does not matter what else
+you have researched.** (Both corrected 2026-07-29 after the original text proved
+unrunnable: it said "before researching anything" while reading
+`MainCity.labels.Colonist[1]`, and you cannot have a colonist before the game
+has auto-researched something.) Two facts make it easy:
 
-**Trigger (console), before researching anything:**
+- `GetRareTraitChance(unit)` takes an **optional** unit —
+  `local city = unit and unit.city or MainCity` (`Colonist.lua:3542`, preserved
+  verbatim by the fix). Call it bare and it reads MainCity, so it works from
+  sol 1 with an empty colony.
+- The function consults **exactly two techs** and is blind to every other:
+  `GeneSelection` (shipped) and `GeneForging` (added by the fix). So the only
+  real precondition is that *those two* are unresearched — and neither can
+  arrive by accident, because **GeneSelection is a Breakthrough** (needs anomaly
+  discovery; `CheatResearchAll()` skips undiscovered breakthroughs) and
+  **GeneForging is a Storybit tech** (granted by a story event). Confirm with
+  the first two lines below rather than assuming.
+
+**Trigger (console) — type these ONE LINE AT A TIME, nothing else on the line**
+(bare expressions print themselves — see the console-forms rules above; do NOT
+add trailing `--` annotations, they break `*r` snippets):
 ```
-*r local u = MainCity.labels.Colonist[1] ConsolePrint("rare bonus: " .. tostring(GetRareTraitChance(u)))
+UIColony:IsTechResearched("GeneForging")
+UIColony:IsTechResearched("GeneSelection")
+GetRareTraitChance()
+UIColony:SetTechResearched("GeneForging")
+GetRareTraitChance()
+UIColony:SetTechResearched("GeneSelection")
+GetRareTraitChance()
 ```
-Then grant **Gene Forging** on its own — `UIColony:SetTechResearched("GeneForging")`
-(`Lua/Research.lua:276`) — and re-run the line. Then grant `"GeneSelection"` as well and
-re-run it a third time. (`CheatResearchAll()` would grant both at once and hide the
+(`SetTechResearched` is `Lua/Research.lua:276` and discovers the tech itself.
+Do NOT use `CheatResearchAll()` — it would grant both at once and hide the
 isolated reading.)
 
-- **BROKEN looks like:** `rare bonus: nil` with Gene Forging researched, and `100` once
-  Gene Selection is researched no matter what else you have.
-- **FIXED looks like:** `50` for Gene Forging alone, `100` for Gene Selection alone,
-  `150` with both.
+- **BROKEN looks like:** still `nil` after Gene Forging is researched, then
+  `100` once Gene Selection lands — i.e. Gene Forging contributed nothing.
+- **FIXED looks like:** `nil` → **`50`** after Gene Forging → **`150`** after
+  Gene Selection as well. (The `100`-for-Gene-Selection-alone case is the
+  counterfactual; this sequence never shows it and does not need to. Params
+  verified in `Data/TechPreset.lua`: GeneForging `param1 = 50`, GeneSelection
+  `param1 = 100`.)
+- **The `50` is the whole test.** The first read is only a control — fixed and
+  unfixed both answer `nil` when neither tech is researched.
 
 **Optional feel check:** with both researched, generate a big applicant batch
 (`CheatGenerateApplicants(100)`) and eyeball how many carry rare traits versus a
