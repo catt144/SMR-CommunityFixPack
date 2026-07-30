@@ -431,10 +431,11 @@ direction is the cheap half structurally — every hook consults
   `CargoTransporterNew:UpdateCargoResourceRequests` runs; for an already-parked
   rocket nothing re-triggers that, and landing is what does (the tester's own
   "on-land interaction" guess, confirmed in source). So the file-scope install
-  is working — the demand refresh is what is missing. **Open decision:** give
-  the module an `on_activate` that re-runs `UpdateCargoResourceRequests` on
-  parked destination-less player rockets, which would satisfy step 1 exactly.
-  Until then this limitation is a documented behaviour, not a silent one.
+  is working — the demand refresh is what is missing. **DECIDED 2026-07-30:
+  accepted as a documented limitation (user call)** — no `on_activate` refresh
+  built; an already-parked rocket picks the behavior up on its next landing.
+  The enhancement path stays on record on the D01 entry. With this decision,
+  step 1 is CLOSED for all three modules and only step 3 remains for PT-55.
 
 ## PT-56 — Drone stat dials · covers **D09 `Opt_DroneStatDials`** (built 2026-07-29)
 

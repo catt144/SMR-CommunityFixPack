@@ -1705,12 +1705,16 @@ save/reload either**. Cause, confirmed in source: the wrap is on
 `CargoTransporterNew:UpdateCargoResourceRequests` runs
 (`CargoTransporterNew.lua:1249-1265`); for an already-parked rocket nothing
 re-triggers that, and the landing path is what does. The hook answers correctly
-— nobody asks it. **Open decision (user):** add an `on_activate` that re-runs
-`UpdateCargoResourceRequests` on parked destination-less player rockets, which
-would make the mid-session enable immediate and satisfy PT-55 step 1 literally.
-That is the D05 reconciler's intended use of `on_activate` (state nudges that
-are not a call path, FIX_POLICY §5). Until decided, the limitation is documented
-here and in the PT-55 record rather than silent.
+— nobody asks it. **DECIDED 2026-07-30 (user): accepted as a documented
+limitation.** A first mid-session enable engages for rockets that land after
+the flip; an already-parked rocket picks the behavior up on its next landing.
+No `on_activate` demand refresh is built. If the limitation ever grates in
+play, the enhancement is on record: an `on_activate` that re-runs
+`UpdateCargoResourceRequests` on parked destination-less player rockets — the
+D05 reconciler's intended use of `on_activate` (state nudges that are not a
+call path, FIX_POLICY §5) — would make the enable immediate. Building it would
+be a normal mechanical change (A/B re-run + live re-verify), not a reopening of
+this decision.
 
 Not a bug: legacy always-on PreciousMetals loader exists only in dead legacy class
 (`RocketBase.lua:1730-1734`; `RocketCompatibility.lua:58-59,97-98` nils old fields).
