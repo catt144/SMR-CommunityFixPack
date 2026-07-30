@@ -3714,10 +3714,17 @@ left outside a dome; confirm a flagged dome with no valid destination leaves
 its homeless in place rather than expelling them; toggle off = instantly
 vanilla; save with it ON, reload with the module OFF, clean load.
 
-**Two confirming reads still owed from the origin sitting** (the chain is
-source-verified but step 4 was inferred, not observed):
-`g_Consts.OverpopulatedDome`, and
-`*r local d = SelectedObj ConsolePrint("overpopulated=" .. tostring(d.overpopulated) .. " homeless=" .. #(d.labels.Homeless or {}))`
+**CHAIN CONFIRMED END TO END (2026-07-30).** The inferred link (step 4) was
+measured live: `g_Consts.OverpopulatedDome` = **20**, and the child dome read
+`overpopulated=true homeless=20`. So the flag is latched by the stranded
+graduates exactly as traced, and nothing in the chain is now inference.
+
+**Knife-edge, and useful for testing D12:** the threshold is `>=`, and the dome
+sat at **exactly 20** (down from 28 earlier the same sitting, as a few drained
+or died). Two more departures would clear `overpopulated` and D07 would resume
+delivering unaided. So the deadlock is genuine but marginal — a D12 test must
+confirm the drain is what cleared it, not natural attrition. Take a homeless
+count immediately before setting the flag and immediately after.
 
 ### C01 — `BreakthroughOrder` rebuilt+reshuffled on every map load
 `Lua\Buildings\Anomaly.lua:652-682` (`City:InitBreakThroughAnomalies`), called from

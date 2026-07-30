@@ -414,6 +414,15 @@ hooks install and run on a first mid-session enable, no relaunch.** Per module:
   `SolarPanelBase:GameInit`, so a panel that already ran GameInit cannot be
   retro-bound — and a reload re-runs GameInit (plus the module's own LoadGame
   sweep), which is what heals it. Nothing owed.
+**Step 2 (toggle OFF) — REPORTED VERIFIED 2026-07-30.** The tester confirms all
+three revert immediately on toggle-off — ClassicRockets stops requesting fuel on
+a destination-less parked rocket, ResidencyControl's closed dome accepts
+move-ins again, MultipleSuns' build menu refuses a second sun again. *Provenance
+note: verified during a parallel session and reported here rather than captured
+separately, so there are no per-module screenshots for this half.* The OFF
+direction is the cheap half structurally — every hook consults
+`SMRFixPack.IsActive` per call, so OFF is the pass-through path.
+
 - **ClassicRockets (D01) — hook PROVEN LIVE, but step 1 as written FAILS.** A
   rocket already parked on the pad did NOT begin refuelling after the flip, and
   — unlike the panel — **did not heal on a save/reload either**. A rocket that
@@ -486,7 +495,19 @@ never touches Tourists or employed Seniors; player orders, quarantine and the
 D03 closed policy always win; arrival housing at the destination may take one
 heavy update to slot into the cohort building (transient, by design).
 
-`Result (A in-dome move + employed exemption):` _____________________________________________
+`Result (A in-dome move + employed exemption):` **PASS — 2026-07-30**, run as a
+controlled A/B on one save rather than two observations. The tester granted
+**Forever Young** (`g_SeniorsCanWork`, `Colonist.lua:1461-1462`) so the seniors
+took jobs, then enabled the module mid-session: **employed seniors did NOT
+move** — the designed exemption (`IsValid(colonist.workplace)`,
+`Opt_CohortHousing.lua:87-94`, whose header names Forever Young explicitly).
+Reloading the pre-tech quicksave left the same seniors **unemployed**, and over
+1-2 sols they **re-homed into the Retirement Home**. One save, one variable
+(employment), both halves of the trigger in a single controlled run.
+**Module status confirmed `active` at the time of the employed observation** —
+the tester ran that check (not screenshotted); without it the negative half
+would have been uninformative, since "did not move" is equally consistent with
+"module never engaged".
 
 `Result (E precedence + uninstall):` _____________________________________________
 

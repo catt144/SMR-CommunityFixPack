@@ -60,15 +60,17 @@ retro-bound — the wrap is on `SolarPanelBase:GameInit` — and a reload snaps 
 to sun #2); **D01's hook is live** (a rocket that LANDS after the flip fills
 immediately).
 
-**Three things remain. State them to the user when they ask what is left:**
+**Step 2 (toggle OFF, all three) is REPORTED VERIFIED 2026-07-30** — all three
+revert immediately; reported from a parallel session rather than separately
+captured. **Two things remain. State them to the user when they ask what is
+left:**
 
-1. **Step 2 — toggle OFF, for all three modules.** Un-run. Flip each module
-   back off mid-session and confirm the behavior reverts immediately to vanilla
-   answers. Nothing about the OFF direction has been exercised this sitting.
-2. **Step 3 — `SMRFixPack.ListFixes()` agreement + a log sweep.** Un-run.
-   ListFixes must agree with the toggle at each step, and the session log must
-   be clean per PT-22 rules.
-3. **The D01 decision (user's call, blocks closure).** PT-55 step 1's literal
+1. **Step 3 — `SMRFixPack.ListFixes()` agreement + a log sweep.** Status
+   unconfirmed. ListFixes must agree with the toggle at each step, and the
+   session log must be clean per PT-22 rules. **Ask the user whether this was
+   done** before treating it as owed — several PT-55 halves were run across
+   parallel conversations and reported late.
+2. **The D01 decision (user's call, blocks closure).** PT-55 step 1's literal
    wording — *"a parked, destination-less player rocket starts requesting
    launch fuel"* — **FAILED**: an already-parked rocket did not begin refuelling
    after the flip and **did not heal on a save/reload either**. Cause confirmed
@@ -82,11 +84,11 @@ immediately).
 
 **Playtest state:** **PT-11 PASS → F01 `tested`** and **PT-29 PASS → F41
 `tested`** (both 2026-07-29, archived). PT-53 (D07 CohortHousing) is 3-of-5
-PASS — triggers A and E left, though **A may be effectively covered**: on
-2026-07-30 the user ran the exact employed/unemployed A/B (Forever Young ON →
-employed seniors did NOT move; reload without it → unemployed seniors re-homed
-over 1-2 sols). The employed half is only valid if the module read `active`
-at the time — **confirm that before crediting it**. PT-52 (D06 + F77) has three
+PASS, and **Trigger A PASSED 2026-07-30** (Forever Young A/B on one save:
+employed seniors exempt, unemployed re-homed on reload; module confirmed
+`active` for the employed half). **Only Trigger E is left** — player-forced
+residence wins, toggle-off is instantly vanilla, save-ON/reload-OFF loads
+clean. That is the last thing between D07 and `tested`. PT-52 (D06 + F77) has three
 healthy passive sittings; Trigger B is un-run and the **B2 stress A/B re-run on
 the v2 harness is the natural centrepiece of the next live sitting**. PT-54
 gates the wave-6 disaster fixes. PT-56 gates D09 (and its PASS un-gates the

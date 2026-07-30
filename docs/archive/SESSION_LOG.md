@@ -177,9 +177,12 @@ same dome simultaneously** (entry open, exit forced), so the new flag needs its
 own field and its own gate. Packaging revised to a **separate module with D03 as
 donor pattern only**, which also keeps D03's `tested` status intact.
 
-Two confirming reads still owed from this sitting (the chain is source-verified
-but step 4 was inferred, not observed): `g_Consts.OverpopulatedDome` and the
-dome's `overpopulated` flag.
+**Chain confirmed end to end later the same sitting:**
+`g_Consts.OverpopulatedDome` = **20**, dome read `overpopulated=true
+homeless=20`. Step 4 is measured, not inferred. Note the threshold is `>=` and
+the dome sat at **exactly** 20 (down from 28 as a few drained or died) — the
+deadlock is genuine but marginal, so a future D12 test must show the drain
+cleared it rather than attrition.
 
 ## PT-11 PASS → F01 `tested`, and the test that could not have worked — 2026-07-29 late
 

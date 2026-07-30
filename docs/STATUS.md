@@ -83,8 +83,10 @@ proves the dials work independently of the toggles. Pre-D09 reference set
 **Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** **PT-55 is PARTIALLY
 RUN (2026-07-30) and is the cheapest open item.** The audit's A2 question is
 answered YES — all three hooks install and run on a first mid-session enable.
-**Three things close it:** (1) the toggle-OFF direction for all three modules,
-(2) `ListFixes()` agreement + a log sweep, (3) the D01 decision — PT-55 step 1's
+The toggle-OFF direction for all three is **reported verified 2026-07-30**
+(parallel session, not separately captured). **Two things close it:**
+(1) `ListFixes()` agreement + a log sweep — status unconfirmed, ask before
+assuming it is owed, (2) the D01 decision — PT-55 step 1's
 literal wording FAILED (an already-parked rocket does not begin refuelling and
 does not heal on reload; the wrap is on `GetFuelResourceRequest`, only consulted
 when `UpdateCargoResourceRequests` runs, which landing triggers and parking does
