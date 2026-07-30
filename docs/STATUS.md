@@ -122,13 +122,28 @@ checklist's reference half, split out 2026-07-30). Two tests have now been found
 them (PT-29, PT-11) — treat an un-run PT's procedure as unverified until it has
 been executed once.
 
-**Tech-gated fixes — coverage settled 2026-07-29, do not re-derive.** F41 is
-`tested` (PT-29). Of the other four, **F28** (latent, mod-facing), **F43**
-(latent — the one shipped layout has no tech-locked entry) and **F25**
-(pre-1.0.6 saves only, which is why its probe SKIPs on a current build) are
-correctly untestable in play. **F18** is the only genuinely uncovered one:
-preset half probe-covered, play half needs an Independence sponsor + a special
-project; judged not worth a PT for a data-only P2.
+**Tech-gated fixes — coverage settled 2026-07-29, re-grounded by the
+2026-07-30 reachability audit.** F41 is `tested` (PT-29). Of the other four,
+**F28** (R4 — zero callers in all of Src; the audit's one DELETE candidate,
+user decision pending), **F43** (R3 — corrected grounds: MoistureVaporator IS
+tech-locked, but its `require_prefab`+unlocked cargo item routes it into the
+branch the shipped code handles; the old "no tech-locked entry" wording was
+wrong) and **F25** (R2 — pre-1.0.6 legacy saves; note the probe's SKIP label
+may be mislabeled, see the entry) are correctly untestable in play. **F18** is
+the only genuinely uncovered one: preset half probe-covered, play half needs
+the Independence arc + a special project; judged not worth a PT for a
+data-only P2.
+
+**REACHABILITY AUDIT COMPLETE 2026-07-30 — `docs/REACHABILITY_AUDIT.md`.**
+All 66 fix modules + both sanitizer passes audited for player reachability
+(the F24 question, asked pack-wide): ~21 R1, ~38 R2, five R3 (kept — F27,
+F29†, F31, F43, F57(a)†; † = §1.5-latent, flagged), one U (F11, settling
+observation on the entry), two R4 — F49(a) (kept, lives inside a module with
+two live halves) and **F28 (DELETE candidate, awaiting user decision)**. A
+proposed FIX_POLICY §4 amendment (reachability tier required before a fix
+ships) is drafted in the audit file, not applied. Eleven BUGS.md entries
+carry new "Audit 2026-07-30" notes (evidence corrections: F06, F17, F22, F25,
+F34, F37, F40, F43, F49, F74, F81 — plus F11's observation).
 
 ## What this project is
 

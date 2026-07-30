@@ -243,6 +243,14 @@ milestone errors and the "AllMilestonesCompleted" popup is lost. **Fix:** the ev
 local — override global `CompleteMilestone` with a copy using `(milestone:GetScore() or 0)`.
 
 ### F06 — Philosopher's Stone mystery can hang forever  `[fixed: Code/Fix_CrystalMysteryHang.lua]`
+
+**Audit 2026-07-30 (reachability): R2 — and easier to hit than this entry says.**
+The Epilogue popup arrives MINIMIZED by SA default (`SA_WaitMessage` inherits
+`start_minimized = true`, SequenceAction.lua:207, and the Epilogue call passes
+no override) and the pause layer engages only after the player opens it — so
+the one-sol miss window passes in ordinary inattention at fast-forward;
+"the player can minimise and ignore" understates. Full block in
+REACHABILITY_AUDIT.md.
 `Lua\Mysteries\Crystals.lua:67-70` — composed crystal emits `Msg("CrystalFlyAway")` exactly
 once (1 sol after completion; the `CrystalForceFlyAway` escape hatch has **no emitter
 anywhere** in Src). Scenario (`Lua\Scenario\Mystery 10.generated.lua:232,243,271`) first
@@ -311,6 +319,18 @@ it now serves as a standing canary that a future game patch hasn't broken the
 shipped body — expected A/B numbers stay unchanged.
 
 ### F11 — Train wedges at platform (`table.remove` misuse)  `[fixed: Code/Fix_TrainPlatformWedge.lua]`
+
+**Audit 2026-07-30 (reachability): U — kept, settling observation recorded.**
+The sole call site (Train.lua:447, UnloadTrain) is unconditional in train play,
+but every Lua-visible path keeps `train.units` synced; the stale-passenger
+state the guard exists for bottoms out in engine-side `TransferToMap`
+(`Unit:EnterTransporter`, Unit.lua:1202-1209 — crew-gathering explicitly takes
+BUSY colonists including riders, CargoTransporterNew.lua:221-234), which
+source alone cannot settle. Observation that settles it: with a colonist
+mid-ride, launch a crew expedition that dips into busy colonists, then inspect
+`train.units` (or catch the shipped TrainsLogging "not in train" warn) — a
+stale entry makes this R2. Playtest-item candidate. Full block in
+REACHABILITY_AUDIT.md.
 `Lua\Units\ColonistTransport.lua:541-547` (`ExitVehicle` stale-passenger guard) —
 `table.remove(vehicle.units, self)` needs an integer pos; intended API is
 `table.remove_entry`. When the guard fires (dev comment: CargoTransporter abduction),
@@ -397,6 +417,13 @@ running action (`self.action == action`) is still let through, since that branch
 `StopAction` and is unrelated to progress.
 
 ### F17 — Dust Sickness damage not randomized  `[fixed: Code/Fix_DustSicknessDamage.lua]`
+
+**Audit 2026-07-30 (reachability): R2 — gate previously unrecorded here.** The
+DustSickness trait is granted ONLY by the DustSickness storybit family, and
+the parent storybit requires the **Dust in the Wind** game rule
+(Data\StoryBit\DustSickness.lua:19-21; plus sol ≤ 100, ≥ 30 colonists,
+DustStormStart trigger). Within that rule the defect is near-certain — the
+rule maximizes dust storms. Full block in REACHABILITY_AUDIT.md.
 `Data\TraitPreset.lua:87-91` — `local change = 5 + colonist:Random(trait.param)` dead;
 always deals flat `trait.param` (10)/sol instead of 5-14. **Fix:** patch
 `TraitPresets.DustSickness.daily_update_func` (data patch at ClassesPostprocess — very
@@ -501,6 +528,15 @@ and "travelling" moves to where the colonist actually boards.
 Probe: `TrainWaitTime` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
 ### F22 — `GetGridGlobalStorage` breaks Last Transmission gates  `[fixed: Code/Fix_GridGlobalStorage.lua]`
+
+**Audit 2026-07-30 (reachability): R1 — stronger than this entry implies.**
+UndergroundMap is generated at new-game map generation for every surface game
+(RandomMapGenerator.lua:819-820 → Picard.lua:263-292; only the
+NoUndergroundAndAsteroids rule skips it), so the zero-demand sentinel corrupts
+the sum from sol 1 — and the six Last Transmission conditions are evaluated
+EVERY GAME HOUR by FactionsHolder:RecalcFactionsApproval over all FactionDef
+presets (Factions.lua:690-697), gated only by NoPolitics. No "player opens the
+Underground" step is needed. Full block in REACHABILITY_AUDIT.md.
 `Lua\ResourceOverview.lua:880-899` — zero-demand map returns sentinel `1000 sols` and
 per-map sols are **summed**; once Underground loads, `== 0` conditions in
 `Data\FactionDef\LastTransmission.lua:103-184` unsatisfiable, `> 2 sols` always true.
@@ -612,6 +648,16 @@ the top of this entry). No TestKit probe ever existed for this fix, so its
 deletion does not move the 77-probe A/B counts — only the module counts.
 
 ### F25 — Tech description names wrong building (pre-1.0.6 saves only)  `[fixed: Code/Fix_TechDescriptionBuilding.lua]`
+
+**Audit 2026-07-30 (reachability): R2 (legacy save) — "pre-1.0.6 only"
+CONFIRMED, one probe-label doubt.** `UndergroundRework106` is a persisted
+GameVar set true only on OnMsg.NewGame (UndergroundDome.lua:16-19), so only
+saves started pre-1.0.6 show the tech — a genuine R2 condition. But the
+preset itself is placed unconditionally (the condition gates TREE MEMBERSHIP,
+not preset existence), so the probe's stated SKIP reason "tech not present on
+a current build" may be mislabeled — the patch target should exist on any
+build. Low stakes; worth a look next TestKit pass. Full block in
+REACHABILITY_AUDIT.md.
 `Data\TechPreset.lua:1486` (`UndergroundLargeDome`, gated `not UndergroundRework106`) —
 description says "Jumbo Cave Reinforcements", tech unlocks `UndergroundDomeMedium`.
 **Fix:** ClassesPostprocess description patch. Low priority (legacy saves only).
@@ -817,6 +863,13 @@ unwind in mod code); with the clamp, a missing cache yields an empty list, which
 `drone:Goto` already handles. Probe: `SmallLandscapeSites` in `30_Probes_Wave3.lua`.
 
 ### F34 — Landscape nil-guard bundle (P3, med/latent)  `[fixed*: Code/Fix_LandscapeUnitFilter.lua — item (d) only; (a)(b)(c) verified NOT actionable, see below]`
+
+**Audit 2026-07-30 (reachability): item (d) R2, one wording correction.**
+Shipped Lua sets the "Embark" command only on DRONES (rocket/rover/transporter
+boarding) — the fix header's "boarding colonists" overstates; colonists board
+via other commands and were never protected by this filter in the vanilla
+sibling either. The player-visible save is boarding drones plus the lost
+dedup. Full block in REACHABILITY_AUDIT.md.
 (a) `ClearWasteRockConstructionSite:GameInit` (`:60-63`) unguarded `Landscapes[self.mark]`;
 (b) `LandscapeMarkEnd` (`Landscaping.lua:200-206`) unguarded nil mark;
 (c) lake `landscape_grid` overlap only assert-guarded (`LandscapeConstructionController.lua:502-507`,
@@ -908,6 +961,19 @@ accumulation loop). Fixing this one function covers all three consumers: `CanTra
 list.
 
 ### F37 — Ghost farm oxygen survives salvage (P1, high)  `[fixed: Code/Fix_GhostFarmOxygen.lua — SetDome hook + LoadGame sweep]`
+
+**Audit 2026-07-30 (reachability): R2, frequency claim corrected.** The
+header's "the demolish path skips UpdateWorking(false) for buildings without a
+demolished state" does NOT apply to shipped farms — no farm template or class
+sets `use_demolished_state` false (Building default is true, Building.lua:210),
+so a WORKING farm's salvage or destruction DOES clear the modifier via the
+Destroyed working-edge (Building:Destroy :1473 → UpdateWorking(false) :1483 →
+OnSetWorking(false) → Farm.lua:122). The leak needs the modifier applied in a
+NOT-working window: the default crop plants at GameInit regardless of workers
+(Farm.lua:84-96 → :557), so salvage-before-first-spin-up (the "misplaced
+building, undo it" move) or an off-state SetCrop followed by salvage orphans
+it permanently. Fix unchanged and still worth carrying; "every rebuild adds
+another" overstated the common case. Full block in REACHABILITY_AUDIT.md.
 `FarmBase:ApplyOxygenProductionMod` (`Farm.lua:561-571`) puts negative `air_consumption`
 modifier on `parent_dome` keyed `farm_id`; no `FarmBase:Done`, `Building:Done`/`SetDome(false)`
 never clear it, and demolish path skips `UpdateWorking(false)` for non-`use_demolished_state`
@@ -966,6 +1032,14 @@ opt-in SKIP-unless-opted pattern (now in TestKit `60_Probes_Opt.lua`), and the A
 numbers renumbered in the same leg (see the D04 entry).
 
 ### F40 — Dust Sickness infects Biorobots (P2, high)  `[fixed: Code/Fix_DustSicknessBiorobots.lua]`
+
+**Audit 2026-07-30 (reachability): R2 — two gates previously unrecorded
+here.** (1) The DustSickness storybit family requires the **Dust in the Wind**
+game rule (Data\StoryBit\DustSickness.lua:19-21) — same gate as F17. (2) The
+"Biorobots breakthrough" is named **The Positronic Brain** in shipped data
+(TechPreset.lua:336-344). Both are ordinary content (a selectable rule + a
+random breakthrough); a Dust-in-the-Wind colony that gets the breakthrough
+will hit it. Full block in REACHABILITY_AUDIT.md.
 `Data\StoryBit\DustSickness*.lua` filters exclude only `Child`; `Android` trait not
 excluded, `DustSickness.incompatible = {}`; androids bleed Health every dust storm via
 `daily_update_func` until cure tech. (Same trait also hit by F17 randomization bug.)
@@ -1031,6 +1105,21 @@ grounds as F56/F62/F63: deliberately maintained design, breaks nothing, no shipp
 text promises the block. No opt-in module planned.
 
 ### F43 — Layout construction bypasses tech locks (P3, high)  `[fixed: Code/Fix_LayoutTechLock.lua — latent in the shipped game, see below]`
+
+**Audit 2026-07-30 (reachability): R3 confirmed — but the recorded REASON was
+wrong.** "None of its entries carries a tech requirement" is FALSE:
+MoistureVaporator IS tech-locked behind MoistureFarming
+(Data\TechPreset.lua:2038-2045) and appears twice in the one populated layout.
+The latency holds on different grounds: the template sets
+`require_prefab = true` (Data\BuildingTemplate\MoistureVaporator.lua:11) and
+its resupply cargo item ships unlocked (Data\Cargo.lua:334-343 — no `locked`
+flag, no sponsor lock, no verifier), so the tech lock is routed into exactly
+the `require_prefab` branch the shipped code handles (add = false). The
+defect branch still needs a tech-locked entry with a MISSING or LOCKED
+resupply item, which no shipped data provides. Also: the preset has nine
+entries, seven unique templates (MoistureVaporator and life_support_grid
+appear twice). STATUS.md's matching one-liner corrected the same day. Full
+block in REACHABILITY_AUDIT.md.
 `LayoutConstructionController:Activate` (`LayoutConstruction.lua:231-263`): tech-locked
 building with no prefab item → `require_prefab=false` → `add=true`, sub-controller
 placed with no research gate. **Fix:** wrap `Activate`: filter items where
@@ -1252,6 +1341,21 @@ both cases → implement in the sanitizer, skipping tracks that carry repair sit
 FAIL on the damaged-track case → close `wontfix — repair riskier than the defect`.*
 
 ### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — items (a), (c) and (d); (b)(e) screened and deliberately not fixed, see below]`
+
+**Audit 2026-07-30 (reachability): (a) settled R4; (c)(d) live R2; module
+kept.** The (a) trigger list "map setup, cheats, the instant-build rule"
+contains ZERO player-reachable members: there is no `InstantTracks` const
+(the Instant* family is Cables/Passages/Pipes only, __const.lua:1043-1056);
+all four shipped entries into track mode inherit the track dialog's
+`grid_elements_require_construction = true` default (TrackConstruction.lua:8);
+`PlaceTrackLine`'s only caller is the construction-mode dispatch
+(GridConstruction.lua:607/:1852); Cheats.lua has no track cheat; and with the
+flag true the instant `place_track` closure cannot fire (Tracks.lua:234,
+:431-442). The PT-46 injection incident corroborates: the state was producible
+only by injecting a mode flag with no player-facing control. The (a) wrapper
+is a cheap additive no-op for correctly-painted elements — keep or strip on
+next touch, no §1.5 liability. Full proof in REACHABILITY_AUDIT.md (lead-pass
+block).
 (a) instant-built tracks use pipes palette (`Tracks.lua:385` vs `TrackElement.lua:791`);
 (b) `DemolishAndSplitTrack` ignores `assigned_vehicles` — mid-transit trains silently
 stored/self-destruct (`Train.lua:249-251,535-541`); (c) salvage click on invisible
@@ -2541,6 +2645,20 @@ effects read the RESIDENCE's life-support state, not the building the
 colonist occupies; cleared instantly on restore.
 
 ### F74 — RC Transports can be ordered onto trade / refugee rockets (P2, high)  `[tested: Code/Fix_RocketInteractGuard.lua — PT-39 PASS 2026-07-27: cursor + route both refused a landed trade rocket; controls clean (F76 caveat on the entry)]`
+
+**Audit 2026-07-30 (reachability): R2, one framing correction.** Rival-colony
+trade-pad and foreign-aid rockets are plain class `UniversalRocket`
+(RivalColonies.lua:242-247; PopupNotificationPreset-Default.lua:42-46) — they
+were never covered by the shipped guard OR by F74, so PT-39's "rival-colony
+trade offer" wording conflates rocket families: the refused rocket must have
+been a storybit/mystery `UniversalTradeRocket`/`UniversalRefugeeRocket`
+(spawners, enumerated: CallTradeRocket/CallRefugeeRocket storybit effects —
+TheDoorToSummer family, ExportWasteRock_SplintersOfMars — and
+SA_CallTradeRocketWithCargo/SA_CallRefugeeRocket in Mysteries 7/8/9). If the
+original report's "rival colony rockets" meant trade-pad rockets, that surface
+is untouched by F74 — possibly design parity, since the pre-Relaunched guard
+never covered a mechanic that didn't exist. Full block in
+REACHABILITY_AUDIT.md.
 *Found by screening F56 in wave 4.* `RCTransport:CanInteractWithObject`
 (`Lua\Units\RCTransport.lua:338-385`) opens with a hard refusal —
 `if IsKindOfClasses(obj, "TradeRocketBase", "RefugeeRocketBase") then return false end`
@@ -2968,6 +3086,18 @@ indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
 PT-43 F21.
 
 ### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[fixed: Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (RainsDisasterLoop replaced with a bounded WaitMsg — timeout > max warning+duration so healthy cycles are untouched — plus a PostLoadGame pass that swaps persisted old-body loop threads for fixed ones, marked SMRFixPack_fixed_loop so reloads do not re-roll cycles). Built 2026-07-29 post-QA; PT pending; wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+**Audit 2026-07-30 (reachability): leak half R1, rains half R2 + settling
+observation.** Reachability strengthener not previously recorded: the
+**Capture Meteors POI** special project (Data\POI.lua:47-69) fires
+`MeteorsDisaster("storm")` on ANY map — bypassing both the NoDisasters rule
+and per-map storm settings — so even rule-protected colonies can strand the
+prediction flag by launching that expedition. Rains-half settling observation
+(PT-54 can carry it): after a rain/disaster collision under the fix, rain
+resuming within ≤7 sols — or a console read showing a blocked
+`RainsDisasterThreads[type]` activation thread on a vanilla save — upgrades
+the deadlock from statically-proven to observed. Full blocks in
+REACHABILITY_AUDIT.md.
+
 **LIVE CONFIRMATION (2026-07-29, the user's 194-sol save) — the whole chain,
 end to end, in four console reads.** The prediction dump returned exactly what
 the static trace predicted:
