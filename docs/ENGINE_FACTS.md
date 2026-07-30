@@ -97,6 +97,18 @@ code suggests.
   `GatherTransportableResources` (`ResourceTracking.lua:216`) is *called* but
   defined in neither Src nor the shipped Lua (verified in the extraction) — a
   genuine engine C export. F12's fix checks for it at apply time.
+- **`print` does NOT reach the log file — it goes ON-SCREEN** (recorded
+  2026-07-29, correcting a backwards claim that had been carried in the
+  continuation prompt's console facts). `print = CreatePrint{""}`
+  (`CommonLua\Core\lib.lua:202`) passes no `output` option, and `CreatePrint`
+  defaults `output = ConsolePrint` (`:149`), which the engine's own docs
+  describe as printing "to the console" — as opposed to `OutputDebugString`,
+  documented as "does not appear in the console log". **`ModLog(...)` is the
+  only path proven to reach the on-disk log** (ModLog → ModPrint → DebugPrint,
+  `Mod.lua:109-132`) — which is why every fix and probe reports through it, and
+  why `FlushLogFile()` is needed before reading the log mid-session. Practical
+  consequence: a console snippet whose output must survive the session has to
+  call `ModLog`, not `print`.
 - Sample mod format in `<game>\ModTools\Samples\Mods`; docs in `ModTools\Docs\index.md.html`.
 - **Replacing an EXISTING global from mod code works**: `ModEnvMeta.__newindex`
   (`Mod.lua:1557-1563`) rawsets any non-blacklisted key into the real `_G`, and the

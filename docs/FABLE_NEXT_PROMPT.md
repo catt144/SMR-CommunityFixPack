@@ -283,8 +283,15 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   not `UniversalRocketBase`. (The same fact is why the opt-module
   first-enable defect existed — fixed by audit 1.3's file-scope installs;
   human re-verify is PT-55.)
-- Bare console expressions echo on-screen only (NOT logged); `print(...)`
-  goes to the log — use `print` when output must be retrievable.
+- **CORRECTED 2026-07-29 — the earlier claim here was backwards.** Bare console
+  expressions echo on-screen only (NOT logged), **and so does `print(...)`**:
+  `print = CreatePrint{""}` (`lib.lua:202`) and `CreatePrint` defaults its
+  output to **`ConsolePrint`** (`lib.lua:149`), which the engine documents as
+  on-screen only. `print` therefore does NOT reach the log — the old advice to
+  "use `print` when output must be retrievable" would have silently lost it.
+  **`ModLog(...)` is the only path proven to reach the log file on disk**
+  (ModLog → ModPrint → DebugPrint, `Mod.lua:109-132`), which is why the pack's
+  own logging goes through it. Read the log with `FlushLogFile()` first.
 - **`not understood` = the console could not COMPILE the line** (`console.lua:24`
   — no rule in `ConsoleRules` produced a loadable chunk). Overwhelmingly the
   cause is a `--` comment inside a `*r` / `*g` snippet: those rules splice your
