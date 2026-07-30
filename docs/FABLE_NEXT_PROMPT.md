@@ -27,11 +27,11 @@ earned its keep:** all three wave-6 probes had been silently reporting SKIP
 (they ran every assertion then fell off the end of `run()` with no verdict;
 `SMRTest.Run` turns nil into SKIP), so wave 6's automated coverage was
 imaginary until the repair (TestKit `d701595`) — the fixes themselves were
-correct throughout. **Account state (CORRECTED 2026-07-29 latest): all six
-Mod Options toggles are ON again** — re-enabled during the day's play session;
-the post-D09 A/B leg read 75/75 active, which is only possible with all six on.
-**PT-55 requires them OFF at session start — the user must turn them off by
-hand first.** The two D09 dials default to base and are not part of the six.
+correct throughout. **Account state: all six Mod Options toggles are OFF as
+of 2026-07-30** (the user flipped them for the default-config leg) — **exactly
+PT-55's required starting state, so PT-55 is staged; do not assume any
+optional module is on.** The two D09 dials default to base and are not part
+of the six.
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
@@ -145,13 +145,12 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **~~Post-D09 A/B RunAll pair~~ DONE unattended 2026-07-29 latest** — 77
-  probes (new DroneStatDials probe drives the real Apply path via
-  `Mods[pack].options`): baseline **1/61/15/0** · all-six-toggles + dials
-  **67/0/10/0 at 75/75**, logs clean. OptionsMenu now asserts the two dial
-  wirings too (TestKit `ed01ef7`). A default-config leg (69/75) is possible
-  only after the six toggles are turned OFF by hand — account state is
-  currently ALL SIX ON (re-enabled during the day's play).
+- **~~Post-D09 A/B RunAll set~~ DONE IN FULL 2026-07-30** — 77 probes (new
+  DroneStatDials probe drives the real Apply path via `Mods[pack].options`):
+  baseline **1/61/15/0** · default config **62/0/15/0 at 69/75** ·
+  all-six-toggles + dials **67/0/10/0 at 75/75**, logs clean in every leg.
+  OptionsMenu now asserts the two dial wirings too (TestKit `ed01ef7`).
+  Nothing owed to the harness; the next A/B is owed only when new code lands.
 - **~~AUDIT_FIX_PROMPT~~ DONE 2026-07-29** — AUDIT_FINDINGS Phases 1-3 all
   landed (veto bypasses, opt-module first-enable repair, error-status
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
@@ -360,12 +359,12 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — FRESH (2026-07-29 latest, 77 probes, post-D09 pair
-  run):** baseline (`code` list emptied) **1 / 61 / 15 / 0**; all six toggles
-  ON + dials **67 / 0 / 10 / 0 at 75/75**. A default-config leg (toggles OFF
-  by hand) should read **62 / 0 / 15 / 0 at 69/75** — un-run, derived from the
-  pre-D09 61/0/15/0 plus the D09 probe (which asserts in every fixed leg:
-  DroneStatDials registers active-at-base). The 10 SKIPs are 9 `[install]`
+- **Expected numbers — FRESH (post-D09 set completed 2026-07-30, 77 probes,
+  all three legs run):** baseline (`code` list emptied) **1 / 61 / 15 / 0**;
+  default config, six toggles OFF **62 / 0 / 15 / 0 at 69/75**; all six
+  toggles ON + dials **67 / 0 / 10 / 0 at 75/75**. The D09 dial probe PASSes
+  in BOTH fixed legs (DroneStatDials registers active-at-base, independent of
+  the toggles). The 10 SKIPs are 9 `[install]`
   retail-sandbox probes + TechDescriptionBuilding; a default leg's extra 5 are
   the opt-module probes reporting `inactive (opt-in)` — **five, not six,
   because D06 has no probe of its own** (the stress harness covers it).

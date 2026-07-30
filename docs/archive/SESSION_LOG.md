@@ -35,11 +35,18 @@ UNATTENDED (user pre-authorized):
   1/61/15/0** (D09 probe FAILs "fix pack not loaded" by design). Logs clean
   both legs; metadata baseline surgery restored from saved copy, tree clean.
 
-**Account-state correction:** the legs read 75/75 — all six toggles are ON
+**Account-state correction:** the legs read 75/75 — all six toggles were ON
 again (re-enabled during the day's play). PT-55's all-OFF starting state must
 be set by hand; the FABLE_NEXT/checklist notes claiming OFF were corrected.
 D09 status: `built`, PT-56 owed (apply/stack reads, live removal, stale-save
 reconcile — the clamp probe half is already done).
+
+**Set completed 2026-07-30 (same assisted session):** the user flipped all six
+toggles OFF and the default-config leg ran unattended — **62/0/15/0 at
+69/75**, log clean, dial probe PASS (dials independent of the toggles; the
+five opt-module probes back to `inactive (opt-in)` SKIPs). All three legs of
+the post-D09 set now match expectations exactly. Side effect: the account is
+in PT-55's required all-OFF starting state — PT-55 staged.
 
 ---
 

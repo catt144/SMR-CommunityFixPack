@@ -43,13 +43,15 @@ overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
 BUILT (D09); the structural choice stays gated on the B2 re-run); F79
 D-item or not; D08.
 
-**A/B probe state (FRESH — post-D09 unattended pair, 2026-07-29 latest):**
-**77 probes** (the D09 dial probe is new), both legs clean.
+**A/B probe state (FRESH — post-D09 unattended set, completed 2026-07-30
+after the user flipped the six toggles OFF):** **77 probes** (the D09 dial
+probe is new), all three legs clean.
 
 | Leg | Active | Result |
 |---|---|---|
 | Baseline (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** |
-| Fixed, all six toggles ON (account state) + dials | 75/75 | **67 / 0 / 10 / 0** |
+| Fixed, default config (six toggles OFF) | 69/75 | **62 / 0 / 15 / 0** |
+| Fixed, all six toggles ON + dials | 75/75 | **67 / 0 / 10 / 0** |
 
 Baseline's 1 PASS is the FactionFundingCheck canary; the D09 probe FAILs
 baseline by design ("fix pack not loaded"). The 10 SKIPs are 9 `[install]`
@@ -59,17 +61,17 @@ known synthetic-map noise only. **The pair caught two real defects en route**
 (both fixed same-session, see the D09 entry): the module's file-scope
 `Modifier.new` check tripped the F64 pre-flattening trap, and the probe's
 first version wrote the TestKit env's own `CurrentModOptions` (per-mod-env —
-new ENGINE_FACTS entry). **Account toggle state is now all six ON** (the
-day's play session re-enabled them) — a default-config leg (69/75) and
-PT-55's required all-OFF starting state both need the toggles turned off by
-hand first. Pre-D09 reference set (76 probes): baseline 1/60/15/0 · default
-61/0/15/0 at 68/74 · all-toggles 66/0/10/0 at 74/74.
+new ENGINE_FACTS entry). **Account toggle state: all six OFF as of 2026-07-30
+(user flipped them for the default-config leg) — exactly PT-55's required
+starting state, so PT-55 is staged.** The default leg's dial probe PASS also
+proves the dials work independently of the toggles. Pre-D09 reference set
+(76 probes): baseline 1/60/15/0 · default 61/0/15/0 at 68/74 · all-toggles
+66/0/10/0 at 74/74.
 
 **Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** live-toggle
 re-verify of the three reworked Opt_ modules (PT-55 — both directions, incl.
-mid-session FIRST enable; **PT-55 needs the six toggles OFF at session start —
-the account currently has ALL SIX ON again** (re-enabled during the day's
-play; verified by the post-D09 A/B leg reading 75/75)); PT-56 D09 dials;
+mid-session FIRST enable; **the six toggles are OFF as of 2026-07-30 — PT-55's
+required starting state is SET, go straight in**); PT-56 D09 dials;
 PT-54 wedge watchdog; PT-52
 Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
 tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.
