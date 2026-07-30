@@ -55,7 +55,6 @@ and can be individually disabled.
 | LandscapeUnitFilter | Landscaping over a rocket, train or shuttle boarding point no longer drags the colonists who are boarding it back out |
 | IndependenceTerraforming | The Independent Terraforming technology discounts terraforming special projects by the 20% its own description parameter names, instead of 10% (applies to games where you research it after installing the pack) |
 | FounderTraitNotification | You are told again when one of your Founders picks up a new trait — the check that decided whether to notify could never succeed |
-| DomePipeMoveInside | When a dome grows to swallow a building, that building's old pipe connections are cleaned up properly instead of being torn down against the dome, which left stale plumbing behind on every load |
 | StorageRateModifiers | Modifiers that change how fast a battery or tank charges and discharges actually reach the grid (nothing in the base game uses these yet — this keeps mods and future updates working) |
 | ReplaceTechCount | Swapping one researched technology for another (used by mods and story events) keeps the research counters correct instead of corrupting them |
 | SequenceLatents | Two scripting-system bugs modders can hit: "pick N random objects with this label" returned all of them, and the Alien Digger timing swap left both values the same |

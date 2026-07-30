@@ -6,12 +6,17 @@ remediation 3.3). Session legs are append-only in
 `docs/ENGINE_FACTS.md`; defect truth lives in `docs/BUGS.md`.
 
 **Build state (authoritative counts — stated here and nowhere else):**
-`Code/` = **76 files** (67 `Fix_` + 7 `Opt_` + `00_Core` +
-`90_SaveSanitizer`) = **75 registered modules, 69 default-active** (the 6
+`Code/` = **75 files** (66 `Fix_` + 7 `Opt_` + `00_Core` +
+`90_SaveSanitizer`) = **74 registered modules, 68 default-active** (the 6
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
 92 rows.
+**Counts changed 2026-07-30 (75→74 / 69→68): `Fix_DomePipeMoveInside` DELETED**
+— F24 closed `wontfix` by user decision after the trigger was proven
+unreachable in the shipped game (full proof on the F24 entry). No TestKit probe
+existed for it, so the 77-probe suite is unchanged — but **an A/B pair is OWED**
+before this ships: every recorded leg below was measured at 75/69.
 
 **Just landed (2026-07-29 late, D09 build):** the drone stat dials DECISION is
 BUILT — `Code/Opt_DroneStatDials.lua` + two Mod Options dropdowns: Drone
@@ -62,7 +67,7 @@ probe is new), all three legs clean.
 | Leg | Active | Result |
 |---|---|---|
 | Baseline (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** |
-| Fixed, default config (six toggles OFF) | 69/75 | **62 / 0 / 15 / 0** |
+| Fixed, default config (six toggles OFF) | 69/75 *(pre-F24-removal)* | **62 / 0 / 15 / 0** |
 | Fixed, all six toggles ON + dials | 75/75 | **67 / 0 / 10 / 0** |
 
 Baseline's 1 PASS is the FactionFundingCheck canary; the D09 probe FAILs
@@ -181,6 +186,7 @@ the tracker. **Only F48 is still open** — the other four are closed.
 | **F32** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** The shipped data already carries the fix (`NotWorkingBuildings` is now `Suppressable`); the other two presets are one-shot adds. The residual by-design annoyance (2-real-minute window, per-category suppression, no per-building ack) is spun out as **D02** — a planned `Opt_AcknowledgedWarnings` module, gated on **PT-38**; MOD_DESCRIPTION carries a player-facing "looks like a bug, isn't" explainer. | — done. D02 build belongs to a wave-4+ leg after PT-38. |
 | **F42** | **NEW, wave-5 screening.** `blocked` — wontfix candidate. The tracked observation is entirely correct and does not add up to a defect: the guard it names exists to stop units being entombed, a dust devil has no footprint to be entombed in, the omission sits in declared overridable class members, no shipped text promises the block, and the game's one weather-gated placement rule (`RocketLandingDustStorm`) is implemented and working. Full write-up on the entry. | **A user decision.** Recommend `wontfix` on the F56/F62/F63 grounds. |
 | **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
+| **F24** | **CLOSED `wontfix` 2026-07-30 (user decision) — fix DELETED.** Real defect (water grid passes `dome` where its electricity twin passes `self`), but **unreachable in the shipped game**: its only live call site can't reach the buggy line (`SpireBase` is not a life-support object), and the `Dome:OnLoad` sweep needs a state vanilla can't produce — domes refuse to place over buildings, no dome has an upgrade, interior shapes never change at runtime. Carried as a 34-line full-function replacement, so deletion beat latency. Counts 75→74 / 69→68. | — done. Rollback is one `git revert` if a counter-example appears. |
 | **F62** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** Verified identical to the original game (same one-hop algorithm, same two transitive-predicate callers): carried-forward dev vision in both games, breaks nothing. No opt-in module planned. | — done. |
 | **F63** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds** — no training term ever existed in either game's emigration score. | — done. |
 

@@ -8,6 +8,51 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## F24 CLOSED `wontfix` — fix DELETED, counts 75→74 / 69→68 — 2026-07-30
+
+Came out of the user sitting down to run PT-44's F24 half and finding it
+**impossible**: no dome will place over existing buildings ("Objects underneath
+are blocking construction"), tried across dome types, sizes and angles. The
+user's own read — "if this was ever a bug it needed a mod that breaks
+boundaries or does upgrades" — turned out to be exactly right, and the question
+they asked next is the one that settled it: *what are we really fixing here?*
+
+**Reachability proof (now on the F24 entry, do not re-derive).** `MoveInside`
+has two call sites in all of `Src`. `MartianAssembly.lua:60` is live in play but
+cannot reach the buggy line — `SpireBase.__parents = { "Building" }` and the
+template declares no water or air, so `LifeSupportGridObject:MoveInside` is not
+in that chain. That leaves `Dome:OnLoad`'s repair sweep, which needs a
+pipe-connected life-support building inside a dome's interior hexes with
+`parent_dome ~= self` and live connections. Vanilla cannot produce that: domes
+refuse to place over buildings, **no dome template carries any upgrade** (all
+`*Dome*.lua` checked, zero `upgrade*_id`), and nothing mutates an interior shape
+at runtime. The defect is real — it was never a player report, it was found by
+diffing the water grid against its electricity twin — but it is unreachable.
+
+**User decision: delete rather than carry as latent.** The F28/F43 precedent
+(real-but-latent, keep) was offered and declined, on the reasonable grounds that
+those are cheap patches while this one was a **34-line full-function replacement**
+of `LifeSupportGridObject:MoveInside` that would rot on any future patch to it.
+Removed: `Code/Fix_DomePipeMoveInside.lua`, its `metadata.lua` code entry, its
+`items.lua` ModItemCode entry, and the README fix-table row.
+
+**Verification of the removal:** both edited Lua files parse clean (luaparser);
+`items.lua`'s CodeFileName list now diffs **identical** to `metadata.lua`'s code
+list; 75 files = 66 `Fix_` + 7 `Opt_` + `00_Core` + `90_SaveSanitizer` → **74
+registered / 68 default-active**. No TestKit probe existed for F24, so the suite
+stays at 77 probes.
+
+**OWED:** an A/B pair — every recorded leg predates this and was measured at
+75/69; the default leg should now read **68/74**. Flagged in STATUS, the
+continuation prompt, PLAYTEST_CHECKLIST (PT-22 item 4, PT-21 setup) and
+PLAYTEST_HELP's ListFixes row. Rollback is one `git revert`.
+
+**PT-44 consequence:** the F24 half is removed; PT-44 now covers F23 only. This
+is the **third** PT procedure found unrunnable by executing it (PT-29, PT-11,
+now PT-44's F24 half) — the standing rule earns another data point.
+
+---
+
 ## PT-48 CLOSED IN FULL — D02 AcknowledgedWarnings → `tested` — 2026-07-30
 
 Live playtest-standby sitting, parallel to the PT-55 closure session (that

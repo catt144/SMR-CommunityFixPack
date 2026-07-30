@@ -246,10 +246,6 @@ return {
 		'CodeFileName', "Code/Fix_FounderTraitNotification.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_DomePipeMoveInside",
-		'CodeFileName', "Code/Fix_DomePipeMoveInside.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_StorageRateModifiers",
 		'CodeFileName', "Code/Fix_StorageRateModifiers.lua",
 	}),

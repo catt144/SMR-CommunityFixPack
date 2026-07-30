@@ -56,7 +56,7 @@ protocol.
 2. Any **`[LUA ERROR]`** block whose stack mentions a file under `SMR-BugFixPack\Code\`.
 3. Any `[LUA ERROR]` in shipped game code that you did **not** see in a vanilla session
    — note the file:line even if it looks unrelated to us.
-4. `SMRFixPack.ListFixes` output at load: **all 69 default fixes should read
+4. `SMRFixPack.ListFixes` output at load: **all 68 default fixes should read
    `active`** (plus whichever opt-in modules you have toggled ON). Any other
    `inactive`/`error` line means a fix silently self-deactivated (its apply()
    self-check failed) — that is a FAIL and needs reporting with the reason string.
@@ -783,7 +783,16 @@ goals.
 
 `Result (Oxygen goal needs Oxygen / penalties reachable at zero?):` _____________________________________________
 
-### PT-44 — Founder trait notice and dome pipe cleanup · covers **F23, F24**
+### PT-44 — Founder trait notice · covers **F23**
+
+> **The F24 half was REMOVED 2026-07-30 — it was unrunnable, and F24 is now
+> `wontfix` (fix deleted, user call).** The step asked you to "build or upgrade
+> a dome so the building ends up inside", and the shipped game can do neither:
+> a dome refuses to place over existing buildings ("Objects underneath are
+> blocking construction", confirmed in play), no dome template carries any
+> upgrade, and nothing mutates a dome's interior shape at runtime. Full
+> reachability proof on the F24 BUGS.md entry. Third PT procedure found
+> unrunnable by executing it (after PT-29 and PT-11).
 
 **F23 — Founder gains a trait.** Probes cover the wiring; play confirms the
 notification renders and reads correctly.
@@ -795,25 +804,6 @@ notification renders and reads correctly.
      notifications appear for the same event.
 
 `Result (notification appears once, names the right trait?):` _____________________________________________
-
-**F24 — dome absorbing a pipe-connected building.** This one has no probe: it
-needs a real dome and real pipes.
-2. Build a life-support building **outside** a dome and connect it with pipes
-   (Water Extractor, Moisture Vaporator, Water Tank, or an Oxygen tank).
-3. Now build or upgrade a **dome** so that the building ends up **inside** the
-   dome's footprint (the game moves it "inside" the dome's grid).
-   - **EXPECTED:** the pipe stubs and connection graphics at the old boundary
-     disappear cleanly; the building keeps working on the dome's grid; no
-     orphaned plug graphics are left floating.
-4. **Save, quit to the menu, and reload.** The repair sweep that runs on load
-   exercises the same code path.
-   - **EXPECTED:** still clean — no stale pipe visuals reappear, and pipes can
-     still be connected in that area afterwards.
-   - **SURPRISE looks like:** leftover plugs/pipe ends, or a spot where new pipe
-     refuses to connect.
-5. Check the log for errors mentioning `DestroyConnection` or `LifeSupportGrid`.
-
-`Result (clean at absorption / clean after reload / pipes still connectable?):` _____________________________________________
 
 ### PT-47 — Bombardment volley shape · covers **F26**
 
@@ -883,7 +873,7 @@ Re-enable the fix pack before continuing.
 
 ## PT-21 — Long-save soak
 
-**Setup:** any healthy colony (SAVE-A or the live colony is fine). All **69
+**Setup:** any healthy colony (SAVE-A or the live colony is fine). All **68
 default fixes** active (incl. `DroneStatDials`, active-at-base) — confirm with
 `SMRFixPack.ListFixes` (opt-in modules read `inactive` unless you enabled
 them).

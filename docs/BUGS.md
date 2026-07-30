@@ -39,7 +39,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F21 | Train travel-time penalty includes station waiting       | P2  | med  | tested — PT-43 PASS 2026-07-28 (entry) |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | fixed  |
-| F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | fixed  |
+| F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | wontfix — unreachable in vanilla, fix deleted 2026-07-30 (entry) |
 | F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | fixed  |
 | F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | fixed  |
 | F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | fixed  |
@@ -541,7 +541,55 @@ the shipped handler add the notification and its own `not FindNotification(...)`
 then what stops ours from adding a second.
 Probe: `FounderTraitNotification` in `40_Probes_Wave4.lua`. Playtest: PT-44.
 
-### F24 — Dome pipe visuals corrupt on load (`MoveInside` copy-paste)  `[fixed: Code/Fix_DomePipeMoveInside.lua]`
+### F24 — Dome pipe visuals corrupt on load (`MoveInside` copy-paste)  `[wontfix 2026-07-30 (user decision) — real defect, UNREACHABLE in the shipped game; fix file DELETED, module count 75→74 / 69→68 default-active]`
+
+**CLOSED `wontfix` 2026-07-30 (user call), on a reachability proof built while
+trying to run PT-44's F24 half.** The defect below is real and the diagnosis
+stands — it was never a player report, it was found by diffing the water grid
+against its electricity twin. But nothing in the shipped game can reach it, so
+the pack was carrying a 34-line full-function replacement of
+`LifeSupportGridObject:MoveInside` (a copy that would rot on any future patch to
+that function) to guard a state vanilla cannot produce. **`Code/Fix_DomePipeMoveInside.lua`
+deleted; removed from `metadata.lua`, `items.lua` (ModItemCode) and the README
+fix table.** Rollback is `git revert` — the file is one commit away if a
+counter-example ever turns up.
+
+**The reachability proof (do not re-derive).** `MoveInside` has exactly two call
+sites in all of `Src`:
+1. **`MartianAssembly.lua:60`** — `AssemblyFakeBase:GameInit` teleports the real
+   Assembly into the fake's dome and calls `MoveInside(self.parent_dome)`. Live
+   and in-play, but **it cannot reach the buggy line**: `SpireBase.__parents =
+   { "Building" }` and the `MartianAssembly` template declares no water or air,
+   so `LifeSupportGridObject:MoveInside` is not in that class chain at all.
+2. **`Dome:OnLoad` (`Dome.lua:896-899`)** — the repair sweep the original
+   diagnosis names. It only acts on a building inside the dome's interior shape
+   whose `parent_dome ~= self`, and the buggy loop body only executes when
+   `SupplyGridRemoveBuilding` returns live connections — i.e. a **pipe-connected
+   life-support building sitting inside a dome's interior hexes but not parented
+   to that dome**.
+
+That state cannot arise in vanilla, on three independent grounds:
+* **A dome will not place over existing buildings** — confirmed in play
+  2026-07-30 across multiple dome types, sizes and angles; the placement Status
+  panel reads *"Objects underneath are blocking construction."*
+* **No dome has an upgrade.** Every `Data/BuildingTemplate/*Dome*.lua` was
+  checked — zero `upgrade1/2/3_id` values. The old PT-44 wording ("build or
+  **upgrade** a dome") described a mechanic that does not exist.
+* **A dome's interior shape never changes at runtime** — no `SetInteriorShape`
+  and no `interior_shape` assignment anywhere in `Lua/`.
+
+So the sweep's `parent_dome ~= self` branch is defensive code for states
+produced by older versions, map scripts or other mods — not by play. Filed
+alongside the same judgement call the pack already makes for F28 and F43
+(real, latent), except here the user chose deletion over carrying it, because
+this one costs a whole-function copy rather than a one-line patch.
+
+**PT-44 consequence:** its F24 half was **unrunnable as written** and has been
+removed; PT-44 now covers F23 only. That is the **third** PT procedure found
+unrunnable by executing it (after PT-29 and PT-11) — the standing rule that an
+un-run PT's procedure is unverified until executed once holds again.
+
+**Original diagnosis, kept for the record:**
 `Lua\LifeSupportGrid.lua:304` — passes `dome` where electricity twin
 (`ElectricityGrid.lua:291`) passes `self` to `DestroyConnection`. Triggered from
 `Dome:OnLoad` (Dome.lua:896-899) repair sweep; stale plugs/connections block future
@@ -557,8 +605,11 @@ middle of the function, so no wrapper position reaches it, and wrapping
 which caller handed it the wrong owner. The shipped `assert(IsKindOf(dome, "Dome"))` is
 dropped from the copy (asserts do not unwind; the statements after it already require a
 real dome).
-Probe: `[install]`-free — the fix is verified through F24's own playtest, PT-44, because
-the behaviour needs a real dome absorbing a real pipe-connected building.
+Probe: `[install]`-free — the fix was to be verified through F24's own playtest,
+PT-44, because the behaviour needs a real dome absorbing a real pipe-connected
+building. **That is exactly what proved impossible** (see the closure block at
+the top of this entry). No TestKit probe ever existed for this fix, so its
+deletion does not move the 77-probe A/B counts — only the module counts.
 
 ### F25 — Tech description names wrong building (pre-1.0.6 saves only)  `[fixed: Code/Fix_TechDescriptionBuilding.lua]`
 `Data\TechPreset.lua:1486` (`UndergroundLargeDome`, gated `not UndergroundRework106`) —

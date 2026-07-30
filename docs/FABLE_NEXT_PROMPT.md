@@ -10,6 +10,15 @@ model-specific.)
 
 ## Where the project stands (2026-07-30, mid-playtest — a live sitting is in progress)
 
+> ⚠️ **COUNTS CHANGED 2026-07-30 (after the numbers below were measured):
+> `Fix_DomePipeMoveInside` was DELETED** — F24 closed `wontfix` by user
+> decision, its trigger proven unreachable in the shipped game (proof on the
+> F24 entry). The pack is now **74 registered / 68 default-active**; every
+> "75"/"69" and "at 69/75" below is a HISTORICAL measurement taken before the
+> removal. No TestKit probe existed for F24, so the suite stays at 77 probes —
+> but **an A/B pair is OWED** before this ships. Expect the default leg to read
+> `68/74`.
+
 **Build state: 75 registered modules — 69 active by default, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
 (`Opt_DroneStatDials`, BUILT 2026-07-29 late: Drone speed 1x/2x/3x/5x and
@@ -110,8 +119,9 @@ Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 
 **Session-start sequence (~2 min):**
 1. `git log --oneline -5` + `git pull` (see above).
-2. Verify the pack loaded clean: on-screen status loop (below) — all 69
-   default fixes `active` (incl. DroneStatDials, active-at-base), plus
+2. Verify the pack loaded clean: on-screen status loop (below) — all **68**
+   default fixes `active` (69 before the 2026-07-30 F24 removal; incl.
+   DroneStatDials, active-at-base), plus
    whichever opt-in toggles the user runs (account-persistent — READ the
    state, never assume it; all six ended OFF after the PT-55 closure cycle).
 3. Fresh `SMRFixPack.DroneReport` baseline if D06 is on (counters reset
