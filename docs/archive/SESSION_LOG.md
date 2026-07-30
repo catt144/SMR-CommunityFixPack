@@ -8,6 +8,72 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## PT-48 CLOSED IN FULL — D02 AcknowledgedWarnings → `tested` — 2026-07-30
+
+Live playtest-standby sitting, parallel to the PT-55 closure session (that
+agent held `PLAYTEST_CHECKLIST.md` / `PLAYTEST_ARCHIVE.md` dirty for most of
+this leg; results were written only after `aac6798` landed and the tree went
+clean — no collision).
+
+**Why the item was open at all, since the user asked.** The D02 work everyone
+remembers is **PT-38**, which is a *different test with a different job*: it was
+the GATE that decided whether to build the module, and it corrected the premise
+from "re-nags every 2 real minutes" to **120,000 GAME-ms = 4 game hours**.
+Archived and done 2026-07-27. The module was BUILT the same day. **PT-48 — the
+play verification — had never been run once**; its only coverage was the TestKit
+stand-in probe, and probe-verified ≠ `tested`. Nothing had been lost.
+
+**Method: counters, not eyes.** Steps 1-2 are "nothing should happen" tests, the
+exact shape that has twice produced unrunnable procedures here (PT-29, PT-11).
+So the sitting opened with a **positive control**: fixture built, module OFF,
+dismissal armed `suppress_until = now + 120,000` to the millisecond, and the
+notification RETURNED after the window — proving the no-power fixture generates
+re-add attempts and that a later "it stayed quiet" could not be vacuous. Two
+paste-safe console counters (per-building state + whole-ack-set enumeration) are
+recorded verbatim in the archived section and are reusable for any future
+notification work.
+
+**Result: all five steps PASS.** Acked buildings held for 505,850 game-ms
+(≈16.9 game hours = **4.2 vanilla windows**) with `shouldshow=true` proving they
+actively qualified and were still excluded, and `suppress_until=nil` proving the
+silence was the per-object filter rather than the shipped window. A new
+building, placed while PAUSED, warned inside the interval vanilla would have
+been silent. Repowering the original three cleared all three stamps
+(`total_acked` 3 → 1) and re-breaking re-warned all three. The stamp survived
+save/reload — flagged pre-run as the likeliest failure.
+
+**Two findings worth carrying forward:**
+1. **D02's blast radius is provably tiny.** Exactly **two** notification presets
+   in the entire game are `Suppressable` — `InsufficientResources` and
+   `NotWorkingBuildings` (`Data/NotificationPreset.lua:546/:646`). Since the
+   module's guard is a literal `id == ID`, `InsufficientResources` is the only
+   id in the game where it could differ from vanilla. It was forced (via
+   `const.MinDaysFoodSupplyBeforeNotification`, restored after) and shown
+   arming, expiring and re-nagging untouched. That reduces step 5 from a vague
+   "check other warnings" to a single decisive observation.
+2. **Vanilla curiosity, unexplained, filed on the D02 entry:**
+   `InsufficientResources`' suppression resolved on **RealTime** while PT-38
+   measured `NotWorkingBuildings` on **GameTime**, even though both presets
+   leave `GameTime` at its default `true`
+   (`NotificationPreset.lua:65-66/:126-128`). D02 never calls `GetTime()`, so
+   the PASS is unaffected — but if the notification INSTANCE rather than the
+   preset supplies `GameTime`, PT-38's recorded 4-game-hour fact may need
+   scoping. Game-free item.
+
+Also confirmed by reading before the sitting started: **D02 never had the
+audit-1.3 first-enable defect.** Its three wrappers replace plain notification
+GLOBALS rather than class methods, so runtime flattening never applies, and
+`OnMsg.ApplyModOptions` re-runs `apply()` (`00_Core.lua:129`) on a first
+mid-session enable. Verified in play — the module was enabled mid-session with
+no relaunch and worked immediately.
+
+**Docs:** D02 flipped in both BUGS.md places + full result block on the entry;
+PT-48 section moved to PLAYTEST_ARCHIVE.md (37 sections) with the counters and
+conditions; STATUS next-gates and optional-module list updated. MOD_DESCRIPTION
+needed no change (it does not segregate tested/untested for opt-in modules).
+
+---
+
 ## PT-55 CLOSED — step 3 run live, D01 limitation accepted — 2026-07-30
 
 The bottleneck item is done, on the user's explicit "nothing else until it is

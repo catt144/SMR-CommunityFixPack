@@ -41,7 +41,12 @@ see the section's result note).
 Archived 2026-07-30: PT-55 (audit fix 1.3 live re-verify → CLOSED — first
 mid-session enable works for all three reworked opt-modules; D04 binding
 timing self-healing; D01 parked-rocket limitation accepted by user call;
-ListFixes tracked a full OFF/ON/OFF toggle cycle with a clean log).
+ListFixes tracked a full OFF/ON/OFF toggle cycle with a clean log), PT-48
+(D02 → tested — all five steps PASS on console counters, opened with a
+positive control that proved the fixture could re-nag; the acked building held
+16.9 game hours = 4.2 vanilla windows, the stamp survived save/reload, and
+`InsufficientResources` — the game's ONLY other suppressable id — was shown
+still arming its vanilla window untouched).
 
 Archived 2026-07-27 (later): PT-14 (DONE — **premise falsified**: the
 accept-colonists toggle is a **quarantine** — its OFF state is titled
@@ -1966,3 +1971,142 @@ statuses — the modules keep their D-entry gates.
 the logs DIRECTORY shows a stale 0-byte size for it — NTFS directory metadata
 only updates on handle close. `FlushLogFile()` works; open or copy the file
 to read the flushed content instead of trusting the listing.
+
+---
+
+## PT-48 — Acknowledged warnings · covers **D02 `Opt_AcknowledgedWarnings`**
+
+Dismissal now means "I've seen THESE buildings" instead of "silence the whole
+category for 4 game hours". **Enable route:** Options → Mod Options →
+Community Fix Pack → **Acknowledged warnings** (takes effect on Apply, no
+restart); `SMRFixPack.ListFixes` must show it `active`. This is a FEATURE, not
+a fix — the question is "does it behave as advertised", plus the usual
+"nothing else broke".
+
+**Setup:** break two buildings in ways that won't self-heal (e.g. turn off their
+power supply, or use a permanently entombed/unsupplied building if the save has
+one). Wait for the "Building Not Working" notification listing both.
+
+**Trigger:**
+1. Dismiss the notification (right-click it / its dismiss control).
+   - **EXPECTED:** it goes away and STAYS away — play several game hours at high
+     speed; the two acknowledged wrecks never re-nag (vanilla re-nags every 4
+     game hours ≈ every few real seconds at ultra).
+2. While it is quiet, break a THIRD building.
+   - **EXPECTED:** a new "Building Not Working" notification appears promptly
+     for the new one — no 4-hour category silence (this is the module's other
+     half; vanilla would keep it quiet for the rest of the window).
+   - The new notification lists only the new building, not the acknowledged two.
+3. Repair one of the acknowledged buildings, let it run, then break it AGAIN.
+   - **EXPECTED:** it notifies again — recovery re-arms the warning.
+4. Save, reload, and confirm the still-broken acknowledged building stays quiet
+   after the load (the stamp persists).
+5. Other warnings (fuel, DestroyedInfrastructure, rover damage) must behave
+   exactly as vanilla — dismiss one and confirm nothing odd.
+
+`Result (acked stay quiet / new one warns / re-break warns / survives reload?):`
+**PASS IN FULL — 2026-07-30**, all five steps, on the live 297-sol
+SAVE-B-derived no-disasters colony. **D02 → `tested`.**
+
+**Conditions (EXTERNAL VALIDITY rule).** Cheat-developed colony, ~166
+colonists, full depots, normal game speed throughout except the step-1 soak.
+Module enabled mid-session via Mod Options with **no relaunch** — D02 does NOT
+have the audit-1.3 first-enable defect, because its three wrappers replace
+plain notification GLOBALS rather than class methods, so class flattening never
+applies, and `OnMsg.ApplyModOptions` re-runs `apply()` on the tick
+(`00_Core.lua:129`). Every claim below is a console counter reading, not an
+eyeball judgement.
+
+**The counter** (re-run at every step; select the building first):
+`*r local b = SelectedObj local n = FindNotification("NotWorkingBuildings", b:GetMap()) ConsolePrint("acked=" .. tostring(b.SMRFixPack_ack_notworking) .. " shouldshow=" .. tostring(b:ShouldShowNotWorkingNotification()) .. " in_notif=" .. tostring(n and n.objects and n.objects[b] ~= nil) .. " notif_objs=" .. tostring(n and n.objects and #n.objects or 0) .. " suppress_until=" .. tostring(SuppressedNotifications["NotWorkingBuildings"]) .. " now=" .. tostring(GameTime()))`
+
+Whole-ack-set enumeration:
+`*r local n = FindNotification("NotWorkingBuildings", CurrentMap) local c = 0 for _, b in ipairs(CurrentMap:MapGet("map", "Building") or empty_table) do if b.SMRFixPack_ack_notworking then c = c + 1 ConsolePrint(c .. " " .. b.class .. " shouldshow=" .. tostring(b:ShouldShowNotWorkingNotification()) .. " in_notif=" .. tostring(n and n.objects and n.objects[b] ~= nil)) end end ConsolePrint("total_acked=" .. c .. " notif_objs=" .. tostring(n and n.objects and #n.objects or 0))`
+
+**Fixture:** three buildings left off the power grid (a Concrete Extractor among
+them) as the ack set, plus a newly built Triboelectric Scrubber as the "third
+building", plus cabling for the recovery leg. Power-cut damage was chosen over
+PT-38's out-of-range maintenance failure precisely because step 3 needs damage
+that can be UNDONE.
+
+**POSITIVE CONTROL FIRST (module OFF)** — steps 1 and 2 are "nothing should
+happen" tests, and this project has twice been burned by those (PT-29, PT-11).
+With D02 off, dismissal armed `suppress_until = 211,856,285` against
+`now = 211,736,285` — **exactly +120,000**, i.e. `SuppressTime` to the
+millisecond — and the notification RETURNED after the window expired. That
+proves the no-power fixture genuinely generates re-add attempts, so a later
+"it stayed quiet" cannot be a false PASS. It also verified D02's pass-through
+direction while inactive (`acked=nil`, shipped window armed normally).
+
+**Step 1 — acked stay quiet: PASS.** With D02 ON, dismissal stamped the
+buildings and left `suppress_until=nil` — the module deliberately skips the
+shipped whole-id window, so nothing but the per-object filter is holding
+anything back. The extractor then held at
+`acked=true shouldshow=true in_notif=false` from `now=211,940,495` to
+`now=212,446,345` = **505,850 game-ms ≈ 16.9 game hours = 4.2 vanilla windows**;
+vanilla would have re-nagged four times in that span. `shouldshow=true`
+throughout is the load-bearing half: the building actively QUALIFIED for the
+notification the whole time and was still excluded.
+
+**Step 2 — new breakage still warns: PASS.** A freshly built Triboelectric
+Scrubber warned immediately while three acknowledged buildings sat broken;
+the notification listed **only** the scrubber (`objs=1`, `ack=nil`). Placement
+was done PAUSED, so game time never advanced and the warning provably landed
+inside the window vanilla would have been silent for.
+
+**Step 3 — recovery re-arms: PASS.** Reconnecting power to the original three
+genuinely recovered them, which routed each through the `RemoveObjectFromNotification`
+wrapper and cleared all three stamps (**`total_acked` 3 → 1**). Splitting the
+cable again re-broke them and all three re-warned (`notif_objs=3`). Stronger
+than the step asks for: the one building that never recovered (the scrubber,
+stamped in a later dismissal) stayed correctly filtered out through two power-grid
+rebuilds and three neighbour break→recover→break cycles, with `notif_objs`
+climbing 1 → 2 → 3 and the acknowledged one never leaking in.
+
+**Step 4 — survives save/reload: PASS.** Flagged before the run as the likeliest
+failure, since `SMRFixPack_ack_notworking` is a plain member on the Building
+object and its persistence had only ever been asserted in design, never
+exercised. Quicksave + reload returned
+`1 TriboelectricScrubber shouldshow=true in_notif=false / total_acked=1` — the
+stamp persisted and the acknowledged building stayed out of a live notification
+after the load.
+
+**Step 5 — other warning ids behave vanilla: PASS.** Source fact established
+first: **exactly two notification presets in the whole game are `Suppressable`**
+— `InsufficientResources` and `NotWorkingBuildings` (`Data/NotificationPreset.lua`
+:546/:646). D02's guard is a literal `notification.id == ID`, so
+`InsufficientResources` is the ONLY id in the game where the module could
+possibly cause a visible difference; `PowerGridProblem` and friends are not
+suppressable at all, which is why dismissing one leaves
+`SuppressedNotifications` empty (correct, not a failure — cost one inconclusive
+reading before it was understood). Forced the real check with
+`const.MinDaysFoodSupplyBeforeNotification = 1000000` (restored to **3**
+afterwards; `const` is static config, not a GameVar, so nothing persists).
+The resulting **"Low Storage"** warning (that is `InsufficientResources`'
+Title — it does not say "Insufficient Resources" on screen) armed
+`SuppressedNotifications["InsufficientResources"]` normally on **two separate
+dismissals** (7,992,065 then 8,167,605, +175,540 apart), the entry
+**self-cleared on expiry** (absent at `RealTime=8,220,479`), and the warning
+**re-nagged on schedule**. Pure vanilla. `NotWorkingBuildings` never appeared in
+that table at any point — the module's intended asymmetry, visible side by side
+with an untouched id in the same session.
+
+**VANILLA ENGINE OBSERVATION recorded en route — not a D02 issue, unexplained.**
+`InsufficientResources`' suppression clock reads as **REAL time, not game
+time**: its stored values sat in the 8.0-8.2M range and expired against
+`RealTime()=8,220,479` while `GameTime()` was 213.5M. Yet
+`NotificationPreset:GetTime()` is `self.GameTime and GameTime() or RealTime()`
+with `GameTime` **defaulting true** (`NotificationPreset.lua:65-66/:126-128`),
+and neither preset overrides it — and PT-38 measured `NotWorkingBuildings` on
+GAME time three times over. So two presets with identical `Suppressable`/
+`SuppressTime`/`GameTime` settings appear to resolve different clocks. D02
+never consults `GetTime()`, so nothing here affects the module or this PASS,
+but it is worth a look in a game-free sitting; if the instance rather than the
+preset supplies `GameTime`, PT-38's recorded fact may need scoping.
+
+**Why this test sat open so long:** the early D02 work everyone remembers is
+**PT-38**, the *gate* — it measured the shipped cadence and corrected the
+premise from "2 real minutes" to 120,000 GAME-ms. That is archived and done.
+The module was then BUILT the same day (2026-07-27) and its only coverage since
+was the TestKit stand-in probe. PT-48 is the play half, and it had never been
+run once until now.

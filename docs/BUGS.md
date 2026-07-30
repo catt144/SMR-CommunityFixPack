@@ -80,7 +80,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F62 | Services reach 1 passage hop only, never trains          | P2  | high | wontfix|
 | F63 | Universities invisible to emigration (no students)       | P2  | high | wontfix|
 | D01 | Rockets don't auto-refuel/auto-export rare metals        | dsgn| high | opt-in fix |
-| D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | built 2026-07-27 — PT-48 (entry) |
+| D02 | Dismissed "not working" warnings re-nag every 4 game h   | dsgn| med  | tested 2026-07-30 — PT-48 PASS in full (entry) |
 | D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | tested — PT-49 PASS 2026-07-28 (entry) |
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested — PT-50 PASS 2026-07-27 (entry) |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested — PT-51 PASS 2026-07-27 (entry) |
@@ -1788,7 +1788,7 @@ and shipping the two separately would let a player enable an emptying behaviour 
 refilling one. So whenever the export half gets its design decision, decide auto-offload in
 the same pass and behind the same `ClassicRockets` flag.
 
-### D02 — Dismissing a "Building Not Working" warning only silences it ~4 game hours — BY DESIGN, feels like a bug  `[built 2026-07-27: Code/Opt_AcknowledgedWarnings.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-48]`
+### D02 — Dismissing a "Building Not Working" warning only silences it ~4 game hours — BY DESIGN, feels like a bug  `[tested 2026-07-30: Code/Opt_AcknowledgedWarnings.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-48 PASS in full — all five steps on console counters, archived]`
 Spun out of F32's close (2026-07-26, user decision) — read that entry for the full trace.
 Not a defect: the shipped suppression machinery works exactly as designed
 (`Notifications.lua:41-43`, `:86-88`, `:141-146`). The design just has no answer for a
@@ -1837,6 +1837,44 @@ Only `NotWorkingBuildings` is touched. Savegame footprint: the per-building flag
 absent-tolerant both ways (policy §3). Probe `AcknowledgedWarnings` (TestKit
 `60_Probes_Opt.lua`) drives all three wrappers with stand-ins — PASS in the opt-in leg,
 SKIP-with-reason otherwise. Playtest: PT-48.
+**PT-48 PASS IN FULL → `tested` (2026-07-30).** Live 297-sol colony, module
+enabled mid-session with no relaunch. Every result is a console counter reading,
+not an eyeball call; full evidence in PLAYTEST_ARCHIVE.md. Headlines:
+* **Positive control run FIRST** (module OFF): dismissal armed
+  `suppress_until = now + 120,000` exactly, and the notification RETURNED after
+  the window — proving the no-power fixture generates re-add attempts, so the
+  "stays quiet" steps could not false-PASS (the PT-29/PT-11 lesson applied).
+* **Acked stay quiet:** `acked=true shouldshow=true in_notif=false` held for
+  505,850 game-ms ≈ **16.9 game hours = 4.2 vanilla windows**, with
+  `suppress_until=nil` throughout — the shipped whole-id window is skipped, so
+  only the per-object filter accounts for the silence. `shouldshow=true` is the
+  load-bearing half: the building actively qualified and was still excluded.
+* **New breakage warns:** a fresh Triboelectric Scrubber warned while three
+  acknowledged buildings sat broken; the notification listed only the scrubber.
+  Placed while PAUSED, so it provably landed inside vanilla's silent window.
+* **Recovery re-arms:** repowering the original three cleared all three stamps
+  (`total_acked` 3 → 1) and re-breaking them re-warned all three. The one
+  never-recovered building stayed filtered through two grid rebuilds and three
+  neighbour break→recover→break cycles.
+* **Save/reload:** the `SMRFixPack_ack_notworking` member persists — flagged
+  pre-run as the likeliest failure, and it held.
+* **Blast radius bounded by source:** exactly TWO presets in the game are
+  `Suppressable` (`InsufficientResources`, `NotWorkingBuildings` —
+  `Data/NotificationPreset.lua:546/:646`), so `InsufficientResources` is the only
+  id where this module could differ from vanilla. Forced via
+  `const.MinDaysFoodSupplyBeforeNotification`: it armed normally on two
+  dismissals, self-cleared on expiry, and re-nagged — untouched.
+* **Vanilla curiosity, unexplained, NOT a D02 issue:** `InsufficientResources`'
+  suppression resolved on **RealTime**, while PT-38 measured
+  `NotWorkingBuildings` on **GameTime** — despite both presets leaving
+  `GameTime` at its default `true` (`NotificationPreset.lua:65-66/:126-128`).
+  D02 never calls `GetTime()`, so nothing here touches this PASS, but if the
+  notification INSTANCE rather than the preset supplies `GameTime`, PT-38's
+  recorded 4-game-hour fact may need scoping. Worth a game-free look.
+* **No first-enable defect here** (unlike D01/D03/D04 pre-audit-1.3): the three
+  wrappers replace plain notification GLOBALS, not class methods, so runtime
+  flattening never applies, and `OnMsg.ApplyModOptions` re-runs `apply()`
+  (`00_Core.lua:129`) on a first mid-session enable.
 
 ### D03 — No way to block dome move-ins short of a full quarantine  `[tested 2026-07-28: Code/Opt_ResidencyControl.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-49 PASS in full (archived) — arrivals/tourists proven against an adversarial pad-beside-the-closed-dome setup, quarantine independence, MicroG row (kept on asteroid habitats by user decision), uninstall shape live + reload; PT-55 PASS 2026-07-30 — mid-session first enable clean, "no issues at all"]`
 Filed 2026-07-27 (user decision, out of PT-14/F61's close — read that entry first). The

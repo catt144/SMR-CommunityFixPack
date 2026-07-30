@@ -6,9 +6,9 @@ next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so far
-(36 sections): PT-01 … PT-09, PT-11 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
+(37 sections): PT-01 … PT-09, PT-11 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
 PT-26, PT-29, PT-31 … PT-34, PT-36, PT-38 … PT-41, PT-43, PT-45, PT-46 (the
-F49(b) half), PT-49, PT-50, PT-51, PT-55. This file carries **only un-run work**; when a test
+F49(b) half), PT-48, PT-49, PT-50, PT-51, PT-55. This file carries **only un-run work**; when a test
 completes, its whole section (with the result notes) moves to the archive.
 (Cross-checked against the archive and the BUGS.md index 2026-07-29 — nothing
 below re-tests anything already passed; PT-46's remaining halves are exactly
@@ -846,38 +846,6 @@ obvious). Watch from a low camera angle so the incoming trails are visible.
 `Result (spread visible?):` _____________________________________________
 
 `Result (decals / dome hits / notification / interception / volley ends?):` _____________________________________________
-
-### PT-48 — Acknowledged warnings · covers **D02 `Opt_AcknowledgedWarnings`**
-
-Dismissal now means "I've seen THESE buildings" instead of "silence the whole
-category for 4 game hours". **Enable route:** Options → Mod Options →
-Community Fix Pack → **Acknowledged warnings** (takes effect on Apply, no
-restart); `SMRFixPack.ListFixes` must show it `active`. This is a FEATURE, not
-a fix — the question is "does it behave as advertised", plus the usual
-"nothing else broke".
-
-**Setup:** break two buildings in ways that won't self-heal (e.g. turn off their
-power supply, or use a permanently entombed/unsupplied building if the save has
-one). Wait for the "Building Not Working" notification listing both.
-
-**Trigger:**
-1. Dismiss the notification (right-click it / its dismiss control).
-   - **EXPECTED:** it goes away and STAYS away — play several game hours at high
-     speed; the two acknowledged wrecks never re-nag (vanilla re-nags every 4
-     game hours ≈ every few real seconds at ultra).
-2. While it is quiet, break a THIRD building.
-   - **EXPECTED:** a new "Building Not Working" notification appears promptly
-     for the new one — no 4-hour category silence (this is the module's other
-     half; vanilla would keep it quiet for the rest of the window).
-   - The new notification lists only the new building, not the acknowledged two.
-3. Repair one of the acknowledged buildings, let it run, then break it AGAIN.
-   - **EXPECTED:** it notifies again — recovery re-arms the warning.
-4. Save, reload, and confirm the still-broken acknowledged building stays quiet
-   after the load (the stamp persists).
-5. Other warnings (fuel, DestroyedInfrastructure, rover damage) must behave
-   exactly as vanilla — dismiss one and confirm nothing odd.
-
-`Result (acked stay quiet / new one warns / re-break warns / survives reload?):` _____________________________________________
 
 ---
 

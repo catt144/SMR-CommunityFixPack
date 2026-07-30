@@ -84,11 +84,15 @@ proves the dials work independently of the toggles. Pre-D09 reference set
 FULL 2026-07-30** (archived; audit A2 caveat retired; the D01 parked-rocket
 limitation ACCEPTED by user call `4f5f61e` — a parked rocket picks the
 behavior up on its next landing, `on_activate` enhancement on record but
-unbuilt). Cheapest open item now: **PT-56 D09 dials** (~5 min; PASS un-gates
-the D10 workshops build). Then: PT-53 Trigger E (the last thing between D07
-and `tested`); PT-54 wedge watchdog; PT-52 Trigger B + the B2 re-run on the
-v2 stress harness; PT-46 tail; PT-20 save/remove/load incl. wave-6 persisted
-state; PT-21.
+unbuilt). **PT-48 CLOSED IN FULL 2026-07-30 → D02 `tested`** (archived; all
+five steps on console counters, opened with a positive control; the acked
+building held 4.2 vanilla windows and the stamp survived save/reload; a vanilla
+GameTime-vs-RealTime curiosity on `InsufficientResources` was filed on the D02
+entry for a game-free look). Cheapest open item now: **PT-56 D09 dials**
+(~5 min; PASS un-gates the D10 workshops build). Then: PT-53 Trigger E (the
+last thing between D07 and `tested`); PT-54 wedge watchdog; PT-52 Trigger B +
+the B2 re-run on the v2 stress harness; PT-46 tail; PT-20 save/remove/load
+incl. wave-6 persisted state; PT-21.
 
 **Newest legs:** `docs/archive/SESSION_LOG.md` → the 2026-07-30 set, newest
 first: the PT-55 closure leg, the PLAYTEST_CHECKLIST/PLAYTEST_HELP split leg,
@@ -142,9 +146,10 @@ build history in SESSION_LOG.md.
   parked at the colony keeps its launch ration requested even with no destination selected,
   so drones refuel it while it waits. Only the fuel half of D01; the standing Rare Metals
   export half is deliberately unwritten (see the D01 entry).
-- **AcknowledgedWarnings** (D02, `Code/Opt_AcknowledgedWarnings.lua`, added 2026-07-27) —
-  dismissing "Building Not Working" acknowledges the listed buildings until they recover;
-  new breakages always warn immediately.
+- **AcknowledgedWarnings** (D02, `Code/Opt_AcknowledgedWarnings.lua`, added 2026-07-27,
+  **`tested` 2026-07-30 — PT-48 PASS in full**) — dismissing "Building Not Working"
+  acknowledges the listed buildings until they recover; new breakages always warn
+  immediately.
 - **ResidencyControl** (D03, `Code/Opt_ResidencyControl.lua`, added 2026-07-27) —
   per-dome/habitat "closed to new residents" policy row; quarantine untouched.
 - **MultipleSuns** (D04, `Code/Opt_MultipleSuns.lua`, added 2026-07-27) — lifts the
