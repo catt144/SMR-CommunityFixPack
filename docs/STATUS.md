@@ -59,9 +59,18 @@ PT-54 wedge watchdog; PT-52
 Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
 tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.
 
-**Newest leg:** `docs/archive/SESSION_LOG.md` → "PT-29 PASS + two documentation
-defects — 2026-07-29 late" (the pre-flight A/B, audit-remediation and
-disaster-system legs sit below it).
+**Newest leg:** `docs/archive/SESSION_LOG.md` → "PT-11 PASS → F01 `tested`, and
+the test that could not have worked — 2026-07-29 late" (the PT-29, pre-flight
+A/B, audit-remediation and disaster-system legs sit below it).
+
+**Playtest-method rule earned 2026-07-29 (applies beyond PT-11):** compressing a
+scheduler's `g_Consts` interval does NOT shorten the sleep already in flight, so
+a "nothing should happen" test must **re-arm the repeat**
+(`RestartPeriodicRepeatThread`) and **carry a positive control**, or it
+false-PASSes regardless of the fix. Full rule in PLAYTEST_CHECKLIST.md's ground
+rules. Two tests have now been found unrunnable-as-written by actually running
+them (PT-29, PT-11) — treat an un-run PT's procedure as unverified until it has
+been executed once.
 
 **Tech-gated fixes — coverage settled 2026-07-29, do not re-derive.** F41 is
 `tested` (PT-29). Of the other four, **F28** (latent, mod-facing), **F43**

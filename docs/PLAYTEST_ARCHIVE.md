@@ -25,6 +25,13 @@ Opt_AcknowledgedWarnings build unblocked), PT-41 (F66 → tested), PT-45 (F47 �
 tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail remains in the
 checklist as un-run).
 
+Archived 2026-07-29 (later): PT-11 (F01 → tested — two 20-game-hour legs either
+side of a save/reload with the rubble count frozen at 27, then a positive control
+quake taking it to 36. Running it exposed that the test as written could not
+work: compressing a `g_Consts` interval does not shorten the sleep already in
+flight, so the old procedure would have false-PASSed regardless of the fix. The
+general rule is now in the checklist's ground rules).
+
 Archived 2026-07-29: PT-29 (F41 → tested — `nil` → `50` → `150` console read;
 Gene Forging alone now contributes its `param1 = 50` and the two techs add.
 Running it exposed and fixed two documentation defects: the trigger was
@@ -469,6 +476,83 @@ Waste Rock 921→903 etc.) — live-sim drift between screenshots, same source
 values. Screenshots of both screens taken.
 
 ---
+
+## PT-11 — Cave-ins under the No Disasters rule · covers **F01**
+
+**Setup:** SAVE-B, standing on the underground map. Confirm all three
+preconditions (bare expressions, one line at a time):
+```
+IsGameRuleActive("NoDisasters")
+CurrentMap.mapdata.Environment
+SMRFixPack.fixes.CaveInsNoDisasters.status
+```
+Expect `true` / `Underground` / `active`. If the rule is not active the test is
+void — it can only be set at new-game. Underground *buildings* are NOT required:
+`FindEpicentre` is `GetRandomPassable` → `GetPlayableAreaNearby`
+(`Marsquake.lua:237-241`), so quakes fire on a bare map and their rubble lands
+near a random epicentre, not near your colony. Watching a dome for damage is the
+wrong detector.
+
+**Detector — an objective count, not eyes** (events at ultra speed are easy to
+miss). Take this before, between and after every leg:
+```
+*r local l = CurrentMap:MapGet("map", "CaveInRubble") or {} ConsolePrint("rubble: " .. #l)
+```
+
+**Trigger (console):**
+```
+g_Consts.MarsquakeSpawnTime = 1
+g_Consts.MarsquakeRandomTime = 1
+RestartPeriodicRepeatThread("UndergroundMarsquake", CurrentMap)
+IsValidThread(CurrentMap.RepeatThreads.UndergroundMarsquake)
+SetGameSpeedState("ultra")
+*g Sleep(20 * const.HourDuration) ConsolePrint("20h elapsed")
+```
+**The restart is mandatory, not optional** — see the "Compressing a scheduler
+with `g_Consts`" rule in the checklist's ground rules. Without it the thread is
+still asleep on the default 384+96-hour (16-sol) interval and 20 hours proves
+nothing. `IsValidThread` must print `true`.
+
+Then save, reload, **re-run the restart and the IsValidThread check** (repeat
+threads are persistable, so the reload restores the old sleep), and let another
+20 pass. Finish with the positive control:
+```
+CheatTriggerUndergroundMarsquake()
+```
+
+- **BROKEN looks like:** the rubble count climbing across either leg; cave-in
+  notifications and camera shakes during the watch.
+- **FIXED looks like:** the count frozen across both legs, then jumping on the
+  control — proving the scheduler really was ticking and being suppressed.
+
+> Expected and **not** a failure: `CheatTriggerUndergroundMarsquake()` still
+> fires a quake. It bypasses the scheduler on purpose; the fix gates the
+> scheduler only (`Lua/Marsquake.lua:292`). That is exactly why it makes a
+> sound positive control.
+
+`Result:` **PASS — 2026-07-29.** Preconditions verified live: `true` /
+`Underground` / `active`. Baseline **27** rubble. Consts compressed to 1, thread
+re-armed, `IsValidThread` → `true`. **Leg 1:** 20 game hours at ultra → **27**,
+unchanged. Save + reload; `g_Consts.MarsquakeSpawnTime` read back `1` (GameVar
+survived), rule still `true`, thread re-armed and valid, count still **27**.
+**Leg 2:** another 20 game hours → then the control
+`CheatTriggerUndergroundMarsquake()` → **36**.
+
+*Why that closes it:* +9 is exactly one quake's worth — `rubble_count = 10`
+(`Marsquake.lua:235`) with one `FindCaveInLocation` returning nil, which is
+normal. So at most ONE quake occurred across the whole run, and the control
+fired it. Had leg 2's ~10-20 compressed ticks produced even a single scheduler
+quake the count would sit near 45; an unfixed pack would be in the hundreds.
+Leg 2 therefore contributed zero, and the control proves the counter moves when
+a quake really happens — the two 27s are the fix suppressing live ticks, not a
+dead observation method. → **F01 `tested`.**
+
+*Test defect found and repaired by running it:* the original procedure set the
+consts and waited, which cannot work — a `MapGameTimeRepeat` computes its next
+interval at the end of each tick, so the in-flight sleep still ran on the
+384+96-hour defaults. Followed literally, the old text would have returned a
+false PASS for any fix state. The restart step, the objective counter and the
+positive control are all new, and the general rule is now in the ground rules.
 
 ## PT-12 — Shuttle-cache emigration · covers **F51**
 

@@ -8,6 +8,49 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## PT-11 PASS → F01 `tested`, and the test that could not have worked — 2026-07-29 late
+
+**PT-11 PASS → F01 `tested`** (P1, the first of the pack's fixes verified on the
+SAVE-B no-disasters fixture). Preconditions live: `NoDisasters` true,
+`Environment` Underground, fix `active`. Rubble baseline **27**; leg 1 (20 game
+hours) **27**; save + reload, `g_Consts.MarsquakeSpawnTime` read back `1`, count
+**27**; leg 2 (20 more) then the positive control
+`CheatTriggerUndergroundMarsquake()` → **36**.
+
+**Why +9 closes it:** `rubble_count = 10` (`Marsquake.lua:235`), so one quake
+spawns at most ten cave-ins and nine landing (one `FindCaveInLocation` nil) is
+the normal outcome. At most ONE quake occurred across the entire run, and the
+control fired it. A single scheduler quake in leg 2 would have put the count
+near 45; an unfixed pack, in the hundreds.
+
+**THE TEST AS WRITTEN COULD NOT HAVE WORKED.** PT-11 said to set
+`g_Consts.MarsquakeSpawnTime = 1` / `MarsquakeRandomTime = 1` and wait 20 game
+hours. But a `MapGameTimeRepeat` computes its next interval at the END of each
+tick and then sits in `Sleep(sleep)` (`CommonLua/Core/lib.lua:1590-1592`) — the
+running thread keeps the interval it was handed *before* the edit. The defaults
+are **384 and 96 hours** (`Lua/__const.lua:1085-1094`), i.e. **16 sols**, so the
+prescribed 20-hour wait would have observed a thread still asleep on the old
+interval and scored a PASS **whether or not the fix worked**. Every previous
+reading of this test would have been vacuous.
+
+Repaired by three additions, now in the checklist's ground rules as a general
+rule (it applies to any scheduler-compression test, not just this one):
+1. **`RestartPeriodicRepeatThread("<name>", CurrentMap)` after compressing**, so
+   the fresh thread reads the new consts — verified with
+   `IsValidThread(CurrentMap.RepeatThreads.<name>)`. It does not bypass a fix
+   that wraps the repeat: the wrapper lives in `PeriodicRepeatInfo`, re-read
+   every loop. **Must be repeated after each save/reload** — repeat threads are
+   persistable (`MakeThreadPersistable`, `lib.lua:1595`), so a reload restores
+   the old sleep.
+2. **An objective counter** (`CurrentMap:MapGet("map", "CaveInRubble")`) instead
+   of watching for damage. Also recorded: underground *buildings are irrelevant*
+   to this test — `FindEpicentre` is `GetRandomPassable` →
+   `GetPlayableAreaNearby` (`Marsquake.lua:237-241`), so quakes fire on a bare
+   map and rubble lands near a random epicentre, not near the colony.
+3. **A positive control at the end.** A negative test without one cannot
+   distinguish "the fix worked" from "nothing would have happened anyway" —
+   which was precisely this test's failure mode.
+
 ## PT-29 PASS + two documentation defects — 2026-07-29 late (live, on the SAVE-B fixture)
 
 **PT-29 PASS → F41 `tested`** (index row + heading flipped, section moved to

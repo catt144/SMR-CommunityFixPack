@@ -6,7 +6,7 @@ next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so far
-(34 sections): PT-01 … PT-09, PT-12 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
+(35 sections): PT-01 … PT-09, PT-11 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
 PT-26, PT-29, PT-31 … PT-34, PT-36, PT-38 … PT-41, PT-43, PT-45, PT-46 (the
 F49(b) half), PT-49, PT-50, PT-51. This file carries **only un-run work**; when a test
 completes, its whole section (with the result notes) moves to the archive.
@@ -112,6 +112,36 @@ Two standing cautions:
 - **PT-10 / F55**: use `OpenAllDomes()`, not `CheatOpenAllDomes()` — the Cheat
   variant also maxes terraforming params and muddies the observation.
 
+### ⚠️ Compressing a scheduler with `g_Consts` — the false-PASS trap (learned running PT-11, 2026-07-29)
+
+**Lowering a `g_Consts` interval does NOT shorten the sleep already in flight.**
+A `MapGameTimeRepeat` body computes its next interval at the END of each tick
+and then sits in `Sleep(sleep)` (`CommonLua/Core/lib.lua:1590-1592`), so the
+running thread keeps whatever interval it was handed *before* your edit.
+
+This silently invalidates any "nothing should happen" test. PT-11's defaults are
+`MarsquakeSpawnTime = 384` hours and `MarsquakeRandomTime = 96`
+(`Lua/__const.lua:1085-1094`) — **16 sols**. Waiting the prescribed 20 hours
+after setting them to 1 would have watched a thread still asleep on the old
+16-sol interval and scored it a PASS whether or not the fix worked.
+
+**Always re-arm after compressing, and prove the thread is live:**
+```
+RestartPeriodicRepeatThread("UndergroundMarsquake", CurrentMap)
+IsValidThread(CurrentMap.RepeatThreads.UndergroundMarsquake)
+```
+The restart does not bypass a fix that wraps the repeat — the wrapper lives in
+`PeriodicRepeatInfo`, which the fresh thread re-reads every loop. **Repeat the
+restart after every save/reload:** repeat threads are persistable
+(`MakeThreadPersistable`, `lib.lua:1595`), so a reload restores the old sleep.
+
+**Pair every negative result with a positive control.** A cheat that forces the
+event, run at the END, proves the map can produce it and that your detector
+actually moves. Without one, a negative test cannot distinguish "the fix worked"
+from "nothing would have happened anyway". Prefer an **objective counter** over
+eyes — e.g. `CurrentMap:MapGet("map", "CaveInRubble")` — since events at ultra
+speed are easy to miss.
+
 ### Console: what works and what silently does nothing
 
 On a retail build the console runs inside the **mod sandbox** (`CommonLua/console.lua:27-56`:
@@ -173,7 +203,7 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatToggleInfopanelCheats()` | `Lua/Cheats.lua:290` | shows per-building cheat buttons — ⚠️ **on retail the buttons render but silently NO-OP** (they dispatch `NetSyncEvents.ObjCheat`, gated `AreCheatsEnabled()`, `Network.lua:218-219`; found live 2026-07-27). Either run `Platform.cheats = true` first (buttons work; set false after), or skip the panel and call the method directly on the selection: `SelectedObj:CheatMalfunction()` / `CheatAddMaintenancePnts()` / `CheatCleanAndFix()` (`Building.lua:1813-1849`). Second gotcha (2026-07-27): button presses ride the game-time sync queue (`ScheduleOfflineSyncEvent`) — they look DEAD while the game is paused and fire on unpause; the `ObjCheat <method>` console print confirms delivery |
 | `CheatMeteors("single"\|"multispawn"\|"storm", setting, pos)` | `Lua/Cheats.lua:62` | meteor strike. ⚠️ **RE-CORRECTED 2026-07-29 (QA session):** with no explicit `pos` it can silently do NOTHING — but the mechanism recorded earlier was wrong. `GetCameraLookAtPassable` is a **file-local helper** (`local function`, `Cheats.lua:42`) — invisible from the console *by design*, which is what the `attempt to call a nil value` probe actually proved; the shipped `Cheats.lua` is byte-identical to Src (full fpk diff, see ENGINE_FACTS.md). The real no-op path: the helper returns nil when no passable point exists within 100m of the camera look-at, and the body is `if pos then … end` with no else. **Always pass a position**, or drive the disaster directly: `*r local d = Presets.MapSettings.Meteor["Meteor_High"] local p = GetRandomPassable(MainMap) CreateGameTimeThread(function() MeteorsDisaster(d, "storm", p) end)`. Note `"storm"` reliably WEDGES (F78) — with the pack loaded, `Fix_MeteorStormWedge` heals it automatically ~2 game hours after the storm notification expires (PT-54); manual recovery remains `*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end` |
 | `CheatTriggerMarsquake(settings_name)` | `Lua/Marsquake.lua:223` | surface quake |
-| `CheatTriggerUndergroundMarsquake()` | `Lua/Marsquake.lua:292` | underground quake (**bypasses** the scheduler — see PT-11) |
+| `CheatTriggerUndergroundMarsquake()` | `Lua/Marsquake.lua:292` | underground quake (**bypasses** the scheduler on purpose — which is what makes it a sound positive control for any "no disasters" watch; PT-11, archived) |
 | `CheatTriggerUndergroundCaveIn(pos)` | `Lua/Marsquake.lua:284` | cave-in at a position |
 | `CheatStopDisaster()` | `Lua/Cheats.lua:74` | stop the running disaster |
 | `CheatStartMystery(id)` | `Lua/Mysteries/Mysteries.lua:91` | **gated on `Platform.cheats`** — see PT-15 |
@@ -199,7 +229,8 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatFinishMystery(id)` | `Lua/Mysteries/Mysteries.lua:142` | complete the running mystery. Mystery class ids (from the DevMenu tree): `AIUprisingMystery`, `UnitedEarthMystery`, `DreamMystery`, `MarsgateMystery`, `MetatronMystery`, `CrystalsMystery` (Philosopher's Stone — F06), `MirrorSphereMystery` (F16), `LightsMystery` (St. Elmo's Fire — F07/F15), `DiggersMystery`, `BlackCubeMystery`, `TheMarsBug`. Starting a mystery while one runs auto-finishes the old one |
 | `CheatSpawnPlanetaryAnomalies()` / `CheatBatchSpawnPlanetaryAnomalies()` | `Lua/Cheats.lua:26` / `:38` | planetary anomalies (C01 material) |
 | `CheatChangeTerraformingParamPct(param, delta)` / `GetTerraformParamPct(param)` | `Lua/Cheats.lua:343` / `Lua/Terraforming.lua:219` | relative terraforming nudge / read-back |
-| `g_Consts.MarsquakeSpawnTime = 1` + `g_Consts.MarsquakeRandomTime = 1` | `Lua/Marsquake.lua` scheduler consts | compress the underground-quake schedule (PT-11 setup) |
+| `g_Consts.MarsquakeSpawnTime = 1` + `g_Consts.MarsquakeRandomTime = 1` | `Lua/Marsquake.lua` scheduler consts | compress the underground-quake schedule (PT-11 setup). ⚠️ **Setting the const is NOT enough on its own — see the rule below** |
+| `RestartPeriodicRepeatThread("<RepeatName>", CurrentMap)` | `CommonLua/Core/lib.lua:1637` | **re-arm a `MapGameTimeRepeat` after compressing its consts.** Verify with `IsValidThread(CurrentMap.RepeatThreads.<RepeatName>)` → `true` |
 | DevMenu "Max All Stats (Temp)" equivalent | inline per colonist | set comfort/health/sanity to `100*const.Scale.Stat` directly — the satisfaction lever for F08/F09 setups |
 
 **No cheat exists** (inventoried 2026-07; do not look again) for: forcing a
@@ -289,7 +320,7 @@ served its tests — PT-12/13/14 are archived — and is no longer needed.)
 | Fixture | How to build it | Feeds |
 |---|---|---|
 | **SAVE-A — Sandbox colony** | New game, any sponsor, **default game rules** (disasters ON, meteors at least "Low"), Mars surface. Land, build one dome with ~20 colonists, a Medical Center, a Martian Express station with a short track, and a landed rocket. `MultiCheat()` + `CheatAddFunding(500000000)` to remove build gating. For PT-27/PT-28 the save also needs the **Dust In The Wind** game rule (set at new-game). | PT-10, PT-27, PT-28 |
-| **SAVE-B — No-Disasters underground** | New game, tick the **No Disasters** game rule at setup (it cannot be added later). Then in-colony: `UIColony:UnlockUnderground()` and `CheatRevealDarkness()`, build a small underground presence. | PT-11, PT-25 |
+| **SAVE-B — No-Disasters underground** | New game, tick the **No Disasters** game rule at setup (it cannot be added later). Then in-colony: `UIColony:UnlockUnderground()` and `CheatRevealDarkness()`, build a small underground presence. (PT-11 is done and archived — buildings turned out not to be needed for it at all.) | PT-25 |
 | **SAVE-D — St. Elmo's Fire mystery** | Easiest: start a **new game and pick "The Power of Three / St. Elmo's Fire" (`LightsMystery`) as the mystery at setup**, then play/skip forward until Light Traps are buildable and have caught wisps. (Console alternative in PT-15.) | PT-15 |
 | **SAVE-E — Frontier save (underground elevator + asteroid)** | From a healthy mid-game colony: `UIColony:UnlockUnderground()`, `CheatRevealDarkness()`, build an **Elevator** and an **underground dome with free housing**; then `UIColony:OnDiscoveryCompleted("Asteroid", false, true)` and build/land an **Asteroid Lander** with a **MicroG Habitat** and a couple of colonists on the asteroid. `dbg_ToggleRocketInstantTravel()` when running lander tests. | PT-18 |
 | **SAVE-F — Uninstall-safety copy** | Just a save made *while the fix pack is enabled* — copy of SAVE-A after ~1 sol of play is fine. | PT-20 |
@@ -776,32 +807,6 @@ and look at the pattern rather than exact numbers.)
 `Result:` _____________________________________________
 
 ## SAVE-B sitting (No Disasters, underground)
-
-### PT-11 — Cave-ins under the No Disasters rule · covers **F01**
-
-**Setup:** SAVE-B. Confirm the rule is on: `IsGameRuleActive("NoDisasters")` should
-print `true`. Have some underground infrastructure that rubble would visibly damage.
-
-**Trigger (console):**
-```
-g_Consts.MarsquakeSpawnTime = 1
-g_Consts.MarsquakeRandomTime = 1
-SetGameSpeedState("ultra")
-```
-(the underground quake repeat sleeps `MarsquakeSpawnTime * const.HourDuration` +
-`Random(MarsquakeRandomTime * const.HourDuration)`, `Lua/Marsquake.lua:308,313`).
-Let **20+ game hours** pass. Then save, reload, and let another 20 pass.
-
-- **BROKEN looks like:** underground quakes and cave-in rubble keep happening on a save
-  you explicitly started with disasters turned off.
-- **FIXED looks like:** nothing. No quake, no rubble, no cave-in notification — forever,
-  including after a save/load.
-
-> Expected and **not** a failure: `CheatTriggerUndergroundMarsquake()` still fires a
-> quake. It bypasses the scheduler on purpose; the fix gates the scheduler only
-> (`Lua/Marsquake.lua:292`).
-
-`Result:` _____________________________________________
 
 ### PT-25 — Destroyed tunnel after a reload · covers **F38**
 

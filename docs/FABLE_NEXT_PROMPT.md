@@ -180,9 +180,16 @@ silent.
   promptly; repair + re-break re-warns; stamp survives reload.
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
-- Un-run fixture PTs (checklist §4-5): PT-10, PT-11, PT-15, PT-18 (fixtures
-  A/B/D/E), PT-25, PT-27/28/30 (**PT-29 PASSED 2026-07-29 → F41 `tested`,
-  archived**; PT-27's Biorobots grant is
+- **Playtest-method rule (earned 2026-07-29, applies to every PT):** two tests
+  in a row proved unrunnable as written (PT-29's trigger needed a colonist that
+  could not exist yet; PT-11 compressed a scheduler const without re-arming the
+  repeat, so it would have false-PASSed regardless of the fix). **Treat an
+  un-run PT's procedure as unverified until it has been executed once**, and
+  for any "nothing should happen" test insist on a positive control and an
+  objective counter. Details in the checklist's ground rules.
+- Un-run fixture PTs (checklist §4-5): PT-10, PT-15, PT-18 (fixtures
+  A/D/E), PT-25, PT-27/28/30 (**PT-29 and PT-11 PASSED 2026-07-29 → F41 and F01
+  `tested`, both archived**; PT-27's Biorobots grant is
   `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
   breakthroughs — grant directly via `UIColony:SetTechResearched("<Id>")`),
   PT-35, PT-42, PT-44, PT-46 tail (F49(d) cap, F49(a) palette), PT-47,

@@ -16,7 +16,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 
 | ID  | Title                                                    | Sev | Conf | Status |
 |-----|----------------------------------------------------------|-----|------|--------|
-| F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | fixed  |
+| F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | tested 2026-07-29 — PT-11 |
 | F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | fixed  |
 | F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | tested |
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
@@ -123,7 +123,7 @@ Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbe
 
 ## P1 — gameplay-breaking
 
-### F01 — Cave-ins ignore "No Disasters" rule  `[fixed: Code/Fix_CaveInsNoDisasters.lua]`
+### F01 — Cave-ins ignore "No Disasters" rule  `[tested: Code/Fix_CaveInsNoDisasters.lua — PT-11 PASS 2026-07-29: two 20-game-hour legs either side of a save/reload, scheduler compressed to a ~1h interval and re-armed so it really was ticking, CaveInRubble count held at 27 throughout; positive control CheatTriggerUndergroundMarsquake() then took it to 36 (+9, one quake's worth — rubble_count = 10), proving the detector moves when a quake fires]`
 `Lua\Marsquake.lua:306-325` — `MapGameTimeRepeat("UndergroundMarsquake", ...)` has no
 `IsGameRuleActive("NoDisasters")` check; every other disaster has one (ColdWave.lua:222,
 DustStorm.lua:413, DustDevils.lua:189, surface quake Marsquake.lua:43). Matches live
