@@ -10,6 +10,16 @@ model-specific.)
 
 ## Where the project stands (end of 2026-07-30 — a long playtest day, no sitting currently live)
 
+**Next session is PLAYTEST STANDBY.** Nothing is half-finished and nothing is
+blocked on an agent. Do the two ⚠️ items at the top of the board first (read
+§4a; dials-to-base + one A/B leg), then the owner picks a PT. Open playtests, in
+suggested order: **PT-56** (D09 dials, ~5 min, un-gates the D10 build) ·
+**PT-53 Trigger E** (last thing before D07 → `tested`) · **PT-54** (wave-6
+disasters) · **PT-52 Trigger B + the B2 stress re-run** · checklist **§6
+needs-eyes riders** (take them while you are in a qualifying save) ·
+**PT-20/21** last. One decision is owed (FIX_POLICY §4 amendment) and one
+build is queued behind PT-56 (D10 workshops).
+
 **Build state: 73 registered modules — 67 active by default**, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
 (`Opt_DroneStatDials`, active-at-base = vanilla, PT-56 owed). **Two modules were
@@ -76,7 +86,7 @@ it.**
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
-ticked) live in `docs/AUDIT_FINDINGS.md`; Phase 4 (core helpers, merges,
+ticked) live in `docs/archive/AUDIT_FINDINGS.md` (ARCHIVED 2026-07-30 — Phases 1-3 done; only the Phase 4 go/no-go is still live); Phase 4 (core helpers, merges,
 deactivation surface) stays deferred pending a user go-decision. Playtest
 consequences NOW:
 
@@ -229,7 +239,7 @@ Your jobs, in the order they usually come up:
    rules earned the hard way: *a state producible only by console/debug
    injection is evidence AGAINST reachability*, and *re-read `git log` between
    assembling conclusions and publishing them*.
-6. Only when relevant: `docs\AUDIT_FINDINGS.md` (audit findings + the plan —
+6. Only when relevant: `docsrchive\AUDIT_FINDINGS.md` (ARCHIVED — audit findings + the plan;
    Phases 1-3 implemented 2026-07-29, Phase 4 awaiting the user's
    go-decision); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
    iteration, not just knob tuning — the shipped core is the veto variant of
@@ -246,23 +256,41 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **DECISIONS OWED BY THE USER — nothing else on this board is blocked on
-  them, but both are one word away.** (1) **F28** `Fix_ReplaceTechCount` — the
-  reachability audit's sole DELETE candidate: `Research:ReplaceTech` has **zero
-  callers in all of Src** (whole-tree grep = the definition only), it cannot go
-  live by data alone, and it is carried as a §1.5 full replacement. Keep only
-  as declared mod-facing support, or delete F24-style. (2) **The FIX_POLICY §4
-  amendment** — drafted at the end of `REACHABILITY_AUDIT.md` and revised by
-  the Challenge review to demand a reachability tier **and** a positive intent
-  statement backed by a hard tell. `FIX_POLICY.md` is deliberately UNTOUCHED.
-  ⚠️ *Note before applying it:* as drafted it says "R4 does not ship", which
-  would also mandate stripping **F49(a)** — while the audit separately
-  recommends keeping (a) as a cheap rider. Resolve that contradiction first.
-- **~~Post-removal A/B~~ DONE 2026-07-30, code gate CLEAR** — 74/74, zero
-  `[CommunityFixPack]` error lines, 77 probes, **66/1/10/0**. The one FAIL is
-  the state-dependent D09 dial probe (TestKit defect, D09 entry + TestKit
-  README). Nothing owed to the harness; the next A/B is owed only when new code
-  lands — **or to re-confirm that FAIL with the dials set to base**.
+- **⛔ FIRST — DO NOT WRITE ANY FIX BEFORE READING `FIX_POLICY.md` §4a.**
+  Owner hard rule, 2026-07-30. The test is **who benefits**: could a PLAYER be
+  harmed, now or after a future patch/DLC? Yes → real fix, ship it (invisible
+  and latent are irrelevant). Only-a-mod-benefits → barred. Operationally the
+  **R4/R3 boundary**: R4 needs new *calling code* (mod territory, barred), R3
+  needs new *data* (ships with patches/DLC, allowed). Override is an explicit
+  per-case ask to the owner, never inferred. **Judge by enumeration, never by an
+  entry's own words** — F29 called itself "mod-facing / No shipped user" and had
+  four live shipped callers.
+
+- **⚠️ FIRST ACTION AT THE KEYBOARD, before any PT: set BOTH Mod Options dials
+  to base, then run one A/B leg.** Two things ride on it: (1) it re-confirms the
+  D09 dial probe goes green — its FAIL last leg was the off-base account dial,
+  not the pack (TestKit defect, D09 entry); (2) **an A/B is genuinely OWED** —
+  F28's deletion took its probe with it, so the numbers moved and no leg has run
+  since. **Expect `67/73` default-config (or `73/73` all-toggles-on) and 76
+  probes.** The last recorded leg (74/74, 77 probes, 66/1/10/0) predates F28.
+
+- **DECISION OWED — the FIX_POLICY §4 amendment** (the *other* one; §4a is
+  already applied). Drafted at the end of `REACHABILITY_AUDIT.md` and revised by
+  its Challenge review: requires a reachability tier **plus** a positive intent
+  statement backed by a hard tell, adds tier **`I` — Intentional**, and makes
+  every lettered sub-item of a bundled fix its own audit subject.
+  `FIX_POLICY.md` §4 is deliberately UNTOUCHED pending the owner.
+  ⚠️ **Resolve this contradiction first:** as drafted it says "R4 does not
+  ship", which would mandate stripping **F49(a)** — while the audit separately
+  recommends keeping (a) as a cheap no-op rider on a module kept by (d). Three
+  options are written up on the F49 entry; the recommended one is a narrow
+  carve-out for an R4 item riding inside a module retained on other grounds.
+
+- **Second-order, only if the owner wants a stricter line:** **F29** and
+  **F57(a)** are R3 implemented as **§1.5 replacements** — the combination the
+  amendment would put to the owner. Both are KEPT and correct today. F29 is
+  explicitly NOT a §4a case (see its entry).
+
 - **~~AUDIT_FIX_PROMPT~~ DONE 2026-07-29** — AUDIT_FINDINGS Phases 1-3 all
   landed (veto bypasses, opt-module first-enable repair, error-status
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,

@@ -53,7 +53,7 @@ modifiers removed = vanilla. D09 entry in BUGS.md; PT-56 owed. **The owed
 post-D09 A/B pair RAN unattended the same night — see the probe-state table
 below (code gate CLEAR).**
 
-**Landed earlier the same day (audit-remediation session):** AUDIT_FINDINGS.md
+**Landed earlier the same day (audit-remediation session):** `docs/archive/AUDIT_FINDINGS.md` (ARCHIVED 2026-07-30 — Phases 1-3 complete; only the Phase 4 go/no-go remains open)
 Phases 1-3 implemented — code: veto re-check in the three data-patch fixes
 (A1), DustSickness data-loaded latch (B3), file-scope install for the three
 flattening-unsafe Opt_ hooks so a first mid-session enable works (A2),
@@ -67,7 +67,7 @@ restructured (this header, ENGINE_FACTS, SESSION_LOG, archives). Details:
 the newest SESSION_LOG leg.
 
 **Open user decisions:** Phase 4 go/no-go (core helpers, module merges,
-deactivation surface — AUDIT_FINDINGS.md PLAN); D01 standing-export half
+deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
 overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
 BUILT (D09); the structural choice stays gated on the B2 re-run); F79
@@ -103,7 +103,7 @@ one fewer than the pre-removal 75/75, which is the F24 deletion and nothing
 else. **Zero `[CommunityFixPack]` error / inactive / disabled / FAILED lines**;
 `DroneStatDials: applied`. Probe total still 77 (no probe was removed with
 F24). The account had all six toggles ON, hence 74/74 rather than a
-default-config 68/74 — read the state, never assume it.
+default-config leg (68/74 at that moment; **67/73 now, after the later F28 removal**) — read the state, never assume it.
 **The single FAIL is a PROBE defect, not a pack regression.**
 `DroneStatDials` reported `+1 carry dial: DroneResourceCarryAmount 3 → 2
 (want 4)`. Cause: the probe captures its own baseline from the LIVE value —

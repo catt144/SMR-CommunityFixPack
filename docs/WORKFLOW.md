@@ -69,7 +69,7 @@ ENGINE_FACTS.md). The discipline guards *future* updates:
 1. After every game patch, re-extract `Packs\Lua.fpk` (FLPK container, zstd
    per file) and diff against the new Src tree; re-verify every replacement
    fix's target function byte-for-byte (the ~29 full replacements are the
-   pack's patch-rot exposure — C1 in AUDIT_FINDINGS.md).
+   pack's patch-rot exposure — C1 in `docs/archive/AUDIT_FINDINGS.md`).
 2. Runtime self-checks stay mandatory in every apply() regardless (existence/
    layout checks only — the sandbox has no introspection; they catch renamed/
    removed targets, NOT an edited same-named function — hence step 1).
@@ -91,7 +91,7 @@ regression harness; run it as pre-flight when STATUS says one is owed.
 ## Release steps
 
 - Owner tasks first: preview image (PDX ≤2 MB / Steam ≤1 MB), screenshots,
-  portal rules check for console publishing (AUDIT_FINDINGS plan 2.5).
+  portal rules check for console publishing (`docs/archive/AUDIT_FINDINGS.md` plan 2.5).
 - metadata.lua: bump `version_major`/`version_minor`, refresh `last_changes`.
   `short_description`, `ignore_files`, `optional_mod` are already in place
   (audit 2.1). `lua_revision` stays 350453.
