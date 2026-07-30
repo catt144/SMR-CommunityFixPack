@@ -59,8 +59,17 @@ PT-54 wedge watchdog; PT-52
 Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
 tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.
 
-**Newest leg:** `docs/archive/SESSION_LOG.md` → "Pre-flight A/B pair —
-2026-07-29 late" (the audit-remediation and disaster-system legs sit below it).
+**Newest leg:** `docs/archive/SESSION_LOG.md` → "PT-29 PASS + two documentation
+defects — 2026-07-29 late" (the pre-flight A/B, audit-remediation and
+disaster-system legs sit below it).
+
+**Tech-gated fixes — coverage settled 2026-07-29, do not re-derive.** F41 is
+`tested` (PT-29). Of the other four, **F28** (latent, mod-facing), **F43**
+(latent — the one shipped layout has no tech-locked entry) and **F25**
+(pre-1.0.6 saves only, which is why its probe SKIPs on a current build) are
+correctly untestable in play. **F18** is the only genuinely uncovered one:
+preset half probe-covered, play half needs an Independence sponsor + a special
+project; judged not worth a PT for a data-only P2.
 
 ## What this project is
 

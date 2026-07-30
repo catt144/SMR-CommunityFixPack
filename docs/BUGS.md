@@ -56,7 +56,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | folded into D04 2026-07-27 — PT-50 PASS (entry) |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
-| F41 | Gene Forging tech has no effect                          | P2  | high | fixed  |
+| F41 | Gene Forging tech has no effect                          | P2  | high | tested 2026-07-29 — PT-29 |
 | F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
 | F43 | Layout construction bypasses tech locks                  | P3  | high | fixed  |
 | F44 | One-hex track salvage can delete the entire track        | P1  | high | tested |
@@ -924,7 +924,7 @@ change nothing. Four `ForEachExecuteEffects` hand out the trait — two in
 than index. LoadGame pass removes the trait (and the paired
 `StatusEffect_UnableToWork`) from biorobots already infected in a save.
 
-### F41 — Gene Forging tech has no effect (P2, high)  `[fixed: Code/Fix_GeneForging.lua]`
+### F41 — Gene Forging tech has no effect (P2, high)  `[tested: Code/Fix_GeneForging.lua — PT-29 PASS 2026-07-29: live console read on a colony with neither tech researched went nil → 50 (Gene Forging alone, was nil = the defect) → 150 (both), confirming the additive sum]`
 `Colonist:GetRareTraitChance` (`Colonist.lua:3541-3550`) reads only
 `TechDef.GeneSelection.param1`; `GeneForging` (`TechPreset.lua:1556-1564`, param1=50)
 referenced nowhere in gameplay code. **Fix:** wrap `GetRareTraitChance`: add GeneForging

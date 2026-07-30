@@ -181,7 +181,8 @@ silent.
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
 - Un-run fixture PTs (checklist §4-5): PT-10, PT-11, PT-15, PT-18 (fixtures
-  A/B/D/E), PT-25, PT-27..30 (PT-27's Biorobots grant is
+  A/B/D/E), PT-25, PT-27/28/30 (**PT-29 PASSED 2026-07-29 → F41 `tested`,
+  archived**; PT-27's Biorobots grant is
   `ThePositronicBrain`; `CheatResearchAll()` SKIPS undiscovered
   breakthroughs — grant directly via `UIColony:SetTechResearched("<Id>")`),
   PT-35, PT-42, PT-44, PT-46 tail (F49(d) cap, F49(a) palette), PT-47,

@@ -25,6 +25,12 @@ Opt_AcknowledgedWarnings build unblocked), PT-41 (F66 → tested), PT-45 (F47 �
 tested), PT-46 (F49(b) resolved as no-defect; its (d)/(a) tail remains in the
 checklist as un-run).
 
+Archived 2026-07-29: PT-29 (F41 → tested — `nil` → `50` → `150` console read;
+Gene Forging alone now contributes its `param1 = 50` and the two techs add.
+Running it exposed and fixed two documentation defects: the trigger was
+literally unrunnable, and the doc's `--> nil` annotations broke the console —
+see the section's result note).
+
 Archived 2026-07-27 (later): PT-14 (DONE — **premise falsified**: the
 accept-colonists toggle is a **quarantine** — its OFF state is titled
 "Quarantined" and the rollover promises "Colonists are not allowed to enter or
@@ -1481,6 +1487,68 @@ nothing self-supplied stranded); long-track control unchanged; save → quit
 applied` and zero errors incl. the reload's PostLoadGame pass.**
 
 ---
+
+## PT-29 — Gene Forging · covers **F41**
+
+**Setup:** any colony — **no colonists needed, and it does not matter what else
+you have researched.** (Both corrected 2026-07-29 after the original text proved
+unrunnable: it said "before researching anything" while reading
+`MainCity.labels.Colonist[1]`, and you cannot have a colonist before the game
+has auto-researched something.) Two facts make it easy:
+
+- `GetRareTraitChance(unit)` takes an **optional** unit —
+  `local city = unit and unit.city or MainCity` (`Colonist.lua:3542`, preserved
+  verbatim by the fix). Call it bare and it reads MainCity, so it works from
+  sol 1 with an empty colony.
+- The function consults **exactly two techs** and is blind to every other:
+  `GeneSelection` (shipped) and `GeneForging` (added by the fix). So the only
+  real precondition is that *those two* are unresearched — and neither can
+  arrive by accident, because **GeneSelection is a Breakthrough** (needs anomaly
+  discovery; `CheatResearchAll()` skips undiscovered breakthroughs) and
+  **GeneForging is a Storybit tech** (granted by a story event).
+
+**Trigger (console) — one line at a time, nothing else on the line:**
+```
+UIColony:IsTechResearched("GeneForging")
+UIColony:IsTechResearched("GeneSelection")
+GetRareTraitChance()
+UIColony:SetTechResearched("GeneForging")
+GetRareTraitChance()
+UIColony:SetTechResearched("GeneSelection")
+GetRareTraitChance()
+```
+
+- **BROKEN looks like:** still `nil` after Gene Forging is researched, then
+  `100` once Gene Selection lands — i.e. Gene Forging contributed nothing.
+- **FIXED looks like:** `nil` → **`50`** after Gene Forging → **`150`** after
+  Gene Selection as well.
+
+`Result:` **PASS — 2026-07-29** (run on the SAVE-B no-disasters fixture).
+Preconditions confirmed live: both techs read `false` before starting. Readings
+went **`nil` → `50` → `150`**, exactly the fixed signature — Gene Forging alone
+now contributes its `param1 = 50` where it previously contributed nothing, and
+the two techs **add** rather than one masking the other (the defect ChoGGi's
+param1-bump approach would have left in place). `SetTechResearched` returned
+`true` for both grants. → **F41 `tested`.**
+
+*Two documentation defects were found and repaired by running this test.*
+(1) The original trigger was unrunnable — see the Setup note above. (2) The
+first attempt pasted the doc's `--> nil` annotations into the console and got
+`not understood` three times: the `*r` / `*g` rules splice the typed code into
+`CreateRealTimeThread(function() %s end) return` **on one line**
+(`uiConsole.lua:360-361`), so a `--` comment swallows the closing `end) return`
+and nothing compiles (`console.lua:24`). Compounded by the console input being
+a single line, so a pasted multi-line block concatenates. Both traps are now
+recorded in the checklist's console section and the continuation prompt, along
+with the corollary that a bare expression is auto-wrapped in
+`ConsolePrint(print_format(...))` (`uiConsole.lua:363`) — so a simple read
+needs neither `*r` nor `ConsolePrint`.
+
+*Not exercised (optional, statistical):* the applicant-batch feel check
+(`CheatGenerateApplicants(100)` before/after). The console read is definitive
+for F41 — the fix's entire claim is the value `GetRareTraitChance` returns, and
+the path from there into trait generation is shipped code the fix does not
+touch.
 
 ## PT-31 — Edit Payload sticks · covers **F70**
 

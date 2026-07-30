@@ -8,6 +8,60 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## PT-29 PASS + two documentation defects — 2026-07-29 late (live, on the SAVE-B fixture)
+
+**PT-29 PASS → F41 `tested`** (index row + heading flipped, section moved to
+PLAYTEST_ARCHIVE.md). Console read on a colony with both techs unresearched:
+**`nil` → `50` → `150`**. Gene Forging alone now contributes its `param1 = 50`
+where it contributed nothing before, and the two techs **add** — which is the
+whole reason the fix is an additive sum rather than ChoGGi's GeneSelection
+param1-bump (that approach pays out only when the *other* tech is also
+researched, so Gene Forging alone would still have done nothing).
+
+**Two documentation defects, both found by simply trying to run the test:**
+
+1. **PT-29's trigger was unrunnable as written.** It read
+   `MainCity.labels.Colonist[1]` while requiring the reading be taken "before
+   researching anything" — you cannot have a colonist before the game
+   auto-researches something. Neither constraint was real:
+   `GetRareTraitChance(unit)` takes an **optional** unit
+   (`local city = unit and unit.city or MainCity`, `Colonist.lua:3542`, a
+   fallback the fix preserves verbatim), so a bare call works from sol 1; and
+   the function consults **only** GeneSelection and GeneForging, so every other
+   tech is irrelevant. Neither can arrive by accident either — GeneSelection is
+   a **Breakthrough** (`CheatResearchAll` skips undiscovered ones) and
+   GeneForging is a **Storybit** tech. PT-29 rewritten accordingly.
+2. **`not understood` explained and written down.** The first attempt pasted the
+   doc's `--> nil` annotations into the console and failed three times. Cause:
+   the `*r` / `*g` rules splice the typed code into
+   `CreateRealTimeThread(function() %s end) return` **on one line**
+   (`uiConsole.lua:360-361`), so a `--` comment swallows the closing
+   `end) return`, nothing compiles, no rule matches, and `console.lua:24`
+   answers "not understood". Compounded by the console input being a SINGLE
+   line — a pasted block concatenates, which is why `--> nil` and the next
+   command arrived fused as `--> nilUIColony:SetTechResearched(...)`.
+   **Never write a console snippet with a trailing comment or a `--> value`
+   annotation.** Corollary also recorded: a bare expression is auto-wrapped in
+   `ConsolePrint(print_format(...))` (`uiConsole.lua:363`), so a simple read
+   needs neither `*r` nor `ConsolePrint`. Swept the rest of the checklist —
+   PT-29 was the only instance of either trap.
+
+**Coverage question raised and answered:** are any other playtests
+research-sensitive? **No** — PT-29 was the only one, and the remaining un-run
+items are gated on fixtures, mysteries and game rules, not research state (most
+want *more* research, not less). But the check surfaced that **all four
+tech-related fixes other than F41 have no playtest at all** — and three of them
+correctly never will: **F28** is latent and mod-facing, **F43** is latent in the
+shipped game (only one layout ships, `SelfSufficientDome`, and none of its
+entries is tech-locked), and **F25** applies to pre-1.0.6 saves only, which is
+also why its probe reports SKIP ("the tech has no description T") on a current
+build — not a coverage hole, an unreachable defect. **F18** is the only
+genuinely untested one; its preset half is already probe-covered
+(`IndependenceTerraforming` PASSes), and the play half needs an Independence
+sponsor plus a special project to observe `Consts.SpecialProjectResourcesModifier`
+move 100 → 80 rather than → 90. Judged not worth a PT for a data-only P2;
+recorded here so the question is not re-derived.
+
 ## Pre-flight A/B pair — 2026-07-29 late (unattended; the owed post-wave-6 re-baseline)
 
 The A/B pair owed since wave 6 RAN, and it earned its keep: it caught a

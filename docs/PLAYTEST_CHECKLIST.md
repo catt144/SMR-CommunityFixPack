@@ -6,9 +6,9 @@ next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so far
-(33 sections): PT-01 … PT-09, PT-12 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
-PT-26, PT-31 … PT-34, PT-36, PT-38 … PT-41, PT-43, PT-45, PT-46 (the F49(b)
-half), PT-49, PT-50, PT-51. This file carries **only un-run work**; when a test
+(34 sections): PT-01 … PT-09, PT-12 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
+PT-26, PT-29, PT-31 … PT-34, PT-36, PT-38 … PT-41, PT-43, PT-45, PT-46 (the
+F49(b) half), PT-49, PT-50, PT-51. This file carries **only un-run work**; when a test
 completes, its whole section (with the result notes) moves to the archive.
 (Cross-checked against the archive and the BUGS.md index 2026-07-29 — nothing
 below re-tests anything already passed; PT-46's remaining halves are exactly
@@ -288,7 +288,7 @@ served its tests — PT-12/13/14 are archived — and is no longer needed.)
 
 | Fixture | How to build it | Feeds |
 |---|---|---|
-| **SAVE-A — Sandbox colony** | New game, any sponsor, **default game rules** (disasters ON, meteors at least "Low"), Mars surface. Land, build one dome with ~20 colonists, a Medical Center, a Martian Express station with a short track, and a landed rocket. `MultiCheat()` + `CheatAddFunding(500000000)` to remove build gating. For PT-27/PT-28 the save also needs the **Dust In The Wind** game rule (set at new-game). | PT-10, PT-27, PT-28, PT-29 |
+| **SAVE-A — Sandbox colony** | New game, any sponsor, **default game rules** (disasters ON, meteors at least "Low"), Mars surface. Land, build one dome with ~20 colonists, a Medical Center, a Martian Express station with a short track, and a landed rocket. `MultiCheat()` + `CheatAddFunding(500000000)` to remove build gating. For PT-27/PT-28 the save also needs the **Dust In The Wind** game rule (set at new-game). | PT-10, PT-27, PT-28 |
 | **SAVE-B — No-Disasters underground** | New game, tick the **No Disasters** game rule at setup (it cannot be added later). Then in-colony: `UIColony:UnlockUnderground()` and `CheatRevealDarkness()`, build a small underground presence. | PT-11, PT-25 |
 | **SAVE-D — St. Elmo's Fire mystery** | Easiest: start a **new game and pick "The Power of Three / St. Elmo's Fire" (`LightsMystery`) as the mystery at setup**, then play/skip forward until Light Traps are buildable and have caught wisps. (Console alternative in PT-15.) | PT-15 |
 | **SAVE-E — Frontier save (underground elevator + asteroid)** | From a healthy mid-game colony: `UIColony:UnlockUnderground()`, `CheatRevealDarkness()`, build an **Elevator** and an **underground dome with free housing**; then `UIColony:OnDiscoveryCompleted("Asteroid", false, true)` and build/land an **Asteroid Lander** with a **MicroG Habitat** and a couple of colonists on the asteroid. `dbg_ToggleRocketInstantTravel()` when running lander tests. | PT-18 |
@@ -772,58 +772,6 @@ and look at the pattern rather than exact numbers.)
 - **BROKEN looks like:** every sick colonist loses **exactly the same** Health per sol
   (a flat 10) — the damage roll the code computes is discarded.
 - **FIXED looks like:** the per-colonist losses **differ**, spread over 5-14.
-
-`Result:` _____________________________________________
-
-### PT-29 — Gene Forging · covers **F41**
-
-**Setup:** any colony — **no colonists needed, and it does not matter what else
-you have researched.** (Both corrected 2026-07-29 after the original text proved
-unrunnable: it said "before researching anything" while reading
-`MainCity.labels.Colonist[1]`, and you cannot have a colonist before the game
-has auto-researched something.) Two facts make it easy:
-
-- `GetRareTraitChance(unit)` takes an **optional** unit —
-  `local city = unit and unit.city or MainCity` (`Colonist.lua:3542`, preserved
-  verbatim by the fix). Call it bare and it reads MainCity, so it works from
-  sol 1 with an empty colony.
-- The function consults **exactly two techs** and is blind to every other:
-  `GeneSelection` (shipped) and `GeneForging` (added by the fix). So the only
-  real precondition is that *those two* are unresearched — and neither can
-  arrive by accident, because **GeneSelection is a Breakthrough** (needs anomaly
-  discovery; `CheatResearchAll()` skips undiscovered breakthroughs) and
-  **GeneForging is a Storybit tech** (granted by a story event). Confirm with
-  the first two lines below rather than assuming.
-
-**Trigger (console) — type these ONE LINE AT A TIME, nothing else on the line**
-(bare expressions print themselves — see the console-forms rules above; do NOT
-add trailing `--` annotations, they break `*r` snippets):
-```
-UIColony:IsTechResearched("GeneForging")
-UIColony:IsTechResearched("GeneSelection")
-GetRareTraitChance()
-UIColony:SetTechResearched("GeneForging")
-GetRareTraitChance()
-UIColony:SetTechResearched("GeneSelection")
-GetRareTraitChance()
-```
-(`SetTechResearched` is `Lua/Research.lua:276` and discovers the tech itself.
-Do NOT use `CheatResearchAll()` — it would grant both at once and hide the
-isolated reading.)
-
-- **BROKEN looks like:** still `nil` after Gene Forging is researched, then
-  `100` once Gene Selection lands — i.e. Gene Forging contributed nothing.
-- **FIXED looks like:** `nil` → **`50`** after Gene Forging → **`150`** after
-  Gene Selection as well. (The `100`-for-Gene-Selection-alone case is the
-  counterfactual; this sequence never shows it and does not need to. Params
-  verified in `Data/TechPreset.lua`: GeneForging `param1 = 50`, GeneSelection
-  `param1 = 100`.)
-- **The `50` is the whole test.** The first read is only a control — fixed and
-  unfixed both answer `nil` when neither tech is researched.
-
-**Optional feel check:** with both researched, generate a big applicant batch
-(`CheatGenerateApplicants(100)`) and eyeball how many carry rare traits versus a
-pre-research batch. Statistical, so only note it if it looks obviously wrong.
 
 `Result:` _____________________________________________
 
