@@ -100,6 +100,40 @@ no "improvements", no opinions — those belong in other mods. When intent is
 ambiguous, prefer the reading proven by sibling code in the same file
 (the F07/F08/F02 pattern: the same author wrote it correctly elsewhere).
 
+## 4a. SCOPE — vanilla only. This pack never fixes other mods' problems. (HARD RULE, user, 2026-07-30)
+
+**Stated by the project owner, verbatim:** *"This mod does not fix bugs caused
+from other mods. No agent should assume it does at any point going forward. The
+only way that should be able to be changed is if an agent specifically asks me
+to override as a one-off for something I specifically ask for."*
+
+Two forms, both barred:
+
+1. **A bug caused by another mod.** Not ours. Never fix it, never work around
+   it, never add a compatibility shim for it. If one is reported, record it and
+   say whose it is.
+2. **A vanilla bug reachable ONLY from mod code** — no shipped caller, no
+   shipped data path, only a mod or subclass could ever execute it. *(Corollary,
+   derived 2026-07-30 while applying the rule to F28. It is the form that
+   actually occurs in this tracker, so it is written down explicitly rather
+   than left to interpretation.)* This is not a player fix. **It does not ship**
+   — record it `wontfix` with the search that proved no shipped caller exists.
+
+**"For modder benefit" is no longer a valid reason to ship anything.** It was
+used twice — F28 and F29 — and both predate this rule.
+
+**Override procedure — the ONLY one.** An agent that believes a specific case
+warrants an exception must **ask the owner explicitly and get an explicit yes,
+for that one case**. It is never inferred, never assumed from precedent, and
+never carried forward to a second case. An existing shipped fix is NOT
+precedent; two already violate this rule and are being retired under it.
+
+**Why this exists.** The pack shipped `Fix_ReplaceTechCount` (F28) against a
+function with **zero callers in all of Src** — a 37-line copy of a shipped
+method, carrying per-game-update re-verification cost forever, for a code path
+no player can reach. It was not an accident: the entry said "No vanilla caller"
+in its second line and it shipped anyway. That is the failure this rule stops.
+
 ## 5. Optional modules (`Opt_*`)
 
 Not bug fixes: opt-in behavior changes, off by default, one Mod Options

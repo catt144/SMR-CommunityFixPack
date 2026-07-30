@@ -58,7 +58,7 @@ protocol.
 2. Any **`[LUA ERROR]`** block whose stack mentions a file under `SMR-BugFixPack\Code\`.
 3. Any `[LUA ERROR]` in shipped game code that you did **not** see in a vanilla session
    — note the file:line even if it looks unrelated to us.
-4. `SMRFixPack.ListFixes` output at load: **all 68 default fixes should read
+4. `SMRFixPack.ListFixes` output at load: **all 67 default fixes should read
    `active`** (plus whichever opt-in modules you have toggled ON). Any other
    `inactive`/`error` line means a fix silently self-deactivated (its apply()
    self-check failed) — that is a FAIL and needs reporting with the reason string.
@@ -867,7 +867,7 @@ Re-enable the fix pack before continuing.
 
 ## PT-21 — Long-save soak
 
-**Setup:** any healthy colony (SAVE-A or the live colony is fine). All **68
+**Setup:** any healthy colony (SAVE-A or the live colony is fine). All **67
 default fixes** active (incl. `DroneStatDials`, active-at-base) — confirm with
 `SMRFixPack.ListFixes` (opt-in modules read `inactive` unless you enabled
 them).

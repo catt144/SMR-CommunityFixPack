@@ -56,7 +56,6 @@ and can be individually disabled.
 | IndependenceTerraforming | The Independent Terraforming technology discounts terraforming special projects by the 20% its own description parameter names, instead of 10% (applies to games where you research it after installing the pack) |
 | FounderTraitNotification | You are told again when one of your Founders picks up a new trait — the check that decided whether to notify could never succeed |
 | StorageRateModifiers | Modifiers that change how fast a battery or tank charges and discharges actually reach the grid (nothing in the base game uses these yet — this keeps mods and future updates working) |
-| ReplaceTechCount | Swapping one researched technology for another (used by mods and story events) keeps the research counters correct instead of corrupting them |
 | SequenceLatents | Two scripting-system bugs modders can hit: "pick N random objects with this label" returned all of them, and the Alien Digger timing swap left both values the same |
 | GraphConsumedCaption | The Command Center graph caption for "Consumed" counts maintenance, so the number finally matches the bar it sits next to (Machine Parts and Electronics used to read as almost nothing beside a full-height bar) |
 | MoraleComfortTooltip | A colonist's Morale tooltip stops promising a bonus for high Comfort that the game no longer grants, so the listed effects add up to the Morale shown |

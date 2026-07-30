@@ -250,10 +250,6 @@ return {
 		'CodeFileName', "Code/Fix_StorageRateModifiers.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_ReplaceTechCount",
-		'CodeFileName', "Code/Fix_ReplaceTechCount.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_SequenceLatents",
 		'CodeFileName', "Code/Fix_SequenceLatents.lua",
 	}),

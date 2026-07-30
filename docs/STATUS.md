@@ -6,13 +6,28 @@ remediation 3.3). Session legs are append-only in
 `docs/ENGINE_FACTS.md`; defect truth lives in `docs/BUGS.md`.
 
 **Build state (authoritative counts — stated here and nowhere else):**
-`Code/` = **75 files** (66 `Fix_` + 7 `Opt_` + `00_Core` +
-`90_SaveSanitizer`) = **74 registered modules, 68 default-active** (the 6
+`Code/` = **74 files** (65 `Fix_` + 7 `Opt_` + `00_Core` +
+`90_SaveSanitizer`) = **73 registered modules, 67 default-active** (the 6
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
 92 rows.
-**Counts changed 2026-07-30 (75→74 / 69→68): `Fix_DomePipeMoveInside` DELETED**
+**⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
+other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
+reachable only from mod code. "For modder benefit" is no longer a valid reason
+to ship anything. Overridable ONLY by asking the owner explicitly, per case —
+never inferred, never carried forward. It retired **F28** immediately (below)
+and **F29 is flagged for the same treatment, awaiting the owner's call** — those
+are the only two entries the whole-tracker scan found resting on that rationale.
+
+**Counts changed twice on 2026-07-30 — TWO modules deleted:**
+**`Fix_ReplaceTechCount` (F28)** went under the new §4a rule: `Research:ReplaceTech`
+has **zero callers in all of Src** (re-verified independently), so only mod code
+could reach it, and it was carried as a §1.5 full replacement. Its TestKit probe
+went with it (**probes 77 → 76**) — it asserted the fixed counter, so it would
+have FAILed every leg. **A fresh A/B is therefore OWED** — unlike F24, the
+numbers move. Earlier the same day:
+**`Fix_DomePipeMoveInside` DELETED**
 — F24 closed `wontfix` by user decision after the trigger was proven
 unreachable in the shipped game (full proof on the F24 entry). No TestKit probe
 existed for it, so the 77-probe suite is unchanged. **The owed A/B RAN the same
@@ -250,6 +265,8 @@ the tracker. **Only F48 is still open** — the other four are closed.
 | **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
 | **F24** | **CLOSED `wontfix` 2026-07-30 (user decision) — fix DELETED.** Real defect (water grid passes `dome` where its electricity twin passes `self`), but **unreachable in the shipped game**: its only live call site can't reach the buggy line (`SpireBase` is not a life-support object), and the `Dome:OnLoad` sweep needs a state vanilla can't produce — domes refuse to place over buildings, no dome has an upgrade, interior shapes never change at runtime. Carried as a 34-line full-function replacement, so deletion beat latency. Counts 75→74 / 69→68. | — done. Rollback is one `git revert` if a counter-example appears. |
 | **F49(c)** | **CLOSED `wontfix` 2026-07-30 (user decision) — guard REMOVED. It was fixing DESIGNED BEHAVIOUR**, a different and worse failure mode than F24's unreachable-but-real defect. Established at the keyboard: salvage mode targets objects not hexes, the cursor always names its target (red `Salvage` = no action permitted), the `Salvage Train Station`→`Salvage Track` handoff is seamless to the millimetre, and **no exposed control separates a station from its own connector track**. The propagation the item called a defect is what makes that boundary continuous; the guard would have carved a dead band into it. The module keeps (a) and (d) — counts unchanged. | — done. The reachability audit rated (c) "live R2" **without ever enumerating it**, and its R1-R4 vocabulary cannot express "reachable, but intended" — both ANSWERED in the audit's own "Challenge review 2026-07-30": new tier `I` — Intentional — with (c) reassigned to it. |
+| **F28** | **CLOSED `wontfix` 2026-07-30 — barred by the new FIX_POLICY §4a hard rule.** Real defect, but `Research:ReplaceTech` has **zero callers in all of Src** — only mod code or the console can reach it, and it shipped as a §1.5 full replacement (37-line body copy) carrying per-update re-verification cost forever. Not an oversight: the entry said "No vanilla caller" the day it was filed and shipped anyway on a "modder benefit" rationale, which §4a now bars. Fix **and its probe** deleted; counts 74→73 / 68→67, probes 77→76. | — done. Rollback is one `git revert`. Optional later: rebuild the probe as a vanilla canary on the F10 precedent. |
+| **F29** | **FLAGGED for the same treatment, NOT actioned — owner's call.** Its stated rationale is *"ship for modder benefit"*, which §4a bars; its own text says items 1 and 2 have "No shipped user" and item 3 is "unreachable with shipped defaults". The only counter-argument is technique cost — three small overrides, not a function copy — which is not a rationale the rule permits. | **A yes/no from the owner.** If retired: −1 module, −1 probe, fresh A/B owed. |
 | **F62** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** Verified identical to the original game (same one-hop algorithm, same two transitive-predicate callers): carried-forward dev vision in both games, breaks nothing. No opt-in module planned. | — done. |
 | **F63** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds** — no training term ever existed in either game's emigration score. | — done. |
 

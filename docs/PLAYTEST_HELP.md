@@ -266,7 +266,7 @@ with `ConsoleSetEnabled(true)` + `ReloadShortcuts()`.)
 | `SMRTest.ReportReservations` | counts stale residence reservations — **PT-21** |
 | `SMRTest.ReportTrains` | stored train prefabs vs trains on the map — **PT-21** |
 | `SMRTest.RunAll` | re-run the whole probe suite (sanity check before/after a session) |
-| `SMRFixPack.ListFixes` | per-fix status — all **68 default fixes** should read `active`, incl. `DroneStatDials` (active-at-base = armed, vanilla behavior) (opt-in modules read `inactive` unless toggled ON; `Code/00_Core.lua`). **68, not 69, since 2026-07-30** — `DomePipeMoveInside` was deleted with F24's `wontfix` close |
+| `SMRFixPack.ListFixes` | per-fix status — all **67 default fixes** should read `active`, incl. `DroneStatDials` (active-at-base = armed, vanilla behavior) (opt-in modules read `inactive` unless toggled ON; `Code/00_Core.lua`). **67, not 69, since 2026-07-30** — `DomePipeMoveInside` (F24) and `ReplaceTechCount` (F28) were both deleted that day |
 
 **Drone dispatch STRESS HARNESS** (`Code/91_Stress.lua`, added 2026-07-29;
 **v2 lifecycle-tracing rebuild 2026-07-29** after the first run proved the v1

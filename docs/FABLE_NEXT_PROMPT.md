@@ -10,17 +10,28 @@ model-specific.)
 
 ## Where the project stands (end of 2026-07-30 — a long playtest day, no sitting currently live)
 
-**Build state: 74 registered modules — 68 active by default**, 6 opt-in via
+**Build state: 73 registered modules — 67 active by default**, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
-(`Opt_DroneStatDials`, active-at-base = vanilla, PT-56 owed). Two modules were
-**deleted** on 2026-07-30, both for the same new reason — see "the reachability
-turn" below. Everything committed and pushed.
+(`Opt_DroneStatDials`, active-at-base = vanilla, PT-56 owed). **Two modules were
+DELETED and one guard removed on 2026-07-30** — see "the reachability turn"
+below. Everything committed and pushed.
+
+> ⛔ **READ THIS BEFORE WRITING ANY FIX — FIX_POLICY §4a, owner hard rule,
+> 2026-07-30: this pack NEVER fixes other mods' problems.** Not bugs caused by
+> another mod, and not vanilla bugs reachable only from mod code. **"For modder
+> benefit" is not a valid reason to ship anything.** Overridable only by asking
+> the owner explicitly, for that one case — never inferred, never assumed from
+> precedent, never carried to a second case. Existing shipped fixes are NOT
+> precedent: two violated this rule and one is already retired under it (F28;
+> F29 is flagged, awaiting the owner).
 
 **The code gate is CLEAR.** Post-removal A/B leg (unattended, log
 `Mars.exe-20260730-17.25.32`): **74/74 fixes active** — exactly one fewer than
 the pre-removal 75/75, which is the F24 deletion and nothing else — **zero
 `[CommunityFixPack]` error/inactive/disabled lines**, **77 probes**, result
-**66 / 1 / 10 / 0**. The single FAIL is a **TestKit defect, not a pack
+**66 / 1 / 10 / 0**. ⚠️ **That leg predates the F28 removal**, which came later
+the same evening: expect **73 registered / 67 default-active and 76 probes**
+next run, and **a fresh A/B is OWED** because F28 took its probe with it. The single FAIL is a **TestKit defect, not a pack
 regression**: the D09 dial probe takes its baseline from the live value
 (`60_Probes_Opt.lua:411`) and the account dials are off-base. Full record on the
 D09 entry and in the TestKit README's "Known probe defects".
@@ -484,7 +495,7 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   user's own Mod Options toggles are account-persistent and apply during legs.
   So ALWAYS read the leg's own `fix pack present: N/74 fixes active` line to
   learn which config you actually measured — and a true default-config leg
-  (**68/74** since the F24 removal) requires the user to turn the six toggles
+  (**67/73** since the F24 and F28 removals) requires the user to turn the six toggles
   off by hand first. Proven three times: 2026-07-29 a "default" leg came up
   74/74 with all six on; the post-D09 set needed the user's hand flip to
   produce its 69/75 leg; and the 2026-07-30 post-removal leg came up **74/74**
@@ -498,7 +509,7 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
 - **Expected numbers — CURRENT is the post-removal leg (2026-07-30 late, 77
   probes): all six toggles ON, `74/74`, `66 / 1 / 10 / 0`**, the one FAIL being
   the state-dependent D09 dial probe (set both dials to base and it should go
-  green). A default-config leg should now read **`68/74`** and has NOT been run
+  green). A default-config leg should now read **`67/73`** and has NOT been run
   since the removals. The three legs below are HISTORICAL — measured before
   `Fix_DomePipeMoveInside` was deleted, so their `/75` and `/69` counts no
   longer apply: baseline (`code` list emptied) **1 / 61 / 15 / 0**;

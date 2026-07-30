@@ -43,7 +43,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | fixed  |
 | F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | fixed  |
 | F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | fixed  |
-| F28 | `Research:ReplaceTech` crashes (latent, mod-facing)      | P3  | high | fixed  |
+| F28 | `Research:ReplaceTech` mishandles the field counter      | P3  | high | wontfix 2026-07-30 — mod-facing only, barred by FIX_POLICY §4a; fix + probe DELETED (entry) |
 | F29 | SA/sequence latents: label filter, workshift wait, Diggers swap | P3 | high | fixed*|
 | F30 | Lake placement entombs RC builder + drones               | P1  | high | fixed  |
 | F31 | Anomaly cave-in hardcodes UndergroundMap (cross-map)     | P2  | med  | fixed  |
@@ -718,7 +718,41 @@ changed is one of the two rates, and each of the three classes is wrapped indepe
 one missing target cannot take the other two down.
 Probe: `StorageRateModifiers` in `40_Probes_Wave4.lua`.
 
-### F28 — `Research:ReplaceTech` mishandles the field counter (latent)  `[fixed: Code/Fix_ReplaceTechCount.lua]`
+### F28 — `Research:ReplaceTech` mishandles the field counter  `[wontfix 2026-07-30 (user rule) — REACHABLE ONLY FROM MOD CODE, barred by FIX_POLICY §4a; Code/Fix_ReplaceTechCount.lua and its TestKit probe both DELETED; counts 74→73 registered / 68→67 default-active, probes 77→76]`
+
+**CLOSED under the new hard rule, not on its merits.** The defect below is real
+and the diagnosis stands. It is retired because **`Research:ReplaceTech` has
+zero callers in all of Src** — independently re-verified 2026-07-30, the
+whole-tree grep over `Lua/`, `Data/`, `CommonLua/` and `DLC/` returns exactly
+one hit, the definition at `Research.lua:684`. Only mod code or the console can
+reach it.
+
+**This was never an oversight — and that is the point.** The entry's own second
+line said *"No vanilla caller; hits mods/storybits/console"* the day it was
+filed. It shipped anyway, on a "modder benefit" rationale, as a **§1.5 full
+replacement** (37-line body copy) carrying per-game-update re-verification cost
+forever, for a code path no player can execute. **FIX_POLICY §4a now bars that
+rationale outright** (owner rule, 2026-07-30): this pack does not fix other
+mods' problems, and a vanilla defect reachable only from mod code is not a
+player fix. That rule, not this entry's evidence, is what closed it.
+
+Distinguish it from **F24** (also deleted 2026-07-30): F24 was an *error* —
+nobody knew it was unreachable until asked. F28 was a *decision*, and the rule
+reversed the decision.
+
+**Removed:** `Code/Fix_ReplaceTechCount.lua`, its `metadata.lua` code entry, its
+`items.lua` ModItemCode entry, the README fix-table row, and the
+`ReplaceTechCount` probe (TestKit `40_Probes_Wave4.lua`). The probe had to go
+with it — it drives the real method and asserts the *fixed* counter, so with the
+fix gone it would FAIL in every leg. *Optional future refinement:* it could be
+rebuilt as a vanilla canary on the **F10 precedent** (`FactionFundingCheck`
+survived F10's deletion and is now the single baseline PASS), which would give
+a tripwire if a game patch ever wires `ReplaceTech` up. Not done — that is new
+assertion code and nobody asked for it.
+
+**Rollback** is one `git revert`, the F24 pattern.
+
+**Original diagnosis, kept for the record:**
 `Lua\Research.lua:715` — `if not next(g_TechFieldResearchedCount[field_id] == 0)` →
 `next()` applied to a boolean. No vanilla caller; hits mods/storybits/console. Correct
 pattern at :246-249. **Fix:** override `Research.ReplaceTech`
@@ -739,7 +773,28 @@ assert was load-bearing through its ARGUMENT — `tech_def.group` raises on an u
 `if not tech_def then return end` guard.)*
 Probe: `ReplaceTechCount` in `40_Probes_Wave4.lua`.
 
-### F29 — Sequence-system latents (mod-facing bundle)  `[fixed*: Code/Fix_SequenceLatents.lua — items 1 and 3; item 2 deliberately not fixed, see below]`
+### F29 — Sequence-system latents (mod-facing bundle)  `[fixed*: Code/Fix_SequenceLatents.lua — items 1 and 3; item 2 deliberately not fixed. ⚠️ FLAGGED FOR REMOVAL 2026-07-30 under FIX_POLICY §4a — awaiting the owner's call]`
+
+**⚠️ FLAGGED, NOT YET ACTIONED — owner decision owed.** This entry's shipping
+rationale is stated below in its own words: *"all three are small overrides;
+**ship for modder benefit**."* **FIX_POLICY §4a (owner hard rule, 2026-07-30)
+bars exactly that rationale**, and a scan of the whole tracker found only two
+shipped fixes resting on it — F28 (now deleted under the rule) and this one.
+Its own text confirms the reachability: item 1 "No shipped user", item 2 "No
+shipped user", item 3 "unreachable with shipped defaults, bites subclasses".
+
+It was **not** deleted alongside F28 because that was not what the owner was
+deciding, and it is a second module with its own probe and count churn. The
+consistent outcome under the rule is removal; the argument for keeping it is
+that its patches are three **small overrides** rather than F28's 37-line
+function copy, so the carry cost is genuinely lower — which is a
+*technique-cost* argument, not a rationale the rule permits.
+
+If retired: delete `Code/Fix_SequenceLatents.lua`, its `metadata.lua` and
+`items.lua` entries, the README row, and the `SequenceLatents` probe
+(`40_Probes_Wave4.lua`); counts drop to 72 registered / 66 default-active and
+probes to 75; a fresh A/B is owed. **Do not act on this without an explicit
+instruction.**
 1. `Lua\Sequences\SA_Filters.lua:30-40` — `SA_GetLabelToRegister` ignores
    `random_count`/`random_percent` (returns full list after shuffle). No shipped user.
 2. `Lua\Sequences\SA_Gameplay.lua:2705` — `SA_WaitMarsTime` *generated-code* path inverts

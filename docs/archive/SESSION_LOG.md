@@ -8,6 +8,60 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## HARD RULE: vanilla only, never other mods (FIX_POLICY §4a) — F28 retired under it — 2026-07-30 (late)
+
+**The owner set a standing rule**, prompted by asking a simple question about
+F28: *why did we build a "replace tech" fix when we have never replaced a tech?*
+
+> *"This mod does not fix bugs caused from other mods. No agent should assume it
+> does at any point going forward. The only way that should be able to be
+> changed is if an agent specifically asks me to override as a one-off for
+> something I specifically ask for."*
+
+Recorded verbatim as **FIX_POLICY §4a**, with the corollary that actually occurs
+in this tracker written out explicitly rather than left to interpretation: a
+**vanilla bug reachable only from mod code is not a player fix and does not
+ship**. The override procedure is the only one permitted — explicit ask, explicit
+yes, one case, never inferred and never carried forward. Existing shipped fixes
+are explicitly declared NOT precedent.
+
+**Whole-tracker scan first, because setting the rule is only half of "don't slip
+more in".** Exactly two shipped fixes rested on a mod-facing rationale: **F28**
+and **F29**. (F34(b) is labelled mod-facing but was never actioned; F42 is
+already `wontfix`.) Bounded blast radius.
+
+**F28 retired under the rule.** The answer to the owner's question is that it was
+**never an oversight** — the entry's second line said *"No vanilla caller; hits
+mods/storybits/console"* the day it was filed, and it shipped anyway on a
+"modder benefit" rationale. So F24 was an *error* (nobody knew it was
+unreachable); **F28 was a decision, and the rule reversed it.** Independently
+re-verified before deleting: the whole-tree grep over `Lua/`, `Data/`,
+`CommonLua/` and `DLC/` returns exactly one `ReplaceTech` hit — the definition
+at `Research.lua:684`.
+
+Removed: `Code/Fix_ReplaceTechCount.lua`, its `metadata.lua` and `items.lua`
+entries, the README row, and the `ReplaceTechCount` probe. **The probe had to go
+too** — it drives the real method and asserts the *fixed* counter, so with the
+fix gone it would FAIL in every leg. Recorded on the entry that it could later
+be rebuilt as a vanilla canary on the **F10 precedent**, which is what
+`FactionFundingCheck` became after F10's deletion; not done, because that is new
+assertion code nobody asked for.
+
+**Counts: 74 → 73 registered, 68 → 67 default-active, probes 77 → 76.** A fresh
+A/B is **OWED** — unlike F24, this one moves the probe numbers. Also caught while
+recounting: `metadata.lua`'s player-facing `last_changes` still advertised "68
+bug fixes"; it derives as Fix_ files + the sanitizer and is now **66**, with the
+derivation written into a comment so it stops drifting silently.
+
+**F29 flagged, deliberately NOT actioned.** Same banned rationale in its own
+words ("ship for modder benefit"), same "No shipped user" text on its items. Not
+deleted because it was not what the owner was deciding and it is a second module
+with its own probe and count churn. Its entry and the STATUS parked table both
+carry the flag and the exact cost of retiring it, so it cannot be quietly
+forgotten. **Awaiting an explicit yes/no.**
+
+---
+
 ## F49(c) removed; post-removal A/B leg run unattended — 2026-07-30 (late)
 
 Owner away; work done to standing instruction, with two decisions deliberately
