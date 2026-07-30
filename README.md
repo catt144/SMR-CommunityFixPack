@@ -119,6 +119,7 @@ SMRFixPack_Optional = { ClassicRockets = true, AcknowledgedWarnings = true }
 | MultipleSuns | Lifts the one-Artificial-Sun-per-colony build limit, and ships the panel-binding repair that makes a second sun actually light the panels built around it (vanilla only ever checks the first sun — a real bug that generic "multiple wonders" mods run straight into). |
 | DroneOverhaul | Experimental: repair and cleaning jobs go to the closest hub's fleet first (a far fleet still serves if the near one doesn't respond within seconds), and idle drones help a neighboring overloaded hub with nearby repairs. Player orders, hauling, construction and RC rovers untouched. |
 | CohortHousing | Seniors and Children living in normal housing automatically move into free Retirement Home / Nursery slots — own dome first, any reachable dome second — and are left alone when no such slot exists. Employed Seniors stay put; manual assignments always win; quarantine and closed domes respected. |
+| DroneStatDials | Not a toggle — two dropdowns on the same Mod Options page: **Drone speed** (1x base / 2x / 3x / 5x, stacking on top of the speed techs) and **Drone carry capacity** (+0 base / +1 / +2, stacking with Artificial Muscles). Both take effect immediately in both directions; the base positions are exactly vanilla, and the module ships at base. (No `SMRFixPack_Optional` entry — the dials are read from Mod Options directly.) |
 
 ## For modders
 

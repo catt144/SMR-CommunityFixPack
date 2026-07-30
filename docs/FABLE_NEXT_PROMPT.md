@@ -62,25 +62,17 @@ immediately).
 
 **Step 2 (toggle OFF, all three) is REPORTED VERIFIED 2026-07-30** — all three
 revert immediately; reported from a parallel session rather than separately
-captured. **Two things remain. State them to the user when they ask what is
-left:**
+captured. **The D01 decision is MADE (2026-07-30, user call, recorded
+`4f5f61e`): the parked-rocket first-enable limitation is ACCEPTED as
+documented** — no `on_activate` demand refresh built; an already-parked rocket
+picks the behavior up on its next landing; the enhancement path stays on the
+D01 entry. **ONE thing remains to close PT-55:**
 
 1. **Step 3 — `SMRFixPack.ListFixes()` agreement + a log sweep.** Status
    unconfirmed. ListFixes must agree with the toggle at each step, and the
    session log must be clean per PT-22 rules. **Ask the user whether this was
    done** before treating it as owed — several PT-55 halves were run across
    parallel conversations and reported late.
-2. **The D01 decision (user's call, blocks closure).** PT-55 step 1's literal
-   wording — *"a parked, destination-less player rocket starts requesting
-   launch fuel"* — **FAILED**: an already-parked rocket did not begin refuelling
-   after the flip and **did not heal on a save/reload either**. Cause confirmed
-   in source: the wrap is on `GetFuelResourceRequest`, only consulted when
-   `CargoTransporterNew:UpdateCargoResourceRequests` runs, and nothing
-   re-triggers that for a parked rocket (landing is what does — the tester's own
-   "on-land interaction" guess). **Either** accept it as a documented limitation
-   (PT-55 then closes on items 1-2 alone) **or** build the `on_activate` demand
-   refresh on parked destination-less player rockets, then re-verify D01's
-   step 1. Full write-up on the D01 entry.
 
 **Playtest state:** **PT-11 PASS → F01 `tested`** and **PT-29 PASS → F41
 `tested`** (both 2026-07-29, archived). PT-53 (D07 CohortHousing) is 3-of-5
@@ -130,8 +122,8 @@ Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 1. `git log --oneline -5` + `git pull` (see above).
 2. Verify the pack loaded clean: on-screen status loop (below) — all 69
    default fixes `active` (incl. DroneStatDials, active-at-base), plus
-   whichever opt-in toggles the user runs (account-persistent — currently
-   ALL SIX ON, see the account-state note above).
+   whichever opt-in toggles the user runs (account-persistent — a live PT-55
+   sitting has been flipping them: READ the state, never assume it).
 3. Fresh `SMRFixPack.DroneReport` baseline if D06 is on (counters reset
    every launch; the PT-52 passive watch continues every sitting).
 4. Optional (only if a lander/cargo read is planned): re-arm
@@ -173,8 +165,8 @@ Your jobs, in the order they usually come up:
    `docs\STATUS.md` — now a compact current-state doc: header (counts, open
    decisions, next gates) + reference sections. Session legs all live in
    `docs\archive\SESSION_LOG.md` (newest first) — read the newest ones (the
-   2026-07-29 audit-remediation and disaster/QA legs) down through the D06
-   build leg.
+   2026-07-30 legs: checklist split, curiosity/D10-D12 spec legs, the
+   playtest legs) down through the 2026-07-29 audit-remediation leg.
 2. `docs\PLAYTEST_CHECKLIST.md` — **SPLIT 2026-07-30: the checklist now
    carries ONLY tests + the reporting protocol**; §1 standing watches (log
    hygiene, meteor watchdog, PT-52 passive), §2 owed halves, §3 wave-6
@@ -222,10 +214,10 @@ silent.
   re-verify, checklist §2 — **PARTIALLY RUN 2026-07-30, see the PT-55 section
   near the top for the exact three items still owed**) and the **Phase 4
   go-decision** (user).
-- **PT-55 — FINISH IT (cheapest open item).** Toggle-OFF direction for all
-  three modules, ListFixes agreement + log sweep, and the D01 decision. Full
-  list in the dedicated section above. Nothing else on the board is closer to
-  done.
+- **PT-55 — FINISH IT (cheapest open item).** ONLY step 3 remains: ListFixes
+  agreement + a log sweep (the toggle-OFF half is reported verified; the D01
+  parked-rocket limitation is ACCEPTED by user decision — see the dedicated
+  section above). Nothing else on the board is closer to done.
 - **PT-52 STRESS A/B — re-run with the v2 harness (the v1 run's metric was
   invalid).** Protocol is Trigger B2 in the checklist (§2): quicksave →
   `Targets` dry run (check the `pure_only=true` cohort size too) → D06 OFF →
@@ -238,9 +230,9 @@ silent.
 - **PT-54 — wave-6 disaster fixes live gate** (checklist §3): stranded-flag
   reconcile, live-warning-never-cleared, wedge self-heal, reschedule-after-
   heal, rains survive collisions. The live 194-sol save is the fixture.
-- **PT-53 — D07 CohortHousing, TWO cheap triggers left** (checklist §2):
-  **(A)** unemployed Senior re-homes in-dome, EMPLOYED Senior does NOT move
-  (two-minute infopanel read); **(E)** manual assignment wins, toggle-off =
+- **PT-53 — D07 CohortHousing, ONE trigger left** (checklist §2): Trigger A
+  PASSED 2026-07-30 (Forever Young A/B — employed exempt, unemployed
+  re-homed). **Only (E)** remains: manual assignment wins, toggle-off =
   instantly vanilla, save-ON/reload-OFF loads clean. Then it flips `tested`.
 - **PT-52 Trigger B — controlled off/on CheatMalfunction A/B demo + F77
   extender-flap check** (checklist §2) — still un-run; cheap once hub A/B +
@@ -416,7 +408,7 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
 - Cheat use is logged per save and blocks that save's achievements — fixture
   saves only.
 
-## Harness facts (for the queued pre-flight pair / any same-day repair)
+## Harness facts (for any A/B pair / same-day repair)
 
 - Launch: `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050 -smrautorun`.
   A leg takes ~75 s; Mars.exe may take minutes to appear. **Never kill on a
@@ -434,10 +426,11 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   Delete it after the leg. **The bridge is one-way: it can only force a module
   ON, never off** (OptionEnabled ORs the table with the saved toggles), and the
   user's own Mod Options toggles are account-persistent and apply during legs.
-  So ALWAYS read the leg's own `fix pack present: N/74 fixes active` line to
+  So ALWAYS read the leg's own `fix pack present: N/75 fixes active` line to
   learn which config you actually measured — and a true default-config leg
-  (68/74) requires the user to turn the six toggles off by hand first. Proven
-  2026-07-29: the "default" leg came up 74/74 because all six were on.
+  (69/75) requires the user to turn the six toggles off by hand first. Proven
+  twice: 2026-07-29 a "default" leg came up 74/74 with all six on, and the
+  post-D09 set needed the user's hand flip to produce the 69/75 leg.
 - **TestKit `Code/91_Stress.lua` (v2, lifecycle tracing)** — the drone stress
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but

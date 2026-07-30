@@ -84,23 +84,23 @@ proves the dials work independently of the toggles. Pre-D09 reference set
 RUN (2026-07-30) and is the cheapest open item.** The audit's A2 question is
 answered YES — all three hooks install and run on a first mid-session enable.
 The toggle-OFF direction for all three is **reported verified 2026-07-30**
-(parallel session, not separately captured). **Two things close it:**
-(1) `ListFixes()` agreement + a log sweep — status unconfirmed, ask before
-assuming it is owed, (2) the D01 decision — PT-55 step 1's
-literal wording FAILED (an already-parked rocket does not begin refuelling and
-does not heal on reload; the wrap is on `GetFuelResourceRequest`, only consulted
-when `UpdateCargoResourceRequests` runs, which landing triggers and parking does
-not), so either accept the documented limitation or build the `on_activate`
-demand refresh. D04's panel-binding timing is expected and self-healing;
+(parallel session, not separately captured). **The D01 decision is MADE
+(2026-07-30, user call, `4f5f61e`): the parked-rocket first-enable limitation
+is ACCEPTED as documented** — no `on_activate` refresh built; a parked rocket
+picks the behavior up on its next landing. **ONE thing closes PT-55:**
+`ListFixes()` agreement + a log sweep — status unconfirmed, ask before
+assuming it is owed. D04's panel-binding timing is expected and self-healing;
 D03 was clean. Then: PT-56 D09 dials (PASS also un-gates the D10 workshops
 build);
 PT-54 wedge watchdog; PT-52
 Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
 tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.
 
-**Newest leg:** `docs/archive/SESSION_LOG.md` → "PT-11 PASS → F01 `tested`, and
-the test that could not have worked — 2026-07-29 late" (the PT-29, pre-flight
-A/B, audit-remediation and disaster-system legs sit below it).
+**Newest legs:** `docs/archive/SESSION_LOG.md` → the 2026-07-30 set, newest
+first: the PLAYTEST_CHECKLIST/PLAYTEST_HELP split leg, the curiosity leg
+(tunnel water, workshop research → D10 spec, shuttle limits → D11 candidate),
+and the parallel playtest legs (PT-55/PT-53-A/D12); the 2026-07-29 D09-build
+and PT-11 legs sit below them.
 
 **Playtest-method rule earned 2026-07-29 (applies beyond PT-11):** compressing a
 scheduler's `g_Consts` interval does NOT shorten the sleep already in flight, so
