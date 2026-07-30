@@ -89,6 +89,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | built 2026-07-29 — PT-56 owed (entry) |
 | D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30 — build gated on PT-56 (entry) |
 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
+| D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | SPECED 2026-07-30, user-approved, build owed (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -3597,6 +3598,126 @@ sitting.
   the round-robin already prevents passenger starvation.
 
 ## Candidates under investigation
+
+### D12 — Homeless strand in specialist domes; emigration ties never move them  `[SPECED 2026-07-30, user-approved — build owed. Own module, Opt_ResidencyControl as donor pattern only]`
+
+**Origin: found in play 2026-07-30**, by deliberately stressing homelessness and
+unemployment in a dedicated child dome. Observed live: nurseries at 5/26 and
+3/26 (**68 free Child slots**) with **28 homeless in the dome — 26 Youth, 2
+Adult** — while a Child in a neighbouring dome commuted in to the school and
+went home to a Smart Apartment. `accept_colonists` read `true`, so the
+quarantine was NOT involved.
+
+**Root cause — a vanilla tie rule, not a mod defect.** The shipped emigration
+eval explicitly permits a homeless colonist to move to a dome with no free
+housing (`Colonist.lua:2676`, comment: *"if homeless, try changing community
+even if doesn't have living space available"*). But the gate above it requires
+the candidate to score **strictly better** unless home or work improves
+(`:2675`, `:2680-2681`). With zero non-cohort free slots colony-wide
+`better_home` is false everywhere; with unemployment saturated `better_work` is
+false too. Every candidate **ties**, and ties never move anyone. This is the
+same tie rule D07's header already cites as the reason cohort members never
+consolidate — it strands the graduates for exactly the same reason.
+
+**Why it compounds (the D07 deadlock).** The stranded homeless push the dome
+over `IsOverpopulated` (`#labels.Homeless >= g_Consts.OverpopulatedDome`,
+`Dome.lua:1026-1035`), and D07's own cross-dome `consider()` skips
+`community.overpopulated` (`Opt_CohortHousing.lua:194`) — so the child dome is
+permanently excluded as a destination and no new Children ever arrive. **The
+module poisons its own destination, and it tightens with every child it
+delivers.** D12 breaks the loop at the cause: drain the homeless, the flag
+clears, D07 resumes unaided.
+
+**Rejected alternatives (recorded so they are not re-proposed).** Dropping
+`or community.overpopulated` from D07's `consider()` was the obvious one-clause
+fix; the user rejected it — it only stops D07 *noticing* the problem and leaves
+homeless colonists stranded. Refusing to deliver children into domes with no
+non-cohort housing was also rejected: it does not heal an already-poisoned dome.
+Both are still on file if D12 proves impractical.
+
+**Also settled, and NOT a defect:** the homeless youths themselves.
+`non-cohort free slots colony-wide: 0`, so total homelessness is set by
+(population − housing capacity). D07 changes *which* colonist lacks a bed, not
+how many, and arguably improves utilisation by freeing ordinary slots for
+adults. No F-number.
+
+## WHAT D12 SHIPS
+
+A per-dome / per-habitat **"no homeless residents"** policy: when set, homeless
+colonists in that dome are moved to the nearest community that accepts them,
+using the shipped emigration machinery.
+
+**Hard constraint (the trap that killed the first design).** The flag must be
+its **own field with its own gate** and must **NOT** route through
+`Community:CanAcceptNewColonists`. D03's existing "closed to new residents" row
+wraps exactly that method (`Opt_ResidencyControl.lua:35-37`), and D07's
+`consider()` calls it (`Opt_CohortHousing.lua:193`) — so reusing D03's gate
+would block cohort delivery into the very dome we are trying to protect. The two
+controls must act in **opposite directions on the same dome simultaneously**:
+
+| Flag | Child dome | Effect |
+|---|---|---|
+| `SMRFixPack_closed_to_new_residents` (D03, existing) | **off** | children can still migrate in |
+| `SMRFixPack_no_homeless` (D12, new) | **on** | graduates are pushed out before they pile up |
+
+**Mechanism — reuse D07's proven wrapper shape:**
+* Post-wrapper on `Colonist:FindEmigrationDome` (declared on Colonist,
+  `Colonist.lua:2581`; called every heavy update from
+  `Colonist.lua:1894-1898`, so no new scheduling). When the colonist
+  `IsHomeless()` and their own dome carries the flag, pick the **nearest
+  reachable community that does NOT carry the flag** and that
+  `CanAcceptNewColonists()`, bypassing the tie. Reuse the shipped candidate
+  gathering and `FindTransportationModeToCommunity` exactly as D07 does —
+  walk / passage / shuttle / train / elevator.
+* **Never expel to the surface.** If no candidate qualifies, return the shipped
+  answer unchanged and the colonist simply stays. Best-effort only. A colonist
+  put outside with no dome dies (F53 territory) — this is the one failure mode
+  the design must make structurally impossible.
+* Ping-pong guard: only consider destinations WITHOUT the flag, so two flagged
+  domes can never trade the same colonist back and forth.
+* UI: a second toggle row on the dome / MicroG-habitat infopanel via the shipped
+  `Community:TogglePolicy` / `SetPolicyState` machinery (`Community.lua:77-100`)
+  — same idiom as D03's row, including Ctrl+click broadcast and the rogue-dome
+  UI lock.
+
+**Packaging decision (user, 2026-07-30): its own module**, with
+`Opt_ResidencyControl` as the **donor pattern only** — copy the row-append and
+policy-toggle approach, share no gate. Rationale: D03 is `tested` and shipping
+(PT-49 in full, plus PT-55), and duplicating the infopanel-row machinery is
+cheaper than re-qualifying a shipped module. The two behaviours are distinct
+concepts — block entry vs. force exit.
+
+**Defaults and safety:**
+* Every dome defaults to **allowing** homeless (flag absent = vanilla). A module
+  that stranded a whole colony on first enable would be unshippable.
+* Opt-in module, off by default, per-call `IsActive` gate, file-scope install
+  (the A2 lesson — FIX_POLICY §5).
+* Savegame footprint per FIX_POLICY §3: `SMRFixPack_no_homeless` on the
+  Dome/Habitat object, absent-tolerant both ways; the unmodded game never reads
+  it and a save carrying it loads fine with the module or the pack removed.
+
+**Precedence:** quarantine (`accept_colonists` false) wins absolutely — a sealed
+dome neither admits nor releases anyone, matching the shipped early-out at
+`Colonist.lua:2632-2635`. Player-forced dome (`CheckForcedDome`) wins over the
+policy. The D03 row composes independently.
+
+**Open question for the build:** whether the push should apply to ALL homeless
+or only to colonists the dome can never house (i.e. no residence in the dome is
+`IsSuitable` for them). The narrow reading is more surgical and is what the
+child-dome case actually needs; the broad reading is simpler to explain to a
+player. Decide before coding.
+
+**PT owed:** a new item covering — set the flag on a nursery-only dome with
+stranded graduates and watch them drain; confirm the dome's `overpopulated`
+clears and D07 resumes delivering children unaided; confirm NO colonist is ever
+left outside a dome; confirm a flagged dome with no valid destination leaves
+its homeless in place rather than expelling them; toggle off = instantly
+vanilla; save with it ON, reload with the module OFF, clean load.
+
+**Two confirming reads still owed from the origin sitting** (the chain is
+source-verified but step 4 was inferred, not observed):
+`g_Consts.OverpopulatedDome`, and
+`*r local d = SelectedObj ConsolePrint("overpopulated=" .. tostring(d.overpopulated) .. " homeless=" .. #(d.labels.Homeless or {}))`
 
 ### C01 — `BreakthroughOrder` rebuilt+reshuffled on every map load
 `Lua\Buildings\Anomaly.lua:652-682` (`City:InitBreakThroughAnomalies`), called from

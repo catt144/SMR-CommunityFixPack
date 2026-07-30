@@ -147,15 +147,39 @@ by (population − housing capacity); D07 changes *which* colonist lacks a chair
 not how many. It arguably improves utilisation by freeing ordinary slots. A
 caveat, not a bug — deliberately not given an F-number.
 
-**Open decisions (user):** (a) drop `or community.overpopulated` from
-`consider()`, since `find_cohort_slot` already proves a free, working,
-trait-suitable slot exists and those Child slots are unusable by any homeless
-Youth — so the delivery worsens crowding for nobody; (b) whether D07 should
-refuse to send children into a dome with **no non-cohort housing at all**, since
-every child delivered there is guaranteed to be evicted into homelessness on
-its birthday. Both are Opt_ behaviour changes, hence the user's call per
-FIX_POLICY. Two confirming reads still owed: `g_Consts.OverpopulatedDome` and
-the dome's `overpopulated` flag.
+**RESOLVED SAME DAY → D12 SPECED AND APPROVED.** Four options were put to the
+user (drop the `overpopulated` clause; refuse nursery-only domes; both;
+document only) and **all four were rejected** in favour of a better direction
+the user proposed: a per-dome **"no homeless residents"** policy that pushes
+homeless colonists out to a dome that accepts them. It fixes the *cause* rather
+than the symptom, is player-steerable rather than a hidden heuristic,
+generalises to Retirement domes, and heals an already-poisoned dome — set the
+flag, the homeless drain, `overpopulated` clears, D07 resumes unaided with no
+change to D07 at all.
+
+**Root cause reframed while speccing it.** The shipped eval *already* lets a
+homeless colonist move to a dome with no free housing (`Colonist.lua:2676`,
+comment: "if homeless, try changing community even if doesn't have living space
+available"). What stops them is the gate above: candidates must score
+**strictly better** unless home or work improves (`:2675`, `:2680-2681`). With
+zero free slots colony-wide and unemployment saturated, every candidate **ties**
+— and ties never move anyone. **This is the same tie rule D07's own header
+cites as the reason cohort members never consolidate.** D12 is that same
+tie-break applied to a different population.
+
+**A design trap the user caught before it was written.** The first packaging
+idea was to extend D03 ResidencyControl. The user asked whether that meant the
+same UI control, and it would have been fatal: D03's row wraps
+`Community:CanAcceptNewColonists`, which D07's `consider()` calls — so closing
+the child dome to new residents would block the cohort delivery the feature
+exists to protect. The two controls must act in **opposite directions on the
+same dome simultaneously** (entry open, exit forced), so the new flag needs its
+own field and its own gate. Packaging revised to a **separate module with D03 as
+donor pattern only**, which also keeps D03's `tested` status intact.
+
+Two confirming reads still owed from this sitting (the chain is source-verified
+but step 4 was inferred, not observed): `g_Consts.OverpopulatedDome` and the
+dome's `overpopulated` flag.
 
 ## PT-11 PASS → F01 `tested`, and the test that could not have worked — 2026-07-29 late
 

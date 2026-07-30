@@ -47,7 +47,12 @@ file (BUGS.md entry), explicitly NOT green-lit: re-ask the user before any
 build; multi-hop passenger routing REJECTED outright.**
 **Decided, build queued:** D10 workshops module (speced + user-approved
 2026-07-30, BUGS.md entry — text repairs + capacity dial; build gated on
-PT-56 PASS). Unfiled candidate: Universal Tunnel description omits its
+PT-56 PASS). **D12 no-homeless dome policy** (speced + user-approved
+2026-07-30, BUGS.md entry — own module, `Opt_ResidencyControl` as donor pattern
+only; breaks vanilla's emigration tie for homeless colonists so specialist
+domes stop stranding them, which also unwinds the D07 overpopulated deadlock
+without touching D07). **D10 and D12 both touch colonist assignment — land them
+separately, each with its own A/B.** Unfiled candidate: Universal Tunnel description omits its
 life-support bridging (description drift, one-line text patch — user call).
 
 **A/B probe state (FRESH — post-D09 unattended set, completed 2026-07-30
@@ -75,11 +80,18 @@ proves the dials work independently of the toggles. Pre-D09 reference set
 (76 probes): baseline 1/60/15/0 · default 61/0/15/0 at 68/74 · all-toggles
 66/0/10/0 at 74/74.
 
-**Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** live-toggle
-re-verify of the three reworked Opt_ modules (PT-55 — both directions, incl.
-mid-session FIRST enable; **the six toggles are OFF as of 2026-07-30 — PT-55's
-required starting state is SET, go straight in**); PT-56 D09 dials (PASS
-also un-gates the D10 workshops-module build);
+**Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** **PT-55 is PARTIALLY
+RUN (2026-07-30) and is the cheapest open item.** The audit's A2 question is
+answered YES — all three hooks install and run on a first mid-session enable.
+**Three things close it:** (1) the toggle-OFF direction for all three modules,
+(2) `ListFixes()` agreement + a log sweep, (3) the D01 decision — PT-55 step 1's
+literal wording FAILED (an already-parked rocket does not begin refuelling and
+does not heal on reload; the wrap is on `GetFuelResourceRequest`, only consulted
+when `UpdateCargoResourceRequests` runs, which landing triggers and parking does
+not), so either accept the documented limitation or build the `on_activate`
+demand refresh. D04's panel-binding timing is expected and self-healing;
+D03 was clean. Then: PT-56 D09 dials (PASS also un-gates the D10 workshops
+build);
 PT-54 wedge watchdog; PT-52
 Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
 tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.

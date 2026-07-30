@@ -1,4 +1,4 @@
-# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-29, post-pre-flight)
+# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-30, mid-playtest)
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks the model per task and everything here works identically on
@@ -8,30 +8,30 @@ file goes stale the moment another session commits. (The filename keeps its
 historical FABLE_ prefix so existing references stay valid — nothing in it is
 model-specific.)
 
-## Where the project stands (2026-07-29 late, after the pre-flight A/B pair — AUDIT_FINDINGS Phases 1-3 landed earlier the same day)
+## Where the project stands (2026-07-30, mid-playtest — a live sitting is in progress)
 
 **Build state: 75 registered modules — 69 active by default, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
 (`Opt_DroneStatDials`, BUILT 2026-07-29 late: Drone speed 1x/2x/3x/5x and
 Drone carry +0/+1/+2 dropdowns, active-at-base = vanilla, PT-56 owed).
 Everything committed and pushed.**
-**The post-D09 A/B pair RAN unattended 2026-07-29 latest — nothing is owed to
-the harness and the code gate is CLEAR** (77 probes: baseline 1/61/15/0 ·
-all-six-toggles + dials 67/0/10/0 at 75/75, logs clean both legs). Fresh numbers (76 probes): baseline
-**1/60/15/0** · default config **61/0/15/0 at 68/74** · all-six-toggles
-**66/0/10/0 at 74/74**. Log clean in every leg; all four engine error
-signatures appear in both halves of the pair. The audit-remediation Code/
-changes (veto re-checks, Opt_ file-scope installs, 00_Core reconciler,
-MeteorStormWedge flag clear) are now probe-run, not just parse-swept. **The set
-earned its keep:** all three wave-6 probes had been silently reporting SKIP
-(they ran every assertion then fell off the end of `run()` with no verdict;
-`SMRTest.Run` turns nil into SKIP), so wave 6's automated coverage was
-imaginary until the repair (TestKit `d701595`) — the fixes themselves were
-correct throughout. **Account state: all six Mod Options toggles are OFF as
-of 2026-07-30** (the user flipped them for the default-config leg) — **exactly
-PT-55's required starting state, so PT-55 is staged; do not assume any
-optional module is on.** The two D09 dials default to base and are not part
-of the six.
+**The post-D09 A/B set RAN IN FULL — nothing is owed to the harness and the
+code gate is CLEAR.** Current numbers (**77 probes**): baseline
+**1 / 61 / 15 / 0** · default config, six toggles OFF **62 / 0 / 15 / 0 at
+69/75** · all six toggles ON + dials **67 / 0 / 10 / 0 at 75/75**. Logs clean
+in every leg; the four engine error signatures appear in both halves of the
+pair. (Pre-D09 reference, 76 probes: 1/60/15/0 · 61/0/15/0 at 68/74 ·
+66/0/10/0 at 74/74.) The audit-remediation Code/ changes are probe-run, not
+just parse-swept. **The set earned its keep:** all three wave-6 probes had been
+silently reporting SKIP (they ran every assertion then fell off the end of
+`run()` with no verdict; `SMRTest.Run` turns nil into SKIP), so wave 6's
+automated coverage was imaginary until the repair (TestKit `d701595`) — the
+fixes themselves were correct throughout.
+
+**Account state: the six Mod Options toggles were OFF as of 2026-07-30, but a
+live PT-55 sitting has been flipping them** — **read the state, never assume
+it.** `SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`. The two D09
+dials default to base and are not part of the six.
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
@@ -39,23 +39,63 @@ ticked) live in `docs/AUDIT_FINDINGS.md`; Phase 4 (core helpers, merges,
 deactivation surface) stays deferred pending a user go-decision. Playtest
 consequences NOW:
 
-1. **The opt-module first-enable defect is FIXED (audit 1.3):** a first
-   mid-session enable of ClassicRockets / ResidencyControl / MultipleSuns now
-   works without a relaunch — hooks install at file scope. The human
-   re-verify is **PT-55** in the checklist (§2); until it passes, treat an
-   apparent dead first-enable as a PT-55 FAIL to report, not as legacy
-   behavior.
+1. **The opt-module first-enable defect is FIXED (audit 1.3) and CONFIRMED IN
+   PLAY (PT-55, 2026-07-30):** a first mid-session enable of ClassicRockets /
+   ResidencyControl / MultipleSuns works without a relaunch — hooks install at
+   file scope. Do NOT treat a dead first-enable as legacy behavior any more; it
+   would be a regression. The two known-and-explained exceptions are the D04
+   panel-binding timing and the D01 parked-rocket demand refresh — both in the
+   PT-55 section above.
 2. The audit-era warning about running the fix prompt concurrently is
    obsolete — that one-off executed and deleted itself 2026-07-29.
 
-**Playtest state:** PT-53 (D07 CohortHousing) is 3-of-5 PASS ("worked
-wonderfully") — only triggers A and E left. PT-52 (D06 DroneOverhaul + F77)
-has three healthy passive sittings; the controlled Trigger B demo is un-run
-and the **B2 stress A/B re-run with the v2 harness is the natural centrepiece
-of the next live sitting** (the v1 run was a null result with a proven-invalid
-metric; harness rebuilt same day). PT-54 gates the wave-6 disaster fixes.
-`docs/PLAYTEST_CHECKLIST.md` was **restructured 2026-07-29** — see the
-read-list below for its new layout.
+## ⚠️ PT-55 — WHAT IS STILL OWED TO CLOSE IT (tell the user this explicitly)
+
+**PT-55 is PARTIALLY run (2026-07-30) and is NOT closed.** The audit's A2
+question is already answered **YES** — all three reworked hooks install and run
+on a first mid-session enable, no relaunch. Recorded on the checklist and the
+D01/D03/D04 entries. What was proven: **D03 clean**; **D04 passes** with an
+expected self-healing limitation (a panel built BEFORE the flip cannot be
+retro-bound — the wrap is on `SolarPanelBase:GameInit` — and a reload snaps it
+to sun #2); **D01's hook is live** (a rocket that LANDS after the flip fills
+immediately).
+
+**Three things remain. State them to the user when they ask what is left:**
+
+1. **Step 2 — toggle OFF, for all three modules.** Un-run. Flip each module
+   back off mid-session and confirm the behavior reverts immediately to vanilla
+   answers. Nothing about the OFF direction has been exercised this sitting.
+2. **Step 3 — `SMRFixPack.ListFixes()` agreement + a log sweep.** Un-run.
+   ListFixes must agree with the toggle at each step, and the session log must
+   be clean per PT-22 rules.
+3. **The D01 decision (user's call, blocks closure).** PT-55 step 1's literal
+   wording — *"a parked, destination-less player rocket starts requesting
+   launch fuel"* — **FAILED**: an already-parked rocket did not begin refuelling
+   after the flip and **did not heal on a save/reload either**. Cause confirmed
+   in source: the wrap is on `GetFuelResourceRequest`, only consulted when
+   `CargoTransporterNew:UpdateCargoResourceRequests` runs, and nothing
+   re-triggers that for a parked rocket (landing is what does — the tester's own
+   "on-land interaction" guess). **Either** accept it as a documented limitation
+   (PT-55 then closes on items 1-2 alone) **or** build the `on_activate` demand
+   refresh on parked destination-less player rockets, then re-verify D01's
+   step 1. Full write-up on the D01 entry.
+
+**Playtest state:** **PT-11 PASS → F01 `tested`** and **PT-29 PASS → F41
+`tested`** (both 2026-07-29, archived). PT-53 (D07 CohortHousing) is 3-of-5
+PASS — triggers A and E left, though **A may be effectively covered**: on
+2026-07-30 the user ran the exact employed/unemployed A/B (Forever Young ON →
+employed seniors did NOT move; reload without it → unemployed seniors re-homed
+over 1-2 sols). The employed half is only valid if the module read `active`
+at the time — **confirm that before crediting it**. PT-52 (D06 + F77) has three
+healthy passive sittings; Trigger B is un-run and the **B2 stress A/B re-run on
+the v2 harness is the natural centrepiece of the next live sitting**. PT-54
+gates the wave-6 disaster fixes. PT-56 gates D09 (and its PASS un-gates the
+D10 build).
+
+**A live sitting is in progress on a SAVE-B-derived no-disasters save** with
+Forever Young researched, a dedicated nursery-only child dome, and homelessness
+/ unemployment deliberately saturated. That save is the fixture for D12's
+origin evidence — do not assume a healthy colony.
 
 **Open decisions on the user (nothing blocks on you):** F79 D-item or not
 (trains never serve service trips — confirmed vanilla gap); audit Phase 4
@@ -67,6 +107,20 @@ D08 (extender overhaul) is speced in `DRONE_OVERHAUL_OPTIONS.md`, nothing built.
 **D10 (workshops: text repairs + capacity dial) is DECIDED and speced
 (2026-07-30, BUGS.md entry) — build it after PT-56 PASSes; not a decision.**
 Deferred decision recorded there: seniors-in-workshops (D07 interaction).
+**D12 (no-homeless dome policy) is DECIDED and speced (2026-07-30, BUGS.md
+entry) — build owed, not a decision.** Origin: found in play — a nursery-only
+child dome deadlocked itself. Vanilla's emigration tie rule
+(`Colonist.lua:2675-2681`) never moves homeless colonists when every candidate
+ties, so graduates evicted from nurseries strand in place; that pushes the dome
+over `IsOverpopulated`, and D07's own `consider()` skips overpopulated
+communities — so no new children arrive. D12 drains the homeless and the loop
+unwinds without touching D07. **Its own module**, `Opt_ResidencyControl` as
+donor pattern ONLY — the hard constraint is that the new flag must NOT route
+through `CanAcceptNewColonists` (D03's gate), or it blocks the cohort delivery
+it exists to protect. Never expel to the surface: best-effort via the shipped
+emigration machinery, and if no destination qualifies the colonist stays.
+**Sequencing:** D10 and D12 both touch colonist assignment — land them
+separately with their own A/B, never entangled.
 Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 / Steam ≤1 MB), screenshots, Paradox portal console-publishing rules.
 
@@ -159,7 +213,13 @@ silent.
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
   MOD_DESCRIPTION/README corrections, ENGINE_FACTS + STATUS/SESSION_LOG
   restructure). What it left for humans: **PT-55** (opt-module live-toggle
-  re-verify, checklist §2) and the **Phase 4 go-decision** (user).
+  re-verify, checklist §2 — **PARTIALLY RUN 2026-07-30, see the PT-55 section
+  near the top for the exact three items still owed**) and the **Phase 4
+  go-decision** (user).
+- **PT-55 — FINISH IT (cheapest open item).** Toggle-OFF direction for all
+  three modules, ListFixes agreement + log sweep, and the D01 decision. Full
+  list in the dedicated section above. Nothing else on the board is closer to
+  done.
 - **PT-52 STRESS A/B — re-run with the v2 harness (the v1 run's metric was
   invalid).** Protocol is Trigger B2 in the checklist (§2): quicksave →
   `Targets` dry run (check the `pure_only=true` cohort size too) → D06 OFF →
