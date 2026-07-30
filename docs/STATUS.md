@@ -106,8 +106,8 @@ A/B, audit-remediation and disaster-system legs sit below it).
 scheduler's `g_Consts` interval does NOT shorten the sleep already in flight, so
 a "nothing should happen" test must **re-arm the repeat**
 (`RestartPeriodicRepeatThread`) and **carry a positive control**, or it
-false-PASSes regardless of the fix. Full rule in PLAYTEST_CHECKLIST.md's ground
-rules. Two tests have now been found unrunnable-as-written by actually running
+false-PASSes regardless of the fix. Full rule in PLAYTEST_HELP.md (the
+checklist's reference half, split out 2026-07-30). Two tests have now been found unrunnable-as-written by actually running
 them (PT-29, PT-11) — treat an un-run PT's procedure as unverified until it has
 been executed once.
 

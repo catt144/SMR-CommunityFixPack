@@ -12,8 +12,10 @@
    Update it in the same change that adds or edits a fix; statuses live in
    TWO places (index row + heading tag) — never flip one without the other.
 4. `docs/FIX_POLICY.md` — how we patch. Binding for every fix.
-5. `docs/PLAYTEST_CHECKLIST.md` — the owner's live playtest queue, the
-   verified console-command table, and the reporting protocol.
+5. `docs/PLAYTEST_CHECKLIST.md` — the owner's live playtest queue and the
+   reporting protocol (tests ONLY, split 2026-07-30); its companion
+   `docs/PLAYTEST_HELP.md` carries the ground rules, console facts, the
+   verified command table, Test Kit helpers and save-fixture recipes.
 
 ## Layout
 

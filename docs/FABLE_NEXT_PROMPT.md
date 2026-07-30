@@ -146,8 +146,9 @@ keyboard in the retail game with both mods loaded, and you assist in real time.
 Your jobs, in the order they usually come up:
 
 1. **Set tests up** — for whichever PT item the user picks, walk them through
-   setup using the checklist's own steps and the verified command table
-   (`PLAYTEST_CHECKLIST.md`); hand them exact console lines to paste. The
+   setup using the checklist's own steps (`PLAYTEST_CHECKLIST.md`) and the
+   verified command table (`PLAYTEST_HELP.md` — the reference half was split
+   out 2026-07-30); hand them exact console lines to paste. The
    opt-in modules are enabled in **Options → Mod Options → Community Fix
    Pack** (main menu or pause menu; PT-51 verified the surface — but see the
    first-enable caveat above for the three affected modules).
@@ -174,13 +175,16 @@ Your jobs, in the order they usually come up:
    `docs\archive\SESSION_LOG.md` (newest first) — read the newest ones (the
    2026-07-29 audit-remediation and disaster/QA legs) down through the D06
    build leg.
-2. `docs\PLAYTEST_CHECKLIST.md` — **restructured 2026-07-29**: toolbox/
-   reference first (ground rules, verified command table, stress harness),
-   then §1 standing watches (log hygiene, meteor watchdog, PT-52 passive),
-   §2 owed halves (PT-53 A/E, PT-52 Trigger B + B2 re-run, PT-46 tail),
-   §3 wave-6 PT-54, §4 fixture sittings, §5 cross-cutting (PT-20/21).
-   The PT-52 section still carries the CAN/CANNOT lists — judge the module
-   only on the CAN list.
+2. `docs\PLAYTEST_CHECKLIST.md` — **SPLIT 2026-07-30: the checklist now
+   carries ONLY tests + the reporting protocol**; §1 standing watches (log
+   hygiene, meteor watchdog, PT-52 passive), §2 owed halves, §3 wave-6
+   PT-54, §4 fixture sittings, §5 cross-cutting (PT-20/21). The PT-52
+   section still carries the CAN/CANNOT lists — judge the module only on
+   the CAN list. **All reference material — ground rules, external-validity
+   rule, cheat discipline, console facts, the verified command table, Test
+   Kit helpers + stress harness, save-fixture recipes — lives in
+   `docs\PLAYTEST_HELP.md`.** Read the help doc's ground rules before
+   handing the user any console line.
 3. `docs\BUGS.md` — the entries the sitting touches (D06 + F77 for the PT-52
    watch; D07 for PT-53; F78/F81 for PT-54; **F76 before ANY depot-picker
    interaction**; F48 before PT-37). For any drone anomaly, the DroneControl

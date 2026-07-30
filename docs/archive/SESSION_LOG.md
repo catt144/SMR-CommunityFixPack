@@ -8,6 +8,22 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## PLAYTEST_CHECKLIST split: tests-only checklist + PLAYTEST_HELP.md — 2026-07-30
+
+User call ("to the human eye its hard to find and organize play tests and then
+find commands. its bloated"): the checklist now carries ONLY tests + the
+reporting protocol; everything reference — ground rules, external-validity
+rule, cheat discipline, console facts, the verified command table, Test Kit
+helpers + stress harness, save-fixture recipes, the unverified-commands table —
+moved verbatim to the new `docs/PLAYTEST_HELP.md`. Split executed by line-range
+slice (python, utf-8, no round-trip); verified: all 46 headings survive, moved
+content greps in exactly one of the two files. Cross-references updated:
+checklist internal pointers, FABLE_NEXT read-list + jobs list, WORKFLOW.md
+read-list, STATUS.md ground-rules pointer, TestKit README (own repo commit).
+PLAYTEST_ARCHIVE and history docs untouched.
+
+---
+
 ## Curiosity sitting → D10 speced: tunnel water, workshop research, unemployment truth — 2026-07-30
 
 Assisted research session (game-free), three questions from the user, all
