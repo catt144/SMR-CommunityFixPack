@@ -8,6 +8,61 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## F49(c) removed; post-removal A/B leg run unattended — 2026-07-30 (late)
+
+Owner away; work done to standing instruction, with two decisions deliberately
+left untouched (below).
+
+**F49(c) closed `wontfix`, guard removed (`d03417b`).** Full reasoning on the
+F49 entry. The short version: the tester established at the keyboard that
+salvage mode targets objects not hexes, the cursor always names its target
+(bare red `Salvage` = no action permitted), the
+`Salvage Train Station`→`Salvage Track` handoff is seamless to the millimetre,
+and **no exposed control separates a station from its own connector track**.
+The propagation item (c) called a defect is what makes that boundary
+continuous — it is designed. Had the guard engaged it would have carved a dead
+band into it. Removed the pre-guard, its apply-time self-check and the title
+clause; (a) and (d) untouched; file parses; README never described (c).
+
+**Post-removal A/B leg — code gate CLEAR.** Unattended, log
+`Mars.exe-20260730-17.25.32`, 65 s. **74/74 fixes active** (exactly one fewer
+than the pre-removal 75/75 = the F24 deletion), **zero `[CommunityFixPack]`
+error/inactive/disabled lines**, probe total still 77. Result
+**66 / 1 / 10 / 0**. The single FAIL is a **probe defect, not a pack
+regression**: the D09 dial probe captures its baseline from the live value
+(`60_Probes_Opt.lua:411`) and asserts `base_carry + 1` at `:431`, which only
+holds if the account dial is already at base — today's playtest left it
+off-base (same account change that produced 74/74 instead of 68/74). Neither
+removal touches drones, modifiers or Mod Options, and the module logged
+`applied`. **New TestKit defect recorded: the D09 probe is state-dependent and
+can FAIL or false-PASS on account dial state; it must force base before
+measuring.** Same family as the 2026-07-29 falls-off-the-end-returns-SKIP trap.
+Confirmation is a 2-minute re-run with the dials at base — the natural moment
+to run PT-56 as well. TestKit autorun armed and **disarmed** cleanly either
+side.
+
+**Challenge issued and answered the same evening.** The reachability audit
+(`3398031`) had rated F49(c) "live R2" — the owner asked for it to be
+challenged with our evidence rather than blind, on the grounds that catching
+exactly this was the audit's premise. Prompt at `0d9435c`, answered `48d9edb`.
+Its findings are worth more than the one corrected verdict: the method is
+**decisive on reachability and near-mute on intent**, so a wrong
+author-hypothesis sails through with full confidence; exactly **two** verdicts
+in the whole table were unenumerated, both F49 items the lead kept for itself;
+and the audit's own evidence base **went stale mid-run** — `c3c4383` and
+`ba1e88b` landed while its sweeps ran and it never re-read `git log` before
+publishing, so the falsifying evidence for (c) *and* the play-proof for (d)
+were already in the repo. New tier **`I` (intended behaviour)** added, and (d)
+late-enumerated and confirmed R2.
+
+**Held for the owner, deliberately not actioned:** the **F28** delete decision
+(the audit's sole DELETE candidate) and the **FIX_POLICY §4 amendment** (now
+revised by the challenge to require a positive intent statement plus tier `I`).
+Both were framed by the audit as the owner's call, and the project reserves fix
+deletions and policy edits to them.
+
+---
+
 ## PT-46 tail — F49(d) PASS; F49(a) parked on a reachability question — 2026-07-30
 
 **(d) cap-follows-length: PASS.** Live 305-sol colony, read-only counter

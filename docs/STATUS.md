@@ -68,7 +68,31 @@ probe is new), all three legs clean.
 |---|---|---|
 | Baseline (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** |
 | Fixed, default config (six toggles OFF) | 69/75 *(pre-F24-removal)* | **62 / 0 / 15 / 0** |
-| Fixed, all six toggles ON + dials | 75/75 | **67 / 0 / 10 / 0** |
+| Fixed, all six toggles ON + dials | 75/75 *(pre-F24-removal)* | **67 / 0 / 10 / 0** |
+| **Post-removal re-verify, 2026-07-30 17.25 (unattended)** | **74/74** | **66 / 1 / 10 / 0** |
+
+**Post-removal leg — the code gate for the F24 and F49(c) removals is CLEAR.**
+Ran unattended after both removals; log
+`Mars.exe-20260730-17.25.32`. `fix pack present: 74/74 fixes active` — exactly
+one fewer than the pre-removal 75/75, which is the F24 deletion and nothing
+else. **Zero `[CommunityFixPack]` error / inactive / disabled / FAILED lines**;
+`DroneStatDials: applied`. Probe total still 77 (no probe was removed with
+F24). The account had all six toggles ON, hence 74/74 rather than a
+default-config 68/74 — read the state, never assume it.
+**The single FAIL is a PROBE defect, not a pack regression.**
+`DroneStatDials` reported `+1 carry dial: DroneResourceCarryAmount 3 → 2
+(want 4)`. Cause: the probe captures its own baseline from the LIVE value —
+`local base_carry = consts.DroneResourceCarryAmount`
+(TestKit `60_Probes_Opt.lua:411`) — then asserts `base_carry + 1` at `:431`.
+That is only valid when the account's carry dial is already at base. Today's
+playtest left it off-base (the same account change that turned the six toggles
+on), so the arithmetic is measured against an already-modified value. Neither
+removal touches drones, modifiers or Mod Options, and the module logged
+`applied`. **The probe is state-dependent and can FAIL — or false-PASS —
+depending on account dial state; it should force base before measuring.**
+Recorded as a TestKit defect, same family as the 2026-07-29
+falls-off-the-end-returns-SKIP trap. **To confirm: set both dials to base in
+Mod Options and re-run the leg** (2 min; also the natural moment to run PT-56).
 
 Baseline's 1 PASS is the FactionFundingCheck canary; the D09 probe FAILs
 baseline by design ("fix pack not loaded"). The 10 SKIPs are 9 `[install]`
