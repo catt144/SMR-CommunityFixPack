@@ -64,7 +64,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | tested — PT-23 PASS 2026-07-28 (entry) |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | tested |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
-| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* — (d) tested 2026-07-30 PT-46; (a) parked on reachability, (c) no play coverage (entry) |
+| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* — (d) tested 2026-07-30 PT-46; (c) wontfix + guard REMOVED (designed behaviour); (a) R4, kept (entry) |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | tested |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | tested |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | tested*|
@@ -1340,7 +1340,7 @@ and after. If it holds up, the pass belongs in `90_SaveSanitizer.lua` behind a o
 both cases → implement in the sanitizer, skipping tracks that carry repair sites; a dirty
 FAIL on the damaged-track case → close `wontfix — repair riskier than the defect`.*
 
-### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — items (a), (c) and (d); (b)(e) screened and deliberately not fixed, see below]`
+### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — items (a) and (d) only since 2026-07-30; (d) TESTED (PT-46); (c) wontfix, guard REMOVED — it was fixing designed behaviour; (b)(e) screened and deliberately not fixed, see below]`
 
 **Audit 2026-07-30 (reachability): (a) settled R4; (c)(d) live R2; module
 kept.** The (a) trigger list "map setup, cheats, the instant-build rule"
@@ -1434,12 +1434,45 @@ colour-scheme change (`ColonyColorScheme.lua:120-121` repaints every
 passed on the live save: `tracks=4283130509/4283130509`,
 `pipes=760202697884/966355804813`, `distinguishable=true`.
 
-**(c) HAS NO PLAY COVERAGE — gap noticed 2026-07-30.** PT-46's tail covers only
-(d) and (a); nothing in any PT exercises the demolish-mode `SelectionPropagate`
-pre-guard. Cheap to close whenever someone is next in salvage mode: click a
-station-owned connector hex and confirm the STATION is not flagged for
-demolition, while normal-mode clicking still selects it. Until then F49 stays
-`fixed*` on (a) and (c), not only (a).
+**(c) CLOSED `wontfix` 2026-07-30 (user decision) — GUARD REMOVED. It was
+"fixing" DESIGNED BEHAVIOUR.** Started as a hunt for the missing play coverage
+(no PT ever exercised the pre-guard) and ended by falsifying the premise. The
+tester established at the keyboard what no amount of source reading would have
+shown:
+* Salvage mode targets **objects, never hexes** — a bare hex cannot be clicked
+  and is not drawn.
+* The cursor **always names what it will remove** (`Salvage Track`,
+  `Salvage Train Station`, …), and a bare red `Salvage` means "no action
+  permitted here". So a mis-resolved salvage target could never be a silent
+  trap — the player is told before committing.
+* The transition from `Salvage Train Station` to `Salvage Track` is
+  **seamless, exact to the millimetre, with no third state in between**
+  (two screenshots a few pixels apart, each correctly named).
+* **A player cannot salvage a station's own track without salvaging the
+  station.** No exposed control distinguishes them.
+
+Station connector elements are real and station-owned — created with
+`station = self` at the station's `Trackconnector` spots
+(`TrainTransport.lua:132-139`) — so the guard was not inert by luck. **The
+propagation to `self.station` that this item called a defect is exactly what
+makes that boundary continuous.** Had the guard engaged it would have carved a
+DEAD BAND into it: a strip reading red `Salvage` where nothing is targetable.
+Best case it changed nothing observable; worst case it degraded the interface.
+There was no wrong outcome for it to prevent.
+
+Removed from `Code/Fix_TrainMinors.lua`: the `SelectionPropagate` pre-guard,
+its apply-time self-check, and the "connector-hex salvage click neutralized"
+clause in the Register title. (a) and (d) untouched.
+
+**Method note — this is a DIFFERENT failure mode from F24, and a worse one.**
+F24 was a real defect nobody could reach. This was a **non-defect**: the
+shipped behaviour was intentional and the patch fought the design. The
+reachability audit (`REACHABILITY_AUDIT.md`, `3398031`) rated (c) "live R2" —
+but it never enumerated (c) at all; the tier was asserted in passing while
+justifying the *module's* retention on (a)'s behalf. Its R1-R4 vocabulary also
+has no way to express "reachable, but intended", because every tier
+presupposes the shipped behaviour is wrong. Both gaps are put to the audit in
+`docs/AUDIT_CHALLENGE_PROMPT.md`.
 
 **(b) RESOLVED — no defect (PT-46 PASS, 2026-07-25/26).** Mechanism confirmed as
 tracked (no branch of `DemolishAndSplitTrack` touches `assigned_vehicles`), but the

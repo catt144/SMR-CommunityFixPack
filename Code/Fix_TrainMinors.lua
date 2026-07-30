@@ -58,18 +58,25 @@
 -- `SavegameFixups.RemoveTrackDoubleTurns`, TrackElement.lua:839-843, re-processes
 -- track elements).
 --
----- (c) a salvage click on a station's connector hex reached the STATION ----
--- Mechanism: `TrackGridElement:SelectionPropagate` returns `self.station`
--- (TrackElement.lua:297-300), `SelectionMouseObj` runs every candidate through
--- it (SelectionModeDialog.lua:44-50), and both shipped demolish-mode guards
--- test only `TrackBase` (:54-56 discards, :84-88 substitutes the element) — a
--- Station is neither, so the salvage toggle landed on the whole station. The
--- two guards prescribe different remedies, so this was screened as a design
--- decision; **the user chose "the click does nothing" (2026-07-25)**. Patch:
--- a pre-guard on `SelectionPropagate` — in demolish mode a station-owned
--- element propagates to nothing. Every other mode keeps the shipped behavior
--- (clicking a connector selects its station), and the station itself is still
--- salvageable by clicking the station's own footprint.
+---- (c) REMOVED 2026-07-30 — it was "fixing" designed behavior --------------
+-- The guard that used to live here made a station-owned connector element
+-- propagate to nothing in demolish mode. It is gone, closed `wontfix` by user
+-- decision on live evidence (full record on the F49 BUGS.md entry).
+--
+-- What the tester established at the keyboard, which no amount of source
+-- reading would have shown: the salvage cursor transitions from
+-- `Salvage Train Station` to `Salvage Track` seamlessly, to the millimetre,
+-- with no third state in between — and a player has NO exposed control that
+-- distinguishes a station's connector from the station itself. The
+-- propagation to `self.station` is therefore not a defect at all; it is what
+-- makes that boundary continuous, and it is why the station's own track
+-- cannot be salvaged out from under it.
+--
+-- Station connector elements are real and station-owned (`station = self`,
+-- TrainTransport.lua:132-139, at the station's `Trackconnector` spots), so
+-- the guard was not inert by accident — had it engaged it would have carved a
+-- DEAD BAND into that boundary where nothing is targetable. A repair that can
+-- only make the UI worse is not a repair.
 --
 ---- screened, NOT fixed here (full write-ups on the BUGS.md entry) ----------
 -- (b) `DemolishAndSplitTrack` never touches `assigned_vehicles`: mechanism
@@ -81,7 +88,7 @@
 --     condition that inserts the status — a redesign, not a fix.
 
 SMRFixPack.Register("TrainMinors", {
-	title = "Instant-track paint, train cap follows length, connector-hex salvage click neutralized",
+	title = "Instant-track paint, train cap follows length",
 	apply = function()
 		local TE = rawget(_G, "TrackGridElement")
 		if type(TE) ~= "table" or type(TE.GameInit) ~= "function" then
@@ -100,10 +107,8 @@ SMRFixPack.Register("TrainMinors", {
 		if type(expand) ~= "function" then
 			return "ExpandTrackFromElement not found (game update changed it?)"
 		end
-		if type(TE.SelectionPropagate) ~= "function"
-			or type(rawget(_G, "GetInGameInterfaceMode")) ~= "function" then
-			return "SelectionPropagate/GetInGameInterfaceMode not found (game update changed it?)"
-		end
+		-- (the SelectionPropagate / GetInGameInterfaceMode self-check went with
+		-- the (c) guard, 2026-07-30 — nothing here touches either any more)
 
 		---- (a) ---------------------------------------------------------------
 		local orig_el_gameinit = TE.GameInit
@@ -141,17 +146,7 @@ SMRFixPack.Register("TrainMinors", {
 			return res
 		end
 
-		---- (c) ---------------------------------------------------------------
-		-- In demolish mode a station-owned connector element propagates to
-		-- nothing (user decision — see header). All other modes fall through
-		-- to the shipped body untouched.
-		local orig_prop = TE.SelectionPropagate
-		function TE:SelectionPropagate(...)
-			if self.station and GetInGameInterfaceMode() == "demolish" then
-				return nil
-			end
-			return orig_prop(self, ...)
-		end
+		-- (c) removed 2026-07-30 — see the header block.
 
 		-- ExpandTrackFromElement(track, element) — a global, so replace it in the
 		-- real _G by plain assignment (ModEnvMeta.__newindex, Mod.lua:1557-1563).
