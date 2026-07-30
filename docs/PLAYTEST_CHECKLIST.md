@@ -402,7 +402,30 @@ PASS flips nothing on its own (the modules keep their D-entry gates) — it
 retires the audit's A2 "live confirmation still worthwhile" caveat; record
 the result on the D01/D03/D04 entries.
 
-`Result:` _____________________________________________
+`Result:` **2026-07-30 — the audit's A2 question is ANSWERED YES: all three
+hooks install and run on a first mid-session enable, no relaunch.** Per module:
+
+- **ResidencyControl (D03) — PASS, clean.** Mid-session flip worked with no
+  issues at all.
+- **MultipleSuns (D04) — PASS with a documented, self-healing limitation.** A
+  panel built BEFORE the flip did not start tracking sun #2; a panel built
+  AFTER it bound immediately; after a save/reload the pre-existing panel
+  snapped to the sun. **Expected by construction:** the binding fix wraps
+  `SolarPanelBase:GameInit`, so a panel that already ran GameInit cannot be
+  retro-bound — and a reload re-runs GameInit (plus the module's own LoadGame
+  sweep), which is what heals it. Nothing owed.
+- **ClassicRockets (D01) — hook PROVEN LIVE, but step 1 as written FAILS.** A
+  rocket already parked on the pad did NOT begin refuelling after the flip, and
+  — unlike the panel — **did not heal on a save/reload either**. A rocket that
+  LANDED after the flip started filling immediately. Cause: the wrap is on
+  `GetFuelResourceRequest`, which is only consulted when
+  `CargoTransporterNew:UpdateCargoResourceRequests` runs; for an already-parked
+  rocket nothing re-triggers that, and landing is what does (the tester's own
+  "on-land interaction" guess, confirmed in source). So the file-scope install
+  is working — the demand refresh is what is missing. **Open decision:** give
+  the module an `on_activate` that re-runs `UpdateCargoResourceRequests` on
+  parked destination-less player rockets, which would satisfy step 1 exactly.
+  Until then this limitation is a documented behaviour, not a silent one.
 
 ## PT-56 — Drone stat dials · covers **D09 `Opt_DroneStatDials`** (built 2026-07-29)
 

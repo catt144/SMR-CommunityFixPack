@@ -1692,6 +1692,24 @@ in either game. Adding it is a new mechanic, not a repair.
 **CLOSED `wontfix` 2026-07-26 (user decision), same grounds as F62.**
 
 ### D01 — Rockets don't auto-refuel / auto-export rare metals — INTENTIONAL REDESIGN (verdict)
+
+**PT-55 (2026-07-30) — live-toggle result, and one OPEN item.** The audit's A2
+repair is confirmed: the file-scope install works, and a rocket that LANDS after
+a first mid-session enable starts filling immediately (no relaunch). But a
+rocket **already parked** on the pad when the toggle flips does NOT begin
+refuelling, and — unlike Opt_MultipleSuns' panel — **does not heal on a
+save/reload either**. Cause, confirmed in source: the wrap is on
+`GetFuelResourceRequest`, which is only consulted when
+`CargoTransporterNew:UpdateCargoResourceRequests` runs
+(`CargoTransporterNew.lua:1249-1265`); for an already-parked rocket nothing
+re-triggers that, and the landing path is what does. The hook answers correctly
+— nobody asks it. **Open decision (user):** add an `on_activate` that re-runs
+`UpdateCargoResourceRequests` on parked destination-less player rockets, which
+would make the mid-session enable immediate and satisfy PT-55 step 1 literally.
+That is the D05 reconciler's intended use of `on_activate` (state nudges that
+are not a call path, FIX_POLICY §5). Until decided, the limitation is documented
+here and in the PT-55 record rather than silent.
+
 Not a bug: legacy always-on PreciousMetals loader exists only in dead legacy class
 (`RocketBase.lua:1730-1734`; `RocketCompatibility.lua:58-59,97-98` nils old fields).
 UniversalRocket: `auto_mode_on = false` default (`UniversalRocket.lua:113`); manual mode
@@ -1811,7 +1829,7 @@ absent-tolerant both ways (policy §3). Probe `AcknowledgedWarnings` (TestKit
 `60_Probes_Opt.lua`) drives all three wrappers with stand-ins — PASS in the opt-in leg,
 SKIP-with-reason otherwise. Playtest: PT-48.
 
-### D03 — No way to block dome move-ins short of a full quarantine  `[tested 2026-07-28: Code/Opt_ResidencyControl.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-49 PASS in full (archived) — arrivals/tourists proven against an adversarial pad-beside-the-closed-dome setup, quarantine independence, MicroG row (kept on asteroid habitats by user decision), uninstall shape live + reload]`
+### D03 — No way to block dome move-ins short of a full quarantine  `[tested 2026-07-28: Code/Opt_ResidencyControl.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-49 PASS in full (archived) — arrivals/tourists proven against an adversarial pad-beside-the-closed-dome setup, quarantine independence, MicroG row (kept on asteroid habitats by user decision), uninstall shape live + reload; PT-55 PASS 2026-07-30 — mid-session first enable clean, "no issues at all"]`
 Filed 2026-07-27 (user decision, out of PT-14/F61's close — read that entry first). The
 community's long-standing ask: **stop new residents from moving into a dome while its
 residents keep commuting and using services normally.** The shipped game offers only the
@@ -1880,7 +1898,18 @@ parent's array part and VList renders array order (XWindow.lua:719-739 is the
 engine's own array-reorder precedent); falls back to end-of-section if the
 shape ever differs. Position eyes-on re-check after the next relaunch.
 
-### D04 — Multiple Artificial Suns — absorbs F39  `[tested 2026-07-27 (PT-50 PASS in full, archive): Code/Opt_MultipleSuns.lua (opt-in, off by default); night signature matched the banked baseline both sectors, sunless panels 0 at night, reload clean, limit off/on live via the D05 Mod Options toggle]`
+### D04 — Multiple Artificial Suns — absorbs F39  `[tested 2026-07-27 (PT-50 PASS in full, archive): Code/Opt_MultipleSuns.lua (opt-in, off by default); night signature matched the banked baseline both sectors, sunless panels 0 at night, reload clean, limit off/on live via the D05 Mod Options toggle; PT-55 PASS 2026-07-30 — see the binding-timing note below]`
+
+**PT-55 (2026-07-30) — binding timing, expected and self-healing.** On a first
+mid-session enable, a panel built BEFORE the flip does NOT start tracking sun #2;
+a panel built AFTER it binds immediately; a save/reload makes the pre-existing
+panel snap to the sun. By construction: the binding half wraps
+`SolarPanelBase:GameInit`, so a panel that already ran GameInit cannot be
+retro-bound, and a reload re-runs GameInit (plus this module's own LoadGame
+sweep). Not a defect — but worth saying in player-facing text, since "enable the
+module and my existing panels ignore the second sun until I reload" reads like
+one. Nothing owed in code.
+
 Filed 2026-07-27 (user decision, out of PT-26/F39's premise finding — read F39 first).
 The shipped game hard-limits the Artificial Sun to one per colony (`build_once` wonder,
 enforced colony-wide incl. construction sites, `BuildMenu.lua:711-719`), which makes

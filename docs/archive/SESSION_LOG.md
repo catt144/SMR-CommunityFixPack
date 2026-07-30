@@ -87,6 +87,62 @@ in PT-55's required all-OFF starting state — PT-55 staged.
 
 ---
 
+## PT-55 result + the D07 cohort-housing deadlock found in play — 2026-07-30
+
+**PT-55 — the audit's A2 question is ANSWERED YES.** All three reworked hooks
+install and run on a first mid-session enable, no relaunch. D03 clean ("no
+issues at all"). D04 passes with an expected, self-healing timing limitation
+(pre-existing panels can't be retro-bound because the wrap is on
+`SolarPanelBase:GameInit`; a reload re-runs it and they snap to sun #2). D01's
+hook is proven live — a rocket that LANDS after the flip fills immediately — but
+**a rocket already parked does not begin refuelling and does not heal on
+reload**, because `GetFuelResourceRequest` is only consulted when
+`CargoTransporterNew:UpdateCargoResourceRequests` runs and nothing re-triggers
+that for a parked rocket. PT-55 step 1's literal wording therefore fails for
+D01. Open decision recorded on the D01 entry: an `on_activate` demand refresh.
+The tester diagnosed the cause unaided ("my guess it's an on-land interaction")
+and source confirmed it.
+
+**D07 COHORT HOUSING — a self-reinforcing deadlock, found by deliberately
+stressing homelessness.** Full chain, every link source-verified:
+
+1. D07's cross-dome pass fills a nursery-only dome with Children.
+2. They age up; the **Youth** trait's `apply_func` evicts them from the Nursery
+   (`Data/TraitPreset.lua:760-764`) — so the tester's first hypothesis, that
+   aged-up children clog the nursery, is WRONG; they are evicted correctly.
+3. That dome has **no non-Child housing**, so they become homeless *there*.
+4. `Dome:AddToLabel("Homeless", …)` sets
+   `overpopulated = #Homeless >= g_Consts.OverpopulatedDome`
+   (`Dome.lua:1026-1035`).
+5. **D07's own `consider()` skips `community.overpopulated`**
+   (`Opt_CohortHousing.lua:194`) — so the child dome is now permanently
+   excluded as a destination.
+6. New Children never migrate in. Observed live: nurseries at 5/26 and 3/26
+   (68 free Child slots) with 28 homeless in the dome (**26 Youth, 2 Adult** —
+   93% aged-out, the eviction signature), while a Child in a neighbouring dome
+   commutes in to the school and goes home to a Smart Apartment.
+
+`CanAcceptNewColonists()` is only `ui_working and accept_colonists`
+(`Community.lua:61-63`) and read `true` live, so the quarantine is NOT involved
+— `overpopulated` is the whole gate. **The module poisons its own destination**,
+and the more children it delivers the more firmly it locks itself out.
+
+**Separately established and NOT filed as a defect:** the homeless youths
+themselves. `non-cohort free slots colony-wide: 0`, so total homelessness is set
+by (population − housing capacity); D07 changes *which* colonist lacks a chair,
+not how many. It arguably improves utilisation by freeing ordinary slots. A
+caveat, not a bug — deliberately not given an F-number.
+
+**Open decisions (user):** (a) drop `or community.overpopulated` from
+`consider()`, since `find_cohort_slot` already proves a free, working,
+trait-suitable slot exists and those Child slots are unusable by any homeless
+Youth — so the delivery worsens crowding for nobody; (b) whether D07 should
+refuse to send children into a dome with **no non-cohort housing at all**, since
+every child delivered there is guaranteed to be evicted into homelessness on
+its birthday. Both are Opt_ behaviour changes, hence the user's call per
+FIX_POLICY. Two confirming reads still owed: `g_Consts.OverpopulatedDome` and
+the dome's `overpopulated` flag.
+
 ## PT-11 PASS → F01 `tested`, and the test that could not have worked — 2026-07-29 late
 
 **PT-11 PASS → F01 `tested`** (P1, the first of the pack's fixes verified on the
