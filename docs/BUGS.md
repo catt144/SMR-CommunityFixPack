@@ -3438,6 +3438,19 @@ elapsed repair time. **Dial range widened from the DECISION's 1.0x/1.5x/2.0x to
   dial's headroom is proven, not inferred.
 - Playtest: PT-56 (checklist §2) — apply/stack reads, live removal, stale-save
   reconcile. PASS flips this entry to tested (both places).
+- **A/B 2026-07-29 late (unattended pair, 77 probes):** baseline **1/61/15/0**
+  (dial probe FAILs "fix pack not loaded" by design) · fixed all-six-toggles
+  account state **67/0/10/0 at 75/75** — the DroneStatDials probe drives the
+  REAL Apply path (rawset on `Mods[pack].options` + `Msg("ApplyModOptions")`)
+  and PASSes both directions: 2x/+1 land as label modifiers (move_speed +100,
+  carry +1), base removes both by id. Log clean both legs. **Two lessons paid
+  for en route:** (1) the module's first install check read `Modifier.new` at
+  file scope — the F64 pre-flattening trap (`new` is inherited, invisible on
+  the classdef); presence-only at file scope, capability check moved to the
+  reapply guard. (2) `CurrentModOptions` is per-mod-env — the probe's first
+  version wrote the TestKit's own options object (ENGINE_FACTS fact added).
+  A default-config leg (69/75) needs the six toggles turned OFF by hand first
+  — the account state had all six ON from the day's play session.
 
 ## Candidates under investigation
 

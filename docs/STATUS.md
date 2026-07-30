@@ -19,9 +19,9 @@ speed 1x/2x/3x/5x (range widened from the DECISION's 1.5x/2.0x by user call
 after the live no-clamp probe: `SetMoveSpeed(10000)` read back exactly, clean
 movement at ultra) and Drone carry +0/+1/+2. Techs' own label-modifier
 machinery, reconciled on ApplyModOptions/CityStart/PostLoadGame, base =
-modifiers removed = vanilla. D09 entry in BUGS.md; PT-56 owed; **a fresh A/B
-RunAll pair is owed to the harness (new code)** — expected-number shifts:
-default leg 69/75 active, all-toggles 75/75.
+modifiers removed = vanilla. D09 entry in BUGS.md; PT-56 owed. **The owed
+post-D09 A/B pair RAN unattended the same night — see the probe-state table
+below (code gate CLEAR).**
 
 **Landed earlier the same day (audit-remediation session):** AUDIT_FINDINGS.md
 Phases 1-3 implemented — code: veto re-check in the three data-patch fixes
@@ -43,31 +43,33 @@ overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
 BUILT (D09); the structural choice stays gated on the B2 re-run); F79
 D-item or not; D08.
 
-**A/B probe state (2026-07-29 late — the post-wave-6 set RAN in full;
-**superseded by the D09 build: a fresh pair is owed**, numbers below are the
-pre-D09 reference):** **76 probes**, all three legs clean.
+**A/B probe state (FRESH — post-D09 unattended pair, 2026-07-29 latest):**
+**77 probes** (the D09 dial probe is new), both legs clean.
 
 | Leg | Active | Result |
 |---|---|---|
-| Baseline (`code` list emptied) | — | **1 PASS / 60 FAIL / 15 SKIP / 0 ERROR** |
-| Fixed, default config (six toggles OFF) | 68/74 | **61 / 0 / 15 / 0** |
-| Fixed, all six toggles ON | 74/74 | **66 / 0 / 10 / 0** |
+| Baseline (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** |
+| Fixed, all six toggles ON (account state) + dials | 75/75 | **67 / 0 / 10 / 0** |
 
-Baseline's 1 PASS is the FactionFundingCheck canary. The 10 SKIPs are 9
-`[install]` retail-sandbox probes + TechDescriptionBuilding; the default leg's
-extra 5 are the opt-module probes reporting `inactive (opt-in)` — D06 has no
-probe of its own by design (the stress harness covers it), which is why five,
-not six. Log clean in all legs: no `[CommunityFixPack]` error/disabled lines,
-no error naming our `Code/`, and the four engine error signatures appear in
-BOTH halves of the pair. **The set caught a real defect:** all three wave-6
-probes had been silently reporting SKIP (missing PASS verdict — TestKit
-`d701595`), so wave 6 had no genuine automated coverage until this run; the
-fixes themselves were correct throughout. Detail: the newest SESSION_LOG leg.
+Baseline's 1 PASS is the FactionFundingCheck canary; the D09 probe FAILs
+baseline by design ("fix pack not loaded"). The 10 SKIPs are 9 `[install]`
+retail-sandbox probes + TechDescriptionBuilding. Log clean in both legs: no
+`[CommunityFixPack]` error/disabled lines, no error naming our `Code/`,
+known synthetic-map noise only. **The pair caught two real defects en route**
+(both fixed same-session, see the D09 entry): the module's file-scope
+`Modifier.new` check tripped the F64 pre-flattening trap, and the probe's
+first version wrote the TestKit env's own `CurrentModOptions` (per-mod-env —
+new ENGINE_FACTS entry). **Account toggle state is now all six ON** (the
+day's play session re-enabled them) — a default-config leg (69/75) and
+PT-55's required all-OFF starting state both need the toggles turned off by
+hand first. Pre-D09 reference set (76 probes): baseline 1/60/15/0 · default
+61/0/15/0 at 68/74 · all-toggles 66/0/10/0 at 74/74.
 
 **Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** live-toggle
 re-verify of the three reworked Opt_ modules (PT-55 — both directions, incl.
-mid-session FIRST enable; **all six toggles were set OFF 2026-07-29 late for
-the default-config leg, which is exactly PT-55's required starting state**);
+mid-session FIRST enable; **PT-55 needs the six toggles OFF at session start —
+the account currently has ALL SIX ON again** (re-enabled during the day's
+play; verified by the post-D09 A/B leg reading 75/75)); PT-56 D09 dials;
 PT-54 wedge watchdog; PT-52
 Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
 tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.

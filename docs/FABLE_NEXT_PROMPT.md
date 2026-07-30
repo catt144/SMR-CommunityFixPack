@@ -15,8 +15,9 @@ Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
 (`Opt_DroneStatDials`, BUILT 2026-07-29 late: Drone speed 1x/2x/3x/5x and
 Drone carry +0/+1/+2 dropdowns, active-at-base = vanilla, PT-56 owed).
 Everything committed and pushed.**
-**The pre-flight A/B set RAN IN FULL 2026-07-29 late, but the D09 build landed
-AFTER it — a fresh A/B pair is owed to the harness (see the board).** Fresh numbers (76 probes): baseline
+**The post-D09 A/B pair RAN unattended 2026-07-29 latest — nothing is owed to
+the harness and the code gate is CLEAR** (77 probes: baseline 1/61/15/0 ·
+all-six-toggles + dials 67/0/10/0 at 75/75, logs clean both legs). Fresh numbers (76 probes): baseline
 **1/60/15/0** · default config **61/0/15/0 at 68/74** · all-six-toggles
 **66/0/10/0 at 74/74**. Log clean in every leg; all four engine error
 signatures appear in both halves of the pair. The audit-remediation Code/
@@ -26,9 +27,11 @@ earned its keep:** all three wave-6 probes had been silently reporting SKIP
 (they ran every assertion then fell off the end of `run()` with no verdict;
 `SMRTest.Run` turns nil into SKIP), so wave 6's automated coverage was
 imaginary until the repair (TestKit `d701595`) — the fixes themselves were
-correct throughout. **Account state:** all six Mod Options toggles were left
-**OFF** after the default leg (account-persistent) — that is PT-55's required
-starting state, so do not assume any optional module is on.
+correct throughout. **Account state (CORRECTED 2026-07-29 latest): all six
+Mod Options toggles are ON again** — re-enabled during the day's play session;
+the post-D09 A/B leg read 75/75 active, which is only possible with all six on.
+**PT-55 requires them OFF at session start — the user must turn them off by
+hand first.** The two D09 dials default to base and are not part of the six.
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
@@ -66,9 +69,10 @@ Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 
 **Session-start sequence (~2 min):**
 1. `git log --oneline -5` + `git pull` (see above).
-2. Verify the pack loaded clean: on-screen status loop (below) — all 68
-   default fixes `active`, plus whichever opt-in toggles the user runs
-   (their toggles are account-persistent).
+2. Verify the pack loaded clean: on-screen status loop (below) — all 69
+   default fixes `active` (incl. DroneStatDials, active-at-base), plus
+   whichever opt-in toggles the user runs (account-persistent — currently
+   ALL SIX ON, see the account-state note above).
 3. Fresh `SMRFixPack.DroneReport` baseline if D06 is on (counters reset
    every launch; the PT-52 passive watch continues every sitting).
 4. Optional (only if a lander/cargo read is planned): re-arm
@@ -141,11 +145,13 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **A/B RunAll pair — OWED AGAIN (D09 landed after the 2026-07-29-late set).**
-  Pre-D09 reference numbers: baseline 1/60/15/0 · default 61/0/15/0 at 68/74 ·
-  all-toggles 66/0/10/0 at 74/74. Post-D09 expectations: 69/75 and 75/75
-  actives; the TestKit OptionsMenu probe asserts six toggle wirings and needs
-  a D09 dial-wiring assertion (TestKit is local-only).
+- **~~Post-D09 A/B RunAll pair~~ DONE unattended 2026-07-29 latest** — 77
+  probes (new DroneStatDials probe drives the real Apply path via
+  `Mods[pack].options`): baseline **1/61/15/0** · all-six-toggles + dials
+  **67/0/10/0 at 75/75**, logs clean. OptionsMenu now asserts the two dial
+  wirings too (TestKit `ed01ef7`). A default-config leg (69/75) is possible
+  only after the six toggles are turned OFF by hand — account state is
+  currently ALL SIX ON (re-enabled during the day's play).
 - **~~AUDIT_FIX_PROMPT~~ DONE 2026-07-29** — AUDIT_FINDINGS Phases 1-3 all
   landed (veto bypasses, opt-module first-enable repair, error-status
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
@@ -354,18 +360,21 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — pre-D09 reference (2026-07-29 late, 76 probes; the D09
-  build shifts actives to 69/75 / 75/75 and a fresh pair is owed):**
-  baseline (`code` list emptied) **1 / 60 / 15 / 0**; default config, six
-  toggles OFF **61 / 0 / 15 / 0 at 68/74**; all six toggles ON
-  **66 / 0 / 10 / 0 at 74/74**. The 10 SKIPs are 9 `[install]` retail-sandbox
-  probes + TechDescriptionBuilding; the default leg's extra 5 are the
-  opt-module probes reporting `inactive (opt-in)` — **five, not six, because
-  D06 has no probe of its own** (the stress harness covers it). Baseline's
-  1 PASS = FactionFundingCheck canary; the OptionsMenu probe (D05) asserts all
-  six toggle wirings and FAILs baseline by design. The rains probe does NOT
-  skip on the synthetic map — the harness builds a colony, so `HasGame()` is
-  true.
+- **Expected numbers — FRESH (2026-07-29 latest, 77 probes, post-D09 pair
+  run):** baseline (`code` list emptied) **1 / 61 / 15 / 0**; all six toggles
+  ON + dials **67 / 0 / 10 / 0 at 75/75**. A default-config leg (toggles OFF
+  by hand) should read **62 / 0 / 15 / 0 at 69/75** — un-run, derived from the
+  pre-D09 61/0/15/0 plus the D09 probe (which asserts in every fixed leg:
+  DroneStatDials registers active-at-base). The 10 SKIPs are 9 `[install]`
+  retail-sandbox probes + TechDescriptionBuilding; a default leg's extra 5 are
+  the opt-module probes reporting `inactive (opt-in)` — **five, not six,
+  because D06 has no probe of its own** (the stress harness covers it).
+  Baseline's 1 PASS = FactionFundingCheck canary; the OptionsMenu probe (D05)
+  asserts all six toggle wirings PLUS the two D09 dial wirings and FAILs
+  baseline by design. The D09 dial probe writes `Mods[pack].options` (NOT its
+  own env's CurrentModOptions — per-mod-env, see ENGINE_FACTS) and restores
+  the leg's values through the same path. The rains probe does NOT skip on
+  the synthetic map — the harness builds a colony, so `HasGame()` is true.
 - **Probe-authoring trap (cost wave 6 its coverage, 2026-07-29):** a probe
   whose `run` falls off the end returns nil, and `SMRTest.Run` turns nil into
   **SKIP with an empty message** (`00_TestCore.lua:243`) — it looks like a

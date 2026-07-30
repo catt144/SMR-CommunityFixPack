@@ -381,11 +381,12 @@ gate and MultipleSuns' panel-binding wrap to file-scope installs, so a FIRST
 mid-session Mod Options enable now works without a relaunch (previously
 silently dead until restart). One sitting, any healthy save, per module:
 
-> ✅ **Setup state (2026-07-29 late):** all six Mod Options toggles were turned
-> **OFF** for the default-config A/B leg (verified in that leg's log — the pack
-> reported all six `inactive (opt-in)` at 68/74 active). Toggles are
-> account-persistent, so unless they have been changed since, this test's
-> required starting state is already set — go straight to step 1.
+> ⚠️ **Setup state (CORRECTED 2026-07-29 latest): all six toggles are ON
+> again** — re-enabled during the day's play session (the post-D09 A/B leg
+> read 75/75 active, only possible with all six on). Toggles are
+> account-persistent, so this test's required starting state is NOT set:
+> **turn all six OFF and relaunch before step 1.** (The two D09 dials are
+> separate, default to base, and don't affect this test.)
 
 1. Start the session with the module **OFF**. Mid-session, toggle it **ON**
    (no relaunch) and confirm the behavior engages: ClassicRockets — a parked,

@@ -34,6 +34,14 @@ code suggests.
 - `g_Consts` is a **GameVar** (`Lua\Modifiers.lua:427`) and does not exist while
   mods load — read it inside the patched function, never in apply(). `const` IS
   populated at that point.
+- **`CurrentModOptions` is PER-MOD-ENV** (proven by the D09 probe A/B,
+  2026-07-29 late): the engine loads each mod's options object before code
+  (Mod.lua:2128-2131, values rawset onto it :679-683) and each mod env's
+  `CurrentModOptions` aliases that mod's OWN object. A mod reading another
+  mod's options (the TestKit driving the fix pack's dials) must go through
+  `Mods["<id>"].options` — writing your own env's `CurrentModOptions` silently
+  changes the wrong object. Runtime rawsets on `Mods[id].options` are
+  session-only (AccountStorage saves only via the options dialog's Apply).
 - Engine Lua tolerates `#nil`/`next(nil)`/`ipairs(false)` (verified from working
   code paths) but NOT boolean relational compares — don't report/fix nil-iteration
   as crashes. `/` truncates (integer division); that is what makes F12's

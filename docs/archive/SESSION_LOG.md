@@ -8,6 +8,41 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## D09 stat dials: decided → probed → range widened → BUILT → A/B clean, one evening — 2026-07-29 latest
+
+**The whole D09 lifecycle ran in a single assisted evening.** During live play
+the user asked where the planned speed/carry sliders were (answer: DECISION
+recorded, build not started). Prep ran WHILE the user played (Mars.exe-running
+rule respected: all drafting in scratchpad, zero repo writes); the user ran the
+queued C-side clamp probe in-session (`SetMoveSpeed(10000)` → read back 10000,
+movement clean at ultra — no C-side clamp, recorded on D09 + the DECISION
+facts) and **widened the dial range 1.5x/2.0x → 2x/3x/5x on the strength of
+it** (worst case 1440 × 5.6 = 8064 < 10000). On exit the build landed as
+`9aae3de` (module + items/metadata + BUGS D09 + FIX_POLICY §5 dial addendum +
+MOD_DESCRIPTION + PT-56 + STATUS/FABLE_NEXT), then the owed A/B pair ran
+UNATTENDED (user pre-authorized):
+
+- **Leg 1a FAIL — real catch #1:** the module's file-scope self-check read
+  `Modifier.new` — the F64 pre-flattening trap (`new` is inherited, invisible
+  on the classdef). Fixed `d8e309c` (presence-only at file scope, capability
+  check in the reapply guard).
+- **Leg 1b FAIL — real catch #2:** the new TestKit dial probe wrote its OWN
+  env's `CurrentModOptions` — **per-mod-env** (each env aliases that mod's
+  options object, Mod.lua:2128-2131/:679-683). New ENGINE_FACTS entry; probe
+  now writes `Mods[pack].options` (TestKit `ed01ef7`).
+- **Leg 1c: 67 PASS / 0 FAIL / 10 SKIP / 0 ERROR at 75/75** — dial probe
+  PASSes both directions through the real Apply path. **Baseline:
+  1/61/15/0** (D09 probe FAILs "fix pack not loaded" by design). Logs clean
+  both legs; metadata baseline surgery restored from saved copy, tree clean.
+
+**Account-state correction:** the legs read 75/75 — all six toggles are ON
+again (re-enabled during the day's play). PT-55's all-OFF starting state must
+be set by hand; the FABLE_NEXT/checklist notes claiming OFF were corrected.
+D09 status: `built`, PT-56 owed (apply/stack reads, live removal, stale-save
+reconcile — the clamp probe half is already done).
+
+---
+
 ## PT-11 PASS → F01 `tested`, and the test that could not have worked — 2026-07-29 late
 
 **PT-11 PASS → F01 `tested`** (P1, the first of the pack's fixes verified on the
