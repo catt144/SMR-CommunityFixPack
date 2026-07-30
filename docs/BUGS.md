@@ -773,28 +773,42 @@ assert was load-bearing through its ARGUMENT — `tech_def.group` raises on an u
 `if not tech_def then return end` guard.)*
 Probe: `ReplaceTechCount` in `40_Probes_Wave4.lua`.
 
-### F29 — Sequence-system latents (mod-facing bundle)  `[fixed*: Code/Fix_SequenceLatents.lua — items 1 and 3; item 2 deliberately not fixed. ⚠️ FLAGGED FOR REMOVAL 2026-07-30 under FIX_POLICY §4a — awaiting the owner's call]`
+### F29 — Sequence-system latents (**NOT** mod-facing — see the 2026-07-30 correction)  `[fixed*: Code/Fix_SequenceLatents.lua — items 1 and 3; item 2 deliberately not fixed. KEPT: R3 latent-by-data, a real player fix under FIX_POLICY §4a]`
 
-**⚠️ FLAGGED, NOT YET ACTIONED — owner decision owed.** This entry's shipping
-rationale is stated below in its own words: *"all three are small overrides;
-**ship for modder benefit**."* **FIX_POLICY §4a (owner hard rule, 2026-07-30)
-bars exactly that rationale**, and a scan of the whole tracker found only two
-shipped fixes resting on it — F28 (now deleted under the rule) and this one.
-Its own text confirms the reachability: item 1 "No shipped user", item 2 "No
-shipped user", item 3 "unreachable with shipped defaults, bites subclasses".
+**✅ KEPT — and this entry's own self-description is WRONG. Correction
+2026-07-30.** It was briefly flagged for removal under the new FIX_POLICY §4a
+rule, on the strength of its own words below (*"mod-facing bundle"*, *"ship for
+modder benefit"*, *"No shipped user"*). **Those words are false**, and the
+reachability audit's enumeration proves it:
 
-It was **not** deleted alongside F28 because that was not what the owner was
-deciding, and it is a second module with its own probe and count churn. The
-consistent outcome under the rule is removal; the argument for keeping it is
-that its patches are three **small overrides** rather than F28's 37-line
-function copy, so the carry cost is genuinely lower — which is a
-*technique-cost* argument, not a rationale the rule permits.
+* **Item 1** (`SA_GetLabelToRegister`) has **four shipped callers**, all in
+  Mystery 2 "Dredgers" (`Mystery 2.generated.lua:298, :315, :365, :369`), and
+  **all four execute live in every Dredgers playthrough.** They are harmless
+  only because none passes `random_count`/`random_percent`, so the defaults make
+  the missing truncation a no-op. A grep of `random_count|random_percent` across
+  all of `Data` returns zero presets setting either — **today**.
+* **Item 3** (`AlienDigger:GameInit`) likewise **runs live for every digger
+  Mystery 2 spawns**. The buggy swap branch needs
+  `pre_hit_ground_t < pre_hit_ground_t_2`, and the shipped defaults (1000/500,
+  `Diggers.lua:53-54`) are already ordered, so the lines never execute.
 
-If retired: delete `Code/Fix_SequenceLatents.lua`, its `metadata.lua` and
-`items.lua` entries, the README row, and the `SequenceLatents` probe
-(`40_Probes_Wave4.lua`); counts drop to 72 registered / 66 default-active and
-probes to 75; a fresh A/B is owed. **Do not act on this without an explicit
-instruction.**
+That makes F29 **R3 — latent-by-data**, not mod-only: the game runs this code in
+ordinary play, and only the current *values* keep it benign. **A patch, a DLC or
+new story content can expose it without any mod involved.** Under §4a's test —
+*could a player be harmed, now or after a future patch?* — the answer is yes, so
+it is a real fix and it ships. Same shape as F27, F31 and F43.
+
+**The mistake is worth keeping on the record:** the flag came from trusting this
+entry's self-description instead of the enumeration sitting in
+`REACHABILITY_AUDIT.md` — precisely the failure mode that produced the wrong
+F49(c) verdict, repeated on provenance rather than on intent. §4a now says
+outright: judge by enumeration, never by the entry's own words.
+
+**What F29 does still owe** is unrelated to §4a: it is R3 implemented as two
+**§1.5 method replacements**, and the *pending* §4 amendment would require an
+explicit owner decision for that combination (latent benefit, permanent
+maintenance cost). It is paired with **F57(a)** in that bucket. No action unless
+the owner wants the stricter line.
 1. `Lua\Sequences\SA_Filters.lua:30-40` — `SA_GetLabelToRegister` ignores
    `random_count`/`random_percent` (returns full list after shuffle). No shipped user.
 2. `Lua\Sequences\SA_Gameplay.lua:2705` — `SA_WaitMarsTime` *generated-code* path inverts

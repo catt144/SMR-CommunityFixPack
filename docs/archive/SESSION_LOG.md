@@ -53,12 +53,34 @@ recounting: `metadata.lua`'s player-facing `last_changes` still advertised "68
 bug fixes"; it derives as Fix_ files + the sanitizer and is now **66**, with the
 derivation written into a comment so it stops drifting silently.
 
-**F29 flagged, deliberately NOT actioned.** Same banned rationale in its own
-words ("ship for modder benefit"), same "No shipped user" text on its items. Not
-deleted because it was not what the owner was deciding and it is a second module
-with its own probe and count churn. Its entry and the STATUS parked table both
-carry the flag and the exact cost of retiring it, so it cannot be quietly
-forgotten. **Awaiting an explicit yes/no.**
+**F29 flagged — then UN-flagged the same evening, and the mistake is mine.** I
+flagged it on the strength of its own words ("mod-facing bundle", "ship for
+modder benefit", "No shipped user"). The owner asked the obvious question —
+*what does F29 actually do?* — and reading the audit's enumeration to answer it
+showed **the entry's self-description is false**: item 1 has **four shipped
+callers**, all in Mystery 2 "Dredgers", all executing live in every playthrough;
+item 3 runs for every digger that mystery spawns. Both are benign only because
+the shipped *data* is benign (default sampling params; already-ordered timings).
+That is **R3 latent-by-data**, not mod-only — same shape as F27/F31/F43. **KEPT.**
+
+I made the exact error the audit made on F49(c): **trusted an entry's own
+framing instead of the enumeration sitting right there.** There it was about
+intent; here it was about provenance. §4a now carries the warning explicitly.
+
+**The owner's clarification is what settled it**, and it is now the rule's
+operative test: *"I don't want to fix things for other possible mods. But if
+it's game code that could cause real problems for users now or in the future
+even if they can't expressly see the issue, that is a real fix."* Ask **who
+benefits**, not how visible the harm is. Invisible, latent and
+nobody-has-complained are all irrelevant. Operationally it lands exactly on the
+**R4/R3 boundary**: R4 needs new *calling code* to go live (only a mod can
+supply that — barred); R3 needs new *data*, which ships with patches, DLC and
+story content (player territory — allowed). So the rule retired **F28 alone**.
+
+F29's one genuine open question is unrelated to §4a: it is R3 implemented as two
+**§1.5 method replacements**, the combination the *pending* §4 amendment would
+put to the owner. Paired with F57(a) in that bucket. No action unless a stricter
+line is wanted.
 
 ---
 

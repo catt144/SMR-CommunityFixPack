@@ -107,26 +107,59 @@ from other mods. No agent should assume it does at any point going forward. The
 only way that should be able to be changed is if an agent specifically asks me
 to override as a one-off for something I specifically ask for."*
 
-Two forms, both barred:
+### The test is WHO BENEFITS — not how visible the problem is
+
+Owner's clarification, same day: *"I don't want to fix things for other possible
+mods. But if it's game code that could cause real problems for users now or in
+the future even if they can't expressly see the issue, that is a real fix."*
+
+**Ask one question: could a PLAYER be harmed by this — now, or after a future
+game patch or DLC?**
+
+- **Yes → it is a real fix. Ship it.** Invisibility is irrelevant. Latent is
+  irrelevant. "No player has complained" is irrelevant. Silent corruption, a
+  wrong number nobody has noticed yet, a branch that is benign only because
+  today's shipped data happens to be benign — all of these are real fixes,
+  because the harm lands on players the moment the data or the build moves.
+- **No, the only conceivable beneficiary is another mod → do not ship it.**
+
+**BARRED:**
 
 1. **A bug caused by another mod.** Not ours. Never fix it, never work around
    it, never add a compatibility shim for it. If one is reported, record it and
    say whose it is.
-2. **A vanilla bug reachable ONLY from mod code** — no shipped caller, no
-   shipped data path, only a mod or subclass could ever execute it. *(Corollary,
-   derived 2026-07-30 while applying the rule to F28. It is the form that
-   actually occurs in this tracker, so it is written down explicitly rather
-   than left to interpretation.)* This is not a player fix. **It does not ship**
-   — record it `wontfix` with the search that proved no shipped caller exists.
+2. **A vanilla bug reachable ONLY from mod code** — no shipped caller anywhere,
+   so lighting it up needs **new calling code**, which only a mod can supply.
+   Record it `wontfix` with the search that proved no shipped caller exists.
+   *(This is tier **R4**. F28 is the worked example: `Research:ReplaceTech` has
+   zero callers in all of Src.)*
 
-**"For modder benefit" is no longer a valid reason to ship anything.** It was
-used twice — F28 and F29 — and both predate this rule.
+**NOT BARRED — these are real fixes, ship them:**
+
+3. **Shipped code that executes in ordinary play but whose defective branch is
+   currently unreachable because of DATA.** The game runs the code; only the
+   values keep it harmless. A patch, a DLC, or new story content can expose it
+   without anyone touching a mod. *(Tier **R3**. F29's two items are the worked
+   example — both execute live in every Dredgers playthrough and are benign only
+   because the shipped presets pass default sampling parameters and
+   already-ordered timings. F27, F31 and F43 are the same shape.)*
+
+**The R4/R3 boundary is the whole rule:** R4 needs new *code* to become live —
+mod territory, barred. R3 needs new *data* — which ships with patches and DLC,
+so it is player territory, allowed.
+
+**"For modder benefit" is no longer a valid reason to ship anything** — but do
+not read a fix's own header or BUGS entry as authority on whether it is
+mod-facing. **F29 described itself as a "mod-facing bundle" with "No shipped
+user", and both claims were false** — the reachability audit found four live
+shipped callers. Judge by enumeration, never by the entry's self-description
+(the F49(c) lesson, applied to provenance).
 
 **Override procedure — the ONLY one.** An agent that believes a specific case
 warrants an exception must **ask the owner explicitly and get an explicit yes,
 for that one case**. It is never inferred, never assumed from precedent, and
 never carried forward to a second case. An existing shipped fix is NOT
-precedent; two already violate this rule and are being retired under it.
+precedent — one (F28) already violated this rule and was retired under it.
 
 **Why this exists.** The pack shipped `Fix_ReplaceTechCount` (F28) against a
 function with **zero callers in all of Src** — a 37-line copy of a shipped
