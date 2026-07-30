@@ -118,6 +118,35 @@ from "nothing would have happened anyway". Prefer an **objective counter** over
 eyes — e.g. `CurrentMap:MapGet("map", "CaveInRubble")` — since events at ultra
 speed are easy to miss.
 
+### Salvage mode — how to read the cursor (observed 2026-07-30, applies to EVERY salvage test)
+
+Reported by the tester while running PT-46(c), and general to the whole map —
+not a train-station quirk. Any test that involves salvaging or demolishing
+should be read through these three facts:
+
+1. **Salvage mode targets OBJECTS, never hexes.** You cannot click a bare hex.
+   If no live object occupies the spot, there is nothing to click and the hex
+   itself is not drawn.
+2. **The cursor always NAMES what it is about to remove**, for everything:
+   `Salvage Stirling Generator`, `Salvage Power Cable`, `Salvage Wind Turbine`,
+   `Salvage Track`, `Salvage Train Station`. Line-drawn things add
+   `CTRL + click — Salvage entire length`. There is therefore no such thing as
+   a silent mis-target in salvage mode: whatever the tool is going to destroy,
+   it says so first.
+3. **The word `Salvage` alone, rendered in RED, means "no action permitted
+   here"** — nothing targetable under the cursor. It draws at the true mouse
+   position (screenshots do not capture the cursor itself, so the red label is
+   where the pointer actually was).
+
+**Why this matters beyond one test.** Fact 3 gives a positive read for
+"nothing is targetable", which turns several otherwise eyes-only checks into
+definite observations — e.g. F49(c), where the fix makes a station-owned
+connector element propagate to nothing in demolish mode: red `Salvage` over a
+connector position is the fix engaging, whereas `Salvage Train Station` over a
+hex that is not the station body would be the guard failing. Fact 2 also bears
+on **severity** assessments: a defect that mis-resolves a salvage target is
+announced to the player before they commit, so it can never be a silent trap.
+
 ### Console: what works and what silently does nothing
 
 On a retail build the console runs inside the **mod sandbox** (`CommonLua/console.lua:27-56`:
