@@ -98,14 +98,11 @@ entry for a game-free look). Cheapest open item now: **PT-56 D09 dials**
 last thing between D07 and `tested`); PT-54 wedge watchdog; PT-52 Trigger B +
 the B2 re-run on the v2 stress harness; PT-20 save/remove/load
 incl. wave-6 persisted state; PT-21. **PT-46 tail: (d) PASSED 2026-07-30**
-(cap follows length, `43/2`→`13/1` across a salvage); **(a) parked on a
-reachability question** and (c) found to have no play coverage, so F49 holds at
-`fixed*` — see the entry.
-**NEW, game-free, awaiting a fresh session: `docs/REACHABILITY_AUDIT_PROMPT.md`**
-— audit every fix for whether a player can reach the defect at all. Born from
-the F24 close and the user's question during the PT-46 attempt. Its first live
-case is F49(a). It also drafts the FIX_POLICY §4 amendment that would have
-caught F24 before it shipped.
+(cap follows length, `43/2`→`13/1` across a salvage); **(a) settled R4 by the
+reachability audit** (no player-reachable entry into `place_track` — see the
+audit's lead-pass block); **(c) closed `wontfix` 2026-07-30 (user decision,
+tier I — designed behaviour), guard REMOVED (`d03417b`)**. F49 now holds at
+`fixed*` on (a)+(d), carried by (d).
 
 **Newest legs:** `docs/archive/SESSION_LOG.md` → the 2026-07-30 set, newest
 first: the PT-55 closure leg, the PLAYTEST_CHECKLIST/PLAYTEST_HELP split leg,
@@ -144,6 +141,20 @@ proposed FIX_POLICY §4 amendment (reachability tier required before a fix
 ships) is drafted in the audit file, not applied. Eleven BUGS.md entries
 carry new "Audit 2026-07-30" notes (evidence corrections: F06, F17, F22, F25,
 F34, F37, F40, F43, F49, F74, F81 — plus F11's observation).
+**CHALLENGED same day and one verdict fell: F49(c) was tabled "live R2"
+unenumerated and was in fact designed behaviour** — closed `wontfix` by user
+decision, guard removed. The "Challenge review 2026-07-30" appendix in the
+audit file answers it: the three-part method failure (bundle inheritance;
+grading reachability while inheriting defectiveness — source is decisive on
+"can this path execute" and near-mute on "is it wrong", so UI-shaped
+misreadings come back confident, not uncertain; evidence base going stale
+mid-audit — `c3c4383`/`ba1e88b` landed during the run and were not re-read),
+the two unenumerated verdicts (F49(c) wrong, F49(d) late-enumerated and
+holding), the eleven-row source-blind-spot list with settling observations,
+the new tier **I — Intentional**, and the REVISED §4 draft now requiring a
+positive intent statement (hard tells: player report / dead code / sibling
+contradiction / self-contradiction / dev comment; no tell → keyboard
+observation before any fix is written). Still not applied — user go-ahead.
 
 ## What this project is
 
@@ -210,6 +221,7 @@ the tracker. **Only F48 is still open** — the other four are closed.
 | **F42** | **NEW, wave-5 screening.** `blocked` — wontfix candidate. The tracked observation is entirely correct and does not add up to a defect: the guard it names exists to stop units being entombed, a dust devil has no footprint to be entombed in, the omission sits in declared overridable class members, no shipped text promises the block, and the game's one weather-gated placement rule (`RocketLandingDustStorm`) is implemented and working. Full write-up on the entry. | **A user decision.** Recommend `wontfix` on the F56/F62/F63 grounds. |
 | **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
 | **F24** | **CLOSED `wontfix` 2026-07-30 (user decision) — fix DELETED.** Real defect (water grid passes `dome` where its electricity twin passes `self`), but **unreachable in the shipped game**: its only live call site can't reach the buggy line (`SpireBase` is not a life-support object), and the `Dome:OnLoad` sweep needs a state vanilla can't produce — domes refuse to place over buildings, no dome has an upgrade, interior shapes never change at runtime. Carried as a 34-line full-function replacement, so deletion beat latency. Counts 75→74 / 69→68. | — done. Rollback is one `git revert` if a counter-example appears. |
+| **F49(c)** | **CLOSED `wontfix` 2026-07-30 (user decision) — guard REMOVED. It was fixing DESIGNED BEHAVIOUR**, a different and worse failure mode than F24's unreachable-but-real defect. Established at the keyboard: salvage mode targets objects not hexes, the cursor always names its target (red `Salvage` = no action permitted), the `Salvage Train Station`→`Salvage Track` handoff is seamless to the millimetre, and **no exposed control separates a station from its own connector track**. The propagation the item called a defect is what makes that boundary continuous; the guard would have carved a dead band into it. The module keeps (a) and (d) — counts unchanged. | — done. The reachability audit rated (c) "live R2" **without ever enumerating it**, and its R1-R4 vocabulary cannot express "reachable, but intended" — both put back to it in `AUDIT_CHALLENGE_PROMPT.md`. |
 | **F62** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** Verified identical to the original game (same one-hop algorithm, same two transitive-predicate callers): carried-forward dev vision in both games, breaks nothing. No opt-in module planned. | — done. |
 | **F63** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds** — no training term ever existed in either game's emigration score. | — done. |
 

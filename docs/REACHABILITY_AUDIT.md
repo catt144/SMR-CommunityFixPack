@@ -31,11 +31,13 @@ settling observation), and two R4 — of which only one is a deletion candidate.
 | **F28** `Fix_ReplaceTechCount.lua` | **R4, verified twice.** `Research:ReplaceTech` has **zero callers in all of Src** — the whole-tree grep returns exactly one hit, the definition (Research.lua:684). Data-embedded scripts, codegen, cheats and DLC are all covered by that textual sweep; unlike the R3 latents this cannot go live by new *data*, it needs new *calling code*. Carried as a §1.5 full replacement (37-line body copy) with per-game-update re-verification cost. Benefit in unmodded play: zero. The only keep-argument is mod-ecosystem support (another mod calling ReplaceTech gets the fixed counter) — the F29 precedent, but F29's carry cost is smaller. Recommendation: **delete** (rollback is one `git revert`, the F24 pattern); if kept, re-classify explicitly as mod-facing support, not a player fix. |
 
 **Explicitly NOT delete candidates despite R4/R3 findings:**
-- **F49(a)** (instant-track pipes palette) is R4, but it is one third of
-  `Fix_TrainMinors.lua` whose other two thirds — (c) connector-hex salvage
-  click, (d) stale `max_vehicles` — are live R2; the (a) hook is a cheap
-  additive post-wrapper that is a no-op for correctly-painted elements.
-  Optionally strip the (a) wrapper on the next touch of that file.
+- **F49(a)** (instant-track pipes palette) is R4, but it shares
+  `Fix_TrainMinors.lua` with (d) stale `max_vehicles` — live R2, play-proven
+  (PT-46 tail); the (a) hook is a cheap additive post-wrapper that is a no-op
+  for correctly-painted elements. Optionally strip the (a) wrapper on the
+  next touch of that file. *(Corrected by Challenge review: this bullet
+  originally also cited (c), whose "live R2" was asserted, wrong, and is now
+  tier I — closed `wontfix`, guard removed, `d03417b`.)*
 - **F27, F31, F43** are R3 with §1.1–§1.4 patches — exactly the
   "latent-but-cheap" class the decision rules keep.
 - **F29** is R3 on §1.5 replacements — kept per its existing mod-facing
@@ -96,7 +98,7 @@ Provenance: src-diff = found by reading source, no player report.
 | F45 | Fix_BrokenTrackSalvage | §1.4 | mixed | R2 (trains + meteor hit) | keep |
 | F46 | Fix_TrainCargoDumping | §1.5 | mixed | R2 (trains; PT-23 by play) | keep |
 | F47 | Fix_TrackSalvageRefund | §1.5+1.4 | src-diff | R2 (trains; PT-45 by play) | keep |
-| F49 | Fix_TrainMinors | §1.4 | mixed | (a) **R4** · (c)(d) R2 | keep module; (a) optional strip |
+| F49 | Fix_TrainMinors | §1.4 | mixed | (a) **R4** · (d) R2 play-proven · (c) **I — wontfix, guard removed** *(corrected by Challenge review)* | keep module on (d); (a) optional strip |
 | F50 | Fix_RocketDroneChurn | §1.5 | mixed | R2 (auto-mode toggle; PT-04 by play) | keep |
 | F51 | Fix_ShuttleTransportCache | §4b | player-report | R1 (PT-12 organic) | keep |
 | F52 | Fix_VacuumWalks | §1.5 | player-report | R1 (PT-13 by play) | keep |
@@ -871,6 +873,10 @@ included too — they carry the call-site enumerations and PT checks.
 
 ## Proposed FIX_POLICY §4 amendment (draft — not applied; user go-ahead required)
 
+**SUPERSEDED — the Challenge review 2026-07-30 (end of this file) revises this
+draft to also require a positive intent statement and the tier `I` vocabulary.
+Use that version.** Original draft kept for the record:
+
 Replace the current §4 ("Only fix proven defects") with:
 
 > ## 4. Only fix proven, reachable defects
@@ -953,3 +959,237 @@ substance lives on each entry:
   busy train passenger and inspecting `train.units` settles U → R2.
 - **F81 (rains)** — settling observation recorded (see its block); the
   planned PT-54 leg can carry it.
+
+---
+
+# Challenge review 2026-07-30
+
+The audit above carried a wrong verdict: **F49(c) was tabled "live R2" and
+used to justify keeping its module — it was designed behaviour.** The owner
+found it at the keyboard within hours (salvage cursor names its target for
+everything on the map; the station↔track handoff is seamless and exact; the
+propagation the fix nulled is what MAKES that boundary continuous; the guard,
+had it engaged, would have carved a dead band of red `Salvage` into it). F49(c)
+is closed `wontfix` by user decision and the guard is removed (`d03417b`).
+This section answers the challenge (`AUDIT_CHALLENGE_PROMPT.md`, deleted after
+recording): why the method produced a confident wrong answer, what else it did
+the same thing to, and what changes.
+
+## 1. The failure mode, stated precisely
+
+Three distinct failures stacked. Each alone would have been survivable;
+together they published a wrong verdict in the audit's own showcase module.
+
+**(i) Bundle inheritance.** `Fix_TrainMinors` bundles three lettered items.
+The lead reserved the module (pulling it from the tracks sweep), enumerated
+(a) exhaustively — and then let (c) and (d) wear tiers derived from nothing
+but the module header's own claims. A tier with no enumeration behind it is
+not a verdict; it is the fix author's hypothesis wearing the audit's clothes.
+Every lettered sub-item of a bundle is a separate audit subject. Enumerating
+one third of a module proves nothing about the other two thirds — that is
+exactly how this got through, in the one module that got the most attention.
+
+**(ii) The defectiveness presupposition, and why source made it worse, not
+better.** Every tier in R1/R2/R3/R4/U grades *how reachable* a defect is. All
+five presuppose the shipped behaviour is defective — and the audit never
+tested that presupposition; it inherited it from BUGS.md and from fix
+headers, which are the *author's* hypothesis about why the code is wrong.
+For most of the pack the presupposition is carried by hard evidence (a crash,
+a wrong number, dead code). F49(c) had none of those. Its "defect" was a
+claim about interface intent — and intent of that shape lives in facts the
+Lua does not carry: what the cursor names before the click, how input
+resolves to objects, whether two adjacent things are separately addressable
+at all. On such a claim, source reading does not return "uncertain." It
+returns a **confident wrong answer**, because the code path plainly exists,
+plainly executes, and reads exactly like every reachable defect the audit
+correctly confirmed. Source evidence is decisive for reachability and
+near-mute on intent; a method that grades only reachability will wave
+intended behaviour through as a live defect with full confidence, every time
+the author's hypothesis was wrong. That is the failure §4 must guard against.
+
+**(iii) The evidence base went stale during the audit itself.** Two commits
+landed while the sweeps were running: `c3c4383` (16:34 — PT-46 tail:
+F49(d) **PASS by play** on a live 305-sol colony, and an explicit note that
+*"F49(c) has no play coverage either"*) and `ba1e88b` (16:50 —
+PLAYTEST_HELP salvage-cursor facts, whose reference entry **names F49(c) as
+its immediate case**). The audit committed at 17:00 against its session-start
+snapshot and never re-read `git log` before publishing. The falsifying
+evidence — and the play-proof for (d) that the audit instead asserted — were
+both already in the repo when the verdict shipped. The project already owned
+this rule ("playtest commits land after docs are written; check git log
+first") and the audit applied it to BUGS.md's past, not to its own present.
+**Method rule going forward: re-run `git log` between assembling verdicts and
+publishing; anything landed mid-run is part of the evidence base.**
+
+## 2. Coverage self-audit — verdicts that had no enumeration of their own
+
+Sweep standard: does a block exist that enumerates *that item's* call sites
+and interrogates *its* preconditions? Result over every table row:
+
+- **Enumerated:** every module's primary item received its own block from a
+  subsystem sweep, including both halves of the multi-defect modules that
+  were audited as pairs (F07+F15, F29 a/b, F53 a/b, F57 a/b, F73 a/b, F81's
+  two modules, F12's two formulas, F47's two halves, both sanitizer passes).
+- **Unenumerated — tier worn with nothing behind it:** exactly two, both in
+  the module the lead kept for itself:
+  * **F49(c)** — asserted "live R2" from the module header; never audited;
+    wrong. Closed `wontfix` (designed behaviour), guard removed.
+  * **F49(d)** — asserted "live R2" from the same header. The tier happens to
+    survive its late enumeration (below), and the play-proof was already in
+    the repo (`c3c4383`) — which makes the assertion no better as method:
+    right by luck plus unread evidence.
+
+The asymmetry the challenge names is real and is now policy (see §4
+revision): the original prompt required an R4 to state its search, and let
+R1/R2 pass unstated. An unenumerated "keep, it's live" is exactly as
+unproven as an unstated R4 and more dangerous, because nobody ever revisits
+a keep.
+
+### F49(d) — the late enumeration (module's remaining live justification)
+
+- Defect: `TrackBase:GameInit` (Track.lua:62-67) computes `max_vehicles` from
+  the element count once; Track.lua:65 is the ONLY assignment in Src
+  (verified: whole-tree grep returns the class default StationsLink.lua:8,
+  the read :29, and the one assignment). A partial salvage shortens the
+  surviving track, which never re-runs GameInit — the cap stays sized to a
+  length the track no longer has (stale-HIGH only; the split-off track
+  recomputes correctly via deferred GameInit, the 2026-07-25 QA correction).
+- Consumers: `StationsLink:GetMaxVehicles` → `CanAddVehicle`
+  (StationsLink.lua:28-34), gating `AddTransportLink` (:36-39) — i.e. how
+  many trains the player can assign to the track. Live in all train play.
+- Intent: the formula visibly derives the cap from length, and the engine
+  recomputes it for the split-off half but not the survivor — an asymmetry
+  with no design reading, unlike (c). Intent tell: self-inconsistency.
+- Reachability: R2 — train play plus any partial salvage (same entry points
+  as F44/F47: TrackElement.lua:259-261, Construction.lua:2911). **Play-proven
+  before the audit shipped:** PT-46 tail (`c3c4383`), live colony, els=43
+  cap=2 → els=13 cap=1 across a partial salvage under the fix; formula
+  spot-checks 43→2, 113→4, 74→2, 13→1, 25→1; reload-stable. The PostLoadGame
+  sweep's *repair* of an already-stale save remains unproven (needs a
+  fix-vetoed save; TestKit probe queued — recorded honestly in `c3c4383`).
+- Verdict: **R2, keep.** The module now ships (a) + (d) after the (c)
+  removal; (d) alone carries the keep, with (a) as a cheap no-op rider.
+
+## 3. The source-blind-spot list — verdicts that need eyes, not greps
+
+Every verdict below depends on runtime or interface behaviour source cannot
+determine: hit-testing, affordances, cursor/confirmation feedback, engine
+placement, visual outcomes. For each, the single observation that settles it.
+None of these is currently believed wrong; all of them are believed on
+source-shaped evidence that F49(c) just demonstrated can lie.
+
+| Fix | What source cannot see | Settling observation |
+|-----|------------------------|----------------------|
+| F16 | whether a finished sphere site's actions are truly still offered and clickable in the live infopanel (enabled-state could differ from the IsActionEnabled read) | finish the excavation in a Spheres game; open the site's infopanel; click "Pierce the Shell"; watch whether drones engage a dead request |
+| F38 | whether units actually ROUTE through a destroyed tunnel's restored PF shortcut after load, or the engine declines it for other reasons | destroy a tunnel (meteor or salvage), save/load in vanilla, order a colonist/rover across — watch the route |
+| F34(d) | whether a mid-"Embark" drone swept by the landscape scatter is visibly yanked/broken or recovers silently | drop a landscape mark over a rocket actively loading drones; watch the boarding drone |
+| F74 | the ORIGINAL harm claim — does pushing cargo at an event rocket actually glitch it in vanilla? (PT-39 proved the fix refuses; nobody has observed the vanilla harm) | in vanilla, order an RC Transport onto a landed storybit trade rocket; observe |
+| F53(a) | whether a blocked "Colonistout" spot actually strands arrivals at runtime (engine placement/passability at the moment of disembark) | in vanilla, land a passenger rocket flush against a Universal Depot; watch the arrivals |
+| F06 | whether the Epilogue really arrives minimized and unpaused on current build (source-read of SA defaults; the pause layer is UI code) | reach the Mystery 10 finale; ignore the corner notification for one sol at fast-forward |
+| F26 | the visual claim itself (parallel volley vs jittered spread — cosmetic intent) | watch one Last War volley with the fix off, one with it on |
+| F22 | where the corrupted number is player-visible before the Martian Assembly stage | open the Last Transmission faction goals panel in a young politics-enabled colony |
+| F77 | the churn's player-visible magnitude (the fix's PT is already pending on the entry) | the queued PT: flap an extender during hub activity; watch fleet Idle-kicks with/without |
+| F11 | engine-side `TransferToMap` semantics (already recorded as U) | crew-gather a busy train passenger; inspect `train.units` |
+| F81b | the rain deadlock live (already recorded) | blocked `RainsDisasterThreads` activation thread on a vanilla save after a collision, or rain resuming ≤7 sols under the fix |
+
+## 4. The missing tier, reassignments, and the revised §4 amendment
+
+**New tier: `I` — Intentional.** The shipped behaviour is deliberate; the
+"defect" is the fix author's misreading; reachability grading is moot (the
+behaviour is typically fully reachable — that is what makes the misreading
+expensive). A fix against an `I` behaviour fights the design and must not
+ship. The project has used this category informally all along — F42, F56,
+F62, F63 were closed on exactly these grounds — the audit's vocabulary just
+failed to contain it, so nothing prompted the question.
+
+**Reassigned to `I`:** F49(c) (closed `wontfix`, guard removed). Re-scan of
+the full table for others: no further reassignments. The re-scan keyed on the
+challenge's criterion — src-diff provenance where the "defect" is behaviour a
+player must *notice and object to*, with none of the hard tells. Three
+entries carry a **flag (intent believed, not proven — tell is soft)** rather
+than a reassignment:
+
+- **F59** (freed housing doesn't notify homeless): the organic-vacancy lag
+  could be read as deliberate load-shedding; the tell is only the asymmetry
+  that every player-caused vacancy gets the fast path. Soft. Observation:
+  none crisp short of dev word; the fix is additive and cheap, keep-with-flag.
+- **F77** (extender flap rebuilds the hub): the full rebuild is explicitly
+  written code, not a slip; the defect claim rests on consequence (Idle-kick
+  of unrelated drones) plus the live symptom report. Kicking a fleet off its
+  tasks twice per power blip has no plausible design reading, but the tell is
+  consequence, not code. The pending PT doubles as the intent observation.
+- **F49(d)** (stale cap): intent tell is the recompute asymmetry —
+  self-inconsistency, moderate. Play-proof covers the mechanism; flag noted
+  in its block above.
+
+Entries whose intent was checked and PASSES on hard tells, for the record:
+F26 (dead local — `spawn_dir` computed and discarded), F72 (gate and list
+contradict each other), F20 (explicit dev comment), F16/F23/F28/F43/F75
+(dead validation), F18/F25 (self-contradiction within one preset), F02/F04/
+F07/F08/F12 (sibling contradiction), F36/F51/F52/F55/F78/F81 (player-reported
+harm).
+
+### Revised FIX_POLICY §4 amendment (supersedes the draft above — still not applied)
+
+> ## 4. Only fix proven, reachable, UNINTENDED defects
+>
+> Every fix links to a BUGS.md entry with file:line evidence, **a recorded
+> reachability tier, and a positive intent statement**. Before a fix ships:
+>
+> - **Intent first.** State why the shipped behaviour is unintended, citing
+>   at least one hard tell: (1) player-reported harm; (2) dead code / dead
+>   validation — a computed value discarded, a guard that cannot fire, a
+>   message nothing emits; (3) sibling contradiction — the same author wrote
+>   it correctly elsewhere; (4) self-contradiction within one function or
+>   preset; (5) an explicit dev comment. **No tell → the defect claim is a
+>   hypothesis, and it needs a keyboard observation before any fix is
+>   written.** UI/affordance behaviours — anything whose wrongness lives in
+>   hit-testing, cursor feedback, input modes, or whether two things are
+>   separately addressable — are in this class BY DEFAULT: source reading
+>   gives confident answers with no validity there (the F49(c) lesson). A
+>   behaviour found intentional is tier **I**: record it, close it, write no
+>   fix.
+> - **Then reachability.** Enumerate every call site of the defective
+>   function in Src; eliminate the ones that cannot execute the defective
+>   body (class chain, guards, early returns, template data); for each
+>   survivor name the concrete player action that produces the precondition.
+>   Record the tier: R1 live · R2 conditional · R3 latent-by-data · R4
+>   unreachable · U unknown (naming the observation that would settle it).
+> - **Symmetry of proof.** Every tier states its evidence — an unenumerated
+>   R1/R2 is exactly as unproven as an unstated R4, and more dangerous,
+>   because "keep, it's live" is the verdict nobody revisits. **Every
+>   lettered sub-item of a bundled fix is a separate audit subject**;
+>   enumerating one item proves nothing about its siblings.
+> - R1/R2 ship normally. **R3 ships only as a §1.1–§1.4 patch**; an R3 §1.5
+>   full replacement needs an explicit user decision (the F24 lesson). **R4
+>   does not ship**; record it `wontfix — unreachable` with the search that
+>   proved it. **U ships only with the settling observation queued** as a
+>   playtest item.
+> - A `tested` status proves reachability only if the playtest reached the
+>   state **by playing**; console surgery, `g_Consts` compression or `Cheat*`
+>   calls prove the fix, not the path. A state producible **only by
+>   console/debug injection is evidence for R4** (the PT-46 track lesson).
+> - **Evidence freshness:** re-check `git log` between assembling a verdict
+>   and recording it — playtest evidence lands continuously, and this
+>   project has now twice been burned by writing against a stale snapshot.
+> - No balance changes, no "improvements", no opinions — those belong in
+>   other mods. When intent is ambiguous, prefer the reading proven by
+>   sibling code in the same file (the F07/F08/F02 pattern).
+
+## 5. Shaken loose
+
+- **The F49 verdict-table row and the "NOT delete candidates" bullet above
+  were corrected in place** (marked "corrected by Challenge review"): the
+  module is now (a) R4 no-op rider + (d) R2 play-proven; (c) is tier I,
+  closed, code removed. The original lead-pass prose stands as the record of
+  what was claimed.
+- **The audit's "PT citations checked" claim gains a caveat:** those checks
+  ran against the session-start snapshot. Two commits (`c3c4383`, `ba1e88b`)
+  landed mid-audit; one of them contained a play-PASS the audit re-asserted
+  as an unproven tier, the other the facts that falsified a tabled verdict.
+- **F49(d)'s PostLoadGame sweep repair remains unproven** (idempotence shown,
+  repair not — needs a fix-vetoed save; TestKit probe queued, per `c3c4383`).
+- **The blind-spot list (§3) is standing work**: eleven verdicts currently
+  rest on source-shaped evidence for claims with runtime components. None is
+  suspected wrong; F49(c) is the proof that "not suspected" is not the same
+  as "checked".
