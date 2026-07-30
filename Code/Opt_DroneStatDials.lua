@@ -73,17 +73,19 @@ local SPEED_PERCENT = { ["1x (base)"] = 0, ["2x"] = 100, ["3x"] = 200, ["5x"] = 
 local CARRY_ADD     = { ["+0 (base)"] = 0, ["+1"] = 1, ["+2"] = 2 }
 
 -- Validate every target before installing anything; apply() reports failures.
--- Prop modifiability (HasModifiablePropScale) is deliberately NOT checked here:
--- the scale table fills during class processing, after mod code loads — the
--- reapply guards it at call time instead.
+-- Pre-flattening rules (ENGINE_FACTS, the F64 lesson — and this module's own
+-- first A/B leg 2026-07-29, which FAILed on checking Modifier.new here):
+-- a classdef exposes only members it declares ITSELF, so file scope may only
+-- check presence (Modifier declares data fields, `new` is inherited) and
+-- methods on their DECLARING class (SetLabelModifier is declared on
+-- LabelContainer itself, Lua/LabelContainer.lua:59). Capability checks that
+-- need the BUILT class (`Modifier:new`) and the modifiable-prop scale table
+-- live in the reapply guard, which runs post-build at msg time.
 local install_error
 do
-	local M = rawget(_G, "Modifier")
-	if type(M) ~= "table" or type(M.new) ~= "function" then
+	if type(rawget(_G, "Modifier")) ~= "table" then
 		install_error = "Modifier class not found (game update changed it?)"
 	end
-	-- SetLabelModifier is declared on LabelContainer itself
-	-- (Lua/LabelContainer.lua:59) — the declaring class, valid pre-flattening.
 	local LC = rawget(_G, "LabelContainer")
 	if not install_error
 			and (type(LC) ~= "table" or type(LC.SetLabelModifier) ~= "function") then
@@ -112,6 +114,10 @@ local function ReapplyDials()
 	local colony = rawget(_G, "UIColony")
 	if type(colony) ~= "table" or type(colony.SetLabelModifier) ~= "function" then
 		return
+	end
+	local M = rawget(_G, "Modifier")
+	if type(M) ~= "table" or type(M.new) ~= "function" then
+		return -- classes not built yet (never at msg time) or a game update
 	end
 	if not (rawget(_G, "HasModifiablePropScale")
 			and HasModifiablePropScale("move_speed")
