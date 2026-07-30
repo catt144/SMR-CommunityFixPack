@@ -67,6 +67,21 @@ console achievements + per-fix-disable disclosures (A4/B4/D1/D2). Docs
 restructured (this header, ENGINE_FACTS, SESSION_LOG, archives). Details:
 the newest SESSION_LOG leg.
 
+**NEW FINDING 2026-07-30 (live play) — F83, P2, mechanism PROVEN, nothing built.**
+Minimized story popups lose their callback across a save/load: the waiter is a
+real-time thread and the async popup context is not persisted, while the corner
+notification *is* — so after a reload the notification still opens, any choice
+closes it, and the callback never runs. Found via a dead **View** button on a
+founder popup (unrelated to F23/PT-44; not caused by this pack), isolated at the
+keyboard, and confirmed by a controlled quicksave/reload leg. Six of the seven
+affected call sites are cosmetic; **the seventh is `FirstAsteroid`, whose
+callback grants three Micro-G Auto Extractor prefabs that the popup's own text
+promises and `show_once` never re-offers.** That consequence is *inferred* from
+identical code shape and is NOT yet observed — **PT-58** is owed and gates any
+fix. Fix design is a **user decision** (recommended: decouple the asteroid grant
+from the popup via an additive `OnMsg.SpawnedAsteroid`; a general popup-waiter
+repair is not recommended). Full trail on the F83 entry.
+
 **Open user decisions:** Phase 4 go/no-go (core helpers, module merges,
 deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone

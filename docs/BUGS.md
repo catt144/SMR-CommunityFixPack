@@ -109,6 +109,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
+| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN (mechanism) | filed 2026-07-30 from live play — fix design is a USER DECISION; PT-58 owed (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -3482,6 +3483,136 @@ is cadence or a missing on-rejoin removal call. Cheap live tap once the updater
 is found. Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
+
+### F83 — Minimized story popups lose their callback across a save/load; First Asteroid silently withholds three promised prefabs (P2, PROVEN mechanism)  `[filed 2026-07-30 from live play — NOTHING BUILT, fix design is a user decision; PT-58 owed on the asteroid half]`
+
+**Found in play 2026-07-30**, mid-setup for PT-56. The tester got the
+`FirstFounderEnthusiast` popup ("When Life Gives You Lemons…", Samuel Hayden has
+the Enthusiast trait) as a corner notification, opened it, clicked **View** —
+and nothing happened. Note the popup is a *scan* announcement, not a trait-gain
+event (`CheckFirstColonistWithTrait` announces the first Founder who ALREADY has
+one of six traits), so **this is unrelated to F23/PT-44**. It is also not ours:
+the pack never references `WaitPopupNotification` for these presets,
+`ViewAndSelectObject`, `SelectObj` or `ViewObjectMars`.
+
+**Mechanism — proven end to end at the keyboard, same session.**
+1. **These popups ALWAYS start minimized.** `ShowPopupNotification` takes the
+   open-immediately branch only when `context.start_minimized == false`
+   (`Lua/UI/PopupNotification.lua:261`) — an explicit `== false`. No
+   `FirstFounder*` or `FirstAsteroid` preset defines the field and no call site
+   passes it, so it is `nil`; `nil == false` is false; every one of them takes
+   the else branch and becomes a corner notification.
+2. **The waiter is a REAL-TIME thread.** `CreateRealTimeThread(function()
+   WaitPopupNotification(…) end)` (`Lua/ColonyViability.lua:51`), and
+   `WaitPopupNotification` blocks in `WaitMsg(context.async_signal)`
+   (`PopupNotification.lua:293-306`).
+3. **Neither the thread nor the context survives a load.** Real-time threads are
+   not persisted, and `OnMsg.PersistSave` keeps only queue entries carrying a
+   `sync_popup_id`; these are async (`bPersistable` nil → `context.async_signal
+   = {}`), so the context is dropped from `g_PopupQueue` too.
+4. **The minimized NOTIFICATION does survive** — observed. So after a reload it
+   is still on screen and still clickable: `PressFunc` re-queues and opens the
+   popup, any choice runs `host:Close(i)` → `PopupNotificationEnd` →
+   `Msg(context.async_signal, i)` — **and nothing is listening.** The callback
+   never runs. The popup just closes.
+
+**Tester observations, 2026-07-30 (this is the evidence, in order):**
+- *Organic:* popup arrived, View clicked, nothing — no selection, no camera move.
+- *Isolation:* `ViewAndSelectObject(<the founder>)` called directly from the
+  console **worked** — camera jumped, colonist selected. So the view helper is
+  healthy and the failure is that the callback never delivered. (This also
+  killed the first hypothesis, that the colonist was inside a building.)
+- *Controlled repro, same session:* console `WaitPopupNotification` with the
+  identical preset, params and callback → corner notification → open → View →
+  **callback ran, camera jumped.** Machinery healthy live.
+- *The decisive leg:* same repro, notification left minimized across a quicksave
+  and load, then answered → **View dead.** Tester, verbatim: *"Correct view died
+  after a load."*
+
+**Scope — seven in-game call sites pass a callback** (`WaitPopupNotification`
+over `Lua/`; the two `PreGameMission.lua` tutorial calls pass a `host` parent,
+not a callback, and are excluded):
+
+| Call site | Preset | What the callback does |
+|---|---|---|
+| `Asteroids.lua:415` | FirstAsteroid | **grants 3 prefabs** |
+| `ColonyViability.lua:52` | FirstFounder\<trait\> | `ViewAndSelectObject` |
+| `ColonyViability.lua:173` | LastFounderDies | `ViewAndSelectObject` |
+| `ColonyViability.lua:185` | FirstFounderDiesOfOldAge | `ViewAndSelectObject` |
+| `ColonyViability.lua:199` | FirstColonistDeath | `ViewAndSelectObject` |
+| `ColonyViability.lua:216` | LastFounderLeavingMars | `ViewAndSelectObject` |
+| `ColonyViability.lua:260` | `class.popup_on_first` (status effects) | `ViewAndSelectObject` |
+
+Six are cosmetic — a dead View button on a story popup. **The seventh is not.**
+
+**The FirstAsteroid case — permanent, silent loss of a promised reward.**
+```lua
+WaitPopupNotification("FirstAsteroid", nil, nil, nil, function()
+    ColonyAddPrefabs("MicroGAutoExtractorExoticMinerals", 1, nil, MainCity)
+    ColonyAddPrefabs("MicroGAutoExtractorMetals", 1, nil, MainCity)
+    ColonyAddPrefabs("MicroGAutoExtractorRareMetals", 1, nil, MainCity)
+end)
+```
+- **The popup's own text promises it:** `<effect> Gain Micro-G Auto Extractor
+  Prefabs for every type of resource`
+  (`Data/PopupNotifications/PopupNotificationPreset-Asteroid.lua:36`).
+- The preset carries **`show_once = true`** (`:35`) and
+  `g_ShownPopupNotifications[preset]` is set the moment the notification is
+  opened — so once dismissed it never comes back.
+- `OnMsg.SpawnedAsteroid` runs the block only at `UIColony.asteroid_count == 1`
+  (`Asteroids.lua:412`). No retry, no second chance.
+- No alternate grant path found for those ids; the only other `AddPrefabs` of
+  them is `AutomaticMicroGExtractor.lua:15/25`, a different context (re-verify
+  before relying on it).
+
+Net: leave the First Asteroid corner notification alone, save, reload, then open
+it — the game tells you that you gained three prefabs, and you did not. Nothing
+reports the loss.
+
+**Intent — UNINTENDED, hard tell: self-contradiction.** The popup's own
+`<effect>` line promises a reward its delivery path can silently fail to grant;
+text and code disagree inside one feature. Secondary tell: the notification
+survives the load and keeps offering a **View** affordance that cannot function
+— a live control with a dead action. Not a design choice under any reading.
+
+**Reachability — R1 (live).** The minimized corner notification is the *only*
+presentation these popups get, and leaving one sitting for a while and then
+saving/reloading is ordinary play. The mechanism was reached organically first
+and only then reproduced from the console. **Honest caveat, recorded per the
+F49(c) rule:** the mechanism is proven on `FirstFounderEnthusiast`; the
+FirstAsteroid *consequence* is **inferred** from identical code shape (same
+thread pattern, same nil `start_minimized`, same non-persisted async context)
+and has **not** been observed. It needs its own keyboard observation before any
+fix ships.
+
+**Family:** the same trap as **F06** (Mystery 10's Epilogue arrives minimized by
+SA default and a one-shot `CrystalFlyAway` is missed while it sits) — and F06's
+audit note already says the minimized-by-default presentation makes it "easier
+to hit than this entry says". F06 repaired its own one-shot by re-broadcasting;
+F83 is the general case of the same shape. Also thematically adjacent to
+F81/F78/F82: this codebase drives state changes from specific code paths rather
+than from state, so anything that interrupts the path loses the change.
+
+**Fix options — USER DECISION, nothing built.**
+1. **Narrow, recommended:** decouple the FirstAsteroid grant from the popup —
+   an additive `OnMsg.SpawnedAsteroid` (FIX_POLICY §1.2) granting the three
+   prefabs once behind its own persistent flag, regardless of whether the popup
+   is ever answered. Smallest possible surface, repairs the only consequence
+   that costs a player anything, touches no shared UI machinery. Would also want
+   a one-shot `OnMsg.LoadGame` sweep for saves already past the moment (§3), if
+   a stranded case can be detected.
+2. **General:** re-arm stranded async popup waiters on load. Fixes all seven at
+   once but touches shared popup machinery, would rot on patches, and risks
+   double-firing callbacks. **Not recommended.**
+3. **The six cosmetic View buttons:** low value on their own. Reasonable to
+   document and leave, or to let option 2 carry them if it is ever taken.
+
+**PT-58 owed before any fix** (the settling observation): on a save approaching
+the first asteroid, leave the First Asteroid notification minimized, save,
+reload, answer it, then read
+`ColonyGetPrefabs("MicroGAutoExtractorMetals", MainCity)` — and compare against
+answering it without a reload. That turns the inference into a fact and gives
+the fix its A/B.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit) — B2 re-run pending]`
 **FIRST MEASURED A/B — PT-52 Trigger B2, 2026-07-29.** Controlled run on the
