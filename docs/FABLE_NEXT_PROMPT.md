@@ -64,6 +64,9 @@ AUDIT_FINDINGS); D06 iteration beyond knobs (design changes are user calls;
 the stat dials are BUILT — D09, 2026-07-29 late, range widened to 1x/2x/3x/5x
 by user call after the live no-clamp probe; PT-56 owed).
 D08 (extender overhaul) is speced in `DRONE_OVERHAUL_OPTIONS.md`, nothing built.
+**D10 (workshops: text repairs + capacity dial) is DECIDED and speced
+(2026-07-30, BUGS.md entry) — build it after PT-56 PASSes; not a decision.**
+Deferred decision recorded there: seniors-in-workshops (D07 interaction).
 Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 / Steam ≤1 MB), screenshots, Paradox portal console-publishing rules.
 
@@ -206,7 +209,17 @@ silent.
   the cycle covers the new persisted state).
 - **PT-56 — D09 stat dials** (checklist §2, ~5 min): baseline reads → 2x/+1
   → Apply → stacked reads → base → Apply → baseline again → stale-save
-  reconcile. PASS flips D09 to tested.
+  reconcile. PASS flips D09 to tested **and un-gates the D10 build** (the
+  workshops module reuses the same label-modifier dial machinery).
+- **D10 — workshops module BUILD (assistant, game-free, after PT-56 PASS):**
+  speced + user-approved 2026-07-30, full spec on the BUGS.md D10 entry —
+  T1 text repairs (workshop descriptions + Unemployed rollover gain the
+  Relaunched faction-approval fact; ≥10% dome unemployment costs -900..-3000
+  approval per faction clause) + T2 capacity dial (base/+50%/+100%, colony
+  label modifiers on the three template labels, max_workers AND
+  consumption_amount PAIRED — the pairing keeps per-worker cost vanilla).
+  Adds PT-57 (~7 min) at build time. Seniors-in-workshops deliberately
+  deferred (D07 interaction — own decision).
 - **DECISIONS owed (user):** F79 D-item or not; audit Phase 4 go/no-go; D08.
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.

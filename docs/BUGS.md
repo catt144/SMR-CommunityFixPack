@@ -87,6 +87,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28 — first A/B NULL 2026-07-29, B2 re-run pending (entry) |
 | D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 — PT-53 3-of-5 PASS 2026-07-29, A/E owed (entry) |
 | D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | built 2026-07-29 — PT-56 owed (entry) |
+| D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30 — build gated on PT-56 (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -3452,6 +3453,70 @@ elapsed repair time. **Dial range widened from the DECISION's 1.0x/1.5x/2.0x to
   capability check moved to the reapply guard. (2) `CurrentModOptions` is
   per-mod-env — the probe's first version wrote the TestKit's own options
   object (ENGINE_FACTS fact added).
+
+### D10 — Workshops: capacity can't scale late-game; unemployment's real cost is invisible (design, med)  `[speced 2026-07-30, user-approved same day — BUILD GATED ON PT-56 PASS (the capacity dial reuses D09's label-modifier machinery; no point stacking a second dial module on machinery whose first live check hasn't run). One Opt_ module, planned PT-57]`
+**Problem (research session 2026-07-30, all source-verified).** The three
+vocation Workshops (Art/VR/Biorobotics, build category "Workshops") are the
+designed late-game employment+resource sink: they produce nothing, consume
+Polymers/Electronics/MachineParts, and pay workers **+10 Morale**
+(`WorkInWorkshopMoraleBoost` = 10000, `__const.lua:1737-1743`, applied
+`Colonist.lua:3975-3976`) and up to **+5 Comfort** × performance per fulfilled
+shift (`WorkInWorkshopComfortBoost` = 5000, applied `ArtWorkshop.lua:24-27`).
+Two failures:
+1. **Scale:** 6-10 workers/shift (VR 10, Biorobotics 6) against late-game
+   unemployment in the hundreds — the "solution" is carpeting domes with
+   copies.
+2. **Legibility:** unemployment has NO colonist-level penalty
+   (`StatusEffect_Unemployed` is icon-only, `StatusEffects.lua:74-81`; zero
+   stat modifiers in Colonist.lua) — but in Relaunched EVERY faction def
+   carries unemployment clauses, e.g. Workers' Party `CollectiveUnemployment`:
+   a dome ≥10% unemployed costs **-900..-3000 approval**
+   (`WorkersParty.lua:103-121`). Nothing in the building descriptions, the
+   Unemployed rollover, or the build menu says any of this — the community
+   still repeats the original game's "no penalty, ignore it" advice, and the
+   Workshops flyout sits over the Stores row labeled only "Art Workshop",
+   reading as a store variant (user observation, screenshot on file).
+
+**Spec — one opt-in module (`Opt_WorkshopsRole`), two halves:**
+- **T1 — text repairs (default-on within the module, vetoable):** append the
+  real mechanics to the three workshop template descriptions (T(8821)/
+  T(8818)/T(8827)) — the ≥10% unemployment faction-approval cost and the
+  sink role — and to the `StatusEffect_Unemployed` rollover
+  (`StatusEffects.lua:76-77`, classdef field patch). Template descriptions
+  patch post-DataLoaded (F75 latch; TechDescriptionBuilding/MultipleSuns
+  precedents). New strings via `Untranslated()` (FIX_POLICY §6). Repairs
+  actively-misleading text — same family as F65's description drift.
+  *Build-time option, default OFF: "Vocation:" display-name prefix to break
+  the store association — cosmetic, user tunes at build.*
+- **T2 — capacity dial (Mod Options choice, D09 pattern):** "Workshop
+  capacity: base / +50% / +100%" → colony label modifiers (module-owned ids)
+  on the three template-id labels `ArtWorkshop`/`VRWorkshop`/
+  `BioroboticsWorkshop`, **paired props**: `max_workers` AND
+  `consumption_amount`, same percent. The pairing is load-bearing:
+  consumption is fraction-of-capacity × `consumption_amount`
+  (`ArtWorkshop.lua:35-39`), so raising capacity alone silently CUTS
+  per-worker resource cost; pairing keeps it exactly vanilla. Both props are
+  modifiable (`consumption_amount`: `HasConsumption.lua:47` `modifiable =
+  true`; `max_workers`: the workshops' own upgrade1 modifies it, so
+  live-change incl. worker unassignment on dial-down is a vanilla path).
+  Precedent for template-id colony labels: the vanilla WindTurbine fixup
+  (`WindTurbine.lua:78-88`) and this pack's SaveSanitizer restore. Reconcile
+  on ApplyModOptions/CityStart/PostLoadGame; base = modifiers removed by id =
+  byte-vanilla; benign-residue uninstall story identical to D09.
+- **Why a dial and not base-stat/tech changes (user's call, 2026-07-30):**
+  a flat base increase would distort the mid-game era where 6-10 slots is
+  meaningful; a new TechPreset drags in research-UI integration and a bigger
+  playtest. The dial defaults to base and is account-scoped player intent.
+- **Deferred (recorded, NOT in this module):** seniors-in-workshops
+  ("vocation in retirement") — needs work-eligibility surgery and interacts
+  with D07's employed-senior exemption (senior workshop workers would stop
+  cohort-migrating). Own decision + own playtest when wanted.
+
+**Planned playtest (PT-57, added to the checklist at build time):** tooltip
+reads (T1); dial infopanel check on a live workshop (slots and consumption
+shift together, +50%/+100%); dial-down mid-shift → excess workers unassigned
+cleanly; stale-save reconcile (PT-56 step-4 shape). Estimated one ~7-minute
+sitting.
 
 ## Candidates under investigation
 

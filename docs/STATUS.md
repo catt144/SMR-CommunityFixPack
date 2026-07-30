@@ -41,7 +41,11 @@ deactivation surface — AUDIT_FINDINGS.md PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
 overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
 BUILT (D09); the structural choice stays gated on the B2 re-run); F79
-D-item or not; D08.
+D-item or not; D08; seniors-in-workshops (deferred from D10, own decision).
+**Decided, build queued:** D10 workshops module (speced + user-approved
+2026-07-30, BUGS.md entry — text repairs + capacity dial; build gated on
+PT-56 PASS). Unfiled candidate: Universal Tunnel description omits its
+life-support bridging (description drift, one-line text patch — user call).
 
 **A/B probe state (FRESH — post-D09 unattended set, completed 2026-07-30
 after the user flipped the six toggles OFF):** **77 probes** (the D09 dial
@@ -71,7 +75,8 @@ proves the dials work independently of the toggles. Pre-D09 reference set
 **Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** live-toggle
 re-verify of the three reworked Opt_ modules (PT-55 — both directions, incl.
 mid-session FIRST enable; **the six toggles are OFF as of 2026-07-30 — PT-55's
-required starting state is SET, go straight in**); PT-56 D09 dials;
+required starting state is SET, go straight in**); PT-56 D09 dials (PASS
+also un-gates the D10 workshops-module build);
 PT-54 wedge watchdog; PT-52
 Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
 tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.

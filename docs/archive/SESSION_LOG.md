@@ -8,6 +8,43 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## Curiosity sitting → D10 speced: tunnel water, workshop research, unemployment truth — 2026-07-30
+
+Assisted research session (game-free), three questions from the user, all
+answered from Src with community cross-checks; ended in a new speced D-item.
+
+- **"Can water reach an isolated mountain base?" — YES, through the Universal
+  Tunnel, and the UI hides it.** `UniversalTunnel` → `TrackTunnelBase` →
+  `TunnelBase` = `ElectricityGridObject` + `LifeSupportGridObject`;
+  `GameInit` merges BOTH grids (Tunnel.lua:6,87-88; re-merged on track power
+  reconnect, TrackTunnel.lua:12-17). Tracks/stations bridge electricity ONLY
+  (Track.lua:112-123) — which is why players see power cross but never water.
+  Recipe: pipes to both portals. The buildable Universal Tunnel's description
+  says "tracks and power grids" — the hidden legacy Tunnel template still
+  carries the correct "power and life support grids" text (description drift,
+  F65 family). **Unfiled candidate** (user call): one-line description patch.
+- **"What are 'workshops'?" — the three vocation buildings** (Art/VR/
+  Biorobotics, build category "Workshops"), NOT factories: produce nothing,
+  consume Polymers/Electronics/MachineParts per fraction-of-capacity, pay
+  +10 Morale / +5 Comfort×performance. Community's three-camp unemployment
+  argument adjudicated from code: no colonist-level penalty (icon-only
+  status effect) — but **in Relaunched every faction def punishes ≥10% dome
+  unemployment** (Workers' Party -900..-3000, WorkersParty.lua:103-121), so
+  the inherited "ignore it, no penalty" advice is now wrong at colony level.
+- **Design verdict on workshops** (user asked for honest): sound core loop,
+  undersized (6-10 workers/shift), and illegible — the faction cost appears
+  nowhere in workshop/unemployment UI text.
+- **D10 SPECED + user-approved:** one Opt_ module — T1 text repairs
+  (descriptions + Unemployed rollover state the faction cost) + T2 capacity
+  dial (base/+50%/+100%, D09 label-modifier pattern, `max_workers` +
+  `consumption_amount` PAIRED so per-worker cost stays vanilla —
+  consumption is fraction-of-capacity × amount, ArtWorkshop.lua:35-39).
+  **Build gated on PT-56 PASS** (same machinery, first live check first).
+  Seniors-in-workshops deferred as its own decision (D07 employed-senior
+  exemption interaction). Full spec: BUGS.md D10.
+
+---
+
 ## D09 stat dials: decided → probed → range widened → BUILT → A/B clean, one evening — 2026-07-29 latest
 
 **The whole D09 lifecycle ran in a single assisted evening.** During live play
