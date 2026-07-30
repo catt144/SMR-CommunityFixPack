@@ -12,20 +12,20 @@ model-specific.)
 
 **Build state: 74 registered modules — 68 active by default, 6 opt-in via
 Options → Mod Options (D05, `tested`). Everything committed and pushed.**
-**The owed pre-flight A/B pair RAN 2026-07-29 late — no A/B is owed and the
-code gate is CLEAR.** Fresh numbers (76 probes): baseline **1/60/15/0** ·
-all-six-toggles **66/0/10/0 at 74/74 active**; log clean in both legs, all
-engine errors present in both. The audit-remediation Code/ changes (veto
-re-checks, Opt_ file-scope installs, 00_Core reconciler, MeteorStormWedge flag
-clear) are now probe-run, not just parse-swept. **The pair earned its keep:**
-all three wave-6 probes had been silently reporting SKIP (they ran every
-assertion then fell off the end of `run()` with no verdict; `SMRTest.Run` turns
-nil into SKIP), so wave 6's automated coverage was imaginary until the repair
-(TestKit `d701595`) — the fixes themselves were correct throughout. **One
-harness item stays owed:** a true default-config leg (all six toggles OFF,
-expect ~68/74). The account's six toggles are currently ALL ON and are
-account-persistent; `SMRFixPack_Optional` can only force modules ON, so that
-leg needs them toggled off by hand first, then one ~70 s unattended run.
+**The owed pre-flight A/B set RAN IN FULL 2026-07-29 late — nothing is owed to
+the harness and the code gate is CLEAR.** Fresh numbers (76 probes): baseline
+**1/60/15/0** · default config **61/0/15/0 at 68/74** · all-six-toggles
+**66/0/10/0 at 74/74**. Log clean in every leg; all four engine error
+signatures appear in both halves of the pair. The audit-remediation Code/
+changes (veto re-checks, Opt_ file-scope installs, 00_Core reconciler,
+MeteorStormWedge flag clear) are now probe-run, not just parse-swept. **The set
+earned its keep:** all three wave-6 probes had been silently reporting SKIP
+(they ran every assertion then fell off the end of `run()` with no verdict;
+`SMRTest.Run` turns nil into SKIP), so wave 6's automated coverage was
+imaginary until the repair (TestKit `d701595`) — the fixes themselves were
+correct throughout. **Account state:** all six Mod Options toggles were left
+**OFF** after the default leg (account-persistent) — that is PT-55's required
+starting state, so do not assume any optional module is on.
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
@@ -138,10 +138,10 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **~~PRE-FLIGHT A/B RunAll pair~~ DONE 2026-07-29 late** — 1/60/15/0 baseline
-  vs 66/0/10/0 at 74/74; wave-6 probe repair landed in the TestKit. The only
-  harness leg still owed is the **true default-config leg** (six toggles OFF,
-  ~68/74) — cheap, but the user must turn the toggles off first.
+- **~~PRE-FLIGHT A/B RunAll pair~~ DONE IN FULL 2026-07-29 late** — three legs
+  (baseline 1/60/15/0 · default 61/0/15/0 at 68/74 · all-toggles 66/0/10/0 at
+  74/74), wave-6 probe repair landed in the TestKit. Nothing owed to the
+  harness; the next A/B is owed only when new code lands.
 - **~~AUDIT_FIX_PROMPT~~ DONE 2026-07-29** — AUDIT_FINDINGS Phases 1-3 all
   landed (veto bypasses, opt-module first-enable repair, error-status
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
@@ -309,23 +309,28 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
 - Opt-in leg mechanism (proven): temporary `Code/97_OptInLeg.lua` in the FIX
   PACK listed right after 00_Core, setting the `SMRFixPack_Optional` table
   (the OptionEnabled bridge ORs it with the saved Mod Options toggles).
-  Delete it after the leg. NOTE: the user's own Mod Options toggles are
-  account-persistent and will ALSO be on during legs — either ask the user to
-  toggle them off first for a true default-config leg, or run with toggles
-  as-is and compare against the matching expectation.
+  Delete it after the leg. **The bridge is one-way: it can only force a module
+  ON, never off** (OptionEnabled ORs the table with the saved toggles), and the
+  user's own Mod Options toggles are account-persistent and apply during legs.
+  So ALWAYS read the leg's own `fix pack present: N/74 fixes active` line to
+  learn which config you actually measured — and a true default-config leg
+  (68/74) requires the user to turn the six toggles off by hand first. Proven
+  2026-07-29: the "default" leg came up 74/74 because all six were on.
 - **TestKit `Code/91_Stress.lua` (v2, lifecycle tracing)** — the drone stress
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — FRESH (2026-07-29 late, 76 probes):** baseline
-  (`code` list emptied) **1 PASS / 60 FAIL / 15 SKIP / 0 ERROR**; fixed with
-  all six toggles ON **66 / 0 / 10 / 0 at 74/74 active**. The 10 SKIPs are 9
-  `[install]` retail-sandbox probes + TechDescriptionBuilding. Baseline's
+- **Expected numbers — FRESH (2026-07-29 late, 76 probes, all three legs run):**
+  baseline (`code` list emptied) **1 / 60 / 15 / 0**; default config, six
+  toggles OFF **61 / 0 / 15 / 0 at 68/74**; all six toggles ON
+  **66 / 0 / 10 / 0 at 74/74**. The 10 SKIPs are 9 `[install]` retail-sandbox
+  probes + TechDescriptionBuilding; the default leg's extra 5 are the
+  opt-module probes reporting `inactive (opt-in)` — **five, not six, because
+  D06 has no probe of its own** (the stress harness covers it). Baseline's
   1 PASS = FactionFundingCheck canary; the OptionsMenu probe (D05) asserts all
   six toggle wirings and FAILs baseline by design. The rains probe does NOT
   skip on the synthetic map — the harness builds a colony, so `HasGame()` is
-  true. **A true default leg (six toggles OFF) has not been run since wave 6;**
-  the last one, pre-wave-6, was 58/0/15/0 at 65/71.
+  true.
 - **Probe-authoring trap (cost wave 6 its coverage, 2026-07-29):** a probe
   whose `run` falls off the end returns nil, and `SMRTest.Run` turns nil into
   **SKIP with an empty message** (`00_TestCore.lua:243`) — it looks like a

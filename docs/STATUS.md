@@ -31,28 +31,31 @@ deactivation surface — AUDIT_FINDINGS.md PLAN); D01 standing-export half
 overhaul stat dials + structural choice (DRONE_OVERHAUL_OPTIONS.md DECISION
 section, gated on the B2 re-run).
 
-**A/B probe state (fresh 2026-07-29 late — the owed post-wave-6 pair RAN):**
-**76 probes.** Baseline (`code` list emptied) **1 PASS / 60 FAIL / 15 SKIP /
-0 ERROR**; fixed with all six optional toggles ON **66 PASS / 0 FAIL / 10 SKIP
-/ 0 ERROR at 74/74 active**. Baseline's 1 PASS is the FactionFundingCheck
-canary; the 10 SKIPs are 9 `[install]` retail-sandbox probes + the
-TechDescriptionBuilding no-description case. Log clean both legs — no
-`[CommunityFixPack]` inactive/error lines, no error naming our `Code/`, and the
-only engine errors appear in BOTH legs. **The pair caught a real defect:** all
-three wave-6 probes had been silently reporting SKIP (missing PASS verdict —
-TestKit `d701595`), so wave 6 had no genuine automated coverage until this run;
-the fixes themselves were correct throughout. Detail: the newest SESSION_LOG leg.
+**A/B probe state (fresh 2026-07-29 late — the owed post-wave-6 set RAN in
+full; nothing owed to the harness):** **76 probes**, all three legs clean.
 
-**Still owed on the harness:** a **true default-config leg** (all six optional
-modules OFF, expect ~68/74 active). The account's Mod Options toggles are
-currently **all six ON** and are account-persistent, and the pre-load
-`SMRFixPack_Optional` table can only force modules ON — so this leg needs the
-six toggled off by hand first, then one ~70 s unattended run.
+| Leg | Active | Result |
+|---|---|---|
+| Baseline (`code` list emptied) | — | **1 PASS / 60 FAIL / 15 SKIP / 0 ERROR** |
+| Fixed, default config (six toggles OFF) | 68/74 | **61 / 0 / 15 / 0** |
+| Fixed, all six toggles ON | 74/74 | **66 / 0 / 10 / 0** |
+
+Baseline's 1 PASS is the FactionFundingCheck canary. The 10 SKIPs are 9
+`[install]` retail-sandbox probes + TechDescriptionBuilding; the default leg's
+extra 5 are the opt-module probes reporting `inactive (opt-in)` — D06 has no
+probe of its own by design (the stress harness covers it), which is why five,
+not six. Log clean in all legs: no `[CommunityFixPack]` error/disabled lines,
+no error naming our `Code/`, and the four engine error signatures appear in
+BOTH halves of the pair. **The set caught a real defect:** all three wave-6
+probes had been silently reporting SKIP (missing PASS verdict — TestKit
+`d701595`), so wave 6 had no genuine automated coverage until this run; the
+fixes themselves were correct throughout. Detail: the newest SESSION_LOG leg.
 
 **Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** live-toggle
 re-verify of the three reworked Opt_ modules (PT-55 — both directions, incl.
-mid-session FIRST enable; note the six toggles are currently ON, so PT-55
-needs them turned off before it starts); PT-54 wedge watchdog; PT-52
+mid-session FIRST enable; **all six toggles were set OFF 2026-07-29 late for
+the default-config leg, which is exactly PT-55's required starting state**);
+PT-54 wedge watchdog; PT-52
 Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
 tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.
 

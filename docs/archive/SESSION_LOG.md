@@ -21,6 +21,7 @@ TestKit defect that had made wave 6's automated coverage imaginary.
 | Baseline (fix pack `code` list emptied) | 21.21.01 | **1 PASS, 60 FAIL, 15 SKIP, 0 ERROR** |
 | Fixed, all six toggles ON | 21.22.35 | 63 PASS, 0 FAIL, **13** SKIP, 0 ERROR — 74/74 active |
 | Fixed, re-verify after the probe repair | 21.25.56 | **66 PASS, 0 FAIL, 10 SKIP, 0 ERROR** — 74/74 active |
+| Fixed, **default config** (six toggles OFF) | 21.36.51 | **61 PASS, 0 FAIL, 15 SKIP, 0 ERROR** — 68/74 active |
 
 **76 probes now** (was 73). Baseline's 1 PASS is the FactionFundingCheck
 canary, as always; all three wave-6 probes FAIL in baseline as designed —
@@ -55,14 +56,25 @@ all present in BOTH legs and none ours: 48× `Flight.lua:465 objects_to_mark`,
 baseline, 3× each in the fixed leg — each leg generates a different random map,
 so per-signature counts vary; no new signature appeared).
 
-**Account-state fact worth carrying:** the fixed legs came up **74/74 active**,
-i.e. all six optional modules were already ON from the account's saved Mod
-Options toggles (they are account-persistent, and no `SMRFixPack_Optional`
-override was in play — the leg's temp file was never listed in metadata).
-So the middle/final legs ARE the all-toggles leg. **A true default-config leg
-(all six OFF, expected ~68/74 active) was NOT run** and stays owed; it needs
-the user to toggle the six off first, since the pre-load override table can
-only force modules ON, never off.
+**Account-state fact worth carrying:** the first fixed legs came up **74/74
+active** — all six optional modules were already ON from the account's saved
+Mod Options toggles (they are account-persistent, and no `SMRFixPack_Optional`
+override was in play; the leg's temp file was never listed in metadata). So
+those legs ARE the all-toggles leg. The user then turned all six OFF at the
+main menu and the **default-config leg** ran: **68/74 active, 61/0/15/0**, with
+the pack reporting all six `inactive (opt-in module, off by default)`. That
+leg had to be done by hand because the pre-load override table can only force
+modules ON, never off. **The A/B set is therefore complete — nothing is owed
+to the harness.**
+
+**Cross-leg arithmetic checks out exactly.** All-toggles 66/10 vs default
+61/15: the difference is precisely the five opt-module probes
+(ClassicRockets, AcknowledgedWarnings, ResidencyControl, MultipleSuns,
+CohortHousing) moving PASS → SKIP. Five, not six, because **D06 has no probe
+of its own by design** — the stress harness and PT-52 cover it. Against the
+pre-wave-6 default leg (58/0/15/0 at 65/71): +3 PASS = the three repaired
+wave-6 probes, SKIP identical at 15, active 65 → 68, total 71 → 74. The
+toggles were left OFF afterwards, which is PT-55's required starting state.
 
 **Harness discipline held:** `metadata.lua` was restored from a saved copy and
 hash-verified byte-identical (`7C352189…`), the temporary `Code/97_OptInLeg.lua`
