@@ -31,16 +31,33 @@ deactivation surface — AUDIT_FINDINGS.md PLAN); D01 standing-export half
 overhaul stat dials + structural choice (DRONE_OVERHAUL_OPTIONS.md DECISION
 section, gated on the B2 re-run).
 
-**Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** pre-flight A/B
-RunAll pair (OWED since wave 6; expected numbers stale until it runs);
-live-toggle re-verify of the three reworked Opt_ modules (both directions,
-incl. mid-session FIRST enable — new since the audit fix); PT-54 wedge
-watchdog; PT-52 Trigger B + the B2 re-run on the v2 stress harness; PT-53
-A/E halves; PT-46 tail; PT-20 save/remove/load incl. wave-6 persisted
-state; PT-21.
+**A/B probe state (fresh 2026-07-29 late — the owed post-wave-6 pair RAN):**
+**76 probes.** Baseline (`code` list emptied) **1 PASS / 60 FAIL / 15 SKIP /
+0 ERROR**; fixed with all six optional toggles ON **66 PASS / 0 FAIL / 10 SKIP
+/ 0 ERROR at 74/74 active**. Baseline's 1 PASS is the FactionFundingCheck
+canary; the 10 SKIPs are 9 `[install]` retail-sandbox probes + the
+TechDescriptionBuilding no-description case. Log clean both legs — no
+`[CommunityFixPack]` inactive/error lines, no error naming our `Code/`, and the
+only engine errors appear in BOTH legs. **The pair caught a real defect:** all
+three wave-6 probes had been silently reporting SKIP (missing PASS verdict —
+TestKit `d701595`), so wave 6 had no genuine automated coverage until this run;
+the fixes themselves were correct throughout. Detail: the newest SESSION_LOG leg.
 
-**Newest leg:** `docs/archive/SESSION_LOG.md` → "Audit remediation session —
-2026-07-29" (the disaster-system leg sits below it).
+**Still owed on the harness:** a **true default-config leg** (all six optional
+modules OFF, expect ~68/74 active). The account's Mod Options toggles are
+currently **all six ON** and are account-persistent, and the pre-load
+`SMRFixPack_Optional` table can only force modules ON — so this leg needs the
+six toggled off by hand first, then one ~70 s unattended run.
+
+**Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** live-toggle
+re-verify of the three reworked Opt_ modules (PT-55 — both directions, incl.
+mid-session FIRST enable; note the six toggles are currently ON, so PT-55
+needs them turned off before it starts); PT-54 wedge watchdog; PT-52
+Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
+tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.
+
+**Newest leg:** `docs/archive/SESSION_LOG.md` → "Pre-flight A/B pair —
+2026-07-29 late" (the audit-remediation and disaster-system legs sit below it).
 
 ## What this project is
 

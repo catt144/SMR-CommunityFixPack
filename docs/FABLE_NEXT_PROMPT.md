@@ -1,4 +1,4 @@
-# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-29, post-audit)
+# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-29, post-pre-flight)
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks the model per task and everything here works identically on
@@ -8,22 +8,24 @@ file goes stale the moment another session commits. (The filename keeps its
 historical FABLE_ prefix so existing references stay valid — nothing in it is
 model-specific.)
 
-## Where the project stands (2026-07-29, end of the audit-REMEDIATION session — AUDIT_FINDINGS Phases 1-3 all landed)
+## Where the project stands (2026-07-29 late, after the pre-flight A/B pair — AUDIT_FINDINGS Phases 1-3 landed earlier the same day)
 
 **Build state: 74 registered modules — 68 active by default, 6 opt-in via
 Options → Mod Options (D05, `tested`). Everything committed and pushed.**
-Wave 6 (2026-07-29 post-QA: `Fix_DisasterPredictionLeak`,
-`Fix_MeteorStormWedge`, `Fix_RainsDeadlock`) postdates the last A/B pair, so
-**a pre-flight A/B RunAll pair IS owed** before any further code lands. The
-last fresh pair (2026-07-28 late, post-D07, 73 probes) was baseline
-1/57/15/0 · all-six-toggles 63/0/10/0 at 71/71 applied; wave 6 adds three
-modules (denominators move to /74) and the wave-6 probes
-(`SMRTest.DisasterPredictionLeak` / `MeteorStormWedge` / `RainsDeadlock`, the
-rains one needs a loaded colony) — record the fresh pair's numbers in the
-STATUS header + a SESSION_LOG leg and update the expected-numbers bullet
-below when it runs. Note the audit remediation touched Code/ (veto re-checks,
-Opt_ file-scope installs, 00_Core reconciler, MeteorStormWedge flag clear) —
-all parse-swept, none probe-run yet, one more reason the pair comes first.
+**The owed pre-flight A/B pair RAN 2026-07-29 late — no A/B is owed and the
+code gate is CLEAR.** Fresh numbers (76 probes): baseline **1/60/15/0** ·
+all-six-toggles **66/0/10/0 at 74/74 active**; log clean in both legs, all
+engine errors present in both. The audit-remediation Code/ changes (veto
+re-checks, Opt_ file-scope installs, 00_Core reconciler, MeteorStormWedge flag
+clear) are now probe-run, not just parse-swept. **The pair earned its keep:**
+all three wave-6 probes had been silently reporting SKIP (they ran every
+assertion then fell off the end of `run()` with no verdict; `SMRTest.Run` turns
+nil into SKIP), so wave 6's automated coverage was imaginary until the repair
+(TestKit `d701595`) — the fixes themselves were correct throughout. **One
+harness item stays owed:** a true default-config leg (all six toggles OFF,
+expect ~68/74). The account's six toggles are currently ALL ON and are
+account-persistent; `SMRFixPack_Optional` can only force modules ON, so that
+leg needs them toggled off by hand first, then one ~70 s unattended run.
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
@@ -136,10 +138,10 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **PRE-FLIGHT A/B RunAll pair (unattended, ~5 min)** — wave 6 postdates the
-  last pair. Run it before any further code lands; record fresh numbers
-  (expect /74 denominators + the wave-6 probes) in STATUS and update this
-  prompt's expected-numbers bullet.
+- **~~PRE-FLIGHT A/B RunAll pair~~ DONE 2026-07-29 late** — 1/60/15/0 baseline
+  vs 66/0/10/0 at 74/74; wave-6 probe repair landed in the TestKit. The only
+  harness leg still owed is the **true default-config leg** (six toggles OFF,
+  ~68/74) — cheap, but the user must turn the toggles off first.
 - **~~AUDIT_FIX_PROMPT~~ DONE 2026-07-29** — AUDIT_FINDINGS Phases 1-3 all
   landed (veto bypasses, opt-module first-enable repair, error-status
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
@@ -315,13 +317,22 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — STALE, refresh with the queued pre-flight pair:** the
-  last recorded pair (73 probes, pre-wave-6) was baseline 1/57/15/0 · fixed
-  default 58/0/15/0 (65/71 active) · all six toggles 63/0/10/0 (71/71).
-  Wave 6 moves denominators to /74 (68 default-active) and adds the wave-6
-  probes; the rains probe needs a loaded colony and may SKIP in the synthetic
-  legs. Baseline's 1 PASS = FactionFundingCheck canary; the OptionsMenu
-  probe (D05) asserts all six toggle wirings and FAILs baseline by design.
+- **Expected numbers — FRESH (2026-07-29 late, 76 probes):** baseline
+  (`code` list emptied) **1 PASS / 60 FAIL / 15 SKIP / 0 ERROR**; fixed with
+  all six toggles ON **66 / 0 / 10 / 0 at 74/74 active**. The 10 SKIPs are 9
+  `[install]` retail-sandbox probes + TechDescriptionBuilding. Baseline's
+  1 PASS = FactionFundingCheck canary; the OptionsMenu probe (D05) asserts all
+  six toggle wirings and FAILs baseline by design. The rains probe does NOT
+  skip on the synthetic map — the harness builds a colony, so `HasGame()` is
+  true. **A true default leg (six toggles OFF) has not been run since wave 6;**
+  the last one, pre-wave-6, was 58/0/15/0 at 65/71.
+- **Probe-authoring trap (cost wave 6 its coverage, 2026-07-29):** a probe
+  whose `run` falls off the end returns nil, and `SMRTest.Run` turns nil into
+  **SKIP with an empty message** (`00_TestCore.lua:243`) — it looks like a
+  deliberate skip, not a missing verdict. Baseline legs never catch it (the
+  `FixMissing` guard returns FAIL before the tail runs), so only a FIXED leg
+  can. Every probe needs an explicit `return "PASS", …`; grep
+  `Register(` vs `return "PASS"` counts per wave file to audit this.
 - **TestKit stand-in probe corollary (D07 leg):** WithGlobals stubs CANNOT
   reach a game file that localizes the global at load time
   (`local IsValid = IsValid`, Colonist.lua:5) — a probe driving shipped code

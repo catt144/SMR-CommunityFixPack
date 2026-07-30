@@ -8,6 +8,68 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## Pre-flight A/B pair — 2026-07-29 late (unattended; the owed post-wave-6 re-baseline)
+
+The A/B pair owed since wave 6 RAN, and it earned its keep: it caught a
+TestKit defect that had made wave 6's automated coverage imaginary.
+
+**Legs** (all unattended via `-smrautorun`, ~70 s each, logs in
+`%AppData%\Surviving Mars Relaunched\logs`):
+
+| Leg | Log | Result |
+|---|---|---|
+| Baseline (fix pack `code` list emptied) | 21.21.01 | **1 PASS, 60 FAIL, 15 SKIP, 0 ERROR** |
+| Fixed, all six toggles ON | 21.22.35 | 63 PASS, 0 FAIL, **13** SKIP, 0 ERROR — 74/74 active |
+| Fixed, re-verify after the probe repair | 21.25.56 | **66 PASS, 0 FAIL, 10 SKIP, 0 ERROR** — 74/74 active |
+
+**76 probes now** (was 73). Baseline's 1 PASS is the FactionFundingCheck
+canary, as always; all three wave-6 probes FAIL in baseline as designed —
+including `RainsDeadlock`, which did NOT skip on the synthetic map (the
+harness builds a colony, so `HasGame()` is true).
+
+**THE FINDING — wave 6 had zero real probe coverage until this run.** The
+middle leg showed PASS stuck at 63 while SKIP rose 10 → 13: the three wave-6
+probes were reporting **SKIP with an empty message**. Cause: all three ran
+every assertion and then fell off the end of `run()` without returning a
+verdict, and `SMRTest.Run` turns a nil status into SKIP
+(`00_TestCore.lua:243`). Every other wave file has exactly one `return "PASS"`
+per probe; `55_Probes_Wave6.lua` had **none**. The file was written in the
+post-QA build leg and never run against a *fixed* leg until now — baseline
+FAILs come from the `FixMissing` guard and so never exercise the tail.
+
+Repaired in the TestKit (local-only, commit `d701595`): explicit
+`return "PASS", <what was verified>` in all three, and the two
+`if x == nil then return end` holes now return an explicit FAIL — a bare
+return read as an empty SKIP whether `WithGlobals` had deferred an ERROR or
+the call simply answered nothing. Returning FAIL is safe for the deferred
+case: `SMRTest.Run` overrides a FAIL with the pending ERROR
+(`00_TestCore.lua:237-242`). Re-verified leg: 66/0/10/0. Reaching the tail
+means every assertion had already passed, so the wave-6 *fixes* were correct
+throughout — only the reporting was broken.
+
+**Log hygiene, both legs:** zero `[CommunityFixPack]` inactive/error/disabled
+lines, zero errors naming `SMR-BugFixPack\Code`. Four engine error signatures,
+all present in BOTH legs and none ours: 48× `Flight.lua:465 objects_to_mark`,
+1× `Flight.lua:479 objects_to_unmark`, plus the `GridObject:ApplyToGrids` /
+`BuildWaypointChains` / `CreateResourceRequests` GameInit nil-calls (1× each in
+baseline, 3× each in the fixed leg — each leg generates a different random map,
+so per-signature counts vary; no new signature appeared).
+
+**Account-state fact worth carrying:** the fixed legs came up **74/74 active**,
+i.e. all six optional modules were already ON from the account's saved Mod
+Options toggles (they are account-persistent, and no `SMRFixPack_Optional`
+override was in play — the leg's temp file was never listed in metadata).
+So the middle/final legs ARE the all-toggles leg. **A true default-config leg
+(all six OFF, expected ~68/74 active) was NOT run** and stays owed; it needs
+the user to toggle the six off first, since the pre-load override table can
+only force modules ON, never off.
+
+**Harness discipline held:** `metadata.lua` was restored from a saved copy and
+hash-verified byte-identical (`7C352189…`), the temporary `Code/97_OptInLeg.lua`
+was deleted unused, nothing was committed while the baseline edit was in the
+tree, and the TestKit autorun flag stayed commented out (the `-smrautorun`
+command line armed the legs instead).
+
 ## Audit remediation session — 2026-07-29 (game-free, one-off AUDIT_FIX_PROMPT executed and deleted)
 
 AUDIT_FINDINGS.md Phases 1-3 implemented in full, one commit per plan item

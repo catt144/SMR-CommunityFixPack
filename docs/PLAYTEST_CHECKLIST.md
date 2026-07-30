@@ -334,6 +334,11 @@ gate and MultipleSuns' panel-binding wrap to file-scope installs, so a FIRST
 mid-session Mod Options enable now works without a relaunch (previously
 silently dead until restart). One sitting, any healthy save, per module:
 
+> ⚠️ **Setup note (2026-07-29 pre-flight):** the account's Mod Options toggles
+> are currently **all six ON** (the A/B legs came up 74/74 active). They are
+> account-persistent, so turn the three under test **off at the main menu
+> before starting** — otherwise step 1 has nothing to enable.
+
 1. Start the session with the module **OFF**. Mid-session, toggle it **ON**
    (no relaunch) and confirm the behavior engages: ClassicRockets — a parked,
    destination-less player rocket starts requesting launch fuel;
