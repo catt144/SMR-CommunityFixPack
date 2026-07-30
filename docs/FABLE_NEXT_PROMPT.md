@@ -1,4 +1,4 @@
-# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-30, mid-playtest)
+# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-30, end of the playtest day)
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks the model per task and everything here works identically on
@@ -8,39 +8,60 @@ file goes stale the moment another session commits. (The filename keeps its
 historical FABLE_ prefix so existing references stay valid — nothing in it is
 model-specific.)
 
-## Where the project stands (2026-07-30, mid-playtest — a live sitting is in progress)
+## Where the project stands (end of 2026-07-30 — a long playtest day, no sitting currently live)
 
-> ⚠️ **COUNTS CHANGED 2026-07-30 (after the numbers below were measured):
-> `Fix_DomePipeMoveInside` was DELETED** — F24 closed `wontfix` by user
-> decision, its trigger proven unreachable in the shipped game (proof on the
-> F24 entry). The pack is now **74 registered / 68 default-active**; every
-> "75"/"69" and "at 69/75" below is a HISTORICAL measurement taken before the
-> removal. No TestKit probe existed for F24, so the suite stays at 77 probes —
-> but **an A/B pair is OWED** before this ships. Expect the default leg to read
-> `68/74`.
-
-**Build state: 75 registered modules — 69 active by default, 6 opt-in via
+**Build state: 74 registered modules — 68 active by default**, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
-(`Opt_DroneStatDials`, BUILT 2026-07-29 late: Drone speed 1x/2x/3x/5x and
-Drone carry +0/+1/+2 dropdowns, active-at-base = vanilla, PT-56 owed).
-Everything committed and pushed.**
-**The post-D09 A/B set RAN IN FULL — nothing is owed to the harness and the
-code gate is CLEAR.** Current numbers (**77 probes**): baseline
-**1 / 61 / 15 / 0** · default config, six toggles OFF **62 / 0 / 15 / 0 at
-69/75** · all six toggles ON + dials **67 / 0 / 10 / 0 at 75/75**. Logs clean
-in every leg; the four engine error signatures appear in both halves of the
-pair. (Pre-D09 reference, 76 probes: 1/60/15/0 · 61/0/15/0 at 68/74 ·
-66/0/10/0 at 74/74.) The audit-remediation Code/ changes are probe-run, not
-just parse-swept. **The set earned its keep:** all three wave-6 probes had been
-silently reporting SKIP (they ran every assertion then fell off the end of
-`run()` with no verdict; `SMRTest.Run` turns nil into SKIP), so wave 6's
-automated coverage was imaginary until the repair (TestKit `d701595`) — the
-fixes themselves were correct throughout.
+(`Opt_DroneStatDials`, active-at-base = vanilla, PT-56 owed). Two modules were
+**deleted** on 2026-07-30, both for the same new reason — see "the reachability
+turn" below. Everything committed and pushed.
 
-**Account state: all six Mod Options toggles ended OFF when the 2026-07-30
-PT-55 closure cycle finished on a deactivate-all** — **still: read the state,
-never assume it.** `SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`. The two D09
-dials default to base and are not part of the six.
+**The code gate is CLEAR.** Post-removal A/B leg (unattended, log
+`Mars.exe-20260730-17.25.32`): **74/74 fixes active** — exactly one fewer than
+the pre-removal 75/75, which is the F24 deletion and nothing else — **zero
+`[CommunityFixPack]` error/inactive/disabled lines**, **77 probes**, result
+**66 / 1 / 10 / 0**. The single FAIL is a **TestKit defect, not a pack
+regression**: the D09 dial probe takes its baseline from the live value
+(`60_Probes_Opt.lua:411`) and the account dials are off-base. Full record on the
+D09 entry and in the TestKit README's "Known probe defects".
+Reference legs, measured **before** the removals (historical — the counts no
+longer apply): baseline `1/61/15/0` · default config, six toggles OFF
+`62/0/15/0 at 69/75` · all six ON + dials `67/0/10/0 at 75/75`.
+
+**Account state — READ IT, NEVER ASSUME IT.** As of the last leg all six
+toggles were **ON** (74/74) and the **carry dial is at +1, not base**
+(`DroneResourceCarryAmount` read 3 where a techs-only save reads 2). A
+default-config leg needs the six turned off by hand; **PT-56 needs both dials
+set to base first** or its "baseline" step records an already-modified value.
+`SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`.
+
+### The reachability turn (2026-07-30) — the day's most important outcome
+
+The pack now asks a question it never used to: **can a player reach this
+defect at all, and is the shipped behaviour even wrong?** Two modules failed it
+and were deleted the same day.
+
+- **F24** — real defect (water grid passes `dome` where its electricity twin
+  passes `self`), **unreachable**: domes refuse to place over buildings, no dome
+  template has an upgrade, interior shapes never change at runtime. Carried as a
+  §1.5 full replacement. Deleted.
+- **F49(c)** — worse: **not a defect at all.** The salvage cursor names its
+  target for everything on the map, the
+  `Salvage Train Station`→`Salvage Track` handoff is seamless to the
+  millimetre, and no exposed control separates a station from its own connector
+  track. The propagation it "fixed" is what makes that boundary continuous;
+  the guard would have carved a dead band into it. Guard removed.
+
+A full **reachability audit** of all 66 fix modules + 2 sanitizer passes
+followed (`docs/REACHABILITY_AUDIT.md`) — the pack survives almost intact
+(~21 R1, ~38 R2, 5 R3 kept, 1 U, 2 R4). It was then **challenged and corrected**
+(same file, "Challenge review 2026-07-30"), which is the part worth reading:
+its method was **decisive on reachability and near-mute on intent**, so a wrong
+author-hypothesis passes with full confidence; exactly two verdicts in the
+table were unenumerated; and its evidence base went stale mid-run. New tier
+**`I` — Intentional** was added. **Standing rule earned: a state producible
+only by console/debug injection is evidence AGAINST reachability, never for
+it.**
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
@@ -170,7 +191,9 @@ Your jobs, in the order they usually come up:
 2. `docs\PLAYTEST_CHECKLIST.md` — **SPLIT 2026-07-30: the checklist now
    carries ONLY tests + the reporting protocol**; §1 standing watches (log
    hygiene, meteor watchdog, PT-52 passive), §2 owed halves, §3 wave-6
-   PT-54, §4 fixture sittings, §5 cross-cutting (PT-20/21). The PT-52
+   PT-54, §4 fixture sittings, §5 cross-cutting (PT-20/21), **§6 the
+   needs-eyes list (new 2026-07-30 — eleven single observations from the
+   reachability audit; six ride along on PTs already scheduled)**. The PT-52
    section still carries the CAN/CANNOT lists — judge the module only on
    the CAN list. **All reference material — ground rules, external-validity
    rule, cheat discipline, console facts, the verified command table, Test
@@ -182,8 +205,20 @@ Your jobs, in the order they usually come up:
    interaction**; F48 before PT-37). For any drone anomaly, the DroneControl
    bullet in "Not yet swept" carries the full assignment-machinery trace and
    the R1-R7 paste-ready console forensics.
-4. `docs\FIX_POLICY.md` — binding rules for any code you write.
-5. Only when relevant: `docs\AUDIT_FINDINGS.md` (audit findings + the plan —
+4. `docs\FIX_POLICY.md` — binding rules for any code you write. **Its §4 has a
+   drafted replacement awaiting the user's go-ahead** (end of
+   `REACHABILITY_AUDIT.md`); until applied, §4 as written demands a proven
+   defect but NOT a reachable one, and not an intended-vs-defective judgement
+   — the two gaps that cost F24 and F49(c). Apply the spirit of the draft to
+   anything you write in the meantime.
+5. **`docs\REACHABILITY_AUDIT.md` — read the "Challenge review 2026-07-30" at
+   the end before writing ANY new fix.** It carries the tier vocabulary
+   (R1/R2/R3/R4/U plus `I` — Intentional), the hard tells that distinguish a
+   defect from designed behaviour, the needs-eyes list, and the two standing
+   rules earned the hard way: *a state producible only by console/debug
+   injection is evidence AGAINST reachability*, and *re-read `git log` between
+   assembling conclusions and publishing them*.
+6. Only when relevant: `docs\AUDIT_FINDINGS.md` (audit findings + the plan —
    Phases 1-3 implemented 2026-07-29, Phase 4 awaiting the user's
    go-decision); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
    iteration, not just knob tuning — the shipped core is the veto variant of
@@ -200,12 +235,23 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **~~Post-D09 A/B RunAll set~~ DONE IN FULL 2026-07-30** — 77 probes (new
-  DroneStatDials probe drives the real Apply path via `Mods[pack].options`):
-  baseline **1/61/15/0** · default config **62/0/15/0 at 69/75** ·
-  all-six-toggles + dials **67/0/10/0 at 75/75**, logs clean in every leg.
-  OptionsMenu now asserts the two dial wirings too (TestKit `ed01ef7`).
-  Nothing owed to the harness; the next A/B is owed only when new code lands.
+- **DECISIONS OWED BY THE USER — nothing else on this board is blocked on
+  them, but both are one word away.** (1) **F28** `Fix_ReplaceTechCount` — the
+  reachability audit's sole DELETE candidate: `Research:ReplaceTech` has **zero
+  callers in all of Src** (whole-tree grep = the definition only), it cannot go
+  live by data alone, and it is carried as a §1.5 full replacement. Keep only
+  as declared mod-facing support, or delete F24-style. (2) **The FIX_POLICY §4
+  amendment** — drafted at the end of `REACHABILITY_AUDIT.md` and revised by
+  the Challenge review to demand a reachability tier **and** a positive intent
+  statement backed by a hard tell. `FIX_POLICY.md` is deliberately UNTOUCHED.
+  ⚠️ *Note before applying it:* as drafted it says "R4 does not ship", which
+  would also mandate stripping **F49(a)** — while the audit separately
+  recommends keeping (a) as a cheap rider. Resolve that contradiction first.
+- **~~Post-removal A/B~~ DONE 2026-07-30, code gate CLEAR** — 74/74, zero
+  `[CommunityFixPack]` error lines, 77 probes, **66/1/10/0**. The one FAIL is
+  the state-dependent D09 dial probe (TestKit defect, D09 entry + TestKit
+  README). Nothing owed to the harness; the next A/B is owed only when new code
+  lands — **or to re-confirm that FAIL with the dials set to base**.
 - **~~AUDIT_FIX_PROMPT~~ DONE 2026-07-29** — AUDIT_FINDINGS Phases 1-3 all
   landed (veto bypasses, opt-module first-enable repair, error-status
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
@@ -242,9 +288,22 @@ silent.
   (`ResourceItems.lua:45-71`); Init-time anchor conversion is a proven NO-OP;
   tier-2 fallback = bypass the picker. The F76 entry + section below are the
   whole brief.
-- **PT-48** AcknowledgedWarnings (D02, checklist §4) — break two buildings so
-  they won't self-heal, dismiss: acked stay quiet; a THIRD breakage warns
-  promptly; repair + re-break re-warns; stamp survives reload.
+- **~~PT-48~~ CLOSED IN FULL 2026-07-30 → D02 `tested`** (archived) — all five
+  steps on console counters, opened with a positive control; acked buildings
+  held 4.2 vanilla windows; the stamp survived save/reload. Left one vanilla
+  curiosity on the D02 entry for a game-free look: `InsufficientResources`
+  suppression resolves on **RealTime** while PT-38 measured
+  `NotWorkingBuildings` on **GameTime**, despite both presets leaving
+  `GameTime` at its default `true`.
+- **~~PT-46 tail~~ CLOSED IN FULL 2026-07-30** (archived) — (d) PASSED by play
+  (`els=43 cap=2` → `els=13 cap=1` across a salvage), (a) settled **R4** by the
+  audit, (c) closed `wontfix` with its guard removed. F49 holds at `fixed*`
+  carried by (d).
+- **NEW — checklist §6 "Needs-eyes list"**: eleven single observations that
+  settle verdicts currently believed on source-shaped evidence. Six ride along
+  on PTs already scheduled; the genuinely new ones are **F34(d)**, **F74**,
+  **F06** and F11's console read. **F74 and F53(a) need the pack DISABLED** —
+  bundle them into the next PT-20 sitting.
 - **PT-37 — the LAST decision gate** (attended): F48 — PASS = build the
   corrected fixup behind a one-shot flag; FAIL = `wontfix`.
 - **Playtest-method rule (earned 2026-07-29, applies to every PT):** two tests
@@ -423,17 +482,26 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   Delete it after the leg. **The bridge is one-way: it can only force a module
   ON, never off** (OptionEnabled ORs the table with the saved toggles), and the
   user's own Mod Options toggles are account-persistent and apply during legs.
-  So ALWAYS read the leg's own `fix pack present: N/75 fixes active` line to
+  So ALWAYS read the leg's own `fix pack present: N/74 fixes active` line to
   learn which config you actually measured — and a true default-config leg
-  (69/75) requires the user to turn the six toggles off by hand first. Proven
-  twice: 2026-07-29 a "default" leg came up 74/74 with all six on, and the
-  post-D09 set needed the user's hand flip to produce the 69/75 leg.
+  (**68/74** since the F24 removal) requires the user to turn the six toggles
+  off by hand first. Proven three times: 2026-07-29 a "default" leg came up
+  74/74 with all six on; the post-D09 set needed the user's hand flip to
+  produce its 69/75 leg; and the 2026-07-30 post-removal leg came up **74/74**
+  because the playtest had left all six ON. **The dials are the same trap** —
+  they are account-persistent too, and the carry dial was left at +1, which is
+  what FAILed the D09 probe. Read both.
 - **TestKit `Code/91_Stress.lua` (v2, lifecycle tracing)** — the drone stress
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — FRESH (post-D09 set completed 2026-07-30, 77 probes,
-  all three legs run):** baseline (`code` list emptied) **1 / 61 / 15 / 0**;
+- **Expected numbers — CURRENT is the post-removal leg (2026-07-30 late, 77
+  probes): all six toggles ON, `74/74`, `66 / 1 / 10 / 0`**, the one FAIL being
+  the state-dependent D09 dial probe (set both dials to base and it should go
+  green). A default-config leg should now read **`68/74`** and has NOT been run
+  since the removals. The three legs below are HISTORICAL — measured before
+  `Fix_DomePipeMoveInside` was deleted, so their `/75` and `/69` counts no
+  longer apply: baseline (`code` list emptied) **1 / 61 / 15 / 0**;
   default config, six toggles OFF **62 / 0 / 15 / 0 at 69/75**; all six
   toggles ON + dials **67 / 0 / 10 / 0 at 75/75**. The D09 dial probe PASSes
   in BOTH fixed legs (DroneStatDials registers active-at-base, independent of

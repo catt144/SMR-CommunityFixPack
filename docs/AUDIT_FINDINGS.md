@@ -10,6 +10,12 @@ Phases 1-3 were implemented 2026-07-29 by the one-off AUDIT_FIX_PROMPT.md
 (executed and deleted per its own rule; the work is in the "Audit fix"
 commit series and the SESSION_LOG leg). Phase 4 awaits a user go-decision.
 
+> ⚠️ **Counts below are the 2026-07-29 snapshot and are STALE.** Current
+> authoritative counts live in `STATUS.md` (as of 2026-07-30: 75 files,
+> 74 registered, 68 default-active — `Fix_DomePipeMoveInside` was deleted with
+> F24's `wontfix` close, and a 7th `Opt_` module, D09's stat dials, was added).
+> This file is a dated audit record; its findings stand, its arithmetic does not.
+
 Ground truth: `Code/` = **75 files** (67 `Fix_` + 6 `Opt_` + 00_Core +
 90_SaveSanitizer) = **74 registered modules, 68 default-active**. Several docs'
 counts disagreed with this — see D-findings.

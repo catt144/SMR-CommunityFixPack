@@ -2110,3 +2110,82 @@ premise from "2 real minutes" to 120,000 GAME-ms. That is archived and done.
 The module was then BUILT the same day (2026-07-27) and its only coverage since
 was the TestKit stand-in probe. PT-48 is the play half, and it had never been
 run once until now.
+
+---
+
+## PT-46 tail — train cap + instant-track palette · covers **F49(d), F49(a)**
+
+The main half — splitting a track under a running train, F49(b) — PASSed
+2026-07-25/26 and is archived (resolved as no-defect: the engine stores the
+train back as a prefab). The archived run explicitly left these two small
+checks "not separately exercised":
+
+**Steps:**
+1. Read every track's element count and cap, salvage most of one away, read again.
+   **EXPECTED:** the cap follows the shipped formula (`Track.lua:65`) — 0 elements
+   → 0, 1-29 → 1, 30+ → `2 * Max(1, DivRound(n, 50))`. Confirm you can still assign
+   trains up to that number and no further. Paste-safe counter (read-only, prints
+   actual vs expected for every track):
+   `*r for i, t in ipairs(MainCity.labels.TrackBase or empty_table) do local u = t.elements_under_construction or empty_table local r = t.repair_cgs or empty_table local n = #(t.elements or empty_table) + ((#r > 0) and 0 or #u) local exp = (n == 0) and 0 or (n < 30) and 1 or 2 * Max(1, DivRound(n, 50)) ConsolePrint(i .. " els=" .. n .. " cap=" .. tostring(t.max_vehicles) .. " expected=" .. exp .. " trains=" .. #(t.assigned_vehicles or empty_table) .. (t.max_vehicles == exp and " OK" or " MISMATCH")) end`
+2. ~~Look at any track placed instantly by the map~~ — **PARKED 2026-07-30, see
+   the (a) result line below.**
+
+> ⚠️ **Known accepted coverage gap — do NOT report as a regression.** The
+> `AutoConnectTracks` merge path and instant-build reuse of an existing
+> `track_obj` recompute nothing in-session; a MERGED track's cap can read
+> `MISMATCH` until the next load's sweep corrects it. Salvage is the covered
+> path. Full note on the F49 entry.
+
+`Result (d — cap follows length):` **PASS — 2026-07-30**, live 305-sol colony,
+7 tracks, `TrainMinors` confirmed `active`. Run entirely on the read-only
+counter above (actual vs shipped-formula expected, per track), not on eyes.
+**The headline:** track 3 went `els=43 cap=2` → `els=13 cap=1` across a partial
+salvage. That is precisely the residual defect the fix covers — the SURVIVING
+track never re-runs `GameInit` and would have kept a cap of 2 for a 13-element
+track. Every line read `OK` in all four runs. Formula spot-checks all correct:
+43→2, 113→4, 74→2, 13→1, 25→1.
+**Both sides of the mechanism came out in one run.** The salvage was mid-track,
+so it SPLIT: a new track 8 appeared at `els=25 cap=1`, correct on its own via
+the engine's deferred `GameInit` — which independently confirms the 2026-07-25
+QA correction to the entry (the split-off track was never the defect; the
+survivor was).
+**Also verified across a reload:** the post-load baseline read correct (`43/2`),
+and salvaging again on the freshly loaded track recomputed correctly (`13/1`),
+so the fix works on a track object that has just come off disk, not only one
+that has been alive in-session. Train counts shuffling between tracks is the
+stored-as-prefab behaviour = F49(b), already resolved as no-defect.
+*Not proven, and it cannot be from a healthy save:* the `PostLoadGame` sweep's
+actual REPAIR of an already-stale cap. Our in-session caps were already correct,
+so the reload only demonstrated the sweep is idempotent and does no harm. Proving
+the repair needs a save written with the fix absent
+(`SMRFixPack_Disabled["TrainMinors"] = true` pre-load) — a relaunch-level
+fixture, queued as a TestKit probe rather than a live-save chore.
+
+`Result (a — instant track colour):` **PARKED 2026-07-30 — not run, and
+deliberately not attempted again on a live save.** Reaching the instant
+`place_track` path needed
+`GetInGameInterface():SetMode("track_grid", {grid_elements_require_construction = false})`
+— an injection with **no player-facing equivalent**. It misbehaved, and
+cancelling out of it left an orphan `Track` with invisible elements blocking
+grid hexes on the 305-sol colony (cleared by reload). That violated the
+project's own no-live-UI-internals rule (the F76 lesson). **The debris is an
+artifact of an unreachable entry path, not a defect in anything — do not file
+it.** Superseding question raised by the user and settled by the reachability audit
+(`REACHABILITY_AUDIT.md`, lead-pass block): instant-placed track is documented as coming
+from "map setup, cheats, the instant-build rule", and **nobody has verified any
+of the three is player-reachable**. If none is, F49(a) is in F24's category.
+Settle that game-free before any further live attempt; note it also self-heals
+on any colour-scheme change. The palette control DID pass, so the test is viable
+if a safe route exists: `tracks=4283130509/4283130509 pipes=760202697884/966355804813
+distinguishable=true`.
+
+**SECTION CLOSED 2026-07-30 — nothing left to run.** (d) PASSED (above).
+(a) settled **R4** by the reachability audit: no `InstantTracks` const exists,
+all four track-mode entries default to requiring construction, `PlaceTrackLine`
+has exactly one caller, and `Cheats.lua` contains zero track references — so
+"map setup, cheats, the instant-build rule" has **zero player-reachable
+members**. The (a) wrapper stays only as a cheap no-op rider on a module kept
+by (d). (c) closed `wontfix` and its guard REMOVED (`d03417b`) — tier `I`,
+designed behaviour, on the tester's live salvage-cursor evidence. F49 holds at
+`fixed*` carried by (d).
+

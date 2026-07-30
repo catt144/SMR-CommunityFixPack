@@ -15,8 +15,10 @@ build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
 **Counts changed 2026-07-30 (75→74 / 69→68): `Fix_DomePipeMoveInside` DELETED**
 — F24 closed `wontfix` by user decision after the trigger was proven
 unreachable in the shipped game (full proof on the F24 entry). No TestKit probe
-existed for it, so the 77-probe suite is unchanged — but **an A/B pair is OWED**
-before this ships: every recorded leg below was measured at 75/69.
+existed for it, so the 77-probe suite is unchanged. **The owed A/B RAN the same
+evening and the code gate is CLEAR** — see the post-removal row in the table
+below. `Fix_TrainMinors` also lost its (c) guard the same day (F49(c)
+`wontfix`, designed behaviour), which changes no counts.
 
 **Just landed (2026-07-29 late, D09 build):** the drone stat dials DECISION is
 BUILT — `Code/Opt_DroneStatDials.lua` + two Mod Options dropdowns: Drone
@@ -102,9 +104,11 @@ known synthetic-map noise only. **The pair caught two real defects en route**
 (both fixed same-session, see the D09 entry): the module's file-scope
 `Modifier.new` check tripped the F64 pre-flattening trap, and the probe's
 first version wrote the TestKit env's own `CurrentModOptions` (per-mod-env —
-new ENGINE_FACTS entry). **Account toggle state: all six OFF as of the
-2026-07-30 PT-55 closure cycle (it ended on a deactivate-all) — still: read
-the state, never assume it.** The default leg's dial probe PASS also
+new ENGINE_FACTS entry). **Account state as of the LAST leg (2026-07-30 late):
+all six toggles ON (hence 74/74), and the CARRY DIAL IS AT +1, not base** — the
+earlier "all six OFF after the PT-55 closure" note is superseded. **Read the
+state, never assume it**, and read the DIALS too, not just the toggles: the
+off-base dial is what FAILed the D09 probe.** The default leg's dial probe PASS also
 proves the dials work independently of the toggles. Pre-D09 reference set
 (76 probes): baseline 1/60/15/0 · default 61/0/15/0 at 68/74 · all-toggles
 66/0/10/0 at 74/74.
@@ -245,7 +249,7 @@ the tracker. **Only F48 is still open** — the other four are closed.
 | **F42** | **NEW, wave-5 screening.** `blocked` — wontfix candidate. The tracked observation is entirely correct and does not add up to a defect: the guard it names exists to stop units being entombed, a dust devil has no footprint to be entombed in, the omission sits in declared overridable class members, no shipped text promises the block, and the game's one weather-gated placement rule (`RocketLandingDustStorm`) is implemented and working. Full write-up on the entry. | **A user decision.** Recommend `wontfix` on the F56/F62/F63 grounds. |
 | **F48** | Mechanism confirmed, but the corrected call runs `OrderTrackElements`, which clears and rebuilds `el.connections` and rewrites `node_idx` on **every element of every track**, with a non-unwinding `assert` as its only failure handling. Too invasive to ship untested for a P3. | **PT-37** (added 2026-07-26) — exact console steps for the healthy-network + meteor-damaged-track test, on the user's in-person list. PASS → sanitizer behind a one-shot flag; FAIL → `wontfix`. |
 | **F24** | **CLOSED `wontfix` 2026-07-30 (user decision) — fix DELETED.** Real defect (water grid passes `dome` where its electricity twin passes `self`), but **unreachable in the shipped game**: its only live call site can't reach the buggy line (`SpireBase` is not a life-support object), and the `Dome:OnLoad` sweep needs a state vanilla can't produce — domes refuse to place over buildings, no dome has an upgrade, interior shapes never change at runtime. Carried as a 34-line full-function replacement, so deletion beat latency. Counts 75→74 / 69→68. | — done. Rollback is one `git revert` if a counter-example appears. |
-| **F49(c)** | **CLOSED `wontfix` 2026-07-30 (user decision) — guard REMOVED. It was fixing DESIGNED BEHAVIOUR**, a different and worse failure mode than F24's unreachable-but-real defect. Established at the keyboard: salvage mode targets objects not hexes, the cursor always names its target (red `Salvage` = no action permitted), the `Salvage Train Station`→`Salvage Track` handoff is seamless to the millimetre, and **no exposed control separates a station from its own connector track**. The propagation the item called a defect is what makes that boundary continuous; the guard would have carved a dead band into it. The module keeps (a) and (d) — counts unchanged. | — done. The reachability audit rated (c) "live R2" **without ever enumerating it**, and its R1-R4 vocabulary cannot express "reachable, but intended" — both put back to it in `AUDIT_CHALLENGE_PROMPT.md`. |
+| **F49(c)** | **CLOSED `wontfix` 2026-07-30 (user decision) — guard REMOVED. It was fixing DESIGNED BEHAVIOUR**, a different and worse failure mode than F24's unreachable-but-real defect. Established at the keyboard: salvage mode targets objects not hexes, the cursor always names its target (red `Salvage` = no action permitted), the `Salvage Train Station`→`Salvage Track` handoff is seamless to the millimetre, and **no exposed control separates a station from its own connector track**. The propagation the item called a defect is what makes that boundary continuous; the guard would have carved a dead band into it. The module keeps (a) and (d) — counts unchanged. | — done. The reachability audit rated (c) "live R2" **without ever enumerating it**, and its R1-R4 vocabulary cannot express "reachable, but intended" — both ANSWERED in the audit's own "Challenge review 2026-07-30": new tier `I` — Intentional — with (c) reassigned to it. |
 | **F62** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision).** Verified identical to the original game (same one-hop algorithm, same two transitive-predicate callers): carried-forward dev vision in both games, breaks nothing. No opt-in module planned. | — done. |
 | **F63** | ~~blocked~~ **CLOSED `wontfix` 2026-07-26 (user decision), same grounds** — no training term ever existed in either game's emigration score. | — done. |
 

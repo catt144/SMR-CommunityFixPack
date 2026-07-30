@@ -1423,13 +1423,25 @@ cancelling left an orphan `TrackBase` with invisible elements blocking grid
 hexes on the live colony (cleared by reload). That broke the project's own
 no-live-UI-internals rule (F76 lesson). **The debris is an artifact of an
 unreachable entry path, not a defect — it is not filed as one.** The question
-that supersedes the test: `place_track` is documented as serving "map setup,
-cheats, and the instant-build rule", and **none of the three has been verified
-player-reachable**. If none is, (a) is in F24's category and should be closed
-the same way — with the extra mitigation that it self-corrects on any
+that superseded the test — is `place_track` reachable at all? — is now
+**ANSWERED: it is not. (a) is R4.** Settled by the reachability audit's
+lead-pass block (`docs/REACHABILITY_AUDIT.md`): there is **no `InstantTracks`
+const** (the Instant* family is Cables/Passages/Pipes only,
+`__const.lua:1043-1056`), all four shipped entries into track mode pass no
+override and the track dialog defaults `grid_elements_require_construction`
+**true** (`TrackConstruction.lua:8`), `PlaceTrackLine` has exactly one caller,
+the build menu hardcodes `require_construction = true` for tracks
+(`BuildMenu.lua:1938`), and `Cheats.lua` contains **zero** track references.
+So "map setup, cheats, the instant-build rule" has **zero player-reachable
+members**.
+**Kept anyway, deliberately:** the (a) hook is a cheap additive post-wrapper
+that is a no-op for correctly-painted elements, and it rides a module retained
+on (d)'s live R2. Strip it on the next touch of this file if you want the
+stricter line. Note the drafted FIX_POLICY §4 says "R4 does not ship", which
+would mandate stripping it — that contradiction is flagged for the user and
+must be resolved before the amendment lands. It also self-corrects on any
 colour-scheme change (`ColonyColorScheme.lua:120-121` repaints every
-`TrackGridElement`). This is the live worked example in
-`docs/REACHABILITY_AUDIT_PROMPT.md`; settle it there, game-free.
+`TrackGridElement`), so the live impact was cosmetic and transient anyway.
 *The test itself is sound if a safe route is ever found* — the palette control
 passed on the live save: `tracks=4283130509/4283130509`,
 `pipes=760202697884/966355804813`, `distinguishable=true`.
@@ -1471,8 +1483,12 @@ reachability audit (`REACHABILITY_AUDIT.md`, `3398031`) rated (c) "live R2" —
 but it never enumerated (c) at all; the tier was asserted in passing while
 justifying the *module's* retention on (a)'s behalf. Its R1-R4 vocabulary also
 has no way to express "reachable, but intended", because every tier
-presupposes the shipped behaviour is wrong. Both gaps are put to the audit in
-`docs/AUDIT_CHALLENGE_PROMPT.md`.
+presupposes the shipped behaviour is wrong. Both gaps were put back to the
+audit and are **ANSWERED** in `docs/REACHABILITY_AUDIT.md` ("Challenge review
+2026-07-30"): new tier **`I` — Intentional** was added with (c) reassigned to
+it, every lettered sub-item is now its own audit subject by rule, and the
+revised FIX_POLICY §4 draft demands a positive intent statement backed by a
+hard tell — not merely a reachability tier.
 
 **(b) RESOLVED — no defect (PT-46 PASS, 2026-07-25/26).** Mechanism confirmed as
 tracked (no branch of `DemolishAndSplitTrack` touches `assigned_vehicles`), but the
@@ -3731,6 +3747,31 @@ non-cohort negatives). A/B 2026-07-28 late: baseline 1/57/15/0 ·
 all-six-toggles 63/0/10/0 (71/71 applied), zero errors. PT-53 pending.
 
 ### D09 — Drone speed & carry capacity dials (design, med)  `[built 2026-07-29: Code/Opt_DroneStatDials.lua — Mod Options choice dials "Drone speed" (1x/2x/3x/5x) and "Drone carry capacity" (+0/+1/+2); base = vanilla; PT-56 owed]`
+
+**⚠️ TESTKIT DEFECT + LIVE STATE, both found 2026-07-30 (post-removal A/B leg,
+log `Mars.exe-20260730-17.25.32`). Read this before running PT-56 or trusting a
+DroneStatDials probe result.**
+
+1. **The account dials are NOT at base.** That leg read
+   `DroneResourceCarryAmount = 3` where a techs-only save reads 2 — the carry
+   dial is sitting at **+1**. Dials are account-persistent and today's playtest
+   moved them (the same account change that produced `74/74` toggles-on instead
+   of a default-config `68/74`). PT-56 step 1 would otherwise record an
+   already-modified value as its "baseline" and every later comparison would be
+   off by the dial. Set both dials to base first.
+2. **The probe is STATE-DEPENDENT — a TestKit defect, not a pack defect.**
+   `SMRTest` `60_Probes_Opt.lua:411` does
+   `local base_carry = consts.DroneResourceCarryAmount` and then asserts
+   `base_carry + 1` at `:431`. That only holds if the dial is already at base.
+   With the dial at +1 the probe FAILed
+   (`+1 carry dial: DroneResourceCarryAmount 3 → 2 (want 4)`) while the module
+   itself logged `applied` and the leg carried **zero** `[CommunityFixPack]`
+   error/inactive lines. **The probe must force base before measuring** —
+   otherwise it can equally well false-PASS. Same family as the 2026-07-29
+   falls-off-the-end-returns-SKIP trap: a probe whose verdict depends on
+   ambient state it did not set. Repair is a TestKit task; until it lands,
+   treat a DroneStatDials verdict as valid only when the dials are known
+   to be at base.
 Player-facing stat dials for drone speed and carry capacity, decided post-QA
 2026-07-29 (`DRONE_OVERHAUL_OPTIONS.md` DECISION): relief for big colonies and
 breakthrough-lottery insurance, NOT the fix for the structural hauling problem —

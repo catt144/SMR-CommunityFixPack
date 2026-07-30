@@ -6,13 +6,15 @@ next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so far
-(37 sections): PT-01 … PT-09, PT-11 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
-PT-26, PT-29, PT-31 … PT-34, PT-36, PT-38 … PT-41, PT-43, PT-45, PT-46 (the
-F49(b) half), PT-48, PT-49, PT-50, PT-51, PT-55. This file carries **only un-run work**; when a test
-completes, its whole section (with the result notes) moves to the archive.
+(38 sections): PT-01 … PT-09, PT-11 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
+PT-26, PT-29, PT-31 … PT-34, PT-36, PT-38 … PT-41, PT-43, PT-45, **PT-46 (now
+closed in full)**, PT-48, PT-49, PT-50, PT-51, PT-55. This file carries **only
+un-run work**; when a test completes, its whole section (with the result notes)
+moves to the archive.
 (Cross-checked against the archive and the BUGS.md index 2026-07-29 — nothing
-below re-tests anything already passed; PT-46's remaining halves are exactly
-the two the archived run left "not separately exercised".)
+below re-tests anything already passed. **PT-46's tail closed 2026-07-30:** (d)
+PASSED by play, (a) settled R4 by the reachability audit, (c) closed `wontfix`
+with its guard removed — the whole section is archived.)
 
 ## What a pass here means
 
@@ -89,6 +91,19 @@ Two Mod Options dropdowns: **Drone speed** (1x base / 2x / 3x / 5x, percent
 added on BASE, additive with speed techs) and **Drone carry capacity**
 (+0 base / +1 / +2 on `g_Consts.DroneResourceCarryAmount`). One sitting,
 any healthy save with at least one drone (~5 min):
+
+> ⚠️ **SET BOTH DIALS TO BASE FIRST — as of 2026-07-30 they are NOT.** The
+> unattended A/B leg that evening read `DroneResourceCarryAmount = 3` where a
+> techs-only save should read 2, i.e. the account carry dial is sitting at +1.
+> Dials are account-persistent, so step 1's "baseline" would silently record an
+> already-modified value and every later comparison would be off by the dial.
+> **Read the state, never assume it** — and if the numbers below don't match,
+> suspect the dial before suspecting the fix.
+>
+> The same account state is why the D09 **probe** FAILed that leg: it captures
+> its own baseline from the live value (`60_Probes_Opt.lua:411`) then asserts
+> `base_carry + 1`. That is a **TestKit defect** — the probe must force base
+> before measuring — not a pack regression. Full record on the D09 entry.
 
 1. **Baseline reads:** select a drone —
    `SelectedObj:GetMoveSpeed()` and `g_Consts.DroneResourceCarryAmount`
@@ -354,74 +369,6 @@ idle drones, and every hub in this report has idle drones (lowest 4/6).
 `Result (regressions: rockets/rovers/construction clean?):` _____________________________________________
 
 `Knob changes made + effect:` _____________________________________________
-
----
-
-## PT-46 tail — train cap + instant-track palette · covers **F49(d), F49(a)**
-
-The main half — splitting a track under a running train, F49(b) — PASSed
-2026-07-25/26 and is archived (resolved as no-defect: the engine stores the
-train back as a prefab). The archived run explicitly left these two small
-checks "not separately exercised":
-
-**Steps:**
-1. Read every track's element count and cap, salvage most of one away, read again.
-   **EXPECTED:** the cap follows the shipped formula (`Track.lua:65`) — 0 elements
-   → 0, 1-29 → 1, 30+ → `2 * Max(1, DivRound(n, 50))`. Confirm you can still assign
-   trains up to that number and no further. Paste-safe counter (read-only, prints
-   actual vs expected for every track):
-   `*r for i, t in ipairs(MainCity.labels.TrackBase or empty_table) do local u = t.elements_under_construction or empty_table local r = t.repair_cgs or empty_table local n = #(t.elements or empty_table) + ((#r > 0) and 0 or #u) local exp = (n == 0) and 0 or (n < 30) and 1 or 2 * Max(1, DivRound(n, 50)) ConsolePrint(i .. " els=" .. n .. " cap=" .. tostring(t.max_vehicles) .. " expected=" .. exp .. " trains=" .. #(t.assigned_vehicles or empty_table) .. (t.max_vehicles == exp and " OK" or " MISMATCH")) end`
-2. ~~Look at any track placed instantly by the map~~ — **PARKED 2026-07-30, see
-   the (a) result line below.**
-
-> ⚠️ **Known accepted coverage gap — do NOT report as a regression.** The
-> `AutoConnectTracks` merge path and instant-build reuse of an existing
-> `track_obj` recompute nothing in-session; a MERGED track's cap can read
-> `MISMATCH` until the next load's sweep corrects it. Salvage is the covered
-> path. Full note on the F49 entry.
-
-`Result (d — cap follows length):` **PASS — 2026-07-30**, live 305-sol colony,
-7 tracks, `TrainMinors` confirmed `active`. Run entirely on the read-only
-counter above (actual vs shipped-formula expected, per track), not on eyes.
-**The headline:** track 3 went `els=43 cap=2` → `els=13 cap=1` across a partial
-salvage. That is precisely the residual defect the fix covers — the SURVIVING
-track never re-runs `GameInit` and would have kept a cap of 2 for a 13-element
-track. Every line read `OK` in all four runs. Formula spot-checks all correct:
-43→2, 113→4, 74→2, 13→1, 25→1.
-**Both sides of the mechanism came out in one run.** The salvage was mid-track,
-so it SPLIT: a new track 8 appeared at `els=25 cap=1`, correct on its own via
-the engine's deferred `GameInit` — which independently confirms the 2026-07-25
-QA correction to the entry (the split-off track was never the defect; the
-survivor was).
-**Also verified across a reload:** the post-load baseline read correct (`43/2`),
-and salvaging again on the freshly loaded track recomputed correctly (`13/1`),
-so the fix works on a track object that has just come off disk, not only one
-that has been alive in-session. Train counts shuffling between tracks is the
-stored-as-prefab behaviour = F49(b), already resolved as no-defect.
-*Not proven, and it cannot be from a healthy save:* the `PostLoadGame` sweep's
-actual REPAIR of an already-stale cap. Our in-session caps were already correct,
-so the reload only demonstrated the sweep is idempotent and does no harm. Proving
-the repair needs a save written with the fix absent
-(`SMRFixPack_Disabled["TrainMinors"] = true` pre-load) — a relaunch-level
-fixture, queued as a TestKit probe rather than a live-save chore.
-
-`Result (a — instant track colour):` **PARKED 2026-07-30 — not run, and
-deliberately not attempted again on a live save.** Reaching the instant
-`place_track` path needed
-`GetInGameInterface():SetMode("track_grid", {grid_elements_require_construction = false})`
-— an injection with **no player-facing equivalent**. It misbehaved, and
-cancelling out of it left an orphan `Track` with invisible elements blocking
-grid hexes on the 305-sol colony (cleared by reload). That violated the
-project's own no-live-UI-internals rule (the F76 lesson). **The debris is an
-artifact of an unreachable entry path, not a defect in anything — do not file
-it.** Superseding question raised by the user and now the live example in
-`REACHABILITY_AUDIT_PROMPT.md`: instant-placed track is documented as coming
-from "map setup, cheats, the instant-build rule", and **nobody has verified any
-of the three is player-reachable**. If none is, F49(a) is in F24's category.
-Settle that game-free before any further live attempt; note it also self-heals
-on any colour-scheme change. The palette control DID pass, so the test is viable
-if a safe route exists: `tracks=4283130509/4283130509 pipes=760202697884/966355804813
-distinguishable=true`.
 
 ---
 
@@ -953,6 +900,48 @@ them).
 `Result (ReportReservations):` __________  `(ReportTrains):` __________  `(ReportBrokenTrack):` __________
 
 `Result (log clean?):` _____________________________________________
+
+---
+
+# 6 · Needs-eyes list — settling observations from the reachability audit
+
+**Added 2026-07-30.** These are not full PTs. Each is a **single observation**
+that settles a verdict currently believed on source-shaped evidence — the exact
+kind of evidence F49(c) proved can lie. Source is decisive about whether a code
+path can execute and **near-mute about whether what it does is wrong**; every
+row below turns on runtime or interface behaviour the Lua does not carry
+(hit-testing, affordances, cursor and confirmation feedback, engine placement,
+visual outcome).
+
+**None of these is currently believed wrong.** Treat them as cheap
+opportunistic riders — if you are already in a save that qualifies, take the
+observation and record it. Full reasoning per row is in
+`REACHABILITY_AUDIT.md` §3 (Challenge review 2026-07-30).
+
+| Fix | The one observation that settles it |
+|---|---|
+| **F16** | Finish a Mirror Sphere excavation, open the finished site's infopanel, click "Pierce the Shell" — do drones engage a dead request? (overlaps PT-30) |
+| **F38** | Destroy a tunnel, save/load **in vanilla**, order a colonist or rover across — does the route still use the ruin? (overlaps PT-25) |
+| **F34(d)** | Drop a landscape mark over a rocket actively loading drones — is a mid-"Embark" drone visibly yanked, or does it recover silently? |
+| **F74** | **In vanilla**, order an RC Transport onto a landed storybit trade rocket — does the original harm actually occur? PT-39 proved the fix refuses; nobody has ever observed the vanilla damage it prevents |
+| **F53(a)** | **In vanilla**, land a passenger rocket flush against a Universal Depot — do arrivals actually strand? (overlaps PT-18) |
+| **F06** | Reach the Mystery 10 finale and ignore the corner notification for one sol at speed — does the Epilogue really arrive minimized and unpaused? |
+| **F26** | Watch one Last War volley with the fix off and one with it on — is the spread visible? (this IS PT-47's first result line) |
+| **F22** | Open the Last Transmission faction goals panel in a young politics-enabled colony — where is the corrupted number player-visible before the Martian Assembly stage? (overlaps PT-42) |
+| **F77** | Flap an extender during hub activity, with and without — how big is the fleet Idle-kick? (this IS PT-52 Trigger B's F77 half) |
+| **F11** | Crew-gather a busy train's passenger, then inspect `train.units` — the U-tier settling read |
+| **F81b** | On a vanilla save, catch a blocked `RainsDisasterThreads` activation after a collision; or under the fix, rain resuming within ~7 sols (overlaps PT-54 Trigger E) |
+
+**Six of the eleven ride along on PTs already in this file** (F16→PT-30,
+F38→PT-25, F53(a)→PT-18, F26→PT-47, F22→PT-42, F77→PT-52B, F81b→PT-54E) — take
+them while you are there rather than scheduling anything. The genuinely new
+ones are **F34(d)**, **F74** and **F06**, plus **F11**'s console read.
+
+**Two of these are "does the vanilla harm exist at all" checks** (F74, F53(a)),
+and they need the pack **disabled** to be meaningful. Bundle them into the next
+PT-20 uninstall-safety sitting, which already runs with the pack off.
+
+`Results (record per fix, with the date):` _____________________________________________
 
 ---
 ## Reporting protocol
