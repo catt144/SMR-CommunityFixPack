@@ -96,8 +96,16 @@ GameTime-vs-RealTime curiosity on `InsufficientResources` was filed on the D02
 entry for a game-free look). Cheapest open item now: **PT-56 D09 dials**
 (~5 min; PASS un-gates the D10 workshops build). Then: PT-53 Trigger E (the
 last thing between D07 and `tested`); PT-54 wedge watchdog; PT-52 Trigger B +
-the B2 re-run on the v2 stress harness; PT-46 tail; PT-20 save/remove/load
-incl. wave-6 persisted state; PT-21.
+the B2 re-run on the v2 stress harness; PT-20 save/remove/load
+incl. wave-6 persisted state; PT-21. **PT-46 tail: (d) PASSED 2026-07-30**
+(cap follows length, `43/2`→`13/1` across a salvage); **(a) parked on a
+reachability question** and (c) found to have no play coverage, so F49 holds at
+`fixed*` — see the entry.
+**NEW, game-free, awaiting a fresh session: `docs/REACHABILITY_AUDIT_PROMPT.md`**
+— audit every fix for whether a player can reach the defect at all. Born from
+the F24 close and the user's question during the PT-46 attempt. Its first live
+case is F49(a). It also drafts the FIX_POLICY §4 amendment that would have
+caught F24 before it shipped.
 
 **Newest legs:** `docs/archive/SESSION_LOG.md` → the 2026-07-30 set, newest
 first: the PT-55 closure leg, the PLAYTEST_CHECKLIST/PLAYTEST_HELP split leg,

@@ -64,7 +64,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | tested — PT-23 PASS 2026-07-28 (entry) |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | tested |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
-| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* |
+| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* — (d) tested 2026-07-30 PT-46; (a) parked on reachability, (c) no play coverage (entry) |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | tested |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | tested |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | tested*|
@@ -1294,6 +1294,48 @@ instant-build reuse of an existing `track_obj` (`Tracks.lua:307/:318/:327`) reco
 nothing, so a merged/extended track's cap can stay stale in-session until the next
 load's sweep. The fix never sets a wrong value; it just doesn't catch every change
 point yet.*
+
+**(d) PLAYTESTED PASS 2026-07-30 (PT-46 tail).** Live 305-sol colony, 7 tracks,
+run on a read-only counter printing actual vs shipped-formula expected per
+track. Track 3 went `els=43 cap=2` → `els=13 cap=1` across a partial salvage —
+exactly the surviving-track case this fix exists for. All lines `OK` across four
+runs; formula spot-checks 43→2, 113→4, 74→2, 13→1, 25→1. The salvage was
+mid-track so it also SPLIT, producing a new track at `els=25 cap=1` correct on
+its own — independent confirmation of the 2026-07-25 QA correction that the
+split-off track was never the defect. Re-verified after a reload: post-load
+baseline correct, and salvaging a freshly loaded track recomputed correctly.
+*Explicitly NOT proven:* the `PostLoadGame` sweep REPAIRING an already-stale
+cap — a healthy save cannot show that, since the in-session recompute has
+already corrected it. The reload only showed the sweep is idempotent. Proving
+the repair needs a save written with the fix vetoed
+(`SMRFixPack_Disabled["TrainMinors"]`); queued as a TestKit probe.
+
+**(a) NOT PLAYTESTED — PARKED 2026-07-30, and now a REACHABILITY question.**
+The attempt is on record because it cost something. Reaching the instant
+`place_track` path required injecting
+`GetInGameInterface():SetMode("track_grid", {grid_elements_require_construction = false})`
+— there is **no player-facing control that does this**. It misbehaved, and
+cancelling left an orphan `TrackBase` with invisible elements blocking grid
+hexes on the live colony (cleared by reload). That broke the project's own
+no-live-UI-internals rule (F76 lesson). **The debris is an artifact of an
+unreachable entry path, not a defect — it is not filed as one.** The question
+that supersedes the test: `place_track` is documented as serving "map setup,
+cheats, and the instant-build rule", and **none of the three has been verified
+player-reachable**. If none is, (a) is in F24's category and should be closed
+the same way — with the extra mitigation that it self-corrects on any
+colour-scheme change (`ColonyColorScheme.lua:120-121` repaints every
+`TrackGridElement`). This is the live worked example in
+`docs/REACHABILITY_AUDIT_PROMPT.md`; settle it there, game-free.
+*The test itself is sound if a safe route is ever found* — the palette control
+passed on the live save: `tracks=4283130509/4283130509`,
+`pipes=760202697884/966355804813`, `distinguishable=true`.
+
+**(c) HAS NO PLAY COVERAGE — gap noticed 2026-07-30.** PT-46's tail covers only
+(d) and (a); nothing in any PT exercises the demolish-mode `SelectionPropagate`
+pre-guard. Cheap to close whenever someone is next in salvage mode: click a
+station-owned connector hex and confirm the STATION is not flagged for
+demolition, while normal-mode clicking still selects it. Until then F49 stays
+`fixed*` on (a) and (c), not only (a).
 
 **(b) RESOLVED — no defect (PT-46 PASS, 2026-07-25/26).** Mechanism confirmed as
 tracked (no branch of `DemolishAndSplitTrack` touches `assigned_vehicles`), but the

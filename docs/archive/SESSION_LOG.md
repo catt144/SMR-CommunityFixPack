@@ -8,6 +8,47 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## PT-46 tail — F49(d) PASS; F49(a) parked on a reachability question — 2026-07-30
+
+**(d) cap-follows-length: PASS.** Live 305-sol colony, read-only counter
+printing actual vs shipped-formula expected per track. Track 3 went
+`els=43 cap=2` → `els=13 cap=1` across a partial salvage — the surviving-track
+case the fix exists for. All lines `OK` across four runs, including after a
+reload and a second salvage on a freshly loaded track. The mid-track salvage
+also split off a new track at `els=25 cap=1`, correct on its own, which
+independently confirms the 2026-07-25 QA correction. Recorded honestly on the
+entry: the `PostLoadGame` sweep's REPAIR of a stale cap is **not** proven and
+cannot be from a healthy save — queued as a TestKit probe.
+
+**(a) instant-track palette: parked, not run.** The attempt cost something and
+is on record. Reaching `place_track` needed a `SetMode` injection with no
+player-facing equivalent; it misbehaved and left an orphan `TrackBase` with
+invisible elements blocking grid hexes on the live colony (cleared by reload).
+That broke the project's own no-live-UI-internals rule (F76 lesson) — the
+assistant handed it over, the rule existed, it was violated anyway.
+
+**The user's response to that is the important output of this leg.** Their
+question — *"are we forcing this to test something vanilla, or are we in a loop
+of testing artifacts that aren't real bugs if you play the game correctly?"* —
+reframed the whole thing. The debris was an artifact of an unreachable entry
+path and is filed as nothing. And it exposed that F49(a) itself has never been
+asked the F24 question: `place_track` serves "map setup, cheats, the
+instant-build rule", and **none of the three is verified player-reachable**.
+
+That became `docs/REACHABILITY_AUDIT_PROMPT.md` (commit `5b0ad35`) — a
+game-free, read-only audit asking of every fix whether a player can reach the
+defect at all, with F24 as the worked template, an R1-R4/U tier vocabulary,
+decision rules keyed to patch cost, an explicit anti-over-pruning stance, and a
+drafted FIX_POLICY §4 amendment (the policy demands a proven defect but has
+never demanded proven reachability — which is exactly how F24 shipped).
+
+**Gap noticed while writing this up:** F49**(c)** has no play coverage either —
+PT-46's tail only ever covered (d) and (a). Cheap to close in salvage mode
+(click a station-owned connector hex, confirm the station is not flagged).
+F49 therefore stays `fixed*` on two items, not one.
+
+---
+
 ## F24 CLOSED `wontfix` — fix DELETED, counts 75→74 / 69→68 — 2026-07-30
 
 Came out of the user sitting down to run PT-44's F24 half and finding it
