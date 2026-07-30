@@ -3817,30 +3817,36 @@ all-six-toggles 63/0/10/0 (71/71 applied), zero errors. PT-53 pending.
 
 ### D09 — Drone speed & carry capacity dials (design, med)  `[built 2026-07-29: Code/Opt_DroneStatDials.lua — Mod Options choice dials "Drone speed" (1x/2x/3x/5x) and "Drone carry capacity" (+0/+1/+2); base = vanilla; PT-56 owed]`
 
-**⚠️ TESTKIT DEFECT + LIVE STATE, both found 2026-07-30 (post-removal A/B leg,
-log `Mars.exe-20260730-17.25.32`). Read this before running PT-56 or trusting a
-DroneStatDials probe result.**
+**⚠️ LIVE STATE — still true. Read this before running PT-56.**
 
-1. **The account dials are NOT at base.** That leg read
+1. **The account dials are NOT at base.** The 2026-07-30 17.25 leg read
    `DroneResourceCarryAmount = 3` where a techs-only save reads 2 — the carry
-   dial is sitting at **+1**. Dials are account-persistent and today's playtest
-   moved them (the same account change that produced `74/74` toggles-on instead
-   of a default-config `68/74`). PT-56 step 1 would otherwise record an
-   already-modified value as its "baseline" and every later comparison would be
-   off by the dial. Set both dials to base first.
-2. **The probe is STATE-DEPENDENT — a TestKit defect, not a pack defect.**
-   `SMRTest` `60_Probes_Opt.lua:411` does
-   `local base_carry = consts.DroneResourceCarryAmount` and then asserts
-   `base_carry + 1` at `:431`. That only holds if the dial is already at base.
-   With the dial at +1 the probe FAILed
-   (`+1 carry dial: DroneResourceCarryAmount 3 → 2 (want 4)`) while the module
-   itself logged `applied` and the leg carried **zero** `[CommunityFixPack]`
-   error/inactive lines. **The probe must force base before measuring** —
-   otherwise it can equally well false-PASS. Same family as the 2026-07-29
-   falls-off-the-end-returns-SKIP trap: a probe whose verdict depends on
-   ambient state it did not set. Repair is a TestKit task; until it lands,
-   treat a DroneStatDials verdict as valid only when the dials are known
-   to be at base.
+   dial is sitting at **+1**. Dials are account-persistent and that day's
+   playtest moved them (the same account change that produced `74/74`
+   toggles-on instead of a default-config `68/74`). **Nothing since has moved
+   them back** — the 19.20 leg's probe forces base internally and restores the
+   account's own values, so it neither reads nor leaves a base state.
+   PT-56 step 1 would otherwise record an already-modified value as its
+   "baseline" and every later comparison would be off by the dial. **Set both
+   dials to base by hand before PT-56.**
+
+2. **~~The probe is STATE-DEPENDENT~~ — TESTKIT DEFECT, REPAIRED 2026-07-30
+   late; verified green the same evening.** `60_Probes_Opt.lua` used to do
+   `local base_carry = consts.DroneResourceCarryAmount` and then assert
+   `base_carry + 1`, which only holds if the dial is already at base. With the
+   dial at +1 it FAILed (`+1 carry dial: DroneResourceCarryAmount 3 → 2
+   (want 4)`) while the module itself logged `applied` and the leg carried
+   **zero** `[CommunityFixPack]` error/inactive lines — a probe defect, never a
+   pack defect. **The probe now forces both dials to base through the real
+   Apply path, takes its baseline from that state, and restores the leg's entry
+   values**; its cleanup check compares against the value read on entry, so it
+   is exact for any account state. Confirmed on the **2026-07-30 19.20 leg with
+   the account dial still at +1** — the exact state that FAILed it hours
+   earlier — reporting `carry +1 over probe-forced base 1`. Same family as the
+   2026-07-29 falls-off-the-end-returns-SKIP trap: a probe whose verdict
+   depended on ambient state it did not set. **A DroneStatDials probe verdict
+   no longer depends on how the last playtest left the dials** (the human
+   playtest's own baseline reads still do — see item 1).
 Player-facing stat dials for drone speed and carry capacity, decided post-QA
 2026-07-29 (`DRONE_OVERHAUL_OPTIONS.md` DECISION): relief for big colonies and
 breakthrough-lottery insurance, NOT the fix for the structural hauling problem —
@@ -3895,6 +3901,17 @@ elapsed repair time. **Dial range widened from the DECISION's 1.0x/1.5x/2.0x to
   capability check moved to the reapply guard. (2) `CurrentModOptions` is
   per-mod-env — the probe's first version wrote the TestKit's own options
   object (ENGINE_FACTS fact added).
+- **A/B 2026-07-30 late (log `Mars.exe-20260730-19.20.24`, unattended, 76
+  probes): `73/73 fixes active`, `66 PASS / 0 FAIL / 10 SKIP / 0 ERROR`.** The
+  first leg run after the F28 removal and after the probe repair, and it clears
+  both: the counts land exactly where the removal predicted, and **the dial
+  probe is GREEN with the account carry dial still at +1** — the state that
+  FAILed it on the 17.25 leg. The account still had all six toggles ON, hence
+  `73/73` rather than a default-config `67/73`. Zero `[CommunityFixPack]`
+  error/inactive/disabled lines; no log line names our `Code/`; noise profile
+  identical to the previous leg. **This does NOT flip D09 to `tested`** — only
+  the playtest does that, and PT-56's stale-save reconcile step is beyond any
+  probe.
 
 ### D10 — Workshops: capacity can't scale late-game; unemployment's real cost is invisible (design, med)  `[speced 2026-07-30, user-approved same day — BUILD GATED ON PT-56 PASS (the capacity dial reuses D09's label-modifier machinery; no point stacking a second dial module on machinery whose first live check hasn't run). One Opt_ module, planned PT-57]`
 **Problem (research session 2026-07-30, all source-verified).** The three

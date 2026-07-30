@@ -100,10 +100,13 @@ any healthy save with at least one drone (~5 min):
 > **Read the state, never assume it** — and if the numbers below don't match,
 > suspect the dial before suspecting the fix.
 >
-> The same account state is why the D09 **probe** FAILed that leg: it captures
-> its own baseline from the live value (`60_Probes_Opt.lua:411`) then asserts
-> `base_carry + 1`. That is a **TestKit defect** — the probe must force base
-> before measuring — not a pack regression. Full record on the D09 entry.
+> The same account state is why the D09 **probe** FAILed that leg: it captured
+> its own baseline from the live value (`60_Probes_Opt.lua:411`) then asserted
+> `base_carry + 1`. That was a **TestKit defect**, not a pack regression, and it
+> is **REPAIRED 2026-07-30 late** — the probe now forces base itself and went
+> green on the 19.20 leg with the account dial still at +1. **That repair does
+> not help step 1 below:** your baseline reads come from the live game, so the
+> dials still have to be at base by hand. Full record on the D09 entry.
 
 1. **Baseline reads:** select a drone —
    `SelectedObj:GetMoveSpeed()` and `g_Consts.DroneResourceCarryAmount`

@@ -11,8 +11,10 @@ model-specific.)
 ## Where the project stands (end of 2026-07-30 — a long playtest day, no sitting currently live)
 
 **Next session is PLAYTEST STANDBY.** Nothing is half-finished and nothing is
-blocked on an agent. Do the two ⚠️ items at the top of the board first (read
-§4a; dials-to-base + one A/B leg), then the owner picks a PT. Open playtests, in
+blocked on an agent. **The owed A/B leg is DONE and CLEAR** (2026-07-30 evening,
+unattended) and the D09 probe defect that FAILed the previous leg is **repaired
+and verified** — so the board opens straight on a PT. The one surviving ⚠️ is
+dials-to-base, which is now just PT-56's own step 0. Open playtests, in
 suggested order: **PT-56** (D09 dials, ~5 min, un-gates the D10 build) ·
 **PT-53 Trigger E** (last thing before D07 → `tested`) · **PT-54** (wave-6
 disasters) · **PT-52 Trigger B + the B2 stress re-run** · checklist **§6
@@ -35,26 +37,38 @@ below. Everything committed and pushed.
 > precedent: two violated this rule and one is already retired under it (F28;
 > F29 is flagged, awaiting the owner).
 
-**The code gate is CLEAR.** Post-removal A/B leg (unattended, log
-`Mars.exe-20260730-17.25.32`): **74/74 fixes active** — exactly one fewer than
-the pre-removal 75/75, which is the F24 deletion and nothing else — **zero
-`[CommunityFixPack]` error/inactive/disabled lines**, **77 probes**, result
-**66 / 1 / 10 / 0**. ⚠️ **That leg predates the F28 removal**, which came later
-the same evening: expect **73 registered / 67 default-active and 76 probes**
-next run, and **a fresh A/B is OWED** because F28 took its probe with it. The single FAIL is a **TestKit defect, not a pack
-regression**: the D09 dial probe takes its baseline from the live value
-(`60_Probes_Opt.lua:411`) and the account dials are off-base. Full record on the
-D09 entry and in the TestKit README's "Known probe defects".
-Reference legs, measured **before** the removals (historical — the counts no
-longer apply): baseline `1/61/15/0` · default config, six toggles OFF
-`62/0/15/0 at 69/75` · all six ON + dials `67/0/10/0 at 75/75`.
+**The code gate is CLEAR and nothing is owed.** Current leg (unattended, log
+`Mars.exe-20260730-19.20.24`): **`73/73` fixes active**, **76 probes**, result
+**66 PASS / 0 FAIL / 10 SKIP / 0 ERROR**, **zero `[CommunityFixPack]`
+error/inactive/disabled lines**, no log line naming our `Code/`. That is the
+first leg run after the F28 removal and it lands exactly on the predicted
+post-removal counts. It read `73/73` and not a default-config `67/73` **because
+the account had all six toggles ON** — read the state, never assume it; a true
+default-config leg still has not run since the removals and needs the six turned
+off by hand.
+
+**The D09 dial probe is REPAIRED** (TestKit, same evening) — it forces both dials
+to base through the real Apply path before measuring and restores the leg's entry
+values, so its verdict no longer depends on how the last playtest left the dials.
+It went green on this leg **with the account carry dial still at +1**, the exact
+state that FAILed it on the previous leg. **Consequence: an A/B leg no longer has
+a set-the-dials-to-base precondition** — PT-56 still does, for its own step-1
+baseline reads. Full record on the D09 entry and in the TestKit README's "Known
+probe defects".
+
+Historical legs (counts no longer apply — measured before the removals):
+`74/74` at 77 probes `66/1/10/0` (the 1 FAIL was the probe defect) · baseline
+`1/61/15/0` · default config, six toggles OFF `62/0/15/0 at 69/75` · all six ON
++ dials `67/0/10/0 at 75/75`.
 
 **Account state — READ IT, NEVER ASSUME IT.** As of the last leg all six
-toggles were **ON** (74/74) and the **carry dial is at +1, not base**
-(`DroneResourceCarryAmount` read 3 where a techs-only save reads 2). A
-default-config leg needs the six turned off by hand; **PT-56 needs both dials
-set to base first** or its "baseline" step records an already-modified value.
-`SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`.
+toggles were **ON** (hence 73/73) and the **carry dial is at +1, not base**
+(`DroneResourceCarryAmount` read 3 where a techs-only save reads 2). The
+2026-07-30 evening leg did not change either — its probe forces base internally
+and restores the account's own values. A default-config leg needs the six turned
+off by hand; **PT-56 needs both dials set to base first** or its "baseline" step
+records an already-modified value. `SMRFixPack.ListFixes()` or
+`SMRFixPack.fixes.<Id>.status`.
 
 ### The reachability turn (2026-07-30) — the day's most important outcome
 
@@ -161,11 +175,11 @@ Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 
 **Session-start sequence (~2 min):**
 1. `git log --oneline -5` + `git pull` (see above).
-2. Verify the pack loaded clean: on-screen status loop (below) — all **68**
-   default fixes `active` (69 before the 2026-07-30 F24 removal; incl.
-   DroneStatDials, active-at-base), plus
-   whichever opt-in toggles the user runs (account-persistent — READ the
-   state, never assume it; all six ended OFF after the PT-55 closure cycle).
+2. Verify the pack loaded clean: on-screen status loop (below) — all **67**
+   default fixes `active` (67, not 69, since the 2026-07-30 F24 and F28
+   removals; incl. DroneStatDials, active-at-base), plus whichever opt-in
+   toggles the user runs (account-persistent — READ the state, never assume it;
+   all six were left **ON**, and the carry dial at +1).
 3. Fresh `SMRFixPack.DroneReport` baseline if D06 is on (counters reset
    every launch; the PT-52 passive watch continues every sitting).
 4. Optional (only if a lander/cargo read is planned): re-arm
@@ -266,13 +280,14 @@ silent.
   entry's own words** — F29 called itself "mod-facing / No shipped user" and had
   four live shipped callers.
 
-- **⚠️ FIRST ACTION AT THE KEYBOARD, before any PT: set BOTH Mod Options dials
-  to base, then run one A/B leg.** Two things ride on it: (1) it re-confirms the
-  D09 dial probe goes green — its FAIL last leg was the off-base account dial,
-  not the pack (TestKit defect, D09 entry); (2) **an A/B is genuinely OWED** —
-  F28's deletion took its probe with it, so the numbers moved and no leg has run
-  since. **Expect `67/73` default-config (or `73/73` all-toggles-on) and 76
-  probes.** The last recorded leg (74/74, 77 probes, 66/1/10/0) predates F28.
+- **~~⚠️ FIRST ACTION: dials-to-base + one A/B leg~~ — the A/B is DONE and CLEAR**
+  (2026-07-30 evening, unattended: `73/73`, 76 probes, `66/0/10/0`). The probe
+  defect behind the previous leg's single FAIL was **repaired** rather than
+  worked around, so the dials-to-base step is no longer a precondition for a
+  leg at all. **What survives:** (1) **set both dials to base before PT-56** —
+  its step-1 baseline reads come from the live game, and the account carry dial
+  is still at +1; (2) a genuine **default-config leg** (`67/73`) has still never
+  run since the removals and needs the six toggles turned off by hand.
 
 - **DECISION OWED — the FIX_POLICY §4 amendment** (the *other* one; §4a is
   already applied). Drafted at the end of `REACHABILITY_AUDIT.md` and revised by
@@ -521,24 +536,26 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   Delete it after the leg. **The bridge is one-way: it can only force a module
   ON, never off** (OptionEnabled ORs the table with the saved toggles), and the
   user's own Mod Options toggles are account-persistent and apply during legs.
-  So ALWAYS read the leg's own `fix pack present: N/74 fixes active` line to
+  So ALWAYS read the leg's own `fix pack present: N/73 fixes active` line to
   learn which config you actually measured — and a true default-config leg
   (**67/73** since the F24 and F28 removals) requires the user to turn the six toggles
-  off by hand first. Proven three times: 2026-07-29 a "default" leg came up
+  off by hand first. Proven four times: 2026-07-29 a "default" leg came up
   74/74 with all six on; the post-D09 set needed the user's hand flip to
-  produce its 69/75 leg; and the 2026-07-30 post-removal leg came up **74/74**
-  because the playtest had left all six ON. **The dials are the same trap** —
-  they are account-persistent too, and the carry dial was left at +1, which is
-  what FAILed the D09 probe. Read both.
+  produce its 69/75 leg; the 2026-07-30 post-removal leg came up **74/74**;
+  and the 19.20 leg came up **73/73** — all because the playtest had left the
+  six ON. **The dials are the same trap** — they are account-persistent too, and
+  the carry dial is still at +1. Read both. (The dial no longer breaks the D09
+  probe, which now forces base itself, but it still skews any live baseline
+  read a human takes.)
 - **TestKit `Code/91_Stress.lua` (v2, lifecycle tracing)** — the drone stress
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — CURRENT is the post-removal leg (2026-07-30 late, 77
-  probes): all six toggles ON, `74/74`, `66 / 1 / 10 / 0`**, the one FAIL being
-  the state-dependent D09 dial probe (set both dials to base and it should go
-  green). A default-config leg should now read **`67/73`** and has NOT been run
-  since the removals. The three legs below are HISTORICAL — measured before
+- **Expected numbers — CURRENT is the 2026-07-30 19.20 leg (76 probes): all six
+  toggles ON, `73/73`, `66 / 0 / 10 / 0`.** The D09 dial probe now forces base
+  itself, so it is green regardless of account dial state. A default-config leg
+  should read **`67/73`** and has NOT been run since the removals. The three
+  legs below are HISTORICAL — measured before
   `Fix_DomePipeMoveInside` was deleted, so their `/75` and `/69` counts no
   longer apply: baseline (`code` list emptied) **1 / 61 / 15 / 0**;
   default config, six toggles OFF **62 / 0 / 15 / 0 at 69/75**; all six
@@ -552,7 +569,9 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   asserts all six toggle wirings PLUS the two D09 dial wirings and FAILs
   baseline by design. The D09 dial probe writes `Mods[pack].options` (NOT its
   own env's CurrentModOptions — per-mod-env, see ENGINE_FACTS) and restores
-  the leg's values through the same path. The rains probe does NOT skip on
+  the leg's values through the same path — and since 2026-07-30 late it FORCES
+  both dials to base before measuring, so account dial state can no longer make
+  it FAIL or false-PASS. The rains probe does NOT skip on
   the synthetic map — the harness builds a colony, so `HasGame()` is true.
 - **Probe-authoring trap (cost wave 6 its coverage, 2026-07-29):** a probe
   whose `run` falls off the end returns nil, and `SMRTest.Run` turns nil into
@@ -561,16 +580,22 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   `FixMissing` guard returns FAIL before the tail runs), so only a FIXED leg
   can. Every probe needs an explicit `return "PASS", …`; grep
   `Register(` vs `return "PASS"` counts per wave file to audit this.
+  **Re-audited 2026-07-30 late: clean** — 10/10, 20/21, 18/18, 12/12, 7/7, 3/3,
+  6/6 across the seven probe files. Nothing is sitting in the trap today.
 - **TestKit stand-in probe corollary (D07 leg):** WithGlobals stubs CANNOT
   reach a game file that localizes the global at load time
   (`local IsValid = IsValid`, Colonist.lua:5) — a probe driving shipped code
   with plain-table stand-ins must assert on the MODULE's own action, never on
   vanilla bookkeeping around the stand-ins; a fake colonist through the
   shipped FindEmigrationDome tail needs a PickEmigrationCommunity stub.
-- Synthetic-map noise unchanged: ~49 Flight.lua `objects_to_mark` errors +
+- Synthetic-map noise unchanged: ~50-60 Flight.lua `objects_to_mark` errors
+  (the count tracks the random map — 48 and 59 on the two 2026-07-30 legs) +
   a few GameInit nil-call lines in BOTH legs; a `[mod] Error in mod … Test
   Kit` line at quit is a shutdown artifact. The MultipleSuns
   "not found → lifted" line pair during load is the known benign transient.
+  **Also two `ResManager Error` missing-animation lines** (`LawOfficeDoor_idle`
+  / `_opening`) — added to this list 2026-07-30 after being shown present,
+  identically, in both legs; pre-existing game data, nothing to do with us.
 - Parse sweep: python + luaparser, `ast.parse(open(f,encoding='utf-8-sig').read())`.
 - Docs tooling: never round-trip a doc through PowerShell 5.1 `Get-Content`
   without `-Encoding UTF8` both ends; prefer the editor's file tools. Git

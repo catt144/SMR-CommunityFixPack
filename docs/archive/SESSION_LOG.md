@@ -8,6 +8,70 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## The owed A/B ran and is CLEAR — and the D09 probe defect is repaired, not just recorded — 2026-07-30 (evening, unattended)
+
+Session opened as playtest standby; the tester stepped away and released the
+session for unattended work, so it took the two ⚠️ items at the top of the board
+instead of waiting.
+
+**The problem with the first item as written.** The board said: set both Mod
+Options dials to base by hand, *then* run the owed A/B leg. That ordering exists
+only because the D09 probe was broken — it read its baseline from the live
+`g_Consts` value and asserted `base_carry + 1`, which is arithmetic against an
+already-modified number whenever the account dial is off base. With nobody at the
+keyboard the hand-flip was unavailable, and the leg would have FAILed again for
+the same non-reason. **So the probe was repaired first and the precondition
+disappeared.**
+
+**TestKit repair** (`60_Probes_Opt.lua`, commits `ac30f54` + `e1d9bf1`). The probe
+now reads the entry value, forces both dials to base through the real Apply path
+(`rawset` on `Mods[pack].options` + `Msg("ApplyModOptions")`), takes its baseline
+from *that* state, asserts that forcing base leaves no module modifier behind,
+and restores the leg's entry values. Its tail cleanup check now compares the
+restored const against the **entry** reading rather than against base, so it is
+exact for any account dial state instead of speaking only when the account
+happened to sit at base. STATUS had already written the remedy — *"it should
+force base before measuring"* — this session just did it.
+
+**Leg result (log `Mars.exe-20260730-19.20.24`, unattended via `-smrautorun`,
+~70 s):** `fix pack present: 73/73 fixes active`, **76 probes, 66 PASS / 0 FAIL /
+10 SKIP / 0 ERROR**.
+- The counts land exactly where the F28 removal predicted (73 registered, 76
+  probes), which is what the leg owed.
+- **The dial probe went green with the account carry dial still at +1** — the
+  exact state that FAILed it on the 17.25 leg — reporting `carry +1 over
+  probe-forced base 1`. The repair is verified against the failing condition,
+  not merely against a clean one.
+- Zero `[CommunityFixPack]` error / inactive / disabled / FAILED lines; no log
+  line names our `Code/`; noise profile identical to 17.25 (same 2 pre-existing
+  `ResManager` `LawOfficeDoor` animation errors, same shutdown-artifact
+  `[mod] Error in mod … Test Kit`, `objects_to_mark` 48→59 with the random map).
+  The `LawOfficeDoor` pair was not previously on the documented noise list; it is
+  now, having been shown present in both legs.
+- The account still had all six toggles ON, hence `73/73` and not a
+  default-config `67/73`. **A default-config leg has still not been run since
+  the removals** — it needs the six turned off by hand, so it stays a keyboard
+  item.
+
+**Harness health check while the leg ran:** the falls-off-the-end-returns-SKIP
+trap was re-audited across every probe file (`Register(` vs `return "PASS"`
+counts). Clean — 10/10, 20/21, 18/18, 12/12, 7/7, 3/3, 6/6. Nothing is sitting
+in that trap.
+
+**What did NOT change.** D09 is still **not** `tested` — only the playtest flips
+statuses, and PT-56's stale-save reconcile step is beyond any probe. **PT-56 also
+still needs both dials set to base by hand**, because its step-1 baseline reads
+come from the live game; the repair removed that precondition from *A/B legs*
+only. The board's ⚠️ A/B item is now done and can come off; the ⚠️ dials-to-base
+item survives as part of PT-56 itself.
+
+Docs: STATUS A/B table + account-state block rewritten (17.25 compressed to
+history), BUGS D09 entry item 2 flipped to repaired-and-verified with the new leg
+recorded, PT-56's warning block corrected so it no longer tells the tester a
+repaired defect is open, TestKit README's "Known probe defects" entry updated.
+
+---
+
 ## HARD RULE: vanilla only, never other mods (FIX_POLICY §4a) — F28 retired under it — 2026-07-30 (late)
 
 **The owner set a standing rule**, prompted by asking a simple question about

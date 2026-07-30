@@ -33,8 +33,9 @@ explicitly: judge by enumeration, never by an entry's own words.
 has **zero callers in all of Src** (re-verified independently), so only mod code
 could reach it, and it was carried as a §1.5 full replacement. Its TestKit probe
 went with it (**probes 77 → 76**) — it asserted the fixed counter, so it would
-have FAILed every leg. **A fresh A/B is therefore OWED** — unlike F24, the
-numbers move. Earlier the same day:
+have FAILed every leg. **The A/B that owed for it RAN the same evening and is
+CLEAR** (19.20 leg — `73/73`, 76 probes, `66/0/10/0`; table below). Earlier the
+same day:
 **`Fix_DomePipeMoveInside` DELETED**
 — F24 closed `wontfix` by user decision after the trigger was proven
 unreachable in the shipped game (full proof on the F24 entry). No TestKit probe
@@ -85,56 +86,71 @@ without touching D07). **D10 and D12 both touch colonist assignment — land the
 separately, each with its own A/B.** Unfiled candidate: Universal Tunnel description omits its
 life-support bridging (description drift, one-line text patch — user call).
 
-**A/B probe state (FRESH — post-D09 unattended set, completed 2026-07-30
-after the user flipped the six toggles OFF):** **77 probes** (the D09 dial
-probe is new), all three legs clean.
+**A/B probe state — CURRENT is the 2026-07-30 19.20 leg: 76 probes,
+`73/73 fixes active`, `66 PASS / 0 FAIL / 10 SKIP / 0 ERROR`, code gate CLEAR
+and nothing owed.** It is the first leg run after the F28 removal (which took
+the 77th probe with it) and after the D09 probe repair, and it clears both.
+Earlier rows are historical — their `/75`, `/74` and 77-probe counts no longer
+apply.
 
 | Leg | Active | Result |
 |---|---|---|
-| Baseline (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** |
+| Baseline (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** *(77 probes; a post-F28 baseline would read 60 FAIL — not re-run, the arithmetic is not in doubt)* |
 | Fixed, default config (six toggles OFF) | 69/75 *(pre-F24-removal)* | **62 / 0 / 15 / 0** |
 | Fixed, all six toggles ON + dials | 75/75 *(pre-F24-removal)* | **67 / 0 / 10 / 0** |
-| **Post-removal re-verify, 2026-07-30 17.25 (unattended)** | **74/74** | **66 / 1 / 10 / 0** |
+| Post-removal re-verify, 2026-07-30 17.25 (unattended) | 74/74 *(pre-F28-removal)* | **66 / 1 / 10 / 0** — the 1 FAIL was the probe defect below |
+| **CURRENT — 2026-07-30 19.20 (unattended), 76 probes** | **73/73** | **66 / 0 / 10 / 0** |
 
-**Post-removal leg — the code gate for the F24 and F49(c) removals is CLEAR.**
-Ran unattended after both removals; log
-`Mars.exe-20260730-17.25.32`. `fix pack present: 74/74 fixes active` — exactly
-one fewer than the pre-removal 75/75, which is the F24 deletion and nothing
-else. **Zero `[CommunityFixPack]` error / inactive / disabled / FAILED lines**;
-`DroneStatDials: applied`. Probe total still 77 (no probe was removed with
-F24). The account had all six toggles ON, hence 74/74 rather than a
-default-config leg (68/74 at that moment; **67/73 now, after the later F28 removal**) — read the state, never assume it.
-**The single FAIL is a PROBE defect, not a pack regression.**
-`DroneStatDials` reported `+1 carry dial: DroneResourceCarryAmount 3 → 2
-(want 4)`. Cause: the probe captures its own baseline from the LIVE value —
-`local base_carry = consts.DroneResourceCarryAmount`
-(TestKit `60_Probes_Opt.lua:411`) — then asserts `base_carry + 1` at `:431`.
-That is only valid when the account's carry dial is already at base. Today's
-playtest left it off-base (the same account change that turned the six toggles
-on), so the arithmetic is measured against an already-modified value. Neither
-removal touches drones, modifiers or Mod Options, and the module logged
-`applied`. **The probe is state-dependent and can FAIL — or false-PASS —
-depending on account dial state; it should force base before measuring.**
-Recorded as a TestKit defect, same family as the 2026-07-29
-falls-off-the-end-returns-SKIP trap. **To confirm: set both dials to base in
-Mod Options and re-run the leg** (2 min; also the natural moment to run PT-56).
+**The 19.20 leg — the owed A/B, run and CLEAR.** `fix pack present: 73/73 fixes
+active`, matching the post-F28 registry exactly; **zero** `[CommunityFixPack]`
+error / inactive / disabled / FAILED lines; no log line names our `Code/`; noise
+profile identical to the 17.25 leg (same 2 pre-existing `ResManager` animation
+errors, same shutdown-artifact `[mod] Error in mod … Test Kit`, `objects_to_mark`
+48→59 with the random map). The account still had all six toggles ON, hence
+`73/73` rather than a default-config **67/73** — **read the state, never assume
+it.** A default-config leg has still not been run since the removals and needs
+the six turned off by hand.
 
-Baseline's 1 PASS is the FactionFundingCheck canary; the D09 probe FAILs
-baseline by design ("fix pack not loaded"). The 10 SKIPs are 9 `[install]`
-retail-sandbox probes + TechDescriptionBuilding. Log clean in both legs: no
-`[CommunityFixPack]` error/disabled lines, no error naming our `Code/`,
-known synthetic-map noise only. **The pair caught two real defects en route**
-(both fixed same-session, see the D09 entry): the module's file-scope
-`Modifier.new` check tripped the F64 pre-flattening trap, and the probe's
-first version wrote the TestKit env's own `CurrentModOptions` (per-mod-env —
-new ENGINE_FACTS entry). **Account state as of the LAST leg (2026-07-30 late):
-all six toggles ON (hence 74/74), and the CARRY DIAL IS AT +1, not base** — the
-earlier "all six OFF after the PT-55 closure" note is superseded. **Read the
-state, never assume it**, and read the DIALS too, not just the toggles: the
-off-base dial is what FAILed the D09 probe.** The default leg's dial probe PASS also
-proves the dials work independently of the toggles. Pre-D09 reference set
-(76 probes): baseline 1/60/15/0 · default 61/0/15/0 at 68/74 · all-toggles
-66/0/10/0 at 74/74.
+**The D09 probe defect is REPAIRED (TestKit, 2026-07-30 late) and verified.**
+The probe used to take its baseline from the live const, valid only when the
+account dial already sat at base; it now forces both dials to base through the
+real Apply path, measures from there, and restores the leg's entry values, with
+a cleanup check against the entry reading rather than against base. It went
+**green on the 19.20 leg with the account carry dial still at +1** — the exact
+state that FAILed it at 17.25. Consequence: **an A/B leg no longer has a
+set-the-dials-to-base precondition.** PT-56 still does, for its own step-1
+baseline reads (BUGS.md D09 entry, item 1).
+
+**The 17.25 leg (superseded by 19.20, kept for the record):** the code gate for
+the F24 and F49(c) removals, run unattended after both. `74/74 fixes active` —
+exactly one fewer than the pre-removal 75/75, which was the F24 deletion and
+nothing else — zero `[CommunityFixPack]` error lines, `DroneStatDials: applied`,
+probe total still 77 (F24 had no probe). Its single FAIL was the D09 probe
+defect described above, now repaired.
+
+**Reading any leg:** baseline's 1 PASS is the FactionFundingCheck canary, and
+the D09 probe FAILs baseline by design ("fix pack not loaded"). The 10 SKIPs in
+a fixed leg are 9 `[install]` retail-sandbox probes + TechDescriptionBuilding; a
+default-config leg's extra 5 are the opt-module probes reporting `inactive
+(opt-in)` — five, not six, because D06 has no probe of its own (the stress
+harness covers it). Known synthetic-map noise only: ~50-60 `Flight.lua`
+`objects_to_mark` errors, a few GameInit nil-call lines, 2 `ResManager Error`
+missing-animation lines (`LawOfficeDoor`, pre-existing and present in every leg),
+the MultipleSuns "not found → lifted" load transient, and a `[mod] Error in mod …
+Test Kit` line at quit (shutdown artifact).
+
+**The post-D09 pair caught two real defects en route** (both fixed
+same-session, see the D09 entry): the module's file-scope `Modifier.new` check
+tripped the F64 pre-flattening trap, and the probe's first version wrote the
+TestKit env's own `CurrentModOptions` (per-mod-env — new ENGINE_FACTS entry).
+
+**⚠️ ACCOUNT STATE as of the 19.20 leg — READ IT, NEVER ASSUME IT.** All six
+toggles **ON** (hence `73/73`), and the **CARRY DIAL IS AT +1, not base**. The
+earlier "all six OFF after the PT-55 closure" note is superseded, and the 19.20
+leg did not change either: its probe forces base internally and restores the
+account's own values. **Read the DIALS too, not just the toggles.** Pre-D09
+reference set (76 probes): baseline 1/60/15/0 · default 61/0/15/0 at 68/74 ·
+all-toggles 66/0/10/0 at 74/74.
 
 **Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** **PT-55 CLOSED IN
 FULL 2026-07-30** (archived; audit A2 caveat retired; the D01 parked-rocket
