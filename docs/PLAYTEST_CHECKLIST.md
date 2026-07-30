@@ -661,7 +661,15 @@ path is exactly the case that was broken. Test that path deliberately.
 
 ### PT-58 — First Asteroid prefabs survive a reload? · settles **F83** (NEW 2026-07-30)
 
-**Needs a save that has not yet spawned its first asteroid.** F83's mechanism is
+**Needs a save with `UIColony.asteroid_count == 0` — check it first
+(`UIColony.asteroid_count`), because the FirstAsteroid popup is `show_once` and a
+save that has already met an asteroid cannot test it.** A second popup,
+`ReconCenterDiscoveryAsteroid`, fires on the SAME message for every asteroid, and
+its choice 2 is the paid Detailed Scan — so one spawn exercises both consequential
+call sites. Take both readings while you are here (does Detailed Scan actually
+spend the Electronics and set `asteroid.scanned` after a reload?).
+
+F83's mechanism is
 already play-proven on a founder popup (a minimized story popup loses its
 callback across a load, because the waiter is a real-time thread and the async
 popup context is not persisted). What is NOT yet observed is the one consequence

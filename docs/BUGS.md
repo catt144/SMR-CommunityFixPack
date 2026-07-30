@@ -3529,13 +3529,14 @@ the pack never references `WaitPopupNotification` for these presets,
   and load, then answered → **View dead.** Tester, verbatim: *"Correct view died
   after a load."*
 
-**Scope — seven in-game call sites pass a callback** (`WaitPopupNotification`
+**Scope — eight in-game call sites pass a callback** (`WaitPopupNotification`
 over `Lua/`; the two `PreGameMission.lua` tutorial calls pass a `host` parent,
 not a callback, and are excluded):
 
 | Call site | Preset | What the callback does |
 |---|---|---|
 | `Asteroids.lua:415` | FirstAsteroid | **grants 3 prefabs** |
+| `Discoveries.lua:126` | ReconCenterDiscoveryAsteroid | choice 1 opens planetary view; **choice 2 performs the paid Detailed Scan** |
 | `ColonyViability.lua:52` | FirstFounder\<trait\> | `ViewAndSelectObject` |
 | `ColonyViability.lua:173` | LastFounderDies | `ViewAndSelectObject` |
 | `ColonyViability.lua:185` | FirstFounderDiesOfOldAge | `ViewAndSelectObject` |
@@ -3543,7 +3544,21 @@ not a callback, and are excluded):
 | `ColonyViability.lua:216` | LastFounderLeavingMars | `ViewAndSelectObject` |
 | `ColonyViability.lua:260` | `class.popup_on_first` (status effects) | `ViewAndSelectObject` |
 
-Six are cosmetic — a dead View button on a story popup. **The seventh is not.**
+Six are cosmetic — a dead View button on a story popup. **Two are not.**
+
+**Second consequential site — `ReconCenterDiscoveryAsteroid`
+(`Discoveries.lua:117-136`), and it is the FREQUENT one.** It fires on *every*
+asteroid discovery, not just the first (`OnMsg.SpawnedAsteroid` →
+`ShowAsteroidPopupNotification`), so a player meets it repeatedly. Its choice 2
+is **"Detailed Scan (Costs: N Electronics stored in Recon Centers)"** and runs
+`PerformDetailedScan(asteroid)`, which spends the Electronics and sets
+`asteroid.scanned = true`. Answered after a reload the callback never runs, so
+the popup closes and **the player's paid action is silently refused** — no
+Electronics spent (the cost lives inside the same callback, so nothing is
+stolen) and no scan performed. Milder than the prefab loss and probably
+recoverable through the planetary-view UI — *verify that before grading it* —
+but it is a player-initiated action that silently does nothing, and it is
+reachable far more often than the once-per-game FirstAsteroid popup.
 
 **The FirstAsteroid case — permanent, silent loss of a promised reward.**
 ```lua
