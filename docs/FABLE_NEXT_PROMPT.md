@@ -28,9 +28,9 @@ silently reporting SKIP (they ran every assertion then fell off the end of
 automated coverage was imaginary until the repair (TestKit `d701595`) — the
 fixes themselves were correct throughout.
 
-**Account state: the six Mod Options toggles were OFF as of 2026-07-30, but a
-live PT-55 sitting has been flipping them** — **read the state, never assume
-it.** `SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`. The two D09
+**Account state: all six Mod Options toggles ended OFF when the 2026-07-30
+PT-55 closure cycle finished on a deactivate-all** — **still: read the state,
+never assume it.** `SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`. The two D09
 dials default to base and are not part of the six.
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
@@ -44,35 +44,25 @@ consequences NOW:
    ResidencyControl / MultipleSuns works without a relaunch — hooks install at
    file scope. Do NOT treat a dead first-enable as legacy behavior any more; it
    would be a regression. The two known-and-explained exceptions are the D04
-   panel-binding timing and the D01 parked-rocket demand refresh — both in the
-   PT-55 section above.
+   panel-binding timing (self-healing on reload) and the D01 parked-rocket
+   demand refresh (accepted limitation) — both recorded on their BUGS entries
+   and in the archived PT-55 section.
 2. The audit-era warning about running the fix prompt concurrently is
    obsolete — that one-off executed and deleted itself 2026-07-29.
 
-## ⚠️ PT-55 — WHAT IS STILL OWED TO CLOSE IT (tell the user this explicitly)
+## PT-55 — CLOSED IN FULL 2026-07-30 (nothing owed)
 
-**PT-55 is PARTIALLY run (2026-07-30) and is NOT closed.** The audit's A2
-question is already answered **YES** — all three reworked hooks install and run
-on a first mid-session enable, no relaunch. Recorded on the checklist and the
-D01/D03/D04 entries. What was proven: **D03 clean**; **D04 passes** with an
-expected self-healing limitation (a panel built BEFORE the flip cannot be
-retro-bound — the wrap is on `SolarPanelBase:GameInit` — and a reload snaps it
-to sun #2); **D01's hook is live** (a rocket that LANDS after the flip fills
-immediately).
-
-**Step 2 (toggle OFF, all three) is REPORTED VERIFIED 2026-07-30** — all three
-revert immediately; reported from a parallel session rather than separately
-captured. **The D01 decision is MADE (2026-07-30, user call, recorded
-`4f5f61e`): the parked-rocket first-enable limitation is ACCEPTED as
-documented** — no `on_activate` demand refresh built; an already-parked rocket
-picks the behavior up on its next landing; the enhancement path stays on the
-D01 entry. **ONE thing remains to close PT-55:**
-
-1. **Step 3 — `SMRFixPack.ListFixes()` agreement + a log sweep.** Status
-   unconfirmed. ListFixes must agree with the toggle at each step, and the
-   session log must be clean per PT-22 rules. **Ask the user whether this was
-   done** before treating it as owed — several PT-55 halves were run across
-   parallel conversations and reported late.
+All three steps resolved. Step 1 per module: first mid-session enable works
+for all three reworked opt-modules — D03 clean; D04 with the self-healing
+binding-timing note (a panel built before the flip binds on reload); D01's
+hook live (a rocket that LANDS after the flip fills immediately). Step 2
+(toggle-OFF reverts) reported verified. Step 3 ran in the live sitting:
+`ListFixes` agreed with the toggles through a full OFF/ON/OFF Mod Options
+cycle and the log swept clean per PT-22. **The D01 parked-rocket limitation
+is ACCEPTED by user call (`4f5f61e`)** — a parked rocket picks the behavior
+up on its next landing; the `on_activate` enhancement stays on the D01 entry,
+unbuilt. Audit A2 caveat retired. Full evidence: the archived PT-55 section
+in `PLAYTEST_ARCHIVE.md`.
 
 **Playtest state:** **PT-11 PASS → F01 `tested`** and **PT-29 PASS → F41
 `tested`** (both 2026-07-29, archived). PT-53 (D07 CohortHousing) is 3-of-5
@@ -122,8 +112,8 @@ Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 1. `git log --oneline -5` + `git pull` (see above).
 2. Verify the pack loaded clean: on-screen status loop (below) — all 69
    default fixes `active` (incl. DroneStatDials, active-at-base), plus
-   whichever opt-in toggles the user runs (account-persistent — a live PT-55
-   sitting has been flipping them: READ the state, never assume it).
+   whichever opt-in toggles the user runs (account-persistent — READ the
+   state, never assume it; all six ended OFF after the PT-55 closure cycle).
 3. Fresh `SMRFixPack.DroneReport` baseline if D06 is on (counters reset
    every launch; the PT-52 passive watch continues every sitting).
 4. Optional (only if a lander/cargo read is planned): re-arm
@@ -210,14 +200,11 @@ silent.
   landed (veto bypasses, opt-module first-enable repair, error-status
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
   MOD_DESCRIPTION/README corrections, ENGINE_FACTS + STATUS/SESSION_LOG
-  restructure). What it left for humans: **PT-55** (opt-module live-toggle
-  re-verify, checklist §2 — **PARTIALLY RUN 2026-07-30, see the PT-55 section
-  near the top for the exact three items still owed**) and the **Phase 4
+  restructure). What it left for humans: **~~PT-55~~ (CLOSED IN FULL
+  2026-07-30, archived — see the section above)** and the **Phase 4
   go-decision** (user).
-- **PT-55 — FINISH IT (cheapest open item).** ONLY step 3 remains: ListFixes
-  agreement + a log sweep (the toggle-OFF half is reported verified; the D01
-  parked-rocket limitation is ACCEPTED by user decision — see the dedicated
-  section above). Nothing else on the board is closer to done.
+- **~~PT-55~~ CLOSED IN FULL 2026-07-30** — archived; audit A2 caveat retired.
+  The cheapest open item is now **PT-56** (D09 stat dials, ~5 min).
 - **PT-52 STRESS A/B — re-run with the v2 harness (the v1 run's metric was
   invalid).** Protocol is Trigger B2 in the checklist (§2): quicksave →
   `Targets` dry run (check the `pure_only=true` cohort size too) → D06 OFF →
@@ -375,7 +362,7 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   already-built subclasses — e.g. lander taps go on `UniversalLanderRocket`,
   not `UniversalRocketBase`. (The same fact is why the opt-module
   first-enable defect existed — fixed by audit 1.3's file-scope installs;
-  human re-verify is PT-55.)
+  human re-verify PASSED — PT-55, closed 2026-07-30.)
 - **CORRECTED 2026-07-29 — the earlier claim here was backwards.** Bare console
   expressions echo on-screen only (NOT logged), **and so does `print(...)`**:
   `print = CreatePrint{""}` (`lib.lua:202`) and `CreatePrint` defaults its

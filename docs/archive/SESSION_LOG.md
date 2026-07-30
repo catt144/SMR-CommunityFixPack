@@ -8,6 +8,29 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## PT-55 CLOSED — step 3 run live, D01 limitation accepted — 2026-07-30
+
+The bottleneck item is done, on the user's explicit "nothing else until it is
+closed" directive. Two blockers resolved in order: (1) the D01 decision — the
+parked-rocket first-enable limitation ACCEPTED as documented (user call,
+`4f5f61e`), no `on_activate` refresh built, enhancement path recorded on the
+D01 entry; (2) step 3 executed in the live sitting (log
+`Mars.exe-20260730-12.03.01`): all six opt-ins `applied` → `deactivated` ×6 →
+`re-activated` ×6 → `deactivated` ×6, with on-screen status reads AND full
+`ListFixes` blocks agreeing at every step; log swept clean per PT-22 (zero
+LUA ERRORs; Braze DNS + LawOfficeDoor ResManager noise only). Bonus capture:
+`MultipleSuns: reconnected 1 solar panel(s)` on the mid-sitting reload — the
+D04 self-heal visible in the log. PT-55 section archived (36 archived
+sections now); audit A2 caveat retired in AUDIT_FINDINGS; STATUS + the
+continuation prompt rewritten.
+
+Tooling fact worth keeping: while Mars.exe holds the session log open, the
+logs DIRECTORY reports a stale 0-byte size for it — NTFS directory metadata
+only updates on handle close. `FlushLogFile()` works; open or copy the file
+to read the flushed content instead of trusting the listing.
+
+---
+
 ## PLAYTEST_CHECKLIST split: tests-only checklist + PLAYTEST_HELP.md — 2026-07-30
 
 User call ("to the human eye its hard to find and organize play tests and then

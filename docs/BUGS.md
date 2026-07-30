@@ -1695,7 +1695,7 @@ in either game. Adding it is a new mechanic, not a repair.
 
 ### D01 — Rockets don't auto-refuel / auto-export rare metals — INTENTIONAL REDESIGN (verdict)
 
-**PT-55 (2026-07-30) — live-toggle result, and one OPEN item.** The audit's A2
+**PT-55 (2026-07-30) — live-toggle result; PT-55 CLOSED IN FULL the same day.** The audit's A2
 repair is confirmed: the file-scope install works, and a rocket that LANDS after
 a first mid-session enable starts filling immediately (no relaunch). But a
 rocket **already parked** on the pad when the toggle flips does NOT begin
@@ -1714,7 +1714,10 @@ play, the enhancement is on record: an `on_activate` that re-runs
 D05 reconciler's intended use of `on_activate` (state nudges that are not a
 call path, FIX_POLICY §5) — would make the enable immediate. Building it would
 be a normal mechanical change (A/B re-run + live re-verify), not a reopening of
-this decision.
+this decision. **PT-55 closed 2026-07-30:** step 3 (ListFixes agreement + log
+sweep) PASSed in the live sitting — statuses tracked a full OFF/ON/OFF Mod
+Options cycle at every step, log clean per PT-22. Evidence archived with the
+PT-55 section in PLAYTEST_ARCHIVE.md.
 
 Not a bug: legacy always-on PreciousMetals loader exists only in dead legacy class
 (`RocketBase.lua:1730-1734`; `RocketCompatibility.lua:58-59,97-98` nils old fields).

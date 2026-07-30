@@ -73,34 +73,28 @@ known synthetic-map noise only. **The pair caught two real defects en route**
 (both fixed same-session, see the D09 entry): the module's file-scope
 `Modifier.new` check tripped the F64 pre-flattening trap, and the probe's
 first version wrote the TestKit env's own `CurrentModOptions` (per-mod-env —
-new ENGINE_FACTS entry). **Account toggle state: all six OFF as of 2026-07-30
-(user flipped them for the default-config leg) — exactly PT-55's required
-starting state, so PT-55 is staged.** The default leg's dial probe PASS also
+new ENGINE_FACTS entry). **Account toggle state: all six OFF as of the
+2026-07-30 PT-55 closure cycle (it ended on a deactivate-all) — still: read
+the state, never assume it.** The default leg's dial probe PASS also
 proves the dials work independently of the toggles. Pre-D09 reference set
 (76 probes): baseline 1/60/15/0 · default 61/0/15/0 at 68/74 · all-toggles
 66/0/10/0 at 74/74.
 
-**Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** **PT-55 is PARTIALLY
-RUN (2026-07-30) and is the cheapest open item.** The audit's A2 question is
-answered YES — all three hooks install and run on a first mid-session enable.
-The toggle-OFF direction for all three is **reported verified 2026-07-30**
-(parallel session, not separately captured). **The D01 decision is MADE
-(2026-07-30, user call, `4f5f61e`): the parked-rocket first-enable limitation
-is ACCEPTED as documented** — no `on_activate` refresh built; a parked rocket
-picks the behavior up on its next landing. **ONE thing closes PT-55:**
-`ListFixes()` agreement + a log sweep — status unconfirmed, ask before
-assuming it is owed. D04's panel-binding timing is expected and self-healing;
-D03 was clean. Then: PT-56 D09 dials (PASS also un-gates the D10 workshops
-build);
-PT-54 wedge watchdog; PT-52
-Trigger B + the B2 re-run on the v2 stress harness; PT-53 A/E halves; PT-46
-tail; PT-20 save/remove/load incl. wave-6 persisted state; PT-21.
+**Next gates (owner playtests — PLAYTEST_CHECKLIST.md):** **PT-55 CLOSED IN
+FULL 2026-07-30** (archived; audit A2 caveat retired; the D01 parked-rocket
+limitation ACCEPTED by user call `4f5f61e` — a parked rocket picks the
+behavior up on its next landing, `on_activate` enhancement on record but
+unbuilt). Cheapest open item now: **PT-56 D09 dials** (~5 min; PASS un-gates
+the D10 workshops build). Then: PT-53 Trigger E (the last thing between D07
+and `tested`); PT-54 wedge watchdog; PT-52 Trigger B + the B2 re-run on the
+v2 stress harness; PT-46 tail; PT-20 save/remove/load incl. wave-6 persisted
+state; PT-21.
 
 **Newest legs:** `docs/archive/SESSION_LOG.md` → the 2026-07-30 set, newest
-first: the PLAYTEST_CHECKLIST/PLAYTEST_HELP split leg, the curiosity leg
-(tunnel water, workshop research → D10 spec, shuttle limits → D11 candidate),
-and the parallel playtest legs (PT-55/PT-53-A/D12); the 2026-07-29 D09-build
-and PT-11 legs sit below them.
+first: the PT-55 closure leg, the PLAYTEST_CHECKLIST/PLAYTEST_HELP split leg,
+the curiosity leg (tunnel water, workshop research → D10 spec, shuttle limits
+→ D11 candidate), and the parallel playtest legs (PT-55/PT-53-A/D12); the
+2026-07-29 D09-build and PT-11 legs sit below them.
 
 **Playtest-method rule earned 2026-07-29 (applies beyond PT-11):** compressing a
 scheduler's `g_Consts` interval does NOT shorten the sleep already in flight, so

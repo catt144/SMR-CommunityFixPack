@@ -6,9 +6,9 @@ next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so far
-(35 sections): PT-01 … PT-09, PT-11 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
+(36 sections): PT-01 … PT-09, PT-11 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
 PT-26, PT-29, PT-31 … PT-34, PT-36, PT-38 … PT-41, PT-43, PT-45, PT-46 (the
-F49(b) half), PT-49, PT-50, PT-51. This file carries **only un-run work**; when a test
+F49(b) half), PT-49, PT-50, PT-51, PT-55. This file carries **only un-run work**; when a test
 completes, its whole section (with the result notes) moves to the archive.
 (Cross-checked against the archive and the BUGS.md index 2026-07-29 — nothing
 below re-tests anything already passed; PT-46's remaining halves are exactly
@@ -82,69 +82,6 @@ healthy = `vetoed` climbing, `veto_expired` low, `unclaimed` not building up.
 ---
 
 # 2 · In progress — owed halves of partially-passed tests
-
-## PT-55 — Opt-module live-toggle re-verify · covers **audit fix 1.3 (2026-07-29)**
-
-The audit rework moved ClassicRockets' fuel wrap, ResidencyControl's dome
-gate and MultipleSuns' panel-binding wrap to file-scope installs, so a FIRST
-mid-session Mod Options enable now works without a relaunch (previously
-silently dead until restart). One sitting, any healthy save, per module:
-
-> ✅ **Setup state (2026-07-30): all six toggles are OFF** — the user flipped
-> them for the default-config A/B leg (verified in that leg's log: 69/75
-> active, all six `inactive (opt-in)`). Toggles are account-persistent, so
-> unless they have been changed since, this test's required starting state is
-> already set — go straight to step 1. (The two D09 dials are separate,
-> default to base, and don't affect this test.)
-
-1. Start the session with the module **OFF**. Mid-session, toggle it **ON**
-   (no relaunch) and confirm the behavior engages: ClassicRockets — a parked,
-   destination-less player rocket starts requesting launch fuel;
-   ResidencyControl — a closed dome stops voluntary move-ins (the infopanel
-   row appears on the next panel open); MultipleSuns — a NEW panel built
-   beside sun #2 binds to it (the limit lift itself was already live-safe).
-2. Toggle **OFF** again: behavior reverts immediately (vanilla answers).
-3. `SMRFixPack.ListFixes()` agrees with the toggle at each step; log clean
-   (PT-22 rules).
-
-PASS flips nothing on its own (the modules keep their D-entry gates) — it
-retires the audit's A2 "live confirmation still worthwhile" caveat; record
-the result on the D01/D03/D04 entries.
-
-`Result:` **2026-07-30 — the audit's A2 question is ANSWERED YES: all three
-hooks install and run on a first mid-session enable, no relaunch.** Per module:
-
-- **ResidencyControl (D03) — PASS, clean.** Mid-session flip worked with no
-  issues at all.
-- **MultipleSuns (D04) — PASS with a documented, self-healing limitation.** A
-  panel built BEFORE the flip did not start tracking sun #2; a panel built
-  AFTER it bound immediately; after a save/reload the pre-existing panel
-  snapped to the sun. **Expected by construction:** the binding fix wraps
-  `SolarPanelBase:GameInit`, so a panel that already ran GameInit cannot be
-  retro-bound — and a reload re-runs GameInit (plus the module's own LoadGame
-  sweep), which is what heals it. Nothing owed.
-**Step 2 (toggle OFF) — REPORTED VERIFIED 2026-07-30.** The tester confirms all
-three revert immediately on toggle-off — ClassicRockets stops requesting fuel on
-a destination-less parked rocket, ResidencyControl's closed dome accepts
-move-ins again, MultipleSuns' build menu refuses a second sun again. *Provenance
-note: verified during a parallel session and reported here rather than captured
-separately, so there are no per-module screenshots for this half.* The OFF
-direction is the cheap half structurally — every hook consults
-`SMRFixPack.IsActive` per call, so OFF is the pass-through path.
-
-- **ClassicRockets (D01) — hook PROVEN LIVE, but step 1 as written FAILS.** A
-  rocket already parked on the pad did NOT begin refuelling after the flip, and
-  — unlike the panel — **did not heal on a save/reload either**. A rocket that
-  LANDED after the flip started filling immediately. Cause: the wrap is on
-  `GetFuelResourceRequest`, which is only consulted when
-  `CargoTransporterNew:UpdateCargoResourceRequests` runs; for an already-parked
-  rocket nothing re-triggers that, and landing is what does (the tester's own
-  "on-land interaction" guess, confirmed in source). So the file-scope install
-  is working — the demand refresh is what is missing. **DECIDED 2026-07-30:
-  accepted as a documented limitation (user call)** — no `on_activate` refresh
-  built; an already-parked rocket picks the behavior up on its next landing.
-  The enhancement path stays on record on the D01 entry. With this decision,
-  step 1 is CLOSED for all three modules and only step 3 remains for PT-55.
 
 ## PT-56 — Drone stat dials · covers **D09 `Opt_DroneStatDials`** (built 2026-07-29)
 

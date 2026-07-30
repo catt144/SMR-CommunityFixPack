@@ -38,7 +38,7 @@ Fix_LastTransmissionStorage.lua:102-106 — applied to one file of four, never
 propagated. Found independently by two reviewers; verified. FIX_POLICY §2
 violation.
 
-### A2. First mid-session enable of three optional modules is silently dead (or half-dead) until restart `[x — fixed 2026-07-29, plan 1.3; live first-enable confirmation still owed to playtest]`
+### A2. First mid-session enable of three optional modules is silently dead (or half-dead) until restart `[x — fixed 2026-07-29, plan 1.3; live first-enable CONFIRMED IN PLAY 2026-07-30 — PT-55 closed in full, archived]`
 Per the project's own live-proven engine fact (STATUS "Key technical facts":
 runtime patches on a base class are invisible to already-flattened derived
 classes), an option OFF at load installs nothing; the first in-game toggle runs
@@ -242,8 +242,9 @@ authoritative home plus pointers** — that is the structural lesson.
 
 ## Unverified (and what it would take)
 
-1. **A2 live confirmation** — enable ClassicRockets mid-session, park a rocket,
-   watch fuel requests (one sitting; also re-verifies the Phase-1 fix).
+1. **~~A2 live confirmation~~ DONE 2026-07-30 (PT-55 closed, archived)** — all
+   three reworked hooks install and run on a first mid-session enable; the
+   parked-rocket demand-refresh limitation was accepted by user call (D01 entry).
 2. **Save → remove-mod → load cycle for the newest fixes** (RainsDeadlock's
    persisted-by-global-name threads, MeteorStormWedge) — one PT-20-shaped cycle.
 3. **Paradox Mods portal-side rules for console exposure** — needs the
