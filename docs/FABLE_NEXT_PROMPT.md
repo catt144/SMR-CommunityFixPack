@@ -37,15 +37,22 @@ below. Everything committed and pushed.
 > precedent: two violated this rule and one is already retired under it (F28;
 > F29 is flagged, awaiting the owner).
 
-**The code gate is CLEAR and nothing is owed.** Current leg (unattended, log
-`Mars.exe-20260730-19.20.24`): **`73/73` fixes active**, **76 probes**, result
-**66 PASS / 0 FAIL / 10 SKIP / 0 ERROR**, **zero `[CommunityFixPack]`
-error/inactive/disabled lines**, no log line naming our `Code/`. That is the
-first leg run after the F28 removal and it lands exactly on the predicted
-post-removal counts. It read `73/73` and not a default-config `67/73` **because
-the account had all six toggles ON** — read the state, never assume it; a true
-default-config leg still has not run since the removals and needs the six turned
-off by hand.
+**The code gate is CLEAR and nothing is owed. BOTH configurations are measured
+post-removal**, unattended, 76 probes each:
+
+- **all six toggles ON** (log `Mars.exe-20260730-19.20.24`) — **`73/73` active**,
+  **66 PASS / 0 FAIL / 10 SKIP / 0 ERROR**
+- **default config, six toggles OFF + dials at base** (log
+  `Mars.exe-20260730-19.32.16`) — **`67/73` active**, **61 PASS / 0 FAIL /
+  15 SKIP / 0 ERROR**
+
+Both: zero `[CommunityFixPack]` error/disabled/FAILED lines, no log line naming
+our `Code/`, known noise only. The default leg's 15 SKIPs are the 10 standing
+ones plus the five opt-module probes reporting `inactive (opt-in)` — five, not
+six, because D06 has no probe. Its six `[CommunityFixPack] … inactive (opt-in
+module …)` log lines are the **expected healthy signature**, not errors.
+`DroneStatDials` and `OptionsMenu` PASS in both, so the dials and the Mod Options
+wiring are toggle-independent.
 
 **The D09 dial probe is REPAIRED** (TestKit, same evening) — it forces both dials
 to base through the real Apply path before measuring and restores the leg's entry
@@ -61,14 +68,15 @@ Historical legs (counts no longer apply — measured before the removals):
 `1/61/15/0` · default config, six toggles OFF `62/0/15/0 at 69/75` · all six ON
 + dials `67/0/10/0 at 75/75`.
 
-**Account state — READ IT, NEVER ASSUME IT.** As of the last leg all six
-toggles were **ON** (hence 73/73) and the **carry dial is at +1, not base**
-(`DroneResourceCarryAmount` read 3 where a techs-only save reads 2). The
-2026-07-30 evening leg did not change either — its probe forces base internally
-and restores the account's own values. A default-config leg needs the six turned
-off by hand; **PT-56 needs both dials set to base first** or its "baseline" step
-records an already-modified value. `SMRFixPack.ListFixes()` or
-`SMRFixPack.fixes.<Id>.status`.
+**Account state — READ IT, NEVER ASSUME IT.** As of 2026-07-30 19.32 the owner
+set **all six toggles OFF and both dials to base**, and the `67/73` leg confirms
+the toggles. **That is the clean state PT-56 wants** — but it is one Mod Options
+visit away from going stale again, exactly as it did that afternoon (the carry
+dial was left at +1, `DroneResourceCarryAmount` reading 3 where a techs-only save
+reads 2). The repaired D09 probe is deliberately immune to dial state, so a green
+leg does NOT prove the dials are at base; the probe now *reports* the state it
+found on entry instead. Read it, and read the toggles with
+`SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`.
 
 ### The reachability turn (2026-07-30) — the day's most important outcome
 
@@ -280,14 +288,13 @@ silent.
   entry's own words** — F29 called itself "mod-facing / No shipped user" and had
   four live shipped callers.
 
-- **~~⚠️ FIRST ACTION: dials-to-base + one A/B leg~~ — the A/B is DONE and CLEAR**
-  (2026-07-30 evening, unattended: `73/73`, 76 probes, `66/0/10/0`). The probe
-  defect behind the previous leg's single FAIL was **repaired** rather than
-  worked around, so the dials-to-base step is no longer a precondition for a
-  leg at all. **What survives:** (1) **set both dials to base before PT-56** —
-  its step-1 baseline reads come from the live game, and the account carry dial
-  is still at +1; (2) a genuine **default-config leg** (`67/73`) has still never
-  run since the removals and needs the six toggles turned off by hand.
+- **~~⚠️ FIRST ACTION: dials-to-base + one A/B leg~~ — DONE, both legs CLEAR**
+  (2026-07-30 evening, unattended: `73/73` at `66/0/10/0`, then `67/73`
+  default-config at `61/0/15/0`). The probe defect behind the earlier leg's
+  single FAIL was **repaired** rather than worked around, so dials-to-base is no
+  longer a precondition for a leg at all. **Nothing on the harness side is
+  owed.** The owner has left all six toggles OFF and both dials at base — the
+  state PT-56 wants; just re-read it rather than trusting this sentence.
 
 - **DECISION OWED — the FIX_POLICY §4 amendment** (the *other* one; §4a is
   already applied). Drafted at the end of `REACHABILITY_AUDIT.md` and revised by
@@ -539,22 +546,21 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   So ALWAYS read the leg's own `fix pack present: N/73 fixes active` line to
   learn which config you actually measured — and a true default-config leg
   (**67/73** since the F24 and F28 removals) requires the user to turn the six toggles
-  off by hand first. Proven four times: 2026-07-29 a "default" leg came up
-  74/74 with all six on; the post-D09 set needed the user's hand flip to
-  produce its 69/75 leg; the 2026-07-30 post-removal leg came up **74/74**;
-  and the 19.20 leg came up **73/73** — all because the playtest had left the
-  six ON. **The dials are the same trap** — they are account-persistent too, and
-  the carry dial is still at +1. Read both. (The dial no longer breaks the D09
-  probe, which now forces base itself, but it still skews any live baseline
-  read a human takes.)
+  off by hand first — proven four times over (2026-07-29's "default" leg came up
+  74/74 with all six on; the post-D09 set needed a hand flip for its 69/75 leg;
+  the post-removal leg came up 74/74; the 19.20 leg came up 73/73). **The
+  2026-07-30 19.32 leg is the one that actually got the hand flip and read
+  `67/73`.** **The dials are the same trap** — account-persistent too. Read both.
+  (The dial no longer breaks the D09 probe, which forces base itself and now
+  reports what it found, but it still skews any live baseline read a human takes.)
 - **TestKit `Code/91_Stress.lua` (v2, lifecycle tracing)** — the drone stress
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — CURRENT is the 2026-07-30 19.20 leg (76 probes): all six
-  toggles ON, `73/73`, `66 / 0 / 10 / 0`.** The D09 dial probe now forces base
-  itself, so it is green regardless of account dial state. A default-config leg
-  should read **`67/73`** and has NOT been run since the removals. The three
+- **Expected numbers — CURRENT is the 2026-07-30 pair (76 probes each): all six
+  toggles ON `73/73` → `66 / 0 / 10 / 0`; default config `67/73` →
+  `61 / 0 / 15 / 0`.** The D09 dial probe now forces base itself, so it is green
+  regardless of account dial state (and reports the state it found). The three
   legs below are HISTORICAL — measured before
   `Fix_DomePipeMoveInside` was deleted, so their `/75` and `/69` counts no
   longer apply: baseline (`code` list emptied) **1 / 61 / 15 / 0**;

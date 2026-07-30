@@ -3817,18 +3817,21 @@ all-six-toggles 63/0/10/0 (71/71 applied), zero errors. PT-53 pending.
 
 ### D09 — Drone speed & carry capacity dials (design, med)  `[built 2026-07-29: Code/Opt_DroneStatDials.lua — Mod Options choice dials "Drone speed" (1x/2x/3x/5x) and "Drone carry capacity" (+0/+1/+2); base = vanilla; PT-56 owed]`
 
-**⚠️ LIVE STATE — still true. Read this before running PT-56.**
+**⚠️ LIVE STATE — read this before running PT-56.**
 
-1. **The account dials are NOT at base.** The 2026-07-30 17.25 leg read
-   `DroneResourceCarryAmount = 3` where a techs-only save reads 2 — the carry
-   dial is sitting at **+1**. Dials are account-persistent and that day's
-   playtest moved them (the same account change that produced `74/74`
-   toggles-on instead of a default-config `68/74`). **Nothing since has moved
-   them back** — the 19.20 leg's probe forces base internally and restores the
-   account's own values, so it neither reads nor leaves a base state.
-   PT-56 step 1 would otherwise record an already-modified value as its
-   "baseline" and every later comparison would be off by the dial. **Set both
-   dials to base by hand before PT-56.**
+1. **RESOLVED 2026-07-30 19.32 — the owner set both dials to base** (and all six
+   toggles off; the `67/73` leg confirms the toggles). **PT-56 can run as
+   written.** The history is worth keeping because it will recur: the 17.25 leg
+   read `DroneResourceCarryAmount = 3` where a techs-only save reads 2 — the
+   carry dial had been left at **+1** by that day's playtest (the same account
+   change that produced `74/74` toggles-on instead of a default-config `68/74`).
+   Dials are account-persistent, so **one Mod Options visit puts this back**, and
+   PT-56 step 1 would then record an already-modified value as its "baseline"
+   with every later comparison off by the dial. **Re-read the state; do not
+   trust this line.** Note a green D09 probe is NOT that confirmation — the
+   repaired probe forces base internally and is immune to account state by
+   design; it does now *report* the state it found on entry, which is the read
+   to look for.
 
 2. **~~The probe is STATE-DEPENDENT~~ — TESTKIT DEFECT, REPAIRED 2026-07-30
    late; verified green the same evening.** `60_Probes_Opt.lua` used to do
@@ -3912,6 +3915,13 @@ elapsed repair time. **Dial range widened from the DECISION's 1.0x/1.5x/2.0x to
   identical to the previous leg. **This does NOT flip D09 to `tested`** — only
   the playtest does that, and PT-56's stale-save reconcile step is beyond any
   probe.
+- **A/B 2026-07-30 19.32 — default config** (log `Mars.exe-20260730-19.32.16`,
+  76 probes, unattended after the owner set all six toggles OFF and both dials to
+  base): **`67/73` active, `61 PASS / 0 FAIL / 15 SKIP / 0 ERROR`**, predicted
+  before the run and landing exactly. **`DroneStatDials` PASSes here too**, with
+  the five opt-module probes SKIPping as `inactive (opt-in)` around it — the
+  dials are confirmed independent of the toggle modules in the shipping default
+  configuration, not just with everything switched on.
 
 ### D10 — Workshops: capacity can't scale late-game; unemployment's real cost is invisible (design, med)  `[speced 2026-07-30, user-approved same day — BUILD GATED ON PT-56 PASS (the capacity dial reuses D09's label-modifier machinery; no point stacking a second dial module on machinery whose first live check hasn't run). One Opt_ module, planned PT-57]`
 **Problem (research session 2026-07-30, all source-verified).** The three

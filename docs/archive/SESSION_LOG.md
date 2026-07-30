@@ -65,6 +65,35 @@ come from the live game; the repair removed that precondition from *A/B legs*
 only. The board's ⚠️ A/B item is now done and can come off; the ⚠️ dials-to-base
 item survives as part of PT-56 itself.
 
+### Second leg the same evening — the default configuration, and a self-inflicted blind spot found
+
+The owner then set **all six toggles OFF and both dials to base** by hand — the
+one thing the opt-in bridge cannot do, since it ORs with the saved toggles and
+can only force a module ON. Leg run unattended immediately after, with the
+expected result **stated before the run** so it could fail: log
+`Mars.exe-20260730-19.32.16`, **`67/73` active, 76 probes, `61 PASS / 0 FAIL /
+15 SKIP / 0 ERROR`.** It landed exactly. The five opt-module probes flip
+PASS→SKIP as `inactive (opt-in)` — five, not six, because D06 has no probe of its
+own — turning 66/10 into 61/15 with FAIL and ERROR still zero. `DroneStatDials`
+and `OptionsMenu` both stay PASS, so the dials and the Mod Options wiring are
+confirmed toggle-independent **in the shipping default configuration**, not just
+with everything switched on. The six `[CommunityFixPack] … inactive (opt-in
+module …)` log lines are the healthy default-config signature, not errors — six
+here, not five, because DroneOverhaul reports its status despite having no probe.
+Same noise profile a third time.
+
+**The blind spot the leg exposed, in this session's own work.** Making the dial
+probe immune to account dial state also made it *silent* about it — and that
+silence costs something real, because the old broken probe's FAIL text
+(`DroneResourceCarryAmount 3 → 2 (want 4)`) is precisely how the project learned
+a playtest had left the carry dial at +1. A green leg now proves nothing either
+way about the account, while **PT-56's own baseline reads still depend on it**.
+Fixed the same evening (`e605ba6`): the probe compares its entry reading against
+the base it forced and reports `account carry dial AT BASE on entry` or `OFF BASE
+on entry (const N vs base M)`. Immunity for the verdict, visibility for the
+human. General shape worth remembering: **when you make a check robust to some
+ambient state, ask what the old fragility was accidentally reporting.**
+
 Docs: STATUS A/B table + account-state block rewritten (17.25 compressed to
 history), BUGS D09 entry item 2 flipped to repaired-and-verified with the new leg
 recorded, PT-56's warning block corrected so it no longer tells the tester a

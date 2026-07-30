@@ -86,10 +86,9 @@ without touching D07). **D10 and D12 both touch colonist assignment — land the
 separately, each with its own A/B.** Unfiled candidate: Universal Tunnel description omits its
 life-support bridging (description drift, one-line text patch — user call).
 
-**A/B probe state — CURRENT is the 2026-07-30 19.20 leg: 76 probes,
-`73/73 fixes active`, `66 PASS / 0 FAIL / 10 SKIP / 0 ERROR`, code gate CLEAR
-and nothing owed.** It is the first leg run after the F28 removal (which took
-the 77th probe with it) and after the D09 probe repair, and it clears both.
+**A/B probe state — CURRENT is the 2026-07-30 pair at 76 probes: `73/73` all
+toggles ON and `67/73` default config, both `0 FAIL / 0 ERROR`. Code gate CLEAR,
+nothing owed, and both shipping configurations are now measured post-removal.**
 Earlier rows are historical — their `/75`, `/74` and 77-probe counts no longer
 apply.
 
@@ -99,17 +98,30 @@ apply.
 | Fixed, default config (six toggles OFF) | 69/75 *(pre-F24-removal)* | **62 / 0 / 15 / 0** |
 | Fixed, all six toggles ON + dials | 75/75 *(pre-F24-removal)* | **67 / 0 / 10 / 0** |
 | Post-removal re-verify, 2026-07-30 17.25 (unattended) | 74/74 *(pre-F28-removal)* | **66 / 1 / 10 / 0** — the 1 FAIL was the probe defect below |
-| **CURRENT — 2026-07-30 19.20 (unattended), 76 probes** | **73/73** | **66 / 0 / 10 / 0** |
+| **CURRENT — all six toggles ON, 2026-07-30 19.20 (unattended), 76 probes** | **73/73** | **66 / 0 / 10 / 0** |
+| **CURRENT — default config, six toggles OFF + dials at base, 2026-07-30 19.32 (unattended), 76 probes** | **67/73** | **61 / 0 / 15 / 0** |
+
+**The 19.32 leg — the shipping default configuration, CLEAN.** Run after the
+owner set all six toggles OFF and both dials to base. `fix pack present: 67/73
+fixes active`, and the result was **predicted before the run and landed exactly**:
+the five opt-module probes flip PASS→SKIP as `inactive (opt-in)` (five, not six —
+D06 has no probe of its own), so 66/10 becomes 61/15 with the same zero FAIL and
+zero ERROR. `DroneStatDials` and `OptionsMenu` both stay PASS, confirming the
+dials and the Mod Options wiring are independent of the toggles. The six
+`[CommunityFixPack] … inactive (opt-in module, off by default …)` lines are the
+expected healthy default-config signature, **not** error lines — six here, not
+five, because DroneOverhaul reports its status even though it has no probe. Zero
+error / disabled / FAILED lines, no log line names our `Code/`, same noise
+profile again (2 `ResManager` `LawOfficeDoor`, 1 shutdown artifact,
+`objects_to_mark` 48).
 
 **The 19.20 leg — the owed A/B, run and CLEAR.** `fix pack present: 73/73 fixes
 active`, matching the post-F28 registry exactly; **zero** `[CommunityFixPack]`
 error / inactive / disabled / FAILED lines; no log line names our `Code/`; noise
 profile identical to the 17.25 leg (same 2 pre-existing `ResManager` animation
 errors, same shutdown-artifact `[mod] Error in mod … Test Kit`, `objects_to_mark`
-48→59 with the random map). The account still had all six toggles ON, hence
-`73/73` rather than a default-config **67/73** — **read the state, never assume
-it.** A default-config leg has still not been run since the removals and needs
-the six turned off by hand.
+48→59 with the random map). The account had all six toggles ON at that point,
+hence `73/73` — **read the state, never assume it.**
 
 **The D09 probe defect is REPAIRED (TestKit, 2026-07-30 late) and verified.**
 The probe used to take its baseline from the live const, valid only when the
@@ -144,11 +156,15 @@ same-session, see the D09 entry): the module's file-scope `Modifier.new` check
 tripped the F64 pre-flattening trap, and the probe's first version wrote the
 TestKit env's own `CurrentModOptions` (per-mod-env — new ENGINE_FACTS entry).
 
-**⚠️ ACCOUNT STATE as of the 19.20 leg — READ IT, NEVER ASSUME IT.** All six
-toggles **ON** (hence `73/73`), and the **CARRY DIAL IS AT +1, not base**. The
-earlier "all six OFF after the PT-55 closure" note is superseded, and the 19.20
-leg did not change either: its probe forces base internally and restores the
-account's own values. **Read the DIALS too, not just the toggles.** Pre-D09
+**⚠️ ACCOUNT STATE as of 2026-07-30 19.32 — READ IT, NEVER ASSUME IT.** The
+owner set **all six toggles OFF and both dials to base** before that leg, and the
+`67/73` reading confirms the toggles. **This is the clean state PT-56 needs** —
+if a later sitting moves the dials again, PT-56's step-1 baseline reads go stale
+the same way they did on 2026-07-30 afternoon. Note the repaired D09 probe is
+deliberately *immune* to account dial state, so a leg's PASS no longer proves the
+dials are at base; the probe was therefore extended the same evening to **report
+the dial state it found on entry**, restoring the observability the broken
+version had by accident. **Read the DIALS too, not just the toggles.** Pre-D09
 reference set (76 probes): baseline 1/60/15/0 · default 61/0/15/0 at 68/74 ·
 all-toggles 66/0/10/0 at 74/74.
 
