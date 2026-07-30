@@ -10,10 +10,13 @@ model-specific.)
 
 ## Where the project stands (2026-07-29 late, after the pre-flight A/B pair — AUDIT_FINDINGS Phases 1-3 landed earlier the same day)
 
-**Build state: 74 registered modules — 68 active by default, 6 opt-in via
-Options → Mod Options (D05, `tested`). Everything committed and pushed.**
-**The owed pre-flight A/B set RAN IN FULL 2026-07-29 late — nothing is owed to
-the harness and the code gate is CLEAR.** Fresh numbers (76 probes): baseline
+**Build state: 75 registered modules — 69 active by default, 6 opt-in via
+Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
+(`Opt_DroneStatDials`, BUILT 2026-07-29 late: Drone speed 1x/2x/3x/5x and
+Drone carry +0/+1/+2 dropdowns, active-at-base = vanilla, PT-56 owed).
+Everything committed and pushed.**
+**The pre-flight A/B set RAN IN FULL 2026-07-29 late, but the D09 build landed
+AFTER it — a fresh A/B pair is owed to the harness (see the board).** Fresh numbers (76 probes): baseline
 **1/60/15/0** · default config **61/0/15/0 at 68/74** · all-six-toggles
 **66/0/10/0 at 74/74**. Log clean in every leg; all four engine error
 signatures appear in both halves of the pair. The audit-remediation Code/
@@ -55,9 +58,9 @@ read-list below for its new layout.
 (trains never serve service trips — confirmed vanilla gap); audit Phase 4
 go/no-go (core-helper extraction + module merges — deferred, see
 AUDIT_FINDINGS); D06 iteration beyond knobs (design changes are user calls;
-the stat-dials decision — speed ×1.0/1.5/2.0, carry +0/+1/+2 as Mod Options
-dials — is recorded in `DRONE_OVERHAUL_OPTIONS.md` DECISION, build not
-started). D08 (extender overhaul) is speced there too, nothing built.
+the stat dials are BUILT — D09, 2026-07-29 late, range widened to 1x/2x/3x/5x
+by user call after the live no-clamp probe; PT-56 owed).
+D08 (extender overhaul) is speced in `DRONE_OVERHAUL_OPTIONS.md`, nothing built.
 Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 / Steam ≤1 MB), screenshots, Paradox portal console-publishing rules.
 
@@ -138,10 +141,11 @@ silent.
 
 ## The board (user picks; suggested order)
 
-- **~~PRE-FLIGHT A/B RunAll pair~~ DONE IN FULL 2026-07-29 late** — three legs
-  (baseline 1/60/15/0 · default 61/0/15/0 at 68/74 · all-toggles 66/0/10/0 at
-  74/74), wave-6 probe repair landed in the TestKit. Nothing owed to the
-  harness; the next A/B is owed only when new code lands.
+- **A/B RunAll pair — OWED AGAIN (D09 landed after the 2026-07-29-late set).**
+  Pre-D09 reference numbers: baseline 1/60/15/0 · default 61/0/15/0 at 68/74 ·
+  all-toggles 66/0/10/0 at 74/74. Post-D09 expectations: 69/75 and 75/75
+  actives; the TestKit OptionsMenu probe asserts six toggle wirings and needs
+  a D09 dial-wiring assertion (TestKit is local-only).
 - **~~AUDIT_FIX_PROMPT~~ DONE 2026-07-29** — AUDIT_FINDINGS Phases 1-3 all
   landed (veto bypasses, opt-module first-enable repair, error-status
   checkbox, F78/F81 decoupling, upload blockers + ignore_files + ModItemCode,
@@ -195,8 +199,10 @@ silent.
   PT-35, PT-42, PT-44, PT-46 tail (F49(d) cap, F49(a) palette), PT-47,
   PT-20/21/22 (cross-cutting, last — PT-20's save should post-date wave 6 so
   the cycle covers the new persisted state).
-- **DECISIONS owed (user):** F79 D-item or not; audit Phase 4 go/no-go;
-  stat-dials build timing; D08.
+- **PT-56 — D09 stat dials** (checklist §2, ~5 min): baseline reads → 2x/+1
+  → Apply → stacked reads → base → Apply → baseline again → stale-save
+  reconcile. PASS flips D09 to tested.
+- **DECISIONS owed (user):** F79 D-item or not; audit Phase 4 go/no-go; D08.
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.
 
@@ -348,7 +354,8 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — FRESH (2026-07-29 late, 76 probes, all three legs run):**
+- **Expected numbers — pre-D09 reference (2026-07-29 late, 76 probes; the D09
+  build shifts actives to 69/75 / 75/75 and a fresh pair is owed):**
   baseline (`code` list emptied) **1 / 60 / 15 / 0**; default config, six
   toggles OFF **61 / 0 / 15 / 0 at 68/74**; all six toggles ON
   **66 / 0 / 10 / 0 at 74/74**. The 10 SKIPs are 9 `[install]` retail-sandbox

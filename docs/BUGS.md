@@ -86,6 +86,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested — PT-51 PASS 2026-07-27 (entry) |
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28 — first A/B NULL 2026-07-29, B2 re-run pending (entry) |
 | D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 — PT-53 3-of-5 PASS 2026-07-29, A/E owed (entry) |
+| D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | built 2026-07-29 — PT-56 owed (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -3395,6 +3396,48 @@ user_forced_workplace. TestKit probe drives both wrappers with stand-ins
 (8 cases: both moves, tie-bypass, employed/forced/no-slot/quarantine/
 non-cohort negatives). A/B 2026-07-28 late: baseline 1/57/15/0 ·
 all-six-toggles 63/0/10/0 (71/71 applied), zero errors. PT-53 pending.
+
+### D09 — Drone speed & carry capacity dials (design, med)  `[built 2026-07-29: Code/Opt_DroneStatDials.lua — Mod Options choice dials "Drone speed" (1x/2x/3x/5x) and "Drone carry capacity" (+0/+1/+2); base = vanilla; PT-56 owed]`
+Player-facing stat dials for drone speed and carry capacity, decided post-QA
+2026-07-29 (`DRONE_OVERHAUL_OPTIONS.md` DECISION): relief for big colonies and
+breakthrough-lottery insurance, NOT the fix for the structural hauling problem —
+the A/B save was AT the vanilla stat ceiling and hauling was still 88% of
+elapsed repair time. **Dial range widened from the DECISION's 1.0x/1.5x/2.0x to
+1x/2x/3x/5x by user call the same day, pre-build, after the no-clamp probe.**
+- **Mechanism — the techs' own machinery** (`Effect_ModifyLabel`,
+  MarsGameEffects.lua:161-178). Speed: percent Modifier on UIColony label
+  "Drone" prop `move_speed` (+100/+200/+400), identical to Advanced Drone
+  Drive (TechPreset.lua:702-706, +40) / Low-G Drive (+20); percents stack
+  ADDITIVELY on base (Modifiers.lua:100,112-113), worst case 5x + both
+  breakthroughs = 1440 × 5.6 = 8064. Carry: amount Modifier on label "Consts"
+  prop `DroneResourceCarryAmount` (base 1, __const.lua:637-641), identical to
+  Artificial Muscles (TechPreset.lua:626-630, +1); consumed Drone.lua:719,
+  auto-rebuilt via ConstValueChanged (Drone.lua:724). New drones inherit label
+  modifiers automatically (LabelContainer:AddToLabel, LabelContainer.lua:17-28).
+- **Reconcile points:** OnMsg.ApplyModOptions (live, both directions),
+  OnMsg.CityStart (new game), OnMsg.PostLoadGame (stale persisted modifiers in
+  a loaded save replaced/removed to match current dials). Idempotent via
+  SetLabelModifier same-id replace (LabelContainer.lua:59-78). Modifier ids
+  `SMRFixPack_DroneSpeedDial` / `SMRFixPack_DroneCarryDial`. Choice values
+  arrive as the choice STRING itself (Mod.lua:2764-2771) — mapped in code;
+  unknown/missing reads as base.
+- **Not a toggle module:** option names ≠ Register id (`DroneStatDials`);
+  registers WITHOUT `optional` (00_Core's boolean reconciler must not manage
+  it); reports `active` whenever targets validate — active at base = armed,
+  behavior byte-vanilla. FIX_POLICY §5 dial addendum covers the shape.
+- **Save-safety (FIX_POLICY §3):** base position, veto or error status removes
+  the modifiers BY ID, including cleaning stale ones out of loaded saves.
+  Uninstalling with a dial active leaves benign vanilla `Modifier` residue
+  (string keys, vanilla class — loads clean without the mod, keeps the boost
+  permanently); set dials to base first — documented in MOD_DESCRIPTION.
+- **C-side clamp check DONE live 2026-07-29 (user probe, screenshot on file):**
+  `SelectedObj:SetMoveSpeed(10000)` → `GetMoveSpeed()` = 10000 — NO C-side
+  clamp; at 10000 on ultra sim speed (~35x the dial's worst-case relative
+  throughput) movement stayed clean: no frame skips, clipping, pathing
+  failures or stuck states. Probe drone restored to 2304 afterwards. The 5x
+  dial's headroom is proven, not inferred.
+- Playtest: PT-56 (checklist §2) — apply/stack reads, live removal, stale-save
+  reconcile. PASS flips this entry to tested (both places).
 
 ## Candidates under investigation
 

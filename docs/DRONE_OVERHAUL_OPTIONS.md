@@ -357,12 +357,19 @@ fired ONCE across 25 simultaneous malfunctions and moved its own leg by one
 minute.** Options A–H and the D08 layers below were all designed before that
 was known. Re-read them as hypotheses, not as a plan.
 
-# DECISION — 2026-07-29 (post-QA review): the overhaul ships with player-facing STAT DIALS
+# DECISION — 2026-07-29 (post-QA review): the overhaul ships with player-facing STAT DIALS — **BUILT 2026-07-29 late (D09, `Code/Opt_DroneStatDials.lua`)**
 
 **User decision, made after the fresh-context QA review reported:** stop
 treating speed as a diagnosis question. The overhaul module will EXPOSE the two
 stat levers as Mod Options dials and move on; the structural work stays gated
 on instrumentation (below).
+
+**BUILD NOTE (2026-07-29 late):** shipped as D09 — see the BUGS.md entry for
+the build facts. **Speed dial range AMENDED by user the same day, pre-build,
+after the no-clamp probe below: 1x (base)/2x/3x/5x (percent +0/+100/+200/+400,
+additive with techs; worst case 1440 × 5.6 = 8064, under the proven 10000
+headroom), superseding this section's original 1.0x/1.5x/2.0x. Carry unchanged
+(+0/+1/+2).** PT-56 owed.
 
 **The UI capability is verified** (QA session, `CommonLua\Classes\Mod.lua`):
 Mod Options is NOT toggle-only. Three widget types exist —
@@ -397,9 +404,11 @@ session):**
 - **No drone speed cap exists in the game's Lua** — no clamp constant, no
   min/max metadata on the property; the modifier pipeline clamps only to int64
   (`Modifiers.lua:100-101`); the game itself runs units at 2× through passages
-  via raw `SetMoveSpeed` (`Passage.lua:1046-1056`). A C-side clamp can't be
-  ruled out statically — one-liner check queued for the next live sitting:
-  `SelectedObj:SetMoveSpeed(10000)` then read back.
+  via raw `SetMoveSpeed` (`Passage.lua:1046-1056`). **The queued C-side check
+  RAN 2026-07-29 (user, live, screenshot on file): `SelectedObj:SetMoveSpeed(10000)`
+  → `GetMoveSpeed()` = 10000 — NO C-side clamp; and at 10000 on ultra sim
+  speed movement stayed clean (no frame skips, clipping, tripping or stuck
+  states). Probe drone restored to 2304 afterwards.**
 - Save-safety (FIX_POLICY §3): modifiers persist on objects/save. Toggle-off or
   selecting "base" must remove the module's modifiers **by id**; uninstalling
   the mod with a dial active leaves a benign vanilla `Modifier` residue

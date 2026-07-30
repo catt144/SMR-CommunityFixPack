@@ -16,6 +16,13 @@
 --   * Every toggle here must also appear (as false) in metadata.lua
 --     `default_options` — that field is what makes the Options screen list
 --     the pack at all (ModDef:HasOptions, Mod.lua:473-475).
+--   * EXCEPTION — the two ModItemOptionChoice dials (DroneSpeedDial /
+--     DroneCarryDial) belong to the NON-toggle module DroneStatDials (D09):
+--     their names are NOT Register ids, 00_Core's boolean reconciler does
+--     not manage them, and the module reads CurrentModOptions directly and
+--     reconciles itself (FIX_POLICY §5 dial addendum). Their
+--     `default_options` entries are the base STRINGS (must stay
+--     byte-identical to the ChoiceList/module maps), not false.
 --   * Toggling takes effect immediately (00_Core's OnMsg.ApplyModOptions
 --     reconciliation activates/deactivates the module live); the tooltips
 --     stay behavior-only.
@@ -330,6 +337,10 @@ return {
 		'name', "Opt_CohortHousing",
 		'CodeFileName', "Code/Opt_CohortHousing.lua",
 	}),
+	PlaceObj('ModItemCode', {
+		'name', "Opt_DroneStatDials",
+		'CodeFileName', "Code/Opt_DroneStatDials.lua",
+	}),
 	PlaceObj('ModItemOptionToggle', {
 		'name', "ClassicRockets",
 		'DisplayName', "Classic rockets — refuel while parked",
@@ -365,5 +376,19 @@ return {
 		'DisplayName', "Cohort housing — Seniors & Children",
 		'Help', "Seniors and Children living in normal housing automatically move into free Retirement Home / Nursery slots — in their own Dome first, in any reachable Dome second — and are left completely alone when no such slot exists. Employed Seniors stay put; your manual residence and Dome assignments always win; quarantine and closed Domes are respected. No dome designation needed: concentrate the cohort buildings where you want the cohort to live.",
 		'DefaultValue', false,
+	}),
+	PlaceObj('ModItemOptionChoice', {
+		'name', "DroneSpeedDial",
+		'DisplayName', "Drone speed",
+		'Help', "Adds a multiple of base Drone movement speed: 2x adds +100%, 3x adds +200%, 5x adds +400%, stacking on top of any speed techs the save has (Low-G Drive, Advanced Drone Drive). Drones only — rovers and shuttles are untouched. Takes effect immediately; 1x is exactly vanilla.",
+		'DefaultValue', "1x (base)",
+		'ChoiceList', { "1x (base)", "2x", "3x", "5x" },
+	}),
+	PlaceObj('ModItemOptionChoice', {
+		'name', "DroneCarryDial",
+		'DisplayName', "Drone carry capacity",
+		'Help', "How many extra units of a resource a Drone carries per trip, on top of the base 1 (the Artificial Muscles breakthrough adds another +1 — they stack). Takes effect immediately; +0 is exactly vanilla.",
+		'DefaultValue', "+0 (base)",
+		'ChoiceList', { "+0 (base)", "+1", "+2" },
 	}),
 }

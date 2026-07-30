@@ -403,6 +403,34 @@ the result on the D01/D03/D04 entries.
 
 `Result:` _____________________________________________
 
+## PT-56 — Drone stat dials · covers **D09 `Opt_DroneStatDials`** (built 2026-07-29)
+
+Two Mod Options dropdowns: **Drone speed** (1x base / 2x / 3x / 5x, percent
+added on BASE, additive with speed techs) and **Drone carry capacity**
+(+0 base / +1 / +2 on `g_Consts.DroneResourceCarryAmount`). One sitting,
+any healthy save with at least one drone (~5 min):
+
+1. **Baseline reads:** select a drone —
+   `SelectedObj:GetMoveSpeed()` and `g_Consts.DroneResourceCarryAmount`
+   (with both speed techs expect 2304 = 1440 × 1.6; carry 2 with Artificial
+   Muscles).
+2. **Set speed 2x + carry +1 → Apply** (no relaunch): same reads — speed
+   gains +1440 (100% of base, additive: 2304 → 3744 on the techs save),
+   carry +1; drones visibly faster; log clean (PT-22 rules).
+3. **Back to base → Apply:** both reads return to the step-1 numbers —
+   live removal, no residue (`SMRFixPack.ListFixes()` still shows
+   `DroneStatDials [active]` — active-at-base is the armed state, by design).
+4. **Stale-save reconcile:** save with dials ON, set dials to base, reload
+   that save → reads are the step-1 numbers (the persisted modifiers were
+   removed on load).
+
+PASS flips D09 to `tested` (both BUGS.md places). (The C-side clamp probe
+originally queued here was run ahead of the build, 2026-07-29 live: no clamp —
+`SetMoveSpeed(10000)` read back exactly — and movement stayed clean at 10000
+on ultra. Recorded on the D09 entry; no need to repeat it.)
+
+`Result:` _____________________________________________
+
 ## PT-53 — Cohort housing · covers **D07 `Opt_CohortHousing`** (built 2026-07-28)
 
 Colonist/housing-level rule, NO dome designation: a Senior or Child living in

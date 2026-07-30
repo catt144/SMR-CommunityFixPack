@@ -1,8 +1,8 @@
 return PlaceObj('ModDef', {
 	'title', "Community Fix Pack",
-	'description', "Fixes bugs in Surviving Mars: Relaunched gameplay code. Every fix targets a verified defect in the game's Lua source and patches at runtime in a mod-compatible way (no game files are modified). The six optional modules can be toggled in-game via Mod Options on every platform; individual bug fixes can additionally be disabled on PC (via the console or a companion mod). See the mod page for the full list of fixes.",
-	'short_description', "Dozens of verified bug fixes for Surviving Mars: Relaunched, applied at runtime in a mod-compatible way — no game files modified. Plus six optional quality-of-life modules, all off by default.",
-	'last_changes', "Initial release: 68 bug fixes plus 6 optional modules (toggle in Mod Options).",
+	'description', "Fixes bugs in Surviving Mars: Relaunched gameplay code. Every fix targets a verified defect in the game's Lua source and patches at runtime in a mod-compatible way (no game files are modified). The optional modules — six toggles plus Drone speed and carry-capacity dials — are controlled in-game via Mod Options on every platform; individual bug fixes can additionally be disabled on PC (via the console or a companion mod). See the mod page for the full list of fixes.",
+	'short_description', "Dozens of verified bug fixes for Surviving Mars: Relaunched, applied at runtime in a mod-compatible way — no game files modified. Plus optional quality-of-life modules — six toggles and two Drone stat dials — all off/at base by default.",
+	'last_changes', "Initial release: 68 bug fixes, 6 optional modules and Drone speed/carry dials (all in Mod Options).",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	'version', 1,
@@ -28,7 +28,9 @@ return PlaceObj('ModDef', {
 	-- Mod Options defaults (D05): must mirror items.lua's ModItemOptionToggle
 	-- names, all false. This field is what makes Options → Mod Options list the
 	-- pack (ModDef:HasOptions reads it, Mod.lua:473-475), and the engine seeds
-	-- CurrentModOptions from it before our code loads.
+	-- CurrentModOptions from it before our code loads. The two D09 dial
+	-- entries are ModItemOptionChoice values — base STRINGS, byte-identical
+	-- to items.lua's ChoiceList and Opt_DroneStatDials.lua's maps, not false.
 	'default_options', {
 		ClassicRockets = false,
 		AcknowledgedWarnings = false,
@@ -36,6 +38,8 @@ return PlaceObj('ModDef', {
 		MultipleSuns = false,
 		DroneOverhaul = false,
 		CohortHousing = false,
+		DroneSpeedDial = "1x (base)",
+		DroneCarryDial = "+0 (base)",
 	},
 	'code', {
 		"Code/00_Core.lua",
@@ -114,6 +118,7 @@ return PlaceObj('ModDef', {
 		"Code/Opt_MultipleSuns.lua",
 		"Code/Opt_DroneOverhaul.lua",
 		"Code/Opt_CohortHousing.lua",
+		"Code/Opt_DroneStatDials.lua",
 	},
 	'TagGameplay', true,
 })

@@ -106,6 +106,15 @@ Not bug fixes: opt-in behavior changes, off by default, one Mod Options
 toggle each (`ModItemOptionToggle.name` == the Register id == the
 `default_options` key — all three are load-bearing).
 
+**Dial addendum (D09):** a module may instead expose `ModItemOptionChoice`
+dials. Then the option names are NOT the Register id, the module registers
+WITHOUT `optional` (00_Core's boolean reconciler must not manage it), and it
+reconciles itself from `CurrentModOptions` on ApplyModOptions + CityStart +
+PostLoadGame. The dial's base position must be byte-vanilla (module-owned
+modifiers removed by id, including stale ones in loaded saves); choice
+strings are load-bearing across items.lua / metadata `default_options` / the
+module's own maps — byte-identical in all three.
+
 - **Install pattern (mandatory — the A2 lesson, audit 2026-07-29):** hooks on
   class methods are installed at FILE SCOPE (classdef time, so they propagate
   through class flattening) and gate per call on `SMRFixPack.IsActive(id)`.

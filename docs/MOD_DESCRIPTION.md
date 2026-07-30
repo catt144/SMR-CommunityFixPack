@@ -23,7 +23,12 @@ the optional modules — an acknowledgment stamp on a dismissed building warning
 and a "closed to new residents" flag on a dome) whose absence simply means the
 pre-fix behavior, and — where a save-repair pass restored a bonus a broken
 patch migration dropped — an ordinary label modifier the game handles like any
-other. Removing the mod simply lets the original bugs come back.
+other. Removing the mod simply lets the original bugs come back. One footnote
+for the optional **Drone stat dials**: a non-base dial is stored in the save
+as an ordinary modifier too, so a save made with a dial active keeps that
+boost if you later remove the mod — harmless, but permanent. Set the dials
+back to base (and load/save once) before uninstalling if you want a clean
+vanilla save.
 
 **Playing on Xbox, PlayStation, or the Microsoft Store version?** One platform
 rule to know before you install — it applies to every mod, not just this one:
@@ -355,6 +360,24 @@ every one of them is **off until you turn it on**, with its own switch in
 with a controller). Toggles take effect immediately — no restart needed.
 (Modders: the pre-load `SMRFixPack_Optional = { ModuleIdHere = true }` table
 still works as an override.)
+
+**Drone stat dials** (`DroneSpeedDial` / `DroneCarryDial`). Two dropdowns on
+the same Mod Options page, for colonies where drone logistics can't keep up
+(or where the breakthrough lottery never dealt you the drone techs):
+
+- **Drone speed** — 1x (base) / 2x / 3x / 5x. Adds that multiple of base
+  drone speed on top of whatever speed techs your save has. Drones only —
+  rovers and shuttles are untouched.
+- **Drone carry capacity** — +0 (base) / +1 / +2 extra units per trip, on
+  top of the base 1; the Artificial Muscles breakthrough still stacks.
+- Both take effect immediately, both directions; the base positions are
+  exactly vanilla behavior. Honest expectations: these are relief, not a
+  cure — in our stress tests, colony-scale repair time was dominated by trip
+  count and distances, so faster, bigger drones help but don't change the
+  underlying logistics.
+- Uninstalling the mod while a dial is active leaves that save with the
+  boost permanently (see the savegame note near the top) — set dials back
+  to base first.
 
 **Acknowledged warnings** (`AcknowledgedWarnings`). Changes what dismissing a
 **"Building Not Working"** warning means: instead of silencing the whole warning

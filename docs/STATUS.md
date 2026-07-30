@@ -6,13 +6,24 @@ remediation 3.3). Session legs are append-only in
 `docs/ENGINE_FACTS.md`; defect truth lives in `docs/BUGS.md`.
 
 **Build state (authoritative counts — stated here and nowhere else):**
-`Code/` = **75 files** (67 `Fix_` + 6 `Opt_` + `00_Core` +
-`90_SaveSanitizer`) = **74 registered modules, 68 default-active** (the 6
-`Opt_` modules are opt-in via Mod Options). Pinned game build:
-**1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
-91 rows.
+`Code/` = **76 files** (67 `Fix_` + 7 `Opt_` + `00_Core` +
+`90_SaveSanitizer`) = **75 registered modules, 69 default-active** (the 6
+toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
+registers active but is byte-vanilla until a dial leaves base). Pinned game
+build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
+92 rows.
 
-**Just landed (2026-07-29, audit-remediation session):** AUDIT_FINDINGS.md
+**Just landed (2026-07-29 late, D09 build):** the drone stat dials DECISION is
+BUILT — `Code/Opt_DroneStatDials.lua` + two Mod Options dropdowns: Drone
+speed 1x/2x/3x/5x (range widened from the DECISION's 1.5x/2.0x by user call
+after the live no-clamp probe: `SetMoveSpeed(10000)` read back exactly, clean
+movement at ultra) and Drone carry +0/+1/+2. Techs' own label-modifier
+machinery, reconciled on ApplyModOptions/CityStart/PostLoadGame, base =
+modifiers removed = vanilla. D09 entry in BUGS.md; PT-56 owed; **a fresh A/B
+RunAll pair is owed to the harness (new code)** — expected-number shifts:
+default leg 69/75 active, all-toggles 75/75.
+
+**Landed earlier the same day (audit-remediation session):** AUDIT_FINDINGS.md
 Phases 1-3 implemented — code: veto re-check in the three data-patch fixes
 (A1), DustSickness data-loaded latch (B3), file-scope install for the three
 flattening-unsafe Opt_ hooks so a first mid-session enable works (A2),
@@ -28,11 +39,13 @@ the newest SESSION_LOG leg.
 **Open user decisions:** Phase 4 go/no-go (core helpers, module merges,
 deactivation surface — AUDIT_FINDINGS.md PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
-overhaul stat dials + structural choice (DRONE_OVERHAUL_OPTIONS.md DECISION
-section, gated on the B2 re-run).
+overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
+BUILT (D09); the structural choice stays gated on the B2 re-run); F79
+D-item or not; D08.
 
-**A/B probe state (fresh 2026-07-29 late — the owed post-wave-6 set RAN in
-full; nothing owed to the harness):** **76 probes**, all three legs clean.
+**A/B probe state (2026-07-29 late — the post-wave-6 set RAN in full;
+**superseded by the D09 build: a fresh pair is owed**, numbers below are the
+pre-D09 reference):** **76 probes**, all three legs clean.
 
 | Leg | Active | Result |
 |---|---|---|
