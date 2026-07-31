@@ -158,9 +158,9 @@ other buildings, without ever touching food. Confirm that reading.
 > trap: **`const.TaskRequest.DefBuildingPriority` is dead** — the classdef
 > captures the local before `ClassesPreprocess` reassigns it, so a default change
 > must be written on the class. `Min`/`MaxBuildingPriority` are unaffected, so
-> **Q1's experiment is unharmed**. Still worth a ~30-second live read (load a
-> save, read a Grocer's `priority`) to confirm the prediction against a real
-> save rather than only against source.
+> **Q1's experiment is unharmed**. **✅ CONFIRMED LIVE 2026-07-31** — untouched
+> `ShopsFood_Small`: `priority` → 2 but `rawget(obj, "priority")` → **nil**;
+> after moving the arrow to 3, `rawget` → **3**. Both branches. **Q4 is closed.**
 
 **Why it matters.** `priority` is a property with `default = 2`
 (`Building.lua:199`). Property objects commonly omit default-valued properties

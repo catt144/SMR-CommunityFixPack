@@ -4184,6 +4184,16 @@ all** and reads whatever the class default currently is. Player-set values are
 explicit members and are preserved. That is the desirable half of both outcomes
 the brief posed — but it is now a **known choice**, which is what Q4 asked for.
 
+**✅ CONFIRMED LIVE 2026-07-31** (owner at the keyboard, real loaded save, both
+branches in one sitting). On an untouched Small Grocer: `SelectedObj.class` →
+`ShopsFood_Small`, `SelectedObj.priority` → **`2`**, and
+`rawget(SelectedObj, "priority")` → **nil** — the key is genuinely absent, so the
+2 is the class table's. Then, after moving that building's priority arrow to 3,
+`rawget(SelectedObj, "priority")` → **`3`**. Both halves of the prediction, from
+the live game rather than from source alone: the member materialises **only on a
+real change**, so untouched buildings follow the class default and hand-set ones
+keep the player's choice.
+
 ⚠️ **Trap found while proving it: `const.TaskRequest.DefBuildingPriority` is
 dead for this purpose.** `DefineClass.TaskRequester` captures the module local at
 **file-load** time (`:57`); `OnMsg.ClassesPreprocess` reassigns that local
