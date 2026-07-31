@@ -22,8 +22,10 @@ Staleness check: this was written at **`84427e1`** + the PT-20 leg that follows 
 >   safe by construction; **12 are exposed** (list on the F86 entry).
 > - The 2026-07-31 audit's "class tables are safe" clearance is **void** —
 >   `Drone.Idle` is a class-table write and leaked anyway.
-> - **Nothing is built.** A three-layer redesign is proposed on the entry and is
->   an **owner decision**.
+> - **Nothing is built.** The three-layer redesign lives in
+>   **`docs\SAVE_SAFETY_REDESIGN.md`** — per-module disposition for all 12, the
+>   autosave timer trap, and the four decisions owed. It is an **owner decision**;
+>   do not build against it unquoted.
 
 > **Same leg, two corrections to recorded "facts" — both were believed and both
 > were wrong:**
@@ -334,6 +336,14 @@ resource choice, and the RC Terraformer clicking a waste-rock heap.
 
 ## Harness facts (for any A/B pair / same-day repair)
 
+- ⚠️ **EVERY LEG WE HAVE IS A COLD BOOT — the enable path is unmeasured.** The
+  harness always launches with the pack already enabled, so all `N/74` figures
+  describe the *second session onward*. **A player's first session is different**:
+  they tick the mod at the main menu, which triggers an in-place mod reload where
+  presets are already loaded and classes are not yet flattened. That is where F87
+  lives, and an **enable-path leg is owed** — boot with the pack off, enable at
+  the main menu, then run the probes. It also verifies audit A2's three `Opt_`
+  modules.
 - Launch: `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050 -smrautorun`.
   A leg takes ~75 s; Mars.exe may take minutes to appear. **Never kill on a short
   timeout** (25 min no-kill guard; harness watchdog 15 min).

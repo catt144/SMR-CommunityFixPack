@@ -19,7 +19,8 @@ remediation 3.3). Session legs are append-only in
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
-93 rows. **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
+**98 rows** (87 `F` + 11 `D`; recounted 2026-07-31 — the previous "93" had gone
+stale before F86/F87 were added). **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
 before that the F83 probe added `56_Probes_Wave7.lua`). Counts moved 2026-07-31
 with **PHASE 4 COMPLETE** (below).
 > ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
@@ -77,9 +78,12 @@ with **PHASE 4 COMPLETE** (below).
 >   construction.
 > - Controls: reproduces identically with the pack *disabled* and with the
 >   junction *physically removed* (98 vs 98 errors, same locals).
-> - **Redesign proposed, nothing built, owner decision owed** — patch synchronous
->   inputs instead of replacing blocking bodies (F02 needs no body at all), a
->   tail-call rule for wrappers, and `SaveGameStart` tear-down for the rest.
+> - **Redesign proposed, nothing built, owner decision owed** — full spec in
+>   **`docs/SAVE_SAFETY_REDESIGN.md`** (three layers, the per-module disposition
+>   for all 12 exposed modules, the autosave timer trap, and the four decisions
+>   owed): patch synchronous inputs instead of replacing blocking bodies (F02
+>   needs no body at all), no mod code after a call that can block, and
+>   `SaveGameStart` tear-down for the rest.
 > - ✅ **Remedy measured:** reinstalling the pack DOES revive a killed thread
 >   (`IsValidThread(Meteors)` → `true`, restarted by our own `LoadGame`). The
 >   answer for an affected player is "put the mod back" — real, and uncomfortable.
@@ -162,7 +166,8 @@ followed, and the build ran with its own probe and a CLEAR harness leg
 (`74/74`, `67 PASS / 0 FAIL / 10 SKIP / 0 ERROR` at 77 probes — the all-toggles-ON
 configuration *as it stood at build time*; that leg and its owed twin have both
 since been superseded by the post-Phase-4 set at 78 probes, and **nothing is owed
-on the harness side**). What
+on the harness side for the COLD-BOOT configurations** — see the enable-path
+caveat on the A/B table below, added 2026-07-31). What
 ships: an `OnMsg.LoadGame` sweep that, when the FirstAsteroid popup notification
 is still sitting in the persisted `Notifications` table after a load — the only
 state the dead real-time waiter can leave — **removes** it, **grants** the three
@@ -327,8 +332,18 @@ All six toggles ON: `74/74` → **68 / 0 / 10 / 0** (leg 12.30.34). Baseline
 config, six toggles OFF + dials at base (owner-flipped, leg 12.44.39):
 `68/74` → **63 / 0 / 15 / 0** — predicted before the run and landed exactly;
 the D09 probe reports the carry dial AT BASE on entry, so the account is
-genuinely clean. **NOTHING IS OWED.** Every measured leg: zero `[CommunityFixPack]`
+genuinely clean. Every measured leg: zero `[CommunityFixPack]`
 error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
+
+> ⚠️ **"NOTHING IS OWED" RETIRED 2026-07-31 — every leg above is a COLD BOOT.**
+> All of them launch the game with the pack already enabled, so the whole A/B set
+> describes the **second session onward**. The session in which a player *turns
+> the mod on* has never been measured, and **F87 lives there** (an in-place mod
+> reload makes apply-time code run with presets loaded and classes unflattened).
+> **Owed:** a leg that boots with the pack off, enables it at the main menu, then
+> runs the probes. It would also verify audit finding **A2**'s three `Opt_`
+> modules, whose "a first mid-session enable works" remediation has never been
+> checked end to end.
 The post-F83 set at 77 probes (`74/74` → `67/0/10/0`; default `68/74` →
 `62/0/15/0`; baseline `1/61/15/0`) is now historical, as are all older rows.
 
@@ -618,8 +633,11 @@ authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
 1. DONE 2026-07-25/26 — retail A/B pairs clean AND the MarsDebug [install] pass is
    complete (49 PASS / 0 FAIL, F73 fully verified — see the QA session leg in
    SESSION_LOG.md).
-   **Automated + attended probe coverage is now 100%**; nothing further is owed to
-   the harness. All that remains is the human playtest.
+   **Automated + attended probe coverage is now 100%**; ~~nothing further is owed
+   to the harness~~ — **corrected 2026-07-31: that "100%" covers the cold-boot
+   path only. The enable path (player ticks the mod at the main menu) has never
+   been measured and is where F87 lives; a leg for it is owed.** All that remains
+   otherwise is the human playtest.
 2. DONE 2026-07-26 — author set to **catt144** in both mods' metadata.lua.
 3. For the save-failure lead: logs from `%AppData%\Surviving Mars Relaunched\logs`
    and Ctrl+F1 reports from affected players would pin it.
