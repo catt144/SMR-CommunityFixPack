@@ -171,6 +171,67 @@ function SMRFixPack.WhenActive(id, fn)
 	end
 end
 
+-- Shared DataLoaded/DataChanged preset-patch scaffold (Phase 4, audit C2 —
+-- generalises the Fix_LastTransmissionStorage donor; the F75, B3 and A1
+-- lessons live HERE so a site cannot forget them).
+--
+--   local run = SMRFixPack.DataPatch(id, {
+--       changed_class = "TraitPreset",   -- rerun when DataChanged names this
+--                                        -- class (or posts no class table)
+--       pass = function(ctx) ... end,    -- the site's own pass
+--   })
+--   ...Register(id, { apply = function() ...pre-checks...; run() end })
+--
+-- The runner owns the skeleton every scaffold shared:
+--   * one pass per (re)load — ctx.patched short-circuit, reset by DataChanged;
+--   * the veto re-read before every pass (audit A1: these handlers install
+--     unconditionally and Register's veto only skips apply);
+--   * ctx.data_loaded — sites gate their missing-target latch on it (the F75
+--     lesson: the preset GlobalMap exists EMPTY before DataLoaded, so absence
+--     proves nothing until it has fired);
+--   * ctx.ever_changed — sites set it after changing shipped data and return
+--     early on the DataChanged(false) the engine posts right after every
+--     DataLoaded (the B3 lesson: nothing-left-to-do then is SUCCESS, not
+--     "shipped data already correct");
+--   * ctx.latch(detail[, log_suffix]) — flip the entry inactive; detail is
+--     always a string, never nil (the PT-51 ListFixes crash);
+--   * ctx.heal() — restore an "inactive" mislabel to active with "" detail;
+--     never overwrites "disabled" (the user veto) or "error" (the A1 guard).
+function SMRFixPack.DataPatch(id, opts)
+	local ctx = { patched = false, ever_changed = false, data_loaded = false }
+	function ctx.latch(detail, log_suffix)
+		local entry = SMRFixPack.fixes[id]
+		if entry then
+			entry.status = "inactive"
+			entry.detail = detail
+		end
+		log("%s: inactive (%s)", id, log_suffix or detail)
+	end
+	function ctx.heal()
+		local entry = SMRFixPack.fixes[id]
+		if entry and (entry.status == "active" or entry.status == "inactive") then
+			entry.status = "active"
+			entry.detail = ""
+		end
+	end
+	local function run()
+		if ctx.patched then return end
+		local disabled = rawget(_G, "SMRFixPack_Disabled")
+		if type(disabled) == "table" and disabled[id] then return end
+		opts.pass(ctx)
+	end
+	OnMsg.DataLoaded = function()
+		ctx.data_loaded = true
+		run()
+	end
+	OnMsg.DataChanged = function(classes)
+		if classes and opts.changed_class and not classes[opts.changed_class] then return end
+		ctx.patched = false
+		run()
+	end
+	return run
+end
+
 -- Shared apply runner: Register and the Mod Options reconciliation both route
 -- through here so the verdict handling stays identical.
 local function run_apply(id, def, entry)

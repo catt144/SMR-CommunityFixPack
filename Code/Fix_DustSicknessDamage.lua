@@ -35,47 +35,32 @@ local function dust_sickness_daily_update(colonist, trait)
 	end
 end
 
-local patched = false
-local data_loaded = false   -- DataLoaded has fired at least once
-
-local function patch()
-	if patched then return end
-	-- FIX (audit 2026-07-29, A1): honor the per-fix veto here too — these OnMsg
-	-- handlers are installed unconditionally, and Register's veto only skips
-	-- apply(), so without this check a disabled fix still mutated the preset.
-	local disabled = rawget(_G, "SMRFixPack_Disabled")
-	if type(disabled) == "table" and disabled[FIX_ID] then return end
-	local presets = rawget(_G, "TraitPresets")
-	local trait = presets and presets.DustSickness
-	if type(trait) ~= "table" then
-		-- Before DataLoaded this just means "presets not loaded yet". Only after
-		-- DataLoaded does a missing preset mean a future update removed the
-		-- target — latch inactive then instead of reporting active forever
-		-- (audit 2026-07-29, B3; pattern: Fix_LastTransmissionStorage).
-		if data_loaded then
-			patched = true
-			local entry = SMRFixPack.fixes[FIX_ID]
-			if entry then
-				entry.status = "inactive"
-				entry.detail = "TraitPresets.DustSickness not found (game update changed it?)"
+-- The scaffold (one pass per load, veto re-read, F75 data_loaded latch gate,
+-- DataChanged re-arm) lives in SMRFixPack.DataPatch since Phase 4 (audit C2).
+local patch = SMRFixPack.DataPatch(FIX_ID, {
+	changed_class = "TraitPreset",
+	pass = function(ctx)
+		local presets = rawget(_G, "TraitPresets")
+		local trait = presets and presets.DustSickness
+		if type(trait) ~= "table" then
+			-- Before DataLoaded this just means "presets not loaded yet"; after
+			-- it, a missing preset means a future update removed the target.
+			if ctx.data_loaded then
+				ctx.patched = true
+				ctx.latch("TraitPresets.DustSickness not found (game update changed it?)",
+					"TraitPresets.DustSickness not found")
 			end
-			log("%s: inactive (TraitPresets.DustSickness not found)", FIX_ID)
+			return
 		end
-		return
-	end
-	if type(trait.param) ~= "number" or type(trait.daily_update_func) ~= "function" then
-		local entry = SMRFixPack.fixes[FIX_ID]
-		if entry then
-			entry.status = "inactive"
-			entry.detail = "TraitPresets.DustSickness has no param/daily_update_func"
+		if type(trait.param) ~= "number" or type(trait.daily_update_func) ~= "function" then
+			ctx.latch("TraitPresets.DustSickness has no param/daily_update_func")
+			ctx.patched = true
+			return
 		end
-		log("%s: inactive (TraitPresets.DustSickness has no param/daily_update_func)", FIX_ID)
-		patched = true
-		return
-	end
-	trait.daily_update_func = dust_sickness_daily_update
-	patched = true
-end
+		trait.daily_update_func = dust_sickness_daily_update
+		ctx.patched = true
+	end,
+})
 
 SMRFixPack.Register(FIX_ID, {
 	title = "Dust Sickness deals its intended random damage instead of the maximum every sol",
@@ -87,15 +72,3 @@ SMRFixPack.Register(FIX_ID, {
 		patch()   -- no-op unless the presets are already loaded
 	end,
 })
-
-function OnMsg.DataLoaded()
-	data_loaded = true
-	patch()
-end
-
--- Covers a later data reload (the Mod Editor reloads presets in place).
-function OnMsg.DataChanged(classes)
-	if classes and not classes.TraitPreset then return end
-	patched = false
-	patch()
-end

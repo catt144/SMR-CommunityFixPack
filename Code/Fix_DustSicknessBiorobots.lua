@@ -80,59 +80,44 @@ local function patch_node(node, seen, depth, stats)
 	end
 end
 
-local patched = false
-local data_loaded = false   -- DataLoaded has fired at least once
+-- The scaffold (one pass per load, veto re-read, F75 data_loaded latch gate,
+-- DataChanged re-arm) lives in SMRFixPack.DataPatch since Phase 4 (audit C2).
+local patch = SMRFixPack.DataPatch(FIX_ID, {
+	changed_class = "StoryBit",
+	pass = function(ctx)
+		local storybits = rawget(_G, "StoryBits")
+		local present = false
+		if type(storybits) == "table" and type(rawget(_G, "HasTrait")) == "table" then
+			for _, id in ipairs(STORYBIT_IDS) do
+				if storybits[id] then
+					present = true
+					break
+				end
+			end
+		end
+		if not present then
+			-- Before DataLoaded this just means "presets not loaded yet"; after
+			-- it, an absent storybit means a future update removed the target.
+			if ctx.data_loaded then
+				ctx.patched = true
+				ctx.latch("the Dust Sickness storybits are gone (game update changed them?)",
+					"the Dust Sickness storybits are gone")
+			end
+			return
+		end
 
-local function patch()
-	if patched then return end
-	-- FIX (audit 2026-07-29, A1): honor the per-fix veto here too — these OnMsg
-	-- handlers are installed unconditionally, and Register's veto only skips
-	-- apply(), so without this check a disabled fix still mutated the presets.
-	local disabled = rawget(_G, "SMRFixPack_Disabled")
-	if type(disabled) == "table" and disabled[FIX_ID] then return end
-	local storybits = rawget(_G, "StoryBits")
-	local present = false
-	if type(storybits) == "table" and type(rawget(_G, "HasTrait")) == "table" then
+		local stats = { found = 0, patched = 0 }
 		for _, id in ipairs(STORYBIT_IDS) do
-			if storybits[id] then
-				present = true
-				break
-			end
+			local sb = storybits[id]
+			if sb then patch_node(sb, {}, 0, stats) end
 		end
-	end
-	if not present then
-		-- Before DataLoaded this just means "presets not loaded yet". Only after
-		-- DataLoaded does an absent storybit mean a future update removed the
-		-- target — latch inactive then instead of reporting active forever
-		-- (audit 2026-07-29, B3; pattern: Fix_LastTransmissionStorage).
-		if data_loaded then
-			patched = true
-			local entry = SMRFixPack.fixes[FIX_ID]
-			if entry then
-				entry.status = "inactive"
-				entry.detail = "the Dust Sickness storybits are gone (game update changed them?)"
-			end
-			log("%s: inactive (the Dust Sickness storybits are gone)", FIX_ID)
-		end
-		return
-	end
+		ctx.patched = true
 
-	local stats = { found = 0, patched = 0 }
-	for _, id in ipairs(STORYBIT_IDS) do
-		local sb = storybits[id]
-		if sb then patch_node(sb, {}, 0, stats) end
-	end
-	patched = true
-
-	if stats.found == 0 then
-		local entry = SMRFixPack.fixes[FIX_ID]
-		if entry then
-			entry.status = "inactive"
-			entry.detail = "no Dust Sickness storybit hands out the trait any more"
+		if stats.found == 0 then
+			ctx.latch("no Dust Sickness storybit hands out the trait any more")
 		end
-		log("%s: inactive (no Dust Sickness storybit hands out the trait any more)", FIX_ID)
-	end
-end
+	end,
+})
 
 SMRFixPack.Register(FIX_ID, {
 	title = "Dust Sickness no longer infects Biorobots",
@@ -140,17 +125,6 @@ SMRFixPack.Register(FIX_ID, {
 		patch()   -- no-op unless the presets are already loaded
 	end,
 })
-
-function OnMsg.DataLoaded()
-	data_loaded = true
-	patch()
-end
-
-function OnMsg.DataChanged(classes)
-	if classes and not classes.StoryBit then return end
-	patched = false
-	patch()
-end
 
 -- Biorobots already infected in an existing save never recover on their own.
 OnMsg.LoadGame = SMRFixPack.WhenActive(FIX_ID, function()
