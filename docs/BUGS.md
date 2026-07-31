@@ -4167,17 +4167,33 @@ changing a property default reach buildings already in a save?
 > "ignored" outcome: requests filed at 4 are **not** invisible and **not**
 > silently lost.
 >
-> ⚠️ **WHAT THIS DOES NOT PROVE — the HAUL leg is NOT evidenced.** Both buildings'
-> `resource request (haul leg)` sat at `target=1000` until the owner used
-> `CheatFill`, which satisfied the maintenance resource **directly**. No drone
-> hauled anything. So band-4 consumption is demonstrated for the **work/repair**
-> request only. The cheat was applied to both legs symmetrically, so it biases
-> nothing — but symmetric absence of evidence is still absence of evidence.
-> **This matters more than it sounds: hauling is 88% of elapsed repair time (the
-> B2 finding that motivated the whole rebuild), so the demand-queue half is the
-> half the design most depends on.** Close it with a natural haul — stock the
-> maintenance resource, break a band-4 building, and watch the haul target fall
-> without cheating.
+> **✅ THE HAUL LEG IS ALSO CLOSED — second pair, no cheat.** The first pair
+> above had its maintenance resource satisfied by `CheatFill`, so it evidenced
+> the **work** request only. A second pair was then run on a symmetric fixture:
+> two Stirling Generators on **opposite sides of a single hub, both at the very
+> limit of its range**, equidistant, with Polymers stocked. Log
+> `Mars.exe-20260731-14.09.07`; the cheat sits at line 329 and this pair was
+> armed at lines **407 / 425**, i.e. entirely after it — **no cheat touched it**.
+>
+> - **Direct queue inspection**, not inference: `demand_queues[4][Polymers]`
+>   held the band-4 building's request (and `demand_queues[3][Polymers]` the
+>   control's). The demand queue at band 4 is real and populated.
+> - **Both haul targets went `1000 → 0` by drone delivery.** The demand-queue
+>   half — the half that carries **88% of elapsed repair time**, per the B2
+>   finding that motivated the rebuild — works at band 4.
+> - Band 4 then ran `work 80000 → 50000 → 25000 → 0` and cleared
+>   (`malfunctioned=false`).
+>
+> **🔎 A precedence signal, offered as suggestive and NOT as proof.** From
+> equidistant positions under a single hub, the band-4 building reached
+> `phase=work` while the band-3 control was **still `phase=demand`**, and it
+> finished (`malfunctioned=false`) while the control still had **52000** of
+> repair outstanding. That is consistent with the C matcher *ordering* by the
+> widened band rather than merely tolerating it — which is what
+> `SupplyGridBreakable.lua:52`'s shipped comment claims for the normal range.
+> **n=1 pair, no repeat, and drone-assignment luck is not excluded.** Ordering
+> within and between bands remains on the "measure, do not assert" list
+> (`DRONE_PRIORITY_SYSTEM.md` §7).
 
 ### ✅ Q2, Q3 and Q4 are ANSWERED (2026-07-31)
 
