@@ -86,7 +86,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested — PT-51 PASS 2026-07-27 (entry) |
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28 — first A/B NULL 2026-07-29, B2 re-run pending (entry) |
 | D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 — PT-53 3-of-5 PASS 2026-07-29, A/E owed (entry) |
-| D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | built 2026-07-29 — PT-56 owed (entry) |
+| D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | tested 2026-07-30 — PT-56 PASS in full (entry) |
 | D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30 — build gated on PT-56 (entry) |
 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
 | D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | SPECED 2026-07-30, user-approved, build owed (entry) |
@@ -3961,7 +3961,40 @@ user_forced_workplace. TestKit probe drives both wrappers with stand-ins
 non-cohort negatives). A/B 2026-07-28 late: baseline 1/57/15/0 ·
 all-six-toggles 63/0/10/0 (71/71 applied), zero errors. PT-53 pending.
 
-### D09 — Drone speed & carry capacity dials (design, med)  `[built 2026-07-29: Code/Opt_DroneStatDials.lua — Mod Options choice dials "Drone speed" (1x/2x/3x/5x) and "Drone carry capacity" (+0/+1/+2); base = vanilla; PT-56 owed]`
+### D09 — Drone speed & carry capacity dials (design, med)  `[tested 2026-07-30 — PT-56 PASS IN FULL: Code/Opt_DroneStatDials.lua — Mod Options choice dials "Drone speed" (1x/2x/3x/5x) and "Drone carry capacity" (+0/+1/+2); base = vanilla; all four steps passed live incl. the stale-save reconcile]`
+
+**PT-56 PASS IN FULL — 2026-07-30, live, on a one-speed-tech save.** All four
+steps, exact numbers, no residue:
+
+| Step | Read | Verdict |
+|---|---|---|
+| 1. Baseline (dials at base) | `speed=1728 carry=1 dials=active` | 1728 = 1440 × 1.2 (Low-G Drive only); no Artificial Muscles |
+| 2. Speed 2x + carry +1, Apply | `speed=3168 carry=2 dials=active` | **+1440 exactly** — 100% of the 1440 BASE, additive with the tech, not a doubling of the current value; carry +1 |
+| 3. Both dials back to base, Apply | `speed=1728 carry=1 dials=active` | exact restore, live, no relaunch; still `active` (armed-at-base, by design) |
+| 4. **Stale-save reconcile** | save made with dials at 2x/+1 → dials set to base + Apply → **base confirmed live first** (`speed_dial=1x (base) carry_dial=+0 (base) speed=1728 carry=1`) → load that save → `speed=1728 carry=1` | **PASS** — the modifiers baked into the save were stripped on load to match the current dials |
+
+Step 4 is the one no probe can reach, and it is the FIX_POLICY §3 requirement:
+persisted modifiers from a save must not survive into a session whose dials say
+base. **Method note worth keeping:** the first attempt at step 4 read
+`3168/2` and looked like a FAIL — the dials had simply not been set back to base
+before the load, so the reading was correct behaviour. It was caught by reading
+the DIAL POSITIONS alongside the values
+(`Mods["SMR_CommunityFixPack"].options.DroneSpeedDial`) instead of the values
+alone. Any future re-run should verify the base state *going into* the load as
+its own step; scoring step 4 without it is a coin flip.
+
+**Log swept clean per PT-22** (log `Mars.exe-20260730-19.37.47`): every module
+`applied`, zero `[CommunityFixPack]` error/inactive/disabled lines, and the only
+`Error` lines in the whole session are the two known pre-existing `ResManager`
+`LawOfficeDoor` animation entries. The four `MeteorFrequency: persisted Meteors
+thread on load was DEAD — restarting with the fixed body` lines are F02's
+watchdog doing its job across the four loads the sitting made, not a fault.
+
+**Observability gap noted (not a defect):** the module logs nothing when it
+reconciles, so the log cannot confirm whether a stale-save strip ran — the
+verdict had to come from live reads. If D10 reuses this machinery, a one-line
+`ModLog` on reconcile would make the same test self-evidencing.
+
 
 **⚠️ LIVE STATE — read this before running PT-56.**
 

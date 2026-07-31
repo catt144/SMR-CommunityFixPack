@@ -85,49 +85,12 @@ healthy = `vetoed` climbing, `veto_expired` low, `unclaimed` not building up.
 
 # 2 · In progress — owed halves of partially-passed tests
 
-## PT-56 — Drone stat dials · covers **D09 `Opt_DroneStatDials`** (built 2026-07-29)
+## ~~PT-56~~ — PASSED IN FULL 2026-07-30 → D09 `tested`, ARCHIVED
 
-Two Mod Options dropdowns: **Drone speed** (1x base / 2x / 3x / 5x, percent
-added on BASE, additive with speed techs) and **Drone carry capacity**
-(+0 base / +1 / +2 on `g_Consts.DroneResourceCarryAmount`). One sitting,
-any healthy save with at least one drone (~5 min):
-
-> ⚠️ **SET BOTH DIALS TO BASE FIRST — as of 2026-07-30 they are NOT.** The
-> unattended A/B leg that evening read `DroneResourceCarryAmount = 3` where a
-> techs-only save should read 2, i.e. the account carry dial is sitting at +1.
-> Dials are account-persistent, so step 1's "baseline" would silently record an
-> already-modified value and every later comparison would be off by the dial.
-> **Read the state, never assume it** — and if the numbers below don't match,
-> suspect the dial before suspecting the fix.
->
-> The same account state is why the D09 **probe** FAILed that leg: it captured
-> its own baseline from the live value (`60_Probes_Opt.lua:411`) then asserted
-> `base_carry + 1`. That was a **TestKit defect**, not a pack regression, and it
-> is **REPAIRED 2026-07-30 late** — the probe now forces base itself and went
-> green on the 19.20 leg with the account dial still at +1. **That repair does
-> not help step 1 below:** your baseline reads come from the live game, so the
-> dials still have to be at base by hand. Full record on the D09 entry.
-
-1. **Baseline reads:** select a drone —
-   `SelectedObj:GetMoveSpeed()` and `g_Consts.DroneResourceCarryAmount`
-   (with both speed techs expect 2304 = 1440 × 1.6; carry 2 with Artificial
-   Muscles).
-2. **Set speed 2x + carry +1 → Apply** (no relaunch): same reads — speed
-   gains +1440 (100% of base, additive: 2304 → 3744 on the techs save),
-   carry +1; drones visibly faster; log clean (PT-22 rules).
-3. **Back to base → Apply:** both reads return to the step-1 numbers —
-   live removal, no residue (`SMRFixPack.ListFixes()` still shows
-   `DroneStatDials [active]` — active-at-base is the armed state, by design).
-4. **Stale-save reconcile:** save with dials ON, set dials to base, reload
-   that save → reads are the step-1 numbers (the persisted modifiers were
-   removed on load).
-
-PASS flips D09 to `tested` (both BUGS.md places). (The C-side clamp probe
-originally queued here was run ahead of the build, 2026-07-29 live: no clamp —
-`SetMoveSpeed(10000)` read back exactly — and movement stayed clean at 10000
-on ultra. Recorded on the D09 entry; no need to repeat it.)
-
-`Result:` _____________________________________________
+Moved to `PLAYTEST_ARCHIVE.md` with its results. All four steps passed live
+including the stale-save reconcile. **This PASS un-gated the D10 workshops
+build.** Numbers and the method note (read the DIAL POSITIONS, not just the
+values, when scoring step 4) live on the D09 entry.
 
 ## PT-53 — Cohort housing · covers **D07 `Opt_CohortHousing`** (built 2026-07-28)
 

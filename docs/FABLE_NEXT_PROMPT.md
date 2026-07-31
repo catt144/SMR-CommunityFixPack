@@ -10,21 +10,33 @@ model-specific.)
 
 ## Where the project stands (end of 2026-07-30 — a long playtest day, no sitting currently live)
 
-**Next session is PLAYTEST STANDBY.** Nothing is half-finished and nothing is
-blocked on an agent. **The owed A/B leg is DONE and CLEAR** (2026-07-30 evening,
-unattended) and the D09 probe defect that FAILed the previous leg is **repaired
-and verified** — so the board opens straight on a PT. The one surviving ⚠️ is
-dials-to-base, which is now just PT-56's own step 0. Open playtests, in
-suggested order: **PT-56** (D09 dials, ~5 min, un-gates the D10 build) ·
-**PT-53 Trigger E** (last thing before D07 → `tested`) · **PT-54** (wave-6
-disasters) · **PT-52 Trigger B + the B2 stress re-run** · checklist **§6
-needs-eyes riders** (take them while you are in a qualifying save) ·
-**PT-20/21** last. One decision is owed (FIX_POLICY §4 amendment) and one
-build is queued behind PT-56 (D10 workshops).
+**Next session is PLAYTEST STANDBY — or the D10 build, which is now unblocked.**
+Nothing is half-finished and nothing is blocked on an agent. Both A/B legs are
+DONE and CLEAR, the D09 probe defect is repaired and verified, and **PT-56
+PASSED IN FULL 2026-07-30 → D09 `tested`**, which **un-gates the D10 workshops
+build** (speced, user-approved, game-free, assistant work — the obvious thing to
+pick up if the owner is not at the keyboard). Open playtests, in suggested
+order: **PT-53 Trigger E** (last thing before D07 → `tested`) · **PT-54**
+(wave-6 disasters) · **PT-52 Trigger B + the B2 stress re-run** · **PT-58**
+(NEW — settles F83; needs a save with `UIColony.asteroid_count == 0`) ·
+checklist **§6 needs-eyes riders** (take them while you are in a qualifying
+save) · **PT-20/21** last. Decisions owed: the FIX_POLICY §4 amendment, and
+**F83's fix design**.
+
+**NEW FINDING — F83 (P2, mechanism proven in play, NOTHING BUILT).** Minimized
+story popups lose their callback across a save/load: the waiter is a real-time
+thread and the async popup context is not persisted, while the corner
+notification *is*, so after a reload the notification still opens, any choice
+closes it, and the callback never runs. Eight call sites; six are cosmetic dead
+View buttons, but **`FirstAsteroid` silently withholds three prefabs its own
+popup text promises** (`show_once`, never re-offered) and
+**`ReconCenterDiscoveryAsteroid` silently refuses the paid Detailed Scan** on
+every asteroid. The asteroid consequence is INFERRED, not observed — **PT-58
+gates any fix**. Full trail on the F83 entry.
 
 **Build state: 73 registered modules — 67 active by default**, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
-(`Opt_DroneStatDials`, active-at-base = vanilla, PT-56 owed). **Two modules were
+(`Opt_DroneStatDials`, active-at-base = vanilla, **`tested` 2026-07-30 — PT-56 PASS**). **Two modules were
 DELETED and one guard removed on 2026-07-30** — see "the reachability turn"
 below. Everything committed and pushed.
 
@@ -59,9 +71,9 @@ to base through the real Apply path before measuring and restores the leg's entr
 values, so its verdict no longer depends on how the last playtest left the dials.
 It went green on this leg **with the account carry dial still at +1**, the exact
 state that FAILed it on the previous leg. **Consequence: an A/B leg no longer has
-a set-the-dials-to-base precondition** — PT-56 still does, for its own step-1
-baseline reads. Full record on the D09 entry and in the TestKit README's "Known
-probe defects".
+a set-the-dials-to-base precondition**, and neither does PT-56 any more — it
+PASSED IN FULL from a base state on 2026-07-30. Full record on the D09 entry and
+in the TestKit README's "Known probe defects".
 
 Historical legs (counts no longer apply — measured before the removals):
 `74/74` at 77 probes `66/1/10/0` (the 1 FAIL was the probe defect) · baseline
@@ -70,7 +82,7 @@ Historical legs (counts no longer apply — measured before the removals):
 
 **Account state — READ IT, NEVER ASSUME IT.** As of 2026-07-30 19.32 the owner
 set **all six toggles OFF and both dials to base**, and the `67/73` leg confirms
-the toggles. **That is the clean state PT-56 wants** — but it is one Mod Options
+the toggles. **PT-56 has since PASSED from that state** — but it is one Mod Options
 visit away from going stale again, exactly as it did that afternoon (the carry
 dial was left at +1, `DroneResourceCarryAmount` reading 3 where a techs-only save
 reads 2). The repaired D09 probe is deliberately immune to dial state, so a green
@@ -146,8 +158,8 @@ residence wins, toggle-off is instantly vanilla, save-ON/reload-OFF loads
 clean. That is the last thing between D07 and `tested`. PT-52 (D06 + F77) has three
 healthy passive sittings; Trigger B is un-run and the **B2 stress A/B re-run on
 the v2 harness is the natural centrepiece of the next live sitting**. PT-54
-gates the wave-6 disaster fixes. PT-56 gates D09 (and its PASS un-gates the
-D10 build).
+gates the wave-6 disaster fixes. **PT-56 PASSED → D09 `tested`, and the D10
+build is un-gated.**
 
 **A live sitting is in progress on a SAVE-B-derived no-disasters save** with
 Forever Young researched, a dedicated nursery-only child dome, and homelessness
@@ -159,10 +171,10 @@ origin evidence — do not assume a healthy colony.
 go/no-go (core-helper extraction + module merges — deferred, see
 AUDIT_FINDINGS); D06 iteration beyond knobs (design changes are user calls;
 the stat dials are BUILT — D09, 2026-07-29 late, range widened to 1x/2x/3x/5x
-by user call after the live no-clamp probe; PT-56 owed).
+by user call after the live no-clamp probe; **PT-56 PASSED 2026-07-30, D09 `tested`**).
 D08 (extender overhaul) is speced in `DRONE_OVERHAUL_OPTIONS.md`, nothing built.
 **D10 (workshops: text repairs + capacity dial) is DECIDED and speced
-(2026-07-30, BUGS.md entry) — build it after PT-56 PASSes; not a decision.**
+(2026-07-30, BUGS.md entry) — **PT-56 has PASSED, so this is BUILDABLE NOW**; not a decision.**
 Deferred decision recorded there: seniors-in-workshops (D07 interaction).
 **D12 (no-homeless dome policy) is DECIDED and speced (2026-07-30, BUGS.md
 entry) — build owed, not a decision.** Origin: found in play — a nursery-only
@@ -294,7 +306,7 @@ silent.
   single FAIL was **repaired** rather than worked around, so dials-to-base is no
   longer a precondition for a leg at all. **Nothing on the harness side is
   owed.** The owner has left all six toggles OFF and both dials at base — the
-  state PT-56 wants; just re-read it rather than trusting this sentence.
+  state PT-56 passed from; just re-read it rather than trusting this sentence.
 
 - **DECISION OWED — the FIX_POLICY §4 amendment** (the *other* one; §4a is
   already applied). Drafted at the end of `REACHABILITY_AUDIT.md` and revised by
@@ -321,7 +333,7 @@ silent.
   2026-07-30, archived — see the section above)** and the **Phase 4
   go-decision** (user).
 - **~~PT-55~~ CLOSED IN FULL 2026-07-30** — archived; audit A2 caveat retired.
-  The cheapest open item is now **PT-56** (D09 stat dials, ~5 min).
+  **PT-56 also CLOSED IN FULL 2026-07-30 → D09 `tested`** (archived).
 - **PT-52 STRESS A/B — re-run with the v2 harness (the v1 run's metric was
   invalid).** Protocol is Trigger B2 in the checklist (§2): quicksave →
   `Targets` dry run (check the `pure_only=true` cohort size too) → D06 OFF →
@@ -341,6 +353,14 @@ silent.
 - **PT-52 Trigger B — controlled off/on CheatMalfunction A/B demo + F77
   extender-flap check** (checklist §2) — still un-run; cheap once hub A/B +
   extender geometry exists.
+- **PT-58 (NEW) — settles F83.** Needs a save with
+  `UIColony.asteroid_count == 0` (check it first; `FirstAsteroid` is
+  `show_once`). Spawn the first asteroid, leave the corner notification
+  UNANSWERED, save, reload, then answer it and read
+  `ColonyGetPrefabs("MicroGAutoExtractorMetals", MainCity)` against a control
+  leg answered without a reload. One spawn also exercises
+  `ReconCenterDiscoveryAsteroid`'s paid Detailed Scan — take both readings.
+  **No F83 fix ships before this.**
 - **F82** — split-grid notification lingers ~a sol; machinery located,
   updater cadence still to trace (own entry). **F80** — trains skip valid
   waiting passengers; investigating, forensic tap on the entry.
@@ -382,11 +402,16 @@ silent.
   PT-35, PT-42, PT-44, PT-46 tail (F49(d) cap, F49(a) palette), PT-47,
   PT-20/21/22 (cross-cutting, last — PT-20's save should post-date wave 6 so
   the cycle covers the new persisted state).
-- **PT-56 — D09 stat dials** (checklist §2, ~5 min): baseline reads → 2x/+1
-  → Apply → stacked reads → base → Apply → baseline again → stale-save
-  reconcile. PASS flips D09 to tested **and un-gates the D10 build** (the
-  workshops module reuses the same label-modifier dial machinery).
-- **D10 — workshops module BUILD (assistant, game-free, after PT-56 PASS):**
+- **~~PT-56~~ PASSED IN FULL 2026-07-30 → D09 `tested`** (archived). All four
+  steps: baseline `1728/1` → 2x/+1 `3168/2` (**+1440 exactly** — 100% of the
+  1440 BASE, additive with the tech, NOT a doubling of the live value) → base
+  `1728/1` → stale-save reconcile `1728/1`. **Method note that cost a
+  mis-score:** confirm the dials are at base *going into* the load as its own
+  step — read `Mods["SMR_CommunityFixPack"].options.DroneSpeedDial` alongside
+  the values, because step 4 read `3168/2` on the first attempt and looked like
+  a FAIL when the dials simply had not been reset.
+- **⭐ D10 — workshops module BUILD (assistant, game-free) — UN-GATED, PT-56 has
+  PASSED. This is the ready-to-go build item:**
   speced + user-approved 2026-07-30, full spec on the BUGS.md D10 entry —
   T1 text repairs (workshop descriptions + Unemployed rollover gain the
   Relaunched faction-approval fact; ≥10% dome unemployment costs -900..-3000

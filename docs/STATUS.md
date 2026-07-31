@@ -50,7 +50,8 @@ speed 1x/2x/3x/5x (range widened from the DECISION's 1.5x/2.0x by user call
 after the live no-clamp probe: `SetMoveSpeed(10000)` read back exactly, clean
 movement at ultra) and Drone carry +0/+1/+2. Techs' own label-modifier
 machinery, reconciled on ApplyModOptions/CityStart/PostLoadGame, base =
-modifiers removed = vanilla. D09 entry in BUGS.md; PT-56 owed. **The owed
+modifiers removed = vanilla. D09 entry in BUGS.md; **PT-56 PASSED IN FULL
+2026-07-30 → D09 `tested`**. **The owed
 post-D09 A/B pair RAN unattended the same night — see the probe-state table
 below (code gate CLEAR).**
 
@@ -93,7 +94,8 @@ file (BUGS.md entry), explicitly NOT green-lit: re-ask the user before any
 build; multi-hop passenger routing REJECTED outright.**
 **Decided, build queued:** D10 workshops module (speced + user-approved
 2026-07-30, BUGS.md entry — text repairs + capacity dial; build gated on
-PT-56 PASS). **D12 no-homeless dome policy** (speced + user-approved
+PT-56 PASS — **that gate is now OPEN, PT-56 passed 2026-07-30**). **D12
+no-homeless dome policy** (speced + user-approved
 2026-07-30, BUGS.md entry — own module, `Opt_ResidencyControl` as donor pattern
 only; breaks vanilla's emigration tie for homeless colonists so specialist
 domes stop stranding them, which also unwinds the D07 overpopulated deadlock
@@ -191,8 +193,11 @@ unbuilt). **PT-48 CLOSED IN FULL 2026-07-30 → D02 `tested`** (archived; all
 five steps on console counters, opened with a positive control; the acked
 building held 4.2 vanilla windows and the stamp survived save/reload; a vanilla
 GameTime-vs-RealTime curiosity on `InsufficientResources` was filed on the D02
-entry for a game-free look). Cheapest open item now: **PT-56 D09 dials**
-(~5 min; PASS un-gates the D10 workshops build). Then: PT-53 Trigger E (the
+entry for a game-free look). **PT-56 PASSED IN FULL 2026-07-30 → D09 `tested`**
+(archived; all four steps live, including the stale-save reconcile — a save
+carrying 2x/+1 modifiers, loaded against base dials, came back at the baseline
+`1728/1`. **This UN-GATES the D10 workshops build**, which is speced,
+user-approved and ready to write). Next: PT-53 Trigger E (the
 last thing between D07 and `tested`); PT-54 wedge watchdog; PT-52 Trigger B +
 the B2 re-run on the v2 stress harness; PT-20 save/remove/load
 incl. wave-6 persisted state; PT-21. **PT-46 tail: (d) PASSED 2026-07-30**

@@ -8,6 +8,70 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## PT-56 PASS IN FULL → D09 `tested`, D10 un-gated; and F83 filed from a surprise mid-setup — 2026-07-30 (evening, attended)
+
+Live sitting with the tester at the keyboard, after the two unattended legs
+below.
+
+**PT-56 — PASS on all four steps**, on a one-speed-tech save (Low-G Drive only,
+no Artificial Muscles), toggles off and dials at base going in. Baseline
+`speed=1728 carry=1` · 2x/+1 → `speed=3168 carry=2` · back to base →
+`1728/1` · **stale-save reconcile → `1728/1`**. The 3168 is the number worth
+remembering: **+1440 exactly**, 100% of the 1440 BASE added additively beside
+the tech — *not* a doubling of the live 1728. Log swept clean per PT-22 (zero
+`[CommunityFixPack]` error lines; the only `Error` lines all session are the two
+pre-existing `ResManager` `LawOfficeDoor` entries; four `MeteorFrequency
+… restarting` lines are F02's watchdog across the sitting's four loads). D09 →
+`tested`, section archived, **D10 workshops build un-gated**.
+
+**Method lesson, paid for in this very test.** Step 4 was scored wrong first
+time: it read `3168/2` and looked like a FAIL. The dials had simply not been set
+back to base before the load, so the reading was correct behaviour. What caught
+it was reading the **dial positions** alongside the values
+(`Mods["SMR_CommunityFixPack"].options.DroneSpeedDial`) instead of the values
+alone. Generalised onto the archived PT and the D09 entry: **for any dial test,
+confirming the base state going INTO the load is its own step** — without it,
+step 4 cannot distinguish a pass from a fail. Note this is the *third* time this
+project has been bitten by account-persistent dial state in one day (the FAILed
+probe, the 73/73-vs-67/73 leg, and now this).
+
+**F83 filed — found by the tester mid-setup, and it grew.** A
+`FirstFounderEnthusiast` popup arrived as a corner notification and its **View**
+button did nothing. Chased live: the popup is a *scan* announcement of a founder
+who already HAS the trait, so unrelated to F23/PT-44; the pack touches none of
+this machinery; and `ViewAndSelectObject` called directly on the founder
+**worked**, isolating the failure to callback delivery. A console repro of the
+identical popup worked live, then the same repro left minimized across a
+quicksave and load had its View die — tester verbatim: *"Correct view died after
+a load."*
+
+Mechanism: these popups always start minimized (`ShowPopupNotification` gates the
+open-now branch on `start_minimized == false` and nothing ever sets it, so `nil`
+takes the else branch); the waiter is a **real-time thread** blocking on
+`WaitMsg(async_signal)`; neither the thread nor the async context survives a load
+(`OnMsg.PersistSave` keeps only `sync_popup_id` entries) — **but the notification
+does**. So after a reload it still opens, any choice signals nothing, and the
+callback never runs.
+
+**Eight call sites pass a callback; two are consequential.** `FirstAsteroid`
+grants three Micro-G Auto Extractor prefabs its own popup text promises, is
+`show_once`, and fires only at `asteroid_count == 1` — permanent silent loss.
+`ReconCenterDiscoveryAsteroid` fires on *every* asteroid and its choice 2 is the
+paid Detailed Scan, silently refused after a reload. The other six are dead View
+buttons. Intent tell is self-contradiction (popup text vs delivery path);
+reachability R1, reached organically before it was reproduced. **Honest caveat
+recorded:** the mechanism is proven on the founder popup, the FirstAsteroid
+consequence is *inferred* from identical code shape and is NOT observed —
+**PT-58** added as the settling observation and gates any fix, per the F49(c)
+rule. Nothing built; fix design is a user decision (recommended: decouple the
+asteroid grant via an additive `OnMsg.SpawnedAsteroid`; a general popup-waiter
+repair is not recommended). Family: same trap as F06.
+
+The tester's current save had already met one asteroid, so it cannot serve as
+PT-58's fixture — a fresh one is owed.
+
+---
+
 ## The owed A/B ran and is CLEAR — and the D09 probe defect is repaired, not just recorded — 2026-07-30 (evening, unattended)
 
 Session opened as playtest standby; the tester stepped away and released the

@@ -6,6 +6,74 @@ work. `BUGS.md` is the canonical status record; this file is the evidence
 trail. Ground rules, save fixtures and the verified command reference stay in
 the checklist — consult it before re-running anything here.
 
+---
+
+## PT-56 — Drone stat dials · covered **D09 `Opt_DroneStatDials`** — **PASS IN FULL 2026-07-30** → D09 `tested`
+
+Two Mod Options dropdowns: **Drone speed** (1x base / 2x / 3x / 5x, percent
+added on BASE, additive with speed techs) and **Drone carry capacity**
+(+0 base / +1 / +2 on `g_Consts.DroneResourceCarryAmount`). One sitting, any
+healthy save with at least one drone (~5 min). Run on a **one-speed-tech save**
+(Low-G Drive only, no Artificial Muscles), all six opt-in toggles OFF and both
+dials at base going in.
+
+The read used at every step, one line, prints all three values:
+```
+*r local d = (MainCity.labels.Drone or empty_table)[1] ConsolePrint("speed=" .. tostring(d and d:GetMoveSpeed()) .. " carry=" .. tostring(g_Consts.DroneResourceCarryAmount) .. " dials=" .. tostring(SMRFixPack.fixes.DroneStatDials.status))
+```
+
+1. **Baseline reads** (dials at base).
+   `Result:` **PASS — `speed=1728 carry=1 dials=active`.** 1728 = 1440 × 1.2,
+   the Low-G Drive tech alone; carry 1, no Artificial Muscles.
+2. **Set speed 2x + carry +1 → Apply** (no relaunch).
+   `Result:` **PASS — `speed=3168 carry=2 dials=active`.** +1440 exactly, i.e.
+   100% of the 1440 BASE added additively alongside the tech — **not** a
+   doubling of the current 1728. Carry +1. This is the reading most likely to
+   produce a false FAIL if the expectation is read as "2x the current value".
+3. **Back to base → Apply.**
+   `Result:` **PASS — `speed=1728 carry=1 dials=active`.** Exact restore, live,
+   no relaunch, no residue; status still `active` (armed-at-base, by design).
+4. **Stale-save reconcile:** save with dials ON, set dials to base, reload that
+   save → reads must be the step-1 numbers.
+   `Result:` **PASS — `speed=1728 carry=1`.** Sequence: saved as
+   `PT56-dials-on` while the dials read 2x/+1 and the values read 3168/2 → both
+   dials set to base + Apply → **base state confirmed live before loading**
+   (`speed_dial=1x (base) carry_dial=+0 (base) speed=1728 carry=1`) → loaded
+   `PT56-dials-on` → `speed=1728 carry=1`. The modifiers persisted inside that
+   save were stripped on load to match the current dials.
+5. **Log hygiene (PT-22).**
+   `Result:` **PASS** — log `Mars.exe-20260730-19.37.47`: every module
+   `applied`, zero `[CommunityFixPack]` error/inactive/disabled lines, and the
+   only `Error` lines in the entire session are the two pre-existing
+   `ResManager` `LawOfficeDoor` animation entries. Four `MeteorFrequency:
+   persisted Meteors thread on load was DEAD — restarting with the fixed body`
+   lines correspond to the four loads the sitting made — F02's watchdog working,
+   not a fault.
+
+**Method note earned here (applies to any dial re-run).** Step 4 was scored
+wrong on the first attempt: it read `3168/2` and looked like a FAIL, but the
+dials had simply not been set back to base before the load, so the reading was
+correct behaviour. It was caught by reading the **dial positions** next to the
+values —
+`Mods["SMR_CommunityFixPack"].options.DroneSpeedDial` / `.DroneCarryDial` —
+rather than the values alone. **Verify the base state going INTO the load as its
+own step**; scoring step 4 without that check cannot distinguish a pass from a
+fail. Combined read:
+```
+*r local o = Mods["SMR_CommunityFixPack"].options local d = (MainCity.labels.Drone or empty_table)[1] ConsolePrint("speed_dial=" .. tostring(o.DroneSpeedDial) .. " carry_dial=" .. tostring(o.DroneCarryDial) .. " speed=" .. tostring(d and d:GetMoveSpeed()) .. " carry=" .. tostring(g_Consts.DroneResourceCarryAmount))
+```
+
+The C-side clamp probe originally queued in this test was run ahead of the
+build (2026-07-29 live): no clamp — `SetMoveSpeed(10000)` read back exactly —
+and movement stayed clean at 10000 on ultra. Recorded on the D09 entry; it was
+not repeated here.
+
+**Consequences:** D09 → `tested` (both BUGS.md places); **the D10 workshops
+build is un-gated** (it reuses this same label-modifier dial machinery, which
+has now had its first live check).
+
+---
+
 Archived 2026-07-26: PT-01 (F02 cadence + tower lead verified live; the
 passive silence-watch continues via the watchdog), PT-02 (F03 → tested),
 PT-03 (F44/F45 → tested), PT-04 (F50 → tested), PT-05 (F05 → tested — the
