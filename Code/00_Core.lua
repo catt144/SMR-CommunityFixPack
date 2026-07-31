@@ -15,13 +15,15 @@ SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
 SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 
 SMRFixPack = rawget(_G, "SMRFixPack") or {
-	fixes = {},        -- id -> { title, status, detail, installed }
+	fixes = {},        -- id -> { title, status, detail, installed, update_suspect }
 	order = {},        -- registration order, for ListFixes()
 	defs = {},         -- id -> the Register def (for Mod Options reconciliation)
 }
 SMRFixPack.defs = SMRFixPack.defs or {}
 
-local function log(fmt, ...)
+-- The one true logger — Phase 4 (audit C2) hoisted the copy previously cloned
+-- in 11 fix files; migrated call sites alias it (`local log = SMRFixPack.Log`).
+function SMRFixPack.Log(fmt, ...)
 	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
 	-- ModLog stores the message unformatted, but its ModPrint output path is a
 	-- printf-style CreatePrint (Mod.lua:109-132, lib.lua:164-174) that formats the
@@ -29,6 +31,7 @@ local function log(fmt, ...)
 	-- "bad argument #2" there. Escape it for the second pass.
 	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 end
+local log = SMRFixPack.Log
 
 -- Is a fix currently active? Optional modules' wrappers consult this at CALL
 -- time, so a Mod Options toggle takes effect live in both directions — the
@@ -49,6 +52,123 @@ function SMRFixPack.OptionEnabled(id)
 	if SMRFixPack_Optional[id] then return true end
 	local opts = CurrentModOptions
 	return type(opts) == "table" and opts[id] and true or false
+end
+
+-- ===== shared self-check helpers (Phase 4, audit C2/C4) ======================
+
+-- Walks a classdef's __parents chain looking for the class that DECLARES
+-- `method`. Diagnostic only: mod code runs before class flattening, so a class
+-- global is a plain classdef exposing only self-declared members
+-- (ENGINE_FACTS) — a check against the wrong class reads nil and would
+-- otherwise masquerade as "game update changed it" (how F64 shipped broken).
+-- classdefs carry __parents (classes.lua:61); post-flattening the walk is
+-- harmless and simply finds the baked copy on the class itself first.
+local function find_declaring_ancestor(class_name, method, seen)
+	seen = seen or {}
+	if seen[class_name] then return nil end
+	seen[class_name] = true
+	local C = rawget(_G, class_name)
+	if type(C) ~= "table" then return nil end
+	if rawget(C, method) ~= nil then return class_name end
+	local parents = rawget(C, "__parents")
+	if type(parents) == "table" then
+		for _, p in ipairs(parents) do
+			local found = find_declaring_ancestor(p, method, seen)
+			if found then return found end
+		end
+	end
+	return nil
+end
+
+-- Declarative preflight checker. `spec` is a LIST of checks evaluated in
+-- order; the FIRST failure returns its reason string (pass `reason` wherever a
+-- site's historical string differs from the generated convention — reason
+-- strings are an interface and are preserved byte-for-byte). Returns nil when
+-- every check passes. A failure also marks the fix entry `update_suspect` for
+-- the C1 deactivation report.
+--
+-- Check forms (each takes an optional `reason`):
+--   { global = "Name" }                    -- rawget(_G, Name) is a function
+--   { global = "Name", kind = "table" }    -- ... is a table
+--   { global = "Name", kind = "any" }      -- ... is not nil
+--   { class = "Building" }                 -- the class table exists
+--   { class = "Building", method = "X" }   -- the DECLARING class check: plain
+--        -- index, which pre-flattening sees only self-declared members. If it
+--        -- fails but an ancestor declares X, a LOUD authoring-error line is
+--        -- logged so a wrong-class check can never masquerade as patch rot.
+--   { path = {"const","Scale","Stat"}, kind = "number"|"function"|"table"|"any" }
+--   { test = function() return truthy end, reason = "..." }  -- content checks
+function SMRFixPack.Require(id, spec)
+	for _, c in ipairs(spec) do
+		local ok, name
+		if c.test then
+			ok = c.test()
+			name = "(custom check)"
+		elseif c.global then
+			local v = rawget(_G, c.global)
+			local kind = c.kind or "function"
+			ok = (kind == "any") and v ~= nil or type(v) == kind
+			name = c.global
+		elseif c.class and c.method then
+			local C = rawget(_G, c.class)
+			ok = type(C) == "table" and type(C[c.method]) == "function"
+			name = c.class .. "." .. c.method
+			if not ok and type(C) == "table" then
+				local declaring = find_declaring_ancestor(c.class, c.method)
+				if declaring and declaring ~= c.class then
+					log("%s: self-check targets %s but %s declares %s — authoring error, not a game update (FIX_POLICY §2)",
+						tostring(id), c.class, declaring, c.method)
+				end
+			end
+		elseif c.class then
+			ok = type(rawget(_G, c.class)) == "table"
+			name = c.class
+		elseif c.path then
+			local v
+			for i, k in ipairs(c.path) do
+				if i == 1 then
+					v = rawget(_G, k)
+				elseif type(v) == "table" then
+					v = v[k]
+				else
+					v = nil
+				end
+			end
+			local kind = c.kind or "any"
+			ok = (kind == "any") and v ~= nil or type(v) == kind
+			name = table.concat(c.path, ".")
+		end
+		if not ok then
+			local entry = id and SMRFixPack.fixes[id]
+			if entry then entry.update_suspect = true end
+			return c.reason or (name .. " not found (game update changed it?)")
+		end
+	end
+end
+
+-- Global replacement with the read-back verification FIX_POLICY §1.4b
+-- requires (the F22 donor): plain assignment reaches the real _G through
+-- ModEnvMeta.__newindex; rawget confirms the write landed. Returns nil on
+-- success, the failure reason otherwise.
+function SMRFixPack.SetGlobal(name, value, reason)
+	_G[name] = value
+	if rawget(_G, name) ~= value then
+		return reason or ("could not install the " .. name .. " replacement")
+	end
+end
+
+-- Wraps a handler so it runs only while the fix is active AND not vetoed —
+-- FIX_POLICY §2 requires BOTH checks in every OnMsg handler (the A1 lesson).
+-- Register latches status "disabled" for a pre-load veto, so the status read
+-- already honours it; the separate table read also covers a mid-session veto.
+function SMRFixPack.WhenActive(id, fn)
+	return function(...)
+		local f = SMRFixPack.fixes[id]
+		if not (f and f.status == "active") then return end
+		local disabled = rawget(_G, "SMRFixPack_Disabled")
+		if type(disabled) == "table" and disabled[id] then return end
+		return fn(...)
+	end
 end
 
 -- Shared apply runner: Register and the Mod Options reconciliation both route
