@@ -151,9 +151,10 @@ Phase 4 go/no-go (core helpers, module merges,
 deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
 overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
-BUILT (D09); the structural choice stays gated on the B2 re-run); F79
-D-item or not; D08; **~~seniors-in-workshops~~ — PARKED 2026-07-31, see
-`docs/FUTURE_IDEAS.md`**;
+BUILT (D09); the structural choice stays gated on the B2 re-run);
+**~~F79~~ — CLOSED `wontfix` 2026-07-31 (owner: risk exceeds benefit on large
+multi-stop maps; F80 must be explained first if ever revisited)**; D08;
+**~~seniors-in-workshops~~ — PARKED 2026-07-31, see `docs/FUTURE_IDEAS.md`**;
 **D11 shuttle same-pair passenger batching — candidate with feasibility on
 file (BUGS.md entry), explicitly NOT green-lit: re-ask the user before any
 build; multi-hop passenger routing REJECTED outright.**
@@ -511,10 +512,14 @@ authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
    `DRONE_OVERHAUL_OPTIONS.md` with a risk table. Recommended order is
    dispatcher → Command Center tab + advisory → cluster scoping → adjustable
    radius → building (last, gated on PT-20). Also gated on the QA review.
-9. **OPEN (2026-07-28): the F79 decision** — trains never carry service seekers
-   (confirmed vanilla gap, entry has the fix sketch). Feature-completion D-item or
-   leave as documented vanilla behavior? This is the only decision currently owed.
-   (D07 was decided AND built 2026-07-28 — see the build leg in SESSION_LOG.md.)
+9. **~~OPEN: the F79 decision~~ — CLOSED `wontfix` 2026-07-31 (owner).** Trains
+   never carry service seekers; the gap is real but feature-completion was
+   DECLINED — risk of new issues exceeds the benefit, especially on a large
+   multi-stop end-game map. Two facts on file back it: F80 (the train boarding
+   layer has an open, unexplained defect) and the fix sketch's post-wrap on
+   `Dome:GetService`, a hot path whose added station walk scales with exactly
+   that map shape. **Not parked, not owed.** If ever revisited, F80 must be
+   explained and closed first. Full reasoning on the F79 entry.
 
 ## Save-rescue expectations (for release messaging + sanitizer design)
 

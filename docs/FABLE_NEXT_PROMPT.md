@@ -216,8 +216,10 @@ Forever Young researched, a dedicated nursery-only child dome, and homelessness
 / unemployment deliberately saturated. That save is the fixture for D12's
 origin evidence — do not assume a healthy colony.
 
-**Open decisions on the user (nothing blocks on you):** F79 D-item or not
-(trains never serve service trips — confirmed vanilla gap); audit Phase 4
+**Open decisions on the user (nothing blocks on you):** ~~F79~~ **CLOSED
+`wontfix` 2026-07-31 — owner declined the trains-for-services feature
+completion (risk exceeds benefit on large multi-stop maps; F80 must be
+explained first if ever revisited). Do not re-propose or park it.** audit Phase 4
 go/no-go (core-helper extraction + module merges — deferred, see
 AUDIT_FINDINGS); D06 iteration beyond knobs (design changes are user calls;
 the stat dials are BUILT — D09, 2026-07-29 late, range widened to 1x/2x/3x/5x
@@ -521,7 +523,7 @@ silent.
   seniors-in-workshops. **A proposed-parking list sits at the bottom of that
   file awaiting the owner's yes/no — check it before treating any of those
   items as owed, and do not start one without asking.**
-- **DECISIONS owed (user):** F79 D-item or not; audit Phase 4 go/no-go; D08;
+- **DECISIONS owed (user):** audit Phase 4 go/no-go; D08;
   **D11 shuttle same-pair passenger batching — feasibility is on the BUGS entry
   but it is NOT approved: ask fresh before any build (user's explicit
   instruction 2026-07-30); multi-hop passenger routing is REJECTED, do not

@@ -105,7 +105,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo — found 2026-07-27, wave-6 candidate (entry) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed 2026-07-28 — PT pending (entry) |
 | F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | fixed 2026-07-29 — PT-54 pending (entry) |
-| F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | confirmed vanilla gap 2026-07-28 — D-item decision owed (entry) |
+| F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
@@ -3233,7 +3233,34 @@ Cross-refs: F02 (the scheduler fix + watchdog), F81 (the weather half of the
 original report), PT-01 (the passive watch that caught this — record the
 catch on its line when the checklist is next touched).
 
-### F79 — Colonists never use trains for services; the service search is passage-only (P3, high confidence)  `[confirmed vanilla gap 2026-07-28 — any fix is feature-completion, D-item decision]`
+### F79 — Colonists never use trains for services; the service search is passage-only (P3, high confidence)  `[wontfix 2026-07-31 — OWNER DECISION, declined as feature-completion; reasoning below. Do NOT re-propose or park it]`
+
+**⛔ DECIDED `wontfix` 2026-07-31 (owner).** *"I am cutting services for trains.
+I think that introduces risks of more issues than it might fix, especially in a
+large multi stop end game map."* This is a **decision, not a deferral** — it is
+not parked in `FUTURE_IDEAS.md` and it is not owed to anyone. Two facts already
+on file support it, and they are why the decision should stand rather than be
+revisited casually:
+
+1. **The train boarding layer has an open, UNEXPLAINED defect — F80.** A
+   colonist with a fully valid ticket sat 17+ game hours while four trains
+   stopped and left without boarding anyone, with ~19 colonists queued and no
+   capacity branch ever running. F79's own "Cross-refs" line already pointed at
+   it (same session). Teaching `GetService` to hand a whole new rider class
+   (shoppers) to a boarding layer that demonstrably drops the riders it already
+   has would stack a feature on unstable ground — and the failure would look
+   like *our* bug.
+2. **The fix sketch sits on a hot path and scales with exactly the map shape the
+   owner named.** It post-wraps `Dome:GetService` — consulted for every
+   colonist's service search — and on in-dome + passage failure adds a
+   station-enumeration walk over train-reachable domes. On a large multi-stop
+   end-game map (many domes × many stations × many unserviced colonists) that
+   cost lands on the worst case, in the state where the colony is already
+   struggling.
+
+The gap itself is real and stays documented below as vanilla behavior. If it is
+ever revisited, **F80 must be explained and closed first** — that is the
+precondition, not a preference.
 **Live observation (2026-07-28, F21 setup):** a dome stripped of services, with
 a working 5-station train network to three service-rich domes, produced ZERO
 service riders — colonists roamed their own dome "looking for places to shop"
