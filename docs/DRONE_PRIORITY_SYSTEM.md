@@ -365,3 +365,83 @@ it had, and it belongs in the design-drift disclaimer if the scheme survives.
 
 **Safe re-run:** do it on a **new game**, where every hub is constructed after the
 const change and allocates the full range natively.
+
+---
+
+## §9 The uninstall picture — safe, lossy, and the heal path expires
+
+Measured 2026-07-31 immediately after §8, on a purpose-built save (`Q1orphan`):
+a band-4 demand request left **outstanding**, the closure stripped from the
+building first (priority is baked at insert, so the request stays at 4), saved
+while paused, then loaded with the experiment module **disarmed**.
+
+### What a vanilla load does with a widened save
+
+- **Zero Lua errors.** The colony loads and runs clean.
+- **The widened structure is IN THE SAVE.** With the module gone, a hub still
+  reports `demand keys: -1,0,1,2,3,4,5`. Queue key range is savegame state, not
+  mod state.
+- **`band4 entries on this hub: 4`** — and note four, not one: *every* building
+  ever armed at band 4 left its request parked there, including ones that were
+  successfully repaired (those sit at amount 0, harmless but unreachable).
+- A mod-written plain number on a building (`SMRTest_Q1_band = 4`) persisted into
+  the vanilla load without issue.
+
+**The asymmetry is the whole finding:**
+
+| | loops | tables | result |
+|---|---|---|---|
+| §8 — widen an existing save | `-1..5` | `-1..3` | **nil index, total drone failure** |
+| §9 — load a widened save vanilla | `-1..3` | `-1..5` | **silent; keys 4-5 never visited** |
+
+Wide loops over narrow tables crash. Narrow loops over wide tables are safe and
+quiet — vanilla asks only for `-1..3`, finds every key, and never looks higher.
+**So uninstall does not break a colony. It strands work in it.**
+
+### The heal path exists — and then it expires
+
+Re-registration re-files requests through `GetPriorityForRequest`, which without
+the mod returns `1..3`, so an orphan clears the moment its hub re-registers.
+Every trigger, swept:
+
+- `OnMsg.DepositsSpawned` → re-registers **every drone hub in the city**
+  (`DroneHub.lua:188-198`). Fired from a completed sector scan, and **only when
+  that sector actually placed deposits** (`Exploration.lua:265`, `if placed > 0`).
+- Work-radius change → `DelayedCall(300, ReconnectTaskRequesters)`
+  (`DroneControl.lua:776`).
+- Extender flap → `DroneHubExtender.lua:110-111`.
+- Rocket takeoff/landing (`RocketBase.lua:1577/1583`); RC Rover movement
+  (`RCRover.lua:425/439`) — these two are not in `labels.DroneHub` and heal
+  themselves.
+
+**There is NO timer, NO lap sweep and NO on-unpause pass.** Nothing is gated to a
+sol.
+
+⚠️ **And the main path expires.** Sector status is a one-way ladder —
+`unexplored → scanned → deep scanned` (`Exploration.lua:123`, `:40`) — deposits
+are revealed only on those transitions, and `UnexploredSectorsExist` reports
+`fully_scanned` once every sector is deep scanned (`:47-68`). **There is no
+re-scan, so `DepositsSpawned` never fires again on a fully-explored map.**
+
+**Owner's observation, and it is the right one:** clearing the map is one of the
+first things players do, while removing a mod from an established colony is a
+late act. **The heal dries up exactly when it would be needed.** (Sensor towers
+are disaster warning, a different system; the in-range revealer at
+`DepositRevealer.lua:21` does not fire `DepositsSpawned`.) What is left late-game
+is incidental — a hub toggle, a radius change, an extender flap.
+
+> 🔗 **Uncomfortable interaction, recorded not actioned:** **F77
+> (`ExtenderFlapChurn`) exists to REDUCE extender flap**, and extender flap is
+> one of the few recurring reconnect sources still alive in a late colony. Our
+> own fix therefore reduces the frequency of this heal path. That is not a reason
+> to change F77 — but do not design a mitigation around "it will reconnect
+> eventually" without accounting for it.
+
+### What this obliges the disclaimer to say
+
+Not *"savegame footprint: none"* — that is D06 v1's claim and the rebuild cannot
+inherit it. The honest version: uninstalling **does not break the colony and does
+not error**, but any work filed in the extra bands at that moment is **stranded**
+until that hub happens to re-register, which on a fully-scanned map may not
+happen on its own. A deliberate mitigation (a shutdown sweep that re-registers
+every hub, or a one-shot fixup) would be worth more than any wording.
