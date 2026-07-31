@@ -3737,16 +3737,34 @@ exposed list; and the commented-out `AnomalyAnalyzed` wait
 (`PlanetaryAnomaly.lua:299-305`) is dead code, not a live site. Full
 enumeration, safety rule, and needs-eyes list in the audit file.
 
-**Fix options (option 1 RECOMMENDED by the audit; owner decides).**
-1. **Narrow, RECOMMENDED:** decouple the FirstAsteroid grant from the popup —
-   an additive `OnMsg.SpawnedAsteroid` (FIX_POLICY §1.2) granting the three
-   prefabs once behind its own persistent flag, regardless of whether the popup
-   is ever answered. Smallest possible surface, repairs the only consequence
-   proven to cost a player anything, touches no shared UI machinery, and the
-   shipped handler can stay exactly where it is (OnMsg is additive) — a future
-   game hotfix that repairs the delivery would then need our flag to stop a
-   double grant, which the flag already does. **PT-58 gives it a ready-made
-   A/B:** re-run the same two legs and the reload leg must read 1/1/1.
+**Fix options (option 1 RECOMMENDED by the audit; ⭐ OWNER GAVE THE GO
+2026-07-30 evening — "review and action on your findings" to the audit
+session; build brief on FABLE_NEXT_PROMPT's board).**
+1. **Narrow, RECOMMENDED — but ⚠️ NOT as originally written here.** The
+   original text ("additive `OnMsg.SpawnedAsteroid` granting the three prefabs
+   once behind a persistent flag; the shipped handler can stay") has a
+   **double-grant trap, caught 2026-07-30 late**: `WaitPopupNotification`
+   ALWAYS `procall`s its callback — even when `ShowPopupNotification`
+   early-returns on `show_once` (`PopupNotification.lua:249`, `:302-304`) —
+   and the FirstAsteroid callback takes no args and grants unconditionally, so
+   with vanilla's grant still live the healthy no-reload path would pay
+   **2/2/2**. The claim that "the flag already stops a double grant" was wrong
+   for the present-day case (the flag gates only OUR handler, not vanilla's
+   callback). Corrected shapes (build session verifies both against Src and
+   picks one — both stay FIX_POLICY §1.2-additive, smallest surface, no shared
+   UI machinery):
+   * **(i) LoadGame sweep:** grant behind the flag ONLY when the stranded
+     state is detected on load (FirstAsteroid minimized notification still in
+     the persisted `Notifications` GameVar, flag unset; match by T loc-id, not
+     T identity). Healthy path untouched.
+   * **(ii) show_once pre-mark:** additive handler shows the popup itself as
+     display, then sets `g_ShownPopupNotifications.FirstAsteroid = true` in
+     the same dispatch — the shipped RT thread's Show early-returns and its
+     always-run callback grants IMMEDIATELY at spawn, before any wait exists.
+     Residual window: the sub-frame before the shipped RT thread runs.
+   **PT-58's fixture gives the A/B (filed as PT-59 at build time):** the
+   reload leg must read 1/1/1 — and the no-reload leg must STILL read 1/1/1,
+   not 2/2/2; that half now guards the trap above.
 2. **General:** re-arm stranded async popup waiters on load. Fixes all eight at
    once but touches shared popup machinery, would rot on patches, and risks
    double-firing callbacks. **Not recommended.**

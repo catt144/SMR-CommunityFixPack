@@ -61,6 +61,23 @@ observed corroboration, and every remaining question needs a keyboard.
 into the `### D06` heading, leaving D06's whole entry living under F84 —
 heading restored in place, content untouched. Index 92 → **93 rows** (F85).
 
+**Addendum, same evening — THE OWNER GAVE THE BUILD GO** (*"update the fable
+next prompt to review and action on your findings"*), recorded on the F83
+entry, STATUS and the next-prompt board. While writing the build brief the
+session caught a **double-grant trap in option 1 as originally recorded**:
+`WaitPopupNotification` procalls its callback even when `ShowPopupNotification`
+early-returns on `show_once` (`PopupNotification.lua:249`, `:302-304`), and the
+FirstAsteroid callback grants unconditionally — so "grant in our own additive
+handler behind a flag" would pay 2/2/2 in the healthy no-reload path (the
+entry's "the flag already stops a double grant" was wrong: the flag gates only
+our handler). The brief now offers two corrected shapes — (i) a conservative
+LoadGame sweep granting only when the stranded notification is detected
+(matched by T loc-id, not T identity), or (ii) a show_once pre-mark that makes
+vanilla's own always-run callback grant at spawn with the popup demoted to
+display — build session verifies both against Src and picks one. PT-59 (the
+kept fixture A/B) gains a second assertion: the no-reload leg must still read
+1/1/1, not 2/2/2.
+
 ---
 
 ## Four PTs closed, two defects filed — and the F83 fix STOPPED by an owner question — 2026-07-30 (late evening, attended)

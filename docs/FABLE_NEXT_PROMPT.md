@@ -16,24 +16,36 @@ model-specific.)
 > real-time popup waiters lose their consequences across a load** (new
 > ENGINE_FACTS entries) — so storybits/mysteries/sequences need no fix, F06
 > stands as-is, **the F83 hold is LIFTED and the narrow decouple is REINSTATED
-> as recommended** (owner go/no-go now owed), and one latent shielded class was
-> filed as **F85** (tier U, no fix until its observation runs). Pick up the
-> audit's **4-item needs-eyes list** (§8) as playtest riders — item 1 (storybit
-> save/load in the notification window, ~5 min console check) validates the
-> audit's one load-bearing inference; item 2 (Detailed Scan recoverability)
-> grades F83's second site; item 3 (rebind-quicksave) settles F85's tier.
+> as recommended**, and one latent shielded class was filed as **F85** (tier U,
+> no fix until its observation runs).
+>
+> ⭐ **THE OWNER GAVE THE GO the same evening** — instruction to the audit
+> session, verbatim: *"update the fable next prompt to review and action on
+> your findings."* Recorded as the F83 option-1 build green-light (if that
+> reading is wrong, the owner can say so before code is written — but do not
+> re-ask by default; the gate question the owner posed is answered and the
+> recommendation he stopped is the one being built). **THIS SESSION'S HEADLINE
+> TASK is therefore the F83 fix build** — see "⭐ F83 BUILD" on the board
+> below: review the audit findings first (§1-§3 + §7 minimum), then build
+> option 1. It is small, game-free, and lands with its own A/B. F85 stays
+> observation-gated — actioning the findings does NOT include building it.
+> Also pick up the audit's **4-item needs-eyes list** (§8) as playtest riders
+> when the owner is at the keyboard — item 1 validates the audit's one
+> load-bearing inference; item 2 grades F83's second site (and decides whether
+> a second, separate fix is even warranted); item 3 settles F85's tier.
 
-**Next session is PLAYTEST STANDBY — or the D10 build, which is now unblocked.**
-Nothing is half-finished and nothing is blocked on an agent. Both A/B legs are
-DONE and CLEAR, the D09 probe defect is repaired and verified, and **PT-56
-PASSED IN FULL 2026-07-30 → D09 `tested`**, which **un-gates the D10 workshops
-build** (speced, user-approved, game-free, assistant work — the obvious thing to
-pick up if the owner is not at the keyboard). Open playtests, in suggested
-order: **PT-53 Trigger E** (last thing before D07 → `tested`) · **PT-54**
-(wave-6 disasters) · **PT-52 Trigger B + the B2 stress re-run** ·
-checklist **§6 needs-eyes riders** (take them while you are in a qualifying
-save) · **PT-20/21** last. Decisions owed: the FIX_POLICY §4 amendment, and
-**F83's fix design** (gate cleared — PT-58 passed, fixture save kept).
+**Next session: the F83 BUILD first (small, game-free, GO GIVEN — see the
+banner above), then D10 or playtest standby.** Nothing else is half-finished
+and nothing is blocked on an agent. Both A/B legs are DONE and CLEAR, the D09
+probe defect is repaired and verified, and **PT-56 PASSED IN FULL 2026-07-30 →
+D09 `tested`**, which **un-gates the D10 workshops build** (speced,
+user-approved, game-free, assistant work — the follow-on build once F83 lands).
+Open playtests, in suggested order: **PT-53 Trigger E** (last thing before D07
+→ `tested`) · **PT-54** (wave-6 disasters) · **PT-52 Trigger B + the B2 stress
+re-run** · checklist **§6 needs-eyes riders** (now 15 rows — the 4 popup-audit
+items were added 2026-07-30 late; take them while you are in a qualifying
+save) · **PT-20/21** last. Decisions still owed: the FIX_POLICY §4 amendment
+(**F83's fix design is no longer one of them — the go is recorded above**).
 
 **F83 (P2, PROVEN in play, NOTHING BUILT — audit COMPLETE, decision owed).**
 Minimized story popups lose their callback across a save/load: the waiter is a
@@ -377,14 +389,51 @@ silent.
 - **PT-52 Trigger B — controlled off/on CheatMalfunction A/B demo + F77
   extender-flap check** (checklist §2) — still un-run; cheap once hub A/B +
   extender geometry exists.
+- **⭐ F83 BUILD — GO GIVEN 2026-07-30 (banner above). THIS SESSION'S HEADLINE
+  TASK.** Read `POPUP_CONSEQUENCE_AUDIT.md` §1-§3 + §7 first, then the F83
+  entry. Goal: decouple the FirstAsteroid prefab grant from the real-time
+  popup waiter. **⚠️ Do NOT build entry option 1 as literally written — it has
+  a double-grant trap, found when the go was recorded:**
+  `WaitPopupNotification` ALWAYS `procall`s its callback, even when
+  `ShowPopupNotification` early-returns on `show_once`
+  (`PopupNotification.lua:249` + `:302-304`), and the FirstAsteroid callback
+  takes no args and grants unconditionally — so a naive additive handler that
+  grants at spawn leaves vanilla's own grant alive in the healthy path →
+  2/2/2. Two candidate shapes, both small; VERIFY against Src, pick one, and
+  say why in the fix header:
+  * **(i) LoadGame sweep (conservative):** grant behind a persistent
+    `SMRFixPack_*` once-flag ONLY when the stranded state is detected on load —
+    the FirstAsteroid minimized notification still present in the persisted
+    `Notifications` GameVar with the flag unset. Heals saves where the
+    notification is sitting; healthy path completely untouched. Detection
+    caveat: match the notification by the preset's T loc-id number
+    (`text[1]`/`title[1]`), NOT by T table identity — T identity does not
+    survive a load.
+  * **(ii) show_once pre-mark (grants at spawn via vanilla's own code):** an
+    additive `OnMsg.SpawnedAsteroid` (mod handlers register after the shipped
+    one) that shows the popup itself as pure display, then sets
+    `g_ShownPopupNotifications.FirstAsteroid = true` during the same Msg
+    dispatch — the shipped RT thread then early-returns from its Show and its
+    `WaitPopupNotification` procalls the grant callback IMMEDIATELY, so
+    **vanilla grants at spawn** and the popup is demoted to display. Residual
+    loss window: the sub-frame before the shipped RT thread first runs.
+  Whichever ships: §2 status+veto re-checks in every handler, §3 savegame
+  discipline (flag named `SMRFixPack_*`, absence tolerated), header states the
+  chosen shape and the rejected one. **Arithmetic after the build: 74
+  registered modules (all-toggles leg `74/74`, default `68/74`); probes stay
+  76 unless you add one** — a probe is recommended (flag + handler
+  installed + no-double-grant assertion via a stubbed grant path if feasible).
+  **Add PT-59 to the checklist**: the owner's keyboard A/B on the kept
+  pre-trigger fixture — reload leg must read **1/1/1** (and the no-reload leg
+  must STILL read 1/1/1, not 2/2/2 — that half now guards the trap above).
+  BUGS.md F83 → `fixed` (both places) with PT-59 owed; MOD_DESCRIPTION line;
+  A/B pair before push per policy.
 - **~~PT-58~~ PASSED 2026-07-30 → F83's consequence OBSERVED** (archived).
   **1/1/1** answered without a reload vs **0/0/0** after one, same fixture, one
-  variable. **The popup audit has since CLEARED the hold — the narrow decouple
-  (option 1) is the reinstated recommendation and the owner owes only the
-  go/no-go.** The owner keeps the **pre-trigger baseline save** as the reusable
+  variable. The owner keeps the **pre-trigger baseline save** as the reusable
   verification fixture — it restores `g_ShownPopupNotifications`, so the
   `show_once` popup re-offers itself on every run and the A/B can be repeated
-  indefinitely (reload leg must read 1/1/1 under the fix).
+  indefinitely (that fixture is PT-59's instrument, see the build item above).
 - **NEW — popup-audit needs-eyes riders (audit §8, cheap, take them in any
   qualifying sitting):** (1) **storybit save/load in the notification window**
   — `ForceActivateStoryBit("<popup-carrying bit>", MainMap)` (not immediate),

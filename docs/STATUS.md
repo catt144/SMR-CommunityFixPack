@@ -96,13 +96,21 @@ choice — real-time waiters behind an open-immediately modal window; tier U,
 settling observation = the rebind-quicksave check). F06 is NOT this family
 (one-shot Msg race; its fix stands). The audit also left a **4-item needs-eyes
 list** (audit §8, mirrored on the checklist) and repaired a BUGS.md structural
-break (the F84 filing had swallowed the D06 heading). **Decision now owed to
-the owner: green-light F83 fix option 1** (additive `OnMsg.SpawnedAsteroid`
-grant behind a persistent flag; PT-58's kept fixture is the ready A/B — reload
-leg must read 1/1/1). Full trail on the F83/F85 entries and the audit file.
+break (the F84 filing had swallowed the D06 heading). **The owner gave the
+build GO the same evening** ("review and action on your findings") — the F83
+decouple is queued as the next session's headline task with a **corrected
+build brief** (double-grant trap caught after the go: vanilla's popup callback
+always runs, even show_once-suppressed — see the F83 entry and
+FABLE_NEXT_PROMPT's board; PT-58's kept fixture is the A/B — reload leg must
+read 1/1/1 AND the no-reload leg must still read 1/1/1, not 2/2/2). Full trail
+on the F83/F85 entries and the audit file.
 
-**Open user decisions:** **F83 fix option 1 go/no-go** (popup audit reinstated
-it 2026-07-30 — the narrow FirstAsteroid decouple; fixture kept, A/B ready);
+**Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN 2026-07-30
+evening** ("review and action on your findings" to the audit session); the
+build is now queued as the next session's headline task, with a corrected
+build brief on FABLE_NEXT_PROMPT's board (the entry's original option-1 text
+had a double-grant trap — vanilla's popup callback always runs, even
+show_once-suppressed; see the F83 entry). Still open:
 Phase 4 go/no-go (core helpers, module merges,
 deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
