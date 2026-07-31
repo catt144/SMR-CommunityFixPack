@@ -4232,6 +4232,44 @@ changing a property default reach buildings already in a save?
 >   pack "because it might move later". Until the overhaul actually relocates, it
 >   stays opt-in-and-off, and D06 v1 remains the shipped thing.
 
+> 💡 **OWNER PROPOSAL 2026-07-31, later the same session — THE CLEANUP MOD. This
+> supersedes the "must go standalone" reading above: standalone is no longer
+> assumed.** Verbatim: *"Yes we create a stand alone mod. But it becomes a
+> cleanup mod. And it allows us to be straight forward in the game description,
+> you must run this once after you remove our mod, and it will do a full cleanup.
+> And whats better it allows us to safely cleanup anything in the future."*
+>
+> **Why it works, mechanically.** The blocker was absolute: mods get **no save
+> hook** (`PersistSave`/`PersistLoad`/`PersistGatherPermanents` are blacklisted,
+> `Mod.lua:1430-1433`), and no mod code can run after its own removal — so a
+> save's mod-shaped residue is unreachable. **A second mod is the one thing that
+> can occupy that window.** It runs on `OnMsg.LoadGame` — the hook we definitely
+> have — in a world where the pack is already gone. It also makes the owner's
+> discarded alternative unnecessary: a tear-down-on-save / rebuild-on-load scheme
+> is not merely fragile, it is **unimplementable**, because the save hook does
+> not exist.
+>
+> **Three conditions it must meet — recorded so they are not discovered late:**
+> 1. **It is a remedy, not a guarantee.** The player has already removed the
+>    pack; asking them to install a second mod will reach the diligent and not
+>    everyone. So the primary design must still minimise what needs cleaning.
+>    The cleaner is not a licence to strand things.
+> 2. **It must identify our artifacts with our code absent.** Out-of-range queue
+>    keys are self-identifying; an orphaned closure is not —
+>    `rawget(obj, "GetPriorityForRequest")` returning a function does not say
+>    whose. ⇒ **Design requirement on the PACK: leave deliberate, identifiable
+>    markers on anything written into a save.** Prefer generic rules ("anything
+>    outside the vanilla range") over a maintained list of known artifacts, which
+>    would rot as the pack changes.
+> 3. **Zero footprint of its own** — no GameVars, no closures on objects, purely
+>    transient work plus a report. Otherwise it needs its own cleanup mod.
+>
+> **Scope control:** this is a NEW SHIPPED ARTIFACT. It is owed *with the
+> overhaul*, not with launch, and must not drift into a separate project
+> (`FUTURE_IDEAS.md` exists because every three items closed were adding six).
+> **Not approved to build — recorded as the current plan of record for the
+> uninstall problem.**
+
 Phase 4 is closed, so the gates are unblocked. **Q3 and Q4 turned out to be
 source questions, not playtests, and both are now settled** — enumeration and
 persistence are readable in `ModTools\Src` at build `1.0.7.396349`. What still
