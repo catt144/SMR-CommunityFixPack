@@ -60,10 +60,12 @@ end
 SMRFixPack.Register("MeteorFrequency", {
 	title = "Meteors strike on their designed 35-115h schedule instead of ~every 6 hours",
 	apply = function()
-		local funcs = rawget(_G, "GlobalGameTimeThreadFuncs")
-		if type(funcs) ~= "table" or type(funcs.Meteors) ~= "function" then
-			return "Meteors thread function not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("MeteorFrequency", {
+			{ path = { "GlobalGameTimeThreadFuncs", "Meteors" }, kind = "function",
+			  reason = "Meteors thread function not found (game update changed it?)" },
+		})
+		if err then return err end
+		local funcs = GlobalGameTimeThreadFuncs
 
 		funcs.Meteors = function()
 			SMRFixPack.MeteorsBeatSet("thread-start") -- FIX: heartbeat for the PT-01 watchdog (see header)

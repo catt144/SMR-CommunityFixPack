@@ -36,16 +36,17 @@
 SMRFixPack.Register("TrackSalvageWipe", {
 	title = "Salvaging one track piece no longer deletes the whole track and its trains",
 	apply = function()
-		local E = rawget(_G, "TrackGridElement")
-		if type(E) ~= "table" or type(E.DemolishAndSplitTrack) ~= "function" then
-			return "TrackGridElement.DemolishAndSplitTrack not found (game update changed it?)"
-		end
-		for _, name in ipairs{ "IsTrackElementStraight", "ResolveMap", "ExpandTrackFromElement",
-				"ProcessTrackElements", "RebuildTrainRoutes", "PlaceObjectIn" } do
-			if type(rawget(_G, name)) ~= "function" then
-				return name .. " not found (game update changed it?)"
-			end
-		end
+		local err = SMRFixPack.Require("TrackSalvageWipe", {
+			{ class = "TrackGridElement", method = "DemolishAndSplitTrack" },
+			{ global = "IsTrackElementStraight" },
+			{ global = "ResolveMap" },
+			{ global = "ExpandTrackFromElement" },
+			{ global = "ProcessTrackElements" },
+			{ global = "RebuildTrainRoutes" },
+			{ global = "PlaceObjectIn" },
+		})
+		if err then return err end
+		local E = TrackGridElement
 
 		function E:DemolishAndSplitTrack(mass_delete, skip_track_process)
 			local track_obj = self.track_obj

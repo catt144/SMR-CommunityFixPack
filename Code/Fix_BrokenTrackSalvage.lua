@@ -25,14 +25,18 @@
 SMRFixPack.Register("BrokenTrackSalvage", {
 	title = "Meteor-damaged tracks can be salvaged again",
 	apply = function()
-		local T = rawget(_G, "TrackBase")
-		if type(T) ~= "table" or type(T.BreakTrackElement) ~= "function" then
-			return "TrackBase.BreakTrackElement not found (game update changed it?)"
-		end
-		local E = rawget(_G, "TrackGridElement")
-		if type(E) ~= "table" or E.node_idx ~= false then
-			return "TrackGridElement.node_idx no longer defaults to false (already fixed?)"
-		end
+		local err = SMRFixPack.Require("BrokenTrackSalvage", {
+			{ class = "TrackBase", method = "BreakTrackElement" },
+			-- content check: the fix only makes sense while the class default is
+			-- still the broken `false`
+			{ test = function()
+				local E = rawget(_G, "TrackGridElement")
+				return type(E) == "table" and E.node_idx == false
+			  end,
+			  reason = "TrackGridElement.node_idx no longer defaults to false (already fixed?)" },
+		})
+		if err then return err end
+		local T = TrackBase
 
 		local orig = T.BreakTrackElement
 		function T:BreakTrackElement(element, ...)

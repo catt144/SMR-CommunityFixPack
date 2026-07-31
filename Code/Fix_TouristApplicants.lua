@@ -15,9 +15,10 @@
 SMRFixPack.Register("TouristApplicants", {
 	title = "Higher tourist ratings now correctly give more bonus applicants (roll was inverted)",
 	apply = function()
-		if type(HolidayRating) ~= "table" or type(HolidayRating.RewardApplicants) ~= "function" then
-			return "HolidayRating.RewardApplicants not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("TouristApplicants", {
+			{ class = "HolidayRating", method = "RewardApplicants" },
+		})
+		if err then return err end
 
 		function HolidayRating:RewardApplicants(rating, tourist)
 			local applicants = 0

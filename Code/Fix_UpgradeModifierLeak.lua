@@ -22,10 +22,13 @@
 SMRFixPack.Register("UpgradeModifierLeak", {
 	title = "Salvaging an upgraded building now removes its dome/colony-wide upgrade bonuses",
 	apply = function()
-		if type(Building.StopUpgradeModifiers) ~= "function"
-				or type(Building.ApplyUpgradeModifiers) ~= "function" then
-			return "Building upgrade-modifier methods not found (game update changed them?)"
-		end
+		local err = SMRFixPack.Require("UpgradeModifierLeak", {
+			{ class = "Building", method = "StopUpgradeModifiers",
+			  reason = "Building upgrade-modifier methods not found (game update changed them?)" },
+			{ class = "Building", method = "ApplyUpgradeModifiers",
+			  reason = "Building upgrade-modifier methods not found (game update changed them?)" },
+		})
+		if err then return err end
 
 		function Building:StopUpgradeModifiers(only_for_object)
 			-- FIX: iterate the id-keyed table like ApplyUpgradeModifiers does;

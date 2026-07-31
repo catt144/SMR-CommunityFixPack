@@ -17,9 +17,10 @@
 SMRFixPack.Register("MilestoneCrash", {
 	title = "Completing all milestones no longer errors in No Terraforming / No Politics games",
 	apply = function()
-		if type(CompleteMilestone) ~= "function" then
-			return "CompleteMilestone not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("MilestoneCrash", {
+			{ global = "CompleteMilestone" },
+		})
+		if err then return err end
 
 		local function eval_complete_all_milestones(milestones)
 			local sponsor = GetMissionSponsor()

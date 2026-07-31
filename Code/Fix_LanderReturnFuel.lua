@@ -25,18 +25,14 @@
 SMRFixPack.Register("LanderReturnFuel", {
 	title = "Asteroid landers keep their return fuel instead of unloading it on the asteroid",
 	apply = function()
-		local R = rawget(_G, "UniversalRocketBase")
-		if type(R) ~= "table" or type(R.GetFuelResourceRequest) ~= "function" then
-			return "UniversalRocketBase.GetFuelResourceRequest not found (game update changed it?)"
-		end
-		if type(R.GetDepartureLocType) ~= "function" then
-			return "UniversalRocketBase.GetDepartureLocType not found (game update changed it?)"
-		end
-		local types = rawget(_G, "g_RocketTypes")
-		if type(types) ~= "table" or types.LanderRocket == nil then
-			return "g_RocketTypes.LanderRocket not found (game update changed it?)"
-		end
-		local LanderRocket = types.LanderRocket
+		local err = SMRFixPack.Require("LanderReturnFuel", {
+			{ class = "UniversalRocketBase", method = "GetFuelResourceRequest" },
+			{ class = "UniversalRocketBase", method = "GetDepartureLocType" },
+			{ path = { "g_RocketTypes", "LanderRocket" } },
+		})
+		if err then return err end
+		local R = UniversalRocketBase
+		local LanderRocket = g_RocketTypes.LanderRocket
 
 		local orig = R.GetFuelResourceRequest
 		function R:GetFuelResourceRequest()

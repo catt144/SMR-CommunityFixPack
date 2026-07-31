@@ -28,23 +28,19 @@
 SMRFixPack.Register("LanderEmptyLaunch", {
 	title = "Automatic rockets and asteroid landers wait for cargo instead of launching empty",
 	apply = function()
-		local R = rawget(_G, "UniversalRocketBase")
-		if type(R) ~= "table" or type(R.IsCargoReady) ~= "function" then
-			return "UniversalRocketBase.IsCargoReady not found (game update changed it?)"
-		end
-		-- NB: mod code loads before the classes are built (autorun.lua:423 vs
-		-- OnMsg.Autorun in classes.lua:980), so these tables are still the CLASS
-		-- DEFS — only members declared by the class itself are visible here.
-		-- IsAutoModeEnabled comes from the AutoMode mixin, so check it there.
-		for _, name in ipairs{ "CheckAutoDepart", "IsSpecialAutomode", "IsPlayerControlled" } do
-			if type(R[name]) ~= "function" then
-				return "UniversalRocketBase." .. name .. " not found (game update changed it?)"
-			end
-		end
-		local AutoMode = rawget(_G, "AutoMode")
-		if type(AutoMode) ~= "table" or type(AutoMode.IsAutoModeEnabled) ~= "function" then
-			return "AutoMode.IsAutoModeEnabled not found (game update changed it?)"
-		end
+		-- NB: Require's class/method checks run against the CLASS DEFS (mod code
+		-- loads before the classes are built) — only members declared by the
+		-- class itself are visible. IsAutoModeEnabled comes from the AutoMode
+		-- mixin, so it is checked there.
+		local err = SMRFixPack.Require("LanderEmptyLaunch", {
+			{ class = "UniversalRocketBase", method = "IsCargoReady" },
+			{ class = "UniversalRocketBase", method = "CheckAutoDepart" },
+			{ class = "UniversalRocketBase", method = "IsSpecialAutomode" },
+			{ class = "UniversalRocketBase", method = "IsPlayerControlled" },
+			{ class = "AutoMode", method = "IsAutoModeEnabled" },
+		})
+		if err then return err end
+		local R = UniversalRocketBase
 
 		-- Would this rocket take off carrying nothing at all? Fuel does not count:
 		-- it is the trip's cost, not its purpose.

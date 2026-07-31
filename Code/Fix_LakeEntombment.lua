@@ -27,14 +27,12 @@
 SMRFixPack.Register("LakeEntombment", {
 	title = "Building an artificial lake no longer entombs the RC Constructor and drones",
 	apply = function()
-		local L = rawget(_G, "LandscapeLake")
-		if type(L) ~= "table" or type(L.PlacePrefab) ~= "function" then
-			return "LandscapeLake.PlacePrefab not found (game update changed it?)"
-		end
-		local U = rawget(_G, "Unit")
-		if type(U) ~= "table" or type(U.ExitImpassable) ~= "function" then
-			return "Unit.ExitImpassable not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("LakeEntombment", {
+			{ class = "LandscapeLake", method = "PlacePrefab" },
+			{ class = "Unit", method = "ExitImpassable" },
+		})
+		if err then return err end
+		local L = LandscapeLake
 
 		local orig = L.PlacePrefab
 		function L:PlacePrefab(...)

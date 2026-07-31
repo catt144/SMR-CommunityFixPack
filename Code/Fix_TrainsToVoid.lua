@@ -29,16 +29,13 @@
 SMRFixPack.Register("TrainsToVoid", {
 	title = "Demolishing a station stores its trains instead of permanently deleting them",
 	apply = function()
-		local Building = rawget(_G, "Building")
-		if not Building or type(Building.OnDemolish) ~= "function" then
-			return "Building.OnDemolish not found (game update changed it?)"
-		end
-		if not rawget(_G, "Station") then
-			return "Station class not found (game update changed it?)"
-		end
-		if not (rawget(_G, "Train") and type(Train.DestroySilent) == "function") then
-			return "Train.DestroySilent not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("TrainsToVoid", {
+			{ class = "Building", method = "OnDemolish" },
+			{ class = "Station",
+			  reason = "Station class not found (game update changed it?)" },
+			{ class = "Train", method = "DestroySilent" },
+		})
+		if err then return err end
 
 		local orig = Building.OnDemolish
 		function Building:OnDemolish(...)

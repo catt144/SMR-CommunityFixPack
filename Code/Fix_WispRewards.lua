@@ -22,9 +22,10 @@
 SMRFixPack.Register("WispRewards", {
 	title = 'Mystery 11: "free the wisps" produces real power; destroyed-wisp rewards match the notification',
 	apply = function()
-		if type(SetLightTrapMode) ~= "function" then
-			return "SetLightTrapMode not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("WispRewards", {
+			{ global = "SetLightTrapMode" },
+		})
+		if err then return err end
 
 		function SetLightTrapMode(mode)
 			UIColony.mystery.lighttrap_mode = mode

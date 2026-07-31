@@ -20,16 +20,17 @@
 SMRFixPack.Register("CaveInsNoDisasters", {
 	title = 'Cave-ins no longer occur when the "No Disasters" game rule is active',
 	apply = function()
+		local err = SMRFixPack.Require("CaveInsNoDisasters", {
+			{ path = { "PeriodicRepeatInfo", "UndergroundMarsquake" },
+			  reason = "UndergroundMarsquake repeat not found (game update changed it?)" },
+			-- slot layout THREAD=1, SLEEP=2, FUNC=3 (lib.lua:1538-1542)
+			{ path = { "PeriodicRepeatInfo", "UndergroundMarsquake", 3 }, kind = "function",
+			  reason = "unexpected PeriodicRepeatInfo layout (game update changed it?)" },
+		})
+		if err then return err end
 		local FUNC = 3
-		local info = rawget(_G, "PeriodicRepeatInfo")
-		info = info and info["UndergroundMarsquake"]
-		if not info then
-			return "UndergroundMarsquake repeat not found (game update changed it?)"
-		end
+		local info = PeriodicRepeatInfo["UndergroundMarsquake"]
 		local orig = info[FUNC]
-		if type(orig) ~= "function" then
-			return "unexpected PeriodicRepeatInfo layout (game update changed it?)"
-		end
 
 		info[FUNC] = function(sleep, map, ...)
 			-- First call (sleep == nil) only asks for the interval; quakes fire on

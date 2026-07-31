@@ -19,9 +19,10 @@
 SMRFixPack.Register("NightShiftWork", {
 	title = "Night-shift colonists go to work after midnight instead of skipping their shift",
 	apply = function()
-		if type(Colonist.ShouldLeaveForWork) ~= "function" then
-			return "Colonist.ShouldLeaveForWork not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("NightShiftWork", {
+			{ class = "Colonist", method = "ShouldLeaveForWork" },
+		})
+		if err then return err end
 
 		local HOURS = const.HoursPerDay -- 24
 
