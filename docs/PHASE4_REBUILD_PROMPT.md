@@ -9,6 +9,17 @@ the final commit when the job completes** (the popup audit's
 moment another session commits. If the log shows work after
 `7c75887`, re-read `docs/STATUS.md` before trusting any number below.
 
+**This is a long job — plan for it.** Work the phases in order and do not
+truncate them to finish sooner; the verification is the deliverable, not
+overhead attached to one. If you run short of room, **commit what is verified,
+write down exactly where you stopped and what the last leg read, and hand over
+cleanly** rather than rushing the remainder.
+
+> *Editorial note for anyone revising this brief:* where it needs to describe
+> the mod environment's supported API set, it **points at `ENGINE_FACTS.md`
+> rather than restating the list here.** That is deliberate — one source of
+> truth, and a brief that does not drift from it. Please keep it that way.
+
 ---
 
 ## What this job is
@@ -116,7 +127,7 @@ independent and additive; it can land last.
 1. `docs/ENGINE_FACTS.md` — **the whole file.** Several behaviours here are the
    opposite of what the code suggests, and at least three of them can silently
    break this specific job (declaring-class flattening, `error()` not unwinding,
-   `rawset` vs assignment in the mod sandbox).
+   `rawset` vs plain assignment inside the mod environment).
 2. `docs/FIX_POLICY.md` — **§2 in full** (this job rewrites §2 compliance
    everywhere), plus §5, §6, §8.
 3. `docs/archive/AUDIT_FINDINGS.md` — findings **C1, C2, C4** and the PLAN.
@@ -203,8 +214,9 @@ wrong quietly.
 6. **⚠️ C1 — can it honestly deliver what its name promises?** The audit's own
    C1 text says self-checks catch *renamed or removed* targets but **not an
    edited same-named function** — and the edited-in-place case is precisely the
-   dangerous one, where the pack silently reinstates `1.0.7.396349` bodies onto
-   a patched game. **So a "N fixes deactivated after game update" surface can
+   dangerous one: the pack would go on applying its `1.0.7.396349` copies to a
+   game whose own code has moved, and nothing in the present design would tell
+   the player that had happened. **So a "N fixes deactivated after game update" surface can
    only report what the self-checks were able to notice.** Decide and state
    plainly: what can this surface truthfully claim? If the honest version is
    narrower than the audit implies, say so — and consider whether the honest
@@ -242,7 +254,8 @@ For **each** stage in your approved staging plan, in this order, no shortcuts:
 3. **Verify the invariants by inspection**, per stage:
    - no reason string changed unless deliberately approved;
    - no self-check moved off its declaring class;
-   - no handler lost its status gate or its veto refusal;
+   - no handler lost its status gate, or its refusal to overwrite a
+     `"disabled"` status;
    - no `%` escaping lost from any log path (`msg:gsub("%%", "%%%%")`);
    - no `rawset(_G, ...)` where an assignment is required, and vice versa;
    - `metadata.lua` `code` and `items.lua` `ModItemCode` still identical in
@@ -287,9 +300,12 @@ product.
    explicit `return "PASS"`. A probe whose `run` falls off the end returns nil
    and `SMRTest.Run` turns that into a **SKIP with an empty message** — it looks
    deliberate. Baseline legs cannot catch it; only a fixed leg can.
-6. **Sandbox re-check**: no blacklisted API introduced (`debug`, `io`,
-   `package`, `lfs`, `Async*`, `load`/`dofile`/`require`; `os` is `{time}`
-   only).
+6. **Mod-environment API re-check**: confirm the helpers introduced no calls
+   outside the set the mod environment supports. The supported set, and the
+   reasons behind it, are recorded in `ENGINE_FACTS.md` — consult it rather than
+   guessing, and note that the pack's existing `Code/` was verified clean
+   against it. If a helper needs something the pack has never used before, that
+   is a design question, not a detail: raise it.
 7. **Write the certification** (next section).
 8. **Update the docs**: `STATUS.md` counts and A/B table, `docs/archive/SESSION_LOG.md`
    leg (newest first), `FUTURE_IDEAS.md` Phase 4 entry, `AUDIT_FINDINGS.md`
@@ -344,7 +360,7 @@ the harness cannot see. Name it. Recommend what would close it.
 **Engine (all in `ENGINE_FACTS.md` — read it, do not re-derive)**
 - Mod code loads **before** classes are built; a classdef exposes only what it
   declares itself. Self-check the **declaring** class.
-- Runtime patches on a base class are invisible to already-built subclasses;
+- Runtime patches on a base class do not reach already-built subclasses;
   pre-build patches propagate.
 - `error()`/`assert()` **report and continue** — never use them for control
   flow. Use early returns and reason strings.
