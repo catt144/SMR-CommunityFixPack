@@ -6,7 +6,7 @@ the user picks per task and everything here works identically on either.**
 moment another session commits. (The filename keeps its historical `FABLE_`
 prefix so existing references stay valid; nothing in it is model-specific.)
 
-Staleness check: this was written at **`84427e1`** + the PT-20 leg that follows it.
+Staleness check: this was written at **`e07cece`** (the F87 repair leg).
 
 > 🛑 **READ FIRST — PT-20 FAILED AND WE HAVE A P1 DEFECT OF OUR OWN. `BUGS.md`
 > F86, and it BLOCKS RELEASE.** Measured 2026-07-31: **pack code is written into
@@ -41,14 +41,25 @@ Staleness check: this was written at **`84427e1`** + the PT-20 leg that follows 
 >   SKIP); the second wakes only `WaitWakeup` sleepers, never a `Sleep`. Both were
 >   proposed and killed by controls during PT-20. Do not re-derive them.
 
-> 🥇 **AND A SECOND DEFECT OF OURS — F87, which the owner wants fixed FIRST.**
-> `Fix_DustSicknessBiorobots` **throws** at apply when the player enables the mod,
-> so F40 is silently unfixed for that whole session. **This is the first-run
-> path**: a mod is never auto-enabled, so every player ticks it at the main menu
-> of a running process, which triggers an in-place reload. **The harness has never
-> tested that path** — every A/B leg starts with the pack already on, so all
-> `74/74` figures describe the second session onward. Details, repair shape and
-> the three follow-ups: the F87 entry.
+> ✅ **F87 IS FIXED (2026-07-31 late) — ONE THING IS OWED AND IT NEEDS YOU FOR ONE
+> CLICK.** The repair went into the shared `SMRFixPack.DataPatch` scaffold, not
+> the one file: nothing runs before `ClassesBuilt`, the enable path gets its own
+> triggers, and the pass is `pcall`ed (a throw in a msg handler is swallowed by
+> `procall`, so the fix would have reported `active` while doing nothing).
+> - **The sweep it earned found THREE MORE modules silently dead on the enable
+>   path** — `Fix_TechDescriptionBuilding`, `Opt_MultipleSuns`,
+>   `Fix_FirstAsteroidPrefabs` — all repaired via the new
+>   `SMRFixPack.OnDataReady`. The blast radius was four modules, not one.
+> - Rule written (**FIX_POLICY §2**: no `apply()` may assume a cold boot) and the
+>   load-order sequence traced into **ENGINE_FACTS**.
+> - **Cold-boot A/B re-verified CLEAR** (18.44, `68/74` → `63/0/15/0`). It proves
+>   no regression and **nothing about the enable path.**
+> - ⏳ **OWED: RUN THE ENABLE-PATH LEG.** It is built — TestKit
+>   `Code/98_EnablePathLeg.lua`, recipe in `PLAYTEST_HELP.md`. Arm it, launch with
+>   the **fix pack DISABLED**, tick it at the main menu, walk away. **That click
+>   cannot be automated** (`AccountStorage`, `SaveAccountStorage`,
+>   `ModsReloadItems` are all sandbox-blacklisted; no main-menu console). Until
+>   it runs, **no measurement we hold describes a player's first session.**
 
 > 🚧 **THERE ARE NOW TWO PROMPTS, AND THIS ONE DOES NOT DRIVE DRONE WORK.**
 > The drone project grew its own open design decision, its own frozen tests, and
@@ -128,10 +139,12 @@ committed and pushed.
 > ⚠️ **"Nothing is owed on the harness side" is NO LONGER TRUE (2026-07-31).**
 > Every one of those legs launches the game with the pack **already enabled**, so
 > they measure the *second session onward*. **The session in which a player turns
-> the mod on has never been measured**, and F87 lives there. A leg that boots with
-> the pack off, enables it at the main menu and then runs the probes is **owed**,
-> and it would also verify audit finding A2's three `Opt_` modules, whose "a first
-> mid-session enable works" remediation has never been checked end to end.
+> the mod on has still never been measured** — F87 lived there. The leg that
+> measures it is now **built and unrun**: it is board item 0, it needs one click
+> at the main menu, and it also verifies audit finding A2's three `Opt_` modules,
+> whose "a first mid-session enable works" remediation has never been checked end
+> to end. A **post-F87-repair cold-boot re-verify DID run** (18.44, `68/74` →
+> `63/0/15/0`) and is clear — it proves no regression, nothing more.
 
 **Account state — READ IT, NEVER ASSUME IT.** The 2026-07-31 13.18 log showed all
 six opt-in modules reporting `inactive (opt-in …)`, i.e. **all six toggles OFF**.
@@ -143,26 +156,30 @@ account-persistent too.
 
 ## ▶️ Next session — the board, user picks
 
-> ⚠️ **Items 0 and 0b outrank everything else on this list.** F87 is the owner's
-> stated first task; F86 blocks release. Items 1-2 are BUILDS — writing new fixes
-> before the save-safety rules are settled risks adding leak sites, and both D10
-> and D12 touch colonist assignment, which is command-thread territory. Confirm
-> the owner's intent before starting any build.
+> ⚠️ **Item 0 needs the owner at the keyboard for one click and takes ~5 minutes;
+> 0b blocks release.** Items 1-2 are BUILDS — writing new fixes before the
+> save-safety rules are settled risks adding leak sites, and both D10 and D12
+> touch colonist assignment, which is command-thread territory. Confirm the
+> owner's intent before starting any build.
 
-0. **🥇 F87 — DO THIS FIRST (owner instruction, 2026-07-31).**
-   `Fix_DustSicknessBiorobots` **throws** at apply when the player enables the
-   mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for
-   that whole session. **This is every player's first run**, not an edge case: a
-   mod is never auto-enabled, so it is always ticked at the main menu of a
-   running process, which triggers an in-place reload. **Owner direction: solve
-   it so the player never has to be told anything** — the C1 dialog wording is a
-   fallback, not the fix. Note the obvious guard does NOT work (`DataLoaded` has
-   already fired); use `ClassesBuilt` / `ModsReloaded` and fix the shared
-   `DataPatch` scaffold rather than the one file. Full repair shape, the C1
-   `error`-vs-`inactive` split, and the three follow-ups are on the F87 entry.
-   **The widest-coverage item there is a harness leg for the ENABLE PATH — we
-   have never once tested the session a new player actually has.**
-   **Do not start anything else until this lands.**
+0. **▶️ RUN THE ENABLE-PATH LEG — the last thing F87 owes, and the only
+   measurement we have never taken.** The leg is built and disarmed at rest.
+   Recipe: `PLAYTEST_HELP.md` → "The ENABLE-PATH leg". In short: uncomment
+   `"Code/98_EnablePathLeg.lua"` in the **TestKit** metadata `code` list, make
+   sure the **fix pack is DISABLED** in the Mod Manager, launch, then at the main
+   menu tick "Community Fix Pack" and close the dialog — the harness builds a
+   colony, runs all 78 probes and quits by itself. Re-comment to disarm.
+   - **Expect** the same totals as the cold-boot leg for the same toggle state
+     (read the `fix pack present: N/74` line first — the toggles are account
+     state and this leg does not change them).
+   - It also verifies audit **A2**'s three `Opt_` modules, whose "a first
+     mid-session enable works" remediation has never been checked end to end.
+   - A FAIL here is a real first-run defect: `FixMissing` FAILs any probe whose
+     fix is not `active`, and the data-patch probes read live preset data.
+   - **Still undone and deliberately so:** the C1 `error`-vs-`inactive` wording
+     split on the F87 entry. It is a FALLBACK — the owner's direction was to
+     solve the bug so no player message is needed, and that is what landed. Ask
+     before building it.
 0b. **🛑 F86 — the save-safety redesign.** Owner decision owed on the three
    layers (input-patching, the tail-call rule, `SaveGameStart` tear-down). Two
    cheap measurements are owed first and both are quick: **(a)** does
@@ -336,14 +353,16 @@ resource choice, and the RC Terraformer clicking a waste-rock heap.
 
 ## Harness facts (for any A/B pair / same-day repair)
 
-- ⚠️ **EVERY LEG WE HAVE IS A COLD BOOT — the enable path is unmeasured.** The
-  harness always launches with the pack already enabled, so all `N/74` figures
-  describe the *second session onward*. **A player's first session is different**:
-  they tick the mod at the main menu, which triggers an in-place mod reload where
-  presets are already loaded and classes are not yet flattened. That is where F87
-  lives, and an **enable-path leg is owed** — boot with the pack off, enable at
-  the main menu, then run the probes. It also verifies audit A2's three `Opt_`
-  modules.
+- ⚠️ **EVERY LEG WE HAVE IS A COLD BOOT — the enable path is still unmeasured,
+  but the leg for it now EXISTS.** The harness always launches with the pack
+  already enabled, so all `N/74` figures describe the *second session onward*.
+  **A player's first session is different**: they tick the mod at the main menu,
+  which triggers an in-place mod reload where presets are already loaded and
+  classes are not yet flattened. That is where F87 lived. **Board item 0 is
+  running the leg** (TestKit `Code/98_EnablePathLeg.lua`, recipe in
+  `PLAYTEST_HELP.md`) — it needs one human click and cannot be fully automated
+  (`AccountStorage` / `SaveAccountStorage` / `ModsReloadItems` are all in
+  `ModEnvBlacklist`, and there is no main-menu console).
 - Launch: `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050 -smrautorun`.
   A leg takes ~75 s; Mars.exe may take minutes to appear. **Never kill on a short
   timeout** (25 min no-kill guard; harness watchdog 15 min).
