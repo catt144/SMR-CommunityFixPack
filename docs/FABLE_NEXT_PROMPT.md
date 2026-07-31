@@ -51,7 +51,8 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
 - **The test is NOT "where is the function stored".** It is *can it be blocked
   below a `Sleep`/`WaitMsg`/`WaitWakeup` on a **game-time** thread when the save
   is written*. Synchronous code can never be captured, so ~62 of 74 modules are
-  safe by construction; **12 are exposed** (list on the F86 entry).
+  safe by construction; **13 are exposed** (list on the F86 entry — corrected
+  upward from 12 by the sweep, which caught `Fix_DroneUnreachableForever`).
 - ✅ **THE DECISION IS TAKEN (2026-07-31) — and exactly ONE game-free item is
   owed: the layer-3 sweep.** All four calls in **`docs\SAVE_SAFETY_REDESIGN.md`**
   §4 are answered:
@@ -59,7 +60,7 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
      §3a** — read that, not this summary, before writing any fix. It binds new
      fixes as well as F86 repairs.
   2. **The layer-3 sweep is AUTHORISED at FULL scope** — every full-replacement
-     module, not just the 12 exposed. Asks of each: *is there a synchronous
+     module, not just the 13 exposed. Asks of each: *is there a synchronous
      input we could patch instead of replacing a blocking body?* **Game-free,
      and it is the critical path.**
   3. **F02 is HELD until the sweep reports — do NOT touch

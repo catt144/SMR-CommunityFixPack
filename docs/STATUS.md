@@ -68,7 +68,7 @@ with **PHASE 4 COMPLETE** (below).
 > running after the mod is removed**. Two sites proven live:
 > `Fix_MeteorFrequency` (the colony's meteors stop **permanently** and do not
 > self-heal) and `Opt_DroneOverhaul` (98 errors/session, log noise only — and it
-> leaked with **its own opt-in toggle OFF**). Ten more modules are exposed.
+> leaked with **its own opt-in toggle OFF**). **Eleven more are exposed — 13 in total**, corrected upward from 12 by the sweep the same day (`Fix_DroneUnreachableForever`; see the F86 entry).
 > - **The route is a THREAD STACK, not a storage location.** A save captures
 >   every game-time thread with its blocked stack; a mod function there is
 >   serialised by value and comes back with an empty `_ENV`. The audit's
@@ -88,7 +88,7 @@ with **PHASE 4 COMPLETE** (below).
 >      block; `SaveGameStart` tear-down last, only for what survives, each with
 >      its own A/B plus a soak.
 >   2. **The layer-3 sweep is AUTHORISED at full scope** (all full-replacement
->      modules, not just the 12 exposed) and is **the critical path — the only
+>      modules, not just the 13 exposed) and is **the critical path — the only
 >      thing F86 owes.** Game-free.
 >   3. **F02 is HELD until that sweep reports.** Do not touch
 >      `Fix_MeteorFrequency`. Accepted cost: the measured leak stays shipped
@@ -99,7 +99,11 @@ with **PHASE 4 COMPLETE** (below).
 >   and the **`MeteorStorm`** thread at `Meteors.lua:326` pass the *same*
 >   descriptor, so descriptor-keying would fire the storm warning ~5 sols early
 >   and make Sensor Towers irrelevant to it (a balance change, FIX_POLICY §4).
->   The exposure list was independently re-verified the same day and holds.
+> - ⚠️ **And the exposure list grew: 13, not 12.** The sweep caught
+>   **`Fix_DroneUnreachableForever`** — it replaces `Drone:ApproachWrapper`, whose
+>   `DroneApproach` call blocks, and runs mod code after it, the same layer-2
+>   violation measured in `Opt_DroneOverhaul`. An earlier "no 13th site"
+>   certification is **withdrawn**. Detail: `SAVE_SAFETY_REDESIGN.md` §4a.
 > - ✅ **Remedy measured:** reinstalling the pack DOES revive a killed thread
 >   (`IsValidThread(Meteors)` → `true`, restarted by our own `LoadGame`). The
 >   answer for an affected player is "put the mod back" — real, and uncomfortable.

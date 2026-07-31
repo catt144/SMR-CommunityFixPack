@@ -151,7 +151,7 @@ A/B plus a long-interval soak.
 
 ---
 
-## 3. Per-module disposition (12 exposed)
+## 3. Per-module disposition (13 exposed — was 12, see §4a)
 
 | module | default? | route in | proposed layer |
 |---|---|---|---|
@@ -167,6 +167,7 @@ A/B plus a long-interval soak.
 | `Fix_ExtenderFlapChurn` | yes | own thread, short `Sleep` | 1 — narrow window |
 | `Fix_TrackConnectorPingPong` | yes | own thread closure | 1 |
 | `Fix_ShelterReflex` | yes | `Colonist:Idle` wrapper | **already compliant** with layer 2 |
+| **`Fix_DroneUnreachableForever`** ⚠️ **added 2026-07-31 by the sweep** | yes | replaces `Drone:ApproachWrapper`; `building:DroneApproach(...)` blocks and **lines 52-77 run after it** | **2** — move the failure-record ahead of the call or into a hook. Same shape as the measured `Opt_DroneOverhaul` leak. See §4a |
 
 \* `Opt_DroneOverhaul` leaked **with its own toggle OFF** — the wrapper installs
 at file scope and only early-returns. Opt-in status is not protection.
@@ -188,7 +189,7 @@ long-interval soak.
 Game-free source pass over the remaining full-replacement modules, asking of
 each: *is there a synchronous input we could patch instead of replacing a
 blocking body?* The owner authorised the **full** scope (all full-replacement
-modules), not just the 12 exposed — layer-3 wins on currently-safe modules are
+modules), not just the 13 exposed — layer-3 wins on currently-safe modules are
 worth having, because a module that keeps vanilla's body cannot regress into
 this defect class later. **This is the only thing owed on F86 right now.**
 
@@ -219,22 +220,66 @@ these two items: the answer is **not yet**.
 
 ---
 
-## 4a. Verification run against this file, 2026-07-31 (before the decisions)
+## 4a. ⚠️ THE EXPOSURE LIST IS 13, NOT 12 — corrected by the sweep, 2026-07-31
 
-Two controls were run on this document's own claims so the decisions rested on
-checked grounds rather than the file's summary of itself:
+**`Fix_DroneUnreachableForever` is a 13th exposed module and it was missing from
+every earlier count**, including a "no 13th site" certification written earlier
+the same day and committed in `23dd59d`. **That certification is WITHDRAWN.**
 
-- **The 12-module exposure list is neither padded nor short.** An independent
-  grep of `Code/` for `Sleep(` / `WaitMsg(` / `WaitWakeup(` /
-  `CreateGameTimeThread` / `GlobalGameTimeThreadFuncs` returned 9 modules, plus
-  `00_Core` (a **real-time** thread, correctly cleared). All 9 are on the list.
-  The list correctly adds 3 more — `Fix_TrainWaitTime`, `Fix_TrainCargoDumping`,
-  `Fix_ShelterReflex` — whose route is a **command body on the stack** rather
-  than a yield of their own, which the naive grep cannot see.
-- **No 13th site.** The pack's only other wrapper on a command-object class is
-  `Fix_RocketInteractGuard:119-135` (`RC.CanInteractWithObject`,
-  `RC.InteractWithObject`). Both do their work **before** the call and end
-  `return orig(self, ...)`, so both are already layer-2 compliant.
+**The site.** `Code/Fix_DroneUnreachableForever.lua:46-78` replaces
+`Drone:ApproachWrapper` wholesale. Line 51 calls
+`building:DroneApproach(self, resource)` and **lines 52-77 run after it** —
+table surgery, a `table.count`, and `self.command_center:UpdateConstructions()`,
+then `return IsValid(building) and result`. Three legs, all verified in Src:
+
+1. **`DroneApproach` blocks.** Every one of its ~20 implementations terminates in
+   `drone:Goto` / `GotoBuildingSpot` / `GotoBuildingsSpot` / `EnterBuilding`, and
+   `Unit:Goto` (`Unit.lua:130`) sits in a `while true` loop around
+   `pfSleep(self, status)`.
+2. **It runs on a game-time thread.** `ApproachWrapper`'s only four callers are
+   `Drone:Work` (`:920`), `Drone:PickUp` (`:972`), `Drone:Deliver` (`:1239`) and
+   `Drone:EmergencyPower` (`:1325`) — all drone **commands**, which run on
+   `CreateGameTimeThread` command threads (`CommandObject.lua:100`).
+3. **There is mod code after the blocking call** — the layer-2 violation.
+
+This is the **same shape as the measured `Opt_DroneOverhaul:188-190` leak**, so
+it is not a theoretical exposure: after uninstall the resumed frame reaches
+`IsValid(...)` with an empty `_ENV` and throws on a drone work path.
+
+**Why three earlier checks missed it, and the method that catches it.** A grep
+for `^function Drone:` was defeated by two things at once: the module installs
+via `local D = Drone` … `function D:ApproachWrapper` — an **alias** — and it does
+so **indented inside `apply()`**, so the column-0 anchor failed too. A yield-grep
+of `Code/` also misses it, because the module contains no yield of its own; it
+blocks through a **callee**.
+
+> **The reliable key is what each module ASSIGNS, extracted alias-blind:**
+> `grep -oE 'function [A-Za-z_][A-Za-z_0-9]*:[A-Za-z_][A-Za-z_0-9]*\('` over
+> `Code/`, then for each target read **vanilla's body in Src** and ask whether it
+> or any callee can yield. Do **not** key on `SMRFixPack.Require{class=,method=}`
+> — that declares a *self-check* target, not a replacement, and over-catches
+> badly (`Fix_LakeEntombment` checks `Unit:ExitImpassable`, which does block, but
+> never replaces it).
+
+**Everything else the sweep checked came back CLEAR**, each against vanilla's
+body rather than its name:
+
+| module | assigns | verdict |
+|---|---|---|
+| `Fix_MirrorSphereSite` | `StartAction` | **safe** — vanilla's body creates the `WaitWakeup` thread; ours is a thin wrapper that ends `return orig(self, action, ...)` |
+| `Fix_TrainPlatformWedge` | `Colonist:ExitVehicle` | **safe** — no yield in 32 lines |
+| `Fix_VacuumWalks` | `Colonist:TryToEmigrateToDome` | **safe** — no yield in 47 lines |
+| `Opt_CohortHousing` | `UpdateResidence`, `FindEmigrationDome` | **safe** — no yield (9 and 119 lines) |
+| `Fix_TouristSatisfaction` | `Colonist:UpdateSatisfaction` | **safe** — no yield |
+| `Fix_NightShiftWork` | `Colonist:ShouldLeaveForWork` | **safe** — no yield |
+| `Fix_DroneTransportMinors` | `DroneControl:UpdateRocketsInternal` | **safe** — no yield; own file adds no thread |
+| `Fix_LakeEntombment` | `LandscapeLake:PlacePrefab` | **safe** — no yield; it only *invokes* `ExitImpassable` via `SetCommand` on another unit |
+| `Fix_SmallLandscapeSites` | `GetClosestDests` | **safe** — returns before the caller's `drone:Goto` |
+| `Fix_RocketInteractGuard` | `CanInteractWithObject`, `InteractWithObject` | **safe** — both already layer-2 compliant |
+
+**Disposition for the new site:** `Fix_DroneUnreachableForever` is a **layer 2**
+case, and an easy one — the post-call block only records a failure timestamp, so
+it can move ahead of the call or into a hook. It does **not** need layer 1.
 
 ## 5. What is NOT proposed
 
