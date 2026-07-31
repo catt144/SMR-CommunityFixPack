@@ -1,48 +1,70 @@
-# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-30 late, after the F83 build)
+# Continuation prompt (model-agnostic) — rewritten 2026-07-31, mid-Phase-4, drones queued next
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks the model per task and everything here works identically on
-either.** This is the ONE live prompt. **Start with `git log --oneline -5` +
+either.** This is the ONE live prompt. **Start with `git log --oneline -10` +
 `git pull`** in case another session ran since this prompt was written — this
 file goes stale the moment another session commits. (The filename keeps its
 historical FABLE_ prefix so existing references stay valid — nothing in it is
 model-specific.)
 
-## Where the project stands (end of 2026-07-30 late — the F83 build landed; no sitting currently live)
+## Where the project stands (2026-07-31 — Phase 4 IN FLIGHT, drones now top of the list)
 
-> ⭐ **F83 IS BUILT AND ITS HARNESS LEG IS CLEAR** —
-> `Code\Fix_FirstAsteroidPrefabs.lua`, shape **(i) the load-time heal**. The
-> owner's go was recorded, the corrected brief was followed, both candidate
-> shapes were verified against Src, and shape (ii) was **rejected** with its
-> reasons in the fix header. Full build record on the F83 entry + the newest
-> SESSION_LOG leg. **What is owed now is human, not code: PT-59** (checklist
-> §3) — the keyboard A/B on the kept pre-trigger fixture. Reload leg must read
-> **1/1/1**; the healthy no-reload leg must STILL read **1/1/1, not 2/2/2**
-> (that half is the double-grant guard); reload twice must still read 1/1/1.
+> ⚠️ **A PHASE 4 REBUILD SESSION MAY STILL BE RUNNING.** `git log` first. It
+> commits one stage per commit with `leg identical` in the message. **If it has
+> not finished, do not touch `Code/`, `STATUS.md`, `SESSION_LOG.md`,
+> `FUTURE_IDEAS.md` or `AUDIT_FINDINGS.md`** — it owns those until it reports.
+> Its brief is `docs\PHASE4_REBUILD_PROMPT.md` (it deletes that file on
+> completion, so **if the file is gone, the job is done**). Scope: audit
+> Phase 4 items **C1 + C2 + C4** — shared core helpers, deeper self-checks, a
+> deactivated-fixes surface. **C3 merges are BARRED.** The three drone modules
+> are deliberately **carved out** of the migration.
 >
-> ✅ **The harness side is FULLY CLEAR — three legs, nothing owed.** The owner
-> set everything back to base at the end of the night and the default-config leg
-> ran unattended straight after: **`68/74` → `62 / 0 / 15 / 0`**, the predicted
-> numbers exactly, with the D09 probe reporting the **carry dial AT BASE** for
-> the first time since the PT-58 sitting. Both shipping configurations plus a
-> baseline are measured post-build (table below).
+> ⛔ **SCOPE CONTROL IS NOW A STANDING RULE — `docs\FUTURE_IDEAS.md`.** Good
+> ideas that are not needed before launch are PARKED there. **Nothing in that
+> file is work**: not owed, not scheduled, not counted, never reported as
+> outstanding. Reason on record: mission creep — every three items closed were
+> adding about six. **Defects never go there** (they stay in BUGS.md with a real
+> status). Parked so far: seniors-in-workshops, D01 `on_activate`, D11, and the
+> save-rescue proving work.
 >
-> The audit's **4-item needs-eyes list** (audit §8, mirrored in checklist §6)
-> is still open and still cheap — take the items as riders when the owner is
-> at the keyboard. Item 1 validates the audit's one load-bearing inference;
-> item 2 grades F83's *second* site, `ReconCenterDiscoveryAsteroid`, and
-> decides whether a separate fix is warranted at all; item 3 settles F85's
-> tier. **F85 stays observation-gated — do not build it.**
+> ⭐ **DRONES ARE THE NEXT MAJOR PIECE OF WORK, and nothing about them is
+> deferred.** The D06 entry now carries the full plan of record. Reading order:
+> **D06 entry → `docs\DRONE_PRIORITY_SYSTEM.md` → `docs\DRONE_RESEARCH_BRIEF.md`.**
+> **Four research questions gate the design and Q1 can kill it outright — run
+> them only AFTER Phase 4 finishes**, then a build brief gets written against
+> real answers. **⛔ NO DRONE PLAYTESTING until a final plan exists**
+> (freeze banner in `PLAYTEST_CHECKLIST.md` §1) — PT-52 A/B/B2 are frozen
+> pending invalidation; PT-10 is explicitly NOT frozen.
+>
+> ✅ **F83 IS BUILT AND FULLY LEG-VERIFIED** — `Code\Fix_FirstAsteroidPrefabs.lua`,
+> shape (i) the load-time heal; shape (ii) verified against Src and rejected,
+> reasons in the fix header. **Three legs measured post-build**: all-toggles-ON
+> `74/74` → `67/0/10/0`; default config `68/74` → `62/0/15/0`; baseline
+> `1/61/15/0` (where the new probe FAILs, proving it discriminates). **What is
+> owed is human: PT-59** (checklist §3) — reload leg **1/1/1**, healthy
+> no-reload leg **still 1/1/1 not 2/2/2** (the double-grant guard), reload twice
+> still 1/1/1. ⚠️ Those leg numbers are **pre-Phase-4**; re-read STATUS after it
+> reports.
+>
+> The audit's **4-item needs-eyes list** (checklist §6) is still open and cheap.
+> Item 1 validates the popup audit's one load-bearing inference; item 2 grades
+> F83's second site, `ReconCenterDiscoveryAsteroid`; item 3 settles F85's tier.
+> **F85 stays observation-gated — do not build it.**
 
-**Next session: PT-59 first if the owner is at the keyboard (it is short and it
-closes the F83 build), otherwise the D10 workshops BUILD.** Nothing is
-half-finished and nothing is blocked on an agent. D10 is speced, user-approved,
-game-free assistant work and was un-gated by PT-56's pass. Open playtests, in
-suggested order: **PT-59** (F83, new) · **PT-53 Trigger E** (last thing before
-D07 → `tested`) · **PT-54** (wave-6 disasters) · **PT-52 Trigger B + the B2
-stress re-run** · checklist **§6 needs-eyes riders** (15 rows — take them while
-you are in a qualifying save) · **PT-20/21** last. Decisions still owed: the
-FIX_POLICY §4 amendment (F83's fix design is no longer one of them — built).
+**Next session, in order: (1) if Phase 4 is unfinished, leave it alone and pick
+something outside its files; (2) PT-59 if the owner is at the keyboard — short,
+and it closes F83; (3) the four drone research questions once Phase 4 reports;
+(4) otherwise the D10 workshops build**, which is speced, user-approved,
+game-free and un-gated. Open playtests, suggested order: **PT-59** · **PT-53
+Trigger E** (last thing before D07 → `tested`) · **PT-54** (wave-6 disasters) ·
+checklist **§6 needs-eyes riders** · **PT-20/21** last. **PT-52 is FROZEN — do
+not run it.** Decisions still owed: the FIX_POLICY §4 amendment; audit Phase 4's
+C3 question is settled (**never**); **D08 and D06-structural are UNDECIDED and
+pending one dedicated drone conversation** — a third state, distinct from both
+"owed" and "parked". ~~F79~~ is CLOSED `wontfix` 2026-07-31 (owner: risk exceeds
+benefit on large multi-stop maps; F80 must be explained first if ever
+revisited) — do not re-propose or park it.
 
 **F83 (P2, PROVEN in play, ⭐ FIXED 2026-07-30 — PT-59 owed).** Minimized story
 popups lose their callback across a save/load: the waiter is a real-time thread
@@ -328,12 +350,17 @@ Your jobs, in the order they usually come up:
    rules earned the hard way: *a state producible only by console/debug
    injection is evidence AGAINST reachability*, and *re-read `git log` between
    assembling conclusions and publishing them*.
-6. **`docs\FUTURE_IDEAS.md` — read the hard rule at the top before you plan
+6. **`docs\BUGS.md` D06 entry + `docs\DRONE_PRIORITY_SYSTEM.md` +
+   `docs\DRONE_RESEARCH_BRIEF.md`** — the drone plan of record, in that order.
+   Read them before ANY drone work, including "just a quick look". The
+   priority-system doc is source-verified reference; the research brief holds
+   the four gates and the playtest freeze.
+7. **`docs\FUTURE_IDEAS.md` — read the hard rule at the top before you plan
    ANY session.** It is the launch-scope brake: everything in it is parked, and
    parked means not-work. It also carries a proposed-parking list awaiting the
    owner's yes/no — items on it are still live until answered, but do not start
    one without asking first.
-7. Only when relevant: `docsrchive\AUDIT_FINDINGS.md` (ARCHIVED — audit findings + the plan;
+8. Only when relevant: `docsrchive\AUDIT_FINDINGS.md` (ARCHIVED — audit findings + the plan;
    Phases 1-3 implemented 2026-07-29, Phase 4 awaiting the user's
    go-decision); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
    iteration, not just knob tuning — the shipped core is the veto variant of

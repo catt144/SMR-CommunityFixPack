@@ -84,7 +84,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D03 | No way to block dome move-ins short of full quarantine   | dsgn| med  | tested — PT-49 PASS 2026-07-28 (entry) |
 | D04 | Artificial Sun is build-once; second-sun support unused  | dsgn| low  | tested — PT-50 PASS 2026-07-27 (entry) |
 | D05 | Opt-in modules had no player-usable enable surface       | dsgn| high | tested — PT-51 PASS 2026-07-27 (entry) |
-| D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28 — first A/B NULL 2026-07-29, B2 re-run pending (entry) |
+| D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | v1 built 2026-07-28, A/B NULL — ⭐ **REBUILD DECIDED 2026-07-31, top of the list**; 4 research gates owed, **playtest FROZEN** (entry) |
 | D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 — PT-53 3-of-5 PASS 2026-07-29, A/E owed (entry) |
 | D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | tested 2026-07-30 — PT-56 PASS in full (entry) |
 | D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30, user-approved — **gate OPEN (PT-56 PASSED 2026-07-30), BUILDABLE NOW** (entry) |
@@ -4011,6 +4011,116 @@ machinery surgery.
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
 commit `21b92cb` had spliced F84's text into this heading, leaving D06's whole
 entry living under F84. Content untouched.)*
+
+---
+
+## ⭐ REBUILD DECIDED 2026-07-31 (owner) — this entry's shipped v1 is being replaced
+
+**Drones moved to the TOP of the list, nothing about drones is deferred, and the
+rebuild lands as ONE piece rather than another increment.** Owner's reasoning:
+drones are the one part of the pack that has been iterated piece-by-piece, and
+that is *why* it became cumbersome to test and reason about. Also, verbatim:
+*"even though its not technically bugged, it is near the top of a top 10 list of
+reasons people hate late game… I consider it to be an opt in only in terms of it
+being technically not bugged, but as far as I am concerned its a non bugged core
+developer failure."*
+
+### The finding that reframes v1 (from this entry's own B2 data)
+
+Hauling was **3h03m of a 3h27m total — 88% of elapsed time — and D06 exempts
+hauling by design.** Within the remaining 12%, the claim gate fired **once in 25
+malfunctions** and moved its leg by one minute, because
+`MaintenanceDroneUnload` → `StartWorkPhase(drone)` hands the repair to the
+**delivering** drone and bypasses `FindTask` entirely.
+
+**v1's exemption line was drawn on a code seam, not on the player's problem.**
+In the code, hauling is `rfSupplyDemand` pairing and repair is `rfWork` — two
+systems. But for a building that needs a maintenance resource, **the haul IS the
+repair.** That is a scoping error, not a tuning miss, and it is the case for
+rebuilding rather than iterating.
+
+### The root cause, and the full priority research
+
+**→ `docs/DRONE_PRIORITY_SYSTEM.md`** (source-verified 2026-07-31) is the
+reference. Headline: there is **no hidden priority band**. The whole system is
+five integers, `-1..3`; the player's scrollbar is `min 1, max 3, default 2`
+(`Building.lua:199`); and the "fast repair" players notice is **two classes
+auto-assigning themselves band 3** — `BreakableSupplyGridElement` (pipes/cables)
+and `PassageGridElement` (dome fractures), both at
+`GetPriorityForRequest`. Ordinary building maintenance has **no override at
+all** and inherits the player's arrows.
+
+**The developers' actual rule is not "repairs are urgent"** — track elements are
+repairs and get no bump. It is **"life-support-critical repairs are urgent"**,
+applied to the grid and the dome shell and never extended to the buildings that
+*produce* the air and water. Extending it completes their policy rather than
+inventing ours.
+
+### The design shape (owner-directed; NOT yet approved to build)
+
+**The core insight:** the player's arrows answer a **supply-allocation** question
+(*"when resources are scarce, who gets them first?"*). The same number also
+governs **repair urgency** — a question the player never answered. They answered
+the first one once, early, and it silently adjudicates repairs forever. That is
+the sol-12 setting still running a sol-400 colony, and it is the forum post.
+
+| Band | Assigned by | Contents |
+|---|---|---|
+| **5** | auto | malfunctioned life-support — producers, plus the grid/dome tier the game already elevates |
+| **4** | auto | every other **malfunctioned** building — decoupled from the arrows |
+| **3** | player | supply allocation, "high" |
+| **2** | player | supply allocation, "normal" (default) |
+| **1** | player | supply allocation, "low" |
+
+- **The split is `is_malfunctioned`** (`RequiresMaintenance.lua:41`, *"no work
+  possible"*) — elevate **broken**, not merely degrading. Routine top-up
+  genuinely *is* a supply question and stays on the player's scale. This is also
+  the bound that stops repairs starving food and construction.
+- **The claim gate is DROPPED** (not demoted). It arbitrates a 12% slice already
+  decided by the deliverer handoff, and carries strike counters, TTLs and cover
+  caches for a measured one-minute effect.
+- **Food service buildings get a data-patched default priority of 3**
+  (FIX_POLICY §1.1), fully player-overridable. Justification is **correct
+  attribution of failure**, not throughput — owner's framing: full pallet in the
+  dome reads *"this game sucks, drones are stupid"*; empty pallet reads *"I
+  under-built"*. Same starving colonist, opposite conclusion, and only one ends
+  up on a forum. That argument holds even when the player really is
+  under-producing, which a throughput argument does not.
+- **ONE TOGGLE, ALL OR NOTHING.** No sub-toggles inside the module. Separate
+  toggles multiply the configuration matrix and every combination is an
+  unmeasured product — which is exactly how v1 got here. **D09's stat dials stay
+  separate**; they are a player-set value with a clean off position, already
+  `tested`.
+- **D08's layers are folded into this conversation**, not a separate project —
+  layer 1 (the dispatcher) acts on registration, i.e. on the 88%, and the B2
+  data promotes it from speculation to evidence-backed.
+
+### ⛔ Four gates before any of this is designed further
+
+**→ `docs/DRONE_RESEARCH_BRIEF.md`.** Nobody writes a build brief until these
+answer; **Q1 can kill the band scheme outright.** (1) Does the C matcher honour
+a widened priority range? (2) Are hub queues persisted or rebuilt on load? (3) Do
+the life-support and Food-demand data tests identify what we think? (4) Does
+changing a property default reach buildings already in a save?
+
+**Run them only AFTER the Phase 4 rebuild finishes** — that job is rewriting
+`Code/` and these need temporary modules in the same directory.
+
+### ⛔ Drone playtest FREEZE, and a mandatory disclaimer
+
+**No drone playtesting until a final plan exists** (banner in
+`PLAYTEST_CHECKLIST.md` §1). **PT-52 Triggers A/B/B2 are FROZEN pending
+invalidation**; on approval they are archived as deprecated-by-redesign and
+replaced by **ONE multi-step playtest**, not a family of them. **PT-10 (F55) is
+NOT frozen** — different subject, shipped default-on fix. F77's defect is real
+and unaffected; only its test packaging is caught, and it folds into the
+consolidated PT.
+
+**The rebuild does not ship without a design-drift disclaimer** in
+MOD_DESCRIPTION (owner requirement; spec in the research brief). It cannot be
+written until Q2 answers, because the honest uninstall claim depends on it.
+
+---
 **COMMANDER-PROFILE INTERACTION CHECKED 2026-07-30 (owner question) — NO
 COLLISION between the `Inventor` profile and D06/D09/F77; the interaction is
 purely one of measurement.** Enumerated rather than assumed:
