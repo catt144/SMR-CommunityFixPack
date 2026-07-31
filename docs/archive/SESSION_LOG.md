@@ -152,16 +152,20 @@ seconds is adequate; tower-scaled meteor warning is a feature and is declined.**
   pre-flattening trap), so F40 was silently unfixed. Status `error`, not
   `inactive`, so it is a crash rather than a self-check latch — which also means
   the C1 dialog's "the game code they patch has changed" wording is wrong for
-  this case. **Trigger pinned on a second pass through the log (a first reading
-  wrongly blamed mod load order): enabling the pack from the in-game Mod Manager
-  triggers an IN-PLACE MOD RELOAD, and our code runs inside it with presets
-  already loaded — so an apply-time data patch that is a no-op at cold boot does
-  real work during file scope, before class flattening.** Same hazard class as
-  audit finding A2 (which moved three `Opt_` hooks to file-scope install so a
-  first mid-session enable works); the shared `DataPatch` scaffold was never
-  covered. Every A/B leg we have ever run is a cold boot, which is why `74/74`
-  never caught it. **Owner instruction: this is the FIRST thing done next
-  session.**
+  this case. **Trigger pinned over three passes, and the first two were wrong** —
+  mod load order (wrong), then a mid-*session* enable (wrong). Owner correction
+  settled it: the mod was ticked **at the main menu**, and since a mod is never
+  auto-enabled, **this is the path every player takes on their first run**.
+  Ticking it makes the engine do an IN-PLACE MOD RELOAD, and our code runs inside
+  it with presets already loaded — so an apply-time data patch that is a no-op at
+  cold boot does real work during file scope, before class flattening. **F40 is
+  dead for that whole session** and self-corrects only from the next launch.
+  Same hazard class as audit finding A2 (which moved three `Opt_` hooks to
+  file-scope install so a first enable works); the shared `DataPatch` scaffold
+  was never covered. **And the harness has never tested the enable path at all** —
+  every A/B leg starts with the pack already on, so all `74/74` figures describe
+  the second session onward. **Owner instruction: this is the FIRST thing done
+  next session.**
 - **A planned experiment was cancelled rather than run, and the reasoning is
   worth keeping.** The plan was a purpose-built probe to measure whether a proper
   tail call keeps a wrapper out of the save. It is **unfalsifiable by

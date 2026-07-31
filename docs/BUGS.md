@@ -113,7 +113,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **MEASURED** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), 10 more at risk. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE** — FIX_POLICY §3 (entry) |
-| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply on some load orders (`HasTrait:new` before class flattening), so F40 is silently unfixed | P2 | **OBSERVED** | filed 2026-07-31 — caught live by the Phase-4 C1 dialog on its first non-synthetic outing. Third instance of the F64 pre-flattening trap. **DO THIS FIRST NEXT SESSION** — one-line repair + A/B (entry) |
+| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | filed 2026-07-31 — caught live by the Phase-4 C1 dialog on its first non-synthetic outing. **Hits EVERY PLAYER'S FIRST RUN** (enable at the main menu → in-place reload); self-corrects only from the next launch. Third instance of the F64 pre-flattening trap, second of the enable-path class after audit A2, and **our harness has never tested the enable path at all**. **DO THIS FIRST NEXT SESSION** (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -4249,9 +4249,17 @@ yet, so `HasTrait.new` is nil**. Precedents: F64 itself, and D09's module
 tripping the same trap on `Modifier.new` (2026-07-29). Three occurrences makes it
 a pattern, not an incident.
 
-**TRIGGER PINNED (corrected — an earlier draft of this entry blamed mod load
-order; that was wrong).** The trigger is **enabling the pack from the in-game Mod
-Manager without restarting**. The log shows two reload cycles in one process:
+**TRIGGER PINNED — and it is the path EVERY PLAYER TAKES ON THEIR FIRST RUN.**
+(Two earlier drafts of this entry were wrong: the first blamed mod load order,
+the second described it as a mid-*session* enable. Owner correction: the mod was
+ticked **at the main menu**, and a mod is *never* auto-enabled — Workshop,
+Paradox or local, the player always flips it on themselves, and the main menu of
+the session they just launched is where they do it.)
+
+The trigger is **enabling the pack at any point after the process has loaded its
+data, which includes the main menu.** The log shows two reload cycles in one
+process, at `Lua 0:00:28` — the game reaching the main menu and the box being
+ticked, nothing to do with being in a colony:
 
 ```
 :67  [SMRTest] test kit loaded          <- first pass, Test Kit ONLY
@@ -4263,22 +4271,30 @@ Manager without restarting**. The log shows two reload cycles in one process:
 :190 Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
 ```
 
-The game was already running with its data loaded; enabling the mod triggered an
+The process was already up with its data loaded; ticking the mod triggered an
 **in-place mod reload**, and our code ran inside it. `apply()` calls `patch()`,
 documented as *"no-op unless the presets are already loaded"*, and the file
 header states *"presets load after mod code … hence the DataLoaded/DataChanged
 handlers"*. **Both statements assume a cold boot.** On a reload `StoryBits` is
 already populated, so the pass did real work during file scope — where
 `HasTrait` exists but is not yet flattened. The Test-Kit-before-pack ordering
-noted earlier is incidental: it is a side effect of the Test Kit loading alone
-first and both together second.
+noted in an earlier draft is incidental: a side effect of the Test Kit loading
+alone first and both together second.
 
-**Player-reachable, and the Mod Manager invites it.** Enabling a mod mid-session
-is a normal, offered action. In that session **F40 is silently not fixed** (Dust
-Sickness keeps infecting Biorobots, who keep bleeding Health every dust storm),
-invisible apart from the C1 dialog. It **self-corrects on the next restart**,
-which bounds the harm to one session — and is also why every A/B leg we have run
-(all cold boots) reported `74/74` and never caught it.
+**⚠️ SEVERITY — this is the first-run experience, not an edge case.** The only
+way to enable a mod is for the player to do it, and they do it from the main
+menu of a session that is already running. So **the broken path is the one every
+player takes the first time they install this pack**: launch → Mods → enable →
+play, with `Fix_DustSicknessBiorobots` dead for that entire session (Dust
+Sickness keeps infecting Biorobots, who keep bleeding Health every dust storm).
+Nothing prompts a restart, and the only visible sign is the C1 dialog. It
+**self-corrects from the next launch onward**, because the mod is enabled before
+the process starts.
+
+**And it is exactly the path our harness has never tested.** Every A/B leg
+launches with the pack already enabled, so all 74/74 measurements describe the
+*second* session onward. The first session — the one a new player actually has —
+has never been measured.
 
 **The general defect is bigger than this one fix: apply-time code assumes a cold
 boot.** This is the same hazard class the 2026-07-29 audit's finding **A2**

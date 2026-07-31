@@ -85,12 +85,19 @@ with **PHASE 4 COMPLETE** (below).
 >   answer for an affected player is "put the mod back" — real, and uncomfortable.
 
 > 🥇 **F87 — OWNER SAYS DO THIS FIRST NEXT SESSION.** `Fix_DustSicknessBiorobots`
-> **throws** at apply on some load orders (`HasTrait:new` before class
-> flattening), so **F40 is silently unfixed** for that player. One-line repair +
-> a re-verified A/B. **Caught live by the Phase-4 C1 dialog on its first
-> non-synthetic outing** — the fix would otherwise have shipped silently dead.
-> Third instance of the F64 pre-flattening trap, so it earns a constructor sweep
-> and a FIX_POLICY rule (both on the entry, neither done).
+> **throws** at apply when the player enables the mod, so **F40 is silently
+> unfixed for that entire session**. **This is the first-run path, not an edge
+> case:** a mod is never auto-enabled, so every player ticks it at the main menu
+> of a running process, which triggers an in-place reload — and our apply-time
+> data patch then runs with presets already loaded, before class flattening. It
+> self-corrects only from the next launch onward.
+> - **Caught live by the Phase-4 C1 dialog on its first non-synthetic outing.**
+> - **Our harness has NEVER tested the enable path.** Every A/B leg launches with
+>   the pack already on, so all `74/74` numbers describe the second session
+>   onward. The session a new player actually has is unmeasured.
+> - Third instance of the F64 pre-flattening trap and the second of the
+>   enable-path class after audit finding **A2** — so it earns an `apply()` sweep
+>   (both paths) and a FIX_POLICY rule. Neither done; both on the entry.
 
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
