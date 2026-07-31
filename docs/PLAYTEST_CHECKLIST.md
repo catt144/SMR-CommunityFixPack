@@ -865,7 +865,47 @@ Re-enable the fix pack before continuing.
 > threads by global name; `SMRFixPack_fixed_loop` markers) — make sure the
 > save used for this test post-dates wave 6 so the cycle covers them.
 
-`Result:` _____________________________________________
+> ⚠️ **NEW MANDATORY STEP 5, added 2026-07-31 — "it does not break" is NO LONGER
+> A SUFFICIENT PASS.** A mod-authored closure stored on a persisted game object
+> was **measured** going into a save, surviving the mod's removal, and still
+> being *called* afterwards (ENGINE_FACTS; drone Q1/Q2 sitting — the read
+> returned `function: 000001E95D57A6B0` with the module uninstalled, and it
+> re-filed queue entries using the vanished mod's logic, with **zero errors in
+> the log**). A silent, error-free session therefore does **not** prove the pack
+> left nothing behind.
+>
+> **Step 5 — hunt for surviving pack code, with the pack DISABLED:**
+> - **`Fix_MeteorFrequency` is the specific suspect** and the reason this step
+>   exists. It assigns our function to `GlobalGameTimeThreadFuncs.Meteors`
+>   (`Code/Fix_MeteorFrequency.lua:70`), game-time threads persist **with their
+>   blocked stacks** (ENGINE_FACTS), and the pack's own load line
+>   (`MeteorFrequency: persisted Meteors thread on load was alive — restarting
+>   with the fixed body`) proves that thread survives a save. If our body is in
+>   the save, it runs after uninstall in a world with **no `SMRFixPack` global**,
+>   so every `SMRFixPack.MeteorsBeatSet(...)` call inside it would index nil.
+>   Read, with the pack disabled:
+>   `*r ConsolePrint("Meteors body: " .. tostring(GlobalGameTimeThreadFuncs and GlobalGameTimeThreadFuncs.Meteors))`
+>   then let **a meteor cycle pass** (35-115h) and re-check the log for
+>   `attempt to index a nil value` naming `SMRFixPack`.
+> - **`rawget` spot-checks on objects the pack touches** — a function where
+>   vanilla has none is residue.
+> - ⚠️ **This is an INFERENCE, not a measured defect.** The closure-persistence
+>   mechanism is proven; that it applies to `GlobalGameTimeThreadFuncs` is not.
+>   **Either result is a real finding** — if the body does NOT survive, record
+>   that too, because it bounds the hazard to instance members only.
+>
+> Cleared by this step, from a 2026-07-31 audit of every `= function` site in
+> `Code/`: `Fix_GraphConsumedCaption` (`panel.caption`) and
+> `Fix_MoraleComfortTooltip` (`win.GetRolloverText`) write to **XWindows**, which
+> are not savegame-persisted; `Opt_ResidencyControl` (`self.OnActivate` /
+> `OnAltActivate` / the `ProcessToggle` rawset) is likewise a UI section; and
+> `Fix_StorageRateModifiers` writes to a **class table**, restored as a permanent
+> by name rather than serialised as instance data. **`Fix_MeteorFrequency` is the
+> only unresolved one.**
+
+`Result (steps 1-4):` _____________________________________________
+
+`Result (step 5 — surviving pack code):` _____________________________________________
 
 ## PT-21 — Long-save soak
 

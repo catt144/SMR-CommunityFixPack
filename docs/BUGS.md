@@ -4264,6 +4264,25 @@ changing a property default reach buildings already in a save?
 > 3. **Zero footprint of its own** — no GameVars, no closures on objects, purely
 >    transient work plus a report. Otherwise it needs its own cleanup mod.
 >
+> **The strongest argument is the last one, and it is two-sided by design.**
+> Owner, same session: *"the part about anything in the future is two sided, it
+> doesn't mean we have to add other things to it but it gives us the option. But
+> more importantly it gives us an option in the future to add things to it that
+> we don't know about yet that could come in from beta reports."*
+>
+> - **It is a capability, not a backlog.** Existing merely permits future
+>   cleanups; it does not create an obligation to find work for it, and nothing
+>   may be scheduled into it speculatively.
+> - **It is a BETA RESPONSE CHANNEL.** If beta surfaces save residue we did not
+>   anticipate, the remedy ships **without** requiring players to reinstall the
+>   pack and **without** us shipping a risky migration inside the pack itself.
+>   That is a materially different posture from "we would have to patch the pack
+>   and hope everyone updates".
+> - **It preserves the ethos rather than relaxing it.** The standing rule stays
+>   *make the mod clean*; the cleaner is for the cases where we hit a genuine
+>   brick wall — as here, where mods have **no save hook at all** — not a general
+>   permission to leave residue.
+>
 > **Scope control:** this is a NEW SHIPPED ARTIFACT. It is owed *with the
 > overhaul*, not with launch, and must not drift into a separate project
 > (`FUTURE_IDEAS.md` exists because every three items closed were adding six).

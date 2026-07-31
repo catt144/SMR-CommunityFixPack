@@ -445,3 +445,66 @@ not error**, but any work filed in the extra bands at that moment is **stranded*
 until that hub happens to re-register, which on a fully-scanned map may not
 happen on its own. A deliberate mitigation (a shutdown sweep that re-registers
 every hub, or a one-shot fixup) would be worth more than any wording.
+
+---
+
+## §10 The duplicate-entry leak — a defect of the band design ITSELF, not of uninstall
+
+Measured 2026-07-31, and it is the finding that most constrains the band scheme.
+
+**What was seen.** On the `Q1orphan` save, with the experiment module removed,
+`demand_queues[4]` on the sampled hub held **4** entries. A
+`ReconnectTaskRequesters()` was then run. It **repaired the target building** —
+its request re-filed into band 1 and a drone serviced it — but the band-4 count
+went **4 → 6**. The re-registration *healed the building and grew the garbage.*
+
+**Mechanism.** `ReconnectTaskRequesters` is `DisconnectTaskRequesters()` +
+`ConnectTaskRequesters()` (`DroneControl.lua:779-785`). The disconnect runs
+`DroneControl:RemoveBuilding`, whose loop is
+
+```lua
+for priority = -1, MaxBuildingPriority do   -- DroneControl.lua:735
+```
+
+where `MaxBuildingPriority` is the **file-local captured at game-Lua load time**
+(`DroneControl.lua:8`, `local MaxBuildingPriority = const.MaxBuildingPriority`)
+— i.e. **3**, before any mod runs, and unreachable from mod code because a
+file-local upvalue is not addressable. So the disconnect **cannot remove a
+band-4/5 entry**. The connect then re-files each request at its current
+priority. Any building still resolving to 4 gets a **new** entry while its old
+one is never cleared. Two such buildings were still armed at band 4 in that save;
+`4 + 2 = 6`, and the arithmetic matches exactly.
+
+> ⛔ **This is NOT an uninstall problem. It happens with the mod fully
+> installed and working.** Re-registration is routine in normal play — extender
+> flap, work-radius change, deposits spawning. **Every one of them duplicates
+> the elevated entries of every elevated building, permanently.** A long game
+> would accumulate dead request references in bands 4-5 without bound.
+
+**Corollary — the base class is not the problem.** `TaskRequestHub:RemoveBuilding`
+(`TaskRequest.lua:344-358`) and `_InternalRemoveRequest` (`:364-374`) loop the
+**module locals**, which the `const.TaskRequest` group *does* widen. It is
+specifically `DroneControl`'s override, with its own baked constant, that traps
+the entries — and `DroneControl` is the class every drone hub, rocket and RC
+Rover inherits.
+
+### What this costs each design option
+
+- **Bands 4-5 inside `-1..3`-shaped vanilla structures require replacing
+  `DroneControl:RemoveBuilding` outright** — a FIX_POLICY §1.5 full replacement
+  in the most shared queue code in the game, and one of the highest patch-rot
+  exposures available. Nothing smaller reaches the constant.
+- **Working inside `-1..3` avoids this entirely.** Vanilla's own removal loop
+  already covers the whole range, so no entry can ever be stranded and no
+  duplicate can accumulate. (This is now a *second* independent argument for the
+  `-1..3` design, alongside uninstall-cleanliness — and neither was known when
+  the band table was drafted.)
+- **A merged-view overlay** (band 4-5 held in non-persisted mod-side tables,
+  merged into the view handed to `Request_FindTask`) would sidestep both,
+  because nothing outside `-1..3` would ever enter a hub's real queues.
+  **Unproven and unscoped** — `FindTask` is hot, and every other queue path
+  would have to agree with the overlay.
+
+**Do not design against this section without re-measuring it.** The count read
+`4 → 6` once, on one hub, in one save. The mechanism is source-backed and the
+arithmetic fits, but a second observation on a clean fixture would make it solid.
