@@ -139,7 +139,10 @@ function SMRFixPack.Require(id, spec)
 			name = table.concat(c.path, ".")
 		end
 		if not ok then
-			local entry = id and SMRFixPack.fixes[id]
+			-- Target-SHAPE failures mark the fix for the C1 update report;
+			-- `test` entries do not — a content check owns its own meaning
+			-- (e.g. "already fixed?" verdicts are healthy, not patch rot).
+			local entry = id and not c.test and SMRFixPack.fixes[id]
 			if entry then entry.update_suspect = true end
 			return c.reason or (name .. " not found (game update changed it?)")
 		end
@@ -199,11 +202,15 @@ end
 --     never overwrites "disabled" (the user veto) or "error" (the A1 guard).
 function SMRFixPack.DataPatch(id, opts)
 	local ctx = { patched = false, ever_changed = false, data_loaded = false }
-	function ctx.latch(detail, log_suffix)
+	function ctx.latch(detail, log_suffix, benign)
 		local entry = SMRFixPack.fixes[id]
 		if entry then
 			entry.status = "inactive"
 			entry.detail = detail
+			-- a latch means the shipped data no longer matches this pack's
+			-- pinned build — C1-suspect unless the site says the data is
+			-- verifiably already-correct (benign)
+			if not benign then entry.update_suspect = true end
 		end
 		log("%s: inactive (%s)", id, log_suffix or detail)
 	end
@@ -334,6 +341,73 @@ function OnMsg.ApplyModOptions(mod_id)
 		end
 	end
 end
+
+-- ===== C1 — the update-deactivation report (Phase 4) =========================
+
+-- Which fixes look like PATCH ROT: deactivated (or errored) because the game
+-- code they patch no longer matches this pack's pinned build. Suspect =
+-- status "error"; or status "inactive" with the update_suspect mark a failed
+-- target-shape check leaves; or (fallback for bespoke sites) a detail string
+-- from the pack's target-changed/install-failed conventions. Opt-in state,
+-- Mod-Options-off and verified-already-correct verdicts are never suspect.
+function SMRFixPack.UpdateSuspects()
+	local out = {}
+	for _, id in ipairs(SMRFixPack.order) do
+		local f = SMRFixPack.fixes[id]
+		if f then
+			local suspect = false
+			if f.status == "error" then
+				suspect = true
+			elseif f.status == "inactive" then
+				local d = f.detail or ""
+				suspect = f.update_suspect and true
+					or d:find("game update changed", 1, true) ~= nil
+					or d:find("could not install", 1, true) ~= nil
+					or d:find("could not replace", 1, true) ~= nil
+					or d:find("did not land", 1, true) ~= nil
+			end
+			if suspect then out[#out + 1] = id end
+		end
+	end
+	return out
+end
+
+-- The player-facing surface: a one-time dialog at the pregame main menu when
+-- at least one fix deactivated itself over a game-code change.
+--
+-- Trigger: this title never fires Msg("PreGameMenuOpen") — the game's
+-- Lua\init.lua replaces OpenPreGameMainMenu without it, so the engine's own
+-- mod-error dialog path (Mod.lua:2231-2243) is dead code here. Poll the menu
+-- dialog instead, the way the TestKit autorun does. Consoles: a WaitMessage
+-- dialog is the same gamepad-native surface the engine uses for "Mod Loaded
+-- with Errors", so this reaches Xbox/PlayStation players — the log and
+-- console surfaces cannot (FIX_POLICY §7).
+--
+-- HONESTY LIMIT (by construction, FIX_POLICY §2 + the sandbox): self-checks
+-- notice a target that was renamed, removed or reshaped. They CANNOT notice a
+-- same-named function edited in place — those fixes keep applying their
+-- pinned bodies and no runtime surface can know. The dialog text therefore
+-- never claims the rest of the pack is verified; the after-every-patch
+-- extraction diff (WORKFLOW.md) remains the real re-verification.
+CreateRealTimeThread(function()
+	local deadline = RealTime() + 5 * 60 * 1000
+	while RealTime() < deadline do
+		Sleep(500)
+		local get_menu = rawget(_G, "GetPreGameMainMenu")
+		if type(get_menu) == "function" and get_menu() then break end
+	end
+	local suspects = SMRFixPack.UpdateSuspects()
+	if #suspects == 0 then return end
+	local list = table.concat(suspects, ", ")
+	log("update report: %d fix(es) deactivated over a game-code change: %s", #suspects, list)
+	local wait_message = rawget(_G, "WaitMessage")
+	if type(wait_message) == "function" then
+		wait_message(nil,
+			Untranslated("Community Fix Pack"),
+			Untranslated(string.format(
+				"%d of this pack's fixes found that the game code they patch has changed — usually after a game update — and switched themselves off for safety.\n\nFixes that cannot detect such changes may still need attention: if the game was recently updated, check for a new version of the Community Fix Pack.\n\nSwitched off: %s", #suspects, list)))
+	end
+end)
 
 -- Console helper: print what the pack did this session.
 function SMRFixPack.ListFixes()

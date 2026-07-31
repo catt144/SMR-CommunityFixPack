@@ -154,7 +154,7 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 		elseif stats.seen == 0 then
 			ctx.latch("Last Transmission has no storage conditions any more")
 		else
-			ctx.latch("the shipped presets are already correct")
+			ctx.latch("the shipped presets are already correct", nil, "benign")
 		end
 		SMRFixPack.LastTransmissionStorage = stats
 	end,

@@ -104,7 +104,7 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 			ctx.latch(TECH_ID .. " no longer modifies " .. PROP,
 				TECH_ID .. " no longer modifies " .. PROP)
 		else
-			ctx.latch("the shipped tech already matches its own param1")
+			ctx.latch("the shipped tech already matches its own param1", nil, "benign")
 		end
 		SMRFixPack.IndependenceTerraforming = { found = found, changed = changed }
 	end,
