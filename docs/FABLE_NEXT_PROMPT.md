@@ -1,53 +1,43 @@
-# Continuation prompt (model-agnostic) — rewritten 2026-07-31 late, after the drone-research sitting
+# General continuation prompt (model-agnostic) — rewritten 2026-07-31 late
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
-the user picks per task and everything here works identically on either.** This
-is the ONE live prompt. **Start with `git log --oneline -10` + `git pull`** in
-case another session ran since this was written — this file goes stale the
+the user picks per task and everything here works identically on either.**
+**Start with `git log --oneline -10` + `git pull`** — this file goes stale the
 moment another session commits. (The filename keeps its historical `FABLE_`
 prefix so existing references stay valid; nothing in it is model-specific.)
 
-Staleness check: this was written at **`2ee9745`** plus the session write-up
-commit that followed it.
+Staleness check: this was written at **`bd8d831`**.
+
+> 🚧 **THERE ARE NOW TWO PROMPTS, AND THIS ONE DOES NOT DRIVE DRONE WORK.**
+> The drone project grew its own open design decision, its own frozen tests, and
+> constraints that do not generalise — sharing a prompt was making both worse. It
+> now lives in **`docs\DRONE_PROJECT_PROMPT.md`** (re-runnable), which owns D06,
+> D08, D09, F77, the drone queue machinery, the consolidated drone playtest, and
+> the cleanup mod.
+> - **You MAY answer drone questions in passing**, from the `BUGS.md` D06 entry
+>   and `docs\DRONE_PRIORITY_SYSTEM.md`.
+> - **You may NOT start drone work, plan it, schedule it, or list it as owed
+>   here.** If a session turns into drone work, **stop and load the drone prompt
+>   instead.**
+> - Drone state appears below **as context only, never as a task.**
 
 ---
 
 ## Where the project stands
 
-> ✅ **ALL FOUR DRONE RESEARCH GATES ARE ANSWERED (2026-07-31). Nothing on the
-> drone research side is owed.** Answers live on the **D06 entry** in `BUGS.md`
-> and in `docs/DRONE_PRIORITY_SYSTEM.md` **§8-§10**. Headlines:
-> - **Q1 = HONOURED, both legs.** A band-4 *repair* and a band-4 *haul* were both
->   consumed by drones, the haul on a cheat-free symmetric pair (equidistant
->   buildings, one hub, `demand_queues[4][Polymers]` inspected directly). **The
->   band scheme survived the gate that could have killed it.**
-> - **Q2 = hub queues are PERSISTED**, allocated in `TaskRequestHub:Init()` at
->   construction and never on load.
-> - **Q3** — both data tests settled with exact enumerations: **5** life-support
->   producers via the game's own class test, **4** food services via
->   `ServiceWorkplace` + a Food demand. **Q4** — property defaults are omitted
->   from saves; live-confirmed on both branches.
+> 🚁 **DRONE CONTEXT ONLY — the work belongs to `docs\DRONE_PROJECT_PROMPT.md`.**
+> All four research gates were answered 2026-07-31 (Q1 **honoured** — bands 4-5
+> are visible to the C matcher and consumed on both the repair and haul legs; Q2
+> hub queues **persist**; Q3 both data tests settled; Q4 defaults omitted from
+> saves). **An open design decision follows from it and is NOT owed here** — the
+> band scheme passed but picked up two constraints that did not exist when it was
+> drafted (uninstall lossiness with an expiring heal path, and a duplicate leak
+> that bites with the mod installed). Detail: `BUGS.md` D06 entry and
+> `docs\DRONE_PRIORITY_SYSTEM.md` §8-§10. **Answer questions from those; start
+> nothing.**
 >
-> ⚠️ **THE DESIGN DECISION IS OPEN AND IS THE NEXT REAL PIECE OF WORK.** The band
-> scheme passed, but acquired **two constraints that did not exist when it was
-> drafted**, and **no side has been picked**:
-> - **§9 — uninstall is safe and silent but LOSSY.** A widened save loads into
->   vanilla with zero errors, but elevated work is stranded, and the heal path
->   (`DepositsSpawned` → re-register all hubs) **expires** once the map is fully
->   scanned. There is no re-scan. **The hub UI toggle does NOT re-register**
->   (measured). Clearing the map is an early act; removing a mod is a late one.
-> - **§10 — the duplicate leak, and this one bites with the mod INSTALLED.**
->   `DroneControl:RemoveBuilding` iterates using a **file-local pinned at 3**
->   (`DroneControl.lua:8`), which mod code cannot reach. So a re-registration
->   *heals the building but never removes the old band-4 entry* — measured going
->   `4 → 6`. Re-registration is routine in play, so bands 4-5 accumulate dead
->   references without bound.
-> - ⇒ **The `-1..3` fallback now has two independent arguments in its favour**,
->   neither of which existed when the five-band table was written. A third option
->   (a non-persisted merged-view overlay passed to `Request_FindTask`) is
->   sketched in §10 and is **unproven and unscoped**.
-> - **Do not pick one of these silently. It is an owner decision** and deserves a
->   dedicated conversation, not the tail of a build session.
+> ⛔ **PT-52 A/B/B2 remain FROZEN** — they test D06 v1's design and the design is
+> unsettled. **PT-10 is explicitly NOT frozen** (F55, different subject).
 
 > 🆕 **A NEW ENGINE FACT WITH PACK-WIDE REACH — read it before writing any fix.**
 > `ENGINE_FACTS.md`: **a mod-authored closure stored on a persisted game object
@@ -62,18 +52,12 @@ commit that followed it.
 > stacks). **PT-20 now carries a mandatory step 5 that names it**, and *"it does
 > not break"* is no longer a sufficient PT-20 pass.
 
-> 💡 **THE CLEANUP MOD — plan of record for the uninstall problem, NOT approved to
-> build** (D06 entry). Mods get **no save hook at all** (`PersistSave`,
-> `PersistLoad`, `PersistGatherPermanents` are blacklisted, `Mod.lua:1430-1433`)
-> and cannot run after their own removal — so a **second mod is the only thing
-> that can occupy that window**, running on `OnMsg.LoadGame` in a world where the
-> pack is gone. Owner frames it as a **beta response channel** and as a
-> *capability, not a backlog*. Three conditions are on the entry: it is a remedy
-> not a guarantee; the pack must leave **identifiable markers** so a cleaner can
-> find residue without our code present; and the cleaner must have **zero
-> footprint of its own**. Owed *with the overhaul*, not with launch.
-> ⚠️ It **supersedes** the earlier "the overhaul must go standalone" reading —
-> standalone is no longer assumed.
+> 💡 **ONE PACK-WIDE FACT FROM THE CLEANUP-MOD DISCUSSION — mods get NO SAVE
+> HOOK.** `PersistSave`, `PersistLoad` and `PersistGatherPermanents` are
+> blacklisted for mods (`Mod.lua:1430-1433`), and no mod can run after its own
+> removal. **Any design that assumes "we can tidy up on save" is impossible**,
+> not merely fragile. *(The cleanup-mod proposal that follows from this is
+> drone-owned — see the drone prompt. Not approved to build.)*
 
 > 🧭 **UNDECIDED, deliberately — a possible PACK SPLIT** (true fixes + a companion
 > mod holding the opt-ins). **Not owed, not scheduled, and it may not gate
@@ -117,36 +101,31 @@ account-persistent too.
 
 ## ▶️ Next session — the board, user picks
 
-1. **⭐ THE DRONE DESIGN DECISION** (above). Owner conversation, not a build. Read
-   `DRONE_PRIORITY_SYSTEM.md` §8-§10 first — they are new and they change the
-   trade. **Nothing else about drones should start until this settles.**
-2. **⭐ D10 — workshops module BUILD.** Speced, user-approved, game-free, un-gated
+1. **⭐ D10 — workshops module BUILD.** Speced, user-approved, game-free, un-gated
    (PT-56 passed). Full spec on the D10 BUGS entry: T1 text repairs + T2 capacity
    dial (base/+50%/+100%, `max_workers` AND `consumption_amount` **PAIRED**).
    Adds PT-57 (~7 min) at build time. **This is the ready-to-go build item.**
-3. **D12 — no-homeless dome policy.** DECIDED and speced, build owed. Its own
+2. **D12 — no-homeless dome policy.** DECIDED and speced, build owed. Its own
    module; `Opt_ResidencyControl` as donor pattern ONLY. **Hard constraint:** the
    new flag must NOT route through `CanAcceptNewColonists` (D03's gate) or it
    blocks the cohort delivery it exists to protect. Never expel to the surface.
    **Sequencing: D10 and D12 both touch colonist assignment — land them
    separately, each with its own A/B, never entangled.**
-4. **PT-20 — promoted.** It now has a **named suspect** (`Fix_MeteorFrequency`)
+3. **PT-20 — promoted.** It now has a **named suspect** (`Fix_MeteorFrequency`)
    and a mandatory step 5. It also needs the pack DISABLED, so bundle **F74** and
    **F53(a)** from the needs-eyes list into the same sitting.
-5. **PT-53 Trigger E** — the last thing between D07 and `tested`.
-6. **PT-54** — wave-6 disaster fixes; the live 194-sol save is the fixture.
-7. **Checklist §6 needs-eyes riders** — cheap single observations; the genuinely
+4. **PT-53 Trigger E** — the last thing between D07 and `tested`.
+5. **PT-54** — wave-6 disaster fixes; the live 194-sol save is the fixture.
+6. **Checklist §6 needs-eyes riders** — cheap single observations; the genuinely
    new ones are **F34(d)**, **F74**, **F06** and F11's console read.
-8. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
+7. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
    **PT-21/22** last.
 
-**⛔ PT-52 A/B/B2 remain FROZEN** — they test D06 v1's design and the design is
-unsettled. Do not run them. **PT-10 is explicitly NOT frozen.**
-
-**Decisions owed (user):** the drone design (above); the **FIX_POLICY §4
+**Decisions owed (user):** the **FIX_POLICY §4
 amendment** (drafted at the end of `REACHABILITY_AUDIT.md` — resolve its R4
 contradiction with F49(a) first; three options are on the F49 entry); **D08** and
-**D06-structural** (UNDECIDED, a third state); **D11** (feasibility is on the
+**D06-structural** (UNDECIDED, a third state — and drone-owned, see the drone
+prompt); **D11** (feasibility is on the
 entry but it is NOT approved — ask fresh; multi-hop passenger routing is
 REJECTED). ~~F79~~ is CLOSED `wontfix` — do not re-propose or park it.
 **F85 stays observation-gated — do not build it.**
@@ -209,10 +188,10 @@ test, insist on a **positive control** and an **objective counter**.
    rules: *a state producible only by console/debug injection is evidence
    AGAINST reachability*, and *re-read `git log` between assembling conclusions
    and publishing them*.
-6. **For any drone work: `BUGS.md` D06 entry → `docs\DRONE_PRIORITY_SYSTEM.md`
-   (§8-§10 are new and decisive) → `docs\DRONE_RESEARCH_BRIEF.md`** (now
-   historical — all four gates answered; keep it for the freeze and the
-   disclaimer spec).
+6. **Drones: do NOT read in to start work — load `docs\DRONE_PROJECT_PROMPT.md`
+   instead.** To answer a passing question only, the sources are the `BUGS.md`
+   D06 entry and `docs\DRONE_PRIORITY_SYSTEM.md` (§8-§10 are the new, decisive
+   ones).
 7. **`docs\FUTURE_IDEAS.md` — the hard rule at the top, before planning ANY
    session.** A proposed-parking list at the bottom awaits the owner's yes/no.
 8. Only when relevant: `docs\archive\AUDIT_FINDINGS.md` (ARCHIVED — Phases 1-3

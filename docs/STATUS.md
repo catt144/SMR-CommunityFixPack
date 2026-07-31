@@ -5,6 +5,14 @@ remediation 3.3). Session legs are append-only in
 `docs/archive/SESSION_LOG.md` (newest first); engine facts live in
 `docs/ENGINE_FACTS.md`; defect truth lives in `docs/BUGS.md`.
 
+> 🚧 **TWO PROMPTS since 2026-07-31 (owner).** `docs/FABLE_NEXT_PROMPT.md` is the
+> **general** prompt and no longer drives drone work — it may answer drone
+> questions but may not start, plan or schedule that work.
+> **`docs/DRONE_PROJECT_PROMPT.md`** owns it: D06, D08, D09, F77, the drone queue
+> machinery, the consolidated drone playtest, and the cleanup mod. Reason: the
+> drone project grew its own open design decision, its own frozen tests, and
+> constraints that do not generalise, and sharing a prompt was degrading both.
+
 **Build state (authoritative counts — stated here and nowhere else):**
 `Code/` = **75 files** (66 `Fix_` + 7 `Opt_` + `00_Core` +
 `90_SaveSanitizer`) = **74 registered modules, 68 default-active** (the 6
