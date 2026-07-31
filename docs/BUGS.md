@@ -4147,7 +4147,39 @@ changing a property default reach buildings already in a save?
 **Run them only AFTER the Phase 4 rebuild finishes** — that job is rewriting
 `Code/` and these need temporary modules in the same directory.
 
-### ✅ Q2, Q3 and Q4 are ANSWERED (2026-07-31) — only Q1 is still owed
+### ✅ ALL FOUR RESEARCH GATES ANSWERED 2026-07-31 — Q1 is **HONOURED**, the band scheme survives
+
+> **Q1 — the C matcher HONOURS a widened priority range. Measured, not inferred.**
+> Run on a **new game** (v2 instrument, `MaxBuildingPriority = 5`), where every
+> hub allocates `-1..5` natively — `Status()` read
+> `sample hub supply_queues keys: -1,0,1,2,3,4,5`, `4 hub(s) seen, 0 topped up`.
+> Two identical **Stirling Generators** were armed at **band 3** and **band 4**
+> and broken — same colony, same drones, same resources, one variable.
+>
+> | | band 3 (control) | band 4 (test) |
+> |---|---|---|
+> | malfunctioned → phase | `demand` → `work` | `demand` → `work` |
+> | work request target | 45000 → 0 | **51000 → 11000 → 0** |
+> | outcome | repaired | **repaired** |
+>
+> **The band-4 repair leg was claimed and worked to completion.** The positive
+> control cleared alongside it, so the harness is known-good. That kills the
+> "ignored" outcome: requests filed at 4 are **not** invisible and **not**
+> silently lost.
+>
+> ⚠️ **WHAT THIS DOES NOT PROVE — the HAUL leg is NOT evidenced.** Both buildings'
+> `resource request (haul leg)` sat at `target=1000` until the owner used
+> `CheatFill`, which satisfied the maintenance resource **directly**. No drone
+> hauled anything. So band-4 consumption is demonstrated for the **work/repair**
+> request only. The cheat was applied to both legs symmetrically, so it biases
+> nothing — but symmetric absence of evidence is still absence of evidence.
+> **This matters more than it sounds: hauling is 88% of elapsed repair time (the
+> B2 finding that motivated the whole rebuild), so the demand-queue half is the
+> half the design most depends on.** Close it with a natural haul — stock the
+> maintenance resource, break a band-4 building, and watch the haul target fall
+> without cheating.
+
+### ✅ Q2, Q3 and Q4 are ANSWERED (2026-07-31)
 
 > **Q2 — hub queues are PERSISTED, not rebuilt on load. Answered the hard way.**
 > The experiment module widened `const.TaskRequest.MaxBuildingPriority` to 5 at
