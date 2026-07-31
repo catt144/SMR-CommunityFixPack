@@ -1,4 +1,4 @@
-# General continuation prompt (model-agnostic) — rewritten 2026-07-31 late
+# General continuation prompt (model-agnostic) — reset to playtest standby 2026-07-31 late
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks per task and everything here works identically on either.**
@@ -6,232 +6,7 @@ the user picks per task and everything here works identically on either.**
 moment another session commits. (The filename keeps its historical `FABLE_`
 prefix so existing references stay valid; nothing in it is model-specific.)
 
-Staleness check: this was written at **`e07cece`** (the F87 repair leg).
-
-> 🛑 **READ FIRST — PT-20 FAILED AND WE HAVE A P1 DEFECT OF OUR OWN. `BUGS.md`
-> F86, and it BLOCKS RELEASE.** Measured 2026-07-31: **pack code is written into
-> the player's savegame and keeps running after the mod is removed.** A save
-> captures every game-time thread **with its blocked stack**; a mod function
-> there is serialised by value and returns with an empty `_ENV`.
-> - Proven at two sites: **`Fix_MeteorFrequency`** — the colony's meteors stop
->   **permanently** and do not self-heal — and **`Opt_DroneOverhaul`** (98
->   errors/session, log-only harm) which leaked **with its own toggle OFF**.
-> - **The test is NOT "where is the function stored".** It is *can it be blocked
->   below a `Sleep`/`WaitMsg`/`WaitWakeup` on a **game-time** thread when the save
->   is written*. Synchronous code can never be captured, so ~62 of 74 modules are
->   safe by construction; **12 are exposed** (list on the F86 entry).
-> - The 2026-07-31 audit's "class tables are safe" clearance is **void** —
->   `Drone.Idle` is a class-table write and leaked anyway.
-> - **Nothing is built.** The three-layer redesign lives in
->   **`docs\SAVE_SAFETY_REDESIGN.md`** — per-module disposition for all 12, the
->   autosave timer trap, and the four decisions owed. It is an **owner decision**;
->   do not build against it unquoted.
-
-> **Same leg, two corrections to recorded "facts" — both were believed and both
-> were wrong:**
-> - **MODS *DO* GET A PRE-SAVE HOOK.** `OnMsg.SaveGameStart` / `SaveGameDone`
->   reach mod code (measured, with `OnMsg.LoadGame` as a positive control); only
->   `PersistSave`, `PersistLoad`, `PersistGatherPermanents` are blacklisted
->   (`Mod.lua:1430-1440`). The "tidying up on save is unimplementable" claim is
->   dead, and the D06 cleanup-mod argument resting on it is corrected in place.
->   Autosaves are the same path (one flag) — so the hook covers them, and so does
->   the leak.
-> - **`debug.getinfo` and `Wakeup` are both dead ends** — the first is absent in
->   the sandbox (already in ENGINE_FACTS:69, and it is why `[install]` probes
->   SKIP); the second wakes only `WaitWakeup` sleepers, never a `Sleep`. Both were
->   proposed and killed by controls during PT-20. Do not re-derive them.
-
-> ✅ **F87 IS FIXED AND FULLY VERIFIED (2026-07-31 late) — NOTHING ON IT IS
-> OWED.** The repair went into the shared `SMRFixPack.DataPatch` scaffold, not
-> the one file: nothing runs before `ClassesBuilt`, the enable path gets its own
-> triggers, and the pass is `pcall`ed (a throw in a msg handler is swallowed by
-> `procall`, so the fix would have reported `active` while doing nothing).
-> - **The sweep it earned found THREE MORE modules silently dead on the enable
->   path** — `Fix_TechDescriptionBuilding`, `Opt_MultipleSuns`,
->   `Fix_FirstAsteroidPrefabs` — all repaired via the new
->   `SMRFixPack.OnDataReady`. The blast radius was four modules, not one.
-> - Rule written (**FIX_POLICY §2**: no `apply()` may assume a cold boot) and the
->   load-order sequence traced into **ENGINE_FACTS**.
-> - **Both legs ran and both are CLEAR.** Cold boot 18.44 (`68/74` →
->   `63/0/15/0`) and — for the first time in this project — **the ENABLE PATH
->   itself, 19.09, owner ticking the box at the main menu: `68/74` →
->   `63/0/15/0`**, probe-for-probe identical bar two RNG lines, with
->   `DustSicknessBiorobots` PASSing on live preset data. The leg logs its own
->   positive control (`ARMED — the pack is OFF` → `ENABLE DETECTED`).
-> - **And again at 19.24 with every optional module forced ON** via a temporary
->   `Code/97_OptInLeg.lua`: **`74/74` -> `68/0/10/0`**, matching the all-ON cold
->   boot exactly, all five `Opt_` probes PASSing. The log line
->   `MultipleSuns: … build-once limit lifted` proves one of the three sweep
->   repairs firing on the path where it was dead. Temporary file removed, leg
->   disarmed.
-> - 🛠 **A CLAIM THIS PROMPT CARRIED WAS FALSE AND IS WITHDRAWN:** the
->   enable-path leg does **not** "also verify audit A2". **PT-55 answered A2 in
->   play on 2026-07-30** and the audit caveat was retired then; A2 is the MODULE
->   toggle mid-session, not the PACK enabled at the main menu. Do not re-file
->   it as owed.
-
-> 🚧 **THERE ARE NOW TWO PROMPTS, AND THIS ONE DOES NOT DRIVE DRONE WORK.**
-> The drone project grew its own open design decision, its own frozen tests, and
-> constraints that do not generalise — sharing a prompt was making both worse. It
-> now lives in **`docs\DRONE_PROJECT_PROMPT.md`** (re-runnable), which owns D06,
-> D08, D09, F77, the drone queue machinery, the consolidated drone playtest, and
-> the cleanup mod.
-> - **You MAY answer drone questions in passing**, from the `BUGS.md` D06 entry
->   and `docs\DRONE_PRIORITY_SYSTEM.md`.
-> - **You may NOT start drone work, plan it, schedule it, or list it as owed
->   here.** If a session turns into drone work, **stop and load the drone prompt
->   instead.**
-> - Drone state appears below **as context only, never as a task.**
-
----
-
-## Where the project stands
-
-> 🚁 **DRONE CONTEXT ONLY — the work belongs to `docs\DRONE_PROJECT_PROMPT.md`.**
-> All four research gates were answered 2026-07-31 (Q1 **honoured** — bands 4-5
-> are visible to the C matcher and consumed on both the repair and haul legs; Q2
-> hub queues **persist**; Q3 both data tests settled; Q4 defaults omitted from
-> saves). **An open design decision follows from it and is NOT owed here** — the
-> band scheme passed but picked up two constraints that did not exist when it was
-> drafted (uninstall lossiness with an expiring heal path, and a duplicate leak
-> that bites with the mod installed). Detail: `BUGS.md` D06 entry and
-> `docs\DRONE_PRIORITY_SYSTEM.md` §8-§10. **Answer questions from those; start
-> nothing.**
->
-> ⛔ **PT-52 A/B/B2 remain FROZEN** — they test D06 v1's design and the design is
-> unsettled. **PT-10 is explicitly NOT frozen** (F55, different subject).
-
-> 🆕 **THE ENGINE FACT THAT STARTED IT — now superseded in scope by F86 above.**
-> A mod-authored closure on a persisted game object goes into the savegame,
-> survives removal and keeps running. **PT-20 proved the hazard is wider than
-> "instances":** the route is a persisted **thread stack**, so class-table writes
-> and `GlobalGameTimeThreadFuncs` replacements leak too. UI windows (XWindows)
-> remain genuinely safe — they are not savegame-persisted. Read the corrected
-> ENGINE_FACTS entries before writing any fix.
->
-> **Still true and still load-bearing:** no mod can run after its own removal, so
-> residue already inside a player's save is unreachable by the pack. *(The
-> cleanup-mod proposal is drone-owned — see the drone prompt. Not approved to
-> build, and its "no save hook" justification has been corrected.)*
-
-> 🧭 **UNDECIDED, deliberately — a possible PACK SPLIT** (true fixes + a companion
-> mod holding the opt-ins). **Not owed, not scheduled, and it may not gate
-> anything.** The owner's reason for not deciding is itself on the record in
-> `STATUS.md`: one mod is one configuration matrix, and every measurement we hold
-> is calibrated to it. Impacts (harness counts, the `OptionsMenu` probe's eight
-> assertions, D05's options surface, its composition with the cleanup mod, and
-> that it is cheap before beta and expensive after) are recorded there too.
-
-> ⛔ **SCOPE CONTROL IS A STANDING RULE — `docs\FUTURE_IDEAS.md`.** Ideas not
-> needed before launch are PARKED. **Nothing in that file is work**: not owed,
-> not scheduled, not counted, never reported as outstanding. Reason on record:
-> every three items closed were adding about six. **Defects never go there** —
-> they stay in BUGS.md with a real status; declining one is a `wontfix` with
-> reasoning.
-
-> 📋 **Todo lists: ONE ITEM PER COMMIT-AND-VERIFY UNIT** (`WORKFLOW.md`). The
-> owner reads that list to time when to step in. A list coarser than the work
-> gives a confident wrong answer.
-
-## Build state
-
-**74 registered modules — 68 active by default**, 6 opt-in via Options → Mod
-Options (D05, `tested`), plus the D09 stat-dials module (`Opt_DroneStatDials`,
-active-at-base = vanilla, `tested`). `Code/` = 75 files. **TestKit probes: 78.**
-Pinned game build **1.0.7.396349** (fpk parity proven, ENGINE_FACTS). Everything
-committed and pushed.
-
-**The cold-boot code gate is clear** — current legs at 78 probes: all-toggles-ON
-`74/74` → **68/0/10/0** (12.30.34); default config `68/74` → **63/0/15/0**
-(12.44.39, dials at base); baseline **1/62/15/0** (12.32.11).
-
-> ⚠️ **"Nothing is owed on the harness side" is NO LONGER TRUE (2026-07-31).**
-> Every one of those legs launches the game with the pack **already enabled**, so
-> they measure the *second session onward*. **The session in which a player turns
-> the mod on has still never been measured** — F87 lived there. The leg that
-> measures it is now **built and unrun**: it is board item 0, it needs one click
-> at the main menu, and it also verifies audit finding A2's three `Opt_` modules,
-> whose "a first mid-session enable works" remediation has never been checked end
-> to end. A **post-F87-repair cold-boot re-verify DID run** (18.44, `68/74` →
-> `63/0/15/0`) and is clear — it proves no regression, nothing more.
-
-**Account state — READ IT, NEVER ASSUME IT.** The 2026-07-31 13.18 log showed all
-six opt-in modules reporting `inactive (opt-in …)`, i.e. **all six toggles OFF**.
-But treat that as a reading with a timestamp: this sentence went stale twice on
-2026-07-30 alone. **Read the leg's own `fix pack present: N/74 fixes active`
-line** to learn which configuration you actually measured, and read the toggles
-with `SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`. The dials are
-account-persistent too.
-
-## ▶️ Next session — the board, user picks
-
-> ⚠️ **Item 0 needs the owner at the keyboard for one click and takes ~5 minutes;
-> 0b blocks release.** Items 1-2 are BUILDS — writing new fixes before the
-> save-safety rules are settled risks adding leak sites, and both D10 and D12
-> touch colonist assignment, which is command-thread territory. Confirm the
-> owner's intent before starting any build.
-
-0. **✅ F87 IS CLOSED OUT — nothing on it is owed. Read this only to avoid
-   re-opening it.** Both legs ran and passed (cold boot 18.44, enable path 19.09
-   and again with the optional modules forced ON). The leg is built, executed and
-   disarmed at rest — TestKit `Code/98_EnablePathLeg.lua`, recipe in
-   `PLAYTEST_HELP.md`.
-   - **Do NOT re-file "verify audit A2 on the enable path" as work.** A2 was
-     answered in play by **PT-55 on 2026-07-30**; the claim that this leg covers
-     it was wrong and is withdrawn.
-   - **Still undone and deliberately so:** the C1 `error`-vs-`inactive` wording
-     split on the F87 entry. It is a FALLBACK — the owner's direction was to
-     solve the bug so no player message is needed, and that is what landed. Ask
-     before building it.
-   - **The next item on the board is 0b (F86).**
-0b. **🛑 F86 — the save-safety redesign.** Owner decision owed on the three
-   layers (input-patching, the tail-call rule, `SaveGameStart` tear-down). Two
-   cheap measurements are owed first and both are quick: **(a)** does
-   `Fix_ShelterReflex` stay off the stack via its proper tail call — if yes, the
-   whole wrapper class collapses into a coding rule; **(b)** does reinstalling
-   the pack heal a damaged save (our `LoadGame` restarts the thread), which
-   decides what we tell an affected player.
-1. **⭐ D10 — workshops module BUILD.** Speced, user-approved, game-free, un-gated
-   (PT-56 passed). Full spec on the D10 BUGS entry: T1 text repairs + T2 capacity
-   dial (base/+50%/+100%, `max_workers` AND `consumption_amount` **PAIRED**).
-   Adds PT-57 (~7 min) at build time. **This is the ready-to-go build item.**
-2. **D12 — no-homeless dome policy.** DECIDED and speced, build owed. Its own
-   module; `Opt_ResidencyControl` as donor pattern ONLY. **Hard constraint:** the
-   new flag must NOT route through `CanAcceptNewColonists` (D03's gate) or it
-   blocks the cohort delivery it exists to protect. Never expel to the surface.
-   **Sequencing: D10 and D12 both touch colonist assignment — land them
-   separately, each with its own A/B, never entangled.**
-3. ~~**PT-20**~~ — **RUN 2026-07-31: steps 1-4 PASS, step 5 FAIL → F86.** Its
-   remaining work is item 0. **F74 and F53(a) are NO LONGER bundled with it** —
-   a pack-lineage save is not a vanilla control, so they need a colony that has
-   never had the pack installed (a fresh 10-minute save covers both).
-4. **PT-53 Trigger E** — the last thing between D07 and `tested`.
-5. **PT-54** — wave-6 disaster fixes. ⚠️ **The "live 194-sol save" named here is
-   GONE** (owner, 2026-07-31). The current long-running fixtures are `test 2i`
-   (288 sols) and `test 2e`-`2h` (~150-250 sols); `PT-20TEST`/`PT-20TEST-B` are
-   the F86 evidence saves and should not be played on.
-6. **Checklist §6 needs-eyes riders** — cheap single observations; the genuinely
-   new ones are **F34(d)**, **F74**, **F06** and F11's console read.
-7. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
-   **PT-21/22** last.
-
-**Decisions owed (user):** the **FIX_POLICY §4
-amendment** (drafted at the end of `REACHABILITY_AUDIT.md` — resolve its R4
-contradiction with F49(a) first; three options are on the F49 entry); **D08** and
-**D06-structural** (UNDECIDED, a third state — and drone-owned, see the drone
-prompt); **D11** (feasibility is on the
-entry but it is NOT approved — ask fresh; multi-hop passenger routing is
-REJECTED). ~~F79~~ is CLOSED `wontfix` — do not re-propose or park it.
-**F85 stays observation-gated — do not build it.**
-
-**Release-time owner tasks** (audit plan 2.5): preview image (PDX ≤2 MB / Steam
-≤1 MB), screenshots, Paradox portal console-publishing rules.
-
-**🚦 `docs\BETA_READINESS_REVIEW.md` is re-runnable** — derives every fact at run
-time, hard gates that cannot be judgement-softened. **Do NOT run it until the
-drone design decision has settled.**
-
----
+Staleness check: written after **`695424b`** (F87 closed out).
 
 You are continuing the Surviving Mars: Relaunched "Community Fix Pack". Sessions
 are usually **LIVE PLAYTEST STANDBY**: the user is at the keyboard in the retail
@@ -252,30 +27,202 @@ game with both mods loaded, and you assist in real time. Your jobs:
 4. **Commit as you go** — every processed result or finding is a commit, pushed.
    Docs never lag play.
 
-**⚠️ A PT's own procedure is unverified until it has been executed once.** This
-cost a leg *again* on 2026-07-31: PT-59 never said which of two popups to answer,
-and the wrong one produced a result indistinguishable from a fix failure — which
-was reported as a FAIL before source settled it. For any "nothing should happen"
-test, insist on a **positive control** and an **objective counter**.
+**⚠️ A PT's own procedure is unverified until it has been executed once.** Four
+tests have now been found unrunnable-as-written by running them (PT-29, PT-11,
+PT-25, PT-59). PT-59 cost a leg on 2026-07-31: it never said which of two popups
+to answer, and the wrong one produced a result indistinguishable from a fix
+failure — reported as a FAIL before source settled it. For any "nothing should
+happen" test, insist on a **positive control** and an **objective counter**.
+
+---
+
+## 🛑 The one thing blocking release — F86
+
+**We write executable code into the player's savegame and it keeps running after
+the mod is removed** (measured 2026-07-31 by PT-20 step 5; `BUGS.md` F86, P1).
+A save captures every game-time thread **with its blocked stack**; a mod function
+sitting there is serialised by value and comes back with an empty `_ENV`.
+
+- Proven at two sites: **`Fix_MeteorFrequency`** — the colony's meteors stop
+  **permanently** and do not self-heal — and **`Opt_DroneOverhaul`** (98
+  errors/session, log-only harm) which leaked **with its own toggle OFF**.
+- **The test is NOT "where is the function stored".** It is *can it be blocked
+  below a `Sleep`/`WaitMsg`/`WaitWakeup` on a **game-time** thread when the save
+  is written*. Synchronous code can never be captured, so ~62 of 74 modules are
+  safe by construction; **12 are exposed** (list on the F86 entry).
+- **Nothing is built. It is an owner decision.** The three-layer redesign is in
+  **`docs\SAVE_SAFETY_REDESIGN.md`** — per-module disposition for all 12, the
+  autosave timer trap, and the four decisions owed. Do not build against it
+  unquoted.
+- **Two cheap measurements are owed first**, both quick: **(a)** does
+  `Fix_ShelterReflex` stay off the stack via its proper tail call — if yes the
+  whole wrapper class collapses into a coding rule; **(b)** does reinstalling the
+  pack heal a damaged save (our `LoadGame` restarts the thread), which decides
+  what we tell an affected player.
+- **Three facts to spend nobody's time re-deriving** (all in ENGINE_FACTS):
+  **mods DO get a pre-save hook** — `OnMsg.SaveGameStart`/`SaveGameDone` reach
+  mod code and autosaves are the same path, so tear-down-on-save is
+  implementable; **`debug.getinfo` is absent in the sandbox** and **`Wakeup`
+  only wakes a `WaitWakeup` sleeper, never a `Sleep`** — both were proposed
+  during PT-20 and killed by controls.
+- **Still true and load-bearing:** no mod can run after its own removal, so
+  residue already inside a player's save is unreachable by the pack. (The
+  cleanup-mod proposal is drone-owned and not approved to build.)
+
+## 🚧 Two prompts — this one does NOT drive drone work
+
+The drone project grew its own open design decision, its own frozen tests and
+constraints that do not generalise. It lives in
+**`docs\DRONE_PROJECT_PROMPT.md`** (re-runnable), which owns D06, D08, D09, F77,
+the drone queue machinery, the consolidated drone playtest and the cleanup mod.
+
+- **You MAY answer drone questions in passing**, from the `BUGS.md` D06 entry and
+  `docs\DRONE_PRIORITY_SYSTEM.md` (§8-§10 are the decisive ones).
+- **You may NOT start drone work, plan it, schedule it, or list it as owed here.**
+  If a session turns into drone work, **stop and load the drone prompt instead.**
+- Drone state appears below **as context only, never as a task.**
+- ⛔ **PT-52 A/B/B2 remain FROZEN** — they test D06 v1's design and the design is
+  unsettled. **PT-10 is explicitly NOT frozen** (F55, different subject).
+
+## Standing rules for planning a session
+
+> ⛔ **SCOPE CONTROL — `docs\FUTURE_IDEAS.md`.** Ideas not needed before launch
+> are PARKED. **Nothing in that file is work**: not owed, not scheduled, not
+> counted, never reported as outstanding. Reason on record: every three items
+> closed were adding about six. **Defects never go there** — they stay in BUGS.md
+> with a real status; declining one is a `wontfix` with reasoning.
+
+> 📋 **Todo lists: ONE ITEM PER COMMIT-AND-VERIFY UNIT** (`WORKFLOW.md`). The
+> owner reads that list to time when to step in. A list coarser than the work
+> gives a confident wrong answer.
+
+> 🧭 **UNDECIDED, deliberately — a possible PACK SPLIT** (true fixes + a companion
+> mod holding the opt-ins). **Not owed, not scheduled, and it may not gate
+> anything.** The owner's reason for not deciding is on the record in `STATUS.md`:
+> one mod is one configuration matrix, and every measurement we hold is
+> calibrated to it. Impacts are recorded there too.
+
+---
+
+## Build state
+
+**74 registered modules — 68 active by default**, 6 opt-in via Options → Mod
+Options (D05, `tested`), plus the D09 stat-dials module (`Opt_DroneStatDials`,
+active-at-base = vanilla, `tested`). `Code/` = 75 files. **TestKit probes: 78.**
+Pinned game build **1.0.7.396349** (fpk parity proven, ENGINE_FACTS). Everything
+committed and pushed.
+
+**The code gate is clear on BOTH load orders and nothing is owed on the harness
+side** (78 probes, all 2026-07-31):
+
+| Leg | Active | Result |
+|---|---|---|
+| Cold boot, all toggles ON (12.30) | 74/74 | 68 / 0 / 10 / 0 |
+| Cold boot, default config (12.44, and again 18.44 post-F87-repair) | 68/74 | 63 / 0 / 15 / 0 |
+| Cold boot baseline, `code` list emptied (12.32) | — | 1 / 62 / 15 / 0 |
+| **Enable path**, default config (19.09) | 68/74 | 63 / 0 / 15 / 0 |
+| **Enable path**, all modules ON via the bridge (19.24) | 74/74 | 68 / 0 / 10 / 0 |
+
+**The enable path is the session a player's FIRST run actually is** — they tick
+the mod at the main menu, which triggers an in-place reload where presets are
+already loaded and classes are not yet flattened. It was unmeasured until
+2026-07-31 and F87 lived there; it now has its own leg (TestKit
+`Code/98_EnablePathLeg.lua`, recipe in `PLAYTEST_HELP.md`, disarmed at rest).
+
+**Account state — READ IT, NEVER ASSUME IT.** As of the 19.24 leg: **the fix pack
+is ENABLED** (the enable-path leg's own click persists — `ModsUIDialogEnd` calls
+`SaveAccountStorage`), **the six opt-in toggles are OFF**, and **both D09 dials
+are at base** (the probe reported it on entry). Treat that as a reading with a
+timestamp — this sentence went stale twice on 2026-07-30 alone. **Read the leg's
+own `fix pack present: N/74 fixes active` line** to learn which configuration you
+actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
+`SMRFixPack.fixes.<Id>.status`.
+
+## ▶️ The board — user picks
+
+> Playtests are the default work. The builds below are real and approved but
+> **confirm the owner's intent before starting one** — new fixes written before
+> the F86 save-safety rules are settled risk adding leak sites, and both D10 and
+> D12 touch colonist assignment, which is command-thread territory.
+
+1. **PT-53 Trigger E** — the last thing between D07 and `tested`.
+2. **PT-54** — wave-6 disaster fixes. ⚠️ **The "live 194-sol save" named in the
+   test is GONE** (owner, 2026-07-31). Current long-running fixtures are
+   `test 2i` (288 sols) and `test 2e`-`2h` (~150-250 sols); `PT-20TEST` /
+   `PT-20TEST-B` are the F86 evidence saves and should not be played on.
+3. **Checklist §6 needs-eyes riders** — cheap single observations; the genuinely
+   new ones are **F34(d)**, **F74**, **F06** and F11's console read.
+4. **F74 and F53(a)** — no longer bundled with PT-20: a pack-lineage save is not
+   a vanilla control, so they need a colony that has never had the pack installed
+   (one fresh 10-minute save covers both).
+5. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
+   **PT-21/22** last.
+6. **F86 decision + its two measurements** — see the block above. Owner call.
+7. **⭐ D10 — workshops module BUILD.** Speced, user-approved, game-free, un-gated
+   (PT-56 passed). Full spec on the D10 BUGS entry: T1 text repairs + T2 capacity
+   dial (base/+50%/+100%, `max_workers` AND `consumption_amount` **PAIRED**).
+   Adds PT-57 (~7 min) at build time. **This is the ready-to-go build item.**
+8. **D12 — no-homeless dome policy.** DECIDED and speced, build owed. Its own
+   module; `Opt_ResidencyControl` as donor pattern ONLY. **Hard constraint:** the
+   new flag must NOT route through `CanAcceptNewColonists` (D03's gate) or it
+   blocks the cohort delivery it exists to protect. Never expel to the surface.
+   **Sequencing: D10 and D12 both touch colonist assignment — land them
+   separately, each with its own A/B, never entangled.**
+
+**Decisions owed (user):** the **FIX_POLICY §4 amendment** (drafted at the end of
+`REACHABILITY_AUDIT.md` — resolve its R4 contradiction with F49(a) first; three
+options are on the F49 entry); **D08** and **D06-structural** (UNDECIDED, a third
+state — and drone-owned, see the drone prompt); **D11** (feasibility is on the
+entry but it is NOT approved — ask fresh; multi-hop passenger routing is
+REJECTED). ~~F79~~ is CLOSED `wontfix` — do not re-propose or park it.
+**F85 stays observation-gated — do not build it.**
+
+**Release-time owner tasks** (audit plan 2.5): preview image (PDX ≤2 MB / Steam
+≤1 MB), screenshots, Paradox portal console-publishing rules.
+
+**🚦 `docs\BETA_READINESS_REVIEW.md` is re-runnable** — derives every fact at run
+time, hard gates that cannot be judgement-softened. **Do NOT run it until the
+drone design decision has settled.**
+
+### Closed recently — do not re-open or re-file as owed
+
+- **F87** (`Fix_DustSicknessBiorobots` threw at apply on the enable path) —
+  **fixed and verified on both load orders 2026-07-31.** The repair is in the
+  shared `SMRFixPack.DataPatch` scaffold; the sweep it earned found three more
+  modules silently dead on that path, all repaired via the new
+  `SMRFixPack.OnDataReady`. The rule is in FIX_POLICY §2 and the load-order
+  sequence in ENGINE_FACTS. Only deliberately-undone piece: the C1
+  `error`-vs-`inactive` wording split, a FALLBACK the owner did not want in place
+  of a real fix — **ask before building it.**
+- **Audit A2** — answered YES in play by **PT-55 on 2026-07-30**. A claim that the
+  enable-path leg "also verifies A2" was carried in several docs during the F87
+  work and is **withdrawn**; A2 is the MODULE toggle flipped mid-session, not the
+  PACK enabled at the main menu.
+- **F79** — `wontfix` by owner decision 2026-07-31.
+
+---
 
 ## First, read (in order) from `C:\Dev\SMR-BugFixPack`
 
 1. **`docs\ENGINE_FACTS.md` — the whole file.** Several behaviours are the
-   opposite of what the code suggests, and it now carries the
-   closure-persistence fact. Then `docs\STATUS.md` (compact current state).
-   Session legs are in `docs\archive\SESSION_LOG.md`, newest first.
+   opposite of what the code suggests; it carries the closure/thread-stack
+   persistence facts and the enable-path load order. Then `docs\STATUS.md`
+   (compact current state). Session legs are in `docs\archive\SESSION_LOG.md`,
+   newest first.
 2. `docs\PLAYTEST_CHECKLIST.md` — tests + the reporting protocol only. §1
-   standing watches, §2 owed halves, §3 wave-6 + PT-59 (now archived), §4
-   fixture sittings, §5 cross-cutting (PT-20/21), §6 the needs-eyes list. **All
-   reference material — ground rules, external-validity rule, cheat discipline,
-   console facts, the verified command table, Test Kit helpers, save-fixture
-   recipes — lives in `docs\PLAYTEST_HELP.md`.** Read its ground rules before
-   handing the user any console line.
-3. `docs\BUGS.md` — the entries the sitting touches. **F76 before ANY depot-picker
-   interaction.** For drone anomalies, the DroneControl bullet in "Not yet swept"
-   carries the assignment-machinery trace and the R1-R7 paste-ready forensics.
+   standing watches, §2 owed halves, §3 wave-6, §4 fixture sittings, §5
+   cross-cutting (PT-20/21), §6 the needs-eyes list. **All reference material —
+   ground rules, external-validity rule, cheat discipline, console facts, the
+   verified command table, Test Kit helpers, the enable-path leg recipe,
+   save-fixture recipes — lives in `docs\PLAYTEST_HELP.md`.** Read its ground
+   rules before handing the user any console line.
+3. `docs\BUGS.md` — the entries the sitting touches. **F76 before ANY
+   depot-picker interaction.** For drone anomalies, the DroneControl bullet in
+   "Not yet swept" carries the assignment-machinery trace and the R1-R7
+   paste-ready forensics.
 4. `docs\FIX_POLICY.md` — binding for any code you write. **§4a is the owner hard
-   rule (below); §4 has a drafted replacement awaiting the owner.**
+   rule (below); §2 carries the F87 cold-boot rule; §4 has a drafted replacement
+   awaiting the owner.**
 5. **`docs\REACHABILITY_AUDIT.md` — the "Challenge review 2026-07-30" at the end,
    before writing ANY new fix.** Tier vocabulary (R1/R2/R3/R4/U + `I`), the hard
    tells that distinguish a defect from designed behaviour, and two standing
@@ -284,19 +231,19 @@ test, insist on a **positive control** and an **objective counter**.
    and publishing them*.
 6. **Drones: do NOT read in to start work — load `docs\DRONE_PROJECT_PROMPT.md`
    instead.** To answer a passing question only, the sources are the `BUGS.md`
-   D06 entry and `docs\DRONE_PRIORITY_SYSTEM.md` (§8-§10 are the new, decisive
-   ones).
+   D06 entry and `docs\DRONE_PRIORITY_SYSTEM.md`.
 7. **`docs\FUTURE_IDEAS.md` — the hard rule at the top, before planning ANY
    session.** A proposed-parking list at the bottom awaits the owner's yes/no.
-8. Only when relevant: `docs\archive\AUDIT_FINDINGS.md` (ARCHIVED — Phases 1-3
-   done 2026-07-29, Phase 4 EXECUTED 2026-07-31); `docs\DRONE_OVERHAUL_OPTIONS.md`.
+8. Only when relevant: `docs\SAVE_SAFETY_REDESIGN.md` (F86);
+   `docs\archive\AUDIT_FINDINGS.md` (ARCHIVED — Phases 1-3 done 2026-07-29,
+   Phase 4 EXECUTED 2026-07-31); `docs\DRONE_OVERHAUL_OPTIONS.md`.
 
 Game source (read-only, NEVER modify):
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`.
 Both mods load through junctions from `C:\Dev\SMR-BugFixPack` and
 `C:\Dev\SMR-BugFixPack-TestKit`. **Check `Mars.exe` is NOT running BEFORE
 touching loadable code** (`tasklist`) — and check it *before*, not in the same
-command as the edit (that slip happened 2026-07-31; no harm, wrong order).
+command as the edit.
 
 > ⛔ **READ BEFORE WRITING ANY FIX — FIX_POLICY §4a, owner hard rule: this pack
 > NEVER fixes other mods' problems.** Not bugs caused by another mod, and not
@@ -347,7 +294,7 @@ resource choice, and the RC Terraformer clicking a waste-rock heap.
 - **Runtime console wrappers must target the LEAF class** — a runtime patch on a
   base class is invisible to already-built subclasses.
 - Console opens via Enter / Alt-Shift-C / Ctrl-Alt-C (TestKit auto-opens it
-  in-colony; there is NO main-menu console).
+  in-colony; there is **NO main-menu console**).
 - Infopanel cheat buttons need `Platform.cheats = true` AND ride the game-time
   sync queue (dead while paused). Direct `SelectedObj:Cheat*()` bypasses both.
 - Speed techs sanctioned for setup: `AdvancedDroneDrive`, `LowGDrive`,
@@ -357,32 +304,27 @@ resource choice, and the RC Terraformer clicking a waste-rock heap.
 
 ## Harness facts (for any A/B pair / same-day repair)
 
-- ✅ **THE ENABLE PATH IS MEASURED NOW — one leg, 2026-07-31 19.09, PASSED.**
-  Every *other* leg is a cold boot (launched with the pack already enabled), so
-  those `N/74` figures describe the *second session onward*. **A player's first
-  session is different**: they tick the mod at the main menu, which triggers an
-  in-place mod reload where presets are already loaded and classes are not yet
-  flattened. That is where F87 lived. The leg is TestKit
-  `Code/98_EnablePathLeg.lua` (recipe in `PLAYTEST_HELP.md`); it needs one human
-  click and cannot be fully automated (`AccountStorage` / `SaveAccountStorage` /
-  `ModsReloadItems` are all in `ModEnvBlacklist`, and there is no main-menu
-  console). ⚠️ **The one run had the toggles OFF, so audit A2 is still open on
-  that path — re-running it with the toggles ON is board item 0.**
 - Launch: `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050 -smrautorun`.
   A leg takes ~75 s; Mars.exe may take minutes to appear. **Never kill on a short
   timeout** (25 min no-kill guard; harness watchdog 15 min).
 - Arm the TestKit autorun by uncommenting `"Code/96_AutoRunFlag.lua"` in the TestKit
   metadata `code` list; re-comment to disarm (commented at rest).
+- **Enable-path leg** (a player's first run): uncomment
+  `"Code/98_EnablePathLeg.lua"` instead, make sure the **fix pack is DISABLED**,
+  launch, and have the owner tick it at the main menu — the harness takes over
+  from there. Full recipe in `PLAYTEST_HELP.md`. ⚠️ **That click persists**
+  (`ModsUIDialogEnd` → `SaveAccountStorage`), so every run must disable the pack
+  again first; the leg's guard aborts loudly if it was already on.
 - Baseline = overwrite fix pack `metadata.lua` with an emptied `code` list — **keep
   the `default_options` block**. **Restore from a saved copy, NOT `git checkout`,
   while uncommitted metadata changes exist. NEVER `git commit -a` while that edit
   is in the working tree.**
 - Opt-in leg mechanism: temporary `Code/97_OptInLeg.lua` in the FIX PACK right
   after 00_Core, setting `SMRFixPack_Optional`. Delete after the leg. **The bridge
-  is one-way — it can only force a module ON**, and the user's Mod Options toggles
-  are account-persistent and apply during legs. **A true default-config leg (68/74)
-  requires the user to turn the six toggles off by hand first** — proven five times
-  over.
+  is one-way — it can only force a module ON** (it is checked before
+  `CurrentModOptions`, so it overrides an OFF toggle and never touches account
+  state). **A true default-config leg (68/74) requires the user to turn the six
+  toggles off by hand first** — proven five times over.
 - **Probe-authoring trap:** a probe whose `run` falls off the end returns nil, and
   `SMRTest.Run` turns nil into **SKIP with an empty message** — it looks deliberate.
   Every probe needs an explicit `return "PASS", …`. Re-audited 2026-07-30: clean.
@@ -402,15 +344,18 @@ resource choice, and the RC Terraformer clicking a waste-rock heap.
 ## Hard rules
 
 `docs/ENGINE_FACTS.md` governs: sandbox on all platforms; `error()`/`assert()`
-report-and-continue; self-checks read the DECLARING class; presets only after
+report-and-continue; self-checks read the DECLARING class; **no `apply()` may
+assume a cold boot** (F87 — no class/preset construction at apply time, and
+`OnMsg.DataLoaded` alone is not a sufficient trigger); presets only after
 DataLoaded (which can fire MORE THAN ONCE); GameVars only inside patched
 functions; post-wrappers on command methods never run; `IsValid()` is falsy for
 ALL pure-Lua objects; **the shipped build IS Src** (2250/2256 byte-identical —
-keep apply-time self-checks anyway, they guard future patches); **a mod closure
-on a persisted object enters the save and survives uninstall**; never modify the
-game directory; only the playtest flips statuses to `tested`; mechanical repairs
-land with a re-verified A/B, redesigns go to the user; **no live UI-internals
-prototyping on the user's play sessions**. Commit with
+keep apply-time self-checks anyway, they guard future patches); **a mod function
+blocked on a persisted game-time thread enters the save and survives uninstall**
+(F86); never modify the game directory; only the playtest flips statuses to
+`tested`; mechanical repairs land with a re-verified A/B, redesigns go to the
+user; **no live UI-internals prototyping on the user's play sessions**. Commit
+with
 `git -c user.name="SMR-BugFixPack" -c user.email="154917955+catt144@users.noreply.github.com"`,
 push the fix pack (TestKit stays local-only).
 
