@@ -46,10 +46,7 @@
 -- Body below is a copy of Lua\Meteors.lua:266-304 (shipped Src, game 1.0.7.396349); the only
 -- changes are marked with `-- FIX:`.
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 -- The thread body below must keep ZERO upvalues (like the shipped body it copies):
 -- the running thread is persisted into saves, and a closure that only does global

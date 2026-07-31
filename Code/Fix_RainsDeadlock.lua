@@ -45,10 +45,7 @@
 
 local FIX_ID = "RainsDeadlock"
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 -- Body below is a copy of TerraformingDisasters.lua:310-316 (shipped Src, game
 -- 1.0.7.396349); the only change is marked with `-- FIX:`. No upvalues: threads

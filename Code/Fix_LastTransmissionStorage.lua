@@ -76,11 +76,7 @@ local COMPARE = {
 	["~="] = function(a, b) return a ~= b end,
 }
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	-- ModLog's output path formats the message a second time (00_Core.lua:18-25).
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 -- The ScriptCheckGridGlobalStorage node inside a condition list, if there is one.
 local function find_grid_check(list)

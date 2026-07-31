@@ -52,10 +52,7 @@ local TECH_ID = "Independence_TerraformingProjects"
 local PROP = "SpecialProjectResourcesModifier"
 local WANTED = -20
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 local patched = false
 local ever_changed = false   -- some pass this session actually changed the preset

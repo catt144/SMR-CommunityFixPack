@@ -25,11 +25,7 @@
 
 local FIX_ID = "DustSicknessDamage"
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 -- The shipped body with the one line corrected, marked -- FIX.
 local function dust_sickness_daily_update(colonist, trait)

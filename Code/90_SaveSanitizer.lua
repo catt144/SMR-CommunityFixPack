@@ -24,14 +24,7 @@
 
 local FIX_ID = "SaveSanitizer"
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	-- ModLog's ModPrint output path re-formats the message (printf-style
-	-- CreatePrint, Mod.lua:109-132 + lib.lua:164-174), so a literal '%' — as in
-	-- this file's "+100% electricity_production" lines — must be escaped or the
-	-- second format raises. Caught by the 2026-07-25 A/B pair.
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 --------------------------------------------------------------------------------
 -- F35 — Large Wind Turbines never got their Frictionless Composites buff back

@@ -114,11 +114,7 @@ local PREFABS = {
 -- registered before any NewGame / persist pass.
 GameVar(FLAG, false)
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 local function get_flag()
 	-- safe_rawget falls through to the real _G for a name our env does not hold

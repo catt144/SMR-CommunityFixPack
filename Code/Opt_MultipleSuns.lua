@@ -65,11 +65,7 @@ SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 
 local FIX_ID = "MultipleSuns"
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	-- ModLog's output path formats the message a second time (00_Core.lua:18-25).
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 local function module_active()
 	local fix = SMRFixPack.fixes[FIX_ID]

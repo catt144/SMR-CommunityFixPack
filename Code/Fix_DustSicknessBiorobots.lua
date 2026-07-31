@@ -39,11 +39,7 @@ local FIX_ID = "DustSicknessBiorobots"
 -- Cited above; each of these is a storybit that hands out the trait.
 local STORYBIT_IDS = { "DustSickness", "DustSickness_GeneratSick", "DustSickness_GeneratSickNotWorking" }
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 local function adds_dust_sickness(effects)
 	if type(effects) ~= "table" then return false end

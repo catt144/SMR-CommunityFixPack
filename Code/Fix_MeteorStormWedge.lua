@@ -52,10 +52,7 @@
 
 local FIX_ID = "MeteorStormWedge"
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 -- The heal thread body reaches the logger through the real global SMRFixPack
 -- (zero-upvalue discipline, F02 precedent).

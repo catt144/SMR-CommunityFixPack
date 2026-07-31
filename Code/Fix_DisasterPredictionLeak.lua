@@ -48,10 +48,7 @@
 
 local FIX_ID = "DisasterPredictionLeak"
 
-local function log(fmt, ...)
-	local msg = string.format("[CommunityFixPack] " .. fmt, ...)
-	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
-end
+local log = SMRFixPack.Log
 
 SMRFixPack.Register(FIX_ID, {
 	title = "A finished meteor storm no longer disables rains, cold waves and dust storms forever",
