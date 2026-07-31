@@ -71,12 +71,61 @@ PT-01 passed and is archived, but its silence-watch continues in the background:
 the watchdog self-reports (`WATCHDOG — Meteors thread silent …`) if the meteor
 wedge ever recurs. **If you see that line in the log, report it verbatim.**
 
-## PT-52 Trigger A — drone overhaul passive watch (whenever D06 is enabled)
+## ~~PT-52 Trigger A — drone overhaul passive watch~~ ⛔ FROZEN 2026-07-31
 
-Runs in the background of any sitting with the module ON — full procedure and
-result lines live in the PT-52 section (§2 below). Short form: watch who
-answers wrench icons near idle drones; `SMRFixPack.DroneReport` every ~30 min;
-healthy = `vetoed` climbing, `veto_expired` low, `unclaimed` not building up.
+**Do not run this. Do not enable D06 to run it.** See the drone freeze below.
+
+Historical short form, kept only so the archived results stay readable: watch
+who answers wrench icons near idle drones; `SMRFixPack.DroneReport` every
+~30 min; healthy = `vetoed` climbing, `veto_expired` low, `unclaimed` not
+building up.
+
+---
+
+# ⛔ DRONE PLAYTEST FREEZE — owner decision, 2026-07-31
+
+**No drone playtesting of any kind until a final drone plan is in place.**
+
+**Why.** Drones are the one part of this pack that has been iterated
+piece-by-piece, and the testing has followed the same pattern: *"they keep
+getting new playtests, and every time I get one half done we have another."*
+Half-finished tests of superseded designs are worse than no tests — they cost a
+sitting and produce evidence about a thing that is being replaced.
+
+**What is frozen — everything that tests D06's DESIGN:**
+
+- **PT-52 Trigger A** — passive watch (above).
+- **PT-52 Triggers B and B2** — the controlled A/B and the stress re-run (§2).
+
+These are pending **invalidation and rewrite**. `Opt_DroneOverhaul`'s claim gate
+is expected to be dropped or demoted by the rebuild, which would make every
+result they produce evidence about code that no longer exists.
+
+**What is NOT frozen — these test shipped BUG FIXES, not the overhaul:**
+
+- **PT-10** (F55, open-roof drone observation) — that is dome entrance/entity
+  data, untouched by any dispatch redesign. Run it normally.
+- **F77 `Fix_ExtenderFlapChurn`'s own behaviour.** The defect is real and the
+  fix ships default-on. Its check currently rides along inside PT-52, which is
+  why it is caught in the freeze — but F77 is *not* invalidated, only its
+  test's packaging. It gets folded into the consolidated PT below.
+
+**What happens when the plan lands.** If `docs/DRONE_RESEARCH_BRIEF.md` answers
+its four questions and a rebuild design is approved:
+
+1. The frozen PT-52 sections are **archived as deprecated-by-redesign** —
+   deleted from this checklist per the archived-sections-are-deleted-outright
+   rule, with the reason recorded in `PLAYTEST_ARCHIVE.md`. They are not
+   "un-run"; they are obsolete.
+2. **ONE multi-step drone playtest replaces all of them.** Not a family of PTs.
+   One item, numbered steps, run start to finish in a single sitting, covering
+   the whole overhaul as one product — which is also how the module ships
+   (**one toggle, all or nothing**; D09's dials stay separate).
+
+**Until then:** if a drone anomaly shows up organically mid-sitting, it is still
+worth capturing — file it on the D06 entry or as a new F-number. Observing is
+not playtesting. Just do not go looking, and do not start a scheduled drone
+test.
 
 ---
 
@@ -131,7 +180,24 @@ would have been uninformative, since "did not move" is equally consistent with
 
 ---
 
-## PT-52 — Drone dispatch overhaul · covers **D06 `Opt_DroneOverhaul` core v1 + F77 `Fix_ExtenderFlapChurn`** (built 2026-07-28)
+## ⛔ ~~PT-52 — Drone dispatch overhaul~~ — FROZEN 2026-07-31, PENDING INVALIDATION
+
+> **Do not run any part of this section.** Owner decision 2026-07-31: no drone
+> playtesting until a final drone plan is in place — full reasoning in the
+> **DRONE PLAYTEST FREEZE** banner in §1 above.
+>
+> This section tests **D06's design**, and that design is being rebuilt. The
+> claim gate it exercises is expected to be dropped or demoted, which would make
+> every result here evidence about code that no longer exists. When the rebuild
+> lands, this section is **archived as deprecated-by-redesign** and replaced by
+> **one multi-step drone playtest**, not by a new family of them.
+>
+> Kept below unchanged, for two reasons only: the B2 protocol is the instrument
+> the rebuild's own verification will be derived from, and the CAN/CANNOT lists
+> record what was learned about judging this module. **Reference material, not a
+> to-do.**
+
+### Historical section — covers **D06 `Opt_DroneOverhaul` core v1 + F77 `Fix_ExtenderFlapChurn`** (built 2026-07-28)
 
 **This is NOT a 15-minute test.** It is a watch-and-judge item that runs in the
 background of the WHOLE session (and future sessions) while other PT items are

@@ -173,6 +173,44 @@ throughput argument does not.
 
 ---
 
+---
+
+## ⛔ The drone playtest freeze — in force NOW, and what these answers obligate
+
+**Owner decision 2026-07-31: no drone playtesting until a final drone plan is in
+place.** The banner lives in `PLAYTEST_CHECKLIST.md` §1; this is the pointer.
+
+**Why it exists.** Drones are the one part of the pack that was iterated
+piece-by-piece, and testing followed the same pattern — *"they keep getting new
+playtests, and every time I get one half done we have another."* A half-finished
+test of a superseded design costs a sitting and produces evidence about code
+that is being replaced.
+
+**Frozen (they test D06's design):** PT-52 Trigger A, Trigger B, Trigger B2.
+**Not frozen (they test shipped bug fixes):** PT-10 (F55 — dome entity data,
+untouched by any dispatch redesign). F77's defect is real and ships default-on;
+only its *test packaging* is caught in the freeze, because it currently rides
+inside PT-52.
+
+**These experiments are NOT playtesting and are NOT frozen** — they answer
+mechanism questions with temporary instrumentation. That distinction is the
+whole point: measure the machine now, judge the product once, later.
+
+**What a successful outcome obligates.** If these four questions answer and a
+rebuild design is approved:
+
+1. The frozen PT-52 sections are **archived as deprecated-by-redesign** —
+   deleted from the checklist per the archived-sections-are-deleted-outright
+   rule, reason recorded in `PLAYTEST_ARCHIVE.md`. They are **obsolete, not
+   un-run**, and must not be reported as outstanding coverage.
+2. **ONE multi-step drone playtest replaces all of them.** One item, numbered
+   steps, run start to finish in a single sitting, covering the overhaul as a
+   single product — matching how it ships (**one toggle, all or nothing**; D09's
+   dials stay separate). **Do not create a family of drone PTs. That is the
+   failure mode this freeze exists to end.**
+
+---
+
 ## Rules for whoever runs this
 
 - **Answer the questions. Do not design.** The rebuild brief is written *after*,
