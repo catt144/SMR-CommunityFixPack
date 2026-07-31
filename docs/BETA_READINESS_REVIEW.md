@@ -64,6 +64,13 @@ no list at all. Where it is short and stable, put the useful state in the item
 text (which phase, what the last gate read) so the list answers "where are we"
 without anyone reading the transcript.
 
+**⚠️ Granularity is the part that actually fails.** One item per
+commit-and-verify unit. If a step produces its own commit or its own
+verification run, it gets its own checkbox — never bundle several behind one.
+A list coarser than the work gives the owner a long silent stretch no amount of
+prompt marking can fix, and if a step turns out to be four things, expand it in
+the list the moment you find out.
+
 ---
 
 ## PHASE 1 — Establish current state, from sources

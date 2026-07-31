@@ -127,9 +127,19 @@ because it actively misleads that decision.
 
 So every brief must instruct the agent to:
 
-- **Create a todo list covering the whole job before starting**, at the
-  granularity of the brief's own stages, so the shape of the work is visible
-  from the first minute.
+- **Create a todo list covering the whole job before starting.**
+- **⚠️ GRANULARITY: one item per commit-and-verify unit — this is the rule that
+  actually matters.** If a stage produces its own commit, or its own
+  verification run, it is its own item. Never bundle several of those behind one
+  checkbox. *Observed failure, Phase 4, 2026-07-31:* the list carried
+  `S6a-d: Require migration in 4 waves` as a **single** item covering four
+  waves, four commits and four legs — so the owner saw the list at S4 and the
+  next time it moved it read "final phase", with no signal across the longest
+  stretch of the job. Per-item discipline cannot fix a list that is coarser than
+  the work.
+- **If a stage turns out to contain more units than the brief anticipated,
+  expand it in the list at that moment** — do not carry one checkbox through
+  work you have already discovered is four things.
 - **Mark each item complete the moment it completes** — before starting the
   next one, never as a batch at the end. "I'll tidy the list later" is the
   failure mode.

@@ -259,6 +259,13 @@ able to say the same.
   game involved here — Q4 needs a save loaded), so a stale list actively
   misleads that decision. Put the answer in the item text as you go, so the list
   itself carries the result.
+
+**⚠️ Granularity is the part that actually fails.** One item per
+commit-and-verify unit. If a step produces its own commit or its own
+verification run, it gets its own checkbox — never bundle several behind one.
+A list coarser than the work gives the owner a long silent stretch no amount of
+prompt marking can fix, and if a step turns out to be four things, expand it in
+the list the moment you find out.
 - **Answer the questions. Do not design.** The rebuild brief is written *after*,
   against real answers. If you find yourself sketching the module, stop.
 - **Do not build any part of the overhaul**, not even "while we're in there".
