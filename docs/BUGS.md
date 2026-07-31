@@ -53,7 +53,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F35 | Large Wind Turbine buff lost in old saves (fixup bug)    | P2  | high | fixed  |
 | F36 | Universities overtrain geologists (unmanned extractors)  | P2  | high | tested |
 | F37 | Ghost farm oxygen modifier survives salvage/demolish     | P1  | high | fixed  |
-| F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | fixed  |
+| F38 | Destroyed tunnels rejoin pathfinding after save/load     | P2  | high | tested |
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | folded into D04 2026-07-27 — PT-50 PASS (entry) |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | tested 2026-07-29 — PT-29 |
@@ -1086,7 +1086,22 @@ buildings (`Building.lua:1457-1483`, `Demolishable.lua:139`). Dome keeps phantom
 **Fix:** wrap `FarmBase` delete path (post-hook `Done` via class or `OnMsg` on demolish) to
 remove the dome modifier; one-shot LoadGame sweep for orphaned `farm_id` modifiers.
 
-### F38 — Destroyed tunnels rejoin pathfinding after load (P2, high)  `[fixed: Code/Fix_DestroyedTunnels.lua]`
+### F38 — Destroyed tunnels rejoin pathfinding after load (P2, high)  `[tested 2026-07-30 — PT-25 PASS IN FULL: Code/Fix_DestroyedTunnels.lua]`
+
+**PT-25 PASS IN FULL — 2026-07-30, live, on a surface save.** All four
+observations, in order:
+
+| Step | Result |
+|---|---|
+| Rover uses the Universal Tunnel pair as the short route | **confirmed** (and it disproved the shipped description — see F84) |
+| Tunnel destroyed → rover takes the long way | **confirmed** (in-session removal was already correct in vanilla) |
+| **Save / quit / load → rover STILL takes the long way** | **confirmed — this is the leak the fix closes** |
+| Rebuilt → rover uses the tunnel again | **confirmed — the fix does not lock a repaired tunnel out** |
+
+The third row is the defect and the fourth is the over-reach guard; both had to
+pass. Source predicted the rebuild would be safe (`Building:Rebuild` yields a
+NEW object whose `GameInit` registers normally, `Building.lua:1655`) but that
+prediction was verified rather than assumed.
 
 **Reachability re-checked 2026-07-30 (tester question at the keyboard: "the
 underground has no tunnel option — is this another phantom fix?"). Answer: NO,

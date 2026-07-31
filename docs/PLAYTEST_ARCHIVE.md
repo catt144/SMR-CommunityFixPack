@@ -8,6 +8,63 @@ the checklist — consult it before re-running anything here.
 
 ---
 
+## PT-25 — Destroyed tunnel after a reload · covered **F38** — **PASS IN FULL 2026-07-30** → F38 `tested`
+
+> ⚠️ **The setup line in this test was WRONG and was corrected at the keyboard on
+> the day it ran.** It used to say "SAVE-B (or any save with underground access
+> — `UIColony:UnlockUnderground()` then `CheatRevealDarkness()`)". The tester
+> noticed **the underground build menu has no tunnel at all** and asked whether
+> the premise was flawed — the same question that killed F24 and F49(c). It was
+> half right: `UniversalTunnel` is the only tunnel in a player-facing build
+> category (`Infrastructure`), `Tunnel` and `TrackTunnel` are both
+> `build_category = "Hidden"`, and **tunnels are a surface building**. The
+> underground reference was pure mis-specification. Fourth PT procedure found
+> faulty by executing it, after PT-29, PT-11 and PT-44's F24 half.
+>
+> **F38 itself survived the challenge:** the defect is
+> `OnMsg.LoadGame` → `AllMapsForEach("map", "TunnelBase", Tunnel.AddPFTunnel)`
+> (`Tunnel.lua:264-266`), and the buildable Universal Tunnel is in scope —
+> `object_class` `TrackTunnelBase`, whose `__parents` include `TunnelBase`, with
+> no override of `AddPFTunnel` or `TraverseTunnel`.
+
+**Setup (corrected):** any healthy **surface** save. Build a **Universal Tunnel
+pair** across an obstacle so the tunnel is the short route between two points,
+park an **RC Rover** on one side with an errand on the other. Cost is 80k
+Concrete / 20k Metals / 30k MachineParts, so `CheatFillAllStorages()` +
+`CheatCompleteAllConstructions()` first.
+
+**Trigger:** destroy the tunnel (infopanel cheat button, or a meteor), confirm
+both ends read as destroyed ruins, send the rover across, then **save, quit to
+menu, load**, and send the rover again.
+
+`Result (rover uses the tunnel at all?):` **PASS — confirmed 2026-07-30.** Taken
+as a free rider on the setup, because the shipped description claims *"Rovers
+cannot use this type of tunnel."* **They can.** That prediction came from the
+unit-class mask — `TunnelBase:AddPFTunnel` registers
+`pf.AddTunnel(…, weight, -1)` where `Dome_Entrance` passes `2` for "people only"
+and `1` for "drones only" — and play confirmed it. Filed as **F84** (description
+defect, bundled with the same building's omission of its life-support bridging).
+
+`Result (long way round once destroyed?):` **PASS** — in-session removal was
+already correct in vanilla (`OnDestroyed` → `RemovePFTunnel`); this step only
+establishes the baseline.
+
+`Result (still closed after reload?):` **PASS — the defect this fix exists for.**
+After a full save / quit-to-menu / load cycle the rover **still took the long
+way**. Unfixed, the `LoadGame` sweep would have re-registered the destroyed
+tunnel and the rover would have walked at the ruin and teleported through.
+
+`Result (works again after repair?):` **PASS — the over-reach guard.** Rebuilt
+via the ruin's Rebuild button, the rover **used the tunnel again normally**. The
+fix does not permanently blacklist a repaired tunnel. Source predicted this
+(`Building:Rebuild` yields a NEW object whose `GameInit` registers normally,
+`Building.lua:1655`) but the prediction was verified, not assumed.
+
+**Consequence:** F38 → `tested`. Also retires the **SAVE-B** fixture — PT-25 was
+its last consumer, and it turned out not to need it.
+
+---
+
 ## PT-58 — First Asteroid prefabs survive a reload? · settled **F83** — **PASS 2026-07-30** (the defect is real)
 
 Purpose-built same-day to convert F83's FirstAsteroid consequence from an

@@ -498,64 +498,6 @@ and look at the pattern rather than exact numbers.)
 
 `Result:` _____________________________________________
 
-## SAVE-B sitting (No Disasters, underground)
-
-### PT-25 — Destroyed tunnel after a reload · covers **F38**
-
-> ⚠️ **SETUP LINE CORRECTED 2026-07-30 — this test does NOT need the underground.**
-> It used to say "SAVE-B (or any save with underground access)". That was wrong
-> and was caught by the tester at the keyboard: **the underground build menu has
-> no tunnel at all.** `UniversalTunnel` is the only tunnel in a player-facing
-> build category (`Infrastructure`, surface); `Tunnel` and `TrackTunnel` are both
-> `build_category = "Hidden"`. Tunnels are a **surface** building — use any
-> healthy surface save. Fourth PT procedure found faulty by executing it (after
-> PT-29, PT-11 and PT-44's F24 half).
->
-> **F38 is still reachable — this is not an F24-style phantom.** The defect is
-> `OnMsg.LoadGame` → `AllMapsForEach("map", "TunnelBase", Tunnel.AddPFTunnel)`
-> (`Tunnel.lua:264-266`), and the buildable Universal Tunnel is in scope:
-> `UniversalTunnel` → `object_class` **`TrackTunnelBase`** →
-> `__parents = { "TunnelBase", … }`, with **no override** of `AddPFTunnel` or
-> `TraverseTunnel` in `TrackTunnel.lua`.
->
-> ❓ **Free observation to take during setup — does an RC Rover actually use a
-> Universal Tunnel?** `TunnelBase:AddPFTunnel` registers with
-> `pf.AddTunnel(…, weight, -1)`, and the unit-class mask reads as *all units*
-> (`Dome_Entrance` passes `2` = "people only" and `1` = "drones only"). But the
-> Universal Tunnel's own description says **"Rovers cannot use this type of
-> tunnel."** If the rover routes through it, that is a description defect worth
-> filing. If it does NOT, this test needs a different observable (drones or
-> colonists) and F38's practical reach needs re-examining — say so rather than
-> forcing it.
-
-**Setup:** Any healthy **surface** save. Build a **Universal Tunnel pair** across an
-obstacle so that the tunnel is the *short* route between two points, and park an
-**RC Rover** on one side with an errand on the other (a deposit to mine, a
-building to service). Watch it use the tunnel once so you know the route — and
-see the free observation above if it will not.
-
-**Trigger:**
-1. Destroy the tunnel. `CheatToggleInfopanelCheats()` gives you a per-building
-   **break/destroy** button in the infopanel; a meteor strike on it works too
-   (`CheatMeteors("single")` with the camera on the tunnel). Confirm both ends now
-   show as **destroyed ruins**.
-2. Send the rover across again. It should now take the long way round (or refuse).
-3. **Save, quit to menu, and load that save.** This is the step that mattered.
-4. Send the rover across again and watch its path.
-
-- **BROKEN looks like:** after the reload the rover walks straight at the ruin and
-  teleports through it as if the tunnel were intact — the shortcut came back on load.
-- **FIXED looks like:** the rover takes the same long route after the reload as it did
-  before it. The log shows a `[CommunityFixPack] DestroyedTunnels: closed N destroyed
-  tunnel(s)` line if the save already had the bad state baked in.
-
-**Then repair it** (the ruin's Rebuild button) and confirm the tunnel **works again** —
-this is the check that the fix does not lock a repaired tunnel out permanently.
-
-`Result (still closed after reload?):` _____________________________________________
-
-`Result (works again after repair?):` _____________________________________________
-
 ## Mystery saves
 
 ### PT-15 — Wisp power output · covers **F07** (+ **F15** bonus read)

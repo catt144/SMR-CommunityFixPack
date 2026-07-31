@@ -203,7 +203,16 @@ unbuilt). **PT-48 CLOSED IN FULL 2026-07-30 → D02 `tested`** (archived; all
 five steps on console counters, opened with a positive control; the acked
 building held 4.2 vanilla windows and the stamp survived save/reload; a vanilla
 GameTime-vs-RealTime curiosity on `InsufficientResources` was filed on the D02
-entry for a game-free look). **PT-44 PASSED 2026-07-30 → F23 `tested`**
+entry for a game-free look). **PT-25 PASSED IN FULL 2026-07-30 → F38 `tested`**
+(archived; rover used the tunnel, took the long way once destroyed, **still took
+the long way after a save/quit/load** — the leak the fix closes — and **used it
+again after Rebuild**, the over-reach guard. Its setup line was WRONG and was
+corrected at the keyboard: the tester spotted that the underground has no tunnel
+at all, and tunnels turned out to be a surface building — fourth PT found faulty
+by executing it. F38 itself survived the challenge. **SAVE-B is retired**, PT-25
+was its last consumer and never needed it. The rover check also **disproved the
+Universal Tunnel's description → F84**.)
+**PT-44 PASSED 2026-07-30 → F23 `tested`**
 (archived; the notification fired 0→1 on the module's own counter and read
 "Founder Has Trait / Ciara Grant: Fit" — exactly one, with the dead shipped
 handler staying dead. Console-injected grant, so it verifies rendering; the path
