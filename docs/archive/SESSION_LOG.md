@@ -70,7 +70,16 @@ stranded (must grant 1/1/1, remove once, re-show once, latch), already-healed
 non-FirstAsteroid popup (must grant nothing and must not latch). Unattended leg
 `Mars.exe-20260730-23.29.22`: **`74/74` active, 67 PASS / 0 FAIL / 10 SKIP /
 0 ERROR**, the predicted arithmetic exactly; zero `[CommunityFixPack]`
-error/disabled/FAILED lines; no log line names our `Code/`.
+error/disabled/FAILED lines; no log line names our `Code/`. **Baseline leg**
+`Mars.exe-20260730-23.46.39` (`code` list emptied, `default_options` kept):
+**1 / 61 / 15 / 0**, with `FirstAsteroidPrefabs` **FAILing** as
+`fix pack not loaded (bug reproduces)` — which is the whole point of running it,
+since a probe that PASSes on baseline is measuring nothing (the wave-6
+probe-authoring trap). metadata.lua restored from the saved copy and re-verified
+against items.lua. **`items.lua` also needed its own `ModItemCode` entry** for
+the new file, in the same order as the `code` list — without it an editor
+round-trip would regenerate `code` without the fix (audit A3); `last_changes`
+recounted 66 → 67.
 
 **Two things this leg exposed, both worth carrying forward.** (1) The account
 had **all six toggles ON again** — the previous prompt's "owner left all six

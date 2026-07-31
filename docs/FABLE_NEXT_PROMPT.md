@@ -86,13 +86,19 @@ reachability turn" below. TestKit probes: **77** (new wave file
 > precedent: two violated this rule and one is already retired under it (F28;
 > F29 is flagged, awaiting the owner).
 
-**The code gate is CLEAR for the configuration that could be measured, and ONE
-leg is owed.** Post-F83-build, unattended, 77 probes:
+**The code gate is CLEAR — the A/B pair ran — and ONE further leg is owed.**
+Post-F83-build, unattended, 77 probes:
 
 - **all six toggles ON** (log `Mars.exe-20260730-23.29.22`) — **`74/74` active**,
   **67 PASS / 0 FAIL / 10 SKIP / 0 ERROR**. Zero `[CommunityFixPack]`
   error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
   `FirstAsteroidPrefabs: applied`, and its probe PASSed all three legs.
+- **baseline, `code` list emptied** (log `Mars.exe-20260730-23.46.39`) —
+  **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR**, and `FirstAsteroidPrefabs` **FAILs**
+  there with `fix pack not loaded (bug reproduces)`. That is the point of the
+  leg: it proves the new probe discriminates instead of false-PASSing (the
+  wave-6 probe-authoring trap). metadata.lua was restored from the saved copy
+  and re-verified against items.lua afterwards.
 - **OWED — default config, six toggles OFF** — expect **`68/74` active**,
   **62 PASS / 0 FAIL / 15 SKIP / 0 ERROR**. **It cannot be run unattended:** the
   opt-in bridge is one-way (ON only) and the owner currently has all six toggles

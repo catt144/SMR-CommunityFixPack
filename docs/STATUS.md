@@ -160,10 +160,13 @@ omits that it bridges life support. Text patch, but it converts a localized `T`
 into an English-only `Untranslated` string, so **decide it together with D10's T1
 text repairs** — identical tradeoff, should not be answered twice differently.
 
-**A/B probe state — CURRENT is the post-F83-build leg at 77 probes: `74/74` all
-toggles ON, `67 PASS / 0 FAIL / 10 SKIP / 0 ERROR`, zero `[CommunityFixPack]`
-error/disabled/FAILED lines, no log line naming our `Code/`. Code gate CLEAR for
-the configuration that was measurable.** ⚠️ **One leg is OWED: the
+**A/B probe state — CURRENT is the post-F83-build PAIR at 77 probes. Fixed leg:
+`74/74` all toggles ON, `67 PASS / 0 FAIL / 10 SKIP / 0 ERROR`, zero
+`[CommunityFixPack]` error/disabled/FAILED lines, no log line naming our
+`Code/`. Baseline leg (`code` list emptied): `1 / 61 / 15 / 0` — and the new
+`FirstAsteroidPrefabs` probe FAILs there with `fix pack not loaded (bug
+reproduces)`, so it is a genuine discriminator, not a false-PASS (the wave-6
+probe-authoring trap). Code gate CLEAR.** ⚠️ **A third leg is OWED: the
 default-config leg (six toggles OFF) could not be run — the owner left all six
 toggles ON during the PT-58 sitting** (the 23.29 leg came up `74/74`, and the
 D09 probe additionally reported the **account carry dial OFF BASE**, const 3 vs
@@ -175,13 +178,14 @@ the older `/75` and `/74` rows.
 
 | Leg | Active | Result |
 |---|---|---|
-| Baseline (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** *(77 probes; a post-F28 baseline would read 60 FAIL — not re-run, the arithmetic is not in doubt)* |
+| Baseline, historical (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** *(77 probes, pre-F28)* |
 | Fixed, default config (six toggles OFF) | 69/75 *(pre-F24-removal)* | **62 / 0 / 15 / 0** |
 | Fixed, all six toggles ON + dials | 75/75 *(pre-F24-removal)* | **67 / 0 / 10 / 0** |
 | Post-removal re-verify, 2026-07-30 17.25 (unattended) | 74/74 *(pre-F28-removal)* | **66 / 1 / 10 / 0** — the 1 FAIL was the probe defect below |
 | All six toggles ON, 2026-07-30 19.20 (unattended), 76 probes | 73/73 | **66 / 0 / 10 / 0** — pre-F83-build |
 | Default config, six toggles OFF + dials at base, 2026-07-30 19.32 (unattended), 76 probes | 67/73 | **61 / 0 / 15 / 0** — pre-F83-build |
 | **CURRENT — post-F83 build, all six toggles ON, 2026-07-30 23.29 (unattended), 77 probes** | **74/74** | **67 / 0 / 10 / 0** |
+| **CURRENT baseline — post-F83 build, `code` list emptied, 2026-07-30 23.46 (unattended), 77 probes** | — | **1 / 61 / 15 / 0** — `FirstAsteroidPrefabs` FAILs here (`bug reproduces`) |
 | **OWED — post-F83 build, default config (six toggles OFF)** | *68/74 expected* | *62 / 0 / 15 / 0 expected — needs the owner to flip the six toggles off by hand* |
 
 **The 23.29 leg — the F83 build's gate, CLEAR.** `fix pack present: 74/74 fixes

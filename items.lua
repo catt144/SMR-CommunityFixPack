@@ -302,6 +302,10 @@ return {
 		'CodeFileName', "Code/Fix_RainsDeadlock.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_FirstAsteroidPrefabs",
+		'CodeFileName', "Code/Fix_FirstAsteroidPrefabs.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

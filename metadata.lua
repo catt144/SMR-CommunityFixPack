@@ -2,10 +2,11 @@ return PlaceObj('ModDef', {
 	'title', "Community Fix Pack",
 	'description', "Fixes bugs in Surviving Mars: Relaunched gameplay code. Every fix targets a verified defect in the game's Lua source and patches at runtime in a mod-compatible way (no game files are modified). The optional modules — six toggles plus Drone speed and carry-capacity dials — are controlled in-game via Mod Options on every platform; individual bug fixes can additionally be disabled on PC (via the console or a companion mod). See the mod page for the full list of fixes.",
 	'short_description', "Dozens of verified bug fixes for Surviving Mars: Relaunched, applied at runtime in a mod-compatible way — no game files modified. Plus optional quality-of-life modules — six toggles and two Drone stat dials — all off/at base by default.",
-	-- the count below = Fix_*.lua files + 90_SaveSanitizer (65 + 1 as of
-	-- 2026-07-30). It drifts every time a fix is retired — it read 68 until
-	-- F24 and F28 were closed `wontfix`. Recount before every release.
-	'last_changes', "Initial release: 66 bug fixes, 6 optional modules and Drone speed/carry dials (all in Mod Options).",
+	-- the count below = Fix_*.lua files + 90_SaveSanitizer (66 + 1 as of
+	-- 2026-07-30 late). It drifts every time a fix is retired or added — it read
+	-- 68 until F24 and F28 were closed `wontfix`, then 66, and F83's
+	-- Fix_FirstAsteroidPrefabs brought it to 67. Recount before every release.
+	'last_changes', "Initial release: 67 bug fixes, 6 optional modules and Drone speed/carry dials (all in Mod Options).",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	'version', 1,
