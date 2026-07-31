@@ -51,6 +51,21 @@ nothing.
 
 ---
 
+## Keep a live progress list — required
+
+**Create a todo list covering all four phases before you start**, and **mark
+each item done the moment it completes** — not in a batch at the end. Keep
+exactly one item in progress, and rewrite the list if the work diverges from it.
+
+This is not bookkeeping. **The owner reads that list to decide when to step in**
+— whether there is time to start a playtest, or whether to wait. A list that
+stops being updated actively misleads that decision, which is worse than having
+no list at all. Where it is short and stable, put the useful state in the item
+text (which phase, what the last gate read) so the list answers "where are we"
+without anyone reading the transcript.
+
+---
+
 ## PHASE 1 — Establish current state, from sources
 
 Read, in this order, and record what you actually find:

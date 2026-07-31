@@ -252,6 +252,13 @@ able to say the same.
 
 ## Rules for whoever runs this
 
+- **Keep a live progress list.** Create one covering all four questions before
+  you start, and **mark each done the moment it answers** — not in a batch at
+  the end. One item in progress at a time; rewrite the list if the work
+  diverges. **The owner reads it to decide when to step in** (there is a live
+  game involved here — Q4 needs a save loaded), so a stale list actively
+  misleads that decision. Put the answer in the item text as you go, so the list
+  itself carries the result.
 - **Answer the questions. Do not design.** The rebuild brief is written *after*,
   against real answers. If you find yourself sketching the module, stop.
 - **Do not build any part of the overhaul**, not even "while we're in there".

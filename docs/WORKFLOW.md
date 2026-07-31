@@ -112,6 +112,52 @@ regression harness; run it as pre-flight when STATUS says one is owed.
 - The TestKit must NOT be uploaded.
 - Credit ChoGGi (Fix Bugs) + LukeH (Martian Express) as prior art.
 
+## Authoring a prompt / job brief — required elements
+
+Every brief written for another session (`*_PROMPT.md`, `*_BRIEF.md`,
+`*_REVIEW.md`) must include these. They are not optional polish; each one exists
+because its absence cost this project something.
+
+**1. A live progress list — REQUIRED, and required to stay current.**
+
+The owner reads the session's todo list to decide **when to step in** — whether
+there is time to start a playtest, whether to wait, whether a job is nearly
+done. A list that is created and then not maintained is worse than no list,
+because it actively misleads that decision.
+
+So every brief must instruct the agent to:
+
+- **Create a todo list covering the whole job before starting**, at the
+  granularity of the brief's own stages, so the shape of the work is visible
+  from the first minute.
+- **Mark each item complete the moment it completes** — before starting the
+  next one, never as a batch at the end. "I'll tidy the list later" is the
+  failure mode.
+- Keep **exactly one item in progress** at a time.
+- **Rewrite the list when reality diverges** — if a stage splits, grows, or
+  turns out unnecessary, the list changes. A stale item is a wrong answer to
+  the owner's question.
+- Put **useful state in the item text** where it is short and stable (which
+  stage, what the last verification read), so the list answers "where are we"
+  without the owner reading the transcript.
+
+**2. `git log` + `git pull` first**, and a named commit to check staleness
+against — briefs go stale the moment another session commits.
+
+**3. An explicit scope fence** — what is in, what is out, and what to do with
+something interesting found out of scope (**file it, do not fix it**).
+
+**4. Stop conditions** — the situations where reporting beats pushing through,
+stated as permission, not as failure.
+
+**5. What may NOT be claimed** — for any brief that ends in a verdict or a
+certification. An agent that cannot cite evidence for a claim must say the
+narrower true thing instead.
+
+**6. Whether the brief deletes itself.** One-off jobs delete their brief on
+completion (precedent: the popup audit). Re-runnable ones say plainly that they
+do not.
+
 ## `[FAQ]` — the tag for "a player will ask about this"
 
 Owner intends to write an FAQ doc at some point. Rather than start one early
