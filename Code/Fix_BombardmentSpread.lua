@@ -193,9 +193,7 @@ SMRFixPack.Register("BombardmentSpread", {
 			})
 		end
 
-		WaitBombard = replacement
-		if rawget(_G, "WaitBombard") ~= replacement then
-			return "could not install the WaitBombard replacement"
-		end
+		return SMRFixPack.SetGlobal("WaitBombard", replacement,
+			"could not install the WaitBombard replacement")
 	end,
 })

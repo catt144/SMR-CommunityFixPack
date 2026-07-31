@@ -124,13 +124,9 @@ SMRFixPack.Register("AcknowledgedWarnings", {
 			return orig_remove(object, id, ...)
 		end
 
-		_G.SuppressNotification = suppress
-		_G.AddObjectToNotification = add
-		_G.RemoveObjectFromNotification = remove
-		if rawget(_G, "SuppressNotification") ~= suppress
-				or rawget(_G, "AddObjectToNotification") ~= add
-				or rawget(_G, "RemoveObjectFromNotification") ~= remove then
-			return "could not install the notification wrappers (sandbox change?)"
-		end
+		local WRAP_FAIL = "could not install the notification wrappers (sandbox change?)"
+		return SMRFixPack.SetGlobal("SuppressNotification", suppress, WRAP_FAIL)
+			or SMRFixPack.SetGlobal("AddObjectToNotification", add, WRAP_FAIL)
+			or SMRFixPack.SetGlobal("RemoveObjectFromNotification", remove, WRAP_FAIL)
 	end,
 })

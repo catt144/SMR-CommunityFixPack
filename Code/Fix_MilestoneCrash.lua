@@ -42,7 +42,7 @@ SMRFixPack.Register("MilestoneCrash", {
 			end
 		end
 
-		function CompleteMilestone(id, res)
+		local function fixed_CompleteMilestone(id, res)
 			if g_Tutorial or ChangingMapInEditorMode or not HasGameLogic(CurrentMap) then
 				return
 			end
@@ -77,5 +77,9 @@ SMRFixPack.Register("MilestoneCrash", {
 			end
 			eval_complete_all_milestones(milestones)
 		end
+
+		-- Phase 4 (C4): this install previously had no read-back verification —
+		-- the only global replacement in the pack without one.
+		return SMRFixPack.SetGlobal("CompleteMilestone", fixed_CompleteMilestone)
 	end,
 })

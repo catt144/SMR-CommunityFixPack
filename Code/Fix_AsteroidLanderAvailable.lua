@@ -58,7 +58,7 @@ SMRFixPack.Register("AsteroidLanderAvailable", {
 			return "LandingSiteObject.GetRocketsForExpedition not found (game update changed it?)"
 		end
 
-		PlanetaryAsteroidVisitPossible = function(...)
+		local fixed_visit_possible = function(...)
 			if orig(...) then return true end
 
 			-- FIX (F72): accept what GetRocketsForExpedition would list.
@@ -78,5 +78,8 @@ SMRFixPack.Register("AsteroidLanderAvailable", {
 			end
 			return false
 		end
+
+		-- Phase 4 (C4): this install previously had no read-back verification.
+		return SMRFixPack.SetGlobal("PlanetaryAsteroidVisitPossible", fixed_visit_possible)
 	end,
 })

@@ -225,10 +225,9 @@ SMRFixPack.Register("ResidencyControl", {
 			end
 			return orig_choose(traits, domes, safety_dome, dome_elevators, ...)
 		end
-		_G.ChooseDome = choose
-		if rawget(_G, "ChooseDome") ~= choose then
-			return "could not install the ChooseDome wrapper (sandbox change?)"
-		end
+		local err = SMRFixPack.SetGlobal("ChooseDome", choose,
+			"could not install the ChooseDome wrapper (sandbox change?)")
+		if err then return err end
 
 		-- UI: append the policy row after the shipped rows (VList order). The
 		-- module_active check keeps the row out of newly opened infopanels when

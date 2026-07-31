@@ -71,10 +71,8 @@ SMRFixPack.Register(FIX_ID, {
 		if type(rawget(_G, "RainsDisasterActivation")) ~= "function" then
 			return "RainsDisasterActivation not found (game update changed it?)"
 		end
-		_G.RainsDisasterLoop = fixed_loop
-		if rawget(_G, "RainsDisasterLoop") ~= fixed_loop then
-			return "replacing RainsDisasterLoop did not land (mod env change?)"
-		end
+		return SMRFixPack.SetGlobal("RainsDisasterLoop", fixed_loop,
+			"replacing RainsDisasterLoop did not land (mod env change?)")
 	end,
 })
 

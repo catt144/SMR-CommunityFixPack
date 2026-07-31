@@ -103,10 +103,9 @@ SMRFixPack.Register("GridGlobalStorage", {
 			return stored / required * const.HourDuration
 		end
 
-		_G.GetGridGlobalStorage = replacement
-		if rawget(_G, "GetGridGlobalStorage") ~= replacement then
-			return "could not replace the global GetGridGlobalStorage"
-		end
+		local err = SMRFixPack.SetGlobal("GetGridGlobalStorage", replacement,
+			"could not replace the global GetGridGlobalStorage")
+		if err then return err end
 		SMRFixPack.GetGridGlobalStorage = replacement   -- exposed for the probe
 	end,
 })

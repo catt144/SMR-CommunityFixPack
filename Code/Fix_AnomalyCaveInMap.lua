@@ -87,10 +87,9 @@ SMRFixPack.Register("AnomalyCaveInMap", {
 			end
 			return orig(map, pos, ...)
 		end
-		TriggerCaveIn = wrapped
-		if rawget(_G, "TriggerCaveIn") ~= wrapped then
-			return "could not install the TriggerCaveIn wrapper"
-		end
+		local err = SMRFixPack.SetGlobal("TriggerCaveIn", wrapped,
+			"could not install the TriggerCaveIn wrapper")
+		if err then return err end
 
 		-- FIX (QA 2026-07-25): the Cave_Of_Wonders site calls
 		-- `TriggerCaveIn(UndergroundMap, FindCaveInLocation(UndergroundMap, ...))`
@@ -109,10 +108,9 @@ SMRFixPack.Register("AnomalyCaveInMap", {
 				end
 				return orig_find(map, pos, radius, ...)
 			end
-			FindCaveInLocation = wrapped_find
-			if rawget(_G, "FindCaveInLocation") ~= wrapped_find then
-				return "could not install the FindCaveInLocation wrapper"
-			end
+			local err_find = SMRFixPack.SetGlobal("FindCaveInLocation", wrapped_find,
+				"could not install the FindCaveInLocation wrapper")
+			if err_find then return err_find end
 		end
 	end,
 })

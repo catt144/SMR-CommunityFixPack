@@ -156,10 +156,9 @@ SMRFixPack.Register("TrainMinors", {
 			pcall(recompute_max_vehicles, track)
 			return res
 		end
-		ExpandTrackFromElement = wrapped_expand
-		if rawget(_G, "ExpandTrackFromElement") ~= wrapped_expand then
-			return "could not install the ExpandTrackFromElement wrapper"
-		end
+		local err = SMRFixPack.SetGlobal("ExpandTrackFromElement", wrapped_expand,
+			"could not install the ExpandTrackFromElement wrapper")
+		if err then return err end
 
 		-- Existing saves: one pass over every track, idempotent.
 		OnMsg.PostLoadGame = function()
