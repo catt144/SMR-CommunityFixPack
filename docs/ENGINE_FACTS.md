@@ -229,6 +229,45 @@ code suggests.
     handler that *restarts* a long-interval loop would reset its timer forever.
     Re-arm from a persisted deadline instead.
 
+- **ENABLING A MOD AT THE MAIN MENU IS A DIFFERENT LOAD ORDER FROM A COLD BOOT,
+  AND IT IS THE ONE EVERY PLAYER GETS FIRST** (measured 2026-07-31, F87; source
+  traced the same day). A mod is never auto-enabled, so the first time our code
+  ever runs it runs on this path, not the one every A/B leg measures.
+  * Ticking the box calls `ModsReloadItems` (`Mod.lua:2073`), which calls
+    `ReloadLua()` (`:2145`) because our mod has code. `ReloadLua`
+    (`lib.lua:353-374`) does `dofile("CommonLua/Core/autorun.lua")` — mod code
+    loads at `autorun.lua:423` — then `Msg("Autorun")`, which is where classes
+    are built (`classes.lua:980`). Then `ContinueModsReloadItems` loads the mod
+    items and fires `Msg("ModsReloaded")` (`:2193`).
+  * **`LoadData` is NOT part of that sequence, so `DataLoaded` never fires
+    again.** The presets are already loaded from the original boot and survive
+    the Lua reload. **A fix hung off `OnMsg.DataLoaded` alone is silently dead
+    for that entire session** — three of ours were (F87 sweep).
+  * **The engine's `DataLoaded` GLOBAL is the only evidence available**: it is
+    declared under `if FirstLoad` (`Dlc.lua:51`) and set true at `:663`, so it
+    survives a Lua reload where the message does not. ⚠️ It is set **after**
+    `Msg("DataLoaded")` is posted (`:661` then `:663`), so inside a `DataLoaded`
+    handler the global still reads false.
+  * **`ClassesBuilt` (`classes.lua:1099`) DOES fire on both paths** and is the
+    enable path's real trigger — and on a cold boot it fires *before*
+    `DataLoaded`, so a handler there sees classes built and presets missing.
+    `MsgClear` runs immediately after (`:1100`), so the handler must be
+    registered at file scope — which is where our code already runs.
+  * So the state at apply() time is **not** "nothing is loaded": on this path it
+    is **presets loaded, classes NOT flattened** — the exact combination that
+    made `HasTrait:new` throw in `Fix_DustSicknessBiorobots` (F87).
+  * `g_Classes` is **not** a usable "are classes built" test: during a reload it
+    still holds the PREVIOUS build's classes while the current ones are bare
+    classdefs. The only truth is that your own `ClassesBuilt` handler has fired.
+  * Mod options are loaded BEFORE code on this path too (`Mod.lua:2129-2131`),
+    so `CurrentModOptions` is readable at apply() time exactly as on a cold boot.
+
+- **`Msg` dispatches static handlers through `procall`** (`cthreads.lua:15-31`),
+  so one handler throwing cannot break the others — and a throw inside a mod's
+  `OnMsg` handler is **swallowed**. Consequence for this pack: a fix whose work
+  happens in a message handler must `pcall` its own body and report the failure,
+  or it will go on reporting `active` while having silently done nothing.
+
 - **`Wakeup(thread)` only wakes a thread sleeping in `WaitWakeup`** — not one in
   `Sleep` (`CommonLua/LuaExportedDocs/Global/thread.lua:62-71`). There is no way
   to shorten a `Sleep` already in flight; compressing the interval constant only

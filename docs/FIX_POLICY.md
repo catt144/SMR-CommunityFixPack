@@ -70,6 +70,28 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   ITSELF — checking an inherited method on a subclass finds nil and silently
   deactivates the fix. Verify where the method is declared in Src and check
   that class.
+- ⛔ **NO `apply()` MAY ASSUME A COLD BOOT (the F87 rule, 2026-07-31).** A mod is
+  never auto-enabled: the player ticks it at the main menu of a process that is
+  already running, the engine does an **in-place reload**
+  (`ModsReloadItems` → `ReloadLua`, `Mod.lua:2145`), and our code loads with the
+  **presets ALREADY loaded and the classes NOT yet built**. That is **every
+  player's first run**, and it is the opposite of the cold boot every A/B leg we
+  have ever run measures. Two binding consequences:
+  * **Apply-time code may not CONSTRUCT a class or preset object** — no
+    `Class:new{…}`, no `PlaceObj`, no class-table method call. Mod code always
+    loads before flattening, so `Class.new` is nil; on a cold boot the pass
+    usually returned early for lack of presets and hid it. `type(X) == "table"`
+    does NOT prove a class is built — an unflattened classdef is a table too.
+    Test what you are about to use (`type(X.new) == "function"`), and prefer
+    `PlaceObj("Class", {…})`, which fails soft where `:new` throws.
+  * **`OnMsg.DataLoaded` alone is NOT a sufficient trigger** — it does not fire
+    on the enable path, so a fix hung off it is silently dead for that entire
+    session. Use `SMRFixPack.DataPatch` (preset patches with the latch/heal
+    contract) or `SMRFixPack.OnDataReady` (everything else); both fire on
+    `ClassesBuilt` / `ModsReloaded` too, and both require the callback to be
+    idempotent. The F87 sweep found three sites that had this bug.
+  **Both paths must be tested** — a cold boot AND a run where the pack is
+  enabled from the main menu. The second one is why F87 shipped.
 - Respect `SMRFixPack_Disabled["<id>"]` so users/other mods can veto single fixes.
 - **Every `OnMsg` handler must re-check BOTH the registry status AND the veto
   itself** (the A1 lesson, audit 2026-07-29): handlers are installed at file
@@ -81,7 +103,10 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   templates), track a `data_loaded` flag and only latch `inactive` after it
   has fired — before that, absence just means "not loaded yet" (the F75
   false-inactive lesson); after it, silence means reporting `active` forever
-  on a target a future update removed (the B3 lesson).
+  on a target a future update removed (the B3 lesson). **On the enable path
+  that flag can only come from the engine's own `DataLoaded` global**
+  (`Dlc.lua:51/:663`, declared under `FirstLoad` so it survives a Lua reload) —
+  the message never arrives. Both shared runners do this for you.
 
 ## 3. Savegame discipline
 
