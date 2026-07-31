@@ -193,7 +193,14 @@ unbuilt). **PT-48 CLOSED IN FULL 2026-07-30 → D02 `tested`** (archived; all
 five steps on console counters, opened with a positive control; the acked
 building held 4.2 vanilla windows and the stamp survived save/reload; a vanilla
 GameTime-vs-RealTime curiosity on `InsufficientResources` was filed on the D02
-entry for a game-free look). **PT-56 PASSED IN FULL 2026-07-30 → D09 `tested`**
+entry for a game-free look). **PT-44 PASSED 2026-07-30 → F23 `tested`**
+(archived; the notification fired 0→1 on the module's own counter and read
+"Founder Has Trait / Ciara Grant: Fit" — exactly one, with the dead shipped
+handler staying dead. Console-injected grant, so it verifies rendering; the path
+is R1 by enumeration. It also corrected a checklist expectation: a notification
+click selects its object **only when that object is visible** — an indoors
+colonist gets a camera pan and no selection, which is correct vanilla.)
+**PT-56 PASSED IN FULL 2026-07-30 → D09 `tested`**
 (archived; all four steps live, including the stale-save reconcile — a save
 carrying 2x/+1 modifiers, loaded against base dials, came back at the baseline
 `1728/1`. **This UN-GATES the D10 workshops build**, which is speced,
