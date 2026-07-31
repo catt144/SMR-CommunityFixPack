@@ -70,8 +70,9 @@ console achievements + per-fix-disable disclosures (A4/B4/D1/D2). Docs
 restructured (this header, ENGINE_FACTS, SESSION_LOG, archives). Details:
 the newest SESSION_LOG leg.
 
-**⭐ F83 IS BUILT (2026-07-30 late) — `Code/Fix_FirstAsteroidPrefabs.lua`, shape
-(i), the load-time heal.** The owner's go was recorded, the corrected brief was
+**⭐ F83 IS BUILT AND `tested` — `Code/Fix_FirstAsteroidPrefabs.lua`, shape
+(i), the load-time heal.** (Built 2026-07-30 late; **PT-59 PASSED IN FULL on the
+keyboard 2026-07-31**, archived — see the block below the build description.) The owner's go was recorded, the corrected brief was
 followed, and the build ran with its own probe and a CLEAR harness leg
 (`74/74`, `67 PASS / 0 FAIL / 10 SKIP / 0 ERROR` at 77 probes — the all-toggles-ON
 configuration; see the A/B section below for the leg that is still owed). What
@@ -93,8 +94,21 @@ off the healthy path for everyone, and it cannot heal an already-stranded save).
 works only in a dev build — retail `T()` returns **light userdata** when the id
 is in the translation table (`localization.lua:268`); the fix uses `TGetID`
 (`:48-65`) and reads the id from the live preset rather than hardcoding it.
-**PT-59 is filed and owed** (checklist §3): reload leg must read 1/1/1, and the
-no-reload leg must STILL read 1/1/1, not 2/2/2. BUGS.md F83 → `fixed`.
+**✅ PT-59 PASSED IN FULL 2026-07-31 → F83 is `tested`** (archived to
+`PLAYTEST_ARCHIVE.md`; nothing owed). Reload leg **1/1/1** with the grant line;
+healthy leg **1/1/1** with `SMRFixPack_FirstAsteroidPrefabs` still `false`, so
+vanilla granted and our code never ran; and the sitting logged **10 game loads
+against exactly 2 grants**, with 7 non-granting loads between the two — Trigger
+C many times over. Log clean. Two unasked-for results worth keeping: the heal
+**discriminated between two asteroid notifications** sitting in the corner list
+together (the loc-id match is doing real work), and **8 of 10 loads granted
+nothing**, so the no-op path is the common one and it is silent.
+⚠️ **The test's own procedure was wrong and has been corrected** — it never said
+*which* popup to answer, and answering `ReconCenterDiscoveryAsteroid` produces
+`0/0/0`, indistinguishable from a fix failure. It was reported as a FAIL before
+the source settled it. The `FirstAsteroid` preset declares no choices at all and
+its callback runs on any answer, so there is no wrong *button*, only a wrong
+*popup*.
 
 **The finding it closes (2026-07-30, live play) — F83, P2, mechanism PROVEN.**
 Minimized story popups lose their callback across a save/load: the waiter is a
@@ -161,8 +175,8 @@ exactly (fingerprint: `docs/archive/fingerprint_after_default.txt`). NOTHING
 is owed on the harness side; both shipping configurations are measured
 post-Phase-4, and the account is in the clean all-OFF/base state.**
 
-**Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN and BUILT
-2026-07-30** (see the F83 build block above; PT-59 is the owed keyboard A/B).
+**Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN, BUILT
+2026-07-30, and `tested` 2026-07-31** (PT-59 PASSED IN FULL; nothing owed).
 ~~Phase 4 go/no-go~~ — **EXECUTED 2026-07-31, see above.** Still open:
 D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone

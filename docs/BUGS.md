@@ -109,7 +109,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
-| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **fixed 2026-07-30** — consequence OBSERVED (PT-58 PASS, 1/1/1 vs 0/0/0), popup audit COMPLETE, owner go given; built as the load-time heal (`Fix_FirstAsteroidPrefabs`) — **PT-59 pending** (entry) |
+| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
@@ -3599,7 +3599,48 @@ is found. Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
 
-### F83 — Minimized story popups lose their callback across a save/load; First Asteroid silently withholds three promised prefabs (P2, PROVEN mechanism)  `[fixed 2026-07-30 — Fix_FirstAsteroidPrefabs, shape (i) the load-time heal; PT-59 owed]`
+### F83 — Minimized story popups lose their callback across a save/load; First Asteroid silently withholds three promised prefabs (P2, PROVEN mechanism)  `[tested 2026-07-31 — Fix_FirstAsteroidPrefabs, shape (i) the load-time heal; PT-59 PASSED IN FULL, archived]`
+
+**✅ PT-59 PASSED IN FULL 2026-07-31 (keyboard, owner at the controls) — F83 is
+`tested`.** Full record in `PLAYTEST_ARCHIVE.md`. The three triggers:
+
+- **(A) the reload leg** — trigger fired, First Asteroid notification left
+  unanswered, quicksave, reload: counters **1 / 1 / 1**, the flag latched
+  `true`, and exactly one
+  `FirstAsteroidPrefabs: First Asteroid prefabs recovered after a save/load (3 granted)`
+  line. Answering the re-shown popup afterwards left the counters at 1/1/1.
+- **(B) the healthy leg** — same trigger, popup answered with NO save/load:
+  counters **1 / 1 / 1** (vanilla's own grant) and
+  `SMRFixPack_FirstAsteroidPrefabs` **still `false`**, so our code never ran on
+  the healthy path. That is the double-grant guard, and it is why the fix's
+  first draft was rejected.
+- **(C) reload twice** — subsumed and exceeded: the sitting logged **10 game
+  loads and exactly 2 grants**, the two grants 14 minutes apart with **7
+  non-granting loads between them**. The persistent flag holds across repeated
+  loads, and the heal stays silent on loads with nothing to heal.
+
+**Two things this sitting proved that the test was not designed to ask:**
+
+1. **The heal discriminates against a near-neighbour popup.** The trigger
+   actually raises **two** asteroid notifications from the same preset file —
+   `ReconCenterDiscoveryAsteroid` (*"A new Asteroid has been discovered!"*, three
+   buttons) and `FirstAsteroid` (single OK, carrying the
+   `<effect> Gain Micro-G Auto Extractor Prefabs` line). Both sat in the corner
+   list together and `find_stranded_notification` picked the right one every
+   time — the loc-id match on the live preset is doing real work, not just
+   finding the only candidate.
+2. **8 of 10 loads granted nothing.** The no-op path is the common one and it is
+   quiet.
+
+⚠️ **Procedure defect found and FIXED in the checklist (it cost a leg).** PT-59
+did not say *which* popup to answer. Answering `ReconCenterDiscoveryAsteroid`
+produces **0/0/0**, which reads exactly like a fix failure and was initially
+reported as one. The `FirstAsteroid` preset declares **no choices at all**
+(`PopupNotificationPreset-Asteroid.lua:28-38`) and `WaitPopupNotification` runs
+the grant callback unconditionally on any answer
+(`PopupNotification.lua:302-304`) — so there is no wrong *button*, only a wrong
+*popup*. This is a fresh instance of the standing playtest-method rule: an
+un-run PT's procedure is unverified until it has been executed once.
 
 **Found in play 2026-07-30**, mid-setup for PT-56. The tester got the
 `FirstFounderEnthusiast` popup ("When Life Gives You Lemons…", Samuel Hayden has
