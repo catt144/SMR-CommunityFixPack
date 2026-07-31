@@ -104,3 +104,28 @@ regression harness; run it as pre-flight when STATUS says one is owed.
   BOTH metadata.lua `code` AND items.lua in the same commit, same order.
 - The TestKit must NOT be uploaded.
 - Credit ChoGGi (Fix Bugs) + LukeH (Martian Express) as prior art.
+
+## `[FAQ]` — the tag for "a player will ask about this"
+
+Owner intends to write an FAQ doc at some point. Rather than start one early
+(and rather than let the material scatter), **tag the source of truth in place**
+with the literal marker `[FAQ]` and collect it later:
+
+```
+grep -rn "\[FAQ\]" docs/ Code/
+```
+
+Rules that keep the tag worth having:
+
+- Put it on the **entry that already explains the thing** — a BUGS.md entry, a
+  parked item, a module header. Never create a doc just to hold a tag.
+- Tag **behaviour a player could reasonably mistake for a bug**, or a question
+  the design deliberately answers "no" to. Not every quirk.
+- A `[FAQ]` tag is **not work and not a promise** — it is a bookmark. Writing
+  the FAQ is a launch-time task, and tagging things is not progress toward it.
+- If the tagged behaviour is later changed or fixed, **remove the tag** in the
+  same commit, or the FAQ inherits a stale answer.
+
+Currently tagged: D01's parked-rocket activation limitation (`BUGS.md` D01
+entry + `FUTURE_IDEAS.md` entry 2); the save-repair framework's honest-limits
+wording (`BUGS.md` F03/F35 + the sanitizer section of `MOD_DESCRIPTION.md`).

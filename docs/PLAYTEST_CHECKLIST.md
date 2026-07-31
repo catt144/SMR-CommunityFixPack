@@ -658,9 +658,22 @@ path is exactly the case that was broken. Test that path deliberately.
 
 ### PT-35 — Save sanitizer passes · covers **F35, F03 (sweep half)**
 
-Both passes only act on damage that is *already* in a save, so a fresh colony
-proves nothing about them beyond "they ran and broke nothing". Treat the first
-two steps as the real test and the third as the only one that needs a fixture.
+> **SCOPE CUT 2026-07-31 (owner decision on the sanitizer, + assistant
+> pushback).** The sanitizer is **not a launch gate** and its repair half ships
+> as-specced-but-unproven — see the honest wording in `MOD_DESCRIPTION.md`.
+> **Cases B and C are PARKED** (`FUTURE_IDEAS.md` entry 4): case C needs a
+> donated community save that may never arrive, and case B needs a
+> deliberately-broken fixture built with the pack disabled.
+> **⚠️ Case A stays IN, and it is the only part that was ever about risk.**
+> These two passes run **automatically on every load for every player**, and the
+> F03 pass **removes** label modifiers from persisted colony state. Case A is
+> the do-no-harm check on that, it needs **no fixture at all** (any healthy
+> save), and it takes about five minutes. Parking it would mean shipping
+> auto-running save-writing code with no live observation — which is the one
+> shape this project has repeatedly learned not to trust on source reasoning
+> alone. Both passes ARE probe-covered (`SaveSanitizerTurbineBuff`,
+> `SaveSanitizerUpgradeLeak`), so this is cheap insurance on top, not a
+> substitute for missing coverage.
 
 **Setup:** any save. The pack's passes run automatically on load; the two are also
 callable by hand from the console:
@@ -677,14 +690,14 @@ things it repaired.
 3. Save, reload, check again — still unchanged. (Running twice must never stack a
    bonus; that is the failure this checks for.)
 
-**Trigger — case B (F03 sweep, forced):**
+**~~Trigger — case B (F03 sweep, forced)~~ — PARKED 2026-07-31, do not run:**
 4. Follow the archived PT-02 procedure to build + upgrade + salvage a Medical
    Center **with the fix pack disabled**, so a bonus really leaks. Save.
 5. Re-enable the pack and load that save. The dome's birth-comfort bonus should
    drop back to its unbuffed value, and the log should carry
    `SaveSanitizer: removed N leaked upgrade modifier(s)`.
 
-**Trigger — case C (F35, needs a fixture — skip if unavailable):**
+**~~Trigger — case C (F35, needs a donated community save)~~ — PARKED 2026-07-31:**
 6. A save that researched **Frictionless Composites before the game patched the
    tech** is the only true fixture. If a community save is donated, load it and
    check a Large Wind Turbine's Power production against a Shrouded one: unfixed

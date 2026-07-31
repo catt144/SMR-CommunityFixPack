@@ -88,6 +88,104 @@ senior still cohort-migrate, or not? Everything else follows from that answer.
 
 ---
 
+## 2. D01 `on_activate` demand refresh — parked 2026-07-31  **[FAQ]**
+
+**What.** Make a mid-session enable of `ClassicRockets` take effect on a rocket
+that is **already parked**, instead of only on rockets that land after the flip.
+Today the wrap sits on `GetFuelResourceRequest`, which is only consulted when
+`CargoTransporterNew:UpdateCargoResourceRequests` runs — and nothing re-triggers
+that for an already-parked rocket; the landing path is what does. The hook
+answers correctly, nobody asks it. An `on_activate` would re-run it on parked,
+destination-less player rockets.
+
+**Why it is a good idea.** It would make the toggle feel instant instead of
+"works from the next landing".
+
+**Why it is parked.** Owner, 2026-07-31: *"its not a high priority, the mod
+functions flawlessly, besides a already parked rocket when activated… Touching
+it just invites a regression."* The limitation was already **accepted by owner
+decision on 2026-07-30** and is self-correcting — the rocket picks the behaviour
+up on its next landing. **Documented instead of built:** a player-facing note is
+in `MOD_DESCRIPTION.md` under the Classic rocket behavior module.
+
+**Where the material lives.** D01 entry in `BUGS.md` (PT-55 found it; cause
+confirmed in source).
+
+**Cost.** Small — but it touches a working module's activation path, which is
+the regression surface the owner named.
+
+**To un-park.** Only if the limitation actually grates in play.
+
+---
+
+## 3. D11 — shuttle same-pair passenger batching — parked 2026-07-31
+
+**What.** Let one shuttle carry several colonists on a trip when they share the
+same origin→destination dome pair. Today the limit is **1 passenger per shuttle
+and it is structural, not a tunable**: one `ColonistTransportTask` per colonist,
+`transport_task.colonist` singular (`ShuttleHub.lua:635+`). For contrast, the
+limits that ARE modifiable are cargo/shuttle (3) and shuttles/hub (10) — neither
+is the constraint here.
+
+**Why it is a good idea.** Owner, 2026-07-31: *"I love this idea."* Shuttle
+passenger throughput is a real late-game pinch, and no breakthrough, law or tech
+in the game touches it.
+
+**Why it is parked.** Owner, same message: *"I think its something that has
+decent risk."* Correct — because the 1-passenger limit is **structural**, this is
+not a knob change; it means reworking the transport task model that colonist
+movement depends on.
+
+**Where the material lives.** D11 entry in `BUGS.md` (full shuttle-limits
+research, all source-verified).
+
+**To un-park.** Post-launch, and only with a clear-eyed look at the task-model
+rework first.
+
+⚠️ **Multi-hop passenger routing is REJECTED, not parked** — refused by the
+owner 2026-07-30. Do not re-propose it as part of this.
+
+---
+
+## 4. Save-rescue framework — proving and extending it — parked 2026-07-31  **[FAQ]**
+
+**What.** The pack ships two automatic save-repair passes (F35 Large Wind
+Turbine buff, F03 leaked upgrade modifiers) plus per-fix LoadGame repairs in
+eight other modules. Parked here: **proving the repair half against real broken
+saves**, and extending the framework to damage patterns we have not seen yet
+(F48's station-connector fixup is the known one we deliberately left out).
+
+**Why it is a good idea.** Rescuing a save someone has put 200 sols into is the
+single most valuable thing this pack could do for an individual player.
+
+**Why it is parked.** Owner, 2026-07-31: *"I like the core idea of rescuing
+saves, but I think unless we have player saves to test it's hard. And shouldn't
+be a launch gate."* Agreed on both counts — the F35 fixture in particular
+requires a save that researched Frictionless Composites **before the game
+patched the tech**, which only a donated community save can provide. Shipping
+the framework as-specced with **honest wording** is the right call: the
+`MOD_DESCRIPTION.md` section now says plainly that it is a genuine attempt and
+not a guarantee, that a save broken another way may get no benefit, and that we
+intend to improve it as real cases turn up.
+
+**Specifically parked:** PT-35 **case B** (forced F03 leak — needs a fixture
+built with the pack disabled) and **case C** (F35 — needs a donated save).
+
+**⚠️ NOT parked — PT-35 case A**, the do-no-harm check. Both passes run
+automatically on **every load for every player**, and F03 **removes** modifiers
+from persisted colony state. Case A needs no fixture (any healthy save), takes
+~5 minutes, and is the only live observation that the framework does not damage
+a colony it was not meant to touch. Parking a shipped module's do-no-harm check
+is barred by this file's own rules.
+
+**Where the material lives.** `Code/90_SaveSanitizer.lua` (both passes, with the
+conservatism argument in the header and the F48 exclusion reasoned out); PT-35
+in the checklist; F03/F35/F48 entries in `BUGS.md`.
+
+**To un-park.** A donated broken save, or a credible player report after launch.
+
+---
+
 # ⏸️ PROPOSED for parking — awaiting the owner's yes/no
 
 Listed, not moved. Each is still live on the board until the owner answers. A
@@ -179,59 +277,46 @@ waiting.
 
 ---
 
-### D. D01 `on_activate` demand refresh
 
-**What it does.** Makes a mid-session enable of `ClassicRockets` take effect on
-a rocket that is **already parked**, instead of only on rockets that land after
-the flip. Today the wrap sits on `GetFuelResourceRequest`, which is only
-consulted when `UpdateCargoResourceRequests` runs — and nothing re-triggers that
-for a parked rocket. An `on_activate` would re-run it on parked,
-destination-less player rockets.
-
-**What it relates to.** `Opt_ClassicRockets`, D05's reconciler (this is
-`on_activate`'s intended use per FIX_POLICY §5), PT-55 (which found it).
-
-**Why park it.** The limitation is **already accepted by owner decision**
-(2026-07-30) and documented; a parked rocket picks the behaviour up on its next
-landing. Pure polish.
-
----
-
-### E. D11 — shuttle same-pair passenger batching
-
-**What it does.** Lets one shuttle carry several colonists on a trip when they
-share the same origin→destination dome pair. Today the limit is **1 passenger
-per shuttle and it is structural**, not a tunable: one `ColonistTransportTask`
-per colonist, `transport_task.colonist` singular.
-
-**What it relates to.** `ShuttleHub`; adjacent to the shuttle cargo limit (3,
-modifiable) and shuttles-per-hub (10, modifiable), neither of which is the
-constraint here.
-
-**Why park it.** Low severity, never green-lit, and a feature rather than a fix
-— and the "1 passenger" limit is structural, so it is not a small change.
-Parking also clears a standing "ask the owner fresh" obligation off the board.
-⚠️ **Multi-hop passenger routing stays REJECTED** — that is refused, not parked,
-and must not be re-proposed.
-
----
 
 ### F. D06 structural iteration beyond knobs
 
-**What it does.** The redesign options above the shipped core: **H-v2** demand
-filter, **registration-H**, **balancer C**. The shipped D06 is the veto variant
-of option H plus option A.
+**Plain English first.** D06 is the opt-in "drone dispatch overhaul". The
+problem it attacks: a hub on the far side of the map can claim a job that a
+nearby hub's idle drones should have taken, because drones are leashed to their
+own hub and cannot relay work. **What actually shipped is a narrow version** —
+a *veto* at the moment of claiming, plus letting idle drones help a neighbouring
+hub that has none. "Structural iteration" means the **bigger redesigns that were
+speced but deliberately NOT built**, each of which changes how work is
+distributed rather than just tuning the shipped behaviour:
 
-**What it relates to.** `Opt_DroneOverhaul`, and D08 layer 1 (which would feed
-the same claim gate).
+| Option | What it would do | Status |
+|---|---|---|
+| **H (registration)** | Instead of vetoing a bad claim *after* the fact, control which hubs a request is ever **visible** to — closest hub first, escalating outward only if it is overloaded. Hooks `ShouldAddRequestToCommandCenter`. | The *veto* variant of H shipped; **full registration-H did not** |
+| **H-v2 (demand filter)** | Narrower still — filter by demand. Only worth it if live data shows the **delivery** leg (depot→building) dominating. Needs the shuttle deficit-table ripple assessed first. | Not built |
+| **B (full moonlighting)** | Hand the whole job to the neighbouring hub's own matcher, **including haulage** — much broader than the shipped repair-only help. | Not built |
+| **C (migration balancer)** | A slow sweep (every ½ sol) that physically **migrates idle drones** from a slack hub to an overloaded one, so imbalance self-corrects instead of just being survivable. | Not built |
+| **D / E** | Largely superseded by H; E (reassigning already-claimed work) stays a last resort. | Not built |
 
-**Why park it.** D06's core is opt-in and **experimental**, and the structural
-choice was always gated on measurement. **Knob tuning stays available** as an
-ordinary mechanical change — only the redesign parks.
+**What it relates to.** `Opt_DroneOverhaul`; D08 layer 1 (which would feed the
+same claim gate); and the rocket cargo path F50/F68/F70/F71, because these are
+**the deepest shared queues in the game**.
+
+**Why park it.** Three reasons, all on file. The shipped core is **opt-in and
+explicitly experimental**. The structural choice was **always gated on
+measurement** — the PT-52 B2 stress re-run — and that measurement has not
+happened, so choosing now would be guessing. And the design doc's own **global
+risk statement** says any subset approved must re-pass the F50 rocket-churn and
+F55 unreachable scenarios plus a new probe set before shipping — that is a large
+verification bill for an experimental opt-in module, immediately pre-launch.
+
+**Knob tuning stays available** (STRIKES_MAX, STRIKE_TTL, MOONLIGHT_MAX_HEXES,
+cache TTLs) as an ordinary mechanical change. Only the redesign parks.
 
 ⚠️ **The PT-52 Trigger B2 stress re-run does NOT park with it.** That is a test
 of code already shipped, and parking a shipped module's verification is barred
-by this file's own rules.
+by this file's own rules. It also stays useful independently: it tells you
+whether the shipped core is doing anything at all.
 
 ---
 

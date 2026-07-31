@@ -2107,13 +2107,18 @@ re-triggers that, and the landing path is what does. The hook answers correctly
 — nobody asks it. **DECIDED 2026-07-30 (user): accepted as a documented
 limitation.** A first mid-session enable engages for rockets that land after
 the flip; an already-parked rocket picks the behavior up on its next landing.
-No `on_activate` demand refresh is built. If the limitation ever grates in
-play, the enhancement is on record: an `on_activate` that re-runs
-`UpdateCargoResourceRequests` on parked destination-less player rockets — the
-D05 reconciler's intended use of `on_activate` (state nudges that are not a
-call path, FIX_POLICY §5) — would make the enable immediate. Building it would
-be a normal mechanical change (A/B re-run + live re-verify), not a reopening of
-this decision. **PT-55 closed 2026-07-30:** step 3 (ListFixes agreement + log
+No `on_activate` demand refresh is built. **PARKED 2026-07-31 (owner) —
+`docs/FUTURE_IDEAS.md` entry 2. `[FAQ]`** Owner's words: *"its not a high
+priority, the mod functions flawlessly, besides a already parked rocket when
+activated… Touching it just invites a regression."* Documented instead of built:
+a player-facing note now sits in `MOD_DESCRIPTION.md` under the Classic rocket
+behavior module. **This is not owed work and must not be reported as
+outstanding.** The enhancement stays on record for post-launch: an `on_activate`
+that re-runs `UpdateCargoResourceRequests` on parked destination-less player
+rockets — the D05 reconciler's intended use of `on_activate` (state nudges that
+are not a call path, FIX_POLICY §5) — would make the enable immediate. Building
+it would be a normal mechanical change (A/B re-run + live re-verify), not a
+reopening of this decision. **PT-55 closed 2026-07-30:** step 3 (ListFixes agreement + log
 sweep) PASSed in the live sitting — statuses tracked a full OFF/ON/OFF Mod
 Options cycle at every step, log clean per PT-22. Evidence archived with the
 PT-55 section in PLAYTEST_ARCHIVE.md.

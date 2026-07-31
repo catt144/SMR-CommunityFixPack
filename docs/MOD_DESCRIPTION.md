@@ -327,16 +327,32 @@ Be aware of what a mod can and cannot do for damage that already happened:
 - **Most fixes help immediately.** Anything about ongoing behavior — drones,
   colonists, schedulers, rockets — starts working correctly the moment you
   load your save. A colony that was falling apart should stop deteriorating.
-- **Some damage needs active repair, which this pack includes.** Every time you
-  load, the pack looks for damage that is already sitting in your save and undoes
-  it: upgrade bonuses left behind by buildings you salvaged long ago, Large Wind
-  Turbines that lost their Frictionless Composites bonus to a faulty patch
-  migration, phantom oxygen from deleted farms, housing held for colonists who
-  never arrived, tunnels destroyed but still routed through, Biorobots infected
-  with Dust Sickness, meteor-damaged
-  track that could not be salvaged, and mysteries frozen mid-sequence. Each pass
-  is conservative — it changes something only when it can positively identify what
-  went wrong — and re-running it does nothing.
+- **Some damage needs active repair, and the pack ships a framework that
+  attempts it — but please read this honestly before you count on it.** Every
+  time you load, the pack looks for specific damage already sitting in your save
+  and tries to undo it: upgrade bonuses left behind by buildings you salvaged
+  long ago, Large Wind Turbines that lost their Frictionless Composites bonus to
+  a faulty patch migration, phantom oxygen from deleted farms, housing held for
+  colonists who never arrived, tunnels destroyed but still routed through,
+  Biorobots infected with Dust Sickness, meteor-damaged track that could not be
+  salvaged, and mysteries frozen mid-sequence.
+
+  **What we can promise:** every pass is deliberately conservative — it changes
+  something only when it can positively identify exactly what went wrong, it
+  errs towards doing nothing when unsure, and running it twice does nothing the
+  second time. It is built so that failing to help is the normal failure, not
+  making things worse.
+
+  **What we cannot promise:** that it will fix *your* save. These repairs are
+  aimed at specific, identified damage patterns. A save broken in some other way
+  — or broken in a way we have not seen yet — may get no benefit at all, and the
+  pack will not tell you it tried and failed. We have deliberately not built
+  repairs we could not do safely (one station-track fixup was left out for
+  exactly this reason). Consider it a genuine attempt, not a guarantee, and keep
+  a backup of an important save before loading it with any mod for the first
+  time. **We intend to keep improving this as real broken saves turn up** — if
+  one of these repairs helps you, or obviously should have and did not, that
+  report is genuinely useful to us.
 - **Some history is gone for good.** Colonists who already died stay dead,
   destroyed buildings stay destroyed, expeditions lost to the lander bugs are
   lost. Trains that were voided by the station bug can't be counted or
@@ -493,6 +509,13 @@ instead:
   up while it waits. It changes nothing about Automated Mode or the payload
   dialog — rockets you automate behave exactly as Relaunched intends, module on
   or off.
+- **One thing to know if you switch it on mid-game:** a rocket that is *already
+  sitting parked* at the moment you enable the module will not start refuelling
+  right then. It picks the behaviour up the next time it lands. Rockets that
+  land after you enable it fill immediately. This is a known limitation and it
+  is deliberate — the alternative was poking at rockets mid-flight-cycle, and we
+  would rather leave a working system alone than risk breaking it for a few
+  seconds of convenience. If it ever bothers you, land the rocket once.
 
 Turn it on in **Options → Mod Options → Community Fix Pack** ("Classic rockets
 — refuel while parked"). Off unless you turn it on.
