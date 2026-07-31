@@ -97,6 +97,13 @@ regression harness; run it as pre-flight when STATUS says one is owed.
   (audit 2.1). `lua_revision` stays 350453.
 - MOD_DESCRIPTION.md: delete the `[DRAFT NOTE]` markers; do NOT promise the
   ClassicRockets export half; sync the fix list with BUGS.md statuses.
+  **Recount the probe number** quoted in the "What we can promise, and what we
+  can't" block — it moves whenever a wave file gains or loses a probe, and a
+  stale number there is a false claim in player-facing text. Authoritative count
+  is in `STATUS.md`.
+- **Drone overhaul, if it has shipped by then:** its design-drift disclaimer is
+  MANDATORY (owner requirement — spec in `docs/DRONE_RESEARCH_BRIEF.md`). Do not
+  publish the module without it.
 - Upload via the in-game Mod Editor (Paradox Mods / Steam Workshop). The
   editor round-trip is SAFE since audit 2.2: items.lua carries one
   `ModItemCode` per Code/ file in metadata order, so SaveDef regenerates the
