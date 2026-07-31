@@ -8,6 +8,113 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## ALL FOUR DRONE RESEARCH GATES ANSWERED + F83 `tested` — 2026-07-31 (live playtest sitting, owner at the keyboard)
+
+Started from `docs/FABLE_NEXT_PROMPT.md` at `4d0d453`. Two jobs came in ahead of
+plan and a third emerged from a mistake.
+
+### 1. PT-59 PASSED IN FULL → F83 `tested` (`8387aaf`)
+
+- **(A) reload leg** — counters **1/1/1**, flag `true`, exactly one
+  `recovered after a save/load (3 granted)` line; answering the re-shown popup
+  left it at 1/1/1.
+- **(B) healthy leg** — **1/1/1** with `SMRFixPack_FirstAsteroidPrefabs` still
+  `false`. Vanilla granted; our code never ran. That is the double-grant guard.
+- **(C)** — exceeded: the sitting logged **10 game loads against exactly 2
+  grants**, 14 minutes apart, with **7 non-granting loads between them**.
+- Unasked-for results: the heal **discriminated between two asteroid
+  notifications** sitting in the corner list together, and **8 of 10 loads
+  granted nothing** — the no-op path is the common one and it is silent.
+- ⚠️ **The test's own procedure was WRONG and is corrected.** It never said which
+  popup to answer; answering `ReconCenterDiscoveryAsteroid` yields `0/0/0`,
+  indistinguishable from a fix failure, **and it was reported as a FAIL** before
+  source settled it. Another instance of the standing rule that an un-run PT's
+  procedure is unverified until executed once.
+
+### 2. The four gates — ALL ANSWERED
+
+- **Q3 + Q4 fell to SOURCE, not playtesting** (`cd37235`). **Q3a:** use the
+  game's own class test `IsKindOf("AirProducer"/"WaterProducer")` — docstrings
+  claim completeness — catching exactly five buildings; the property test the
+  brief proposed would have **missed one**. **Q3b:** the Food-demand test alone
+  catches six, two of which are *residences*; adding `ServiceWorkplace` gives
+  exactly four. **Q4:** defaults are omitted from saves, five-step chain, and
+  **no template in the game sets `priority`**. Live-confirmed both branches
+  (`2708d24`): untouched `ShopsFood_Small` → `rawget` **nil**; after moving the
+  arrow → **3**.
+- **Q1 = HONOURED, both legs** (`add2d8a`, `663facf`). On a new game the hubs
+  allocated `-1..5` natively. Two Stirling Generators at band 3 and band 4:
+  band 4's work request ran `80000 → 50000 → 25000 → 0` and cleared. A **second,
+  cheat-free symmetric pair** (equidistant, single hub, Polymers stocked) closed
+  the **haul** leg — `demand_queues[4][Polymers]` inspected directly, both haul
+  targets `1000 → 0` by drone delivery. **The band scheme survived the gate that
+  could have killed it.**
+- **Q2 = PERSISTED, answered by an accident** (`97a55fb`) — see below.
+
+### 3. THE INCIDENT — the experiment module broke a live save (`d88dd11`)
+
+v1 widened `const.TaskRequest.MaxBuildingPriority` at file scope and **asserted
+in its own header that this was "inert"**. It was not. On an existing save every
+`FindTask` threw, drones froze colony-wide while the UI reported "heavy load",
+and the log took tens of millions of lines. **Nothing had been armed.**
+
+Cause: `TaskRequestHub:Init()` allocates the queue tables at **construction** and
+never again — so a restored hub carries `-1..3` while the widened const makes
+vanilla's loops iterate `-1..5` and index nil. **That is the Q2 answer.**
+
+**Three corrections to our own reference doc** fell out of it: the cited
+`InitRequestQueues` **does not exist**; the claim that the game defines no
+`const.TaskRequest` group is **false** (it exists and carries 3 — home not
+determined, likely `Data.fpk`, which the parity extraction never covered); and
+the hub population is **`DroneHubBase`, `RocketBase` and `RCRover`**.
+
+v2 was rebuilt **safe by construction** — a queue top-up pre-wrapped onto all
+seven entry points that index the queues — and ran clean.
+
+### 4. The uninstall picture, and a NEW ENGINE FACT with pack-wide reach
+
+- **Uninstall is safe, silent and LOSSY** (`6c05053`). A save with wide tables
+  loading into narrow vanilla loops throws **nothing** — the mirror of the
+  incident. But `demand keys: -1,0,1,2,3,4,5` persisted **with the module gone**,
+  and 4 entries sat in a band vanilla never visits.
+- **The heal path EXPIRES.** `DepositsSpawned` re-registers every hub, but fires
+  only from a sector scan that places deposits, and sector status is a one-way
+  ladder — **no re-scan on a fully-explored map**. Owner's framing, and it is
+  right: clearing the map is an early act, removing a mod is a late one.
+  **The hub UI toggle does NOT re-register** (measured).
+- 🆕 **ENGINE FACT** (`988b0a8`): **a mod-authored closure stored on a persisted
+  game object goes into the save, survives uninstall, and KEEPS RUNNING** —
+  `rawget(obj, "GetPriorityForRequest")` returned `function: 000001E95D57A6B0`
+  with the module uninstalled, and it re-filed queue entries using the vanished
+  mod's logic, **with zero errors**. Pack audited: 5 of 6 sites cleared (UI
+  windows, class tables); **`Fix_MeteorFrequency` is unresolved** and PT-20 now
+  carries a mandatory step 5 naming it (`93bbf47`).
+- 🆕 **The duplicate leak** (`93bbf47`, `DRONE_PRIORITY_SYSTEM.md` §10): a
+  reconnect healed the building but took band 4 from **4 → 6**, because
+  `DroneControl:RemoveBuilding` is bounded by a **file-local** pinned at 3.
+  **This happens with the mod installed and working** — it is a defect of the
+  band design, not of uninstall.
+
+### 5. Owner decisions taken this session
+
+- **A save-safety wall RELOCATES the overhaul, it does not kill it** (`1e19056`).
+- **THE CLEANUP MOD** (`cae4eec`) — supersedes forced-standalone. Mods get **no
+  save hook** (`PersistSave` blacklisted) and cannot run after their own removal;
+  a second mod is the only thing that can occupy that window. Framed by the owner
+  as a **beta response channel**, and as a capability rather than a backlog.
+- **A possible PACK SPLIT is UNDECIDED and deliberately so** (`2ee9745`) — not
+  owed, not scheduled, and may not gate anything.
+
+### What this leaves for the next session
+
+The band scheme **passed** its decisive gate but picked up **two constraints that
+did not exist when it was drafted** (§9 uninstall, §10 duplicate leak), and the
+`-1..3` fallback now has two independent arguments in its favour. Both are
+written up neutrally; **no side has been picked. That is a design decision for a
+fresh session.**
+
+---
+
 ## PHASE 4 COMPLETE — C2 helpers + C4 deeper self-checks + C1 update report, CERTIFIED — 2026-07-31 (one-off PHASE4_REBUILD_PROMPT session, 11 unattended legs)
 
 Executed `docs/PHASE4_REBUILD_PROMPT.md` (deleted on completion per its own

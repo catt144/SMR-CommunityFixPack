@@ -14,6 +14,41 @@ build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
 93 rows. **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
 before that the F83 probe added `56_Probes_Wave7.lua`). Counts moved 2026-07-31
 with **PHASE 4 COMPLETE** (below).
+> ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
+> F83 is `tested`.** Nothing on the drone research side is owed. Full leg in
+> `docs/archive/SESSION_LOG.md`; the answers live on the **D06 entry** and in
+> `docs/DRONE_PRIORITY_SYSTEM.md` §8-§10.
+> - **Q1 = HONOURED, both legs** — a band-4 repair AND a band-4 haul were
+>   consumed, the second on a cheat-free symmetric pair. The band scheme
+>   survived the gate that could have killed it.
+> - **Q2 = queues are PERSISTED** — allocated in `TaskRequestHub:Init()` at
+>   construction, never on load. Learned by breaking a live save (§8).
+> - **Q3** — both data tests settled with exact enumerations (5 life-support
+>   producers; 4 food services). **Q4** — defaults are omitted from saves,
+>   live-confirmed on both branches.
+>
+> ⚠️ **But the band scheme picked up TWO constraints that did not exist when it
+> was drafted, and NO SIDE HAS BEEN PICKED — that is a design decision owed to a
+> fresh session.** §9: uninstall is safe and silent but **lossy**, and the heal
+> path **expires** once the map is fully scanned. §10: `DroneControl:RemoveBuilding`
+> is bounded by a **file-local pinned at 3**, so every re-registration duplicates
+> band-4/5 entries **with the mod installed and working**. The `-1..3` fallback
+> now has two independent arguments in its favour.
+>
+> 🆕 **A NEW ENGINE FACT WITH PACK-WIDE REACH** (ENGINE_FACTS.md): a
+> mod-authored closure stored on a **persisted game object** goes into the save,
+> **survives uninstall, and keeps running** — measured, with zero errors logged.
+> 5 of 6 `= function` sites in `Code/` are cleared (UI windows, class tables);
+> **`Fix_MeteorFrequency` is UNRESOLVED**, and **PT-20 now carries a mandatory
+> step 5** that names it. "It does not break" is no longer a sufficient PT-20
+> pass.
+>
+> 💡 **THE CLEANUP MOD is the plan of record for the uninstall problem** (D06
+> entry) — mods get **no save hook at all** and cannot run after their own
+> removal, so a second mod is the only thing that can occupy that window. Owner
+> frames it as a **beta response channel**. **Not approved to build**; owed with
+> the overhaul, not with launch.
+
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
 reachable only from mod code. "For modder benefit" is no longer a valid reason
