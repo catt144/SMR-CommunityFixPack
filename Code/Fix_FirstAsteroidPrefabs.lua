@@ -212,10 +212,12 @@ end
 SMRFixPack.Register(FIX_ID, {
 	title = "The First Asteroid prefabs still arrive if the popup was left unanswered across a save/load",
 	apply = function()
-		-- Everything the sweep needs is game code loaded before us. Presets are
-		-- NOT loaded yet (the GlobalMap exists but is EMPTY until DataLoaded),
-		-- so the FirstAsteroid preset itself is checked from OnMsg.DataLoaded
-		-- below, never here — the F75 false-inactive lesson.
+		-- Everything the sweep needs is game code loaded before us. On a cold
+		-- boot the presets are NOT loaded yet (the GlobalMap exists but is EMPTY
+		-- until DataLoaded), so the FirstAsteroid preset itself is checked from
+		-- the OnDataReady block below, never here — the F75 false-inactive
+		-- lesson. (On the enable path they ARE loaded here; the check still
+		-- belongs there, which is why OnDataReady covers both — F87.)
 		local err = SMRFixPack.Require(FIX_ID, {
 			{ global = "ColonyAddPrefabs" },
 			{ global = "TGetID" },
@@ -229,7 +231,10 @@ SMRFixPack.Register(FIX_ID, {
 	end,
 })
 
-function OnMsg.DataLoaded()
+-- F87 sweep: OnMsg.DataLoaded alone never fires on the enable path, so this
+-- self-check silently skipped the session in which the player enables the mod —
+-- the fix would have reported `active` on a preset it never verified.
+SMRFixPack.OnDataReady(function()
 	local entry = SMRFixPack.fixes[FIX_ID]
 	if not entry or entry.status == "disabled" then return end
 	-- After DataLoaded a missing preset really does mean a future update removed
@@ -244,7 +249,7 @@ function OnMsg.DataLoaded()
 		entry.detail = "the FirstAsteroid popup preset no longer exists"
 		log("%s: inactive (the FirstAsteroid popup preset no longer exists)", FIX_ID)
 	end
-end
+end)
 
 -- WhenActive carries both FIX_POLICY §2 checks (registry status + the veto
 -- re-read this handler used to do by hand).

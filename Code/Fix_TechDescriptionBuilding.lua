@@ -18,9 +18,9 @@
 -- 1.0.6 underground rework.
 --
 -- Patch approach: a preset data patch (FIX_POLICY §1.1 — the most compatible
--- technique) from `OnMsg.DataLoaded`, plus `OnMsg.DataChanged` for Mod Editor
--- reloads. Presets do not exist when mod code loads, so neither can be done at
--- apply time.
+-- technique) driven by `SMRFixPack.OnDataReady` — the presets do not exist when
+-- mod code loads, so it cannot be done at apply time, and `OnMsg.DataLoaded`
+-- alone is not enough: it never fires on the ENABLE path (F87).
 --
 -- **Localisation, deliberately:** the replacement is built with `T(<the same
 -- translation id>, "<corrected English>")`. Reusing id 841885693955 means a
@@ -78,12 +78,20 @@ SMRFixPack.Register("TechDescriptionBuilding", {
 
 		SMRFixPack.TechDescriptionBuilding = { Patch = patch }
 
-		OnMsg.DataLoaded = function()
+		-- F87 sweep: this used to hang off OnMsg.DataLoaded alone, which is the
+		-- one message that does NOT fire when the player enables the mod at the
+		-- main menu — so on every player's first run the description stayed
+		-- wrong. OnDataReady adds the enable path's triggers.
+		SMRFixPack.OnDataReady(function()
 			local ok, res, why = pcall(patch)
-			SMRFixPack.TechDescriptionBuilding.result = ok and (res or why) or tostring(res)
-		end
-		OnMsg.DataChanged = function()
-			pcall(patch)
-		end
+			local stats = SMRFixPack.TechDescriptionBuilding
+			-- Called more than once per load now. Keep the FIRST verdict, since
+			-- a re-run of an already-applied patch legitimately declines with
+			-- "description does not carry ..." — but let a real later patch
+			-- (Mod Editor reload restoring the shipped text) upgrade it.
+			if stats.result == nil or res == "patched" then
+				stats.result = ok and (res or why) or tostring(res)
+			end
+		end)
 	end,
 })

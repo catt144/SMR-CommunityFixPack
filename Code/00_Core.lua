@@ -305,6 +305,33 @@ function SMRFixPack.DataPatch(id, opts)
 	return run
 end
 
+-- The same trigger set as DataPatch, for the sites that patch preset data
+-- WITHOUT the runner's latch/heal contract (F87 sweep, 2026-07-31 — it found
+-- three of them, each silently dead for the whole session on the enable path
+-- because `OnMsg.DataLoaded` is the one message that does NOT fire when a
+-- player ticks the mod at the main menu).
+--
+-- `fn` runs only when the classes are flattened AND the presets are loaded, and
+-- it MAY RUN SEVERAL TIMES per load — it must be idempotent, exactly as the
+-- DataChanged re-fire already required.
+function SMRFixPack.OnDataReady(fn)
+	local classes_built = false
+	local function fire()
+		-- the engine's flag, which survives a Lua reload (Dlc.lua:51/:663) —
+		-- the only evidence available on the enable path
+		if classes_built and rawget(_G, "DataLoaded") == true then fn() end
+	end
+	OnMsg.ClassesBuilt = function() classes_built = true fire() end
+	OnMsg.ModsReloaded = function() classes_built = true fire() end
+	OnMsg.DataLoaded = function()
+		-- NOT fire(): `DataLoaded` the global is set AFTER Msg("DataLoaded") is
+		-- posted (Dlc.lua:661 then :663), so the flag still reads false here.
+		classes_built = true
+		fn()
+	end
+	OnMsg.DataChanged = function() classes_built = true fire() end
+end
+
 -- Shared apply runner: Register and the Mod Options reconciliation both route
 -- through here so the verdict handling stays identical.
 local function run_apply(id, def, entry)

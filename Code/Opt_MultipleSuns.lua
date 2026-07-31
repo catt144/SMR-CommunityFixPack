@@ -26,10 +26,12 @@
 -- WHAT THIS SHIPS:
 --
 --   1. LIMIT LIFT — `BuildingTemplates.ArtificialSun.build_once = false`,
---      applied on OnMsg.DataLoaded (template presets exist only after
---      DataLoaded — the GlobalMap is EMPTY at mod-load time, the F75 lesson —
---      and the engine re-posts Msg("DataChanged", false) right after every
---      DataLoaded, Dlc.lua:715-717, so the patch re-asserts idempotently). The
+--      applied through SMRFixPack.OnDataReady (template presets exist only
+--      after DataLoaded — the GlobalMap is EMPTY at mod-load time, the F75
+--      lesson — and the engine re-posts Msg("DataChanged", false) right after
+--      every DataLoaded, Dlc.lua:715-717, so the patch re-asserts idempotently;
+--      OnDataReady also carries the ENABLE path, where DataLoaded never fires
+--      at all and this lift used to be skipped for the session — F87). The
 --      build menu re-reads CanBuildOnlyOnce() live (verified in-session via a
 --      console toggle of this exact flag), so no UI refresh is needed.
 --      `wonder` stays true — sight category and placement behavior untouched.
@@ -187,16 +189,16 @@ function restore_build_limit()
 	end
 end
 
-function OnMsg.DataLoaded()
+-- F87 sweep: this used to hang off DataLoaded/DataChanged alone, and neither
+-- fires when the player ticks the mod at the main menu — so on the enable path
+-- (with the toggle already ON from a previous session, which is account state)
+-- the build-once limit was never lifted for that whole session, while the
+-- file-scope binding half worked. OnDataReady adds ClassesBuilt/ModsReloaded and
+-- still re-asserts on DataChanged; the lift is idempotent either way.
+SMRFixPack.OnDataReady(function()
 	data_loaded = true
 	lift_build_limit()
-end
-
-function OnMsg.DataChanged()
-	-- fires (with false) right after every DataLoaded and on editor reloads;
-	-- re-asserting the one boolean is idempotent
-	lift_build_limit()
-end
+end)
 
 -- Panels built beside a second sun BEFORE this module was enabled (typically
 -- under a third-party limit mod) are still dark in the save; nothing re-runs
