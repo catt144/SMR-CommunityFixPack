@@ -37,19 +37,16 @@
 SMRFixPack.Register("GraphConsumedCaption", {
 	title = "Command Center graph captions count maintenance, like the bars do",
 	apply = function()
-		local C = rawget(_G, "City")
-		if type(C) ~= "table" or type(C.GetColonyStatsButtons) ~= "function" then
-			return "City.GetColonyStatsButtons not found (game update changed it?)"
-		end
-		local RO = rawget(_G, "ResourceOverview")
-		if type(RO) ~= "table" or type(RO.GetConsumedByMaintenanceYesterday) ~= "function"
-			or type(RO.GetConsumedByConsumptionYesterday) ~= "function"
-			or type(RO.GetProducedYesterday) ~= "function" then
-			return "ResourceOverview consumption getters not found (game update changed it?)"
-		end
-		if type(rawget(_G, "GetCityResourceOverview")) ~= "function" then
-			return "GetCityResourceOverview not found (game update changed it?)"
-		end
+		local GETTERS = "ResourceOverview consumption getters not found (game update changed it?)"
+		local err = SMRFixPack.Require("GraphConsumedCaption", {
+			{ class = "City", method = "GetColonyStatsButtons" },
+			{ class = "ResourceOverview", method = "GetConsumedByMaintenanceYesterday", reason = GETTERS },
+			{ class = "ResourceOverview", method = "GetConsumedByConsumptionYesterday", reason = GETTERS },
+			{ class = "ResourceOverview", method = "GetProducedYesterday", reason = GETTERS },
+			{ global = "GetCityResourceOverview" },
+		})
+		if err then return err end
+		local C = City
 
 		local matched_once = false
 

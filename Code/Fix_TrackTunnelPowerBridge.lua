@@ -84,17 +84,18 @@
 SMRFixPack.Register("TrackTunnelPowerBridge", {
 	title = "A station attached to a train tunnel bridges the power grid again",
 	apply = function()
-		local T = rawget(_G, "TrackBase")
-		if type(T) ~= "table" or type(T.ConnectToGrids) ~= "function"
-			or type(T.GetStartStation) ~= "function" or type(T.GetEndStation) ~= "function" then
-			return "TrackBase.ConnectToGrids/GetStartStation/GetEndStation not found (game update changed it?)"
-		end
-		if type(T.Done) ~= "function" or type(T.DisconnectFromGrids) ~= "function" then
-			return "TrackBase.Done/DisconnectFromGrids not found (game update changed it?)"
-		end
-		if type(rawget(_G, "IsBeingDestructed")) ~= "function" then
-			return "IsBeingDestructed not found (game update changed it?)"
-		end
+		local GRID_METHODS = "TrackBase.ConnectToGrids/GetStartStation/GetEndStation not found (game update changed it?)"
+		local DONE_METHODS = "TrackBase.Done/DisconnectFromGrids not found (game update changed it?)"
+		local err = SMRFixPack.Require("TrackTunnelPowerBridge", {
+			{ class = "TrackBase", method = "ConnectToGrids", reason = GRID_METHODS },
+			{ class = "TrackBase", method = "GetStartStation", reason = GRID_METHODS },
+			{ class = "TrackBase", method = "GetEndStation", reason = GRID_METHODS },
+			{ class = "TrackBase", method = "Done", reason = DONE_METHODS },
+			{ class = "TrackBase", method = "DisconnectFromGrids", reason = DONE_METHODS },
+			{ global = "IsBeingDestructed" },
+		})
+		if err then return err end
+		local T = TrackBase
 
 		-- Returns "bridged" when it created the missing supply tunnel, or nil plus
 		-- a short reason. Never raises: every read is guarded, because this runs

@@ -29,15 +29,20 @@
 SMRFixPack.Register("MirrorSphereSite", {
 	title = "A completed Mirror Sphere site no longer accepts more drone work",
 	apply = function()
-		local B = rawget(_G, "MirrorSphereBuildingBase")
-		if type(B) ~= "table" or type(B.StartAction) ~= "function" then
-			return "MirrorSphereBuildingBase.StartAction not found (game update changed it?)"
-		end
-		local S = rawget(_G, "MirrorSphere")
-		local max_progress = type(S) == "table" and S.max_progress or nil
-		if type(max_progress) ~= "number" or max_progress <= 100 then
-			return "MirrorSphere.max_progress not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("MirrorSphereSite", {
+			{ class = "MirrorSphereBuildingBase", method = "StartAction" },
+			-- content check: the published constant must still be the >100 scale
+			-- the shipped guard mis-compared against
+			{ test = function()
+				local S = rawget(_G, "MirrorSphere")
+				local mp = type(S) == "table" and S.max_progress or nil
+				return type(mp) == "number" and mp > 100
+			  end,
+			  reason = "MirrorSphere.max_progress not found (game update changed it?)" },
+		})
+		if err then return err end
+		local B = MirrorSphereBuildingBase
+		local max_progress = MirrorSphere.max_progress
 
 		local orig = B.StartAction
 		function B:StartAction(action, ...)

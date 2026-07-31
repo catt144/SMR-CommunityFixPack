@@ -38,13 +38,12 @@
 SMRFixPack.Register("DomeFreeSpaceMismatch", {
 	title = "A dome's free-housing total counts the same residences the game assigns colonists to",
 	apply = function()
-		local D = rawget(_G, "Dome")
-		if type(D) ~= "table" or type(D.RefreshFreeLivingSpaces) ~= "function" then
-			return "Dome.RefreshFreeLivingSpaces not found (game update changed it?)"
-		end
-		if type(rawget(_G, "GatherFreeLivingSpaces")) ~= "function" then
-			return "GatherFreeLivingSpaces not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("DomeFreeSpaceMismatch", {
+			{ class = "Dome", method = "RefreshFreeLivingSpaces" },
+			{ global = "GatherFreeLivingSpaces" },
+		})
+		if err then return err end
+		local D = Dome
 
 		function D:RefreshFreeLivingSpaces()
 			-- FIX (F60): second argument added. Without it the tally is taken on

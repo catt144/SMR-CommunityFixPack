@@ -57,12 +57,11 @@
 SMRFixPack.Register("GridGlobalStorage", {
 	title = "Colony-wide power/water/oxygen reserve is measured as one ratio again",
 	apply = function()
-		if type(rawget(_G, "GetGridGlobalStorage")) ~= "function" then
-			return "GetGridGlobalStorage not found (game update changed it?)"
-		end
-		if type(rawget(_G, "GetCityResourceOverview")) ~= "function" then
-			return "GetCityResourceOverview not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("GridGlobalStorage", {
+			{ global = "GetGridGlobalStorage" },
+			{ global = "GetCityResourceOverview" },
+		})
+		if err then return err end
 
 		-- Same table the shipped GetGridGlobalStorageInSols uses
 		-- (ResourceOverview.lua:874-878), restated because it is a file-local there.

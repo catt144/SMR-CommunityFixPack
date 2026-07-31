@@ -32,13 +32,12 @@
 SMRFixPack.Register("SmallLandscapeSites", {
 	title = "Drones no longer error out when sent to a small landscaping site",
 	apply = function()
-		local L = rawget(_G, "LandscapeConstructionSiteBase")
-		if type(L) ~= "table" or type(L.GetClosestDests) ~= "function" then
-			return "LandscapeConstructionSiteBase.GetClosestDests not found (game update changed it?)"
-		end
-		if type(rawget(_G, "table")) ~= "table" or type(table.imap) ~= "function" then
-			return "table.imap not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("SmallLandscapeSites", {
+			{ class = "LandscapeConstructionSiteBase", method = "GetClosestDests" },
+			{ path = { "table", "imap" }, kind = "function" },
+		})
+		if err then return err end
+		local L = LandscapeConstructionSiteBase
 
 		function L:GetClosestDests(drone, top_count)
 			top_count = top_count or 5

@@ -65,10 +65,10 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 SMRFixPack.Register(FIX_ID, {
 	title = "Dust Sickness deals its intended random damage instead of the maximum every sol",
 	apply = function()
-		if type(rawget(_G, "const")) ~= "table" or type(const.Scale) ~= "table"
-			or type(const.Scale.Stat) ~= "number" then
-			return "const.Scale.Stat not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require(FIX_ID, {
+			{ path = { "const", "Scale", "Stat" }, kind = "number" },
+		})
+		if err then return err end
 		patch()   -- no-op unless the presets are already loaded
 	end,
 })

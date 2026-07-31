@@ -46,12 +46,11 @@
 SMRFixPack.Register("LandscapeUnitFilter", {
 	title = "Landscaping over a boarding point no longer drags boarding colonists out",
 	apply = function()
-		if type(rawget(_G, "LandscapeForEachUnit")) ~= "function" then
-			return "LandscapeForEachUnit not found (game update changed it?)"
-		end
-		if type(rawget(_G, "Landscape_ForEachObject")) ~= "function" then
-			return "Landscape_ForEachObject not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("LandscapeUnitFilter", {
+			{ global = "LandscapeForEachUnit" },
+			{ global = "Landscape_ForEachObject" },
+		})
+		if err then return err end
 		-- Landscapes is a GameVar (Landscaping.lua:21) and does not exist yet, so
 		-- it is read inside the function, never here.
 

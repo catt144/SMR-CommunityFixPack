@@ -34,9 +34,10 @@
 SMRFixPack.Register("GeneForging", {
 	title = "The Gene Forging tech actually increases the rare-trait chance",
 	apply = function()
-		if type(rawget(_G, "GetRareTraitChance")) ~= "function" then
-			return "GetRareTraitChance not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("GeneForging", {
+			{ global = "GetRareTraitChance" },
+		})
+		if err then return err end
 
 		function GetRareTraitChance(unit)
 			local city = unit and unit.city or MainCity

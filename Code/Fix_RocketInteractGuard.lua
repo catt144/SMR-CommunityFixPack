@@ -58,14 +58,15 @@
 SMRFixPack.Register("RocketInteractGuard", {
 	title = "RC Transports stay off trade and refugee rockets again",
 	apply = function()
-		local RC = rawget(_G, "RCTransport")
-		if type(RC) ~= "table" or type(RC.CanInteractWithObject) ~= "function"
-			or type(RC.InteractWithObject) ~= "function" then
-			return "RCTransport.CanInteractWithObject/InteractWithObject not found (game update changed it?)"
-		end
-		if type(rawget(_G, "IsKindOfClasses")) ~= "function" then
-			return "IsKindOfClasses not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("RocketInteractGuard", {
+			{ class = "RCTransport", method = "CanInteractWithObject",
+			  reason = "RCTransport.CanInteractWithObject/InteractWithObject not found (game update changed it?)" },
+			{ class = "RCTransport", method = "InteractWithObject",
+			  reason = "RCTransport.CanInteractWithObject/InteractWithObject not found (game update changed it?)" },
+			{ global = "IsKindOfClasses" },
+		})
+		if err then return err end
+		local RC = RCTransport
 
 		-- Mod code loads before the classes are flattened, so IsKindOf* cannot be
 		-- asked about a class yet — walk the classdefs' own __parents lists

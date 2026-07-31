@@ -37,18 +37,23 @@
 SMRFixPack.Register("TrainWaitTime", {
 	title = "Waiting on a train platform no longer counts as time spent riding",
 	apply = function()
-		local C = rawget(_G, "Colonist")
-		if type(C) ~= "table" or type(C.BoardVehicle) ~= "function" then
-			return "Colonist.BoardVehicle not found (game update changed it?)"
-		end
-		local S = rawget(_G, "Station")
-		if type(S) ~= "table" then
-			return "Station class not found (game update changed it?)"
-		end
-		if type(rawget(_G, "RebuildInfopanel")) ~= "function"
-			or type(rawget(_G, "PrgAmbientLife")) ~= "table" then
-			return "RebuildInfopanel/PrgAmbientLife not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("TrainWaitTime", {
+			{ class = "Colonist", method = "BoardVehicle" },
+			{ class = "Station",
+			  reason = "Station class not found (game update changed it?)" },
+			{ global = "RebuildInfopanel",
+			  reason = "RebuildInfopanel/PrgAmbientLife not found (game update changed it?)" },
+			{ global = "PrgAmbientLife", kind = "table",
+			  reason = "RebuildInfopanel/PrgAmbientLife not found (game update changed it?)" },
+			-- Phase 4 (C4): the replaced body calls these two on the station; they
+			-- were never checked. RemoveColonist is declared on Station itself
+			-- (Station.lua:770), AddSpentTime on the TransportStatistics mixin
+			-- (TransportStatistics.lua:31).
+			{ class = "Station", method = "RemoveColonist" },
+			{ class = "TransportStatistics", method = "AddSpentTime" },
+		})
+		if err then return err end
+		local C = Colonist
 
 		function C:BoardVehicle(vehicle)
 			if not self.transport_ticket then

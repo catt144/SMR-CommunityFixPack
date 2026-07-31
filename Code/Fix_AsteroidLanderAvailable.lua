@@ -44,19 +44,15 @@
 SMRFixPack.Register("AsteroidLanderAvailable", {
 	title = "A landed lander with no destination counts as available for an asteroid expedition",
 	apply = function()
-		local orig = rawget(_G, "PlanetaryAsteroidVisitPossible")
-		if type(orig) ~= "function" then
-			return "PlanetaryAsteroidVisitPossible not found (game update changed it?)"
-		end
-		if type(rawget(_G, "IsRocketClass")) ~= "function" then
-			return "IsRocketClass not found (game update changed it?)"
-		end
-		-- The list builder is what we are agreeing with; if it is gone, the
-		-- disagreement this fix repairs no longer means anything.
-		local LSO = rawget(_G, "LandingSiteObject")
-		if type(LSO) ~= "table" or type(LSO.GetRocketsForExpedition) ~= "function" then
-			return "LandingSiteObject.GetRocketsForExpedition not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("AsteroidLanderAvailable", {
+			{ global = "PlanetaryAsteroidVisitPossible" },
+			{ global = "IsRocketClass" },
+			-- The list builder is what we are agreeing with; if it is gone, the
+			-- disagreement this fix repairs no longer means anything.
+			{ class = "LandingSiteObject", method = "GetRocketsForExpedition" },
+		})
+		if err then return err end
+		local orig = PlanetaryAsteroidVisitPossible
 
 		local fixed_visit_possible = function(...)
 			if orig(...) then return true end

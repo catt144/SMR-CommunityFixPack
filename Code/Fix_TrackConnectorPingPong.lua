@@ -78,20 +78,21 @@
 SMRFixPack.Register("TrackConnectorPingPong", {
 	title = "A station and a tunnel one hex apart stop stealing each other's track connector",
 	apply = function()
-		local B = rawget(_G, "TrackConnectedObjBase")
-		if type(B) ~= "table" or type(B.CreateConnectorElements) ~= "function" then
-			return "TrackConnectedObjBase.CreateConnectorElements not found (game update changed it?)"
-		end
-		if type(B.Done) ~= "function" then
-			return "TrackConnectedObjBase.Done not found (game update changed it?)"
-		end
-		for _, name in ipairs({ "HexGetTrackGridElement", "TrackGridElement", "PlaceObjectIn",
-			"ResolveMap", "WorldToHex", "HexToWorld", "HexGetDirection", "IsBeingDestructed",
-			"CreateGameTimeThread" }) do
-			if rawget(_G, name) == nil then
-				return name .. " not found (game update changed it?)"
-			end
-		end
+		local err = SMRFixPack.Require("TrackConnectorPingPong", {
+			{ class = "TrackConnectedObjBase", method = "CreateConnectorElements" },
+			{ class = "TrackConnectedObjBase", method = "Done" },
+			{ global = "HexGetTrackGridElement", kind = "any" },
+			{ global = "TrackGridElement", kind = "any" },
+			{ global = "PlaceObjectIn", kind = "any" },
+			{ global = "ResolveMap", kind = "any" },
+			{ global = "WorldToHex", kind = "any" },
+			{ global = "HexToWorld", kind = "any" },
+			{ global = "HexGetDirection", kind = "any" },
+			{ global = "IsBeingDestructed", kind = "any" },
+			{ global = "CreateGameTimeThread", kind = "any" },
+		})
+		if err then return err end
+		local B = TrackConnectedObjBase
 
 		function B:CreateConnectorElements(force)
 			-- check track direction spots for track elements and connect them to us

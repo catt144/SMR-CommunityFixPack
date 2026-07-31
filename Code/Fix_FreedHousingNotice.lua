@@ -39,17 +39,17 @@
 SMRFixPack.Register("FreedHousingNotice", {
 	title = "A home falling vacant is offered to the dome's homeless straight away",
 	apply = function()
-		local C = rawget(_G, "Colonist")
-		if type(C) ~= "table" or type(C.SetResidence) ~= "function" then
-			return "Colonist.SetResidence not found (game update changed it?)"
-		end
-		-- NB: mod code loads before the classes are flattened — these are declared
-		-- on Residence itself, which is the class to check.
-		local R = rawget(_G, "Residence")
-		if type(R) ~= "table" or type(R.CheckHomeForHomeless) ~= "function"
-				or type(R.GetFreeSpace) ~= "function" then
-			return "Residence.CheckHomeForHomeless/GetFreeSpace not found (game update changed them?)"
-		end
+		-- NB: CheckHomeForHomeless/GetFreeSpace are declared on Residence
+		-- itself, which is the class to check (pre-flattening).
+		local err = SMRFixPack.Require("FreedHousingNotice", {
+			{ class = "Colonist", method = "SetResidence" },
+			{ class = "Residence", method = "CheckHomeForHomeless",
+			  reason = "Residence.CheckHomeForHomeless/GetFreeSpace not found (game update changed them?)" },
+			{ class = "Residence", method = "GetFreeSpace",
+			  reason = "Residence.CheckHomeForHomeless/GetFreeSpace not found (game update changed them?)" },
+		})
+		if err then return err end
+		local C = Colonist
 
 		local orig = C.SetResidence
 		function C:SetResidence(home, ...)

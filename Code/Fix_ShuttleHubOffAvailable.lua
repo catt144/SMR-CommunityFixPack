@@ -36,16 +36,17 @@
 SMRFixPack.Register("ShuttleHubOffAvailable", {
 	title = "Shuttle Hubs switched off no longer count as available colonist transport",
 	apply = function()
-		if type(rawget(_G, "IsLRTransportAvailable")) ~= "function" then
-			return "IsLRTransportAvailable not found (game update changed it?)"
-		end
-		-- NB: mod code loads before the classes are flattened, so look these up on
-		-- the class that DECLARES them, not on ShuttleHubBase.
-		local B = rawget(_G, "BaseBuilding")
-		if type(B) ~= "table" or type(B.GetWorkNotPermittedReason) ~= "function"
-				or type(B.GetWorkNotPossibleReason) ~= "function" then
-			return "BaseBuilding work-reason methods not found (game update changed them?)"
-		end
+		-- NB: the work-reason methods are checked on the class that DECLARES
+		-- them (BaseBuilding), not on ShuttleHubBase — mod code loads before the
+		-- classes are flattened.
+		local err = SMRFixPack.Require("ShuttleHubOffAvailable", {
+			{ global = "IsLRTransportAvailable" },
+			{ class = "BaseBuilding", method = "GetWorkNotPermittedReason",
+			  reason = "BaseBuilding work-reason methods not found (game update changed them?)" },
+			{ class = "BaseBuilding", method = "GetWorkNotPossibleReason",
+			  reason = "BaseBuilding work-reason methods not found (game update changed them?)" },
+		})
+		if err then return err end
 
 		function IsLRTransportAvailable(city)
 			for _, hub in ipairs((city or MainCity).labels.ShuttleHub or empty_table) do

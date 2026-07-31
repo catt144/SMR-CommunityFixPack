@@ -42,13 +42,17 @@
 SMRFixPack.Register("MoraleComfortTooltip", {
 	title = "Morale tooltip stops listing a Comfort bonus the game does not apply",
 	apply = function()
-		local C = rawget(_G, "Colonist")
-		if type(C) ~= "table" or type(C.UIStatUpdate) ~= "function" then
-			return "Colonist.UIStatUpdate not found (game update changed it?)"
-		end
-		if type(C.GetProperty) ~= "function" and type(rawget(_G, "PropertyObject")) ~= "table" then
-			return "GetProperty not reachable (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("MoraleComfortTooltip", {
+			{ class = "Colonist", method = "UIStatUpdate" },
+			-- Phase 4 (C4): GetProperty is declared on PropertyObject
+			-- (CommonLua\PropertyObject.lua); the old check's Colonist.GetProperty
+			-- limb was always nil pre-flattening, so only the table-existence
+			-- fallback ever carried it. This is the real declaring-class check.
+			{ class = "PropertyObject", method = "GetProperty",
+			  reason = "GetProperty not reachable (game update changed it?)" },
+		})
+		if err then return err end
+		local C = Colonist
 
 		-- Reports whether the shipped high-Comfort morale bonus is still absent.
 		-- Cannot be checked at apply time (g_Consts is a GameVar and UpdateMorale

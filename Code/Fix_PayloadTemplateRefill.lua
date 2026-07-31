@@ -42,17 +42,16 @@
 SMRFixPack.Register("PayloadTemplateRefill", {
 	title = "Edit Payload keeps the amounts you set instead of refilling them from the flight-policy template",
 	apply = function()
-		local C = rawget(_G, "CargoRequestNew")
-		if type(C) ~= "table" or type(C.RetrieveRequests) ~= "function"
-			or type(C.Apply) ~= "function" or type(C.SetRequest) ~= "function" then
-			return "CargoRequestNew.RetrieveRequests/Apply not found (game update changed it?)"
-		end
-		if type(rawget(_G, "GetFlightPolicy")) ~= "function" then
-			return "GetFlightPolicy not found (game update changed it?)"
-		end
-		if type(rawget(_G, "CargoType")) ~= "table" then
-			return "CargoType not found (game update changed it?)"
-		end
+		local REQ_METHODS = "CargoRequestNew.RetrieveRequests/Apply not found (game update changed it?)"
+		local err = SMRFixPack.Require("PayloadTemplateRefill", {
+			{ class = "CargoRequestNew", method = "RetrieveRequests", reason = REQ_METHODS },
+			{ class = "CargoRequestNew", method = "Apply", reason = REQ_METHODS },
+			{ class = "CargoRequestNew", method = "SetRequest", reason = REQ_METHODS },
+			{ global = "GetFlightPolicy" },
+			{ global = "CargoType", kind = "table" },
+		})
+		if err then return err end
+		local C = CargoRequestNew
 
 		-- verbatim copy of the file-local at CargoRequestNew.lua:166-177
 		local function resolve_loc_cargo_template(transporter)
