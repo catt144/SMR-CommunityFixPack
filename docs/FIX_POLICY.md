@@ -118,6 +118,69 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   one-shot `OnMsg.LoadGame` sweep**, conservative by default.
 - Never break saves for players who later disable the mod.
 
+### 3a. SAVE SAFETY — no mod function below a yield on a game-time thread (HARD RULE, owner, 2026-07-31)
+
+**The defect this exists to stop is F86, and it was measured, not theorised.** A
+savegame captures every game-time thread **together with its blocked stack**. A
+mod function is not in `PersistGatherPermanents`, so it is serialised **by
+value** and comes back runnable with an empty `_ENV` — it survives the mod's
+removal and keeps executing in the player's save. `Fix_MeteorFrequency` killed a
+colony's meteors permanently this way; `Opt_DroneOverhaul` leaked **with its own
+opt-in toggle OFF**. Neither is reachable by the pack after uninstall.
+
+**The test is not "where is this function stored".** It is:
+
+> **Can this function be executing, or blocked, below a `Sleep` / `WaitMsg` /
+> `WaitWakeup` on a GAME-TIME thread at the moment the save is written?**
+
+Two properties bound it: a save captures only **blocked** threads, so purely
+synchronous mod code (data patches, getters, `Can…` predicates, UI handlers,
+non-yielding `OnMsg` bodies) can never be captured; and **real-time threads are
+not persisted at all**. That is ~62 of 74 modules safe by construction.
+
+**Choose the remedy in this order — 3 → 2 → 1. The ordering is binding.**
+
+1. **Layer 3 — patch a synchronous input, keep vanilla's body.** ⭐ Best: the
+   pack has no body in the save at all and the problem disappears for that
+   module. Where a defect can be repaired by changing what a shipped function
+   *reads* rather than replacing what it *does*, do that.
+   ⚠️ **Scope the wrapper by the narrowest thing that actually separates the
+   call sites, and enumerate every caller before choosing the key.** Keying on
+   an argument is not automatically enough: `GetDisasterWarningTime` is called
+   with the *same* meteor descriptor by both the `Meteors` and `MeteorStorm`
+   threads, so a descriptor-keyed wrapper would silently change storm warning
+   timing. `CurrentThread()` is available (not blacklisted) and global
+   game-time threads are parked in a global of their own name, so
+   `CurrentThread() == rawget(_G, "<Name>")` is a precise key where one is
+   needed.
+2. **Layer 2 — no mod code after a call that can block.** Do all work
+   **before** the call, then `return orig(...)`. Then whether or not the frame
+   is serialised, there is nothing left to execute after removal. This needs no
+   engine guarantee, which is why it replaced the earlier "tail calls remove
+   our frame" justification — that claim is **unobservable in this sandbox and
+   must not be re-derived or re-tested** (a tail call has nothing after it, so
+   a vanished frame and a surviving frame produce identical silence). Wrappers
+   that genuinely need post-work must move it out of the command body into a
+   message or periodic hook.
+   *Residual, accepted:* an inert serialised function may sit in a save as dead
+   weight; it executes nothing and no read available to us can see it.
+3. **Layer 1 — `OnMsg.SaveGameStart` tear-down / `SaveGameDone` rebuild**, for
+   what layers 3 and 2 cannot reach. Mods **do** get this hook (only
+   `PersistSave` / `PersistLoad` / `PersistGatherPermanents` are blacklisted).
+   **Build it last, and only for what survives the other two layers; every
+   module that uses it needs its own A/B plus a long-interval soak.**
+   ⚠️ **THE TRAP:** autosaves are the same `DoSaveGame` path and fire roughly
+   once a sol, so a tear-down that *restarts* a loop would reset a 35–115 h
+   meteor timer before it could ever expire — recreating PT-01's
+   permanent-silence signature out of our own code. **Re-arm from a persisted
+   deadline, never restart blind.**
+
+**This binds new fixes as well as repairs.** Anything that replaces a blocking
+body, wraps a command method, or creates its own game-time thread must state in
+its header which layer it is on and why. Full analysis, the 12-module exposure
+list and the per-module disposition: `docs/SAVE_SAFETY_REDESIGN.md` and BUGS.md
+F86.
+
 ## 4. Only fix proven defects
 
 Every fix links to a BUGS.md entry with file:line evidence. No balance changes,

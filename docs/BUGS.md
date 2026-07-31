@@ -112,7 +112,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
-| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **MEASURED** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), 10 more at risk. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE** — FIX_POLICY §3 (entry) |
+| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep owed** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), 10 more at risk. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Owner took all four calls 2026-07-31: layer ordering 3→2→1 ADOPTED into **FIX_POLICY §3a**, layer-3 sweep AUTHORISED (game-free, the one thing owed), F02 HELD until it reports, D10/D12 sequenced behind the rules |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
@@ -4089,7 +4089,45 @@ real, the audit's §7.3 names the shape: move each consequence into a game-time
 thread and let the real-time side only present UI — per site, no shared-
 machinery surgery.
 
-### F86 — OUR OWN DEFECT: pack code blocked on a persisted game-time thread is written INTO the player's savegame and keeps running after the mod is removed (P1, MEASURED)  `[open — filed 2026-07-31 by PT-20; BLOCKS RELEASE (FIX_POLICY §3); redesign proposed, nothing built]`
+### F86 — OUR OWN DEFECT: pack code blocked on a persisted game-time thread is written INTO the player's savegame and keeps running after the mod is removed (P1, MEASURED)  `[open — filed 2026-07-31 by PT-20; BLOCKS RELEASE. Remedy DECIDED 2026-07-31 (owner, all four calls): layer ordering 3→2→1 adopted into FIX_POLICY §3a; layer-3 sweep authorised and OWED; F02 held for it; D10/D12 sequenced behind it. Nothing built yet]`
+
+> ## ✅ THE OWNER DECISION IS TAKEN (2026-07-31) — read this before the diagnosis below
+>
+> All four calls in `docs/SAVE_SAFETY_REDESIGN.md` §4 were answered. **No
+> measurements are owed and none may be designed** (see the cancelled tail-call
+> experiment below). What is owed is **one game-free source sweep.**
+>
+> 1. **Layer ordering 3 → 2 → 1 — ADOPTED**, and it is now a hard rule in
+>    **`FIX_POLICY.md` §3a**, binding on new fixes as well as repairs. That
+>    section, not this entry, is the authoritative statement.
+> 2. **The layer-3 sweep — AUTHORISED, full scope** (all full-replacement
+>    modules, not just the 12 exposed). Game-free. **This is the critical path
+>    and the only thing F86 owes.**
+> 3. **F02 — HELD until the sweep reports.** Do **not** touch
+>    `Fix_MeteorFrequency`; the owner declined to take it module-by-module and
+>    wants the layer-3 set to land as one designed change. Accepted cost, stated
+>    at the time: the measured colony-killing leak stays shipped meanwhile.
+> 4. **D10 and D12 — sequenced BEHIND the rules.** Neither approved build starts
+>    until save safety is settled; both touch colonist assignment, which is
+>    command-thread territory. The board's "confirm owner intent" on those two
+>    items is answered: **not yet.**
+>
+> ⚠️ **A correction to this entry's own worked example landed with the
+> decision.** The F02 wrapper must key on **`CurrentThread()`**, not on the
+> meteor descriptor — `Meteors.lua:279` (the `Meteors` thread) and
+> `Meteors.lua:326` (the **`MeteorStorm`** thread) pass the *same* descriptor, so
+> descriptor-keying would fire the storm warning ~5 sols early instead of 6
+> hours and make Sensor Towers irrelevant to it — a balance change barred by
+> FIX_POLICY §4. Full enumeration of every call site, and a second smaller
+> correction (the residual `Sleep(5000)` is ~10 game minutes, not zero), are in
+> `SAVE_SAFETY_REDESIGN.md` §2 Layer 3.
+>
+> ✅ **The exposure list below was independently re-verified before the decision
+> and holds.** A yield-grep of `Code/` returns 9 modules, all listed; the list
+> correctly adds 3 whose route is a command body rather than their own yield;
+> and the pack's only other command-class wrapper
+> (`Fix_RocketInteractGuard:119-135`) is already layer-2 compliant, so there is
+> no 13th site. Detail in `SAVE_SAFETY_REDESIGN.md` §4a.
 
 **This is a defect in this pack, not in the game.** Found by executing PT-20's
 mandatory step 5 for the first time. It is measured, not inferred, and it
@@ -4196,8 +4234,9 @@ persist **by the global name** this function is written to"). Persist does not
 resolve mod functions by name. Avoiding upvalues only made the serialised
 function smaller.
 
-**Proposed remedy — three layers, none built, owner decision owed. Full spec with
-the per-module disposition table: `docs/SAVE_SAFETY_REDESIGN.md`.**
+**Remedy — three layers, ordering ADOPTED 2026-07-31 (owner), nothing built yet.
+The rule is `FIX_POLICY.md` §3a; the full spec and per-module disposition table
+are `docs/SAVE_SAFETY_REDESIGN.md`.**
 
 1. **Patch a synchronous input instead of replacing a blocking body** (best;
    zero savegame footprint). Worked example for F02 below.

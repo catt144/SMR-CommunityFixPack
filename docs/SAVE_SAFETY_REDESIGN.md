@@ -1,8 +1,16 @@
-# Save-safety redesign — the F86 remedy, for owner decision
+# Save-safety redesign — the F86 remedy
 
-**Status: PROPOSAL. Nothing here is built, approved or owed.** Written
-2026-07-31 immediately after the PT-20 leg that measured the defect. The defect
-itself is `BUGS.md` **F86** (P1, blocks release); this file is only the *how*.
+**Status: DECIDED 2026-07-31 (owner). The layer ordering is ADOPTED and now
+lives in `FIX_POLICY.md` §3a as a hard rule. The layer-3 sweep is AUTHORISED
+and is the critical path. F02 is HELD until that sweep reports. D10 and D12 are
+sequenced BEHIND these rules.** Written 2026-07-31 immediately after the PT-20
+leg that measured the defect; the four decisions were taken the same day and are
+recorded in §4. The defect itself is `BUGS.md` **F86** (P1, blocks release);
+this file is the *how*.
+
+> **What is owed right now: the sweep (§4 decision 2), and nothing else.** It is
+> game-free. No code may be written against this file until the sweep reports —
+> that includes F02, which the owner explicitly held for it.
 
 ---
 
@@ -48,14 +56,44 @@ as a second fix (see the F02 root-cause note).
 `Fix_MeteorFrequency`'s replacement body — the site that killed a colony's
 meteors in PT-20 — is then deleted outright.
 
-*Scope check:* `GetDisasterWarningTime` serves other disasters and the tower UI
-text, so the wrapper must key on the meteor descriptor and defer to the original
-otherwise.
+> ⚠️ **SCOPE CHECK CORRECTED 2026-07-31 — the original one here was wrong, and
+> shipping against it would have caused a balance change.** It said the wrapper
+> "must key on the meteor descriptor and defer to the original otherwise."
+> **Keying on the descriptor does not separate the call sites.** Every caller of
+> `GetDisasterWarningTime`, enumerated:
+>
+> | site | passes | affected |
+> |---|---|---|
+> | `Meteors.lua:279` — the `Meteors` thread | `GetMeteorsDescr()` | ✅ the target |
+> | **`Meteors.lua:326` — the `MeteorStorm` thread** | **`GetMeteorsDescr()`** | ⚠️ **the same descriptor** |
+> | `ColdWave.lua:231`, `:378`; `DustStorm.lua:467` | their own descriptors | no |
+> | `SensorTower.lua:31`; `TerraformingDisasters.lua:285` | **no argument at all** | no |
+>
+> Both meteor threads pass the identical descriptor. Inflating `warning_time` to
+> `spawntime + spawntime_random` (up to 115 h) would make the **meteor-storm
+> warning notification fire ~5 sols early instead of 6 hours**, and would make
+> Sensor Towers irrelevant to storm warning — a visible gameplay change, barred
+> by FIX_POLICY §4, arriving as a side effect of a save-safety repair.
+>
+> **Key on the calling thread instead.** `GlobalGameTimeThread` parks each
+> thread in a global of its own name (the current watchdog already relies on
+> this: `rawget(_G, "Meteors")`), and `CurrentThread()` exists and is **not** in
+> `ModEnvBlacklist`. So inflate only when
+> `CurrentThread() == rawget(_G, "Meteors")` and defer everywhere else. Still
+> fully synchronous, so it never enters a save — this stays layer 3.
+>
+> **Second correction, minor but it belongs in the eventual header:** "vanilla's
+> own body produces the designed 35–115 h schedule" is fractionally off. Once
+> `warning_time > spawn_time`, vanilla's dead `if`
+> (`0 > spawn_time - warning_time`) stops being dead and adds `Sleep(5000)` —
+> **10 game minutes** per cycle, since one game hour is 30,000 ms. Negligible
+> against 35–115 h, but it is not exactly `spawn_time`.
 
 **Which other modules could take this shape is NOT yet swept.** One strong
-candidate is confirmed; the remaining ~24 full-replacement modules have not been
-examined for it. That sweep is a game-free pass and is the single highest-value
-piece of follow-up work here.
+candidate is confirmed; the remaining full-replacement modules have not been
+examined for it. **That sweep is AUTHORISED (§4 decision 2, owner 2026-07-31),
+is game-free, and is now the critical path** — F02 itself is held until it
+reports.
 
 ### Layer 2 — no mod code after a call that can block
 
@@ -135,20 +173,68 @@ at file scope and only early-returns. Opt-in status is not protection.
 
 ---
 
-## 4. What the owner is actually deciding
+## 4. The four decisions — ALL TAKEN 2026-07-31 (owner)
 
-1. **Adopt the layer ordering** (3 → 2 → 1) as the standing approach, or not.
-2. **Authorise the game-free sweep** of the ~24 remaining full-replacement
-   modules for layer-3 opportunities. This is the highest-value follow-up and
-   needs no game time.
-3. **F02 specifically** — approve deleting `Fix_MeteorFrequency`'s body in favour
-   of the `GetDisasterWarningTime` input patch. Note the PT-01 watchdog splits
-   out as a second, also save-safe module: vanilla emits `Msg("MeteorDone")`
-   (`Meteors.lua:388`), so it can time strikes from `OnMsg`, check
-   `IsValidThread(Meteors)` on `NewDay`, and restart **vanilla's** body.
-4. **Sequencing against the launch build.** D10 and D12 are approved builds. If
-   they land before these rules are settled, they may add new leak sites — both
-   touch colonist assignment, which is command-thread territory.
+### 1. Layer ordering — ✅ ADOPTED, 3 → 2 → 1
+
+Binding standing approach for every fix, new or repaired. **Written into
+`FIX_POLICY.md` §3a**, which is now the authoritative statement of the rule;
+this file keeps the analysis. Layer 1 is built **last**, only for what survives
+layers 3 and 2, and every module that uses it needs its own A/B plus a
+long-interval soak.
+
+### 2. The layer-3 sweep — ✅ AUTHORISED, and it is the critical path
+
+Game-free source pass over the remaining full-replacement modules, asking of
+each: *is there a synchronous input we could patch instead of replacing a
+blocking body?* The owner authorised the **full** scope (all full-replacement
+modules), not just the 12 exposed — layer-3 wins on currently-safe modules are
+worth having, because a module that keeps vanilla's body cannot regress into
+this defect class later. **This is the only thing owed on F86 right now.**
+
+### 3. F02 — ⏸️ HELD until the sweep reports
+
+The owner declined to take F02 module-by-module. **Do not touch
+`Fix_MeteorFrequency` yet.** The whole layer-3 set lands as one designed change
+once the sweep has scoped it. Accepted cost, stated at the time of the decision:
+the measured, colony-killing leak stays shipped in the meantime.
+
+When it is unheld, the design is settled and two corrections apply — **the
+wrapper keys on `CurrentThread()`, not on the descriptor** (see the boxed
+correction in §2, Layer 3; descriptor-keying would change meteor-storm warning
+timing), and the residual `Sleep(5000)` is ~10 game minutes, not zero. The PT-01
+watchdog can split out as a second save-safe module: vanilla emits
+`Msg("MeteorDone")` (`Meteors.lua:388` — verified), so it can time strikes from
+`OnMsg`, check `IsValidThread(Meteors)` on `NewDay`, and restart **vanilla's**
+body. Note the watchdog is already save-safe where it sits (`OnMsg` handlers,
+no yield), so moving it is tidiness, not an F86 requirement.
+
+### 4. Sequencing — ✅ SAVE-SAFETY RULES FIRST, then D10 and D12
+
+Neither approved build starts until these rules are settled. Both touch
+colonist assignment, which is command-thread territory, and building them first
+risks adding new leak sites to a defect that already blocks release. This
+supersedes the board's "confirm the owner's intent before starting one" for
+these two items: the answer is **not yet**.
+
+---
+
+## 4a. Verification run against this file, 2026-07-31 (before the decisions)
+
+Two controls were run on this document's own claims so the decisions rested on
+checked grounds rather than the file's summary of itself:
+
+- **The 12-module exposure list is neither padded nor short.** An independent
+  grep of `Code/` for `Sleep(` / `WaitMsg(` / `WaitWakeup(` /
+  `CreateGameTimeThread` / `GlobalGameTimeThreadFuncs` returned 9 modules, plus
+  `00_Core` (a **real-time** thread, correctly cleared). All 9 are on the list.
+  The list correctly adds 3 more — `Fix_TrainWaitTime`, `Fix_TrainCargoDumping`,
+  `Fix_ShelterReflex` — whose route is a **command body on the stack** rather
+  than a yield of their own, which the naive grep cannot see.
+- **No 13th site.** The pack's only other wrapper on a command-object class is
+  `Fix_RocketInteractGuard:119-135` (`RC.CanInteractWithObject`,
+  `RC.InteractWithObject`). Both do their work **before** the call and end
+  `return orig(self, ...)`, so both are already layer-2 compliant.
 
 ## 5. What is NOT proposed
 
@@ -156,8 +242,11 @@ at file scope and only early-returns. Opt-in status is not protection.
   already in a player's save is measured and simple: **reinstalling the pack
   revives a killed thread** (confirmed 2026-07-31 — our `LoadGame` restart runs
   and `IsValidThread(Meteors)` returns `true`). Uncomfortable, but real.
-- **No FIX_POLICY edit yet.** The rule belongs there once the owner picks the
-  ordering. Drafted wording: *no mod function may be reachable below a yield on
-  a game-time thread; prefer patching a synchronous input over replacing a
-  blocking body; never place mod code after a call that can block.*
-- **No changes to the ~62 safe modules.**
+- ~~No FIX_POLICY edit yet~~ — **DONE 2026-07-31.** The owner adopted the
+  ordering, so the rule landed in **`FIX_POLICY.md` §3a**, which is now
+  authoritative for it. This file keeps the analysis and the per-module
+  disposition.
+- **No changes to the ~62 safe modules** *(beyond whatever the authorised
+  layer-3 sweep proposes — the sweep may recommend converting a currently-safe
+  full replacement to an input patch, but nothing is built without a further
+  owner go)*.

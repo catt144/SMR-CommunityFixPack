@@ -78,12 +78,28 @@ with **PHASE 4 COMPLETE** (below).
 >   construction.
 > - Controls: reproduces identically with the pack *disabled* and with the
 >   junction *physically removed* (98 vs 98 errors, same locals).
-> - **Redesign proposed, nothing built, owner decision owed** — full spec in
->   **`docs/SAVE_SAFETY_REDESIGN.md`** (three layers, the per-module disposition
->   for all 12 exposed modules, the autosave timer trap, and the four decisions
->   owed): patch synchronous inputs instead of replacing blocking bodies (F02
->   needs no body at all), no mod code after a call that can block, and
->   `SaveGameStart` tear-down for the rest.
+> - ✅ **THE OWNER DECISION IS TAKEN (2026-07-31) — all four calls answered, and
+>   ONE game-free item is owed.** Full spec and the recorded calls in
+>   **`docs/SAVE_SAFETY_REDESIGN.md`** §4.
+>   1. **Layer ordering 3 → 2 → 1 ADOPTED** and written into **`FIX_POLICY.md`
+>      §3a** as a hard rule binding new fixes as well as repairs (that section,
+>      not BUGS.md, is now authoritative for it): patch a synchronous input
+>      instead of replacing a blocking body; no mod code after a call that can
+>      block; `SaveGameStart` tear-down last, only for what survives, each with
+>      its own A/B plus a soak.
+>   2. **The layer-3 sweep is AUTHORISED at full scope** (all full-replacement
+>      modules, not just the 12 exposed) and is **the critical path — the only
+>      thing F86 owes.** Game-free.
+>   3. **F02 is HELD until that sweep reports.** Do not touch
+>      `Fix_MeteorFrequency`. Accepted cost: the measured leak stays shipped
+>      meanwhile.
+>   4. **D10 and D12 are sequenced BEHIND the rules** — neither build starts yet.
+> - ⚠️ **The F02 worked example was corrected with the decision:** the wrapper
+>   keys on **`CurrentThread()`**, not the meteor descriptor — `Meteors.lua:279`
+>   and the **`MeteorStorm`** thread at `Meteors.lua:326` pass the *same*
+>   descriptor, so descriptor-keying would fire the storm warning ~5 sols early
+>   and make Sensor Towers irrelevant to it (a balance change, FIX_POLICY §4).
+>   The exposure list was independently re-verified the same day and holds.
 > - ✅ **Remedy measured:** reinstalling the pack DOES revive a killed thread
 >   (`IsValidThread(Meteors)` → `true`, restarted by our own `LoadGame`). The
 >   answer for an affected player is "put the mod back" — real, and uncomfortable.

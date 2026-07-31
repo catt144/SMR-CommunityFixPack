@@ -1,4 +1,4 @@
-# General continuation prompt (model-agnostic) — reset to playtest standby 2026-07-31 late
+# General continuation prompt (model-agnostic) — playtest standby + the F86 sweep, 2026-07-31 late
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks per task and everything here works identically on either.**
@@ -6,7 +6,9 @@ the user picks per task and everything here works identically on either.**
 moment another session commits. (The filename keeps its historical `FABLE_`
 prefix so existing references stay valid; nothing in it is model-specific.)
 
-Staleness check: written after **`695424b`** (F87 closed out).
+Staleness check: written after **`8d201c3`** (F86 owes no measurements), then
+updated the same evening with the **four F86 owner decisions** — layer ordering
+adopted, sweep authorised, F02 held, D10/D12 sequenced behind the rules.
 
 You are continuing the Surviving Mars: Relaunched "Community Fix Pack". Sessions
 are usually **LIVE PLAYTEST STANDBY**: the user is at the keyboard in the retail
@@ -50,10 +52,24 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
   below a `Sleep`/`WaitMsg`/`WaitWakeup` on a **game-time** thread when the save
   is written*. Synchronous code can never be captured, so ~62 of 74 modules are
   safe by construction; **12 are exposed** (list on the F86 entry).
-- **Nothing is built. It is an owner decision.** The three-layer redesign is in
-  **`docs\SAVE_SAFETY_REDESIGN.md`** — per-module disposition for all 12, the
-  autosave timer trap, and the four decisions owed. Do not build against it
-  unquoted.
+- ✅ **THE DECISION IS TAKEN (2026-07-31) — and exactly ONE game-free item is
+  owed: the layer-3 sweep.** All four calls in **`docs\SAVE_SAFETY_REDESIGN.md`**
+  §4 are answered:
+  1. **Layer ordering 3 → 2 → 1 ADOPTED**, now a hard rule in **`FIX_POLICY.md`
+     §3a** — read that, not this summary, before writing any fix. It binds new
+     fixes as well as F86 repairs.
+  2. **The layer-3 sweep is AUTHORISED at FULL scope** — every full-replacement
+     module, not just the 12 exposed. Asks of each: *is there a synchronous
+     input we could patch instead of replacing a blocking body?* **Game-free,
+     and it is the critical path.**
+  3. **F02 is HELD until the sweep reports — do NOT touch
+     `Fix_MeteorFrequency`.** The owner declined to take it module-by-module.
+  4. **D10 and D12 are sequenced BEHIND the rules** (see the board).
+  ⚠️ When F02 is unheld, the wrapper keys on **`CurrentThread()`**, not the
+  meteor descriptor — both `Meteors.lua:279` and the **`MeteorStorm`** thread at
+  `:326` pass the same descriptor, so descriptor-keying would fire the storm
+  warning ~5 sols early (a balance change, FIX_POLICY §4). Correction is on the
+  F86 entry and in the redesign §2.
 - ✅ **NOTHING IS OWED BEFORE THE DECISION — the two measurements this block used
   to list are both RESOLVED (2026-07-31, PT-20 leg). Do not re-run them.**
   - **(a) `Fix_ShelterReflex` / the tail-call question — CANCELLED as
@@ -69,8 +85,8 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
     `PT-20TEST-B` loaded with the pack back: `IsValidThread(Meteors)` → `true`,
     phase `restarted`, our own `LoadGame` doing it. The answer for an affected
     player is *"put the mod back"* — real, and uncomfortable.
-  So F86 is **purely an owner decision** now: the four calls in
-  `SAVE_SAFETY_REDESIGN.md` §4.
+  Those two are still resolved and still must not be re-run. What F86 owes is
+  the **sweep**, and nothing else.
 - **Three facts to spend nobody's time re-deriving** (all in ENGINE_FACTS):
   **mods DO get a pre-save hook** — `OnMsg.SaveGameStart`/`SaveGameDone` reach
   mod code and autosaves are the same path, so tear-down-on-save is
@@ -152,10 +168,10 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
 
 ## ▶️ The board — user picks
 
-> Playtests are the default work. The builds below are real and approved but
-> **confirm the owner's intent before starting one** — new fixes written before
-> the F86 save-safety rules are settled risk adding leak sites, and both D10 and
-> D12 touch colonist assignment, which is command-thread territory.
+> Playtests are the default work. ⛔ **The two approved builds (D10, D12) are on
+> a HOLD as of 2026-07-31 — the owner sequenced them behind the F86 save-safety
+> rules.** Do not start either, and do not ask again per-sitting: the answer is
+> recorded. **Item 6, the layer-3 sweep, is the authorised non-playtest work.**
 
 1. **PT-53 Trigger E** — the last thing between D07 and `tested`.
 2. **PT-54** — wave-6 disaster fixes. ⚠️ **The "live 194-sol save" named in the
@@ -169,23 +185,30 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
    (one fresh 10-minute save covers both).
 5. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
    **PT-21/22** last.
-6. **F86 — the owner decision.** No measurements are owed (both were resolved
-   2026-07-31; see the block above). Four calls in `SAVE_SAFETY_REDESIGN.md` §4.
+6. **⭐ F86 — THE LAYER-3 SWEEP. Authorised, game-free, and the critical path.**
+   The decision is taken (block above); this is the one thing it owes. Read
+   every full-replacement module and ask: *is there a synchronous input we could
+   patch instead of replacing a blocking body?* Report per module, then the
+   owner decides what gets built. **No code is written from this sweep without a
+   further go.**
    ⚠️ **Sequencing note:** the `Opt_DroneOverhaul` half of the layer-2 repair
    sits inside a drone-owned module. It is save-safety surgery on a wrapper's
    call position and touches no drone design, so it should be carved out of the
    drone scope fence rather than waiting on the D06 decision — **owner to
    confirm the carve-out.**
-7. **⭐ D10 — workshops module BUILD.** Speced, user-approved, game-free, un-gated
-   (PT-56 passed). Full spec on the D10 BUGS entry: T1 text repairs + T2 capacity
-   dial (base/+50%/+100%, `max_workers` AND `consumption_amount` **PAIRED**).
-   Adds PT-57 (~7 min) at build time. **This is the ready-to-go build item.**
-8. **D12 — no-homeless dome policy.** DECIDED and speced, build owed. Its own
-   module; `Opt_ResidencyControl` as donor pattern ONLY. **Hard constraint:** the
-   new flag must NOT route through `CanAcceptNewColonists` (D03's gate) or it
-   blocks the cohort delivery it exists to protect. Never expel to the surface.
-   **Sequencing: D10 and D12 both touch colonist assignment — land them
-   separately, each with its own A/B, never entangled.**
+7. ⏸️ **D10 — workshops module BUILD. NOT YET — sequenced behind the save-safety
+   rules** (owner, 2026-07-31). Speced, user-approved, game-free, un-gated by
+   PT-56, and otherwise ready: T1 text repairs + T2 capacity dial
+   (base/+50%/+100%, `max_workers` AND `consumption_amount` **PAIRED**), adding
+   PT-57 (~7 min) at build time. Full spec on the D10 BUGS entry. **Do not start
+   it** — it touches colonist assignment, which is command-thread territory.
+8. ⏸️ **D12 — no-homeless dome policy. NOT YET — same sequencing hold.** DECIDED
+   and speced. Its own module; `Opt_ResidencyControl` as donor pattern ONLY.
+   **Hard constraint:** the new flag must NOT route through
+   `CanAcceptNewColonists` (D03's gate) or it blocks the cohort delivery it
+   exists to protect. Never expel to the surface. **When the hold lifts: D10 and
+   D12 both touch colonist assignment — land them separately, each with its own
+   A/B, never entangled.**
 
 **Decisions owed (user):** the **FIX_POLICY §4 amendment** (drafted at the end of
 `REACHABILITY_AUDIT.md` — resolve its R4 contradiction with F49(a) first; three
@@ -239,8 +262,10 @@ drone design decision has settled.**
    "Not yet swept" carries the assignment-machinery trace and the R1-R7
    paste-ready forensics.
 4. `docs\FIX_POLICY.md` — binding for any code you write. **§4a is the owner hard
-   rule (below); §2 carries the F87 cold-boot rule; §4 has a drafted replacement
-   awaiting the owner.**
+   rule (below); §3a is the NEW save-safety hard rule (layer ordering 3→2→1,
+   adopted 2026-07-31 — read it before writing anything that replaces a blocking
+   body, wraps a command method, or creates a game-time thread); §2 carries the
+   F87 cold-boot rule; §4 has a drafted replacement awaiting the owner.**
 5. **`docs\REACHABILITY_AUDIT.md` — the "Challenge review 2026-07-30" at the end,
    before writing ANY new fix.** Tier vocabulary (R1/R2/R3/R4/U + `I`), the hard
    tells that distinguish a defect from designed behaviour, and two standing
@@ -370,7 +395,10 @@ functions; post-wrappers on command methods never run; `IsValid()` is falsy for
 ALL pure-Lua objects; **the shipped build IS Src** (2250/2256 byte-identical —
 keep apply-time self-checks anyway, they guard future patches); **a mod function
 blocked on a persisted game-time thread enters the save and survives uninstall**
-(F86); never modify the game directory; only the playtest flips statuses to
+(F86 — and the remedy ordering **3→2→1 is now binding, FIX_POLICY §3a**: patch a
+synchronous input over replacing a blocking body, never put mod code after a
+call that can block, `SaveGameStart` tear-down last and only with its own A/B +
+soak); never modify the game directory; only the playtest flips statuses to
 `tested`; mechanical repairs land with a re-verified A/B, redesigns go to the
 user; **no live UI-internals prototyping on the user's play sessions**. Commit
 with
