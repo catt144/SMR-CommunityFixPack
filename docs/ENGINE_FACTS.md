@@ -170,14 +170,69 @@ code suggests.
     GameVar, and one FIX_POLICY §3 does not currently name.
   * The orphaned closure runs in a world where its mod's globals are gone, so
     any reference to `SMRFixPack.*` inside it would index nil after uninstall.
-  * **UI windows are NOT affected** (XWindows are not savegame-persisted), and
-    **class tables are NOT affected** (restored as permanents by name). The
-    hazard is specifically *instances* that persist.
-  * ⚠️ **Unverified adjacent risk:** the same mechanism plausibly applies to
-    `GlobalGameTimeThreadFuncs[name]` replacements, because game-time threads
-    persist WITH their blocked stacks. `Fix_MeteorFrequency` patches that table.
-    **PT-20 (uninstall safety) must specifically check for a surviving mod
-    function**, not just "the game does not break".
+  * **UI windows are NOT affected** (XWindows are not savegame-persisted).
+  * ⚠️ **CORRECTED 2026-07-31 by PT-20 — the "class tables are NOT affected"
+    clause below was WRONG, and so was framing the hazard as "specifically
+    instances".** Class tables really are restored as permanents by name, and
+    that turns out not to protect anything: `Opt_DroneOverhaul` writes
+    `Drone.Idle` — a class-table write — and it leaked into the save anyway,
+    because the route is a **thread stack**, not the storage location. See the
+    entry immediately below.
+  * ~~Unverified adjacent risk~~ — **MEASURED 2026-07-31:**
+    `GlobalGameTimeThreadFuncs[name]` replacements do leak.
+    `Fix_MeteorFrequency` was caught red-handed (F86).
+
+- **THE REAL RULE (measured 2026-07-31, PT-20 — supersedes the framing above):
+  A SAVE CAPTURES EVERY GAME-TIME THREAD WITH ITS BLOCKED STACK, SO ANY MOD
+  FUNCTION SITTING BELOW A YIELD ON SUCH A THREAD GOES INTO THE SAVE.** The test
+  is not *where is this function stored* but:
+  > can it be executing, or blocked, below a `Sleep`/`WaitMsg`/`WaitWakeup` on a
+  > **game-time** thread at the moment the save is written?
+  * Serialisation is **by value**, not by name — a mod function is not in
+    `PersistGatherPermanents`. Writing a body with no upvalues does NOT make it
+    persist "by the global name it is written to"; that belief is in two of our
+    own file headers and is false.
+  * Each mod env is a permanent (`Mod.lua:1642-1644`,
+    `permanents["Mod/" .. mod.id] = mod.env`). With the mod gone it cannot
+    resolve and a **fallback table** is substituted
+    (`Unpersist missing permanent: Mod/<id> | Fallback permanent: table: …`), so
+    the orphan runs with an empty `_ENV` and every global lookup inside it fails.
+  * A save only captures **blocked** threads, so purely synchronous mod code —
+    data patches, getters, `Can…` predicates, UI handlers — can never be
+    captured. This is what bounds the hazard.
+  * **A proper Lua tail call (`return orig(...)`) removes our frame from the
+    stack**; calling `orig(...)` as a statement and then doing more work keeps it
+    there. That is the only structural difference between the wrapper that
+    leaked and the one that appears not to (believed, not yet measured).
+  * Real-time threads are unaffected — they are not persisted at all.
+  * Evidence, harm and the 12-module exposure list: **BUGS.md F86**.
+
+- **MODS *DO* GET A PRE-SAVE HOOK — `OnMsg.SaveGameStart` and
+  `OnMsg.SaveGameDone` reach mod code** (measured 2026-07-31 with a Test Kit
+  probe, alongside `OnMsg.LoadGame` as a positive control). **This corrects an
+  earlier recorded "fact" that mods have no save hook and that tidying up on
+  save is therefore impossible — it is possible.**
+  * `ModMsgBlacklist` (`CommonLua/Classes/Mod.lua:1430-1440`) blocks only
+    `PersistGatherPermanents`, `PersistLoad`, `PersistSave`,
+    `ModBlacklistPrefixes`, `ModBlacklistGather`, `DebugDownloadExternalMods`,
+    `DebugCopyExternalMods`, `PasswordChanged`,
+    `UnableToUnlockAchievementReasons`. `SaveGameStart` is not among them.
+  * `DoSaveGame` (`CommonLua/Savegame.lua:1037-1063`) fires
+    `Msg("SaveGameStart", params)` **before** the write and
+    `Msg("SaveGameDone", name, autosave, err, metadata)` after. Observed
+    `SavingGame=true` inside the handler.
+  * **Autosaves are the same path**: `SaveAutosaveGame` (`:1450-1453`) just sets
+    `params.autosave = true` and calls `DoSaveGame`. So the hook covers them —
+    and so does the leak. The `autosave` flag is visible to the handler
+    (a manual save logged `autosave=nil`).
+  * ⚠️ Consequence for any tear-down design: autosaves fire ~once a sol, so a
+    handler that *restarts* a long-interval loop would reset its timer forever.
+    Re-arm from a persisted deadline instead.
+
+- **`Wakeup(thread)` only wakes a thread sleeping in `WaitWakeup`** — not one in
+  `Sleep` (`CommonLua/LuaExportedDocs/Global/thread.lua:62-71`). There is no way
+  to shorten a `Sleep` already in flight; compressing the interval constant only
+  affects the *next* roll. Cost one wasted step in PT-20 before the doc settled it.
 - **TOOLING: never round-trip a doc through PowerShell 5.1 `Get-Content -Raw` +
   `WriteAllText`.** `Get-Content` without `-Encoding` decodes UTF-8 files as cp1252, so
   every `—`, `↔`, `≤` comes back double-encoded and the whole file shows as changed.

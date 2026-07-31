@@ -6,7 +6,33 @@ the user picks per task and everything here works identically on either.**
 moment another session commits. (The filename keeps its historical `FABLE_`
 prefix so existing references stay valid; nothing in it is model-specific.)
 
-Staleness check: this was written at **`bd8d831`**.
+Staleness check: this was written at **`84427e1`** + the PT-20 leg that follows it.
+
+> 🛑 **READ FIRST — PT-20 FAILED AND WE HAVE A P1 DEFECT OF OUR OWN. `BUGS.md`
+> F86, and it BLOCKS RELEASE.** Measured 2026-07-31: **pack code is written into
+> the player's savegame and keeps running after the mod is removed.** A save
+> captures every game-time thread **with its blocked stack**; a mod function
+> there is serialised by value and returns with an empty `_ENV`.
+> - Proven at two sites: **`Fix_MeteorFrequency`** — the colony's meteors stop
+>   **permanently** and do not self-heal — and **`Opt_DroneOverhaul`** (98
+>   errors/session, log-only harm) which leaked **with its own toggle OFF**.
+> - **The test is NOT "where is the function stored".** It is *can it be blocked
+>   below a `Sleep`/`WaitMsg`/`WaitWakeup` on a **game-time** thread when the save
+>   is written*. Synchronous code can never be captured, so ~62 of 74 modules are
+>   safe by construction; **12 are exposed** (list on the F86 entry).
+> - The 2026-07-31 audit's "class tables are safe" clearance is **void** —
+>   `Drone.Idle` is a class-table write and leaked anyway.
+> - **Nothing is built.** A three-layer redesign is proposed on the entry and is
+>   an **owner decision**.
+
+> 🆕 **AND A SECOND CORRECTION: MODS *DO* GET A PRE-SAVE HOOK.**
+> `OnMsg.SaveGameStart` / `SaveGameDone` reach mod code — measured, with
+> `OnMsg.LoadGame` as a positive control. Only `PersistSave`, `PersistLoad` and
+> `PersistGatherPermanents` are blacklisted (`Mod.lua:1430-1440`). **The recorded
+> "mods get no save hook / tidying up on save is unimplementable" fact was
+> wrong**, and the D06 cleanup-mod argument that rested on it has been corrected
+> in place. Autosaves are the same code path (one flag), so the hook covers them
+> — and so does the leak.
 
 > 🚧 **THERE ARE NOW TWO PROMPTS, AND THIS ONE DOES NOT DRIVE DRONE WORK.**
 > The drone project grew its own open design decision, its own frozen tests, and
@@ -39,25 +65,18 @@ Staleness check: this was written at **`bd8d831`**.
 > ⛔ **PT-52 A/B/B2 remain FROZEN** — they test D06 v1's design and the design is
 > unsettled. **PT-10 is explicitly NOT frozen** (F55, different subject).
 
-> 🆕 **A NEW ENGINE FACT WITH PACK-WIDE REACH — read it before writing any fix.**
-> `ENGINE_FACTS.md`: **a mod-authored closure stored on a persisted game object
-> goes into the savegame, survives the mod's removal, and KEEPS RUNNING.**
-> Measured — `rawget(obj, "GetPriorityForRequest")` returned a live function with
-> the module uninstalled, and it was still being *called*, **with zero errors in
-> the log**. Consequences: writing a function onto a game object is a
-> **permanent, un-removable modification to the player's save**; UI windows
-> (XWindows) and class tables are NOT affected; instances are.
-> **`Fix_MeteorFrequency` is the one unresolved site in the pack** (it patches
-> `GlobalGameTimeThreadFuncs.Meteors`, and game-time threads persist with their
-> stacks). **PT-20 now carries a mandatory step 5 that names it**, and *"it does
-> not break"* is no longer a sufficient PT-20 pass.
-
-> 💡 **ONE PACK-WIDE FACT FROM THE CLEANUP-MOD DISCUSSION — mods get NO SAVE
-> HOOK.** `PersistSave`, `PersistLoad` and `PersistGatherPermanents` are
-> blacklisted for mods (`Mod.lua:1430-1433`), and no mod can run after its own
-> removal. **Any design that assumes "we can tidy up on save" is impossible**,
-> not merely fragile. *(The cleanup-mod proposal that follows from this is
-> drone-owned — see the drone prompt. Not approved to build.)*
+> 🆕 **THE ENGINE FACT THAT STARTED IT — now superseded in scope by F86 above.**
+> A mod-authored closure on a persisted game object goes into the savegame,
+> survives removal and keeps running. **PT-20 proved the hazard is wider than
+> "instances":** the route is a persisted **thread stack**, so class-table writes
+> and `GlobalGameTimeThreadFuncs` replacements leak too. UI windows (XWindows)
+> remain genuinely safe — they are not savegame-persisted. Read the corrected
+> ENGINE_FACTS entries before writing any fix.
+>
+> **Still true and still load-bearing:** no mod can run after its own removal, so
+> residue already inside a player's save is unreachable by the pack. *(The
+> cleanup-mod proposal is drone-owned — see the drone prompt. Not approved to
+> build, and its "no save hook" justification has been corrected.)*
 
 > 🧭 **UNDECIDED, deliberately — a possible PACK SPLIT** (true fixes + a companion
 > mod holding the opt-ins). **Not owed, not scheduled, and it may not gate
@@ -101,6 +120,17 @@ account-persistent too.
 
 ## ▶️ Next session — the board, user picks
 
+> ⚠️ **F86 outranks everything on this list.** It blocks release, and items 1-2
+> are BUILDS — writing new fixes before the save-safety rules are settled risks
+> adding leak sites. Confirm the owner's intent before starting a build.
+
+0. **🛑 F86 — the save-safety redesign.** Owner decision owed on the three
+   layers (input-patching, the tail-call rule, `SaveGameStart` tear-down). Two
+   cheap measurements are owed first and both are quick: **(a)** does
+   `Fix_ShelterReflex` stay off the stack via its proper tail call — if yes, the
+   whole wrapper class collapses into a coding rule; **(b)** does reinstalling
+   the pack heal a damaged save (our `LoadGame` restarts the thread), which
+   decides what we tell an affected player.
 1. **⭐ D10 — workshops module BUILD.** Speced, user-approved, game-free, un-gated
    (PT-56 passed). Full spec on the D10 BUGS entry: T1 text repairs + T2 capacity
    dial (base/+50%/+100%, `max_workers` AND `consumption_amount` **PAIRED**).
@@ -111,11 +141,15 @@ account-persistent too.
    blocks the cohort delivery it exists to protect. Never expel to the surface.
    **Sequencing: D10 and D12 both touch colonist assignment — land them
    separately, each with its own A/B, never entangled.**
-3. **PT-20 — promoted.** It now has a **named suspect** (`Fix_MeteorFrequency`)
-   and a mandatory step 5. It also needs the pack DISABLED, so bundle **F74** and
-   **F53(a)** from the needs-eyes list into the same sitting.
+3. ~~**PT-20**~~ — **RUN 2026-07-31: steps 1-4 PASS, step 5 FAIL → F86.** Its
+   remaining work is item 0. **F74 and F53(a) are NO LONGER bundled with it** —
+   a pack-lineage save is not a vanilla control, so they need a colony that has
+   never had the pack installed (a fresh 10-minute save covers both).
 4. **PT-53 Trigger E** — the last thing between D07 and `tested`.
-5. **PT-54** — wave-6 disaster fixes; the live 194-sol save is the fixture.
+5. **PT-54** — wave-6 disaster fixes. ⚠️ **The "live 194-sol save" named here is
+   GONE** (owner, 2026-07-31). The current long-running fixtures are `test 2i`
+   (288 sols) and `test 2e`-`2h` (~150-250 sols); `PT-20TEST`/`PT-20TEST-B` are
+   the F86 evidence saves and should not be played on.
 6. **Checklist §6 needs-eyes riders** — cheap single observations; the genuinely
    new ones are **F34(d)**, **F74**, **F06** and F11's console read.
 7. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then

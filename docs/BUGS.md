@@ -112,6 +112,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
+| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **MEASURED** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), 10 more at risk. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE** — FIX_POLICY §3 (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -137,6 +138,45 @@ DustStorm.lua:413, DustDevils.lua:189, surface quake Marsquake.lua:43). Matches 
 Paradox-forum report. **Fix:** wrap FUNC slot (index 3) of `PeriodicRepeatInfo["UndergroundMarsquake"]`.
 
 ### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed: Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL; REWORKED 2026-07-26 with a stall watchdog + forensics; PT-01 silence ROOT CAUSE PINNED 2026-07-29 to F78 (wedged storm held the scheduler) + F81 (stranded prediction flag gated all weather), wave-6 fixes shipped — see the resolution note at the entry's end]`
+
+> 🔬 **ROOT CAUSE SHARPENED 2026-07-31 — it is not "a dead `if`", it is a
+> COLLAPSED POLLING LOOP, and the `Min` is not the bug.**
+> The broken first phase (`Meteors.lua:280-283`) is a fossil of the loop that
+> still exists intact **40 lines below in the same file**, in `MeteorStorm`
+> (`:319-341`): same `start_time`, same `GameTime() - start_time > X - warning_time`
+> test, same magic `Sleep(5000)`. In the sibling that `Sleep(5000)` is the poll
+> interval at the **bottom of a `while`**, and the `if` is the early exit that
+> issues the warning and `break`s. In the meteor version the `while` is gone and
+> the loop **body** has been pulled inside the `if`. Because `start_time` is
+> assigned and read with no yield between, `GameTime() - start_time` is always 0
+> and the test degenerates to `warning_time > spawn_time`, deciding nothing but a
+> pointless five-second nap.
+> - **The intended shape** (identical in `DustDevils.lua:168-173`) is a two-phase
+>   wait whose total is always `spawn_time`: `Sleep(spawn - warning)` then
+>   `Sleep(Min(spawn, warning))`. **`Min(spawn_time, warning_time)` is the correct
+>   clamp** for when warning exceeds spawn — DustDevils has it verbatim. It only
+>   looks like the bug because with phase 1 deleted it became the whole interval.
+> - **Why the symptom inverts with tower count.** Interval = `Min(spawn, warning)`
+>   and `GetDisasterWarningTime` = `Min(base + 12h × towers, 75h)`. No towers →
+>   ~6 h between strikes (catastrophic). Several towers → 65-75 h, i.e. towers
+>   **accidentally repair the cadence**. The players actually harmed are early
+>   colonies with no Sensor Towers; a tower-rich late colony reads as "meteors
+>   are rare", which is why the 2026-07-31 PT-20 fixture showed 75 h.
+> - **Sensor towers contribute NOTHING to single-meteor warning, and that is
+>   designed.** The "Incoming Meteor" notification is preset `MeteorImpact`,
+>   raised only by `BaseMeteor:Predict()` (`Meteors.lua:430-441`) off
+>   `meteors.prediction_time` — default **30 game seconds**, help text *"time
+>   before appearance to be able to register a mark on the ground FX"* — which
+>   does not scale with towers. `AddDisasterNotification` appears in `Meteors.lua`
+>   only in the two **storm** paths (`:179`, `:328`). So there is no deleted
+>   warning to restore: restoring phase 1 restores the *cadence* and nothing else
+>   observable. **Owner decision 2026-07-31: 30 seconds is adequate for a single
+>   meteor's risk; tower-scaled meteor warning is a FEATURE and is declined.**
+> - **Consequence for the rewrite (see F86).** The fix needs no body of its own:
+>   make `GetDisasterWarningTime` return `Max(orig, spawntime + spawntime_random)`
+>   for the meteor descriptor and vanilla's own `Min` becomes `spawn_time`. That
+>   also removes the tower dependence as a side effect rather than as a second
+>   fix. `Fix_MeteorFrequency`'s current body is an F86 leak site and must go.
 
 **PT-01 FAIL (2026-07-25, user confirmed NO reloads):** Variant B, max-threat map.
 Natural strikes at ~sol 5.5, 7.5 (+60h), 8.4 (+39h), 10.3 (+39h); 3 Sensor Towers built
@@ -4048,6 +4088,138 @@ real, the audit's §7.3 names the shape: move each consequence into a game-time
 thread and let the real-time side only present UI — per site, no shared-
 machinery surgery.
 
+### F86 — OUR OWN DEFECT: pack code blocked on a persisted game-time thread is written INTO the player's savegame and keeps running after the mod is removed (P1, MEASURED)  `[open — filed 2026-07-31 by PT-20; BLOCKS RELEASE (FIX_POLICY §3); redesign proposed, nothing built]`
+
+**This is a defect in this pack, not in the game.** Found by executing PT-20's
+mandatory step 5 for the first time. It is measured, not inferred, and it
+reproduces identically whether the pack is *disabled in the Mod Manager* or
+*physically removed from disk*.
+
+**Mechanism.** A savegame captures every game-time thread **together with its
+blocked stack** (ENGINE_FACTS). A mod function is not in
+`PersistGatherPermanents`, so it is serialised **by value** — bytecode, upvalues
+and all — not by name. Each mod's environment is registered as a permanent
+(`Mod.lua:1642-1644`, `permanents["Mod/" .. mod.id] = mod.env`); with the mod
+gone that permanent cannot resolve, and unpersist substitutes a fallback table:
+
+```
+Unpersist missing permanent: Mod/SMR_CommunityFixPack | Fallback permanent: table: … [7]
+```
+
+The orphaned function therefore comes back **runnable**, with its `_ENV` replaced,
+so every global lookup inside it — `SMRFixPack` included — resolves to nothing.
+
+**The test that found it.** `PT-20TEST`, cut from the 288-sol `test 2i` colony.
+The meteor descriptor's `spawntime` was compressed to 2 h and the thread
+restarted, so its next wake was bounded and known; saved at sol 290 with the
+thread parked in `Sleep`. Loaded with the pack gone.
+
+**Site 1 — `Fix_MeteorFrequency`, the global `Meteors` game-time thread.** The
+thread arrived **alive**, finished vanilla's `MeteorsDisaster`, returned into our
+frame and died:
+
+```
+[LUA ERROR] attempt to index a nil value (global 'SMRFixPack')
+  Mod/SMR_CommunityFixPack/Code/Fix_MeteorFrequency.lua(106):   <>
+Locals:
+   meteors | object MapSettings_Meteor 'Meteor_Low'
+   spawn_time | number 60000      <-- the values WE injected before saving
+   hit_time   | number 60000
+```
+
+The locals are conclusive: that stack frame, with its local variables, came out
+of the savegame. **Player harm: the colony never gets another meteor.** It does
+not self-heal — a save written after the death carries the dead thread, and
+`_fixup.lua:54-55` only rebuilds a global GT thread when the save carries
+*nothing* for that name (confirmed on a second save, `IsValidThread` returns no
+value on load).
+
+**Site 2 — `Opt_DroneOverhaul`, drone command threads.** 98 errors per short
+session, `Opt_DroneOverhaul.lua(96)` ← `(190)` ← `sprocall` ←
+`CommandObject.lua(246)`. Harm is log noise only: line 188 calls
+`orig_idle(self)` first, so vanilla's `Idle` completes before line 190 throws,
+and drones behave normally (observed at the keyboard). **Two things this proves
+that matter more than the noise:** the module's own **opt-in toggle was OFF**
+(the wrapper installs at file scope and only early-returns), so *any save made
+while the pack is merely installed carries pack code; and it reached the save
+through a **class-table** write (`Drone.Idle`), which the 2026-07-31 audit had
+cleared as safe.
+
+**What this overturns.** The audit asked *where is the function stored* and
+cleared class tables ("restored as permanents by name") and UI windows. That is
+true of the table and irrelevant to the outcome — the route into the save is a
+**thread stack**. The correct test is:
+
+> **Can this function be executing, or blocked, below a yield
+> (`Sleep`/`WaitMsg`/`WaitWakeup`) on a GAME-TIME thread when the save is
+> written?**
+
+A save captures only *blocked* threads, so synchronous code — data patches,
+getters, UI handlers, `Can…` predicates — can never be captured. That bounds the
+problem: **~62 of 74 modules are safe by construction.**
+
+**Exposure list (12 modules).** Proven: `Fix_MeteorFrequency`,
+`Opt_DroneOverhaul`. High, same shape, unmeasured — all default-active:
+`Fix_RainsDeadlock` (its `fixed_loop` is written to the global
+`RainsDisasterLoop` and is blocked in our body nearly always),
+`Fix_ArrivalDeaths` (`Colonist:Arrive` command + its own `Sleep`),
+`Fix_TrainWaitTime` (`Colonist:BoardVehicle`), `Fix_TrainCargoDumping`
+(`Train:UnloadAll`), `Fix_BombardmentSpread` (replaces the blocking
+`WaitBombard`). At risk while their own threads live:
+`Fix_MeteorStormWedge`, `Fix_CrystalMysteryHang`, `Fix_ExtenderFlapChurn`,
+`Fix_TrackConnectorPingPong`. **Believed safe but must be measured:**
+`Fix_ShelterReflex` — it wraps `Colonist:Idle` but ends `return orig_idle(self, ...)`,
+a **proper Lua tail call**, which replaces our frame rather than keeping it.
+That single difference is the only thing distinguishing it from the proven drone
+leak.
+
+**The defence the pack already tried, and why it failed.** Both leaking files
+say in their own headers that avoiding upvalues makes the thread safe —
+`Fix_MeteorFrequency:51-54` ("the persistence shape the engine has already
+proven it handles") and `Fix_RainsDeadlock:51-52` ("threads suspended inside it
+persist **by the global name** this function is written to"). Persist does not
+resolve mod functions by name. Avoiding upvalues only made the serialised
+function smaller.
+
+**Proposed remedy — three layers, none built, owner decision owed.**
+
+1. **Patch a synchronous input instead of replacing a blocking body** (best;
+   zero savegame footprint). Worked example for F02 below.
+2. **Tail-call rule for wrappers** — do all work *before* the call and finish
+   `return orig(...)`; never work after a call that can block. Move genuine
+   post-work (D06's moonlighting) out of the command body into a message hook.
+3. **`OnMsg.SaveGameStart` tear-down / `SaveGameDone` rebuild** for what 1 and 2
+   cannot reach. **This is newly possible — see the ENGINE_FACTS correction: the
+   "mods get no save hook" fact was wrong.** ⚠️ **Trap:** autosaves are the same
+   `DoSaveGame` path (`Savegame.lua:1450-1453`, one flag), so they fire roughly
+   once a sol; a tear-down that *restarts* a loop would reset a 35–115 h meteor
+   timer before it ever expired — reintroducing PT-01's permanent-silence
+   signature from our own code. Any tear-down must **re-arm from a persisted
+   deadline**, never restart blind.
+
+**Worked example — F02 needs no body at all.** Vanilla's interval is
+`Min(spawn_time, warning_time)` (`Meteors.lua:291-292`). Wrap
+`GetDisasterWarningTime` (a synchronous global, `MapSettings.lua:94`, never on a
+blocked stack) to return `Max(orig, spawntime + spawntime_random)` for the meteor
+descriptor; `Min` then equals `spawn_time` and **vanilla's own body** produces the
+designed 35–115 h schedule. The PT-01 watchdog splits out as a second, also
+save-safe module: vanilla emits `Msg("MeteorDone")` (`Meteors.lua:388`), so it can
+time strikes from `OnMsg`, check `IsValidThread(Meteors)` on `NewDay`, and
+`RestartGlobalGameTimeThread("Meteors")` — which now restarts *vanilla's* body.
+
+**Controls run.** Junction physically removed (`1 mods installed`, Test Kit only)
+reproduced the mod-manager result to the error count — 98 vs 98, same single
+meteor error, same injected locals — the only difference being the engine's own
+wording (`present, but not loaded` → `not present`). Steam verify / reinstall
+rungs were judged unnecessary: no game-install state can invent our injected
+`spawn_time 60000` inside our own function's frame.
+
+**Not a defect (owner decision 2026-07-31):** single meteors' ~30-second
+`Predict()` marker is adequate warning for the risk a single meteor poses.
+Sensor towers extending single-meteor warning would be a **feature**, not a
+repair, and is declined. See the F02 root-cause note for why towers currently
+affect meteor *frequency* instead.
+
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
 commit `21b92cb` had spliced F84's text into this heading, leaving D06's whole
@@ -4252,15 +4424,27 @@ complete and the experiments ran after it.
 > you must run this once after you remove our mod, and it will do a full cleanup.
 > And whats better it allows us to safely cleanup anything in the future."*
 >
-> **Why it works, mechanically.** The blocker was absolute: mods get **no save
+> ⚠️ **CORRECTED 2026-07-31 (PT-20 leg) — THE PREMISE BELOW IS FALSE AND THIS
+> ARGUMENT NEEDS RE-MAKING.** Mods **do** get a pre-save hook:
+> `OnMsg.SaveGameStart` and `OnMsg.SaveGameDone` reach mod code (measured, with
+> `OnMsg.LoadGame` as a positive control). Only `PersistSave`, `PersistLoad` and
+> `PersistGatherPermanents` are blacklisted — `SaveGameStart` is not in
+> `ModMsgBlacklist` (`Mod.lua:1430-1440`), and `DoSaveGame` fires it before the
+> write (`Savegame.lua:1043`). **A tear-down-on-save / rebuild-on-load scheme is
+> therefore implementable**, and the sentence below calling it "unimplementable"
+> was wrong. That does not by itself kill the cleanup mod — a tear-down cannot
+> reach residue already sitting in saves the player has, and it cannot rewind
+> another thread's stack — but the cleanup mod can no longer be justified as
+> *the only thing that can occupy that window*. Full detail: ENGINE_FACTS + F86.
+>
+> **Why it works, mechanically.** ~~The blocker was absolute: mods get **no save
 > hook** (`PersistSave`/`PersistLoad`/`PersistGatherPermanents` are blacklisted,
-> `Mod.lua:1430-1433`), and no mod code can run after its own removal — so a
-> save's mod-shaped residue is unreachable. **A second mod is the one thing that
-> can occupy that window.** It runs on `OnMsg.LoadGame` — the hook we definitely
-> have — in a world where the pack is already gone. It also makes the owner's
-> discarded alternative unnecessary: a tear-down-on-save / rebuild-on-load scheme
-> is not merely fragile, it is **unimplementable**, because the save hook does
-> not exist.
+> `Mod.lua:1430-1433`), and no mod code can run after its own removal~~ — the
+> surviving half of that claim is that **no mod code can run after its own
+> removal**, which is still true, so a save's mod-shaped residue is unreachable
+> *by the pack itself*. **A second mod is the one thing that can occupy that
+> window.** It runs on `OnMsg.LoadGame` — in a world where the pack is already
+> gone.
 >
 > **Three conditions it must meet — recorded so they are not discovered late:**
 > 1. **It is a remedy, not a guarantee.** The player has already removed the
@@ -4293,8 +4477,10 @@ complete and the experiments ran after it.
 >   and hope everyone updates".
 > - **It preserves the ethos rather than relaxing it.** The standing rule stays
 >   *make the mod clean*; the cleaner is for the cases where we hit a genuine
->   brick wall — as here, where mods have **no save hook at all** — not a general
->   permission to leave residue.
+>   brick wall — ~~as here, where mods have **no save hook at all**~~ **(that
+>   example is retired: we DO have `SaveGameStart`, see the correction above; the
+>   surviving brick wall is residue already inside saves the player already
+>   holds)** — not a general permission to leave residue.
 >
 > **Scope control:** this is a NEW SHIPPED ARTIFACT. It is owed *with the
 > overhaul*, not with launch, and must not drift into a separate project

@@ -55,7 +55,7 @@ protocol.
 2. Any **`[LUA ERROR]`** block whose stack mentions a file under `SMR-BugFixPack\Code\`.
 3. Any `[LUA ERROR]` in shipped game code that you did **not** see in a vanilla session
    — note the file:line even if it looks unrelated to us.
-4. `SMRFixPack.ListFixes` output at load: **all 67 default fixes should read
+4. `SMRFixPack.ListFixes` output at load: **all 68 default fixes should read
    `active`** (plus whichever opt-in modules you have toggled ON). Any other
    `inactive`/`error` line means a fix silently self-deactivated (its apply()
    self-check failed) — that is a FAIL and needs reporting with the reason string.
@@ -903,13 +903,51 @@ Re-enable the fix pack before continuing.
 > by name rather than serialised as instance data. **`Fix_MeteorFrequency` is the
 > only unresolved one.**
 
-`Result (steps 1-4):` _____________________________________________
+`Result (steps 1-4):` **PASS 2026-07-31** — `PT-20TEST` (cut from the 288-sol
+`test 2i`, saved at sol 290) loaded and played normally with the pack gone. No
+missing-class/missing-function errors on load, colony fully functional, drones
+observed operating normally (they resumed work the moment construction was
+ordered). The save is not corrupted and is not held hostage.
 
-`Result (step 5 — surviving pack code):` _____________________________________________
+`Result (step 5 — surviving pack code):` 🛑 **FAIL 2026-07-31 — SURVIVING PACK
+CODE MEASURED AT TWO SITES. Filed as `BUGS.md` F86 (P1, blocks release).**
+`Fix_MeteorFrequency.lua(106)` errored on a nil `SMRFixPack` with **our injected
+locals still in its frame** (`spawn_time 60000`), killing the `Meteors` thread —
+that colony gets no further meteors, and it does not self-heal.
+`Opt_DroneOverhaul.lua(190)` threw 98 times in one short session via drone
+command threads (`CommandObject.lua:246` → `sprocall`), **with its own opt-in
+toggle OFF**. Harm there is log-only (line 188 runs vanilla's `Idle` first).
+
+> **PROCEDURE CORRECTIONS EARNED BY RUNNING THIS TEST — read before the next run.**
+> - **Step 2's "disable in the Mod Manager" is now MEASURED equivalent to a real
+>   uninstall** for this hazard. Both were run against the same save file: 98 vs
+>   98 `Opt_DroneOverhaul` errors, the same single `Fix_MeteorFrequency` error
+>   with the same locals. The only difference is the engine's own wording
+>   (`present, but not loaded` → `not present`). Either method is valid; say
+>   which one you used.
+> - **The suggested `GlobalGameTimeThreadFuncs.Meteors` read is NOT decisive** —
+>   that table is rebuilt from vanilla at load, so it reads clean whether or not
+>   the body leaked. Do not treat a clean read as a pass.
+> - **`debug.getinfo` is unavailable** (mod sandbox — ENGINE_FACTS, and it is why
+>   the `[install]` probes SKIP). No introspection reads.
+> - **`Wakeup(Meteors)` does NOT shorten a `Sleep`** — it only wakes
+>   `WaitWakeup` sleepers (`thread.lua:62-71`). Do not plan around it.
+> - **What DID work, and is the recommended method:** compress the next roll
+>   (`local d = GetMeteorsDescr() d.spawntime = 60000 d.spawntime_random = 0`)
+>   then `RestartGlobalGameTimeThread("Meteors")`, confirm the phase advances to
+>   `long-sleep-done`, pause, save. The wake is then bounded to ~2 game hours, so
+>   a null result is interpretable instead of "maybe it hasn't woken yet".
+> - **Take a positive control with the pack ON before saving.** It is what caught
+>   the dead `Wakeup` approach before it could produce a false pass.
+> - **The `rawget` spot-check needs a discriminator, not a presence test.**
+>   `rawget(b, "GetPriorityForRequest")` returns a function on **192** buildings
+>   in a healthy vanilla colony — `RequiresMaintenance.lua:94` flattens it onto
+>   every instance that does not require maintenance. Comparing against the class
+>   value false-positived on all 192 too. Presence proves nothing here.
 
 ## PT-21 — Long-save soak
 
-**Setup:** any healthy colony (SAVE-A or the live colony is fine). All **67
+**Setup:** any healthy colony (SAVE-A or the live colony is fine). All **68
 default fixes** active (incl. `DroneStatDials`, active-at-base) — confirm with
 `SMRFixPack.ListFixes` (opt-in modules read `inactive` unless you enabled
 them).
@@ -990,8 +1028,15 @@ them while you are there rather than scheduling anything. The genuinely new
 ones are **F34(d)**, **F74** and **F06**, plus **F11**'s console read.
 
 **Two of these are "does the vanilla harm exist at all" checks** (F74, F53(a)),
-and they need the pack **disabled** to be meaningful. Bundle them into the next
-PT-20 uninstall-safety sitting, which already runs with the pack off.
+and they need the pack **disabled** to be meaningful. ~~Bundle them into the next
+PT-20 uninstall-safety sitting~~ — **that bundling is RETIRED as of 2026-07-31,
+and the reason is F86.** They were attempted in the PT-20 leg and dropped
+unrun: a save whose colony has ever been played with the pack installed carries
+pack code on its persisted thread stacks, so **turning the pack off does not
+produce a vanilla control.** These two rows need a colony that has **never** had
+the pack installed — a fresh ten-minute save is enough for both, and it is the
+only true negative control the project has. Do not record a reading for them
+taken on a pack-lineage save.
 
 `Results (record per fix, with the date):` _____________________________________________
 

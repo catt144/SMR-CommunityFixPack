@@ -8,6 +8,146 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## 🛑 PT-20 FAILED — WE LEAK EXECUTABLE CODE INTO PLAYER SAVES (F86, P1, blocks release) — 2026-07-31 late (live sitting, owner at the keyboard)
+
+Started from `docs/FABLE_NEXT_PROMPT.md` at `84427e1`. The plan was PT-20 plus
+the F74/F53(a) riders. PT-20's steps 1-4 passed; **step 5 — executed for the
+first time — found a P1 defect in our own pack**, and the riders were dropped
+because the leg proved they cannot be run on this colony at all.
+
+### 1. Setting the trap (the part that made the answer interpretable)
+
+`PT-20TEST` cut from the 288-sol `test 2i`. Positive-control reads with the pack
+ON: `MeteorFrequency` `active`, `IsValidThread(Meteors)` `true`, heartbeat phase
+`rolled`. Descriptor read: spawn 65 h (+0-25 h), warning **75 h — capped**, i.e.
+this colony is tower-rich.
+
+**Two dead ends, both killed by controls before they could produce a false pass:**
+- `debug.getinfo` — proposed as an instant read of the thread's body. It is
+  **unavailable in the mod sandbox**, which `ENGINE_FACTS.md:69` already recorded
+  and the Test Kit logs on every boot (`no debug.getinfo … [install] probes will
+  SKIP`). Should have come from the facts file; cost one console line.
+- `Wakeup(Meteors)` — proposed to force the in-flight `Sleep` to resume. **It
+  only wakes `WaitWakeup` sleepers** (`thread.lua:62-71`). The positive control
+  (phase still `rolled` afterwards) caught it immediately.
+
+**What worked:** compress the next roll to 2 h (`GetMeteorsDescr()` returns a
+live preset table — `TerraformingDisasters.lua:54-99` returns `original` or a
+sibling, no copy), `RestartGlobalGameTimeThread("Meteors")`, confirm the phase
+advances to `long-sleep-done`, pause, save at sol 290. The next wake is then
+bounded to ~2 game hours, so a null result would have been *interpretable*
+rather than "maybe it hasn't woken yet".
+
+### 2. The result — F86
+
+Pack disabled in the Mod Manager, save reloaded:
+
+```
+[LUA ERROR] attempt to index a nil value (global 'SMRFixPack')
+  Mod/SMR_CommunityFixPack/Code/Fix_MeteorFrequency.lua(106):   <>
+Locals:  spawn_time | number 60000     <-- the value WE injected before saving
+         hit_time   | number 60000
+```
+
+Our stack frame, with our local variables, came back out of the savegame. The
+`Meteors` thread then died: **that colony gets no more meteors, permanently**,
+and a save written afterwards carries the dead thread (`_fixup.lua:54-55` only
+rebuilds when the save carries *nothing* for the name), so it does not self-heal.
+
+Alongside it, **98** errors from `Opt_DroneOverhaul.lua(190)` via drone command
+threads — **with its own opt-in toggle OFF**, because the wrapper installs at
+file scope and only early-returns. Harm there is log-only: line 188 runs
+vanilla's `Idle` to completion first, and drones were observed working normally.
+
+**Mechanism:** a save captures every game-time thread **with its blocked stack**;
+a mod function is serialised **by value** (not in `PersistGatherPermanents`), and
+each mod env is a permanent (`Mod.lua:1642-1644`) which cannot resolve after
+removal — `Unpersist missing permanent: Mod/SMR_CommunityFixPack | Fallback
+permanent: table` — so the orphan runs with an empty `_ENV`.
+
+**This voids an audit clearance.** The 2026-07-31 audit asked *where is the
+function stored* and cleared class tables. `Drone.Idle` is a class-table write
+and leaked anyway. The route is the stack, not the storage.
+
+### 3. Controls (owner-directed escalation ladder)
+
+Rung 1 — junction physically removed (`1 mods installed`, Test Kit only) —
+**reproduced identically against the same save file**: 98 vs 98 drone errors, the
+same single meteor error with the same locals; the only difference was the
+engine's wording (`present, but not loaded` → `not present`). Rungs 2-3 (Steam
+verify, reinstall) were stood down by agreement: no game-install state can invent
+our injected `spawn_time 60000` inside our own frame. A repo backup was taken to
+`B:\Dev mod backup\2026-07-31_pre-uninstall-test` (both mods, byte-verified)
+before the junction was touched; junction restored afterwards.
+
+**A false alarm worth keeping:** a `rawget` sweep found `GetPriorityForRequest`
+on **192 buildings**. That is vanilla — `RequiresMaintenance.lua:94` flattens it
+onto every instance that does not require maintenance (26 distinct per-class
+functions, none equal to the base). Neither mod writes that member. Presence-based
+orphan detection is useless here, and comparing against the class value
+false-positived on all 192 — which hardens the cleanup mod's "leave identifiable
+markers" condition with a failed attempt rather than a theory.
+
+### 4. A second, independent finding — MODS DO GET A SAVE HOOK
+
+`ModMsgBlacklist` (`Mod.lua:1430-1440`) blocks only `PersistSave`, `PersistLoad`,
+`PersistGatherPermanents` and five non-save messages. A Test Kit probe
+(`97_SaveHookProbe.lua`, temporary) proved it, with `OnMsg.LoadGame` as a
+positive control:
+
+```
+[SMRTest][savehook] LoadGame FIRED (positive control)
+[SMRTest][savehook] SaveGameStart FIRED — params=table: … SavingGame=true
+[SMRTest][savehook] SaveGameDone FIRED — name=savesavetest.savegame.sav autosave=nil err=false
+```
+
+**This falsifies the recorded "mods get no save hook / tidying up on save is
+unimplementable" fact** in `STATUS.md` and the D06 cleanup-mod argument, both now
+corrected. Autosaves are the same path (`SaveAutosaveGame` sets one flag and
+calls `DoSaveGame`, `Savegame.lua:1450-1453`) — so the hook covers them, and so
+does the leak. ⚠️ Which is also the trap: autosaves fire ~once a sol, so a
+tear-down that *restarts* a long loop would reset a 35–115 h timer forever,
+recreating PT-01's silence from our own code. Re-arm from a persisted deadline.
+
+### 5. F02's root cause, sharpened (owner asked)
+
+Not "a dead `if`" — a **collapsed polling loop**. The fossil in
+`Meteors.lua:280-283` is the loop that still exists intact 40 lines below in
+`MeteorStorm` (`:319-341`): same `start_time`, same comparison, same `Sleep(5000)`,
+but with the `while` removed and the loop body pulled inside the `if`.
+`Min(spawn_time, warning_time)` is **not** the bug — it is the correct clamp, and
+`DustDevils.lua:171` has it verbatim. Consequences: towers *accidentally repair*
+the cadence (no towers → 6 h; several → 65-75 h), and sensor towers contribute
+nothing to single-meteor warning because that comes from `Predict()` /
+`prediction_time` (30 game seconds, tower-independent). **Owner decision: that 30
+seconds is adequate; tower-scaled meteor warning is a feature and is declined.**
+
+### 6. What this costs us
+
+- **F86 blocks release** (FIX_POLICY §3 — the pack must never hold a save hostage).
+- **12 modules exposed**, ~62 safe by construction (synchronous code cannot be
+  captured — a save only captures *blocked* threads). Full list on the F86 entry.
+- **`Fix_ShelterReflex` is the one to measure next**: it wraps `Colonist:Idle`
+  like the drone leak but ends `return orig_idle(self, ...)`, a proper tail call,
+  which should replace our frame. If that holds, it becomes a cheap coding rule
+  for the whole wrapper class.
+- **F74 and F53(a) are un-runnable on this colony** and the PT-20 bundling is
+  retired: any save whose colony was ever played with the pack installed carries
+  pack code, so switching the pack off does **not** produce a vanilla control.
+  They need a colony that has never had the pack — a fresh 10-minute save.
+- **Redesign proposed, nothing built, owner decision owed**: patch synchronous
+  inputs instead of replacing blocking bodies (F02 then needs no body at all), a
+  tail-call rule for wrappers, `SaveGameStart` tear-down for the remainder.
+
+### 7. Housekeeping
+
+Junction restored and verified (75 `Code/` files through the link) — **the pack
+is still unticked in the Mod Manager and must be re-enabled**. The temporary
+`97_SaveHookProbe.lua` is still armed in the Test Kit (local-only, never ships)
+and should be removed once the autosave firing is confirmed on the keyboard.
+
+---
+
 ## ALL FOUR DRONE RESEARCH GATES ANSWERED + F83 `tested` — 2026-07-31 (live playtest sitting, owner at the keyboard)
 
 Started from `docs/FABLE_NEXT_PROMPT.md` at `4d0d453`. Two jobs came in ahead of

@@ -51,11 +51,35 @@ with **PHASE 4 COMPLETE** (below).
 > step 5** that names it. "It does not break" is no longer a sufficient PT-20
 > pass.
 >
-> 💡 **THE CLEANUP MOD is the plan of record for the uninstall problem** (D06
-> entry) — mods get **no save hook at all** and cannot run after their own
-> removal, so a second mod is the only thing that can occupy that window. Owner
-> frames it as a **beta response channel**. **Not approved to build**; owed with
-> the overhaul, not with launch.
+> 💡 **THE CLEANUP MOD** (D06 entry) — owner frames it as a **beta response
+> channel**. **Not approved to build**; owed with the overhaul, not with launch.
+> ⚠️ **Its stated justification was corrected 2026-07-31:** the claim that mods
+> get *no save hook at all* is **false** — `OnMsg.SaveGameStart` /
+> `SaveGameDone` reach mods (measured; only `PersistSave`/`PersistLoad`/
+> `PersistGatherPermanents` are blacklisted). A tear-down-on-save scheme is
+> implementable after all. What survives is that no mod can run after its own
+> removal, so residue *already inside a player's saves* still needs someone else
+> to clean it.
+
+> 🛑 **PT-20 FAILED 2026-07-31 — WE HAVE A P1 DEFECT OF OUR OWN, AND IT BLOCKS
+> RELEASE. See `BUGS.md` F86.** Executing PT-20's step 5 for the first time
+> measured **pack code being written into the player's savegame and still
+> running after the mod is removed**. Two sites proven live:
+> `Fix_MeteorFrequency` (the colony's meteors stop **permanently** and do not
+> self-heal) and `Opt_DroneOverhaul` (98 errors/session, log noise only — and it
+> leaked with **its own opt-in toggle OFF**). Ten more modules are exposed.
+> - **The route is a THREAD STACK, not a storage location.** A save captures
+>   every game-time thread with its blocked stack; a mod function there is
+>   serialised by value and comes back with an empty `_ENV`. The audit's
+>   "class tables are safe" clearance is void — `Drone.Idle` is a class-table
+>   write and leaked anyway.
+> - **Synchronous code cannot be captured**, so ~62 of 74 modules are safe by
+>   construction.
+> - Controls: reproduces identically with the pack *disabled* and with the
+>   junction *physically removed* (98 vs 98 errors, same locals).
+> - **Redesign proposed, nothing built, owner decision owed** — patch synchronous
+>   inputs instead of replacing blocking bodies (F02 needs no body at all), a
+>   tail-call rule for wrappers, and `SaveGameStart` tear-down for the rest.
 
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
