@@ -77,11 +77,17 @@ founder popup (unrelated to F23/PT-44; not caused by this pack), isolated at the
 keyboard, and confirmed by a controlled quicksave/reload leg. Six of the seven
 affected call sites are cosmetic; **the seventh is `FirstAsteroid`, whose
 callback grants three Micro-G Auto Extractor prefabs that the popup's own text
-promises and `show_once` never re-offers.** That consequence is *inferred* from
-identical code shape and is NOT yet observed — **PT-58** is owed and gates any
-fix. Fix design is a **user decision** (recommended: decouple the asteroid grant
-from the popup via an additive `OnMsg.SpawnedAsteroid`; a general popup-waiter
-repair is not recommended). Full trail on the F83 entry.
+promises and `show_once` never re-offers.** **PT-58 RAN AND PASSED the same day
+and the consequence is now OBSERVED, not inferred:** one purpose-built fixture,
+one variable, **1/1/1 answered without a reload vs 0/0/0 answered after one**.
+The notification survives the load, opens normally, and grants nothing. **The
+gate on a fix is therefore CLEARED** and the design is a **user decision**
+(recommended: decouple the asteroid grant via an additive
+`OnMsg.SpawnedAsteroid` behind its own flag — smallest surface, and PT-58 is its
+ready-made A/B; a general popup-waiter repair is not recommended). Still
+untested: the second consequential site, `ReconCenterDiscoveryAsteroid`'s paid
+Detailed Scan, which needs a Recon Center holding Electronics. Full trail on the
+F83 entry.
 
 **Open user decisions:** Phase 4 go/no-go (core helpers, module merges,
 deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half

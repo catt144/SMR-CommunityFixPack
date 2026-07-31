@@ -633,53 +633,6 @@ path is exactly the case that was broken. Test that path deliberately.
 
 ## Any-save items (live colony or any healthy save)
 
-### PT-58 — First Asteroid prefabs survive a reload? · settles **F83** (NEW 2026-07-30)
-
-**Needs a save with `UIColony.asteroid_count == 0` — check it first
-(`UIColony.asteroid_count`), because the FirstAsteroid popup is `show_once` and a
-save that has already met an asteroid cannot test it.** A second popup,
-`ReconCenterDiscoveryAsteroid`, fires on the SAME message for every asteroid, and
-its choice 2 is the paid Detailed Scan — so one spawn exercises both consequential
-call sites. Take both readings while you are here (does Detailed Scan actually
-spend the Electronics and set `asteroid.scanned` after a reload?).
-
-F83's mechanism is
-already play-proven on a founder popup (a minimized story popup loses its
-callback across a load, because the waiter is a real-time thread and the async
-popup context is not persisted). What is NOT yet observed is the one consequence
-that costs a player anything: `FirstAsteroid`'s callback grants three Micro-G
-Auto Extractor prefabs, the preset's own text promises them, and `show_once`
-means the popup never returns.
-
-Baseline read first, so the deltas mean something:
-```
-ColonyGetPrefabs("MicroGAutoExtractorMetals", MainCity)
-```
-
-1. **Control leg.** Reach the first asteroid (`UIColony:OnDiscoveryCompleted("Asteroid", false, true)`
-   is the shortcut if you are not there naturally). When the **First Asteroid**
-   corner notification appears, open it and answer it **without reloading**.
-   Read the prefab counter again.
-   - **EXPECTED:** +1 on each of `MicroGAutoExtractorMetals`,
-     `MicroGAutoExtractorRareMetals`, `MicroGAutoExtractorExoticMinerals`.
-2. **The actual test.** Reload to before you answered (quicksave *while the
-   notification is still sitting minimized and unanswered* — that is the state
-   the whole test turns on). After the load, open the notification and answer it.
-   Read the counter.
-   - **PASS for the defect claim (i.e. the bug is real):** counter does NOT move,
-     while the popup text still says you gained the prefabs.
-   - **FAIL (the bug is not real here):** counter moves anyway — meaning the
-     grant survives the load, and F83's harm is limited to the six cosmetic View
-     buttons. Say so; that would materially shrink the finding.
-
-Record the counter values verbatim both legs. This is the observation F83's fix
-is gated on — no fix ships before it (the F49(c) rule: source is near-mute on
-whether behaviour is wrong, and this one has a runtime component).
-
-`Result (control, no reload):` _____________________________________________
-
-`Result (after reload):` _____________________________________________
-
 ### PT-35 — Save sanitizer passes · covers **F35, F03 (sweep half)**
 
 Both passes only act on damage that is *already* in a save, so a fresh colony

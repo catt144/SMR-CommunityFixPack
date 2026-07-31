@@ -17,22 +17,28 @@ PASSED IN FULL 2026-07-30 → D09 `tested`**, which **un-gates the D10 workshops
 build** (speced, user-approved, game-free, assistant work — the obvious thing to
 pick up if the owner is not at the keyboard). Open playtests, in suggested
 order: **PT-53 Trigger E** (last thing before D07 → `tested`) · **PT-54**
-(wave-6 disasters) · **PT-52 Trigger B + the B2 stress re-run** · **PT-58**
-(NEW — settles F83; needs a save with `UIColony.asteroid_count == 0`) ·
+(wave-6 disasters) · **PT-52 Trigger B + the B2 stress re-run** ·
 checklist **§6 needs-eyes riders** (take them while you are in a qualifying
 save) · **PT-20/21** last. Decisions owed: the FIX_POLICY §4 amendment, and
-**F83's fix design**.
+**F83's fix design** (gate cleared — PT-58 passed, fixture save kept).
 
-**NEW FINDING — F83 (P2, mechanism proven in play, NOTHING BUILT).** Minimized
-story popups lose their callback across a save/load: the waiter is a real-time
-thread and the async popup context is not persisted, while the corner
+**NEW FINDING — F83 (P2, PROVEN in play, NOTHING BUILT, fix gate CLEARED).**
+Minimized story popups lose their callback across a save/load: the waiter is a
+real-time thread and the async popup context is not persisted, while the corner
 notification *is*, so after a reload the notification still opens, any choice
 closes it, and the callback never runs. Eight call sites; six are cosmetic dead
 View buttons, but **`FirstAsteroid` silently withholds three prefabs its own
 popup text promises** (`show_once`, never re-offered) and
 **`ReconCenterDiscoveryAsteroid` silently refuses the paid Detailed Scan** on
-every asteroid. The asteroid consequence is INFERRED, not observed — **PT-58
-gates any fix**. Full trail on the F83 entry.
+every asteroid. **PT-58 RAN AND PASSED 2026-07-30 — the asteroid consequence is
+OBSERVED: 1/1/1 answered without a reload vs 0/0/0 after one**, same fixture,
+one variable. **A fix is therefore un-gated and is a USER DECISION** —
+recommended option is the narrow one (decouple the grant via an additive
+`OnMsg.SpawnedAsteroid` behind its own flag). **The owner keeps a pre-trigger
+baseline save as the reusable fix-verification fixture** (see the F83 entry —
+it restores `g_ShownPopupNotifications`, so it can be re-run indefinitely).
+Still untested: the Detailed Scan half, which needs a Recon Center holding
+Electronics. Full trail on the F83 entry.
 
 **Build state: 73 registered modules — 67 active by default**, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
@@ -353,14 +359,15 @@ silent.
 - **PT-52 Trigger B — controlled off/on CheatMalfunction A/B demo + F77
   extender-flap check** (checklist §2) — still un-run; cheap once hub A/B +
   extender geometry exists.
-- **PT-58 (NEW) — settles F83.** Needs a save with
-  `UIColony.asteroid_count == 0` (check it first; `FirstAsteroid` is
-  `show_once`). Spawn the first asteroid, leave the corner notification
-  UNANSWERED, save, reload, then answer it and read
-  `ColonyGetPrefabs("MicroGAutoExtractorMetals", MainCity)` against a control
-  leg answered without a reload. One spawn also exercises
-  `ReconCenterDiscoveryAsteroid`'s paid Detailed Scan — take both readings.
-  **No F83 fix ships before this.**
+- **~~PT-58~~ PASSED 2026-07-30 → F83's consequence OBSERVED** (archived).
+  **1/1/1** answered without a reload vs **0/0/0** after one, same fixture, one
+  variable. **The F83 fix is un-gated and awaits only the owner's choice of
+  option** (recommended: the narrow decouple). The owner keeps the **pre-trigger
+  baseline save** as the reusable verification fixture — it restores
+  `g_ShownPopupNotifications`, so the `show_once` popup re-offers itself on every
+  run and the A/B can be repeated indefinitely. **Still untested:** the
+  `ReconCenterDiscoveryAsteroid` Detailed Scan half, which needs a Recon Center
+  holding enough Electronics for `CanPerformDetailedScan()`.
 - **F82** — split-grid notification lingers ~a sol; machinery located,
   updater cadence still to trace (own entry). **F80** — trains skip valid
   waiting passengers; investigating, forensic tap on the entry.

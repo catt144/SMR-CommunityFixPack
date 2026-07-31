@@ -109,7 +109,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
-| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN (mechanism) | filed 2026-07-30 from live play — fix design is a USER DECISION; PT-58 owed (entry) |
+| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | filed 2026-07-30, **consequence OBSERVED — PT-58 PASS same day (1/1/1 vs 0/0/0)**; fix design is a USER DECISION, gate cleared (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -3618,21 +3618,42 @@ Net: leave the First Asteroid corner notification alone, save, reload, then open
 it — the game tells you that you gained three prefabs, and you did not. Nothing
 reports the loss.
 
+**⭐ OBSERVED IN PLAY — PT-58 PASS, 2026-07-30.** No longer an inference. Purpose-
+built fixture (new game, `hydroengineer` profile, `NoUndergroundAndAsteroids`
+off), pre-flight `asteroid_count=0 max=1 recon_researched=false`. Trigger was the
+game's own: `UIColony:SetTechResearched("ReconCenter")`, which fires
+`Msg("TechResearched", …)` → `Asteroids.lua:392` → `SpawnAsteroid`. Two legs off
+one fixture, one variable:
+
+| Leg | `MicroGAutoExtractorMetals` | `…RareMetals` | `…ExoticMinerals` |
+|---|---|---|---|
+| Popup answered **without** a reload | **1** | **1** | **1** |
+| Saved with the notification **unanswered**, reloaded, then answered | **0** | **0** | **0** |
+
+The notification **did survive the load** and opened normally; the choice closed
+it and granted nothing. Confirms every step of the mechanism and the
+consequence: **a player who leaves the First Asteroid notification in the corner
+across a save/load permanently loses all three prefabs**, is told in the popup's
+own text that they received them, gets no error, and — because the preset is
+`show_once` and `OnMsg.SpawnedAsteroid` only fires at `asteroid_count == 1`,
+a counter that never resets — has no second chance for the rest of that game.
+
 **Intent — UNINTENDED, hard tell: self-contradiction.** The popup's own
 `<effect>` line promises a reward its delivery path can silently fail to grant;
 text and code disagree inside one feature. Secondary tell: the notification
 survives the load and keeps offering a **View** affordance that cannot function
 — a live control with a dead action. Not a design choice under any reading.
 
-**Reachability — R1 (live).** The minimized corner notification is the *only*
-presentation these popups get, and leaving one sitting for a while and then
-saving/reloading is ordinary play. The mechanism was reached organically first
-and only then reproduced from the console. **Honest caveat, recorded per the
-F49(c) rule:** the mechanism is proven on `FirstFounderEnthusiast`; the
-FirstAsteroid *consequence* is **inferred** from identical code shape (same
-thread pattern, same nil `start_minimized`, same non-persisted async context)
-and has **not** been observed. It needs its own keyboard observation before any
-fix ships.
+**Reachability — R1 (live), PLAY-PROVEN on both halves.** The minimized corner
+notification is the *only* presentation these popups get, and leaving one sitting
+and then saving/reloading is ordinary play. The mechanism was reached
+organically first (the founder popup, unprompted, mid-setup for another test),
+then reproduced under control, and the **consequence** was then observed on its
+own purpose-built fixture (PT-58, above). The earlier caveat on this entry —
+that the FirstAsteroid consequence was inferred from code shape and needed a
+keyboard observation before any fix shipped — is **discharged**. It was the right
+caveat to hold: it took one 10-minute fixture to convert, and the inference
+turned out correct in every particular.
 
 **Family:** the same trap as **F06** (Mystery 10's Epilogue arrives minimized by
 SA default and a one-shot `CrystalFlyAway` is missed while it sits) — and F06's
@@ -3642,26 +3663,46 @@ F83 is the general case of the same shape. Also thematically adjacent to
 F81/F78/F82: this codebase drives state changes from specific code paths rather
 than from state, so anything that interrupts the path loses the change.
 
-**Fix options — USER DECISION, nothing built.**
-1. **Narrow, recommended:** decouple the FirstAsteroid grant from the popup —
+**Fix options — USER DECISION, nothing built. The PT-58 gate is now CLEARED, so
+this is buildable as soon as the owner picks an option.**
+1. **Narrow, RECOMMENDED:** decouple the FirstAsteroid grant from the popup —
    an additive `OnMsg.SpawnedAsteroid` (FIX_POLICY §1.2) granting the three
    prefabs once behind its own persistent flag, regardless of whether the popup
    is ever answered. Smallest possible surface, repairs the only consequence
-   that costs a player anything, touches no shared UI machinery. Would also want
-   a one-shot `OnMsg.LoadGame` sweep for saves already past the moment (§3), if
-   a stranded case can be detected.
-2. **General:** re-arm stranded async popup waiters on load. Fixes all seven at
+   proven to cost a player anything, touches no shared UI machinery, and the
+   shipped handler can stay exactly where it is (OnMsg is additive) — a future
+   game hotfix that repairs the delivery would then need our flag to stop a
+   double grant, which the flag already does. **PT-58 gives it a ready-made
+   A/B:** re-run the same two legs and the reload leg must read 1/1/1.
+2. **General:** re-arm stranded async popup waiters on load. Fixes all eight at
    once but touches shared popup machinery, would rot on patches, and risks
    double-firing callbacks. **Not recommended.**
-3. **The six cosmetic View buttons:** low value on their own. Reasonable to
+3. **`ReconCenterDiscoveryAsteroid`'s Detailed Scan** (the second consequential
+   site) is untested — it needs a Recon Center holding enough Electronics for
+   `CanPerformDetailedScan()` to be true, otherwise choice 2 renders disabled.
+   Own fixture, own observation, not covered by PT-58.
+4. **The six cosmetic View buttons:** low value on their own. Reasonable to
    document and leave, or to let option 2 carry them if it is ever taken.
 
-**PT-58 owed before any fix** (the settling observation): on a save approaching
-the first asteroid, leave the First Asteroid notification minimized, save,
-reload, answer it, then read
-`ColonyGetPrefabs("MicroGAutoExtractorMetals", MainCity)` — and compare against
-answering it without a reload. That turns the inference into a fact and gives
-the fix its A/B.
+**⭐ THE FIX-VERIFICATION FIXTURE EXISTS AND IS KEPT (owner, 2026-07-30): a save
+taken BEFORE the `ReconCenter` tech was ever researched**, on the PT-58 colony.
+That is the reusable A/B fixture for whatever fix is built — load it, apply the
+fix, grant the tech, leave the notification unanswered, save, reload, answer,
+read the counters. **The reload leg must read 1/1/1.** Because it predates the
+trigger it also restores `g_ShownPopupNotifications`, so the `show_once` popup
+re-offers itself on every run — this fixture can be used indefinitely rather
+than being consumed by one attempt. Do not lose it.
+
+**~~PT-58 owed before any fix~~ — RUN AND PASSED 2026-07-30** (results in the
+OBSERVED block above; archived in `PLAYTEST_ARCHIVE.md`). Fixture recipe worth
+keeping, since the popup is `show_once` and one save gives one shot: new game,
+commander profile **not** `SpaceMiner`, game rule `NoUndergroundAndAsteroids`
+**off**, `ReconCenter` tech **unresearched**; verify with
+`UIColony.asteroid_count` / `UIColony:IsTechResearched("ReconCenter")`; save
+BEFORE triggering so the fixture can be regenerated (loading a pre-trigger save
+also resets the `g_ShownPopupNotifications` GameVar, which is what makes the
+`show_once` popup offer itself again); then
+`UIColony:SetTechResearched("ReconCenter")`.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit) — B2 re-run pending]`
 **COMMANDER-PROFILE INTERACTION CHECKED 2026-07-30 (owner question) — NO

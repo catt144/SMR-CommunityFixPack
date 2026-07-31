@@ -8,6 +8,68 @@ the checklist — consult it before re-running anything here.
 
 ---
 
+## PT-58 — First Asteroid prefabs survive a reload? · settled **F83** — **PASS 2026-07-30** (the defect is real)
+
+Purpose-built same-day to convert F83's FirstAsteroid consequence from an
+inference into an observation. F83's *mechanism* was already play-proven on a
+founder popup; what had never been seen was the one consequence that costs a
+player anything.
+
+**Fixture (recipe worth keeping — the popup is `show_once`, so one save gives
+one shot):** new game; commander profile **not** `SpaceMiner` (used
+`hydroengineer`); game rule `NoUndergroundAndAsteroids` **off**; `ReconCenter`
+tech **unresearched**. Pre-flight read came back
+`asteroid_count=0 max=1 recon_researched=false profile=hydroengineer`:
+```
+*r ConsolePrint("asteroid_count=" .. tostring(UIColony.asteroid_count) .. " max=" .. tostring(UIColony:GetMaxAsteroids()) .. " recon_researched=" .. tostring(UIColony:IsTechResearched("ReconCenter")) .. " profile=" .. tostring(g_CurrentMissionParams.idCommanderProfile))
+```
+
+**Trigger — the game's own, not a synthetic spawn.** `OnMsg.TechResearched` at
+`Asteroids.lua:392-401` spawns the first asteroid the moment the `ReconCenter`
+tech completes (unless the profile is `SpaceMiner`). `SetTechResearched` emits
+`Msg("TechResearched", …)` (`Research.lua:318`), so granting the tech drives the
+real path:
+```
+UIColony:SetTechResearched("ReconCenter")
+```
+**Save BEFORE triggering.** That pre-trigger save is the fixture regenerator —
+loading it also restores the `g_ShownPopupNotifications` GameVar, which is what
+lets the `show_once` popup offer itself again for a second leg.
+
+Prefab read used at every step:
+```
+*r for _, id in ipairs({"MicroGAutoExtractorMetals", "MicroGAutoExtractorRareMetals", "MicroGAutoExtractorExoticMinerals"}) do ConsolePrint(id .. " = " .. tostring(ColonyGetPrefabs(id, MainCity))) end
+```
+
+`Result (control, no reload):` **PASS — 1 / 1 / 1.** Popup opened and answered in
+the same session; all three prefabs granted.
+
+`Result (after reload):` **PASS for the defect claim — 0 / 0 / 0.** Re-ran from
+the pre-trigger save, granted the tech, **left the corner notification
+unanswered**, saved, loaded that save, then opened and answered the popup. The
+notification **did survive the load** and opened normally; the choice closed it
+and granted nothing.
+
+**Verdict: F83's FirstAsteroid consequence is REAL and observed.** One fixture,
+one variable (the reload), 1/1/1 → 0/0/0. A player who leaves the First Asteroid
+notification in the corner across a save/load permanently loses all three
+prefabs, is told by the popup's own text that they received them, gets no error,
+and has no second chance — `show_once` plus an `asteroid_count == 1` gate on a
+counter that never resets.
+
+**Not covered here:** the second consequential site,
+`ReconCenterDiscoveryAsteroid`'s paid **Detailed Scan**. Its choice 2 renders
+*disabled* unless `CanPerformDetailedScan()` is true, which sums Electronics
+stored in Recon Centers — a brand-new fixture has the tech but no building. That
+half needs its own fixture and its own observation.
+
+**This PASS cleared the gate on F83's fix**, which is now a user decision
+(recommended: decouple the grant via an additive `OnMsg.SpawnedAsteroid` behind
+its own flag). PT-58 doubles as that fix's ready-made A/B — re-run the same two
+legs and the reload leg must read 1/1/1.
+
+---
+
 ## PT-44 — Founder trait notice · covered **F23** — **PASS 2026-07-30** → F23 `tested`
 
 > The F24 half was REMOVED 2026-07-30 — it was unrunnable, and F24 is now
