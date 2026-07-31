@@ -25,14 +25,12 @@
 SMRFixPack.Register("GhostFarmOxygen", {
 	title = "Salvaging a farm removes the oxygen it was giving its dome",
 	apply = function()
-		local B = rawget(_G, "Building")
-		if type(B) ~= "table" or type(B.SetDome) ~= "function" then
-			return "Building.SetDome not found (game update changed it?)"
-		end
-		local F = rawget(_G, "FarmBase")
-		if type(F) ~= "table" or type(F.ApplyOxygenProductionMod) ~= "function" then
-			return "FarmBase.ApplyOxygenProductionMod not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("GhostFarmOxygen", {
+			{ class = "Building", method = "SetDome" },
+			{ class = "FarmBase", method = "ApplyOxygenProductionMod" },
+		})
+		if err then return err end
+		local B = Building
 
 		local orig = B.SetDome
 		function B:SetDome(dome, ...)

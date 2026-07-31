@@ -27,14 +27,13 @@
 SMRFixPack.Register("TouristSatisfaction", {
 	title = "Tourist satisfaction stops drifting down (threshold awards are now symmetric)",
 	apply = function()
-		local C = rawget(_G, "Colonist")
-		if type(C) ~= "table" or type(C.UpdateSatisfaction) ~= "function" then
-			return "Colonist.UpdateSatisfaction not found (game update changed it?)"
-		end
-		local stat_scale = const.Scale and const.Scale.Stat
-		if not stat_scale then
-			return "const.Scale.Stat not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("TouristSatisfaction", {
+			{ class = "Colonist", method = "UpdateSatisfaction" },
+			{ path = { "const", "Scale", "Stat" } },
+		})
+		if err then return err end
+		local C = Colonist
+		local stat_scale = const.Scale.Stat
 
 		function C:UpdateSatisfaction(stat, old_value, new_value, high_stat_bonus, perfect_stat_bonus)
 			if not self.traits.Tourist or self:IsDead() then return end

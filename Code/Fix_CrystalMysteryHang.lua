@@ -57,14 +57,11 @@ end
 SMRFixPack.Register("CrystalMysteryHang", {
 	title = "The Philosopher's Stone mystery can no longer hang forever at the finale",
 	apply = function()
-		local M = rawget(_G, "CrystalsMystery")
-		if type(M) ~= "table" then
-			return "CrystalsMystery not found (game update changed it?)"
-		end
-		local C = rawget(_G, "Crystal")
-		if type(C) ~= "table" or type(C.ComposeProc) ~= "function" then
-			return "Crystal.ComposeProc not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("CrystalMysteryHang", {
+			{ class = "CrystalsMystery" },
+			{ class = "Crystal", method = "ComposeProc" },
+		})
+		if err then return err end
 		-- The handlers below are registered at file scope; nothing else to install.
 	end,
 })

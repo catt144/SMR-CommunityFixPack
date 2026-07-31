@@ -29,13 +29,15 @@
 SMRFixPack.Register("RocketDroneChurn", {
 	title = "Landed rockets stop sending their delivery drones back to Idle every hour",
 	apply = function()
-		local CT = rawget(_G, "CargoTransporterNew")
-		if type(CT) ~= "table" or type(CT.UpdateCargoResourceRequests) ~= "function" then
-			return "CargoTransporterNew.UpdateCargoResourceRequests not found (game update changed it?)"
-		end
-		if type(CT.AddCargoDemandRequest) ~= "function" or type(CT.AddCargoSupplyRequest) ~= "function" then
-			return "CargoTransporterNew cargo request helpers not found (game update changed them?)"
-		end
+		local err = SMRFixPack.Require("RocketDroneChurn", {
+			{ class = "CargoTransporterNew", method = "UpdateCargoResourceRequests" },
+			{ class = "CargoTransporterNew", method = "AddCargoDemandRequest",
+			  reason = "CargoTransporterNew cargo request helpers not found (game update changed them?)" },
+			{ class = "CargoTransporterNew", method = "AddCargoSupplyRequest",
+			  reason = "CargoTransporterNew cargo request helpers not found (game update changed them?)" },
+		})
+		if err then return err end
+		local CT = CargoTransporterNew
 
 		function CT:UpdateCargoResourceRequests()
 			-- FIX (F50): only a request that has to be CREATED needs the command

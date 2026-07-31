@@ -39,26 +39,25 @@
 SMRFixPack.Register("UniversityOvertraining", {
 	title = "Universities stop training specialists for workplaces that run themselves",
 	apply = function()
-		local C = rawget(_G, "City")
-		if type(C) ~= "table" or type(C.GetNeededSpecialist) ~= "function" then
-			return "City.GetNeededSpecialist not found (game update changed it?)"
-		end
-		-- `automation` is declared on Workplace (Workplace.lua:8); if the property
-		-- is gone the gate below would silently exclude nothing. Property defaults
-		-- are not copied onto the class until the classes are built, well after mod
-		-- code loads, so look in the classdef's own `properties` list instead of
-		-- reading Workplace.automation (which is still nil at this point).
-		local W = rawget(_G, "Workplace")
-		if type(W) ~= "table" or type(W.properties) ~= "table"
-			or not table.find(W.properties, "id", "automation") then
-			return "Workplace 'automation' property not found (game update changed it?)"
-		end
-		if type(rawget(_G, "ValidateBuilding")) ~= "function" then
-			return "ValidateBuilding not found (game update changed it?)"
-		end
-		if type(rawget(_G, "ColonistSpecializationList")) ~= "table" then
-			return "ColonistSpecializationList not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("UniversityOvertraining", {
+			{ class = "City", method = "GetNeededSpecialist" },
+			-- `automation` is declared on Workplace (Workplace.lua:8); if the
+			-- property is gone the gate below would silently exclude nothing.
+			-- Property defaults are not copied onto the class until the classes
+			-- are built, well after mod code loads, so look in the classdef's own
+			-- `properties` list instead of reading Workplace.automation (which is
+			-- still nil at this point).
+			{ test = function()
+				local W = rawget(_G, "Workplace")
+				return type(W) == "table" and type(W.properties) == "table"
+					and table.find(W.properties, "id", "automation")
+			  end,
+			  reason = "Workplace 'automation' property not found (game update changed it?)" },
+			{ global = "ValidateBuilding" },
+			{ global = "ColonistSpecializationList", kind = "table" },
+		})
+		if err then return err end
+		local C = City
 
 		function C:GetNeededSpecialist()
 			if self.needed_specialist_last_time == GameTime() then

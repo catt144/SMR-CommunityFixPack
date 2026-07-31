@@ -27,13 +27,13 @@
 SMRFixPack.Register("ShuttleTransportCache", {
 	title = "New Shuttle Hubs are noticed: colonists stop being stuck with a cached 'unreachable'",
 	apply = function()
-		if type(rawget(_G, "FindTransportationModeToCommunity")) ~= "function"
-				or type(rawget(_G, "GetTransportationModeToCommunity")) ~= "function" then
-			return "FindTransportationModeToCommunity not found (game update changed it?)"
-		end
-		if type(rawget(_G, "ValidateBuilding")) ~= "function" then
-			return "ValidateBuilding not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("ShuttleTransportCache", {
+			{ global = "FindTransportationModeToCommunity" },
+			{ global = "GetTransportationModeToCommunity",
+			  reason = "FindTransportationModeToCommunity not found (game update changed it?)" },
+			{ global = "ValidateBuilding" },
+		})
+		if err then return err end
 
 		local function is_identical(t1, t2)
 			for k, v in pairs(t1) do

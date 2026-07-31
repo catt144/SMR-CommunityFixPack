@@ -31,19 +31,20 @@
 SMRFixPack.Register("VacuumWalks", {
 	title = "Colonists use the passages instead of crossing vacuum on foot between nearby domes",
 	apply = function()
-		local C = rawget(_G, "Colonist")
-		if type(C) ~= "table" or type(C.TryToEmigrateToDome) ~= "function" then
-			return "Colonist.TryToEmigrateToDome not found (game update changed it?)"
-		end
-		for _, name in ipairs{ "GetAtmosphereBreathable", "GetDomesPassagePath",
-				"IsLRTransportAvailable", "IsTransportAvailableBetween", "CreateColonistTransportTask" } do
-			if type(rawget(_G, name)) ~= "function" then
-				return name .. " not found (game update changed it?)"
-			end
-		end
-		if const.ColonistMaxDomeWalkDist == nil or const.ColonistMinDistToIgnorePassage == nil then
-			return "walk-distance constants not found (game update changed them?)"
-		end
+		local err = SMRFixPack.Require("VacuumWalks", {
+			{ class = "Colonist", method = "TryToEmigrateToDome" },
+			{ global = "GetAtmosphereBreathable" },
+			{ global = "GetDomesPassagePath" },
+			{ global = "IsLRTransportAvailable" },
+			{ global = "IsTransportAvailableBetween" },
+			{ global = "CreateColonistTransportTask" },
+			{ path = { "const", "ColonistMaxDomeWalkDist" },
+			  reason = "walk-distance constants not found (game update changed them?)" },
+			{ path = { "const", "ColonistMinDistToIgnorePassage" },
+			  reason = "walk-distance constants not found (game update changed them?)" },
+		})
+		if err then return err end
+		local C = Colonist
 
 		function C:TryToEmigrateToDome(current_dome, dest_dome, transport_mode, transport_mode_dist)
 			local transport_task = self.transport_task

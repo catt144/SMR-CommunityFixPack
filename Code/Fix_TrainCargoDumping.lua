@@ -40,20 +40,16 @@
 SMRFixPack.Register("TrainCargoDumping", {
 	title = "Trains stop dumping cargo at stations where that resource is switched off",
 	apply = function()
-		local T = rawget(_G, "Train")
-		if type(T) ~= "table" or type(T.UnloadAll) ~= "function" then
-			return "Train.UnloadAll not found (game update changed it?)"
-		end
-		-- IsResourceEnabled is declared on UniversalStorageDepotBase, not on
-		-- Station: mod code loads before the classes are flattened, so looking
-		-- for it on Station would find nil and deactivate this fix for nothing.
-		local D = rawget(_G, "UniversalStorageDepotBase")
-		if type(D) ~= "table" or type(D.IsResourceEnabled) ~= "function" then
-			return "UniversalStorageDepotBase.IsResourceEnabled not found (game update changed it?)"
-		end
-		if type(rawget(_G, "RequestUnassignUnit")) ~= "function" then
-			return "RequestUnassignUnit not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("TrainCargoDumping", {
+			{ class = "Train", method = "UnloadAll" },
+			-- IsResourceEnabled is declared on UniversalStorageDepotBase, not on
+			-- Station: mod code loads before the classes are flattened, so looking
+			-- for it on Station would find nil and deactivate this fix for nothing.
+			{ class = "UniversalStorageDepotBase", method = "IsResourceEnabled" },
+			{ global = "RequestUnassignUnit" },
+		})
+		if err then return err end
+		local T = Train
 
 		-- Does any OTHER station this train can reach on its current route still
 		-- accept `res`? Reads the route table directly (city.train_track_routes,

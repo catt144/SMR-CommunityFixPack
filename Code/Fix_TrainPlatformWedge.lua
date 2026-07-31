@@ -20,17 +20,14 @@
 SMRFixPack.Register("TrainPlatformWedge", {
 	title = "A stale passenger no longer wedges a train at the platform forever",
 	apply = function()
-		local C = rawget(_G, "Colonist")
-		if type(C) ~= "table" or type(C.ExitVehicle) ~= "function" then
-			return "Colonist.ExitVehicle not found (game update changed it?)"
-		end
-		if type(table.remove_entry) ~= "function" then
-			return "table.remove_entry not found (game update changed it?)"
-		end
-		local stat_scale = const.Scale and const.Scale.Stat
-		if not stat_scale then
-			return "const.Scale.Stat not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("TrainPlatformWedge", {
+			{ class = "Colonist", method = "ExitVehicle" },
+			{ path = { "table", "remove_entry" }, kind = "function" },
+			{ path = { "const", "Scale", "Stat" } },
+		})
+		if err then return err end
+		local C = Colonist
+		local stat_scale = const.Scale.Stat
 
 		function C:ExitVehicle(vehicle)
 			if not self.holder or self.holder ~= vehicle or not IsSameMap(self, vehicle) then

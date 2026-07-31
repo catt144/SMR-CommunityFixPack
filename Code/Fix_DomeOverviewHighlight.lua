@@ -17,13 +17,12 @@
 SMRFixPack.Register("DomeOverviewHighlight", {
 	title = "Domes Overview marks low colonist stats in red again",
 	apply = function()
-		local C = rawget(_G, "Community")
-		if type(C) ~= "table" or type(C.UICommandCenterStatUpdate) ~= "function" then
-			return "Community.UICommandCenterStatUpdate not found (game update changed it?)"
-		end
-		if type(rawget(_G, "GetAverageStat")) ~= "function" then
-			return "GetAverageStat not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("DomeOverviewHighlight", {
+			{ class = "Community", method = "UICommandCenterStatUpdate" },
+			{ global = "GetAverageStat" },
+		})
+		if err then return err end
+		local C = Community
 
 		function C:UICommandCenterStatUpdate(win, stat)
 			local stat_scale = const.Scale.Stat

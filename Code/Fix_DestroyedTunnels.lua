@@ -32,11 +32,14 @@
 SMRFixPack.Register("DestroyedTunnels", {
 	title = "Destroyed tunnels stay closed after loading a save instead of rejoining pathfinding",
 	apply = function()
-		local TB = rawget(_G, "TunnelBase")
-		if type(TB) ~= "table" or type(TB.AddPFTunnel) ~= "function"
-			or type(TB.RemovePFTunnel) ~= "function" then
-			return "TunnelBase.AddPFTunnel/RemovePFTunnel not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("DestroyedTunnels", {
+			{ class = "TunnelBase", method = "AddPFTunnel",
+			  reason = "TunnelBase.AddPFTunnel/RemovePFTunnel not found (game update changed it?)" },
+			{ class = "TunnelBase", method = "RemovePFTunnel",
+			  reason = "TunnelBase.AddPFTunnel/RemovePFTunnel not found (game update changed it?)" },
+		})
+		if err then return err end
+		local TB = TunnelBase
 
 		local orig = TB.AddPFTunnel
 		function TB:AddPFTunnel(...)

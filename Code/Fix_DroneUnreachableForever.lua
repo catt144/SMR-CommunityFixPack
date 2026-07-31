@@ -33,13 +33,15 @@
 SMRFixPack.Register("DroneUnreachableForever", {
 	title = "Drones re-try buildings they once failed to reach instead of writing them off forever",
 	apply = function()
-		local D = rawget(_G, "Drone")
-		if type(D) ~= "table" or type(D.ApproachWrapper) ~= "function" then
-			return "Drone.ApproachWrapper not found (game update changed it?)"
-		end
-		if type(D.CleanUnreachables) ~= "function" or const.UnreachablesCleanupDeltaT == nil then
-			return "the unreachables expiry mechanism is gone (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("DroneUnreachableForever", {
+			{ class = "Drone", method = "ApproachWrapper" },
+			{ class = "Drone", method = "CleanUnreachables",
+			  reason = "the unreachables expiry mechanism is gone (game update changed it?)" },
+			{ path = { "const", "UnreachablesCleanupDeltaT" },
+			  reason = "the unreachables expiry mechanism is gone (game update changed it?)" },
+		})
+		if err then return err end
+		local D = Drone
 
 		function D:ApproachWrapper(building, resource)
 			if not IsValid(building) or not building:IsValidPos() then

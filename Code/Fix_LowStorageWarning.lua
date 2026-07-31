@@ -39,24 +39,25 @@
 SMRFixPack.Register("LowStorageWarning", {
 	title = 'The "Insufficient Resources" warning works again for Food and maintenance resources',
 	apply = function()
-		local RT = rawget(_G, "ResourceTracking")
-		if type(RT) ~= "table" or type(RT.GatheredResourcesOnHourlyUpdate) ~= "function" then
-			return "ResourceTracking.GatheredResourcesOnHourlyUpdate not found (game update changed it?)"
-		end
-		-- GatherTransportableResources is called at :216 but declared engine-side only.
-		for _, name in ipairs{ "GatherTransportableResources", "GetCityResourceOverview",
-				"FindNotification", "AddObjectToNotification", "RemoveObjectFromNotification",
-				"GetCommandCenterPowerGrids", "GetCommandCenterLifeSupportGrids",
-				"MulDivRound", "ripairs" } do
-			if type(rawget(_G, name)) ~= "function" then
-				return name .. " not found (game update changed it?)"
-			end
-		end
-		if const.MinDaysMaintenanceSupplyBeforeNotification == nil
-				or const.MinDaysFoodSupplyBeforeNotification == nil
-				or const.HoursPerDay == nil then
-			return "supply-warning constants not found (game update changed them?)"
-		end
+		local WARN_CONSTS = "supply-warning constants not found (game update changed them?)"
+		local err = SMRFixPack.Require("LowStorageWarning", {
+			{ class = "ResourceTracking", method = "GatheredResourcesOnHourlyUpdate" },
+			-- GatherTransportableResources is called at :216 but declared engine-side only.
+			{ global = "GatherTransportableResources" },
+			{ global = "GetCityResourceOverview" },
+			{ global = "FindNotification" },
+			{ global = "AddObjectToNotification" },
+			{ global = "RemoveObjectFromNotification" },
+			{ global = "GetCommandCenterPowerGrids" },
+			{ global = "GetCommandCenterLifeSupportGrids" },
+			{ global = "MulDivRound" },
+			{ global = "ripairs" },
+			{ path = { "const", "MinDaysMaintenanceSupplyBeforeNotification" }, reason = WARN_CONSTS },
+			{ path = { "const", "MinDaysFoodSupplyBeforeNotification" }, reason = WARN_CONSTS },
+			{ path = { "const", "HoursPerDay" }, reason = WARN_CONSTS },
+		})
+		if err then return err end
+		local RT = ResourceTracking
 
 		local function GetGridObj(grid)
 			local obj = grid.storages[1] or grid.producers[1] or grid.consumers[1] or grid.elements[1]

@@ -52,22 +52,22 @@
 SMRFixPack.Register("ArrivalDeaths", {
 	title = "Arriving colonists no longer hike to unreachable domes or land in impassable ground",
 	apply = function()
-		local C = rawget(_G, "Colonist")
-		if type(C) ~= "table" or type(C.Arrive) ~= "function" then
-			return "Colonist.Arrive not found (game update changed it?)"
-		end
-		for _, name in ipairs{ "IsInWalkingDist", "GetDomesReachableByColonists", "ChooseDome",
-				"AddObjectToNotification", "IsKindOfClasses", "ValidateBuilding", "IsSameMap" } do
-			if type(rawget(_G, name)) ~= "function" then
-				return name .. " not found (game update changed it?)"
-			end
-		end
-		-- GetMapSlot is an engine method; CObject's copy is only flattened onto the
-		-- classes later, so check the table it is published from instead.
-		local cobj_funcs = rawget(_G, "g_CObjectFuncs")
-		if type(cobj_funcs) ~= "table" or type(cobj_funcs.GetMapSlot) ~= "function" then
-			return "CObject:GetMapSlot not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("ArrivalDeaths", {
+			{ class = "Colonist", method = "Arrive" },
+			{ global = "IsInWalkingDist" },
+			{ global = "GetDomesReachableByColonists" },
+			{ global = "ChooseDome" },
+			{ global = "AddObjectToNotification" },
+			{ global = "IsKindOfClasses" },
+			{ global = "ValidateBuilding" },
+			{ global = "IsSameMap" },
+			-- GetMapSlot is an engine method; CObject's copy is only flattened
+			-- onto the classes later, so check the table it is published from.
+			{ path = { "g_CObjectFuncs", "GetMapSlot" }, kind = "function",
+			  reason = "CObject:GetMapSlot not found (game update changed it?)" },
+		})
+		if err then return err end
+		local C = Colonist
 
 		function C:Arrive()
 			local rocket = self.arriving

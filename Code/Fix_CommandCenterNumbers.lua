@@ -23,10 +23,11 @@
 SMRFixPack.Register("CommandCenterNumbers", {
 	title = "Command Center resource rows show their numbers again",
 	apply = function()
-		local RO = rawget(_G, "ResourceOverview")
-		if type(RO) ~= "table" or type(RO.GetAvailable) ~= "function" then
-			return "ResourceOverview.GetAvailable not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("CommandCenterNumbers", {
+			{ class = "ResourceOverview", method = "GetAvailable" },
+		})
+		if err then return err end
+		local RO = ResourceOverview
 
 		-- exactly the tags used by Data\XDef\CommandCenterCategories.lua
 		local resources = {

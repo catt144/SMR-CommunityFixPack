@@ -35,11 +35,14 @@
 SMRFixPack.Register("StaleReservations", {
 	title = "Housing reserved for colonists that never arrive is released again",
 	apply = function()
-		local R = rawget(_G, "Residence")
-		if type(R) ~= "table" or type(R.ReserveResidence) ~= "function"
-				or type(R.CancelResidenceReservation) ~= "function" then
-			return "Residence reservation methods not found (game update changed them?)"
-		end
+		local err = SMRFixPack.Require("StaleReservations", {
+			{ class = "Residence", method = "ReserveResidence",
+			  reason = "Residence reservation methods not found (game update changed them?)" },
+			{ class = "Residence", method = "CancelResidenceReservation",
+			  reason = "Residence reservation methods not found (game update changed them?)" },
+		})
+		if err then return err end
+		local R = Residence
 
 		local orig = R.ReserveResidence
 		function R:ReserveResidence(unit, ...)
