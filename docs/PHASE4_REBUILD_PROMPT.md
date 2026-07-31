@@ -43,6 +43,29 @@ clean the code looks.
   helper (see "why they are one job" below).
 - **C1** — a user-visible surface reporting fixes that deactivated themselves.
 
+### ⚠️ CARVE-OUT — the three drone modules are NOT migrated by this job
+
+**Do not migrate `Code/Opt_DroneOverhaul.lua`, `Code/Opt_DroneStatDials.lua` or
+`Code/Fix_ExtenderFlapChurn.lua` onto the new helpers.** Leave them exactly as
+they are.
+
+Reason: a **drone dispatch rebuild is queued directly behind this job** (owner
+decision 2026-07-31 — drones moved to the top of the list) and it will rewrite
+or restructure those files. Migrating them now means writing them twice and
+putting refactor churn into the files with the most pending change.
+
+**They still count for the harness.** They must keep applying, keep their
+statuses, and keep their reason strings — they appear in the fingerprint like
+everything else. You are leaving them alone, not excluding them from
+verification.
+
+**Design the helper API so the drone rebuild can adopt it cleanly** — that
+module will be written natively against whatever you produce. If a helper's
+shape would be awkward for a large opt-in module with file-scope class hooks
+and per-call `IsActive` gating, fix the shape now. `Opt_DroneOverhaul.lua` is
+the reference for what that code looks like; read it as a *consumer* of your
+API, not as a migration target.
+
 **EXPLICITLY OUT OF SCOPE — do not do these, do not propose them mid-job:**
 
 - **C3 module merges. BARRED.** They change module identity and therefore
@@ -51,6 +74,15 @@ clean the code looks.
   redundant and no load-order sensitivity**, so the benefit is ≈0. The owner's
   standing decision is *never*, not *later*. If you find yourself wanting to
   merge two files, you have left the job.
+
+  > **Scope note so this bar is not mis-cited later:** what C3 barred is an
+  > **audit-driven merge with ≈0 benefit that breaks player-facing IDs for
+  > nothing**. It is NOT a general ban on module identity ever changing. An
+  > **owner-directed redesign** — specifically the queued drone rebuild, which
+  > may consolidate the drone modules — is a different thing entirely, is
+  > justified on its own merits, and pre-launch is exactly when ID changes are
+  > free. Do not cite the C3 bar against it, and do not treat the drone
+  > carve-out above as a C3 exception.
 - **Any behaviour change to any fix.** If a fix looks wrong while you are in it,
   **file it in `BUGS.md` and keep going.** Do not fix it. That is the mission
   creep this project is actively fighting (`docs/FUTURE_IDEAS.md`).
@@ -370,9 +402,9 @@ avoid.
 
 ## Note for the owner (not for the agent)
 
-**Sequencing question worth settling before this starts:** Phase 4 changes the
-helper substrate that D10 and D12 would be written against. Landing Phase 4
-first means those two modules are built on the new helpers once. Landing them
-first means two more modules to migrate, and a larger refactor. **Recommend
-Phase 4 first** — but PT-59 (F83's keyboard A/B) is short, independent, and owed
-either way.
+**Sequencing SETTLED 2026-07-31: Phase 4 runs first**, with the drone modules
+carved out of the migration (see the carve-out in the scope fence). The drone
+dispatch rebuild follows immediately behind it and is written natively against
+the helpers this job produces, so no file is written twice. D10 and D12 also
+land on the finished substrate. PT-59 (F83's keyboard A/B) is short,
+independent, and owed regardless of ordering.
