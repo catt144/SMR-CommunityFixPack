@@ -54,11 +54,23 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
   **`docs\SAVE_SAFETY_REDESIGN.md`** — per-module disposition for all 12, the
   autosave timer trap, and the four decisions owed. Do not build against it
   unquoted.
-- **Two cheap measurements are owed first**, both quick: **(a)** does
-  `Fix_ShelterReflex` stay off the stack via its proper tail call — if yes the
-  whole wrapper class collapses into a coding rule; **(b)** does reinstalling the
-  pack heal a damaged save (our `LoadGame` restarts the thread), which decides
-  what we tell an affected player.
+- ✅ **NOTHING IS OWED BEFORE THE DECISION — the two measurements this block used
+  to list are both RESOLVED (2026-07-31, PT-20 leg). Do not re-run them.**
+  - **(a) `Fix_ShelterReflex` / the tail-call question — CANCELLED as
+    unfalsifiable, and the rule no longer depends on it.** A tail call has
+    nothing after it, so a vanished frame and a surviving frame produce
+    *identical silence*; adding a detector after the call stops it being a tail
+    call. **There is no experiment here — do not design one.** Layer 2 was
+    restated to need no engine guarantee: *no mod code after a call that can
+    block*, which is true whether or not the frame is serialised, and is
+    checkable by reading source. `Opt_DroneOverhaul:188-190` violates it
+    (measured leak); `Fix_ShelterReflex:73` complies.
+  - **(b) does reinstalling the pack heal a damaged save — YES, measured.**
+    `PT-20TEST-B` loaded with the pack back: `IsValidThread(Meteors)` → `true`,
+    phase `restarted`, our own `LoadGame` doing it. The answer for an affected
+    player is *"put the mod back"* — real, and uncomfortable.
+  So F86 is **purely an owner decision** now: the four calls in
+  `SAVE_SAFETY_REDESIGN.md` §4.
 - **Three facts to spend nobody's time re-deriving** (all in ENGINE_FACTS):
   **mods DO get a pre-save hook** — `OnMsg.SaveGameStart`/`SaveGameDone` reach
   mod code and autosaves are the same path, so tear-down-on-save is
@@ -157,7 +169,13 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
    (one fresh 10-minute save covers both).
 5. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
    **PT-21/22** last.
-6. **F86 decision + its two measurements** — see the block above. Owner call.
+6. **F86 — the owner decision.** No measurements are owed (both were resolved
+   2026-07-31; see the block above). Four calls in `SAVE_SAFETY_REDESIGN.md` §4.
+   ⚠️ **Sequencing note:** the `Opt_DroneOverhaul` half of the layer-2 repair
+   sits inside a drone-owned module. It is save-safety surgery on a wrapper's
+   call position and touches no drone design, so it should be carved out of the
+   drone scope fence rather than waiting on the D06 decision — **owner to
+   confirm the carve-out.**
 7. **⭐ D10 — workshops module BUILD.** Speced, user-approved, game-free, un-gated
    (PT-56 passed). Full spec on the D10 BUGS entry: T1 text repairs + T2 capacity
    dial (base/+50%/+100%, `max_workers` AND `consumption_amount` **PAIRED**).

@@ -4168,11 +4168,25 @@ problem: **~62 of 74 modules are safe by construction.**
 (`Train:UnloadAll`), `Fix_BombardmentSpread` (replaces the blocking
 `WaitBombard`). At risk while their own threads live:
 `Fix_MeteorStormWedge`, `Fix_CrystalMysteryHang`, `Fix_ExtenderFlapChurn`,
-`Fix_TrackConnectorPingPong`. **Believed safe but must be measured:**
-`Fix_ShelterReflex` — it wraps `Colonist:Idle` but ends `return orig_idle(self, ...)`,
-a **proper Lua tail call**, which replaces our frame rather than keeping it.
-That single difference is the only thing distinguishing it from the proven drone
-leak.
+`Fix_TrackConnectorPingPong`. **Compliant, and NOT to be measured:**
+`Fix_ShelterReflex` — it wraps `Colonist:Idle` but ends
+`return orig_idle(self, ...)` with nothing after it.
+
+> ⚠️ **An earlier draft of this entry said `Fix_ShelterReflex` "must be
+> measured". Withdrawn 2026-07-31 — that measurement is IMPOSSIBLE, and the rule
+> was restated so it is not needed.** A tail call has nothing after it, so a
+> vanished frame and a surviving frame produce **identical silence**; any
+> detector placed after the call stops it being a tail call. The experiment is
+> unfalsifiable by construction and was cancelled rather than run.
+> **The rule does not depend on it.** It was first justified as *"a tail call
+> removes our frame from the stack"* — unobservable here, since the sandbox
+> denies introspection. The sound form needs no engine guarantee:
+> **no mod code after a call that can block** — then whether or not the frame is
+> serialised, there is nothing left to execute after removal. By that test
+> `Opt_DroneOverhaul:188-190` violates it (measured leak) and
+> `Fix_ShelterReflex:73` complies. Residual, accepted: an inert serialised
+> function may sit in a save as dead weight; it executes nothing and no read
+> available to us can see it.
 
 **The defence the pack already tried, and why it failed.** Both leaking files
 say in their own headers that avoiding upvalues makes the thread safe —
