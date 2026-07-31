@@ -3664,6 +3664,45 @@ answering it without a reload. That turns the inference into a fact and gives
 the fix its A/B.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit) — B2 re-run pending]`
+**COMMANDER-PROFILE INTERACTION CHECKED 2026-07-30 (owner question) — NO
+COLLISION between the `Inventor` profile and D06/D09/F77; the interaction is
+purely one of measurement.** Enumerated rather than assumed:
+
+- **Inventor** (`Data/CommanderProfilePreset.lua:152-186`) applies three
+  `Effect_ModifyLabelOverTime` ramps to the **`Consts`** label —
+  `DroneConstructAmount` +1%, `DroneBuildingRepairAmount` +1%,
+  `DroneGatherResourceWorkTime` −1%, each every 2 sols × 50 reps (to Sol 100) —
+  plus `Effect_GrantTech AutonomousHubs`.
+- **`AutonomousHubs`** (`Data/TechPreset.lua:1332-1358`) sets
+  `disable_electricity_consumption` and `disable_maintenance` on the **`DroneHub`**
+  and **`DroneHubExtender`** labels.
+- **D09** writes exactly two modifiers, by id, through
+  `colony:SetLabelModifier`: `SMRFixPack_DroneSpeedDial` on label **`Drone`**
+  prop `move_speed`, and `SMRFixPack_DroneCarryDial` on label **`Consts`** prop
+  `DroneResourceCarryAmount`. It removes only those two ids, so it cannot touch
+  a profile's or a tech's modifiers. **Label `Consts` is shared with Inventor but
+  the props are disjoint** (`DroneResourceCarryAmount` vs the three above), and
+  Inventor never touches `move_speed`. The two are complementary by accident:
+  Inventor makes drones *work* faster, D09 makes them *move* faster and carry
+  more.
+- **D06 and F77 reference no power, maintenance or `disable_*` property at all**
+  (grepped). D06 changes *who claims* work, never how fast work goes; Inventor
+  changes *how fast*, never who claims. Orthogonal layers.
+
+**What DOES change is measurement validity, and it matters for PT-52:**
+1. Inventor's ramps mean **repair throughput on that colony drifts upward over
+   time**. The B2 protocol survives this only because it reloads the same
+   quicksave between legs, putting both at the same sol. **Never compare a
+   stress run against one from an earlier sitting on an Inventor save.**
+2. `AutonomousHubs` removes the two commonest causes of an extender's
+   working-flag flapping, so **F77's trigger should be rare or absent there** —
+   a quiet F77 half on an Inventor save is not evidence the fix does nothing.
+   *(Inference from the effect data; not observed. Run the F77 half on a
+   non-Inventor save if the result is to mean anything.)*
+
+Recorded per the EXTERNAL VALIDITY rule: **log the commander profile with any
+D06 measurement**, the same way run conditions are logged.
+
 **FIRST MEASURED A/B — PT-52 Trigger B2, 2026-07-29.** Controlled run on the
 user's live 9-hub colony: same quicksave reloaded between legs, identical seeded
 target set (`scope="overlap"`, `n=25`, `seed=1`), **both legs at NORMAL speed**,

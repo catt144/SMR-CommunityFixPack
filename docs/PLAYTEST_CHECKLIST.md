@@ -5,16 +5,13 @@
 next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
-**Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — done so far
-(38 sections): PT-01 … PT-09, PT-11 … PT-14, PT-16, PT-17, PT-19, PT-23, PT-24,
-PT-26, PT-29, PT-31 … PT-34, PT-36, PT-38 … PT-41, PT-43, PT-45, **PT-46 (now
-closed in full)**, PT-48, PT-49, PT-50, PT-51, PT-55. This file carries **only
-un-run work**; when a test completes, its whole section (with the result notes)
-moves to the archive.
+**Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — 40
+sections as of 2026-07-30. This file carries **only un-run work**: when a test
+completes, its whole section moves to the archive and is **deleted from here,
+with no stub or pointer left behind** (see the reporting protocol). The archive
+is the notes-and-documentation half; this file is the live work list.
 (Cross-checked against the archive and the BUGS.md index 2026-07-29 — nothing
-below re-tests anything already passed. **PT-46's tail closed 2026-07-30:** (d)
-PASSED by play, (a) settled R4 by the reachability audit, (c) closed `wontfix`
-with its guard removed — the whole section is archived.)
+below re-tests anything already passed.)
 
 ## What a pass here means
 
@@ -85,13 +82,6 @@ healthy = `vetoed` climbing, `veto_expired` low, `unclaimed` not building up.
 
 # 2 · In progress — owed halves of partially-passed tests
 
-## ~~PT-56~~ — PASSED IN FULL 2026-07-30 → D09 `tested`, ARCHIVED
-
-Moved to `PLAYTEST_ARCHIVE.md` with its results. All four steps passed live
-including the stale-save reconcile. **This PASS un-gated the D10 workshops
-build.** Numbers and the method note (read the DIAL POSITIONS, not just the
-values, when scoring step 4) live on the D09 entry.
-
 ## PT-53 — Cohort housing · covers **D07 `Opt_CohortHousing`** (built 2026-07-28)
 
 Colonist/housing-level rule, NO dome designation: a Senior or Child living in
@@ -148,6 +138,27 @@ background of the WHOLE session (and future sessions) while other PT items are
 played, plus one controlled A/B demonstration. Expect multiple iterations —
 tuning knobs live at the top of `Code/Opt_DroneOverhaul.lua` (changes need a
 relaunch); record every knob change and its observed effect on the D06 entry.
+
+> ⚠️ **RECORD THE COMMANDER PROFILE, and be careful with `Inventor`**
+> (added 2026-07-30). The **Inventor** profile
+> (`Data/CommanderProfilePreset.lua:152-186`) does two things that bear on this
+> test, neither of which is interference with our modules — see the D06 entry
+> for the collision analysis — but both of which affect what you can *measure*:
+> 1. **Three `Effect_ModifyLabelOverTime` ramps on the `Consts` label** —
+>    `DroneConstructAmount` +1%, `DroneBuildingRepairAmount` +1%,
+>    `DroneGatherResourceWorkTime` −1%, each **every 2 sols × 50 repetitions**,
+>    i.e. drifting until Sol 100. **Repair throughput on an Inventor colony is
+>    not constant over time.** The B2 protocol is safe *because* it reloads the
+>    same quicksave between legs, putting both legs at the same sol — but any
+>    comparison of runs taken at **different sols** on such a save is invalid.
+>    Never compare a stress run to one from an earlier sitting.
+> 2. **It grants `AutonomousHubs`**, which sets `disable_electricity_consumption`
+>    and `disable_maintenance` on both the `DroneHub` and `DroneHubExtender`
+>    labels. That removes the two commonest causes of an extender's working-flag
+>    flapping, so **F77's trigger should be rare or absent on an Inventor save**
+>    — a quiet F77 half there is NOT evidence the fix does nothing. (Inference
+>    from the effect data, not yet observed; run the F77 half on a
+>    non-Inventor save if you want it to mean anything.)
 
 **What the module CAN do (judge it on these):**
 - Repair and cleaning jobs in OVERLAPPING hub coverage go to the CLOSEST hub's
@@ -790,14 +801,6 @@ goals.
 
 `Result (Oxygen goal needs Oxygen / penalties reachable at zero?):` _____________________________________________
 
-### ~~PT-44~~ — PASSED 2026-07-30 → F23 `tested`, ARCHIVED
-
-Moved to `PLAYTEST_ARCHIVE.md` with its result. The notification fires, renders
-and reads correctly; the F24 half had already been removed as unrunnable.
-**Carried forward:** `clicking a notification selects the object only when that
-object is VISIBLE` — an indoors colonist gets a camera pan and no selection,
-which is correct vanilla and must not be filed as a defect.
-
 ### PT-47 — Bombardment volley shape · covers **F26**
 
 The probe can prove the game computes a different direction per missile; only eyes
@@ -980,3 +983,10 @@ PT-20 uninstall-safety sitting, which already runs with the pack off.
    from this file into `docs/PLAYTEST_ARCHIVE.md`, so this checklist only
    carries un-run work. (A partially-passed test stays here with its passed
    triggers recorded, like PT-52/PT-53 above.)
+   ⛔ **DELETE the section outright — do NOT leave a ~~struck-through~~ stub,
+   summary or "moved to the archive" pointer behind** (owner instruction,
+   2026-07-30). This file is the live work list and nothing else; the archive is
+   where the notes and documentation live. Any fact worth carrying forward from
+   a completed test goes on its **BUGS.md entry** or into the archived section —
+   never a residue line here. The same applies to §6 needs-eyes rows once they
+   are settled.
