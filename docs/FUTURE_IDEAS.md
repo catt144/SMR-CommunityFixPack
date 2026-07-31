@@ -188,45 +188,58 @@ in the checklist; F03/F35/F48 entries in `BUGS.md`.
 
 # ⏸️ PROPOSED for parking — awaiting the owner's yes/no
 
-Listed, not moved. Each is still live on the board until the owner answers. A
-single "yes to all" is enough. Each entry says **what it actually does**, **what
-it touches**, and **why park it** — the short names alone are not
-self-explanatory.
+Listed, not moved. Each is still live on the board until the owner answers.
+
+**Status 2026-07-31:** seniors-in-workshops, D01 `on_activate`, D11 and the
+save-rescue proving work are **parked** (entries 1-4 above). D08 and D06
+structural had their parking **VETOED** — see below. **Only B and C are still
+awaiting an answer, and B's recommendation has been withdrawn and rewritten.**
 
 ---
 
-### A. D08 — Drone Hub Extender overhaul + Command Center  ⭐ strongest candidate
 
-**What it does.** Five independent layers, all unbuilt:
-1. **Dispatcher** — today a building covered by an extender registers only to
-   that extender's *uplink* hub; this makes it register to **every hub within
-   legal drone reach**, and lets D06's existing claim gate arbitrate. No new
-   scoring system.
-2. **Cluster scoping** — a player-authored "these hubs are one logistics zone"
-   grouping, as a *subset* of the geometric set.
-3. **Adjustable extender radius** — the original request; today the hub slider
-   can only ever SHRINK below default (max == default).
-4. **Command Center drone tab** — a dedicated drone tab rather than columns
-   bolted onto the Transportation tab.
-5. **"Drone Command Center" building** — a unique building that owns dispatch.
+### B. Audit Phase 4 — ⚠️ STILL OPEN, and the assistant's park recommendation is WITHDRAWN
 
-**What it relates to.** D06 (`Opt_DroneOverhaul` — its claim gate is what layer
-1 feeds), F77 (extender flap churn — the debounce pattern layer 1 would reuse),
-PT-20 (layer 5 is gated on it), and the drone leash constant
-`DroneRestrictRadius`, which is why job-relaying is permanently off the table.
+> **Owner's counter-argument, 2026-07-31 — it is correct and it changes the
+> answer:** *"I am picturing a real risk of regression after we launch a live
+> mod and risk introducing serious issues when we miss something during the
+> implementation of this."*
+>
+> The park case was framed as "risk of doing it now, immediately before launch."
+> That framing was wrong, because the alternative was never *no* risk — it is
+> **the same refactor later, against a live mod with real players' saves on the
+> line**, instead of now, against a green 77-probe harness and nobody's colony.
+>
+> **The assistant's own strongest objection inverts.** "Merging changes
+> player-facing fix IDs (`SMRFixPack_Disabled[...]`)" was given as a reason NOT
+> to do it now. Backwards: IDs are **free to change before launch and expensive
+> to change ever again after it** — post-launch they live in players' configs,
+> forum posts, the description and the FAQ. If the merges are ever going to
+> happen, they happen **before launch or realistically never**.
+>
+> **Revised recommendation — split it three ways rather than one yes/no:**
+> 1. **C3 merges — decide NEVER, not "later".** The audit found *no fix
+>    redundant and no load-order sensitivity*, so the benefit is ≈0, and
+>    post-launch it is ID-breaking. Closing it out permanently is cleaner than
+>    parking something that can never actually be done.
+> 2. **C4 deeper self-checks + C1 deactivation surface — the real pre-launch
+>    candidate.** ~25-32 of 74 modules carry pinned full-replacement bodies
+>    (verified 2026-07-31). After a game patch that edits those functions in
+>    place, the pack silently reinstates the 1.0.7.396349 bodies — **the one
+>    lifecycle case where a player ends up worse off than unmodded, and it is
+>    invisible to them.** Today that is mitigated only by *us* noticing and
+>    shipping an update. A game patch lands on the vendor's schedule, not ours.
+> 3. **C2 helper extraction — genuinely safe to defer.** Internal only, changes
+>    no module identity and no player-facing ID, so it carries no
+>    now-or-never pressure. This is the part that can wait.
+>
+> The one latent defect Phase 4 originally cited — 6 copies of `log()` missing
+> the `%%` escaping — is **already fixed** (verified: all 18 ModLog callers
+> escape). So no live defect is at stake either way; the argument is entirely
+> about *when* to accept refactor risk, and the owner is right that "after
+> launch" is the more expensive time.
 
-**Why park it.** The largest scope sink still open and **nothing is built**.
-Already gated on a QA review *and* PT-20. Critically, the whole document carries
-a mandate-change banner: **every layer was designed BEFORE the reachability/§4a
-turn**, so it needs re-reading against current policy before a line is written.
-Parking costs nothing today.
-
-**Material.** `DRONE_OVERHAUL_OPTIONS.md` (design record + risk table + five
-open questions).
-
----
-
-### B. Audit Phase 4 — core-helper extraction, module merges, deactivation surface  ⭐ second strongest
+**Original park case, kept for the record:**
 
 **What it does.** Three refactors of our own code, no gameplay change:
 - **C2 helper extraction** — the `log()` helper is cloned in 11 files plus 5
@@ -279,46 +292,6 @@ waiting.
 
 
 
-### F. D06 structural iteration beyond knobs
-
-**Plain English first.** D06 is the opt-in "drone dispatch overhaul". The
-problem it attacks: a hub on the far side of the map can claim a job that a
-nearby hub's idle drones should have taken, because drones are leashed to their
-own hub and cannot relay work. **What actually shipped is a narrow version** —
-a *veto* at the moment of claiming, plus letting idle drones help a neighbouring
-hub that has none. "Structural iteration" means the **bigger redesigns that were
-speced but deliberately NOT built**, each of which changes how work is
-distributed rather than just tuning the shipped behaviour:
-
-| Option | What it would do | Status |
-|---|---|---|
-| **H (registration)** | Instead of vetoing a bad claim *after* the fact, control which hubs a request is ever **visible** to — closest hub first, escalating outward only if it is overloaded. Hooks `ShouldAddRequestToCommandCenter`. | The *veto* variant of H shipped; **full registration-H did not** |
-| **H-v2 (demand filter)** | Narrower still — filter by demand. Only worth it if live data shows the **delivery** leg (depot→building) dominating. Needs the shuttle deficit-table ripple assessed first. | Not built |
-| **B (full moonlighting)** | Hand the whole job to the neighbouring hub's own matcher, **including haulage** — much broader than the shipped repair-only help. | Not built |
-| **C (migration balancer)** | A slow sweep (every ½ sol) that physically **migrates idle drones** from a slack hub to an overloaded one, so imbalance self-corrects instead of just being survivable. | Not built |
-| **D / E** | Largely superseded by H; E (reassigning already-claimed work) stays a last resort. | Not built |
-
-**What it relates to.** `Opt_DroneOverhaul`; D08 layer 1 (which would feed the
-same claim gate); and the rocket cargo path F50/F68/F70/F71, because these are
-**the deepest shared queues in the game**.
-
-**Why park it.** Three reasons, all on file. The shipped core is **opt-in and
-explicitly experimental**. The structural choice was **always gated on
-measurement** — the PT-52 B2 stress re-run — and that measurement has not
-happened, so choosing now would be guessing. And the design doc's own **global
-risk statement** says any subset approved must re-pass the F50 rocket-churn and
-F55 unreachable scenarios plus a new probe set before shipping — that is a large
-verification bill for an experimental opt-in module, immediately pre-launch.
-
-**Knob tuning stays available** (STRIKES_MAX, STRIKE_TTL, MOONLIGHT_MAX_HEXES,
-cache TTLs) as an ordinary mechanical change. Only the redesign parks.
-
-⚠️ **The PT-52 Trigger B2 stress re-run does NOT park with it.** That is a test
-of code already shipped, and parking a shipped module's verification is barred
-by this file's own rules. It also stays useful independently: it tells you
-whether the shipped core is doing anything at all.
-
----
 
 ### Deliberately NOT proposed for parking
 
@@ -332,6 +305,20 @@ whether the shipped core is doing anything at all.
 - **F84 / D10 T1 localization call** — already bundled into a build that is
   happening; splitting it creates the second decision this pairing exists to
   avoid.
+
+### Parking VETOED by the owner — these stay LIVE on the board
+
+- **D08 — Drone Hub Extender overhaul + Command Center.** Owner, 2026-07-31:
+  parking **vetoed**, cycle back to it — *"its a more complex conversation."*
+  It stays a live, undecided item.
+- **D06 structural iteration beyond knobs.** Owner, same message: fold into the
+  D08 discussion. *"We will be having a major drone conversation once we get the
+  rest of the house cleaning done."*
+
+⚠️ **Both are pending ONE dedicated drone conversation, after the housekeeping.**
+Until that conversation happens: do not build either, do not re-propose parking
+them, and do not treat them as scheduled work. They are **undecided**, which is
+a different state from both "owed" and "parked".
 
 ### Decided and CLOSED — not parked, do not re-file
 
