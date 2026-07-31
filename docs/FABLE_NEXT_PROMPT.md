@@ -124,12 +124,20 @@ account-persistent too.
 > are BUILDS — writing new fixes before the save-safety rules are settled risks
 > adding leak sites. Confirm the owner's intent before starting a build.
 
-0. **🥇 F87 — DO THIS FIRST (owner instruction, 2026-07-31).** A one-line repair
-   with a re-verified A/B. `Fix_DustSicknessBiorobots` **throws** at apply on
-   some load orders (`HasTrait:new` before class flattening — the third F64
-   pre-flattening trap), so F40 is silently unfixed for that player. Caught live
-   by the Phase-4 C1 dialog. Repair, the two follow-ups it earns, and the full
-   trail are on the F87 entry. **Do not start anything else until this lands.**
+0. **🥇 F87 — DO THIS FIRST (owner instruction, 2026-07-31).**
+   `Fix_DustSicknessBiorobots` **throws** at apply when the player enables the
+   mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for
+   that whole session. **This is every player's first run**, not an edge case: a
+   mod is never auto-enabled, so it is always ticked at the main menu of a
+   running process, which triggers an in-place reload. **Owner direction: solve
+   it so the player never has to be told anything** — the C1 dialog wording is a
+   fallback, not the fix. Note the obvious guard does NOT work (`DataLoaded` has
+   already fired); use `ClassesBuilt` / `ModsReloaded` and fix the shared
+   `DataPatch` scaffold rather than the one file. Full repair shape, the C1
+   `error`-vs-`inactive` split, and the three follow-ups are on the F87 entry.
+   **The widest-coverage item there is a harness leg for the ENABLE PATH — we
+   have never once tested the session a new player actually has.**
+   **Do not start anything else until this lands.**
 0b. **🛑 F86 — the save-safety redesign.** Owner decision owed on the three
    layers (input-patching, the tail-call rule, `SaveGameStart` tear-down). Two
    cheap measurements are owed first and both are quick: **(a)** does

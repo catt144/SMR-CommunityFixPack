@@ -4304,17 +4304,60 @@ those three modules; **the shared `SMRFixPack.DataPatch` scaffold has the same
 exposure and was never covered.** The repair below fixes the reported symptom;
 the sweep in follow-up 1 is what addresses the class.
 
-**Repair (one line, do not construct preset objects during apply).** Either
-guard the construction and let the `DataLoaded` pass do the work post-flattening:
+**REPAIR — owner direction 2026-07-31: solve it so the player never needs to be
+told anything.** A dialog explaining a broken first run is a worse outcome than a
+first run that works, so the player-facing message below is a fallback, not the
+fix.
 
-```lua
-if type(HasTrait.new) ~= "function" then return end
-```
+⚠️ **The obvious guard does NOT work.** Skipping the construction and "letting
+the `DataLoaded` pass handle it" fails on this exact path — `DataLoaded` has
+already fired before the mod was enabled and does not fire again, so the fix
+would simply never apply that session. The repair needs a genuine
+post-flattening trigger.
 
-or build the filter with `PlaceObj("HasTrait", { Trait = "Android", Negate = true })`.
-**A plain table will not do** — those filters are evaluated through their class
-metatable. Needs a re-verified A/B (~90 s unattended) and ideally a load-order
-check, since the favourable order is what hid it.
+**Two exist, both source-verified, neither blacklisted (`ModMsgBlacklist`,
+`Mod.lua:1430-1440`) — UNTESTED, verify before relying on them:**
+- **`OnMsg.ClassesBuilt`** (`CommonLua/Core/classes.lua:1099`) — *"post-built
+  actions on the final classes"*, i.e. after flattening, which is precisely what
+  `HasTrait:new` needs. `MsgClear`'d immediately after firing (`:1100`), so it is
+  one-shot per build cycle and the handler must be registered at file scope —
+  where our code already runs. **The crash itself proves the ordering works:**
+  `HasTrait` was unflattened when our code ran, so classes had not yet been
+  built, so a handler registered then still fires afterwards.
+- **`OnMsg.ModsReloaded`** (`CommonLua/Classes/Mod.lua:2193`) — *"fired right
+  after mods are loaded, unloaded or changed"*; the enable path specifically.
+
+**Preferred shape — fix the class, not the instance.** Remove the cold-boot
+assumption from the shared `SMRFixPack.DataPatch` scaffold rather than patching
+this one file: do no work at apply time, register the full trigger set
+(`DataLoaded` for cold boot, `ClassesBuilt` / `ModsReloaded` for the enable
+path, `DataChanged` for re-fires), and let whichever fires first with **both**
+presets loaded and classes flattened do the work once, idempotently. Every
+`DataPatch` user inherits the fix. Construction should also use
+`PlaceObj("HasTrait", { Trait = "Android", Negate = true })` rather than
+`HasTrait:new{…}`; **a plain table will not do**, since those filters are
+evaluated through their class metatable.
+
+**Verification:** a re-verified A/B (~90 s unattended) **plus a leg on the enable
+path** — boot with the pack off, enable it at the main menu, then run the probes.
+That leg does not exist today and is the reason this hid (see follow-up 3).
+
+**FALLBACK ONLY — the player-facing message, if something still slips through.**
+The C1 dialog is entirely ours (`00_Core.lua:345-391`) and currently
+misclassifies: `UpdateSuspects` treats `status == "error"` as patch rot, so a
+fix that *threw* is reported with the vocabulary of a fix whose self-check found
+changed game code. That is what produced "the game code they patch has changed"
+when no such thing had happened, and it sends a player hunting for a mod update
+that cannot help. Split it:
+- `inactive` + update-suspect → genuine patch rot. Keep today's text. **Do not
+  suggest a restart** — it will not help and sends them in circles.
+- `error` → the fix crashed at startup. Different text, and the actionable line
+  belongs here: *"If you just enabled this mod, restart the game to activate the
+  affected fix(es). If this reappears after a restart, please report it."*
+The enable path is also **detectable** — presets already populated at file scope
+is exactly the trigger condition — so the message can state what happened rather
+than hedge. **Fire only when something actually failed**; a dialog greeting every
+player on install is worse than the bug it describes.
 
 **Two follow-ups this earns, neither done:**
 1. **Sweep every `apply()` for cold-boot assumptions** — constructor calls
@@ -4326,10 +4369,16 @@ check, since the favourable order is what hid it.
    enable from the Mod Manager. Every leg we have ever run is a cold boot, which
    is precisely why this hid.
 2. **`FIX_POLICY` needs the rule stated**: apply-time code runs before class
-   flattening and may not construct preset/class objects — and the C1 report
-   should distinguish *"self-check found changed game code"* (`inactive`) from
-   *"the fix threw"* (`error`), because they mean very different things to a
-   player and only the first is about a game update.
+   flattening and may not construct preset/class objects, and **no apply() may
+   assume a cold boot** — the player's first run is always the enable path.
+3. **The harness has never tested the enable path — add a leg for it.** Every
+   A/B leg ever run launches with the pack already enabled, so all `74/74`
+   figures describe the second session onward. A leg that boots with the pack
+   off, enables it at the main menu and then runs the probes would have caught
+   this the day it was written, and would also verify audit finding **A2**'s
+   three `Opt_` modules, whose "a first mid-session enable works" remediation has
+   never been checked end to end. **This is the widest-coverage item on the
+   entry** — wider than the repair itself.
 
 **Credit where due:** this is the C1 surface's first catch outside a synthetic
 test, and it caught a defect that would otherwise have shipped silently. That
