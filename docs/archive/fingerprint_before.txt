@@ -1,0 +1,193 @@
+# Phase 4 behavioural fingerprint — captured BEFORE any code was touched.
+# Leg: Mars.exe-20260731-11.43.28 (unattended, -smrautorun), 2026-07-31.
+# CONFIGURATION MEASURED (read from the leg itself, per the standing rule):
+#   all six opt toggles ON (74/74) + carry dial OFF BASE (const 3 vs base 1
+#   per the D09 probe's entry report). The owner enabled these during the
+#   morning play session — the 01.37 leg's default state is gone.
+# This is the acceptance criterion for every Phase 4 stage: every count,
+# every per-probe verdict, every reason string must match EXACTLY.
+#
+=== FINGERPRINT from Mars.exe-20260731-11.43.28-6a22b86d.log ===
+
+--- fix pack present line:
+[SMRTest] fix pack present: 74/74 fixes active
+
+--- probe summary:
+[mod] [SMRTest] ---- 67 PASS, 0 FAIL, 10 SKIP, 0 ERROR ----
+
+--- per-probe verdict lines ([mod] channel only, in order):
+[mod] [SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  MeteorFrequency          [behavior] watchdog restarts a stalled Meteors thread and leaves a healthy one alone
+[mod] [SMRTest] PASS  UpgradeModifierLeak      [behavior] modifier turned off
+[mod] [SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[mod] [SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[mod] [SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[mod] [SMRTest] PASS  TouristApplicants        [behavior] 1-star 170 < 2-star 317 over 400 rolls
+[mod] [SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[mod] [SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready
+[mod] [SMRTest] PASS  LanderCargoRatchet       [behavior] request 300000 >= 300000 aboard
+[mod] [SMRTest] PASS  LanderReturnFuel         [behavior] parked lander keeps 3500 fuel requested
+[mod] [SMRTest] PASS  ShelterReflex            [behavior] life-support blip tolerated; Idle wrapper unverified (introspection unavailable (retail sandbox))
+[mod] [SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[mod] [SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[mod] [SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[mod] [SMRTest] SKIP  ArrivalDeaths            [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  DroneUnreachableForever  [behavior] failure stamped at now+0 ms; expires after 3600000 ms
+[mod] [SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (0 reserved slot(s) in this save, 0 clearly stale)
+[mod] [SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: MirrorSphereMystery)
+[mod] [SMRTest] PASS  TouristSatisfaction      [behavior] 0->100 pays 40000, 100->0 charges -40000
+[mod] [SMRTest] PASS  TrainPlatformWedge       [behavior] stale passenger removed and ticket discarded
+[mod] [SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  CommandCenterNumbers     [behavior] all 11 getters present
+[mod] [SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[mod] [SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20) but never overrides a configured one
+[mod] [SMRTest] PASS  ClassicRockets           [behavior] a parked player rocket keeps 3500 fuel requested
+[mod] [SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[mod] [SMRTest] PASS  SaveSanitizerUpgradeLeak [behavior] orphaned upgrade bonus removed; live building's and unrelated modifiers untouched
+[mod] [SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[mod] [SMRTest] PASS  SmallLandscapeSites      [behavior] two-hex site returns 2 destinations, nine-hex site still returns the closest 5
+[mod] [SMRTest] PASS  DomeFreeSpaceMismatch    [behavior] tally follows the player's switch, matching ChooseResidence
+[mod] [SMRTest] PASS  FreedHousingNotice       [behavior] vacated home notifies the dome's homeless; a residence with no free slot does not
+[mod] [SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[mod] [SMRTest] PASS  AsteroidLanderAvailable  [behavior] busy-but-unassigned landers on the pad count; assigned and off-world ones do not
+[mod] [SMRTest] PASS  AutoExportPriority       [behavior] the scarce hold goes to PreciousMinerals; with room to spare both are still requested
+[mod] [SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[mod] [SMRTest] PASS  GeneForging              [behavior] Gene Forging +50, Gene Selection +100, both +150
+[mod] [SMRTest] PASS  DustSicknessDamage       [behavior] damage rolls 5..14 instead of a flat 10
+[mod] [SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[mod] [SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[mod] [SMRTest] PASS  UniversityOvertraining   [behavior] automated extractor needs 0, manned extractor still needs 12
+[mod] [SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped
+[mod] [SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[mod] [SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex; an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[mod] [SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[mod] [SMRTest] PASS  GridGlobalStorage        [behavior] 1h reserve reads 180000, empty reads 0, 100h reads 3000000 (2-sol mark is 1440000)
+[mod] [SMRTest] PASS  LastTransmissionStorage  [behavior] all 6 storage conditions are on Condition and read their own grid
+[mod] [SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[mod] [SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[mod] [SMRTest] PASS  MoraleComfortTooltip     [behavior] Comfort reads 69 (below the 70 mark); other stats untouched
+[mod] [SMRTest] PASS  StorageRateModifiers     [behavior] rates reached the element (7777/8888), UpdateStorage ran 2 time(s)
+[mod] [SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[mod] [SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Infected (Negative) raises the notification						Lua 0:01:04:943
+[mod] [SMRTest] PASS  IndependenceTerraforming [behavior] discount is 20%, matching param1; the savegame sweep replaces a stale stored modifier and leaves a correct one alone
+[mod] [SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[mod] [SMRTest] PASS  LayoutTechLock           [behavior] locked entries drop; researched, prefab-package and owned-prefab entries and grid runs all survive
+[mod] [SMRTest] PASS  TrainMinors              [behavior] instant track takes the tracks palette (sites untouched); train cap recomputed 4->1, 40->2, 0->0
+[mod] [SMRTest] PASS  DroneTransportMinors     [behavior] weak keys restored; count corrected 4 -> 2
+[mod] [SMRTest] PASS  AnomalyCaveInMap         [behavior] a false map is declined; a real map still reaches the shipped cave-in
+[mod] [SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[mod] [SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[mod] [SMRTest] PASS  DisasterPredictionLeak   [behavior] stranded flag cleared, notification-backed flag kept (1 cleared)
+[mod] [SMRTest] PASS  MeteorStormWedge         [behavior] all four watchdog states correct: no-storm, live storm protected, signature arms, sustained heals
+[mod] [SMRTest] PASS  RainsDeadlock            [behavior] global is the bounded body; 1 unmarked loop refreshed and marked, marked loop untouched
+[mod] [SMRTest] PASS  FirstAsteroidPrefabs     [behavior] stranded save granted 1/1/1 and latched; already-healed and non-FirstAsteroid states granted nothing
+[mod] [SMRTest] PASS  AcknowledgedWarnings     [behavior] dismissal stamps listed buildings, blocks their re-adds, skips the id-wide window; recovery re-arms
+[mod] [SMRTest] PASS  ResidencyControl         [behavior] closed dome refused to resettlers and arrivals; tourists and the safety fallback untouched
+[mod] [SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panel picks up whichever Artificial Sun is actually in range
+[mod] [SMRTest] PASS  CohortHousing            [behavior] in-dome move + cross-dome tie-bypass work; employed/forced/no-slot/quarantine all left vanilla
+[mod] [SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 1) and base removed both by id; account carry dial OFF BASE on entry (const 3 vs base 1) — set it to base before any human baseline read
+[mod] [SMRTest] PASS  OptionsMenu              [behavior] default_options + 6 toggles + 2 D09 dials present, names match the registry, bridge helpers installed
+
+--- complete [CommunityFixPack] load-time output ([mod] channel, in order):
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] DroneStatDials: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+[mod] [CommunityFixPack] MeteorFrequency: WATCHDOG — Meteors thread silent for 99 game hours (last phase 'probe-stall', thread ALIVE but stuck); restarting
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine label (+100% electricity_production)
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine_Large label (+100% electricity_production)
+[mod] [CommunityFixPack] SaveSanitizer: removed 1 leaked upgrade modifier(s) from salvaged buildings
+[mod] [CommunityFixPack] IndependenceTerraforming: corrected the already-researched tech's stored discount from 10% to 20% (savegame sweep)
+[mod] [CommunityFixPack] DisasterPredictionLeak: cleared stranded prediction flag 'DisasterMeteorStorm' (no live notification behind it)
+[mod] [CommunityFixPack] RainsDeadlock: 'toxic' rain loop moved onto the bounded body (settings 'Toxic_VeryLow')
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: First Asteroid prefabs recovered after a save/load (3 granted)
+
+--- SMRAUTO markers:
+[mod] [SMRAUTO] armed (cmdline -smrautorun)
+[mod] [SMRAUTO] ShowStartGamePopup neutered for the unattended run
+[mod] [SMRAUTO] BEGIN
+[mod] [SMRAUTO] END
+[mod] [SMRAUTO] done
+
+--- error-shaped lines naming our code (must be empty):
+(none)
