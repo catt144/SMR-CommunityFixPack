@@ -89,7 +89,20 @@ consumption is the question. A drone must actually perform the work.
 
 ---
 
-## Q2 — Are hub queues persisted, or rebuilt on load?
+## Q2 — Are hub queues persisted, or rebuilt on load? ✅ ANSWERED 2026-07-31 — **PERSISTED**
+
+> **Answered the hard way, by a live incident.** The queue tables are allocated in
+> `TaskRequestHub:Init()` (`TaskRequest.lua:242-256`) — at **construction**, never
+> again, and **not on load**. A hub restored from a save comes back with the
+> tables it was built with. Demonstrated when the experiment module widened the
+> range on an existing save: every `FindTask` threw, drones froze colony-wide.
+> Full write-up in `DRONE_PRIORITY_SYSTEM.md` §8; the "Persisted" branch below is
+> the one that applies, and its mitigation is **not optional**.
+>
+> Also settled here: the hub population is **`DroneHubBase`, `RocketBase` and
+> `RCRover`** — rockets and rovers carry their own queue sets. And
+> `DroneControl` caches the maximum in a **file-local** (`DroneControl.lua:8`)
+> that mod code cannot reach, so its `RemoveBuilding` loop stops at 3 regardless.
 
 **Why it matters.** This is the uninstall-safety question, and it is also open
 question #1 in the D08 section of `DRONE_OVERHAUL_OPTIONS.md`, so it pays for

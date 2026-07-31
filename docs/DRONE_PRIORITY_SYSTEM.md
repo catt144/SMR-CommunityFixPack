@@ -46,16 +46,39 @@ local DefBuildingPriority        =  2
 local MaxBuildingPriority        =  3
 ```
 
-**The game does not override them** — a sweep for a `const.TaskRequest` settings
-group found no hits, so the CommonLua defaults stand. Separately
+~~**The game does not override them** — a sweep for a `const.TaskRequest`
+settings group found no hits, so the CommonLua defaults stand.~~ Separately
 `Lua/_GameConst.lua:56` sets `const.MaxBuildingPriority = 3`, with the shipped
 comment `-- 1 normal, 2 - high, 3 - urgent`.
+
+> ⚠️ **CORRECTION 2026-07-31, measured live — the struck sentence is WRONG.**
+> The experiment module read the group at mod-load time and reported
+> `const.TaskRequest.MaxBuildingPriority = 5 (was 3)`. **The group EXISTS and
+> already carries 3** before any mod runs, so `ClassesPreprocess` really does
+> apply it and the CommonLua defaults are being re-asserted rather than left
+> alone. Where it is defined is **not determined**: it is in neither the Src Lua
+> tree nor Src's `Data/` (both swept). The likely home is a Consts/`ConstDef`
+> preset inside `Data.fpk`, which the 2026-07-29 parity extraction did not cover
+> — that job diffed `Lua.fpk` only. **Do not re-assert "the game does not define
+> that group" without extracting `Data.fpk` first.**
+>
+> This matters beyond bookkeeping: the group being live is what makes a
+> file-scope `const.TaskRequest` write take effect at all — and therefore what
+> made the §8 incident possible.
 
 ⚠️ **That comment is misleading and should not be trusted as the band map.** The
 actual player default is **2**, not 1 — see §2.
 
+> ⚠️ **CORRECTION 2026-07-31 — the function named below does not exist.** This
+> section originally cited `TaskRequestHub:InitRequestQueues`; there is no such
+> function anywhere in the tree. **The allocation loop lives in
+> `TaskRequestHub:Init()` (`TaskRequest.lua:242-256`)** — i.e. it runs when a hub
+> is **constructed**, and *never again*. It does **not** run on load. The wrong
+> name carried a wrong implication (that queues get initialised at some
+> re-triggerable moment), and that implication broke a live save — see §8.
+
 **The queues exist only for those five values.**
-`TaskRequestHub:InitRequestQueues` (`TaskRequest.lua:245-256`):
+`TaskRequestHub:Init()` (`TaskRequest.lua:242-256`):
 
 ```lua
 for priority = MinBuildingPriority, MaxBuildingPriority do
@@ -282,3 +305,63 @@ shortens the 3h03m haul leg in play (that is a measurement, and PT-52's harness
 must be re-pointed first — the current metric measures *which hub delivered*, not
 which won a claim); and how much routine traffic a colony-wide promotion would
 displace.
+
+---
+
+## §8 The live widening incident, 2026-07-31 — read this before touching the range
+
+The Q1/Q2 experiment module widened `const.TaskRequest.MaxBuildingPriority` to 5
+at file scope and the owner loaded an existing save. **Every `FindTask` call in
+the colony threw immediately**, drones froze in place while the UI reported
+"heavy load", and the log filled with tens of millions of lines. Nothing had been
+armed yet — the widening **alone** did it. Stack:
+
+```
+[LUA ERROR] attempt to index a nil value
+  [C](-1):                   upvalue Request_FindTask_C
+  Lua/_TaskRequest.lua(73):  upvalue orig_findtask
+```
+
+**Mechanism, and it is the important part.** `Init()` allocates the queue tables
+at construction time and never runs again (see the correction in §1). A hub
+restored from a save therefore comes back with the tables it was **built** with —
+`-1..3`. The widened const makes vanilla's own loops (`_InternalRemoveRequest`
+`:364-374`, `TaskRequestHub:RemoveBuilding` `:344-358`, both reading the module
+locals) iterate `-1..5` and index `supply_queues[4]`, which is nil.
+
+### What this settles
+
+1. **Q2 IS ANSWERED: hub queues are PERSISTED, not rebuilt on load.** They are
+   plain instance members and they come back through the save exactly as they
+   were. This was the branch the research brief flagged as needing mitigation,
+   and it now has a live demonstration rather than an assumption.
+2. **The hub population is bigger than "drone hubs".** `DroneControl` subclasses
+   are **`DroneHubBase`, `RocketBase` and `RCRover`** (`DroneHub.lua:2`,
+   `RocketBase.lua:2`, `RCRover.lua:6`) — every rocket and every RC Rover carries
+   its own queue set. Any range change has to reach all of them.
+3. **Strong signal on Q1, not yet proof.** If the C matcher had `-1..3` baked in,
+   widening a const it ignores could not have made it index a missing key.
+   `Request_FindTask_C` throwing is most simply explained by the C side *reading*
+   the bound — which points toward "honoured". **Not recorded as the answer**;
+   it needs the clean run.
+4. **`DroneControl` caches the maximum in a FILE-LOCAL** — `local MaxBuildingPriority
+   = const.MaxBuildingPriority` (`DroneControl.lua:8`), evaluated when the game's
+   own Lua loads, **before any mod runs**, and used by the live
+   `DroneControl:RemoveBuilding` loop at `:735`. Mod code cannot reach a file-local
+   upvalue. So even a fully honoured widening leaves that removal path stopping at
+   3, and band 4-5 entries would not be cleared by it. (The similar loop at `:133`
+   is inside a `--[[ ]]` comment — a dead Lua version of a C function — and does
+   not count.)
+
+### The design consequence — this is the part that bites the rebuild
+
+Bands 4-5 cannot simply be switched on. **Every hub in every existing save has
+narrow tables**, and the moment the range widens, vanilla's own removal loops
+index keys those hubs do not have. Any real deployment needs to top up (or
+rebuild) the queue tables of every already-constructed `DroneControl` — hubs,
+rockets and rovers, across every loaded map — before anything calls `FindTask`.
+That is a savegame-compatibility burden the band design did not previously know
+it had, and it belongs in the design-drift disclaimer if the scheme survives.
+
+**Safe re-run:** do it on a **new game**, where every hub is constructed after the
+const change and allocates the full range natively.
