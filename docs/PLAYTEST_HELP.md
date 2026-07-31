@@ -315,6 +315,42 @@ Turn loggers **off** when a test is done — they print every tick and will bury
 
 ---
 
+## The ENABLE-PATH leg — the session shape the harness never measured (added 2026-07-31, F87)
+
+**Every A/B leg we have is a COLD BOOT** — the game launches with the pack
+already enabled, so all `N/74` figures describe the *second session onward*. **A
+player's first session is a different load order**: a mod is never auto-enabled,
+so they tick it at the main menu of a running process, the engine does an
+in-place reload, and our code runs with the **presets already loaded and the
+classes not yet built**. F87 shipped in that gap. This leg closes it.
+
+**It needs a human for exactly one click, and nothing else.** The enable itself
+cannot be scripted: `AccountStorage`, `SaveAccountStorage` and `ModsReloadItems`
+are all in `ModEnvBlacklist` (`Mod.lua:1270/:1279/:1392`), and there is no
+console at the main menu — so no mod-side or console-side path exists.
+
+1. In the Mod Manager, leave the **fix pack DISABLED** and the **Test Kit
+   ENABLED**. (The leg aborts with a log line if the pack is already on — that
+   would just be a cold boot wearing this leg's name.)
+2. Arm it: uncomment `"Code/98_EnablePathLeg.lua"` in the TestKit metadata
+   `code` list. Do **not** arm `96_AutoRunFlag.lua` as well.
+3. Launch as usual (`-smrautorun` is carried by habit and is ignored — the leg
+   stands the normal autorun down so it cannot start a colony pack-less).
+4. At the main menu: **Mods → tick "Community Fix Pack" → close the dialog.**
+5. Walk away. The harness sees `ModsReloaded`, builds a colony, runs the whole
+   probe suite and quits, exactly like an unattended leg.
+6. Disarm by re-commenting the line.
+
+**Reading it:** expect the same totals as the equivalent cold-boot leg for the
+same toggle state — so read the `fix pack present: N/74 fixes active` line
+first, as always; the opt-in toggles are account state and this leg does not
+touch them. The suite is a real detector for this defect class: `FixMissing`
+FAILs any probe whose fix is not `active` (catching an `apply()` that threw) and
+the data-patch probes read live preset data (catching a patch that silently
+never ran) — the two F87 symptoms.
+
+---
+
 ## Save fixtures — create these once, reuse them
 
 Make each one, then **save under the given name**. Every open test below names its

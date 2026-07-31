@@ -113,7 +113,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **MEASURED** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), 10 more at risk. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE** — FIX_POLICY §3 (entry) |
-| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | filed 2026-07-31 — caught live by the Phase-4 C1 dialog on its first non-synthetic outing. **Hits EVERY PLAYER'S FIRST RUN** (enable at the main menu → in-place reload); self-corrects only from the next launch. Third instance of the F64 pre-flattening trap, second of the enable-path class after audit A2, and **our harness has never tested the enable path at all**. **DO THIS FIRST NEXT SESSION** (entry) |
+| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written; cold-boot A/B re-verified CLEAR (`68/74`, 63/0/15/0). ⏳ **The enable-path leg is BUILT (TestKit `98_EnablePathLeg.lua`) but NOT YET RUN — it needs one click from the owner at the main menu** (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -4222,7 +4222,81 @@ Sensor towers extending single-meteor warning would be a **feature**, not a
 repair, and is declined. See the F02 root-cause note for why towers currently
 affect meteor *frequency* instead.
 
-### F87 — OUR OWN DEFECT: `Fix_DustSicknessBiorobots` throws at apply on some load orders, silently leaving F40 unfixed (P2, OBSERVED)  `[open — filed 2026-07-31; OWNER: DO THIS FIRST in the next session. One-line repair + a re-verified A/B]`
+### F87 — OUR OWN DEFECT: `Fix_DustSicknessBiorobots` throws at apply on some load orders, silently leaving F40 unfixed (P2, OBSERVED)  `[fixed 2026-07-31 — repaired in the shared DataPatch scaffold; 3 further enable-path casualties found and repaired; FIX_POLICY + ENGINE_FACTS written; cold-boot A/B CLEAR. ⏳ ONE THING OWED: the enable-path leg is built but unrun — it needs one click from the owner]`
+
+> ## ✅ WHAT LANDED 2026-07-31 (this entry's repair — read this before the diagnosis below)
+>
+> **The defect was in the shared scaffold, not in the one file.** `apply()` runs
+> before class flattening on *every* path; the cold boot hid it because the
+> presets are not loaded then either, so every pass returned early.
+> `SMRFixPack.DataPatch` (`00_Core.lua`) now:
+> - **runs nothing until `ClassesBuilt` has fired in this Lua load.** `g_Classes`
+>   is not a usable test — a reload leaves the PREVIOUS build's classes standing
+>   while the current ones are bare classdefs.
+> - fires from **`ClassesBuilt` (the enable path's real trigger) / `DataLoaded`
+>   (cold boot) / `ModsReloaded` (belt) / `DataChanged` (re-arm)**, all idempotent.
+> - seeds `ctx.data_loaded` from the **engine's `DataLoaded` global**
+>   (`Dlc.lua:51/:663`, `FirstLoad`-scoped so it survives a Lua reload) — without
+>   it, a missing-target latch reads the enable path as "presets not loaded yet"
+>   and never fires, which is the F75 gap through a different door.
+> - **`pcall`s the pass.** `Msg` dispatches handlers through `procall`
+>   (`cthreads.lua:20`), so a throw there is swallowed and the fix would go on
+>   reporting `active` while doing nothing — the F87 failure mode with no log
+>   line at all. It now reports `error`, logs, and C1 sees it.
+> - `apply()`'s `patch()` call is kept as a **documented no-op**: a live Mod
+>   Options re-apply happens long after `ClassesBuilt` and must do the work.
+>
+> `Fix_DustSicknessBiorobots` builds the filter with
+> `PlaceObj("HasTrait", { "Trait", "Android", "Negate", true })` — the prop-list
+> form the shipped data itself uses (`Data\StoryBit\DustSickness.lua:66-69`;
+> `HasTrait` is a `Condition` and `Condition.StoreAsTable` is set false in
+> `_fixup.lua:148-152`), and it fails soft where `:new` throws. The old guard
+> tested `type(HasTrait) == "table"`, **which is true for an unflattened
+> classdef — that is exactly why this shipped**; it now tests that the class is
+> BUILT, and a `PlaceObj` refusal is counted and latched with its own reason
+> instead of silently appending nothing.
+>
+> **Follow-up 1 (the sweep) — DONE, and it found three more.** All 75 files
+> checked for both shapes. Constructor calls: 6 sites, every one at runtime
+> inside a patched method or msg handler, none exposed. Preset patching: three
+> sites hung off `OnMsg.DataLoaded` alone, outside the scaffold, each **silently
+> dead for the whole session on the enable path** —
+> **`Fix_TechDescriptionBuilding`** (the data patch itself; the description
+> stayed wrong on every first run), **`Opt_MultipleSuns`** (the build-once limit
+> lift; with the toggle already ON from account state the module ran half-live)
+> and **`Fix_FirstAsteroidPrefabs`** (its preset self-check; it would have
+> reported `active` on a preset it never verified). All three now use the new
+> **`SMRFixPack.OnDataReady(fn)`** — DataPatch's trigger set without the
+> latch/heal contract. One ordering trap documented at the call site: the global
+> `DataLoaded` is set *after* `Msg("DataLoaded")` is posted, so the `DataLoaded`
+> handler must call `fn` directly rather than test the flag.
+>
+> **Follow-up 2 (the rule) — DONE.** `FIX_POLICY` §2 carries the hard rule (no
+> `apply()` may assume a cold boot; no class/preset construction at apply time;
+> `OnMsg.DataLoaded` alone is not a sufficient trigger; both paths must be
+> tested). `ENGINE_FACTS` carries the traced sequence so nobody re-derives it,
+> plus the `procall` fact.
+>
+> **Follow-up 3 (the harness) — BUILT, NOT RUN. This is the one thing still
+> owed.** TestKit `Code/98_EnablePathLeg.lua`, armed like `96_AutoRunFlag`:
+> boot with the pack OFF, the owner ticks it at the main menu, and the harness
+> takes over from `ModsReloaded` — colony, full suite, quit. Recipe in
+> `PLAYTEST_HELP.md`. **One click stays manual and cannot be automated:**
+> `AccountStorage`, `SaveAccountStorage` and `ModsReloadItems` are all in
+> `ModEnvBlacklist` (`Mod.lua:1270/:1279/:1392`) and there is no main-menu
+> console, so nothing mod-side or console-side can flip the checkbox. The
+> existing 78 probes are a real detector without any new probe: `FixMissing`
+> FAILs any probe whose fix is not `active` (an `apply()` that threw) and the
+> data-patch probes read live preset data (a patch that never ran).
+>
+> **Cold-boot re-verification (2026-07-31 18.44, unattended, 78 probes):**
+> `fix pack present: 68/74 fixes active` → **63 PASS / 0 FAIL / 15 SKIP / 0
+> ERROR** — the current default-config reference exactly. 68 `applied` lines,
+> `DustSicknessBiorobots: applied`, zero `[CommunityFixPack]`
+> error/FAILED/disabled lines, no log line names our `Code/`, known noise only
+> (`objects_to_mark` 48, 2 `LawOfficeDoor`, the TestKit GameInit nil-call pair).
+> **This proves the repair did not regress the cold boot. It does NOT prove the
+> enable path — only the leg above can.**
 
 **Observed live 2026-07-31**, immediately after re-enabling the pack following
 the PT-20 leg. The Phase-4 **C1 update-deactivation dialog** raised it at the
@@ -4359,7 +4433,10 @@ is exactly the trigger condition — so the message can state what happened rath
 than hedge. **Fire only when something actually failed**; a dialog greeting every
 player on install is worse than the bug it describes.
 
-**Two follow-ups this earns, neither done:**
+**Two follow-ups this earns, neither done:** ✅ **ALL THREE ARE NOW DONE OR
+BUILT — see the "WHAT LANDED" block at the top of this entry. The sweep in 1
+found three more casualties; 3 is built but unrun.** Original text kept below
+because it states the reasoning:
 1. **Sweep every `apply()` for cold-boot assumptions** — constructor calls
    (`:new{`, `PlaceObj`, class-table methods) and anything that behaves
    differently when presets are already loaded. Third occurrence of the

@@ -88,20 +88,35 @@ with **PHASE 4 COMPLETE** (below).
 >   (`IsValidThread(Meteors)` → `true`, restarted by our own `LoadGame`). The
 >   answer for an affected player is "put the mod back" — real, and uncomfortable.
 
-> 🥇 **F87 — OWNER SAYS DO THIS FIRST NEXT SESSION.** `Fix_DustSicknessBiorobots`
-> **throws** at apply when the player enables the mod, so **F40 is silently
-> unfixed for that entire session**. **This is the first-run path, not an edge
-> case:** a mod is never auto-enabled, so every player ticks it at the main menu
-> of a running process, which triggers an in-place reload — and our apply-time
-> data patch then runs with presets already loaded, before class flattening. It
-> self-corrects only from the next launch onward.
-> - **Caught live by the Phase-4 C1 dialog on its first non-synthetic outing.**
-> - **Our harness has NEVER tested the enable path.** Every A/B leg launches with
->   the pack already on, so all `74/74` numbers describe the second session
->   onward. The session a new player actually has is unmeasured.
-> - Third instance of the F64 pre-flattening trap and the second of the
->   enable-path class after audit finding **A2** — so it earns an `apply()` sweep
->   (both paths) and a FIX_POLICY rule. Neither done; both on the entry.
+> ✅ **F87 IS FIXED (2026-07-31) — and the repair went into the shared scaffold,
+> not the one file.** `Fix_DustSicknessBiorobots` threw at apply when the player
+> enabled the mod, leaving F40 silently unfixed for that whole session — **every
+> player's first run**, because a mod is never auto-enabled and the main-menu
+> tick triggers an in-place reload where the presets are already loaded and the
+> classes are not yet built.
+> - **`SMRFixPack.DataPatch` now runs nothing before `ClassesBuilt`**, fires from
+>   `ClassesBuilt` / `DataLoaded` / `ModsReloaded` / `DataChanged`, seeds its
+>   `data_loaded` gate from the engine's own `DataLoaded` global (the message
+>   never re-fires on that path), and `pcall`s its pass — `Msg` dispatches
+>   through `procall`, so a throw there was swallowed and the fix would keep
+>   reporting `active` while doing nothing. The filter is now built with
+>   `PlaceObj`, which fails soft; the old `type(X) == "table"` guard passed on an
+>   unflattened classdef, which is exactly why this shipped.
+> - **The sweep it earned found THREE MORE sites silently dead on the enable
+>   path** — `Fix_TechDescriptionBuilding` (the patch itself),
+>   `Opt_MultipleSuns` (the build-limit lift, so the module ran half-live) and
+>   `Fix_FirstAsteroidPrefabs` (its self-check). All repaired through the new
+>   **`SMRFixPack.OnDataReady`**. Constructor sites: 6, all at runtime, none
+>   exposed.
+> - **FIX_POLICY §2 carries the rule** (no `apply()` may assume a cold boot;
+>   both paths must be tested) and **ENGINE_FACTS carries the traced sequence**.
+> - **Cold-boot A/B re-verified CLEAR** — see the leg row below.
+> - ⏳ **ONE THING OWED: the enable-path leg is BUILT but UNRUN.** TestKit
+>   `Code/98_EnablePathLeg.lua` + the recipe in `PLAYTEST_HELP.md`: boot with the
+>   pack OFF, **the owner ticks it at the main menu**, and the harness does the
+>   rest. That one click cannot be automated — `AccountStorage`,
+>   `SaveAccountStorage` and `ModsReloadItems` are all sandbox-blacklisted and
+>   there is no main-menu console.
 
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
@@ -338,17 +353,20 @@ error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
 > ⚠️ **"NOTHING IS OWED" RETIRED 2026-07-31 — every leg above is a COLD BOOT.**
 > All of them launch the game with the pack already enabled, so the whole A/B set
 > describes the **second session onward**. The session in which a player *turns
-> the mod on* has never been measured, and **F87 lives there** (an in-place mod
-> reload makes apply-time code run with presets loaded and classes unflattened).
-> **Owed:** a leg that boots with the pack off, enables it at the main menu, then
-> runs the probes. It would also verify audit finding **A2**'s three `Opt_`
-> modules, whose "a first mid-session enable works" remediation has never been
-> checked end to end.
+> the mod on* had never been measured, and **F87 lived there**.
+> **Status 2026-07-31 late: the leg now EXISTS and is still UNRUN.** TestKit
+> `Code/98_EnablePathLeg.lua` (armed like `96_AutoRunFlag`, recipe in
+> `PLAYTEST_HELP.md`) boots with the pack off, waits for **the owner to tick it
+> at the main menu**, then drives the normal flow. It will also verify audit
+> finding **A2**'s three `Opt_` modules, whose "a first mid-session enable works"
+> remediation has never been checked end to end. **Until it runs, no measurement
+> we hold describes a player's first session.**
 The post-F83 set at 77 probes (`74/74` → `67/0/10/0`; default `68/74` →
 `62/0/15/0`; baseline `1/61/15/0`) is now historical, as are all older rows.
 
 | Leg | Active | Result |
 |---|---|---|
+| **CURRENT — POST-F87-REPAIR cold-boot re-verify, default config, 2026-07-31 18.44 (unattended), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — identical to the 12.44 reference; proves the scaffold change did not regress the cold boot. Says NOTHING about the enable path |
 | **CURRENT — POST-PHASE-4, all six toggles ON, 2026-07-31 12.30 (unattended), 78 probes** | **74/74** | **68 / 0 / 10 / 0** |
 | **CURRENT baseline — POST-PHASE-4, `code` list emptied, 2026-07-31 12.32 (unattended), 78 probes** | — | **1 / 62 / 15 / 0** — `FirstAsteroidPrefabs` + `UpdateReport` FAIL here (`bug reproduces`) |
 | **CURRENT — POST-PHASE-4 default config, six toggles OFF + dials at base, 2026-07-31 12.44 (unattended), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — predicted exactly; carry dial AT BASE on entry |
@@ -636,8 +654,11 @@ authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
    **Automated + attended probe coverage is now 100%**; ~~nothing further is owed
    to the harness~~ — **corrected 2026-07-31: that "100%" covers the cold-boot
    path only. The enable path (player ticks the mod at the main menu) has never
-   been measured and is where F87 lives; a leg for it is owed.** All that remains
-   otherwise is the human playtest.
+   been measured and is where F87 lived.** ▶️ **The leg for it is now BUILT and
+   needs YOU for one click:** arm `Code/98_EnablePathLeg.lua` in the TestKit
+   metadata, launch with the fix pack DISABLED, tick it at the main menu, and
+   walk away (recipe in `PLAYTEST_HELP.md`). All that remains otherwise is the
+   human playtest.
 2. DONE 2026-07-26 — author set to **catt144** in both mods' metadata.lua.
 3. For the save-failure lead: logs from `%AppData%\Surviving Mars Relaunched\logs`
    and Ctrl+F1 reports from affected players would pin it.

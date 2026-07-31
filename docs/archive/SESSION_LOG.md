@@ -8,6 +8,85 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## ✅ F87 FIXED — the enable path is now owned by the shared scaffold, and the sweep it earned found three more casualties — 2026-07-31 late (game-free, unattended leg)
+
+Started from `docs/FABLE_NEXT_PROMPT.md` at `82a6e8a`, board item 0 (owner: do
+F87 first). Everything below is one session; five commits, all pushed.
+
+### 1. The diagnosis moved: the defect was in the scaffold, not the file
+
+The entry described a one-line repair in `Fix_DustSicknessBiorobots`. Reading
+the shared `SMRFixPack.DataPatch` runner made it clear the file was innocent:
+`apply()` runs before class flattening on **every** path, and the cold boot
+merely hid it — the presets are not loaded then either, so every pass returned
+early before touching a constructor. The enable path removes exactly that
+coincidence. So the repair went into the runner and every `DataPatch` user
+inherits it.
+
+Source traced rather than assumed (all now in `ENGINE_FACTS.md`):
+`ModsReloadItems` → `ReloadLua` → `dofile(autorun)` → `Msg("Autorun")` (classes
+built) → `ContinueModsReloadItems` → `Msg("ModsReloaded")`. **`LoadData` is not
+in that sequence**, which is why `DataLoaded` never re-fires; the engine's
+`DataLoaded` *global* is `FirstLoad`-scoped and therefore survives the reload,
+which is the only evidence available on that path. And it is set **after** the
+message is posted, so it reads false inside a `DataLoaded` handler — a trap the
+first draft of the repair would have walked into.
+
+Two things the repair does that the entry did not ask for, both earned:
+- **`pcall` around the pass.** `Msg` dispatches through `procall`
+  (`cthreads.lua:20`), so a throw in a message handler is *swallowed* — the fix
+  would have kept reporting `active` while doing nothing. That is the F87
+  failure mode with no log line at all. Now it reports `error` and C1 sees it.
+- **`PlaceObj` instead of `:new`.** Not only because the entry says so: it fails
+  soft (returns nil for an unbuilt class) where `:new` throws, and it is the
+  form the shipped data itself uses for the sibling filter.
+
+### 2. The sweep found three more, and two of them were functional
+
+All 75 files, both shapes the entry names. Constructor calls: 6 sites, every one
+at runtime inside a patched method or a msg handler — none exposed. Preset
+patching outside the scaffold: **three sites hung off `OnMsg.DataLoaded` alone**,
+each silently dead for the whole session on the enable path —
+`Fix_TechDescriptionBuilding` (the patch itself), `Opt_MultipleSuns` (the
+build-once lift; with the toggle already ON from account state the module ran
+half-live, binding fix working, limit not lifted) and `Fix_FirstAsteroidPrefabs`
+(its self-check). All three now go through the new `SMRFixPack.OnDataReady`.
+
+So the blast radius of "our harness only ever measured one load order" was four
+modules, not one.
+
+### 3. The harness leg exists now, and one click of it cannot be automated
+
+`AccountStorage`, `SaveAccountStorage` and `ModsReloadItems` are **all** in
+`ModEnvBlacklist`, and there is no console at the main menu — so no mod-side or
+console-side path can flip the checkbox. Everything after the click is
+automated: TestKit `Code/98_EnablePathLeg.lua` watches `ModsReloaded`, refuses to
+run if the pack was already on at boot (that would be a cold boot wearing the
+leg's name), and hands off to `SMRAutoRun.Flow()`, which was factored out of 95's
+entry thread for the purpose.
+
+No new probe was needed: `FixMissing` already FAILs any probe whose fix is not
+`active` (an `apply()` that threw) and the data-patch probes read live preset
+data (a patch that never ran). Both F87 symptoms are covered by the suite we
+already have — which is the sharpest version of the finding: **the probes were
+never the gap; the load order was.**
+
+### 4. Cold-boot re-verify — CLEAR
+
+18.44 unattended, default config, 78 probes: `fix pack present: 68/74 fixes
+active` → **63 PASS / 0 FAIL / 15 SKIP / 0 ERROR**, identical to the 12.44
+reference row. 68 `applied` lines including `DustSicknessBiorobots`, zero
+`[CommunityFixPack]` error/FAILED/disabled lines, no log line names our `Code/`,
+known noise only (`objects_to_mark` 48, 2 `LawOfficeDoor`, the TestKit GameInit
+nil-call pair). **It proves no cold-boot regression and nothing about the enable
+path** — only the new leg can speak to that.
+
+### What is owed out of this leg
+
+One thing: **run the enable-path leg.** It needs the owner for one click.
+
+---
+
 ## 🛑 PT-20 FAILED — WE LEAK EXECUTABLE CODE INTO PLAYER SAVES (F86, P1, blocks release) — 2026-07-31 late (live sitting, owner at the keyboard)
 
 Started from `docs/FABLE_NEXT_PROMPT.md` at `84427e1`. The plan was PT-20 plus
