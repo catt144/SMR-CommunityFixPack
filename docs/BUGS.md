@@ -109,8 +109,9 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
-| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | filed 2026-07-30, **consequence OBSERVED — PT-58 PASS same day (1/1/1 vs 0/0/0)**; fix design is a USER DECISION, gate cleared (entry) |
+| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | filed 2026-07-30, **consequence OBSERVED — PT-58 PASS same day (1/1/1 vs 0/0/0)**; popup audit COMPLETE same day: hold lifted, **narrow decouple REINSTATED** — awaiting owner go (entry) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
+| F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -253,6 +254,12 @@ no override) and the pause layer engages only after the player opens it — so
 the one-sol miss window passes in ordinary inattention at fast-forward;
 "the player can minimise and ignore" understates. Full block in
 REACHABILITY_AUDIT.md.
+**Popup audit 2026-07-30 (`POPUP_CONSEQUENCE_AUDIT.md`): F06 is NOT an F83-family
+member.** Sequence threads are game-time and persist across saves with their
+blocked popup waits (no shipped scenario sets `real_time`); this defect is a
+**one-shot `Msg` fired while the sequence sat in a player-gated popup** — a
+path-vs-state race needing no save/load at all. The re-broadcast fix remains the
+right shape; nothing to re-scope.
 `Lua\Mysteries\Crystals.lua:67-70` — composed crystal emits `Msg("CrystalFlyAway")` exactly
 once (1 sol after completion; the `CrystalForceFlyAway` escape hatch has **no emitter
 anywhere** in Src). Scenario (`Lua\Scenario\Mystery 10.generated.lua:232,243,271`) first
@@ -3560,7 +3567,7 @@ is found. Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
 
-### F83 — Minimized story popups lose their callback across a save/load; First Asteroid silently withholds three promised prefabs (P2, PROVEN mechanism)  `[filed 2026-07-30 from live play — NOTHING BUILT, fix design is a user decision; PT-58 owed on the asteroid half]`
+### F83 — Minimized story popups lose their callback across a save/load; First Asteroid silently withholds three promised prefabs (P2, PROVEN mechanism)  `[filed 2026-07-30 from live play — NOTHING BUILT; audit COMPLETE same day, narrow decouple REINSTATED as recommended, awaiting owner go]`
 
 **Found in play 2026-07-30**, mid-setup for PT-56. The tester got the
 `FirstFounderEnthusiast` popup ("When Life Gives You Lemons…", Samuel Hayden has
@@ -3705,36 +3712,32 @@ F83 is the general case of the same shape. Also thematically adjacent to
 F81/F78/F82: this codebase drives state changes from specific code paths rather
 than from state, so anything that interrupts the path loses the change.
 
-**⛔ FIX ON HOLD 2026-07-30 — the narrow-decouple recommendation is RETRACTED
-pending `docs/POPUP_AUDIT_PROMPT.md`.** The owner asked whether FirstAsteroid is
-really the only thing a player can lose this way — anomalies, mystery popups,
-story choices — and a first dive says **no**. Established the same evening
-(source-read, NOT observed, flagged accordingly):
-- **`choiceN_func` is SAFE**: preset choice functions run in the UI action
-  handler (`PopupNotification.lua:135`) *before* `host:Close(i)`, not in the
-  waiting thread.
-- **The return-value form of `WaitPopupNotification` is exposed exactly like the
-  callback form** — code written after the wait dies with the thread. The
-  callback subset (8 sites) is not the whole surface; there are ~70 call sites.
-- **Storybits look like the real exposure, and anomalies + mysteries all route
-  through them** (`Discoveries.lua:49`, `PlanetaryAnomaly.lua:341`,
-  `ClassDef-StoryBits.lua:151`, `MarsStoryBits.lua:310`). In `_StoryBits.lua`:
-  `ActivateStoryBit` (:461) spawns `run_thread = CreateGameTimeThread(RunWrapper)`
-  (:475); `Run()` posts a corner notification and waits; `OpenPopup()` then does
-  reply → `StoryBitPayCost` → weighted outcome → `ProcessOutcomeEffects` →
-  `Complete()`. **Everything from the reply onward is after the waits.**
-  `g_StoryBitActive` is a persisted GameVar (:107) but `run_thread` has **no
-  `MakeThreadPersistable`**, `OnMsg.LoadGame` (:109) only prunes dead presets,
-  **no resume exists anywhere**, and `Unregister()` already ran — so a stranded
-  storybit cannot re-trigger. ActivationEffects run before the waits and are safe.
-- **F06 is already a documented instance of this family.**
+**~~⛔ FIX ON HOLD~~ — AUDIT COMPLETE 2026-07-30 (`docs/POPUP_CONSEQUENCE_AUDIT.md`):
+the hold is LIFTED and the narrow-decouple recommendation is REINSTATED.** The
+owner asked whether FirstAsteroid is really the only thing a player can lose
+this way, and the same-evening first dive said "no — storybits". **That storybit
+alarm was WRONG, and wrong about the engine:** it assumed a
+`CreateGameTimeThread` without `MakeThreadPersistable` dies on load. The
+default is the opposite — **game-time threads persist BY DEFAULT with their full
+blocked stacks; real-time threads do not** (three source proofs + the everyday
+observed fact that units resume mid-command after every load; now an
+ENGINE_FACTS entry). Storybits, mysteries, anomaly sequences and challenges all
+wait in game-time threads and are save-safe by the engine's own design (the
+storybit notification window even carries a forced-popup timeout backstop,
+`const.StoryBits.NotificationTimeout`). What the dive got right and the audit
+confirms: `choiceN_func` is safe, the return-value form is exposed exactly like
+the callback form, and the exposure is real — but **only where the waiter is a
+REAL-TIME thread**, which is exactly this entry's two consequential sites plus
+one latent shielded class (filed **F85**). F06 is NOT this family (its defect is
+a one-shot `Msg` missed while a sequence popup sat — no save/load involved; its
+fix stands). **Corrections to this entry from the audit:** the eighth callback
+site (`ColonyViability.lua:260`, `class.popup_on_first`) is a **game-time**
+thread whose presets open immediately — safe on both axes, not part of the
+exposed list; and the commented-out `AnomalyAnalyzed` wait
+(`PlanetaryAnomaly.lua:299-305`) is dead code, not a live site. Full
+enumeration, safety rule, and needs-eyes list in the audit file.
 
-Fixing the asteroid grant alone would paper over what may be a general defect —
-*player-facing consequences applied after a wait in a non-persisted thread* —
-with the asteroid as its one proven symptom. **Nothing ships until the audit
-reports.**
-
-**Fix options (recorded, NOT approved — the audit may supersede all of them).**
+**Fix options (option 1 RECOMMENDED by the audit; owner decides).**
 1. **Narrow, RECOMMENDED:** decouple the FirstAsteroid grant from the popup —
    an additive `OnMsg.SpawnedAsteroid` (FIX_POLICY §1.2) granting the three
    prefabs once behind its own persistent flag, regardless of whether the popup
@@ -3829,7 +3832,74 @@ Options:
    than two separate calls.
 
 **Recommendation:** decide it together with D10's T1 text repairs; they raise the
-identical tradeoff and should not be answered twice differently.  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit) — B2 re-run pending]`
+identical tradeoff and should not be answered twice differently.
+
+### F85 — Breakthrough choice popups and the Assembly "Colony Values" choice ride real-time waiters; any save landing in their open window silently voids the choice (P3, LATENT — tier U)  `[filed 2026-07-30 by the popup audit — NOTHING BUILT, settling observation queued; no fix until U resolves]`
+
+The F83 family's latent members — found by the popup/deferred-consequence audit
+(`docs/POPUP_CONSEQUENCE_AUDIT.md` §3.3, which is the full evidence; this entry
+is the record of claim). Four popups carry heavyweight consequences in code
+that runs **after** a `WaitPopupNotification` inside a **real-time** thread —
+the thread class that does not survive a save/load:
+
+- **`ShowBreakthroughChoicePopup`** (`Anomaly.lua:696-714`,
+  `CreateRealTimeThread` :703): after the wait,
+  `UIColony:SetTechDiscovered(techs[res].id)` (:708) + the caller's callback —
+  **the breakthrough discovery itself**. Three callers/presets: subsurface
+  anomaly (`Anomaly.lua:393`), planetary anomaly (`PlanetaryAnomaly.lua:268` —
+  the anomaly is already consumed, `DoneObject` :351), and the Breakthrough
+  law (`LawDef-Research.lua:78`).
+- **`AssemblyChoicePopup`** (`Factions.lua:1191-1236`, spawned
+  `CurrentMap:CreateRealTimeThread` from `AssemblyBase:GameInit`,
+  `MartianAssembly.lua:8`): after the wait, `ApplyAssemblyChoice` (:1214) —
+  faction weights, initial laws, colonist standings, `ElectMembers()`. The
+  **entire politics initialization**; `GameInit` never re-runs, so a lost
+  choice would leave the Assembly built and the politics system dead.
+
+**Why this is latent rather than live — the modal shield.** All four presets
+open immediately (`start_minimized = false`), modal + input-suppressed +
+game-pausing (`PopupNotification:Init`). No autosave can fire (game time is
+paused) and the quicksave shortcut (Ctrl-F9) is eaten by the popup's
+`OnShortcut`. So in ordinary play **no save can exist inside the window**, and
+loading any older save replays the trigger. The shield is UI reachability, NOT
+the save system: `CanSaveGame` has no popup clause, and Quick Save is
+`ActionBindable` while `PopupPropagateShortcuts`
+(`MarsMessageQuestionBox.lua:1-9`) lets **F9 and F11 through the modal layer**
+— a player who rebinds Quick Save onto one of those keys can produce the
+poisoned save. **Settling observation (needs-eyes item 3 in the audit):**
+rebind Quick Save to F9, open any choice popup, press it — if a save lands,
+this is R2-by-rebind and worth an owner decision; if the binding or save is
+refused, this drops to I/R4 and stays documentation.
+
+**Intent — unintended (sibling contradiction):** every subsystem that carries
+real consequences through a popup wait (challenges, storybits, sequences,
+status-effect popups) waits in a **game-time** thread, which the engine
+persists by default (ENGINE_FACTS); these sites chose the one thread class the
+persist machinery cannot save. The modal shield makes the choice harmless
+today, which is why this files at P3/U rather than P2.
+
+**Also folded in here (audit §3.6, R3-edge, no fix proposed):** the game's one
+`dont_pause` popup — the distress-call confirmation
+(`RivalColonies.lua:535-555`) — is the only popup window where the game runs,
+so a sol-change autosave can land under it. That save loses only the popup
+itself (nothing is committed before its wait — self-healing, harm ≈ 0), but any
+async popup **queued behind it** at that moment (including a storybit's, which
+has no corner notification to resurrect it) is dropped from `g_PopupQueue`
+with its game-time waiter left blocked forever — event lost, `g_StoryBitActive`
+ghost, a non-OneTime storybit dead for that colony. Requires the player
+mid-distress-flow at the exact autosave tick with a second popup queued —
+recorded for completeness.
+
+**No fix ships on this entry until the observation runs** (revised-§4
+discipline: a U tier authorizes an observation, not a build). If it proves
+real, the audit's §7.3 names the shape: move each consequence into a game-time
+thread and let the real-time side only present UI — per site, no shared-
+machinery surgery.
+
+### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit) — B2 re-run pending]`
+*(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
+commit `21b92cb` had spliced F84's text into this heading, leaving D06's whole
+entry living under F84. Content untouched.)*
 **COMMANDER-PROFILE INTERACTION CHECKED 2026-07-30 (owner question) — NO
 COLLISION between the `Inventor` profile and D06/D09/F77; the interaction is
 purely one of measurement.** Enumerated rather than assumed:

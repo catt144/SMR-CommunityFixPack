@@ -855,6 +855,16 @@ observation and record it. Full reasoning per row is in
 | **F11** | Crew-gather a busy train's passenger, then inspect `train.units` — the U-tier settling read |
 | **F81b** | On a vanilla save, catch a blocked `RainsDisasterThreads` activation after a collision; or under the fix, rain resuming within ~7 sols (overlaps PT-54 Trigger E) |
 
+**Added 2026-07-30 late by the popup audit (`POPUP_CONSEQUENCE_AUDIT.md` §8 —
+full reasoning there; these four settle ITS verdicts):**
+
+| Subject | The one observation that settles it |
+|---|---|
+| **Audit keystone (storybits/sequences safe)** | `ForceActivateStoryBit("<popup-carrying bit>", MainMap)` (not immediate) → save with the corner notification up → load → `IsValidThread(g_StoryBitActive[1] and g_StoryBitActive[1].run_thread)` should print **true** → click the notification → the popup must open, and answering it must apply the outcome (~5 min, console) |
+| **F83 second site** | After declining/losing a `ReconCenterDiscoveryAsteroid` popup, is the paid Detailed Scan reachable anywhere else (planetary view)? Needs a Recon Center holding ≥ `g_Consts.DiscoveryScanCost` Electronics for `CanPerformDetailedScan()` |
+| **F85 (U tier)** | Rebind Quick Save to **F9**, open any choice popup (a launch-issue prompt is cheapest), press it — does a save land, and does loading it void the choice? |
+| **§3.6 corner (optional)** | With the distress-call popup left open, does the sol-change autosave fire under it? |
+
 **Six of the eleven ride along on PTs already in this file** (F16→PT-30,
 F38→PT-25, F53(a)→PT-18, F26→PT-47, F22→PT-42, F77→PT-52B, F81b→PT-54E) — take
 them while you are there rather than scheduling anything. The genuinely new

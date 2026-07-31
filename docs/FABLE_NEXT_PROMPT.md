@@ -10,15 +10,18 @@ model-specific.)
 
 ## Where the project stands (end of 2026-07-30 — a long playtest day, no sitting currently live)
 
-> ⚠️ **FIRST: is `docs\POPUP_AUDIT_PROMPT.md` still present?** If so, a one-off
-> popup/deferred-consequence audit was queued 2026-07-30 and has **not run**.
-> It is a self-contained prompt for its own fresh session — do not start it
-> inside a playtest sitting. **It blocks the F83 fix**, which is explicitly on
-> hold pending its verdict.
-> **If the file is GONE**, the audit ran: read `docs\POPUP_CONSEQUENCE_AUDIT.md`
-> instead, pick up its **needs-eyes list** (keyboard observations it could not
-> take itself) as playtest items, and expect a decision owed to the owner on the
-> fix shape for the whole family — not just F83.
+> ✅ **The popup/deferred-consequence audit RAN 2026-07-30 (same day it was
+> queued): `docs\POPUP_CONSEQUENCE_AUDIT.md`.** Verdict in one line: the
+> storybit alarm was wrong — **game-time threads persist by default; only
+> real-time popup waiters lose their consequences across a load** (new
+> ENGINE_FACTS entries) — so storybits/mysteries/sequences need no fix, F06
+> stands as-is, **the F83 hold is LIFTED and the narrow decouple is REINSTATED
+> as recommended** (owner go/no-go now owed), and one latent shielded class was
+> filed as **F85** (tier U, no fix until its observation runs). Pick up the
+> audit's **4-item needs-eyes list** (§8) as playtest riders — item 1 (storybit
+> save/load in the notification window, ~5 min console check) validates the
+> audit's one load-bearing inference; item 2 (Detailed Scan recoverability)
+> grades F83's second site; item 3 (rebind-quicksave) settles F85's tier.
 
 **Next session is PLAYTEST STANDBY — or the D10 build, which is now unblocked.**
 Nothing is half-finished and nothing is blocked on an agent. Both A/B legs are
@@ -32,29 +35,28 @@ checklist **§6 needs-eyes riders** (take them while you are in a qualifying
 save) · **PT-20/21** last. Decisions owed: the FIX_POLICY §4 amendment, and
 **F83's fix design** (gate cleared — PT-58 passed, fixture save kept).
 
-**NEW FINDING — F83 (P2, PROVEN in play, NOTHING BUILT, fix gate CLEARED).**
+**F83 (P2, PROVEN in play, NOTHING BUILT — audit COMPLETE, decision owed).**
 Minimized story popups lose their callback across a save/load: the waiter is a
 real-time thread and the async popup context is not persisted, while the corner
 notification *is*, so after a reload the notification still opens, any choice
-closes it, and the callback never runs. Eight call sites; six are cosmetic dead
-View buttons, but **`FirstAsteroid` silently withholds three prefabs its own
-popup text promises** (`show_once`, never re-offered) and
-**`ReconCenterDiscoveryAsteroid` silently refuses the paid Detailed Scan** on
-every asteroid. **PT-58 RAN AND PASSED 2026-07-30 — the asteroid consequence is
-OBSERVED: 1/1/1 answered without a reload vs 0/0/0 after one**, same fixture,
-one variable. **⛔ But the fix is ON HOLD and the narrow-decouple recommendation
-is RETRACTED** — the owner asked whether FirstAsteroid is really the only thing
-losable this way, and a first dive says no: the return-value form of
-`WaitPopupNotification` is exposed the same as the callback form, and
-**storybits — which anomalies, planetary anomalies, mysteries and random events
-all route through — apply their reply cost, outcome roll, effects and
-`Complete()` after two waits in a `CreateGameTimeThread` that has no
-`MakeThreadPersistable` and no resume on load.** F06 is already a documented
-instance. `docs\POPUP_AUDIT_PROMPT.md` is the queued one-off that settles it.
-**The owner keeps a pre-trigger baseline save as the reusable fix-verification
-fixture** (see the F83 entry — it restores `g_ShownPopupNotifications`, so it
-re-runs indefinitely). Still untested: the Detailed Scan half, which needs a
-Recon Center holding Electronics. Full trail on the F83 entry.
+closes it, and the callback never runs. **PT-58 PASSED 2026-07-30 — the
+asteroid consequence is OBSERVED: 1/1/1 without a reload vs 0/0/0 after one.**
+The owner then stopped the fix to ask whether FirstAsteroid is the only thing
+losable this way; the queued one-off audit ran the same day
+(`docs\POPUP_CONSEQUENCE_AUDIT.md`) and the answer is: **the exposure is
+exactly the real-time-waiter family and no wider.** The storybit alarm rested
+on a backwards engine assumption — game-time threads persist BY DEFAULT with
+their blocked stacks (ENGINE_FACTS), so storybits, mysteries, anomaly
+sequences and challenges are save-safe by design and F06 is a different family
+(one-shot Msg race, fix stands). Consequential RT sites: **FirstAsteroid**
+(observed) and **`ReconCenterDiscoveryAsteroid`'s paid Detailed Scan**
+(recoverability = needs-eyes item 2); plus cosmetic dead-View sites, and the
+latent shielded class filed as **F85** (breakthrough choices ×3 + Assembly
+"Colony Values" — RT waiters behind open-immediately modal popups; tier U,
+settling observation = rebind-quicksave, needs-eyes item 3). **The narrow
+decouple (F83 option 1) is REINSTATED as recommended — the owner owes only the
+go/no-go.** The pre-trigger baseline save remains the reusable A/B fixture
+(reload leg must read 1/1/1). Full trail: F83/F85 entries + the audit file.
 
 **Build state: 73 registered modules — 67 active by default**, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
@@ -377,13 +379,26 @@ silent.
   extender geometry exists.
 - **~~PT-58~~ PASSED 2026-07-30 → F83's consequence OBSERVED** (archived).
   **1/1/1** answered without a reload vs **0/0/0** after one, same fixture, one
-  variable. **The F83 fix is un-gated and awaits only the owner's choice of
-  option** (recommended: the narrow decouple). The owner keeps the **pre-trigger
-  baseline save** as the reusable verification fixture — it restores
-  `g_ShownPopupNotifications`, so the `show_once` popup re-offers itself on every
-  run and the A/B can be repeated indefinitely. **Still untested:** the
-  `ReconCenterDiscoveryAsteroid` Detailed Scan half, which needs a Recon Center
-  holding enough Electronics for `CanPerformDetailedScan()`.
+  variable. **The popup audit has since CLEARED the hold — the narrow decouple
+  (option 1) is the reinstated recommendation and the owner owes only the
+  go/no-go.** The owner keeps the **pre-trigger baseline save** as the reusable
+  verification fixture — it restores `g_ShownPopupNotifications`, so the
+  `show_once` popup re-offers itself on every run and the A/B can be repeated
+  indefinitely (reload leg must read 1/1/1 under the fix).
+- **NEW — popup-audit needs-eyes riders (audit §8, cheap, take them in any
+  qualifying sitting):** (1) **storybit save/load in the notification window**
+  — `ForceActivateStoryBit("<popup-carrying bit>", MainMap)` (not immediate),
+  save with the corner notification up, load, check
+  `IsValidThread(g_StoryBitActive[1].run_thread)` (expect true), click, answer
+  — popup must open and effects apply (~5 min; validates the audit's one
+  load-bearing inference, and by mechanism-identity the sequence popups too);
+  (2) **Detailed Scan recoverability** — after declining/losing a
+  `ReconCenterDiscoveryAsteroid` popup, can the paid scan still be reached via
+  the planetary view? (grades F83's second site; needs a Recon Center holding
+  ≥ `g_Consts.DiscoveryScanCost` Electronics); (3) **F85's rebind vector** —
+  rebind Quick Save to F9, open any choice popup, press it: does a save land,
+  and does loading it void the choice? (settles F85's U tier); (4, optional)
+  does the sol-change autosave fire under the open distress-call popup?
 - **F82** — split-grid notification lingers ~a sol; machinery located,
   updater cadence still to trace (own entry). **F80** — trains skip valid
   waiting passengers; investigating, forensic tap on the entry.

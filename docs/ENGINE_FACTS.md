@@ -127,6 +127,33 @@ code suggests.
 - **`OnMsg` is additive, confirmed structurally**: four shipped files each define
   `OnMsg.StationsConnected` (`Station.lua:1213`, `Track.lua:668`,
   `TrainTransport.lua:357`, `UnderconstructionSign.lua:87`) and all four must run.
+- **GAME-TIME THREADS PERSIST BY DEFAULT — real-time threads do not** (popup
+  audit 2026-07-30; the F83 investigation briefly assumed the opposite and
+  retracted a fix recommendation on it). `MakeThreadPersistable`
+  (cthreads.lua:224-230) exists to CLEAR the flag on GT threads
+  (`XWindow.lua:1578` clears it on a maybe-GT thread) and to SET it on RT
+  threads (`_fixup.lua:36`, `Notifications.lua:215` — their GT twins go bare);
+  `OnMsg.PersistPostLoad` (`_fixup.lua:50-66`) expects global GT threads to
+  arrive through the save. Persist serializes blocked STACKS —
+  `PersistGatherPermanents` (cthreads.lua:451-464) registers `Sleep`/`WaitMsg`/
+  `WaitWakeup`/`CObject.PlayState` as "sleeping function[s] found in the thread
+  stack" — and preserves shared-reference identity across one save's graph.
+  Corroborated in play constantly: unit command threads are bare
+  `CreateGameTimeThread` (CommandObject.lua:100) and resume mid-command after
+  every load. Consequences: a consequence computed after a wait is safe in a GT
+  thread and LOST in an RT thread (the F83 family); "no MakeThreadPersistable"
+  on a GT thread is the SAFE default, not a missing call.
+- **Every shipped popup is ASYNC — the persistable popup path is dead code**
+  (same audit). `ShowPopupNotification` opens with
+  `assert(not bPersistable) -- we don't support these`
+  (PopupNotification.lua:246); no call site passes it, so `OnMsg.PersistSave`
+  (:347-355), which keeps only `sync_popup_id` entries, always saves an EMPTY
+  popup queue — an OPEN popup's context never survives a load. The system is
+  safe anyway because notifications persist (`GameVar("Notifications")`,
+  closures included — observed, F83) and GT waiters persist (above); an open
+  popup is modal + game-pausing + shortcut-eating, so no ordinary save can
+  exist in its window (the shield is UI reachability, not the save system —
+  `CanSaveGame` has no popup clause; see F85 for the rebind edge).
 - **TOOLING: never round-trip a doc through PowerShell 5.1 `Get-Content -Raw` +
   `WriteAllText`.** `Get-Content` without `-Encoding` decodes UTF-8 files as cp1252, so
   every `—`, `↔`, `≤` comes back double-encoded and the whole file shows as changed.

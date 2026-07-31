@@ -11,7 +11,7 @@ remediation 3.3). Session legs are append-only in
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
-92 rows.
+93 rows.
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
 reachable only from mod code. "For modder benefit" is no longer a valid reason
@@ -80,22 +80,30 @@ callback grants three Micro-G Auto Extractor prefabs that the popup's own text
 promises and `show_once` never re-offers.** **PT-58 RAN AND PASSED the same day
 and the consequence is now OBSERVED, not inferred:** one purpose-built fixture,
 one variable, **1/1/1 answered without a reload vs 0/0/0 answered after one**.
-The notification survives the load, opens normally, and grants nothing. **⛔ BUT THE FIX IS ON HOLD** and the
-narrow-decouple recommendation is **RETRACTED**. The owner asked whether
-FirstAsteroid is really the only thing a player can lose this way — anomalies,
-mystery popups, story choices — and a first dive says **no**: the *return-value*
-form of `WaitPopupNotification` is exposed exactly like the callback form, and
-**storybits (the system anomalies, planetary anomalies, mysteries and random
-events all route through) apply their reply cost, weighted outcome,
-`ProcessOutcomeEffects` and `Complete()` after two waits, in a
-`CreateGameTimeThread` with no `MakeThreadPersistable` and no resume on load**.
-F06 is already a documented instance of the same family. **A one-off audit is
-queued: `docs/POPUP_AUDIT_PROMPT.md`** — self-contained, its own session, may run
-unattended A/B legs, and **nothing ships until it reports**. Also still untested:
-`ReconCenterDiscoveryAsteroid`'s paid Detailed Scan (needs a Recon Center holding
-Electronics). Full trail on the F83 entry.
+The notification survives the load, opens normally, and grants nothing.
+**✅ THE QUEUED POPUP AUDIT RAN 2026-07-30 (`docs/POPUP_CONSEQUENCE_AUDIT.md`)
+and the hold is LIFTED: the narrow-decouple recommendation is REINSTATED.** The
+storybit alarm that stopped the fix was wrong about the engine — **game-time
+threads persist by default with their blocked stacks; only real-time threads
+die on load** (new ENGINE_FACTS entry, three source proofs + observed
+unit-command resumption). Storybits, mysteries, anomaly sequences and
+challenges are save-safe by design; the defect family is exactly "consequence
+owned by a REAL-TIME popup waiter": F83's two consequential sites (FirstAsteroid
+OBSERVED; ReconCenterDiscoveryAsteroid — Detailed Scan recoverability still
+needs eyes), six-ish cosmetic dead-View sites, and one latent shielded class
+filed as **F85** (breakthrough choices ×3 + the Assembly "Colony Values"
+choice — real-time waiters behind an open-immediately modal window; tier U,
+settling observation = the rebind-quicksave check). F06 is NOT this family
+(one-shot Msg race; its fix stands). The audit also left a **4-item needs-eyes
+list** (audit §8, mirrored on the checklist) and repaired a BUGS.md structural
+break (the F84 filing had swallowed the D06 heading). **Decision now owed to
+the owner: green-light F83 fix option 1** (additive `OnMsg.SpawnedAsteroid`
+grant behind a persistent flag; PT-58's kept fixture is the ready A/B — reload
+leg must read 1/1/1). Full trail on the F83/F85 entries and the audit file.
 
-**Open user decisions:** Phase 4 go/no-go (core helpers, module merges,
+**Open user decisions:** **F83 fix option 1 go/no-go** (popup audit reinstated
+it 2026-07-30 — the narrow FirstAsteroid decouple; fixture kept, A/B ready);
+Phase 4 go/no-go (core helpers, module merges,
 deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
 overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are

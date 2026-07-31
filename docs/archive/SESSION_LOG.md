@@ -8,6 +8,61 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## The popup/deferred-consequence audit — the storybit alarm OVERTURNED, F83's narrow decouple REINSTATED — 2026-07-30 (one-off session, unattended, game not launched)
+
+Ran `docs/POPUP_AUDIT_PROMPT.md` (deleted on completion). Deliverable:
+**`docs/POPUP_CONSEQUENCE_AUDIT.md`** — full enumeration of every path where a
+player-visible consequence is applied after a wait, classified by save/load
+survival. Headline: **the lead that stopped the F83 fix was wrong about the
+engine.** A `CreateGameTimeThread` does NOT need `MakeThreadPersistable` —
+**game-time threads persist by default with their full blocked stacks
+(`WaitMsg`/`WaitWakeup`/`Sleep` are registered persist permanents "found in the
+thread stack"); only real-time threads die on load.** Three source proofs
+(XWindow clears the flag on a maybe-GT thread; `_fixup.lua` sets it only on the
+RT twins and expects GT globals to arrive through the save;
+Notifications.lua:214 flags only its RT variant) plus the everyday observed
+fact that bare-GT unit command threads resume mid-command after every load.
+Now an ENGINE_FACTS entry, alongside a second keystone: **every shipped popup
+is async** — `ShowPopupNotification` opens with `assert(not bPersistable) --
+we don't support these`, so the "persistable popup" branch the save handler
+preserves is dead code and an OPEN popup's queue context never survives a load
+(shielded in ordinary play because open popups are modal + game-pausing +
+shortcut-eating; the shield is UI reachability, not the save system).
+
+Consequences: **storybits, mysteries, anomaly sequences and challenges are
+save-safe by design** (the storybit notification window even has a
+forced-popup timeout backstop; no shipped scenario sequence is `real_time`;
+the sequence system ships a watchdog that restarts abnormally-dead sequences).
+**F06 is NOT an F83-family member** — one-shot `Msg` race, no save/load
+involved, fix stands (entry note added). The real family is "consequence owned
+by a REAL-TIME popup waiter": F83's two consequential sites + cosmetic
+dead-View sites + a latent shielded class now filed as **F85** (breakthrough
+choice popups ×3 grant `SetTechDiscovered` after an RT wait; the Assembly
+"Colony Values" popup runs the ENTIRE politics init after one; all
+open-immediately/modal, so tier **U** with a named settling observation — the
+rebind-quicksave-to-F9 check, since `PopupPropagateShortcuts` lets F9/F11
+through the modal layer and Quick Save is bindable). Also recorded: the one
+`dont_pause` popup (distress call) admits sol-tick autosaves under it — the
+popup itself is self-healing, but a second popup queued behind it at that tick
+would be dropped with its GT waiter stranded (R3-edge, documented, no fix).
+
+**F83: hold lifted, option 1 (narrow `OnMsg.SpawnedAsteroid` decouple)
+REINSTATED as recommended — decision owed to the owner.** Entry corrections
+from the audit: the eighth callback site (`ColonyViability.lua:260`) is GT +
+open-immediately (safe, delisted); the `AnomalyAnalyzed` wait is commented out
+in Src (dead site). **Needs-eyes list (4 items, audit §8):** (1) storybit
+save/load in the notification window — the audit's one load-bearing inference,
+~5 min console check; (2) Detailed Scan recoverability — grades F83's second
+site; (3) the F85 rebind save vector; (4, optional) autosave under the
+distress popup. No unattended game legs were run: the keystone fact has
+observed corroboration, and every remaining question needs a keyboard.
+
+**Rider repair:** the F84 filing commit (`21b92cb`) had spliced F84's last line
+into the `### D06` heading, leaving D06's whole entry living under F84 —
+heading restored in place, content untouched. Index 92 → **93 rows** (F85).
+
+---
+
 ## Four PTs closed, two defects filed — and the F83 fix STOPPED by an owner question — 2026-07-30 (late evening, attended)
 
 Continuation of the evening sitting below. **PT-58** (F83's consequence:
