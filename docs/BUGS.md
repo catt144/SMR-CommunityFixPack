@@ -4106,6 +4106,109 @@ changing a property default reach buildings already in a save?
 **Run them only AFTER the Phase 4 rebuild finishes** — that job is rewriting
 `Code/` and these need temporary modules in the same directory.
 
+### ✅ Q3 and Q4 are ANSWERED from source (2026-07-31, game-free) — Q1 and Q2 still owed
+
+Phase 4 is closed, so the gates are unblocked. **Q3 and Q4 turned out to be
+source questions, not playtests, and both are now settled** — enumeration and
+persistence are readable in `ModTools\Src` at build `1.0.7.396349`. What still
+needs a running game is **Q1**, **Q2**, and a ~30-second confirmation read for
+Q4. Nothing below authorises a build.
+
+**Q4 — defaults ARE omitted. Changing a class default re-rates every existing
+building in a loaded save, and reverts completely on uninstall.** The chain:
+
+1. `DefineClass.TaskRequester` (`CommonLua/TaskRequest.lua:53-59`) carries
+   `priority = DefBuildingPriority` as a **class member** — so `self.priority`
+   resolves through the flattened class table, not through property metadata.
+2. **No building template anywhere sets `priority`.** Swept all 288
+   `Lua/BuildingTemplate/*.generated.lua` plus `Data/`: zero hits. The class
+   member is the effective value for every building in the game.
+3. The instance member is written **only on a real change**:
+   `TaskRequester:SetPriority` (`:170-179`) early-outs on
+   `if self.priority == priority then return end` before `self.priority = priority`.
+   Moving the arrow to the value it already holds writes nothing.
+4. A newly completed building does not get one either: `ConstructionSite:Complete`
+   (`:1484-1521`) builds the `instance` table from
+   `city / init_with_skin / name / orig_terrain* / construction_data` — no
+   `priority`. The one exception is copy-paste (`Building:GatherCopyParams`
+   `:3678` → `ApplyCopyParams` `:3683`), which routes through `SetPriority` and
+   so still early-outs when equal.
+5. Savegames are a **persisted Lua graph** and class tables are permanents keyed
+   by name — `CommonLua/Core/persist.lua:157-165` registers every `g_Classes`
+   entry. Instance tables serialise their own keys only; the class link is
+   restored by name on load.
+
+⇒ A saved building the player never re-prioritised has **no `priority` key at
+all** and reads whatever the class default currently is. Player-set values are
+explicit members and are preserved. That is the desirable half of both outcomes
+the brief posed — but it is now a **known choice**, which is what Q4 asked for.
+
+⚠️ **Trap found while proving it: `const.TaskRequest.DefBuildingPriority` is
+dead for this purpose.** `DefineClass.TaskRequester` captures the module local at
+**file-load** time (`:57`); `OnMsg.ClassesPreprocess` reassigns that local
+**afterwards** (`:21-32`), by which point the classdef already holds 2. A default
+change must therefore be written **on the class**, never through the const group.
+`Min`/`MaxBuildingPriority` are unaffected — `InitRequestQueues` reads them at
+call time — so **Q1's experiment is unharmed**.
+
+**Q3a — use the shipped CLASS test, not the property test. It catches exactly
+five buildings.**
+
+- The game already has the test and uses it:
+  `LifeSupportGridObject:ShowUISectionLifeSupportProduction`
+  (`LifeSupportGrid.lua:272-276`) is `IsKindOf("AirProducer") or IsKindOf("WaterProducer")`.
+- Both classes carry an engine docstring making a **completeness claim**: *"All
+  buildings that produce water for the water grid are either of this class or a
+  derived class"* (`LifeSupportProducer.lua:21-23`; the air twin at `:125-127`).
+  That is source-authoritative, not an inference from a sweep.
+- Full enumeration. Only four classes derive from them — `ElectrolyzerBase`,
+  `MOXIEBase`, `MoistureVaporatorBase`, `WaterExtractorBase` — yielding five
+  templates: **MOXIE** and **Electrolyzer** (air); **Water Extractor**,
+  **Micro-G Water Extractor** and **Moisture Vaporator** (water). Nothing
+  trivial is caught; there are no false positives.
+- **The property test the brief proposed would have been worse.** Only 4 of the
+  288 templates state `air_production`/`water_production` in data at all — the
+  rest inherit the property default of `10000` (`LifeSupportProducer.lua:28,132`)
+  — so a template-data sweep silently misses one producer.
+
+Two judgements the enumeration hands the owner (**recorded, not decided**):
+
+- **Storage is NOT caught.** `AirStorage`/`WaterStorage` (Oxygen Tank ×2, Water
+  Tank ×2, `LifeSupportStorage.lua:305-323`) are a separate class family. A
+  broken tank does not stop production; it drops buffer.
+- **The power-plant question: OUT, and it should be.** An unpowered MOXIE is
+  *not working*, not *malfunctioned* — a different state, and not what
+  `is_malfunctioned` selects. Elevating by dependency also has no natural
+  stopping point (every producer depends on power, which depends on maintenance,
+  which depends on hauling). The shipped precedent agrees: §4a elevates the grid
+  element itself, never its upstream.
+
+**Q3b — the Food-demand test alone has two false positives; adding the
+ServiceWorkplace test makes it exact (four buildings).**
+
+- `consumption_resource_type = "Food"` across all 288 templates catches **six**:
+  Diner, Mega Mall, Grocer (`ShopsFood`), Small Grocer (`ShopsFood_Small`) —
+  **plus Micro-G Habitat and Naturalist Habitat**.
+- Those two are **residences, not services**: `MicroGHabitatBase` is
+  `{ LivingBase, LifeSupportConsumer, WaypointsObj, Community, … }`
+  (`MicroGHabitat.lua:3-4`) and `NaturalHabitatBase` derives from it
+  (`NaturalHabitat.lua:1-2`). They *consume* food rather than serving it.
+- So the test to use is **`IsKindOf("ServiceWorkplace")` AND a Food demand
+  request** → exactly **Diner, Mega Mall, Grocer, Small Grocer**. No other
+  service qualifies: Casino, Spacebar, Temple, Medical Center, Low-G Amusement
+  Park and the Electronics/Jewelry shops carry no Food demand.
+- ⚠️ **Owner call parked, not made:** the two habitats are places colonists
+  *live* that starve on the same queue. Excluding them is defensible — they are
+  not services, and a hungry habitat is a different UI story — but it is a
+  judgement, not a fact.
+- **The owner's observation is CONFIRMED, and more strongly than it was put.**
+  Food services do have the property (`Grocery` → `ServiceWorkplace` → … →
+  `TaskRequester.priority = 2`), and the arrows do show (no service sets
+  `prio_button = false`; the templates that do are decorations and anomalies).
+  And per Q4 step 2, **no template in the entire game sets `priority`** — so
+  every building on the map starts at exactly 2, and the only distinguishing
+  signal in the whole system is the one the player supplies by hand.
+
 ### ⛔ Drone playtest FREEZE, and a mandatory disclaimer
 
 **No drone playtesting until a final plan exists** (banner in

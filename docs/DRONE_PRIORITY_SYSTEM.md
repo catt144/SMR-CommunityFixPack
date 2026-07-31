@@ -248,8 +248,37 @@ override that exists; that building maintenance has none; that priority is baked
 at insert; that the developers' rule is life-support-criticality rather than
 repair-ness.
 
-**NOT settled, and not to be assumed:** the C matcher's exact ordering within a
-band; whether a bump to 3 measurably shortens the 3h03m haul leg in play (that
-is a measurement, and PT-52's harness must be re-pointed first — the current
-metric measures *which hub delivered*, not which won a claim); and how much
-routine traffic a colony-wide promotion would displace.
+**Settled 2026-07-31 by the research brief's Q3/Q4 (source, game-free)** — moved
+out of the unsettled list below; full evidence on the D06 entry:
+
+- **Property defaults are omitted from saves.** `TaskRequester` carries
+  `priority = 2` as a **class member** (`TaskRequest.lua:53-59`); the instance
+  member is written only by a real change (`SetPriority` `:170-179` early-outs on
+  equality); `ConstructionSite:Complete` (`:1484-1521`) does not pass one; and
+  savegames persist the instance table only, with class tables restored as
+  permanents by name (`Core/persist.lua:157-165`). **No template in the game sets
+  `priority`** — all 288 swept. So a class-default change reaches every existing
+  building the player never re-prioritised, and reverts on uninstall.
+- ⚠️ **`const.TaskRequest.DefBuildingPriority` is dead.** The classdef captures
+  the module local at file-load time (`:57`); `ClassesPreprocess` reassigns it
+  afterwards (`:21-32`). A default change must be written on the class.
+  `Min`/`MaxBuildingPriority` are read at call time and are unaffected.
+- **Life-support producers = a shipped class test**, not a property test:
+  `IsKindOf("AirProducer")` / `IsKindOf("WaterProducer")`, which the game itself
+  uses at `LifeSupportGrid.lua:272-276` and whose docstrings claim completeness
+  (`LifeSupportProducer.lua:21-23`, `:125-127`). It catches exactly five —
+  MOXIE, Electrolyzer, Water Extractor, Micro-G Water Extractor, Moisture
+  Vaporator. Air/water **storage** is a separate family and is not caught.
+- **Food service = `ServiceWorkplace` AND a Food demand**, exactly four: Diner,
+  Mega Mall, Grocer, Small Grocer. The Food test **alone** also catches Micro-G
+  Habitat and Naturalist Habitat, which are residences (`MicroGHabitat.lua:3-4`)
+  — an owner call, recorded and not made.
+
+**NOT settled, and not to be assumed:** whether the C matcher honours a widened
+priority range at all (**research brief Q1 — decisive, still owed, needs a
+running game**); whether hub queues persist across a save (**Q2, still owed**);
+the C matcher's exact ordering within a band; whether a bump to 3 measurably
+shortens the 3h03m haul leg in play (that is a measurement, and PT-52's harness
+must be re-pointed first — the current metric measures *which hub delivered*, not
+which won a claim); and how much routine traffic a colony-wide promotion would
+displace.

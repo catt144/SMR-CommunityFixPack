@@ -111,7 +111,19 @@ residual is whether the **hub queues themselves** persist carrying bands 4-5.
 
 ---
 
-## Q3 — Do the two data tests cleanly identify what we think they do?
+## Q3 — Do the two data tests cleanly identify what we think they do? ✅ ANSWERED 2026-07-31 (source, game-free)
+
+> **Answered in full from `ModTools\Src` — nothing here needs a running game.**
+> Full evidence and enumerations on the **D06 entry** and in
+> `DRONE_PRIORITY_SYSTEM.md` §7. Headline: **3a** — use the game's own class test
+> `IsKindOf("AirProducer") / IsKindOf("WaterProducer")` (`LifeSupportGrid.lua:272-276`,
+> docstrings claim completeness), which catches exactly five buildings; the
+> property test proposed below would have missed one. **3b** — the Food-demand
+> test alone catches six, two of which are *residences*; adding
+> `IsKindOf("ServiceWorkplace")` makes it exactly four. The owner's
+> priority-property observation is **confirmed, and more strongly**: no template
+> in the entire game sets `priority`. The text below is kept as the original
+> question.
 
 Both classifications must be **data tests, not hardcoded lists** — a list needs
 maintaining and silently misses anything a patch or DLC adds. This is the same
@@ -137,7 +149,18 @@ other buildings, without ever touching food. Confirm that reading.
 
 ---
 
-## Q4 — Does changing a property default reach buildings already in a save?
+## Q4 — Does changing a property default reach buildings already in a save? ✅ ANSWERED 2026-07-31 (source; one cheap live confirmation still worth taking)
+
+> **Answer: defaults ARE omitted — the first branch below.** Changing the class
+> default re-rates every existing building the player never re-prioritised, and
+> reverts completely on uninstall; player-set values are explicit members and
+> survive. Five-step evidence chain on the **D06 entry**. ⚠️ It also turned up a
+> trap: **`const.TaskRequest.DefBuildingPriority` is dead** — the classdef
+> captures the local before `ClassesPreprocess` reassigns it, so a default change
+> must be written on the class. `Min`/`MaxBuildingPriority` are unaffected, so
+> **Q1's experiment is unharmed**. Still worth a ~30-second live read (load a
+> save, read a Grocer's `priority`) to confirm the prediction against a real
+> save rather than only against source.
 
 **Why it matters.** `priority` is a property with `default = 2`
 (`Building.lua:199`). Property objects commonly omit default-valued properties
