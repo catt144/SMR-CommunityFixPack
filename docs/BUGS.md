@@ -1086,6 +1086,38 @@ buildings (`Building.lua:1457-1483`, `Demolishable.lua:139`). Dome keeps phantom
 remove the dome modifier; one-shot LoadGame sweep for orphaned `farm_id` modifiers.
 
 ### F38 — Destroyed tunnels rejoin pathfinding after load (P2, high)  `[fixed: Code/Fix_DestroyedTunnels.lua]`
+
+**Reachability re-checked 2026-07-30 (tester question at the keyboard: "the
+underground has no tunnel option — is this another phantom fix?"). Answer: NO,
+F38 is reachable; PT-25's SETUP LINE was wrong.**
+- **The underground genuinely has no tunnel.** `UniversalTunnel` is the only
+  tunnel in a player-facing build category (`Infrastructure`); `Tunnel` and
+  `TrackTunnel` are `build_category = "Hidden"`. Tunnels are a **surface**
+  building. PT-25's "SAVE-B / underground access" setup was a
+  mis-specification and has been corrected in the checklist.
+- **The buildable tunnel IS in the defect's scope.** `UniversalTunnel`'s
+  `object_class` is **`TrackTunnelBase`**
+  (`Data/BuildingTemplate/UniversalTunnel.lua`), and
+  `TrackTunnelBase.__parents = { "TunnelBase", "TrackConnectedObjBase" }`
+  (`Lua/Buildings/TrackTunnel.lua:1-5`) with **no override** of `AddPFTunnel` or
+  `TraverseTunnel`. The leaking sweep iterates exactly that class:
+  `AllMapsForEach("map", "TunnelBase", Tunnel.AddPFTunnel)`. So a destroyed
+  Universal Tunnel regains its pathfinding shortcut on every load.
+- Not a mod artifact: all of this is shipped `Src`, byte-identical to the running
+  build per the fpk parity proof (ENGINE_FACTS.md).
+
+**❓ OPEN QUESTION raised by the same check — possible description defect.**
+`TunnelBase:AddPFTunnel` registers with `pf.AddTunnel(self, start, exit, weight,
+-1)` (`Tunnel.lua:208`). The 5th argument is a unit-class mask —
+`Dome_Entrance` passes `2` with the comment "usable by people only" and `1`
+"usable by drones only" (`Dome_Entrance.lua:15-16`) — so `-1` reads as **all
+unit types**, rovers included. But the Universal Tunnel's shipped description
+says **"Rovers cannot use this type of tunnel."** Either the description is
+wrong or rovers are excluded somewhere not yet found. **Settle it by
+observation, not by more source reading** (the F49(c) rule): build a Universal
+Tunnel pair and watch whether an RC Rover routes through it. Queued as a free
+rider on PT-25. If rovers do NOT use it, PT-25 needs a different observable and
+F38's practical reach needs re-examining.
 `Tunnel:OnDestroyed` correctly calls `RemovePFTunnel` (`Tunnel.lua:153-155`), but
 `OnMsg.LoadGame` (:264-266) re-adds PF tunnels for ALL `TunnelBase` with no `destroyed`
 check (`AddPFTunnel` :197-209 checks only `IsValid(linked_obj)`; ruins are valid).

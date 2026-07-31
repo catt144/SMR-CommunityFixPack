@@ -502,11 +502,37 @@ and look at the pattern rather than exact numbers.)
 
 ### PT-25 — Destroyed tunnel after a reload · covers **F38**
 
-**Setup:** SAVE-B (or any save with underground access — `UIColony:UnlockUnderground()`
-then `CheatRevealDarkness()`). Build a **tunnel pair** across an obstacle so that the
-tunnel is the *short* route between two points, and park an **RC Rover** on one side
-with an errand on the other (a deposit to mine, a building to service). Watch it use
-the tunnel once so you know the route.
+> ⚠️ **SETUP LINE CORRECTED 2026-07-30 — this test does NOT need the underground.**
+> It used to say "SAVE-B (or any save with underground access)". That was wrong
+> and was caught by the tester at the keyboard: **the underground build menu has
+> no tunnel at all.** `UniversalTunnel` is the only tunnel in a player-facing
+> build category (`Infrastructure`, surface); `Tunnel` and `TrackTunnel` are both
+> `build_category = "Hidden"`. Tunnels are a **surface** building — use any
+> healthy surface save. Fourth PT procedure found faulty by executing it (after
+> PT-29, PT-11 and PT-44's F24 half).
+>
+> **F38 is still reachable — this is not an F24-style phantom.** The defect is
+> `OnMsg.LoadGame` → `AllMapsForEach("map", "TunnelBase", Tunnel.AddPFTunnel)`
+> (`Tunnel.lua:264-266`), and the buildable Universal Tunnel is in scope:
+> `UniversalTunnel` → `object_class` **`TrackTunnelBase`** →
+> `__parents = { "TunnelBase", … }`, with **no override** of `AddPFTunnel` or
+> `TraverseTunnel` in `TrackTunnel.lua`.
+>
+> ❓ **Free observation to take during setup — does an RC Rover actually use a
+> Universal Tunnel?** `TunnelBase:AddPFTunnel` registers with
+> `pf.AddTunnel(…, weight, -1)`, and the unit-class mask reads as *all units*
+> (`Dome_Entrance` passes `2` = "people only" and `1` = "drones only"). But the
+> Universal Tunnel's own description says **"Rovers cannot use this type of
+> tunnel."** If the rover routes through it, that is a description defect worth
+> filing. If it does NOT, this test needs a different observable (drones or
+> colonists) and F38's practical reach needs re-examining — say so rather than
+> forcing it.
+
+**Setup:** Any healthy **surface** save. Build a **Universal Tunnel pair** across an
+obstacle so that the tunnel is the *short* route between two points, and park an
+**RC Rover** on one side with an errand on the other (a deposit to mine, a
+building to service). Watch it use the tunnel once so you know the route — and
+see the free observation above if it will not.
 
 **Trigger:**
 1. Destroy the tunnel. `CheatToggleInfopanelCheats()` gives you a per-building
