@@ -87,7 +87,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built 2026-07-28 — first A/B NULL 2026-07-29, B2 re-run pending (entry) |
 | D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 — PT-53 3-of-5 PASS 2026-07-29, A/E owed (entry) |
 | D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | tested 2026-07-30 — PT-56 PASS in full (entry) |
-| D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30 — build gated on PT-56 (entry) |
+| D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30, user-approved — **gate OPEN (PT-56 PASSED 2026-07-30), BUILDABLE NOW** (entry) |
 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
 | D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | SPECED 2026-07-30, user-approved, build owed (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
@@ -4490,7 +4490,7 @@ elapsed repair time. **Dial range widened from the DECISION's 1.0x/1.5x/2.0x to
   dials are confirmed independent of the toggle modules in the shipping default
   configuration, not just with everything switched on.
 
-### D10 — Workshops: capacity can't scale late-game; unemployment's real cost is invisible (design, med)  `[speced 2026-07-30, user-approved same day — BUILD GATED ON PT-56 PASS (the capacity dial reuses D09's label-modifier machinery; no point stacking a second dial module on machinery whose first live check hasn't run). One Opt_ module, planned PT-57]`
+### D10 — Workshops: capacity can't scale late-game; unemployment's real cost is invisible (design, med)  `[speced 2026-07-30, user-approved same day — ⭐ GATE OPEN: PT-56 PASSED IN FULL 2026-07-30, so the build is UNBLOCKED and ready to start. (The gate existed because the capacity dial reuses D09's label-modifier machinery and its first live check hadn't run.) One Opt_ module, planned PT-57]`
 **Problem (research session 2026-07-30, all source-verified).** The three
 vocation Workshops (Art/VR/Biorobotics, build category "Workshops") are the
 designed late-game employment+resource sink: they produce nothing, consume
