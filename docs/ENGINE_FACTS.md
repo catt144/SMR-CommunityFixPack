@@ -154,6 +154,30 @@ code suggests.
   popup is modal + game-pausing + shortcut-eating, so no ordinary save can
   exist in its window (the shield is UI reachability, not the save system —
   `CanSaveGame` has no popup clause; see F85 for the rebind edge).
+- **A MOD-AUTHORED CLOSURE STORED ON A PERSISTED GAME OBJECT GOES INTO THE SAVE,
+  SURVIVES UNINSTALL, AND KEEPS RUNNING** (measured 2026-07-31, drone Q1/Q2
+  sitting). A temporary experiment module assigned an instance-level
+  `GetPriorityForRequest` onto a Building. The colony was saved, the module was
+  removed from the mod's `code` list, and the save was loaded. The read
+  `rawget(obj, "GetPriorityForRequest")` returned **`function: 000001E95D57A6B0`**
+  — and it was still being *called*: a `ReconnectTaskRequesters` re-filed that
+  building's requests using the vanished mod's logic. Zero Lua errors throughout.
+  Persist serialises the function rather than dropping it, because a mod function
+  is not in `PersistGatherPermanents`.
+  **Consequences:**
+  * Writing a function onto a game object is a **permanent, un-removable
+    modification to the player's savegame** — a far larger footprint than a
+    GameVar, and one FIX_POLICY §3 does not currently name.
+  * The orphaned closure runs in a world where its mod's globals are gone, so
+    any reference to `SMRFixPack.*` inside it would index nil after uninstall.
+  * **UI windows are NOT affected** (XWindows are not savegame-persisted), and
+    **class tables are NOT affected** (restored as permanents by name). The
+    hazard is specifically *instances* that persist.
+  * ⚠️ **Unverified adjacent risk:** the same mechanism plausibly applies to
+    `GlobalGameTimeThreadFuncs[name]` replacements, because game-time threads
+    persist WITH their blocked stacks. `Fix_MeteorFrequency` patches that table.
+    **PT-20 (uninstall safety) must specifically check for a surviving mod
+    function**, not just "the game does not break".
 - **TOOLING: never round-trip a doc through PowerShell 5.1 `Get-Content -Raw` +
   `WriteAllText`.** `Get-Content` without `-Encoding` decodes UTF-8 files as cp1252, so
   every `—`, `↔`, `≤` comes back double-encoded and the whole file shows as changed.
