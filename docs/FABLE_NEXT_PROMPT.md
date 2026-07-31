@@ -43,6 +43,63 @@ model-specific.)
 > (freeze banner in `PLAYTEST_CHECKLIST.md` §1) — PT-52 A/B/B2 are frozen
 > pending invalidation; PT-10 is explicitly NOT frozen.
 >
+> 🧭 **CARRY-OVER FROM THE 2026-07-31 PLANNING SESSION — these are SETTLED.
+> Do not re-litigate them; you are continuing a conversation, not starting one.**
+> Full reasoning lives where noted, so you can read *why* rather than re-derive.
+> - **The drone insight** (D06 entry): the player's priority arrows answer a
+>   **supply-allocation** question — *"when resources are scarce, who gets them
+>   first?"* The same number also governs **repair urgency**, which the player
+>   never answered; they answered the first question once, early, and it
+>   adjudicates repairs forever. **Repairs move off that scale.** The split is
+>   `is_malfunctioned` — elevate **broken**, not degrading.
+> - **The claim gate is DROPPED, not demoted.** B2 measured it intervening once
+>   in 25 malfunctions, moving its leg by one minute.
+> - **Hauling is 88% of elapsed time and D06 exempts it by design.** That is a
+>   scoping error, not a tuning miss — and it is why this is a rebuild rather
+>   than another increment.
+> - **ONE TOGGLE, ALL OR NOTHING** for the overhaul. No sub-toggles: separate
+>   toggles multiply the configuration matrix and every combination is an
+>   unmeasured product. **D09's dials stay separate** (clean off position,
+>   already `tested`).
+> - **The developers' own rule** is *"life-support-critical repairs are urgent"*
+>   — they applied it to pipes and dome fractures and never extended it to the
+>   buildings that produce the air. Extending it **completes their policy**
+>   rather than inventing ours. That framing is the module's whole defence; do
+>   not weaken it by bolting on preferences.
+> - **F79 is CLOSED `wontfix`** — not parked. Do not re-propose or re-file it.
+> - **C3 merges: NEVER**, not "later".
+> - **D08 and D06-structural are UNDECIDED** — a third state, distinct from both
+>   "owed" and "parked". They need one dedicated owner conversation, not a build.
+> - **The overhaul does not ship without its design-drift disclaimer** (spec in
+>   the research brief). That text **cannot be written until Q2 answers**,
+>   because the honest uninstall claim depends on it.
+>
+> ⚠️ **What Phase 4 did NOT prove — do not over-trust the green.** Its own
+> certification refuses to claim "no behaviour changed": probes drive **planted
+> globals** and cannot see a real colony, and **nothing in Phase 4 is
+> playtested**. C4's deeper checks and C1's report catch renamed / removed /
+> reshaped targets — **NOT a same-named function edited in place**, which is the
+> dangerous post-patch case. **The fpk extraction diff remains the real
+> post-patch gate.** One Src correction from that job worth keeping: this game
+> **never fires `Msg("PreGameMenuOpen")`** — the audit's cited engine precedent
+> is dead code here, so C1 polls the menu dialog instead.
+>
+> ▶️ **NEXT ACTION: the four drone research questions.** **Split Q1 into its own
+> sub-items** — set the const → confirm queues allocate at 4/5 → file a request
+> at priority 4 → watch a drone *actually take it*. Allocation is Lua and proves
+> nothing by itself; **consumption is the question**. A Q1 answer of "ignored"
+> kills the band scheme and is the single most valuable outcome available here,
+> because it costs one sitting instead of one module.
+>
+> 📋 **Todo lists: ONE ITEM PER COMMIT-AND-VERIFY UNIT** (`WORKFLOW.md`). Phase 4
+> bundled four waves behind one checkbox and the owner lost all visibility across
+> the longest stretch of the job. **He reads that list to time when to step in**
+> — a list coarser than the work gives a confident wrong answer.
+>
+> 🚦 **`docs\BETA_READINESS_REVIEW.md` is new and re-runnable** — derives every
+> fact at run time, hard gates that cannot be judgement-softened. **Do NOT run it
+> until the drone work has a settled heading.**
+>
 > ✅ **F83 IS BUILT AND FULLY LEG-VERIFIED** — `Code\Fix_FirstAsteroidPrefabs.lua`,
 > shape (i) the load-time heal; shape (ii) verified against Src and rejected,
 > reasons in the fix header. **Three legs measured post-build**: all-toggles-ON
