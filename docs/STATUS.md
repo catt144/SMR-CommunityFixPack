@@ -175,6 +175,35 @@ exactly (fingerprint: `docs/archive/fingerprint_after_default.txt`). NOTHING
 is owed on the harness side; both shipping configurations are measured
 post-Phase-4, and the account is in the clean all-OFF/base state.**
 
+> 🧭 **UNDECIDED, and deliberately so — a possible PACK SPLIT (owner, 2026-07-31).**
+> Under serious consideration: separating the project into **(a) the true fixes**
+> and **(b) a companion mod holding the opt-in modules**. **No decision has been
+> made and the owner does not want one yet** — a third state, like D08 and
+> D06-structural. It is **not owed, not scheduled, not counted**, and **nothing
+> may be deferred "until the split is decided".**
+>
+> **The reason for not deciding is itself the record:** the current single-mod
+> shape is the best one for *testing*. One mod is one configuration matrix, and
+> every measurement we hold is calibrated to it — the `fix pack present: N/74
+> fixes active` line, the 78-probe fingerprint, the three-leg A/B set, and the
+> baseline mechanism (emptying the `code` list). Splitting mid-testing would
+> invalidate the comparison base.
+>
+> **Known impacts, recorded so the eventual decision is informed rather than
+> rediscovered:**
+> - **The harness is calibrated to one mod.** Counts, the baseline leg, and the
+>   opt-in leg bridge (`SMRFixPack_Optional`) all assume a single `code` list.
+> - **The `OptionsMenu` probe asserts six toggle wirings PLUS the two D09 dial
+>   wirings** in one place; a split divides that surface across two mods.
+> - **D05 (Mod Options) currently lives in the pack**, and the opt-ins are
+>   reached through it — the companion would need its own options surface or a
+>   cross-mod bridge (note `CurrentModOptions` is **per-mod-env**, ENGINE_FACTS).
+> - **It composes with the cleanup-mod proposal** (D06 entry): that would already
+>   make a second shipped artifact, so the question becomes the shape of a
+>   *family*, not whether to have one.
+> - **It has a natural deadline** — it changes what players install, so it is
+>   cheap before beta and expensive after.
+
 **Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN, BUILT
 2026-07-30, and `tested` 2026-07-31** (PT-59 PASSED IN FULL; nothing owed).
 ~~Phase 4 go/no-go~~ — **EXECUTED 2026-07-31, see above.** Still open:
