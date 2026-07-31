@@ -332,6 +332,12 @@ console at the main menu — so no mod-side or console-side path exists.
 1. In the Mod Manager, leave the **fix pack DISABLED** and the **Test Kit
    ENABLED**. (The leg aborts with a log line if the pack is already on — that
    would just be a cold boot wearing this leg's name.)
+   ⚠️ **EVERY run needs this step, including the second one in a row.** The
+   click in step 4 **persists**: `ModsUIDialogEnd` calls `SaveAccountStorage()`
+   (`ModManager.lua:132`), so the pack is enabled in account state from then on.
+   Learned by tripping the guard, 2026-07-31 19.19. **Disable it and quit the
+   game fully** — do not untick and re-tick inside one process, which is a third
+   load order (the pack's code has already been in that process once).
 2. Arm it: uncomment `"Code/98_EnablePathLeg.lua"` in the TestKit metadata
    `code` list. Do **not** arm `96_AutoRunFlag.lua` as well.
 3. Launch as usual (`-smrautorun` is carried by habit and is ignored — the leg
@@ -357,12 +363,14 @@ control and you should look for both: `ENABLE-PATH: ARMED — the pack is OFF`
 before the click and `ENABLE DETECTED — the pack loaded through an in-place mod
 reload` after it. `95_AutoRun` logs `standing down` at boot.
 
-⚠️ **A toggles-OFF run does NOT cover audit A2.** With the six opt-in toggles
-off, all five `Opt_` probes SKIP, so A2's three flattening-unsafe `Opt_` hooks
-are never exercised on this path — the thing the leg was also supposed to
-settle. **Set the six toggles ON before a leg intended to close A2**, and note
-that turning a toggle on is itself a live activation, so do it in an earlier
-session and let the account state carry it in.
+⚠️ **A toggles-OFF run leaves the optional modules uncovered.** All five `Opt_`
+probes SKIP. To exercise them on this path, do NOT ask the owner to flip
+toggles — drop a temporary `Code/97_OptInLeg.lua` into the FIX PACK right after
+`00_Core` setting `SMRFixPack_Optional`, which overrides an OFF toggle
+(`OptionEnabled`, `00_Core.lua:51-55`, checks the bridge first) and leaves
+account state alone. Delete the file and its metadata line after the leg.
+*(This does NOT bear on audit A2, which PT-55 answered in play 2026-07-30 — a
+different path, the module toggle rather than the pack.)*
 
 ---
 

@@ -103,16 +103,63 @@ probe-for-probe against the 18.44 cold boot: **2 of 78 lines differ and both are
 RNG, not path** (a different randomly generated mystery; 400 tourist rolls
 landing 156/332 vs 160/312). Same noise profile, zero fix-pack error lines.
 
+### 6. Repeated with every optional module ON — and two procedure facts learned the hard way
+
+The 19.09 run had the toggles OFF, so all five `Opt_` probes SKIPped. Repeated at
+19.24 with a temporary `Code/97_OptInLeg.lua` forcing `SMRFixPack_Optional`
+(the bridge overrides an OFF toggle and never touches account state, so the owner
+flips nothing): **`74/74` -> 68 PASS / 0 FAIL / 10 SKIP / 0 ERROR**, matching the
+all-ON cold-boot reference exactly, all five optional-module probes PASSing on
+the enable path.
+
+**A sweep repair caught in the act.** The log carries
+`[CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted`. That
+line comes from `lift_build_limit()`, which on this path is driven ONLY by the
+new `SMRFixPack.OnDataReady` — before today it hung off `OnMsg.DataLoaded`, which
+never fires here, and the limit simply stayed in place. So one of the three
+casualties the sweep found is confirmed repaired *on the exact path where it was
+dead*, not merely by inspection.
+
+**Two procedure facts, both learned by tripping over them** (now in
+`PLAYTEST_HELP.md`):
+- **The leg's own click PERSISTS.** `ModsUIDialogEnd` calls `SaveAccountStorage()`
+  (`ModManager.lua:132`), so the pack stays enabled in account state and EVERY
+  run must disable it again first. I told the owner the pack was "still unticked
+  from last time"; it was not. **The guard caught it** — `ABORT — the fix pack was
+  already enabled at boot` — instead of quietly measuring a cold boot and
+  reporting it as a first-run result. That guard paid for itself on its second
+  outing.
+- **The leg's first load-detector was WRONG.** It read the `SMRFixPack` global,
+  which is rawset into the real `_G` and **survives a Lua reload**, so after the
+  pack was disabled it still looked loaded and the leg logged ABORT where it owed
+  ARMED. Replaced with a `ModsLoaded` scan, which `ModsReloadItems` rebuilds from
+  scratch every reload. The irony is exact: that survives-a-reload property is
+  the same one the leg's own SawPackOff marker deliberately relies on — which is
+  precisely why it could not also serve as the detector.
+
 ### What is owed out of this leg
 
-**One thing, and it is a correction to a claim this session had been repeating.**
-Three documents said the enable-path leg would also verify audit finding **A2**'s
-three flattening-unsafe `Opt_` hooks. **It did not** — the account's six toggles
-were OFF, so all five `Opt_` probes SKIPped and those hooks were never exercised
-on that path. The claim was written before the leg existed and was never checked
-against what the leg would actually cover with the account in its current state.
-**Owed: the same leg again with the six toggles ON.** Corrected in place in
-BUGS/STATUS/PLAYTEST_HELP and made board item 0.
+**Nothing on F87.** What follows is a correction to a claim this session spent the
+evening repeating, and it is the more useful lesson of the leg.
+
+The F87 entry said the enable-path leg "would also verify audit finding **A2**",
+and I propagated that into STATUS, the prompt and PLAYTEST_HELP. When the 19.09
+run came back with the toggles OFF I "corrected" the docs to say **A2 is still
+owed** — compounding the error, because **A2 was never open.** PT-55 answered it
+in play on 2026-07-30: *"all three hooks install and run on a first mid-session
+enable, no relaunch"*, with per-module results, and the audit's own "one live
+confirmation still worthwhile" caveat was retired then. A2 is also a **different
+path** — the MODULE toggle flipped mid-session, not the PACK enabled at the main
+menu — and its three modules are `Opt_ClassicRockets` / `Opt_ResidencyControl` /
+`Opt_MultipleSuns`, not the set the entry implied.
+
+Two failures compounded: the original claim was never checked against
+`AUDIT_FINDINGS.md`, and the "correction" was written from the same unchecked
+premise rather than from source. **The standing rule that caught it in the end is
+the one already on the books — read the record before publishing a conclusion.**
+Withdrawn in BUGS/STATUS/PLAYTEST_HELP/prompt, with the withdrawal stated
+explicitly so it cannot be re-filed as owed. The toggles-ON leg ran anyway
+(section 6) as **coverage**, which is what it actually buys.
 
 ---
 

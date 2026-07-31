@@ -113,7 +113,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **MEASURED** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), 10 more at risk. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE** — FIX_POLICY §3 (entry) |
-| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so audit **A2**'s three `Opt_` modules are still unverified on this path (entry) |
+| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -4222,7 +4222,7 @@ Sensor towers extending single-meteor warning would be a **feature**, not a
 repair, and is declined. See the F02 root-cause note for why towers currently
 affect meteor *frequency* instead.
 
-### F87 — OUR OWN DEFECT: `Fix_DustSicknessBiorobots` throws at apply on some load orders, silently leaving F40 unfixed (P2, OBSERVED)  `[fixed 2026-07-31 — repaired in the shared DataPatch scaffold; 3 further enable-path casualties found and repaired; FIX_POLICY + ENGINE_FACTS written. VERIFIED ON THE ENABLE PATH 19.09 (63/0/15/0, owner at the keyboard) and on a cold boot 18.44. Residual: A2's three Opt_ modules were toggled OFF, so they are still unverified there]`
+### F87 — OUR OWN DEFECT: `Fix_DustSicknessBiorobots` throws at apply on some load orders, silently leaving F40 unfixed (P2, OBSERVED)  `[fixed 2026-07-31 — repaired in the shared DataPatch scaffold; 3 further enable-path casualties found and repaired; FIX_POLICY + ENGINE_FACTS written. VERIFIED ON THE ENABLE PATH 19.09 (63/0/15/0, owner at the keyboard) and on a cold boot 18.44. The five Opt_ probes SKIPped there (toggles OFF) - coverage, not an open finding: the A2 claim is withdrawn, PT-55 answered it 2026-07-30]`
 
 > ## ✅ WHAT LANDED 2026-07-31 (this entry's repair — read this before the diagnosis below)
 >
@@ -4312,13 +4312,53 @@ affect meteor *frequency* instead.
 >   `[CommunityFixPack]` error/FAILED/disabled lines, no log line names our
 >   `Code/`, 68 `applied` lines.
 >
-> ⚠️ **WHAT THIS LEG DID *NOT* VERIFY — audit A2, still owed.** The account's six
-> opt-in toggles were OFF, so all five `Opt_` probes SKIPped and **audit finding
-> A2's three flattening-unsafe `Opt_` hooks were never exercised on the enable
-> path.** The claim that this leg covers A2 (carried in three docs before this
-> run) is therefore NOT yet satisfied: it needs **a second enable-path leg with
-> the six toggles ON.** That is cheap — same recipe, toggles flipped first — and
-> it is the honest remaining gap.
+> ### ✅ AND AGAIN WITH EVERY OPTIONAL MODULE ACTIVE — 2026-07-31 19.24
+>
+> The 19.09 run had the toggles OFF, so all five `Opt_` probes SKIPped. Repeated
+> with a temporary `Code/97_OptInLeg.lua` forcing `SMRFixPack_Optional` (the
+> bridge overrides an OFF toggle and leaves account state alone):
+> **`74/74` -> 68 PASS / 0 FAIL / 10 SKIP / 0 ERROR**, matching the all-ON
+> cold-boot reference exactly, with all five optional-module probes PASSing on
+> the enable path.
+> - **A sweep repair caught in the act:** the log carries
+>   `[CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted`.
+>   That line comes from `lift_build_limit()`, which on this path is driven ONLY
+>   by the new `SMRFixPack.OnDataReady` — before today it hung off
+>   `OnMsg.DataLoaded`, which never fires here, and the limit stayed in place.
+>   `LastTransmissionStorage` and `IndependenceTerraforming` logging their own
+>   pass lines likewise confirm the `DataPatch` scaffold ran on this path.
+> - 74 `applied` lines, zero error/FAILED/disabled lines, same noise profile
+>   (`objects_to_mark` 48, 2 `LawOfficeDoor`).
+> - Temporary file and its metadata line deleted after the leg; the TestKit leg
+>   is disarmed.
+>
+> 🔧 **TWO PROCEDURE FACTS LEARNED BY RUNNING IT** (both now in `PLAYTEST_HELP.md`):
+> - **The leg's own click PERSISTS.** `ModsUIDialogEnd` calls
+>   `SaveAccountStorage()` (`ModManager.lua:132`), so the pack is enabled in
+>   account state from then on and **every** run must disable it again first. The
+>   guard caught this rather than measuring a cold boot and reporting it as a
+>   first-run result — it logged `ABORT — the fix pack was already enabled at
+>   boot`.
+> - **The first load-detector was wrong.** It read the `SMRFixPack` global, which
+>   is rawset into the REAL `_G` and **survives a Lua reload**, so after the pack
+>   was disabled it still looked loaded and the leg logged ABORT where it should
+>   have logged ARMED. Now it reads `ModsLoaded`, which `ModsReloadItems` rebuilds
+>   from scratch every reload. (It is the same survives-a-reload property the
+>   leg's own SawPackOff marker relies on — which is why it could not also serve
+>   as the detector.)
+>
+> 🛠 **CORRECTION, same evening — "this leg also verifies audit A2" was FALSE and
+> is withdrawn.** That claim originated on this entry, was repeated into the
+> prompt doc and STATUS, and was then restated as "A2 is still owed" after the
+> toggles-OFF run — all on a premise nobody had re-checked. **A2 was already
+> ANSWERED YES in play by PT-55 on 2026-07-30** (`PLAYTEST_ARCHIVE.md`: *"all
+> three hooks install and run on a first mid-session enable, no relaunch"*, with
+> per-module results), and the audit's own "one live confirmation still
+> worthwhile" caveat was retired then. **A2's three are `Opt_ClassicRockets`,
+> `Opt_ResidencyControl`, `Opt_MultipleSuns`** — not the set named earlier.
+> A2 is also a **different path**: the MODULE toggle flipped mid-session, versus
+> the PACK enabled at the main menu. So the all-modules-ON enable-path leg is
+> **coverage, not the closing of an open finding.**
 >
 > **Cold-boot re-verification (2026-07-31 18.44, unattended, 78 probes):**
 > `fix pack present: 68/74 fixes active` → **63 PASS / 0 FAIL / 15 SKIP / 0
@@ -4483,7 +4523,7 @@ because it states the reasoning:
    A/B leg ever run launches with the pack already enabled, so all `74/74`
    figures describe the second session onward. A leg that boots with the pack
    off, enables it at the main menu and then runs the probes would have caught
-   this the day it was written, and would also verify audit finding **A2**'s
+   this the day it was written, and ~~would also verify audit finding **A2**'s
    three `Opt_` modules, whose "a first mid-session enable works" remediation has
    never been checked end to end. **This is the widest-coverage item on the
    entry** — wider than the repair itself.

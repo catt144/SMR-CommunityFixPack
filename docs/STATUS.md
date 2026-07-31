@@ -119,10 +119,17 @@ with **PHASE 4 COMPLETE** (below).
 >   before the click, `ENABLE DETECTED` after), so it is provably not a cold boot.
 >   **This is the first measurement this project has ever taken of a player's
 >   first session.**
-> - ⚠️ **Residual gap: audit A2 is STILL unverified.** The six toggles were OFF,
->   so all five `Opt_` probes SKIPped and A2's three flattening-unsafe `Opt_`
->   hooks were never exercised on that path. **A second enable-path leg with the
->   toggles ON is owed** — same recipe, toggles flipped first.
+> - ✅ **AND AGAIN WITH ALL SEVEN OPTIONAL MODULES ACTIVE (19.24): `74/74` ->
+>   68/0/10/0**, matching the all-ON cold-boot reference exactly. All five `Opt_`
+>   probes PASS on the enable path. The log carries
+>   `MultipleSuns: Artificial Sun build-once limit lifted` — a line that can only
+>   come from the new `OnDataReady`, so one of the three sweep repairs is
+>   confirmed firing on the very path where it was dead.
+> - 🛠 **CORRECTION: "this leg also verifies audit A2" is WITHDRAWN.** A2 was
+>   **answered YES in play by PT-55 on 2026-07-30** ("all three hooks install and
+>   run on a first mid-session enable, no relaunch") and the audit caveat was
+>   retired then. A2 is also a different path — the MODULE toggle mid-session,
+>   not the PACK enabled at the main menu.
 
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
@@ -363,16 +370,17 @@ error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
 > `Code/98_EnablePathLeg.lua` (armed like `96_AutoRunFlag`, recipe in
 > `PLAYTEST_HELP.md`) boots with the pack off, waits for **the owner to tick it
 > at the main menu**, then drives the normal flow. **Its first run PASSED.**
-> ⚠️ **Still owed on that path: audit finding A2.** The run had the six toggles
-> OFF, so A2's three `Opt_` modules — whose "a first mid-session enable works"
-> remediation has never been checked end to end — SKIPped. **Re-run the same leg
-> with the toggles ON** to close it.
+> ⚠️ **Coverage note:** that run had the six toggles OFF, so the five `Opt_`
+> probes SKIPped — the optional modules are still unexercised on this path. A
+> second leg with them forced ON closes it. **It does NOT bear on audit A2**,
+> which PT-55 answered in play on 2026-07-30.
 The post-F83 set at 77 probes (`74/74` → `67/0/10/0`; default `68/74` →
 `62/0/15/0`; baseline `1/61/15/0`) is now historical, as are all older rows.
 
 | Leg | Active | Result |
 |---|---|---|
-| **⭐ CURRENT — THE ENABLE-PATH LEG, default config, 2026-07-31 19.09 (owner ticked the box at the main menu), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — **the first leg ever run on a player's FIRST session.** Probe-for-probe identical to the 18.44 cold boot bar 2 RNG lines. `DustSicknessBiorobots` PASS on live preset data = the F87 patch really ran. ⚠️ toggles OFF, so audit A2 is NOT covered |
+| **⭐ CURRENT — THE ENABLE-PATH LEG, all optional modules ON via the `SMRFixPack_Optional` bridge, 2026-07-31 19.24 (owner ticked the box), 78 probes** | **74/74** | **68 / 0 / 10 / 0** — matches the all-ON cold-boot reference exactly; all five `Opt_` probes PASS on the enable path, and `MultipleSuns: … limit lifted` proves the `OnDataReady` repair fired there |
+| **⭐ CURRENT — THE ENABLE-PATH LEG, default config, 2026-07-31 19.09 (owner ticked the box at the main menu), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — **the first leg ever run on a player's FIRST session.** Probe-for-probe identical to the 18.44 cold boot bar 2 RNG lines. `DustSicknessBiorobots` PASS on live preset data = the F87 patch really ran. ⚠️ toggles OFF, so the five `Opt_` probes SKIPped |
 | **CURRENT — POST-F87-REPAIR cold-boot re-verify, default config, 2026-07-31 18.44 (unattended), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — identical to the 12.44 reference; proves the scaffold change did not regress the cold boot. Says NOTHING about the enable path |
 | **CURRENT — POST-PHASE-4, all six toggles ON, 2026-07-31 12.30 (unattended), 78 probes** | **74/74** | **68 / 0 / 10 / 0** |
 | **CURRENT baseline — POST-PHASE-4, `code` list emptied, 2026-07-31 12.32 (unattended), 78 probes** | — | **1 / 62 / 15 / 0** — `FirstAsteroidPrefabs` + `UpdateReport` FAIL here (`bug reproduces`) |
@@ -662,9 +670,9 @@ authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
    to the harness~~ — **corrected 2026-07-31: that "100%" covers the cold-boot
    path only. The enable path (player ticks the mod at the main menu) has never
    been measured and is where F87 lived.** ✅ **RAN 2026-07-31 19.09 and
-   PASSED** — see the A/B table. ⚠️ **One re-run owed: the same leg with the six
-   toggles ON**, which is what closes audit A2. All that remains otherwise is the
-   human playtest.
+   PASSED** — see the A/B table. A second leg with the optional modules forced
+   ON covers the five `Opt_` probes on that path. All that remains otherwise is
+   the human playtest.
 2. DONE 2026-07-26 — author set to **catt144** in both mods' metadata.lua.
 3. For the save-failure lead: logs from `%AppData%\Surviving Mars Relaunched\logs`
    and Ctrl+F1 reports from affected players would pin it.

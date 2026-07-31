@@ -41,8 +41,8 @@ Staleness check: this was written at **`e07cece`** (the F87 repair leg).
 >   SKIP); the second wakes only `WaitWakeup` sleepers, never a `Sleep`. Both were
 >   proposed and killed by controls during PT-20. Do not re-derive them.
 
-> ✅ **F87 IS FIXED (2026-07-31 late) — ONE THING IS OWED AND IT NEEDS YOU FOR ONE
-> CLICK.** The repair went into the shared `SMRFixPack.DataPatch` scaffold, not
+> ✅ **F87 IS FIXED AND FULLY VERIFIED (2026-07-31 late) — NOTHING ON IT IS
+> OWED.** The repair went into the shared `SMRFixPack.DataPatch` scaffold, not
 > the one file: nothing runs before `ClassesBuilt`, the enable path gets its own
 > triggers, and the pass is `pcall`ed (a throw in a msg handler is swallowed by
 > `procall`, so the fix would have reported `active` while doing nothing).
@@ -58,13 +58,17 @@ Staleness check: this was written at **`e07cece`** (the F87 repair leg).
 >   `63/0/15/0`**, probe-for-probe identical bar two RNG lines, with
 >   `DustSicknessBiorobots` PASSing on live preset data. The leg logs its own
 >   positive control (`ARMED — the pack is OFF` → `ENABLE DETECTED`).
-> - ⚠️ **ONE GAP LEFT: audit A2.** That run had the six toggles OFF, so all five
->   `Opt_` probes SKIPped and A2's three flattening-unsafe `Opt_` hooks are
->   **still unverified on the enable path**. **Owed: the same leg with the
->   toggles ON** (TestKit `Code/98_EnablePathLeg.lua`, recipe in
->   `PLAYTEST_HELP.md`; the click cannot be automated —
->   `AccountStorage`/`SaveAccountStorage`/`ModsReloadItems` are all
->   sandbox-blacklisted and there is no main-menu console).
+> - **And again at 19.24 with every optional module forced ON** via a temporary
+>   `Code/97_OptInLeg.lua`: **`74/74` -> `68/0/10/0`**, matching the all-ON cold
+>   boot exactly, all five `Opt_` probes PASSing. The log line
+>   `MultipleSuns: … build-once limit lifted` proves one of the three sweep
+>   repairs firing on the path where it was dead. Temporary file removed, leg
+>   disarmed.
+> - 🛠 **A CLAIM THIS PROMPT CARRIED WAS FALSE AND IS WITHDRAWN:** the
+>   enable-path leg does **not** "also verify audit A2". **PT-55 answered A2 in
+>   play on 2026-07-30** and the audit caveat was retired then; A2 is the MODULE
+>   toggle mid-session, not the PACK enabled at the main menu. Do not re-file
+>   it as owed.
 
 > 🚧 **THERE ARE NOW TWO PROMPTS, AND THIS ONE DOES NOT DRIVE DRONE WORK.**
 > The drone project grew its own open design decision, its own frozen tests, and
@@ -167,25 +171,19 @@ account-persistent too.
 > touch colonist assignment, which is command-thread territory. Confirm the
 > owner's intent before starting any build.
 
-0. **▶️ RE-RUN THE ENABLE-PATH LEG WITH THE SIX TOGGLES ON — the last thing F87
-   owes, and the only way to close audit A2.** The leg itself is built, executed
-   once (PASS) and disarmed at rest; the 19.09 run had the toggles OFF, so the
-   five `Opt_` probes SKIPped and A2's three flattening-unsafe `Opt_` hooks were
-   never exercised on that path. Recipe: `PLAYTEST_HELP.md` → "The ENABLE-PATH
-   leg". In short: **turn the six Mod Options toggles ON in an earlier session**
-   (account state carries them in), then uncomment
-   `"Code/98_EnablePathLeg.lua"` in the **TestKit** metadata `code` list, make
-   sure the **fix pack is DISABLED** in the Mod Manager, launch, and at the main
-   menu tick "Community Fix Pack" and close the dialog. Re-comment to disarm.
-   - **Expect** the all-toggles-ON numbers on the enable path — `74/74` →
-     `68/0/10/0` if it matches the cold boot. Read the
-     `fix pack present: N/74` line first, always.
-   - A FAIL here is a real first-run defect: `FixMissing` FAILs any probe whose
-     fix is not `active`, and the data-patch probes read live preset data.
+0. **✅ F87 IS CLOSED OUT — nothing on it is owed. Read this only to avoid
+   re-opening it.** Both legs ran and passed (cold boot 18.44, enable path 19.09
+   and again with the optional modules forced ON). The leg is built, executed and
+   disarmed at rest — TestKit `Code/98_EnablePathLeg.lua`, recipe in
+   `PLAYTEST_HELP.md`.
+   - **Do NOT re-file "verify audit A2 on the enable path" as work.** A2 was
+     answered in play by **PT-55 on 2026-07-30**; the claim that this leg covers
+     it was wrong and is withdrawn.
    - **Still undone and deliberately so:** the C1 `error`-vs-`inactive` wording
      split on the F87 entry. It is a FALLBACK — the owner's direction was to
      solve the bug so no player message is needed, and that is what landed. Ask
      before building it.
+   - **The next item on the board is 0b (F86).**
 0b. **🛑 F86 — the save-safety redesign.** Owner decision owed on the three
    layers (input-patching, the tail-call rule, `SaveGameStart` tear-down). Two
    cheap measurements are owed first and both are quick: **(a)** does
