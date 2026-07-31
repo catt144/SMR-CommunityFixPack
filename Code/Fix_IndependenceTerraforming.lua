@@ -54,68 +54,61 @@ local WANTED = -20
 
 local log = SMRFixPack.Log
 
-local patched = false
-local ever_changed = false   -- some pass this session actually changed the preset
+-- The scaffold (one pass per load, veto re-read, F75 data_loaded latch gate,
+-- B3 ever_changed re-fire branch, DataChanged re-arm) lives in
+-- SMRFixPack.DataPatch since Phase 4 (audit C2).
+local patch = SMRFixPack.DataPatch(FIX_ID, {
+	changed_class = "TechPreset",
+	pass = function(ctx)
+		local defs = rawget(_G, "TechDef")
+		local tech = type(defs) == "table" and defs[TECH_ID]
+		if type(tech) ~= "table" then
+			-- Phase 4 (C4): this pass previously had NO missing-target latch at
+			-- all — a future update that removed the tech would have reported
+			-- `active` forever (the exact B3 gap). Closed via the runner's
+			-- data_loaded gate; before DataLoaded, absence still proves nothing.
+			if ctx.data_loaded then
+				ctx.patched = true
+				ctx.latch("TechDef." .. TECH_ID .. " not found (game update changed it?)",
+					"TechDef." .. TECH_ID .. " not found")
+			end
+			return
+		end
 
-local function patch()
-	if patched then return end
-	-- FIX (audit 2026-07-29, A1): honor the per-fix veto here too — these OnMsg
-	-- handlers are installed unconditionally, and Register's veto only skips
-	-- apply(), so without this check a disabled fix still rewrote the tech
-	-- effect AND re-armed the status-gated LoadGame sweep via the heal below.
-	local disabled = rawget(_G, "SMRFixPack_Disabled")
-	if type(disabled) == "table" and disabled[FIX_ID] then return end
-	local defs = rawget(_G, "TechDef")
-	local tech = type(defs) == "table" and defs[TECH_ID]
-	if type(tech) ~= "table" then return end   -- presets not loaded yet
-
-	local found, changed = 0, 0
-	for _, effect in ipairs(tech) do
-		if type(effect) == "table" and effect.class == "Effect_ModifyLabel"
-			and effect.Label == "Consts" and effect.Prop == PROP then
-			found = found + 1
-			if effect.Amount ~= WANTED then
-				effect.Amount = WANTED
-				changed = changed + 1
+		local found, changed = 0, 0
+		for _, effect in ipairs(tech) do
+			if type(effect) == "table" and effect.class == "Effect_ModifyLabel"
+				and effect.Label == "Consts" and effect.Prop == PROP then
+				found = found + 1
+				if effect.Amount ~= WANTED then
+					effect.Amount = WANTED
+					changed = changed + 1
+				end
 			end
 		end
-	end
-	patched = true
+		ctx.patched = true
 
-	local entry = SMRFixPack.fixes[FIX_ID]
-	if changed > 0 then
-		ever_changed = true
-		-- restore the status too, in case an earlier pass mislabeled it.
-		-- FIX (audit 2026-07-29, A1): heal ONLY an "inactive" mislabel — never
-		-- overwrite "disabled" (the user veto) or any other state.
-		if entry and (entry.status == "active" or entry.status == "inactive") then
-			entry.status = "active"
-			entry.detail = ""   -- "" not nil: ListFixes concatenates it (PT-51 crash)
+		if changed > 0 then
+			ctx.ever_changed = true
+			-- restore the status too, in case an earlier pass mislabeled it —
+			-- ctx.heal() heals ONLY an "inactive" mislabel, never "disabled"
+			-- (audit A1)
+			ctx.heal()
+			log("%s: %s now discounts special projects by %d%% as its param1 says",
+				FIX_ID, TECH_ID, -WANTED)
+		elseif ctx.ever_changed then
+			-- finding nothing left to change on the DataChanged(false) re-fire
+			-- is SUCCESS (the B3 lesson — see SMRFixPack.DataPatch)
+			return
+		elseif found == 0 then
+			ctx.latch(TECH_ID .. " no longer modifies " .. PROP,
+				TECH_ID .. " no longer modifies " .. PROP)
+		else
+			ctx.latch("the shipped tech already matches its own param1")
 		end
-		log("%s: %s now discounts special projects by %d%% as its param1 says",
-			FIX_ID, TECH_ID, -WANTED)
-	elseif ever_changed then
-		-- FIX (QA 2026-07-25, same defect as F75): the engine posts
-		-- DataChanged(false) right after DataLoaded, rerunning this pass over
-		-- the preset it just corrected. Finding nothing left to change then is
-		-- SUCCESS — without this branch the fix relabeled itself
-		-- "inactive: already matches" on every boot (seen in the first B leg).
-		return
-	elseif found == 0 then
-		if entry then
-			entry.status = "inactive"
-			entry.detail = TECH_ID .. " no longer modifies " .. PROP
-		end
-		log("%s: inactive (%s no longer modifies %s)", FIX_ID, TECH_ID, PROP)
-	else
-		if entry then
-			entry.status = "inactive"
-			entry.detail = "the shipped tech already matches its own param1"
-		end
-		log("%s: inactive (the shipped tech already matches its own param1)", FIX_ID)
-	end
-	SMRFixPack.IndependenceTerraforming = { found = found, changed = changed }
-end
+		SMRFixPack.IndependenceTerraforming = { found = found, changed = changed }
+	end,
+})
 
 SMRFixPack.Register(FIX_ID, {
 	title = "Independent Terraforming discounts special projects by the 20% it advertises",
@@ -123,16 +116,6 @@ SMRFixPack.Register(FIX_ID, {
 		patch()   -- no-op unless the presets are already loaded
 	end,
 })
-
-function OnMsg.DataLoaded()
-	patch()
-end
-
-function OnMsg.DataChanged(classes)
-	if classes and not classes.TechPreset then return end
-	patched = false
-	patch()
-end
 
 local OLD_WRONG = -10   -- the shipped defect's Amount, the only value the sweep corrects
 

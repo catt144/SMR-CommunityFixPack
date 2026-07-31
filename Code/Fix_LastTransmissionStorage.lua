@@ -89,100 +89,76 @@ local function find_grid_check(list)
 	return nil
 end
 
-local patched = false        -- a full pass ran since the last (re)load of the presets
-local ever_changed = false   -- some pass this session actually moved/retargeted entries
-local data_loaded = false    -- DataLoaded has fired at least once
-
-local function patch()
-	if patched then return end
-	-- FIX (QA 2026-07-25): honor the per-fix veto here too — these OnMsg
-	-- handlers are installed unconditionally, and Register's veto only skips
-	-- apply(), so without this check a disabled fix still mutated the presets.
-	local disabled = rawget(_G, "SMRFixPack_Disabled")
-	if type(disabled) == "table" and disabled[FIX_ID] then return end
-	local defs = rawget(_G, "FactionDefs")
-	local faction = type(defs) == "table" and defs.LastTransmission
-	local likes = type(faction) == "table" and faction.likes
-	if type(likes) ~= "table" then
-		-- Before DataLoaded this just means "presets not loaded yet" — the
-		-- GlobalMap table exists EMPTY at mod-load time, so it must not be
-		-- read as evidence of anything (the first B leg latched a false
-		-- "inactive: not found" here, QA 2026-07-25). Only after DataLoaded
-		-- does a missing faction mean a future update removed the target.
-		if data_loaded then
-			patched = true
-			local entry = SMRFixPack.fixes[FIX_ID]
-			if entry then
-				entry.status = "inactive"
-				entry.detail = "FactionDefs.LastTransmission not found (game update changed it?)"
+-- The scaffold (one pass per load, veto re-read, F75 data_loaded latch gate,
+-- B3 ever_changed re-fire branch, DataChanged re-arm) lives in
+-- SMRFixPack.DataPatch since Phase 4 (audit C2) — this file was its donor.
+local patch = SMRFixPack.DataPatch(FIX_ID, {
+	changed_class = "FactionDef",
+	pass = function(ctx)
+		local defs = rawget(_G, "FactionDefs")
+		local faction = type(defs) == "table" and defs.LastTransmission
+		local likes = type(faction) == "table" and faction.likes
+		if type(likes) ~= "table" then
+			-- Before DataLoaded this just means "presets not loaded yet" (the
+			-- first B leg latched a false "inactive: not found" here, QA
+			-- 2026-07-25); after it, a missing faction means a future update
+			-- removed the target.
+			if ctx.data_loaded then
+				ctx.patched = true
+				ctx.latch("FactionDefs.LastTransmission not found (game update changed it?)",
+					"FactionDefs.LastTransmission not found")
 			end
-			log("%s: inactive (FactionDefs.LastTransmission not found)", FIX_ID)
+			return
 		end
-		return
-	end
 
-	local stats = { seen = 0, moved = 0, retargeted = 0 }
-	for _, like in ipairs(likes) do
-		local grid_type = type(like) == "table" and like.Id and STORAGE_LIKES[like.Id]
-		if grid_type then
-			stats.seen = stats.seen + 1
+		local stats = { seen = 0, moved = 0, retargeted = 0 }
+		for _, like in ipairs(likes) do
+			local grid_type = type(like) == "table" and like.Id and STORAGE_LIKES[like.Id]
+			if grid_type then
+				stats.seen = stats.seen + 1
 
-			-- (a) the test has to live where Eval() looks for it
-			if not like.Condition and type(like.Prerequisite) == "table" then
-				like.Condition = like.Prerequisite
-				like.Prerequisite = false
-				stats.moved = stats.moved + 1
-			end
+				-- (a) the test has to live where Eval() looks for it
+				if not like.Condition and type(like.Prerequisite) == "table" then
+					like.Condition = like.Prerequisite
+					like.Prerequisite = false
+					stats.moved = stats.moved + 1
+				end
 
-			-- (b) and it has to measure the resource the entry claims to measure
-			local check = find_grid_check(like.Condition)
-			if check and check.GridType ~= grid_type then
-				check.GridType = grid_type
-				local op = COMPARE[check.Condition]
-				local value = check.Value or 1440000
-				if op and type(like.Condition) == "table" then
-					like.Condition.eval = function()
-						return op(GetGridGlobalStorage(grid_type) or 0, value)
+				-- (b) and it has to measure the resource the entry claims to measure
+				local check = find_grid_check(like.Condition)
+				if check and check.GridType ~= grid_type then
+					check.GridType = grid_type
+					local op = COMPARE[check.Condition]
+					local value = check.Value or 1440000
+					if op and type(like.Condition) == "table" then
+						like.Condition.eval = function()
+							return op(GetGridGlobalStorage(grid_type) or 0, value)
+						end
+						stats.retargeted = stats.retargeted + 1
 					end
-					stats.retargeted = stats.retargeted + 1
 				end
 			end
 		end
-	end
-	patched = true
+		ctx.patched = true
 
-	local entry = SMRFixPack.fixes[FIX_ID]
-	if stats.moved > 0 or stats.retargeted > 0 then
-		ever_changed = true
-		-- restore the status too: an earlier pass may have mislabeled the fix
-		-- before the presets were loaded (QA 2026-07-25)
-		if entry then
-			entry.status = "active"
-			entry.detail = ""   -- "" not nil: ListFixes concatenates it (PT-51 crash)
+		if stats.moved > 0 or stats.retargeted > 0 then
+			ctx.ever_changed = true
+			-- restore the status too: an earlier pass may have mislabeled the fix
+			-- before the presets were loaded (QA 2026-07-25)
+			ctx.heal()
+			log("%s: %d storage condition(s) made effective, %d retargeted", FIX_ID, stats.moved, stats.retargeted)
+		elseif ctx.ever_changed then
+			-- finding nothing left to do on the DataChanged(false) re-fire is
+			-- SUCCESS (the B3 lesson — see SMRFixPack.DataPatch)
+			return
+		elseif stats.seen == 0 then
+			ctx.latch("Last Transmission has no storage conditions any more")
+		else
+			ctx.latch("the shipped presets are already correct")
 		end
-		log("%s: %d storage condition(s) made effective, %d retargeted", FIX_ID, stats.moved, stats.retargeted)
-	elseif ever_changed then
-		-- FIX (QA 2026-07-25): the engine posts Msg("DataChanged", false) right
-		-- after every DataLoaded (Dlc.lua:715-717), which reruns this pass over
-		-- the presets it just corrected. Finding nothing left to do then is
-		-- SUCCESS, not "shipped data already correct" — without this branch the
-		-- fix relabeled itself inactive on every normal boot.
-		return
-	elseif stats.seen == 0 then
-		if entry then
-			entry.status = "inactive"
-			entry.detail = "Last Transmission has no storage conditions any more"
-		end
-		log("%s: inactive (Last Transmission has no storage conditions any more)", FIX_ID)
-	else
-		if entry then
-			entry.status = "inactive"
-			entry.detail = "the shipped presets are already correct"
-		end
-		log("%s: inactive (the shipped presets are already correct)", FIX_ID)
-	end
-	SMRFixPack.LastTransmissionStorage = stats
-end
+		SMRFixPack.LastTransmissionStorage = stats
+	end,
+})
 
 SMRFixPack.Register(FIX_ID, {
 	title = "Last Transmission's power/water/oxygen storage opinions actually count",
@@ -190,14 +166,3 @@ SMRFixPack.Register(FIX_ID, {
 		patch()   -- no-op unless the presets are already loaded
 	end,
 })
-
-function OnMsg.DataLoaded()
-	data_loaded = true
-	patch()
-end
-
-function OnMsg.DataChanged(classes)
-	if classes and not classes.FactionDef then return end
-	patched = false
-	patch()
-end
