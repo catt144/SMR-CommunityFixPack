@@ -15,7 +15,8 @@ game's code says a Sensor Tower should delay meteors and instead it attracts
 them, we fix that. If we merely disagreed with a design choice, it's not in
 this pack (with one clearly-labeled optional exception below).
 
-**Works with your existing saves. Safe to add or remove at any time.** The mod
+**Works with your existing saves, and built to be safe to add or remove at any
+time.** The mod
 writes almost nothing into your savegame, and what it does write is inert
 without it: a few `SMRFixPack_*` bookkeeping fields (a timestamp on a housing
 reservation, a "the player has set this payload" flag on a rocket, and — from
@@ -29,6 +30,23 @@ as an ordinary modifier too, so a save made with a dial active keeps that
 boost if you later remove the mod — harmless, but permanent. Set the dials
 back to base (and load/save once) before uninstalling if you want a clean
 vanilla save.
+
+**What we can promise, and what we can't.** We would rather tell you this
+plainly than have you find it out. Here is what actually stands behind the
+paragraph above: every fix inspects the game's own code before it patches
+anything, and switches itself off if the game no longer looks the way that fix
+expects, so an official patch that fixes a bug retires our version rather than
+fighting it. The savegame footprint is deliberately tiny and is enumerated above
+rather than summarised. The pack carries an automated suite of 77 checks that is
+run against both a modded and an unmodded build before release, and
+add-then-remove cycles are part of that testing.
+
+**None of that is a guarantee, and we are not going to pretend otherwise.** We
+cannot test every combination of other mods, every colony shape, every save
+state, or every future game patch — and a patch can change the code underneath
+us at any time. If a save matters to you, back it up before adding *any* mod to
+it for the first time. That advice is not specific to this pack; it is just
+true, and most people only learn it the expensive way.
 
 **Playing on Xbox, PlayStation, or the Microsoft Store version?** One platform
 rule to know before you install — it applies to every mod, not just this one:

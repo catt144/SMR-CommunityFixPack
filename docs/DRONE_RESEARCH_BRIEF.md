@@ -211,6 +211,45 @@ rebuild design is approved:
 
 ---
 
+## MANDATORY on the rebuild — the design-drift disclaimer
+
+**Owner requirement, 2026-07-31.** The rebuilt overhaul does not ship without a
+plain-language disclaimer in `MOD_DESCRIPTION.md`, and it is **not** the generic
+one. A mod-wide honesty block already exists (*"What we can promise, and what we
+can't"*) — this is **in addition**, and stronger, because the overhaul is the
+single largest departure from the shipped game in the whole pack.
+
+Owner's framing: *"while we tried to make this as save safe as possible this is
+a major design drift from the original game and we heavily tested safety and
+compatibility we can make no guarantees."*
+
+**What it must say, in substance:**
+
+- This is a **design change, not a bug fix.** It alters how work is distributed
+  across the colony — a system the game leans on nearly everywhere.
+- **What was actually done** to make it safe, stated specifically rather than as
+  reassurance. Whatever the rebuild's real savegame footprint turns out to be
+  (see **Q2** — do not write this until that is answered), plus: off by default,
+  one toggle, reversible, and measured as a single product rather than
+  piece-by-piece.
+- **The limits, without hedging language.** It touches the deepest shared queues
+  in the game — hubs, rovers, and the rocket cargo path all run through them —
+  and it is the part of the pack where we can least claim every interaction has
+  been found.
+- **The off-ramp:** if you want the bug fixes without the redesign, leave it
+  off. Everything else in the pack works normally with it disabled.
+
+**Do not write it as legal cover.** A disclaimer is only worth reading if it is
+specific about what was done and honest about where the edge is. "Use at your
+own risk" tells a player nothing and reads as an excuse prepared in advance.
+
+⚠️ **This text cannot be finalised until Q2 answers.** The honest claim about
+uninstall safety depends on whether hub queues persist — the current D06 can
+truthfully say *"savegame footprint: none"*, and the rebuild may or may not be
+able to say the same.
+
+---
+
 ## Rules for whoever runs this
 
 - **Answer the questions. Do not design.** The rebuild brief is written *after*,
