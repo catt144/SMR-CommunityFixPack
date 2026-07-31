@@ -4249,24 +4249,44 @@ yet, so `HasTrait.new` is nil**. Precedents: F64 itself, and D09's module
 tripping the same trap on `Modifier.new` (2026-07-29). Three occurrences makes it
 a pattern, not an incident.
 
-**Why it only surfaced now.** `apply()` calls `patch()`, documented as *"no-op
-unless the presets are already loaded"*, and the file header states *"presets
-load after mod code … hence the DataLoaded/DataChanged handlers"*. To reach line
-73, `StoryBits` must already have been populated at mod-load time — so **that
-premise does not always hold**. The trigger is not yet pinned; two candidates,
-and the repair does not depend on which:
-- **Load-order flip.** This session the Test Kit's code ran *before* the pack's
-  (log `:96-101` then `:102+`); every previous log had the reverse. Recreating
-  the mod junction changed it.
-- **The re-enable path** — the pack was re-ticked in the Mod Manager rather than
-  being enabled at a cold boot.
+**TRIGGER PINNED (corrected — an earlier draft of this entry blamed mod load
+order; that was wrong).** The trigger is **enabling the pack from the in-game Mod
+Manager without restarting**. The log shows two reload cycles in one process:
 
-**Player-reachable, and it is not cosmetic.** Mod load order is arbitrary on a
-player's machine, so this is a configuration a real player can land in — and in
-it, **F40 is silently not fixed** (Dust Sickness keeps infecting Biorobots, who
-keep bleeding Health every dust storm). It is invisible except for the C1 dialog.
-Every A/B leg we have ever run happened to use the favourable order, which is why
-`74/74` never caught it.
+```
+:67  [SMRTest] test kit loaded          <- first pass, Test Kit ONLY
+:72  Reloading done in 924 ms
+:80  Loaded mod items for: SMR_CommunityFixPackTestKit
+:98  [SMRTest] test kit loaded          <- second pass, after the pack was ticked
+:102 [CommunityFixPack] CaveInsNoDisasters: applied
+:188 Reloading done in 1158 ms
+:190 Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+```
+
+The game was already running with its data loaded; enabling the mod triggered an
+**in-place mod reload**, and our code ran inside it. `apply()` calls `patch()`,
+documented as *"no-op unless the presets are already loaded"*, and the file
+header states *"presets load after mod code … hence the DataLoaded/DataChanged
+handlers"*. **Both statements assume a cold boot.** On a reload `StoryBits` is
+already populated, so the pass did real work during file scope — where
+`HasTrait` exists but is not yet flattened. The Test-Kit-before-pack ordering
+noted earlier is incidental: it is a side effect of the Test Kit loading alone
+first and both together second.
+
+**Player-reachable, and the Mod Manager invites it.** Enabling a mod mid-session
+is a normal, offered action. In that session **F40 is silently not fixed** (Dust
+Sickness keeps infecting Biorobots, who keep bleeding Health every dust storm),
+invisible apart from the C1 dialog. It **self-corrects on the next restart**,
+which bounds the harm to one session — and is also why every A/B leg we have run
+(all cold boots) reported `74/74` and never caught it.
+
+**The general defect is bigger than this one fix: apply-time code assumes a cold
+boot.** This is the same hazard class the 2026-07-29 audit's finding **A2**
+addressed when it moved three flattening-unsafe `Opt_` hooks to file-scope
+install *"so a first mid-session enable works"*. That remediation fixed it for
+those three modules; **the shared `SMRFixPack.DataPatch` scaffold has the same
+exposure and was never covered.** The repair below fixes the reported symptom;
+the sweep in follow-up 1 is what addresses the class.
 
 **Repair (one line, do not construct preset objects during apply).** Either
 guard the construction and let the `DataLoaded` pass do the work post-flattening:
@@ -4281,10 +4301,14 @@ metatable. Needs a re-verified A/B (~90 s unattended) and ideally a load-order
 check, since the favourable order is what hid it.
 
 **Two follow-ups this earns, neither done:**
-1. **Sweep every constructor call reachable from an `apply()`** (`:new{`,
-   `PlaceObj`, class-table method calls). Third occurrence of the same trap
-   means the codebase should be checked rather than patched incident by
-   incident.
+1. **Sweep every `apply()` for cold-boot assumptions** — constructor calls
+   (`:new{`, `PlaceObj`, class-table methods) and anything that behaves
+   differently when presets are already loaded. Third occurrence of the
+   pre-flattening trap, and the second hazard of the mid-session-enable class
+   after audit finding A2, so the codebase should be checked rather than patched
+   incident by incident. **Test both paths:** a cold boot AND a mid-session
+   enable from the Mod Manager. Every leg we have ever run is a cold boot, which
+   is precisely why this hid.
 2. **`FIX_POLICY` needs the rule stated**: apply-time code runs before class
    flattening and may not construct preset/class objects — and the C1 report
    should distinguish *"self-check found changed game code"* (`inactive`) from
