@@ -418,6 +418,61 @@ Log hygiene: no `[LUA ERROR]` mentioning `DisasterPredictionLeak`,
 
 ---
 
+## PT-59 — First Asteroid prefabs survive a save/load · covers **F83 `Fix_FirstAsteroidPrefabs`** (built 2026-07-30)
+
+The A/B PT-58 already ran unfixed (**1/1/1** without a reload, **0/0/0** after
+one). This is the same A/B with the fix in. **Both halves matter** — the
+no-reload half is not a formality, it is the guard against the double-grant trap
+that killed the fix's first draft.
+
+**Fixture (kept by the owner, do not lose it):** the PT-58 colony saved BEFORE
+the `ReconCenter` tech was ever researched. Loading it restores
+`g_ShownPopupNotifications`, so the `show_once` popup re-offers itself on every
+run and this test can be repeated indefinitely.
+
+**Setup:** load the pre-trigger save. `SMRFixPack.ListFixes` (or the on-screen
+loop) must show `FirstAsteroidPrefabs` **`active`**. Pre-flight reads, one line
+each (bare expressions echo on screen):
+`UIColony.asteroid_count` → expect `0`
+`UIColony:IsTechResearched("ReconCenter")` → expect `false`
+`SMRFixPack_FirstAsteroidPrefabs` → expect `false`
+
+The counter read used in both legs, one line:
+`*r for _, id in ipairs({"MicroGAutoExtractorMetals", "MicroGAutoExtractorRareMetals", "MicroGAutoExtractorExoticMinerals"}) do ConsolePrint(id .. " = " .. tostring(ColonyGetPrefabs(id, MainCity))) end`
+(PT-58's own proven line — do not retype it a different way.)
+
+**Trigger A — the reload leg (the fix's whole point).** Load the fixture, fire
+the game's own trigger `UIColony:SetTechResearched("ReconCenter")`, leave the
+First Asteroid corner notification **unanswered**, quicksave, reload.
+   - **EXPECTED:** on load, a log line
+     `FirstAsteroidPrefabs: First Asteroid prefabs recovered after a save/load
+     (3 granted)`; the counters read **1 / 1 / 1**; `SMRFixPack_FirstAsteroidPrefabs`
+     reads `true`; the notification is still in the corner (re-shown as display)
+     and opening it shows the normal popup, whose choice closes it and changes
+     nothing further.
+   - **SURPRISE looks like:** `0/0/0` (the sweep did not identify the
+     notification — dump `Notifications[""]` and report), or **2/2/2** (a double
+     grant — report immediately, that is the trap).
+
+**Trigger B — the healthy leg must be UNCHANGED.** Reload the fixture fresh,
+fire the same trigger, and answer the popup **without** any save/load.
+   - **EXPECTED:** counters read **1 / 1 / 1** — exactly vanilla — and
+     `SMRFixPack_FirstAsteroidPrefabs` stays **`false`** (our code never ran).
+   - **SURPRISE looks like:** `2/2/2`, or the flag reading `true` on a path that
+     never reloaded.
+
+**Trigger C — reload twice, still once.** From Trigger A's post-heal state (or
+by repeating A), save again and load again.
+   - **EXPECTED:** counters still **1 / 1 / 1**, no second
+     `recovered after a save/load` line — the persistent flag holds.
+
+Log hygiene: no `[LUA ERROR]` mentioning `FirstAsteroidPrefabs`,
+`HealFirstAsteroidPrefabs` or `ColonyAddPrefabs`.
+
+`Result (A reload / B healthy / C twice):` _____________________________________________
+
+---
+
 # 4 · Fixture sittings — batch these by save
 
 ## SAVE-A sitting (sandbox; PT-27/28 need the Dust In The Wind rule)

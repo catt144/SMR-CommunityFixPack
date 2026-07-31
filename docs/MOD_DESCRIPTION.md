@@ -229,6 +229,13 @@ affected — achievements keep unlocking normally there with mods enabled.
 - Asteroid landers no longer strand themselves. Landing manually made the lander
   treat the fuel reserved for the trip home as surplus and unload it — on an
   asteroid with no drones and no fuel production, that was permanent.
+- The First Asteroid message pays out the prefabs it promises, even if you
+  saved and reloaded before answering it. That message arrives as a corner
+  notification and says you have gained a Micro-G Auto Extractor prefab of each
+  type — but if you left it sitting there across a save and a load, opening it
+  afterwards granted nothing at all. It is a once-per-game message, so those
+  three prefabs were simply gone, with no warning and no second chance. Loading
+  such a save now delivers them and re-offers the message to read.
 - Asteroid colonists no longer stand around outside until they suffocate. A
   colonist idling in vacuum now heads home before the oxygen runs out — and a
   brief power or air interruption no longer throws every resident out of a

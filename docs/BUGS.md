@@ -109,7 +109,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
-| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | filed 2026-07-30, **consequence OBSERVED — PT-58 PASS same day (1/1/1 vs 0/0/0)**; popup audit COMPLETE same day: hold lifted, **narrow decouple REINSTATED** — awaiting owner go (entry) |
+| F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **fixed 2026-07-30** — consequence OBSERVED (PT-58 PASS, 1/1/1 vs 0/0/0), popup audit COMPLETE, owner go given; built as the load-time heal (`Fix_FirstAsteroidPrefabs`) — **PT-59 pending** (entry) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
@@ -3567,7 +3567,7 @@ is found. Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
 
-### F83 — Minimized story popups lose their callback across a save/load; First Asteroid silently withholds three promised prefabs (P2, PROVEN mechanism)  `[filed 2026-07-30 from live play — NOTHING BUILT; audit COMPLETE same day, narrow decouple REINSTATED as recommended, awaiting owner go]`
+### F83 — Minimized story popups lose their callback across a save/load; First Asteroid silently withholds three promised prefabs (P2, PROVEN mechanism)  `[fixed 2026-07-30 — Fix_FirstAsteroidPrefabs, shape (i) the load-time heal; PT-59 owed]`
 
 **Found in play 2026-07-30**, mid-setup for PT-56. The tester got the
 `FirstFounderEnthusiast` popup ("When Life Gives You Lemons…", Samuel Hayden has
@@ -3739,7 +3739,8 @@ enumeration, safety rule, and needs-eyes list in the audit file.
 
 **Fix options (option 1 RECOMMENDED by the audit; ⭐ OWNER GAVE THE GO
 2026-07-30 evening — "review and action on your findings" to the audit
-session; build brief on FABLE_NEXT_PROMPT's board).**
+session. ⭐ OPTION 1 IS NOW BUILT, in shape (i) — see the build record below
+this list for what shipped and why (ii) was rejected).**
 1. **Narrow, RECOMMENDED — but ⚠️ NOT as originally written here.** The
    original text ("additive `OnMsg.SpawnedAsteroid` granting the three prefabs
    once behind a persistent flag; the shipped handler can stay") has a
@@ -3774,6 +3775,66 @@ session; build brief on FABLE_NEXT_PROMPT's board).**
    Own fixture, own observation, not covered by PT-58.
 4. **The six cosmetic View buttons:** low value on their own. Reasonable to
    document and leave, or to let option 2 carry them if it is ever taken.
+
+**⭐ BUILT 2026-07-30 — `Code/Fix_FirstAsteroidPrefabs.lua`, Register id
+`FirstAsteroidPrefabs`. Shape (i), the load-time heal.** Option 1's corrected
+form; shape (ii) was verified against Src and REJECTED. What ships:
+
+- **`OnMsg.LoadGame` sweep** (FIX_POLICY §1.2 additive handler + §3's sanctioned
+  one-shot cleanup). If a FirstAsteroid popup notification is still sitting in
+  the persisted `Notifications` table after a load, its real-time waiter is
+  necessarily dead — nothing else produces that state. The sweep then, in order:
+  **removes** the stranded notification, **grants** the same three prefabs
+  through the same `ColonyAddPrefabs(..., 1, nil, MainCity)` calls in the
+  shipped order, **latches** a persistent flag, and **re-shows** the popup as
+  pure display so the player still gets the story text.
+- **The healthy path is untouched** — no reload means no `LoadGame`, so a player
+  who answers normally goes through vanilla and reads 1/1/1. This is what makes
+  the double-grant trap unreachable: our code never runs on that path at all.
+- **Removing the notification is load-bearing, not tidiness.** Its `PressFunc`
+  closure is the only thing that can re-queue the dead context, so with it gone
+  exactly one grant path exists. That holds even if a future patch moves the
+  shipped waiter to a game-time thread (where it would persist and still be
+  listening) — a bare additive grant would pay 2/2/2 in that world.
+- **Identification** is by the FirstAsteroid preset's localization id, read from
+  the LIVE preset at sweep time, never hardcoded. Two facts force it: the preset
+  id is NOT on the notification instance (`ShowPopupNotification` nils
+  `instance.id` at `PopupNotification.lua:286`, because `AddNotification` asserts
+  an id-less instance), and T identity does not survive a load. **Correction to
+  the audit's build note:** matching on `text[1]` would have worked only in a dev
+  build — `T()` returns **light userdata**, not a table, whenever the id is in
+  the translation table (`localization.lua:268`), which is the retail case. The
+  accessor that handles both forms is `TGetID` (`localization.lua:48-65`).
+- **Save footprint:** one GameVar, `SMRFixPack_FirstAsteroidPrefabs`, boolean.
+  `GameVar` from mod code lands in the real `_G` and in `PersistableGlobals`
+  (`lib.lua:1040-1055`); `ModEnvMeta.__newindex` explicitly permits writing a
+  name registered there (`Mod.lua:1559`). A save made with the mod and loaded
+  **without** it is unaffected — `OnMsg.PersistLoad` only restores names still
+  listed in `PersistableGlobals` (`persist.lua:135-142`), so the stray value is
+  ignored.
+- **Why NOT shape (ii)** (the `show_once` pre-mark — show the popup ourselves,
+  then set `g_ShownPopupNotifications.FirstAsteroid = true` in the same dispatch
+  so the shipped thread's Show early-returns at `:249-251` and its
+  `WaitPopupNotification` reaches `procall(callback, res)` at `:302-304`
+  immediately). The mechanism is real and was confirmed in Src — it is exactly
+  why a *naive* additive grant is wrong — but it was rejected on three counts:
+  (1) its correctness rests on OnMsg handler order **and** on
+  `CreateRealTimeThread` not running the body during the Msg dispatch, a C
+  export whose scheduling is not verifiable from Src, and losing that race shows
+  the player two corner notifications; (2) it moves the grant off the healthy
+  path for every player, fixed or not (prefabs at spawn instead of on answer);
+  (3) it cannot heal a save already sitting in the stranded state, which shape
+  (i) does — including the owner's own PT-58 fixture.
+- **Known limit, deliberate (§3 "conservative by default"):** a player who has
+  already answered the dead notification after a reload is past detection — the
+  notification is gone and "granted then spent" is indistinguishable from "never
+  granted". Those saves are not healed. Nothing is guessed.
+- **Probe:** `SMRTest.FirstAsteroidPrefabs` (TestKit `56_Probes_Wave7.lua`, a new
+  wave file). Drives `SMRFixPack.HealFirstAsteroidPrefabs()` against planted
+  globals over three legs — stranded (must grant 1/1/1, remove once, re-show
+  once, latch), already-healed (must grant nothing — the no-double-grant
+  assertion), and a decoy non-FirstAsteroid popup (must grant nothing and must
+  not latch).
 
 **⭐ THE FIX-VERIFICATION FIXTURE EXISTS AND IS KEPT (owner, 2026-07-30): a save
 taken BEFORE the `ReconCenter` tech was ever researched**, on the PT-58 colony.

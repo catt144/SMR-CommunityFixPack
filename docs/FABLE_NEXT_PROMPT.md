@@ -1,4 +1,4 @@
-# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-30, end of the playtest day)
+# Continuation prompt (model-agnostic) — PLAYTEST STANDBY (rewritten 2026-07-30 late, after the F83 build)
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks the model per task and everything here works identically on
@@ -8,73 +8,74 @@ file goes stale the moment another session commits. (The filename keeps its
 historical FABLE_ prefix so existing references stay valid — nothing in it is
 model-specific.)
 
-## Where the project stands (end of 2026-07-30 — a long playtest day, no sitting currently live)
+## Where the project stands (end of 2026-07-30 late — the F83 build landed; no sitting currently live)
 
-> ✅ **The popup/deferred-consequence audit RAN 2026-07-30 (same day it was
-> queued): `docs\POPUP_CONSEQUENCE_AUDIT.md`.** Verdict in one line: the
-> storybit alarm was wrong — **game-time threads persist by default; only
-> real-time popup waiters lose their consequences across a load** (new
-> ENGINE_FACTS entries) — so storybits/mysteries/sequences need no fix, F06
-> stands as-is, **the F83 hold is LIFTED and the narrow decouple is REINSTATED
-> as recommended**, and one latent shielded class was filed as **F85** (tier U,
-> no fix until its observation runs).
+> ⭐ **F83 IS BUILT AND ITS HARNESS LEG IS CLEAR** —
+> `Code\Fix_FirstAsteroidPrefabs.lua`, shape **(i) the load-time heal**. The
+> owner's go was recorded, the corrected brief was followed, both candidate
+> shapes were verified against Src, and shape (ii) was **rejected** with its
+> reasons in the fix header. Full build record on the F83 entry + the newest
+> SESSION_LOG leg. **What is owed now is human, not code: PT-59** (checklist
+> §3) — the keyboard A/B on the kept pre-trigger fixture. Reload leg must read
+> **1/1/1**; the healthy no-reload leg must STILL read **1/1/1, not 2/2/2**
+> (that half is the double-grant guard); reload twice must still read 1/1/1.
 >
-> ⭐ **THE OWNER GAVE THE GO the same evening** — instruction to the audit
-> session, verbatim: *"update the fable next prompt to review and action on
-> your findings."* Recorded as the F83 option-1 build green-light (if that
-> reading is wrong, the owner can say so before code is written — but do not
-> re-ask by default; the gate question the owner posed is answered and the
-> recommendation he stopped is the one being built). **THIS SESSION'S HEADLINE
-> TASK is therefore the F83 fix build** — see "⭐ F83 BUILD" on the board
-> below: review the audit findings first (§1-§3 + §7 minimum), then build
-> option 1. It is small, game-free, and lands with its own A/B. F85 stays
-> observation-gated — actioning the findings does NOT include building it.
-> Also pick up the audit's **4-item needs-eyes list** (§8) as playtest riders
-> when the owner is at the keyboard — item 1 validates the audit's one
-> load-bearing inference; item 2 grades F83's second site (and decides whether
-> a second, separate fix is even warranted); item 3 settles F85's tier.
+> ⚠️ **ONE HARNESS LEG IS ALSO OWED, and it needs the owner's hands.** The
+> 23.29 leg came up **`74/74`** — i.e. **all six toggles are ON again**; the
+> previous prompt's "owner left all six OFF" had gone stale during the PT-58
+> sitting, and the D09 probe reported the **carry dial off base** too. The
+> opt-in bridge is one-way (it can only force a module ON), so the
+> **default-config leg (expect `68/74` → `62 / 0 / 15 / 0`) requires the six
+> toggles to be flipped off by hand first.** Ask for that flip when the owner
+> is at the keyboard, then run it unattended.
+>
+> The audit's **4-item needs-eyes list** (audit §8, mirrored in checklist §6)
+> is still open and still cheap — take the items as riders when the owner is
+> at the keyboard. Item 1 validates the audit's one load-bearing inference;
+> item 2 grades F83's *second* site, `ReconCenterDiscoveryAsteroid`, and
+> decides whether a separate fix is warranted at all; item 3 settles F85's
+> tier. **F85 stays observation-gated — do not build it.**
 
-**Next session: the F83 BUILD first (small, game-free, GO GIVEN — see the
-banner above), then D10 or playtest standby.** Nothing else is half-finished
-and nothing is blocked on an agent. Both A/B legs are DONE and CLEAR, the D09
-probe defect is repaired and verified, and **PT-56 PASSED IN FULL 2026-07-30 →
-D09 `tested`**, which **un-gates the D10 workshops build** (speced,
-user-approved, game-free, assistant work — the follow-on build once F83 lands).
-Open playtests, in suggested order: **PT-53 Trigger E** (last thing before D07
-→ `tested`) · **PT-54** (wave-6 disasters) · **PT-52 Trigger B + the B2 stress
-re-run** · checklist **§6 needs-eyes riders** (now 15 rows — the 4 popup-audit
-items were added 2026-07-30 late; take them while you are in a qualifying
-save) · **PT-20/21** last. Decisions still owed: the FIX_POLICY §4 amendment
-(**F83's fix design is no longer one of them — the go is recorded above**).
+**Next session: PT-59 first if the owner is at the keyboard (it is short and it
+closes the F83 build), otherwise the D10 workshops BUILD.** Nothing is
+half-finished and nothing is blocked on an agent. D10 is speced, user-approved,
+game-free assistant work and was un-gated by PT-56's pass. Open playtests, in
+suggested order: **PT-59** (F83, new) · **PT-53 Trigger E** (last thing before
+D07 → `tested`) · **PT-54** (wave-6 disasters) · **PT-52 Trigger B + the B2
+stress re-run** · checklist **§6 needs-eyes riders** (15 rows — take them while
+you are in a qualifying save) · **PT-20/21** last. Decisions still owed: the
+FIX_POLICY §4 amendment (F83's fix design is no longer one of them — built).
 
-**F83 (P2, PROVEN in play, NOTHING BUILT — audit COMPLETE, decision owed).**
-Minimized story popups lose their callback across a save/load: the waiter is a
-real-time thread and the async popup context is not persisted, while the corner
-notification *is*, so after a reload the notification still opens, any choice
-closes it, and the callback never runs. **PT-58 PASSED 2026-07-30 — the
-asteroid consequence is OBSERVED: 1/1/1 without a reload vs 0/0/0 after one.**
-The owner then stopped the fix to ask whether FirstAsteroid is the only thing
-losable this way; the queued one-off audit ran the same day
-(`docs\POPUP_CONSEQUENCE_AUDIT.md`) and the answer is: **the exposure is
-exactly the real-time-waiter family and no wider.** The storybit alarm rested
-on a backwards engine assumption — game-time threads persist BY DEFAULT with
-their blocked stacks (ENGINE_FACTS), so storybits, mysteries, anomaly
-sequences and challenges are save-safe by design and F06 is a different family
-(one-shot Msg race, fix stands). Consequential RT sites: **FirstAsteroid**
-(observed) and **`ReconCenterDiscoveryAsteroid`'s paid Detailed Scan**
-(recoverability = needs-eyes item 2); plus cosmetic dead-View sites, and the
-latent shielded class filed as **F85** (breakthrough choices ×3 + Assembly
-"Colony Values" — RT waiters behind open-immediately modal popups; tier U,
-settling observation = rebind-quicksave, needs-eyes item 3). **The narrow
-decouple (F83 option 1) is REINSTATED as recommended — the owner owes only the
-go/no-go.** The pre-trigger baseline save remains the reusable A/B fixture
-(reload leg must read 1/1/1). Full trail: F83/F85 entries + the audit file.
+**F83 (P2, PROVEN in play, ⭐ FIXED 2026-07-30 — PT-59 owed).** Minimized story
+popups lose their callback across a save/load: the waiter is a real-time thread
+and the async popup context is not persisted, while the corner notification
+*is*, so after a reload the notification still opens, any choice closes it, and
+the callback never runs. **PT-58 PASSED 2026-07-30 — the asteroid consequence
+is OBSERVED: 1/1/1 without a reload vs 0/0/0 after one.** The popup audit then
+bounded the family (`docs\POPUP_CONSEQUENCE_AUDIT.md`): **the exposure is
+exactly the real-time-waiter family and no wider** — game-time threads persist
+BY DEFAULT with their blocked stacks (ENGINE_FACTS), so storybits, mysteries,
+anomaly sequences and challenges are save-safe by design and F06 is a different
+family (one-shot Msg race, fix stands). **The FirstAsteroid site is now FIXED**
+by an `OnMsg.LoadGame` heal that removes the stranded notification, grants the
+three prefabs through the shipped calls, latches a persistent GameVar, and
+re-shows the popup as display; the healthy path is never entered, which is what
+makes the double-grant trap unreachable. Still open in the family, none of it
+code: **`ReconCenterDiscoveryAsteroid`'s paid Detailed Scan** (recoverability =
+needs-eyes item 2, and it decides whether a second fix is warranted at all);
+the cosmetic dead-View sites (documented, no work); and **F85** (breakthrough
+choices ×3 + Assembly "Colony Values" — RT waiters behind open-immediately
+modal popups; tier U, settling observation = rebind-quicksave, needs-eyes item
+3, **no fix until U resolves**). The pre-trigger baseline save is PT-59's
+instrument — do not lose it. Full trail: F83/F85 entries + the audit file.
 
-**Build state: 73 registered modules — 67 active by default**, 6 opt-in via
+**Build state: 74 registered modules — 68 active by default**, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
-(`Opt_DroneStatDials`, active-at-base = vanilla, **`tested` 2026-07-30 — PT-56 PASS**). **Two modules were
-DELETED and one guard removed on 2026-07-30** — see "the reachability turn"
-below. Everything committed and pushed.
+(`Opt_DroneStatDials`, active-at-base = vanilla, **`tested` 2026-07-30 — PT-56
+PASS**). **`Fix_FirstAsteroidPrefabs` was ADDED 2026-07-30 late (F83)**; earlier
+the same day **two modules were DELETED and one guard removed** — see "the
+reachability turn" below. TestKit probes: **77** (new wave file
+`56_Probes_Wave7.lua`). Everything committed and pushed.
 
 > ⛔ **READ THIS BEFORE WRITING ANY FIX — FIX_POLICY §4a, owner hard rule,
 > 2026-07-30: this pack NEVER fixes other mods' problems.** Not bugs caused by
@@ -85,22 +86,26 @@ below. Everything committed and pushed.
 > precedent: two violated this rule and one is already retired under it (F28;
 > F29 is flagged, awaiting the owner).
 
-**The code gate is CLEAR and nothing is owed. BOTH configurations are measured
-post-removal**, unattended, 76 probes each:
+**The code gate is CLEAR for the configuration that could be measured, and ONE
+leg is owed.** Post-F83-build, unattended, 77 probes:
 
-- **all six toggles ON** (log `Mars.exe-20260730-19.20.24`) — **`73/73` active**,
-  **66 PASS / 0 FAIL / 10 SKIP / 0 ERROR**
-- **default config, six toggles OFF + dials at base** (log
-  `Mars.exe-20260730-19.32.16`) — **`67/73` active**, **61 PASS / 0 FAIL /
-  15 SKIP / 0 ERROR**
+- **all six toggles ON** (log `Mars.exe-20260730-23.29.22`) — **`74/74` active**,
+  **67 PASS / 0 FAIL / 10 SKIP / 0 ERROR**. Zero `[CommunityFixPack]`
+  error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
+  `FirstAsteroidPrefabs: applied`, and its probe PASSed all three legs.
+- **OWED — default config, six toggles OFF** — expect **`68/74` active**,
+  **62 PASS / 0 FAIL / 15 SKIP / 0 ERROR**. **It cannot be run unattended:** the
+  opt-in bridge is one-way (ON only) and the owner currently has all six toggles
+  ON. Ask for the hand flip, then launch.
 
-Both: zero `[CommunityFixPack]` error/disabled/FAILED lines, no log line naming
-our `Code/`, known noise only. The default leg's 15 SKIPs are the 10 standing
-ones plus the five opt-module probes reporting `inactive (opt-in)` — five, not
-six, because D06 has no probe. Its six `[CommunityFixPack] … inactive (opt-in
-module …)` log lines are the **expected healthy signature**, not errors.
-`DroneStatDials` and `OptionsMenu` PASS in both, so the dials and the Mod Options
-wiring are toggle-independent.
+The default leg's 15 SKIPs are the 10 standing ones plus the five opt-module
+probes reporting `inactive (opt-in)` — five, not six, because D06 has no probe.
+Its six `[CommunityFixPack] … inactive (opt-in module …)` log lines are the
+**expected healthy signature**, not errors. `DroneStatDials` and `OptionsMenu`
+PASS in both configurations, so the dials and the Mod Options wiring are
+toggle-independent. Pre-F83 pair (historical, 76 probes): all-ON
+`Mars.exe-20260730-19.20.24` → `73/73`, `66/0/10/0`; default
+`Mars.exe-20260730-19.32.16` → `67/73`, `61/0/15/0`.
 
 **The D09 dial probe is REPAIRED** (TestKit, same evening) — it forces both dials
 to base through the real Apply path before measuring and restores the leg's entry
@@ -116,15 +121,16 @@ Historical legs (counts no longer apply — measured before the removals):
 `1/61/15/0` · default config, six toggles OFF `62/0/15/0 at 69/75` · all six ON
 + dials `67/0/10/0 at 75/75`.
 
-**Account state — READ IT, NEVER ASSUME IT.** As of 2026-07-30 19.32 the owner
-set **all six toggles OFF and both dials to base**, and the `67/73` leg confirms
-the toggles. **PT-56 has since PASSED from that state** — but it is one Mod Options
-visit away from going stale again, exactly as it did that afternoon (the carry
-dial was left at +1, `DroneResourceCarryAmount` reading 3 where a techs-only save
-reads 2). The repaired D09 probe is deliberately immune to dial state, so a green
-leg does NOT prove the dials are at base; the probe now *reports* the state it
-found on entry instead. Read it, and read the toggles with
-`SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`.
+**Account state — READ IT, NEVER ASSUME IT. This went stale AGAIN on
+2026-07-30.** The prompt said the owner had left all six toggles OFF and both
+dials at base after the 19.32 leg; by the 23.29 leg **all six were ON and the
+carry dial was off base** (the D09 probe reported `const 3 vs base 1`) —
+presumably flipped during the PT-58 sitting. That is now twice this has
+misled a session. The repaired D09 probe is deliberately immune to dial state,
+so a green leg does NOT prove the dials are at base; it *reports* the state it
+found on entry instead. **Read the leg's own `fix pack present: N/74 fixes
+active` line to learn which configuration you actually measured**, and read the
+toggles with `SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`.
 
 ### The reachability turn (2026-07-30) — the day's most important outcome
 
@@ -231,11 +237,13 @@ Release-time owner tasks from the audit (plan 2.5): preview image (PDX ≤2 MB
 
 **Session-start sequence (~2 min):**
 1. `git log --oneline -5` + `git pull` (see above).
-2. Verify the pack loaded clean: on-screen status loop (below) — all **67**
-   default fixes `active` (67, not 69, since the 2026-07-30 F24 and F28
-   removals; incl. DroneStatDials, active-at-base), plus whichever opt-in
-   toggles the user runs (account-persistent — READ the state, never assume it;
-   all six were left **ON**, and the carry dial at +1).
+2. Verify the pack loaded clean: on-screen status loop (below) — all **68**
+   default fixes `active` (68 since `Fix_FirstAsteroidPrefabs` landed
+   2026-07-30 late; it was 67 after the F24 and F28 removals earlier that day;
+   incl. DroneStatDials, active-at-base), plus whichever opt-in toggles the
+   user runs (account-persistent — READ the state, never assume it; as of the
+   23.29 leg **all six were ON and the carry dial was off base**, but that is a
+   reading, not a guarantee).
 3. Fresh `SMRFixPack.DroneReport` baseline if D06 is on (counters reset
    every launch; the PT-52 passive watch continues every sitting).
 4. Optional (only if a lander/cargo read is planned): re-arm
@@ -282,7 +290,8 @@ Your jobs, in the order they usually come up:
 2. `docs\PLAYTEST_CHECKLIST.md` — **SPLIT 2026-07-30: the checklist now
    carries ONLY tests + the reporting protocol**; §1 standing watches (log
    hygiene, meteor watchdog, PT-52 passive), §2 owed halves, §3 wave-6
-   PT-54, §4 fixture sittings, §5 cross-cutting (PT-20/21), **§6 the
+   PT-54 **+ the new PT-59 (F83, added 2026-07-30 late)**,
+   §4 fixture sittings, §5 cross-cutting (PT-20/21), **§6 the
    needs-eyes list (new 2026-07-30 — eleven single observations from the
    reachability audit; six ride along on PTs already scheduled)**. The PT-52
    section still carries the CAN/CANNOT lists — judge the module only on
@@ -336,13 +345,15 @@ silent.
   entry's own words** — F29 called itself "mod-facing / No shipped user" and had
   four live shipped callers.
 
-- **~~⚠️ FIRST ACTION: dials-to-base + one A/B leg~~ — DONE, both legs CLEAR**
-  (2026-07-30 evening, unattended: `73/73` at `66/0/10/0`, then `67/73`
-  default-config at `61/0/15/0`). The probe defect behind the earlier leg's
-  single FAIL was **repaired** rather than worked around, so dials-to-base is no
-  longer a precondition for a leg at all. **Nothing on the harness side is
-  owed.** The owner has left all six toggles OFF and both dials at base — the
-  state PT-56 passed from; just re-read it rather than trusting this sentence.
+- **⚠️ ONE HARNESS LEG IS OWED — the post-F83 default-config leg, and it needs
+  the owner's hands.** The pre-F83 pair ran CLEAR on 2026-07-30 evening
+  (`73/73` at `66/0/10/0`, then `67/73` default-config at `61/0/15/0`), and the
+  post-F83 all-toggles-ON leg ran CLEAR at 23.29 (`74/74` at `67/0/10/0`,
+  77 probes). The missing half is default-config (**expect `68/74` →
+  `62/0/15/0`): ask the owner to turn the six Mod Options toggles OFF, then
+  launch unattended.** The opt-in bridge can only force a module ON, so there is
+  no way to do it without them. The D09 probe defect was repaired rather than
+  worked around, so dials-to-base is no longer a precondition for any leg.
 
 - **DECISION OWED — the FIX_POLICY §4 amendment** (the *other* one; §4a is
   already applied). Drafted at the end of `REACHABILITY_AUDIT.md` and revised by
@@ -389,45 +400,28 @@ silent.
 - **PT-52 Trigger B — controlled off/on CheatMalfunction A/B demo + F77
   extender-flap check** (checklist §2) — still un-run; cheap once hub A/B +
   extender geometry exists.
-- **⭐ F83 BUILD — GO GIVEN 2026-07-30 (banner above). THIS SESSION'S HEADLINE
-  TASK.** Read `POPUP_CONSEQUENCE_AUDIT.md` §1-§3 + §7 first, then the F83
-  entry. Goal: decouple the FirstAsteroid prefab grant from the real-time
-  popup waiter. **⚠️ Do NOT build entry option 1 as literally written — it has
-  a double-grant trap, found when the go was recorded:**
-  `WaitPopupNotification` ALWAYS `procall`s its callback, even when
-  `ShowPopupNotification` early-returns on `show_once`
-  (`PopupNotification.lua:249` + `:302-304`), and the FirstAsteroid callback
-  takes no args and grants unconditionally — so a naive additive handler that
-  grants at spawn leaves vanilla's own grant alive in the healthy path →
-  2/2/2. Two candidate shapes, both small; VERIFY against Src, pick one, and
-  say why in the fix header:
-  * **(i) LoadGame sweep (conservative):** grant behind a persistent
-    `SMRFixPack_*` once-flag ONLY when the stranded state is detected on load —
-    the FirstAsteroid minimized notification still present in the persisted
-    `Notifications` GameVar with the flag unset. Heals saves where the
-    notification is sitting; healthy path completely untouched. Detection
-    caveat: match the notification by the preset's T loc-id number
-    (`text[1]`/`title[1]`), NOT by T table identity — T identity does not
-    survive a load.
-  * **(ii) show_once pre-mark (grants at spawn via vanilla's own code):** an
-    additive `OnMsg.SpawnedAsteroid` (mod handlers register after the shipped
-    one) that shows the popup itself as pure display, then sets
-    `g_ShownPopupNotifications.FirstAsteroid = true` during the same Msg
-    dispatch — the shipped RT thread then early-returns from its Show and its
-    `WaitPopupNotification` procalls the grant callback IMMEDIATELY, so
-    **vanilla grants at spawn** and the popup is demoted to display. Residual
-    loss window: the sub-frame before the shipped RT thread first runs.
-  Whichever ships: §2 status+veto re-checks in every handler, §3 savegame
-  discipline (flag named `SMRFixPack_*`, absence tolerated), header states the
-  chosen shape and the rejected one. **Arithmetic after the build: 74
-  registered modules (all-toggles leg `74/74`, default `68/74`); probes stay
-  76 unless you add one** — a probe is recommended (flag + handler
-  installed + no-double-grant assertion via a stubbed grant path if feasible).
-  **Add PT-59 to the checklist**: the owner's keyboard A/B on the kept
-  pre-trigger fixture — reload leg must read **1/1/1** (and the no-reload leg
-  must STILL read 1/1/1, not 2/2/2 — that half now guards the trap above).
-  BUGS.md F83 → `fixed` (both places) with PT-59 owed; MOD_DESCRIPTION line;
-  A/B pair before push per policy.
+- **~~⭐ F83 BUILD~~ DONE 2026-07-30 late — `Code\Fix_FirstAsteroidPrefabs.lua`,
+  shape (i) the load-time heal.** Both candidate shapes were verified against
+  Src; (ii) the `show_once` pre-mark was **rejected** (it depends on OnMsg order
+  AND on `CreateRealTimeThread` scheduling that Src cannot settle, it moves the
+  grant off the healthy path for everyone, and it cannot heal an
+  already-stranded save). The double-grant trap is **unreachable** rather than
+  guarded: our code only runs on `LoadGame`, and it removes the stranded
+  notification — the sole route back to the dead context — before granting.
+  One new GameVar (`SMRFixPack_FirstAsteroidPrefabs`), §3-compliant. One new
+  probe in a new TestKit wave file. Harness leg CLEAR. **What is left is
+  PT-59** (next item) and the owed default-config leg.
+- **⭐ PT-59 — F83's keyboard A/B, SHORT, do it in the next sitting**
+  (checklist §3). Fixture: the kept pre-trigger save (before `ReconCenter` was
+  ever researched) — it restores `g_ShownPopupNotifications`, so the
+  `show_once` popup re-offers itself every run and the test is repeatable.
+  Three triggers: **(A)** leave the notification unanswered across a
+  quicksave/reload → counters must read **1/1/1** and a
+  `FirstAsteroidPrefabs: … (3 granted)` line must appear on load; **(B)** the
+  healthy leg, answer with NO reload → must still read **1/1/1, not 2/2/2**
+  (this half is the trap guard, and it must leave
+  `SMRFixPack_FirstAsteroidPrefabs` reading `false`); **(C)** save+load a
+  second time → still 1/1/1, no second grant line. PASS flips F83 to `tested`.
 - **~~PT-58~~ PASSED 2026-07-30 → F83's consequence OBSERVED** (archived).
   **1/1/1** answered without a reload vs **0/0/0** after one, same fixture, one
   variable. The owner keeps the **pre-trigger baseline save** as the reusable
@@ -655,25 +649,29 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   Delete it after the leg. **The bridge is one-way: it can only force a module
   ON, never off** (OptionEnabled ORs the table with the saved toggles), and the
   user's own Mod Options toggles are account-persistent and apply during legs.
-  So ALWAYS read the leg's own `fix pack present: N/73 fixes active` line to
+  So ALWAYS read the leg's own `fix pack present: N/74 fixes active` line to
   learn which config you actually measured — and a true default-config leg
-  (**67/73** since the F24 and F28 removals) requires the user to turn the six toggles
-  off by hand first — proven four times over (2026-07-29's "default" leg came up
-  74/74 with all six on; the post-D09 set needed a hand flip for its 69/75 leg;
-  the post-removal leg came up 74/74; the 19.20 leg came up 73/73). **The
-  2026-07-30 19.32 leg is the one that actually got the hand flip and read
-  `67/73`.** **The dials are the same trap** — account-persistent too. Read both.
+  (**68/74** since `Fix_FirstAsteroidPrefabs` landed) requires the user to turn
+  the six toggles off by hand first — proven five times over (2026-07-29's
+  "default" leg came up 74/74 with all six on; the post-D09 set needed a hand
+  flip for its 69/75 leg; the post-removal leg came up 74/74; the 19.20 leg came
+  up 73/73; **the post-F83 23.29 leg came up 74/74 again**). **The 2026-07-30
+  19.32 leg is the only one that ever got the hand flip** (it read `67/73`),
+  and the toggles were flipped back ON before the day was out. **The dials are
+  the same trap** — account-persistent too. Read both.
   (The dial no longer breaks the D09 probe, which forces base itself and now
   reports what it found, but it still skews any live baseline read a human takes.)
 - **TestKit `Code/91_Stress.lua` (v2, lifecycle tracing)** — the drone stress
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — CURRENT is the 2026-07-30 pair (76 probes each): all six
-  toggles ON `73/73` → `66 / 0 / 10 / 0`; default config `67/73` →
-  `61 / 0 / 15 / 0`.** The D09 dial probe now forces base itself, so it is green
+- **Expected numbers — CURRENT is post-F83-build, 77 probes: all six toggles ON
+  `74/74` → `67 / 0 / 10 / 0` (measured, 23.29 leg); default config `68/74` →
+  `62 / 0 / 15 / 0` (PREDICTED — that leg is OWED and needs the hand flip).**
+  The pre-F83 pair (76 probes: `73/73` → `66/0/10/0`, `67/73` → `61/0/15/0`) is
+  historical. The D09 dial probe now forces base itself, so it is green
   regardless of account dial state (and reports the state it found). The three
-  legs below are HISTORICAL — measured before
+  legs below are older still — measured before
   `Fix_DomePipeMoveInside` was deleted, so their `/75` and `/69` counts no
   longer apply: baseline (`code` list emptied) **1 / 61 / 15 / 0**;
   default config, six toggles OFF **62 / 0 / 15 / 0 at 69/75**; all six

@@ -8,6 +8,87 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## F83 BUILT — the First Asteroid prefabs are recovered on load — 2026-07-30 late (build session, unattended harness leg)
+
+The headline task the previous session queued. Read the audit (§1-§3, §7), the
+F83 entry and FIX_POLICY first, then verified **both** candidate shapes against
+Src before writing anything, per the corrected brief.
+
+**What Src confirmed (the trap is real).** `ShowPopupNotification` early-returns
+on a `show_once` preset already shown (`PopupNotification.lua:249-251`) —
+returning nothing — and `WaitPopupNotification` then takes neither `WaitMsg`
+branch but still reaches `procall(callback, res)` (`:302-304`). So vanilla's
+grant callback runs unconditionally, and a naive additive handler that also
+grants would pay **2/2/2** on the healthy path. Both candidate shapes were
+therefore judged on how they avoid that, not just on whether they heal.
+
+**SHIPPED: shape (i), the load-time heal** —
+`Code/Fix_FirstAsteroidPrefabs.lua`, Register id `FirstAsteroidPrefabs`
+(FIX_POLICY §1.2 additive handler + §3's sanctioned one-shot sweep). On
+`LoadGame`, if the FirstAsteroid popup notification is still in the persisted
+`Notifications` table — the only state a dead real-time waiter can leave — the
+sweep **removes** it, **grants** the three prefabs through the shipped
+`ColonyAddPrefabs(..., 1, nil, MainCity)` calls in the shipped order,
+**latches** a persistent flag, and **re-shows** the popup as pure display so the
+player still gets the story text. The healthy path is never touched: no reload
+means no `LoadGame`, so the trap is unreachable rather than merely guarded.
+Removing the notification is load-bearing, not tidiness — its `PressFunc` is the
+only thing that can re-queue the dead context, so exactly one grant path exists,
+and that stays true even if a future patch moves the shipped waiter to a
+game-time thread (where it would persist and still be listening).
+
+**REJECTED: shape (ii), the `show_once` pre-mark.** The mechanism is real and
+was confirmed in Src, but its correctness rests on OnMsg handler order **and**
+on `CreateRealTimeThread` not running its body during the Msg dispatch — a C
+export whose scheduling Src cannot settle, and losing that race shows the player
+two corner notifications. It also moves the grant off the healthy path for every
+player (prefabs at spawn instead of on answer) and cannot heal a save already
+sitting stranded — which shape (i) does, including the owner's own PT-58
+fixture. Reasoning recorded in the fix header, per the brief.
+
+**Correction to the audit's own build note.** It advised matching the
+notification by the preset's T loc-id via `text[1]`. That works only in a dev
+build: `T()` returns **light userdata**, not a table, whenever the id is in the
+translation table (`localization.lua:268`) — the retail case. The fix uses
+`TGetID` (`:48-65`), which handles both forms, and reads the id from the **live**
+preset rather than hardcoding it. (The related caveat the audit got right: the
+preset id is genuinely absent from the instance — `ShowPopupNotification` nils
+`instance.id` at `:286` because `AddNotification` asserts an id-less instance.)
+
+**Savegame footprint** — one GameVar, `SMRFixPack_FirstAsteroidPrefabs`. Checked
+end to end that a mod-declared GameVar is safe in the sandbox: `GameVar` writes
+the real `_G` and `PersistableGlobals` (`lib.lua:1040-1055`) regardless of
+caller, `ModEnvMeta.__newindex` explicitly permits writing a name registered
+there (`Mod.lua:1559`), and `OnMsg.PersistLoad` only restores names still listed
+in `PersistableGlobals` (`persist.lua:135-142`) — so a save made with the mod and
+loaded **without** it simply ignores the stray value (§3).
+
+**Probe + harness.** New TestKit wave file `56_Probes_Wave7.lua` (**probes
+76 → 77**) driving the real sweep against planted globals over three legs:
+stranded (must grant 1/1/1, remove once, re-show once, latch), already-healed
+(must grant nothing — the no-double-grant assertion), and a decoy
+non-FirstAsteroid popup (must grant nothing and must not latch). Unattended leg
+`Mars.exe-20260730-23.29.22`: **`74/74` active, 67 PASS / 0 FAIL / 10 SKIP /
+0 ERROR**, the predicted arithmetic exactly; zero `[CommunityFixPack]`
+error/disabled/FAILED lines; no log line names our `Code/`.
+
+**Two things this leg exposed, both worth carrying forward.** (1) The account
+had **all six toggles ON again** — the previous prompt's "owner left all six
+OFF" had gone stale during the PT-58 sitting, and the D09 dial probe reported
+the carry dial off base too. The leg is therefore the all-toggles-ON
+configuration, and **the default-config leg is OWED** — the opt-in bridge is
+one-way (ON only), so it needs a hand flip by the owner. (2) The lesson stands
+exactly as ENGINE_FACTS and the prompt already warn: read the account state,
+never trust a doc for it.
+
+**Docs:** BUGS.md F83 → `fixed` in both places with a full build record;
+**PT-59 filed** in the checklist (§3) with three triggers — reload leg 1/1/1,
+healthy leg still 1/1/1 (the trap guard), and reload-twice still 1/1/1;
+MOD_DESCRIPTION player line; STATUS counts to 75 files / 74 modules /
+68 default-active / 77 probes.
+
+---
+
 ## The popup/deferred-consequence audit — the storybit alarm OVERTURNED, F83's narrow decouple REINSTATED — 2026-07-30 (one-off session, unattended, game not launched)
 
 Ran `docs/POPUP_AUDIT_PROMPT.md` (deleted on completion). Deliverable:

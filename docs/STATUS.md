@@ -6,12 +6,14 @@ remediation 3.3). Session legs are append-only in
 `docs/ENGINE_FACTS.md`; defect truth lives in `docs/BUGS.md`.
 
 **Build state (authoritative counts — stated here and nowhere else):**
-`Code/` = **74 files** (65 `Fix_` + 7 `Opt_` + `00_Core` +
-`90_SaveSanitizer`) = **73 registered modules, 67 default-active** (the 6
+`Code/` = **75 files** (66 `Fix_` + 7 `Opt_` + `00_Core` +
+`90_SaveSanitizer`) = **74 registered modules, 68 default-active** (the 6
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
-93 rows.
+93 rows. **TestKit probes: 77** (the F83 probe added a new wave file,
+`56_Probes_Wave7.lua`). Counts moved 2026-07-30 late with the **F83 build**
+(`Fix_FirstAsteroidPrefabs`, below).
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
 reachable only from mod code. "For modder benefit" is no longer a valid reason
@@ -68,7 +70,33 @@ console achievements + per-fix-disable disclosures (A4/B4/D1/D2). Docs
 restructured (this header, ENGINE_FACTS, SESSION_LOG, archives). Details:
 the newest SESSION_LOG leg.
 
-**NEW FINDING 2026-07-30 (live play) — F83, P2, mechanism PROVEN, nothing built.**
+**⭐ F83 IS BUILT (2026-07-30 late) — `Code/Fix_FirstAsteroidPrefabs.lua`, shape
+(i), the load-time heal.** The owner's go was recorded, the corrected brief was
+followed, and the build ran with its own probe and a CLEAR harness leg
+(`74/74`, `67 PASS / 0 FAIL / 10 SKIP / 0 ERROR` at 77 probes — the all-toggles-ON
+configuration; see the A/B section below for the leg that is still owed). What
+ships: an `OnMsg.LoadGame` sweep that, when the FirstAsteroid popup notification
+is still sitting in the persisted `Notifications` table after a load — the only
+state the dead real-time waiter can leave — **removes** it, **grants** the three
+prefabs through the shipped `ColonyAddPrefabs` calls, **latches** a persistent
+`SMRFixPack_FirstAsteroidPrefabs` GameVar, and **re-shows** the popup as pure
+display so the player still gets the story text. The healthy path is untouched
+(no reload means no `LoadGame`), which is what makes the double-grant trap
+unreachable rather than merely guarded. Removing the notification is
+load-bearing: its `PressFunc` is the only route back to the dead context, so
+exactly one grant path exists — and that stays true even if a future patch moves
+the shipped waiter to a game-time thread. **Shape (ii), the `show_once`
+pre-mark, was verified against Src and REJECTED** (it depends on OnMsg order and
+on `CreateRealTimeThread` scheduling that Src cannot settle, it moves the grant
+off the healthy path for everyone, and it cannot heal an already-stranded save).
+**Correction to the audit's build note:** matching the notification on `text[1]`
+works only in a dev build — retail `T()` returns **light userdata** when the id
+is in the translation table (`localization.lua:268`); the fix uses `TGetID`
+(`:48-65`) and reads the id from the live preset rather than hardcoding it.
+**PT-59 is filed and owed** (checklist §3): reload leg must read 1/1/1, and the
+no-reload leg must STILL read 1/1/1, not 2/2/2. BUGS.md F83 → `fixed`.
+
+**The finding it closes (2026-07-30, live play) — F83, P2, mechanism PROVEN.**
 Minimized story popups lose their callback across a save/load: the waiter is a
 real-time thread and the async popup context is not persisted, while the corner
 notification *is* — so after a reload the notification still opens, any choice
@@ -105,12 +133,9 @@ FABLE_NEXT_PROMPT's board; PT-58's kept fixture is the A/B — reload leg must
 read 1/1/1 AND the no-reload leg must still read 1/1/1, not 2/2/2). Full trail
 on the F83/F85 entries and the audit file.
 
-**Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN 2026-07-30
-evening** ("review and action on your findings" to the audit session); the
-build is now queued as the next session's headline task, with a corrected
-build brief on FABLE_NEXT_PROMPT's board (the entry's original option-1 text
-had a double-grant trap — vanilla's popup callback always runs, even
-show_once-suppressed; see the F83 entry). Still open:
+**Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN and BUILT
+2026-07-30** (see the F83 build block above; PT-59 is the owed keyboard A/B).
+Still open:
 Phase 4 go/no-go (core helpers, module merges,
 deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
@@ -135,11 +160,18 @@ omits that it bridges life support. Text patch, but it converts a localized `T`
 into an English-only `Untranslated` string, so **decide it together with D10's T1
 text repairs** — identical tradeoff, should not be answered twice differently.
 
-**A/B probe state — CURRENT is the 2026-07-30 pair at 76 probes: `73/73` all
-toggles ON and `67/73` default config, both `0 FAIL / 0 ERROR`. Code gate CLEAR,
-nothing owed, and both shipping configurations are now measured post-removal.**
-Earlier rows are historical — their `/75`, `/74` and 77-probe counts no longer
-apply.
+**A/B probe state — CURRENT is the post-F83-build leg at 77 probes: `74/74` all
+toggles ON, `67 PASS / 0 FAIL / 10 SKIP / 0 ERROR`, zero `[CommunityFixPack]`
+error/disabled/FAILED lines, no log line naming our `Code/`. Code gate CLEAR for
+the configuration that was measurable.** ⚠️ **One leg is OWED: the
+default-config leg (six toggles OFF) could not be run — the owner left all six
+toggles ON during the PT-58 sitting** (the 23.29 leg came up `74/74`, and the
+D09 probe additionally reported the **account carry dial OFF BASE**, const 3 vs
+base 1). The opt-in bridge is one-way — it can only force a module ON — so a
+true default-config leg (**68/74** now) needs the owner to flip the six toggles
+off by hand first. Expected then: **62 / 0 / 15 / 0**. The pre-F83 pair at 76
+probes (`73/73` → `66/0/10/0`; `67/73` → `61/0/15/0`) is now historical, as are
+the older `/75` and `/74` rows.
 
 | Leg | Active | Result |
 |---|---|---|
@@ -147,8 +179,21 @@ apply.
 | Fixed, default config (six toggles OFF) | 69/75 *(pre-F24-removal)* | **62 / 0 / 15 / 0** |
 | Fixed, all six toggles ON + dials | 75/75 *(pre-F24-removal)* | **67 / 0 / 10 / 0** |
 | Post-removal re-verify, 2026-07-30 17.25 (unattended) | 74/74 *(pre-F28-removal)* | **66 / 1 / 10 / 0** — the 1 FAIL was the probe defect below |
-| **CURRENT — all six toggles ON, 2026-07-30 19.20 (unattended), 76 probes** | **73/73** | **66 / 0 / 10 / 0** |
-| **CURRENT — default config, six toggles OFF + dials at base, 2026-07-30 19.32 (unattended), 76 probes** | **67/73** | **61 / 0 / 15 / 0** |
+| All six toggles ON, 2026-07-30 19.20 (unattended), 76 probes | 73/73 | **66 / 0 / 10 / 0** — pre-F83-build |
+| Default config, six toggles OFF + dials at base, 2026-07-30 19.32 (unattended), 76 probes | 67/73 | **61 / 0 / 15 / 0** — pre-F83-build |
+| **CURRENT — post-F83 build, all six toggles ON, 2026-07-30 23.29 (unattended), 77 probes** | **74/74** | **67 / 0 / 10 / 0** |
+| **OWED — post-F83 build, default config (six toggles OFF)** | *68/74 expected* | *62 / 0 / 15 / 0 expected — needs the owner to flip the six toggles off by hand* |
+
+**The 23.29 leg — the F83 build's gate, CLEAR.** `fix pack present: 74/74 fixes
+active`, **67 / 0 / 10 / 0** at 77 probes — the predicted arithmetic exactly
+(66 + the one new `FirstAsteroidPrefabs` probe). `[CommunityFixPack]
+FirstAsteroidPrefabs: applied` on load; the probe PASSed all three of its legs
+(*"stranded save granted 1/1/1 and latched; already-healed and non-FirstAsteroid
+states granted nothing"*). Zero error / disabled / FAILED lines, no log line
+names our `Code/`, known noise only. **What this leg also revealed: the account
+toggles are ON again** — the prompt doc's "owner left all six OFF" had gone
+stale during the PT-58 sitting, and the D09 dial probe reported the carry dial
+off base too. Read the account state, never trust a doc for it.
 
 **The 19.32 leg — the shipping default configuration, CLEAN.** Run after the
 owner set all six toggles OFF and both dials to base. `fix pack present: 67/73
