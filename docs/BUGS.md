@@ -38,7 +38,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | tested — PT-43 PASS 2026-07-28 (entry) |
 | F21 | Train travel-time penalty includes station waiting       | P2  | med  | tested — PT-43 PASS 2026-07-28 (entry) |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
-| F23 | Founder-gains-trait notification never fires             | P3  | high | fixed  |
+| F23 | Founder-gains-trait notification never fires             | P3  | high | tested |
 | F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | wontfix — unreachable in vanilla, fix deleted 2026-07-30 (entry) |
 | F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | fixed  |
 | F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | fixed  |
@@ -566,7 +566,41 @@ Probe: `GridGlobalStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
 
 ## P3 — cosmetic / latent / mod-facing
 
-### F23 — Founder-gains-trait notification never fires  `[fixed: Code/Fix_FounderTraitNotification.lua]`
+### F23 — Founder-gains-trait notification never fires  `[tested 2026-07-30 — PT-44 PASS: Code/Fix_FounderTraitNotification.lua]`
+
+**PT-44 PASS — 2026-07-30, live.** Trigger: `founder:AddTrait("Fit")` on a
+Founder lacking it — the same call a shipped **Open Air Gym** makes
+(`OpenAirGym.lua:10`), through the real `Colonist:AddTrait`, which emits
+`Msg("ColonistAddTrait", …)` synchronously (`Units/Colonist.lua:427`).
+Evidence, objective counter first:
+
+| Check | Result |
+|---|---|
+| `SMRFixPack.FounderTraitNotification.fired` | **0 → 1** |
+| `FindNotification("FounderGainsTrait")` | `false` → `true` |
+| Notification rendered | **"Founder Has Trait" / "Ciara Grant: Fit"** — correct colonist, correct trait |
+| Duplicate check | **exactly one** notification — the dead shipped handler stayed dead, so the dedupe guard was not even needed |
+| Module status | `active` throughout |
+
+**Path vs rendering, stated honestly:** the grant was console-injected, so this
+run proves the notification *fires, renders and reads correctly* — which is
+exactly what PT-44 exists to check ("probes cover the wiring; play confirms the
+notification renders"). It does not itself prove the player path, but the path
+was never the open question: the reachability audit graded F23 **R1** with a
+full enumeration, and a re-grep confirms a dozen live shipped callers of
+`AddTrait` on existing colonists — Martian University specializations
+(`MartianUniversity.lua:30`), School / SchoolSpire, Sanatorium, Open Air Gym,
+Project Morpheus, CovertOps, the Dome `Renegade` path, and storybit/faction
+effect classes.
+
+**Vanilla behaviour recorded so it is never filed as a defect:** PT-44 used to
+say "clicking it selects them". That is only true when the colonist is
+**visible**. A notification click runs `ViewCycledObj`
+(`Lua/UI/OnScreenNotification.lua:1-19`), which calls `ViewAndSelectObject` only
+for an object with `efVisible ~= 0`; a colonist inside a building (Ciara Grant
+was "Resting in Living Complex") falls to the `ViewObjectMars` branch — camera
+only, no selection. Correct by design: you cannot select a hidden unit. The
+checklist wording was corrected accordingly.
 `Lua\ColonyViability.lua:282-295` — array `FounderGainsTraitCategories` indexed with group
 string → always nil. Handler can't be replaced (OnMsg is additive; original is dead and
 harmless). **Fix:** add our own `OnMsg.ColonistAddTrait` with a proper set

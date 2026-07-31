@@ -8,6 +8,64 @@ the checklist — consult it before re-running anything here.
 
 ---
 
+## PT-44 — Founder trait notice · covered **F23** — **PASS 2026-07-30** → F23 `tested`
+
+> The F24 half was REMOVED 2026-07-30 — it was unrunnable, and F24 is now
+> `wontfix` (fix deleted, user call). The step asked you to "build or upgrade a
+> dome so the building ends up inside", and the shipped game can do neither: a
+> dome refuses to place over existing buildings ("Objects underneath are
+> blocking construction", confirmed in play), no dome template carries any
+> upgrade, and nothing mutates a dome's interior shape at runtime. Full
+> reachability proof on the F24 BUGS.md entry. Third PT procedure found
+> unrunnable by executing it (after PT-29 and PT-11).
+
+**F23 — Founder gains a trait.** Probes cover the wiring; play confirms the
+notification renders and reads correctly.
+
+**Trigger used:** `founder:AddTrait("Fit")` on a Founder lacking it — the same
+call a shipped **Open Air Gym** makes (`OpenAirGym.lua:10`), routed through the
+real `Colonist:AddTrait`, which emits `Msg("ColonistAddTrait", …)` synchronously
+(`Units/Colonist.lua:427`). `Fit` is `group = "Positive"`, so it passes the
+handler's filter, and is benign (+5 DailyHealthRecover).
+
+```
+*r ConsolePrint("fired=" .. tostring(SMRFixPack.FounderTraitNotification.fired) .. " existing=" .. tostring(FindNotification("FounderGainsTrait") ~= nil) .. " status=" .. tostring(SMRFixPack.fixes.FounderTraitNotification.status))
+```
+```
+*r local f for _, c in ipairs(MainCity.labels.Colonist or empty_table) do if c.traits and c.traits.Founder and not c.traits.Fit then f = c break end end if not f then ConsolePrint("no founder without Fit found") else ConsolePrint("granting Fit to " .. f:GetDisplayName()) f:AddTrait("Fit") end
+```
+
+`Result (notification appears once, names the right trait?):` **PASS —
+2026-07-30.**
+
+| Check | Result |
+|---|---|
+| `SMRFixPack.FounderTraitNotification.fired` | **0 → 1** |
+| `FindNotification("FounderGainsTrait")` | `false` → `true` |
+| Rendered notification | **"Founder Has Trait" / "Ciara Grant: Fit"** — correct colonist, correct trait |
+| Duplicate check | **exactly one** — the dead shipped handler stayed dead |
+| Module status | `active` throughout |
+
+**Path vs rendering, stated honestly:** the grant was console-injected, so this
+run proves the notification fires, renders and reads correctly — precisely what
+this PT exists to check. It does not itself prove the player path, but the path
+was never the open question: the reachability audit graded F23 **R1** with a
+full enumeration, and a re-grep confirms a dozen live shipped callers of
+`AddTrait` on existing colonists (Martian University specializations, School /
+SchoolSpire, Sanatorium, Open Air Gym, Project Morpheus, CovertOps, the Dome
+`Renegade` path, storybit and faction effect classes).
+
+**Vanilla behaviour recorded so it is never filed as a defect.** This PT used to
+say "clicking it selects them". That holds only when the colonist is **visible**.
+A notification click runs `ViewCycledObj`
+(`Lua/UI/OnScreenNotification.lua:1-19`), which calls `ViewAndSelectObject` only
+for an object with `efVisible ~= 0`; a colonist indoors — "Resting in …",
+working, at home — falls to the `ViewObjectMars` branch: camera pan, no
+selection. Ciara Grant was "Resting in Living Complex" at the time. Correct by
+design; you cannot select a hidden unit.
+
+---
+
 ## PT-56 — Drone stat dials · covered **D09 `Opt_DroneStatDials`** — **PASS IN FULL 2026-07-30** → D09 `tested`
 
 Two Mod Options dropdowns: **Drone speed** (1x base / 2x / 3x / 5x, percent

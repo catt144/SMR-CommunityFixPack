@@ -790,27 +790,13 @@ goals.
 
 `Result (Oxygen goal needs Oxygen / penalties reachable at zero?):` _____________________________________________
 
-### PT-44 — Founder trait notice · covers **F23**
+### ~~PT-44~~ — PASSED 2026-07-30 → F23 `tested`, ARCHIVED
 
-> **The F24 half was REMOVED 2026-07-30 — it was unrunnable, and F24 is now
-> `wontfix` (fix deleted, user call).** The step asked you to "build or upgrade
-> a dome so the building ends up inside", and the shipped game can do neither:
-> a dome refuses to place over existing buildings ("Objects underneath are
-> blocking construction", confirmed in play), no dome template carries any
-> upgrade, and nothing mutates a dome's interior shape at runtime. Full
-> reachability proof on the F24 BUGS.md entry. Third PT procedure found
-> unrunnable by executing it (after PT-29 and PT-11).
-
-**F23 — Founder gains a trait.** Probes cover the wiring; play confirms the
-notification renders and reads correctly.
-1. Play until one of your **Founders** gains a trait (age, a story event, or the
-   Gene Forging / trait-granting paths).
-   - **EXPECTED:** a "Founder gains trait" notification appears, naming the
-     colonist and the trait, and clicking it selects them.
-   - **SURPRISE looks like:** nothing appears (the old behaviour), or two
-     notifications appear for the same event.
-
-`Result (notification appears once, names the right trait?):` _____________________________________________
+Moved to `PLAYTEST_ARCHIVE.md` with its result. The notification fires, renders
+and reads correctly; the F24 half had already been removed as unrunnable.
+**Carried forward:** `clicking a notification selects the object only when that
+object is VISIBLE` — an indoors colonist gets a camera pan and no selection,
+which is correct vanilla and must not be filed as a defect.
 
 ### PT-47 — Bombardment volley shape · covers **F26**
 
