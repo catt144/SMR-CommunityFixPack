@@ -133,6 +133,17 @@ FABLE_NEXT_PROMPT's board; PT-58's kept fixture is the A/B — reload leg must
 read 1/1/1 AND the no-reload leg must still read 1/1/1, not 2/2/2). Full trail
 on the F83/F85 entries and the audit file.
 
+**⛔ SCOPE CONTROL, owner 2026-07-31 — `docs/FUTURE_IDEAS.md`.** New parking
+file for good ideas that are NOT needed before launch. **Nothing in it is work:
+not owed, not scheduled, not counted, and never to be reported as
+outstanding**; un-parking is an explicit owner decision, one item at a time,
+after launch. Reason on record: mission creep — every three items closed were
+adding about six. **Defects never go there** (they stay in `BUGS.md` with a real
+status; declining one is a `wontfix` with reasoning). Entry 1 is
+seniors-in-workshops. A proposed-parking list sits at the bottom of that file
+awaiting the owner's yes/no — **read it before treating anything on it as
+owed.**
+
 **Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN and BUILT
 2026-07-30** (see the F83 build block above; PT-59 is the owed keyboard A/B).
 Still open:
@@ -141,7 +152,8 @@ deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-ex
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
 overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
 BUILT (D09); the structural choice stays gated on the B2 re-run); F79
-D-item or not; D08; seniors-in-workshops (deferred from D10, own decision);
+D-item or not; D08; **~~seniors-in-workshops~~ — PARKED 2026-07-31, see
+`docs/FUTURE_IDEAS.md`**;
 **D11 shuttle same-pair passenger batching — candidate with feasibility on
 file (BUGS.md entry), explicitly NOT green-lit: re-ask the user before any
 build; multi-hop passenger routing REJECTED outright.**

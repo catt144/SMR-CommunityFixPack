@@ -326,7 +326,12 @@ Your jobs, in the order they usually come up:
    rules earned the hard way: *a state producible only by console/debug
    injection is evidence AGAINST reachability*, and *re-read `git log` between
    assembling conclusions and publishing them*.
-6. Only when relevant: `docsrchive\AUDIT_FINDINGS.md` (ARCHIVED — audit findings + the plan;
+6. **`docs\FUTURE_IDEAS.md` — read the hard rule at the top before you plan
+   ANY session.** It is the launch-scope brake: everything in it is parked, and
+   parked means not-work. It also carries a proposed-parking list awaiting the
+   owner's yes/no — items on it are still live until answered, but do not start
+   one without asking first.
+7. Only when relevant: `docsrchive\AUDIT_FINDINGS.md` (ARCHIVED — audit findings + the plan;
    Phases 1-3 implemented 2026-07-29, Phase 4 awaiting the user's
    go-decision); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
    iteration, not just knob tuning — the shipped core is the veto variant of
@@ -506,11 +511,22 @@ silent.
   consumption_amount PAIRED — the pairing keeps per-worker cost vanilla).
   Adds PT-57 (~7 min) at build time. Seniors-in-workshops deliberately
   deferred (D07 interaction — own decision).
+- **⛔ SCOPE CONTROL — `docs\FUTURE_IDEAS.md` (new 2026-07-31, owner).** Good
+  ideas that are NOT needed before launch are PARKED there. **Nothing in that
+  file is work: not owed, not scheduled, not counted, never reported as
+  outstanding**, and un-parking is an explicit owner decision, one at a time,
+  AFTER launch. Reason on record: mission creep — every three items closed were
+  adding about six. **Defects never go there** — they stay in BUGS.md with a
+  real status; declining one is a `wontfix` with reasoning. Entry 1 =
+  seniors-in-workshops. **A proposed-parking list sits at the bottom of that
+  file awaiting the owner's yes/no — check it before treating any of those
+  items as owed, and do not start one without asking.**
 - **DECISIONS owed (user):** F79 D-item or not; audit Phase 4 go/no-go; D08;
-  seniors-in-workshops (D10 deferral); **D11 shuttle same-pair passenger
-  batching — feasibility is on the BUGS entry but it is NOT approved: ask
-  fresh before any build (user's explicit instruction 2026-07-30); multi-hop
-  passenger routing is REJECTED, do not re-propose.**
+  **D11 shuttle same-pair passenger batching — feasibility is on the BUGS entry
+  but it is NOT approved: ask fresh before any build (user's explicit
+  instruction 2026-07-30); multi-hop passenger routing is REJECTED, do not
+  re-propose.** *(Several of these are on the FUTURE_IDEAS proposed-parking
+  list — if the owner says yes, they stop being owed decisions entirely.)*
 - Passive: PT-01 meteor silence-watch (the watchdog self-reports); F18
   savegame-sweep line on affected saves.
 

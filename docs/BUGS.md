@@ -4543,10 +4543,12 @@ Two failures:
   a flat base increase would distort the mid-game era where 6-10 slots is
   meaningful; a new TechPreset drags in research-UI integration and a bigger
   playtest. The dial defaults to base and is account-scoped player intent.
-- **Deferred (recorded, NOT in this module):** seniors-in-workshops
-  ("vocation in retirement") — needs work-eligibility surgery and interacts
-  with D07's employed-senior exemption (senior workshop workers would stop
-  cohort-migrating). Own decision + own playtest when wanted.
+- **PARKED UNTIL AFTER LAUNCH (owner, 2026-07-31 — `docs/FUTURE_IDEAS.md`
+  entry 1):** seniors-in-workshops ("vocation in retirement") — needs
+  work-eligibility surgery and interacts with D07's employed-senior exemption
+  (senior workshop workers would stop cohort-migrating). **It is not a deferred
+  decision any more, it is parked: not owed, not scheduled, and not to be
+  reported as outstanding.** Do not build it as a rider on D10.
 
 **Planned playtest (PT-57, added to the checklist at build time):** tooltip
 reads (T1); dial infopanel check on a live workshop (slots and consumption
