@@ -113,6 +113,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **MEASURED** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), 10 more at risk. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE** — FIX_POLICY §3 (entry) |
+| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply on some load orders (`HasTrait:new` before class flattening), so F40 is silently unfixed | P2 | **OBSERVED** | filed 2026-07-31 — caught live by the Phase-4 C1 dialog on its first non-synthetic outing. Third instance of the F64 pre-flattening trap. **DO THIS FIRST NEXT SESSION** — one-line repair + A/B (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -4181,7 +4182,8 @@ persist **by the global name** this function is written to"). Persist does not
 resolve mod functions by name. Avoiding upvalues only made the serialised
 function smaller.
 
-**Proposed remedy — three layers, none built, owner decision owed.**
+**Proposed remedy — three layers, none built, owner decision owed. Full spec with
+the per-module disposition table: `docs/SAVE_SAFETY_REDESIGN.md`.**
 
 1. **Patch a synchronous input instead of replacing a blocking body** (best;
    zero savegame footprint). Worked example for F02 below.
@@ -4219,6 +4221,79 @@ rungs were judged unnecessary: no game-install state can invent our injected
 Sensor towers extending single-meteor warning would be a **feature**, not a
 repair, and is declined. See the F02 root-cause note for why towers currently
 affect meteor *frequency* instead.
+
+### F87 — OUR OWN DEFECT: `Fix_DustSicknessBiorobots` throws at apply on some load orders, silently leaving F40 unfixed (P2, OBSERVED)  `[open — filed 2026-07-31; OWNER: DO THIS FIRST in the next session. One-line repair + a re-verified A/B]`
+
+**Observed live 2026-07-31**, immediately after re-enabling the pack following
+the PT-20 leg. The Phase-4 **C1 update-deactivation dialog** raised it at the
+pregame menu — *"1 of this pack's fixes found that the game code they patch has
+changed … Switched off: DustSicknessBiorobots"* — and the log gives the real
+cause:
+
+```
+[CommunityFixPack] DustSicknessBiorobots: FAILED to apply:
+  Mod/SMR_CommunityFixPack/Code/Fix_DustSicknessBiorobots.lua:73:
+  attempt to call a nil value (method 'new')
+```
+
+Status is **`error`** (the `pcall` in `run_apply` caught a throw), not
+`inactive` — so this is a crash, not a self-check latch. The C1 dialog's wording
+("the game code they patch has changed") is therefore **misleading for this
+case**; see the second follow-up below.
+
+**Mechanism — the third instance of the F64 pre-flattening trap.**
+Line 73 is `filters[#filters + 1] = HasTrait:new{ Trait = "Android", Negate = true }`.
+The guard at `:90` only tests `type(rawget(_G, "HasTrait")) == "table"`, which
+passes: the class table exists during file scope, but **it has not been flattened
+yet, so `HasTrait.new` is nil**. Precedents: F64 itself, and D09's module
+tripping the same trap on `Modifier.new` (2026-07-29). Three occurrences makes it
+a pattern, not an incident.
+
+**Why it only surfaced now.** `apply()` calls `patch()`, documented as *"no-op
+unless the presets are already loaded"*, and the file header states *"presets
+load after mod code … hence the DataLoaded/DataChanged handlers"*. To reach line
+73, `StoryBits` must already have been populated at mod-load time — so **that
+premise does not always hold**. The trigger is not yet pinned; two candidates,
+and the repair does not depend on which:
+- **Load-order flip.** This session the Test Kit's code ran *before* the pack's
+  (log `:96-101` then `:102+`); every previous log had the reverse. Recreating
+  the mod junction changed it.
+- **The re-enable path** — the pack was re-ticked in the Mod Manager rather than
+  being enabled at a cold boot.
+
+**Player-reachable, and it is not cosmetic.** Mod load order is arbitrary on a
+player's machine, so this is a configuration a real player can land in — and in
+it, **F40 is silently not fixed** (Dust Sickness keeps infecting Biorobots, who
+keep bleeding Health every dust storm). It is invisible except for the C1 dialog.
+Every A/B leg we have ever run happened to use the favourable order, which is why
+`74/74` never caught it.
+
+**Repair (one line, do not construct preset objects during apply).** Either
+guard the construction and let the `DataLoaded` pass do the work post-flattening:
+
+```lua
+if type(HasTrait.new) ~= "function" then return end
+```
+
+or build the filter with `PlaceObj("HasTrait", { Trait = "Android", Negate = true })`.
+**A plain table will not do** — those filters are evaluated through their class
+metatable. Needs a re-verified A/B (~90 s unattended) and ideally a load-order
+check, since the favourable order is what hid it.
+
+**Two follow-ups this earns, neither done:**
+1. **Sweep every constructor call reachable from an `apply()`** (`:new{`,
+   `PlaceObj`, class-table method calls). Third occurrence of the same trap
+   means the codebase should be checked rather than patched incident by
+   incident.
+2. **`FIX_POLICY` needs the rule stated**: apply-time code runs before class
+   flattening and may not construct preset/class objects — and the C1 report
+   should distinguish *"self-check found changed game code"* (`inactive`) from
+   *"the fix threw"* (`error`), because they mean very different things to a
+   player and only the first is about a game update.
+
+**Credit where due:** this is the C1 surface's first catch outside a synthetic
+test, and it caught a defect that would otherwise have shipped silently. That
+was the argument for building it.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing

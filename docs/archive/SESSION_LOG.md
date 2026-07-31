@@ -139,7 +139,36 @@ seconds is adequate; tower-scaled meteor warning is a feature and is declined.**
   inputs instead of replacing blocking bodies (F02 then needs no body at all), a
   tail-call rule for wrappers, `SaveGameStart` tear-down for the remainder.
 
-### 7. Housekeeping
+### 7. Tail end of the sitting — remedy PASS, a new defect, and a killed experiment
+
+- **Remedy test PASSED.** Loading the damaged `PT-20TEST-B` with the pack
+  reinstalled brought the dead `Meteors` thread back: `IsValidThread(Meteors)`
+  → `true`, phase `long-sleep-done` (a fresh restart that has already cleared its
+  1-second first sleep). **The answer for an affected player is "reinstall the
+  mod" — real, and uncomfortable.**
+- **🥇 A NEW DEFECT, caught by Phase 4's C1 dialog on its first non-synthetic
+  outing — F87.** On re-enabling the pack, `Fix_DustSicknessBiorobots` **threw**
+  at apply (`HasTrait:new` before class flattening — the third F64
+  pre-flattening trap), so F40 was silently unfixed. Status `error`, not
+  `inactive`, so it is a crash rather than a self-check latch — which also means
+  the C1 dialog's "the game code they patch has changed" wording is wrong for
+  this case. Mod load order had flipped (Test Kit code ran before the pack's for
+  the first time, after the junction was recreated). **Owner instruction: this is
+  the FIRST thing done next session.**
+- **A planned experiment was cancelled rather than run, and the reasoning is
+  worth keeping.** The plan was a purpose-built probe to measure whether a proper
+  tail call keeps a wrapper out of the save. It is **unfalsifiable by
+  construction**: a tail call has nothing after it, so a vanished frame and a
+  surviving frame both produce silence, and adding a detector after the call
+  stops it being a tail call. Working that through improved the rule instead —
+  it does not need TCO at all. **"No mod code after a call that can block"** is
+  sound whether or not the frame survives, needs no engine guarantee, and is
+  checkable by reading the source. That is now the layer-2 rule in the spec.
+- **Redesign spec written** — `docs/SAVE_SAFETY_REDESIGN.md`: the three layers,
+  the per-module disposition for all 12 exposed modules, the autosave timer trap,
+  and the four decisions owed to the owner.
+
+### 8. Housekeeping
 
 Junction restored and verified (75 `Code/` files through the link) — **the pack
 is still unticked in the Mod Manager and must be re-enabled**. The temporary

@@ -124,7 +124,13 @@ account-persistent too.
 > are BUILDS — writing new fixes before the save-safety rules are settled risks
 > adding leak sites. Confirm the owner's intent before starting a build.
 
-0. **🛑 F86 — the save-safety redesign.** Owner decision owed on the three
+0. **🥇 F87 — DO THIS FIRST (owner instruction, 2026-07-31).** A one-line repair
+   with a re-verified A/B. `Fix_DustSicknessBiorobots` **throws** at apply on
+   some load orders (`HasTrait:new` before class flattening — the third F64
+   pre-flattening trap), so F40 is silently unfixed for that player. Caught live
+   by the Phase-4 C1 dialog. Repair, the two follow-ups it earns, and the full
+   trail are on the F87 entry. **Do not start anything else until this lands.**
+0b. **🛑 F86 — the save-safety redesign.** Owner decision owed on the three
    layers (input-patching, the tail-call rule, `SaveGameStart` tear-down). Two
    cheap measurements are owed first and both are quick: **(a)** does
    `Fix_ShelterReflex` stay off the stack via its proper tail call — if yes, the

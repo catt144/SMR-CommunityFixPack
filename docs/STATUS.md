@@ -80,6 +80,17 @@ with **PHASE 4 COMPLETE** (below).
 > - **Redesign proposed, nothing built, owner decision owed** — patch synchronous
 >   inputs instead of replacing blocking bodies (F02 needs no body at all), a
 >   tail-call rule for wrappers, and `SaveGameStart` tear-down for the rest.
+> - ✅ **Remedy measured:** reinstalling the pack DOES revive a killed thread
+>   (`IsValidThread(Meteors)` → `true`, restarted by our own `LoadGame`). The
+>   answer for an affected player is "put the mod back" — real, and uncomfortable.
+
+> 🥇 **F87 — OWNER SAYS DO THIS FIRST NEXT SESSION.** `Fix_DustSicknessBiorobots`
+> **throws** at apply on some load orders (`HasTrait:new` before class
+> flattening), so **F40 is silently unfixed** for that player. One-line repair +
+> a re-verified A/B. **Caught live by the Phase-4 C1 dialog on its first
+> non-synthetic outing** — the fix would otherwise have shipped silently dead.
+> Third instance of the F64 pre-flattening trap, so it earns a constructor sweep
+> and a FIX_POLICY rule (both on the entry, neither done).
 
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
