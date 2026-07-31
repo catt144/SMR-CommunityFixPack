@@ -20,14 +20,12 @@ model-specific.)
 > **1/1/1**; the healthy no-reload leg must STILL read **1/1/1, not 2/2/2**
 > (that half is the double-grant guard); reload twice must still read 1/1/1.
 >
-> ⚠️ **ONE HARNESS LEG IS ALSO OWED, and it needs the owner's hands.** The
-> 23.29 leg came up **`74/74`** — i.e. **all six toggles are ON again**; the
-> previous prompt's "owner left all six OFF" had gone stale during the PT-58
-> sitting, and the D09 probe reported the **carry dial off base** too. The
-> opt-in bridge is one-way (it can only force a module ON), so the
-> **default-config leg (expect `68/74` → `62 / 0 / 15 / 0`) requires the six
-> toggles to be flipped off by hand first.** Ask for that flip when the owner
-> is at the keyboard, then run it unattended.
+> ✅ **The harness side is FULLY CLEAR — three legs, nothing owed.** The owner
+> set everything back to base at the end of the night and the default-config leg
+> ran unattended straight after: **`68/74` → `62 / 0 / 15 / 0`**, the predicted
+> numbers exactly, with the D09 probe reporting the **carry dial AT BASE** for
+> the first time since the PT-58 sitting. Both shipping configurations plus a
+> baseline are measured post-build (table below).
 >
 > The audit's **4-item needs-eyes list** (audit §8, mirrored in checklist §6)
 > is still open and still cheap — take the items as riders when the owner is
@@ -86,23 +84,25 @@ reachability turn" below. TestKit probes: **77** (new wave file
 > precedent: two violated this rule and one is already retired under it (F28;
 > F29 is flagged, awaiting the owner).
 
-**The code gate is CLEAR — the A/B pair ran — and ONE further leg is owed.**
-Post-F83-build, unattended, 77 probes:
+**The code gate is CLEAR and NOTHING is owed on the harness side.** Three legs
+post-F83-build, all unattended, 77 probes each:
 
 - **all six toggles ON** (log `Mars.exe-20260730-23.29.22`) — **`74/74` active**,
-  **67 PASS / 0 FAIL / 10 SKIP / 0 ERROR**. Zero `[CommunityFixPack]`
-  error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
-  `FirstAsteroidPrefabs: applied`, and its probe PASSed all three legs.
+  **67 PASS / 0 FAIL / 10 SKIP / 0 ERROR**.
+- **default config, six toggles OFF + dials at base** (log
+  `Mars.exe-20260731-01.37.22`) — **`68/74` active**, **62 PASS / 0 FAIL /
+  15 SKIP / 0 ERROR** — the predicted numbers exactly. `FirstAsteroidPrefabs`
+  PASSes here too, confirming the F83 fix is toggle-independent.
 - **baseline, `code` list emptied** (log `Mars.exe-20260730-23.46.39`) —
   **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR**, and `FirstAsteroidPrefabs` **FAILs**
   there with `fix pack not loaded (bug reproduces)`. That is the point of the
   leg: it proves the new probe discriminates instead of false-PASSing (the
   wave-6 probe-authoring trap). metadata.lua was restored from the saved copy
   and re-verified against items.lua afterwards.
-- **OWED — default config, six toggles OFF** — expect **`68/74` active**,
-  **62 PASS / 0 FAIL / 15 SKIP / 0 ERROR**. **It cannot be run unattended:** the
-  opt-in bridge is one-way (ON only) and the owner currently has all six toggles
-  ON. Ask for the hand flip, then launch.
+
+All three: zero `[CommunityFixPack]` error/disabled/FAILED lines, no log line
+naming our `Code/`, known noise only (2 `ResManager` `LawOfficeDoor`,
+`objects_to_mark` 48).
 
 The default leg's 15 SKIPs are the 10 standing ones plus the five opt-module
 probes reporting `inactive (opt-in)` — five, not six, because D06 has no probe.
@@ -127,16 +127,18 @@ Historical legs (counts no longer apply — measured before the removals):
 `1/61/15/0` · default config, six toggles OFF `62/0/15/0 at 69/75` · all six ON
 + dials `67/0/10/0 at 75/75`.
 
-**Account state — READ IT, NEVER ASSUME IT. This went stale AGAIN on
-2026-07-30.** The prompt said the owner had left all six toggles OFF and both
-dials at base after the 19.32 leg; by the 23.29 leg **all six were ON and the
-carry dial was off base** (the D09 probe reported `const 3 vs base 1`) —
-presumably flipped during the PT-58 sitting. That is now twice this has
-misled a session. The repaired D09 probe is deliberately immune to dial state,
-so a green leg does NOT prove the dials are at base; it *reports* the state it
-found on entry instead. **Read the leg's own `fix pack present: N/74 fixes
-active` line to learn which configuration you actually measured**, and read the
-toggles with `SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`.
+**Account state — READ IT, NEVER ASSUME IT.** As of the 01.37 leg (2026-07-31)
+the owner has set **all six toggles OFF and both dials to base**, and that leg
+confirms both (`68/74`, and the D09 probe reporting the carry dial **at base**
+on entry). **But treat even that as a reading with a timestamp, not a
+guarantee** — this exact sentence went stale twice on 2026-07-30 alone: the
+prompt claimed OFF after the 19.32 leg and the 23.29 leg found all six ON with
+the carry dial off base, flipped during the PT-58 sitting. The repaired D09
+probe is deliberately immune to dial state, so a green leg does NOT prove the
+dials are at base; it *reports* the state it found on entry instead. **Read the
+leg's own `fix pack present: N/74 fixes active` line to learn which
+configuration you actually measured**, and read the toggles with
+`SMRFixPack.ListFixes()` or `SMRFixPack.fixes.<Id>.status`.
 
 ### The reachability turn (2026-07-30) — the day's most important outcome
 
@@ -351,15 +353,12 @@ silent.
   entry's own words** — F29 called itself "mod-facing / No shipped user" and had
   four live shipped callers.
 
-- **⚠️ ONE HARNESS LEG IS OWED — the post-F83 default-config leg, and it needs
-  the owner's hands.** The pre-F83 pair ran CLEAR on 2026-07-30 evening
-  (`73/73` at `66/0/10/0`, then `67/73` default-config at `61/0/15/0`), and the
-  post-F83 all-toggles-ON leg ran CLEAR at 23.29 (`74/74` at `67/0/10/0`,
-  77 probes). The missing half is default-config (**expect `68/74` →
-  `62/0/15/0`): ask the owner to turn the six Mod Options toggles OFF, then
-  launch unattended.** The opt-in bridge can only force a module ON, so there is
-  no way to do it without them. The D09 probe defect was repaired rather than
-  worked around, so dials-to-base is no longer a precondition for any leg.
+- **~~⚠️ THE OWED HARNESS LEG~~ — RAN 2026-07-31 01.37, CLEAR.** All three
+  post-F83 legs are on file (`74/74` → `67/0/10/0`; `68/74` → `62/0/15/0`;
+  baseline `1/61/15/0`). **Nothing on the harness side is owed.** The D09 probe
+  defect was repaired rather than worked around, so dials-to-base is no longer a
+  precondition for any leg — but the account state is still a *reading*, not a
+  guarantee (see "Account state" above).
 
 - **DECISION OWED — the FIX_POLICY §4 amendment** (the *other* one; §4a is
   already applied). Drafted at the end of `REACHABILITY_AUDIT.md` and revised by
@@ -415,8 +414,8 @@ silent.
   guarded: our code only runs on `LoadGame`, and it removes the stranded
   notification — the sole route back to the dead context — before granting.
   One new GameVar (`SMRFixPack_FirstAsteroidPrefabs`), §3-compliant. One new
-  probe in a new TestKit wave file. Harness leg CLEAR. **What is left is
-  PT-59** (next item) and the owed default-config leg.
+  probe in a new TestKit wave file. **All three harness legs are CLEAR — the
+  only thing left is PT-59** (next item), which needs the keyboard.
 - **⭐ PT-59 — F83's keyboard A/B, SHORT, do it in the next sitting**
   (checklist §3). Fixture: the kept pre-trigger save (before `ReconCenter` was
   ever researched) — it restores `g_ShownPopupNotifications`, so the
@@ -671,9 +670,10 @@ waste-rock storage heap (confirmed by play, on-click). During play sessions:
   harness. It registers NO probes; v2 installs permanent classdef-time wraps
   on `RequiresMaintenance` `StartDemandPhase`/`StartWorkPhase`/`Repair`, but
   they gate on an active stress run and pass straight through otherwise.
-- **Expected numbers — CURRENT is post-F83-build, 77 probes: all six toggles ON
-  `74/74` → `67 / 0 / 10 / 0` (measured, 23.29 leg); default config `68/74` →
-  `62 / 0 / 15 / 0` (PREDICTED — that leg is OWED and needs the hand flip).**
+- **Expected numbers — CURRENT is post-F83-build, 77 probes, BOTH measured: all
+  six toggles ON `74/74` → `67 / 0 / 10 / 0` (23.29 leg, 2026-07-30); default
+  config `68/74` → `62 / 0 / 15 / 0` (01.37 leg, 2026-07-31). Baseline
+  `1 / 61 / 15 / 0` (23.46 leg).**
   The pre-F83 pair (76 probes: `73/73` → `66/0/10/0`, `67/73` → `61/0/15/0`) is
   historical. The D09 dial probe now forces base itself, so it is green
   regardless of account dial state (and reports the state it found). The three

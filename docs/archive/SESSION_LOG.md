@@ -81,14 +81,22 @@ the new file, in the same order as the `code` list — without it an editor
 round-trip would regenerate `code` without the fix (audit A3); `last_changes`
 recounted 66 → 67.
 
-**Two things this leg exposed, both worth carrying forward.** (1) The account
-had **all six toggles ON again** — the previous prompt's "owner left all six
-OFF" had gone stale during the PT-58 sitting, and the D09 dial probe reported
-the carry dial off base too. The leg is therefore the all-toggles-ON
-configuration, and **the default-config leg is OWED** — the opt-in bridge is
-one-way (ON only), so it needs a hand flip by the owner. (2) The lesson stands
-exactly as ENGINE_FACTS and the prompt already warn: read the account state,
-never trust a doc for it.
+**The account-state trap bit again, and then closed.** The 23.29 leg came up
+`74/74`, i.e. **all six toggles were ON** — the previous prompt's "owner left
+all six OFF" had gone stale during the PT-58 sitting, and the D09 probe reported
+the carry dial off base too. That made 23.29 the all-toggles-ON configuration
+and left the default-config leg owed, which the one-way opt-in bridge (ON only)
+cannot supply. **The owner set everything back to base at the end of the night
+and the leg ran immediately after** (`Mars.exe-20260731-01.37.22`): **`68/74`
+active, 62 PASS / 0 FAIL / 15 SKIP / 0 ERROR** — predicted before the run and
+landed exactly, with the D09 probe reporting the carry dial **AT BASE** on
+entry. `FirstAsteroidPrefabs` PASSes in this configuration too, confirming the
+fix is toggle-independent (it is default-on, not an opt module). Six
+`inactive (opt-in module …)` lines = the expected healthy default signature.
+**All three post-F83 legs are now on file and nothing is owed on the harness
+side.** Standing lesson, unchanged and now twice-earned in one day: read the
+account state from the leg's own `fix pack present: N/74` line, never from a
+doc.
 
 **Docs:** BUGS.md F83 → `fixed` in both places with a full build record;
 **PT-59 filed** in the checklist (§3) with three triggers — reload leg 1/1/1,

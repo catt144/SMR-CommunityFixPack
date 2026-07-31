@@ -160,21 +160,17 @@ omits that it bridges life support. Text patch, but it converts a localized `T`
 into an English-only `Untranslated` string, so **decide it together with D10's T1
 text repairs** — identical tradeoff, should not be answered twice differently.
 
-**A/B probe state — CURRENT is the post-F83-build PAIR at 77 probes. Fixed leg:
-`74/74` all toggles ON, `67 PASS / 0 FAIL / 10 SKIP / 0 ERROR`, zero
-`[CommunityFixPack]` error/disabled/FAILED lines, no log line naming our
-`Code/`. Baseline leg (`code` list emptied): `1 / 61 / 15 / 0` — and the new
-`FirstAsteroidPrefabs` probe FAILs there with `fix pack not loaded (bug
-reproduces)`, so it is a genuine discriminator, not a false-PASS (the wave-6
-probe-authoring trap). Code gate CLEAR.** ⚠️ **A third leg is OWED: the
-default-config leg (six toggles OFF) could not be run — the owner left all six
-toggles ON during the PT-58 sitting** (the 23.29 leg came up `74/74`, and the
-D09 probe additionally reported the **account carry dial OFF BASE**, const 3 vs
-base 1). The opt-in bridge is one-way — it can only force a module ON — so a
-true default-config leg (**68/74** now) needs the owner to flip the six toggles
-off by hand first. Expected then: **62 / 0 / 15 / 0**. The pre-F83 pair at 76
-probes (`73/73` → `66/0/10/0`; `67/73` → `61/0/15/0`) is now historical, as are
-the older `/75` and `/74` rows.
+**A/B probe state — CURRENT is the post-F83-build set of THREE legs at 77
+probes, all measured 2026-07-30/31, and NOTHING IS OWED.** All six toggles ON:
+`74/74` → `67 / 0 / 10 / 0`. Default config, six toggles OFF + dials at base:
+`68/74` → `62 / 0 / 15 / 0` — **the predicted numbers exactly**. Baseline
+(`code` list emptied): `1 / 61 / 15 / 0`, where the new `FirstAsteroidPrefabs`
+probe **FAILs** with `fix pack not loaded (bug reproduces)`, proving it
+discriminates instead of false-PASSing (the wave-6 probe-authoring trap). Every
+leg: zero `[CommunityFixPack]` error/disabled/FAILED lines, no log line naming
+our `Code/`, known noise only. **Both shipping configurations are measured
+post-F83-build.** The pre-F83 pair at 76 probes (`73/73` → `66/0/10/0`;
+`67/73` → `61/0/15/0`) is now historical, as are the older `/75` and `/74` rows.
 
 | Leg | Active | Result |
 |---|---|---|
@@ -186,7 +182,23 @@ the older `/75` and `/74` rows.
 | Default config, six toggles OFF + dials at base, 2026-07-30 19.32 (unattended), 76 probes | 67/73 | **61 / 0 / 15 / 0** — pre-F83-build |
 | **CURRENT — post-F83 build, all six toggles ON, 2026-07-30 23.29 (unattended), 77 probes** | **74/74** | **67 / 0 / 10 / 0** |
 | **CURRENT baseline — post-F83 build, `code` list emptied, 2026-07-30 23.46 (unattended), 77 probes** | — | **1 / 61 / 15 / 0** — `FirstAsteroidPrefabs` FAILs here (`bug reproduces`) |
-| **OWED — post-F83 build, default config (six toggles OFF)** | *68/74 expected* | *62 / 0 / 15 / 0 expected — needs the owner to flip the six toggles off by hand* |
+| **CURRENT — post-F83 build, default config, six toggles OFF + dials at base, 2026-07-31 01.37 (unattended), 77 probes** | **68/74** | **62 / 0 / 15 / 0** |
+
+**The 01.37 leg (2026-07-31) — the shipping default configuration post-F83,
+CLEAN, and the last thing the build owed on the harness side.** Run after the
+owner set all six toggles OFF and both dials back to base (their own
+`deactivated via Mod Options` lines are on record in the 01.33 session log).
+`fix pack present: 68/74 fixes active`, **62 / 0 / 15 / 0** — predicted before
+the run and landed exactly: the five opt-module probes flip PASS→SKIP as
+`inactive (opt-in)`, so 67/10 becomes 62/15 with the same zero FAIL and zero
+ERROR. `FirstAsteroidPrefabs` applied and its probe PASSed here too, confirming
+the F83 fix is toggle-independent (it is a default-on fix, not an opt module).
+The D09 probe reported the **carry dial AT BASE on entry** — the account state
+is genuinely clean for the first time since the PT-58 sitting. Six
+`[CommunityFixPack] … inactive (opt-in module …)` lines (six, not five —
+DroneOverhaul reports status despite having no probe), zero error / disabled /
+FAILED lines, no log line names our `Code/`, same noise profile
+(2 `ResManager` `LawOfficeDoor`, `objects_to_mark` 48).
 
 **The 23.29 leg — the F83 build's gate, CLEAR.** `fix pack present: 74/74 fixes
 active`, **67 / 0 / 10 / 0** at 77 probes — the predicted arithmetic exactly
