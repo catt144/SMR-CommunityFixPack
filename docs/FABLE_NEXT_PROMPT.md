@@ -20,9 +20,11 @@ model-specific.)
 > preflight record: `docs\archive\PHASE4_PREFLIGHT.md`. **C3 merges: NEVER**
 > (owner standing decision). The three drone modules were carved out and are
 > untouched — the drone rebuild writes natively against the new helpers.
-> **⚠️ ONE LEG OWED: the shipping default configuration** — needs the owner
-> to set the six toggles OFF + dials to base, then one unattended leg;
-> predicted `68/74`, **63 / 0 / 15 / 0** at 78 probes (STATUS A/B table).
+> **✅ ALL THREE LEGS MEASURED POST-PHASE-4, nothing owed on the harness
+> side:** all-ON `74/74` → `68/0/10/0`; default config `68/74` → `63/0/15/0`
+> (owner flipped the toggles, leg 12.44.39, predicted exactly, dials AT BASE
+> on entry); baseline `1/62/15/0`. The account is in the clean all-OFF/base
+> state.
 >
 > ⛔ **SCOPE CONTROL IS NOW A STANDING RULE — `docs\FUTURE_IDEAS.md`.** Good
 > ideas that are not needed before launch are PARKED there. **Nothing in that
@@ -56,11 +58,9 @@ model-specific.)
 > F83's second site, `ReconCenterDiscoveryAsteroid`; item 3 settles F85's tier.
 > **F85 stays observation-gated — do not build it.**
 
-**Next session, in order: (1) the owed default-config leg if the owner has set
-the six toggles OFF + dials base (one unattended run, predicted 63/0/15/0 at
-78 probes); (2) PT-59 if the owner is at the keyboard — short, and it closes
-F83; (3) the four drone research questions — Phase 4 is done, they are
-unblocked; (4) otherwise the D10 workshops build**, which is speced,
+**Next session, in order: (1) PT-59 if the owner is at the keyboard — short,
+and it closes F83; (2) the four drone research questions — Phase 4 is done,
+they are unblocked; (3) otherwise the D10 workshops build**, which is speced,
 user-approved, game-free and un-gated. Open playtests, suggested order: **PT-59** · **PT-53
 Trigger E** (last thing before D07 → `tested`) · **PT-54** (wave-6 disasters) ·
 checklist **§6 needs-eyes riders** · **PT-20/21** last. **PT-52 is FROZEN — do
@@ -112,12 +112,12 @@ and pushed.
 > precedent: two violated this rule and one is already retired under it (F28;
 > F29 is flagged, awaiting the owner).
 
-**The code gate is CLEAR; the ONLY harness item owed is the post-Phase-4
-default-config leg** (see the Phase 4 banner at the top — the account was
-all-ON throughout the rebuild). Post-Phase-4 current legs, 78 probes:
-all-toggles-ON `74/74` → **68/0/10/0** (12.30.34); baseline **1/62/15/0**
-(12.32.11). The three post-F83 legs below are the superseded 77-probe set,
-kept because PT-59's expectations were written against them:
+**The code gate is CLEAR and NOTHING is owed on the harness side.**
+Post-Phase-4 current legs, 78 probes: all-toggles-ON `74/74` → **68/0/10/0**
+(12.30.34); default config `68/74` → **63/0/15/0** (12.44.39, dials at base);
+baseline **1/62/15/0** (12.32.11). The three post-F83 legs below are the
+superseded 77-probe set, kept because PT-59's expectations were written
+against them:
 
 - **all six toggles ON** (log `Mars.exe-20260730-23.29.22`) — **`74/74` active**,
   **67 PASS / 0 FAIL / 10 SKIP / 0 ERROR**.

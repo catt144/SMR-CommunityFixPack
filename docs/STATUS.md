@@ -154,10 +154,12 @@ self-checks cannot see). Eleven unattended legs, every one identical to the
 control fingerprint (`docs/archive/fingerprint_before.txt` →
 `fingerprint_after.txt`); full certification with evidence and residual risk
 in the newest SESSION_LOG leg. C3 merges were BARRED and not done; the three
-drone modules are untouched per the carve-out. **⚠️ ONE LEG OWED: the shipping
-default configuration** — the account was all-ON throughout (owner flipped the
-toggles mid-morning); when the six toggles are next OFF + dials at base, run
-one unattended leg; predicted `68/74`, **63 / 0 / 15 / 0** at 78 probes.
+drone modules are untouched per the carve-out. **✅ The owed default-config leg
+RAN 2026-07-31 12.44 after the owner set the six toggles OFF + dials to base:
+`68/74`, 63 / 0 / 15 / 0 at 78 probes — the certification's predicted numbers
+exactly (fingerprint: `docs/archive/fingerprint_after_default.txt`). NOTHING
+is owed on the harness side; both shipping configurations are measured
+post-Phase-4, and the account is in the clean all-OFF/base state.**
 
 **Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN and BUILT
 2026-07-30** (see the F83 build block above; PT-59 is the owed keyboard A/B).
@@ -191,10 +193,11 @@ text repairs** — identical tradeoff, should not be answered twice differently.
 All six toggles ON: `74/74` → **68 / 0 / 10 / 0** (leg 12.30.34). Baseline
 (`code` list emptied): **1 / 62 / 15 / 0** (leg 12.32.11), where both the
 `FirstAsteroidPrefabs` and the new `UpdateReport` probes **FAIL** with
-`fix pack not loaded (bug reproduces)`, proving they discriminate. **⚠️ The
-default-config leg is OWED** (account was all-ON throughout Phase 4; needs the
-owner to set six toggles OFF + dials base); predicted `68/74` →
-**63 / 0 / 15 / 0**. Every measured leg: zero `[CommunityFixPack]`
+`fix pack not loaded (bug reproduces)`, proving they discriminate. Default
+config, six toggles OFF + dials at base (owner-flipped, leg 12.44.39):
+`68/74` → **63 / 0 / 15 / 0** — predicted before the run and landed exactly;
+the D09 probe reports the carry dial AT BASE on entry, so the account is
+genuinely clean. **NOTHING IS OWED.** Every measured leg: zero `[CommunityFixPack]`
 error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
 The post-F83 set at 77 probes (`74/74` → `67/0/10/0`; default `68/74` →
 `62/0/15/0`; baseline `1/61/15/0`) is now historical, as are all older rows.
@@ -203,7 +206,7 @@ The post-F83 set at 77 probes (`74/74` → `67/0/10/0`; default `68/74` →
 |---|---|---|
 | **CURRENT — POST-PHASE-4, all six toggles ON, 2026-07-31 12.30 (unattended), 78 probes** | **74/74** | **68 / 0 / 10 / 0** |
 | **CURRENT baseline — POST-PHASE-4, `code` list emptied, 2026-07-31 12.32 (unattended), 78 probes** | — | **1 / 62 / 15 / 0** — `FirstAsteroidPrefabs` + `UpdateReport` FAIL here (`bug reproduces`) |
-| **OWED — POST-PHASE-4 default config (six toggles OFF + dials base), 78 probes** | *predicted 68/74* | *predicted 63 / 0 / 15 / 0 — needs the owner to flip the toggles* |
+| **CURRENT — POST-PHASE-4 default config, six toggles OFF + dials at base, 2026-07-31 12.44 (unattended), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — predicted exactly; carry dial AT BASE on entry |
 | Baseline, historical (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** *(77 probes, pre-F28)* |
 | Fixed, default config (six toggles OFF) | 69/75 *(pre-F24-removal)* | **62 / 0 / 15 / 0** |
 | Fixed, all six toggles ON + dials | 75/75 *(pre-F24-removal)* | **67 / 0 / 10 / 0** |

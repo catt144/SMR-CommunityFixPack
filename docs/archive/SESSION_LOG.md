@@ -46,14 +46,19 @@ fingerprint: `docs/archive/fingerprint_before.txt`; end-state fingerprint:
   committed while the edit was in the tree) — **1 / 62 / 15 / 0**, the 1 PASS
   is the FactionFundingCheck canary and the new `UpdateReport` probe **FAILs**
   as `fix pack not loaded (bug reproduces)`, proving it discriminates.
-- **⚠️ OWED, not fabricated: the default-config leg.** The owner enabled all
-  six toggles + moved the dials during the morning play session (the leg's own
-  `74/74` line said so — the account-state lesson's third earning in two
-  days), and the opt-in bridge is one-way ON. **When the owner next sets the
-  six toggles OFF and dials to base, one unattended leg is owed; predicted:
-  `68/74`, 63 PASS / 0 FAIL / 15 SKIP / 0 ERROR at 78 probes.** Until it runs,
-  the shipping default configuration is measured only pre-Phase-4 (the 01.37
-  leg at 77 probes).
+- **✅ The default-config leg RAN the same sitting** — the owner set the six
+  toggles OFF + dials to base on request and leg `Mars.exe-20260731-12.44.39`
+  read **`68/74`, 63 PASS / 0 FAIL / 15 SKIP / 0 ERROR** at 78 probes — the
+  numbers predicted above before the run, landed exactly. Six
+  `inactive (opt-in module …)` lines (the healthy default signature, six not
+  five because DroneOverhaul reports status without a probe), zero
+  error/disabled/FAILED lines, the D09 probe reporting the **carry dial AT
+  BASE on entry** — the account is genuinely clean again. Fingerprint:
+  `docs/archive/fingerprint_after_default.txt`. **Both shipping
+  configurations are measured post-Phase-4; nothing is owed on the harness
+  side.** (For the record: at certification-writing time this leg was owed —
+  the account had been all-ON throughout the build, the account-state
+  lesson's third earning in two days, and the opt-in bridge is one-way ON.)
 
 **Invariants verified, and how.**
 - Reason strings preserved byte-for-byte: legs cannot see a passing check's
