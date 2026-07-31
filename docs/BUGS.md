@@ -110,6 +110,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | filed 2026-07-30, **consequence OBSERVED — PT-58 PASS same day (1/1/1 vs 0/0/0)**; fix design is a USER DECISION, gate cleared (entry) |
+| F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -1106,18 +1107,12 @@ F38 is reachable; PT-25's SETUP LINE was wrong.**
 - Not a mod artifact: all of this is shipped `Src`, byte-identical to the running
   build per the fpk parity proof (ENGINE_FACTS.md).
 
-**❓ OPEN QUESTION raised by the same check — possible description defect.**
-`TunnelBase:AddPFTunnel` registers with `pf.AddTunnel(self, start, exit, weight,
--1)` (`Tunnel.lua:208`). The 5th argument is a unit-class mask —
-`Dome_Entrance` passes `2` with the comment "usable by people only" and `1`
-"usable by drones only" (`Dome_Entrance.lua:15-16`) — so `-1` reads as **all
-unit types**, rovers included. But the Universal Tunnel's shipped description
-says **"Rovers cannot use this type of tunnel."** Either the description is
-wrong or rovers are excluded somewhere not yet found. **Settle it by
-observation, not by more source reading** (the F49(c) rule): build a Universal
-Tunnel pair and watch whether an RC Rover routes through it. Queued as a free
-rider on PT-25. If rovers do NOT use it, PT-25 needs a different observable and
-F38's practical reach needs re-examining.
+**~~❓ OPEN QUESTION~~ — ANSWERED BY PLAY 2026-07-30: rovers DO use Universal
+Tunnels**, so the shipped description ("Rovers cannot use this type of tunnel")
+is wrong. Filed as **F84**. It also confirms F38's reach: the tunnel a player can
+actually build carries rover pathfinding, which is exactly what the leaking
+`LoadGame` sweep re-registers. The prediction from the unit-class mask
+(`pf.AddTunnel(…, -1)` = all units, vs `Dome_Entrance`'s `2`/`1`) held.
 `Tunnel:OnDestroyed` correctly calls `RemovePFTunnel` (`Tunnel.lua:153-155`), but
 `OnMsg.LoadGame` (:264-266) re-adds PF tunnels for ALL `TunnelBase` with no `destroyed`
 check (`AddPFTunnel` :197-209 checks only `IsValid(linked_obj)`; ruins are valid).
@@ -3736,7 +3731,62 @@ also resets the `g_ShownPopupNotifications` GameVar, which is what makes the
 `show_once` popup offer itself again); then
 `UIColony:SetTechResearched("ReconCenter")`.
 
-### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit) — B2 re-run pending]`
+### F84 — Universal Tunnel's description is wrong on two counts (P3, PROVEN)  `[todo — text patch, but the localization tradeoff makes it a USER DECISION; nothing built]`
+
+Shipped description (`Data/BuildingTemplate/UniversalTunnel.lua`, T 893478951171):
+
+> *"The tunnel entrance and exit can connect tracks and power grids at different
+> locations and different elevations. **Rovers cannot use this type of tunnel.**"*
+
+Both halves are wrong.
+
+**(a) Rovers CAN use it — DISPROVEN BY PLAY, 2026-07-30** (tester, during PT-25,
+taken as a free rider on that setup). The tester built a Universal Tunnel pair on
+the surface and confirmed **rovers route through it**. This matches the code
+exactly: `UniversalTunnel`'s `object_class` is `TrackTunnelBase`
+(`__parents = { "TunnelBase", "TrackConnectedObjBase" }`,
+`Lua/Buildings/TrackTunnel.lua:1-5`) with **no override** of `AddPFTunnel`, and
+`TunnelBase:AddPFTunnel` registers
+`pf.AddTunnel(self, start_point, exit_point, weight, -1)` (`Tunnel.lua:208`).
+The 5th argument is a unit-class mask: `Dome_Entrance` passes `2` with the
+comment *"usable by people only"* and `1` *"usable by drones only"*
+(`Dome_Entrance.lua:15-16`), so `-1` is every unit type. The sentence describes
+a restriction the code does not implement.
+
+**(b) It also bridges LIFE SUPPORT, which the description omits** (the "unfiled
+candidate" previously noted in STATUS, now folded in here). `TunnelBase`'s
+parents include **`LifeSupportGridObject`** (`Tunnel.lua:6`); it creates the
+elements (`CreateLifeSupportElements`, `:178`), merges water grids across the
+pair (`MergeGrids("water")`, `:88`), and registers itself on the water supply
+connection grid (`:112-121`). So the tunnel joins water/life-support networks as
+well as tracks and power — a genuinely useful property a player would want to
+know and cannot learn from the text.
+
+**Intent — UNINTENDED, hard tell: self-contradiction** between shipped text and
+shipped code, with half of it now confirmed at the keyboard. **Reachability R1** —
+build-menu and encyclopedia text, read by any player evaluating the building.
+Player consequence is a real planning error in both directions: they avoid the
+tunnel for rover routing when it would work, and they never learn it can carry
+life support.
+
+**⚠️ The fix is NOT free — this is why it is a user decision.** FIX_POLICY §6:
+the pack ships **no localization tables**, and new player-visible strings must
+use `Untranslated(...)`. Replacing this `T` therefore **converts a fully
+localized description into English-only** for every language. That is a
+regression for non-English players in exchange for correcting English text.
+Options:
+1. **Replace the whole description** with a corrected `Untranslated` string.
+   Accurate, but English-only everywhere. Precedent exists (F25 is a description
+   defect), but F25 should be re-checked for how it handled loc before this is
+   treated as settled.
+2. **Do nothing in game text; document it** in MOD_DESCRIPTION as a known vanilla
+   text error. Zero localization cost, zero risk, no in-game benefit.
+3. **Ship it only if D10 lands**, since D10's T1 is already a batch of workshop
+   description repairs — one localization decision covering all of them rather
+   than two separate calls.
+
+**Recommendation:** decide it together with D10's T1 text repairs; they raise the
+identical tradeoff and should not be answered twice differently.  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit) — B2 re-run pending]`
 **COMMANDER-PROFILE INTERACTION CHECKED 2026-07-30 (owner question) — NO
 COLLISION between the `Inventor` profile and D06/D09/F77; the interaction is
 purely one of measurement.** Enumerated rather than assumed:

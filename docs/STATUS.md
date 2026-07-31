@@ -106,8 +106,12 @@ no-homeless dome policy** (speced + user-approved
 only; breaks vanilla's emigration tie for homeless colonists so specialist
 domes stop stranding them, which also unwinds the D07 overpopulated deadlock
 without touching D07). **D10 and D12 both touch colonist assignment — land them
-separately, each with its own A/B.** Unfiled candidate: Universal Tunnel description omits its
-life-support bridging (description drift, one-line text patch — user call).
+separately, each with its own A/B.** ~~Unfiled candidate: Universal Tunnel
+description~~ **now FILED as F84** (2026-07-30) — the description is wrong twice:
+it claims rovers cannot use the tunnel (**disproven by play** during PT-25) and
+omits that it bridges life support. Text patch, but it converts a localized `T`
+into an English-only `Untranslated` string, so **decide it together with D10's T1
+text repairs** — identical tradeoff, should not be answered twice differently.
 
 **A/B probe state — CURRENT is the 2026-07-30 pair at 76 probes: `73/73` all
 toggles ON and `67/73` default config, both `0 FAIL / 0 ERROR`. Code gate CLEAR,
