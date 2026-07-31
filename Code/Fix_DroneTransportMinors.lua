@@ -83,18 +83,17 @@
 SMRFixPack.Register("DroneTransportMinors", {
 	title = "A passability change no longer corrupts each drone's unreachable-buildings table",
 	apply = function()
-		local D = rawget(_G, "Drone")
-		if type(D) ~= "table" or type(D.ApproachWrapper) ~= "function"
-			or type(D.CleanUnreachables) ~= "function" then
-			return "Drone.ApproachWrapper/CleanUnreachables not found (game update changed it?)"
-		end
-		local meta = rawget(_G, "weak_keys_meta")
-		if type(meta) ~= "table" then
-			return "weak_keys_meta not found (game update changed it?)"
-		end
-		if type(rawget(_G, "table")) ~= "table" or type(table.count) ~= "function" then
-			return "table.count not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("DroneTransportMinors", {
+			{ class = "Drone", method = "ApproachWrapper",
+			  reason = "Drone.ApproachWrapper/CleanUnreachables not found (game update changed it?)" },
+			{ class = "Drone", method = "CleanUnreachables",
+			  reason = "Drone.ApproachWrapper/CleanUnreachables not found (game update changed it?)" },
+			{ global = "weak_keys_meta", kind = "table" },
+			{ path = { "table", "count" }, kind = "function" },
+		})
+		if err then return err end
+		local D = Drone
+		local meta = weak_keys_meta
 
 		---- (b) ---------------------------------------------------------------
 		-- Runs after the shipped handler has swapped in its plain table.

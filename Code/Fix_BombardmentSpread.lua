@@ -39,12 +39,6 @@
 SMRFixPack.Register("BombardmentSpread", {
 	title = "Bombardment missiles come in from spread directions instead of in parallel",
 	apply = function()
-		if type(rawget(_G, "WaitBombard")) ~= "function" then
-			return "WaitBombard not found (game update changed it?)"
-		end
-		if type(rawget(_G, "BombardMissile")) ~= "table" then
-			return "BombardMissile not found (game update changed it?)"
-		end
 		-- FIX (QA 2026-07-25): HitsDome/GetTimeToImpact are declared on
 		-- BaseMeteor (Meteors.lua:443/:453), not on BombardMissile — at apply
 		-- time classes are not flattened, so checking BombardMissile finds nil
@@ -52,18 +46,22 @@ SMRFixPack.Register("BombardmentSpread", {
 		-- DECLARING class. SessionRandom is a GameVar (Lua\_init.lua:5) and does
 		-- not exist at apply time either — the body reads it at call time, which
 		-- is fine, so it is not preflighted at all.
-		local BMet = rawget(_G, "BaseMeteor")
-		if type(BMet) ~= "table" or type(BMet.HitsDome) ~= "function"
-			or type(BMet.GetTimeToImpact) ~= "function" then
-			return "BaseMeteor.HitsDome/GetTimeToImpact not found (game update changed it?)"
-		end
-		if type(rawget(_G, "SetLen")) ~= "function" or type(rawget(_G, "sincos")) ~= "function" then
-			return "SetLen/sincos not found (game update changed it?)"
-		end
-		if type(rawget(_G, "GetRandomPassableAroundOnMap")) ~= "function"
-			or type(rawget(_G, "AddObjectToNotification")) ~= "function" then
-			return "the bombardment helpers are gone (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("BombardmentSpread", {
+			{ global = "WaitBombard" },
+			{ class = "BombardMissile",
+			  reason = "BombardMissile not found (game update changed it?)" },
+			{ class = "BaseMeteor", method = "HitsDome",
+			  reason = "BaseMeteor.HitsDome/GetTimeToImpact not found (game update changed it?)" },
+			{ class = "BaseMeteor", method = "GetTimeToImpact",
+			  reason = "BaseMeteor.HitsDome/GetTimeToImpact not found (game update changed it?)" },
+			{ global = "SetLen", reason = "SetLen/sincos not found (game update changed it?)" },
+			{ global = "sincos", reason = "SetLen/sincos not found (game update changed it?)" },
+			{ global = "GetRandomPassableAroundOnMap",
+			  reason = "the bombardment helpers are gone (game update changed it?)" },
+			{ global = "AddObjectToNotification",
+			  reason = "the bombardment helpers are gone (game update changed it?)" },
+		})
+		if err then return err end
 
 		-- Copy of the file-local Bombardment.lua:38-50.
 		local function GenerateDir(dir, angle)

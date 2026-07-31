@@ -64,27 +64,15 @@
 SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 
 -- Validate every target before installing anything; apply() reports failures.
-local install_error
-do
-	local R = rawget(_G, "UniversalRocketBase")
-	if type(R) ~= "table" or type(R.GetFuelResourceRequest) ~= "function" then
-		install_error = "UniversalRocketBase.GetFuelResourceRequest not found (game update changed it?)"
-	else
-		-- Both declared on UniversalRocketBase itself (:826 and :2140), so this
-		-- lookup is valid even though mod code loads before the classes are
-		-- flattened and only self-declared members are visible.
-		for _, name in ipairs{ "GetDepartureLocType", "IsPlayerControlled" } do
-			if type(R[name]) ~= "function" then
-				install_error = "UniversalRocketBase." .. name .. " not found (game update changed it?)"
-			end
-		end
-	end
-	local CT = rawget(_G, "CargoTransporterNew")
-	if not install_error
-			and (type(CT) ~= "table" or type(CT.UpdateCargoResourceRequests) ~= "function") then
-		install_error = "CargoTransporterNew.UpdateCargoResourceRequests not found (game update changed it?)"
-	end
-end
+-- All three rocket methods are declared on UniversalRocketBase itself (:826
+-- and :2140), so the classdef lookup is valid even though mod code loads
+-- before the classes are flattened.
+local install_error = SMRFixPack.Require("ClassicRockets", {
+	{ class = "UniversalRocketBase", method = "GetFuelResourceRequest" },
+	{ class = "UniversalRocketBase", method = "GetDepartureLocType" },
+	{ class = "UniversalRocketBase", method = "IsPlayerControlled" },
+	{ class = "CargoTransporterNew", method = "UpdateCargoResourceRequests" },
+})
 
 if not install_error then
 

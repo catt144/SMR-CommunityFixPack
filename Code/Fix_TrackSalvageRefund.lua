@@ -91,31 +91,24 @@
 SMRFixPack.Register("TrackSalvageRefund", {
 	title = "Salvaging a track refunds what the whole track cost, not one hex",
 	apply = function()
-		local TB = rawget(_G, "TrackBase")
-		if type(TB) ~= "table" or type(TB.GetRefundResources) ~= "function" then
-			return "TrackBase.GetRefundResources not found (game update changed it?)"
-		end
-		local TE = rawget(_G, "TrackGridElement")
-		if type(TE) ~= "table" or type(TE.Demolish) ~= "function" then
-			return "TrackGridElement.Demolish not found (game update changed it?)"
-		end
-		-- The refund maths live on Building; TrackBase only overrides the getter.
-		-- Classes are not flattened yet, so look them up on the DECLARING class.
-		local B = rawget(_G, "Building")
-		if type(B) ~= "table" or type(B.CalcRefundAmount) ~= "function"
-			or type(B.AddRefundResource) ~= "function" then
-			return "Building.CalcRefundAmount/AddRefundResource not found (game update changed it?)"
-		end
-		-- The premise: one stamp per construction group, written by the leader.
-		local CGL = rawget(_G, "ConstructionGroupLeader")
-		if type(CGL) ~= "table" or type(CGL.Complete) ~= "function"
-			or type(rawget(_G, "ConstructionSite")) ~= "table"
-			or type(ConstructionSite.MarkSpentResources) ~= "function" then
-			return "the construction-group stamping machinery is gone (game update changed it?)"
-		end
-		if type(rawget(_G, "PlaceResourceStockpile_Delayed")) ~= "function" then
-			return "PlaceResourceStockpile_Delayed not found (game update changed it?)"
-		end
+		local REFUND_MATHS = "Building.CalcRefundAmount/AddRefundResource not found (game update changed it?)"
+		local STAMPING = "the construction-group stamping machinery is gone (game update changed it?)"
+		local err = SMRFixPack.Require("TrackSalvageRefund", {
+			{ class = "TrackBase", method = "GetRefundResources" },
+			{ class = "TrackGridElement", method = "Demolish" },
+			-- The refund maths live on Building; TrackBase only overrides the
+			-- getter — check the DECLARING class (pre-flattening).
+			{ class = "Building", method = "CalcRefundAmount", reason = REFUND_MATHS },
+			{ class = "Building", method = "AddRefundResource", reason = REFUND_MATHS },
+			-- The premise: one stamp per construction group, written by the leader.
+			{ class = "ConstructionGroupLeader", method = "Complete", reason = STAMPING },
+			{ class = "ConstructionSite", method = "MarkSpentResources", reason = STAMPING },
+			{ global = "PlaceResourceStockpile_Delayed" },
+		})
+		if err then return err end
+		local TB = TrackBase
+		local TE = TrackGridElement
+		local B = Building
 
 		---- half A -------------------------------------------------------------
 		-- Source: Lua\Buildings\Track.lua:286-307 (ModTools\Src, game 1.0.7.396349).

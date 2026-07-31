@@ -65,12 +65,11 @@ SMRFixPack.RainsFixedLoop = fixed_loop -- probe surface: the global must BE this
 SMRFixPack.Register(FIX_ID, {
 	title = "A rain that collides with another disaster retries instead of never raining again",
 	apply = function()
-		if type(rawget(_G, "RainsDisasterLoop")) ~= "function" then
-			return "RainsDisasterLoop not found (game update changed it?)"
-		end
-		if type(rawget(_G, "RainsDisasterActivation")) ~= "function" then
-			return "RainsDisasterActivation not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require(FIX_ID, {
+			{ global = "RainsDisasterLoop" },
+			{ global = "RainsDisasterActivation" },
+		})
+		if err then return err end
 		return SMRFixPack.SetGlobal("RainsDisasterLoop", fixed_loop,
 			"replacing RainsDisasterLoop did not land (mod env change?)")
 	end,

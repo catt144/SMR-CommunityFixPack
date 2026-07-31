@@ -90,23 +90,22 @@
 SMRFixPack.Register("TrainMinors", {
 	title = "Instant-track paint, train cap follows length",
 	apply = function()
-		local TE = rawget(_G, "TrackGridElement")
-		if type(TE) ~= "table" or type(TE.GameInit) ~= "function" then
-			return "TrackGridElement.GameInit not found (game update changed it?)"
-		end
-		local TB = rawget(_G, "TrackBase")
-		if type(TB) ~= "table" or type(TB.GameInit) ~= "function"
-			or type(TB.UpdateEndElements) ~= "function" then
-			return "TrackBase.GameInit/UpdateEndElements not found (game update changed it?)"
-		end
-		if type(rawget(_G, "GetTracksPalette")) ~= "function"
-			or type(rawget(_G, "SetObjectPaletteRecursive")) ~= "function" then
-			return "GetTracksPalette/SetObjectPaletteRecursive not found (game update changed it?)"
-		end
-		local expand = rawget(_G, "ExpandTrackFromElement")
-		if type(expand) ~= "function" then
-			return "ExpandTrackFromElement not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("TrainMinors", {
+			{ class = "TrackGridElement", method = "GameInit" },
+			{ class = "TrackBase", method = "GameInit",
+			  reason = "TrackBase.GameInit/UpdateEndElements not found (game update changed it?)" },
+			{ class = "TrackBase", method = "UpdateEndElements",
+			  reason = "TrackBase.GameInit/UpdateEndElements not found (game update changed it?)" },
+			{ global = "GetTracksPalette",
+			  reason = "GetTracksPalette/SetObjectPaletteRecursive not found (game update changed it?)" },
+			{ global = "SetObjectPaletteRecursive",
+			  reason = "GetTracksPalette/SetObjectPaletteRecursive not found (game update changed it?)" },
+			{ global = "ExpandTrackFromElement" },
+		})
+		if err then return err end
+		local TE = TrackGridElement
+		local TB = TrackBase
+		local expand = ExpandTrackFromElement
 		-- (the SelectionPropagate / GetInGameInterfaceMode self-check went with
 		-- the (c) guard, 2026-07-30 — nothing here touches either any more)
 

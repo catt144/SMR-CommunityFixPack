@@ -216,21 +216,14 @@ SMRFixPack.Register(FIX_ID, {
 		-- NOT loaded yet (the GlobalMap exists but is EMPTY until DataLoaded),
 		-- so the FirstAsteroid preset itself is checked from OnMsg.DataLoaded
 		-- below, never here — the F75 false-inactive lesson.
-		if type(rawget(_G, "ColonyAddPrefabs")) ~= "function" then
-			return "ColonyAddPrefabs not found (game update changed it?)"
-		end
-		if type(rawget(_G, "TGetID")) ~= "function" then
-			return "TGetID not found (game update changed it?)"
-		end
-		if type(rawget(_G, "ShowPopupNotification")) ~= "function" then
-			return "ShowPopupNotification not found (game update changed it?)"
-		end
-		if type(rawget(_G, "RemoveNotification")) ~= "function" then
-			return "RemoveNotification not found (game update changed it?)"
-		end
-		if type(rawget(_G, "PopupNotificationPresets")) ~= "table" then
-			return "PopupNotificationPresets not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require(FIX_ID, {
+			{ global = "ColonyAddPrefabs" },
+			{ global = "TGetID" },
+			{ global = "ShowPopupNotification" },
+			{ global = "RemoveNotification" },
+			{ global = "PopupNotificationPresets", kind = "table" },
+		})
+		if err then return err end
 		-- The LoadGame handler below is registered at file scope; nothing else
 		-- to install.
 	end,

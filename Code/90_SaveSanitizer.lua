@@ -185,13 +185,10 @@ SMRFixPack.Register(FIX_ID, {
 		-- Everything this module touches is savegame state, so there is nothing
 		-- to patch at load time. The self-check is that the APIs the passes call
 		-- still exist; the game objects themselves are re-checked on every run.
-		local LC = rawget(_G, "LabelContainer")
-		if type(LC) ~= "table" or type(LC.SetLabelModifier) ~= "function" then
-			return "LabelContainer.SetLabelModifier not found (game update changed it?)"
-		end
-		if type(rawget(_G, "HandleToObject")) ~= "table" then
-			return "HandleToObject not found (game update changed it?)"
-		end
+		return SMRFixPack.Require(FIX_ID, {
+			{ class = "LabelContainer", method = "SetLabelModifier" },
+			{ global = "HandleToObject", kind = "table" },
+		})
 	end,
 })
 

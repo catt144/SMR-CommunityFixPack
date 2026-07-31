@@ -25,11 +25,11 @@
 SMRFixPack.Register("FounderTraitNotification", {
 	title = "The notification for a Founder gaining a trait fires again",
 	apply = function()
-		for _, name in ipairs({ "FindNotification", "AddNotification" }) do
-			if type(rawget(_G, name)) ~= "function" then
-				return name .. " not found (game update changed it?)"
-			end
-		end
+		local err = SMRFixPack.Require("FounderTraitNotification", {
+			{ global = "FindNotification" },
+			{ global = "AddNotification" },
+		})
+		if err then return err end
 		SMRFixPack.FounderTraitNotification = { fired = 0 }
 	end,
 })

@@ -182,22 +182,22 @@ SMRFixPack.Register("ResidencyControl", {
 			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 
-		local C = rawget(_G, "Community")
-		if type(C) ~= "table" or type(C.CanAcceptNewColonists) ~= "function"
-				or type(C.TogglePolicy) ~= "function" then
-			return "Community.CanAcceptNewColonists/TogglePolicy not found (game update changed it?)"
-		end
-		if type(rawget(_G, "ChooseDome")) ~= "function" then
-			return "ChooseDome not found (game update changed it?)"
-		end
 		-- Both section classes declare Init themselves (generated XDef classes),
 		-- so the classdef lookup is valid at mod-load time.
-		local SD = rawget(_G, "sectionDome")
-		local SM = rawget(_G, "sectionMicroGHabitat")
-		if type(SD) ~= "table" or type(SD.Init) ~= "function"
-				or type(SM) ~= "table" or type(SM.Init) ~= "function" then
-			return "sectionDome/sectionMicroGHabitat Init not found (game update changed the infopanel?)"
-		end
+		local err = SMRFixPack.Require("ResidencyControl", {
+			{ class = "Community", method = "CanAcceptNewColonists",
+			  reason = "Community.CanAcceptNewColonists/TogglePolicy not found (game update changed it?)" },
+			{ class = "Community", method = "TogglePolicy",
+			  reason = "Community.CanAcceptNewColonists/TogglePolicy not found (game update changed it?)" },
+			{ global = "ChooseDome" },
+			{ class = "sectionDome", method = "Init",
+			  reason = "sectionDome/sectionMicroGHabitat Init not found (game update changed the infopanel?)" },
+			{ class = "sectionMicroGHabitat", method = "Init",
+			  reason = "sectionDome/sectionMicroGHabitat Init not found (game update changed the infopanel?)" },
+		})
+		if err then return err end
+		local SD = sectionDome
+		local SM = sectionMicroGHabitat
 
 		-- gate 1 (the CanAcceptNewColonists wrap) is installed at file scope
 		-- above — see the header; apply() only validates its targets.

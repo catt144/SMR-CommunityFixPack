@@ -79,12 +79,17 @@ SMRFixPack.Register("AcknowledgedWarnings", {
 			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 
-		for _, name in ipairs{ "SuppressNotification", "AddObjectToNotification",
-				"RemoveObjectFromNotification", "FindNotification" } do
-			if type(rawget(_G, name)) ~= "function" then
-				return name .. " not found (game update changed the notification library?)"
-			end
-		end
+		local err = SMRFixPack.Require("AcknowledgedWarnings", {
+			{ global = "SuppressNotification",
+			  reason = "SuppressNotification not found (game update changed the notification library?)" },
+			{ global = "AddObjectToNotification",
+			  reason = "AddObjectToNotification not found (game update changed the notification library?)" },
+			{ global = "RemoveObjectFromNotification",
+			  reason = "RemoveObjectFromNotification not found (game update changed the notification library?)" },
+			{ global = "FindNotification",
+			  reason = "FindNotification not found (game update changed the notification library?)" },
+		})
+		if err then return err end
 		-- NOTE: NotificationPresets is a preset GlobalMap and exists EMPTY at
 		-- mod-load time (the F75 lesson) — do not "verify" the preset here. The
 		-- wrappers key on the id string alone, which is safe either way.

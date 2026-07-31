@@ -42,9 +42,10 @@ SMRFixPack.Register("TechDescriptionBuilding", {
 			"Building: <em>" .. RIGHT .. "</em> (<buildinginfo('UndergroundDomeMedium')>) - A medium-sized Dome for the <em>Underground</em>.\n\n" ..
 			"<grey>With space being the limiting factor below the Martian surface, we have to make the most of every inch we can find.</grey>"
 
-		if type(rawget(_G, "T")) ~= "function" then
-			return "T() not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("TechDescriptionBuilding", {
+			{ global = "T", reason = "T() not found (game update changed it?)" },
+		})
+		if err then return err end
 
 		-- Returns "patched", or nil plus a reason. Never raises: it runs from a
 		-- message handler and reads live preset data.

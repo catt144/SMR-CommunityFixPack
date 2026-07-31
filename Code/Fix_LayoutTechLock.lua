@@ -55,16 +55,13 @@
 SMRFixPack.Register("LayoutTechLock", {
 	title = "Layout construction respects research locks",
 	apply = function()
-		local L = rawget(_G, "LayoutConstructionController")
-		if type(L) ~= "table" or type(L.Activate) ~= "function" then
-			return "LayoutConstructionController.Activate not found (game update changed it?)"
-		end
-		if type(rawget(_G, "GetBuildingTechsStatus")) ~= "function" then
-			return "GetBuildingTechsStatus not found (game update changed it?)"
-		end
-		if type(rawget(_G, "BuildingTemplates")) ~= "table" then
-			return "BuildingTemplates not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("LayoutTechLock", {
+			{ class = "LayoutConstructionController", method = "Activate" },
+			{ global = "GetBuildingTechsStatus" },
+			{ global = "BuildingTemplates", kind = "table" },
+		})
+		if err then return err end
+		local L = LayoutConstructionController
 
 		-- Should this entry never have been added? Mirrors the shipped decision at
 		-- LayoutConstruction.lua:236-248, reading the state that loop recorded.

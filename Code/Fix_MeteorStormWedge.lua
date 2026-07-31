@@ -62,19 +62,13 @@ SMRFixPack.StormWedge = SMRFixPack.StormWedge or { restarts = 0 }
 SMRFixPack.Register(FIX_ID, {
 	title = "A wedged meteor storm is detected and released instead of blocking storms forever",
 	apply = function()
-		local funcs = rawget(_G, "GlobalGameTimeThreadFuncs")
-		if type(funcs) ~= "table" or type(funcs.MeteorStorm) ~= "function" then
-			return "MeteorStorm thread function not found (game update changed it?)"
-		end
-		if type(rawget(_G, "RestartGlobalGameTimeThread")) ~= "function" then
-			return "RestartGlobalGameTimeThread not found (game update changed it?)"
-		end
-		if type(rawget(_G, "FindNotification")) ~= "function" then
-			return "FindNotification not found (game update changed it?)"
-		end
-		if type(rawget(_G, "MeteorsDisaster")) ~= "function" then
-			return "MeteorsDisaster not found (game update changed it?)"
-		end
+		return SMRFixPack.Require(FIX_ID, {
+			{ path = { "GlobalGameTimeThreadFuncs", "MeteorStorm" }, kind = "function",
+			  reason = "MeteorStorm thread function not found (game update changed it?)" },
+			{ global = "RestartGlobalGameTimeThread" },
+			{ global = "FindNotification" },
+			{ global = "MeteorsDisaster" },
+		})
 	end,
 })
 

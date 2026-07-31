@@ -53,15 +53,11 @@ local log = SMRFixPack.Log
 SMRFixPack.Register(FIX_ID, {
 	title = "A finished meteor storm no longer disables rains, cold waves and dust storms forever",
 	apply = function()
-		if type(rawget(_G, "RemoveDisasterNotifications")) ~= "function" then
-			return "RemoveDisasterNotifications not found (game update changed it?)"
-		end
-		if type(rawget(_G, "AddDisasterNotification")) ~= "function" then
-			return "AddDisasterNotification not found (game update changed it?)"
-		end
-		if type(rawget(_G, "FindNotification")) ~= "function" then
-			return "FindNotification not found (game update changed it?)"
-		end
+		return SMRFixPack.Require(FIX_ID, {
+			{ global = "RemoveDisasterNotifications" },
+			{ global = "AddDisasterNotification" },
+			{ global = "FindNotification" },
+		})
 	end,
 })
 

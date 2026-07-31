@@ -122,20 +122,22 @@ SMRFixPack.Register("CohortHousing", {
 			return "opt-in module, off by default — enable it in Options → Mod Options"
 		end
 
-		local C = rawget(_G, "Colonist")
-		if type(C) ~= "table" or type(C.UpdateResidence) ~= "function"
-				or type(C.FindEmigrationDome) ~= "function" then
-			return "Colonist.UpdateResidence/FindEmigrationDome not found (game update changed it?)"
-		end
-		local R = rawget(_G, "Residence")
-		if type(R) ~= "table" or type(R.GetFreeSpace) ~= "function"
-				or type(R.IsSuitable) ~= "function" then
-			return "Residence.GetFreeSpace/IsSuitable not found (game update changed it?)"
-		end
-		if type(rawget(_G, "FindTransportationModeToCommunity")) ~= "function"
-				or type(rawget(_G, "IsLRTransportAvailable")) ~= "function" then
-			return "emigration transport helpers not found (game update changed them?)"
-		end
+		local err = SMRFixPack.Require("CohortHousing", {
+			{ class = "Colonist", method = "UpdateResidence",
+			  reason = "Colonist.UpdateResidence/FindEmigrationDome not found (game update changed it?)" },
+			{ class = "Colonist", method = "FindEmigrationDome",
+			  reason = "Colonist.UpdateResidence/FindEmigrationDome not found (game update changed it?)" },
+			{ class = "Residence", method = "GetFreeSpace",
+			  reason = "Residence.GetFreeSpace/IsSuitable not found (game update changed it?)" },
+			{ class = "Residence", method = "IsSuitable",
+			  reason = "Residence.GetFreeSpace/IsSuitable not found (game update changed it?)" },
+			{ global = "FindTransportationModeToCommunity",
+			  reason = "emigration transport helpers not found (game update changed them?)" },
+			{ global = "IsLRTransportAvailable",
+			  reason = "emigration transport helpers not found (game update changed them?)" },
+		})
+		if err then return err end
+		local C = Colonist
 
 		-- In-dome pass: after the shipped residence logic settles, force a
 		-- cohort member out of normal housing into a free same-dome cohort

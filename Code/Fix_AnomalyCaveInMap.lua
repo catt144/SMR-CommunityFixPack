@@ -58,13 +58,13 @@
 SMRFixPack.Register("AnomalyCaveInMap", {
 	title = "A cave-in on a map that does not exist is declined instead of crashing the sequence",
 	apply = function()
-		local orig = rawget(_G, "TriggerCaveIn")
-		if type(orig) ~= "function" then
-			return "TriggerCaveIn not found (game update changed it?)"
-		end
-		if type(rawget(_G, "CaveInRubble")) ~= "table" then
-			return "CaveInRubble class not found (game update changed it?)"
-		end
+		local err = SMRFixPack.Require("AnomalyCaveInMap", {
+			{ global = "TriggerCaveIn" },
+			{ class = "CaveInRubble",
+			  reason = "CaveInRubble class not found (game update changed it?)" },
+		})
+		if err then return err end
+		local orig = TriggerCaveIn
 
 		-- Can this value stand in for a map in TriggerCaveIn's body? The only
 		-- thing it does with it before anything else is call MapFindNearest on it
