@@ -37,9 +37,7 @@ SMRFixPack.Register("FounderTraitNotification", {
 -- The same three groups the shipped array lists, as a set this time.
 local FOUNDER_TRAIT_GROUPS = { Positive = true, Negative = true, Specialization = true }
 
-function OnMsg.ColonistAddTrait(colonist, trait_id, init)
-	local fix = SMRFixPack.fixes["FounderTraitNotification"]
-	if not (fix and fix.status == "active") then return end
+OnMsg.ColonistAddTrait = SMRFixPack.WhenActive("FounderTraitNotification", function(colonist, trait_id, init)
 	if init then return end
 	if type(colonist) ~= "table" or not colonist.traits or not colonist.traits.Founder then return end
 	local presets = rawget(_G, "TraitPresets")
@@ -49,4 +47,4 @@ function OnMsg.ColonistAddTrait(colonist, trait_id, init)
 	AddNotification("FounderGainsTrait", { obj = colonist, founder = colonist, trait = trait_id })
 	local stats = SMRFixPack.FounderTraitNotification
 	if stats then stats.fired = stats.fired + 1 end
-end
+end)

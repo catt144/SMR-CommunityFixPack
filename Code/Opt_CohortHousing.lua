@@ -229,8 +229,8 @@ SMRFixPack.Register("CohortHousing", {
 -- Graduation nudge: free the Nursery slot the moment the Child trait drops.
 -- Additive OnMsg, registered unconditionally, gated per call — the move-out
 -- itself is the shipped ChooseResidence rejecting the unsuitable home.
-function OnMsg.ColonistBecameYouth(colonist)
-	if module_active() and IsValid(colonist) then
+OnMsg.ColonistBecameYouth = SMRFixPack.WhenActive("CohortHousing", function(colonist)
+	if IsValid(colonist) then
 		colonist:UpdateResidence()
 	end
-end
+end)

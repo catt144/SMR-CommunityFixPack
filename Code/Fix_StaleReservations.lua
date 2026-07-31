@@ -55,9 +55,7 @@ SMRFixPack.Register("StaleReservations", {
 
 -- Daily sweep. Additive handler: the shipped OnMsg.NewDay in Residence.lua:567
 -- keeps running untouched.
-function OnMsg.NewDay()
-	local fix = SMRFixPack.fixes.StaleReservations
-	if not (fix and fix.status == "active") then return end
+OnMsg.NewDay = SMRFixPack.WhenActive("StaleReservations", function()
 	if not (rawget(_G, "MainCity") and MainCity.labels) then return end
 	local timeout = g_Consts and g_Consts.ForcedByUserLockTimeout
 	if not timeout then return end
@@ -92,8 +90,6 @@ function OnMsg.NewDay()
 	end
 
 	if released > 0 then
-		local msg = string.format("[CommunityFixPack] StaleReservations: released %d stale housing reservation(s)", released)
-		-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
-		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
+		SMRFixPack.Log("StaleReservations: released %d stale housing reservation(s)", released)
 	end
-end
+end)

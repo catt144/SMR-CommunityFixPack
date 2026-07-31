@@ -69,9 +69,7 @@ SMRFixPack.Register(FIX_ID, {
 -- removed the notification (Meteors.lua:227), and a double removal is a no-op
 -- (RemoveNotification returns early, RemoveDisasterNotifications just nils the
 -- flag again).
-function OnMsg.MeteorStormEnded(map)
-	local fix = SMRFixPack.fixes[FIX_ID]
-	if not (fix and fix.status == "active") then return end
+OnMsg.MeteorStormEnded = SMRFixPack.WhenActive(FIX_ID, function(map)
 	local presets = rawget(_G, "NotificationPresets")
 	if not (type(presets) == "table" and presets.DisasterMeteorStorm) then
 		log("%s: NotificationPresets.DisasterMeteorStorm missing — leak handler skipped", FIX_ID)
@@ -79,7 +77,7 @@ function OnMsg.MeteorStormEnded(map)
 	end
 	RemoveDisasterNotifications("DisasterMeteorStorm", map)
 	log("%s: meteor storm ended — its notification and prediction flag are cleared", FIX_ID)
-end
+end)
 
 -- Half 2 — heal saves already poisoned. Exposed for the console and the TestKit;
 -- returns how many flags it cleared. Idempotent: a second run finds nothing.
@@ -98,9 +96,7 @@ function SMRFixPack.ReconcileDisasterPredictions()
 	return cleared
 end
 
-function OnMsg.PostLoadGame()
-	local fix = SMRFixPack.fixes[FIX_ID]
-	if not (fix and fix.status == "active") then return end
+OnMsg.PostLoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	local ok, err = pcall(SMRFixPack.ReconcileDisasterPredictions)
 	if not ok then log("%s: reconciliation pass failed: %s", FIX_ID, tostring(err)) end
-end
+end)

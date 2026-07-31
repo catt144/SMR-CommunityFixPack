@@ -105,9 +105,7 @@ function SMRFixPack.RefreshRainsLoops()
 	return refreshed
 end
 
-function OnMsg.PostLoadGame()
-	local fix = SMRFixPack.fixes[FIX_ID]
-	if not (fix and fix.status == "active") then return end
+OnMsg.PostLoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	local ok, err = pcall(SMRFixPack.RefreshRainsLoops)
 	if not ok then log("%s: rains-loop refresh failed: %s", FIX_ID, tostring(err)) end
-end
+end)

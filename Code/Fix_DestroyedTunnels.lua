@@ -52,9 +52,7 @@ SMRFixPack.Register("DestroyedTunnels", {
 
 -- Runs after the shipped Tunnel.lua handler (OnMsg is additive and ours registers
 -- later), so anything it re-added for a ruin is taken back out here.
-function OnMsg.LoadGame()
-	local fix = SMRFixPack.fixes.DestroyedTunnels
-	if not (fix and fix.status == "active") then return end
+OnMsg.LoadGame = SMRFixPack.WhenActive("DestroyedTunnels", function()
 	if type(rawget(_G, "AllMapsForEach")) ~= "function" then return end
 
 	local closed = 0
@@ -66,8 +64,6 @@ function OnMsg.LoadGame()
 	end)
 
 	if closed > 0 then
-		local msg = string.format("[CommunityFixPack] DestroyedTunnels: closed %d destroyed tunnel(s) left open in pathfinding", closed)
-		-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
-		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
+		SMRFixPack.Log("DestroyedTunnels: closed %d destroyed tunnel(s) left open in pathfinding", closed)
 	end
-end
+end)

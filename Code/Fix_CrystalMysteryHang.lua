@@ -70,23 +70,19 @@ SMRFixPack.Register("CrystalMysteryHang", {
 })
 
 -- Additive: the shipped code has no CrystalFlyAway handler of its own.
-function OnMsg.CrystalFlyAway()
-	local fix = SMRFixPack.fixes.CrystalMysteryHang
-	if not (fix and fix.status == "active") then return end
+OnMsg.CrystalFlyAway = SMRFixPack.WhenActive("CrystalMysteryHang", function()
 	start_repeater() -- re-entrant call from our own Msg is a no-op while running
-end
+end)
 
 function OnMsg.MysteryEnd()
 	stop_repeater()
 end
 
-function OnMsg.LoadGame()
-	local fix = SMRFixPack.fixes.CrystalMysteryHang
-	if not (fix and fix.status == "active") then return end
+OnMsg.LoadGame = SMRFixPack.WhenActive("CrystalMysteryHang", function()
 	stop_repeater() -- the thread from before the save is gone
 	if crystals_mystery_active() and not IsValid(UIColony.mystery.crystal) then
 		-- the crystal has already left (or has not been composed yet — in which case
 		-- nothing is listening and the extra broadcasts are ignored)
 		start_repeater()
 	end
-end
+end)

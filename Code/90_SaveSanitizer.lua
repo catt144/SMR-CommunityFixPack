@@ -205,13 +205,10 @@ SMRFixPack.Register(FIX_ID, {
 -- the save permanently. After fixups the pass sees the world post-migration and
 -- the "any percent modifier present → skip" guard holds. (Found by the wave-3
 -- QA audit, 2026-07-25.)
-function OnMsg.PostLoadGame()
-	local fix = SMRFixPack.fixes[FIX_ID]
-	if not (fix and fix.status == "active") then return end
-
+OnMsg.PostLoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	local ok, err = pcall(repair_turbine_buff)
 	if not ok then log("%s: turbine-buff pass failed: %s", FIX_ID, tostring(err)) end
 
 	ok, err = pcall(repair_leaked_upgrade_modifiers)
 	if not ok then log("%s: upgrade-modifier pass failed: %s", FIX_ID, tostring(err)) end
-end
+end)

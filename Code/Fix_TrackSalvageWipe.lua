@@ -257,9 +257,7 @@ SMRFixPack.Register("TrackSalvageWipe", {
 -- arrays — invisible to every track system and, before this session's click
 -- guard, immune to salvage. Sweep them out once per load; a healthy save has
 -- none (every live element belongs to a track).
-function OnMsg.LoadGame()
-	local fix = SMRFixPack.fixes.TrackSalvageWipe
-	if not (fix and fix.status == "active") then return end
+OnMsg.LoadGame = SMRFixPack.WhenActive("TrackSalvageWipe", function()
 	if type(rawget(_G, "AllMapsForEach")) ~= "function" then return end
 	local removed = 0
 	AllMapsForEach(true, "TrackGridElement", function(el)
@@ -285,7 +283,6 @@ function OnMsg.LoadGame()
 		end
 	end)
 	if removed > 0 or purged > 0 then
-		local msg = string.format("[CommunityFixPack] TrackSalvageWipe: removed %d orphaned track element(s) and %d dead track-list entr(y/ies) left behind by a corrupted salvage", removed, purged)
-		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
+		SMRFixPack.Log("TrackSalvageWipe: removed %d orphaned track element(s) and %d dead track-list entr(y/ies) left behind by a corrupted salvage", removed, purged)
 	end
-end
+end)

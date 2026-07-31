@@ -49,9 +49,7 @@ SMRFixPack.Register("BrokenTrackSalvage", {
 })
 
 -- Repair sites created before this fix was installed still carry node_idx = false.
-function OnMsg.LoadGame()
-	local fix = SMRFixPack.fixes.BrokenTrackSalvage
-	if not (fix and fix.status == "active") then return end
+OnMsg.LoadGame = SMRFixPack.WhenActive("BrokenTrackSalvage", function()
 	if type(rawget(_G, "AllMapsForEach")) ~= "function" then return end
 	local stamped = 0
 	AllMapsForEach(true, "TrackGridElement", function(site)
@@ -62,8 +60,6 @@ function OnMsg.LoadGame()
 		end
 	end)
 	if stamped > 0 then
-		local msg = string.format("[CommunityFixPack] BrokenTrackSalvage: repaired %d unsalvageable track repair site(s)", stamped)
-		-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
-		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
+		SMRFixPack.Log("BrokenTrackSalvage: repaired %d unsalvageable track repair site(s)", stamped)
 	end
-end
+end)

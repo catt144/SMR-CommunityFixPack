@@ -253,12 +253,8 @@ function OnMsg.DataLoaded()
 	end
 end
 
-function OnMsg.LoadGame()
-	local entry = SMRFixPack.fixes[FIX_ID]
-	if not (entry and entry.status == "active") then return end
-	-- FIX_POLICY §2: handlers install unconditionally, so re-check the veto
-	-- itself as well as the registry status.
-	local disabled = rawget(_G, "SMRFixPack_Disabled")
-	if type(disabled) == "table" and disabled[FIX_ID] then return end
+-- WhenActive carries both FIX_POLICY §2 checks (registry status + the veto
+-- re-read this handler used to do by hand).
+OnMsg.LoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	SMRFixPack.HealFirstAsteroidPrefabs()
-end
+end)

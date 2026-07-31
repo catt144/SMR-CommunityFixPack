@@ -50,9 +50,7 @@ SMRFixPack.Register("GhostFarmOxygen", {
 })
 
 -- Saves made before this fix carry one leftover modifier per farm ever removed.
-function OnMsg.LoadGame()
-	local fix = SMRFixPack.fixes.GhostFarmOxygen
-	if not (fix and fix.status == "active") then return end
+OnMsg.LoadGame = SMRFixPack.WhenActive("GhostFarmOxygen", function()
 	if type(rawget(_G, "AllMapsForEach")) ~= "function" then return end
 
 	local live = {}
@@ -85,8 +83,6 @@ function OnMsg.LoadGame()
 	end)
 
 	if cleaned > 0 then
-		local msg = string.format("[CommunityFixPack] GhostFarmOxygen: removed %d phantom farm oxygen modifier(s)", cleaned)
-		-- ModLog's output path formats the message a second time (00_Core.lua:24-30).
-		if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
+		SMRFixPack.Log("GhostFarmOxygen: removed %d phantom farm oxygen modifier(s)", cleaned)
 	end
-end
+end)

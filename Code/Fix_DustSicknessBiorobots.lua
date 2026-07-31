@@ -153,9 +153,7 @@ function OnMsg.DataChanged(classes)
 end
 
 -- Biorobots already infected in an existing save never recover on their own.
-function OnMsg.LoadGame()
-	local fix = SMRFixPack.fixes[FIX_ID]
-	if not (fix and fix.status == "active") then return end
+OnMsg.LoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	if type(rawget(_G, "AllMapsForEach")) ~= "function" then return end
 
 	local cured = 0
@@ -171,4 +169,4 @@ function OnMsg.LoadGame()
 	if cured > 0 then
 		log("%s: cleared Dust Sickness from %d Biorobot(s)", FIX_ID, cured)
 	end
-end
+end)

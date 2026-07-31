@@ -201,8 +201,7 @@ end
 -- Panels built beside a second sun BEFORE this module was enabled (typically
 -- under a third-party limit mod) are still dark in the save; nothing re-runs
 -- the range test for them.
-function OnMsg.LoadGame()
-	if not module_active() then return end
+OnMsg.LoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	if type(rawget(_G, "AllMapsForEach")) ~= "function" then return end
 
 	local lit = 0
@@ -219,4 +218,4 @@ function OnMsg.LoadGame()
 	if lit > 0 then
 		log("%s: reconnected %d solar panel(s) to an Artificial Sun in range", FIX_ID, lit)
 	end
-end
+end)
