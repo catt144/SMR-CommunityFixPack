@@ -186,6 +186,62 @@ in the checklist; F03/F35/F48 entries in `BUGS.md`.
 
 ---
 
+## 5. Standalone save-residue cleaner — a second mod that un-mods a save — parked 2026-07-31
+
+> ⛔ **This does NOT park F86.** The defect (we write executable code into player
+> saves) is live on the board in `BUGS.md` and blocks release. What is parked
+> here is the *cleaner*, which repairs saves that are **already** damaged. The
+> real fix is not creating residue in the first place, and that is not parked.
+
+**What.** A separate, tiny mod whose only job is to strip mod residue out of a
+savegame and hand it back to vanilla. The 2026-07-31 PT-20 leg turned this from
+an idea into something with named primitives:
+- **Global game-time threads** — `RestartGlobalGameTimeThread(name)` swept over
+  the enumerable `GlobalGameTimeThreads` list rebuilds each thread from
+  `GlobalGameTimeThreadFuncs`, which with no mods loaded is **vanilla's body**.
+  This is fully generic: it repairs *any* mod's leaked global thread without
+  knowing anything about that mod.
+- **Command threads** — re-issuing `SetCommand` discards a stale stack carrying a
+  vanished mod's frame.
+- **Named fields / GameVars** — removable when the mod named them identifiably.
+
+**Why it is a good idea.** The leak class is invisible: no errors while the mod
+is installed, and after removal the harm can be silent (a dead scheduler) rather
+than loud. Almost nothing in the ecosystem would catch it, which is exactly why
+every audit *we* ran missed it too. The thread sweep in particular is a real
+community-scale tool, not just a cleanup for our own pack.
+
+**Why it is parked.** Priority order is **don't create residue > clean it up**,
+and the pack has zero players, so there are zero damaged saves in the world
+today. Ship clean and the cleaner is never needed for launch. It is also not as
+generic as the name suggests: threads yes, everything else needs to know what a
+specific mod did — and today's leg proved detection is the hard part (a `rawget`
+sweep false-positived on **192** buildings, and comparing against the class value
+false-positived on all 192 too).
+
+⚠️ **Two traps recorded so they are not rediscovered.** (1) **Some residue must
+survive** — `90_SaveSanitizer.lua` writes a `SMRFixPack_F35_<label>` modifier that
+*is* the repair; a cleaner deleting everything named `SMRFixPack_*` would
+re-break the save it was cleaning. Any cleaner needs a curated keep/remove list.
+(2) **Restarting a thread resets its interval** — blanket-restarting `Meteors`
+throws away a 35–115 h timer. Bounded as a one-shot, not free.
+
+**Where the material lives.** `BUGS.md` **F86** (mechanism, the 12-module
+exposure list, the three-layer redesign); the **D06 cleanup-mod block** (the
+owner's beta-response-channel framing and its three conditions — note its "mods
+get no save hook" premise is corrected); `ENGINE_FACTS.md` (thread-stack
+persistence, the `SaveGameStart` hook); the 2026-07-31 PT-20 SESSION_LOG leg.
+
+**Cost.** A new shipped artifact: its own metadata, its own testing, its own
+support surface. Composes with — and probably *is* — the D06 cleanup mod rather
+than a second one.
+
+**To un-park.** After launch, and only if beta surfaces residue in real players'
+saves. If it is ever built it should be **one** cleanup mod, not two: fold it
+into the D06 proposal rather than starting a parallel project.
+
+---
+
 # ⏸️ PROPOSED for parking — awaiting the owner's yes/no
 
 Listed, not moved. Each is still live on the board until the owner answers.
