@@ -8,6 +8,154 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## PHASE 4 COMPLETE — C2 helpers + C4 deeper self-checks + C1 update report, CERTIFIED — 2026-07-31 (one-off PHASE4_REBUILD_PROMPT session, 11 unattended legs)
+
+Executed `docs/PHASE4_REBUILD_PROMPT.md` (deleted on completion per its own
+rule). Preflight design record: `docs/archive/PHASE4_PREFLIGHT.md`. Control
+fingerprint: `docs/archive/fingerprint_before.txt`; end-state fingerprint:
+`docs/archive/fingerprint_after.txt`.
+
+### THE CERTIFICATION — every claim with its evidence
+
+**What was measured, and what it read.**
+- **Control** (before any edit): leg `Mars.exe-20260731-11.43.28` —
+  all-six-toggles-ON + carry dial off base (read from the leg itself),
+  `74/74 fixes active`, **67 PASS / 0 FAIL / 10 SKIP / 0 ERROR** at 77 probes.
+- **Eight build stages, one commit + one leg each**, every leg diffed
+  line-by-line against the control (verdicts, per-probe ids, all
+  `[CommunityFixPack]` lines, reason strings):
+  S1 helpers `67a744c` leg 11.47.23 · S2 log clones `eb06e31` leg 11.50.40 ·
+  S3 SetGlobal `6b4a555` leg 11.53.21 (its commit message mis-cites the leg as
+  "12.01" — written from memory; the fingerprint header carries the true name;
+  the counts stated are correct) · S4 WhenActive `2e1bf88` leg 11.57.28 ·
+  S5a DataPatch+Dust pair `6f90161` leg 12.00.22 · S5b donor+Independence
+  `ad7f7e1` leg 12.03.14 · S6a-d Require waves `d28bf4c`/`b5f172c`/`7203a55`/
+  `21a1a8d` legs 12.09.00/12.13.40/12.18.14/12.23.32 — **all EIGHT identical
+  to the control**, modulo exactly four documented random-input probe messages
+  (TouristApplicants roll counts, CrystalMysteryHang current mystery,
+  FounderTraitNotification random trait, BombardmentSpread volley directions —
+  verdicts always identical) and the log's own timing suffixes. · S7 C1
+  surface `79a8e92` leg 12.28.05 — **68 / 0 / 10 / 0 at 78 probes**, the
+  numbers predicted before the run; diff vs control is exactly the new
+  `UpdateReport` PASS line + the summary counts.
+- **Final fresh legs** (assembled result, from scratch):
+  all-toggles-ON leg `Mars.exe-20260731-12.30.34` — `74/74`,
+  **68 / 0 / 10 / 0** at 78 probes, identical to S7's fingerprint;
+  baseline leg `Mars.exe-20260731-12.32.11` (`code` list emptied via the
+  saved-copy discipline, restored and hash-verified `4dab1410…`, nothing
+  committed while the edit was in the tree) — **1 / 62 / 15 / 0**, the 1 PASS
+  is the FactionFundingCheck canary and the new `UpdateReport` probe **FAILs**
+  as `fix pack not loaded (bug reproduces)`, proving it discriminates.
+- **⚠️ OWED, not fabricated: the default-config leg.** The owner enabled all
+  six toggles + moved the dials during the morning play session (the leg's own
+  `74/74` line said so — the account-state lesson's third earning in two
+  days), and the opt-in bridge is one-way ON. **When the owner next sets the
+  six toggles OFF and dials to base, one unattended leg is owed; predicted:
+  `68/74`, 63 PASS / 0 FAIL / 15 SKIP / 0 ERROR at 78 probes.** Until it runs,
+  the shipping default configuration is measured only pre-Phase-4 (the 01.37
+  leg at 77 probes).
+
+**Invariants verified, and how.**
+- Reason strings preserved byte-for-byte: legs cannot see a passing check's
+  reason, so every wave carried a static extract-and-diff of string-return
+  sites against HEAD (0 missing everywhere; the only flagged items were the
+  checker's own em-dash decoding artifact — verified intact in the files —
+  and concat-loop reasons the helper now generates identically).
+- Declaring-class rule: every migrated method check re-verified; three
+  suspicious sites resolved — ShelterReflex's Community.HasLifeSupport check
+  is CORRECT (MicroGHabitat.lua:4 lists Community as a parent of the live
+  class), MoraleComfortTooltip's dead Colonist.GetProperty limb became the
+  real PropertyObject check, TrainWaitTime gained the two never-checked
+  station-method checks (Station.RemoveColonist, Station.lua:770;
+  TransportStatistics.AddSpentTime, TransportStatistics.lua:31).
+- Handler gates: WhenActive carries BOTH FIX_POLICY §2 checks; no handler
+  lost its gate; the by-design ungated handlers (MysteryEnd, the two watchdog
+  state resets) and the probe-visible verdict functions were left untouched.
+- `%` escaping: centralised in SMRFixPack.Log — the 12 clones and 5 inline
+  variants are gone; output byte-identical.
+- No `rawset(_G, …)` introduced anywhere; the two previously-unverified
+  global installs gained the standard read-back.
+- Packaging: metadata `code` (75) and items.lua `ModItemCode` (75) identical
+  in content and order (script-verified after the final leg).
+- Probe-authoring audit: 78 `Register(` across 8 files, every file with ≥ as
+  many explicit `return "PASS"` sites (10/10, 20/21, 18/18, 12/12, 7/7, 3/3,
+  2/3, 6/6).
+- Mod-environment API: the helpers use only APIs the pack already used, plus
+  three engine globals new to the pack — `GetPreGameMainMenu` (the TestKit
+  autorun's proven poll target), `WaitMessage` (the engine's own mod-error
+  dialog surface, Mod.lua:2229-2243) and `RealTime` — none on the
+  ModEnvBlacklist (ENGINE_FACTS sandbox entry).
+
+**What shipped.**
+- **C2**: `SMRFixPack.Log` / `Require` / `SetGlobal` / `WhenActive` /
+  `DataPatch` in 00_Core; 58 files migrated onto them (11 log clones, 12
+  global installs, 16 handler gates, 4 DataPatch scaffolds, ~60 Require
+  preflights). The F75/B3/A1 lessons and the PT-51 detail rule now live in
+  the runner, not in per-file copies. A failing declaring-class check now
+  gets a loud `__parents`-walk diagnosis naming the true declarer, so the F64
+  failure mode can no longer masquerade as a game update.
+- **C4**: the EXIST-only tier enumerated (42 modules, criterion in the
+  preflight doc); bare-global indexing rawget-guarded through the helper
+  everywhere; the IndependenceTerraforming missing-target latch added (it
+  previously reported `active` forever if a future patch removed the tech —
+  the B3 gap); the deepening items above.
+- **C1**: `SMRFixPack.UpdateSuspects()` + a pregame-menu `WaitMessage` dialog
+  shown ONLY when ≥1 fix deactivated over a game-code change (status
+  `error`, the `update_suspect` mark, or the target-changed/install-failed
+  detail conventions; opt-in / Mod-Options-off / verified-already-correct
+  are never reported). This title never fires `Msg("PreGameMenuOpen")`
+  (its init.lua replaces OpenPreGameMainMenu without it — the audit's cited
+  engine precedent is dead code here), so the surface polls
+  `GetPreGameMainMenu()` the way the TestKit autorun does. The dialog is the
+  engine's own gamepad-native message surface, so it reaches console players
+  — the pack's first failure surface that does (FIX_POLICY §7).
+- **NOT shipped, by preflight decision** (`9f51f52`): the shared watchdog
+  skeleton (F02 and F78 are different mechanisms — heartbeat-vs-signature —
+  and consolidating them removed ~zero duplication at maximum risk); force-
+  fitting the three divergent DataLoaded scaffolds (TechDescriptionBuilding,
+  Opt_MultipleSuns, FirstAsteroid's latch); Require for the three
+  partial-install applies (ShelterReflex, StorageRateModifiers,
+  SequenceLatents — their per-target semantics are not gate-or-die). C3
+  merges were never in scope (BARRED). The three drone modules
+  (Opt_DroneOverhaul, Opt_DroneStatDials, Fix_ExtenderFlapChurn) are
+  untouched per the carve-out and verified present in every fingerprint.
+
+**What this certification does NOT claim.**
+- **NOT "no behaviour changed."** Probes drive planted globals; a stand-in
+  cannot reach a game file that localised a global at load time. What IS
+  claimed: every fix still applies, still reports the same status, detail
+  and reason string, and every probe returns the same verdict, in the
+  all-toggles-ON and baseline configurations, across eleven legs.
+- **Nothing here is playtested on a real colony or a real save.** Owed:
+  the default-config leg (above) and normal play regression exposure.
+- **C4's deeper checks are untestable against a future patch today, by
+  construction.** They would catch a renamed/removed/reshaped target at the
+  moment it happens; they would NOT catch a same-named function edited in
+  place — and neither can C1's report, whose dialog text says so.
+- **Residual risk, named plainly:** a consolidated code path whose behaviour
+  differs only on a real colony state the harness cannot plant — the most
+  exposed candidates are the WhenActive-gated LoadGame/PostLoadGame sweeps
+  and the DataPatch-run preset passes (identical fingerprints prove their
+  load-time behaviour, not their mid-colony behaviour). What would close it:
+  one ordinary play session with the log checked afterwards (zero
+  `[CommunityFixPack]` error lines, fixes still `applied`), plus the owed
+  default-config leg. The after-every-patch extraction diff (WORKFLOW.md)
+  remains the only true re-verification for the ~29 pinned replacement
+  bodies.
+
+**Deliberate deviations from strict preservation** (all fail-path-only,
+invisible in every measured configuration, itemised for the record): the two
+outlier installs' new read-back failure strings; AcknowledgedWarnings'
+sequential (vs batch) install verification; the WhenActive veto re-read on 14
+handlers that previously checked status only (newly effective only for a
+mid-session console veto — FIX_POLICY §2's stated intent); DataPatch's heal
+guarded against `"disabled"`/`"error"` where LastTransmission's was
+unguarded (unreachable difference); Independence's new missing-target latch
+reason; ClassicRockets' first-vs-last failing-name report when multiple
+targets vanish at once.
+
+---
+
 ## F83 BUILT — the First Asteroid prefabs are recovered on load — 2026-07-30 late (build session, unattended harness leg)
 
 The headline task the previous session queued. Read the audit (§1-§3, §7), the

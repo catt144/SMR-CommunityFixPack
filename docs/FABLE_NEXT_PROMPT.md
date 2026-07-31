@@ -1,4 +1,4 @@
-# Continuation prompt (model-agnostic) — rewritten 2026-07-31, mid-Phase-4, drones queued next
+# Continuation prompt (model-agnostic) — rewritten 2026-07-31, Phase 4 COMPLETE, drones unblocked
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks the model per task and everything here works identically on
@@ -8,17 +8,21 @@ file goes stale the moment another session commits. (The filename keeps its
 historical FABLE_ prefix so existing references stay valid — nothing in it is
 model-specific.)
 
-## Where the project stands (2026-07-31 — Phase 4 IN FLIGHT, drones now top of the list)
+## Where the project stands (2026-07-31 — Phase 4 COMPLETE, drones now top of the list)
 
-> ⚠️ **A PHASE 4 REBUILD SESSION MAY STILL BE RUNNING.** `git log` first. It
-> commits one stage per commit with `leg identical` in the message. **If it has
-> not finished, do not touch `Code/`, `STATUS.md`, `SESSION_LOG.md`,
-> `FUTURE_IDEAS.md` or `AUDIT_FINDINGS.md`** — it owns those until it reports.
-> Its brief is `docs\PHASE4_REBUILD_PROMPT.md` (it deletes that file on
-> completion, so **if the file is gone, the job is done**). Scope: audit
-> Phase 4 items **C1 + C2 + C4** — shared core helpers, deeper self-checks, a
-> deactivated-fixes surface. **C3 merges are BARRED.** The three drone modules
-> are deliberately **carved out** of the migration.
+> ✅ **PHASE 4 IS COMPLETE AND CERTIFIED (2026-07-31).** C2 shared helpers
+> (`SMRFixPack.Log/Require/SetGlobal/WhenActive/DataPatch`, 58 files
+> migrated), C4 deeper self-checks, and the C1 update-deactivation report (a
+> pregame-menu dialog, console-visible, honest about what self-checks cannot
+> see). Eleven unattended legs, every one identical to the control
+> fingerprint; **probes are now 78** (`UpdateReport` added). Full
+> certification with evidence and residual risk: the newest SESSION_LOG leg;
+> preflight record: `docs\archive\PHASE4_PREFLIGHT.md`. **C3 merges: NEVER**
+> (owner standing decision). The three drone modules were carved out and are
+> untouched — the drone rebuild writes natively against the new helpers.
+> **⚠️ ONE LEG OWED: the shipping default configuration** — needs the owner
+> to set the six toggles OFF + dials to base, then one unattended leg;
+> predicted `68/74`, **63 / 0 / 15 / 0** at 78 probes (STATUS A/B table).
 >
 > ⛔ **SCOPE CONTROL IS NOW A STANDING RULE — `docs\FUTURE_IDEAS.md`.** Good
 > ideas that are not needed before launch are PARKED there. **Nothing in that
@@ -31,8 +35,8 @@ model-specific.)
 > ⭐ **DRONES ARE THE NEXT MAJOR PIECE OF WORK, and nothing about them is
 > deferred.** The D06 entry now carries the full plan of record. Reading order:
 > **D06 entry → `docs\DRONE_PRIORITY_SYSTEM.md` → `docs\DRONE_RESEARCH_BRIEF.md`.**
-> **Four research questions gate the design and Q1 can kill it outright — run
-> them only AFTER Phase 4 finishes**, then a build brief gets written against
+> **Four research questions gate the design and Q1 can kill it outright —
+> Phase 4 is done, so they are UNBLOCKED**; a build brief gets written against
 > real answers. **⛔ NO DRONE PLAYTESTING until a final plan exists**
 > (freeze banner in `PLAYTEST_CHECKLIST.md` §1) — PT-52 A/B/B2 are frozen
 > pending invalidation; PT-10 is explicitly NOT frozen.
@@ -44,19 +48,20 @@ model-specific.)
 > `1/61/15/0` (where the new probe FAILs, proving it discriminates). **What is
 > owed is human: PT-59** (checklist §3) — reload leg **1/1/1**, healthy
 > no-reload leg **still 1/1/1 not 2/2/2** (the double-grant guard), reload twice
-> still 1/1/1. ⚠️ Those leg numbers are **pre-Phase-4**; re-read STATUS after it
-> reports.
+> still 1/1/1. (Post-Phase-4 leg numbers are in STATUS: all-ON `74/74` →
+> `68/0/10/0` at 78 probes; baseline `1/62/15/0`; default-config leg owed.)
 >
 > The audit's **4-item needs-eyes list** (checklist §6) is still open and cheap.
 > Item 1 validates the popup audit's one load-bearing inference; item 2 grades
 > F83's second site, `ReconCenterDiscoveryAsteroid`; item 3 settles F85's tier.
 > **F85 stays observation-gated — do not build it.**
 
-**Next session, in order: (1) if Phase 4 is unfinished, leave it alone and pick
-something outside its files; (2) PT-59 if the owner is at the keyboard — short,
-and it closes F83; (3) the four drone research questions once Phase 4 reports;
-(4) otherwise the D10 workshops build**, which is speced, user-approved,
-game-free and un-gated. Open playtests, suggested order: **PT-59** · **PT-53
+**Next session, in order: (1) the owed default-config leg if the owner has set
+the six toggles OFF + dials base (one unattended run, predicted 63/0/15/0 at
+78 probes); (2) PT-59 if the owner is at the keyboard — short, and it closes
+F83; (3) the four drone research questions — Phase 4 is done, they are
+unblocked; (4) otherwise the D10 workshops build**, which is speced,
+user-approved, game-free and un-gated. Open playtests, suggested order: **PT-59** · **PT-53
 Trigger E** (last thing before D07 → `tested`) · **PT-54** (wave-6 disasters) ·
 checklist **§6 needs-eyes riders** · **PT-20/21** last. **PT-52 is FROZEN — do
 not run it.** Decisions still owed: the FIX_POLICY §4 amendment; audit Phase 4's
@@ -94,8 +99,9 @@ Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
 (`Opt_DroneStatDials`, active-at-base = vanilla, **`tested` 2026-07-30 — PT-56
 PASS**). **`Fix_FirstAsteroidPrefabs` was ADDED 2026-07-30 late (F83)**; earlier
 the same day **two modules were DELETED and one guard removed** — see "the
-reachability turn" below. TestKit probes: **77** (new wave file
-`56_Probes_Wave7.lua`). Everything committed and pushed.
+reachability turn" below. TestKit probes: **78** (`56_Probes_Wave7.lua` added
+by F83; Phase 4's `UpdateReport` probe added 2026-07-31). Everything committed
+and pushed.
 
 > ⛔ **READ THIS BEFORE WRITING ANY FIX — FIX_POLICY §4a, owner hard rule,
 > 2026-07-30: this pack NEVER fixes other mods' problems.** Not bugs caused by
@@ -106,8 +112,12 @@ reachability turn" below. TestKit probes: **77** (new wave file
 > precedent: two violated this rule and one is already retired under it (F28;
 > F29 is flagged, awaiting the owner).
 
-**The code gate is CLEAR and NOTHING is owed on the harness side.** Three legs
-post-F83-build, all unattended, 77 probes each:
+**The code gate is CLEAR; the ONLY harness item owed is the post-Phase-4
+default-config leg** (see the Phase 4 banner at the top — the account was
+all-ON throughout the rebuild). Post-Phase-4 current legs, 78 probes:
+all-toggles-ON `74/74` → **68/0/10/0** (12.30.34); baseline **1/62/15/0**
+(12.32.11). The three post-F83 legs below are the superseded 77-probe set,
+kept because PT-59's expectations were written against them:
 
 - **all six toggles ON** (log `Mars.exe-20260730-23.29.22`) — **`74/74` active**,
   **67 PASS / 0 FAIL / 10 SKIP / 0 ERROR**.
@@ -192,8 +202,7 @@ it.**
 
 **A whole-mod audit ran 2026-07-29 and its Phase 1-3 remediation is DONE
 (same day, one-off fix session).** Findings + the plan (all Phase 1-3 boxes
-ticked) live in `docs/archive/AUDIT_FINDINGS.md` (ARCHIVED 2026-07-30 — Phases 1-3 done; only the Phase 4 go/no-go is still live); Phase 4 (core helpers, merges,
-deactivation surface) stays deferred pending a user go-decision. Playtest
+ticked) live in `docs/archive/AUDIT_FINDINGS.md` (ARCHIVED 2026-07-30 — Phases 1-3 done; **Phase 4 EXECUTED 2026-07-31**: C2 helpers + C4 deepening + the C1 surface shipped, C3 merges settled NEVER). Playtest
 consequences NOW:
 
 1. **The opt-module first-enable defect is FIXED (audit 1.3) and CONFIRMED IN
@@ -241,9 +250,9 @@ origin evidence — do not assume a healthy colony.
 **Open decisions on the user (nothing blocks on you):** ~~F79~~ **CLOSED
 `wontfix` 2026-07-31 — owner declined the trains-for-services feature
 completion (risk exceeds benefit on large multi-stop maps; F80 must be
-explained first if ever revisited). Do not re-propose or park it.** audit Phase 4
-go/no-go (core-helper extraction + module merges — deferred, see
-AUDIT_FINDINGS); D06 iteration beyond knobs (design changes are user calls;
+explained first if ever revisited). Do not re-propose or park it.** ~~audit
+Phase 4 go/no-go~~ — **EXECUTED 2026-07-31** (C3 merges settled NEVER);
+D06 iteration beyond knobs (design changes are user calls;
 the stat dials are BUILT — D09, 2026-07-29 late, range widened to 1x/2x/3x/5x
 by user call after the live no-clamp probe; **PT-56 PASSED 2026-07-30, D09 `tested`**).
 D08 (extender overhaul) is speced in `DRONE_OVERHAUL_OPTIONS.md`, nothing built.
@@ -361,8 +370,7 @@ Your jobs, in the order they usually come up:
    owner's yes/no — items on it are still live until answered, but do not start
    one without asking first.
 8. Only when relevant: `docsrchive\AUDIT_FINDINGS.md` (ARCHIVED — audit findings + the plan;
-   Phases 1-3 implemented 2026-07-29, Phase 4 awaiting the user's
-   go-decision); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
+   Phases 1-3 implemented 2026-07-29, Phase 4 EXECUTED 2026-07-31); `docs\DRONE_OVERHAUL_OPTIONS.md` (only if D06 needs design
    iteration, not just knob tuning — the shipped core is the veto variant of
    option H + option A; upgrade paths H-v2/B/C and the DECISION section are
    there).
@@ -417,7 +425,7 @@ silent.
   MOD_DESCRIPTION/README corrections, ENGINE_FACTS + STATUS/SESSION_LOG
   restructure). What it left for humans: **~~PT-55~~ (CLOSED IN FULL
   2026-07-30, archived — see the section above)** and the **Phase 4
-  go-decision** (user).
+  go-decision** (user — since GIVEN and EXECUTED 2026-07-31).
 - **~~PT-55~~ CLOSED IN FULL 2026-07-30** — archived; audit A2 caveat retired.
   **PT-56 also CLOSED IN FULL 2026-07-30 → D09 `tested`** (archived).
 - **PT-52 STRESS A/B — re-run with the v2 harness (the v1 run's metric was
@@ -550,7 +558,7 @@ silent.
   seniors-in-workshops. **A proposed-parking list sits at the bottom of that
   file awaiting the owner's yes/no — check it before treating any of those
   items as owed, and do not start one without asking.**
-- **DECISIONS owed (user):** audit Phase 4 go/no-go; D08;
+- **DECISIONS owed (user):** ~~audit Phase 4 go/no-go~~ (EXECUTED 2026-07-31); D08;
   **D11 shuttle same-pair passenger batching — feasibility is on the BUGS entry
   but it is NOT approved: ask fresh before any build (user's explicit
   instruction 2026-07-30); multi-hop passenger routing is REJECTED, do not

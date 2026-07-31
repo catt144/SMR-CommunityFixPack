@@ -198,7 +198,16 @@ awaiting an answer, and B's recommendation has been withdrawn and rewritten.**
 ---
 
 
-### B. Audit Phase 4 — ⚠️ STILL OPEN, and the assistant's park recommendation is WITHDRAWN
+### B. Audit Phase 4 — ✅ RESOLVED 2026-07-31: EXECUTED, not parked
+
+> **Phase 4 ran as the one-off `PHASE4_REBUILD_PROMPT.md` session on
+> 2026-07-31 and is COMPLETE AND CERTIFIED** — C2 shared helpers, C4 deeper
+> self-checks, and the C1 update-deactivation surface, with eleven identical
+> unattended legs and a written certification (newest SESSION_LOG leg;
+> preflight record in `docs/archive/PHASE4_PREFLIGHT.md`). **C3 merges are
+> settled NEVER** per the owner's standing decision. One default-config leg
+> remains owed (STATUS A/B table). Everything below is the historical
+> decision record.
 
 > **Owner's counter-argument, 2026-07-31 — it is correct and it changes the
 > answer:** *"I am picturing a real risk of regression after we launch a live

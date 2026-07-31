@@ -11,9 +11,9 @@ remediation 3.3). Session legs are append-only in
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
-93 rows. **TestKit probes: 77** (the F83 probe added a new wave file,
-`56_Probes_Wave7.lua`). Counts moved 2026-07-30 late with the **F83 build**
-(`Fix_FirstAsteroidPrefabs`, below).
+93 rows. **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
+before that the F83 probe added `56_Probes_Wave7.lua`). Counts moved 2026-07-31
+with **PHASE 4 COMPLETE** (below).
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
 reachable only from mod code. "For modder benefit" is no longer a valid reason
@@ -57,7 +57,7 @@ modifiers removed = vanilla. D09 entry in BUGS.md; **PT-56 PASSED IN FULL
 post-D09 A/B pair RAN unattended the same night — see the probe-state table
 below (code gate CLEAR).**
 
-**Landed earlier the same day (audit-remediation session):** `docs/archive/AUDIT_FINDINGS.md` (ARCHIVED 2026-07-30 — Phases 1-3 complete; only the Phase 4 go/no-go remains open)
+**Landed earlier the same day (audit-remediation session):** `docs/archive/AUDIT_FINDINGS.md` (ARCHIVED 2026-07-30 — Phases 1-3 complete; **Phase 4 EXECUTED 2026-07-31**, C3 permanently barred)
 Phases 1-3 implemented — code: veto re-check in the three data-patch fixes
 (A1), DustSickness data-loaded latch (B3), file-scope install for the three
 flattening-unsafe Opt_ hooks so a first mid-session enable works (A2),
@@ -144,11 +144,25 @@ seniors-in-workshops. A proposed-parking list sits at the bottom of that file
 awaiting the owner's yes/no — **read it before treating anything on it as
 owed.**
 
+**⭐ PHASE 4 COMPLETE AND CERTIFIED (2026-07-31).** C2 shared helpers
+(`SMRFixPack.Log/Require/SetGlobal/WhenActive/DataPatch` in 00_Core, 58 files
+migrated), C4 deeper self-checks (42-file EXIST-only tier enumerated and
+raised; declaring-class failures now loudly diagnosed via a `__parents` walk),
+and the C1 update-deactivation report (pregame-menu dialog, console-visible,
+shown only when ≥1 fix deactivated over a game-code change; honest about what
+self-checks cannot see). Eleven unattended legs, every one identical to the
+control fingerprint (`docs/archive/fingerprint_before.txt` →
+`fingerprint_after.txt`); full certification with evidence and residual risk
+in the newest SESSION_LOG leg. C3 merges were BARRED and not done; the three
+drone modules are untouched per the carve-out. **⚠️ ONE LEG OWED: the shipping
+default configuration** — the account was all-ON throughout (owner flipped the
+toggles mid-morning); when the six toggles are next OFF + dials at base, run
+one unattended leg; predicted `68/74`, **63 / 0 / 15 / 0** at 78 probes.
+
 **Open user decisions:** ~~F83 fix option 1 go/no-go~~ — **GO GIVEN and BUILT
 2026-07-30** (see the F83 build block above; PT-59 is the owed keyboard A/B).
-Still open:
-Phase 4 go/no-go (core helpers, module merges,
-deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half
+~~Phase 4 go/no-go~~ — **EXECUTED 2026-07-31, see above.** Still open:
+D01 standing-export half
 (spec decided 2026-07-26, unwritten); F48 (parked section below); drone
 overhaul structural choice (DRONE_OVERHAUL_OPTIONS.md — the stat dials are
 BUILT (D09); the structural choice stays gated on the B2 re-run);
@@ -173,29 +187,32 @@ omits that it bridges life support. Text patch, but it converts a localized `T`
 into an English-only `Untranslated` string, so **decide it together with D10's T1
 text repairs** — identical tradeoff, should not be answered twice differently.
 
-**A/B probe state — CURRENT is the post-F83-build set of THREE legs at 77
-probes, all measured 2026-07-30/31, and NOTHING IS OWED.** All six toggles ON:
-`74/74` → `67 / 0 / 10 / 0`. Default config, six toggles OFF + dials at base:
-`68/74` → `62 / 0 / 15 / 0` — **the predicted numbers exactly**. Baseline
-(`code` list emptied): `1 / 61 / 15 / 0`, where the new `FirstAsteroidPrefabs`
-probe **FAILs** with `fix pack not loaded (bug reproduces)`, proving it
-discriminates instead of false-PASSing (the wave-6 probe-authoring trap). Every
-leg: zero `[CommunityFixPack]` error/disabled/FAILED lines, no log line naming
-our `Code/`, known noise only. **Both shipping configurations are measured
-post-F83-build.** The pre-F83 pair at 76 probes (`73/73` → `66/0/10/0`;
-`67/73` → `61/0/15/0`) is now historical, as are the older `/75` and `/74` rows.
+**A/B probe state — CURRENT is the POST-PHASE-4 set at 78 probes (2026-07-31).**
+All six toggles ON: `74/74` → **68 / 0 / 10 / 0** (leg 12.30.34). Baseline
+(`code` list emptied): **1 / 62 / 15 / 0** (leg 12.32.11), where both the
+`FirstAsteroidPrefabs` and the new `UpdateReport` probes **FAIL** with
+`fix pack not loaded (bug reproduces)`, proving they discriminate. **⚠️ The
+default-config leg is OWED** (account was all-ON throughout Phase 4; needs the
+owner to set six toggles OFF + dials base); predicted `68/74` →
+**63 / 0 / 15 / 0**. Every measured leg: zero `[CommunityFixPack]`
+error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
+The post-F83 set at 77 probes (`74/74` → `67/0/10/0`; default `68/74` →
+`62/0/15/0`; baseline `1/61/15/0`) is now historical, as are all older rows.
 
 | Leg | Active | Result |
 |---|---|---|
+| **CURRENT — POST-PHASE-4, all six toggles ON, 2026-07-31 12.30 (unattended), 78 probes** | **74/74** | **68 / 0 / 10 / 0** |
+| **CURRENT baseline — POST-PHASE-4, `code` list emptied, 2026-07-31 12.32 (unattended), 78 probes** | — | **1 / 62 / 15 / 0** — `FirstAsteroidPrefabs` + `UpdateReport` FAIL here (`bug reproduces`) |
+| **OWED — POST-PHASE-4 default config (six toggles OFF + dials base), 78 probes** | *predicted 68/74* | *predicted 63 / 0 / 15 / 0 — needs the owner to flip the toggles* |
 | Baseline, historical (`code` list emptied) | — | **1 PASS / 61 FAIL / 15 SKIP / 0 ERROR** *(77 probes, pre-F28)* |
 | Fixed, default config (six toggles OFF) | 69/75 *(pre-F24-removal)* | **62 / 0 / 15 / 0** |
 | Fixed, all six toggles ON + dials | 75/75 *(pre-F24-removal)* | **67 / 0 / 10 / 0** |
 | Post-removal re-verify, 2026-07-30 17.25 (unattended) | 74/74 *(pre-F28-removal)* | **66 / 1 / 10 / 0** — the 1 FAIL was the probe defect below |
 | All six toggles ON, 2026-07-30 19.20 (unattended), 76 probes | 73/73 | **66 / 0 / 10 / 0** — pre-F83-build |
 | Default config, six toggles OFF + dials at base, 2026-07-30 19.32 (unattended), 76 probes | 67/73 | **61 / 0 / 15 / 0** — pre-F83-build |
-| **CURRENT — post-F83 build, all six toggles ON, 2026-07-30 23.29 (unattended), 77 probes** | **74/74** | **67 / 0 / 10 / 0** |
-| **CURRENT baseline — post-F83 build, `code` list emptied, 2026-07-30 23.46 (unattended), 77 probes** | — | **1 / 61 / 15 / 0** — `FirstAsteroidPrefabs` FAILs here (`bug reproduces`) |
-| **CURRENT — post-F83 build, default config, six toggles OFF + dials at base, 2026-07-31 01.37 (unattended), 77 probes** | **68/74** | **62 / 0 / 15 / 0** |
+| Post-F83 build (superseded by Phase 4), all six toggles ON, 2026-07-30 23.29 (unattended), 77 probes** | **74/74** | **67 / 0 / 10 / 0** |
+| Post-F83 baseline (superseded by Phase 4), `code` list emptied, 2026-07-30 23.46 (unattended), 77 probes** | — | **1 / 61 / 15 / 0** — `FirstAsteroidPrefabs` FAILs here (`bug reproduces`) |
+| Post-F83 default config (LAST measured default, superseded by Phase 4), six toggles OFF + dials at base, 2026-07-31 01.37 (unattended), 77 probes** | **68/74** | **62 / 0 / 15 / 0** |
 
 **The 01.37 leg (2026-07-31) — the shipping default configuration post-F83,
 CLEAN, and the last thing the build owed on the harness side.** Run after the

@@ -128,7 +128,7 @@ see or steer any of it.
 
 ## Severity C — structural, decide deliberately
 
-### C1. 29 of 74 modules are full replacements pinned to build 1.0.7.396349 `[~ accepted risk — mitigations tracked]`
+### C1. 29 of 74 modules are full replacements pinned to build 1.0.7.396349 `[x — the user-visible deactivation surface SHIPPED 2026-07-31 (Phase 4); the inherent replacement risk remains accepted, mitigated by the release-gate extraction diff]`
 Self-checks are existence/layout checks (the sandbox has no introspection) —
 they catch renamed/removed targets, **not** an edited same-named function. After
 a game patch that edits those functions in place, the pack silently reinstates
@@ -140,7 +140,7 @@ deactivated after game update" surface is buildable (engine precedent:
 Mod.lua:2231-2243). Merging is not the answer; the risk is inherent to
 replacements.
 
-### C2. Duplicated machinery belongs in the core `[~ deferred — Phase 4]`
+### C2. Duplicated machinery belongs in the core `[x — DONE 2026-07-31 (Phase 4): Log/Require/SetGlobal/WhenActive/DataPatch in 00_Core, 58 files migrated; watchdog skeleton deliberately NOT consolidated (different mechanisms — preflight scope reduction)]`
 Quantified: `log()` helper cloned in 11 files + 5 inline variants (6 copies
 missing the `%%` escaping 00_Core documents as a crash class, :26-30 — latent);
 ~154 self-check preflight sites of the same loop shape; status-gate prologue
@@ -151,7 +151,7 @@ verifier ×7. Candidates: `Require{}`, `WhenActive(id, fn)`, `DataPatch(id,
 opts)`, `SetGlobal(name, fn)`, shared watchdog skeleton (hand-rolled twice:
 F02, F78).
 
-### C3. Merge candidates `[~ deferred — Phase 4]`
+### C3. Merge candidates `[~ CLOSED — NEVER, owner standing decision 2026-07-31: no fix redundant, no load-order sensitivity, benefit ≈0, ID-breaking post-launch]`
 Track-salvage trio F45/F44/F47 (F44 re-implements F45's stamping inline;
 F47's logic written in terms of F44's semantics); DustSickness pair (same
 scaffold — merging fixes A1 once); weather family F02/F78(/F81) (identical
@@ -365,15 +365,18 @@ deleted); Phase 4 is deliberately deferred and needs a separate go-decision.
   `status + date + PT ref` (result prose lives in the entry; heading tag
   stays the summary) — mechanical, one pass.
 
-## Phase 4 — DEFERRED (separate go-decision; touches tested code mid-playtest)
+## Phase 4 — EXECUTED 2026-07-31 (one-off PHASE4_REBUILD_PROMPT session; certification in SESSION_LOG)
 
-- `[~]` Core helper extraction (C2): `DataPatch` runner, `Require`,
-  `WhenActive`, `SetGlobal`, shared watchdog.
-- `[~]` Module merges (C3): track-salvage trio, DustSickness pair, weather
-  family, F55/F57b.
-- `[~]` User-visible deactivation surface (C1): "N fixes deactivated after a
-  game update" pregame notice.
-- `[~]` Early-file self-check deepening beyond 1.6 (C4).
+- `[x]` Core helper extraction (C2): `DataPatch` runner, `Require`,
+  `WhenActive`, `SetGlobal`. The shared watchdog was DROPPED by preflight
+  decision (F02/F78 are different mechanisms; ~zero duplication at maximum
+  risk).
+- `[~]` Module merges (C3): **NEVER** — owner standing decision (see C3 above).
+- `[x]` User-visible deactivation surface (C1): pregame `WaitMessage` notice,
+  console-visible, honest about the edited-in-place blind spot; `UpdateReport`
+  probe added (78 total).
+- `[x]` Early-file self-check deepening beyond 1.6 (C4): through the Require
+  helper; declaring-class failures loudly diagnosed via `__parents` walk.
 
 Rationale for deferral: all four change code that is probe-verified and
 partially play-verified; the defect fixes above are minimal diffs, these are
