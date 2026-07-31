@@ -185,8 +185,14 @@ end
 --   })
 --   ...Register(id, { apply = function() ...pre-checks...; run() end })
 --
+-- `run()` at apply time is a NO-OP by design since F87 (see below) — the runner
+-- fires itself from the message that actually leaves the game ready. The call is
+-- kept because a LIVE re-apply (Mod Options reconciliation, mid-session) happens
+-- long after ClassesBuilt and must do the work.
+--
 -- The runner owns the skeleton every scaffold shared:
 --   * one pass per (re)load — ctx.patched short-circuit, reset by DataChanged;
+--   * ctx.classes_built — nothing runs before flattening (F87);
 --   * the veto re-read before every pass (audit A1: these handlers install
 --     unconditionally and Register's veto only skips apply);
 --   * ctx.data_loaded — sites gate their missing-target latch on it (the F75
@@ -200,8 +206,28 @@ end
 --     always a string, never nil (the PT-51 ListFixes crash);
 --   * ctx.heal() — restore an "inactive" mislabel to active with "" detail;
 --     never overwrites "disabled" (the user veto) or "error" (the A1 guard).
+--
+-- F87 (2026-07-31): the runner no longer does work at apply time, and it owns
+-- the ENABLE PATH. Mod code always loads before class flattening, so a pass that
+-- CONSTRUCTS a preset object cannot run at apply time. Cold boot hid that from
+-- every A/B leg we have ever run — the presets are not loaded then either, so
+-- every pass returned early. A player's FIRST run does not hide it:
+-- they tick the mod at the main menu of a running process, the engine does an
+-- in-place reload (ModsReloadItems -> ReloadLua, Mod.lua:2145), and our code runs
+-- with the presets ALREADY loaded and the classes NOT yet built.
+-- Fix_DustSicknessBiorobots threw exactly there.
+-- So: nothing runs until `ClassesBuilt` has fired in this Lua load. Triggers,
+-- any of which may be the one that does the work (all idempotent via ctx.patched):
+--   * ClassesBuilt  (classes.lua:1099) — the enable path's real trigger; the
+--     presets are already up by then, so this pass does the work.
+--   * DataLoaded    (Dlc.lua:661)      — the cold-boot trigger; fires AFTER
+--     ClassesBuilt on that path, so it is also a safe classes-built fallback.
+--   * ModsReloaded  (Mod.lua:2193)     — belt for the enable path: fired after
+--     both the Lua reload and the item load.
+--   * DataChanged                      — Mod Editor / re-fire re-arm, unchanged.
 function SMRFixPack.DataPatch(id, opts)
-	local ctx = { patched = false, ever_changed = false, data_loaded = false }
+	local ctx = { patched = false, ever_changed = false, data_loaded = false,
+		classes_built = false }
 	function ctx.latch(detail, log_suffix, benign)
 		local entry = SMRFixPack.fixes[id]
 		if entry then
@@ -222,17 +248,57 @@ function SMRFixPack.DataPatch(id, opts)
 		end
 	end
 	local function run()
+		-- F87: never before flattening. `g_Classes` is NOT a usable test here —
+		-- on a reload it still holds the PREVIOUS build's classes while the
+		-- current ones are bare classdefs — so the only truth is "our own
+		-- ClassesBuilt handler has fired in this Lua load".
+		if not ctx.classes_built then return end
 		if ctx.patched then return end
 		local disabled = rawget(_G, "SMRFixPack_Disabled")
 		if type(disabled) == "table" and disabled[id] then return end
-		opts.pass(ctx)
+		-- The passes now run from a message handler, and Msg calls handlers
+		-- through `procall` (cthreads.lua:20) — a throw there would be swallowed
+		-- and the fix would keep reporting `active` while having done nothing.
+		-- That is the F87 failure mode (silently unfixed), so own the error the
+		-- way run_apply does: report it, and let C1 see it.
+		local ok, err = pcall(opts.pass, ctx)
+		if not ok then
+			local entry = SMRFixPack.fixes[id]
+			if entry then
+				entry.status = "error"
+				entry.detail = tostring(err)
+			end
+			ctx.patched = true   -- do not re-throw on every later trigger
+			log("%s: FAILED to patch data: %s", id, tostring(err))
+		end
+	end
+	-- The engine's own flag (Dlc.lua:51/:663 — declared under FirstLoad, so it
+	-- SURVIVES a Lua reload) is the only way to learn the presets were loaded
+	-- before we existed. Without it a site's missing-target latch would read the
+	-- enable path as "presets not loaded yet" and never fire (the F75 gap again).
+	local function note_data_loaded()
+		if not ctx.data_loaded and rawget(_G, "DataLoaded") == true then
+			ctx.data_loaded = true
+		end
+	end
+	OnMsg.ClassesBuilt = function()
+		ctx.classes_built = true
+		note_data_loaded()
+		run()
+	end
+	OnMsg.ModsReloaded = function()
+		ctx.classes_built = true
+		note_data_loaded()
+		run()
 	end
 	OnMsg.DataLoaded = function()
+		ctx.classes_built = true
 		ctx.data_loaded = true
 		run()
 	end
 	OnMsg.DataChanged = function(classes)
 		if classes and opts.changed_class and not classes[opts.changed_class] then return end
+		note_data_loaded()
 		ctx.patched = false
 		run()
 	end

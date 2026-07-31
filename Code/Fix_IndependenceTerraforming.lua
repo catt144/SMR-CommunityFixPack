@@ -113,7 +113,8 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 SMRFixPack.Register(FIX_ID, {
 	title = "Independent Terraforming discounts special projects by the 20% it advertises",
 	apply = function()
-		patch()   -- no-op unless the presets are already loaded
+		patch()   -- no-op at apply time (F87); the runner fires itself once
+		          -- the classes are built AND the presets are loaded
 	end,
 })
 

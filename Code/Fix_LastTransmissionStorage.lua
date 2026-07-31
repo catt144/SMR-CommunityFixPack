@@ -163,6 +163,7 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 SMRFixPack.Register(FIX_ID, {
 	title = "Last Transmission's power/water/oxygen storage opinions actually count",
 	apply = function()
-		patch()   -- no-op unless the presets are already loaded
+		patch()   -- no-op at apply time (F87); the runner fires itself once
+		          -- the classes are built AND the presets are loaded
 	end,
 })

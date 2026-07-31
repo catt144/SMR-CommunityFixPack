@@ -24,8 +24,12 @@
 -- position, so a reshuffled preset is still handled; if it matches nothing the fix
 -- reports itself inactive.
 --
--- Timing: presets load after mod code (LoadData -> Msg("DataLoaded"),
--- CommonLua\Dlc.lua:640-662), hence the DataLoaded/DataChanged handlers.
+-- Timing: on a cold boot the presets load after mod code (LoadData ->
+-- Msg("DataLoaded"), CommonLua\Dlc.lua:640-662). On the ENABLE path — the player
+-- ticking the mod at the main menu, which is every player's first run — they are
+-- loaded ALREADY and DataLoaded never fires again, while the classes are NOT yet
+-- built. Both are the shared SMRFixPack.DataPatch runner's problem now (F87);
+-- this file must only assume that when its pass runs, both are ready.
 --
 -- Savegame repair: biorobots already carrying the trait keep losing Health for the
 -- rest of the game, so a LoadGame pass removes it from them. It also clears
@@ -60,6 +64,16 @@ local function has_android_filter(filters)
 	return false
 end
 
+-- Built exactly the way the shipped data builds its sibling filter
+-- (Data\StoryBit\DustSickness.lua:66-69): HasTrait is a Condition, whose
+-- StoreAsTable is set false in OnMsg.ClassesGenerate (Lua\_fixup.lua:148-152),
+-- so the prop-LIST form is the right one. PlaceObj (PropertyObject.lua:1213)
+-- also fails soft — it returns nil for a class that is not built, where
+-- `HasTrait:new` throws (F87).
+local function make_android_filter()
+	return PlaceObj("HasTrait", { "Trait", "Android", "Negate", true })
+end
+
 -- Storybit presets are small trees of nested PlaceObj nodes (outcomes hold
 -- effects hold effects), so walk them rather than hard-coding indices.
 local function patch_node(node, seen, depth, stats)
@@ -70,8 +84,13 @@ local function patch_node(node, seen, depth, stats)
 		local filters = node.Filters
 		if type(filters) == "table" then
 			if not has_android_filter(filters) then
-				filters[#filters + 1] = HasTrait:new{ Trait = "Android", Negate = true }
-				stats.patched = stats.patched + 1
+				local filter = make_android_filter()
+				if filter then
+					filters[#filters + 1] = filter
+					stats.patched = stats.patched + 1
+				else
+					stats.failed = stats.failed + 1
+				end
 			end
 		end
 	end
@@ -87,7 +106,7 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 	pass = function(ctx)
 		local storybits = rawget(_G, "StoryBits")
 		local present = false
-		if type(storybits) == "table" and type(rawget(_G, "HasTrait")) == "table" then
+		if type(storybits) == "table" then
 			for _, id in ipairs(STORYBIT_IDS) do
 				if storybits[id] then
 					present = true
@@ -106,10 +125,27 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 			return
 		end
 
-		local stats = { found = 0, patched = 0 }
+		-- Belt for the scaffold's ClassesBuilt gate: constructing a preset object
+		-- needs the class FLATTENED, which is strictly later than "the class
+		-- table exists" — the guard this line replaces tested the latter and
+		-- passed while `HasTrait.new` was still nil (F87). Leave ctx.patched
+		-- false so a later trigger retries rather than latching a wrong reason.
+		local ht = rawget(_G, "HasTrait")
+		if type(ht) ~= "table" or type(ht.new) ~= "function" then return end
+
+		local stats = { found = 0, patched = 0, failed = 0 }
 		for _, id in ipairs(STORYBIT_IDS) do
 			local sb = storybits[id]
 			if sb then patch_node(sb, {}, 0, stats) end
+		end
+
+		if stats.failed > 0 then
+			-- PlaceObj declined: the class is gone, not merely unbuilt (the
+			-- flattening case returned above). Report it rather than claiming
+			-- the fix is live.
+			ctx.patched = true
+			ctx.latch("could not build the Android filter (HasTrait changed?)")
+			return
 		end
 		ctx.patched = true
 
@@ -122,7 +158,8 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 SMRFixPack.Register(FIX_ID, {
 	title = "Dust Sickness no longer infects Biorobots",
 	apply = function()
-		patch()   -- no-op unless the presets are already loaded
+		patch()   -- no-op at apply time (F87); the runner fires itself once
+		          -- the classes are built AND the presets are loaded
 	end,
 })
 

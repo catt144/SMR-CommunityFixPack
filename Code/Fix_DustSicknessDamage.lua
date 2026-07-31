@@ -69,6 +69,7 @@ SMRFixPack.Register(FIX_ID, {
 			{ path = { "const", "Scale", "Stat" }, kind = "number" },
 		})
 		if err then return err end
-		patch()   -- no-op unless the presets are already loaded
+		patch()   -- no-op at apply time (F87); the runner fires itself once
+		          -- the classes are built AND the presets are loaded
 	end,
 })
