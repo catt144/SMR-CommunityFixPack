@@ -25,14 +25,28 @@ Staleness check: this was written at **`84427e1`** + the PT-20 leg that follows 
 > - **Nothing is built.** A three-layer redesign is proposed on the entry and is
 >   an **owner decision**.
 
-> 🆕 **AND A SECOND CORRECTION: MODS *DO* GET A PRE-SAVE HOOK.**
-> `OnMsg.SaveGameStart` / `SaveGameDone` reach mod code — measured, with
-> `OnMsg.LoadGame` as a positive control. Only `PersistSave`, `PersistLoad` and
-> `PersistGatherPermanents` are blacklisted (`Mod.lua:1430-1440`). **The recorded
-> "mods get no save hook / tidying up on save is unimplementable" fact was
-> wrong**, and the D06 cleanup-mod argument that rested on it has been corrected
-> in place. Autosaves are the same code path (one flag), so the hook covers them
-> — and so does the leak.
+> **Same leg, two corrections to recorded "facts" — both were believed and both
+> were wrong:**
+> - **MODS *DO* GET A PRE-SAVE HOOK.** `OnMsg.SaveGameStart` / `SaveGameDone`
+>   reach mod code (measured, with `OnMsg.LoadGame` as a positive control); only
+>   `PersistSave`, `PersistLoad`, `PersistGatherPermanents` are blacklisted
+>   (`Mod.lua:1430-1440`). The "tidying up on save is unimplementable" claim is
+>   dead, and the D06 cleanup-mod argument resting on it is corrected in place.
+>   Autosaves are the same path (one flag) — so the hook covers them, and so does
+>   the leak.
+> - **`debug.getinfo` and `Wakeup` are both dead ends** — the first is absent in
+>   the sandbox (already in ENGINE_FACTS:69, and it is why `[install]` probes
+>   SKIP); the second wakes only `WaitWakeup` sleepers, never a `Sleep`. Both were
+>   proposed and killed by controls during PT-20. Do not re-derive them.
+
+> 🥇 **AND A SECOND DEFECT OF OURS — F87, which the owner wants fixed FIRST.**
+> `Fix_DustSicknessBiorobots` **throws** at apply when the player enables the mod,
+> so F40 is silently unfixed for that whole session. **This is the first-run
+> path**: a mod is never auto-enabled, so every player ticks it at the main menu
+> of a running process, which triggers an in-place reload. **The harness has never
+> tested that path** — every A/B leg starts with the pack already on, so all
+> `74/74` figures describe the second session onward. Details, repair shape and
+> the three follow-ups: the F87 entry.
 
 > 🚧 **THERE ARE NOW TWO PROMPTS, AND THIS ONE DOES NOT DRIVE DRONE WORK.**
 > The drone project grew its own open design decision, its own frozen tests, and
@@ -105,10 +119,17 @@ active-at-base = vanilla, `tested`). `Code/` = 75 files. **TestKit probes: 78.**
 Pinned game build **1.0.7.396349** (fpk parity proven, ENGINE_FACTS). Everything
 committed and pushed.
 
-**The code gate is CLEAR and nothing is owed on the harness side.** Current legs
-at 78 probes: all-toggles-ON `74/74` → **68/0/10/0** (12.30.34); default config
-`68/74` → **63/0/15/0** (12.44.39, dials at base); baseline **1/62/15/0**
-(12.32.11).
+**The cold-boot code gate is clear** — current legs at 78 probes: all-toggles-ON
+`74/74` → **68/0/10/0** (12.30.34); default config `68/74` → **63/0/15/0**
+(12.44.39, dials at base); baseline **1/62/15/0** (12.32.11).
+
+> ⚠️ **"Nothing is owed on the harness side" is NO LONGER TRUE (2026-07-31).**
+> Every one of those legs launches the game with the pack **already enabled**, so
+> they measure the *second session onward*. **The session in which a player turns
+> the mod on has never been measured**, and F87 lives there. A leg that boots with
+> the pack off, enables it at the main menu and then runs the probes is **owed**,
+> and it would also verify audit finding A2's three `Opt_` modules, whose "a first
+> mid-session enable works" remediation has never been checked end to end.
 
 **Account state — READ IT, NEVER ASSUME IT.** The 2026-07-31 13.18 log showed all
 six opt-in modules reporting `inactive (opt-in …)`, i.e. **all six toggles OFF**.
@@ -120,9 +141,11 @@ account-persistent too.
 
 ## ▶️ Next session — the board, user picks
 
-> ⚠️ **F86 outranks everything on this list.** It blocks release, and items 1-2
-> are BUILDS — writing new fixes before the save-safety rules are settled risks
-> adding leak sites. Confirm the owner's intent before starting a build.
+> ⚠️ **Items 0 and 0b outrank everything else on this list.** F87 is the owner's
+> stated first task; F86 blocks release. Items 1-2 are BUILDS — writing new fixes
+> before the save-safety rules are settled risks adding leak sites, and both D10
+> and D12 touch colonist assignment, which is command-thread territory. Confirm
+> the owner's intent before starting any build.
 
 0. **🥇 F87 — DO THIS FIRST (owner instruction, 2026-07-31).**
    `Fix_DustSicknessBiorobots` **throws** at apply when the player enables the

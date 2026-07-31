@@ -11,8 +11,36 @@ the end of every drone session.
 > into drone work, **stop and load this file instead.**
 
 **Staleness check — do this FIRST:** `git log --oneline -10` + `git pull`. This
-file was written at **`bd8d831`**. If commits landed after it, read them before
-trusting anything below — this project has already had a prompt go stale mid-job.
+file was written at **`bd8d831`** and patched at **`bdc2c27`** (the PT-20 leg).
+If commits landed after that, read them before trusting anything below — this
+project has already had a prompt go stale mid-job.
+
+> 🛑 **F86 CHANGED THE GROUND UNDER THIS PROMPT — read `BUGS.md` F86 and
+> `docs\SAVE_SAFETY_REDESIGN.md` before touching the D06 decision.** PT-20
+> (2026-07-31) measured **pack code being serialised into the savegame and still
+> running after the mod is removed**, and **`Opt_DroneOverhaul` is one of the two
+> proven sites** — 98 errors per session after removal, and it leaked **with its
+> own opt-in toggle OFF**, because the `Drone:Idle` wrapper installs at file
+> scope and only early-returns.
+>
+> **Three claims below were written before that and are now wrong. They are
+> corrected in place; this banner exists so you do not trust a stale memory of
+> them:**
+> 1. *"uninstall is safe and silent"* — it is **not silent**. The data half is
+>    still lossy-but-quiet; the **code** half floods the log.
+> 2. *"Option 2 is uninstall-clean by construction / nothing mod-shaped ever
+>    enters the save"* — **false as written.** Staying inside `-1..3` keeps the
+>    *priority data* clean; it does nothing about the module's own **code**
+>    entering the save via a persisted thread stack. Option 2's advantage is real
+>    but narrower than stated.
+> 3. The **cleanup mod's justification** — *"mods get no save hook"* — is
+>    **false**. `OnMsg.SaveGameStart` / `SaveGameDone` reach mods (measured). A
+>    tear-down-on-save scheme is implementable, so the cleanup mod is no longer
+>    "the only thing that can occupy that window".
+>
+> **None of this picks a side in the D06 decision, and neither may you.** It
+> changes the inputs, not the verdict. F86's remedy is an **owner decision that
+> has not been made** — do not assume any layer will be adopted.
 
 ---
 
@@ -79,13 +107,22 @@ The band scheme **passed** Q1, but the sitting that proved it also found **two
 constraints that did not exist when the five-band table was drafted**. Both are
 written up neutrally. **No side has been picked, and you must not pick one.**
 
-**Constraint A — uninstall is safe and silent but LOSSY** (§9). A widened save
-loads into vanilla with **zero errors** (wide tables, narrow loops — the mirror
-of the incident that broke a live save). But elevated work is **stranded**, and
-the heal path expires: `DepositsSpawned` re-registers every hub, but only fires
-from a sector scan that places deposits, and **sector status is a one-way ladder
-with no re-scan**. Clearing the map is an early act; removing a mod is a late
-one. **The hub UI toggle does NOT re-register** (measured).
+**Constraint A — the widened DATA is silent but LOSSY** (§9). A widened save
+loads into vanilla with **zero errors from the priority data** (wide tables,
+narrow loops — the mirror of the incident that broke a live save). But elevated
+work is **stranded**, and the heal path expires: `DepositsSpawned` re-registers
+every hub, but only fires from a sector scan that places deposits, and **sector
+status is a one-way ladder with no re-scan**. Clearing the map is an early act;
+removing a mod is a late one. **The hub UI toggle does NOT re-register**
+(measured).
+
+> ⚠️ **CORRECTED 2026-07-31 (F86): "uninstall is safe and silent" is no longer
+> true of the module as a whole.** The sentence above is now scoped to the
+> *priority data* only. Separately and additionally, **`Opt_DroneOverhaul`'s own
+> code enters the save** on drone command-thread stacks and throws 98 errors per
+> session after removal — measured, and with the module's toggle OFF. That is
+> F86, it applies to **every** option below equally, and it is not a reason to
+> prefer one band scheme over another.
 
 **Constraint B — the duplicate leak, and it bites with the mod INSTALLED** (§10).
 `DroneControl:RemoveBuilding` iterates using a **file-local pinned at 3**
@@ -101,9 +138,12 @@ without bound.
    duplicate leak needs a **full replacement of `DroneControl:RemoveBuilding`**
    (FIX_POLICY §1.5) in the most shared queue code in the game — one of the
    highest patch-rot exposures available.
-2. **Work inside `-1..3`.** Uninstall-clean *by construction* — vanilla
-   recomputes every priority at insert, so **nothing mod-shaped ever enters the
-   save**, and the file-local becomes irrelevant. **Cost:** band 3 stops
+2. **Work inside `-1..3`.** ⚠️ **CLAIM NARROWED 2026-07-31 (F86)** — this option
+   is uninstall-clean **in its priority data**, not "by construction" overall:
+   vanilla recomputes every priority at insert, so **no mod-shaped *data* enters
+   the save** and the file-local becomes irrelevant. It does **not** stop the
+   module's own **code** entering the save via a persisted thread stack, which is
+   F86 and which affects all three options equally. **Cost:** band 3 stops
    distinguishing a broken oxygen factory from a dome breach *and* from anything
    the player hand-set to max (`DRONE_PRIORITY_SYSTEM.md` §6.2). That cost was
    judged too high when the alternative looked free. **It is no longer free.**
@@ -222,12 +262,22 @@ If you cannot cite evidence, **say the narrower true thing instead.**
 - **Do not claim the duplicate leak's magnitude.** It read `4 → 6` once, on one
   hub, in one save. The mechanism is source-backed and the arithmetic fits; a
   second observation on a clean fixture would make it solid.
-- **Do not claim uninstall safety beyond what was measured** — *loads clean, no
-  errors, work stranded, heal path expires*. That is the whole of it.
+- **Do not claim uninstall safety at all — the module is a PROVEN F86 leak
+  site.** The old wording here ("loads clean, no errors, work stranded, heal path
+  expires") described the *priority data* and is still true of it. It is **not**
+  true of the module: `Opt_DroneOverhaul`'s `Drone:Idle` wrapper is serialised
+  into the save and throws 98 errors per session after removal, toggle OFF
+  included. Measured 2026-07-31, `BUGS.md` F86.
 - **Do not report a module `tested`** without a playtest. Only the playtest flips
   that status.
-- **Do not describe the cleanup mod as approved.** It is the plan of record for
-  the uninstall problem and **not approved to build**.
+- **Do not describe the cleanup mod as approved.** It is **not approved to
+  build** — and note its stated justification ("mods get no save hook") is
+  **false**; `SaveGameStart` reaches mods. If you repeat the cleanup-mod case,
+  make it on grounds that survive that correction.
+- **Do not assume any F86 remedy.** The three-layer redesign in
+  `docs\SAVE_SAFETY_REDESIGN.md` is a **proposal awaiting an owner decision**.
+  Do not build against it, and do not treat D06's shape as constrained by a
+  layer that has not been chosen.
 
 ---
 
