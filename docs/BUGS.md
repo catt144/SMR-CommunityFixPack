@@ -4147,7 +4147,42 @@ changing a property default reach buildings already in a save?
 **Run them only AFTER the Phase 4 rebuild finishes** — that job is rewriting
 `Code/` and these need temporary modules in the same directory.
 
-### ✅ Q3 and Q4 are ANSWERED from source (2026-07-31, game-free) — Q1 and Q2 still owed
+### ✅ Q2, Q3 and Q4 are ANSWERED (2026-07-31) — only Q1 is still owed
+
+> **Q2 — hub queues are PERSISTED, not rebuilt on load. Answered the hard way.**
+> The experiment module widened `const.TaskRequest.MaxBuildingPriority` to 5 at
+> file scope; the owner loaded an existing save and **every `FindTask` in the
+> colony threw**, drones froze in place while the UI reported "heavy load", and
+> the log took tens of millions of error lines. **Nothing had been armed — the
+> widening alone did it.** Cause: `TaskRequestHub:Init()`
+> (`TaskRequest.lua:242-256`) allocates the queue tables at **construction** and
+> never again, so a restored hub carries `-1..3` while the widened const makes
+> vanilla's own removal loops iterate `-1..5` and index nil.
+> **Full write-up, including three corrections to our own reference doc and the
+> savegame-compatibility consequence for the band scheme:
+> `DRONE_PRIORITY_SYSTEM.md` §8.** Q1 must be re-run on a **new game**, where
+> every hub allocates the full range natively.
+
+> 🧭 **OWNER DECISION 2026-07-31, in response to the Q2 finding — a save-safety
+> wall does NOT kill this work, it RELOCATES it.** Verbatim: *"if we run into a
+> hard this is a non save safe mod / or needs fresh game to play. That will not
+> kill our work, but it will change our work. That will mean it transitions to a
+> stand alone mod instead of an opt in for this mod."*
+>
+> **Consequences, so nobody re-litigates them:**
+> - "Requires a new game" is a **shipping shape**, not a failure condition. It
+>   moves the overhaul **out of the Community Fix Pack** into its own mod.
+> - The Fix Pack's own promise is unaffected: the pack stays save-safe and
+>   uninstall-clean, because the risky module would no longer live in it.
+> - It also **retires the one-toggle-all-or-nothing constraint's hardest edge** —
+>   a standalone mod has no configuration matrix to multiply against the pack's
+>   68 default fixes.
+> - The design-drift disclaimer (research brief) still applies, and gets
+>   *stronger*: a standalone mod that requires a fresh colony must say so at the
+>   top, not in a limits section.
+> - **What this does NOT license:** shipping a known-broken save path inside the
+>   pack "because it might move later". Until the overhaul actually relocates, it
+>   stays opt-in-and-off, and D06 v1 remains the shipped thing.
 
 Phase 4 is closed, so the gates are unblocked. **Q3 and Q4 turned out to be
 source questions, not playtests, and both are now settled** — enumeration and
