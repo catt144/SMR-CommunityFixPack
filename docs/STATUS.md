@@ -80,14 +80,20 @@ callback grants three Micro-G Auto Extractor prefabs that the popup's own text
 promises and `show_once` never re-offers.** **PT-58 RAN AND PASSED the same day
 and the consequence is now OBSERVED, not inferred:** one purpose-built fixture,
 one variable, **1/1/1 answered without a reload vs 0/0/0 answered after one**.
-The notification survives the load, opens normally, and grants nothing. **The
-gate on a fix is therefore CLEARED** and the design is a **user decision**
-(recommended: decouple the asteroid grant via an additive
-`OnMsg.SpawnedAsteroid` behind its own flag — smallest surface, and PT-58 is its
-ready-made A/B; a general popup-waiter repair is not recommended). Still
-untested: the second consequential site, `ReconCenterDiscoveryAsteroid`'s paid
-Detailed Scan, which needs a Recon Center holding Electronics. Full trail on the
-F83 entry.
+The notification survives the load, opens normally, and grants nothing. **⛔ BUT THE FIX IS ON HOLD** and the
+narrow-decouple recommendation is **RETRACTED**. The owner asked whether
+FirstAsteroid is really the only thing a player can lose this way — anomalies,
+mystery popups, story choices — and a first dive says **no**: the *return-value*
+form of `WaitPopupNotification` is exposed exactly like the callback form, and
+**storybits (the system anomalies, planetary anomalies, mysteries and random
+events all route through) apply their reply cost, weighted outcome,
+`ProcessOutcomeEffects` and `Complete()` after two waits, in a
+`CreateGameTimeThread` with no `MakeThreadPersistable` and no resume on load**.
+F06 is already a documented instance of the same family. **A one-off audit is
+queued: `docs/POPUP_AUDIT_PROMPT.md`** — self-contained, its own session, may run
+unattended A/B legs, and **nothing ships until it reports**. Also still untested:
+`ReconCenterDiscoveryAsteroid`'s paid Detailed Scan (needs a Recon Center holding
+Electronics). Full trail on the F83 entry.
 
 **Open user decisions:** Phase 4 go/no-go (core helpers, module merges,
 deactivation surface — `docs/archive/AUDIT_FINDINGS.md` PLAN); D01 standing-export half

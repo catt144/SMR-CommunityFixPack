@@ -3705,8 +3705,36 @@ F83 is the general case of the same shape. Also thematically adjacent to
 F81/F78/F82: this codebase drives state changes from specific code paths rather
 than from state, so anything that interrupts the path loses the change.
 
-**Fix options — USER DECISION, nothing built. The PT-58 gate is now CLEARED, so
-this is buildable as soon as the owner picks an option.**
+**⛔ FIX ON HOLD 2026-07-30 — the narrow-decouple recommendation is RETRACTED
+pending `docs/POPUP_AUDIT_PROMPT.md`.** The owner asked whether FirstAsteroid is
+really the only thing a player can lose this way — anomalies, mystery popups,
+story choices — and a first dive says **no**. Established the same evening
+(source-read, NOT observed, flagged accordingly):
+- **`choiceN_func` is SAFE**: preset choice functions run in the UI action
+  handler (`PopupNotification.lua:135`) *before* `host:Close(i)`, not in the
+  waiting thread.
+- **The return-value form of `WaitPopupNotification` is exposed exactly like the
+  callback form** — code written after the wait dies with the thread. The
+  callback subset (8 sites) is not the whole surface; there are ~70 call sites.
+- **Storybits look like the real exposure, and anomalies + mysteries all route
+  through them** (`Discoveries.lua:49`, `PlanetaryAnomaly.lua:341`,
+  `ClassDef-StoryBits.lua:151`, `MarsStoryBits.lua:310`). In `_StoryBits.lua`:
+  `ActivateStoryBit` (:461) spawns `run_thread = CreateGameTimeThread(RunWrapper)`
+  (:475); `Run()` posts a corner notification and waits; `OpenPopup()` then does
+  reply → `StoryBitPayCost` → weighted outcome → `ProcessOutcomeEffects` →
+  `Complete()`. **Everything from the reply onward is after the waits.**
+  `g_StoryBitActive` is a persisted GameVar (:107) but `run_thread` has **no
+  `MakeThreadPersistable`**, `OnMsg.LoadGame` (:109) only prunes dead presets,
+  **no resume exists anywhere**, and `Unregister()` already ran — so a stranded
+  storybit cannot re-trigger. ActivationEffects run before the waits and are safe.
+- **F06 is already a documented instance of this family.**
+
+Fixing the asteroid grant alone would paper over what may be a general defect —
+*player-facing consequences applied after a wait in a non-persisted thread* —
+with the asteroid as its one proven symptom. **Nothing ships until the audit
+reports.**
+
+**Fix options (recorded, NOT approved — the audit may supersede all of them).**
 1. **Narrow, RECOMMENDED:** decouple the FirstAsteroid grant from the popup —
    an additive `OnMsg.SpawnedAsteroid` (FIX_POLICY §1.2) granting the three
    prefabs once behind its own persistent flag, regardless of whether the popup

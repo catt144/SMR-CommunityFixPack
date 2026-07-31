@@ -8,6 +8,64 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
 
 ---
 
+## Four PTs closed, two defects filed — and the F83 fix STOPPED by an owner question — 2026-07-30 (late evening, attended)
+
+Continuation of the evening sitting below. **PT-58** (F83's consequence:
+`1/1/1` vs `0/0/0`), **PT-44** (F23 → `tested`), **PT-25** (F38 → `tested`), on
+top of **PT-56** (D09 → `tested`). Two new entries: **F83** (P2, proven) and
+**F84** (P3, proven — the Universal Tunnel description is wrong twice).
+
+**PT-25 is the one worth re-reading.** Its setup line said "SAVE-B / underground
+access". The tester opened the underground build menu, found **no tunnel at all**,
+and asked whether the premise was flawed — the same question that killed F24 and
+F49(c). Half right: tunnels are a **surface** building (`UniversalTunnel` is the
+only one in a player-facing category; `Tunnel` and `TrackTunnel` are `Hidden`),
+so the underground reference was pure mis-specification — **fourth PT found
+faulty by executing it**. But F38 itself held: the leaking sweep iterates
+`TunnelBase`, and `UniversalTunnel` → `TrackTunnelBase` → `TunnelBase` with no
+override. Corrected, run on the surface, passed all four steps including the
+Rebuild over-reach guard. **SAVE-B retired** — its last consumer never needed it.
+A free rider on that setup also disproved the tunnel's own description ("Rovers
+cannot use this type of tunnel") → **F84**.
+
+**Then the owner stopped a fix from shipping, and was right to.** F83's gate was
+cleared and the narrow decouple was recommended and ready to build. He asked:
+*are we 100% sure this is the only thing players can lose — what about anomaly
+reports, mystery popups, story choices?* A first dive says the scope was drawn
+too small:
+- **`choiceN_func` is safe** — it runs in the UI action handler
+  (`PopupNotification.lua:135`) before `host:Close(i)`, not in the waiting thread.
+- **The return-value form of `WaitPopupNotification` is exposed exactly like the
+  callback form.** The 8 callback sites are a subset of ~70 call sites; anything
+  written after the wait dies with the thread.
+- **Storybits are the likely real exposure**, and anomalies, planetary anomalies,
+  mysteries and random events all route through them. `ActivateStoryBit`
+  (`_StoryBits.lua:461`) spawns `run_thread = CreateGameTimeThread(RunWrapper)`;
+  `Run()` posts a corner notification and waits; `OpenPopup()` then does reply →
+  `StoryBitPayCost` → weighted outcome → `ProcessOutcomeEffects` → `Complete()`.
+  Everything from the reply onward is after the waits. `g_StoryBitActive` is a
+  persisted GameVar but `run_thread` has **no `MakeThreadPersistable`**,
+  `OnMsg.LoadGame` only prunes dead presets, **no resume exists anywhere**, and
+  `Unregister()` already ran so a stranded storybit cannot re-trigger.
+  ActivationEffects run before the waits and are safe.
+- **F06 was already an instance of this family** and nobody had connected it.
+
+**The F83 narrow-decouple recommendation is RETRACTED and the fix is on hold.**
+Fixing the asteroid grant alone would have papered over what looks like a general
+defect — *player-facing consequences applied after a wait in a non-persisted
+thread* — with the asteroid as its one proven symptom. A one-off audit prompt was
+written (`docs/POPUP_AUDIT_PROMPT.md`): its own session, free to run unattended
+A/B legs and add TestKit probes, explicitly barred from building any fix, and
+required to separate observed from inferred. `FABLE_NEXT_PROMPT.md` now opens by
+checking whether that file still exists.
+
+**Lesson worth keeping:** the storybit exposure was reachable by grep the whole
+time. It went unnoticed because F83 was scoped to the mechanism that produced the
+*symptom* (a callback) rather than to the *shape* of the defect (consequences
+after a wait). Scope a defect by its shape, not by the call form that surfaced it.
+
+---
+
 ## PT-56 PASS IN FULL → D09 `tested`, D10 un-gated; and F83 filed from a surprise mid-setup — 2026-07-30 (evening, attended)
 
 Live sitting with the tester at the keyboard, after the two unattended legs

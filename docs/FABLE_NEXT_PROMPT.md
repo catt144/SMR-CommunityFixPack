@@ -10,6 +10,16 @@ model-specific.)
 
 ## Where the project stands (end of 2026-07-30 — a long playtest day, no sitting currently live)
 
+> ⚠️ **FIRST: is `docs\POPUP_AUDIT_PROMPT.md` still present?** If so, a one-off
+> popup/deferred-consequence audit was queued 2026-07-30 and has **not run**.
+> It is a self-contained prompt for its own fresh session — do not start it
+> inside a playtest sitting. **It blocks the F83 fix**, which is explicitly on
+> hold pending its verdict.
+> **If the file is GONE**, the audit ran: read `docs\POPUP_CONSEQUENCE_AUDIT.md`
+> instead, pick up its **needs-eyes list** (keyboard observations it could not
+> take itself) as playtest items, and expect a decision owed to the owner on the
+> fix shape for the whole family — not just F83.
+
 **Next session is PLAYTEST STANDBY — or the D10 build, which is now unblocked.**
 Nothing is half-finished and nothing is blocked on an agent. Both A/B legs are
 DONE and CLEAR, the D09 probe defect is repaired and verified, and **PT-56
@@ -32,13 +42,19 @@ popup text promises** (`show_once`, never re-offered) and
 **`ReconCenterDiscoveryAsteroid` silently refuses the paid Detailed Scan** on
 every asteroid. **PT-58 RAN AND PASSED 2026-07-30 — the asteroid consequence is
 OBSERVED: 1/1/1 answered without a reload vs 0/0/0 after one**, same fixture,
-one variable. **A fix is therefore un-gated and is a USER DECISION** —
-recommended option is the narrow one (decouple the grant via an additive
-`OnMsg.SpawnedAsteroid` behind its own flag). **The owner keeps a pre-trigger
-baseline save as the reusable fix-verification fixture** (see the F83 entry —
-it restores `g_ShownPopupNotifications`, so it can be re-run indefinitely).
-Still untested: the Detailed Scan half, which needs a Recon Center holding
-Electronics. Full trail on the F83 entry.
+one variable. **⛔ But the fix is ON HOLD and the narrow-decouple recommendation
+is RETRACTED** — the owner asked whether FirstAsteroid is really the only thing
+losable this way, and a first dive says no: the return-value form of
+`WaitPopupNotification` is exposed the same as the callback form, and
+**storybits — which anomalies, planetary anomalies, mysteries and random events
+all route through — apply their reply cost, outcome roll, effects and
+`Complete()` after two waits in a `CreateGameTimeThread` that has no
+`MakeThreadPersistable` and no resume on load.** F06 is already a documented
+instance. `docs\POPUP_AUDIT_PROMPT.md` is the queued one-off that settles it.
+**The owner keeps a pre-trigger baseline save as the reusable fix-verification
+fixture** (see the F83 entry — it restores `g_ShownPopupNotifications`, so it
+re-runs indefinitely). Still untested: the Detailed Scan half, which needs a
+Recon Center holding Electronics. Full trail on the F83 entry.
 
 **Build state: 73 registered modules — 67 active by default**, 6 opt-in via
 Options → Mod Options (D05, `tested`), plus the D09 stat-dials module
