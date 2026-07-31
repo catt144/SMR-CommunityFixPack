@@ -1,9 +1,16 @@
 # Drone rebuild — the four experiments that must run BEFORE any design is fixed
 
-Queued 2026-07-31. **Do not start this while the Phase 4 rebuild is in flight** —
-that job is rewriting `Code/`, these experiments need temporary modules in the
-same directory, and running both at once produces a fingerprint diff nobody can
-explain. Wait for Phase 4 to report, then run this.
+> ✅ **HISTORICAL — ALL FOUR GATES WERE ANSWERED 2026-07-31.** This file is kept
+> for the **playtest freeze rules** and the **design-drift disclaimer spec**,
+> both of which are still binding. The experiments themselves are done and the
+> temporary module has been deleted. **The live drone prompt is
+> `docs/DRONE_PROJECT_PROMPT.md`;** the answers are on the `BUGS.md` D06 entry
+> and in `DRONE_PRIORITY_SYSTEM.md` §8-§10. Each question below carries its
+> answer inline.
+
+~~Queued 2026-07-31. **Do not start this while the Phase 4 rebuild is in
+flight**~~ — spent: Phase 4 completed 2026-07-31 and the experiments ran after
+it.
 
 ---
 
@@ -55,7 +62,22 @@ position and are already `tested`.
 
 ---
 
-## Q1 — Does the C matcher honour a widened priority range? **(decisive)**
+## Q1 — Does the C matcher honour a widened priority range? ✅ ANSWERED 2026-07-31 — **HONOURED**
+
+> **Measured on a new game, both legs, with the mandatory positive control.**
+> Two Stirling Generators armed at band 3 and band 4 and broken: band 4's repair
+> ran `80000 → 50000 → 25000 → 0` and cleared alongside the control. A **second,
+> cheat-free symmetric pair** (equidistant, one hub, Polymers stocked) closed the
+> **haul** leg — `demand_queues[4][Polymers]` inspected directly, both haul
+> targets `1000 → 0` by drone delivery. **The "ignored" outcome is dead: requests
+> filed at 4 are neither invisible nor silently lost.**
+>
+> ⚠️ **But the sitting also found two constraints the band scheme did not know it
+> had** — see `DRONE_PRIORITY_SYSTEM.md` §9 (uninstall is lossy, heal path
+> expires) and §10 (the duplicate leak, which bites with the mod *installed*).
+> **The design decision that follows is OPEN and owner-owned**;
+> `docs/DRONE_PROJECT_PROMPT.md` carries it. The text below is the original
+> question.
 
 **Why it decides everything.** The design needs two automatic bands above the
 player's three. The Lua half is configurable by design: `MinBuildingPriority` /
@@ -162,7 +184,7 @@ other buildings, without ever touching food. Confirm that reading.
 
 ---
 
-## Q4 — Does changing a property default reach buildings already in a save? ✅ ANSWERED 2026-07-31 (source; one cheap live confirmation still worth taking)
+## Q4 — Does changing a property default reach buildings already in a save? ✅ ANSWERED 2026-07-31 — **DEFAULTS ARE OMITTED** (source + live confirmation, both taken)
 
 > **Answer: defaults ARE omitted — the first branch below.** Changing the class
 > default re-rates every existing building the player never re-prioritised, and

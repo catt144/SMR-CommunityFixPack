@@ -118,7 +118,9 @@ the newest SESSION_LOG leg.
 keyboard 2026-07-31**, archived — see the block below the build description.) The owner's go was recorded, the corrected brief was
 followed, and the build ran with its own probe and a CLEAR harness leg
 (`74/74`, `67 PASS / 0 FAIL / 10 SKIP / 0 ERROR` at 77 probes — the all-toggles-ON
-configuration; see the A/B section below for the leg that is still owed). What
+configuration *as it stood at build time*; that leg and its owed twin have both
+since been superseded by the post-Phase-4 set at 78 probes, and **nothing is owed
+on the harness side**). What
 ships: an `OnMsg.LoadGame` sweep that, when the FirstAsteroid popup notification
 is still sitting in the persisted `Notifications` table after a load — the only
 state the dead real-time waiter can leave — **removes** it, **grants** the three

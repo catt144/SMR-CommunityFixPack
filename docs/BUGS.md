@@ -4055,6 +4055,13 @@ entry living under F84. Content untouched.)*
 
 ---
 
+> 🚧 **DRONE WORK HAS ITS OWN PROMPT — `docs/DRONE_PROJECT_PROMPT.md`** (owner,
+> 2026-07-31). It is re-runnable and owns D06, D08, D09, F77, the drone queue
+> machinery, the consolidated drone playtest and the cleanup mod.
+> `docs/FABLE_NEXT_PROMPT.md` is the **general** prompt and may answer drone
+> questions but **may not start, plan or schedule drone work.** This entry is the
+> plan of record; that prompt is how a session picks it up.
+
 ## ⭐ REBUILD DECIDED 2026-07-31 (owner) — this entry's shipped v1 is being replaced
 
 **Drones moved to the TOP of the list, nothing about drones is deferred, and the
@@ -4136,16 +4143,22 @@ the sol-12 setting still running a sol-400 colony, and it is the forum post.
   layer 1 (the dispatcher) acts on registration, i.e. on the 88%, and the B2
   data promotes it from speculation to evidence-backed.
 
-### ⛔ Four gates before any of this is designed further
+### ~~⛔ Four gates before any of this is designed further~~ — ALL ANSWERED 2026-07-31
 
-**→ `docs/DRONE_RESEARCH_BRIEF.md`.** Nobody writes a build brief until these
-answer; **Q1 can kill the band scheme outright.** (1) Does the C matcher honour
-a widened priority range? (2) Are hub queues persisted or rebuilt on load? (3) Do
-the life-support and Food-demand data tests identify what we think? (4) Does
-changing a property default reach buildings already in a save?
+> **HISTORICAL — kept for the reasoning, not as outstanding work.** All four
+> answered; see the ANSWERED sections above and `DRONE_PRIORITY_SYSTEM.md`
+> §8-§10. The Phase-4 sequencing note below is also spent: Phase 4 completed
+> 2026-07-31 and the experiments ran after it.
 
-**Run them only AFTER the Phase 4 rebuild finishes** — that job is rewriting
-`Code/` and these need temporary modules in the same directory.
+**→ `docs/DRONE_RESEARCH_BRIEF.md`** (now historical; keep it for the playtest
+freeze rules and the disclaimer spec). The gates were: **Q1 can kill the band
+scheme outright** — (1) does the C matcher honour a widened priority range?
+(2) are hub queues persisted or rebuilt on load? (3) do the life-support and
+Food-demand data tests identify what we think? (4) does changing a property
+default reach buildings already in a save?
+
+~~**Run them only AFTER the Phase 4 rebuild finishes**~~ — spent; Phase 4 is
+complete and the experiments ran after it.
 
 ### ✅ ALL FOUR RESEARCH GATES ANSWERED 2026-07-31 — Q1 is **HONOURED**, the band scheme survives
 
