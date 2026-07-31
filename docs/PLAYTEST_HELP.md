@@ -349,6 +349,21 @@ FAILs any probe whose fix is not `active` (catching an `apply()` that threw) and
 the data-patch probes read live preset data (catching a patch that silently
 never ran) — the two F87 symptoms.
 
+**✅ EXECUTED ONCE, 2026-07-31 19.09 — the procedure above is verified, not
+merely written** (the standing rule: a test's own procedure is unverified until
+it has been run). It produced `68/74` → `63/0/15/0`, probe-for-probe identical to
+the cold boot bar two RNG lines. Two log lines are the leg's own positive
+control and you should look for both: `ENABLE-PATH: ARMED — the pack is OFF`
+before the click and `ENABLE DETECTED — the pack loaded through an in-place mod
+reload` after it. `95_AutoRun` logs `standing down` at boot.
+
+⚠️ **A toggles-OFF run does NOT cover audit A2.** With the six opt-in toggles
+off, all five `Opt_` probes SKIP, so A2's three flattening-unsafe `Opt_` hooks
+are never exercised on this path — the thing the leg was also supposed to
+settle. **Set the six toggles ON before a leg intended to close A2**, and note
+that turning a toggle on is itself a live activation, so do it in an earlier
+session and let the account state carry it in.
+
 ---
 
 ## Save fixtures — create these once, reuse them

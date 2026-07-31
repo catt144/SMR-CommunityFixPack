@@ -110,13 +110,19 @@ with **PHASE 4 COMPLETE** (below).
 >   exposed.
 > - **FIX_POLICY §2 carries the rule** (no `apply()` may assume a cold boot;
 >   both paths must be tested) and **ENGINE_FACTS carries the traced sequence**.
-> - **Cold-boot A/B re-verified CLEAR** — see the leg row below.
-> - ⏳ **ONE THING OWED: the enable-path leg is BUILT but UNRUN.** TestKit
->   `Code/98_EnablePathLeg.lua` + the recipe in `PLAYTEST_HELP.md`: boot with the
->   pack OFF, **the owner ticks it at the main menu**, and the harness does the
->   rest. That one click cannot be automated — `AccountStorage`,
->   `SaveAccountStorage` and `ModsReloadItems` are all sandbox-blacklisted and
->   there is no main-menu console.
+> - **Cold-boot A/B re-verified CLEAR** — see the leg rows below.
+> - ✅ **AND THE ENABLE PATH ITSELF IS NOW MEASURED — the leg RAN and PASSED
+>   (19.09, owner ticked the box).** `68/74` → **63/0/15/0**, probe-for-probe
+>   identical to the cold boot bar two RNG lines, with the `DustSicknessBiorobots`
+>   probe — which reads live preset data — PASSing on the path that used to
+>   throw. The harness logged its own positive control (`ARMED — the pack is OFF`
+>   before the click, `ENABLE DETECTED` after), so it is provably not a cold boot.
+>   **This is the first measurement this project has ever taken of a player's
+>   first session.**
+> - ⚠️ **Residual gap: audit A2 is STILL unverified.** The six toggles were OFF,
+>   so all five `Opt_` probes SKIPped and A2's three flattening-unsafe `Opt_`
+>   hooks were never exercised on that path. **A second enable-path leg with the
+>   toggles ON is owed** — same recipe, toggles flipped first.
 
 **⛔ NEW HARD RULE 2026-07-30 (owner) — FIX_POLICY §4a: this pack never fixes
 other mods' problems.** Neither bugs caused by another mod, nor vanilla bugs
@@ -350,22 +356,23 @@ the D09 probe reports the carry dial AT BASE on entry, so the account is
 genuinely clean. Every measured leg: zero `[CommunityFixPack]`
 error/disabled/FAILED lines, no log line naming our `Code/`, known noise only.
 
-> ⚠️ **"NOTHING IS OWED" RETIRED 2026-07-31 — every leg above is a COLD BOOT.**
-> All of them launch the game with the pack already enabled, so the whole A/B set
-> describes the **second session onward**. The session in which a player *turns
-> the mod on* had never been measured, and **F87 lived there**.
-> **Status 2026-07-31 late: the leg now EXISTS and is still UNRUN.** TestKit
+> ✅ **THE ENABLE PATH IS NO LONGER UNMEASURED (2026-07-31 19.09).** Every leg
+> above except the 19.09 row is a COLD BOOT — launched with the pack already
+> enabled, describing the *second session onward*. The session in which a player
+> *turns the mod on* is where **F87** lived, and it now has its own leg: TestKit
 > `Code/98_EnablePathLeg.lua` (armed like `96_AutoRunFlag`, recipe in
 > `PLAYTEST_HELP.md`) boots with the pack off, waits for **the owner to tick it
-> at the main menu**, then drives the normal flow. It will also verify audit
-> finding **A2**'s three `Opt_` modules, whose "a first mid-session enable works"
-> remediation has never been checked end to end. **Until it runs, no measurement
-> we hold describes a player's first session.**
+> at the main menu**, then drives the normal flow. **Its first run PASSED.**
+> ⚠️ **Still owed on that path: audit finding A2.** The run had the six toggles
+> OFF, so A2's three `Opt_` modules — whose "a first mid-session enable works"
+> remediation has never been checked end to end — SKIPped. **Re-run the same leg
+> with the toggles ON** to close it.
 The post-F83 set at 77 probes (`74/74` → `67/0/10/0`; default `68/74` →
 `62/0/15/0`; baseline `1/61/15/0`) is now historical, as are all older rows.
 
 | Leg | Active | Result |
 |---|---|---|
+| **⭐ CURRENT — THE ENABLE-PATH LEG, default config, 2026-07-31 19.09 (owner ticked the box at the main menu), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — **the first leg ever run on a player's FIRST session.** Probe-for-probe identical to the 18.44 cold boot bar 2 RNG lines. `DustSicknessBiorobots` PASS on live preset data = the F87 patch really ran. ⚠️ toggles OFF, so audit A2 is NOT covered |
 | **CURRENT — POST-F87-REPAIR cold-boot re-verify, default config, 2026-07-31 18.44 (unattended), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — identical to the 12.44 reference; proves the scaffold change did not regress the cold boot. Says NOTHING about the enable path |
 | **CURRENT — POST-PHASE-4, all six toggles ON, 2026-07-31 12.30 (unattended), 78 probes** | **74/74** | **68 / 0 / 10 / 0** |
 | **CURRENT baseline — POST-PHASE-4, `code` list emptied, 2026-07-31 12.32 (unattended), 78 probes** | — | **1 / 62 / 15 / 0** — `FirstAsteroidPrefabs` + `UpdateReport` FAIL here (`bug reproduces`) |
@@ -654,10 +661,9 @@ authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
    **Automated + attended probe coverage is now 100%**; ~~nothing further is owed
    to the harness~~ — **corrected 2026-07-31: that "100%" covers the cold-boot
    path only. The enable path (player ticks the mod at the main menu) has never
-   been measured and is where F87 lived.** ▶️ **The leg for it is now BUILT and
-   needs YOU for one click:** arm `Code/98_EnablePathLeg.lua` in the TestKit
-   metadata, launch with the fix pack DISABLED, tick it at the main menu, and
-   walk away (recipe in `PLAYTEST_HELP.md`). All that remains otherwise is the
+   been measured and is where F87 lived.** ✅ **RAN 2026-07-31 19.09 and
+   PASSED** — see the A/B table. ⚠️ **One re-run owed: the same leg with the six
+   toggles ON**, which is what closes audit A2. All that remains otherwise is the
    human playtest.
 2. DONE 2026-07-26 — author set to **catt144** in both mods' metadata.lua.
 3. For the save-failure lead: logs from `%AppData%\Surviving Mars Relaunched\logs`

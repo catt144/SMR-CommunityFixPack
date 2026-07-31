@@ -113,7 +113,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **MEASURED** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), 10 more at risk. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE** — FIX_POLICY §3 (entry) |
-| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written; cold-boot A/B re-verified CLEAR (`68/74`, 63/0/15/0). ⏳ **The enable-path leg is BUILT (TestKit `98_EnablePathLeg.lua`) but NOT YET RUN — it needs one click from the owner at the main menu** (entry) |
+| F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so audit **A2**'s three `Opt_` modules are still unverified on this path (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -4222,7 +4222,7 @@ Sensor towers extending single-meteor warning would be a **feature**, not a
 repair, and is declined. See the F02 root-cause note for why towers currently
 affect meteor *frequency* instead.
 
-### F87 — OUR OWN DEFECT: `Fix_DustSicknessBiorobots` throws at apply on some load orders, silently leaving F40 unfixed (P2, OBSERVED)  `[fixed 2026-07-31 — repaired in the shared DataPatch scaffold; 3 further enable-path casualties found and repaired; FIX_POLICY + ENGINE_FACTS written; cold-boot A/B CLEAR. ⏳ ONE THING OWED: the enable-path leg is built but unrun — it needs one click from the owner]`
+### F87 — OUR OWN DEFECT: `Fix_DustSicknessBiorobots` throws at apply on some load orders, silently leaving F40 unfixed (P2, OBSERVED)  `[fixed 2026-07-31 — repaired in the shared DataPatch scaffold; 3 further enable-path casualties found and repaired; FIX_POLICY + ENGINE_FACTS written. VERIFIED ON THE ENABLE PATH 19.09 (63/0/15/0, owner at the keyboard) and on a cold boot 18.44. Residual: A2's three Opt_ modules were toggled OFF, so they are still unverified there]`
 
 > ## ✅ WHAT LANDED 2026-07-31 (this entry's repair — read this before the diagnosis below)
 >
@@ -4277,8 +4277,8 @@ affect meteor *frequency* instead.
 > tested). `ENGINE_FACTS` carries the traced sequence so nobody re-derives it,
 > plus the `procall` fact.
 >
-> **Follow-up 3 (the harness) — BUILT, NOT RUN. This is the one thing still
-> owed.** TestKit `Code/98_EnablePathLeg.lua`, armed like `96_AutoRunFlag`:
+> **Follow-up 3 (the harness) — BUILT **AND RUN**, and it PASSED.** TestKit
+> `Code/98_EnablePathLeg.lua`, armed like `96_AutoRunFlag`:
 > boot with the pack OFF, the owner ticks it at the main menu, and the harness
 > takes over from `ModsReloaded` — colony, full suite, quit. Recipe in
 > `PLAYTEST_HELP.md`. **One click stays manual and cannot be automated:**
@@ -4288,6 +4288,37 @@ affect meteor *frequency* instead.
 > existing 78 probes are a real detector without any new probe: `FixMissing`
 > FAILs any probe whose fix is not `active` (an `apply()` that threw) and the
 > data-patch probes read live preset data (a patch that never ran).
+>
+> ### ✅ THE ENABLE-PATH LEG RAN AND PASSED — 2026-07-31 19.09 (owner ticked the box)
+>
+> **The first measurement this project has ever taken of a player's first
+> session.** `fix pack present: 68/74 fixes active` → **63 PASS / 0 FAIL / 15
+> SKIP / 0 ERROR** at 78 probes.
+> - **Positive control on the leg's own premise:** the harness logged
+>   `ENABLE-PATH: ARMED — the pack is OFF` at boot before the click, and
+>   `ENABLE DETECTED — the pack loaded through an in-place mod reload` after it,
+>   so this is provably not a cold boot. `95_AutoRun` logged `standing down`,
+>   confirming the `-smrautorun` command line did not start a colony pack-less.
+> - **The log carries the F87 fingerprint exactly** — two reload cycles in one
+>   process, `Loaded mod items for: …TestKit` then `…TestKit, …CommunityFixPack`
+>   — the same shape as the log that caught the defect, now with zero errors.
+> - **The decisive probe:** `DustSicknessBiorobots` **PASS** — *"all 4 infection
+>   effects filter Biorobots out"*. It reads the LIVE preset data, so it proves
+>   the data patch actually ran on the path where `apply()` used to throw.
+> - **Probe-for-probe identical to the cold-boot leg**, diffed: only 2 of 78
+>   lines differ and both are RNG, not path — `CrystalMysteryHang` names a
+>   different randomly generated mystery, `TouristApplicants` rolls 156/332 vs
+>   160/312. Same noise profile (`objects_to_mark` 48, 2 `LawOfficeDoor`), zero
+>   `[CommunityFixPack]` error/FAILED/disabled lines, no log line names our
+>   `Code/`, 68 `applied` lines.
+>
+> ⚠️ **WHAT THIS LEG DID *NOT* VERIFY — audit A2, still owed.** The account's six
+> opt-in toggles were OFF, so all five `Opt_` probes SKIPped and **audit finding
+> A2's three flattening-unsafe `Opt_` hooks were never exercised on the enable
+> path.** The claim that this leg covers A2 (carried in three docs before this
+> run) is therefore NOT yet satisfied: it needs **a second enable-path leg with
+> the six toggles ON.** That is cheap — same recipe, toggles flipped first — and
+> it is the honest remaining gap.
 >
 > **Cold-boot re-verification (2026-07-31 18.44, unattended, 78 probes):**
 > `fix pack present: 68/74 fixes active` → **63 PASS / 0 FAIL / 15 SKIP / 0

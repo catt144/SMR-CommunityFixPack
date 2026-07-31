@@ -52,14 +52,19 @@ Staleness check: this was written at **`e07cece`** (the F87 repair leg).
 >   `SMRFixPack.OnDataReady`. The blast radius was four modules, not one.
 > - Rule written (**FIX_POLICY §2**: no `apply()` may assume a cold boot) and the
 >   load-order sequence traced into **ENGINE_FACTS**.
-> - **Cold-boot A/B re-verified CLEAR** (18.44, `68/74` → `63/0/15/0`). It proves
->   no regression and **nothing about the enable path.**
-> - ⏳ **OWED: RUN THE ENABLE-PATH LEG.** It is built — TestKit
->   `Code/98_EnablePathLeg.lua`, recipe in `PLAYTEST_HELP.md`. Arm it, launch with
->   the **fix pack DISABLED**, tick it at the main menu, walk away. **That click
->   cannot be automated** (`AccountStorage`, `SaveAccountStorage`,
->   `ModsReloadItems` are all sandbox-blacklisted; no main-menu console). Until
->   it runs, **no measurement we hold describes a player's first session.**
+> - **Both legs ran and both are CLEAR.** Cold boot 18.44 (`68/74` →
+>   `63/0/15/0`) and — for the first time in this project — **the ENABLE PATH
+>   itself, 19.09, owner ticking the box at the main menu: `68/74` →
+>   `63/0/15/0`**, probe-for-probe identical bar two RNG lines, with
+>   `DustSicknessBiorobots` PASSing on live preset data. The leg logs its own
+>   positive control (`ARMED — the pack is OFF` → `ENABLE DETECTED`).
+> - ⚠️ **ONE GAP LEFT: audit A2.** That run had the six toggles OFF, so all five
+>   `Opt_` probes SKIPped and A2's three flattening-unsafe `Opt_` hooks are
+>   **still unverified on the enable path**. **Owed: the same leg with the
+>   toggles ON** (TestKit `Code/98_EnablePathLeg.lua`, recipe in
+>   `PLAYTEST_HELP.md`; the click cannot be automated —
+>   `AccountStorage`/`SaveAccountStorage`/`ModsReloadItems` are all
+>   sandbox-blacklisted and there is no main-menu console).
 
 > 🚧 **THERE ARE NOW TWO PROMPTS, AND THIS ONE DOES NOT DRIVE DRONE WORK.**
 > The drone project grew its own open design decision, its own frozen tests, and
@@ -162,18 +167,19 @@ account-persistent too.
 > touch colonist assignment, which is command-thread territory. Confirm the
 > owner's intent before starting any build.
 
-0. **▶️ RUN THE ENABLE-PATH LEG — the last thing F87 owes, and the only
-   measurement we have never taken.** The leg is built and disarmed at rest.
-   Recipe: `PLAYTEST_HELP.md` → "The ENABLE-PATH leg". In short: uncomment
+0. **▶️ RE-RUN THE ENABLE-PATH LEG WITH THE SIX TOGGLES ON — the last thing F87
+   owes, and the only way to close audit A2.** The leg itself is built, executed
+   once (PASS) and disarmed at rest; the 19.09 run had the toggles OFF, so the
+   five `Opt_` probes SKIPped and A2's three flattening-unsafe `Opt_` hooks were
+   never exercised on that path. Recipe: `PLAYTEST_HELP.md` → "The ENABLE-PATH
+   leg". In short: **turn the six Mod Options toggles ON in an earlier session**
+   (account state carries them in), then uncomment
    `"Code/98_EnablePathLeg.lua"` in the **TestKit** metadata `code` list, make
-   sure the **fix pack is DISABLED** in the Mod Manager, launch, then at the main
-   menu tick "Community Fix Pack" and close the dialog — the harness builds a
-   colony, runs all 78 probes and quits by itself. Re-comment to disarm.
-   - **Expect** the same totals as the cold-boot leg for the same toggle state
-     (read the `fix pack present: N/74` line first — the toggles are account
-     state and this leg does not change them).
-   - It also verifies audit **A2**'s three `Opt_` modules, whose "a first
-     mid-session enable works" remediation has never been checked end to end.
+   sure the **fix pack is DISABLED** in the Mod Manager, launch, and at the main
+   menu tick "Community Fix Pack" and close the dialog. Re-comment to disarm.
+   - **Expect** the all-toggles-ON numbers on the enable path — `74/74` →
+     `68/0/10/0` if it matches the cold boot. Read the
+     `fix pack present: N/74` line first, always.
    - A FAIL here is a real first-run defect: `FixMissing` FAILs any probe whose
      fix is not `active`, and the data-patch probes read live preset data.
    - **Still undone and deliberately so:** the C1 `error`-vs-`inactive` wording
@@ -353,16 +359,17 @@ resource choice, and the RC Terraformer clicking a waste-rock heap.
 
 ## Harness facts (for any A/B pair / same-day repair)
 
-- ⚠️ **EVERY LEG WE HAVE IS A COLD BOOT — the enable path is still unmeasured,
-  but the leg for it now EXISTS.** The harness always launches with the pack
-  already enabled, so all `N/74` figures describe the *second session onward*.
-  **A player's first session is different**: they tick the mod at the main menu,
-  which triggers an in-place mod reload where presets are already loaded and
-  classes are not yet flattened. That is where F87 lived. **Board item 0 is
-  running the leg** (TestKit `Code/98_EnablePathLeg.lua`, recipe in
-  `PLAYTEST_HELP.md`) — it needs one human click and cannot be fully automated
-  (`AccountStorage` / `SaveAccountStorage` / `ModsReloadItems` are all in
-  `ModEnvBlacklist`, and there is no main-menu console).
+- ✅ **THE ENABLE PATH IS MEASURED NOW — one leg, 2026-07-31 19.09, PASSED.**
+  Every *other* leg is a cold boot (launched with the pack already enabled), so
+  those `N/74` figures describe the *second session onward*. **A player's first
+  session is different**: they tick the mod at the main menu, which triggers an
+  in-place mod reload where presets are already loaded and classes are not yet
+  flattened. That is where F87 lived. The leg is TestKit
+  `Code/98_EnablePathLeg.lua` (recipe in `PLAYTEST_HELP.md`); it needs one human
+  click and cannot be fully automated (`AccountStorage` / `SaveAccountStorage` /
+  `ModsReloadItems` are all in `ModEnvBlacklist`, and there is no main-menu
+  console). ⚠️ **The one run had the toggles OFF, so audit A2 is still open on
+  that path — re-running it with the toggles ON is board item 0.**
 - Launch: `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050 -smrautorun`.
   A leg takes ~75 s; Mars.exe may take minutes to appear. **Never kill on a short
   timeout** (25 min no-kill guard; harness watchdog 15 min).

@@ -81,9 +81,38 @@ known noise only (`objects_to_mark` 48, 2 `LawOfficeDoor`, the TestKit GameInit
 nil-call pair). **It proves no cold-boot regression and nothing about the enable
 path** — only the new leg can speak to that.
 
+### 5. The enable-path leg RAN the same evening — and PASSED
+
+19.09, owner ticking the box at the main menu. `fix pack present: 68/74 fixes
+active` -> **63 PASS / 0 FAIL / 15 SKIP / 0 ERROR**. **The first measurement this
+project has ever taken of a player's first session.**
+
+The leg carried its own positive control, which is what makes the result
+interpretable: `ENABLE-PATH: ARMED — the pack is OFF` at boot *before* the click
+and `ENABLE DETECTED — the pack loaded through an in-place mod reload` after it,
+with `95_AutoRun` logging `standing down` so the `-smrautorun` command line
+provably did not start a colony pack-less. The log carries the F87 fingerprint
+exactly — two reload cycles in one process, `…TestKit` then
+`…TestKit, …CommunityFixPack` — the same shape as the log that caught the
+defect, now with zero errors.
+
+The decisive line is `DustSicknessBiorobots` **PASS** — *"all 4 infection effects
+filter Biorobots out"*. That probe reads the LIVE preset data, so it proves the
+data patch really ran on the path where `apply()` used to throw. Diffed
+probe-for-probe against the 18.44 cold boot: **2 of 78 lines differ and both are
+RNG, not path** (a different randomly generated mystery; 400 tourist rolls
+landing 156/332 vs 160/312). Same noise profile, zero fix-pack error lines.
+
 ### What is owed out of this leg
 
-One thing: **run the enable-path leg.** It needs the owner for one click.
+**One thing, and it is a correction to a claim this session had been repeating.**
+Three documents said the enable-path leg would also verify audit finding **A2**'s
+three flattening-unsafe `Opt_` hooks. **It did not** — the account's six toggles
+were OFF, so all five `Opt_` probes SKIPped and those hooks were never exercised
+on that path. The claim was written before the leg existed and was never checked
+against what the leg would actually cover with the account in its current state.
+**Owed: the same leg again with the six toggles ON.** Corrected in place in
+BUGS/STATUS/PLAYTEST_HELP and made board item 0.
 
 ---
 
