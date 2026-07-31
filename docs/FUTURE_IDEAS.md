@@ -229,9 +229,49 @@ awaiting an answer, and B's recommendation has been withdrawn and rewritten.**
 >    lifecycle case where a player ends up worse off than unmodded, and it is
 >    invisible to them.** Today that is mitigated only by *us* noticing and
 >    shipping an update. A game patch lands on the vendor's schedule, not ours.
-> 3. **C2 helper extraction — genuinely safe to defer.** Internal only, changes
->    no module identity and no player-facing ID, so it carries no
->    now-or-never pressure. This is the part that can wait.
+> 3. **~~C2 helper extraction — genuinely safe to defer~~ — CORRECTED
+>    2026-07-31: C2 and C4 are the SAME CODE and must be done together.**
+>    C4 means deepening the self-checks in the early files; C2 means
+>    consolidating the self-check boilerplate. Measured today: **194
+>    reason-return self-check sites** across the pack — those *are* the checks
+>    C4 wants to deepen. Doing C4 alone means hand-writing deeper checks into
+>    194 duplicated sites, i.e. **multiplying the duplication C2 exists to
+>    remove**. Doing C2 first means writing the deeper check **once** in the
+>    shared helper and every site inherits it. C2-before-C4 is the only
+>    sequencing that is not self-defeating.
+>
+> **Measured duplication, 2026-07-31** (not the stale audit numbers): 12 cloned
+> `log()` helpers · 194 self-check reason-returns · 31 status-gate prologues in
+> 24 files · 6 DataLoaded/DataChanged scaffolds · 17 LoadGame/PostLoadGame
+> sweeps · 2 hand-rolled watchdogs.
+>
+> **C2 has no live defect behind it either — verified, not assumed.** The audit
+> cited two: the unescaped loggers (already fixed — all 18 ModLog callers
+> escape) and "only one DataPatch scaffold has the veto check". The second was
+> checked directly: 13 files gate an `OnMsg` handler on `status == "active"`
+> without a separate `SMRFixPack_Disabled` read, but **none of them heal
+> status**, and Register sets status to `"disabled"` when vetoed — so the status
+> read already honours the veto. **No live gap. C2 is purely structural.**
+>
+> **What C2 could hurt, and why the harness covers most of it.** The failure
+> mode is a helper that does not exactly reproduce a call site: (a) the 194
+> distinct reason strings that surface in the log and `ListFixes()`; (b) the
+> declaring-class rule — a generic checker makes it *easier* to check the wrong
+> class, which is precisely how F64 shipped broken; (c) the hard-won latch
+> semantics a shared `DataPatch` runner must reproduce — the F75 false-inactive
+> (do not latch `inactive` before DataLoaded fires) and the B3 re-fire branch
+> (finding nothing on the `DataChanged` re-fire is SUCCESS, not
+> already-correct). **Every one of those surfaces as "a fix is not active" or "a
+> probe FAILs" — exactly what the A/B legs measure** (`N/74 fixes active` + 77
+> probes, ~90 s unattended). The residual the harness cannot see is anything
+> that only manifests on a real colony or across a real save — e.g. a
+> consolidated multi-map `AllMapsForEach` sweep — because probes drive planted
+> globals (the TestKit stand-in corollary). That residual is real, small, and
+> identical to the one C4 carries anyway.
+>
+> **Sequencing if this is approved:** separate commits with an A/B leg between
+> them, not one batch commit — a regression must stay bisectable, and a leg
+> costs ~90 seconds unattended.
 >
 > The one latent defect Phase 4 originally cited — 6 copies of `log()` missing
 > the `%%` escaping — is **already fixed** (verified: all 18 ModLog callers
