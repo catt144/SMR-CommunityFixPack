@@ -769,6 +769,25 @@ FIX_POLICY §3's footprint; it belongs in that section as a measured baseline.
 
 ## 8.8 Item 8 — prior art: worth one scoped pass, with one honesty caveat
 
+> ✅ **RUN 2026-07-31 (owner flipped it on, same day) — full results in
+> `docs/PRIOR_ART_SURVEY.md`.** Headline: the F86 mechanism is **documented,
+> intentional engine design** (the original's own `LuaSavegame.md.html`:
+> sleeping threads serialise with locals, upvalues and bytecode "to allow
+> loading the savegame even when a game update has changed the Lua code");
+> the community's norm is accept-silence-heal (473-mod census: 112 ship
+> yielding code, 0 touch PersistableGlobals, the flagship library ships an
+> `IgnorePersistErrors` option, and ChoGGi explicitly wished for the
+> post-save restart hook the remaster now gives us); no mod replaces a
+> vanilla global GT thread body (the Tier-1 shape has no prior art, and the
+> one adjacent mod-owned global loop is a live runs-forever orphan); and the
+> veteran fix-mods independently converged on our exact repair shapes
+> (synchronous heals, posting the missed end-Msg, restarting vanilla's
+> thread, wrap-over-copy at 215:59). Verdict for the owner's question:
+> **uninstall-marking saves is the accepted community constraint; our
+> guarantee is unprecedented but not impossible — its impossible parts are
+> exactly the residuals already accepted.** The paragraph below is retained
+> as the pre-survey position.
+
 Agreed it is evidence, not owed by this review, and I have not read any of it.
 One scope note for whoever does: original-game mods ran **unsandboxed** in an
 engine whose persist machinery is the same family but whose mod environment is

@@ -300,6 +300,19 @@ code suggests.
   happens in a message handler must `pcall` its own body and report the failure,
   or it will go on reporting `active` while having silently done nothing.
 
+- **THE BY-VALUE THREAD SERIALISATION IS DOCUMENTED, INTENTIONAL ENGINE
+  DESIGN** — primary source found 2026-07-31 (prior-art survey): the original
+  game's own modding docs, `Surviving Mars\ModTools\Docs\LuaSavegame.md.html`:
+  *"Any Lua threads sleeping when a savegame is triggered will be serialized …
+  including any local variables anywhere in the call stack, any upvalues, and
+  even the bytecode of the functions themselves, to allow loading the savegame
+  even when a game update has changed the Lua code. This means that after
+  loading, pieces of 'old' Lua code … will be running. New invocations of
+  these functions, however, will use their new versions."* So F86's mechanism
+  is designed update-tolerance that mods inherit; the last sentence is the
+  official statement of the command-thread self-cleaning rule and the upgrade
+  model. ⚠️ The REMASTER's ModTools docs no longer carry this page.
+  Community norms built on it: `docs/PRIOR_ART_SURVEY.md`.
 - **THE SAVE/LOAD HOOK SURFACE — enumerated 2026-07-31 (F86 round 2), so no
   design discovers hooks one at a time again.** `ModMsgBlacklist` is exactly
   nine names (`Mod.lua:1430-1440`: PersistGatherPermanents, PersistLoad,
