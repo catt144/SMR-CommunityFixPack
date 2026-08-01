@@ -137,16 +137,19 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | cand | investigate — F52/F53-adjacent |
 | C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | investigate (ChoGGi prior art) |
 | C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | investigate (ChoGGi prior art) |
-| C22 | Saint Blessing morale stacking not applied               | ?   | cand | investigate (fredware prior art, Relaunched) |
-| C23 | Dust devils keep spawning after terraforming ends storms | ?   | cand | investigate (fredware prior art, Relaunched) |
-| C24 | Ordinary rockets misclassified as asteroid landers       | ?   | cand | investigate (fredware prior art, Relaunched) |
-| C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | investigate (fredware prior art + old RESEARCH lead) |
+| C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source recovered + read) |
+| C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
+| C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
+| C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro |
 | C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | investigate (SkiRich prior art, OG) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | cand | investigate (SkiRich prior art, OG) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | cand | investigate (SkiRich prior art, OG) |
 | C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
 | C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
-| C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | investigate (GromGor prior art — OUR pinned build) |
+| C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
+| C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | filed 2026-08-01 — GromGor's fix source + Src + witness thread (entry) |
+| C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source) — needs F-row decision (entry) |
+| C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — F81b's sibling class, sanitizer candidate (entry) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -292,6 +295,19 @@ a missed leak is cheap, stripping a live building's bonus is not. Idempotent.
 Probe: `SaveSanitizerUpgradeLeak` in `30_Probes_Wave3.lua`.
 
 ### F04 — Night-shift workers never return to work after midnight  `[fixed: Code/Fix_NightShiftWork.lua]`
+
+**Audit 2026-08-01 (external witness): tier corrected GOLD → BRONZE-B2.** The
+Steam thread "Buildings are stuck on night shift" was initially matched to
+this entry, but GromGor's extracted Workshifts-FixUp source revealed a
+*different* live mechanism that fits the thread better — buildings falling
+out of `UIColony.labels.ShiftsBuilding` and never receiving `SetWorkshift`
+again (**filed as C32**; the thread describes stuck BUILDINGS colony-wide,
+with an asteroid-range correlation that fits label rebuilds, not our
+colonist-side hour-window). F04's own defect claim is unchanged — the
+shift-3 window arithmetic at :1758-1768 stands on the sibling tell
+(shift-1/2 windows are correct) — but it currently has **no external witness
+that discriminates it**, and the two mechanisms may co-produce the reported
+symptom family.
 `Lua\Units\Colonist.lua:1758-1768` — `ShouldLeaveForWork` window for shift 3
 (`DefaultWorkshifts = {{6,14},{14,22},{22,6}}`, `_GameConst.lua:370`) evaluates as
 `hour >= 21 and hour <= 25`; hours 0-1 unreachable (hour is 0-23, no wrap). Shift-1/2 get a
@@ -5972,8 +5988,16 @@ F-row. Provenance and the fuller lead lists live in
   **Witness upgrade 2026-08-01 (bug-list audit): an independent Relaunched fix
   exists** — GromGor's "No Underground supply grid breaks" (workshop
   3730839706): *"It's very strange to experience supply grid breaks
-  underground during dust storms on the surface. This mod fixes it."* The lead
-  is confirmed real; his source is not public (subscribe to compare).
+  underground during dust storms on the surface. This mod fixes it."*
+  **MECHANISM CONFIRMED same day (his FPK extracted + Src read):** vanilla
+  `SupplyGridFragment:RandomBreakConnection` (`SupplyGrid.lua:669-683`) picks
+  its break victim via `table.rand(self.connectors, …)` with **no map
+  filter**; his rewrite selects only connectors whose building's city map is
+  `MainMap`. His fix working in the wild implies fragments can span maps (or
+  the break pass reaches underground fragments), exactly as the lead
+  suspected. Our own sweep still owed before an F-row: trace WHO calls
+  `RandomBreakConnection` during a surface dust storm and how an underground
+  connector enters `self.connectors`.
 - **C05 — Colonists repeatedly visit already-satisfied interest buildings.**
   ChoGGi fixed this class in the original game — check whether the interest-
   satisfaction check survived into Relaunched.
@@ -6066,25 +6090,89 @@ quotes verbatim; sources in the audit report §8.
   soft locking the mystery."* Relaunched `Fireflies.lua:116` sets no
   `indestructible`; whether the meteor damage path can still hit them is
   unchecked. Distinct from F07/F15 (wisp math).
-- **C22 [author] — Saint Blessing morale stacking not applied.** fredware
-  (Relaunched, workshop 3775120166): *"Correctly applies each Saint's
-  stacking Morale bonus to Religious colonists in the same Dome."*
-  **⚠ Source caveat for C22–C25 (2026-08-01, same day):** fredware's "Bug
-  Fixes" was REMOVED from the Workshop within ~a day of upload ("violating
-  Steam Community & Content Guidelines", reason unstated); the quoted
-  descriptions survive only as the audit's API-read record. His GitHub
-  (facazevedo/surviving-mars-relaunched-mods) had not received the Bug Fixes
-  folder at last check — re-check before leaning on these four.
-- **C23 [author] — dust devils continue after terraforming disables dust
-  storms.** fredware: *"prevents new Dust Devils after terraforming disables
-  Dust Storms."*
-- **C24 [author] — ordinary rockets misclassified as asteroid landers.**
-  fredware: *"Prevents ordinary rockets from being incorrectly treated as
-  asteroid landers."* Possibly F72's neighborhood — audit relationship first.
-- **C25 [author] — Jumbo Cave reinforcements stuck on unreachable waste
-  rock.** fredware: *"Releases construction sites that become stuck because
-  of unreachable Waste Rock."* Confirms the old RESEARCH.md lead ("stuck at
-  'construction site is being cleared'").
+- **C22 [VERIFIED 2026-08-01, source recovered] — the Saint trait's dome
+  morale blessing has never worked: label-name mismatch.**
+  `TraitPreset:AddDomeColonistsModifier`
+  (`ClassDef-PresetDefs.generated.lua:1783-1789`) uses the raw trait string
+  `"Religious"` as the dome label, but colonists are filed under
+  `GetTraitLabel(trait_id)` = `"Trait" .. trait_id` → `"TraitReligious"`
+  (`Traits.lua:1300-1302`; `"Religious"` is not in `fixed_labels`
+  :1268-1298; filing site `Colonist.lua:373`). The +10 base_morale lands on
+  an empty label — Saint's *"Raises the Morale of all Religious people in
+  the Dome"* (`TraitPreset.lua:383-397`) has never applied to anyone.
+  Airtight from Src; fredware's fix substitutes `GetTraitLabel("Religious")`
+  and re-bases live Saints. *(fredware "Bug Fixes" was removed from the
+  Workshop ~a day after upload, reason unstated — but the owner's
+  subscription delivered the FPK and the full 22-file source was extracted
+  and read 2026-08-01; these entries now cite held source, not a dead page.)*
+- **C23 [VERIFIED 2026-08-01] — dust devils: three scheduler defects in
+  `DustDevils.lua`.** (1) The natural scheduler misuses `spawn_chance` as a
+  count multiplier — `:216 Random(count_min,count_max) * spawn_chance / 100`
+  (integer-truncating toward zero) — while the marker path uses it correctly
+  as a probability (`:169 Random(100) < marker_spawn_chance`); sibling
+  contradiction on the page. (2) `GetDustDevilsDescr` reads
+  `CurrentMap.mapdata` (`:59,:64`) but the scheduler spawns on `MainMap`
+  (`:198`) and re-reads every cycle (`:234-238`) — viewing the underground/
+  asteroid while it re-reads picks up the wrong map's descriptor
+  (`"disabled"` → nil → loop wedges in the day-long retry). (3) The marker
+  spawn check `:169` has no `DustStormsDisabled` term while the main
+  scheduler gates on it twice (`:209,:220`) — after terraforming permanently
+  sets it (`TerraformingDisasters.lua:16`), feature-marker dust devils keep
+  spawning forever (the player-facing symptom fredware's description names).
+- **C24 [VERIFIED 2026-08-01] — operator-precedence bug makes ordinary
+  rockets count as asteroid landers.** `PlanetaryView.lua:439`:
+  `IsKindOf(rocket,"LanderRocketBase") and command=="Refuel" or
+  command=="WaitLaunchOrder" or (command=="LoadAndLaunch" and not
+  target_spot)` — precedence detaches the last two clauses from the
+  `IsKindOf`, so any pad-idle supply rocket satisfies the asteroid-visit
+  predicate and the consumer (`PlanetaryViewAsteroidResources.generated.lua:
+  37-41`) opens an EMPTY lander-selection screen. Verified on the line
+  2026-08-01. **Complementary to F72, not covered by it** — our
+  `Fix_AsteroidLanderAvailable` wrapper fixes the false NEGATIVE and passes
+  vanilla's `true` straight through, so this false POSITIVE survives our
+  pack.
+- **C25 [mechanism verified, trigger unproven] — Jumbo Cave reinforcements
+  wedge on unreachable Waste Rock.** The wedge chain is real in Src: a
+  failed `WasteRockObstructor:DroneApproach` (`WasteRock.lua:318-327`) files
+  the rock in `unreachable_buildings` (`Drone.lua:818-826`), stalling the
+  clear request the `JumboCaveReinforcementStructure` site blocks on
+  (`BuriedWonder_Jumbo_Cave.generated.lua:103`). What Src alone cannot prove
+  is that cave geometry actually produces an unreachable rock — fredware's
+  fix fires only after observing a live approach failure, which is honest
+  about the same limit. Old RESEARCH lead ("stuck at 'construction site is
+  being cleared'") + his independent fix = witnessed; needs an in-game repro
+  before an F-row.
+- **C33 [VERIFIED 2026-08-01 — and OUR OWN F44 PATH REPRODUCES IT] —
+  whole-track demolition leaks an invisible, undeletable TrackBase shell.**
+  `TrackGridElement:DemolishAndSplitTrack` calls `track_obj:OnDemolish()`
+  directly at three sites (`TrackElement.lua:468,:506,:520`), bypassing the
+  `Demolishable` flow that is the only place `OnDemolish` is followed by
+  `DoneObject` (`Demolishable.lua:132-140`). `TrackBase:OnDemolish` sets
+  `CanDelete = ret_false` + `demolishing = true` (`Track.lua:248-250`, read
+  this session) and empties `elements`/`assigned_vehicles` to `false`
+  (`:190-191`,`:165`); the element-side auto-delete requires
+  `track_obj:CanDelete()` (`TrackElement.lua:203-205`) — now permanently
+  false — so the invisible shell (`entity = "InvisibleObject"`, `Track.lua:35`)
+  persists in the map and every save. A naive `DoneObject` on it RAISES
+  (`Done` ripairs over the `false` fields, `Track.lua:69-76,:176-192`).
+  **Our `Fix_TrackSalvageWipe` (F44) keeps the `track_obj:OnDemolish()` call
+  on the mass-delete path, so our pack produces the same shells on
+  Ctrl+click mass salvage.** The shell also pins `demolishing = true` — the
+  field F47's half-B stands down on. fredware's repair: post-wrap
+  `DemolishAndSplitTrack`, detect the exact four-field shell signature,
+  install empty tables, `DoneObject`; plus a save sweep deleting existing
+  shells. Needs its own F-row decision + a look at whether F44 should stop
+  producing shells.
+- **C34 [author, source held] — stale-ACTIVE rain state: `g_RainDisaster`
+  set with a dead `main_thread` reads as disaster-active forever; nothing in
+  our pack repairs it.** fredware's rains module heals it via vanilla's own
+  `FinishRainProcedure(rain_type)` (`TerraformingDisasters.lua:247-274` —
+  clears fields, label modifiers, notifications, sets `g_RainDisaster =
+  false`, sends `Msg("RainDisasterEnd")`), with a manual fallback; he also
+  recreates a missing `RainsDisasterThreads` GameVar table, clears dead
+  `soil_thread`s and invalid `g_RainDisaster` values. Our F81b fixes the
+  deadlock that *strands* the loop; this is the sibling class of stale state
+  we do not touch. Candidate for the sanitizer/F81 family.
 - **C26 [author] — malfunctioned buildings stuck in perpetual maintenance.**
   SkiRich (OG, workshop 2433157820, 4,100 subs): *"buildings that are
   malfunctioned and stuck in perpetual maintenance mode and nobody is willing
@@ -6105,12 +6193,37 @@ quotes verbatim; sources in the audit report §8.
 - **C30 [author] — supply-pod reward pins stuck on HUD.** SkiRich (OG,
   2636538587): *"Fixes an issue with vanilla code that causes supply pod pins
   to get stuck on the HUD."*
-- **C31 [author] — meteor storms broken in 1.0.7.396349 — OUR PINNED
-  BUILD.** GromGor (Relaunched, workshop 3745475097): *"The latest update
-  broke the meteor storm mechanics in a strange way. I don't know the exact
-  cause of this issue, but I think I've found a temporary solution."* No
-  public source; mechanism unknown — possible relative of F02/F78. Subscribe
-  to compare (owner action in the audit report §7.1).
+- **C31 [author→RESOLVED 2026-08-01] — meteor storms broken in 1.0.7.396349 —
+  OUR PINNED BUILD.** GromGor (Relaunched, workshop 3745475097): *"The latest
+  update broke the meteor storm mechanics in a strange way. I don't know the
+  exact cause of this issue, but I think I've found a temporary solution."*
+  **The owner subscribed and the FPK was extracted+read (2026-08-01):** his
+  mod is (a) a one-shot `OnMsg.LoadGame` → `StopMeteorStorm()` heal behind a
+  `MeteorsFixed` GameVar, and (b) a global `GenerateDir` clone. **(b) is a
+  NO-OP for meteors** — vanilla's `GenerateDir` is a *file-local* in
+  `Meteors.lua:43-55` (his clone is byte-identical to it INCLUDING the
+  degenerate-case guard, so nothing is even changed), and vanilla call sites
+  resolve the local, never his global. The effective ingredient is (a) — the
+  same wedged-storm heal family as our F78. **Verdict: not a new mechanism;
+  independent corroboration that the F78 wedge state still occurs in
+  1.0.7.396349.** Side find: `Bombardment.lua:38-50` carries a sibling
+  `GenerateDir` whose guard checks only `c == 0` and not the zero-dir case —
+  minor, F26's neighborhood, noted not filed.
+- **C32 — buildings drop out of the `ShiftsBuilding` colony label and stay
+  stuck on their last workshift forever.** Filed 2026-08-01 from GromGor's
+  "Patch 1.0.6 Workshifts FixUp" source (workshop 3676027320, extracted): his
+  fix runs every `NewWorkshift` and re-adds any `ShiftsBuilding` present in
+  `UICity.labels.Building` but missing from `UIColony.labels.ShiftsBuilding`,
+  then delivers the missed `SetWorkshift(CurrentWorkshift)`. Implication:
+  vanilla's workshift tick iterates `UIColony.labels.ShiftsBuilding` only, so
+  a building that falls out of that label (map unload? relabel path?) never
+  changes shift again. **This — not our F04 — is the better mechanism match
+  for the Steam witness thread "Buildings are stuck on night shift"**
+  (colony-wide BUILDING shift stuck; one reporter correlates onset with "an
+  asteroid had recently gone out of range", which fits a label rebuilt on map
+  transitions). Needs our own sweep: find the de-labeling path in Src and
+  whether `AddToLabel` on re-registration is safe. F04's audit tier was
+  corrected on this finding (see the F04 entry note).
 
 ## Not yet swept (follow-up targets)
 

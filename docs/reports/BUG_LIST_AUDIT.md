@@ -15,9 +15,9 @@ anything was filed** — one agent claim was refuted by that verification (§7.3
 
 | tier | count | entries |
 |---|---|---|
-| **GOLD** | **17** | F04 F30 F44 F45 F46 F52 F55 F58 F65 F66 F67 F68 F70 F71 F73 F78 F81 |
+| **GOLD** | **16** | F30 F44 F45 F46 F52 F55 F58 F65 F66 F67 F68 F70 F71 F73 F78 F81 *(F04 moved to BRONZE by the §9 addendum — its witness turned out to fit a different mechanism)* |
 | **SILVER** | **25** | F01 F02 F03 F05 F06 F11 F16 F21 F35 F36 F37 F38 F40 F41 F43 F48 F50 F51 F53 F59 F60 F64 F69 F74 F76 |
-| **BRONZE** | **29** | F07 F08 F09 F12 F13 F14 F15 F17 F18 F19 F20 F22 F23 F25 F26 F27 F29 F31 F33 F34 F47 F54 F57 F72 F75 F77 F82 F84 F85 |
+| **BRONZE** | **30** | F04 F07 F08 F09 F12 F13 F14 F15 F17 F18 F19 F20 F22 F23 F25 F26 F27 F29 F31 F33 F34 F47 F54 F57 F72 F75 F77 F82 F84 F85 |
 | **HOLD** | **1** | **F49(a) only** — a sub-item rider, not a module (§3) |
 | play-proven, exempt | 2 | F83 (PROVEN + A/B + tested), F80 (→ §4) |
 | out of scope | — | F86–F88 (our own defects); closed entries (§2.4); D-entries (design, not defect claims); C-entries (leads, §4/§5) |
@@ -33,8 +33,11 @@ one hard tell from the challenge review's intent list.
 1. **A native Relaunched fix-modding scene exists and independently converges on
    our list.** GromGor's "Patch 1.0.7 No Disasters after Meteor Storm" describes
    **F81a's exact mechanism** ("After a meteor storm, one of the keys may not be
-   removed, preventing further disasters from generating"); his "Workshifts
-   FixUp" is **F04**; Oxygenus's "Asteroid Rocket Waste Fix" (397 subs, the
+   removed, preventing further disasters from generating" — confirmed at code
+   level in §9: he clears the same `g_DisastersPredicted` key our fix manages);
+   his "Workshifts FixUp" repairs a *different, additional* workshift bug
+   (→ C32 — and reading it cost F04 its GOLD, §9); Oxygenus's "Asteroid
+   Rocket Waste Fix" (397 subs, the
    highest-subscribed Relaunched fix mod) is **F71**; and fredware's "Bug Fixes"
    (13 per-toggle fixes, **created 2026-07-31 — the day before this audit**)
    independently ships **F01, F74, F78/F81, and the F45/F48 track-demolition
@@ -74,7 +77,6 @@ owe their playtest as implementation (not diagnostic) checks.
 
 | id | prov | witness (verbatim · source · game) |
 |---|---|---|
-| F04 | src-diff | "Buildings are stuck on night shift" / "every single other building in the colony is stuck on night shift" — Wanev, Mar 13 [S1] **R**; + GromGor's independent fix "Your buildings will change workshifts correctly" [S24] **R** |
 | F30 | mixed | "My builder rover entombed itself and three other drones underneath an artificial lake." — Kudaku review, Nov 14 2025 [S2] **R** — incl. the constructor-is-the-victim detail our part (a) exempts |
 | F44 | mixed | "If you place a single hex of track wrong and want to delete it you delete the entire track." — Kudaku review [S2] **R** |
 | F45 | mixed | "I can I select the track, but when I click delete nothing happens" — A Lamp, Feb 26 [S3] **R** (silent no-op = the sort-error signature); + dev note "track segments would become undemolishable" [S5] |
@@ -140,6 +142,7 @@ absence is a prior, not a verdict.
 
 | id | sub | tell / note | owes |
 |---|---|---|---|
+| F04 | B2 | **Moved from GOLD by §9:** the stuck-night-shift thread fits C32's label-desync better (stuck BUILDINGS + asteroid-range correlation); our hour-window defect stands on its sibling tell (shift-1/2 windows correct) but no witness discriminates it | probe (has) + owner skim |
 | F07 | B1 | sibling contradiction; 1000× unit error. Reports NOT FOUND — a colony grid hides 1 kW vs 1 MW | probe (has) + owner skim |
 | F08 | B1 | sibling tell; **defective inverted line re-confirmed live in Relaunched Src this audit** (`HolidayRating.lua:77`) | probe + owner skim |
 | F09 | B1/B2 | asymmetric threshold pair; statistically invisible to players | probe + owner skim |
@@ -385,3 +388,98 @@ one-off single-fix authors (listed in the roster agent output with links).
 ## 8. Sources
 
 [S1] steamcommunity.com/app/3215050/discussions/0/797838226728656171/ · [S2] steamcommunity.com/app/3215050/reviews/?browsefilter=toprated (Kudaku, Nov 14 2025) · [S3] steamcommunity.com/app/3215050/discussions/0/691998095298538348/ · [S4] steamcommunity.com/app/3215050/discussions/0/691994648689827064/ · [S5] steamcommunity.com/app/3215050/discussions/0/766309862211705626/ (dev fix-list thread) · [S6] steamcommunity.com/app/464920/discussions/0/1640918469751039933/ · [S7] steamcommunity.com/app/3215050/negativereviews/?browsefilter=toprated&l=english&p=1 (Rhodith) · [S8] steamcommunity.com/app/3215050/discussions/0/658215953538296888/ · [S9] steamcommunity.com/app/3215050/discussions/0/660467372238571824/ · [S10] steamcommunity.com/app/3215050/discussions/0/695372460980312562/ · [S11] steamcommunity.com/app/3215050/discussions/0/658215953538161940/ · [S12] steamcommunity.com/app/3215050/discussions/0/658215953538296815/ + /658216290030325560/ · [S13] steamcommunity.com/app/3215050/discussions/0/660467372238569064/ · [S14] steamcommunity.com/app/3215050/discussions/0/691994126364820085/ · [S15] steamcommunity.com/app/3215050/discussions/0/679607959154615075/ · [S16] steamcommunity.com/app/3215050/discussions/0/682986810375204974/ · [S17] steamcommunity.com/app/3215050/discussions/0/834998413871378587/ · [S18] steamcommunity.com/app/3215050/discussions/0/691994366768609081/ · [S19] steamcommunity.com/app/464920/discussions/0/3038230013019773675/ · [S20] steamcommunity.com/app/3215050/discussions/0/691994126364708516/ · [S21] steamcommunity.com/app/3215050/discussions/0/694249410478015485/ · [S22] forum.paradoxplaza.com threads 1112166 / 1113731 / 1495056 (title/snippet grade) · [S23] steamcommunity.com/sharedfiles/filedetails/?id=3775120166 (fredware Bug Fixes) · [S24] GromGor workshop items 3717125029 / 3676027320 / 3730839706 / 3745475097 · [S25] steamcommunity.com/sharedfiles/filedetails/?id=3604423090 (Oxygenus) · [S26] steamcommunity.com/app/3215050/discussions/0/682986292645092952/ · [S27] steamcommunity.com/app/3215050/discussions/0/660467372238618006/ · [S28] steamcommunity.com/app/464920/discussions/1/1742228532898283720/ · [S29] github.com/ChoGGi/SurvivingMars_Mods … /Fix Bugs/MoreInfo.md (verbatim copy in audit scratchpad) · [S30] steamcommunity.com/app/3215050/discussions/0/567036688513147663/ · [S31] steamcommunity.com/app/3215050/discussions/0/658216290030318639/ · [S32] steamcommunity.com/games/3215050/announcements/detail/534381453704692743 (1.0.7 notes) · [S33] steamcommunity.com/app/464920/discussions/0/3211505894106180744/ · [S34] steamcommunity.com/app/3215050/discussions/0/691994126364857669/ · [S35] steamcommunity.com/sharedfiles/filedetails/?id=2588520023 (Tremualin's Library). Full per-query search logs live in the five agent outputs under the session task directory.
+
+## 9. Addendum (same day) — the packed-source comparison round
+
+The owner subscribed to GromGor's five mods and fredware's "Bug Fixes" on
+Steam; the workshop delivered all six `ModContent.fpk` files — **including the
+removed fredware mod**. The FLPK container format was re-derived (the parity
+session's extractor was not kept; the new one, with the format documented
+in-file, is `flpk_extract.py` in the session scratchpad) and all six unpacked.
+Everything below comes from reading the actual fix source against Src and our
+own `Code/`, with the load-bearing claims re-verified in Src by this session.
+
+**Tier corrections this round:**
+
+- **F04: GOLD → BRONZE-B2** (counts in §1 updated). GromGor's "Workshifts
+  FixUp" turned out to repair a *different* live mechanism — buildings falling
+  out of `UIColony.labels.ShiftsBuilding` and never receiving `SetWorkshift`
+  again — and that fits the witness thread better than our colonist
+  hour-window bug (stuck BUILDINGS colony-wide; onset correlated with an
+  asteroid leaving range, which fits label rebuilds on map transitions). The
+  label-desync is filed as **C32**. F04's defect claim itself stands
+  unchanged on its sibling tell. This is rule 2 doing its job at the source
+  level: the false GOLD survived quote-matching and fell only to code.
+- **F81a hardened**: GromGor clears the exact `g_DisastersPredicted
+  .DisasterMeteorStorm` key our `Fix_MeteorStormWedge`/`Fix_DisasterPrediction
+  Leak` pair manages — independent diagnosis confirmed at code level, not
+  just description level.
+- **C31 RESOLVED — not a new mechanism.** GromGor's "Broken Meteor Storms in
+  1.0.7.396349": his `GenerateDir` half is a **no-op** (vanilla's is a
+  file-local in `Meteors.lua:43-55` his global cannot shadow — and his copy
+  is byte-identical to Src anyway, guard included); the effective ingredient
+  is a one-shot `StopMeteorStorm()` on load — the F78 heal family. Verdict:
+  independent corroboration that the F78 wedge still occurs on our pinned
+  build. Side find: `Bombardment.lua:38-50`'s sibling `GenerateDir` lacks the
+  zero-dir guard (F26's neighborhood; noted, not filed).
+- **C04 mechanism confirmed**: vanilla `SupplyGridFragment:
+  RandomBreakConnection` (`SupplyGrid.lua:669-683`) picks its break victim
+  with **no map filter**; GromGor's working fix restricts to surface
+  connectors. One call-chain sweep away from an F-row.
+
+**fredware's 13 fixes vs ours (agent comparison, spot-verified):**
+
+- **F01 — equivalent.** He wraps the repeat's COND slot + deletes live
+  threads (reversible-at-runtime, his panel architecture demands it); we wrap
+  FUNC. Same defect, same coverage, neither misses anything.
+- **F74 — OURS IS A SUPERSET.** His guard blocks only `UniversalTradeRocket`
+  and **misses `UniversalRefugeeRocket`** (a sibling class, not a subclass —
+  his own description claims parity it doesn't deliver). Ours blocks both
+  plus the legacy classes.
+- **F78/F81 — overlapping, neither subsumes.** He clears the same stale
+  meteor-storm flags (his liveness test is the same one our F78 uses) and his
+  rains rewrite kills the F81b deadlock by `WaitThread` instead of our
+  bounded `WaitMsg`. **But he never restarts the wedged `MeteorStorm`
+  scheduler thread** — under his mod, weather resumes but the colony never
+  sees another natural meteor storm; our F78 heal restarts it. Conversely
+  **he clears stale state we do not**: → **C34** (stale-ACTIVE
+  `g_RainDisaster` with a dead main thread, healed via vanilla
+  `FinishRainProcedure`), plus minor `RainsDisasterThreads` structure
+  repairs and mid-session (not just on-load) flag sweeps.
+- **Track demolition — a THIRD defect, not F45/F48.** He does not attempt
+  F48's blocked fixup at all. What he fixes is → **C33**: whole-track
+  demolition via `DemolishAndSplitTrack` calls `OnDemolish` directly
+  (`TrackElement.lua:468/:506/:520`, verified), which sets
+  `CanDelete = ret_false` (`Track.lua:248-250`, verified) with no
+  `DoneObject` ever following — an invisible, undeletable, save-persisted
+  TrackBase shell that raises if deleted naively. **Our own F44 replacement
+  keeps that call shape and reproduces the shell on mass salvage** — the
+  single most actionable finding of the round.
+
+**His four fixes we lacked, now graded:** C22 Saint blessing —
+**Src-airtight** (`"Religious"` vs `GetTraitLabel` → `"TraitReligious"`,
+verified; the trait has never worked); C23 dust devils — **three verified
+defects** (spawn_chance misused as an integer-truncating count scaler :216 vs
+the correct probability use :169; `CurrentMap` descriptor read under a
+`MainMap` scheduler; no `DustStormsDisabled` term in the marker path); C24
+asteroid-visit predicate — **precedence bug verified on
+`PlanetaryView.lua:439`**, complementary to our F72 (we fix the false
+negative, vanilla's false positive passes through our wrapper); C25 Jumbo
+Cave — mechanism chain verified, trigger needs a repro. Also noted: his #11
+(lander cargo-ramp safety) overlaps our F67/F68 family and deserves its own
+comparison pass — recorded as a lead, not filed.
+
+**On the removal:** nothing in his 22 files plausibly explains a Workshop
+takedown — no copied vanilla bodies (his loop replacements are
+re-implementations; our pack ships more captured vanilla code than his), no
+network/filesystem/loadstring, persistence via the sanctioned mod-storage API
+only, version 38 of careful in-place migration. The removal cause is likely
+external to the code. His `bf_forecast.lua` (40KB) is an original
+disaster-forecast overlay, off by default.
+
+**Net effect on the audit's numbers:** GOLD 17→16, BRONZE 29→30, and the
+C-ledger grew to C12–C34 (23 filed candidates), of which **9 are now
+Src-verified** (C12–C17, C22–C24, plus C33) and two more mechanism-confirmed
+(C04, C25). The §7.1 owner actions are updated: the GromGor/fredware
+subscribe suggestion is DONE and consumed; the Paradox subforum and Paradox
+Mods browser checks remain open.

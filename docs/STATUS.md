@@ -20,9 +20,10 @@ toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
 **98 rows** (87 `F` + 11 `D`; recounted 2026-07-31 — the previous "93" had gone
-stale before F86/F87 were added), **plus 31 `C` candidate rows** (was 11 — the
-2026-08-01 bug-list audit filed C12–C31; C rows are leads, not defects, and are
-not counted in the 98). **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
+stale before F86/F87 were added), **plus 34 `C` candidate rows** (was 11 — the
+2026-08-01 bug-list audit filed C12–C31, and its same-day packed-source
+addendum filed C32–C34; C rows are leads, not defects, and are not counted in
+the 98). **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
 before that the F83 probe added `56_Probes_Wave7.lua`). Counts moved 2026-07-31
 with **PHASE 4 COMPLETE** (below).
 > ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
@@ -80,8 +81,20 @@ with **PHASE 4 COMPLETE** (below).
 > (work item); F01's recorded forum-report claim is not re-derivable
 > (Paradox forum crawler-blocked). **Owner actions requested (audit §7.1):**
 > logged-in Paradox subforum check (F01/F64/F74 reports), Paradox Mods
-> browser check (console channel, matters for D13), consider subscribing to
-> GromGor's + fredware's mods for source comparison.
+> browser check (console channel, matters for D13), ~~consider subscribing to
+> GromGor's + fredware's mods for source comparison~~ — **DONE same day: the
+> owner subscribed, all six FPKs (including fredware's REMOVED "Bug Fixes")
+> were extracted and read (audit §9).** Results: **F04 GOLD→BRONZE** (its
+> witness fits the newly-filed C32 label-desync better), final verdict
+> **16 GOLD / 25 SILVER / 30 BRONZE / 1 HOLD**; C31 resolved (F78-heal, not a
+> new mechanism); C04 mechanism confirmed vs Src; C22/C23/C24 VERIFIED vs Src
+> (Saint blessing never worked; 3 dust-devil scheduler defects; asteroid-visit
+> precedence bug); **C33 filed — whole-track demolition leaks an undeletable
+> TrackBase shell AND OUR OWN F44 PATH REPRODUCES IT** (needs an F-row
+> decision); C34 filed (stale-active rain state, F81b's sibling). fredware's
+> F74 misses refugee rockets (ours is a superset); his disasters fix never
+> restarts the wedged scheduler (ours does); nothing in his source explains
+> the Workshop removal.
 
 > ⚖️ **F86 STATE AS OF 2026-07-31 EVENING — the block below is the original
 > filing and parts of it are SUPERSEDED. Current truth:** the design was
