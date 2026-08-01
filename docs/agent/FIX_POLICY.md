@@ -146,48 +146,40 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   ⛔ The artifact is **specced only after Tiers 1+2 land and verify** — its
   target list is their output, never today's leak set. `[FAQ]`
 
-### 3a. SAVE SAFETY — no mod function below a yield on a game-time thread (HARD RULE, owner, 2026-07-31)
+### 3a. SAVE SAFETY — design so the save carries as little of us as possible, and the exit cleans the rest (HARD RULE, owner, 2026-07-31; framing set by the owner 2026-08-01)
 
-**The defect this exists to stop is F86, and it was measured, not theorised.** A
-savegame captures every game-time thread **together with its blocked stack**. A
-mod function is not in `PersistGatherPermanents`, so it is serialised **by
-value** and comes back runnable with an empty `_ENV` — it survives the mod's
-removal and keeps executing in the player's save. `Fix_MeteorFrequency` killed a
-colony's meteors permanently this way; `Opt_DroneOverhaul` leaked **with its own
-opt-in toggle OFF**. Neither is reachable by the pack after uninstall.
+**The stance (owner, 2026-08-01, verbatim):** *"we now know mod left overs are
+an accepted fact, we will try to be above the normal but its not a lockout …
+We just need to make sure our uninstall methods address them late."* By-value
+thread serialisation is **documented, intentional engine design**
+(`LuaSavegame.md.html`, quoted in ENGINE_FACTS) and the community's norm is to
+accept and silence it (`PRIOR_ART_SURVEY.md`). This pack aims **above that
+norm** — an engineered exit, not accidental residue — so §3a is a **design
+discipline that minimises what the exit path must clean**, not a purity bar.
+Named, bounded, inert residuals are accepted and disclosed; the uninstall
+procedure + the late-specced rescue artifact (D13, gated on Tier 1/2) address
+what remains.
 
-**The test is not "where is this function stored".** It is:
-
-> **Can this function be executing, or blocked, below a `Sleep` / `WaitMsg` /
-> `WaitWakeup` on a GAME-TIME thread at the moment the save is written?**
-
-Two properties bound it: a save captures only **blocked** threads, so purely
-synchronous mod code (data patches, getters, `Can…` predicates, UI handlers,
-non-yielding `OnMsg` bodies) can never be captured **through the thread-stack
-route**; and **real-time threads are not persisted at all**. That is ~62 of 74
-modules safe from that route by construction.
-
-⚠️ **CORRECTED 2026-07-31 (F86 adjudication): the test is value-reachability,
-not frame-position alone.** A mod function enters a save iff its **value** is
-reachable from the persisted graph at write time: (a) frame below a yield on a
-blocked GT thread; (b) held in a live local/upvalue of any captured frame —
-engine frames included (`Fix_CaveInsNoDisasters` is capturable this way today,
-inert only because it is layer-2-shaped); (c) stored in persisted state
-(object fields, GameVar contents, notification closures — the measured
-instance-closure experiment). So "safe by construction" additionally requires:
-**no function value stored into persisted state, and no assignment target that
-engine code holds live across a yield.** Class tables, presets, `OnMsg`
-registrations and UI windows remain safe. `docs/reports/F86_ADJUDICATION.md` §3.1/§5.1.
-
-⚠️ **And the rule's second half (measured 2026-07-31, round 2): what a captured
-function still REACHES.** An orphan's fallback env falls through to the real
-`_G` — it resolves every vanilla global and loses only names its own mod
-creates. So a captured body that touches a `SMRFixPack.*` name dies loudly at
-that touch; a captured body with only-vanilla names **keeps executing after
-uninstall** — bounded if it self-limits, forever if it loops. Every layer-3/2
-design must therefore also ask: *if this body is ever captured anyway, does it
-die, expire, or run forever — and would anyone notice?*
-(ENGINE_FACTS; `docs/reports/F86_ADJUDICATION.md` §8.)
+**The mechanism, as finally established (measured + twice-adjudicated — this
+opening states the CURRENT truth; earlier drafts' "empty `_ENV`" claim is
+dead):** a savegame serialises **by value** everything reachable from the
+persisted graph at write time. A mod function enters a save iff: **(a)** its
+frame sits below a `Sleep`/`WaitMsg`/`WaitWakeup` on a blocked **game-time**
+thread; **(b)** it is held in a live local/upvalue of ANY captured frame —
+engine frames included (`Fix_CaveInsNoDisasters` is capturable this way,
+inert because layer-2-shaped); or **(c)** it is stored in persisted state
+(object fields, GameVar contents, notification closures). Purely synchronous
+code that stores no function values is safe by construction; real-time
+threads are never persisted; class tables, presets, `OnMsg` registrations and
+UI windows are safe. And a captured orphan is NOT env-dead: its fallback env
+falls through to real `_G`, so it resolves every vanilla global and loses
+only mod-created names — a body touching `SMRFixPack.*` dies at that touch,
+an all-vanilla body **keeps executing after uninstall** (bounded if it
+self-limits, forever if it loops). `Fix_MeteorFrequency` killed a colony's
+meteors permanently this way; `Opt_DroneOverhaul` leaked with its toggle OFF.
+Every design must answer: *if this body is captured anyway, does it die,
+expire, or run forever — and would anyone notice?*
+(`F86_ADJUDICATION.md` §3.1/§5.1/§8; ENGINE_FACTS.)
 
 **⛔ THE ORPHAN GATE (owner, 2026-07-31) — loud death is the BACKSTOP, not the
 failure mechanism.** An orphan that dies at its first mod-name lookup dies at
@@ -245,8 +237,10 @@ failure is:
 
 **This binds new fixes as well as repairs.** Anything that replaces a blocking
 body, wraps a command method, or creates its own game-time thread must state in
-its header which layer it is on and why. Full analysis, the 12-module exposure
-list and the per-module disposition: `docs/reports/SAVE_SAFETY_REDESIGN.md` and BUGS.md
+its header which layer it is on and why. Full analysis, the exposure list
+(**13** after two same-day membership corrections — `DroneUnreachableForever`
+in, `TrainCargoDumping` out, compliant `CaveInsNoDisasters` counted) and the
+per-module disposition: `docs/reports/SAVE_SAFETY_REDESIGN.md` and BUGS.md
 F86.
 
 ## 4. Only fix proven, reachable, UNINTENDED defects

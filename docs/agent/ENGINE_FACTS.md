@@ -17,7 +17,8 @@ code suggests.
   * an apply() self-check must look for the method on its **declaring** class.
     Checking `Station.OnDemolish` (declared on Building), or
     `UniversalRocketBase.IsAutoModeEnabled` (declared on the AutoMode mixin),
-    finds nil and silently deactivates the fix. F64 shipped broken this way and
+    finds nil and silently deactivates the fix. F64 shipped broken this way
+    and was corrected in that session.
   * **the flattening cuts BOTH ways at runtime (proven live 2026-07-28):** once
     classes are built, each class carries its own baked copy of every method —
     so a RUNTIME patch on a base class (console wrapper, TestKit logger toggle)
@@ -29,8 +30,9 @@ code suggests.
     Rule: pre-build (mod-load) patches on the declaring class propagate;
     runtime instrumentation must target the LEAF class the instances actually
     use (e.g. `UniversalLanderRocket`, not `UniversalRocketBase`). TestKit's
-    AutoCargo logger needs the leaf-class repair (game-free item, queued).
-    was corrected this session.
+    AutoCargo logger got that leaf-class repair on 2026-07-28
+    (`90_Loggers.lua` — an earlier "queued" note here had gone stale; caught
+    by the 2026-08-01 agent-doc review).
 - `g_Consts` is a **GameVar** (`Lua\Modifiers.lua:427`) and does not exist while
   mods load — read it inside the patched function, never in apply(). `const` IS
   populated at that point.
@@ -67,11 +69,11 @@ code suggests.
   `_G[k] = v` goes through `ModEnvMeta.__newindex` (:1557-1563) into the real
   `_G`. `rawget(_G, "X")` for READS is fine (safe_rawget falls through, :1577).
 - **CORRECTION of an earlier "fact": `debug.getinfo` is NOT available in mod
-  code** (debug is blacklisted). The Test Kit's install probes
-  (00_TestCore.lua:37) break under the sandbox; repair in progress — bridge
-  real `debug` via a console-exec path or SKIP install probes with a
-  `SMRTest.debug = debug` console instruction. `GetStaticMsgNames()` (F06 probe)
-  is a real global and still fine.
+  code** (debug is blacklisted). RESOLVED: the Test Kit's install probes SKIP
+  in the retail sandbox — the 9 `[install]` SKIPs in every A/B leg's expected
+  numbers are exactly this, by design. `GetStaticMsgNames()` (F06 probe) is a
+  real global and still fine. (An earlier "repair in progress" note here had
+  outlived its resolution; caught by the 2026-08-01 agent-doc review.)
 - Patch points that work: `PeriodicRepeatInfo[name]` slots (THREAD/SLEEP/FUNC/COND
   = 1..4, CommonLua\Core\lib.lua:1538+), `GlobalGameTimeThreadFuncs[name]` +
   `RestartGlobalGameTimeThread(name)` on LoadGame (Lua\Config\_fixup.lua),
@@ -232,12 +234,22 @@ code suggests.
     this route and remains true. Class tables, presets, `OnMsg` registrations
     and UI windows are safe (permanents / rebuilt / not persisted).
     Full evidence: `docs/reports/F86_ADJUDICATION.md` §3.1/§5.1.
-  * **A proper Lua tail call (`return orig(...)`) removes our frame from the
-    stack**; calling `orig(...)` as a statement and then doing more work keeps it
-    there. That is the only structural difference between the wrapper that
-    leaked and the one that appears not to (believed, not yet measured).
+  * ~~A proper Lua tail call (`return orig(...)`) removes our frame from the
+    stack — (believed, not yet measured).~~ ⚠️ **CANCELLED as unfalsifiable
+    (F86 adjudication + owner, 2026-07-31): do not measure this and do not
+    rely on it.** A tail call has nothing after it, so a vanished frame and a
+    surviving frame produce identical silence — no experiment exists, and
+    adding a detector after the call stops it being a tail call. FIX_POLICY
+    §3a's layer 2 was restated to need no engine guarantee: *no mod code
+    after a call that can block*, checkable by reading source.
   * Real-time threads are unaffected — they are not persisted at all.
-  * Evidence, harm and the 12-module exposure list: **BUGS.md F86**.
+  * Evidence, harm and the exposure list (**13** after two same-day membership
+    corrections): **BUGS.md F86**.
+  * ⚠️ The disproven by-name persistence belief still sits in TWO shipped file
+    headers — `Fix_MeteorFrequency.lua:53` and `Fix_RainsDeadlock.lua:52`
+    (named here 2026-08-01 so nobody inherits them as facts). Both bodies are
+    deleted by the F86 Tier-1 rewrite (project chain prompt 4), which retires
+    the comments with them; do not cite either header in the meantime.
 
 - **MODS *DO* GET A PRE-SAVE HOOK — `OnMsg.SaveGameStart` and
   `OnMsg.SaveGameDone` reach mod code** (measured 2026-07-31 with a Test Kit
