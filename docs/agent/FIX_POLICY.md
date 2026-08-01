@@ -239,9 +239,12 @@ failure is:
 body, wraps a command method, or creates its own game-time thread must state in
 its header which layer it is on and why. Full analysis, the exposure list
 (**13** after two same-day membership corrections — `DroneUnreachableForever`
-in, `TrainCargoDumping` out, compliant `CaveInsNoDisasters` counted) and the
-per-module disposition: `docs/reports/SAVE_SAFETY_REDESIGN.md` and BUGS.md
-F86.
+in, `TrainCargoDumping` out, compliant `CaveInsNoDisasters` counted;
+**re-derived 2026-08-01 by the five-shape Phase-1 enumeration, which confirmed
+the 13 and classified one additional inert route-(c) preset-field site** —
+`Fix_LastTransmissionStorage`'s `Condition.eval`, disclosed-no-build,
+adjudication §4.4) and the per-module disposition:
+`docs/reports/SAVE_SAFETY_REDESIGN.md` and BUGS.md F86.
 
 ## 4. Only fix proven, reachable, UNINTENDED defects
 

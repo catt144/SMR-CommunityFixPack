@@ -113,7 +113,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | todo — filed 2026-07-30; rover half DISPROVEN BY PLAY during PT-25; nothing built; text-patch design is a USER DECISION (localization tradeoff), bundled into the D10 build (chain prompt 9) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
-| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | open — filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **10 more exposed — 12 in total; the sweep corrected the MEMBERSHIP both ways** (`Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — next: the Phase-0 measurement session (~~`F86_NEXT_SESSION_PROMPT.md`~~ — split and archived 2026-08-01; now project chain prompts 2→5). D10/D12 held until repairs land |
+| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | open — filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **durable exposed list re-derived 2026-08-01 (five-shape enumeration, Phase 1): 13** (the sweep had corrected the membership both ways — `Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out — and the re-run confirms it) **plus one inert route-(c) preset-field site** (`Fix_LastTransmissionStorage`, adjudication §4.4 closed — no build). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — Phase 0 measured 2026-08-01 (GT creation DEFERS; autosave hook FIRES); **Phase 1 done 2026-08-01** (final Tier-1 spec `SAVE_SAFETY_REDESIGN.md` §6.2a; enumeration re-derived; §4.4 closed; build prompt written) — next: the Tier-1 BUILD (chain prompt 4, `F86_TIER1_BUILD_PROMPT.md`). D10/D12 held until repairs land |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
 | F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | P2 | SOURCE-VERIFIED | open — filed 2026-07-31 (found by the owner during the F86 design review; confirmed by the adjudication). Currently shipped; silent; also the measured "reinstall repairs a damaged save" mechanism — same restart, both effects. Fix rides the F02/F86 Tier-1 rewrite via the one-shot latched heal (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
@@ -4446,6 +4446,49 @@ machinery surgery.
 > contains no yield of its own — it blocks through a callee. Full detail, the
 > reliable enumeration method, and the ten other modules the sweep cleared:
 > `SAVE_SAFETY_REDESIGN.md` §4a.
+
+> ## ✅ THE ENUMERATION RE-RAN 2026-08-01 (F86 Phase 1, chain prompt 3) — all five assignment shapes, re-derived over the current `Code/` (post-F49(a)-strip), NOT inherited. **The durable list is the expected 13, plus one newly CLASSIFIED route-(c) site.**
+>
+> **Method:** alias-blind extraction of everything `Code/` assigns in each of
+> the five shapes (class-method incl. aliased/indented defs; table-slot;
+> global assignment incl. `SMRFixPack.SetGlobal`; preset-field; own-thread),
+> then every extracted target run through `tools/blocking_analysis.py`
+> (primitive-seeded, unambiguous-callee propagation — 15,106 names, 633 direct
+> yielders) and every BLOCKS/AMBIGUOUS verdict resolved BY HAND against the
+> specific class we patch. **Durable list and dispositions:**
+>
+> | # | module | shape | exposure | disposition |
+> |---|---|---|---|---|
+> | 1 | `Fix_MeteorFrequency` | table-slot (`GlobalGameTimeThreadFuncs.Meteors`) + persisted named GT thread | body IS a blocked GT thread body | **Tier 1 — rewritten** (spec §6.2a-A) |
+> | 2 | `Fix_RainsDeadlock` | global assignment (`RainsDisasterLoop`, direct yield) + own threads via `RefreshRainsLoops` | persisted loops run our body | **Tier 1 — rewritten** (spec §6.2a-B, C34 rider) |
+> | 3 | `Fix_ArrivalDeaths` | class-method (`Colonist:Arrive`, direct yield) | command body, yields | Tier 2 (half (b) layer 3; half (a) design pass owed) |
+> | 4 | `Fix_TrainWaitTime` | class-method (`Colonist:BoardVehicle`, blocks via `PlayPrg`) | command body | Tier 2 (layer 3 via `AddSpentTime`) |
+> | 5 | `Fix_DroneUnreachableForever` | class-method (`Drone:ApproachWrapper`, blocks via `DroneApproach`) | mod code after the blocking call | Tier 2 (layer 3 via consumer `CleanUnreachables`) |
+> | 6 | `Opt_DroneOverhaul` | class-method (`Drone:Idle` wrapper) | **measured leak** — work after the call | Tier 2 (layer 2; carve-out granted) |
+> | 7 | `Fix_BombardmentSpread` | global assignment (`WaitBombard`, direct yield) + own GT thread (`:137`) | replaced blocking body | NOT built — residual ≈ nil (round-2 measured; mod-name-free body completes the volley) |
+> | 8 | `Fix_MeteorStormWedge` | own GT thread (`:119`, `StormWedgeHeal`) | mod-owned thread | Tier 3 accepted; **orphan-gate reorder specced** (§6.2a-D) |
+> | 9 | `Fix_CrystalMysteryHang` | own GT thread (`:44`) | mod-owned thread | Tier 3 accepted (expires at frozen deadline) |
+> | 10 | `Fix_ExtenderFlapChurn` | own GT thread (`:77`) | mod-owned thread | Tier 3 accepted (one-shot, completes silently) |
+> | 11 | `Fix_TrackConnectorPingPong` | own GT thread (`:156`) | mod-owned thread | Tier 3 accepted (one-shot) — its `Done` wrapper's post-`orig` reclaim verified behind a **non-blocking** chain (see below) |
+> | 12 | `Fix_ShelterReflex` | class-method (`Colonist:Idle` wrapper) | tail-return over a blocking body | compliant — no work (§4.5 accepted residual) |
+> | 13 | `Fix_CaveInsNoDisasters` | table-slot (`info[FUNC]` into the engine's periodic-repeat entry) | route (b) — live engine local | compliant — no work (inert, layer-2 shape) |
+> | +1 | `Fix_LastTransmissionStorage` | **preset-field** (`like.Condition.eval`, `:134`) | **route (c) — CONFIRMED 2026-08-01** by the §4.4 closure: `RecalcFactionsApproval` stores `likes_data` (entries carry `like = like_def`) into `g_FactionsHolder`, a **GameVar** (`Factions.lua:196/:659`), and preset permanents cover **roots only** (`CommonLua/Preset.lua:1362-1394`) — the sub-object and our closure serialise by value, precisely when a patched entry evaluates non-zero | **compliant/inert — no build.** The persisted copy is never invoked (consumers read plain fields; fresh evaluations use the live presets), and even if invoked it touches only vanilla names + own plain upvalues. Named, bounded, disclosed (§3a residual class) |
+>
+> **No non-compliant 14th** — the stop condition did not fire. Notable
+> hand-resolutions, so the next re-run does not repeat them: the analysis
+> tool's verdicts merge ALL same-name defs and count yields inside nested
+> closures, so four of its BLOCKS flags were false for the class we patch —
+> `MirrorSphereBuildingBase:StartAction` (its `WaitWakeup`s live in a
+> vanilla-spawned inner thread; the outer body is sync),
+> `RCTransport:InteractWithObject` (the blocking `AssignTrain` caller is
+> `Station:InteractWithObject`), and `Fix_TrainsToVoid`/`Fix_TrackTunnelPowerBridge`
+> (their pre-work `Train:DestroySilent` calls are **synchronous by
+> construction** — it forces `demolishing_countdown = 0` immediately before
+> `DoDemolish`, skipping the only yielding branch; zero yield primitives in
+> the whole of `Track.lua`/`Tracks.lua`/`TrainTransport.lua`/`StationsLink.lua`).
+> Everything else `Code/` assigns resolved clear (sync bodies, UI surfaces,
+> class-table/permanent stores, `OnMsg` registrations, or RT threads — safe by
+> construction).
 
 **This is a defect in this pack, not in the game.** Found by executing PT-20's
 mandatory step 5 for the first time. It is measured, not inferred, and it

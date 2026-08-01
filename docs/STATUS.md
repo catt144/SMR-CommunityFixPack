@@ -215,6 +215,15 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > Owner directives of the evening: orphan-gate rule (FIX_POLICY §3a), latched
 > heal, and the **prelaunch save-exit deliverables** (uninstall procedure +
 > standalone cleaner — WORKFLOW release gates).
+> **PHASE 0 MEASURED + PHASE 1 DONE (2026-08-01, chain prompts 2-3):** GT
+> creation DEFERS and the autosave hook FIRES (ENGINE_FACTS); the **final
+> Tier-1 spec is `SAVE_SAFETY_REDESIGN.md` §6.2a** (rains wrapper shape final,
+> C34 rider riding the rains pass, F81a mid-session NewDay reconcile taken,
+> StormWedgeHeal orphan-gate reorder specced); the five-shape enumeration
+> re-derived the durable exposed list at **13, plus one inert route-(c) site**
+> (`Fix_LastTransmissionStorage`, adjudication §4.4 CLOSED — no build); the
+> build prompt is **`docs/prompts/F86_TIER1_BUILD_PROMPT.md`** (chain prompt 4
+> runs it). Next: the Tier-1 BUILD.
 >
 > 🛑 **PT-20 FAILED 2026-07-31 — WE HAVE A P1 DEFECT OF OUR OWN, AND IT BLOCKS
 > RELEASE. See `BUGS.md` F86.** Executing PT-20's step 5 for the first time
