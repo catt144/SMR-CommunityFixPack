@@ -1130,6 +1130,19 @@ all three shipped effects have Amount 0, but the pass is preset-driven by design
 LoadGame-vs-fixup ordering cannot be discriminated by the probe (it drives the pass
 directly); PT-35 case C remains the only true fixture.
 Probe: `SaveSanitizerTurbineBuff` in `30_Probes_Wave3.lua`.
+**⚠ OPEN SCOPE QUESTION — added 2026-08-01 by the bug-list audit (§2.2, row
+F35, ⚠).** The witness thread this entry cites ("polymer upgrade works now,
+frictionless doesn't"; TheNightglow Nov 2025 [S27], Frictionless Composites
+named with a player-derived formula) **may be describing a LIVE label miss in a
+current game, not the old-save migration failure this fix repairs.** If so, our
+scope is one layer too shallow: the pass would be quietly repairing on every
+load something that should never have broken, and the player-visible defect
+would persist for a whole session before the next load. **The rider that
+decides it is in `PLAYTEST_CHECKLIST.md` §6** (bug-list-audit table) — research
+the tech in a live session and read `UIColony.label_modifiers` **without
+reloading**, because our own auto-running pass masks the answer the moment a
+save is loaded. Until that reading exists, "witnessed and fixed" is not
+claimable for F35.
 
 ### F36 — Universities overtrain geologists (P2, high behavior-confirmed)  `[tested: Code/Fix_UniversityOvertraining.lua — PT-24 PASS 2026-07-27, both halves]`
 `City:GetNeededSpecialist` (`City.lua:561-593`) counts every `ui_working` workplace incl.
@@ -2979,6 +2992,20 @@ colonist occupies; cleared instantly on restore.
 
 ### F74 — RC Transports can be ordered onto trade / refugee rockets (P2, high)  `[tested: Code/Fix_RocketInteractGuard.lua — PT-39 PASS 2026-07-27: cursor + route both refused a landed trade rocket; controls clean (F76 caveat on the entry)]`
 
+**Needs-eyes rider DOWNSIZED 2026-08-01 (bug-list audit §2.2, row F74).** The
+outstanding observation was never about the fix — PT-39 proved the guard
+refuses — it was "does the vanilla harm this prevents actually occur?", and
+nobody had ever seen it. **Two outside answers landed with the audit:** a 1.0.7
+dev note (*paraphrase-grade*: RC-Transporter rare-metals rocket-overload
+exploit fixed, [S32]) and fredware's independent Relaunched fix #10 —
+*"Prevents RC Transports from interrupting Universal Trade Rockets"* [S23],
+which also makes F74 a ⚑ BRONZE→SILVER promotion. A fix author shipping the
+same guard is evidence the harm is real. **So the rider stops being
+load-bearing**: it was merged into the F53(a) row in `PLAYTEST_CHECKLIST.md`
+§6 and now rides along on that row's never-modded fresh colony rather than
+justifying one of its own. (Ours also remains a superset — his guard misses
+`UniversalRefugeeRocket`, audit §9.)
+
 **Audit 2026-07-30 (reachability): R2, one framing correction.** Rival-colony
 trade-pad and foreign-aid rockets are plain class `UniversalRocket`
 (RivalColonies.lua:242-247; PopupNotificationPreset-Default.lua:42-46) — they
@@ -3456,7 +3483,14 @@ which is consistent with the theory (other tracks' orientations cover the
 missing directions) but does not prove it. A ready console tap on the
 global `ForEachStationAlongTrack` (prints each stop's enumerated dest set —
 in the session log 2026-07-28) brackets it definitively if the symptom
-recurs. Related vanilla wart, same session: the trip planner books tickets
+recurs. **That tap is now a standing rider in `PLAYTEST_CHECKLIST.md` §6
+(bug-list-audit table, added 2026-08-01), with one instruction attached: TAP
+BEFORE MITIGATING** — adding trains is the known workaround and it destroys
+the evidence. The audit (§4) rates F80 the strongest reported-but-unpinned
+defect we hold: a Relaunched witness (*"they crowd a train station supposedly
+waiting for it to take them to the dome they're right next to!"* —
+reeses4brkfst, Nov 27 2025 [S34]) plus a dev note, and still no located
+mechanism. Related vanilla wart, same session: the trip planner books tickets
 over track REACHABILITY with no regard for train SERVICE — colonists queue
 indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
 PT-43 F21.
@@ -3757,7 +3791,11 @@ the actual add/remove path for the split-grid notification lives elsewhere
 once-per-sol periodic re-check would explain the observation exactly. Compare
 against a notification that clears promptly to isolate whether the difference
 is cadence or a missing on-rejoin removal call. Cheap live tap once the updater
-is found. Related in kind (not in mechanism) to F81/F78, where a notification
+is found. **The timed observation is now a standing rider in
+`PLAYTEST_CHECKLIST.md` §6** (bug-list-audit table, added 2026-08-01): time the
+rejoin → clear gap on any grid split that happens in play, and take the
+prompt-clearing comparison in the same sitting or the reading discriminates
+nothing. The source trace itself is owed by chain prompt 6b. Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
 
@@ -6320,6 +6358,14 @@ quotes verbatim; sources in the audit report §8.
   this finding (see the F04 entry note) — if the sweep finds 1.0.7 fixed the
   label desync and the reports predate 1.0.7, re-examine F04's witness
   reassignment as well.
+  **A live read now rides alongside the sweep** (`PLAYTEST_CHECKLIST.md` §6,
+  bug-list-audit table, added 2026-08-01): after visiting and leaving an
+  asteroid — the witness's own onset condition — count the `ShiftsBuilding`
+  members of `UICity.labels.Building` missing from
+  `UIColony.labels.ShiftsBuilding`; any non-zero count is the defect, observed
+  on our pinned build. It does not replace the Src sweep (chain prompt 6) —
+  a zero count proves nothing on its own — but a non-zero one settles the
+  1.0.7 question in the direction that matters.
 
 ## Not yet swept (follow-up targets)
 

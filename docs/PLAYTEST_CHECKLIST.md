@@ -5,8 +5,9 @@
 next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
-**Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — 40
-sections as of 2026-07-30. This file carries **only un-run work**: when a test
+**Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — 44
+sections as of 2026-08-01, of which one (PT-54) is **retired unrun**, not
+completed. This file carries **only un-run work**: when a test
 completes, its whole section moves to the archive and is **deleted from here,
 with no stub or pointer left behind** (see the reporting protocol). The archive
 is the notes-and-documentation half; this file is the live work list.
@@ -973,19 +974,34 @@ them).
 
 ---
 
-# 6 · Needs-eyes list — settling observations from the reachability audit
+# 6 · Needs-eyes list — one-observation riders
 
-**Added 2026-07-30.** These are not full PTs. Each is a **single observation**
-that settles a verdict currently believed on source-shaped evidence — the exact
+**Three intakes now feed this list**, and they do not all mean the same thing —
+read the block above each table before taking a reading:
+
+1. **The reachability audit (2026-07-30)** — verdicts believed on source-shaped
+   evidence. **None of these is currently believed wrong.**
+2. **The popup audit (2026-07-30 late)** — same shape, its own four verdicts.
+3. **The bug-list audit (2026-08-01)** — these are different: two of them
+   (**F35**, **C32**) exist because an external witness suggests something we
+   believe may be *incomplete or misattributed*, and two (**F80**, **F82**)
+   are evidence-gathering on open defects with no located mechanism. Each row
+   says what it decides.
+
+None of these is a full PT. Each is a **single observation**, taken
+opportunistically: if you are already in a save that qualifies, take it and
+record it.
+
+### From the reachability audit — settling observations
+
+Each settles a verdict currently believed on source-shaped evidence — the exact
 kind of evidence F49(c) proved can lie. Source is decisive about whether a code
 path can execute and **near-mute about whether what it does is wrong**; every
 row below turns on runtime or interface behaviour the Lua does not carry
 (hit-testing, affordances, cursor and confirmation feedback, engine placement,
 visual outcome).
 
-**None of these is currently believed wrong.** Treat them as cheap
-opportunistic riders — if you are already in a save that qualifies, take the
-observation and record it. Full reasoning per row is in
+**None of these is currently believed wrong.** Full reasoning per row is in
 `REACHABILITY_AUDIT.md` §3 (Challenge review 2026-07-30).
 
 | Fix | The one observation that settles it |
@@ -993,14 +1009,15 @@ observation and record it. Full reasoning per row is in
 | **F16** | Finish a Mirror Sphere excavation, open the finished site's infopanel, click "Pierce the Shell" — do drones engage a dead request? (overlaps PT-30) |
 | **F38** | Destroy a tunnel, save/load **in vanilla**, order a colonist or rover across — does the route still use the ruin? (overlaps PT-25) |
 | **F34(d)** | Drop a landscape mark over a rocket actively loading drones — is a mid-"Embark" drone visibly yanked, or does it recover silently? |
-| **F74** | **In vanilla**, order an RC Transport onto a landed storybit trade rocket — does the original harm actually occur? PT-39 proved the fix refuses; nobody has ever observed the vanilla damage it prevents |
-| **F53(a)** | **In vanilla**, land a passenger rocket flush against a Universal Depot — do arrivals actually strand? (overlaps PT-18) |
+| **F74 + F53(a)** *(merged 2026-08-01)* | **One never-modded fresh colony, two observations, one sitting** — see the fresh-colony note below, which is the whole cost of both. **(1)** Order an RC Transport onto a landed storybit trade rocket — does the original harm actually occur? **(2)** Land a passenger rocket flush against a Universal Depot — do arrivals actually strand? (F53(a) also overlaps PT-18.) ⬇ **F74's half is downsized to exactly this** (bug-list audit 2026-08-01, `BUG_LIST_AUDIT.md` §2.2 row F74): its "is the vanilla harm real at all" question now has two outside answers — a 1.0.7 dev note (*paraphrase-grade*: RC-Transporter rare-metals rocket-overload exploit fixed, [S32]) and fredware's independent Relaunched fix #10, *"Prevents RC Transports from interrupting Universal Trade Rockets"* [S23] — so the observation is no longer load-bearing for the verdict. It rides along only because the fresh colony is already there for F53(a) |
 | **F06** | Reach the Mystery 10 finale and ignore the corner notification for one sol at speed — does the Epilogue really arrive minimized and unpaused? |
 | **F26** | Watch one Last War volley with the fix off and one with it on — is the spread visible? (this IS PT-47's first result line) |
 | **F22** | Open the Last Transmission faction goals panel in a young politics-enabled colony — where is the corrupted number player-visible before the Martian Assembly stage? (overlaps PT-42) |
 | **F77** | Flap an extender during hub activity, with and without — how big is the fleet Idle-kick? (this IS PT-52 Trigger B's F77 half) |
 | **F11** | Crew-gather a busy train's passenger, then inspect `train.units` — the U-tier settling read |
-| **F81b** | On a vanilla save, catch a blocked `RainsDisasterThreads` activation after a collision; or under the fix, rain resuming within ~7 sols (overlaps PT-54 Trigger E) |
+| **F81b** | On a vanilla save, catch a blocked `RainsDisasterThreads` activation after a collision; or under the fix, rain resuming within ~7 sols. ~~(overlaps PT-54 Trigger E)~~ → **carried by the F86 Tier-1 `Fix_RainsDeadlock` A/B leg** (PT-54 retired 2026-08-01) |
+
+### From the popup audit
 
 **Added 2026-07-30 late by the popup audit (`POPUP_CONSEQUENCE_AUDIT.md` §8 —
 full reasoning there; these four settle ITS verdicts):**
@@ -1012,21 +1029,41 @@ full reasoning there; these four settle ITS verdicts):**
 | **F85 (U tier)** | Rebind Quick Save to **F9**, open any choice popup (a launch-issue prompt is cheapest), press it — does a save land, and does loading it void the choice? |
 | **§3.6 corner (optional)** | With the distress-call popup left open, does the sol-change autosave fire under it? |
 
-**Six of the eleven ride along on PTs already in this file** (F16→PT-30,
-F38→PT-25, F53(a)→PT-18, F26→PT-47, F22→PT-42, F77→PT-52B, F81b→PT-54E) — take
-them while you are there rather than scheduling anything. The genuinely new
-ones are **F34(d)**, **F74** and **F06**, plus **F11**'s console read.
+### From the bug-list audit — two scope checks and two evidence-gathering reads
 
-**Two of these are "does the vanilla harm exist at all" checks** (F74, F53(a)),
-and they need the pack **disabled** to be meaningful. ~~Bundle them into the next
+**Added 2026-08-01 by the bug-list audit (`BUG_LIST_AUDIT.md`) and the entries
+named on each row — four cheap riders, no sitting of their own. Unlike the two
+tables above, these are not "believed right, verify anyway":**
+
+| Subject | The one observation, and what it decides |
+|---|---|
+| **F35 live-label check** | **In a CURRENT game — no old save, that is the point — read the label the moment the tech lands, WITHOUT reloading.** Build a Large Wind Turbine, note its Power, research **Frictionless Composites**, and check the same turbine again in the same session: the +100% must appear immediately. Console form of the same question, run right after research — it also names **whose** modifier is doing the work: `*r for id, m in pairs((UIColony.label_modifiers or empty_table)["WindTurbine_Large"] or empty_table) do ConsolePrint(tostring(id) .. " prop=" .. tostring(m.prop) .. " percent=" .. tostring(m.percent)) end` (the read path our own pass uses, `90_SaveSanitizer.lua:64-79`). **No line with `prop=electricity_production` and a non-zero percent, with the tech researched, is the defect.** A line whose id starts `SMRFixPack_F35_` means **our pass supplied it, not the tech** — which is the audit's suspicion made visible. ⚠️ **The no-reload part is not optional and the sanitizer is why:** our F35 pass runs automatically on every load, so *any* reload repairs a live miss before you can see it, and `RepairTurbineBuff()` typed at the console will read 0 no matter what — a live defect would be silently masked by our own fix. **Decides whether our F35 scope under-reaches:** the audit flags (§2.2, row F35, ⚠) that the witness thread — *"none of these buffs apply to large wind turbines"*, Frictionless Composites named, player-derived formula, TheNightglow Nov 2025 [S27] **R** — may describe a **live** label miss rather than (only) the old-save migration failure the fixup repairs. If it is live, the fix is aimed one layer too shallow and repairs on reload what should never break. Cheapest home is a research-era colony; **PT-35 case A** wants a Large-turbine save anyway, but that case's *reload* half cannot answer this one |
+| **C32 label-membership read** | **After visiting an asteroid and leaving it** (the witness's own onset condition), is every `ShiftsBuilding` still in the colony label? One line — it counts exactly what GromGor's fix re-adds: `*r local n = 0 for _, b in ipairs(UICity.labels.Building or empty_table) do if IsKindOf(b, "ShiftsBuilding") and not table.find(UIColony.labels.ShiftsBuilding or empty_table, b) then n = n + 1 end end ConsolePrint("ShiftsBuilding missing from the colony label: " .. n)` **Any non-zero count is the defect** (`table.find`/`IsKindOf`/the two label tables are all shapes this pack already uses). Decides C32 (BUGS C32 entry): vanilla's workshift tick iterates that label only, so a building that falls out never changes shift again. **Pairs with any asteroid sitting** — and note the owner's standing challenge on that entry: if 1.0.7 already fixed this, F04's witness reassignment gets re-examined too |
+| **F80 settling observation** | **On any train sitting, if the symptom appears** (colonists waiting while trains come and go): before touching anything, run the ready console tap on the global `ForEachStationAlongTrack` recorded in the F80 entry — it prints each stop's enumerated destination set. The suspected mechanism there is that the stop-processing walk takes its enumeration **direction from the track's canonical orientation, not the train's travel direction**, so a destination lying "behind" it is structurally unenumerable at that stop forever. **The tap brackets that definitively**; adding trains (the known mitigation) destroys the evidence, so tap first. F80 is the audit's strongest reported-but-unpinned defect (§4) — it has a Relaunched witness and a dev note, and no located mechanism |
+| **F82 timing observation** | **One timed watch**: note the game time when a split power/life-support grid is rejoined, then the time its notification clears. The owner's verbatim report (F82 entry, 2026-07-29) is that it takes *"close to an entire sol"* while every other notification type clears promptly. **Decides between the two candidate causes** the entry names — a once-per-sol periodic re-check (a timing figure near one sol says cadence) versus a missing on-rejoin removal call (a clear-on-the-next-anything pattern says the removal path). Compare against one notification that clears promptly in the same sitting, or the reading proves nothing |
+
+**Eight ride along on something already scheduled** (F16→PT-30, F38→PT-25,
+F53(a)→PT-18, F26→PT-47, F22→PT-42, F77→PT-52B, F35→a research-era colony,
+PT-35 case A shares the save; F81b→the F86 Tier-1 rains A/B leg) — take them
+while you are there rather than scheduling anything. The rest wait for their
+situation to arise: **F34(d)**, **F06**, **F11**'s console read, and the three
+2026-08-01 riders (**C32** an asteroid visit, **F80** the symptom recurring,
+**F82** a grid split).
+
+**One merged row is a "does the vanilla harm exist at all" check** (F74 +
+F53(a), merged 2026-08-01), and it needs the pack **disabled** to be
+meaningful. ~~Bundle them into the next
 PT-20 uninstall-safety sitting~~ — **that bundling is RETIRED as of 2026-07-31,
 and the reason is F86.** They were attempted in the PT-20 leg and dropped
 unrun: a save whose colony has ever been played with the pack installed carries
 pack code on its persisted thread stacks, so **turning the pack off does not
-produce a vanilla control.** These two rows need a colony that has **never** had
-the pack installed — a fresh ten-minute save is enough for both, and it is the
-only true negative control the project has. Do not record a reading for them
-taken on a pack-lineage save.
+produce a vanilla control.** That row needs a colony that has **never** had
+the pack installed — a fresh ten-minute save is enough for both halves, and it
+is the only true negative control the project has. Do not record a reading for
+it taken on a pack-lineage save. **This shared fresh colony is the entire
+reason the two rows were merged:** F53(a) still needs the observation, F74's
+no longer decides anything (two outside witnesses now answer it), and neither
+justifies a second never-modded save.
 
 `Results (record per fix, with the date):` _____________________________________________
 
