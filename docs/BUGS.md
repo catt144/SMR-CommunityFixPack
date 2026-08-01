@@ -1142,8 +1142,50 @@ all three shipped effects have Amount 0, but the pass is preset-driven by design
 LoadGame-vs-fixup ordering cannot be discriminated by the probe (it drives the pass
 directly); PT-35 case C remains the only true fixture.
 Probe: `SaveSanitizerTurbineBuff` in `30_Probes_Wave3.lua`.
-**⚠ OPEN SCOPE QUESTION — added 2026-08-01 by the bug-list audit (§2.2, row
-F35, ⚠).** The witness thread this entry cites ("polymer upgrade works now,
+**✅ SCOPE QUESTION CLOSED 2026-08-01 — MEASURED, and the answer is that our
+scope is RIGHT: the live label path works, for all three labels including
+`WindTurbine_Large`.** Owner at the keyboard, log
+`Mars.exe-20260801-14.59.57-6a22b86d.log`, a **pre-research save loaded fresh**
+so our own pass could not have run first (it early-returns at
+`90_SaveSanitizer.lua:58` when the tech is not researched — verified in the same
+sitting) and **no reload anywhere in the measurement window**:
+* **Before** (tech not researched): all three labels
+  `NO MODIFIERS` — a clean baseline, nothing pre-supplied by anyone.
+* **After** the tech landed: every one of `WindTurbine`, `WindTurbine_Large`,
+  `WindTurbine_Diffuser` carries `prop=electricity_production percent=100`,
+  **keyed by the vanilla `Effect_ModifyLabel` objects with `id=GameEffect` — NOT
+  `SMRFixPack_F35_*`**, so it is the tech's own apply and demonstrably not our
+  sanitizer's work.
+* **And it reaches the buildings, not just the colony table** — Power doubled on
+  all three, exactly: Wind Turbine 9.3 → 18.6, Large 18.6 → 37.2, Shrouded
+  (Diffuser) 29.8 → 59.5. So label *membership* is intact for these classes too,
+  and the +100% compounds with the 86% elevation boost multiplicatively
+  (`5 × 1.86 × 2 = 18.6`) rather than adding.
+* **Trigger stated exactly:** the tech was granted with
+  `UIColony:SetTechResearched("FrictionlessComposites")`, not researched
+  naturally — it is a **Breakthrough** (`TechPreset.lua:799`, `group =
+  "Breakthroughs"`) and was not obtainable in that colony. That is the same
+  funnel natural completion uses: `Research:SetTechResearched` →
+  `tech:EffectsApply(UIColony)` (`Research.lua:313`) → `Effect_ModifyLabel:OnApplyEffect`
+  (`MarsGameEffects.lua:161`) → `SetLabelModifier`; the natural paths
+  (`Research.lua:803`, `:841`) reach line 313 through that same function and
+  differ only in the `notify` flag, which only adds the popup.
+* ⚠️ **A trap this sitting walked into, recorded so nobody repeats it:** the
+  first "after" reading was taken while **Low-G Turbines** was completing, not
+  Frictionless Composites. `LowGTurbines` (`TechPreset.lua:2830-2844`, group
+  Physics) grants two `Effect_UnlockUpgrade` entries (Polymer Blades) and
+  **no label modifier at all** — so its three `NO MODIFIERS` readings were
+  correct and would have been mis-filed as a P1 defect. Low-G Turbines is the
+  "polymer upgrade works" half of the witness's own sentence. Always confirm
+  with `IsTechResearched("FrictionlessComposites")` before reading.
+**Consequence: the fix is NOT aimed one layer too shallow.** F35 is the old-save
+migration failure it was filed as, the pass is not quietly repairing a live
+defect on every load, and "witnessed and fixed" is now claimable. What this does
+NOT establish: that the Nov 2025 witness was mistaken about *their* game — this
+measures build 1.0.7.396349's live path, not theirs.
+
+**~~⚠ OPEN SCOPE QUESTION~~ — added 2026-08-01 by the bug-list audit (§2.2, row
+F35, ⚠), closed the same day by the reading above.** The witness thread this entry cites ("polymer upgrade works now,
 frictionless doesn't"; TheNightglow Nov 2025 [S27], Frictionless Composites
 named with a player-derived formula) **may be describing a LIVE label miss in a
 current game, not the old-save migration failure this fix repairs.** If so, our

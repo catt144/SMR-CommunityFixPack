@@ -68,4 +68,45 @@ decision packages (esp. C32/F04). Delete this file, commit, push.
 
 ## Notes from upstream
 
+### From prompt 2 (2026-08-01) — your job 3 is already answered by measurement; do not re-run it
+
+**Your §3 "F35 scope check" says *"the keyboard rider from prompt 1 settles the
+live half if source can't."* The rider was taken.** It rode the F86 Phase-0
+sitting opportunistically (a colony was already up), and it settles the live half
+outright, so job 3 shrinks to at most a source cross-check — **do not spend a
+sweep on it and do not file an F-row for the live case.**
+
+**Result: the live label path WORKS, for all three labels including
+`WindTurbine_Large`.** Log `Mars.exe-20260801-14.59.57-6a22b86d.log`. From a
+**pre-research save** (so our pass could not have run first — it early-returns at
+`90_SaveSanitizer.lua:58` when the tech is not researched) with **no reload in
+the window**: before = all three labels `NO MODIFIERS`; after = all three carry
+`prop=electricity_production percent=100`, keyed by the vanilla
+`Effect_ModifyLabel` objects with `id=GameEffect` (**not** `SMRFixPack_F35_*`, so
+it is the tech's apply and not ours), and **Power doubled on every turbine**
+(9.3→18.6 / 18.6→37.2 / 29.8→59.5) — so label membership is intact for these
+classes too, not merely the colony table. Full record incl. the exact
+grant-vs-natural-path equivalence: **BUGS.md F35**, where the audit's ⚠ OPEN
+SCOPE QUESTION is now closed; the checklist row is struck through.
+
+**What that leaves you:** F35 is the old-save migration failure it was filed as.
+The audit's §2.2 ⚠ suspicion — that our fix is aimed one layer too shallow and
+quietly repairs a live defect on every load — is dead. The one thing NOT
+established is that the Nov 2025 witness was wrong about *their* game; this
+measures 1.0.7.396349's live path only, so if your source pass wants to say
+anything about older builds, say it as its own claim.
+
+⚠️ **Carry this trap into any similar reading you do.** The first attempt read
+the labels while **Low-G Turbines** was completing, not Frictionless Composites.
+`LowGTurbines` (`TechPreset.lua:2830-2844`, group Physics) grants two
+`Effect_UnlockUpgrade` entries and **no label modifier at all**, so its perfectly
+correct `NO MODIFIERS` result looked like a defect three times bigger than the
+one we were hunting and came close to being filed. It is also the "polymer
+upgrade works now" half of the witness's own sentence. **Confirm the tech
+identity (`IsTechResearched("<id>")`) in the same log line as any label read.**
+
+*(Nothing else here is yours; C32's label-membership rider is untouched — its
+mechanism is the asteroid-visit `ShiftsBuilding` case and this reading says
+nothing about it.)*
+
 (prompt 5 appends state here)

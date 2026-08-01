@@ -157,7 +157,16 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 >   in `PLAYTEST_ARCHIVE.md` under a RETIRED-UNRUN banner.
 > - **The needs-eyes list gained four bug-list-audit riders** (F35 live-label,
 >   C32 label-membership, F80 enumeration tap, F82 timing) and lost one: **F74
->   merged into F53(a)**, its question answered twice from outside. The list is
+>   merged into F53(a)**, its question answered twice from outside.
+>   **⬇️ THREE REMAIN as of 2026-08-01 evening: the F35 live-label rider was
+>   TAKEN AND CLOSED** during the F86 Phase-0 keyboard sitting — exactly the
+>   opportunistic capture it was written for. **The live label path works, all
+>   three turbine labels including `WindTurbine_Large` (+100% applied, Power
+>   doubled on every turbine), from a pre-research save with no reload** — so the
+>   audit's suspicion that F35 is aimed one layer too shallow is dead and F35 is
+>   the old-save migration failure it was filed as. Evidence and the
+>   wrong-tech trap that nearly mis-filed it: BUGS.md F35; prompt 6's job 3 is
+>   pre-answered and told not to re-run it. The list is
 >   now split by intake, because two of the new rows check whether something we
 >   believe is *incomplete*, which is not what the other two tables mean.
 > - **`MOD_DESCRIPTION.md`** gained the documented-engine-behaviour paragraph
