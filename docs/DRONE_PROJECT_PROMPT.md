@@ -10,6 +10,13 @@ the end of every drone session.
 > drives drone work. If you were started from that prompt and the session turns
 > into drone work, **stop and load this file instead.**
 
+**⛔ THE STALE-PROBE GATE (HARD RULE, owner, 2026-08-01) — before ANY test this
+session runs or records, attended or unattended:** run
+`grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/`, put the result
+in the todo list, and record NOTHING unless it is clean or every hit is
+declared by the test design; every result commit carries a `PROBE SWEEP:`
+line. Full rule: `WORKFLOW.md` "Probe hygiene".
+
 **Staleness check — do this FIRST:** `git log --oneline -10` + `git pull`. This
 file was written at **`bd8d831`** and patched at **`bdc2c27`** (the PT-20 leg).
 If commits landed after that, read them before trusting anything below — this

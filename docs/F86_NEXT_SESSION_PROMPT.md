@@ -49,6 +49,22 @@ landed since, read them before acting.
 
 ## Phase 0 — the two measurements (owner at keyboard)
 
+### 0.0 ⛔ The stale-probe gate FIRST (HARD RULE, owner, 2026-08-01)
+
+Run `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/` and put the
+result in your todo list before anything else. **Expected state for THIS
+session: exactly two hits.**
+- `97_SaveHookProbe.lua` — **declared**: it IS the 0.2 instrument. Keep.
+- `99_OrphanEnvProbe.lua` — **STALE (answer recorded) and NOT inert**: it
+  re-arms on every `LoadGame` and fires a loud `[LUA ERROR]` ~1 sol later —
+  straight into the log 0.2 reads, and it parks a probe thread in any save
+  made. **Delete it (+ its TestKit metadata/items lines) and commit BEFORE
+  the owner launches the game.** This moves half of step 0.3 up front; 0.3
+  then only tears down `97` after its result is recorded.
+Any OTHER hit is undeclared: stop and repair before testing. Every result
+commit this session carries the `PROBE SWEEP:` line. Full rule:
+`WORKFLOW.md` "Probe hygiene".
+
 ### 0.1 GT-creation ordering — does `CreateGameTimeThread` run the body before the creating statement continues?
 
 Hand the owner these, one per line, in a loaded colony (game UNPAUSED so game

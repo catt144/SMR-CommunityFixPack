@@ -26,6 +26,15 @@ You are continuing the Surviving Mars: Relaunched "Community Fix Pack". Sessions
 are usually **LIVE PLAYTEST STANDBY**: the user is at the keyboard in the retail
 game with both mods loaded, and you assist in real time. Your jobs:
 
+0. **⛔ THE STALE-PROBE GATE — before ANY test, attended or unattended (HARD
+   RULE, owner, 2026-08-01).** Run
+   `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/` and put the
+   result in your todo list. CLEAN = zero hits, or every hit explicitly
+   declared by this session's test design. **Not clean → repair (delete probe
+   + metadata lines, commit) or stop — no result may be recorded either way,
+   and every result commit carries a `PROBE SWEEP:` line.** Full rule:
+   `WORKFLOW.md` "Probe hygiene". Stale probes are how false facts got
+   recorded before.
 1. **Set tests up** — walk the user through the checklist's own steps
    (`PLAYTEST_CHECKLIST.md`) using the verified command table
    (`PLAYTEST_HELP.md`); hand them exact console lines to paste, **one command

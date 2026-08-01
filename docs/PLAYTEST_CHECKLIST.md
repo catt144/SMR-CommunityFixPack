@@ -42,6 +42,24 @@ protocol.
 
 # 1 · Standing watches — every sitting, alongside whatever else you play
 
+## PT-00 — ⛔ The stale-probe gate (BEFORE every sitting; HARD RULE, owner, 2026-08-01)
+
+Before the game is even launched for a test — attended or unattended — the
+assisting session runs:
+
+```
+grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/
+```
+
+**CLEAN** = zero hits, or every hit is a probe this sitting's test design
+explicitly declares. Not clean → delete the stale probe (+ its metadata/items
+lines), commit, re-run the sweep — or the sitting does not test. **No result
+from this checklist may be recorded without the sweep having run first**; the
+`PROBE SWEEP:` line goes in the result commit (see the reporting protocol).
+Rationale + full rule: `WORKFLOW.md` "Probe hygiene" — stale probes contaminate
+both the measurement and the log it is read from, and are how false facts got
+recorded before.
+
 ## PT-22 — Log hygiene (after EVERY session, including every test below)
 
 **Where:** `%AppData%\Surviving Mars Relaunched\logs` — take the newest
@@ -1042,6 +1060,12 @@ taken on a pack-lineage save.
 
 ---
 ## Reporting protocol
+
+**⛔ Gate on the whole protocol (owner, 2026-08-01): no result below is valid
+unless PT-00's stale-probe sweep ran BEFORE the sitting.** Every commit that
+records a result carries its `PROBE SWEEP: clean` (or `armed: <files>,
+declared by <test>`) line. A result recorded without it gets re-verified
+before anything builds on it — treat it as unrecorded.
 
 **Tester (you):**
 1. Fill in every `Result:` line — `PASS` / `FAIL` / `SKIP (reason)` — plus free-text

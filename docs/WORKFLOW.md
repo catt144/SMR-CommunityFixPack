@@ -74,6 +74,43 @@ ENGINE_FACTS.md). The discipline guards *future* updates:
    layout checks only — the sandbox has no introspection; they catch renamed/
    removed targets, NOT an edited same-named function — hence step 1).
 
+## ⛔ Probe hygiene — HARD GATE before ANY testing (owner, 2026-08-01)
+
+**No test session — attended or unattended — starts, and NO result is
+recorded, until the stale-probe sweep has run and reported clean.** Stale
+probes are how false facts got recorded: leftover instrumentation logs, hooks
+messages, creates threads, and contaminates both the measurement and the log
+it is read from (the 2026-07-31 probes were still armed days after their
+questions were answered).
+
+**The sweep (mechanical, one command):**
+
+```
+grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/
+```
+
+**CLEAN =** zero hits, **or** every hit is a probe that THIS session's test
+design explicitly declares it needs — named in the brief and in the todo
+list. Anything else: the session repairs first (delete the file + its
+metadata/items lines, commit) or stops and reports.
+
+**The rules that make this work:**
+
+1. **Every temporary probe/experiment file MUST carry the literal word
+   `TEMPORARY` in its header comment** — that is what the sweep greps for.
+   A temp probe without the marker is itself a defect: file it on sight.
+2. **A probe is STALE the moment its answer is recorded.** Deletion belongs
+   in the SAME commit that records the answer (docs-never-lag, applied to
+   instrumentation).
+3. **The sweep result is part of the record:** every commit that flips a
+   BUGS.md status, records a MEASURED fact, or reports a PASS/FAIL carries a
+   `PROBE SWEEP:` line — either `clean` or `armed: <files>, declared by
+   <test>`. **A result commit without that line is invalid and gets
+   re-verified before anything builds on it.**
+4. Both repos are in scope (the pack AND the TestKit) — the
+   `GetPriorityForRequest` experiment that seeded ENGINE_FACTS lived in the
+   PACK's code list.
+
 ## Testing checklist per fix
 
 1. Load a save (or new game) where the bug reproduces; confirm reproduction
@@ -182,6 +219,11 @@ narrower true thing instead.
 **6. Whether the brief deletes itself.** One-off jobs delete their brief on
 completion (precedent: the popup audit). Re-runnable ones say plainly that they
 do not.
+
+**7. The stale-probe gate — for any brief that runs or records a test.** The
+brief must instruct: run the probe sweep (the hard gate above) BEFORE testing,
+put the sweep line in the todo list, and refuse to record results without it.
+A brief that omits this is non-compliant; add the gate before running it.
 
 ## `[FAQ]` — the tag for "a player will ask about this"
 
