@@ -62,6 +62,22 @@ with **PHASE 4 COMPLETE** (below).
 > removal, so residue *already inside a player's saves* still needs someone else
 > to clean it.
 
+> ⚖️ **F86 STATE AS OF 2026-07-31 EVENING — the block below is the original
+> filing and parts of it are SUPERSEDED. Current truth:** the design was
+> **adjudicated twice** (`F86_ADJUDICATION.md` — yes-with-changes) and a
+> **prior-art survey ran** (`PRIOR_ART_SURVEY.md`). Corrections that override
+> the text below: capture is **value-reachability**, not frame position ("an
+> empty `_ENV`" is WRONG — orphans resolve vanilla globals and lose only
+> mod-created names, measured); "synchronous can never be captured" holds for
+> the **thread-stack route only** (exposed set is **≥13**, incl. the compliant
+> `Fix_CaveInsNoDisasters`); F02's hold is LIFTED and the build is authorised
+> (Tiers 1+2, layer 1 gated); the sweep is DONE; **F88 filed** (the per-load
+> restart). **Plan of record: `F86_EXECUTION_PLAN.md`; next session:
+> `F86_NEXT_SESSION_PROMPT.md` (two measurements, then the Tier-1 spec).**
+> Owner directives of the evening: orphan-gate rule (FIX_POLICY §3a), latched
+> heal, and the **prelaunch save-exit deliverables** (uninstall procedure +
+> standalone cleaner — WORKFLOW release gates).
+>
 > 🛑 **PT-20 FAILED 2026-07-31 — WE HAVE A P1 DEFECT OF OUR OWN, AND IT BLOCKS
 > RELEASE. See `BUGS.md` F86.** Executing PT-20's step 5 for the first time
 > measured **pack code being written into the player's savegame and still

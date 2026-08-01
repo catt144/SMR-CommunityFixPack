@@ -112,8 +112,9 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
-| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **10 more exposed — 12 in total; the sweep corrected the MEMBERSHIP both ways** (`Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Owner took all four calls 2026-07-31: layer ordering 3→2→1 ADOPTED into **FIX_POLICY §3a**, layer-3 sweep AUTHORISED (game-free, the one thing owed), F02 HELD until it reports, D10/D12 sequenced behind the rules |
+| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **10 more exposed — 12 in total; the sweep corrected the MEMBERSHIP both ways** (`Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — next: the Phase-0 measurement session (`F86_NEXT_SESSION_PROMPT.md`). D10/D12 held until repairs land |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
+| F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | P2 | SOURCE-VERIFIED | filed 2026-07-31 (found by the owner during the F86 design review; confirmed by the adjudication). Currently shipped; silent; also the measured "reinstall repairs a damaged save" mechanism — same restart, both effects. Fix rides the F02/F86 Tier-1 rewrite via the one-shot latched heal (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -4677,6 +4678,43 @@ because it states the reasoning:
 **Credit where due:** this is the C1 surface's first catch outside a synthetic
 test, and it caught a defect that would otherwise have shipped silently. That
 was the argument for building it.
+
+### F88 — OUR OWN DEFECT: the per-load meteor restart re-rolls the timer, silently suppressing meteors for frequent loaders (P2, SOURCE-VERIFIED)  `[open — filed 2026-07-31; fix rides the F86 Tier-1 rewrite (one-shot latched heal); regression leg specified in F86_EXECUTION_PLAN Phase 2]`
+
+**Found by the owner during the F86 design review** (recorded first in
+`F86_SESSION_FINDINGS.md` §1.4); independently confirmed by the adjudication
+(§2.4) against the shipped file.
+
+**Defect.** `Code/Fix_MeteorFrequency.lua:187-197`: `OnMsg.LoadGame` calls
+`RestartGlobalGameTimeThread("Meteors")` gated only on the fix being active —
+never on the persisted thread's health. The restarted body re-rolls
+`spawn_time` from zero (`:90`, `SessionRandom:Random(spawntime, spawntime +
+spawntime_random)` = 35-115 **game** hours ≈ 1.5-4.8 sols). So a player who
+never plays a full rolled interval between loads **never receives a single
+meteor — indefinitely and silently**, for as long as the pack is installed.
+The file's own header saw the mechanism and stopped one inference short:
+"worst case a pending strike/warning is rescheduled **once** on load" — true
+per load, false in aggregate. Vanilla does NOT have this defect:
+`OnMsg.PersistPostLoad` (`_fixup.lua:50-56`) resumes the persisted thread with
+its remaining sleep intact and rebuilds only when the save carries nothing.
+
+**The same restart is also the measured repair.** PT-20TEST-B measured that
+reinstalling the pack revives a dead `Meteors` thread — that IS this restart.
+Both effects are real: it revives dead threads (good) and re-rolls live timers
+(this defect). "Put the mod back" remains honest advice for reviving a
+damaged save, with this caveat attached until the fix ships. `[FAQ]`
+
+**Fix (adopted 2026-07-31, owner):** the F86 Tier-1 rewrite replaces the
+unconditional restart with a **one-shot latched heal** — restart once per save
+lineage on first load under the new version (GameVar version latch), never
+again — which fixes this defect, guards the upgrade path (old serialised
+bodies calling deleted helpers), and clears old bodies out of existing saves
+in one mechanism. Shipped precedent for the pattern:
+`Fix_RainsDeadlock`'s `RefreshRainsLoops` marker. Spec:
+`F86_EXECUTION_PLAN.md` Phase 1; regression leg (load 3× inside a rolled
+interval, meteor must still arrive on the persisted schedule): Phase 2.
+
+Cross-refs: F02, F86.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing

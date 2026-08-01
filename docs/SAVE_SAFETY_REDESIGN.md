@@ -598,10 +598,14 @@ again without new evidence that Tier 3 causes real harm.**
 
 ## 7. What is NOT proposed
 
-- **No cleanup mod.** Parked (`FUTURE_IDEAS.md` entry 5). The remedy for damage
-  already in a player's save is measured and simple: **reinstalling the pack
-  revives a killed thread** (confirmed 2026-07-31 — our `LoadGame` restart runs
-  and `IsValidThread(Meteors)` returns `true`). Uncomfortable, but real.
+- ~~**No cleanup mod.** Parked (`FUTURE_IDEAS.md` entry 5).~~ ⭐ **SUPERSEDED
+  by owner directive 2026-07-31: the cleanup mod is now a PRELAUNCH
+  deliverable** — built and tested before launch, published for the community
+  the moment anyone needs it (and it is the only remedy that works on
+  console). The "reinstall revives the thread" remedy stays true but now
+  carries the F88 caveat (the revive mechanism re-rolls timers until the
+  Tier-1 rewrite ships). Spec, primitives and honest limits:
+  `F86_EXECUTION_PLAN.md` Phase 5; primitives inventory: FUTURE_IDEAS entry 5.
 - ~~No FIX_POLICY edit yet~~ — **DONE 2026-07-31.** The owner adopted the
   ordering, so the rule landed in **`FIX_POLICY.md` §3a**, which is now
   authoritative for it. This file keeps the analysis and the per-module

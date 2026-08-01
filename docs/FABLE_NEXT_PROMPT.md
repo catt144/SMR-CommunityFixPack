@@ -10,6 +10,18 @@ Staleness check: written after **`8d201c3`** (F86 owes no measurements), then
 updated the same evening with the **four F86 owner decisions** — layer ordering
 adopted, sweep authorised, F02 held, D10/D12 sequenced behind the rules.
 
+> ⚖️ **SUPERSEDED FOR F86 (2026-07-31, late evening).** The F86 section below
+> predates the adjudication rounds, the prior-art survey, and the evening's
+> owner decisions. **If this session is about F86, use
+> `docs/F86_NEXT_SESSION_PROMPT.md` (the Phase-0/1 handover) and
+> `docs/F86_EXECUTION_PLAN.md` (the plan of record) instead.** Known-stale
+> claims below: "comes back with an empty `_ENV`" (wrong — orphans resolve
+> vanilla globals; ENGINE_FACTS has the measured correction), "~62 safe by
+> construction / 12 exposed" (thread-route only; ≥13 incl. compliant CaveIns),
+> "F02 HELD / one game-free item owed" (hold lifted; sweep done; build
+> authorised; next owed item is the Phase-0 measurement session). F88 is now
+> filed. Playtest-standby guidance below remains valid.
+
 You are continuing the Surviving Mars: Relaunched "Community Fix Pack". Sessions
 are usually **LIVE PLAYTEST STANDBY**: the user is at the keyboard in the retail
 game with both mods loaded, and you assist in real time. Your jobs:

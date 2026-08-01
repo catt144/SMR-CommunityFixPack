@@ -110,7 +110,22 @@ regression harness; run it as pre-flight when STATUS says one is owed.
   same `code` list. If a Code/ file is ever added/removed/reordered, update
   BOTH metadata.lua `code` AND items.lua in the same commit, same order.
 - The TestKit must NOT be uploaded.
-- Credit ChoGGi (Fix Bugs) + LukeH (Martian Express) as prior art.
+- Credit ChoGGi (Fix Bugs) + LukeH (Martian Express) as prior art — and the
+  prior-art survey (`docs/PRIOR_ART_SURVEY.md`) backs the save-safety claim in
+  player-facing text.
+- **Save-exit gates (owner, 2026-07-31 — release blockers alongside the fpk
+  diff):**
+  1. the **uninstall procedure** is published in MOD_DESCRIPTION ("update,
+     load, save, then uninstall", backup-first) and is true (latched heal +
+     rains migration shipped and verified);
+  2. the **standalone save-rescue mod** is built and tested, ready to publish
+     (the only console-viable remedy — `F86_EXECUTION_PLAN.md` Phase 5);
+  3. the **residual disclosure** (inert layer-2 residue; irreversible-history
+     class) appears wherever save-cleanliness is claimed;
+  4. after EVERY game update, alongside the fpk extraction diff, **re-run the
+     five-shape exposure enumeration** (class-method / table-slot / global
+     assignment / preset-field / own-thread) — a live game means persisted-body
+     version skew is a standing failure mode, not a launch-time one.
 
 ## Authoring a prompt / job brief — required elements
 

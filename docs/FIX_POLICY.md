@@ -136,6 +136,13 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   (e.g. F03's leaked modifiers), the cleanup is a **separate, clearly marked
   one-shot `OnMsg.LoadGame` sweep**, conservative by default.
 - Never break saves for players who later disable the mod.
+- **Exit hygiene (owner, 2026-07-31): the pack ships with its exit paved.**
+  Two standing deliverables, both ready BEFORE launch: a player-facing
+  **uninstall procedure** ("update, load, save, then uninstall" — backed by
+  the latched heal + migration passes, which clear our threads out of the
+  save), and the **standalone save-rescue mod** for saves that already lost
+  the pack (the only console-viable remedy). Spec + honest limits:
+  `F86_EXECUTION_PLAN.md` Phase 5. `[FAQ]`
 
 ### 3a. SAVE SAFETY — no mod function below a yield on a game-time thread (HARD RULE, owner, 2026-07-31)
 
@@ -174,12 +181,28 @@ registrations and UI windows remain safe. `docs/F86_ADJUDICATION.md` §3.1/§5.1
 function still REACHES.** An orphan's fallback env falls through to the real
 `_G` — it resolves every vanilla global and loses only names its own mod
 creates. So a captured body that touches a `SMRFixPack.*` name dies loudly at
-that touch (the safer failure — keep the global-helper discipline for exactly
-this reason); a captured body with only-vanilla names **keeps executing after
+that touch; a captured body with only-vanilla names **keeps executing after
 uninstall** — bounded if it self-limits, forever if it loops. Every layer-3/2
 design must therefore also ask: *if this body is ever captured anyway, does it
 die, expire, or run forever — and would anyone notice?*
 (ENGINE_FACTS; `docs/F86_ADJUDICATION.md` §8.)
+
+**⛔ THE ORPHAN GATE (owner, 2026-07-31) — loud death is the BACKSTOP, not the
+failure mechanism.** An orphan that dies at its first mod-name lookup dies at
+an *accidental* point — wherever a logging call happens to sit — and can die
+mid-work (`StormWedgeHeal` could strand `g_MeteorStormStop=true`). The designed
+failure is:
+
+> **Every mod-owned thread body opens each wake with an explicit orphan gate —
+> `if not SMRFixPack then return end` — and resets any vanilla state it set
+> BEFORE its first mod-created-name touch.** Reading a nil global is safe (only
+> indexing/calling it throws), so the gate exits cleanly in an orphan: zero
+> errors, zero half-done work, at a point we chose. Long loops re-check the
+> gate after every yield. The global-lookup helper discipline stays underneath
+> as the backstop: anything that slips past a gate still dies rather than
+> running forever. (This supersedes the earlier "die loudly is the safer
+> failure" framing — that loudness was an accident of the disproven by-name
+> persistence belief, retroactively useful, never designed.)
 
 **Choose the remedy in this order — 3 → 2 → 1. The ordering is binding.**
 

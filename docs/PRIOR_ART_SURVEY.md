@@ -191,3 +191,35 @@ cannot keep are named, bounded, and inert.**
   preferred over a synchronous heal.
 - No community evidence supports building layer 1; the one runs-forever
   precedent (§3) supports Tier 1's rewrite priority instead.
+
+---
+
+## 7. Addendum (same day) — two owner questions the survey answered
+
+**7.1 "Can we adopt his method for all our fixes?" — We already share it where
+it is good; the remaining differences are deliberate upgrades.** His four
+ingredients, scored: (a) wrap-first with a local-captured `orig` — we already
+do this in nearly every wrapper (the divergent zero-upvalue/global-helper
+discipline exists only in the persisted thread bodies, which Tier 1 deletes);
+(b) a single file-local `mod_EnableMod` gate — NOT adopted: our per-call
+registry/veto reads are what make 74 individually vetoable fixes and
+console-safe self-deactivation work (FIX_POLICY §2); (c) his repair shapes —
+already adopted and now precedented (§5); (d) his persistence hygiene
+(no GameVars, silence persist errors) — explicitly declined; ours is declared
+and audited. Wholesale adoption would trade veto granularity, footprint
+accounting, and die-don't-linger orphans for nothing we lack.
+
+**7.2 "Is Relaunched different enough for a different outcome?" — Same
+physics, different calculus, all three differences favouring our stricter
+standard.** (i) **The hooks exist now** — ChoGGi's library carries a comment
+wishing for a post-save thread-restart hook he was sure would never come;
+Relaunched has `SaveGameStart`/`SaveGameDone` reaching mods, measured by this
+project. (ii) **Consoles** — every mitigation his community leaned on (read
+the log, console commands, third-party cleanup mods, hex-editing
+`active_mods`) is PC-only; Relaunched ships mods to Xbox/PS5 where none of it
+exists, so silent residue has no escape hatch — which is why the cleaner mod
+(FUTURE_IDEAS entry 5, now prelaunch) is not optional. (iii) **The game is
+alive** — the original stopped patching, so "old bytecode runs from your
+save" converged to harmless; Relaunched's active patching makes version skew
+between persisted bodies and current code (the §2.5 upgrade-path class) a
+live failure mode his years-at-scale record never stress-tested.

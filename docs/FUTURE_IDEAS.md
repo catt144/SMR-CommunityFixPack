@@ -186,7 +186,16 @@ in the checklist; F03/F35/F48 entries in `BUGS.md`.
 
 ---
 
-## 5. Standalone save-residue cleaner — a second mod that un-mods a save — parked 2026-07-31
+## 5. Standalone save-residue cleaner — a second mod that un-mods a save — ~~parked 2026-07-31~~ ⭐ UN-PARKED SAME DAY (owner): now a PRELAUNCH deliverable
+
+> ⭐ **Owner directive 2026-07-31 (post-adjudication, post-survey): build and
+> test this BEFORE launch, ready to publish for the community after.** The
+> prior-art survey settled why: mod residue breaking saves is a named
+> community problem (ChoGGi ships a cleaner for *other* mods' residue), a
+> cleaner mod is the **only console-viable remedy**, and waiting for beta
+> reports means shipping the answer after the damage. Plan and honest limits:
+> `F86_EXECUTION_PLAN.md` Phase 5. The primitives inventory below remains
+> current.
 
 > ⛔ **This does NOT park F86.** The defect (we write executable code into player
 > saves) is live on the board in `BUGS.md` and blocks release. What is parked
