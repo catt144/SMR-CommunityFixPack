@@ -60,9 +60,9 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
   1. **Layer ordering 3 → 2 → 1 ADOPTED**, now a hard rule in **`FIX_POLICY.md`
      §3a** — read that, not this summary, before writing any fix. It binds new
      fixes as well as F86 repairs.
-  2. **The layer-3 sweep was AUTHORISED at FULL scope** and ✅ **has RUN over the
-     exposed set** — see board item 6 and `SAVE_SAFETY_REDESIGN.md` §5. Its
-     non-exposed half (§5.4) is still outstanding and blocks nothing.
+  2. **The layer-3 sweep was AUTHORISED at FULL scope** and ✅ **is COMPLETE —
+     both halves** (`SAVE_SAFETY_REDESIGN.md` §5). See board item 6. Nothing
+     further is owed on it.
   3. **F02 is HELD until the sweep reports — do NOT touch
      `Fix_MeteorFrequency`.** The owner declined to take it module-by-module.
   4. **D10 and D12 are sequenced BEHIND the rules** (see the board).
@@ -192,9 +192,11 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
    `DroneUnreachableForever`, `TrainWaitTime` and `RainsDeadlock` fully,
    `ArrivalDeaths` by half — each through an input verified **synchronous**.
    Only **four own-thread modules plus `BombardmentSpread`** are layer-1
-   candidates, and `BombardmentSpread` has **no** layer-3 route. **Nothing is
-   built; no code without a further owner go.** ⏳ Outstanding: the non-exposed
-   half of the sweep's scope (§5.4) — future-proofing, nothing blocks on it.
+   candidates, and `BombardmentSpread` has **no** layer-3 route.
+   ✅ **The non-exposed half ran too (§5.4, all 22 modules): 6 convert cleanly to
+   a chained wrapper, 4 need a design pass, 9 are correctly full replacements, 3
+   already optimal. THE SWEEP IS COMPLETE and decision 2 is discharged.**
+   **Nothing is built; no code without a further owner go.**
    ⚠️ **Sequencing note:** the `Opt_DroneOverhaul` half of the layer-2 repair
    sits inside a drone-owned module. It is save-safety surgery on a wrapper's
    call position and touches no drone design, so it should be carved out of the

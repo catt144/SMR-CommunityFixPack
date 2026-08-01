@@ -92,7 +92,10 @@ with **PHASE 4 COMPLETE** (below).
 >      exposed set** (`SAVE_SAFETY_REDESIGN.md` §5): **five of the twelve have a
 >      layer-3 or layer-2 route out**, each via a verified-synchronous input;
 >      only four own-thread modules plus `BombardmentSpread` are layer-1
->      candidates. The non-exposed half (§5.4) is outstanding and blocks nothing.
+>      candidates. ✅ **The non-exposed half ran too (§5.4, all 22 modules): 6
+>      convert cleanly to a chained wrapper, 4 need a design pass, 9 are
+>      correctly full replacements, 3 already optimal. DECISION 2 IS
+>      DISCHARGED** — nothing further is owed on the sweep.
 >   3. **F02 is HELD until that sweep reports.** Do not touch
 >      `Fix_MeteorFrequency`. Accepted cost: the measured leak stays shipped
 >      meanwhile.

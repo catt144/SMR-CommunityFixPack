@@ -4109,8 +4109,11 @@ machinery surgery.
 >    `ArrivalDeaths` by half), each via an input verified **synchronous**. Only
 >    **four own-thread modules plus `BombardmentSpread`** are layer-1 candidates,
 >    and `BombardmentSpread` has **no** layer-3 route (its defect is a discarded
->    local mid-function). ⏳ The non-exposed half of the full scope is still
->    outstanding (§5.4) — future-proofing only, nothing blocks on it.
+>    local mid-function).
+>    ✅ **The non-exposed half ran too — all 22 modules (§5.4).** 6 convert
+>    cleanly to a chained wrapper, 4 have a route worth designing, 9 are
+>    correctly full replacements, 3 are already optimal. **Decision 2 is
+>    discharged; nothing further is owed on the sweep.**
 > 3. **F02 — HELD until the sweep reports.** Do **not** touch
 >    `Fix_MeteorFrequency`; the owner declined to take it module-by-module and
 >    wants the layer-3 set to land as one designed change. Accepted cost, stated

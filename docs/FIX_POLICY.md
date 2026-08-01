@@ -40,6 +40,25 @@ Ranked from most to least preferred:
    back with `rawget(_G, name)` in apply() to confirm the write landed (F22
    does); prefer a chained wrapper (capture `orig`, delegate) over a body
    copy whenever the defect is hookable.
+   **⚠️ Prefer a wrapper over a body copy even when both work — it degrades
+   gracefully and a copy does not** (recorded 2026-07-31 by the F86 layer-3
+   sweep). If a future game patch fixes the vanilla bug, a chained wrapper
+   becomes a harmless no-op, whereas a §1.5 copy silently reinstates the old
+   body's shape and can *undo the official fix*. Two shapes make a wrapper
+   sufficient more often than it looks:
+   * **the fix only needs to widen a result** — vanilla returns `true`/nil and
+     you need `true` in more cases, so `local r = orig(...) if r then return r
+     end return <extra case>` leaves every existing path identical **by
+     construction**, which is stronger than a hand-verified byte-copy
+     (`Colonist:ShouldLeaveForWork`, F04);
+   * **the broken original is a verified no-op** — then a post-wrapper doing the
+     correct work is enough (`Building:StopUpgradeModifiers` iterates a
+     string-keyed table with `ipairs`, F03).
+   Also check whether the shipped function **already takes the parameter you
+   need**: `LandscapeConstructionSiteBase:GetClosestDests(drone, top_count)`
+   accepts the bound its only caller never passes, so clamping it in a wrapper
+   fixes F33 with zero copied logic.
+
 5. **Full replacement** — only when the defect is mid-function and unhookable
    (F04, F09, F11, F12...). Rules:
    - Copy the shipped body **byte-identical except the minimal fix**, marked with

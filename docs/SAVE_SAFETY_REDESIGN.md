@@ -8,12 +8,15 @@ leg that measured the defect; the four decisions were taken the same day and are
 recorded in §4. The defect itself is `BUGS.md` **F86** (P1, blocks release);
 this file is the *how*.
 
-> ✅ **THE SWEEP HAS REPORTED — §5.** It found one module that was missing from
-> the exposed list and one that never belonged on it, and it establishes that
-> **five of the twelve exposed modules have a layer-3 or layer-2 route out**, so
-> only four own-thread modules plus `BombardmentSpread` are candidates for the
-> dangerous layer 1. **Still outstanding (§5.4): the non-exposed half of decision
-> 2's full scope — future-proofing, nothing blocks on it.**
+> ✅ **THE SWEEP IS COMPLETE — §5, BOTH HALVES. Decision 2 is discharged and
+> nothing further is owed on it.**
+> - **Exposed set (§5.3):** one module was missing from the list and one never
+>   belonged on it; **five of the twelve have a layer-3 or layer-2 route out**, so
+>   only four own-thread modules plus `BombardmentSpread` are candidates for the
+>   dangerous layer 1.
+> - **Non-exposed set (§5.4, all 22):** **6 convert cleanly to a chained
+>   wrapper**, 4 have a route worth designing, 9 are correctly full replacements,
+>   3 are already optimal. None of it is urgent; none of it blocks F86.
 >
 > **Nothing here is built, and F02 stays HELD until the owner acts on §5.**
 
@@ -94,11 +97,10 @@ meteors in PT-20 — is then deleted outright.
 > **10 game minutes** per cycle, since one game hour is 30,000 ms. Negligible
 > against 35–115 h, but it is not exactly `spawn_time`.
 
-**Which other modules could take this shape is NOT yet swept.** One strong
-candidate is confirmed; the remaining full-replacement modules have not been
-examined for it. **That sweep is AUTHORISED (§4 decision 2, owner 2026-07-31),
-is game-free, and is now the critical path** — F02 itself is held until it
-reports.
+**Which other modules can take this shape — ✅ SWEPT, §5.** Beyond F02, the
+sweep found four more exposed modules with a layer-3/2 route (§5.3) and six
+non-exposed full replacements that convert cleanly to a chained wrapper (§5.4
+group A). F02 itself remains **held** by decision 3.
 
 ### Layer 2 — no mod code after a call that can block
 
@@ -371,17 +373,100 @@ thread is needed at all, which this sweep did not do.
 `00_Core:485` and `Fix_MilestoneCrash:40` use `CreateRealTimeThread` and are
 **safe by construction** — real-time threads are not persisted.
 
-### 5.4 Still outstanding from decision 2's full scope
+### 5.4 The non-exposed half — SWEPT 2026-07-31, all 22 modules
 
-The owner authorised the sweep over **all** full-replacement modules, not only
-the exposed ones. The exposed set above is complete. **The ~17 remaining
-non-exposed full replacements have NOT been swept for layer-3 opportunities** —
-that half is future-proofing (a module that keeps vanilla's body cannot regress
-into this defect class later) and nothing blocks on it. Two candidates were
-spotted in passing and not verified: `Fix_DomeFreeSpaceMismatch` (the defect is
-purely a caller's omitted `player_enabled` argument to the **synchronous**
-`GatherFreeLivingSpaces`) and `Fix_TrainCargoDumping` (the disabled-resource cap
-could come from the **synchronous** `GetTargetAmount`).
+**First, what this half is and is not for.** These 22 modules are **already save-
+safe** — every one is synchronous, so F86 cannot reach them and nothing here is a
+defect. The benefit is different and worth stating plainly, because it changes
+how the results should be read:
+
+- **Fewer body copies to re-verify per game update.** FIX_POLICY §1.5 full
+  replacements are the ones that rot, and the fpk extraction diff is a release
+  gate (WORKFLOW.md). Every conversion is one less body to re-check forever.
+- **A wrapper degrades gracefully; a body copy does not.** If a future patch
+  fixes the vanilla bug, a chained wrapper becomes a harmless no-op, whereas a
+  §1.5 copy silently reinstates the old body's shape and can *undo* the official
+  fix. This is the stronger argument of the two and it is not currently written
+  down anywhere.
+
+**Scope correction:** the outstanding set is **22**, not the "~17" estimated in
+§5.4 — that figure was a guess and is superseded.
+
+#### A. Convert to a chained wrapper — no body copy, verified feasible (6)
+
+Each was checked against the shipped body, not inferred from our header.
+
+| module | current | the wrapper that replaces it |
+|---|---|---|
+| ⭐ `Fix_SmallLandscapeSites` | replaces `GetClosestDests` | **The cleanest in the pack.** `GetClosestDests(drone, top_count)` *already takes* the bound as a parameter and the only caller never passes it, so it defaults to 5 and over-runs a short `drone_dests_cache`. A wrapper clamping `top_count` to `#self.drone_dests_cache` fixes it with **zero** copied logic |
+| `Fix_NightShiftWork` | replaces `ShouldLeaveForWork` | Vanilla returns `true`/nil and the fix only ever needs to return true in **more** cases (the unreachable hours 0-1). `local r = orig(self) if r then return r end return <wrap-around window>`. **Shift 1/2 behaviour is then identical by construction**, which is strictly stronger than the current copy's hand-verified "bit-identical" claim |
+| `Fix_GeneForging` | replaces global `GetRareTraitChance` | Vanilla returns `nil` or `TechDef.GeneSelection.param1`; the two techs are meant to **add**. `return (orig(unit) or 0) + <GeneForging param1 if researched>`. Downstream does `100 + (x or 0)`, so nil-vs-0 is equivalent |
+| `Fix_ShuttleHubOffAvailable` | replaces global `IsLRTransportAvailable` | Vanilla returns a boolean and the fix only makes it **stricter**, so `false` from the original is already correct. Re-validate only on the `true` path |
+| `Fix_UpgradeModifierLeak` | replaces `StopUpgradeModifiers` | Vanilla iterates a string-keyed table with `ipairs`, so **the original is a verified no-op**. A post-wrapper that runs the correct `pairs` loop is sufficient (and must honour `only_for_object`) |
+| `Fix_TrainCargoDumping` | replaces `Train:UnloadAll` | **Layer 3**: the disabled-resource cap comes from the demand request's `GetTargetAmount` (**verified synchronous**). Return 0 for a disabled resource and vanilla's `Min(carried, station_cap)` yields 0 by itself |
+
+#### B. Real route, but needs a design pass before anyone commits (4)
+
+| module | route | the open question |
+|---|---|---|
+| `Fix_LanderCargoRatchet` | wrap `GetTotalCargoAvailable` to count what is already aboard | It is a global with **14 callers**; needs narrow keying to the auto-cargo path |
+| `Fix_ShuttleTransportCache` | additive `OnMsg` flush of `g_TransportationModeToCommunityCache` on shuttle-hub state change | A flush is **coarser than the correct fix** (the real defect is a cache key missing `shuttles_available`); trades correctness-of-key for a smaller footprint |
+| `Fix_RocketDroneChurn` | wrapper pair — flag on `AddCargoDemandRequest`, no-op the Connect/Disconnect unless set | Two coupled wrappers replacing one body; may not be simpler |
+| `Fix_LandscapeUnitFilter` | wrap `Landscape_ForEachObject` and apply the dropped filter to the callback | Must key on the unit params so the **stockpile** path, which already passes its own filter correctly, is untouched |
+
+#### C. No route — the body copy is the right technique (9)
+
+`Fix_LowStorageWarning` (its header already proves a wrapper cannot work: the
+unreachable add-branch means vanilla's else-branch *removes* the entry every
+hour) · `Fix_TouristSatisfaction` (path-dependence mid-function; a correcting
+wrapper risks double-accounting) · **`Fix_TrackSalvageWipe`** (a **130-line**
+copy — the pack's single largest rot exposure — but the defect is a missing
+bounds check on a `repeat…until`, and no input bends it) · `Fix_TrackSalvageRefund`
+(multi-target refund accounting) · `Fix_TrainPlatformWedge` (`table.remove` vs
+`table.remove_entry` mid-function; also a §1.5 **reconstruction**, recreating the
+file-local `stat_scale`) · `Fix_VacuumWalks` (the gate compares against a const
+used elsewhere) · `Fix_WispRewards` (a missing `* 1000` inside a branch; wrapping
+`Modifier:Change` is far too broad) · `Fix_PayloadTemplateRefill` (the template
+comes from a **file-local** resolver, unreachable) · `Fix_UniversityOvertraining`
+(the tempting input is `ValidateBuilding` — **checked, and it has 55 callers**,
+so patching it would reach story bits and staffing; rejected).
+
+#### D. Already optimal — do not touch (3)
+
+- **`Fix_IndependenceTerraforming`** — already a pure **data/preset patch**
+  (FIX_POLICY §1.1, the most preferred technique). Caught by the sweep's
+  header grep, not actually a full replacement.
+- **`Fix_DomeFreeSpaceMismatch`** — the "replacement" is a **two-line** method
+  where *the fix is literally the argument*. An input patch on
+  `GatherFreeLivingSpaces` would be **worse**: it would also hit
+  `MicroGHabitatBase:RefreshFreeLivingSpaces`, which this module **deliberately
+  excludes for a recorded reason** (an asteroid habitat's `working` state is its
+  life support — F73's subject). Leave it.
+- **`Fix_DroneTransportMinors`** — mixed, and its larger half is already ideal:
+  item **(b) is an additive `OnMsg.OnPassabilityChanged` handler** (§1.2). Only
+  (a) replaces `UpdateRocketsInternal`, and no input route was found for it.
+
+#### Bottom line for this half
+
+**6 of 22 convert cleanly** to a chained wrapper with verified feasibility,
+**4 more have a route worth designing**, **9 are correctly full replacements**,
+and **3 are already at the best available technique**. None of it is urgent and
+none of it blocks F86 — but the 6 in group A are cheap, individually testable,
+and each permanently removes a body copy from the per-update re-verification
+gate. `Fix_TrackSalvageWipe` is worth knowing about for the opposite reason: it
+is the biggest copied body we carry and it has **no** way out.
+
+### 5.5 Decision 2's full scope — ✅ DISCHARGED
+
+The owner authorised the sweep over **all** full-replacement modules. Both
+halves are now done: the **exposed set** in §5.3 and the **22 non-exposed
+modules** in §5.4. Nothing further is owed on the sweep.
+
+*Two guesses recorded here before that second half ran are superseded by it: the
+outstanding count was estimated at "~17" and is actually **22**; and
+`Fix_DomeFreeSpaceMismatch` was floated as a layer-3 candidate but is
+**rejected** on inspection — an input patch there would over-reach into MicroG
+habitats, which the module deliberately excludes (§5.4 group D).*
 
 ## 6. What is NOT proposed
 
