@@ -82,4 +82,35 @@ both are already written and waiting.**
    carry them, that is prompt 3 dropping a routed item, not a scope reduction
    you may accept silently.
 
-(prompt 3 appends the build-prompt pointer + non-relitigable decisions here)
+### From prompt 3 (2026-08-01) — the spec is final, the build prompt is written, and these decisions are CLOSED
+
+**Your brief is `docs/prompts/F86_TIER1_BUILD_PROMPT.md`** (commit `366069b`);
+its authority is **`SAVE_SAFETY_REDESIGN.md` §6.2a** — the FINAL Tier-1 spec,
+written on measured ground. Decisions your session must NOT re-litigate:
+
+1. **Rains takes the wrapper shape as specced** (collision test BEFORE the
+   call, `Msg` post, tail-return; vanilla's loop stays). The synchronous heal,
+   ChoGGi-style body and `Sleep(1)` micro-thread are dead options — measured
+   deferral makes them unnecessary (ENGINE_FACTS).
+2. **The F02 wrapper keys on `CurrentThread()`**; the falsy-global defer guard
+   is defence in depth only. The latched heal is `GameVar` version-latched,
+   PostLoadGame, one-shot — the per-load restart it replaces IS F88.
+3. **The C34 rider rides the rains migration pass** (structure → stale-ACTIVE
+   `FinishRainProcedure` heal → loop migration; manual fallback for invalid
+   `g_RainDisaster` values). No module of its own.
+4. **The pre-cleared F81a mid-session reconcile was TAKEN** (§6.2a-C:
+   `OnMsg.NewDay` → the existing reconcile). PT-54 legs A/B are in the build
+   prompt in their changed shape — heals-without-reload is now an assertion,
+   not an option. The checklist's carried-forward paragraph is closed out.
+5. **StormWedgeHeal reorder is specced against the exact orphan path**
+   (dies at `StormWedgeNote` stranding `g_MeteorStormStop`) — gate at every
+   wake incl. after each `Sleep`, resets inside the gate, logging last.
+6. **The enumeration re-derived the durable list at exactly 13** (BUGS F86
+   carries the table, shapes, dispositions, and the four hand-resolved
+   analysis-tool false positives). **Adjudication §4.4 is CLOSED**: the
+   `LastTransmissionStorage` closure DOES enter saves (route (c), via
+   `likes_data` → `g_FactionsHolder` GameVar) and is inert — recorded as "+1"
+   beside the 13, compliant, no build. Your uninstall leg's allowed-residual
+   list already accounts for it — do not treat it as a new finding.
+7. **Probe-sweep expectation is `clean` / ZERO hits in both repos** — the
+   "one declared hit" earlier sessions saw is stale (97 and 99 are gone).
