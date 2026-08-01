@@ -48,8 +48,15 @@ Two properties make this tractable rather than terrifying:
 
 - **A save captures only *blocked* threads.** Synchronous mod code — data
   patches, getters, `Can…` predicates, UI handlers, `OnMsg` bodies that do not
-  yield — can never be captured. That is ~62 of 74 modules, safe by
-  construction, with no work needed.
+  yield — can never be captured *through the thread-stack route*. That is ~62
+  of 74 modules, safe from that route by construction.
+  ⚠️ **CORRECTED 2026-07-31 (adjudication): capture is value-reachability, not
+  frame position alone** — a function value held in a live local of a captured
+  engine frame, or stored in persisted state, also enters the save.
+  `Fix_CaveInsNoDisasters` is capturable today via the engine's periodic-repeat
+  `info` local (inert — layer-2 shape; no build needed), which makes the
+  exposed-set count **at least 13** and proves the method grep blind to
+  slot/global/preset assignments. `docs/F86_ADJUDICATION.md` §3.1/§5.1.
 - **Real-time threads are not persisted at all.** `00_Core`'s update-report
   thread is a `CreateRealTimeThread` and is already fine.
 
@@ -342,7 +349,16 @@ Names with a mix are reported AMBIGUOUS and read by hand against the specific
 class we patch. That gives **633 of 15,106 names yielding directly**, which is a
 believable figure, and every ambiguous case resolved cleanly.
 
-### 5.2 ⚠️ The exposed set is **12**, and the membership changed BOTH ways
+### 5.2 ⚠️ The exposed set is ~~12~~ **at least 13 (adjudication 2026-07-31)**, and the membership changed BOTH ways
+
+> ⚠️ **Adjudication correction:** `Fix_CaveInsNoDisasters` is capturable (live
+> `info` local in the engine's periodic-repeat loop while the yielding
+> UndergroundMarsquake FUNC runs — ~1 in 9 Underground-map saves) and belongs on
+> this list with disposition **compliant — no work**, alongside
+> `Fix_ShelterReflex`. Both sweeps missed it because their enumeration keys
+> (`function C:m(` grep; full-replacement scope) cannot see table-slot
+> assignments. The build scope is unchanged; the count and the method are what
+> this corrects. `docs/F86_ADJUDICATION.md` §3.1, §6 step 7.
 
 The count returns to 12, but it is not the original 12:
 
@@ -542,7 +558,15 @@ line**, not the 98/session `Opt_DroneOverhaul` produced (that figure came from
 
 `Fix_BombardmentSpread` is also **not built**: it has **no layer-3 route at all**
 (the defect is a discarded local mid-function with no seam), bombardments are a
-rare Mystery-7 event, and the damage is one broken volley.
+rare Mystery-7 event, ~~and the damage is one broken volley~~.
+⚠️ **HARM STATEMENT FALSIFIED 2026-07-31 (adjudication): the damage is NOT one
+broken volley.** `WaitBombard`'s only caller posts `Msg("BombardEnd")` after it
+returns (Bombardment.lua:156-161), and Mystery 7 blocks on an **untimed**
+`WaitMsg("BombardEnd")` (`Mystery 7.generated.lua:941-942`) — so a save cut
+mid-volley plus a later uninstall wedges the mystery's bombardment loop
+**permanently** (the F81 shape). The window is small (~2 game-minute volleys on
+a 10-20-sol cycle) but the accepted-residual decision was taken on the wrong
+description and is owed a re-take: `docs/F86_ADJUDICATION.md` §3.2, §7 D3.
 
 ⛔ **LAYER 1 IS NOT TO BE BUILT.** The owner declined it explicitly. Its own spec
 calls it the most dangerous layer, and the autosave-restart trap could recreate

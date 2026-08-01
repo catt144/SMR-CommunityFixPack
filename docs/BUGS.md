@@ -4091,6 +4091,32 @@ machinery surgery.
 
 ### F86 — OUR OWN DEFECT: pack code blocked on a persisted game-time thread is written INTO the player's savegame and keeps running after the mod is removed (P1, MEASURED)  `[open — filed 2026-07-31 by PT-20; BLOCKS RELEASE. Remedy DECIDED 2026-07-31 (owner, all four calls): layer ordering 3→2→1 adopted into FIX_POLICY §3a; layer-3 sweep authorised and OWED; F02 held for it; D10/D12 sequenced behind it. Nothing built yet]`
 
+> ## ⚖️ ADJUDICATED 2026-07-31 — `docs/F86_ADJUDICATION.md` — read alongside this entry
+>
+> The two position documents were independently torn down against Src, `Code/`
+> and the PT-20 logs. **Verdict: the authorised build is right,
+> yes-with-changes.** What the adjudication corrects in THIS entry:
+> - **"Synchronous code can never be captured" is true of the thread-stack
+>   route only.** The full test is value-reachability (three routes); a mod
+>   function held in a live local of a captured ENGINE frame also enters the
+>   save. Concrete: `Fix_CaveInsNoDisasters` is capturable today (~1 in 9
+>   Underground-map saves; inert — layer-2 shape; no build needed), so the
+>   exposed set is **at least 13**, and the sweep's enumeration grep is proven
+>   blind to slot/global/preset assignments.
+> - **`Fix_BombardmentSpread`'s accepted residual was mis-stated** — not "one
+>   broken volley" but a permanently wedged Mystery-7 bombardment loop
+>   (untimed `WaitMsg("BombardEnd")`, `Mystery 7.generated.lua:942`). Owner
+>   re-decision owed.
+> - **Before Tier 1 is built**, one engine fact must be measured (does
+>   `CreateGameTimeThread` run the body before the creating statement
+>   continues?) — it gates both the F02 wrapper key and the entire rains
+>   wrapper design — and the rains repair needs a migration pass for existing
+>   saves' persisted `fixed_loop` threads.
+> - The per-load meteor restart (`Fix_MeteorFrequency.lua:187-197`) is
+>   confirmed as a shipped player-facing defect; recommendation: own F-number,
+>   fixed by the F02 rewrite via a one-shot latched heal (shipped precedent:
+>   `RefreshRainsLoops`).
+>
 > ## ✅ THE OWNER DECISION IS TAKEN (2026-07-31) — read this before the diagnosis below
 >
 > All four calls in `docs/SAVE_SAFETY_REDESIGN.md` §4 were answered. **No
@@ -4234,8 +4260,11 @@ true of the table and irrelevant to the outcome — the route into the save is a
 > written?**
 
 A save captures only *blocked* threads, so synchronous code — data patches,
-getters, UI handlers, `Can…` predicates — can never be captured. That bounds the
-problem: **~62 of 74 modules are safe by construction.**
+getters, UI handlers, `Can…` predicates — can never be captured **through the
+thread-stack route**. That bounds that route: **~62 of 74 modules are safe from
+it by construction** *(adjudication 2026-07-31: capture is value-reachability —
+see the box at the top of this entry; the stored-closure and live-local routes
+also exist, and one compliant module is capturable today).*
 
 **Exposure list (12 modules — membership corrected BOTH ways by the sweep 2026-07-31: `Fix_DroneUnreachableForever` ADDED, `Fix_TrainCargoDumping` REMOVED because `Train:UnloadAll` is fully synchronous. See the correction box above and `SAVE_SAFETY_REDESIGN.md` §5.2).** Proven: `Fix_MeteorFrequency`,
 `Opt_DroneOverhaul`. High, same shape, unmeasured — all default-active:

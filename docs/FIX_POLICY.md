@@ -154,8 +154,21 @@ opt-in toggle OFF**. Neither is reachable by the pack after uninstall.
 
 Two properties bound it: a save captures only **blocked** threads, so purely
 synchronous mod code (data patches, getters, `Can…` predicates, UI handlers,
-non-yielding `OnMsg` bodies) can never be captured; and **real-time threads are
-not persisted at all**. That is ~62 of 74 modules safe by construction.
+non-yielding `OnMsg` bodies) can never be captured **through the thread-stack
+route**; and **real-time threads are not persisted at all**. That is ~62 of 74
+modules safe from that route by construction.
+
+⚠️ **CORRECTED 2026-07-31 (F86 adjudication): the test is value-reachability,
+not frame-position alone.** A mod function enters a save iff its **value** is
+reachable from the persisted graph at write time: (a) frame below a yield on a
+blocked GT thread; (b) held in a live local/upvalue of any captured frame —
+engine frames included (`Fix_CaveInsNoDisasters` is capturable this way today,
+inert only because it is layer-2-shaped); (c) stored in persisted state
+(object fields, GameVar contents, notification closures — the measured
+instance-closure experiment). So "safe by construction" additionally requires:
+**no function value stored into persisted state, and no assignment target that
+engine code holds live across a yield.** Class tables, presets, `OnMsg`
+registrations and UI windows remain safe. `docs/F86_ADJUDICATION.md` §3.1/§5.1.
 
 **Choose the remedy in this order — 3 → 2 → 1. The ordering is binding.**
 

@@ -199,7 +199,22 @@ code suggests.
     the orphan runs with an empty `_ENV` and every global lookup inside it fails.
   * A save only captures **blocked** threads, so purely synchronous mod code —
     data patches, getters, `Can…` predicates, UI handlers — can never be
-    captured. This is what bounds the hazard.
+    captured **through the thread-stack route**.
+    ⚠️ **CORRECTED 2026-07-31 (F86 adjudication): that clause is not the whole
+    test, and "the test is not where is this function stored" above is wrong as
+    written.** Persist serialises by value everything reachable from a captured
+    thread — every frame's function, locals and upvalues — plus persisted
+    storage. The full rule: **a mod function enters a save iff its VALUE is
+    reachable from the persisted graph at write time** — (a) its frame below a
+    yield on a blocked persistable GT thread; (b) held in a live local/upvalue
+    of ANY captured frame, engine frames included (measured shape:
+    `Fix_CaveInsNoDisasters`' wrapper sits in the `info` local the engine's
+    periodic-repeat loop keeps live across the yielding UndergroundMarsquake
+    FUNC — ~1 in 9 Underground-map saves, inert because layer-2-shaped); or
+    (c) stored in persisted state — the instance-closure experiment above IS
+    this route and remains true. Class tables, presets, `OnMsg` registrations
+    and UI windows are safe (permanents / rebuilt / not persisted).
+    Full evidence: `docs/F86_ADJUDICATION.md` §3.1/§5.1.
   * **A proper Lua tail call (`return orig(...)`) removes our frame from the
     stack**; calling `orig(...)` as a statement and then doing more work keeps it
     there. That is the only structural difference between the wrapper that
