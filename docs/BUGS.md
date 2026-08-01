@@ -3596,13 +3596,16 @@ the migration pass and the C34 stale-ACTIVE rider; the rains-half settling
 observation below rides that same leg (it previously said "PT-54 can carry
 it"). **NOT absorbed:** Triggers **A** (load-time reconciliation heals a
 stranded flag) and **B** (a genuine warning is never cleared — the liveness
-test). Both test `Fix_DisasterPredictionLeak`, which Tier 1 neither rewrites
-nor deletes, so no Tier-1 leg covers them by construction, and the wave-6 probe
-asserts that mechanism only synthetically. They were **routed to chain prompt
-3** (2026-08-01) to be written into `F86_TIER1_BUILD_PROMPT.md` as legs —
-prompt 3 also holds a pre-cleared option to add a **mid-session** reconcile to
-this same flag class, which would change what A and B test, so the legs must be
-specified there rather than left as a standing playtest item. Full trigger text
+test). Both test `Fix_DisasterPredictionLeak`, whose body Tier 1 keeps, so no
+rewrite leg covers them by construction, and the wave-6 probe asserts that
+mechanism only synthetically. They were **routed to chain prompt 3**
+(2026-08-01) and are Tier-1 leg 4 in `F86_TIER1_BUILD_PROMPT.md`. **The
+pre-cleared mid-session reconcile prompt 3 held was TAKEN and BUILT
+2026-08-01 (spec §6.2a-C): the same sweep now also runs on `OnMsg.NewDay`
+(WhenActive-gated, pcall-wrapped), so trigger A changed shape — a stranded
+flag must heal BOTH without a reload (within a sol) AND through the
+load-time sweep; trigger B gains the matching liveness assertion (a genuine
+warning survives a NewDay tick too).** Full trigger text
 preserved in `PLAYTEST_ARCHIVE.md`. **No session may re-run PT-54 against the
 current bodies.**
 

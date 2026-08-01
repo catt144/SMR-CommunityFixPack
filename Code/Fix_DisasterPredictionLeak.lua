@@ -45,6 +45,19 @@
 -- cheats/sequences; vanilla already trades the single notification slot between
 -- them via ReplaceNotification) the first storm to end clears the shared slot
 -- early. The alternative is the permanent leak.
+--
+-- MID-SESSION RECONCILE (added 2026-08-01, F86 Tier-1 rider — spec
+-- `SAVE_SAFETY_REDESIGN.md` §6.2a-C, pre-cleared option TAKEN): the same sweep
+-- also runs on OnMsg.NewDay. The sweep's predicate — flag set with no live
+-- notification — is stranded by construction at ANY time, not just at load
+-- (every disaster notification preset is Dismissable = false, and flag and
+-- notification are set/cleared in the same synchronous bodies, so cooperative
+-- scheduling leaves no observable mid-function window; the PostLoadGame-only
+-- placement of the shipped sweep was about SavegameFixups ordering, not
+-- mid-session safety). Cost: one flag-table scan per sol. Benefit: an
+-- F81a-class stranding (e.g. the wedge-heal's force-clean path with this fix
+-- disabled, or any future leak) gates weather for at most one sol instead of
+-- the rest of the session. §3a-compliant: OnMsg-based, additive, synchronous.
 
 local FIX_ID = "DisasterPredictionLeak"
 
@@ -95,4 +108,10 @@ end
 OnMsg.PostLoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	local ok, err = pcall(SMRFixPack.ReconcileDisasterPredictions)
 	if not ok then log("%s: reconciliation pass failed: %s", FIX_ID, tostring(err)) end
+end)
+
+-- The mid-session reconcile (see header): same sweep, same gates, once per sol.
+OnMsg.NewDay = SMRFixPack.WhenActive(FIX_ID, function()
+	local ok, err = pcall(SMRFixPack.ReconcileDisasterPredictions)
+	if not ok then log("%s: mid-session reconciliation failed: %s", FIX_ID, tostring(err)) end
 end)
