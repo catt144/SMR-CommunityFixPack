@@ -229,8 +229,9 @@ rebound onto F9/F11 (both in `PopupPropagateShortcuts`, and the action is
 `ActionBindable`), the shortcut reaches the dialog. `CanSaveGame` does not
 object (§1b). **Settling observation = needs-eyes item 3.** Intent: unintended
 (same sibling contradiction as 3.1); the shield is an accident of modality, not
-a design choice — but per the revised §4 draft, no fix is written on a U with
-the observation pending.
+a design choice — but per the revised §4 (**applied to `FIX_POLICY.md`
+2026-08-01**; "U ships only with the settling observation queued"), no fix is
+written on a U with the observation pending.
 
 ### 3.4 Player-initiated confirmations + real-time + opens-immediately — recoverable, no fix warranted
 
@@ -420,7 +421,7 @@ real consequences — except the two sites in §3.1 and the latent class in §3.
    cheapest correct family fix is the same one vector-by-vector: move each
    consequence out of the RT thread (e.g. breakthrough: pick-and-apply in a GT
    thread, RT popup only reports) — but that is a decision for after the
-   observation, per the revised §4 draft.
+   observation, per the revised §4 (applied to `FIX_POLICY.md` 2026-08-01).
 4. **The general re-arm** (F83 option 2 — resurrect stranded async waiters on
    load) stays **NOT recommended**, now with a stronger reason: the engine
    already persists every waiter that matters; a re-arm layer would exist for

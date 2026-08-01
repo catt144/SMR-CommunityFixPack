@@ -249,12 +249,66 @@ its header which layer it is on and why. Full analysis, the 12-module exposure
 list and the per-module disposition: `docs/reports/SAVE_SAFETY_REDESIGN.md` and BUGS.md
 F86.
 
-## 4. Only fix proven defects
+## 4. Only fix proven, reachable, UNINTENDED defects
 
-Every fix links to a BUGS.md entry with file:line evidence. No balance changes,
-no "improvements", no opinions — those belong in other mods. When intent is
-ambiguous, prefer the reading proven by sibling code in the same file
-(the F07/F08/F02 pattern: the same author wrote it correctly elsewhere).
+> **AMENDED AND ADOPTED 2026-08-01.** This section replaces the three-sentence
+> "Only fix proven defects" rule with the reachability audit's drafted
+> amendment, applied verbatim from `REACHABILITY_AUDIT.md` §4. **Authority:**
+> the owner's blanket pre-clearance of 2026-08-01 (recorded in
+> `docs/prompts/project/README.md`), which clears the approval step for work
+> items derived from the audit-and-adjudication conversation — this adoption
+> named among them. **The blocker that held it back is gone:** the draft
+> contradicted itself while F49(a) shipped a no-op R4 rider against the new
+> "R4 does not ship" line; that guard was **stripped from `Fix_TrainMinors`
+> on 2026-08-01** (BUGS F49; A/B code-gate leg ran clear), so the rule and the
+> shipped code now agree. **Live consequence on adoption:** F29 and F57(a) are
+> R3 defects fixed by §1.5 method replacements — the combination the R3 bullet
+> below now makes conditional on an explicit owner decision. Both entries
+> already anticipated this; the decision is routed and owed, not assumed
+> either way.
+
+Every fix links to a BUGS.md entry with file:line evidence, **a recorded
+reachability tier, and a positive intent statement**. Before a fix ships:
+
+- **Intent first.** State why the shipped behaviour is unintended, citing
+  at least one hard tell: (1) player-reported harm; (2) dead code / dead
+  validation — a computed value discarded, a guard that cannot fire, a
+  message nothing emits; (3) sibling contradiction — the same author wrote
+  it correctly elsewhere; (4) self-contradiction within one function or
+  preset; (5) an explicit dev comment. **No tell → the defect claim is a
+  hypothesis, and it needs a keyboard observation before any fix is
+  written.** UI/affordance behaviours — anything whose wrongness lives in
+  hit-testing, cursor feedback, input modes, or whether two things are
+  separately addressable — are in this class BY DEFAULT: source reading
+  gives confident answers with no validity there (the F49(c) lesson). A
+  behaviour found intentional is tier **I**: record it, close it, write no
+  fix.
+- **Then reachability.** Enumerate every call site of the defective
+  function in Src; eliminate the ones that cannot execute the defective
+  body (class chain, guards, early returns, template data); for each
+  survivor name the concrete player action that produces the precondition.
+  Record the tier: R1 live · R2 conditional · R3 latent-by-data · R4
+  unreachable · U unknown (naming the observation that would settle it).
+- **Symmetry of proof.** Every tier states its evidence — an unenumerated
+  R1/R2 is exactly as unproven as an unstated R4, and more dangerous,
+  because "keep, it's live" is the verdict nobody revisits. **Every
+  lettered sub-item of a bundled fix is a separate audit subject**;
+  enumerating one item proves nothing about its siblings.
+- R1/R2 ship normally. **R3 ships only as a §1.1–§1.4 patch**; an R3 §1.5
+  full replacement needs an explicit user decision (the F24 lesson). **R4
+  does not ship**; record it `wontfix — unreachable` with the search that
+  proved it. **U ships only with the settling observation queued** as a
+  playtest item.
+- A `tested` status proves reachability only if the playtest reached the
+  state **by playing**; console surgery, `g_Consts` compression or `Cheat*`
+  calls prove the fix, not the path. A state producible **only by
+  console/debug injection is evidence for R4** (the PT-46 track lesson).
+- **Evidence freshness:** re-check `git log` between assembling a verdict
+  and recording it — playtest evidence lands continuously, and this
+  project has now twice been burned by writing against a stale snapshot.
+- No balance changes, no "improvements", no opinions — those belong in
+  other mods. When intent is ambiguous, prefer the reading proven by
+  sibling code in the same file (the F07/F08/F02 pattern).
 
 ## 4a. SCOPE — vanilla only. This pack never fixes other mods' problems. (HARD RULE, user, 2026-07-30)
 

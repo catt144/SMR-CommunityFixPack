@@ -354,9 +354,11 @@ waiting.
   drone-owned, see `docs/prompts/DRONE_PROJECT_PROMPT.md`.)
 - **The needs-eyes observations** (Detailed Scan recoverability, F85's tier,
   the storybit reconnect) — minutes each, and they grade **defects**.
-- **The FIX_POLICY §4 amendment** — it is the rule that decides what is allowed
-  to be built at all, and it currently carries a live contradiction affecting
-  F49(a). Cheap, and it is itself a brake on scope creep.
+- ~~**The FIX_POLICY §4 amendment**~~ — **APPLIED 2026-08-01**, so it is off
+  every list. Kept here as the record of why it was never parkable: it is the
+  rule that decides what is allowed to be built at all, and it is itself a
+  brake on scope creep. (The live contradiction it carried — F49(a) — died the
+  same day the guard was stripped.)
 - **F84 / D10 T1 localization call** — already bundled into a build that is
   happening; splitting it creates the second decision this pairing exists to
   avoid.

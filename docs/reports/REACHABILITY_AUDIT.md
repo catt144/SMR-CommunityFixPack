@@ -1130,7 +1130,20 @@ contradict each other), F20 (explicit dev comment), F16/F23/F28/F43/F75
 F07/F08/F12 (sibling contradiction), F36/F51/F52/F55/F78/F81 (player-reported
 harm).
 
-### Revised FIX_POLICY §4 amendment (supersedes the draft above — still not applied)
+### Revised FIX_POLICY §4 amendment (supersedes the draft above) — ✅ **APPLIED 2026-08-01**
+
+**This draft is spent.** The text below was copied verbatim into
+`docs/agent/FIX_POLICY.md` §4 on 2026-08-01, replacing the old three-sentence
+"Only fix proven defects" rule; **FIX_POLICY is now the authority for it and
+this block is only the record of where it came from.** Authority for the
+adoption: the owner's blanket pre-clearance (`docs/prompts/project/README.md`),
+which removed the approval step for audit-derived items. The blocker that held
+it — the draft's "R4 does not ship" against F49(a)'s shipped no-op R4 rider —
+died the same day when that guard was stripped from `Fix_TrainMinors` (BUGS
+F49). One live consequence recorded on adoption: **F29 and F57(a)** are R3
+defects fixed by §1.5 method replacements, which the R3 bullet now makes
+conditional on an explicit owner decision; both entries carry it and the
+decision is routed, not assumed.
 
 > ## 4. Only fix proven, reachable, UNINTENDED defects
 >

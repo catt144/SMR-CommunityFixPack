@@ -927,10 +927,22 @@ F49(c) verdict, repeated on provenance rather than on intent. §4a now says
 outright: judge by enumeration, never by the entry's own words.
 
 **What F29 does still owe** is unrelated to §4a: it is R3 implemented as two
-**§1.5 method replacements**, and the *pending* §4 amendment would require an
+**§1.5 method replacements**, and ~~the *pending* §4 amendment would require~~ →
+**the §4 amendment APPLIED 2026-08-01 now requires** an
 explicit owner decision for that combination (latent benefit, permanent
-maintenance cost). It is paired with **F57(a)** in that bucket. No action unless
-the owner wants the stricter line.
+maintenance cost). It is paired with **F57(a)** in that bucket. ~~No action unless
+the owner wants the stricter line.~~
+**⚠ ACTIVATED 2026-08-01.** The stricter line landed: FIX_POLICY §4 now reads
+"**R3 ships only as a §1.1–§1.4 patch**; an R3 §1.5 full replacement needs an
+explicit user decision (the F24 lesson)". F29 (items 1 and 3) and F57(a) are
+the pack's only members of that combination, and neither has such a decision on
+record. **Nothing is presumed either way** — the blanket pre-clearance covered
+adopting the rule, not pre-deciding what the rule then asks. The decision is
+**routed to chain prompt 7** (`docs/prompts/project/`), which is where §4-bar
+decision packages are put to the owner: keep both as replacements (the shape is
+already shipped, probe-covered and A/B-clean), convert to §1.1–§1.4 where a
+wrapper can reach the defect, or drop the latent halves. It is a decision owed,
+not a defect found — nothing here is claimed to be wrong.
 1. `Lua\Sequences\SA_Filters.lua:30-40` — `SA_GetLabelToRegister` ignores
    `random_count`/`random_percent` (returns full list after shuffle). No shipped user.
 2. `Lua\Sequences\SA_Gameplay.lua:2705` — `SA_WaitMarsTime` *generated-code* path inverts
@@ -1726,12 +1738,18 @@ the build menu hardcodes `require_construction = true` for tracks
 (`BuildMenu.lua:1938`), and `Cheats.lua` contains **zero** track references.
 So "map setup, cheats, the instant-build rule" has **zero player-reachable
 members**.
-**Kept anyway, deliberately:** the (a) hook is a cheap additive post-wrapper
-that is a no-op for correctly-painted elements, and it rides a module retained
+~~**Kept anyway, deliberately:**~~ **SUPERSEDED — the (a) guard was STRIPPED
+2026-08-01 (owner direction); the paragraph below is the record of the position
+it replaced.** The (a) hook was a cheap additive post-wrapper
+that is a no-op for correctly-painted elements, and it rode a module retained
 on (d)'s live R2. Strip it on the next touch of this file if you want the
 stricter line. Note the drafted FIX_POLICY §4 says "R4 does not ship", which
 would mandate stripping it — that contradiction is flagged for the user and
-must be resolved before the amendment lands. It also self-corrects on any
+must be resolved before the amendment lands. **Both halves of that sentence
+have since happened, in that order:** the guard came out (A/B code-gate leg ran
+clear, `68/74` → `63/0/15/0`), and **the amendment landed 2026-08-01 with the
+contradiction already gone** — FIX_POLICY §4 now carries "R4 does not ship"
+against no shipped R4 code. It also self-corrects on any
 colour-scheme change (`ColonyColorScheme.lua:120-121` repaints every
 `TrackGridElement`), so the live impact was cosmetic and transient anyway.
 *The test itself is sound if a safe route is ever found* — the palette control
@@ -1779,8 +1797,8 @@ presupposes the shipped behaviour is wrong. Both gaps were put back to the
 audit and are **ANSWERED** in `docs/reports/REACHABILITY_AUDIT.md` ("Challenge review
 2026-07-30"): new tier **`I` — Intentional** was added with (c) reassigned to
 it, every lettered sub-item is now its own audit subject by rule, and the
-revised FIX_POLICY §4 draft demands a positive intent statement backed by a
-hard tell — not merely a reachability tier.
+revised FIX_POLICY §4 ~~draft~~ (**APPLIED 2026-08-01**) demands a positive
+intent statement backed by a hard tell — not merely a reachability tier.
 
 **(b) RESOLVED — no defect (PT-46 PASS, 2026-07-25/26).** Mechanism confirmed as
 tracked (no branch of `DemolishAndSplitTrack` touches `assigned_vehicles`), but the
@@ -1996,6 +2014,14 @@ branch hardcodes `"Fuel"` — so on shipped data the two keys coincide and nothi
 Fixed for the F27/F28 reason: a mod or a future rocket with its own fuel resource
 inherits the leak. The replacement also clears the key it wrote last time, remembered in
 an absent-tolerant `SMRFixPack_rocket_fuel_key` field on the DroneControl.
+**⚠ §4 DECISION OWED ON THIS ITEM (2026-08-01).** (a) is **R3 latent-by-data
+implemented as a §1.5 replacement** — the exact combination the §4 amendment,
+applied today, now makes conditional on an explicit owner decision ("R3 ships
+only as a §1.1–§1.4 patch"). It is paired with **F29** in that bucket and the
+two are routed together to chain prompt 7. Note for whoever prepares that
+package: (a)'s defect is a mid-function key write, so a §1.1–§1.4 route is not
+obviously available — that is part of what the decision must weigh, not a
+reason to skip the ask. (b) is unaffected (additive `OnMsg`, §1.2).
 
 **(c) NOT FIXED — redundant with the assignment-time check, and a §1.5 replacement to
 reach.** The mechanism is exactly as tracked: `can_work_here = work_or_train or (cdome ==

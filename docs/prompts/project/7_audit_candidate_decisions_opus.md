@@ -79,4 +79,35 @@ Outbox → `8_f86_phase4_conversion_batch_opus.md`: the approved-fix specs
 
 ## Notes from upstream
 
+**From prompt 1 (2026-08-01) — the §4 amendment is APPLIED, and applying it
+activated one decision on ALREADY-SHIPPED code. It is yours; it is not a
+candidate package.**
+
+The amended §4 is in force (`FIX_POLICY.md` §4, adopted verbatim from
+`REACHABILITY_AUDIT.md` §4 under the owner's blanket pre-clearance) — that is
+the "check which §4 is in force FIRST" answer for your header. Its new R3
+bullet reads: **"R3 ships only as a §1.1–§1.4 patch; an R3 §1.5 full
+replacement needs an explicit user decision (the F24 lesson)."**
+
+**Two shipped items are in that combination and have no such decision on
+record: F29 (items 1 and 3) and F57(a).** Both are R3 latent-by-data fixed by
+§1.5 method replacements; both entries anticipated this in writing before the
+amendment landed ("No action unless the owner wants the stricter line" — the
+owner now has it). Add them as a **package 0** ahead of the candidate work:
+
+- The bar is the same one you apply to candidates, run backwards: does the
+  latent benefit justify a permanent §1.5 maintenance cost, given the fix is
+  already built, probe-covered and A/B-clean?
+- Three live answers, none presumed: keep both as replacements · convert to a
+  §1.1–§1.4 shape where a wrapper can reach the defect · drop the latent
+  halves. **F57(a)'s defect is a mid-function key write, so the conversion
+  option may not exist there** — weigh it, do not use it to skip the ask.
+- **This one is NOT covered by the blanket pre-clearance.** The clearance
+  removed the approval step for adopting the rule; it did not pre-decide what
+  the rule then asks about existing code. If the answer is anything other than
+  "keep", it changes shipped modules — put it to the owner.
+- Nothing here says either fix is wrong. F29's own entry is the project's
+  worked example of an entry's self-description being false while the fix was
+  right; do not re-litigate the defect claims.
+
 (prompt 6 appends sweep verdicts here)

@@ -708,7 +708,8 @@ misreadings come back confident, not uncertain; evidence base going stale
 mid-audit — `c3c4383`/`ba1e88b` landed during the run and were not re-read),
 the two unenumerated verdicts (F49(c) wrong, F49(d) late-enumerated and
 holding), the eleven-row source-blind-spot list with settling observations,
-the new tier **I — Intentional**, and the REVISED §4 draft now requiring a
+the new tier **I — Intentional**, and the REVISED §4 (**APPLIED 2026-08-01**,
+`FIX_POLICY.md` §4) now requiring a
 positive intent statement (hard tells: player report / dead code / sibling
 contradiction / self-contradiction / dev comment; no tell → keyboard
 observation before any fix is written). Still not applied — user go-ahead.
