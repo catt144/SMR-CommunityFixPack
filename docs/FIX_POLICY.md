@@ -140,9 +140,11 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   Two standing deliverables, both ready BEFORE launch: a player-facing
   **uninstall procedure** ("update, load, save, then uninstall" — backed by
   the latched heal + migration passes, which clear our threads out of the
-  save), and the **standalone save-rescue mod** for saves that already lost
-  the pack (the only console-viable remedy). Spec + honest limits:
-  `F86_EXECUTION_PLAN.md` Phase 5. `[FAQ]`
+  save), and the **standalone save-rescue artifact** for saves that already
+  lost the pack (the only console-viable remedy). Record + spec gate + open
+  design question: **`BUGS.md` D13**; plan: `F86_EXECUTION_PLAN.md` Phase 5.
+  ⛔ The artifact is **specced only after Tiers 1+2 land and verify** — its
+  target list is their output, never today's leak set. `[FAQ]`
 
 ### 3a. SAVE SAFETY — no mod function below a yield on a game-time thread (HARD RULE, owner, 2026-07-31)
 

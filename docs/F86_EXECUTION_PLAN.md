@@ -92,10 +92,13 @@ plus the **half (a) design pass** (raw `SetPos`, still routeless),
 The six §5.4-A wrapper conversions as one batch, single leg. Then D10/D12
 unhold (the owner's gate was "repairs land and verify").
 
-## Phase 5 — prelaunch save-exit work (⭐ owner directive 2026-07-31, supersedes the §7/FUTURE_IDEAS parking)
+## Phase 5 — prelaunch save-exit work (⭐ owner directive 2026-07-31; home: **BUGS.md D13**)
 
 **The pack must ship with its exit paved.** Two deliverables, both ready
-BEFORE launch, published as needed after:
+BEFORE launch. The full record — primitives inventory, the two traps, the
+second-artifact costs, the open player-story design question — lives on
+**D13** (moved out of FUTURE_IDEAS 2026-08-01 so that file's "nothing here is
+work" rule stays true). What this phase owns:
 
 1. **The pack's own exit hygiene** (mostly falls out of Tiers 1+2): the
    latched heal + rains migration mean a player who **updates, loads, saves,
@@ -103,22 +106,26 @@ BEFORE launch, published as needed after:
    this as a player-facing **uninstall procedure** in `MOD_DESCRIPTION.md`
    ("to remove the pack cleanly: update to the latest version, load your
    colony, save, then uninstall" + backup-first advice). `[FAQ]`
-2. **The standalone save-rescue mod** ("SMR FixPack Save Cleaner") for saves
-   that already lost the pack — the F86 scenario. Primitives already named in
-   FUTURE_IDEAS entry 5: sweep `GlobalGameTimeThreads` /
-   `RestartGlobalGameTimeThread` (rebuilds vanilla bodies when the pack is
-   absent), refresh `RainsDisasterThreads` entries, clear `SMRFixPack_*`
-   GameVars and instance fields (the fixture measured the field inventory:
-   919× `reserved_at` + 8 others). Build and test it prelaunch; publish it on
-   PDX Mods so it exists the day anyone needs it. **It works on console**
-   (it's just a mod — Paradox Mods reaches Xbox/PS5), which makes it the ONLY
-   console-viable remedy and therefore not optional.
+2. **The standalone save-rescue artifact** for saves that already lost the
+   pack — the only console-viable remedy, therefore not optional.
+   ⛔ **SPEC GATE (owner, 2026-08-01): scoped against what is LEFT after
+   Tiers 1+2 land AND verify — never against today's leak set.** The F86
+   build exists to stop creating residue; a cleaner specced now would be
+   built to clean things that won't exist when it ships, and would grow to
+   fit. Its target list is Tier 1/2's measured output (the uninstall leg's
+   findings), so this phase CANNOT start before Phase 3 verifies — building
+   in parallel means building it twice. Design question (run-after vs
+   keep-installed vs pack-as-own-cleaner) is decided when the gate opens.
 
 **Honest limits (state them wherever the cleaner is described):** a cleaner
 cannot remove **inert captured frames** from old saves (invisible, inert,
 harmless — layer-2 residue); it cannot resurrect **irreversible history**
 (the ~15% class in STATUS's save-rescue section); and it must run at least
 once inside the save to act (some mod must execute — physics, not policy).
+Its own residue must be **zero** (purely synchronous, no threads, no
+GameVars), and the release checklist must absorb the second artifact's full
+cost: own metadata, preview, description, PDX portal pass, console cert,
+version-skew statement (WORKFLOW).
 
 **Release gates added (WORKFLOW):** uninstall procedure published; cleaner
 built + tested; residual disclosure in MOD_DESCRIPTION; the five-shape
@@ -142,5 +149,5 @@ exposure enumeration re-run after every game update alongside the fpk diff.
 | 2 | **One-shot latched heal ADOPTED** for `Fix_MeteorFrequency` (and the pattern for rains migration) |
 | 3 | **Orphan-gate rule ADOPTED** into FIX_POLICY §3a; loud-death demoted from failure mechanism to backstop |
 | 4 | **BombardmentSpread: KEEP**, corrected residual (≈nil) accepted — closes adjudication D3 |
-| 5 | **Prelaunch save-exit directive**: uninstall procedure + standalone cleaner ready before launch (this section) — supersedes the "parked, post-launch-only" status of FUTURE_IDEAS entry 5 and REDESIGN §7 |
+| 5 | **Prelaunch save-exit directive**: uninstall procedure + standalone cleaner ready before launch — filed as **D13** (BUGS.md), spec gated on Tier 1/2 verification; supersedes REDESIGN §7's "no cleanup mod" (the FUTURE_IDEAS entry was MOVED to D13, not annotated in place) |
 | 6 | Prior-art survey run and closed; Tier-3 control leg not required (source-verified per module) |

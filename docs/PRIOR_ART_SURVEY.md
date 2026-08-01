@@ -217,8 +217,8 @@ Relaunched has `SaveGameStart`/`SaveGameDone` reaching mods, measured by this
 project. (ii) **Consoles** — every mitigation his community leaned on (read
 the log, console commands, third-party cleanup mods, hex-editing
 `active_mods`) is PC-only; Relaunched ships mods to Xbox/PS5 where none of it
-exists, so silent residue has no escape hatch — which is why the cleaner mod
-(FUTURE_IDEAS entry 5, now prelaunch) is not optional. (iii) **The game is
+exists, so silent residue has no escape hatch — which is why the cleaner
+(`BUGS.md` D13, prelaunch, spec gated on Tier 1/2) is not optional. (iii) **The game is
 alive** — the original stopped patching, so "old bytecode runs from your
 save" converged to harmless; Relaunched's active patching makes version skew
 between persisted bodies and current code (the §2.5 upgrade-path class) a

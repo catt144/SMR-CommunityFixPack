@@ -155,8 +155,14 @@ regression harness; run it as pre-flight when STATUS says one is owed.
   1. the **uninstall procedure** is published in MOD_DESCRIPTION ("update,
      load, save, then uninstall", backup-first) and is true (latched heal +
      rains migration shipped and verified);
-  2. the **standalone save-rescue mod** is built and tested, ready to publish
-     (the only console-viable remedy — `F86_EXECUTION_PLAN.md` Phase 5);
+  2. the **standalone save-rescue artifact** (`BUGS.md` **D13**) is built and
+     tested, ready to publish (the only console-viable remedy). ⛔ Its spec is
+     GATED on Tier 1/2 landing and verifying — scoped against their measured
+     output, never today's leak set. ⚠️ **A second shipped artifact doubles
+     this checklist**: it needs its OWN metadata, preview image, description,
+     PDX portal pass and console cert, plus a version-skew statement (which
+     pack versions' residue it handles) and proof its own residue is zero —
+     budget the release window accordingly;
   3. the **residual disclosure** (inert layer-2 residue; irreversible-history
      class) appears wherever save-cleanliness is claimed;
   4. after EVERY game update, alongside the fpk extraction diff, **re-run the

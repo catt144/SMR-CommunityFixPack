@@ -599,13 +599,14 @@ again without new evidence that Tier 3 causes real harm.**
 ## 7. What is NOT proposed
 
 - ~~**No cleanup mod.** Parked (`FUTURE_IDEAS.md` entry 5).~~ ⭐ **SUPERSEDED
-  by owner directive 2026-07-31: the cleanup mod is now a PRELAUNCH
-  deliverable** — built and tested before launch, published for the community
-  the moment anyone needs it (and it is the only remedy that works on
-  console). The "reinstall revives the thread" remedy stays true but now
-  carries the F88 caveat (the revive mechanism re-rolls timers until the
-  Tier-1 rewrite ships). Spec, primitives and honest limits:
-  `F86_EXECUTION_PLAN.md` Phase 5; primitives inventory: FUTURE_IDEAS entry 5.
+  by owner directive 2026-07-31: the save-exit deliverables are now
+  PRELAUNCH — filed as `BUGS.md` D13** (the FUTURE_IDEAS entry was MOVED
+  there 2026-08-01, keeping that file's "nothing here is work" rule true).
+  ⛔ D13's spec is **gated on Tiers 1+2 landing AND verifying** — the
+  cleaner is scoped against their measured output, never today's leak set.
+  The "reinstall revives the thread" remedy stays true but carries the F88
+  caveat (the revive mechanism re-rolls timers until the Tier-1 rewrite
+  ships). Plan: `F86_EXECUTION_PLAN.md` Phase 5; record: D13.
 - ~~No FIX_POLICY edit yet~~ — **DONE 2026-07-31.** The owner adopted the
   ordering, so the rule landed in **`FIX_POLICY.md` §3a**, which is now
   authoritative for it. This file keeps the analysis and the per-module

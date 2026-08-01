@@ -90,6 +90,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30, user-approved — **gate OPEN (PT-56 PASSED 2026-07-30), BUILDABLE NOW** (entry) |
 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
 | D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | SPECED 2026-07-30, user-approved, build owed (entry) |
+| D13 | Save-exit deliverables: uninstall procedure + standalone save-rescue artifact | dsgn| high | directed 2026-07-31 (owner), prelaunch — ⛔ **spec GATED on Tier 1/2 landing AND verifying** (target list = their output, never today's leak set); second-artifact costs + open player-story design question on the entry (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -5863,6 +5864,68 @@ or died). Two more departures would clear `overpopulated` and D07 would resume
 delivering unaided. So the deadlock is genuine but marginal — a D12 test must
 confirm the drain is what cleared it, not natural attrition. Take a homeless
 count immediately before setting the flag and immediately after.
+
+### D13 — Save-exit deliverables: the uninstall procedure + the standalone save-rescue artifact (design, high)  `[directed 2026-07-31 (owner) — prelaunch deliverable. ⛔ SPEC GATED: not specced, not built, until Tier 1/2 land AND verify — its target list is their OUTPUT. Moved here from FUTURE_IDEAS entry 5 (2026-08-01) so that file's "nothing here is work" rule stays true]`
+
+**The owner's directive (2026-07-31):** the pack ships with its exit paved —
+prelaunch, ready for the community post-launch. Two deliverables:
+
+1. **The uninstall procedure** (player-facing, MOD_DESCRIPTION): "update to
+   the latest pack, load your colony, save, then uninstall" — true because
+   the Tier-1 latched heal + rains migration clear our threads from the save.
+   Backup-first advice, honest residual disclosure (inert layer-2 residue;
+   irreversible history). `[FAQ]`
+2. **The standalone save-rescue artifact** for saves that already lost the
+   pack — the only remedy that works on console (Paradox Mods reaches
+   Xbox/PS5; no logs, no console commands, no hex-editing there).
+
+**⛔ THE SPEC GATE (owner concern, 2026-08-01): scope it against what is LEFT
+after Tier 1/2 — never against today's leak set.** The F86 build exists to
+stop creating residue; a cleaner specced now would be built to clean things
+that won't exist when it ships, and would grow to fit. Sequencing therefore:
+Tier 1/2 land → verify (their PT-20-method uninstall leg) → THEN freeze this
+spec against the measured leftover classes (expected: pre-rewrite-lineage
+saves — dead `Meteors` threads, old-body rains loops; `SMRFixPack_*` instance
+fields — fixture-measured inventory 919× `reserved_at` + 8 others; GameVars
+from any era). Building in parallel with Tier 1/2 means building it twice.
+
+**Second-artifact costs (all owed by the release checklist, WORKFLOW):** own
+metadata, preview image, description, PDX portal pass, console cert — plus
+**version-skew management**: the cleaner must state which pack versions'
+residue it handles, and its own residue must be ZERO (a cleaner that marks
+saves is a farce — so: purely synchronous, no threads, no GameVars).
+
+**⚠️ OPEN DESIGN QUESTION (owner, deliberately not yet answered): what does
+the player actually DO?** (a) Run-after-removal — the promise depends on the
+player remembering a second step at the exact moment they've decided to stop
+using our mods (though the broken-save case is self-motivating: they arrive
+because something is wrong). (b) Keep-installed — then it is not a cleaner
+but a permanent runtime. (c) The pack is its own cleaner and the standalone
+artifact serves ONLY the already-removed case. The choice shapes the whole
+artifact; it is taken when the spec gate opens, not before.
+
+**Primitives inventory (moved from FUTURE_IDEAS entry 5, still current):**
+- Global GT threads: `RestartGlobalGameTimeThread(name)` swept over
+  `GlobalGameTimeThreads` rebuilds each from `GlobalGameTimeThreadFuncs` —
+  with the pack absent, that is **vanilla's body**. Fully generic across mods.
+- Command threads: re-issuing `SetCommand` discards a stale stack carrying a
+  vanished mod's frame (rarely needed — they self-clean per the LuaSavegame
+  doc's "new invocations" rule).
+- Named fields/GameVars: removable where identifiably named.
+- **Trap 1 — some residue must SURVIVE:** `90_SaveSanitizer` writes
+  `SMRFixPack_F35_<label>` modifiers that ARE the repair; a delete-everything
+  cleaner re-breaks the save. Curated keep/remove list required.
+- **Trap 2 — restarting a thread resets its interval** (35-115 h for
+  Meteors); bounded as a one-shot, never blanket-repeated.
+- Detection is the hard part: the 2026-07-31 `rawget` sweep false-positived
+  on 192 buildings twice. Enumerate by curated list, never by pattern-guess.
+
+**Playtest owed when built:** its own PT — damaged pre-rewrite fixture save →
+run artifact → verify vanilla threads alive, fields/GameVars per keep-list,
+zero artifact residue after ITS removal, on a save then loaded with no mods.
+
+Cross-refs: F86, F88, `F86_EXECUTION_PLAN.md` Phase 5, WORKFLOW save-exit
+gates, D06 (the beta-response-channel framing this composes with).
 
 ### C01 — `BreakthroughOrder` rebuilt+reshuffled on every map load
 `Lua\Buildings\Anomaly.lua:652-682` (`City:InitBreakThroughAnomalies`), called from
