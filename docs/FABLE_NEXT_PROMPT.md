@@ -51,18 +51,18 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
 - **The test is NOT "where is the function stored".** It is *can it be blocked
   below a `Sleep`/`WaitMsg`/`WaitWakeup` on a **game-time** thread when the save
   is written*. Synchronous code can never be captured, so ~62 of 74 modules are
-  safe by construction; **13 are exposed** (list on the F86 entry — corrected
-  upward from 12 by the sweep, which caught `Fix_DroneUnreachableForever`).
+  safe by construction; **12 are exposed** (list on the F86 entry — the sweep
+  corrected the membership both ways: `Fix_DroneUnreachableForever` IN,
+  `Fix_TrainCargoDumping` OUT).
 - ✅ **THE DECISION IS TAKEN (2026-07-31) — and exactly ONE game-free item is
   owed: the layer-3 sweep.** All four calls in **`docs\SAVE_SAFETY_REDESIGN.md`**
   §4 are answered:
   1. **Layer ordering 3 → 2 → 1 ADOPTED**, now a hard rule in **`FIX_POLICY.md`
      §3a** — read that, not this summary, before writing any fix. It binds new
      fixes as well as F86 repairs.
-  2. **The layer-3 sweep is AUTHORISED at FULL scope** — every full-replacement
-     module, not just the 13 exposed. Asks of each: *is there a synchronous
-     input we could patch instead of replacing a blocking body?* **Game-free,
-     and it is the critical path.**
+  2. **The layer-3 sweep was AUTHORISED at FULL scope** and ✅ **has RUN over the
+     exposed set** — see board item 6 and `SAVE_SAFETY_REDESIGN.md` §5. Its
+     non-exposed half (§5.4) is still outstanding and blocks nothing.
   3. **F02 is HELD until the sweep reports — do NOT touch
      `Fix_MeteorFrequency`.** The owner declined to take it module-by-module.
   4. **D10 and D12 are sequenced BEHIND the rules** (see the board).
@@ -186,12 +186,15 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
    (one fresh 10-minute save covers both).
 5. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
    **PT-21/22** last.
-6. **⭐ F86 — THE LAYER-3 SWEEP. Authorised, game-free, and the critical path.**
-   The decision is taken (block above); this is the one thing it owes. Read
-   every full-replacement module and ask: *is there a synchronous input we could
-   patch instead of replacing a blocking body?* Report per module, then the
-   owner decides what gets built. **No code is written from this sweep without a
-   further go.**
+6. **⭐ F86 — THE SWEEP HAS REPORTED; the owner now picks what gets built.**
+   Result in `SAVE_SAFETY_REDESIGN.md` §5. **Five of the twelve exposed modules
+   have a layer-3 or layer-2 route out** — `MeteorFrequency`,
+   `DroneUnreachableForever`, `TrainWaitTime` and `RainsDeadlock` fully,
+   `ArrivalDeaths` by half — each through an input verified **synchronous**.
+   Only **four own-thread modules plus `BombardmentSpread`** are layer-1
+   candidates, and `BombardmentSpread` has **no** layer-3 route. **Nothing is
+   built; no code without a further owner go.** ⏳ Outstanding: the non-exposed
+   half of the sweep's scope (§5.4) — future-proofing, nothing blocks on it.
    ⚠️ **Sequencing note:** the `Opt_DroneOverhaul` half of the layer-2 repair
    sits inside a drone-owned module. It is save-safety surgery on a wrapper's
    call position and touches no drone design, so it should be carved out of the

@@ -8,9 +8,14 @@ leg that measured the defect; the four decisions were taken the same day and are
 recorded in §4. The defect itself is `BUGS.md` **F86** (P1, blocks release);
 this file is the *how*.
 
-> **What is owed right now: the sweep (§4 decision 2), and nothing else.** It is
-> game-free. No code may be written against this file until the sweep reports —
-> that includes F02, which the owner explicitly held for it.
+> ✅ **THE SWEEP HAS REPORTED — §5.** It found one module that was missing from
+> the exposed list and one that never belonged on it, and it establishes that
+> **five of the twelve exposed modules have a layer-3 or layer-2 route out**, so
+> only four own-thread modules plus `BombardmentSpread` are candidates for the
+> dangerous layer 1. **Still outstanding (§5.4): the non-exposed half of decision
+> 2's full scope — future-proofing, nothing blocks on it.**
+>
+> **Nothing here is built, and F02 stays HELD until the owner acts on §5.**
 
 ---
 
@@ -151,7 +156,7 @@ A/B plus a long-interval soak.
 
 ---
 
-## 3. Per-module disposition (13 exposed — was 12, see §4a)
+## 3. Per-module disposition (12 exposed — membership corrected BOTH ways by the sweep: see §4a for the addition and §5.2 for the removal)
 
 | module | default? | route in | proposed layer |
 |---|---|---|---|
@@ -160,7 +165,7 @@ A/B plus a long-interval soak.
 | `Fix_RainsDeadlock` | yes | `fixed_loop` → global `RainsDisasterLoop` | 3 if an input exists, else **1** |
 | `Fix_ArrivalDeaths` | yes | `Colonist:Arrive` command + own `Sleep` | needs its own look — a command body replacement |
 | `Fix_TrainWaitTime` | yes | `Colonist:BoardVehicle` command body | needs its own look |
-| `Fix_TrainCargoDumping` | yes | `Train:UnloadAll` command body | needs its own look |
+| ~~`Fix_TrainCargoDumping`~~ **NOT EXPOSED** | yes | ~~`Train:UnloadAll` command body~~ | ❌ **REMOVED by the sweep (§5.2)** — `UnloadAll` is fully synchronous, so a thread can never be blocked inside it. "It is a command body" was the wrong test |
 | `Fix_BombardmentSpread` | yes | replaces blocking `WaitBombard` + own thread | 1 |
 | `Fix_MeteorStormWedge` | yes | own `CreateGameTimeThread` | 1 |
 | `Fix_CrystalMysteryHang` | yes | own thread, hourly `Sleep` loop | 1 |
@@ -220,11 +225,17 @@ these two items: the answer is **not yet**.
 
 ---
 
-## 4a. ⚠️ THE EXPOSURE LIST IS 13, NOT 12 — corrected by the sweep, 2026-07-31
+## 4a. ⚠️ `Fix_DroneUnreachableForever` IS EXPOSED — found by the sweep, 2026-07-31
 
-**`Fix_DroneUnreachableForever` is a 13th exposed module and it was missing from
-every earlier count**, including a "no 13th site" certification written earlier
-the same day and committed in `23dd59d`. **That certification is WITHDRAWN.**
+**`Fix_DroneUnreachableForever` was missing from every earlier count**, including
+a "no 13th site" certification written earlier the same day and committed in
+`23dd59d`. **That certification is WITHDRAWN.**
+
+> ⚠️ **On the COUNT specifically, read §5.2, not this section.** This module's
+> addition was first published as "the list is 13". The same sweep then found
+> that **`Fix_TrainCargoDumping` does not belong on the list at all**, so the
+> total settles back at **12** with two membership changes rather than one. The
+> addition below is solid; the interim "13" is superseded.
 
 **The site.** `Code/Fix_DroneUnreachableForever.lua:46-78` replaces
 `Drone:ApproachWrapper` wholesale. Line 51 calls
@@ -281,7 +292,98 @@ body rather than its name:
 case, and an easy one — the post-call block only records a failure timestamp, so
 it can move ahead of the call or into a hook. It does **not** need layer 1.
 
-## 5. What is NOT proposed
+## 5. THE LAYER-3 SWEEP — RESULT (2026-07-31, game-free, decision 2 discharged)
+
+### 5.1 Method — and why the first two attempts were thrown away
+
+The question per module: *is there a **synchronous** input we could patch instead
+of replacing a blocking body?* That needs a sound answer to "can this function
+block", and two attempts at that were discarded before one worked:
+
+1. **Pattern-grepping for yields failed.** `Colonist:BoardVehicle` contains no
+   `Sleep`/`WaitMsg`, yet it blocks for an entire train journey via
+   `self:PlayPrg(...)` in its `while self.holder == vehicle` loop. Any fixed list
+   of "blocking-looking" names will miss one.
+2. **Transitive analysis resolved by bare function name failed harder** — it
+   marked **7,621 of 15,106** names blocking, claiming `LandscapeForEachUnit`
+   blocks "via `IsValid`". Common accessor names collide with unrelated blocking
+   methods, and the result was noise.
+
+**What works** (kept in the repo as `tools/blocking_analysis.py`, re-runnable
+after any game update): seed from the engine's four
+primitives — `Sleep` / `WaitMsg` / `WaitWakeup` / `PlayState`
+(`PersistGatherPermanents`, `cthreads.lua:451-464`) — then propagate **only
+through unambiguous callees**, where *every* definition of that name blocks.
+Names with a mix are reported AMBIGUOUS and read by hand against the specific
+class we patch. That gives **633 of 15,106 names yielding directly**, which is a
+believable figure, and every ambiguous case resolved cleanly.
+
+### 5.2 ⚠️ The exposed set is **12**, and the membership changed BOTH ways
+
+The count returns to 12, but it is not the original 12:
+
+- **ADDED — `Fix_DroneUnreachableForever`** (§4a): replaces
+  `Drone:ApproachWrapper`, which blocks in `DroneApproach` and has our code after
+  the call.
+- **REMOVED — `Fix_TrainCargoDumping`**: `Train:UnloadAll`
+  (`Train.lua:783-803`) is **fully synchronous** — read line by line, it is
+  `pairs`/`ipairs` table work over `RequestUnassignUnit`, `GetStoredAmount`,
+  `GetTargetAmount`, `AddResource`, none of which yields, and the analysis agrees.
+  A thread can never be *blocked inside it*, so a save cannot capture it. It was
+  listed on the assumption that a command body is exposed by virtue of being a
+  command body; **that assumption is wrong — the test is whether it yields.**
+
+> The general lesson, worth more than either correction: **"it is a command
+> method" is not the test, and neither is "it contains no `Sleep`".** The test is
+> whether the function can be on the stack while the thread is blocked — which
+> means reading what it *calls*, transitively.
+
+### 5.3 Result — 5 of the 12 have a layer-3 or layer-2 route out
+
+Every "input" named below was checked and is **synchronous**, so each is a
+legitimate layer-3 target rather than a guess.
+
+| module | why it is exposed today | sweep verdict |
+|---|---|---|
+| `Fix_MeteorFrequency` | replaces the global `Meteors` GT thread body | **LAYER 3** — wrap `GetDisasterWarningTime` (sync), keyed on `CurrentThread()`; delete the body. *(F02 — HELD by decision 3)* |
+| **`Fix_DroneUnreachableForever`** | `ApproachWrapper`, work after a blocking call | ⭐ **LAYER 3 — patch the CONSUMER, not the writer.** The defect is only the timestamp value; its reader `Drone:CleanUnreachables` is **synchronous**. Normalise the poisoned future timestamps there and our code leaves the drone command thread entirely |
+| `Fix_ArrivalDeaths` | `Colonist:Arrive`, direct yield | **LAYER 3 for half (b)** — the unwalkable `safety_dome` comes from `ChooseDome` / `GetDomesReachableByColonists`, **both synchronous**. Half (a), the raw `SetPos` with no passability search, still needs a design pass |
+| `Fix_TrainWaitTime` | `BoardVehicle`, blocks via `PlayPrg` for the whole journey | **LAYER 3** — the restamp can come from a wrapper on `TransportStatistics:AddSpentTime` (**sync**), which vanilla calls at the exact boarding moment (`:511`); the triple-spend site `ExitVehicle` is **also sync** |
+| `Fix_RainsDeadlock` | replaces the global `RainsDisasterLoop` (direct yield) | **LAYER 2, and vanilla's loop stays** — the deadlock is `RainsDisasterActivation` returning early on collision without posting `RainDisasterEnd`. Wrap it: work before, `return orig(...)`. `IsDisasterActive`, `IsDisasterPredicted` and `FinishRainProcedure` are all sync |
+| `Opt_DroneOverhaul` | `Drone:Idle`, work after the call | **LAYER 2** — move moonlighting out of the command body (unchanged) |
+| `Fix_ShelterReflex` | `Colonist:Idle` wrapper | **already compliant** — nothing owed |
+| `Fix_BombardmentSpread` | replaces blocking `WaitBombard` + own GT thread | **NO LAYER 3.** The defect is one discarded local (`spawn_dir`) mid-function with no seam near it; there is no input whose value fixes it. Layer 1, or accept |
+| `Fix_MeteorStormWedge` | own `CreateGameTimeThread` (`:119`) | Layer 1 |
+| `Fix_CrystalMysteryHang` | own `CreateGameTimeThread` (`:44`) | Layer 1 |
+| `Fix_ExtenderFlapChurn` | own `CreateGameTimeThread` (`:77`) | Layer 1 — narrow window |
+| `Fix_TrackConnectorPingPong` | own `CreateGameTimeThread` (`:156`) | Layer 1 |
+
+**Sizing answer for the owner: five modules can leave the exposed set without
+layer 1** — `MeteorFrequency`, `DroneUnreachableForever`, `TrainWaitTime`,
+`RainsDeadlock` by a full route, `ArrivalDeaths` by half. What genuinely needs
+the dangerous `SaveGameStart` layer is **four own-thread modules plus
+`BombardmentSpread`** — and each of those four should first be asked whether its
+thread is needed at all, which this sweep did not do.
+
+**Our own threads, inventoried:** six modules call `CreateGameTimeThread`
+(`BombardmentSpread:137`, `CrystalMysteryHang:44`, `ExtenderFlapChurn:77`,
+`MeteorStormWedge:119`, `RainsDeadlock:56/:93`, `TrackConnectorPingPong:156`).
+`00_Core:485` and `Fix_MilestoneCrash:40` use `CreateRealTimeThread` and are
+**safe by construction** — real-time threads are not persisted.
+
+### 5.4 Still outstanding from decision 2's full scope
+
+The owner authorised the sweep over **all** full-replacement modules, not only
+the exposed ones. The exposed set above is complete. **The ~17 remaining
+non-exposed full replacements have NOT been swept for layer-3 opportunities** —
+that half is future-proofing (a module that keeps vanilla's body cannot regress
+into this defect class later) and nothing blocks on it. Two candidates were
+spotted in passing and not verified: `Fix_DomeFreeSpaceMismatch` (the defect is
+purely a caller's omitted `player_enabled` argument to the **synchronous**
+`GatherFreeLivingSpaces`) and `Fix_TrainCargoDumping` (the disabled-resource cap
+could come from the **synchronous** `GetTargetAmount`).
+
+## 6. What is NOT proposed
 
 - **No cleanup mod.** Parked (`FUTURE_IDEAS.md` entry 5). The remedy for damage
   already in a player's save is measured and simple: **reinstalling the pack

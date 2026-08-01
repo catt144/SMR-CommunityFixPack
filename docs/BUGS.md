@@ -112,7 +112,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
-| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep owed** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **11 more exposed — 13 in total, corrected upward by the sweep**. Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Owner took all four calls 2026-07-31: layer ordering 3→2→1 ADOPTED into **FIX_POLICY §3a**, layer-3 sweep AUTHORISED (game-free, the one thing owed), F02 HELD until it reports, D10/D12 sequenced behind the rules |
+| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **10 more exposed — 12 in total; the sweep corrected the MEMBERSHIP both ways** (`Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Owner took all four calls 2026-07-31: layer ordering 3→2→1 ADOPTED into **FIX_POLICY §3a**, layer-3 sweep AUTHORISED (game-free, the one thing owed), F02 HELD until it reports, D10/D12 sequenced behind the rules |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
@@ -4101,8 +4101,16 @@ machinery surgery.
 >    **`FIX_POLICY.md` §3a**, binding on new fixes as well as repairs. That
 >    section, not this entry, is the authoritative statement.
 > 2. **The layer-3 sweep — AUTHORISED, full scope** (all full-replacement
->    modules, not just the 13 exposed). Game-free. **This is the critical path
->    and the only thing F86 owes.**
+>    modules, not just the 12 exposed). Game-free.
+>    ✅ **RAN 2026-07-31 over the exposed set — result in
+>    `SAVE_SAFETY_REDESIGN.md` §5.** Headline: **five of the twelve have a
+>    layer-3 or layer-2 route out** (`MeteorFrequency`,
+>    `DroneUnreachableForever`, `TrainWaitTime`, `RainsDeadlock` fully;
+>    `ArrivalDeaths` by half), each via an input verified **synchronous**. Only
+>    **four own-thread modules plus `BombardmentSpread`** are layer-1 candidates,
+>    and `BombardmentSpread` has **no** layer-3 route (its defect is a discarded
+>    local mid-function). ⏳ The non-exposed half of the full scope is still
+>    outstanding (§5.4) — future-proofing only, nothing blocks on it.
 > 3. **F02 — HELD until the sweep reports.** Do **not** touch
 >    `Fix_MeteorFrequency`; the owner declined to take it module-by-module and
 >    wants the layer-3 set to land as one designed change. Accepted cost, stated
@@ -4205,7 +4213,7 @@ A save captures only *blocked* threads, so synchronous code — data patches,
 getters, UI handlers, `Can…` predicates — can never be captured. That bounds the
 problem: **~62 of 74 modules are safe by construction.**
 
-**Exposure list (13 modules — was 12; `Fix_DroneUnreachableForever` added by the sweep 2026-07-31, see the correction box above).** Proven: `Fix_MeteorFrequency`,
+**Exposure list (12 modules — membership corrected BOTH ways by the sweep 2026-07-31: `Fix_DroneUnreachableForever` ADDED, `Fix_TrainCargoDumping` REMOVED because `Train:UnloadAll` is fully synchronous. See the correction box above and `SAVE_SAFETY_REDESIGN.md` §5.2).** Proven: `Fix_MeteorFrequency`,
 `Opt_DroneOverhaul`. High, same shape, unmeasured — all default-active:
 `Fix_RainsDeadlock` (its `fixed_loop` is written to the global
 `RainsDisasterLoop` and is blocked in our body nearly always),

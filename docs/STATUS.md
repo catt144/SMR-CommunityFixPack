@@ -68,7 +68,7 @@ with **PHASE 4 COMPLETE** (below).
 > running after the mod is removed**. Two sites proven live:
 > `Fix_MeteorFrequency` (the colony's meteors stop **permanently** and do not
 > self-heal) and `Opt_DroneOverhaul` (98 errors/session, log noise only — and it
-> leaked with **its own opt-in toggle OFF**). **Eleven more are exposed — 13 in total**, corrected upward from 12 by the sweep the same day (`Fix_DroneUnreachableForever`; see the F86 entry).
+> leaked with **its own opt-in toggle OFF**). **Ten more are exposed — 12 in total**; the sweep corrected the membership both ways the same day (`Fix_DroneUnreachableForever` IN, `Fix_TrainCargoDumping` OUT — see the F86 entry).
 > - **The route is a THREAD STACK, not a storage location.** A save captures
 >   every game-time thread with its blocked stack; a mod function there is
 >   serialised by value and comes back with an empty `_ENV`. The audit's
@@ -88,8 +88,11 @@ with **PHASE 4 COMPLETE** (below).
 >      block; `SaveGameStart` tear-down last, only for what survives, each with
 >      its own A/B plus a soak.
 >   2. **The layer-3 sweep is AUTHORISED at full scope** (all full-replacement
->      modules, not just the 13 exposed) and is **the critical path — the only
->      thing F86 owes.** Game-free.
+>      modules, not just the 12 exposed). Game-free. ✅ **IT HAS RUN over the
+>      exposed set** (`SAVE_SAFETY_REDESIGN.md` §5): **five of the twelve have a
+>      layer-3 or layer-2 route out**, each via a verified-synchronous input;
+>      only four own-thread modules plus `BombardmentSpread` are layer-1
+>      candidates. The non-exposed half (§5.4) is outstanding and blocks nothing.
 >   3. **F02 is HELD until that sweep reports.** Do not touch
 >      `Fix_MeteorFrequency`. Accepted cost: the measured leak stays shipped
 >      meanwhile.
