@@ -85,7 +85,7 @@ Read, in this order, and record what you actually find:
    yourself (`fixed`, `tested`, `todo`, `wontfix`, design items).
 4. `docs/PLAYTEST_CHECKLIST.md` — what verification is outstanding, and what is
    frozen.
-5. `docs/FIX_POLICY.md` — the rules the pack claims to follow.
+5. `docs/agent/FIX_POLICY.md` — the rules the pack claims to follow.
 6. `docs/MOD_DESCRIPTION.md` — every claim made to players.
 7. `docs/FUTURE_IDEAS.md` — parked items. **These are not blockers and must not
    be reported as outstanding work.**

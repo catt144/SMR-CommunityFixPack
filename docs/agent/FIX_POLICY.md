@@ -177,7 +177,7 @@ inert only because it is layer-2-shaped); (c) stored in persisted state
 instance-closure experiment). So "safe by construction" additionally requires:
 **no function value stored into persisted state, and no assignment target that
 engine code holds live across a yield.** Class tables, presets, `OnMsg`
-registrations and UI windows remain safe. `docs/F86_ADJUDICATION.md` §3.1/§5.1.
+registrations and UI windows remain safe. `docs/reports/F86_ADJUDICATION.md` §3.1/§5.1.
 
 ⚠️ **And the rule's second half (measured 2026-07-31, round 2): what a captured
 function still REACHES.** An orphan's fallback env falls through to the real
@@ -187,7 +187,7 @@ that touch; a captured body with only-vanilla names **keeps executing after
 uninstall** — bounded if it self-limits, forever if it loops. Every layer-3/2
 design must therefore also ask: *if this body is ever captured anyway, does it
 die, expire, or run forever — and would anyone notice?*
-(ENGINE_FACTS; `docs/F86_ADJUDICATION.md` §8.)
+(ENGINE_FACTS; `docs/reports/F86_ADJUDICATION.md` §8.)
 
 **⛔ THE ORPHAN GATE (owner, 2026-07-31) — loud death is the BACKSTOP, not the
 failure mechanism.** An orphan that dies at its first mod-name lookup dies at
@@ -246,7 +246,7 @@ failure is:
 **This binds new fixes as well as repairs.** Anything that replaces a blocking
 body, wraps a command method, or creates its own game-time thread must state in
 its header which layer it is on and why. Full analysis, the 12-module exposure
-list and the per-module disposition: `docs/SAVE_SAFETY_REDESIGN.md` and BUGS.md
+list and the per-module disposition: `docs/reports/SAVE_SAFETY_REDESIGN.md` and BUGS.md
 F86.
 
 ## 4. Only fix proven defects

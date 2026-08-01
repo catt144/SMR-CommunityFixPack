@@ -348,7 +348,7 @@ waiting.
 - **PT-53 Trigger E, PT-54** — verification of shipped code. (~~PT-59~~ PASSED
   IN FULL 2026-07-31 → F83 `tested`, archived. **PT-52 B2 is FROZEN**, not
   parked — it tests D06 v1's design and the design is unsettled; it is
-  drone-owned, see `docs/DRONE_PROJECT_PROMPT.md`.)
+  drone-owned, see `docs/prompts/DRONE_PROJECT_PROMPT.md`.)
 - **The needs-eyes observations** (Detailed Scan recoverability, F85's tier,
   the storybit reconnect) — minutes each, and they grade **defects**.
 - **The FIX_POLICY §4 amendment** — it is the rule that decides what is allowed

@@ -1,7 +1,7 @@
 # F86 — the discovery session's position, stated for adversarial review
 
 **Written 2026-07-31 by the session that found F86 (the PT-20 leg), at the
-owner's request, to be compared against `docs/F86_SESSION_FINDINGS.md` by an
+owner's request, to be compared against `docs/reports/F86_SESSION_FINDINGS.md` by an
 independent reviewer.**
 
 ## How to read this document

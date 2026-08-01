@@ -1,6 +1,6 @@
 # F86 adjudication — where the project actually stands
 
-**Written 2026-07-31 by an independent session against `docs/F86_ADJUDICATION_PROMPT.md`.
+**Written 2026-07-31 by an independent session against `docs/archive/F86_ADJUDICATION_PROMPT.md`.
 Every load-bearing claim below was re-derived from `ModTools\Src`, `Code\`, or the
 2026-07-31 game logs — not from either position document.** Labels: **RE-VERIFIED**
 (I reproduced it from primary sources), **FALSIFIED** (I can show it wrong),
@@ -8,7 +8,7 @@ Every load-bearing claim below was re-derived from `ModTools\Src`, `Code\`, or t
 
 > ## ⚠️ ROUND 2 AMENDMENT (2026-07-31, same session) — §8 of this file
 >
-> `docs/F86_ADJUDICATION_FOLLOWUP.md` item 6(a) — the orphan-environment probe,
+> `docs/prompts/F86_ADJUDICATION_FOLLOWUP.md` item 6(a) — the orphan-environment probe,
 > which I verified independently (log `21.23.19` plus the mechanism at
 > `Mod.lua:1647-1656`) — **falsifies parts of §2.9, §2.11 and §3.2 below, and
 > the RE-VERIFIED label I put on §2.9.** An orphaned mod function does NOT die
@@ -573,7 +573,7 @@ was modified.*
 
 ---
 
-# §8 — ROUND 2 (2026-07-31, `docs/F86_ADJUDICATION_FOLLOWUP.md`)
+# §8 — ROUND 2 (2026-07-31, `docs/prompts/F86_ADJUDICATION_FOLLOWUP.md`)
 
 **Verdict after round 2: still yes-with-changes, same build, same order.** One
 item (6a) falsified three of my paragraphs and one of my labels — amended
@@ -770,7 +770,7 @@ FIX_POLICY §3's footprint; it belongs in that section as a measured baseline.
 ## 8.8 Item 8 — prior art: worth one scoped pass, with one honesty caveat
 
 > ✅ **RUN 2026-07-31 (owner flipped it on, same day) — full results in
-> `docs/PRIOR_ART_SURVEY.md`.** Headline: the F86 mechanism is **documented,
+> `docs/reports/PRIOR_ART_SURVEY.md`.** Headline: the F86 mechanism is **documented,
 > intentional engine design** (the original's own `LuaSavegame.md.html`:
 > sleeping threads serialise with locals, upvalues and bytecode "to allow
 > loading the savegame even when a game update has changed the Lua code");

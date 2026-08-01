@@ -2,7 +2,7 @@
 
 ## Reading path for a new session
 
-1. `docs/ENGINE_FACTS.md` — the proven engine behaviors (several are the
+1. `docs/agent/ENGINE_FACTS.md` — the proven engine behaviors (several are the
    opposite of what the code suggests). Read before writing or reviewing any
    fix.
 2. `docs/STATUS.md` — current state: authoritative build counts, open user
@@ -11,7 +11,7 @@
 3. `docs/BUGS.md` — the canonical defect tracker (index + full entries).
    Update it in the same change that adds or edits a fix; statuses live in
    TWO places (index row + heading tag) — never flip one without the other.
-4. `docs/FIX_POLICY.md` — how we patch. Binding for every fix.
+4. `docs/agent/FIX_POLICY.md` — how we patch. Binding for every fix.
 5. `docs/PLAYTEST_CHECKLIST.md` — the owner's live playtest queue and the
    reporting protocol (tests ONLY, split 2026-07-30); its companion
    `docs/PLAYTEST_HELP.md` carries the ground rules, console facts, the
@@ -139,7 +139,7 @@ regression harness; run it as pre-flight when STATUS says one is owed.
   stale number there is a false claim in player-facing text. Authoritative count
   is in `STATUS.md`.
 - **Drone overhaul, if it has shipped by then:** its design-drift disclaimer is
-  MANDATORY (owner requirement — spec in `docs/DRONE_RESEARCH_BRIEF.md`). Do not
+  MANDATORY (owner requirement — spec in `docs/archive/DRONE_RESEARCH_BRIEF.md`). Do not
   publish the module without it.
 - Upload via the in-game Mod Editor (Paradox Mods / Steam Workshop). The
   editor round-trip is SAFE since audit 2.2: items.lua carries one
@@ -148,7 +148,7 @@ regression harness; run it as pre-flight when STATUS says one is owed.
   BOTH metadata.lua `code` AND items.lua in the same commit, same order.
 - The TestKit must NOT be uploaded.
 - Credit ChoGGi (Fix Bugs) + LukeH (Martian Express) as prior art — and the
-  prior-art survey (`docs/PRIOR_ART_SURVEY.md`) backs the save-safety claim in
+  prior-art survey (`docs/reports/PRIOR_ART_SURVEY.md`) backs the save-safety claim in
   player-facing text.
 - **Save-exit gates (owner, 2026-07-31 — release blockers alongside the fpk
   diff):**

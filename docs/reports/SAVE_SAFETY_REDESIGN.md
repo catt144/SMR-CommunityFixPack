@@ -21,7 +21,7 @@ this file is the *how*.
 >
 > ⏸️ **BUILD PAUSED 2026-07-31 — nothing was written.** The owner is having this
 > session's findings independently compared first:
-> **`docs/F86_SESSION_FINDINGS.md`** (confidence labels per finding, the two
+> **`docs/reports/F86_SESSION_FINDINGS.md`** (confidence labels per finding, the two
 > discarded analysis methods, and the mistakes made). ⚠️ **It records a shipped
 > defect not covered anywhere in this file** — `Fix_MeteorFrequency` restarts the
 > meteor timer on **every** load, so frequent loading suppresses meteors
@@ -56,7 +56,7 @@ Two properties make this tractable rather than terrifying:
   `Fix_CaveInsNoDisasters` is capturable today via the engine's periodic-repeat
   `info` local (inert — layer-2 shape; no build needed), which makes the
   exposed-set count **at least 13** and proves the method grep blind to
-  slot/global/preset assignments. `docs/F86_ADJUDICATION.md` §3.1/§5.1.
+  slot/global/preset assignments. `docs/reports/F86_ADJUDICATION.md` §3.1/§5.1.
 - **Real-time threads are not persisted at all.** `00_Core`'s update-report
   thread is a `CreateRealTimeThread` and is already fine.
 
@@ -358,7 +358,7 @@ believable figure, and every ambiguous case resolved cleanly.
 > `Fix_ShelterReflex`. Both sweeps missed it because their enumeration keys
 > (`function C:m(` grep; full-replacement scope) cannot see table-slot
 > assignments. The build scope is unchanged; the count and the method are what
-> this corrects. `docs/F86_ADJUDICATION.md` §3.1, §6 step 7.
+> this corrects. `docs/reports/F86_ADJUDICATION.md` §3.1, §6 step 7.
 
 The count returns to 12, but it is not the original 12:
 
@@ -579,7 +579,7 @@ falsified that in turn: the replacement body references **no mod-created
 name**, so a mid-volley orphan resolves vanilla globals through the fallback
 env, **completes the volley, and `BombardEnd` posts** — Mystery 7 proceeds.
 Keep the fix; the untimed-WaitMsg contract stays on record as the pattern to
-check on any future module. `docs/F86_ADJUDICATION.md` §3.2 (as amended), §8.3.
+check on any future module. `docs/reports/F86_ADJUDICATION.md` §3.2 (as amended), §8.3.
 
 ⛔ **LAYER 1 IS NOT TO BE BUILT.** The owner declined it explicitly. Its own spec
 calls it the most dangerous layer, and the autosave-restart trap could recreate

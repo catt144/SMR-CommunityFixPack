@@ -4,13 +4,13 @@ Every session leg lives HERE (moved out of STATUS.md 2026-07-29, audit
 remediation 3.3; new legs are PREPENDED below this preamble). Everything in
 this file is **history**: counts, statuses and "next" claims were true when
 written and are NOT maintained — the current state lives in `docs/STATUS.md`,
-defect truth in `docs/BUGS.md`, engine facts in `docs/ENGINE_FACTS.md`.
+defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
 ## ✅ F87 FIXED — the enable path is now owned by the shared scaffold, and the sweep it earned found three more casualties — 2026-07-31 late (game-free, unattended leg)
 
-Started from `docs/FABLE_NEXT_PROMPT.md` at `82a6e8a`, board item 0 (owner: do
+Started from `docs/prompts/FABLE_NEXT_PROMPT.md` at `82a6e8a`, board item 0 (owner: do
 F87 first). Everything below is one session; five commits, all pushed.
 
 ### 1. The diagnosis moved: the defect was in the scaffold, not the file
@@ -165,7 +165,7 @@ explicitly so it cannot be re-filed as owed. The toggles-ON leg ran anyway
 
 ## 🛑 PT-20 FAILED — WE LEAK EXECUTABLE CODE INTO PLAYER SAVES (F86, P1, blocks release) — 2026-07-31 late (live sitting, owner at the keyboard)
 
-Started from `docs/FABLE_NEXT_PROMPT.md` at `84427e1`. The plan was PT-20 plus
+Started from `docs/prompts/FABLE_NEXT_PROMPT.md` at `84427e1`. The plan was PT-20 plus
 the F74/F53(a) riders. PT-20's steps 1-4 passed; **step 5 — executed for the
 first time — found a P1 defect in our own pack**, and the riders were dropped
 because the leg proved they cannot be run on this colony at all.
@@ -330,7 +330,7 @@ seconds is adequate; tower-scaled meteor warning is a feature and is declined.**
   it does not need TCO at all. **"No mod code after a call that can block"** is
   sound whether or not the frame survives, needs no engine guarantee, and is
   checkable by reading the source. That is now the layer-2 rule in the spec.
-- **Redesign spec written** — `docs/SAVE_SAFETY_REDESIGN.md`: the three layers,
+- **Redesign spec written** — `docs/reports/SAVE_SAFETY_REDESIGN.md`: the three layers,
   the per-module disposition for all 12 exposed modules, the autosave timer trap,
   and the four decisions owed to the owner.
 
@@ -345,7 +345,7 @@ and should be removed once the autosave firing is confirmed on the keyboard.
 
 ## ALL FOUR DRONE RESEARCH GATES ANSWERED + F83 `tested` — 2026-07-31 (live playtest sitting, owner at the keyboard)
 
-Started from `docs/FABLE_NEXT_PROMPT.md` at `4d0d453`. Two jobs came in ahead of
+Started from `docs/prompts/FABLE_NEXT_PROMPT.md` at `4d0d453`. Two jobs came in ahead of
 plan and a third emerged from a mistake.
 
 ### 1. PT-59 PASSED IN FULL → F83 `tested` (`8387aaf`)
@@ -704,7 +704,7 @@ MOD_DESCRIPTION player line; STATUS counts to 75 files / 74 modules /
 ## The popup/deferred-consequence audit — the storybit alarm OVERTURNED, F83's narrow decouple REINSTATED — 2026-07-30 (one-off session, unattended, game not launched)
 
 Ran `docs/POPUP_AUDIT_PROMPT.md` (deleted on completion). Deliverable:
-**`docs/POPUP_CONSEQUENCE_AUDIT.md`** — full enumeration of every path where a
+**`docs/reports/POPUP_CONSEQUENCE_AUDIT.md`** — full enumeration of every path where a
 player-visible consequence is applied after a wait, classified by save/load
 survival. Headline: **the lead that stopped the F83 fix was wrong about the
 engine.** A `CreateGameTimeThread` does NOT need `MakeThreadPersistable` —
@@ -2144,7 +2144,7 @@ plan live on the BUGS "Not yet swept" DroneControl bullet; **F77** filed
   pre-wrap on `Drone:Idle` for (a) vs near-idle claim veto on
   `Drone:Work`/`PickUp` for (b) — which are assignment-POLICY changes
   (D-item territory). All sketches + risk statements on the bullet/F77 entry.
-- **Follow-up same leg (user-commissioned): `docs/DRONE_OVERHAUL_OPTIONS.md`**
+- **Follow-up same leg (user-commissioned): `docs/reports/DRONE_OVERHAUL_OPTIONS.md`**
   — the D06-candidate feasibility study for an optional overhaul toggle.
   Options A-G with verified patch points; key new engine findings:
   `Drone:Idle` falls through (returns) exactly when no work was found, so a
@@ -2443,7 +2443,7 @@ one-line summary here:
   directly via `UIColony:SetTechResearched("<Id>")`; PT-27's Biorobots route
   corrected to `ThePositronicBrain` in the same pass.
 **ONE live prompt (updated 2026-07-28 — post-D06 build):**
-- `docs/FABLE_NEXT_PROMPT.md` — playtest-standby assistance: the user plays,
+- `docs/prompts/FABLE_NEXT_PROMPT.md` — playtest-standby assistance: the user plays,
   the session drives console instrumentation and processes results live.
   Rewritten 2026-07-28: PT-52 (D06 overhaul watch-and-judge) is the board
   centerpiece with assistant-side briefing notes; carries the queued A/B
@@ -2755,9 +2755,9 @@ harness hardening, bafbd61 probe wedge fix + 15-min watchdog.
 **Open after this session (both user answers now in, 2026-07-25 late):**
 - **PT-01: NO reloads** → F02 is genuinely regressed (meteors stopped for 560+ game
   hours on a max-threat map after Sensor Towers went up) — REOPENED `fixed*`,
-  investigation speced in docs/FABLE_NEXT_PROMPT.md Task 1.
+  investigation speced in docs/prompts/FABLE_NEXT_PROMPT.md Task 1.
 - **F66: user chose the rebuild-trigger repair** over accept-and-document — spec on
-  the F66 entry + docs/FABLE_NEXT_PROMPT.md Task 2.
+  the F66 entry + docs/prompts/FABLE_NEXT_PROMPT.md Task 2.
 - PT-03 re-run (user, next sitting); F47 composition under-refunds; MarsDebug
   [install] pass for wave-4/5 (attended, SetupOnly); game-version tags on
   full-replacement headers (release checklist).

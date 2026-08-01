@@ -212,7 +212,7 @@ code suggests.
     uninstalled player's save). The zero-upvalue discipline — adopted on the
     false by-name premise — is worth keeping for the inverted reason: global
     helper lookups make orphans die loudly, the safer failure. Per-module
-    outcomes: `docs/F86_ADJUDICATION.md` §8.1-8.2. This also explains the
+    outcomes: `docs/reports/F86_ADJUDICATION.md` §8.1-8.2. This also explains the
     `GetPriorityForRequest` orphan above running with zero errors.
   * A save only captures **blocked** threads, so purely synchronous mod code —
     data patches, getters, `Can…` predicates, UI handlers — can never be
@@ -231,7 +231,7 @@ code suggests.
     (c) stored in persisted state — the instance-closure experiment above IS
     this route and remains true. Class tables, presets, `OnMsg` registrations
     and UI windows are safe (permanents / rebuilt / not persisted).
-    Full evidence: `docs/F86_ADJUDICATION.md` §3.1/§5.1.
+    Full evidence: `docs/reports/F86_ADJUDICATION.md` §3.1/§5.1.
   * **A proper Lua tail call (`return orig(...)`) removes our frame from the
     stack**; calling `orig(...)` as a statement and then doing more work keeps it
     there. That is the only structural difference between the wrapper that
@@ -312,7 +312,7 @@ code suggests.
   is designed update-tolerance that mods inherit; the last sentence is the
   official statement of the command-thread self-cleaning rule and the upgrade
   model. ⚠️ The REMASTER's ModTools docs no longer carry this page.
-  Community norms built on it: `docs/PRIOR_ART_SURVEY.md`.
+  Community norms built on it: `docs/reports/PRIOR_ART_SURVEY.md`.
 - **THE SAVE/LOAD HOOK SURFACE — enumerated 2026-07-31 (F86 round 2), so no
   design discovers hooks one at a time again.** `ModMsgBlacklist` is exactly
   nine names (`Mod.lua:1430-1440`: PersistGatherPermanents, PersistLoad,

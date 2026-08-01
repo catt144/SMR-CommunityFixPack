@@ -128,7 +128,7 @@ result they produce evidence about code that no longer exists.
   why it is caught in the freeze — but F77 is *not* invalidated, only its
   test's packaging. It gets folded into the consolidated PT below.
 
-**What happens when the plan lands.** If `docs/DRONE_RESEARCH_BRIEF.md` answers
+**What happens when the plan lands.** If `docs/archive/DRONE_RESEARCH_BRIEF.md` answers
 its four questions and a rebuild design is approved:
 
 1. The frozen PT-52 sections are **archived as deprecated-by-redesign** —
@@ -263,7 +263,7 @@ relaunch); record every knob change and its observed effect on the D06 entry.
 - Resource HAULING (PickUp/Deliver, incl. the maintenance "fetch Electronics
   from a depot" leg) is untouched — a far drone can still win a delivery.
   If the delivery leg dominates the pain, that is the H-v2/B iteration
-  (docs/DRONE_OVERHAUL_OPTIONS.md), not a bug in this one.
+  (docs/reports/DRONE_OVERHAUL_OPTIONS.md), not a bug in this one.
 - Construction work is untouched (multi-fleet swarming on a site is wanted).
 - RC rover fleets, rockets, shuttles: untouched by design.
 - It does not MOVE drones between hubs (that is option C, the migration

@@ -10,11 +10,23 @@ Staleness check: written after **`8d201c3`** (F86 owes no measurements), then
 updated the same evening with the **four F86 owner decisions** — layer ordering
 adopted, sweep authorised, F02 held, D10/D12 sequenced behind the rules.
 
+> 📁 **DOCS LAYOUT (reorganised 2026-08-01) — read `docs\README.md` if unsure
+> where something lives or where a new document goes.**
+> `docs/` root = daily truth (`STATUS`, `BUGS`, the playtest files,
+> `FUTURE_IDEAS`, `MOD_DESCRIPTION`) · `docs\agent\` = the binding rules
+> (`ENGINE_FACTS`, `FIX_POLICY`, `WORKFLOW`) · `docs\prompts\` = the two
+> standing prompts + live one-offs · `docs\reports\` = reports, plans,
+> specs, surveys · `docs\archive\` = spent, plus `SESSION_LOG.md`.
+> **New rules/engine facts go in `agent\`, not buried in a report. Defects go
+> in `BUGS.md`, never a report and never `FUTURE_IDEAS.md`. Reports are not
+> authority — if a report and `BUGS`/`ENGINE_FACTS` disagree, the root/agent
+> document wins.**
+
 > ⚖️ **SUPERSEDED FOR F86 (2026-07-31, late evening).** The F86 section below
 > predates the adjudication rounds, the prior-art survey, and the evening's
 > owner decisions. **If this session is about F86, use
-> `docs/F86_NEXT_SESSION_PROMPT.md` (the Phase-0/1 handover) and
-> `docs/F86_EXECUTION_PLAN.md` (the plan of record) instead.** Known-stale
+> `docs/prompts/F86_NEXT_SESSION_PROMPT.md` (the Phase-0/1 handover) and
+> `docs/reports/F86_EXECUTION_PLAN.md` (the plan of record) instead.** Known-stale
 > claims below: "comes back with an empty `_ENV`" (wrong — orphans resolve
 > vanilla globals; ENGINE_FACTS has the measured correction), "~62 safe by
 > construction / 12 exposed" (thread-route only; ≥13 incl. compliant CaveIns),
@@ -76,7 +88,7 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
   corrected the membership both ways: `Fix_DroneUnreachableForever` IN,
   `Fix_TrainCargoDumping` OUT).
 - ✅ **THE DECISION IS TAKEN (2026-07-31) — and exactly ONE game-free item is
-  owed: the layer-3 sweep.** All four calls in **`docs\SAVE_SAFETY_REDESIGN.md`**
+  owed: the layer-3 sweep.** All four calls in **`docs\reports\SAVE_SAFETY_REDESIGN.md`**
   §4 are answered:
   1. **Layer ordering 3 → 2 → 1 ADOPTED**, now a hard rule in **`FIX_POLICY.md`
      §3a** — read that, not this summary, before writing any fix. It binds new
@@ -124,11 +136,11 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
 
 The drone project grew its own open design decision, its own frozen tests and
 constraints that do not generalise. It lives in
-**`docs\DRONE_PROJECT_PROMPT.md`** (re-runnable), which owns D06, D08, D09, F77,
+**`docs\prompts\DRONE_PROJECT_PROMPT.md`** (re-runnable), which owns D06, D08, D09, F77,
 the drone queue machinery, the consolidated drone playtest and the cleanup mod.
 
 - **You MAY answer drone questions in passing**, from the `BUGS.md` D06 entry and
-  `docs\DRONE_PRIORITY_SYSTEM.md` (§8-§10 are the decisive ones).
+  `docs\reports\DRONE_PRIORITY_SYSTEM.md` (§8-§10 are the decisive ones).
 - **You may NOT start drone work, plan it, schedule it, or list it as owed here.**
   If a session turns into drone work, **stop and load the drone prompt instead.**
 - Drone state appears below **as context only, never as a task.**
@@ -211,7 +223,7 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
 6. **⏸️ F86 — BUILD AUTHORISED BUT PAUSED BY THE OWNER 2026-07-31.** Nothing
    was written; every repair below is unstarted. The owner is having the session's
    findings compared against another agent's before code is written — full
-   write-up with per-finding confidence labels in **`docs\F86_SESSION_FINDINGS.md`**,
+   write-up with per-finding confidence labels in **`docs\reports\F86_SESSION_FINDINGS.md`**,
    which also carries **an unrecorded shipped defect the owner found** (our
    `OnMsg.LoadGame` restarts the meteor timer on EVERY load, so a player who
    loads more often than the 35-115 h interval never gets a meteor — report
@@ -273,7 +285,7 @@ REJECTED). ~~F79~~ is CLOSED `wontfix` — do not re-propose or park it.
 **Release-time owner tasks** (audit plan 2.5): preview image (PDX ≤2 MB / Steam
 ≤1 MB), screenshots, Paradox portal console-publishing rules.
 
-**🚦 `docs\BETA_READINESS_REVIEW.md` is re-runnable** — derives every fact at run
+**🚦 `docs\reports\BETA_READINESS_REVIEW.md` is re-runnable** — derives every fact at run
 time, hard gates that cannot be judgement-softened. **Do NOT run it until the
 drone design decision has settled.**
 
@@ -297,7 +309,7 @@ drone design decision has settled.**
 
 ## First, read (in order) from `C:\Dev\SMR-BugFixPack`
 
-1. **`docs\ENGINE_FACTS.md` — the whole file.** Several behaviours are the
+1. **`docs\agent\ENGINE_FACTS.md` — the whole file.** Several behaviours are the
    opposite of what the code suggests; it carries the closure/thread-stack
    persistence facts and the enable-path load order. Then `docs\STATUS.md`
    (compact current state). Session legs are in `docs\archive\SESSION_LOG.md`,
@@ -313,25 +325,25 @@ drone design decision has settled.**
    depot-picker interaction.** For drone anomalies, the DroneControl bullet in
    "Not yet swept" carries the assignment-machinery trace and the R1-R7
    paste-ready forensics.
-4. `docs\FIX_POLICY.md` — binding for any code you write. **§4a is the owner hard
+4. `docs\agent\FIX_POLICY.md` — binding for any code you write. **§4a is the owner hard
    rule (below); §3a is the NEW save-safety hard rule (layer ordering 3→2→1,
    adopted 2026-07-31 — read it before writing anything that replaces a blocking
    body, wraps a command method, or creates a game-time thread); §2 carries the
    F87 cold-boot rule; §4 has a drafted replacement awaiting the owner.**
-5. **`docs\REACHABILITY_AUDIT.md` — the "Challenge review 2026-07-30" at the end,
+5. **`docs\reports\REACHABILITY_AUDIT.md` — the "Challenge review 2026-07-30" at the end,
    before writing ANY new fix.** Tier vocabulary (R1/R2/R3/R4/U + `I`), the hard
    tells that distinguish a defect from designed behaviour, and two standing
    rules: *a state producible only by console/debug injection is evidence
    AGAINST reachability*, and *re-read `git log` between assembling conclusions
    and publishing them*.
-6. **Drones: do NOT read in to start work — load `docs\DRONE_PROJECT_PROMPT.md`
+6. **Drones: do NOT read in to start work — load `docs\prompts\DRONE_PROJECT_PROMPT.md`
    instead.** To answer a passing question only, the sources are the `BUGS.md`
-   D06 entry and `docs\DRONE_PRIORITY_SYSTEM.md`.
+   D06 entry and `docs\reports\DRONE_PRIORITY_SYSTEM.md`.
 7. **`docs\FUTURE_IDEAS.md` — the hard rule at the top, before planning ANY
    session.** A proposed-parking list at the bottom awaits the owner's yes/no.
-8. Only when relevant: `docs\SAVE_SAFETY_REDESIGN.md` (F86);
+8. Only when relevant: `docs\reports\SAVE_SAFETY_REDESIGN.md` (F86);
    `docs\archive\AUDIT_FINDINGS.md` (ARCHIVED — Phases 1-3 done 2026-07-29,
-   Phase 4 EXECUTED 2026-07-31); `docs\DRONE_OVERHAUL_OPTIONS.md`.
+   Phase 4 EXECUTED 2026-07-31); `docs\reports\DRONE_OVERHAUL_OPTIONS.md`.
 
 Game source (read-only, NEVER modify):
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`.
@@ -438,7 +450,7 @@ resource choice, and the RC Terraformer clicking a waste-rock heap.
 
 ## Hard rules
 
-`docs/ENGINE_FACTS.md` governs: sandbox on all platforms; `error()`/`assert()`
+`docs/agent/ENGINE_FACTS.md` governs: sandbox on all platforms; `error()`/`assert()`
 report-and-continue; self-checks read the DECLARING class; **no `apply()` may
 assume a cold boot** (F87 — no class/preset construction at apply time, and
 `OnMsg.DataLoaded` alone is not a sufficient trigger); presets only after

@@ -5,7 +5,19 @@ gates.** Paste this into a fresh session when the owner wants to work on drones.
 **This prompt is RE-RUNNABLE — it does NOT delete itself.** Update it in place at
 the end of every drone session.
 
-> 🚧 **This prompt owns drone work exclusively.** `docs\FABLE_NEXT_PROMPT.md` is
+> 📁 **DOCS LAYOUT (reorganised 2026-08-01) — read `docs\README.md` if unsure
+> where something lives or where a new document goes.**
+> `docs/` root = daily truth (`STATUS`, `BUGS`, the playtest files,
+> `FUTURE_IDEAS`, `MOD_DESCRIPTION`) · `docs\agent\` = the binding rules
+> (`ENGINE_FACTS`, `FIX_POLICY`, `WORKFLOW`) · `docs\prompts\` = the two
+> standing prompts + live one-offs · `docs\reports\` = reports, plans,
+> specs, surveys · `docs\archive\` = spent, plus `SESSION_LOG.md`.
+> **New rules/engine facts go in `agent\`, not buried in a report. Defects go
+> in `BUGS.md`, never a report and never `FUTURE_IDEAS.md`. Reports are not
+> authority — if a report and `BUGS`/`ENGINE_FACTS` disagree, the root/agent
+> document wins.**
+
+> 🚧 **This prompt owns drone work exclusively.** `docs\prompts\FABLE_NEXT_PROMPT.md` is
 > the general prompt; it may *answer questions* about drones but it no longer
 > drives drone work. If you were started from that prompt and the session turns
 > into drone work, **stop and load this file instead.**
@@ -23,7 +35,7 @@ If commits landed after that, read them before trusting anything below — this
 project has already had a prompt go stale mid-job.
 
 > 🛑 **F86 CHANGED THE GROUND UNDER THIS PROMPT — read `BUGS.md` F86 and
-> `docs\SAVE_SAFETY_REDESIGN.md` before touching the D06 decision.** PT-20
+> `docs\reports\SAVE_SAFETY_REDESIGN.md` before touching the D06 decision.** PT-20
 > (2026-07-31) measured **pack code being serialised into the savegame and still
 > running after the mod is removed**, and **`Opt_DroneOverhaul` is one of the two
 > proven sites** — 98 errors per session after removal, and it leaked **with its
@@ -77,7 +89,7 @@ settled by the owner.** Not "while we're in there", not a prototype, not a
 
 **All four research gates are ANSWERED (2026-07-31).** Nothing on the research
 side is owed. Evidence lives on the **D06 entry** in `BUGS.md` and in
-`docs\DRONE_PRIORITY_SYSTEM.md` §8-§10.
+`docs\reports\DRONE_PRIORITY_SYSTEM.md` §8-§10.
 
 | Gate | Answer |
 |---|---|
@@ -175,7 +187,7 @@ Only once the owner has chosen:
 1. **Write a build brief** against the chosen design (a separate doc, following
    `WORKFLOW.md`'s required elements). Nobody builds from this prompt directly.
 2. **The design-drift disclaimer is MANDATORY** and ships with the module
-   (spec in `docs\DRONE_RESEARCH_BRIEF.md`). It can now be written honestly,
+   (spec in `docs\archive\DRONE_RESEARCH_BRIEF.md`). It can now be written honestly,
    because Q2 is answered: **the rebuild cannot inherit D06 v1's *"savegame
    footprint: none"*.** State what was actually done, the limits without hedging,
    and the off-ramp. **Not legal cover** — "use at your own risk" tells a player
@@ -198,17 +210,17 @@ is caught in the freeze.
 
 ## 5 · Reading order for any drone session
 
-1. `docs\ENGINE_FACTS.md` — whole file. **It now carries the closure-persistence
+1. `docs\agent\ENGINE_FACTS.md` — whole file. **It now carries the closure-persistence
    fact**, which is why the overlay option (3) must never store a function on a
    game object.
 2. **`BUGS.md` D06 entry** — the plan of record, including the owner decisions on
    relocation and the cleanup mod.
-3. **`docs\DRONE_PRIORITY_SYSTEM.md` — §8, §9 and §10 especially.** These are the
+3. **`docs\reports\DRONE_PRIORITY_SYSTEM.md` — §8, §9 and §10 especially.** These are the
    new, decisive sections. §1 and §7 carry corrections to earlier claims.
-4. `docs\DRONE_RESEARCH_BRIEF.md` — now historical (all gates answered); keep it
+4. `docs\archive\DRONE_RESEARCH_BRIEF.md` — now historical (all gates answered); keep it
    for the freeze rules and the disclaimer spec.
-5. `docs\DRONE_OVERHAUL_OPTIONS.md` — only if D08 or D06-structural comes up.
-6. `docs\FIX_POLICY.md` §1.5 and §3 — replacements and savegame footprint.
+5. `docs\reports\DRONE_OVERHAUL_OPTIONS.md` — only if D08 or D06-structural comes up.
+6. `docs\agent\FIX_POLICY.md` §1.5 and §3 — replacements and savegame footprint.
 7. `docs\FUTURE_IDEAS.md` — the scope brake.
 
 **Game source (read-only, NEVER modify):**
@@ -282,7 +294,7 @@ If you cannot cite evidence, **say the narrower true thing instead.**
   **false**; `SaveGameStart` reaches mods. If you repeat the cleanup-mod case,
   make it on grounds that survive that correction.
 - **Do not assume any F86 remedy.** The three-layer redesign in
-  `docs\SAVE_SAFETY_REDESIGN.md` is a **proposal awaiting an owner decision**.
+  `docs\reports\SAVE_SAFETY_REDESIGN.md` is a **proposal awaiting an owner decision**.
   Do not build against it, and do not treat D06's shape as constrained by a
   layer that has not been chosen.
 

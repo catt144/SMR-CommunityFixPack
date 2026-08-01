@@ -4,7 +4,7 @@
 > for the **playtest freeze rules** and the **design-drift disclaimer spec**,
 > both of which are still binding. The experiments themselves are done and the
 > temporary module has been deleted. **The live drone prompt is
-> `docs/DRONE_PROJECT_PROMPT.md`;** the answers are on the `BUGS.md` D06 entry
+> `docs/prompts/DRONE_PROJECT_PROMPT.md`;** the answers are on the `BUGS.md` D06 entry
 > and in `DRONE_PRIORITY_SYSTEM.md` §8-§10. Each question below carries its
 > answer inline.
 
@@ -76,7 +76,7 @@ position and are already `tested`.
 > had** — see `DRONE_PRIORITY_SYSTEM.md` §9 (uninstall is lossy, heal path
 > expires) and §10 (the duplicate leak, which bites with the mod *installed*).
 > **The design decision that follows is OPEN and owner-owned**;
-> `docs/DRONE_PROJECT_PROMPT.md` carries it. The text below is the original
+> `docs/prompts/DRONE_PROJECT_PROMPT.md` carries it. The text below is the original
 > question.
 
 **Why it decides everything.** The design needs two automatic bands above the

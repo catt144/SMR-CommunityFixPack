@@ -121,7 +121,7 @@ SMRFixPack_Optional = { ClassicRockets = true, AcknowledgedWarnings = true }
 
 ## For modders
 
-See [docs/FIX_POLICY.md](docs/FIX_POLICY.md). Short version: data patches and
+See [docs/agent/FIX_POLICY.md](docs/agent/FIX_POLICY.md). Short version: data patches and
 chained wrappers over replacements; every fix self-checks the target code
 before patching and deactivates itself (with a logged reason) if a game update
 already fixed it; `SMRFixPack_Disabled` is the veto surface.

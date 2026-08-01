@@ -1,6 +1,6 @@
 # F86 — second-round questions for the adjudicator
 
-> ✅ **ROUND TWO — released 2026-07-31 after `docs\F86_ADJUDICATION.md` was
+> ✅ **ROUND TWO — released 2026-07-31 after `docs\reports\F86_ADJUDICATION.md` was
 > delivered.** This file was withheld until then on purpose: several items point
 > at specific answers, and reading it earlier would have contaminated a verdict
 > that had to be independent.

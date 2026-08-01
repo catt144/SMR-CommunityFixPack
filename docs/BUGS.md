@@ -1621,7 +1621,7 @@ no-live-UI-internals rule (F76 lesson). **The debris is an artifact of an
 unreachable entry path, not a defect — it is not filed as one.** The question
 that superseded the test — is `place_track` reachable at all? — is now
 **ANSWERED: it is not. (a) is R4.** Settled by the reachability audit's
-lead-pass block (`docs/REACHABILITY_AUDIT.md`): there is **no `InstantTracks`
+lead-pass block (`docs/reports/REACHABILITY_AUDIT.md`): there is **no `InstantTracks`
 const** (the Instant* family is Cables/Passages/Pipes only,
 `__const.lua:1043-1056`), all four shipped entries into track mode pass no
 override and the track dialog defaults `grid_elements_require_construction`
@@ -1680,7 +1680,7 @@ but it never enumerated (c) at all; the tier was asserted in passing while
 justifying the *module's* retention on (a)'s behalf. Its R1-R4 vocabulary also
 has no way to express "reachable, but intended", because every tier
 presupposes the shipped behaviour is wrong. Both gaps were put back to the
-audit and are **ANSWERED** in `docs/REACHABILITY_AUDIT.md` ("Challenge review
+audit and are **ANSWERED** in `docs/reports/REACHABILITY_AUDIT.md` ("Challenge review
 2026-07-30"): new tier **`I` — Intentional** was added with (c) reassigned to
 it, every lettered sub-item is now its own audit subject by rule, and the
 revised FIX_POLICY §4 draft demands a positive intent statement backed by a
@@ -3828,7 +3828,7 @@ F83 is the general case of the same shape. Also thematically adjacent to
 F81/F78/F82: this codebase drives state changes from specific code paths rather
 than from state, so anything that interrupts the path loses the change.
 
-**~~⛔ FIX ON HOLD~~ — AUDIT COMPLETE 2026-07-30 (`docs/POPUP_CONSEQUENCE_AUDIT.md`):
+**~~⛔ FIX ON HOLD~~ — AUDIT COMPLETE 2026-07-30 (`docs/reports/POPUP_CONSEQUENCE_AUDIT.md`):
 the hold is LIFTED and the narrow-decouple recommendation is REINSTATED.** The
 owner asked whether FirstAsteroid is really the only thing a player can lose
 this way, and the same-evening first dive said "no — storybits". **That storybit
@@ -4032,7 +4032,7 @@ identical tradeoff and should not be answered twice differently.
 ### F85 — Breakthrough choice popups and the Assembly "Colony Values" choice ride real-time waiters; any save landing in their open window silently voids the choice (P3, LATENT — tier U)  `[filed 2026-07-30 by the popup audit — NOTHING BUILT, settling observation queued; no fix until U resolves]`
 
 The F83 family's latent members — found by the popup/deferred-consequence audit
-(`docs/POPUP_CONSEQUENCE_AUDIT.md` §3.3, which is the full evidence; this entry
+(`docs/reports/POPUP_CONSEQUENCE_AUDIT.md` §3.3, which is the full evidence; this entry
 is the record of claim). Four popups carry heavyweight consequences in code
 that runs **after** a `WaitPopupNotification` inside a **real-time** thread —
 the thread class that does not survive a save/load:
@@ -4093,7 +4093,7 @@ machinery surgery.
 
 ### F86 — OUR OWN DEFECT: pack code blocked on a persisted game-time thread is written INTO the player's savegame and keeps running after the mod is removed (P1, MEASURED)  `[open — filed 2026-07-31 by PT-20; BLOCKS RELEASE. Remedy DECIDED 2026-07-31 (owner, all four calls): layer ordering 3→2→1 adopted into FIX_POLICY §3a; layer-3 sweep authorised and OWED; F02 held for it; D10/D12 sequenced behind it. Nothing built yet]`
 
-> ## ⚖️ ADJUDICATED 2026-07-31 — `docs/F86_ADJUDICATION.md` — read alongside this entry
+> ## ⚖️ ADJUDICATED 2026-07-31 — `docs/reports/F86_ADJUDICATION.md` — read alongside this entry
 >
 > The two position documents were independently torn down against Src, `Code/`
 > and the PT-20 logs. **Verdict: the authorised build is right,
@@ -4135,7 +4135,7 @@ machinery surgery.
 >
 > ## ✅ THE OWNER DECISION IS TAKEN (2026-07-31) — read this before the diagnosis below
 >
-> All four calls in `docs/SAVE_SAFETY_REDESIGN.md` §4 were answered. **No
+> All four calls in `docs/reports/SAVE_SAFETY_REDESIGN.md` §4 were answered. **No
 > measurements are owed and none may be designed** (see the cancelled tail-call
 > experiment below). What is owed is **one game-free source sweep.**
 >
@@ -4235,7 +4235,7 @@ to the real `_G` (`Mod.lua:1647-1656`), so **vanilla globals resolve — an orph
 loses ONLY names its own mod creates**. `SMRFixPack` is nil after uninstall
 because the pack never loaded to create it. Whether an orphan dies, expires, or
 runs forever is a per-module property of the names its body touches
-(ENGINE_FACTS; `docs/F86_ADJUDICATION.md` §8.1-8.2). Both measured legs are
+(ENGINE_FACTS; `docs/reports/F86_ADJUDICATION.md` §8.1-8.2). Both measured legs are
 consistent: `Fix_MeteorFrequency` died at `SMRFixPack` (mod name);
 `Opt_DroneOverhaul`'s wrapper died at its `SMRFixPack` gate — while
 `Fix_RainsDeadlock`'s all-vanilla `fixed_loop` would run forever.
@@ -4331,7 +4331,7 @@ function smaller.
 
 **Remedy — three layers, ordering ADOPTED 2026-07-31 (owner), nothing built yet.
 The rule is `FIX_POLICY.md` §3a; the full spec and per-module disposition table
-are `docs/SAVE_SAFETY_REDESIGN.md`.**
+are `docs/reports/SAVE_SAFETY_REDESIGN.md`.**
 
 1. **Patch a synchronous input instead of replacing a blocking body** (best;
    zero savegame footprint). Worked example for F02 below.
@@ -4724,10 +4724,10 @@ entry living under F84. Content untouched.)*
 
 ---
 
-> 🚧 **DRONE WORK HAS ITS OWN PROMPT — `docs/DRONE_PROJECT_PROMPT.md`** (owner,
+> 🚧 **DRONE WORK HAS ITS OWN PROMPT — `docs/prompts/DRONE_PROJECT_PROMPT.md`** (owner,
 > 2026-07-31). It is re-runnable and owns D06, D08, D09, F77, the drone queue
 > machinery, the consolidated drone playtest and the cleanup mod.
-> `docs/FABLE_NEXT_PROMPT.md` is the **general** prompt and may answer drone
+> `docs/prompts/FABLE_NEXT_PROMPT.md` is the **general** prompt and may answer drone
 > questions but **may not start, plan or schedule drone work.** This entry is the
 > plan of record; that prompt is how a session picks it up.
 
@@ -4758,7 +4758,7 @@ rebuilding rather than iterating.
 
 ### The root cause, and the full priority research
 
-**→ `docs/DRONE_PRIORITY_SYSTEM.md`** (source-verified 2026-07-31) is the
+**→ `docs/reports/DRONE_PRIORITY_SYSTEM.md`** (source-verified 2026-07-31) is the
 reference. Headline: there is **no hidden priority band**. The whole system is
 five integers, `-1..3`; the player's scrollbar is `min 1, max 3, default 2`
 (`Building.lua:199`); and the "fast repair" players notice is **two classes
@@ -4819,7 +4819,7 @@ the sol-12 setting still running a sol-400 colony, and it is the forum post.
 > §8-§10. The Phase-4 sequencing note below is also spent: Phase 4 completed
 > 2026-07-31 and the experiments ran after it.
 
-**→ `docs/DRONE_RESEARCH_BRIEF.md`** (now historical; keep it for the playtest
+**→ `docs/archive/DRONE_RESEARCH_BRIEF.md`** (now historical; keep it for the playtest
 freeze rules and the disclaimer spec). The gates were: **Q1 can kill the band
 scheme outright** — (1) does the C matcher honour a widened priority range?
 (2) are hub queues persisted or rebuilt on load? (3) do the life-support and
@@ -5345,7 +5345,7 @@ pull-only and own-hub-only, requests sit in every covering hub's queues, claims 
 first-poller-wins held through the whole approach, repair requests are max_units=1,
 and no handoff/steal/distance-tiebreak exists anywhere. Full trace on the "Not yet
 swept" DroneControl bullet; the option analysis (A-H, feasibility/risk/reward) is
-`docs/DRONE_OVERHAUL_OPTIONS.md`. **Core v1 ships three parts** (all
+`docs/reports/DRONE_OVERHAUL_OPTIONS.md`. **Core v1 ships three parts** (all
 per-call-gated on `IsActive`, hooks installed at classdef time; NO persisted state —
 saves made with it load identically without it):
 1. **Closest-fleet-first claim gate** — chained wrapper on `TaskRequestHub:FindTask`
@@ -6169,7 +6169,7 @@ F-row. Provenance and the fuller lead lists live in
     change must re-pass the F50 rocket-churn and F55 unreachable scenarios in
     playtest before shipping.
   * **Follow-up (2026-07-28, user-commissioned): full overhaul-toggle feasibility
-    study in `docs/DRONE_OVERHAUL_OPTIONS.md`** — options A-G (repair moonlighting,
+    study in `docs/reports/DRONE_OVERHAUL_OPTIONS.md`** — options A-G (repair moonlighting,
     full moonlighting, migration balancer, claim veto, true handoff, Lua-matcher
     rewrite [rejected], telemetry/F77/throttle supporting acts) ranked by
     feasibility/risk/reward with verified patch points and a recommended build

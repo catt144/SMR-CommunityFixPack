@@ -47,7 +47,7 @@ Original spec, for reference:
   each auto-cargo request the lander computes). Enable per-test, print to
   console/log with a `[SMRTest]` prefix.
 - First build task: inventory `Cheats.lua` + `GameCheatShortcuts.generated.lua`
-  — **DONE**, see `docs/CHEATS_INVENTORY.md`. It also answers the console
+  — **DONE**, see `docs/archive/CHEATS_INVENTORY.md`. It also answers the console
   question (Enter / Alt-Shift-C, gated on `AreCheatsEnabled() or ConsoleEnabled`;
   a Mod Editor test session grants it for free) and records which `Cheat*`
   functions self-gate on `Platform.cheats` (only `CheatStartMystery` and

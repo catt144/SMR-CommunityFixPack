@@ -11,7 +11,7 @@ that don't depend on probe results and leave the rest clearly marked.
 You are continuing the Surviving Mars: Relaunched "Community Fix Pack"
 (`C:\Dev\SMR-BugFixPack`, git). **F86 is the single release blocker; the
 analysis is finished and twice-verified; your job is the first two phases of
-`docs/F86_EXECUTION_PLAN.md`** — measure two engine facts, then finalise the
+`docs/reports/F86_EXECUTION_PLAN.md`** — measure two engine facts, then finalise the
 Tier-1 spec and write the build prompt.
 
 **Start with `git log --oneline -10` + `git pull`.** Staleness check: this
@@ -21,12 +21,12 @@ landed since, read them before acting.
 
 ## Read first (in this order — nothing else is required reading)
 
-1. `docs/F86_EXECUTION_PLAN.md` — the plan; you are Phase 0 + Phase 1.
-2. `docs/F86_ADJUDICATION.md` §4.1, §8.4-8.6 — why each measurement gates a
+1. `docs/reports/F86_EXECUTION_PLAN.md` — the plan; you are Phase 0 + Phase 1.
+2. `docs/reports/F86_ADJUDICATION.md` §4.1, §8.4-8.6 — why each measurement gates a
    design, and the hook-surface table.
-3. `docs/FIX_POLICY.md` §3a (as amended: value-reachability + orphan reach +
-   orphan gate) and `docs/ENGINE_FACTS.md` (the 2026-07-31 entries).
-4. `docs/SAVE_SAFETY_REDESIGN.md` §6 — the authorised build you are speccing.
+3. `docs/agent/FIX_POLICY.md` §3a (as amended: value-reachability + orphan reach +
+   orphan gate) and `docs/agent/ENGINE_FACTS.md` (the 2026-07-31 entries).
+4. `docs/reports/SAVE_SAFETY_REDESIGN.md` §6 — the authorised build you are speccing.
 
 ## Standing project rules (all of them binding)
 

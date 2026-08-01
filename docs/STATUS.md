@@ -3,12 +3,12 @@
 Rewritten in place every session (structure since 2026-07-29, audit
 remediation 3.3). Session legs are append-only in
 `docs/archive/SESSION_LOG.md` (newest first); engine facts live in
-`docs/ENGINE_FACTS.md`; defect truth lives in `docs/BUGS.md`.
+`docs/agent/ENGINE_FACTS.md`; defect truth lives in `docs/BUGS.md`.
 
-> 🚧 **TWO PROMPTS since 2026-07-31 (owner).** `docs/FABLE_NEXT_PROMPT.md` is the
+> 🚧 **TWO PROMPTS since 2026-07-31 (owner).** `docs/prompts/FABLE_NEXT_PROMPT.md` is the
 > **general** prompt and no longer drives drone work — it may answer drone
 > questions but may not start, plan or schedule that work.
-> **`docs/DRONE_PROJECT_PROMPT.md`** owns it: D06, D08, D09, F77, the drone queue
+> **`docs/prompts/DRONE_PROJECT_PROMPT.md`** owns it: D06, D08, D09, F77, the drone queue
 > machinery, the consolidated drone playtest, and the cleanup mod. Reason: the
 > drone project grew its own open design decision, its own frozen tests, and
 > constraints that do not generalise, and sharing a prompt was degrading both.
@@ -26,7 +26,7 @@ with **PHASE 4 COMPLETE** (below).
 > ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
 > F83 is `tested`.** Nothing on the drone research side is owed. Full leg in
 > `docs/archive/SESSION_LOG.md`; the answers live on the **D06 entry** and in
-> `docs/DRONE_PRIORITY_SYSTEM.md` §8-§10.
+> `docs/reports/DRONE_PRIORITY_SYSTEM.md` §8-§10.
 > - **Q1 = HONOURED, both legs** — a band-4 repair AND a band-4 haul were
 >   consumed, the second on a cheat-free symmetric pair. The band scheme
 >   survived the gate that could have killed it.
@@ -96,7 +96,7 @@ with **PHASE 4 COMPLETE** (below).
 >   junction *physically removed* (98 vs 98 errors, same locals).
 > - ✅ **THE OWNER DECISION IS TAKEN (2026-07-31) — all four calls answered, and
 >   ONE game-free item is owed.** Full spec and the recorded calls in
->   **`docs/SAVE_SAFETY_REDESIGN.md`** §4.
+>   **`docs/reports/SAVE_SAFETY_REDESIGN.md`** §4.
 >   1. **Layer ordering 3 → 2 → 1 ADOPTED** and written into **`FIX_POLICY.md`
 >      §3a** as a hard rule binding new fixes as well as repairs (that section,
 >      not BUGS.md, is now authoritative for it): patch a synchronous input
@@ -305,7 +305,7 @@ promises and `show_once` never re-offers.** **PT-58 RAN AND PASSED the same day
 and the consequence is now OBSERVED, not inferred:** one purpose-built fixture,
 one variable, **1/1/1 answered without a reload vs 0/0/0 answered after one**.
 The notification survives the load, opens normally, and grants nothing.
-**✅ THE QUEUED POPUP AUDIT RAN 2026-07-30 (`docs/POPUP_CONSEQUENCE_AUDIT.md`)
+**✅ THE QUEUED POPUP AUDIT RAN 2026-07-30 (`docs/reports/POPUP_CONSEQUENCE_AUDIT.md`)
 and the hold is LIFTED: the narrow-decouple recommendation is REINSTATED.** The
 storybit alarm that stopped the fix was wrong about the engine — **game-time
 threads persist by default with their blocked stacks; only real-time threads
@@ -616,7 +616,7 @@ the only genuinely uncovered one: preset half probe-covered, play half needs
 the Independence arc + a special project; judged not worth a PT for a
 data-only P2.
 
-**REACHABILITY AUDIT COMPLETE 2026-07-30 — `docs/REACHABILITY_AUDIT.md`.**
+**REACHABILITY AUDIT COMPLETE 2026-07-30 — `docs/reports/REACHABILITY_AUDIT.md`.**
 All 66 fix modules + both sanitizer passes audited for player reachability
 (the F24 question, asked pack-wide): ~21 R1, ~38 R2, five R3 (kept — F27,
 F29†, F31, F43, F57(a)†; † = §1.5-latent, flagged), one U (F11, settling
@@ -720,7 +720,7 @@ MapDescriptor. All are permissive failures — none blocks a player.
 
 ## Key technical facts — MOVED
 
-The engine-facts section that lived here is now **docs/ENGINE_FACTS.md** (sole
+The engine-facts section that lived here is now **docs/agent/ENGINE_FACTS.md** (sole
 authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
 
 ## Waiting on the user

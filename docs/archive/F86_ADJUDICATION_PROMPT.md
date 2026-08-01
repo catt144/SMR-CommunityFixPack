@@ -13,9 +13,9 @@ authorised but PAUSED, waiting on you.**
 Two agents worked on the same defect, **independently**, and each wrote up its
 own position. The owner wants them torn apart before a line of code is written.
 
-- **`docs\F86_DISCOVERY_POSITION.md`** — the session that *found* the defect
+- **`docs\reports\F86_DISCOVERY_POSITION.md`** — the session that *found* the defect
   (the PT-20 leg). It ran the game; its claims include real measurements.
-- **`docs\F86_SESSION_FINDINGS.md`** — the session that did the *design and
+- **`docs\reports\F86_SESSION_FINDINGS.md`** — the session that did the *design and
   sweep* work afterwards. It never launched the game; its claims are source
   reading and analysis.
 
@@ -60,13 +60,13 @@ is "do not build any of this yet", say so plainly.
 
 ## Read first
 
-1. **`docs\ENGINE_FACTS.md` — the whole file.** Several behaviours are the
+1. **`docs\agent\ENGINE_FACTS.md` — the whole file.** Several behaviours are the
    opposite of what the code suggests, and it carries the thread-stack
    persistence entry this whole defect rests on.
 2. `docs\BUGS.md` — the **F86** entry, and **F02** (the fix under rewrite).
-3. `docs\SAVE_SAFETY_REDESIGN.md` — the remedy of record, including the owner
+3. `docs\reports\SAVE_SAFETY_REDESIGN.md` — the remedy of record, including the owner
    decisions in §4 and the authorised build in §6.
-4. `docs\FIX_POLICY.md` — **§3a** is the newly adopted layer rule; **§4** bars
+4. `docs\agent\FIX_POLICY.md` — **§3a** is the newly adopted layer rule; **§4** bars
    gameplay changes; **§1.5** governs full-body replacements.
 5. Then the two position documents.
 
@@ -144,7 +144,7 @@ by consequence, not by author.
 
 ## Deliverable
 
-Write **`docs\F86_ADJUDICATION.md`** and commit it. Structure:
+Write **`docs\reports\F86_ADJUDICATION.md`** and commit it. Structure:
 
 1. **Verdict up front** — is the authorised build safe to start as scoped? Yes,
    no, or yes-with-changes. One paragraph.
