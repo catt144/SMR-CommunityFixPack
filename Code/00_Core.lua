@@ -54,6 +54,19 @@ function SMRFixPack.OptionEnabled(id)
 	return type(opts) == "table" and opts[id] and true or false
 end
 
+-- Pack version string ("major.minor.revision"), read from the loaded ModDef —
+-- metadata.lua stays the single source (Mods[id] is the runtime ModDef object,
+-- the same one Mod Options reads; ENGINE_FACTS). Returns false when the
+-- registry is not readable; version-keyed callers must then SKIP their work,
+-- never guess — an unkeyed restart is exactly F88's defect (F86 Tier 1).
+function SMRFixPack.PackVersion()
+	local mods = rawget(_G, "Mods")
+	local def = type(mods) == "table" and mods["SMR_CommunityFixPack"]
+	if type(def) ~= "table" then return false end
+	return tostring(def.version_major or 0) .. "." .. tostring(def.version_minor or 0)
+		.. "." .. tostring(def.version or 0)
+end
+
 -- ===== shared self-check helpers (Phase 4, audit C2/C4) ======================
 
 -- Walks a classdef's __parents chain looking for the class that DECLARES

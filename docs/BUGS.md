@@ -17,7 +17,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | ID  | Title                                                    | Sev | Conf | Status |
 |-----|----------------------------------------------------------|-----|------|--------|
 | F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | tested 2026-07-29 — PT-11 |
-| F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | fixed  |
+| F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | fixed — **rewritten 2026-08-01 (F86 Tier-1, layer 3: keyed wrapper + vanilla body, one-shot latched heal); Tier-1 legs owed** (entry) |
 | F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | tested |
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | tested |
@@ -115,7 +115,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | open — filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **durable exposed list re-derived 2026-08-01 (five-shape enumeration, Phase 1): 13** (the sweep had corrected the membership both ways — `Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out — and the re-run confirms it) **plus one inert route-(c) preset-field site** (`Fix_LastTransmissionStorage`, adjudication §4.4 closed — no build). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — Phase 0 measured 2026-08-01 (GT creation DEFERS; autosave hook FIRES); **Phase 1 done 2026-08-01** (final Tier-1 spec `SAVE_SAFETY_REDESIGN.md` §6.2a; enumeration re-derived; §4.4 closed; build prompt written) — next: the Tier-1 BUILD (chain prompt 4, `F86_TIER1_BUILD_PROMPT.md`). D10/D12 held until repairs land |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
-| F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | P2 | SOURCE-VERIFIED | open — filed 2026-07-31 (found by the owner during the F86 design review; confirmed by the adjudication). Currently shipped; silent; also the measured "reinstall repairs a damaged save" mechanism — same restart, both effects. Fix rides the F02/F86 Tier-1 rewrite via the one-shot latched heal (entry) |
+| F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | P2 | SOURCE-VERIFIED | open — filed 2026-07-31; **fix BUILT 2026-08-01 (Tier-1 rewrite: the per-load restart is gone, one-shot version-latched heal in its place); may not be claimed fixed until Tier-1 leg 2 (load 3× inside a rolled interval, meteor arrives on the persisted deadline)** (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -163,7 +163,7 @@ Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbe
 DustStorm.lua:413, DustDevils.lua:189, surface quake Marsquake.lua:43). Matches live
 Paradox-forum report. **Fix:** wrap FUNC slot (index 3) of `PeriodicRepeatInfo["UndergroundMarsquake"]`.
 
-### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed: Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL; REWORKED 2026-07-26 with a stall watchdog + forensics; PT-01 silence ROOT CAUSE PINNED 2026-07-29 to F78 (wedged storm held the scheduler) + F81 (stranded prediction flag gated all weather), wave-6 fixes shipped — see the resolution note at the entry's end]`
+### F02 — Meteors strike ~every 6h instead of 35–115h  `[fixed: Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL; REWORKED 2026-07-26 with a stall watchdog + forensics; PT-01 silence ROOT CAUSE PINNED 2026-07-29 to F78 + F81, wave-6 fixes shipped; **REWRITTEN 2026-08-01 (F86 Tier-1, spec §6.2a-A): layer-3 keyed GetDisasterWarningTime wrapper, vanilla's own body — the body copy and its heartbeat surface are DELETED; the per-load restart (F88) replaced by a one-shot version-latched heal (SMRFixPack_MeteorLatch GameVar); watchdog liveness moved onto an additive OnMsg.MeteorDone timestamp. Verification rides the Tier-1 legs (A/B pair + F88 load-3× mini-leg)** — see the rewrite note at the entry's end]`
 
 > 🔬 **ROOT CAUSE SHARPENED 2026-07-31 — it is not "a dead `if`", it is a
 > COLLAPSED POLLING LOOP, and the `Min` is not the bug.**
@@ -270,7 +270,30 @@ that. The F02 watchdog's silence-watch captured the evidence as designed.
 Wave-6 fixes shipped: `Fix_MeteorStormWedge` (F78) +
 `Fix_DisasterPredictionLeak` (F81) — full trace and evidence live on those
 two entries. The F02 watchdog stays as a standing safety net.
-Cross-refs: F78, F81.
+
+**REWRITE (2026-08-01, F86 Tier 1 — spec `SAVE_SAFETY_REDESIGN.md` §6.2a-A).**
+The body copy is gone: the fix is now a layer-3 wrapper on the synchronous
+`GetDisasterWarningTime`, keyed on `CurrentThread() == rawget(_G, "Meteors")`
+(a falsy global takes the orig path — defence in depth, measured not
+load-bearing). On the keyed path it returns `Max(orig(descr), descr.spawntime
++ descr.spawntime_random)`, so vanilla's `Min(spawn_time, warning_time)`
+(`Meteors.lua:291-292`) equals `spawn_time` and **vanilla's own body produces
+the designed 35–115h schedule**. The MeteorStorm thread passes the same
+descriptor and keeps vanilla warning timing (the key is what makes this not a
+balance change). `GlobalGameTimeThreadFuncs.Meteors` stays vanilla's; the
+heartbeat surface (`MeteorsBeat`/`MeteorsBeatSet`/`MeteorsNote`) died with the
+copy. The per-load `OnMsg.LoadGame` restart — F88's defect — is replaced by a
+**one-shot latched heal**: `GameVar("SMRFixPack_MeteorLatch", false)` holds
+the last-healed pack version; PostLoadGame restarts the thread once per save
+lineage per version and stamps the latch. The PT-01 watchdog keeps its
+threshold, ladder and guards; its liveness input is now an additive
+`OnMsg.MeteorDone` timestamp, and its restarts recreate vanilla's body.
+Disclosed residuals: the dead `if` gains `Sleep(5000)` ≈ 10 game min/cycle
+with warning > spawn (negligible), and the latch GameVar stays in saves as
+inert data. **Verification rides the Tier-1 legs** — the A/B cadence pair
+(leg 1), the F88 load-3×-inside-an-interval mini-leg (leg 2), and the
+uninstall leg (leg 5).
+Cross-refs: F78, F81, F86, F88.
 
 ### F03 — Upgrade buffs leak & stack after salvage/demolish  `[tested: Code/Fix_UpgradeModifierLeak.lua stops new leaks; Code/90_SaveSanitizer.lua clears the ones already in a save — PT-02 PASS 2026-07-25]`
 `Lua\Buildings\Building.lua:1268-1274` — `StopUpgradeModifiers` iterates `upgrade_modifiers`
@@ -4959,7 +4982,7 @@ because it states the reasoning:
 test, and it caught a defect that would otherwise have shipped silently. That
 was the argument for building it.
 
-### F88 — OUR OWN DEFECT: the per-load meteor restart re-rolls the timer, silently suppressing meteors for frequent loaders (P2, SOURCE-VERIFIED)  `[open — filed 2026-07-31; fix rides the F86 Tier-1 rewrite (one-shot latched heal); regression leg specified in F86_EXECUTION_PLAN Phase 2]`
+### F88 — OUR OWN DEFECT: the per-load meteor restart re-rolls the timer, silently suppressing meteors for frequent loaders (P2, SOURCE-VERIFIED)  `[open — filed 2026-07-31; **fix BUILT 2026-08-01 in the F86 Tier-1 rewrite of Code/Fix_MeteorFrequency.lua: OnMsg.LoadGame's unconditional restart is DELETED; a one-shot latched heal (GameVar SMRFixPack_MeteorLatch = last-healed pack version, PostLoadGame, restart once per save lineage per version) replaces it. NOT claimable as fixed until Tier-1 leg 2 passes — load 3× inside a rolled interval, the meteor must arrive on the persisted deadline**]`
 
 **Found by the owner during the F86 design review** (recorded first in
 `F86_SESSION_FINDINGS.md` §1.4); independently confirmed by the adjudication
