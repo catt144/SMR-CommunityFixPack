@@ -462,13 +462,14 @@ retirement made good):
 
 ⚠️ **NOT absorbed, and carried forward rather than dropped: triggers A and B.**
 They test `Fix_DisasterPredictionLeak` — the load-time reconciliation and its
-liveness test — and that module is **not** in Tier 1 (it is neither rewritten
-nor deleted), so no Tier-1 leg covers it by construction. Its wave-6 probe
-asserts the mechanism synthetically only. Chain prompt 3 has been told, in its
-inbox, to write both observations into `F86_TIER1_BUILD_PROMPT.md` as legs —
-which is also where they belong because prompt 3 may add a **mid-session**
-reconcile to that same flag class (its pre-cleared option), and that would
-change what A and B are testing.
+liveness test — and no Tier-1 rewrite covers them by construction. Its wave-6
+probe asserts the mechanism synthetically only. ✅ **RESOLVED 2026-08-01
+(prompt 3): both are written into `docs/prompts/F86_TIER1_BUILD_PROMPT.md` as
+leg 4 — and the pre-cleared mid-session reconcile WAS taken**
+(`SAVE_SAFETY_REDESIGN.md` §6.2a-C: an `OnMsg.NewDay` reconcile joins the
+module in the Tier-1 build), **so A and B changed shape as anticipated**: A
+asserts the stranded flag heals both without a reload (within a sol) and on
+reload; B asserts a genuine warning survives both sweeps.
 
 Status flips for F78/F81/F02/F88 ride the Tier-1 legs and the normal reporting
 protocol (index row **and** heading tag, both).
