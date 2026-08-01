@@ -41,6 +41,33 @@ rather than summarised. The pack carries an automated suite of 77 checks that is
 run against both a modded and an unmodded build before release, and
 add-then-remove cycles are part of that testing.
 
+**Why we make a fuss about this at all.** `[FAQ]` The game's own modding
+documentation says that when you save, any mod code that happens to be waiting
+on something is written into the savegame and keeps running from there after
+you load — that is a deliberate engine feature, not a bug, and it means the
+normal state of affairs is that a mod leaves traces in your save. Almost no
+Surviving Mars mod promises otherwise, and that is a reasonable position, not a
+failing on their part: the engine makes a clean uninstall expensive rather than
+impossible. We decided to treat it as a requirement instead, which is why the
+footprint above is a list rather than a summary. *(Sources: the original
+game's `LuaSavegame.md.html` modding page and a survey of 471 published mods —
+`docs/reports/PRIOR_ART_SURVEY.md` §1, §2, §4. **[DRAFT NOTE]** keep this
+paragraph's claims to what that survey and `BUG_LIST_AUDIT.md` can cite; it is
+about a documented engine behaviour and a community norm, never about other
+authors doing worse work.)*
+
+**[DRAFT NOTE — CONDITIONAL, do not publish until F86 Tier 1 has landed AND
+verified** (project prompt chain 4; then delete this note and keep the
+sentence)**.]** `[FAQ]` Once the Tier-1 repairs ship, one more sentence becomes
+true and belongs here: *"As far as we can tell, no mod in either game's
+community has held itself to this uninstall standard before — not because
+others fell short, but because the engine never made it cheap enough to
+promise."* The survey found the shapes we use all have precedent
+individually; what has none is treating uninstall-cleanliness as a requirement
+with an enumeration behind it (`PRIOR_ART_SURVEY.md` §6). **Until Tier 1
+verifies, the claim is not ours to make** — our own `Fix_MeteorFrequency` is
+currently one of the modules that leaves a running thread behind.
+
 **None of that is a guarantee, and we are not going to pretend otherwise.** We
 cannot test every combination of other mods, every colony shape, every save
 state, or every future game patch — and a patch can change the code underneath

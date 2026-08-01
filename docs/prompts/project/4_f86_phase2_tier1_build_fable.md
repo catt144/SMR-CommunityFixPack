@@ -61,4 +61,25 @@ anything the Tier-2 builds must respect. Commit, push.
 
 ## Notes from upstream
 
+**From prompt 1 (2026-08-01) — two things become true when your legs pass, and
+both are already written and waiting.**
+
+1. **`MOD_DESCRIPTION.md` holds a `[FAQ]`-tagged sentence that is deliberately
+   NOT yet publishable** — the claim that no mod in either game's community has
+   held itself to this uninstall standard (`PRIOR_ART_SURVEY.md` §6). It sits
+   under a `[DRAFT NOTE — CONDITIONAL]` marker because our own
+   `Fix_MeteorFrequency` is currently one of the modules leaving a running
+   thread behind, which makes the claim false while it is true. **If your
+   uninstall leg passes on its own log, delete the DRAFT NOTE and keep the
+   sentence; if it does not, leave the marker exactly where it is.** Do not
+   soften the sentence to make it survive a weaker result.
+2. **PT-54 was retired into your legs** (prompt 1's record;
+   `PLAYTEST_CHECKLIST.md` §3 carries the trigger-by-trigger absorption table,
+   full text in `PLAYTEST_ARCHIVE.md`). Triggers C, D and E are yours. Triggers
+   A and B are **not** absorbed by the Tier-1 shape and were routed to prompt 3
+   to be written into `F86_TIER1_BUILD_PROMPT.md` as legs against
+   `Fix_DisasterPredictionLeak` — if the build prompt you receive does not
+   carry them, that is prompt 3 dropping a routed item, not a scope reduction
+   you may accept silently.
+
 (prompt 3 appends the build-prompt pointer + non-relitigable decisions here)

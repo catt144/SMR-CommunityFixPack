@@ -252,6 +252,22 @@ Rules that keep the tag worth having:
 - If the tagged behaviour is later changed or fixed, **remove the tag** in the
   same commit, or the FAQ inherits a stale answer.
 
-Currently tagged: D01's parked-rocket activation limitation (`BUGS.md` D01
-entry + `FUTURE_IDEAS.md` entry 2); the save-repair framework's honest-limits
-wording (`BUGS.md` F03/F35 + the sanitizer section of `MOD_DESCRIPTION.md`).
+Currently tagged (re-derived from `grep -rn "\[FAQ\]" docs/ Code/` on
+2026-08-01 — the previous list named a tag in `MOD_DESCRIPTION.md` that did not
+exist):
+
+- D01's parked-rocket activation limitation — `BUGS.md` D01 entry +
+  `FUTURE_IDEAS.md` entry 2.
+- The save-repair framework's honest limits — `FUTURE_IDEAS.md` entry 4.
+- "Put the mod back" as advice for a damaged save, and its F88 caveat —
+  `BUGS.md` F88 entry.
+- The uninstall procedure and the standalone save-rescue artifact —
+  `BUGS.md` D13 + `FIX_POLICY.md` §3a + `F86_EXECUTION_PLAN.md` Phase 5.
+- **Why we make a fuss about the savegame footprint at all** — the documented
+  engine behaviour (mod code is serialised into saves by design) and the
+  community norm we deliberately exceed: `MOD_DESCRIPTION.md`, added
+  2026-08-01 from `PRIOR_ART_SURVEY.md` §1/§2/§4.
+- **The no-precedent uninstall claim** — `MOD_DESCRIPTION.md`, added
+  2026-08-01 but **written conditionally and marked do-not-publish until F86
+  Tier 1 lands and verifies** (`PRIOR_ART_SURVEY.md` §6). A tag on a claim
+  that is not yet true has to say so.
