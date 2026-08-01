@@ -19,8 +19,9 @@ anything was filed** — one agent claim was refuted by that verification (§7.3
 | **SILVER** | **25** | F01 F02 F03 F05 F06 F11 F16 F21 F35 F36 F37 F38 F40 F41 F43 F48 F50 F51 F53 F59 F60 F64 F69 F74 F76 |
 | **BRONZE** | **30** | F04 F07 F08 F09 F12 F13 F14 F15 F17 F18 F19 F20 F22 F23 F25 F26 F27 F29 F31 F33 F34 F47 F54 F57 F72 F75 F77 F82 F84 F85 |
 | **HOLD** | **0** | *(F49(a) briefly held; reclassified same day on owner challenge — §3)* |
+| **NON-FIX (adjudicated)** | **12** | F10 F24 F28 F32 F42 **F49(a)** F49(c) F56 F61 F62 F63 F79 — hard "we are not fixing this" decisions with recorded grounds (§2.4); formalized as a first-class tier 2026-08-01 (owner) so they never muddy the maybe-BRONZEs |
 | play-proven, exempt | 2 | F83 (PROVEN + A/B + tested), F80 (→ §4) |
-| out of scope | — | F86–F88 (our own defects); closed entries (§2.4); D-entries (design, not defect claims); C-entries (leads, §4/§5) |
+| out of scope | — | F86–F88 (our own defects); D-entries (design, not defect claims); C-entries (leads, §4/§5) |
 
 **Does anything in the shipped default-on set land in HOLD? NOTHING does —
 the tier is empty.** Every default-on module is BRONZE or better, and every
@@ -172,14 +173,33 @@ absence is a prior, not a verdict.
 | F84 | B3 | **play-proven** (rover used the tunnel during PT-25); text-patch design is the recorded user decision | user decision (open) |
 | F85 | B2 | audit-derived latent (F83-family mechanism play-PROVEN; this instance shielded by the modal); tier U | settling observation (queued: rebind quicksave) |
 
-### 2.4 Closed / out of scope (listed for the record, not audited)
+### 2.4 NON-FIX tier (adjudicated "we are not fixing this" — formalized 2026-08-01, owner)
 
-`wontfix`/closed: F10, F24, F28, F32, **F42 (⚠ index row said `blocked`, entry
-says `wontfix` 2026-07-25 — stale row corrected in this commit)**, F49(c), F56,
-F61, F62, F63, F79; F39 folded into D04. **Adjudicated R4 rider: F49(a)** —
-high-confidence unreachable (mod-tools-only entry path), disposition already
-decided by the reachability audit (keep as no-op rider, optional strip on next
-touch); briefly mis-tiered HOLD, corrected on owner challenge (§3). Our own defects F86/F87/F88: external
+**Definition:** entries where the decision NOT to fix is made and grounded —
+R4 unreachable, tier-I intentional, §4a mod-facing-only, or owner-declined.
+Distinct from BRONZE by construction: every BRONZE is a shipped fix (or a
+filed defect awaiting decision) for a real player-reachable — or
+§4a-deliberately-shipped latent — defect. Nothing in BRONZE belongs here; the
+four latent R3s (F27/F29/F31/F57(a)) are *deliberate* fixes under the owner's
+§4a rule (latent harm ships), not non-fixes.
+
+| id | grounds |
+|---|---|
+| F10 | wontfix — faction funding conditions, designed/declined |
+| F24 | R4 unreachable in vanilla; fix DELETED 2026-07-30 (user decision) |
+| F28 | R4 — zero callers in all of Src; §4a mod-facing bar; fix + probe DELETED |
+| F32 | wontfix — designed notification behavior |
+| F42 | tier I — guard's purpose does not reach dust devils; designed scope (user 2026-07-25; ⚠ stale index row corrected this audit) |
+| **F49(a)** | **R4, mod-tools-only entry into `place_track`** (exhaustive falsification: no InstantTracks const, no cheat, injection-only repro; self-corrects on palette refresh). ⚠ unique wrinkle: its no-op guard CODE still ships inside `Fix_TrainMinors` — strip on next module touch stands |
+| F49(c) | tier I — designed behavior; guard REMOVED 2026-07-30 |
+| F56 | tier I — auto RC Transports never covered rockets, by maintained design |
+| F61 | wontfix — superseded by D03 (the need is met by design, not repair) |
+| F62 | tier I — carried-forward design (services one passage hop) |
+| F63 | tier I — carried-forward design (universities/emigration) |
+| F79 | owner-declined 2026-07-31 — risk exceeds benefit on large maps |
+
+(F39 is not a non-fix — folded into D04. F49(a) briefly sat in HOLD this
+audit and was reclassified here on owner challenge, §3.) Our own defects F86/F87/F88: external
 witnesses are category-inapplicable (though the prior-art survey already
 benchmarked F86 against the community). D-entries are design decisions, not
 defect claims. F83 is play-PROVEN + `tested` — no external witness owed.

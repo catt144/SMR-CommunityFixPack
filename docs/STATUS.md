@@ -71,7 +71,11 @@ with **PHASE 4 COMPLETE** (below).
 > (initial 17/25/29/1; F04 fell to the §9 packed-source read, and F49(a)'s
 > brief HOLD was reclassified on owner challenge — it is a high-confidence
 > adjudicated R4, which fails HOLD's lacks-confidence definition); **the HOLD
-> tier ends the audit EMPTY**. Headlines: a native Relaunched fix-modding scene exists and
+> tier ends the audit EMPTY**, and a **NON-FIX tier (12 items) was formalized
+> at the owner's direction** (audit §2.4) so hard we-are-not-fixing-this
+> decisions (R4 / tier-I / §4a-barred / owner-declined) never muddy the
+> maybe-BRONZEs — checked: nothing in BRONZE belongs there; the latent R3s
+> ship deliberately per §4a. Headlines: a native Relaunched fix-modding scene exists and
 > independently converges on F01/F04/F71/F74/F78/F81 (fredware's 13-fix "Bug
 > Fixes" created 2026-07-31, GromGor, Oxygenus); the Relaunched dev patch-note
 > thread witnesses the train/lander/homeless clusters wholesale; **20 gap
