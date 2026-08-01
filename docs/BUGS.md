@@ -108,7 +108,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | fixed 2026-07-29 — **PT-54 retired unrun 2026-08-01; verification rides the F86 Tier-1 build leg** (entry) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
-| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — **PT-54 retired unrun 2026-08-01; verification rides the F86 Tier-1 build leg** (entry) |
+| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — **rains half REWRITTEN 2026-08-01 (F86 Tier-1, layer-2 wrapper + version-stamped migration + C34 rider); PT-54 retired unrun; verification rides the Tier-1 legs** (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | todo — filed 2026-07-30; rover half DISPROVEN BY PLAY during PT-25; nothing built; text-patch design is a USER DECISION (localization tradeoff), bundled into the D10 build (chain prompt 9) (entry) |
@@ -149,7 +149,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
 | C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | filed 2026-08-01 — GromGor's fix source + Src + witness thread (entry) |
 | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source) — needs F-row decision (entry) |
-| C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — F81b's sibling class, sanitizer candidate (entry) |
+| C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — **ADOPTED as the Tier-1 rains-pass rider, BUILT 2026-08-01 into Fix_RainsDeadlock's migration pass (structure → FinishRainProcedure heal → migration; manual fallback for invalid values); verification rides Tier-1 leg 3** (entry) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -3586,7 +3586,7 @@ over track REACHABILITY with no regard for train SERVICE — colonists queue
 indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
 PT-43 F21.
 
-### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[fixed: Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (RainsDisasterLoop replaced with a bounded WaitMsg — timeout > max warning+duration so healthy cycles are untouched — plus a PostLoadGame pass that swaps persisted old-body loop threads for fixed ones, marked SMRFixPack_fixed_loop so reloads do not re-roll cycles). Built 2026-07-29 post-QA; **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg, except the (a) leak half's live legs, routed to chain prompt 3** (note below); wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[fixed: Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (**REWRITTEN 2026-08-01, F86 Tier-1 spec §6.2a-B: the loop replacement is DELETED — vanilla's RainsDisasterLoop stays; a layer-2 wrapper on RainsDisasterActivation mirrors the collision test BEFORE the call and posts Msg("RainDisasterEnd") on the early-return, so a collided cycle costs one re-roll; a version-stamped PostLoadGame migration pass (SMRFixPack_loop_version; resolves id-less entries by unique type match) moves every persisted loop onto vanilla's body and carries the C34 stale-state rider — structure repairs → stale-ACTIVE FinishRainProcedure heal → loop migration**). Leak half built 2026-07-29 post-QA; rains half rewritten 2026-08-01; **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg, except the (a) leak half's live legs, routed to chain prompt 3** (note below); wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
 **⛔ PT-54 RETIRED UNRUN 2026-08-01 — and this entry is the one that keeps a
 LIVE OBLIGATION out of it.** The test was withdrawn by the project prompt
 chain because the F86 Tier-1 build deletes and replaces the `Fix_RainsDeadlock`
@@ -6443,6 +6443,16 @@ quotes verbatim; sources in the audit report §8.
   `soil_thread`s and invalid `g_RainDisaster` values. Our F81b fixes the
   deadlock that *strands* the loop; this is the sibling class of stale state
   we do not touch. Candidate for the sanitizer/F81 family.
+  **→ ADOPTED AND BUILT 2026-08-01 (F86 Tier-1, spec §6.2a-B3): rides
+  `Fix_RainsDeadlock`'s PostLoadGame migration pass as a rider, no module of
+  its own. Structure repairs (missing/non-table registry recreated, dead
+  `soil_thread`s → false) → stale-ACTIVE heal through vanilla's own
+  `FinishRainProcedure` → loop migration; invalid `g_RainDisaster` values
+  that match no known rain type take the manual fallback (`= false` +
+  `Msg("RainDisasterEnd")`, logged) because FinishRainProcedure's
+  notif_prefix lookup would concatenate nil on them. Verification rides
+  Tier-1 leg 3 (plant `g_RainDisaster` with a dead `main_thread` → heals
+  through FinishRainProcedure).**
 - **C26 [author] — malfunctioned buildings stuck in perpetual maintenance.**
   SkiRich (OG, workshop 2433157820, 4,100 subs): *"buildings that are
   malfunctioned and stuck in perpetual maintenance mode and nobody is willing
