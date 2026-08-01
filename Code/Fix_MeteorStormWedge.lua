@@ -49,6 +49,21 @@
 -- can persist g_MeteorStormStop = true; the next storm in that save aborts once,
 -- cleanly (the stop branch removes its notification, Meteors.lua:227). Three
 -- heals per session, then the watchdog gives up loudly (F02 pattern).
+--
+-- ORPHAN-GATE REORDER (2026-08-01, F86 Tier-1 — spec `SAVE_SAFETY_REDESIGN.md`
+-- §6.2a-D; FIX_POLICY §3a): a save made during the pulse window persists this
+-- thread, and the pre-reorder body's SECOND statement was a mod-name touch
+-- (`SMRFixPack.StormWedgeNote`) — an orphan resuming mid-pulse completed the
+-- vanilla-name loop and then DIED at the force-clean path's Note call, AFTER
+-- `g_MeteorStormStop = true` and BEFORE the reset: the exact stray the round-2
+-- adjudication predicted. Now the body opens, and re-opens after every Sleep,
+-- with the gate (`if not SMRFixPack then g_MeteorStormStop = false return end`
+-- — the vanilla state it may have set is reset INSIDE the gate), every
+-- completion path clears vanilla state BEFORE its first SMRFixPack.* touch
+-- (logging last), and `StormWedge.healing = false` stays last (mod state — an
+-- orphan losing it is harmless; the per-save PostLoadGame reset covers it).
+-- After the reorder this is the pack's one mod-owned GT thread in Tier-1
+-- scope, and it is gate-compliant.
 
 local FIX_ID = "MeteorStormWedge"
 
@@ -125,6 +140,9 @@ end
 -- not persisted (F06/F77 precedent) — an interrupted heal simply re-arms after
 -- the next load (state reset below).
 function SMRFixPack.StormWedgeHeal()
+	-- ⛔ orphan gate (see header): first statement, and re-armed after every
+	-- Sleep — vanilla state is reset INSIDE the gate, before the return
+	if not SMRFixPack then g_MeteorStormStop = false return end
 	RestartGlobalGameTimeThread("MeteorStorm")
 	SMRFixPack.StormWedgeNote("MeteorStormWedge: scheduler thread restarted - future storms will schedule again")
 
@@ -135,10 +153,14 @@ function SMRFixPack.StormWedgeHeal()
 		if FindNotification("DisasterMeteorStorm") then break end
 		g_MeteorStormStop = true
 		Sleep(4000)
+		if not SMRFixPack then g_MeteorStormStop = false return end
 	end
 
 	if g_MeteorStorm and not FindNotification("DisasterMeteorStorm") then
-		-- nothing released (the wedged thread was already dead): force clean
+		-- nothing released (the wedged thread was already dead): force clean.
+		-- Vanilla-state writes first, the Note call LAST — an orphan dying at
+		-- a mod-name touch must never strand the stop flag
+		g_MeteorStormStop = false
 		g_MeteorStorm = false
 		local flags = rawget(_G, "g_DisastersPredicted")
 		if type(flags) == "table" then flags.DisasterMeteorStorm = nil end
@@ -151,7 +173,7 @@ function SMRFixPack.StormWedgeHeal()
 		end)
 		SMRFixPack.StormWedgeNote("MeteorStormWedge: forced storm state clean (%d stray meteor object(s) removed)", removed)
 	else
-		SMRFixPack.StormWedgeNote("MeteorStormWedge: wedged storm released through the vanilla end path")
+		g_MeteorStormStop = false -- never leave a stray stop signal for the next storm
 		-- FIX (audit 2026-07-29, B2): the vanilla end path clears the prediction
 		-- flag only via Fix_DisasterPredictionLeak's MeteorStormEnded handler —
 		-- with that fix individually disabled, a released storm stranded
@@ -160,13 +182,18 @@ function SMRFixPack.StormWedgeHeal()
 		-- notification is behind it; idempotent beside F81 (both nil the same
 		-- entry, and a new storm's AddDisasterNotification re-sets it).
 		local flags = rawget(_G, "g_DisastersPredicted")
+		local cleared_flag = false
 		if type(flags) == "table" and flags.DisasterMeteorStorm
 				and not FindNotification("DisasterMeteorStorm") then
 			flags.DisasterMeteorStorm = nil
+			cleared_flag = true
+		end
+		-- logging last (§3a ordering)
+		SMRFixPack.StormWedgeNote("MeteorStormWedge: wedged storm released through the vanilla end path")
+		if cleared_flag then
 			SMRFixPack.StormWedgeNote("MeteorStormWedge: cleared the stranded meteor prediction flag itself (DisasterPredictionLeak handler not active)")
 		end
 	end
-	g_MeteorStormStop = false -- never leave a stray stop signal for the next storm
 	SMRFixPack.StormWedge.healing = false
 end
 
