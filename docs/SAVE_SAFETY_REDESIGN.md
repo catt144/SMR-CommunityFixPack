@@ -1,9 +1,10 @@
 # Save-safety redesign — the F86 remedy
 
-**Status: DECIDED 2026-07-31 (owner). The layer ordering is ADOPTED and now
-lives in `FIX_POLICY.md` §3a as a hard rule. The layer-3 sweep is AUTHORISED
-and is the critical path. F02 is HELD until that sweep reports. D10 and D12 are
-sequenced BEHIND these rules.** Written 2026-07-31 immediately after the PT-20
+**Status: DECIDED and the BUILD IS AUTHORISED (owner, 2026-07-31). The layer
+ordering is ADOPTED and lives in `FIX_POLICY.md` §3a as a hard rule. The sweep
+has RUN and is discharged (§5). The authorised build is §6 — Tiers 1 and 2,
+with LAYER 1 EXPLICITLY NOT TO BE BUILT. F02's hold is LIFTED. D10 and D12 stay
+held until these repairs land.** Written 2026-07-31 immediately after the PT-20
 leg that measured the defect; the four decisions were taken the same day and are
 recorded in §4. The defect itself is `BUGS.md` **F86** (P1, blocks release);
 this file is the *how*.
@@ -18,7 +19,10 @@ this file is the *how*.
 >   wrapper**, 4 have a route worth designing, 9 are correctly full replacements,
 >   3 are already optimal. None of it is urgent; none of it blocks F86.
 >
-> **Nothing here is built, and F02 stays HELD until the owner acts on §5.**
+> ⭐ **THE BUILD IS NOW AUTHORISED — §6. Scope: Tiers 1 and 2; LAYER 1 IS NOT TO
+> BE BUILT.** F02's hold is **lifted** and it leads the build. `Opt_DroneOverhaul`
+> is in scope but blocked on the drone carve-out. D10/D12 stay held until these
+> repairs land.
 
 ---
 
@@ -100,7 +104,7 @@ meteors in PT-20 — is then deleted outright.
 **Which other modules can take this shape — ✅ SWEPT, §5.** Beyond F02, the
 sweep found four more exposed modules with a layer-3/2 route (§5.3) and six
 non-exposed full replacements that convert cleanly to a chained wrapper (§5.4
-group A). F02 itself remains **held** by decision 3.
+group A). **F02's hold was lifted 2026-07-31 and it leads the build (§6).**
 
 ### Layer 2 — no mod code after a call that can block
 
@@ -129,6 +133,13 @@ must move that work out of the command body into a message or periodic hook.
 weight. It executes nothing and is invisible to any read available to us.
 
 ### Layer 1 — `SaveGameStart` tear-down / `SaveGameDone` rebuild
+
+> ⛔ **NOT TO BE BUILT — owner decision 2026-07-31 (§6.3).** The four modules it
+> would serve own their own threads, so nothing vanilla is lost when they die
+> after uninstall — the cost is one log line each. The owner accepted that
+> residual rather than build this layer. **Do not propose it again without new
+> evidence that Tier 3 causes real harm.** The design below is retained only as
+> a record of what was considered.
 
 For what layers 2 and 3 cannot reach: the pack's own game-time threads.
 
@@ -200,12 +211,14 @@ modules), not just the 13 exposed — layer-3 wins on currently-safe modules are
 worth having, because a module that keeps vanilla's body cannot regress into
 this defect class later. **This is the only thing owed on F86 right now.**
 
-### 3. F02 — ⏸️ HELD until the sweep reports
+### 3. F02 — ✅ HOLD LIFTED 2026-07-31 (was: held until the sweep reports)
 
-The owner declined to take F02 module-by-module. **Do not touch
-`Fix_MeteorFrequency` yet.** The whole layer-3 set lands as one designed change
-once the sweep has scoped it. Accepted cost, stated at the time of the decision:
-the measured, colony-killing leak stays shipped in the meantime.
+~~The owner declined to take F02 module-by-module.~~ **The sweep has reported
+(§5) and the hold is LIFTED: F02 is built with the rest of the authorised set.**
+It is the only site with *measured* permanent harm, so it leads the build.
+
+The design is settled and two corrections apply — see the boxed correction in §2,
+Layer 3.
 
 When it is unheld, the design is settled and two corrections apply — **the
 wrapper keys on `CurrentThread()`, not on the descriptor** (see the boxed
@@ -468,7 +481,76 @@ outstanding count was estimated at "~17" and is actually **22**; and
 **rejected** on inspection — an input patch there would over-reach into MicroG
 habitats, which the module deliberately excludes (§5.4 group D).*
 
-## 6. What is NOT proposed
+## 6. ⭐ THE BUILD — AUTHORISED SCOPE, owner 2026-07-31
+
+**Scope: Tiers 1 and 2. Layer 1 is NOT to be built.** The tiering below is the
+reason, and it is the thing to understand before touching any of it.
+
+### 6.1 The tiering that set the scope
+
+Exposure severity is **not** about the module — it is about whether we replaced
+something vanilla would otherwise keep running:
+
+- **We ADD a thread** (a heal loop, a watchdog) → after uninstall it resumes,
+  errors once and dies. The player loses the fix, which they lose by
+  uninstalling anyway. **Net harm ≈ one log line.**
+- **We REPLACE a vanilla body** → our version is what got serialised, so when it
+  errors after uninstall **vanilla's behaviour is gone too**. The player ends up
+  **worse than if they had never installed the pack.**
+
+> ⚠️ **This tiering is REASONED from the measured mechanism, not itself
+> measured.** Only two sites have ever been observed leaking
+> (`Fix_MeteorFrequency`, `Opt_DroneOverhaul`). If Tier 3's residual is ever
+> challenged, the control is one PT-20-method leg against a single own-thread
+> module: block it, save, uninstall, load, count errors. The owner accepted the
+> residual without requiring that leg.
+
+### 6.2 What gets built
+
+**Tier 1 — uninstall leaves the player worse than vanilla. Build first.**
+
+| module | harm | route |
+|---|---|---|
+| `Fix_MeteorFrequency` | **MEASURED** — colony's meteors stop permanently, no self-heal | Layer 3: wrap `GetDisasterWarningTime`, keyed on `CurrentThread()`; delete the body; split the PT-01 watchdog onto `Msg("MeteorDone")` |
+| `Fix_RainsDeadlock` | ⚠️ **Same shape, not previously called out** — we replace the *global* `RainsDisasterLoop`, so its death stops that rain type for the save | Layer 2: wrap `RainsDisasterActivation` to post `RainDisasterEnd` on the collision early-return. **Vanilla's loop is left alone** |
+
+**Tier 2 — a unit's command thread dies; recoverable but noisy.**
+
+| module | route |
+|---|---|
+| `Fix_DroneUnreachableForever` | Layer 3 — patch the **consumer** `Drone:CleanUnreachables` (sync); stop replacing `ApproachWrapper` |
+| `Fix_TrainWaitTime` | Layer 3 — restamp from a wrapper on the sync `TransportStatistics:AddSpentTime`; stop replacing `BoardVehicle` |
+| `Fix_ArrivalDeaths` | Layer 3 for **half (b)** via `ChooseDome` / `GetDomesReachableByColonists`. ⚠️ **Half (a) — the raw `SetPos` with no passability search — has NO route yet and needs a design pass before this module is finished** |
+| `Opt_DroneOverhaul` | Layer 2 — move moonlighting out of the command body. ⛔ **DRONE-OWNED: blocked until the owner grants the carve-out** |
+
+### 6.3 What is deliberately NOT built
+
+**Tier 3 — accepted residual, by owner decision.** `Fix_MeteorStormWedge`,
+`Fix_CrystalMysteryHang`, `Fix_ExtenderFlapChurn`, `Fix_TrackConnectorPingPong`.
+Each owns its thread, so nothing vanilla is lost; each would cost **one error
+line**, not the 98/session `Opt_DroneOverhaul` produced (that figure came from
+*many* drone command threads, one per drone). None has a layer-3 route.
+
+`Fix_BombardmentSpread` is also **not built**: it has **no layer-3 route at all**
+(the defect is a discarded local mid-function with no seam), bombardments are a
+rare Mystery-7 event, and the damage is one broken volley.
+
+⛔ **LAYER 1 IS NOT TO BE BUILT.** The owner declined it explicitly. Its own spec
+calls it the most dangerous layer, and the autosave-restart trap could recreate
+PT-01's permanent-silence signature out of our own code. **Do not propose it
+again without new evidence that Tier 3 causes real harm.**
+
+### 6.4 Sequencing
+
+1. Tier 1 (`MeteorFrequency`, then `RainsDeadlock`).
+2. Tier 2, `Opt_DroneOverhaul` only if the carve-out is granted.
+3. **Then** the six wrapper conversions of §5.4 group A, as **one batch with a
+   single A/B leg** — deliberately after, so the F86 legs stay clean of
+   unrelated change.
+4. **D10 and D12 remain HELD until these repairs land and verify** — the owner
+   confirmed the hold means *until built*, not *until the rules were written*.
+
+## 7. What is NOT proposed
 
 - **No cleanup mod.** Parked (`FUTURE_IDEAS.md` entry 5). The remedy for damage
   already in a player's save is measured and simple: **reinstalling the pack

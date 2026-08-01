@@ -63,9 +63,10 @@ sitting there is serialised by value and comes back with an empty `_ENV`.
   2. **The layer-3 sweep was AUTHORISED at FULL scope** and ✅ **is COMPLETE —
      both halves** (`SAVE_SAFETY_REDESIGN.md` §5). See board item 6. Nothing
      further is owed on it.
-  3. **F02 is HELD until the sweep reports — do NOT touch
-     `Fix_MeteorFrequency`.** The owner declined to take it module-by-module.
-  4. **D10 and D12 are sequenced BEHIND the rules** (see the board).
+  3. ✅ **F02's hold is LIFTED (2026-07-31)** — `Fix_MeteorFrequency` leads the
+     authorised build; it is the only site with *measured* permanent harm.
+  4. **D10 and D12 stay HELD until these repairs LAND and verify** — the owner
+     confirmed the hold means *until built*, not *until the rules were written*.
   ⚠️ When F02 is unheld, the wrapper keys on **`CurrentThread()`**, not the
   meteor descriptor — both `Meteors.lua:279` and the **`MeteorStorm`** thread at
   `:326` pass the same descriptor, so descriptor-keying would fire the storm
@@ -169,10 +170,10 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
 
 ## ▶️ The board — user picks
 
-> Playtests are the default work. ⛔ **The two approved builds (D10, D12) are on
-> a HOLD as of 2026-07-31 — the owner sequenced them behind the F86 save-safety
-> rules.** Do not start either, and do not ask again per-sitting: the answer is
-> recorded. **Item 6, the layer-3 sweep, is the authorised non-playtest work.**
+> ⭐ **Item 6 — the F86 save-safety build — is the authorised work right now.**
+> Playtests remain available. ⛔ **D10 and D12 stay on HOLD until those repairs
+> land and verify**; do not start either and do not re-ask per sitting, the
+> answer is recorded.
 
 1. **PT-53 Trigger E** — the last thing between D07 and `tested`.
 2. **PT-54** — wave-6 disaster fixes. ⚠️ **The "live 194-sol save" named in the
@@ -186,7 +187,21 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
    (one fresh 10-minute save covers both).
 5. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
    **PT-21/22** last.
-6. **⭐ F86 — THE SWEEP HAS REPORTED; the owner now picks what gets built.**
+6. **⭐ F86 — THE BUILD IS AUTHORISED. THIS IS THE WORK.** Scope in
+   `SAVE_SAFETY_REDESIGN.md` **§6**; read it before writing a line.
+   **Tier 1 first:** `Fix_MeteorFrequency` (layer 3, thread-keyed
+   `GetDisasterWarningTime`; delete the body; split the PT-01 watchdog onto
+   `Msg("MeteorDone")`) and `Fix_RainsDeadlock` (layer 2, wrap
+   `RainsDisasterActivation`; leave vanilla's loop alone). **Then Tier 2:**
+   `Fix_DroneUnreachableForever` (layer 3 — patch the *consumer*
+   `CleanUnreachables`), `Fix_TrainWaitTime` (layer 3 via the sync
+   `AddSpentTime`), `Fix_ArrivalDeaths` half (b) via `ChooseDome`.
+   ⛔ **`Opt_DroneOverhaul` is in scope but BLOCKED on the drone carve-out.**
+   ⛔ **LAYER 1 IS NOT TO BE BUILT** — the four own-thread modules and
+   `BombardmentSpread` are an accepted residual; do not re-propose it.
+   ⚠️ **`Fix_ArrivalDeaths` half (a) (the raw `SetPos`) has NO route yet** — it
+   needs a design pass, not a guess.
+   *(Superseded framing: the sweep reported and the owner has since picked.)*
    Result in `SAVE_SAFETY_REDESIGN.md` §5. **Five of the twelve exposed modules
    have a layer-3 or layer-2 route out** — `MeteorFrequency`,
    `DroneUnreachableForever`, `TrainWaitTime` and `RainsDeadlock` fully,
@@ -202,13 +217,15 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
    call position and touches no drone design, so it should be carved out of the
    drone scope fence rather than waiting on the D06 decision — **owner to
    confirm the carve-out.**
-7. ⏸️ **D10 — workshops module BUILD. NOT YET — sequenced behind the save-safety
-   rules** (owner, 2026-07-31). Speced, user-approved, game-free, un-gated by
+7. ⏸️ **D10 — workshops module BUILD. NOT YET — held until the F86 repairs LAND
+   AND VERIFY** (owner, 2026-07-31; re-confirmed that the gate is the *build*,
+   not the written rules). Speced, user-approved, game-free, un-gated by
    PT-56, and otherwise ready: T1 text repairs + T2 capacity dial
    (base/+50%/+100%, `max_workers` AND `consumption_amount` **PAIRED**), adding
    PT-57 (~7 min) at build time. Full spec on the D10 BUGS entry. **Do not start
    it** — it touches colonist assignment, which is command-thread territory.
-8. ⏸️ **D12 — no-homeless dome policy. NOT YET — same sequencing hold.** DECIDED
+8. ⏸️ **D12 — no-homeless dome policy. NOT YET — same hold, same gate (the F86
+   repairs must land and verify first).** DECIDED
    and speced. Its own module; `Opt_ResidencyControl` as donor pattern ONLY.
    **Hard constraint:** the new flag must NOT route through
    `CanAcceptNewColonists` (D03's gate) or it blocks the cohort delivery it

@@ -110,6 +110,26 @@ with **PHASE 4 COMPLETE** (below).
 >   `DroneApproach` call blocks, and runs mod code after it, the same layer-2
 >   violation measured in `Opt_DroneOverhaul`. An earlier "no 13th site"
 >   certification is **withdrawn**. Detail: `SAVE_SAFETY_REDESIGN.md` §4a.
+> ⭐ **THE BUILD IS AUTHORISED (owner, 2026-07-31) — scope in
+> `SAVE_SAFETY_REDESIGN.md` §6. Tiers 1 and 2; ⛔ LAYER 1 IS NOT TO BE BUILT.**
+> The scope follows a severity tiering: exposure matters most where we
+> **replaced a vanilla body**, because then uninstall leaves the player *worse
+> than never installing* — as opposed to modules that **own their thread**, where
+> the only cost is one log line for a fix the player just removed.
+> - **Tier 1 (build first)** — `Fix_MeteorFrequency` (**measured**: meteors stop
+>   permanently) and `Fix_RainsDeadlock` (**same shape, not previously called
+>   out**: we replace the *global* `RainsDisasterLoop`).
+> - **Tier 2** — `Fix_DroneUnreachableForever`, `Fix_TrainWaitTime`,
+>   `Fix_ArrivalDeaths` half (b); plus `Opt_DroneOverhaul` ⛔ **blocked on the
+>   drone carve-out**.
+> - **NOT built** — the four own-thread modules and `Fix_BombardmentSpread`
+>   (which has no layer-3 route at all). Accepted residual.
+> - **⚠️ `Fix_ArrivalDeaths` half (a)** — the raw `SetPos` with no passability
+>   search — **has no route yet** and needs a design pass.
+> - **F02's hold is LIFTED**; D10/D12 stay held **until these repairs land**.
+> - ⚠️ The tiering is **reasoned from the measured mechanism, not measured**.
+>   The control, if ever wanted, is one PT-20-method leg against an own-thread
+>   module.
 > - ✅ **Remedy measured:** reinstalling the pack DOES revive a killed thread
 >   (`IsValidThread(Meteors)` → `true`, restarted by our own `LoadGame`). The
 >   answer for an affected player is "put the mod back" — real, and uncomfortable.
