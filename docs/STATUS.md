@@ -178,6 +178,45 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 >   **Counts re-derived from the files, not inherited:** 100 index rows
 >   (88 F + 12 D) — the 2026-07-31 "98" had gone stale within its own day.
 
+> 🔨 **F86 TIER 1 IS BUILT (2026-08-01, chain prompt 4) — ALL FOUR BUILD UNITS
+> LANDED; THE FIVE LEGS ARE THE VERIFICATION AND HAVE NOT RUN YET.** Nothing
+> below may be called repaired/fixed/tested until the legs read their numbers
+> (owner at the keyboard, one game sitting; leg definitions in
+> `F86_TIER1_BUILD_PROMPT.md` until it is consumed, then the outbox of chain
+> prompt 4). What shipped:
+> - **`Fix_MeteorFrequency` REWRITTEN (§6.2a-A):** layer-3 keyed
+>   `GetDisasterWarningTime` wrapper over VANILLA's thread body; the body copy
+>   and its heartbeat surface are deleted; the per-load restart (F88's defect)
+>   replaced by a one-shot version-latched heal (`SMRFixPack_MeteorLatch`
+>   GameVar + new core helper `SMRFixPack.PackVersion()`); watchdog liveness
+>   moved onto an additive `OnMsg.MeteorDone` timestamp, threshold/ladder/
+>   guards unchanged, restarts recreate vanilla's body.
+> - **`Fix_RainsDeadlock` REWRITTEN (§6.2a-B):** the bounded-loop copy is
+>   deleted; a layer-2 wrapper on `RainsDisasterActivation` mirrors the
+>   collision test BEFORE the call and posts `Msg("RainDisasterEnd")` on the
+>   early-return; the version-stamped PostLoadGame migration pass
+>   (`SMRFixPack.MigrateRainsState`, `SMRFixPack_loop_version`, id-less
+>   entries resolved by unique type) moves every persisted loop onto vanilla's
+>   body and **carries the C34 rider** (structure → stale-ACTIVE
+>   `FinishRainProcedure` heal → migration; manual fallback for invalid
+>   `g_RainDisaster`).
+> - **`Fix_DisasterPredictionLeak` rider (§6.2a-C):** the stranded-flag sweep
+>   also runs on `OnMsg.NewDay` (the taken mid-session reconcile) — Tier-1 leg
+>   4's A/B triggers test it in their changed shape.
+> - **`SMRFixPack.StormWedgeHeal` REORDERED (§6.2a-D):** orphan gate at body
+>   start and after every Sleep, vanilla-state resets before any mod-name
+>   touch, logging last — the pack's one mod-owned GT thread in Tier-1 scope
+>   is now §3a gate-compliant.
+> - **TestKit probes realigned, count stays 78:** the F02 probe drives the
+>   keyed wrapper + `wd.last_seen` watchdog (heartbeat surface is gone); the
+>   RainsDeadlock probe drives the collision Msg, the version-stamped
+>   migration (incl. the id-less `test 2i` shape) and the C34 heal;
+>   FixtureCarry's version-lock warning is RESOLVED (the migration is
+>   version-stamped) and `SMRFixPack_MeteorLatch` joins its GameVar list.
+> - **Tier 2 still owes** (chain prompt 5): `DroneUnreachableForever`,
+>   `TrainWaitTime`, `ArrivalDeaths` (b) + the (a) design pass, and the
+>   D10/D12 unhold record. The §5.4-A conversions are chain prompt 8.
+
 > ✅ **F86 PHASE 0 IS DONE (2026-08-01, owner at the keyboard, one sitting) —
 > the two engine measurements that gated the Tier-1 designs are MEASURED, and
 > both came back the permissive way.** Log
