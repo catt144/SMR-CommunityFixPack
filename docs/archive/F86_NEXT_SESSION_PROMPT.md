@@ -1,4 +1,9 @@
-# One-off prompt — F86 Phase 0+1: the two measurements, then the Tier-1 spec
+# [ARCHIVED 2026-08-01 — DO NOT RUN] One-off prompt — F86 Phase 0+1
+
+> ⛔ **SUPERSEDED, never executed.** Split into the project chain's prompts
+> `2_f86_phase0_measurements_opus.md` + `3_f86_phase1_tier1_spec_fable.md`
+> (`docs/prompts/project/`), with the bug-list audit's C34 rains rider added
+> to the Phase-1 half. Run those, in chain order. Kept for the record only.
 
 **Paste everything below into a fresh session. One-off: this file is DELETED
 by the session that completes it** (WORKFLOW brief rule 6). Model-neutral.

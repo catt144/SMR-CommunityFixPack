@@ -6118,7 +6118,11 @@ quotes verbatim; sources in the audit report §8.
   and re-bases live Saints. *(fredware "Bug Fixes" was removed from the
   Workshop ~a day after upload, reason unstated — but the owner's
   subscription delivered the FPK and the full 22-file source was extracted
-  and read 2026-08-01; these entries now cite held source, not a dead page.)*
+  and read 2026-08-01; these entries now cite held source, not a dead page.
+  **All six mod FPKs — fredware's included, otherwise unrecoverable — are
+  archived at `C:\Dev\workshop_fpk_archive\` (local, not in git; extract with
+  `tools/flpk_extract.py`), so the workshop subscriptions are no longer
+  needed.**)*
 - **C23 [VERIFIED 2026-08-01] — dust devils: three scheduler defects in
   `DustDevils.lua`.** (1) The natural scheduler misuses `spawn_chance` as a
   count multiplier — `:216 Random(count_min,count_max) * spawn_chance / 100`

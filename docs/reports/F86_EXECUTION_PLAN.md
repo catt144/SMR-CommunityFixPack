@@ -15,7 +15,10 @@ settled. Nothing below is a reading task except where explicitly marked.
 
 ## Phase 0 — the measurement session (GAME session, owner at the keyboard, ~30 min)
 
-The one thing gating Tier-1 design choices. Prompt: `F86_NEXT_SESSION_PROMPT.md`.
+The one thing gating Tier-1 design choices. Prompt: **superseded 2026-08-01 —
+Phases 0-4 now run as the numbered chain in `docs/prompts/project/` (prompts
+2-5 and 8); the original `F86_NEXT_SESSION_PROMPT.md` is archived, split into
+chain prompts 2+3 with the audit's C34 rider added to Phase 1.**
 
 1. **GT-creation-ordering probe.** Two console lines: create a GT thread whose
    body `ModLog`s, `ModLog` immediately after the create call, `FlushLogFile()`,

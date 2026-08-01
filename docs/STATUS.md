@@ -1,5 +1,21 @@
 # Project Status — read this first in a new session
 
+> 🔗 **THE PROJECT PROMPT CHAIN (2026-08-01, owner direction) —
+> `docs/prompts/project/`.** All pending project work between the bug-list
+> audit and the F86 adjudication now runs as a numbered, self-consuming
+> prompt chain (13 prompts, model routing in the filenames, mechanics in the
+> folder's README): harness gate → playtest reorg → F86 Phases 0-4 → audit
+> candidate sweeps/decisions → D10 → D12 → F76 → final backward QA. **Run in
+> filename order; each prompt hands notes forward and deletes itself; when
+> the folder is empty the owner is free for the playtest campaign.**
+> `FABLE_NEXT_PROMPT.md` was rewritten the same day as a PURE playtest-standby
+> prompt and no longer carries the board — chain-owned work found in a
+> playtest session is routed to the chain, never started there. The spent
+> `F86_NEXT_SESSION_PROMPT.md` and `F86_ADJUDICATION_FOLLOWUP.md` are
+> archived. All six research-mod FPKs (incl. the removed fredware mod) are
+> archived at `C:\Dev\workshop_fpk_archive\` — workshop subscriptions are no
+> longer needed for any planned work.
+
 Rewritten in place every session (structure since 2026-07-29, audit
 remediation 3.3). Session legs are append-only in
 `docs/archive/SESSION_LOG.md` (newest first); engine facts live in
@@ -121,7 +137,9 @@ with **PHASE 4 COMPLETE** (below).
 > `Fix_CaveInsNoDisasters`); F02's hold is LIFTED and the build is authorised
 > (Tiers 1+2, layer 1 gated); the sweep is DONE; **F88 filed** (the per-load
 > restart). **Plan of record: `F86_EXECUTION_PLAN.md`; next session:
-> `F86_NEXT_SESSION_PROMPT.md` (two measurements, then the Tier-1 spec).**
+> ~~`F86_NEXT_SESSION_PROMPT.md`~~ **→ since 2026-08-01 the numbered chain in
+> `docs/prompts/project/` (prompts 2-3 carry the split + the audit's C34
+> rider; the original is archived).**
 > Owner directives of the evening: orphan-gate rule (FIX_POLICY §3a), latched
 > heal, and the **prelaunch save-exit deliverables** (uninstall procedure +
 > standalone cleaner — WORKFLOW release gates).
