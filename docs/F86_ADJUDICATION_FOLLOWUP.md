@@ -1,11 +1,21 @@
 # F86 — second-round questions for the adjudicator
 
-> ⛔ **DO NOT READ THIS UNTIL YOU HAVE DELIVERED `docs\F86_ADJUDICATION.md`.**
-> It is withheld deliberately. These questions come from the discovery session
-> and the owner, and several of them point at specific answers — reading them
-> first would contaminate a verdict that is supposed to be independent. If you
-> have not yet written your verdict, stop and go back to
-> `docs\F86_ADJUDICATION_PROMPT.md`.
+> ✅ **ROUND TWO — released 2026-07-31 after `docs\F86_ADJUDICATION.md` was
+> delivered.** This file was withheld until then on purpose: several items point
+> at specific answers, and reading it earlier would have contaminated a verdict
+> that had to be independent.
+>
+> **Your verdict is strong and it is not being re-litigated.** Three findings in
+> it were reached by neither position document — route (b) capture via
+> `Fix_CaveInsNoDisasters` (§3.1), the `BombardEnd`/Mystery-7 correction (§3.2),
+> and the GT-creation-ordering gate (§4.1) — and §3.1 correctly falsifies the
+> discovery session's central claim. §5.4's "who is waiting on the promise this
+> frame was keeping" is a better test than the tiering it replaces.
+>
+> ⚠️ **But one assumption runs through §2.9, §2.11 and §5.2, and it has now been
+> MEASURED FALSE. See item 6(a) — it is no longer a question.** Item 6(b) you
+> found independently and stated better than we did; it is kept only for the
+> record.
 
 **Purpose.** A second round, raised while you were working. Answer each on its
 merits, and **amend your verdict if any of them changes it** — say so explicitly
@@ -107,38 +117,70 @@ objection largely dissolves.
 the bar be *"not yet, and here is the gate"* rather than *"not ever"*? What is the
 gate?
 
-## 6. Two things neither document tested, both cheap, both load-bearing
+## 6. The orphan-environment question — now MEASURED, and it contradicts §2.9 / §2.11 / §5.2
 
-**(a) Do VANILLA globals resolve inside an orphaned mod function?**
-We know mod globals do not — that is what killed both measured leak sites
-(`SMRFixPack` → nil). But `ENGINE_FACTS` records an orphan that *kept working
-with zero errors*, which implies vanilla names still resolve through the
-substituted fallback env. **Both readings are live and they invert the harm
-model:**
+**(a) Do VANILLA globals resolve inside an orphaned mod function? YES. MEASURED
+2026-07-31 21.23, with a clean control.**
 
-- **They resolve** → an orphaned `Fix_RainsDeadlock` loop does not die. It runs
-  our replacement logic **forever, silently, in a save that is supposed to be
-  vanilla.** Worse than the loud failure, and it makes the severity tiering's
-  "net harm ≈ one log line" optimistic.
-- **They do not resolve** → orphans die at their first vanilla call, and the
-  tiering is roughly right.
+A purpose-built Test Kit probe (`SMR-BugFixPack-TestKit/Code/99_OrphanEnvProbe.lua`)
+registered a thread through `GlobalGameTimeThread` — the exact mechanism measured
+leaking — parked it in a `Sleep`, saved, and the Test Kit was then disabled. Log
+`Mars.exe-20260731-21.23.19`:
 
-Cheap to settle: one orphaned thread, one wake, one log read. **Neither document
-flags it.**
+```
+:266  Loaded mod items for: SMR_CommunityFixPack          <- Test Kit code ABSENT
+:289  Unpersist missing permanent: Mod/SMR_CommunityFixPackTestKit
+                                   | Fallback permanent: table: … [7]
+:311  [LUA ERROR] SMRTEST-ORPHANENV RESOLVED — vanilla globals reachable in an
+      orphan, GameTime=98125338       (Locals: now | number 98125338)
+```
 
-**(b) The discovery session's filter is incomplete, by its own author's later
-admission.** `F86_DISCOVERY_POSITION` §3 states the test as *"can it be blocked
-below a yield on a game-time thread"* and concludes synchronous code can never be
-captured. **There are two routes into a save, not one:** a function on a blocked
-thread stack, **and** a function stored on a persisted object — which is the
-original `GetPriorityForRequest` finding this entire line of work started from. A
-perfectly synchronous function assigned onto a persisted instance *is* captured.
-The audit's `= function` enumeration covered that route, so the practical
-exposure list may be unaffected — but the filter as written drops it, and anyone
-applying it as the sole test would miss that class.
+The env permanent failed to resolve, the fallback was substituted — the exact F86
+condition — and the orphan **still called the vanilla global `GameTime()` and got
+a real value.**
 
-**Question.** Does the two-route correction change the exposure list, and should
-`FIX_POLICY.md` §3a state both routes?
+**The mechanism is therefore narrower than "the environment is gutted": the
+fallback still reaches the real game globals. An orphan loses ONLY the names its
+own mod created.** `SMRFixPack` reads nil after uninstall because the mod that
+creates it never loaded — not because the environment was replaced.
+
+**What this falsifies in your verdict:**
+
+- **§2.9** — *"the orphaned `fixed_loop` dies at its first global lookup
+  (`Sleep`) after uninstall — that rain type is then gone for the save"*.
+  `fixed_loop` references **no mod-created name** (`Sleep`, `AsyncRand`,
+  `CreateGameTimeThread`, `RainsDisasterActivation`, `WaitMsg`, `const` are all
+  vanilla). It does not die. It runs our replacement loop **forever**.
+- **§5.2** — the harm statement inverts. A player who uninstalls does not "lose
+  rain types"; they **keep our rain loop permanently**, in a save they believe is
+  vanilla, with nothing to tell them.
+- **§2.11** — *"Each orphaned thread errors at its first post-resume global
+  lookup and dies"* is the same assumption applied to all four own-thread
+  modules, and it is what upgraded the Tier-3 "one log line" claim from REASONED
+  to source-verified. A first pass suggests it holds for
+  `Fix_MeteorStormWedge` and `Fix_TrackConnectorPingPong` (both reference
+  `SMRFixPack.*`) but **not** for `Fix_CrystalMysteryHang` or
+  `Fix_ExtenderFlapChurn`, whose bodies look pure-vanilla. **Please verify per
+  module rather than trusting that pass** — it was a crude extraction.
+- **Labelling.** §2.9 carries **RE-VERIFIED**, but "the orphan dies at `Sleep`"
+  is not source-verifiable — it is an inference about environment behaviour that
+  only a measurement can settle. The document's worth rests on those labels, so
+  this one wants correcting alongside the finding.
+
+It also retroactively explains the original `GetPriorityForRequest` orphan that
+"kept working with zero errors": same mechanism, not an anomaly.
+
+**Questions.** Which Tier-1/Tier-3 conclusions move? Does the corrected capture
+rule in §5.1 need a fourth clause about what an orphan can still *reach* (as
+opposed to how it got captured)? And does "runs our logic forever, silently"
+change the `BombardmentSpread` D3 recommendation or the tiering's ADD side?
+
+**(b) The two-route point — you got there first, and stated it better.**
+Kept only for the record: this item originally asked whether the discovery
+session's filter was incomplete because it omitted the storage route. Your §3.1
+found that **and** route (b) — capture via a live local/upvalue in an engine
+frame — which neither position document had, and §5.1's value-reachability rule
+is the correct durable statement. Nothing owed here.
 
 ---
 
