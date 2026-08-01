@@ -57,7 +57,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F39 | Second Artificial Sun ignored by solar panels            | P2  | high | folded into D04 2026-07-27 — PT-50 PASS (entry) |
 | F40 | Dust Sickness infects Biorobots (androids)               | P2  | high | fixed  |
 | F41 | Gene Forging tech has no effect                          | P2  | high | tested 2026-07-29 — PT-29 |
-| F42 | Buildings placeable on active dust devils                | P3  | high | blocked|
+| F42 | Buildings placeable on active dust devils                | P3  | high | wontfix — user decision 2026-07-25 (index row corrected 2026-08-01; it had gone stale as `blocked`) |
 | F43 | Layout construction bypasses tech locks                  | P3  | high | fixed  |
 | F44 | One-hex track salvage can delete the entire track        | P1  | high | tested |
 | F45 | Damaged tracks can't be salvaged at all (sort crash)     | P1  | high | tested |
@@ -127,6 +127,26 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C09 | Deterministic freeze near 90% breathable atmosphere      | ?   | cand | investigate (HIGH) |
 | C10 | Last War mystery freezes at 54%; permanently blocks ALL imports | ? | cand | investigate (HIGH) |
 | C11 | Game stops saving entirely (auto + manual)               | ?   | cand | needs a player log/save (HIGH) |
+| C12 | Support Struts ignore Easy Maintenance game rule         | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
+| C13 | Three FollowUp storybits mis-categorized, never fire     | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
+| C14 | Fhtagn! option 2 cowards ALL colonists, not religious    | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
+| C15 | Dust Sickness: Deaths morale penalty never applied       | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
+| C16 | Flying drones malfunctioning mid-air stuck "flying"      | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
+| C17 | The Man From Mars follow-up rewards nothing              | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
+| C18 | XenoExtraction tech skips now-native ex-DLC extractors   | ?   | cand | investigate — INTENT QUESTION (no promise broken) |
+| C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | cand | investigate — F52/F53-adjacent |
+| C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | investigate (ChoGGi prior art) |
+| C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | investigate (ChoGGi prior art) |
+| C22 | Saint Blessing morale stacking not applied               | ?   | cand | investigate (fredware prior art, Relaunched) |
+| C23 | Dust devils keep spawning after terraforming ends storms | ?   | cand | investigate (fredware prior art, Relaunched) |
+| C24 | Ordinary rockets misclassified as asteroid landers       | ?   | cand | investigate (fredware prior art, Relaunched) |
+| C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | investigate (fredware prior art + old RESEARCH lead) |
+| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | investigate (SkiRich prior art, OG) |
+| C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | cand | investigate (SkiRich prior art, OG) |
+| C28 | Transport Optimization tech never applied to RC Transport| ?   | cand | investigate (SkiRich prior art, OG) |
+| C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
+| C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
+| C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | investigate (GromGor prior art — OUR pinned build) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -5949,12 +5969,20 @@ F-row. Provenance and the fuller lead lists live in
 - **C04 — Surface dust storms damage underground pipes.** Cross-map disaster
   leak: a surface disaster's damage pass reaching objects on the underground
   map. Sweep the dust-storm damage iteration for a map filter.
+  **Witness upgrade 2026-08-01 (bug-list audit): an independent Relaunched fix
+  exists** — GromGor's "No Underground supply grid breaks" (workshop
+  3730839706): *"It's very strange to experience supply grid breaks
+  underground during dust storms on the surface. This mod fixes it."* The lead
+  is confirmed real; his source is not public (subscribe to compare).
 - **C05 — Colonists repeatedly visit already-satisfied interest buildings.**
   ChoGGi fixed this class in the original game — check whether the interest-
   satisfaction check survived into Relaunched.
 - **C06 — Colonist assigned to multiple workplaces simultaneously.**
   Tremualin's original-game fix is prior art; sweep the workplace-assignment
   transaction for a missing un-assign.
+  **Witness upgrade 2026-08-01 (bug-list audit):** the fix is confirmed to
+  exist in Tremualin's Library (workshop 2588520023, upd 2025-06-09, GitHub
+  MIT): *"Fixed a bug where colonists would end up with multiple workplaces."*
 - **C07 — Manual workplace assignment immediately discarded.** The
   auto-assignment pass may not respect a fresh `user_forced_workplace`; same
   family as the F61 forced-residence precedence work.
@@ -5972,6 +6000,111 @@ F-row. Provenance and the fuller lead lists live in
   of a Lua error during savegame persistence (one unpersistable object aborts
   the save). Cross-check against the pack's corruption-leaving families (F03,
   F30, F45); needs a player log/save to pin.
+
+### C12–C31 — gaps filed by the external-witness audit (2026-08-01, `docs/reports/BUG_LIST_AUDIT.md` §5)
+
+Bugs that verified fix authors fixed and we do not track. **[VERIFIED]** = the
+audit read the Relaunched Src lines itself; **[author]** = fix-author witness
+only, our Src check still owed. None is a fix commitment — each needs the
+FIX_POLICY §4 intent/reachability pass before any code is written. Author
+quotes verbatim; sources in the audit report §8.
+
+- **C12 [VERIFIED] — Support Struts ignore Easy Maintenance.**
+  `Lua\Buildings\SupportStruts.lua:17-22`: `AccumulateMaintenancePoints`
+  overrides straight to `SetMalfunction()` with no
+  `IsGameRuleActive("EasyMaintenance")` branch (the rule's soften path exists
+  for other buildings). ChoGGi (OG): *"Devs didn't check for EasyMaintenance
+  when overriding AccumulateMaintenancePoints for picard"* — body verified
+  byte-identical in Relaunched.
+- **C13 [VERIFIED] — three FollowUp storybits mis-categorized.**
+  `Data\StoryBit\FreeWill_2.lua:4,8` (`Category = "TechResearched"`,
+  `Enabled = true`) and `SurveyOffer_TechEffect.lua:4,18` same;
+  `Cure4Cancer_RareOutcome.lua:4` same category, **no `Enabled` line** (chain
+  behavior needs one more check). ChoGGi (OG): *"The bit is in the
+  TechResearched category instead of the FollowUp, so it never shows up."*
+- **C14 [VERIFIED] — Fhtagn! Fhtagn! option 2 cowards every colonist.**
+  `Data\StoryBit\FhtagnFhtagn.lua:66-82`: outcome text promises *"all
+  Religious Colonists become Cowards"*; the `ForEachExecuteEffects` over
+  `Colonist` has **no Filters**, while the sibling outcome at :45-65 filters
+  correctly (`HasTrait Child, Negate`). Sibling-contradiction tell.
+- **C15 [VERIFIED] — Dust Sickness: Deaths advertises a morale penalty it
+  never applies.** `Data\StoryBit\DustSickness_Deaths.lua`: declares
+  `morale_penalty`/`lower_morale_penalty`/duration params and both texts
+  promise the loss; the file contains **zero** `StoryBitOutcome`/`ModifyObject`
+  effects. Same Dust-in-the-Wind gate as F17/F40.
+- **C16 [VERIFIED] — flying drones malfunctioning mid-air stay "flying".**
+  `Lua\Units\FlyingDrone.lua:141-154`: `Malfunction`/`Freeze`/`NoBattery` are
+  `assert(self:IsLanded())` + parent call (asserts strip in retail builds);
+  `Dead()` at :156-159 lands first. ChoGGi (OG): *"Flying drones that
+  malfunction mid-air are stuck 'flying'."* Sibling-contradiction tell.
+- **C17 [VERIFIED] — The Man From Mars follow-up rewards nothing.**
+  `Data\StoryBit\TheManFromMars_FollowUp4.lua`: replies carry "all
+  Nerd/Hippie Colonists gain Morale" texts; the file has **zero**
+  `StoryBitOutcome`/`ActivationEffects` — and remaster QA stamps (2024-11,
+  2025-04) show it was touched without repair. ChoGGi (OG): *"None of the
+  options reward anything."*
+- **C18 [author→Src-pointed] — XenoExtraction skips the now-native ex-DLC
+  extractors.** `Data\TechPreset.lua:2568-2598`: four `Effect_ModifyLabel`
+  entries (Water/Metals/PreciousMetals/Regolith) — the description names
+  exactly those four, so **no promise is broken**; ChoGGi extended it to
+  Automatic/Micro-G extractors + RC Harvester/Driller in OG. **Intent
+  question, not a defect claim** — §4-amendment bar: needs a positive intent
+  statement (does `AutomaticMetalsExtractor` carry the `MetalsExtractor`
+  label players would expect?) before anything is written.
+- **C19 [author→Src-pointed] — `AreDomesConnectedWithPassage` has no distance
+  term.** `Lua\Passage.lua:1109-1119` is pure network membership; ChoGGi's OG
+  fix added a `ColonistMaxDomeWalkDist` check. F52 fixed the ≤400m vacuum
+  walk; whether the *long-walk-through-network* class survives in Relaunched
+  is unswept. Interacts with F52/F53 — audit before touching.
+- **C20 [author] — Philosopher's Stone sector-scan count stalls while
+  paused.** ChoGGi (OG): *"The Philosopher's Stone doesn't update sector
+  scanned count when paused."* The `registers._sectors_scanned` machinery is
+  intact in Relaunched `Mystery 10.generated.lua`; pause behavior needs a
+  live check. Distinct from F06 (the CrystalFlyAway one-shot hang).
+- **C21 [author] — St. Elmo sinkholes destructible by meteors → mystery
+  soft-lock.** ChoGGi (OG): *"Stop meteoroids from destroying sinkholes and
+  soft locking the mystery."* Relaunched `Fireflies.lua:116` sets no
+  `indestructible`; whether the meteor damage path can still hit them is
+  unchecked. Distinct from F07/F15 (wisp math).
+- **C22 [author] — Saint Blessing morale stacking not applied.** fredware
+  (Relaunched, workshop 3775120166): *"Correctly applies each Saint's
+  stacking Morale bonus to Religious colonists in the same Dome."*
+- **C23 [author] — dust devils continue after terraforming disables dust
+  storms.** fredware: *"prevents new Dust Devils after terraforming disables
+  Dust Storms."*
+- **C24 [author] — ordinary rockets misclassified as asteroid landers.**
+  fredware: *"Prevents ordinary rockets from being incorrectly treated as
+  asteroid landers."* Possibly F72's neighborhood — audit relationship first.
+- **C25 [author] — Jumbo Cave reinforcements stuck on unreachable waste
+  rock.** fredware: *"Releases construction sites that become stuck because
+  of unreachable Waste Rock."* Confirms the old RESEARCH.md lead ("stuck at
+  'construction site is being cleared'").
+- **C26 [author] — malfunctioned buildings stuck in perpetual maintenance.**
+  SkiRich (OG, workshop 2433157820, 4,100 subs): *"buildings that are
+  malfunctioned and stuck in perpetual maintenance mode and nobody is willing
+  to fix them. Most people think its a drone issue. It is not, it is a repair
+  cycle issue with the building."* Relaunched-presence unswept.
+- **C27 [author] — Signal Boosters never extend Drone Hub Extender radius.**
+  SkiRich (OG, 2611877948): *"After researching Signal Boosters both the
+  Drone Hubs and Drone Hub Extenders are suppose to have an additional 15 hex
+  radius… the missing code… to make the Drone Hub Extenders have that extra
+  15 hexes."* F77's file neighborhood — check Relaunched.
+- **C28 [author] — Transport Optimization never applied to RC Transports.**
+  SkiRich (OG, 2609028695): *"the missing code that is required to make the
+  RC Transport obey the Tech upgrade Transport Optimization… should be able
+  to carry 45 of every resource."*
+- **C29 [author] — children-only buildings admit all age groups.** SkiRich
+  (OG, 2428123536): *"the missing code that is required to make Child Only
+  Buildings, such as the Nuseries, omit any other age group."*
+- **C30 [author] — supply-pod reward pins stuck on HUD.** SkiRich (OG,
+  2636538587): *"Fixes an issue with vanilla code that causes supply pod pins
+  to get stuck on the HUD."*
+- **C31 [author] — meteor storms broken in 1.0.7.396349 — OUR PINNED
+  BUILD.** GromGor (Relaunched, workshop 3745475097): *"The latest update
+  broke the meteor storm mechanics in a strange way. I don't know the exact
+  cause of this issue, but I think I've found a temporary solution."* No
+  public source; mechanism unknown — possible relative of F02/F78. Subscribe
+  to compare (owner action in the audit report §7.1).
 
 ## Not yet swept (follow-up targets)
 

@@ -20,7 +20,9 @@ toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
 **98 rows** (87 `F` + 11 `D`; recounted 2026-07-31 — the previous "93" had gone
-stale before F86/F87 were added). **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
+stale before F86/F87 were added), **plus 31 `C` candidate rows** (was 11 — the
+2026-08-01 bug-list audit filed C12–C31; C rows are leads, not defects, and are
+not counted in the 98). **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
 before that the F83 probe added `56_Probes_Wave7.lua`). Counts moved 2026-07-31
 with **PHASE 4 COMPLETE** (below).
 > ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
@@ -61,6 +63,25 @@ with **PHASE 4 COMPLETE** (below).
 > implementable after all. What survives is that no mod can run after its own
 > removal, so residue *already inside a player's saves* still needs someone else
 > to clean it.
+
+> ⭐ **2026-08-01 — THE BUG-LIST AUDIT RAN (`docs/reports/BUG_LIST_AUDIT.md`,
+> game-free, one-off prompt consumed).** Every shipped fix tiered against
+> external witnesses: **17 GOLD / 25 SILVER / 29 BRONZE / exactly 1 HOLD** —
+> the HOLD is the F49(a) R4 rider, not a module; **no default-on module lands
+> in HOLD**. Headlines: a native Relaunched fix-modding scene exists and
+> independently converges on F01/F04/F71/F74/F78/F81 (fredware's 13-fix "Bug
+> Fixes" created 2026-07-31, GromGor, Oxygenus); the Relaunched dev patch-note
+> thread witnesses the train/lander/homeless clusters wholesale; **20 gap
+> candidates filed as C12–C31** (6 VERIFIED against Src this audit — incl.
+> Fhtagn cowards-everyone and two storybits that promise rewards they never
+> apply); **`Lua.hpk` extraction: needed by ZERO entries — recommend not
+> building it**. Corrections en route: F42's stale index row fixed; F34's
+> claimed ChoGGi corroboration falls; F35's witness may out-scope the fix
+> (work item); F01's recorded forum-report claim is not re-derivable
+> (Paradox forum crawler-blocked). **Owner actions requested (audit §7.1):**
+> logged-in Paradox subforum check (F01/F64/F74 reports), Paradox Mods
+> browser check (console channel, matters for D13), consider subscribing to
+> GromGor's + fredware's mods for source comparison.
 
 > ⚖️ **F86 STATE AS OF 2026-07-31 EVENING — the block below is the original
 > filing and parts of it are SUPERSEDED. Current truth:** the design was
