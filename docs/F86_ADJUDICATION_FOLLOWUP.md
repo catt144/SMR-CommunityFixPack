@@ -252,11 +252,17 @@ Specifically worth looking for:
 - Do any carry an explicit save-safety convention we could adopt rather than
   derive?
 
+**Starting point, already available (owner):** ChoGGi's mods are **already
+subscribed on this machine**, so the hunt needs no subscription step — the Lua is
+readable now. If ChoGGi turns out to be a dead end, other established
+fix-focused authors exist and the owner will point at them; the release
+checklist already credits ChoGGi (Fix Bugs) and LukeH (Martian Express) as prior
+art. **Do not guess at author names** — ask.
+
 ⚠️ **Not researched — deliberately deferred, and NOT owed by this review.**
 Recorded here so it is not lost and not silently converted into work. The
 original's Lua is **packed** (`Packs/Lua.hpk`, no extractor in `tools/`), but
-this item does not need it: the mods themselves are readable Lua once
-subscribed.
+this item does not need it: the mods themselves are readable Lua on disk.
 
 ## 9. Two smaller items for the record
 
