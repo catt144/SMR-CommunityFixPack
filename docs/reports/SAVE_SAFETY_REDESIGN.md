@@ -546,10 +546,190 @@ something vanilla would otherwise keep running:
 
 **Tier 1 — uninstall leaves the player worse than vanilla. Build first.**
 
+> ℹ️ The table below is the AUTHORISATION record. **The build spec is §6.2a** —
+> the Phase-0 probe has since run (GT creation DEFERS), so the rains row's
+> "shape gated on the probe" caveat is resolved: the wrapper shape is final.
+
 | module | harm | route |
 |---|---|---|
 | `Fix_MeteorFrequency` | **MEASURED** — colony's meteors stop permanently, no self-heal | Layer 3: wrap `GetDisasterWarningTime`, keyed on `CurrentThread()`; delete the body; split the PT-01 watchdog onto `Msg("MeteorDone")` |
 | `Fix_RainsDeadlock` | ⚠️ ~~its death stops that rain type for the save~~ **CORRECTED (round 2, measured orphan behaviour): `fixed_loop` touches only vanilla names, so it does NOT die — an uninstalled player keeps our rains loop FOREVER, silently. The harm is save-integrity (pack code becomes unremovable), not lost rains** | Layer 2: wrap `RainsDisasterActivation` to post `RainDisasterEnd` on the collision early-return — ⚠️ **shape gated on the GT-creation-ordering probe** (if a new GT thread runs at creation, the Msg fires before the loop reaches `WaitMsg` and the wrapper does nothing — adjudication §4.1/§8). **Plus the MIGRATION PASS (owed, or the repair means nothing for existing saves): a `RefreshRainsLoops`-style swap of persisted loops onto VANILLA's `RainsDisasterLoop`, keyed on a VERSION-STAMPED marker (the shipped boolean now means "old fixed body"), and handling id-less entries the current pass skips (`Fix_RainsDeadlock.lua:88-91`; the `test 2i` fixture's `toxic` entry has `id=nil`)** |
+
+### 6.2a ⭐ THE FINAL TIER-1 SPEC (Phase 1, 2026-08-01 — this is what prompt 4 builds)
+
+**Inputs absorbed, all measured or owner-decided — the build session re-litigates
+none of them:** the Phase-0 GT-creation measurement (**DEFERS**, both forms —
+ENGINE_FACTS; adjudication §4.1 CLOSED), the audit's C34 packed-source findings
+(BUG_LIST_AUDIT §9; BUGS C34), the orphan-gate rule (FIX_POLICY §3a), and the
+owner's one-shot-latched-heal decision (`F86_EXECUTION_PLAN.md` §7 #2).
+
+#### A. `Fix_MeteorFrequency` — rewritten (retires F02's body copy; fixes F88; keeps PT-01 coverage)
+
+1. **The layer-3 wrapper.** Wrap the global `GetDisasterWarningTime`
+   (`MapSettings.lua:94-98`, synchronous). Keyed: when
+   `CurrentThread() == rawget(_G, "Meteors")` and a descriptor argument is
+   present, return `Max(orig(descr), descr.spawntime + descr.spawntime_random)`;
+   in every other case (including a falsy global) `return orig(...)` unchanged.
+   With `warning_time ≥` every possible roll, vanilla's
+   `Min(spawn_time, warning_time)` (`Meteors.lua:291-292`) equals `spawn_time`
+   and **vanilla's own body produces the designed 35–115 h schedule**.
+   - The defer-when-falsy branch is **defence in depth, not load-bearing**
+     (measured: under deferral `RestartGlobalGameTimeThread` assigns
+     `_G.Meteors` before the persisted body's first call — `_fixup.lua:21`).
+     Keep it; spend nothing else on it.
+   - Disclosed residual: with `warning_time > spawn_time` the dead `if` gains
+     `Sleep(5000)` ≈ 10 game minutes per cycle, plus the wrapper path's
+     `Sleep(Max(spawn-warning,1000))` floor of 1 s — negligible against 35–115 h;
+     state it in the module header.
+   - The `MeteorStorm` thread passes the **same descriptor** — the
+     `CurrentThread()` key is what keeps storm warning timing untouched
+     (§2 Layer 3 correction; a descriptor key is a barred balance change).
+2. **Delete the replacement body outright.** No `funcs.Meteors` install;
+   `GlobalGameTimeThreadFuncs.Meteors` stays vanilla's. The heartbeat surface
+   (`SMRFixPack.MeteorsBeat`/`MeteorsBeatSet`/`MeteorsNote`) goes with it.
+3. **The one-shot latched heal** (F88's fix; owner decision #2). A GameVar
+   latch — `GameVar("SMRFixPack_MeteorLatch", false)` — holding the last-healed
+   pack version. `OnMsg.PostLoadGame` (fix active): if latch ≠ current version →
+   `RestartGlobalGameTimeThread("Meteors")` once and stamp the latch. **Never
+   restart otherwise** — that per-load restart IS F88. One restart per save
+   lineage per version: clears persisted old bodies (vanilla-broken, our shipped
+   copy, or PT-01-wedged dead threads) onto vanilla's body + wrapper, and guards
+   the §2.5 upgrade path (a version bump re-heals once, cost one re-roll).
+   - Residual, disclosed: the latch GameVar stays in the save after uninstall as
+     **inert data** (prior art: GromGor's `MeteorsFixed` GameVar, C31).
+4. **The watchdog split** (`Msg("MeteorDone")` / `NewDay`, restarting
+   **vanilla's** body). Liveness input moves off the deleted heartbeats:
+   an additive `OnMsg.MeteorDone` handler stamps last-strike GameTime in
+   session-local `SMRFixPack` state; the `NewDay` check keeps its threshold
+   (`descr.spawntime + descr.spawntime_random + const.SensorTowerPredictionMaxTime
+   + const.DayDuration`), its 3-restart give-up ladder, and its designed-silence
+   guards (NoDisasters, missing/forbidden descriptor), and its restart is
+   `RestartGlobalGameTimeThread("Meteors")` — which now recreates **vanilla's**
+   body. First sighting after load arms a full grace period (no blind restart).
+   All handlers synchronous — save-safe where they sit.
+5. **Compliance (§3a, stated explicitly):** no mod-owned thread body exists in
+   this module after the rewrite; the wrapper is synchronous and never enters a
+   save; watchdog and heal are additive `OnMsg` handlers that do not yield.
+   Residuals: the latch GameVar (inert data) and pre-rewrite bodies in old saves
+   (cleared by the latched heal on first post-update load).
+
+#### B. `Fix_RainsDeadlock` — rewritten (F81b; wrapper shape per the Phase-0 verdict; carries the C34 rider)
+
+1. **The wrapper — authorised shape, now measured viable.** Replace the global
+   `RainsDisasterActivation` with a wrapper that mirrors vanilla's own collision
+   test **before** the call: if `IsDisasterActive() or IsDisasterPredicted()`
+   (both synchronous) → `Msg("RainDisasterEnd", MainMap, settings.type or
+   "normal")` and `return`; otherwise `return orig(settings)`. Vanilla's loop
+   stays; the deadlock (`TerraformingDisasters.lua:310-316`'s untimed `WaitMsg`
+   never signalled on the `:277` early-return) is broken at the source.
+   - **Why this works, so nobody re-derives it:** GT creation DEFERS (measured
+     twice, incl. the GT-creates-GT form with a live `WaitMsg` receipt), so the
+     loop is already blocked in `WaitMsg` when the activation body posts. The
+     synchronous-heal fallback, the ChoGGi-style body, and the `Sleep(1)`-first
+     micro-thread variant are all **not needed — do not build them**.
+   - Layer-2 compliant by construction: all mod work precedes the call;
+     `return orig(...)` with nothing after.
+   - Design input (BUG_LIST_AUDIT §9 A3) absorbed: the posted Msg wakes the loop
+     immediately and vanilla re-rolls a fresh spawn — a collided cycle costs one
+     re-roll, which **is** fredware's immediate-retry behaviour, delivered
+     through vanilla's own loop instead of a replaced one. The shipped ~7-sol
+     bounded timeout is retired with `fixed_loop`.
+   - `fixed_loop`, the `RainsDisasterLoop` replacement, and the
+     `SMRFixPack.RainsFixedLoop` probe surface are **deleted**; the
+     `RainsDisasterLoop` global stays vanilla's.
+2. **The migration pass** (`OnMsg.PostLoadGame`, replaces `RefreshRainsLoops`).
+   For each `RainsDisasterThreads` entry with a valid `activation_thread` not
+   yet stamped by the CURRENT version: `DeleteThread` + recreate with
+   `CreateGameTimeThread(RainsDisasterLoop, settings)` — vanilla's loop — and
+   stamp `data.SMRFixPack_loop_version = <version>` (the shipped
+   `SMRFixPack_fixed_loop` boolean now just means "old fixed body" — treat it as
+   unmigrated and clear it on migration). **Settings resolution handles the
+   id-less entries the shipped pass skips** (`Fix_RainsDeadlock.lua:88-91`;
+   `test 2i`'s `toxic` entry has `id=nil`): resolve by `data.id` first, else by
+   a unique `settings.type == rain_type` match over
+   `Presets.MapSettings.RainsDisaster`, else leave-and-log. `main_thread` is
+   never touched — an in-flight warning or rain continues undisturbed.
+   - Marker discipline unchanged (FIX_POLICY §3): fields inside vanilla's own
+     GameVar entries survive reuse (`:411-415`), vanish on recreation, and are
+     ignored by a save loaded without the mod.
+3. ⭐ **The C34 rider (audit adoption — rides this pass, no module of its own).**
+   Before the loop migration, the same pass repairs the sibling stale-state
+   class fredware heals and we did not:
+   - **structure:** recreate a missing/non-table `RainsDisasterThreads` as `{}`;
+     set dead `soil_thread`s to `false`;
+   - **stale-ACTIVE:** if `g_RainDisaster` holds a rain type whose entry's
+     `main_thread` is dead/invalid → heal through **vanilla's own**
+     `FinishRainProcedure(rain_type)` (`TerraformingDisasters.lua:247-274` —
+     clears the entry's fields, label modifiers, notifications, sets
+     `g_RainDisaster = false`, posts `Msg("RainDisasterEnd")`, which also frees
+     any still-deadlocked persisted loop);
+   - **invalid values:** a truthy `g_RainDisaster` that matches no known rain
+     type (preset `type`s / `RainsDisasterThreads` keys) cannot go through
+     `FinishRainProcedure` (it would index `rain_data` with an unknown key) —
+     manual fallback: `g_RainDisaster = false` + post `Msg("RainDisasterEnd",
+     MainMap, "normal")`, logged.
+   Order within the pass: structure → stale-ACTIVE heal → loop migration.
+   ⚠ fredware's `WaitCurrentDisaster`/loop-body replacements are §3a violations
+   — his exposure, not a pattern; nothing here copies them.
+4. **Compliance (§3a, stated explicitly):** no mod-owned thread body; the
+   wrapper does all work before the call and tail-returns; the migration/heal
+   pass is a synchronous `OnMsg` handler using only vanilla primitives
+   (`DeleteThread`/`CreateGameTimeThread`/`FinishRainProcedure`/`Msg`).
+
+#### C. `Fix_DisasterPredictionLeak` rider — the MID-SESSION reconcile (pre-cleared option: **TAKEN**)
+
+Add `OnMsg.NewDay` → `SMRFixPack.ReconcileDisasterPredictions()` (gated
+`WhenActive`, pcall-wrapped like the load-time hook). Judgment for taking it:
+the sweep's predicate — flag set with no live notification — is **stranded by
+construction at any time**, not just at load (every disaster notification
+preset is `Dismissable = false`, and flag and notification are set/cleared in
+the same synchronous bodies, so cooperative scheduling leaves no observable
+mid-function window; the PostLoadGame-only placement of the shipped sweep was
+about `SavegameFixups` ordering, not mid-session safety). Cost: one flag-table
+scan per sol. Benefit: an F81a-class stranding (e.g. the wedge-heal's
+force-clean path with the fix disabled, or any future leak) gates weather for
+at most one sol instead of the rest of the session. §3a-compliant: OnMsg-based,
+additive, synchronous — never a replaced waiting body.
+**Leg consequence (recorded for the build prompt):** PT-54 trigger A changes
+shape — a hand-planted stranded flag must ALSO heal without a reload, within a
+sol; the reload assertion stays.
+
+#### D. `SMRFixPack.StormWedgeHeal` — the orphan-gate reorder (FIX_POLICY §3a)
+
+The shipped body (`Fix_MeteorStormWedge.lua:127-171`) violates the gate rule
+twice: its second statement is a mod-name touch (`SMRFixPack.StormWedgeNote`),
+and an orphan resuming mid-pulse completes the vanilla-name loop and then dies
+at the force-clean path's `StormWedgeNote` — **after** `g_MeteorStormStop = true`
+and **before** the `:169` reset, stranding the flag (the exact stray the
+round-2 adjudication predicted). Reorder:
+
+1. The body opens, **and re-opens after every `Sleep`**, with the gate:
+   `if not SMRFixPack then g_MeteorStormStop = false return end` — the vanilla
+   state it may have set is reset INSIDE the gate, before the return.
+2. On every completion path, `g_MeteorStormStop = false` executes **before**
+   the first `SMRFixPack.*` touch of that path (logging moves last; the
+   force-clean path's vanilla-state writes all precede its Note call).
+3. `SMRFixPack.StormWedge.healing = false` stays last (mod state — losing it in
+   an orphan is harmless; the per-save `PostLoadGame` reset already covers it).
+
+Compliance: after the reorder this is the one mod-owned GT thread in Tier-1
+scope and it is gate-compliant. The other own-thread bodies
+(`CrystalMysteryHang`, `ExtenderFlapChurn`, `TrackConnectorPingPong`,
+`BombardmentSpread`) are Tier-3/not-built accepted residuals — measured
+round 2 to end by themselves (expire / complete silently / volley-completing)
+— and are **not** retrofitted in this build; their gates ride a later batch if
+ever needed.
+
+#### E. What this spec may and may not claim
+
+Save-cleanliness for **existing** saves is claimed ONLY via the named clearing
+mechanisms — the meteor latched heal (A3) and the rains migration + C34 heal
+(B2/B3) — and only for the thread-stack route those mechanisms actually clear.
+**No cleanliness is claimed for layer-2 residue** (inert captured frames and
+stored function values, including the route-(c) `LastTransmissionStorage`
+closure recorded 2026-08-01): inert, accepted, disclosed. Nothing in this spec
+is RE-VERIFIED on inherited facts; every load-bearing input above cites its
+measurement or its owner decision.
 
 **Tier 2 — a unit's command thread dies; recoverable but noisy.**
 
