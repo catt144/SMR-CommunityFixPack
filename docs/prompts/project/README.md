@@ -19,7 +19,7 @@ mechanism below.
 | 2 | `2_f86_phase0_measurements_opus.md` | Opus | ~30 min at keyboard | the two F86 engine measurements (GT-creation ordering, autosave hook) + probe `97` teardown |
 | 3 | `3_f86_phase1_tier1_spec_fable.md` | **Fable** | no | final Tier-1 spec (+ the C34 rains rider) · five-shape exposure enumeration re-run · adjudication §4.4 closure · writes `F86_TIER1_BUILD_PROMPT.md` |
 | 4 | `4_f86_phase2_tier1_build_fable.md` | **Fable** | launch legs | Tier-1 build (`Fix_MeteorFrequency` + `Fix_RainsDeadlock` rewrites) + A/B + F88 regression + uninstall leg (absorbs retired PT-54) |
-| 5 | `5_f86_phase3_tier2_build_opus.md` | Opus | launch leg + one ask (drone carve-out) | Tier-2 builds + `ArrivalDeaths`(a) design pass · records D10/D12 unhold |
+| 5 | `5_f86_phase3_tier2_build_opus.md` | Opus | launch leg | Tier-2 builds + `ArrivalDeaths`(a) design pass (drone carve-out PRE-GRANTED — no ask) · records D10/D12 unhold |
 | 6 | `6_audit_candidate_sweeps_opus.md` | Opus | no | verification reading: C32 (incl. already-patched-in-1.0.7 check), C04 call chain, F35 scope, fredware #11 comparison · owner web-check reminders |
 | 6b | `6b_residual_candidate_sweeps_opus.md` | Opus | no | the rest of the C-ledger: C18-C21 evidence prep, C25 mechanism limits, C26-C30 Relaunched-presence checks, F82 trace, F80 source-audit (pre-cleared work) |
 | 7 | `7_audit_candidate_decisions_opus.md` | Opus | review only | decision packages: C33 (+F44 shell amendment), C22, C23, C24 + everything 6/6b promoted — each through the §4 bar; **passing packages are PRE-CLEARED to build (blanket above)**; failing ones close honestly |
