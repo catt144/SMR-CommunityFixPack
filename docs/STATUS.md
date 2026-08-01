@@ -43,8 +43,10 @@ same way), **plus 34 `C` candidate rows** (was 11 — the
 addendum filed C32–C34; C rows are leads, not defects, and are not counted in
 the 100). **TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
-excluding the definition in `00_TestCore.lua`; the temporary `97_SaveHookProbe`
-is declared, not registered). **74 registered modules** likewise re-verified
+excluding the definition in `00_TestCore.lua`; **unchanged by the 2026-08-01
+teardown of `97_SaveHookProbe` — it was declared, never registered**, and the
+stale-probe sweep now returns **zero** hits in both repos). **74 registered
+modules** likewise re-verified
 (75 `SMRFixPack.Register(` occurrences minus the definition in `00_Core.lua`).
 Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
@@ -166,6 +168,26 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 >   rows now agree with their heading tags, and the comparison is mechanical.
 >   **Counts re-derived from the files, not inherited:** 100 index rows
 >   (88 F + 12 D) — the 2026-07-31 "98" had gone stale within its own day.
+
+> ✅ **F86 PHASE 0 IS DONE (2026-08-01, owner at the keyboard, one sitting) —
+> the two engine measurements that gated the Tier-1 designs are MEASURED, and
+> both came back the permissive way.** Log
+> `Mars.exe-20260801-14.59.57-6a22b86d.log`; full records in ENGINE_FACTS.
+> - **`CreateGameTimeThread` DEFERS** — the body does not run before the creating
+>   statement continues. Measured twice, the second form creating the GT thread
+>   *from a GT thread* and confirming a live `WaitMsg` receipt (the actual vanilla
+>   shape), so the answer is not an inference off the console-context form.
+>   **→ the authorised rains wrapper works as written; the synchronous-heal
+>   fallback is NOT needed.** F02's defer-when-falsy guard turns out not to be
+>   load-bearing and is kept only as defence in depth.
+> - **The pre-save hook COVERS AUTOSAVES** — `SaveGameStart`/`SaveGameDone` with
+>   `autosave=true err=false`, twice, positive control `LoadGame FIRED` present.
+>   Both autosaves were console-forced through the engine's own `Autosave` entry
+>   point (`CreateRealTimeThread(Autosave)` — literally what
+>   `Savegame.lua:1550-1555` does); no naturally-timed autosave was observed.
+> - `97_SaveHookProbe.lua` torn down in the recording commit; **the stale-probe
+>   sweep now returns zero hits in both repos.**
+> Phase 1 (chain prompt 3) is unblocked and inherits the wrapper shape.
 
 > ⚖️ **F86 STATE AS OF 2026-07-31 EVENING — the block below is the original
 > filing and parts of it are SUPERSEDED. Current truth:** the design was

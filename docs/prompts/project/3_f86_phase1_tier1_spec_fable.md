@@ -133,4 +133,85 @@ exact flag class. If you take it, A and B change shape (a stranded flag must
 heal without a reload) and the legs must say so; if you skip it, they stand as
 written above. Either way they are specified where the decision is made.
 
-(prompt 2 appends the two measurement verdicts here)
+### From prompt 2 (2026-08-01) — Phase 0 is MEASURED, and both answers are the permissive ones
+
+**One sitting, owner at the keyboard, one log:
+`Mars.exe-20260801-14.59.57-6a22b86d.log`** (a loaded colony, unpaused, fix pack
++ Test Kit enabled). ENGINE_FACTS entry names, both new bullets in
+`docs/agent/ENGINE_FACTS.md`:
+**"`CreateGameTimeThread` DEFERS — the body does NOT run before the creating
+statement continues"** and **"THE PRE-SAVE HOOK COVERS AUTOSAVES —
+`SaveGameStart`/`SaveGameDone` fire on the autosave path with `autosave=true`"**.
+`F86_ADJUDICATION.md` §4.1 and §4.2 are flipped to CLOSED; the execution plan's
+Phase 0 gate is marked MET; the F86 BUGS entry carries the answer inline.
+
+**1. §0.1 GT-creation ordering → DEFERRED. Your spec takes the WRAPPER shape.**
+
+- Log lines, form 1 (creator = console context), `Lua 0:01:43:086`:
+  `SMRPROBE-GTORDER: statement after create ran` **then**
+  `SMRPROBE-GTORDER: thread body ran`.
+- **I did not stop there, and you should know why the second form exists.** Form
+  1 creates the GT thread from the console; every call site you are speccing
+  creates one *from inside another GT thread*
+  (`TerraformingDisasters.lua:310-316`). Treating form 1 as the answer for form 2
+  would have been an inference, which is the exact move that has put a wrong
+  fact in ENGINE_FACTS before. Form 2 reproduces vanilla's shape — outer GT
+  thread creates inner GT thread, inner posts a `Msg`, outer `WaitMsg`s with a
+  5000 ms timeout — and its verdict is order-independent (receipt vs timeout,
+  not log line order). Result at `Lua 0:04:29:476`: `outer past create, about to
+  WaitMsg` → `inner ran, posting` → **`outer GOT the message`**.
+- **Consequences you can spec on:**
+  - `Fix_RainsDeadlock` takes the **authorised wrapper shape as written** — wrap
+    `RainsDisasterActivation`, post `RainDisasterEnd` on the collision
+    early-return, vanilla's loop stays. **The synchronous-heal branch is NOT
+    needed** and the ChoGGi-style fallback is off the table for this reason
+    (adjudication §4.1's first bullet). The `Sleep(1)`-first micro-thread variant
+    is likewise unnecessary — do not spend the 1 ms own-thread window on it.
+  - `Fix_MeteorFrequency`'s **F02 defer-when-`rawget(_G,"Meteors")`-falsy guard
+    is not load-bearing**: under deferral, `RestartGlobalGameTimeThread`
+    (`_fixup.lua:21`) always assigns the global before the persisted body can
+    make its first `GetDisasterWarningTime` call, so the `CurrentThread()` key
+    cannot miss on iteration 1. **Keep the guard anyway as defence in depth** —
+    that was the standing instruction and the measurement does not retire it —
+    but do **not** write a spec that spends anything to buy the "one short cycle
+    per restart" it was hedging; that cycle does not occur.
+  - Scope limit, so you do not over-read it: this measures the **create call**,
+    not scheduler latency. In both forms the body ran inside the same
+    log-timestamp group — "deferred" here means next scheduler opportunity, not
+    "much later". Nothing in your spec should assume a long window.
+
+**2. §0.2 autosave hook → FIRES, cleanly.** `SaveGameStart FIRED — … 
+SavingGame=true` then `SaveGameDone FIRED — name=Autosave Sol 285.savegame.sav
+autosave=true err=false` (`Lua 0:02:29:324`/`0:02:30:011`), and a second
+identical pair at `0:02:37:203`/`0:02:37:846`. Positive control
+`LoadGame FIRED (positive control)` present in the same log, so the probe was
+demonstrably alive.
+**State the trigger honestly if you cite this:** both autosaves were
+**console-forced** with `CreateRealTimeThread(Autosave)`; no naturally-timed
+autosave was observed. That is the engine's own invocation — the periodic
+autosave thread does literally `CreateRealTimeThread(Autosave)`
+(`Savegame.lua:1550-1555`) and `Autosave` → `SaveAutosaveGame` (`:1450-1453`,
+which is what sets `params.autosave = true`) → `DoSaveGame` — so nothing
+downstream of the trigger differs, and `CanAutosave()` gates only *whether* the
+periodic thread fires. **Note what this does and does not unlock:** layer 1
+stays barred (§8.5's four-part gate; this measurement satisfies only gate #2's
+autosave half, and §4.1 satisfies its other half). Do not spec a
+tear-down-on-save scheme — and if you are tempted, the ⚠️ on the existing
+ENGINE_FACTS entry still stands: autosaves fire ~once a sol, so a handler that
+*restarts* a long-interval loop resets its timer forever.
+
+**3. Housekeeping done, so you inherit a clean board.** `97_SaveHookProbe.lua`
+and its `metadata.lua` line are deleted (TestKit commit, local-only). **The
+stale-probe sweep now returns ZERO hits in both repos** — you are game-free so
+you run no leg, but the build prompt you write must tell prompt 4 to expect
+`PROBE SWEEP: clean`, not the one declared hit the last three sessions saw. The uncommitted
+`99_FixtureCarry.lua` repair prompt 0 routed to me is committed (the
+`IsValidThread(...) or false` fix; the TestKit tree is clean).
+
+**4. Nothing was found out of scope, and nothing is owed back to me.** No defect
+turned up, so the amended FIX_POLICY §4 bar was not exercised. The optional F35
+live-label rider was not taken — the sitting was a loaded save on
+`BlankBigCanyonCMix_09` at Sol 285 and I would have had to extend it, which
+prompt 1 explicitly forbade.
+
+

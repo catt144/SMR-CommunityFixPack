@@ -4297,6 +4297,17 @@ machinery surgery.
 >   continues?) — it gates both the F02 wrapper key and the entire rains
 >   wrapper design — and the rains repair needs a migration pass for existing
 >   saves' persisted `fixed_loop` threads.
+>   **✅ MEASURED 2026-08-01 (F86 Phase 0, chain prompt 2, owner at the keyboard;
+>   log `Mars.exe-20260801-14.59.57-6a22b86d.log`; ENGINE_FACTS carries the full
+>   record): it DEFERS.** Two forms, the second creating the GT thread *from a GT
+>   thread* and confirming the outer's `WaitMsg` actually received the inner's
+>   `Msg` — the vanilla shape, so the answer is measured rather than generalised
+>   off the console-context form. **The rains wrapper design is viable as
+>   authorised (no synchronous-heal fallback), and the F02 wrapper's
+>   defer-when-`_G.Meteors`-falsy guard is NOT load-bearing** — it is kept as
+>   defence in depth. The migration pass is unaffected and still owed.
+>   The same sitting closed the autosave leg of the save hook
+>   (`SaveGameStart`/`SaveGameDone` fire with `autosave=true err=false`).
 > - The per-load meteor restart (`Fix_MeteorFrequency.lua:187-197`) is
 >   confirmed as a shipped player-facing defect; recommendation: own F-number,
 >   fixed by the F02 rewrite via a one-shot latched heal (shipped precedent:

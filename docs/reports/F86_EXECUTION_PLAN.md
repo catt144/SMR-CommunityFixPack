@@ -13,7 +13,17 @@ settled. Nothing below is a reading task except where explicitly marked.
 
 ---
 
-## Phase 0 — the measurement session (GAME session, owner at the keyboard, ~30 min)
+## Phase 0 — ✅ DONE 2026-08-01 (GAME session, owner at the keyboard)
+
+**Exit gate MET.** Both facts measured in one sitting, log
+`Mars.exe-20260801-14.59.57-6a22b86d.log`, recorded in ENGINE_FACTS, probe `97`
+deleted in the recording commit:
+1. **GT-creation ordering: DEFERRED** (two forms, incl. GT-creates-GT with a
+   live `WaitMsg` receipt) → **the rains wrapper works as written; take the
+   wrapper shape, not the synchronous heal.** F02's falsy-global guard is not
+   load-bearing; keep it as defence in depth.
+2. **Autosave hook: FIRES** — `SaveGameStart`/`SaveGameDone` with
+   `autosave=true err=false`, twice, positive control present.
 
 The one thing gating Tier-1 design choices. Prompt: **superseded 2026-08-01 —
 Phases 0-4 now run as the numbered chain in `docs/prompts/project/` (prompts

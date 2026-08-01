@@ -361,7 +361,15 @@ column-0 dot-called names", nothing stronger.
 ## 4. Unproven and load-bearing
 
 **4.1 GT-thread creation ordering — the one fact that gates BOTH Tier-1
-designs. OPEN.** Does `CreateGameTimeThread(f)` run `f` synchronously to its
+designs. ✅ CLOSED 2026-08-01 (MEASURED): it DEFERS.** The body does not run
+before the creating statement continues — measured in two forms, including
+creator-is-a-GT-thread with a real `WaitMsg` receipt (log
+`Mars.exe-20260801-14.59.57-6a22b86d.log`; full record in ENGINE_FACTS).
+**So the authorised rains wrapper works as written — no synchronous-heal
+fallback needed — and F02's defer-when-global-falsy guard is not load-bearing
+(kept as defence in depth).** The original framing follows.
+
+Does `CreateGameTimeThread(f)` run `f` synchronously to its
 first yield, or only on a later scheduler tick? Nothing in ENGINE_FACTS or
 Src's Lua answers it (the scheduler is C). It matters twice:
 
@@ -387,7 +395,11 @@ Src's Lua answers it (the scheduler is C). It matters twice:
 `ModLog` after the create; `FlushLogFile()`; read the order). Run before any
 Tier-1 code.
 
-**4.2 The autosave leg of the save hook. OPEN, probe armed.** Source-verified
+**4.2 The autosave leg of the save hook. ✅ CLOSED 2026-08-01 (MEASURED):
+`SaveGameStart`/`SaveGameDone` fire on the autosave path with `autosave=true,
+err=false`**, positive control present, probe torn down in the recording commit
+(same log as §4.1). The source reading below was correct. Original framing
+follows. Source-verified
 (§2.8) but never observed. With layer 1 barred nothing in the authorised build
 depends on it, but it is a recorded ENGINE_FACTS claim resting on source-only
 evidence, the probe (`97_SaveHookProbe.lua`) is already in the Test Kit, and

@@ -269,6 +269,9 @@ code suggests.
     `params.autosave = true` and calls `DoSaveGame`. So the hook covers them —
     and so does the leak. The `autosave` flag is visible to the handler
     (a manual save logged `autosave=nil`).
+    ⬆️ **This bullet was SOURCE-ONLY when written; it is now MEASURED
+    (2026-08-01, F86 Phase 0 §0.2 — `autosave=true err=false` observed twice).
+    See the dedicated entry below; the source reading was correct.**
   * ⚠️ Consequence for any tear-down design: autosaves fire ~once a sol, so a
     handler that *restarts* a long-interval loop would reset its timer forever.
     Re-arm from a persisted deadline instead.
@@ -351,6 +354,57 @@ code suggests.
     it fires earlier than `LoadGame`, but mod handlers run after the engine's
     (registration order), so vanilla's `data[name]==nil` thread rebuild has
     already happened. Use `LoadGame` unless the heal needs `data`.
+- **`CreateGameTimeThread` DEFERS — the body does NOT run before the creating
+  statement continues** (MEASURED 2026-08-01, F86 Phase 0 §0.1, owner at the
+  keyboard, loaded colony, unpaused; log
+  `Mars.exe-20260801-14.59.57-6a22b86d.log`). This was the one fact gating both
+  Tier-1 designs (`F86_ADJUDICATION.md` §4.1) and it could not be read from
+  source: `CreateGameTimeThread` is a C export with no Lua body (the only
+  definition in the tree is the empty stub
+  `ModTools/Src/CommonLua/LuaExportedDocs/Global/thread.lua:6`).
+  * **Form 1 — creator = console context.** `CreateGameTimeThread(function()
+    ModLog("…thread body ran") end) ModLog("…statement after create ran")` logged
+    `statement after create ran` **then** `thread body ran` (both at
+    `Lua 0:01:43:086`).
+  * **Form 2 — creator = a GAME-TIME thread, i.e. the shape that actually
+    matters** (vanilla's `RainsDisasterLoop` creates its activation thread from a
+    GT thread, `TerraformingDisasters.lua:310-316`). An outer GT thread created an
+    inner GT thread that posts `Msg`, then the outer `WaitMsg`'d for it with a
+    5000 ms timeout. Result at `Lua 0:04:29:476`: `outer past create, about to
+    WaitMsg` → `inner ran, posting` → **`outer GOT the message`**. Form 2's
+    verdict does not depend on log line order at all — receipt vs timeout is the
+    discriminator. Form 1 was NOT generalised to Form 2 by inference; both were
+    run.
+  * **Consequences.** (a) The authorised rains repair works **as written** — a
+    wrapper on `RainsDisasterActivation` that posts `RainDisasterEnd` on the
+    collision early-return reaches a vanilla loop that is already in `WaitMsg`;
+    the synchronous-heal fallback is NOT required. (b) `RestartGlobalGameTimeThread`
+    (`_fixup.lua:21`) assigns `_G.Meteors` after the create returns, and under
+    deferral the persisted body cannot make its first `GetDisasterWarningTime`
+    call before that assignment — so the `CurrentThread()` key never misses on
+    the first iteration. The F02 wrapper's defer-when-`rawget(_G,"Meteors")`-falsy
+    guard is therefore **not load-bearing, and stays anyway as defence in depth**.
+  * ⚠️ Scope of the claim: this measures the **create call**, not scheduling
+    latency. In both forms the body ran within the same log-timestamp group, so
+    deferral here means "next scheduler opportunity", not "much later".
+- **THE PRE-SAVE HOOK COVERS AUTOSAVES — `SaveGameStart`/`SaveGameDone` fire on
+  the autosave path with `autosave=true`** (MEASURED 2026-08-01, F86 Phase 0
+  §0.2, same log `Mars.exe-20260801-14.59.57-6a22b86d.log`; closes
+  `F86_ADJUDICATION.md` §4.2, which had this source-verified but never observed).
+  Probe `97_SaveHookProbe.lua` (now torn down), positive control `LoadGame FIRED`
+  present in the same log. Two autosaves observed, both clean:
+  `SaveGameStart FIRED — params=table: … SavingGame=true` then
+  `SaveGameDone FIRED — name=Autosave Sol 285.savegame.sav autosave=true
+  err=false` (`Lua 0:02:29:324`/`0:02:30:011`, and a duplicate pair at
+  `0:02:37:203`/`0:02:37:846`).
+  * **How it was triggered, stated exactly:** both were forced from the console
+    with `CreateRealTimeThread(Autosave)`, not left to fire on their own. That is
+    the engine's own invocation, byte-for-byte — the periodic autosave thread
+    does literally `CreateRealTimeThread(Autosave)` (`Savegame.lua:1550-1555`),
+    and `Autosave` → `SaveAutosaveGame` (`:1450-1453`, sets `params.autosave =
+    true`) → `DoSaveGame`. The trigger differs; nothing downstream of it does.
+    `CanAutosave()` (`:1466-1477`) gates only *whether* the periodic thread fires,
+    not what the path then does.
 - **`IsValidThread` returns NO VALUE for an invalid thread — not `false`**
   (bit us twice 2026-07-31: a console read shows a blank line easy to misread,
   and `tostring(IsValidThread(x))` throws `bad argument #1 to 'tostring'`).
