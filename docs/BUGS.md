@@ -116,6 +116,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | open — filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **durable exposed list re-derived 2026-08-01 (five-shape enumeration, Phase 1): 13** (the sweep had corrected the membership both ways — `Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out — and the re-run confirms it) **plus one inert route-(c) preset-field site** (`Fix_LastTransmissionStorage`, adjudication §4.4 closed — no build). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — Phase 0 measured 2026-08-01 (GT creation DEFERS; autosave hook FIRES); **Phase 1 done 2026-08-01** (final Tier-1 spec `SAVE_SAFETY_REDESIGN.md` §6.2a; enumeration re-derived; §4.4 closed; build prompt written) — next: the Tier-1 BUILD (chain prompt 4, `F86_TIER1_BUILD_PROMPT.md`). D10/D12 held until repairs land |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
 | F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | P2 | SOURCE-VERIFIED | open — filed 2026-07-31; **fix BUILT 2026-08-01 (Tier-1 rewrite: the per-load restart is gone, one-shot version-latched heal in its place); may not be claimed fixed until Tier-1 leg 2 (load 3× inside a rolled interval, meteor arrives on the persisted deadline)** (entry) |
+| F89 | `MeteorsDisaster`'s unbounded drain loop wedges the METEORS thread on ordinary single/multispawn strikes — the colony silently loses ALL regular meteors, forever in vanilla | P2 | MEASURED | open — observed live 2026-08-01 (Tier-1 leg sitting): F78's drain-loop class on the singles path, INVISIBLE to the storm watchdog (no `g_MeteorStorm`); **covered by the F02 watchdog** (detected at its 189h threshold, `ALIVE but stuck`, restarted, ~6-8 sol latency); no direct fix routable — mid-function loop, body copy barred by F86 (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -5021,6 +5022,45 @@ in one mechanism. Shipped precedent for the pattern:
 interval, meteor must still arrive on the persisted schedule): Phase 2.
 
 Cross-refs: F02, F86.
+
+### F89 — MeteorsDisaster's unbounded drain loop wedges the Meteors thread on ordinary strikes; the colony silently loses all regular meteors (P2, MEASURED)  `[open — filed 2026-08-01 mid-sitting (Tier-1 leg 1); vanilla defect, F78's class on the singles path; COVERED by the F02 watchdog (detect + restart at its 189h threshold, ~6-8 sol latency, proven live the same sitting); no direct fix routable: the loop is mid-function with no seam, and a body copy is barred by F86/FIX_POLICY §3a]`
+
+**Defect (vanilla; same code F78 documented, different reachable state).** EVERY
+`MeteorsDisaster` call — not just storms — ends in the unbounded drain tail
+(`Meteors.lua:238-241`): `while not g_MeteorStormStop and #spawned > 0 do
+WaitMsg("MeteorDone", delta) table.validate(spawned) end`. When a spawned entry
+never becomes invalid, the CALL never returns. For a storm that wedges the
+MeteorStorm scheduler (F78, fixed by `Fix_MeteorStormWedge`). For a **single or
+multispawn strike** it wedges the **`Meteors` thread itself** — and
+`Fix_MeteorStormWedge` is blind to it BY CONSTRUCTION: its signature requires
+`g_MeteorStorm`, which ordinary strikes never set.
+
+**Measured live 2026-08-01** (log `Mars.exe-20260801-17.11.08`, test-2 lineage,
+owner at keyboard): strike printed at `t=218608231` (its impact destroyed 2
+infrastructure — the call's meteors landed), then 192 game hours of silence with
+`GetMeteorsDescr()` valid throughout (Atmosphere 59.37%, nowhere near the 80%
+shutoff), thread reads `valid: true`, zero `[LUA ERROR]`, no loads after the
+strike. The F02 watchdog crossed its threshold
+(`spawntime+random+SensorTowerPredictionMaxTime+DayDuration` = 189h on this
+map's 65+0-25h descriptor) and acted:
+`WATCHDOG — no meteor resolved for 192 game hours (thread ALIVE but stuck);
+restarting onto vanilla's body`.
+
+**Retro-consistency — this class is likely PT-01's recurring stall.** The old
+heartbeat died at phase `'striking'` (set immediately BEFORE the
+`MeteorsDisaster` call, F02 entry) and TEST 2G's watchdog fired at 183h with
+the same ALIVE-but-stuck read — both match a wedged drain call, not a dead
+thread. F78+F81 remain real and fixed; this entry records that the drain-loop
+class ALSO reaches the Meteors thread through ordinary strikes, where the
+storm watchdog cannot see it.
+
+**Disposition: watchdog-insurance IS the design (accepted, disclosed).** The
+F02 watchdog detects (designed-silence guards keep it honest), diagnoses
+alive-vs-dead, restarts onto vanilla's body (cost: one timer re-roll), gives up
+loudly after 3. In vanilla, without the pack, this state is a permanent loss of
+all regular meteors for the save. No layer-3 route exists into a mid-function
+loop; bounding the loop would need a body copy — barred (F86, §3a).
+Cross-refs: F02 (watchdog), F78 (class + storm half), F86 (why no body copy).
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing

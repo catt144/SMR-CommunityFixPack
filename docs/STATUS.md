@@ -216,6 +216,12 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > - **Tier 2 still owes** (chain prompt 5): `DroneUnreachableForever`,
 >   `TrainWaitTime`, `ArrivalDeaths` (b) + the (a) design pass, and the
 >   D10/D12 unhold record. The §5.4-A conversions are chain prompt 8.
+> - **F89 filed mid-sitting (2026-08-01, leg 1):** vanilla's `MeteorsDisaster`
+>   drain loop wedges the Meteors thread on ORDINARY strikes (F78's class on
+>   the singles path, invisible to the storm watchdog); measured live at 192h
+>   silence and healed by the F02 watchdog at its threshold — the insurance
+>   the spec kept proved itself. Covered, not fixable directly (entry).
+>   **Index rows now 101 (89 F + 12 D).**
 
 > ✅ **F86 PHASE 0 IS DONE (2026-08-01, owner at the keyboard, one sitting) —
 > the two engine measurements that gated the Tier-1 designs are MEASURED, and
