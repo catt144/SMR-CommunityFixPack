@@ -18,15 +18,14 @@ anything was filed** — one agent claim was refuted by that verification (§7.3
 | **GOLD** | **16** | F30 F44 F45 F46 F52 F55 F58 F65 F66 F67 F68 F70 F71 F73 F78 F81 *(F04 moved to BRONZE by the §9 addendum — its witness turned out to fit a different mechanism)* |
 | **SILVER** | **25** | F01 F02 F03 F05 F06 F11 F16 F21 F35 F36 F37 F38 F40 F41 F43 F48 F50 F51 F53 F59 F60 F64 F69 F74 F76 |
 | **BRONZE** | **30** | F04 F07 F08 F09 F12 F13 F14 F15 F17 F18 F19 F20 F22 F23 F25 F26 F27 F29 F31 F33 F34 F47 F54 F57 F72 F75 F77 F82 F84 F85 |
-| **HOLD** | **1** | **F49(a) only** — a sub-item rider, not a module (§3) |
+| **HOLD** | **0** | *(F49(a) briefly held; reclassified same day on owner challenge — §3)* |
 | play-proven, exempt | 2 | F83 (PROVEN + A/B + tested), F80 (→ §4) |
 | out of scope | — | F86–F88 (our own defects); closed entries (§2.4); D-entries (design, not defect claims); C-entries (leads, §4/§5) |
 
-**Does anything in the shipped default-on set land in HOLD? NO module does.**
-The single HOLD is **F49(a)**, an R4 no-op rider *inside* the default-on
-`Fix_TrainMinors`, already slated "optional strip" by the reachability audit.
-Every default-on module is BRONZE or better, and every BRONZE carries at least
-one hard tell from the challenge review's intent list.
+**Does anything in the shipped default-on set land in HOLD? NOTHING does —
+the tier is empty.** Every default-on module is BRONZE or better, and every
+BRONZE carries at least one hard tell from the challenge review's intent
+list.
 
 **Headline discoveries beyond the tiering:**
 
@@ -177,33 +176,40 @@ absence is a prior, not a verdict.
 
 `wontfix`/closed: F10, F24, F28, F32, **F42 (⚠ index row said `blocked`, entry
 says `wontfix` 2026-07-25 — stale row corrected in this commit)**, F49(c), F56,
-F61, F62, F63, F79; F39 folded into D04. Our own defects F86/F87/F88: external
+F61, F62, F63, F79; F39 folded into D04. **Adjudicated R4 rider: F49(a)** —
+high-confidence unreachable (mod-tools-only entry path), disposition already
+decided by the reachability audit (keep as no-op rider, optional strip on next
+touch); briefly mis-tiered HOLD, corrected on owner challenge (§3). Our own defects F86/F87/F88: external
 witnesses are category-inapplicable (though the prior-art survey already
 benchmarked F86 against the community). D-entries are design decisions, not
 defect claims. F83 is play-PROVEN + `tested` — no external witness owed.
 
-## 3. HOLD list — one entry
+## 3. HOLD list — EMPTY (corrected 2026-08-01 on owner challenge)
 
-**F49(a) — instant-built track painted with the pipes palette (rider inside
-`Fix_TrainMinors`).**
+**F49(a) held here for a few hours and was reclassified: it does not meet
+HOLD's own definition.** HOLD requires "the audit's own recheck **lacks
+strong confidence**" — F49(a) is the opposite. The reachability audit's
+lead-pass block is an exhaustive, high-confidence R4: no `InstantTracks`
+const exists (the Instant* family is Cables/Passages/Pipes only), both
+instant-build techs and the one sponsor perk touch other grids, the build
+menu hardcodes `require_construction = true` for tracks, `Cheats.lua` has
+zero track references, and the only reproduction ever achieved was
+console-injecting `grid_elements_require_construction = false` — a
+mod-tools-grade entry with no player-facing control (the PT-46 lesson:
+injection-only = evidence FOR R4). The defect even self-corrects — a colony
+colour-scheme change repaints every element with the correct palette.
 
-- **What it does:** guards a cosmetic palette path in instant-build track
-  placement.
-- **Why we have it:** filed in the F49 bundle; the challenge review corrected it
-  to **R4** — no player-reachable entry into `place_track` (PT-46 lesson: the
-  state is producible only by console/debug injection).
-- **Why keep it at all:** it rides inside a module carried by the live,
-  play-proven (d) half; stripping it is a code change to a shipped module for
-  zero player-visible gain, and F86-era policy says don't touch shipped
-  modules without cause.
-- **Exit condition:** strip the (a) guard the next time `Fix_TrainMinors` is
-  opened for any other reason (the reachability audit already marks it
-  "optional strip"), or at the F86 Tier-1/2 rework if that touches the module.
-  If a future patch makes instant-build player-reachable (sandbox/creative
-  mode), re-audit instead of stripping.
-- No other entry qualifies: every other no-witness entry is either arithmetic
-  (B1), carries a hard tell, is UNREPORTABLE-exempt, or gained a witness this
-  audit (F11's stuck-train report, F59's homeless thread).
+F49(a) is therefore an **already-adjudicated R4 rider**, not an open
+question: the reachability audit decided its disposition (keep the no-op
+rider inside the module carried by the live (d) half; optionally strip on
+next touch), and this audit adds nothing and defers to that record. It is
+listed with the adjudicated set in §2.4, not here.
+
+No other entry qualifies for HOLD: every no-witness entry is either
+arithmetic (B1), carries a hard tell, is UNREPORTABLE-exempt, or gained a
+witness this audit (F11's stuck-train report, F59's homeless thread).
+**The tier ends the audit empty — nothing we ship rests on a
+low-confidence, unwitnessed judgment call.**
 
 ## 4. NO MECHANISM FOUND — report prominently
 
@@ -477,8 +483,10 @@ only, version 38 of careful in-place migration. The removal cause is likely
 external to the code. His `bf_forecast.lua` (40KB) is an original
 disaster-forecast overlay, off by default.
 
-**Net effect on the audit's numbers:** GOLD 17→16, BRONZE 29→30, and the
-C-ledger grew to C12–C34 (23 filed candidates), of which **9 are now
+**Net effect on the audit's numbers:** GOLD 17→16, BRONZE 29→30, **HOLD 1→0**
+(F49(a) reclassified to the adjudicated set on owner challenge — it is a
+high-confidence R4, which fails HOLD's lacks-confidence definition, §3), and
+the C-ledger grew to C12–C34 (23 filed candidates), of which **9 are now
 Src-verified** (C12–C17, C22–C24, plus C33) and two more mechanism-confirmed
 (C04, C25). The §7.1 owner actions are updated: the GromGor/fredware
 subscribe suggestion is DONE and consumed; the Paradox subforum and Paradox

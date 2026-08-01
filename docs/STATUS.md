@@ -67,9 +67,11 @@ with **PHASE 4 COMPLETE** (below).
 
 > ⭐ **2026-08-01 — THE BUG-LIST AUDIT RAN (`docs/reports/BUG_LIST_AUDIT.md`,
 > game-free, one-off prompt consumed).** Every shipped fix tiered against
-> external witnesses: **17 GOLD / 25 SILVER / 29 BRONZE / exactly 1 HOLD** —
-> the HOLD is the F49(a) R4 rider, not a module; **no default-on module lands
-> in HOLD**. Headlines: a native Relaunched fix-modding scene exists and
+> external witnesses: final **16 GOLD / 25 SILVER / 30 BRONZE / 0 HOLD**
+> (initial 17/25/29/1; F04 fell to the §9 packed-source read, and F49(a)'s
+> brief HOLD was reclassified on owner challenge — it is a high-confidence
+> adjudicated R4, which fails HOLD's lacks-confidence definition); **the HOLD
+> tier ends the audit EMPTY**. Headlines: a native Relaunched fix-modding scene exists and
 > independently converges on F01/F04/F71/F74/F78/F81 (fredware's 13-fix "Bug
 > Fixes" created 2026-07-31, GromGor, Oxygenus); the Relaunched dev patch-note
 > thread witnesses the train/lander/homeless clusters wholesale; **20 gap
@@ -86,7 +88,7 @@ with **PHASE 4 COMPLETE** (below).
 > owner subscribed, all six FPKs (including fredware's REMOVED "Bug Fixes")
 > were extracted and read (audit §9).** Results: **F04 GOLD→BRONZE** (its
 > witness fits the newly-filed C32 label-desync better), final verdict
-> **16 GOLD / 25 SILVER / 30 BRONZE / 1 HOLD**; C31 resolved (F78-heal, not a
+> **16 GOLD / 25 SILVER / 30 BRONZE / 0 HOLD**; C31 resolved (F78-heal, not a
 > new mechanism); C04 mechanism confirmed vs Src; C22/C23/C24 VERIFIED vs Src
 > (Saint blessing never worked; 3 dust-devil scheduler defects; asteroid-visit
 > precedence bug); **C33 filed — whole-track demolition leaks an undeletable
