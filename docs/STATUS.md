@@ -35,13 +35,18 @@ remediation 3.3). Session legs are append-only in
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
-**98 rows** (87 `F` + 11 `D`; recounted 2026-07-31 — the previous "93" had gone
-stale before F86/F87 were added), **plus 34 `C` candidate rows** (was 11 — the
+**100 rows** (88 `F` + 12 `D`; **recounted 2026-08-01** — the "98 (87 F + 11 D)"
+recorded on 2026-07-31 went stale within the same day, when F88 and D13 were
+filed after that count was taken; the count before it, "93", had gone stale the
+same way), **plus 34 `C` candidate rows** (was 11 — the
 2026-08-01 bug-list audit filed C12–C31, and its same-day packed-source
 addendum filed C32–C34; C rows are leads, not defects, and are not counted in
-the 98). **TestKit probes: 78** (Phase 4's C1 `UpdateReport` probe, 2026-07-31;
-before that the F83 probe added `56_Probes_Wave7.lua`). Counts moved 2026-07-31
-with **PHASE 4 COMPLETE** (below).
+the 100). **TestKit probes: 78** (re-verified 2026-08-01 by counting
+`SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
+excluding the definition in `00_TestCore.lua`; the temporary `97_SaveHookProbe`
+is declared, not registered). **74 registered modules** likewise re-verified
+(75 `SMRFixPack.Register(` occurrences minus the definition in `00_Core.lua`).
+Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
 > F83 is `tested`.** Nothing on the drone research side is owed. Full leg in
 > `docs/archive/SESSION_LOG.md`; the answers live on the **D06 entry** and in
@@ -129,6 +134,38 @@ with **PHASE 4 COMPLETE** (below).
 > F74 misses refugee rockets (ours is a superset); his disasters fix never
 > restarts the wedged scheduler (ours does); nothing in his source explains
 > the Workshop removal.
+
+> ✅ **2026-08-01 — CHAIN PROMPT 1 DRAINED (playtest reorg + the §4 amendment +
+> the consistency sweep; game-free, prompt consumed).** Five things changed:
+> - **`FIX_POLICY.md` §4 is AMENDED AND IN FORCE** — the reachability audit's
+>   drafted replacement applied verbatim (intent-first with five hard tells ·
+>   per-tier reachability with symmetry of proof · R1-R4/U dispositions ·
+>   tested-by-playing · evidence freshness). Authority: the owner's blanket
+>   pre-clearance; the blocker died when F49(a)'s guard was stripped. **Every
+>   session from here judges fixes by the amended §4, not the old
+>   three-sentence rule.** ⚠️ **One decision it activated is OWED and routed to
+>   chain prompt 7:** F29 (items 1+3) and F57(a) are R3 latent-by-data shipped
+>   as §1.5 replacements — the combination the new R3 bullet makes conditional
+>   on an explicit owner decision. Nothing presumed; both entries carry it.
+> - **PT-54 is RETIRED UNRUN** — it tested bodies the F86 Tier-1 build deletes
+>   and reorders. Triggers C/D/E ride the Tier-1 legs (prompt 4 records them as
+>   the retirement made good); **triggers A and B are NOT absorbed** (they test
+>   `Fix_DisasterPredictionLeak`, which is in no tier) and were routed to
+>   prompt 3 to be written into the build prompt as legs. Full text preserved
+>   in `PLAYTEST_ARCHIVE.md` under a RETIRED-UNRUN banner.
+> - **The needs-eyes list gained four bug-list-audit riders** (F35 live-label,
+>   C32 label-membership, F80 enumeration tap, F82 timing) and lost one: **F74
+>   merged into F53(a)**, its question answered twice from outside. The list is
+>   now split by intake, because two of the new rows check whether something we
+>   believe is *incomplete*, which is not what the other two tables mean.
+> - **`MOD_DESCRIPTION.md`** gained the documented-engine-behaviour paragraph
+>   and a conditional, do-not-publish-yet no-precedent claim tied to prompt 4.
+> - **The consistency sweep found four divergences** beyond the F42 row the
+>   audit had already caught (F18's stale `fixed*`, F86's stale *heading*,
+>   D01's missing tag, plus vocabulary drift on F84/F88/F10/D06). All 100 index
+>   rows now agree with their heading tags, and the comparison is mechanical.
+>   **Counts re-derived from the files, not inherited:** 100 index rows
+>   (88 F + 12 D) — the 2026-07-31 "98" had gone stale within its own day.
 
 > ⚖️ **F86 STATE AS OF 2026-07-31 EVENING — the block below is the original
 > filing and parts of it are SUPERSEDED. Current truth:** the design was
@@ -695,7 +732,10 @@ F29†, F31, F43, F57(a)†; † = §1.5-latent, flagged), one U (F11, settling
 observation on the entry), two R4 — F49(a) (kept, lives inside a module with
 two live halves) and **F28 (DELETE candidate, awaiting user decision)**. A
 proposed FIX_POLICY §4 amendment (reachability tier required before a fix
-ships) is drafted in the audit file, not applied. Eleven BUGS.md entries
+ships) ~~is drafted in the audit file, not applied~~ — **APPLIED 2026-08-01,
+`FIX_POLICY.md` §4 is the authority now**; the two † entries above are exactly
+the R3-plus-§1.5 combination it makes conditional on an owner decision, routed
+to chain prompt 7. Eleven BUGS.md entries
 carry new "Audit 2026-07-30" notes (evidence corrections: F06, F17, F22, F25,
 F34, F37, F40, F43, F49, F74, F81 — plus F11's observation).
 **CHALLENGED same day and one verdict fell: F49(c) was tabled "live R2"
@@ -814,8 +854,10 @@ authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
 4. An in-game observation for F55: do drones still enter a dome after the roof is
    opened? The Lua half of that report turned out not to be actionable (see the
    F55 entry) — only play can tell us whether the entity data is at fault.
-5. Manual playtest per `docs/PLAYTEST_CHECKLIST.md` (35 tests — PT-23..PT-35 are the
-   wave-3 group 6; no third-party mods;
+5. Manual playtest per `docs/PLAYTEST_CHECKLIST.md` (**recounted 2026-08-01:
+   17 PT sections carried, of which 2 are not runnable — PT-52 frozen, PT-54
+   retired — so 15 live, plus the §6 needs-eyes riders**; the previous "35"
+   predates the archive sweeps; no third-party mods;
    covers what scripts can't: feel, visuals, UI, long-running behavior). Results
    reported back flip each covered fix's BUGS.md status to `tested` — see that
    file's "Reporting protocol" section for the exact follow-up workflow.
@@ -832,7 +874,11 @@ authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
 7. A donated save that researched **Frictionless Composites before the game patched the
    tech** is the only true fixture for the F35 sanitizer pass (PT-35 case C). Everything
    else about that pass is probe-covered.
-10. **OPEN (2026-07-29): the F81/F78 disaster fix — scope decision.** F81 is
+10. **~~OPEN (2026-07-29)~~ — CLOSED: the F81/F78 disaster fix scope decision was
+   made and built on 2026-07-29** (both open questions answered by the QA
+   review, watchdog chosen over the full replacement; label corrected
+   2026-08-01, the resolution was already recorded in this item's own closing
+   parenthetical). Kept for the reasoning. F81 is
    CONFIRMED LIVE and the leak is unconditional (every completed meteor storm
    strands the flag and kills that colony's weather). Proposed package:
    (a) replace the global `MeteorsDisaster` with a **per-invocation** bounded

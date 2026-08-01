@@ -147,3 +147,39 @@ unverified edit. It is inert for legs — the file only defines
 next touch the TestKit, or discard it if you judge it wrong.
 
 *(Nothing found here was checklist-relevant, so nothing was copied to prompt 1.)*
+
+### From prompt 1 (2026-08-01) — the §4 decision is MADE, and two things about your keyboard session changed
+
+**1. FIX_POLICY §4 is AMENDED AND IN FORCE** (applied verbatim from
+`REACHABILITY_AUDIT.md` §4 under the owner's blanket pre-clearance; the F49(a)
+contradiction died with the guard strip). It does not change what you measure,
+but it changes what any finding you file is judged by: a defect claim now needs
+a positive intent statement with a named hard tell, and a reachability tier,
+before anything is written. **If Phase 0 turns up a defect, file it to that
+standard** — prompt 3 inherits the amended bar when it specs.
+*One consequence, for your awareness only, already routed to prompt 7:* F29 and
+F57(a) are R3 fixes shipped as §1.5 replacements, the combination the new R3
+bullet makes conditional on an owner decision. Not yours; do not act on it.
+
+**2. Checklist facts you should know at the keyboard:**
+
+- **PT-54 is RETIRED UNRUN** — nobody runs the wave-6 disaster tests against
+  the current bodies again. If the owner asks why the disaster tests vanished
+  from the checklist: the code under them is being replaced, and the intent
+  moved onto the Tier-1 build's own legs (`PLAYTEST_CHECKLIST.md` §3 carries
+  the trigger-by-trigger table).
+- **Your §0.1 measurement is what decides the rains shape**, and prompt 3's
+  spec now also carries two PT-54 legs I routed there against
+  `Fix_DisasterPredictionLeak`. Nothing about that changes your job; it is why
+  prompt 3's inbox is longer than you left it.
+- **Four cheap needs-eyes riders were added** (F35 live-label, C32
+  label-membership, F80 enumeration tap, F82 timing). **One is worth knowing
+  while a colony is up in front of the owner: the F35 read must be taken with
+  NO reload** — our sanitizer runs on every load and would silently repair the
+  very thing the reading is looking for. If the session happens to sit in a
+  colony that is about to research Frictionless Composites, that reading is 30
+  seconds and it is otherwise hard to schedule. Entirely optional; do not
+  extend the sitting for it, and do not let it displace the two measurements.
+- **The `97` teardown you owe is unchanged.** The stale-probe sweep still
+  returns exactly one hit, `97_SaveHookProbe.lua` — re-verified this session
+  (game-free, no legs run).
