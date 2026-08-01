@@ -435,70 +435,42 @@ idle drones, and every hub in this report has idle drones (lowest 4/6).
 
 # 3 · Wave-6 disaster fixes (built 2026-07-29 post-QA) — live colony
 
-## PT-54 — Disaster prediction leak, storm wedge, rains deadlock · covers **F78 `Fix_MeteorStormWedge`, F81 `Fix_DisasterPredictionLeak` + `Fix_RainsDeadlock`**
+## ~~PT-54 — Disaster prediction leak, storm wedge, rains deadlock~~ ⛔ RETIRED UNRUN 2026-08-01
 
-These three ship together and share machinery, so one PT covers them. The
-wave-6 probes (`SMRTest.DisasterPredictionLeak()`, `SMRTest.MeteorStormWedge()`,
-`SMRTest.RainsDeadlock()` — the rains one needs a loaded colony) assert the
-mechanisms; this PT is the live half. The flag dump used throughout:
-`*r for k, v in pairs(g_DisastersPredicted) do ConsolePrint(tostring(k) .. " = " .. tostring(v)) end`
-(an empty print = no flags set).
+**Do not run this. Do not schedule a wave-6 disaster sitting for it.** Full
+test text (all five triggers) preserved in
+[PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md) under its RETIRED-UNRUN banner —
+the trigger designs are the raw material the Tier-1 build prompt draws on.
 
-**Setup:** the live 194-sol save (or any save with meteor storms enabled).
-`SMRFixPack.ListFixes` must show `DisasterPredictionLeak`, `MeteorStormWedge`
-and `RainsDeadlock` all `active`.
+**Why:** PT-54 tests the *current* `Fix_RainsDeadlock` body, which the F86
+Tier-1 build deletes and replaces outright (`SAVE_SAFETY_REDESIGN.md` §6.2),
+and the *current* `Fix_MeteorStormWedge`/`Fix_MeteorFrequency` heal sequencing,
+which the same build reorders (the orphan-gate rule + the watchdog moving onto
+`Msg("MeteorDone")`/`NewDay` restarting **vanilla's** body). Running it would
+verify code that is about to stop existing.
 
-**Trigger A — reconciliation heals a stranded flag.** Hand-plant one
-(`g_DisastersPredicted["DisasterMeteorStorm"] = true`, nothing on screen),
-quicksave, reload.
-   - **EXPECTED:** a `DisasterPredictionLeak: cleared stranded prediction flag`
-     log line on load; the flag dump is clean.
-   - **SURPRISE looks like:** the flag survives the reload (sweep did not run —
-     check fix status first).
+**What absorbs its intent — named trigger by trigger** (project prompt chain
+`4_f86_phase2_tier1_build_fable.md` §3, which states these legs *are* PT-54's
+retirement made good):
 
-**Trigger B — a genuine warning is NEVER cleared.** Wait for (or reach) any
-disaster warning countdown (toxic rain works — 3-sol window with 6 towers),
-quicksave mid-countdown, reload.
-   - **EXPECTED:** the notification is still on screen still counting AND its
-     flag still reads `true` in the dump. The sweep must keep it.
-   - **SURPRISE looks like:** flag cleared while the countdown is visible —
-     that is a FAIL of the sweep's liveness test; report immediately.
+| PT-54 trigger | absorbed by |
+|---|---|
+| **C** wedge heals itself | the Tier-1 **A/B pair** — it must exercise the reordered heal path, since that path is what changes |
+| **D** storms keep scheduling after a heal | the Tier-1 A/B pair **+ the F88 load-3×-inside-a-rolled-interval regression leg**, which is the sharper form of the same question |
+| **E** rains survive collisions | the `Fix_RainsDeadlock` rewrite's own A/B leg (incl. the migration pass and the C34 stale-ACTIVE rider) |
 
-**Trigger C — the wedge heals itself.** Drive a storm:
-`*r local d = Presets.MapSettings.Meteor["Meteor_High"] local p = GetRandomPassable(MainMap) CreateGameTimeThread(function() MeteorsDisaster(d, "storm", p) end)`
-Let it run to its wedge (validate-style stall after the last strikes; the
-duration notification eventually expires). While the storm is HEALTHY
-(notification visible), `SMRFixPack.StormWedgeCheck` must read
-`storm notification live (healthy)` — the watchdog must never touch a live
-storm. After the notification expires with the wedge in place:
-   - **EXPECTED:** within ~2 game hours, `MeteorStormWedge: WEDGE confirmed …
-     healing`, then either `released through the vanilla end path` (plus
-     Fix_DisasterPredictionLeak's `storm ended` line) or `forced storm state
-     clean`; the flag dump is clean afterwards; `g_MeteorStorm` reads false.
-   - **SURPRISE looks like:** `StormWedgeCheck` stuck on `signature armed`
-     forever, repeated heals (`restarts` climbing to give-up), or a healthy
-     storm getting cut short.
+⚠️ **NOT absorbed, and carried forward rather than dropped: triggers A and B.**
+They test `Fix_DisasterPredictionLeak` — the load-time reconciliation and its
+liveness test — and that module is **not** in Tier 1 (it is neither rewritten
+nor deleted), so no Tier-1 leg covers it by construction. Its wave-6 probe
+asserts the mechanism synthetically only. Chain prompt 3 has been told, in its
+inbox, to write both observations into `F86_TIER1_BUILD_PROMPT.md` as legs —
+which is also where they belong because prompt 3 may add a **mid-session**
+reconcile to that same flag class (its pre-cleared option), and that would
+change what A and B are testing.
 
-**Trigger D — storms keep scheduling after a heal.** After Trigger C, confirm
-the scheduler is alive: `IsValidThread(MeteorStorm)` reads true, and over a
-long soak a NATURAL storm warning eventually appears (the pre-fix failure mode
-was: never again).
-
-**Trigger E — rains survive collisions.** On load expect
-`RainsDeadlock: … rain loop moved onto the bounded body` lines IF the save had
-live rain loops (zero lines is normal when the bands had no loops — e.g. after
-the manual 2026-07-29 recovery). Over the soak: rain must occur again within a
-few sols of a rain roll colliding with a warning window (pre-fix: that rain
-type died permanently). Cheap forced check: while any warning countdown is up,
-rains rolling during it must NOT kill later rains — watch for normal/toxic rain
-in the sols after the warning resolves.
-
-Log hygiene: no `[LUA ERROR]` mentioning `DisasterPredictionLeak`,
-`MeteorStormWedge`, `RainsDeadlock`, `RainsDisasterLoop` or `StormWedgeHeal`.
-
-`Result (A reconcile / B warning kept):` _____________________________________________
-
-`Result (C heal / D reschedule / E rains):` _____________________________________________
+Status flips for F78/F81/F02/F88 ride the Tier-1 legs and the normal reporting
+protocol (index row **and** heading tag, both).
 
 ---
 

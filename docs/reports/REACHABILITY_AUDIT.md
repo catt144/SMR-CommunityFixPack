@@ -581,7 +581,7 @@ included too — they carry the call-site enumerations and PT checks.
 - Precondition & player path: rains are gated by terraforming — `UpdateRainsThreads` creates a loop only when Atmosphere, Temperature AND Water are all at or above a rain band's start thresholds (:400-403; live-save panel: normal rains ≈40/40/10, toxic bands lower) and not all past its end (:407-410); toxic rains are additionally off under NoDisasters (:386-388). So: terraform into a rain band (GHG factories/imports, Forestation — normal mid/late-game play), then have one rain roll land inside any other disaster's active or warning window — with sensor towers pinning warnings at 75h (MapSettings.lua:94-98), a collision on a long save is close to certain. That rain type is then dead for the rest of the save.
 - Searched: grep `RainsDisasterLoop|UpdateRainsThreads`; read :310-435 in full (band gating, thread reuse, NoDisasters branch).
 - Tier: R2 — needs terraforming progress into a rain band plus any coexisting disaster; both are genuine, common player states, and the collision math makes the deadlock near-inevitable once they coexist, but it is not yet demonstrated live (the 194-sol save's rain threads were empty placeholders — the leak half alone explained its silence).
-- Recommendation: keep + record observation: a live save whose rain loop is blocked in `WaitMsg` with a stale roll (console read of `RainsDisasterThreads[type].activation_thread` status, or simply rain resuming ≤7 sols after a collision under the fix) would upgrade this to proven; the PT-54 leg already planned for F78/F81 can carry it.
+- Recommendation: keep + record observation: a live save whose rain loop is blocked in `WaitMsg` with a stale roll (console read of `RainsDisasterThreads[type].activation_thread` status, or simply rain resuming ≤7 sols after a collision under the fix) would upgrade this to proven; ~~the PT-54 leg already planned for F78/F81 can carry it~~ — **PT-54 was retired unrun 2026-08-01; the observation now rides the F86 Tier-1 `Fix_RainsDeadlock` rewrite's own A/B leg** (BUGS F81 entry).
 - Notes: under NoDisasters, normal rains still run and toxic rains are never created — but collisions remain possible between concurrent rain types and mystery "dream" disasters, so the rule does not make the defect unreachable, only rarer.
 
 ## Mysteries, story & traits (F05-F07/F15, F16, F17, F23, F29, F40, F41, F75)
@@ -957,8 +957,9 @@ substance lives on each entry:
   storm settings — a reachability strengthener not in the entry.
 - **F11** — settling observation recorded (see its block): crew-gathering a
   busy train passenger and inspecting `train.units` settles U → R2.
-- **F81 (rains)** — settling observation recorded (see its block); the
-  planned PT-54 leg can carry it.
+- **F81 (rains)** — settling observation recorded (see its block); ~~the
+  planned PT-54 leg can carry it~~ → **the F86 Tier-1 `Fix_RainsDeadlock` A/B
+  leg carries it (PT-54 retired unrun 2026-08-01).**
 
 ---
 

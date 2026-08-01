@@ -102,4 +102,35 @@ file, commit, push.
 
 ## Notes from upstream
 
+**From prompt 1 (2026-08-01) — PT-54 is retired, and two of its five triggers
+are NOT absorbed by the legs you are about to specify. They are yours to place.**
+
+PT-54 was retired unrun (record: `PLAYTEST_CHECKLIST.md` §3, full text kept in
+`PLAYTEST_ARCHIVE.md`, notes on BUGS F78/F81). Triggers **C**, **D** and **E**
+ride the Tier-1 legs you are writing (A/B pair · F88 load-3× regression ·
+uninstall) — job 4 already tells you to say so in the build prompt.
+
+**Triggers A and B do not, and dropping them would be the retirement claiming
+more than it can.** They test `Fix_DisasterPredictionLeak`, which is in no tier
+— Tier 1 neither rewrites nor deletes it — so no Tier-1 leg touches it by
+construction, and its wave-6 probe asserts the mechanism synthetically only.
+Add both to `F86_TIER1_BUILD_PROMPT.md` as legs (they are cheap: the build
+session is already loading disaster saves):
+
+- **A — the load-time reconciliation heals a stranded flag.** Hand-plant
+  `g_DisastersPredicted["DisasterMeteorStorm"] = true` with nothing on screen,
+  quicksave, reload → expect `DisasterPredictionLeak: cleared stranded
+  prediction flag` and a clean flag dump.
+- **B — a genuine warning is NEVER cleared.** Quicksave mid-countdown on any
+  live disaster warning, reload → the notification must still be counting AND
+  its flag must still read `true`. A cleared flag under a visible countdown is
+  a FAIL of the sweep's liveness test.
+- Flag dump: `*r for k, v in pairs(g_DisastersPredicted) do ConsolePrint(tostring(k) .. " = " .. tostring(v)) end`
+
+**This is also the reason the routing is to you and not to the checklist:** your
+job 1 carries the pre-cleared option to add a **mid-session** reconcile to this
+exact flag class. If you take it, A and B change shape (a stranded flag must
+heal without a reload) and the legs must say so; if you skip it, they stand as
+written above. Either way they are specified where the decision is made.
+
 (prompt 2 appends the two measurement verdicts here)

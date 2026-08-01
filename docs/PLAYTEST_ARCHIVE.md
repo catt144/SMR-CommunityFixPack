@@ -6,6 +6,94 @@ work. `BUGS.md` is the canonical status record; this file is the evidence
 trail. Ground rules, save fixtures and the verified command reference stay in
 the checklist — consult it before re-running anything here.
 
+**One section here is RETIRED UNRUN, not completed** (PT-54, below): it was
+withdrawn before it ever ran because the code under it is being replaced. It
+is kept for its trigger designs, which the replacing build's legs draw on. Its
+banner says so; nothing in it is a result.
+
+---
+
+## ~~PT-54~~ — Disaster prediction leak, storm wedge, rains deadlock · covered **F78 `Fix_MeteorStormWedge`, F81 `Fix_DisasterPredictionLeak` + `Fix_RainsDeadlock`** — ⛔ **RETIRED UNRUN 2026-08-01, NO RESULTS**
+
+> **This test was never run and must not be run.** Retired by the project
+> prompt chain 2026-08-01 because the F86 Tier-1 build deletes and replaces
+> `Fix_RainsDeadlock` and reorders the storm-wedge/meteor heal sequencing
+> (`SAVE_SAFETY_REDESIGN.md` §6.2; chain prompts 3 and 4). Triggers **C, D and
+> E** are absorbed by the Tier-1 build's own legs (A/B pair + the F88
+> load-3×-inside-a-rolled-interval regression + the PT-20-method uninstall
+> leg). Triggers **A and B** are NOT absorbed — they test
+> `Fix_DisasterPredictionLeak`, which Tier 1 does not touch — and were routed
+> to chain prompt 3 to be written into `F86_TIER1_BUILD_PROMPT.md` as legs.
+> The retirement record and the trigger-by-trigger absorption table live in
+> `PLAYTEST_CHECKLIST.md` §3 and on the BUGS F78/F81 entries.
+>
+> The text below is the test **as written on 2026-07-29**, preserved for its
+> trigger designs and its console recipes. Read it as source material, never as
+> a procedure to execute against current code.
+
+These three ship together and share machinery, so one PT covers them. The
+wave-6 probes (`SMRTest.DisasterPredictionLeak()`, `SMRTest.MeteorStormWedge()`,
+`SMRTest.RainsDeadlock()` — the rains one needs a loaded colony) assert the
+mechanisms; this PT is the live half. The flag dump used throughout:
+`*r for k, v in pairs(g_DisastersPredicted) do ConsolePrint(tostring(k) .. " = " .. tostring(v)) end`
+(an empty print = no flags set).
+
+**Setup:** the live 194-sol save (or any save with meteor storms enabled).
+`SMRFixPack.ListFixes` must show `DisasterPredictionLeak`, `MeteorStormWedge`
+and `RainsDeadlock` all `active`.
+
+**Trigger A — reconciliation heals a stranded flag.** Hand-plant one
+(`g_DisastersPredicted["DisasterMeteorStorm"] = true`, nothing on screen),
+quicksave, reload.
+   - **EXPECTED:** a `DisasterPredictionLeak: cleared stranded prediction flag`
+     log line on load; the flag dump is clean.
+   - **SURPRISE looks like:** the flag survives the reload (sweep did not run —
+     check fix status first).
+
+**Trigger B — a genuine warning is NEVER cleared.** Wait for (or reach) any
+disaster warning countdown (toxic rain works — 3-sol window with 6 towers),
+quicksave mid-countdown, reload.
+   - **EXPECTED:** the notification is still on screen still counting AND its
+     flag still reads `true` in the dump. The sweep must keep it.
+   - **SURPRISE looks like:** flag cleared while the countdown is visible —
+     that is a FAIL of the sweep's liveness test; report immediately.
+
+**Trigger C — the wedge heals itself.** Drive a storm:
+`*r local d = Presets.MapSettings.Meteor["Meteor_High"] local p = GetRandomPassable(MainMap) CreateGameTimeThread(function() MeteorsDisaster(d, "storm", p) end)`
+Let it run to its wedge (validate-style stall after the last strikes; the
+duration notification eventually expires). While the storm is HEALTHY
+(notification visible), `SMRFixPack.StormWedgeCheck` must read
+`storm notification live (healthy)` — the watchdog must never touch a live
+storm. After the notification expires with the wedge in place:
+   - **EXPECTED:** within ~2 game hours, `MeteorStormWedge: WEDGE confirmed …
+     healing`, then either `released through the vanilla end path` (plus
+     Fix_DisasterPredictionLeak's `storm ended` line) or `forced storm state
+     clean`; the flag dump is clean afterwards; `g_MeteorStorm` reads false.
+   - **SURPRISE looks like:** `StormWedgeCheck` stuck on `signature armed`
+     forever, repeated heals (`restarts` climbing to give-up), or a healthy
+     storm getting cut short.
+
+**Trigger D — storms keep scheduling after a heal.** After Trigger C, confirm
+the scheduler is alive: `IsValidThread(MeteorStorm)` reads true, and over a
+long soak a NATURAL storm warning eventually appears (the pre-fix failure mode
+was: never again).
+
+**Trigger E — rains survive collisions.** On load expect
+`RainsDeadlock: … rain loop moved onto the bounded body` lines IF the save had
+live rain loops (zero lines is normal when the bands had no loops — e.g. after
+the manual 2026-07-29 recovery). Over the soak: rain must occur again within a
+few sols of a rain roll colliding with a warning window (pre-fix: that rain
+type died permanently). Cheap forced check: while any warning countdown is up,
+rains rolling during it must NOT kill later rains — watch for normal/toxic rain
+in the sols after the warning resolves.
+
+Log hygiene: no `[LUA ERROR]` mentioning `DisasterPredictionLeak`,
+`MeteorStormWedge`, `RainsDeadlock`, `RainsDisasterLoop` or `StormWedgeHeal`.
+
+`Result (A reconcile / B warning kept):` **NONE — retired unrun 2026-08-01**
+
+`Result (C heal / D reschedule / E rains):` **NONE — retired unrun 2026-08-01**
+
 ---
 
 ## PT-59 — First Asteroid prefabs survive a save/load · covered **F83 `Fix_FirstAsteroidPrefabs`** — **PASS IN FULL 2026-07-31** → F83 `tested`

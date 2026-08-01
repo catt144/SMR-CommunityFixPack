@@ -105,10 +105,10 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo — found 2026-07-27, wave-6 candidate (entry) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed 2026-07-28 — PT pending (entry) |
-| F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | fixed 2026-07-29 — PT-54 pending (entry) |
+| F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | fixed 2026-07-29 — **PT-54 retired unrun 2026-08-01; verification rides the F86 Tier-1 build leg** (entry) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
-| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — PT-54 pending (entry) |
+| F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | fixed 2026-07-29 — **PT-54 retired unrun 2026-08-01; verification rides the F86 Tier-1 build leg** (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | filed 2026-07-30 — rover half DISPROVEN BY PLAY during PT-25; text-patch design is a USER DECISION (localization tradeoff) (entry) |
@@ -3213,7 +3213,23 @@ Risk note: the wrap point is narrow (extender class only), but the effect surfac
 every `DroneControl` descendant serviced by the uplink hub — must pass the F50
 rocket-churn and F55 unreachable scenarios in playtest before shipping.
 
-### F78 — MeteorsDisaster hangs mid-strike; the colony never sees a meteor — and possibly no disaster/weather at all (P1, high)  `[fixed: Code/Fix_MeteorStormWedge.lua — built 2026-07-29 after the QA review superseded the full-replacement plan: hourly watchdog detects the wedge signature (g_MeteorStorm set + no DisasterMeteorStorm notification + nothing falling, sustained 1h), heals via RestartGlobalGameTimeThread("MeteorStorm") + a guarded g_MeteorStormStop pulse + forced-state cleanup; 3 heals/session then loud give-up (F02 pattern); PT pending. Wave-6 probe in TestKit 55_Probes_Wave6.lua — PASS in the 2026-07-29 pre-flight A/B, its first run against a fixed leg; until that run the probe silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+### F78 — MeteorsDisaster hangs mid-strike; the colony never sees a meteor — and possibly no disaster/weather at all (P1, high)  `[fixed: Code/Fix_MeteorStormWedge.lua — built 2026-07-29 after the QA review superseded the full-replacement plan: hourly watchdog detects the wedge signature (g_MeteorStorm set + no DisasterMeteorStorm notification + nothing falling, sustained 1h), heals via RestartGlobalGameTimeThread("MeteorStorm") + a guarded g_MeteorStormStop pulse + forced-state cleanup; 3 heals/session then loud give-up (F02 pattern); **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg** (note below). Wave-6 probe in TestKit 55_Probes_Wave6.lua — PASS in the 2026-07-29 pre-flight A/B, its first run against a fixed leg; until that run the probe silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+**⛔ PT-54 RETIRED UNRUN 2026-08-01 → verification rides the F86 Tier-1 build
+leg.** The test was withdrawn before it ever ran, by the project prompt chain,
+because the F86 Tier-1 build reorders this fix's heal sequencing (the
+orphan-gate rule, plus the meteor watchdog moving onto
+`Msg("MeteorDone")`/`NewDay` restarting **vanilla's** body) and deletes the
+`Fix_RainsDeadlock` body it was bundled with — running it would have verified
+code that is about to stop existing. **What absorbs F78's half:** PT-54
+Trigger C (the wedge heals itself) → the Tier-1 **A/B pair**, which must
+exercise the reordered heal path; Trigger D (storms keep scheduling after a
+heal) → the A/B pair **plus** the F88 load-3×-inside-a-rolled-interval
+regression leg. Chain prompt 4 records those legs as PT-54's retirement made
+good, and flips this entry's status through the normal protocol (index row +
+heading tag, both). Full trigger text preserved in `PLAYTEST_ARCHIVE.md`;
+absorption table in `PLAYTEST_CHECKLIST.md` §3. **No session may re-run PT-54
+against the current bodies.**
+
 **User report (2026-07-28, save TEST 2G):** minimal-but-nonzero disaster map
 settings, 194 sols played, ZERO disasters ever seen, and no weather effects at
 all despite terraforming progressing well into the range where toxic rains
@@ -3445,14 +3461,34 @@ over track REACHABILITY with no regard for train SERVICE — colonists queue
 indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
 PT-43 F21.
 
-### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[fixed: Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (RainsDisasterLoop replaced with a bounded WaitMsg — timeout > max warning+duration so healthy cycles are untouched — plus a PostLoadGame pass that swaps persisted old-body loop threads for fixed ones, marked SMRFixPack_fixed_loop so reloads do not re-roll cycles). Built 2026-07-29 post-QA; PT pending; wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[fixed: Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (RainsDisasterLoop replaced with a bounded WaitMsg — timeout > max warning+duration so healthy cycles are untouched — plus a PostLoadGame pass that swaps persisted old-body loop threads for fixed ones, marked SMRFixPack_fixed_loop so reloads do not re-roll cycles). Built 2026-07-29 post-QA; **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg, except the (a) leak half's live legs, routed to chain prompt 3** (note below); wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+**⛔ PT-54 RETIRED UNRUN 2026-08-01 — and this entry is the one that keeps a
+LIVE OBLIGATION out of it.** The test was withdrawn by the project prompt
+chain because the F86 Tier-1 build deletes and replaces the `Fix_RainsDeadlock`
+body outright (`SAVE_SAFETY_REDESIGN.md` §6.2). **Absorbed:** Trigger E (rains
+survive collisions) → the `Fix_RainsDeadlock` rewrite's own A/B leg, including
+the migration pass and the C34 stale-ACTIVE rider; the rains-half settling
+observation below rides that same leg (it previously said "PT-54 can carry
+it"). **NOT absorbed:** Triggers **A** (load-time reconciliation heals a
+stranded flag) and **B** (a genuine warning is never cleared — the liveness
+test). Both test `Fix_DisasterPredictionLeak`, which Tier 1 neither rewrites
+nor deletes, so no Tier-1 leg covers them by construction, and the wave-6 probe
+asserts that mechanism only synthetically. They were **routed to chain prompt
+3** (2026-08-01) to be written into `F86_TIER1_BUILD_PROMPT.md` as legs —
+prompt 3 also holds a pre-cleared option to add a **mid-session** reconcile to
+this same flag class, which would change what A and B test, so the legs must be
+specified there rather than left as a standing playtest item. Full trigger text
+preserved in `PLAYTEST_ARCHIVE.md`. **No session may re-run PT-54 against the
+current bodies.**
+
 **Audit 2026-07-30 (reachability): leak half R1, rains half R2 + settling
 observation.** Reachability strengthener not previously recorded: the
 **Capture Meteors POI** special project (Data\POI.lua:47-69) fires
 `MeteorsDisaster("storm")` on ANY map — bypassing both the NoDisasters rule
 and per-map storm settings — so even rule-protected colonies can strand the
 prediction flag by launching that expedition. Rains-half settling observation
-(PT-54 can carry it): after a rain/disaster collision under the fix, rain
+(~~PT-54 can carry it~~ → the Tier-1 `Fix_RainsDeadlock` A/B leg carries it,
+PT-54 retired 2026-08-01): after a rain/disaster collision under the fix, rain
 resuming within ≤7 sols — or a console read showing a blocked
 `RainsDisasterThreads[type]` activation thread on a vanilla save — upgrades
 the deadlock from statically-proven to observed. Full blocks in

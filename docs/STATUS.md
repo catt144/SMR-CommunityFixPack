@@ -651,7 +651,8 @@ colonist gets a camera pan and no selection, which is correct vanilla.)
 carrying 2x/+1 modifiers, loaded against base dials, came back at the baseline
 `1728/1`. **This UN-GATES the D10 workshops build**, which is speced,
 user-approved and ready to write). Next: PT-53 Trigger E (the
-last thing between D07 and `tested`); PT-54 wedge watchdog; PT-52 Trigger B +
+last thing between D07 and `tested`); ~~PT-54 wedge watchdog~~ **(RETIRED
+unrun 2026-08-01 → the F86 Tier-1 build legs)**; PT-52 Trigger B +
 the B2 re-run on the v2 stress harness; PT-20 save/remove/load
 incl. wave-6 persisted state; PT-21. **PT-46 tail: (d) PASSED 2026-07-30**
 (cap follows length, `43/2`→`13/1` across a salvage); **(a) settled R4 by the
@@ -843,7 +844,8 @@ authoritative home; moved verbatim 2026-07-29, audit remediation 3.2).
    precedent) beats a full-body replacement that rots on game patches.
    *(Review since fired and both questions answered: `FindNotification` +
    Dismissable=false makes the stranded/legit test sound, and the watchdog DID
-   beat the replacement — wave 6 built 2026-07-29 late, PT-54 gates it.)*
+   beat the replacement — wave 6 built 2026-07-29 late; ~~PT-54 gates it~~ →
+   PT-54 RETIRED unrun 2026-08-01, the F86 Tier-1 build legs gate it.)*
 11. **OPEN (2026-07-29): D08 — the extender overhaul**, five layers speced in
    `DRONE_OVERHAUL_OPTIONS.md` with a risk table. Recommended order is
    dispatcher → Command Center tab + advisory → cluster scoping → adjustable
