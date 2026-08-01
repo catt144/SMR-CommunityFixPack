@@ -178,12 +178,14 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 >   **Counts re-derived from the files, not inherited:** 100 index rows
 >   (88 F + 12 D) — the 2026-07-31 "98" had gone stale within its own day.
 
-> 🔨 **F86 TIER 1 IS BUILT (2026-08-01, chain prompt 4) — ALL FOUR BUILD UNITS
-> LANDED; THE FIVE LEGS ARE THE VERIFICATION AND HAVE NOT RUN YET.** Nothing
-> below may be called repaired/fixed/tested until the legs read their numbers
-> (owner at the keyboard, one game sitting; leg definitions in
-> `F86_TIER1_BUILD_PROMPT.md` until it is consumed, then the outbox of chain
-> prompt 4). What shipped:
+> ✅ **F86 TIER 1 IS BUILT AND VERIFIED (2026-08-01, chain prompts 4 + 4b) —
+> ALL FOUR BUILD UNITS LANDED AND ALL FIVE LEGS HAVE RUN** (owner at the
+> keyboard, one game sitting plus the uninstall sitting). Save lineage
+> `save_game_id HdmSxGs6kyd0uz6-` (test-2, map BlankBigCanyonCMix_09); logs
+> `Mars.exe-20260801-16.42.31` (first load), `-17.11.08` (main sitting),
+> `-19.14.11` (uninstall). **F02, F78, F81 and F88 are flipped to `tested` on
+> that evidence** (index rows and heading tags both), and C34's rider is
+> verified. What shipped:
 > - **`Fix_MeteorFrequency` REWRITTEN (§6.2a-A):** layer-3 keyed
 >   `GetDisasterWarningTime` wrapper over VANILLA's thread body; the body copy
 >   and its heartbeat surface are deleted; the per-load restart (F88's defect)
@@ -213,15 +215,66 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 >   migration (incl. the id-less `test 2i` shape) and the C34 heal;
 >   FixtureCarry's version-lock warning is RESOLVED (the migration is
 >   version-stamped) and `SMRFixPack_MeteorLatch` joins its GameVar list.
-> - **Tier 2 still owes** (chain prompt 5): `DroneUnreachableForever`,
->   `TrainWaitTime`, `ArrivalDeaths` (b) + the (a) design pass, and the
->   D10/D12 unhold record. The §5.4-A conversions are chain prompt 8.
 > - **F89 filed mid-sitting (2026-08-01, leg 1):** vanilla's `MeteorsDisaster`
 >   drain loop wedges the Meteors thread on ORDINARY strikes (F78's class on
 >   the singles path, invisible to the storm watchdog); measured live at 192h
 >   silence and healed by the F02 watchdog at its threshold — the insurance
 >   the spec kept proved itself. Covered, not fixable directly (entry).
 >   **Index rows now 101 (89 F + 12 D).**
+>
+> **What the legs actually read (2026-08-01):**
+> - **Leg 1 — cadence + warning timing.** Scheduler gaps 75h, 83h, 72h (plus
+>   86.7h around the natural storm), all inside the designed 65–90h roll.
+>   Storm-warning timing UNCHANGED, proven three independent ways: probe
+>   keyed/unkeyed discrimination; a live `GetDisasterWarningTime` read from a
+>   non-Meteors thread returning **2250000** (the tower cap, not the keyed
+>   2700000); and the natural storm's UI countdown reading ≈74h. **Both**
+>   §6.2a-D heal branches ran live on the reordered body — the release branch
+>   on a forced storm and the force-clean branch on the scheduler's own
+>   natural storm — with logging last in both, exactly as specced. Storms are
+>   2-for-2 wedging in this colony, so F78's repro is robust.
+> - **Leg 2 — F88's own repro as its regression test.** `t=216351730` →
+>   quicksave → **three loads with zero pack lines** → `t=218608231
+>   (+2256501 ms = 75 game hours)`. The meteor arrived on the pre-load
+>   deadline; the per-load re-roll is gone.
+> - **Leg 3 — rains.** The collision arrived NATURALLY (re-roll posted, rain
+>   returned; a second one later), `'normal'` migrated and stamped 1.0.1 with
+>   no re-migration on later loads, `toxic` correctly silent per the amended
+>   id-less reading (`70e6d0c`), and the C34 stale-ACTIVE plant healed through
+>   vanilla `FinishRainProcedure`.
+> - **Leg 4 — stranded flags, both halves.** A stranded flag cleared on a
+>   NewDay tick with NO reload *and* inside a load block; a genuine live
+>   countdown survived both sweeps (reload and sol tick) with its flag intact.
+> - **Leg 5 — uninstall (PT-20 method).** With the pack disabled: `Meteors`
+>   and `MeteorStorm` threads both `valid=true` on vanilla bodies, **zero
+>   lines and zero errors naming any Tier-1 module**, and residue only from
+>   the allowed list — `SMRFixPack_MeteorLatch = (absent)` (below budget) and
+>   inert `loop_version` fields in vanilla's own `RainsDisasterThreads`. F86
+>   **Site 1's harm no longer happens**: removing the pack no longer kills the
+>   colony's meteors.
+>
+> ⚠️ **Two limits leg 5 did NOT clear, recorded rather than glossed:**
+> (1) **F86 Site 2 is untouched and still leaks** — the uninstall log carries
+> **80** `[LUA ERROR] Opt_DroneOverhaul.lua:96` orphan errors, the same
+> `(96)←(190)←sprocall←CommandObject.lua(246)` shape BUGS.md already records
+> at 98/session. New this leg: they are confined to the FIRST load and are
+> **zero after a save+reload** — the leak self-clears in one load. That site
+> is layer-2/Tier-2 work and belongs to chain prompt 5, where its carve-out is
+> pre-granted; it is **not** a Tier-1 falsification and did not gate the flips.
+> (2) **No meteor cycle was instrumented in the uninstalled state** — the
+> meteor logger is a per-session toggle and the game restart cleared it. The
+> owner saw a warning with no strike behind it, which is ordinary vanilla F89
+> with no watchdog to heal it. The uninstall claim rests on the thread/body
+> read and the zero-error log, not on that observation. FixtureCarry also
+> reports label modifiers as `NOT INSPECTABLE` — absence there is not evidence
+> of absence.
+>
+> - **Tier 2 still owes** (chain prompt 5): `DroneUnreachableForever`,
+>   `TrainWaitTime`, `ArrivalDeaths` (b) + the (a) design pass, **F86 Site 2
+>   (`Opt_DroneOverhaul`)**, and the D10/D12 unhold record. The §5.4-A
+>   conversions are chain prompt 8. **F86 still BLOCKS RELEASE until Tier 2
+>   closes** — Tier 1 verifying does not by itself make the pack
+>   uninstall-clean.
 
 > ✅ **F86 PHASE 0 IS DONE (2026-08-01, owner at the keyboard, one sitting) —
 > the two engine measurements that gated the Tier-1 designs are MEASURED, and

@@ -56,17 +56,25 @@ paragraph's claims to what that survey and `BUG_LIST_AUDIT.md` can cite; it is
 about a documented engine behaviour and a community norm, never about other
 authors doing worse work.)*
 
-**[DRAFT NOTE — CONDITIONAL, do not publish until F86 Tier 1 has landed AND
-verified** (project prompt chain 4; then delete this note and keep the
-sentence)**.]** `[FAQ]` Once the Tier-1 repairs ship, one more sentence becomes
-true and belongs here: *"As far as we can tell, no mod in either game's
+**[DRAFT NOTE — CONDITIONAL, STILL NOT PUBLISHABLE. ⚠️ Gate CORRECTED
+2026-08-01 (chain prompt 4b) — do not delete this note on the old reading.]**
+The note used to say "do not publish until F86 Tier 1 has landed AND verified".
+**Tier 1 has now landed and verified** — all five legs run 2026-08-01, F02/F78/
+F81/F88 flipped to `tested`, and the specific blocker this note used to name is
+gone: `Fix_MeteorFrequency` no longer leaves a running thread behind (leg 5 read
+its `Meteors` thread alive on *vanilla's* body with the pack removed). **But the
+claim below is still not ours to make**, because leg 5's uninstall log
+(`Mars.exe-20260801-19.14.11`) still carries 80 orphan `[LUA ERROR]` lines from
+F86 **Site 2** (`Opt_DroneOverhaul`). **The real gate is Tier 2** (chain prompt
+5), which owns that site. Publish only when an uninstall leg reads clean across
+the whole pack — then delete this note and keep the sentence exactly as written.
+`[FAQ]` The sentence: *"As far as we can tell, no mod in either game's
 community has held itself to this uninstall standard before — not because
 others fell short, but because the engine never made it cheap enough to
 promise."* The survey found the shapes we use all have precedent
 individually; what has none is treating uninstall-cleanliness as a requirement
-with an enumeration behind it (`PRIOR_ART_SURVEY.md` §6). **Until Tier 1
-verifies, the claim is not ours to make** — our own `Fix_MeteorFrequency` is
-currently one of the modules that leaves a running thread behind.
+with an enumeration behind it (`PRIOR_ART_SURVEY.md` §6). It is deliberately
+**not** softened to fit the current state: it ships whole, or not at all.
 
 **None of that is a guarantee, and we are not going to pretend otherwise.** We
 cannot test every combination of other mods, every colony shape, every save

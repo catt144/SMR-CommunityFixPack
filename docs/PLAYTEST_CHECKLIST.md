@@ -454,16 +454,22 @@ verify code that is about to stop existing.
 `4_f86_phase2_tier1_build_fable.md` §3, which states these legs *are* PT-54's
 retirement made good):
 
-| PT-54 trigger | absorbed by |
-|---|---|
-| **C** wedge heals itself | the Tier-1 **A/B pair** — it must exercise the reordered heal path, since that path is what changes |
-| **D** storms keep scheduling after a heal | the Tier-1 A/B pair **+ the F88 load-3×-inside-a-rolled-interval regression leg**, which is the sharper form of the same question |
-| **E** rains survive collisions | the `Fix_RainsDeadlock` rewrite's own A/B leg (incl. the migration pass and the C34 stale-ACTIVE rider) |
+| PT-54 trigger | absorbed by | ✅ RUN |
+|---|---|---|
+| **C** wedge heals itself | the Tier-1 **A/B pair** — it must exercise the reordered heal path, since that path is what changes | **RUN 2026-08-01, leg 1** (`Mars.exe-20260801-17.11.08`) — and better than asked: BOTH §6.2a-D completion branches ran live, the release branch on the forced storm (`0:20:28.442` → vanilla end path) and the force-clean branch on the scheduler's own natural storm (`1:56:48.368` → `8 stray meteor object(s) removed`) |
+| **D** storms keep scheduling after a heal | the Tier-1 A/B pair **+ the F88 load-3×-inside-a-rolled-interval regression leg**, which is the sharper form of the same question | **RUN 2026-08-01, legs 1+2** (same log) — `IsValidThread(MeteorStorm)` true after the heal, and the natural storm that arrived later *is* the scheduler proving it; leg 2 read the sharper form, `t=216351730` → 3 loads → `t=218608231 (+2256501 ms = 75 game hours)` on the persisted deadline |
+| **E** rains survive collisions | the `Fix_RainsDeadlock` rewrite's own A/B leg (incl. the migration pass and the C34 stale-ACTIVE rider) | **RUN 2026-08-01, leg 3** (same log) — the collision arrived NATURALLY (`0:20:06` re-roll posted, rain returned; a second at `1:50:10`), `'normal'` migrated + stamped 1.0.1, and the C34 stale-ACTIVE plant healed through vanilla `FinishRainProcedure` at `0:23:39` |
 
 ⚠️ **NOT absorbed, and carried forward rather than dropped: triggers A and B.**
 They test `Fix_DisasterPredictionLeak` — the load-time reconciliation and its
 liveness test — and no Tier-1 rewrite covers them by construction. Its wave-6
-probe asserts the mechanism synthetically only. ✅ **RESOLVED 2026-08-01
+probe asserts the mechanism synthetically only. ✅ **RUN 2026-08-01 as leg 4,
+in their changed shape** (`Mars.exe-20260801-17.11.08`): A(a) a planted flag
+cleared on the next NewDay tick with NO reload (`0:02:24`); A(b) re-planted
+with no sol tick either side, cleared inside the load block (`0:10:47`); B a
+live storm countdown survived quicksave/reload with no clear line and a flag
+dump of `DisasterMeteorStorm = true`, and survived a sol tick during the live
+countdown too. ✅ **RESOLVED 2026-08-01
 (prompt 3): both are written into `docs/prompts/F86_TIER1_BUILD_PROMPT.md` as
 leg 4 — and the pre-cleared mid-session reconcile WAS taken**
 (`SAVE_SAFETY_REDESIGN.md` §6.2a-C: an `OnMsg.NewDay` reconcile joins the
