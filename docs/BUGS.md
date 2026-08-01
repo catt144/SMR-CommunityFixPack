@@ -6456,6 +6456,19 @@ quotes verbatim; sources in the audit report §8.
   notif_prefix lookup would concatenate nil on them. Verification rides
   Tier-1 leg 3 (plant `g_RainDisaster` with a dead `main_thread` → heals
   through FinishRainProcedure).**
+  **Id-less migration clause resolved 2026-08-01 (mid-sitting, owner
+  cleared): `test 2i`'s `toxic id=nil` entry is vanilla's own empty fill-in
+  (`UpdateRainsThreads` creates `{}` entries for inactive rain types,
+  `TerraformingDisasters.lua:453-457`; live dump: `alive=false`) — nothing
+  to migrate, correctly silent. A LIVE id-less thread is effectively
+  unreachable (vanilla always stamps `id`; our old pass never removed one);
+  the spec's unique-type resolution is dead code against the real preset
+  group (classdef defaults `type="toxic"`, `:128` → 3 toxic + 3 normal,
+  never unique), so a hypothetical live id-less entry takes the loud
+  leave-and-log path — bounded by vanilla's next `UpdateRainsThreads`, which
+  DeleteThreads every not-kept activation thread (id=nil can never be kept)
+  and recreates the loop on its own body. Leg 3's PASS reading amended
+  accordingly (build prompt carries the note).**
 - **C26 [author] — malfunctioned buildings stuck in perpetual maintenance.**
   SkiRich (OG, workshop 2433157820, 4,100 subs): *"buildings that are
   malfunctioned and stuck in perpetual maintenance mode and nobody is willing

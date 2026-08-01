@@ -94,10 +94,22 @@ claimed passed without the arrival observed on the pre-load deadline.
 
 **Leg 3 — rains A/B** (PT-54 trigger E): under the rewrite, a forced collision
 re-rolls immediately (wrapper Msg observed in log) and rain returns; the
-migration pass moves persisted loops (the `test 2i` fixture's `toxic`
-`id=nil` entry is the id-less case — it must migrate, not be skipped); the C34
-stale-ACTIVE state (plant `g_RainDisaster` with a dead `main_thread`) heals
-through `FinishRainProcedure`.
+migration pass moves persisted loops; the C34 stale-ACTIVE state (plant
+`g_RainDisaster` with a dead `main_thread`) heals through
+`FinishRainProcedure`.
+> ⚠️ **Id-less clause AMENDED 2026-08-01 mid-sitting (owner cleared).** The
+> original text — "the `test 2i` `toxic id=nil` entry must migrate, not be
+> skipped" — is unsatisfiable: that entry is vanilla's own empty fill-in
+> (`UpdateRainsThreads` creates `{}` entries for inactive rain types,
+> `TerraformingDisasters.lua:453-457`; live dump read `alive=false`), a LIVE
+> id-less thread is effectively impossible (vanilla always stamps `id`), the
+> spec's unique-type resolution can never fire (preset classdef defaults
+> `type="toxic"`, `:128` — the group is 3 toxic + 3 normal, never unique),
+> and an id-less live entry would take the loud leave-and-log path, bounded
+> by vanilla's next `UpdateRainsThreads` deleting/recreating it. **Amended
+> PASS reading: `normal` migrated + stamped; `toxic` silent (no thread); NO
+> "left as-is — settings unresolved" line anywhere.** Observed already in
+> `Mars.exe-20260801-16.42.31`.
 
 **Leg 4 — PT-54 triggers A and B, `Fix_DisasterPredictionLeak`** (routed here
 by prompt 1's retirement record; **shape CHANGED by the taken mid-session
