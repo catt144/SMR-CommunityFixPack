@@ -1,31 +1,19 @@
 -- F49: the train minors bundle. Five items were tracked; each was screened
--- against the shipped source and two are fixed here. What the other three turned
--- out to be is recorded on the BUGS.md entry and summarised at the bottom of
--- this header — none of them is a no-op fix waiting to be written.
+-- against the shipped source and ONE is fixed here — the (d) train cap. The
+-- other four's dispositions are recorded on the BUGS.md entry and summarised
+-- below — none of them is a no-op fix waiting to be written.
 --
----- (a) instantly-built track is painted with the PIPES palette --------------
--- `Tracks.lua:385` captures `local cm1, cm2, cm3, cm4 = GetPipesPalette()` and
--- `:412` applies it to every element the instant placement path creates
--- (`place_track`, used when the track does not require construction — map
--- setup, cheats, the instant-build rule). Every other track path uses
--- `GetTracksPalette()`: the completed-construction path (`TrackElement.lua:791`),
--- the construction cursor (`GridConstruction.lua:220`), and — decisively — the
--- colony colour-scheme refresh, which repaints *every* `TrackGridElement` on
--- every map with it (`ColonyColorScheme.lua:120-121`). The two palettes differ:
--- pipes is `(pipes_metal, pipes_base, pipes_metal, pipes_base)`, tracks is
--- `train_track_base` four times (`ColonyColorScheme.lua:69-77`). So instant
--- track comes out pipe-coloured until the player happens to change colour
--- scheme, at which point it silently corrects itself — which is what makes the
--- scheme refresh the authority on what the colour should have been.
---
--- Patch approach: a post-wrapper on `TrackGridElement:GameInit`
--- (TrackElement.lua:218-224) applying exactly what the scheme refresh applies.
--- The palette assignment at Tracks.lua:412 happens during construction of the
--- object, before GameInit, so the wrapper lands after it. Construction sites
--- (`TrackConstructionSite`, which inherits TrackGridElement) are skipped — the
--- shipped GameInit branches on the same flag, and their visuals belong to the
--- construction cursor. Elements built the normal way are repainted with the
--- colour they already had, so this is a no-op for them.
+---- (a) REMOVED 2026-08-01 — R4 unreachable; adjudicated NON-FIX -------------
+-- The guard that used to live here repainted instantly-built track (which
+-- vanilla paints with the pipes palette, Tracks.lua:385/:412) with the tracks
+-- palette. The reachability audit proved the instant path R4 — no player-
+-- reachable entry into `place_track` exists (no InstantTracks const, no track
+-- cheat, build menu hardcodes require_construction; injection-only repro) —
+-- and the defect self-corrects anyway on any colour-scheme change
+-- (ColonyColorScheme.lua:120-121). The 2026-08-01 bug-list audit filed it in
+-- the NON-FIX tier and the owner directed the strip the same day. Full
+-- record: BUGS.md F49 entry + BUG_LIST_AUDIT.md §2.4 / REACHABILITY_AUDIT.md
+-- F49(a) lead pass.
 --
 ---- (d) `max_vehicles` is computed once and never again ---------------------
 -- `TrackBase:GameInit` (Track.lua:62-67) sets
@@ -88,39 +76,21 @@
 --     condition that inserts the status — a redesign, not a fix.
 
 SMRFixPack.Register("TrainMinors", {
-	title = "Instant-track paint, train cap follows length",
+	title = "Train cap follows track length",
 	apply = function()
 		local err = SMRFixPack.Require("TrainMinors", {
-			{ class = "TrackGridElement", method = "GameInit" },
 			{ class = "TrackBase", method = "GameInit",
 			  reason = "TrackBase.GameInit/UpdateEndElements not found (game update changed it?)" },
 			{ class = "TrackBase", method = "UpdateEndElements",
 			  reason = "TrackBase.GameInit/UpdateEndElements not found (game update changed it?)" },
-			{ global = "GetTracksPalette",
-			  reason = "GetTracksPalette/SetObjectPaletteRecursive not found (game update changed it?)" },
-			{ global = "SetObjectPaletteRecursive",
-			  reason = "GetTracksPalette/SetObjectPaletteRecursive not found (game update changed it?)" },
 			{ global = "ExpandTrackFromElement" },
 		})
 		if err then return err end
-		local TE = TrackGridElement
 		local TB = TrackBase
 		local expand = ExpandTrackFromElement
 		-- (the SelectionPropagate / GetInGameInterfaceMode self-check went with
-		-- the (c) guard, 2026-07-30 — nothing here touches either any more)
-
-		---- (a) ---------------------------------------------------------------
-		local orig_el_gameinit = TE.GameInit
-		function TE:GameInit(...)
-			local res = orig_el_gameinit(self, ...)
-			if not self.is_construction_site then
-				-- exactly what ColonyColorScheme.lua:120-121 applies to every
-				-- TrackGridElement when the player changes colour scheme
-				local cm1, cm2, cm3, cm4 = GetTracksPalette()
-				SetObjectPaletteRecursive(self, cm1, cm2, cm3, cm4)
-			end
-			return res
-		end
+		-- the (c) guard, 2026-07-30; the (a) palette wrapper and its three
+		-- Require entries went 2026-08-01 — see the header)
 
 		---- (d) ---------------------------------------------------------------
 		-- The shipped formula, Track.lua:64-65, verbatim. Returns the value it

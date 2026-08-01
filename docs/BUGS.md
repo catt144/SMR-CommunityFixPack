@@ -64,7 +64,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | tested — PT-23 PASS 2026-07-28 (entry) |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | tested |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
-| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* — (d) tested 2026-07-30 PT-46; (c) wontfix + guard REMOVED (designed behaviour); (a) R4, kept (entry) |
+| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* — (d) tested 2026-07-30 PT-46; (c) wontfix + guard REMOVED (designed behaviour); (a) R4 NON-FIX, guard STRIPPED 2026-08-01 (owner; audit §2.4) — A/B code-gate leg owed (entry) |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | tested |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | tested |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | tested*|
@@ -1572,7 +1572,21 @@ and after. If it holds up, the pass belongs in `90_SaveSanitizer.lua` behind a o
 both cases → implement in the sanitizer, skipping tracks that carry repair sites; a dirty
 FAIL on the damaged-track case → close `wontfix — repair riskier than the defect`.*
 
-### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — items (a) and (d) only since 2026-07-30; (d) TESTED (PT-46); (c) wontfix, guard REMOVED — it was fixing designed behaviour; (b)(e) screened and deliberately not fixed, see below]`
+### F49 — Train minors bundle (P3, med)  `[fixed*: Code/Fix_TrainMinors.lua — item (d) ONLY since 2026-08-01; (d) TESTED (PT-46); (c) wontfix, guard REMOVED 2026-07-30 — designed behaviour; (a) R4 NON-FIX, guard STRIPPED 2026-08-01; (b)(e) screened and deliberately not fixed, see below]`
+
+**2026-08-01 (owner direction, bug-list audit follow-through): the (a) palette
+guard is STRIPPED from the module.** Grounds: the reachability audit's R4 was
+already high-confidence and adjudicated (no player-reachable entry into
+`place_track`; injection-only repro; self-corrects on colour-scheme change),
+the audit's NON-FIX tier (BUG_LIST_AUDIT.md §2.4) formalized it, and the owner
+directed removal so no adjudicated non-fix leaves live code behind. Removed in
+the same change: the wrapper on `TrackGridElement:GameInit`, its three Require
+entries, and the probe's palette half (TestKit `50_Probes_Wave5.lua` — probe
+retained, cap half only; probe count stays 78; its PASS text changed, so the
+next fingerprint diff will show that one line). Module title now "Train cap
+follows track length". **Owed: the standard unattended A/B code-gate leg**
+(expected: counts unchanged — 74 registered / 68 default-active; all-ON
+68/0/10/0, default 63/0/15/0, baseline probe FAIL row unchanged).
 
 **Audit 2026-07-30 (reachability): (a) settled R4; (c)(d) live R2; module
 kept.** The (a) trigger list "map setup, cheats, the instant-build rule"

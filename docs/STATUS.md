@@ -75,7 +75,15 @@ with **PHASE 4 COMPLETE** (below).
 > at the owner's direction** (audit §2.4) so hard we-are-not-fixing-this
 > decisions (R4 / tier-I / §4a-barred / owner-declined) never muddy the
 > maybe-BRONZEs — checked: nothing in BRONZE belongs there; the latent R3s
-> ship deliberately per §4a. Headlines: a native Relaunched fix-modding scene exists and
+> ship deliberately per §4a. **And the tier's one code wrinkle is CLOSED
+> (owner direction, same day): the F49(a) no-op guard was STRIPPED from
+> `Fix_TrainMinors`** — wrapper + 3 Require entries + the probe's palette
+> half (probe retained, cap-only; count stays 78; its PASS text changed —
+> expect that one line in the next fingerprint diff). Counts unchanged
+> (74 registered / 68 default-active). ⚠ **OWED: the standard unattended A/B
+> code-gate leg** (expected all-ON 68/0/10/0 · default 63/0/15/0 · baseline
+> TrainMinors probe still FAILs by design — verified: the cap half alone
+> discriminates). Headlines: a native Relaunched fix-modding scene exists and
 > independently converges on F01/F04/F71/F74/F78/F81 (fredware's 13-fix "Bug
 > Fixes" created 2026-07-31, GromGor, Oxygenus); the Relaunched dev patch-note
 > thread witnesses the train/lander/homeless clusters wholesale; **20 gap

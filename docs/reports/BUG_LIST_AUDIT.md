@@ -190,7 +190,7 @@ four latent R3s (F27/F29/F31/F57(a)) are *deliberate* fixes under the owner's
 | F28 | R4 — zero callers in all of Src; §4a mod-facing bar; fix + probe DELETED |
 | F32 | wontfix — designed notification behavior |
 | F42 | tier I — guard's purpose does not reach dust devils; designed scope (user 2026-07-25; ⚠ stale index row corrected this audit) |
-| **F49(a)** | **R4, mod-tools-only entry into `place_track`** (exhaustive falsification: no InstantTracks const, no cheat, injection-only repro; self-corrects on palette refresh). ⚠ unique wrinkle: its no-op guard CODE still ships inside `Fix_TrainMinors` — strip on next module touch stands |
+| **F49(a)** | **R4, mod-tools-only entry into `place_track`** (exhaustive falsification: no InstantTracks const, no cheat, injection-only repro; self-corrects on palette refresh). ✅ **Wrinkle RESOLVED 2026-08-01 (owner direction): the no-op guard was STRIPPED from `Fix_TrainMinors` the same day** — wrapper, Require entries and the probe's palette half all removed; A/B code-gate leg owed (F49 entry). The tier now leaves no live code behind |
 | F49(c) | tier I — designed behavior; guard REMOVED 2026-07-30 |
 | F56 | tier I — auto RC Transports never covered rockets, by maintained design |
 | F61 | wontfix — superseded by D03 (the need is met by design, not repair) |
