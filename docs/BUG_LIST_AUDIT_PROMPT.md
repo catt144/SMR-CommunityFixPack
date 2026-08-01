@@ -52,11 +52,33 @@ scores low. The output is a confidence tier plus the work each tier owes.
    **identical between the original and Relaunched** — then you have independent
    diagnosis, proof the remaster did not change it, and years of in-the-wild
    validation of the approach.
-4. **Other established fix authors.** `LukeH` is credited in the release
-   checklist — ⚠️ **for Martian Express, which is a CONTENT mod. Verify he has a
-   fix corpus at all before seating him at ChoGGi's tier.** Do not guess at other
-   author names; if you find candidates, list them for the owner rather than
-   promoting on them.
+4. **Other established fix authors — GO AND FIND THEM. This is an active task,
+   not a footnote.** ChoGGi is simply the one whose collection we happen to hold
+   locally; he is the *index*, not the population. **Hunt for fix-focused authors
+   in BOTH games and dig into their work.**
+   - **Where to look:** Steam Workshop sorted by subscribers/rating, filtered for
+     fix/bugfix/QoL; Paradox Mods (the only console channel, so its top-rated
+     fix mods matter); GitHub (many authors mirror unpacked source, as ChoGGi
+     does); "essential mods" and "best bugfix mods" threads on the Paradox
+     forums, Reddit and the wiki; mod descriptions that cross-credit each other.
+   - **Qualifying as ChoGGi-tier:** a substantial **fix** corpus (not content or
+     balance), readable source, and either longevity or a large subscriber base.
+     ⚠️ **Verify fix-author vs content-author before weighting anything.**
+     `LukeH` is credited in our release checklist — but **for Martian Express,
+     which is a CONTENT mod.** Being excellent at features does not make an
+     author's patch shapes evidence about bug reality. Apply that test to every
+     candidate.
+   - **Weighting.** One independent author fixing the same thing promotes
+     **BRONZE → SILVER**. Two or more independent authors is stronger and worth
+     recording, but **modder agreement alone never reaches GOLD** — GOLD requires
+     a player-side witness that someone *noticed and minded*. A mod description
+     that names the player-facing symptom is a legitimate witness quote (cite it
+     verbatim like any other) and can support SILVER on its own.
+   - **Their fix lists are also the source for the "gaps in our list" section** —
+     read what they fixed that we did not.
+   - **Report the roster** you assembled, including candidates you *rejected* and
+     why (content-only, no readable source, dead link). A short roster with
+     reasons is a real result; a long roster of unverified names is not.
 
 ## Sources — local first, so this ages into evidence
 
@@ -133,7 +155,7 @@ source is near-mute on *wrongness*) · `docs\PRIOR_ART_SURVEY.md` ·
    tier · sub-type if BRONZE · witness quote + source + game · what it owes.
 3. **HOLD list** — each with its written defence and exit condition.
 4. **`NO MECHANISM FOUND`** — separately and prominently.
-5. **⭐ Gaps in OUR list** — bugs ChoGGi (or another verified fix author) fixed
+5. **⭐ Gaps in OUR list** — bugs ChoGGi or any other verified fix author fixed
    that we do **not** have. This is the half only available because we built
    independently first, and it may be the most valuable output. **File findings
    as `BUGS.md` entries with evidence; do not fix them.**
