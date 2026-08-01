@@ -410,14 +410,44 @@ source-verified per module (§2.11). The one-leg control (block an own-thread
 module, save, uninstall, load, count errors) remains available if the owner
 wants a measured datum, but no build decision now rests on it.
 
-**4.4 `Fix_LastTransmissionStorage`'s `Condition.eval` closure. OPEN, low.**
-The module writes a mod closure into a FactionDefs preset sub-object
+**4.4 `Fix_LastTransmissionStorage`'s `Condition.eval` closure. ✅ CLOSED
+2026-08-01 (source-read, F86 Phase 1): the closure DOES enter saves — via
+route (c), not the route this question guessed — and it is INERT. No build.**
+The framing below asked whether engine code holds the Condition sub-object
+live *across a yield*; the answer to that narrow question is NO — the entire
+evaluation path is synchronous (`FactionDef:EvalApproval` →
+`FactionLikeBase:EvalPreconditions` → `FactionLikeGlobalCondition:Eval`,
+ClassDef-Factions.generated.lua:165-246/:672-688/:843-849 — no yield
+anywhere). But value-reachability finds the route the framing missed:
+`FactionsHolder:RecalcFactionsApproval` (`Factions.lua:641-660`) stores
+`likes_data` — whose non-zero entries carry `like = like_def`, the preset
+SUB-object — into `self.factions_approval`, and `g_FactionsHolder` is a
+**GameVar** (`Factions.lua:196`). The permanents gather registers preset
+ROOTS only (`permanents["Preset:Class.Group.Name"] = preset`,
+`CommonLua/Preset.lua:1362-1394`), so the like sub-object, its `Condition`
+table, and our `eval` closure (upvalues: a comparator, a grid-type string, a
+number) serialise **by value** — and they do so exactly when the fix WORKS,
+because only a non-zero evaluation stores the like reference (a zero
+evaluation stores `{how_to, value}` with no like ref — which is why vanilla's
+six broken entries never carried it). **Why it is inert, verified:** every
+consumer of the persisted `likes_data` reads plain fields only
+(`:647-653` value-comparison for notifications; `GetFactionLikeData`
+`:1134-1156` sort/UI) — nothing ever calls `.Condition.eval` on a persisted
+copy; fresh evaluations go through the LIVE presets via `ForEachPreset`. An
+orphaned copy is dead weight; even if something invoked it, it touches only
+vanilla globals and its own plain upvalues — zero mod-name lookups, zero
+errors. Classification: **route-(c) named/bounded/inert residual, accepted
+and disclosed (§3a)** — recorded on the BUGS F86 durable list as "+1"
+alongside the 13, and in FIX_POLICY §3a's count note. The original framing
+follows for the record.
+
+~~The module writes a mod closure into a FactionDefs preset sub-object
 (`Fix_LastTransmissionStorage.lua:134`). Presets are permanents
 (Preset.lua:1362-1394), so the walk stops at the preset root — the closure
 enters a save only if engine code holds the *Condition sub-object* live across
 a yield while evaluating likes. One source check of the faction-likes
 evaluation path closes it. Until then this is the only unclassified
-function-value write among the "safe" modules.
+function-value write among the "safe" modules.~~
 
 **4.5 `Fix_ShelterReflex` / `Fix_CaveInsNoDisasters` compliance** rests on the
 layer-2 argument (nothing after the call ⇒ nothing to execute after removal),
