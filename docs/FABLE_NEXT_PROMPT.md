@@ -187,7 +187,15 @@ actually measured, and read the toggles with `SMRFixPack.ListFixes()` or
    (one fresh 10-minute save covers both).
 5. **PT-10, PT-15, PT-18, PT-25, PT-27/28/30, PT-35, PT-42, PT-44, PT-47**, then
    **PT-21/22** last.
-6. **⭐ F86 — THE BUILD IS AUTHORISED. THIS IS THE WORK.** Scope in
+6. **⏸️ F86 — BUILD AUTHORISED BUT PAUSED BY THE OWNER 2026-07-31.** Nothing
+   was written; every repair below is unstarted. The owner is having the session's
+   findings compared against another agent's before code is written — full
+   write-up with per-finding confidence labels in **`docs\F86_SESSION_FINDINGS.md`**,
+   which also carries **an unrecorded shipped defect the owner found** (our
+   `OnMsg.LoadGame` restarts the meteor timer on EVERY load, so a player who
+   loads more often than the 35-115 h interval never gets a meteor — report
+   §1.4). **Read that report before resuming.**
+   *Authorised scope, when it resumes:* Scope in
    `SAVE_SAFETY_REDESIGN.md` **§6**; read it before writing a line.
    **Tier 1 first:** `Fix_MeteorFrequency` (layer 3, thread-keyed
    `GetDisasterWarningTime`; delete the body; split the PT-01 watchdog onto

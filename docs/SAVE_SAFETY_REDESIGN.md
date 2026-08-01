@@ -19,7 +19,16 @@ this file is the *how*.
 >   wrapper**, 4 have a route worth designing, 9 are correctly full replacements,
 >   3 are already optimal. None of it is urgent; none of it blocks F86.
 >
-> ⭐ **THE BUILD IS NOW AUTHORISED — §6. Scope: Tiers 1 and 2; LAYER 1 IS NOT TO
+> ⏸️ **BUILD PAUSED 2026-07-31 — nothing was written.** The owner is having this
+> session's findings independently compared first:
+> **`docs/F86_SESSION_FINDINGS.md`** (confidence labels per finding, the two
+> discarded analysis methods, and the mistakes made). ⚠️ **It records a shipped
+> defect not covered anywhere in this file** — `Fix_MeteorFrequency` restarts the
+> meteor timer on **every** load, so frequent loading suppresses meteors
+> indefinitely (§1.4 there). That also puts §6's retroactive-heal reasoning in
+> question. **Read it before building.**
+>
+> ⭐ **THE BUILD IS AUTHORISED — §6. Scope: Tiers 1 and 2; LAYER 1 IS NOT TO
 > BE BUILT.** F02's hold is **lifted** and it leads the build. `Opt_DroneOverhaul`
 > is in scope but blocked on the drone carve-out. D10/D12 stay held until these
 > repairs land.
