@@ -113,7 +113,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | todo — filed 2026-07-30; rover half DISPROVEN BY PLAY during PT-25; nothing built; text-patch design is a USER DECISION (localization tradeoff), bundled into the D10 build (chain prompt 9) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
-| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | open — filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **durable exposed list re-derived 2026-08-01 (five-shape enumeration, Phase 1): 13** (the sweep had corrected the membership both ways — `Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out — and the re-run confirms it) **plus one inert route-(c) preset-field site** (`Fix_LastTransmissionStorage`, adjudication §4.4 closed — no build). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — Phase 0 measured 2026-08-01 (GT creation DEFERS; autosave hook FIRES); **Phase 1 done 2026-08-01** (final Tier-1 spec `SAVE_SAFETY_REDESIGN.md` §6.2a; enumeration re-derived; §4.4 closed; build prompt written) — next: the Tier-1 BUILD (chain prompt 4, `F86_TIER1_BUILD_PROMPT.md`). D10/D12 held until repairs land |
+| F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | open — filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **durable exposed list re-derived 2026-08-01 (five-shape enumeration, Phase 1): 13** (the sweep had corrected the membership both ways — `Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out — and the re-run confirms it) **plus one inert route-(c) preset-field site** (`Fix_LastTransmissionStorage`, adjudication §4.4 closed — no build). Reproduces identically whether the pack is disabled OR fully removed. **BLOCKS RELEASE.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — Phase 0 measured 2026-08-01 (GT creation DEFERS; autosave hook FIRES); **Phase 1 done 2026-08-01** (final Tier-1 spec `SAVE_SAFETY_REDESIGN.md` §6.2a; enumeration re-derived; §4.4 closed; build prompt written); **✅ TIER 1 BUILT AND VERIFIED 2026-08-01 (chain prompts 4 + 4b, build prompt consumed) — all four units shipped and all five legs ran; F02/F78/F81/F88 flipped to `tested`; leg 5 read Site 1 REPAIRED (the `Meteors` thread now survives uninstall alive on vanilla's body)**. ⚠️ **Site 2 (`Opt_DroneOverhaul`) STILL LEAKS** — leg 5 re-measured it at 80 orphan errors, newly observed to self-clear after one load; it is Tier-2 work (chain prompt 5). **STILL BLOCKS RELEASE** — next: Tier 2. D10/D12 held until repairs land |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
 | F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | P2 | SOURCE-VERIFIED | **fixed 2026-08-01, VERIFIED by the defect's own repro** — filed 2026-07-31; fix BUILT 2026-08-01 (Tier-1 rewrite: the per-load restart is gone, one-shot version-latched heal in its place); **Tier-1 leg 2 met the named bar exactly** — strike #1 at `t=216351730` → quicksave → **3 loads with ZERO pack lines** → strike #2 at `t=218608231 (+2256501 ms = 75 game hours)`, i.e. the meteor arrived on the PRE-LOAD deadline (entry) |
 | F89 | `MeteorsDisaster`'s unbounded drain loop wedges the METEORS thread on ordinary single/multispawn strikes — the colony silently loses ALL regular meteors, forever in vanilla | P2 | MEASURED | open — observed live 2026-08-01 (Tier-1 leg sitting): F78's drain-loop class on the singles path, INVISIBLE to the storm watchdog (no `g_MeteorStorm`); **covered by the F02 watchdog** (detected at its 189h threshold, `ALIVE but stuck`, restarted, ~6-8 sol latency); no direct fix routable — mid-function loop, body copy barred by F86 (entry) |
@@ -3673,7 +3673,8 @@ stranded flag) and **B** (a genuine warning is never cleared — the liveness
 test). Both test `Fix_DisasterPredictionLeak`, whose body Tier 1 keeps, so no
 rewrite leg covers them by construction, and the wave-6 probe asserts that
 mechanism only synthetically. They were **routed to chain prompt 3**
-(2026-08-01) and are Tier-1 leg 4 in `F86_TIER1_BUILD_PROMPT.md`. **The
+(2026-08-01) and were Tier-1 leg 4 (that build prompt has since been consumed;
+leg 4's readings are recorded in this entry below). **The
 pre-cleared mid-session reconcile prompt 3 held was TAKEN and BUILT
 2026-08-01 (spec §6.2a-C): the same sweep now also runs on `OnMsg.NewDay`
 (WhenActive-gated, pcall-wrapped), so trigger A changed shape — a stranded
@@ -4696,6 +4697,36 @@ that matter more than the noise:** the module's own **opt-in toggle was OFF**
 while the pack is merely installed carries pack code; and it reached the save
 through a **class-table** write (`Drone.Idle`), which the 2026-07-31 audit had
 cleared as safe.
+
+**🔁 RE-MEASURED 2026-08-01 (Tier-1 leg 5, the PT-20-method uninstall; log
+`Mars.exe-20260801-19.14.11`, test-2 lineage, owner at the keyboard).** Site 2
+is **unchanged and still leaking** — Tier 1 did not touch this module
+(`Opt_DroneOverhaul.lua` is untouched since `89bd463`, pre-Tier-1), and the
+signature reproduced byte-for-byte: `Opt_DroneOverhaul.lua:96: attempt to index
+a nil value (global 'SMRFixPack')`, chain `(96)` ← `(190)` ← `sprocall` ←
+`CommandObject.lua(246)`. **80 errors** this sitting (vs the 98 recorded above
+— the count tracks how many drones happened to be mid-`Idle`, not severity).
+
+**New this leg, and not previously recorded: the leak is FIRST-LOAD-ONLY and
+self-clears.** All 80 errors fall inside the first load of the uninstalled save
+(within ~2 s, Lua `0:00:26.493`→`0:00:26.7xx`), and a save-and-reload of that
+same save produced **ZERO** — the erroring commands abort, vanilla re-issues
+`Idle` on its own body, and the persisted pack closures are gone from the save
+from then on. So the player-visible harm is one burst of log noise on the first
+load after uninstalling, not an ongoing condition. **This does not make the site
+compliant** — `[LUA ERROR]`s naming pack code after removal is exactly what F86
+forbids, and the burst still lands in the log the player would send us — but it
+bounds the harm and tells the Tier-2 fix what it has to beat.
+
+The rest of leg 5 corroborates the diagnosis: with the pack disabled, drones
+behaved normally throughout ~15 minutes of ordinary play (build, salvage, a sol,
+save+reload), and `SMRTest.FixtureCarry()` found the drone GameVars **absent**
+(`SMRFixPack_DroneSpeedDial`, `SMRFixPack_DroneCarryDial`) — the residue is the
+in-flight command closures, nothing declarative.
+
+**Disposition unchanged: Tier 2 (layer 2; carve-out granted), chain prompt 5.**
+Confirmed with the owner 2026-08-01 during the Tier-1 close-out, which recorded
+the observation and routed it rather than acting on it.
 
 **What this overturns.** The audit asked *where is the function stored* and
 cleared class tables ("restored as permanents by name") and UI windows. That is

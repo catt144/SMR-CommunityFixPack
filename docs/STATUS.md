@@ -320,8 +320,9 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > StormWedgeHeal orphan-gate reorder specced); the five-shape enumeration
 > re-derived the durable exposed list at **13, plus one inert route-(c) site**
 > (`Fix_LastTransmissionStorage`, adjudication §4.4 CLOSED — no build); the
-> build prompt is **`docs/prompts/F86_TIER1_BUILD_PROMPT.md`** (chain prompt 4
-> runs it). Next: the Tier-1 BUILD.
+> build prompt was `F86_TIER1_BUILD_PROMPT.md` (chain prompt 4 ran it;
+> **consumed 2026-08-01 once Tier 1 was built and verified** — see the
+> post-Tier-1 block higher up this file for what the legs read).
 >
 > 🛑 **PT-20 FAILED 2026-07-31 — WE HAVE A P1 DEFECT OF OUR OWN, AND IT BLOCKS
 > RELEASE. See `BUGS.md` F86.** Executing PT-20's step 5 for the first time

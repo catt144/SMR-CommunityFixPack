@@ -470,8 +470,8 @@ with no sol tick either side, cleared inside the load block (`0:10:47`); B a
 live storm countdown survived quicksave/reload with no clear line and a flag
 dump of `DisasterMeteorStorm = true`, and survived a sol tick during the live
 countdown too. ✅ **RESOLVED 2026-08-01
-(prompt 3): both are written into `docs/prompts/F86_TIER1_BUILD_PROMPT.md` as
-leg 4 — and the pre-cleared mid-session reconcile WAS taken**
+(prompt 3): both were written up as Tier-1 leg 4 (that build prompt has since
+been consumed) — and the pre-cleared mid-session reconcile WAS taken**
 (`SAVE_SAFETY_REDESIGN.md` §6.2a-C: an `OnMsg.NewDay` reconcile joins the
 module in the Tier-1 build), **so A and B changed shape as anticipated**: A
 asserts the stranded flag heals both without a reload (within a sol) and on
