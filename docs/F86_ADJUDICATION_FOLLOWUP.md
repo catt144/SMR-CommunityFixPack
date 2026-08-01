@@ -184,6 +184,101 @@ is the correct durable statement. Nothing owed here.
 
 ---
 
+## 7. The version lock is CONFIRMED on our primary fixture — §5.2 is measured, not predicted
+
+`SMRTest.FixtureCarry()` was run against `test 2i` (288 sols, the save all
+complex testing uses). Result:
+
+```
+-- RainsDisasterThreads (the version lock) --
+  normal: marked=true  thread_alive=true  id=Normal_VeryLow
+  toxic:  marked=nil   thread_alive=false id=nil
+-- instance fields on live objects --
+  scanned 2850 distinct labelled objects
+    SMRFixPack_reserved_at on 919 object(s)
+    SMRFixPack_payload_set on 3 · SMRFixPack_shelter_try on 1
+    SMRFixPack_closed_to_new_residents on 4
+    (no unexpected SMRFixPack_* fields)
+-- label modifiers --  NOT INSPECTABLE
+```
+
+**Your §5.2 migration gap is real, present and armed.** The `Normal_VeryLow`
+loop is marked, so `RefreshRainsLoops` will never touch it again
+(`Fix_RainsDeadlock.lua:89`), and the marker is a **boolean with no version and
+no timestamp** — there is no way to tell which body it captured. That absence is
+the defect.
+
+**It is not biting today, and only by luck.** `git log -p --follow` on
+`Fix_RainsDeadlock.lua` shows the `fixed_loop` body has **never changed** since
+`352dce2`; the later commits touched the log helper, `SetGlobal` routing and
+`WhenActive`. So what is frozen in the fixture is byte-identical to what ships.
+
+⚠️ **It arms the moment Tier 1 lands.** The authorised repair deletes
+`fixed_loop`. A marked save will not be migrated and keeps running the deleted
+body — and per item 6(a) that body is pure vanilla, so it also survives
+uninstall and runs forever. Two consequences for the spec:
+- The replacement marker must be **version-stamped, not boolean**, or the trap
+  re-arms on the next change to the module.
+- The migration pass must also handle the **second hole** this dump exposed:
+  `toxic` has `id=nil`, so even if its thread revived, `RefreshRainsLoops` would
+  take its `settings not found in presets` branch and skip it.
+
+**Two side results worth recording.** `(no unexpected SMRFixPack_* fields)` —
+across 2850 objects there is no residue from removed or renamed modules, so that
+contamination channel is clean. And `SMRFixPack_reserved_at` sits on **919
+objects, about a third of the colony** — data, not code, so not F86-class, but it
+is the first actual measurement of what "the pack writes into a player's save"
+amounts to, and FIX_POLICY §3 has never had a number against it.
+
+## 8. Prior art — original-game mods as evidence for save-safe shapes (owner)
+
+**Owner's reasoning, and it reframes what the original game is useful for.** The
+remaster is *more polished than different*. Many of the defects this pack fixes
+were also fixed by original-Surviving-Mars mods — ChoGGi's **Fix Bugs** is
+already credited as prior art in the release checklist — and **those mods have
+run in players' saves for years.** If they did not produce the F86 failure mode,
+then **how they patched is direct evidence about which implementation shapes are
+save-safe**, validated at a scale we can never reach.
+
+This is not "is the bug original or a regression" (which is separately
+interesting but blocks nothing). It is: **someone has already solved this, in
+the wild, at scale — read their patch shape before inventing ours.**
+
+Specifically worth looking for:
+- Did they wrap or replace? A field of long-lived mods that avoided body copies
+  would be strong support for the layer-3/wrapper preference in FIX_POLICY §3a.
+- Did any of them patch a **global game-time thread body** — the F86 Tier-1
+  shape? If none did, that absence is itself a signal.
+- Do any carry an explicit save-safety convention we could adopt rather than
+  derive?
+
+⚠️ **Not researched — deliberately deferred, and NOT owed by this review.**
+Recorded here so it is not lost and not silently converted into work. The
+original's Lua is **packed** (`Packs/Lua.hpk`, no extractor in `tools/`), but
+this item does not need it: the mods themselves are readable Lua once
+subscribed.
+
+## 9. Two smaller items for the record
+
+**9.1 `IsValidThread` returns NO VALUE for an invalid thread — not `false`.**
+`tostring(IsValidThread(x))` therefore throws
+`bad argument #1 to 'tostring' (value expected)`, and a bare console read prints
+a blank line that is easy to misread as "no answer" rather than "not valid". It
+cost a wrong reading during PT-20 and then broke the fixture dump written the
+same evening. Worth one line in ENGINE_FACTS; the safe form is
+`IsValidThread(x) or false`.
+
+**9.2 Provenance gap on the original-game comparisons.** `BUGS.md` carries
+"**verified identical to the original game**" on F62 and F63 (and a similar
+claim on F56). The original ships its Lua **packed**, we have no extractor, and
+nothing on this machine can re-derive those claims. They are not being called
+wrong — but they are labelled with more confidence than any current artifact
+supports, and this project has spent two days finding confidently-recorded facts
+that were false. If a cheap re-derivation is not available, the labels should
+say so.
+
+---
+
 **If any of the above changes your verdict, amend `F86_ADJUDICATION.md` and say
 which item caused the change.** If none does, say that too — a second round that
 moves nothing is a real result.
