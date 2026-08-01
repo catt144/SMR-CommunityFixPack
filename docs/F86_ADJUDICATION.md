@@ -6,6 +6,23 @@ Every load-bearing claim below was re-derived from `ModTools\Src`, `Code\`, or t
 (I reproduced it from primary sources), **FALSIFIED** (I can show it wrong),
 **OPEN** (needs a measurement; the measurement is named).
 
+> ## ⚠️ ROUND 2 AMENDMENT (2026-07-31, same session) — §8 of this file
+>
+> `docs/F86_ADJUDICATION_FOLLOWUP.md` item 6(a) — the orphan-environment probe,
+> which I verified independently (log `21.23.19` plus the mechanism at
+> `Mod.lua:1647-1656`) — **falsifies parts of §2.9, §2.11 and §3.2 below, and
+> the RE-VERIFIED label I put on §2.9.** An orphaned mod function does NOT die
+> at its first global lookup: the fallback permanent is a **fresh sandbox env
+> whose metatable falls through to the real `_G`**, so an orphan loses only the
+> names its own mod creates. The affected sections carry inline corrections
+> pointing into §8; the original text is preserved struck-through, because this
+> document's own error is part of the record. **The verdict itself stands —
+> yes-with-changes — and the changes list is unchanged in substance**; what
+> moves is harm descriptions (rains inverts from "lost" to "runs our code
+> forever"; Bombardment's residual shrinks to ≈nil; Tier-3 residuals shrink),
+> one labelling failure I own, and a set of new engine facts (§8.2). Every
+> other Round-2 item is answered in §8.
+
 ---
 
 ## 1. Verdict
@@ -140,27 +157,64 @@ call into the same function (Savegame.lua:1450-1453). **The autosave leg
 remains unobserved**, and the probe is still armed:
 `SMR-BugFixPack-TestKit/Code/97_SaveHookProbe.lua`. One sol of play closes it.
 
-**2.9 `Fix_RainsDeadlock` is correctly Tier 1. RE-VERIFIED.** It replaces the
-global (`SMRFixPack.SetGlobal("RainsDisasterLoop", fixed_loop)`, the module's
-apply), and the orphaned `fixed_loop` dies at its first global lookup
-(`Sleep`) after uninstall — that rain type is then gone for the save, vanilla
-behaviour with it. Note its header still carries the falsified by-name
-persistence belief (`:51-52`), as the F86 entry records.
+**2.9 `Fix_RainsDeadlock` replaces the global — that part is RE-VERIFIED**
+(`SMRFixPack.SetGlobal("RainsDisasterLoop", fixed_loop)`, the module's apply).
+~~and the orphaned `fixed_loop` dies at its first global lookup (`Sleep`) after
+uninstall — that rain type is then gone for the save, vanilla behaviour with
+it.~~ ⚠️ **CORRECTED by Round 2 item 6(a) — and the RE-VERIFIED label on the
+struck text was a labelling error I own: orphan death was an inference about
+environment behaviour, not something source can verify.** Measured (probe log
+`21.23.19`, mechanism §8.1): an orphan resolves vanilla globals through the
+fallback env, and `fixed_loop` references **no mod-created name** (`Sleep`,
+`AsyncRand`, `CreateGameTimeThread`, `RainsDisasterActivation`, `WaitMsg`,
+`const` — all vanilla). **It does not die. It runs our replacement loop
+forever, silently, in a save the player believes is vanilla.** The harm
+inverts: uninstall does not lose rain types — it permanently keeps our code
+(functionally *better* than vanilla's F81 deadlock, which is exactly why
+nothing will ever surface it). Tier-1 priority for this module stands, but its
+ground shifts from "vanilla behaviour lost" to **save-integrity: pack code
+becomes unremovable** — see §8.3. Its header still carries the falsified
+by-name persistence belief (`:51-52`), as the F86 entry records.
 
 **2.10 The analysis tool's figures are honest. RE-VERIFIED by running it.**
 `tools/blocking_analysis.py` against today's Src prints **15,106 names; 633
 yield directly** — exactly as reported. What the figures *mean* is narrower
 than the findings imply — see §3.3.
 
-**2.11 The Tier-3 "one log line" claim is now source-verified per module.**
-All four own-thread modules (`MeteorStormWedge`, `CrystalMysteryHang`,
-`ExtenderFlapChurn`, `TrackConnectorPingPong`) create their own GT threads and
-replace no vanilla body — `Fix_MeteorStormWedge` in particular only *checks*
-`GlobalGameTimeThreadFuncs.MeteorStorm` in `Require` and restarts **vanilla's**
-body when healing. Each orphaned thread errors at its first post-resume global
-lookup and dies; nothing vanilla dies with it. The proposed control leg is no
-longer needed to trust the tiering's ADD side (owner may still want the datum —
-§7, D4).
+**2.11 The Tier-3 modules add threads and replace no vanilla body — that part
+holds** (`Fix_MeteorStormWedge` only *checks* `GlobalGameTimeThreadFuncs.MeteorStorm`
+in `Require` and restarts **vanilla's** body when healing). ~~Each orphaned
+thread errors at its first post-resume global lookup and dies; nothing vanilla
+dies with it.~~ ⚠️ **CORRECTED by Round 2 item 6(a) — re-verified per module,
+as the follow-up asked, and its own first pass was wrong on two of four:**
+- `Fix_CrystalMysteryHang` — orphan repeater is **self-limiting**: its
+  deadline (`GameTime() + 10*DayDuration`) and generation counter are frozen
+  upvalues, so it re-posts a consumed-by-nobody `Msg("CrystalFlyAway")` hourly
+  for at most 10 sols, then exits cleanly. Bounded, silent, zero errors — not
+  "forever", not "one log line".
+- `Fix_ExtenderFlapChurn` — the debounce thread is a **one-shot**: sleeps,
+  performs one vanilla hub-requester rebuild, ends. Completes silently.
+- `Fix_TrackConnectorPingPong` — the follow-up's first pass said it dies on
+  `SMRFixPack.*`; **the capturable pieces don't**: the reclaim spawns one-shot
+  inner threads referencing only vanilla names (`IsValid`,
+  `CreateConnectorElements` — which resolves to *vanilla's* method after
+  uninstall). They complete silently. The `SMRFixPack.TrackConnectorReclaim`
+  caller is our `B:Done` wrapper — a class-table method, restored on
+  uninstall, never orphaned.
+- `Fix_MeteorStormWedge` — the heal thread yields only in its ≤40-game-second
+  pulse loop (`for i=1,10 … Sleep(4000)`), during a rare confirmed heal. An
+  orphan resumes, finishes the pulses (vanilla names), then dies at
+  `SMRFixPack.StormWedgeNote` — **after** the vanilla-storm restart and
+  possibly **before** the `g_MeteorStormStop = false` reset, so it can leave a
+  stray stop flag that clips one future storm. One error line + one-storm
+  edge, in a vanishingly small window.
+**Net: none of the four runs forever; the ADD-side residual is smaller than
+"one log line each" for three modules and slightly different in kind for
+StormWedge.** The control leg remains unnecessary (§7, D4). The general
+lesson moves to §8.2: whether an orphan dies, expires, or runs forever is
+decided by which *names* its body touches, so it must be verified per module —
+"zero-upvalue discipline" ironically makes bodies die loudly, and
+upvalue-carried helpers survive by value.
 
 **2.12 The retroactive heal (`F86_SESSION_FINDINGS` §2.3) has a shipped
 precedent neither document cites.** `Fix_RainsDeadlock` already implements a
@@ -242,23 +296,29 @@ frame. **What breaks is the bookkeeping, not the build:**
   nets. "Is any fixed number defensible?" — only relative to an enumeration
   that names all five assignment shapes (§6, step 7).
 
-### 3.2 `Fix_BombardmentSpread`: "the damage is one broken volley" — FALSIFIED
+### 3.2 `Fix_BombardmentSpread`: "the damage is one broken volley" — the original claim stays falsified, but MY replacement harm was falsified in turn by Round 2 item 6(a)
 
-`WaitBombard` has exactly one caller: `StartBombard` runs it on a one-shot GT
-thread and posts `Msg("BombardEnd", obj)` **after it returns**
-(Bombardment.lua:156-161). Mystery 7's generated sequence does
-`StartBombard(RandomDome, …)` then **`WaitMsg("BombardEnd")` with no timeout**
-(`Scenario/Mystery 7.generated.lua:941-942`), inside its bombardment loop. So
-if a save lands mid-volley (our replaced `WaitBombard` blocked in its missile
-sleeps) and the pack is later removed, the resumed frame errors, the one-shot
-thread dies **before posting `BombardEnd`**, and the mystery's sequence thread
-blocks forever on an untimed WaitMsg — the same shape as F81. Corrected harm:
-not one broken volley but **Mystery 7's recurring bombardment permanently
-stops for that save** (plus a wedged sequence thread). The window is small —
-volleys last a couple of game minutes on a 10-20-sol cycle
-(`Sleep(7200000 + InteractionRand(7200000))` = 240-480 game hours) — but the
-§6.3 decision ("accepted residual") was taken on a wrong description and
-should be re-taken on this one (§7, D3).
+The structural facts hold: `WaitBombard` has exactly one caller — `StartBombard`
+runs it on a one-shot GT thread and posts `Msg("BombardEnd", obj)` **after it
+returns** (Bombardment.lua:156-161) — and Mystery 7 blocks on an **untimed**
+`WaitMsg("BombardEnd")` (`Scenario/Mystery 7.generated.lua:941-942`). ~~So the
+resumed frame errors, the one-shot thread dies before posting `BombardEnd`, and
+the mystery's sequence thread blocks forever.~~ ⚠️ **CORRECTED: that scenario
+required the orphan to die, and it does not.** The replacement body
+(`Fix_BombardmentSpread.lua:90-192`) and its per-missile closures reference
+**no mod-created name** — `SMRFixPack` appears only in `Register`/`Require`,
+the probe-surface assignment, and `SetGlobal`, all outside the body; the body's
+upvalues (`GenerateDir`, `travel_dist`) are vanilla-only locals serialised by
+value. Under the measured orphan behaviour (§8.1), a mid-volley orphan
+**completes the volley correctly, returns, and `BombardEnd` posts** — Mystery 7
+proceeds. **Corrected residual: ≈ nothing** — one captured volley finishes on
+our (more correct) code; all later volleys resolve the restored vanilla global.
+So §6.3's "one broken volley" was wrong in the *other* direction, my Mystery-7
+wedge never fires on the uninstall path, and the D3 re-decision becomes
+trivial: keep the fix (§7, D3 as amended in §8.3). The untimed
+`WaitMsg("BombardEnd")` observation stays on the record as the kind of
+waiting-contract §5.4 says to look for — it is real, just not reachable
+through this module's orphan.
 
 ### 3.3 `tools/blocking_analysis.py` — figures honest, verdicts not standalone
 
@@ -375,6 +435,17 @@ sweep. The corrected rule costs nothing operationally — layers 3/2/1 address
 route (a), and the route (b)/(c) sweep of `Code/` is §3.1's (done, one residual
 in §4.4) — but the *test* the policy teaches must be the reachability test, or
 the next module written against §3a will repeat CaveIns.
+
+> **Round-2 addition — the rule needs a second half: what a captured function
+> can still DO (item 6(a), measured).** Capture decides what enters the save;
+> the orphan's *reach* decides what happens next. The fallback permanent for a
+> missing mod env is a **fresh `LuaModEnv{}` whose metatable falls through to
+> the real `_G`** (`Mod.lua:1647-1656`; the log's `[7]` is its seed entries), so
+> an orphan resolves every vanilla global and loses **only names its own mod
+> creates** — and its upvalues survive by value. Consequence: an orphan **dies
+> loudly iff its body touches a mod-created global name; otherwise it keeps
+> executing** — bounded if the body self-limits, forever if it loops. Per-module
+> outcomes: §2.9/§2.11 as corrected, §8.2.
 
 **5.2 The rains migration gap.** Every existing save made with today's pack
 carries `fixed_loop` threads **by value** (they are the activation threads;
@@ -499,3 +570,226 @@ disposition column is where the nuance lives.
 `%AppData%\Surviving Mars Relaunched\logs`, files of 2026-07-31. The analysis
 tool was re-run against Src today. Nothing in `Code/` or the game directory
 was modified.*
+
+---
+
+# §8 — ROUND 2 (2026-07-31, `docs/F86_ADJUDICATION_FOLLOWUP.md`)
+
+**Verdict after round 2: still yes-with-changes, same build, same order.** One
+item (6a) falsified three of my paragraphs and one of my labels — amended
+inline above, and I state plainly which item caused each change: **6(a) moved
+§2.9, §2.11, §3.2 and the §5.1 rule; item 7 hardened §5.2's migration spec;
+items 1/9.1 add engine facts; nothing else moved anything.** Where I already
+covered an item, I say so — that was asked for as a signal.
+
+## 8.1 Item 6(a) — verified, mechanism pinned, and it is the round's real content
+
+I did not take the probe's word for it. Re-verified: the probe
+(`SMR-BugFixPack-TestKit/Code/99_OrphanEnvProbe.lua`) registers through
+`GlobalGameTimeThread` — the exact leaking mechanism — with a clean absence
+control in log `Mars.exe-20260731-21.23.19` (`:164` both mods loaded earlier,
+`:266` Test Kit absent, `:289` fallback substituted, `:311` the orphan resolved
+`GameTime`, `tostring` and `error`, having already been through `Sleep`/`const`).
+**And the mechanism is exactly what the source predicts, which nobody had
+read:** the `Mod/` permanent resolver returns `LuaModEnv{CurrentModId = …}`
+(`Mod.lua:1647-1656`) — a *fresh sandbox env*, seven seeded entries (the log's
+`[7]`), `ModEnvMeta.__index` falling through to the real `_G`. The prior
+recorded belief — "the orphan runs with an empty `_ENV` and every global lookup
+fails" (ENGINE_FACTS, BUGS F86) — was never what the code said. I inherited it
+uncritically and stamped conclusions with it; the follow-up is right that the
+adjudication's worth rests on its labels, and §2.9's RE-VERIFIED was misapplied.
+Corrected in place.
+
+**Which conclusions move (their question):**
+- **§2.9 rains** — harm inverts; Tier-1 ground becomes save-integrity
+  ("uninstall cannot remove our code") rather than functional loss. Build
+  priority unchanged; the migration pass (§5.2) is now what makes the repair
+  *mean* something for existing saves.
+- **§2.11 Tier 3** — verified per module above: nothing runs forever, three of
+  four end silently and harmlessly, StormWedge has a tiny stray-flag edge. The
+  ADD-side residual **shrinks**.
+- **§3.2 Bombardment** — my wedge scenario dies with the gutted-env premise;
+  residual ≈ nothing; D3 becomes "keep the fix", full stop.
+- **§5.1** — gains the orphan-reach half of the rule (inline above).
+- **The `GetPriorityForRequest` orphan** that "kept running with zero errors"
+  is retroactively explained — same mechanism, not an anomaly.
+- **Fix_MeteorFrequency still dies loudly** — its body touches `SMRFixPack.*`
+  at ~12 points — so PT-20's measured harm is unchanged; the upgrade-path
+  analysis (§2.6, §5.3) is unchanged (with the pack *installed*, a deleted
+  helper is a nil **field** on a live `SMRFixPack`, same throw).
+
+Item 6(b): covered before release — §3.1/§5.1 — the follow-up itself closes it.
+
+## 8.2 New engine facts this round establishes (written to ENGINE_FACTS with this commit)
+
+1. **Orphan reach** — fallback env resolves vanilla globals; loses only
+   mod-created names; upvalues survive by value (8.1).
+2. **The practical corollary**: whether an orphan dies, expires, or runs
+   forever is a *per-module* property of the names its body touches. The
+   pack's "zero-upvalue discipline" (adopted on the false by-name-persistence
+   premise) is what makes bodies die *loudly* — the safer failure. A body that
+   carries its helpers as upvalues would run forever. Worth keeping the
+   discipline for exactly the inverted reason.
+3. **The save/load hook surface** (item 1) — enumerated below, 8.4.
+4. **`IsValidThread` returns NO value for an invalid thread** (item 9.1) —
+   consistent with PT-20's `IsValidThread returns no value` phrasing in the F86
+   entry; safe form `IsValidThread(x) or false`. Recorded.
+
+## 8.3 Owner decisions, as amended by 6(a)
+
+- **D3 (Bombardment)** — now trivial: **keep the fix**. The uninstall residual
+  is ≈nothing (a captured volley completes on our code); the vanilla defect it
+  cures is visible every volley. The re-decision I asked for is withdrawn as
+  moot; §6.3's text still needs its correction (it was wrong in the *other*
+  direction, and the reasoning "one broken volley" was never right).
+- **D2 (restart semantics)** — unchanged and slightly strengthened: the
+  latched heal is now also what *removes our forever-running `fixed_loop`*
+  from existing rain saves (8.1), not just meteor hygiene.
+- **Tiering language** — replace "errors once and dies, one log line" with:
+  *"REPLACE-class orphans keep vanilla's role exactly as long as their body
+  avoids mod-created names — which is worse, because it is silent and
+  permanent; ADD-class orphans end by themselves or die at their first
+  mod-name touch."* The severity dimension that survives round 2 is §5.4's:
+  who is waiting on the promise, and — new — **whether anyone would ever
+  notice the orphan working**.
+
+## 8.4 Item 1 — the hook surface, enumerated (this was a real gap)
+
+`ModMsgBlacklist` is exactly nine names (`Mod.lua:1430-1440`). The save/load
+lifecycle reachable by mods, with sources — **six of these appear in neither
+position document**:
+
+| message | fires | mods? | notes |
+|---|---|---|---|
+| `CanSaveGameQuery` | `Savegame.lua:94`, before any save | ✅ | any entry a handler puts in `query` **blocks the save** ("Can't save at this moment"); vanilla uses it (`Lua/Savegame.lua:54`) |
+| `SaveGameStart` / `SaveGameDone` | `:1043` / `:1061` | ✅ measured | the layer-1 pair |
+| `AutosaveStart` / `AutosaveEnd` | `:1502` / `:1544` | ✅ | dedicated autosave bracket — observing autosaves needs neither `params.autosave` nor the shared path |
+| `SavegameSaved` / `SavegameDeleted` | `:1085` / `:993` | ✅ | bookkeeping |
+| `UnpersistStart` → `PreLoadGame`(metadata) → **`PersistPreLoad`** → `PersistLoad`⛔ → **`PersistPostLoad`(data)** → `LoadGame` → `PostLoadGame` → `UnpersistEnd` | `Savegame.lua:802-816`, `persist.lua:106-113` | all but ⛔ | load order, left to right |
+
+**`PersistPostLoad` vs `LoadGame`:** it runs earlier (inside the unpersist)
+and receives **`data`** — a mod can read `data["Meteors"]` /
+`data["RainsDisasterThreads"]` directly and know what the save carried before
+deciding to heal. Caveat: mod handlers register after engine files load, so
+vanilla's own `PersistPostLoad` (the `data[name]==nil` rebuild) runs first.
+Real but marginal value; use `LoadGame` unless the heal needs `data`.
+**`CanSaveGameQuery`:** available, and I recommend recording it as **barred
+for this pack** — vetoing or deferring a player's save from fix-pack code has
+a failure mode (stuck veto = can't save, invisible on console) strictly worse
+than anything F86 does. **Yes, write the table into ENGINE_FACTS** — done with
+this commit. Completeness caveat: this is the save/load lifecycle, not all
+messages; the durable statement is "everything except the nine blacklisted
+names reaches mods".
+
+## 8.5 Items 2, 3, 5 — the invariant, the limit, and the bar
+
+**Item 3 first, because it decides item 2 — CONFIRMED.** There is no lever to
+clear our frame from another thread's stack: `DeleteThread` kills the whole
+thread, `SetCommand` restarts it through destructors (mass-interrupting every
+unit on every save, autosaves included, is a gameplay defect), coroutine frame
+surgery does not exist, and `debug` is blacklisted. So command-thread exposure
+**must** be solved by never putting code after a yield there — layer 2 is
+mandatory regardless of hook quality. Neither session missed an alternative;
+there isn't one.
+
+**Item 2 — the invariant is right as an aspiration and cannot be total.**
+"The pack is never installed at the moment a save is written" is achievable
+for (i) our own threads (delete on `SaveGameStart`, recreate on
+`SaveGameDone`/`LoadGame` — cheap, and our watchdog threads are stateless so
+the timer trap does not even apply to them), (ii) global-name loops and
+FUNC-slot/global replacements (restore on save, reinstall after). It is **not
+achievable** for in-flight command frames (item 3) — there, layer 2's
+guarantee ("nothing left to execute") is the invariant's practical equivalent:
+inert-but-present rather than absent. So the framing does not change §3a's
+ordering or the build scope; layers 3/2 still shrink what a disarm would have
+to touch. Where it earns its keep is as the *release test*: "could a player
+uninstall at any save and be vanilla?" — after Tiers 1+2 the honest answer is
+"yes, except inert residue and the four bounded Tier-3 orphans", which is a
+sentence the store page could carry.
+
+**Item 5 — correct, and here is the gate.** Yes: §1.4 proves the full
+timer-reset cost is already being paid on every load for no benefit, so a
+deadline-persisting disarm would be strictly better than shipped behaviour —
+the objection to layer 1 was never "the cost is unpayable", it was "unpayable
+*blind*". But note what round 2 did to layer 1's clientele: per-module
+verification (§2.11 corrected) shrank the Tier-3 residual to bounded silent
+completions, and Tier 1's own repairs remove the two forever-orphans. **The
+bar should read "not in this build; gated", not "not ever". The gate:**
+1. Tiers 1+2 landed and verified (the residual layer 1 would address must be
+   what is *left*, not what we have today);
+2. the autosave-hook leg measured (probe armed) and the GT-creation-ordering
+   probe run (§4.1);
+3. deadline persistence built and proven once, by the §1.4 fix;
+4. a named residual that layers 3+2 demonstrably leave and that exceeds the
+   corrected Tier-3 residuals in §2.11 — named per module, with its own A/B
+   and soak per the existing §3a rule.
+Until all four hold, layer 1 stays down — and nothing measured this round
+comes close to justifying it.
+
+## 8.6 Item 4 — the cleaner disarm: viable, and their trap is real but avoidable
+
+Their suspicion is confirmed at the source: `GlobalGameTimeThread` initialises
+the global to **`false`** (`_fixup.lua:10-12`) and the rebuild fires only
+`if data[name] == nil` (`:54`). But what lands in the save is whatever
+`rawget(_G, name)` returns at write time (`persist.lua:126-127`), and a table
+key holding `nil` is *absent* from `pairs` — so:
+- disarm writes `_G[name] = false` → `data[name] == false` → **no rebuild →
+  dead colony system → the F86 harm, delivered by the repair.** Their ⚠️ is
+  exactly right.
+- disarm writes `_G[name] = nil` (plain assignment reaches the real `_G`
+  through `ModEnvMeta.__newindex`; the pack has no blacklist conflict) → the
+  key is absent → vanilla's own `PersistPostLoad` **creates a fresh vanilla
+  thread on load, even for a player who never reinstalls.** The variant
+  survives, with `nil` and only `nil`.
+Two caveats before anyone builds it: threads referenced from **persisted
+state** (the rains loops live in the `RainsDisasterThreads` GameVar) need
+their entries handled too, not just the global; and the timer objection stands
+until re-arm-from-deadline exists (item 5's gate #3). Also note this variant
+is layer-1 machinery — currently barred — recorded so the design is not
+re-derived when the gate opens.
+
+## 8.7 Item 7 — the fixture measurement confirms §5.2 and sharpens the spec
+
+Covered in round 1 as a prediction (§5.2: the marker "now means 'old fixed
+body', not 'current'"); the fixture run upgrades it to **measured on the
+primary fixture** and adds two spec requirements I adopt wholesale:
+1. **The migration marker must be version-stamped** (the boolean cannot say
+   *which* body it froze; today's is byte-identical to shipped only by the
+   accident that `fixed_loop` never changed after `352dce2`);
+2. **the id-less entry hole is real** — `RefreshRainsLoops` requires
+   `IsValidThread(data.activation_thread)` *and* `presets[data.id]`
+   (`Fix_RainsDeadlock.lua:88-91`), so the fixture's `toxic` entry
+   (`id=nil, thread_alive=false`) would be skipped on both grounds; the
+   Tier-1 migration must handle entries it cannot resolve (recreate via the
+   vanilla path rather than skip-and-log).
+The two side results deserve their line: **no `SMRFixPack_*` residue from
+removed modules across 2,850 objects** (clean channel), and
+**`SMRFixPack_reserved_at` on 919 objects** — the first actual number against
+FIX_POLICY §3's footprint; it belongs in that section as a measured baseline.
+
+## 8.8 Item 8 — prior art: worth one scoped pass, with one honesty caveat
+
+Agreed it is evidence, not owed by this review, and I have not read any of it.
+One scope note for whoever does: original-game mods ran **unsandboxed** in an
+engine whose persist machinery is the same family but whose mod environment is
+not (no `LuaModEnv`, no env permanent to go missing), so their years-at-scale
+record validates **patch shapes** (wrap vs replace vs data) more than it
+validates orphan behaviour. The specific questions worth answering from
+ChoGGi's Fix Bugs (already subscribed, readable Lua): did anything replace a
+global GT thread body (the Tier-1 shape), and does any mod carry an explicit
+save-safety convention. Recommend: a one-session read-only pass, after Tier 1
+is specified and before it is coded, so a shape conflict can still change a
+design cheaply. Do not gate the build on it.
+
+## 8.9 Item 9 — both recorded
+
+**9.1** `IsValidThread` no-value return → ENGINE_FACTS with this commit (safe
+form `IsValidThread(x) or false`). **9.2** — agreed in principle, with one
+correction to the item: F63's claim is not baseless — its entry cites the
+original's Lua at file:line (`Lua/Units/Colonist.lua:1987-2064` etc.), so a
+source tree existed wherever that session ran. What is true is that **nothing
+on this machine can re-derive it today** (the original ships `Lua.hpk`, no
+extractor in `tools/`). BUGS F62/F63 get a provenance annotation with this
+commit: claim retained, method named, currently not re-derivable here. F56
+carries no such claim (checked) — its header cites the same *grounds*, not the
+same verification.

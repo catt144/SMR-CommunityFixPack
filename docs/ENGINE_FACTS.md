@@ -195,8 +195,25 @@ code suggests.
   * Each mod env is a permanent (`Mod.lua:1642-1644`,
     `permanents["Mod/" .. mod.id] = mod.env`). With the mod gone it cannot
     resolve and a **fallback table** is substituted
-    (`Unpersist missing permanent: Mod/<id> | Fallback permanent: table: …`), so
-    the orphan runs with an empty `_ENV` and every global lookup inside it fails.
+    (`Unpersist missing permanent: Mod/<id> | Fallback permanent: table: …`).
+    ~~so the orphan runs with an empty `_ENV` and every global lookup inside it
+    fails.~~ ⚠️ **CORRECTED — MEASURED 2026-07-31 21.23 (orphan-env probe, clean
+    absence control) + source-pinned: the fallback is a fresh
+    `LuaModEnv{CurrentModId=…}`** (`Mod.lua:1647-1656` — the resolver; the log's
+    `[7]` is its seven seeded entries) **whose `ModEnvMeta.__index` falls
+    through to the real `_G`. An orphan resolves every VANILLA global and loses
+    ONLY the names its own mod creates** (`SMRFixPack` is nil after uninstall
+    because the mod that creates it never loaded — not because lookups fail);
+    its upvalues survive by value. **Consequence: an orphan dies loudly iff its
+    body touches a mod-created global name; otherwise it KEEPS EXECUTING** —
+    bounded if it self-limits (`Fix_CrystalMysteryHang`'s frozen 10-sol
+    deadline), forever if it loops (`Fix_RainsDeadlock`'s `fixed_loop` is
+    all-vanilla names and would run our rains loop permanently in an
+    uninstalled player's save). The zero-upvalue discipline — adopted on the
+    false by-name premise — is worth keeping for the inverted reason: global
+    helper lookups make orphans die loudly, the safer failure. Per-module
+    outcomes: `docs/F86_ADJUDICATION.md` §8.1-8.2. This also explains the
+    `GetPriorityForRequest` orphan above running with zero errors.
   * A save only captures **blocked** threads, so purely synchronous mod code —
     data patches, getters, `Can…` predicates, UI handlers — can never be
     captured **through the thread-stack route**.
@@ -283,6 +300,36 @@ code suggests.
   happens in a message handler must `pcall` its own body and report the failure,
   or it will go on reporting `active` while having silently done nothing.
 
+- **THE SAVE/LOAD HOOK SURFACE — enumerated 2026-07-31 (F86 round 2), so no
+  design discovers hooks one at a time again.** `ModMsgBlacklist` is exactly
+  nine names (`Mod.lua:1430-1440`: PersistGatherPermanents, PersistLoad,
+  PersistSave, ModBlacklistPrefixes, ModBlacklistGather,
+  DebugDownloadExternalMods, DebugCopyExternalMods, PasswordChanged,
+  UnableToUnlockAchievementReasons); **everything else reaches mods.** The
+  save/load lifecycle:
+  * **Save:** `CanSaveGameQuery(query, request)` (`Savegame.lua:94` — any entry
+    a handler puts in `query` **blocks the save**; vanilla uses it,
+    `Lua/Savegame.lua:54`; ⛔ **barred for this pack** — a stuck veto is a
+    can't-save bug, invisible on console, worse than F86) →
+    `SaveGameStart(params)` (`:1043`, MEASURED) → write →
+    `SavegameSaved` (`:1085`) → `SaveGameDone(name, autosave, err, metadata)`
+    (`:1061`, MEASURED). Autosaves additionally bracket with
+    `AutosaveStart`/`AutosaveEnd` (`:1502`/`:1544`) — observing autosaves needs
+    neither `params.autosave` nor the shared path.
+  * **Load, in order:** `UnpersistStart` → `PreLoadGame(metadata)`
+    (`Savegame.lua:802-804`) → `PersistPreLoad` → `PersistLoad`⛔ →
+    **`PersistPostLoad(data)`** (`persist.lua:106-113`) → `LoadGame(metadata,
+    version, params)` → `PostLoadGame(metadata, version)` → `UnpersistEnd(err)`
+    (`Savegame.lua:810-816`).
+  * **`PersistPostLoad` is NOT blacklisted and receives `data`** — a mod can
+    read what the save carried (`data["Meteors"]`, …) before deciding to heal;
+    it fires earlier than `LoadGame`, but mod handlers run after the engine's
+    (registration order), so vanilla's `data[name]==nil` thread rebuild has
+    already happened. Use `LoadGame` unless the heal needs `data`.
+- **`IsValidThread` returns NO VALUE for an invalid thread — not `false`**
+  (bit us twice 2026-07-31: a console read shows a blank line easy to misread,
+  and `tostring(IsValidThread(x))` throws `bad argument #1 to 'tostring'`).
+  Safe form: `IsValidThread(x) or false`.
 - **`Wakeup(thread)` only wakes a thread sleeping in `WaitWakeup`** — not one in
   `Sleep` (`CommonLua/LuaExportedDocs/Global/thread.lua:62-71`). There is no way
   to shorten a `Sleep` already in flight; compressing the interval constant only

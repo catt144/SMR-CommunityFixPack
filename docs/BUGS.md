@@ -2059,7 +2059,7 @@ line removed; the TestKit `HomeDomeMigrationGate` probe DELETED too (it tested t
 removed behavior — not an F10-style canary). A/B re-verified: baseline 1/56/14/0, fixed
 57/0/14/0, 64/68 active.
 
-### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)  `[wontfix — carried-forward design, verified identical to the original game]`
+### F62 — Services reach exactly 1 passage hop, never trains (P2, high mechanism)  `[wontfix — carried-forward design, verified identical to the original game (provenance: original's Lua read 2026-07-26 at cited lines; that source is NOT on this machine — original ships Lua.hpk, no extractor in tools/ — so the claim is currently not re-derivable here; F86 adjudication round 2, item 9.2)]`
 `GetService` iterates `GetConnectedDomes()` = direct adjacency refcounts (`Dome.lua:619-644`,
 `Passage.lua:1237-1247`), not the transitive `dome_networks` (`Passage.lua:1096-1119`);
 workplace search additionally enumerates train-reachable domes (`Dome.lua:646-690`).
@@ -2100,7 +2100,7 @@ extremely hard, and original to the devs' vision in both games. No opt-in module
 the recorded internal inconsistencies (walkability-vs-service, permitted-vs-offered
 training) stay on this entry for the record.
 
-### F63 — Universities invisible to emigration (P2, high)  `[wontfix — carried-forward design, verified identical to the original game]`
+### F63 — Universities invisible to emigration (P2, high)  `[wontfix — carried-forward design, verified identical to the original game (provenance: original's Lua read 2026-07-26 at the file:lines cited in the entry; that source is NOT on this machine — original ships Lua.hpk, no extractor in tools/ — so the claim is currently not re-derivable here; F86 adjudication round 2, item 9.2)]`
 Training is pull-only from student side, 1 hop, F61-gated (`Colonist.lua:1505-1507`,
 `Dome.lua:2945-2955`); `FindEmigrationDome` scores only `labels.Workplace`
 (`Colonist.lua:2644,2672`, `Workforce.lua:53-64`) — `TrainingBuilding` is a different label
@@ -4117,6 +4117,20 @@ machinery surgery.
 >   fixed by the F02 rewrite via a one-shot latched heal (shipped precedent:
 >   `RefreshRainsLoops`).
 >
+> **ROUND 2 (same day, `F86_ADJUDICATION.md` §8):** the orphan-env probe
+> (measured) corrected the harm model — orphans resolve vanilla globals and
+> die only on mod-created names, so **rains harm INVERTS** (uninstall keeps
+> our loop forever, silently — save-integrity harm, not lost rains), the
+> **Bombardment residual shrinks to ≈nothing** (the body is mod-name-free; a
+> mid-volley orphan completes and `BombardEnd` posts — no Mystery-7 wedge),
+> and the Tier-3 residuals shrink (three of four orphans end silently by
+> themselves). The save/load **hook surface is now enumerated in
+> ENGINE_FACTS** (PersistPostLoad carries `data`; CanSaveGameQuery exists and
+> is barred). The layer-1 bar is restated as gated, not permanent — four
+> named gates in §8.5. Verdict unchanged: yes-with-changes, same build, plus
+> a version-stamped migration marker and id-less-entry handling for the rains
+> pass (measured on the `test 2i` fixture).
+>
 > ## ✅ THE OWNER DECISION IS TAKEN (2026-07-31) — read this before the diagnosis below
 >
 > All four calls in `docs/SAVE_SAFETY_REDESIGN.md` §4 were answered. **No
@@ -4211,8 +4225,18 @@ gone that permanent cannot resolve, and unpersist substitutes a fallback table:
 Unpersist missing permanent: Mod/SMR_CommunityFixPack | Fallback permanent: table: … [7]
 ```
 
-The orphaned function therefore comes back **runnable**, with its `_ENV` replaced,
-so every global lookup inside it — `SMRFixPack` included — resolves to nothing.
+The orphaned function therefore comes back **runnable**, with its `_ENV` replaced.
+~~so every global lookup inside it — `SMRFixPack` included — resolves to
+nothing.~~ ⚠️ **CORRECTED 2026-07-31 (orphan-env probe, measured with a clean
+control):** the fallback is a fresh `LuaModEnv{}` whose metatable falls through
+to the real `_G` (`Mod.lua:1647-1656`), so **vanilla globals resolve — an orphan
+loses ONLY names its own mod creates**. `SMRFixPack` is nil after uninstall
+because the pack never loaded to create it. Whether an orphan dies, expires, or
+runs forever is a per-module property of the names its body touches
+(ENGINE_FACTS; `docs/F86_ADJUDICATION.md` §8.1-8.2). Both measured legs are
+consistent: `Fix_MeteorFrequency` died at `SMRFixPack` (mod name);
+`Opt_DroneOverhaul`'s wrapper died at its `SMRFixPack` gate — while
+`Fix_RainsDeadlock`'s all-vanilla `fixed_loop` would run forever.
 
 **The test that found it.** `PT-20TEST`, cut from the 288-sol `test 2i` colony.
 The meteor descriptor's `spawntime` was compressed to 2 h and the thread

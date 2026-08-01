@@ -170,6 +170,17 @@ instance-closure experiment). So "safe by construction" additionally requires:
 engine code holds live across a yield.** Class tables, presets, `OnMsg`
 registrations and UI windows remain safe. `docs/F86_ADJUDICATION.md` §3.1/§5.1.
 
+⚠️ **And the rule's second half (measured 2026-07-31, round 2): what a captured
+function still REACHES.** An orphan's fallback env falls through to the real
+`_G` — it resolves every vanilla global and loses only names its own mod
+creates. So a captured body that touches a `SMRFixPack.*` name dies loudly at
+that touch (the safer failure — keep the global-helper discipline for exactly
+this reason); a captured body with only-vanilla names **keeps executing after
+uninstall** — bounded if it self-limits, forever if it loops. Every layer-3/2
+design must therefore also ask: *if this body is ever captured anyway, does it
+die, expire, or run forever — and would anyone notice?*
+(ENGINE_FACTS; `docs/F86_ADJUDICATION.md` §8.)
+
 **Choose the remedy in this order — 3 → 2 → 1. The ordering is binding.**
 
 1. **Layer 3 — patch a synchronous input, keep vanilla's body.** ⭐ Best: the

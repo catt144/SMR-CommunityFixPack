@@ -523,6 +523,18 @@ something vanilla would otherwise keep running:
   errors after uninstall **vanilla's behaviour is gone too**. The player ends up
   **worse than if they had never installed the pack.**
 
+> ⚠️ **ROUND-2 CORRECTION (2026-07-31, measured): "errors once and dies" only
+> happens when the body touches a mod-created name.** Orphans resolve vanilla
+> globals through the fallback env, so per-module (adjudication §2.11/§8): the
+> ADD-class four end by themselves — CrystalMysteryHang expires at its frozen
+> 10-sol deadline, ExtenderFlapChurn and TrackConnectorPingPong complete
+> one-shots silently, StormWedge alone dies at a `SMRFixPack.*` touch (after
+> restarting vanilla's storm thread; can leave one stray `g_MeteorStormStop`)
+> — while a REPLACE-class body with only-vanilla names (`fixed_loop`) **keeps
+> running our code forever, silently**, which is worse than the loud loss the
+> table above describes. The dimension that matters: *who waits on the promise
+> this frame keeps, and would anyone ever notice the orphan working.*
+
 > ⚠️ **This tiering is REASONED from the measured mechanism, not itself
 > measured.** Only two sites have ever been observed leaking
 > (`Fix_MeteorFrequency`, `Opt_DroneOverhaul`). If Tier 3's residual is ever
@@ -537,7 +549,7 @@ something vanilla would otherwise keep running:
 | module | harm | route |
 |---|---|---|
 | `Fix_MeteorFrequency` | **MEASURED** — colony's meteors stop permanently, no self-heal | Layer 3: wrap `GetDisasterWarningTime`, keyed on `CurrentThread()`; delete the body; split the PT-01 watchdog onto `Msg("MeteorDone")` |
-| `Fix_RainsDeadlock` | ⚠️ **Same shape, not previously called out** — we replace the *global* `RainsDisasterLoop`, so its death stops that rain type for the save | Layer 2: wrap `RainsDisasterActivation` to post `RainDisasterEnd` on the collision early-return. **Vanilla's loop is left alone** |
+| `Fix_RainsDeadlock` | ⚠️ ~~its death stops that rain type for the save~~ **CORRECTED (round 2, measured orphan behaviour): `fixed_loop` touches only vanilla names, so it does NOT die — an uninstalled player keeps our rains loop FOREVER, silently. The harm is save-integrity (pack code becomes unremovable), not lost rains** | Layer 2: wrap `RainsDisasterActivation` to post `RainDisasterEnd` on the collision early-return — ⚠️ **shape gated on the GT-creation-ordering probe** (if a new GT thread runs at creation, the Msg fires before the loop reaches `WaitMsg` and the wrapper does nothing — adjudication §4.1/§8). **Plus the MIGRATION PASS (owed, or the repair means nothing for existing saves): a `RefreshRainsLoops`-style swap of persisted loops onto VANILLA's `RainsDisasterLoop`, keyed on a VERSION-STAMPED marker (the shipped boolean now means "old fixed body"), and handling id-less entries the current pass skips (`Fix_RainsDeadlock.lua:88-91`; the `test 2i` fixture's `toxic` entry has `id=nil`)** |
 
 **Tier 2 — a unit's command thread dies; recoverable but noisy.**
 
@@ -559,14 +571,15 @@ line**, not the 98/session `Opt_DroneOverhaul` produced (that figure came from
 `Fix_BombardmentSpread` is also **not built**: it has **no layer-3 route at all**
 (the defect is a discarded local mid-function with no seam), bombardments are a
 rare Mystery-7 event, ~~and the damage is one broken volley~~.
-⚠️ **HARM STATEMENT FALSIFIED 2026-07-31 (adjudication): the damage is NOT one
-broken volley.** `WaitBombard`'s only caller posts `Msg("BombardEnd")` after it
-returns (Bombardment.lua:156-161), and Mystery 7 blocks on an **untimed**
-`WaitMsg("BombardEnd")` (`Mystery 7.generated.lua:941-942`) — so a save cut
-mid-volley plus a later uninstall wedges the mystery's bombardment loop
-**permanently** (the F81 shape). The window is small (~2 game-minute volleys on
-a 10-20-sol cycle) but the accepted-residual decision was taken on the wrong
-description and is owed a re-take: `docs/F86_ADJUDICATION.md` §3.2, §7 D3.
+⚠️ **HARM STATEMENT CORRECTED TWICE — final state (round 2): the residual is
+≈ NOTHING, and no re-take is owed.** Round 1 replaced "one broken volley" with
+a permanent Mystery-7 wedge (untimed `WaitMsg("BombardEnd")`,
+`Mystery 7.generated.lua:941-942`). Round 2's measured orphan behaviour
+falsified that in turn: the replacement body references **no mod-created
+name**, so a mid-volley orphan resolves vanilla globals through the fallback
+env, **completes the volley, and `BombardEnd` posts** — Mystery 7 proceeds.
+Keep the fix; the untimed-WaitMsg contract stays on record as the pattern to
+check on any future module. `docs/F86_ADJUDICATION.md` §3.2 (as amended), §8.3.
 
 ⛔ **LAYER 1 IS NOT TO BE BUILT.** The owner declined it explicitly. Its own spec
 calls it the most dangerous layer, and the autosave-restart trap could recreate
