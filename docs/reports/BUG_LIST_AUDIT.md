@@ -318,7 +318,12 @@ longevity/subscribers):**
 all <9 months old):** **fredware** (Bug Fixes, 13 per-toggle fixes, MIT GitHub
 with 112 commits though the Bug Fixes folder wasn't pushed at fetch time,
 "Please complain! I can't fix what I don't know is broken" — the one to
-watch); **GromGor** (5 fix/workaround mods, no readable source); **Oxygenus**
+watch — **⚠ REMOVED from the Workshop within ~a day of upload**: by the
+owner's follow-up check later on 2026-08-01 the item page reads "removed from
+the community for violating Steam Community & Content Guidelines", reason
+unstated. The 13-fix description survives only as this audit's verbatim
+API-read quote; his GitHub is the remaining watch channel, and the §7.1
+subscribe suggestion is moot until/unless it returns); **GromGor** (5 fix/workaround mods, no readable source); **Oxygenus**
 (Asteroid Rocket Waste Fix, 397 subs); MyNutzYurFace (underground lighting).
 
 **Rejected (with reasons):** **LukeH** — one genuine fix mod (Martian Express

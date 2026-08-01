@@ -6069,6 +6069,12 @@ quotes verbatim; sources in the audit report §8.
 - **C22 [author] — Saint Blessing morale stacking not applied.** fredware
   (Relaunched, workshop 3775120166): *"Correctly applies each Saint's
   stacking Morale bonus to Religious colonists in the same Dome."*
+  **⚠ Source caveat for C22–C25 (2026-08-01, same day):** fredware's "Bug
+  Fixes" was REMOVED from the Workshop within ~a day of upload ("violating
+  Steam Community & Content Guidelines", reason unstated); the quoted
+  descriptions survive only as the audit's API-read record. His GitHub
+  (facazevedo/surviving-mars-relaunched-mods) had not received the Bug Fixes
+  folder at last check — re-check before leaning on these four.
 - **C23 [author] — dust devils continue after terraforming disables dust
   storms.** fredware: *"prevents new Dust Devils after terraforming disables
   Dust Storms."*
