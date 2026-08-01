@@ -22,6 +22,29 @@ the end of every drone session.
 > drives drone work. If you were started from that prompt and the session turns
 > into drone work, **stop and load this file instead.**
 
+> 🔗 **ADDENDUM 2026-08-01 (bug-list audit + project chain) — three facts a
+> drone session must know:**
+> 1. **The `Opt_DroneOverhaul` layer-2 carve-out is PRE-CLEARED** (owner
+>    blanket clearance, recorded in `docs\prompts\project\README.md`): the
+>    project chain's prompt 5 will move the module's wrapper call position
+>    for F86 save-safety — surgery on WHERE the wrapper calls, zero drone
+>    design. Expect that change to land from outside this prompt; do not
+>    re-do it, do not treat it as a design decision, and rebase any D06
+>    rebuild work on the module as it stands after the chain touches it.
+> 2. **C32 filed (BUGS.md):** buildings can drop out of
+>    `UIColony.labels.ShiftsBuilding` and stop changing workshift —
+>    suspected label rebuild on map transitions (asteroid out-of-range
+>    correlation). Not drone-owned, but any drone sitting that watches
+>    building work states should know the symptom exists so it isn't
+>    misattributed to drone behavior.
+> 3. **C27 filed (BUGS.md):** SkiRich's original-game fix claims Signal
+>    Boosters never extend the Drone Hub EXTENDER radius (hubs only) —
+>    F77's file neighborhood. If a drone session touches extenders or hub
+>    range, read C27 first; its Relaunched-presence check is chain prompt
+>    6b's job (don't duplicate it, but its verdict may matter to D06
+>    locality work). F77 itself audited BRONZE (owner-observed, no external
+>    witness; its pending PT doubles as the intent observation — unchanged).
+
 **⛔ THE STALE-PROBE GATE (HARD RULE, owner, 2026-08-01) — before ANY test this
 session runs or records, attended or unattended:** run
 `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/`, put the result

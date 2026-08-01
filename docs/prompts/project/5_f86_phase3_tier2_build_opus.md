@@ -20,11 +20,13 @@ for shapes: `docs/reports/SAVE_SAFETY_REDESIGN.md` §5/§6 + `FIX_POLICY.md` §3
    if no clean route exists, spec the options + trade-offs on the BUGS F53
    entry and route the decision to the owner via prompt 12's inbox — do NOT
    force a shape.**
-5. **`Opt_DroneOverhaul` layer-2 move — ASK FIRST.** The sequencing note
-   (STATUS/board) says the carve-out from the drone scope fence needs owner
-   confirmation: it is save-safety surgery on a wrapper's call position,
-   touching no drone design. Ask once. Granted → do the move here. Refused →
-   record on the F86 entry and route the residual to prompt 12's inbox.
+5. **`Opt_DroneOverhaul` layer-2 move — CARVE-OUT PRE-GRANTED** (owner
+   blanket clearance, README; also recorded in DRONE_PROJECT_PROMPT's
+   2026-08-01 addendum so the drone track expects it). It is save-safety
+   surgery on the wrapper's call position, touching no drone design — do
+   the move here. **The clearance does not cover drone-design judgment:**
+   if the move turns out to require ANY behavioral choice beyond call
+   position, stop and ask — that would be new scope.
 6. **One leg for the tier** (stale-probe gate first; probes updated so none
    asserts replaced behavior; predictions written down BEFORE the leg runs).
 7. **After the leg verifies: record the D10/D12 UNHOLD** in STATUS and on

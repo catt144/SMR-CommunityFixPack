@@ -45,6 +45,13 @@ autosave-hook fact. If the inbox is empty, prompt 2 has not run — stop.
      re-rolls immediately instead of waiting out a timeout (BUG_LIST_AUDIT §9
      A3). Consider it when choosing the rains shape; the Phase-0 verdict
      still rules.
+   - ⭐ **Pre-cleared option (owner blanket, README):** a §3a-compliant
+     MID-SESSION reconcile for the F81a flag class (OnMsg-based — e.g.
+     NewDay — never a replaced waiting body): our current sweep is
+     PostLoadGame-only, so a flag stranded mid-session waits for the next
+     load. Include it if this session judges it sound; skip with one line of
+     reasoning if not. Either answer is fine — the clearance removes the
+     ask, not the judgment.
    - ⚠ Do NOT copy fredware's `WaitCurrentDisaster`/loop-body replacements —
      they are §3a violations (mod code on persisted waiting stacks); the
      audit records them as HIS exposure, not a pattern.

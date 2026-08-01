@@ -40,16 +40,26 @@ below).
 4. **Verify checklist/HELP cross-references still hold** after the edits
    (the split rule: tests in CHECKLIST, reference in HELP).
 
-### B. The FIX_POLICY §4 amendment — present for decision
+### B. The FIX_POLICY §4 amendment — PRE-CLEARED, apply it
 
 The drafted replacement §4 (end of `docs/reports/REACHABILITY_AUDIT.md`,
 "Revised FIX_POLICY §4 amendment") was blocked on the F49(a) R4-ships
-contradiction. **That blocker died 2026-08-01** — the guard is stripped
-(BUGS F49 entry). Present the amendment to the owner as a yes/no:
-- **Yes** → apply the drafted text into `FIX_POLICY.md` §4 verbatim, note
-  adoption date + the F49(a) resolution, commit.
-- **No / defer** → append the standing decision to prompt 12's inbox with the
-  owner's stated reason.
+contradiction; that blocker died 2026-08-01 (the guard is stripped, BUGS F49
+entry), and **the owner's blanket pre-clearance (README) covers adoption —
+no ask needed.** Apply the drafted text into `FIX_POLICY.md` §4 verbatim,
+note the adoption date, the F49(a) resolution, and the pre-clearance as the
+authority; mark the draft in REACHABILITY_AUDIT.md as APPLIED. If applying
+it surfaces a conflict with any OTHER policy text, that is new information —
+stop and ask (the clearance covers the adoption, not conflicts).
+
+### B2. MOD_DESCRIPTION — the audit's community-standing facts (pre-cleared)
+
+Add, `[FAQ]`-tagged in place per WORKFLOW: the prior-art survey + audit
+differentiators worth a player-facing sentence each — the dev-documented
+save-marking norm we exceed, and (once F86 Tier 1 lands — write it
+conditionally or leave a TODO tied to chain prompt 4) that the pack's
+uninstall-cleanliness bar has no precedent in either game's community.
+Keep claims to what BUG_LIST_AUDIT.md / PRIOR_ART_SURVEY.md can cite.
 
 ### C. Doc consistency sweep
 

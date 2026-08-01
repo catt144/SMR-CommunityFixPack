@@ -62,8 +62,9 @@ by reading current Src, never by patch-note text alone.
 
 ## On completion
 
-Outbox → `7_audit_candidate_decisions_opus.md`: sweep verdicts that change
-its decision packages (esp. C32/F04). Delete this file, commit, push.
+Outbox → `6b_residual_candidate_sweeps_opus.md` (overlapping verdicts) and
+→ `7_audit_candidate_decisions_opus.md`: sweep verdicts that change its
+decision packages (esp. C32/F04). Delete this file, commit, push.
 
 ## Notes from upstream
 

@@ -1,20 +1,27 @@
-# Chain 7 — audit candidate DECISION packages (owner present for yes/no calls)
+# Chain 7 — audit candidate DECISION packages (pre-cleared: the package's own §4 pass IS the decision)
 
 **One-off; delete this file in your final commit. Read `README.md` in this
-folder first.** Game-free. This prompt turns the audit's Src-verified gap
-candidates into owner decisions, each through the FIX_POLICY §4 bar (as
-possibly amended by prompt 1 — check which §4 is in force FIRST).
+folder first — especially the owner blanket pre-clearance block, which
+changes this prompt's nature:** the owner pre-approved building every
+package that PASSES its own §4 bar (as amended by prompt 1 — check which §4
+is in force FIRST). **Evidence remains the gate; the ask is removed.** The
+owner reviews the outcome table; they are not needed per-item.
 
-**Staleness check: `git log --oneline -10` + `git pull`.** Read prompt 6's
-outbox below before packaging anything it swept.
+**Staleness check: `git log --oneline -10` + `git pull`.** Read prompts
+6/6b's outboxes below before packaging anything they swept.
 
 ## The decision packages (todo list first; one package = one item)
 
-Present each with: the defect claim + Src evidence (already on the C-entry),
-the intent tell, the reachability tier YOU derive this session (§4
-enumeration — the audit did NOT do these), who benefits (§4a), a
-recommended disposition, and the cost of the fix shape. **The owner says
-yes/no/defer per item; record every answer on the entry.**
+Work each package to the same standard as if the owner were deciding:
+defect claim + Src evidence (on the C-entry), the intent tell, the
+reachability tier YOU derive this session (§4 enumeration — the audit did
+NOT do these), who benefits (§4a), the fix shape and cost. Then:
+**PASSES all bars → record the pass on the entry and hand the spec to
+prompt 8 (pre-cleared). FAILS any bar → close it honestly on the entry
+(`wontfix` with grounds, or stays a candidate) — the clearance never
+converts a failed bar into a build.** Borderline → that is what
+stop-and-ask is for; the clearance covers clear passes, not judgment calls
+you are unsure of.
 
 1. **C33 — the track-shell leak (+ the F44 amendment).** The package the
    owner most needs: whole-track demolition leaks an undeletable invisible
@@ -46,18 +53,18 @@ owner's wording rules).
 
 ## Scope fence
 
-**In:** packaging, tier derivation, decisions, specs for approved items.
-**Out:** building anything (prompt 8); re-sweeping (prompt 6 did it);
-C25-C31 (not Src-verified — they stay candidates unless the owner asks);
-SkiRich's C26-C30 (OG-era, unswept — offer as a batch question: sweep now
-via a `7b` continuation, or leave as candidates?).
+**In:** packaging, tier derivation, pass/fail dispositions, specs for
+passing items. **Out:** building anything (prompt 8); re-sweeping (prompts
+6/6b did it); any candidate 6/6b left at CANNOT-DETERMINE (it stays a
+candidate — no package without settled evidence).
 
 ## Stop conditions
 
-- Owner unavailable → package everything, decide nothing, route the package
-  list to prompt 12's inbox, stop.
 - A package's reachability derivation surprises you (R4, or intent turns
-  ambiguous) → present the narrower true thing; never round up to "fixable".
+  ambiguous) → record the narrower true thing; never round up to "fixable".
+  A borderline call you cannot make cleanly → stop and ask (the clearance
+  covers clear passes only); route the question to the owner, not to a
+  guess.
 
 ## What may not be claimed
 

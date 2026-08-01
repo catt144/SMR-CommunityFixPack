@@ -21,7 +21,8 @@ mechanism below.
 | 4 | `4_f86_phase2_tier1_build_fable.md` | **Fable** | launch legs | Tier-1 build (`Fix_MeteorFrequency` + `Fix_RainsDeadlock` rewrites) + A/B + F88 regression + uninstall leg (absorbs retired PT-54) |
 | 5 | `5_f86_phase3_tier2_build_opus.md` | Opus | launch leg + one ask (drone carve-out) | Tier-2 builds + `ArrivalDeaths`(a) design pass · records D10/D12 unhold |
 | 6 | `6_audit_candidate_sweeps_opus.md` | Opus | no | verification reading: C32 (incl. already-patched-in-1.0.7 check), C04 call chain, F35 scope, fredware #11 comparison · owner web-check reminders |
-| 7 | `7_audit_candidate_decisions_opus.md` | Opus | decisions | decision packages: C33 (+F44 shell amendment), C22, C23, C24 — each through the §4 intent/reachability bar → owner yes/no; approved fixes get specs for prompt 8 |
+| 6b | `6b_residual_candidate_sweeps_opus.md` | Opus | no | the rest of the C-ledger: C18-C21 evidence prep, C25 mechanism limits, C26-C30 Relaunched-presence checks, F82 trace, F80 source-audit (pre-cleared work) |
+| 7 | `7_audit_candidate_decisions_opus.md` | Opus | review only | decision packages: C33 (+F44 shell amendment), C22, C23, C24 + everything 6/6b promoted — each through the §4 bar; **passing packages are PRE-CLEARED to build (blanket above)**; failing ones close honestly |
 | 8 | `8_f86_phase4_conversion_batch_opus.md` | Opus | launch leg | the six §5.4-A wrapper conversions + every prompt-7-approved fix, ONE leg |
 | 9 | `9_d10_workshops_build_opus.md` | Opus | decision (F84) + launch leg | D10 build (carries the bundled F84 text decision, adds PT-57) |
 | 10 | `10_d12_no_homeless_build_opus.md` | Opus | launch leg | D12 build, own A/B, never entangled with D10 |
@@ -33,6 +34,23 @@ Model routing lives in the FILENAME only — prompt bodies are model-neutral
 each other and may run in any order after their gates open (9/10 after 5
 verifies; 11 anytime after 1). 12 runs last, when the folder holds only it
 and this README.
+
+## ⭐ Owner blanket pre-clearance (2026-08-01, recorded verbatim in intent)
+
+The owner cleared, in advance and "regardless of flags", **all work items
+derived from the 2026-08-01 audit-and-adjudication conversation** that the
+chain's author judged appropriate. Scope and limits, stated precisely:
+
+- **What it clears:** the approval STEP on items already evidenced in that
+  conversation — the §4 amendment adoption (prompt 1), the
+  `Opt_DroneOverhaul` carve-out (prompt 5), building the audit's verified
+  candidates when their own §4 package passes (prompts 6b/7/8), and the
+  residual-candidate sweeps (prompt 6b).
+- **What it does NOT clear:** the EVIDENCE bars — a package that fails its
+  own intent/reachability/§4a test still does not ship (the clearance
+  removes the ask, not the bar); anything the owner previously REJECTED
+  outright (e.g. the C1 wording fallback) stays rejected; NEW scope that
+  did not come from that conversation still stops and asks (rule 2 below).
 
 ## Chain mechanics (binding for every prompt here)
 
