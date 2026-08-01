@@ -58,6 +58,19 @@ code suggests.
   `SMRFixPack`/`SMRTest` are cross-mod and console visible; `Msg`/`OnMsg` are
   filtered only for persist/debug messages. The fix pack Code/ uses no
   blacklisted API (verified) — sandbox- and console-clean.
+- **`Msg`/`OnMsg` are PER-ENV OWN KEYS and cannot be stubbed or deleted from
+  mod code** (measured 2026-08-01, Tier-1 sitting; source: Mod.lua). LuaModEnv
+  installs `env.Msg = safe_Msg` / `env.OnMsg = safe_OnMsg` as env-locals
+  (:1600-1610) AND `ModEnvBlacklist` lists both (:1288-1289), which gates them
+  out of `ModEnvMeta.__newindex` and `safe_rawget`'s fall-through alike. So:
+  assignment through `_G` is a SILENT NO-OP, and `rawset(_G, "Msg", nil)`
+  deletes the env's own wrapper PERMANENTLY (nothing can read the real one
+  back — blacklisted) while the real `_G` and every other env stay untouched.
+  Observed live: a TestKit probe stubbing `Msg` blinded only the TestKit env;
+  a later probe's `Msg(...)` errored (`60_Probes_Opt.lua:417`) and popped the
+  engine's "Mod Flagged" warning; the game and the fix pack were unaffected.
+  Guard: TestKit `00_TestCore.lua` ENV_SPECIALS refuses these keys in
+  `SetGlobal`/`WithGlobals`. Same class: `rawget`, `getmetatable`, `os`, `_G`.
 - **`error()` and `assert()` do NOT unwind mod code — they report and execution
   continues** with the next statement (LuaExports.lua:567 "asserts pop instead of
   being printed out"). Never use them for control flow; `pcall` still catches
