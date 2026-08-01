@@ -14,7 +14,7 @@ mechanism below.
 
 | # | file | model | owner needed? | what it drains |
 |---|------|-------|---------------|----------------|
-| 0 | `0_harness_gate_and_probe_teardown_opus.md` | Opus | ~5 min (launch one leg) | owed F49-strip A/B code-gate leg · stale probe `99` teardown |
+| 0 | ~~`0_harness_gate_and_probe_teardown_opus.md`~~ **✅ DONE 2026-08-01, file consumed** | Opus | — | owed F49-strip A/B code-gate leg (RAN CLEAR: `68/74` → `63/0/15/0`) · stale probe `99` teardown (deleted; sweep now returns one declared hit, `97`) |
 | 1 | `1_playtest_reorg_and_policy_sweep_opus.md` | Opus | one decision (§4 amendment) | PT-54 retirement · new checklist riders (F35, C32, F80, F82) · F74 rider downsize · FIX_POLICY §4 amendment adoption ask · BUGS/STATUS consistency sweep |
 | 2 | `2_f86_phase0_measurements_opus.md` | Opus | ~30 min at keyboard | the two F86 engine measurements (GT-creation ordering, autosave hook) + probe `97` teardown |
 | 3 | `3_f86_phase1_tier1_spec_fable.md` | **Fable** | no | final Tier-1 spec (+ the C34 rains rider) · five-shape exposure enumeration re-run · adjudication §4.4 closure · writes `F86_TIER1_BUILD_PROMPT.md` |

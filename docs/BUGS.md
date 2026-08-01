@@ -64,7 +64,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F46 | Trains dump cargo at stations with resource disabled     | P2  | high | tested — PT-23 PASS 2026-07-28 (entry) |
 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | P3  | high | tested |
 | F48 | Station-connector savegame fixup no-op (paren misplaced) | P3  | high | blocked|
-| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* — (d) tested 2026-07-30 PT-46; (c) wontfix + guard REMOVED (designed behaviour); (a) R4 NON-FIX, guard STRIPPED 2026-08-01 (owner; audit §2.4) — A/B code-gate leg owed (entry) |
+| F49 | Train minors bundle (palette, split kills trains, etc.)  | P3  | med  | fixed* — (d) tested 2026-07-30 PT-46; (c) wontfix + guard REMOVED (designed behaviour); (a) R4 NON-FIX, guard STRIPPED 2026-08-01 (owner; audit §2.4) — A/B code-gate leg RAN CLEAR 2026-08-01 (entry) |
 | F50 | Auto-rockets kick approaching drones to Idle every hour  | P1  | high | tested |
 | F51 | Transport-mode cache never sees new shuttles (homeless)  | P1  | high | tested |
 | F52 | Colonists still walk ≤400m in vacuum past passages       | P1  | high | tested*|
@@ -1584,9 +1584,42 @@ the same change: the wrapper on `TrackGridElement:GameInit`, its three Require
 entries, and the probe's palette half (TestKit `50_Probes_Wave5.lua` — probe
 retained, cap half only; probe count stays 78; its PASS text changed, so the
 next fingerprint diff will show that one line). Module title now "Train cap
-follows track length". **Owed: the standard unattended A/B code-gate leg**
-(expected: counts unchanged — 74 registered / 68 default-active; all-ON
-68/0/10/0, default 63/0/15/0, baseline probe FAIL row unchanged).
+follows track length".
+
+**✅ The owed A/B code-gate leg RAN CLEAR — 2026-08-01, unattended, default
+config** (log `Mars.exe-20260801-14.15.08-6a22b86d`, read this session; every
+number below is quoted from it, not predicted). `[SMRAUTO] armed (flag file
+Code/96_AutoRunFlag.lua)` → `BEGIN` → `END` → `done`, no TIMEOUT and no ERROR
+stage.
+* **Counts unchanged, as predicted:** `fix pack present: 68/74 fixes active` —
+  68 `: applied` lines and exactly 6 `inactive (opt-in module, off by default)`,
+  zero error / disabled / FAILED lines from `[CommunityFixPack]`.
+* **Tally exactly the recorded default-config prediction: `---- 63 PASS, 0
+  FAIL, 15 SKIP, 0 ERROR ----`**, over 78 verdict lines (probe count unchanged).
+* **The TrainMinors probe PASSes on its new cap-only text:**
+  `PASS TrainMinors [behavior] train cap recomputed 4->1, 40->2, 0->0`.
+* **Fingerprint diff vs the last comparable default-config leg
+  (`Mars.exe-20260731-18.44.38`, also 68/74 → 63/0/15/0) is THREE lines, and
+  only ONE is a real change** — TrainMinors losing its palette clause, which is
+  the one difference this strip was predicted to produce. The other two are the
+  known RNG lines: `TouristApplicants` (160/312 → 159/308) and
+  `FounderTraitNotification` (random trait pick Sexy → Whiner).
+* **Noise is the documented set only:** 60 `Flight.lua objects_to_mark` /
+  `objects_to_unmark` lines (documented ~50-60), three GameInit nil-calls
+  (`CreateResourceRequests`, `ApplyToGrids`, `BuildWaypointChains`), 2
+  `ResManager LawOfficeDoor` lines, the `no debug.getinfo` notice, and the
+  `MeteorFrequency: WATCHDOG … probe-stall` line — that last one checked
+  against the 2026-07-31 leg, which carries it identically, so it is prior
+  known behaviour and not something this change introduced.
+* **PROBE SWEEP:** armed `97_SaveHookProbe.lua` only (declared: chain prompt 2's
+  instrument; it logged its load line and nothing else, since the leg starts a
+  new game and never saves). `99_OrphanEnvProbe.lua` was deleted before the leg
+  and no `SMRTEST-ORPHANENV` line appears anywhere in the log.
+
+**Nothing is owed on the harness side for the F49(a) strip.** The leg measured
+the default configuration; the all-ON prediction (68/0/10/0) was not exercised
+and is not owed — the account was in default state and the reading, per the
+standing rule, is the truth.
 
 **Audit 2026-07-30 (reachability): (a) settled R4; (c)(d) live R2; module
 kept.** The (a) trigger list "map setup, cheats, the instant-build rule"

@@ -96,4 +96,54 @@ the log filenames. Delete this file, commit, push.
 
 ## Notes from upstream
 
-(prompt 0 appends the leg result + the one-hit expectation here)
+### From prompt 0 (2026-08-01) — harness gate discharged, probe `99` gone
+
+**Your §0.0 expectation is now correct as written: the sweep returns exactly
+ONE hit, `97_SaveHookProbe.lua`.** Verified after the deletion, both repos.
+`99_OrphanEnvProbe.lua` and its `metadata.lua` line are deleted (TestKit commit
+`57247ee`, local-only). Nothing in the fix pack's `Code/` carries the marker.
+
+**The owed F49(a)-strip A/B code-gate leg RAN CLEAR** — 2026-08-01 14.15,
+unattended, default config, log `Mars.exe-20260801-14.15.08-6a22b86d`.
+`fix pack present: 68/74 fixes active` · `---- 63 PASS, 0 FAIL, 15 SKIP, 0
+ERROR ----` over 78 verdict lines · zero `[CommunityFixPack]`
+error/disabled/FAILED lines · exactly ONE real fingerprint change vs the
+2026-07-31 18.44 default-config reference (TrainMinors' palette clause gone) plus
+the two known RNG lines. Numbers and noise inventory on the F49 BUGS entry.
+**Nothing is owed on the harness side.**
+
+**Two things worth knowing before you run 0.2:**
+
+1. **`97` is passive and quiet in an unattended leg.** Across the whole 14.15
+   log it emitted one line — `probe loaded — waiting for LoadGame /
+   SaveGameStart / SaveGameDone` — because the autorun harness starts a NEW
+   game and never saves. So on your leg, an absent `SaveGameStart FIRED` line is
+   only an answer if a save actually happened; the positive control
+   (`LoadGame FIRED`) is what tells you the probe is alive at all. Do not read
+   the unattended silence this leg produced as evidence about the save hook.
+2. **The autorun harness never loads a save** (`95_AutoRun.lua` →
+   `NewGame()` + `GenerateCurrentRandomMap()`). That is why deleting `99` could
+   not disturb this leg. But note the shape for your own work: any save written
+   while `99` was armed carries a persisted `SMRTestOrphanEnvProbe` game-time
+   thread whose body no longer exists. If you load an old save and see a nil-body
+   or missing-permanent line naming that thread, it is `99`'s residue, not a
+   finding.
+
+**Baseline-noise reference for your leg** (from 14.15, all known/documented): 60
+`Flight.lua objects_to_mark`/`objects_to_unmark` lines, three GameInit nil-calls
+(`CreateResourceRequests`, `ApplyToGrids`, `BuildWaypointChains`), 2
+`ResManager LawOfficeDoor`, the `no debug.getinfo (mod sandbox)` notice, and one
+`MeteorFrequency: WATCHDOG … probe-stall` line — that last one appears
+identically in the 2026-07-31 leg, so it is pre-existing and not a signal.
+
+**One TestKit housekeeping item, routed to you because you own the TestKit
+next.** `Code/99_FixtureCarry.lua` sits **uncommitted** in the TestKit working
+tree — a prior session's real repair wrapping two `IsValidThread(...)` reads in
+`... or false` (the engine returns NO VALUE for an invalid thread, so bare
+`tostring()` throws "value expected"; the same fact your own §preamble cites).
+Prompt 0 left it alone as out of scope rather than adopt someone else's
+unverified edit. It is inert for legs — the file only defines
+`SMRTest.FixtureCarry()` — but the tree should not stay dirty. Commit it when you
+next touch the TestKit, or discard it if you judge it wrong.
+
+*(Nothing found here was checklist-relevant, so nothing was copied to prompt 1.)*

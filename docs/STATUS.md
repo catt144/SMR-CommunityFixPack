@@ -96,10 +96,14 @@ with **PHASE 4 COMPLETE** (below).
 > `Fix_TrainMinors`** — wrapper + 3 Require entries + the probe's palette
 > half (probe retained, cap-only; count stays 78; its PASS text changed —
 > expect that one line in the next fingerprint diff). Counts unchanged
-> (74 registered / 68 default-active). ⚠ **OWED: the standard unattended A/B
-> code-gate leg** (expected all-ON 68/0/10/0 · default 63/0/15/0 · baseline
-> TrainMinors probe still FAILs by design — verified: the cap half alone
-> discriminates). Headlines: a native Relaunched fix-modding scene exists and
+> (74 registered / 68 default-active). ✅ **The owed unattended A/B code-gate
+> leg RAN CLEAR 2026-08-01** (default config; log
+> `Mars.exe-20260801-14.15.08`): `fix pack present: 68/74 fixes active` ·
+> `---- 63 PASS, 0 FAIL, 15 SKIP, 0 ERROR ----` · 78 verdict lines · zero
+> `[CommunityFixPack]` error/disabled/FAILED lines · the predicted ONE
+> fingerprint change (TrainMinors now `train cap recomputed 4->1, 40->2, 0->0`)
+> plus the two known RNG lines · documented noise only. **Nothing is owed on
+> the harness side.** Full quoted numbers on the F49 entry. Headlines: a native Relaunched fix-modding scene exists and
 > independently converges on F01/F04/F71/F74/F78/F81 (fredware's 13-fix "Bug
 > Fixes" created 2026-07-31, GromGor, Oxygenus); the Relaunched dev patch-note
 > thread witnesses the train/lander/homeless clusters wholesale; **20 gap
@@ -507,6 +511,7 @@ The post-F83 set at 77 probes (`74/74` → `67/0/10/0`; default `68/74` →
 
 | Leg | Active | Result |
 |---|---|---|
+| **⭐ NEWEST — the F49(a)-strip code-gate leg, default config, 2026-08-01 14.15 (unattended), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — the owed leg for the F49(a) guard strip, CLEAR. Fingerprint vs the 18.44 default-config reference differs in exactly ONE real line (`TrainMinors` now `train cap recomputed 4->1, 40->2, 0->0`, palette clause gone as predicted) plus the two known RNG lines (`TouristApplicants`, `FounderTraitNotification`). `PROBE SWEEP:` armed `97_SaveHookProbe.lua` only (declared); `99_OrphanEnvProbe.lua` deleted before the leg and no `SMRTEST-ORPHANENV` line in the log |
 | **⭐ CURRENT — THE ENABLE-PATH LEG, all optional modules ON via the `SMRFixPack_Optional` bridge, 2026-07-31 19.24 (owner ticked the box), 78 probes** | **74/74** | **68 / 0 / 10 / 0** — matches the all-ON cold-boot reference exactly; all five `Opt_` probes PASS on the enable path, and `MultipleSuns: … limit lifted` proves the `OnDataReady` repair fired there |
 | **⭐ CURRENT — THE ENABLE-PATH LEG, default config, 2026-07-31 19.09 (owner ticked the box at the main menu), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — **the first leg ever run on a player's FIRST session.** Probe-for-probe identical to the 18.44 cold boot bar 2 RNG lines. `DustSicknessBiorobots` PASS on live preset data = the F87 patch really ran. ⚠️ toggles OFF, so the five `Opt_` probes SKIPped |
 | **CURRENT — POST-F87-REPAIR cold-boot re-verify, default config, 2026-07-31 18.44 (unattended), 78 probes** | **68/74** | **63 / 0 / 15 / 0** — identical to the 12.44 reference; proves the scaffold change did not regress the cold boot. Says NOTHING about the enable path |
