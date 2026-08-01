@@ -5060,6 +5060,19 @@ alive-vs-dead, restarts onto vanilla's body (cost: one timer re-roll), gives up
 loudly after 3. In vanilla, without the pack, this state is a permanent loss of
 all regular meteors for the save. No layer-3 route exists into a mid-function
 loop; bounding the loop would need a body copy — barred (F86, §3a).
+
+**Two bounded caveats, measured the same sitting (accepted, disclosed):**
+(1) **event strikes re-arm the watchdog's liveness clock** — ANY meteor posts
+`Msg("MeteorDone")`, including story-bit/sequence/POI event spawns
+(`MeteorsDisaster` has NINE call sites in Src; the event families fire outside
+the 65-90h roll, unannounced) — so detection latency stretches during
+event-heavy play; the conservative threshold absorbs it. (2) **strike
+attribution needs the caller type**: the sitting's strike #3 was a Singularity
+story-bit meteor masquerading as a scheduler strike until the story-bit log
+line was correlated; the TestKit's Meteors logger now prints the
+`meteors_type` argument to disambiguate ("single"/"multispawn" from the
+scheduler or events, "storm" from the storm thread — sequence/POI singles
+remain ambiguous without an accompanying story-bit line).
 Cross-refs: F02 (watchdog), F78 (class + storm half), F86 (why no body copy).
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
