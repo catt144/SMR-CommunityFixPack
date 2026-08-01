@@ -6221,9 +6221,18 @@ quotes verbatim; sources in the audit report §8.
   for the Steam witness thread "Buildings are stuck on night shift"**
   (colony-wide BUILDING shift stuck; one reporter correlates onset with "an
   asteroid had recently gone out of range", which fits a label rebuilt on map
-  transitions). Needs our own sweep: find the de-labeling path in Src and
-  whether `AddToLabel` on re-registration is safe. F04's audit tier was
-  corrected on this finding (see the F04 entry note).
+  transitions). Needs our own sweep: find the de-labeling path in Src,
+  whether `AddToLabel` on re-registration is safe, **and — owner challenge
+  2026-08-01 — whether 1.0.7 already fixed it**: GromGor's mod is titled
+  "Patch **1.0.6** Workshifts FixUp", and this is the one packed-source
+  finding NOT verified against current Src by this session (unlike
+  C22-C24/C33, which were read in today's proven-parity source; game install
+  confirmed unchanged since the parity proof — last Steam update 2026-06-24,
+  parity run 2026-07-29). The witness thread's reports (Mar 13 / Apr 26) are
+  post-1.0.6 but not provably post-1.0.7. F04's audit tier was corrected on
+  this finding (see the F04 entry note) — if the sweep finds 1.0.7 fixed the
+  label desync and the reports predate 1.0.7, re-examine F04's witness
+  reassignment as well.
 
 ## Not yet swept (follow-up targets)
 
