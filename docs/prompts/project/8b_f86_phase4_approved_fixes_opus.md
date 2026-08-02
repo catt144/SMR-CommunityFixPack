@@ -23,6 +23,13 @@
 **One-off; delete this file in your final commit. Read `README.md` in this
 folder first.**
 
+> ## ⛔ CONSUMED 2026-08-02 — SPLIT UNDER RULE 3. **GO TO `8b2_pt60_leg_completion_opus.md`.**
+>
+> This prompt's build jobs are complete and PT-60 is **partly run**. All remaining
+> work, all fixture names, all readings taken, and one **unverified fix** are
+> carried in `8b2_pt60_leg_completion_opus.md`. **Do not work from this file** —
+> read 8b2. The block below is kept only as the record of what 8b finished.
+
 > ## ⏸️ STATE 2026-08-02 — JOBS 1 AND 2 ARE DONE AND PUSHED. ONLY THE LEG REMAINS.
 >
 > **This file is NOT yet consumed, and it must not be deleted until PT-60 has

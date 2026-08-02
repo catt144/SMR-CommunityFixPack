@@ -180,16 +180,40 @@ OnMsg.LoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	local colony = rawget(_G, "UIColony")
 	if type(colony) ~= "table" or type(colony.label_modifiers) ~= "table" then return end
 
-	local healed = 0
+	-- ⛔ DO NOT test presence by object identity. `label_modifiers` is PERSISTED and
+	-- the save deserialises its OWN COPY of the Effect_ModifyLabel key, so the
+	-- loaded key is never the same table as the one `owned` holds. An identity
+	-- test therefore misses on every load and re-applies — observed 2026-08-02 at
+	-- the keyboard: 1 modifier became 2 after one save+reload, i.e. +20% instead of
+	-- +10%, growing without bound. Test by PROPERTY instead, which survives the
+	-- round trip. (Vanilla's own ten entries never hit this because EffectsApply
+	-- runs once at game start and nothing re-applies them on load.)
+	local healed, removed = 0, 0
 	for label, effect in pairs(owned) do
 		local mods = colony.label_modifiers[label]
-		if not (mods and mods[effect]) then
+		local keep, extra = nil, {}
+		if type(mods) == "table" then
+			for key, m in pairs(mods) do
+				if type(m) == "table" and m.prop == effect.Prop then
+					if keep then extra[#extra + 1] = key else keep = key end
+				end
+			end
+		end
+		-- repair saves already inflated by the identity-keyed version above
+		for _, key in ipairs(extra) do
+			colony:SetLabelModifier(label, key, nil)
+			removed = removed + 1
+		end
+		if not keep then
 			effect:OnApplyEffect(colony, profile)
 			healed = healed + 1
 		end
 	end
 	if healed > 0 then
 		log("%s: applied %d Astrogeologist extractor bonus(es) this save started without", FIX_ID, healed)
+	end
+	if removed > 0 then
+		log("%s: removed %d duplicate extractor modifier(s) left by the identity-keyed heal", FIX_ID, removed)
 	end
 end)
 

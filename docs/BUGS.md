@@ -7541,6 +7541,33 @@ instruction's substance is unchanged and was followed — the heal calls that me
 rather than hand-rolling a `LabelModifier`, so the modifier id, scale and container
 are identical to what a new game produces.
 
+## ⛔ THE HEAL WAS NOT IDEMPOTENT — FOUND AT THE KEYBOARD 2026-08-02, FIXED, **NOT YET RE-VERIFIED**
+
+**Observed:** load an Astrogeologist save with the pack on → correct
+(`AutomaticMetalsExtractor=1 MicroGAutoWaterExtractor=1`). Save, reload → **`=2`
+and `=2`.** Every load added another +10%, **without bound**.
+
+**Root cause.** `Effect_ModifyLabel:OnApplyEffect` keys the modifier by the
+**effect object** — `colony:SetLabelModifier(self.Label, self, …)`. `label_modifiers`
+is a **persisted** field, so a save deserialises its **own copy** of that key. The
+presence check compared **object identity**, which can never match across a
+save/load, so it re-applied every time. ⭐ Vanilla's own ten entries never hit this
+because `EffectsApply` runs once at game start and nothing re-applies them on load
+— which is exactly why this defect is invisible to source review of vanilla.
+
+**Fix:** test by **property** (`m.prop == effect.Prop` on that label) instead of
+identity, and **remove duplicates already present**, so saves inflated by the
+broken version are repaired. ⚠️ **UNVERIFIED — fixture `f95 healed` carries the
+duplicates; chain prompt 8b-2 job 1 must confirm it heals to `=1` and stays there
+across a second save/load.**
+
+⚠️ **This is the SECOND idempotence defect of the same class in this batch** —
+`Fix_SaintBlessing`'s heal re-applied every load too (fixed `991c5dc`). Both were
+written by the same session. **The general lesson: "idempotent" and "one-shot" are
+different properties, and an identity-keyed presence test is worthless across a
+save boundary.** The paragraph below is the reasoning that was *wrong* and is kept
+because it shows exactly where it fails.
+
 **Why the heal is idempotent, re-derived rather than inherited.** Vanilla applies
 profile effects exactly once, at game start
 (`Colony.lua:436` → `GameEffectsContainer:EffectsApply`, `GameEffect.lua:36-40`),
