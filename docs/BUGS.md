@@ -4691,14 +4691,25 @@ only by a fixed REAL-TIME expiry.**
   **no `Expiration` at all**; they are cleared by state when the leak is
   repaired. The split ones were deliberately given a timeout instead. One
   notification family, two clearing disciplines, in the same preset file.
-- **The arithmetic reproduces the observation, and it also explains why the
-  observer's estimate reads low.** One sol = `const.Scale.sols` = 720 000 ms of
-  game time (`Lua\__const.lua:1454-1458`; `const.Scale.h` = 30 000, `:1438-1442`
-  → 24 h/sol), and ultra speed is **20×** (`Lua\_GameConst.lua:26-28`). So at
-  ultra a sol takes **36 real seconds**, and a 120-real-second expiry spans
-  **≈3.3 sols of game time** — comfortably "MUCH longer" and felt-wrong even at
-  ultra, exactly as reported. At normal speed (1×) a sol is 12 real minutes, so
-  the same 2 real minutes is only **≈1/6 sol**.
+- **The arithmetic reproduces the observation — and the observer's estimate was
+  RIGHT.** One sol = `const.Scale.sols` = 720 000 ms of game time
+  (`Lua\__const.lua:1454-1458`; `const.Scale.h` = 30 000, `:1438-1442` → 24
+  h/sol). ⚠️ **CORRECTED 2026-08-02 by the live run — the max player speed is
+  5×, not 20×.** `const.ultraGameSpeed = 20` exists
+  (`Lua\_GameConst.lua:26-28`) but **`"ultra"` is appended to the speed-state
+  list ONLY under `if Platform.debug`** (`Lua\X\HUD.lua:462-467` and
+  `:481-487`), and the HUD wires buttons for `"play"`/`"medium"`/`"fast"` only
+  (`Lua\XDef\HUD.generated.lua:226,:247,:269`). **On retail the fastest
+  reachable speed is `const.fastGameSpeed` = 5×** — confirmed in game by the
+  button's own tooltip, *"Fastest — Play at five times normal speed"*.
+  So the real figures are: at **5×**, 120 real seconds spans **600 000 game ms =
+  0.83 sols**; at **1×** it spans **120 000 game ms = 1/6 sol**. The game-time
+  spread between slowest and fastest is **5×, not 20×**.
+  ⛔ **WITHDRAWN: the earlier claim here that the observer's estimate "reads
+  low".** It did not. 0.83 sols *is* "close to an entire sol", which is exactly
+  what the 2026-07-29 report said. **The error was mine** — I took
+  `ultraGameSpeed = 20` from source and assumed it was the speed the player
+  meant, without checking that it is debug-gated and unreachable.
 - ⭐ **That inversion is the discriminating prediction, and it is free to
   take:** the delay is **constant in real time and shrinks in game time as you
   speed up**. No state-cleared notification can behave that way. The checklist
