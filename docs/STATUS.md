@@ -269,11 +269,59 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > reports label modifiers as `NOT INSPECTABLE` — absence there is not evidence
 > of absence.
 >
-> - **Tier 2 still owes** (chain prompt 5): `DroneUnreachableForever`,
+> - ~~**Tier 2 still owes** (chain prompt 5): `DroneUnreachableForever`,
 >   `TrainWaitTime`, `ArrivalDeaths` (b) + the (a) design pass, **F86 Site 2
->   (`Opt_DroneOverhaul`)**, and the D10/D12 unhold record. The §5.4-A
+>   (`Opt_DroneOverhaul`)**, and the D10/D12 unhold record.~~ **→ BUILT
+>   2026-08-01, see the Tier-2 block immediately below.** The §5.4-A
 >   conversions are chain prompt 8. Tier 1 verifying does not by itself make
 >   the pack uninstall-clean.
+>
+
+> ⭐ **F86 TIER 2 IS BUILT — 2026-08-01, chain prompt 5 (`88f3154`, `44e6af2`,
+> `6f0cb95`, `ef7d49c`; TestKit `6eb3c0b`, `7bfa274`). ⚠️ NOT YET VERIFIED — the
+> one leg for the tier is specced and UNRUN (`PLAYTEST_CHECKLIST.md` PT-58,
+> predictions P1-P7 written before the run). The D10/D12 unhold is therefore NOT
+> recorded: its gate is "repairs land AND verify", and only half of that is true.**
+> Chain prompt **5b** carries the leg, the unhold and the outbox.
+>
+> **All four Tier-2 modules now sit on synchronous seams; none replaces a blocking
+> body any more. Per-site dispositions (FIX_POLICY §3a per-site release gate):**
+>
+> | site | was | now | disposition |
+> |---|---|---|---|
+> | `Fix_DroneUnreachableForever` | replaced `Drone:ApproachWrapper` (blocks in `DroneApproach`, our code after the call) | pre-wrapper on the **verified-synchronous** `Drone:CleanUnreachables` — `ts > GameTime()` → `ts - max_int` recovers the exact failure time; vanilla's writer and its 5-sol expiry both untouched | **REPAIRED IN-PACK, layer 3. No residue; nothing owed to D13.** |
+> | `Fix_TrainWaitTime` | replaced `Colonist:BoardVehicle` (blocks for the whole journey via `PlayPrg`) | wrapper on the **verified-synchronous** `TransportStatistics:AddSpentTime`, keyed `IsKindOf(self,"Station")` — the only Station call site of three, and vanilla's own "the wait is paid" line. Boarding colonist identified by `command_thread == CurrentThread()` | **REPAIRED IN-PACK, layer 3. No residue.** |
+> | `Fix_ArrivalDeaths` (a) | inside the replaced `Colonist:Arrive`, in a destructor after a `Sleep`, on an upvalue nothing could change | pre-wrapper on the **verified-synchronous** `Colonist:OnArrival`, which runs after the placement and (on the walking path) before `TransportByFoot` starts. **This is the design pass §6.2 booked as owed — run, and it found a route** | **REPAIRED IN-PACK, layer 3. No residue.** |
+> | `Fix_ArrivalDeaths` (b) | same replaced body; destination read into a local at `:1260` before anything else runs | pre-wrapper on `Colonist:Idle` keyed on `self.arriving` — the only issuer of `"Arrive"`. Work before the call, `return orig_idle(...)` with nothing after | **REPAIRED IN-PACK, layer 2. Accepted residual: one inert captured frame — ethos tier 2, named and disclosed. Nothing owed to D13.** |
+> | `Opt_DroneOverhaul` — **F86 Site 2** | post-wrapper on `Drone:Idle`, under three `Sleep`s: **80 orphan errors** on the Tier-1 uninstall leg, 98 when first measured | post-wrapper on `Drone:CleanUnreachables` gated `self.command == "Idle"` — vanilla's own last statement in the same fall-through, with **no statement between it and the end of `Idle`**. Beats the layer 2 the spec asked for | **REPAIRED IN-PACK, layer 3. No residue.** Verification = PT-58 P5. |
+>
+> **Carve-out honoured, not stretched:** the `Opt_DroneOverhaul` move changed the
+> hook's call position and nothing else — same trigger condition, same ordering,
+> same code — so no drone-design judgement was required and the pre-granted
+> clearance covered it exactly. Part 1's `TaskRequestHub:FindTask` wrapper was
+> checked in the same pass and is already on a synchronous C-backed seam, so the
+> module now has **no capturable frame anywhere**.
+>
+> **Two records were corrected rather than quietly dropped:** `Opt_DroneOverhaul`'s
+> header claimed *"saves made with the module enabled load identically without
+> it"* — false, and Site 2 is the counter-example; and F53's entry claimed *"no
+> wrapper can run in time"* for F21 — right about `BoardVehicle`, wrong about the
+> repair, because it only ever asked whether that one body could be wrapped.
+>
+> **F21 was DOWNGRADED `tested` → `fixed`** in the same move: PT-43's pass was read
+> against a body that no longer ships. PT-58 carries the optional re-take that
+> earns the tag back; the probe alone does not.
+>
+> **`ChooseDome` was deliberately NOT wrapped**, though it is where F53's bad
+> fallback is born: eight shipped call sites, only the arrival ones are F53's
+> subject, and suppressing the fallback globally would change android spawning and
+> the "Abandoned" path — behaviour with no evidence behind it (FIX_POLICY §4), and
+> §5.3 requires the narrowest key that separates the sites.
+>
+> **Probe hygiene:** sweep **CLEAN** (zero `TEMPORARY` hits, both repos) at
+> `ef7d49c`. Three probes asserted behaviour the pack no longer replaces and were
+> **realigned onto the new seams** before any leg was specced — `ArrivalDeaths`
+> and `DroneUnreachableForever` (TestKit `7bfa274`), `TrainWaitTime` (`6eb3c0b`).
 >
 > ⭐ **ETHOS + RELEASE GATE RESTATED BY THE OWNER 2026-08-01 (authoritative
 > text: `FIX_POLICY.md` §3a — any "leave no trace" framing left elsewhere in

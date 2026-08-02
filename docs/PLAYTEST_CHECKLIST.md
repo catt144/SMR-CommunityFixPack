@@ -835,6 +835,65 @@ obvious). Watch from a low camera angle so the incoming trails are visible.
 
 # 5 · Cross-cutting — do these last, once per era of the pack
 
+## PT-58 — F86 **Tier-2** verification leg · covers **F86 Site 2, F53, F55, F21** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 5b
+
+**One leg for the whole tier** (chain prompt 5, 2026-08-01). Tier 2 rebuilt four
+modules onto synchronous seams; this is the sitting that decides whether that
+worked. **Nothing in Tier 2 may be called verified, and the D10/D12 unhold may not
+be recorded, until this leg's numbers are quoted.**
+
+**⛔ PT-00 first.** Sweep result at build time (`ef7d49c`): **CLEAN — zero
+`TEMPORARY` hits in both repos.** Re-run it at the keyboard anyway; that is the
+rule. Both probes that asserted a replaced body (`ArrivalDeaths` drove
+`FromFixPack(Colonist.Arrive)`, `DroneUnreachableForever` drove
+`Drone:ApproachWrapper`) were **realigned onto the new seams** in TestKit
+`7bfa274`, and `TrainWaitTime` in `6eb3c0b` — none of the three now asserts
+behaviour the pack no longer replaces.
+
+**⚠️ Turn the loggers on AFTER every restart** (`SMRTest.Log.<name>(true)`,
+`SMRTest.Loggers()` lists state) — a game restart clears them, which is how Tier-1
+leg 5 lost its meteor instrumentation.
+
+### ⭐ PREDICTIONS — written 2026-08-01, BEFORE the leg runs
+
+Record the reading against each one. A prediction that misses is the finding.
+
+| # | prediction | what a miss means |
+|---|---|---|
+| **P1** | `*r SMRTest.RunAll()` with the pack ON: `DroneUnreachableForever` **PASS**, reporting the failure **normalised to roughly `now±0 ms`** (not `now + max_int`) | the consumer patch is not reaching the poisoned stamp |
+| **P2** | same run: `ArrivalDeaths` **PASS**, reporting *"the impassable drop spot was snapped to a walkable one"* **and** *"Colonist.Arrive is vanilla's"* | either half (a) is not installed, or a pack body crept back onto `Arrive` |
+| **P3** | same run: `TrainWaitTime` **PASS**, travel clock restarted at boarding. It **SKIPs** if run bare — use the `*r` form | the `AddSpentTime` key or the command-thread identification is wrong |
+| **P4** | whole-session play with the pack ON: **zero** `[LUA ERROR]` lines naming any of `Fix_DroneUnreachableForever.lua`, `Fix_TrainWaitTime.lua`, `Fix_ArrivalDeaths.lua`, `Opt_DroneOverhaul.lua` | a wrapper is throwing on a live path a fixture cannot reach |
+| **P5** | **the headline.** PT-20 method (play, park drones idle, save, disable the pack only, load): **ZERO** `Opt_DroneOverhaul.lua` orphan errors. Tier-1 leg 5 read **80** on this exact shape (`Mars.exe-20260801-19.14.11`), 98 when first measured | Site 2 is not repaired; the moonlight frame is still being captured |
+| **P6** | same load: **zero** lines naming `Fix_DroneUnreachableForever.lua`, `Fix_TrainWaitTime.lua` or `Fix_ArrivalDeaths.lua` | a Tier-2 wrapper is on a blocking stack we did not account for |
+| **P7** | `Fix_ArrivalDeaths`' half (b) is layer 2 — an **inert** captured `Colonist:Idle` frame may exist in the save. It must produce **no error and no behaviour**: nothing runs after `return orig_idle(...)`. `Fix_ShelterReflex` has had this exact shape through every prior leg and has never appeared in a log | an "inert" frame that is not inert — that would be a §3a finding, not a bug in this module alone |
+
+### Steps
+
+1. **PT-00 sweep**, then load a save with the pack enabled. `*r SMRTest.RunAll()`
+   → read P1/P2/P3 off the output.
+2. Play ~15 minutes of ordinary colony: let drones work and go idle, let a rocket
+   land if one is due, run a train if the save has one. Watch for P4.
+3. **Park drones idle before saving** — P5 depends on drones being mid-`Idle` at
+   write time; that is what made 80 frames last time. Save.
+4. Quit to menu, **disable the Community Fix Pack only** (Test Kit stays on),
+   restart, load that save. **Count `Opt_DroneOverhaul` lines in the log** (P5),
+   then grep the other three module names (P6/P7).
+5. Play 10 minutes with the pack gone (build, salvage, a sol, save+reload once) —
+   the save must behave normally, and the reload must stay at zero.
+6. Re-enable the pack.
+
+### Optional read that re-earns a status tag
+
+**F21 was downgraded `tested` → `fixed`** when its body was retired, because
+PT-43's pass measured a mechanism that no longer ships. If this sitting has a
+working train line, re-take PT-43's two reads — a long platform wait producing
+**no** "travel time" Comfort entry, and the train's *Travel time (rolling
+average)* excluding the wait — and F21 goes back to `tested`. Skip it and F21
+simply stays `fixed`; do not re-flip it on the probe alone.
+
+`Result:` **NOT RUN** — owed. Owner at the keyboard; chain prompt 5b carries it.
+
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
 
 The pack must never hold a save hostage.
