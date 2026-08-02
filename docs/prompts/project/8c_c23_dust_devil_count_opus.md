@@ -147,3 +147,55 @@ reaching this item. Two carry-overs worth having:
 
 ⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
 prompt 8** — no broad search touched it.
+
+### Handed over by chain prompt 8b (2026-08-02) — your gate is now concrete
+
+**Your gate has fired on the BUILD side and NOT on the verification side. Read
+this before you start.**
+
+`F93` is built and pushed: `Code/Fix_DustDevilsDescrMap.lua` (`b22dda5`), a
+§1.4b global replacement of `GetDustDevilsDescr` — seven lines copied from
+`DustDevils.lua:58-66` with `CurrentMap` → `MainMap` on both reads. **That is the
+same subsystem you are about to patch, and it is UNRUN.** The batch leg is
+`PLAYTEST_CHECKLIST.md` **PT-60**, predictions P1-P9 written before any run.
+
+**What that means for you, concretely:**
+
+- ⚠️ **Do not start until PT-60 has run.** The README gates you on 8b precisely
+  so that two changes to the dust-devil subsystem do not land against one unrun
+  leg — a result then cannot be attributed to either. If PT-60 has run, quote its
+  P2/P4/P6 readings for `DustDevilsDescrMap` in your own leg's baseline; if it has
+  not, that is the thing to fix before building anything.
+- **The function you will be reading is now OURS, not vanilla's.** Your item sits
+  in the `DustDevils` thread body (`DustDevils.lua:193-240`), which calls
+  `GetDustDevilsDescr` at `:193`, `:234` and `:237`. Those calls now reach our
+  replacement. Nothing about the descriptor's *contents* changed — only which
+  map's `mapdata` it is read from — so your `spawn_chance`/`count_min`/`count_max`
+  reasoning is unaffected. But when you re-verify the thread body against Src (and
+  you must — see prompt 8's carry-over above), **remember that the shipped
+  `GetDustDevilsDescr` is no longer what runs.**
+- ⭐ **A rider already exists for the live half of F93** and it is worth taking in
+  the same sitting as yours, because it needs the same map switch you will
+  already be doing: `PLAYTEST_CHECKLIST.md`, needs-eyes section, "F93 dust-devil
+  map rider". Two readings, one map switch.
+- **F93 needed no new §3a site and yours will.** F93's replacement is synchronous
+  and stores nothing, so it is route-(a)/(b)/(c) clean. Your item is inside the
+  thread body itself — a 14th §3a exposed site and a sleeping game-time thread —
+  which is exactly the asymmetry that got you split out. Do not let F93's
+  cheapness set your expectations.
+
+**One more carry-over, and it is the strongest one from 8b:** of prompt 7's six
+approved specs, **five had a defect in their supporting detail** — a wrong line
+citation, a method name that does not exist, a self-check placed where it cannot
+run, two writes described as equivalent when only one was load-bearing, and an
+overclaimed equivalence. Every *shape* survived; every *detail* had to be
+re-derived. Your entry was written by the same session in the same sitting.
+**Re-verify its code sketch, its line numbers and its self-check against Src
+before you build, and treat the "should not need to re-derive" framing as the
+thing that has now been falsified five times.** Full list on prompt 12, job-7
+seed block.
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
+prompt 8b.** One staging slip is recorded rather than hidden: a `git add -A`
+staged it in one commit, which was amended out before any push; the file is
+untracked again and **nothing in it was opened, read or summarised**.

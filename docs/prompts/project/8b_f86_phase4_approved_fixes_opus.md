@@ -23,6 +23,39 @@
 **One-off; delete this file in your final commit. Read `README.md` in this
 folder first.**
 
+> ## ⏸️ STATE 2026-08-02 — JOBS 1 AND 2 ARE DONE AND PUSHED. ONLY THE LEG REMAINS.
+>
+> **This file is NOT yet consumed, and it must not be deleted until PT-60 has
+> run**, because the leg is the only thing standing between "built" and
+> "verified" for fifteen separate changes. A session picking this up should read
+> the block below as inherited state, not re-derive it.
+>
+> **Landed and pushed** (`ec83ec3..e5ce290` on the pack; TestKit `2ef64a4`):
+>
+> | job | state |
+> |---|---|
+> | 1 — the seven approved fixes | ✅ **ALL SEVEN BUILT, one commit each.** F91 `a5b9db0` · F92 `eb4c6d6` · F93 `b22dda5` · F94 `3966fb3` · F95 `125783e` · F96 `08b5d84` · F90 `b5628a7`. Five new modules; F91 and F94 needed none. Every BUGS entry carries a `✅ BUILT` section and both status places are flipped |
+> | 2 — the seven probes | ✅ **BUILT** — TestKit wave 8, `57_Probes_Wave8.lua` (`2ef64a4`). Probe count **78 → 85** |
+> | 3 — the ONE batch leg | ⏳ **SPECCED, NOT RUN.** `PLAYTEST_CHECKLIST.md` **PT-60**, predictions **P1-P9 written before any run**, covering the seven fixes AND prompt 8's eight conversions. **ATTENDED — it needs the owner at the keyboard.** Stale-probe gate: **clean** in both repos at build time; re-run it at the keyboard anyway |
+> | 4 — STATUS | ⏳ **HALF DONE.** Counts re-derived and landed (**79 registered / 73 default-active**, 85 probes; row counts unchanged at 108 = 96 F + 12 D, 38 C). The **batch results and the remaining tail are owed and cannot be written until the leg runs** |
+>
+> **What is left, in order:** run PT-60 with the owner → record the readings
+> against P1-P9 → flip the seven entries from `built` to `fixed` **only** where
+> the leg supports it (see "What may not be claimed" below) → finish STATUS →
+> write the outbox to prompt 9 → delete this file.
+>
+> **Already routed, so do not redo it:** the C23-touching handover is appended to
+> `8c` (F93 patches the same subsystem and 8c's gate is now concrete), and six
+> job-7 drift instances are appended to prompt 12.
+>
+> ⚠️ **The one thing a fresh session would get wrong:** five of prompt 7's six
+> approved specs had a defect in their *supporting detail* (a wrong line
+> citation, a method name that does not exist, a self-check placed where it
+> cannot run, two writes described as equivalent when only one was load-bearing,
+> an overclaimed equivalence). All five are corrected on their entries and listed
+> on prompt 12. The shapes were all sound — **do not reopen the designs**; the
+> corrections are already made.
+
 **Staleness check: `git log --oneline -12` + `git pull`.** This prompt was
 written at **`8f58f30`** (chain prompt 8's last commit). Gate: prompt 8's
 conversions are landed and committed — verify that before building, because this

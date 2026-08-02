@@ -586,3 +586,51 @@ instance of it — BUGS statuses live in TWO places, index row and heading tag,
 "never flip one without the other" — and that rule exists precisely because the
 pairing is invisible unless someone writes it down. Nothing does that for module
 headers, entry summaries, or report bottom lines.
+
+### Added by chain prompt 8b (2026-08-02) — six job-7 instances, and they cluster into ONE new shape
+
+**All six were caught the same way as prompt 8's two: by a session being made to
+BUILD the thing rather than cite it.** Every one is corrected on its own entry;
+they are listed here because rule 4b says a silently-corrected instance is
+destroyed evidence.
+
+⭐ **The shape they share, and it is a third axis for the job-7 diagnosis: five
+of the six are defects in an APPROVED SPEC — not in a fact, and not in a stale
+copy.** Prompt 7's six §4 packages were written to be built without re-derivation
+("this prompt should not need to re-derive any of it"), and each carried a module,
+a technique, a code sketch, a self-check and a probe outline. The specs were
+right about **what to build** in all six cases and the shapes all survived
+contact. What failed was the *supporting detail* — a line number, a method name,
+a placement, a claim about equivalence — which is exactly the material a builder
+must trust if the "do not re-derive" instruction is to mean anything. **A spec
+that is authoritative about design and unreliable about detail is a shape the
+project has no convention for, and it is more dangerous than an ordinary stale
+fact, because the instruction attached to it actively discourages checking.**
+
+| # | instance | where it was corrected |
+|---|---|---|
+| 1 | **F91's spec cited `Track.lua:56-60` for all three arrays' initialisation.** `TrackBase:Init` gives two; `assigned_vehicles` comes from the combined `StationsLink:Init` (`StationsLink.lua:13`) one class up. The *claim* survives — a constructed track still has all three as tables, so the three-`false` shell signature still cannot match a live track — but the citation was wrong | BUGS F91, BUILT section |
+| 2 | **F95's spec named a method that does not exist.** It said to reuse `Effect_ModifyLabel`'s own `__exec`; the method is `OnApplyEffect` (`MarsGameEffects.lua:161-172`). The instruction's substance was followed exactly | BUGS F95, BUILT section |
+| 3 | **F93's spec put half a self-check where it cannot run.** "Self-check at apply: the global exists **and `Presets.MapSettings.DustDevils` is populated**" — presets do not exist when mod code loads on a cold boot, so an apply-time absence test *is* the F75 false-inactive bug, and building it as written would have deactivated the fix on every cold start. Moved to `DataPatch`, which owns the F75 gate | BUGS F93, BUILT section |
+| 4 | **F96's spec treated two writes as equivalent.** "Patch both `BuildingTemplates.Sinkhole` and the `Sinkhole` class table" reads as belt-and-braces; in fact only the class write is load-bearing. `BuildingTemplates.Sinkhole` is a thin proxy — `setmetatable({template_name = id}, g_Classes[id])`, `Building.lua:2566` — **rebuilt on every `ClassesBuilt`/`DataChanged`**, so a write there is both transient and redundant. Had a builder patched only the template, the fix would have silently done nothing | BUGS F96, BUILT section |
+| 5 | **F90's spec overclaimed its own error handling.** "`pcall` + restore + re-raise; **vanilla's error behaviour is preserved**". `error()` in mod code reports and continues — it does not unwind (ENGINE_FACTS, FIX_POLICY §6) — so the re-raise keeps the failure *visible* but does not reproduce the unwind. Narrowed to "vanilla's error is still reported" | BUGS F90, BUILT section |
+| 6 | **A count line that lacked the exclusion its neighbour documented.** STATUS's probe count says in writing that `SMRTest.Register(` also matches the *definition* in `00_TestCore.lua` and must be excluded. The registered-module line, derived by the identical technique against `SMRFixPack.Register(`, said no such thing — and `00_Core.lua` has the identical definition line. A first raw recount this session came back one high because of it. Both lines now carry the exclusion | STATUS build-state block |
+
+**And one instance of prompt 8's shape, at four-copy scale.** F94 removed a
+property `Fix_AsteroidLanderAvailable` advertised, and that property was asserted
+in **four** places: the module header, F72's BUGS entry body, F72's heading tag,
+and F72's index row. All four were corrected in the same commit — but the only
+reason all four were found is that the F94 entry explicitly warned the builder to
+fix the header. **Nothing in the format would have surfaced the other three**,
+which is the "no convention for where a claim's other copies live" point above,
+now with a measured fan-out: one behaviour change, four documents.
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point in prompt
+8b.** One staging slip is recorded rather than hidden: a `git add -A` in the F93
+commit staged `docs/reports/BLIND_AUDIT.md`. It was amended out before any push
+and the file is untracked again, exactly as prompt 8 left it. **Nothing in it was
+opened, read, grepped or summarised** — the slip was a staging pattern, not a
+read, and it is noted in that commit message too. (Job-7 relevance, if any: the
+seal is enforced by prose in two prompts and nothing mechanical — no
+`.gitignore` entry, no hook — so the only thing standing between the control and
+an accidental commit is that every session remembers to name its paths.)
