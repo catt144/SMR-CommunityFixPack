@@ -1718,6 +1718,20 @@ Scope: only the "have" half. Rare traits GAINED later (schools, sanity breakdown
 `GetRandomTrait` with no `rare_weight_mod` at all, so neither tech has ever affected them
 — separate defect, not touched.
 
+⭐ **CONVERTED TO A §1.4b CHAINED WRAPPER 2026-08-02** (chain prompt 8;
+`SAVE_SAFETY_REDESIGN.md` §5.4 group A). The two techs are meant to ADD, so the
+shipped body keeps owning the GeneSelection term and the module contributes only
+its own: `local base = orig(unit)` … `return (base or 0) + GeneForging.param1`
+when researched, `base` otherwise. The six-line copy is gone, and the global is
+now installed through `SMRFixPack.SetGlobal` so the §1.4b read-back check applies
+(the copy assigned it directly). All four states reproduce PT-29's ladder
+exactly: neither → `nil`; GeneSelection only → its `param1`, passed through
+untouched; GeneForging only → `50`; both → `150`. One documented delta: the copy
+carried a `city.colony` nil-guard vanilla does not have, and delegating gives
+vanilla's unguarded index back — defensive hardening with no defect claim behind
+it, no producer in Src for a live city without a colony, and vanilla raises there
+too.
+
 ### F42 — Buildings placeable on active dust devils (P3, high)  `[wontfix — user decision 2026-07-25, F56/F62/F63 grounds: designed scope, not a defect]`
 `AreThereBlockingUnitsUnderneath` (`Construction.lua:1895-1914`) queries only
 Drone/BaseRover; `BaseDustDevil` inherits `Object` (`DustDevils.lua:245-247`) — never
