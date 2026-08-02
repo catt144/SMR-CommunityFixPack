@@ -109,7 +109,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **tested 2026-08-01** — fixed 2026-07-29; rains half REWRITTEN 2026-08-01 (F86 Tier-1, layer-2 wrapper + version-stamped migration + C34 rider) and **verified live by Tier-1 legs 3+4**: a NATURAL collision re-rolled and rain returned, 'normal' migrated + stamped 1.0.1, C34 stale-ACTIVE healed through vanilla FinishRainProcedure, and the stranded-flag sweep cleared both with and without a reload while never touching a live warning. PT-54 triggers A+B+E absorbed (entry) |
-| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | filed 2026-07-29 (entry) |
+| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | **✅ MECHANISM FOUND 2026-08-02 (prompt 6c trace) — and it is neither option the entry weighed.** The notification has **no removal path at all** (`SupplyGrid.lua:1626-1629` is the only reference to `PowerGridSplit`/`LifeSupportGridSplit` in the tree) and registers a **position**, not the grid — so a rejoin is not an input. It clears only by the preset's `Expiration = 120000` with `GameTime = false`, which `Notifications.lua:188-217` runs on a **REAL-TIME** thread → **2 real minutes regardless of game speed**. Sibling tell: `PowerLeak`/`LifeSupportLeak` under the same parents carry no `Expiration`. ⚠️ Symmetric half not in the original report: an **unrepaired** split also stops being reported after 2 real minutes. Nothing built — key-matching design question **routed to prompt 7**; checklist rider rewritten around the real-time prediction (entry) |
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | todo — filed 2026-07-30; rover half DISPROVEN BY PLAY during PT-25; nothing built; text-patch design is a USER DECISION (localization tradeoff), bundled into the D10 build (chain prompt 9) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
@@ -4474,15 +4474,66 @@ notification type they have watched clears promptly on resolution.
 savegame-fixup registrations for a variable the live code no longer uses, so
 the actual add/remove path for the split-grid notification lives elsewhere
 (shipped `Lua.fpk`, or a periodic sweep that has not been located yet).
-**Next step:** find what re-evaluates split grids and on what cadence. A
-once-per-sol periodic re-check would explain the observation exactly. Compare
-against a notification that clears promptly to isolate whether the difference
-is cadence or a missing on-rejoin removal call. Cheap live tap once the updater
-is found. **The timed observation is now a standing rider in
-`PLAYTEST_CHECKLIST.md` §6** (bug-list-audit table, added 2026-08-01): time the
-rejoin → clear gap on any grid split that happens in play, and take the
-prompt-clearing comparison in the same sitting or the reading discriminates
-nothing. The source trace itself is owed by chain prompt 6b. Related in kind (not in mechanism) to F81/F78, where a notification
+**✅ TRACE FINISHED 2026-08-02 (prompt 6c) — MECHANISM FOUND, and the answer is
+neither of the two options this entry was weighing.** There is no periodic
+re-check and no missing on-rejoin removal call to restore. **The notification
+has no removal path at all, and it is not state-driven in any sense: it clears
+only by a fixed REAL-TIME expiry.**
+
+- **It is added in exactly one place and removed nowhere.** The only reference
+  to `PowerGridSplit` / `LifeSupportGridSplit` in the whole of `ModTools\Src` is
+  `Lua\SupplyGrid.lua:1626-1629`, inside the grid-split pass:
+  `AddObjectToNotification(self:GetPos(), GameTime(), notification_id, map)`.
+  There is **no matching `RemoveObjectFromNotification`** anywhere for either
+  id. (The two `FixupObjectNotification` lines this entry already cites,
+  `:1348-1349`, are the *parent* ids and are legacy savegame plumbing — they are
+  not the add/remove path and there is no hidden updater.)
+- ⭐ **The object it registers is a POSITION, not the grid** — `self:GetPos()`,
+  with `GameTime()` passed only as the sort key the preset's `GetObjectItem`
+  reads. So there is nothing for anything to re-evaluate: the notification does
+  not hold a reference to the grid, and **rejoining the grid is not an input to
+  it**. This is the entry's own "clears from code paths, not from state" theme
+  in its purest form.
+- **What clears it is the preset's `Expiration`, and it runs on REAL time.**
+  Both split presets carry `Expiration = 120000` with `GameTime = false`
+  (`Data\NotificationPreset.lua` — `LifeSupportGridSplit` and `PowerGridSplit`),
+  and `UpdateNotificationThread` branches on exactly that flag:
+  `GameTime` true → `CreateGameTimeThread`, false → **`CreateRealTimeThread`**
+  (`CommonLua\Libs\Notifications\Notifications.lua:188-217`, expiry fires at
+  `:194-199`). So the lifetime is **120 000 ms of REAL time = 2 real minutes**,
+  independent of game speed and independent of whether the grid was ever
+  rejoined.
+- **Sibling tell, the same shape that carried C04/F90.** The neighbouring
+  children of the same two parents — `PowerLeak` and `LifeSupportLeak` — carry
+  **no `Expiration` at all**; they are cleared by state when the leak is
+  repaired. The split ones were deliberately given a timeout instead. One
+  notification family, two clearing disciplines, in the same preset file.
+- **The arithmetic reproduces the observation, and it also explains why the
+  observer's estimate reads low.** One sol = `const.Scale.sols` = 720 000 ms of
+  game time (`Lua\__const.lua:1454-1458`; `const.Scale.h` = 30 000, `:1438-1442`
+  → 24 h/sol), and ultra speed is **20×** (`Lua\_GameConst.lua:26-28`). So at
+  ultra a sol takes **36 real seconds**, and a 120-real-second expiry spans
+  **≈3.3 sols of game time** — comfortably "MUCH longer" and felt-wrong even at
+  ultra, exactly as reported. At normal speed (1×) a sol is 12 real minutes, so
+  the same 2 real minutes is only **≈1/6 sol**.
+- ⭐ **That inversion is the discriminating prediction, and it is free to
+  take:** the delay is **constant in real time and shrinks in game time as you
+  speed up**. No state-cleared notification can behave that way. The checklist
+  rider has been rewritten around it (see `PLAYTEST_CHECKLIST.md` §6) — stopwatch
+  the *real* seconds, not the sols, and note the game speed.
+
+**Consequence and disposition.** The player is shown a live warning for a
+condition that has ended, for up to 2 real minutes, with no way to dismiss it by
+fixing anything — and, symmetrically, a split that is *not* repaired stops being
+reported after 2 real minutes. The second half is the more serious one and was
+not in the original report. **Nothing built** — the repair shape is not obvious,
+because the notification is keyed by the break *position* and a rejoin does not
+happen at a known position, so a `RemoveObjectFromNotification` heal needs a
+key-matching design first. **Routed to chain prompt 7** as a §4 package
+question. Stays **P3** until the rider returns; the "never clears an unrepaired
+split" half may argue for P2.
+
+Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
 
