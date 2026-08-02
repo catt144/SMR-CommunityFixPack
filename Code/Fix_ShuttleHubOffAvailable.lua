@@ -27,11 +27,27 @@
 -- Building.lua:591-596, is the other player toggle in that family but cannot
 -- apply here: a Shuttle Hub is an outside building and has no parent dome.)
 --
--- Patch approach: full replacement of the global IsLRTransportAvailable — a copy
--- of Lua\Buildings\ShuttleHub.lua:350-359 (shipped Src, game 1.0.7.396349) with one added
--- term, marked -- FIX. Replacement rather than a wrapper because the repair makes
--- the predicate STRICTER: the shipped function returns a single boolean for the
--- whole colony, so a wrapper that sees `true` cannot tell which hub produced it.
+-- Patch approach: FIX_POLICY §1.4b chained POST-wrapper on the global, as a
+-- FILTER. The repair only ever makes the predicate STRICTER, so a `false` from
+-- the shipped body is already the right answer and is returned untouched; only
+-- a `true` is re-validated against the stricter per-hub test.
+-- Layer: §3a layer 2 — a synchronous predicate, nothing left to run after.
+--
+-- CONVERTED 2026-08-02 from a §1.5 full replacement (SAVE_SAFETY_REDESIGN §5.4
+-- group A). Before/after: the module no longer OVERRIDES vanilla's verdict — it
+-- can only narrow it. Behaviour is unchanged, because the strict per-hub test is
+-- a subset of the shipped one (it is the shipped one AND `hub.working or
+-- hub.ui_working`), so "some hub passes strict" implies "some hub passes loose":
+-- `orig(city) and <strict scan>` selects exactly what the old copy's `<strict
+-- scan>` selected. What the delegation buys is the §1.4b degradation property —
+-- if a future patch tightens this predicate further, or a DLC adds a term, we
+-- inherit it instead of silently reinstating the 1.0.7 shape.
+-- ⚠️ Honest limit: the stricter scan is still a loop over the same label, so the
+-- shipped loop is duplicated rather than eliminated. A wrapper cannot filter the
+-- `true` on its own — the shipped function returns ONE boolean for the whole
+-- colony and never says which hub produced it — so the predicate has to be owned.
+-- The rot exposure is therefore reduced (we can never be LOOSER than a patched
+-- vanilla), not removed.
 
 SMRFixPack.Register("ShuttleHubOffAvailable", {
 	title = "Shuttle Hubs switched off no longer count as available colonist transport",
@@ -47,8 +63,11 @@ SMRFixPack.Register("ShuttleHubOffAvailable", {
 			  reason = "BaseBuilding work-reason methods not found (game update changed them?)" },
 		})
 		if err then return err end
+		local orig = IsLRTransportAvailable
 
-		function IsLRTransportAvailable(city)
+		return SMRFixPack.SetGlobal("IsLRTransportAvailable", function(city)
+			-- vanilla is never too strict, only too lax: a `false` needs no review
+			if not orig(city) then return false end
 			for _, hub in ipairs((city or MainCity).labels.ShuttleHub or empty_table) do
 				if #hub.shuttle_infos > 0
 				-- FIX (F54): `hub.ui_working` added. A hub the player switched off
@@ -60,6 +79,6 @@ SMRFixPack.Register("ShuttleHubOffAvailable", {
 				end
 			end
 			return false
-		end
+		end, "could not install the IsLRTransportAvailable wrapper")
 	end,
 })

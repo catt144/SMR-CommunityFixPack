@@ -2385,6 +2385,21 @@ are set and cleared by the game itself, so they are kept; only the player's swit
 excluded, which `hub.ui_working` expresses directly and without matching reason strings.
 Probe: `ShuttleHubOffAvailable` in the Test Kit's `30_Probes_Wave3.lua`.
 
+⭐ **CONVERTED TO A §1.4b CHAINED WRAPPER 2026-08-02** (chain prompt 8;
+`SAVE_SAFETY_REDESIGN.md` §5.4 group A). The repair only ever makes the predicate
+STRICTER, so a `false` from the shipped body is already the right answer and is
+returned untouched; only a `true` is re-validated against the stricter per-hub
+test. Behaviour is unchanged — the strict test is the shipped one AND
+`hub.working or hub.ui_working`, so "some hub passes strict" implies "some hub
+passes loose", and `orig(city) and <strict scan>` selects exactly what the copy's
+`<strict scan>` selected. ⚠️ **Honest limit, recorded rather than glossed:** the
+quoted objection above is still half right — the shipped function returns ONE
+boolean for the whole colony and never says which hub produced it, so the
+predicate has to be owned and the loop is DUPLICATED rather than eliminated. What
+the delegation buys is the §1.4b degradation property: we can never be LOOSER
+than a patched vanilla, whereas the copy would have silently reinstated the 1.0.7
+shape over a future tightening. Rot exposure reduced, not removed.
+
 ### F55 — Open domes: drone access lost + unreachable-forever cache (P1, med — matches report exactly)  `[fixed*: Code/Fix_DroneUnreachableForever.lua — the unreachable-forever cache (3) is fixed; the open-air entrance half (1) is NOT actionable, see below]`
 (1) Open-air skin swaps dome entity with `skin[2] = empty_table`
 (`OpenAirBuilding.lua:216-237`) → `Dome_Entrance` attaches destroyed
