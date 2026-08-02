@@ -113,6 +113,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_MeteorStormWedge.lua",
 		"Code/Fix_RainsDeadlock.lua",
 		"Code/Fix_FirstAsteroidPrefabs.lua",
+		"Code/Fix_SaintBlessing.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",
