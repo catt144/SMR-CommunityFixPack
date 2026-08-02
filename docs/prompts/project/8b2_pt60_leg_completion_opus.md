@@ -129,8 +129,8 @@ Fixtures all exist and are saved. **Do not rebuild any of them.**
 | # | save | what to run | predictions |
 |---|---|---|---|
 | 1 | `f95 healed` | §2 above | all `=1`, duplicates removed, second load silent |
-| 2 | *fresh Astrogeologist game* | extractor command | all four `=1` **and NO heal line** — proves `EffectsApply` applies our `PlaceObj` entries rather than the heal covering for it |
-| 3 | same throwaway | **F96 sinkhole** — see §5 | `true` → `true` → `false` |
+| ~~2~~ | ~~fresh Astrogeologist game~~ | ✅ **DONE 2026-08-02** — fresh game read **all four `=1`** with no `LoadGame` involved. `EffectsApply` applies our `PlaceObj` entries. **F95 is now verified on every path; nothing further owed** | — |
+| ~~3~~ | ~~same throwaway~~ | ✅ **F96 DONE 2026-08-02** — `placed: true indestructible: true` → `survived meteor-path destroy: **true**` → `survived CheatDestroy: **false**`. Control held. **F96 verified; nothing further owed** | — |
 | 4 | `F59 TEST1` | **F91** | `deleted 1 invisible track shell(s)`, shell count → **0**; then Ctrl+click another track **with the pack on** → count stays **0** (half A in play); save as `F59 TEST2`, reload → **no** heal line |
 | 5 | `f90` | **F90 pack-ON leg** | **B1** underground stays **0** · **B2** zero `[LUA ERROR]`, especially none from the empty filtered list · **B3** surface still breaks (control — frag 2 is pure surface, takes the fast path) · **B4** after the storm frag 1 still reports `connectors 1668` (the §3a restore, on a real persisted fragment) · **B5** no `SMRFixPack` orphan error |
 | 6 | `TEST 2H` | **the main PT-60 run** | `*r SMRTest.RunAll()` for P4/P5 · Saint heal line for **10** blessings · then unpaused play for P6/P7 |

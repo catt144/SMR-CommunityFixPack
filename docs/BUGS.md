@@ -7559,6 +7559,16 @@ because `EffectsApply` runs once at game start and nothing re-applies them on lo
 identity, and **remove duplicates already present**, so saves inflated by the
 broken version are repaired.
 
+## ✅ F95 IS VERIFIED ON EVERY PATH 2026-08-02 (chain prompt 8b)
+
+| path | evidence |
+|---|---|
+| **the defect** | Astrogeologist colony, pack OFF: `MetalsExtractor=1 WaterExtractor=1 **AutomaticMetalsExtractor=0 MicroGAutoWaterExtractor=0**`. The two vanilla labels are the positive control — they prove the query works and `EffectsApply` ran, so the zeros are a real shortfall |
+| **the preset patch** | same colony, pack ON: **all four `=1`**; log `added 2 missing extractor entr(y/ies) … (10 already present)` — the "10" independently reproduces the count read from Src |
+| **`EffectsApply` on a NEW game** | fresh Astrogeologist game: **all four `=1` with no `LoadGame` involved at all**, so the two `PlaceObj`-built entries are applied by vanilla's own start-of-game path, not covered for by the heal |
+| **the load-time heal** | `f95 baseline` (a save begun without the bonus): log `applied 2 Astrogeologist extractor bonus(es) this save started without`, all four → `=1` |
+| **heal idempotence** | below — it failed first, and the fix is verified |
+
 ✅ **VERIFIED AT THE KEYBOARD 2026-08-02** on fixture `f95 healed`, which carried
 the duplicates: after a full restart and load, **all four labels read `=1`** (2 → 1,
 duplicates cleaned); after a further **save and reload, still all `=1`** — no
@@ -7718,6 +7728,37 @@ load-bearing.
 `BuildingTemplates.Sinkhole` agrees, plus the live half asserting no `Sinkhole`
 instance carries an own-field override (which is what guards the
 reaches-existing-saves claim above rather than merely restating it).
+
+## ✅ VERIFIED IN PLAY 2026-08-02 (chain prompt 8b) — with a positive control
+
+Both campaign saves are `mystery: none`, so no Sinkhole exists anywhere and the
+probe's instance half reads zero. The state was therefore **manufactured**, using
+only shipped globals and **no debug build** (the retail console has everything):
+
+| step | command | result |
+|---|---|---|
+| 1 | `PlaceBuildingIn("Sinkhole", MainMap)` | `placed: true indestructible: true` |
+| 2 | `DestroyBuildingImmediate(s, {dont_notify=true, …})` | **`survived: true`** |
+| 3 | `s:CheatDestroy()` | **`survived: false`** |
+
+**Step 1** is the substantive one: a real instance reads `indestructible = true`
+through the class default, which is the mechanism behind the "reaches objects
+already in a save with no sweep" claim — now observed, not inferred.
+**Step 2** is not a simulation: `DestroyBuildingImmediate` is the exact call
+`BaseMeteorLarge:Explode` makes at `Meteors.lua:821`.
+**Step 3 is the control that makes step 2 mean anything** — `CheatDestroy` opens
+with `self.indestructible = false` (`Building.lua:1813-1820`), so it must succeed;
+without it, "survived" could equally mean the call did nothing.
+
+⚠️ **Trap recorded for testers: the in-game destroy-building cheat will ALWAYS kill
+a sinkhole**, fix or no fix, because `CheatDestroy` clears the flag first. That is
+by design and must not be read as F96 failing.
+⚠️ Reachability is unchanged by this: the state was console-produced, so this is
+**fix verification, not reachability evidence** (FIX_POLICY §4). R2 still rests on
+the source enumeration.
+⚠️ A full meteor end-to-end via `CheatMeteors` was considered and rejected: only
+`BaseMeteorLarge` destroys buildings and the cheat takes a *type*, not a size, so
+it is an RNG wait with no guarantee of hitting the hex.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
