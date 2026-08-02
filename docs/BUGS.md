@@ -6974,6 +6974,24 @@ the run:
 "TrackBase", …)`, PASS iff zero objects match the shell signature). It covers half
 A after a Ctrl+click salvage with no scripted repro, and half B after any load.
 
+## ✅ VERIFIED IN PLAY 2026-08-02 (chain prompt 8b) — on a manufactured shell
+
+Neither campaign save carried a shell (checked on two colonies, including the one
+where all the track testing was done — `TrackBase total: 5, demolishing: 0`, so the
+zero was controlled, not a query matching nothing). The owner therefore **made
+one**: with the pack **OFF**, a Ctrl+click whole-track salvage on a sandbox colony,
+verified present (`shells: 1`) and saved as fixture `F59 TEST1`.
+
+| half | reading |
+|---|---|
+| **B — heal** | loading the fixture with the pack on logged `deleted 1 invisible track shell(s) left behind by a whole-track salvage (F91)` — **naming exactly the one manufactured** — and `shells: 0` after |
+| **B — idempotence** | the heal line appears **once** across **five** save/load events in that session. Structurally guaranteed rather than guard-dependent: the shells it deletes are gone from the save it then writes |
+| **A — stop producing** | a Ctrl+click whole-track salvage **with the pack on** left `shells: 0` |
+
+⚠️ The shell was console-free but cheat-adjacent (the colony was cheat-built), and
+the *route* was the advertised Ctrl+click. So half A's reading is a genuine player
+action; only the colony around it was manufactured.
+
 ### F92 — The Saint trait's dome blessing has never applied to anyone: the modifier is filed under the raw trait name, colonists are filed under the prefixed label (P2, SOURCE-VERIFIED)  `[built 2026-08-02 by chain prompt 8b as `Code/Fix_SaintBlessing.lua` — §1.1 preset patch through SMRFixPack.DataPatch + a one-shot idempotent LoadGame re-base; probe SaintBlessing written. ⚠️ UNRUN — the batch leg is 8b's. ⚠️ This one CHANGES REAL GAMEPLAY: Saints finally buff Religious colonists]`
 
 **Defect, re-verified line by line this session.** Two adjacent lines in the same
@@ -7759,6 +7777,17 @@ the source enumeration.
 ⚠️ A full meteor end-to-end via `CheatMeteors` was considered and rejected: only
 `BaseMeteorLarge` destroys buildings and the cheat takes a *type*, not a size, so
 it is an RNG wait with no guarantee of hitting the hex.
+
+⛔ **SIDE EFFECT OF THIS PROCEDURE — read before repeating it.** A Sinkhole placed
+outside a running St. Elmo's Fire mystery **spams engine errors every tick until it
+is destroyed**: 18 × `HGE::l_SetPos: IsPointSane(pt)` from `ActionFX.lua`'s
+`FXOrient` (default position is not a sane point) and
+`attempt to index a boolean value (field 'mystery')` from
+`Lua\Mysteries\Fireflies.lua`'s `BuildingUpdate` (`mystery` is `false` with no
+mystery running). **None of these are pack errors and none is a defect worth
+filing** — the state needs console injection to produce, which is R4 under
+FIX_POLICY §4a. **Run step 3 promptly** and expect that noise in the log between
+steps 1 and 3; do not attribute it to this batch.
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
