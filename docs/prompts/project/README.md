@@ -91,6 +91,14 @@ chain's author judged appropriate. Scope and limits, stated precisely:
   forbids speccing before Tier 1/2 land AND verify, and it is release-phase
   work — it comes AFTER the playtest campaign, before release. Prompt 12
   carries it forward as the standing next item.
+  ⭐ **Clarified 2026-08-01 (owner): D13 is a HARD LAUNCH DEPENDENCY — "we
+  won't launch till it does."** Its absence from this chain is a *sequencing*
+  fact, not a deprioritisation: the cleaner's target list is the OUTPUT of the
+  builds, so it cannot be designed until they are done. **The corollary binds
+  every prompt here: build every reachable repair NOW, and never defer a site
+  to the cleaner as a way to descope** — a cleaner hand-off is a valid
+  disposition only *after* the in-pack attempt has been made and the route
+  proven absent (FIX_POLICY §3a).
 - **The playtest campaign itself** (PT-53, needs-eyes riders, the PT backlog):
   that is what the owner is freed FOR; prompt 1 leaves the checklist current.
 - **Pack split / D11 / C1 wording fallback / FUTURE_IDEAS**: undecided or

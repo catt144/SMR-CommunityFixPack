@@ -66,8 +66,24 @@ its `Meteors` thread alive on *vanilla's* body with the pack removed). **But the
 claim below is still not ours to make**, because leg 5's uninstall log
 (`Mars.exe-20260801-19.14.11`) still carries 80 orphan `[LUA ERROR]` lines from
 F86 **Site 2** (`Opt_DroneOverhaul`). **The real gate is Tier 2** (chain prompt
-5), which owns that site. Publish only when an uninstall leg reads clean across
-the whole pack — then delete this note and keep the sentence exactly as written.
+5), which owns that site.
+
+**⏳ THE WORDING CALL IS DEFERRED TO LAUNCH (owner decision, 2026-08-01) — do
+not settle it earlier, and do not delete this note on either reading alone.**
+Under the three-tier ethos (FIX_POLICY §3a) the pack ships *with* its cleaner
+(D13, a hard launch dependency), so two readings are defensible, and the
+release-phase session that ships D13 picks one against the residual set that
+actually exists by then:
+
+- **Reading A — the pack alone.** Publish only when an uninstall leg reads
+  clean across the whole pack. Most conservative, and closest to what a reader
+  will assume the sentence means.
+- **Reading B — pack + cleaner together.** The uninstall standard is delivered
+  by both artifacts, so the sentence ships at launch when both are out. Honest
+  under our own ethos, **but only if the sentence is rewritten to say so** — as
+  written it reads as a claim about the pack by itself, and shipping it
+  unchanged under Reading B would overclaim.
+
 `[FAQ]` The sentence: *"As far as we can tell, no mod in either game's
 community has held itself to this uninstall standard before — not because
 others fell short, but because the engine never made it cheap enough to

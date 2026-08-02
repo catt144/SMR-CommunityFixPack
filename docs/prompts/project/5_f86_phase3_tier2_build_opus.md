@@ -105,8 +105,29 @@ names **Tier 2** and carries a do-not-delete-on-the-old-reading warning.
 **When Site 2 closes and an uninstall leg reads clean across the whole pack,
 delete the note and keep the sentence verbatim.**
 
-**F86 still BLOCKS RELEASE.** Tier 1 verifying does not by itself make the pack
-uninstall-clean; STATUS says so explicitly.
+**⭐ THE ETHOS AND THE RELEASE GATE WERE RESTATED BY THE OWNER 2026-08-01 —
+read `FIX_POLICY.md` §3a before scoping anything here.** Two changes bind this
+prompt:
+
+1. **Three-tier ethos** (supersedes any "leave no trace" framing still lying
+   around the docs): (1) leave no trace; (2) failing that, leave **inert**
+   trace, named and disclosed; (3) failing that, leave harmful trace **only**
+   paired with its remedy — the D13 cleaner, a **hard launch dependency**.
+2. **The release gate is PER-SITE, not blanket.** Every exposed site needs a
+   recorded disposition: repaired in-pack where a layer 3/2 route exists,
+   handed to the cleaner where one provably does not. A site without a
+   disposition blocks release; a site with one does not, either way.
+
+⛔ **DO NOT READ THAT AS PERMISSION TO DESCOPE.** The owner was explicit:
+*"We will build everything now, regardless of whether the cleaner exists now
+because we won't launch till it does. It doesn't make sense to build a cleaner
+until we know everything it needs to clean and how."* So: **build every
+reachable repair in this tier, now.** A cleaner hand-off is a valid disposition
+only *after* the in-pack attempt has been made and the route proven absent —
+never as a prediction, never as a reason to skip work. D13's target list is the
+**output** of what you build here, which is exactly why it cannot be specced
+first. **Record a disposition for every site you touch, including the ones you
+repair.**
 
 **Constraints and facts Tier 2 should respect:**
 1. **All legs ran on the test-2 lineage** (`HdmSxGs6kyd0uz6-`). Anything you

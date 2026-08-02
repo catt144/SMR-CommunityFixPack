@@ -156,9 +156,56 @@ thread serialisation is **documented, intentional engine design**
 accept and silence it (`PRIOR_ART_SURVEY.md`). This pack aims **above that
 norm** — an engineered exit, not accidental residue — so §3a is a **design
 discipline that minimises what the exit path must clean**, not a purity bar.
-Named, bounded, inert residuals are accepted and disclosed; the uninstall
-procedure + the late-specced rescue artifact (D13, gated on Tier 1/2) address
-what remains.
+
+**⭐ THE THREE-TIER ETHOS (owner, 2026-08-01 — this is the goal §3a serves, and
+it supersedes any "leave no trace" framing left elsewhere in the docs).** The
+original game's own code spells the mechanism out; leftovers are an accepted
+fact of modding this engine, not a failure. So we aim, **in this order**:
+
+> 1. **Leave no trace.** Prefer a shape that puts nothing of ours in the save
+>    at all — that is what the layer 3 → 2 → 1 ordering below exists to reach.
+> 2. **Leave non-harmful trace.** Where something must persist, make it
+>    **inert**: named, bounded, disclosed, and incapable of doing anything
+>    after removal. An accepted residual.
+> 3. **Leave harmful trace only when 1 and 2 are both unreachable** — and then
+>    **fix it from outside**, with the uninstall/save-rescue tooling (**D13**)
+>    that **ships at launch, alongside the pack**. A harmful residual is never
+>    simply accepted; it is accepted *paired with its remedy*.
+
+**⚖️ THE RELEASE GATE IS PER-SITE, NOT BLANKET (owner decision, 2026-08-01).**
+There is no rule that all residue must be repaired in-pack before release, and
+no rule that the cleaner excuses leaving it. **Every exposed site gets its own
+recorded disposition:** repaired in-pack where a layer 3 or layer 2 route
+exists, handed to the cleaner where one provably does not. **A complete
+per-site disposition — every site, each with its call and the reason — is
+required before release.** A site with no recorded disposition blocks release
+by default; a site *with* one does not, whichever way it went.
+
+**⛔ BUILD FIRST, DISPOSITION AFTER — the cleaner is NOT a scoping escape hatch
+(owner, 2026-08-01, verbatim):** *"We will build everything now, regardless of
+whether the cleaner exists now because we won't launch till it does. It doesn't
+make sense to build a cleaner until we know everything it needs to clean and
+how."* Two rules follow, and they bind:
+
+> - **No site may be deferred to the cleaner in advance.** Build everything the
+>   layer ordering allows, **now**, without waiting on D13 and without counting
+>   on it. A cleaner hand-off is only a valid disposition **after** the in-pack
+>   attempt has been made and the route proven absent — never as a prediction,
+>   and never as a reason to descope.
+> - **The cleaner is specced LAST, by construction.** Its target list is the
+>   *output* of the build work: what remains once every reachable repair has
+>   landed. That is why D13's spec is gated — not because it is low priority,
+>   but because designing it earlier would mean designing against a residual set
+>   we had not finished changing.
+
+**Sequence, therefore:** build every reachable repair → the residue that
+survives *is* the cleaner's target list → spec and build D13 against it →
+launch. **Launch waits for D13; D13 does not wait for launch.**
+
+Where dispositions are recorded: sites repaired in-pack are dispositioned by
+the tier that repairs them (Tier 2 = chain prompt 5); the **complete
+pre-release table is a D13 deliverable**, since D13 is what carries whatever
+the pack could not.
 
 **The mechanism, as finally established (measured + twice-adjudicated — this
 opening states the CURRENT truth; earlier drafts' "empty `_ENV`" claim is

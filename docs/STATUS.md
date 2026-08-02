@@ -272,9 +272,24 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > - **Tier 2 still owes** (chain prompt 5): `DroneUnreachableForever`,
 >   `TrainWaitTime`, `ArrivalDeaths` (b) + the (a) design pass, **F86 Site 2
 >   (`Opt_DroneOverhaul`)**, and the D10/D12 unhold record. The §5.4-A
->   conversions are chain prompt 8. **F86 still BLOCKS RELEASE until Tier 2
->   closes** — Tier 1 verifying does not by itself make the pack
->   uninstall-clean.
+>   conversions are chain prompt 8. Tier 1 verifying does not by itself make
+>   the pack uninstall-clean.
+>
+> ⭐ **ETHOS + RELEASE GATE RESTATED BY THE OWNER 2026-08-01 (authoritative
+> text: `FIX_POLICY.md` §3a — any "leave no trace" framing left elsewhere in
+> the docs is superseded by it).** Leftovers are an accepted fact of this
+> engine — the game's own code spells the mechanism out — so the ethos is
+> three-tier: **(1)** leave no trace; **(2)** failing that, leave **inert**
+> trace, named and disclosed; **(3)** failing that, leave harmful trace **only
+> paired with its remedy**, the D13 cleaner. **The release gate is now
+> PER-SITE, not blanket:** every exposed site needs a recorded disposition
+> (repaired in-pack, or handed to the cleaner where no layer 3/2 route exists).
+> A site without a disposition blocks release; a site with one does not.
+> ⛔ **This is not permission to descope — build every reachable repair NOW.**
+> A cleaner hand-off counts only *after* the in-pack attempt failed, because
+> D13's target list is the OUTPUT of the builds and cannot be designed before
+> them. **D13 is a HARD LAUNCH DEPENDENCY: launch waits for it, it does not
+> wait for launch.**
 
 > ✅ **F86 PHASE 0 IS DONE (2026-08-01, owner at the keyboard, one sitting) —
 > the two engine measurements that gated the Tier-1 designs are MEASURED, and
