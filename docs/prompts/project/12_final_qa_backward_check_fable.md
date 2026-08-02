@@ -240,6 +240,33 @@ INFERRED — an honest gap beats a manufactured confirmation.
    the build it, accept the thread for now, but its not locked. I want the QA run
    to personally review it and provide feedback."*
 
+   ⛔⛔ **READ THIS FIRST — HALF OF THIS JOB WAS DISSOLVED BY THE BUILD
+   (chain prompt 8c, 2026-08-02). The paragraphs below were written when the fix
+   was expected to cost a game-time thread. IT DOES NOT.** The C23 entry's
+   *"the only precise route is owning the scheduler body"* was **falsified when
+   `8c` re-verified it against Src**: `GetDustDevilsDescr` has three callers, all
+   inside that one thread, and the descriptor read is 1:1 with the count draw, so
+   §3a **layer 3** reaches the defect by *substituting* the descriptor rather
+   than mutating it. **F97 shipped as a §1.4b post-wrapper on
+   `OverrideDisasterDescriptor`** — no 14th site, no sleeping mod thread, no
+   §1.5 reconstruction, no version latch, no restart and therefore **neither of
+   the two named traps applies at all** (they are moot by construction, not
+   "handled"). The owner confirmed the route change before any code was written.
+
+   **So the cost side of this review is gone, and what remains is ONE question:
+   is the RATE change right?** Nothing in this chain has ever settled that —
+   `DustDevils_Low` accidentally approximates a gate today (50% × 1..2 truncates
+   to 0-or-1), so the shipped rates *may* have been tuned around the truncation.
+   ⭐ **Reversal is still a legitimate outcome, and it now costs the project
+   almost nothing** — deleting one 250-line module with no persisted state and
+   no save reachable by it. Weigh the rate on its merits; do not let "the build
+   turned out cheap" become a reason to keep a gameplay change.
+   ⚠️ **Do not read the paragraphs below as current.** They are kept verbatim
+   because the owner's approval was given against them, and a review that
+   silently swapped its own premises would be worth less. Full record: BUGS
+   **F97**, `SAVE_SAFETY_REDESIGN.md` **§8**, and `PLAYTEST_CHECKLIST.md`
+   **PT-61**.
+
    **What was decided and why it is unusual.** C23 item 1 is the dust-devil
    scheduler using `spawn_chance` as a count multiplier instead of a probability
    gate. The owner approved **building** it, which means **owning the
@@ -679,3 +706,66 @@ round-tripped this way — the F86 Tier-1 version latch, the rains migration,
 `90_SaveSanitizer`. `Fix_TrackSalvageWipe`'s sweep *was* verified on 2026-08-02
 (one heal line across five loads). **Two for two on the ones actually tested is not
 a reassuring base rate.**
+
+### From chain prompt 8c (2026-08-02) — the C23 item 1 build, and a job-7 axis the corpus does not have
+
+**Job 8's premises changed before you got here — the correction is inline at job 8
+itself.** In one line: F97 shipped, it costs no §3a site and no thread, and the
+only live question is the rate.
+
+**⭐ A JOB-7 SEED LINE, and it is a different SHAPE from the ones already in this
+list (chain rule 4b).** Every drift instance recorded so far is a *citation* going
+stale — a wrong line number, a method that does not exist, a self-check in the
+wrong place, a summary outliving its reason, a table column asserting its own
+verification. **This one is a ROUTE claim, and it failed in the opposite direction
+to prompt 8's.**
+
+* **What drifted.** The C23 build spec stated *"the only precise route is owning
+  the scheduler body"* and priced the item accordingly — a 14th §3a exposed site,
+  a mod-owned sleeping game-time thread in every save, a §1.5 reconstruction, a
+  version latch and an uninstall hand-back. **The owner approved the item WITH
+  that cost attached.** It was wrong: a §3a layer-3 route existed the whole time.
+* **How it was caught.** Only by re-deriving the route from Src rather than
+  re-checking the spec's citations. Every supporting fact the spec gave is
+  individually TRUE — `:216` really is inside a thread closure, there really is no
+  global function to replace, and the descriptor really is a shared preset that
+  cannot be mutated. The conclusion still did not follow, because nobody asked
+  whether the descriptor could be **substituted** instead of mutated.
+* **⭐ Why this is worth a taxonomy row of its own.** Prompt 8 found a route
+  recorded as *"verified feasible"* that **did not exist** (§5.4's `GetTargetAmount`
+  wrapper). Prompt 8c found a route recorded as **impossible** that **did**. Same
+  week, same corpus, opposite signs. **The project's re-verification discipline
+  currently checks citations, and both misses were in the reasoning above the
+  citations.** A doc convention that distinguishes *"this line says X"* from
+  *"therefore the only route is Y"* would have caught both; today the two are
+  written in the same voice, and the second inherits the first's authority.
+* **One aggravating factor worth recording:** the spec was written in the same
+  sitting as F93, and F93 is what made the layer-3 route *obvious* — it put a
+  mod-owned seam on `GetDustDevilsDescr`. The route existed before F93 and did not
+  depend on it, but nobody looked again after F93 landed. **A spec's cost estimate
+  has a shelf life, and nothing in this project's process re-opens one.**
+
+**Two smaller items, both already fixed, both recorded because chain rule 4b says
+a silently-corrected instance is destroyed evidence:**
+
+* The C23 entry cited `TerraformingDisasters.lua:97` for *"`OverrideDisasterDescriptor`
+  returns the preset itself"*. Line `:97` returns `settings` — a **different**
+  preset from the same group; `original` is returned at `:56`, `:62` and `:89`.
+  The conclusion (it is always a shared preset, so it cannot be mutated) is
+  **unaffected and correct**; the cited line was the wrong one of two right
+  answers. This is the **seventh** prompt-7-era spec whose supporting detail had a
+  defect.
+* `STATUS.md`'s build-state line has carried *"79 registered modules, 73
+  default-active"* — a pair that only reconciles if the divisor is **6**, while
+  **7** modules register with `optional = true`. It is not an error (the seventh,
+  `Opt_DroneStatDials`, reports active at base, by design), but the line never said
+  so, so the next recount had to re-derive why 79 − 7 ≠ 73. Now stated explicitly.
+  **A count that needs an unwritten exception to add up is a count that will drift.**
+
+**Nothing else is routed here.** F97 is unrun; PT-61 is written with predictions
+**P1-P10** before any run, and its verdict belongs to whoever runs it, not to this
+prompt.
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
+prompt 8c.** No broad search touched it; the one repo-wide `grep` run in this
+sitting was the stale-probe sweep (`TEMPORARY`), which returned zero hits.

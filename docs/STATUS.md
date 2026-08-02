@@ -30,11 +30,17 @@ remediation 3.3). Session legs are append-only in
 > constraints that do not generalise, and sharing a prompt was degrading both.
 
 **Build state (authoritative counts — stated here and nowhere else):**
-`Code/` = **80 files** (71 `Fix_` + 7 `Opt_` + `00_Core` +
-`90_SaveSanitizer`) = **79 registered modules, 73 default-active** (the 6
+`Code/` = **81 files** (72 `Fix_` + 7 `Opt_` + `00_Core` +
+`90_SaveSanitizer`) = **80 registered modules, 74 default-active** (the 6
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base).
-**Re-counted 2026-08-02 by chain prompt 8b** — `Select-String` for
+**Re-counted 2026-08-02 by chain prompt 8c** — one new module,
+`Fix_DustDevilSpawnGate` (F97, C23 item 1), added to prompt 8b's 79/73. The
+arithmetic is `80 registered − 6 opt-in-and-off = 74`; ⚠️ note that
+`79 − 6 = 73` is what reconciles prompt 8b's pair, so the divisor is **6, not
+the 7 `optional = true` registrations** — `Opt_DroneStatDials` is the seventh
+and it reports active at base. Prior recount, by
+`Select-String` for
 `SMRFixPack\.Register\(` over `Code/`, **minus the one false positive that
 count has always had to drop: `00_Core.lua`'s own `function
 SMRFixPack.Register(id, def)` definition line matches the same pattern.**
@@ -44,6 +50,10 @@ Was 74/68; the batch added **five new modules** (`Fix_SaintBlessing`,
 that needed no new module** (F91 amended `Fix_TrackSalvageWipe`, F94 landed
 inside `Fix_AsteroidLanderAvailable`). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
+**109 rows** (97 `F` + 12 `D`; **re-counted 2026-08-02 by chain prompt 8c** —
+`F=97, D=12, C=38`. Chain prompt 8c filed **F97** (C23 item 1, the dust-devil
+spawn gate); the `C` count is unchanged because a promoted candidate keeps its
+row. The prior figure, and prompt 7's own recount, follow — was
 **108 rows** (96 `F` + 12 `D`; **re-counted 2026-08-02 by chain prompt 7** —
 `Select-String` over the index block, not by hand, and not by incrementing:
 **F=96, D=12, C=38**. Prompt 7's six §4 packages filed **F91-F96**; the C count
@@ -161,6 +171,40 @@ Prompt 8 **split under rule 3**: `8b` carries the seven approved fixes
 out on its own scale call (Tier-1-scale work — a 14th §3a site, a sleeping
 game-time thread — on a P3 item) and **gated on 8b**, since F93 patches the same
 dust-devil subsystem.
+⭐ **2026-08-02, chain prompt 8c — C23 ITEM 1 IS BUILT AS `F97`
+(`Fix_DustDevilSpawnGate`, `b43f1d9`), AND THE §3a COST ITS APPROVAL ACCEPTED DID
+NOT MATERIALISE.** Counts re-derived by counting: **109 rows = 97 F + 12 D; 38 C**;
+**80 registered modules / 74 default-active**; **86 probes**.
+`DustDevils.lua:216` multiplies the wave count by `spawn_chance`, which is a
+probability, and the divide truncates — so `count_max` is unreachable below 100%
+and the count can be 0 while `count_min` is 1. `DustDevils_VeryHigh_3` is authored
+`6..8 @ 50%` and can only ever produce 3 or 4.
+⭐⭐ **THE APPROVED SPEC'S ROUTE CLAIM WAS FALSIFIED WHEN IT WAS RE-VERIFIED.** The
+entry said *"the only precise route is owning the scheduler body"* and priced it: a
+**14th §3a exposed site**, a **mod-owned sleeping game-time thread in every save**, a
+§1.5 reconstruction, a version-latched one-shot restart, and a hand-back gate on
+uninstall. Src says otherwise — `GetDustDevilsDescr` has **three callers, all inside
+that one thread**, and the descriptor read is **1:1 with the count draw** — so §3a
+**layer 3** reaches the defect by *substituting* the descriptor rather than mutating
+it, the possibility the spec's "shared preset table" reasoning skipped. **Owner
+confirmed the route change before any code was written.** Built as a §1.4b
+post-wrapper on `OverrideDisasterDescriptor` (**4 callers, one per disaster**, keyed
+on `original.class`), deliberately one level below `GetDustDevilsDescr` so it never
+contends with **F93**, whose `DataPatch` runner re-installs its own body whenever
+that global holds anything else. **Result: no 14th site, no sleeping thread, no
+reconstruction, no latch, no restart and therefore no F88 timer re-roll**; existing
+saves are reached with no load-time action, and uninstall self-heals within one wave.
+The one residual is an **inert plain-data descriptor copy**, marked
+`SMRFixPack_spawn_gate`, that carries no function values by construction —
+per-site disposition in `SAVE_SAFETY_REDESIGN.md` **§8**.
+⚠️ **UNRUN** — the leg is **PT-61**, attended, predictions **P1-P10 written before
+any run**, with a within-session A/B (`SMRFixPack_Disabled.DustDevilSpawnGate`,
+honoured per call) and two setup traps recorded that would each cost a sitting.
+⚠️ **The RATE question is NOT settled and this build does not close it** — the
+owner's approval is explicitly provisional and **chain prompt 12 job 8 reviews the
+decision, with reversal a legitimate outcome**. The route change removes the *cost*
+side of that review entirely; what is left is purely the rate.
+
 **2026-08-02, chain prompt 8b — ALL SEVEN APPROVED FIXES ARE BUILT, one commit
 each, with seven probes and the batch leg specced. Nothing filed or closed, so
 row counts are unchanged and re-derived: 108 rows = 96 F + 12 D; 38 C.**
@@ -219,17 +263,20 @@ carry R1/R2. **F93 and F94 have no live reading at all**, and F93's rider is
 **impossible on a terraformed colony**: dust devils share the `Atmosphere` /
 `DustStormStop` gate with dust storms (`TerraformingDisasters.lua:34-52, :69`), so
 both F90's and F93's live riders need a colony below that threshold and stay open.
-**TestKit probes: 85** (78 + this batch's 7 — wave 8,
+**TestKit probes: 86** (85 + chain prompt 8c's one — wave 9,
+`58_Probes_Wave9.lua`, TestKit `7733f79`, `DustDevilSpawnGate`; the same commit
+adds a `DustDevils` logger, which is not a probe and is not counted).
+The 85 was 78 + prompt 8b's 7 (wave 8,
 `57_Probes_Wave8.lua`, TestKit `2ef64a4`). The 78 was re-verified 2026-08-01 by
 counting `SMRTest.Register(` across the TestKit's nine probe files:
 10+20+18+12+7+3+2+6, **excluding the definition line in `00_TestCore.lua`, which
 matches the same pattern and is the standing false positive in this count**;
 unchanged by the 2026-08-01 teardown of `97_SaveHookProbe` — it was declared,
 never registered — and the stale-probe sweep still returns **zero** hits in both
-repos. **79 registered
+repos. **80 registered
 modules** likewise re-verified
-(80 `SMRFixPack.Register(` occurrences minus the definition in `00_Core.lua` —
-it was 75 minus one before this batch).
+(81 `SMRFixPack.Register(` occurrences minus the definition in `00_Core.lua` —
+it was 80 minus one before F97, and 75 minus one before prompt 8b's batch).
 Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
 > F83 is `tested`.** Nothing on the drone research side is owed. Full leg in

@@ -187,6 +187,12 @@ A/B plus a long-interval soak.
 
 ## 3. Per-module disposition (12 exposed — membership corrected BOTH ways by the sweep: see §4a for the addition and §5.2 for the removal)
 
+> ⭐ **A 14th site was approved in 2026-08-02 and did not materialise — see §8.**
+> C23 item 1 (`F97`) was owner-approved *with* a mod-owned sleeping game-time
+> thread priced in; re-verification found a layer-3 route the spec had ruled out,
+> so the module adds **no exposed site**. Its per-site call, and the one inert
+> residual it does leave, are recorded there.
+
 | module | default? | route in | proposed layer |
 |---|---|---|---|
 | `Fix_MeteorFrequency` | yes | global GT thread body | **3** — delete the body (worked example above) |
@@ -829,3 +835,89 @@ again without new evidence that Tier 3 causes real harm.**
   layer-3 sweep proposes — the sweep may recommend converting a currently-safe
   full replacement to an input patch, but nothing is built without a further
   owner go)*.
+
+---
+
+## 8. ⭐ F97 `Fix_DustDevilSpawnGate` — per-site disposition (chain prompt 8c, 2026-08-02)
+
+**Recorded because the item was APPROVED AS A 14TH EXPOSED SITE AND DID NOT
+BECOME ONE.** The §3a release gate is per-site and a site without a recorded call
+blocks release; this is that call, and it is *no new site*. The disposition is
+worth more than the usual one-liner because the approved spec priced the opposite
+answer and the owner accepted that price.
+
+**What was approved.** C23 item 1's build spec states *"the only precise route is
+owning the scheduler body"* through `GlobalGameTimeThreadFuncs["DustDevils"]` —
+a §1.5 reconstruction of `DustDevils.lua:188-241`, a **mod-owned sleeping
+game-time thread in every save**, a version-latched one-shot restart (because a
+table swap does not reach a save whose thread is already executing the serialised
+body), and a hand-the-loop-back-to-vanilla orphan gate to avoid recreating F86
+Site 1. That is **layer 1**, the layer this document ranks last and
+`FIX_POLICY.md` §3a bars without a gate.
+
+**What was built, and why the layer ordering forced it.** §2's ordering is
+binding, and layer 3 exists here:
+
+* `GetDustDevilsDescr` has exactly **three callers, all inside that one thread**
+  (`:193`, `:234`, `:237`), and the scheduler reads the descriptor **exactly once
+  per wave**, which is 1:1 with the defective count line at `:216`;
+* `OverrideDisasterDescriptor` — one level below it — has exactly **four callers**
+  (`ColdWave.lua:48`, `DustDevils.lua:65`, `DustStorm.lua:61`,
+  `Meteors.lua:262`), each passing its own `MapSettings` subclass, so
+  `original.class` is the precise key §2's layer-3 note demands (*"scope the
+  wrapper by the narrowest thing that actually separates the call sites, and
+  enumerate every caller before choosing the key"*).
+
+So the repair changes **what the shipped body reads**, not what it does: the
+chance is pre-rolled into a plain-data copy of the descriptor whose
+`spawn_chance` is 100 and whose count range is either the authored one or `0..0`.
+Vanilla's `:216` is untouched and computes gate-then-count itself.
+
+**Route-by-route call.**
+
+| route | verdict | why |
+|---|---|---|
+| **(a)** frame below a yield on a game-time thread | **not exposed** | the wrapper is synchronous, contains no `Sleep`/`WaitMsg`, and returns before the scheduler's next yield |
+| **(b)** held in a live local/upvalue of a captured frame | **not exposed** | the thread's locals hold the returned **table**, never our function; the function is reachable only from `_G.OverrideDisasterDescriptor`, which is **not** in `PersistableGlobals` (only the thread handle `"DustDevils"` is, `Lua\Config\_fixup.lua:9-16`) |
+| **(c)** stored in persisted state | ⚠️ **one inert residual, disclosed** | vanilla stores our descriptor copy in its own thread local, so a save written between two waves carries it |
+
+**The residual, stated precisely** — this is tier 2 of §3a's ethos (*"leave
+non-harmful trace … named, bounded, disclosed, and incapable of doing anything
+after removal"*), not tier 1:
+
+* **What it is:** one plain table of the preset's declared property values.
+  **No function values can be in it** — the copier refuses any
+  `function`/`userdata`/`thread` value and hands back the untouched preset
+  instead, so the fix does nothing that wave rather than persisting code.
+* **Named:** it carries `SMRFixPack_spawn_gate = true`, so the residue is
+  findable in a save by the D13 cleaner and the module refuses to re-gate its own
+  output.
+* **Bounded:** at most **two** exist — one held by the main thread (replaced at
+  every wave's re-read) and one shared by any marker threads created at map-gen.
+  A preset already at `spawn_chance = 100` is returned **by identity, with no copy
+  made at all**, so those maps carry nothing of ours.
+* **Incapable after removal:** it is numbers and booleans. The scheduler discards
+  it at its next `:234` re-read, i.e. **within one wave**, and the marker threads
+  that keep it read only `marker_*`, `warning_time` and the spawn geometry —
+  **none of the three fields this fix changes** (`DustDevils.lua:161-179`
+  enumerated).
+
+**Nothing is owed to D13 by this module.** The cleaner has no target here: there
+is no thread to revive, no global to restore, no persisted field to strip, and
+the one residual self-replaces with vanilla data within one wave of ordinary play.
+
+**Verification.** `PLAYTEST_CHECKLIST.md` **PT-61**, predictions written before
+the run. **P10 is the save-safety prediction** — with the pack removed the same
+save keeps producing dust devils and the descriptor reads vanilla numbers again
+within one wave. ⚠️ Until PT-61 runs, everything above is argued, not observed.
+
+**The lesson worth keeping, and it generalises past this module.** The spec's
+supporting reasoning was individually correct — `:216` really is inside a thread
+closure, there really is no global function to replace, and the descriptor really
+is a shared preset that **cannot be mutated**. The conclusion *"the only precise
+route"* still did not follow, because it never asked whether the descriptor could
+be **substituted** rather than mutated. ⭐ **"No layer-3 route exists" is a claim
+of the same kind as "this route is verified feasible", and this project has now
+been wrong in both directions in the same week** (prompt 8 found a "verified
+feasible" §5.4 route that did not exist; prompt 8c found a "no route" that did).
+**Re-derive the route, not just the citations.**

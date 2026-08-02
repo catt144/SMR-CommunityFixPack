@@ -1107,6 +1107,143 @@ Quote the header line and the seven new verdicts; do not chase a total.
    dismissal, and every previous pushback on one of these lines has turned up a
    vanilla defect that was not on our list (WORKFLOW.md).
 
+## PT-61 — F97 dust-devil spawn gate · covers **F97 (C23 item 1)** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 8c
+
+**One fix, its own leg, because the item earned one.** F97 changes how many dust
+devils a wave produces. It is the only item in the chain whose approval was
+explicitly **provisional** (owner, 2026-08-02: *"build it … it's not locked. I
+want the QA run to personally review it"*), so the leg has to produce numbers a
+reviewer can argue with, not a green tick.
+
+**⛔ PT-00 first.** Sweep result at build time (`b43f1d9` + TestKit `7733f79`):
+**CLEAN — zero `TEMPORARY` hits in both repos.** Re-run it at the keyboard.
+
+### ⛔ TWO SETUP TRAPS. Either one costs the whole sitting and both look like the fix failing.
+
+**Trap 1 — dust devils are OFF on a terraformed colony, for reasons that have
+nothing to do with this fix.** `MapSettings_DustDevils` shares the `Atmosphere` /
+`DustStormStop` gate with dust storms (`TerraformingDisasters.lua:34-52`) and
+`OverrideDisasterDescriptor` **returns nil** once the parameter passes the
+threshold (`:69`), after which the scheduler parks in
+`while not new_descr do Sleep(const.DayDuration) end`. **Check before choosing a
+colony:**
+
+```
+*r ConsolePrint("DustStormsDisabled: "..tostring(rawget(_G,"DustStormsDisabled")).." | Atmosphere: "..tostring(GetTerraformParamPct("Atmosphere")))
+```
+
+`true` means that colony **cannot produce dust devils at all**. ⛔ The campaign's
+deep colony (`TEST 2H`, sol 285) is past the threshold and **cannot host this
+leg** — use a young colony or a fresh sandbox.
+
+**Trap 2 — do NOT turn dust storms off by setting `DustStormsDisabled`.** The
+scheduler's own first statement each cycle is
+`while HasDustStorm(map) or DustStormsDisabled do Sleep(5000) end`
+(`DustDevils.lua:209`), so that flag **parks the whole scheduler** and you would
+read zero devils forever and call it a regression. The rider's "dust storms off"
+means *no storm occurring* — set the map's storm preset to `"disabled"` instead
+(`MainMap.mapdata.MapSettings_DustStorm = "disabled"`) and confirm with
+`HasDustStorm(MainMap)`. A storm arriving mid-wave also truncates the burst
+(`:220-222`), which would under-count a **passed** gate specifically.
+
+### Setup — console-produced, and disclosed as such
+
+The shipped cadence is unusable for a leg: `DustDevils_VeryHigh_3` sleeps
+`spawntime 1350000` between waves and `warning_time` again **per devil** inside
+the burst, so one wave of 8 would take most of an evening. The leg therefore
+**compresses the preset in the console** and records that it did.
+
+```
+*r local p = Presets.MapSettings.DustDevils.DustDevils_VeryHigh_3
+*r MainMap.mapdata.MapSettings_DustDevils = "DustDevils_VeryHigh_3"
+*r MainMap.mapdata.MapSettings_DustStorm = "disabled"
+*r p.spawntime = 4 * const.HourDuration  p.spawntime_random = 0
+*r p.warning_time = 1000  p.spawn_delay_min = 1000  p.spawn_delay_max = 1000
+*r p.duration = 20000  p.duration_random = 0
+*r SMRTest.Log.DustDevils(true)
+```
+
+⚠️ **This is fix verification, not reachability evidence** (FIX_POLICY §4a) — the
+same standing F96's manufactured sinkhole has. The *defect* is source-verified
+and R1 on shipped data; what the leg proves is that the repair does what it
+claims on the live scheduler. **The edits are session-only** (presets are rebuilt
+from `Data\` at Lua load) — but they are edits to a **shared preset object**, so
+do not save-and-keep this save as a fixture.
+⚠️ **Only `spawn_chance 50` and `count 6..8` may be left alone.** Changing either
+destroys the discriminator.
+
+### ⭐ THE A/B IS WITHIN ONE SESSION, ON ONE COLONY — use it
+
+F97's wrapper consults `SMRFixPack_Disabled` **per call**, and the scheduler
+re-reads its descriptor once per wave, so the fix can be switched off and back on
+**live**, with everything else held constant:
+
+```
+*r SMRFixPack_Disabled.DustDevilSpawnGate = true    -- vanilla from the NEXT wave
+*r SMRFixPack_Disabled.DustDevilSpawnGate = false   -- fix from the NEXT wave
+```
+
+⚠️ **"From the next wave", not immediately** — the wave now in flight already
+holds its descriptor. Watch the logger's `WAVE descriptor` line for `gated=YES`
+/ `gated=no` to know which body produced which burst; that line is the ground
+truth for attribution, not the toggle command.
+
+### ⭐ PREDICTIONS — written 2026-08-02, BEFORE the leg runs
+
+Record the reading against each one. **A prediction that misses is the finding.**
+Counts re-derived, not inherited: **80 registered modules** (79 + `DustDevilSpawnGate`),
+**74 default-active**, **86 probes** (85 + `DustDevilSpawnGate`). ⚠️ The *active*
+number depends on which opt-in toggles the profile has on — **Mod Options survive
+a Mod Manager disable**, so read `ListFixes()` before writing it (PT-60's P1
+missed on exactly this, with no defect behind it).
+
+| # | prediction | what a miss means |
+|---|---|---|
+| **P1** | `SMRFixPack.ListFixes()`: **80 registered**, and `DustDevilSpawnGate` reports **`active`** with an empty detail | the `OverrideDisasterDescriptor` preflight or the `SetGlobal` read-back failed, or the preset self-check latched — read the detail string first |
+| **P2** | `SMRTest.RunAll()`: the new probe `DustDevilSpawnGate` **PASSes**; probe total **86**; **no probe that passed under PT-60 now fails** — the one at risk is `DustDevilsDescrMap`, since F93 and F97 sit on the same call chain | the two dust-devil fixes interfere, which is the exact thing prompt 8c was gated on `8b` to prevent |
+| **P3** | **VANILLA HALF** (fix disabled): every `WAVE descriptor` line reads `spawn_chance=50 count=6..8 gated=no`, and every wave spawns **3 or 4** positioned devils. **Never 0, never 6, never more than 4** | the defect is not what the source says it is — stop and re-derive before touching the fix |
+| **P4** | **FIXED HALF**: every `WAVE descriptor` line reads `spawn_chance=100` and `gated=YES`, with `count` reading either **`6..8`** or **`0..0`** and nothing else | the copy is not reaching the scheduler, or a field was lost in it |
+| **P5** | **FIXED HALF, observed bursts**: each wave spawns **either 0 or 6-8** positioned devils, matching the `count` on that wave's own `WAVE` line. Over ~10 waves both outcomes appear, roughly half and half | a mismatch between the predicted and observed count means something between the descriptor and the spawn loop is interfering — a storm (check `HasDustStorm`), vegetation refusals (the logger prints `REFUSED`), or `GetRandomPassableAwayFromBuilding` returning nil and breaking the loop early (`:224-226`) |
+| **P6** | ⭐ **the discriminator, stated as one number: `count_max` becomes reachable.** At least one wave in the fixed half spawns **8**. Vanilla cannot produce 8 from this preset under any roll | if no wave ever reaches 8 over ~10 waves, the repair is not doing the one thing it exists to do |
+| **P7** | **zero `[LUA ERROR]` naming `Fix_DustDevilSpawnGate`**, across the whole sitting and both halves — including the wave immediately after each toggle flip | the wrapper throws on a path the probe's stand-in preset does not reach; the property-list copy is the suspect |
+| **P8** | **the other three disasters are untouched.** Meteors, dust storms and cold waves behave as they did — they share `OverrideDisasterDescriptor` and the wrapper is keyed on `original.class` alone | the class key is wrong or a preset carries an unexpected `class`, and three unrelated disaster schedulers are being rewritten |
+| **P9** | **SOAK / save-boundary:** save mid-wave, reload, and the scheduler continues — `WAVE` lines resume and devils keep spawning. On the reloaded save the **first** wave may still carry a pre-roll made before the save; from the second it is business as usual | the descriptor copy did not survive persistence, which would mean a value the property walk copied is not plain data |
+| **P10** | **UNINSTALL:** with the pack removed, the same save keeps producing dust devils, and within **one wave** the `WAVE` line (kit still installed) reads vanilla numbers again — `spawn_chance=50 count=6..8 gated=no` | ⛔ this is the `Fix_MeteorFrequency` failure mode (F86 Site 1). It should be impossible here — we own no body and no thread — so a miss means the §3a reasoning on the F97 entry is wrong |
+
+**Not predicted, and deliberately so:** the exact ratio of gated-off to gated-on
+waves. Ten waves is far too small a sample to say anything about a 50/50 gate, and
+a run of four zeroes is unremarkable. **Do not read the ratio as evidence either
+way** — P6 is the discriminator, and it needs only one wave of 8.
+
+### Steps
+
+1. **PT-00 sweep.** Then pick a colony and run the **Trap 1** terraforming check
+   before anything else. If it prints `true`, change colony.
+2. `*r SMRTest.RunAll()` → **P2**. `SMRFixPack.ListFixes()` → **P1**.
+3. Apply the setup block. Confirm `HasDustStorm(MainMap)` is false and
+   `DustStormsDisabled` is still `false` (**Trap 2**).
+4. **Vanilla half first** — disable the fix, let ~5 waves run at high speed,
+   count positioned spawns between `WAVE` lines → **P3**.
+5. **Re-enable**, let ~10 waves run → **P4, P5, P6**. Watch **P7** throughout.
+6. Save mid-wave, reload, continue a wave or two → **P9**.
+7. Check the other disasters are still arriving normally → **P8**. (A meteor or
+   cold wave in the log is enough; do not wait for one.)
+8. Quit, remove the pack, load the same save, run a wave → **P10**.
+9. ⛔ **Report every unexplained log line with its age.** "Not caused by our leg"
+   is an attribution verdict and not a dismissal, and every previous pushback on
+   one of these lines has turned up a vanilla defect that was not on our list
+   (`WORKFLOW.md`). ⚠️ Expect noise from the compressed preset itself: a 20-second
+   `duration` makes devils expire almost immediately, which is not a defect.
+
+### What this leg does NOT settle
+
+⛔ **The rate question.** This leg can prove the authored range is reachable and
+that the gate fires at its stated chance. It cannot say whether the resulting
+frequency is the one the game was tuned for — `DustDevils_Low` accidentally
+approximates a gate today (50% × 1..2 truncates to 0-or-1), so the shipped rates
+*may* have been tuned around the truncation. **That is chain prompt 12's job 8,
+and reversal is a legitimate outcome no matter how cleanly this leg passes.**
+
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
 
 The pack must never hold a save hostage.

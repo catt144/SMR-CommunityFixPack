@@ -149,3 +149,27 @@ sitting on either.
 8b.** One `git add -A` staged it in a single commit; it was amended out before any
 push and the file is untracked again. Nothing in it was opened. **Name your paths
 when you stage.**
+### From chain prompt 8c (2026-08-02) — counts moved, and one warning worth two minutes
+
+**Counts, re-derived by counting — recount rather than inherit these too:**
+**109 BUGS rows = 97 F + 12 D**; **38 C**; **80 registered modules / 74
+default-active**; **86 TestKit probes**. `8c` filed and built **F97**
+(`Fix_DustDevilSpawnGate`, C23 item 1) — one new module, one new probe, one new
+row. ⚠️ **74 default-active is `80 − 6`, not `80 − 7`**: seven modules register
+with `optional = true`, but `Opt_DroneStatDials` reports **active at base** by
+design. `STATUS.md` now says so out loud; it did not before, and the pair
+`79/73` had to be re-derived to work out why.
+
+**The warning.** `8c` set out to build the route its approved spec described and
+found the spec's route claim was **false** — a §3a layer-3 route existed that the
+spec had ruled out in writing, which changed the item from "a 14th exposed site
+plus a sleeping game-time thread" to a 250-line wrapper with no persisted state.
+Prompt 8 hit the mirror image the same week: a route recorded as *"verified
+feasible"* that did not exist. **Both were caught only by re-deriving the route
+from Src, not by re-checking the spec's citations.** D10 is a build with its own
+recorded design; **re-derive its route before you write to it**, and treat any
+sentence of the form *"the only way to do this is X"* as the least-verified
+sentence on the page.
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
+prompt 8c.**
