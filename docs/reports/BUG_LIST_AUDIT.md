@@ -681,6 +681,42 @@ the bodies reversed what the titles said** — which is the third time in one da
   multiply witnessed — but OG-2021, so it corroborates the FAMILY, not the
   Relaunched build.**
 
+**⭐⭐ THE OCT 20 AND OCT 23 REPLIES ARE NOT JUST "corroborators" — THEY ARE
+SEPARATE REPORTS ABOUT TWO OTHER MYSTERIES, AND THEY SHOULD BE READ THAT WAY
+(owner, 2026-08-02).** Filing them under "three people confirm the Spheres bug"
+understates them. What the thread actually contains is **three mysteries with
+the same completion-cleanup failure, reported independently within five days**:
+- **Spheres** — Homeshine (OP) + shannley (*"Same Problem"*, Oct 20).
+- **St. Elmo's Fire** — Candergart, Oct 20, describing his own case in detail:
+  *"The dialogue 'Waiting final results' just stay on the screen forever, even
+  if all the research is done **and I made my choice to get power for water**."*
+  He is past the mystery's decision point, and the mystery will not let go.
+- **The Last War** — omega telescope, Oct 23, *"Same problem with 'The Last
+  War'"*.
+
+**We hold entries touching both of those mysteries — for entirely DIFFERENT
+defects** (F07 and C21 on St. Elmo's Fire; F26 on The Last War). Nobody has ever
+looked at their *completion* paths. **So these two replies are not evidence for
+F07/F26/C21 — they are a known symptom to carry into any future sweep of those
+files**, which is a more useful thing to have recorded than a corroboration
+count.
+
+**⭐ And a detail in the OP that was under-weighted first time through: one of
+the two stuck dialogs is a "COLD WAVE" — a DISASTER notification.** Homeshine:
+*"the dialog never goes away for **'cold wave'** and the dialog for 'Sphere
+countdown: 101%'… I can cancel the mystery log, but not these last two
+dialogs."* **A disaster notification that can never be dismissed is
+structurally the F81(a) shape** — a disaster notification/flag that is added and
+never removed is precisely what strands `g_DisastersPredicted` and makes
+`IsDisasterPredicted()` permanently true (`MapSettings.lua:169/176`).
+⚠️ **This is a shape match, NOT an identification.** OG-2021 is a different
+codebase generation, we have no OG source, and F81(a)'s specific leak is the
+meteor-storm *duration* notification, not a cold wave. **What it does is sharpen
+the unassigned lead below**: the question is not only *"do mysteries gate on
+disaster state?"* but also *"do mysteries CREATE disaster notifications that
+leak?"* — two directions through the same seam, and F81(a) plus C36 already
+prove both directions exist in Relaunched.
+
 **⭐ The cross-mystery pattern is worth more than the citation it arrived in, and
 it now has TWO independent OG threads.** `1495056` shows one completion-cleanup
 symptom across **Spheres, St. Elmo's Fire and The Last War**; `1112166` shows
@@ -694,8 +730,14 @@ piece of state silently voided a whole mystery.**
 **The question that follows, recorded precisely because nobody owns it yet:**
 *do other mysteries gate on a global disaster/weather predicate the same way?*
 St. Elmo's Fire in particular is disaster-adjacent (`Fireflies.lua`, F07's
-file). **Cheap first check: grep the `Lua\Mysteries\` and `Lua\Scenario\` trees
-for `IsDisasterPredicted` / `IsDisasterActive` / `WaitCurrentDisaster` gates.**
+file). **Cheap first check, now in BOTH directions** (the cold-wave detail above
+is why the second half was added): grep the `Lua\Mysteries\` and `Lua\Scenario\`
+trees for **(a)** `IsDisasterPredicted` / `IsDisasterActive` /
+`WaitCurrentDisaster` — mysteries *gated by* disaster state, C36's proven shape;
+and **(b)** `AddDisasterNotification` / `RemoveDisasterNotifications` — mysteries
+that *create* disaster notifications and may not remove them, F81(a)'s proven
+shape. One grep pair, and it either finds a third instance of a defect class we
+have already proven twice, or it closes the question.
 ⚠️ **UNASSIGNED — not in any chain prompt's scope, and deliberately not routed
 by guesswork.** OG-era evidence only; the Relaunched-era mystery stalls in §10.5
 (cave mystery, network-nodes) are unverified hearsay. Owner's call whether it
