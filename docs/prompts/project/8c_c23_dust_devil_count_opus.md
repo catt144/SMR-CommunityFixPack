@@ -199,3 +199,69 @@ seed block.
 prompt 8b.** One staging slip is recorded rather than hidden: a `git add -A`
 staged it in one commit, which was amended out before any push; the file is
 untracked again and **nothing in it was opened, read or summarised**.
+
+
+### ⭐ ADDENDUM — written AFTER PT-60 ran (2026-08-02). Three things the notes above predate.
+
+**Your gate is genuinely open now, not merely landed.** The note above said F93 was
+built and unrun. **PT-60 has since run**: `76 PASS, 0 FAIL, 9 SKIP, 0 ERROR`,
+`79/79` modules active, zero `[LUA ERROR]`, and the `DustDevilsDescrMap` probe
+PASSes on all three legs (*"the descriptor follows MainMap in both directions, and
+MainMap's own disabled setting still wins"*). The dust-devil subsystem therefore has
+a **verified baseline** before you touch it — anything that misbehaves afterwards is
+attributable to you.
+
+**1 · ⛔ THE TRAP THAT WOULD COST YOU A WHOLE SITTING: dust devils are OFF on a
+terraformed colony.** `MapSettings_DustDevils` shares the **`Atmosphere` /
+`DustStormStop`** gate with dust storms (`TerraformingDisasters.lua:34-52`), and
+`OverrideDisasterDescriptor` **returns nil** once that parameter passes the
+threshold (`:69`) — after which the scheduler parks in
+`while not new_descr do Sleep(const.DayDuration) end` indefinitely. **Your entire
+item is about how many dust devils spawn.** On a terraformed save the answer is
+zero, for a reason with nothing to do with your fix. **Check before choosing a
+colony:**
+
+```
+*r ConsolePrint("DustStormsDisabled: "..tostring(rawget(_G,"DustStormsDisabled")).." | Atmosphere: "..tostring(GetTerraformParamPct("Atmosphere")))
+```
+
+`true` means that colony cannot produce dust devils at all. The campaign's deep
+colony (`TEST 2H`, sol 285) is past the threshold and **cannot host this work**.
+⚠️ Related correction: F93's own entry claimed its window runs *"forever"*. It does
+not — it is large but bounded by terraforming, and that is fixed on the entry.
+Expect the same bound on your item's reachability.
+
+**2 · ⛔ YOU PERSIST STATE, AND THAT IS EXACTLY WHERE THIS BATCH BROKE.** Two of
+8b's three load-time heals were **not idempotent**, and — the part that matters for
+you — **neither was visible to source review, to code review, or to its own passing
+probe.** `Fix_AstrogeologistExtractors` added +10% on *every* load, unbounded,
+because its presence test compared **object identity** while `label_modifiers` is
+persisted: the save deserialises its own copy of the key, so the test can never
+match across a load. Its probe PASSed throughout, because the probe asserted the
+*preset* while the *applied* count doubled.
+
+**You own a sleeping game-time thread and a version latch. Both cross a save
+boundary.** So:
+
+- **never key a presence/already-done test on an object identity that crosses a
+  save** — test a stable property instead;
+- **save, reload, and re-read the number** before believing any idempotence claim.
+  That round trip is the only instrument that found either defect;
+- a Mod-Manager re-enable does **not** load edited Lua — **exit and relaunch**.
+
+Full write-up: prompt 12's job-7 block, filed as a third axis that corpus lacked.
+
+**3 · A SIXTH spec-detail defect, on top of the five listed above.** F96's spec
+enumerated `Building.lua:1814` as a runtime clear of `indestructible` *"on other
+objects"*. It is `Building:CheatDestroy`, a **generic `Building` method** applying
+to any building including the one being fixed. The conclusion survived (cheat-only,
+so unreachable in normal play) but the stated reason was wrong. **Six of prompt 7's
+six specs have now had a defective supporting detail. Treat "should not need to
+re-derive" as fully falsified.**
+
+**Counts, already re-derived — recount, never inherit:** 108 rows = 96 F + 12 D;
+38 C; **79 registered modules / 73 default-active**; **85 probes**.
+⚠️ Any prediction quoting an *active* count must read the toggles first — **Mod
+Options survive a Mod Manager disable**, so `metadata.lua`'s all-`false` defaults do
+not describe a profile anyone tests with. PT-60's P1 missed on exactly that
+(`ENGINE_FACTS.md`, three-switches table).
