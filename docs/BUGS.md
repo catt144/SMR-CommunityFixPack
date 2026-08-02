@@ -9064,6 +9064,25 @@ quotes verbatim; sources in the audit report §8.
     as a back-reference — `count_max` "was not present" by the same test while
     sitting in plain view in the class definition. **Only the POSITIVE hits above
     are evidence.**
+    ⭐ **COST ESTIMATE REVISED DOWN: the compression is LZ4.** Probing
+    `Packs\Data.hpk` shows the marker **`_ENVLZ4`** immediately before each blob,
+    followed by a Lua chunk header and the chunk name in the clear (e.g.
+    `Mars/Data/MapSettings_DustDevils.lua` at offset 1170603). So `Data.hpk`
+    holds **compiled** Lua and `Lua.hpk` holds **source**, both LZ4 inside a
+    `BPUL` container. LZ4 block decoding is a ~40-line function (or the `lz4`
+    pip package), so "write an HPK extractor" is a **much smaller job than it
+    first sounded** — the hard-looking part was never the compression.
+  - 🎯 **THE ONE-OBSERVATION DISCRIMINATOR, if anyone ever measures instead of
+    extracting.** Under the multiply the largest possible wave is
+    `floor(count_max * spawn_chance / 100)`; under the gate it is `count_max`.
+    On **`DustDevils_High`** (`spawn_chance 75`, `count 1..3`) that is **2 vs 3**.
+    So **a single scheduler wave of THREE dust devils proves the gate** — and it
+    is bounds-independent, i.e. it does not depend on whether
+    `SessionRandom:Random(min, max)` is inclusive. ⚠️ **One-sided:** seeing 3 is
+    conclusive, *not* seeing 3 is weak (it could be the exclusive-bounds case).
+    Instrument: sample `#g_DustDevils` (the global exists in OG — offset
+    3725258) from a real-time thread and cluster the increments; marker-spawned
+    devils are the noise source, so cluster within a few seconds of each other.
     ⛔ It does **not** change the §3a arithmetic — a replacement
     body is still ours and still sleeps.
   - **Item 3 (marker path missing `DustStormsDisabled`) — ✅ DEFECT CONFIRMED,
