@@ -197,13 +197,27 @@ saves are reached with no load-time action, and uninstall self-heals within one 
 The one residual is an **inert plain-data descriptor copy**, marked
 `SMRFixPack_spawn_gate`, that carries no function values by construction —
 per-site disposition in `SAVE_SAFETY_REDESIGN.md` **§8**.
-⚠️ **UNRUN** — the leg is **PT-61**, attended, predictions **P1-P10 written before
-any run**, with a within-session A/B (`SMRFixPack_Disabled.DustDevilSpawnGate`,
-honoured per call) and two setup traps recorded that would each cost a sitting.
-⚠️ **The RATE question is NOT settled and this build does not close it** — the
-owner's approval is explicitly provisional and **chain prompt 12 job 8 reviews the
-decision, with reversal a legitimate outcome**. The route change removes the *cost*
-side of that review entirely; what is left is purely the rate.
+✅ **PT-61 RUN WITH THE OWNER, SAME DAY — ALL TEN PREDICTIONS MET, F97 IS
+`tested`.** Save `d10test1`, `Atmosphere 0`, 29 scored waves. **Vanilla produced
+only 3s and 4s over nine waves and never once entered the authored `6..8`; the
+fixed half produced 0 or 6-8 over twenty and reached 8 twice** — a value vanilla
+cannot compute from that preset. The persisted descriptor copy **survived a save
+boundary** and drove the far-side wave correctly; on **uninstall** the colony kept
+its dust devils (8 in the carryover wave) and the descriptor reverted to vanilla
+numbers on the very next read, **zero `[LUA ERROR]` in either log**. The
+`Fix_MeteorFrequency` failure mode (F86 Site 1) could not occur — we own no body
+and no thread.
+⭐ **Two riders closed for free during the leg.** **F93's live half** (above), and
+⭐ **the defect caught on the save's OWN shipped preset with no mod installed** —
+post-uninstall, `DustDevils_Low` (authored `count 1..2`) computing `0..1`, two
+consecutive waves of nothing. That is **reachability evidence**, which the rest of
+the leg deliberately is not.
+⚠️ **The RATE question is STILL NOT SETTLED, and PT-61 barely speaks to it** — it
+measured `DustDevils_VeryHigh_3`, the *least*-affected played preset (+5% mean).
+A per-preset derivation is now on the F97 entry and **job 8 should decide on that
+table, not on the leg's averages**. ⛔ It also surfaced that
+**`DustDevils_VeryLow` produces exactly zero dust devils from the natural
+scheduler, always** — and it is the fallback descriptor.
 
 **2026-08-02, chain prompt 8b — ALL SEVEN APPROVED FIXES ARE BUILT, one commit
 each, with seven probes and the batch leg specced. Nothing filed or closed, so

@@ -124,7 +124,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F94 | An operator-precedence slip makes **any parked supply rocket** satisfy the asteroid-visit gate — the picker opens with no lander to pick | P3 | SOURCE-VERIFIED | **fixed 2026-08-02 (chain prompt 8b) inside the existing `Fix_AsteroidLanderAvailable` — VERIFIED IN PLAY 2026-08-02 (PT-60).** Promoted from C24 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.4b body copy (12 lines from `PlanetaryView.lua:433-444`, build 1.0.7.396349, one added pair of brackets) with F72's scan appended where vanilla's `return false` was; no new registry id; probe `AsteroidVisitPrecedence` written. **F72's module header and its BUGS entry were both corrected in the same commit** — the chained delegation they advertised is gone, because a wrapper cannot filter a false positive. `PlanetaryView.lua:439` — `and` binds tighter than `or`, so `IsKindOf(rocket, "LanderRocketBase")` qualifies only the first of three clauses. **R1**: `SupplyRocketBase` descends from `RocketBase` alone (`SupplyRocket.lua:1-3`) and parks in `WaitLaunchOrder` (`RocketBase.lua:643, :699`), which the detached clause accepts. The picker's own list keeps only non-pod `UniversalRocketBase` rockets (`PlanetUI.lua:1623-1635`), so it comes up empty. Tells: a guard that cannot fire, and the branch 3 lines above plus `EarthVisitPossible` both bracket the same idiom correctly. ⚠️ Repairing a false positive means owning the predicate — F72's chained delegation cannot survive, and its header says otherwise today (entry) |
 | F95 | The Astrogeologist profile promises an unqualified "Extractor production increased by 10%" and pays **10 of the 12** buildable extractors | P3 | SOURCE-VERIFIED | **tested 2026-08-02 (chain prompt 8b, PT-60) as `Fix_AstrogeologistExtractors` — VERIFIED IN PLAY 2026-08-02 (PT-60).** Promoted from C38 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 additive patch (two `Effect_ModifyLabel` entries via `PlaceObj`, idempotent append) plus a load-time heal that calls vanilla's own `OnApplyEffect`; probe `AstrogeologistExtractors` written. One spec name corrected on the entry: the method is `OnApplyEffect`, not `__exec`. `CommanderProfilePreset.lua:333` (the promise), `:336-385` (ten `Effect_ModifyLabel` entries), omitting `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor` — both buildable, both carrying the modified prop. ⭐ **The list is curated by a rule these two satisfy**: the shared `Extractors` label exists (16 templates) and is deliberately unused because it would add 3 non-extractors and 2 `hide_from_build_menu` legacy templates — leaving these two as the only unexplained exclusions, and 12 buildable / 10 paid closes exactly. **R1.** Fix = two additive entries built with `PlaceObj` (F87 rule) + a load-time heal for existing saves. ⚠️ The counter-reading (a deliberate balance carve-out) is recorded on the entry — this is the package to veto if the owner reads it that way (entry) |
 | F96 | The St. Elmo's Fire sinkhole is the **only** mystery set-piece in the game a meteor can destroy | P3 | SOURCE-VERIFIED | **fixed 2026-08-02 (chain prompt 8b) as `Fix_SinkholeIndestructible` — VERIFIED IN PLAY 2026-08-02 (PT-60).** Promoted from C21 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 preset patch through `SMRFixPack.DataPatch`, on both targets — and the entry records which is which: the **class table** is load-bearing (instances have no own field and fall through to it, which is how it reaches existing saves with no sweep), while `BuildingTemplates.Sinkhole` is a rebuilt-every-`ClassesBuilt` proxy that already inherits it (`Building.lua:2566`) and is belt. Probe `SinkholeIndestructible` written. `Sinkhole.generated.lua:1-24` carries neither `indestructible` nor `disasters_strike_immunity`; the meteor chain reaches `DestroyBuildingImmediate`, whose only guard is that flag (`Building.lua:1371-1374`). **Tell:** every other set-piece has it (Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly, BottomlessPit, AncientArtifact, DragonRocket, DropPod) and the property's help text names meteors (`Building.lua:209`). **R2.** Fix = **§1.1 preset patch**, one boolean, and its side effects were enumerated: the other two consumers are already-false paths for this template, so it changes exactly one behaviour. ⚠️ The soft-lock at `Mystery 11.generated.lua:146` stays **located, not proven** — and the package does not rest on it (entry) |
-| F97 | The dust-devil scheduler multiplies its wave COUNT by `spawn_chance`, a probability — so `count_max` is unreachable below 100% and the count can be 0 while `count_min` is 1 | P3 | SOURCE-VERIFIED | **fixed 2026-08-02 (chain prompt 8c) as `Fix_DustDevilSpawnGate` — UNRUN.** Promoted from C23 item 1; **owner-approved PROVISIONALLY 2026-08-02** (*"not locked. I want the QA run to personally review it"*) and reviewed by chain prompt 12, job 8. `DustDevils.lua:216` — `SessionRandom:Random(count_min, count_max) * spawn_chance / 100`, integer-truncating; `DustDevils_High` (`75%`, `1..3`) yields 0-2 and never 3, and `DustDevils_VeryHigh_3` is authored `6..8 @ 50%` (`Data\MapSettings-DustDevils.lua:111-127`) so its range **cannot occur at all** — it produces only 3 or 4. Contradicts the fields' own help text (`:9-10`). **Intent settled by three independent controls** — the same file's marker sibling (`Random(100) < marker_spawn_chance`, `:169`), `MapSettings_Meteor`'s identical trio used gate-then-count (`Meteors.lua:7, :137, :284-290`), and an outside developer's independent repair — with **zero** examples of chance-as-multiplier in `Lua\`. **R1.** ⭐⭐ **THE ENTRY'S SPECCED ROUTE WAS FALSIFIED AT BUILD TIME AND THE FIX COST A FRACTION OF ITS ESTIMATE**: the spec's *"the only precise route is owning the scheduler body"* is wrong — the count line reads its three numbers from a **synchronous getter, exactly once per wave**, so §3a **layer 3** reaches it. Built as a §1.4b post-wrapper on `OverrideDisasterDescriptor` (4 callers, one per disaster, keyed on `original.class`), pre-rolling the gate into a plain-data copy of the descriptor. **No 14th §3a site, no sleeping mod thread, no §1.5 reconstruction, no version latch, no thread restart and therefore no F88 timer re-roll**; existing saves are reached with no load-time action and uninstall self-heals within one wave. ⚠️ **The RATE question is NOT settled by any of this** and the decision stays provisional (entry) |
+| F97 | The dust-devil scheduler multiplies its wave COUNT by `spawn_chance`, a probability — so `count_max` is unreachable below 100% and the count can be 0 while `count_min` is 1 | P3 | SOURCE-VERIFIED | **tested 2026-08-02 (chain prompt 8c) as `Fix_DustDevilSpawnGate` — ✅ VERIFIED IN PLAY (PT-61), ALL TEN PREDICTIONS MET.** 9 vanilla waves produced **only 3s and 4s and never once entered the authored 6..8**; 20 fixed waves produced 0 or 6-8 and **reached 8 twice** — a number vanilla cannot compute from that preset. The persisted copy survived a save boundary and drove a wave correctly on the far side; on uninstall the colony **kept its dust devils** (8 in the carryover wave) and the descriptor reverted to vanilla numbers on the very next read, with zero `[LUA ERROR]` anywhere. ⭐ **The uninstall log then caught the defect on the save's OWN shipped preset with no mod installed** — `DustDevils_Low`, authored `1..2`, computing `0..1`, two consecutive waves of nothing — which is reachability evidence the rest of the leg is not. ⚠️ **RATE STILL UNDECIDED and PT-61 barely speaks to it** (it measured `VeryHigh_3`, the least-affected played preset at +5%); a per-preset table is on the entry, and ⛔ it shows **`DustDevils_VeryLow` produces exactly zero dust devils, always** — and it is the fallback descriptor. Promoted from C23 item 1; **owner-approved PROVISIONALLY 2026-08-02** (*"not locked. I want the QA run to personally review it"*) and reviewed by chain prompt 12, job 8. `DustDevils.lua:216` — `SessionRandom:Random(count_min, count_max) * spawn_chance / 100`, integer-truncating; `DustDevils_High` (`75%`, `1..3`) yields 0-2 and never 3, and `DustDevils_VeryHigh_3` is authored `6..8 @ 50%` (`Data\MapSettings-DustDevils.lua:111-127`) so its range **cannot occur at all** — it produces only 3 or 4. Contradicts the fields' own help text (`:9-10`). **Intent settled by three independent controls** — the same file's marker sibling (`Random(100) < marker_spawn_chance`, `:169`), `MapSettings_Meteor`'s identical trio used gate-then-count (`Meteors.lua:7, :137, :284-290`), and an outside developer's independent repair — with **zero** examples of chance-as-multiplier in `Lua\`. **R1.** ⭐⭐ **THE ENTRY'S SPECCED ROUTE WAS FALSIFIED AT BUILD TIME AND THE FIX COST A FRACTION OF ITS ESTIMATE**: the spec's *"the only precise route is owning the scheduler body"* is wrong — the count line reads its three numbers from a **synchronous getter, exactly once per wave**, so §3a **layer 3** reaches it. Built as a §1.4b post-wrapper on `OverrideDisasterDescriptor` (4 callers, one per disaster, keyed on `original.class`), pre-rolling the gate into a plain-data copy of the descriptor. **No 14th §3a site, no sleeping mod thread, no §1.5 reconstruction, no version latch, no thread restart and therefore no F88 timer re-roll**; existing saves are reached with no load-time action and uninstall self-heals within one wave. ⚠️ **The RATE question is NOT settled by any of this** and the decision stays provisional (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -7911,7 +7911,7 @@ filing** — the state needs console injection to produce, which is R4 under
 FIX_POLICY §4a. **Run step 3 promptly** and expect that noise in the log between
 steps 1 and 3; do not attribute it to this batch.
 
-### F97 — The dust-devil scheduler multiplies its wave count by `spawn_chance`, a probability, so the authored count range is unreachable (P3, SOURCE-VERIFIED)  `[fixed 2026-08-02 by chain prompt 8c as `Code/Fix_DustDevilSpawnGate.lua` — §3a LAYER 3, a §1.4b post-wrapper on OverrideDisasterDescriptor keyed on original.class; probe DustDevilSpawnGate written. ⚠️ UNRUN — its A/B leg is PT-61. ⚠️ Owner-approved PROVISIONALLY; chain prompt 12 job 8 reviews the decision and reversal is a legitimate outcome]`
+### F97 — The dust-devil scheduler multiplies its wave count by `spawn_chance`, a probability, so the authored count range is unreachable (P3, SOURCE-VERIFIED)  `[tested 2026-08-02 by chain prompt 8c as `Code/Fix_DustDevilSpawnGate.lua` — §3a LAYER 3, a §1.4b post-wrapper on OverrideDisasterDescriptor keyed on original.class; probe DustDevilSpawnGate written. ✅ **VERIFIED IN PLAY 2026-08-02 (PT-61) — ALL TEN PREDICTIONS MET**, 29 scored waves across both halves, uninstall included; and the uninstall log caught the defect on the save's OWN shipped preset with no mod installed. ⚠️ Owner-approved PROVISIONALLY; chain prompt 12 job 8 reviews the decision and reversal is a legitimate outcome — decide it on the per-preset RATE TABLE on this entry, not on PT-61's numbers]`
 
 **Defect.** The natural dust-devil scheduler draws its wave size as
 
@@ -8108,6 +8108,100 @@ enumerated in the module header.
   shared `DataPatch` runner (an apply-time preset test would be the F75
   false-inactive bug).
 
+## ✅ VERIFIED IN PLAY 2026-08-02 (PT-61, chain prompt 8c) — ALL TEN PREDICTIONS MET
+
+Save `d10test1`, `Atmosphere 0`, dust storms disabled at the map, natural
+scheduler only (three feature-marker threads swept after every restart). Logs
+`Mars.exe-20260802-16.25.43` (A/B) and `-17.02.15` (uninstall). Cadence
+compressed to one wave per 4 game hours by console preset edit — **fix
+verification, not reachability evidence** (FIX_POLICY §4a), except where noted at
+the end, which is the opposite.
+
+**The instrument scored itself.** The TestKit's `DustDevils` logger prints one
+`WAVE n RESULT` line per completed wave carrying predicted range, attempts,
+devils made and a verdict, and it only advances its tally when
+`CurrentThread() == rawget(_G, "DustDevils")` — so console reads cannot split a
+wave. **Every number below is the game's own count, not a reading off the map.**
+
+| half | waves | attempts per wave | verdict |
+|---|---|---|---|
+| **vanilla** (fix vetoed live) | 9 | 3, 3, **4**, 3, 3, 3, 3, **4**, 3 | 9/9 MATCH |
+| **F97, gate passed** | 13 | **6**×4, **7**×7, **8**×2 | all MATCH |
+| **F97, gate failed** | 7 | 0 | all MATCH |
+
+* **P3 — the defect, measured.** Nine vanilla waves produced **only 3s and 4s.
+  Never 0, never 6, 7 or 8.** The authored range did not occur once. Seven 3s to
+  two 4s is the predicted 2:1 shape — `Random(6,8) * 50 / 100` truncates draws 6
+  *and* 7 to 3, and only 8 to 4.
+* **P6 — the discriminator, met twice.** Waves 24 and 27 each attempted **8**, a
+  value vanilla cannot compute from this preset under any roll.
+* **P4/P5** — every gated descriptor read `spawn_chance=100` with a range of
+  either `6..8` or `0..0` and nothing else; **20/20 MATCH**, zero `UNDER`, zero
+  `OVER`, attempts equal devils made in every wave.
+* **P7** — **zero `[LUA ERROR]` in either log**, and zero lines naming any pack
+  file.
+* **P8** — meteors and cold waves unaffected; the other three disasters share
+  `OverrideDisasterDescriptor` and the `original.class` key held.
+
+⭐ **Two instrument checks were run because a claim rested on each, and both are
+recorded in `ENGINE_FACTS.md`:** `GameRandom:Random(max)` is `[0, max-1]` (1005
+under-50 in 2000, min 0 max 99) and `Random(min, max)` is **inclusive** (min 6,
+max 8, top value 652 in 2000). The second had only ever been *inferred*, and
+F97's headline claim is that `count_max` becomes reachable — had the form been
+half-open the claim would have been false for a reason in the engine.
+⚠️ **`GetRandomPassableAwayFromBuilding` returned nil 0 times in 500**, which
+retires the instrument's one blind spot: the loop never broke early on this map,
+so ATTEMPTED equals the computed count exactly and every 7 is a drawn 7.
+
+### P9 — the copy survives a save boundary (the §3a claim, observed)
+
+Paused on a `WAVE descriptor` reading `count=6..8 gated=YES`, saved, reloaded,
+and let the in-flight wave finish **without restarting the thread**:
+`WAVE 31 RESULT | F97 gated | predicted 6..8 | ATTEMPTED 6 | MATCH`. The plain
+table our fix built **before** the save serialised, deserialised, and drove the
+wave correctly on the other side — marker intact, no error. ⭐ The reload also
+reverted the map to `DustDevils_Low` (`ApplyDisasterSettings`), and the fix gated
+the *new* preset correctly on its next read, so a **second preset** was verified
+for free.
+
+### P10 — uninstall: the colony keeps its dust devils, and the residue clears in one wave
+
+Saved holding a gated `6..8` copy, quit, **disabled the pack in the Mod Manager**
+(Test Kit left on), relaunched, loaded, touched nothing:
+
+| | |
+|---|---|
+| `SMRFixPack` | `nil` — the pack is genuinely gone |
+| the carryover wave | ⭐ **8 devils**, the top of the range, driven by the persisted copy |
+| the very next descriptor read | `id=DustDevils_Low spawn_chance=50 count=1..2 \| **gated=no (vanilla numbers)**` |
+| `[LUA ERROR]` / lines naming the pack | **0** |
+| the two waves after | `vanilla \| predicted 0..1 \| MATCH` — normal service |
+
+**The `Fix_MeteorFrequency` failure mode did not happen and could not have**
+(F86 Site 1 left a colony with no meteor scheduler permanently). We own no body
+and no thread; the only thing of ours in that save was a plain table, which
+vanilla read once, used, and replaced on the next cycle. **The "self-heals
+within one wave" claim on this entry is now observed, not argued.**
+
+### ⭐⭐ AND THE UNINSTALL LOG IS REACHABILITY EVIDENCE, WHICH THE REST OF THIS LEG IS NOT
+
+With the pack removed and the map back on **its own shipped setting** — the save
+was already `DustDevils_Low` before anything was touched, and
+`ApplyDisasterSettings` restored it — the log reads:
+
+```
+WAVE descriptor | id=DustDevils_Low spawn_chance=50 count=1..2 | next wave should be 0..1
+WAVE 1 RESULT | vanilla | predicted 0..1 | ATTEMPTED 0 | MATCH
+WAVE 2 RESULT | vanilla | predicted 0..1 | ATTEMPTED 0 | MATCH
+```
+
+`DustDevils_Low` is authored `count 1..2`. Vanilla computes **`0..1`** — the
+maximum unreachable, the result 0 while `count_min` is 1 — and two consecutive
+waves produced nothing. **That is the defect occurring in ordinary play, on an
+unmodified map setting, with no mod installed.** Until now R1 rested on the source
+enumeration alone. ⚠️ The *observation* needed the TestKit logger; the *state* did
+not.
+
 ## ⚠️ THE RATE QUESTION IS OPEN AND THIS BUILD DOES NOT CLOSE IT
 
 The three controls establish which **shape** these authors write. They say
@@ -8123,6 +8217,59 @@ review it and provide feedback"* — and why **chain prompt 12 carries job 8: re
 the decision, with reversal a legitimate outcome.** ⭐ The route change above
 removes the *cost* side of that review entirely (there is no thread to accept, and
 no §3a site), so what remains for job 8 is purely the rate question.
+
+### ⭐ THE RATE CHANGE, DERIVED FOR EVERY SHIPPED PRESET (2026-08-02, PT-61 write-up)
+
+**Job 8 should decide on this table, not on PT-61's numbers.** Mean devils per
+wave, from `Data\MapSettings-DustDevils.lua` plus the class defaults
+(`spawn_chance` 30, `count_min` 2, `count_max` 4 — `DustDevils.lua:8-10`). Vanilla
+= mean of `floor(n * chance / 100)` over `n` in `[count_min, count_max]`; fixed =
+`chance/100 × mean(count_min..count_max)`.
+
+| preset | chance | count | vanilla can produce | vanilla mean | fixed mean | change |
+|---|---|---|---|---|---|---|
+| **`VeryLow`** ⛔ | 20 | 1..1 | **0, only ever 0** | **0.00** | 0.20 | **0 → 0.2** |
+| `Low` | 50 | 1..2 | 0, 1 | 0.50 | 0.75 | +50% |
+| `High` | 75 | 1..3 | 0, 1, 2 | 1.00 | 1.50 | +50% |
+| `VeryHigh` | 100 | 2..4 | 2, 3, 4 | 3.00 | 3.00 | **0% — untouched, no copy made** |
+| `VeryHigh_1` | 75 | 2..3 | 1, 2 | 1.50 | 1.88 | +25% |
+| `VeryHigh_2` | 75 | 1..2 | 0, 1 | 0.50 | 1.13 | **+125%** |
+| `VeryHigh_3` | 50 | 6..8 | 3, 4 | 3.33 | 3.50 | **+5%** |
+| `GameRule` † | 75 | 2..4 | 1, 2, 3 | 2.00 | 2.25 | +12.5% |
+| `CrystalBig` / `CrystalSmall` † | 30 | 2..4 | 0, 0, 1 | 0.33 | 0.90 | +170% |
+
+† `use_in_gen = false` — not selected by map generation. The Crystals pair are
+marker-driven (`marker_spawn_chance 100`), and the marker path never reads these
+fields, so their natural-scheduler numbers are probably dead. **Do not weight
+them.**
+
+**Three things this table says that PT-61 could not.**
+
+1. ⛔ **`DustDevils_VeryLow` produces EXACTLY ZERO dust devils from the natural
+   scheduler, always** — `Random(1,1) * 20 / 100` = 0, every wave, forever. Only
+   feature-marker devils can appear on such a map. **And it is the FALLBACK
+   descriptor** (`data[…] or data["DustDevils_VeryLow"]`, `DustDevils.lua:64`), so
+   any map whose setting fails to resolve also gets a scheduler that runs forever
+   and spawns nothing. ⭐ **This is the intent argument at its sharpest: a preset
+   named "Very Low" that delivers a flat zero is not a tuning choice.** Together
+   with `VeryHigh_3`, whose authored range is *entirely* unreachable, both
+   extremes of the ladder are broken in the direction the truncation predicts.
+2. ⚠️ **PT-61 measured the LEAST affected preset that anyone actually plays.**
+   `VeryHigh_3` moves +5%. The leg therefore says almost nothing about rate, and
+   its observed vanilla-3.22 vs fixed-4.45 average is **not** the rate change —
+   that sample's gate passed 65% rather than 50%. **Do not quote 4.45 as evidence
+   of anything.**
+3. **The change is not uniform and is largest where counts are small**, because
+   truncation bites hardest when `count_max × chance < 100`. The honest one-line
+   summary is *"the fix roughly restores the authored means, and the authored
+   means are up to twice what the game currently delivers on some presets"* —
+   which is either the repair working or a difficulty change, and that is exactly
+   the judgement job 8 was asked for.
+
+⚠️ **These are means, and the SHAPE change is separate and larger.** On
+`VeryHigh_3` the distribution goes from a metronomic 3-or-4 every wave to bimodal
+0-or-6-8 — observed in PT-61. A player would notice the burstiness long before
+they noticed a 5% mean.
 
 ## Verification — PT-61 (predictions written BEFORE the run)
 

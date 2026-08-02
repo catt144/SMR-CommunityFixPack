@@ -906,10 +906,20 @@ after removal"*), not tier 1:
 is no thread to revive, no global to restore, no persisted field to strip, and
 the one residual self-replaces with vanilla data within one wave of ordinary play.
 
+**Verification. ✅ PT-61 RAN 2026-08-02 AND P10 PASSED — this disposition is
+OBSERVED, not argued.** With the pack disabled in the Mod Manager and the save
+loaded untouched: the colony **produced 8 dust devils** from the persisted copy,
+the very next descriptor read came back `gated=no (vanilla numbers)`, and there
+were **zero `[LUA ERROR]`** and zero lines naming the pack. The residue cleared
+**within one wave**, exactly as the row above claims. ⭐ P9 also passed: the copy
+**survived a save boundary** and drove the far-side wave correctly
+(`predicted 6..8 | ATTEMPTED 6 | MATCH`), which is the only way to test that a
+plain-data residue is genuinely persistable. Original wording follows.
+
 **Verification.** `PLAYTEST_CHECKLIST.md` **PT-61**, predictions written before
 the run. **P10 is the save-safety prediction** — with the pack removed the same
 save keeps producing dust devils and the descriptor reads vanilla numbers again
-within one wave. ⚠️ Until PT-61 runs, everything above is argued, not observed.
+within one wave. ~~⚠️ Until PT-61 runs, everything above is argued, not observed.~~ ✅ **It ran.**
 
 **The lesson worth keeping, and it generalises past this module.** The spec's
 supporting reasoning was individually correct — `:216` really is inside a thread

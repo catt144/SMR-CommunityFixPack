@@ -769,3 +769,64 @@ prompt.
 ⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
 prompt 8c.** No broad search touched it; the one repo-wide `grep` run in this
 sitting was the stale-probe sweep (`TEMPORARY`), which returned zero hits.
+
+### ⭐ PT-61 RAN (2026-08-02, same day) — job 8 now has evidence, and it points at a table rather than at the leg
+
+**F97 is `tested`.** All ten predictions met over 29 scored waves; the full result
+is on the F97 entry and in `PLAYTEST_CHECKLIST.md` PT-61. In one line: vanilla
+produced **only 3s and 4s** across nine waves and never once entered the authored
+`6..8`; the fixed half produced **0 or 6-8** across twenty and reached 8 twice.
+Save-boundary and uninstall both clean, zero `[LUA ERROR]`, and the colony kept
+its dust devils with the pack removed.
+
+**⛔ THE ONE THING JOB 8 MUST NOT DO IS DECIDE ON PT-61'S NUMBERS.** The leg
+measured `DustDevils_VeryHigh_3`, which the per-preset derivation on the F97 entry
+shows is the **least**-affected preset anyone actually plays: **+5% on the mean**.
+Its observed averages (vanilla 3.22, fixed 4.45) are **not** the rate change —
+that sample's gate passed 65% instead of 50%. Decide on the table.
+
+**Two findings on that table that did not exist when job 8 was written:**
+
+* ⛔ **`DustDevils_VeryLow` produces EXACTLY ZERO dust devils from the natural
+  scheduler, always** — `Random(1,1) * 20 / 100` = 0, every wave, forever — **and
+  it is the fallback descriptor** (`DustDevils.lua:64`), so a map whose setting
+  fails to resolve also gets a scheduler that runs forever and spawns nothing.
+  ⭐ **This is the strongest form of the intent argument yet: a preset named "Very
+  Low" that delivers a flat zero is not a tuning decision.** Both ends of the
+  ladder are broken in the direction the truncation predicts — `VeryLow` floors at
+  zero, `VeryHigh_3`'s authored range is entirely unreachable.
+* **The change is not uniform: 0% to +125% across played presets**, largest where
+  counts are small. The honest framing for the owner is *"the fix roughly restores
+  the authored means, and on some presets the authored mean is twice what the game
+  currently delivers"* — repair or difficulty change, which is the judgement asked
+  for.
+
+⭐ **And the reachability standing changed.** The uninstall leg, with **no mod
+installed** and the map back on **its own shipped setting**, logged
+`DustDevils_Low` (authored `count 1..2`) computing `0..1` and producing nothing
+across two consecutive waves. Until then R1 rested on source enumeration alone.
+The *observation* needed the TestKit logger; the *state* did not.
+
+**Job 8's cost side is now empty and its evidence side is full.** Reversal remains
+legitimate and now costs almost nothing — one module, no persisted state, and the
+uninstall path is measured. But it is a rate judgement, and it should be made
+against nine presets, not one.
+
+**Two more job-7 seed lines from the run itself (chain rule 4b):**
+
+* **A verification step that could never have executed, shipped inside a handover
+  and was inherited verbatim into a checklist.** PT-61's terraforming gate check
+  came from prompt 8c's addendum as `rawget(_G, "DustStormsDisabled")` — both
+  `rawget` and `_G` are in `ModEnvBlacklist` (`Mod.lua:1267-1428`) and the console
+  runs in that sandbox, so the line calls a nil value. ⭐ **The failure would not
+  have looked like a broken command; it would have looked like an answer**, and
+  the check's entire job was to stop the sitting before it started. Nobody had run
+  it. **Consider whether console snippets in docs need a "has this ever been
+  executed?" marker** — a snippet that has only ever been *written* is a different
+  artefact from one that has been *run*, and today they are indistinguishable.
+* **A probe that FAILED on correct code**, because it asserted an input the engine
+  cannot supply (`vanilla_count(off, 8)` where the range had been zeroed, so
+  `Random(0,0)` could only return 0). Caught immediately, but the direction
+  matters: a false positive is cheap to notice and a false negative is not, and
+  the wave-file house rules say "assert on the mechanism" without saying "and only
+  on inputs the engine can produce."

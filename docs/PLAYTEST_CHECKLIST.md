@@ -1107,7 +1107,28 @@ Quote the header line and the seven new verdicts; do not chase a total.
    dismissal, and every previous pushback on one of these lines has turned up a
    vanilla defect that was not on our list (WORKFLOW.md).
 
-## PT-61 — F97 dust-devil spawn gate · covers **F97 (C23 item 1)** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 8c
+## ~~PT-61 — F97 dust-devil spawn gate~~ ✅ **RUN 2026-08-02 WITH THE OWNER — ALL TEN PREDICTIONS MET**
+
+> **Result, in one place.** Save `d10test1`, `Atmosphere 0`, storms disabled at the
+> map, natural scheduler only. Logs `Mars.exe-20260802-16.25.43` (A/B) and
+> `-17.02.15` (uninstall).
+> **Vanilla, 9 waves: 3, 3, 4, 3, 3, 3, 3, 4, 3 — never 0, never 6-8.**
+> **F97, 20 waves: 0 ×7, 6 ×4, 7 ×7, 8 ×2 — 20/20 MATCH.**
+> **P6 met twice** (waves 24 and 27 attempted 8, which vanilla cannot compute).
+> **P9**: the persisted copy survived a save boundary and drove the far-side wave
+> (`predicted 6..8 | ATTEMPTED 6 | MATCH`).
+> **P10**: with the pack removed the colony produced **8 devils** from the
+> carryover copy and the next descriptor read `gated=no (vanilla numbers)` —
+> self-healed inside one wave, **zero `[LUA ERROR]`**.
+> ⭐ **Two riders closed for free:** F93's live half (the underground read
+> `disabled` while `MainMap` read `VeryHigh_3` — the nil branch, and the 4-hour
+> cadence never broke), and the defect observed on the save's **own shipped
+> preset** post-uninstall (`DustDevils_Low`, authored `1..2`, computing `0..1`).
+> ⚠️ **The RATE question is NOT settled** — see the per-preset table on BUGS F97.
+> **Lessons that changed the tooling mid-leg are recorded in the steps below;
+> keep them — three of them would each have cost a sitting.**
+
+## PT-61 (as written before the run) — F97 dust-devil spawn gate · covers **F97 (C23 item 1)** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 8c
 
 **One fix, its own leg, because the item earned one.** F97 changes how many dust
 devils a wave produces. It is the only item in the chain whose approval was
