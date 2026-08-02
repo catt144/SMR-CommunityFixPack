@@ -137,7 +137,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C17 | The Man From Mars follow-up rewards nothing              | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
 | C18 | XenoExtraction tech skips now-native ex-DLC extractors   | ?   | **✅ CLOSED — `wontfix` (intent)** | swept 2026-08-02 (prompt 6b): label mechanism read (`Building.lua:413-424,:427-444` — a building carries only `class` + `object_class`, never a parent's); `AutomaticMetalsExtractor` carries `AutomaticMetalsExtractor`/`AutomaticMetalsExtractorBase` and is displayed as a **differently-named building**, so the tech's four-name description promises it nothing. **Positive control found: when this game means "every extractor" it enumerates all of them** (`CommanderProfilePreset.lua:336-385`, ten labels). No promise broken → declined under the §4 bar (entry) |
 | C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | **✅ CLOSED — declined, no defect in Relaunched** | swept 2026-08-02 (prompt 6b): the predicate is membership-only as charged, but it has **exactly two consumers** and the distance term lives at the consumer — `Dome.lua:256-259` gates it on `const.ColonistMinDistToIgnorePassage` (1200m, `_GameConst.lua:134`, *with* the design comment), and `Colonist.lua:1567` adds an 8-dome hop cap. Both escape branches are correct (open-air = safe outside; no shuttles = no alternative). The residual unbounded walk is the **no-passage** case, which is F52's deliberately-open half, not this. ⚠️ **Taking ChoGGi's OG shape would have narrowed F53's reachability test** (entry) |
-| C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | **MECHANISM LOCATED 2026-08-02 (prompt 6b), harm not sized** — the ONLY emitter of `Msg("SectorScanned")` is a **game-time thread that opens with `Sleep(10)`** (`Exploration.lua:88-104`, spawned `:276-280`), so nothing is counted while game time is stopped; probe scanning has no pause gate (`OverviewModeDialog.lua:468-482`). Source cannot say whether the increment is **deferred or lost** → ⭐ one checklist observation written, with the HUD toast as a free visible proxy (entry) |
+| C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | **MECHANISM LOCATED 2026-08-02 (prompt 6b), harm not sized** — the ONLY emitter of `Msg("SectorScanned")` is a **game-time thread that opens with `Sleep(10)`** (`Exploration.lua:88-104`, spawned `:276-280`), so nothing is counted while game time is stopped; probe scanning has no pause gate (`OverviewModeDialog.lua:468-482`). Source cannot say whether the increment is **deferred or lost** → one checklist observation written. **✅ OBSERVATION TAKEN 2026-08-02 (owner, live): DEFERRED, NOT LOST → CLOSED, `wontfix — no player-visible cost`.** Paused: no signal. Unpaused: the **"Sector scanned" voice-over fired**, and `QueueVoice` sits inside `AddHUDNotification` at `:103`, immediately before the `Msg` at `:104` — so the message provably fired on unpause. ⭐ Internal control in the same scan: the synchronous `NewAnomalies` card behaved differently from the `Sleep(10)`-deferred `SectorScanned`. ⚠️ 6b's "on-screen toast" wording was **corrected** — `SectorScanned` is a `HUDNotificationPreset` on `idOverview` with a voice line, **not a popup card** (entry) |
 | C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | **DESTRUCTION ROUTE VERIFIED 2026-08-02 (prompt 6b) — the soft-lock is LOCATED, not proven** → prompt 7. `Sinkhole` carries **neither** `indestructible` **nor** `disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`) and is the **only mystery set-piece in the game without the flag** — Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly all have it. A large meteor reaches `DestroyBuildingImmediate` → `DoneObject` (`Meteors.lua:817-825` → `Building.lua:1371-1393` → `Demolishable.lua:132-141`). Best soft-lock candidate is the **unguarded `_sinkhole:GetMap()`** at `Mystery 11.generated.lua:146`. ⭐ Anomalies are NOT at risk — checked and ruled out (entry) |
 | C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source recovered + read) |
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
@@ -7661,13 +7661,60 @@ quotes verbatim; sources in the audit report §8.
   time, and a single `WaitMsg` loop may or may not be re-armed in time to see
   all of them. **Engine wake-up semantics are not readable from Lua source —
   CANNOT DETERMINE, deliberately.**
-  ⭐ **The observation this needs is free, because the HUD toast is a perfect
-  proxy.** `AddHUDNotification` (`:103`) is the line immediately before the
-  `Msg` (`:104`), in the same thread with no yield between them — so **the
-  on-screen "Sector scanned" notification appears if and only if the mystery
-  counter ticks.** No console, no active Philosopher's Stone run, no
-  TestKit needed. Rider written into `PLAYTEST_CHECKLIST.md` (bug-list-audit
-  rider table). Verdict stays `cand` until it is taken.
+  ⭐ **The observation this needs is free, because the HUD notification is a
+  perfect proxy.** `AddHUDNotification` (`:103`) is the line immediately before
+  the `Msg` (`:104`), in the same thread with no yield between them — so **it
+  fires if and only if the mystery counter ticks.** No console, no active
+  Philosopher's Stone run, no TestKit needed.
+  ⚠️ **CORRECTION 2026-08-02 (found mid-observation, by the reading itself):
+  6b called this "the on-screen toast" and that wording is WRONG — it sent the
+  observer looking for a popup card that does not exist.** `SectorScanned` is a
+  **`HUDNotificationPreset`**, not a `NotificationPreset`
+  (`Data\HUDNotificationPreset.lua:55-61`): `button_id = "idOverview"`, so it
+  attaches to the **Overview button** and plays a **voice line** ("Sector
+  scanned"), and there is **no popup card at all**. The voice is emitted inside
+  `AddHUDNotification` itself (`QueueVoice`, `Lua\X\HUDNotifications.lua:33-36`),
+  so it is just as tight a proxy — but you listen for it, or read
+  `IsHUDNotificationShown("SectorScanned")` (`:111-118`), rather than watch for
+  a card.
+
+  **✅ OBSERVATION TAKEN 2026-08-02 (owner, live, 98-sol save, mystery not even
+  active — the proxy needs no mystery). VERDICT: DEFERRED, NOT LOST. C20 IS
+  CLOSED, `wontfix — no player-visible cost`.**
+  - **Paused:** probe deployed onto an unexplored sector, scan landed. **No
+    "Sector scanned" signal of any kind.**
+  - **On unpause:** the **"Sector scanned" voice-over fired.** Since `QueueVoice`
+    is inside `AddHUDNotification` at `:103`, immediately before the `Msg` at
+    `:104` with no yield, **the message provably fired on unpause.** The
+    increment is deferred by exactly the pause, then delivered.
+  - **The stall in the pause window is REAL and stays confirmed** — the source
+    trail above is unaffected. What is now settled is the half source could not
+    reach: **it costs the player nothing**, because game time resuming is
+    precisely what the sleeping thread was waiting for.
+  - ⭐ **INTERNAL CONTROL, confirmed on timing by the observer** — this is the
+    strongest part of the reading and it was free. The same scan raised **two**
+    notifications and they split **exactly** on the pause boundary:
+    **`NewAnomalies` appeared BEFORE the unpause** (a plain `NotificationPreset`
+    raised synchronously on the reveal, `Lua\Buildings\Anomaly.lua:444`), while
+    **`SectorScanned` fired the instant the game was unpaused and not before**
+    (behind the `Sleep(10)` game-time thread, `Exploration.lua:88-104`).
+    **What that additionally proves, and why it matters more than the voice
+    alone:** the scan itself **executed under pause** — `MapSector:Scan` ran and
+    the anomaly revealed — while the `Msg` did not fire. That is the source
+    trail's claim *"the scan lands, the deposits reveal, and the counter does
+    not move"* observed directly, and it rules out the rival reading that
+    nothing happened while paused at all (e.g. the probe silently refusing to
+    deploy). 6b's located mechanism demonstrated rather than argued.
+  - ⛔ **NOT settled by this reading, and deliberately left open:** routes (a)
+    save/reload while paused and (b) re-scan of the same sector
+    (`DeleteThread(self.notify_thread)`, `:277`), plus the multi-sector
+    re-arm question. **None of them is reachable in ordinary play the way the
+    pause case is**, and the pause case — the actual charge in ChoGGi's
+    sentence — is answered. If anyone wants (a) later, use
+    `IsHUDNotificationShown("SectorScanned")` and **not** the voice:
+    `QueueVoice` is rate-limited by `const.NotificationVoiceCooldown` = **120
+    real seconds** per id (`HUDNotifications.lua:33-36`), so a repeat inside two
+    minutes can be silent and read as a false "lost".
 - **C21 [author] — St. Elmo sinkholes destructible by meteors → mystery
   soft-lock.** ChoGGi (OG): *"Stop meteoroids from destroying sinkholes and
   soft locking the mystery."* Relaunched `Fireflies.lua:116` sets no
