@@ -82,7 +82,23 @@ them on load.
 on that label) instead of identity, and additionally **remove duplicates** already
 present, so saves inflated by the broken version are repaired.
 
-### Your job 1 — verify it
+### ✅ JOB 1 IS DONE — VERIFIED 2026-08-02, SKIP IT
+
+Verified at the keyboard after a **full game exit and restart** (a Mod Manager
+re-enable was not enough — the edited Lua only loads on a real reload; an
+in-session file edit is invisible to a running game). Fixture `f95 healed`, which
+carried the duplicates:
+
+- after restart + load → **`MetalsExtractor=1 WaterExtractor=1 AutomaticMetalsExtractor=1 MicroGAutoWaterExtractor=1`** (duplicates cleaned, 2 → 1)
+- after save + reload → **still all `=1`** — no re-application, no growth
+
+**The property-keyed test is idempotent across a save boundary and the duplicate
+repair works.** Nothing further owed on F95's heal.
+
+⚠️ **Method note for anyone re-running this:** editing a `Code/*.lua` file while
+the game is open changes nothing in the running session. Exit fully and relaunch.
+
+### Original job-1 instructions, kept for reference only
 
 Fixture already exists: **`f95 healed`** (an Astrogeologist save carrying the
 duplicates). Load it with the pack on and run:

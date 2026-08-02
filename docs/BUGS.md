@@ -7557,9 +7557,15 @@ because `EffectsApply` runs once at game start and nothing re-applies them on lo
 
 **Fix:** test by **property** (`m.prop == effect.Prop` on that label) instead of
 identity, and **remove duplicates already present**, so saves inflated by the
-broken version are repaired. ⚠️ **UNVERIFIED — fixture `f95 healed` carries the
-duplicates; chain prompt 8b-2 job 1 must confirm it heals to `=1` and stays there
-across a second save/load.**
+broken version are repaired.
+
+✅ **VERIFIED AT THE KEYBOARD 2026-08-02** on fixture `f95 healed`, which carried
+the duplicates: after a full restart and load, **all four labels read `=1`** (2 → 1,
+duplicates cleaned); after a further **save and reload, still all `=1`** — no
+re-application, no growth. The property-keyed test is idempotent across a save
+boundary and the repair works. ⚠️ Method note: a full game **exit and relaunch** was
+required — editing a `Code/*.lua` file is invisible to a running session, and a
+Mod Manager re-enable was not sufficient.
 
 ⚠️ **This is the SECOND idempotence defect of the same class in this batch** —
 `Fix_SaintBlessing`'s heal re-applied every load too (fixed `991c5dc`). Both were
