@@ -41,9 +41,9 @@ had gone stale *twice within the same day*: F89 was filed mid-sitting during
 Tier-1 leg 1, and F90 by this session's C04 sweep. The two before it, "98 (87 F
 + 11 D)" and "93", went stale the same way — **this line is the most
 drift-prone number in the project; re-derive it, never carry it forward**),
-**plus 35 `C` candidate rows** (was 11 — the
+**plus 37 `C` candidate rows** (was 11 — the
 2026-08-01 bug-list audit filed C12–C31, its same-day packed-source
-addendum filed C32–C34, and chain prompt 6 filed **C35** the same day; C rows
+addendum filed C32–C34, and chain prompt 6 filed **C35-C37** the same day — **C36 was closed the hour it was filed** (Inner Light is a downstream victim of F81(a), not a new defect); C rows
 are leads, not defects, and are not counted in the 102. **Two more moved
 without changing the count**: C04 is CLOSED and promoted to F90, C32
 DOWNGRADED — both keep their rows as history). **TestKit probes: 78** (re-verified 2026-08-01 by counting

@@ -857,11 +857,22 @@ was out of fuel and got stuck on the asteroid"*), which is the caveat above in
 miniature. **Standing rule, unchanged: "fixed in Relaunched" only from current
 Src.**
 
-#### 10.6d Filed as candidates (two, both current-build and specific)
+#### 10.6d Filed as candidates — and one of them SOLVED itself within the hour
 
-**C36** (Inner Light mystery) and **C37** (planetary anomalies / elevator) — see
-BUGS. Both are single-source and mechanism-free; they are filed rather than
-noted because each names one defect precisely, on the current build.
+- **⭐ C36 (Inner Light) — FILED AND CLOSED THE SAME DAY. It is not a new defect;
+  it is a downstream victim of F81(a), which our pack already fixes.**
+  `Lua\Mysteries\Dream.lua:20-34`: the mirage loop skips `Dream()` for as long as
+  `IsDisasterPredicted()` is true — the exact flag F81(a) strands permanently —
+  so the mystery stops advancing forever, silently. **It explains the reporters'
+  "for some people" precisely** (you are affected iff a meteor storm completed
+  during your run). `REACHABILITY_AUDIT.md` had already listed the Inner Light
+  dream cycle as a downstream victim *as an inference*; the community supplied
+  the observation and Src confirmed the path. **Recorded on F81 as a new
+  player-visible consequence: (a) does not merely stop the weather, it voids a
+  mystery playthrough.**
+- **C37 (planetary anomalies / elevator)** — stands as a candidate:
+  single-source, mechanism unread, but specific, current, and sitting on the
+  same elevator seam **F90** just proved the surrounding code mishandles.
 
 #### 10.6e Noted, NOT filed — with the reason in each case
 
@@ -935,11 +946,43 @@ freeze arrives later with nothing to connect it to.
    `[LUA ERROR]` instead of trusting "it seemed fine". **A playtest leg that
    reports "no crash" has measured nothing; the log is the instrument.**
 
+**⭐ MECHANISM REFINED (owner, 2026-08-01) — the engine's answer to bad state is
+a HANG, not a crash, and that is why the two categories collapse.** During the
+F86 investigation an agent induced **massive save degradation**, and the session
+had to be ended by **force-stopping the game**. Under abuse severe enough to
+require a kill, **it still did not crash.** Combined with mizushimo's endpoint —
+*"makes the save unplayable by **freezing in the same point in time every
+reload**"* — the chain is almost certainly not `defect → process crash`. It is:
+
+> **defect → wedged or runaway state → the game stops responding → the player
+> force-quits → the player reports "it crashed."**
+
+That is a **stronger** version of the connection, not a weaker one. It means
+much of the community's "crash" volume is likely the **hang/freeze class, which
+IS the state-corruption class** — the class this pack is largely aimed at. It
+also fits the engine: Lua errors here are usually swallowed by `procall` rather
+than fatal, so a defect cannot easily kill the process; it can only leave the
+world wrong until something spins or blocks forever. Every wedged-thread defect
+we hold (F02, F78, F81b, F88, F89) is exactly that shape.
+⚠️ **Unmeasured.** The incident is the owner's account and is not anchored to a
+log or leg in these docs — **if anyone can identify the session, anchor it**,
+because an induced-degradation case that did *not* crash is a useful control in
+its own right.
+
 **Recorded as a framing correction, not a finding.** No measurement here ties
 any specific crash to any specific defect, and some reports are plainly
 unrelated (one commenter's PC froze while changing graphics settings). The
 claim is only that the community's two categories are one category, and that
 treating them as two makes defect incidence look smaller than it is.
+
+**⭐ And §10.6 supplied a worked example of the same blindness at the DEFECT
+level, not the crash level:** one commenter gave two unconnected pieces of
+advice — *"install the disasters patch mod"* and *"avoid Inner Light"* — which
+a source read (`Lua\Mysteries\Dream.lua:20-34`) showed to be **one defect**,
+F81(a), whose stranded `IsDisasterPredicted()` flag freezes the Inner Light
+dream loop forever. **Players do not group symptoms by cause, because they
+cannot see causes.** Any future reading of community evidence should assume the
+report count over-counts distinct defects and under-counts their severity.
 
 ##### 10.6f(i) Our own sample — a real observation, and why it is NOT a control
 

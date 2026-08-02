@@ -149,7 +149,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
 | C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
 | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
-| C36 | "Inner Light" mystery does not complete for some players | ?   | cand | filed 2026-08-01 from two **current** Reddit threads (§10.6) — same commenter twice advises newcomers to avoid it; **"for some people" is a race/state-gate tell, i.e. F06's shape**. Single source, no mechanism. Next step: read the Inner Light sequence for a one-shot `Msg` or a popup-gated completion (entry) |
+| C36 | "Inner Light" mystery does not complete for some players | ?   | **✅ SOLVED — not a new defect** | filed AND closed 2026-08-01: **it is a downstream victim of F81(a), which our pack already fixes.** `Dream.lua:20-34` — the mirage loop skips `Dream()` whenever `IsDisasterPredicted()`, the exact flag F81(a) strands permanently true, so the mystery stops advancing forever. **Explains the reporters' "for some people" precisely** (depends on whether a meteor storm completed). ⭐ One commenter gave two unconnected pieces of advice — "install the disasters mod" and "avoid Inner Light" — for one defect (entry) |
 | C37 | Planetary anomalies don't pull colonists up the elevator — blocks a purely-underground colony | ?   | cand | filed 2026-08-01 from a **hours-old** Reddit thread (§10.6); specific, current, names the seam. **Same elevator boundary F90 just proved the code mishandles.** Single source, unverified. Next step: is the anomaly colonist-transfer path map-aware? (entry) |
 | C35 | Edit Payload confirmed while units are on the cargo ramp tears down the rocket's command-centre connection **with no wait**, where the takeoff path doing the same thing waits | ?   | cand | filed 2026-08-01 by the prompt-6 fredware-#11 comparison — **real gap vs F67/F68/F70/F71 (different function, zero overlap), mechanism traced, HARM UNPROVEN**; ⚠️ not a prompt-7 package until a live repro exists (entry) |
 | C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | **DOWNGRADED 2026-08-01 (prompt-6 Src sweep): no route in current Src; his fix's firing explained by destroyed buildings; 1.0.7 killed the named trigger, not the mechanism — and F04's reassignment lost its positive evidence** |
@@ -4080,6 +4080,46 @@ defect's real-world weight can be observed at all. ⚠️ Read `BUG_LIST_AUDIT.m
 enthusiast "no bugs" testimony in the same threads is data about the speaker,
 not the build.
 
+**⭐⭐ AND THE SAME COMMENTER, IN THE SAME BREATH, DESCRIBED A SECOND SYMPTOM OF
+THIS SAME DEFECT WITHOUT KNOWING IT — (a) SILENTLY KILLS THE "INNER LIGHT"
+MYSTERY. Verified in Src this session; this is a NEW player-visible consequence
+for this entry.** Alongside "install the disasters mod", mizushimo twice tells
+newcomers *"**Inner light is broken for some people** so pick a different
+mystery."* Those are not two bugs.
+
+`Lua\Mysteries\Dream.lua:20-34` — Inner Light is `DreamMystery` (`:4,:6`) and
+advances by dreams. Its mirage thread is:
+```lua
+while UIColony.mystery.state == "running" do
+    if IsDisasterPredicted() or IsDisasterActive() then
+        Sleep(5000)
+    else
+        Dream(city) ; Sleep(...)
+    end
+end
+```
+**`IsDisasterPredicted()` is the flag this entry's (a) half strands permanently
+true.** Once stranded, the loop takes `Sleep(5000)` forever, `Dream()` never
+fires again, the scenario's `WaitMsg("MysteryDream")` (comment at `:24`) never
+returns, and **an entire mystery playthrough dies silently** — no error, no
+notification, just a story that stops.
+
+**It also explains the reporters' "for some people" exactly**, which is what
+lifts this above a guess: you are affected iff a meteor storm completed (or a
+Capture Meteors POI fired) during your run. That is the same precondition this
+entry's own reachability story already uses.
+
+**Half of this was already on the books and nobody joined it up.**
+`REACHABILITY_AUDIT.md`'s F81 block already listed *"the Inner Light dream
+cycle"* among the leak's downstream victims — as a code inference, never
+observed. The community supplied the observation; the source read above
+confirms the path. **Consequence for this entry: (a)'s player-facing cost is
+larger than "the weather stops" — it silently voids a mystery.** Filed and
+closed as **C36**.
+**Not proven:** nobody has watched Inner Light *recover* under our fix. Cheap
+settling observation if wanted — stall it, apply the pack, see whether dreams
+resume. Not scheduled.
+
 **⛔ PT-54 RETIRED UNRUN 2026-08-01 — and this entry is the one that keeps a
 LIVE OBLIGATION out of it.** The test was withdrawn by the project prompt
 chain because the F86 Tier-1 build deletes and replaces the `Fix_RainsDeadlock`
@@ -7636,23 +7676,52 @@ quotes verbatim; sources in the audit report §8.
   firing in the wild — is fully explained by destroyed buildings, and (c) its
   named trigger cannot occur unattended on our build. Decision package is
   prompt 7's.
-- **C36 — the "Inner Light" mystery does not complete for some players (current
-  build).** Filed 2026-08-01 from two **current** Reddit threads
-  (`BUG_LIST_AUDIT.md` §10.6, [S37]/[S38]). Same commenter, twice, days apart,
-  as standing advice to newcomers: *"At least one mystery is broken for some
-  people so **avoid Inner Light**"* and *"**Inner light is also broken for some
-  people** so pick a different mystery."*
-  **Why it is filed rather than noted:** it names **one** mystery precisely, on
-  the build we ship against, and it lands in a family we already hold two
-  entries in — **F06** (Philosopher's Stone: a one-shot `Msg` missed behind a
-  player-gated popup) and **F16**. The *"for some people"* qualifier is itself a
-  tell for a **race or a state-dependent gate** rather than a flat data error —
-  which is F06's shape exactly.
-  ⚠️ **Single source (one commenter), no mechanism, no version stamp, and no
-  description of the failure beyond "broken".** Nobody has looked at Inner
-  Light's scenario file. **Next step: read the Inner Light sequence for the F06
-  pattern** — a one-shot message, or a completion gate behind a popup wait.
-  Cheap, and it either lands in the mystery-stall family or closes.
+- **C36 — "Inner Light" does not complete for some players. ✅ SOLVED THE SAME
+  DAY IT WAS FILED — it is NOT a new defect. It is a downstream victim of
+  F81(a), and OUR PACK ALREADY FIXES IT.** Filed and closed 2026-08-01.
+  **Filed from** two **current** Reddit threads (`BUG_LIST_AUDIT.md` §10.6,
+  [S37]/[S38]), same commenter twice, days apart, as standing advice to
+  newcomers: *"At least one mystery is broken for some people so **avoid Inner
+  Light**"* and *"**Inner light is also broken for some people** so pick a
+  different mystery."*
+  **Solved by reading Src this session** (`Lua\Mysteries\Dream.lua:20-34`).
+  Inner Light **is** `DreamMystery` (`:4` `scenario_name = "Mystery 4"`, `:6`
+  `display_name = "Inner Light"`), and it advances by dreams. The mirage loop is:
+  ```lua
+  while UIColony.mystery.state == "running" do
+      if IsDisasterPredicted() or IsDisasterActive() then
+          Sleep(5000)
+      else
+          Dream(city) ; Sleep(...)
+      end
+  end
+  ```
+  **`IsDisasterPredicted()` is precisely what F81(a) strands permanently true** —
+  every meteor storm that completes normally leaks `g_DisastersPredicted`
+  (`MapSettings.lua:169/176`; `Meteors.lua:179` with no removal on the normal
+  tail). Once stranded, this loop takes the `Sleep(5000)` branch **forever**, no
+  `Dream()` ever fires again, the scenario's `WaitMsg("MysteryDream")` (see the
+  comment at `:24`) never returns — **and the mystery silently stops advancing.**
+  **It also explains the "for some people" qualifier exactly**, which is what
+  makes this more than a guess: whether you are affected depends on whether a
+  meteor storm has completed (or a Capture Meteors POI has fired) during your
+  run. Players who never stranded the flag see Inner Light work fine.
+  **This was half-recorded and never joined up.** `REACHABILITY_AUDIT.md` §F81
+  already listed *"the Inner Light dream cycle"* among the leak's downstream
+  victims. What was missing was that it lands in play — the community supplied
+  that, and the source read confirms it. Recorded fact, now verified rather
+  than inherited.
+  ⭐ **The wider point, and it is the best illustration this project has of it:
+  ONE commenter gave TWO separate pieces of advice — "install the disasters
+  mod" and "avoid Inner Light" — for what is almost certainly ONE defect.**
+  Players experience a single root cause as several unrelated "bugs" and never
+  connect them (see `BUG_LIST_AUDIT.md` §10.6f).
+  **Disposition: no F-row, no new fix.** F81's `Fix_DisasterPredictionLeak`
+  removes the leak and sweeps stranded flags on load, so a pack user's Inner
+  Light run should simply work. **What is NOT proven:** nobody has watched Inner
+  Light recover live. **Cheap settling observation if anyone wants it** — on a
+  save with the flag stranded, confirm the mystery is stalled, apply the pack,
+  and see whether dreams resume. Recorded on F81, not scheduled here.
 - **C37 — planetary anomalies do not pull colonists up the elevator, blocking a
   purely-underground colony (current build).** Filed 2026-08-01 from [S38], a
   thread **hours old** at the time of reading, from a commenter describing their
