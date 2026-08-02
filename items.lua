@@ -318,6 +318,10 @@ return {
 		'CodeFileName', "Code/Fix_AstrogeologistExtractors.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_SinkholeIndestructible",
+		'CodeFileName', "Code/Fix_SinkholeIndestructible.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

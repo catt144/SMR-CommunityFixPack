@@ -123,7 +123,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F93 | The dust-devil scheduler reads its descriptor from the map the **player is looking at**, not the map it spawns on | P2 | SOURCE-VERIFIED | **built 2026-08-02 (chain prompt 8b) as `Fix_DustDevilsDescrMap` — ⚠️ UNRUN, the batch leg is 8b's.** Promoted from C23 item 2 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.4b global replacement (7 lines from `DustDevils.lua:58-66`, build 1.0.7.396349, `CurrentMap` → `MainMap` on both reads, installed via `SetGlobal`'s read-back), probe `DustDevilsDescrMap` written. Two spec-wording corrections recorded on the entry: the preset half of the self-check moved off apply onto `DataPatch` (an apply-time absence test is the F75 false-inactive bug), and the runner carries no `changed_class` filter. The thread pins `local map = MainMap` (`DustDevils.lua:198`) and uses it everywhere except in `GetDustDevilsDescr`, which takes no map and reads `CurrentMap.mapdata` twice (`:58-66`); the descriptor is **re-read every cycle** (`:234-238`), and `CurrentMap` is the camera's map (`ChangeCurrentMapSlot` → `SetCurrentMap`, `CommonLua\Core\map.lua:389-404`). Viewing the underground therefore either parks the surface scheduler a day at a time or hands it the **other map's intensity**. **R1**; all three callers are in that one thread. Fix = §1.4b global replacement, 7 lines, `CurrentMap` → `MainMap`; nothing enters the save. Siblings from the same bundle got different answers — see C23 (entry) |
 | F94 | An operator-precedence slip makes **any parked supply rocket** satisfy the asteroid-visit gate — the picker opens with no lander to pick | P3 | SOURCE-VERIFIED | **built 2026-08-02 (chain prompt 8b) inside the existing `Fix_AsteroidLanderAvailable` — ⚠️ UNRUN, the batch leg is 8b's.** Promoted from C24 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.4b body copy (12 lines from `PlanetaryView.lua:433-444`, build 1.0.7.396349, one added pair of brackets) with F72's scan appended where vanilla's `return false` was; no new registry id; probe `AsteroidVisitPrecedence` written. **F72's module header and its BUGS entry were both corrected in the same commit** — the chained delegation they advertised is gone, because a wrapper cannot filter a false positive. `PlanetaryView.lua:439` — `and` binds tighter than `or`, so `IsKindOf(rocket, "LanderRocketBase")` qualifies only the first of three clauses. **R1**: `SupplyRocketBase` descends from `RocketBase` alone (`SupplyRocket.lua:1-3`) and parks in `WaitLaunchOrder` (`RocketBase.lua:643, :699`), which the detached clause accepts. The picker's own list keeps only non-pod `UniversalRocketBase` rockets (`PlanetUI.lua:1623-1635`), so it comes up empty. Tells: a guard that cannot fire, and the branch 3 lines above plus `EarthVisitPossible` both bracket the same idiom correctly. ⚠️ Repairing a false positive means owning the predicate — F72's chained delegation cannot survive, and its header says otherwise today (entry) |
 | F95 | The Astrogeologist profile promises an unqualified "Extractor production increased by 10%" and pays **10 of the 12** buildable extractors | P3 | SOURCE-VERIFIED | **built 2026-08-02 (chain prompt 8b) as `Fix_AstrogeologistExtractors` — ⚠️ UNRUN, the batch leg is 8b's.** Promoted from C38 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 additive patch (two `Effect_ModifyLabel` entries via `PlaceObj`, idempotent append) plus a load-time heal that calls vanilla's own `OnApplyEffect`; probe `AstrogeologistExtractors` written. One spec name corrected on the entry: the method is `OnApplyEffect`, not `__exec`. `CommanderProfilePreset.lua:333` (the promise), `:336-385` (ten `Effect_ModifyLabel` entries), omitting `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor` — both buildable, both carrying the modified prop. ⭐ **The list is curated by a rule these two satisfy**: the shared `Extractors` label exists (16 templates) and is deliberately unused because it would add 3 non-extractors and 2 `hide_from_build_menu` legacy templates — leaving these two as the only unexplained exclusions, and 12 buildable / 10 paid closes exactly. **R1.** Fix = two additive entries built with `PlaceObj` (F87 rule) + a load-time heal for existing saves. ⚠️ The counter-reading (a deliberate balance carve-out) is recorded on the entry — this is the package to veto if the owner reads it that way (entry) |
-| F96 | The St. Elmo's Fire sinkhole is the **only** mystery set-piece in the game a meteor can destroy | P3 | SOURCE-VERIFIED | **open — promoted from C21 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt **8b** (prompt 8 split under rule 3).** `Sinkhole.generated.lua:1-24` carries neither `indestructible` nor `disasters_strike_immunity`; the meteor chain reaches `DestroyBuildingImmediate`, whose only guard is that flag (`Building.lua:1371-1374`). **Tell:** every other set-piece has it (Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly, BottomlessPit, AncientArtifact, DragonRocket, DropPod) and the property's help text names meteors (`Building.lua:209`). **R2.** Fix = **§1.1 preset patch**, one boolean, and its side effects were enumerated: the other two consumers are already-false paths for this template, so it changes exactly one behaviour. ⚠️ The soft-lock at `Mystery 11.generated.lua:146` stays **located, not proven** — and the package does not rest on it (entry) |
+| F96 | The St. Elmo's Fire sinkhole is the **only** mystery set-piece in the game a meteor can destroy | P3 | SOURCE-VERIFIED | **built 2026-08-02 (chain prompt 8b) as `Fix_SinkholeIndestructible` — ⚠️ UNRUN, the batch leg is 8b's.** Promoted from C21 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 preset patch through `SMRFixPack.DataPatch`, on both targets — and the entry records which is which: the **class table** is load-bearing (instances have no own field and fall through to it, which is how it reaches existing saves with no sweep), while `BuildingTemplates.Sinkhole` is a rebuilt-every-`ClassesBuilt` proxy that already inherits it (`Building.lua:2566`) and is belt. Probe `SinkholeIndestructible` written. `Sinkhole.generated.lua:1-24` carries neither `indestructible` nor `disasters_strike_immunity`; the meteor chain reaches `DestroyBuildingImmediate`, whose only guard is that flag (`Building.lua:1371-1374`). **Tell:** every other set-piece has it (Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly, BottomlessPit, AncientArtifact, DragonRocket, DropPod) and the property's help text names meteors (`Building.lua:209`). **R2.** Fix = **§1.1 preset patch**, one boolean, and its side effects were enumerated: the other two consumers are already-false paths for this template, so it changes exactly one behaviour. ⚠️ The soft-lock at `Mystery 11.generated.lua:146` stays **located, not proven** — and the package does not rest on it (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -7470,7 +7470,7 @@ effect objects: the modifier is keyed by identity, not by name.
 by scanning `BuildingTemplates`** rather than hardcoded, so the probe also catches a
 future template arriving unpaid.
 
-### F96 — The St. Elmo's Fire sinkhole is the only mystery set-piece in the game a meteor can destroy (P3, SOURCE-VERIFIED)  `[open — promoted from C21 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8b (prompt 8 split under rule 3)]`
+### F96 — The St. Elmo's Fire sinkhole is the only mystery set-piece in the game a meteor can destroy (P3, SOURCE-VERIFIED)  `[built 2026-08-02 by chain prompt 8b as `Code/Fix_SinkholeIndestructible.lua` — §1.1 preset patch through SMRFixPack.DataPatch, one boolean on the class table (load-bearing) and one on the BuildingTemplates proxy (belt); probe SinkholeIndestructible written. ⚠️ UNRUN — the batch leg is 8b's]`
 
 **Defect.** `Sinkhole` carries neither `indestructible` nor
 `disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`, re-read this
@@ -7565,6 +7565,39 @@ about the mystery, the meteor, or the building changes.*
 Cross-refs: **C21** (the candidate this promotes), F31/F90 (the other
 disaster-reaches-where-it-should-not family), `Mystery 11.generated.lua:146`
 (the unguarded consumer, recorded but not claimed).
+
+## ✅ BUILT 2026-08-02 (chain prompt 8b) — `Code/Fix_SinkholeIndestructible.lua`
+
+One boolean, installed through `SMRFixPack.DataPatch`, on both targets the spec
+named. The template was re-read this session
+(`Lua\BuildingTemplate\Sinkhole.generated.lua:1-24`): still no `indestructible`,
+still `can_demolish = false` `:10`, `use_demolished_state = false` `:11`,
+`count_as_building = false` `:23` — so all three enumerated side-effect sites are
+still already-false paths for this template and the flag still changes exactly one
+behaviour.
+
+**⭐ Which of the two writes is load-bearing turned out to matter, and the answer
+is the class table — not the template.** `BuildingTemplates.Sinkhole` is not the
+preset: `SetupBuildingTemplateTables` builds it as a **thin proxy**,
+`setmetatable({ template_name = id }, g_Classes[id])` (`Building.lua:2566`), and
+rebuilds every proxy on each `ClassesBuilt`/`DataChanged` (`:2560-2578`). So a
+write there is transient *and* redundant — the proxy already inherits whatever the
+class says. Meanwhile the actual consumer, `DestroyBuildingImmediate`, reads
+`bld.indestructible` on the **instance**, which has no own field and falls through
+to the class default. **That is the mechanism by which this reaches objects
+already placed in a save with no sweep at all**, exactly as the spec claimed —
+and it works because after flattening the class-name global *is* the flattened
+class (`classes.lua:1085` rebinds `_G[name]` to `classes[name]`), and the runner
+fires from `ClassesBuilt`.
+
+Both writes are still made, as specced. The proxy one is belt, costs one
+assignment, and is documented in the header as belt rather than left looking
+load-bearing.
+
+**Probe:** `SinkholeIndestructible` — asserts the class default is `true` and that
+`BuildingTemplates.Sinkhole` agrees, plus the live half asserting no `Sinkhole`
+instance carries an own-field override (which is what guards the
+reaches-existing-saves claim above rather than merely restating it).
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
