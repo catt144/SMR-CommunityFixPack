@@ -1179,6 +1179,16 @@ MainMap.mapdata.MapSettings_DustStorm = "disabled"
 *r MainMap:MapForEach(true, "PrefabFeatureMarker", function(m) if m.FeatureType == "Dust Devils" and m.thread then DeleteThread(m.thread) m.thread = false end end)
 ```
 
+**Confirm the setup took before relying on it** — and note the `print_format`
+wrapper, for the reason given under the smoke test:
+
+```
+*r local p = Presets.MapSettings.DustDevils.DustDevils_VeryHigh_3 ConsolePrint(print_format(p.id, p.spawntime, p.spawntime_random, p.warning_time, p.spawn_chance, p.count_min, p.count_max))
+```
+
+⛔ **`spawn_chance 50`, `count_min 6`, `count_max 8` must be untouched** — those
+three are the discriminator, and the leg proves nothing if any of them moved.
+
 **Why each line is there, because three of them are not optional:**
 
 * ⛔ **The restart is mandatory or the leg does not start.** The scheduler is
@@ -1255,11 +1265,22 @@ The repair is visible without waiting for a single wave, because the descriptor
 getter is pure. Run this a dozen times:
 
 ```
-*r local d = GetDustDevilsDescr() ConsolePrint(tostring(d and d.spawn_chance), tostring(d and d.count_min), tostring(d and d.count_max), tostring(d and d.SMRFixPack_spawn_gate))
+*r local d = GetDustDevilsDescr() ConsolePrint(print_format(d and d.id, d and d.spawn_chance, d and d.count_min, d and d.count_max, d and d.SMRFixPack_spawn_gate))
 ```
 
-**Expect `100  6  8  true` and `100  0  0  true` in roughly equal numbers.** With
-`SMRFixPack_Disabled.DustDevilSpawnGate = true` expect `50  6  8  nil` every time.
+⛔ **`ConsolePrint` takes exactly ONE string argument** (`LuaSharedLib.lua:7`, a
+native binding). A multi-argument call **prints nothing at all and reports no
+error** — found the hard way on 2026-08-02, when PT-61's own setup-confirmation
+line silently produced no output and looked like a console that had stopped
+responding. Wrap the values in **`print_format(...)`** (`lib.lua:95`), which is
+exactly what the console's own expression rule does, or concatenate into one
+string yourself. This applies to every `*r ... ConsolePrint(...)` snippet in this
+document.
+
+**Expect `DustDevils_VeryHigh_3  100  6  8  true` and
+`DustDevils_VeryHigh_3  100  0  0  true` in roughly equal numbers.** With
+`SMRFixPack_Disabled.DustDevilSpawnGate = true` expect
+`DustDevils_VeryHigh_3  50  6  8  nil` every time.
 If that does not happen, stop — the leg cannot succeed and the fault is upstream
 of any timing. ⚠️ Each call consumes one `SessionRandom` draw and does **not**
 touch the running scheduler (it holds its own descriptor); a dozen draws is

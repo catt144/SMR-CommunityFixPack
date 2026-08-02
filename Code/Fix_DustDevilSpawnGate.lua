@@ -182,7 +182,22 @@ local function plain_copy(descr)
 		return
 	end
 
-	copy.class = descr.class   -- self-describing for a save inspector; unread by the game
+	-- Self-describing for a save inspector and for the D13 cleaner; neither is
+	-- read by the game. `id` is carried EXPLICITLY because the property walk
+	-- cannot reach it: `Id` is a declared Preset property (CommonLua\Preset.lua
+	-- :42) but it is ACCESSOR-BACKED — the value lives in the lowercase `self.id`
+	-- field (:96) behind `Preset:GetId` (:400) — so plain indexing of `Id` reads
+	-- nil. Observed 2026-08-02 on PT-61's first WAVE line, which printed
+	-- `id=nil` for a copy while vanilla's own descriptor prints its id.
+	-- ⚠️ Honest limit of this copier, stated once: it snapshots PLAIN-FIELD
+	-- properties. Any property served by a `GetX()` accessor rather than a
+	-- stored field is not resolved, and `Id` is the only one this class has that
+	-- matters. That is deliberate — the alternative is a native `GetProperty`
+	-- call per property per wave, and NO consumer of this descriptor reads an
+	-- accessor-backed property (all of them are plain numbers and booleans;
+	-- enumerated in the header).
+	copy.class = descr.class
+	copy.id = descr.id
 	copy[MARK] = true
 	return copy
 end

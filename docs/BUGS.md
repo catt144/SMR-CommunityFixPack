@@ -8036,6 +8036,22 @@ timer is re-rolled and no version latch is needed. Existing saves are reached by
 themselves, with **no load-time action at all**: the running thread picks the fix
 up at its next descriptor re-read, i.e. within one wave.
 
+⚠️ **The copy snapshots PLAIN-FIELD properties only, and one field had to be
+carried by hand** (found on PT-61's first live `WAVE` line, 2026-08-02). `Id` is a
+declared `Preset` property (`CommonLua\Preset.lua:42`) but is **accessor-backed** —
+the value lives in the lowercase `self.id` field (`:96`) behind `Preset:GetId`
+(`:400`) — so plain indexing of `Id` reads nil and the property walk cannot reach
+it. `copy.id` is therefore assigned explicitly alongside `copy.class`. ⭐ **This
+was not cosmetic:** `PLAYTEST_CHECKLIST.md`'s **F93 dust-devil map rider** reads
+`d.id` off the live descriptor to say which preset the scheduler is using, and a
+gated copy without it would have printed *"descriptor with no id"* — an F97
+artefact that would have read as an F93 failure. The general limit is recorded on
+the module: a property served by a `GetX()` accessor rather than a stored field is
+not resolved, which is deliberate (the alternative is a native `GetProperty` call
+per property per wave) and safe here because **no consumer of this descriptor
+reads an accessor-backed property** — all of them are plain numbers and booleans,
+enumerated in the module header.
+
 **Honest limits, recorded rather than hidden.**
 
 * The repair consumes **one extra `SessionRandom` draw per wave**, so a save's
