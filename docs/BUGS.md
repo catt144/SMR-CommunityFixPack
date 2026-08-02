@@ -4044,7 +4044,7 @@ WorkServiceTrain gate, returning a service the transport layer can already
 ticket. Cross-refs: F80 (boarding anomaly found in the same session), PT-43
 F21 (the test whose setup surfaced this).
 
-### F80 — Trains stop at a platform and skip valid waiting passengers (P2, med)  `[investigating — observed live 2026-07-28; mitigated by adding trains; unexplained]`
+### F80 — Trains stop at a platform and skip valid waiting passengers (P2, med)  `[investigating — observed live 2026-07-28; mitigated by adding trains. NO LONGER "unexplained": the 2026-08-02 source audit (chain 6c) gives an exact predicate — `traverse_dir` is never normalised to ±1 (`TrainTransport.lua:374`) and a stride ≠ ±1 hits a missing `link_edge` and HARD-RETURNS (`:417`), dropping the tail silently, which explains BOTH the waits and the walks from one function. ⛔ The TRIGGER is still unproven — stays `investigating`]`
 **Observed (2026-07-28, live):** a colonist with a fully valid transport
 ticket (`stage = Waiting`, both stations valid) sat at a station for 17+
 game hours while at least four trains stopped, exchanged cargo, and left
@@ -4641,7 +4641,7 @@ or a loaded save) keep running the OLD body, so the fix needs a one-shot
 Cross-refs: F78 (same save, same report — this is the weather half), F02 (the
 meteor scheduler watchdog precedent for exactly this class of thread wedge).
 
-### F82 — Split power/life-support grid notification lingers ~a sol after the grid is rejoined (P3, med)  `[filed 2026-07-29 from live observation — needs its own trace]`
+### F82 — Split power/life-support grid notification lingers ~a sol after the grid is rejoined (P3, med)  `[traced AND MEASURED 2026-08-02 (chain 6c) — there is NO removal path at all; it clears only on the preset's REAL-TIME `Expiration = 120000` (measured live: 119999 real ms @5x, 120001 @1x, game ms 600000 vs 120000, grid left unrepaired in both legs). Nothing built — the removal KEY is a design question (the notification is keyed by the break position) → routed to chain prompt 7, which also owns the P3-vs-P2 call now that the unreported-break half is observed]`
 **User observation (2026-07-29, live, while running the F78 storm repro):**
 "All notifications I have seen dismiss themselves after their issue is fixed,
 except for split power grids — they do dismiss eventually but it takes a MUCH
