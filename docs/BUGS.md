@@ -7220,6 +7220,28 @@ GetTraitLabel("Religious")`) plus a live half (any dome whose `labels.TraitSaint
 is non-empty carries a `label_modifiers["TraitReligious"]` entry keyed by that
 Saint). Neither needs a scripted repro.
 
+## ✅ VERIFIED IN PLAY 2026-08-02 (chain prompt 8b) — ten live targets, and idempotent
+
+Run on `TEST 2H` (NASA / rocketscientist / sol 285), which carries **10 Saints, all
+10 in domes** — found by console count after the owner's initial recollection was
+that the colony had none. Saint is `rare = true, weight = 5` and **not**
+`hidden_on_start`, so it is an ordinary applicant-pool trait, not sponsor-gated.
+
+| reading | result |
+|---|---|
+| load-time re-base | `re-based 10 dome blessing(s) onto the label colonists are actually filed under` |
+| registered modifiers | **10 of 10** dome Saints carry a `label_modifiers["TraitReligious"]` entry keyed by them |
+| **idempotence** | the heal line appears **exactly once** across a session containing a reload, and the count read **10 before and after** — not 20 |
+| probe | `SaintBlessing` PASS — *"names TraitReligious, and all 10 dome Saint(s) have it registered"* |
+
+⚠️ The idempotence result is only clean because this heal was **repaired earlier the
+same day** — as first built it re-applied on every load. See the note in the BUILT
+section above; two of the three heals in this batch had that defect.
+
+⚠️ **This colony's morale baseline moved.** Ten Saints now pay +10 morale to the
+Religious colonists in their domes, permanently, in that save. Any older reading
+taken from `TEST 2H` predates it.
+
 ### F93 — The dust-devil scheduler reads its descriptor from the map the PLAYER IS LOOKING AT, not the map it spawns on (P2, SOURCE-VERIFIED)  `[built 2026-08-02 by chain prompt 8b as `Code/Fix_DustDevilsDescrMap.lua` — §1.4b global replacement, 7 lines copied from DustDevils.lua:58-66 (1.0.7.396349) with CurrentMap → MainMap; probe DustDevilsDescrMap written. ⚠️ UNRUN — the batch leg is 8b's]`
 
 **Defect.** The scheduler thread pins its map on its second line — `local map =
