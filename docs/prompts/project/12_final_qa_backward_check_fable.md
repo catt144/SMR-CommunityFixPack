@@ -564,3 +564,25 @@ it explicitly claimed the stronger status for all six.** A blanket
 standard of the best one, and nothing in the format can record that row 6 was
 weaker. Caught only by going to primary source, again, and only because a
 session was made to build the thing rather than cite it.
+
+**Second job-7 seed line from prompt 8 (chain rule 4b) — a summary that outlived
+its own correction.** `Code/Fix_DroneTransportMinors.lua` opened with *"the third
+is deliberately left alone because fixing it would undo F61"*. That reason was
+**withdrawn by the QA audit on 2026-07-25** and replaced, in the same file, in
+the `(c)` paragraph — which says so explicitly, in a parenthetical beginning
+"RATIONALE CORRECTED". The one-line summary at the top of the file went on
+asserting the retracted reason for eight days. Caught only because prompt 8 was
+rewriting that header for the F57(a) conversion; fixed in the same commit and
+reported here rather than silently corrected.
+
+**What is new about this instance, versus the four already listed:** those are
+all *facts* that drifted. This one is a **correction that landed in one place and
+not in the other place that says the same thing**, in a single file, with the
+corrected paragraph and the stale summary visible on one screen. It suggests the
+job-7 diagnosis needs a second axis beyond "the docs cannot mark a fact's
+provenance": **the docs also have no convention for where a claim's OTHER copies
+live.** The project already knows this shape well enough to have a rule for one
+instance of it — BUGS statuses live in TWO places, index row and heading tag,
+"never flip one without the other" — and that rule exists precisely because the
+pairing is invisible unless someone writes it down. Nothing does that for module
+headers, entry summaries, or report bottom lines.

@@ -111,7 +111,7 @@ are already `tested`; this is reachability evidence, not new verification.
 line drifts exactly like the 102 does, so re-derive it too.
 **2026-08-02, chain prompt 7 — the §4 decision packages: SIX F-ROWS FILED
 (F91-F96), counts re-derived by counting → 96 F + 12 D = 108; 38 C.** All six
-are **approved and specced, none built** — the build is chain prompt 8's.
+are **approved and specced, none built** — ~~the build is chain prompt 8's~~ **→ chain prompt 8b's**, after prompt 8 split under rule 3 (see the 2026-08-02 prompt-8 entry below).
 **F91** track-shell leak (from C33; our own F44 path reproduces it),
 **F92** Saint blessing label mismatch (C22), **F93** dust-devil descriptor read
 from the camera's map (C23 item 2), **F94** asteroid-visit precedence (C24),
@@ -122,7 +122,36 @@ different answers. **Two closures without a build:** **F82** is `wontfix —
 intent` (a timed event announcement, not a state warning — so its P3-vs-P2
 question is void), and **C23 item 3** is declined on shape. **Two owner
 decisions are open and are the only things blocking prompt 8 from a full
-sweep** — see the outbox in `8_f86_phase4_conversion_batch_opus.md`).
+sweep** — ~~see the outbox in `8_f86_phase4_conversion_batch_opus.md`~~ **both
+were DECIDED by the owner the same day: package 0 → CONVERT, C23 item 1 → build
+it PROVISIONALLY**.
+**2026-08-02, chain prompt 8 — THE WHOLE CONVERSION BATCH IS BUILT; nothing
+filed or closed, so counts are unchanged and re-derived: 108 rows = 96 F + 12 D;
+38 C.** Eight conversions landed, one commit each — §5.4 group A:
+`Fix_SmallLandscapeSites` (`69c02b9`), `Fix_NightShiftWork` (`26f0b57`),
+`Fix_GeneForging` (`ab7d432`), `Fix_ShuttleHubOffAvailable` (`388c72a`),
+`Fix_UpgradeModifierLeak` (`21990fb`); **package 0**: F29 items 1+3 (`1471533`)
+and F57(a) (`8f58f30`). ⭐ **The pack now holds ZERO R3 §1.5 replacements**, so
+FIX_POLICY §4's amended R3 line is satisfied by construction rather than by the
+owner's exception — and **one more persisted mod field has left the save**
+(`SMRFixPack_rocket_fuel_key`, cleared from **existing** saves too, because the
+new shape needing no memory does not by itself remove a field an old save already
+carries). ⛔ **One conversion was DECLINED under the prompt's stop condition:
+`Fix_TrainCargoDumping` stays a §1.5 replacement** (`10cd2b4`) — §5.4's
+"verified feasible" route does not exist (`GetTargetAmount` is a **native**
+`TaskRequest` metatable method published as a savegame **permanent** through the
+mod-blacklisted `PersistGatherPermanents`, across 148 call sites with no key),
+and the one route that would work mutates a **persisted property** on a live
+object, which §3a ranks below keeping the copy. **§5.4 group counts corrected to
+5 / 4 / 10 / 3**; routed to prompt 12 for a second opinion, with two job-7 drift
+instances. ⚠️ **THE CONVERSIONS ARE UNRUN** — each carries a written
+byte-equivalence argument, but an argument is not an observation; **the leg is
+chain prompt 8b's** and no converted module may be called verified before it.
+Prompt 8 **split under rule 3**: `8b` carries the seven approved fixes
+(F90-F96) + their probes + the one batch leg; `8c` carries **C23 item 1**, split
+out on its own scale call (Tier-1-scale work — a 14th §3a site, a sleeping
+game-time thread — on a P3 item) and **gated on 8b**, since F93 patches the same
+dust-devil subsystem.
 **TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
 excluding the definition in `00_TestCore.lua`; **unchanged by the 2026-08-01
