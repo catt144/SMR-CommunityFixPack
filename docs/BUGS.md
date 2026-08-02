@@ -6045,8 +6045,16 @@ first-poller-wins held through the whole approach, repair requests are max_units
 and no handoff/steal/distance-tiebreak exists anywhere. Full trace on the "Not yet
 swept" DroneControl bullet; the option analysis (A-H, feasibility/risk/reward) is
 `docs/reports/DRONE_OVERHAUL_OPTIONS.md`. **Core v1 ships three parts** (all
-per-call-gated on `IsActive`, hooks installed at classdef time; NO persisted state —
-saves made with it load identically without it):
+per-call-gated on `IsActive`, hooks installed at classdef time; no GameVars, no
+object fields — ~~NO persisted state — saves made with it load identically without
+it~~ ⚠️ **THAT CLAIM WAS FALSE AND IS STRUCK, 2026-08-01.** It counted
+*declarative* state only. Frames are persisted state too: the part-2 hook was
+installed at FILE SCOPE and sat below `Drone:Idle`'s sleeps, so every drone parked
+in `Idle` at save time serialised it — **F86 Site 2, 98 errors per session, and it
+happened with the module's own toggle OFF.** Corrected in the module header the
+same day; the mechanism now lives in `ENGINE_FACTS.md` ("OFF" is three different
+things). Site 2 was repaired and verified 2026-08-01 (PT-58), but the *reasoning*
+error is the thing to remember: **"no GameVars" is not "nothing in the save"**):
 1. **Closest-fleet-first claim gate** — chained wrapper on `TaskRequestHub:FindTask`
    (`_TaskRequest.lua:72-83`; sole caller is the drone auto-Idle path, so player
    orders are structurally untouched). A repair/clean WORK request offered to a hub

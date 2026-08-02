@@ -464,7 +464,18 @@ module's own maps — byte-identical in all three.
 - Header must state the real toggle semantics (both directions, including
   the first mid-session enable) — and be updated when they change.
 - Savegame footprint per §3; a module OFF must be byte-for-byte vanilla
-  behavior.
+  **behavior**.
+  ⚠️ **AND THAT IS ALL IT MEANS — "off" says NOTHING about the save (added
+  2026-08-01, after this bullet's neighbourly placement next to "savegame
+  footprint" helped breed a false claim twice).** An optional module's hooks are
+  installed at file scope / classdef time and only *gate* per call, so a module
+  the player has switched off is still fully installed and still capturable:
+  `Opt_DroneOverhaul` leaked into saves at 98 errors per session **with its own
+  toggle OFF**, which is how F86 Site 2 was found. Never infer save-cleanliness
+  from a toggle, in a claim or in a test — an uninstall question is only answered
+  by Mod-Manager-disable or removal (measured equivalent, PT-20: 98 vs 98 on the
+  same save). The three switches and what each one actually removes:
+  `ENGINE_FACTS.md`, "OFF" IS THREE DIFFERENT THINGS.
 
 ## 6. Engine semantics that bind every fix
 
