@@ -117,6 +117,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DustDevilsDescrMap.lua",
 		"Code/Fix_AstrogeologistExtractors.lua",
 		"Code/Fix_SinkholeIndestructible.lua",
+		"Code/Fix_DustStormUndergroundBreaks.lua",
 		"Code/90_SaveSanitizer.lua",
 		-- optional modules, off by default (see SMRFixPack_Optional)
 		"Code/Opt_ClassicRockets.lua",
