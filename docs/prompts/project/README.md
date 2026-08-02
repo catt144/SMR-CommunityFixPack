@@ -20,7 +20,8 @@ mechanism below.
 | 3 | ~~`3_f86_phase1_tier1_spec_fable.md`~~ **✅ DONE 2026-08-01, file consumed** | Fable | — | final Tier-1 spec = `SAVE_SAFETY_REDESIGN.md` **§6.2a** (C34 rider rides the rains pass; **mid-session F81a reconcile TAKEN**; StormWedgeHeal reorder specced) · enumeration re-derived: **exactly 13** (+1 inert route-(c) site — no non-compliant 14th) · **adjudication §4.4 CLOSED** (closure enters saves via `likes_data`→GameVar, inert) · `F86_TIER1_BUILD_PROMPT.md` written (5 legs incl. PT-54 A/B reshaped) |
 | 4 | ~~`4_f86_phase2_tier1_build_fable.md`~~ **SPLIT 2026-08-01 (rule 3), file consumed** | Fable | — (legs 1-4 RUN with owner) | Tier-1 BUILT (4 units + probe realign, `d899a54..a9d68e3`; TestKit thru `49b40da`) · **legs 1-4 PASSED on log evidence** (ledger in 4b) · F89 filed mid-leg · leg-3 id-less clause amended (owner-cleared) |
 | 4b | ~~`4b_f86_phase2_tier1_close_opus.md`~~ **✅ DONE 2026-08-01, file consumed** | Opus | — (leg 5 run with owner) | **TIER 1 VERIFIED — all five legs run** (`c6180ad`; logs `Mars.exe-20260801-16.42.31`/`-17.11.08`/`-19.14.11`, test-2 lineage) · **F02/F78/F81/F88 → `tested`** (row + tag both) · C34 rider verified · PT-54 absorption table marked RUN (C/D/E + the carried A/B as leg 4) · STATUS F86 rewritten to post-Tier-1 truth · **leg 5 read Tier-1 CLEAN** (`Meteors`/`MeteorStorm` alive on vanilla bodies, zero Tier-1-named lines, residue below the allowed list) **but surfaced F86 Site 2 still leaking — 80 `Opt_DroneOverhaul` orphan errors, owner-ruled out of scope → routed to prompt 5** · **MOD_DESCRIPTION no-precedent sentence NOT published** (unsoftened; its gate corrected from Tier 1 to Tier 2) · consumed `F86_TIER1_BUILD_PROMPT.md` + itself |
-| 5 | `5_f86_phase3_tier2_build_opus.md` | Opus | launch leg | Tier-2 builds + `ArrivalDeaths`(a) design pass (drone carve-out PRE-GRANTED — no ask) · records D10/D12 unhold |
+| 5 | ~~`5_f86_phase3_tier2_build_opus.md`~~ **SPLIT 2026-08-01 (rule 3), file consumed** | Opus | — (builds needed none) | **TIER 2 BUILT** (`88f3154`, `44e6af2`, `6f0cb95`, `ef7d49c`, `e197190`; TestKit `6eb3c0b`, `7bfa274`) — all four modules moved off their blocking bodies onto verified-synchronous seams, **F86 Site 2 repaired**, **the `ArrivalDeaths`(a) design pass RUN and it found a route** (so it was built, not deferred; nothing routed to prompt 12) · per-site dispositions recorded for all five sites · F21 **downgraded `tested`→`fixed`** (PT-43 measured a retired body) · three probes realigned off replaced behaviour, sweep clean · **PT-58 written with predictions P1-P7 BEFORE any run** · ⚠️ **the leg is UNRUN, so the D10/D12 unhold is NOT recorded** → 5b |
+| 5b | `5b_f86_phase3_tier2_leg_opus.md` | Opus | **launch leg** | run PT-58 · record it · the flips it earns · **D10/D12 unhold** (gated on it) · the MOD_DESCRIPTION no-precedent unlock (gated on a clean uninstall read) |
 | 6 | `6_audit_candidate_sweeps_opus.md` | Opus | no | verification reading: C32 (incl. already-patched-in-1.0.7 check), C04 call chain, F35 scope, fredware #11 comparison · owner web-check reminders |
 | 6b | `6b_residual_candidate_sweeps_opus.md` | Opus | no | the rest of the C-ledger: C18-C21 evidence prep, C25 mechanism limits, C26-C30 Relaunched-presence checks, F82 trace, F80 source-audit (pre-cleared work) |
 | 7 | `7_audit_candidate_decisions_opus.md` | Opus | review only | decision packages: C33 (+F44 shell amendment), C22, C23, C24 + everything 6/6b promoted — each through the §4 bar; **passing packages are PRE-CLEARED to build (blanket above)**; failing ones close honestly |
@@ -32,8 +33,9 @@ mechanism below.
 
 Model routing lives in the FILENAME only — prompt bodies are model-neutral
 (project rule). Order is strict through 8; prompts 9-11 are independent of
-each other and may run in any order after their gates open (9/10 after 5
-verifies; 11 anytime after 1). 12 runs last, when the folder holds only it
+each other and may run in any order after their gates open (9/10 after **5b**
+verifies — prompt 5 built the repairs but did not run their leg; 11 anytime
+after 1). 12 runs last, when the folder holds only it
 and this README.
 
 ## ⭐ Owner blanket pre-clearance (2026-08-01, recorded verbatim in intent)
