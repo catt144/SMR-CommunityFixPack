@@ -142,7 +142,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source recovered + read) |
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
-| C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro |
+| C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
 | C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | investigate (SkiRich prior art, OG) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | cand | investigate (SkiRich prior art, OG) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | cand | investigate (SkiRich prior art, OG) |
@@ -7582,6 +7582,45 @@ quotes verbatim; sources in the audit report §8.
   about the same limit. Old RESEARCH lead ("stuck at 'construction site is
   being cleared'") + his independent fix = witnessed; needs an in-game repro
   before an F-row.
+  **⭐ SWEPT 2026-08-02 (prompt 6b) — the patch-note question is ANSWERED from
+  source (better than notes), and the minimal check is written.**
+  **1. Yes, a patch touched Jumbo Cave in the 1.0.4-1.0.7 window — 1.0.6
+  replaced the ENTIRE scenario — and no, it did not touch this.** The tree
+  ships **two** Jumbo Cave scenarios: `Lua\Scenario\
+  BuriedWonder_Jumbo_Cave.generated.lua` and `…_106.generated.lua`. The
+  selector is `FixSequenceList` (`Lua\Buildings\Anomaly.lua:26-33`): *"if
+  `self.sequence_list == "BuriedWonder_Jumbo_Cave"` and `UndergroundRework106`
+  then `self.sequence_list = "BuriedWonder_Jumbo_Cave_106"`"*. The template
+  itself still names the old list (`Data\BuildingTemplate\JumboCave.lua:24`);
+  the remap is what makes the new one live.
+  **⚠️ And the gate is SAVE VINTAGE, not build.** `GameVar("UndergroundRework106",
+  false)` with the shipped comment one line above it: *"UndergroundRework106 is
+  false in old savegames, true in ones started at or after 1.0.6"*
+  (`Lua\Buildings\UndergroundDome.lua:16-17`), set true only in
+  `OnMsg.NewGame` (`:19`). **A save begun before 1.0.6 runs the OLD script on
+  our pinned 1.0.7.396349** — a live external-validity constraint for any
+  Jumbo Cave observation, and it generalises: the underground rework is gated
+  the same way throughout (`Elevator.lua:830,:839`,
+  `UndergroundDome.lua:41,:53`).
+  **The wedge itself is untouched by the rework.** Both versions block on the
+  same label with the same shape — old `:103` and new `:104` are the identical
+  statement `while not (UndergroundMap.City.labels["JumboCaveReinforcementStructure"])
+  do Sleep(3000 + …) end`. **1.0.6 rewrote the story around this and left the
+  mechanism exactly where it was.** No fix to inherit, and no "fixed in
+  Relaunched" close available.
+  **2. The minimal in-game check (rider written to `PLAYTEST_CHECKLIST.md`).**
+  What needs proving is only the TRIGGER — that cave geometry actually strands
+  a rock. The read is one console line, taken **while the site is stuck**,
+  **on the underground map** (`UICity` follows the map you are looking at,
+  `Lua\_init.lua:12-14`): walk the underground drones' per-drone
+  `unreachable_buildings` tables (`Lua\Units\Drone.lua:817-835` — weak-keyed,
+  `[building] = timestamp`, capped at `const.MaxUnreachablesInTable` = 64) and
+  count `WasteRockObstructor` entries (class confirmed,
+  `Lua\WasteRock.lua:33-41`; `DroneApproach` at `:318-326` is the failing call
+  the wrapper catches). ⚠️ Guard with `IsValid(b)` before `IsKindOf` — the
+  table also carries a plain `version` key (`Drone.lua:826`). The rocks
+  additionally carry `parent_construction` (`WasteRock.lua:40`), so a stranded
+  rock can be tied to the blocked site rather than merely counted.
 - **C33 [VERIFIED 2026-08-01 — and OUR OWN F44 PATH REPRODUCES IT] —
   whole-track demolition leaks an invisible, undeletable TrackBase shell.**
   `TrackGridElement:DemolishAndSplitTrack` calls `track_obj:OnDemolish()`
