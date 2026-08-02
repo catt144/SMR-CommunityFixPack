@@ -864,7 +864,7 @@ Record the reading against each one. A prediction that misses is the finding.
 | **P2** | same run: `ArrivalDeaths` **PASS**, reporting *"the impassable drop spot was snapped to a walkable one"* **and** *"Colonist.Arrive is vanilla's"* | either half (a) is not installed, or a pack body crept back onto `Arrive` |
 | **P3** | same run: `TrainWaitTime` **PASS**, travel clock restarted at boarding. It **SKIPs** if run bare — use the `*r` form | the `AddSpentTime` key or the command-thread identification is wrong |
 | **P4** | whole-session play with the pack ON: **zero** `[LUA ERROR]` lines naming any of `Fix_DroneUnreachableForever.lua`, `Fix_TrainWaitTime.lua`, `Fix_ArrivalDeaths.lua`, `Opt_DroneOverhaul.lua` | a wrapper is throwing on a live path a fixture cannot reach |
-| **P5** | **the headline.** PT-20 method (play, park drones idle, save, disable the pack only, load): **ZERO** `Opt_DroneOverhaul.lua` orphan errors. Tier-1 leg 5 read **80** on this exact shape (`Mars.exe-20260801-19.14.11`), 98 when first measured | Site 2 is not repaired; the moonlight frame is still being captured |
+| **P5** | **the headline.** PT-20 method (play, park drones idle, save, disable the pack only, load): **ZERO** `Opt_DroneOverhaul.lua` orphan errors. Tier-1 leg 5 read **80** on this exact shape (`Mars.exe-20260801-19.14.11`), 98 when first measured. ⚠️ **A zero is only worth the idle-drone count behind it** — record the `DroneReport` total from step 3 alongside it, or the reading proves nothing | Site 2 is not repaired; the moonlight frame is still being captured |
 | **P6** | same load: **zero** lines naming `Fix_DroneUnreachableForever.lua`, `Fix_TrainWaitTime.lua` or `Fix_ArrivalDeaths.lua` | a Tier-2 wrapper is on a blocking stack we did not account for |
 | **P7** | `Fix_ArrivalDeaths`' half (b) is layer 2 — an **inert** captured `Colonist:Idle` frame may exist in the save. It must produce **no error and no behaviour**: nothing runs after `return orig_idle(...)`. `Fix_ShelterReflex` has had this exact shape through every prior leg and has never appeared in a log | an "inert" frame that is not inert — that would be a §3a finding, not a bug in this module alone |
 
@@ -875,7 +875,28 @@ Record the reading against each one. A prediction that misses is the finding.
 2. Play ~15 minutes of ordinary colony: let drones work and go idle, let a rocket
    land if one is due, run a train if the save has one. Watch for P4.
 3. **Park drones idle before saving** — P5 depends on drones being mid-`Idle` at
-   write time; that is what made 80 frames last time. Save.
+   write time; that is what made 80 frames last time. On a big colony (the
+   2026-08-01 article is ~1k colonists over 6-7 domes) requests fire constantly
+   and the fleet never settles on its own, so **switch the Drone Hubs OFF** for
+   the last minute or two, verify, then save.
+   - **Off, NOT salvage.** `Drone:Idle` gates its whole find-work block on
+     `if command_center.working then` (`Drone.lua:612`), so a switched-off hub
+     drops every drone straight through to `Sleep(2000)` + `CleanUnreachables()`
+     (`:639-640`) — the capture site, and where the Tier-2 hook now lives. A
+     salvaged/destroyed hub instead makes `command_center` invalid and sends
+     drones to **`WaitingCommand`** (`:583-586`), a body the old wrapper never
+     sat on: that would read zero for the wrong reason.
+   - **Do not linger.** Idle drones keep draining, and at
+     `battery <= DroneEmergencyPower * 2` they leave Idle for `EmergencyPower`
+     (`:608`) with nothing recharging them. Off → settle → verify → save. Do not
+     let a sol pass with the hubs down.
+   - **Verify the precondition, do not eyeball it:** `SMRFixPack.DroneReport()`
+     prints `idle=N` per hub, and that field is a literal count of drones with
+     `command == "Idle"` (`DroneControl.lua:909-918`). Sum it; **record the
+     total in the result** — a zero in P5 is only as strong as the number of
+     capturable frames the save actually contained. Aim well above 80.
+   - Hubs stay ON for step 2 — P4 needs the live drone paths exercised.
+   Save.
 4. Quit to menu, **disable the Community Fix Pack only** (Test Kit stays on),
    restart, load that save. **Count `Opt_DroneOverhaul` lines in the log** (P5),
    then grep the other three module names (P6/P7).
