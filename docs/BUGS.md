@@ -143,7 +143,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
-| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | investigate (SkiRich prior art, OG) |
+| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op) (entry) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | cand | investigate (SkiRich prior art, OG) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | cand | investigate (SkiRich prior art, OG) |
 | C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
@@ -7743,7 +7743,68 @@ quotes verbatim; sources in the audit report §8.
   SkiRich (OG, workshop 2433157820, 4,100 subs): *"buildings that are
   malfunctioned and stuck in perpetual maintenance mode and nobody is willing
   to fix them. Most people think its a drone issue. It is not, it is a repair
-  cycle issue with the building."* Relaunched-presence unswept.
+  cycle issue with the building."*
+  **→ SWEPT 2026-08-02 (prompt 6c). Verdict: CANNOT DETERMINE — the state is
+  real and the engine heals it, but no producer exists in current Src that I
+  could reach.**
+  - **The engine ships two savegame heals named for exactly this symptom.**
+    `SavegameFixups.FixMaintenanceRequestsSources`
+    (`Lua\RequiresMaintenance.lua:531-566`) re-`SetSource`es orphaned
+    maintenance requests **and re-inserts requests that fell out of
+    `task_requests`** (`:540-548`) — a request missing from `task_requests` is
+    never offered to a command centre, so **no drone can ever be assigned and
+    the building stays malfunctioned forever**, which is SkiRich's sentence
+    almost verbatim ("not a drone issue… a repair cycle issue with the
+    building"). `SavegameFixups.FixMissingMaintenance` (`:568-574`) re-inits
+    buildings that `DoesRequireMaintenance()` but hold **no work request at
+    all**. Haemimont saw both states.
+  - ⚠️ **Those heals are OLD-SAVE-ONLY, and this is the load-bearing fact.**
+    `AppliedSavegameFixups` is a `GameVar` whose initializer marks **every
+    fixup that exists at new-game time as already applied**
+    (`CommonLua\SavegameFixup.lua:10-16`); `FixupSavegame` then runs only the
+    unmarked ones (`:34-41`). A save **started** on our pinned build therefore
+    never runs either fixup. Same shape as C25's vintage gate: presence in Src
+    is not reachability in this save. **So these are heals for a producer, not
+    a repair of one** — the C32 lesson ("his fix does something" ≠ the thing it
+    does was needed) does not apply here, because the fixups are the *vendor's*
+    and they name the state; but neither do they prove the producer survives.
+  - **Obvious guess 1 — rubble-shroud stranding — CHECKED AND RULED OUT.**
+    `IsMaintenancePrevented()` is exactly `IsShroudedInRubble()` (`:151-153`),
+    and `TryRequestMaintenance` (`:155-162`) **sets
+    `last_maintenance_points_full_ts` but skips `RequestMaintenance()` while
+    prevented**, after which `BuildingUpdate` malfunctions the building a sol
+    later (`:120-126`) and then early-returns forever on `IsMalfunctioned()`
+    (`:112-114`) — a perfect stranding shape. It does not strand: `RubbleBase:OnClear`
+    re-fires `TryRequestMaintenance()` on **every** shrouded object before
+    deleting itself (`Lua\Buildings\RubbleBase.lua:140-149`), and rubble has no
+    non-`OnClear` destruction route (`CanGetDamagedBy` → false `:50-52`,
+    `CanDemolish` → false `:46-48`), so no dangling `shrouding_rubble`
+    back-pointer can accumulate (`Lua\Shroudable.lua:8-18`).
+  - **Obvious guess 2 — zero maintenance threshold — CHECKED AND RULED OUT.**
+    `RequestMaintenance()` silently does nothing when
+    `accumulated_maintenance_points == 0` (`:343-357`), and
+    `AccumulateMaintenancePoints` clamps to `maintenance_threshold_current`
+    (`:167`), so a zero threshold would make `SetMalfunction()` produce a
+    malfunctioned building with **no request at all**. Unreachable in data: all
+    18 templates that set `maintenance_threshold_base` sit at 50000-200000 (min
+    `DefenceTower`/`RechargeStation`/`SensorTower`/`TriboelectricScrubber`
+    50000), and although the prop **is** modifiable in the negative direction —
+    the BadMOXIE storybits apply `Percent = -25`
+    (`Data\StoryBit\BadMOXIE.lua:60-66`, `BadMOXIE_ColdWave.lua:100-109`) — the
+    two stack to -50% at worst and are MOXIE-only, while every other modifier is
+    positive (`Data\TechPreset.lua:2277-2283` SustainableArchitecture +20,
+    `:2405-2411` ResilientArchitecture +20; `Data\CommanderProfilePreset.lua:140-150`
+    citymayor +20/+20). The product cannot reach 0.
+  - **What would settle it, cheaply:** the fixups tell you what the broken state
+    *looks like*, so it is directly observable rather than derivable — on a
+    long-running save, dump every `RequiresMaintenance` whose
+    `maintenance_phase` is truthy or `is_malfunctioned` is set, and check
+    (a) `maintenance_work_request` present, (b) present **in
+    `task_requests`**, (c) `:GetSource() == obj`, (d) `rfSuspended` clear while
+    `ui_working` is true. Any building failing (b)/(c) is the producer firing
+    live on our build. That is a console sweep, not a source question, and it
+    needs a heavily-loaded save — so it belongs to the playtest campaign, not
+    to this chain. **Not promoted; stays `cand`.**
 - **C27 [author] — Signal Boosters never extend Drone Hub Extender radius.**
   SkiRich (OG, 2611877948): *"After researching Signal Boosters both the
   Drone Hubs and Drone Hub Extenders are suppose to have an additional 15 hex
