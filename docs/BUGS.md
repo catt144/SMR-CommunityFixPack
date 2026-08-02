@@ -3763,9 +3763,9 @@ and it worked on first contact.
 map `BlankBig_02`, sol 59 of which ~50 were organic pre-playtest play, not
 opened in a long time) loaded with the **same wedge signature** —
 `WEDGE confirmed … scheduler thread alive but stuck; healing` →
-`scheduler thread restarted`. **Two for two on independent old-pack-era saves.**
+`scheduler thread restarted`.
 
-**The three-load pattern, recorded with its confounds because it is suggestive
+**The four-load pattern, recorded with its confounds because it is suggestive
 and easy to over-claim:**
 
 | load | save | sol | pack ver in save | wedge? | F81(a) stranded flag? |
@@ -3773,6 +3773,16 @@ and easy to over-claim:**
 | 1 | colony A, late | 288 | current (no mismatch) | **no** | **no** |
 | 2 | colony A, early | 98 | `v0.00-001` | **yes** | **yes** |
 | 3 | colony B | 59 | `v0.00-001` | **yes** | **yes** |
+| 4 | colony C, young/basic | low | `v0.00-001` | **no** | **no** |
+
+⚠️ **CORRECTION, same sitting:** an earlier draft of this note said *"two for
+two on independent old-pack-era saves."* **Load 4 makes it two of three.** A
+fourth independent colony (`save_game_id: Dps_S53Fxrq6RJPv`, map `BlankBig_01`,
+also `v0.00-001`) loaded carrying **neither** state — only the routine
+`MeteorFrequency` migration fired. The plausible reason is mundane and worth
+recording rather than glossing: it is a **young basic colony**, so it has most
+likely not had a meteor storm at all yet, and no storm means no wedge and no
+stranded prediction flag. **Prevalence is 2 of 3 old-pack saves, not 2 of 2.**
 
 ⛔ **What this does NOT establish, and must not be written as if it did:** that
 the current pack *prevents* the wedge. Confounds, all live: load 1 is a **later
@@ -4231,7 +4241,10 @@ Tier-1 legs.
 `BlankBig_02`, sol 59 with ~50 sols of organic pre-playtest play) loaded
 carrying **another stranded `DisasterMeteorStorm` flag**, cleared the same way —
 and **the same load also carried a live F78 wedge** (`:315-316`). **Two
-independent colonies, both carrying both defects.** The co-occurrence is what
+independent colonies, both carrying both defects.** ⚠️ A **fourth** load the
+same sitting (a third independent colony, young and basic, also `v0.00-001`)
+carried **neither**, so the prevalence figure is **2 of 3 old-pack saves, not
+2 of 2** — most likely because a young colony has not had a meteor storm yet. The co-occurrence is what
 the shared `MeteorStorm` origin predicts, and it is now observed twice rather
 than once. ⛔ **Prevalence, not prevention** — the full three-load table and its
 confounds are recorded on the **F78** entry; do not read the pattern as evidence
@@ -8192,6 +8205,17 @@ quotes verbatim; sources in the audit report §8.
      in maintenance/malfunction), so the walk demonstrably reached live
      candidates instead of matching nothing — which is the failure mode this
      kind of dump usually dies of.
+  - ⚠️ **A FOURTH DUMP WAS TAKEN AND IS VACUOUS — recorded so it is never
+    counted as a third confirmation.** Log line 359, a genuinely independent
+    third colony (`save_game_id: Dps_S53Fxrq6RJPv`, map `BlankBig_01`), returned
+    **`0 in maintenance or malfunction, 0 structurally broken`**. **`n = 0` is
+    the ambiguous case** — no candidates were found, so nothing was inspected,
+    and it cannot be distinguished from a query matching nothing. It is a young
+    basic colony, so nothing has yet accumulated enough maintenance to be in
+    `maintenance_phase` or malfunctioned; that is expected, not surprising.
+    **Neither supports nor undermines the close.** ⭐ **General rule this
+    illustrates: a dump of this shape is only readable when `n > 0`** — always
+    report `n` alongside `bad`, and treat `0 / 0` as "no measurement taken".
   ⚠️ **Limits, so this is not over-read:** two samples is two samples, and
   reading 2's control of `2` is thin. This closes C26 as **"not reachable in
   Relaunched on saves started at 1.0.7.396349"** — *not* as "impossible" — and it

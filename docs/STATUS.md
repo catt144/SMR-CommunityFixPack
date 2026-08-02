@@ -92,9 +92,11 @@ all healed on load. First non-fixture occurrences of either, and the
 co-occurrence is what their shared `MeteorStorm` origin predicts. ⭐ It also
 means two of three real playthrough saves were, at load, silently unable to
 advance **Inner Light** — C36's mechanism observed rather than inferred.
-⛔ **Prevalence, NOT prevention.** The third load (a later save of the same
-colony, written under the current pack) carried neither, which is suggestive and
-is recorded on the F78 entry **with its confounds named** — it is a later save
+⛔ **Prevalence, NOT prevention — and the figure is 2 of 3 old-pack saves, not
+2 of 2.** A fourth load (a third independent colony, young and basic) carried
+neither, most likely because it has not had a meteor storm yet; and the load
+written under the **current** pack carried neither either. Both are suggestive
+and both are recorded on the F78 entry **with their confounds named** — it is a later save
 of an already-healed colony, n = 3, no vanilla control, and this fix was never a
 prevention. **No "the pack improves vanilla stability" claim is licensed by it**,
 least of all in `MOD_DESCRIPTION.md`. **No status flips earned** — both entries
