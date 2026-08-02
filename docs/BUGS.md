@@ -2039,8 +2039,23 @@ buildings START needing maintenance (`OpenDome_Maintenance`, `OpenAirBuilding.lu
 filters park spots by `GetPointOutsideDomesIn` (`Dome.lua:2505-2507`) → fleet clusters
 just outside the dome. Caveat: final passability of `*_Open` entities is engine data —
 unverifiable from Lua. **Fix:** override `Dome:CalcOpenAirSkin` to preserve entrance
-attaches; override approach-failure cache to store `GameTime()` so `CleanUnreachables`
-retires entries.
+attaches; ~~override approach-failure cache to store `GameTime()`~~ **superseded by the
+F86 Tier-2 shape below** so `CleanUnreachables` retires entries.
+
+**⭐ F86 TIER-2 REWRITE, 2026-08-01 — the repair moved from the writer to the reader.**
+The shipped fix replaced `Drone:ApproachWrapper`, which blocks in `DroneApproach` and had
+our code after the call — F86 exposure route (a), and a REPLACE-class one (an orphaned copy
+means vanilla's own approach handling is gone too). The defect is only the VALUE, and its
+reader `Drone:CleanUnreachables` is **verified synchronous** (`Drone.lua:879-896` — a
+`pairs` walk plus `GameTime()`; `tools/blocking_analysis.py` reports it `clear`). So the
+module now PRE-wraps `CleanUnreachables` and normalises the poison in place:
+`ts > GameTime()` → `ts - max_int`, which recovers the exact original failure time because
+`max_int` is the same constant vanilla added (`CommonLua\Core\lib.lua:69`). Vanilla's
+`ApproachWrapper` is untouched and keeps writing its own value; vanilla's 5-sol expiry then
+does what it was written to do. The normalisation is one-way, so stamps written by the
+pre-2026-08-01 shipped fix (plain `GameTime()`) are left alone and existing saves migrate
+themselves on the next call. **Disposition (FIX_POLICY §3a per-site gate): REPAIRED IN-PACK
+— layer 3, no residue, nothing owed to D13.**
 
 ### F56 — Auto RC Transports never offload rockets  `[wontfix — user decision 2026-07-26: deliberately maintained design, breaks nothing; same grounds as F62/F63]`
 `RCTransport.lua`: `Automation_Gather` (:884-908) sources only surface deposits;
