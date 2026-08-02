@@ -9018,7 +9018,33 @@ quotes verbatim; sources in the audit report §8.
     every named global game-time thread's body is addressable by name
     (`Lua\Config\_fixup.lua:5, :9-16`), with a shipped
     `RestartGlobalGameTimeThread` helper (`:18-22`). A real §1.3 seam for vanilla
-    thread bodies. ⛔ It does **not** change the §3a arithmetic — a replacement
+    thread bodies.
+    ⛔ **His fix carries NO rate information.** Grepped across his whole `Code/`
+    tree: he only ever **reads** `descr.spawn_chance`, `descr.count_min`,
+    `descr.count_max`, and **writes no preset value anywhere**. He applied the
+    gate to the shipped numbers, so his mod produces the same rate change ours
+    would. **Three sources now agree on the SHAPE and none of them is evidence
+    about the tuned RATE.**
+  - 🔎 **WHAT WOULD ACTUALLY SETTLE THE RATE — a concrete, un-run check
+    (recorded 2026-08-02 so it is not lost).** Relaunched is a remaster, and the
+    **original Surviving Mars is installed on this machine**
+    (`A:\SteamLibrary\steamapps\common\Surviving Mars`). If OG's scheduler
+    **gates** where Relaunched's **multiplies**, the multiply is a remaster
+    regression and the shipped preset numbers were tuned *under the gate* —
+    which turns "adopting the gate raises the rate" into "adopting the gate
+    **restores** the rate", and item 1 stops being a judgment call.
+    **Status: probed, not obtained.** OG ships **no `ModTools\Src`**; its Lua is
+    in `Packs\Lua.hpk`, magic **`BPUL`** — the older Haemimont container, **not**
+    the FLPK/zstd format `tools/flpk_extract.py` reads. A raw scan confirms the
+    payload is **Lua SOURCE, not bytecode**: the `MapSettings_DustDevils` class
+    definition is legible in the clear at offset ~3.92 M — `spawn_chance`,
+    `count_min`, the `"Lo Range - how many"` help text, and the `marker_` fields,
+    so **OG already had the marker system**. But the stream is back-reference
+    compressed and the scheduler line is not in a literal run. **Cost to settle:
+    write a `BPUL`/HPK extractor** — one-time, and reusable for any future
+    OG-vs-Relaunched question. Not attempted here: outside this package, and
+    item 1 blocks nothing.
+    ⛔ It does **not** change the §3a arithmetic — a replacement
     body is still ours and still sleeps.
   - **Item 3 (marker path missing `DustStormsDisabled`) — ✅ DEFECT CONFIRMED,
     ❌ DECLINED ON SHAPE. Recorded, not built, and this is the F89 disposition,
