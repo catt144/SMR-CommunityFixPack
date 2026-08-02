@@ -149,6 +149,8 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
 | C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
 | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
+| C36 | "Inner Light" mystery does not complete for some players | ?   | cand | filed 2026-08-01 from two **current** Reddit threads (§10.6) — same commenter twice advises newcomers to avoid it; **"for some people" is a race/state-gate tell, i.e. F06's shape**. Single source, no mechanism. Next step: read the Inner Light sequence for a one-shot `Msg` or a popup-gated completion (entry) |
+| C37 | Planetary anomalies don't pull colonists up the elevator — blocks a purely-underground colony | ?   | cand | filed 2026-08-01 from a **hours-old** Reddit thread (§10.6); specific, current, names the seam. **Same elevator boundary F90 just proved the code mishandles.** Single source, unverified. Next step: is the anomaly colonist-transfer path map-aware? (entry) |
 | C35 | Edit Payload confirmed while units are on the cargo ramp tears down the rocket's command-centre connection **with no wait**, where the takeoff path doing the same thing waits | ?   | cand | filed 2026-08-01 by the prompt-6 fredware-#11 comparison — **real gap vs F67/F68/F70/F71 (different function, zero overlap), mechanism traced, HARM UNPROVEN**; ⚠️ not a prompt-7 package until a live repro exists (entry) |
 | C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | **DOWNGRADED 2026-08-01 (prompt-6 Src sweep): no route in current Src; his fix's firing explained by destroyed buildings; 1.0.7 killed the named trigger, not the mechanism — and F04's reassignment lost its positive evidence** |
 | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source) — needs F-row decision (entry) |
@@ -3142,6 +3144,18 @@ departs empty. Only mitigation: 1-hour sleep on asteroids (:227-229), none on Ma
 Endless empty round trips ~70 fuel each. **Fix:** wrap `IsCargoReady`: in auto mode with
 CheckAutoDepart true and no non-fuel payload requested, return false (1-sol timer still
 exits cleanly).
+**⚠️ A CURRENT COMMUNITY CLAIM CONTRADICTS THIS ENTRY — recorded, not hidden
+(2026-08-01).** In a Reddit thread hours old ([S38], `BUG_LIST_AUDIT.md`
+§10.6c), a commenter states: *"**Landers and the elevator work much more
+smoothly now. The old bugs don't happen because they've completely changed how
+both work to be more straightforward.**"* **It moves nothing** — F67/F68/F70/F71
+are Src-verified against 1.0.7.396349 and live-tested (PT-16/17/31/32), and the
+standing rule is *"fixed in Relaunched" only from current Src*. It is recorded
+because the **same threads** contain a player describing this exact defect
+verbatim (*"my rocket would just fly back and forth until it was out of fuel and
+got stuck on the asteroid"* — [S37]), which is the selection-bias caveat in
+miniature: enthusiast "it's fixed" testimony is data about the speaker.
+
 **⭐ PLAYER WITNESSES 2026-08-01** (Reddit thread, `BUG_LIST_AUDIT.md` §10.5,
 [S36] — **hotfix-1.0.3-era, ~Dec 2025, NOT our pinned build; this is evidence
 of harm, not of current presence**). Next_Interaction4335, twice, describing
@@ -4039,6 +4053,33 @@ before anyone designs a fix here.
 "TAP BEFORE MITIGATING" instruction stands.
 
 ### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[tested 2026-08-01 (Tier-1 legs 3+4, log Mars.exe-20260801-17.11.08 — natural collision re-roll, migration stamped, C34 heal, and the stranded-flag sweep proven BOTH ways with liveness held; see the leg note below the PT-54 block): Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (**REWRITTEN 2026-08-01, F86 Tier-1 spec §6.2a-B: the loop replacement is DELETED — vanilla's RainsDisasterLoop stays; a layer-2 wrapper on RainsDisasterActivation mirrors the collision test BEFORE the call and posts Msg("RainDisasterEnd") on the early-return, so a collided cycle costs one re-roll; a version-stamped PostLoadGame migration pass (SMRFixPack_loop_version; resolves id-less entries by unique type match) moves every persisted loop onto vanilla's body and carries the C34 stale-state rider — structure repairs → stale-ACTIVE FinishRainProcedure heal → loop migration**). Leak half built 2026-07-29 post-QA; rains half rewritten 2026-08-01; **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg, except the (a) leak half's live legs, routed to chain prompt 3** (note below); wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+**⭐ F81(a) IS NOW STANDARD COMMUNITY ADVICE — the strongest real-world
+reachability signal this project has for any fix (2026-08-01).** Two **current**
+Reddit threads the owner exported (`BUG_LIST_AUDIT.md` §10.6, [S37]/[S38];
+~2026-07-30 and 2026-08-01, i.e. contemporaneous with our pinned build) show the
+same regular telling two different newcomers, unprompted, to install a fix
+**before they start playing**:
+> *"It is buggy… **I recommend running the game with the disasters patch mod
+> (Patch 1.0.7 No Disasters After Meteor Storms)**"* — and, to a second player,
+> *"**disasters are broken but you can fix it with a mod**."*
+
+**That mod is GromGor's workshop `3717125029`, already in our archive and
+already read.** Its own `metadata.lua` description, re-verified this session:
+*"After a meteor storm, **one of the keys may not be removed, preventing further
+disasters from generating.** This mod fixes this issue."* — **this entry's (a)
+half exactly**, the stranded `g_DisastersPredicted` key that silently gates the
+whole weather system.
+
+**Why it is worth recording separately from §9's code-level match.** §9 proved
+his fix and ours manage the same key. This proves something §9 could not: **the
+symptom is common enough, and recognised enough, that experienced players treat
+the fix as a prerequisite for playing the game.** That is a §4a "who benefits"
+answer from outside our own reasoning — and it is one of the few places where a
+defect's real-world weight can be observed at all. ⚠️ Read `BUG_LIST_AUDIT.md`
+§10.6's selection-bias caveat before quoting the threads for anything else;
+enthusiast "no bugs" testimony in the same threads is data about the speaker,
+not the build.
+
 **⛔ PT-54 RETIRED UNRUN 2026-08-01 — and this entry is the one that keeps a
 LIVE OBLIGATION out of it.** The test was withdrawn by the project prompt
 chain because the F86 Tier-1 build deletes and replaces the `Fix_RainsDeadlock`
@@ -7595,6 +7636,40 @@ quotes verbatim; sources in the audit report §8.
   firing in the wild — is fully explained by destroyed buildings, and (c) its
   named trigger cannot occur unattended on our build. Decision package is
   prompt 7's.
+- **C36 — the "Inner Light" mystery does not complete for some players (current
+  build).** Filed 2026-08-01 from two **current** Reddit threads
+  (`BUG_LIST_AUDIT.md` §10.6, [S37]/[S38]). Same commenter, twice, days apart,
+  as standing advice to newcomers: *"At least one mystery is broken for some
+  people so **avoid Inner Light**"* and *"**Inner light is also broken for some
+  people** so pick a different mystery."*
+  **Why it is filed rather than noted:** it names **one** mystery precisely, on
+  the build we ship against, and it lands in a family we already hold two
+  entries in — **F06** (Philosopher's Stone: a one-shot `Msg` missed behind a
+  player-gated popup) and **F16**. The *"for some people"* qualifier is itself a
+  tell for a **race or a state-dependent gate** rather than a flat data error —
+  which is F06's shape exactly.
+  ⚠️ **Single source (one commenter), no mechanism, no version stamp, and no
+  description of the failure beyond "broken".** Nobody has looked at Inner
+  Light's scenario file. **Next step: read the Inner Light sequence for the F06
+  pattern** — a one-shot message, or a completion gate behind a popup wait.
+  Cheap, and it either lands in the mystery-stall family or closes.
+- **C37 — planetary anomalies do not pull colonists up the elevator, blocking a
+  purely-underground colony (current build).** Filed 2026-08-01 from [S38], a
+  thread **hours old** at the time of reading, from a commenter describing their
+  own recent playthroughs (`BUG_LIST_AUDIT.md` §10.6): *"**You can't do a purely
+  underground run right now because of planetary anomalies not pulling people up
+  the elevator** — but my most recent Europe game was as an underground, trains
+  only, no shuttles run and it was great."*
+  **Why it is filed:** it is specific, current, names the mechanism location
+  (the anomaly → colonist-transfer path across the elevator), and states a
+  concrete gameplay consequence rather than a vibe. It also sits next to a
+  proven cross-map defect of our own — **F90** showed the elevator's grid merge
+  makes two maps one object in a way the surrounding code does not expect, and
+  *"anomalies don't pull people up the elevator"* is the same seam.
+  ⚠️ **Single source, no mechanism read, and the reporter is describing a
+  limitation they worked around rather than filing a bug.** Not verified in Src
+  by anyone. **Next step: find who moves colonists for a planetary anomaly and
+  whether that path is map-aware at the elevator.**
 - **C35 — applying an Edit Payload change while units are still on the cargo
   ramp tears down the rocket's command-centre connection with no wait, where
   every other path that does the same thing waits.** Filed 2026-08-01 by the

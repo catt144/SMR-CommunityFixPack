@@ -62,3 +62,33 @@ satisfied player rather than a patch note, and ⛔ the thread is
 rule stands: *"fixed in Relaunched" only from current Src.* One Src read settles
 whether D12's premise survived a 1.0.x pass, and it is much cheaper before the
 build than after.
+
+### ⭐ AND a MECHANISM HYPOTHESIS for the same symptom — worth more than the claim above
+
+Two **current** Reddit threads read the same evening ([S37]/[S38],
+`BUG_LIST_AUDIT.md` **§10.6**) contain both halves of D12's symptom *and*, from
+the player who lived it, a proposed cause nobody here has considered:
+
+> *"people were constantly **flicking between being housed and unhoused**, and
+> people genuinely just stopped working. There were jobs available in domes with
+> unemployed people and they would not fill the job slots anymore."*
+> …*"I think the homelessness issue was caused by **one of the law upgrades that
+> allows homes to house more colonists**, because I'd check homes at their
+> capacity would regularly fluctuate **because of staffing in the law spire**."*
+
+A second commenter: *"Oh yeah, I heard about that."*
+
+**Why this deserves a source read before you build.** If a politics law grants a
+residence-capacity bonus that tracks **live law-spire staffing**, then dome
+capacity oscillates as that building's workers come and go — and colonists at
+the margin flip housed/unhoused on every swing. That is a **churn** mechanism,
+not a shortage mechanism, and **a "no homeless" design aimed at shortage would
+not fix it.** It would also explain why the symptom is reported as *flickering*
+rather than as a steady deficit.
+
+⚠️ **It is a player's hypothesis, not a finding** — no Src, one corroborating
+"I heard about that", and the OP was describing a launch-era game. **Check it,
+do not adopt it.** The check is small: find the law's `Effect_ModifyLabel` (or
+equivalent) on residence capacity and see whether its amount is recomputed from
+the spire's current workforce. If it is, D12's premise needs restating before a
+line of code is written.

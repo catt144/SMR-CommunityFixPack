@@ -71,3 +71,20 @@ patch-note or forum text alone.* If unemployment's cost really did become
 visible in a 1.0.x pass, D10's premise changes and you want to know that before
 building, not after. If it did not, you have spent five minutes and closed a
 loose claim that would otherwise have surfaced during QA.
+
+**⚠️ And a CURRENT report pointing the other way, so you do not read the above
+as settled.** Two Reddit threads from 2026-07-30/08-01 ([S37]/[S38], §10.6)
+carry the symptom in plain terms: *"people genuinely just stopped working.
+**There were jobs available in domes with unemployed people and they would not
+fill the job slots anymore.** My entire industry started falling apart."* That
+reporter was describing a launch-era game, so it is not proof of current
+presence either — **which is the point: you have one player saying it was fixed
+and another describing it in detail, and neither is Src.** Read the code.
+
+**One more thing worth knowing before you scope D10.** The same threads produced
+a mechanism hypothesis for the *homelessness* half (a politics law whose
+residence-capacity bonus may track live law-spire staffing, making capacity
+oscillate) — routed to prompt 10 and written up there. **If that shape is real
+for housing, ask whether the jobs half has a twin**: a workplace-capacity or
+performance modifier that also tracks a live workforce would make employment
+churn the same way, and a design aimed at a *shortage* would not fix a *churn*.

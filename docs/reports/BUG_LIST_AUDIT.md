@@ -420,7 +420,7 @@ one-off single-fix authors (listed in the roster agent output with links).
 
 ## 8. Sources
 
-[S1] steamcommunity.com/app/3215050/discussions/0/797838226728656171/ · [S2] steamcommunity.com/app/3215050/reviews/?browsefilter=toprated (Kudaku, Nov 14 2025) · [S3] steamcommunity.com/app/3215050/discussions/0/691998095298538348/ · [S4] steamcommunity.com/app/3215050/discussions/0/691994648689827064/ · [S5] steamcommunity.com/app/3215050/discussions/0/766309862211705626/ (dev fix-list thread) · [S6] steamcommunity.com/app/464920/discussions/0/1640918469751039933/ · [S7] steamcommunity.com/app/3215050/negativereviews/?browsefilter=toprated&l=english&p=1 (Rhodith) · [S8] steamcommunity.com/app/3215050/discussions/0/658215953538296888/ · [S9] steamcommunity.com/app/3215050/discussions/0/660467372238571824/ · [S10] steamcommunity.com/app/3215050/discussions/0/695372460980312562/ · [S11] steamcommunity.com/app/3215050/discussions/0/658215953538161940/ · [S12] steamcommunity.com/app/3215050/discussions/0/658215953538296815/ + /658216290030325560/ · [S13] steamcommunity.com/app/3215050/discussions/0/660467372238569064/ · [S14] steamcommunity.com/app/3215050/discussions/0/691994126364820085/ · [S15] steamcommunity.com/app/3215050/discussions/0/679607959154615075/ · [S16] steamcommunity.com/app/3215050/discussions/0/682986810375204974/ · [S17] steamcommunity.com/app/3215050/discussions/0/834998413871378587/ · [S18] steamcommunity.com/app/3215050/discussions/0/691994366768609081/ · [S19] steamcommunity.com/app/464920/discussions/0/3038230013019773675/ · [S20] steamcommunity.com/app/3215050/discussions/0/691994126364708516/ · [S21] steamcommunity.com/app/3215050/discussions/0/694249410478015485/ · [S22] forum.paradoxplaza.com threads 1112166 / 1113731 / 1495056 (title/snippet grade) · [S23] steamcommunity.com/sharedfiles/filedetails/?id=3775120166 (fredware Bug Fixes) · [S24] GromGor workshop items 3717125029 / 3676027320 / 3730839706 / 3745475097 · [S25] steamcommunity.com/sharedfiles/filedetails/?id=3604423090 (Oxygenus) · [S26] steamcommunity.com/app/3215050/discussions/0/682986292645092952/ · [S27] steamcommunity.com/app/3215050/discussions/0/660467372238618006/ · [S28] steamcommunity.com/app/464920/discussions/1/1742228532898283720/ · [S29] github.com/ChoGGi/SurvivingMars_Mods … /Fix Bugs/MoreInfo.md (verbatim copy in audit scratchpad) · [S30] steamcommunity.com/app/3215050/discussions/0/567036688513147663/ · [S31] steamcommunity.com/app/3215050/discussions/0/658216290030318639/ · [S32] steamcommunity.com/games/3215050/announcements/detail/534381453704692743 (1.0.7 notes) · [S33] steamcommunity.com/app/464920/discussions/0/3211505894106180744/ · [S34] steamcommunity.com/app/3215050/discussions/0/691994126364857669/ · [S35] steamcommunity.com/sharedfiles/filedetails/?id=2588520023 (Tremualin's Library) · **[S36] reddit.com/r/SurvivingMars/comments/1p6dnbj/ — "We are up to hotfix 1.0.3 now… anyone notice game getting better?", u/aom17, ~Dec 2025, read in full from an owner PDF export 2026-08-01 (§10.5). ⛔ HOTFIX-1.0.3-ERA — four generations before our pinned build; evidence of harm, never of current presence.** Full per-query search logs live in the five agent outputs under the session task directory.
+[S1] steamcommunity.com/app/3215050/discussions/0/797838226728656171/ · [S2] steamcommunity.com/app/3215050/reviews/?browsefilter=toprated (Kudaku, Nov 14 2025) · [S3] steamcommunity.com/app/3215050/discussions/0/691998095298538348/ · [S4] steamcommunity.com/app/3215050/discussions/0/691994648689827064/ · [S5] steamcommunity.com/app/3215050/discussions/0/766309862211705626/ (dev fix-list thread) · [S6] steamcommunity.com/app/464920/discussions/0/1640918469751039933/ · [S7] steamcommunity.com/app/3215050/negativereviews/?browsefilter=toprated&l=english&p=1 (Rhodith) · [S8] steamcommunity.com/app/3215050/discussions/0/658215953538296888/ · [S9] steamcommunity.com/app/3215050/discussions/0/660467372238571824/ · [S10] steamcommunity.com/app/3215050/discussions/0/695372460980312562/ · [S11] steamcommunity.com/app/3215050/discussions/0/658215953538161940/ · [S12] steamcommunity.com/app/3215050/discussions/0/658215953538296815/ + /658216290030325560/ · [S13] steamcommunity.com/app/3215050/discussions/0/660467372238569064/ · [S14] steamcommunity.com/app/3215050/discussions/0/691994126364820085/ · [S15] steamcommunity.com/app/3215050/discussions/0/679607959154615075/ · [S16] steamcommunity.com/app/3215050/discussions/0/682986810375204974/ · [S17] steamcommunity.com/app/3215050/discussions/0/834998413871378587/ · [S18] steamcommunity.com/app/3215050/discussions/0/691994366768609081/ · [S19] steamcommunity.com/app/464920/discussions/0/3038230013019773675/ · [S20] steamcommunity.com/app/3215050/discussions/0/691994126364708516/ · [S21] steamcommunity.com/app/3215050/discussions/0/694249410478015485/ · [S22] forum.paradoxplaza.com threads 1112166 / 1113731 / 1495056 (title/snippet grade) · [S23] steamcommunity.com/sharedfiles/filedetails/?id=3775120166 (fredware Bug Fixes) · [S24] GromGor workshop items 3717125029 / 3676027320 / 3730839706 / 3745475097 · [S25] steamcommunity.com/sharedfiles/filedetails/?id=3604423090 (Oxygenus) · [S26] steamcommunity.com/app/3215050/discussions/0/682986292645092952/ · [S27] steamcommunity.com/app/3215050/discussions/0/660467372238618006/ · [S28] steamcommunity.com/app/464920/discussions/1/1742228532898283720/ · [S29] github.com/ChoGGi/SurvivingMars_Mods … /Fix Bugs/MoreInfo.md (verbatim copy in audit scratchpad) · [S30] steamcommunity.com/app/3215050/discussions/0/567036688513147663/ · [S31] steamcommunity.com/app/3215050/discussions/0/658216290030318639/ · [S32] steamcommunity.com/games/3215050/announcements/detail/534381453704692743 (1.0.7 notes) · [S33] steamcommunity.com/app/464920/discussions/0/3211505894106180744/ · [S34] steamcommunity.com/app/3215050/discussions/0/691994126364857669/ · [S35] steamcommunity.com/sharedfiles/filedetails/?id=2588520023 (Tremualin's Library) · **[S36] reddit.com/r/SurvivingMars/comments/1p6dnbj/ — "We are up to hotfix 1.0.3 now… anyone notice game getting better?", u/aom17, ~Dec 2025, read in full from an owner PDF export 2026-08-01 (§10.5). ⛔ HOTFIX-1.0.3-ERA — four generations before our pinned build; evidence of harm, never of current presence.** · **[S37] reddit.com/r/SurvivingMars/comments/1vblaf6/ — "Should I buy relaunched?", ~2026-07-30** · **[S38] reddit.com/r/SurvivingMars/comments/1vcylpm/ — "Is relaunched still broken?", 2026-08-01.** Both owner PDF exports, read in full (§10.6). **CURRENT — contemporaneous with our pinned build — but read §10.6's selection-bias caveat before quoting either: enthusiast "no bugs" testimony is data about the speaker, not the build.** Full per-query search logs live in the five agent outputs under the session task directory.
 
 ## 9. Addendum (same day) — the packed-source comparison round
 
@@ -779,3 +779,213 @@ complaints. They were **one commenter's throwaway memory of a hotfix history**
 (*"only between two domes"*, which constrained a mechanism). Neither would
 survive a keyword search. That is an argument for reading community threads
 whole, and an argument against treating them as a bug-report feed.
+
+### 10.6 Two CURRENT Reddit threads [S37][S38] — contemporaneous with our pinned build, and they cut both ways
+
+**Sources, both exported by the owner 2026-08-01 and read in full:**
+- **[S37]** *"Should I buy relaunched?"* (u/Regular_Future2474, **~2026-07-30**)
+- **[S38]** *"Is relaunched still broken?"* (u/Thorn-of-your-side, **2026-08-01**, hours old)
+
+**These are NOT §10.5.** That thread was 1.0.3-era and could only speak to harm.
+These are current, so they can speak to the build we actually ship against —
+which makes the sampling problem the important thing to state first.
+
+> ⚠️ **SELECTION-BIAS CAVEAT (owner, recorded because it governs every use of
+> [S37]/[S38]).** A subreddit is not a bug tracker. Enthusiasts report "no bugs"
+> for reasons that are not evidence of absence: **they may be running fix mods
+> and no longer remember**, they may be motivated to defend a game they want
+> supported, and the loudest "it's fine now" posts sit next to detailed defect
+> reports in the same thread. **Treat "I haven't seen that" as data about the
+> speaker, not about the build.** Both threads contain both kinds, sometimes
+> from people with hundreds of hours.
+
+#### ⭐ 10.6a The strongest finding: our F81(a) has become standard community advice
+
+**mizushimo ([S37], 1 day old):** *"It is buggy… **I recommend running the game
+with the disasters patch mod (Patch 1.0.7 No Disasters After Meteor Storms)**"*
+— and repeats it to a second player in [S38]: *"**disasters are broken but you
+can fix it with a mod**."*
+
+**That mod is GromGor's workshop `3717125029`, which this project already holds
+in the archive and has already read.** Its own description
+(`metadata.lua`, verified this session): *"After a meteor storm, **one of the
+keys may not be removed, preventing further disasters from generating.** This
+mod fixes this issue."* — i.e. **precisely F81(a)**, the stranded
+`g_DisastersPredicted` key our `Fix_DisasterPredictionLeak` /
+`Fix_MeteorStormWedge` pair manages (§9 already matched the code; this matches
+the *community's experience of it*).
+
+**Why this is worth more than another bug report.** It is not one player hitting
+a defect — it is a regular telling newcomers to install the fix **before they
+start playing**, unprompted, twice, in two different threads, days ago. That is
+about as strong a real-world reachability signal as this project is ever going
+to get for F81(a), and it is independent of both our source reading and
+GromGor's code.
+
+#### 10.6b A mechanism hypothesis for D12, from the player who had the symptom
+
+**Thorn-of-your-side ([S38] OP):** *"people were constantly flicking between
+being housed and unhoused, and people genuinely just stopped working. There were
+jobs available in domes with unemployed people and they would not fill the job
+slots anymore."* Then, unprompted, a cause:
+> *"I think the homelessness issue was caused by **one of the law upgrades that
+> allows homes to house more colonists**, because I'd check homes at their
+> capacity would regularly fluctuate **because of staffing in the law spire**."*
+
+mizushimo: *"Oh yeah, I heard about that."* **A politics law whose residence-capacity
+bonus tracks live law-spire staffing would make dome capacity oscillate, and
+colonists would flick housed/unhoused as it moved** — a concrete, checkable
+mechanism for a symptom D12 has only ever had as a symptom. **Routed to prompt
+10; it is a hypothesis to test against Src, not a finding.** Note the OP was
+describing a launch-era game, so currency is not claimed for the symptom — only
+the hypothesis is new.
+
+#### ⚠️ 10.6c A current claim that CONTRADICTS our verified lander family — recorded, not hidden
+
+**lifeinneon ([S38], 2 hours old, "Research" flair):** *"They fixed the
+showstopper bugs fairly quickly after launch… **Landers and the elevator work
+much more smoothly now. The old bugs don't happen because they've completely
+changed how both work to be more straightforward**."*
+
+**Our F67/F68/F70/F71 are Src-verified against 1.0.7.396349 and live-tested
+(PT-16/17/31/32).** So this claim is contradicted by stronger evidence and does
+not move any verdict — **but it is recorded because burying inconvenient
+testimony is exactly the failure mode this audit has spent the day correcting.**
+It also sits *in the same thread* as a player describing F67 verbatim
+(Thorn-of-your-side, [S37]: *"my rocket would just fly back and forth until it
+was out of fuel and got stuck on the asteroid"*), which is the caveat above in
+miniature. **Standing rule, unchanged: "fixed in Relaunched" only from current
+Src.**
+
+#### 10.6d Filed as candidates (two, both current-build and specific)
+
+**C36** (Inner Light mystery) and **C37** (planetary anomalies / elevator) — see
+BUGS. Both are single-source and mechanism-free; they are filed rather than
+noted because each names one defect precisely, on the current build.
+
+#### 10.6e Noted, NOT filed — with the reason in each case
+
+- **Save-freeze / autosave corruption.** mizushimo, both threads: *"makes the
+  save unplayable by **freezing in the same point in time every reload**"*, and
+  *"the crashing was due to repeated crashes during autosave slowly corrupting
+  your save file… turn off autosave"*, described as an OG-era problem too. **A
+  deterministic, reload-stable save wedge is the same CLASS as F86** and bears
+  on D13 and on our own save/reload test legs. Not filed: community hearsay,
+  no mechanism, and it is vanilla. **Worth a look if D13 ever asks what a
+  "rescued" save can be expected to survive.**
+- **Console autosave lock.** YsoL8 (PS5): *"a bug with it locking when it
+  autosaves if there isn't enough save space left."* Feeds the D13 console
+  question; not ours.
+- **Asteroid cave-ins.** Thorn-of-your-side (launch-era): cave-ins spawning on
+  **asteroid** maps and *"filling the entire asteroid"*. If real, that is the
+  **same map-scoping class as F90/C04** — a disaster reaching a map it was not
+  scoped to. Launch-era and unverified; recorded because the class now has a
+  proven member.
+- **Passageway oscillation.** mizushimo: *"a rare bug with a passageway (where
+  they **run back and forth endlessly** in a passageway)"*, plus *"dome mobbing"*
+  from over-using filters. Adjacent to F52/F53 and to **C19** (prompt 6b job 2).
+- **Trains vs shuttles.** sloppylaw: *"trains are still a bit buggy in that I
+  can't get them to not want to take the shuttles."* Transport-mode selection;
+  F80's neighbourhood, no mechanism.
+- **Politics balance, food/research reworks, terraforming slog, seeders stopping
+  at ~40%** — balance and roadmap, not defects.
+
+#### ⭐ 10.6f "Crashes" and "bugs" are not two categories — and players report them as if they were (owner, 2026-08-01)
+
+**The observation:** community threads carry a large volume of *"it crashes"*
+alongside *"I haven't really found any major bugs"*, often from the same
+population — as though instability were a separate phenomenon from defects.
+**It very likely is not. A defect that leaves bad state can surface to the
+player as a crash, a freeze, or a corrupted save, and the player will file that
+under "unstable game" rather than under the bug that caused it.**
+
+**This is not speculation about players; the threads contain the link being made
+and missed in the same breath:**
+- **Made:** Thorn-of-your-side, on runaway asteroid cave-ins — *"that would end
+  up filling the entire asteroid with caveins and **I believe even caused some
+  crashes when the game wanted to spawn more**."* A player tracing a crash back
+  to a defect.
+- **Missed:** the same thread's *"I haven't really found any major bugs"* from a
+  player who is not reporting on their error log, because nobody can.
+- **The chain, described by a third:** mizushimo — *"the crashing was due to
+  **repeated crashes during autosave slowly corrupting your save file**"*, and
+  the endpoint, *"makes the save unplayable by **freezing in the same point in
+  time every reload**."* Deterministic replay of a bad state is what a corrupted
+  save looks like, not what a driver fault looks like.
+
+**The datum that makes it concrete — and it is from §10.5:** Bst011, playing
+with debug enabled, reports *"you get a pop up **every time the game throws an
+error code**, and the volume of pop-ups I get on the latest version is maybe
+**1% of the volume it was on launch**."* **The retail game runs on a stream of
+Lua errors that no ordinary player can see.** In this engine an error is
+usually swallowed (`procall`) rather than fatal — so the visible consequence is
+not a crash at the error, it is **state quietly going wrong**, and the crash or
+freeze arrives later with nothing to connect it to.
+
+**Three consequences for how this project reads evidence:**
+1. **Crash reports are a LOWER BOUND on defect incidence, not a separate
+   bucket.** A thread full of crash complaints is a thread reporting defects it
+   cannot name.
+2. **"I haven't seen any bugs" from someone who also reports crashing is not a
+   clean report** — it sharpens §10.6's selection-bias caveat with a mechanism.
+3. ⚠️ **It points back at us.** Our own `Opt_DroneOverhaul` threw **80–98 orphan
+   errors per load** after uninstall (F86, leg 5 / PT-58) — completely silent to
+   a player, who would eventually blame the game. **That is the whole argument
+   for F86's per-site discipline and for D13**, and it is why our A/B legs count
+   `[LUA ERROR]` instead of trusting "it seemed fine". **A playtest leg that
+   reports "no crash" has measured nothing; the log is the instrument.**
+
+**Recorded as a framing correction, not a finding.** No measurement here ties
+any specific crash to any specific defect, and some reports are plainly
+unrelated (one commenter's PC froze while changing graphics settings). The
+claim is only that the community's two categories are one category, and that
+treating them as two makes defect incidence look smaller than it is.
+
+##### 10.6f(i) Our own sample — a real observation, and why it is NOT a control
+
+**Owner, 2026-08-01: across the entire beta campaign — ~58 hours of in-game
+testing — the game has NEVER crashed with the fix pack installed**, including
+during legs that do things no player would do (console-forced autosaves, planted
+stale GameVars, deliberately killed and wedged threads, forced tech grants,
+mid-session mod enable/disable, repeated save/load cycling, and a full uninstall
+leg).
+
+That is worth recording, and it is **not** evidence that the pack prevents
+crashes. Four reasons, stated plainly so nobody later quotes the 58 hours as a
+result:
+
+1. **There is no vanilla arm.** No matched run of comparable length and abuse
+   without the pack exists. Zero crashes in the treatment group with no control
+   group is not a comparison.
+2. **The exposure profile differs from where the community crashes.** Their
+   reports cluster in **late-game, long-session, high-entity-count** colonies —
+   *"by the time I had like 8 domes up"*, *"85% vegetation score"*, *"I
+   typically like to leave it open and just pause so my session lengths can be
+   pretty long"*. Our legs are mostly short, targeted, and early-to-mid colony.
+   We may simply not be standing where the crashes are.
+3. **We reload constantly, and reloading breaks the proposed accumulation.**
+   If mizushimo's chain (crash → corrupted save → more crashes) is right, a
+   campaign that repeatedly loads from known-good saves would look clean whether
+   or not the pack helps.
+4. **One machine, one driver stack, one player.**
+
+**The mechanistic case is real, though, and worth stating because it is what
+would make the observation more than luck.** Several fixes repair exactly the
+class §10.6f describes — persisted bad state: F81's stranded
+`g_DisastersPredicted` key, F02/F78/F88/F89's wedged threads, C34's
+stale-ACTIVE rain state, F64's leaked train prefabs, F35's missing label
+modifiers. **If defects surface as instability, fixing state corruption should
+reduce instability.** That is a plausible mechanism, not a measurement.
+
+**⭐ The controlled version of this claim already exists, and it is stronger
+than crash-counting: our A/B legs count `[LUA ERROR]` directly** — the thing
+§10.6f argues *precedes* crashes — and they report zero with the pack applied on
+clean runs (e.g. `63/0/15/0`; PT-58's *"zero `[LUA ERROR]` of any kind"*).
+**That is the number to cite. "It never crashed" is the anecdote; the error
+count is the instrument.**
+
+⚠️ **PUBLICATION TRAP, flagged because this is exactly where it would go
+wrong.** "58 hours, zero crashes" is a tempting line for `MOD_DESCRIPTION.md`
+and **it would fail this project's own evidence bar** — the same bar that kept
+the no-precedent uninstall sentence unpublished. A stability claim needs a
+control; we do not have one. **Do not ship it.**
