@@ -24,10 +24,15 @@
 folder first.**
 
 **Staleness check: `git log --oneline -10` + `git pull`.** Gate: the D10/D12
-unhold recorded (prompt 5); prompt 9 (D10) landed and its leg read clean —
-**never build D12 in the same session as D10** (both touch colonist
-assignment; standing rule: separate landings, own A/Bs). Authority: **the
-BUGS.md D12 entry is the spec** — speced 2026-07-30, user-approved.
+unhold recorded (prompt 5). ⚠️ **THIS GATE LINE WAS CORRECTED 2026-08-02 — it
+used to read *"prompt 9 (D10) landed and its leg read clean"*, and BOTH halves
+are false.** Prompt 9 ran and consumed itself but **built nothing and ran no
+leg**: the owner parked D10 to post-release mid-prompt (see the notes below).
+**Nothing about D12 is blocked by that** — the standing "never build D12 in the
+same session as D10" rule is satisfied trivially, since D10 does not exist and is
+not being built. Do not inherit a clean-leg fact from a leg that never ran.
+Authority: **the BUGS.md D12 entry is the spec** — speced 2026-07-30,
+user-approved.
 
 ## Jobs (todo list first)
 
