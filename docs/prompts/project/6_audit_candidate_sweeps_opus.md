@@ -109,4 +109,46 @@ identity (`IsTechResearched("<id>")`) in the same log line as any label read.**
 mechanism is the asteroid-visit `ShiftsBuilding` case and this reading says
 nothing about it.)*
 
-(prompt 5 appends state here)
+### From chain prompts 5 + 5b (F86 Tier 2, 2026-08-01) — BUILT AND VERIFIED, chain is clear ahead of you
+
+**Nothing here is work for you.** This is state, so you do not re-derive it.
+
+**✅ F86 TIER 2 IS DONE.** Four modules moved off their blocking bodies onto
+verified-synchronous seams (`88f3154`, `44e6af2`, `6f0cb95`, `ef7d49c`,
+`e197190`, `77683c8`; TestKit `6eb3c0b`, `7bfa274`), and **PT-58 ran with the
+owner and passed all seven predictions**: the uninstalled load carried **zero**
+`Opt_DroneOverhaul` orphan errors against Tier-1 leg 5's **80**, over an article
+holding 73 idle drones. **F86 Site 2 is CLOSED — both proven leak sites are now
+repaired and verified.** The `ArrivalDeaths` half-(a) design pass was run and
+found a route, so it was built rather than deferred; nothing was routed to
+prompt 12 from it.
+
+**What changed under you, in case a sweep touches these files:**
+- `Fix_DroneUnreachableForever`, `Fix_TrainWaitTime`, `Fix_ArrivalDeaths` and
+  `Opt_DroneOverhaul` are all wrappers now — **none replaces a body**. If a
+  candidate sweep proposes anything for these, read the entry first.
+- **F21 was downgraded `tested` → `fixed`** (PT-43 measured a retired body). F53
+  and F55 stay `fixed`. **PT-58 earned NO status flip** — its P1-P3 are fixture
+  results, and the leg verified save safety, not function.
+- **D10/D12 are UNHELD** (prompts 9 and 10 are runnable). That does not change
+  your order: 6 → 6b → 7 → 8 still runs first.
+
+**Two limits recorded on PT-58 that a later session must not read past:**
+1. **D06 part 2's moonlighting is untested** — every hub read `unclaimed=0`, so
+   the `self.command == "Idle"` gate never fired. Save safety does not depend on
+   it; function does. Its home is the frozen PT-52, not a sweep.
+2. **The clean uninstall is not a Tier-3 clearance** — it means no accepted
+   residual happened to be in an erroring state on that save.
+
+**➡️ ONE ITEM ROUTED PAST YOU TO PROMPT 12** (not yours, recorded so it is not
+lost twice): an asserts-build sitting with `SMRTest.EnableIntrospection(debug)`
+typed into the un-sandboxed console would clear the **eight `[install]` probes
+that SKIP on every retail run** — standing TestKit coverage the project has
+never had. The mod sandbox applies on all builds, so MarsDebug alone does not do
+it (verified 2026-07-26). Deliberately not run during PT-58, whose baseline was
+measured on retail.
+
+**Instrument note you may want:** `tools/blocking_analysis.py` takes a JSON list
+of `[label, name]` pairs and answers "can this yield?" per name. Tier 2 used it
+for every "verified synchronous" claim. If a sweep needs that question, use it
+rather than grepping for `Sleep`.

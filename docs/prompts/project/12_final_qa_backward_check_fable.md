@@ -101,6 +101,24 @@ recommendations to decide on separately.
 
 ## Notes from upstream
 
+### Routed here from chain prompt 5b (2026-08-01) — a standing coverage gap, not chain work
+
+**Eight `[install]` probes SKIP on every retail run** ("introspection unavailable
+(retail sandbox)") and always have. They can be made to report: the mod sandbox
+applies on ALL builds including `MarsDebug.exe` (verified 2026-07-26 — the
+"asserts build un-sandboxes mod code" assumption was tested and is wrong), but an
+asserts build DOES un-sandbox the **console**, so the working attended procedure
+is a MarsDebug session, then `SMRTest.EnableIntrospection(debug)` typed in the
+console, then `SMRTest.RunAll()`.
+
+Deliberately not done during PT-58: that leg's headline was a comparison against
+a figure measured on retail, and an asserts build makes the `dbg()` calls inside
+`CommandThreadProc` itself live (`CommandObject.lua:208`, `:273`) — the exact
+loop under measurement. Right call there; still worth having as its own sitting.
+**Recommend it as a standing playtest item rather than chain work** — it is
+TestKit coverage and belongs to nobody's numbered prompt.
+
+
 (any prompt may have routed standing items here — resolve them all)
 
 ### From chain prompt 4b (2026-08-01) — documentation drift, and why job 7 exists
