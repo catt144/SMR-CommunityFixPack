@@ -1142,6 +1142,50 @@ decision packages are put to the owner: keep both as replacements (the shape is
 already shipped, probe-covered and A/B-clean), convert to §1.1–§1.4 where a
 wrapper can reach the defect, or drop the latent halves. It is a decision owed,
 not a defect found — nothing here is claimed to be wrong.
+
+**📦 PACKAGE 0 PREPARED 2026-08-02 (chain prompt 7) — RECOMMENDATION: CONVERT
+BOTH ITEMS TO §1.4 WRAPPERS. ⛔ OWNER DECISION OWED — nothing built, nothing
+changed.** The blanket pre-clearance does not cover this (it removed the ask for
+*adopting* the rule, not for what the rule then asks of shipped code), so this
+sits until the owner answers.
+
+*Tier re-derived this session, not inherited.* **Item 1 — R3.** Exactly four
+shipped `SA_GetLabelToRegister` sites in all of `Data`, all in Mystery 2
+(`Data\Scenario\Mystery 2.lua:235, :252, :280, :284` — the same four the audit
+found in the `.generated` twin), and **zero presets anywhere in `Data` set
+`random_count` or `random_percent`** on the action (the three grep hits are the
+property *declaration* in `ClassDef-PresetDefs.lua` and two unrelated
+`Vegetation.lua` fields). **Item 3 — R3.** `pre_hit_ground_t` /
+`pre_hit_ground_t_2` are declared once (`Diggers.lua:53-54`, 1000/500 —
+already ordered) with **no subclass and no preset override anywhere in Src**,
+so the broken branch cannot execute on shipped data. Both are latent by DATA,
+not by code: §4a case 3, and the fixes stay in scope.
+
+**The conversion option EXISTS for both, and it is cheap — this was checked in
+Src, not assumed.**
+
+* **Item 1 → §1.4 post-wrapper.** `GetObjectsByLabel` returns
+  `table.icopy(labels[label])` (`SA_Gameplay.lua:147-168`) — **a copy, not the
+  live label table** — so truncating the returned list is safe and touches no
+  city label. (That also retires an unstated risk in the *current* replacement,
+  which truncates the same table on the same assumption without recording it.)
+  The wrapper calls `orig`, re-derives the same `count` from `self` and `#objs`,
+  and drops the tail. No body copy; the shuffle stays vanilla's.
+* **Item 3 → §1.4 PRE-wrapper, zero copied lines.** Order the two fields
+  *before* calling `orig`; the shipped `if self.pre_hit_ground_t <
+  self.pre_hit_ground_t_2` is then false by construction and its broken swap
+  never runs. `return orig(self)` — nothing after the call, so it is also
+  §3a **layer 2** rather than a body sitting in the save's shape.
+
+**Why convert rather than keep:** a §1.5 copy re-verifies against every game
+update forever (WORKFLOW fpk gate) and, if Paradox ever fixes either line, the
+copy silently reinstates the old body — the failure §1.4b names in writing.
+Both wrappers are no-ops on today's data exactly as the replacements are, so
+**the conversion is not a behaviour change; it is the same fix at a cheaper
+maintenance tier.** Dropping the latent halves is the weakest of the three
+answers: the benefit is unchanged and the cost objection disappears on
+conversion. Paired ask on **F57(a)**; build routed to chain prompt 8 **only if
+the owner says convert**.
 1. `Lua\Sequences\SA_Filters.lua:30-40` — `SA_GetLabelToRegister` ignores
    `random_count`/`random_percent` (returns full list after shuffle). No shipped user.
 2. `Lua\Sequences\SA_Gameplay.lua:2705` — `SA_WaitMarsTime` *generated-code* path inverts
@@ -2356,6 +2400,57 @@ two are routed together to chain prompt 7. Note for whoever prepares that
 package: (a)'s defect is a mid-function key write, so a §1.1–§1.4 route is not
 obviously available — that is part of what the decision must weigh, not a
 reason to skip the ask. (b) is unaffected (additive `OnMsg`, §1.2).
+
+**📦 PACKAGE 0 PREPARED 2026-08-02 (chain prompt 7) — the §1.1–§1.4 route the
+note doubted DOES exist, and it is better than the replacement on three axes.
+RECOMMENDATION: CONVERT. ⛔ OWNER DECISION OWED — nothing built.**
+
+*Tier re-derived this session.* **R3.** `FuelResource` still has **no
+assignment anywhere in `ModTools\Src`**, and the legacy `RocketBase` branch
+hardcodes `"Fuel"` (`DroneControl.lua:623, :628`), so the written key and the
+cleared key coincide on shipped data. Latent by DATA — a new rocket template
+with its own fuel resource is a patch/DLC away, not a mod away (§4a case 3).
+
+**The route.** The stale key survives because `r_t.Fuel = nil` (`:615`) clears
+one key of a table the loop may key by `r.FuelResource` (`:634`). A wrapper
+cannot see which key `orig` wrote — but it does not need to: it can **clear the
+whole restrictor table before calling `orig`**, which is precisely what the
+shipped line was trying to express.
+
+```lua
+local orig = DroneControl.UpdateRocketsInternal
+function DroneControl:UpdateRocketsInternal()
+    local r_t = self.restrictor_tables and self.restrictor_tables[rfRestrictorRocket]
+    if type(r_t) == "table" then for k in pairs(r_t) do r_t[k] = nil end end
+    return orig(self)   -- vanilla re-clears .Fuel and rebuilds from serviced_rockets
+end
+```
+
+**Safe because that table has exactly one writer.** Full-tree grep of
+`restrictor_tables` / `rfRestrictorRocket`: created empty at
+`DroneControl:InitRocketRestrictors` (`:174-178`), written **only** by
+`UpdateRocketsInternal` (`:614`), read by `Drone.lua:1209-1210` and the C
+matcher (`_TaskRequest.lua:57, :75`). Nothing else puts a key there to lose, and
+the clear and the rebuild are in the same synchronous call — the only caller is
+`RestrictorThreadBody` (`:562-574`), which cannot re-enter between them.
+
+**Three axes better than the shipped replacement, not merely equal:**
+1. **§1 preference** — §1.4 wrapper over a 27-line §1.5 copy, and the copy
+   carries a live gotcha it had to work around (`rfRestrictorRocket` is a
+   FILE-LOCAL, `:12`).
+2. **§3a/§3** — it **deletes a persisted mod field from every save**: the
+   replacement remembers the key in `self.SMRFixPack_rocket_fuel_key` on a
+   saved DroneControl; the wrapper needs no memory at all. Strictly less of us
+   in the player's file, and it is `return orig(...)` with no post-work
+   (**layer 2**).
+3. **Patch rot** — if Paradox fixes `:615`, the wrapper becomes a harmless
+   double-clear; the §1.5 copy would reinstate the old body.
+
+**The one thing it changes:** if another mod deliberately parked an entry in
+that restrictor table, we now clear it — vanilla already clears `Fuel` there
+every update, so this widens an existing sweep rather than inventing one. Worth
+stating; not, on its own, a reason to keep the copy. Paired ask on **F29**;
+build routed to chain prompt 8 **only if the owner says convert**.
 
 **(c) NOT FIXED — redundant with the assignment-time check, and a §1.5 replacement to
 reach.** The mechanism is exactly as tracked: `can_work_here = work_or_train or (cdome ==
