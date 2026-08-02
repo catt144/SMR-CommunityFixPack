@@ -289,3 +289,104 @@ classes, so no scan stage can be broken by losing an anomaly.
 **Package shape if it passes §4:** the minimal repair is the flag the whole
 rest of the game already uses on set-pieces, not a wrapper on the meteor path.
 Weigh that a flag change alters vanilla data rather than patching a method.
+
+---
+
+### From 6c (2026-08-02) — one new package for you, and two method facts that will change how you read the others
+
+6c ran the last three of 6b's jobs: the five SkiRich OG candidates (C26-C30),
+the F82 trace, and the F80 source audit. **It filed nothing and promoted one
+thing.** Counts unchanged and re-derived: 102 rows (90 F + 12 D), 38 C.
+
+#### ⭐ Your new package: F82 (split-grid notification)
+
+**The trace is DONE and the mechanism is source-verified**, so this arrives as
+a decision, not an investigation. The notification has **no removal path at
+all** — `Lua\SupplyGrid.lua:1626-1629` is the only reference to
+`PowerGridSplit`/`LifeSupportGridSplit` in the whole tree — and what it
+registers is `self:GetPos()`, a **position, not the grid**, so a rejoin is not
+an input to it in any sense. It clears only by the preset's
+`Expiration = 120000` with `GameTime = false`, and `Notifications.lua:188-217`
+runs that branch on a **real-time** thread: **2 real minutes, independent of
+game speed and of whether anything was repaired.** Sibling tell: `PowerLeak`
+and `LifeSupportLeak`, children of the same two parents in the same preset
+file, carry **no `Expiration`** and are cleared by state.
+
+**Two things to weigh that the original entry did not have:**
+
+1. ⚠️ **The symmetric half is arguably the worse one and it was never
+   reported**: an **unrepaired** split also stops being reported after 2 real
+   minutes. The entry is filed P3 on the lingering half alone; the vanishing
+   half may argue for P2. That is a severity call, and it is yours.
+2. **The repair shape is a genuine design question, which is why 6c built
+   nothing.** A `RemoveObjectFromNotification` heal needs a **key**, and the
+   notification is keyed by the break *position* — a rejoin does not happen at
+   a known position, so there is no key to match on without either tracking
+   split→rejoin pairs ourselves or clearing the whole notification. Decide the
+   key before deciding the fix.
+
+The checklist rider is rewritten around a falsifiable number (≈120 REAL
+seconds, and the delay should be **constant in real time while the elapsed sols
+differ ~20× between normal and ultra**). If that reading ever comes back
+speed-dependent, this entry is wrong and the package dies — so it is worth
+letting the rider land before building.
+
+#### ⚠️ Method fact 1 — the label rule you inherited from 6b is WRONG as written, and 6c corrected it in three places
+
+6b recorded, under C18: *"No parent class ever contributes a label."* **That is
+false.** `AddToCityLabels` is a **combined method** —
+`DefineCombinedMethod("AddToCityLabels", "call")` (`Lua\CityObject.lua:8`,
+machinery `CommonLua\Core\classes.lua:1499-1511`) — so **every** parent
+implementation runs, and parents really do contribute labels
+(`ResourceExploiter`, `ResourceProducer`, `DroneControl`, `Frozen`, and for
+units `Unit`/`Rover`/`self.class`). C18's *verdict* is unaffected and the
+reason is recorded on its entry: every parent-contributed label is a **role**
+name, never a **building-type** name, and XenoExtraction names four
+building-type labels. **The corrected rule is now in `ENGINE_FACTS.md`** along
+with the fact that `City:AddToLabel` forwards to the **colony** container first
+(`Lua\City.lua:83-86`) — which is where `Effect_ModifyLabel` writes — so "the
+tech was researched before the unit existed" is **not** a way for a label
+modifier to miss. Read the corrected version before you use the label argument
+in any C22/C38 package.
+
+#### ⭐ Method fact 2 — three of the four closes turned on the same shape, and it will recur in your packages
+
+**C27, C28 and C30 all looked like "the missing code" from outside and all
+three had the code present, written somewhere other than where the symptom
+points.** Signal Boosters commits the extender's new radius through the *hub's*
+`Effect_Code` (the hub's forced reconnect recurses into `linked_extenders` and
+re-reads their live `work_radius`). Supply-pod pins survive a generic path that
+genuinely would strand them — `PinnableObject:Done` unpins **without force**
+while `RocketBase:CanBeUnpinned()` returns false unconditionally — only because
+every affected class force-unpins in its **own** `Done`. **Before you grade any
+package on "the vanilla code for X is missing", check whether X is done by the
+neighbour, the parent, or the caller.** 6c's five sweeps went 4-0 against that
+reading.
+
+Related engine fact now recorded because it decided C30: **`Init` and `Done`
+are combined with OPPOSITE order** — `Init` is `procall` (parents first),
+`Done` is `procall_parents_last` (**most-derived first**),
+`CommonLua\PropertyObject.lua:1663-1664`. Reading either `Done` alone gives the
+wrong answer. And a rule that binds anything **we** ever make pinnable: it must
+force-unpin in its own `Done`, because `map.pinned` is a `MapVar` and a leaked
+entry is saved into the player's game.
+
+#### Not for you, recorded so you do not pick them up
+
+- **C26 stays `cand`, CANNOT DETERMINE.** The engine ships two savegame heals
+  named for exactly the symptom (`RequiresMaintenance.lua:531-566`, `:568-574`)
+  but `AppliedSavegameFixups` is pre-seeded at new-game
+  (`CommonLua\SavegameFixup.lua:10-16`), so they never run on a save started on
+  our build — **presence in Src is not reachability in this save, the same gate
+  C25 hit.** No producer found; both obvious guesses are checked and written
+  down. Next step is a console dump on a loaded save, which is playtest work,
+  not chain work. **Do not package it.**
+- **F80 stays `investigating`.** The audit gave it an exact predicate —
+  `traverse_dir = next_idx - start_idx` is never normalised to ±1
+  (`TrainTransport.lua:374`) and a stride ≠ ±1 hits a missing `link_edge` and
+  **hard-returns** (`:417`), silently dropping the tail — and it explains
+  **both** public symptoms from one function (waits via `Train.lua:882`, walks
+  via `Station:GetReachableStations`). But **the trigger is not proven**, so it
+  is not a package. ⚠️ If a fix is ever written here: `ForEachStationAlongTrack`
+  is **not re-entrant** (`stations_visited` is one shared file-local table,
+  `:365`, `:386-390`), so our callback must never enumerate.

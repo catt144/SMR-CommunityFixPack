@@ -53,6 +53,16 @@ extractors) — that is the +1; and **three moved without changing the count**:
 **C18 and C19 CLOSED as declines** (no defect — the label system and the dome
 distance term both turned out correctly scoped) and **C21's destruction route
 VERIFIED**, promoted to prompt 7 with its soft-lock located but unproven.
+**2026-08-02, chain prompt 6c: NOTHING FILED, counts UNCHANGED and
+re-derived by `awk` (90 F + 12 D = 102; 38 C).** Four C rows moved without
+changing the count: **C27, C28, C29 and C30 all CLOSED — no defect in
+Relaunched** (the four SkiRich OG candidates whose mechanisms are present in
+current Src, three of them where the code that looked missing is simply written
+somewhere other than where the symptom points), and **C26 stays `cand` with a
+recorded CANNOT DETERMINE** (the engine ships two savegame heals for exactly
+that state but they are new-game-gated, and no producer exists in current Src).
+That leaves **C26 as the only unresolved SkiRich candidate**, and its next step
+is a console dump on a loaded save, not a source read.
 ⚠️ Prompt 6's own handoff note said "35 C"; counting says otherwise — the C
 line drifts exactly like the 102 does, so re-derive it too). **TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
