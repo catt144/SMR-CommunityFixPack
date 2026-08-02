@@ -74,6 +74,15 @@ chain's author judged appropriate. Scope and limits, stated precisely:
    the edge of a context window.
 4. **New defects:** file in `BUGS.md` (never here, never FUTURE_IDEAS), then
    route any follow-up per rule 2.
+4b. **Documentation drift is EVIDENCE — capture it even when you fix it**
+   (owner, 2026-08-02). Prompt 12's job 7 diagnoses the project's doc
+   practices from a corpus of observed drift (stale tags, diverged
+   duplicates, dangling pointers, expired gates, counts gone stale). Any
+   session that catches an instance appends one line to prompt 12's job-7
+   seed list — what drifted, where, how caught — **even if the fix took ten
+   seconds**. A silently-corrected instance is destroyed evidence; the owner
+   is deliberately accumulating this corpus through prompts 7-11 before the
+   review runs.
 5. **Every prompt obeys `WORKFLOW.md` "Authoring a prompt" elements 1-7**:
    live todo list (one item per commit-and-verify unit), `git log`+`git pull`
    staleness check first, scope fence, stop conditions, what-may-not-be-
