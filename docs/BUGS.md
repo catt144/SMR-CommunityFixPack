@@ -116,7 +116,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | open — filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **durable exposed list re-derived 2026-08-01 (five-shape enumeration, Phase 1): 13** (the sweep had corrected the membership both ways — `Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out — and the re-run confirms it) **plus one inert route-(c) preset-field site** (`Fix_LastTransmissionStorage`, adjudication §4.4 closed — no build). Reproduces identically whether the pack is disabled OR fully removed. **Blocked release when filed; the gate is now PER-SITE — see the restatement at the end of this row.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — Phase 0 measured 2026-08-01 (GT creation DEFERS; autosave hook FIRES); **Phase 1 done 2026-08-01** (final Tier-1 spec `SAVE_SAFETY_REDESIGN.md` §6.2a; enumeration re-derived; §4.4 closed; build prompt written); **✅ TIER 1 BUILT AND VERIFIED 2026-08-01 (chain prompts 4 + 4b, build prompt consumed) — all four units shipped and all five legs ran; F02/F78/F81/F88 flipped to `tested`; leg 5 read Site 1 REPAIRED (the `Meteors` thread now survives uninstall alive on vanilla's body)**. ⚠️ **Site 2 (`Opt_DroneOverhaul`) STILL LEAKS** — leg 5 re-measured it at 80 orphan errors, newly observed to self-clear after one load; it is Tier-2 work (chain prompt 5). ⚖️ **RELEASE GATE RESTATED 2026-08-01 (owner): PER-SITE, not blanket** — every exposed site needs a recorded disposition (repaired in-pack where a layer 3/2 route exists; handed to the D13 cleaner where one provably does not). A site without a disposition blocks release; a site with one does not, whichever way it went. ⛔ **But the cleaner is NOT a scoping escape hatch: BUILD EVERYTHING REACHABLE NOW** — a hand-off is only valid *after* the in-pack attempt failed, never as a prediction, because D13's target list is the OUTPUT of the build work and cannot be designed before it. **Launch waits for D13; D13 does not wait for launch** (FIX_POLICY §3a). **✅ TIER 2 BUILT 2026-08-01 (chain prompt 5) — all four modules moved onto synchronous seams and **Site 2 is repaired**: `DroneUnreachableForever` → the sync consumer `Drone:CleanUnreachables`; `TrainWaitTime` → the sync `TransportStatistics:AddSpentTime`; `ArrivalDeaths` (b) → a layer-2 pre-wrapper on `Colonist:Idle` and (a) → the sync `Colonist:OnArrival` (**the design pass §6.2 booked as owed is RUN and found a route**); `Opt_DroneOverhaul` → the sync `Drone:CleanUnreachables` at vanilla's own Idle tail. Per-site dispositions recorded on each entry and in STATUS. ⚠️ **NOT YET VERIFIED — the one Tier-2 leg is specced and UNRUN (`PLAYTEST_CHECKLIST.md` PT-58, predictions written before the run), so the D10/D12 unhold is NOT recorded; chain prompt 5b carries both.** **✅ TIER 2 VERIFIED 2026-08-01 (PT-58, owner at the keyboard) — F86 SITE 2 IS CLOSED.** Uninstall log `Mars.exe-20260801-21.54.16`, test-2 lineage, 73 idle drones in the article: **ZERO `Opt_DroneOverhaul` orphan errors where leg 5 read 80** (98 when first measured), zero `[LUA ERROR]` of any kind, zero mentions of any Tier-2 module. **Both proven leak sites are now repaired and verified.** The leg verified SAVE SAFETY only — F53/F55/F21 stay `fixed`, since P1-P3 are fixture results and no live functional reading was taken. Next: the §5.4-A conversions (prompt 8) |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
 | F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | P2 | SOURCE-VERIFIED | **fixed 2026-08-01, VERIFIED by the defect's own repro** — filed 2026-07-31; fix BUILT 2026-08-01 (Tier-1 rewrite: the per-load restart is gone, one-shot version-latched heal in its place); **Tier-1 leg 2 met the named bar exactly** — strike #1 at `t=216351730` → quicksave → **3 loads with ZERO pack lines** → strike #2 at `t=218608231 (+2256501 ms = 75 game hours)`, i.e. the meteor arrived on the PRE-LOAD deadline (entry) |
-| F90 | Surface dust storms break **underground** cables and pipes — the break pass rolls its victim from a cross-map (elevator-merged) grid fragment with no map filter | P2 | SOURCE-VERIFIED | **open — filed 2026-08-01 by the prompt-6 C04 sweep** (C04 closed and promoted). Chain read end to end: `City:HourlyUpdate` `City.lua:148-149` (gated `HasDustStorm`, which is **MainMap-only**, `DustStorm.lua:41`) → `RandomBreakSupplyGrid` :178-181 → `SupplyGrid:RandomBreakElements` `SupplyGrid.lua:1017-1021` → `table.rand(self.connectors, …)` :677 with no map filter. Underground connectors arrive because `SupplyGridFragment` **is** a `MultiMapSupplyGrid` (:337-338) and the elevator merges the two sides (`Elevator.lua:402-440` → `MergeGrids` :1635-1650 → `AddElement` :547-548), with the merged fragment registered on both cities' lists (:463-477). **Sibling tell**: the production pass 16 lines above guards the shared-fragment case and says so in a comment (:999-1001); the break pass does not. Independent Relaunched witness + working third-party fix (GromGor 3730839706, re-read from the archived FPK). **NOTHING BUILT** — body-copy shape vs FIX_POLICY §3a is the design question; decision package is chain prompt 7's (entry) |
+| F90 | Surface dust storms break **underground** cables and pipes — the break pass rolls its victim from a cross-map (elevator-merged) grid fragment with no map filter | P2 | SOURCE-VERIFIED | **open — filed 2026-08-01 by the prompt-6 C04 sweep** (C04 closed and promoted). Chain read end to end: `City:HourlyUpdate` `City.lua:148-149` (gated `HasDustStorm`, which is **MainMap-only**, `DustStorm.lua:41`) → `RandomBreakSupplyGrid` :178-181 → `SupplyGrid:RandomBreakElements` `SupplyGrid.lua:1017-1021` → `table.rand(self.connectors, …)` :677 with no map filter. Underground connectors arrive because `SupplyGridFragment` **is** a `MultiMapSupplyGrid` (:337-338) and the elevator merges the two sides (`Elevator.lua:402-440` → `MergeGrids` :1635-1650 → `AddElement` :547-548), with the merged fragment registered on both cities' lists (:463-477). **Sibling tell**: the production pass 16 lines above guards the shared-fragment case and says so in a comment (:999-1001); the break pass does not. Independent Relaunched witness + working third-party fix (GromGor 3730839706, re-read from the archived FPK). **✅ §4 PACKAGE RUN 2026-08-02 (chain prompt 7) — PASSED, APPROVED, routed to prompt 8; the shape question is ANSWERED and it needs NO body copy.** Tier **R1**, enumerated: every link is single-caller back to `City:HourlyUpdate`, so ⭐ **`RandomBreakConnection` is dust-storm-only by construction** — a fix there needs no key or state. ⛔ **The "cheaper-looking" `Break` interception is UNSOUND**: `:Break()` has 8 call sites incl. **`CaveInRubble.lua:158`**, so an off-MainMap veto would silently eat legitimate cave-in damage underground. Approved instead: **§3a LAYER 3** — a pre-wrapper handing vanilla a surface-only `self.connectors` and restoring it (`pcall` + restore + re-raise, because the field is persisted). GromGor's empty-list crash is impossible in this shape, since the filtered list also feeds `IsBreakable`'s `<= 10` gate. ⚠️ Residual disclosed: the break **probability** (`^ #self.elements`) stays cross-map — deliberately not decided (entry) |
 | F89 | `MeteorsDisaster`'s unbounded drain loop wedges the METEORS thread on ordinary single/multispawn strikes — the colony silently loses ALL regular meteors, forever in vanilla | P2 | MEASURED | open — observed live 2026-08-01 (Tier-1 leg sitting): F78's drain-loop class on the singles path, INVISIBLE to the storm watchdog (no `g_MeteorStorm`); **covered by the F02 watchdog** (detected at its 189h threshold, `ALIVE but stuck`, restarted, ~6-8 sol latency); no direct fix routable — mid-function loop, body copy barred by F86 (entry) |
 | F91 | Whole-track salvage leaves an undeletable invisible `TrackBase` shell in the map and every later save — **our own F44 path reproduces it** | P3 | SOURCE-VERIFIED | **open — promoted from C33 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** `DemolishAndSplitTrack` calls `track_obj:OnDemolish()` and returns at three sites (`TrackElement.lua:467-470, :503-508, :517-522`); `OnDemolish` only *prepares* deletion — it sets `CanDelete = ret_false` (`Track.lua:249`) and empties the three arrays to `false` — and the only other deletion route is gated on the flag it just falsified (`TrackElement.lua:203-205`). **Tell: every other route to `OnDemolish` ends in `DoneObject`** (`Demolishable.lua:132-141`) and `TrackBase` sets `use_demolished_state = false` (`Track.lua:45`) to opt into that branch. **R1 — the `mass_delete` route is one advertised keypress** (*"CTRL + left_click — Salvage entire length"*, `Construction.lua:2925-2930`), and our F44 keeps it. Fix = amendment to `Fix_TrackSalvageWipe` (finish the deletion + heal existing saves on the sweep that already walks `TrackBase`), **no new module**. ⚠️ The C33 "cannot add trains to tracks" lead is **NOT** this — traced and dropped (entry) |
 | F92 | The Saint trait's dome blessing has never applied to anyone — the modifier is filed under the raw trait name `Religious`, colonists under `TraitReligious` | P2 | SOURCE-VERIFIED | **open — promoted from C22 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** Two adjacent lines in one loop disagree: `Colonist.lua:373` files under `GetTraitLabel(trait_id)`, `:376` passes the raw id to `AddDomeColonistsModifier`, which uses it as the label verbatim (`ClassDef-PresetDefs.generated.lua:1783-1784`); `Religious` is absent from `fixed_labels` (`Traits.lua:1268-1302`), so the +10 morale sits on a label nobody is in. ⭐ **Internal control: Empath is the only other `dome colonists` preset and it works** — its label needs no translation. **R1** (fires whenever a Saint joins a dome). Fix = **§1.1 preset patch** + one-shot load-time re-base; nothing enters the save (entry) |
@@ -6301,6 +6301,116 @@ owns decisions, and this session built nothing):**
 Cross-refs: C04 (the lead this closes), F86/FIX_POLICY §3a (why the body copy
 is not automatic), `BUG_LIST_AUDIT.md` §9 (mechanism-confirmed grading) and
 §10.2 (this sweep).
+
+## ✅ §4 PACKAGE RUN 2026-08-02 (chain prompt 7) — PASSED, APPROVED, and the shape question is ANSWERED: layer 3, no body copy
+
+**Tier: R1 — derived this session by enumeration, not inherited.** The defective
+line has exactly one route and every link is single-caller:
+`SupplyGridFragment:RandomBreakConnection` (:669) ← `SupplyGrid
+:RandomBreakElements` (:1017-1021, its **only** caller) ← `City
+:RandomBreakSupplyGrid` (`City.lua:178-181`, its **only** caller) ← `City
+:HourlyUpdate` (`:148-149`), gated on `HasDustStorm(self:GetMap())` and
+`hour % const.BreakIntervalHours == 0`. Player action producing the
+precondition: **build one elevator** (which merges the grids automatically),
+then wait for a surface dust storm on a merged fragment with ≥1 producer, ≥1
+consumer and >10 connectors (`IsBreakable`, :693-697). Ordinary mid-game play.
+
+⭐ **A consequence of that enumeration that removes the hardest part of the
+design problem: `RandomBreakConnection` is dust-storm-only BY CONSTRUCTION.**
+Its single call chain is already behind `HasDustStorm`, so a fix placed there
+**needs no key, no `CurrentThread()` test and no state** to know it is the storm
+pass — the very thing §3a warns is usually the hard part of a layer-3 wrapper.
+
+### ⛔ The candidate this entry called "the cheaper-looking of the two" is UNSOUND — checked, not assumed
+
+Vetoing an off-`MainMap` `BreakableSupplyGridElement:Break` during a dust storm
+**would suppress legitimate underground damage.** `:Break()` has **eight**
+shipped call sites, enumerated this session: `SupplyGrid.lua:680` (this defect)
+and `:689` (`BreakConnection`, driven by the `CauseFault` **Effect**,
+`ClassDef-Effects.generated.lua:198`), `Building.lua:3497/:3500`,
+`DustDevils.lua:426`, **`CaveInRubble.lua:158`**, `Meteors.lua:721/:724` and
+`:857/:860`, `SupplyGridBreakable.lua:275`. **Cave-ins are an underground
+phenomenon and they break underground elements on purpose.** Dust storms are
+frequent, so "off-MainMap break while a dust storm is running" is a state that
+occurs *legitimately* — the veto would silently eat marsquake/cave-in damage
+underground and the player would never know. Rejected on those grounds.
+
+### ✅ Approved shape: FIX_POLICY §3a **LAYER 3** — narrow the input, keep vanilla's body
+
+A pre-wrapper on `SupplyGridFragment:RandomBreakConnection` that hands vanilla a
+**surface-only connector list** and restores the real one:
+
+```lua
+local orig = SupplyGridFragment.RandomBreakConnection
+function SupplyGridFragment:RandomBreakConnection()
+    local all = self.connectors
+    local surface = <all connectors whose building is on MainMap>
+    if #surface == #all then return orig(self) end     -- not a merged fragment: untouched
+    self.connectors = surface
+    local ok, err = pcall(orig, self)
+    self.connectors = all                              -- ALWAYS restored
+    if not ok then error(err, 0) end
+end
+```
+
+**Why this is layer 3 and not a body copy:** the roll, the seed, the
+probability and the `Break` call all stay vanilla's. We change **what the
+shipped function reads**, which is the exact case §3a's layer-3 bullet
+describes. No mod body sits in the save.
+
+**Four properties worth stating, each of which was checked:**
+1. **No yield inside the call, so no §3a route-(a) exposure.**
+   `BreakableSupplyGridElement:Break` (`SupplyGridBreakable.lua:70-106`) is
+   straight-line: grid remove/add, consumption maths, request creation, then
+   `Presentation(true)` → `AddObjectToNotification` + FX. Nothing sleeps or
+   waits. Our frame is therefore never below a `Sleep` on the city's hourly
+   game-time thread.
+2. **The persisted field is always restored** — `self.connectors` lives on a
+   saved grid fragment, so an error escaping `orig` must not strand our
+   filtered array there. Hence the `pcall` + restore + re-raise; vanilla's error
+   behaviour is preserved, its state is not corrupted.
+3. **⭐ GromGor's empty-list crash is structurally impossible in this shape.**
+   His version indexes `element.building` on a `table.rand` of a possibly-empty
+   `surface_connectors`. Ours cannot reach that: the filtered list is also what
+   `IsBreakable` counts, and `#connectors <= 10` returns false long before the
+   pick (:695). The entry's "ours must guard rather than inherit the shape" is
+   satisfied by construction rather than by an added check.
+4. **Fragments that do not span maps are untouched** — the `#surface == #all`
+   early return means the overwhelming majority of calls pass straight through
+   to `orig` with nothing swapped.
+
+**The scope question from this entry is answered HALF-way, deliberately, and the
+residual is disclosed.** Filtering `connectors` also makes `IsBreakable`'s
+`#self.connectors <= 10` test surface-only — which is *self-consistent* (the
+"nothing to break" gate should count the pool we break from) and is accepted.
+The break **probability** at :673 is `^ #self.elements`, a different array, and
+it stays cross-map. **Residual, stated plainly: after this fix an elevator
+player's merged fragment still rolls at the inflated cross-map probability while
+only surface connectors can be picked, so their surface cables break somewhat
+more often than a non-elevator player's.** That is the narrower true thing;
+whether the probability should also be surface-only is the intent question this
+entry flagged, and it is **still not decided** — it is a rate change and it is
+not needed to stop underground pipes bursting in a surface dust storm.
+
+**Module:** new `Code/Fix_DustStormUndergroundBreaks.lua`. **Technique:** §1.4
+chained wrapper, §3a layer 3. **Self-check at apply:** the class and method
+exist on the declaring class (`SupplyGridFragment`), `MainMap` resolvable at
+call time. **Map test:** GromGor used `con.building.city:GetMap() == MainMap`;
+the builder verifies which accessor a connector's building actually offers
+before choosing between that and `Building:GetMap`.
+
+**Probe outline:** `DustStormBreakMapFilter` — construct nothing; assert the
+wrapper is installed, and (live half, checklist rider) after a surface dust
+storm on an elevator colony, zero new `PowerLeak`/`LifeSupportLeak`
+notifications exist on the underground map. The rider is the honest test because
+the defect is a *victim distribution*, not a single event.
+
+**Intent statement for the header:** *the disaster is gated to `MainMap` by
+`HasDustStorm`, and its damage arm inherited a cross-map connector list from the
+elevator merge. We narrow what the shipped picker sees to the map the disaster
+is on; the roll, the odds and the break itself remain vanilla's.*
+
+**Route to chain prompt 8.**
 
 ### F91 — Whole-track salvage leaves an undeletable invisible `TrackBase` shell in the map and in every later save — and our own F44 path reproduces it (P3, SOURCE-VERIFIED)  `[open — promoted from C33 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8 as an amendment to Fix_TrackSalvageWipe — no new module]`
 
