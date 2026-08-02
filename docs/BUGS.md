@@ -9044,6 +9044,26 @@ quotes verbatim; sources in the audit report §8.
     write a `BPUL`/HPK extractor** — one-time, and reusable for any future
     OG-vs-Relaunched question. Not attempted here: outside this package, and
     item 1 blocks nothing.
+    ⭐ **A CHEAPER ROUTE MAY EXIST — the game can read its own pack.** OG's Lua
+    contains **`AsyncFileToString`** (offset 928527) and **`AsyncStringToFile`**
+    (2163605), and the pack indexes the file under the literal virtual path
+    **`Lua/DustDevils.lua`** (3919915, immediately before the source blob). So
+    from an OG console two calls would dump the real source to disk with no
+    extractor at all: `local err, s = AsyncFileToString("Lua/DustDevils.lua")`
+    then `AsyncStringToFile("<out>", s)`. OG also carries **`ConsoleExec`**
+    (419561), **`ModEditor`** (317795) and **`Cheats`** (1448163), so a console
+    path exists.
+    ⚠️ **Two honest caveats before anyone spends time on it.** (1) **Relaunched
+    BLACKLISTS both file functions from the mod environment** —
+    `ModEnvBlacklist` (`CommonLua\Classes\Mod.lua:1267`) lists `AsyncFileToString`
+    (:1334) and `AsyncStringToFile` (:1341) alongside `ConsoleExec` (:1285), and
+    the console runs inside that sandbox (`PLAYTEST_HELP.md`). If OG blacklists
+    them too, the console route fails and the **Mod Editor** (unsandboxed) is the
+    fallback. (2) ⛔ **Absence in these scans proves nothing.** `Lua.hpk` is
+    back-reference compressed, so a missing string may simply have been encoded
+    as a back-reference — `count_max` "was not present" by the same test while
+    sitting in plain view in the class definition. **Only the POSITIVE hits above
+    are evidence.**
     ⛔ It does **not** change the §3a arithmetic — a replacement
     body is still ours and still sleeps.
   - **Item 3 (marker path missing `DustStormsDisabled`) — ✅ DEFECT CONFIRMED,
