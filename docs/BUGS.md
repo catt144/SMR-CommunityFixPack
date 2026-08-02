@@ -4812,9 +4812,36 @@ save+reload), and `SMRTest.FixtureCarry()` found the drone GameVars **absent**
 (`SMRFixPack_DroneSpeedDial`, `SMRFixPack_DroneCarryDial`) — the residue is the
 in-flight command closures, nothing declarative.
 
-**Disposition unchanged: Tier 2 (layer 2; carve-out granted), chain prompt 5.**
+~~**Disposition unchanged: Tier 2 (layer 2; carve-out granted), chain prompt 5.**~~
 Confirmed with the owner 2026-08-01 during the Tier-1 close-out, which recorded
 the observation and routed it rather than acting on it.
+
+**⭐ REPAIRED 2026-08-01 (chain prompt 5, Tier 2) — and the shape beats what the
+spec asked for.** §6.2 called for layer 2 ("move moonlighting out of the command
+body"); what landed is a layer-3 class seam. The moonlight hook moved off
+`Drone:Idle` and onto vanilla's own **last statement in the fall-through**,
+`self:CleanUnreachables()` (`Drone.lua:640`), gated on `self.command == "Idle"` —
+which selects that call site and not the two inside `Deliver` (`:1247`) and
+`PickRechargeStation` (`:1287`). `Drone:CleanUnreachables` is **verified
+synchronous** (`:879-896` is a `pairs` walk plus `GameTime()`;
+`tools/blocking_analysis.py` reports it `clear`), so the frame now exists only
+during synchronous execution and route (a) is closed outright rather than made
+inert. Part 1's `TaskRequestHub:FindTask` wrapper was checked in the same pass and
+is already on a synchronous C-backed seam (`_TaskRequest.lua:72-83`, `clear`), so
+after this move the module has **no frame that a save can capture at all**.
+
+**It is a call-position move and nothing else** — vanilla has literally no
+statement between `self:CleanUnreachables()` and the end of `Idle`, so the trigger
+condition, the ordering and the code that runs are unchanged, and no drone-design
+judgement was needed. That was the exact limit of the owner's pre-granted
+carve-out (chain README, and the DRONE_PROJECT_PROMPT 2026-08-01 addendum).
+
+The module header's old **"Saves made with the module enabled load identically
+without it"** claim was FALSE and has been corrected in place rather than quietly
+dropped — Site 2 is the counter-example, and the header now carries the
+measurement and the repair.
+**Disposition (FIX_POLICY §3a per-site gate): REPAIRED IN-PACK — layer 3, no
+residue, nothing owed to D13.** Verification: Tier-2 leg, below.
 
 **What this overturns.** The audit asked *where is the function stored* and
 cleared class tables ("restored as permanents by name") and UI windows. That is

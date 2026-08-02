@@ -34,12 +34,13 @@
 --     const.DroneRestrictRadius of the building (whose drones could not
 --     legally travel there — the registered-but-unreachable pathology).
 --
---  2. REPAIR MOONLIGHTING — a chained POST-wrapper on `Drone:Idle`. The
---     shipped Idle body falls through and returns EXACTLY when it found no
---     work at all (Drone.lua:564-641 ends in Sleep(2000) + CleanUnreachables;
---     every found-work branch SetCommands, which kills the thread before our
---     code — so vanilla own-hub priority is preserved for free; the F73
---     "pre-wrap only" rule is for command bodies that always SetCommand).
+--  2. REPAIR MOONLIGHTING — a chained POST-wrapper on `Drone:CleanUnreachables`,
+--     gated to the Idle tail. The shipped Idle body falls through and reaches
+--     its LAST statement, `self:CleanUnreachables()` (Drone.lua:640), EXACTLY
+--     when it found no work at all; every found-work branch SetCommands, which
+--     kills the thread before our code — so vanilla own-hub priority is
+--     preserved for free (the F73 "pre-wrap only" rule is for command bodies
+--     that always SetCommand).
 --     A workless drone then scans OTHER working Drone Hubs that are
 --     SATURATED (zero idle drones of their own) for unclaimed repair/clean
 --     work requests whose target building is near the drone (MOONLIGHT_MAX_
@@ -66,10 +67,36 @@
 -- so toggling this module off restores vanilla behavior instantly and
 -- completely).
 --
--- Savegame footprint (FIX_POLICY §3): NONE. All state (strike counters,
--- caches, stats) is transient module-local with weak keys; no flags on
--- objects, no GameVars, no long-lived threads. Saves made with the module
--- enabled load identically without it.
+-- Savegame footprint (FIX_POLICY §3): all state (strike counters, caches,
+-- stats) is transient module-local with weak keys; no flags on objects, no
+-- GameVars, no long-lived threads.
+--
+-- ⚠️ F86 SITE 2 — the "saves load identically without it" claim this header used
+-- to carry was FALSE, and it is corrected here rather than quietly dropped. The
+-- moonlighting hook was a POST-wrapper on `Drone:Idle`, whose frame sits below
+-- three Sleeps (Drone.lua:570, :577, :639). Every drone parked in Idle at save
+-- time therefore serialised OUR frame by route (a), once per drone command
+-- thread, and on the next load without the pack each one threw
+-- `Opt_DroneOverhaul.lua:96: attempt to index a nil value (global 'SMRFixPack')`
+-- — 98 per session when first measured, 80 again on the 2026-08-01 uninstall leg
+-- (call chain `(96) ← (190) ← sprocall ← CommandObject.lua(246)`). Harm was log
+-- noise only (line 188 called `orig_idle(self)` first, so vanilla's Idle
+-- completed before our line threw) and it self-cleared in one load, because the
+-- erroring commands abort and get re-issued onto vanilla bodies.
+--
+-- F86 TIER-2 REPAIR (2026-08-01, owner carve-out pre-granted): the hook moved to
+-- vanilla's own last statement in that fall-through — `self:CleanUnreachables()`
+-- (Drone.lua:640) — gated on `self.command == "Idle"`, which selects that call
+-- site and not the two inside Deliver (:1247) and PickRechargeStation (:1287).
+-- `Drone:CleanUnreachables` is **VERIFIED SYNCHRONOUS** (:879-896 is a `pairs`
+-- walk plus `GameTime()`; `tools/blocking_analysis.py` reports it `clear`), so
+-- the moonlight frame now exists only during synchronous execution and cannot be
+-- captured by a save at all.
+--
+-- This is a call-position move and nothing else: vanilla has literally no
+-- statement between `self:CleanUnreachables()` and the end of `Idle`, so the
+-- trigger condition, the ordering and the code that runs are unchanged. No drone
+-- design decision is involved, which is the exact limit of the carve-out.
 --
 -- Install pattern: hooks are installed at FILE SCOPE (classdef time, so they
 -- propagate through class flattening) and gate per call on IsActive — the
@@ -134,7 +161,10 @@ do
 	if type(TRH) ~= "table" or type(TRH.FindTask) ~= "function" then
 		install_error = "TaskRequestHub.FindTask not found (game update changed it?)"
 	elseif type(D) ~= "table" or type(D.Idle) ~= "function" then
+		-- not wrapped any more, but the moonlight precondition IS its fall-through
 		install_error = "Drone.Idle not found (game update changed it?)"
+	elseif type(D.CleanUnreachables) ~= "function" then
+		install_error = "Drone.CleanUnreachables not found (game update changed it?)"
 	elseif type(TR) ~= "table" or type(TR.FindDroneNodes) ~= "function" then
 		install_error = "TaskRequester.FindDroneNodes not found (game update changed it?)"
 	elseif not (const.rfWork and const.DroneRestrictRadius and const.MaxBuildingPriority) then
@@ -182,11 +212,18 @@ if not install_error then
 	end
 
 	-- Part 2: repair moonlighting --------------------------------------------
+	-- Hooked on the LAST statement of vanilla's Idle fall-through rather than on
+	-- Idle itself (F86 Site 2 — see the header). Same trigger, same order, but
+	-- the frame is now inside a synchronous method and can never be serialised.
 	local D = Drone
-	local orig_idle = D.Idle
-	function D:Idle()
-		orig_idle(self)
-		-- reached ONLY when the shipped Idle found nothing and fell through
+	local orig_clean = D.CleanUnreachables
+	function D:CleanUnreachables(...)
+		orig_clean(self, ...)
+		-- Drone.lua:640 is the only CleanUnreachables call made under command
+		-- "Idle"; the other two are inside Deliver (:1247) and
+		-- PickRechargeStation (:1287). Reaching it means the shipped Idle found
+		-- nothing and fell through — every found-work branch SetCommands first.
+		if self.command ~= "Idle" then return end
 		if not module_active() then return end
 		local own = self.command_center
 		if not (IsValid(self) and IsValid(own) and IsKindOf(own, "DroneHubBase") and own.working) then return end
