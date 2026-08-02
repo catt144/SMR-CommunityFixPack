@@ -40,7 +40,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | tested |
 | F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | wontfix — unreachable in vanilla, fix deleted 2026-07-30 (entry) |
-| F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | fixed  |
+| F25 | Tech description names wrong building (pre-1.0.6 saves)  | P3  | high | ⚠️ **`fixed` DEMOTED 2026-08-02 (chain prompt 9): THE SHIPPED FIX IS A NO-OP IN RETAIL** — it re-uses the shipped translation id, and `T(id, text)` discards the literal at construction in any non-dev build, so the assignment writes back the text that was already there, in every language. Defect claim unchanged and still correct; the repair is not. Filed as **F98**, parked with D10's post-release `ModItemLocTable` work by owner decision. **Do not cite F25 as localisation precedent** (entry) |
 | F26 | Bombardment missiles fly parallel (cosmetic)             | P3  | med  | fixed  |
 | F27 | Storage charge/discharge rate modifiers ignored (latent) | P3  | med  | fixed  |
 | F28 | `Research:ReplaceTech` mishandles the field counter      | P3  | high | wontfix 2026-07-30 — mod-facing only, barred by FIX_POLICY §4a; fix + probe DELETED (entry) |
@@ -87,7 +87,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D06 | Drone assignment has no cross-hub locality (far fleets claim near work) | dsgn| high | built (v1) 2026-07-28, A/B NULL — ⭐ **REBUILD DECIDED 2026-07-31, top of the list**; 4 research gates owed, **playtest FROZEN** (entry) |
 | D07 | Cohort housing: seniors/children never consolidate without filter micromanagement | dsgn| med | built 2026-07-28 — PT-53 3-of-5 PASS 2026-07-29, A/E owed (entry) |
 | D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | tested 2026-07-30 — PT-56 PASS in full (entry) |
-| D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30, user-approved — **gate OPEN (PT-56 PASSED 2026-07-30), BUILDABLE NOW** (entry) |
+| D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | ⏸️ **PARKED / ON HOLD 2026-08-02 (owner) — POST-RELEASE, LOW PRIORITY, NOT OWED.** Shape confirmed same day: opt-in module, and the text ships via **our own `ModItemLocTable`** rather than English-only strings — which is what moves it behind release. Nothing technical blocks it (F86 hold discharged, PT-56 passed); it was re-prioritised. ⛔ **Route RE-DERIVED from Src first (chain prompt 9) and three spec claims FAILED** — there are **four** workshops not three (`TVStudioWorkshopCCP1`), the `upgrade1` citation is false (no `upgrade1_id`, so that modifier never applies — conclusion survives on `Workplace:OnModifiableValueChanged`), and unemployment clauses are on **7 of 29** faction defs, not every one. Two new facts bind any future build: `max_workers` is **hard-clamped at 20** while `consumption_amount` is not (so the pairing must clamp its own percent per template), and raising capacity without staffing it **lowers** the Comfort payout. **Nothing built, no PT-57 written, F84 un-bundled.** Also filed en route: **F98** (our F25 fix is a retail no-op) and **C39** (do not build D10 while it is open) (entry) |
 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
 | D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | SPECED 2026-07-30, user-approved, build owed (entry) |
 | D13 | Save-exit deliverables: uninstall procedure + standalone save-rescue artifact | dsgn| high | directed 2026-07-31 (owner), prelaunch — **HARD LAUNCH DEPENDENCY (owner, 2026-08-01): the pack does not ship until this ships alongside it**; ⛔ **spec GATED on Tier 1/2 landing AND verifying** (target list = their output, never today's leak set — the gate is sequencing, not priority); also owns the **complete per-site disposition table** required before release (FIX_POLICY §3a) and **must DERIVE the exposed set itself rather than inherit any recorded count** (the docs carry an open lower bound, "at least 13", from a grep known blind to slot/global/preset assignments, and the builds have since changed the set) — **its derivation is authoritative and it updates every doc stating a count** (list on the entry); second-artifact costs + open player-story design question on the entry (entry) |
@@ -111,7 +111,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **tested 2026-08-01** — fixed 2026-07-29; rains half REWRITTEN 2026-08-01 (F86 Tier-1, layer-2 wrapper + version-stamped migration + C34 rider) and **verified live by Tier-1 legs 3+4**: a NATURAL collision re-rolled and rain returned, 'normal' migrated + stamped 1.0.1, C34 stale-ACTIVE healed through vanilla FinishRainProcedure, and the stranded-flag sweep cleared both with and without a reload while never touching a live warning. PT-54 triggers A+B+E absorbed (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | **✅⭐ MECHANISM FOUND *AND MEASURED* 2026-08-02 — neither option the entry weighed.** **Live pair: `119999` real ms @5x and `120001` real ms @1x** (game ms 600000 vs 120000, exactly 5.000x) against a preset `Expiration = 120000` — real time constant to **2 ms** across a 5x speed change, and **the grid was left unrepaired in both legs and the notification vanished anyway**. The notification has **no removal path at all** (`SupplyGrid.lua:1626-1629` is the only reference to `PowerGridSplit`/`LifeSupportGridSplit` in the tree) and registers a **position**, not the grid — so a rejoin is not an input. It clears only by the preset's `Expiration = 120000` with `GameTime = false`, which `Notifications.lua:188-217` runs on a **REAL-TIME** thread → **2 real minutes regardless of game speed**. Sibling tell: `PowerLeak`/`LifeSupportLeak` under the same parents carry no `Expiration`. ⚠️ Symmetric half not in the original report: an **unrepaired** split also stops being reported after 2 real minutes. ⛔ **CLOSED 2026-08-02 `wontfix — intent` (tier I) by the prompt-7 §4 package — and the P3-vs-P2 question is VOID because there is no defect to rank.** Both halves assumed a *state warning*; three controls say it is a **timed event announcement**: (1) real-time `Expiration` is the house style for the event family (`BreakthroughDiscovered`, `RPReceived`, `ResourcesReceived`, `ArriveAsteroid`, `ReconCenterDiscoveryGeneric` — all `GameTime = false`); (2) ⭐ it registers **the position where a player action split the grid**, while `PowerLeak`/`LifeSupportLeak` register the leaking **element** — the clearing discipline follows from what is registered, so the sibling tell dissolves; (3) it is **dismissable by default**, and a warning a click can silence is not a standing fault indicator (disaster presets set `Dismissable = false` explicitly). ⚠️ Counter-evidence recorded: `GameTime = false` sits **inert** on `PowerLeak`, so that flag is withdrawn as evidence of deliberate design (entry) |
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
-| F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | todo — filed 2026-07-30; rover half DISPROVEN BY PLAY during PT-25; nothing built; text-patch design is a USER DECISION (localization tradeoff), bundled into the D10 build (chain prompt 9) (entry) |
+| F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | todo — filed 2026-07-30; rover half DISPROVEN BY PLAY during PT-25; nothing built. ⭐ **DECISION TAKEN 2026-08-02 (owner): the text ships through our own `ModItemLocTable`** — which removes the tradeoff entirely (correct text in every language, no `Untranslated` regression) and moves this behind release with D10's loc-table work. ⛔ **UN-BUNDLED from D10 the same day: the shared-tradeoff premise that justified bundling is VOID.** T1 is pure addition and F84(a) is a deletion, so `T .. Untranslated(…)` would have covered one and not the other — they were never the same question. ⚠️ **And F25 is no longer precedent for any of it: re-using a shipped translation id is a no-op in retail (F98).** This entry is now blocked on capability, not on a decision (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | P1 | **DECIDED — sweep reported** | open — filed 2026-07-31 by PT-20 — two sites proven live (`Fix_MeteorFrequency` kills the colony's meteors permanently; `Opt_DroneOverhaul` floods the log, and it leaked with its own toggle OFF), **durable exposed list re-derived 2026-08-01 (five-shape enumeration, Phase 1): 13** (the sweep had corrected the membership both ways — `Fix_DroneUnreachableForever` in, `Fix_TrainCargoDumping` out — and the re-run confirms it) **plus one inert route-(c) preset-field site** (`Fix_LastTransmissionStorage`, adjudication §4.4 closed — no build). Reproduces identically whether the pack is disabled OR fully removed. **Blocked release when filed; the gate is now PER-SITE — see the restatement at the end of this row.** Layer ordering 3→2→1 in **FIX_POLICY §3a**; build AUTHORISED (Tiers 1+2, layer 1 barred/gated); **ADJUDICATED twice 2026-07-31 (yes-with-changes; capture = value-reachability; exposed set ≥13 incl. compliant CaveIns) + prior-art survey run** (mechanism is documented engine design; community norm is accept-silence-heal; our guarantee unprecedented but achievable). **Plan of record: `F86_EXECUTION_PLAN.md`** — Phase 0 measured 2026-08-01 (GT creation DEFERS; autosave hook FIRES); **Phase 1 done 2026-08-01** (final Tier-1 spec `SAVE_SAFETY_REDESIGN.md` §6.2a; enumeration re-derived; §4.4 closed; build prompt written); **✅ TIER 1 BUILT AND VERIFIED 2026-08-01 (chain prompts 4 + 4b, build prompt consumed) — all four units shipped and all five legs ran; F02/F78/F81/F88 flipped to `tested`; leg 5 read Site 1 REPAIRED (the `Meteors` thread now survives uninstall alive on vanilla's body)**. ⚠️ **Site 2 (`Opt_DroneOverhaul`) STILL LEAKS** — leg 5 re-measured it at 80 orphan errors, newly observed to self-clear after one load; it is Tier-2 work (chain prompt 5). ⚖️ **RELEASE GATE RESTATED 2026-08-01 (owner): PER-SITE, not blanket** — every exposed site needs a recorded disposition (repaired in-pack where a layer 3/2 route exists; handed to the D13 cleaner where one provably does not). A site without a disposition blocks release; a site with one does not, whichever way it went. ⛔ **But the cleaner is NOT a scoping escape hatch: BUILD EVERYTHING REACHABLE NOW** — a hand-off is only valid *after* the in-pack attempt failed, never as a prediction, because D13's target list is the OUTPUT of the build work and cannot be designed before it. **Launch waits for D13; D13 does not wait for launch** (FIX_POLICY §3a). **✅ TIER 2 BUILT 2026-08-01 (chain prompt 5) — all four modules moved onto synchronous seams and **Site 2 is repaired**: `DroneUnreachableForever` → the sync consumer `Drone:CleanUnreachables`; `TrainWaitTime` → the sync `TransportStatistics:AddSpentTime`; `ArrivalDeaths` (b) → a layer-2 pre-wrapper on `Colonist:Idle` and (a) → the sync `Colonist:OnArrival` (**the design pass §6.2 booked as owed is RUN and found a route**); `Opt_DroneOverhaul` → the sync `Drone:CleanUnreachables` at vanilla's own Idle tail. Per-site dispositions recorded on each entry and in STATUS. ⚠️ **NOT YET VERIFIED — the one Tier-2 leg is specced and UNRUN (`PLAYTEST_CHECKLIST.md` PT-58, predictions written before the run), so the D10/D12 unhold is NOT recorded; chain prompt 5b carries both.** **✅ TIER 2 VERIFIED 2026-08-01 (PT-58, owner at the keyboard) — F86 SITE 2 IS CLOSED.** Uninstall log `Mars.exe-20260801-21.54.16`, test-2 lineage, 73 idle drones in the article: **ZERO `Opt_DroneOverhaul` orphan errors where leg 5 read 80** (98 when first measured), zero `[LUA ERROR]` of any kind, zero mentions of any Tier-2 module. **Both proven leak sites are now repaired and verified.** The leg verified SAVE SAFETY only — F53/F55/F21 stay `fixed`, since P1-P3 are fixture results and no live functional reading was taken. **✅ THE §5.4-A CONVERSIONS ARE BUILT 2026-08-02 (chain prompt 8)** — five of six converted (`Fix_TrainCargoDumping` declined under the prompt's stop condition, §5.4's route being native code behind a savegame permanent; moved to group C, counts corrected to 5/4/10/3), plus package 0's three, so the pack holds **zero R3 §1.5 replacements** and `SMRFixPack_rocket_fuel_key` has left the save. ⚠️ **All eight are UNRUN** — the leg is chain prompt 8b's. Next: the seven approved fixes + that leg (8b), then C23 item 1 (8c) |
 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | P2 | **OBSERVED** | **fixed 2026-07-31** — repaired in the shared `DataPatch` scaffold, not the one file: nothing runs before `ClassesBuilt`, and the enable path gets its own triggers. The sweep it earned found **3 more sites** silently dead on that path (TechDescriptionBuilding, MultipleSuns, FirstAsteroidPrefabs) — all repaired via the new `SMRFixPack.OnDataReady`. FIX_POLICY rule + ENGINE_FACTS written. ✅ **VERIFIED ON THE ENABLE PATH ITSELF, 2026-07-31 19.09** — the new leg ran with the owner ticking the box at the main menu: `68/74` → **63/0/15/0**, probe-for-probe identical to the cold boot bar two RNG lines, and the `DustSicknessBiorobots` probe (which reads live preset data) PASSed on the path that used to throw. Cold-boot A/B also CLEAR. ⚠️ Residual: the toggles were OFF, so the five `Opt_` probes SKIPped — a coverage gap on that path, closed by a second all-modules-ON leg. (An earlier claim that this leg verifies audit **A2** is WITHDRAWN — PT-55 answered A2 in play on 2026-07-30) (entry) |
@@ -125,6 +125,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F95 | The Astrogeologist profile promises an unqualified "Extractor production increased by 10%" and pays **10 of the 12** buildable extractors | P3 | SOURCE-VERIFIED | **tested 2026-08-02 (chain prompt 8b, PT-60) as `Fix_AstrogeologistExtractors` — VERIFIED IN PLAY 2026-08-02 (PT-60).** Promoted from C38 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 additive patch (two `Effect_ModifyLabel` entries via `PlaceObj`, idempotent append) plus a load-time heal that calls vanilla's own `OnApplyEffect`; probe `AstrogeologistExtractors` written. One spec name corrected on the entry: the method is `OnApplyEffect`, not `__exec`. `CommanderProfilePreset.lua:333` (the promise), `:336-385` (ten `Effect_ModifyLabel` entries), omitting `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor` — both buildable, both carrying the modified prop. ⭐ **The list is curated by a rule these two satisfy**: the shared `Extractors` label exists (16 templates) and is deliberately unused because it would add 3 non-extractors and 2 `hide_from_build_menu` legacy templates — leaving these two as the only unexplained exclusions, and 12 buildable / 10 paid closes exactly. **R1.** Fix = two additive entries built with `PlaceObj` (F87 rule) + a load-time heal for existing saves. ⚠️ The counter-reading (a deliberate balance carve-out) is recorded on the entry — this is the package to veto if the owner reads it that way (entry) |
 | F96 | The St. Elmo's Fire sinkhole is the **only** mystery set-piece in the game a meteor can destroy | P3 | SOURCE-VERIFIED | **fixed 2026-08-02 (chain prompt 8b) as `Fix_SinkholeIndestructible` — VERIFIED IN PLAY 2026-08-02 (PT-60).** Promoted from C21 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 preset patch through `SMRFixPack.DataPatch`, on both targets — and the entry records which is which: the **class table** is load-bearing (instances have no own field and fall through to it, which is how it reaches existing saves with no sweep), while `BuildingTemplates.Sinkhole` is a rebuilt-every-`ClassesBuilt` proxy that already inherits it (`Building.lua:2566`) and is belt. Probe `SinkholeIndestructible` written. `Sinkhole.generated.lua:1-24` carries neither `indestructible` nor `disasters_strike_immunity`; the meteor chain reaches `DestroyBuildingImmediate`, whose only guard is that flag (`Building.lua:1371-1374`). **Tell:** every other set-piece has it (Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly, BottomlessPit, AncientArtifact, DragonRocket, DropPod) and the property's help text names meteors (`Building.lua:209`). **R2.** Fix = **§1.1 preset patch**, one boolean, and its side effects were enumerated: the other two consumers are already-false paths for this template, so it changes exactly one behaviour. ⚠️ The soft-lock at `Mystery 11.generated.lua:146` stays **located, not proven** — and the package does not rest on it (entry) |
 | F97 | The dust-devil scheduler multiplies its wave COUNT by `spawn_chance`, a probability — so `count_max` is unreachable below 100% and the count can be 0 while `count_min` is 1 | P3 | SOURCE-VERIFIED | **tested 2026-08-02 (chain prompt 8c) as `Fix_DustDevilSpawnGate` — ✅ VERIFIED IN PLAY (PT-61), ALL TEN PREDICTIONS MET.** 9 vanilla waves produced **only 3s and 4s and never once entered the authored 6..8**; 20 fixed waves produced 0 or 6-8 and **reached 8 twice** — a number vanilla cannot compute from that preset. The persisted copy survived a save boundary and drove a wave correctly on the far side; on uninstall the colony **kept its dust devils** (8 in the carryover wave) and the descriptor reverted to vanilla numbers on the very next read, with zero `[LUA ERROR]` anywhere. ⭐ **The uninstall log then caught the defect on the save's OWN shipped preset with no mod installed** — `DustDevils_Low`, authored `1..2`, computing `0..1`, two consecutive waves of nothing — which is reachability evidence the rest of the leg is not. ⚠️ **RATE STILL UNDECIDED and PT-61 barely speaks to it** (it measured `VeryHigh_3`, the least-affected played preset at +5%); a per-preset table is on the entry. ⚠️ **A `VeryLow`-produces-zero claim in the first version of that table was RETRACTED the same day** — that preset ships `forbidden = true` and the scheduler returns before its wave loop, so the zero is a design decision and not this defect. Promoted from C23 item 1; **owner-approved PROVISIONALLY 2026-08-02** (*"not locked. I want the QA run to personally review it"*) and reviewed by chain prompt 12, job 8. `DustDevils.lua:216` — `SessionRandom:Random(count_min, count_max) * spawn_chance / 100`, integer-truncating; `DustDevils_High` (`75%`, `1..3`) yields 0-2 and never 3, and `DustDevils_VeryHigh_3` is authored `6..8 @ 50%` (`Data\MapSettings-DustDevils.lua:111-127`) so its range **cannot occur at all** — it produces only 3 or 4. Contradicts the fields' own help text (`:9-10`). **Intent settled by three independent controls** — the same file's marker sibling (`Random(100) < marker_spawn_chance`, `:169`), `MapSettings_Meteor`'s identical trio used gate-then-count (`Meteors.lua:7, :137, :284-290`), and an outside developer's independent repair — with **zero** examples of chance-as-multiplier in `Lua\`. **R1.** ⭐⭐ **THE ENTRY'S SPECCED ROUTE WAS FALSIFIED AT BUILD TIME AND THE FIX COST A FRACTION OF ITS ESTIMATE**: the spec's *"the only precise route is owning the scheduler body"* is wrong — the count line reads its three numbers from a **synchronous getter, exactly once per wave**, so §3a **layer 3** reaches it. Built as a §1.4b post-wrapper on `OverrideDisasterDescriptor` (4 callers, one per disaster, keyed on `original.class`), pre-rolling the gate into a plain-data copy of the descriptor. **No 14th §3a site, no sleeping mod thread, no §1.5 reconstruction, no version latch, no thread restart and therefore no F88 timer re-roll**; existing saves are reached with no load-time action and uninstall self-heals within one wave. ⚠️ **The RATE question is NOT settled by any of this** and the decision stays provisional (entry) |
+| F98 | **OUR OWN DEFECT:** `Fix_TechDescriptionBuilding` (F25) is a **no-op in retail** — it re-uses the shipped translation id, and the engine discards a re-used id's literal at `T()` construction | P3 | SOURCE-VERIFIED | **filed 2026-08-02 (chain prompt 9) — NOTHING BUILT, and deliberately so: the repair is the `ModItemLocTable` work the owner scheduled post-release with D10.** `T(id, text)` in a non-dev build returns `LocIdToLightUserdata(id)` and throws the literal away (`localization.lua:250-252`, `:270-272`), so `tech.description = T(841885693955, CORRECTED)` writes back exactly the id that was already there. **R1** for the wrong text (any pre-1.0.6 save reading that tech), but the shipped fix simply never changes it in any language. ⚠️ **The module's own "patched" verdict is not evidence** — it reports success on having performed the assignment, which it does. Its header's localisation rationale is wrong in the same way and must be rewritten with the fix. Live control queued on the next attended sitting (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -163,6 +164,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01 (fredware source); **§4 package RUN 2026-08-02 (prompt 7) — PASSED all bars → filed as `F91`, fix approved and routed to prompt **8b** (prompt 8 split under rule 3)** (R1 derived this session: the `mass_delete` route is one advertised keypress). ⚠️ **The "cannot add trains to tracks" lead is DROPPED** — the assignment path was traced this session and a shell cannot produce it: the shell has no elements, so no station reaches it and it cannot enter `RebuildTrainRoutes`; the silent refusal is fully explained by vanilla's own two-caps arrangement (entry) |
 | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — **ADOPTED as the Tier-1 rains-pass rider, BUILT 2026-08-01 into Fix_RainsDeadlock's migration pass (structure → FinishRainProcedure heal → migration; manual fallback for invalid values); VERIFIED live by Tier-1 leg 3 2026-08-01** — planted `g_RainDisaster="toxic"` with a dead main_thread, and on reload the log read `0:23:39 RainsDeadlock: stale-ACTIVE rain 'toxic' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)`, with `g_RainDisaster` false afterwards (entry) |
 | C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | ? | cand | filed 2026-08-02 by the C18 sweep — **VERIFIED vs Src**: `CommanderProfilePreset.lua:336-385` enumerates ten labels for an **unqualified** promise and omits `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor`, both currently buildable and both carrying the modified prop. Sibling tell is the enumeration itself. **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F95`, approved, routed to prompt **8b** (prompt 8 split under rule 3).** ⭐ The evidence that settles oversight-vs-balance: there **is** a shared `Extractors` label (16 templates) and the designers did **not** use it — and every building it would have added is explained (3 non-extractors: ConcretePlant/MoholeMine/TheExcavator; 2 hidden legacy with `hide_from_build_menu`), leaving **no principled line** that includes `MicroGExtractorExoticMinerals` and excludes `AutomaticMetalsExtractor`. Count closes exactly at 12 buildable / 10 paid. Fix = two additive `Effect_ModifyLabel` entries via `PlaceObj` (**not** `:new` — F87) + a load-time heal; the "retarget to `WaterExtractorBase`" alternative was rejected as too wide (entry) |
+| C39 | `Policy_Automation_ServiceAutomation` cuts `max_workers` by **label** while its performance compensation keys on **class** — the four Workshops are on the label and outside the class | ? | cand | filed 2026-08-02 by the D10 route re-derivation (chain prompt 9) — **VERIFIED vs Src, harm direction NOT determined.** The law's only effect is `LawEffectModifyLabel{Label="ServiceBuildings", Prop="max_workers", Percent=-50}` (`Data\LawDef\LawDef-Technology.lua:227-234`). **23 templates carry that label; all derive from `Service` except `ArtWorkshop`, `VRWorkshop`, `BioroboticsWorkshop` and `TVStudioWorkshopCCP1`**, which are `Workshop = {ElectricityConsumer, Workplace}`. The compensating branch in `Workplace:GetWorkshiftPerformance` is gated on `self:IsKindOf("Service")` (`Workplace.lua:205-217`), so it cannot fire for those four. **Tells: self-contradiction** (one effect targeted by label, its compensation by class) **and an explicit dev comment** — `:209-210` says the code *"assumes that there's a modification in max_workers matching the value on automation_workforce_reduction"*, i.e. it assumes the two sets coincide. ⚠️ **NOT sized, and the sign is genuinely unclear**: `law_scale` appears to *raise* performance (a full reduced shift computes ~200 rather than 100), so the four may be missing an uplift rather than taking a penalty — and workshop `performance` feeds the **Comfort boost** (`ArtWorkshop.lua:24-27`), not resource output, so the player-visible consequence differs from every other member of the label. Next step is a keyboard observation with the law enacted, not more reading (entry) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -1043,7 +1045,7 @@ building. **That is exactly what proved impossible** (see the closure block at
 the top of this entry). No TestKit probe ever existed for this fix, so its
 deletion does not move the 77-probe A/B counts — only the module counts.
 
-### F25 — Tech description names wrong building (pre-1.0.6 saves only)  `[fixed: Code/Fix_TechDescriptionBuilding.lua]`
+### F25 — Tech description names wrong building (pre-1.0.6 saves only)  `[⚠️ **`fixed` DEMOTED 2026-08-02 (chain prompt 9) — Code/Fix_TechDescriptionBuilding.lua IS A NO-OP IN RETAIL.** The defect claim below is unchanged and still correct; the *repair* re-uses the shipped translation id, which the engine discards at `T()` construction in any non-dev build, so it writes back the text that was already there — in every language, English included. Full mechanism, the three text routes, and the owner's route-3 decision: **F98**. Parked with D10's post-release loc-table work. ⛔ **This entry is no longer localisation precedent for anything**]`
 
 **Audit 2026-07-30 (reachability): R2 (legacy save) — "pre-1.0.6 only"
 CONFIRMED, one probe-label doubt.** `UndergroundRework106` is a persisted
@@ -5532,7 +5534,7 @@ also resets the `g_ShownPopupNotifications` GameVar, which is what makes the
 `show_once` popup offer itself again); then
 `UIColony:SetTechResearched("ReconCenter")`.
 
-### F84 — Universal Tunnel's description is wrong on two counts (P3, PROVEN)  `[todo — text patch, but the localization tradeoff makes it a USER DECISION; nothing built]`
+### F84 — Universal Tunnel's description is wrong on two counts (P3, PROVEN)  `[todo — ⭐ **THE USER DECISION IS TAKEN (owner, 2026-08-02): ship our own `ModItemLocTable`.** That answers the tradeoff by dissolving it — correct text in every language, no `Untranslated` regression for anyone — and moves this behind release alongside D10's localisation work. Still nothing built; this is now blocked on a capability we have decided to build, not on a call anyone owes. ⛔ **UN-BUNDLED from D10** and ⛔ **F25 is no longer precedent for it (F98)** — see the decision block at the end of this entry]`
 
 Shipped description (`Data/BuildingTemplate/UniversalTunnel.lua`, T 893478951171):
 
@@ -5588,6 +5590,52 @@ Options:
 
 **Recommendation:** decide it together with D10's T1 text repairs; they raise the
 identical tradeoff and should not be answered twice differently.
+
+## ⭐ DECIDED 2026-08-02 (owner, chain prompt 9) — and the options above were wrong in two places
+
+**The decision: ship our own translations (`ModItemLocTable`), post-release.**
+Owner, verbatim: *"we will ship our own translations … this will be a low
+priority build, planned for after release."* Said of D10's vocational-workshop
+text, and it governs here too — this is the same capability, and the whole reason
+the two were bundled was that they would otherwise be answered twice
+differently.
+
+**What that does to the three options above.**
+
+* **Option 1 (replace with a corrected `Untranslated` string)** — available and
+  correct, but superseded. It buys accurate English at the price of an
+  English-only description in the nine other languages. Route 3 gets the
+  accuracy without the price.
+* **Option 2 (document it in MOD_DESCRIPTION, change nothing in game)** — remains
+  the interim state, and is what ships at release, because route 3 lands after.
+* **Option 3 ("ship it only if D10 lands")** — **the premise is void and this
+  option is withdrawn.** ⛔ **UN-BUNDLED 2026-08-02.** The bundling rested on
+  D10's T1 and this entry raising *the identical* tradeoff. Re-derivation showed
+  they do not: **every string T1 needs is an APPEND**, and an append costs nothing
+  in any language (`shipped_T .. Untranslated("…")` — `TMeta.__concat` works on
+  the retail light-userdata form, `localization.lua:359, :373-412`, shipped
+  precedent `Workplace.lua:293`). **F84 half (a) is a DELETION** — the false
+  sentence *"Rovers cannot use this type of tunnel"* must come out, and concat
+  cannot subtract. So T1 could always have been free and this never could. Two
+  different questions that looked like one.
+  *(Half (b), the omitted life-support bridging, is an append and would have been
+  free — but shipping half of a description repair by one route and half by
+  another is worse than waiting.)*
+
+**⛔ And the precedent this entry pointed at is gone.** The line above —
+*"Precedent exists (F25 is a description defect), but F25 should be re-checked
+for how it handled loc before this is treated as settled"* — is the sentence that
+triggered the re-check, and it was right to ask. **F25 re-uses the shipped
+translation id, and the engine discards a re-used id's replacement literal at
+`T()` construction in any non-dev build** (`localization.lua:250-252`), so
+`Fix_TechDescriptionBuilding` has never changed anything in retail, in any
+language. Filed as **F98**, which carries the mechanism and enumerates the three
+real routes. **Do not cite F25 as localisation precedent again.**
+
+**Status, stated exactly:** this entry is no longer waiting on a user decision —
+that is taken. It is waiting on a capability the project has decided to build
+after release. Until then the shipped text stays wrong and option 2 is the
+disclosure. **Nothing is owed by any current chain prompt.**
 
 ### F85 — Breakthrough choice popups and the Assembly "Colony Values" choice ride real-time waiters; any save landing in their open window silently voids the choice (P3, LATENT — tier U)  `[filed 2026-07-30 by the popup audit — NOTHING BUILT, settling observation queued; no fix until U resolves]`
 
@@ -8310,6 +8358,81 @@ body, 0 or 6-8 under the fix**. ⛔ **The colony must not be terraformed past th
 `DustStormStop` threshold** or the answer is zero for an unrelated reason; check
 with the console line on the PT-61 entry first.
 
+### F98 — OUR OWN DEFECT: `Fix_TechDescriptionBuilding` (F25) is a no-op in retail — re-using a shipped translation id discards the replacement text (P3, SOURCE-VERIFIED)  `[filed 2026-08-02 by chain prompt 9's D10 route re-derivation — NOTHING BUILT BY DESIGN. The repair is a `ModItemLocTable` entry, which is the post-release localisation work the owner scheduled alongside D10; building it any other way just re-picks the tradeoff the owner has already decided]`
+
+**How it was found.** Not by looking at F25. D10's T1 half needed a ruling on the
+`Untranslated` localisation cost, and `F84`'s entry pointed at F25 as the
+precedent — *"Precedent exists (F25 is a description defect), but F25 should be
+re-checked for how it handled loc before this is treated as settled."* This is
+that re-check, and it came back the other way.
+
+**The mechanism.** `Fix_TechDescriptionBuilding.lua:75` assigns
+`tech.description = T(TRANSLATION_ID, CORRECTED)`, re-using the shipped id
+`841885693955` on the stated reasoning that a localised build resolves the id
+from its own table while an English build falls back to the embedded literal.
+**The second half is false in retail.** The `T()` constructor
+(`CommonLua\Core\localization.lua:250-252`, and the sibling branch `:270-272`)
+ends with:
+
+```lua
+if not dev and not Platform.ged and TranslationTable[id] then
+    return LocIdToLightUserdata(id)     -- the literal is discarded here
+end
+```
+
+`dev` is `Platform.debug or Platform.developer` (`:3`), false in a retail build.
+So `T(841885693955, CORRECTED)` returns a **light userdata carrying only the id**
+— our corrected string never leaves the call. Rendering then reads
+`TranslationTable[841885693955]` (`:662`) and prints the shipped text. **The
+assignment writes back exactly what was already there, in every language,
+English included.**
+
+**Why English is not the exception.** English is a loaded translation table like
+any other — the install ships `Local\English.fpk` beside `French.fpk`,
+`German.fpk` and seven more, and `LoadTranslationTables` (`:970-985`) hard-asserts
+if the folder is missing in a non-developer build. There is no configuration in
+which a retail player reaches the literal by that route.
+
+**Intent — unintended, hard tell: dead code.** The `CORRECTED` string and the
+comment block justifying it are a computed value that is discarded unread. The
+module's own header states the opposite mechanism as fact.
+
+**Reachability R1 for the underlying defect** (F25's wrong building name is
+visible to any player on a pre-1.0.6 save who opens that tech) — the fix simply
+does not reach it. ⚠️ **The module's runtime verdict is not evidence either
+way:** `patch()` returns `"patched"` on having performed the assignment, which it
+genuinely does; nothing in it observes what the player sees. A fix that reports
+success while changing nothing is the failure mode `FIX_POLICY` §2's self-checks
+are explicitly documented as unable to catch.
+
+**⭐ What this settles beyond F25.** There are exactly three ways for this pack to
+put text on a player's screen, and the re-check closes the middle one:
+
+1. **Re-use a shipped id** — discarded in retail, per above. **Not a route.**
+2. **`Untranslated("…")`** — `T{str, untranslated = true}` has no id, so
+   `TranslationTable[false]` misses and `TDevModeGetEnglishText` returns the
+   literal (`:75-92`). Works everywhere; the string is English for everyone.
+3. **Ship our own loc tables** — `ModItemLocTable` is real and supported
+   (`Mod.lua:2277-2307`, `ModItem.lua:1069-1093`): a per-language CSV in the mod,
+   merged into the shared `TranslationTable` at load when
+   `loctable.language == GetLanguage()`. ⚠️ It merges into the **shared** table,
+   so an id we write is overridden for vanilla and every other mod too — which is
+   a capability worth having and a footgun worth writing down.
+
+**⭐ OWNER DECISION 2026-08-02: route 3.** *"we will ship our own translations …
+this will be a low priority build, planned for after release."* So this entry is
+filed and parked with D10 rather than repaired now — repairing it today would
+mean shipping route 2 for one string and route 3 for the rest, which is exactly
+the "answered twice differently" outcome the F84 bundling rule exists to prevent.
+
+**Owed with the repair, in the same commit:** rewrite the module header (its
+localisation rationale is wrong as written), and re-check whether any other
+shipped fix re-uses a translation id. ⚠️ **A 30-second live control is queued for
+the next attended sitting** and settles this at the keyboard rather than on my
+reading: `ModLog(type(T(8821, "ZZZ")))` — `userdata` means the literal was
+discarded and this entry is right; `table` means it survived and this entry is
+wrong. Nothing should be built on the source reading alone before that runs.
+
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
 commit `21b92cb` had spliced F84's text into this heading, leaving D06's whole
@@ -9240,7 +9363,27 @@ elapsed repair time. **Dial range widened from the DECISION's 1.0x/1.5x/2.0x to
   dials are confirmed independent of the toggle modules in the shipping default
   configuration, not just with everything switched on.
 
-### D10 — Workshops: capacity can't scale late-game; unemployment's real cost is invisible (design, med)  `[speced 2026-07-30, user-approved same day — ⭐⭐ **BUILD UNHELD 2026-08-01: the F86 save-safety hold is DISCHARGED** (owner's condition was "repairs land AND verify" — Tier 1 verified `c6180ad`, Tier 2 verified by PT-58 with F86 Site 2 closed at zero against leg 5's 80). Chain prompt 9 is runnable. GATE OPEN: PT-56 PASSED IN FULL 2026-07-30, so the build is UNBLOCKED and ready to start. (The gate existed because the capacity dial reuses D09's label-modifier machinery and its first live check hadn't run.) One Opt_ module, planned PT-57]`
+### D10 — Workshops: capacity can't scale late-game; unemployment's real cost is invisible (design, med)  `[⏸️ **PARKED / ON HOLD 2026-08-02 (owner) — POST-RELEASE, LOW PRIORITY. Not owed, not scheduled, and not to be reported as outstanding.** Shape confirmed the same day: build it as an **opt-in module**, and **ship our own translations** (`ModItemLocTable`) rather than English-only `Untranslated` strings — which is why it moves behind release, since the pack has no localisation pipeline today. ~~speced 2026-07-30, user-approved~~ / ~~BUILD UNHELD 2026-08-01~~ / ~~Chain prompt 9 is runnable~~ — all true when written and all superseded: **the F86 hold really is discharged and PT-56 really did pass, so nothing technical blocks this; the owner re-prioritised it, which is a different reason.** ⛔ **The spec below was RE-DERIVED FROM Src 2026-08-02 (chain prompt 9) BEFORE any code was written, and three of its claims did not survive** — corrections block immediately after the spec. Read that block before building. **NOTHING BUILT; no PT-57; F84 no longer bundled to it (see F84)**]`
+
+> ## ⏸️ PARKED 2026-08-02 — what happened, so this is not re-litigated
+>
+> Chain prompt 9 opened to build this. It ran the staleness/gate check (clear),
+> verified the routed [S36] *"the devs squashed unemployment with 1.0"* claim
+> against current Src (**false — the premise below still holds, see the
+> re-derivation**), re-derived the route, and put the bundled F84/T1
+> localisation decision to the owner as job 1 requires. **The owner's answer
+> re-scoped the item rather than answering the tradeoff:** opt-in is confirmed,
+> but the text ships through our own translation tables, and *"this will be a
+> low priority build, planned for after release, so it will become Parked / on
+> hold after your work."*
+>
+> **So no code exists, and none should be written until this is un-parked.**
+> What the session leaves behind is the re-derivation below, which is worth more
+> than the build would have been at this point: it corrects three claims in an
+> approved spec, and one of the things it found while checking F84's cited
+> precedent was that **our own shipped `Fix_TechDescriptionBuilding` is a no-op
+> in retail** (**F98**) — a defect nothing in the D10 plan would have surfaced.
+
 **Problem (research session 2026-07-30, all source-verified).** The three
 vocation Workshops (Art/VR/Biorobotics, build category "Workshops") are the
 designed late-game employment+resource sink: they produce nothing, consume
@@ -9304,7 +9447,141 @@ Two failures:
 reads (T1); dial infopanel check on a live workshop (slots and consumption
 shift together, +50%/+100%); dial-down mid-shift → excess workers unassigned
 cleanly; stale-save reconcile (PT-56 step-4 shape). Estimated one ~7-minute
-sitting.
+sitting. ⏸️ **NOT WRITTEN — the park landed before the build, so no PT-57 row
+exists in `PLAYTEST_CHECKLIST.md`. It is created by whoever un-parks this, not
+owed now.**
+
+## ⛔ ROUTE RE-DERIVED FROM Src 2026-08-02 (chain prompt 9) — three spec claims did not survive
+
+Done under the standing rule that a build re-derives its own route rather than
+re-checking the spec's citations (the 8c lesson: *"treat any sentence of the form
+'the only way to do this is X' as the least-verified sentence on the page"*).
+Read this before writing any code against the spec above. Build `1.0.7.396349`.
+
+### What survived, and is now confirmed twice
+
+| Spec claim | Status |
+|---|---|
+| Description T ids `8821` (Art) / `8818` (VR) / `8827` (Biorobotics) | ✅ exact |
+| Consumption is fraction-of-capacity × `consumption_amount`, so **pairing is load-bearing** — raising capacity alone cuts per-worker cost | ✅ exact: `GetWorkersConsumption` = `MulDivRound(MulDivRound(#workers, 100, max_workers), consumption_amount, 100)` (`ArtWorkshop.lua:35-39`) |
+| Both props are modifiable | ✅ `max_workers` (`Workplace.lua:5`), `consumption_amount` (`HasConsumption.lua:47`) |
+| `StatusEffect_Unemployed` is icon-only — no stat modifiers anywhere | ✅ `StatusEffects.lua:73-80` declares `display_name`, `description`, `sign`, `selection_arrow`, `priority` and nothing else. Sibling control sits 3 lines below: `StatusEffect_Shock` carries `damage`, `damage_pct_hour`, `sanity_damage_percent` — the class fully supports stat damage and Unemployed uses none of it |
+| Workers' Party `CollectiveUnemployment` costs −900…−3000 at ≥10% | ✅ `FactionLikes` entry, `Value −900`, `ValueMin −3000`, filter `#obj.labels.Unemployed * 100 >= 10 * #obj.labels.Colonist` |
+| Template-id colony labels are reachable the D09 way | ✅ `City:AddToLabel` forwards to `self.colony` first (`City.lua:83-86`), which is the container label modifiers are written to |
+
+⭐ **And the routed [S36] claim is answered: NO.** A player on a hotfix-1.0.3-era
+Reddit thread asserted the devs *"squashed … homelessness and unemployment"* with
+1.0. Against our pinned Src the colonist-level cost is **still absent** — the
+premise of this entry's half 2 is intact and was not taken on trust from the
+2026-07-30 research. (The counter-report [S37]/[S38] is not evidence of presence
+either; neither is Src, which is why this was read rather than argued.)
+
+### ❌ Three claims that did not survive
+
+**1. "The three vocation Workshops" — there are FOUR.**
+`TVStudioWorkshopCCP1` carries `build_category = "Workshops"`, `label2 =
+"Workshop"`, `object_class = "TVStudioWorkshop"` whose parent is `Workshop`
+(`Lua\Buildings\TVStudioWorkshop.lua:5-6`) — so it pays the same +10 Morale and
++5 Comfort × performance per fulfilled shift and counts toward the same Workshop
+milestone. `max_workers` 12, consumption Electronics.
+⚠️ **It is DLC in the original game and base content in Relaunched** (owner,
+2026-08-02), unlocked by an ordinary tech `LiveFromMars`
+(`Data\TechPreset.lua:4050-4062`); no `BuildingTemplate` in this tree carries a
+DLC gate at all. **So every player can build it, and the F95 curation rule
+("every buildable X") points at including it.**
+**Open design point, deliberately not decided while parked:** its worker count
+also drives TV-show progress → colony funding (`AddShowDevelopmentProgress`,
+`Broadcast`), so a capacity dial there moves **income**, not only employment.
+Text and dial may reasonably be answered differently for it.
+
+**2. "`max_workers`: the workshops' own upgrade1 modifies it, so live-change is a
+vanilla path" — the CITATION IS FALSE, the CONCLUSION IS TRUE on other evidence.**
+All three templates carry `upgrade1_mod_prop_id_3 = "max_workers"` and
+`upgrade1_mul_value_3 = -100`, but **none carries an `upgrade1_id`** — and
+`Building:ApplyUpgrade` gates on `UIColony:IsUpgradeUnlocked(self:GetUpgradeID(tier))`,
+so the modifier never applies. Those fields are inert editor leftovers (contrast
+`Diner`, which has a real `upgrade1_id = "Diner_ServiceBots"`).
+✅ **The conclusion stands on better evidence:** `Workplace:OnModifiableValueChanged`
+(`Workplace.lua:376-415`) handles `max_workers` explicitly in **both** directions —
+on a decrease it walks each shift and calls `FireWorker` on the excess, then
+`SetWorkshift` / `CheckWorkForUnemployed` / `UpdatePerformance` / `RebuildInfopanel`;
+on an increase `CheckWorkForUnemployed` refills. Live change is a first-class
+vanilla path. It is also exercised for real by `Policy_Automation_ServiceAutomation`
+— see **C39**, filed by this re-derivation.
+
+**3. "EVERY faction def carries unemployment clauses" — SEVEN of twenty-nine.**
+`Data\FactionDef\` holds 29 presets; the ones with an unemployment clause are
+`India`, `Japan`, `JusticeMovement`, `MarsDemocraticParty`, `NewSol`,
+`ProsperityForMars`, `WorkersParty`. The legibility argument does not need
+"every" and is weaker for overstating it — **seven factions is still a real,
+entirely undisclosed political cost**, which is the point.
+
+### ⭐ Two facts the spec did not have, and both change the build
+
+**(a) `max_workers` is HARD-CLAMPED AT 20; `consumption_amount` is not — so the
+pairing breaks at the ceiling, against the player.** The property metadata
+carries `min = 0, max = 20` (`Workplace.lua:5`), and `Modifiable:ModifyValue`
+applies it as `Clamp(value, modification.min, modification.max)`
+(`Lua\Modifiers.lua:98`) after the percent. `consumption_amount` declares no
+bounds (`HasConsumption.lua:47`), so it is unclamped. Consequence at +100%:
+
+| | base | +50% | +100% | at the cap? |
+|---|---|---|---|---|
+| ArtWorkshop | 5 (class default) | 8 | 10 | no |
+| BioroboticsWorkshop | 6 | 9 | 12 | no |
+| VRWorkshop | 10 | 15 | **20** | **exactly on it** |
+| TVStudioWorkshopCCP1 | 12 | 18 | **20, not 24** | **clamped** |
+
+⚠️ **VR lands exactly on 20 with nothing to spare**, so any *other* additive
+`max_workers` percent — `Policy_Automation_ServiceAutomation` is −50% and helps,
+but a future law, tech or mod could go the other way — silently truncates
+capacity while consumption keeps the full +100%. **The build must clamp its own
+dial percent per template from that template's base and apply the same clamped
+percent to `consumption_amount`**, so the pairing is exact by construction rather
+than by arithmetic that happens to fit today. Do not ship the nominal percent.
+
+**(b) Raising capacity without filling it LOWERS the workshop's performance, and
+performance is what pays the Comfort boost.** `GetWorkshiftPerformance` splits a
+fixed 100 points across `max_workers` slots
+(`part_per_worker = law_scale / self.max_workers`, `Workplace.lua:219-224`), and
+the workshop Comfort payout is `MulDivRound(WorkInWorkshopComfortBoost,
+self.performance, 100)` (`ArtWorkshop.lua:24-27`). The game states the rule in its
+own UI — *"Free work slots reduce workplace performance"* (`Workplace.lua:1225`).
+**So a player who dials +100% and cannot staff the new slots gets less Comfort
+per worker than before, not the same.** That is vanilla mechanics and not a
+defect, but it is a real cost of the dial, it is exactly the case the dial exists
+to create, and it belongs in the module header, in the option's rollover text and
+in PT-57's expectations. The spec does not mention it.
+
+### Localisation — the tradeoff is not what this entry and F84 both describe
+
+T1 assumes *"New strings via `Untranslated()` (FIX_POLICY §6)"* and F84 frames the
+choice as localized-`T`-versus-English-only-`Untranslated`. Re-checking F84's
+cited precedent (F25) found that **re-using a shipped translation id is a no-op
+in retail** — the engine discards the replacement literal at `T()` construction —
+so that escape hatch does not exist, and **F25 itself has never worked**
+(→ **F98**, which carries the full mechanism and the three available text routes).
+
+A fourth possibility the spec did not consider **does** work and would have made
+T1 free: `shipped_T .. Untranslated("…")`. `TMeta.__concat` (`localization.lua:373-412`)
+operates on the stripped light-userdata form because `LightUserDataSetMetatable(TMeta)`
+(`:359`) installs TMeta as the shared metatable, `IsTCompatible` is `return_true`
+in retail (`:23`), and `_InternalTranslate` handles the resulting `TConcatMeta`
+(`:756`). Shipped precedent exists — `sign..Untranslated(amount)`
+(`Workplace.lua:293, :299`). **Every string T1 needs is an APPEND**, so every
+language would have kept its shipped description and gained an English clause.
+⭐ **The owner chose route 3 instead — ship our own `ModItemLocTable`** — which is
+strictly better again and is the reason this item moved behind release. Recorded
+because the concat route stays the correct fallback if the loc-table work is ever
+descoped.
+
+### ⚠️ Do not build D10 while C39 is open
+
+**C39** (filed by this re-derivation) is a candidate defect in which
+`Policy_Automation_ServiceAutomation` already puts a `max_workers` modifier on
+these same four buildings by label. D10 would add a second one. A leg run with
+both live cannot attribute a capacity reading to either. Settle C39 first, or
+hold the dial at base for D10's leg.
 
 ### D11 — Shuttles fly ONE passenger per trip, even when several colonists share the same dome pair (design, low)  `[candidate 2026-07-30 — feasibility research ON FILE, **NOT GREEN-LIT: the user explicitly directed that this filing is NOT approval. Before ANY build work, ASK the user fresh and get an explicit go.** Multi-hop passenger routing was REJECTED by the user the same day — do not re-propose it]`
 **Shuttle-limits reference (research 2026-07-30, all source-verified):**
@@ -11349,6 +11626,79 @@ quotes verbatim; sources in the audit report §8.
   (fix the omission vs. leave a balance number alone) is prompt 7's, not this
   sweep's. **If it is built, the shape is two added `Effect_ModifyLabel`
   entries or an `object_class`-level label, not a code patch.**
+
+### C39 — `Policy_Automation_ServiceAutomation` cuts `max_workers` by LABEL while its performance compensation keys on CLASS, and the four Workshops sit on one side of that line only  `[filed 2026-08-02 by chain prompt 9's D10 route re-derivation — VERIFIED vs Src, HARM DIRECTION NOT DETERMINED, nothing built, not a §4 package until someone watches it]`
+
+**How it was found.** Checking whether D10's proposed capacity dial would collide
+with anything else that already modifies `max_workers` on the workshops. One
+thing does, and the way it does it is asymmetric.
+
+**The two halves that disagree.**
+
+* **The effect targets a LABEL.** The law's sole effect is
+  `LawEffectModifyLabel{ Label = "ServiceBuildings", Prop = "max_workers",
+  Percent = -50 }` (`Data\LawDef\LawDef-Technology.lua:227-234`, parameter
+  `automation_workforce_reduction`).
+* **The compensation targets a CLASS.** `Workplace:GetWorkshiftPerformance`
+  re-derives a `law_scale` from that same parameter, but only under
+  `self:IsKindOf("Factory")` / `IsKindOf("ResearchBuilding")` /
+  `IsKindOf("Service")` (`Lua\Buildings\Workplace.lua:205-217`).
+
+**The sets do not coincide, and the mismatch is exactly four buildings.**
+Twenty-three templates carry `label3 = "ServiceBuildings"`. Every one of them
+resolves to a `Service` descendant — directly (`AmphitheaterBase`), via
+`ServiceWorkplace = { "Service", "Workplace" }` (Diner, MegaMall, Spacebar,
+CasinoComplex, the Shops, `MedicalBuilding` → Infirmary/Hospital/MedicalPost),
+or via `FitService = { "Service" }` (OpenAirGym, TaiChiGarden) — **except**
+`ArtWorkshop`, `VRWorkshop`, `BioroboticsWorkshop` and `TVStudioWorkshopCCP1`,
+whose chain is `Workshop = { "ElectricityConsumer", "Workplace" }`
+(`Lua\Buildings\ArtWorkshop.lua:3-6`). Those four take the staffing cut and
+cannot reach the compensating branch.
+
+**Intent — two tells, and the second is the strong one.**
+1. **Self-contradiction:** one effect is aimed by label and its corrective by
+   class, with no mechanism keeping the two lists in step.
+2. **Explicit dev comment**, on the compensating block itself (`:209-210`):
+   *"this code assumes that there's a modification in max_workers matching the
+   value on automation_workforce_reduction, and tries to reverse its effect so
+   that the overall performance is maintained; other modifications on
+   max_workers are ignored."* The code says out loud that it assumes the two
+   sets coincide. For these four they do not.
+
+**⚠️ WHAT THIS ENTRY DOES NOT CLAIM — the sign is genuinely unresolved, and it
+is recorded that way rather than guessed.** Reading the arithmetic,
+`law_scale = MulDivRound(base_max_workers, 100, post_auto_workers)` comes out at
+**200** for a −50% law, and `part_per_worker = law_scale / max_workers` then puts
+a *full* reduced shift at ~200 performance where an unmodified full shift is 100.
+If that reading is right, the compensation **raises** performance and the four
+Workshops are missing an uplift rather than carrying a penalty — which is a much
+smaller thing, and possibly a deliberate one. I could not settle it from source
+without following `performance` through its consumers, which is beyond what this
+sweep was for.
+
+**And the consequence is a different KIND for these four.** For a Factory or a
+Shop, `performance` scales resource output or service throughput. For a Workshop
+it scales the **Comfort boost** the shift pays its workers
+(`Min(MulDivRound(g_Consts.WorkInWorkshopComfortBoost, self.performance, 100),
+100*const.Scale.Stat)`, `ArtWorkshop.lua:24-27`) — so whatever the sign turns out
+to be, the player-visible effect lands somewhere no other member of the label
+puts it.
+
+**Reachability — R1 if the law is enactable in ordinary play, which is not yet
+checked** (it is a `Policy_Automation_*` LawDef in the Technology group; whether
+it needs a tech, a sponsor or an Assembly vote was not traced). Stating that as
+open rather than assuming R1 from the file it lives in.
+
+**Next step is a keyboard observation, not more reading:** enact Service
+Automation on a colony with a staffed workshop and read the infopanel — workers
+per shift, performance, and the Comfort the shift pays — against a Diner or
+Spacebar in the same dome as the in-family control. Until that runs this stays
+`cand`, and it is **not** a §4 package.
+
+⚠️ **Do not fold this into D10.** D10 adds a `max_workers` modifier to the same
+four buildings, so a session that builds D10 while this is open will be unable to
+tell the two apart in a log. If D10 is ever un-parked, settle C39 first or hold
+the dial at base for the leg.
 
 ## Not yet swept (follow-up targets)
 

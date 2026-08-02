@@ -483,12 +483,28 @@ module's own maps — byte-identical in all three.
   unwind (ENGINE_FACTS.md). Never use them for control flow or guards; use
   early returns and reason strings. `pcall` still catches genuine runtime
   errors.
-- **Localization stance:** a T value is a TABLE (`Untranslated(s)` →
-  `T{s, untranslated = true}`). Copied shipped bodies keep their `T(id, ...)`
-  calls byte-identical; NEW player-visible strings from this pack use
-  `Untranslated("...")` — the pack ships no loc tables, and a raw Lua string
-  where the UI expects a T value renders wrong or crashes (the F14 probe
-  lesson). Log/console text stays plain strings.
+- **Localization stance:** a T value is a TABLE **in dev — in retail it is often
+  a light userdata** (`Untranslated(s)` → `T{s, untranslated = true}`). Copied
+  shipped bodies keep their `T(id, ...)` calls byte-identical; NEW player-visible
+  strings from this pack use `Untranslated("...")` — the pack ships no loc tables
+  today, and a raw Lua string where the UI expects a T value renders wrong or
+  crashes (the F14 probe lesson). Log/console text stays plain strings.
+  ⛔ **AND NEVER RE-USE A SHIPPED TRANSLATION ID TO CHANGE TEXT — IT IS A NO-OP
+  IN RETAIL** (added 2026-08-02; this is not a style preference, it is why one of
+  our shipped fixes never worked). `T(id, text)` returns `LocIdToLightUserdata(id)`
+  and **discards your literal** whenever `TranslationTable[id]` exists, which in a
+  retail build is always — English included, since English is a loaded table like
+  every other language. `Fix_TechDescriptionBuilding` did exactly this and has
+  never changed anything (**BUGS F98**; F25 demoted, and **no longer citable as
+  localisation precedent**).
+  ⭐ **To ADD to existing localized text at zero cost in any language, concatenate:
+  `shipped_T .. Untranslated("…")`** — supported on the retail userdata form and
+  used by shipped code (`Workplace.lua:293`). Concat cannot *delete*, so
+  correcting a wrong sentence still means replacing the whole string.
+  Full mechanism, all four routes, and the queued live control: `ENGINE_FACTS.md`,
+  "RE-USING A SHIPPED TRANSLATION ID …". ⭐ **Owner decision 2026-08-02: the pack
+  WILL ship its own `ModItemLocTable` translations, post-release** — at which
+  point this bullet is revisited, not before.
 - **Logging:** every ModLog call escapes `%` (`msg:gsub("%%", "%%%%")`) —
   ModLog's print path formats the message a second time (00_Core.lua:24-30).
 

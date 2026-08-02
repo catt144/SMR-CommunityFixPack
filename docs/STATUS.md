@@ -50,6 +50,16 @@ Was 74/68; the batch added **five new modules** (`Fix_SaintBlessing`,
 that needed no new module** (F91 amended `Fix_TrackSalvageWipe`, F94 landed
 inside `Fix_AsteroidLanderAvailable`). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
+**110 rows** (98 `F` + 12 `D`) **plus 39 `C`** — **re-counted 2026-08-02 by chain
+prompt 9**, by counting. **Module and probe counts are UNCHANGED at 80/74 and 86:
+prompt 9 shipped no code.** It filed **F98** (our own `Fix_TechDescriptionBuilding`
+is a no-op in retail — re-using a shipped translation id discards the replacement
+text at `T()` construction) and **C39** (`Policy_Automation_ServiceAutomation`
+cuts `max_workers` by label while its performance compensation keys on class, and
+the four Workshops are on the label only). ⚠️ **Counting trap worth knowing:** a
+plain `grep -c '^| F'` over the index returns **99**, because the F97 *entry*
+contains a rate table whose rows also begin `| F97 |`. Count distinct ids, not
+matching lines. The prior figure and its history follow — was
 **109 rows** (97 `F` + 12 `D`; **re-counted 2026-08-02 by chain prompt 8c** —
 `F=97, D=12, C=38`. Chain prompt 8c filed **F97** (C23 item 1, the dust-devil
 spawn gate); the `C` count is unchanged because a promoted candidate keeps its
@@ -171,6 +181,65 @@ Prompt 8 **split under rule 3**: `8b` carries the seven approved fixes
 out on its own scale call (Tier-1-scale work — a 14th §3a site, a sleeping
 game-time thread — on a P3 item) and **gated on 8b**, since F93 patches the same
 dust-devil subsystem.
+⏸️ **2026-08-02, chain prompt 9 — D10 IS PARKED BY THE OWNER, NOTHING BUILT, AND
+THE RE-DERIVATION IS WHAT THE SESSION LEAVES BEHIND.** Counts re-derived by
+counting: **110 rows = 98 F + 12 D; 39 C**; **modules and probes UNCHANGED at
+80 / 74 and 86** (no code shipped). **PROBE SWEEP: clean**, both repos.
+
+The prompt opened to build D10. Gate clear (F86 hold discharged, PT-56 passed),
+and the routed **[S36] "the devs squashed unemployment with 1.0" claim was
+checked against Src and is FALSE** — `StatusEffect_Unemployed` is still icon-only
+with zero stat modifiers (`StatusEffects.lua:73-80`, with `StatusEffect_Shock`
+three lines below as the in-file control that the class supports stat damage), so
+D10's premise held. The bundled F84/T1 localisation decision then went to the
+owner as job 1 requires, and **the answer re-scoped the item instead of answering
+the tradeoff**: opt-in confirmed, but the text ships through **our own
+`ModItemLocTable`**, and D10 becomes **low-priority, post-release, PARKED — not
+owed, not scheduled, not to be reported as outstanding.**
+
+⛔ **THE APPROVED SPEC WAS RE-DERIVED FROM Src BEFORE ANY CODE, AND THREE OF ITS
+CLAIMS FAILED.** (a) **"The three vocation Workshops" — there are FOUR**;
+`TVStudioWorkshopCCP1` is the same build category and the same `Workshop` parent,
+and is **DLC in the original game but base content in Relaunched** (owner), so
+every player can build it. (b) **The `upgrade1` citation is false** — none of the
+three carries an `upgrade1_id`, so that modifier never applies; the conclusion it
+supported survives on **better** evidence (`Workplace:OnModifiableValueChanged`,
+`:376-415`, handles `max_workers` in both directions and fires the excess through
+`FireWorker`). (c) **"EVERY faction def carries unemployment clauses" — seven of
+twenty-nine.** Two facts the spec never had also bind any future build:
+**`max_workers` is hard-clamped at 20 while `consumption_amount` is not**, so the
+paired dial must clamp its own percent per template or the pairing breaks against
+the player at the ceiling (VR lands *exactly* on 20 at +100%); and **raising
+capacity without staffing it lowers the Comfort payout**, because performance is
+split across the slots and the workshop boost scales on performance.
+
+⭐ **TWO DEFECTS FILED EN ROUTE, NEITHER OF WHICH THE D10 PLAN WOULD HAVE FOUND.**
+**F98 — our own:** `Fix_TechDescriptionBuilding` (F25) **is a no-op in retail.**
+It re-uses the shipped translation id, and `T(id, text)` in a non-dev build
+returns `LocIdToLightUserdata(id)` and discards the literal
+(`localization.lua:250-252`), so the assignment writes back the text already
+there — in every language, English included. Found by re-checking the precedent
+**F84's own entry asked to be re-checked** before its tradeoff was treated as
+settled. **F25 demoted in both places and is no longer localisation precedent for
+anything.** ⚠️ A 30-second live control is queued (`ModLog(type(T(8821,"ZZZ")))`
+→ `userdata` confirms) — nothing should be built on the source reading alone.
+**C39:** `Policy_Automation_ServiceAutomation` cuts `max_workers` on the
+`ServiceBuildings` **label** (23 templates) while `GetWorkshiftPerformance`'s
+compensation keys on `IsKindOf("Service")` — and the **four Workshops are the only
+members of that label outside that class**. Tells are a self-contradiction plus
+the block's own dev comment saying it *assumes* the two sets coincide. ⚠️ **Sign
+NOT determined** and recorded that way; needs a keyboard observation. **Do not
+build D10 while C39 is open** — both put a `max_workers` modifier on the same four
+buildings and a leg could not attribute a reading to either.
+
+⛔ **F84 IS UN-BUNDLED FROM D10** — the shared-tradeoff premise is void. Every
+string D10's T1 needs is an **append**, and an append costs nothing in any
+language (`shipped_T .. Untranslated(…)`; `TMeta.__concat` works on the retail
+light-userdata form, shipped precedent `Workplace.lua:293`). **F84 half (a) is a
+deletion** and concat cannot subtract. Two different questions that looked like
+one. F84's user decision is now **taken** (route 3, our own loc tables) and it is
+blocked on capability, not on anyone's call.
+
 ⭐ **2026-08-02, chain prompt 8c — C23 ITEM 1 IS BUILT AS `F97`
 (`Fix_DustDevilSpawnGate`, `b43f1d9`), AND THE §3a COST ITS APPROVAL ACCEPTED DID
 NOT MATERIALISE.** Counts re-derived by counting: **109 rows = 97 F + 12 D; 38 C**;

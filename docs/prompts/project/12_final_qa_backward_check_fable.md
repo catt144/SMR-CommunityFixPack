@@ -840,3 +840,59 @@ against nine presets, not one.
   matters: a false positive is cheap to notice and a false negative is not, and
   the wave-file house rules say "assert on the mechanism" without saying "and only
   on inputs the engine can produce."
+
+### Added by chain prompt 9 (2026-08-02) — four job-7 instances, and one is a NEW axis: a fix that reports success while doing nothing
+
+Chain rule 4b: captured even though three of the four took seconds to correct.
+
+**1 · ⭐⭐ NEW AXIS — A SHIPPED FIX THAT HAS NEVER WORKED, AND EVERY SURFACE THE
+PROJECT HAS SAID SO.** `Fix_TechDescriptionBuilding` (F25, status `fixed` since
+it was written) **is a no-op in retail**: it re-uses the shipped translation id,
+and `T(id, text)` in a non-dev build discards the replacement literal and returns
+the id alone (`CommonLua\Core\localization.lua:250-252`). Filed as **F98**.
+**What makes this a new axis rather than another stale fact:** every existing
+job-7 instance is a *document* drifting from a *truth*. Here the document was
+faithful — the module header, the BUGS entry and the index row all described what
+the author believed, consistently, for days. **The defect is that no surface in
+the project can distinguish "this fix ran" from "this fix worked."** The module's
+own verdict function returns `"patched"` on having performed the assignment,
+which it genuinely does; `ListFixes()` reports `active`; the probe suite has
+nothing to say about it. **Ask job 7: what does the project do about a claim
+whose only available evidence confirms the wrong proposition?** The existing
+answer — `fixed` means code written, `tested` means verified in-game — is the
+right *shape* and did not help, because `fixed` was true and read as sufficient
+for a text change nobody thought needed a playtest.
+
+**2 · A DOC ASKED FOR EXACTLY THIS CHECK AND NOBODY RAN IT FOR THREE DAYS.**
+F84's entry, written 2026-07-30, said: *"Precedent exists (F25 is a description
+defect), but **F25 should be re-checked for how it handled loc before this is
+treated as settled**."* That sentence was correct, specific, actionable, and sat
+unexecuted until the D10 build tried to lean on the precedent. **The project has
+no mechanism for a written "someone should check X before relying on this"** —
+it is not a todo, not a checklist rider, not a BUGS row, and nothing sweeps for
+it. ⚠️ Related and worth grepping during the review: how many other entries carry
+a conditional like *"should be re-checked"* / *"if this is true then"* / *"treat
+as unverified until"* with no owner and no trigger.
+
+**3 · AN APPROVED SPEC CARRYING THREE FALSE CLAIMS, ALL SURVIVING USER APPROVAL.**
+D10's entry — specced 2026-07-30, user-approved the same day, and treated as
+*"the spec, do not re-design it"* by prompt 9's own brief — asserted (a) three
+vocation Workshops when there are **four**, (b) that the workshops' own `upgrade1`
+modifies `max_workers` when **none of them has an `upgrade1_id`**, so it never
+applies, and (c) that **every** faction def carries unemployment clauses when
+**seven of twenty-nine** do. ⭐ **The pattern worth naming: (b) is a false
+citation under a true conclusion.** The conclusion — live `max_workers` change is
+a vanilla path — is correct, on completely different evidence
+(`Workplace:OnModifiableValueChanged`). **A reviewer checking whether the claim
+was right would have said yes.** This is the third instance in one week of a
+*route* being wrong while its citations read fine (prompt 8's phantom route,
+8c's route claim in the opposite direction, now this) — the corpus is large
+enough for job 7 to treat "verify the route, not the citations" as a finding
+rather than three anecdotes.
+
+**4 · THE CHAIN'S OWN README WENT STALE ABOUT THE CHAIN.** `README.md` row `8b2`
+still lists `8b2_pt60_leg_completion_opus.md` as a pending, un-struck chain
+member; the file was consumed on 2026-08-02 (`b23e22e`) and does not exist.
+Small, but pointed: **the index the chain uses to decide what runs next is the
+one document no prompt owns**, because each prompt's mechanics tell it to update
+the *next prompt* and delete *itself*. Corrected this session.

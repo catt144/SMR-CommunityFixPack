@@ -112,3 +112,59 @@ do not adopt it.** The check is small: find the law's `Effect_ModifyLabel` (or
 equivalent) on residence capacity and see whether its amount is recomputed from
 the spire's current workforce. If it is, D12's premise needs restating before a
 line of code is written.
+
+### From chain prompt 9 (2026-08-02) — D10 is PARKED, so three things move to you
+
+**State you inherit, not a summary to re-derive.** Prompt 9 opened to build D10
+and **built nothing**: the gate was clear, but when the bundled F84/T1
+localisation decision went to the owner (job 1), the answer re-scoped the item —
+**opt-in confirmed, text ships through our own `ModItemLocTable`, and D10 is now
+PARKED / on hold, low priority, post-release.** Not owed, not scheduled, not to
+be reported as outstanding. Counts re-derived by counting: **110 rows = 98 F +
+12 D; 39 C**; **modules and probes UNCHANGED at 80 / 74 and 86** — prompt 9
+shipped no code. **PROBE SWEEP: clean**, both repos. Recount, do not inherit.
+
+**1 · ⛔ THE `DustDevilSpawnGate` CONFIRMATION OWED TO 8c IS NOW YOURS, AND IT
+LOST ITS FREE RIDE.** 8c routed one unrun change to prompt 9 on the explicit
+basis that it *"rides an existing suite run"* — the `forbidden` early-return
+added to `Fix_DustDevilSpawnGate` after PT-61, which is behaviour-neutral **by
+construction but not by measurement**. Prompt 9 runs no suite, so the ride does
+not exist. **When you run `*r SMRTest.RunAll()` for D12's leg, confirm
+`DustDevilSpawnGate` still PASSes and say so in your notes.** Probe count is
+unchanged at **86** (8c added an assertion to the existing probe, not a probe).
+⚠️ This is the second hop for this item; if D12 also ends without a suite run,
+route it onward rather than dropping it.
+
+**2 · ⭐ YOUR OWN JOB-1 CHECK JUST GOT A WORKED PRECEDENT — AND IT CUTS BOTH
+WAYS.** Your brief carries the law-spire-staffing hypothesis for the *homeless*
+half. Prompt 9 chased the twin question for the *jobs* half and found something
+adjacent: **`Policy_Automation_ServiceAutomation` really does modify a workplace
+capacity property from a law** — `LawEffectModifyLabel{Label="ServiceBuildings",
+Prop="max_workers", Percent=-50}` (`Data\LawDef\LawDef-Technology.lua:227-234`).
+So **"a law that moves building capacity" is a real, shipped shape in this game**
+and your hypothesis is not exotic. ⚠️ **But that one is a static percent, not
+recomputed from live staffing** — which is precisely the distinction your check
+must make. Finding a law that touches capacity is not finding the churn
+mechanism; the question is whether the *amount* tracks a workforce that changes.
+Do not let the first half of that sentence stand in for the second.
+Filed as **C39** in passing, for an unrelated reason (that law's compensation
+keys on class while its effect keys on label, and the four Workshops sit on one
+side only) — **not your work, do not adopt it.**
+
+**3 · ⚠️ THE LOCALISATION FACT, BECAUSE ANY UI STRING YOU ADD IS GOVERNED BY IT.**
+D12 ships a **dome infopanel toggle row**, which means player-visible text. Three
+routes exist and only two work: **re-using a shipped translation id is a NO-OP in
+retail** — `T(id, text)` returns `LocIdToLightUserdata(id)` and discards your
+literal (`CommonLua\Core\localization.lua:250-252`), which is how our own
+`Fix_TechDescriptionBuilding` turned out never to have worked (**F98**, filed
+this session; **F25 demoted in both places and is no longer precedent for
+anything**). Use `Untranslated("…")` for a new string, or `shipped_T ..
+Untranslated("…")` to append to an existing one — `TMeta.__concat` works on the
+retail light-userdata form (`:359`, `:373-412`; shipped precedent
+`Workplace.lua:293`). ⚠️ **A 30-second live control is queued and unrun**:
+`ModLog(type(T(8821, "ZZZ")))` — `userdata` confirms the reading, `table`
+refutes it. **It costs one console line on your leg; please take it**, because
+F98 currently rests on source alone.
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
+prompt 9.**
