@@ -121,6 +121,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F91 | Whole-track salvage leaves an undeletable invisible `TrackBase` shell in the map and every later save — **our own F44 path reproduces it** | P3 | SOURCE-VERIFIED | **open — promoted from C33 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** `DemolishAndSplitTrack` calls `track_obj:OnDemolish()` and returns at three sites (`TrackElement.lua:467-470, :503-508, :517-522`); `OnDemolish` only *prepares* deletion — it sets `CanDelete = ret_false` (`Track.lua:249`) and empties the three arrays to `false` — and the only other deletion route is gated on the flag it just falsified (`TrackElement.lua:203-205`). **Tell: every other route to `OnDemolish` ends in `DoneObject`** (`Demolishable.lua:132-141`) and `TrackBase` sets `use_demolished_state = false` (`Track.lua:45`) to opt into that branch. **R1 — the `mass_delete` route is one advertised keypress** (*"CTRL + left_click — Salvage entire length"*, `Construction.lua:2925-2930`), and our F44 keeps it. Fix = amendment to `Fix_TrackSalvageWipe` (finish the deletion + heal existing saves on the sweep that already walks `TrackBase`), **no new module**. ⚠️ The C33 "cannot add trains to tracks" lead is **NOT** this — traced and dropped (entry) |
 | F92 | The Saint trait's dome blessing has never applied to anyone — the modifier is filed under the raw trait name `Religious`, colonists under `TraitReligious` | P2 | SOURCE-VERIFIED | **open — promoted from C22 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** Two adjacent lines in one loop disagree: `Colonist.lua:373` files under `GetTraitLabel(trait_id)`, `:376` passes the raw id to `AddDomeColonistsModifier`, which uses it as the label verbatim (`ClassDef-PresetDefs.generated.lua:1783-1784`); `Religious` is absent from `fixed_labels` (`Traits.lua:1268-1302`), so the +10 morale sits on a label nobody is in. ⭐ **Internal control: Empath is the only other `dome colonists` preset and it works** — its label needs no translation. **R1** (fires whenever a Saint joins a dome). Fix = **§1.1 preset patch** + one-shot load-time re-base; nothing enters the save (entry) |
 | F93 | The dust-devil scheduler reads its descriptor from the map the **player is looking at**, not the map it spawns on | P2 | SOURCE-VERIFIED | **open — promoted from C23 item 2 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** The thread pins `local map = MainMap` (`DustDevils.lua:198`) and uses it everywhere except in `GetDustDevilsDescr`, which takes no map and reads `CurrentMap.mapdata` twice (`:58-66`); the descriptor is **re-read every cycle** (`:234-238`), and `CurrentMap` is the camera's map (`ChangeCurrentMapSlot` → `SetCurrentMap`, `CommonLua\Core\map.lua:389-404`). Viewing the underground therefore either parks the surface scheduler a day at a time or hands it the **other map's intensity**. **R1**; all three callers are in that one thread. Fix = §1.4b global replacement, 7 lines, `CurrentMap` → `MainMap`; nothing enters the save. Siblings from the same bundle got different answers — see C23 (entry) |
+| F94 | An operator-precedence slip makes **any parked supply rocket** satisfy the asteroid-visit gate — the picker opens with no lander to pick | P3 | SOURCE-VERIFIED | **open — promoted from C24 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8, into the existing `Fix_AsteroidLanderAvailable` module.** `PlanetaryView.lua:439` — `and` binds tighter than `or`, so `IsKindOf(rocket, "LanderRocketBase")` qualifies only the first of three clauses. **R1**: `SupplyRocketBase` descends from `RocketBase` alone (`SupplyRocket.lua:1-3`) and parks in `WaitLaunchOrder` (`RocketBase.lua:643, :699`), which the detached clause accepts. The picker's own list keeps only non-pod `UniversalRocketBase` rockets (`PlanetUI.lua:1623-1635`), so it comes up empty. Tells: a guard that cannot fire, and the branch 3 lines above plus `EarthVisitPossible` both bracket the same idiom correctly. ⚠️ Repairing a false positive means owning the predicate — F72's chained delegation cannot survive, and its header says otherwise today (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -144,7 +145,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | **DESTRUCTION ROUTE VERIFIED 2026-08-02 (prompt 6b) — the soft-lock is LOCATED, not proven** → prompt 7. `Sinkhole` carries **neither** `indestructible` **nor** `disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`) and is the **only mystery set-piece in the game without the flag** — Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly all have it. A large meteor reaches `DestroyBuildingImmediate` → `DoneObject` (`Meteors.lua:817-825` → `Building.lua:1371-1393` → `Demolishable.lua:132-141`). Best soft-lock candidate is the **unguarded `_sinkhole:GetMap()`** at `Mystery 11.generated.lua:146`. ⭐ Anomalies are NOT at risk — checked and ruled out (entry) |
 | C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01 (fredware source recovered + read); **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F92`, fix approved and routed to prompt 8.** Tier derived this session: **R1**, and Saint is **not** a breakthrough trait (no `hidden_on_start`) — the routing note's "R2-ish?" is corrected. ⭐ Internal control found: **Empath** is the only other `modify_target = "dome colonists"` preset and it works, because its label needs no `GetTraitLabel`. Fix is a **§1.1 preset patch**, not a method touch (entry) |
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | **PARTLY promoted — 3 subjects, 3 answers** | VERIFIED vs Src 2026-08-01; **§4 run per sub-item 2026-08-02 (prompt 7).** **Item 2 → PASSED, filed `F93`** (R1: the descriptor comes from the camera's map, and the recorded "wedges in the retry" consequence was too narrow — the other branch silently adopts the viewed map's intensity). **Item 1 → defect confirmed and sharpened** (`count_max` unreachable whenever `spawn_chance < 100`; result can be 0 with `count_min` 1) **but the repair changes the dust-devil RATE, so the shape is an owner decision — nothing built.** **Item 3 → defect confirmed, DECLINED ON SHAPE** (F89's disposition): all four routes over-reach — `GenerateDustDevilIn` has 7 callers incl. the Crystals mystery, the marker sweep would hit `SA_SpawnDustDevilAtAnomaly`'s scripted markers, a loop reconstruction puts a sleeping mod thread in every save, and the descriptor is the shared preset table (entry) |
-| C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
+| C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01; **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F94`, approved, routed to prompt 8.** Tier derived this session: **R1, and wider than "ordinary rockets"** — `SupplyRocketBase.__parents = { "RocketBase" }` only, and `WaitLaunchOrder` is the landed-idle state of *every* supply/trade/refugee/aid/expedition rocket, so **one rocket parked on a pad opens the asteroid picker**. Second tell found: the branch 3 lines above and the sibling `EarthVisitPossible` both parenthesise the same idiom correctly. ⚠️ Fix must OWN the predicate — a post-wrapper cannot filter a false positive — so F72's advertised chaining is lost and its header needs updating (entry) |
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
 | C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | **✅ CLOSED — `wontfix`, not reachable on current-build saves** | **SOURCE: CANNOT DETERMINE 2026-08-02 (prompt 6c); CLOSED THE SAME DAY ON LIVE EVIDENCE.** **THREE independent** colonies (`save_game_id` checked, not assumed), **347+ sols of combined history**, both **founded on the pinned build so the vendor fixups never ran** — `10 / 0` at sol 288, `2 / 0` at sol 59 (~50 of them organic pre-playtest), and `4 / 0` on a third lineage — non-zero controls in every one. Original source finding follows: **CANNOT DETERMINE** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op). ⭐ **FIRST LIVE READING 2026-08-02 — CLEAN**: `10 buildings in maintenance or malfunction, 0 structurally broken` on a **sol-288** colony (log `Mars.exe-20260802-01.31.10:225`), the non-zero `10` acting as the control that the walk reached real candidates. **Points at CLOSE; held open for one confirming dump on a different colony.** ⚠️ A second clean dump (98 sols, `3 / 0`) was taken the same sitting and **does NOT count** — same `save_game_id`, i.e. an earlier point in the *same* playthrough. Vintage now CLOSED for that lineage by two agreeing mechanisms (`OrigLuaRev` = `LuaRevision` = 396349, `UndergroundRework106 = true`) (entry) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT**: `DroneHubExtender` is the template class name, so the label is carried and `Effect_ModifyLabel` lands (`Data\TechPreset.lua:3466-3471`). The extender's `work_radius` really is raised to 50, and the **commit step exists — it is just routed through the hub**: the tech's `Effect_Code` (`:3474-3481`) forces `SetUIWorkRadius` → `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)` (`DroneControl.lua:759-777`), and `FindTaskRequesters` **recurses into `linked_extenders` reading each extender's live `work_radius`** (`:315-325`). Positive control: `CommandCenterMaxRadius = 50` = default 35 + `SignalBoostersBuff` 15 exactly (`_GameConst.lua:62-72`) (entry) |
@@ -6654,6 +6655,100 @@ Cross-refs: **C23** (the bundle), F31 (the same wrong-map class, fixed),
 F35/`OverrideDisasterDescriptor` (`TerraformingDisasters.lua:54-99`, which is
 why the re-read exists at all).
 
+### F94 — An operator-precedence slip makes ANY parked supply rocket satisfy the asteroid-visit gate (P3, SOURCE-VERIFIED)  `[open — promoted from C24 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8, into the existing Fix_AsteroidLanderAvailable module]`
+
+**Defect, on the line (`PlanetaryView.lua:439`).**
+
+```lua
+elseif IsKindOf(rocket, "LanderRocketBase") and rocket.command == "Refuel"
+        or rocket.command == "WaitLaunchOrder"
+        or (rocket.command == "LoadAndLaunch" and not rocket.target_spot) then
+```
+
+`and` binds tighter than `or`, so this parses as
+`(IsKindOf(…) and cmd=="Refuel") or (cmd=="WaitLaunchOrder") or (cmd=="LoadAndLaunch" and not target_spot)`
+— **the class test governs only the first of the three clauses.** Two thirds of
+the predicate apply to whatever rocket reached the `elseif`.
+
+**Reachability: R1, and it is not a corner — it is the default state of a
+supply rocket.** Enumerated this session: `SupplyRocketBase.__parents =
+{ "RocketBase" }` (`SupplyRocket.lua:1-3`) — **not** `UniversalRocketBase`, so
+the first branch does not catch it, and **not** `LanderRocketBase`, so the class
+test is false. `RocketBase` parks in `WaitLaunchOrder`
+(`RocketBase.lua:643, :699`; `SupplyRocket.lua:145` treats it as the landed-idle
+state), and every rocket in the loop comes from `MainCity.labels.AllRockets`.
+So **one supply rocket sitting on its pad awaiting a launch order makes
+`PlanetaryAsteroidVisitPossible()` return true** — with no lander anywhere in
+the colony. The same holds for the trade/refugee/foreign-aid/expedition rockets,
+all of which descend from `SupplyRocketBase` and use the same command.
+
+**Consequence.** The one consumer is the VISIT ASTEROID action
+(`PlanetaryViewAsteroidResources.generated.lua:37-41`): `if
+PlanetaryAsteroidVisitPossible() then host:SetMode("rockets") else
+PromptNoAvailableAsteroidLanders() end`. The list that mode then builds,
+`LandingSiteObject:GetRocketsForExpedition` (`PlanetUI.lua:1623-1635`, the
+function F72 already established as the list builder), keeps only
+non-supply-pod `UniversalRocketBase` rockets — **so the supply rocket that
+opened the screen cannot appear on it.** The player gets an empty picker instead
+of the clear "no asteroid landers" prompt the code was reaching for.
+
+**Intent tells — two, and the second is inside the same function.**
+1. **Dead validation (§4 tell 2).** `IsKindOf(rocket, "LanderRocketBase")` is a
+   guard that cannot do its job for two of the three commands it was written to
+   qualify.
+2. **⭐ Self-contradiction within one function (§4 tell 4).** The branch three
+   lines ABOVE parenthesises its or-group correctly — `not rocket.arrival_loc
+   and ((cmd == "CmdWaitOrder" and …) or (cmd == "CmdOnEarth" and …))` (:436) —
+   and so does the sibling function immediately below,
+   `EarthVisitPossible` (:446-453). The same author, in the same file, in the
+   same idiom, got it right twice and dropped one pair of brackets once.
+
+**§4a — who benefits: the player.** A misleading UI state in vanilla, reachable
+by anyone with a supply rocket. No mod involved.
+
+**Complementary to F72, confirmed by reading our own module.**
+`Fix_AsteroidLanderAvailable` is a **post-wrapper** whose first line is
+`if orig(...) then return true end` — so it repairs the false NEGATIVE and
+**passes vanilla's false positive straight through**. C24 survives our pack
+today exactly as the candidate said.
+
+## Fix spec (approved; build = chain prompt 8)
+
+**Land it inside `Code/Fix_AsteroidLanderAvailable.lua` — one module, one
+target, both halves.** No new registry id.
+
+**Technique: §1.4b global replacement with a body copy** — 12 lines from
+`Lua\PlanetaryView.lua:433-444` (game **1.0.7.396349**), byte-identical except
+the parentheses:
+`elseif IsKindOf(rocket, "LanderRocketBase") and (rocket.command == "Refuel" or
+rocket.command == "WaitLaunchOrder" or (rocket.command == "LoadAndLaunch" and
+not rocket.target_spot)) then`. F72's permissive scan then runs on top of the
+corrected body, in the same order it runs today.
+
+⚠️ **Stated cost, because it reverses a property that module's header currently
+advertises: the chain is lost.** F72 deliberately delegates to `orig` so any
+other mod's wrapper survives. A false POSITIVE cannot be filtered by a
+wrapper — the wrapper sees only `true`, never which rocket produced it — so
+repairing C24 means owning the predicate. Whoever builds this **must update the
+F72 header**, which currently explains the delegation as a design choice.
+
+**§3a: nothing enters the save.** The function is synchronous and is called only
+from an `XAction` handler — UI, real-time, and UI windows are explicitly safe.
+
+**Probe outline:** `AsteroidVisitPrecedence` — with the fix active, a scan
+asserting that `PlanetaryAsteroidVisitPossible()` is false in a colony whose
+`AllRockets` label contains only non-`LanderRocketBase`, non-`UniversalRocketBase`
+rockets in `WaitLaunchOrder`. Cheap to state; the live half rides the F72
+checklist item.
+
+**Intent statement for the header:** *the class test was meant to qualify all
+three commands — the branch above it and the function below it both write the
+same idiom with the brackets in place. We add the brackets. No rocket that
+legitimately qualifies today stops qualifying.*
+
+Cross-refs: **C24** (the candidate this promotes), **F72** (same function,
+opposite error, same module), `PlanetUI.lua:1623-1635` (the list that disagrees).
+
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
 commit `21b92cb` had spliced F84's text into this heading, leaving D06's whole
@@ -8476,6 +8571,19 @@ quotes verbatim; sources in the audit report §8.
   `Fix_AsteroidLanderAvailable` wrapper fixes the false NEGATIVE and passes
   vanilla's `true` straight through, so this false POSITIVE survives our
   pack.
+  **✅ PACKAGED AND PASSED 2026-08-02 (chain prompt 7) → `F94`.** The tier is
+  **R1 and the population is much larger than "ordinary rockets"**: the class
+  chain was read this session — `SupplyRocketBase.__parents = { "RocketBase" }`
+  (`SupplyRocket.lua:1-3`), with trade, refugee, foreign-aid and expedition
+  rockets all descending from it — and `WaitLaunchOrder` is the *landed-idle*
+  state they all sit in (`RocketBase.lua:643, :699`). One rocket on a pad is
+  enough. A second intent tell was found next door: the branch 3 lines above
+  (:436) and the sibling `EarthVisitPossible` (:446-453) both write the same
+  idiom with the brackets in place. ⚠️ **The fix cannot stay a wrapper** — a
+  post-wrapper sees only `true` and cannot tell which rocket produced it — so
+  it becomes a §1.4b body copy inside F72's module, and F72's header (which
+  advertises the delegation as a deliberate compatibility choice) must be
+  updated in the same commit. Full spec on the F94 entry.
 - **C25 [mechanism verified, trigger unproven] — Jumbo Cave reinforcements
   wedge on unreachable Waste Rock.** The wedge chain is real in Src: a
   failed `WasteRockObstructor:DroneApproach` (`WasteRock.lua:318-327`) files
