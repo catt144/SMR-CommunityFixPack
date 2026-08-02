@@ -31,6 +31,22 @@ findable there and commands are findable here.
    the minutes before the first cheat.
 5. If a step's setup fails, write that down. "Could not set this up" is a valid and
    useful result.
+5a. ⭐ **THE DEFAULT IS A WARMED-UP SAVE, NOT AN AS-SAVED ONE — this governs how every
+   rider must be WRITTEN** (owner, stated directly 2026-08-02). The owner **nearly
+   always plays a save organically for 20–30 minutes before running a test**,
+   deliberately, *"setting things up so that there is activity, and log noise, things
+   happening before a test"* — **unless the instruction says not to.** Three
+   consequences, all binding on whoever authors a check:
+   - **If you need the AS-SAVED state, say so explicitly** ("take this within the first
+     minute of load, before playing"). A bare "load the save and read X" will normally
+     be read against a warmed-up colony, and for state-dump checks that is a different
+     measurement.
+   - ⛔ **Never write "play for a while first to generate activity."** That is already
+     the default; asking for it wastes the owner's time. State only the *deviation*.
+   - **A warm-up makes a NEGATIVE result stronger, not weaker.** A dump that comes back
+     clean after 20–30 minutes of live play beats one taken on a parked colony, because
+     the producer had a running world in which to fire. Say which of the two you got
+     when you record the reading.
 6. **The console AUTO-OPENS shortly after a colony is up — loads AND new
    games** (Test Kit; the 2026-07-26 build waits for the loading screen to
    close, fixing the dead console every NEW save used to get — takes effect
