@@ -108,3 +108,44 @@ oscillate) — routed to prompt 10 and written up there. **If that shape is real
 for housing, ask whether the jobs half has a twin**: a workplace-capacity or
 performance modifier that also tracks a live workforce would make employment
 churn the same way, and a design aimed at a *shortage* would not fix a *churn*.
+
+
+### From chain prompt 8b (2026-08-02) — the batch is verified; three things bind you
+
+**State you inherit, not a summary to re-derive.** Chain 8b built the seven
+prompt-7-approved fixes (F90-F96), wrote seven probes, and **ran PT-60 with the
+owner. The batch is verified**: `76 PASS, 0 FAIL, 9 SKIP, 0 ERROR` (85 = the probe
+count), `79/79` modules active with zero `[LUA ERROR]`, measured on the **enable
+path**, and 15 minutes of unpaused play produced no log output at all. Prompt 8's
+**eight conversions are no longer unrun** — they install active and behave
+invisibly. Counts are unchanged and already re-derived: **108 rows = 96 F + 12 D,
+38 C; 79 registered modules / 73 default-active; 85 probes.** Recount, do not
+inherit.
+
+**1 · ⛔ Every load-time heal in this pack is suspect until round-tripped.** Two of
+this batch's three heals were **not idempotent**, and neither was visible to source
+review, to code review, or to its own passing probe — only a save/load round trip
+exposed them. `Fix_AstrogeologistExtractors` added +10% on *every* load, unbounded,
+because its presence test compared **object identity** and the persisted key is a
+different table after a load. **If D10 ships anything that runs at `LoadGame` or
+migrates saved state, save-and-reload twice before believing it**, and do not key a
+presence test on an object that crosses a save boundary. Full write-up: prompt 12's
+job-7 block, where it is filed as a new shape.
+
+**2 · A prediction that reads a module count must read the toggles first.** PT-60's
+P1 predicted `73/79` from `metadata.lua`'s all-`false` `default_options` and the run
+read **`79/79`** — because **Mod Options survive a Mod Manager disable** and six
+opt-in modules were on in that profile. Now in `ENGINE_FACTS.md` beside the
+three-switches table. Read `CurrentModOptions` or just run `ListFixes()`.
+
+**3 · Two riders are open and cannot be taken on a terraformed colony.** F90's
+underground-break distribution and F93's dust-devil map switch both need a colony
+**below the `DustStormStop` atmosphere threshold** — dust devils share that gate
+with dust storms (`TerraformingDisasters.lua:34-52, :69`), so on a terraformed save
+both are structurally impossible. Check `DustStormsDisabled` before spending a
+sitting on either.
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point in prompt
+8b.** One `git add -A` staged it in a single commit; it was amended out before any
+push and the file is untracked again. Nothing in it was opened. **Name your paths
+when you stage.**

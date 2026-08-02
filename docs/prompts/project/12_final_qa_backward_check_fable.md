@@ -634,3 +634,48 @@ read, and it is noted in that commit message too. (Job-7 relevance, if any: the
 seal is enforced by prose in two prompts and nothing mechanical — no
 `.gitignore` entry, no hook — so the only thing standing between the control and
 an accidental commit is that every session remembers to name its paths.)
+
+### ⭐ Added by chain prompt 8b AFTER PT-60 ran (2026-08-02) — a THIRD AXIS this corpus does not have
+
+**Two of this batch's three load-time heals were not idempotent, and neither defect
+was visible to source review, to code review, or to its own probe. Only a keyboard
+save/load round trip exposed them.**
+
+| module | defect | how caught |
+|---|---|---|
+| `Fix_SaintBlessing` | re-applied and re-logged the re-base on **every** load — idempotent in effect but not the **one-shot** its spec specified; would have printed its line in every future session log forever | re-reading the module against its own spec while setting up an unrelated fixture, *before* the leg |
+| `Fix_AstrogeologistExtractors` | **+10% added on every load, unbounded.** Its presence test compared **object identity**, and `label_modifiers` is persisted, so the save deserialises its own copy of the key and the test can never match across a load | **only** because the owner saved, reloaded, and re-read the number |
+
+**Why this is a new shape.** The existing entries are all about *documentation*
+drifting from truth — stale facts, a correction that landed in one copy and not
+another, a spec authoritative about design and unreliable about detail. **This is
+code that is wrong in a way no artefact the project reads can show:**
+
+- **Source review passes it.** Both heals read as obviously idempotent, and the
+  reasoning written into their headers was detailed, confident and wrong.
+  `Fix_AstrogeologistExtractors` argued idempotence from `SetLabelModifier`'s
+  replace semantics — true, and irrelevant, because the **key** changes across the
+  save boundary.
+- **The probe passes it.** `AstrogeologistExtractors` PASSed throughout: it asserts
+  the *profile* carries an entry per buildable extractor, which stayed true while
+  the *applied modifier count* doubled on every load. The probe was testing the
+  preset, not the colony.
+- **Vanilla cannot warn you.** The engine's own ten `Effect_ModifyLabel` entries use
+  the identical identity keying and never hit this, because `EffectsApply` runs once
+  at game start and nothing re-applies them on load. **Copying vanilla's shape is
+  what produced the bug** — the shape is only safe in vanilla's calling context.
+
+**The diagnostic question for job 7.** The project has a rule that a BUGS status
+lives in two places and must be flipped in both. It has **no equivalent rule for a
+claim whose truth depends on a state transition no static artefact crosses.** Every
+load-time heal, migration and version latch in this pack makes an idempotence
+claim, and **the only instrument that can falsify one is a human loading a save
+twice.** Worth asking whether that class of claim needs its own marker, its own
+probe convention (a probe that runs *across* a load rather than within one), or
+simply a standing playtest step.
+
+⚠️ **Scope note:** other heals and migrations in this pack have never been
+round-tripped this way — the F86 Tier-1 version latch, the rains migration,
+`90_SaveSanitizer`. `Fix_TrackSalvageWipe`'s sweep *was* verified on 2026-08-02
+(one heal line across five loads). **Two for two on the ones actually tested is not
+a reassuring base rate.**

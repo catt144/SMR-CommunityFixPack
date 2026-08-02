@@ -182,6 +182,43 @@ delegation. ⚠️ **EVERYTHING IN THIS BATCH IS UNRUN** — the leg is **PT-60*
 attended, predictions **P1-P9 written before any run**, and it covers prompt 8's
 eight conversions too. Two live halves the probes deliberately do not claim went
 to the needs-eyes riders (F90's underground-break distribution, F93's map switch).
+✅ **2026-08-02, chain prompt 8b — PT-60 RUN WITH THE OWNER; THE BATCH IS
+VERIFIED. `76 PASS, 0 FAIL, 9 SKIP, 0 ERROR` (85 = the probe count), all seven new
+probes PASS, and no probe that passed before this batch regressed.** All 15 changes
+report **`79/79 active`** with **zero `[LUA ERROR]`**, measured **on the ENABLE
+PATH** (pack ticked at the main menu of a running process) — the harder of the two
+paths FIX_POLICY §2 requires and the one F87 exists for. Fifteen minutes of
+unpaused play produced **no log output at all**: no error, no line naming any new or
+converted module. ⭐ **The eight conversions are no longer unrun** — they install
+active and behave invisibly, which is what they were argued to do.
+**Two fixes are `tested` (state reached BY PLAYING): F92** (10 Saints, organically
+present in a 285-sol colony, heal idempotent across a reload) and **F95** (an
+ordinary Astrogeologist new game; `1 1 0 0` pack-off → `1 1 1 1` pack-on on one
+colony, with two known-paid labels as controls).
+**Five are `fixed` with in-play verification on manufactured preconditions: F90,
+F91, F96** — and **F93/F94 on probes alone**, their live halves being untakeable
+here (see below).
+⭐ **F90's DEFECT WAS OBSERVED IN PLAY for the first time** — a built fixture whose
+electricity fragment holds 1668 connectors, **all underground**, on the main city's
+list: **underground `0 → 15`** during a surface-only storm pack-OFF, **`0` on all 26
+samples** pack-ON from the identical fixture and storm, surface still breaking in
+both, and the **persisted `connectors` array back at 1668** afterwards. ~70% of the
+pack-ON storm was watched from underground, so both defect and repair are
+camera-independent.
+⛔ **TWO OF OUR OWN DEFECTS WERE FOUND BY THIS LEG AND FIXED** — the `F95` and `F92`
+load-time heals were **not idempotent** (`Fix_AstrogeologistExtractors` re-applied
++10% on *every* load, unbounded, because its presence test compared **object
+identity** across a save boundary; `Fix_SaintBlessing` re-applied and re-logged
+every load). Both repaired and both re-verified. **Neither was visible to source
+review or to the probes — only a save/load round trip exposed them**, which is a new
+shape for prompt 12's job-7 corpus.
+⚠️ **Not claimed:** F90/F91/F96's preconditions were manufactured (a cheat-built
+elevator colony, a deliberately-salvaged track, a console-placed Sinkhole), so those
+are **fix verification, not reachability evidence** — the source enumerations still
+carry R1/R2. **F93 and F94 have no live reading at all**, and F93's rider is
+**impossible on a terraformed colony**: dust devils share the `Atmosphere` /
+`DustStormStop` gate with dust storms (`TerraformingDisasters.lua:34-52, :69`), so
+both F90's and F93's live riders need a colony below that threshold and stay open.
 **TestKit probes: 85** (78 + this batch's 7 — wave 8,
 `57_Probes_Wave8.lua`, TestKit `2ef64a4`). The 78 was re-verified 2026-08-01 by
 counting `SMRTest.Register(` across the TestKit's nine probe files:
