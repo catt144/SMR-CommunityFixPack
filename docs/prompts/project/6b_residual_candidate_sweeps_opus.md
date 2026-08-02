@@ -143,6 +143,27 @@ that sentence with any quote.**
   Weigh that when you decide whether C19's missing distance term is a defect or
   a design the game has always had.
 
+### ⭐ One more move for your job 6, proven the same day: ask "is this DOWNSTREAM of something we already fix?" before asking "is this a new defect?"
+
+**C36 was filed and closed within the hour by that question.** Two current
+Reddit threads reported *"Inner Light is broken for some people"*. Rather than
+sweep it as a new mystery defect, the check was whether an existing entry could
+already produce it — and `Lua\Mysteries\Dream.lua:20-34` showed the mystery's
+mirage loop skips `Dream()` for as long as `IsDisasterPredicted()` is true,
+which is exactly the flag **F81(a)** strands permanently. Not a new defect: a
+silent downstream casualty of one we already repair. **It even explained the
+reporters' "for some people"** — you are affected iff a meteor storm completed
+during your run.
+
+**Why this matters for C26-C30 specifically.** Those are five author-witnessed
+symptoms with no mechanism. Symptoms are what players can see; **one root defect
+routinely presents as several unrelated-looking symptoms**, because players
+cannot see causes (the same commenter gave two separate pieces of advice for
+this one bug). So for each candidate, before hunting a new mechanism, ask
+whether any entry we already hold could produce that symptom — and check the
+`REACHABILITY_AUDIT.md` "downstream victims" lists, which is where the Inner
+Light connection had been sitting unread as an inference for days.
+
 **Tooling you may want:** the six archived FPKs re-extract in one shot with
 `python tools/flpk_extract.py "C:\Dev\workshop_fpk_archive" <outdir>` (all six
 unpacked cleanly this session; fredware's is the only multi-file one).
