@@ -406,6 +406,24 @@ resolves to anything valid is left alone even though handles can in principle be
 a missed leak is cheap, stripping a live building's bonus is not. Idempotent.
 Probe: `SaveSanitizerUpgradeLeak` in `30_Probes_Wave3.lua`.
 
+⭐ **`Fix_UpgradeModifierLeak` CONVERTED TO A §1.4 CHAINED WRAPPER 2026-08-02**
+(chain prompt 8; `SAVE_SAFETY_REDESIGN.md` §5.4 group A). This is the shape
+§1.4b names explicitly — **the broken original is a verified no-op**, so nothing
+has to be prevented and a post-step doing the correct work is sufficient. The
+no-op proof is mechanical, not inferred: `self.upgrade_modifiers` is created
+empty in `Building:Init` (`:322`) and only ever written at
+`self.upgrade_modifiers[id]` with a string upgrade id (`ApplyUpgrade`,
+`:1168-1171`), so it holds no integer keys and `ipairs` over it visits nothing,
+always. `orig` is still called so another mod's wrapper on the same method stays
+in the chain; the corrective `pairs` loop survives unchanged as the post-step,
+under the same `only_for_object` filter, so the set of modifiers turned off is
+exactly the set the copy turned off. One documented consequence of delegating:
+vanilla's `ipairs(self.upgrade_modifiers)` would raise if that field were still
+the class default `false` (`:255`) — it cannot be at either call site
+(`Building:Done` `:510`, `Building:SetDome` `:675`, both on constructed
+buildings), and it is vanilla's own exposure in every unmodded game.
+`90_SaveSanitizer`'s cleanup half is untouched.
+
 ### F04 — Night-shift workers never return to work after midnight  `[fixed: Code/Fix_NightShiftWork.lua]`
 
 **Audit 2026-08-01 (external witness): tier corrected GOLD → BRONZE-B2.** The
