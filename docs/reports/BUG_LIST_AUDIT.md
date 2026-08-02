@@ -498,6 +498,9 @@ negative, vanilla's false positive passes through our wrapper); C25 Jumbo
 Cave — mechanism chain verified, trigger needs a repro. Also noted: his #11
 (lander cargo-ramp safety) overlaps our F67/F68 family and deserves its own
 comparison pass — recorded as a lead, not filed.
+✅ **That comparison pass RAN 2026-08-01 (chain prompt 6) and the "overlaps"
+guess was wrong — see §10.3. It is a real gap with zero overlap; filed as
+C35, deliberately NOT promoted.**
 
 **On the removal:** nothing in his 22 files plausibly explains a Workshop
 takedown — no copied vanilla bodies (his loop replacements are
@@ -582,3 +585,31 @@ FIX_POLICY §3a, and that is chain prompt 7's package. Two scope questions are
 flagged on the F90 entry rather than decided here (the merged element count
 also inflates the surface break *rate*; GromGor's own fix would index nil on
 an empty surface list).
+
+### 10.3 fredware #11 — §9 guessed "overlaps our F67/F68 family"; it does not
+
+The comparison pass ran. His #11 wraps `LanderRocketBase:CanRequestPayload`
+and blocks the Edit Payload affordance while the cargo ramp is in use. Ours
+answer a different question entirely — F67 `IsCargoReady`, F68/F71
+`CreateAutoCargoRequest`, F70 `CargoRequestNew:RetrieveRequests`/`:Apply` — all
+of them about *what the payload contains*, none of them reading the ramp lists.
+**Zero overlap; a real gap, and the nearest miss is ours**: F70 already wraps
+`CargoRequestNew:Apply`, the exact call that fires `SetCommand("CmdLoad")`, and
+does not guard the ramp.
+
+The mechanism is located and the sibling tell is clean — the payload path runs
+`DisconnectFromCommandCenters()` (`Lua\Buildings\CargoTransporter.lua:1017`)
+with no wait, while the takeoff path makes the same call under the comment
+*"so no more drones climb the ramp"* and then waits on `IsCargoRampInUse()`
+(`Lua\Buildings\RocketBase.lua:757, 762-768`).
+
+**But the harm is unproven, so it is filed as C35 and deliberately NOT
+promoted to prompt 7.** Re-tasking a drone whose resource the player just
+removed is the *designed* consequence of editing a payload; nobody has shown a
+unit stranding. fredware himself ships it `beta`, off by default, and his
+remedy takes an action away from the player — a §4 behaviour change, not a
+repair. The settling observation is named on the C35 entry.
+
+**Method note worth keeping:** §9 graded this "overlaps" from the fix
+*descriptions*. Reading the two bodies against Src reversed it. Same lesson as
+§9's own F04 bullet, one level up.

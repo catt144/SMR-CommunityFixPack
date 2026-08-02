@@ -149,6 +149,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
 | C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
 | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
+| C35 | Edit Payload confirmed while units are on the cargo ramp tears down the rocket's command-centre connection **with no wait**, where the takeoff path doing the same thing waits | ?   | cand | filed 2026-08-01 by the prompt-6 fredware-#11 comparison — **real gap vs F67/F68/F70/F71 (different function, zero overlap), mechanism traced, HARM UNPROVEN**; ⚠️ not a prompt-7 package until a live repro exists (entry) |
 | C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | **DOWNGRADED 2026-08-01 (prompt-6 Src sweep): no route in current Src; his fix's firing explained by destroyed buildings; 1.0.7 killed the named trigger, not the mechanism — and F04's reassignment lost its positive evidence** |
 | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source) — needs F-row decision (entry) |
 | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — **ADOPTED as the Tier-1 rains-pass rider, BUILT 2026-08-01 into Fix_RainsDeadlock's migration pass (structure → FinishRainProcedure heal → migration; manual fallback for invalid values); VERIFIED live by Tier-1 leg 3 2026-08-01** — planted `g_RainDisaster="toxic"` with a dead main_thread, and on reload the log read `0:23:39 RainsDeadlock: stale-ACTIVE rain 'toxic' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)`, with `g_RainDisaster` false afterwards (entry) |
@@ -1318,6 +1319,36 @@ the tech in a live session and read `UIColony.label_modifiers` **without
 reloading**, because our own auto-running pass masks the answer the moment a
 save is loaded. Until that reading exists, "witnessed and fixed" is not
 claimable for F35.
+
+**✅ SOURCE CROSS-CHECK RUN 2026-08-01 (chain prompt 6, job 3) — scope
+CONFIRMED from the other side; nothing filed.** Prompt 2 settled the live half
+by measurement, so this was the residual source pass. Three results, all read
+in 1.0.7.396349 Src this session:
+1. **The defect this entry claims is still present, verbatim.**
+   `SavegameFixups.WindTurbine_Large_ReapplyModifiers`
+   (`Lua\Buildings\WindTurbine.lua:78-88`) still reapplies **only**
+   `WindTurbine_Diffuser` — one `SetLabelModifier` call, no `WindTurbine`, no
+   `WindTurbine_Large`. The entry's cited lines are re-verified, not inherited.
+2. **Nothing else in the game covers it.** `WindTurbine_Large` appears nowhere
+   in any Lua `SetLabelModifier` or savegame fixup in the whole Src tree — a
+   grep returns only its `BuildingTemplate` and FX presets. So the old-save
+   miss has no vanilla repair on our pinned build and our pass is not
+   redundant.
+3. **The one 1.0.7 fixup that touches this machinery cannot cover F35 — but it
+   does independently justify the PostLoadGame hook.**
+   `SavegameFixups.Move_Effect_ModifyLabel_FromCitiesBackToColony`
+   (`Lua\MarsGameEffects.lua:180+`) *relocates* existing `Effect_ModifyLabel`
+   modifiers out of per-city containers and onto the colony; it never
+   re-derives a missing one from a tech preset, so it is no substitute. What
+   it does mean is that an old save can carry the turbine modifier on a
+   **city** while `UIColony.label_modifiers` — the table our pass reads
+   (`90_SaveSanitizer.lua:64`) — is still bare. Had the pass stayed on
+   `OnMsg.LoadGame`, it would have run before that move (`Msg("LoadGame")`
+   :810 → `FixupSavegame` :811 → `Msg("PostLoadGame")` :813,
+   `CommonLua\Savegame.lua`), seen nothing, and double-applied. **That is the
+   2026-07-25 QA repair's failure mode reached by a second, previously
+   unrecorded route** — the repair holds against both; recorded so nobody
+   "simplifies" the hook back.
 
 ### F36 — Universities overtrain geologists (P2, high behavior-confirmed)  `[tested: Code/Fix_UniversityOvertraining.lua — PT-24 PASS 2026-07-27, both halves]`
 `City:GetNeededSpecialist` (`City.lua:561-593`) counts every `ui_working` workplace incl.
@@ -7243,6 +7274,68 @@ quotes verbatim; sources in the audit report §8.
   firing in the wild — is fully explained by destroyed buildings, and (c) its
   named trigger cannot occur unattended on our build. Decision package is
   prompt 7's.
+- **C35 — applying an Edit Payload change while units are still on the cargo
+  ramp tears down the rocket's command-centre connection with no wait, where
+  every other path that does the same thing waits.** Filed 2026-08-01 by the
+  chain-prompt-6 fredware-#11 comparison pass. **⚠️ NOT a decision package —
+  it is a located mechanism with an UNPROVEN harm, and it must not go to
+  prompt 7 until a live repro exists.**
+  **Provenance.** fredware's Bug Fixes #11,
+  `bf_restore_asteroid_lander_cargo_safety` (workshop 3775120166, re-extracted
+  from the archive and read in full this session): *"Prevents v1.0.7 asteroid
+  Lander payload changes from interrupting Drones or passengers while they are
+  still using the cargo ramp."* His remedy wraps
+  `LanderRocketBase:CanRequestPayload` and returns **false** whenever any of
+  `drones_exiting` / `drones_entering` / `boarding` is non-empty — i.e. he
+  disables the Edit Payload affordance rather than fixing anything downstream.
+  **Verdict vs our lander family: a real GAP, zero overlap.** F67 wraps
+  `IsCargoReady` (`UniversalRocket.lua:455-472`), F68/F71 wrap
+  `CreateAutoCargoRequest` (:1742-1755), F70 replaces
+  `CargoRequestNew:RetrieveRequests` and pre-wraps `:Apply`
+  (`CargoRequestNew.lua:179-221`, :341-355). All three answer *what the payload
+  contains*; his answers *when a payload change may be applied*. **None of ours
+  reads the ramp lists at all** — and the nearest miss is our own: F70 already
+  wraps `CargoRequestNew:Apply`, the exact call that fires the command switch
+  below, and does not look at the ramp.
+  **Mechanism, traced in Src this session.** The exposure window is real, not
+  hypothetical: Edit Payload is offered exactly in the states where boarding is
+  permitted — `CanRequestPayload` → `IsRocketLanded()` → `Refuel` /
+  `WaitLaunchOrder` / `Idle` (`RocketBase.lua:2273-2275`; the lander adds
+  `LoadAndLaunch`, `LanderRocket.lua:489-491`), while `IsBoardingAllowed`
+  (`RocketBase.lua:2269-2271`) returns true for `Refuel` and `WaitLaunchOrder`.
+  Confirming the payload then runs `CargoRequestNew:Apply` →
+  `transporter:SetCommand("CmdLoad", self)` (`CargoRequestNew.lua:349`) →
+  `UniversalRocketBase:CmdLoad` (`UniversalRocket.lua:424-449`) →
+  `SetCargoRequest` (:436) → `CargoTransporter:SetCargoRequest`
+  (`CargoTransporter.lua:1047-1050`) → `UpdateCargoResourceRequests`
+  (:1016-1032), whose **first** statement is `self:DisconnectFromCommandCenters()`
+  (:1017) and whose body re-sets every supply/demand amount from the new list
+  (:1026-1028) before reconnecting (:1031).
+  **The tell is a sibling asymmetry.** Vanilla's own takeoff path makes the
+  identical call under the comment *"so no more drones climb the ramp"*
+  (`RocketBase.lua:757`) and then **waits** — `while self:IsCargoRampInUse() do
+  … Sleep(1000) end` (:762-768) — before going further. The payload path
+  performs the same teardown with **no wait at all**. Vanilla also already
+  ships the predicate fredware hand-rolled: `RocketBase:IsCargoRampInUse()`
+  (:2277-2281), overridden with a dead-colonist sweep at
+  `UniversalRocket.lua:1559-1569`; his `ramp_in_use` (his :84-92) is a
+  re-implementation of it. **If we ever build this, call the engine's.**
+  **Why this is NOT promoted, stated plainly.** (1) *The harm is not
+  demonstrated.* Zeroing the demand for a resource the player just removed is
+  the designed consequence of editing a payload; nobody has yet shown a drone
+  or colonist ending up in a **bad** state rather than simply re-tasked.
+  `OnRemovedFromTaskRequestHub` is empty in the base and has no Mars override
+  (grep, whole tree), so the disconnect alone does not interrupt a drone that
+  is already carrying. (2) *The author does not present it as settled either* —
+  his catalog entry registers it `beta = true, default_enabled = false` (his
+  :202-204). (3) *His remedy is a behaviour change, not a repair*: it removes a
+  player action whenever any unit is on the ramp, which is FIX_POLICY §4
+  territory and would have to clear that bar on its own merits.
+  **Next step that would settle it (cheap, needs a sitting, NOT scheduled
+  here):** with a lander landed and drones actively on the ramp, open Edit
+  Payload, remove a resource that a drone is mid-delivery on, confirm — and
+  watch whether that drone recovers or strands. Until that reading exists this
+  stays a lead.
 
 ## Not yet swept (follow-up targets)
 

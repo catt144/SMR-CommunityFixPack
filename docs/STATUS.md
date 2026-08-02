@@ -41,11 +41,12 @@ had gone stale *twice within the same day*: F89 was filed mid-sitting during
 Tier-1 leg 1, and F90 by this session's C04 sweep. The two before it, "98 (87 F
 + 11 D)" and "93", went stale the same way — **this line is the most
 drift-prone number in the project; re-derive it, never carry it forward**),
-**plus 34 `C` candidate rows** (was 11 — the
-2026-08-01 bug-list audit filed C12–C31, and its same-day packed-source
-addendum filed C32–C34; C rows are leads, not defects, and are not counted in
-the 102. **Two moved 2026-08-01 without changing the 34**: C04 is CLOSED and
-promoted to F90, C32 DOWNGRADED — both keep their rows as history). **TestKit probes: 78** (re-verified 2026-08-01 by counting
+**plus 35 `C` candidate rows** (was 11 — the
+2026-08-01 bug-list audit filed C12–C31, its same-day packed-source
+addendum filed C32–C34, and chain prompt 6 filed **C35** the same day; C rows
+are leads, not defects, and are not counted in the 102. **Two more moved
+without changing the count**: C04 is CLOSED and promoted to F90, C32
+DOWNGRADED — both keep their rows as history). **TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
 excluding the definition in `00_TestCore.lua`; **unchanged by the 2026-08-01
 teardown of `97_SaveHookProbe` — it was declared, never registered**, and the
