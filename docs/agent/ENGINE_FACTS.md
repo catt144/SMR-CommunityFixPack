@@ -33,6 +33,31 @@ code suggests.
     AutoCargo logger got that leaf-class repair on 2026-07-28
     (`90_Loggers.lua` — an earlier "queued" note here had gone stale; caught
     by the 2026-08-01 agent-doc review).
+- **"OFF" IS THREE DIFFERENT THINGS, and only ONE of them touches the save**
+  (established 2026-08-01 from the F86 Site 2 mechanism + PT-58; the project had
+  been using "off" loosely and it matters to F86 and to D13). Ranked by what they
+  actually remove:
+
+  | switch | hooks installed? | mod env exists? | seeds NEW frames into saves? | orphans frames already in a save? |
+  |---|---|---|---|---|
+  | **Mod Options toggle** (optional modules) | **YES** — wrappers stay installed and pass through at call time (`SMRFixPack.IsActive`, `00_Core.lua:39-42`) | yes | **YES** | no |
+  | **`SMRFixPack_Disabled[id]`** user veto | **depends on where the module installs** — `Register` returns before `run_apply` (`00_Core.lua:384-388`), so an apply()-time installer never hooks; a **FILE-SCOPE** installer (e.g. `Opt_DroneOverhaul` parts 1-2) has already hooked before `Register` is reached, and the veto only flips its status | yes | apply()-installers: no · file-scope installers: **YES** | no |
+  | **Mod Manager disable / uninstall** | no — mod code never loads | **NO** | no | **YES** → `Unpersist missing permanent: Mod/<id>` and `[LUA ERROR]` from any captured body that touches a mod-created name |
+
+  **So "all toggles off" is NOT equivalent to "pack removed", and the difference
+  is the whole of F86.** With any toggle off the environment still exists, so a
+  captured frame resumes, resolves `SMRFixPack`, reads inactive and no-ops
+  cleanly — harmless *at that moment*. Removal is what turns the same frame into
+  an orphan. A toggle is therefore a loaded gun with no trigger: **it decides
+  nothing about persistence, only about behaviour.** This is exactly why
+  `Opt_DroneOverhaul` leaked with its own toggle OFF (the founding Site 2
+  finding, 98/session) — and why a save made by a player who "turned the mod off"
+  still carries whatever was installed at file scope.
+
+  ⚠️ **Corollary for D13:** the cleaner cannot assume a save is clean because the
+  player had the pack toggled off. The only state that keeps frames out of a save
+  is *not having installed the hook*.
+
 - `g_Consts` is a **GameVar** (`Lua\Modifiers.lua:427`) and does not exist while
   mods load — read it inside the patched function, never in apply(). `const` IS
   populated at that point.
