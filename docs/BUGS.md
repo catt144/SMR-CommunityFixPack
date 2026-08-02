@@ -148,7 +148,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
 | C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
 | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
-| C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | filed 2026-08-01 — GromGor's fix source + Src + witness thread (entry) |
+| C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | **DOWNGRADED 2026-08-01 (prompt-6 Src sweep): no route in current Src; his fix's firing explained by destroyed buildings; 1.0.7 killed the named trigger, not the mechanism — and F04's reassignment lost its positive evidence** |
 | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source) — needs F-row decision (entry) |
 | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — **ADOPTED as the Tier-1 rains-pass rider, BUILT 2026-08-01 into Fix_RainsDeadlock's migration pass (structure → FinishRainProcedure heal → migration; manual fallback for invalid values); VERIFIED live by Tier-1 leg 3 2026-08-01** — planted `g_RainDisaster="toxic"` with a dead main_thread, and on reload the log read `0:23:39 RainsDeadlock: stale-ACTIVE rain 'toxic' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)`, with `g_RainDisaster` false afterwards (entry) |
 
@@ -377,6 +377,32 @@ shift-3 window arithmetic at :1758-1768 stands on the sibling tell
 (shift-1/2 windows are correct) — but it currently has **no external witness
 that discriminates it**, and the two mechanisms may co-produce the reported
 symptom family.
+⭐ **RE-EXAMINED 2026-08-01 (chain prompt 6 C32 sweep) — THE REASSIGNMENT'S
+POSITIVE EVIDENCE DID NOT SURVIVE THE SOURCE PASS. Read this before treating
+F04 as BRONZE-B2.** The demotion rested on C32 being the *better* mechanism
+match. The sweep (BUGS C32, §§1-5) found **no route in current Src** for C32 as
+filed, and specifically refuted the inference that carried the reassignment:
+the audit reasoned that the reporter's "an asteroid had recently gone out of
+range" fits *"label rebuilds on map transitions"*, but there is no label
+rebuild on a map transition in Src — `OnMsg.PostDoneMap` →
+`UIColony:ValidateLabels()` (`Lua\Colony.lua:116-120`) only purges **invalid**
+objects, i.e. buildings *on the unloaded map*, and never touches a main-map
+building. It also found that the one observable that made C32 look real —
+GromGor's fix firing in the wild — is fully explained by destroyed-but-not-
+rebuilt buildings (`Building:OnDestroyed` is empty while
+`ShiftsBuilding:OnDestroyed` de-labels), which is not a defect at all. And the
+onset condition itself cannot occur unattended on 1.0.7 (`Asteroids.lua:1,
+:208, :331-348, :493-500`).
+**What that does and does not do to F04.** It does **not** restore GOLD by
+itself: the thread's reports are 1.0.6-era and this session read 1.0.7 only, so
+neither mechanism is discriminated *for that reporter's build* by source alone.
+What it does is remove the reason F04 lost the witness — the audit swapped a
+GOLD witness onto a mechanism that now has no code behind it. **F04's own
+defect claim is unchanged and stands on its sibling tell either way.**
+**The tier decision is prompt 7's, not the sweep's**, and it needs to choose
+between: (i) restore F04's witness and tier, (ii) leave both entries
+witness-less, or (iii) hold pending the corrected live rider
+(`PLAYTEST_CHECKLIST.md` §6, C32 row).
 `Lua\Units\Colonist.lua:1758-1768` — `ShouldLeaveForWork` window for shift 3
 (`DefaultWorkshifts = {{6,14},{14,22},{22,6}}`, `_GameConst.lua:370`) evaluates as
 `hour >= 21 and hour <= 25`; hours 0-1 unreachable (hour is 0-23, no wrap). Shift-1/2 get a
@@ -6984,6 +7010,120 @@ quotes verbatim; sources in the audit report §8.
   on our pinned build. It does not replace the Src sweep (chain prompt 6) —
   a zero count proves nothing on its own — but a non-zero one settles the
   1.0.7 question in the direction that matters.
+  ⚠️ **That rider was rewritten by the sweep below — its trigger no longer
+  occurs automatically on 1.0.7, and its "any non-zero count is the defect"
+  rule is WRONG.** Corrected row in `PLAYTEST_CHECKLIST.md` §6.
+
+  ---
+
+  ⭐ **SRC SWEEP RUN 2026-08-01 (chain prompt 6) — MECHANISM NOT CONFIRMED;
+  C32 DOWNGRADED, AND THE OWNER'S 1.0.7 CHALLENGE IS ANSWERED "TRIGGER YES,
+  MECHANISM NO".** Every line below was read this session in
+  `<game>\ModTools\Src` (1.0.7.396349, install unchanged since the parity
+  proof). GromGor's mod was re-extracted from the archived FPK
+  (`C:\Dev\workshop_fpk_archive\3676027320`) and read in full — it is ten
+  lines, `metadata.lua` `lua_revision 350453` / `saved_with_revision 387175`,
+  i.e. authored against a pre-1.0.7 build.
+
+  **1. The label has exactly ONE add site and ONE remove site in all of Src.**
+  Add: `ShiftsBuilding:GameInit` → `self.city:AddToLabel("ShiftsBuilding",
+  self)` (`Lua\Buildings\ShiftsBuilding.lua:50`), immediately followed by
+  `self:SetWorkshift(CurrentWorkshift)` (:51). `City:AddToLabel`
+  (`Lua\City.lua:83-86`) mirrors into `self.colony` — which is `UIColony`,
+  assigned at `City.lua:44` — **and** the city's own container, so colony
+  membership is established once per object lifetime and never renewed.
+  Remove: `ShiftsBuilding:RemoveFromShiftsBuildingLabel` (:54-57), which
+  **self-disables** (`self.RemoveFromShiftsBuildingLabel = empty_func`, :56),
+  reached only from `OnDestroyed` (:59-61) and `Done(done_map)` (:63-66, which
+  early-returns when the whole map is being torn down). The only other
+  subtraction is the generic invalid-purge: `OnMsg.PostDoneMap` →
+  `UIColony:ValidateLabels()` (`Lua\Colony.lua:116-120`) and
+  `OnMsg.PostLoadGame` → `ForEachLabelInColony("ValidateLabels")` (:152),
+  whose filter defaults to `IsValid` (`CommonLua\LabelContainer.lua:15-33`).
+
+  **2. No route exists in current Src for the defect as this entry states it.**
+  For a *valid, non-destroyed* building on a *loaded* map there is no path out
+  of `UIColony.labels.ShiftsBuilding`: the single removal site requires
+  `OnDestroyed`/`Done`, and `ValidateLabels` drops invalid objects only.
+  Buildings never change maps — the `OnTransferToMap`/`OnTransferToMapDone`
+  pair (`Lua\CityObject.lua:70-81`) is called for rockets, rovers and units,
+  and `ShiftsBuilding` sits deliberately outside the
+  `AddToCityLabels`/`RemoveFromCityLabels` combined methods anyway. One
+  non-permanent path does exist: `WaitChangeWorkshift` (:78-87) walks the live
+  label array by `ipairs` index and **yields** (`Sleep(50)` every 50
+  buildings, :82-84), so a concurrent removal shifts the array left and skips
+  buildings — **for that tick only**; they take the correct shift at the next
+  `NewWorkshift`. It cannot produce "stuck forever".
+
+  **3. What GromGor's predicate actually detects is a different, benign
+  asymmetry — so "his fix works in the wild" is NOT evidence for this entry.**
+  `ShiftsBuilding:OnDestroyed` de-labels, but `Building:OnDestroyed`
+  (`Lua\Buildings\Building.lua:1366-1367`) is **empty** and
+  `Building:RemoveFromCityLabels` (:446-460) is not called on destruction. So
+  every **destroyed-but-not-yet-rebuilt** building is valid, still in
+  `UICity.labels.Building`, and absent from `UIColony.labels.ShiftsBuilding` —
+  matching his predicate exactly, on every workshift, in every colony that has
+  ever been hit by a meteor. It is not a defect: `SetWorkshift` early-returns
+  on `self.destroyed` (:90), and the rebuild path replaces the object entirely
+  (`Building:Rebuild` → `PlaceConstructionSite` with `params.rebuild = self`
+  → `DoneObject(self.rebuild)` at `ConstructionSite.lua:1539-1541`, so the
+  fresh object runs `GameInit` and re-labels itself). Side effect, under his
+  mod only: re-adding a destroyed shell makes the label entry permanent,
+  because `RemoveFromShiftsBuildingLabel` has already self-disabled, so the
+  later `DoneObject` cannot remove it and the colony label accumulates invalid
+  entries until the next `ValidateLabels`.
+
+  **4. Is `AddToLabel` re-registration safe? Guarded against double-add — and
+  useless as a repair for the one desync it is meant to fix.**
+  `City:AddToLabel` → `Colony:AddToLabel` → `LabelContainer:AddToLabel`
+  (`Lua\LabelContainer.lua:17-28`) → `CommonLua\LabelContainer.lua:39-66`,
+  which early-returns on the **key map** (`if objs[obj] then return end`, :44).
+  So a stray re-add cannot duplicate the array entry and cannot double-apply
+  label modifiers (`Lua\LabelContainer.lua:21-26`; no shipped
+  `Effect_ModifyLabel` targets this label — grep over `Data/` — though
+  `Data\Label.lua:268` declares it, so content could add one). **But that same
+  guard means `AddToLabel` cannot re-insert an object whose key bit is still
+  set while its array entry is gone.** GromGor tests membership with
+  `table.find(UIColony.labels.ShiftsBuilding, bld)` — an **array** search — so
+  in exactly that state his re-add silently no-ops and only his direct
+  `bld:SetWorkshift(CurrentWorkshift)` does any work, every shift, forever.
+  **Binding on any fix we ever write:** test membership the way the engine
+  does (`UIColony:IsInLabel("ShiftsBuilding", bld)`,
+  `CommonLua\LabelContainer.lua:106-109`) and repair the key map, never assume
+  `AddToLabel` will re-insert.
+
+  **5. Owner challenge — "did 1.0.7 already fix it?" ANSWER: 1.0.7 killed the
+  TRIGGER the witness named, and left the mechanism untouched.** The onset
+  condition in the thread ("an asteroid had recently gone out of range") is
+  structurally dead on our pinned build: `Lua\Asteroids.lua:1` —
+  `GameVar("AsteroidsNeverLeave107", false)  -- false in old savegames, true
+  for 1.0.7 and later`, set true on `NewGame` (:5); `Asteroids:AddAsteroid`
+  captures every asteroid at birth (`self:CaptureAsteroid(asteroid,
+  "AsteroidsNeverLeave107")`, :208) and `CaptureAsteroid` clears `end_time`
+  (:327); `GetRemainingTime` (:108-110) therefore returns false, so the expiry
+  branch of `Asteroids:HourlyUpdate` (:147-158) — the only *automatic* caller
+  of `RemoveAsteroid` → `RemoveAsteroidMapAsync` → `RemoveAsteroidMap` →
+  `ChangeMapInSlot(map.slot, "")` (:56-67, :244) — never fires;
+  `Asteroids:ReleaseAsteroid` (:331-348) has its **entire body commented
+  out**; and old saves are retro-fixed by
+  `SavegameFixups.AsteroidsNeverExpire` (:493-500). The surviving routes to an
+  asteroid-map unload are the player's own `Asteroids:UIAbandonAsteroid`
+  (:21-26) and `SavegameFixups.ClearInvalidAsteroids` (:450-468).
+  **Against that, the label code is unchanged:** there is exactly **one**
+  `OnMsg.NewWorkshift` handler in all of Src (`ShiftsBuilding.lua:73-76`), it
+  still hands `WaitChangeWorkshift` nothing but `UIColony.labels
+  .ShiftsBuilding`, and 1.0.7 added no membership check, no re-registration
+  and no repair pass. So "1.0.7 fixed it" is true of the trigger and false of
+  the code this entry describes.
+
+  **Verdict: C32 stays a candidate, DOWNGRADED — no F-row, no fix.** Not
+  closed: this session read 1.0.7 only, and the thread's reports (Mar 13 /
+  Apr 26) are 1.0.6-era, where automatic asteroid expiry did unload maps. What
+  is now established is that (a) the mechanism as written has no route in the
+  code we ship against, (b) the evidence that made it look real — his fix
+  firing in the wild — is fully explained by destroyed buildings, and (c) its
+  named trigger cannot occur unattended on our build. Decision package is
+  prompt 7's.
 
 ## Not yet swept (follow-up targets)
 

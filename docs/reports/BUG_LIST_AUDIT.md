@@ -142,7 +142,7 @@ absence is a prior, not a verdict.
 
 | id | sub | tell / note | owes |
 |---|---|---|---|
-| F04 | B2 | **Moved from GOLD by §9:** the stuck-night-shift thread fits C32's label-desync better (stuck BUILDINGS + asteroid-range correlation); our hour-window defect stands on its sibling tell (shift-1/2 windows correct) but no witness discriminates it | probe (has) + owner skim |
+| F04 | B2 ⚠️ **contested — see §10** | **Moved from GOLD by §9:** the stuck-night-shift thread fits C32's label-desync better (stuck BUILDINGS + asteroid-range correlation); our hour-window defect stands on its sibling tell (shift-1/2 windows correct) but no witness discriminates it. **The prompt-6 sweep refuted the reasoning behind this move (§10); tier decision sits with chain prompt 7** | probe (has) + owner skim |
 | F07 | B1 | sibling contradiction; 1000× unit error. Reports NOT FOUND — a colony grid hides 1 kW vs 1 MW | probe (has) + owner skim |
 | F08 | B1 | sibling tell; **defective inverted line re-confirmed live in Relaunched Src this audit** (`HolidayRating.lua:77`) | probe + owner skim |
 | F09 | B1/B2 | asymmetric threshold pair; statistically invisible to players | probe + owner skim |
@@ -436,6 +436,10 @@ own `Code/`, with the load-bearing claims re-verified in Src by this session.
   label-desync is filed as **C32**. F04's defect claim itself stands
   unchanged on its sibling tell. This is rule 2 doing its job at the source
   level: the false GOLD survived quote-matching and fell only to code.
+  ⚠️ **CONTESTED 2026-08-01 by the prompt-6 C32 sweep — see §10. The
+  parenthesised inference above ("which fits label rebuilds on map
+  transitions") is not true of Src: there is no label rebuild on a map
+  transition.** This bullet's own lesson now applies to itself.
 - **F81a hardened**: GromGor clears the exact `g_DisastersPredicted
   .DisasterMeteorStorm` key our `Fix_MeteorStormWedge`/`Fix_DisasterPrediction
   Leak` pair manages — independent diagnosis confirmed at code level, not
@@ -511,3 +515,44 @@ Src-verified** (C12–C17, C22–C24, plus C33) and two more mechanism-confirmed
 (C04, C25). The §7.1 owner actions are updated: the GromGor/fredware
 subscribe suggestion is DONE and consumed; the Paradox subforum and Paradox
 Mods browser checks remain open.
+
+## 10. ⚠️ Candidate verification sweeps (2026-08-01, chain prompt 6) — where they contradict §9
+
+**Read this before quoting §9's addendum.** §9 graded packed mod source against
+Src; this section is the owed *own-sweep* pass over the candidates §9 left at
+"mechanism confirmed, call chain owed". Two of its four results overturn a
+recorded verdict. Full evidence trails live on the BUGS entries named; only the
+contradictions are summarised here, because a summary is what gets quoted.
+
+### 10.1 C32 — DOWNGRADED, and it takes §9's F04 demotion with it
+
+§9 moved F04 GOLD → BRONZE-B2 on the strength of C32 being the better mechanism
+match for the "Buildings are stuck on night shift" thread. The sweep read every
+`ShiftsBuilding` label site in 1.0.7.396349 Src and found:
+
+1. **No route for C32 as filed.** The label has exactly one add site
+   (`ShiftsBuilding:GameInit`, `Lua\Buildings\ShiftsBuilding.lua:50`) and one
+   remove site (`:54-57`, self-disabling, reached only from `OnDestroyed` and
+   `Done`), plus the generic invalid-only purge in `ValidateLabels`
+   (`Lua\Colony.lua:116-120,152`; `CommonLua\LabelContainer.lua:15-33`). A
+   valid, non-destroyed building on a loaded map has no way out of the label.
+2. **§9's load-bearing inference is false of Src.** "Onset correlated with an
+   asteroid leaving range, which fits label rebuilds on map transitions" —
+   there is **no label rebuild on a map transition**; `PostDoneMap` purges
+   invalid objects, i.e. the unloaded map's own buildings, and never touches a
+   main-map building.
+3. **The wild-evidence is explained away.** GromGor's predicate fires on every
+   destroyed-but-unrebuilt building, because `Building:OnDestroyed`
+   (`Lua\Buildings\Building.lua:1366-1367`) is empty while
+   `ShiftsBuilding:OnDestroyed` de-labels. That is not a defect.
+4. **Owner's 1.0.7 challenge, answered: trigger yes, mechanism no.** Asteroids
+   never expire on 1.0.7 (`Lua\Asteroids.lua:1,:208,:327,:331-348,:493-500`),
+   so the reported onset cannot occur unattended; but the workshift tick is
+   unchanged — one `OnMsg.NewWorkshift` handler in all of Src, still iterating
+   `UIColony.labels.ShiftsBuilding` with no membership check.
+
+**Limit, stated so nobody over-reads this:** the sweep read 1.0.7 only, and the
+thread's reports are 1.0.6-era, when asteroid expiry did unload maps. C32 is
+downgraded, not closed; F04's *defect* claim never depended on any of this.
+**The F04 tier decision is chain prompt 7's** — §9's demotion should not be
+quoted as settled.
