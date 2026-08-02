@@ -1224,3 +1224,69 @@ that dismissing a source unread is this audit's characteristic failure**
 (§10.4's three cases). Use standing to decide **what to open first** when owner
 browsing time is scarce, never to decide what to ignore. The asymmetry is the
 whole rule.
+
+### 10.8 The residual candidate sweeps (2026-08-02, chain prompt 6b) — five of eight, and two of them close as DECLINES
+
+**Prompt 6b was the pre-cleared sweep of the leftover C-ledger. It ran five
+sweeps and then self-split (README rule 3) with C26-C30, F82 and F80 carried to
+`6c`. Two entries close as "no defect", which is a result this audit has been
+short of.**
+
+| Entry | Verdict | The load-bearing line |
+|---|---|---|
+| **C18** XenoExtraction | ✅ **CLOSED `wontfix — intent`** | Labels are exact-string and never inherited (`Building.lua:370-425,:427-444`); `AutomaticMetalsExtractor` carries its own class labels, is displayed under a different building name, and the tech's description names exactly the four it pays |
+| **C38** *(NEW, filed by that sweep)* | **VERIFIED → prompt 7** | `CommanderProfilePreset.lua:333,:336-385` — an unqualified "Extractor production increased by 10%" paid to 10 of the 12 buildable extractors |
+| **C19** dome passage distance | ✅ **CLOSED — declined** | The predicate is membership-only as charged, but its only two consumers both carry the distance term: `Dome.lua:256-259` gates on `ColonistMinDistToIgnorePassage` (1200m, `_GameConst.lua:134`), `Colonist.lua:1567` caps hops at 8 |
+| **C20** Philosopher's Stone | **Located; CANNOT DETERMINE on severity** | The only `Msg("SectorScanned")` emitter is a game-time thread opening with `Sleep(10)` (`Exploration.lua:88-104`, spawned `:276-280`); probe scanning has no pause gate |
+| **C21** St. Elmo sinkholes | **Route VERIFIED → prompt 7** | `Sinkhole.generated.lua:1-24` has neither `indestructible` nor `disasters_strike_immunity`, and `DestroyBuildingImmediate`'s only guard is the flag it lacks (`Building.lua:1371-1374`) |
+| **C25** Jumbo Cave | Patch question answered | 1.0.6 replaced the whole scenario (`Anomaly.lua:26-33`) and left the wedge byte-identical |
+
+#### ⭐ 10.8a Two method results worth more than the verdicts
+
+**1. Looking for a POSITIVE intent statement is what found the defect.** C18 was
+an intent question, and the §4 amendment's bar demands a positive statement of
+intent rather than an argument from silence. The search for one — "what does
+this game do when it means *every* extractor?" — turned up
+`CommanderProfilePreset.lua:336-385` spending ten `Effect_ModifyLabel` entries
+where XenoExtraction spends four. **That simultaneously acquitted C18 and
+convicted the preset it was compared against.** The bar did not just filter a
+candidate; it generated one.
+
+**2. Ruling out the obvious mechanism is a finding, and it must be written
+down.** C21's assumed soft-lock was "meteors destroy the anomaly, so the scan
+stage can never complete". It is **false** — `SubsurfaceAnomaly` is not a
+`Building` (`Anomaly.lua:173-174`) and matches none of the classes
+`BaseMeteor:GetQuery` asks for (`Meteors.lua:408`). Recording the negative is
+what stops the next reader spending the same hour. The same sweep's *second*
+obvious answer — the `#MainCity.labels.Sinkhole > 2` gate — is real but
+**largely self-heals**, because the repeater respawns until the count exceeds 9
+(`Mystery 11.generated.lua:689-704`); the better candidate is an unguarded
+`_sinkhole:GetMap()` on the mystery's spine (`:146`). **Both weaker answers are
+recorded as weaker rather than dropped.**
+
+#### ⚠️ 10.8b A general external-validity fact this audit did not have: save VINTAGE gates behaviour independently of build
+
+`GameVar("UndergroundRework106", false)` is true **only in saves started at or
+after 1.0.6** — the comment is on the line above it
+(`Lua\Buildings\UndergroundDome.lua:16-17`) and `OnMsg.NewGame` is the only
+setter (`:19`). It switches the **entire Jumbo Cave scenario**
+(`Anomaly.lua:26-33`), elevator colonist interaction (`Elevator.lua:830,:839`)
+and underground dome rules (`UndergroundDome.lua:41,:53`).
+
+**Consequence for every verdict in this document: "present in current Src" does
+not mean "reachable in the save under test."** A colony begun before 1.0.6 runs
+1.0.5-era underground content on our pinned 1.0.7.396349. This joins §7's
+limits, and any Jumbo Cave or underground observation must state the save's
+vintage or it cannot be placed. Nobody has checked whether the project's
+existing playtest saves are pre- or post-1.0.6.
+
+#### 10.8c Two DECLINES, and why they are worth as much as the confirmations
+
+C18 and C19 both close with **no defect**, and in each case the reason is that
+Relaunched already does the thing the OG-era prior art added. C19 goes further:
+**taking ChoGGi's OG fix shape would have actively degraded F53** — capping
+`AreDomesConnectedWithPassage` at 400m would make passage-connected dome pairs
+read as unreachable, sending arrivals our `Fix_ArrivalDeaths` correctly routes
+into the "Confused Colonists" path instead. **Prior art aimed at the original
+game is not a patch to port; it is a hypothesis to test against current Src**,
+and that is the third time in two days this document has had to say so.

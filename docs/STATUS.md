@@ -41,12 +41,20 @@ had gone stale *twice within the same day*: F89 was filed mid-sitting during
 Tier-1 leg 1, and F90 by this session's C04 sweep. The two before it, "98 (87 F
 + 11 D)" and "93", went stale the same way — **this line is the most
 drift-prone number in the project; re-derive it, never carry it forward**),
-**plus 37 `C` candidate rows** (was 11 — the
+**plus 38 `C` candidate rows** (re-counted 2026-08-02 by chain prompt 6b;
+was 11 — the
 2026-08-01 bug-list audit filed C12–C31, its same-day packed-source
 addendum filed C32–C34, and chain prompt 6 filed **C35-C37** the same day — **C36 was closed the hour it was filed** (Inner Light is a downstream victim of F81(a), not a new defect); C rows
 are leads, not defects, and are not counted in the 102. **Two more moved
 without changing the count**: C04 is CLOSED and promoted to F90, C32
-DOWNGRADED — both keep their rows as history). **TestKit probes: 78** (re-verified 2026-08-01 by counting
+DOWNGRADED — both keep their rows as history. **2026-08-02, chain prompt 6b:
+`C38` filed** (Astrogeologist's extractor bonus misses 2 of 12 buildable
+extractors) — that is the +1; and **three moved without changing the count**:
+**C18 and C19 CLOSED as declines** (no defect — the label system and the dome
+distance term both turned out correctly scoped) and **C21's destruction route
+VERIFIED**, promoted to prompt 7 with its soft-lock located but unproven.
+⚠️ Prompt 6's own handoff note said "35 C"; counting says otherwise — the C
+line drifts exactly like the 102 does, so re-derive it too). **TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
 excluding the definition in `00_TestCore.lua`; **unchanged by the 2026-08-01
 teardown of `97_SaveHookProbe` — it was declared, never registered**, and the
