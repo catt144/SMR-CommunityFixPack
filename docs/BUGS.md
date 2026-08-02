@@ -143,7 +143,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
-| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op). ⭐ **FIRST LIVE READING 2026-08-02 — CLEAN**: `10 buildings in maintenance or malfunction, 0 structurally broken` on a **sol-288** colony (log `Mars.exe-20260802-01.31.10:225`), the non-zero `10` acting as the control that the walk reached real candidates. **Points at CLOSE; held open for one confirming dump on a different colony.** ⚠️ A second clean dump (98 sols, `3 / 0`) was taken the same sitting and **does NOT count** — same `save_game_id`, i.e. an earlier point in the *same* playthrough. Vintage now CLOSED for that lineage by two agreeing mechanisms (`OrigLuaRev` = `LuaRevision` = 396349, `UndergroundRework106 = true`) (entry) |
+| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | **✅ CLOSED — `wontfix`, not reachable on current-build saves** | **SOURCE: CANNOT DETERMINE 2026-08-02 (prompt 6c); CLOSED THE SAME DAY ON LIVE EVIDENCE.** Two **independent** colonies (`save_game_id` checked, not assumed), **347 sols of combined history**, both **founded on the pinned build so the vendor fixups never ran** — `10 / 0` at sol 288 and `2 / 0` at sol 59 (~50 of them organic pre-playtest), non-zero controls in both. Original source finding follows: **CANNOT DETERMINE** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op). ⭐ **FIRST LIVE READING 2026-08-02 — CLEAN**: `10 buildings in maintenance or malfunction, 0 structurally broken` on a **sol-288** colony (log `Mars.exe-20260802-01.31.10:225`), the non-zero `10` acting as the control that the walk reached real candidates. **Points at CLOSE; held open for one confirming dump on a different colony.** ⚠️ A second clean dump (98 sols, `3 / 0`) was taken the same sitting and **does NOT count** — same `save_game_id`, i.e. an earlier point in the *same* playthrough. Vintage now CLOSED for that lineage by two agreeing mechanisms (`OrigLuaRev` = `LuaRevision` = 396349, `UndergroundRework106 = true`) (entry) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT**: `DroneHubExtender` is the template class name, so the label is carried and `Effect_ModifyLabel` lands (`Data\TechPreset.lua:3466-3471`). The extender's `work_radius` really is raised to 50, and the **commit step exists — it is just routed through the hub**: the tech's `Effect_Code` (`:3474-3481`) forces `SetUIWorkRadius` → `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)` (`DroneControl.lua:759-777`), and `FindTaskRequesters` **recurses into `linked_extenders` reading each extender's live `work_radius`** (`:315-325`). Positive control: `CommandCenterMaxRadius = 50` = default 35 + `SignalBoostersBuff` 15 exactly (`_GameConst.lua:62-72`) (entry) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT again**: `RCTransport:AddToCityLabels` files every transport under `RCTransportAndChildren` (`Lua\Units\RCTransport.lua:88-90`), `City:AddToLabel` forwards to the **colony** container first (`Lua\City.lua:83-86`) which is the one `Effect_ModifyLabel` writes to (`MarsGameEffects.lua:161-172`), and `max_shared_storage` is modifiable at `scale = const.ResourceScale` with default `30` (`RCTransport.lua:14`) — so +15 lands exactly on SkiRich's promised **45**, and it is read live at `:118, :282, :311, :1709`. ⭐ **This sweep corrected the C18 label rule** — see the C18 row (entry) |
 | C29 | Children-only buildings admit all age groups             | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). All **three** `children_only` families enforce it at assignment time: residences via `exclusive_trait = "Child"` (`Residence.lua:26-28`) checked in `IsSuitable` `:162-167` / `CanReserveResidence` `:250-255`; training buildings via `CanTrain` → `IsSuitable` (`TrainingBuilding.lua:137-138, :367-376`) which `Workplace` consults at `:930, :1083`; services via `CanService`/`CanBeUsedBy` (`ServiceBase.lua:162-178`). Obvious guess **checked and ruled out**: the `Child` trait IS removed on ageing up (`Colonist.lua:1740-1756`, `RemoveTrait` at `:1747`) (entry) |
@@ -3758,6 +3758,34 @@ about whether the current pack prevents it, which it does not claim to do
 anyway (the fix is a heal, not a prevention). The heal path itself is current
 and it worked on first contact.
 
+**⭐ SECOND ORGANIC OCCURRENCE THE SAME SITTING, ON AN INDEPENDENT COLONY**
+(log `:315-316`): a **different playthrough** (`save_game_id: 91Wh-Fin5FhlZmaF`,
+map `BlankBig_02`, sol 59 of which ~50 were organic pre-playtest play, not
+opened in a long time) loaded with the **same wedge signature** —
+`WEDGE confirmed … scheduler thread alive but stuck; healing` →
+`scheduler thread restarted`. **Two for two on independent old-pack-era saves.**
+
+**The three-load pattern, recorded with its confounds because it is suggestive
+and easy to over-claim:**
+
+| load | save | sol | pack ver in save | wedge? | F81(a) stranded flag? |
+|---|---|---|---|---|---|
+| 1 | colony A, late | 288 | current (no mismatch) | **no** | **no** |
+| 2 | colony A, early | 98 | `v0.00-001` | **yes** | **yes** |
+| 3 | colony B | 59 | `v0.00-001` | **yes** | **yes** |
+
+⛔ **What this does NOT establish, and must not be written as if it did:** that
+the current pack *prevents* the wedge. Confounds, all live: load 1 is a **later
+save of the same colony as load 2**, so its cleanliness may simply mean an
+earlier load already healed it and none recurred since; n = 3; we have no
+vanilla control; and this fix was never a prevention in the first place — it is
+a detector plus heal, so "no wedge pending at save time" is the expected steady
+state once it has run once. **What it DOES establish is prevalence**: the wedge
+is not exotic, it sat in **two of three** real playthrough saves. See the
+standing rule on keeping those two claims apart — a "the pack improves vanilla
+stability" claim needs a control we do not have and belongs nowhere, least of
+all `MOD_DESCRIPTION.md`.
+
 **⛔ PT-54 RETIRED UNRUN 2026-08-01 → verification rides the F86 Tier-1 build
 leg.** The test was withdrawn before it ever ran, by the project prompt chain,
 because the F86 Tier-1 build reorders this fix's heal sequencing (the
@@ -4197,6 +4225,20 @@ two sibling defects co-occurred on one organic save, which is what the shared
 Evidence that the **vanilla state occurs in real play**; not a statement about
 the current pack's leak-prevention half, which is a separate claim tested by the
 Tier-1 legs.
+
+**⭐ SECOND ORGANIC OCCURRENCE THE SAME SITTING, INDEPENDENT COLONY** (log
+`:300`): a different playthrough entirely (`save_game_id: 91Wh-Fin5FhlZmaF`, map
+`BlankBig_02`, sol 59 with ~50 sols of organic pre-playtest play) loaded
+carrying **another stranded `DisasterMeteorStorm` flag**, cleared the same way —
+and **the same load also carried a live F78 wedge** (`:315-316`). **Two
+independent colonies, both carrying both defects.** The co-occurrence is what
+the shared `MeteorStorm` origin predicts, and it is now observed twice rather
+than once. ⛔ **Prevalence, not prevention** — the full three-load table and its
+confounds are recorded on the **F78** entry; do not read the pattern as evidence
+that the pack prevents the leak, which needs a vanilla control we do not have.
+⭐ **Reachability consequence worth naming:** two of three real playthrough saves
+were, at the moment of loading, silently unable to advance **Inner Light**
+(C36's mechanism, `Dream.lua:20-34`). That is no longer an inference.
 
 **⭐ F81(a) IS NOW STANDARD COMMUNITY ADVICE — the strongest real-world
 reachability signal this project has for any fix (2026-08-01).** Two **current**
@@ -8117,10 +8159,46 @@ quotes verbatim; sources in the audit report §8.
     is loaded. Two mechanisms now agree, so the "GameVar stamped at load" hole
     noted above **is closed**: the lineage really was started at/after 1.0.6 on
     the current build, and its sols are unhealed live evidence.
-  - ⛔ **STILL OPEN. Reading 2 must come from a DIFFERENT `save_game_id`** — a
-    different playthrough, not an earlier save of this one. It is free to check:
-    the log's `more_game_settings:` line prints `save_game_id` on every load, so
-    compare it against `HdmSxGs6kyd0uz6-` before counting the dump.
+  - ✅ **READING 2 TAKEN 2026-08-02 ON A GENUINELY INDEPENDENT COLONY — CLEAN.**
+    Same log, line 318. `save_game_id: 91Wh-Fin5FhlZmaF` (vs
+    `HdmSxGs6kyd0uz6-`), coordinates `32S21W`, map `BlankBig_02` — a different
+    playthrough, **checked in the log rather than assumed**, which is the step
+    that caught the false reading 2 above. An **early-playtest save not opened
+    in a long time, sol 59, of which ~50 sols were organic pre-playtest play**:
+    **`2 in maintenance or malfunction, 0 structurally broken`**, zero reason
+    lines. Taken cold within a minute of load (the owner's default 20-30 min
+    warm-up deliberately overridden, for comparability with reading 1).
+  - ⭐ **The masking condition was checked BEFORE the result was trusted, and it
+    passed.** Both fixups run *at load*, so on a save that predated them a clean
+    dump would mean *"they just healed it"* rather than *"nothing was broken"*.
+    Vintage came back **`founded rev 396349 | running rev 396349`** — founded on
+    the pinned build, so both were pre-seeded into `AppliedSavegameFixups` and
+    **never ran here**; `UndergroundRework106 = true` corroborates on the
+    independent mechanism. The clean result is real, not a heal artefact.
+    *(Asymmetry worth keeping: only a CLEAN result needed this check — a dirty
+    line would have been a finding whatever the vintage.)*
+
+  **⛔ VERDICT 2026-08-02: CLOSED — `wontfix`, no defect reachable on
+  current-build saves.** Three legs, and it is negative evidence, stated plainly
+  rather than dressed up:
+  1. **No producer exists in current Src** — the sweep above, with both obvious
+     candidate mechanisms checked and ruled out in writing.
+  2. **Two independent colonies, 347 sols of combined history** (288 + 59, plus
+     the ~50 organic pre-playtest sols inside the second), **both founded on the
+     pinned build so neither was ever healed by the fixups**, both returning
+     **zero** structurally broken maintenance requests across all four axes those
+     fixups repair.
+  3. **The control was non-zero in both** (10 and 2 buildings genuinely sitting
+     in maintenance/malfunction), so the walk demonstrably reached live
+     candidates instead of matching nothing — which is the failure mode this
+     kind of dump usually dies of.
+  ⚠️ **Limits, so this is not over-read:** two samples is two samples, and
+  reading 2's control of `2` is thin. This closes C26 as **"not reachable in
+  Relaunched on saves started at 1.0.7.396349"** — *not* as "impossible" — and it
+  says nothing about saves old enough for the vendor fixups to have run, which is
+  the vendor's own heal path and not our concern. **A dirty line on any
+  current-build save reopens this immediately**, and the four reason strings each
+  name a distinct producer.
 - **C27 [author] — Signal Boosters never extend Drone Hub Extender radius.**
   SkiRich (OG, 2611877948): *"After researching Signal Boosters both the
   Drone Hubs and Drone Hub Extenders are suppose to have an additional 15 hex

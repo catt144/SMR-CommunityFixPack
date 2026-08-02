@@ -61,8 +61,9 @@ current Src, three of them where the code that looked missing is simply written
 somewhere other than where the symptom points), and **C26 stays `cand` with a
 recorded CANNOT DETERMINE** (the engine ships two savegame heals for exactly
 that state but they are new-game-gated, and no producer exists in current Src).
-That leaves **C26 as the only unresolved SkiRich candidate**, and its next step
-is a console dump on a loaded save, not a source read.
+That left **C26 as the only unresolved SkiRich candidate** — and it was closed
+the same day on live evidence (below), so ⭐ **ALL FIVE SkiRich OG candidates
+are now resolved: four on source, one on measurement.**
 **Same day, owner at the keyboard — one more C row closed and one live-evidence
 find, counts still unchanged (90 F + 12 D = 102; 38 C):**
 **C20 CLOSED `wontfix — no player-visible cost`** — the pause-scan observation
@@ -74,17 +75,30 @@ control in the same scan — `NewAnomalies` appeared *before* the unpause and
 the message did not fire. ⚠️ 6b's "on-screen toast" wording was **corrected**
 (it is a `HUDNotificationPreset` on `idOverview` with a voice line, not a popup
 card) — it had sent the observer looking for something that does not exist.
-**C26 got its first clean live dump** (`10 … 0 structurally broken`, sol 288)
-and its **vintage is now settled by two agreeing mechanisms**; a second dump
-the same sitting turned out to be the **same lineage** and does not count, so
-C26 stays open pending one dump from a different `save_game_id`.
-⭐ **F78 and F81(a) were caught occurring ORGANICALLY** on a 98-sol save during
-that sitting (log `Mars.exe-20260802-01.31.10:252,:269-272`) — a live storm
-wedge with 7 stray meteor objects, and a live stranded `DisasterMeteorStorm`
-flag, both healed on load. First non-fixture occurrence of either; recorded on
-both entries with the qualifier that the save was written under pack
-`v0.00-001`. **No status flips earned** — both are already `tested`, and this is
-reachability evidence, not new verification.
+**C26 CLOSED `wontfix` — not reachable on current-build saves.** Two
+**independent** colonies (`save_game_id` compared in the log, not assumed),
+**347 sols of combined history**, both **founded on the pinned build so the
+vendor fixups never ran**: `10 / 0` at sol 288 and `2 / 0` at sol 59 (~50 of
+them organic pre-playtest), with **non-zero controls in both**, which is what
+makes the zeros readable. ⚠️ A third dump was taken and **discarded** — it
+shared `save_game_id` with the 288-sol save, i.e. the same playthrough earlier.
+Closed as *not reachable*, **not** as *impossible*; a dirty line on any
+current-build save reopens it.
+⭐⭐ **F78 and F81(a) were caught occurring ORGANICALLY on TWO INDEPENDENT
+COLONIES** during that sitting (log `Mars.exe-20260802-01.31.10`: `:252,:269-272`
+and `:300,:315-316`) — a live storm wedge (7 stray meteor objects on the first)
+and a live stranded `DisasterMeteorStorm` flag, **both defects on both saves**,
+all healed on load. First non-fixture occurrences of either, and the
+co-occurrence is what their shared `MeteorStorm` origin predicts. ⭐ It also
+means two of three real playthrough saves were, at load, silently unable to
+advance **Inner Light** — C36's mechanism observed rather than inferred.
+⛔ **Prevalence, NOT prevention.** The third load (a later save of the same
+colony, written under the current pack) carried neither, which is suggestive and
+is recorded on the F78 entry **with its confounds named** — it is a later save
+of an already-healed colony, n = 3, no vanilla control, and this fix was never a
+prevention. **No "the pack improves vanilla stability" claim is licensed by it**,
+least of all in `MOD_DESCRIPTION.md`. **No status flips earned** — both entries
+are already `tested`; this is reachability evidence, not new verification.
 ⚠️ Prompt 6's own handoff note said "35 C"; counting says otherwise — the C
 line drifts exactly like the 102 does, so re-derive it too). **TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
