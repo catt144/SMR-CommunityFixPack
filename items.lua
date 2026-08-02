@@ -326,6 +326,10 @@ return {
 		'CodeFileName', "Code/Fix_DustStormUndergroundBreaks.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_DustDevilSpawnGate",
+		'CodeFileName', "Code/Fix_DustDevilSpawnGate.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

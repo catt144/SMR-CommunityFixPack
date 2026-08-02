@@ -124,6 +124,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F94 | An operator-precedence slip makes **any parked supply rocket** satisfy the asteroid-visit gate — the picker opens with no lander to pick | P3 | SOURCE-VERIFIED | **fixed 2026-08-02 (chain prompt 8b) inside the existing `Fix_AsteroidLanderAvailable` — VERIFIED IN PLAY 2026-08-02 (PT-60).** Promoted from C24 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.4b body copy (12 lines from `PlanetaryView.lua:433-444`, build 1.0.7.396349, one added pair of brackets) with F72's scan appended where vanilla's `return false` was; no new registry id; probe `AsteroidVisitPrecedence` written. **F72's module header and its BUGS entry were both corrected in the same commit** — the chained delegation they advertised is gone, because a wrapper cannot filter a false positive. `PlanetaryView.lua:439` — `and` binds tighter than `or`, so `IsKindOf(rocket, "LanderRocketBase")` qualifies only the first of three clauses. **R1**: `SupplyRocketBase` descends from `RocketBase` alone (`SupplyRocket.lua:1-3`) and parks in `WaitLaunchOrder` (`RocketBase.lua:643, :699`), which the detached clause accepts. The picker's own list keeps only non-pod `UniversalRocketBase` rockets (`PlanetUI.lua:1623-1635`), so it comes up empty. Tells: a guard that cannot fire, and the branch 3 lines above plus `EarthVisitPossible` both bracket the same idiom correctly. ⚠️ Repairing a false positive means owning the predicate — F72's chained delegation cannot survive, and its header says otherwise today (entry) |
 | F95 | The Astrogeologist profile promises an unqualified "Extractor production increased by 10%" and pays **10 of the 12** buildable extractors | P3 | SOURCE-VERIFIED | **tested 2026-08-02 (chain prompt 8b, PT-60) as `Fix_AstrogeologistExtractors` — VERIFIED IN PLAY 2026-08-02 (PT-60).** Promoted from C38 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 additive patch (two `Effect_ModifyLabel` entries via `PlaceObj`, idempotent append) plus a load-time heal that calls vanilla's own `OnApplyEffect`; probe `AstrogeologistExtractors` written. One spec name corrected on the entry: the method is `OnApplyEffect`, not `__exec`. `CommanderProfilePreset.lua:333` (the promise), `:336-385` (ten `Effect_ModifyLabel` entries), omitting `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor` — both buildable, both carrying the modified prop. ⭐ **The list is curated by a rule these two satisfy**: the shared `Extractors` label exists (16 templates) and is deliberately unused because it would add 3 non-extractors and 2 `hide_from_build_menu` legacy templates — leaving these two as the only unexplained exclusions, and 12 buildable / 10 paid closes exactly. **R1.** Fix = two additive entries built with `PlaceObj` (F87 rule) + a load-time heal for existing saves. ⚠️ The counter-reading (a deliberate balance carve-out) is recorded on the entry — this is the package to veto if the owner reads it that way (entry) |
 | F96 | The St. Elmo's Fire sinkhole is the **only** mystery set-piece in the game a meteor can destroy | P3 | SOURCE-VERIFIED | **fixed 2026-08-02 (chain prompt 8b) as `Fix_SinkholeIndestructible` — VERIFIED IN PLAY 2026-08-02 (PT-60).** Promoted from C21 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 preset patch through `SMRFixPack.DataPatch`, on both targets — and the entry records which is which: the **class table** is load-bearing (instances have no own field and fall through to it, which is how it reaches existing saves with no sweep), while `BuildingTemplates.Sinkhole` is a rebuilt-every-`ClassesBuilt` proxy that already inherits it (`Building.lua:2566`) and is belt. Probe `SinkholeIndestructible` written. `Sinkhole.generated.lua:1-24` carries neither `indestructible` nor `disasters_strike_immunity`; the meteor chain reaches `DestroyBuildingImmediate`, whose only guard is that flag (`Building.lua:1371-1374`). **Tell:** every other set-piece has it (Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly, BottomlessPit, AncientArtifact, DragonRocket, DropPod) and the property's help text names meteors (`Building.lua:209`). **R2.** Fix = **§1.1 preset patch**, one boolean, and its side effects were enumerated: the other two consumers are already-false paths for this template, so it changes exactly one behaviour. ⚠️ The soft-lock at `Mystery 11.generated.lua:146` stays **located, not proven** — and the package does not rest on it (entry) |
+| F97 | The dust-devil scheduler multiplies its wave COUNT by `spawn_chance`, a probability — so `count_max` is unreachable below 100% and the count can be 0 while `count_min` is 1 | P3 | SOURCE-VERIFIED | **fixed 2026-08-02 (chain prompt 8c) as `Fix_DustDevilSpawnGate` — UNRUN.** Promoted from C23 item 1; **owner-approved PROVISIONALLY 2026-08-02** (*"not locked. I want the QA run to personally review it"*) and reviewed by chain prompt 12, job 8. `DustDevils.lua:216` — `SessionRandom:Random(count_min, count_max) * spawn_chance / 100`, integer-truncating; `DustDevils_High` (`75%`, `1..3`) yields 0-2 and never 3, and `DustDevils_VeryHigh_3` is authored `6..8 @ 50%` (`Data\MapSettings-DustDevils.lua:111-127`) so its range **cannot occur at all** — it produces only 3 or 4. Contradicts the fields' own help text (`:9-10`). **Intent settled by three independent controls** — the same file's marker sibling (`Random(100) < marker_spawn_chance`, `:169`), `MapSettings_Meteor`'s identical trio used gate-then-count (`Meteors.lua:7, :137, :284-290`), and an outside developer's independent repair — with **zero** examples of chance-as-multiplier in `Lua\`. **R1.** ⭐⭐ **THE ENTRY'S SPECCED ROUTE WAS FALSIFIED AT BUILD TIME AND THE FIX COST A FRACTION OF ITS ESTIMATE**: the spec's *"the only precise route is owning the scheduler body"* is wrong — the count line reads its three numbers from a **synchronous getter, exactly once per wave**, so §3a **layer 3** reaches it. Built as a §1.4b post-wrapper on `OverrideDisasterDescriptor` (4 callers, one per disaster, keyed on `original.class`), pre-rolling the gate into a plain-data copy of the descriptor. **No 14th §3a site, no sleeping mod thread, no §1.5 reconstruction, no version latch, no thread restart and therefore no F88 timer re-roll**; existing saves are reached with no load-time action and uninstall self-heals within one wave. ⚠️ **The RATE question is NOT settled by any of this** and the decision stays provisional (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -146,7 +147,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | **MECHANISM LOCATED 2026-08-02 (prompt 6b), harm not sized** — the ONLY emitter of `Msg("SectorScanned")` is a **game-time thread that opens with `Sleep(10)`** (`Exploration.lua:88-104`, spawned `:276-280`), so nothing is counted while game time is stopped; probe scanning has no pause gate (`OverviewModeDialog.lua:468-482`). Source cannot say whether the increment is **deferred or lost** → one checklist observation written. **✅ OBSERVATION TAKEN 2026-08-02 (owner, live): DEFERRED, NOT LOST → CLOSED, `wontfix — no player-visible cost`.** Paused: no signal. Unpaused: the **"Sector scanned" voice-over fired**, and `QueueVoice` sits inside `AddHUDNotification` at `:103`, immediately before the `Msg` at `:104` — so the message provably fired on unpause. ⭐ Internal control in the same scan: the synchronous `NewAnomalies` card behaved differently from the `Sleep(10)`-deferred `SectorScanned`. ⚠️ 6b's "on-screen toast" wording was **corrected** — `SectorScanned` is a `HUDNotificationPreset` on `idOverview` with a voice line, **not a popup card** (entry) |
 | C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | **DESTRUCTION ROUTE VERIFIED 2026-08-02 (prompt 6b) — the soft-lock is LOCATED, not proven** → prompt 7. `Sinkhole` carries **neither** `indestructible` **nor** `disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`) and is the **only mystery set-piece in the game without the flag** — Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly all have it. A large meteor reaches `DestroyBuildingImmediate` → `DoneObject` (`Meteors.lua:817-825` → `Building.lua:1371-1393` → `Demolishable.lua:132-141`). Best soft-lock candidate is the **unguarded `_sinkhole:GetMap()`** at `Mystery 11.generated.lua:146`. ⭐ Anomalies are NOT at risk — checked and ruled out. **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F96`, approved, routed to prompt **8b** (prompt 8 split under rule 3).** Tier **R2** (mystery + meteors on + a large meteor on that hex). It passes **without** the soft-lock: the tell is that every other set-piece has the flag and the flag's own help names meteors (`Building.lua:209`). ⭐ The flag was checked for side effects and has **exactly one** on this template — the other two consumers are already-false paths (`can_demolish`, `use_demolished_state`). The soft-lock stays **located, not proven**: whether `:GetMap()` on a destroyed object raises or yields nil is engine behaviour with no body in Src (entry) |
 | C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01 (fredware source recovered + read); **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F92`, fix approved and routed to prompt **8b** (prompt 8 split under rule 3).** Tier derived this session: **R1**, and Saint is **not** a breakthrough trait (no `hidden_on_start`) — the routing note's "R2-ish?" is corrected. ⭐ Internal control found: **Empath** is the only other `modify_target = "dome colonists"` preset and it works, because its label needs no `GetTraitLabel`. Fix is a **§1.1 preset patch**, not a method touch (entry) |
-| C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | **PARTLY promoted — 3 subjects, 3 answers** | VERIFIED vs Src 2026-08-01; **§4 run per sub-item 2026-08-02 (prompt 7).** **Item 2 → PASSED, filed `F93`** (R1: the descriptor comes from the camera's map, and the recorded "wedges in the retry" consequence was too narrow — the other branch silently adopts the viewed map's intensity). **Item 1 → defect confirmed and sharpened** (`count_max` unreachable whenever `spawn_chance < 100`; result can be 0 with `count_min` 1) **but the repair changes the dust-devil RATE, so the shape is an owner decision — nothing built.** **Item 3 → defect confirmed, DECLINED ON SHAPE** (F89's disposition): all four routes over-reach — `GenerateDustDevilIn` has 7 callers incl. the Crystals mystery, the marker sweep would hit `SA_SpawnDustDevilAtAnomaly`'s scripted markers, a loop reconstruction puts a sleeping mod thread in every save, and the descriptor is the shared preset table (entry) |
+| C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | **PARTLY promoted — 3 subjects, 3 answers** | VERIFIED vs Src 2026-08-01; **§4 run per sub-item 2026-08-02 (prompt 7).** **Item 1 → owner-approved provisionally and BUILT 2026-08-02 (prompt 8c), filed `F97`** — ⭐ and the entry's specced route was falsified at build time, so the §3a cost the approval accepted did not materialise (no 14th site, no sleeping thread). **Item 2 → PASSED, filed `F93`** (R1: the descriptor comes from the camera's map, and the recorded "wedges in the retry" consequence was too narrow — the other branch silently adopts the viewed map's intensity). **Item 1 → defect confirmed and sharpened** (`count_max` unreachable whenever `spawn_chance < 100`; result can be 0 with `count_min` 1) **but the repair changes the dust-devil RATE, so the shape is an owner decision — nothing built.** **Item 3 → defect confirmed, DECLINED ON SHAPE** (F89's disposition): all four routes over-reach — `GenerateDustDevilIn` has 7 callers incl. the Crystals mystery, the marker sweep would hit `SA_SpawnDustDevilAtAnomaly`'s scripted markers, a loop reconstruction puts a sleeping mod thread in every save, and the descriptor is the shared preset table (entry) |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01; **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F94`, approved, routed to prompt **8b** (prompt 8 split under rule 3).** Tier derived this session: **R1, and wider than "ordinary rockets"** — `SupplyRocketBase.__parents = { "RocketBase" }` only, and `WaitLaunchOrder` is the landed-idle state of *every* supply/trade/refugee/aid/expedition rocket, so **one rocket parked on a pad opens the asteroid picker**. Second tell found: the branch 3 lines above and the sibling `EarthVisitPossible` both parenthesise the same idiom correctly. ⚠️ Fix must OWN the predicate — a post-wrapper cannot filter a false positive — so F72's advertised chaining is lost and its header needs updating (entry) |
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
 | C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | **✅ CLOSED — `wontfix`, not reachable on current-build saves** | **SOURCE: CANNOT DETERMINE 2026-08-02 (prompt 6c); CLOSED THE SAME DAY ON LIVE EVIDENCE.** **THREE independent** colonies (`save_game_id` checked, not assumed), **347+ sols of combined history**, both **founded on the pinned build so the vendor fixups never ran** — `10 / 0` at sol 288, `2 / 0` at sol 59 (~50 of them organic pre-playtest), and `4 / 0` on a third lineage — non-zero controls in every one. Original source finding follows: **CANNOT DETERMINE** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op). ⭐ **FIRST LIVE READING 2026-08-02 — CLEAN**: `10 buildings in maintenance or malfunction, 0 structurally broken` on a **sol-288** colony (log `Mars.exe-20260802-01.31.10:225`), the non-zero `10` acting as the control that the walk reached real candidates. **Points at CLOSE; held open for one confirming dump on a different colony.** ⚠️ A second clean dump (98 sols, `3 / 0`) was taken the same sitting and **does NOT count** — same `save_game_id`, i.e. an earlier point in the *same* playthrough. Vintage now CLOSED for that lineage by two agreeing mechanisms (`OrigLuaRev` = `LuaRevision` = 396349, `UndergroundRework106 = true`) (entry) |
@@ -7868,6 +7869,212 @@ filing** — the state needs console injection to produce, which is R4 under
 FIX_POLICY §4a. **Run step 3 promptly** and expect that noise in the log between
 steps 1 and 3; do not attribute it to this batch.
 
+### F97 — The dust-devil scheduler multiplies its wave count by `spawn_chance`, a probability, so the authored count range is unreachable (P3, SOURCE-VERIFIED)  `[fixed 2026-08-02 by chain prompt 8c as `Code/Fix_DustDevilSpawnGate.lua` — §3a LAYER 3, a §1.4b post-wrapper on OverrideDisasterDescriptor keyed on original.class; probe DustDevilSpawnGate written. ⚠️ UNRUN — its A/B leg is PT-61. ⚠️ Owner-approved PROVISIONALLY; chain prompt 12 job 8 reviews the decision and reversal is a legitimate outcome]`
+
+**Defect.** The natural dust-devil scheduler draws its wave size as
+
+```lua
+local count = SessionRandom:Random(descr.count_min, descr.count_max) * descr.spawn_chance / 100
+```
+
+`Lua\DustDevils.lua:216`, inside the `GlobalGameTimeThread("DustDevils", …)` body
+at `:188-241`. The divide truncates toward zero, so:
+
+* **`count_max` is unreachable for every descriptor with `spawn_chance < 100`**;
+* **the result can be 0 while `count_min` is 1**.
+
+Both contradict the fields' own help text — *"Lo Range / Hi Range - how many Dust
+Devils to spawn"* (`:9-10`). Worked from the shipped data
+(`Data\MapSettings-DustDevils.lua`):
+
+| preset | `spawn_chance` | authored count | what actually spawns |
+|---|---|---|---|
+| `DustDevils_Low` | 50 | 1..2 | 0 or 1 |
+| `DustDevils_High` | 75 | 1..3 | 0, 1 or 2 — **never 3** |
+| `DustDevils_VeryHigh` | 100 | 2..4 (defaults) | 2..4 — correct, the only one |
+| `DustDevils_VeryHigh_3` | 50 | **6..8** | **3 or 4 — the authored range cannot occur** |
+
+**Intent — three independent controls, and zero counter-examples.**
+
+1. **Same file.** The marker path uses the sibling field as a Bernoulli gate:
+   `if not HasDustStorm(map) and SessionRandom:Random(100) < descr.marker_spawn_chance`
+   (`:169`) — and that field is the one literally named *"Spawn Chance (%)"*.
+2. **Another file, the same trio, the same property idiom.**
+   `MapSettings_Meteor` declares `multispawn_chance` `default = 30, min = 1,
+   max = 100` (`Meteors.lua:7`) against `spawn_chance` `default = 30, min = 1,
+   max = 100` (`DustDevils.lua:8`) — and uses them gate-then-count: the chance
+   **gates** (`local chance = SessionRandom:Random(100)` … `if chance <
+   meteors.multispawn_chance`, `Meteors.lua:284-290`) and the count is drawn
+   **independently and never multiplied** (`:137`).
+3. **An outside developer read the same line the same way.** fredware's
+   `bf_restore_dust_devils.lua` (workshop 3775120166) computes
+   `chance_passed = chance_roll < descr.spawn_chance` then
+   `count = chance_passed and random:Random(descr.count_min, descr.count_max) or 0`,
+   and names his repair's reason **`"vanilla_scaled_spawn_count"`**.
+
+`spawn_chance` has exactly five occurrences in `Lua\`; **none of them is a
+count multiplier anywhere else.**
+
+**Reachability R1** — the count line is on the scheduler's normal loop, once per
+wave, on every map whose `MapSettings_DustDevils` is not `"disabled"`, forever.
+⚠️ Bounded by terraforming, not unbounded: `MapSettings_DustDevils` shares the
+`Atmosphere` / `DustStormStop` gate with dust storms
+(`TerraformingDisasters.lua:34-52`) and `OverrideDisasterDescriptor` returns nil
+once the parameter passes the threshold (`:69`), after which the scheduler parks
+in `while not new_descr do Sleep(const.DayDuration) end`. A terraformed colony
+produces **no dust devils at all**, for reasons unrelated to this defect.
+
+## ⛔ THE APPROVED SPEC'S ROUTE CLAIM WAS FALSIFIED WHEN IT WAS RE-VERIFIED (2026-08-02, chain prompt 8c)
+
+The C23 build spec states: *"The only precise route is owning the scheduler body
+through `GlobalGameTimeThreadFuncs["DustDevils"]` — i.e. a mod-owned sleeping
+game-time thread in every save"*, and prices the repair accordingly: a **§1.5
+reconstruction** of ~50 lines, a **14th §3a exposed site**, a **version-latched
+one-shot restart** to reach existing saves (because a table swap alone does not),
+and a **hand-the-loop-back-to-vanilla** uninstall gate to avoid recreating the
+`Fix_MeteorFrequency` disaster (F86 Site 1). The owner approved the item **with
+that cost attached**.
+
+**It is not the only route, and the cheaper one is the one FIX_POLICY §3a
+requires.** Re-verification against Src found:
+
+* `GetDustDevilsDescr` has exactly **three callers, all inside that one thread**
+  — `:193` (before the first wave), `:234` (once per wave), `:237` (re-polled
+  only while it returns nil). So the descriptor read and the count draw are
+  **1:1, forever**.
+* `OverrideDisasterDescriptor` (live definition `TerraformingDisasters.lua:54`,
+  shadowing the passthrough at `MapSettings.lua:31`) has exactly **four callers**
+  — `ColdWave.lua:48`, `DustDevils.lua:65`, `DustStorm.lua:61`,
+  `Meteors.lua:262` — each passing its own `MapSettings` subclass, so
+  `original.class` separates them exactly.
+
+Therefore the gate can be **pre-rolled into the descriptor the thread reads**,
+which is §3a **layer 3** — *"patch a synchronous input, keep vanilla's body …
+where a defect can be repaired by changing what a shipped function reads rather
+than replacing what it does, do that"* — and the layer ordering **is binding**,
+so layer 3 is not merely cheaper here, it is required. **Owner confirmed the
+route change 2026-08-02 before any code was written.**
+
+⚠️ **This is a seventh instance of the prompt-7 spec-detail pattern, and the
+first where the defective detail was a ROUTE and not a citation.** The spec's
+supporting reasoning is individually correct — `:216` really is inside a thread
+closure, there really is no global function to replace, and the descriptor really
+is a shared preset that cannot be mutated — but the conclusion *"the only precise
+route"* skipped the possibility of **substituting** the descriptor instead of
+mutating it, and the one function that made substitution obvious
+(`GetDustDevilsDescr` as a mod-owned seam) only became ours when F93 shipped in
+`8b`, after this spec was written. Routed to prompt 12's job-7 corpus.
+
+## Fix — `Code/Fix_DustDevilSpawnGate.lua` (chain prompt 8c, 2026-08-02)
+
+**Technique: FIX_POLICY §3a layer 3, via a §1.4b chained POST-wrapper on the
+global `OverrideDisasterDescriptor`.** No body is copied and no thread is owned.
+
+```lua
+-- gate passed -> Random(count_min, count_max) * 100 / 100 = the full authored range
+-- gate failed -> Random(0, 0)               * 100 / 100 = 0
+copy.spawn_chance = 100
+if not (roll < chance) then copy.count_min, copy.count_max = 0, 0 end
+```
+
+Vanilla's line `:216` is left **completely untouched** and computes
+gate-then-count with its own code.
+
+**Why `OverrideDisasterDescriptor` and not `GetDustDevilsDescr`.** F93
+(`Fix_DustDevilsDescrMap`) already replaces `GetDustDevilsDescr`, **and its
+DataPatch runner re-installs its own body whenever it finds the global holding
+anything else** — a wrapper there would be silently unwrapped on every re-check.
+`OverrideDisasterDescriptor` sits one level down and is called by F93's body
+(`Fix_DustDevilsDescrMap.lua:67`) and vanilla's (`DustDevils.lua:65`) alike, so
+this module is correct with **F93 on or off** and the two never contend for one
+global. **The two fixes are not merged and share no code, no id and no probe.**
+
+**Why a copy, not a mutation.** `OverrideDisasterDescriptor` returns the **preset
+object itself** (`return original`, `:56/:62/:89`) or another preset from the same
+group (`return settings`, `:97`) — both shared live objects — so a per-wave
+mutation would be a permanent global edit. `nil` (terraformed past the threshold,
+`:69`) is passed through unchanged, so the scheduler's own day-long re-poll still
+works and **consumes no gate roll**.
+
+⚠️ **Why the copy must resolve class defaults — this would have been a crash.**
+Preset data stores only non-default values, so `DustDevils_VeryHigh_1` declares
+`count_max 3` and **no `count_min` at all**; `count_min = 2` comes from the class
+property default (`DustDevils.lua:9`). A raw `pairs()` copy hands the thread
+`count_min = nil` and `Random(nil, …)` errors. The copy therefore walks the
+**declared property list** (`PropertyObject:GetProperties`,
+`CommonLua\PropertyObject.lua:868`) and reads each id through normal indexing,
+which resolves instance value first and class default second.
+
+**§3a — no new exposed site, and nothing executable enters the save.**
+
+* **route (a)** — the wrapper is synchronous, contains no `Sleep`/`WaitMsg`, and
+  returns before the scheduler's next yield, so our frame is never captured.
+* **route (b)** — the persisted thread's locals hold the returned **table**,
+  never our function; the function is reachable only from
+  `_G.OverrideDisasterDescriptor`, which is **not** in `PersistableGlobals` (only
+  the thread handle `"DustDevils"` is, `Lua\Config\_fixup.lua:9-16`).
+* **route (c)** — we store nothing ourselves. The one thing of ours that reaches
+  a save is the descriptor copy, stored by **vanilla** in its own thread local,
+  and it is **inert plain data**: the copier refuses any `function`/`userdata`/
+  `thread` value and returns nil instead, in which case the untouched preset is
+  handed back and the fix simply does nothing that wave. The copy carries
+  `SMRFixPack_spawn_gate = true` so the residue is **named and findable** in a
+  save (the §3a "inert, but disclosed" rung), and a preset already at
+  `spawn_chance = 100` is returned **untouched, with no copy made at all**.
+
+**Uninstall.** Nothing to hand back — we own no body and no thread, so the
+`Fix_MeteorFrequency` trap cannot apply. After removal the scheduler is vanilla's
+own code holding one plain table; at `:234` it re-reads the real preset, so the
+copy is discarded **within one wave**. Worst case is a single wave whose size came
+from a pre-roll made while the pack was installed. Marker threads created by a
+fresh map-gen keep the copy for the session, but read only `marker_spawntime`,
+`marker_spawntime_random`, `marker_spawn_chance`, `warning_time` and the spawn
+geometry (`:161-179` enumerated) — **none of the three fields this fix changes**.
+
+**The F88 trap does not apply.** Nothing restarts a thread, so no pending wave
+timer is re-rolled and no version latch is needed. Existing saves are reached by
+themselves, with **no load-time action at all**: the running thread picks the fix
+up at its next descriptor re-read, i.e. within one wave.
+
+**Honest limits, recorded rather than hidden.**
+
+* The repair consumes **one extra `SessionRandom` draw per wave**, so a save's
+  deterministic stream diverges from an unmodded run of the same save. Inherent
+  to any gate (fredware's does the same); reverts on removal.
+* **The self-check cannot see line `:216`** — no Lua read reaches a thread body's
+  source. If a future patch repairs the multiply itself, this module **composes
+  rather than conflicts**: their gate would test our `spawn_chance` of 100 and
+  always pass, leaving our pre-roll as the effective gate. Behaviour stays
+  correct; one draw is wasted. The self-check instead verifies that the shipped
+  presets still carry `spawn_chance`/`count_min`/`count_max` as numbers, on the
+  shared `DataPatch` runner (an apply-time preset test would be the F75
+  false-inactive bug).
+
+## ⚠️ THE RATE QUESTION IS OPEN AND THIS BUILD DOES NOT CLOSE IT
+
+The three controls establish which **shape** these authors write. They say
+nothing about which **frequency** was playtested. And one complication cuts the
+other way: **`DustDevils_Low` accidentally approximates the gate today** —
+`spawn_chance 50` with `count 1..2` truncates to 0-or-1, i.e. roughly "half the
+time, one devil", close to what a gate produces. So the shipped rates *may* have
+been tuned with the truncation in place.
+
+That residual is why the owner's approval is explicitly provisional — *"build it,
+accept the thread — for now, but it's not locked. I want the QA run to personally
+review it and provide feedback"* — and why **chain prompt 12 carries job 8: review
+the decision, with reversal a legitimate outcome.** ⭐ The route change above
+removes the *cost* side of that review entirely (there is no thread to accept, and
+no §3a site), so what remains for job 8 is purely the rate question.
+
+## Verification — PT-61 (predictions written BEFORE the run)
+
+See `PLAYTEST_CHECKLIST.md`. The rider from the entry: set a map to
+`DustDevils_VeryHigh_3` and count wave sizes with **dust storms off** (a storm
+mid-wave truncates the burst, `:220-222`) — **3 or 4 every wave under the old
+body, 0 or 6-8 under the fix**. ⛔ **The colony must not be terraformed past the
+`DustStormStop` threshold** or the answer is zero for an unrelated reason; check
+with the console line on the PT-61 entry first.
+
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
 commit `21b92cb` had spliced F84's text into this heading, leaving D06's whole
@@ -9672,7 +9879,27 @@ quotes verbatim; sources in the audit report §8.
     decline. The evidence got stronger and the cost got higher on the same day;
     both are on the record.
 
-    ### Build spec (approved provisionally; build = prompt 8, review = prompt 12)
+    ✅⛔ **ITEM 1 IS BUILT 2026-08-02 (chain prompt 8c) → FILED AS `F97`
+    (`Code/Fix_DustDevilSpawnGate.lua`) — AND THE BUILD SPEC BELOW IS SUPERSEDED
+    ON ITS ROUTE.** The spec's *"the only precise route is owning the scheduler
+    body"* was **falsified when it was re-verified against Src**: the count line
+    reads its three numbers from a synchronous getter exactly once per wave, so
+    §3a **layer 3** reaches the defect by SUBSTITUTING the descriptor rather than
+    mutating it — the possibility the spec's "shared preset table" reasoning
+    skipped. Built instead as a §1.4b post-wrapper on
+    `OverrideDisasterDescriptor` (4 callers, keyed on `original.class`; clear of
+    F93, which owns `GetDustDevilsDescr`). **The entire §3a cost the owner
+    accepted did not materialise** — no 14th exposed site, no sleeping mod
+    thread, no §1.5 reconstruction, no version latch, no thread restart and
+    therefore no F88 timer re-roll; existing saves are reached with no load-time
+    action and uninstall self-heals within one wave. Owner confirmed the route
+    change before any code was written. **Everything below except the route is
+    still live** — the three edges, the probe outline, the verification rider and
+    the open rate question. ⚠️ **Edges 1 and 2 are now moot BY CONSTRUCTION, not
+    by being handled**; edge 3 (the per-site disposition) still applies and is
+    recorded as a NO-NEW-SITE call. Full record on the F97 entry.
+
+    ### Build spec (approved provisionally; build = prompt 8, review = prompt 12) — ⛔ ROUTE SUPERSEDED, see the note directly above
 
     **Technique:** §1.5 **reconstruction** (the body is a thread closure, not a
     byte-copyable named function) installed at
