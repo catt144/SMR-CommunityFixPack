@@ -490,6 +490,20 @@ Only gate that sends colonists to work (`Colonist:Idle` :1911). **Fix:** overrid
 `Colonist.ShouldLeaveForWork` using modular distance `(hour - start) % 24`, incl. the
 `leave_early_for_work` branch.
 
+⭐ **CONVERTED TO A §1.4 CHAINED WRAPPER 2026-08-02** (chain prompt 8;
+`SAVE_SAFETY_REDESIGN.md` §5.4 group A). The fix only ever needs the answer to be
+`true` in MORE cases, never fewer, so the shipped body now decides first
+(`local r = orig(self) if r then return r end`) and the modular-distance test
+survives only as the additional branch. The §1.5 reconstruction is gone.
+**Shift-1/2 behaviour is now identical BY CONSTRUCTION** — strictly stronger than
+the reconstruction's hand-verified "bit-identical" claim, which is why §5.4
+singled this one out. Union equivalence checked over every `(start, hour, early)`
+the game can produce: the shipped condition is a strict SUBSET of the modular one
+(window 1 → `d ∈ {23,0,1,2,3}`; window 2 → `d == 0` or `24-d == start-hour <=
+early`; and where `start-early` goes negative vanilla's widened hours `0..start`
+also satisfy `24-d <= early`), so `orig(...) or <modular window>` selects exactly
+the hours `<modular window>` alone selected. Nothing added, nothing removed.
+
 ### F05 — Milestone completion crashes (NoTerraforming/NoPolitics)  `[tested: Code/Fix_MilestoneCrash.lua — PT-05 PASS 2026-07-26 ("A dream fulfilled" popup at 18/18 with 9 terraforming milestones hidden; zero LUA errors in-log)]`
 `Lua\Milestones.lua:87-100` — hidden-but-uncompleted milestones fall through to
 `score_sum + milestone:GetScore()`; `GetScore()` returns nil when uncompleted (:23-28) →
