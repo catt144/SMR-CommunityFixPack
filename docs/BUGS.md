@@ -2031,6 +2031,54 @@ through the elevator assigned with it (`RocketBase.lua:2068-2071` → `Transport
 On re-check take both `ChooseDome` returns and write `emigration_elevator` back, else wait
 near rocket under "Confused Colonists" + retry dome selection.
 
+**⭐ F86 TIER-2 REWRITE, 2026-08-01 — `Colonist:Arrive` is no longer replaced, and the
+half-(a) design pass §6.2 flagged as OWED is RUN AND ANSWERED.** `Arrive` yields directly
+(`Sleep(self:TimeToAnimEnd())` in the disembark destructor, `:1285`): route (a),
+REPLACE-class. It also cannot be repaired from the inside — the destination is read into a
+LOCAL at `:1260` before anything else runs, and the drop position is captured into an upvalue
+at `:1281`, so no seam within the body can change either. The two halves therefore leave the
+body in opposite directions:
+
+- **(b) moves AHEAD of it — layer 2.** `Colonist:Idle` is the *only* issuer of `"Arrive"`
+  in the shipped source (`:1791-1793`; `RocketBase.lua:2015`'s state enumeration confirms
+  it), so a PRE-wrapper there keyed on `self.arriving` corrects
+  `emigration_dome`/`emigration_elevator` while they are still fields, and vanilla's own
+  `if not dome` branch (`:1293-1294`) delivers the "Confused Colonists" outcome. All work
+  before the call, `return orig_idle(...)` with nothing after — the same shape
+  `Fix_ShelterReflex` already uses on this method, which §5.3 classified *already
+  compliant*. Accepted residual: one inert captured frame. The re-check is judged from the
+  ROCKET's position, which is the reference point the original assignment used
+  (`RocketBase.lua:1981`, `:2029`). Every function it calls reports `clear` under
+  `tools/blocking_analysis.py`.
+- **(a) moves BEHIND it — layer-3 class seam.** The design pass's answer is that the fix
+  never needed to change `pos`; it needs the colonist to *end up* somewhere walkable, and
+  `Colonist:OnArrival` is a shipped, arrival-specific, **verified synchronous** seam that
+  runs immediately after the placement — via `:1299` on the notification path, and inside
+  `SetCommand`'s destructor pass (`CommandObject.lua:225-235`) *before* `TransportByFoot`
+  starts on the walking path. Body is an assert, three field writes,
+  `UpdateHomelessLabels`/`UpdateEmploymentLabels`/`ChangeComfort` and `GameTime()`
+  (`:1302-1311`); it and all three callees report `clear`. Our frame there exists only
+  during synchronous execution and can never be captured.
+
+**Not wrapped: `ChooseDome` itself**, although that is where the bad fallback is born. It has
+eight shipped call sites (`DroneFactory.lua:224`, `RocketBase.lua:1985/:2068/:2105`,
+`CargoTransporterNew.lua:907/:951/:975`, `Colonist.lua:1149`) and only the arrival ones are
+F53's subject; suppressing an unreachable fallback globally would change android spawning and
+the "Abandoned" path, which has its own oldest-failed-dome fallback and its own
+walking-distance test (`:1149-1163`). No evidence stands behind either change (FIX_POLICY §4),
+and §5.3 requires the narrowest key that separates the call sites — here, `self.arriving`.
+
+**Coverage change, disclosed:** the (a) snap is gated on the harm being present (no holder,
+valid position, position not passable) rather than on the call site, so it now also repairs
+`Colonist:ReturnFromExpedition` (`:4168-4197`), which has the identical raw `SetPos(pos)`
+disembark and was never covered by the old replacement. It cannot reach the spawn paths that
+call `OnArrival` from `GameInit` (`:215-217`): those colonists either have a holder
+(`DroneFactory.lua:230`) or have no position yet when it fires (`RocketBase.lua:2106-2112`
+places them afterwards, already via `GetRandomPassableAroundOnMap`).
+**Disposition (FIX_POLICY §3a per-site gate): REPAIRED IN-PACK — (a) layer 3, no residue;
+(b) layer 2, accepted inert residual (a captured frame with nothing after the call), which
+is tier 2 of the three-tier ethos and needs nothing from D13.**
+
 ### F54 — Switched-off shuttle hubs count as transport available (P2, med-high)  `[tested: Code/Fix_ShuttleHubOffAvailable.lua — PT-34 PASS 2026-07-27 (hubs off: homeless stayed put inside, nobody waited outdoors; hubs back on: emigration resumed immediately)]`
 `IsLRTransportAvailable` (`ShuttleHub.lua:350-359`) counts hubs with
 `GetWorkNotPermittedReason()` truthy (= player toggled OFF) as available, but
