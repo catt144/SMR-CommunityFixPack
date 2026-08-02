@@ -970,6 +970,31 @@ gone. **Leg 5's 80 errors landed at Lua `0:00:26`, inside that same window.** A
 pack-written save was loaded **twice**, plus a save-and-reload of a pack-free
 save, across 10:08 of session. All clean.
 
+### Method note — `Opt_DroneOverhaul` was toggled ON for this leg, and that is fine
+
+**Leg 5 ran with the module's Mod Options toggle OFF; PT-58 ran with it ON.** A
+deliberate owner choice at the keyboard ("I wanted it to be as toxic as possible
+before the uninstall leg"), and a **deviation from the brief that was declared,
+not hidden** — which is why it could be reasoned about instead of discovered
+later in a diff.
+
+**It does not weaken the like-for-like comparison against 80, and the reason is
+Site 2's own founding finding: the leak happened with the toggle OFF.** The old
+post-wrapper installed at FILE SCOPE and called `orig_idle(self)` unconditionally,
+so the frame entered the save whether the module was doing anything or not — the
+toggle never gated persistence, only behaviour. Capturable population is set by
+how many drones sit in `Idle`, which is why both legs are measured by that
+number (80 then, 73 now) and not by the toggle.
+
+**What the ON state DID buy, and it is worth having:** Part 1's
+`TaskRequestHub:FindTask` wrapper does real work on every claim when active —
+`closest_covering_hub`, the extender recursion, the strike counters, the caches —
+and short-circuits at `module_active()` when not. So this sitting pushed the
+module's busiest live path through thousands of calls and produced **zero
+errors**, which is P4 evidence the toggle-off shape could not have given.
+(`vetoed=0` means the veto branch never *fired*; the wrapper around it ran
+constantly.)
+
 ### ⚠️ What this leg did NOT establish — recorded, not glossed
 
 1. **No status flip is earned by it.** `F53`, `F55` and `F21` stay `fixed`. P1-P3
