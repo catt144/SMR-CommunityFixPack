@@ -90,7 +90,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | speced 2026-07-30, user-approved — **gate OPEN (PT-56 PASSED 2026-07-30), BUILDABLE NOW** (entry) |
 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
 | D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | SPECED 2026-07-30, user-approved, build owed (entry) |
-| D13 | Save-exit deliverables: uninstall procedure + standalone save-rescue artifact | dsgn| high | directed 2026-07-31 (owner), prelaunch — **HARD LAUNCH DEPENDENCY (owner, 2026-08-01): the pack does not ship until this ships alongside it**; ⛔ **spec GATED on Tier 1/2 landing AND verifying** (target list = their output, never today's leak set — the gate is sequencing, not priority); also owns the **complete per-site disposition table** required before release (FIX_POLICY §3a); second-artifact costs + open player-story design question on the entry (entry) |
+| D13 | Save-exit deliverables: uninstall procedure + standalone save-rescue artifact | dsgn| high | directed 2026-07-31 (owner), prelaunch — **HARD LAUNCH DEPENDENCY (owner, 2026-08-01): the pack does not ship until this ships alongside it**; ⛔ **spec GATED on Tier 1/2 landing AND verifying** (target list = their output, never today's leak set — the gate is sequencing, not priority); also owns the **complete per-site disposition table** required before release (FIX_POLICY §3a) and **must DERIVE the exposed set itself rather than inherit any recorded count** (the docs carry an open lower bound, "at least 13", from a grep known blind to slot/global/preset assignments, and the builds have since changed the set) — **its derivation is authoritative and it updates every doc stating a count** (list on the entry); second-artifact costs + open player-story design question on the entry (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
@@ -6403,6 +6403,47 @@ confirm the drain is what cleared it, not natural attrition. Take a homeless
 count immediately before setting the flag and immediately after.
 
 ### D13 — Save-exit deliverables: the uninstall procedure + the standalone save-rescue artifact (design, high)  `[directed 2026-07-31 (owner) — prelaunch deliverable. ⛔ SPEC GATED: not specced, not built, until Tier 1/2 land AND verify — its target list is their OUTPUT. **PROMOTED 2026-08-01 (owner) to a HARD LAUNCH DEPENDENCY: the pack does not ship until this ships alongside it** — "we won't launch till it does". The gate is a sequencing fact, not a priority judgement: the cleaner is specced LAST because it can only be designed against the residual set the builds leave behind. Also now the owner of the **complete per-site disposition table** required before release (FIX_POLICY §3a). Moved here from FUTURE_IDEAS entry 5 (2026-08-01) so that file's "nothing here is work" rule stays true]`
+
+**⛔ D13 DERIVES THE EXPOSED SET ITSELF — IT MAY NOT INHERIT ANY COUNT FROM
+THESE DOCS (owner, 2026-08-01).** The recorded numbers are **not** a closed
+answer and must not be treated as one:
+
+- The count is written as an **open lower bound** — *"at least 13"*, *"≥13"* —
+  never as a determination. It was **12** on 2026-07-31, corrected to **13**
+  the same day, and the membership was corrected **both ways** in the process
+  (`Fix_DroneUnreachableForever` added, `Fix_TrainCargoDumping` removed).
+- **The enumeration grep is known blind** to slot/global/preset assignments
+  (`F86_ADJUDICATION.md` §3.1) — that blindness is *why* the bound is open.
+- Tiers 1 and 2 then **changed the set from underneath the numbers** by
+  repairing modules, so even a correct pre-build count is stale by
+  construction.
+
+**So D13 runs its own enumeration from source, over the current `Code/`, and
+that result is authoritative.** It supersedes every number below on sight —
+if D13's derivation disagrees with a recorded count, the recorded count is
+wrong, not D13. Do the derivation FIRST; do not spec the cleaner against an
+inherited list.
+
+**Then update every place that states a count or a per-module denominator.**
+Known locations as of 2026-08-01 (re-sweep before trusting this list — it is a
+starting point, not a guarantee):
+
+| file | what is there |
+|---|---|
+| `BUGS.md` F86 index row + `:4474`, `:4525`, `:4527`, `:4578` | "13", "at least 13", "12 exposed", "five of the twelve", the 13-not-12 correction |
+| `BUGS.md:4593` (Phase-1 re-run block) + `:4747` | the five-shape re-derivation; **"Exposure list (12 modules)"** — a stale denominator |
+| `STATUS.md:321`, `:336`, `:348`, `:368`, `:369`, `:385` | "≥13", "13 plus one inert route-(c)", **"12 in total"**, "five of the twelve", "the exposure list grew: 13, not 12" |
+| `agent/FIX_POLICY.md:291` | "the 13 and one additional inert route-(c) site" |
+| `agent/ENGINE_FACTS.md:259` | "**13** after two same-day membership corrections" |
+| `reports/SAVE_SAFETY_REDESIGN.md:15`, `:58`, **`:188` (§3 "12 exposed")**, `:226`, `:352` (§5.2) | the per-module disposition table and its denominator |
+| `reports/F86_ADJUDICATION.md:290`, `:543` | "at least 13 by its own definition", "≥13 with CaveIns compliant" |
+| `reports/F86_DISCOVERY_POSITION.md:113`, `:119`, **`:131` (§4 "The exposure list (12 modules)")** | the original 12-module framing |
+| `reports/F86_SESSION_FINDINGS.md:201` | **"Exposed set — 5 of 12 have a route out"** |
+
+The four bolded rows are the stale **12**-denominators; the rest are already
+reconciled to 13 but still carry an open bound. **D13 closes the bound and
+makes all of them agree with its own derivation**, and records the disposition
+table (FIX_POLICY §3a) against that same list.
 
 **The owner's directive (2026-07-31):** the pack ships with its exit paved —
 prelaunch, ready for the community post-launch. Two deliverables:

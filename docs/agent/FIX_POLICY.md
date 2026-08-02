@@ -207,6 +207,14 @@ the tier that repairs them (Tier 2 = chain prompt 5); the **complete
 pre-release table is a D13 deliverable**, since D13 is what carries whatever
 the pack could not.
 
+⚠️ **And the table is built against D13's OWN derivation of the exposed set,
+not against any count recorded in these docs** (owner, 2026-08-01). Every
+figure on record is an open lower bound from a grep proven blind to
+slot/global/preset assignments, and the builds have since changed the set —
+so "every exposed site" can only be enumerated by re-deriving it at that
+point. See the D13 entry in `BUGS.md` for the requirement and the list of
+places its result must correct.
+
 **The mechanism, as finally established (measured + twice-adjudicated — this
 opening states the CURRENT truth; earlier drafts' "empty `_ENV`" claim is
 dead):** a savegame serialises **by value** everything reachable from the

@@ -290,6 +290,16 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > D13's target list is the OUTPUT of the builds and cannot be designed before
 > them. **D13 is a HARD LAUNCH DEPENDENCY: launch waits for it, it does not
 > wait for launch.**
+>
+> ⚠️ **DO NOT TRUST ANY EXPOSED-SET COUNT IN THESE DOCS — including the ones
+> in this file.** Every recorded figure is an **open lower bound** ("at least
+> 13", "≥13"), it moved 12→13 within a single day with the membership
+> corrected *both* ways, the enumeration grep behind it is known blind to
+> slot/global/preset assignments, and Tiers 1-2 have since changed the set by
+> repairing modules. Several per-module tables still carry a stale **12**
+> denominator. **D13 derives the set itself from source and that derivation is
+> authoritative**, superseding every number recorded anywhere; it then updates
+> all of them (the locations are listed on the D13 entry in `BUGS.md`).
 
 > ✅ **F86 PHASE 0 IS DONE (2026-08-01, owner at the keyboard, one sitting) —
 > the two engine measurements that gated the Tier-1 designs are MEASURED, and
