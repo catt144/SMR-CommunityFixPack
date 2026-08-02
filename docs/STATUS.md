@@ -277,12 +277,41 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 >   the pack uninstall-clean.
 >
 
-> ⭐ **F86 TIER 2 IS BUILT — 2026-08-01, chain prompt 5 (`88f3154`, `44e6af2`,
-> `6f0cb95`, `ef7d49c`; TestKit `6eb3c0b`, `7bfa274`). ⚠️ NOT YET VERIFIED — the
-> one leg for the tier is specced and UNRUN (`PLAYTEST_CHECKLIST.md` PT-58,
-> predictions P1-P7 written before the run). The D10/D12 unhold is therefore NOT
-> recorded: its gate is "repairs land AND verify", and only half of that is true.**
-> Chain prompt **5b** carries the leg, the unhold and the outbox.
+> ⭐ **F86 TIER 2 IS BUILT AND VERIFIED — 2026-08-01, chain prompts 5 + 5b
+> (`88f3154`, `44e6af2`, `6f0cb95`, `ef7d49c`, `e197190`; TestKit `6eb3c0b`,
+> `7bfa274`). ✅ PT-58 RAN with the owner at the keyboard and PASSED all seven
+> predictions — F86 SITE 2 IS CLOSED.**
+>
+> **The headline: ZERO `Opt_DroneOverhaul` orphan errors on the uninstalled load,
+> where Tier-1's leg 5 read 80** (98 when first measured). Logs
+> `Mars.exe-20260801-21.27.58` (pack ON) and `-21.54.16` (pack REMOVED), lineage
+> `HdmSxGs6kyd0uz6-` on `BlankBigCanyonCMix_09` — the same save family and map as
+> all five Tier-1 legs, so the comparison is like-for-like. **The article carried
+> 73 drones in command `Idle` at save time**, the same population that produced
+> the 80; a zero is only worth its denominator, and this one has one. Zero
+> `[LUA ERROR]` of any kind all session, zero mentions of any other Tier-2
+> module, and the uninstall was genuine (zero `[CommunityFixPack]` lines,
+> `Unpersist missing permanent` at Lua `0:00:19` — leg 5's errors landed at
+> `0:00:26`, inside that window). **Both proven leak sites are now repaired and
+> verified.** Full reading: `PLAYTEST_CHECKLIST.md` PT-58.
+>
+> ⚠️ **What the leg did NOT establish, recorded rather than glossed:**
+> **(1) No status flip is earned.** F53, F55 and F21 stay `fixed` — P1-P3 are
+> *fixture* results, not live readings; no arrival was watched being re-routed,
+> no drone was watched re-trying a written-off building, and the optional train
+> re-take had no suitable line. The leg verified **save safety**, which is what
+> F86 asked of it; the functional re-tests belong to ordinary playtesting.
+> **(2) The `self.command == "Idle"` moonlight gate never fired** — every hub
+> read `unclaimed=0` and the module read `moonlighted=0 vetoed=0`, so there was
+> no work to take. P5 does not depend on it, but D06 part 2's *functionality* is
+> untested; its home is the frozen PT-52, not a save-safety sitting.
+> **(3) A clean uninstall here is not a general Tier-3 clearance** — it means no
+> accepted-residual module happened to be in an erroring state. Tier 3 stays
+> accepted by owner decision.
+> **(4) P2's second clause was unmeasurable, not met** — retail has no
+> `debug.getinfo`, so `FromFixPack(Colonist.Arrive)` could not read. The build
+> question was asked and answered before the run (PT-58's retail-build box), and
+> P6's zero answers the same property live.
 >
 > **All four Tier-2 modules now sit on synchronous seams; none replaces a blocking
 > body any more. Per-site dispositions (FIX_POLICY §3a per-site release gate):**
@@ -459,9 +488,17 @@ Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 >   drone carve-out**.
 > - **NOT built** — the four own-thread modules and `Fix_BombardmentSpread`
 >   (which has no layer-3 route at all). Accepted residual.
-> - **⚠️ `Fix_ArrivalDeaths` half (a)** — the raw `SetPos` with no passability
->   search — **has no route yet** and needs a design pass.
-> - **F02's hold is LIFTED**; D10/D12 stay held **until these repairs land**.
+> - ~~**⚠️ `Fix_ArrivalDeaths` half (a)** — the raw `SetPos` with no passability
+>   search — **has no route yet** and needs a design pass.~~ **→ DESIGN PASS RUN
+>   2026-08-01 (chain prompt 5) AND IT FOUND A ROUTE, so it was built:** the fix
+>   never needed to change `pos`, it needs the colonist to *end up* walkable, and
+>   `Colonist:OnArrival` is a verified-synchronous, arrival-specific seam running
+>   after the placement. Layer 3, no residue.
+> - **F02's hold is LIFTED**; ~~D10/D12 stay held **until these repairs land**~~
+>   **→ ⭐ D10/D12 UNHELD 2026-08-01.** The owner's condition was "repairs land
+>   AND verify". Tier 1 landed and verified (five legs, `c6180ad`); Tier 2 landed
+>   and verified (PT-58 PASS, F86 Site 2 closed at zero against leg 5's 80).
+>   **Both D10 and D12 are runnable now** — chain prompts 9 and 10.
 > - ⚠️ The tiering is **reasoned from the measured mechanism, not measured**.
 >   The control, if ever wanted, is one PT-20-method leg against an own-thread
 >   module.

@@ -938,7 +938,58 @@ working train line, re-take PT-43's two reads — a long platform wait producing
 average)* excluding the wait — and F21 goes back to `tested`. Skip it and F21
 simply stays `fixed`; do not re-flip it on the probe alone.
 
-`Result:` **NOT RUN** — owed. Owner at the keyboard; chain prompt 5b carries it.
+`Result:` ⭐ **PASS — RUN 2026-08-01, owner at the keyboard, two sittings.**
+Logs: `Mars.exe-20260801-21.27.58` (pack ON) and `Mars.exe-20260801-21.54.16`
+(pack REMOVED). Lineage `save_game_id HdmSxGs6kyd0uz6-`, map
+`BlankBigCanyonCMix_09` — the same save family and map as all five Tier-1 legs,
+so P5's comparison is like-for-like. PT-00 sweep **clean** (zero `TEMPORARY`
+hits, both repos). Article: **`T2-UNINSTALL`**, cut from `test 2i`.
+
+**The fixture, stated first, because a zero is only worth its denominator:
+73 drones in command `Idle` at save time** (`SMRFixPack.DroneReport()` summed
+over eleven hubs: 20+14+9+9+7+6+5+3, with `DroneHub:1078`, `:1457`, `:8470` at
+zero). Leg 5's 80 came from the same shape. The hub-off technique specced above
+was **not needed** — the colony settled to 73 idle with every hub still
+`w=true`. It stays on record for a save that does not.
+
+| # | reading | verdict |
+|---|---|---|
+| **P1** | `DroneUnreachableForever` **PASS** — *failure normalised to now+0 ms; expires after 3600000 ms*. Vanilla's `GameTime() + max_int` poison undone exactly, and the entry then sits inside the shipped 5-sol window | ✅ **MET** |
+| **P2** | `ArrivalDeaths` **PASS** — *the impassable drop spot was snapped to a walkable one*. ⚠️ **The second clause could NOT be read**: retail has no `debug.getinfo`, so `FromFixPack(Colonist.Arrive)` returned *SMRTest:no-introspection*. Not a miss — **unmeasurable in this build**, and the build question was asked and answered before the run (see the retail-build box above). P6 tests the same property live | ✅ **MET** / ⚠️ one clause unmeasurable |
+| **P3** | `TrainWaitTime` **PASS** — *station keeps the 90000 wait; the travel clock restarts at boarding (0)*. The `IsKindOf(self,"Station")` key and the `command_thread == CurrentThread()` identification both work against the live class. This was the piece flagged as likeliest to be subtly wrong | ✅ **MET** |
+| **P4** | **One** `[LUA ERROR]` in the ON session, with **zero pack files in its stack**: `HGE::l_GetVisualPos: Expected luaGameObject` ← `Colonist.lua(3282)` ← `ViewObjectAndChangeMap` ← `MarsNotifications.lua(265)` ← NotificationUI `CycleItems`. Fired at Lua `0:12:42`, two seconds after an `ObjCheat CheatDelete`. **Owner-attributed at the keyboard to an accidental cheat click, unrelated to the pack.** Recorded so a later reader does not find a `[LUA ERROR]` inside the Tier-2 leg log and reopen it; **not filed** — a cheat-induced dangling reference is not a player-reachable path (FIX_POLICY §4) and an uninstrumented sighting does not become a defect | ✅ **MET** |
+| **P5** | ⭐ **THE HEADLINE — ZERO.** Not one `Opt_DroneOverhaul` line in the uninstalled session. **Leg 5 read 80 on this exact shape**, 98 when first measured. **F86 Site 2 is CLOSED** | ✅ **MET** |
+| **P6** | **ZERO** mentions of `Fix_DroneUnreachableForever.lua`, `Fix_TrainWaitTime.lua` or `Fix_ArrivalDeaths.lua`. This is also what answers P2's unmeasurable clause: a pack body left on `Colonist:Arrive` would have named its own file here | ✅ **MET** |
+| **P7** | **ZERO `[LUA ERROR]` of ANY kind**, whole session. The layer-2 residual `Fix_ArrivalDeaths` (b) leaves — an inert captured `Colonist:Idle` frame — produced no error and no behaviour, exactly as `return orig_idle(...)` with nothing after it predicts | ✅ **MET** |
+
+**The uninstall was genuine, not a half-disable.** Zero `[CommunityFixPack]`
+lines anywhere in the log, and `Unpersist missing permanent:
+Mod/SMR_CommunityFixPack` fired at Lua `0:00:19` and again at `0:02:21` — the
+engine reporting that the save held a reference to the pack's env and the env is
+gone. **Leg 5's 80 errors landed at Lua `0:00:26`, inside that same window.** A
+pack-written save was loaded **twice**, plus a save-and-reload of a pack-free
+save, across 10:08 of session. All clean.
+
+### ⚠️ What this leg did NOT establish — recorded, not glossed
+
+1. **No status flip is earned by it.** `F53`, `F55` and `F21` stay `fixed`. P1-P3
+   are **fixture** results, not live readings: no arrival was observed being
+   re-routed, no drone was observed re-trying a building it had written off, and
+   the optional train re-take did not run (the sitting had no suitable line).
+   The leg verified **save safety**, which is what F86 asked of it. The
+   functional re-tests are still owed and belong to ordinary playtesting.
+2. **The `self.command == "Idle"` moonlight gate was never exercised.** Every hub
+   reported `unclaimed=0`, and the module reported `moonlighted=0 vetoed=0` —
+   there was no unclaimed work anywhere for a drone to take, so the gate had no
+   opportunity to fire. **P5 does not depend on it** (the frame is uncapturable
+   whether the gate fires or not), but D06 part 2's *functionality* is untested
+   by this leg. Its proper home is the frozen PT-52, not here — do not chase it
+   from a save-safety sitting.
+3. **A clean uninstall here is not a general Tier-3 clearance.** Zero errors
+   means no accepted-residual module happened to be in a state that errors
+   (`StormWedgeHeal` only dies at a `SMRFixPack.*` touch, i.e. mid-heal). This
+   leg bounds the pack's uninstall behaviour on this save; it does not retire
+   the Tier-3 residual, which stays accepted by owner decision.
 
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
 

@@ -56,17 +56,40 @@ paragraph's claims to what that survey and `BUG_LIST_AUDIT.md` can cite; it is
 about a documented engine behaviour and a community norm, never about other
 authors doing worse work.)*
 
-**[DRAFT NOTE — CONDITIONAL, STILL NOT PUBLISHABLE. ⚠️ Gate CORRECTED
-2026-08-01 (chain prompt 4b) — do not delete this note on the old reading.]**
+**[DRAFT NOTE — CONDITIONAL, STILL NOT PUBLISHABLE. ⚠️ Gate corrected twice —
+2026-08-01 (chain prompt 4b), then updated again 2026-08-01 (chain prompt 5b).
+Do not delete this note on ANY single reading.]**
 The note used to say "do not publish until F86 Tier 1 has landed AND verified".
 **Tier 1 has now landed and verified** — all five legs run 2026-08-01, F02/F78/
 F81/F88 flipped to `tested`, and the specific blocker this note used to name is
 gone: `Fix_MeteorFrequency` no longer leaves a running thread behind (leg 5 read
-its `Meteors` thread alive on *vanilla's* body with the pack removed). **But the
-claim below is still not ours to make**, because leg 5's uninstall log
-(`Mars.exe-20260801-19.14.11`) still carries 80 orphan `[LUA ERROR]` lines from
-F86 **Site 2** (`Opt_DroneOverhaul`). **The real gate is Tier 2** (chain prompt
-5), which owns that site.
+its `Meteors` thread alive on *vanilla's* body with the pack removed). ~~But the
+claim below is still not ours to make~~, because leg 5's uninstall log
+(`Mars.exe-20260801-19.14.11`) still carried 80 orphan `[LUA ERROR]` lines from
+F86 **Site 2** (`Opt_DroneOverhaul`). **The real gate is Tier 2.**
+
+**✅ TIER 2 HAS NOW LANDED AND VERIFIED TOO (PT-58, 2026-08-01) — so READING A's
+FACTUAL PRECONDITION IS MET.** F86 Site 2 is closed: the uninstall log
+`Mars.exe-20260801-21.54.16` carries **zero** `Opt_DroneOverhaul` lines against
+leg 5's 80, over an article holding 73 idle drones, with **zero `[LUA ERROR]` of
+any kind** and no mention of any pack module. Both proven leak sites are
+repaired and verified.
+
+⛔ **THAT IS NOT AUTHORITY TO PUBLISH, AND THIS NOTE STAYS.** The wording call
+was **deferred to launch by explicit owner decision** (immediately below) —
+"do not settle it earlier, and do not delete this note on either reading alone".
+A chain prompt written before that decision was read (5b, job 5) instructed the
+opposite; **this file is authoritative and that instruction was wrong.** What
+changed today is only that the *evidence* Reading A asks for now exists. Two
+things still gate the sentence, and both are release-phase:
+1. the owner picks Reading A or Reading B at launch, against the residual set
+   that exists then — not the one that exists now; and
+2. **PT-58's clean uninstall is not a general clearance.** Zero errors means no
+   accepted Tier-3 residual happened to be in an erroring state on that save
+   (`StormWedgeHeal` only dies at a `SMRFixPack.*` touch, i.e. mid-heal). The
+   Tier-3 residual remains accepted-by-decision, and Reading A's "clean across
+   the whole pack" deserves a leg that actually put one of those modules in its
+   erroring state before anyone leans on it in public.
 
 **⏳ THE WORDING CALL IS DEFERRED TO LAUNCH (owner decision, 2026-08-01) — do
 not settle it earlier, and do not delete this note on either reading alone.**
