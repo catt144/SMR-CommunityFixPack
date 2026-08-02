@@ -197,6 +197,29 @@ code suggests.
   every load. Consequences: a consequence computed after a wait is safe in a GT
   thread and LOST in an RT thread (the F83 family); "no MakeThreadPersistable"
   on a GT thread is the SAFE default, not a missing call.
+- **A named GLOBAL game-time thread's BODY is stored in a table you can edit,
+  and the engine ships the restart helper** (found 2026-08-02 by chain prompt 7,
+  reading a third-party mod's dust-devil fix; verified in Src).
+  `GlobalGameTimeThread(name, func)` (`Lua\Config\_fixup.lua:9-16`) does three
+  things: `rawset(_G, name, false)`, appends `name` to `GlobalGameTimeThreads`,
+  and — the useful part — stores the body in **`GlobalGameTimeThreadFuncs[name]`**.
+  It also sets `PersistableGlobals[name] = true`, which is why the thread handle
+  itself survives a load. The shipped
+  **`RestartGlobalGameTimeThread(name, fnNew)`** (`:18-22`) then does
+  `DeleteThread(_G[name])`, swaps `GlobalGameTimeThreadFuncs[name]`, and
+  recreates. `GlobalRealTimeThread` mirrors all of it (`:24-30`).
+  **What this is good for:** it is a genuine **§1.3 registry-surgery seam for a
+  vanilla thread body** — the loop equivalent of wrapping a slot FUNC. Before
+  concluding "the loop is unreachable because its body is a file-local", check
+  whether the thread was declared through `GlobalGameTimeThread`; if it was, the
+  body is addressable by name.
+  ⛔ **What it does NOT do: it does not solve §3a.** A replacement body is still
+  **ours**, still sleeps, and is therefore still serialised into the save by
+  route (a) — swapping it in at the registry changes how you install the body,
+  not whether it persists. Treat this as a way to reach a thread, never as a
+  reason to own one. (Worked example of the trap: chain prompt 7 declined C23
+  item 3 partly because the only precise fix owns a sleeping loop; this seam
+  makes that fix *installable*, not *safe*.)
 - **Every shipped popup is ASYNC — the persistable popup path is dead code**
   (same audit). `ShowPopupNotification` opens with
   `assert(not bPersistable) -- we don't support these`

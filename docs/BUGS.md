@@ -8985,6 +8985,41 @@ quotes verbatim; sources in the audit report §8.
     to what a gate would produce. So the shipped rates *may* have been tuned with
     the truncation in place. **That residual is why this stays an owner decision
     even now that the shape question is answered.**
+  - ⭐⭐ **THIRD CONTROL — fredware's own fix, re-extracted and read 2026-08-02
+    (the owner asked what the third-party source actually does).**
+    `bf_restore_dust_devils.lua` (workshop 3775120166, archived FPK) repairs
+    **all three** of this bundle's items independently, and its internal repair
+    ids name the same diagnoses this project reached:
+    * **item 1** — `local chance_passed = chance_roll < descr.spawn_chance`,
+      then `local count = chance_passed and random:Random(descr.count_min,
+      descr.count_max) or 0`. **The Bernoulli gate, exactly.** His log line calls
+      the repair `"spawn_chance_roll"` with reason
+      **`"vanilla_scaled_spawn_count"`** — he read the multiply as the defect, in
+      the same words.
+    * **item 2** — `GetMainMapDescriptor()` reads
+      `MainMap.mapdata.MapSettings_DustDevils` and logs *"read the Dust Devil
+      preset from MainMap"*, reason **`"current_map_was_not_main_map"`**. The
+      same repair as our **F93**, reached independently.
+    * **item 3** — his marker loop gates on `DustStormsDisabled` and logs
+      *"suppressed a Dust Devil marker after terraforming disabled it"*.
+    **So item 1's SHAPE now has three independent controls** — the same-file
+    marker sibling, the `Meteors.lua` trio, and an outside developer reading the
+    same line — **and still nothing that speaks to the tuned RATE.**
+    ⭐ **His fix CONFIRMS this session's item-3 shape analysis rather than
+    refuting it: he reimplements both loops.** The file carries its own
+    `while Hooks.enabled == true do … Sleep(…)` scheduler and its own marker
+    body — **route 3**, the one declined here because it puts a mod-owned
+    sleeping game-time thread in every save. He pays that cost (his
+    `Hooks.enabled` flag is his orphan gate). **The route we called the only
+    precise one is the route he took**; our decline is a §3a cost judgment, not
+    a disagreement about the mechanism.
+    📌 **One engine fact came out of reading it, now in `ENGINE_FACTS.md`:** he
+    swaps the scheduler through **`GlobalGameTimeThreadFuncs["DustDevils"]`** —
+    every named global game-time thread's body is addressable by name
+    (`Lua\Config\_fixup.lua:5, :9-16`), with a shipped
+    `RestartGlobalGameTimeThread` helper (`:18-22`). A real §1.3 seam for vanilla
+    thread bodies. ⛔ It does **not** change the §3a arithmetic — a replacement
+    body is still ours and still sleeps.
   - **Item 3 (marker path missing `DustStormsDisabled`) — ✅ DEFECT CONFIRMED,
     ❌ DECLINED ON SHAPE. Recorded, not built, and this is the F89 disposition,
     not a `wontfix — intent`.** The tell is as clean as recorded: `:209` reads
