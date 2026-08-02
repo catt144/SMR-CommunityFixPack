@@ -143,7 +143,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
-| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op) (entry) |
+| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op). ⭐ **FIRST LIVE READING 2026-08-02 — CLEAN**: `10 buildings in maintenance or malfunction, 0 structurally broken` on a **sol-288** colony (log `Mars.exe-20260802-01.31.10:225`), the non-zero `10` acting as the control that the walk reached real candidates. **Points at CLOSE; held open for one confirming dump on a different colony** (entry) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT**: `DroneHubExtender` is the template class name, so the label is carried and `Effect_ModifyLabel` lands (`Data\TechPreset.lua:3466-3471`). The extender's `work_radius` really is raised to 50, and the **commit step exists — it is just routed through the hub**: the tech's `Effect_Code` (`:3474-3481`) forces `SetUIWorkRadius` → `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)` (`DroneControl.lua:759-777`), and `FindTaskRequesters` **recurses into `linked_extenders` reading each extender's live `work_radius`** (`:315-325`). Positive control: `CommandCenterMaxRadius = 50` = default 35 + `SignalBoostersBuff` 15 exactly (`_GameConst.lua:62-72`) (entry) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT again**: `RCTransport:AddToCityLabels` files every transport under `RCTransportAndChildren` (`Lua\Units\RCTransport.lua:88-90`), `City:AddToLabel` forwards to the **colony** container first (`Lua\City.lua:83-86`) which is the one `Effect_ModifyLabel` writes to (`MarsGameEffects.lua:161-172`), and `max_shared_storage` is modifiable at `scale = const.ResourceScale` with default `30` (`RCTransport.lua:14`) — so +15 lands exactly on SkiRich's promised **45**, and it is read live at `:118, :282, :311, :1709`. ⭐ **This sweep corrected the C18 label rule** — see the C18 row (entry) |
 | C29 | Children-only buildings admit all age groups             | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). All **three** `children_only` families enforce it at assignment time: residences via `exclusive_trait = "Child"` (`Residence.lua:26-28`) checked in `IsSuitable` `:162-167` / `CanReserveResidence` `:250-255`; training buildings via `CanTrain` → `IsSuitable` (`TrainingBuilding.lua:137-138, :367-376`) which `Workplace` consults at `:930, :1083`; services via `CanService`/`CanBeUsedBy` (`ServiceBase.lua:162-178`). Obvious guess **checked and ruled out**: the `Child` trait IS removed on ageing up (`Colonist.lua:1740-1756`, `RemoveTrait` at `:1747`) (entry) |
@@ -7966,6 +7966,30 @@ quotes verbatim; sources in the audit report §8.
     reasons, and ⭐ **`bad = 0` on an old heavily-built colony is the useful
     result**: a couple of clean dumps close this entry, one dirty line earns it
     an F-row on the spot.
+  - **✅ FIRST READING TAKEN 2026-08-02 (owner, live) — CLEAN.**
+    Log `Mars.exe-20260802-01.31.10`, line 225, taken ~59 s after load on
+    `BlankBigCanyonCMix_09` before anything perturbed state, **sol 288**, both
+    mods on, save on the current patch:
+    **`10 buildings in maintenance or malfunction, 0 structurally broken`** —
+    and **zero individual reason lines**, no `[LUA ERROR]`, no `not understood`.
+    ⭐ **The `10` is the control that makes the `0` mean something**: a `0, 0`
+    result could not be told apart from a query that silently matched nothing,
+    whereas ten live `RequiresMaintenance` objects in maintenance-or-malfunction
+    state prove the walk reached real candidates and **none of them carried a
+    stranded request** on any of the four axes the vendor fixups repair.
+    **Reading: over 288 sols of play, the producer did not fire once.** That is
+    the strongest evidence this entry has and it points at CLOSE.
+  - ⚠️ **NOT closed on one reading, deliberately.** The rider asked for a couple,
+    and the reason stands: a single dump is a snapshot, and a transient or
+    self-healing state could be missed between samples. **What would close it:**
+    one more clean dump on a **different colony** (different history, not the
+    same save later), or a second clean dump on this save several sessions on.
+    ⚠️ **One qualifier to resolve when that reading is taken** — whether this
+    colony was *started* on a build that already carried the two fixups. If yes,
+    they never ran here and 288 clean sols are pure live evidence; if it predates
+    them, the fixups healed once at first load and the evidence covers only the
+    sols since. Either way a dirty line would have been the live producer, so
+    the qualifier only affects how strong the clean result is, not its direction.
 - **C27 [author] — Signal Boosters never extend Drone Hub Extender radius.**
   SkiRich (OG, 2611877948): *"After researching Signal Boosters both the
   Drone Hubs and Drone Hub Extenders are suppose to have an additional 15 hex
