@@ -868,6 +868,31 @@ Record the reading against each one. A prediction that misses is the finding.
 | **P6** | same load: **zero** lines naming `Fix_DroneUnreachableForever.lua`, `Fix_TrainWaitTime.lua` or `Fix_ArrivalDeaths.lua` | a Tier-2 wrapper is on a blocking stack we did not account for |
 | **P7** | `Fix_ArrivalDeaths`' half (b) is layer 2 — an **inert** captured `Colonist:Idle` frame may exist in the save. It must produce **no error and no behaviour**: nothing runs after `return orig_idle(...)`. `Fix_ShelterReflex` has had this exact shape through every prior leg and has never appeared in a log | an "inert" frame that is not inert — that would be a §3a finding, not a bug in this module alone |
 
+### ⛔ Run this leg on the RETAIL build, not MarsDebug
+
+Asked and answered at the keyboard 2026-08-01, before the run. An asserts build
+would un-SKIP the `[install]` probes and let P2's second clause read — but:
+
+- **Debug mode alone does not do it.** The mod sandbox applies on ALL builds
+  including `MarsDebug.exe` (verified 2026-07-26; the "asserts build un-sandboxes
+  mod code" assumption was tested and is wrong). What it un-sandboxes is the
+  CONSOLE, so it also needs `SMRTest.EnableIntrospection(debug)` typed in and a
+  re-run.
+- **P5 is a comparison against 80, and that 80 was measured on retail.** An
+  asserts build makes the `dbg()` calls inside `CommandThreadProc` itself live
+  (`CommandObject.lua:208`, `:273`) — the exact loop this leg measures. Whether
+  that changes what gets serialised is *unknown*, which is the reason not to find
+  out on the leg that decides whether Site 2 is closed.
+- **It is not needed.** P2's structural clause guards against a stale install,
+  and P1/P3 already exclude that: both passed against seams that exist ONLY in
+  the Tier-2 code. P6 then tests the same property live — a pack body on
+  `Colonist:Arrive` would name `Fix_ArrivalDeaths.lua` in the uninstall log.
+
+➡️ **Separate sitting worth having anyway (NOT this one):** a MarsDebug session
+with `SMRTest.EnableIntrospection(debug)` clears the **eight `[install]` probes
+that SKIP on every retail run** — standing coverage the project has never had.
+Route it after the chain; it is TestKit coverage, not F86 work.
+
 ### Steps
 
 1. **PT-00 sweep**, then load a save with the pack enabled. `*r SMRTest.RunAll()`

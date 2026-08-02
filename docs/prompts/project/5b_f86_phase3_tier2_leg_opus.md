@@ -174,6 +174,16 @@ rebuild decision is untouched.
   loggers are per-session and a restart clears them; F89 is open and its
   event-spawn caveat stretches meteor detection latency by design.
 
+**➡️ ONE DISCOVERED ITEM, ROUTED (chain rule 2).** Asked at the keyboard before
+the run: would an asserts build let the `[install]` probes read? Answer recorded
+in PT-58 — it needs MarsDebug **plus** `SMRTest.EnableIntrospection(debug)` typed
+into the un-sandboxed console, because the mod sandbox applies on all builds
+(verified 2026-07-26). Not done for PT-58, for a stated reason. **But it would
+clear the EIGHT `[install]` probes that SKIP on every retail run — coverage this
+project has never had.** It is TestKit coverage, not F86 work and not chain work,
+so it does not belong to any numbered prompt: **carry it to prompt 12's inbox as
+a standing follow-up** unless PT-58 gives it a home sooner.
+
 **Lineage:** every Tier-1 leg ran on test-2 (`save_game_id HdmSxGs6kyd0uz6-`),
 and the re-cut uninstall article is `T1-UNINSTALL` / `t10uninstall-r`. PT-58's
 P5 comparison figure (**80**) comes from that lineage, log
