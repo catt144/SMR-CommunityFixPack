@@ -112,7 +112,7 @@ witness (BRONZE→SILVER promotion per prompt §Witnesses).
 | F02 | src-diff | (b) | Generic severity witnesses only ("about 40% of my colonists died when meteors collided" — MaritimeRetro, Nov 2025 [S20] **R**); nobody quantifies the ~6h cadence or the tower inversion. Sibling tell (intact loop 40 lines below) carries it |
 | F03 | src-diff | (a)⚑ | ChoGGi fixed the same leak class in OG (Water Reclamation upgrade leak, per corpus match); mechanism in Relaunched proven by our PT-02 in play |
 | F05 | src-diff | (b) | "Is there supposed to be a popup i missed telling me i 'won'…?" + community consensus that no win popup exists [S21] **R** — consistent with the crash swallowing "A dream fulfilled"; rules/error not confirmed in-thread |
-| F06 | src-diff | (a) | OG threads (title-grade, forum blocked): "Philosopher's Stone Stuck on Finishing", "Crystal Entity / Philosophers Stone Mystery stuck" [S22]; + R 1.0.6 patch note: "closed many of the things that could cause specific steps in the sequences to not trigger" [S5] |
+| F06 | src-diff | (a) | ~~OG threads (title-grade, forum blocked): "Philosopher's Stone Stuck on Finishing", "Crystal Entity / Philosophers Stone Mystery stuck" [S22]~~ **CORRECTED 2026-08-01 (§10.4): the bodies were read. "Crystal Entity…" (1113731) is a RETRACTION — "NOT A BUG: I missed a crystal" — and is struck. "Stuck on Finishing" (1112166) is genuine and matches the signature, but is OG-2018, carries a destroyed-crystal confound, and its only second witness is the person who retracted the other. ONE confounded OG report, not two**; + R 1.0.6 patch note: "closed many of the things that could cause specific steps in the sequences to not trigger" [S5] |
 | F11 | src-diff | (b) | **Escapes HOLD.** "One gets stuck at a station saying waiting for another station to be empty and there were no trains in that trains direction … they wont move or go away." — freakaholic15, Dec 2 2025 [S4] **R**. Cause not discriminable (tier U stands); the entry's settling observation remains the owed work |
 | F16 | src-diff | (b) | Paradox title+snippet: "Sphere mystery dialog never leaves completely after mystery is over" [S22] — same incomplete-cleanup family, different surface (UI vs site). Dead-validation tell carries the mechanism |
 | F21 | src-diff | (b) | "Colonists will take the train to the extractors, but won't take it back. Instead, they'll hoof it and end up dying on the way back." — Northernlightman, Dec 6 2025 [S26] **R** — asymmetric refusal fits wait-time-in-the-score; 1.0.7 attributes some to commute interruption (mechanism not isolated) |
@@ -641,18 +641,54 @@ functioning as evidence about the world, and it was not.
 | **Paradox Mods (console channel)** | ✅ **RUN.** **GromGor mirrors there — an exact mirror of his Steam workshop, same titles. fredware does NOT; he is Steam-only.** So the channel is live and already used by a Relaunched fix author, and fredware's removed mod has no console-side copy either — our archived FPK remains the only recoverable form of his work. |
 | **⚠️ Discovery on Paradox Mods is term-hostile** | Owner's observation: **searching `bug` or `fix` returns ZERO hits**, while searching the author name `gromgor` surfaces his bug-fix-titled mods immediately. Recorded as an **observation, not a mechanism** — one browse, and search behaviour changes. (The owner's read is that Paradox suppresses such terms; that is a hypothesis this audit does not test.) **If it holds, it is a distribution fact with teeth: a pack whose name and purpose are the words "bug" and "fix" would be undiscoverable by its own keywords on that channel.** Re-check before anything depends on it. |
 
-**⚠️ A CITATION OF OUR OWN IS NOW IN DOUBT — [S22].** The three thread IDs this
-audit cites at title/snippet grade (`1112166`, `1113731`, `1495056`, carrying
-**F06** and **F16**'s Paradox corroboration) **all returned "page could not be
-found"** when the owner tried them. **Not conclusive** — the URL in evidence was
-malformed (a thread path concatenated onto a search path), so the clean form
-`forum.paradoxplaza.com/forum/threads/<id>/` has not really been tested. But
-[S22] was produced by a blocked crawler reading search snippets, which is
-exactly the grade of evidence §10.4 has just caught being wrong twice.
-**Action for whoever does the doc QA: retry the three clean URLs. If they still
-404, F06's and F16's Paradox citations are unsupported and must be downgraded
-or dropped** — neither fix depends on them, so this is a provenance repair, not
-a code risk.
+**⛔ [S22] IS PARTLY A BAD CITATION — RESOLVED SAME DAY, AND ONE OF THE TWO
+THREADS IS A RETRACTION.** The clean URLs work (the earlier 404s were a
+malformed address, not missing threads). The owner opened them, and **reading
+the bodies reversed what the titles said** — which is the third time in one day.
+
+- **`1113731` — "[Win10] Crystal Entity / Philosophers Stone Mystery stuck"
+  (mgla, Aug 7 2018, game version 233,467). ⛔ THE REPORTER RETRACTED IT. The
+  post's own first line reads "NOT A BUG: I missed a crystal."** This audit
+  cited it as corroboration for **F06** on the strength of its *title*. It is
+  the opposite of corroboration. **Struck.**
+- **`1112166` — "Philosopher's Stone Stuck on Finishing" (Hockston, Jul 26
+  2018, game version 231.777). Genuine, and it does match F06's signature** —
+  the big crystal formed, then *"I gave up on the mystery completing after a
+  good while of waiting for the crystal to do something. It didn't get the green
+  checkmark on new game mystery list either."* A formed crystal that never
+  resolves and a mystery that never marks complete is exactly the missed
+  one-shot `Msg("CrystalFlyAway")` this project derived from Src.
+  **But grade it honestly, because it is weaker than it looks:** (i) it is
+  **OG-era 2018**, not Relaunched; (ii) the reporter had **destroyed several
+  crystals**, leaving the formation *"not contiguous"* — a confound the report
+  itself flags; and (iii) **its only apparent second witness is mgla**, whose
+  *"I encountered the same problem on the newest version"* was posted the same
+  day they closed their own identical report as user error. **So F06's Paradox
+  corroboration is ONE OG report with a confound, not two reports.**
+- **`1495056`** (carrying **F16**) — the owner reports it *"looks like it might
+  have multiple confirmations"*. **Content not yet read; still title-grade.
+  Do not upgrade F16's citation until someone reads the bodies** — that is the
+  precise mistake this bullet exists to record.
+
+**F06's and F16's defect claims are untouched by all of this.** Both stand on
+Src — for F06, a one-shot `Msg` with no re-broadcast and a `CrystalForceFlyAway`
+escape hatch that has **no emitter anywhere in Src**. This is a provenance
+repair, not a code risk, exactly as predicted when the retry was booked.
+
+**Incidental find in `1112166` worth more than the citation it came from:** the
+same reporter, same build, adds *"I also played through Spheres in 231.777 and
+it did not complete once done, cold never went away, not marked as done, and
+steam achievement didn't pop."* **Two different mysteries failing to mark
+complete for one player on one build** points at shared completion machinery
+rather than a crystal-specific bug — a lead for the mystery-stall family
+(F06/F16 and the 1.0.3-era cave/network-node stalls in §10.5). Not filed; no
+mechanism, and OG-era.
+
+**The pattern, stated once because it has now happened three times in a day:**
+§9 graded fredware's #11 an overlap from its *description* and was wrong; §7.1
+graded three reports unretrievable from a *crawler block* and was wrong twice;
+[S22] graded a retraction as corroboration from its *title*. **Every one of
+these was a body that had never been read.**
 
 **What §10.4 changes downstream:** F01 and F74 gain primary witnesses (tier
 consequences are bookkeeping, not new decisions); F64 loses a quotation;

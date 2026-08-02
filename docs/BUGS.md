@@ -462,6 +462,32 @@ no override) and the pause layer engages only after the player opens it — so
 the one-sol miss window passes in ordinary inattention at fast-forward;
 "the player can minimise and ignore" understates. Full block in
 REACHABILITY_AUDIT.md.
+**⛔ EXTERNAL CORROBORATION CORRECTED 2026-08-01 — one of the two cited threads
+is a RETRACTION.** The owner opened the `[S22]` threads the bug-list audit could
+only see at title grade (`BUG_LIST_AUDIT.md` §10.4):
+* **`1113731` "Crystal Entity / Philosophers Stone Mystery stuck"** (mgla, Aug 7
+  2018) — the post's own first line is **"NOT A BUG: I missed a crystal."**
+  **Struck; it was never corroboration.** It was counted as such because only
+  its title had ever been read.
+* **`1112166` "Philosopher's Stone Stuck on Finishing"** (Hockston, Jul 26 2018,
+  v231.777) — **genuine, and it matches this entry's signature**: the big
+  crystal formed, then *"I gave up on the mystery completing after a good while
+  of waiting for the crystal to do something. It didn't get the green checkmark
+  on new game mystery list either"* — i.e. the crystal never resolved and
+  `MysteryEnd` never fired. **But grade it low:** OG-2018 (not Relaunched); the
+  reporter had destroyed several crystals so the formation was *"not
+  contiguous"* (a confound the post itself flags); and its only apparent second
+  witness is **mgla, who retracted the identical report the same day**.
+
+**Net: this entry's external support is ONE confounded OG report, not two.**
+Nothing about the defect claim changes — it stands on Src, where
+`Msg("CrystalFlyAway")` fires exactly once and `CrystalForceFlyAway` has **no
+emitter anywhere**, neither of which any witness was ever load-bearing for.
+*(Same post, unfiled lead: Hockston reports the **Spheres** mystery also failing
+to mark complete on the same build — two different mysteries, one player, one
+version, which hints at shared completion machinery rather than a crystal
+bug.)*
+
 **Popup audit 2026-07-30 (`POPUP_CONSEQUENCE_AUDIT.md`): F06 is NOT an F83-family
 member.** Sequence threads are game-time and persist across saves with their
 blocked popup waits (no shipped scenario sets `real_time`); this defect is a

@@ -227,12 +227,17 @@ GromGor mirrors exactly, fredware does not**, plus a discovery problem worth
 re-checking (`bug` / `fix` return zero hits; author search works).
 
 **Two live items this leaves for your backward QA:**
-1. **⚠️ `[S22]` may be a bad citation of our own.** Thread IDs `1112166` /
-   `1113731` / `1495056` (carrying **F06** and **F16**'s Paradox corroboration)
-   404'd — *but the URL tried was malformed*, so retry the clean form
-   `forum.paradoxplaza.com/forum/threads/<id>/`. **If they still 404, those two
-   citations are unsupported and must be downgraded or dropped.** Neither fix
-   depends on them; this is provenance, not code.
+1. ~~**⚠️ `[S22]` may be a bad citation of our own.**~~ **✅ RETRIED AND
+   RESOLVED the same day — and it WAS partly bad.** The clean URLs work.
+   `1113731` is a **retraction** ("NOT A BUG: I missed a crystal") that this
+   audit had counted as F06 corroboration **on its title alone** — struck.
+   `1112166` is genuine but low-grade (OG-2018, destroyed-crystal confound, and
+   its only second witness is the person who retracted the other), so **F06's
+   external support is one confounded OG report, not two**. Recorded in
+   §10.4 and on the F06 entry; both defect claims stand on Src regardless.
+   **⚠️ STILL OPEN, and it is the same trap:** `1495056` (carrying **F16**) has
+   *not* had its bodies read — the owner's impression was "might have multiple
+   confirmations". **Read it before letting F16's citation stand or fall.**
 2. **The audit's §1/§2 witness grades now lag its own §10.4** for F01 and F74.
    Bookkeeping, not a decision — but it is exactly the drift job 7 exists to
    catch, so catch it here.
