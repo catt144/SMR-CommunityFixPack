@@ -119,6 +119,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F90 | Surface dust storms break **underground** cables and pipes — the break pass rolls its victim from a cross-map (elevator-merged) grid fragment with no map filter | P2 | SOURCE-VERIFIED | **open — filed 2026-08-01 by the prompt-6 C04 sweep** (C04 closed and promoted). Chain read end to end: `City:HourlyUpdate` `City.lua:148-149` (gated `HasDustStorm`, which is **MainMap-only**, `DustStorm.lua:41`) → `RandomBreakSupplyGrid` :178-181 → `SupplyGrid:RandomBreakElements` `SupplyGrid.lua:1017-1021` → `table.rand(self.connectors, …)` :677 with no map filter. Underground connectors arrive because `SupplyGridFragment` **is** a `MultiMapSupplyGrid` (:337-338) and the elevator merges the two sides (`Elevator.lua:402-440` → `MergeGrids` :1635-1650 → `AddElement` :547-548), with the merged fragment registered on both cities' lists (:463-477). **Sibling tell**: the production pass 16 lines above guards the shared-fragment case and says so in a comment (:999-1001); the break pass does not. Independent Relaunched witness + working third-party fix (GromGor 3730839706, re-read from the archived FPK). **NOTHING BUILT** — body-copy shape vs FIX_POLICY §3a is the design question; decision package is chain prompt 7's (entry) |
 | F89 | `MeteorsDisaster`'s unbounded drain loop wedges the METEORS thread on ordinary single/multispawn strikes — the colony silently loses ALL regular meteors, forever in vanilla | P2 | MEASURED | open — observed live 2026-08-01 (Tier-1 leg sitting): F78's drain-loop class on the singles path, INVISIBLE to the storm watchdog (no `g_MeteorStorm`); **covered by the F02 watchdog** (detected at its 189h threshold, `ALIVE but stuck`, restarted, ~6-8 sol latency); no direct fix routable — mid-function loop, body copy barred by F86 (entry) |
 | F91 | Whole-track salvage leaves an undeletable invisible `TrackBase` shell in the map and every later save — **our own F44 path reproduces it** | P3 | SOURCE-VERIFIED | **open — promoted from C33 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** `DemolishAndSplitTrack` calls `track_obj:OnDemolish()` and returns at three sites (`TrackElement.lua:467-470, :503-508, :517-522`); `OnDemolish` only *prepares* deletion — it sets `CanDelete = ret_false` (`Track.lua:249`) and empties the three arrays to `false` — and the only other deletion route is gated on the flag it just falsified (`TrackElement.lua:203-205`). **Tell: every other route to `OnDemolish` ends in `DoneObject`** (`Demolishable.lua:132-141`) and `TrackBase` sets `use_demolished_state = false` (`Track.lua:45`) to opt into that branch. **R1 — the `mass_delete` route is one advertised keypress** (*"CTRL + left_click — Salvage entire length"*, `Construction.lua:2925-2930`), and our F44 keeps it. Fix = amendment to `Fix_TrackSalvageWipe` (finish the deletion + heal existing saves on the sweep that already walks `TrackBase`), **no new module**. ⚠️ The C33 "cannot add trains to tracks" lead is **NOT** this — traced and dropped (entry) |
+| F92 | The Saint trait's dome blessing has never applied to anyone — the modifier is filed under the raw trait name `Religious`, colonists under `TraitReligious` | P2 | SOURCE-VERIFIED | **open — promoted from C22 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** Two adjacent lines in one loop disagree: `Colonist.lua:373` files under `GetTraitLabel(trait_id)`, `:376` passes the raw id to `AddDomeColonistsModifier`, which uses it as the label verbatim (`ClassDef-PresetDefs.generated.lua:1783-1784`); `Religious` is absent from `fixed_labels` (`Traits.lua:1268-1302`), so the +10 morale sits on a label nobody is in. ⭐ **Internal control: Empath is the only other `dome colonists` preset and it works** — its label needs no translation. **R1** (fires whenever a Saint joins a dome). Fix = **§1.1 preset patch** + one-shot load-time re-base; nothing enters the save (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -140,7 +141,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | **✅ CLOSED — declined, no defect in Relaunched** | swept 2026-08-02 (prompt 6b): the predicate is membership-only as charged, but it has **exactly two consumers** and the distance term lives at the consumer — `Dome.lua:256-259` gates it on `const.ColonistMinDistToIgnorePassage` (1200m, `_GameConst.lua:134`, *with* the design comment), and `Colonist.lua:1567` adds an 8-dome hop cap. Both escape branches are correct (open-air = safe outside; no shuttles = no alternative). The residual unbounded walk is the **no-passage** case, which is F52's deliberately-open half, not this. ⚠️ **Taking ChoGGi's OG shape would have narrowed F53's reachability test** (entry) |
 | C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | **MECHANISM LOCATED 2026-08-02 (prompt 6b), harm not sized** — the ONLY emitter of `Msg("SectorScanned")` is a **game-time thread that opens with `Sleep(10)`** (`Exploration.lua:88-104`, spawned `:276-280`), so nothing is counted while game time is stopped; probe scanning has no pause gate (`OverviewModeDialog.lua:468-482`). Source cannot say whether the increment is **deferred or lost** → one checklist observation written. **✅ OBSERVATION TAKEN 2026-08-02 (owner, live): DEFERRED, NOT LOST → CLOSED, `wontfix — no player-visible cost`.** Paused: no signal. Unpaused: the **"Sector scanned" voice-over fired**, and `QueueVoice` sits inside `AddHUDNotification` at `:103`, immediately before the `Msg` at `:104` — so the message provably fired on unpause. ⭐ Internal control in the same scan: the synchronous `NewAnomalies` card behaved differently from the `Sleep(10)`-deferred `SectorScanned`. ⚠️ 6b's "on-screen toast" wording was **corrected** — `SectorScanned` is a `HUDNotificationPreset` on `idOverview` with a voice line, **not a popup card** (entry) |
 | C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | **DESTRUCTION ROUTE VERIFIED 2026-08-02 (prompt 6b) — the soft-lock is LOCATED, not proven** → prompt 7. `Sinkhole` carries **neither** `indestructible` **nor** `disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`) and is the **only mystery set-piece in the game without the flag** — Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly all have it. A large meteor reaches `DestroyBuildingImmediate` → `DoneObject` (`Meteors.lua:817-825` → `Building.lua:1371-1393` → `Demolishable.lua:132-141`). Best soft-lock candidate is the **unguarded `_sinkhole:GetMap()`** at `Mystery 11.generated.lua:146`. ⭐ Anomalies are NOT at risk — checked and ruled out (entry) |
-| C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source recovered + read) |
+| C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01 (fredware source recovered + read); **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F92`, fix approved and routed to prompt 8.** Tier derived this session: **R1**, and Saint is **not** a breakthrough trait (no `hidden_on_start`) — the routing note's "R2-ish?" is corrected. ⭐ Internal control found: **Empath** is the only other `modify_target = "dome colonists"` preset and it works, because its label needs no `GetTraitLabel`. Fix is a **§1.1 preset patch**, not a method touch (entry) |
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
@@ -6445,6 +6446,125 @@ retired its player-symptom lead), **F44** (`Fix_TrackSalvageWipe`, the module
 amended), F47 (whose half-B stands down on `demolishing`, the field the shell
 pins true), `FIX_POLICY.md` §4 / §4a.
 
+### F92 — The Saint trait's dome blessing has never applied to anyone: the modifier is filed under the raw trait name, colonists are filed under the prefixed label (P2, SOURCE-VERIFIED)  `[open — promoted from C22 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8]`
+
+**Defect, re-verified line by line this session.** Two adjacent lines in the same
+loop name the same concept two different ways:
+
+```lua
+-- Colonist.lua:372-377, joining a dome
+for trait_id, _ in pairs(self.traits) do
+    dome:AddToLabel(GetTraitLabel(trait_id), self)          -- files under "TraitReligious"
+    local trait = TraitPresets[trait_id]
+    if trait and trait.modify_target == "dome colonists" then
+        trait:AddDomeColonistsModifier(self, trait.modify_trait)   -- passes "Religious"
+    end
+end
+```
+
+`TraitPreset:AddDomeColonistsModifier` then uses the string **raw**:
+`local label = (trait ~= "") and trait or "Colonist"` →
+`dome:SetLabelModifier(label, unit, {…})`
+(`ClassDef-PresetDefs.generated.lua:1774-1791`). `GetTraitLabel` returns
+`fixed_labels[trait_id] or ("Trait" .. trait_id)` (`Traits.lua:1300-1302`), and
+**`Religious` is not in `fixed_labels`** (the full list is `:1268-1298` — read
+this session). So the Saint's +10 `base_morale` is registered on the label
+`"Religious"`, which **no colonist is ever filed under**: the only filing site is
+`Colonist.lua:373` via `GetTraitLabel`, and `OnMsg.GatherAllLabels`
+(`Traits.lua:1304-1306`) registers the prefixed names too. `SetLabelModifier`
+applies the modifier to everyone currently in `self.labels[label]`
+(`LabelContainer.lua:66-77`) and `AddToLabel` applies existing modifiers to
+newcomers (`:17-28`) — both operate on an array that stays empty forever.
+**Saint's promise — *"Raises the Morale of all Religious people in the Dome"*
+(`Data\TraitPreset.lua:383-397`) — has never applied to a single colonist.**
+
+**Intent tells — two, both unusually strong.**
+1. **Self-contradiction (§4 tell 4).** The preset's own `description` and its
+   `infopanel_effect_text` (*"Blessed by a Saint +<amount>"*) promise a visible
+   per-colonist effect that the code cannot deliver to anybody.
+2. **⭐ Internal control — the SAME function works for the sibling trait.**
+   Exactly **two** presets in all of `Data\TraitPreset.lua` use
+   `modify_target = "dome colonists"`: **Empath** (`:259-272`) and **Saint**
+   (`:383-397`). Empath sets no `modify_trait`, so the `(trait ~= "")` branch
+   hands it the literal `"Colonist"` — **a real dome label** — and Empath's
+   blessing works. The single difference between the working case and the
+   broken one is whether the value needs `GetTraitLabel` and doesn't get it.
+
+**Reachability: R1 — live.** The defective line executes on three shipped
+paths, all reached with the Saint preset's own value: `TraitPreset:Apply`
+(`:1801-1816`, when the trait is applied), **`Colonist.lua:376` — every time a
+Saint colonist joins a dome**, and `_fixup.lua:1918` (a savegame fixup, old-save
+only per the `AppliedSavegameFixups` gate). Saint is **not** `hidden_on_start`
+(`Data\TraitPreset.lua:383-397`; contrast Empath at `:263`), so it is not a
+breakthrough or story trait — it is an ordinary `rare = true, weight = 5`
+positive trait in the applicant pool. **Correction to the routing note that sent
+this here:** Saint is not a breakthrough trait, and the tier is R1, not R2.
+
+**§4a — who benefits: the player.** A documented, advertised morale bonus that
+the game charges an applicant slot for and never pays. No mod is involved on
+either side.
+
+## Fix spec (approved; build = chain prompt 8)
+
+**Technique: FIX_POLICY §1.1 — a data/preset patch. The most-preferred rung, and
+it needs no method touched at all.** `modify_trait` has exactly five readers in
+the whole tree (the two calls at `ClassDef-PresetDefs.generated.lua:1814/:1825`,
+`Colonist.lua:362/:376`, `_fixup.lua:1918`) and **no UI or display consumer** —
+grep run this session — so correcting the stored value fixes every path at once,
+add and remove symmetrically.
+
+**A. The patch**, through `SMRFixPack.DataPatch` (mandatory — the F87 rule: a
+plain `OnMsg.DataLoaded` is dead on the enable path):
+
+```lua
+-- for each TraitPreset with modify_target == "dome colonists":
+--   patch only when the value NAMES A REAL TRAIT and the label differs
+if p.modify_trait ~= "" and TraitPresets[p.modify_trait]
+        and GetTraitLabel(p.modify_trait) ~= p.modify_trait then
+    p.modify_trait = GetTraitLabel(p.modify_trait)
+end
+```
+
+Both guards earn their place. `TraitPresets[…]` ~= nil keeps us off any
+**mod-added** preset whose author deliberately stored a raw label that is not a
+trait id — rewriting that would be fixing/breaking another mod's data, barred by
+§4a. The `~=` test makes the patch a no-op for traits that ARE in `fixed_labels`
+(Genius, Dreamer, …), so the rule is safe to state generally. On shipped data the
+set it changes today is **exactly `{Saint}`**.
+
+**B. One-shot re-base for existing saves** (`OnMsg.LoadGame`, synchronous, no
+thread): for each colonist carrying a patched trait and sitting in a dome —
+clear the stale registration `dome:SetLabelModifier(<old raw label>, colonist,
+nil)`, then `trait:AddDomeColonistsModifier(colonist, trait.modify_trait)` with
+the corrected value. Idempotent by construction: `SetLabelModifier` is keyed by
+`(label, unit)` and replaces (`LabelContainer.lua:62-77`), and the stale removal
+walks an empty label array so it cannot subtract morale from anyone.
+
+**§3a: nothing enters the save.** A preset field write plus one synchronous
+load-time pass — no mod thread, no persisted field, no wrapper frame. This is
+the layer-3 shape by construction (patch an input, keep vanilla's body).
+
+**Probe outline:** `SaintBlessing` — (1) static: `TraitPresets.Saint.modify_trait
+== GetTraitLabel("Religious")`; (2) live: for any dome whose `labels.TraitSaint`
+is non-empty, `dome.label_modifiers["TraitReligious"]` carries an entry keyed by
+that Saint. Both are cheap and neither needs a scripted repro.
+
+**Intent statement for the fix header:** *the preset stores a trait id where the
+consumer needs a label, and the same function proves it — Empath's blessing,
+which needs no translation, works. We translate the id the way the line
+immediately above it does; we do not change the amount, the property, or who is
+eligible.*
+
+**Stated plainly, because it is a real effect:** after this fix, Saints actually
+raise Religious colonists' morale by +10 in their dome, and the *"Blessed by a
+Saint"* line appears on those colonists. That is the documented behaviour being
+restored, not a balance change — but it is a behaviour change in play, and
+anyone reading a morale A/B afterwards needs to know it landed.
+
+Cross-refs: **C22** (the candidate this promotes), C38 (the other label-shaped
+package from this prompt — different mechanism: an enumeration that is short,
+not a name that is wrong), `ENGINE_FACTS.md` (the corrected label rules).
+
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
 commit `21b92cb` had spliced F84's text into this heading, leaving D06's whole
@@ -8173,6 +8293,15 @@ quotes verbatim; sources in the audit report §8.
   archived at `C:\Dev\workshop_fpk_archive\` (local, not in git; extract with
   `tools/flpk_extract.py`), so the workshop subscriptions are no longer
   needed.**)*
+  **✅ PACKAGED AND PASSED 2026-08-02 (chain prompt 7) → `F92`.** Re-verified
+  from Src independently of fredware's read; the tier is **R1** (three shipped
+  call paths, `Colonist.lua:376` firing every time a Saint joins a dome) and
+  Saint is an ordinary rare applicant trait, **not** a breakthrough one. The
+  approved fix is a **§1.1 preset patch** (`modify_trait` → `GetTraitLabel(
+  modify_trait)`, guarded to real trait ids so no mod-added preset is touched)
+  plus a one-shot load-time re-base — fredware's `GetTraitLabel` substitution
+  reached the same place through a method edit; the preset field gets there at a
+  higher rung. Full spec on the F92 entry.
 - **C23 [VERIFIED 2026-08-01] — dust devils: three scheduler defects in
   `DustDevils.lua`.** (1) The natural scheduler misuses `spawn_chance` as a
   count multiplier — `:216 Random(count_min,count_max) * spawn_chance / 100`
