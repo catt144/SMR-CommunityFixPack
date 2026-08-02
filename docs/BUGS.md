@@ -137,7 +137,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C17 | The Man From Mars follow-up rewards nothing              | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
 | C18 | XenoExtraction tech skips now-native ex-DLC extractors   | ?   | **✅ CLOSED — `wontfix` (intent)** | swept 2026-08-02 (prompt 6b): label mechanism read (`Building.lua:413-424,:427-444` — a building carries only `class` + `object_class`, never a parent's); `AutomaticMetalsExtractor` carries `AutomaticMetalsExtractor`/`AutomaticMetalsExtractorBase` and is displayed as a **differently-named building**, so the tech's four-name description promises it nothing. **Positive control found: when this game means "every extractor" it enumerates all of them** (`CommanderProfilePreset.lua:336-385`, ten labels). No promise broken → declined under the §4 bar (entry) |
 | C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | **✅ CLOSED — declined, no defect in Relaunched** | swept 2026-08-02 (prompt 6b): the predicate is membership-only as charged, but it has **exactly two consumers** and the distance term lives at the consumer — `Dome.lua:256-259` gates it on `const.ColonistMinDistToIgnorePassage` (1200m, `_GameConst.lua:134`, *with* the design comment), and `Colonist.lua:1567` adds an 8-dome hop cap. Both escape branches are correct (open-air = safe outside; no shuttles = no alternative). The residual unbounded walk is the **no-passage** case, which is F52's deliberately-open half, not this. ⚠️ **Taking ChoGGi's OG shape would have narrowed F53's reachability test** (entry) |
-| C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | investigate (ChoGGi prior art) |
+| C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | **MECHANISM LOCATED 2026-08-02 (prompt 6b), harm not sized** — the ONLY emitter of `Msg("SectorScanned")` is a **game-time thread that opens with `Sleep(10)`** (`Exploration.lua:88-104`, spawned `:276-280`), so nothing is counted while game time is stopped; probe scanning has no pause gate (`OverviewModeDialog.lua:468-482`). Source cannot say whether the increment is **deferred or lost** → ⭐ one checklist observation written, with the HUD toast as a free visible proxy (entry) |
 | C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | investigate (ChoGGi prior art) |
 | C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source recovered + read) |
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
@@ -7414,6 +7414,53 @@ quotes verbatim; sources in the audit report §8.
   scanned count when paused."* The `registers._sectors_scanned` machinery is
   intact in Relaunched `Mystery 10.generated.lua`; pause behavior needs a
   live check. Distinct from F06 (the CrystalFlyAway one-shot hang).
+  **⭐ MECHANISM LOCATED 2026-08-02 (prompt 6b) — the pause-stall is REAL in
+  current Src, but what it costs the player is NOT settled and must not be
+  written up as if it were.** Trail (Mystery 10 = Philosopher's Stone,
+  `Data\Scenario\Mystery 10.lua:4-5`):
+  - **The counter is purely event-driven.** `Sector Scanned Counter` is
+    `while true do WaitMsg("SectorScanned"); _sectors_scanned =
+    _sectors_scanned + 1 end` (`Lua\Scenario\Mystery 10.generated.lua:
+    299-303`). Nothing recomputes the count from map state — **a missed
+    message is a permanently missed count.**
+  - **The only emitter of that message in the tree is a GAME-TIME thread that
+    begins by sleeping.** `AddSectorScannedNotification` (`Lua\Exploration.lua:
+    88-104`) opens with `Sleep(10)  -- allow newly placed deposits to GameInit
+    properly` and ends with `AddHUDNotification("SectorScanned", …)` (`:103`)
+    then `Msg("SectorScanned", …)` (`:104`); it is spawned as
+    `self:CreateGameTimeThread(AddSectorScannedNotification, …)` by
+    `MapSector:Scan` (`:276-280`). **Game time does not advance while the game
+    is paused, so that thread cannot reach line 104.**
+  - **And a scan CAN happen while paused.** `OverviewModeDialog:DeployProbe`
+    (`Lua\UI\OverviewModeDialog.lua:468-482`) → `OrbitalProbe:ScanSector`
+    (`Lua\OrbitalProbe.lua:88-100`) → `MapSector:Scan` for every sector in the
+    probe pattern. **There is no pause check anywhere on that path** — the
+    scan lands, the deposits reveal, and the counter does not move. That is
+    ChoGGi's sentence, with a file:line.
+  - **The stake:** the mystery's Trigger sequence blocks on `while not
+    (_sectors_scanned > 4)` (`:63,:71-73`) and a later branch tests `> 15`
+    (`:347`), so undercounting **delays the mystery's start silently**.
+  **⚠️ What source CANNOT settle — and it is the whole severity question.**
+  Whether the pending increment is merely **DEFERRED to unpause** (harmless;
+  the thread wakes when time resumes) or **LOST**. Two source-visible routes
+  to loss, neither confirmable without a run: (a) **save/reload while
+  paused** — a suspended game-time thread does not survive a load, while
+  `_sectors_scanned` does (it is a persisted scenario register, `:12-24`);
+  (b) **re-scan of the same sector** — `MapSector:Scan` calls
+  `DeleteThread(self.notify_thread)` (`:277`) before spawning the new one, so
+  a pending notification for that sector is discarded outright. There is also
+  an unresolved **multi-sector** question: one probe scans a whole pattern at
+  once (`ScanSector` :96-100), every sector's thread wakes at the same game
+  time, and a single `WaitMsg` loop may or may not be re-armed in time to see
+  all of them. **Engine wake-up semantics are not readable from Lua source —
+  CANNOT DETERMINE, deliberately.**
+  ⭐ **The observation this needs is free, because the HUD toast is a perfect
+  proxy.** `AddHUDNotification` (`:103`) is the line immediately before the
+  `Msg` (`:104`), in the same thread with no yield between them — so **the
+  on-screen "Sector scanned" notification appears if and only if the mystery
+  counter ticks.** No console, no active Philosopher's Stone run, no
+  TestKit needed. Rider written into `PLAYTEST_CHECKLIST.md` (bug-list-audit
+  rider table). Verdict stays `cand` until it is taken.
 - **C21 [author] — St. Elmo sinkholes destructible by meteors → mystery
   soft-lock.** ChoGGi (OG): *"Stop meteoroids from destroying sinkholes and
   soft locking the mystery."* Relaunched `Fireflies.lua:116` sets no
