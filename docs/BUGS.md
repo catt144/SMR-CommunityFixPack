@@ -145,7 +145,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
 | C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op) (entry) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT**: `DroneHubExtender` is the template class name, so the label is carried and `Effect_ModifyLabel` lands (`Data\TechPreset.lua:3466-3471`). The extender's `work_radius` really is raised to 50, and the **commit step exists — it is just routed through the hub**: the tech's `Effect_Code` (`:3474-3481`) forces `SetUIWorkRadius` → `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)` (`DroneControl.lua:759-777`), and `FindTaskRequesters` **recurses into `linked_extenders` reading each extender's live `work_radius`** (`:315-325`). Positive control: `CommandCenterMaxRadius = 50` = default 35 + `SignalBoostersBuff` 15 exactly (`_GameConst.lua:62-72`) (entry) |
-| C28 | Transport Optimization tech never applied to RC Transport| ?   | cand | investigate (SkiRich prior art, OG) |
+| C28 | Transport Optimization tech never applied to RC Transport| ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT again**: `RCTransport:AddToCityLabels` files every transport under `RCTransportAndChildren` (`Lua\Units\RCTransport.lua:88-90`), `City:AddToLabel` forwards to the **colony** container first (`Lua\City.lua:83-86`) which is the one `Effect_ModifyLabel` writes to (`MarsGameEffects.lua:161-172`), and `max_shared_storage` is modifiable at `scale = const.ResourceScale` with default `30` (`RCTransport.lua:14`) — so +15 lands exactly on SkiRich's promised **45**, and it is read live at `:118, :282, :311, :1709`. ⭐ **This sweep corrected the C18 label rule** — see the C18 row (entry) |
 | C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
 | C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
 | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
@@ -7330,8 +7330,36 @@ quotes verbatim; sources in the audit report §8.
     `default_label`, `label1..label5` and its build-menu categories —
     `Building:SetCustomLabels` / `ApplyCustomLabels` (`Lua\Buildings\
     Building.lua:370-425`) and `Building:AddToCityLabels` (`:427-444`);
-    the roster generator agrees (`GetCityLabelsForClass`, `:641-661`). **No
-    parent class ever contributes a label.**
+    the roster generator agrees (`GetCityLabelsForClass`, `:641-661`).
+    - ⚠️ **CORRECTED 2026-08-02 (prompt 6c, C28 sweep). The sentence
+      originally written here — "No parent class ever contributes a label" —
+      is WRONG as a general rule, and it was being carried forward into other
+      sweeps.** `AddToCityLabels` is a **combined method**:
+      `DefineCombinedMethod("AddToCityLabels", "call")`
+      (`Lua\CityObject.lua:8`; machinery
+      `CommonLua\Core\classes.lua:1499-1511`) makes the flattened method call
+      **every** parent implementation, not just `Building`'s. Parents really do
+      contribute labels — `BuildingDepositExploiterComponent` → `ResourceExploiter`
+      (`Lua\Buildings\BuildingComponents.lua:49-51`), `ResourceProducer` →
+      `ResourceProducer` (`:529-531`), `DroneControl` → `DroneControl`
+      (`Lua\Buildings\DroneControl.lua:273-275`), `ColdSensitive` → `Frozen`
+      (`ColdSensitive.lua:42-46`), `Community`, `BaseFarm`, `DustGenerator`,
+      and for units `BaseRover` → `Unit`/`Rover`/`self.class`
+      (`Lua\Buildings\BaseRover.lua:134-138`).
+    - **C18's VERDICT IS UNAFFECTED, and this is why**: every parent-contributed
+      label in the tree is a **role/component** name (`ResourceExploiter`,
+      `ResourceProducer`, `Frozen`, `Rover`…), never a **building-type** name.
+      XenoExtraction names four building-type labels — `WaterExtractor`,
+      `MetalsExtractor`, `PreciousMetalsExtractor`, `RegolithExtractor`
+      (`Data\TechPreset.lua:2578-2597`) — and no parent class anywhere emits any
+      of those. So `AutomaticMetalsExtractor` still does not carry
+      `MetalsExtractor`, and the close stands.
+    - **The rule, restated correctly for future sweeps:** a building's label set
+      is `self.class` + `self.object_class` (when it differs) + `default_label`
+      + `label1..label5` + build-menu categories, **plus one label per parent
+      class that defines its own `AddToCityLabels`**. Type-name labels come only
+      from the first group; role labels come from the second. Matching on an
+      exact string is still the rule — there is no inheritance *of a name*.
   - **So the answer is NO, and the reason is not a bug.**
     `AutomaticMetalsExtractor` has `object_class =
     "AutomaticMetalsExtractorBase"` (`Lua\BuildingTemplate\
@@ -7870,6 +7898,44 @@ quotes verbatim; sources in the audit report §8.
   SkiRich (OG, 2609028695): *"the missing code that is required to make the
   RC Transport obey the Tech upgrade Transport Optimization… should be able
   to carry 45 of every resource."*
+  **→ SWEPT 2026-08-02 (prompt 6c). Verdict: NO DEFECT IN CURRENT SRC —
+  CLOSED. Every link in the chain checks out, and SkiRich's own number (45) is
+  the arithmetic the current data produces.**
+  - **The tech** (`Data\TechPreset.lua:3577-3598`) carries two effects:
+    `Consts`.`RCTransportGatherResourceWorkTime` **-50%** (the "harvest faster"
+    half) and **`RCTransportAndChildren`.`max_shared_storage` +15**.
+  - **Label check (6b's lead) — RULED OUT.** `RCTransport:AddToCityLabels`
+    files the rover under `RCTransportAndChildren` explicitly
+    (`Lua\Units\RCTransport.lua:88-90`); the label is declared
+    (`Data\Label.lua:216-218`); and `RCHarvester` inherits `RCTransport`
+    (`Lua\Units\RCHarvester.lua:4`) so it is one of the promised "children".
+  - ⚠️ **The colony-vs-city container question — the one thing that could
+    plausibly have broken this — is answered and it is safe.** The rover is
+    added to the **city**, but `City:AddToLabel` forwards to
+    `self.colony:AddToLabel` **first** (`Lua\City.lua:83-86`), and the colony
+    container is exactly where `Effect_ModifyLabel:OnApplyEffect` registers its
+    modifier (`Lua\MarsGameEffects.lua:161-172` → `SetLabelModifier`). Both
+    directions are covered: `SetLabelModifier` walks the existing members
+    (`Lua\LabelContainer.lua:59-78`) and `AddToLabel` replays the stored
+    modifiers onto any member added later (`:17-28`). Rovers built after the
+    research get the +15 too.
+  - **Arithmetic control:** `max_shared_storage` is declared on `RCTransport`
+    itself as `modifiable = true`, `scale = const.ResourceScale`, default
+    `30 * const.ResourceScale` (`Lua\Units\RCTransport.lua:14`), and
+    `Effect_ModifyLabel` multiplies `Amount` by that same scale
+    (`MarsGameEffects.lua:166-171`). **30 + 15 = 45**, SkiRich's figure exactly.
+    The value is read live on every capacity test (`RCTransport.lua:118, :282,
+    :311, :1709`) — nothing caches it.
+  - ⭐ **This sweep also overturned a rule 6b recorded — see the correction on
+    the C18 entry.** The near-miss that produced it: `RCTransport` defines its
+    own `AddToCityLabels` **without calling `BaseRover`'s** (`:134-138`, which
+    adds `Unit`/`Rover`/`self.class`), which reads as a classic
+    override-drops-the-parent defect. It is not one:
+    `DefineCombinedMethod("AddToCityLabels", "call")`
+    (`Lua\CityObject.lua:8`, machinery at
+    `CommonLua\Core\classes.lua:1499-1511`) makes the flattened method call
+    **every** parent's implementation. Checked and ruled out, written down so
+    it is not re-derived.
 - **C29 [author] — children-only buildings admit all age groups.** SkiRich
   (OG, 2428123536): *"the missing code that is required to make Child Only
   Buildings, such as the Nuseries, omit any other age group."*

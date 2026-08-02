@@ -472,3 +472,35 @@ code suggests.
   `Encoding.GetEncoding(1252).GetBytes(UTF8.GetString(bytes))`; nothing was committed
   corrupted. Use the editor's own file tools for docs, or pass `-Encoding UTF8` on
   BOTH ends.
+- **Label membership: `AddToCityLabels` is a COMBINED method — every parent
+  class that defines one contributes its labels** (`DefineCombinedMethod
+  ("AddToCityLabels", "call")`, `Lua\CityObject.lua:8`; generator
+  `CommonLua\Core\classes.lua:1499-1511`). A class that defines
+  `AddToCityLabels` without calling its parent's is **not** dropping the
+  parent's labels — that reads like the classic override defect and is not one
+  (near-missed on `RCTransport` 2026-08-02).
+  **The full label set of a building is:** `self.class` + `self.object_class`
+  (only when it differs) + `default_label` + `label1..label5` + build-menu
+  categories (`Lua\Buildings\Building.lua:370-425`, `:427-444`; roster
+  generator `:641-661`) **+ one label per parent class with its own
+  `AddToCityLabels`** — e.g. `ResourceExploiter`
+  (`BuildingComponents.lua:49-51`), `ResourceProducer` (`:529-531`),
+  `DroneControl` (`DroneControl.lua:273-275`), `Frozen`
+  (`ColdSensitive.lua:42-46`), and for units `Unit`/`Rover`/`self.class`
+  (`BaseRover.lua:134-138`).
+  ⚠️ **Corrects the flat "no parent ever contributes a label" written under
+  C18 on 2026-08-02** — that held only for `Building:AddToCityLabels` read
+  alone. The practical rule survives intact: **type-name** labels
+  (`MetalsExtractor`, `DroneHubExtender`, …) come only from the first group;
+  parents contribute **role** names only. Matching is still exact-string with
+  no inheritance of a name, so an `Effect_ModifyLabel` naming a label nothing
+  carries is still silently a no-op.
+- **Units and rovers are labelled through `City:AddToLabel`, which forwards to
+  the COLONY container first** (`Lua\City.lua:83-86`), and the colony container
+  is the one `Effect_ModifyLabel` writes its modifier to
+  (`Lua\MarsGameEffects.lua:161-172` → `LabelContainer:SetLabelModifier`,
+  `Lua\LabelContainer.lua:59-78`). Both directions are covered:
+  `SetLabelModifier` applies to existing members, and `AddToLabel` replays
+  stored modifiers onto members added later (`:17-28`). So "the tech was
+  researched before the unit existed" is **not** a way for a label modifier to
+  miss.
