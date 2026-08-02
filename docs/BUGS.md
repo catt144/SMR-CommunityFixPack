@@ -122,7 +122,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F92 | The Saint trait's dome blessing has never applied to anyone — the modifier is filed under the raw trait name `Religious`, colonists under `TraitReligious` | P2 | SOURCE-VERIFIED | **built 2026-08-02 (chain prompt 8b) as `Fix_SaintBlessing` — ⚠️ UNRUN, the batch leg is 8b's, and ⚠️ this one CHANGES REAL GAMEPLAY (Saints finally buff Religious colonists).** Promoted from C22 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 preset patch through `SMRFixPack.DataPatch` plus a one-shot idempotent `LoadGame` re-base that reuses vanilla's own `AddDomeColonistsModifier`; probe `SaintBlessing` written. Two adjacent lines in one loop disagree: `Colonist.lua:373` files under `GetTraitLabel(trait_id)`, `:376` passes the raw id to `AddDomeColonistsModifier`, which uses it as the label verbatim (`ClassDef-PresetDefs.generated.lua:1783-1784`); `Religious` is absent from `fixed_labels` (`Traits.lua:1268-1302`), so the +10 morale sits on a label nobody is in. ⭐ **Internal control: Empath is the only other `dome colonists` preset and it works** — its label needs no translation. **R1** (fires whenever a Saint joins a dome). Fix = **§1.1 preset patch** + one-shot load-time re-base; nothing enters the save (entry) |
 | F93 | The dust-devil scheduler reads its descriptor from the map the **player is looking at**, not the map it spawns on | P2 | SOURCE-VERIFIED | **built 2026-08-02 (chain prompt 8b) as `Fix_DustDevilsDescrMap` — ⚠️ UNRUN, the batch leg is 8b's.** Promoted from C23 item 2 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.4b global replacement (7 lines from `DustDevils.lua:58-66`, build 1.0.7.396349, `CurrentMap` → `MainMap` on both reads, installed via `SetGlobal`'s read-back), probe `DustDevilsDescrMap` written. Two spec-wording corrections recorded on the entry: the preset half of the self-check moved off apply onto `DataPatch` (an apply-time absence test is the F75 false-inactive bug), and the runner carries no `changed_class` filter. The thread pins `local map = MainMap` (`DustDevils.lua:198`) and uses it everywhere except in `GetDustDevilsDescr`, which takes no map and reads `CurrentMap.mapdata` twice (`:58-66`); the descriptor is **re-read every cycle** (`:234-238`), and `CurrentMap` is the camera's map (`ChangeCurrentMapSlot` → `SetCurrentMap`, `CommonLua\Core\map.lua:389-404`). Viewing the underground therefore either parks the surface scheduler a day at a time or hands it the **other map's intensity**. **R1**; all three callers are in that one thread. Fix = §1.4b global replacement, 7 lines, `CurrentMap` → `MainMap`; nothing enters the save. Siblings from the same bundle got different answers — see C23 (entry) |
 | F94 | An operator-precedence slip makes **any parked supply rocket** satisfy the asteroid-visit gate — the picker opens with no lander to pick | P3 | SOURCE-VERIFIED | **built 2026-08-02 (chain prompt 8b) inside the existing `Fix_AsteroidLanderAvailable` — ⚠️ UNRUN, the batch leg is 8b's.** Promoted from C24 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.4b body copy (12 lines from `PlanetaryView.lua:433-444`, build 1.0.7.396349, one added pair of brackets) with F72's scan appended where vanilla's `return false` was; no new registry id; probe `AsteroidVisitPrecedence` written. **F72's module header and its BUGS entry were both corrected in the same commit** — the chained delegation they advertised is gone, because a wrapper cannot filter a false positive. `PlanetaryView.lua:439` — `and` binds tighter than `or`, so `IsKindOf(rocket, "LanderRocketBase")` qualifies only the first of three clauses. **R1**: `SupplyRocketBase` descends from `RocketBase` alone (`SupplyRocket.lua:1-3`) and parks in `WaitLaunchOrder` (`RocketBase.lua:643, :699`), which the detached clause accepts. The picker's own list keeps only non-pod `UniversalRocketBase` rockets (`PlanetUI.lua:1623-1635`), so it comes up empty. Tells: a guard that cannot fire, and the branch 3 lines above plus `EarthVisitPossible` both bracket the same idiom correctly. ⚠️ Repairing a false positive means owning the predicate — F72's chained delegation cannot survive, and its header says otherwise today (entry) |
-| F95 | The Astrogeologist profile promises an unqualified "Extractor production increased by 10%" and pays **10 of the 12** buildable extractors | P3 | SOURCE-VERIFIED | **open — promoted from C38 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt **8b** (prompt 8 split under rule 3).** `CommanderProfilePreset.lua:333` (the promise), `:336-385` (ten `Effect_ModifyLabel` entries), omitting `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor` — both buildable, both carrying the modified prop. ⭐ **The list is curated by a rule these two satisfy**: the shared `Extractors` label exists (16 templates) and is deliberately unused because it would add 3 non-extractors and 2 `hide_from_build_menu` legacy templates — leaving these two as the only unexplained exclusions, and 12 buildable / 10 paid closes exactly. **R1.** Fix = two additive entries built with `PlaceObj` (F87 rule) + a load-time heal for existing saves. ⚠️ The counter-reading (a deliberate balance carve-out) is recorded on the entry — this is the package to veto if the owner reads it that way (entry) |
+| F95 | The Astrogeologist profile promises an unqualified "Extractor production increased by 10%" and pays **10 of the 12** buildable extractors | P3 | SOURCE-VERIFIED | **built 2026-08-02 (chain prompt 8b) as `Fix_AstrogeologistExtractors` — ⚠️ UNRUN, the batch leg is 8b's.** Promoted from C38 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); built as the specced §1.1 additive patch (two `Effect_ModifyLabel` entries via `PlaceObj`, idempotent append) plus a load-time heal that calls vanilla's own `OnApplyEffect`; probe `AstrogeologistExtractors` written. One spec name corrected on the entry: the method is `OnApplyEffect`, not `__exec`. `CommanderProfilePreset.lua:333` (the promise), `:336-385` (ten `Effect_ModifyLabel` entries), omitting `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor` — both buildable, both carrying the modified prop. ⭐ **The list is curated by a rule these two satisfy**: the shared `Extractors` label exists (16 templates) and is deliberately unused because it would add 3 non-extractors and 2 `hide_from_build_menu` legacy templates — leaving these two as the only unexplained exclusions, and 12 buildable / 10 paid closes exactly. **R1.** Fix = two additive entries built with `PlaceObj` (F87 rule) + a load-time heal for existing saves. ⚠️ The counter-reading (a deliberate balance carve-out) is recorded on the entry — this is the package to veto if the owner reads it that way (entry) |
 | F96 | The St. Elmo's Fire sinkhole is the **only** mystery set-piece in the game a meteor can destroy | P3 | SOURCE-VERIFIED | **open — promoted from C21 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt **8b** (prompt 8 split under rule 3).** `Sinkhole.generated.lua:1-24` carries neither `indestructible` nor `disasters_strike_immunity`; the meteor chain reaches `DestroyBuildingImmediate`, whose only guard is that flag (`Building.lua:1371-1374`). **Tell:** every other set-piece has it (Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly, BottomlessPit, AncientArtifact, DragonRocket, DropPod) and the property's help text names meteors (`Building.lua:209`). **R2.** Fix = **§1.1 preset patch**, one boolean, and its side effects were enumerated: the other two consumers are already-false paths for this template, so it changes exactly one behaviour. ⚠️ The soft-lock at `Mystery 11.generated.lua:146` stays **located, not proven** — and the package does not rest on it (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
@@ -7321,7 +7321,7 @@ and is unaffected**: it stubs `IsKindOf` to answer true only for
 `"UniversalRocketBase"`, so all five of its cases take the first branch and never
 reach the corrected `elseif`.
 
-### F95 — The Astrogeologist profile promises "Extractor production increased by 10%" and pays 10 of the 12 buildable extractors (P3, SOURCE-VERIFIED)  `[open — promoted from C38 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8b (prompt 8 split under rule 3)]`
+### F95 — The Astrogeologist profile promises "Extractor production increased by 10%" and pays 10 of the 12 buildable extractors (P3, SOURCE-VERIFIED)  `[built 2026-08-02 by chain prompt 8b as `Code/Fix_AstrogeologistExtractors.lua` — §1.1 additive preset patch, two Effect_ModifyLabel entries built with PlaceObj (the F87 rule), plus a load-time heal that calls vanilla's own OnApplyEffect; probe AstrogeologistExtractors written. ⚠️ UNRUN — the batch leg is 8b's. ⚠️ The counter-reading is still on the entry: this is the package to veto if the owner reads the exclusion as deliberate balance]`
 
 **Defect.** `Data\CommanderProfilePreset.lua:329-390` — the `astrogeologist`
 profile's `effect` text is **unqualified**: *"<bullet> Extractor production
@@ -7428,6 +7428,47 @@ this profile was its positive control, and the control turned out to have this
 hole in it), F92 (the other label-shaped package from this prompt — a *wrong
 name*, where this is a *short list*), `ENGINE_FACTS.md` (the corrected label
 rules 6c wrote).
+
+## ✅ BUILT 2026-08-02 (chain prompt 8b) — `Code/Fix_AstrogeologistExtractors.lua`
+
+Built to the spec above: two additive `Effect_ModifyLabel` entries constructed with
+`PlaceObj` (never `:new{}` — the F87 rule), appended through `SMRFixPack.DataPatch`,
+with the append made idempotent by adopting any existing entry carrying the same
+`Label` rather than duplicating it. The rejected wider alternative (retargeting the
+existing `WaterExtractor` entry at `WaterExtractorBase`) was not taken.
+
+Both templates were re-verified from Src this session:
+`AutomaticMetalsExtractor.generated.lua` — `object_class` `:9`,
+`production_per_day1 = 12000` `:11`, `build_category = "MetalExtractors"` `:56`,
+`label3 = "Extractors"` `:64`, no `hide_from_build_menu`;
+`MicroGAutoWaterExtractor.generated.lua` — `object_class = "WaterExtractorBase"`
+`:9`, `water_production` carried through it (`:21/:32/:43` upgrade props),
+`build_category = "LifeSupport"` `:53`, and it does **not** carry the `Extractors`
+label, exactly as the entry says. The shipped profile still holds precisely the ten
+entries listed above (`CommanderProfilePreset.lua:336-385`).
+
+**One name on this entry is corrected.** The spec said the builder should reuse
+`Effect_ModifyLabel`'s own **`__exec`**. There is no `__exec`; the method is
+**`OnApplyEffect(colony, parent)`** (`MarsGameEffects.lua:161-172`). The
+instruction's substance is unchanged and was followed — the heal calls that method
+rather than hand-rolling a `LabelModifier`, so the modifier id, scale and container
+are identical to what a new game produces.
+
+**Why the heal is idempotent, re-derived rather than inherited.** Vanilla applies
+profile effects exactly once, at game start
+(`Colony.lua:436` → `GameEffectsContainer:EffectsApply`, `GameEffect.lua:36-40`),
+which is why an existing save needs the pass at all. `OnApplyEffect` ends in
+`colony:SetLabelModifier(self.Label, self, …)` — keyed by the **effect object**, and
+`SetLabelModifier` replaces (removes the old modifier from everyone in the label,
+then adds the new one), so a re-run nets zero. The heal additionally *checks* for
+`colony.label_modifiers[Label][effect]` before applying, so on a healthy save it
+does nothing at all. That is also why the module keeps a reference to the two
+effect objects: the modifier is keyed by identity, not by name.
+
+**Probe:** `AstrogeologistExtractors` — asserts the profile carries an
+`Effect_ModifyLabel` for each buildable extractor, with the extractor set **derived
+by scanning `BuildingTemplates`** rather than hardcoded, so the probe also catches a
+future template arriving unpaid.
 
 ### F96 — The St. Elmo's Fire sinkhole is the only mystery set-piece in the game a meteor can destroy (P3, SOURCE-VERIFIED)  `[open — promoted from C21 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8b (prompt 8 split under rule 3)]`
 

@@ -314,6 +314,10 @@ return {
 		'CodeFileName', "Code/Fix_DustDevilsDescrMap.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_AstrogeologistExtractors",
+		'CodeFileName', "Code/Fix_AstrogeologistExtractors.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),
