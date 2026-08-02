@@ -7984,12 +7984,26 @@ quotes verbatim; sources in the audit report §8.
     self-healing state could be missed between samples. **What would close it:**
     one more clean dump on a **different colony** (different history, not the
     same save later), or a second clean dump on this save several sessions on.
-    ⚠️ **One qualifier to resolve when that reading is taken** — whether this
-    colony was *started* on a build that already carried the two fixups. If yes,
-    they never ran here and 288 clean sols are pure live evidence; if it predates
-    them, the fixups healed once at first load and the evidence covers only the
-    sols since. Either way a dirty line would have been the live producer, so
-    the qualifier only affects how strong the clean result is, not its direction.
+    ✅ **The vintage qualifier was RESOLVED the same sitting, and it lands on
+    the strong side.** `OrigLuaRev` is a `GameVar` that captures `LuaRevision`
+    at new-game and persists it — the engine's own bug dump labels it *"Game
+    Start Rev"* (`CommonLua\SavegameMetadata.lua:288-290`, `:301-302`). Read
+    live: **`founded on rev 396349 | running rev 396349 | last saved on rev
+    396349`** — i.e. founded on the pinned build **1.0.7.396349** itself. So
+    both fixups were **pre-seeded into `AppliedSavegameFixups` at new-game and
+    never ran on this save**, and all 288 sols are unhealed live evidence.
+    ⚠️ **Known limit on that inference, stated so it is not over-read:**
+    a `GameVar` missing from a save is initialized **at load**, so if
+    `OrigLuaRev` itself postdates the save, an old colony would be stamped with
+    today's revision and read as new. Source alone cannot exclude that.
+    **It does not change the direction of the result** — in the worst case the
+    fixups healed once at the first load on this build and every sol since is
+    still live evidence. **Free independent cross-check if anyone wants it
+    later:** `UndergroundRework106` is a GameVar defaulting to the literal
+    `false` and set `true` only in `OnMsg.NewGame`
+    (`Lua\Buildings\UndergroundDome.lua:16-19`) — the **opposite** failure mode,
+    since an old save loading on a new build keeps `false`. `true` brackets the
+    colony at ≥1.0.6 independently of `OrigLuaRev`.
 - **C27 [author] — Signal Boosters never extend Drone Hub Extender radius.**
   SkiRich (OG, 2611877948): *"After researching Signal Boosters both the
   Drone Hubs and Drone Hub Extenders are suppose to have an additional 15 hex
