@@ -6116,7 +6116,9 @@ disaster sitting): "it worked wonderfully."**
 Trigger A (an unemployed Senior re-homing to a free Retirement Home slot in the
 SAME dome, and — the important half — an **EMPLOYED** Senior in that same dome
 NOT moving), and Trigger E (manual residence assignment must win; toggle off =
-instantly vanilla; save with it ON and reload with it OFF loads clean).
+instantly vanilla — ~~save with it ON and reload with it OFF loads clean~~
+**→ save with it ON and reload with the pack disabled in the MOD MANAGER**).
+⚠️ **METHOD CORRECTED 2026-08-01 — a toggle CANNOT answer an uninstall question.** With the module merely switched off the mod env is still present and the hooks are still installed, so any captured frame resolves `SMRFixPack`, reads inactive and no-ops: **it reads clean by construction, whether or not the module leaks.** `Opt_DroneOverhaul` leaked at 98 errors/session with its own toggle OFF — that is how F86 Site 2 was found. Use **Mod-Manager-disable** (measured equivalent to a real uninstall, PT-20: 98 vs 98 on the same save). `ENGINE_FACTS.md`, "OFF" IS THREE DIFFERENT THINGS.
 Everything reported so far is either a positive case or the do-nothing case;
 what remains is the "never moves someone it shouldn't" pair.
 **The want (user, 2026-07-28, after building a live retirement dome):** a
@@ -6558,7 +6560,9 @@ stranded graduates and watch them drain; confirm the dome's `overpopulated`
 clears and D07 resumes delivering children unaided; confirm NO colonist is ever
 left outside a dome; confirm a flagged dome with no valid destination leaves
 its homeless in place rather than expelling them; toggle off = instantly
-vanilla; save with it ON, reload with the module OFF, clean load.
+vanilla; ~~save with it ON, reload with the module OFF, clean load~~ **→ save with
+it ON, reload with the pack disabled in the MOD MANAGER, clean load.**
+⚠️ **METHOD CORRECTED 2026-08-01 — a toggle CANNOT answer an uninstall question.** With the module merely switched off the mod env is still present and the hooks are still installed, so any captured frame resolves `SMRFixPack`, reads inactive and no-ops: **it reads clean by construction, whether or not the module leaks.** `Opt_DroneOverhaul` leaked at 98 errors/session with its own toggle OFF — that is how F86 Site 2 was found. Use **Mod-Manager-disable** (measured equivalent to a real uninstall, PT-20: 98 vs 98 on the same save). `ENGINE_FACTS.md`, "OFF" IS THREE DIFFERENT THINGS.
 
 **CHAIN CONFIRMED END TO END (2026-07-30).** The inferred link (step 4) was
 measured live: `g_Consts.OverpopulatedDome` = **20**, and the child dome read

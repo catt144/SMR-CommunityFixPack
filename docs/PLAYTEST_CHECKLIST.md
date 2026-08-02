@@ -173,8 +173,12 @@ Retirement Home slot.
 
 **Trigger E — precedence + uninstall shape:** manually assign a Senior to a
 normal residence (player order) — they must STAY. Toggle the module off —
-everything is instantly vanilla; save with it ON, reload with it OFF —
-clean load, no errors (zero persisted state).
+everything is instantly vanilla (that half is a BEHAVIOUR check and stands).
+~~save with it ON, reload with it OFF — clean load, no errors (zero persisted
+state)~~ → **save with it ON, then disable the Community Fix Pack in the MOD
+MANAGER and load: clean load, no `[LUA ERROR]` naming pack code.**
+⚠️ **METHOD CORRECTED 2026-08-01 — a toggle CANNOT answer an uninstall question.** With the module merely switched off the mod env is still present and the hooks are still installed, so any captured frame resolves `SMRFixPack`, reads inactive and no-ops: **it reads clean by construction, whether or not the module leaks.** `Opt_DroneOverhaul` leaked at 98 errors/session with its own toggle OFF — that is how F86 Site 2 was found. Use **Mod-Manager-disable** (measured equivalent to a real uninstall, PT-20: 98 vs 98 on the same save). `ENGINE_FACTS.md`, "OFF" IS THREE DIFFERENT THINGS. A clean read here bounds *that save on that path*; it is not a
+general "zero persisted state" proof, and this line no longer claims one.
 
 Reference (already-passed scope, for context only — do not re-run): the module
 never touches Tourists or employed Seniors; player orders, quarantine and the

@@ -117,8 +117,15 @@ metadata/items lines, commit) or stops and reports.
    with the mod disabled.
 2. Enable mod; confirm fixed behavior.
 3. Confirm no error spam in the log (`%AppData%\Surviving Mars Relaunched\logs`).
-4. Save with mod enabled → disable mod → load: game must not break (PT-20
-   shape; FIX_POLICY §3).
+4. Save with mod enabled → **disable the pack in the MOD MANAGER** → load: game
+   must not break (PT-20 shape; FIX_POLICY §3).
+   ⛔ **NOT a Mod Options toggle, ever.** A toggled-off module still has its
+   hooks installed and its env present, so a captured frame resolves
+   `SMRFixPack`, reads inactive and no-ops — **the load reads clean by
+   construction whether or not the module leaks.** `Opt_DroneOverhaul` leaked at
+   98 errors/session with its own toggle OFF; that is how F86 Site 2 was found.
+   Mod-Manager-disable is measured equivalent to a real uninstall (PT-20: 98 vs
+   98 on the same save). `ENGINE_FACTS.md`, "OFF" IS THREE DIFFERENT THINGS.
 5. Update BUGS.md status to `tested` (both places) per the checklist's
    reporting protocol.
 
