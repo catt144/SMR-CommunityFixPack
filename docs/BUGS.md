@@ -1286,6 +1286,37 @@ replacing the whole multi-branch generator for a path with no shipped user and n
 effect. Revisit only if a scenario author reports it.
 Probe: `SequenceLatents` in `40_Probes_Wave4.lua` (covers items 1 and 3).
 
+✅⭐ **BOTH CONVERSIONS BUILT 2026-08-02** (chain prompt 8, package 0). The module
+is now two §1.4 chained wrappers, both §3a layer 2. **The pack's R3 §1.5
+replacements are down to F57(a)**, converted in the same batch — after which the
+count is zero and FIX_POLICY §4's amended R3 line is satisfied by construction
+rather than by the owner's exception.
+
+* **Item 1 → POST-wrapper, and it retires an unrecorded risk.** The old copy
+  truncated the list `GetObjectsByLabel` returned while *assuming* that list was
+  not the live city label. True, but nowhere written down — so it is verified
+  here: the function ends `return table.icopy(labels[label])`
+  (`SA_Gameplay.lua:147-168`), and its only other branch ("Working-age") builds a
+  fresh table with `table.iappend`. The returned list is always ours to mutate
+  and no city label can be shortened by this fix. The wrapper re-derives `count`
+  from `self.random_percent` / `self.random_count` and `#objs` **after** `orig`
+  returns; `table.shuffle` permutes in place and does not change the length, so
+  that is the same `count` the shipped body computed and discarded. The shuffle
+  stays vanilla's.
+* **Item 3 → PRE-wrapper, zero copied lines, exactly as specced.** Ordering the
+  two fields before delegating makes the shipped
+  `if self.pre_hit_ground_t < self.pre_hit_ground_t_2` false BY CONSTRUCTION, so
+  the broken swap is unreachable rather than replaced. One ordering difference
+  against the copy was checked rather than waved through: the fields now settle
+  **before** `MainCity:AddToLabel` and `SetCommand("Idle")` instead of after.
+  Not observable — game-time thread creation **defers** (ENGINE_FACTS, measured
+  twice in chain prompt 2), so the Idle command thread cannot run until
+  `GameInit` has returned and it reads the final values either way.
+
+Both wrappers are no-ops on today's shipped data exactly as the replacements
+were, so this is the same fix at a cheaper maintenance tier — **no behaviour
+change, and the defect claims are untouched.**
+
 ## Phase 2 findings — details (2026-07-24)
 
 ### F30 — Lake placement entombs RC builder + drones (P1, high)  `[fixed: Code/Fix_LakeEntombment.lua]`
