@@ -1228,6 +1228,12 @@ maintenance tier.** Dropping the latent halves is the weakest of the three
 answers: the benefit is unchanged and the cost objection disappears on
 conversion. Paired ask on **F57(a)**; build routed to chain prompt 8 **only if
 the owner says convert**.
+
+✅⭐ **OWNER DECIDED 2026-08-02: CONVERT.** Both F29 items go to §1.4 wrappers as
+specified above, and so does F57(a). **The §4 amendment's condition is now
+satisfied by an explicit decision on the record**, and the pack will hold **zero**
+R3 §1.5 replacements when prompt 8 lands the conversions. Build: chain prompt 8.
+**The defect claims are untouched** — this changes the technique, not the fix.
 1. `Lua\Sequences\SA_Filters.lua:30-40` — `SA_GetLabelToRegister` ignores
    `random_count`/`random_percent` (returns full list after shuffle). No shipped user.
 2. `Lua\Sequences\SA_Gameplay.lua:2705` — `SA_WaitMarsTime` *generated-code* path inverts
@@ -2506,6 +2512,11 @@ that restrictor table, we now clear it — vanilla already clears `Fuel` there
 every update, so this widens an existing sweep rather than inventing one. Worth
 stating; not, on its own, a reason to keep the copy. Paired ask on **F29**;
 build routed to chain prompt 8 **only if the owner says convert**.
+
+✅⭐ **OWNER DECIDED 2026-08-02: CONVERT.** (a) becomes the §1.4 pre-wrapper
+above; `SMRFixPack_rocket_fuel_key` disappears from the module **and from every
+future save**. (b) is unchanged (additive `OnMsg`, §1.2). Build: chain prompt 8.
+**The defect claim is untouched** — this changes the technique, not the fix.
 
 **(c) NOT FIXED — redundant with the assignment-time check, and a §1.5 replacement to
 reach.** The mechanism is exactly as tracked: `can_work_here = work_or_train or (cdome ==
@@ -8947,6 +8958,33 @@ quotes verbatim; sources in the audit report §8.
     changes" line points at leaving a difficulty number alone. That is a
     borderline call this session declines to make for the owner. **Question, and
     the recommendation, are in the prompt-7 handoff.**
+    ⭐ **SECOND CONTROL FOUND 2026-08-02 (owner asked whether the sibling reading
+    actually restores the intent) — it settles the SHAPE question, in another
+    file.** `MapSettings_Meteor` declares the **same three-field trio** — a
+    1-100 chance plus a count range — with an **identical property idiom**:
+    `multispawn_chance`, `default = 30, min = 1, max = 100` (`Meteors.lua:7`)
+    against `spawn_chance`, `default = 30, min = 1, max = 100`
+    (`DustDevils.lua:8`). The meteor scheduler uses them the opposite way to the
+    dust-devil one:
+    * **the chance GATES** — `local chance = SessionRandom:Random(100)` then
+      `if chance < meteors.multispawn_chance then meteors_type = "multispawn"`
+      (`Meteors.lua:284-290`);
+    * **the count is drawn INDEPENDENTLY and never multiplied** — `local count =
+      SessionRandom:Random(meteors.multispawn_count_min,
+      meteors.multispawn_count_max)` (`:137`).
+    So there are now **two independent controls** for gate-then-count — one in
+    the same file (`marker_spawn_chance`, `:169`) and one in another file using
+    the same trio — and **zero** examples of chance-as-multiplier anywhere in
+    `Lua\`. The grep is exhaustive: `spawn_chance` has exactly five occurrences
+    in the tree.
+    ⚠️ **What the controls do NOT settle: the tuned RATE.** They establish which
+    *shape* these authors write; they say nothing about which frequency was
+    playtested. And one complication cuts the other way — **`DustDevils_Low`
+    accidentally approximates the gate**: `spawn_chance 50` with `count 1..2`
+    truncates to 0 or 1, i.e. roughly "half the time, one devil", which is close
+    to what a gate would produce. So the shipped rates *may* have been tuned with
+    the truncation in place. **That residual is why this stays an owner decision
+    even now that the shape question is answered.**
   - **Item 3 (marker path missing `DustStormsDisabled`) — ✅ DEFECT CONFIRMED,
     ❌ DECLINED ON SHAPE. Recorded, not built, and this is the F89 disposition,
     not a `wontfix — intent`.** The tell is as clean as recorded: `:209` reads

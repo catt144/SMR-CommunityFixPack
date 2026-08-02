@@ -104,19 +104,24 @@ are recorded on their entries with grounds and are **out of scope here**.
 batch adds nothing to the save.** Only F91 and F94 touch modules that already
 exist.
 
-#### ⛔ TWO OWNER DECISIONS ARE OPEN — do not build either, and do not infer an answer
+#### ✅ PACKAGE 0 — DECIDED BY THE OWNER 2026-08-02: **CONVERT. These are builds, not questions.**
 
-1. **Package 0 — F29 (items 1 and 3) and F57(a): convert the R3 §1.5
-   replacements to §1.4 wrappers?** The amended §4 makes that combination
-   conditional on an explicit user decision. **Prompt 7's recommendation is
-   CONVERT**, and the wrapper shapes are written out on both entries —
-   including for F57(a), which the routing note doubted had a route (it does:
-   clear the whole restrictor table before the call rather than trying to learn
-   which key was written; that table has exactly one writer in the tree, and the
-   conversion **deletes a persisted mod field from every save**). **If the owner
-   says convert, both conversions belong in this batch**; if not, both entries
-   stay exactly as they ship today. Nothing else depends on the answer.
-2. **C23 item 1 — the dust-devil `spawn_chance` truncation.** Defect confirmed
+**Three conversions join this batch**, each specced with its wrapper written out
+on its entry: **F29 item 1** (post-wrapper: call `orig`, re-derive `count`,
+truncate — `GetObjectsByLabel` returns `table.icopy`, so the list is safe to
+mutate), **F29 item 3** (pre-wrapper, **zero copied lines**: order the two
+fields before `return orig(self)` and vanilla's broken swap becomes
+unreachable), **F57(a)** (pre-wrapper: clear the whole restrictor table before
+`return orig(self)` — that table has exactly one writer in the tree, and this
+**deletes `SMRFixPack_rocket_fuel_key` from the module and from every future
+save**). All three are layer-2-shaped. **After this batch the pack holds ZERO
+R3 §1.5 replacements**, which is what the §4 amendment was asking for. The
+defect claims are untouched — technique only, so the A/B must read
+byte-equivalent behaviour on all three.
+
+#### ⛔ ONE OWNER DECISION STILL OPEN — do not build it, and do not infer an answer
+
+1. **C23 item 1 — the dust-devil `spawn_chance` truncation.** Defect confirmed
    and sharpened (`count_max` unreachable whenever `spawn_chance < 100`; the
    count can be 0 while `count_min` is 1). **Not approved**, because the repair
    changes the dust-devil RATE and two readings are live — §4's ambiguity rule
@@ -124,6 +129,16 @@ exist.
    at leaving a difficulty number alone. **If the owner picks the gate reading,
    the fix is a §1.4b replacement of the scheduler's count line and it joins
    this batch.**
+   ⭐ **Updated the same day: the SHAPE question is now answered by a second
+   control in another file.** `MapSettings_Meteor` declares the same trio with
+   an identical idiom (`multispawn_chance` 30/1/100) and uses it **gate-then-
+   count**: the chance decides *whether* (`Meteors.lua:284-290`), the count is
+   drawn independently and never multiplied (`:137`). Two controls for
+   gate-then-count, zero for chance-as-multiplier anywhere in `Lua\`. ⚠️ **The
+   RATE question is still open** — and `DustDevils_Low` accidentally
+   approximates the gate today (50% × count 1..2 truncates to 0-or-1), so the
+   shipped rates may have been tuned around the bug. That is what the owner is
+   deciding, not the shape.
 
 #### Three things that will bite this prompt if it is not expecting them
 
