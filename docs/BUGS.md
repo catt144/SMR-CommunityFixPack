@@ -118,6 +118,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | P2 | SOURCE-VERIFIED | **fixed 2026-08-01, VERIFIED by the defect's own repro** — filed 2026-07-31; fix BUILT 2026-08-01 (Tier-1 rewrite: the per-load restart is gone, one-shot version-latched heal in its place); **Tier-1 leg 2 met the named bar exactly** — strike #1 at `t=216351730` → quicksave → **3 loads with ZERO pack lines** → strike #2 at `t=218608231 (+2256501 ms = 75 game hours)`, i.e. the meteor arrived on the PRE-LOAD deadline (entry) |
 | F90 | Surface dust storms break **underground** cables and pipes — the break pass rolls its victim from a cross-map (elevator-merged) grid fragment with no map filter | P2 | SOURCE-VERIFIED | **open — filed 2026-08-01 by the prompt-6 C04 sweep** (C04 closed and promoted). Chain read end to end: `City:HourlyUpdate` `City.lua:148-149` (gated `HasDustStorm`, which is **MainMap-only**, `DustStorm.lua:41`) → `RandomBreakSupplyGrid` :178-181 → `SupplyGrid:RandomBreakElements` `SupplyGrid.lua:1017-1021` → `table.rand(self.connectors, …)` :677 with no map filter. Underground connectors arrive because `SupplyGridFragment` **is** a `MultiMapSupplyGrid` (:337-338) and the elevator merges the two sides (`Elevator.lua:402-440` → `MergeGrids` :1635-1650 → `AddElement` :547-548), with the merged fragment registered on both cities' lists (:463-477). **Sibling tell**: the production pass 16 lines above guards the shared-fragment case and says so in a comment (:999-1001); the break pass does not. Independent Relaunched witness + working third-party fix (GromGor 3730839706, re-read from the archived FPK). **NOTHING BUILT** — body-copy shape vs FIX_POLICY §3a is the design question; decision package is chain prompt 7's (entry) |
 | F89 | `MeteorsDisaster`'s unbounded drain loop wedges the METEORS thread on ordinary single/multispawn strikes — the colony silently loses ALL regular meteors, forever in vanilla | P2 | MEASURED | open — observed live 2026-08-01 (Tier-1 leg sitting): F78's drain-loop class on the singles path, INVISIBLE to the storm watchdog (no `g_MeteorStorm`); **covered by the F02 watchdog** (detected at its 189h threshold, `ALIVE but stuck`, restarted, ~6-8 sol latency); no direct fix routable — mid-function loop, body copy barred by F86 (entry) |
+| F91 | Whole-track salvage leaves an undeletable invisible `TrackBase` shell in the map and every later save — **our own F44 path reproduces it** | P3 | SOURCE-VERIFIED | **open — promoted from C33 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** `DemolishAndSplitTrack` calls `track_obj:OnDemolish()` and returns at three sites (`TrackElement.lua:467-470, :503-508, :517-522`); `OnDemolish` only *prepares* deletion — it sets `CanDelete = ret_false` (`Track.lua:249`) and empties the three arrays to `false` — and the only other deletion route is gated on the flag it just falsified (`TrackElement.lua:203-205`). **Tell: every other route to `OnDemolish` ends in `DoneObject`** (`Demolishable.lua:132-141`) and `TrackBase` sets `use_demolished_state = false` (`Track.lua:45`) to opt into that branch. **R1 — the `mass_delete` route is one advertised keypress** (*"CTRL + left_click — Salvage entire length"*, `Construction.lua:2925-2930`), and our F44 keeps it. Fix = amendment to `Fix_TrackSalvageWipe` (finish the deletion + heal existing saves on the sweep that already walks `TrackBase`), **no new module**. ⚠️ The C33 "cannot add trains to tracks" lead is **NOT** this — traced and dropped (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -153,7 +154,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C37 | Planetary anomalies don't pull colonists up the elevator — blocks a purely-underground colony | ?   | cand | filed 2026-08-01 from a **hours-old** Reddit thread (§10.6); specific, current, names the seam. **Same elevator boundary F90 just proved the code mishandles.** Single source, unverified. Next step: is the anomaly colonist-transfer path map-aware? (entry) |
 | C35 | Edit Payload confirmed while units are on the cargo ramp tears down the rocket's command-centre connection **with no wait**, where the takeoff path doing the same thing waits | ?   | cand | filed 2026-08-01 by the prompt-6 fredware-#11 comparison — **real gap vs F67/F68/F70/F71 (different function, zero overlap), mechanism traced, HARM UNPROVEN**; ⚠️ not a prompt-7 package until a live repro exists (entry) |
 | C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | **DOWNGRADED 2026-08-01 (prompt-6 Src sweep): no route in current Src; his fix's firing explained by destroyed buildings; 1.0.7 killed the named trigger, not the mechanism — and F04's reassignment lost its positive evidence** |
-| C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source) — needs F-row decision (entry) |
+| C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01 (fredware source); **§4 package RUN 2026-08-02 (prompt 7) — PASSED all bars → filed as `F91`, fix approved and routed to prompt 8** (R1 derived this session: the `mass_delete` route is one advertised keypress). ⚠️ **The "cannot add trains to tracks" lead is DROPPED** — the assignment path was traced this session and a shell cannot produce it: the shell has no elements, so no station reaches it and it cannot enter `RebuildTrainRoutes`; the silent refusal is fully explained by vanilla's own two-caps arrangement (entry) |
 | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — **ADOPTED as the Tier-1 rains-pass rider, BUILT 2026-08-01 into Fix_RainsDeadlock's migration pass (structure → FinishRainProcedure heal → migration; manual fallback for invalid values); VERIFIED live by Tier-1 leg 3 2026-08-01** — planted `g_RainDisaster="toxic"` with a dead main_thread, and on reload the log read `0:23:39 RainsDeadlock: stale-ACTIVE rain 'toxic' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)`, with `g_RainDisaster` false afterwards (entry) |
 | C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | ? | cand | filed 2026-08-02 by the C18 sweep — **VERIFIED vs Src**: `CommanderProfilePreset.lua:336-385` enumerates ten labels for an **unqualified** promise and omits `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor`, both currently buildable and both carrying the modified prop. Sibling tell is the enumeration itself. Not promoted — §4 decision is prompt 7's (entry) |
 
@@ -1788,6 +1789,19 @@ entries left inside track arrays by a pre-repair aborted split (the log line now
 reports both counts). A/B re-verified same night (baseline 1/58/11, fixed
 59/0/11, 0 ERROR). **F45's salvage step still needs its clean run** (the crash
 aborted it) — retry procedure in the checklist under PT-03.
+
+**📌 AMENDMENT APPROVED 2026-08-02 (chain prompt 7, §4 package on C33 → filed
+`F91`) — this module gains two small changes; the build is chain prompt 8's.**
+Our replacement deliberately keeps vanilla's `if mass_delete or not idx then
+track_obj:OnDemolish() return end` (`Fix_TrackSalvageWipe.lua:98-101`) on the
+grounds that Ctrl+click "still demolishes the whole track, which is what it is
+for" — that stays true, **but `OnDemolish` does not actually delete the
+`TrackBase`**, so our path leaves the same invisible undeletable shell vanilla
+does, on an advertised keypress. The amendment finishes the deletion there, and
+extends this file's existing `OnMsg.LoadGame` sweep — which already walks
+`AllMapsForEach(true, "TrackBase", …)` — to remove shells already baked into
+saves. **Full spec, signature and probe: the F91 entry.** Nothing about which
+elements mass salvage removes changes.
 
 ### F45 — Damaged tracks can't be salvaged at all (P1, high)  `[tested: Code/Fix_BrokenTrackSalvage.lua — wrapper + LoadGame sweep; PT-03 PASS 2026-07-26 (ReportBrokenTrack 7 sites / 0 bad; broken element salvaged cleanly)]`
 `TrackBase:BreakTrackElement` (`Track.lua:618-659`) copies element params to the repair
@@ -6285,6 +6299,152 @@ Cross-refs: C04 (the lead this closes), F86/FIX_POLICY §3a (why the body copy
 is not automatic), `BUG_LIST_AUDIT.md` §9 (mechanism-confirmed grading) and
 §10.2 (this sweep).
 
+### F91 — Whole-track salvage leaves an undeletable invisible `TrackBase` shell in the map and in every later save — and our own F44 path reproduces it (P3, SOURCE-VERIFIED)  `[open — promoted from C33 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8 as an amendment to Fix_TrackSalvageWipe — no new module]`
+
+**Defect.** `TrackGridElement:DemolishAndSplitTrack` calls `track_obj:OnDemolish()`
+and returns, at **three sites** — `TrackElement.lua:467-470` (the `mass_delete`
+or element-not-in-list case), `:503-508` and `:517-522` (the two
+remainder-too-short fallbacks). `TrackBase:OnDemolish` (`Track.lua:248-284`) is
+a *preparation* step, not a deletion: it sets `self.CanDelete = ret_false` and
+`demolishing = true` (:249-250), empties `assigned_vehicles` to `false`
+(`DestroyAssignedTrains`, :159-166) and `elements`/`elements_under_construction`
+to `false` (`DestroyTrackElements`, :176-192). **Nothing then deletes the
+object.** The element-side auto-delete is the only other route and it is gated
+on the flag `OnDemolish` just falsified — `if not self.is_construction_site and
+IsValid(self.track_obj) … and self.track_obj:CanDelete() then
+DoneObject(self.track_obj)` (`TrackElement.lua:203-205`). So an
+`entity = "InvisibleObject"` (`Track.lua:35`) `TrackBase` stays in the map, in
+`city.labels.TrackBase`, and in every save from then on, with no route to
+deletion left in the game.
+
+**Intent tells — three, and the third is inside the function itself.**
+1. **Sibling contradiction (§4 tell 3), the decisive one.** The engine's own
+   demolish flow always pairs the two: `Demolishable:Demolish` runs
+   `self:OnDemolish()` and then, when `UseDemolishedState()` is false,
+   `DoneObject(self)` (`Demolishable.lua:132-141`). **`TrackBase` sets
+   `use_demolished_state = false`** (`Track.lua:45`) — it opts *into* the
+   deleting branch. Every route to `TrackBase:OnDemolish` except these three
+   ends in `DoneObject`.
+2. **Dead code (§4 tell 2).** `TrackBase:Done` (`Track.lua:69-76`) exists to
+   clean up assigned trains and elements on deletion, and can never run for a
+   track demolished this way. `check_track_elements_on_track_delete` (:168-174)
+   asserts the post-delete invariant for a deletion that never happens.
+3. **Self-contradiction inside one function (§4 tell 4).** `OnDemolish`
+   disarms the auto-delete (`CanDelete = ret_false`, :249) *before* calling
+   `DestroyTrackElements` (:280) — i.e. before destroying the very elements
+   whose `Done` would otherwise have deleted the track. The guard that would
+   have cleaned up is switched off by the call that creates the garbage.
+
+**Reachability: R1 — live, enumerated this session, and the game advertises the
+button.** `DemolishAndSplitTrack` has exactly three callers in Src:
+* `TrackGridElement:Demolish(mass_delete)` (`TrackElement.lua:444-446`), which
+  is what salvage mode calls: `DemolishModeDialog:OnMouseButtonDown` →
+  `obj:Demolish(mass_delete)` (`Construction.lua:2911`) with `mass_delete =
+  mass_delete or terminal.IsKeyPressed(const.vkControl)` (:2881), or
+  `+ButtonY` on a gamepad (:2949-2954). The salvage cursor **prints the
+  shortcut**: *"CTRL + left_click — Salvage entire length"* (:2925-2930).
+  → the `mass_delete` branch at :467, i.e. **one advertised keypress, every
+  time, no preconditions**.
+* the two remainder-too-short fallbacks on the ordinary single-hex path
+  (:503-508, :517-522) — reachable in vanilla whenever one side of the clicked
+  hex has fewer than two elements. **Our F44 replacement removes both**, so
+  with the pack installed this route is already gone.
+* `Construction.lua:1574` — `el:DemolishAndSplitTrack(false, "skip process")`
+  for track elements under a new station; reaches `OnDemolish` only through
+  the `not idx` clause. R2.
+
+**§4a — who benefits: the player.** Each whole-track salvage adds one permanent
+invisible object to the map and to every subsequent save, with no in-game way
+to remove it; a player who redoes a rail network accumulates them without limit.
+They are enumerated on the colony's daily statistics walk
+(`ResourceTracking:UpdateTimeSeries` → `for _, track in ipairs(self.labels
+.TrackBase) do … #track.assigned_vehicles`, `ResourceTracking.lua:197-201`,
+reached from `City.lua:125`). No other mod is required to produce or to suffer
+this: vanilla produces it on its own, and so do we.
+
+**⚠️ Two claims this package deliberately does NOT make.**
+* **It is not a crash.** `#false` / `ripairs(false)` on the daily walk is
+  *not* asserted to raise. `ripairs` is engine-provided and has no
+  implementation in Src to read, and `ENGINE_FACTS.md` records that this Lua
+  tolerates `#nil` / `next(nil)` / `ipairs(false)`. The C33 entry's inherited
+  *"a naive `DoneObject` on it RAISES"* is **unverified** and nothing here
+  depends on it — the fix installs empty tables before deleting either way,
+  which is correct whichever the answer is (the F10 lesson).
+* **It is not the "cannot add trains to tracks" report.** See the C33 entry:
+  that lead was traced this session and the mechanism does not connect.
+
+**Severity P3, stated honestly.** The residue is unbounded and permanent, but
+no player-visible symptom is proven, and `TrackBase` carries
+`count_as_building = false` (`Track.lua:52`) so it does not pollute colony
+building counts. If a shell is ever shown to affect routing or assignment this
+becomes P2.
+
+## Fix spec (approved; build = chain prompt 8)
+
+**Module: amend `Code/Fix_TrackSalvageWipe.lua` (F44). No new module, no new
+registry id, no new thread.** Both halves land inside code the pack already
+owns and has already dispositioned under §3a, so this adds **zero** new
+save-safety exposure.
+
+**A. Stop producing shells at the source** — in our F44 replacement of
+`DemolishAndSplitTrack`, at the `if mass_delete or not idx then` branch
+(currently `Fix_TrackSalvageWipe.lua:98-101`): after `track_obj:OnDemolish()`,
+finish the deletion vanilla left half-done —
+
+```lua
+track_obj:OnDemolish()
+-- FIX (F91): OnDemolish prepares a deletion nothing performs. Restore the
+-- arrays it emptied to `false` so Done can walk them, then delete.
+if IsValid(track_obj) and not IsBeingDestructed(track_obj) then
+    track_obj.elements = track_obj.elements or {}
+    track_obj.elements_under_construction = track_obj.elements_under_construction or {}
+    track_obj.assigned_vehicles = track_obj.assigned_vehicles or {}
+    DoneObject(track_obj)
+end
+return
+```
+
+Technique: this is a change of **three lines inside an existing §1.5
+replacement** — it does not add a technique or a target. The empty tables are
+belt-and-braces (see the "not a crash" note): `Done` → `DestroyAssignedTrains`
+→ `DestroyTrackElements` then re-falsifies them.
+**Deliberately NOT done: `Msg("Demolished", track_obj)`.** Vanilla's direct
+`OnDemolish` path never sends it; firing a message the shipped path does not
+would reach listeners outside this defect's scope.
+
+**B. Heal saves that already carry shells** — extend the `OnMsg.LoadGame` sweep
+already in the same file (`Fix_TrackSalvageWipe.lua:261-289`), which **already
+walks `AllMapsForEach(true, "TrackBase", …)`**. Exact signature, so a live track
+cannot match: all three arrays `== false` (only `OnDemolish` produces that; the
+class's `Init` gives all three real tables, `Track.lua:56-60`) **and**
+`demolishing` truthy. Restore the three arrays, `DoneObject`, count, and log
+through the existing `SMRFixPack.Log` line. Note the existing purge loop skips
+shells for free — it tests `type(t) == "table"` and a shell's fields are
+`false`.
+*Timing is safe:* on the healthy `Demolishable` path there is **no yield**
+between `OnDemolish` (:133) and `DoneObject` (:139), so a save can never
+capture a legitimately mid-deletion track and the signature cannot false-positive
+on one.
+
+**Probe outline** (`SMRFixPack-TestKit`, wave 4 style): `TrackShellLeak` —
+`AllMapsForEach(true, "TrackBase", …)`, PASS iff **zero** objects match the
+shell signature. It is a standing invariant, so it also covers half A after a
+Ctrl+click salvage without needing a scripted repro.
+
+**Intent statement for the fix header:** *the shipped code prepares a deletion
+and never performs it; every other route from `TrackBase:OnDemolish` ends in
+`DoneObject`, and `TrackBase` opts out of the demolished-state branch precisely
+so that it does. We finish the deletion vanilla started — we do not change what
+mass salvage removes.*
+
+**Cost:** ~10 lines in a file we already maintain; no new per-update
+re-verification surface beyond the F44 replacement's existing one.
+
+Cross-refs: **C33** (the candidate this promotes, and the source trace that
+retired its player-symptom lead), **F44** (`Fix_TrackSalvageWipe`, the module
+amended), F47 (whose half-B stands down on `demolishing`, the field the shell
+pins true), `FIX_POLICY.md` §4 / §4a.
+
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
 commit `21b92cb` had spliced F84's text into this heading, leaving D06's whole
@@ -8170,6 +8330,42 @@ quotes verbatim; sources in the audit report §8.
   fails it silently. That is a cheap source question and it belongs to whoever
   packages C33 — but on current evidence **assume the lead is spent** rather
   than assume it is real.
+  **✅ THAT TRACE IS DONE, 2026-08-02 (chain prompt 7), AND THE ANSWER IS NO —
+  THE LEAD IS DROPPED.** A shell cannot produce this symptom, on three
+  independent grounds:
+  1. **A shell cannot reach the assignment path at all.** `TrackBase:AssignTrain`
+     (`Track.lua:428-457`) and its gate `CanAddVehicle` (:423-426) →
+     `GetTrainsOnRoute` (`TrainTransport.lua:482-524`) both start from the
+     **clicked** track and walk `city.train_track_routes[track]`. Routes are
+     built by `RebuildTrainRoutes` (:300-317) by walking outwards from
+     `city.labels.Stations` via `station:ForEachConnectedTrack` — and a shell
+     has `elements == false`, i.e. no elements for any station to be connected
+     through. It is unreachable from route construction, so it cannot corrupt
+     or shorten a live track's route.
+  2. **The one place a shell IS enumerated colony-wide is harmless.** The daily
+     `ResourceTracking:UpdateTimeSeries` walks `self.labels.TrackBase` and reads
+     `#track.assigned_vehicles` (`ResourceTracking.lua:197-201`). No crash is
+     claimed — see the F91 entry's "not a crash" note.
+  3. **Vanilla explains the report without any shell.** The infopanel prints
+     `#assigned_vehicles` / **`GetMaxVehicles()`** — `max_vehicles`, set from the
+     element count in `TrackBase:GameInit` (`Track.lua:64-65`; a 250-element
+     network gives exactly **10**) — while the button's actual gate is
+     `GetTrainsOnRoute`'s **`max_trains`, which is the number of STATIONS on the
+     route and is `0` whenever the route has fewer than two** (`TrainTransport
+     .lua:511-513`), or whenever the track has no route entry at all (:489-490).
+     `0 < 0` is false, and `AssignTrain` then returns from inside its own
+     thread with no message. **"It says 0/10 and clicking does nothing" is
+     precisely what a track with an unbuilt or one-station route looks like** —
+     two different caps, one displayed and one enforced.
+  **Not filed as a defect, deliberately.** (3) is a UI/affordance behaviour —
+  an enabled control whose gate is a different quantity from the one displayed —
+  and FIX_POLICY §4 puts that class in the hypothesis bucket **by default**
+  ("source reading gives confident answers with no validity there", the F49(c)
+  lesson). Vanilla does surface the connectivity case in
+  `TrackBase:GetUIWarning` (`Track.lua:386-393`, *"This Track is not connected
+  to at least two stations"*), which cuts against a defect claim. Recorded here
+  as the honest explanation of the lead, and as the thing to check first if a
+  dated Relaunched-era "cannot assign trains" report ever turns up.
   *(Same thread, same caveat, different item: Darganiss reports **"one of my two
   stations refuses to connect"** on 1.0.3 after previously having "zero problems
   on 1.0.0" — a station/track connection failure that is NOT the assignment
