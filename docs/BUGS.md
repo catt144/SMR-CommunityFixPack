@@ -1356,6 +1356,22 @@ The shipped `assert(self.drone_dests_cache)` is dropped from the copy (assert do
 unwind in mod code); with the clamp, a missing cache yields an empty list, which
 `drone:Goto` already handles. Probe: `SmallLandscapeSites` in `30_Probes_Wave3.lua`.
 
+⭐ **CONVERTED TO A §1.4 CHAINED WRAPPER 2026-08-02** (chain prompt 8;
+`SAVE_SAFETY_REDESIGN.md` §5.4 group A — the sweep called this "the cleanest in
+the pack"). **The reasoning quoted above for why a wrapper cannot work is
+CORRECTED, not merely superseded:** it is true that neither a pre- nor a
+post-wrapper can reach *inside* the loop, but the shipped function **already
+takes the loop bound as a parameter** (`GetClosestDests(drone, top_count)`) and
+its sole caller never passes it — so a pre-wrapper that clamps `top_count` to
+`#self.drone_dests_cache` and delegates fixes it with **zero copied logic**. The
+15-line body copy is gone; `Min(top_count or 5, n)` is the whole module now.
+Behaviour is unchanged (`n >= 5` → the clamp yields vanilla's default 5; `n < 5`
+→ the same bound the copy's `Min(top_count, #dests)` computed, since `table.imap`
+builds one entry per cache element; `n == 0` → empty list). One documented
+delta: the shipped `assert(self.drone_dests_cache)` is back, because vanilla's
+body runs again — it does not unwind in mod code and a nil cache raises inside
+`table.imap` in the copy and the wrapper alike, so no reachable behaviour moved.
+
 ### F34 — Landscape nil-guard bundle (P3, med/latent)  `[fixed*: Code/Fix_LandscapeUnitFilter.lua — item (d) only; (a)(b)(c) verified NOT actionable, see below]`
 
 **Audit 2026-07-30 (reachability): item (d) R2, one wording correction.**
