@@ -19,7 +19,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | tested 2026-07-29 — PT-11 · **⭐ WITNESS RE-DERIVED 2026-08-01 (owner, logged-in Paradox browse): first-party report dated May 8 2026, Game Version 1.0.7, with steps to reproduce — the audit's "NOT re-derivable" is RETRACTED** (entry) |
 | F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | **tested 2026-08-01** — rewritten 2026-08-01 (F86 Tier-1, layer 3: keyed wrapper + vanilla body, one-shot latched heal) and **verified live by Tier-1 legs 1+2+5**: cadence gaps of 75 h, 83 h and 72 h all inside the designed 65–90 h roll; storm-warning timing proven UNCHANGED three independent ways (the `CurrentThread()` key's whole point); F88's per-load re-roll gone; and on uninstall the `Meteors` thread survives `valid=true` on vanilla's body (entry) |
 | F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | tested |
-| F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
+| F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed · **⚖️ TIER DECIDED 2026-08-02 (prompt 7): option (ii) — the Steam thread is UNASSIGNED, not C32's.** The audit's §9 demotion moved F04's witness onto a mechanism the prompt-6 sweep showed has no route in Src, so the attribution is struck from both entries; F04 keeps the no-external-witness grade on **corrected grounds**, and GOLD is NOT restored because that would be the same 1.0.6-era claim with the sign reversed. Defect claim, `fixed` status and the shipped fix are untouched; the corrected C32 live rider stays queued as the only route to a different answer (entry) |
 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | P1  | high | tested |
 | F06 | Philosopher's Stone mystery can hang forever             | P1  | med+ | fixed  |
 | F07 | St. Elmo's Fire "free wisps" gives ~1/1000 power         | P1  | high | fixed  |
@@ -122,6 +122,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F92 | The Saint trait's dome blessing has never applied to anyone — the modifier is filed under the raw trait name `Religious`, colonists under `TraitReligious` | P2 | SOURCE-VERIFIED | **open — promoted from C22 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** Two adjacent lines in one loop disagree: `Colonist.lua:373` files under `GetTraitLabel(trait_id)`, `:376` passes the raw id to `AddDomeColonistsModifier`, which uses it as the label verbatim (`ClassDef-PresetDefs.generated.lua:1783-1784`); `Religious` is absent from `fixed_labels` (`Traits.lua:1268-1302`), so the +10 morale sits on a label nobody is in. ⭐ **Internal control: Empath is the only other `dome colonists` preset and it works** — its label needs no translation. **R1** (fires whenever a Saint joins a dome). Fix = **§1.1 preset patch** + one-shot load-time re-base; nothing enters the save (entry) |
 | F93 | The dust-devil scheduler reads its descriptor from the map the **player is looking at**, not the map it spawns on | P2 | SOURCE-VERIFIED | **open — promoted from C23 item 2 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** The thread pins `local map = MainMap` (`DustDevils.lua:198`) and uses it everywhere except in `GetDustDevilsDescr`, which takes no map and reads `CurrentMap.mapdata` twice (`:58-66`); the descriptor is **re-read every cycle** (`:234-238`), and `CurrentMap` is the camera's map (`ChangeCurrentMapSlot` → `SetCurrentMap`, `CommonLua\Core\map.lua:389-404`). Viewing the underground therefore either parks the surface scheduler a day at a time or hands it the **other map's intensity**. **R1**; all three callers are in that one thread. Fix = §1.4b global replacement, 7 lines, `CurrentMap` → `MainMap`; nothing enters the save. Siblings from the same bundle got different answers — see C23 (entry) |
 | F94 | An operator-precedence slip makes **any parked supply rocket** satisfy the asteroid-visit gate — the picker opens with no lander to pick | P3 | SOURCE-VERIFIED | **open — promoted from C24 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8, into the existing `Fix_AsteroidLanderAvailable` module.** `PlanetaryView.lua:439` — `and` binds tighter than `or`, so `IsKindOf(rocket, "LanderRocketBase")` qualifies only the first of three clauses. **R1**: `SupplyRocketBase` descends from `RocketBase` alone (`SupplyRocket.lua:1-3`) and parks in `WaitLaunchOrder` (`RocketBase.lua:643, :699`), which the detached clause accepts. The picker's own list keeps only non-pod `UniversalRocketBase` rockets (`PlanetUI.lua:1623-1635`), so it comes up empty. Tells: a guard that cannot fire, and the branch 3 lines above plus `EarthVisitPossible` both bracket the same idiom correctly. ⚠️ Repairing a false positive means owning the predicate — F72's chained delegation cannot survive, and its header says otherwise today (entry) |
+| F95 | The Astrogeologist profile promises an unqualified "Extractor production increased by 10%" and pays **10 of the 12** buildable extractors | P3 | SOURCE-VERIFIED | **open — promoted from C38 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** `CommanderProfilePreset.lua:333` (the promise), `:336-385` (ten `Effect_ModifyLabel` entries), omitting `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor` — both buildable, both carrying the modified prop. ⭐ **The list is curated by a rule these two satisfy**: the shared `Extractors` label exists (16 templates) and is deliberately unused because it would add 3 non-extractors and 2 `hide_from_build_menu` legacy templates — leaving these two as the only unexplained exclusions, and 12 buildable / 10 paid closes exactly. **R1.** Fix = two additive entries built with `PlaceObj` (F87 rule) + a load-time heal for existing saves. ⚠️ The counter-reading (a deliberate balance carve-out) is recorded on the entry — this is the package to veto if the owner reads it that way (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -156,10 +157,10 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C36 | "Inner Light" mystery does not complete for some players | ?   | **✅ SOLVED — not a new defect** | filed AND closed 2026-08-01: **it is a downstream victim of F81(a), which our pack already fixes.** `Dream.lua:20-34` — the mirage loop skips `Dream()` whenever `IsDisasterPredicted()`, the exact flag F81(a) strands permanently true, so the mystery stops advancing forever. **Explains the reporters' "for some people" precisely** (depends on whether a meteor storm completed). ⭐ One commenter gave two unconnected pieces of advice — "install the disasters mod" and "avoid Inner Light" — for one defect (entry) |
 | C37 | Planetary anomalies don't pull colonists up the elevator — blocks a purely-underground colony | ?   | cand | filed 2026-08-01 from a **hours-old** Reddit thread (§10.6); specific, current, names the seam. **Same elevator boundary F90 just proved the code mishandles.** Single source, unverified. Next step: is the anomaly colonist-transfer path map-aware? (entry) |
 | C35 | Edit Payload confirmed while units are on the cargo ramp tears down the rocket's command-centre connection **with no wait**, where the takeoff path doing the same thing waits | ?   | cand | filed 2026-08-01 by the prompt-6 fredware-#11 comparison — **real gap vs F67/F68/F70/F71 (different function, zero overlap), mechanism traced, HARM UNPROVEN**; ⚠️ not a prompt-7 package until a live repro exists (entry) |
-| C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | **DOWNGRADED 2026-08-01 (prompt-6 Src sweep): no route in current Src; his fix's firing explained by destroyed buildings; 1.0.7 killed the named trigger, not the mechanism — and F04's reassignment lost its positive evidence** |
+| C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | **DOWNGRADED 2026-08-01 (prompt-6 Src sweep): no route in current Src; his fix's firing explained by destroyed buildings; 1.0.7 killed the named trigger, not the mechanism — and F04's reassignment lost its positive evidence.** **⚖️ WITNESS STRIPPED 2026-08-02 (prompt 7, F04 tier decision): the Steam thread the audit assigned here is now UNASSIGNED — it was moved onto C32 by an inference the sweep proved false of Src. C32 keeps its row as history and claims no witness. Not a package; not closed** (F04 entry) |
 | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01 (fredware source); **§4 package RUN 2026-08-02 (prompt 7) — PASSED all bars → filed as `F91`, fix approved and routed to prompt 8** (R1 derived this session: the `mass_delete` route is one advertised keypress). ⚠️ **The "cannot add trains to tracks" lead is DROPPED** — the assignment path was traced this session and a shell cannot produce it: the shell has no elements, so no station reaches it and it cannot enter `RebuildTrainRoutes`; the silent refusal is fully explained by vanilla's own two-caps arrangement (entry) |
 | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — **ADOPTED as the Tier-1 rains-pass rider, BUILT 2026-08-01 into Fix_RainsDeadlock's migration pass (structure → FinishRainProcedure heal → migration; manual fallback for invalid values); VERIFIED live by Tier-1 leg 3 2026-08-01** — planted `g_RainDisaster="toxic"` with a dead main_thread, and on reload the log read `0:23:39 RainsDeadlock: stale-ACTIVE rain 'toxic' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)`, with `g_RainDisaster` false afterwards (entry) |
-| C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | ? | cand | filed 2026-08-02 by the C18 sweep — **VERIFIED vs Src**: `CommanderProfilePreset.lua:336-385` enumerates ten labels for an **unqualified** promise and omits `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor`, both currently buildable and both carrying the modified prop. Sibling tell is the enumeration itself. Not promoted — §4 decision is prompt 7's (entry) |
+| C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | ? | cand | filed 2026-08-02 by the C18 sweep — **VERIFIED vs Src**: `CommanderProfilePreset.lua:336-385` enumerates ten labels for an **unqualified** promise and omits `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor`, both currently buildable and both carrying the modified prop. Sibling tell is the enumeration itself. **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F95`, approved, routed to prompt 8.** ⭐ The evidence that settles oversight-vs-balance: there **is** a shared `Extractors` label (16 templates) and the designers did **not** use it — and every building it would have added is explained (3 non-extractors: ConcretePlant/MoholeMine/TheExcavator; 2 hidden legacy with `hide_from_build_menu`), leaving **no principled line** that includes `MicroGExtractorExoticMinerals` and excludes `AutomaticMetalsExtractor`. Count closes exactly at 12 buildable / 10 paid. Fix = two additive `Effect_ModifyLabel` entries via `PlaceObj` (**not** `:new` — F87) + a load-time heal; the "retarget to `WaterExtractorBase`" alternative was rejected as too wide (entry) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -444,6 +445,42 @@ defect claim is unchanged and stands on its sibling tell either way.**
 between: (i) restore F04's witness and tier, (ii) leave both entries
 witness-less, or (iii) hold pending the corrected live rider
 (`PLAYTEST_CHECKLIST.md` §6, C32 row).
+
+✅ **DECIDED 2026-08-02 (chain prompt 7): OPTION (ii) — THE THREAD IS
+UNASSIGNED. F04 keeps the no-external-witness tier, but the GROUNDS change and
+the attribution to C32 is struck.** No code moves either way; this is a record
+correction, and F04 stays `fixed` on a defect claim nobody has challenged.
+
+**What changes.** The audit's §9 demotion did not merely lower F04's grade — it
+**moved F04's witness onto C32**, on the inference that *"an asteroid leaving
+range fits label rebuilds on map transitions"*. The sweep showed that inference
+is **false of Src**: there is no label rebuild on a map transition
+(`OnMsg.PostDoneMap` → `UIColony:ValidateLabels`, `Colony.lua:116-120`, purges
+only invalid objects). A witness assigned on a mechanism that has no code behind
+it is not assigned. **So the Steam thread now belongs to neither entry**, and
+both say so.
+
+**Why (i) was rejected, and this is the load-bearing part.** Restoring GOLD
+would mean asserting the thread *is* F04's — a positive attribution resting on
+1.0.6-era reports that this project has only read 1.0.7 source for. That is the
+**same claim the audit made, with the sign reversed, on the same evidence we do
+not have.** The sweep's finding is negative (C32 has no route in 1.0.7); a
+negative result about one mechanism is not positive evidence for the other.
+Taking GOLD back here would repeat the exact error being corrected — and the
+project's rule is to record the narrower true thing, never to round up.
+
+**Why (iii) was not chosen as the disposition.** Holding would leave the false
+attribution standing in the record while we wait. The attribution is wrong
+*today*, on evidence we already have, so it is corrected today. **The rider is
+not cancelled** — the corrected C32 row in `PLAYTEST_CHECKLIST.md` §6 is still
+queued, and a live observation remains the only thing that can move this to
+(i). This is (ii) **now**, with (iii) still open as the route to a different
+answer later.
+
+**Explicitly unchanged:** F04's defect claim (the shift-3 window arithmetic,
+standing on the shift-1/2 sibling tell), F04's `fixed` status, and
+`Fix_NightShiftWork.lua`. Nothing in this decision touches shipped code, and
+nothing in it re-litigates the defect.
 `Lua\Units\Colonist.lua:1758-1768` — `ShouldLeaveForWork` window for shift 3
 (`DefaultWorkshifts = {{6,14},{14,22},{22,6}}`, `_GameConst.lua:370`) evaluates as
 `hour >= 21 and hour <= 25`; hours 0-1 unreachable (hour is 0-23, no wrap). Shift-1/2 get a
@@ -6858,6 +6895,114 @@ legitimately qualifies today stops qualifying.*
 
 Cross-refs: **C24** (the candidate this promotes), **F72** (same function,
 opposite error, same module), `PlanetUI.lua:1623-1635` (the list that disagrees).
+
+### F95 — The Astrogeologist profile promises "Extractor production increased by 10%" and pays 10 of the 12 buildable extractors (P3, SOURCE-VERIFIED)  `[open — promoted from C38 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8]`
+
+**Defect.** `Data\CommanderProfilePreset.lua:329-390` — the `astrogeologist`
+profile's `effect` text is **unqualified**: *"<bullet> Extractor production
+increased by 10%"* (:333). It then enumerates exactly **ten**
+`Effect_ModifyLabel` entries (:336-385) and omits **`AutomaticMetalsExtractor`**
+(`production_per_day1`) and **`MicroGAutoWaterExtractor`** (`water_production`).
+Both are ordinary buildable extractors: `AutomaticMetalsExtractor` has no
+`hide_from_build_menu` and sits in `build_category = "MetalExtractors"`
+(`AutomaticMetalsExtractor.generated.lua:56`, `production_per_day1 = 12000` at
+:11); `MicroGAutoWaterExtractor` likewise has no hide flag and carries
+`water_production` through `object_class = "WaterExtractorBase"`.
+
+**⭐ The evidence that settles "oversight vs deliberate exclusion", and neither
+earlier sweep had it: there IS a shared `Extractors` label, the designers did
+NOT use it, and every building it would have added EXCEPT these two is
+explained.** Sixteen templates carry `label = "Extractors"`, enumerated this
+session:
+
+| carries `Extractors` | why the profile excludes it |
+|---|---|
+| ConcretePlant, MoholeMine, TheExcavator | **not extractors** — a plant and two wonders |
+| MicroGExtractor, MicroGAutoExtractor | **hidden legacy** — `hide_from_build_menu = true` (`MicroGExtractor.generated.lua:18`) |
+| the other 11 | paid, except `AutomaticMetalsExtractor` |
+
+Add `MicroGAutoWaterExtractor` (a buildable extractor that does **not** carry
+`Extractors`) and the count closes exactly: **12 buildable extractors, 10
+paid** — corroborating the C18 sweep's "10 of 12" independently. So the list is
+genuinely curated, and the curation rule is *"every buildable extractor, and
+nothing else"*. **There is no principled line that includes
+`MicroGExtractorExoticMinerals` and excludes `AutomaticMetalsExtractor`.**
+
+**Intent tell (§4 tell 4, self-contradiction).** An unqualified promise in the
+preset's own player-facing text against an enumeration in the same preset that
+does not deliver it. §4's ambiguity rule — *prefer the reading proven by sibling
+code in the same file* — reads on the other ten entries, and they say "all
+buildable extractors".
+
+**⚠️ The counter-reading, recorded rather than dismissed.** A designer *could*
+have excluded the Automatic Metals Extractor as a balance choice, and this is a
+commander-profile number rather than a broken mechanism. What defeats it here is
+that the exclusion set is otherwise fully explained by two principled rules, and
+a balance carve-out for exactly these two — one metals, one water, from
+different content sets — has no visible logic. **If the owner reads it the other
+way, this is the package to veto; nothing else depends on it.**
+
+**Reachability: R1 — trivially.** The profile is a start-of-game commander
+choice; `Effect_ModifyLabel` writes to the colony label container
+(`MarsGameEffects.lua:161-172`, and `City:AddToLabel` forwards to the colony
+first — `City.lua:83-86`, the corrected rule in `ENGINE_FACTS.md`). Any player
+who picks Astrogeologist and builds either building is short 10%.
+
+**Severity P3, deliberately.** It is a wrong number, but bounded: one commander
+profile, two buildings, 10%. Nothing compounds and nothing corrupts.
+
+## Fix spec (approved; build = chain prompt 8)
+
+**Technique: §1.1 data/preset patch — the top rung, additive.** Append **two**
+`Effect_ModifyLabel` entries to the `astrogeologist` profile:
+
+| Label | Prop | Percent |
+|---|---|---|
+| `AutomaticMetalsExtractor` | `production_per_day1` | 10 |
+| `MicroGAutoWaterExtractor` | `water_production` | 10 |
+
+⛔ **Construct them with `PlaceObj("Effect_ModifyLabel", {…})`, never
+`Effect_ModifyLabel:new{}`** — the F87 rule: apply-time code may not construct a
+class object, `PlaceObj` fails soft where `:new` throws. Install through
+`SMRFixPack.DataPatch` (latch/heal contract), and make the append **idempotent**
+by checking for an existing entry with the same `Label` first.
+
+**Rejected alternative, and why.** 6b's other suggestion — retarget the existing
+`WaterExtractor` entry at the shared `object_class` label `WaterExtractorBase`
+(both templates carry it: `WaterExtractor.generated.lua:9`,
+`MicroGAutoWaterExtractor.generated.lua:9`) — is neater but **wider**: it
+silently enrolls any future or mod-added template sharing that object_class, and
+it edits an entry that works today. Two additive entries change exactly the two
+buildings named and nothing else.
+
+**Existing saves need a heal.** Profile effects are applied at game start, so a
+save begun before this fix never got the two modifiers. Add a one-shot
+`OnMsg.LoadGame` pass: if the colony's commander profile is `astrogeologist` and
+the two label modifiers are absent, apply them the same way
+`Effect_ModifyLabel` does. **The builder reads `Effect_ModifyLabel`'s own
+`__exec` and reuses it rather than hand-rolling a `LabelModifier`** — that keeps
+the modifier id, scale and container identical to vanilla's, and makes the heal
+idempotent for free.
+
+**§3a: nothing enters the save that is ours.** A preset-array append plus a
+synchronous load-time pass that calls vanilla's own effect. No thread, no mod
+field, no wrapper frame.
+
+**Probe outline:** `AstrogeologistExtractors` — assert the profile carries an
+`Effect_ModifyLabel` for each of the **12** buildable extractor labels, derived
+by scanning `BuildingTemplates` for extractors rather than by hardcoding the
+list, so the probe also catches a future template arriving unpaid.
+
+**Intent statement for the header:** *the profile's own text promises extractor
+production without qualification, and its enumeration covers every buildable
+extractor except two. We add the two. We do not touch the percentage, the other
+ten entries, or any building the profile deliberately leaves out.*
+
+Cross-refs: **C38** (the candidate this promotes), **C18** (`wontfix — intent`;
+this profile was its positive control, and the control turned out to have this
+hole in it), F92 (the other label-shaped package from this prompt — a *wrong
+name*, where this is a *short list*), `ENGINE_FACTS.md` (the corrected label
+rules 6c wrote).
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
