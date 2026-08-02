@@ -310,6 +310,10 @@ return {
 		'CodeFileName', "Code/Fix_SaintBlessing.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_DustDevilsDescrMap",
+		'CodeFileName', "Code/Fix_DustDevilsDescrMap.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),
