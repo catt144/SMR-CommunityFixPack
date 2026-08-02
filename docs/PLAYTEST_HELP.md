@@ -203,6 +203,17 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
   the lines into a single command — e.g. `... --> nil` + `UIColony:Set...` came
   through as `--> nilUIColony:Set...`. Paste one command at a time. Write
   snippets in docs WITHOUT trailing comments so they stay paste-safe.
+- ⛔ **`ConsolePrint` takes exactly ONE argument, and it must be a string**
+  (`CommonLua\LuaExportedDocs\Global\LuaSharedLib.lua:7` — a native binding,
+  `function ConsolePrint(text)`). **A multi-argument call, or one passing a
+  number, prints NOTHING AND REPORTS NO ERROR.** Found the hard way 2026-08-02
+  (PT-61): a setup-confirmation line passing eight numbers produced pure silence
+  and read as a console that had stopped responding. Wrap the values in
+  **`print_format(...)`** (`CommonLua\Core\lib.lua:95`) — which is exactly what
+  the console's own expression rule does — or concatenate into one string
+  yourself:
+  `*r local p = … ConsolePrint(print_format(p.a, p.b, p.c))` ✅
+  `*r local p = … ConsolePrint(p.a, p.b, p.c)` ⛔ silent no-op
 - **Prefer a bare expression over `*r ConsolePrint(...)` for a simple read.**
   Rule `{ "(.*)", "ConsolePrint(print_format(%s))" }` (`uiConsole.lua:363`)
   wraps ANY input that compiles as an expression, so typing
