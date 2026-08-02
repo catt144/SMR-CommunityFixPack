@@ -109,7 +109,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 · **SOURCE AUDIT RUN 2026-08-02 (prompt 6c): enumeration theory SURVIVES with an exact predicate — `traverse_dir = next_idx - start_idx` is never normalised to ±1 (`TrainTransport.lua:374`) off two `table.find` first-occurrence lookups (`:369,:372`) into a `route` array the file itself says can hold a station twice (`:389`, `EnumRouteTracks:273-282`); any stride ≠ ±1 hits a missing `link_edge` and HARD-RETURNS (`:417`), silently dropping the tail.** Explains **both** symptoms from one function (`Train.lua:882` = waits; `Station:GetReachableStations` `:222-231` = walks). ⛔ **Trigger NOT proven — CANNOT DETERMINE, stays `investigating`.** ⚠️ Corrects the old "direction from canonical orientation" suspicion (wrong — it is the magnitude, not the sign). Two fix-binding side finds: the function is **not re-entrant** (`:365,:386-390`) and `GetReachableStations` has no cross-track dedup. Checklist rider rewritten to discriminate waits-vs-walks + a one-way-hole test (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **tested 2026-08-01** — fixed 2026-07-29; rains half REWRITTEN 2026-08-01 (F86 Tier-1, layer-2 wrapper + version-stamped migration + C34 rider) and **verified live by Tier-1 legs 3+4**: a NATURAL collision re-rolled and rain returned, 'normal' migrated + stamped 1.0.1, C34 stale-ACTIVE healed through vanilla FinishRainProcedure, and the stranded-flag sweep cleared both with and without a reload while never touching a live warning. PT-54 triggers A+B+E absorbed (entry) |
-| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | **✅⭐ MECHANISM FOUND *AND MEASURED* 2026-08-02 — neither option the entry weighed.** **Live pair: `119999` real ms @5x and `120001` real ms @1x** (game ms 600000 vs 120000, exactly 5.000x) against a preset `Expiration = 120000` — real time constant to **2 ms** across a 5x speed change, and **the grid was left unrepaired in both legs and the notification vanished anyway**. The notification has **no removal path at all** (`SupplyGrid.lua:1626-1629` is the only reference to `PowerGridSplit`/`LifeSupportGridSplit` in the tree) and registers a **position**, not the grid — so a rejoin is not an input. It clears only by the preset's `Expiration = 120000` with `GameTime = false`, which `Notifications.lua:188-217` runs on a **REAL-TIME** thread → **2 real minutes regardless of game speed**. Sibling tell: `PowerLeak`/`LifeSupportLeak` under the same parents carry no `Expiration`. ⚠️ Symmetric half not in the original report: an **unrepaired** split also stops being reported after 2 real minutes. Nothing built — key-matching design question **routed to prompt 7**; checklist rider rewritten around the real-time prediction (entry) |
+| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | **✅⭐ MECHANISM FOUND *AND MEASURED* 2026-08-02 — neither option the entry weighed.** **Live pair: `119999` real ms @5x and `120001` real ms @1x** (game ms 600000 vs 120000, exactly 5.000x) against a preset `Expiration = 120000` — real time constant to **2 ms** across a 5x speed change, and **the grid was left unrepaired in both legs and the notification vanished anyway**. The notification has **no removal path at all** (`SupplyGrid.lua:1626-1629` is the only reference to `PowerGridSplit`/`LifeSupportGridSplit` in the tree) and registers a **position**, not the grid — so a rejoin is not an input. It clears only by the preset's `Expiration = 120000` with `GameTime = false`, which `Notifications.lua:188-217` runs on a **REAL-TIME** thread → **2 real minutes regardless of game speed**. Sibling tell: `PowerLeak`/`LifeSupportLeak` under the same parents carry no `Expiration`. ⚠️ Symmetric half not in the original report: an **unrepaired** split also stops being reported after 2 real minutes. ⛔ **CLOSED 2026-08-02 `wontfix — intent` (tier I) by the prompt-7 §4 package — and the P3-vs-P2 question is VOID because there is no defect to rank.** Both halves assumed a *state warning*; three controls say it is a **timed event announcement**: (1) real-time `Expiration` is the house style for the event family (`BreakthroughDiscovered`, `RPReceived`, `ResourcesReceived`, `ArriveAsteroid`, `ReconCenterDiscoveryGeneric` — all `GameTime = false`); (2) ⭐ it registers **the position where a player action split the grid**, while `PowerLeak`/`LifeSupportLeak` register the leaking **element** — the clearing discipline follows from what is registered, so the sibling tell dissolves; (3) it is **dismissable by default**, and a warning a click can silence is not a standing fault indicator (disaster presets set `Dismissable = false` explicitly). ⚠️ Counter-evidence recorded: `GameTime = false` sits **inert** on `PowerLeak`, so that flag is withdrawn as evidence of deliberate design (entry) |
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | todo — filed 2026-07-30; rover half DISPROVEN BY PLAY during PT-25; nothing built; text-patch design is a USER DECISION (localization tradeoff), bundled into the D10 build (chain prompt 9) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
@@ -123,6 +123,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F93 | The dust-devil scheduler reads its descriptor from the map the **player is looking at**, not the map it spawns on | P2 | SOURCE-VERIFIED | **open — promoted from C23 item 2 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** The thread pins `local map = MainMap` (`DustDevils.lua:198`) and uses it everywhere except in `GetDustDevilsDescr`, which takes no map and reads `CurrentMap.mapdata` twice (`:58-66`); the descriptor is **re-read every cycle** (`:234-238`), and `CurrentMap` is the camera's map (`ChangeCurrentMapSlot` → `SetCurrentMap`, `CommonLua\Core\map.lua:389-404`). Viewing the underground therefore either parks the surface scheduler a day at a time or hands it the **other map's intensity**. **R1**; all three callers are in that one thread. Fix = §1.4b global replacement, 7 lines, `CurrentMap` → `MainMap`; nothing enters the save. Siblings from the same bundle got different answers — see C23 (entry) |
 | F94 | An operator-precedence slip makes **any parked supply rocket** satisfy the asteroid-visit gate — the picker opens with no lander to pick | P3 | SOURCE-VERIFIED | **open — promoted from C24 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8, into the existing `Fix_AsteroidLanderAvailable` module.** `PlanetaryView.lua:439` — `and` binds tighter than `or`, so `IsKindOf(rocket, "LanderRocketBase")` qualifies only the first of three clauses. **R1**: `SupplyRocketBase` descends from `RocketBase` alone (`SupplyRocket.lua:1-3`) and parks in `WaitLaunchOrder` (`RocketBase.lua:643, :699`), which the detached clause accepts. The picker's own list keeps only non-pod `UniversalRocketBase` rockets (`PlanetUI.lua:1623-1635`), so it comes up empty. Tells: a guard that cannot fire, and the branch 3 lines above plus `EarthVisitPossible` both bracket the same idiom correctly. ⚠️ Repairing a false positive means owning the predicate — F72's chained delegation cannot survive, and its header says otherwise today (entry) |
 | F95 | The Astrogeologist profile promises an unqualified "Extractor production increased by 10%" and pays **10 of the 12** buildable extractors | P3 | SOURCE-VERIFIED | **open — promoted from C38 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** `CommanderProfilePreset.lua:333` (the promise), `:336-385` (ten `Effect_ModifyLabel` entries), omitting `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor` — both buildable, both carrying the modified prop. ⭐ **The list is curated by a rule these two satisfy**: the shared `Extractors` label exists (16 templates) and is deliberately unused because it would add 3 non-extractors and 2 `hide_from_build_menu` legacy templates — leaving these two as the only unexplained exclusions, and 12 buildable / 10 paid closes exactly. **R1.** Fix = two additive entries built with `PlaceObj` (F87 rule) + a load-time heal for existing saves. ⚠️ The counter-reading (a deliberate balance carve-out) is recorded on the entry — this is the package to veto if the owner reads it that way (entry) |
+| F96 | The St. Elmo's Fire sinkhole is the **only** mystery set-piece in the game a meteor can destroy | P3 | SOURCE-VERIFIED | **open — promoted from C21 and APPROVED 2026-08-02 (chain prompt 7 §4 package, pre-cleared); build routed to prompt 8.** `Sinkhole.generated.lua:1-24` carries neither `indestructible` nor `disasters_strike_immunity`; the meteor chain reaches `DestroyBuildingImmediate`, whose only guard is that flag (`Building.lua:1371-1374`). **Tell:** every other set-piece has it (Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly, BottomlessPit, AncientArtifact, DragonRocket, DropPod) and the property's help text names meteors (`Building.lua:209`). **R2.** Fix = **§1.1 preset patch**, one boolean, and its side effects were enumerated: the other two consumers are already-false paths for this template, so it changes exactly one behaviour. ⚠️ The soft-lock at `Mystery 11.generated.lua:146` stays **located, not proven** — and the package does not rest on it (entry) |
 | C01 | `BreakthroughOrder` reshuffled on every map load         | ?   | cand | investigate |
 | C02 | Cave-ins reported on asteroids — no Src code path found  | ?   | cand | runtime-check |
 | C03 | Research screen softlock; research progress can exceed 100% | ? | cand | investigate |
@@ -143,7 +144,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C18 | XenoExtraction tech skips now-native ex-DLC extractors   | ?   | **✅ CLOSED — `wontfix` (intent)** | swept 2026-08-02 (prompt 6b): label mechanism read (`Building.lua:413-424,:427-444` — a building carries only `class` + `object_class`, never a parent's); `AutomaticMetalsExtractor` carries `AutomaticMetalsExtractor`/`AutomaticMetalsExtractorBase` and is displayed as a **differently-named building**, so the tech's four-name description promises it nothing. **Positive control found: when this game means "every extractor" it enumerates all of them** (`CommanderProfilePreset.lua:336-385`, ten labels). No promise broken → declined under the §4 bar (entry) |
 | C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | **✅ CLOSED — declined, no defect in Relaunched** | swept 2026-08-02 (prompt 6b): the predicate is membership-only as charged, but it has **exactly two consumers** and the distance term lives at the consumer — `Dome.lua:256-259` gates it on `const.ColonistMinDistToIgnorePassage` (1200m, `_GameConst.lua:134`, *with* the design comment), and `Colonist.lua:1567` adds an 8-dome hop cap. Both escape branches are correct (open-air = safe outside; no shuttles = no alternative). The residual unbounded walk is the **no-passage** case, which is F52's deliberately-open half, not this. ⚠️ **Taking ChoGGi's OG shape would have narrowed F53's reachability test** (entry) |
 | C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | **MECHANISM LOCATED 2026-08-02 (prompt 6b), harm not sized** — the ONLY emitter of `Msg("SectorScanned")` is a **game-time thread that opens with `Sleep(10)`** (`Exploration.lua:88-104`, spawned `:276-280`), so nothing is counted while game time is stopped; probe scanning has no pause gate (`OverviewModeDialog.lua:468-482`). Source cannot say whether the increment is **deferred or lost** → one checklist observation written. **✅ OBSERVATION TAKEN 2026-08-02 (owner, live): DEFERRED, NOT LOST → CLOSED, `wontfix — no player-visible cost`.** Paused: no signal. Unpaused: the **"Sector scanned" voice-over fired**, and `QueueVoice` sits inside `AddHUDNotification` at `:103`, immediately before the `Msg` at `:104` — so the message provably fired on unpause. ⭐ Internal control in the same scan: the synchronous `NewAnomalies` card behaved differently from the `Sleep(10)`-deferred `SectorScanned`. ⚠️ 6b's "on-screen toast" wording was **corrected** — `SectorScanned` is a `HUDNotificationPreset` on `idOverview` with a voice line, **not a popup card** (entry) |
-| C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | **DESTRUCTION ROUTE VERIFIED 2026-08-02 (prompt 6b) — the soft-lock is LOCATED, not proven** → prompt 7. `Sinkhole` carries **neither** `indestructible` **nor** `disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`) and is the **only mystery set-piece in the game without the flag** — Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly all have it. A large meteor reaches `DestroyBuildingImmediate` → `DoneObject` (`Meteors.lua:817-825` → `Building.lua:1371-1393` → `Demolishable.lua:132-141`). Best soft-lock candidate is the **unguarded `_sinkhole:GetMap()`** at `Mystery 11.generated.lua:146`. ⭐ Anomalies are NOT at risk — checked and ruled out (entry) |
+| C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | **DESTRUCTION ROUTE VERIFIED 2026-08-02 (prompt 6b) — the soft-lock is LOCATED, not proven** → prompt 7. `Sinkhole` carries **neither** `indestructible` **nor** `disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`) and is the **only mystery set-piece in the game without the flag** — Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly all have it. A large meteor reaches `DestroyBuildingImmediate` → `DoneObject` (`Meteors.lua:817-825` → `Building.lua:1371-1393` → `Demolishable.lua:132-141`). Best soft-lock candidate is the **unguarded `_sinkhole:GetMap()`** at `Mystery 11.generated.lua:146`. ⭐ Anomalies are NOT at risk — checked and ruled out. **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F96`, approved, routed to prompt 8.** Tier **R2** (mystery + meteors on + a large meteor on that hex). It passes **without** the soft-lock: the tell is that every other set-piece has the flag and the flag's own help names meteors (`Building.lua:209`). ⭐ The flag was checked for side effects and has **exactly one** on this template — the other two consumers are already-false paths (`can_demolish`, `use_demolished_state`). The soft-lock stays **located, not proven**: whether `:GetMap()` on a destroyed object raises or yields nil is engine behaviour with no body in Src (entry) |
 | C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01 (fredware source recovered + read); **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F92`, fix approved and routed to prompt 8.** Tier derived this session: **R1**, and Saint is **not** a breakthrough trait (no `hidden_on_start`) — the routing note's "R2-ish?" is corrected. ⭐ Internal control found: **Empath** is the only other `modify_target = "dome colonists"` preset and it works, because its label needs no `GetTraitLabel`. Fix is a **§1.1 preset patch**, not a method touch (entry) |
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | **PARTLY promoted — 3 subjects, 3 answers** | VERIFIED vs Src 2026-08-01; **§4 run per sub-item 2026-08-02 (prompt 7).** **Item 2 → PASSED, filed `F93`** (R1: the descriptor comes from the camera's map, and the recorded "wedges in the retry" consequence was too narrow — the other branch silently adopts the viewed map's intensity). **Item 1 → defect confirmed and sharpened** (`count_max` unreachable whenever `spawn_chance < 100`; result can be 0 with `count_min` 1) **but the repair changes the dust-devil RATE, so the shape is an owner decision — nothing built.** **Item 3 → defect confirmed, DECLINED ON SHAPE** (F89's disposition): all four routes over-reach — `GenerateDustDevilIn` has 7 callers incl. the Crystals mystery, the marker sweep would hit `SA_SpawnDustDevilAtAnomaly`'s scripted markers, a loop reconstruction puts a sleeping mod thread in every save, and the descriptor is the shared preset table (entry) |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | **CLOSED — promoted** | VERIFIED vs Src 2026-08-01; **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F94`, approved, routed to prompt 8.** Tier derived this session: **R1, and wider than "ordinary rockets"** — `SupplyRocketBase.__parents = { "RocketBase" }` only, and `WaitLaunchOrder` is the landed-idle state of *every* supply/trade/refugee/aid/expedition rocket, so **one rocket parked on a pad opens the asteroid picker**. Second tell found: the branch 3 lines above and the sibling `EarthVisitPossible` both parenthesise the same idiom correctly. ⚠️ Fix must OWN the predicate — a post-wrapper cannot filter a false positive — so F72's advertised chaining is lost and its header needs updating (entry) |
@@ -4790,7 +4791,7 @@ or a loaded save) keep running the OLD body, so the fix needs a one-shot
 Cross-refs: F78 (same save, same report — this is the weather half), F02 (the
 meteor scheduler watchdog precedent for exactly this class of thread wedge).
 
-### F82 — Split power/life-support grid notification lingers ~a sol after the grid is rejoined (P3, med)  `[traced AND MEASURED 2026-08-02 (chain 6c) — there is NO removal path at all; it clears only on the preset's REAL-TIME `Expiration = 120000` (measured live: 119999 real ms @5x, 120001 @1x, game ms 600000 vs 120000, grid left unrepaired in both legs). Nothing built — the removal KEY is a design question (the notification is keyed by the break position) → routed to chain prompt 7, which also owns the P3-vs-P2 call now that the unreported-break half is observed]`
+### F82 — Split power/life-support grid notification lingers ~a sol after the grid is rejoined  `[⛔ CLOSED 2026-08-02 `wontfix — intent` (tier I) by the chain-prompt-7 §4 package — it is a TIMED EVENT ANNOUNCEMENT, not a state warning, and the timed clearing is the design. Traced AND MEASURED 2026-08-02 (chain 6c): no removal path exists, it clears on the preset's REAL-TIME `Expiration = 120000` (119999 real ms @5x, 120001 @1x, grid left unrepaired in both legs). The P3-vs-P2 severity question is VOID — no defect to rank. Nothing built; the measurement stands and produced the 5x speed-ceiling ENGINE_FACT]`
 **User observation (2026-07-29, live, while running the F78 storm repro):**
 "All notifications I have seen dismiss themselves after their issue is fixed,
 except for split power grids — they do dismiss eventually but it takes a MUCH
@@ -4932,6 +4933,72 @@ split" half may argue for P2.
 Related in kind (not in mechanism) to F81/F78, where a notification
 that is never removed gates whole systems — the recurring theme is that this
 codebase clears notifications from specific code paths rather than from state.
+
+## ⛔ §4 PACKAGE RUN 2026-08-02 (chain prompt 7) — CLOSING `wontfix — intent` (tier **I**). The severity question dissolves: this is not a defect.
+
+**The P3-vs-P2 call was routed here as a severity question. It does not survive
+the intent test, and answering the smaller question would have skipped the
+larger one.** Both halves of the complaint — the lingering one and the
+unreported one — rest on the same premise: that this is a **state warning** that
+ought to track whether the grid is split. The trace proved it is not, and three
+controls run this session say the timed clearing is the design.
+
+**Control 1 — a real-time `Expiration` is the house style for EVENT
+notifications, and there is a family of them.** `Data\NotificationPreset.lua`:
+`BreakthroughDiscovered` (150000), `RPReceived` (60000), `ResourcesReceived`
+(60000), `ArriveAsteroid` (150000), `ReconCenterDiscoveryGeneric` (120000) —
+**every one of them `GameTime = false`.** The split presets' two "explicit
+overrides" are not a lone pair of odd choices; they are how this file writes a
+timed announcement.
+
+**Control 2 — the decisive one: the clearing discipline follows from WHAT IS
+REGISTERED, and that dissolves the sibling tell.** Read in context, the add site
+is inside the disconnect pass and fires only when the walk actually produced a
+new grid: `if not no_notifications and not IsSwitch(element) and not
+is_construction and grid ~= new_grid and map == city_map then …
+AddObjectToNotification(self:GetPos(), …)` (`SupplyGrid.lua:1626-1629`). What it
+registers is **the position where a player action just split the grid** — a
+"look here" pointer for an event that has already happened. `PowerLeak` and
+`LifeSupportLeak` register the **leaking element itself**, an object with state,
+which is exactly why they can be — and are — cleared by state. **The two
+disciplines differ because the two things registered differ.** The sibling
+contradiction this entry leaned on is not a contradiction; it is two correct
+answers to two different questions.
+
+**Control 3 — a dismissable notification is not a standing state indicator.**
+`PowerGridSplit` does not set `Dismissable`, and it defaults to **`true`**
+(`NotificationPreset.lua:60-61`), so the player can click the warning away with
+the grid still split. A notification that a click can silence cannot be the
+colony's standing indicator for a live fault — and this project already recorded
+the contrast: disaster presets set `Dismissable = false` **explicitly** (F81).
+
+**⚠️ Counter-evidence, recorded rather than buried.** `GameTime = false` also
+sits on **`PowerLeak`** (`NotificationPreset.lua:715`) where it is **inert** —
+that preset has no `Expiration` for the flag to govern — and `LifeSupportLeak`
+lacks the flag entirely. So `GameTime = false` is **not** always a considered
+choice in this file, and the entry's reading of it as a deliberate paired
+override on the split presets is **withdrawn**. Control 1 (the event family) and
+Control 2 (position-vs-object) do not depend on it; Control 3 is independent of
+both.
+
+**So the disposition is tier I — intended behaviour — and neither half is
+repaired.** The colony announces *"your grid just split, here"* for two real
+minutes and then stops; the standing evidence of a split grid is where it has
+always been — the affected buildings' own states and the grid overlay. **The
+2026-07-29 observation was accurate and is now fully explained**: at 5× a
+two-real-minute alert spans 0.83 sols, which is why it read as a stuck
+notification. Nothing about that reading was wrong; the wrong part was the
+inference that a notification which outlives its cause must be failing to clear.
+
+**Nothing built. No fix. No severity flip** — the P3-vs-P2 question is void
+because there is no defect to rank. **The trace and the measurement are NOT
+wasted**: they are what made this decidable, and the 5× speed-ceiling correction
+they produced is now an `ENGINE_FACTS.md` entry that outlives this row.
+
+**What would reopen it:** evidence that the game intends a standing split
+indicator — e.g. a shipped UI element that reads split state and is empty, or a
+player report of a split grid going unnoticed *with* the buildings' own warnings
+suppressed. Neither exists today.
 
 ### F83 — Minimized story popups lose their callback across a save/load; First Asteroid silently withholds three promised prefabs (P2, PROVEN mechanism)  `[tested 2026-07-31 — Fix_FirstAsteroidPrefabs, shape (i) the load-time heal; PT-59 PASSED IN FULL, archived]`
 
@@ -7003,6 +7070,102 @@ this profile was its positive control, and the control turned out to have this
 hole in it), F92 (the other label-shaped package from this prompt — a *wrong
 name*, where this is a *short list*), `ENGINE_FACTS.md` (the corrected label
 rules 6c wrote).
+
+### F96 — The St. Elmo's Fire sinkhole is the only mystery set-piece in the game a meteor can destroy (P3, SOURCE-VERIFIED)  `[open — promoted from C21 and APPROVED 2026-08-02 by the chain-prompt-7 §4 package; spec below; build routed to chain prompt 8]`
+
+**Defect.** `Sinkhole` carries neither `indestructible` nor
+`disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`, re-read this
+session — the template sets `can_demolish = false`, `use_demolished_state =
+false`, `count_as_building = false`, and no destruction immunity at all). The
+prompt-6b sweep read the meteor chain end to end: a large meteor's query and
+filter both pass it (`Meteors.lua:405-409, :393-399`), the building branch
+excludes only Dome and ConstructionSite (`:817-825`), and
+`DestroyBuildingImmediate`'s **only** guard is the flag it does not have
+(`Building.lua:1371-1374`) → `DoneObject` (`Demolishable.lua:132-141`).
+
+**Intent tell (§4 tell 3, and it is the most lopsided one in this tracker).**
+Every other mystery set-piece carries `indestructible = true` — Crystals (big
+and small), BlackCubeMonolith, MirrorSphereBuilding, CaveOfWonders, JumboCave
+(and its ReinforcementStructure), ArkPod, MartianAssembly (and its Fake),
+BottomlessPit, AncientArtifact, DragonRocket, DropPod. And the property's own
+help text names the case: *"Specify if the building can be destroyed at all (by
+demolishing, by explosions, **by meteors**, etc)"* (`Building.lua:209`).
+**Sinkhole is the omission, not the rule.**
+
+**Reachability: R2 — conditional, derived this session.** Preconditions: the St.
+Elmo's Fire mystery running, meteors enabled (default; the "No Disasters" rule
+and terraforming both switch them off), and a **large** meteor landing on the
+sinkhole's hex. No mod, no console, no exotic state — but a specific coincidence,
+so R2 and not R1.
+
+**⚠️ What this package does NOT claim.** The **soft-lock is LOCATED, not
+proven**, and it stays that way. The best candidate is
+`Mystery 11.generated.lua:146` — `PlaceResourceStockpile_Delayed(_sinkholePos,
+_sinkhole:GetMap(), "Polymers", …)`, an unguarded method call on a persisted
+register inside the `choice_result == 1` reward branch. **Whether `:GetMap()` on
+a destroyed object raises or merely yields nil is engine behaviour with no body
+in Src** — and this project has seen the nil outcome before (F44's dead-element
+seed produced `map` nil, not a raise). So the honest statement is: *the reward
+branch touches an object that may no longer exist, with no `IsValid` guard*. The
+label-count gate at `:214` is the weaker route (the repeater keeps respawning
+until count > 9, `:689-704`) and is not led with. **Anomalies were checked and
+ruled out by 6b** — `SubsurfaceAnomaly` is not a Building and matches none of
+the meteor query's classes.
+
+**Why it passes anyway.** The defect claim does not depend on the soft-lock: a
+mystery set-piece the game uniformly protects is unprotected here, the player
+can lose it to a disaster, and at minimum the mystery's reward branch is left
+pointing at a dead object. §4a's test — *could a player be harmed?* — is
+answered by that alone. And the fix is one boolean.
+
+**Severity P3** because the proven harm is "the set-piece can vanish". If a
+stall is ever observed, this is P1 and the entry says so up front.
+
+## Fix spec (approved; build = chain prompt 8)
+
+**Technique: FIX_POLICY §1.1 — a data/preset patch. `indestructible = true` on
+Sinkhole, which is the flag the rest of the game already uses on set-pieces.**
+Install through `SMRFixPack.DataPatch` (the F87 rule; a plain
+`OnMsg.DataLoaded` is dead on the enable path). Patch **both**
+`BuildingTemplates.Sinkhole` and the `Sinkhole` class table, so that objects
+already placed in a save are covered too: an instance has no own
+`indestructible` field, so it reads the class default and the correction reaches
+existing saves with no sweep at all.
+
+**⭐ The flag was checked for side effects and has exactly one on this
+template.** All consumers of `indestructible` in `Lua\` were enumerated:
+* `Building.lua:1372` — `DestroyBuildingImmediate`'s guard. **This is the one we
+  want.**
+* `Building.lua:888` — the demolish predicate, `self.can_demolish and … and not
+  self.indestructible`. Sinkhole already has `can_demolish = false`; **no
+  change.**
+* `Building.lua:1458` — gated on `UseDemolishedState()`. Sinkhole sets
+  `use_demolished_state = false`; **no change.**
+* `Crystals.lua:584`, `Building.lua:1814` — runtime *clears* of the flag, on
+  other objects; unaffected.
+So the patch changes precisely one behaviour: a meteor can no longer delete the
+sinkhole. That is the whole defect and nothing else.
+
+**Note on the objection 6b raised** — that a flag change "alters vanilla data
+rather than patching a method". Under §1 that is the *preferred* direction, not
+a concern: a preset patch is rung 1 precisely because other mods then see the
+corrected value, and it puts nothing of ours in the save. The alternative — a
+wrapper on the meteor path — would be strictly worse on every axis and would
+have to re-decide, in our code, a question vanilla already answers with a flag.
+
+**Probe outline:** `SinkholeIndestructible` — assert
+`BuildingTemplates.Sinkhole.indestructible == true` and that the class default
+agrees; plus a live half asserting no `Sinkhole` instance carries an own-field
+override. Static, cheap, no repro needed.
+
+**Intent statement for the header:** *every mystery set-piece in this game is
+flagged indestructible and the flag's own help text names meteors; the sinkhole
+is the single omission. We set the flag the rest of the game sets. Nothing else
+about the mystery, the meteor, or the building changes.*
+
+Cross-refs: **C21** (the candidate this promotes), F31/F90 (the other
+disaster-reaches-where-it-should-not family), `Mystery 11.generated.lua:146`
+(the unguarded consumer, recorded but not claimed).
 
 ### D06 — Drone assignment has no cross-hub locality; far fleets claim near work (design, high)  `[built 2026-07-28: Code/Opt_DroneOverhaul.lua core v1 (opt-in, off by default, Mod Options toggle "Drone dispatch overhaul (experimental)"); FIRST MEASURED A/B 2026-07-29 — NULL RESULT for the claim gate, and it exposed why: see below; INSTRUMENT REBUILT v2 2026-07-29 (lifecycle tracing, TestKit). ⭐ **REBUILD DECIDED 2026-07-31 — v1 is being REPLACED; see the plan of record immediately below. 4 research gates owed; PT-52 (incl. the B2 re-run) is FROZEN pending invalidation — do NOT run it**]`
 *(Heading line restored by the popup-audit session 2026-07-30 — the F84 filing
