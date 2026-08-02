@@ -229,3 +229,31 @@ derivations lean on the audit's witness grades for these two, use §10.4 instead
 - **STATUS's index count was stale by two rows again** and has been re-derived
   by counting (now **102 rows = 90 F + 12 D**, plus **35 C**). If your packages
   file or close anything, re-derive it the same way rather than incrementing.
+
+---
+
+### From prompt 6b (2026-08-02) — the residual C-sweeps
+
+Full trails on every BUGS entry named here; the audit's running record is
+`BUG_LIST_AUDIT.md` §10.8.
+
+#### 6b-1. C38 — a NEW verified defect, filed by the C18 sweep, decision is yours
+
+**C18 itself is CLOSED `wontfix — intent`** (no promise broken; the label
+system is exact-string and the tech names its four buildings) — nothing for
+you there. But the intent question sent the sweep looking for a positive
+statement of what "all extractors" means to this game, and it found one that
+does not keep its own promise:
+
+**The Astrogeologist commander profile promises an unqualified "Extractor
+production increased by 10%" and enumerates ten labels, missing
+`AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor`** —
+`Data\CommanderProfilePreset.lua:333,:336-385`. Both are buildable, both carry
+the exact prop being modified, and the two hidden legacy templates are already
+excluded from the count (10 of 12, not 10 of 14).
+
+**Why it is yours and not built here:** the harm is a silent 10% shortfall on
+two buildings under one commander profile — verified, but small, and "repair
+the omission" vs "leave a balance number alone" is a §4 call. If it passes,
+the shape is data (two `Effect_ModifyLabel` entries, or moving the water entry
+to the shared `object_class` label `WaterExtractorBase`), not a code patch.

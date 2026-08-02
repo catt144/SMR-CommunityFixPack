@@ -135,7 +135,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C15 | Dust Sickness: Deaths morale penalty never applied       | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
 | C16 | Flying drones malfunctioning mid-air stuck "flying"      | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
 | C17 | The Man From Mars follow-up rewards nothing              | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
-| C18 | XenoExtraction tech skips now-native ex-DLC extractors   | ?   | cand | investigate — INTENT QUESTION (no promise broken) |
+| C18 | XenoExtraction tech skips now-native ex-DLC extractors   | ?   | **✅ CLOSED — `wontfix` (intent)** | swept 2026-08-02 (prompt 6b): label mechanism read (`Building.lua:413-424,:427-444` — a building carries only `class` + `object_class`, never a parent's); `AutomaticMetalsExtractor` carries `AutomaticMetalsExtractor`/`AutomaticMetalsExtractorBase` and is displayed as a **differently-named building**, so the tech's four-name description promises it nothing. **Positive control found: when this game means "every extractor" it enumerates all of them** (`CommanderProfilePreset.lua:336-385`, ten labels). No promise broken → declined under the §4 bar (entry) |
 | C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | cand | investigate — F52/F53-adjacent |
 | C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | investigate (ChoGGi prior art) |
 | C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | investigate (ChoGGi prior art) |
@@ -155,6 +155,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | ?   | cand | **DOWNGRADED 2026-08-01 (prompt-6 Src sweep): no route in current Src; his fix's firing explained by destroyed buildings; 1.0.7 killed the named trigger, not the mechanism — and F04's reassignment lost its positive evidence** |
 | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source) — needs F-row decision (entry) |
 | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — **ADOPTED as the Tier-1 rains-pass rider, BUILT 2026-08-01 into Fix_RainsDeadlock's migration pass (structure → FinishRainProcedure heal → migration; manual fallback for invalid values); VERIFIED live by Tier-1 leg 3 2026-08-01** — planted `g_RainDisaster="toxic"` with a dead main_thread, and on reload the log read `0:23:39 RainsDeadlock: stale-ACTIVE rain 'toxic' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)`, with `g_RainDisaster` false afterwards (entry) |
+| C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | ? | cand | filed 2026-08-02 by the C18 sweep — **VERIFIED vs Src**: `CommanderProfilePreset.lua:336-385` enumerates ten labels for an **unqualified** promise and omits `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor`, both currently buildable and both carrying the modified prop. Sibling tell is the enumeration itself. Not promoted — §4 decision is prompt 7's (entry) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -7321,6 +7322,35 @@ quotes verbatim; sources in the audit report §8.
   question, not a defect claim** — §4-amendment bar: needs a positive intent
   statement (does `AutomaticMetalsExtractor` carry the `MetalsExtractor`
   label players would expect?) before anything is written.
+  **✅ ANSWERED AND CLOSED 2026-08-02 (prompt 6b sweep) — `wontfix — intent`,
+  under the owner's blanket pre-clearance for recording this close.** The
+  checkable fact the entry asked for, settled from source:
+  - **The label mechanism is exact-string, never inherited.** A building
+    registers under `self.class`, `self.object_class` (only when it differs),
+    `default_label`, `label1..label5` and its build-menu categories —
+    `Building:SetCustomLabels` / `ApplyCustomLabels` (`Lua\Buildings\
+    Building.lua:370-425`) and `Building:AddToCityLabels` (`:427-444`);
+    the roster generator agrees (`GetCityLabelsForClass`, `:641-661`). **No
+    parent class ever contributes a label.**
+  - **So the answer is NO, and the reason is not a bug.**
+    `AutomaticMetalsExtractor` has `object_class =
+    "AutomaticMetalsExtractorBase"` (`Lua\BuildingTemplate\
+    AutomaticMetalsExtractor.generated.lua:9`), where `MetalsExtractor` has
+    `object_class = "MetalsExtractorBase"` (`MetalsExtractor.generated.lua:9`)
+    — **disjoint label sets, by construction**, and the building is displayed
+    as *"Automatic Metals Extractor"* (`:52`), a different building name from
+    the *"Metals Extractor"* the tech's description names.
+  - **The positive intent statement the §4 bar wanted exists, and it points
+    the same way.** When this game means *every* extractor it **enumerates
+    every extractor**: the Astrogeologist commander profile spends **ten**
+    `Effect_ModifyLabel` entries (`Data\CommanderProfilePreset.lua:336-385`)
+    where XenoExtraction spends four. Four labels for a four-name description
+    is a deliberate match, not an oversight.
+  **Verdict: no promise is broken; declined.** ChoGGi's OG extension was a
+  buff, not a repair. ⭐ **The sweep did turn up a real defect on the way —
+  but in the *other* preset: see `C38`** (the ten-label enumeration is missing
+  two extractors while promising all of them). That is where this candidate's
+  value actually was.
 - **C19 [author→Src-pointed] — `AreDomesConnectedWithPassage` has no distance
   term.** `Lua\Passage.lua:1109-1119` is pure network membership; ChoGGi's OG
   fix added a `ColonistMaxDomeWalkDist` check. F52 fixed the ≤400m vacuum
@@ -7817,6 +7847,50 @@ quotes verbatim; sources in the audit report §8.
   Payload, remove a resource that a drone is mid-delivery on, confirm — and
   watch whether that drone recovers or strands. Until that reading exists this
   stays a lead.
+- **C38 [VERIFIED vs Src 2026-08-02] — the Astrogeologist commander profile
+  promises "Extractor production increased by 10%" and pays it to 10 of the 12
+  buildable extractors.** Filed by the C18 sweep (prompt 6b), which went
+  looking for a *positive intent statement* about extractor label coverage and
+  found one that does not keep its own promise.
+  **The promise is unqualified.** `Data\CommanderProfilePreset.lua:333`:
+  *"<bullet> Extractor production increased by 10%"* — no building is named,
+  unlike XenoExtraction (C18), whose description names its four and pays
+  exactly those four.
+  **The payment is an enumeration of ten labels** (`:336-385`):
+  `WaterExtractor`, `MetalsExtractor`, `PreciousMetalsExtractor`,
+  `RegolithExtractor`, `MicroGExtractorMetals`, `MicroGExtractorRareMetals`,
+  `MicroGExtractorExoticMinerals`, `MicroGAutoExtractorMetals`,
+  `MicroGAutoExtractorRareMetals`, `MicroGAutoExtractorExoticMinerals`.
+  **The two it misses are both real, buildable, currently-shipping
+  extractors** — and since labels are exact-string with no inheritance
+  (`Building.lua:413-424,:427-444`, established under C18), each is simply
+  absent from the modifier:
+  - **`AutomaticMetalsExtractor`** — *"Automatic Metals Extractor"*,
+    `build_category = "MetalExtractors"` (a live build-menu subcategory,
+    `Data\BuildMenuSubcategory.lua:445-447`), `production_per_day1 = 12000`
+    (`Lua\BuildingTemplate\AutomaticMetalsExtractor.generated.lua:11,:52,:56`)
+    — the exact prop the ten entries modify.
+  - **`MicroGAutoWaterExtractor`** — *"Micro-G Water Extractor"*,
+    `build_category = "LifeSupport"`, and its own upgrades modify
+    `water_production` (`MicroGAutoWaterExtractor.generated.lua:21,:49,:53`) —
+    the exact prop the `WaterExtractor` entry modifies. It shares
+    `object_class = "WaterExtractorBase"` with `WaterExtractor` (`:9`), so a
+    one-word change of the existing entry's label would cover both.
+  **The sibling tell is the enumeration itself.** Ten entries hand-written in
+  one preset is the game demonstrating it knows the full extractor roster;
+  the two omissions are the two whose ids break the pattern the author was
+  working down (base four, then the six `MicroG*Extractor<Resource>`), which
+  is what an oversight looks like. Not a name-scoped promise like C18's.
+  **Excluded as candidates, deliberately:** `MicroGExtractor` and
+  `MicroGAutoExtractor` both carry `hide_from_build_menu = true`
+  (`MicroGExtractor.generated.lua:18`, `MicroGAutoExtractor.generated.lua:19`)
+  — legacy templates a player cannot build, so their absence is correct. The
+  count is 10 of 12, not 10 of 14.
+  **Not promoted.** Player-visible harm is a silent 10% shortfall on two
+  buildings for one commander profile — real but small, and the §4 call
+  (fix the omission vs. leave a balance number alone) is prompt 7's, not this
+  sweep's. **If it is built, the shape is two added `Effect_ModifyLabel`
+  entries or an `object_class`-level label, not a code patch.**
 
 ## Not yet swept (follow-up targets)
 
