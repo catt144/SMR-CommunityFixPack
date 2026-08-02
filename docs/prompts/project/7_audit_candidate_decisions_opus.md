@@ -257,3 +257,35 @@ two buildings under one commander profile — verified, but small, and "repair
 the omission" vs "leave a balance number alone" is a §4 call. If it passes,
 the shape is data (two `Effect_ModifyLabel` entries, or moving the water entry
 to the shared `object_class` label `WaterExtractorBase`), not a code patch.
+
+#### 6b-2. C21 (St. Elmo sinkholes) — destruction route VERIFIED, promoted to you
+
+The audit left this as "whether the meteor damage path can still hit them is
+unchecked". It is checked now and the answer is yes, end to end:
+
+Sinkhole carries neither `indestructible` nor `disasters_strike_immunity`
+(`Sinkhole.generated.lua:1-24`; both default false), a large meteor's query and
+filter both pass it (`Meteors.lua:405-409,:393-399`), the building branch
+excludes only Dome and ConstructionSite (`:817-825`), and
+`DestroyBuildingImmediate`'s only guard is the flag it does not have
+(`Building.lua:1371-1374`) -> `DoneObject` (`Demolishable.lua:132-141`).
+
+**The tell is as clean as this project gets:** every other mystery set-piece in
+the game carries `indestructible = true` - Crystals, Monolith, MirrorSphere,
+CaveOfWonders, JumboCave, ArkPod, MartianAssembly, BottomlessPit - and the
+property's own help text names meteors. Sinkhole is the only one missing it.
+
+**What you are deciding is the soft-lock, and it is LOCATED, not proven.**
+Best route is `Mystery 11.generated.lua:146`: `_sinkhole:GetMap()` with no
+`IsValid` guard, on a persisted register, on the Trigger sequence, in a window
+that stays open until the player scans the first anomaly. The label-count gate
+at `:214` is the weaker route because the repeater keeps respawning until
+count > 9 (`:689-704`) - say so if you package it, do not lead with it.
+
+**Ruled out, so you do not re-derive it:** the anomalies are safe.
+`SubsurfaceAnomaly` is not a Building and matches none of the meteor query's
+classes, so no scan stage can be broken by losing an anomaly.
+
+**Package shape if it passes §4:** the minimal repair is the flag the whole
+rest of the game already uses on set-pieces, not a wrapper on the meteor path.
+Weigh that a flag change alters vanilla data rather than patching a method.

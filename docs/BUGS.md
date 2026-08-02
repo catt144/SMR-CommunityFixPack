@@ -138,7 +138,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C18 | XenoExtraction tech skips now-native ex-DLC extractors   | ?   | **✅ CLOSED — `wontfix` (intent)** | swept 2026-08-02 (prompt 6b): label mechanism read (`Building.lua:413-424,:427-444` — a building carries only `class` + `object_class`, never a parent's); `AutomaticMetalsExtractor` carries `AutomaticMetalsExtractor`/`AutomaticMetalsExtractorBase` and is displayed as a **differently-named building**, so the tech's four-name description promises it nothing. **Positive control found: when this game means "every extractor" it enumerates all of them** (`CommanderProfilePreset.lua:336-385`, ten labels). No promise broken → declined under the §4 bar (entry) |
 | C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | **✅ CLOSED — declined, no defect in Relaunched** | swept 2026-08-02 (prompt 6b): the predicate is membership-only as charged, but it has **exactly two consumers** and the distance term lives at the consumer — `Dome.lua:256-259` gates it on `const.ColonistMinDistToIgnorePassage` (1200m, `_GameConst.lua:134`, *with* the design comment), and `Colonist.lua:1567` adds an 8-dome hop cap. Both escape branches are correct (open-air = safe outside; no shuttles = no alternative). The residual unbounded walk is the **no-passage** case, which is F52's deliberately-open half, not this. ⚠️ **Taking ChoGGi's OG shape would have narrowed F53's reachability test** (entry) |
 | C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | **MECHANISM LOCATED 2026-08-02 (prompt 6b), harm not sized** — the ONLY emitter of `Msg("SectorScanned")` is a **game-time thread that opens with `Sleep(10)`** (`Exploration.lua:88-104`, spawned `:276-280`), so nothing is counted while game time is stopped; probe scanning has no pause gate (`OverviewModeDialog.lua:468-482`). Source cannot say whether the increment is **deferred or lost** → ⭐ one checklist observation written, with the HUD toast as a free visible proxy (entry) |
-| C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | investigate (ChoGGi prior art) |
+| C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | **DESTRUCTION ROUTE VERIFIED 2026-08-02 (prompt 6b) — the soft-lock is LOCATED, not proven** → prompt 7. `Sinkhole` carries **neither** `indestructible` **nor** `disasters_strike_immunity` (`Sinkhole.generated.lua:1-24`) and is the **only mystery set-piece in the game without the flag** — Crystals, Monolith, MirrorSphere, CaveOfWonders, JumboCave, ArkPod, MartianAssembly all have it. A large meteor reaches `DestroyBuildingImmediate` → `DoneObject` (`Meteors.lua:817-825` → `Building.lua:1371-1393` → `Demolishable.lua:132-141`). Best soft-lock candidate is the **unguarded `_sinkhole:GetMap()`** at `Mystery 11.generated.lua:146`. ⭐ Anomalies are NOT at risk — checked and ruled out (entry) |
 | C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source recovered + read) |
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
@@ -7466,6 +7466,66 @@ quotes verbatim; sources in the audit report §8.
   soft locking the mystery."* Relaunched `Fireflies.lua:116` sets no
   `indestructible`; whether the meteor damage path can still hit them is
   unchecked. Distinct from F07/F15 (wisp math).
+  **⭐ SWEPT 2026-08-02 (prompt 6b): the meteor path CAN still hit them —
+  verified end to end — and the soft-lock has a located candidate that is not
+  the one anybody would have guessed. → routed to prompt 7 for the §4 call.**
+  **1. The sinkhole has neither protection the engine offers.** The `Sinkhole`
+  template (`Lua\BuildingTemplate\Sinkhole.generated.lua:1-24`) sets
+  `can_demolish = false`, `use_demolished_state = false`, `count_as_building =
+  false` — and **no `indestructible`** and **no `disasters_strike_immunity`**;
+  both default false (`Building.lua:209`, `:282`). `can_demolish` only gates
+  the *player's* demolish button (`Building.lua:888`); no disaster path reads
+  it.
+  **2. The full destruction chain, read this session.** `BaseMeteor:GetQuery`
+  fetches `"Building"` among its classes (`Lua\Meteors.lua:405-409`); the
+  filter rejects only in-dome objects, `disasters_strike_immunity` buildings,
+  parented objects and `TrackBase` (`:393-399`) — a sinkhole passes all four.
+  The **large**-meteor loop's building branch excludes only `Dome` and
+  `ConstructionSite` (`:817-825`) and calls `DestroyBuildingImmediate`, whose
+  **only** protection is `bld.indestructible` (`Building.lua:1371-1374`) →
+  `DoDemolish` → `use_demolished_state` false → **`DoneObject(self)`**
+  (`Demolishable.lua:132-141`). The object is deleted outright, so it also
+  leaves `MainCity.labels.Sinkhole`. The **small**-meteor loop reaches the
+  same object and calls `obj:SetMalfunction()` (`Meteors.lua:688-693`).
+  **3. ⭐ The sibling-contradiction tell is unusually clean: every other
+  mystery set-piece in the game is flagged, and only this one is not.**
+  `indestructible = true` on `CrystalsBig`/`CrystalsSmall` (Philosopher's
+  Stone), `BlackCubeMonolith`, `MirrorSphereBuilding`, `CaveOfWonders`,
+  `JumboCave`, `JumboCaveReinforcementStructure`, `AncientArtifact`, `ArkPod`,
+  `MartianAssembly`(`Fake`), `BottomlessPit` — grep of
+  `Lua\BuildingTemplate\`. The property's own help text names meteors
+  explicitly: *"Specify if the building can be destroyed at all (by
+  demolishing, by explosions, by meteors, etc)"* (`Building.lua:209`).
+  **4. The soft-lock: TWO routes located, neither proven — and the obvious
+  one is the weaker.**
+  - **(a) The unguarded object register, `Mystery 11.generated.lua:146`** —
+    `PlaceResourceStockpile_Delayed(_sinkholePos, _sinkhole:GetMap(),
+    "Polymers", polymers_reward, 0, true)`. `_sinkhole` is a **persisted
+    scenario register** (`:14,:23,:32`) holding the spawned sinkhole, and the
+    call has **no `IsValid` guard**. It runs after the player scans the first
+    anomaly (`:122-126`), so the entire scan window is exposure. If a meteor
+    deleted that sinkhole in the meantime this indexes a dead object — and the
+    line sits on the **Trigger sequence, the mystery's spine**. ⚠️ The same
+    line carries a vanilla-only hazard too: the placement cascade at
+    `:632-675` can leave `_sinkhole` **`false`** after four failed attempts,
+    and `false:GetMap()` is an unconditional Lua error.
+  - **(b) The label-count gate, `:214`** — `while not
+    (#MainCity.labels.Sinkhole > 2) do Sleep(...) end`, and destruction does
+    reduce that count. **But this one largely self-heals**, and the reason is
+    on the page: `Sinkhole Spawner: Repeater` re-runs the spawner every 1-2
+    sols and **only breaks when `#MainCity.labels.Sinkhole > 9`**
+    (`:689-704`), so while meteors eat sinkholes the spawner keeps replacing
+    them. A stall, not a lock — unless the repeater has already exited.
+  **5. ⭐ What is NOT at risk — checked, because it was the obvious guess and
+  it is wrong.** The anomalies survive. `SubsurfaceAnomaly` is not a
+  `Building` at all (`Lua\Buildings\Anomaly.lua:173-174`) and matches none of
+  the classes `BaseMeteor:GetQuery` asks for (`Meteors.lua:408`), so the
+  *"Wait Sinkhole N Scanned"* stages cannot be broken by a meteor removing
+  their anomaly. **The soft-lock cannot come from there.**
+  **Verdict: destruction route VERIFIED; harm LOCATED but UNPROVEN** — nobody
+  has watched a meteor land on a sinkhole, and ChoGGi's OG sentence is the
+  only witness. Route (a) is the one worth deciding on and it is cheap to make
+  safe. **Promoted to prompt 7 as a package.**
 - **C22 [VERIFIED 2026-08-01, source recovered] — the Saint trait's dome
   morale blessing has never worked: label-name mismatch.**
   `TraitPreset:AddDomeColonistsModifier`
