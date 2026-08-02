@@ -30,10 +30,19 @@ remediation 3.3). Session legs are append-only in
 > constraints that do not generalise, and sharing a prompt was degrading both.
 
 **Build state (authoritative counts — stated here and nowhere else):**
-`Code/` = **75 files** (66 `Fix_` + 7 `Opt_` + `00_Core` +
-`90_SaveSanitizer`) = **74 registered modules, 68 default-active** (the 6
+`Code/` = **80 files** (71 `Fix_` + 7 `Opt_` + `00_Core` +
+`90_SaveSanitizer`) = **79 registered modules, 73 default-active** (the 6
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
-registers active but is byte-vanilla until a dial leaves base). Pinned game
+registers active but is byte-vanilla until a dial leaves base).
+**Re-counted 2026-08-02 by chain prompt 8b** — `Select-String` for
+`SMRFixPack\.Register\(` over `Code/`, **minus the one false positive that
+count has always had to drop: `00_Core.lua`'s own `function
+SMRFixPack.Register(id, def)` definition line matches the same pattern.**
+Was 74/68; the batch added **five new modules** (`Fix_SaintBlessing`,
+`Fix_DustDevilsDescrMap`, `Fix_AstrogeologistExtractors`,
+`Fix_SinkholeIndestructible`, `Fix_DustStormUndergroundBreaks`) and **two fixes
+that needed no new module** (F91 amended `Fix_TrackSalvageWipe`, F94 landed
+inside `Fix_AsteroidLanderAvailable`). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
 **108 rows** (96 `F` + 12 `D`; **re-counted 2026-08-02 by chain prompt 7** —
 `Select-String` over the index block, not by hand, and not by incrementing:
@@ -152,13 +161,38 @@ Prompt 8 **split under rule 3**: `8b` carries the seven approved fixes
 out on its own scale call (Tier-1-scale work — a 14th §3a site, a sleeping
 game-time thread — on a P3 item) and **gated on 8b**, since F93 patches the same
 dust-devil subsystem.
-**TestKit probes: 78** (re-verified 2026-08-01 by counting
-`SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
-excluding the definition in `00_TestCore.lua`; **unchanged by the 2026-08-01
-teardown of `97_SaveHookProbe` — it was declared, never registered**, and the
-stale-probe sweep now returns **zero** hits in both repos). **74 registered
+**2026-08-02, chain prompt 8b — ALL SEVEN APPROVED FIXES ARE BUILT, one commit
+each, with seven probes and the batch leg specced. Nothing filed or closed, so
+row counts are unchanged and re-derived: 108 rows = 96 F + 12 D; 38 C.**
+**F91** (`a5b9db0`, amendment to `Fix_TrackSalvageWipe` — no new module; the
+`tested` module's A/B expectations are written on the entry BEFORE the leg),
+**F92** (`eb4c6d6`, `Fix_SaintBlessing`), **F93** (`b22dda5`,
+`Fix_DustDevilsDescrMap`), **F94** (`3966fb3`, inside
+`Fix_AsteroidLanderAvailable`), **F95** (`125783e`,
+`Fix_AstrogeologistExtractors`), **F96** (`08b5d84`,
+`Fix_SinkholeIndestructible`), **F90** (`b5628a7`,
+`Fix_DustStormUndergroundBreaks`). ⚠️ **Two gameplay changes that a morale or
+production reading must account for**: Saints now actually buff Religious
+colonists (+10 morale), and an Astrogeologist colony gains 10% on two extractor
+types. ⚠️ **F72 LOST AN ADVERTISED PROPERTY** — F94 turned that module's chained
+post-wrapper into a §1.4b body copy, because a wrapper cannot filter a false
+positive; **the module header, F72's BUGS entry, its heading tag and its index
+row were all corrected in the same commit** rather than left advertising the
+delegation. ⚠️ **EVERYTHING IN THIS BATCH IS UNRUN** — the leg is **PT-60**,
+attended, predictions **P1-P9 written before any run**, and it covers prompt 8's
+eight conversions too. Two live halves the probes deliberately do not claim went
+to the needs-eyes riders (F90's underground-break distribution, F93's map switch).
+**TestKit probes: 85** (78 + this batch's 7 — wave 8,
+`57_Probes_Wave8.lua`, TestKit `2ef64a4`). The 78 was re-verified 2026-08-01 by
+counting `SMRTest.Register(` across the TestKit's nine probe files:
+10+20+18+12+7+3+2+6, **excluding the definition line in `00_TestCore.lua`, which
+matches the same pattern and is the standing false positive in this count**;
+unchanged by the 2026-08-01 teardown of `97_SaveHookProbe` — it was declared,
+never registered — and the stale-probe sweep still returns **zero** hits in both
+repos. **79 registered
 modules** likewise re-verified
-(75 `SMRFixPack.Register(` occurrences minus the definition in `00_Core.lua`).
+(80 `SMRFixPack.Register(` occurrences minus the definition in `00_Core.lua` —
+it was 75 minus one before this batch).
 Counts moved 2026-07-31 with **PHASE 4 COMPLETE** (below).
 > ⭐ **2026-07-31 (live sitting) — ALL FOUR DRONE RESEARCH GATES ARE ANSWERED and
 > F83 is `tested`.** Nothing on the drone research side is owed. Full leg in

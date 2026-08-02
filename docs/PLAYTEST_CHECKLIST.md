@@ -1020,6 +1020,93 @@ constantly.)
    leg bounds the pack's uninstall behaviour on this save; it does not retire
    the Tier-3 residual, which stays accepted by owner decision.
 
+## PT-60 — The chain-8b batch leg · covers **F90-F96 AND prompt 8's eight unrun conversions** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 8b
+
+**One leg for the whole batch.** Two independent bodies of work land on it and
+neither has ever executed in a game:
+
+* **the seven approved fixes** — F90-F96, built 2026-08-02 (`a5b9db0`, `eb4c6d6`,
+  `b22dda5`, `3966fb3`, `125783e`, `08b5d84`, `b5628a7`);
+* **prompt 8's eight §5.4/package-0 conversions** — `69c02b9`, `26f0b57`,
+  `ab7d432`, `388c72a`, `21990fb`, `1471533`, `8f58f30`. ⚠️ **These are
+  technique-only changes carrying written byte-equivalence arguments, and an
+  argument is not an observation.** No converted module may be called verified
+  until this leg's numbers are quoted.
+
+**⛔ PT-00 first.** Sweep result at build time (`b5628a7` + TestKit `2ef64a4`):
+**CLEAN — zero `TEMPORARY` hits in both repos.** Re-run it at the keyboard
+anyway; that is the rule.
+
+**⚠️ Turn the loggers on AFTER every restart** (`SMRTest.Log.<name>(true)`) — a
+restart clears them.
+
+### ⚠️ Read this before taking any morale or production reading on this save
+
+**F92 changes real gameplay.** Saints now actually raise Religious colonists'
+morale by +10 in their dome, and the *"Blessed by a Saint"* line appears on those
+colonists — behaviour the game has always advertised and never delivered. **F95
+likewise adds 10% production to two extractor types** for an Astrogeologist
+colony, applied at load on an existing save. Neither is a balance change, but a
+morale or production A/B taken across this leg that does not account for them
+will read them as drift.
+
+### ⭐ PREDICTIONS — written 2026-08-02, BEFORE the leg runs
+
+Record the reading against each one. **A prediction that misses is the finding.**
+The counts below are derived, not inherited: 74 registered modules before this
+batch, `+5` new files (F91 and F94 landed inside modules that already existed),
+6 opt-in modules unchanged.
+
+| # | prediction | what a miss means |
+|---|---|---|
+| **P1** | `*r SMRTest.RunAll()` with the pack ON prints **`fix pack present: 73/79 fixes active`** | a module failed its self-check, or the count arithmetic is wrong — either way, read the `ListFixes()` detail string before anything else |
+| **P2** | `SMRFixPack.ListFixes()`: the **five new modules** — `SaintBlessing`, `DustDevilsDescrMap`, `AstrogeologistExtractors`, `SinkholeIndestructible`, `DustStormUndergroundBreaks` — all report **`active`** with an empty detail | a self-check is targeting the wrong class, or a preset pass latched |
+| **P3** | same list: **all eight conversions' modules report `active`** — `SmallLandscapeSites`, `NightShiftWork`, `GeneForging`, `ShuttleHubOffAvailable`, `UpgradeModifierLeak`, `SequenceLatents` (F29 items 1+3), `DroneTransportMinors` (F57(a)) | a conversion's new self-check or `SetGlobal` read-back is failing where the old §1.5 copy did not |
+| **P4** | the **seven new probes** all **PASS**: `TrackShellLeak`, `SaintBlessing`, `DustDevilsDescrMap`, `AsteroidVisitPrecedence`, `AstrogeologistExtractors`, `SinkholeIndestructible`, `DustStormBreakMapFilter`. Probe total is **85** (78 + 7) | read each failure message — every one of them names the specific mechanism it drove |
+| **P5** | **no probe that passed before this batch now fails.** The two at risk are `AsteroidLanderAvailable` (F94 rewrote the body it drives) and any probe touching `Fix_TrackSalvageWipe` | F94's brackets narrowed the wrong clause, or F91's deletion reached a path it should not |
+| **P6** | whole-session play with the pack ON: **zero `[LUA ERROR]` lines naming any of the five new files**, and **zero naming any of the seven converted modules' files** | this is the whole point of the leg for the conversions — a technique change that throws on a live path a fixture cannot reach |
+| **P7** | **the conversions produce no visible behaviour change at all.** Night shifts, gene forging, shuttle-hub availability, landscaping sites, upgrade modifiers, sequence latents and rocket refuelling all behave as they did before `69c02b9` | a byte-equivalence argument was wrong; the module and the argument both go back to prompt 12 |
+| **P8** | on a save that predates this batch, the load logs **at most one line each** from `TrackSalvageWipe` (shell heal), `SaintBlessing` (re-base) and `AstrogeologistExtractors` (bonus heal) — and a **second load of the same save logs none of them** | a heal is not idempotent, which is the one property all three were designed around |
+| **P9** | `SMRFixPack_rocket_fuel_key` is **absent** from `DroneControl` after one load-and-save (`8f58f30` clears it, including from saves that already carry it) | the field-removal half of F57(a)'s conversion did not run |
+
+**Not predicted, and deliberately so:** the exact PASS/SKIP split of the whole
+suite. It moves with what the save contains (several probes SKIP without a
+suitable colony) and with the retail sandbox's eight standing `[install]` SKIPs.
+Quote the header line and the seven new verdicts; do not chase a total.
+
+### What this leg does NOT cover
+
+* **F90's live half.** The defect is a *victim distribution*, not a single
+  event, so "no underground break happened this session" proves nothing. The
+  honest test is the checklist rider: after a surface dust storm on an elevator
+  colony, **zero new `PowerLeak`/`LifeSupportLeak` notifications on the
+  underground map**. The probe covers the filter itself.
+* **F93's live half.** Needs a deliberate map switch — see the rider.
+* **F96 in play.** R2 needs a large meteor to land on the sinkhole's hex during
+  St. Elmo's Fire. The probe asserts the flag; nobody should wait for the
+  coincidence.
+* **A general Tier-3 uninstall clearance.** F90 adds a wrapper on a method the
+  city's hourly game-time thread calls, but the call is **synchronous with no
+  yield inside it** (traced end to end on the F90 entry), so it adds no §3a
+  route-(a) exposure and this leg is not a save-safety leg. If the session ends
+  with an uninstall read anyway, it is a bonus observation, not the verdict.
+
+### Steps
+
+1. **PT-00 sweep.** Then load a save that predates this batch with the pack
+   enabled — that is what makes **P8** and **P9** readable at all. Note the log
+   lines from the three heals immediately.
+2. `*r SMRTest.RunAll()` → read **P1, P2, P4, P5** off the output.
+   `SMRFixPack.ListFixes()` → read **P3**.
+3. Play ~15-20 minutes of ordinary colony. Watch for **P6** and **P7**. If the
+   save has an elevator and a dust storm arrives, take the F90 rider reading.
+4. Save, load the same save again, and confirm **P8**'s second half: none of the
+   three heal lines reappears.
+5. ⛔ **Report every unexplained log line with its age.** The logs span hours of
+   ordinary play, "not caused by our leg" is an attribution verdict and not a
+   dismissal, and every previous pushback on one of these lines has turned up a
+   vanilla defect that was not on our list (WORKFLOW.md).
+
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
 
 The pack must never hold a save hostage.
@@ -1243,3 +1330,15 @@ taken; row struck through below, full record on BUGS.md F35).
 | **C20 pause-scan observation** ✅ **DONE 2026-08-02 — VERDICT: DEFERRED, NOT LOST; C20 CLOSED** | **Result, kept for the record.** Paused, probe deployed on an unexplored sector: **no `SectorScanned` signal**. On unpause: the **"Sector scanned" voice-over fired**, which proves the `Msg` fired, because `QueueVoice` sits inside `AddHUDNotification` (`HUDNotifications.lua:33-36`) at `Exploration.lua:103`, immediately before `Msg` at `:104`. ⭐ **Internal control, timing confirmed by the observer**: `NewAnomalies` appeared **before** the unpause (synchronous `NotificationPreset`, `Anomaly.lua:444`), `SectorScanned` fired **the instant the game unpaused and not before**. One scan, two notifications, split exactly on the pause boundary — which also proves the scan itself executed under pause and rules out the rival reading that the probe simply never deployed. ⚠️ **This row's original wording was WRONG and cost the observer a step**: it said watch for an "on-screen toast". `SectorScanned` is a **`HUDNotificationPreset`** (`Data\HUDNotificationPreset.lua:55-61`, `button_id = "idOverview"`) — it badges the Overview button and plays a voice line, **there is no popup card**. ⚠️ If anyone ever re-runs the save/reload variant, read `IsHUDNotificationShown("SectorScanned")` and **not** the voice: `QueueVoice` is rate-limited at `const.NotificationVoiceCooldown` = **120 real seconds** per id, so a repeat inside two minutes is silently absent and reads as a false "lost"
 | **F82 timing observation** ✅ **DONE 2026-08-02 — PASSED; MECHANISM PROVEN BY MEASUREMENT** | **Result.** Run on a No-Disasters save so nothing but the player could break a cable. A console watcher on `FindNotification("PowerGridSplit", CurrentMap)` timed both clocks, grid left **unrepaired** in both legs: **`119999` real ms / `600000` game ms at 5x**, and **`120001` real ms / `120000` game ms at 1x**. Against a preset `Expiration = 120000`: **real time constant to within 2 ms across a 5x speed change, game time varying by exactly 5.000x.** ⭐ Both legs left the split **unrepaired and the notification vanished anyway**, so the symmetric half — the colony stops reporting a break that is still there — is measured, not inferred. ⚠️ Method notes for any re-run: **do not click the notification** (`PowerGridSplit` does not set `Dismissable`, which defaults to `true`, so a click ends the measurement), and **stay on the map you cut on** (the preset is `PerMap`)
 | **C26 stranded-maintenance dump** ✅ **DONE 2026-08-02 — BOTH READINGS CLEAN; C26 CLOSED** | **Result, kept for the record.** Two **independent** colonies (`save_game_id` compared in the log, not assumed): **`10 / 0`** at sol 288 and **`2 / 0`** at sol 59 (~50 of those sols organic pre-playtest). Zero reason lines in both. ⭐ **Non-zero controls in both** — 10 and 2 buildings genuinely in maintenance/malfunction — which is what makes the zeros readable; a `0 / 0` could not be told apart from a query matching nothing. ⭐ **Masking condition checked before trusting either**: both vendor fixups run *at load*, so on a pre-fixup save a clean dump would mean “they just healed it”. Both colonies returned `OrigLuaRev` = `LuaRevision` = 396349, so the fixups were pre-seeded and never ran. ⚠️ **A false reading 2 was caught and discarded** — a 98-sol save that turned out to share `save_game_id` with the 288-sol one, i.e. the same playthrough earlier. **Always compare the id before counting a dump.** ⚠️ Both were taken **cold**, within a minute of load, deliberately overriding the 20-30 min warm-up default for comparability
+
+### From the chain-8b build — two live halves the probes deliberately do not claim
+
+**Added 2026-08-02 by chain prompt 8b.** Both fixes are probed for their
+*mechanism*; these two riders are the parts a script cannot honestly assert. They
+are cheap and opportunistic — no sitting of their own — and PT-60 says so rather
+than pretending its probe result covers them.
+
+| Subject | The one observation, and what it decides |
+|---|---|
+| **F90 underground-break rider** ⭐ **ADDED 2026-08-02 — take it the first time a dust storm arrives on a colony that has an elevator** | **Why a rider and not a probe: the defect is a VICTIM DISTRIBUTION, not a single event.** "No underground break happened this session" is what an unfixed game looks like most sessions too, so a one-shot in-play check cannot discriminate; the probe covers the filter itself (it asserts what vanilla's body was handed). **Preconditions that must all hold or the reading is void:** underground unlocked, **at least one elevator built** (that is what merges the grids — without it there is nothing cross-map and the fix's fast path returns untouched), a surface dust storm running, and the merged fragment holding **more than 10 connectors** (`IsBreakable`, `SupplyGrid.lua:693-697`). **The read:** while the storm runs and for a while after, **zero NEW `PowerLeak` / `LifeSupportLeak` notifications on the UNDERGROUND map**. ⚠️ **Exclude cave-ins before counting anything** — marsquakes and `CaveInRubble` break underground elements *on purpose* (`CaveInRubble.lua:158` is one of `:Break()`'s eight call sites), and that is exactly why the cheaper `Break`-interception fix was rejected as unsound. A leak that follows a cave-in is not evidence. **Non-zero underground leaks during a surface-only storm = the filter is not holding.** ⚠️ **Known residual, do not file it as a miss:** surface cables on an elevator colony still break somewhat MORE often than on a non-elevator colony — the break *probability* counts `#self.elements` and stays cross-map by decision. Full reasoning: BUGS F90 |
+| **F93 dust-devil map rider** ⭐ **ADDED 2026-08-02 — needs a deliberate map switch, ~2 minutes** | **Why a rider: the probe drives the getter with stand-in maps, which proves the read follows `MainMap` but not that the live scheduler benefits.** **The read:** with the camera on the **underground** map, `*r local d = GetDustDevilsDescr() ConsolePrint(d and (d.id or "descriptor with no id") or "NIL — the scheduler would park a day at a time")`, then switch to the surface and repeat. **The two must agree.** ⭐ **The strong version costs nothing extra**: do it on a map pair whose dust-devil settings actually DIFFER, or with the underground set to `disabled` — that is the case where vanilla returns `nil` and the surface scheduler stops producing dust devils a day at a time until the player looks back at the surface. A matching pair on two identically-configured maps proves much less; say which case was taken. Decides nothing on its own (the defect is source-verified and the fix is a 7-line copy) — it confirms the live path, and a **disagreement** would mean the replacement is not the function the scheduler calls. Full reasoning: BUGS F93 |
