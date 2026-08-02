@@ -63,6 +63,28 @@ recorded CANNOT DETERMINE** (the engine ships two savegame heals for exactly
 that state but they are new-game-gated, and no producer exists in current Src).
 That leaves **C26 as the only unresolved SkiRich candidate**, and its next step
 is a console dump on a loaded save, not a source read.
+**Same day, owner at the keyboard — one more C row closed and one live-evidence
+find, counts still unchanged (90 F + 12 D = 102; 38 C):**
+**C20 CLOSED `wontfix — no player-visible cost`** — the pause-scan observation
+was taken and read **DEFERRED, NOT LOST**: paused, the scan landed with no
+`SectorScanned` signal; on unpause the voice-over fired, and `QueueVoice` sits
+inside `AddHUDNotification` immediately before the `Msg`. ⭐ Free internal
+control in the same scan — `NewAnomalies` appeared *before* the unpause and
+`SectorScanned` the instant after, proving the scan executed under pause while
+the message did not fire. ⚠️ 6b's "on-screen toast" wording was **corrected**
+(it is a `HUDNotificationPreset` on `idOverview` with a voice line, not a popup
+card) — it had sent the observer looking for something that does not exist.
+**C26 got its first clean live dump** (`10 … 0 structurally broken`, sol 288)
+and its **vintage is now settled by two agreeing mechanisms**; a second dump
+the same sitting turned out to be the **same lineage** and does not count, so
+C26 stays open pending one dump from a different `save_game_id`.
+⭐ **F78 and F81(a) were caught occurring ORGANICALLY** on a 98-sol save during
+that sitting (log `Mars.exe-20260802-01.31.10:252,:269-272`) — a live storm
+wedge with 7 stray meteor objects, and a live stranded `DisasterMeteorStorm`
+flag, both healed on load. First non-fixture occurrence of either; recorded on
+both entries with the qualifier that the save was written under pack
+`v0.00-001`. **No status flips earned** — both are already `tested`, and this is
+reachability evidence, not new verification.
 ⚠️ Prompt 6's own handoff note said "35 C"; counting says otherwise — the C
 line drifts exactly like the 102 does, so re-derive it too). **TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
