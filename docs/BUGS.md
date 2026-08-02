@@ -36,7 +36,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F18 | Independence terraforming tech gives 10% not 20%         | P2  | med  | fixed — index row corrected 2026-08-01 (was `fixed*`; the open half closed 2026-07-26, entry) |
 | F19 | Graphs "Consumed" caption omits maintenance              | P2  | med+ | tested — PT-43 PASS 2026-07-28 (entry) |
 | F20 | Morale tooltip shows unapplied +Comfort bonus            | P2  | high | tested — PT-43 PASS 2026-07-28 (entry) |
-| F21 | Train travel-time penalty includes station waiting       | P2  | med  | tested — PT-43 PASS 2026-07-28 (entry) |
+| F21 | Train travel-time penalty includes station waiting       | P2  | med  | fixed — was `tested`; F86 Tier-2 rewrite retired the body PT-43 exercised (entry) |
 | F22 | `GetGridGlobalStorage` breaks Last Transmission gates    | P2  | med  | fixed  |
 | F23 | Founder-gains-trait notification never fires             | P3  | high | tested |
 | F24 | Dome pipe visuals corrupt on load (`MoveInside` typo)    | P3  | med  | wontfix — unreachable in vanilla, fix deleted 2026-07-30 (entry) |
@@ -666,7 +666,7 @@ penalty row is untouched, no other stat is affected, the override is removed in 
 call under `pcall`, nothing in the builder yields, and only Morale tooltips are wrapped.
 Probe: `MoraleComfortTooltip` in `40_Probes_Wave4.lua`. Playtest: PT-43.
 
-### F21 — Train travel-time penalty includes station waiting  `[tested: Code/Fix_TrainWaitTime.lua — PT-43 F21 read PASS 2026-07-28: a 17+ hour platform wait produced ZERO travel Comfort entries; a migrant with a 16-hour total trip arrived at Comfort 99 (vanilla would have billed ~-16); the train's "Travel time (rolling average)" read 4.15 hours against riders with 16-17h queue-inclusive trips — the stats and the penalty both exclude waiting, one shared start_wait mechanism verified end-to-end. Setup detour surfaced F79 + F80 (entries)]`
+### F21 — Train travel-time penalty includes station waiting  `[fixed: Code/Fix_TrainWaitTime.lua — ⚠️ DOWNGRADED FROM `tested` 2026-08-01: the F86 Tier-2 rewrite replaced the mechanism PT-43 exercised, so the pass below is evidence about a body that no longer ships. Re-flip only on a leg run against the wrapper. Prior reading, kept for the record — PT-43 F21 read PASS 2026-07-28: a 17+ hour platform wait produced ZERO travel Comfort entries; a migrant with a 16-hour total trip arrived at Comfort 99 (vanilla would have billed ~-16); the train's "Travel time (rolling average)" read 4.15 hours against riders with 16-17h queue-inclusive trips — the stats and the penalty both exclude waiting, one shared start_wait mechanism verified end-to-end. Setup detour surfaced F79 + F80 (entries)]`
 `Lua\Units\ColonistTransport.lua:493,511,551-569` — `ticket.start_wait` set on reaching
 platform, never reset at boarding; Comfort "travel time" penalty and train/track
 "spent time" stats (TransportStatistics.lua:31-45) count waiting (double-counted vs
@@ -674,15 +674,40 @@ station stat). *(QA audit 2026-07-25 struck the "partially bypasses LuxuriousTra
 claim — the tech gates the ENTIRE ChangeComfort at :555-557, so nothing bypasses it;
 post-research the comfort half is simply moot.)* **Fix:** reset
 `transport_ticket.start_wait = GameTime()` at boarding.
-*Implemented as a full replacement, not a wrapper, because no wrapper can run in
+~~*Implemented as a full replacement, not a wrapper, because no wrapper can run in
 time:* `Colonist:BoardVehicle` (`:503-528`) is issued as a command
 (`Train.lua:967`) and the ride ends with `SetCommand("ExitVehicle")` killing the
 thread inside the blocking loop — a post-wrapper would never run at all (the
 command-method rule), and a pre-wrapper would erase the wait before `:511` credits
-it to the station. The copy is byte-identical except the one added line, placed immediately after the
-station is paid, so the station keeps the full wait and only the boundary between "waiting"
-and "travelling" moves to where the colonist actually boards.
-Probe: `TrainWaitTime` in `40_Probes_Wave4.lua`. Playtest: PT-43.
+it to the station.~~ **That reasoning was right about `BoardVehicle` and wrong about the
+repair: it only ever asked whether `BoardVehicle` itself could be wrapped.** It cannot;
+nothing here needed it to be.
+Only the boundary between "waiting" and "travelling" moves to where the colonist actually
+boards — the station keeps the full wait either way.
+
+**⭐ F86 TIER-2 REWRITE, 2026-08-01 — the restamp moves onto a synchronous input.**
+`Colonist:BoardVehicle` blocks for the whole journey (`PlayPrg` inside
+`while self.holder == vehicle`, `:525-527`), so a copy of it is F86 exposure route (a),
+REPLACE-class. What the restamp actually needs is the MOMENT, and vanilla marks that moment
+itself: `:511` calls `TransportStatistics:AddSpentTime` on the station — the line that pays
+the station for the wait, immediately before the ride starts. That method is **verified
+synchronous** (`TransportStatistics.lua:31-37`: `#`, `table.remove`, `table.insert`,
+arithmetic; `tools/blocking_analysis.py` reports it `clear`), and its call sites are
+enumerated: exactly three in the shipped source, `:511` on a **Station**, `:568` on the
+Train, `:569` on the TrainTrack. `IsKindOf(self, "Station")` therefore keys the boarding
+moment precisely and cannot reach the statistics calls. The boarding colonist is identified
+exactly rather than guessed — `BoardVehicle` is a command (`Train.lua:967`), so it runs on
+that colonist's own thread and the colonist is still in `station.waiting_for_train` at
+`:511` (removed later, in the destructor at `:517`); one scan for
+`command_thread == CurrentThread()` finds them, and no two objects can share a command
+thread. Disclosed narrowing: the restamp now happens only where vanilla credits a Station
+(`self.holder` truthy and a Station at `:510`) — every shipped boarding path gets there
+(`GoToStation` enters the station before joining `waiting_for_train`, `:447-455`), so the
+difference is unreachable in vanilla and fail-safe if a future path changes that.
+**Disposition (FIX_POLICY §3a per-site gate): REPAIRED IN-PACK — layer 3, no residue,
+nothing owed to D13.**
+Probe: `TrainWaitTime` in `40_Probes_Wave4.lua` — ⚠️ realigned 2026-08-01 with this rewrite.
+Playtest: PT-43.
 
 ### F22 — `GetGridGlobalStorage` breaks Last Transmission gates  `[fixed: Code/Fix_GridGlobalStorage.lua]`
 
