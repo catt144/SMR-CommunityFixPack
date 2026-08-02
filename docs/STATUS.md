@@ -259,10 +259,18 @@ shape for prompt 12's job-7 corpus.
 ⚠️ **Not claimed:** F90/F91/F96's preconditions were manufactured (a cheat-built
 elevator colony, a deliberately-salvaged track, a console-placed Sinkhole), so those
 are **fix verification, not reachability evidence** — the source enumerations still
-carry R1/R2. **F93 and F94 have no live reading at all**, and F93's rider is
-**impossible on a terraformed colony**: dust devils share the `Atmosphere` /
-`DustStormStop` gate with dust storms (`TerraformingDisasters.lua:34-52, :69`), so
-both F90's and F93's live riders need a colony below that threshold and stay open.
+carry R1/R2. ~~**F93 and F94 have no live reading at all**~~ ⭐ **F93's LIVE HALF IS
+CLOSED 2026-08-02 (PT-61, chain prompt 8c) — in the rider's STRONG form, and free.**
+The owner switched to the underground mid-leg of their own accord; that map read
+`MapSettings_DustDevils = "disabled"` while `MainMap` read `DustDevils_VeryHigh_3`,
+so unfixed this was the **nil** branch and every wave would have been postponed a
+sol at a time. Observed instead: seven consecutive descriptor reads returning the
+surface preset with the camera underground, and the wave cadence unbroken at its
+compressed 4-hour rhythm (sol 8 h11 → sol 9 h12). **F94 still has no live reading.**
+The colony was `Atmosphere 0`, which is why the rider was takeable at all — dust
+devils share the `Atmosphere` / `DustStormStop` gate with dust storms
+(`TerraformingDisasters.lua:34-52, :69`), so **F90's live rider still needs a
+colony below that threshold and stays open**.
 **TestKit probes: 86** (85 + chain prompt 8c's one — wave 9,
 `58_Probes_Wave9.lua`, TestKit `7733f79`, `DustDevilSpawnGate`; the same commit
 adds a `DustDevils` logger, which is not a probe and is not counted).
