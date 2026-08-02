@@ -665,10 +665,49 @@ the bodies reversed what the titles said** — which is the third time in one da
   *"I encountered the same problem on the newest version"* was posted the same
   day they closed their own identical report as user error. **So F06's Paradox
   corroboration is ONE OG report with a confound, not two reports.**
-- **`1495056`** (carrying **F16**) — the owner reports it *"looks like it might
-  have multiple confirmations"*. **Content not yet read; still title-grade.
-  Do not upgrade F16's citation until someone reads the bodies** — that is the
-  precise mistake this bullet exists to record.
+- **`1495056`** (carrying **F16**) — **READ 2026-08-02, AND IT VALIDATES.** The
+  opposite result to `1113731`, which is itself the point: reading bodies moves
+  citations in *both* directions. Homeshine (the same careful reporter as F74's
+  two reports), **Oct 18 2021, "Below and Beyond hotfix 4"**: *"After completing
+  the mystery of the spheres, the dialog never goes away for 'cold wave' and the
+  dialog for 'Sphere countdown: 101%' (why 101?)… I can cancel the mystery log,
+  but not these last two dialogs."* Save attached; *"Can you replicate the
+  issue? Yes. Complete the sphere mystery."*
+  **And it has three corroborators — across three DIFFERENT mysteries:**
+  shannley (*"Same Problem"*), **Candergart on "St. Elmo's Fire"** (*"The
+  dialogue 'Waiting final results' just stay on the screen forever, even if all
+  the research is done and I made my choice"*), and **omega telescope on "The
+  Last War"** (*"Same problem"*). **Grade: genuine, reproducible-by-author,
+  multiply witnessed — but OG-2021, so it corroborates the FAMILY, not the
+  Relaunched build.**
+
+**⭐ The cross-mystery pattern is worth more than the citation it arrived in, and
+it now has TWO independent OG threads.** `1495056` shows one completion-cleanup
+symptom across **Spheres, St. Elmo's Fire and The Last War**; `1112166` shows
+the same reporter hitting non-completion on **Philosopher's Stone and Spheres**
+in one build. Several mysteries failing to finish or to clean up points at
+**something shared upstream**, not at per-mystery data errors.
+**And this project has now PROVEN one instance of exactly that shape:** C36 —
+Inner Light stalls forever because its dream loop gates on
+`IsDisasterPredicted()`, the flag **F81(a)** strands permanently. **One global
+piece of state silently voided a whole mystery.**
+**The question that follows, recorded precisely because nobody owns it yet:**
+*do other mysteries gate on a global disaster/weather predicate the same way?*
+St. Elmo's Fire in particular is disaster-adjacent (`Fireflies.lua`, F07's
+file). **Cheap first check: grep the `Lua\Mysteries\` and `Lua\Scenario\` trees
+for `IsDisasterPredicted` / `IsDisasterActive` / `WaitCurrentDisaster` gates.**
+⚠️ **UNASSIGNED — not in any chain prompt's scope, and deliberately not routed
+by guesswork.** OG-era evidence only; the Relaunched-era mystery stalls in §10.5
+(cave mystery, network-nodes) are unverified hearsay. Owner's call whether it
+becomes work.
+
+**Also noted from `1495056`, not filed (OG-2021, single report, no mechanism):**
+Candergart tried deleting the mystery-linked building to clear the stuck
+notification and **broke notifications entirely** — *"After having saved and
+restarted the game, I no longer have any notifications at all, even if I can see
+in my bottom right corner that there should be (5) notifications on the mars
+surface and (2) below the surface."* A populated notification list that renders
+nothing is a state/UI desync; F82's neighbourhood, five years stale.
 
 **F06's and F16's defect claims are untouched by all of this.** Both stand on
 Src — for F06, a one-shot `Msg` with no re-broadcast and a `CrystalForceFlyAway`

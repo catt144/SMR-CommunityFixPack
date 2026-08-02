@@ -235,9 +235,18 @@ re-checking (`bug` / `fix` return zero hits; author search works).
    its only second witness is the person who retracted the other), so **F06's
    external support is one confounded OG report, not two**. Recorded in
    §10.4 and on the F06 entry; both defect claims stand on Src regardless.
-   **⚠️ STILL OPEN, and it is the same trap:** `1495056` (carrying **F16**) has
-   *not* had its bodies read — the owner's impression was "might have multiple
-   confirmations". **Read it before letting F16's citation stand or fall.**
+   **✅ AND `1495056` (F16) WAS READ TOO — it VALIDATES**, which is the useful
+   half of the lesson: reading bodies moves citations **both** ways. Genuine,
+   author-reproducible, **three corroborators across three different
+   mysteries** — but OG-2021, so it corroborates the family, not our build.
+   **`[S22]` is fully resolved; nothing owed here.**
+   **One lead came out of it and is deliberately UNASSIGNED** (§10.4): several
+   mysteries failing to complete or clean up suggests shared upstream state, and
+   **C36 proved one instance** (Inner Light gates on `IsDisasterPredicted()`,
+   which F81(a) strands). Whether other mysteries gate the same way is a cheap
+   grep of `Lua\Mysteries\`/`Lua\Scenario\`. **Not routed by guesswork — it is
+   the owner's call whether it becomes work.** If it never does, say so in the
+   QA report rather than leaving it looking owed.
 2. **The audit's §1/§2 witness grades now lag its own §10.4** for F01 and F74.
    Bookkeeping, not a decision — but it is exactly the drift job 7 exists to
    catch, so catch it here.

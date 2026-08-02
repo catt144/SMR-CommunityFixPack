@@ -650,6 +650,22 @@ silently (no per-wisp notification). That is a UI addition rather than a defect 
 (FIX_POLICY §4), so it is deliberately not shipped.
 
 ### F16 — Mirror Sphere site usable after completion  `[fixed: Code/Fix_MirrorSphereSite.lua]`
+**✅ EXTERNAL CITATION READ AND CONFIRMED 2026-08-02** (`BUG_LIST_AUDIT.md`
+§10.4). The audit cited Paradox thread `1495056` for this entry at *title grade
+only*; the owner opened it. **It holds up** — Homeshine, Oct 18 2021 (Below and
+Beyond hotfix 4), *"After completing the mystery of the spheres, the dialog
+never goes away for 'cold wave' and the dialog for 'Sphere countdown: 101%'"*,
+save attached, self-declared reproducible. **Three corroborators, across three
+different mysteries:** shannley (*"Same Problem"*), Candergart on **St. Elmo's
+Fire**, omega telescope on **The Last War**. ⚠️ **OG-2021 — it corroborates the
+incomplete-cleanup FAMILY, not the Relaunched build**, and this entry's own
+defect claim rests on Src regardless. *(Contrast `1113731`, cited for F06, which
+turned out to be a retraction — reading bodies moves citations both ways.)*
+**Lead recorded, unassigned:** several mysteries failing to complete or clean up
+suggests shared upstream state, and C36 proved one instance — Inner Light stalls
+because it gates on `IsDisasterPredicted()`, which F81(a) strands. Whether other
+mysteries gate the same way is an open, cheap grep. Full note in §10.4.
+
 `Lua\Mysteries\MirrorSphere.lua:823` — guard `self.progress == 100`, but scale is
 0..`max_progress` (2^22; see :724-726, :734) → lockout never triggers; players can waste
 drone work on finished site. **Fix:** override `StartAction`-holder method, compare
