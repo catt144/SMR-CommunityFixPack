@@ -8280,10 +8280,26 @@ them.**
    which is either the repair working or a difficulty change, and that is exactly
    the judgement job 8 was asked for.
 
-⚠️ **These are means, and the SHAPE change is separate and larger.** On
-`VeryHigh_3` the distribution goes from a metronomic 3-or-4 every wave to bimodal
-0-or-6-8 — observed in PT-61. A player would notice the burstiness long before
-they noticed a 5% mean.
+⚠️ **These are means, and the SHAPE change is separate — sometimes larger,
+sometimes smaller.** On `VeryHigh_3` the distribution goes from a metronomic
+3-or-4 every wave to bimodal 0-or-6-8 (observed in PT-61); a player notices that
+long before they notice a 5% mean. **But on `DustDevils_Low` the shape barely
+moves at all**, and the "+50%" row overstates what a player would feel:
+
+| `DustDevils_Low` | empty waves | a non-empty wave gives | mean |
+|---|---|---|---|
+| vanilla | **50%** (draw 1 → `1*50/100` = 0) | always exactly 1 | 0.50 |
+| F97 | **50%** (gate fails) | 1 or 2 | 0.75 |
+
+**The proportion of empty waves is identical.** All that changes is that a
+non-empty wave can reach the authored maximum of 2. ⭐ **Observed, not derived:**
+PT-61 ran `DustDevils_Low` under the fix on four gated reads (two passed, two
+failed) and `WAVE 32 RESULT | F97 gated | predicted 1..2 | ATTEMPTED 1 | MATCH`
+put a real devil on the map; the post-uninstall half then showed vanilla `Low`
+reading `next wave should be 0..1` three times and producing nothing twice.
+**Job 8 should weigh per-preset FEEL, not just the mean column** — `Low` and
+`VeryHigh_3` sit at opposite ends of that and neither is described by its
+percentage.
 
 ## Verification — PT-61 (predictions written BEFORE the run)
 
