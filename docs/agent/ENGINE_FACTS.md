@@ -58,6 +58,20 @@ code suggests.
   player had the pack toggled off. The only state that keeps frames out of a save
   is *not having installed the hook*.
 
+  ⚖️ **WHAT IS MEASURED HERE AND WHAT IS NOT — read before leaning on this**
+  (own-medicine, `recorded-facts-are-claims`). **MEASURED:** the toggle-OFF leak
+  itself (`Opt_DroneOverhaul`, 98 errors/session with its own Mod Options toggle
+  off — the founding Site 2 finding), and Mod-Manager-disable ≡ real uninstall
+  (98 vs 98 on the same save, PT-20). **INFERRED, never observed:** that a
+  captured frame loaded under a toggled-OFF module resumes and no-ops *cleanly*
+  (read off `SMRFixPack.IsActive`, `00_Core.lua:39-42`); and that the
+  `SMRFixPack_Disabled` veto blocks capture for apply()-time installers but not
+  for file-scope ones (read off `Register`, `:384-388`). ⛔ **Owner-ordered
+  re-verification is chain prompt 12 JOB 0** ("we cannot be wrong about this") —
+  it re-reads the founding measurement against primary evidence and sizes D13 on
+  the answer. Note the natural control for the inferred half was Site 2, which is
+  now repaired, so it may no longer be constructible from our own code.
+
 - `g_Consts` is a **GameVar** (`Lua\Modifiers.lua:427`) and does not exist while
   mods load — read it inside the patched function, never in apply(). `const` IS
   populated at that point.

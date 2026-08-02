@@ -15,6 +15,63 @@ nothing missed, pending, or wrong. You are adversarial: every "done" is a
 claim; sample the evidence, not the assertion (this project's recorded facts
 have been wrong before — `recorded-facts-are-claims` is a standing lesson).
 
+### ⭐⭐ JOB 0 — DO THIS BEFORE ANYTHING ELSE: re-verify the "OFF is three different things" doctrine, then sweep on the result (OWNER-REQUESTED 2026-08-01, verbatim: *"We cannot be wrong about this"*)
+
+**Why it is job 0 and not job 8:** its answer changes what the rest of your QA is
+checking, and it **re-sizes D13**. If the doctrine holds, the cleaner's target
+population is not "players who used a module" but **every player who ever had the
+pack installed, whatever their toggles** — which is a different amount of launch
+work. The owner asked for this specifically because of that.
+
+**THE CLAIM UNDER TEST** (recorded 2026-08-01 in `ENGINE_FACTS.md` "OFF" IS THREE
+DIFFERENT THINGS, `FIX_POLICY.md` §5 last bullet, `WORKFLOW.md` per-fix step 4;
+commits `b9c4107`, `a5d4b89`, `227366a`):
+
+> A **Mod Options toggle** leaves the module's hooks installed and the mod env
+> present, so it keeps seeding frames into saves and a captured frame merely
+> no-ops. Only **Mod-Manager-disable / removal** takes the env away and orphans
+> what was seeded. Therefore **a toggle-off reload cannot answer an uninstall
+> question — it reads clean by construction.**
+
+**Split it before you test it. Do not verify it as one lump.**
+
+| # | sub-claim | status as recorded | what you must do |
+|---|---|---|---|
+| **A** | `Opt_DroneOverhaul` leaked into saves at **98 errors/session with its own Mod Options toggle OFF** | claimed **MEASURED** — this is the load-bearing fact and *everything* rests on it | **Go to the primary evidence** — the original log and the first Site 2 entry, NOT a restatement. Confirm the toggle really was OFF. ⛔ **If it was actually ON, the whole doctrine collapses** and `b9c4107`/`a5d4b89`/`227366a` must be reverted. `recorded-facts-are-claims` applies with full force here |
+| **B** | Mod-Manager-disable ≡ real uninstall | claimed **MEASURED** (98 vs 98, same save; PT-20 procedure note) | confirm from the log, not the note |
+| **C** | A captured frame, loaded with the pack present but the module toggled OFF, **resumes and no-ops cleanly** | **INFERRED ONLY** — read off `module_active()`/`SMRFixPack.IsActive` (`00_Core.lua:39-42`), never observed | say so plainly. ⚠️ The natural instance was Site 2 and it is **repaired**, so this control may no longer be constructible from our own code. **If it is not, that IS the finding**: the doctrine rests on a historical measurement nobody can re-take. Do not paper over it |
+| **D** | The `SMRFixPack_Disabled[id]` veto prevents capture for apply()-time installers but **NOT** for file-scope installers | **INFERRED** from `Register` returning before `run_apply` (`00_Core.lua:384-388`) | **Deliverable: enumerate every module in `Code/` as FILE-SCOPE or APPLY()-TIME installer.** That table decides what each off-switch actually removes, and D13 needs it |
+
+**THEN THE SWEEP — only if A and B hold.** The owner asked for *all* documentation,
+**including playtest results**:
+
+1. **Void every recorded result whose method was a toggle-reload.** Three were
+   found and corrected 2026-08-01 (`227366a`) — `PLAYTEST_CHECKLIST.md` Trigger E
+   plus two BUGS restatements — and **all three were unrun, which is luck, not a
+   defence.** Hunt the rest, `PLAYTEST_ARCHIVE.md` included. A recorded PASS taken
+   that way is **void, not merely weak**: re-label it with why, never delete it.
+2. **⭐ The launch-sizing question — this is the one the owner is actually
+   asking.** Find every disposition, exposure verdict, "compliant — no work",
+   "savegame footprint: none" or "not exposed" call **that leans on a module being
+   optional / opt-in / off-by-default**. Under this doctrine every one of them is
+   unsound, because off-by-default says nothing about what is installed. Check
+   `SAVE_SAFETY_REDESIGN.md` §5.3 and §5.4 in particular: **were the `Opt_*`
+   modules swept on their own merits, or discounted for being optional?** Report
+   the count and name them.
+3. Correct the findings **everywhere they appear** — BUGS entries and index rows,
+   STATUS, the checklist, module headers in `Code/`, the reports set. One known
+   instance was already struck (D06's *"saves made with it load identically
+   without it"*, `a5d4b89`); assume there are more.
+4. Feed the result to **D13's entry** as a sizing input, since that is the point.
+
+**What may not be claimed here:** that the doctrine is confirmed, unless sub-claim
+**A** was read off primary evidence. That C is measured — it is not, unless you
+measure it. That the sweep is complete without saying which documents you searched
+and how.
+
+**If a keyboard control is needed for C, STOP AND ASK the owner** — do not
+improvise a game leg inside the final QA.
+
 1. **Inbox audit.** Git history of this folder: every deleted prompt's final
    commit should show its outbox landing in a later prompt or a BUGS/STATUS
    record. Hunt for notes that were written and never consumed, and for
