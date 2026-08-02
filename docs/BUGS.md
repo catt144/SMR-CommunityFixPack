@@ -6789,6 +6789,63 @@ surface dust storm on an elevator colony, zero new `PowerLeak`/`LifeSupportLeak`
 notifications underground), which is the honest test because the defect is a
 *victim distribution*, not a single event.
 
+## ⭐ VERIFIED IN PLAY 2026-08-02 (chain prompt 8b) — DEFECT OBSERVED **AND** FIX OBSERVED, same fixture, same storm
+
+**This is the first time the project has watched F90 happen rather than read it in
+source.** No colony in the campaign had the precondition (three checked: 105, 76
+and 0 cross-map connectors), so the owner **built** one — a sandbox colony at sol 7
+with an elevator, giving:
+
+| fragment | connectors | underground | breakable | role |
+|---|---|---|---|---|
+| electricity 1 | 1668 | **1668 (100%)** | true | the target — *every* victim pick lands underground |
+| electricity 2 | 424 | 0 | true | pure-surface control |
+| water 1 | 22 | 0 | true | second surface control |
+
+Saved as fixture `f90` **before** the storm, and both legs run from it.
+
+| | underground | surface |
+|---|---|---|
+| **pack OFF** | **0 → 15**, monotonic, plateauing the moment the storm ended | 0 → 7 |
+| **pack ON** | **0 on all 26 samples**, sol 8 through sol 9 | 0 → 5, still breaking |
+
+**B1 ✅** underground held at 0 against 15. **B2 ✅** zero `[LUA ERROR]` — including
+none from the filtered list being **empty**, which is exactly the state that would
+make GromGor's version index a nil, and is the one claim on this entry that could
+previously only be argued structurally. **B3 ✅** surface kept breaking, which is
+what makes B1 mean "the filter narrowed the pool" rather than "the break pass
+stopped". **B4 ✅** post-storm census reads `frag 1: connectors 1668` — identical to
+pre-storm, so the **persisted** `self.connectors` was restored cleanly after being
+swapped on every break interval for a whole storm. **B5 ✅** no orphan error.
+
+⭐ **Camera-independence, measured in both directions** (owner's own addition to the
+method): **~70% of the pack-ON storm was watched from the underground map**, and
+underground still took zero breaks while the surface kept breaking. On the pack-OFF
+leg, breaks landed underground **while the camera was on the surface**. So neither
+the defect nor the repair is view-dependent — worth stating explicitly in this batch,
+because **F93 ships alongside it and IS a `CurrentMap`-instead-of-`MainMap` bug** in
+the adjacent dust-devil scheduler. Our wrapper reads `rawget(_G, "MainMap")`, and
+that is now observed rather than merely read.
+
+**Attribution controls:** the owner swept the map for cave-in/marsquake debris and
+notifications and found **none** (those break underground elements legitimately —
+the reason the cheap `Break`-interception fix was rejected). `DisastersPredicted set:
+0` was verified on the fixture's **stored** state before the pack-OFF leg, so F81's
+deferral could not have suppressed the storm. No drones underground, so the
+underground counter is **cumulative and cannot slip backwards**.
+
+⚠️ **What this is NOT.** The fixture is deliberately extreme — no organic colony has
+an all-underground 1668-connector fragment. It was built as a **discriminator**, to
+make a probabilistic defect fire reliably. This is **fix verification, not evidence
+about how often F90 arises in real play**, and the three campaign colonies checked
+had no cross-map fragment at all (though they are test fixtures, not a random
+sample).
+⚠️ One observation left **unexplained rather than storied**: surface breaks
+fluctuated on the pack-ON leg (drones repairing) but climbed monotonically on the
+pack-OFF leg. Tempting to attribute to 15 unfulfillable underground repair requests
+starving the surface queue — but the pack-OFF leg had **7 samples against 26**, so
+dips could simply have been missed. Not concludable from this data.
+
 ### F91 — Whole-track salvage leaves an undeletable invisible `TrackBase` shell in the map and in every later save — and our own F44 path reproduces it (P3, SOURCE-VERIFIED)  `[built 2026-08-02 by chain prompt 8b, exactly to the spec below — both halves inside Fix_TrackSalvageWipe, no new module, no new registry id, no new thread; probe TrackShellLeak written. ⚠️ UNRUN — the batch leg is 8b's, and because F44 is a `tested` module the A/B expectations are written out BELOW, before the leg]`
 
 **Defect.** `TrackGridElement:DemolishAndSplitTrack` calls `track_obj:OnDemolish()`
