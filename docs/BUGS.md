@@ -9082,7 +9082,16 @@ quotes verbatim; sources in the audit report §8.
     conclusive, *not* seeing 3 is weak (it could be the exclusive-bounds case).
     Instrument: sample `#g_DustDevils` (the global exists in OG — offset
     3725258) from a real-time thread and cluster the increments; marker-spawned
-    devils are the noise source, so cluster within a few seconds of each other.
+    devils are one noise source, so cluster within a few seconds of each other.
+    ⚠️ **RUN IT WITH DUST STORMS OFF OR VERY LOW — this is dust DEVILS, and a
+    dust STORM corrupts the reading.** The wave loop breaks out early if a storm
+    arrives mid-wave (`DustDevils.lua:220-222`, inside `for i = 1, count do`), so
+    a wave of 3 can surface as 1. **The confound is one-directional and does not
+    threaten the test**: truncation can only *hide* a 3, never manufacture one,
+    so the positive result stays conclusive and only the already-weak negative
+    gets weaker. Set the map's **Dust Devils** intensity to High and its **Dust
+    Storms** intensity low/off — they are two separate landing-site settings, and
+    it is the devils one that carries `spawn_chance`.
     ⛔ It does **not** change the §3a arithmetic — a replacement
     body is still ours and still sleeps.
   - **Item 3 (marker path missing `DustStormsDisabled`) — ✅ DEFECT CONFIRMED,
