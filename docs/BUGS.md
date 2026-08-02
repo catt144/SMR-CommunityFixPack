@@ -4716,6 +4716,42 @@ only by a fixed REAL-TIME expiry.**
   rider has been rewritten around it (see `PLAYTEST_CHECKLIST.md` §6) — stopwatch
   the *real* seconds, not the sols, and note the game speed.
 
+**MEASURED LIVE 2026-08-02 - LEG 1 OF 2, AND IT LANDS ON THE PRESET VALUE TO
+WITHIN 1 MILLISECOND.** Owner at the keyboard, No-Disasters save
+(`save_game_id: 1f6oCbWfYS7IOPCY`, map `BlankUnderground_01`, sol 22) chosen so
+that **nothing but the player could break a cable** - no dust storms, so no
+random `RandomBreakSupplyGrid` splits to confound the reading. A cable was
+salvaged, the split notification raised, and **nothing was repaired or
+clicked**. A console watcher polled `FindNotification("PowerGridSplit",
+CurrentMap)` (`CommonLua\Libs\Notifications\Notifications.lua:16-23`) and timed
+both clocks:
+
+```
+F82 ARMED - notification seen
+F82 CLEARED after 119999 real ms and 600000 game ms      (speed: 5x, retail max)
+```
+
+- **119 999 real ms against a preset `Expiration = 120000`.** The notification
+  cleared on its **real-time** timer, to within a millisecond, **with the grid
+  still split and nothing repaired**. The source read is now confirmed by
+  measurement rather than inference.
+- **600 000 game ms / 119 999 real ms = exactly 5.0x**, which independently
+  recovers `const.fastGameSpeed` from the data - and is what forced the
+  speed-ceiling correction recorded above.
+- **Leg 2 (1x) is what completes the proof**: the prediction is the *same*
+  ~120 000 real ms with game time five times smaller (~120 000 game ms). Real
+  time constant plus game time variable is the signature that no state-cleared
+  notification can produce.
+- **Do not click the notification when re-running this.** `PowerGridSplit` does
+  not set `Dismissable` and the property defaults to **`true`**
+  (`CommonLua\Libs\Notifications\NotificationPreset.lua:60-61`), so a click can
+  end the measurement early. (F81's note that disaster presets are
+  `Dismissable = false` does not carry - those set it explicitly.)
+- **Supporting tell for the package:** `GameTime = false` on both split presets
+  is an **explicit override against a default of `true`**
+  (`NotificationPreset.lua:65-66`), so the real-time expiry is the authors'
+  deliberate choice, not an accident of defaults.
+
 **Consequence and disposition.** The player is shown a live warning for a
 condition that has ended, for up to 2 real minutes, with no way to dismiss it by
 fixing anything — and, symmetrically, a split that is *not* repaired stops being
