@@ -107,7 +107,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed 2026-07-28 — PT pending (entry) |
 | F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | **tested 2026-08-01** — fixed 2026-07-29; StormWedgeHeal REORDERED 2026-08-01 (F86 Tier-1 orphan gate, §6.2a-D) and **BOTH §6.2a-D completion branches ran live on the reordered body** (Tier-1 leg 1 forced storm → release branch; the natural storm → force-clean branch; storms keep scheduling after each heal). PT-54 triggers C+D absorbed (entry) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
-| F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 (entry) |
+| F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 · **SOURCE AUDIT RUN 2026-08-02 (prompt 6c): enumeration theory SURVIVES with an exact predicate — `traverse_dir = next_idx - start_idx` is never normalised to ±1 (`TrainTransport.lua:374`) off two `table.find` first-occurrence lookups (`:369,:372`) into a `route` array the file itself says can hold a station twice (`:389`, `EnumRouteTracks:273-282`); any stride ≠ ±1 hits a missing `link_edge` and HARD-RETURNS (`:417`), silently dropping the tail.** Explains **both** symptoms from one function (`Train.lua:882` = waits; `Station:GetReachableStations` `:222-231` = walks). ⛔ **Trigger NOT proven — CANNOT DETERMINE, stays `investigating`.** ⚠️ Corrects the old "direction from canonical orientation" suspicion (wrong — it is the magnitude, not the sign). Two fix-binding side finds: the function is **not re-entrant** (`:365,:386-390`) and `GetReachableStations` has no cross-track dedup. Checklist rider rewritten to discriminate waits-vs-walks + a one-way-hole test (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **tested 2026-08-01** — fixed 2026-07-29; rains half REWRITTEN 2026-08-01 (F86 Tier-1, layer-2 wrapper + version-stamped migration + C34 rider) and **verified live by Tier-1 legs 3+4**: a NATURAL collision re-rolled and rain returned, 'normal' migrated + stamped 1.0.1, C34 stale-ACTIVE healed through vanilla FinishRainProcedure, and the stranded-flag sweep cleared both with and without a reload while never touching a live warning. PT-54 triggers A+B+E absorbed (entry) |
 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | **✅ MECHANISM FOUND 2026-08-02 (prompt 6c trace) — and it is neither option the entry weighed.** The notification has **no removal path at all** (`SupplyGrid.lua:1626-1629` is the only reference to `PowerGridSplit`/`LifeSupportGridSplit` in the tree) and registers a **position**, not the grid — so a rejoin is not an input. It clears only by the preset's `Expiration = 120000` with `GameTime = false`, which `Notifications.lua:188-217` runs on a **REAL-TIME** thread → **2 real minutes regardless of game speed**. Sibling tell: `PowerLeak`/`LifeSupportLeak` under the same parents carry no `Expiration`. ⚠️ Symmetric half not in the original report: an **unrepaired** split also stops being reported after 2 real minutes. Nothing built — key-matching design question **routed to prompt 7**; checklist rider rewritten around the real-time prediction (entry) |
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
@@ -4068,6 +4068,83 @@ before anyone designs a fix here.
 **What this does NOT do: it does not locate the mechanism.** The console tap on
 `ForEachStationAlongTrack` is still the only thing that settles it, and the
 "TAP BEFORE MITIGATING" instruction stands.
+
+**✅ SOURCE AUDIT RUN 2026-08-02 (prompt 6c). Result: the enumeration theory
+SURVIVES and now has an exact predicate — but reachability is CANNOT
+DETERMINE, so this stays `investigating` and the tap-before-mitigating
+instruction is unchanged.** The audit was asked for **per-stop/per-pair
+asymmetry, not a global break** (Sorbicol reports one origin/destination pair
+failing inside an otherwise healthy 3-line network). That is the shape found.
+
+- **The predicate, exactly.** `ForEachStationAlongTrack`
+  (`Lua\TrainTransport.lua:367-447`) derives its walk direction once and never
+  normalises it: `local traverse_dir = next_idx - start_idx` (`:374`), where
+  **both indices come from `table.find`** (`:369`, `:372`) — i.e. the **first**
+  occurrence in the `route` array. It then advances `idx = idx + traverse_dir`
+  (`:445`) with **wrap-to-1 / wrap-to-n rather than modular arithmetic**
+  (`:393-405`). Nothing anywhere constrains `traverse_dir` to ±1.
+- ⚠️ **The route array can contain a station more than once, and the file says
+  so itself.** The comment at `:389` — *"big stations can exist more than once
+  in the same route if the track loops back into them"* — and `EnumRouteTracks`
+  confirms it structurally: it appends `dest` unconditionally (`:282`) and only
+  terminates on reaching **start_station via start_track** (`:273-279`), so a
+  line that re-enters an intermediate station is appended twice.
+- **Why a stride ≠ ±1 is fatal rather than merely lossy.** `route.edges` holds
+  only **adjacent** pairs (built one per hop, `:255`, `:271`, `:291`). The loop
+  looks up the edge for each consecutive pair and, finding none, does
+  `if not link_edge then return end` (`:417`) — **a hard return, not a skip**.
+  So the first non-adjacent step silently drops **every remaining station**, and
+  the caller cannot tell an empty tail from a complete enumeration.
+- ⭐ **This explains BOTH public symptoms from ONE function, which the late
+  addition to this entry asked for.** `Lua\Units\Train.lua:882` uses it to
+  decide `next_stop` / `has_any_work` → a destination never enumerated is a
+  platform the train never stops at ("**colonists wait**"). `Station:GetReachableStations`
+  (`Lua\Buildings\Station.lua:222-231`) uses it to decide which stations count
+  as train-reachable at all → a truncated set means colonists never believe the
+  train serves that station ("**colonists ignore the train and walk, and die**",
+  the dominant symptom in the wild). Same enumeration, two faces.
+- ⛔ **NOT PROVEN, and this is the honest limit: I could not show a buildable
+  topology that puts the operative occurrence of a station at anything other
+  than its first index.** The shape is real; the trigger is not demonstrated.
+  Treat this as a sharpened hypothesis, not a located mechanism.
+- **Checked and ruled out so it is not re-derived:** the three other `return`s
+  in the walk (`:417` aside — `:421` a track segment under construction, `:428`
+  a transport-mode conflict, `:434` passenger-through-cargo) are **hard aborts
+  by design and correct**: `route` is a path, so anything beyond an
+  untraversable edge genuinely is unreachable on that track. They are not the
+  defect. Likewise the one-direction walk on a non-loop route (`:383`, `:396-404`)
+  is correct at each call site — a mid-line station covers both directions
+  because `ForEachConnectedTrack` runs the enumeration once per connected track.
+- ⚠️ **CORRECTION to a suspicion this project had recorded.** The old checklist
+  rider stated the suspected mechanism as *"the stop-processing walk takes its
+  enumeration direction from the track's canonical orientation, not the train's
+  travel direction, so a destination lying behind it is structurally
+  unenumerable at that stop forever."* **That is wrong.** The direction is taken
+  from the *track being enumerated* (`:371-374`), and every call site enumerates
+  **once per connected track**, so both directions are covered at a mid-line
+  station and an end station has only one direction to cover. The rider has been
+  rewritten; the defect is the **magnitude** of `traverse_dir`, not its sign.
+
+**Two side findings, recorded because they bind any fix WE write here:**
+
+1. ⚠️ **`ForEachStationAlongTrack` is NOT re-entrant.** `stations_visited` is a
+   single **file-local shared table** (`:365`), cleared at the top of every call
+   (`:386-390`). A callback that enumerates — directly or through any helper —
+   wipes the outer call's visited set and then the outer call resumes reading
+   the inner call's. No current call site nests, so this is latent in vanilla;
+   it becomes live the moment a mod's hook enumerates inside a callback. **If we
+   ever wrap this function, our callback must not call it.**
+2. `Station:GetReachableStations` (`Station.lua:222-231`) runs one enumeration
+   **per connected track** into a shared accumulator, and since `stations_visited`
+   is cleared per call there is **no cross-track dedup** — a station reachable on
+   two tracks is appended twice. A duplicate, not a miss; harmless for the
+   `CanColonistsFromDifferentDomesWorkServiceTrainHere` filter it feeds, but it
+   would skew any count taken off that list.
+
+**The settling observation has been rewritten around this** (`PLAYTEST_CHECKLIST.md`
+§6) — it now discriminates **waits vs walks** and tests the predicted
+**directional asymmetry** in one sitting, which is worth strictly more than
+timing the waiting case alone.
 
 ### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[tested 2026-08-01 (Tier-1 legs 3+4, log Mars.exe-20260801-17.11.08 — natural collision re-roll, migration stamped, C34 heal, and the stranded-flag sweep proven BOTH ways with liveness held; see the leg note below the PT-54 block): Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (**REWRITTEN 2026-08-01, F86 Tier-1 spec §6.2a-B: the loop replacement is DELETED — vanilla's RainsDisasterLoop stays; a layer-2 wrapper on RainsDisasterActivation mirrors the collision test BEFORE the call and posts Msg("RainDisasterEnd") on the early-return, so a collided cycle costs one re-roll; a version-stamped PostLoadGame migration pass (SMRFixPack_loop_version; resolves id-less entries by unique type match) moves every persisted loop onto vanilla's body and carries the C34 stale-state rider — structure repairs → stale-ACTIVE FinishRainProcedure heal → loop migration**). Leak half built 2026-07-29 post-QA; rains half rewritten 2026-08-01; **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg, except the (a) leak half's live legs, routed to chain prompt 3** (note below); wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
 **⭐ F81(a) IS NOW STANDARD COMMUNITY ADVICE — the strongest real-world
