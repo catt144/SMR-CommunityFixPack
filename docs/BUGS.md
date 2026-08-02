@@ -147,7 +147,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT**: `DroneHubExtender` is the template class name, so the label is carried and `Effect_ModifyLabel` lands (`Data\TechPreset.lua:3466-3471`). The extender's `work_radius` really is raised to 50, and the **commit step exists — it is just routed through the hub**: the tech's `Effect_Code` (`:3474-3481`) forces `SetUIWorkRadius` → `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)` (`DroneControl.lua:759-777`), and `FindTaskRequesters` **recurses into `linked_extenders` reading each extender's live `work_radius`** (`:315-325`). Positive control: `CommandCenterMaxRadius = 50` = default 35 + `SignalBoostersBuff` 15 exactly (`_GameConst.lua:62-72`) (entry) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT again**: `RCTransport:AddToCityLabels` files every transport under `RCTransportAndChildren` (`Lua\Units\RCTransport.lua:88-90`), `City:AddToLabel` forwards to the **colony** container first (`Lua\City.lua:83-86`) which is the one `Effect_ModifyLabel` writes to (`MarsGameEffects.lua:161-172`), and `max_shared_storage` is modifiable at `scale = const.ResourceScale` with default `30` (`RCTransport.lua:14`) — so +15 lands exactly on SkiRich's promised **45**, and it is read live at `:118, :282, :311, :1709`. ⭐ **This sweep corrected the C18 label rule** — see the C18 row (entry) |
 | C29 | Children-only buildings admit all age groups             | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). All **three** `children_only` families enforce it at assignment time: residences via `exclusive_trait = "Child"` (`Residence.lua:26-28`) checked in `IsSuitable` `:162-167` / `CanReserveResidence` `:250-255`; training buildings via `CanTrain` → `IsSuitable` (`TrainingBuilding.lua:137-138, :367-376`) which `Workplace` consults at `:930, :1083`; services via `CanService`/`CanBeUsedBy` (`ServiceBase.lua:162-178`). Obvious guess **checked and ruled out**: the `Child` trait IS removed on ageing up (`Colonist.lua:1740-1756`, `RemoveTrait` at `:1747`) (entry) |
-| C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
+| C30 | Supply-pod reward pins stuck on HUD                      | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). ⭐ **The stuck-pin MECHANISM is real and sits in the generic path**: `PinnableObject:Done` unpins via `TogglePin()` with **no force** (`PinnableObject.lua:160-164`) while the unpin branch requires `CanBeUnpinned() or force` (`:226`) — and `RocketBase:CanBeUnpinned()`/`UniversalRocketBase:CanBeUnpinned()` return **false unconditionally** (`RocketBase.lua:1476-1478`, `UniversalRocket.lua:1112-1114`). **Every affected class defends against it in its own `Done`**: `RocketBase:Done` → `SetPinned(false)` → `TogglePin("force")` (`:194-199` + `PinnableObject.lua:245-249`); `UniversalRocketBase:Done` → `SetPinOnMap(false)` → `TogglePin("force")` (`UniversalRocket.lua:1069-1074, :1158-1165`); the salvage paths repeat it (`SupplyPod.lua:145`, `UniversalPod.lua:145`). `OrbitalProbe` — the only other `CanBeUnpinned()==false` class — is covered by **`Done` ordering** (`procall_parents_last`, `PropertyObject.lua:1664`) (entry) |
 | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
 | C36 | "Inner Light" mystery does not complete for some players | ?   | **✅ SOLVED — not a new defect** | filed AND closed 2026-08-01: **it is a downstream victim of F81(a), which our pack already fixes.** `Dream.lua:20-34` — the mirage loop skips `Dream()` whenever `IsDisasterPredicted()`, the exact flag F81(a) strands permanently true, so the mystery stops advancing forever. **Explains the reporters' "for some people" precisely** (depends on whether a meteor storm completed). ⭐ One commenter gave two unconnected pieces of advice — "install the disasters mod" and "avoid Inner Light" — for one defect (entry) |
 | C37 | Planetary anomalies don't pull colonists up the elevator — blocks a purely-underground colony | ?   | cand | filed 2026-08-01 from a **hours-old** Reddit thread (§10.6); specific, current, names the seam. **Same elevator boundary F90 just proved the code mishandles.** Single source, unverified. Next step: is the anomaly colonist-transfer path map-aware? (entry) |
@@ -7970,6 +7970,55 @@ quotes verbatim; sources in the audit report §8.
 - **C30 [author] — supply-pod reward pins stuck on HUD.** SkiRich (OG,
   2636538587): *"Fixes an issue with vanilla code that causes supply pod pins
   to get stuck on the HUD."*
+  **→ SWEPT 2026-08-02 (prompt 6c). Verdict: NO DEFECT IN CURRENT SRC —
+  CLOSED. But this is the one of the five where the mechanism he describes is
+  visibly present in the generic path, and only per-class guards close it** —
+  worth recording because a future engine change that adds a pinnable class
+  would re-open it.
+  - **The hazard, exactly.** `PinnableObject:Done` unpins by calling
+    `self:TogglePin()` with **no `force`** (`Lua\PinnableObject.lua:160-164`),
+    and `TogglePin`'s unpin branch is gated `if self:CanBeUnpinned() or force`
+    (`:226`). A class whose `CanBeUnpinned()` is false therefore **stays in
+    `map.pinned` after destruction and its `PinButton` is never closed** —
+    `pins_dlg:Unpin(self)` lives inside that same guarded branch (`:230-232`).
+    `map.pinned` is a `MapVar` (`:6`), so the stale entry is saved, and
+    `SortPins` does not drop it (its trailing "everything else" pass re-adds
+    from the old list, `:72`, and it only runs at all when `#pinned > 1`,
+    `:47`). That is a stuck HUD pin, verbatim.
+  - **`CanBeUnpinned()` is false unconditionally for both rocket families** —
+    `RocketBase:CanBeUnpinned()` (`Lua\Buildings\RocketBase.lua:1476-1478`) and
+    `UniversalRocketBase:CanBeUnpinned()` (`Lua\UniversalRocket.lua:1112-1114`)
+    — and supply pods are in both: `SupplyPod` → `SupplyPodBase` →
+    `SupplyRocketBase` → `RocketBase` (`Lua\Buildings\SupplyPod.lua:2-3`), and
+    `UniversalSupplyPod`/`UniversalDropPod` → `UniversalSupplyPodBase` →
+    `UniversalRocketBase` (`Lua\UniversalPod.lua:2-4`).
+  - **Both families close it in their own `Done`, and this is what makes the
+    verdict "no defect" rather than "broken":**
+    `RocketBase:Done` calls `self:SetPinned(false)` (`:194-199`), and
+    `PinnableObject:SetPinned` toggles with **`"force"`**
+    (`PinnableObject.lua:245-249`), bypassing the guard.
+    `UniversalRocketBase:Done` calls `self:SetPinOnMap(false)`
+    (`UniversalRocket.lua:1069-1074`), whose falsy-`target_map` branch is a
+    forced `TogglePin("force")` (`:1158-1165`). The salvage/shutdown paths
+    unpin ahead of destruction too (`SupplyPod.lua:145`,
+    `UniversalPod.lua:145`), so the pod's pin is normally gone before the
+    player ever demolishes the wreck.
+  - **The third and last `CanBeUnpinned()==false` class was checked too, and it
+    is saved by call ORDER rather than by a guard.** `OrbitalProbe:CanBeUnpinned`
+    is `not label or not next(label)` (`Lua\OrbitalProbe.lua:119-122`), only the
+    first probe is pinned (`:35-48`), and `ScanSector` destroys `label[#label]`
+    (`:112`) — so the pinned probe is destroyed exactly when it is the last one.
+    `OrbitalProbe:Done` removes it from the label (`:53-56`) and does **not**
+    force-unpin, so this works only if the derived `Done` runs before
+    `PinnableObject:Done`. **It does:**
+    `DefineCombinedMethod("Done", "procall_parents_last", "InitDone")`
+    (`CommonLua\PropertyObject.lua:1664`). By the time the parent runs, the
+    label is empty, `CanBeUnpinned()` is true, and the pin is released.
+  - ⭐ **Engine facts this settled, now in `ENGINE_FACTS.md`:** `Done` is a
+    combined method running **most-derived first** (`procall_parents_last`)
+    while `Init` runs **parents first** (`procall`, `PropertyObject.lua:1663`).
+    That is what makes a class's own `Done` able to prepare state its parents'
+    `Done` will read.
 - **C31 [author→RESOLVED 2026-08-01] — meteor storms broken in 1.0.7.396349 —
   OUR PINNED BUILD.** GromGor (Relaunched, workshop 3745475097): *"The latest
   update broke the meteor storm mechanics in a strange way. I don't know the

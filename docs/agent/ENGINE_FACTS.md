@@ -504,3 +504,25 @@ code suggests.
   stored modifiers onto members added later (`:17-28`). So "the tech was
   researched before the unit existed" is **not** a way for a label modifier to
   miss.
+- **`Init` and `Done` are COMBINED methods with OPPOSITE order** —
+  `DefineCombinedMethod("Init", "procall", "InitDone")` and
+  `DefineCombinedMethod("Done", "procall_parents_last", "InitDone")`
+  (`CommonLua\PropertyObject.lua:1663-1664`). So **every** parent's `Done` runs
+  even when a derived class defines its own without calling super, and the
+  **most-derived `Done` runs FIRST** — which is how a class prepares state
+  (e.g. removing itself from a label) that a parent's `Done` then reads.
+  Proven 2026-08-02 while grading C30: `OrbitalProbe:Done` clears its label
+  (`Lua\OrbitalProbe.lua:53-56`) so that the later `PinnableObject:Done` sees
+  `CanBeUnpinned()` true and releases the pin. Reading either `Done` alone
+  gives the wrong answer.
+- **Pin release is guarded, and `TogglePin()` without `force` is a no-op for
+  any class whose `CanBeUnpinned()` is false.** `PinnableObject:Done` unpins
+  unforced (`Lua\PinnableObject.lua:160-164`) but the branch requires
+  `CanBeUnpinned() or force` (`:226`), and `RocketBase`/`UniversalRocketBase`
+  return false unconditionally (`RocketBase.lua:1476-1478`,
+  `UniversalRocket.lua:1112-1114`). Those classes stay clean only because their
+  own `Done` force-unpins first — `SetPinned(false)` toggles with `"force"`
+  (`PinnableObject.lua:245-249`) and `SetPinOnMap(false)` does the same
+  (`UniversalRocket.lua:1158-1165`). **Anything we ever make pinnable must
+  force-unpin in its own `Done`**; `map.pinned` is a `MapVar` (`:6`), so a
+  leaked entry is saved into the player's game.
