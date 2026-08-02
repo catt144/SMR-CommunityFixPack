@@ -1046,6 +1046,21 @@ Three consequences, and the first two are the ones nobody has been crediting:
    the file. Existing legs have generally done this (they quote `t=` game-time
    stamps and line context) — this is a caution for future reading, not a
    retro-accusation.
+   ⛔ **AND IT MUST NOT BE READ AS LICENCE TO DISCOUNT OLD LINES — the owner
+   corrected this the moment it was written, and they were right.** *"Not caused
+   by our leg"* is an **attribution** verdict; it does not answer *"what is it,
+   then?"*. Collapsing the two is how a discovery is thrown away silently.
+   **The owner reviews errors WITH the agent and pushes back when a line does
+   not fit the test. That has happened rarely — and every time, it turned up a
+   VANILLA defect that was not on our list.** The binding version of this rule
+   now lives in `WORKFLOW.md` ("Log review: never silently discount a line"):
+   report every unexplained line with its age and let the owner decide; stop the
+   leg for anything out of the ordinary rather than resolving it privately.
+   The mechanism that makes it work: **the agent pre-registers what it expects
+   and knows why, the owner independently reviews everything the agent saw and
+   does not — so anything outside the prediction is signal by construction, and
+   the only party able to recognise it is the one being asked not to file it
+   away quietly.**
 
 ⚠️ **One check this raises, worth naming rather than assuming away:** error
 *counts* compared across arms are only comparable if the arms had comparable

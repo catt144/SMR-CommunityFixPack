@@ -132,6 +132,43 @@ metadata/items lines, commit) or stops and reports.
 The TestKit's `SMRTest.RunAll()` A/B pair (baseline vs full pack) is the
 regression harness; run it as pre-flight when STATUS says one is owed.
 
+### ⛔ Log review: NEVER silently discount a line (owner rule, 2026-08-01)
+
+**Two facts about how legs actually run, and they change what a log is** (full
+reasoning: `BUG_LIST_AUDIT.md` §10.6f(i); the same session provisioning is why
+our test colonies are heavily loaded before any agent starts):
+
+- **The owner does not close or refresh a game session unless a leg calls for
+  it**, so a flushed log typically covers **1–6 hours of continuous play**.
+- **The owner reviews the errors WITH the agent** and pushes back when a line
+  does not fit the test. That has happened rarely — and **every time it has, it
+  turned up a VANILLA defect that was not on our list.** The practice has paid
+  for itself; it is not ceremony.
+
+**The rule, and it is the whole point:**
+
+> **"Not caused by our leg" is an ATTRIBUTION verdict, never a reason to stop
+> looking.** Locating an error in time answers *"did we cause this?"* — it does
+> **not** answer *"what is it, then?"* Collapsing those two is how a discovery
+> gets thrown away.
+
+**So: report every unexplained line, state its age, and let the owner decide.**
+Do not reason privately that a line is hours older than the leg and therefore
+irrelevant, and do not summarise it away as noise. If something is out of the
+ordinary, **stop and say so** before continuing the leg.
+
+**Why this works, stated precisely.** The agent writes its predictions before
+the run (PT-58's P1–P7 shape) and so knows what it *should* see and why; the
+owner independently reviews everything the agent saw and does not know what to
+expect. **Anything outside the prediction is signal by construction** — and the
+one party able to recognise it is the one being asked not to file it away
+quietly. A log that only ever confirms the prediction has been read for the
+prediction, not read.
+
+**Corollary worth acting on:** since the logs span hours of ordinary play, **old
+logs hold evidence no leg was designed to collect.** Mining them for `[LUA
+ERROR]` of any origin is cheap and has a track record.
+
 ## Release steps
 
 - Owner tasks first: preview image (PDX ≤2 MB / Steam ≤1 MB), screenshots,
