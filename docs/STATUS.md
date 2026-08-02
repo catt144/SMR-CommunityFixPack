@@ -35,13 +35,17 @@ remediation 3.3). Session legs are append-only in
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
-**100 rows** (88 `F` + 12 `D`; **recounted 2026-08-01** — the "98 (87 F + 11 D)"
-recorded on 2026-07-31 went stale within the same day, when F88 and D13 were
-filed after that count was taken; the count before it, "93", had gone stale the
-same way), **plus 34 `C` candidate rows** (was 11 — the
+**102 rows** (90 `F` + 12 `D`; **re-counted 2026-08-01 by chain prompt 6** —
+`awk` over the index block, not by hand. The "100 (88 F + 12 D)" figure here
+had gone stale *twice within the same day*: F89 was filed mid-sitting during
+Tier-1 leg 1, and F90 by this session's C04 sweep. The two before it, "98 (87 F
++ 11 D)" and "93", went stale the same way — **this line is the most
+drift-prone number in the project; re-derive it, never carry it forward**),
+**plus 34 `C` candidate rows** (was 11 — the
 2026-08-01 bug-list audit filed C12–C31, and its same-day packed-source
 addendum filed C32–C34; C rows are leads, not defects, and are not counted in
-the 100). **TestKit probes: 78** (re-verified 2026-08-01 by counting
+the 102. **Two moved 2026-08-01 without changing the 34**: C04 is CLOSED and
+promoted to F90, C32 DOWNGRADED — both keep their rows as history). **TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
 excluding the definition in `00_TestCore.lua`; **unchanged by the 2026-08-01
 teardown of `97_SaveHookProbe` — it was declared, never registered**, and the

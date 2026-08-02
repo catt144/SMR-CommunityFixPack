@@ -512,7 +512,8 @@ disaster-forecast overlay, off by default.
 high-confidence R4, which fails HOLD's lacks-confidence definition, §3), and
 the C-ledger grew to C12–C34 (23 filed candidates), of which **9 are now
 Src-verified** (C12–C17, C22–C24, plus C33) and two more mechanism-confirmed
-(C04, C25). The §7.1 owner actions are updated: the GromGor/fredware
+(C04, C25). **Superseded 2026-08-01 by §10: C04 is closed and promoted to F90;
+C32 is downgraded.** The §7.1 owner actions are updated: the GromGor/fredware
 subscribe suggestion is DONE and consumed; the Paradox subforum and Paradox
 Mods browser checks remain open.
 
@@ -556,3 +557,28 @@ thread's reports are 1.0.6-era, when asteroid expiry did unload maps. C32 is
 downgraded, not closed; F04's *defect* claim never depended on any of this.
 **The F04 tier decision is chain prompt 7's** — §9's demotion should not be
 quoted as settled.
+
+### 10.2 C04 — CONFIRMED and promoted to F90 (this one goes the other way)
+
+§9 graded C04 "mechanism confirmed, one call-chain sweep away from an F-row".
+The sweep ran and the chain closes with no gaps, so **C04 is closed and filed
+as F90**. Caller: `City:HourlyUpdate` (`Lua\City.lua:148-149`) →
+`RandomBreakSupplyGrid` (:178-181) → `SupplyGrid:RandomBreakElements`
+(`Lua\SupplyGrid.lua:1017-1021`) → the map-blind `table.rand(self.connectors,
+…)` at :677. Entry route for the underground connector: `SupplyGridFragment`
+**is** a `MultiMapSupplyGrid` (:337-338); the elevator merges both sides'
+fragments (`Lua\Buildings\Elevator.lua:402-440` → global `MergeGrids`
+:1635-1650 → `AddElement` :547-548) and `AddCityElement` (:463-477) registers
+the merged fragment on **both** cities' lists.
+
+Two intent tells, one of them a sibling contradiction: `HasDustStorm` is
+hard-gated to `MainMap` (`Lua\DustStorm.lua:41`), so the disaster is designed
+surface-only; and the production pass sixteen lines above the break pass
+guards the shared-fragment case *with a comment explaining that fragments span
+cities* (:999-1001), while the break pass carries no guard at all.
+
+Nothing built — the victim pick sits mid-function, so the fix shape runs into
+FIX_POLICY §3a, and that is chain prompt 7's package. Two scope questions are
+flagged on the F90 entry rather than decided here (the merged element count
+also inflates the surface break *rate*; GromGor's own fix would index nil on
+an empty surface list).
