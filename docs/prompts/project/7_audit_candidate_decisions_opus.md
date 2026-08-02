@@ -181,6 +181,46 @@ re-litigate it.**
   live repro first**, named on the C35 entry. Packaging it today would be
   packaging a description.
 
+#### 5d. LATE ADDITION (same day) — a possible LIVE symptom for your item 1 (C33)
+
+**The owner ran the audit's logged-in Paradox browse on 2026-08-01** (results in
+`BUG_LIST_AUDIT.md` §10.4). One thing it surfaced belongs to **your C33
+package**, and it is recorded on the C33 entry as a **lead, not evidence**:
+
+> "Cannot add trains to tracks" — *"I redid my entire train network with large
+> train stations, and now I cannot assign trains to either track… I check the
+> track and it says 0/10 trains. I have 7 trains in my inventory, but still
+> can't assign any to the tracks."*
+
+**Why it may be yours.** The reporter *has* trains, so this is not F64's
+counter-at-zero failure — it is the opposite. What preceded it was a **mass
+track redo**, i.e. the `DemolishAndSplitTrack` path, and what is broken is the
+**track's** ability to accept an assignment. A persisted `TrackBase` shell with
+`elements`/`assigned_vehicles` emptied to `false` is a candidate explanation for
+a track reporting `0/10` and silently swallowing the click.
+
+**⚠️ Do NOT put this in the package as a witness yet.** Its **provenance is not
+established** — it was seen as an in-game Bug Report dialog (over a *"Sending
+bug report failed: 500"*), not a forum thread, so there is no author, date or
+build, and it may never have reached Paradox. The chain is also untraced, and
+F80's enumeration suspicion could produce the same surface. **The cheap move
+that would settle it is a source question you are already in the file for:
+trace what `assign train to track` checks, and whether a shell-state
+`TrackBase` fails it silently.** If it does, C33 gains a real player-visible
+symptom and its reachability tier changes. If it doesn't, drop the lead.
+
+#### 5e. Two witness upgrades that touch your tier work (bookkeeping, not decisions)
+
+Both from the same browse; neither changes code, both were already shipped and
+tested. **F01's** witness is found (May 8 2026, Game Version **1.0.7**, with
+repro steps) — the audit's "NOT re-derivable" is retracted. **F74's**
+rival-rocket report is found **twice from the same reporter** (OG Sep 5 2022,
+overflow trigger; Relaunched **May 2 2026 on 1.07**, halt-mid-load trigger),
+both ending in a permanently bricked rocket — **primary evidence now supersedes
+the paraphrase-grade 1.0.7 dev note**, and the honest reading is that the note
+covers one trigger while a player on 1.07 hit the other. If any of your tier
+derivations lean on the audit's witness grades for these two, use §10.4 instead.
+
 #### Housekeeping that lands on you
 
 - **F35 needs nothing from you.** Its live half was measured by prompt 2 and

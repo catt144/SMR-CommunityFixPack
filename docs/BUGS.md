@@ -16,7 +16,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 
 | ID  | Title                                                    | Sev | Conf | Status |
 |-----|----------------------------------------------------------|-----|------|--------|
-| F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | tested 2026-07-29 — PT-11 |
+| F01 | Cave-ins ignore "No Disasters" rule                      | P1  | high | tested 2026-07-29 — PT-11 · **⭐ WITNESS RE-DERIVED 2026-08-01 (owner, logged-in Paradox browse): first-party report dated May 8 2026, Game Version 1.0.7, with steps to reproduce — the audit's "NOT re-derivable" is RETRACTED** (entry) |
 | F02 | Meteors strike ~every 6h instead of 35–115h              | P1  | high | **tested 2026-08-01** — rewritten 2026-08-01 (F86 Tier-1, layer 3: keyed wrapper + vanilla body, one-shot latched heal) and **verified live by Tier-1 legs 1+2+5**: cadence gaps of 75 h, 83 h and 72 h all inside the designed 65–90 h roll; storm-warning timing proven UNCHANGED three independent ways (the `CurrentThread()` key's whole point); F88's per-load re-roll gone; and on uninstall the `Meteors` thread survives `valid=true` on vanilla's body (entry) |
 | F03 | Upgrade buffs leak & stack after salvage/demolish        | P1  | high | tested |
 | F04 | Night-shift workers never return to work after midnight  | P1  | high | fixed  |
@@ -91,7 +91,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
 | D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | SPECED 2026-07-30, user-approved, build owed (entry) |
 | D13 | Save-exit deliverables: uninstall procedure + standalone save-rescue artifact | dsgn| high | directed 2026-07-31 (owner), prelaunch — **HARD LAUNCH DEPENDENCY (owner, 2026-08-01): the pack does not ship until this ships alongside it**; ⛔ **spec GATED on Tier 1/2 landing AND verifying** (target list = their output, never today's leak set — the gate is sequencing, not priority); also owns the **complete per-site disposition table** required before release (FIX_POLICY §3a) and **must DERIVE the exposed set itself rather than inherit any recorded count** (the docs carry an open lower bound, "at least 13", from a grep known blind to slot/global/preset assignments, and the builds have since changed the set) — **its derivation is authoritative and it updates every doc stating a count** (list on the entry); second-artifact costs + open player-story design question on the entry (entry) |
-| F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed  |
+| F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed · **◑ 2026-08-01 (owner, logged-in Paradox browse): FAMILY witnessed live on Relaunched** (Jan 30 2026 — station removed, train bookkeeping wrong afterwards and stayed wrong), **but the verbatim "trains go to void" report was NOT located** — stop citing that phrase as a quote (entry) |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
 | F66 | Station↔tunnel connector hex ping-pong (never connects)  | P2  | med+ | tested |
 | F67 | Auto-lander launches empty, ping-pongs Mars↔asteroid     | P1  | high | tested — PT-16 PASS 2026-07-28 (entry) |
@@ -101,7 +101,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F71 | Auto-export fills capacity alphabetically (waste rock)   | P2  | med  | tested — PT-32 PASS 2026-07-28 (entry) |
 | F72 | "No available landers" while a lander sits on the pad    | P2  | med  | tested — PT-33 PASS 2026-07-28 (entry) |
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | tested — PT-19 PASS 2026-07-28 (entry) |
-| F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested |
+| F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested · **⭐ RIVAL-ROCKET REPORT FOUND 2026-08-01 (owner, logged-in Paradox browse): same reporter twice — OG Sep 5 2022 (overflow trigger) and Relaunched May 2 2026 on 1.07 (halt-mid-load trigger), both ending in a PERMANENTLY bricked rocket.** Primary evidence replaces the paraphrase-grade dev note; our guard covers both triggers (entry) |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
 | F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo — found 2026-07-27, wave-6 candidate (entry) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed 2026-07-28 — PT pending (entry) |
@@ -165,6 +165,38 @@ Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbe
 `IsGameRuleActive("NoDisasters")` check; every other disaster has one (ColdWave.lua:222,
 DustStorm.lua:413, DustDevils.lua:189, surface quake Marsquake.lua:43). Matches live
 Paradox-forum report. **Fix:** wrap FUNC slot (index 3) of `PeriodicRepeatInfo["UndergroundMarsquake"]`.
+
+**✅ WITNESS RE-DERIVED 2026-08-01 — the audit's "NOT re-derivable" is now
+retracted, and the replacement evidence is BETTER than the claim it rescues.**
+The owner ran the logged-in Paradox subforum browse that the audit booked as a
+stop-and-ask (§7.1 item (a)); the Cloudflare block was the only thing hiding
+this. Report by **Rubik** (member since Apr 18 2020), **May 8 2026**, on the
+subforum's bug-report template:
+> **Summary:** "Cave-ins occur when the No Disasters rule is used"
+> **Description:** "I started playing a new game after the V1.0.7 update using
+> the No Disasters game rule. I seem to remember that in previous versions of
+> the game, that rule would prevent cave-ins from occurring in the underground.
+> However, I am seeing periodic cave-ins in my current game."
+> **Steps to reproduce:** "1.) Start a new game with the No Disasters game rule
+> active. 2.) Research the Elevators tech to access the underground area. 3.) In
+> the underground area, observe that cave-ins occur on a periodic basis."
+> **Platform:** Steam · **Game Version:** 1.0.7
+
+**Why this is stronger than the sentence it restores.** It is first-party, dated,
+**version-stamped to 1.0.7** (our pinned build family), and carries steps to
+reproduce — where the original record was an unattributed "matches live
+Paradox-forum report" that no later session could find. It also matches the
+mechanism on the one word that matters: the reporter says **"periodic"**, and
+the defect is precisely a `MapGameTimeRepeat("UndergroundMarsquake", …)` with no
+`IsGameRuleActive("NoDisasters")` term (`Marsquake.lua:306-325`). Three
+independent witnesses now agree — this report, fredware's #9
+(*"Prevents periodic underground Marsquakes and cave-ins when No Disasters is
+enabled"*), and the sibling tell.
+⚠️ **One thing this does NOT establish:** the reporter's *"in previous versions
+that rule would prevent cave-ins"* is a recollection, not a measurement, and
+nothing here says the OG build had the check. Our claim is and stays about
+Relaunched source. **No code consequence — PT-11 already PASSed.** What changes
+is provenance: the audit row and its §1 tier need to agree with this.
 
 ### F02 — Meteors strike ~every 6h instead of 35–115h  `[tested 2026-08-01 (Tier-1 legs 1+2+5, logs Mars.exe-20260801-16.42.31 and -17.11.08, uninstall -19.14.11 — cadence in the roll, warning timing unchanged three ways, watchdog proven live on a real wedge, thread survives uninstall on vanilla's body; see the leg note at the entry's end): Code/Fix_MeteorFrequency.lua — REOPENED by PT-01 FAIL; REWORKED 2026-07-26 with a stall watchdog + forensics; PT-01 silence ROOT CAUSE PINNED 2026-07-29 to F78 + F81, wave-6 fixes shipped; **REWRITTEN 2026-08-01 (F86 Tier-1, spec §6.2a-A): layer-3 keyed GetDisasterWarningTime wrapper, vanilla's own body — the body copy and its heartbeat surface are DELETED; the per-load restart (F88) replaced by a one-shot version-latched heal (SMRFixPack_MeteorLatch GameVar); watchdog liveness moved onto an additive OnMsg.MeteorDone timestamp. Verification rides the Tier-1 legs (A/B pair + F88 load-3× mini-leg)** — see the rewrite note at the entry's end]`
 
@@ -2918,6 +2950,46 @@ don't know the stored ones are gone. **Fix:** pre-hook `Station:OnDemolish` to
 `Train.Done` refund guard; compensation prefabs for corrupted saves not exactly
 recoverable (count unrecorded).
 
+**◑ PARTIAL RESULT 2026-08-01 — the FAMILY is witnessed live on Relaunched; the
+exact "trains go to void" report is still not located.** Owner's logged-in
+Paradox subforum browse (audit §7.1 item (a)). Honest grade: this corroborates
+the counter-corruption mechanism, it does **not** retrieve the phrase this entry
+quotes.
+
+**Kopernikus79** (member since Feb 24 2011), **Jan 30 2026**:
+> "I built my first 2 train stations with 2 trains. Everything worked perfectly.
+> Some time later I crashed of the stations *[sic — reads as: demolished one of
+> the stations]* and built another one somewhere else, connecting it to one of my
+> first stations. After that, it told me that there are no trains, but looking
+> into the station info, it counted the 2 from my previous connection. In the end
+> I needed to built another one, to get the new line working, still showing that
+> I have 1/2 trains working and in an additional line that I also owe 2 other
+> trains. Looks like a bug?"
+
+**What it does and does not confirm.** It matches this entry's mechanism where it
+counts — a station is removed, and afterwards the colony's train bookkeeping is
+wrong in a way that persists and forces the player to build replacements
+(`city.available_prefabs["Train"]` never refunded, `City.lua:433-440`;
+`Train:OnDemolish` skipped by the bare `DoneObject`, `Station.lua:163-171`). It
+does **not** describe trains visibly vanishing, and the reporter's "crashed of
+the stations" is ambiguous between demolition and a game crash. **Treat it as
+family-level corroboration on the live build, not as the report this entry
+cites.**
+
+**Volume note (owner, same browse): there are MANY similar train reports, but
+most are older than the forum's five-month necro threshold** — i.e. the train
+cluster is widely reported and largely *stale*, which is itself a fact worth
+having. It means (a) the family is not obscure, and (b) a future search should
+not read the absence of *recent* posts as the defects being fixed.
+
+**⚠️ Still open, and deliberately not claimed:** the verbatim "trains go to void"
+report. This entry has quoted that phrase since it was written; one logged-in
+browse did not find it. That is now *"searched with the Cloudflare block removed
+and not located"* rather than *"unretrieved"* — enough to stop treating the
+phrase as a citation. **If it is never found, the quotation marks should come off
+it.** No code consequence either way — the fix is shipped and the mechanism is
+Src-verified independently of any witness.
+
 ### F65 — Station attached to a train tunnel never bridges the power grid (P2, med)  `[tested: Code/Fix_TrackTunnelPowerBridge.lua — PT-40 PASS 2026-07-28, full procedure incl. salvage split, long-track control, reload]`
 `TrackTunnel` description promises power transfer (`Data\BuildingTemplate\TrackTunnel.lua:17`);
 class machinery identical to working `Tunnel`. Defect: `OnMsg.StationsConnected`
@@ -3288,6 +3360,53 @@ load-bearing**: it was merged into the F53(a) row in `PLAYTEST_CHECKLIST.md`
 §6 and now rides along on that row's never-modded fresh colony rather than
 justifying one of its own. (Ours also remains a superset — his guard misses
 `UniversalRefugeeRocket`, audit §9.)
+
+**✅ THE RIVAL-ROCKET REPORT IS FOUND, 2026-08-01 — and it comes with its own
+OG-era ancestor from the same reporter.** Owner's logged-in Paradox subforum
+browse (audit §7.1 item (a)). **Homeshine** (member since Mar 29 2018) reported
+this defect **twice, on two different games, nine years apart**:
+
+*Relaunched, **May 2 2026**, **Game Version 1.07**, Steam:*
+> **Summary:** "1.07 causes Rockets from other civilizations to glitch out
+> permanently if refilled from an RC transport."
+> **Description:** "Just updated to 1.07. If you trade with another
+> country/civilization, and try to refill their rocket using an RC transport,
+> and then stop, the rocket is permanently glitched out and becomes a launchpad
+> paperweight for the entire rest of the game."
+> **Steps:** "…direct an RC transport to begin loading the requested resource.
+> Then, halt the RC transport. The rocket is never interactable by drones or an
+> RC transport ever again ever. It will sit on the launchpad forever, unable to
+> be filled with any resource."
+
+*Original game, **Sep 5 2022** ("Trains hotfix 1"):*
+> "Overflowing trade rocket never takes off again… if you use an RC transport to
+> load resources into the trade rocket from the other country, instead the
+> rocket breaks, it reads '0', and never gives you what you paid for or ever
+> takes off again… It does this whenever the RC transport **'overflows'** the
+> trade rocket with more of the export resource than it asked for."
+
+**Read the two together — they are not the same trigger.** 2022's trigger is
+*overflow* (loading more than the rocket asked for); 2026's is *halt mid-load*.
+Same terminal state both times: a permanently non-interactable rocket stuck on
+the pad for the rest of the game. **That matters for the 1.0.7 dev note.** The
+audit cited [S32] at paraphrase grade as *"RC-Transporter rare-metals
+rocket-overload exploit fixed"* — consistent with the **overflow** trigger being
+addressed. The May 2 2026 report is a player who had *just updated to 1.07* and
+hit the **halt** trigger anyway. So the honest reading is **not** "the patch note
+was false"; it is that the note plausibly covers one trigger and this reporter
+found another still live. (Not verified in Src by this session — recorded as a
+reading of two reports, not a code claim.)
+
+**Consequences.** (1) The "does the vanilla harm actually occur?" question that
+the rider existed for is now answered by a first-party dated report on our own
+build family — **paraphrase-grade evidence has been replaced by primary
+evidence**, and the merged F53(a) rider carries no F74 weight at all any more.
+(2) **Our guard covers both triggers by construction**: `Fix_RocketInteractGuard`
+refuses the RC-Transport-onto-rocket order in the first place, so neither an
+overflow nor a mid-load halt can be reached. (3) The player-visible cost is
+worse than this entry previously said — not "an exploit", a **permanently
+bricked rocket**, which raises what the fix is worth. **No code change; PT-39
+already PASSed.**
 
 **Audit 2026-07-30 (reachability): R2, one framing correction.** Rival-colony
 trade-pad and foreign-aid rockets are plain class `UniversalRocket`
@@ -6739,6 +6858,31 @@ count immediately before setting the flag and immediately after.
 
 ### D13 — Save-exit deliverables: the uninstall procedure + the standalone save-rescue artifact (design, high)  `[directed 2026-07-31 (owner) — prelaunch deliverable. ⭐⭐ **SIZING INPUT PENDING, 2026-08-01: chain prompt 12 JOB 0.** If the "OFF is three different things" doctrine holds, this artifact's target population is NOT "players who used a module" but **every player who ever had the pack installed, whatever their toggles were** — because a toggled-off module still has its hooks installed and still seeds frames. That changes how much work this is. Owner-ordered re-verification against primary evidence before anything is scoped on it ("we cannot be wrong about this"); see `ENGINE_FACTS.md`, and note two of the four sub-claims are INFERRED, not measured. ⛔ SPEC GATED: not specced, not built, until Tier 1/2 land AND verify — its target list is their OUTPUT. **PROMOTED 2026-08-01 (owner) to a HARD LAUNCH DEPENDENCY: the pack does not ship until this ships alongside it** — "we won't launch till it does". The gate is a sequencing fact, not a priority judgement: the cleaner is specced LAST because it can only be designed against the residual set the builds leave behind. Also now the owner of the **complete per-site disposition table** required before release (FIX_POLICY §3a). Moved here from FUTURE_IDEAS entry 5 (2026-08-01) so that file's "nothing here is work" rule stays true]`
 
+**✅ CONSOLE-CHANNEL INPUT LANDED 2026-08-01 (owner ran the Paradox Mods check;
+audit §7.1 item (b), recorded in `BUG_LIST_AUDIT.md` §10.4).** The audit booked
+this because "whether fredware/GromGor mirror there matters for D13". Answers:
+
+- **The channel is live and a Relaunched fix author already uses it.** GromGor
+  mirrors to Paradox Mods — an **exact mirror** of his Steam workshop, same
+  titles. **fredware does not; he is Steam-only** (so his removed mod has no
+  console-side copy either, and our archived FPK stays the only recoverable
+  form of it).
+- **The sharpened question for D13, which nobody has answered yet:** if this
+  pack ever publishes to Paradox Mods, the uninstall story is **not** the Steam
+  one. That audience has no console, so any rescue path that assumes typing
+  into a console does not exist for them — which bears directly on whether the
+  "standalone save-rescue artifact" can be a console procedure at all, or has
+  to be something a console player can actually run. **Decide the channel
+  before speccing the artifact**, because the answer changes what the artifact
+  is. Not a decision this entry makes.
+- ⚠️ **Discovery problem, recorded as an observation and not yet re-checked:**
+  the owner found that searching Paradox Mods for `bug` or `fix` returns **zero
+  hits**, while searching the author name `gromgor` surfaces his bug-fix-titled
+  mods immediately. If that holds, **a pack named for the words "bug" and "fix"
+  is undiscoverable by its own keywords on that channel** — a naming and
+  listing problem for `MOD_DESCRIPTION.md`, not a code one. One browse; re-check
+  before anything leans on it.
+
 **⛔ D13 DERIVES THE EXPOSED SET ITSELF — IT MAY NOT INHERIT ANY COUNT FROM
 THESE DOCS (owner, 2026-08-01).** The recorded numbers are **not** a closed
 answer and must not be treated as one:
@@ -7059,6 +7203,38 @@ quotes verbatim; sources in the audit report §8.
   install empty tables, `DoneObject`; plus a save sweep deleting existing
   shells. Needs its own F-row decision + a look at whether F44 should stop
   producing shells.
+  **🔎 POSSIBLE LIVE PLAYER SYMPTOM, 2026-08-01 — a LEAD, not a verdict, and it
+  must not be packaged as evidence until its provenance is nailed down.** During
+  the owner's logged-in Paradox browse, a bug report surfaced whose shape fits
+  this mechanism unusually well:
+  > **Summary:** "Cannot add trains to tracks" — *"I redid my entire train
+  > network with large train stations, and now I cannot assign trains to either
+  > track. I get the green tooltip that says 'assign train to track', but when I
+  > click nothing happens. I check the track and it says 0/10 trains. I have 7
+  > trains in my inventory, but still can't assign any to the tracks."*
+
+  **Why it is interesting here rather than under F64.** The reporter **has**
+  trains (7 in inventory) — so this is *not* the F64 counter-at-zero symptom,
+  which is the opposite failure. What they did first was **redo an entire track
+  network**, i.e. mass track demolition — the exact path
+  `DemolishAndSplitTrack` sits on — and what is broken afterwards is the
+  **track's** ability to accept an assignment (`0/10` with a live tooltip that
+  does nothing). A persistent `TrackBase` shell with `elements` /
+  `assigned_vehicles` emptied to `false` and `CanDelete = ret_false` is a
+  candidate explanation for a track that reports zero capacity-in-use and
+  silently refuses assignment.
+  **⚠️ Three reasons this is only a lead.** (1) **Provenance unestablished** —
+  it was seen as an in-game Bug Report dialog (with a *"Sending bug report
+  failed: 500"* error over it), not as a forum post with a thread and date, so
+  we do not know who reported it, when, or on which build; it may never have
+  reached Paradox at all. (2) **The chain is unverified** — nobody has traced
+  the assignment path (`AssignTrain` / the track's vehicle slots) against a shell
+  to confirm a shell actually produces this symptom. (3) **Alternatives are
+  live** — F80's enumeration suspicion and ordinary route/track-state defects
+  could produce the same surface.
+  **What would settle it:** trace what `assign train to track` checks and
+  whether a shell-state `TrackBase` fails it silently. That is a source
+  question, cheap, and it belongs to whoever packages C33.
 - **C34 [author, source held] — stale-ACTIVE rain state: `g_RainDisaster`
   set with a dead `main_thread` reads as disaster-active forever; nothing in
   our pack repairs it.** fredware's rains module heals it via vanilla's own

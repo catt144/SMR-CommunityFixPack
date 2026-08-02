@@ -213,6 +213,38 @@ TestKit coverage and belongs to nobody's numbered prompt.
 
 (any prompt may have routed standing items here — resolve them all)
 
+### ✅ RESOLVED SAME DAY — do NOT re-ask. Kept for the QA trail only.
+
+**The owner ran BOTH checks on 2026-08-01, within the hour they were routed
+here.** Results are recorded in `BUG_LIST_AUDIT.md` **§10.4** and on BUGS **F01
+/ F64 / F74 / C33 / D13**. Headlines: **F01's witness is FOUND** (May 8 2026,
+Game Version 1.0.7, with repro steps — the audit's "NOT re-derivable" is
+retracted); **F74's rival-rocket report is FOUND twice from the same reporter**
+(OG 2022 + Relaunched 1.07 May 2026, two different triggers, both bricking the
+rocket permanently); **F64 is partial** — family witnessed live, verbatim phrase
+still not located, so it stops being a quotable citation. **Paradox Mods:
+GromGor mirrors exactly, fredware does not**, plus a discovery problem worth
+re-checking (`bug` / `fix` return zero hits; author search works).
+
+**Two live items this leaves for your backward QA:**
+1. **⚠️ `[S22]` may be a bad citation of our own.** Thread IDs `1112166` /
+   `1113731` / `1495056` (carrying **F06** and **F16**'s Paradox corroboration)
+   404'd — *but the URL tried was malformed*, so retry the clean form
+   `forum.paradoxplaza.com/forum/threads/<id>/`. **If they still 404, those two
+   citations are unsupported and must be downgraded or dropped.** Neither fix
+   depends on them; this is provenance, not code.
+2. **The audit's §1/§2 witness grades now lag its own §10.4** for F01 and F74.
+   Bookkeeping, not a decision — but it is exactly the drift job 7 exists to
+   catch, so catch it here.
+
+**The method lesson is the part worth carrying into the QA report:** §7.1 used
+*"the crawler is blocked"* as grading input, and a single logged-in browse found
+two of the three reports it had written off. **Inability to reach a source is
+not evidence about the source.**
+
+<details>
+<summary>Original routing note (superseded — expand only if the QA trail needs it)</summary>
+
 ### Routed here from chain prompt 6 (2026-08-01) — the audit's TWO remaining owner web-checks, still open
 
 **These are owner actions, not agent work — neither can be done from a
@@ -238,6 +270,8 @@ already done either since 2026-08-01, record the outcome and strike the item —
 do not re-ask.** If they have not, this is a reminder, not a blocker: it gates
 nothing in the chain, and the QA report should say so plainly rather than
 carrying it as an unresolved defect.
+
+</details>
 
 ### Also from prompt 6 (2026-08-01) — one QA-relevant correction, so job 0's sweep does not inherit it
 

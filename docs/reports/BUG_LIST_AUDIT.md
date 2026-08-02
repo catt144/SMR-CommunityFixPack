@@ -108,7 +108,7 @@ witness (BRONZE→SILVER promotion per prompt §Witnesses).
 
 | id | prov | grade | witness / basis |
 |---|---|---|---|
-| F01 | player-report | (b)⚑ | **Recorded "Matches live Paradox-forum report" is NOT re-derivable** (forum Cloudflare-blocked; no matching thread title found). Partial OG witnesses only [S19]. ⚑ fredware #9 names the player-facing symptom: "Prevents periodic underground Marsquakes and cave-ins when No Disasters is enabled." [S23] **R**. Sibling tell (every other disaster checks the rule). Owner action: logged-in check of Paradox subforum 1189 |
+| F01 | player-report | (b)⚑ **→ see §10.4: RETRACTED, witness found** | ~~**Recorded "Matches live Paradox-forum report" is NOT re-derivable**~~ **RE-DERIVED 2026-08-01** by the owner's logged-in browse — Rubik, **May 8 2026, Game Version 1.0.7**, with steps to reproduce and the word "periodic" matching the mechanism. The Cloudflare block was the whole reason it looked unfindable. Partial OG witnesses also [S19]. ⚑ fredware #9 names the player-facing symptom: "Prevents periodic underground Marsquakes and cave-ins when No Disasters is enabled." [S23] **R**. Sibling tell (every other disaster checks the rule). Owner action: logged-in check of Paradox subforum 1189 |
 | F02 | src-diff | (b) | Generic severity witnesses only ("about 40% of my colonists died when meteors collided" — MaritimeRetro, Nov 2025 [S20] **R**); nobody quantifies the ~6h cadence or the tower inversion. Sibling tell (intact loop 40 lines below) carries it |
 | F03 | src-diff | (a)⚑ | ChoGGi fixed the same leak class in OG (Water Reclamation upgrade leak, per corpus match); mechanism in Relaunched proven by our PT-02 in play |
 | F05 | src-diff | (b) | "Is there supposed to be a popup i missed telling me i 'won'…?" + community consensus that no win popup exists [S21] **R** — consistent with the crash swallowing "A dream fulfilled"; rules/error not confirmed in-thread |
@@ -129,9 +129,9 @@ witness (BRONZE→SILVER promotion per prompt §Witnesses).
 | F53 | mixed | (b) | Family witnesses (F52's quotes + RESEARCH's "die walking rocket→dome" paraphrase); the arrivals-specific safety-dome detail is unwitnessed verbatim |
 | F59 | src-diff | (b) | "They refuse to to find a home, even if there are plenty of free houses." — Boothy, Nov 17 2025 [S9] **R** + dev 1.0.4 note. Soft-intent flag from the challenge review stands as a caveat; escapes HOLD on the witness |
 | F60 | src-diff | (b) | "Citizens become homeless despite free housing in both their own and adjacent domes." — Kudaku [S2] **R** — family-grade (overlaps F58/F59); counter-mismatch specifics unwitnessed |
-| F64 | mixed | (b) | Dev-side: "Deleting a track will now prefab trains at stations that are still associated with it" + stored-train notifications added in 1.0.7 [S5] — the defect family acknowledged; the "trains go to void" report itself not relocated (likely in the blocked Paradox subforum) |
+| F64 | mixed | (b) | Dev-side: "Deleting a track will now prefab trains at stations that are still associated with it" + stored-train notifications added in 1.0.7 [S5] — the defect family acknowledged; the "trains go to void" report itself not relocated (likely in the blocked Paradox subforum). **◑ 2026-08-01 (§10.4): the block was removed and the FAMILY is witnessed live (Jan 30 2026), but the verbatim phrase was still NOT found — stop quoting it** |
 | F69 | mixed | (b) | "it arrives at asteroid, it is then stuck there because it did not load the 70 fuel you wanted" — Jammy [S12]; "I've got an RC Commander and 6 drones STRANDED on this EFFING ASTEROID" — DwarfMurdered [S13] **R**. Manual-landing fuel-dump not isolated from F67/F68 |
-| F74 | mixed | (b)⚑ | 1.0.7 note [paraphrase-grade]: RC-Transporter rare-metals rocket-overload exploit fixed [S32]; ⚑ fredware #10: "Prevents RC Transports from interrupting Universal Trade Rockets." [S23] **R** |
+| F74 | mixed | (b)⚑ **→ see §10.4: primary evidence found** | 1.0.7 note [paraphrase-grade]: RC-Transporter rare-metals rocket-overload exploit fixed [S32]; ⚑ fredware #10: "Prevents RC Transports from interrupting Universal Trade Rockets." [S23] **R**. **⭐ 2026-08-01: the rival-rocket report is FOUND — Homeshine, twice, OG Sep 5 2022 (overflow trigger) and Relaunched May 2 2026 on 1.07 (halt-mid-load trigger), both ending in a permanently bricked rocket.** Paraphrase-grade is superseded by primary; the note plausibly covers one trigger and not the other |
 | F76 | play | (a) | Own keyboard (owner verbatim in the entry) **plus** OG same-symptom witness: "The icon which should appear when I click on a deposit does not appear!" [S33] **OG** — suggests NOT ultrawide-only; raises this todo's priority |
 
 ### 2.3 BRONZE — sweep-only; finding report → owner review
@@ -380,6 +380,13 @@ one-off single-fix authors (listed in the roster agent output with links).
    consider subscribing to GromGor's five mods (no public source — the
    workshop download would hand us his packed Lua for mechanism comparison
    on F04/F81a/C31) and fredware's Bug Fixes.
+   ✅ **ALL THREE ARE NOW DONE — §7.1 CLOSES.** (c) was consumed by the §9
+   packed-source round. **(a) and (b) were run by the owner on 2026-08-01 and
+   are recorded in §10.4** — (a) returned two hits and one partial, and
+   retracts this bullet's F01 claim; (b) returned a live console channel with
+   a discovery problem. The general lesson stands and is worth keeping: **"the
+   crawler cannot reach it" was doing far more work in this audit's grading
+   than anyone noticed** — two of three reports existed all along.
 2. **Corrections to our own records made or flagged by this audit:** F42 index
    row (`blocked`→`wontfix`, fixed this commit); F34's claimed ChoGGi
    corroboration falls (§2.3); F35's witness may out-scope our fix (work item
@@ -613,3 +620,41 @@ repair. The settling observation is named on the C35 entry.
 **Method note worth keeping:** §9 graded this "overlaps" from the fix
 *descriptions*. Reading the two bodies against Src reversed it. Same lesson as
 §9's own F04 bullet, one level up.
+
+### 10.4 ⭐ The two owner web-checks were RUN (2026-08-01) — §7.1 closes, and one of this audit's own claims is retracted
+
+**The owner ran both stop-and-ask items the same day prompt 6 routed them.**
+Results below; per-entry records on BUGS F01 / F64 / F74 / C33.
+
+**The headline is a correction to this audit, not to the pack.** §7.1 leaned on
+"forum.paradoxplaza.com is crawler-blocked" to grade three reports
+*unretrieved*. With a logged-in browser, **two of the three were found in one
+sitting**. Nothing about the code changed — all three fixes were already
+shipped and tested — but *"we could not reach the source"* had been quietly
+functioning as evidence about the world, and it was not.
+
+| Item | Result |
+|---|---|
+| **F01** — NoDisasters cave-ins | ⭐ **FOUND.** Rubik, **May 8 2026**, **Game Version 1.0.7**, Steam, with steps to reproduce. The recorded "matches live Paradox-forum report" is **vindicated**, and the replacement is stronger than the original claim — dated, version-stamped to our build family, and its word *"periodic"* matches `MapGameTimeRepeat("UndergroundMarsquake", …)` exactly. **§2's "NOT re-derivable" is retracted.** |
+| **F74** — rival rocket | ⭐ **FOUND, twice, same reporter.** Homeshine: OG **Sep 5 2022** (*overflow* trigger) and Relaunched **May 2 2026 on 1.07** (*halt-mid-load* trigger). Both end in a rocket permanently stuck on the pad. **Primary evidence supersedes the paraphrase-grade dev note [S32]** — and the sane reading is that the note covers the overflow trigger while a player on 1.07 hit the other one. The defect survived the remaster. |
+| **F64** — "trains go to void" | ◑ **PARTIAL.** The *family* is witnessed live (Kopernikus79, **Jan 30 2026**: station removed → train bookkeeping wrong afterwards and stayed wrong). The **verbatim phrase this project has quoted since the entry was written was not located.** It is now "searched with the block removed and not found" — **stop citing it as a quote.** Owner also reports **many** similar train threads, mostly past the forum's five-month necro threshold: the cluster is well-reported and largely stale, so absence of *recent* posts must not be read as "fixed". |
+| **Paradox Mods (console channel)** | ✅ **RUN.** **GromGor mirrors there — an exact mirror of his Steam workshop, same titles. fredware does NOT; he is Steam-only.** So the channel is live and already used by a Relaunched fix author, and fredware's removed mod has no console-side copy either — our archived FPK remains the only recoverable form of his work. |
+| **⚠️ Discovery on Paradox Mods is term-hostile** | Owner's observation: **searching `bug` or `fix` returns ZERO hits**, while searching the author name `gromgor` surfaces his bug-fix-titled mods immediately. Recorded as an **observation, not a mechanism** — one browse, and search behaviour changes. (The owner's read is that Paradox suppresses such terms; that is a hypothesis this audit does not test.) **If it holds, it is a distribution fact with teeth: a pack whose name and purpose are the words "bug" and "fix" would be undiscoverable by its own keywords on that channel.** Re-check before anything depends on it. |
+
+**⚠️ A CITATION OF OUR OWN IS NOW IN DOUBT — [S22].** The three thread IDs this
+audit cites at title/snippet grade (`1112166`, `1113731`, `1495056`, carrying
+**F06** and **F16**'s Paradox corroboration) **all returned "page could not be
+found"** when the owner tried them. **Not conclusive** — the URL in evidence was
+malformed (a thread path concatenated onto a search path), so the clean form
+`forum.paradoxplaza.com/forum/threads/<id>/` has not really been tested. But
+[S22] was produced by a blocked crawler reading search snippets, which is
+exactly the grade of evidence §10.4 has just caught being wrong twice.
+**Action for whoever does the doc QA: retry the three clean URLs. If they still
+404, F06's and F16's Paradox citations are unsupported and must be downgraded
+or dropped** — neither fix depends on them, so this is a provenance repair, not
+a code risk.
+
+**What §10.4 changes downstream:** F01 and F74 gain primary witnesses (tier
+consequences are bookkeeping, not new decisions); F64 loses a quotation;
+C33 gains a possible live symptom recorded as a **lead with unestablished
+provenance**; D13 gains a confirmed console channel plus a discovery problem.
