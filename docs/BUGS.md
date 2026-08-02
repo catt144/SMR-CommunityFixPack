@@ -7117,8 +7117,23 @@ Idempotence, re-derived rather than inherited: `SetLabelModifier` is keyed by
 label and adds the new one, netting zero on a re-run
 (`Lua\LabelContainer.lua:59-78`) — and the stale removal walks
 `labels["Religious"]`, an array that is empty by definition of this defect, so it
-can never subtract morale from anyone. The pass is therefore safe on every load,
-which is what makes it a one-shot heal that needs no latch of its own.
+can never subtract morale from anyone. The pass is therefore safe on every load.
+
+⚠️ **CORRECTED 2026-08-02, before the batch leg ran — idempotent is not the same
+property as one-shot, and this spec asked for both.** As first built, the re-apply
+had **no presence check**: it re-registered every dome Saint's modifier on *every*
+load, forever. That is harmless (the replace nets zero) but it is **not the
+"one-shot re-base" this spec specifies**, and it would have printed its log line in
+every future session's log — permanent noise in the one artifact this project
+reads its results out of. The check now skips a colonist who already carries the
+modifier under the corrected label, which is **the same shape
+`Fix_AstrogeologistExtractors` already used for its own heal**; the unconditional
+stale removal is kept, since it costs nothing and cannot subtract from anyone.
+**The log line is now diagnostic**: it appears only on a save that genuinely
+needed healing, and a second load of a healed save is silent.
+*Found by re-reading this module against its own spec while setting up the leg's
+F91 fixture — not by the leg, which would have reported it as a P8 miss with an
+ambiguous cause.*
 
 ⚠️ **The gameplay change is real and is called out in the header, the commit and
 here**: after this fix Saints raise Religious colonists' morale by +10 in their

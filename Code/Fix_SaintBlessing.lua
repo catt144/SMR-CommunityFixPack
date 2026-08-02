@@ -131,12 +131,21 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 -- under the broken value left a modifier filed on the raw label; the corrected
 -- preset alone does not move it, because nothing re-runs Apply on a load.
 --
--- Idempotent by construction, which is why it can run on every load:
---   * the stale removal walks self.labels["Religious"], an array that is empty by
---     definition of this defect, so it cannot subtract morale from anyone;
---   * SetLabelModifier is keyed by (label, unit) and REPLACES — it removes the
---     old modifier from everyone in the label and adds the new one, netting zero
---     on a re-run (LabelContainer.lua:59-78).
+-- Idempotent, and ALSO one-shot in effect — the two are different properties and
+-- the spec asked for both:
+--   * the stale removal runs unconditionally. It walks self.labels["Religious"],
+--     an array that is empty by definition of this defect, so it cannot subtract
+--     morale from anyone, and doing it every time costs nothing;
+--   * the RE-APPLY is skipped when this colonist already carries the modifier
+--     under the corrected label. Without that check the pass re-applies to every
+--     dome Saint on every load forever — harmless (SetLabelModifier is keyed by
+--     (label, unit) and REPLACES, so a re-run nets zero, LabelContainer.lua:59-78)
+--     but it is NOT one-shot, and it would print its line in every future
+--     session's log. ⚠️ That is exactly what this pass did when first built
+--     2026-08-02; caught before the batch leg ran, and the check is the same shape
+--     Fix_AstrogeologistExtractors already used for its own heal.
+-- The log line therefore MEANS something: it appears only on a save that actually
+-- needed healing, and a second load of a healed save is silent.
 -- It reuses vanilla's own application path rather than hand-rolling a modifier,
 -- so the id, scale and container stay identical to what a new game produces.
 OnMsg.LoadGame = SMRFixPack.WhenActive(FIX_ID, function()
@@ -150,13 +159,19 @@ OnMsg.LoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 		if not IsValid(colonist) or not colonist.dome then return end
 		local traits = colonist.traits
 		if type(traits) ~= "table" then return end
+		local dome = colonist.dome
 		for trait_id in pairs(traits) do
 			local old_label = rebased_from[trait_id]
 			local p = old_label and presets[trait_id]
 			if p and p.modify_target == "dome colonists" then
-				colonist.dome:SetLabelModifier(old_label, colonist, nil)
-				p:AddDomeColonistsModifier(colonist, p.modify_trait)
-				rebased = rebased + 1
+				-- always clear the stale registration; it cannot cost anyone morale
+				dome:SetLabelModifier(old_label, colonist, nil)
+				local mods = type(dome.label_modifiers) == "table"
+					and dome.label_modifiers[p.modify_trait]
+				if not (mods and mods[colonist]) then
+					p:AddDomeColonistsModifier(colonist, p.modify_trait)
+					rebased = rebased + 1
+				end
 			end
 		end
 	end)
