@@ -1126,11 +1126,25 @@ nothing to do with this fix.** `MapSettings_DustDevils` shares the `Atmosphere` 
 `OverrideDisasterDescriptor` **returns nil** once the parameter passes the
 threshold (`:69`), after which the scheduler parks in
 `while not new_descr do Sleep(const.DayDuration) end`. **Check before choosing a
-colony:**
+colony — two bare expressions, one at a time:**
 
 ```
-*r ConsolePrint("DustStormsDisabled: "..tostring(rawget(_G,"DustStormsDisabled")).." | Atmosphere: "..tostring(GetTerraformParamPct("Atmosphere")))
+DustStormsDisabled
+GetTerraformParamPct("Atmosphere")
 ```
+
+⛔⛔ **DO NOT use the `rawget(_G, "DustStormsDisabled")` form that chain prompt
+8c's addendum carried — IT CANNOT WORK IN THE CONSOLE, and it was never run.**
+Both `rawget` and `_G` are in `ModEnvBlacklist` (`Mod.lua:1267-1428`, verified
+2026-08-02: `_G = true`, `rawget = true`, while `setmetatable`/`rawset` are
+deliberately left available). The console runs inside that same sandbox
+(`console.lua:27-56`), so the snippet calls a nil value. **The failure would not
+have looked like a broken command — it would have looked like an answer**, and
+the whole point of the check is to stop the sitting when it says `true`.
+`DustStormsDisabled` is an ordinary non-blacklisted global, so a **bare read
+reaches the real `_G`** and is the correct form. ⚠️ This is the same class of
+mistake as the rest of the prompt-7-era detail defects: the reasoning was right
+and the mechanism was wrong.
 
 `true` means that colony **cannot produce dust devils at all**. ⛔ The campaign's
 deep colony (`TEST 2H`, sol 285) is past the threshold and **cannot host this
@@ -1153,15 +1167,60 @@ The shipped cadence is unusable for a leg: `DustDevils_VeryHigh_3` sleeps
 the burst, so one wave of 8 would take most of an evening. The leg therefore
 **compresses the preset in the console** and records that it did.
 
+**Paste one line at a time. The console input is ONE LINE and a `--` comment
+anywhere in a `*r` snippet makes the whole chunk fail to compile.**
+
 ```
-*r local p = Presets.MapSettings.DustDevils.DustDevils_VeryHigh_3
-*r MainMap.mapdata.MapSettings_DustDevils = "DustDevils_VeryHigh_3"
-*r MainMap.mapdata.MapSettings_DustStorm = "disabled"
-*r p.spawntime = 4 * const.HourDuration  p.spawntime_random = 0
-*r p.warning_time = 1000  p.spawn_delay_min = 1000  p.spawn_delay_max = 1000
-*r p.duration = 20000  p.duration_random = 0
-*r SMRTest.Log.DustDevils(true)
+SMRTest.Log.DustDevils(true)
+MainMap.mapdata.MapSettings_DustDevils = "DustDevils_VeryHigh_3"
+MainMap.mapdata.MapSettings_DustStorm = "disabled"
+*r local p = Presets.MapSettings.DustDevils.DustDevils_VeryHigh_3 p.spawntime = 4 * const.HourDuration p.spawntime_random = 0 p.warning_time = 1000 p.spawn_delay_min = 1000 p.spawn_delay_max = 1000
+*r RestartGlobalGameTimeThread("DustDevils")
+*r MainMap:MapForEach(true, "PrefabFeatureMarker", function(m) if m.FeatureType == "Dust Devils" and m.thread then DeleteThread(m.thread) m.thread = false end end)
 ```
+
+**Why each line is there, because three of them are not optional:**
+
+* ⛔ **The restart is mandatory or the leg does not start.** The scheduler is
+  already asleep inside `Sleep(Max(spawn_time - warning_time, 1000))` with the
+  OLD `spawntime`, and a preset edit cannot shorten a sleep already in progress —
+  the first compressed wave would otherwise be ~270 game hours away.
+  `RestartGlobalGameTimeThread("DustDevils")` re-creates the thread from
+  `GlobalGameTimeThreadFuncs`, which is **vanilla's body** (F97 owns no body), so
+  this is not touching pack code. ⚠️ It re-rolls the pending wave timer — the F88
+  cost — which is harmless *here* because we are deliberately re-timing the
+  scheduler anyway, and is exactly the cost F97 avoids paying in shipped code.
+* ⛔ **The marker sweep is mandatory or the count is contaminated.** The
+  scheduler's opening block creates a marker thread per `PrefabFeatureMarker`
+  (`DustDevils.lua:200-206`) and **assigns over `marker.thread` without deleting
+  the old one**, so every restart leaves an orphan marker thread spawning devils
+  on its own schedule. Marker devils spawn with a position and are
+  indistinguishable from wave devils in the log. Run the sweep **after** the
+  restart, and re-run it after any further restart.
+* **`MapSettings_DustStorm = "disabled"`** is how storms are turned off. See
+  Trap 2 — the flag is not.
+
+⚠️ **After ANY reload, re-apply the two `MainMap.mapdata` lines, the restart and
+the marker sweep.** `OnMsg.LoadGame` → `ApplyDisasterSettings` rewrites
+`MainMap.mapdata[disaster]` from the `g_DisastersSettings` GameVar
+(`MapSettings.lua:36-60`), so the map edits do not survive a load. The **preset**
+edits do survive a load (presets are session state) but not a game restart.
+
+### ⭐ Sixty-second smoke test — do this before committing to the long leg
+
+The repair is visible without waiting for a single wave, because the descriptor
+getter is pure. Run this a dozen times:
+
+```
+*r local d = GetDustDevilsDescr() ConsolePrint(tostring(d and d.spawn_chance), tostring(d and d.count_min), tostring(d and d.count_max), tostring(d and d.SMRFixPack_spawn_gate))
+```
+
+**Expect `100  6  8  true` and `100  0  0  true` in roughly equal numbers.** With
+`SMRFixPack_Disabled.DustDevilSpawnGate = true` expect `50  6  8  nil` every time.
+If that does not happen, stop — the leg cannot succeed and the fault is upstream
+of any timing. ⚠️ Each call consumes one `SessionRandom` draw and does **not**
+touch the running scheduler (it holds its own descriptor); a dozen draws is
+noise, a thousand is not.
 
 ⚠️ **This is fix verification, not reachability evidence** (FIX_POLICY §4a) — the
 same standing F96's manufactured sinkhole has. The *defect* is source-verified
@@ -1217,18 +1276,34 @@ way** — P6 is the discriminator, and it needs only one wave of 8.
 
 ### Steps
 
+⚠️ **Use a throwaway save or a sandbox.** The compressed cadence puts 6-8 dust
+devils on the map every ~4 game hours for the length of the leg; they dust
+buildings, trigger malfunctions and hurt colonists in the open. That is the
+behaviour under test, not a side effect to design around — but do not run it on
+a campaign save you care about.
+
 1. **PT-00 sweep.** Then pick a colony and run the **Trap 1** terraforming check
-   before anything else. If it prints `true`, change colony.
+   before anything else. If `DustStormsDisabled` prints `true`, change colony.
 2. `*r SMRTest.RunAll()` → **P2**. `SMRFixPack.ListFixes()` → **P1**.
-3. Apply the setup block. Confirm `HasDustStorm(MainMap)` is false and
-   `DustStormsDisabled` is still `false` (**Trap 2**).
-4. **Vanilla half first** — disable the fix, let ~5 waves run at high speed,
-   count positioned spawns between `WAVE` lines → **P3**.
-5. **Re-enable**, let ~10 waves run → **P4, P5, P6**. Watch **P7** throughout.
-6. Save mid-wave, reload, continue a wave or two → **P9**.
+   ⚠️ Use the `*r` form — a bare `SMRTest.RunAll()` runs with no thread context
+   and some probes skip.
+3. Apply the setup block, then the **sixty-second smoke test**. Confirm
+   `HasDustStorm(MainMap)` is false and `DustStormsDisabled` is still `false`
+   (**Trap 2**).
+4. **Vanilla half first** — `SMRFixPack_Disabled.DustDevilSpawnGate = true`, then
+   `*r RestartGlobalGameTimeThread("DustDevils")` and the marker sweep again so
+   the change takes effect at once. Let ~5 waves run at high speed; count
+   positioned spawns between `WAVE` lines → **P3**.
+5. **Re-enable** (`SMRFixPack_Disabled.DustDevilSpawnGate = false`, restart,
+   marker sweep), let ~10 waves run → **P4, P5, P6**. Watch **P7** throughout.
+6. Save mid-wave, reload, **re-apply the setup**, continue a wave or two → **P9**.
 7. Check the other disasters are still arriving normally → **P8**. (A meteor or
-   cold wave in the log is enough; do not wait for one.)
-8. Quit, remove the pack, load the same save, run a wave → **P10**.
+   cold wave in the log is enough; do not wait for one.) ⚠️ Dust storms are off on
+   this map by construction — read P8 off meteors and cold waves only.
+8. Quit, remove the pack (Mod Manager; **keep the Test Kit on**), load the same
+   save, re-apply the setup, run a wave → **P10**.
+9. `FlushLogFile()` before reading the log while the game is still running —
+   `ConsolePrint` output and the pack's own lines sit in the buffer otherwise.
 9. ⛔ **Report every unexplained log line with its age.** "Not caused by our leg"
    is an attribution verdict and not a dismissal, and every previous pushback on
    one of these lines has turned up a vanilla defect that was not on our list
