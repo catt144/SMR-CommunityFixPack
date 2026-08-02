@@ -506,3 +506,61 @@ and it keeps being learned rather than enforced. **A candidate diagnosis for
 job 7: the docs have no way to mark the difference between a fact derived from
 Src this session, a fact inherited from an earlier session, and a guess.** All
 three are written in the same voice.
+
+### Added by chain prompt 8 (2026-08-02) — one review item, and one job-7 instance of exactly the class above
+
+**⚠️ REVIEW ITEM — a group-A conversion was withdrawn after being checked
+against source.** `SAVE_SAFETY_REDESIGN.md` §5.4 group A listed **six** modules
+as *"convert to a chained wrapper — no body copy, **verified feasible**"*, with
+the preamble *"each was checked against the shipped body, not inferred from our
+header"*. Prompt 8 built five of them. The sixth,
+**`Fix_TrainCargoDumping`, had no route at all**, and the row that promised one
+is wrong in its load-bearing clause:
+
+- §5.4 said the fix could come from wrapping the demand request's
+  `GetTargetAmount`. **`GetTargetAmount` is not Lua.** The only Lua declaration
+  of that name in Src is `ResourcePile:GetTargetAmount`
+  (`Lua\ResourcePile.lua:79`) — a different class. `station.demand[res]` is a
+  **TaskRequest**, built by the native `Request_New`
+  (`CommonLua\TaskRequest.lua:109-137`); its methods live on the native
+  metatable `Request_GetMeta()` returns.
+- Patching that metatable would desynchronise the savegame **permanents** table
+  (`permanents["TaskRequest.GetTargetAmount"]`, `CommonLua\TaskRequest.lua:38`),
+  and `PersistGatherPermanents` is **blacklisted for mods** — we could not
+  re-register ours.
+- 148 call sites across the request economy, and **no key**: the wrapper cannot
+  tell it is inside `Train:UnloadAll`, and the fix's two escape hatches need the
+  **train**, which the request never carries.
+
+The second route prompt 8 looked for (pre-wrapper swapping
+`station.storable_resources` under `pcall`, F90's shape) is behaviourally exact
+but mutates a **persisted property** on a live object inside a command path —
+worse on §3a grounds than the copy it would replace, on a module §5.4 itself
+certifies is already save-safe. **Skipped under prompt 8's stop condition 1;
+moved to group C; group counts corrected to 5 / 4 / 10 / 3.** Full reasoning is
+on BUGS **F46**; §5.4's row, its bottom line and group C all carry the
+correction. **What is owed here is a second opinion on the skip**, not a rebuild:
+if a route was missed, the module should still convert.
+
+**⭐ And the second, smaller correction, recorded because prompt 8 disagreed with
+its own instructions rather than with a fact.** §5.4 also claimed
+`Fix_ShuttleHubOffAvailable` converts to a wrapper that eliminates the copy. It
+converts — byte-equivalently — but the copy is **duplicated, not eliminated**:
+the shipped function returns one colony-wide boolean and never says which hub
+produced it, so the predicate has to be owned. The conversion is still worth
+having (we can never be looser than a patched vanilla), and it shipped, but the
+row overstated the benefit and both the entry and §5.4 now say so.
+
+**Job-7 seed line (chain rule 4b).** Instance: **a table column that asserts its
+own verification.** §5.4's group A is headed *"verified feasible"* and prefaced
+*"each was checked against the shipped body, not inferred from our header"* —
+and one of its six rows was inferred, from a method name, without checking where
+that name is declared. This is the same failure the prompt-7 block above
+diagnoses ("the docs have no way to mark the difference between a fact derived
+from Src this session, a fact inherited, and a guess"), with one aggravation
+worth its own line: **here the doc did not merely fail to mark the difference —
+it explicitly claimed the stronger status for all six.** A blanket
+"verified"/"checked" header applied to a *list* launders every row to the
+standard of the best one, and nothing in the format can record that row 6 was
+weaker. Caught only by going to primary source, again, and only because a
+session was made to build the thing rather than cite it.

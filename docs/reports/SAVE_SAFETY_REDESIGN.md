@@ -430,9 +430,35 @@ how the results should be read:
 **Scope correction:** the outstanding set is **22**, not the "~17" estimated in
 §5.4 — that figure was a guess and is superseded.
 
-#### A. Convert to a chained wrapper — no body copy, verified feasible (6)
+#### A. Convert to a chained wrapper — no body copy, verified feasible (6 → **5 built, 1 withdrawn**)
 
 Each was checked against the shipped body, not inferred from our header.
+
+> ⭐ **BUILT 2026-08-02 (chain prompt 8).** Five of the six converted and
+> committed one per module, each with its before/after equivalence argument on
+> the module header and on the BUGS entry: `Fix_SmallLandscapeSites` (`69c02b9`),
+> `Fix_NightShiftWork` (`26f0b57`), `Fix_GeneForging` (`ab7d432`),
+> `Fix_ShuttleHubOffAvailable` (`388c72a`), `Fix_UpgradeModifierLeak`
+> (`21990fb`). Two honest corrections to the rows below, because the sweep
+> undersold one and oversold another:
+> - **`Fix_ShuttleHubOffAvailable`'s copy is NOT eliminated.** "Re-validate only
+>   on the `true` path" is right and it is byte-equivalent, but the shipped
+>   function returns one colony-wide boolean and never says which hub produced
+>   it, so the predicate still has to be owned and the loop is *duplicated*. What
+>   the delegation buys is §1.4b's degradation property (we can never be looser
+>   than a patched vanilla), not a smaller body. Rot exposure reduced, not removed.
+> - ⛔ **`Fix_TrainCargoDumping` is WITHDRAWN from group A — the route this table
+>   describes does not exist.** `GetTargetAmount` is a **native** method on the
+>   `TaskRequest` metatable (`Request_GetMeta()`), not Lua — the only Lua
+>   declaration of that name in Src is `ResourcePile:GetTargetAmount`, a different
+>   class — and it is published as a savegame **permanent** through the
+>   mod-blacklisted `PersistGatherPermanents` hook, across 148 call sites with no
+>   key that separates `Train:UnloadAll` from the rest of the request economy.
+>   The row was inferred, not checked. A second route (pre-wrapper swapping
+>   `station.storable_resources` under `pcall`) is behaviourally exact but
+>   mutates a **persisted property** on a live object, which is worse on §3a
+>   grounds than the copy it replaces, on a module already certified save-safe.
+>   **Moved to group C.** Full reasoning: BUGS **F46**. Routed to prompt 12.
 
 | module | current | the wrapper that replaces it |
 |---|---|---|
@@ -441,7 +467,7 @@ Each was checked against the shipped body, not inferred from our header.
 | `Fix_GeneForging` | replaces global `GetRareTraitChance` | Vanilla returns `nil` or `TechDef.GeneSelection.param1`; the two techs are meant to **add**. `return (orig(unit) or 0) + <GeneForging param1 if researched>`. Downstream does `100 + (x or 0)`, so nil-vs-0 is equivalent |
 | `Fix_ShuttleHubOffAvailable` | replaces global `IsLRTransportAvailable` | Vanilla returns a boolean and the fix only makes it **stricter**, so `false` from the original is already correct. Re-validate only on the `true` path |
 | `Fix_UpgradeModifierLeak` | replaces `StopUpgradeModifiers` | Vanilla iterates a string-keyed table with `ipairs`, so **the original is a verified no-op**. A post-wrapper that runs the correct `pairs` loop is sufficient (and must honour `only_for_object`) |
-| `Fix_TrainCargoDumping` | replaces `Train:UnloadAll` | **Layer 3**: the disabled-resource cap comes from the demand request's `GetTargetAmount` (**verified synchronous**). Return 0 for a disabled resource and vanilla's `Min(carried, station_cap)` yields 0 by itself |
+| ⛔ ~~`Fix_TrainCargoDumping`~~ | replaces `Train:UnloadAll` | ~~**Layer 3**: the disabled-resource cap comes from the demand request's `GetTargetAmount` (**verified synchronous**). Return 0 for a disabled resource and vanilla's `Min(carried, station_cap)` yields 0 by itself~~ — **WITHDRAWN 2026-08-02, moved to group C.** `GetTargetAmount` is a native `TaskRequest` metatable method published as a savegame permanent, not a Lua function; 148 unkeyed call sites. See the note above and BUGS F46 |
 
 #### B. Real route, but needs a design pass before anyone commits (4)
 
@@ -452,7 +478,12 @@ Each was checked against the shipped body, not inferred from our header.
 | `Fix_RocketDroneChurn` | wrapper pair — flag on `AddCargoDemandRequest`, no-op the Connect/Disconnect unless set | Two coupled wrappers replacing one body; may not be simpler |
 | `Fix_LandscapeUnitFilter` | wrap `Landscape_ForEachObject` and apply the dropped filter to the callback | Must key on the unit params so the **stockpile** path, which already passes its own filter correctly, is untouched |
 
-#### C. No route — the body copy is the right technique (9)
+#### C. No route — the body copy is the right technique (9 → **10** as of 2026-08-02)
+
+**`Fix_TrainCargoDumping`** joins this group — see group A's withdrawal note and
+BUGS **F46**. The one route the sweep named is native code behind a savegame
+permanent; the one route that would work mutates a persisted property on a live
+object, which §3a ranks below simply keeping the copy.
 
 `Fix_LowStorageWarning` (its header already proves a wrapper cannot work: the
 unreachable add-branch means vanilla's else-branch *removes* the entry every
@@ -486,9 +517,12 @@ so patching it would reach story bits and staffing; rejected).
 
 #### Bottom line for this half
 
-**6 of 22 convert cleanly** to a chained wrapper with verified feasibility,
+~~**6 of 22 convert cleanly** to a chained wrapper with verified feasibility,
 **4 more have a route worth designing**, **9 are correctly full replacements**,
-and **3 are already at the best available technique**. None of it is urgent and
+and **3 are already at the best available technique**.~~
+⭐ **CORRECTED 2026-08-02 after the conversions were actually built (chain prompt
+8): 5 / 4 / 10 / 3.** Five converted and shipped; `Fix_TrainCargoDumping`'s
+"verified feasible" row was inferred rather than checked and moved to group C. None of it is urgent and
 none of it blocks F86 — but the 6 in group A are cheap, individually testable,
 and each permanently removes a body copy from the per-update re-verification
 gate. `Fix_TrackSalvageWipe` is worth knowing about for the opposite reason: it

@@ -1942,6 +1942,53 @@ only targets accepting destinations, so the stock has no train exit; drones are 
 mover. Expected statics, vanilla-consistent, not the fix; trains verifiably dump their
 carried load (the designed branch) instead of stranding.
 
+⛔ **CONVERSION ATTEMPTED AND DECLINED 2026-08-02 — the module STAYS a §1.5 full
+replacement** (chain prompt 8, stop condition 1: *"a conversion is NOT
+byte-equivalent when you diff carefully → it is a B-class in disguise; skip it,
+record why, route to prompt 12"*). `SAVE_SAFETY_REDESIGN.md` §5.4 listed this in
+**group A** — "verified feasible", layer 3, *"the disabled-resource cap comes
+from the demand request's `GetTargetAmount`… return 0 for a disabled resource and
+vanilla's `Min(carried, station_cap)` yields 0 by itself"*. ⚠️ **That route does
+not exist, and the §5.4 row was written without checking where the method is
+declared.** Three findings, each independently disqualifying:
+1. **`GetTargetAmount` is not Lua.** The only Lua declaration of that name in all
+   of Src is `ResourcePile:GetTargetAmount` (`Lua\ResourcePile.lua:79`), a
+   different class. `station.demand[res]` is a **TaskRequest**:
+   `AddDemandRequest` → `AddRequest` → `CreateRequest` → `Request_New`
+   (`CommonLua\TaskRequest.lua:109-137`), a native constructor. Its methods live
+   on the native metatable `Request_GetMeta()` returns. There is no class table
+   to chain.
+2. **Patching that metatable would desynchronise the savegame permanents.**
+   `OnMsg.PersistGatherPermanents` publishes `permanents["TaskRequest.
+   GetTargetAmount"] = meta.GetTargetAmount` (`CommonLua\TaskRequest.lua:34-45`),
+   and `PersistGatherPermanents` is one of the three hooks **blacklisted for
+   mods** (FIX_POLICY §3a), so we could not re-register ours. Replacing a
+   function the permanents table indexes by name is a save-integrity risk, which
+   is the exact class of harm §3a exists to prevent.
+3. **There is no key, and 148 call sites.** `GetTargetAmount` is read across the
+   whole request economy; from `(request)` alone a wrapper cannot tell it is
+   inside `Train:UnloadAll`, and this fix's two deliberate escape hatches
+   (`route_accepts_elsewhere`, `is_stopping`) need the **train**, which the
+   request does not carry. §3a requires the wrapper be scoped by the narrowest
+   thing that actually separates the call sites; nothing here does.
+
+**A second route was looked for and also rejected, recorded so prompt 12 need not
+re-derive it.** The decision *is* computable up front — `carried`,
+`station_cap`, `is_stopping` and `route_accepts_elsewhere` are all pure reads —
+so a pre-wrapper could swap `station.storable_resources` for a filtered copy,
+`return orig(self)`, and restore under `pcall` (F90's shape). It is
+behaviourally exact, but it trades a body copy for a **temporary mutation of a
+persisted property** (`storable_resources` is a `prop_table` property,
+`SharedStorageBaseVisualOnly.lua:6`) on a live station inside a command path —
+strictly WORSE on §3a grounds than the copy it would replace, on a module that
+§5.4 itself certifies is *already save-safe*. Not built.
+
+**Disposition: `Fix_TrainCargoDumping` moves from §5.4 group A to group C ("no
+route — the body copy is the right technique"), making the group counts 5 / 4 /
+10 / 3.** The module is unchanged; only the sweep's classification was wrong.
+Routed to chain prompt 12 for review, and to its job-7 doc-drift seed list (a
+recorded "verified feasible" that had not been verified).
+
 ### F47 — Track salvage refund ~1 hex for whole track; 0 for partial (P3, high)  `[tested: Code/Fix_TrackSalvageRefund.lua — PT-45 PASS 2026-07-26 (refund = stamped sections × 100 on live colony tracks; partial-salvage stockpiles observed)]`
 `TrackBase:GetRefundResources` (`Track.lua:286-307`) reads cost from ONE element (last);
 `construction_cost_at_completion` set only on FIRST element (`Track.lua:524-525`) —
