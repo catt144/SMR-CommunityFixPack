@@ -69,8 +69,43 @@ commits `b9c4107`, `a5d4b89`, `227366a`):
 measure it. That the sweep is complete without saying which documents you searched
 and how.
 
-**If a keyboard control is needed for C, STOP AND ASK the owner** — do not
-improvise a game leg inside the final QA.
+**⭐ THE OWNER HAS PRE-OFFERED THE KEYBOARD SITTING FOR C (2026-08-01, verbatim:
+*"If fable needs me to do any work for it to witness regarding our findings I am
+more than happy to"*). You do not need to negotiate it — you need to design it
+well.** A ready-made proposal, so you are not inventing one under time pressure:
+
+**The difficulty, stated first.** A *discriminating* control for C needs a module
+that has a **capturable frame** AND can be made **inactive while the mod env stays
+present**. Post-Tier-2 that shape may no longer exist in shipped code — Site 2 was
+it, and it is repaired. The layer-2 residuals that remain (`Fix_ShelterReflex`,
+`Fix_ArrivalDeaths` (b)) are **non-discriminating by design**: they have nothing
+after the call, so they produce silence whether C is true or false. ⛔ **Do not
+run a non-discriminating leg and record its silence as a pass** — that is the
+exact failure this whole job exists to stamp out.
+
+**Proposed protocol (adapt it, but keep the discriminating property):**
+1. A purpose-built **TestKit** probe module that deliberately reproduces the old
+   Site 2 shape: a POST-wrapper on a blocking body which, after the call, both
+   (a) writes an observable marker and (b) touches a mod-created name. **It MUST
+   carry the literal word `TEMPORARY` in its header** (WORKFLOW probe hygiene) and
+   be deleted in the same commit that records the answer.
+2. Save with it active and frames captured (the drone-Idle population is the known
+   lever — PT-58 got 73 by letting the colony settle; hubs-off is the fallback).
+3. **Leg 1 — env PRESENT, module INACTIVE.** Load with the fix vetoed via
+   `SMRFixPack_Disabled` (pack still installed, env still there). **C predicts:
+   the frame resumes, resolves the env, no-ops, ZERO errors — and the marker is
+   NOT written.** Silence alone is not the pass; *the marker's absence plus zero
+   errors* is.
+4. **Leg 2 — env ABSENT (the control that proves the instrument works).** Same
+   save, pack disabled in the **Mod Manager**. **Predicts: the frame orphans and
+   throws**, naming the probe file. ⛔ **If leg 2 is silent, the probe never got
+   captured and leg 1 proved nothing — fix the fixture, do not report a result.**
+5. Both legs on one save, one sitting, predictions written before either runs.
+
+**Only leg 2 firing makes leg 1 meaningful.** That pairing is the whole design.
+
+If you conclude C cannot be measured even this way, say so and leave it marked
+INFERRED — an honest gap beats a manufactured confirmation.
 
 1. **Inbox audit.** Git history of this folder: every deleted prompt's final
    commit should show its outbox landing in a later prompt or a BUGS/STATUS
