@@ -7961,6 +7961,11 @@ quotes verbatim; sources in the audit report §8.
     live on our build. That is a console sweep, not a source question, and it
     needs a heavily-loaded save — so it belongs to the playtest campaign, not
     to this chain. **Not promoted; stays `cand`.**
+    **→ WRITTEN UP as a checklist rider 2026-08-02 (`PLAYTEST_CHECKLIST.md` §6,
+    "C26 stranded-maintenance dump")** — one console line, four named failure
+    reasons, and ⭐ **`bad = 0` on an old heavily-built colony is the useful
+    result**: a couple of clean dumps close this entry, one dirty line earns it
+    an F-row on the spot.
 - **C27 [author] — Signal Boosters never extend Drone Hub Extender radius.**
   SkiRich (OG, 2611877948): *"After researching Signal Boosters both the
   Drone Hubs and Drone Hub Extenders are suppose to have an additional 15 hex
