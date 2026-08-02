@@ -143,7 +143,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | ? | cand | VERIFIED vs Src 2026-08-01 |
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
-| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op). ⭐ **FIRST LIVE READING 2026-08-02 — CLEAN**: `10 buildings in maintenance or malfunction, 0 structurally broken` on a **sol-288** colony (log `Mars.exe-20260802-01.31.10:225`), the non-zero `10` acting as the control that the walk reached real candidates. **Points at CLOSE; held open for one confirming dump on a different colony** (entry) |
+| C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op). ⭐ **FIRST LIVE READING 2026-08-02 — CLEAN**: `10 buildings in maintenance or malfunction, 0 structurally broken` on a **sol-288** colony (log `Mars.exe-20260802-01.31.10:225`), the non-zero `10` acting as the control that the walk reached real candidates. **Points at CLOSE; held open for one confirming dump on a different colony.** ⚠️ A second clean dump (98 sols, `3 / 0`) was taken the same sitting and **does NOT count** — same `save_game_id`, i.e. an earlier point in the *same* playthrough. Vintage now CLOSED for that lineage by two agreeing mechanisms (`OrigLuaRev` = `LuaRevision` = 396349, `UndergroundRework106 = true`) (entry) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT**: `DroneHubExtender` is the template class name, so the label is carried and `Effect_ModifyLabel` lands (`Data\TechPreset.lua:3466-3471`). The extender's `work_radius` really is raised to 50, and the **commit step exists — it is just routed through the hub**: the tech's `Effect_Code` (`:3474-3481`) forces `SetUIWorkRadius` → `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)` (`DroneControl.lua:759-777`), and `FindTaskRequesters` **recurses into `linked_extenders` reading each extender's live `work_radius`** (`:315-325`). Positive control: `CommandCenterMaxRadius = 50` = default 35 + `SignalBoostersBuff` 15 exactly (`_GameConst.lua:62-72`) (entry) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT again**: `RCTransport:AddToCityLabels` files every transport under `RCTransportAndChildren` (`Lua\Units\RCTransport.lua:88-90`), `City:AddToLabel` forwards to the **colony** container first (`Lua\City.lua:83-86`) which is the one `Effect_ModifyLabel` writes to (`MarsGameEffects.lua:161-172`), and `max_shared_storage` is modifiable at `scale = const.ResourceScale` with default `30` (`RCTransport.lua:14`) — so +15 lands exactly on SkiRich's promised **45**, and it is read live at `:118, :282, :311, :1709`. ⭐ **This sweep corrected the C18 label rule** — see the C18 row (entry) |
 | C29 | Children-only buildings admit all age groups             | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). All **three** `children_only` families enforce it at assignment time: residences via `exclusive_trait = "Child"` (`Residence.lua:26-28`) checked in `IsSuitable` `:162-167` / `CanReserveResidence` `:250-255`; training buildings via `CanTrain` → `IsSuitable` (`TrainingBuilding.lua:137-138, :367-376`) which `Workplace` consults at `:930, :1083`; services via `CanService`/`CanBeUsedBy` (`ServiceBase.lua:162-178`). Obvious guess **checked and ruled out**: the `Child` trait IS removed on ageing up (`Colonist.lua:1740-1756`, `RemoveTrait` at `:1747`) (entry) |
@@ -3731,6 +3731,33 @@ every `DroneControl` descendant serviced by the uplink hub — must pass the F50
 rocket-churn and F55 unreachable scenarios in playtest before shipping.
 
 ### F78 — MeteorsDisaster hangs mid-strike; the colony never sees a meteor — and possibly no disaster/weather at all (P1, high)  `[tested 2026-08-01 (Tier-1 legs 1+4, log Mars.exe-20260801-17.11.08 — both §6.2a-D completion branches ran live; see the leg note below the PT-54 block): Code/Fix_MeteorStormWedge.lua — built 2026-07-29 after the QA review superseded the full-replacement plan: hourly watchdog detects the wedge signature (g_MeteorStorm set + no DisasterMeteorStorm notification + nothing falling, sustained 1h), heals via RestartGlobalGameTimeThread("MeteorStorm") + a guarded g_MeteorStormStop pulse + forced-state cleanup; 3 heals/session then loud give-up (F02 pattern); **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg** (note below); **StormWedgeHeal REORDERED 2026-08-01 (F86 Tier-1, spec §6.2a-D): orphan gate at body start and after every Sleep (resets g_MeteorStormStop INSIDE the gate), vanilla-state resets before every mod-name touch, logging last — closes the adjudication-predicted orphan stray where the heal died at a Note call after setting the stop flag; the reordered path is exercised by Tier-1 leg 1**. Wave-6 probe in TestKit 55_Probes_Wave6.lua — PASS in the 2026-07-29 pre-flight A/B, its first run against a fixed leg; until that run the probe silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+**⭐⭐ ORGANIC OCCURRENCE CAUGHT IN THE WILD 2026-08-02 — the wedge happened in
+the owner's own playthrough, unprompted, and the heal fired on load.** Log
+`Mars.exe-20260802-01.31.10:269-272`, loading a 98-sol save (lineage
+`save_game_id: HdmSxGs6kyd0uz6-`, NASA/rocketscientist) during the C26
+maintenance-dump sitting — nothing about that sitting touched meteors:
+
+```
+MeteorStormWedge: WEDGE confirmed - g_MeteorStorm set for 1h+ with no notification
+  and nothing falling (scheduler thread alive but stuck); healing
+MeteorStormWedge: scheduler thread restarted - future storms will schedule again
+MeteorStormWedge: forced storm state clean (7 stray meteor object(s) removed)
+```
+
+**Why this matters more than another fixture run:** every previous confirmation
+of this wedge came from a purpose-built fixture or a forced `CheatMeteors`
+storm. This is the signature arising **in ordinary play**, detected by the
+watchdog's own three-part test, with **7 stray meteor objects** left behind —
+and the same load carried a stranded prediction flag for F81(a) (see that
+entry). The two sibling defects co-occurred on one organic save.
+⚠️ **One qualifier, stated so it is not over-read:** that save was written under
+pack **`v0.00-001`** and loaded under **`v1.00-001`** (log `:235`), so the
+wedged state accumulated under an **older pack build**. This is therefore strong
+evidence that **the vanilla state occurs in real play** — it is *not* evidence
+about whether the current pack prevents it, which it does not claim to do
+anyway (the fix is a heal, not a prevention). The heal path itself is current
+and it worked on first contact.
+
 **⛔ PT-54 RETIRED UNRUN 2026-08-01 → verification rides the F86 Tier-1 build
 leg.** The test was withdrawn before it ever ran, by the project prompt chain,
 because the F86 Tier-1 build reorders this fix's heal sequencing (the
@@ -4147,6 +4174,30 @@ failing inside an otherwise healthy 3-line network). That is the shape found.
 timing the waiting case alone.
 
 ### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[tested 2026-08-01 (Tier-1 legs 3+4, log Mars.exe-20260801-17.11.08 — natural collision re-roll, migration stamped, C34 heal, and the stranded-flag sweep proven BOTH ways with liveness held; see the leg note below the PT-54 block): Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (**REWRITTEN 2026-08-01, F86 Tier-1 spec §6.2a-B: the loop replacement is DELETED — vanilla's RainsDisasterLoop stays; a layer-2 wrapper on RainsDisasterActivation mirrors the collision test BEFORE the call and posts Msg("RainDisasterEnd") on the early-return, so a collided cycle costs one re-roll; a version-stamped PostLoadGame migration pass (SMRFixPack_loop_version; resolves id-less entries by unique type match) moves every persisted loop onto vanilla's body and carries the C34 stale-state rider — structure repairs → stale-ACTIVE FinishRainProcedure heal → loop migration**). Leak half built 2026-07-29 post-QA; rains half rewritten 2026-08-01; **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg, except the (a) leak half's live legs, routed to chain prompt 3** (note below); wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
+**⭐⭐ F81(a) OBSERVED ON THE OWNER'S OWN SAVE 2026-08-02 — a stranded flag,
+arising organically, cleared on load.** Log `Mars.exe-20260802-01.31.10:252`,
+loading a 98-sol save (`save_game_id: HdmSxGs6kyd0uz6-`) during the C26
+maintenance-dump sitting, which touched nothing weather-related:
+
+```
+DisasterPredictionLeak: cleared stranded prediction flag 'DisasterMeteorStorm'
+  (no live notification behind it)
+```
+
+That is the reconciliation half firing on a real stranded flag — the exact state
+this entry says gates the whole weather system — **found in ordinary play rather
+than planted.** ⭐ **It is also C36's mechanism caught live**: `Dream.lua:20-34`
+skips the Inner Light mirage loop for as long as `IsDisasterPredicted()` holds,
+so this save was, until that load, silently unable to advance that mystery.
+**The same load also healed a live F78 meteor-storm wedge** (`:269-272`) — the
+two sibling defects co-occurred on one organic save, which is what the shared
+`MeteorStorm` origin predicts.
+⚠️ **Qualifier:** the save was written under pack `v0.00-001` and loaded under
+`v1.00-001` (log `:235`), so the flag stranded under an **older pack build**.
+Evidence that the **vanilla state occurs in real play**; not a statement about
+the current pack's leak-prevention half, which is a separate claim tested by the
+Tier-1 legs.
+
 **⭐ F81(a) IS NOW STANDARD COMMUNITY ADVICE — the strongest real-world
 reachability signal this project has for any fix (2026-08-01).** Two **current**
 Reddit threads the owner exported (`BUG_LIST_AUDIT.md` §10.6, [S37]/[S38];
@@ -8004,6 +8055,25 @@ quotes verbatim; sources in the audit report §8.
     (`Lua\Buildings\UndergroundDome.lua:16-19`) — the **opposite** failure mode,
     since an old save loading on a new build keeps `false`. `true` brackets the
     colony at ≥1.0.6 independently of `OrigLuaRev`.
+  - ⚠️ **A SECOND DUMP WAS TAKEN THE SAME SITTING AND IT IS *NOT* READING 2 —
+    recorded explicitly so nobody later mistakes it for the confirming sample.**
+    Same log, line 274: **`3 in maintenance or malfunction, 0 structurally
+    broken`** on a 98-sol save. Clean, control non-zero — **but it is the SAME
+    COLONY LINEAGE.** Both loads print `save_game_id: HdmSxGs6kyd0uz6-` with the
+    same sponsor (NASA), profile (`rocketscientist`), coordinates (`0N107E`) and
+    map (`BlankBigCanyonCMix_09`): sol 98 is an *earlier point in the same
+    playthrough* as sol 288, so its history is a **subset** of reading 1's, not
+    an independent sample. It adds essentially nothing to the count.
+    ✅ **What it did settle is the VINTAGE.** It returned
+    `UndergroundRework106 = true` — the independent cross-check with the
+    opposite failure mode, since a pre-1.0.6 save keeps `false` however often it
+    is loaded. Two mechanisms now agree, so the "GameVar stamped at load" hole
+    noted above **is closed**: the lineage really was started at/after 1.0.6 on
+    the current build, and its sols are unhealed live evidence.
+  - ⛔ **STILL OPEN. Reading 2 must come from a DIFFERENT `save_game_id`** — a
+    different playthrough, not an earlier save of this one. It is free to check:
+    the log's `more_game_settings:` line prints `save_game_id` on every load, so
+    compare it against `HdmSxGs6kyd0uz6-` before counting the dump.
 - **C27 [author] — Signal Boosters never extend Drone Hub Extender radius.**
   SkiRich (OG, 2611877948): *"After researching Signal Boosters both the
   Drone Hubs and Drone Hub Extenders are suppose to have an additional 15 hex
