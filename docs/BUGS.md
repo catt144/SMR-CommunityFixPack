@@ -9025,6 +9025,27 @@ quotes verbatim; sources in the audit report §8.
     gate to the shipped numbers, so his mod produces the same rate change ours
     would. **Three sources now agree on the SHAPE and none of them is evidence
     about the tuned RATE.**
+  - ✅⭐ **PRECONDITION MET 2026-08-02 — THE OG AND RELAUNCHED PRESETS ARE
+    IDENTICAL, READ OFF THE ORIGINAL GAME'S OWN DEBUG MENU (owner at the
+    keyboard).** The original's cheat menu renders the **live
+    `MapSettings_DustDevils` preset object**, so this is data loaded from OG's
+    packs, not a label. `DustDevils_High` in OG reads: `spawn_chance 75`,
+    `count_min 1`, `count_max 3`, `spawntime 600000`, `spawntime_random 300000`,
+    `marker_spawn_chance 60`, `marker_spawntime 2250000`,
+    `marker_spawntime_random 1500000`, `major_chance 10`, `major_minions_min 1`,
+    `major_minions_max 2`, `major_minions_radius 40000`, `strength 3` — **every
+    field identical to Relaunched's** (`Data\MapSettings-DustDevils.lua:38-54`).
+    The menu also lists the same preset lineup (`VeryLow / Low / High / VeryHigh
+    / VeryHigh_1 / _2 / _3`, plus `CrystalBig`, `CrystalSmall`, `GameRule`).
+    **Why this matters:** it was the load-bearing assumption of the whole OG
+    comparison. The tuning carried into the remaster untouched, so **if OG's
+    scheduler gates and Relaunched's multiplies, these exact numbers were tuned
+    under the gate** — and adopting the gate would *restore* the tuned rate
+    rather than invent one, which turns item 1 from a judgment call into a clear
+    repair. ⛔ **Still missing: the OG CODE.** No debug menu can supply it — the
+    menu shows *data* (the preset) and the defect is in *code* (the `count =`
+    line). The preset match raises the value of getting that line; it does not
+    substitute for it.
   - 🔎 **WHAT WOULD ACTUALLY SETTLE THE RATE — a concrete, un-run check
     (recorded 2026-08-02 so it is not lost).** Relaunched is a remaster, and the
     **original Surviving Mars is installed on this machine**
