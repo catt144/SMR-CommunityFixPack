@@ -2673,6 +2673,30 @@ above; `SMRFixPack_rocket_fuel_key` disappears from the module **and from every
 future save**. (b) is unchanged (additive `OnMsg`, §1.2). Build: chain prompt 8.
 **The defect claim is untouched** — this changes the technique, not the fix.
 
+✅⭐ **BUILT 2026-08-02** (chain prompt 8, package 0), as the pre-wrapper specced
+above. **With F29's two items converted in the same batch, the pack now holds
+ZERO R3 §1.5 replacements** — FIX_POLICY §4's amended R3 line is satisfied by
+construction rather than by the owner's exception. Three notes on what actually
+shipped:
+* The 27-line copy is gone, and with it the gotcha it existed to work around
+  (`rfRestrictorRocket` is a FILE-LOCAL, `DroneControl.lua:12`). The constant is
+  still captured, because the wrapper needs it to *find* the table — but nothing
+  now depends on reproducing the body.
+* ⭐ **The persisted field leaves EXISTING saves, not just future ones.** The
+  spec said the wrapper "needs no memory at all", which is true, but a save
+  already written by the §1.5 shape carries `SMRFixPack_rocket_fuel_key` on its
+  DroneControl and deleting the field from the module would not have removed it
+  from that file. The wrapper therefore clears it too — one idempotent line,
+  before the delegation, so the claim on this entry is true as written.
+* One-writer safety re-verified in Src this session rather than inherited:
+  created empty at `InitRocketRestrictors` (`:174-178`), written only by
+  `UpdateRocketsInternal` (`:614-637`), read by `Drone.lua:1209-1210` and the C
+  matcher (`_TaskRequest.lua:57, :75`); the sole caller is the restrictor thread
+  body (`:562-574`), which cannot re-enter between the clear and the rebuild.
+The behaviour difference stated above stands unchanged and is not hidden: an
+entry another mod parked in that restrictor table is now cleared, which widens a
+sweep vanilla already performs on `Fuel` every update rather than inventing one.
+
 **(c) NOT FIXED — redundant with the assignment-time check, and a §1.5 replacement to
 reach.** The mechanism is exactly as tracked: `can_work_here = work_or_train or (cdome ==
 colonist.dome)` (`Dome.lua:674`) short-circuits the quarantine test away for reason

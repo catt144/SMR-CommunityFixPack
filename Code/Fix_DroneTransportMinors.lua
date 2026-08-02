@@ -1,6 +1,9 @@
 -- F57: the drone/transport minors bundle. Three items were tracked; each was
 -- screened against the shipped source. Two are fixed here; the third is
--- deliberately left alone because fixing it would undo F61.
+-- deliberately left alone, on the grounds set out under (c) below.
+-- (This line used to say "because fixing it would undo F61" — that reason was
+-- withdrawn by the QA audit of 2026-07-25 and corrected under (c), but the
+-- summary above it kept repeating it until 2026-08-02.)
 --
 ---- (b) a passability change corrupts every drone's unreachables table -------
 -- `OnMsg.OnPassabilityChanged` (Lua\Units\Drone.lua:851-864) drops the entries
@@ -55,11 +58,47 @@
 -- with no assignment anywhere in `ModTools\Src` (only `FuelResourceAmount` is
 -- set per template), and the legacy branch hardcoding "Fuel" says what the
 -- normal value is — so on shipped data the two keys coincide and nothing goes
--- wrong. It is fixed for the same reason F27 and F28 are: a mod or a future
--- rocket with its own fuel resource inherits a leak that is invisible until it
--- bites. Patch: full replacement of the 27-line method, byte-identical except
--- that it also clears the key it wrote last time, remembered on the
--- DroneControl in an absent-tolerant `SMRFixPack_` field (FIX_POLICY §3).
+-- wrong. Tier **R3 — latent by DATA**, not mod-only: a new rocket template with
+-- its own fuel resource is a patch or a DLC away, so §4a case 3 applies and the
+-- fix is in scope.
+--
+-- Patch approach: FIX_POLICY §1.4 chained PRE-wrapper. A wrapper cannot see
+-- which key `orig` wrote — but it does not need to. It clears the WHOLE
+-- restrictor table before delegating, which is what the shipped `r_t.Fuel = nil`
+-- was trying to express, and vanilla then re-clears `.Fuel` and rebuilds from
+-- `serviced_rockets` exactly as it always did.
+-- Safe because that table has exactly one writer: created empty at
+-- `DroneControl:InitRocketRestrictors` (`:174-178`), written ONLY by
+-- `UpdateRocketsInternal` (`:614-637`), read by `Drone.lua:1209-1210` and the C
+-- matcher (`_TaskRequest.lua:57, :75`). Nothing else parks a key there to lose,
+-- and the clear and the rebuild are one synchronous call — the sole caller is
+-- the restrictor thread body (`:562-574`), which cannot re-enter between them.
+-- Layer: §3a **layer 2** — all work before `return orig(self)`, nothing after.
+--
+-- ⭐ CONVERTED 2026-08-02 from a §1.5 full replacement, on an explicit owner
+-- decision (BUGS F57, "PACKAGE 0 — DECIDED: CONVERT"). FIX_POLICY §4's amended
+-- R3 line allows an R3 defect to ship only as a §1.1-§1.4 patch unless the owner
+-- decides otherwise; with this and F29 converted the pack holds **zero** R3 §1.5
+-- replacements, so the rule is satisfied by construction rather than by
+-- exception. THE DEFECT CLAIM IS UNTOUCHED — technique only.
+--
+-- Before/after, and the two things that actually changed:
+--   * The 27-line body copy is gone, and with it the gotcha it had to work
+--     around (`rfRestrictorRocket` is a FILE-LOCAL, `DroneControl.lua:12`, so a
+--     verbatim copy reading it as a global would have broken every call). The
+--     constant is still captured below, because the wrapper needs it to find the
+--     table — but nothing depends on reproducing the body.
+--   * ⭐ **A persisted mod field leaves the save.** The replacement remembered
+--     the last-written key in `self.SMRFixPack_rocket_fuel_key` on a serialised
+--     DroneControl; the wrapper needs no memory at all, so the field is deleted
+--     from the module — and cleared from EXISTING saves by the idempotent line
+--     below, so the claim is true for saves already made, not just future ones.
+-- On shipped data the two shapes select identically: only the literal "Fuel" is
+-- ever written, so "clear Fuel + the remembered key" and "clear everything" leave
+-- the same table. **The one real difference, stated rather than buried:** if
+-- another mod deliberately parked an entry in that restrictor table, we now clear
+-- it. Vanilla already clears `Fuel` there on every update, so this widens an
+-- existing sweep rather than inventing one.
 --
 ---- (c) screened, deliberately NOT fixed -------------------------------------
 -- `recursive_enum_dome_workplaces` (Lua\Buildings\Dome.lua:670-680) computes
@@ -129,54 +168,42 @@ SMRFixPack.Register("DroneTransportMinors", {
 			return
 		end
 
-		-- FIX (F57a, QA): in the shipped file rfRestrictorRocket is a FILE-LOCAL
-		-- (DroneControl.lua:12, `local rfRestrictorRocket = const.rfRestrictorRocket`)
-		-- — a verbatim copy reading it as a global breaks every call. Capture the
-		-- constant here; `const` is populated at mod-load time.
+		-- rfRestrictorRocket is a FILE-LOCAL in the shipped file
+		-- (DroneControl.lua:12, `local rfRestrictorRocket = const.rfRestrictorRocket`),
+		-- so the wrapper cannot read it as a global either. Capture the constant
+		-- here; `const` is populated at mod-load time.
 		local rfRestrictorRocket = const.rfRestrictorRocket
 		if type(rfRestrictorRocket) ~= "number" then
 			SMRFixPack.DroneTransportMinors.rockets = "const.rfRestrictorRocket not found"
 			return
 		end
 
-		-- Source: Lua\Buildings\DroneControl.lua:613-639 (ModTools\Src, game 1.0.7.396349).
+		local orig_rockets = DC.UpdateRocketsInternal
+
 		function DC:UpdateRocketsInternal()
-			local r_t = self.restrictor_tables[rfRestrictorRocket]
-			r_t.Fuel = nil
-			-- FIX (F57a): the UniversalRocketBase branch below writes
-			-- r_t[r.FuelResource]; only the literal "Fuel" was ever cleared, so
-			-- any other fuel resource left its request behind forever.
-			local previous = self.SMRFixPack_rocket_fuel_key
-			if previous then
-				r_t[previous] = nil
-				self.SMRFixPack_rocket_fuel_key = nil
-			end
-
-			for i = 1, #self.serviced_rockets do
-				local r = self.serviced_rockets[i]
-
-				if IsKindOf(r, "RocketBase") then
-					local rr = r.refuel_request
-					if rr and rr:GetTargetAmount() > 0 then
-						r_t["Fuel"] = rr
-						break
-					end
-					local rr = r:GetExportRequest(r, "Fuel")
-					if rr and rr:GetTargetAmount() > 0 then
-						r_t["Fuel"] = rr
-						break
-					end
-				elseif IsKindOf(r, "UniversalRocketBase") then
-					local rr = table.get(r, "demand", r.FuelResource)
-					if rr and rr:GetTargetAmount() > 0 then
-						r_t[r.FuelResource] = rr
-						if r.FuelResource ~= "Fuel" then                 -- FIX (F57a)
-							self.SMRFixPack_rocket_fuel_key = r.FuelResource -- FIX (F57a)
-						end                                              -- FIX (F57a)
-						break
-					end
+			-- FIX (F57a): the UniversalRocketBase branch writes
+			-- r_t[r.FuelResource], but the shipped clear only ever removes the
+			-- literal "Fuel" — so any other fuel resource leaves its request
+			-- restricting drone work forever. Clear the whole table, which is what
+			-- that line was trying to express. Safe: this method is the table's
+			-- only writer, so nothing else can lose an entry, and vanilla
+			-- re-clears .Fuel and rebuilds from serviced_rockets immediately below.
+			local tables = self.restrictor_tables
+			local r_t = tables and tables[rfRestrictorRocket]
+			if type(r_t) == "table" then
+				for k in pairs(r_t) do
+					r_t[k] = nil
 				end
 			end
+			-- One-shot heal, idempotent: the §1.5 shape this replaced remembered
+			-- the last-written key on the DroneControl, so a save made with that
+			-- version carries the field. The wrapper needs no memory — drop it, so
+			-- "the field leaves the save" is true of existing saves and not only
+			-- of future ones.
+			if self.SMRFixPack_rocket_fuel_key ~= nil then
+				self.SMRFixPack_rocket_fuel_key = nil
+			end
+			return orig_rockets(self)
 		end
 	end,
 })
