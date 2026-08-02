@@ -134,7 +134,18 @@ INFERRED — an honest gap beats a manufactured confirmation.
    `FABLE_NEXT_PROMPT.md`'s staleness line.
 6b. ⭐ **THE BLIND-AUDIT MERIT EXAMINATION (owner-added 2026-08-02) — run
    AFTER jobs 1-6 and BEFORE job 7, because its findings are job-7
-   evidence.** `docs/reports/BLIND_AUDIT.md` is an independent two-sweep
+   evidence.**
+   ✅ **YOU ARE THE ONLY PROMPT AUTHORISED TO OPEN IT** (owner rule, sealed
+   2026-08-02): chain prompts **7-11 are explicitly FORBIDDEN** from reading,
+   grepping or acting on `BLIND_AUDIT.md`, each carries a sealed block saying
+   so, and it is binding rule 8 in this folder's `README.md`. **Two things that
+   places on you:** (a) the independence you are about to test is only real if
+   that seal held — so **check each consumed prompt's handoff notes for an
+   admission that a broad search surfaced its contents**, and treat any such
+   admission as a caveat on the comparison rather than ignoring it; (b) the
+   seal is why you must do your own pass FIRST — you are the single point
+   where the two readings meet, and there is no second chance at an unanchored
+   comparison. `docs/reports/BLIND_AUDIT.md` is an independent two-sweep
    audit of all 66 fix premises, produced by a fresh session that read no
    project docs (sweep 2: ENGINE_FACTS only). Your job: examine its merit
    against the full evidence base it was forbidden to see — the witness

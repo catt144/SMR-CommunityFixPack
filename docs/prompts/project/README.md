@@ -93,6 +93,19 @@ chain's author judged appropriate. Scope and limits, stated precisely:
    fix pack (TestKit stays local-only).
 7. **STATUS.md is updated by every session that changes counts or state** —
    counts live there and nowhere else.
+8. ⛔ **SEALED DOCUMENT — `docs/reports/BLIND_AUDIT.md` (owner rule,
+   2026-08-02).** **Every prompt in this chain except 12 is FORBIDDEN from
+   reading, grepping, summarising or acting on that file or its contents.**
+   It is a **blind control**: a fresh session produced it having deliberately
+   read no project docs, and its whole evidential value is that it was written
+   without the project's own conclusions in view. **Prompt 12 job 6b** examines
+   its merit against the full record it was forbidden to see — doing its own
+   pass FIRST, then opening the sealed key — precisely so that neither reading
+   anchors the other. **A prompt that reads it early destroys that
+   independence, and the contamination cannot be detected afterwards.**
+   If a broad search surfaces its contents by accident: **stop, discard, do not
+   use it, and record that it happened in your handoff notes.** The blanket
+   pre-clearance does NOT cover opening it; only prompt 12, at job 6b, may.
 
 ## Deliberately NOT in this chain (recorded so QA doesn't flag them)
 

@@ -1,5 +1,25 @@
 # Chain 8 — F86 Phase 4: the conversion batch + every approved audit fix, one leg
 
+> ## ⛔ SEALED: `docs/reports/BLIND_AUDIT.md` — DO NOT OPEN
+>
+> **This prompt is FORBIDDEN from reading, grepping, summarising, or acting on
+> `docs/reports/BLIND_AUDIT.md` or any part of its contents.**
+>
+> **Why (so this is not rationalised around):** it is a **blind control**. It was
+> produced by a fresh session that deliberately read no project docs, and its
+> entire evidential value is that it was written without the project's own
+> conclusions in view. **Chain prompt 12, job 6b** examines it against the full
+> record it was forbidden to see, doing its own pass first and only then opening
+> the sealed key — so that neither reading anchors the other. **Any earlier
+> prompt that reads it destroys the independence that comparison depends on, and
+> the contamination is undetectable afterwards.**
+>
+> - Do not open it. Do not `grep`/`Read` it. Do not ask a subagent to.
+> - **If a broad search incidentally surfaces its contents: stop, discard, do not
+>   use it, and say so in your handoff notes.**
+> - This is not a scope call you may weigh against a deadline or a judgment call
+>   the blanket pre-clearance covers. **Only prompt 12, at job 6b, may open it.**
+
 **One-off; delete this file in your final commit. Read `README.md` in this
 folder first.**
 
