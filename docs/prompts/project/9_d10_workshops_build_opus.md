@@ -173,3 +173,25 @@ sentence on the page.
 
 ⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
 prompt 8c.**
+
+### One 30-second check owed to 8c, and it rides your leg for free
+
+**`Fix_DustDevilSpawnGate` carries ONE change that PT-61 did not run.** After the
+leg passed, the owner asked whether `DustDevils_VeryLow` also produces zero under
+the fix; it does, because that preset ships `forbidden = true` and the scheduler
+returns at `DustDevils.lua:194-196` before its wave loop. A `forbidden`
+early-return was added to the module (and a matching passthrough assertion to the
+probe) so we do not gate a system that is already switched off, or burn a
+`SessionRandom` draw on a map where the fix does nothing.
+
+**It is behaviour-neutral by construction** — the only branch it changes is one
+where the thread exits immediately either way — **but that is reasoning, not a
+measurement.** When you run `*r SMRTest.RunAll()` for your own leg, confirm
+**`DustDevilSpawnGate` still PASSes** and say so. Probe count is unchanged at
+**86** (an assertion was added to the existing probe, not a new probe).
+
+⚠️ Two console facts PT-61 learned the hard way, both now in `PLAYTEST_HELP.md`
+but worth knowing before you write a snippet: **`rawget` and `_G` are blacklisted
+in the console** (a check inherited from a handover could never have executed and
+nobody had run it), and **`ConsolePrint` takes exactly one string argument** — a
+multi-argument or numeric call prints nothing and reports no error.
