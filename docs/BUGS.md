@@ -144,7 +144,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | ? | cand | VERIFIED vs Src 2026-08-01 — complementary to F72 |
 | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock| ?   | cand | mechanism verified; trigger needs in-game repro — **minimal check WRITTEN 2026-08-02 (prompt 6b)** as a checklist rider. ⭐ Patch question answered from source: **1.0.6 replaced the whole Jumbo Cave scenario** (`Anomaly.lua:26-33` remaps to `…_106` when `UndergroundRework106`) **and left this wedge byte-identical** (old `:103` = new `:104`). ⚠️ **That flag is SAVE-VINTAGE gated, not build** (`UndergroundDome.lua:16-19`) — a pre-1.0.6 save runs the OLD script on our pinned build (entry) |
 | C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op) (entry) |
-| C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | cand | investigate (SkiRich prior art, OG) |
+| C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT**: `DroneHubExtender` is the template class name, so the label is carried and `Effect_ModifyLabel` lands (`Data\TechPreset.lua:3466-3471`). The extender's `work_radius` really is raised to 50, and the **commit step exists — it is just routed through the hub**: the tech's `Effect_Code` (`:3474-3481`) forces `SetUIWorkRadius` → `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)` (`DroneControl.lua:759-777`), and `FindTaskRequesters` **recurses into `linked_extenders` reading each extender's live `work_radius`** (`:315-325`). Positive control: `CommandCenterMaxRadius = 50` = default 35 + `SignalBoostersBuff` 15 exactly (`_GameConst.lua:62-72`) (entry) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | cand | investigate (SkiRich prior art, OG) |
 | C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
 | C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
@@ -7810,6 +7810,62 @@ quotes verbatim; sources in the audit report §8.
   Drone Hubs and Drone Hub Extenders are suppose to have an additional 15 hex
   radius… the missing code… to make the Drone Hub Extenders have that extra
   15 hexes."* F77's file neighborhood — check Relaunched.
+  **→ SWEPT 2026-08-02 (prompt 6c). Verdict: NO DEFECT IN CURRENT SRC —
+  CLOSED. The "missing code" is present; it is just written on the hub instead
+  of on the extender, so reading the extender's file alone makes it look
+  absent.** (Nothing said here about OG — only that the current chain is
+  complete.)
+  - **6b's label lead: CHECKED AND RULED OUT — this is NOT the C22/C38
+    empty-label class.** The tech carries two `Effect_ModifyLabel`s
+    (`Data\TechPreset.lua:3462-3471`): `DroneHub`.`service_area_max` +15 and
+    **`DroneHubExtender`.`work_radius` +15**. `DroneHubExtender` is the
+    BuildingTemplate **class name**
+    (`Lua\BuildingTemplate\DroneHubExtender.generated.lua:4`), so under 6b's
+    rule the building is filed under it and the modifier lands on a non-empty
+    set. `work_radius` is genuinely modifiable (`DroneControl.lua:40`,
+    `DroneNode` property), and `Effect_ModifyLabel:OnApplyEffect` registers a
+    **persistent colony label modifier** (`Lua\MarsGameEffects.lua:161-172`),
+    so extenders built *after* the research inherit the +15 too.
+  - **The real question was the COMMIT step, and it is covered.** Neither
+    `DroneHubBase:OnModifiableValueChanged` (`Lua\Buildings\DroneHub.lua:88-92`)
+    nor `DroneHubExtenderBase:OnModifiableValueChanged`
+    (`Lua\Buildings\DroneHubExtender.lua:180-184`) does more than redraw the
+    range ring, and only while the object is selected — so raising the number
+    does not by itself rebuild anyone's serviced-building set, which is guarded
+    by `are_requesters_connected` (`DroneControl.lua:328`, cleared only in
+    `DisconnectTaskRequesters` `:441-450`). **The tech's third effect is what
+    commits it** (`Data\TechPreset.lua:3474-3481`): it walks
+    `colony.labels.DroneHub` and calls
+    `hub:SetUIWorkRadius(hub.work_radius + const.SignalBoostersBuff)` →
+    `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)`
+    (`DroneControl.lua:759-785`). ⭐ **And `FindTaskRequesters` recurses into
+    `node.linked_extenders`, re-reading each extender's live `work_radius`**
+    (`:315-325`) — so the hub's forced reconnect picks up every extender in the
+    chain at its NEW radius. Extenders can only uplink to a hub or to another
+    extender (`DroneHubExtender.lua:57-60`), so every extender chain roots at a
+    `DroneHub` and every extender is reached. The value change is real
+    (`hub.work_radius` is still 35 at that point — `GameInit` copies
+    `service_area_max` once, `DroneHub.lua:39-44` — so `SetWorkRadius(50)`
+    passes its equality guard at `:761`).
+  - **Positive control that the engine expects the boosted extender radius:**
+    `const.CommandCenterDefaultRadius = 35`, `const.SignalBoostersBuff = 15`,
+    `const.CommandCenterMaxRadius = 50` (`Lua\_GameConst.lua:62-72`) — the
+    outer search bound is **exactly** default + buff, and it is the bound used
+    by both the building-side connect (`TaskRequester:FindDroneNodes`,
+    `Lua\_TaskRequest.lua:251-257`, which filters on live `node.work_radius`)
+    and the placement-time coverage test
+    (`DoesAnyDroneControlServiceAtPoint`, `DroneControl.lua:1014-1020`). A
+    50-hex extender is not clipped anywhere.
+  - **Belt and braces:** extenders also fully reconnect their uplink on any
+    working-state flip (`OnSetWorking` → `UpdateUplinkRequesters`,
+    `DroneHubExtender.lua:171-178`, `:109-124`), on link/unlink (`:141-154`),
+    and every hub reconnects on `OnMsg.DepositsSpawned`
+    (`DroneHub.lua:188-199`, whose comment `--template name label` is itself an
+    independent confirmation of 6b's label rule).
+  - **Residual, named so it is not re-derived:** the `Effect_Code` rewrites
+    `UIWorkRadius` to `work_radius + 15`, which silently **overrides a player's
+    manually lowered hub range slider** on research completion. Cosmetic,
+    upward-only, not a promise break — noted, not filed.
 - **C28 [author] — Transport Optimization never applied to RC Transports.**
   SkiRich (OG, 2609028695): *"the missing code that is required to make the
   RC Transport obey the Tech upgrade Transport Optimization… should be able
