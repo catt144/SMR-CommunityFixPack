@@ -209,6 +209,24 @@ local function gate_descriptor(descr, roll)
 	if type(descr) ~= "table" or descr[MARK] then return descr end
 	if descr.class ~= DUST_DEVIL_CLASS then return descr end
 
+	-- A forbidden descriptor means the scheduler shuts down entirely: its third
+	-- line is `if not descr or descr.forbidden then return end`
+	-- (DustDevils.lua:194-196), BEFORE the marker threads are created and before
+	-- the wave loop. `DustDevils_VeryLow` is the only shipped preset that carries
+	-- it, and it is also the FALLBACK descriptor (`data[…] or
+	-- data["DustDevils_VeryLow"]`, :64) — so an unresolvable map setting
+	-- deliberately means "no dust devils at all". Gating it would be gating
+	-- something already switched off: behaviour is identical either way (the copy
+	-- carries `forbidden` through the property walk and the thread still
+	-- returns), but without this guard we would burn a SessionRandom draw and
+	-- build a table on a map where this fix does nothing, diverging the session's
+	-- deterministic stream for no reason.
+	-- ⚠️ Added 2026-08-02 AFTER PT-61 passed, when the owner asked whether
+	-- VeryLow also produces zero under the fix. It does — and the reason is this
+	-- flag, not the arithmetic. Behaviour-neutral by construction; covered by the
+	-- probe's forbidden-passthrough assertion.
+	if descr.forbidden then return descr end
+
 	local chance = descr.spawn_chance
 	if type(chance) ~= "number" or chance >= 100 then
 		-- vanilla's multiply is already the identity; nothing to repair, and no

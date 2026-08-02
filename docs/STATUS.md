@@ -215,9 +215,13 @@ the leg deliberately is not.
 ⚠️ **The RATE question is STILL NOT SETTLED, and PT-61 barely speaks to it** — it
 measured `DustDevils_VeryHigh_3`, the *least*-affected played preset (+5% mean).
 A per-preset derivation is now on the F97 entry and **job 8 should decide on that
-table, not on the leg's averages**. ⛔ It also surfaced that
-**`DustDevils_VeryLow` produces exactly zero dust devils from the natural
-scheduler, always** — and it is the fallback descriptor.
+table, not on the leg's averages**. ⚠️ **A claim in the first version of that table — that
+`DustDevils_VeryLow` produces zero dust devils always, called there "the intent
+argument at its sharpest" — was RETRACTED the same day on the owner's question.**
+That preset ships `forbidden = true` and the scheduler returns at
+`DustDevils.lua:194-196` before its wave loop, so the zero is a deliberate design
+decision, not this defect. It was derived from a targeted grep that omitted the
+field that mattered.
 
 **2026-08-02, chain prompt 8b — ALL SEVEN APPROVED FIXES ARE BUILT, one commit
 each, with seven probes and the batch leg specced. Nothing filed or closed, so

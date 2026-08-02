@@ -787,14 +787,24 @@ that sample's gate passed 65% instead of 50%. Decide on the table.
 
 **Two findings on that table that did not exist when job 8 was written:**
 
-* ⛔ **`DustDevils_VeryLow` produces EXACTLY ZERO dust devils from the natural
-  scheduler, always** — `Random(1,1) * 20 / 100` = 0, every wave, forever — **and
-  it is the fallback descriptor** (`DustDevils.lua:64`), so a map whose setting
-  fails to resolve also gets a scheduler that runs forever and spawns nothing.
-  ⭐ **This is the strongest form of the intent argument yet: a preset named "Very
-  Low" that delivers a flat zero is not a tuning decision.** Both ends of the
-  ladder are broken in the direction the truncation predicts — `VeryLow` floors at
-  zero, `VeryHigh_3`'s authored range is entirely unreachable.
+* ⛔⛔ **RETRACTED THE SAME DAY — DO NOT USE.** The first version of this note
+  claimed `DustDevils_VeryLow` "produces exactly zero dust devils, always" and
+  called it "the strongest form of the intent argument yet". **It is wrong.** That
+  preset ships `'forbidden', true` — the only one that does — and the scheduler's
+  third statement is `if not descr or descr.forbidden then return end`
+  (`DustDevils.lua:194-196`), before the marker threads and before the wave loop.
+  The whole system is switched off on such a map, deliberately and with an
+  explicit flag. **The zero is a design decision, not the defect**, and the
+  fallback point inverts: falling back to a forbidden preset is a fail-safe.
+  ⚠️ **The intent argument for job 8 is therefore `VeryHigh_3` alone** — an
+  authored `6..8` that is entirely unreachable — **plus the three controls already
+  on the C23 entry.** Still strong, but one leg rather than two. Weigh it as one.
+  ⚠️ **And take the error itself as job-7 material** (chain rule 4b): the table was
+  built from a targeted grep for the count fields, `forbidden` was not in the grep
+  so it was not in the analysis, and a striking conclusion was drawn from the
+  fields that had been looked for rather than from the preset. It survived into
+  BUGS, STATUS and this prompt before the owner asked a one-line question that
+  falsified it. **Caught in under an hour, and only because someone asked.**
 * **The change is not uniform: 0% to +125% across played presets**, largest where
   counts are small. The honest framing for the owner is *"the fix roughly restores
   the authored means, and on some presets the authored mean is twice what the game
