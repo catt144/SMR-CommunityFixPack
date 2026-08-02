@@ -136,7 +136,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C16 | Flying drones malfunctioning mid-air stuck "flying"      | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
 | C17 | The Man From Mars follow-up rewards nothing              | ?   | cand | filed 2026-08-01 (bug-list audit) — VERIFIED vs Src |
 | C18 | XenoExtraction tech skips now-native ex-DLC extractors   | ?   | **✅ CLOSED — `wontfix` (intent)** | swept 2026-08-02 (prompt 6b): label mechanism read (`Building.lua:413-424,:427-444` — a building carries only `class` + `object_class`, never a parent's); `AutomaticMetalsExtractor` carries `AutomaticMetalsExtractor`/`AutomaticMetalsExtractorBase` and is displayed as a **differently-named building**, so the tech's four-name description promises it nothing. **Positive control found: when this game means "every extractor" it enumerates all of them** (`CommanderProfilePreset.lua:336-385`, ten labels). No promise broken → declined under the §4 bar (entry) |
-| C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | cand | investigate — F52/F53-adjacent |
+| C19 | `AreDomesConnectedWithPassage` has no distance term      | ?   | **✅ CLOSED — declined, no defect in Relaunched** | swept 2026-08-02 (prompt 6b): the predicate is membership-only as charged, but it has **exactly two consumers** and the distance term lives at the consumer — `Dome.lua:256-259` gates it on `const.ColonistMinDistToIgnorePassage` (1200m, `_GameConst.lua:134`, *with* the design comment), and `Colonist.lua:1567` adds an 8-dome hop cap. Both escape branches are correct (open-air = safe outside; no shuttles = no alternative). The residual unbounded walk is the **no-passage** case, which is F52's deliberately-open half, not this. ⚠️ **Taking ChoGGi's OG shape would have narrowed F53's reachability test** (entry) |
 | C20 | Philosopher's Stone sector count stalls while paused     | ?   | cand | investigate (ChoGGi prior art) |
 | C21 | St. Elmo sinkholes destructible by meteors (soft-lock)   | ?   | cand | investigate (ChoGGi prior art) |
 | C22 | Saint trait dome-morale blessing never worked (label mismatch) | ? | cand | VERIFIED vs Src 2026-08-01 (fredware source recovered + read) |
@@ -7356,6 +7356,59 @@ quotes verbatim; sources in the audit report §8.
   fix added a `ColonistMaxDomeWalkDist` check. F52 fixed the ≤400m vacuum
   walk; whether the *long-walk-through-network* class survives in Relaunched
   is unswept. Interacts with F52/F53 — audit before touching.
+  **✅ SWEPT AND CLOSED 2026-08-02 (prompt 6b) — DECLINED: the charge against
+  the predicate is true and irrelevant, because Relaunched put the distance
+  term at the consumer.** Trail:
+  - **The predicate is membership-only, verbatim as charged**
+    (`Lua\Passage.lua:1109-1119`), and its network cache is correctly
+    invalidated on both connect and disconnect (`:1358-1362`, `:1244`) — no
+    stale-network defect hiding behind it.
+  - **It has exactly TWO consumers in the whole tree** (grep, `ModTools\Src`):
+    `GetDomesPassagePath` (`Passage.lua:1143-1146`, a guard before
+    path-building — policy is the caller's) and `IsInWalkingDistDome`
+    (`Lua\Buildings\Dome.lua:244-262`). **Neither is distance-blind.**
+  - **The distance term, in full** (`Dome.lua:256-259`):
+    `dist[1] or AreDomesConnectedWithPassage(bld1,bld2) and
+    (GetOpenAirBuildings(map) or not IsLRTransportAvailable(map.City) or
+    dist[2] <= const.ColonistMinDistToIgnorePassage)`. That constant is
+    **1200m** (`_GameConst.lua:134`) and it carries the design intent in a
+    comment on the line: *"distance between two domes to provoke colos to
+    request a shuttle, even if connected with passage."* **This is precisely
+    what ChoGGi added to OG's predicate** — Relaunched has it, one call up,
+    at 3× the walk cap. (720m under `Station.lua:1311-1312` / the
+    `GameRuleDef.lua:201-202` rule.)
+  - **A second, independent cap sits below it:**
+    `Colonist:TryToEmigrateToDome` refuses a passage route of more than
+    `const.ColonistMaxPassagePassthroughDomes` = 8 domes
+    (`Colonist.lua:1567`, `_GameConst.lua:135`).
+  - **Both escape branches are correct, not oversights.**
+    `GetOpenAirBuildings(map)` is `map == MainMap and OpenAirBuildings`
+    (`OpenAirBuilding.lua:167-169`), and that GameVar goes true **only** after
+    the atmosphere is breathable and the player accepts *"Open the Domes"*
+    (`LawDef-Research.lua:651-653`, `PopupNotificationPreset-GreenMars.lua:
+    15-17`), and is forced false the moment breathability lapses
+    (`Terraforming.lua:349`, beside the suffocation effects) — i.e. the
+    unlimited walk is allowed exactly when walking outside is safe.
+    `not IsLRTransportAvailable(city)` (`ShuttleHub.lua:350-358`) means there
+    is no shuttle to hold out for — **the same reasoning our own F52 entry
+    records for the half it deliberately left open.**
+  **What survives, and it is not new.** The unbounded walk that remains is the
+  **no-passage** case: vacuum, no shuttle coverage, domes not in one network →
+  `GetDomesPassagePath` returns nil and vanilla walks the colonist across the
+  surface. That is F52's second half, declined by us in writing ("refusing it
+  would strand colonists on shuttle-less maps"). ⭐ **And it is what §10.5's
+  commenters describe ChoGGi actually shipping** — a survivability mitigation
+  *"so at least they didn't suffocate in case they still walked stupid
+  walks"*, i.e. even the index-case author treated the walk as unfixable and
+  softened the consequence. Prior art and our own disposition agree.
+  **⚠️ The F53 interaction is a reason NOT to take the OG fix's shape.**
+  `IsInWalkingDistDome` is the reachability test our `Fix_ArrivalDeaths`
+  re-check consults. Capping `AreDomesConnectedWithPassage` at 400m would make
+  every passage-connected dome pair beyond 400m read as *not reachable* — so
+  arrivals bound for a dome that is perfectly reachable through the passage
+  network would be re-checked, held under "Confused Colonists", or diverted.
+  **A fix here would have degraded a shipped, tested fix.** Verdict: no F-row;
+  no promotion to prompt 7.
 - **C20 [author] — Philosopher's Stone sector-scan count stalls while
   paused.** ChoGGi (OG): *"The Philosopher's Stone doesn't update sector
   scanned count when paused."* The `registers._sectors_scanned` machinery is
