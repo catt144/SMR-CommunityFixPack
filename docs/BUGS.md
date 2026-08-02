@@ -109,7 +109,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
 | F80 | Trains stop at a platform and skip valid waiting passengers | P2 | med | investigating — observed 2026-07-28 · **SOURCE AUDIT RUN 2026-08-02 (prompt 6c): enumeration theory SURVIVES with an exact predicate — `traverse_dir = next_idx - start_idx` is never normalised to ±1 (`TrainTransport.lua:374`) off two `table.find` first-occurrence lookups (`:369,:372`) into a `route` array the file itself says can hold a station twice (`:389`, `EnumRouteTracks:273-282`); any stride ≠ ±1 hits a missing `link_edge` and HARD-RETURNS (`:417`), silently dropping the tail.** Explains **both** symptoms from one function (`Train.lua:882` = waits; `Station:GetReachableStations` `:222-231` = walks). ⛔ **Trigger NOT proven — CANNOT DETERMINE, stays `investigating`.** ⚠️ Corrects the old "direction from canonical orientation" suspicion (wrong — it is the magnitude, not the sign). Two fix-binding side finds: the function is **not re-entrant** (`:365,:386-390`) and `GetReachableStations` has no cross-track dedup. Checklist rider rewritten to discriminate waits-vs-walks + a one-way-hole test (entry) |
 | F81 | Stranded disaster-prediction flag gates ALL weather; rains loop also deadlocks on it | P1 | PROVEN | **tested 2026-08-01** — fixed 2026-07-29; rains half REWRITTEN 2026-08-01 (F86 Tier-1, layer-2 wrapper + version-stamped migration + C34 rider) and **verified live by Tier-1 legs 3+4**: a NATURAL collision re-rolled and rain returned, 'normal' migrated + stamped 1.0.1, C34 stale-ACTIVE healed through vanilla FinishRainProcedure, and the stranded-flag sweep cleared both with and without a reload while never touching a live warning. PT-54 triggers A+B+E absorbed (entry) |
-| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | **✅ MECHANISM FOUND 2026-08-02 (prompt 6c trace) — and it is neither option the entry weighed.** The notification has **no removal path at all** (`SupplyGrid.lua:1626-1629` is the only reference to `PowerGridSplit`/`LifeSupportGridSplit` in the tree) and registers a **position**, not the grid — so a rejoin is not an input. It clears only by the preset's `Expiration = 120000` with `GameTime = false`, which `Notifications.lua:188-217` runs on a **REAL-TIME** thread → **2 real minutes regardless of game speed**. Sibling tell: `PowerLeak`/`LifeSupportLeak` under the same parents carry no `Expiration`. ⚠️ Symmetric half not in the original report: an **unrepaired** split also stops being reported after 2 real minutes. Nothing built — key-matching design question **routed to prompt 7**; checklist rider rewritten around the real-time prediction (entry) |
+| F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | P3 | med | **✅⭐ MECHANISM FOUND *AND MEASURED* 2026-08-02 — neither option the entry weighed.** **Live pair: `119999` real ms @5x and `120001` real ms @1x** (game ms 600000 vs 120000, exactly 5.000x) against a preset `Expiration = 120000` — real time constant to **2 ms** across a 5x speed change, and **the grid was left unrepaired in both legs and the notification vanished anyway**. The notification has **no removal path at all** (`SupplyGrid.lua:1626-1629` is the only reference to `PowerGridSplit`/`LifeSupportGridSplit` in the tree) and registers a **position**, not the grid — so a rejoin is not an input. It clears only by the preset's `Expiration = 120000` with `GameTime = false`, which `Notifications.lua:188-217` runs on a **REAL-TIME** thread → **2 real minutes regardless of game speed**. Sibling tell: `PowerLeak`/`LifeSupportLeak` under the same parents carry no `Expiration`. ⚠️ Symmetric half not in the original report: an **unrepaired** split also stops being reported after 2 real minutes. Nothing built — key-matching design question **routed to prompt 7**; checklist rider rewritten around the real-time prediction (entry) |
 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | P2 | PROVEN | **tested 2026-07-31** — PT-59 PASSED IN FULL on the keyboard (reload leg 1/1/1 + grant line; healthy leg 1/1/1 with the flag still `false`; 10 loads / 2 grants across the sitting). Built as the load-time heal (`Fix_FirstAsteroidPrefabs`) |
 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | P3 | PROVEN | todo — filed 2026-07-30; rover half DISPROVEN BY PLAY during PT-25; nothing built; text-patch design is a USER DECISION (localization tradeoff), bundled into the D10 build (chain prompt 9) (entry) |
 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | P3 | latent | filed 2026-07-30 by the popup audit — tier **U**, shielded by the modal window at default bindings; settling observation queued (rebind quicksave); NO fix until U resolves (entry) |
@@ -4716,8 +4716,8 @@ only by a fixed REAL-TIME expiry.**
   rider has been rewritten around it (see `PLAYTEST_CHECKLIST.md` §6) — stopwatch
   the *real* seconds, not the sols, and note the game speed.
 
-**MEASURED LIVE 2026-08-02 - LEG 1 OF 2, AND IT LANDS ON THE PRESET VALUE TO
-WITHIN 1 MILLISECOND.** Owner at the keyboard, No-Disasters save
+**✅⭐ MEASURED LIVE 2026-08-02 - BOTH LEGS RUN, AND THE MECHANISM IS PROVEN.
+THE TIMER LANDS ON THE PRESET VALUE TO WITHIN 2 ms ACROSS A 5x SPEED CHANGE.** Owner at the keyboard, No-Disasters save
 (`save_game_id: 1f6oCbWfYS7IOPCY`, map `BlankUnderground_01`, sol 22) chosen so
 that **nothing but the player could break a cable** - no dust storms, so no
 random `RandomBreakSupplyGrid` splits to confound the reading. A cable was
@@ -4738,10 +4738,22 @@ F82 CLEARED after 119999 real ms and 600000 game ms      (speed: 5x, retail max)
 - **600 000 game ms / 119 999 real ms = exactly 5.0x**, which independently
   recovers `const.fastGameSpeed` from the data - and is what forced the
   speed-ceiling correction recorded above.
-- **Leg 2 (1x) is what completes the proof**: the prediction is the *same*
-  ~120 000 real ms with game time five times smaller (~120 000 game ms). Real
-  time constant plus game time variable is the signature that no state-cleared
-  notification can produce.
+- **LEG 2 (1x) RAN AND THE PAIR IS CONCLUSIVE:**
+
+```
+F82 CLEARED after 120001 real ms and 120000 game ms      (speed: 1x)
+```
+
+| leg | speed | real ms | game ms | sols elapsed |
+|---|---|---|---|---|
+| 1 | 5x (retail max) | **119 999** | 600 000 | 0.83 |
+| 2 | 1x | **120 001** | 120 000 | 0.17 |
+
+  **Real time is constant to within 2 ms across a 5x speed change; game time
+  varies by exactly 5.000x.** At 1x the two clocks coincide (120 001 real vs
+  120 000 game), which is what 1x means and is a free sanity check on the
+  watcher itself. **This is the signature no state-cleared notification can
+  produce**, and it is now measured rather than argued.
 - **Do not click the notification when re-running this.** `PowerGridSplit` does
   not set `Dismissable` and the property defaults to **`true`**
   (`CommonLua\Libs\Notifications\NotificationPreset.lua:60-61`), so a click can
@@ -4756,7 +4768,12 @@ F82 CLEARED after 119999 real ms and 600000 game ms      (speed: 5x, retail max)
 condition that has ended, for up to 2 real minutes, with no way to dismiss it by
 fixing anything — and, symmetrically, a split that is *not* repaired stops being
 reported after 2 real minutes. The second half is the more serious one and was
-not in the original report. **Nothing built** — the repair shape is not obvious,
+not in the original report. ✅ **THAT SECOND HALF IS NOW MEASURED, NOT
+INFERRED** — in **both** legs above the grid was deliberately left **split and
+unrepaired**, and the notification vanished anyway at ~120 s. So "the colony
+stops telling you about a break that is still there" is an observed fact, and
+the P3-vs-P2 severity question can now be decided on data. **That call belongs
+to prompt 7's package**, not here. **Nothing built** — the repair shape is not obvious,
 because the notification is keyed by the break *position* and a rejoin does not
 happen at a known position, so a `RemoveObjectFromNotification` heal needs a
 key-matching design first. **Routed to chain prompt 7** as a §4 package

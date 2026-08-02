@@ -75,6 +75,7 @@ control in the same scan — `NewAnomalies` appeared *before* the unpause and
 the message did not fire. ⚠️ 6b's "on-screen toast" wording was **corrected**
 (it is a `HUDNotificationPreset` on `idOverview` with a voice line, not a popup
 card) — it had sent the observer looking for something that does not exist.
+✅⭐ **F82's MECHANISM IS MEASURED, NOT JUST TRACED** — the checklist rider ran the same night and passed: **`119999` real ms at 5x and `120001` real ms at 1x** (game ms 600000 vs 120000, exactly 5.000x) against a preset `Expiration = 120000`. Real time constant to **2 ms** across a 5x speed change; no state-cleared notification can do that. **Both legs left the grid unrepaired and the notification vanished anyway**, so the unreported-break half is observed, not inferred, and the P3-vs-P2 call is now decidable on data by prompt 7. ⚠️ The run also corrected a project-wide figure: the fastest **player-reachable** speed is **5x**, not `const.ultraGameSpeed`'s 20x, which is `Platform.debug`-gated — now in `ENGINE_FACTS.md`.
 **C26 CLOSED `wontfix` — not reachable on current-build saves.** Two
 **independent** colonies (`save_game_id` compared in the log, not assumed),
 **347 sols of combined history**, both **founded on the pinned build so the

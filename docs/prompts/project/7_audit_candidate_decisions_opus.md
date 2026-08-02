@@ -325,11 +325,28 @@ file, carry **no `Expiration`** and are cleared by state.
    split→rejoin pairs ourselves or clearing the whole notification. Decide the
    key before deciding the fix.
 
-The checklist rider is rewritten around a falsifiable number (≈120 REAL
-seconds, and the delay should be **constant in real time while the elapsed sols
-differ ~20× between normal and ultra**). If that reading ever comes back
-speed-dependent, this entry is wrong and the package dies — so it is worth
-letting the rider land before building.
+✅⭐ **UPDATE, SAME DAY: THE RIDER LANDED AND IT PASSED. This package is
+measured, not inferred — you are not gambling on a source read.** Owner at the
+keyboard, No-Disasters save so nothing but the player could break a cable, grid
+deliberately left **unrepaired**, console watcher timing both clocks:
+
+| leg | speed | real ms | game ms |
+|---|---|---|---|
+| 1 | 5x (retail max) | **119 999** | 600 000 |
+| 2 | 1x | **120 001** | 120 000 |
+
+Against a preset `Expiration = 120000`: **real time constant to within 2 ms
+across a 5x speed change, while game time varies by exactly 5.000x.** No
+state-cleared notification can behave that way. **And because both legs left the
+split unrepaired and the notification vanished regardless, the symmetric half —
+the colony stops reporting a break that is still there — is now an observed
+fact, so the P3-vs-P2 call is yours to make on data.**
+
+⚠️ **One figure in the entry was corrected by that run and it may matter to you
+elsewhere:** the fastest *player-reachable* speed is **5x**, not the 20x that
+`const.ultraGameSpeed` advertises — `"ultra"` is `Platform.debug`-gated
+(`Lua\X\HUD.lua:462-467`, `:481-487`). It is now an `ENGINE_FACTS.md` entry,
+because any real-time-vs-game-time arithmetic in this project inherits it.
 
 #### ⚠️ Method fact 1 — the label rule you inherited from 6b is WRONG as written, and 6c corrected it in three places
 
