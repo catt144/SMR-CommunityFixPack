@@ -1185,3 +1185,42 @@ wrong.** "58 hours, zero crashes" is a tempting line for `MOD_DESCRIPTION.md`
 and **it would fail this project's own evidence bar** — the same bar that kept
 the no-precedent uninstall sentence unpublished. A stability claim needs a
 control; we do not have one. **Do not ship it.**
+
+### 10.7 Reporter standing — a weak evidence axis this audit never had (owner, 2026-08-02)
+
+§6 grades **fix authors** on a hard bar (fix corpus, readable source, longevity,
+subscribers — the "ChoGGi tier"). It has **no equivalent for reporters**, who
+have only ever been graded present/absent, title-grade/full-text,
+OG-era/Relaunched. The owner's framing supplies the missing axis, and it is
+deliberately modest:
+
+> **Forum tenure and community upvotes do not make someone an expert or
+> ChoGGi-tier. They do make a report worth more than a first-time poster's
+> one-off complaint.**
+
+**What standing actually buys** — and it is narrow: a lower prior on user error,
+a lower prior on a vent post, and in the upvotes a weak independent signal that
+others recognised the problem. **It buys nothing about mechanism.** A tenured
+reporter's *explanation* of their bug is still a guess (see §10.6b, where a
+player's proposed cause is routed as a hypothesis, not a finding).
+
+**Our own sample of four is consistent with it — and it is only four, so it is
+an anecdote, not a validation:**
+
+| Reporter | Standing | How it held up |
+|---|---|---|
+| **Homeshine** | Sergeant, 99 posts, 20 likes, member since 2018 | Reports **held up twice, four years apart** — F74 on OG (2022) and Relaunched 1.07 (2026), plus the F16 thread. Templates filled, saves attached, versions stamped, replication claimed. |
+| **Candergart** | Corporal, 45 posts, 8 likes, since 2018 | Detailed, internally consistent, and volunteered a **second** finding from his own experiment. |
+| **Hockston** | Recruit, 3 posts | Genuine, but **confounded** — he had destroyed crystals and did not control for it. |
+| **mgla** | Recruit, 6 posts | **Self-retracted: "NOT A BUG: I missed a crystal."** |
+
+The two reports that failed came from the two lowest-post-count accounts. That
+is suggestive and nothing more.
+
+⛔ **THE GUARD RAIL, WHICH MATTERS MORE THAN THE HEURISTIC. Standing may raise
+priority; it may NEVER lower a report below "read it and check."** A first-time
+poster with a real bug still has a real bug — and **today's entire lesson is
+that dismissing a source unread is this audit's characteristic failure**
+(§10.4's three cases). Use standing to decide **what to open first** when owner
+browsing time is scarce, never to decide what to ignore. The asymmetry is the
+whole rule.
