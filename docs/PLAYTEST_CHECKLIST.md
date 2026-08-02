@@ -1200,7 +1200,50 @@ MainMap.mapdata.MapSettings_DustStorm = "disabled"
 * **`MapSettings_DustStorm = "disabled"`** is how storms are turned off. See
   Trap 2 — the flag is not.
 
-⚠️ **After ANY reload, re-apply the two `MainMap.mapdata` lines, the restart and
+### ⭐ If the save has a dust storm WARNING baked in (added 2026-08-02)
+
+**Usable, and it is mild evidence FOR the save** — but the pending storm has to
+be cancelled, and `MapSettings_DustStorm = "disabled"` does **not** cancel it.
+
+* **A warning by itself does not block dust devils.** The scheduler gates only on
+  `HasDustStorm(map)` and `DustStormsDisabled` (`:209`, `:220`); a *predicted*
+  storm sets neither. Nothing is wrong with starting the leg with a warning up.
+* ⛔ **But the storm it is warning about will land, and that WILL corrupt the
+  reading in the direction that matters.** `OnMsg.DustStorm` → `StopDustDevils`
+  wipes every devil on the map, the scheduler parks at `:209` until the storm
+  ends, and a storm arriving mid-burst `break`s the loop at `:220-222`. That
+  **truncates a passed gate specifically** — a wave that should have shown 6-8
+  shows fewer, which reads exactly like the fix not working.
+* ⛔ **The preset edit does not reach it.** `DustStormThread` holds its
+  descriptor from `:417`/`:456` and `NewDustStorm:452` calls `StartDustStorm`
+  unless `DustStormsDisabled`; `WaitNewDustStorm` (`:525-534`) only re-reads
+  `GetDustStormDescr` **after** the storm has fired. So `"disabled"` bites on the
+  *next* cycle, not this one.
+* ✅ **The cancel, and it is one line** — run it in the setup block right after
+  `MainMap.mapdata.MapSettings_DustStorm = "disabled"`:
+
+```
+*r RestartGlobalGameTimeThread("DustStorm")
+RemoveDisasterNotifications("DisasterDustStorm", MainMap)
+```
+
+  `DustStormThread` re-reads at `:417`, gets nil because the map is now
+  `"disabled"`, and **returns immediately** — the thread exits and no storm ever
+  fires. The second line clears the stale warning from the UI. Both are reverted
+  by a reload, so **re-run them after every load** with the rest of the setup.
+  ⚠️ **This only works for a PREDICTED storm.** If one is already ACTIVE, restart
+  does not stop it — use `CheatStopDisaster()` and wait for it to clear first.
+* ⭐ **Why the warning is mild evidence FOR this save:** when terraforming passes
+  the `DustStormStop` threshold, `OnMsg.TerraformThresholdPassed` sets
+  `DustStormsDisabled = true` **and** calls
+  `RemoveDisasterNotifications("DisasterDustStorm", map)`
+  (`TerraformingDisasters.lua:16-22`). A **surviving** dust storm warning
+  therefore means the colony is still below the threshold — which is exactly what
+  Trap 1 requires. **Run the one-word check anyway**; this is corroboration, not
+  a substitute.
+
+⚠️ **After ANY reload, re-apply the two `MainMap.mapdata` lines, the storm-thread
+cancel above (if it applied), the restart and
 the marker sweep.** `OnMsg.LoadGame` → `ApplyDisasterSettings` rewrites
 `MainMap.mapdata[disaster]` from the `g_DisastersSettings` GameVar
 (`MapSettings.lua:36-60`), so the map edits do not survive a load. The **preset**
