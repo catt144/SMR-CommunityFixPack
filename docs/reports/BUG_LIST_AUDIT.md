@@ -993,24 +993,48 @@ stale GameVars, deliberately killed and wedged threads, forced tech grants,
 mid-session mod enable/disable, repeated save/load cycling, and a full uninstall
 leg).
 
-That is worth recording, and it is **not** evidence that the pack prevents
-crashes. Four reasons, stated plainly so nobody later quotes the 58 hours as a
-result:
+**⚠️ CORRECTED 2026-08-01, hours after first being written — the original
+version of this block got the exposure profile WRONG, and it was the
+load-bearing objection.** It claimed *"our legs are mostly short, targeted, and
+early-to-mid colony… we may simply not be standing where the crashes are."*
+**That describes only the agent-driven legs.** The owner's actual method:
 
-1. **There is no vanilla arm.** No matched run of comparable length and abuse
-   without the pack exists. Zero crashes in the treatment group with no control
-   group is not a comparison.
-2. **The exposure profile differs from where the community crashes.** Their
-   reports cluster in **late-game, long-session, high-entity-count** colonies —
-   *"by the time I had like 8 domes up"*, *"85% vegetation score"*, *"I
-   typically like to leave it open and just pause so my session lengths can be
-   pretty long"*. Our legs are mostly short, targeted, and early-to-mid colony.
-   We may simply not be standing where the crashes are.
-3. **We reload constantly, and reloading breaks the proposed accumulation.**
-   If mizushimo's chain (crash → corrupted save → more crashes) is right, a
-   campaign that repeatedly loads from known-good saves would look clean whether
-   or not the pack helps.
-4. **One machine, one driver stack, one player.**
+> **The owner spends HOURS, solo, building each test save out before an agent
+> ever starts** — deliberately provisioning colonies with large drone fleets,
+> large populations, many rockets, asteroids, and **"hundreds or thousands of
+> unrelated background tasks firing"**, precisely so the short measured leg runs
+> against a realistically loaded world.
+
+**So the 58 hours DOES include long, continuous, high-entity-count sessions —
+which is exactly the profile the community's crash reports cluster in.** The
+correction cuts two of the four original objections and leaves two standing.
+**This is a fact about every leg result in this project, not just this one:**
+the measured legs are short, but the worlds they run against are not fresh.
+
+**What still stands, and it is the decisive one:**
+
+1. **There is no vanilla arm.** No matched build-out of comparable length and
+   complexity *without* the pack exists. Zero crashes in the treatment group
+   with no control group is not a comparison — this alone prevents any claim
+   that the pack improves stability.
+2. **One machine, one driver stack, one player.**
+
+**What no longer stands:** ~~the exposure-profile objection~~ (corrected above),
+and ~~"we reload constantly, so accumulation never happens"~~ — true of the
+agent legs, **false of the multi-hour build-out sessions**, which are continuous
+play and are where accumulation would occur if it occurs at all.
+
+**⭐ The distinction that actually makes this datum usable.** Two different
+claims are hiding in "58 hours, zero crashes", and they need different evidence:
+- *"The pack improves on vanilla stability"* — **needs the control we do not
+  have. Unsupported. Do not claim it.**
+- *"The pack does not DESTABILISE a heavily loaded colony"* — **needs no vanilla
+  arm at all**, because the question is whether *we* broke something, and the
+  baseline is "a game that works". On that question, ~58 hours of deliberately
+  overloaded play with zero crashes and zero `[LUA ERROR]` on clean runs is a
+  real negative-safety result, and a relevant one given F86 exists precisely
+  because our code can reach the save. **That is the version worth having, and
+  it is already true.**
 
 **The mechanistic case is real, though, and worth stating because it is what
 would make the observation more than luck.** Several fixes repair exactly the
