@@ -241,6 +241,17 @@ re-checking (`bug` / `fix` return zero hits; author search works).
 2. **The audit's §1/§2 witness grades now lag its own §10.4** for F01 and F74.
    Bookkeeping, not a decision — but it is exactly the drift job 7 exists to
    catch, so catch it here.
+3. **⚠️ Error counts are compared across arms, and SESSION UPTIME was never
+   recorded next to them** (`BUG_LIST_AUDIT.md` §10.6f(i)). The owner does not
+   close a game session unless a leg demands it, so a flushed log typically
+   covers **1–6 hours of continuous play** — which makes our zero-error results
+   *stronger* than they read, and makes cross-arm **count** comparisons depend
+   on comparable exposure. The case to look at is **PT-58's `0` against leg 5's
+   `80`**: the concern is small there (the orphan errors fire per drone-idle
+   tick over 73 idle drones, so a zero does not need hours to mean something),
+   but **the uptimes are not on the record and should be**. Fix the convention
+   going forward — log the session uptime beside any error count — and note it
+   in the QA report rather than re-opening a passed leg.
 
 **The method lesson is the part worth carrying into the QA report:** §7.1 used
 *"the crawler is blocked"* as grading input, and a single logged-in browse found

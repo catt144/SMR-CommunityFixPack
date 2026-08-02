@@ -1024,6 +1024,39 @@ and ~~"we reload constantly, so accumulation never happens"~~ — true of the
 agent legs, **false of the multi-hour build-out sessions**, which are continuous
 play and are where accumulation would occur if it occurs at all.
 
+**⭐ AND THE SESSIONS ARE LONG-LIVED PROCESSES, WHICH MATTERS FOR THE LOGS AS
+MUCH AS FOR THE CRASH COUNT (owner, 2026-08-01).** The owner **does not close or
+refresh a game session** unless a playtest specifically calls for a fresh leg.
+So when an agent arrives, runs a leg and asks for a log flush, **the log it
+receives typically covers a session that has been continuously active for 1–6
+hours.**
+
+Three consequences, and the first two are the ones nobody has been crediting:
+
+1. **Our "zero `[LUA ERROR]`" results are stronger than they have been read
+   as.** A zero across a 1–6 hour continuously-running process on a loaded
+   colony is a substantially better result than a zero across a leg window, and
+   that is what several of them actually are.
+2. **Our logs contain far more evidence than the legs that produced them.** Hours
+   of ordinary play sit in the same file as the measured window. **Old logs are
+   worth mining** — for `[LUA ERROR]` of any origin, for vanilla wedges, for the
+   kind of background-task noise no leg was designed to look for.
+3. ⚠️ **But an error three hours older than the leg lands in the same file.**
+   Anything attributed to a leg must be located **in time**, not merely found in
+   the file. Existing legs have generally done this (they quote `t=` game-time
+   stamps and line context) — this is a caution for future reading, not a
+   retro-accusation.
+
+⚠️ **One check this raises, worth naming rather than assuming away:** error
+*counts* compared across arms are only comparable if the arms had comparable
+exposure. PT-58's headline is **0 orphan errors against leg 5's 80** — if those
+two sessions differed greatly in uptime, the zero would be less impressive than
+it reads. **Small concern in that specific case**, because the mechanism fires
+per drone-idle-tick over an article holding 73 idle drones, i.e. fast rather
+than slow, so a zero would not need hours to be meaningful. **Still: session
+uptimes were not recorded alongside the counts, and they should be.** Routed to
+prompt 12's QA.
+
 **⭐ The distinction that actually makes this datum usable.** Two different
 claims are hiding in "58 hours, zero crashes", and they need different evidence:
 - *"The pack improves on vanilla stability"* — **needs the control we do not
