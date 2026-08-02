@@ -76,4 +76,100 @@ file, commit, push.
 
 ## Notes from upstream
 
-(prompt 7 appends approved-fix specs here)
+### From prompt 7 (2026-08-02) — SEVEN builds approved, each specced on its BUGS entry; TWO owner decisions are open
+
+**Nothing was built. Every spec below is written out in full on its own BUGS
+entry — module, technique, code sketch, self-check, probe outline, intent
+statement — so this prompt should not need to re-derive any of it. Read the
+entry, not this summary.** Counts re-derived by counting, not incrementing:
+**96 F + 12 D = 108 rows; 38 C.**
+
+⚠️ **Do not treat any of these as a `wontfix` you may skip, and do not add to
+the list.** Six candidates were run through §4 and closed the other way — they
+are recorded on their entries with grounds and are **out of scope here**.
+
+#### The approved builds — one todo item each
+
+| # | fix | technique | lands in | note |
+|---|---|---|---|---|
+| 1 | **F91** track-shell leak | 3 lines inside an existing §1.5 body + the existing LoadGame sweep | **`Fix_TrackSalvageWipe.lua`** (F44) | ⚠️ **`tested` module** — job 2's rule applies: state A/B expectations BEFORE the leg |
+| 2 | **F92** Saint blessing | **§1.1** preset patch + one-shot load-time re-base | new module | changes real gameplay (Saints finally buff Religious colonists) — say so in the commit |
+| 3 | **F93** dust-devil descriptor map | **§1.4b** global replacement, 7 lines, `CurrentMap` → `MainMap` | new module | header must name file/lines/build per §1.5 rules |
+| 4 | **F94** asteroid-visit precedence | **§1.4b** global replacement, 12 lines, one pair of brackets | **`Fix_AsteroidLanderAvailable.lua`** (F72) | ⚠️ **the F72 header must be corrected in the same commit** — it advertises a chained delegation this fix removes, and the reason is on the F94 entry |
+| 5 | **F95** Astrogeologist extractors | **§1.1** two additive `Effect_ModifyLabel` entries + load-time heal | new module | ⛔ build them with `PlaceObj`, **never** `:new{}` (the F87 rule) |
+| 6 | **F96** sinkhole indestructible | **§1.1** one boolean on preset **and** class table | new module | side effects enumerated on the entry: exactly one behaviour changes |
+| 7 | **F90** underground grid breaks | **§1.4 wrapper = §3a LAYER 3** (narrow the input, keep vanilla's body) | new module | ⚠️ `pcall` + restore + re-raise: `self.connectors` is a **persisted** field and must never be left swapped |
+
+**Three of the seven are §1.1 preset patches and one is layer 3, so most of this
+batch adds nothing to the save.** Only F91 and F94 touch modules that already
+exist.
+
+#### ⛔ TWO OWNER DECISIONS ARE OPEN — do not build either, and do not infer an answer
+
+1. **Package 0 — F29 (items 1 and 3) and F57(a): convert the R3 §1.5
+   replacements to §1.4 wrappers?** The amended §4 makes that combination
+   conditional on an explicit user decision. **Prompt 7's recommendation is
+   CONVERT**, and the wrapper shapes are written out on both entries —
+   including for F57(a), which the routing note doubted had a route (it does:
+   clear the whole restrictor table before the call rather than trying to learn
+   which key was written; that table has exactly one writer in the tree, and the
+   conversion **deletes a persisted mod field from every save**). **If the owner
+   says convert, both conversions belong in this batch**; if not, both entries
+   stay exactly as they ship today. Nothing else depends on the answer.
+2. **C23 item 1 — the dust-devil `spawn_chance` truncation.** Defect confirmed
+   and sharpened (`count_max` unreachable whenever `spawn_chance < 100`; the
+   count can be 0 while `count_min` is 1). **Not approved**, because the repair
+   changes the dust-devil RATE and two readings are live — §4's ambiguity rule
+   points at the sibling Bernoulli gate, §4's "no balance changes" line points
+   at leaving a difficulty number alone. **If the owner picks the gate reading,
+   the fix is a §1.4b replacement of the scheduler's count line and it joins
+   this batch.**
+
+#### Three things that will bite this prompt if it is not expecting them
+
+- **F94 removes a compatibility property F72's header brags about.** A false
+  positive cannot be filtered by a post-wrapper — the wrapper sees `true` and
+  never learns which rocket produced it — so the predicate has to be owned.
+  Fix the header; do not quietly leave it claiming the old behaviour.
+- **F91's amendment sits on the `mass_delete` branch our F44 deliberately
+  kept.** What mass salvage *removes* does not change; what changes is that the
+  `TrackBase` is actually deleted afterwards instead of being left as a shell.
+  The A/B must not read that as a behaviour regression.
+- **F92 and F95 both need a load-time heal for existing saves**, because both
+  repair something applied once (a trait on dome entry / a profile effect at
+  game start). Both heals are specified as idempotent and both reuse vanilla's
+  own application path rather than hand-rolling a modifier — keep that, it is
+  what makes them safe to re-run on every load.
+
+#### Probe outlines are on the entries
+
+Seven probe outlines are written (`TrackShellLeak`, `SaintBlessing`,
+`DustDevilsDescrMap`, `AsteroidVisitPrecedence`, `AstrogeologistExtractors`,
+`SinkholeIndestructible`, `DustStormBreakMapFilter`). Several are **static
+invariants** needing no scripted repro — cheap probe-count growth. Two have live
+halves that belong on the checklist rather than in a probe, and the entries say
+which.
+
+#### Not for you
+
+- **F82 is CLOSED `wontfix — intent`** — a timed *event announcement*, not a
+  state warning. Do not build a removal-key fix for it.
+- **C23 item 3** (marker dust devils ignoring `DustStormsDisabled`) — defect
+  confirmed, **declined on shape**; all four routes over-reach into scripted
+  content or put a sleeping mod thread in every save. F89's disposition.
+- **F04's tier** was decided (the witness is unassigned, not C32's). Record
+  correction only; no code.
+
+#### Housekeeping this prompt inherits
+
+**STATUS's count line was re-derived, not incremented** (`Select-String` over
+the index block). If this batch files or closes anything, re-derive it the same
+way — the line has now gone stale four separate times and it is the single most
+drift-prone number in the project.
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point this
+session** — no broad search touched it. The one place its contents were
+referenced is the inheritance guard prompt 7 was handed about F29(a), which was
+quoted *to* this session in its own brief and was **not** relied on: package 0's
+provenance was re-derived from Src (four shipped Mystery 2 sites, zero presets
+setting either sampling parameter).

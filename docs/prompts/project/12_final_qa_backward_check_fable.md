@@ -426,3 +426,45 @@ pointers to files another prompt owns and deletes. If that holds, the
 protocols we keep adding ("update both locations") are compensation for a
 structural duplication rather than a fix for it. Confirm or refute it against
 your own findings; the owner wants the real diagnosis, not this one repeated.
+
+### Added by chain prompt 7 (2026-08-02, per chain rule 4b) — four instances, and **three of them are a class the hypothesis above does not cover**
+
+The duplication hypothesis explains instance 1 below. It does **not** explain
+2-4, which are a different failure: **a claim was recorded as a fact, carried
+forward by later sessions, and was wrong or unverifiable at the moment it was
+written.** No amount of syncing duplicate locations would have caught any of
+them. If that second class is real, the taxonomy needs both axes.
+
+1. **The prompt's own brief was stale against the entry it described** (the
+   duplication class). `7_audit_candidate_decisions_opus.md` §5d said the C33
+   train-report lead's *"provenance is not established"* and that it *"may never
+   have reached Paradox"* — while the C33 entry itself already recorded
+   **"✅ PROVENANCE ESTABLISHED"** and then a same-day weakening from a rival
+   hotfix-2 explanation. The brief was written before both updates and never
+   re-synced. Caught only because the entry was read before the brief was acted
+   on. **Prompt briefs are a duplication site nobody has been counting.**
+2. **An unverifiable claim recorded as fact, and inherited.** C33 stated that
+   *"a naive `DoneObject` on it RAISES"*. `ripairs` is engine-provided with **no
+   body anywhere in Src**, and `ENGINE_FACTS.md` separately records that this
+   Lua *tolerates* the neighbouring cases (`#nil`, `next(nil)`, `ipairs(false)`).
+   The claim could not have been derived from source at all. It survived because
+   it sounded mechanical.
+3. **A property read as deliberate design that is inert on its sibling.** F82's
+   entry cited `GameTime = false` as an *"explicit override against a default of
+   `true`"* — evidence the real-time expiry was chosen. But `PowerLeak` carries
+   the same flag with **no `Expiration` for it to govern**, and
+   `LifeSupportLeak` lacks it. The flag is not always a considered choice in
+   that file, so the inference was unsound. **Withdrawn on the entry.**
+4. **A routing note's guess hardened into a tier.** The brief suggested Saint is
+   *"a breakthrough trait — R2-ish?"*. It has no `hidden_on_start` (its sibling
+   Empath does), so it is an ordinary rare applicant trait and the tier is R1.
+   A parenthetical guess in a handoff note is indistinguishable, three sessions
+   later, from a derived result.
+
+**What is worth testing about 2-4:** every one of them was caught by *going back
+to the primary source* rather than by any cross-check between documents. The
+project already has a rule for this shape — "recorded facts are claims too" —
+and it keeps being learned rather than enforced. **A candidate diagnosis for
+job 7: the docs have no way to mark the difference between a fact derived from
+Src this session, a fact inherited from an earlier session, and a guess.** All
+three are written in the same voice.

@@ -35,6 +35,11 @@ remediation 3.3). Session legs are append-only in
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
+**108 rows** (96 `F` + 12 `D`; **re-counted 2026-08-02 by chain prompt 7** —
+`Select-String` over the index block, not by hand, and not by incrementing:
+**F=96, D=12, C=38**. Prompt 7's six §4 packages filed **F91-F96**; the C count
+is unchanged because promoted candidates keep their rows. The prior figure and
+its history follow, because this line's drift is itself evidence — was
 **102 rows** (90 `F` + 12 `D`; **re-counted 2026-08-01 by chain prompt 6** —
 `awk` over the index block, not by hand. The "100 (88 F + 12 D)" figure here
 had gone stale *twice within the same day*: F89 was filed mid-sitting during
@@ -103,7 +108,22 @@ prevention. **No "the pack improves vanilla stability" claim is licensed by it**
 least of all in `MOD_DESCRIPTION.md`. **No status flips earned** — both entries
 are already `tested`; this is reachability evidence, not new verification.
 ⚠️ Prompt 6's own handoff note said "35 C"; counting says otherwise — the C
-line drifts exactly like the 102 does, so re-derive it too). **TestKit probes: 78** (re-verified 2026-08-01 by counting
+line drifts exactly like the 102 does, so re-derive it too.
+**2026-08-02, chain prompt 7 — the §4 decision packages: SIX F-ROWS FILED
+(F91-F96), counts re-derived by counting → 96 F + 12 D = 108; 38 C.** All six
+are **approved and specced, none built** — the build is chain prompt 8's.
+**F91** track-shell leak (from C33; our own F44 path reproduces it),
+**F92** Saint blessing label mismatch (C22), **F93** dust-devil descriptor read
+from the camera's map (C23 item 2), **F94** asteroid-visit precedence (C24),
+**F95** Astrogeologist's short extractor list (C38), **F96** the destructible
+St. Elmo sinkhole (C21). Five C rows move to **CLOSED — promoted** (C21, C22,
+C24, C33, C38) and **C23 is PARTLY promoted** — its three sub-items got three
+different answers. **Two closures without a build:** **F82** is `wontfix —
+intent` (a timed event announcement, not a state warning — so its P3-vs-P2
+question is void), and **C23 item 3** is declined on shape. **Two owner
+decisions are open and are the only things blocking prompt 8 from a full
+sweep** — see the outbox in `8_f86_phase4_conversion_batch_opus.md`).
+**TestKit probes: 78** (re-verified 2026-08-01 by counting
 `SMRTest.Register(` across the TestKit's nine probe files: 10+20+18+12+7+3+2+6,
 excluding the definition in `00_TestCore.lua`; **unchanged by the 2026-08-01
 teardown of `97_SaveHookProbe` — it was declared, never registered**, and the
