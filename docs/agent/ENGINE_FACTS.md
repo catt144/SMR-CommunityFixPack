@@ -44,6 +44,23 @@ code suggests.
   | **`SMRFixPack_Disabled[id]`** user veto | **depends on where the module installs** — `Register` returns before `run_apply` (`00_Core.lua:384-388`), so an apply()-time installer never hooks; a **FILE-SCOPE** installer (e.g. `Opt_DroneOverhaul` parts 1-2) has already hooked before `Register` is reached, and the veto only flips its status | yes | apply()-installers: no · file-scope installers: **YES** | no |
   | **Mod Manager disable / uninstall** | no — mod code never loads | **NO** | no | **YES** → `Unpersist missing permanent: Mod/<id>` and `[LUA ERROR]` from any captured body that touches a mod-created name |
 
+  ⚠️ **THE THREE SWITCHES ARE INDEPENDENT, AND MOD OPTIONS SURVIVE A MOD MANAGER
+  DISABLE** (owner, 2026-08-02, observed during the chain-8b batch leg). Turning
+  the pack **off** in the Mod Manager does **not** reset its Mod Options; turning
+  it back on **restores whatever the toggles were before**. So a disable/enable
+  cycle is *not* a return to defaults, and the optional modules come back in the
+  player's previous state.
+  **Binding consequence for any brief that predicts an active count:** the
+  `default_options` in `metadata.lua` are all `false`, so it is tempting to
+  predict "68 of 74" / "73 of 79" from the defaults — that is only correct on a
+  profile whose toggles have never been touched. **Read `CurrentModOptions`
+  (or just run `ListFixes()`) before writing the number.** Observed cost: PT-60's
+  P1 predicted `73/79` and the run read **`79/79`**, entirely because six opt-in
+  modules had been left on in that profile — a prediction miss with no defect
+  behind it, which is exactly the kind that wastes an attended sitting.
+  ⭐ Silver lining worth knowing: an all-toggles-ON run is the leg F87's residual
+  asked for — the five `Opt_` probes execute instead of SKIPping.
+
   **So "all toggles off" is NOT equivalent to "pack removed", and the difference
   is the whole of F86.** With any toggle off the environment still exists, so a
   captured frame resumes, resolves `SMRFixPack`, reads inactive and no-ops
