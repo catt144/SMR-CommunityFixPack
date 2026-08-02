@@ -32,6 +32,23 @@
 --
 -- Deliberately unchanged: mass_delete (Ctrl+click) still demolishes the whole
 -- track, which is what it is for.
+--
+-- AMENDED 2026-08-02 for F91 (whole-track salvage leaves an undeletable invisible
+-- TrackBase shell). Two halves, both inside this file — no new module, no new
+-- registry id, no new thread, so this adds ZERO save-safety exposure:
+--   A. the mass_delete / not-idx branch now FINISHES the deletion vanilla's
+--      OnDemolish only prepares (see the -- FIX (F91) block there);
+--   B. the OnMsg.LoadGame sweep below gained a shell heal for saves that already
+--      carry them — vanilla produces one per Ctrl+click salvage, unbounded and
+--      permanent, so an existing save can hold any number.
+-- ⚠️ WHAT DOES NOT CHANGE, stated because this module is `tested` and an A/B
+-- reader must not misread it: mass salvage still removes exactly the same track
+-- and still destroys the same assigned trains. The only difference is that the
+-- now-empty TrackBase object is deleted instead of being left as a shell — and
+-- the shell was invisible (entity = "InvisibleObject", Track.lua:35) and carried
+-- count_as_building = false (:52), so nothing player-visible moves EXCEPT the
+-- colony's daily "trains on tracks" walk, which stops enumerating dead tracks
+-- (ResourceTracking.lua:197-201).
 
 SMRFixPack.Register("TrackSalvageWipe", {
 	title = "Salvaging one track piece no longer deletes the whole track and its trains",
@@ -97,6 +114,32 @@ SMRFixPack.Register("TrackSalvageWipe", {
 			local idx = table.find(all_elements, self)
 			if mass_delete or not idx then
 				track_obj:OnDemolish()
+				-- FIX (F91): OnDemolish PREPARES a deletion that nothing performs.
+				-- It sets CanDelete = ret_false (Track.lua:249) and empties
+				-- elements / elements_under_construction / assigned_vehicles to
+				-- `false` — and the element-side auto-delete it just disarmed
+				-- (TrackElement.lua:203-205) is the only other route to DoneObject.
+				-- What survives is an entity = "InvisibleObject" TrackBase sitting
+				-- in the map, in city.labels.TrackBase and in every later save,
+				-- with no route to deletion left in the game. Every OTHER path out
+				-- of TrackBase:OnDemolish ends in DoneObject: TrackBase sets
+				-- use_demolished_state = false (Track.lua:45) and
+				-- Demolishable:Demolish deletes on exactly that branch
+				-- (Demolishable.lua:132-141). We finish the deletion vanilla
+				-- started — what mass salvage REMOVES is unchanged.
+				-- The three arrays are restored first so Done can walk them
+				-- (Track.lua:69-76); Done re-falsifies them itself. Belt and
+				-- braces: whether `#false` raises here is unverified and nothing
+				-- depends on the answer (the F10 lesson).
+				-- Deliberately NOT Msg("Demolished", track_obj): vanilla's direct
+				-- OnDemolish path never sends it, and firing it would reach
+				-- listeners outside this defect's scope.
+				if IsValid(track_obj) and not IsBeingDestructed(track_obj) then
+					track_obj.elements = track_obj.elements or {}
+					track_obj.elements_under_construction = track_obj.elements_under_construction or {}
+					track_obj.assigned_vehicles = track_obj.assigned_vehicles or {}
+					DoneObject(track_obj)
+				end
 				return
 			end
 
@@ -270,8 +313,37 @@ OnMsg.LoadGame = SMRFixPack.WhenActive("TrackSalvageWipe", function()
 	-- A salvage aborted mid-split (the pre-2026-07-26 seed crash) can also leave
 	-- a DESTROYED element sitting inside a track's arrays; purge those entries so
 	-- end-element updates and daily walks stop tripping over them.
-	local purged = 0
+	--
+	-- FIX (F91), same walk: heal saves that already carry OnDemolish shells — the
+	-- undeletable invisible TrackBase the half-done deletion above leaves behind.
+	-- Vanilla produces them on every Ctrl+click whole-track salvage, so a save
+	-- from before this fix (or from an unmodded game) can hold any number of them.
+	-- The signature is EXACT, so a live track cannot match: all three arrays
+	-- `== false` — only TrackBase:OnDemolish produces that (DestroyAssignedTrains
+	-- Track.lua:165, DestroyTrackElements :190-191), while construction gives all
+	-- three real tables (TrackBase:Init, Track.lua:56-60, and assigned_vehicles
+	-- from the combined StationsLink:Init, StationsLink.lua:13) — AND
+	-- `demolishing` truthy (set at Track.lua:250).
+	-- Timing is safe: on the healthy Demolishable path there is no yield between
+	-- OnDemolish (Demolishable.lua:133) and DoneObject (:139), so a save can never
+	-- capture a legitimately mid-deletion track and the signature cannot
+	-- false-positive on one.
+	-- The purge loop below is unaffected either way — it tests type(t) == "table"
+	-- and a shell's fields are `false`.
+	local purged, shells = 0, 0
 	AllMapsForEach(true, "TrackBase", function(track)
+		if IsValid(track) and not IsBeingDestructed(track)
+				and track.elements == false
+				and track.elements_under_construction == false
+				and track.assigned_vehicles == false
+				and track.demolishing then
+			track.elements = {}
+			track.elements_under_construction = {}
+			track.assigned_vehicles = {}
+			DoneObject(track)
+			shells = shells + 1
+			return
+		end
 		for _, t in ipairs({ track.elements, track.elements_under_construction }) do
 			if type(t) == "table" then
 				for i = #t, 1, -1 do
@@ -285,5 +357,8 @@ OnMsg.LoadGame = SMRFixPack.WhenActive("TrackSalvageWipe", function()
 	end)
 	if removed > 0 or purged > 0 then
 		SMRFixPack.Log("TrackSalvageWipe: removed %d orphaned track element(s) and %d dead track-list entr(y/ies) left behind by a corrupted salvage", removed, purged)
+	end
+	if shells > 0 then
+		SMRFixPack.Log("TrackSalvageWipe: deleted %d invisible track shell(s) left behind by a whole-track salvage (F91)", shells)
 	end
 end)
