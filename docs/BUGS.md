@@ -9025,9 +9025,49 @@ quotes verbatim; sources in the audit report §8.
     gate to the shipped numbers, so his mod produces the same rate change ours
     would. **Three sources now agree on the SHAPE and none of them is evidence
     about the tuned RATE.**
+  - ⭐⭐⭐ **THE DATA ARGUES ON ITS OWN — `DustDevils_VeryHigh_3` IS INCOHERENT
+    UNDER THE MULTIPLY, AND THIS NEEDS NO OG CODE AT ALL (2026-08-02, from the
+    owner's full preset dump).** The authored values are `count_min 6`,
+    `count_max 8`, `spawn_chance 50` (`Data\MapSettings-DustDevils.lua:111-127`,
+    and identical in OG).
+    * **Under the multiply:** `Random(6,8) * 50 / 100` → **3, 3 or 4**. The
+      authored range `6..8` **can never occur**, and the declared *minimum* of 6
+      actually delivers **3**. Every wave is 3-4; zero is impossible.
+    * **Under the gate:** half the waves are empty, the rest are **6-8** — "a big
+      swarm, half the time", which is a coherent thing for a designer to author.
+    **A designer who wanted 3-4 devils would write `count_min 3, count_max 4,
+    spawn_chance 100`.** Writing `6..8 @ 50%` to obtain `3..4` is gratuitously
+    indirect, and it makes both count fields describe something the game never
+    does. This is a **self-contradiction between authored data and shipped code**,
+    visible without leaving Relaunched, and it is far starker than the `High`
+    case that opened this item.
+    **Two weaker corroborations from the same dump.** `VeryHigh` sets
+    `spawn_chance = 100` **explicitly** — a no-op multiplier, but a meaningful
+    "always fires" gate. `VeryLow` is `count 1..1 @ 20%`, which under the
+    multiply is **always 0** (⚠️ discount this one: `VeryLow` is
+    `forbidden = true` and never runs, so its numbers may simply be vestigial).
+    **⚖️ What this does to the disposition.** It does **not** prove what OG's code
+    did — that is still unread. But it substantially weakens the reason this was
+    held back: "the shipped rates may have been tuned around the truncation" is
+    hard to sustain when a shipped preset's authored range is **unreachable**
+    under that truncation. **On this evidence the item reads as a clear pass
+    rather than a coin-flip**, and the recommendation to the owner is updated
+    accordingly. The decision remains theirs; the argument is now data-driven
+    rather than shape-driven.
+  - 🎯 **BETTER LIVE DISCRIMINATOR — use `VeryHigh_3`, not `High`.** Multiply →
+    **3 or 4 devils, every wave, never zero**. Gate → **0, or 6-8**. Seeing a
+    wave of **5 or more** proves the gate, with a far wider margin than `High`'s
+    2-vs-3, and unlike `High` it is not sensitive to the `Random` bounds
+    question. Waves are `spawntime 1350000` ms ≈ **45 game hours (~1.9 sols)**
+    apart, so at speed this is minutes per sample, not hours.
   - ✅⭐ **PRECONDITION MET 2026-08-02 — THE OG AND RELAUNCHED PRESETS ARE
     IDENTICAL, READ OFF THE ORIGINAL GAME'S OWN DEBUG MENU (owner at the
-    keyboard).** The original's cheat menu renders the **live
+    keyboard). EIGHT presets compared, every field.** `VeryLow` (20/1/1,
+    `forbidden`), `Low` (50/1/2), `High` (75/1/3), `VeryHigh` (100, count
+    defaulted), `VeryHigh_1` (75, `count_max 3`), `VeryHigh_2` (75/1/2),
+    `VeryHigh_3` (50/6/8) and `GameRule` (75, count defaulted) all match
+    `Data\MapSettings-DustDevils.lua` exactly — spawntimes, durations, major and
+    marker fields included. **This is no longer a one-preset coincidence.** The original's cheat menu renders the **live
     `MapSettings_DustDevils` preset object**, so this is data loaded from OG's
     packs, not a label. `DustDevils_High` in OG reads: `spawn_chance 75`,
     `count_min 1`, `count_max 3`, `spawntime 600000`, `spawntime_random 300000`,
