@@ -8958,6 +8958,82 @@ quotes verbatim; sources in the audit report §8.
     changes" line points at leaving a difficulty number alone. That is a
     borderline call this session declines to make for the owner. **Question, and
     the recommendation, are in the prompt-7 handoff.**
+    ✅⛔ **OWNER DECIDED 2026-08-02: BUILD IT — PROVISIONALLY. "Not locked. I want
+    the QA run to personally review it and provide feedback."** So: approved for
+    chain prompt 8, **and chain prompt 12 owns a standing job to re-examine this
+    decision and report back** (routed there, see its job list). The owner
+    accepted the §3a cost below with that review as the check on it.
+    ⚠️ **CORRECTION TO THIS SESSION'S OWN EARLIER NOTE, made before the decision
+    was taken:** the fix was first described as "a §1.4b replacement of the
+    scheduler's count line". **That is wrong.** Line `:216` is **inside the
+    `GlobalGameTimeThread("DustDevils", …)` body** — there is no global function
+    to replace, no synchronous input to narrow, and the descriptor is the
+    **shared preset table** (`OverrideDisasterDescriptor` returns the preset
+    itself, `TerraformingDisasters.lua:97`) so it cannot be mutated per-wave.
+    **The only precise route is owning the scheduler body** through
+    `GlobalGameTimeThreadFuncs["DustDevils"]` — i.e. a mod-owned **sleeping
+    game-time thread in every save**, the same §3a shape that made item 3 a
+    decline. The evidence got stronger and the cost got higher on the same day;
+    both are on the record.
+
+    ### Build spec (approved provisionally; build = prompt 8, review = prompt 12)
+
+    **Technique:** §1.5 **reconstruction** (the body is a thread closure, not a
+    byte-copyable named function) installed at
+    `GlobalGameTimeThreadFuncs["DustDevils"]`, with **one** changed line:
+    ```lua
+    -- FIX (C23-1): spawn_chance is a probability, not a count multiplier.
+    local count = 0
+    if SessionRandom:Random(100) < descr.spawn_chance then
+        count = SessionRandom:Random(descr.count_min, descr.count_max)
+    end
+    ```
+    Header must **say it is a reconstruction**, name `Lua\DustDevils.lua:188-241`
+    and build `1.0.7.396349`, and state that the extraction diff cannot verify it
+    byte-for-byte (§1.5's reconstruction rules).
+
+    **⛔ THREE SHARP EDGES — none optional, and two have bitten this project
+    already.**
+    1. **The F88 trap: never restart blind.** `RestartGlobalGameTimeThread`
+       does `DeleteThread` + recreate, which **re-rolls the pending wave
+       timer**. Installing that way on every load recreates F88 exactly — the
+       defect where `Fix_MeteorFrequency` restarted the meteor timer each load
+       and a player who loaded often never got a meteor. Swapping the table
+       alone does **not** take effect on an existing save (the restored thread
+       is still executing the body serialised into it), so a restart is needed
+       **once per save lineage** — use F88's shipped shape, a **version-latched
+       one-shot** (`SMRFixPack_MeteorLatch` is the worked example). Cost: one
+       timer re-roll per lineage, which is the price F02's watchdog already
+       pays and discloses.
+    2. **The `Fix_MeteorFrequency` uninstall trap: a bare orphan gate KILLS
+       dust devils forever.** Our body is serialised; after removal the restored
+       thread is ours with no `SMRFixPack` behind it. A plain
+       `if not SMRFixPack then return end` exits cleanly — and leaves the save
+       with **no dust-devil scheduler at all**, permanently. That is precisely
+       what `Fix_MeteorFrequency` did to a colony's meteors (F86 Site 1). **The
+       gate must hand the loop back to vanilla**, the way Tier 1 did:
+       `RestartGlobalGameTimeThread("DustDevils")` re-creates the thread from
+       whatever body `GlobalGameTimeThreadFuncs` holds — and with the pack gone
+       that table is vanilla's again, because it is rebuilt from Src at Lua
+       load and is not persisted. ⚠️ Restarting from *inside* the thread being
+       restarted needs care (`DeleteThread` on self); verify it at the keyboard,
+       do not assume.
+    3. **Per-site §3a disposition is mandatory** — this knowingly adds a
+       **14th** exposed site to a list the chain has just spent two tiers
+       shrinking. It must appear in `SAVE_SAFETY_REDESIGN.md` with its own
+       recorded call, and it needs its **own A/B plus a long-interval soak**
+       (§3a layer-1 discipline applies to anything re-arming a timer).
+
+    **Probe outline:** `DustDevilSpawnGate` — static: our body is installed
+    (`GlobalGameTimeThreadFuncs.DustDevils` is ours) and the thread is alive.
+    Live half rides the checklist rider below.
+    **Verification rider (write predictions BEFORE the leg):** set a map to
+    `DustDevils_VeryHigh_3` and watch wave sizes — **3-4 every wave under the old
+    body, 0 or 6-8 under the fix**. Dust storms off (a storm mid-wave truncates
+    the burst, `:220-222`).
+    **Scale warning for prompt 8:** this is Tier-1-scale work on a P3 item, not a
+    drop-in. If it does not fit alongside the batch, **chain rule 3 (self-split)
+    applies** — split it rather than rushing it into a shared leg.
     ⭐ **SECOND CONTROL FOUND 2026-08-02 (owner asked whether the sibling reading
     actually restores the intent) — it settles the SHAPE question, in another
     file.** `MapSettings_Meteor` declares the **same three-field trio** — a

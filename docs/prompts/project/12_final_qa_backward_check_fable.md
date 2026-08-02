@@ -235,6 +235,44 @@ INFERRED — an honest gap beats a manufactured confirmation.
    prompts/sessions are authored, since that touches `WORKFLOW.md` and the
    chain conventions.
 
+8. ⭐⭐ **JOB 8 — THE OWNER ASKED FOR THIS BY NAME (2026-08-02): personally
+   review the C23 item 1 decision and give feedback.** Verbatim: *"I am gonna do
+   the build it, accept the thread for now, but its not locked. I want the QA run
+   to personally review it and provide feedback."*
+
+   **What was decided and why it is unusual.** C23 item 1 is the dust-devil
+   scheduler using `spawn_chance` as a count multiplier instead of a probability
+   gate. The owner approved **building** it, which means **owning the
+   `DustDevils` game-time thread body** — knowingly adding a **14th §3a exposed
+   site**, on a **P3** item, in the same chain that spent Tiers 1 and 2 removing
+   two such sites. **That tension is the point of this job.**
+
+   **The evidence FOR the fix is unusually strong and is all on the C23 entry** —
+   read it before forming a view: three independent controls for gate-then-count
+   (the marker sibling in the same file, `MapSettings_Meteor`'s identical trio,
+   and fredware's independent fix), plus the finding that settles it from data
+   alone — **`DustDevils_VeryHigh_3` is authored `count 6..8 @ 50%` and the
+   multiply makes that range unreachable**, delivering 3-4 while the declared
+   *minimum* is 6. The OG presets were also confirmed identical across all eight,
+   from the original game's own debug menu.
+
+   **What to weigh, honestly and in both directions:**
+   - Is a P3 frequency repair worth a permanent save-safety site? The owner's
+     own §3a ordering says prefer 3 → 2 → 1; this is none of those.
+   - Both named traps are ones this project has already suffered — the F88
+     timer re-roll and `Fix_MeteorFrequency`'s permanent-silence uninstall. If
+     the build did not handle **both**, say so loudly.
+   - Conversely: if the build is clean and the A/B is convincing, say that too.
+     **This is not a job to find fault; it is a second opinion the owner asked
+     for in advance.**
+   - **C23 item 3 was DECLINED on the same shape.** If item 1 ships, is that
+     consistent? Either answer is defensible — but the record should not hold
+     both without noticing.
+
+   **Deliverable:** a short section in the QA report — keep / revert / keep-with-
+   changes, with reasoning. **It is explicitly NOT locked**, so recommending
+   reversal is a legitimate outcome and costs the project only the build time.
+
 ## Scope fence
 
 **In:** verification, the report, presenting unresolved items, **and the job-7

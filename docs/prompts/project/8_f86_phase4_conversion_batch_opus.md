@@ -119,16 +119,47 @@ R3 §1.5 replacements**, which is what the §4 amendment was asking for. The
 defect claims are untouched — technique only, so the A/B must read
 byte-equivalent behaviour on all three.
 
-#### ⛔ ONE OWNER DECISION STILL OPEN — do not build it, and do not infer an answer
+#### ⚠️ C23 ITEM 1 — APPROVED **PROVISIONALLY** BY THE OWNER, AND IT IS THE ONE ITEM IN THIS BATCH THAT CAN BREAK A SAVE IF RUSHED
+
+**Owner, 2026-08-02: "build it, accept the thread — for now, but it's not
+locked. I want the QA run to personally review it and provide feedback."** So it
+is a build, chain prompt 12 has a standing job to re-examine the decision, and
+**the owner may reverse it** — do not treat it as settled precedent for anything
+else.
+
+⚠️ **Read the C23 entry's build spec in full before starting. This is NOT the
+small fix an earlier draft of these notes described** — that description was
+corrected the same day. The defective line is **inside the
+`GlobalGameTimeThread("DustDevils", …)` body**, so the fix means owning a
+**sleeping game-time thread**, i.e. a 14th §3a exposed site, on a **P3** item.
+Three edges, two of which have already bitten this project:
+1. **The F88 trap** — `RestartGlobalGameTimeThread` re-rolls the pending wave
+   timer, so installing on every load recreates F88 exactly. Use F88's
+   **version-latched one-shot**; a table swap alone does not reach an existing
+   save.
+2. **The `Fix_MeteorFrequency` uninstall trap** — a bare
+   `if not SMRFixPack then return end` leaves the save with **no dust-devil
+   scheduler at all, forever**. The gate must **hand the loop back to vanilla**
+   (Tier 1's shape).
+3. **Own A/B + long soak + a recorded per-site disposition** in
+   `SAVE_SAFETY_REDESIGN.md`.
+
+**⛔ Scale call is yours: this is Tier-1-scale work on a P3 item.** If it does
+not fit alongside the six conversions and the other approved fixes, **chain
+rule 3 (self-split) applies** — split it out rather than rushing it into the
+shared leg. Verification rider is written on the entry (`VeryHigh_3`: 3-4 per
+wave before, 0-or-6-8 after, dust storms off).
+
+#### Background — why it was approved, in one paragraph
 
 1. **C23 item 1 — the dust-devil `spawn_chance` truncation.** Defect confirmed
    and sharpened (`count_max` unreachable whenever `spawn_chance < 100`; the
    count can be 0 while `count_min` is 1). **Not approved**, because the repair
    changes the dust-devil RATE and two readings are live — §4's ambiguity rule
    points at the sibling Bernoulli gate, §4's "no balance changes" line points
-   at leaving a difficulty number alone. **If the owner picks the gate reading,
-   the fix is a §1.4b replacement of the scheduler's count line and it joins
-   this batch.**
+   at leaving a difficulty number alone. ⛔ **The "§1.4b replacement of the count
+   line" this line originally promised DOES NOT EXIST** — corrected above and on
+   the entry; the line is inside a thread body.
    ⭐ **Updated the same day: the SHAPE question is now answered by a second
    control in another file.** `MapSettings_Meteor` declares the same trio with
    an identical idiom (`multispawn_chance` 30/1/100) and uses it **gate-then-
