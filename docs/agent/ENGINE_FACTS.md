@@ -297,11 +297,13 @@ code suggests.
   * Real-time threads are unaffected — they are not persisted at all.
   * Evidence, harm and the exposure list (**13** after two same-day membership
     corrections): **BUGS.md F86**.
-  * ⚠️ The disproven by-name persistence belief still sits in TWO shipped file
-    headers — `Fix_MeteorFrequency.lua:53` and `Fix_RainsDeadlock.lua:52`
-    (named here 2026-08-01 so nobody inherits them as facts). Both bodies are
-    deleted by the F86 Tier-1 rewrite (project chain prompt 4), which retires
-    the comments with them; do not cite either header in the meantime.
+  * ✅ RESOLVED 2026-08-01 by the Tier-1 rewrite: the two shipped file headers
+    that carried the disproven by-name persistence belief
+    (`Fix_MeteorFrequency`, `Fix_RainsDeadlock`) were rewritten with their
+    bodies — nothing in `Code/` states it any more. (The warning that stood
+    here outlived its subject within a day; independently caught by
+    `BLIND_AUDIT.md` §11.3, struck 2026-08-02. That one-day staleness is
+    itself evidence for chain prompt 12's job-7 review-cadence question.)
 
 - **MODS *DO* GET A PRE-SAVE HOOK — `OnMsg.SaveGameStart` and
   `OnMsg.SaveGameDone` reach mod code** (measured 2026-07-31 with a Test Kit

@@ -132,6 +132,66 @@ INFERRED — an honest gap beats a manufactured confirmation.
    what the owner should run first at the keyboard now that they are free.
 6. Update `STATUS.md` (chain complete, pointer to the QA report) and
    `FABLE_NEXT_PROMPT.md`'s staleness line.
+6b. ⭐ **THE BLIND-AUDIT MERIT EXAMINATION (owner-added 2026-08-02) — run
+   AFTER jobs 1-6 and BEFORE job 7, because its findings are job-7
+   evidence.** `docs/reports/BLIND_AUDIT.md` is an independent two-sweep
+   audit of all 66 fix premises, produced by a fresh session that read no
+   project docs (sweep 2: ENGINE_FACTS only). Your job: examine its merit
+   against the full evidence base it was forbidden to see — the witness
+   grades in `BUG_LIST_AUDIT.md` §2/§9/§10, the reachability enumerations,
+   the play-proven results — verdict by verdict where it disagrees with or
+   qualifies the project record.
+   - **Do your own examination FIRST, then open the sealed key below and
+     reconcile** (the project's fresh-context-QA pattern: neither reading
+     anchors the other). Where you and the key disagree, that disagreement
+     is a finding — resolve it on evidence, not deference.
+   - Deliverable: an ANNEX appended to `BLIND_AUDIT.md` (do not edit its
+     body — it is a record of an independent exam) recording: which verdicts
+     the informed record confirms/overturns/qualifies, each with its
+     evidence pointer; the entry-record updates that fall out (route or
+     make per the scope fence); and its two structural observations
+     (§11.3 + closing) handed to job 7 as taxonomy evidence.
+   - **The relabel question it raises (F55/F40/F73b/F70: "bug fix" vs
+     "behavior change" on the mod page) is an OWNER decision** — package it
+     with your recommendation; do not decide it.
+
+   <details>
+   <summary>SEALED KEY — the 2026-08-02 informed review's findings (open
+   only after your own pass)</summary>
+
+   1. **F29(a): the report's "Mod-Editor sequence action with no shipped
+      user" is factually wrong** — the reachability audit enumerated four
+      live shipped callers in Mystery 2; this is §4a's own worked example
+      of trusting a self-description. Its latency conclusion still matches
+      (defaults mask both); only the reasoning is bad.
+   2. **The three Contested verdicts were made without witness evidence,
+      and two flip with it**: F73(b) — a developer replied in the witness
+      thread that they are investigating habitat starvation, undercutting
+      "deliberate absence"; F40 — the report graded only the grant filter
+      and never enumerated the cure path (the harm is androids-never-cured;
+      ChoGGi's years-shipped fix targets it). **F55 is the keeper**: the
+      vanilla forever-mark comment is a genuine intent tell our own record
+      never weighed — the fix still passes §4 on the player-harm tell
+      (GOLD witness), but the entry should carry BOTH tells and the
+      judgment explicitly, and the mod-page label is the owner's call.
+   3. **F68: the "belt-and-braces for a state the engine may not produce"
+      lean conflicts with the GOLD witness set** (TheNightglow's
+      steal-cargo report + the dev patch note "Fixed drones endlessly
+      moving resources between Landers") — the churn was real. **But** the
+      report correctly spotted that the fix file's own 2026-07-28 forensic
+      note is in tension with the entry's ratchet-mechanism narrative:
+      the fix and its witness stand; the ENTRY's mechanism story needs
+      reconciling with its own forensics.
+   4. **§11.3 is confirmed** — the ENGINE_FACTS two-headers warning went
+      stale within a day of being written and was struck 2026-08-02 (the
+      strike cites the blind audit). Its correction-cadence observation is
+      direct job-7 evidence.
+   5. Endorsed without reservation: the §12 defensible-shortlist; and the
+      closing "would a designer have written this on purpose" question,
+      which independently reinvents the §4 amendment's intent-first bar —
+      convergent validation of the adopted policy.
+   </details>
+
 7. ⭐ **THEN, AND ONLY AFTER THE QA ABOVE IS DONE: the documentation
    structure review — owner-requested 2026-08-01, deliverable
    `docs/reports/DOC_STRUCTURE_REVIEW.md`.** Do the QA first, because its

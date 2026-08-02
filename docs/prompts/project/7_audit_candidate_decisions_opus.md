@@ -390,3 +390,13 @@ entry is saved into the player's game.
   is not a package. ⚠️ If a fix is ever written here: `ForEachStationAlongTrack`
   is **not re-entrant** (`stations_visited` is one shared file-local table,
   `:365`, `:386-390`), so our callback must never enumerate.
+
+### From the 2026-08-02 blind-audit review — one inheritance guard for package 0
+
+`docs/reports/BLIND_AUDIT.md` §7 grades F29(a) *"a Mod-Editor sequence action
+with no shipped user."* **That is the known-false self-description** — the
+reachability audit enumerated FOUR live shipped callers in Mystery 2, and §4a
+uses F29 as its worked example of exactly this trap. If you read the blind
+audit while working package 0 (F29/F57(a)), do not inherit its provenance
+reasoning; its latency conclusion happens to match the record anyway. The full
+merit review of that report is chain prompt 12's job 6b, not yours.
