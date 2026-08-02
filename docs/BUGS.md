@@ -3116,6 +3116,16 @@ departs empty. Only mitigation: 1-hour sleep on asteroids (:227-229), none on Ma
 Endless empty round trips ~70 fuel each. **Fix:** wrap `IsCargoReady`: in auto mode with
 CheckAutoDepart true and no non-fuel payload requested, return false (1-sol timer still
 exits cleanly).
+**⭐ PLAYER WITNESSES 2026-08-01** (Reddit thread, `BUG_LIST_AUDIT.md` §10.5,
+[S36] — **hotfix-1.0.3-era, ~Dec 2025, NOT our pinned build; this is evidence
+of harm, not of current presence**). Next_Interaction4335, twice, describing
+this entry's exact headline: *"When you request to asteroid the Lander loads
+with nothing and takes off leaving it to arrive with nothing on asteroid!!!"*
+and *"When I send Landers they arrive at the astroid with nothing in making
+them stranded."* The **stranding** consequence is worse than this entry states —
+an empty arrival is not just wasted fuel, it can leave the asteroid operation
+dead. Cross-ref F68: the same thread's players describe both halves together,
+which is what the two defects do in combination.
 
 ### F68 — Hourly auto-request ratchet unloads the lander's own cargo (P1, high)  `[tested: Code/Fix_LanderCargoRatchet.lua — PT-17 complete 2026-07-28, incl. attended capacity-edge re-run post-repair]`
 `CreateAutoCargoRequest` (`UniversalRocket.lua:1742-1755`, hourly): `to_transfer =
@@ -3155,6 +3165,27 @@ pack errors); the LanderCargoRatchet probe passes through the floor path
 (`request 300000 >= 300000 aboard`).** PT-17 stays un-archived until an attended
 re-run of the capacity-edge leg (two exports + replenishing stock) confirms the
 threshold holds live.
+**⭐ PLAYER WITNESSES 2026-08-01** (Reddit thread, `BUG_LIST_AUDIT.md` §10.5,
+[S36] — **hotfix-1.0.3-era, ~Dec 2025, NOT our pinned build**). Two independent
+players describe this entry's mechanism in plain language, including the detail
+that identifies it as the ratchet rather than ordinary drone churn:
+> j1dopeman: *"drones will constantly unload resources particularly fuel even
+> though there are multiple very close depots with tons of fuel. I'm not
+> convinced they're taking it to other rockets, **I think they're just doing a
+> circular unload/load**. Even if it says it is full when you click takeoff the
+> number will drop."*
+> turnipofficer: *"My rockets would constantly load and unload requested
+> resources on mars, so I would have to manually launch them with typically some
+> resources missing."*
+
+*"Circular unload/load"* and *"it says full, then the number drops"* are the
+request-shrinks-below-what-is-aboard signature this entry derived from source —
+a player reconstructing the defect from the outside and landing on the same
+shape. Also note the **workaround they invented** (*"you have to overfill with
+that expectation. If you require 35 then make it 40"*), which is what players do
+instead of reporting. Related in the same thread and belonging to **F70/F71**
+rather than here: *"they load up on useless crap and never take enough of the
+exotic minerals."*
 **RE-RUN CONFIRMED — 2026-07-28, attended, live colony (Sphinx #2, fresh
 relaunch with the repair loaded, repaired TestKit AutoCargo logger doing the
 capture — no console tap needed):** Concrete above 0 (ground 210) + Rare
@@ -3924,6 +3955,62 @@ mechanism. Related vanilla wart, same session: the trip planner books tickets
 over track REACHABILITY with no regard for train SERVICE — colonists queue
 indefinitely at stations no train serves, with no UI hint. Cross-refs: F79,
 PT-43 F21.
+
+**⭐ WITNESS CLUSTER + TWO MECHANISM CONSTRAINTS, 2026-08-01 — from the Reddit
+thread the owner exported (`BUG_LIST_AUDIT.md` §10.5, source [S36]).** F80 was
+"one Relaunched witness and no mechanism". It now has a crowd, and two of them
+narrow the search.
+
+**⚠️ READ THE BUILD CAVEAT FIRST: the thread is hotfix-1.0.3-era (~Dec 2025),
+FOUR hotfix generations before our pinned 1.0.7.396349.** None of it is evidence
+about the current build. What it *is* evidence about is that the symptom family
+is real, widespread and colony-lethal — which is the §4a "who benefits" question,
+not the "does it still exist" question. Our source claim is unaffected either way.
+
+The recurring report is not quite ours and that difference matters: players
+describe colonists **declining the train and walking**, dying en route —
+> Changlini (top comment, 44 pts): *"…too many people choosing to walk(suffocate)
+> to the next station."*
+> mortemdeus: *"just lost a colony from this glitch and had to restart. Way too
+> many trying to walk between train stations and dieing."*
+> Domagan: *"Colonists ignoring trains underground to walk the entire length of
+> the map is still an issue."*
+> RhebRed: *"still having issues with colonists walking along the train tracks
+> and suffocating to death."*
+> TelperionST: *"Trains are still a death trap waiting to happen."*
+> [deleted]: *"…my geologist keep dieing when trying to get back."*
+
+**Why that is plausibly the same defect wearing a different face.** This entry's
+mechanism theory is that a destination lying "behind" the track's canonical
+orientation is *structurally unenumerable at that stop, forever*. A colonist who
+cannot be ticketed to a destination does not stand still — they walk. So "waits
+forever at the platform" and "ignores the train and walks" may be two outcomes
+of one unenumerable-destination bug, differing only in whether a ticket was ever
+issued. **Not established — recorded as the hypothesis the tap can discriminate.**
+
+**Two observations that constrain the mechanism, and both fit the theory:**
+1. **Sorbicol:** *"It's only between two domes though as far as I can tell. My
+   rail network currently includes 3 lines and multiple stations."* — a
+   **specific origin/destination PAIR fails on a multi-line network while the
+   rest works**. That is exactly the signature of a per-stop directional
+   enumeration miss, and it is very hard to explain with a capacity, service or
+   config theory.
+2. **Berkzerker314:** *"I think its when the only rocket leaving is out of range
+   of the train station. So they just Leroy Jenkins it across the map."* — a
+   destination-selection trigger, i.e. the failure is tied to **which
+   destination** is being routed to, not to train supply.
+
+**Prior-art note (relevant to any fix shape):** two commenters recall ChoGGi
+mods for this class in the ORIGINAL game — a train fix mod the OP was
+recommended, and *"Choggi also had a fix for long walks so at least they didn't
+suffocate in case they still walked stupid walks"*. That second one is the
+**mitigation** shape (survive the walk) rather than the repair shape (fix the
+routing), and it is adjacent to **C19**'s missing distance term. Worth knowing
+before anyone designs a fix here.
+
+**What this does NOT do: it does not locate the mechanism.** The console tap on
+`ForEachStationAlongTrack` is still the only thing that settles it, and the
+"TAP BEFORE MITIGATING" instruction stands.
 
 ### F81 — A stranded disaster-prediction flag silently gates the whole weather system; the rains loop also deadlocks on it (P1, PROVEN)  `[tested 2026-08-01 (Tier-1 legs 3+4, log Mars.exe-20260801-17.11.08 — natural collision re-roll, migration stamped, C34 heal, and the stranded-flag sweep proven BOTH ways with liveness held; see the leg note below the PT-54 block): Code/Fix_DisasterPredictionLeak.lua (additive OnMsg.MeteorStormEnded removal — the leak — plus a PostLoadGame reconciliation clearing any flag with no live notification behind it; safe because every disaster preset is Dismissable=false, so flag-without-notification is stranded by construction) + Code/Fix_RainsDeadlock.lua (**REWRITTEN 2026-08-01, F86 Tier-1 spec §6.2a-B: the loop replacement is DELETED — vanilla's RainsDisasterLoop stays; a layer-2 wrapper on RainsDisasterActivation mirrors the collision test BEFORE the call and posts Msg("RainDisasterEnd") on the early-return, so a collided cycle costs one re-roll; a version-stamped PostLoadGame migration pass (SMRFixPack_loop_version; resolves id-less entries by unique type match) moves every persisted loop onto vanilla's body and carries the C34 stale-state rider — structure repairs → stale-ACTIVE FinishRainProcedure heal → loop migration**). Leak half built 2026-07-29 post-QA; rains half rewritten 2026-08-01; **PT-54 RETIRED unrun 2026-08-01 → verification rides the Tier-1 build leg, except the (a) leak half's live legs, routed to chain prompt 3** (note below); wave-6 probes in TestKit 55_Probes_Wave6.lua — both PASS in the 2026-07-29 pre-flight A/B, their first run against a fixed leg; until that run they silently reported SKIP (missing PASS verdict, repaired same day), so wave 6 had no recorded automated coverage before it]`
 **⛔ PT-54 RETIRED UNRUN 2026-08-01 — and this entry is the one that keeps a
@@ -7243,9 +7330,30 @@ quotes verbatim; sources in the audit report §8.
   to confirm a shell actually produces this symptom. (2) **Alternatives are
   live** — F80's enumeration suspicion and ordinary route/track-state defects
   could produce the same surface.
-  **What would settle it:** trace what `assign train to track` checks and
-  whether a shell-state `TrackBase` fails it silently. That is a source
-  question, cheap, and it belongs to whoever packages C33.
+  **⛔ WEAKENED HOURS AFTER FILING, 2026-08-01 — a competing explanation
+  exists and it is already fixed.** The Reddit thread the owner exported the
+  same evening ([S36], `BUG_LIST_AUDIT.md` §10.5) contains this, from
+  Changlini, the thread's top comment:
+  > *"Hotfix 2 allegedly fixed trains, in the sense that **you can place trains
+  > on the train tracks again, which Hotfix 1 broke**."*
+
+  **So "cannot place trains on tracks" was a known hotfix-1 REGRESSION, fixed in
+  hotfix 2 — long before our pinned 1.0.7.396349.** If the screenshotted report
+  dates from the 1.0.1/1.0.2 window, it is that regression and has nothing to do
+  with track shells. **This is precisely why the lead was hedged on its missing
+  date, and the date is now the whole question.** Do not cite it for C33 until
+  someone reads the thread's date off the forum: **1.0.1/1.0.2 → discard;
+  1.0.3 or later → the hotfix-2 explanation is spent and the lead is live
+  again.**
+  **What would settle the mechanism half, independently of the date:** trace
+  what `assign train to track` checks and whether a shell-state `TrackBase`
+  fails it silently. That is a cheap source question and it belongs to whoever
+  packages C33 — but on current evidence **assume the lead is spent** rather
+  than assume it is real.
+  *(Same thread, same caveat, different item: Darganiss reports **"one of my two
+  stations refuses to connect"** on 1.0.3 after previously having "zero problems
+  on 1.0.0" — a station/track connection failure that is NOT the assignment
+  symptom. Noted, not filed; it has no mechanism and no current-build evidence.)*
 - **C34 [author, source held] — stale-ACTIVE rain state: `g_RainDisaster`
   set with a dead `main_thread` reads as disaster-active forever; nothing in
   our pack repairs it.** fredware's rains module heals it via vanilla's own

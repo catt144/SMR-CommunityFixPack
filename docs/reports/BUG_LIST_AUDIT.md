@@ -420,7 +420,7 @@ one-off single-fix authors (listed in the roster agent output with links).
 
 ## 8. Sources
 
-[S1] steamcommunity.com/app/3215050/discussions/0/797838226728656171/ · [S2] steamcommunity.com/app/3215050/reviews/?browsefilter=toprated (Kudaku, Nov 14 2025) · [S3] steamcommunity.com/app/3215050/discussions/0/691998095298538348/ · [S4] steamcommunity.com/app/3215050/discussions/0/691994648689827064/ · [S5] steamcommunity.com/app/3215050/discussions/0/766309862211705626/ (dev fix-list thread) · [S6] steamcommunity.com/app/464920/discussions/0/1640918469751039933/ · [S7] steamcommunity.com/app/3215050/negativereviews/?browsefilter=toprated&l=english&p=1 (Rhodith) · [S8] steamcommunity.com/app/3215050/discussions/0/658215953538296888/ · [S9] steamcommunity.com/app/3215050/discussions/0/660467372238571824/ · [S10] steamcommunity.com/app/3215050/discussions/0/695372460980312562/ · [S11] steamcommunity.com/app/3215050/discussions/0/658215953538161940/ · [S12] steamcommunity.com/app/3215050/discussions/0/658215953538296815/ + /658216290030325560/ · [S13] steamcommunity.com/app/3215050/discussions/0/660467372238569064/ · [S14] steamcommunity.com/app/3215050/discussions/0/691994126364820085/ · [S15] steamcommunity.com/app/3215050/discussions/0/679607959154615075/ · [S16] steamcommunity.com/app/3215050/discussions/0/682986810375204974/ · [S17] steamcommunity.com/app/3215050/discussions/0/834998413871378587/ · [S18] steamcommunity.com/app/3215050/discussions/0/691994366768609081/ · [S19] steamcommunity.com/app/464920/discussions/0/3038230013019773675/ · [S20] steamcommunity.com/app/3215050/discussions/0/691994126364708516/ · [S21] steamcommunity.com/app/3215050/discussions/0/694249410478015485/ · [S22] forum.paradoxplaza.com threads 1112166 / 1113731 / 1495056 (title/snippet grade) · [S23] steamcommunity.com/sharedfiles/filedetails/?id=3775120166 (fredware Bug Fixes) · [S24] GromGor workshop items 3717125029 / 3676027320 / 3730839706 / 3745475097 · [S25] steamcommunity.com/sharedfiles/filedetails/?id=3604423090 (Oxygenus) · [S26] steamcommunity.com/app/3215050/discussions/0/682986292645092952/ · [S27] steamcommunity.com/app/3215050/discussions/0/660467372238618006/ · [S28] steamcommunity.com/app/464920/discussions/1/1742228532898283720/ · [S29] github.com/ChoGGi/SurvivingMars_Mods … /Fix Bugs/MoreInfo.md (verbatim copy in audit scratchpad) · [S30] steamcommunity.com/app/3215050/discussions/0/567036688513147663/ · [S31] steamcommunity.com/app/3215050/discussions/0/658216290030318639/ · [S32] steamcommunity.com/games/3215050/announcements/detail/534381453704692743 (1.0.7 notes) · [S33] steamcommunity.com/app/464920/discussions/0/3211505894106180744/ · [S34] steamcommunity.com/app/3215050/discussions/0/691994126364857669/ · [S35] steamcommunity.com/sharedfiles/filedetails/?id=2588520023 (Tremualin's Library). Full per-query search logs live in the five agent outputs under the session task directory.
+[S1] steamcommunity.com/app/3215050/discussions/0/797838226728656171/ · [S2] steamcommunity.com/app/3215050/reviews/?browsefilter=toprated (Kudaku, Nov 14 2025) · [S3] steamcommunity.com/app/3215050/discussions/0/691998095298538348/ · [S4] steamcommunity.com/app/3215050/discussions/0/691994648689827064/ · [S5] steamcommunity.com/app/3215050/discussions/0/766309862211705626/ (dev fix-list thread) · [S6] steamcommunity.com/app/464920/discussions/0/1640918469751039933/ · [S7] steamcommunity.com/app/3215050/negativereviews/?browsefilter=toprated&l=english&p=1 (Rhodith) · [S8] steamcommunity.com/app/3215050/discussions/0/658215953538296888/ · [S9] steamcommunity.com/app/3215050/discussions/0/660467372238571824/ · [S10] steamcommunity.com/app/3215050/discussions/0/695372460980312562/ · [S11] steamcommunity.com/app/3215050/discussions/0/658215953538161940/ · [S12] steamcommunity.com/app/3215050/discussions/0/658215953538296815/ + /658216290030325560/ · [S13] steamcommunity.com/app/3215050/discussions/0/660467372238569064/ · [S14] steamcommunity.com/app/3215050/discussions/0/691994126364820085/ · [S15] steamcommunity.com/app/3215050/discussions/0/679607959154615075/ · [S16] steamcommunity.com/app/3215050/discussions/0/682986810375204974/ · [S17] steamcommunity.com/app/3215050/discussions/0/834998413871378587/ · [S18] steamcommunity.com/app/3215050/discussions/0/691994366768609081/ · [S19] steamcommunity.com/app/464920/discussions/0/3038230013019773675/ · [S20] steamcommunity.com/app/3215050/discussions/0/691994126364708516/ · [S21] steamcommunity.com/app/3215050/discussions/0/694249410478015485/ · [S22] forum.paradoxplaza.com threads 1112166 / 1113731 / 1495056 (title/snippet grade) · [S23] steamcommunity.com/sharedfiles/filedetails/?id=3775120166 (fredware Bug Fixes) · [S24] GromGor workshop items 3717125029 / 3676027320 / 3730839706 / 3745475097 · [S25] steamcommunity.com/sharedfiles/filedetails/?id=3604423090 (Oxygenus) · [S26] steamcommunity.com/app/3215050/discussions/0/682986292645092952/ · [S27] steamcommunity.com/app/3215050/discussions/0/660467372238618006/ · [S28] steamcommunity.com/app/464920/discussions/1/1742228532898283720/ · [S29] github.com/ChoGGi/SurvivingMars_Mods … /Fix Bugs/MoreInfo.md (verbatim copy in audit scratchpad) · [S30] steamcommunity.com/app/3215050/discussions/0/567036688513147663/ · [S31] steamcommunity.com/app/3215050/discussions/0/658216290030318639/ · [S32] steamcommunity.com/games/3215050/announcements/detail/534381453704692743 (1.0.7 notes) · [S33] steamcommunity.com/app/464920/discussions/0/3211505894106180744/ · [S34] steamcommunity.com/app/3215050/discussions/0/691994126364857669/ · [S35] steamcommunity.com/sharedfiles/filedetails/?id=2588520023 (Tremualin's Library) · **[S36] reddit.com/r/SurvivingMars/comments/1p6dnbj/ — "We are up to hotfix 1.0.3 now… anyone notice game getting better?", u/aom17, ~Dec 2025, read in full from an owner PDF export 2026-08-01 (§10.5). ⛔ HOTFIX-1.0.3-ERA — four generations before our pinned build; evidence of harm, never of current presence.** Full per-query search logs live in the five agent outputs under the session task directory.
 
 ## 9. Addendum (same day) — the packed-source comparison round
 
@@ -674,4 +674,72 @@ weaker evidence than §7.1 treated it as:**
    `old.reddit.com` refuse. r/SurvivingMars is therefore an **owner-only**
    channel, on the same footing as the logged-in forum and Paradox Mods: three
    of the four community sources this project cares about cannot be reached by
-   any session, only by a person.
+   any session, only by a person. **Workaround that works: the owner exported a
+   thread to PDF and handed it over** — §10.5 is the first result of that, and
+   it is the cheapest way to get Reddit into evidence.
+
+### 10.5 The first Reddit thread ever read by this project [S36] — and the build caveat that governs all of it
+
+**Source:** r/SurvivingMars, *"We are up to hotfix 1.0.3 now… anyone notice game
+getting better?"*, u/aom17, **~Dec 2025**, 49 upvotes, ~40 comments; exported to
+PDF by the owner 2026-08-01 and read in full.
+
+> ⛔ **THE CAVEAT IS THE MOST IMPORTANT LINE IN THIS SECTION. This thread is
+> hotfix-1.0.3-era — FOUR hotfix generations before our pinned 1.0.7.396349.
+> Nothing in it is evidence that anything still exists.** It is evidence about
+> **harm**: that these symptoms were real, widespread, and in several cases
+> colony-ending. That answers §4a "who benefits", and it answers nothing about
+> "is it still there" — which is what Src is for. Any future session quoting
+> §10.5 must carry this sentence with the quote.
+
+**What it corroborates (all of these are already Src-verified by us, so the
+thread adds witnesses, not verdicts):**
+
+- **F67 / F68 / F71 — the lander cargo family, described from the outside with
+  startling precision.** j1dopeman independently reconstructs F68: *"I think
+  they're just doing a **circular unload/load**… Even if it says it is full when
+  you click takeoff the number will drop."* Next_Interaction4335 gives F67 twice,
+  and adds a consequence our entry understated — the lander **strands** on the
+  asteroid. turnipofficer gives both at once. Several players describe inventing
+  the same workaround (over-request to compensate), which is what people do
+  *instead* of filing a report.
+- **F80 — a witness cluster, and two observations that constrain the
+  mechanism.** Recorded in full on the F80 entry. The short version: the
+  dominant public symptom is not "colonists wait at the platform" but
+  **"colonists ignore the train and walk, and die"** — plausibly the same
+  unenumerable-destination defect at a different stage (no ticket issued →
+  walk). Sorbicol's *"only between two domes… my rail network includes 3 lines"*
+  is a specific-pair failure on a healthy network, which fits the directional
+  enumeration theory and is hard to explain any other way.
+
+**What it COSTS us — a lead filed hours earlier is now probably dead:**
+
+- **The C33 "cannot add trains to tracks" lead is weakened, possibly spent.**
+  The thread's top comment states that *"you can place trains on the train
+  tracks again, **which Hotfix 1 broke**"* — i.e. that exact symptom was a known
+  hotfix-1 regression **fixed in hotfix 2**. If the screenshotted report is from
+  the 1.0.1/1.0.2 window it is that regression, not a track shell. **Its missing
+  date is now the whole question.** Recorded on the C33 entry.
+
+**Two items routed rather than filed** (neither is this audit's to decide):
+
+- **D10 / D12 — a dev-fix claim that their build prompts must check.** Bst011:
+  *"Theyve also squashed two of the most pressing bugs with the 1.0,
+  **homelessness and unemployment**."* Those are the exact subjects of D12 (no
+  homeless) and D10 (workshops / unemployment). Third-hand, vague about which
+  1.0.x, and from a satisfied player rather than a patch note — **so it is a
+  prompt to verify against Src, not a reason to descope anything.**
+- **Unfiled observations, listed so nobody re-derives them as new:** cave/mystery
+  stalls (*"the cave mystery appears to be bugged and does not complete"*, *"the
+  ai build more network nodes mystery has not advanced"*, the Diggers *"dregers"*
+  spawn question) — F06's family, no mechanism offered; a station that *"refuses
+  to connect"*; naturalist habitats starving/suffocating; rockets vanishing in
+  flight; train capacity/car-count complaints that are **balance, not defect**.
+  None is filed: 1.0.3-era, no mechanism, and no current-build evidence.
+
+**Method note.** The two most useful things in this thread were not the
+complaints. They were **one commenter's throwaway memory of a hotfix history**
+(which cost us a lead) and **one commenter's incidental precision about scope**
+(*"only between two domes"*, which constrained a mechanism). Neither would
+survive a keyword search. That is an argument for reading community threads
+whole, and an argument against treating them as a bug-report feed.

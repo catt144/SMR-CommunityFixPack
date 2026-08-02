@@ -117,6 +117,32 @@ promoted**. Full trails on the BUGS entries and `BUG_LIST_AUDIT.md` §10.
 named settling observation; it is not in your list and should not be adopted
 into it.
 
+### Late addition, same day — your job 8 (F80) and job 2 (C19) both gained evidence
+
+A Reddit thread the owner exported was read in full (`BUG_LIST_AUDIT.md`
+**§10.5**, source **[S36]**). ⛔ **It is hotfix-1.0.3-era, four generations
+before our pinned build — evidence of HARM, never of current presence. Carry
+that sentence with any quote.**
+
+- **Job 8 (F80) — read the F80 entry before you start; it is materially
+  different from when this prompt was written.** It now carries a witness
+  cluster plus two constraining observations. The one that should shape your
+  source audit: **Sorbicol reports the failure on a specific origin/destination
+  PAIR while the rest of a healthy 3-line network works.** If the enumeration
+  theory is right, that is what it should look like — so **audit for
+  per-stop/per-pair asymmetry, not for a global break**. Also note the dominant
+  public symptom is *"colonists ignore the train and walk, and die"*, not
+  "colonists wait" — possibly the same defect before a ticket is ever issued.
+  Sharpening the settling observation to discriminate **waits vs. walks** would
+  be worth more than sharpening it for the waiting case alone.
+- **Job 2 (C19) — prior art exists and it is the wrong shape, which is useful.**
+  Two commenters recall ChoGGi shipping a long-walk fix for the ORIGINAL game
+  *"so at least they didn't suffocate in case they still walked stupid walks"*.
+  That is a **survivability mitigation**, not a routing repair — i.e. even the
+  index-case author treated the walk as unfixable and softened the consequence.
+  Weigh that when you decide whether C19's missing distance term is a defect or
+  a design the game has always had.
+
 **Tooling you may want:** the six archived FPKs re-extract in one shot with
 `python tools/flpk_extract.py "C:\Dev\workshop_fpk_archive" <outdir>` (all six
 unpacked cleanly this session; fredware's is the only multi-file one).

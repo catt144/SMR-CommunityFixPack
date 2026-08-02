@@ -48,3 +48,17 @@ Outbox → `11_f76_depot_picker_repair_opus.md`. Delete this file, commit, push.
 ## Notes from upstream
 
 (prompt 9 appends state here)
+
+### Routed here from chain prompt 6 (2026-08-01) — one claim to CHECK before you build
+
+A Reddit thread read this day (`BUG_LIST_AUDIT.md` **§10.5**, source **[S36]**)
+has a player asserting the devs *"squashed two of the most pressing bugs with
+the 1.0, **homelessness and unemployment**"* — homelessness being exactly D12's
+subject. The same note went to prompt 9 for the unemployment half.
+
+**Verify; do not descope on it.** Third-hand, vague about which 1.0.x, from a
+satisfied player rather than a patch note, and ⛔ the thread is
+**hotfix-1.0.3-era — four generations before our pinned 1.0.7.396349**. Project
+rule stands: *"fixed in Relaunched" only from current Src.* One Src read settles
+whether D12's premise survived a 1.0.x pass, and it is much cheaper before the
+build than after.

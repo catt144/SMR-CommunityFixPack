@@ -51,3 +51,23 @@ Outbox → `10_d12_no_homeless_build_opus.md`. Delete this file, commit, push.
 ## Notes from upstream
 
 (prompt 8 appends state + counts here)
+
+### Routed here from chain prompt 6 (2026-08-01) — one claim to CHECK before you build
+
+A Reddit thread read this day (`BUG_LIST_AUDIT.md` **§10.5**, source **[S36]**)
+contains a player asserting that the devs *"squashed two of the most pressing
+bugs with the 1.0, **homelessness and unemployment**"* — the exact subjects of
+**D10 (workshops / unemployment)** and D12.
+
+**Treat this as a prompt to verify, NOT as a reason to descope.** It is
+third-hand, vague about which 1.0.x, and comes from a satisfied player, not a
+patch note. ⛔ The thread is **hotfix-1.0.3-era, four generations before our
+pinned 1.0.7.396349**, so it says nothing about the build we ship against
+either way.
+
+**What it costs you is one Src read**, and this project's own rule says who
+wins if they disagree: *"fixed in Relaunched" only from current Src, never from
+patch-note or forum text alone.* If unemployment's cost really did become
+visible in a 1.0.x pass, D10's premise changes and you want to know that before
+building, not after. If it did not, you have spent five minutes and closed a
+loose claim that would otherwise have surfaced during QA.
