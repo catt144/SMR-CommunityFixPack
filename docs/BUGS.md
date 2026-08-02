@@ -146,7 +146,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C26 | Malfunctioned buildings stuck in perpetual maintenance   | ?   | cand | **CANNOT DETERMINE 2026-08-02 (prompt 6c)** — no producer found in current Src, but the engine ships **two savegame heals for exactly this state** (`RequiresMaintenance.lua:531-566` `FixMaintenanceRequestsSources`, `:568-574` `FixMissingMaintenance`), so Haemimont saw it. ⚠️ Both are **old-save-only** — `AppliedSavegameFixups` is pre-seeded with every fixup name at new-game (`CommonLua\SavegameFixup.lua:10-16`, applied `:34-41`), so a save started on our build never runs them. Two obvious guesses checked and **ruled out** (rubble-shroud stranding; zero-threshold silent no-op) (entry) |
 | C27 | Signal Boosters never extend Drone Hub Extender radius   | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT**: `DroneHubExtender` is the template class name, so the label is carried and `Effect_ModifyLabel` lands (`Data\TechPreset.lua:3466-3471`). The extender's `work_radius` really is raised to 50, and the **commit step exists — it is just routed through the hub**: the tech's `Effect_Code` (`:3474-3481`) forces `SetUIWorkRadius` → `SetWorkRadius` → `DelayedCall(300, ReconnectTaskRequesters)` (`DroneControl.lua:759-777`), and `FindTaskRequesters` **recurses into `linked_extenders` reading each extender's live `work_radius`** (`:315-325`). Positive control: `CommandCenterMaxRadius = 50` = default 35 + `SignalBoostersBuff` 15 exactly (`_GameConst.lua:62-72`) (entry) |
 | C28 | Transport Optimization tech never applied to RC Transport| ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). **6b's label lead RULED OUT again**: `RCTransport:AddToCityLabels` files every transport under `RCTransportAndChildren` (`Lua\Units\RCTransport.lua:88-90`), `City:AddToLabel` forwards to the **colony** container first (`Lua\City.lua:83-86`) which is the one `Effect_ModifyLabel` writes to (`MarsGameEffects.lua:161-172`), and `max_shared_storage` is modifiable at `scale = const.ResourceScale` with default `30` (`RCTransport.lua:14`) — so +15 lands exactly on SkiRich's promised **45**, and it is read live at `:118, :282, :311, :1709`. ⭐ **This sweep corrected the C18 label rule** — see the C18 row (entry) |
-| C29 | Children-only buildings admit all age groups             | ?   | cand | investigate (SkiRich prior art, OG) |
+| C29 | Children-only buildings admit all age groups             | ?   | **✅ CLOSED — no defect in Relaunched** | swept 2026-08-02 (prompt 6c). All **three** `children_only` families enforce it at assignment time: residences via `exclusive_trait = "Child"` (`Residence.lua:26-28`) checked in `IsSuitable` `:162-167` / `CanReserveResidence` `:250-255`; training buildings via `CanTrain` → `IsSuitable` (`TrainingBuilding.lua:137-138, :367-376`) which `Workplace` consults at `:930, :1083`; services via `CanService`/`CanBeUsedBy` (`ServiceBase.lua:162-178`). Obvious guess **checked and ruled out**: the `Child` trait IS removed on ageing up (`Colonist.lua:1740-1756`, `RemoveTrait` at `:1747`) (entry) |
 | C30 | Supply-pod reward pins stuck on HUD                      | ?   | cand | investigate (SkiRich prior art, OG) |
 | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | ?   | cand | RESOLVED 2026-08-01 — his source read: effective half = F78-family StopMeteorStorm heal; GenerateDir half no-ops (entry) |
 | C36 | "Inner Light" mystery does not complete for some players | ?   | **✅ SOLVED — not a new defect** | filed AND closed 2026-08-01: **it is a downstream victim of F81(a), which our pack already fixes.** `Dream.lua:20-34` — the mirage loop skips `Dream()` whenever `IsDisasterPredicted()`, the exact flag F81(a) strands permanently true, so the mystery stops advancing forever. **Explains the reporters' "for some people" precisely** (depends on whether a meteor storm completed). ⭐ One commenter gave two unconnected pieces of advice — "install the disasters mod" and "avoid Inner Light" — for one defect (entry) |
@@ -7939,6 +7939,34 @@ quotes verbatim; sources in the audit report §8.
 - **C29 [author] — children-only buildings admit all age groups.** SkiRich
   (OG, 2428123536): *"the missing code that is required to make Child Only
   Buildings, such as the Nuseries, omit any other age group."*
+  **→ SWEPT 2026-08-02 (prompt 6c). Verdict: NO DEFECT IN CURRENT SRC —
+  CLOSED.** `children_only` is set on exactly five templates —
+  `Nursery`, `LargeNurseryCCP1`, `Playground`, `School`, `SchoolSpireCCP1` —
+  and those fall into **three** enforcement families, all of which filter at
+  **assignment** time, not merely at use time:
+  - **Residences** (`Nursery`, `LargeNurseryCCP1`). `Residence:GameInit`
+    converts the flag into `exclusive_trait = "Child"`
+    (`Lua\Buildings\Residence.lua:26-28`), which is then the operative filter in
+    `IsSuitable` (`:162-167`), `CanReserveResidence` (`:250-255`),
+    `ColonistInteract` (`:300`), the manual-assign UI (`:280-282`) and the
+    home-scoring pass (`:388-389`). `IsSuitable` is an `"and"`-combined method
+    (`Building.lua:14`) and `ChooseResidence` re-tests it on the *current* home
+    (`:404`), so an aged-up colonist also stops qualifying.
+  - **Training buildings** (`School`, `SchoolSpireCCP1`).
+    `TrainingBuilding:CanTrain` rejects non-children when `children_only`
+    (`Lua\Buildings\TrainingBuilding.lua:367-376`) and is reached from
+    `TrainingBuilding:IsSuitable` (`:137-138`), which the workplace assignment
+    consults at `Lua\Buildings\Workplace.lua:930` and `:1083` — so this is a
+    hiring filter, not just a training-tick filter.
+  - **Services** (`Playground`). `ServiceBase:CanService`
+    (`Lua\ServiceBase.lua:172-178`) via `CanBeUsedBy` (`:162-170`).
+  - **Obvious guess CHECKED AND RULED OUT — and it was the C22 shape, so it was
+    worth checking.** If the age trait were only ever *added*, every adult would
+    still carry `Child` and all three filters would pass for everyone. It is
+    removed: `Colonist:UpdateAgeTrait` calls `self:RemoveTrait(cur_trait)`
+    before adding the next (`Lua\Units\Colonist.lua:1740-1756`, removal at
+    `:1747`). The key the filters read (`traits["Child"]`) is also the exact key
+    `AddTrait`/`RemoveTrait` write — no C22-style string mismatch.
 - **C30 [author] — supply-pod reward pins stuck on HUD.** SkiRich (OG,
   2636538587): *"Fixes an issue with vanilla code that causes supply pod pins
   to get stuck on the HUD."*
