@@ -656,5 +656,22 @@ a code risk.
 
 **What §10.4 changes downstream:** F01 and F74 gain primary witnesses (tier
 consequences are bookkeeping, not new decisions); F64 loses a quotation;
-C33 gains a possible live symptom recorded as a **lead with unestablished
-provenance**; D13 gains a confirmed console channel plus a discovery problem.
+C33 gains a possible live symptom recorded as a **lead still missing its author,
+date and build**; D13 gains a confirmed console channel plus a discovery problem.
+
+**📌 Two source facts this round added, both of which make "no report found"
+weaker evidence than §7.1 treated it as:**
+
+1. **Paradox's in-game bug submitter can fail with HTTP 500.** The C33 lead
+   exists as a *screenshot of a filled-in report form* precisely because its
+   author's submission errored and they posted the picture to the forum by
+   hand. If that is not isolated, **reported volume undercounts real
+   incidence** — an unknown number of players stop at the error box. One
+   observed instance; not established as systemic, and worth a second look if
+   anyone ever reasons from report counts.
+2. **reddit.com is blocked at host level for our tooling — confirmed
+   first-hand 2026-08-01**, not inherited from §7.1. Both `www.reddit.com` and
+   `old.reddit.com` refuse. r/SurvivingMars is therefore an **owner-only**
+   channel, on the same footing as the logged-in forum and Paradox Mods: three
+   of the four community sources this project cares about cannot be reached by
+   any session, only by a person.

@@ -7223,13 +7223,24 @@ quotes verbatim; sources in the audit report §8.
   `assigned_vehicles` emptied to `false` and `CanDelete = ret_false` is a
   candidate explanation for a track that reports zero capacity-in-use and
   silently refuses assignment.
-  **⚠️ Three reasons this is only a lead.** (1) **Provenance unestablished** —
-  it was seen as an in-game Bug Report dialog (with a *"Sending bug report
-  failed: 500"* error over it), not as a forum post with a thread and date, so
-  we do not know who reported it, when, or on which build; it may never have
-  reached Paradox at all. (2) **The chain is unverified** — nobody has traced
+  **✅ PROVENANCE ESTABLISHED (owner, same browse): it IS a Paradox forum
+  report.** The reporter's **in-game bug submitter failed with a 500** (that is
+  the *"Sending bug report failed"* box in the image), so they screenshotted
+  their own filled-in report form and posted the picture to the forum instead.
+  So it reached Paradox, by hand. **Still missing: author, date and build** —
+  the screenshot carries none, and those are what decide whether it is a
+  Relaunched-era report at all. Get them before this is cited anywhere.
+  📌 **Method fact worth more than this lead, recorded here because this is
+  where it surfaced: at least one player found the in-game bug reporter
+  returning HTTP 500 and had to route around it manually.** If that is not
+  isolated, then *reported* volume systematically **undercounts** real
+  incidence — some players will simply have given up at the error box. That
+  weakens "no report found" as evidence one more notch, on top of the
+  crawler-block lesson in `BUG_LIST_AUDIT.md` §10.4. One instance; not
+  established as systemic.
+  **⚠️ Two reasons this is still only a lead.** (1) **The chain is unverified** — nobody has traced
   the assignment path (`AssignTrain` / the track's vehicle slots) against a shell
-  to confirm a shell actually produces this symptom. (3) **Alternatives are
+  to confirm a shell actually produces this symptom. (2) **Alternatives are
   live** — F80's enumeration suspicion and ordinary route/track-state defects
   could produce the same surface.
   **What would settle it:** trace what `assign train to track` checks and
