@@ -75,4 +75,48 @@ here). Delete this file, commit, push.
 
 ## Notes from upstream
 
-(prompt 6 appends overlapping verdicts here)
+### From prompt 6 (2026-08-01) — four sweeps run; three things touch your jobs
+
+**None of my four is yours to redo.** Results: C32 **DOWNGRADED** (no route in
+current Src), C04 **CONFIRMED and promoted → F90**, F35 scope **re-confirmed
+from source**, fredware #11 **a real gap → filed C35, deliberately not
+promoted**. Full trails on the BUGS entries and `BUG_LIST_AUDIT.md` §10.
+
+**Three carry into your sweeps:**
+
+1. **⚠️ Your job 6 (C26-C30) inherits my strongest method warning.** C32 looked
+   real for one reason only: a third-party fix existed and evidently *fires* in
+   the wild. It fires on **destroyed-but-unrebuilt buildings**, because
+   `Building:OnDestroyed` is empty while `ShiftsBuilding:OnDestroyed`
+   de-labels — a benign asymmetry, not the defect. **"His fix does something"
+   is not evidence that the thing it does was needed.** For each SkiRich
+   candidate, find what the fix's *predicate* actually matches in Src before
+   grading it. This is the same failure the audit's own §9 F04 bullet warns
+   about, one level up, and it cost that entry its GOLD.
+2. **Your job 6 also inherits a live 1.0.7-fixed precedent with a shape worth
+   copying.** C32's owner challenge split cleanly into **"1.0.7 killed the
+   trigger, not the mechanism"** — asteroids never expire now
+   (`Lua\Asteroids.lua:1, :208, :331-348` with `ReleaseAsteroid`'s whole body
+   commented out, and `SavegameFixups.AsteroidsNeverExpire` :493-500
+   retro-fixing old saves), while the workshift tick is untouched. When you hit
+   "fixed in Relaunched?", **answer trigger and mechanism separately** — a
+   removed trigger is not a repaired mechanism, and grading them as one thing
+   is how a candidate gets wrongly closed.
+3. **Your job 2 (C19, dome passages) and job 7 (F82, split supply grids) both
+   sit next to something I proved: grid fragments and label containers span
+   maps, and `UICity` follows the map the player is looking at**
+   (`Lua\_init.lua:12-14`). `SupplyGridFragment` **is** a `MultiMapSupplyGrid`
+   (`Lua\SupplyGrid.lua:337-338`), merged across the elevator
+   (`Lua\Buildings\Elevator.lua:402-440`), and registered on **both** cities'
+   lists (`SupplyGrid.lua:463-477`). If either sweep reads a city label or a
+   grid list, say **which** city and **which** map, or the reading means
+   nothing. F82's "split grid rejoined" question in particular may have a
+   cross-map face — I did not look, and it is yours if it appears.
+
+**Nothing else of mine overlaps you.** C35 is a lander/cargo-ramp lead with a
+named settling observation; it is not in your list and should not be adopted
+into it.
+
+**Tooling you may want:** the six archived FPKs re-extract in one shot with
+`python tools/flpk_extract.py "C:\Dev\workshop_fpk_archive" <outdir>` (all six
+unpacked cleanly this session; fredware's is the only multi-file one).

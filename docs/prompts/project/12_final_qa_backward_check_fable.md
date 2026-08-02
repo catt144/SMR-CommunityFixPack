@@ -213,6 +213,43 @@ TestKit coverage and belongs to nobody's numbered prompt.
 
 (any prompt may have routed standing items here — resolve them all)
 
+### Routed here from chain prompt 6 (2026-08-01) — the audit's TWO remaining owner web-checks, still open
+
+**These are owner actions, not agent work — neither can be done from a
+session** (both sources defeat crawlers), which is exactly why they keep
+surviving prompts. `BUG_LIST_AUDIT.md` §7.1 lists them as stop-and-ask items
+(a) and (b); its third, the GromGor/fredware subscribe, is DONE and consumed.
+Prompt 6 had no signal either had been done, so per its own brief it routes
+the reminder here rather than dropping it.
+
+1. **A logged-in browse of the Paradox "Relaunched Bug Reports" subforum
+   (1189)** for the three reports the audit could cite only at title/snippet
+   grade: **F01**'s NoDisasters/cave-ins report, **F64**'s "trains go to void"
+   report, **F74**'s rival-rocket report. They are **unretrieved, not
+   disproven** — that distinction is load-bearing on all three entries.
+2. **A browser check of Paradox Mods' Relaunched section** (a SPA, unfetchable)
+   — specifically whether fredware and GromGor mirror there. **This is the
+   console channel and it feeds D13**, which the owner has since made a hard
+   launch dependency, so it matters more now than when the audit wrote it.
+
+**What to do with the answers:** outcomes go on the named entries (F01, F64,
+F74) and on the D13 record, and §7.1's open list closes. **If the owner has
+already done either since 2026-08-01, record the outcome and strike the item —
+do not re-ask.** If they have not, this is a reminder, not a blocker: it gates
+nothing in the chain, and the QA report should say so plainly rather than
+carrying it as an unresolved defect.
+
+### Also from prompt 6 (2026-08-01) — one QA-relevant correction, so job 0's sweep does not inherit it
+
+**`BUG_LIST_AUDIT.md` now has a §10 that contradicts its own §9 twice** (C32
+downgraded and F04's demotion undermined; C04 confirmed and promoted to F90).
+§9's affected bullets are annotated in place, but **the audit's §1 headline
+counts were left alone on purpose** — F04's tier is chain prompt 7's decision,
+not the sweep's. If prompt 7 moved it, §1 and the §2 table row need to agree
+with wherever it landed; if prompt 7 left it, the ⚠ contested marker on the §2
+F04 row is the truth and should stay. **Either way, §1's "GOLD 17→16, BRONZE
+29→30" line is the thing most likely to be stale by the time you read it.**
+
 ### From chain prompt 4b (2026-08-01) — documentation drift, and why job 7 exists
 
 **The owner asked for job 7 after a single session turned up four more
