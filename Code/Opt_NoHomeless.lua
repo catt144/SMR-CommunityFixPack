@@ -691,6 +691,7 @@ SMRFixPack.Register("NoHomeless", {
 			  reason = "Community.TogglePolicy/CanAcceptNewColonists not found (game update changed it?)" },
 			{ global = "FindTransportationModeToCommunity",
 			  reason = "emigration transport helpers not found (game update changed them?)" },
+			{ global = "ChooseDome" },
 			{ global = "IsLRTransportAvailable",
 			  reason = "emigration transport helpers not found (game update changed them?)" },
 			-- the row states its own consequence through TitleRight; if that
@@ -709,6 +710,56 @@ SMRFixPack.Register("NoHomeless", {
 
 		-- the FindEmigrationDome wrapper is installed at file scope above —
 		-- see the header; apply() only validates its targets.
+
+		-- ⛔ THE SECOND ENTRY PATH. The FindEmigrationDome veto only covers
+		-- colonists who RESETTLE. Arrivals choose a first home through the
+		-- global `ChooseDome` instead — rocket disembark, lander/transporter
+		-- arrivals, factory-born androids, and stranded colonists re-homing
+		-- (`Colonist.lua:1149`) — and nothing above touches it. That is how a
+		-- landing can drop jobseekers straight into a dome the policy is
+		-- draining, which is what PT-62 caught on 2026-08-02.
+		--
+		-- The owner's instinct here was to make vanilla treat a flagged dome as
+		-- QUARANTINED for these colonists, because `accept_colonists` is a gate
+		-- vanilla honours everywhere. ⛔ That cannot be done at its own seam:
+		-- `Community:CanAcceptNewColonists()` takes NO colonist argument
+		-- (`Community.lua:61-63`), so it cannot distinguish a jobseeker from a
+		-- Senior — which is precisely why HARD CONSTRAINT 1 forbids this module
+		-- from using it. `ChooseDome` DOES receive `traits`, so the same intent
+		-- lands here instead, per-colonist and without touching quarantine.
+		--
+		-- Trait-based by necessity: at this seam there is no workplace to read,
+		-- so the test is "could this colonist be workforce" rather than the
+		-- full `need_work`. Children, Seniors and Tourists are never filtered,
+		-- so cohort delivery and hotel-seeking are untouched. ⚠️ `safety_dome`
+		-- passes through UNFILTERED — the last-resort dome for a colonist
+		-- stranded outside must always remain available, so this can never
+		-- suffocate anyone (the D03 lesson, Opt_ResidencyControl.lua:45-50).
+		local orig_choose = ChooseDome
+		local function choose(traits, domes, safety_dome, dome_elevators, ...)
+			if module_active() and type(domes) == "table" and traits
+					and not traits.Tourist and not traits.Child and not traits.Senior then
+				local filtered
+				for i, dome in ipairs(domes) do
+					if is_flagged(dome) and has_cohort_housing(dome) then
+						if not filtered then
+							filtered = {}
+							for j = 1, i - 1 do filtered[#filtered + 1] = domes[j] end
+						end
+					elseif filtered then
+						filtered[#filtered + 1] = dome
+					end
+				end
+				-- never hand back an EMPTY list: if every candidate was flagged,
+				-- the shipped choice stands rather than leaving an arrival with
+				-- nowhere to go at all
+				if filtered and #filtered > 0 then domes = filtered end
+			end
+			return orig_choose(traits, domes, safety_dome, dome_elevators, ...)
+		end
+		local fail = SMRFixPack.SetGlobal("ChooseDome", choose,
+			"could not install the ChooseDome wrapper (sandbox change?)")
+		if fail then return fail end
 
 		local orig_sd_init = SD.Init
 		function SD:Init(parent, context)
