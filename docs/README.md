@@ -1,60 +1,72 @@
-# docs/ — layout, and where new things go
+# docs/ — the map
 
-Reorganised 2026-08-01 (owner). The folder had grown to 28 flat files and the
-reports were burying the daily-truth documents.
+Restructured 2026-08-03 (DOC_RESTRUCTURE_SPEC, owner-delegated). **Human docs
+are at the root; everything an agent reads is under `agent/`; everything spent
+is under `archive/`.** `python tools/doccheck.py` enforces this map — the root
+list below is an allowlist checked in BOTH directions, so a new file at
+`docs/` root is a red build until it is added here too.
 
-## Where things live
+```
+docs/
+  PLAYTEST_CHECKLIST.md   the PT tests, the reporting protocol, and
+                          "Decisions waiting on you" — the owner's file
+  PLAYTEST_HELP.md        playtest reference: console facts, commands, fixtures
+  FUTURE_IDEAS.md         parking lot, NOT a backlog. Nothing in it is work
+  README.md               this map
+  BUGS.md · STATUS.md     3-line stubs pointing at where they went
+  agent/
+    STATE.md              READ FIRST. Current state only, ≤60 lines
+    WORKFLOW.md           process rules — commits, probe hygiene, todo discipline
+    FIX_POLICY.md         what may be built, and how
+    bugs/                 defect truth — one file per entry
+    facts/                engine behaviour — one file per fact
+    reports/              reports, plans, specs, audits, surveys
+    prompts/              the standing prompts + any live one-off
+  archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md,
+                          MOD_DESCRIPTION.md (frozen), retired prompts
+```
 
-**`docs/` (root) — daily truth. Read these; they are maintained.**
+## The two split folders
 
-| file | what it is |
-|---|---|
-| `STATUS.md` | **read first.** Current state, rewritten in place every session |
-| `BUGS.md` | defect truth — every F/D entry, its evidence and status |
-| `PLAYTEST_CHECKLIST.md` | the PT tests + the reporting protocol |
-| `PLAYTEST_HELP.md` | all playtest reference material — console facts, command table, fixtures |
-| `PLAYTEST_ARCHIVE.md` | passed PTs, moved out of the checklist |
-| `FUTURE_IDEAS.md` | **parking lot, NOT a backlog.** Nothing in it is work |
-| `MOD_DESCRIPTION.md` | player-facing release text |
+**`agent/bugs/` — 116 entry files** (`F*.md`, `D*.md`, `C*.md`), **2 of them
+grouped** (`C03-C11.md`, `C12-C38.md` — several candidates share one body, and
+the file name states what it holds). `INDEX.md` is **generated** and carries
+all 151 index rows. `_notes.md` is the residue that belonged to no entry: the
+old intro, the five `##` section dividers, the "Not yet swept" backlog, and
+C02's row, which points at entry text that never existed.
 
-**`docs/agent/` — the rules an agent reads every session.** Small, stable,
-binding.
+**`agent/facts/` — 43 fact files** (`EF-001` … `EF-043`), one per top-level
+bullet of the old ENGINE_FACTS.md, in source order, ids stable. `INDEX.md` is
+**generated**; `_preamble.md` is the prose that opened the old file.
 
-| file | what it is |
-|---|---|
-| `ENGINE_FACTS.md` | hard-won engine behaviour. **Read before writing any fix** |
-| `FIX_POLICY.md` | what is allowed to be built, and how |
-| `WORKFLOW.md` | process rules — commits, probe hygiene, todo discipline |
+⚠️ **`INDEX.md` is generated in both folders and is never hand-edited.** Edit
+the entry or fact file; doccheck regenerates the index and fails on any
+difference. Generated files say so on line 1.
 
-**`docs/prompts/` — the two standing prompts plus any live one-off.**
+## Where new things go
 
-| file | what it is |
-|---|---|
-| `FABLE_NEXT_PROMPT.md` | the **general** continuation prompt (historic filename; model-neutral) |
-| `DRONE_PROJECT_PROMPT.md` | owns all drone work — re-runnable |
-| others | live one-off prompts, consumed when their deliverable lands |
-
-**`docs/reports/` — reports, plans, specs, surveys.** Written once, cited
-after; not maintained line-by-line the way root docs are.
-
-**`docs/archive/` — spent.** History and retired material. `SESSION_LOG.md`
-lives here (append-only, newest first) and is still written every session.
-
-## Where NEW things go
-
-- A **rule or engine fact** → `agent/`. If it binds future work, it belongs here,
+- A **defect** → a new file in `agent/bugs/`. Never a report, never FUTURE_IDEAS.
+- An **engine fact** → a new `EF-###.md` in `agent/facts/`, with its date.
+- A **rule that binds future work** → `agent/WORKFLOW.md` or `agent/FIX_POLICY.md`,
   not buried in a report.
-- A **prompt** → `prompts/`. One-offs are deleted or archived when consumed.
-- A **report, plan, spec, audit or survey** → `reports/`.
-- A **defect** → `BUGS.md`. Never a report, never `FUTURE_IDEAS.md`.
-- A **session leg** → `archive/SESSION_LOG.md`.
-- **Spent** anything → `archive/`.
+- A **report, plan, spec, audit or survey** → `agent/reports/`.
+- A **prompt** → `agent/prompts/`; one-offs delete themselves when consumed.
+- A **session leg** → `archive/SESSION_LOG.md` (append-only, newest first).
+- A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →
+  "Decisions waiting on you". Never only in an agent doc.
+- **Spent** anything → `archive/`, which is append-only and never edited.
 
-⚠️ **Reports are not authority.** When a report and `BUGS.md`/`ENGINE_FACTS.md`
-disagree, the root/agent document wins — or the report is wrong and should be
-corrected in the same change that discovers it.
+⚠️ **Reports are not authority.** When a report disagrees with `agent/bugs/` or
+`agent/facts/`, the entry wins — or the report is wrong and is corrected in the
+same change that discovers it.
 
-## Retired 2026-08-01
+## Path translation
 
-- `F86_ADJUDICATION_PROMPT.md` → `archive/` (verdict delivered)
-- `DRONE_RESEARCH_BRIEF.md` → `archive/` (all four gates ANSWERED)
+> 2026-08-03 restructure: `docs/BUGS.md` → `docs/agent/bugs/<ID>.md`;
+> `docs/STATUS.md` → `docs/agent/STATE.md`; `docs/reports/` →
+> `docs/agent/reports/`; `docs/prompts/` → `docs/agent/prompts/`;
+> `docs/agent/ENGINE_FACTS.md` → `docs/agent/facts/`. Pre-restructure
+> documents cite the old paths; translate mentally, do not edit records.
+
+`MOD_DESCRIPTION.md` and `PLAYTEST_ARCHIVE.md` moved from `docs/` to
+`docs/archive/` in the same change.
