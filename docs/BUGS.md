@@ -9742,6 +9742,26 @@ resident of a flagged dome, transiently evicted, moved out for good over an
 outage that ends by itself. Recorded, not guarded — the guard needs per-colonist
 dwell state and the exposure does not justify it.
 
+**4c · A RECORDED LIMIT OF THE RULE (owner observation, 2026-08-02).** Domes
+allow "use Passages for work", so a colonist can live in one dome and work in
+another — which is why a flagged dome's homeless list contains `job yes` rows.
+Two consequences:
+
+* **There is no "works somewhere unreachable" case to separate**, so the
+  in-dome-versus-commute question the build first raised is void: vanilla only
+  assigns a workplace reachable from the colonist's own dome, so *employed
+  anywhere* and *employed reachably from here* are the same set. Moving an
+  employed colonist would risk severing a commute the game already validated.
+* ⚠️ **But `IsOverpopulated` counts `#labels.Homeless` RAW** (`Dome.lua:1026-1035`)
+  — employment does not enter it. So a dome whose homeless are mostly its own
+  **staff** can still latch and switch its migration off, and this policy will
+  not clear it. **That is consistent, not broken:** it is the same shape as the
+  homeless-Senior signal — a dome full of homeless workers is telling the player
+  their staff have nowhere to live, and clearing it would hide a housing
+  shortage. Recorded as a limit rather than guarded, and **PT-62 must not read
+  a failure to clear `overpopulated` as a P6 miss without first checking how
+  many of the remaining homeless are employed.**
+
 **4b · THE ROW STATES ITS OWN CONSEQUENCE (owner, same day).** *"This could
 easily be mistaken for just hitting a button to get rid of homeless … not all
 players will look at a tooltip, they will just be confused why their retirement
