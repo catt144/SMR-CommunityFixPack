@@ -122,3 +122,25 @@ the choice is the owner's:
   grouped prose, which collides with binding rule 1 (no hand-editing content).
 - (c) INDEX carries only the 116 and the C rows go to `_notes.md` — loses index
   coverage of 35 candidates.
+
+**✅ DECIDED 2026-08-03 (the chain-authoring Fable session, under the owner's
+delegated structure authority): ROUTE (a), with these refinements — treat this
+block as spec §3a's amendment:**
+1. **116 entry files.** The two grouped sections become `C03-C11.md` and
+   `C12-C38.md` — **filenames tell the truth even though the second HEADING's
+   stated range is stale**; heading bytes stay preserved (rule 1), and the
+   generated INDEX is the truth surface from now on. Front matter for grouped
+   files: `id: C03-C11` / `id: C12-C38`, `kind: grouped`, plus a `contains:`
+   list of the member IDs.
+2. **INDEX carries all 151 rows.** Grouped members' rows link to their grouped
+   file with `grouped → C12-C38.md` in the link column (no fake anchors —
+   per-ID anchors inside grouped prose don't exist and must not be invented).
+3. **C02**: INDEX row kept, link column `NO ENTRY TEXT (verified prompt 1,
+   2026-08-03)`; add one line to `_notes.md` recording the same. Do not
+   fabricate an entry.
+4. **Amended abort rule**: "row without heading" aborts UNLESS the ID is in
+   the verified set {C02, C04–C11, C13–C38} — assert that set EXACTLY (a 36th
+   heading-less row means the file changed; stop).
+5. **Assert the three structural `##` lines** (P2/P3/Phase-2 headers) land in
+   `_notes.md`, not in the preceding entry — prompt 1 is right that
+   byte-accounting alone cannot see that corruption.
