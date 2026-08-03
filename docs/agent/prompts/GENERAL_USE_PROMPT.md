@@ -2,9 +2,10 @@
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
-— this file goes stale the moment another session commits. (The filename keeps
-its historical `FABLE_` prefix so existing references stay valid; nothing in
-it is model-specific.) Staleness anchor: **updated 2026-08-03 by chain prompt
+— this file goes stale the moment another session commits. (Renamed from
+`FABLE_NEXT_PROMPT.md` on 2026-08-03, owner request — nothing in it is
+model-specific and the old name implied otherwise; pre-rename documents cite
+the old name, see the translation note in `docs/README.md`.) Staleness anchor: **updated 2026-08-03 by chain prompt
 12's close-out commit — THE CHAIN IS COMPLETE and `docs/agent/prompts/project/` is
 EMPTY.** The final QA's verdict, findings, adjudications (F97 keep / D12 stands
 / F76 closed-refuted, residue = C41) and the ordered campaign top are in

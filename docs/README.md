@@ -67,6 +67,7 @@ same change that discovers it.
 > `docs/agent/reports/`; `docs/prompts/` → `docs/agent/prompts/`;
 > `docs/agent/ENGINE_FACTS.md` → `docs/agent/facts/`. Pre-restructure
 > documents cite the old paths; translate mentally, do not edit records.
+> Renamed 2026-08-03: `FABLE_NEXT_PROMPT.md` → `agent/prompts/GENERAL_USE_PROMPT.md`.
 
 `MOD_DESCRIPTION.md` and `PLAYTEST_ARCHIVE.md` moved from `docs/` to
 `docs/archive/` in the same change.

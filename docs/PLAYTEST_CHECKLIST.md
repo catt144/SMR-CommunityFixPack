@@ -53,7 +53,7 @@ these used to be filed only in agent reports, which is where you never read.
   → `docs/agent/reports/DOC_STRUCTURE_REVIEW.md` §3 and §6.
 - **Feed `DOCS_RESTRUCTURE_REPORT.md` to a Fable session to redesign the
   standing prompts.** The docs restructure is done and verified, but
-  `FABLE_NEXT_PROMPT.md` and `DRONE_PROJECT_PROMPT.md` still describe the old
+  `GENERAL_USE_PROMPT.md` and `DRONE_PROJECT_PROMPT.md` still describe the old
   tree in prose — one of them tells every session to read the engine facts as a
   "whole file", which spends the tokens the restructure just saved. The report
   is written for that session as its whole picture. **Your call when to spend

@@ -13,7 +13,7 @@ bind. The pre-commit hook is armed; doccheck must stay green.
 1. `docs/agent/reports/DOCS_RESTRUCTURE_REPORT.md` — WHOLE FILE. It was
    written for you; §6 is your inventory, O1–O7 are your open questions.
 2. `CLAUDE.md` + `docs/agent/STATE.md` (what every future session auto-sees).
-3. The two subjects: `docs/agent/prompts/FABLE_NEXT_PROMPT.md`,
+3. The two subjects: `docs/agent/prompts/GENERAL_USE_PROMPT.md`,
    `docs/agent/prompts/DRONE_PROJECT_PROMPT.md`.
 4. `docs/agent/WORKFLOW.md` — elements 1–7 and the adopted-rules block.
 5. `docs/agent/reports/CHAIN_METHOD.md` §2–4 (the method your output must fit).
@@ -25,7 +25,7 @@ bind. The pre-commit hook is armed; doccheck must stay green.
    O1 (a read-path element 8 for ALL briefs — a WORKFLOW change, adopt it
    there if taken) and O6 (EF topical ids — the window closes at the first
    citation; if adopted, the rename is a scripted job to SPEC, not to do here).
-2. **Rewrite `FABLE_NEXT_PROMPT.md`** against the new tree. Musts from the
+2. **Rewrite `GENERAL_USE_PROMPT.md`** against the new tree. Musts from the
    report: kill the "`docs/agent/facts/` — whole file" instruction (§3 Q3 —
    the most expensive stale sentence in the repo); route readers through the
    two INDEX.md files; give the STATE.md close-out step an eviction rule

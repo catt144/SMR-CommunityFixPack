@@ -17,6 +17,7 @@ is GENERATED — edit the entry or fact file, never the index** (line-1 banner).
 > `docs/agent/reports/`; `docs/prompts/` → `docs/agent/prompts/`;
 > `docs/agent/ENGINE_FACTS.md` → `docs/agent/facts/`. Pre-restructure
 > documents cite the old paths; translate mentally, do not edit records.
+> Renamed 2026-08-03: `FABLE_NEXT_PROMPT.md` → `agent/prompts/GENERAL_USE_PROMPT.md`.
 
 Before committing doc changes run `python tools/doccheck.py`; red blocks. Set up
 once: `git config core.hooksPath tools/hooks`. **Owner decisions go in

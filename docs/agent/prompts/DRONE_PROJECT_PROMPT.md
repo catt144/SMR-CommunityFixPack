@@ -17,7 +17,7 @@ the end of every drone session.
 > authority — if a report and `agent/bugs/`/`agent/facts/` disagree, the root/agent
 > document wins.**
 
-> 🚧 **This prompt owns drone work exclusively.** `docs\agent\prompts\FABLE_NEXT_PROMPT.md` is
+> 🚧 **This prompt owns drone work exclusively.** `docs\agent\prompts\GENERAL_USE_PROMPT.md` is
 > the general prompt; it may *answer questions* about drones but it no longer
 > drives drone work. If you were started from that prompt and the session turns
 > into drone work, **stop and load this file instead.**
