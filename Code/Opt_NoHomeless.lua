@@ -490,21 +490,21 @@ local function append_policy_row(section, context)
 	-- opened (infopanel sections are constructed in Init, so an already-open
 	-- panel picks it up on re-selection — acceptable, and noted on PT-62's
 	-- look-check rather than papered over).
-	local community0 = ResolvePropObj(context)
-	if not has_cohort_housing(community0) then return end
+	if not has_cohort_housing(ResolvePropObj(context)) then return end
 
-	-- ⛔ TitleRight MUST be seeded HERE, not only in OnContextUpdate.
-	-- InfopanelActiveSection:Init decides the title's alignment ONCE, from
+	-- ⛔ TitleRight IS DELIBERATELY NOT USED, after trying it twice.
+	-- `InfopanelActiveSection:Init` decides the title's alignment ONCE, from
 	-- whether TitleRight is empty at construction
 	-- (`InfopanelActiveSection.generated.lua:157-159`): empty -> the title is
-	-- CENTRED. Setting it later left the title centred and the value
-	-- right-aligned, so the two rendered on top of each other — observed
-	-- 2026-08-02 as "Nursery / Retirement D(28 would move)". Seeding it keeps
-	-- the shipped left/right split every other row gets.
-	local n0 = count_movable(community0)
+	-- CENTRED, like every sibling row on this panel. Setting TitleRight only in
+	-- OnContextUpdate left the title centred AND the value right-aligned, so the
+	-- two rendered on top of each other ("Nursery / Retirement D(28 would
+	-- move)"). Seeding it at construction fixed the overlap but split the row
+	-- into two hard-butted columns with no gap ("Nursery / Retirement Dome28
+	-- would move"), because this panel is narrow. Both observed live 2026-08-02.
+	-- The count therefore lives INSIDE the title, which centres like the shipped
+	-- rows and reads as one sentence.
 	local row = InfopanelActiveSection:new({
-		TitleRight = Untranslated(string.format(
-			is_flagged(community0) and "%d moving out" or "%d would move", n0)),
 		OnContextUpdate = function(self, context, ...)
 			local community = ResolvePropObj(context)
 			local on = is_flagged(community)
@@ -527,8 +527,6 @@ local function append_policy_row(section, context)
 			-- The icon colour carries on/off as well (green permissive, yellow
 			-- restriction), so the state is encoded twice.
 			local n = count_movable(community)
-			self:SetTitleRight(Untranslated(string.format(
-				on and "%d moving out" or "%d would move", n)))
 
 			-- ⛔ ICON POLARITY MIRRORS D03's, and the first build had it
 			-- inverted: the OFF state — which is VANILLA — rendered red, so a
@@ -536,7 +534,9 @@ local function append_policy_row(section, context)
 			-- alarm and would press it to clear it. Permissive state reads
 			-- green/on; the restriction reads yellow/limit. Same pairing as
 			-- Opt_ResidencyControl, which playtested correctly.
-			self:SetTitle(Untranslated("Nursery / Retirement Dome"))
+			self:SetTitle(Untranslated(string.format(
+				on and "Nursery / Retirement Dome (%d moving out)"
+				   or  "Nursery / Retirement Dome (%d would move)", n)))
 			if on then
 				self:SetIcon("UI/IconsRemaster/Sections/service_in_connected_domes_off.png")
 				self:SetIconBack("UI/IconsRemaster/Sections/ip_sections_limit")
