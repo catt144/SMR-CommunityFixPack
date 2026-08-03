@@ -896,3 +896,45 @@ member; the file was consumed on 2026-08-02 (`b23e22e`) and does not exist.
 Small, but pointed: **the index the chain uses to decide what runs next is the
 one document no prompt owns**, because each prompt's mechanics tell it to update
 the *next prompt* and delete *itself*. Corrected this session.
+
+### Added by chain prompt 10 (2026-08-02) — the D12 build: one job-7 instance, and one thing the corpus should NOT be told is drift
+
+**1 · JOB-7 SEED LINE (chain rule 4b) — a citation off by one hop, in an
+APPROVED spec, in the sentence that carried the design's cheapest claim.** The
+D12 entry's Mechanism section said `Colonist:FindEmigrationDome` is *"called
+every heavy update from `Colonist.lua:1894-1898`, so no new scheduling"*. It is
+not called there. Its **only** caller in Src is `Colonist.lua:1603`, inside
+`Colonist:TryToEmigrate` — which the heavy-update block calls at `:1898`, and
+*also* calls off-cycle at `:1900-1902` when `user_forced_dome` is set. Corrected
+in place on the entry.
+
+⭐ **Why this one is worth a line rather than a shrug: the substance survived and
+the citation did not, which is the mirror image of prompt 9's instance** (a false
+citation under a true conclusion). Here the conclusion — "no new scheduling" — is
+correct, the seam is correct, and the line number points at the caller's caller.
+**Both directions of the same failure now sit in the corpus within a day of each
+other**, which strengthens prompt 9's suggestion that job 7 name *"verify the
+route, not the citations"* as a finding: this instance shows the reverse check is
+also needed, because a citation that verifies cleanly against a nearby correct
+fact is exactly the kind that never gets challenged. ⚠️ The off-cycle caller at
+`:1900-1902` is a real behavioural difference the original citation hid — a
+`user_forced_dome` colonist reaches this seam more often than "every heavy
+update" implies.
+
+**2 · ⛔ AND ONE NON-INSTANCE, RECORDED SO IT IS NOT MISCOUNTED.** This session
+also *changed* the D12 entry's destination rule (adding a suitability filter the
+spec did not name) and *decided* its open question. **Neither is documentation
+drift.** The spec explicitly delegated the open question to the build (*"Decide
+before coding"*), and the added filter is recorded on the entry as a deliberate
+departure with its reasoning. Job 7's corpus is about documents drifting from
+truth; a document being deliberately amended by the session authorised to amend
+it is the process working. **The corpus will over-count if amendments and drift
+are pooled** — worth a sentence in the taxonomy about how to tell them apart, and
+the tell here is that the departure was written down in the same commit.
+
+**3 · A note for job 0, not for job 7.** D12 ships opt-in and off by default, and
+its PT-62 leg explicitly uses the **Mod-Manager-disable** method for the
+uninstall half rather than the module toggle, on the "OFF is three different
+things" doctrine. If job 0's re-verification of that doctrine changes the answer,
+**PT-62's P12 is one of the predictions that would need restating** — it is
+written on the assumption that a toggled-off module still has live hooks.

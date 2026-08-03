@@ -1404,6 +1404,171 @@ approximates a gate today (50% × 1..2 truncates to 0-or-1), so the shipped rate
 *may* have been tuned around the truncation. **That is chain prompt 12's job 8,
 and reversal is a legitimate outcome no matter how cleanly this leg passes.**
 
+## PT-62 — D12 "no homeless residents" policy · covers **D12 `Opt_NoHomeless`** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 10
+
+**Written 2026-08-02 with the build, predictions BEFORE any run. The module is
+UNRUN and claims nothing until this leg does.**
+
+**⛔ PT-00 first.** Sweep result at build time: **CLEAN — zero `TEMPORARY` hits in
+both repos.** Re-run it at the keyboard.
+
+### ⛔ THIS LEG NEEDS A PROVISIONED FIXTURE, AND THAT IS THE EXPENSIVE PART
+
+Do not treat the setup as a five-minute job. The behaviour under test only exists
+in a colony that has reached a specific, uncomfortable state: **a specialist dome
+holding colonists it can never house, in a colony with essentially no spare beds
+anywhere.** That is either
+
+* **the campaign save that produced the original observation** (2026-07-30: the
+  child dome read `overpopulated=true homeless=20`, nurseries at 5/26 and 3/26,
+  `accept_colonists true`) — cheapest by far **if it still exists and still sits
+  in that state**; check before planning around it, because the entry itself
+  notes the dome was on a knife edge and *"two more departures would clear
+  `overpopulated`"*; or
+* **a constructed fixture**, which means: a dome whose ONLY residences are
+  Nurseries, children raised in it to Youth, and the rest of the colony's housing
+  filled. That is a solo provisioning sitting, not a warm-up.
+
+⚠️ **The as-saved state is what is being tested.** Do not substitute a fresh
+sandbox with hand-placed buildings and call it equivalent unless the free-bed
+count colony-wide is genuinely at or near zero — the tie the module bypasses only
+occurs when `better_home` is false **everywhere**.
+
+### ⛔ FOUR SETUP TRAPS. The first one will read exactly like the fix doing nothing.
+
+**Trap 1 — the source dome must have NO suitable housing for the stranded.**
+This is the *narrow reading* the build deliberately chose (D12 entry, §4 of the
+pre-build re-derivation). A single ordinary Smart Apartment in that dome makes
+every colonist in it "housable in principle", and **the module will correctly do
+nothing**. If the test dome has any non-exclusive residence, either remove it or
+accept that the leg is measuring nothing. Confirm with the dome selected:
+
+```
+*r local d = SelectedObj local n = 0 for _, r in ipairs(d.labels.Residence or empty_table) do if not r.exclusive_trait then n = n + 1 end end ConsolePrint(print_format(d.class, #d.labels.Residence, n, #d.labels.Homeless, d.overpopulated))
+```
+
+⛔ The **third** number must be `0`. If it is not, Trap 1 is live.
+
+**Trap 2 — the DESTINATION must have housing of a kind they can use.** The module
+will not send a grown Youth from one Nursery-only dome to another. If every dome
+in the colony is specialist, nothing moves and that is **correct behaviour**, not
+a failure — it is P9, and it must be distinguished from P4 by checking the other
+domes before starting.
+
+**Trap 3 — the module is OPT-IN and off by default.** Enable it in
+Options → Mod Options → Community Fix Pack ("No homeless residents (per Dome)").
+⚠️ **Mod Options survive a Mod Manager disable** — PT-60's P1 missed on exactly
+this — so read `SMRFixPack.ListFixes()` for the truth rather than assuming.
+
+**Trap 4 — turn D07 `CohortHousing` OFF for this leg, or use grown Youths only.**
+D07 wraps the same method and moves Children and unemployed Seniors toward cohort
+slots. If the stranded population is Children, the two modules become
+indistinguishable in the result. The original observation was **26 Youths and 2
+Adults**, which D07 ignores entirely — that population is the clean one.
+
+### The A/B
+
+Within-session, honoured per call, both directions:
+
+```
+SMRFixPack_Disabled.NoHomeless = true
+SMRFixPack_Disabled.NoHomeless = false
+```
+
+⚠️ The UI row also disappears from **newly opened** infopanels while the module
+is inactive; a panel already open does not rebuild until re-selection. That is
+expected, not a defect.
+
+⛔ **The uninstall half is a MOD-MANAGER DISABLE, never the toggle.** With the
+module merely switched off the mod env is still present and the hooks are still
+installed, so any captured frame resolves `SMRFixPack`, reads inactive and
+no-ops: **it reads clean by construction whether or not the module leaks.** Use
+the PT-20 method (`ENGINE_FACTS.md`, "OFF" IS THREE DIFFERENT THINGS).
+
+### ⭐ PREDICTIONS — written 2026-08-02, BEFORE the leg runs
+
+Record the reading against each one. **A prediction that misses is the finding.**
+Counts re-derived by counting, not inherited: **81 registered modules**
+(80 + `NoHomeless`), **74 default-active** (`NoHomeless` is opt-in and adds
+none), **87 probes** (86 + `NoHomeless`).
+
+| # | prediction | what a miss means |
+|---|---|---|
+| **P1** | `SMRFixPack.ListFixes()`: **81 registered**, and `NoHomeless` reports **`active`** with an empty detail once enabled in Mod Options | a preflight check failed — read the detail string first; it names which target went missing |
+| **P2** | `*r SMRTest.RunAll()`: the new probe `NoHomeless` **PASSes**; probe total **87**; **no probe that passed under PT-61 now fails** | the wrapper is over-broad or the shipped emigration shape moved |
+| **P2b** | ⛔ **OWED TO CHAIN 8c, SECOND HOP:** in that same `RunAll()`, **`DustDevilSpawnGate` still PASSes.** 8c added a `forbidden` early-return to `Fix_DustDevilSpawnGate` after PT-61 that is behaviour-neutral **by construction but not by measurement**, and it has been looking for a suite run ever since | the early-return changed behaviour; report it against F97, not D12 |
+| **P2c** | ⛔ **the probe's own CONTROL case passes** — i.e. the `NoHomeless` probe does not FAIL with the *"vanilla moved a stranded homeless colonist with the policy OFF"* verdict | that verdict means **the vanilla tie no longer holds** and D12's whole premise needs re-deriving before any other reading here is trusted |
+| **P3** | **VANILLA HALF** (`SMRFixPack_Disabled.NoHomeless = true`, or the flag simply not set): over ~2 sols the specialist dome's `#labels.Homeless` does **not** fall — it holds or grows | the strand is not reproducing on this save; the fixture is wrong, not the fix |
+| **P4** | **FIXED HALF** (flag ON via the infopanel row): the same count **falls**, and reaches **0** unless P9 applies. Take the count immediately before setting the flag and immediately after, per the entry's knife-edge note | the push is not firing — check Trap 1 first, then whether any destination passes Trap 2 |
+| **P5** | ⛔ **NOBODY IS EVER OUTSIDE.** Total colony population is unchanged across the drain, every colonist that left the dome is inside another dome, and there are **zero** deaths attributable to the move | this is the one failure mode the design was built to make structurally impossible (F53 territory). A miss here stops the leg immediately |
+| **P6** | the source dome's **`overpopulated` clears**, and the drain is what cleared it — the before/after homeless counts bracket `g_Consts.OverpopulatedDome` (**measured at 20**, `>=`) | if it cleared without the count crossing 20, natural attrition did it and the leg proves nothing about D12 |
+| **P7** | with `overpopulated` cleared, **D07 resumes delivering Children into that dome unaided** (D07 on, its `consider()` no longer skipping it) | ⚠️ this is the entry's **design rationale**, not a claim the build makes. A miss is a finding about the unwind, not about the push — and neither outcome flips any status |
+| **P8** | **NARROW-READING CONTROL:** flag ON on a dome that **does** have ordinary housing but no free beds → its homeless **do not move** | the wrapper is using the broad reading, which would make it fight the shortage machinery and expose it to the C40 churn |
+| **P9** | **NO-DESTINATION CONTROL:** flag ON with every other dome either quarantined, flagged, or lacking suitable housing → **nobody moves and nobody is expelled**; the colonists simply stay | best-effort is not being honoured; see P5 |
+| **P10** | **PING-PONG CONTROL:** flag ON on two domes at once → no colonist is traded between them repeatedly | the destination filter is not excluding flagged communities |
+| **P11** | **zero `[LUA ERROR]`** naming `Opt_NoHomeless` or `NoHomeless`, across the whole sitting and both halves | — |
+| **P12** | **UNINSTALL (Mod Manager disable, not the toggle):** save with the flag ON, disable the pack, load the same save → clean load, **zero** orphan errors, and the colony behaves as vanilla. The `SMRFixPack_no_homeless` field is still on the dome and is inert | the module leaks. It should not be able to: no threads, no GameVars, no globals, one plain boolean field |
+| **P13** | **toggle off = instantly vanilla**, same session, no reload — set `SMRFixPack_Disabled.NoHomeless = true` mid-drain and the pushes stop | the per-call `IsActive` gate is not being consulted somewhere |
+
+**Not predicted, and deliberately so:** how *fast* the dome drains. Emigration
+runs off the colonist heavy update and the destination search is best-effort;
+anything from "over a few hours" to "over a sol" is unremarkable. **Do not read
+the rate as evidence either way.**
+
+### One extra reading, owed from chain prompt 9 and unrelated to D12
+
+⭐ **The F98 localisation control — one console line, thirty seconds, please take
+it.** F98 (re-used translation ids are discarded at `T()` construction, so our
+shipped `Fix_TechDescriptionBuilding` never worked) currently rests on **source
+alone**:
+
+```
+*r ModLog(type(T(8821, "ZZZ")))
+```
+
+`userdata` **confirms** the reading. `table` **refutes** it — and F25 would then
+need restoring in both places. Record whichever appears, verbatim.
+
+### Steps
+
+1. **PT-00 sweep.** Then confirm the fixture with the Trap 1 command, and check
+   the other domes for Trap 2 before committing to the sitting.
+2. `*r SMRTest.RunAll()` → **P2, P2b, P2c**. `SMRFixPack.ListFixes()` → **P1**.
+   ⚠️ Use the `*r` form — a bare `SMRTest.RunAll()` runs with no thread context
+   and some probes skip.
+3. Take the loc reading above while you are in the console.
+4. **Vanilla half first.** Leave the flag unset, run ~2 sols → **P3**. Record the
+   homeless count at the start and the end.
+5. Select the specialist dome, **set the flag from the infopanel row** (this also
+   look-checks the row: title, icon, rollover text, and that it sits with the
+   other toggles rather than below the stat blocks). Record the count
+   immediately, then watch → **P4, P5, P6**. Watch **P11** throughout.
+6. With `overpopulated` cleared and D07 on, watch for children arriving → **P7**.
+7. Run the three controls → **P8, P9, P10**. **P9** is the important one; if the
+   colony cannot naturally produce a no-destination case, make one by
+   quarantining the candidate domes.
+8. Mid-drain, `SMRFixPack_Disabled.NoHomeless = true` → **P13**.
+9. Save with the flag ON. Quit, **disable the pack in the Mod Manager** (keep the
+   Test Kit on), load the same save → **P12**.
+10. `FlushLogFile()` before reading the log while the game is still running.
+11. ⛔ **Report every unexplained log line with its age.** "Not caused by our leg"
+    is an attribution verdict and not a dismissal, and every previous pushback on
+    one of these lines has turned up a vanilla defect that was not on our list
+    (`WORKFLOW.md`).
+
+### What this leg does NOT settle
+
+⛔ **It does not settle C40, and it is not aimed at it.** The Reddit-reported
+symptom that travelled with this item — colonists *flickering* between housed and
+unhoused as the Ministry of Culture's staffing changes — is a **churn** mechanism
+(`BUGS.md` C40, mechanism verified vs Src, harm unproven). **D12 does not fix it
+and this leg cannot measure it.** If the fixture colony happens to have Crowded
+Living enacted, expect capacity to move under you and say so in the report; that
+is C40's own keyboard observation, which is still owed.
+
+⛔ **It does not license the word "homelessness" anywhere player-facing.** What
+passes here is *colonists stranded in a dome that cannot house them get out*.
+
 ## PT-20 — Uninstall safety · covers **all fixes / FIX_POLICY §3**
 
 The pack must never hold a save hostage.

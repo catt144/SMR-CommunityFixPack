@@ -30,16 +30,19 @@ remediation 3.3). Session legs are append-only in
 > constraints that do not generalise, and sharing a prompt was degrading both.
 
 **Build state (authoritative counts — stated here and nowhere else):**
-`Code/` = **81 files** (72 `Fix_` + 7 `Opt_` + `00_Core` +
-`90_SaveSanitizer`) = **80 registered modules, 74 default-active** (the 6
+`Code/` = **82 files** (72 `Fix_` + 8 `Opt_` + `00_Core` +
+`90_SaveSanitizer`) = **81 registered modules, 74 default-active** (the 7
 toggle `Opt_` modules are opt-in via Mod Options; `Opt_DroneStatDials` (D09)
 registers active but is byte-vanilla until a dial leaves base).
-**Re-counted 2026-08-02 by chain prompt 8c** — one new module,
-`Fix_DustDevilSpawnGate` (F97, C23 item 1), added to prompt 8b's 79/73. The
-arithmetic is `80 registered − 6 opt-in-and-off = 74`; ⚠️ note that
-`79 − 6 = 73` is what reconciles prompt 8b's pair, so the divisor is **6, not
-the 7 `optional = true` registrations** — `Opt_DroneStatDials` is the seventh
-and it reports active at base. Prior recount, by
+**Re-counted 2026-08-02 by chain prompt 10** — one new module,
+`Opt_NoHomeless` (D12), added to prompt 8c's 80/74. It is **opt-in and off by
+default, so default-active does NOT move**: the arithmetic is
+`81 registered − 7 opt-in-and-off = 74`. ⚠️ The divisor tracks the opt-in
+modules that are off, **not** the `optional = true` registrations — there are now
+**8** of those and `Opt_DroneStatDials` is the eighth, reporting active at base.
+Probes: **87** (86 + `NoHomeless`).
+⚠️ **`Opt_NoHomeless` is UNRUN** — its leg is PT-62 and D12 claims no status
+beyond `speced`. Prior recount, by
 `Select-String` for
 `SMRFixPack\.Register\(` over `Code/`, **minus the one false positive that
 count has always had to drop: `00_Core.lua`'s own `function
@@ -50,8 +53,20 @@ Was 74/68; the batch added **five new modules** (`Fix_SaintBlessing`,
 that needed no new module** (F91 amended `Fix_TrackSalvageWipe`, F94 landed
 inside `Fix_AsteroidLanderAvailable`). Pinned game
 build: **1.0.7.396349** (fpk parity proven — ENGINE_FACTS.md). BUGS.md index:
-**110 rows** (98 `F` + 12 `D`) **plus 39 `C`** — **re-counted 2026-08-02 by chain
-prompt 9**, by counting. **Module and probe counts are UNCHANGED at 80/74 and 86:
+**110 rows** (98 `F` + 12 `D`) **plus 40 `C`** — **re-counted 2026-08-02 by chain
+prompt 10**, by counting distinct ids. The row count is unchanged (D12 already had
+its row); the `C` count is **+1**: **`C40`** filed by prompt 10's pre-build check —
+"Crowded Living" grants +3 `Residence.capacity` gated on the **Ministry of
+Culture's live `working` flag**, and every withdrawal **evicts** the tail
+residents colony-wide (mechanism verified vs Src end to end; the live gating is
+**intended** and advertised on the ministry building, so what is open is the
+law's own description and the eviction consequence — harm unproven, nothing
+built). ⭐ It came from a **Reddit player's hypothesis** that the routed brief
+said to *check, not adopt* — and the player was right about the mechanism. It
+decided D12's open question in favour of the narrow reading. The prior figure and
+its history follow — was **110 rows** (98 `F` + 12 `D`) **plus 39 `C`**,
+**re-counted 2026-08-02 by chain
+prompt 9**, by counting. **Module and probe counts were UNCHANGED at 80/74 and 86:
 prompt 9 shipped no code.** It filed **F98** (our own `Fix_TechDescriptionBuilding`
 is a no-op in retail — re-using a shipped translation id discards the replacement
 text at `T()` construction) and **C39** (`Policy_Automation_ServiceAutomation`

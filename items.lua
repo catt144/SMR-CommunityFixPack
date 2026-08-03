@@ -358,6 +358,10 @@ return {
 		'CodeFileName', "Code/Opt_CohortHousing.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Opt_NoHomeless",
+		'CodeFileName', "Code/Opt_NoHomeless.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "Opt_DroneStatDials",
 		'CodeFileName', "Code/Opt_DroneStatDials.lua",
 	}),
@@ -395,6 +399,12 @@ return {
 		'name', "CohortHousing",
 		'DisplayName', "Cohort housing — Seniors & Children",
 		'Help', "Seniors and Children living in normal housing automatically move into free Retirement Home / Nursery slots — in their own Dome first, in any reachable Dome second — and are left completely alone when no such slot exists. Employed Seniors stay put; your manual residence and Dome assignments always win; quarantine and closed Domes are respected. No dome designation needed: concentrate the cohort buildings where you want the cohort to live.",
+		'DefaultValue', false,
+	}),
+	PlaceObj('ModItemOptionToggle', {
+		'name', "NoHomeless",
+		'DisplayName', "No homeless residents (per Dome)",
+		'Help', 'Adds a per-Dome "No homeless residents" policy row to the Dome infopanel. When it is on, Colonists the Dome can never house — because no residence in it accepts them, such as grown Youths left in a Nursery-only Dome — move to the nearest Dome that has housing of a kind they can use. Colonists who simply have no free bed are NOT moved, nobody is ever put outside, and a quarantined Dome still releases no one.',
 		'DefaultValue', false,
 	}),
 	PlaceObj('ModItemOptionChoice', {

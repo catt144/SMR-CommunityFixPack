@@ -89,7 +89,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | D09 | No player control over drone speed/carry (breakthrough lottery) | dsgn| med | tested 2026-07-30 — PT-56 PASS in full (entry) |
 | D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | dsgn| med | ⏸️ **PARKED / ON HOLD 2026-08-02 (owner) — POST-RELEASE, LOW PRIORITY, NOT OWED.** Shape confirmed same day: opt-in module, and the text ships via **our own `ModItemLocTable`** rather than English-only strings — which is what moves it behind release. Nothing technical blocks it (F86 hold discharged, PT-56 passed); it was re-prioritised. ⛔ **Route RE-DERIVED from Src first (chain prompt 9) and three spec claims FAILED** — there are **four** workshops not three (`TVStudioWorkshopCCP1`), the `upgrade1` citation is false (no `upgrade1_id`, so that modifier never applies — conclusion survives on `Workplace:OnModifiableValueChanged`), and unemployment clauses are on **7 of 29** faction defs, not every one. Two new facts bind any future build: `max_workers` is **hard-clamped at 20** while `consumption_amount` is not (so the pairing must clamp its own percent per template), and raising capacity without staffing it **lowers** the Comfort payout. **Nothing built, no PT-57 written, F84 un-bundled.** Also filed en route: **F98** (our F25 fix is a retail no-op) and **C39** (do not build D10 while it is open) (entry) |
 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | dsgn| low | candidate — feasibility on file, NOT green-lit: ASK the user (entry) |
-| D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | SPECED 2026-07-30, user-approved, build owed (entry) |
+| D12 | Homeless strand in specialist domes; emigration ties never move them | dsgn| med | **BUILT 2026-08-02 (chain prompt 10) as `Opt_NoHomeless` — ⚠️ UNRUN, the leg is PT-62.** Premise RE-DERIVED first: the tie is byte-verbatim in pinned Src and the [S36] "1.0 fixed homelessness" claim is FALSE for this half. The entry's **open question is DECIDED — the NARROW reading** (push only colonists the dome can never house), and the third reason for it came from `C40`, filed en route (entry) |
 | D13 | Save-exit deliverables: uninstall procedure + standalone save-rescue artifact | dsgn| high | directed 2026-07-31 (owner), prelaunch — **HARD LAUNCH DEPENDENCY (owner, 2026-08-01): the pack does not ship until this ships alongside it**; ⛔ **spec GATED on Tier 1/2 landing AND verifying** (target list = their output, never today's leak set — the gate is sequencing, not priority); also owns the **complete per-site disposition table** required before release (FIX_POLICY §3a) and **must DERIVE the exposed set itself rather than inherit any recorded count** (the docs carry an open lower bound, "at least 13", from a grep known blind to slot/global/preset assignments, and the builds have since changed the set) — **its derivation is authoritative and it updates every doc stating a count** (list on the entry); second-artifact costs + open player-story design question on the entry (entry) |
 | F64 | Station demolition permanently leaks train prefabs       | P1  | high | fixed · **◑ 2026-08-01 (owner, logged-in Paradox browse): FAMILY witnessed live on Relaunched** (Jan 30 2026 — station removed, train bookkeeping wrong afterwards and stayed wrong), **but the verbatim "trains go to void" report was NOT located** — stop citing that phrase as a quote (entry) |
 | F65 | Station-at-tunnel never bridges the power grid           | P2  | med  | tested — PT-40 PASS 2026-07-28 (entry) |
@@ -165,6 +165,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | ? | cand | filed 2026-08-01 (fredware source held) — **ADOPTED as the Tier-1 rains-pass rider, BUILT 2026-08-01 into Fix_RainsDeadlock's migration pass (structure → FinishRainProcedure heal → migration; manual fallback for invalid values); VERIFIED live by Tier-1 leg 3 2026-08-01** — planted `g_RainDisaster="toxic"` with a dead main_thread, and on reload the log read `0:23:39 RainsDeadlock: stale-ACTIVE rain 'toxic' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)`, with `g_RainDisaster` false afterwards (entry) |
 | C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | ? | cand | filed 2026-08-02 by the C18 sweep — **VERIFIED vs Src**: `CommanderProfilePreset.lua:336-385` enumerates ten labels for an **unqualified** promise and omits `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor`, both currently buildable and both carrying the modified prop. Sibling tell is the enumeration itself. **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F95`, approved, routed to prompt **8b** (prompt 8 split under rule 3).** ⭐ The evidence that settles oversight-vs-balance: there **is** a shared `Extractors` label (16 templates) and the designers did **not** use it — and every building it would have added is explained (3 non-extractors: ConcretePlant/MoholeMine/TheExcavator; 2 hidden legacy with `hide_from_build_menu`), leaving **no principled line** that includes `MicroGExtractorExoticMinerals` and excludes `AutomaticMetalsExtractor`. Count closes exactly at 12 buildable / 10 paid. Fix = two additive `Effect_ModifyLabel` entries via `PlaceObj` (**not** `:new` — F87) + a load-time heal; the "retarget to `WaterExtractorBase`" alternative was rejected as too wide (entry) |
 | C39 | `Policy_Automation_ServiceAutomation` cuts `max_workers` by **label** while its performance compensation keys on **class** — the four Workshops are on the label and outside the class | ? | cand | filed 2026-08-02 by the D10 route re-derivation (chain prompt 9) — **VERIFIED vs Src, harm direction NOT determined.** The law's only effect is `LawEffectModifyLabel{Label="ServiceBuildings", Prop="max_workers", Percent=-50}` (`Data\LawDef\LawDef-Technology.lua:227-234`). **23 templates carry that label; all derive from `Service` except `ArtWorkshop`, `VRWorkshop`, `BioroboticsWorkshop` and `TVStudioWorkshopCCP1`**, which are `Workshop = {ElectricityConsumer, Workplace}`. The compensating branch in `Workplace:GetWorkshiftPerformance` is gated on `self:IsKindOf("Service")` (`Workplace.lua:205-217`), so it cannot fire for those four. **Tells: self-contradiction** (one effect targeted by label, its compensation by class) **and an explicit dev comment** — `:209-210` says the code *"assumes that there's a modification in max_workers matching the value on automation_workforce_reduction"*, i.e. it assumes the two sets coincide. ⚠️ **NOT sized, and the sign is genuinely unclear**: `law_scale` appears to *raise* performance (a full reduced shift computes ~200 rather than 100), so the four may be missing an uplift rather than taking a penalty — and workshop `performance` feeds the **Comfort boost** (`ArtWorkshop.lua:24-27`), not resource output, so the player-visible consequence differs from every other member of the label. Next step is a keyboard observation with the law enacted, not more reading (entry) |
+| C40 | "Crowded Living" grants **+3 residence capacity that is added and removed live with the Ministry of Culture's `working` flag**, and every removal EVICTS the tail residents colony-wide | ? | cand | filed 2026-08-02 by chain prompt 10's pre-build check — **MECHANISM VERIFIED vs Src end to end, and it is a PLAYER'S hypothesis that turned out right** ([S37]/[S38], §10.6: *"homes at their capacity would regularly fluctuate because of staffing in the law spire"*). ⛔ **The live gating is INTENDED** — the Ministry of Culture's own description advertises that it boosts this law — so the gating is not the candidate. What is: the **law's** description interpolates only the static `<capacity_increase>`, so the player is told "+3" with no statement that a second +3 is conditional or that losing it costs colonists their homes. **Harm unproven, frequency unmeasured, nothing built.** ⭐ It also decided D12's open question — the narrow reading is immune to it (entry) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -9633,7 +9634,91 @@ hold the dial at base for D10's leg.
 
 ## Candidates under investigation
 
-### D12 — Homeless strand in specialist domes; emigration ties never move them  `[SPECED 2026-07-30, user-approved — ⭐⭐ **BUILD UNHELD 2026-08-01: the F86 save-safety hold is DISCHARGED** (Tier 1 verified `c6180ad`; Tier 2 verified by PT-58, F86 Site 2 closed at zero against leg 5's 80). Chain prompt 10 is runnable. Build owed. Own module, Opt_ResidencyControl as donor pattern only]`
+### D12 — Homeless strand in specialist domes; emigration ties never move them  `[SPECED 2026-07-30, user-approved — ⭐⭐ **BUILD UNHELD 2026-08-01** (Tier 1 verified `c6180ad`; Tier 2 verified by PT-58). ✅ **BUILT 2026-08-02 (chain prompt 10) as `Opt_NoHomeless` — own module, Opt_ResidencyControl as donor PATTERN only, zero shared gate. ⚠️ UNRUN: the leg is `PLAYTEST_CHECKLIST.md` PT-62 and no status beyond `speced` is claimed. The open question is DECIDED (narrow reading — see below). The D07-unwind remains the design RATIONALE and is not asserted as verified]`
+
+---
+
+## ⭐ PRE-BUILD RE-DERIVATION (chain prompt 10, 2026-08-02) — read this before the spec below
+
+The build session re-derived the premise from Src before writing a line, because
+the project has been wrong in both directions in one week about *routes* whose
+individual citations were all correct. Results:
+
+**1 · The premise HOLDS, byte-verbatim.** The tie gate is exactly as this entry
+describes it in the pinned 1.0.7.396349 Src: `Colonist.lua:2675` `if new_eval >=
+eval then`, the homeless-permitting comment at `:2676`, the strict-improvement
+requirement at `:2680-2681`, the quarantine early-out at `:2632-2635`, and the
+declaration at `:2581`. **The routed [S36] claim that the devs "squashed
+homelessness" with 1.0 is FALSE for this half** — third-hand, hotfix-1.0.3-era,
+and nothing in the current source touches the tie. Project rule satisfied:
+*"fixed in Relaunched" only from current Src*.
+
+**2 · ⚠️ ONE CITATION IN THIS ENTRY IS OFF BY A HOP, and the substance survives.**
+The Mechanism section says `FindEmigrationDome` is *"called every heavy update
+from `Colonist.lua:1894-1898`"*. It is not called there. **Its only caller in Src
+is `Colonist.lua:1603`, inside `Colonist:TryToEmigrate`** — which the heavy-update
+block calls at `:1898`, and *also* calls off-cycle at `:1900-1902` when
+`user_forced_dome` is set. So "no new scheduling" is correct and the seam is
+correct; the line reference named the caller's caller. Corrected here rather than
+silently, per chain rule 4b.
+
+**3 · ⭐ THE ROUTED PLAYER HYPOTHESIS WAS RIGHT — and it decided the open
+question rather than restating the premise.** The brief carried a Reddit player's
+proposed cause for the same symptom (*"homes at their capacity would regularly
+fluctuate because of staffing in the law spire"*) with the instruction *check it,
+do not adopt it*, and the warning that if capacity is recomputed from live
+staffing then **D12's premise needs restating before a line of code is written**.
+It is: `Policy_ExtraResidentialSpace` grants +3 `Residence.capacity` gated on the
+Ministry of Culture's live `working` flag, and a withdrawal EVICTS residents
+colony-wide. Filed as **`C40`** with the five-link route.
+
+**What that does and does not do to D12:**
+
+* It does **NOT** overturn the premise. C40 is a second, independent **producer**
+  of homeless colonists; the tie rule is what **strands** them once they exist.
+  Both a shortage-produced and a churn-produced homeless colonist are stranded by
+  the same gate, and D12 is a **mobility** fix, not a shortage fix.
+* It **DOES** bound what D12 may ever be said to fix. The reported *flickering*
+  is a churn symptom and **D12 does not address it**. No pack document may claim
+  D12 fixes "homelessness" — it fixes colonists **stranded in a dome that cannot
+  house them**. `MOD_DESCRIPTION.md` wording is bound by this.
+* It **DOES** decide the open question, below.
+
+**4 · THE OPEN QUESTION IS DECIDED: the NARROW reading.** The entry asked whether
+the push should apply to ALL homeless or only to colonists the dome can never
+house. **Narrow** — the module acts only when **no** residence in the colonist's
+own dome is `IsSuitable` for them (`Residence.lua:162-167`; suitability is
+exactly the `exclusive_trait` test, and `Dome:ChooseResidence` is dome-local at
+`Dome.lua:2967-2970`, so a dome-local test matches the shipped housing scope).
+Three reasons:
+
+1. It is what the child-dome case actually needs — this entry's own note.
+2. It never competes with `ChooseResidence`/`CheckHomeForHomeless` for an
+   ordinary bed, so the module cannot fight the shipped shortage machinery.
+3. ⭐ **It is structurally immune to C40.** Under the broad reading, a colonist
+   evicted by a transient ministry-outage capacity dip reads as homeless, and
+   D12 would have shipped them out of their dome **permanently** over an outage
+   that ends by itself. Under the narrow reading they are untouched: ordinary
+   housing suitable for them exists in the dome, it is merely full for a moment.
+
+⚠️ **The trap this avoided was invisible from the D12 plan.** It was found only
+because the routed hypothesis was checked before building, which is the whole
+argument for checking routed claims first.
+
+**5 · One deliberate departure from the spec text, recorded.** The Mechanism
+section says the destination is *"the nearest reachable community that does NOT
+carry the flag and that `CanAcceptNewColonists()`"*. The build adds a third
+filter — **the destination must contain housing that is `IsSuitable` for this
+colonist** — because sending a grown Youth from one nursery-only dome to another
+achieves nothing. It is a suitability test, **not** a free-space test:
+free non-cohort slots colony-wide were **zero** in the origin scenario, so
+requiring free space would have made the module inert in the exact case it was
+built for (the shipped eval permits the no-free-space move for the same reason,
+`:2676`). Among qualifying destinations, one that can house them **now** is
+preferred, then the nearest. `community.overpopulated` is **not** filtered
+(D07 does filter it) — draining an overpopulated dome is the point.
+
+---
 
 **Origin: found in play 2026-07-30**, by deliberately stressing homelessness and
 unemployment in a dedicated child dome. Observed live: nurseries at 5/26 and
@@ -9741,7 +9826,9 @@ or only to colonists the dome can never house (i.e. no residence in the dome is
 child-dome case actually needs; the broad reading is simpler to explain to a
 player. Decide before coding.
 
-**PT owed:** a new item covering — set the flag on a nursery-only dome with
+**PT owed → WRITTEN 2026-08-02 as `PLAYTEST_CHECKLIST.md` PT-62**, predictions
+P1-P9 recorded before any run. Original text, kept because the checklist item is
+derived from it: a new item covering — set the flag on a nursery-only dome with
 stranded graduates and watch them drain; confirm the dome's `overpopulated`
 clears and D07 resumes delivering children unaided; confirm NO colonist is ever
 left outside a dome; confirm a flagged dome with no valid destination leaves
@@ -11699,6 +11786,102 @@ Spacebar in the same dome as the in-family control. Until that runs this stays
 four buildings, so a session that builds D10 while this is open will be unable to
 tell the two apart in a log. If D10 is ever un-parked, settle C39 first or hold
 the dial at base for the leg.
+
+### C40 — "Crowded Living" grants +3 residence capacity gated on the Ministry of Culture's LIVE working flag, and every withdrawal evicts the tail residents colony-wide  `[filed 2026-08-02 by chain prompt 10's pre-build check — MECHANISM VERIFIED vs Src end to end; the live gating is INTENDED and is not the candidate; harm unproven, frequency unmeasured, nothing built]`
+
+**Origin, and it is worth stating plainly: this was a PLAYER'S hypothesis and the
+player was right about the mechanism.** Two current Reddit threads
+(`BUG_LIST_AUDIT.md` §10.6, sources **[S37]/[S38]**) reported *"people were
+constantly flicking between being housed and unhoused"* and proposed a cause:
+*"I think the homelessness issue was caused by one of the law upgrades that
+allows homes to house more colonists, because I'd check homes at their capacity
+would regularly fluctuate because of staffing in the law spire."* It was routed
+to chain prompt 10 with the instruction **check it, do not adopt it**. The check
+found the mechanism exactly where the player put it.
+
+**The route, verified against the pinned build (1.0.7.396349), five links:**
+
+1. **`Policy_ExtraResidentialSpace` ("Crowded Living") carries TWO capacity
+   effects, not one** — `Data\LawDef\LawDef-Welfare.lua:799-817`:
+   `LawEffectModifyLabel{Label="Residence", Prop="capacity", Amount=3}` and
+   `LawEffectModifyLabelMinistryWorking{Label="Residence", Prop="capacity",
+   Amount=3, Ministry="MinistryWelfare"}`. Parameters `capacity_increase=3` and
+   `ministry_capacity_increase=3` at `:896-905`.
+2. **The second one reads a LIVE flag.**
+   `LawEffectModifyLabelMinistryWorking:IsMinistryWorking()` is
+   `UIColony.labels[self.Ministry][1].working` —
+   `Lua\ClassDefs\ClassDef-Factions.generated.lua:2186-2190`. That label is
+   reachable: `Building:AddToCityLabels` adds `self.class` as a label
+   (`Lua\Buildings\Building.lua:438`) and the building's class is
+   `MinistryWelfare`.
+3. **The engine re-evaluates it on every change of that flag.**
+   `MinistryBase:UpdateWorking` calls `ReapplyLawEffects()` whenever `working`
+   flips (`Lua\Factions\FactionsBuildings.lua:375-382`) →
+   `Lua\Factions\Laws.lua:247-251` → `OnReapply` → `OnStop`/`OnStart` →
+   `colony:SetLabelModifier("Residence", …, ±3)`
+   (`ClassDef-Factions.generated.lua:2167-2202`).
+4. **A capacity DROP evicts.** `Residence:OnModifiableValueChanged` cancels
+   reservations and then calls `colonist:SetResidence(false)` on the tail
+   residents until the building fits its new capacity —
+   `Lua\Buildings\Residence.lua:224-235`. A colony with no spare beds turns those
+   colonists homeless. On the way back up the same function re-houses
+   `dome.labels.Homeless` (`:238-242`). **That is the flicker, both directions.**
+5. **What actually flips the flag.** A Workplace is not working when its active
+   shift has no workers (`Workplace:GetWorkNotPossibleReason`,
+   `Lua\Buildings\Workplace.lua:122-131`, `HasWorkersForCurrentShift` at
+   `:328-333`), when it has no power (`Lua\ElectricityConsumer.lua:39-43`), or
+   when it is malfunctioned/awaiting maintenance, destroyed, shrouded in rubble
+   or demolishing (`Lua\Buildings\Building.lua:598-618`).
+
+⚠️ **One qualifier the player's account does not have, recorded so nobody
+over-reads the frequency:** MinistryBase runs a **single** shift (`active_shift =
+1`, `enabled_shift_2/3 = false`, `FactionsBuildings.lua:360-362`) with
+`max_workers` 6 (`Data\BuildingTemplate\MinistryWelfare.lua:39`), and
+`HasWorkersForCurrentShift` is satisfied by **any** worker on the active shift.
+So ordinary day/night shift rotation does **not** flicker it. Losing the whole
+shift, a power gap, or a maintenance stop does. How often that happens in a real
+colony is **not measured**, and this entry does not guess.
+
+**⛔ THE INTENT CONTROL — and it is why the live gating is NOT the candidate.**
+`MinistryWelfare` is the **Ministry of Culture**, and its own building
+description says it *"Improves worker performance and **boosts the Crowded
+Living, Quiet Hours, and Mars Appreciation laws** from the Society category"*
+(`Data\BuildingTemplate\MinistryWelfare.lua:23`, `:26`). The dependency is
+advertised, the class exists to express it, and several laws use it. Filing "a
+ministry-gated bonus tracks the ministry" as a bug would be filing the design.
+
+**WHAT IS ACTUALLY UNSETTLED, and it is a smaller, sharper thing.** The **law's**
+own description is `"Residential building capacity is increased by
+<em><capacity_increase></em>"` (`LawDef-Welfare.lua:907`) — it interpolates the
+**static** parameter only. A player reading the law is told **+3** and may be
+receiving +6; nothing in the law's text says half of it is conditional, and
+nothing anywhere says that losing it **takes homes away from people who already
+have them**. The building's description names the law but not the amount and not
+the eviction. So the open question is a disclosure-and-consequence question, of
+the same family as C38/C39, not a control-flow bug.
+
+**Not sized, not reachable-rated, and deliberately so.** No harm has been
+observed by this project, the frequency is unmeasured, and both public reports
+are launch-era accounts from one player plus one *"Oh yeah, I heard about that"*.
+**Next step is a keyboard observation, not more reading:** enact Crowded Living,
+note a Residence's capacity, then stop the Ministry of Culture (cut its power or
+pull its workers) and read the same capacity and the colony's Homeless count.
+Until that runs this stays `cand` and is **not** a §4 package.
+
+**Recorded so it is not re-derived as a second swing:**
+`LawEffectModifyLabelMinistryWorking:OnStart` stores `working = nil` (not
+`false`) when the ministry is down, so `OnReapply`'s `not
+old_modifier.ministry_working` clause is true on every reapply while it is down
+and does a redundant `OnStop`/`OnStart`. Both ends of that write **amount 0**, so
+it re-sets the same value and produces **no** additional capacity movement.
+
+**⭐ Its one settled consequence is on D12, and it is a design consequence rather
+than a defect one.** This is a **churn** producer of homelessness, not a
+**shortage** producer, and D12's push is aimed at neither — D12 fixes
+*mobility*. Under the BROAD reading of D12's open question a transiently-evicted
+colonist would have been pushed permanently out of their dome over a temporary
+ministry outage. Under the **narrow** reading that was chosen they are untouched.
+See the D12 entry.
 
 ## Not yet swept (follow-up targets)
 
