@@ -193,7 +193,13 @@ authored):**
    verification with predictions).
 3. **MOD_DESCRIPTION rebuild** from entries (R11's release gate), including
    the owner's relabel-package decisions (QA report §3) — every claim
-   verified against BUGS, none inherited from the frozen draft.
+   verified against BUGS, none inherited from the frozen draft. **The player
+   FAQ compiles in this same step**: `grep -rn "\[FAQ\]" docs/ Code/` collects
+   the tagged sources (15 tags / 10 files as of 2026-08-03, three inside the
+   frozen draft itself — the grep must include `archive/`), per WORKFLOW's
+   `[FAQ]` convention; each tag's claim gets the same verify-against-entries
+   treatment as the description, and tags whose behaviour has since changed
+   are dropped, not inherited.
 4. **Release-gate sweep** — per-site §3a disposition table complete, fpk
    extraction diff, probe sweep, version/latch checks, the public README.
 5. **Doc overhaul execution** (the R15/R12/R13 scripted migration, if not
