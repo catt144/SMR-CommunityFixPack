@@ -340,6 +340,17 @@ local function has_cohort_housing(community)
 	end) and true or false
 end
 
+-- Is this colonist the class the policy moves? Vanilla's own `need_work`
+-- (Colonist.lua:2623-2624) plus the tourist carve-out. Used on BOTH sides now:
+-- who gets pushed out, and who must not be routed in.
+local function is_push_subject(colonist)
+	local traits = colonist.traits
+	if traits and traits.Tourist then return false end
+	if not colonist:CanWork() then return false end
+	if IsValid(colonist.workplace) or colonist.user_forced_workplace then return false end
+	return true
+end
+
 -- The push. Installed at FILE SCOPE (the A2 lesson, FIX_POLICY §5) so the wrap
 -- is in place before class flattening and a FIRST mid-session Mod Options
 -- enable works without a relaunch; guarded by the same existence check apply()
@@ -353,7 +364,36 @@ do
 		function C:FindEmigrationDome(current_dome, ...)
 			local dome, mode, dist, elevator = orig_find(self, current_dome, ...)
 			if not module_active() then return dome, mode, dist, elevator end
-			-- only ever ADD a destination; never override one
+			-- ⛔ THE SYMMETRIC HALF — a flagged dome must not RECEIVE the class
+			-- it is set to move out. Without this the policy and the shipped
+			-- eval fight each other: we push a jobseeker out, the dome drops
+			-- below `IsOverpopulated`, its free cohort slots start scoring
+			-- ~97 again in `Community:GetScoreFor`, vanilla offers the same
+			-- dome straight back, and the colonist shuttles. **Observed live
+			-- 2026-08-02 during PT-62: six colonists en route INTO flagged
+			-- domes while those domes were draining**, arriving by train and
+			-- walking back in.
+			--
+			-- ⚠️ This is the ONE case where the wrapper overrides a positive
+			-- shipped answer, and the narrowness is what keeps it legal:
+			--   * it fires only for a colonist the policy would immediately
+			--     push out again, so it removes a round trip rather than a
+			--     choice;
+			--   * it NEVER touches cohort members — `is_push_subject` is false
+			--     for anyone outside the workforce — so Children and Seniors
+			--     keep arriving normally. That is what makes it compatible with
+			--     HARD CONSTRAINT 1: we still do not route through
+			--     `CanAcceptNewColonists`, and cohort delivery is untouched;
+			--   * returning nothing is the shipped "stay put" answer, and
+			--     `TryToEmigrate` clears any pending transport request with it
+			--     (`Colonist.lua:1604-1609`).
+			-- It also stays order-independent with D07, which only ever moves
+			-- cohort members and therefore never trips this clause.
+			if dome and is_flagged(dome) and has_cohort_housing(dome)
+					and is_push_subject(self) then
+				return
+			end
+			-- otherwise only ever ADD a destination; never override one
 			if dome then return dome, mode, dist, elevator end
 
 			-- ⛔ GUARD ORDER IS LOAD-BEARING — the FLAG IS TESTED FIRST, before
@@ -386,8 +426,7 @@ do
 			if not my_dome.accept_colonists then
 				return dome, mode, dist, elevator -- quarantine: no one enters or leaves
 			end
-			local traits = self.traits
-			if traits and traits.Tourist then return dome, mode, dist, elevator end
+			if not is_push_subject(self) then return dome, mode, dist, elevator end
 			if not self:IsHomeless() then return dome, mode, dist, elevator end
 			if IsValid(self.reserved_residence) then
 				return dome, mode, dist, elevator -- mid-move
@@ -406,12 +445,8 @@ do
 			-- Senior in a retirement dome survives to be the build-more-housing
 			-- signal it is, and the service staff the dome's ordinary housing
 			-- exists for are employed and never touched.
-			if not self:CanWork() then
-				return dome, mode, dist, elevator -- outside the workforce
-			end
-			if IsValid(self.workplace) or self.user_forced_workplace then
-				return dome, mode, dist, elevator -- workforce, employed here
-			end
+			-- (the workforce / outside-the-workforce test is is_push_subject,
+			-- applied above so both halves of the policy share one predicate)
 
 			-- Candidate gathering mirrors the shipped function: this city's
 			-- communities plus every elevator-linked city's
