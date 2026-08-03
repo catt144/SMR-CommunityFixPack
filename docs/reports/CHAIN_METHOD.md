@@ -120,15 +120,22 @@ emptiness is the objective done-condition. The final prompt is always an
 
 ## 4 · The chain template (assemble from these parts)
 
-0. **Author the chain in a top-tier session, WITH the owner — and let the
-   authoring MODEL decide the per-prompt model placement.** This is how the
-   proven chain was actually made (owner + Fable collaboration, 2026-08-01;
-   the placement was Fable's call, which the owner could sanity-check but
-   not derive). The assignment is a judgment about *where errors compound
-   versus where they get caught* — a read on the work's internal risk
-   structure that the authoring session is better positioned to make than
-   anyone outside it. The division of labor in §2.10 is a design input, not
-   an afterthought. Budget
+0. **Author the chain WITH the owner — and size decides who assigns the
+   models (owner rule, 2026-08-03):**
+   - **5 prompts or fewer:** the owner decides the model placement themselves
+     if comfortable doing so.
+   - **6 prompts or more:** any agent scoping the effort should RECOMMEND
+     that the chain setup — the decomposition AND the per-prompt model
+     placement — be done by a top-tier (Fable) session, unless the owner
+     overrides.
+   This codifies how the proven chain was actually made (owner + Fable
+   collaboration, 2026-08-01; the placement was Fable's call, which the
+   owner could sanity-check but not derive). The assignment is a judgment
+   about *where errors compound versus where they get caught* — a read on
+   the work's internal risk structure that grows superlinearly with chain
+   length: at 5 prompts the owner can hold the risk map; at 18 nobody but
+   the authoring session can. The division of labor in §2.10 is a design
+   input, not an afterthought. Budget
    the scarce tier at roughly 15–20% of prompts, placed at the compounding
    points; if the plan needs more than ~half the chain on the top tier, the
    decomposition is wrong (the specs are not carrying enough of the load).
