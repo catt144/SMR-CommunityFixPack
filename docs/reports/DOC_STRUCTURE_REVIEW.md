@@ -312,6 +312,85 @@ the public-facing documents from, instead of a second hand migration.
 
 ---
 
+## 7 · Addendum 3 (2026-08-03, same session) — a clean human root, and how the structure survives 20 agents
+
+Two further owner requirements: **the root documents folder stays clean**
+(a human setting up or looking for their own docs must not sort through
+dozens of agent files), and **the structure must be live — regression-proof
+20+ agents from now**, not dependent on any one session remembering it.
+
+### R15 — The folder contract
+
+```
+docs/
+  PLAYTEST_CHECKLIST.md    ← human, heaviest (carries the R10 decisions section)
+  PLAYTEST_HELP.md         ← human
+  README.md                ← one-screen map of this tree, human-readable
+  agent/                   ← EVERYTHING agents work from
+    STATE.md (R12) · bugs/ (R13: per-entry + generated index) ·
+    ENGINE_FACTS.md · FIX_POLICY.md · WORKFLOW.md · reports/ · prompts/
+  archive/                 ← historical + deprecated, append-only
+    PLAYTEST_ARCHIVE.md · SESSION_LOG.md · superseded docs ·
+    MOD_DESCRIPTION.md (frozen per R11, until launch prep)
+```
+
+Root rule: **root holds only the human working set plus the map — everything
+else is a rules violation.** A doc that stops being current is *moved to
+`archive/`*, never deleted and never left in place. `FUTURE_IDEAS.md` (parking
+lot) goes under `agent/`. ⚠️ The move is a migration like any other: scripted,
+with a full reference sweep (every `docs/...` path in docs, prompts, module
+headers and TestKit updated in the same commit) — path breakage is exactly a
+T1 dangling-pointer event if done by hand.
+
+### How it stays live — the layered answer, anchored in this week's own evidence
+
+The corpus already answers "what survives agents": **every prose-only
+convention drifted; the two conventions that held all week are the mechanical
+ones** (the stale-probe grep with its `PROBE SWEEP:` commit line, and
+predictions-written-before-runs). So the structure must not live in prose that
+agents are trusted to remember — it must live in three layers, each catching
+the failures of the one above:
+
+**R16 — A root `CLAUDE.md` (the project has none — this is the strongest
+unused mechanism).** The harness auto-loads `CLAUDE.md` into **every** future
+agent session, no matter how the session starts — unlike `WORKFLOW.md`, which
+an agent must know to read. It should be small (it spends the R14 budget):
+the folder contract, the mandatory-read set, "run the doc check before
+committing doc changes", and pointers into `agent/` for everything else.
+Twenty agents from now, this is the one document guaranteed to be in context.
+
+**R17 — A git pre-commit hook as the mechanical floor.** Extend R1's script
+into `tools/doccheck.py` — validates the root allowlist (both directions:
+nothing extra in root, nothing missing from the README map), required front
+matter on `agent/bugs/` entries, index↔entry agreement, counts, the TEMPORARY
+sweep, and R14's mandatory-read budget — and wire it as a **git pre-commit
+hook** (`core.hooksPath=tools/hooks`, the hook script versioned in the repo).
+This layer does not depend on the agent *or the human* remembering anything:
+a commit that violates the structure fails, whoever makes it. The check's
+output line goes in the commit body (the `PROBE SWEEP:` precedent — the
+ritual that demonstrably held).
+
+**Layer three — structure that is derived, not maintained.** R12/R13 already
+do this: generated counts and a generated index cannot drift from their
+sources, and front-matter fields make every new doc declare itself
+(mandatory-read vs pull-based, human vs agent) in a form the hook can check.
+The less structure lives in anyone's memory — biological or model — the less
+there is to regress.
+
+Failure-mode honesty: the checker itself can rot (T8). Two mitigations are
+built in: the allowlist is validated in both directions, so reality and map
+must move together or the commit fails loudly; and the hook failing *loudly on
+every commit* is the one kind of staleness this project has never had — every
+recorded drift instance was silent. Converting silent drift into a red
+pre-commit error is the whole trade.
+
+**Final adoption order across all addenda: R1+R2 → R17 (the hook, as soon as
+R1's script exists) → R16 (CLAUDE.md) → R10+R11 → R15+R12+R13 as one scripted
+migration (folder moves, STATE split, BUGS restructure — one reference sweep
+instead of three) → R3/R4/R5 via front matter → R14 → R7/R8/R9.**
+
+---
+
 *Recommendations only — the owner decides. Items marked [WORKFLOW] change how
 sessions are authored and therefore need explicit adoption into `WORKFLOW.md` /
 `FIX_POLICY.md` rather than silent practice.*
