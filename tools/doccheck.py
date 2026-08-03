@@ -3,11 +3,15 @@
 
 v1 (prompt 1, 2026-08-03): BUGS.md row<->tag status-word agreement, a counts
 recount printed as a STATE-ready block, and a TEMPORARY sweep over both repos.
-Green on the CURRENT structure is the migration baseline; v2/v3 grow this file
-as the restructure chain proceeds.
+v2 (prompt 2, 2026-08-03): docs/BUGS.md is now 116 entry files under
+docs/agent/bugs/ plus a GENERATED INDEX.md, so the row<->tag check moves onto
+front matter, INDEX freshness is checked by regenerating and diffing, and
+`--verify-split` re-runs the migration's byte-accounting against the pre-split
+blob in git.
 
     python tools/doccheck.py                 # check; exit 1 on any red
     python tools/doccheck.py --emit-counts   # + the pasteable counts block
+    python tools/doccheck.py --verify-split [REV]   # REV defaults to HEAD~1
 
 Every parsing rule below that carries a "trap" note was learned the hard way by
 the 2026-08-03 QA session that hand-ran these checks. Do not "simplify" them.
@@ -21,7 +25,8 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
 
-BUGS = os.path.join(REPO, "docs", "BUGS.md")
+BUGS = os.path.join(REPO, "docs", "BUGS.md")          # a stub since 2026-08-03
+BUGS_DIR = os.path.join(REPO, "docs", "agent", "bugs")
 CODE = os.path.join(REPO, "Code")
 
 # Index rows. Trap (a): this pattern also matches a rate table inside the F97
@@ -68,74 +73,158 @@ def status_word(cell):
     return None
 
 
-def parse_bugs():
-    """-> (rows {id: status_cell}, tags {id: tag_text}) from docs/BUGS.md."""
-    rows, tags = {}, {}
-    for line in read(BUGS):
-        m = ROW_RE.match(line)
-        if m and m.group(1) not in rows:  # first occurrence wins (trap a)
-            cells = line.rstrip().split("|")
-            if cells and cells[-1].strip() == "":
-                cells = cells[:-1]
-            # cells[0] is the empty pre-pipe field; 1=ID 2=title 3=sev 4=conf
-            rows[m.group(1)] = "|".join(cells[5:]).strip() if len(cells) > 5 else ""
-        h = HEAD_RE.match(line)
-        if h:
-            t = TAG_RE.search(line)
-            if t:
-                tags[h.group(1)] = t.group(1)
-    return rows, tags
-
-
 def mentions(text, word):
     """Does `word` occur in `text` on a left word boundary?"""
     return re.search(r"(?<![A-Za-z])" + re.escape(word), text, re.IGNORECASE) is not None
 
 
-def check_status_agreement(rows, tags, out):
-    """Index row must not contradict the heading tag's status word.
+def splitter():
+    """The migration module, imported lazily so it can import this one."""
+    import split_bugs
+    return split_bugs
 
-    The TAG is authoritative — spec §2 derives front-matter `status:` from its
-    first status word, and the index row is deleted by the migration. So:
 
-      * the tag MUST lead with a vocabulary word (else the derivation has
-        nothing to read) — red;
-      * if the row also leads with one, the two must be equal — red on drift;
-      * a row that leads with a narrative announcement instead ("⭐ MECHANISM
-        FOUND...") only has to *carry* the tag's word somewhere — reported as
-        WARN so it is visible, never silently discounted.
+def all_rows(model):
+    """-> every index row the split preserved: 116 entry-owning rows, the rows
+    adopted into grouped front matter, and the orphan rows in _notes.md."""
+    rows = []
+    for entry in model["entries"]:
+        rows.append(entry)
+        rows.extend(entry.get("members", []))
+    rows.extend(model["by_id"][i] for i in model["orphans"])
+    return rows
+
+
+def check_entries(model, out):
+    """Front-matter validation + the row<->tag check on its new surface.
+
+    v1 compared a hand-written index row against the heading tag. The row is
+    gone as a hand-written artifact — it is now `row_status:`, copied verbatim
+    and never re-typed — so the same drift is checked between the DERIVED
+    `status:` and the tag the entry body still carries. The tag stays
+    authoritative; a `row_status` that opens with prose instead of a status word
+    is a warn, exactly as before, and is never silently discounted.
     """
-    mismatches, untagged, warns = [], [], []
-    compared = 0
-    for bug_id, tag in sorted(tags.items()):
-        if bug_id not in rows:
-            continue
-        row, tag_word = rows[bug_id], status_word(tag)
-        if tag_word is None:
-            untagged.append((bug_id, tag[:60]))
-            continue
-        compared += 1
-        row_word = status_word(row)
-        if row_word is not None:
-            if row_word != tag_word:
-                mismatches.append((bug_id, row_word, tag_word))
-        elif mentions(row, tag_word):
-            warns.append((bug_id, tag_word, row[:60]))
-        else:
-            mismatches.append((bug_id, "(absent)", tag_word))
+    sb = splitter()
+    red, warns = [], []
+    seqs, rows = {}, {}
+    tagged = 0
 
-    out.append("STATUS AGREEMENT: %d IDs compared (index row vs heading tag)"
-               % compared)
-    for bug_id, row_word, tag_word in mismatches:
-        out.append("  RED  %s: index row says '%s', heading tag says '%s'"
-                   % (bug_id, row_word, tag_word))
-    for bug_id, tag in untagged:
-        out.append("  RED  %s: heading tag has no vocabulary status word: %r"
-                   % (bug_id, tag))
-    for bug_id, tag_word, row in warns:
-        out.append("  warn %s: row leads with prose, not a status word; "
-                   "agrees on '%s' further in — %r" % (bug_id, tag_word, row))
-    return not (mismatches or untagged)
+    for entry in model["entries"]:
+        name = entry["file"]
+        for field in sb.FRONT_FIELDS:
+            if field not in entry:
+                red.append("%s: front matter is missing %r" % (name, field))
+        if red and red[-1].startswith(name):
+            continue
+        if entry["status"] not in STATUS_WORDS:
+            red.append("%s: status %r is not in the vocabulary"
+                       % (name, entry["status"]))
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", str(entry["updated"])):
+            red.append("%s: updated %r is not a date" % (name, entry["updated"]))
+        if not isinstance(entry["copies"], list):
+            red.append("%s: copies must be a list" % name)
+        if entry["kind"] == "grouped":
+            if name != "%s-%s" % (entry["contains"][0], entry["contains"][-1]):
+                red.append("%s: file name does not state the range it holds" % name)
+            member_ids = [m["id"] for m in entry["members"]]
+            if sorted(entry["contains"]) != sorted([entry["id"]] + member_ids):
+                red.append("%s: contains: disagrees with members: + id" % name)
+        elif name != entry["id"]:
+            red.append("%s: file name does not match id %r" % (name, entry["id"]))
+
+        # the body must still open with the heading the split preserved
+        body = entry["body"]
+        head = HEAD_RE.match(body[0]) if body else None
+        if not head or head.group(1) != entry["id"]:
+            red.append("%s: body does not open with its `### %s` heading"
+                       % (name, entry["id"]))
+        else:
+            tag = TAG_RE.search(body[0])
+            if tag:
+                tagged += 1
+                word = status_word(tag.group(1))
+                if word is None:
+                    red.append("%s: heading tag has no vocabulary status word: %r"
+                               % (name, tag.group(1)[:60]))
+                elif word != entry["status"]:
+                    red.append("%s: front matter says %r, heading tag says %r"
+                               % (name, entry["status"], word))
+                elif entry["status_source"] != "tag":
+                    red.append("%s: status_source is %r but the heading is tagged"
+                               % (name, entry["status_source"]))
+            elif entry["status_source"] == "tag":
+                red.append("%s: status_source says 'tag' but the heading has none"
+                           % name)
+
+        seqs.setdefault(entry["seq"], []).append(name)
+
+    sources = {}
+    for row in all_rows(model):
+        rows.setdefault(row["row"], []).append(row["id"])
+        sources[row["status_source"]] = sources.get(row["status_source"], 0) + 1
+        word = status_word(row["row_status"])
+        if word is not None and word != row["status"]:
+            # NOT red, and the difference from v1 is deliberate. v1 compared two
+            # LIVE hand-written surfaces, so drift between them was a defect.
+            # `row_status` is now a frozen copy of the row the migration
+            # deleted: a status that has since advanced (fixed -> tested) MUST
+            # be free to leave it behind. Reported so it is never invisible.
+            warns.append("%s: the frozen index-row cell says %r, entry says %r "
+                         "(from %r)"
+                         % (row["id"], word, row["status"], row["status_source"]))
+
+    dup_seq = {k: v for k, v in seqs.items() if len(v) > 1}
+    if dup_seq:
+        red.append("duplicate seq: %r" % dup_seq)
+    if sorted(seqs) != list(range(1, len(model["entries"]) + 1)):
+        red.append("seq is not 1..%d contiguous" % len(model["entries"]))
+    dup_row = {k: v for k, v in rows.items() if len(v) > 1}
+    if dup_row:
+        red.append("duplicate index row numbers: %r" % dup_row)
+    if sorted(rows) != list(range(1, len(rows) + 1)):
+        red.append("index row numbers are not 1..%d contiguous" % len(rows))
+
+    out.append("ENTRIES: %d files (%d grouped), %d preserved index rows, "
+               "%d heading tags compared"
+               % (len(model["entries"]),
+                  len([e for e in model["entries"] if e["kind"] == "grouped"]),
+                  len(rows), tagged))
+    out.append("  status derived from: %s"
+               % ", ".join("%s x%d" % (k, v) for k, v in sorted(sources.items())))
+    for line in red:
+        out.append("  RED  " + line)
+    for line in warns:
+        out.append("  warn " + line)
+    return not red
+
+
+def check_index(model, out):
+    """INDEX.md is generated: regenerate it and require an empty diff."""
+    sb = splitter()
+    path = os.path.join(BUGS_DIR, "INDEX.md")
+    if not os.path.exists(path):
+        out.append("INDEX: RED  %s is missing" % path)
+        return False
+    with open(path, encoding="utf-8") as fh:
+        have = fh.read().replace("\r\n", "\n").split("\n")
+    if have and have[-1] == "":
+        have.pop()
+    want = sb.render_index(model)
+    if have == want:
+        out.append("INDEX: fresh — regenerating from front matter reproduces "
+                   "%s.md byte for byte (%d rows)"
+                   % (os.path.basename(path)[:-3], len(sb.index_rows(model))))
+        return True
+    out.append("INDEX: RED  regenerated INDEX.md differs from the file "
+               "(%d lines on disk, %d regenerated)" % (len(have), len(want)))
+    for n, (a, b) in enumerate(zip(have, want), 1):
+        if a != b:
+            out.append("  RED  first difference at line %d:" % n)
+            out.append("    on disk:     %r" % a[:100])
+            out.append("    regenerated: %r" % b[:100])
+            break
+    return False
 
 
 def lua_files(directory):
@@ -163,9 +252,10 @@ def occurrences(directory, names, needle):
     return total
 
 
-def recount(rows, out):
+def recount(model, out):
     """The counts block. Reported, never asserted — adding a module is legal."""
     counts = {}
+    rows = [r["id"] for r in all_rows(model)]
     names = lua_files(CODE) or []
     counts["files"] = len(names)
     registered = files_containing(CODE, names, "SMRFixPack.Register(")
@@ -194,9 +284,10 @@ def recount(rows, out):
                % (counts["files"], counts["modules"], counts["default_active"],
                   counts["optional"],
                   "?" if counts["probes"] is None else counts["probes"]))
-    out.append("        index rows: %d F + %d D + %d C = %d"
+    out.append("        index rows: %d F + %d D + %d C = %d (in %d entry files)"
                % (counts["rows_F"], counts["rows_D"], counts["rows_C"],
-                  counts["rows_F"] + counts["rows_D"] + counts["rows_C"]))
+                  counts["rows_F"] + counts["rows_D"] + counts["rows_C"],
+                  len(model["entries"])))
     return counts
 
 
@@ -239,6 +330,9 @@ def main():
     ap = argparse.ArgumentParser(description="SMR-BugFixPack doc structure check")
     ap.add_argument("--emit-counts", action="store_true",
                     help="also print the STATE-ready counts block")
+    ap.add_argument("--verify-split", nargs="?", const="HEAD~1", metavar="REV",
+                    help="re-run the BUGS split accounting against REV's "
+                         "docs/BUGS.md and the files on disk (default HEAD~1)")
     args = ap.parse_args()
 
     # The docs are full of non-cp1252 markup; a Windows console (or a git hook
@@ -249,10 +343,24 @@ def main():
         pass
 
     out = []
-    rows, tags = parse_bugs()
-    ok = check_status_agreement(rows, tags, out)
-    counts = recount(rows, out)
+    sb = splitter()
+    try:
+        model = sb.load_from_dir()
+        ok = check_entries(model, out)
+        ok = check_index(model, out) and ok
+    except sb.SplitError as exc:
+        print("doccheck: RED — %s" % exc)
+        return 1
+    counts = recount(model, out)
     ok = temporary_sweep(out) and ok
+
+    if args.verify_split:
+        try:
+            out.append("VERIFY-SPLIT against %s:%s" % (args.verify_split, "docs/BUGS.md"))
+            sb.verify_split(args.verify_split, out)
+        except sb.SplitError as exc:
+            out.append("  RED  %s" % exc)
+            ok = False
 
     print("\n".join(out))
     print("doccheck: %s" % ("GREEN" if ok else "RED"))

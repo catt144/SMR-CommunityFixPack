@@ -13,7 +13,7 @@ messages via `-F <file>`).
 | # | file | model | drains |
 |---|------|-------|--------|
 | ~~1~~ | ~~`1_tools_baseline_opus.md`~~ | ~~Opus~~ | ~~doccheck v1 green on CURRENT structure + pre-commit hook + CLAUDE.md + checklist decisions section~~ — **DONE 2026-08-03**; hook armed, baseline green |
-| 2 | `2_bugs_split_opus.md` | Opus | BUGS → agent/bugs/ per-entry + generated INDEX + stub, byte-verified |
+| ~~2~~ | ~~`2_bugs_split_opus.md`~~ | ~~Opus~~ | ~~BUGS → agent/bugs/ per-entry + generated INDEX + stub, byte-verified~~ — **DONE 2026-08-03**; 116 entry files, 151 INDEX rows, accounting balanced to the line, doccheck v2 green |
 | 3 | `3_folders_state_opus.md` | Opus | agent/ tree, STATE split, facts split, moves, stubs, living-doc sweep, WORKFLOW block |
 | 4 | `4_backward_qa_opus.md` | Opus | conservation QA, folder-empty gate |
 
