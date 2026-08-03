@@ -293,6 +293,18 @@ end
 -- Hotel counts as the ordinary housing it has become. Nothing here caches the
 -- field, so flipping that button mid-game is picked up on the next read.
 --
+-- ⛔ AND THE CONSEQUENCE OF THAT IS DELIBERATELY UNGUARDED — do not "fix" it.
+-- An open Hotel in a flagged dome quietly cancels this policy: an arriving
+-- jobseeker gets a ROOM there, so they are no longer homeless, so this module
+-- has no subject to move. They stay, they use the services, and they occupy a
+-- room meant for a tourist. That is a real outcome, and it is left to the
+-- player, because the Tourists-Only button is THEIR control and the same
+-- principle governs this module's own toggle — *"no automated system can fully
+-- tell"* (owner, 2026-08-02). The answer is explanation, not interception:
+-- `MOD_DESCRIPTION.md` carries it as `[FAQ]` usage guidance under this module.
+-- A future session that adds a guard here is overriding a player decision this
+-- module exists to respect.
+--
 -- STRUCTURAL: a switched-off Nursery still counts, because the player built one
 -- — this asks what the dome IS, not what it is doing this minute.
 --
