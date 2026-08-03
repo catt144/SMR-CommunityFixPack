@@ -938,3 +938,52 @@ uninstall half rather than the module toggle, on the "OFF is three different
 things" doctrine. If job 0's re-verification of that doctrine changes the answer,
 **PT-62's P12 is one of the predictions that would need restating** — it is
 written on the assumption that a toggled-off module still has live hooks.
+
+### Added by chain prompt 10, second sitting (2026-08-02) — a NEW job-7 axis: test scaffolding that later became load-bearing behaviour
+
+**What happened.** The first suite run after the D12 build returned
+`76 PASS, 1 FAIL, 10 SKIP` (log `Mars.exe-20260802-20.28.19`). The FAIL was
+`DustDevilSpawnGate` — **the very item that had been routed forward three times
+looking for a suite run** — with the verdict *"the installed wrapper did not gate
+a descriptor on a passing roll"*.
+
+**It was a PROBE defect, not a fix defect, and the mechanism is worth naming.**
+The probe's end-to-end section set `forbidden = true` on its test descriptor
+purely as **scaffolding**: `OverrideDisasterDescriptor` returns a forbidden
+descriptor unchanged (`TerraformingDisasters.lua:55-57`), which was the trick
+that let the probe run the REAL captured original instead of a stub. Chain 8c
+then added a `forbidden` early-return to `gate_descriptor` itself as **real
+behaviour**. From that moment the scaffolding lever and the behaviour under test
+were the same flag, and the fix's correct answer (hand it back untouched) was
+read as a failure.
+
+⭐ **The axis this adds to the corpus.** Every instance so far is a *document*
+drifting from a *truth*, or a *route* being wrong under correct citations. This
+one is neither: **two artefacts that were each correct in isolation, written
+eight hours apart, whose meanings collided because they used the same field for
+different purposes.** Nothing drifted, nothing was stale, and no citation was
+wrong. **Ask job 7: what, if anything, the project can do about a test whose
+setup depends on a game flag that a later fix may give meaning to.** The tell was
+available — 8c's own comment said the guard was *"covered by the probe's
+forbidden-passthrough assertion"*, which was true of a *different* assertion in
+the same probe, and nobody checked whether any other assertion also used the
+flag.
+
+⚠️ **And the cost is the real finding: this cannot be caught without running the
+suite.** 8c called the change *"behaviour-neutral by construction but not by
+measurement"* and routed the measurement forward. It was routed three times
+(prompt 9 built nothing, prompt 10's own leg is unrun) and caught only when a
+suite finally ran for an unrelated reason. **A change whose own author flags it
+as unmeasured should not be routable more than once** — worth a recommendation.
+
+**2 · A SECOND, PLAINER INSTANCE FROM THE SAME RUN — a two-file registration
+that only one file knew about.** `Opt_NoHomeless.lua` was added to `items.lua`
+but **not** to `metadata.lua`'s `'code'` list, so the module never loaded and its
+probe reported `SKIP — optional module not present` rather than anything
+alarming. The pack's Lua manifest lives in **two** places that must agree, one of
+them is what the game actually reads, and **nothing checks that they do**.
+⚠️ Note the failure *presented as a benign SKIP*, which is the same shape as the
+opt-in SKIPs around it — there is no reading of that line that says "a file you
+shipped is not loaded". **Ask job 7 for a cheap invariant** (a probe that
+compares the `Code/` directory against the loaded registry would have caught it
+in the same run that missed it).

@@ -1515,19 +1515,14 @@ runs off the colonist heavy update and the destination search is best-effort;
 anything from "over a few hours" to "over a sol" is unremarkable. **Do not read
 the rate as evidence either way.**
 
-### One extra reading, owed from chain prompt 9 and unrelated to D12
+### ~~One extra reading, owed from chain prompt 9~~ ✅ **RUN 2026-08-02 — `userdata`**
 
-⭐ **The F98 localisation control — one console line, thirty seconds, please take
-it.** F98 (re-used translation ids are discarded at `T()` construction, so our
-shipped `Fix_TechDescriptionBuilding` never worked) currently rests on **source
-alone**:
-
-```
-*r ModLog(type(T(8821, "ZZZ")))
-```
-
-`userdata` **confirms** the reading. `table` **refutes** it — and F25 would then
-need restoring in both places. Record whichever appears, verbatim.
+⭐ **The F98 localisation control is DISCHARGED.** `*r ModLog(type(T(8821,
+"ZZZ")))` printed **`userdata`** (log `Mars.exe-20260802-20.28.19`), confirming
+that a re-used translation id is discarded at `T()` construction and that our
+shipped `Fix_TechDescriptionBuilding` never worked in retail. `table` would have
+refuted it and forced F25's restoration in both places. **F98 no longer rests on
+source alone; do not re-run this.**
 
 ### Steps
 
@@ -1536,7 +1531,7 @@ need restoring in both places. Record whichever appears, verbatim.
 2. `*r SMRTest.RunAll()` → **P2, P2b, P2c**. `SMRFixPack.ListFixes()` → **P1**.
    ⚠️ Use the `*r` form — a bare `SMRTest.RunAll()` runs with no thread context
    and some probes skip.
-3. Take the loc reading above while you are in the console.
+3. ~~Take the loc reading above~~ — already discharged 2026-08-02, skip.
 4. **Vanilla half first.** Leave the flag unset, run ~2 sols → **P3**. Record the
    homeless count at the start and the end.
 5. Select the specialist dome, **set the flag from the infopanel row** (this also
