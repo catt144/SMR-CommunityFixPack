@@ -1404,7 +1404,97 @@ approximates a gate today (50% × 1..2 truncates to 0-or-1), so the shipped rate
 *may* have been tuned around the truncation. **That is chain prompt 12's job 8,
 and reversal is a legitimate outcome no matter how cleanly this leg passes.**
 
-## PT-62 — D12 "no homeless residents" policy · covers **D12 `Opt_NoHomeless`** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 10
+## PT-62 — PARTLY RUN 2026-08-02 (attended). ⚠️ NOT PASSED — results and what is still owed
+
+**Log `Mars.exe-20260802-22.28.07` (suite) and the sitting either side of it.
+Fixture: the owner's live campaign, two flagged domes — `Sacagawea #2`
+(retirement, DomeMega) and the nursery DomeMedium.**
+
+### ⭐ The core result, and it is the one the module exists for
+
+Same colonist, same moment, module toggled:
+
+```
+vanilla says   false nil
+with D12       DomeBasic shuttle
+```
+
+Vanilla had **no** answer — the tie — and D12 supplied a reachable dome with
+housing the colonist can use. `DomeBasic` reads `free 0`, which is the design
+working as specified: **suitability, not free space**, or the module would be
+inert in its own origin case.
+
+⚠️ The tie had to be RESTORED first, and that is disclosed fixture
+construction, not a found state. The save had drifted since 2026-07-30: two
+domes offered free work, so `better_work` was true and vanilla was already
+willing to move them (`vanilla says GeoscapeDome shuttle`). Quarantining
+`GeoscapeDome` and one `DomeMedium` returned the reading to `false nil`. **Both
+before/after readings are the evidence that the quarantines restored the tie
+rather than manufactured the result.**
+
+### What PASSED
+
+| # | result |
+|---|---|
+| **P2 / P2b / P2c** | ✅ `78 PASS, 0 FAIL, 9 SKIP, 0 ERROR`; `DustDevilSpawnGate` PASSes (the 8c debt, discharged); the probe's own tie-control holds |
+| **P5** | ✅ colonists go outside **only to board a train or shuttle** — the shipped transit path. Nobody stranded, no deaths |
+| **P8b** | ✅ the row tracked correctly through a population surge: `28 moving out` against `43 homeless`, 15 exempt — the same proportion as before the surge |
+| **P11** | ✅ **zero `[LUA ERROR]`** across the whole sitting, under an active drain and an inflow. The log carries nothing but the pack, the suite and the operator's own diagnostics |
+| ⭐ exemption | ✅ observed live and unprompted: a dome with **17 homeless** showed **13 movable**, and the sample held back Seniors, the employed, and the transiently unable |
+
+### ⛔ What did NOT establish, and why
+
+**P4 and P6 are NOT established.** The drain was fighting an inflow the whole
+time — `Sacagawea #2` went 20 → 43 homeless while flagged and draining, with
+colonists arriving by train and walking straight back in. The numbers from this
+sitting mean nothing for those two predictions and **must not be recorded as a
+result either way.**
+
+### ⭐⭐ THE FINDING: the policy pushed but never DECLINED, and the pair looped
+
+Measured, not inferred — **6 colonists were en route INTO flagged domes** while
+those domes were draining. The mechanism:
+
+1. D12 pushes an unemployed colonist out of a flagged dome;
+2. the dome drops below `IsOverpopulated`, so its free cohort slots start
+   scoring ~97 again in `Community:GetScoreFor` (`Community.lua:376-391`);
+3. vanilla offers **the same dome** straight back to the same colonist;
+4. repeat — burning shuttle capacity and never converging.
+
+The ping-pong guard only stopped **D12** choosing a flagged dome. It could not
+stop **vanilla's own eval** choosing one.
+
+### ⚠️ THREE CHANGES BUILT IN RESPONSE, ALL UNRUN
+
+1. **The symmetric half** — a flagged dome now refuses to RECEIVE the class it
+   pushes out (`FindEmigrationDome`). ⚠️ This is the **only** place the module
+   overrides a positive shipped answer.
+2. **The second entry path** — `ChooseDome` (rocket/lander arrivals, re-homing)
+   was never guarded, so a landing could refill a draining dome. Now filtered,
+   **trait-based**, because that seam has no workplace to read.
+3. **The A/B lever was DEAD.** `SMRFixPack_Disabled.NoHomeless = true` was
+   silently ignored — the module read only `IsActive`. ⚠️ Same shape as PT-61's
+   `rawget` trap: *the failure would not have looked like a broken command, it
+   would have looked like an ANSWER.* Caught because the owner asked whether the
+   line was correct, before the leg leaned on it.
+
+### What a re-run must do
+
+⛔ **Restart first** — all three changes need it. Then:
+
+1. `*r SMRTest.RunAll()` — expect `78 PASS, 0 FAIL, 9 SKIP, 0 ERROR`.
+2. **The loop check, which is now the leading indicator:**
+   `*r local bad = 0 for _, city in ipairs(Cities) do for _, c in ipairs(city.labels.Colonist or empty_table) do local d = c.emigration_dome if d and d.SMRFixPack_no_homeless then bad = bad + 1 end end end ConsolePrint(print_format("heading INTO a flagged dome", bad))`
+   — must reach **0 and stay there, through a rocket landing**. The emigration
+   veto alone would not survive one; that is what tests the `ChooseDome` half.
+3. Only then are **P4 and P6** meaningful. Run them with D03's **"Closed to new
+   residents"** on as well, so arrivals cannot refill the dome from a landing
+   — that composition is HARD CONSTRAINT 1 in use and was never in the original
+   plan.
+
+---
+
+## PT-62 (as written before the run) — D12 "no homeless residents" policy · covers **D12 `Opt_NoHomeless`** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 10
 
 **Written 2026-08-02 with the build, predictions BEFORE any run. The module is
 UNRUN and claims nothing until this leg does.**

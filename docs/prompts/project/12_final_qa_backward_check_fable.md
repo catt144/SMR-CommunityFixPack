@@ -1020,3 +1020,69 @@ longer independent when both are enabled. **Nothing in the project says who is
 responsible for that**, and the answer that fell out here — every wrapper must be
 inert for a foreign object before it touches one — is worth stating as a rule
 rather than rediscovering per module.
+
+### ⭐ ADDED BY CHAIN PROMPT 10 (2026-08-02, LATE) — JOB 9: ADJUDICATE D12, WHICH WAS REDESIGNED FIVE TIMES IN ONE SITTING
+
+**Owner instruction, verbatim (2026-08-02):** *"I think the best option for now
+is to write it all up, and let the Fable QA session look at our findings before
+we make any hard decisions. That is the purpose of the task chain."*
+
+**This is a REVIEW job, not a build job.** D12 (`Opt_NoHomeless`) is committed
+and pushed. It is **UNRUN** past a partial leg, and its rule changed repeatedly
+under live owner review in a single session — which is exactly the condition the
+project distrusts. Nothing below is asking you to build; it is asking you to
+decide whether what was built should stand.
+
+**Read first:** `BUGS.md` D12 (the pre-build re-derivation and §4/§4b/§4c),
+`PLAYTEST_CHECKLIST.md` **PT-62** (the partial-run results at the top), and the
+module header of `Code/Opt_NoHomeless.lua`, which carries the reasoning inline.
+
+#### What is genuinely established (do not re-litigate)
+
+* ⭐ **The repair works at the seam.** Same colonist, same moment: vanilla
+  `false nil`, D12 `DomeBasic shuttle`. The tie is broken.
+* **P5, P8b, P11 and the suite all passed** (log `Mars.exe-20260802-22.28.07`).
+* **The exemption was observed live** — 17 homeless, 13 movable, with Seniors,
+  the employed and the transiently-unable held back.
+* **C40 was filed** from a routed player hypothesis that turned out correct.
+
+#### ⛔ The five decisions to adjudicate, each of which changed the design
+
+1. **The subject test is vanilla's `need_work`.** The approved entry offered two
+   readings (ALL homeless / only-unhousable); **both were rejected** and a third
+   adopted, on the owner's account of how the feature is used. Is a spec's own
+   open question legitimately answerable with an option it did not list?
+2. **The dome precondition** (a Nursery or Retirement Home must be built).
+   Owner-requested; it also made the row's title honest. But it is a form of the
+   automation the toggle exists to avoid — is the line in the right place?
+3. ⚠️ **The veto overrides a POSITIVE shipped answer.** The only place the
+   module does. Justified as removing a round trip rather than a choice, and
+   narrowed so it never touches cohort members — but it is a real departure from
+   "only ever ADD a destination", which was the property that made the module
+   order-independent with D07. **Check that claim independently.**
+4. ⚠️ **The `ChooseDome` filter is trait-based**, so it cannot distinguish an
+   employed arrival from a jobseeker and may steer an employed colonist away
+   from a dome they would have been fine in. Accepted as the conservative
+   direction, bounded by the `safety_dome` passthrough. Is that acceptable?
+5. **Neither new guard has a probe case for the `ChooseDome` half** — case 13
+   covers the emigration veto only. That is a known gap, stated rather than
+   hidden.
+
+#### ⚠️ One pack-wide gap found and NOT fixed
+
+`SMRFixPack_Disabled.<id>` is read by `Fix_DustDevilSpawnGate` and by
+`SMRFixPack.WhenActive`, but **`Opt_ResidencyControl` and `Opt_CohortHousing`
+read only `IsActive`** — so the console veto is dead for D03 and D07. D12 was
+repaired; those two were left alone deliberately, because neither has a PT
+documenting that lever and widening this prompt further was the wrong call.
+**Nothing has been measured wrong as a result** — but any future leg that uses
+`SMRFixPack_Disabled` on D03 or D07 would silently run with the module live.
+
+#### ⭐ And one job-7 axis this session produced four instances of
+
+Two artefacts, each correct alone, colliding on a shared field or a shared
+ordering: the `forbidden` flag (probe scaffolding vs 8c's real guard); the open
+Hotel vs the policy; `TitleRight` set after an `Init` that had already decided
+alignment from its absence; and the push/accept asymmetry that produced the
+loop. **None was findable by reading either side alone.** Four in one day is
+enough for job 7 to name it rather than treat them as anecdotes.
