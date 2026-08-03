@@ -1436,18 +1436,27 @@ occurs when `better_home` is false **everywhere**.
 
 ### ⛔ FOUR SETUP TRAPS. The first one will read exactly like the fix doing nothing.
 
-**Trap 1 — the source dome must have NO suitable housing for the stranded.**
-This is the *narrow reading* the build deliberately chose (D12 entry, §4 of the
-pre-build re-derivation). A single ordinary Smart Apartment in that dome makes
-every colonist in it "housable in principle", and **the module will correctly do
-nothing**. If the test dome has any non-exclusive residence, either remove it or
-accept that the leg is measuring nothing. Confirm with the dome selected:
+**Trap 1 — the subjects must be UNEMPLOYED, and workforce-age.** ⚠️ **RULE
+CHANGED 2026-08-02, after the owner described the real setup** — the module no
+longer asks whether the dome could ever house them. It moves a homeless colonist
+iff vanilla's own `need_work` is true: `CanWork()` and no workplace and no
+pending player-forced workplace. So the dome's building mix is irrelevant, and
+these stay put no matter what:
+
+* anyone **employed** there — the staff its ordinary housing exists for;
+* **Seniors and Children** — `CanWork()` is false for them, and a homeless one
+  is the build-more-housing signal, not a defect to clear;
+* anyone sick, StressedOut, Earthsick or otherwise unable to work.
+
+Confirm the population before starting, with the dome selected:
 
 ```
-*r local d = SelectedObj local n = 0 for _, r in ipairs(d.labels.Residence or empty_table) do if not r.exclusive_trait then n = n + 1 end end ConsolePrint(print_format(d.class, #d.labels.Residence, n, #d.labels.Homeless, d.overpopulated))
+*r local d = SelectedObj local n = 0 for _, c in ipairs(d.labels.Homeless or empty_table) do if c:CanWork() and not IsValid(c.workplace) and not c.user_forced_workplace then n = n + 1 end end ConsolePrint(print_format(d.class, "homeless", #(d.labels.Homeless or empty_table), "movable", n))
 ```
 
-⛔ The **third** number must be `0`. If it is not, Trap 1 is live.
+⛔ **`movable` must be > 0** or the leg measures nothing. **The row itself also
+shows this number** — `off (N would move)` — so it can be read without the
+console, and that is deliberate.
 
 **Trap 2 — the DESTINATION must have housing of a kind they can use.** The module
 will not send a grown Youth from one Nursery-only dome to another. If every dome
@@ -1503,7 +1512,8 @@ none), **87 probes** (86 + `NoHomeless`).
 | **P5** | ⛔ **NOBODY IS EVER OUTSIDE.** Total colony population is unchanged across the drain, every colonist that left the dome is inside another dome, and there are **zero** deaths attributable to the move | this is the one failure mode the design was built to make structurally impossible (F53 territory). A miss here stops the leg immediately |
 | **P6** | the source dome's **`overpopulated` clears**, and the drain is what cleared it — the before/after homeless counts bracket `g_Consts.OverpopulatedDome` (**measured at 20**, `>=`) | if it cleared without the count crossing 20, natural attrition did it and the leg proves nothing about D12 |
 | **P7** | with `overpopulated` cleared, **D07 resumes delivering Children into that dome unaided** (D07 on, its `consider()` no longer skipping it) | ⚠️ this is the entry's **design rationale**, not a claim the build makes. A miss is a finding about the unwind, not about the push — and neither outcome flips any status |
-| **P8** | **NARROW-READING CONTROL:** flag ON on a dome that **does** have ordinary housing but no free beds → its homeless **do not move** | the wrapper is using the broad reading, which would make it fight the shortage machinery and expose it to the C40 churn |
+| **P8** | ⭐ **SUBJECT CONTROLS, all on the flagged dome, all at once:** homeless **Seniors** stay · homeless **Children** stay · **employed** colonists stay · only the workforce-age **unemployed** move | the subject test is not `need_work`. A Senior or Child moving is the serious miss — it deletes the build-more-housing signal the owner named as the reason they must stay |
+| **P8b** | **the row reads its own consequence** before any click: title `Nursery / Retirement Dome` in both states, right-hand value `off (N would move)` → `N moving out`, and the count matches the console reading from Trap 1. ⛔ The OFF state must **not** render red | a mismatch between the row's number and the behaviour means the UI and the wrapper disagree about who is a subject — fix before trusting any other reading |
 | **P9** | **NO-DESTINATION CONTROL:** flag ON with every other dome either quarantined, flagged, or lacking suitable housing → **nobody moves and nobody is expelled**; the colonists simply stay | best-effort is not being honoured; see P5 |
 | **P10** | **PING-PONG CONTROL:** flag ON on two domes at once → no colonist is traded between them repeatedly | the destination filter is not excluding flagged communities |
 | **P11** | **zero `[LUA ERROR]`** naming `Opt_NoHomeless` or `NoHomeless`, across the whole sitting and both halves | — |

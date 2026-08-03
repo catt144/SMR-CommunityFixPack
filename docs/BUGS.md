@@ -9684,26 +9684,78 @@ colony-wide. Filed as **`C40`** with the five-link route.
   house them**. `MOD_DESCRIPTION.md` wording is bound by this.
 * It **DOES** decide the open question, below.
 
-**4 · THE OPEN QUESTION IS DECIDED: the NARROW reading.** The entry asked whether
-the push should apply to ALL homeless or only to colonists the dome can never
-house. **Narrow** — the module acts only when **no** residence in the colonist's
-own dome is `IsSuitable` for them (`Residence.lua:162-167`; suitability is
-exactly the `exclusive_trait` test, and `Dome:ChooseResidence` is dome-local at
-`Dome.lua:2967-2970`, so a dome-local test matches the shipped housing scope).
-Three reasons:
+**4 · THE OPEN QUESTION IS DECIDED, AND THE ANSWER IS NEITHER OPTION IT
+OFFERED.** The entry asked: ALL homeless, or only colonists the dome can never
+house? ⛔ Both are wrong, and it took the OWNER'S ACCOUNT OF HOW THE FEATURE IS
+USED to settle it (2026-08-02) — no amount of source reading would have.
 
-1. It is what the child-dome case actually needs — this entry's own note.
-2. It never competes with `ChooseResidence`/`CheckHomeForHomeless` for an
-   ordinary bed, so the module cannot fight the shipped shortage machinery.
-3. ⭐ **It is structurally immune to C40.** Under the broad reading, a colonist
-   evicted by a transient ministry-outage capacity dip reads as homeless, and
-   D12 would have shipped them out of their dome **permanently** over an outage
-   that ends by itself. Under the narrow reading they are untouched: ordinary
-   housing suitable for them exists in the dome, it is merely full for a moment.
+> *"This is a player control toggle specifically because no automated system can
+> fully tell. Generally when people get to the size they want a child / senior
+> dome, they set up 2 domes out of the way … one to either be a retirement dome
+> + services or nursery + services … It keeps the minimal amount of housing to
+> staff those services, because you expect your retirement dome and the nursery
+> to eventually be filled with non-workforce people. So you also need to keep
+> homeless out of both, because if either gets filled with homeless they cannot
+> do their job any more, because migration turns off."*
 
-⚠️ **The trap this avoided was invisible from the D12 plan.** It was found only
-because the routed hypothesis was checked before building, which is the whole
-argument for checking routed claims first.
+* ⛔ **NARROW fails outright.** "Minimal housing to staff the services" means the
+  dedicated dome HAS ordinary residences by design, so everyone in it is
+  housable-in-principle and the structural test never fires. It was built first,
+  and the owner's own colony disproved it in one reading: **nursery dome
+  `ordinary 0` → fires; retirement dome `ordinary 5` → never fires.** One of the
+  two domes the feature exists for was unprotected.
+* ⛔ **BROAD fails too, and for a reason source cannot show:** a homeless Senior
+  in a retirement dome is **information**, not a defect — *"it signals to them
+  that they need to build more retirement homes"*. Pushing them out deletes the
+  signal and hides the shortage.
+* ⛔ **And "push the non-workforce" is the trap inside BROAD**, caught by the
+  owner before it was written: **"outside the workforce" is a status Children
+  and Seniors carry BY DEFINITION** — the game prints `T(4364, "Outside the
+  workforce (Child)")` / `T(4365, "… (Senior)")` at `Colonist.lua:3146-3148` and
+  distinguishes it from `T(4366, "Unemployed")` three lines later. Targeting it
+  would sweep up the exact cohorts these domes hold.
+
+⭐ **THE RULE, IN VANILLA'S OWN PREDICATE:** a flagged dome pushes out a homeless
+colonist **iff `need_work` is true for them** —
+`can_work and not IsValid(workplace) and not user_forced_workplace`,
+`Colonist.lua:2623-2624`, computed by the very function this module wraps, two
+lines above the tie it breaks. `CanWork()` (`Colonist.lua:2114-2126`) is false
+for Children, for Seniors unless `g_SeniorsCanWork`, for Tourists, and for the
+Earthsick / StressedOut / UnableToWork / unfit. In the game's own words:
+**move the UNEMPLOYED; never the employed, never anyone outside the workforce.**
+
+That maps onto the described pattern exactly: the service staff are EMPLOYED and
+stay, so the dome keeps working; homeless Seniors and Children stay, so the
+build-more-housing signal survives; the graduates and leftovers — workforce-age,
+jobless, housed by nothing — are what is left, and they are the pile-up that
+drives the dome over `IsOverpopulated` and switches its migration off.
+
+⚠️ **Deliberately NOT duplicated:** relocating a homeless Senior or Child toward
+cohort housing elsewhere is **D07 `Opt_CohortHousing`'s** job and it already does
+it. The two divide cleanly — D07 moves the cohort toward its housing, D12 moves
+the workforce-age unemployed out of a dedicated dome.
+
+⚠️ **What it costs versus narrow:** narrow was immune to the C40 capacity churn.
+The employed exemption recovers most of that on a better key (churn-evicted
+service staff are employed, so exempt). Residual: an unemployed workforce-age
+resident of a flagged dome, transiently evicted, moved out for good over an
+outage that ends by itself. Recorded, not guarded — the guard needs per-colonist
+dwell state and the exposure does not justify it.
+
+**4b · THE ROW STATES ITS OWN CONSEQUENCE (owner, same day).** *"This could
+easily be mistaken for just hitting a button to get rid of homeless … not all
+players will look at a tooltip, they will just be confused why their retirement
+dome isn't working."* So the row does not rely on its rollover:
+**title `Nursery / Retirement Dome` in both states** (the recognition words lead,
+per *"if I am a new player working on a retirement home or a nursery that jumps
+out at me, jobseeker doesn't"*), with the state and the live count on the right
+via `TitleRight` — `2 moving out` / `off (2 would move)`. On a retirement dome
+full of homeless Seniors it reads **`0 would move`**, which answers that exact
+confusion in place, before the click. ⛔ **An icon-polarity defect was fixed in
+the same pass:** the first build rendered the OFF state — which is VANILLA — in
+red, so a player who had never touched the row saw an alarm and would press it to
+clear it. It now mirrors D03's proven pairing (permissive green/on, restriction
+yellow/limit).
 
 **5 · One deliberate departure from the spec text, recorded.** The Mechanism
 section says the destination is *"the nearest reachable community that does NOT

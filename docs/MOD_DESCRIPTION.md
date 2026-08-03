@@ -580,31 +580,30 @@ micromanage trait filters. With this module on:
   cohort to live, and the colonists follow. It stores nothing in your save —
   turning it off (or removing the pack) simply stops the moves.
 
-**No homeless residents** (`NoHomeless`). A specialist dome can trap the very
-colonists it has no room for. Build a Nursery-only dome, let the children grow
-up, and the Youths are stuck: no home in that dome will ever take them, and the
-game's own migration rules will not move them out either — a colonist only
-relocates for a *strictly better* dome, and when the colony has no spare beds
-anywhere, every dome scores the same. The tie never breaks, so nobody moves.
-They pile up, the dome reads as overpopulated, and it stops receiving new
-children as well.
+**Nursery / Retirement Dome policy** (`NoHomeless`). For the dome you dedicate
+to Children or Seniors. That dome keeps only enough ordinary housing to staff its
+services — so unhoused jobseekers drift in and pile up, and once it holds enough
+homeless the game counts it as overcrowded and **stops sending it anyone at
+all**, including the Children or Seniors it was built for. It quietly stops doing
+its job.
 
 - A new toggle row on every dome and asteroid habitat infopanel (Ctrl+click
-  applies it to all domes at once).
-- When it is on, colonists **this dome can never house** move to the nearest
-  dome that has housing of a kind they can actually use — walking, or by
-  passage, shuttle, train or elevator, using the game's own migration rules.
-- ⚠️ **Colonists who simply have no free bed are NOT moved.** This is
-  deliberate and it is the whole design: the module fixes colonists who are
-  *stranded*, not a housing shortage. If your dome has ordinary homes and they
-  are merely full, nothing here changes that — build more homes.
+  applies it to all domes at once). The row shows what it will do *before* you
+  click it — `off (3 would move)` becomes `3 moving out`.
+- When it is on, **unemployed** colonists with no home in that dome move to the
+  nearest dome with housing they can use — walking, or by passage, shuttle,
+  train or elevator, using the game's own migration rules.
+- **Colonists who work there stay.** They are who that dome's ordinary housing
+  exists for, and moving them out is how you break its services.
+- **Seniors and Children stay, even while homeless.** That is not an oversight:
+  a homeless Senior in your Retirement Dome is the game telling you to build
+  more Retirement Homes. Hiding that from you would not help you.
 - **Nobody is ever put outside.** If there is nowhere suitable to send someone,
-  they stay exactly where they are. A quarantined dome still releases no one,
-  and your manual dome assignments always win.
+  they simply stay. A quarantined dome still releases no one, and your manual
+  dome assignments always win.
 - Two domes with the policy on never trade the same colonist back and forth.
 - It composes with **Residency control**: a dome can refuse newcomers and move
-  out the people it cannot house at the same time, which is exactly what a
-  nursery dome wants.
+  out jobseekers at the same time, which is exactly what a nursery dome wants.
 - Off by default. It stores one true/false flag per dome in your save, which the
   unmodded game never reads — turning the module off, or removing the pack, is
   clean.

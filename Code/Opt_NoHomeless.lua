@@ -59,24 +59,108 @@
 -- outside with no dome dies (F53 territory); that failure mode is made
 -- structurally impossible rather than guarded against.
 --
--- THE OPEN QUESTION IN THE ENTRY IS DECIDED: the NARROW reading — push only a
--- colonist their own dome can NEVER house, i.e. no residence in it is
--- IsSuitable for them (Residence.lua:162-167 — suitability is exactly the
--- exclusive_trait test). A colonist who is merely unlucky, in a dome whose
--- ordinary housing is full, is left entirely to the shipped machinery. Three
--- reasons, and the third was found by this session's source check:
---   1. It is what the child-dome case actually needs (the entry's own note).
---   2. It never competes with ChooseResidence/CheckHomeForHomeless for an
---      ordinary bed, so the module cannot fight the shortage machinery.
---   3. ⭐ It is immune to the CAPACITY-CHURN mechanism (BUGS.md C40): a law
---      can shrink Residence.capacity colony-wide while a Ministry is down,
---      and Residence:OnModifiableValueChanged (Residence.lua:224-235) EVICTS
---      the tail residents when it does. Under the BROAD reading D12 would
---      have seen those transiently-evicted colonists as homeless and shipped
---      them out of their dome for good, converting a temporary outage into a
---      permanent migration. Under the narrow reading they are untouched —
---      ordinary housing that is suitable for them exists in the dome, it is
---      merely full for a moment.
+-- THE OPEN QUESTION IN THE ENTRY IS DECIDED, AND THE ANSWER IS NEITHER OF THE
+-- TWO IT OFFERED. The entry asked: ALL homeless, or only colonists the dome can
+-- never house (no residence IsSuitable for them)? ⛔ Both are wrong, and the
+-- owner's account of how the feature is actually USED is what settles it
+-- (2026-08-02):
+--
+--   "This is a player control toggle specifically because no automated system
+--   can fully tell. Generally when people get to the size they want a child /
+--   senior dome, they set up 2 domes out of the way of their resources and
+--   major production domes … one to either be a retirement dome + services or
+--   nursery + services … It keeps the minimal amount of housing to staff those
+--   services, because you expect your retirement dome and the nursery to
+--   eventually be filled with non-workforce people. So you also need to keep
+--   homeless out of both, because if either gets filled with homeless they
+--   cannot do their job any more, because migration turns off."
+--
+-- ⛔ The NARROW reading fails that outright. "Minimal housing to staff the
+-- services" means the dedicated dome HAS ordinary residences by design, so
+-- every colonist in it is housable-in-principle and the narrow test never
+-- fires. It was chosen off the entry's own line that narrow "is what the
+-- child-dome case actually needs" — true of a nursery dome with zero ordinary
+-- housing, and false of the retirement+services half of the same pattern. The
+-- owner's own colony had one of each, and narrow covered exactly one of them.
+--
+-- ⛔ The BROAD reading fails too, for a reason no source read would have found:
+-- **a homeless Senior in a retirement dome is INFORMATION, not a defect.** It
+-- tells the player to build more Retirement Homes. Pushing them out deletes the
+-- signal and hides the shortage. The same holds for a homeless Child in a
+-- nursery dome.
+--
+-- ⛔ AND "PUSH THE NON-WORKFORCE" IS THE TRAP INSIDE THE BROAD READING, which
+-- the owner caught before a line of it was written: **"outside the workforce"
+-- is a real status Children and Seniors carry BY DEFINITION**, not a failure
+-- state. The game prints it as such — `T(4364, "Outside the workforce
+-- (Child)")` / `T(4365, "Outside the workforce (Senior)")`,
+-- `Colonist.lua:3146-3148` — and distinguishes it from `T(4366, "Unemployed")`
+-- three lines later. Targeting non-workforce would sweep up exactly the cohorts
+-- these domes exist to hold.
+--
+-- ⭐ THE RULE, THEREFORE, IN VANILLA'S OWN PREDICATE: a flagged dome pushes out
+-- a homeless colonist IF AND ONLY IF `need_work` is true for them —
+--
+--     can_work  = self:CanWork()
+--     need_work = can_work and not IsValid(self.workplace)
+--                          and not self.user_forced_workplace
+--
+-- which is `Colonist.lua:2623-2624`, computed by the very function this module
+-- wraps, two lines above the tie it exists to break. `CanWork()`
+-- (`Colonist.lua:2114-2126`) is false for **Children**, for **Seniors unless
+-- `g_SeniorsCanWork`**, for Tourists, and for the Earthsick / StressedOut /
+-- UnableToWork / unfit. So the rule reads, in the game's own vocabulary:
+--
+--     move the UNEMPLOYED. Never move the employed, and never move anyone the
+--     game itself calls outside the workforce.
+--
+-- Against the pattern the owner described, that is exactly right:
+--   * the service staff the dome's minimal ordinary housing exists for are
+--     EMPLOYED → never moved, so the dome keeps working;
+--   * a homeless Senior in a retirement dome is OUTSIDE THE WORKFORCE → never
+--     moved, so the signal survives — ⭐ *"homeless senior in the dome is
+--     actually useful information to the player. It signals to them that they
+--     need to build more retirement homes"*;
+--   * a homeless Child in a nursery dome, likewise;
+--   * the graduates and leftovers — workforce-age, jobless, housed by nothing
+--     — are what is left, and they are the pile-up that drives the dome over
+--     `IsOverpopulated` and switches its migration off.
+--
+-- ⚠️ NOT DUPLICATED HERE, DELIBERATELY: relocating a homeless Senior or Child
+-- toward cohort housing that exists ELSEWHERE is **D07 `Opt_CohortHousing`'s**
+-- job and it already does it, automatically and with no toggle. D12 must not
+-- compete for those colonists; the two modules divide cleanly as "move the
+-- cohort toward its housing" (D07) versus "move the workforce-age unemployed
+-- out of a dedicated dome" (D12).
+--
+-- The toggle IS the judgment (owner: "no automated system can fully tell"), so
+-- the module does not try to re-derive from building composition whether a dome
+-- is dedicated. The player already said so by flipping the row.
+--
+-- ⚠️ Two honest notes on `CanWork()`, since it is doing the load-bearing work.
+--   * It is not purely structural — it also excludes the momentarily ill,
+--     stressed-out or mid-command. So a Youth who is sick is not pushed until
+--     they recover. That is a delay, never a wrong answer, and it errs in the
+--     conservative direction: do not relocate someone who cannot act.
+--   * It reads `g_SeniorsCanWork`, so a colony that has unlocked senior work
+--     (Forever Young / "Put Them To Work") makes its Seniors workforce, and an
+--     UNEMPLOYED one in a flagged dome then becomes movable. That follows the
+--     game's own definition rather than second-guessing it, and it is the
+--     correct reading: in such a colony a jobless Senior is not a retirement
+--     signal, they are unemployed.
+--
+-- ⚠️ What this costs versus the narrow reading, stated rather than buried: the
+-- narrow reading was immune to the CAPACITY-CHURN mechanism (BUGS.md C40) — a
+-- law can shrink Residence.capacity colony-wide while a Ministry is down, and
+-- Residence:OnModifiableValueChanged (Residence.lua:224-235) EVICTS the tail
+-- residents when it does. The employed exemption recovers most of it on a
+-- better key: the service staff a churn eviction would hit are employed, so
+-- they are exempt anyway. The residual exposure is an UNEMPLOYED workforce-age
+-- resident of a flagged dome, transiently evicted, moved out for good over an
+-- outage that ends by itself. Narrow window, in a dome the player deliberately
+-- dedicated to non-workforce cohorts, and recorded here rather than guarded —
+-- the guard would need per-colonist dwell state and the exposure does not
+-- justify it.
 --
 -- COMPOSITION AND PRECEDENCE (all deliberate):
 --   * The wrapper acts ONLY when the composed answer below it is EMPTY. That
@@ -216,10 +300,22 @@ do
 			if self:CheckForcedDome() then
 				return dome, mode, dist, elevator -- player order wins
 			end
-			if has_suitable_home(my_dome, self) then
-				-- the narrow reading: this dome CAN house them, they are just
-				-- unlucky — leave them to the shipped machinery
-				return dome, mode, dist, elevator
+
+			-- ⛔ THE SUBJECT TEST — vanilla's own `need_work`, verbatim from
+			-- Colonist.lua:2623-2624, which this very function computes a few
+			-- lines above the tie we are breaking. Move the UNEMPLOYED; never
+			-- move the employed, and never move anyone the game itself calls
+			-- OUTSIDE THE WORKFORCE. See the header: CanWork() is false for
+			-- Children, for Seniors unless g_SeniorsCanWork, for Tourists and
+			-- for the Earthsick/StressedOut/UnableToWork/unfit, so a homeless
+			-- Senior in a retirement dome survives to be the build-more-housing
+			-- signal it is, and the service staff the dome's ordinary housing
+			-- exists for are employed and never touched.
+			if not self:CanWork() then
+				return dome, mode, dist, elevator -- outside the workforce
+			end
+			if IsValid(self.workplace) or self.user_forced_workplace then
+				return dome, mode, dist, elevator -- workforce, employed here
 			end
 
 			-- Candidate gathering mirrors the shipped function: this city's
@@ -290,20 +386,65 @@ end
 -- (sectionDome.generated.lua:141-147), chosen over D03's accept_colonists pair
 -- so the two pack rows are not identical at a glance. Look-check is on the
 -- playtest item.
+-- How many colonists in THIS community the policy currently applies to — the
+-- same subject test the wrapper uses, so the number on the row cannot disagree
+-- with the behaviour. Drives TitleRight (see below).
+local function count_movable(community)
+	local n = 0
+	for _, c in ipairs(community and community.labels
+			and community.labels.Homeless or empty_table) do
+		if IsValid(c) and not (c.traits and c.traits.Tourist)
+				and not IsValid(c.reserved_residence)
+				and c:CanWork()
+				and not IsValid(c.workplace) and not c.user_forced_workplace then
+			n = n + 1
+		end
+	end
+	return n
+end
+
 local function append_policy_row(section, context)
 	local row = InfopanelActiveSection:new({
 		OnContextUpdate = function(self, context, ...)
 			local community = ResolvePropObj(context)
 			local on = is_flagged(community)
+
+			-- ⭐ THE TITLE NAMES THE DOME TYPE AND NEVER CHANGES; the STATE and
+			-- the CONSEQUENCE both live on the right. Two owner notes drove
+			-- this (2026-08-02):
+			--   * "this could easily be mistaken for just hitting a button to
+			--     get rid of homeless … not all players will look at a tooltip,
+			--     they will just be confused why their retirement dome isn't
+			--     working" — so the count is ON THE ROW. On a retirement dome
+			--     full of homeless Seniors it reads "0 would move", which
+			--     answers that confusion in place, before the click.
+			--   * "I would like to see something about nursery / retirement in
+			--     the label, so I instantly know what it could be talking
+			--     about … if I am a new player working on a retirement home or
+			--     a nursery that jumps out at me, jobseeker doesn't" — so the
+			--     recognition words lead, and they lead in BOTH states rather
+			--     than only when the policy is set.
+			-- The icon colour carries on/off as well (green permissive, yellow
+			-- restriction), so the state is encoded twice.
+			local n = count_movable(community)
+			self:SetTitleRight(Untranslated(on
+				and string.format("%d moving out", n)
+				or  string.format("off (%d would move)", n)))
+
+			-- ⛔ ICON POLARITY MIRRORS D03's, and the first build had it
+			-- inverted: the OFF state — which is VANILLA — rendered red, so a
+			-- player who had never touched the row saw what looked like an
+			-- alarm and would press it to clear it. Permissive state reads
+			-- green/on; the restriction reads yellow/limit. Same pairing as
+			-- Opt_ResidencyControl, which playtested correctly.
+			self:SetTitle(Untranslated("Nursery / Retirement Dome"))
 			if on then
-				self:SetIcon("UI/IconsRemaster/Sections/service_in_connected_domes_on.png")
+				self:SetIcon("UI/IconsRemaster/Sections/service_in_connected_domes_off.png")
 				self:SetIconBack("UI/IconsRemaster/Sections/ip_sections_limit")
-				self:SetTitle(Untranslated("No homeless residents"))
 				self:SetRolloverImageColor("yellow", true)
 			else
-				self:SetIcon("UI/IconsRemaster/Sections/service_in_connected_domes_off.png")
-				self:SetIconBack("UI/IconsRemaster/Sections/ip_sections_off")
-				self:SetTitle(Untranslated("Homeless residents allowed"))
+				self:SetIcon("UI/IconsRemaster/Sections/service_in_connected_domes_on.png")
+				self:SetIconBack("UI/IconsRemaster/Sections/ip_sections_on")
 				self:SetRolloverImageColor("green", true)
 			end
 			rawset(self, "ProcessToggle", function(self, context, broadcast)
@@ -320,16 +461,19 @@ local function append_policy_row(section, context)
 					self:ProcessToggle(context, true)
 				end
 			end
-			self:SetRolloverTitle(Untranslated("Homeless Policy (Community Fix Pack)"))
-			self:SetRolloverText(Untranslated(on
-				and "Colonists this Dome can never house — no residence here accepts them — move to the nearest Dome that has housing of a kind they can use. Colonists who simply have no free bed here are NOT moved. Nobody is ever put outside: if there is nowhere to send them they stay, and a quarantined Dome releases no one.<newline><newline>Current status: <em>No homeless residents</em>"
-				or  "Stop this Dome from stranding Colonists it can never house — a Nursery-only Dome holding grown Youths, for example. They will move to the nearest Dome with housing of a kind they can use; Colonists who simply have no free bed here are left alone, and nobody is ever put outside.<newline><newline>Current status: <em>Homeless residents allowed</em>"))
+			self:SetRolloverTitle(Untranslated("Dedicated Dome Policy (Community Fix Pack)"))
+			self:SetRolloverText(Untranslated(
+				"For <em>Nursery</em> and <em>Retirement</em> Domes. Those Domes keep only enough ordinary housing to staff their services, so unhoused jobseekers pile up in them — and once a Dome holds enough homeless it counts as overcrowded and stops receiving anyone, including the Children or Seniors it was built for.<newline><newline>"
+				.. "When this is on, <em>unemployed</em> Colonists with no home here move to the nearest Dome that has housing they can use.<newline><newline>"
+				.. "<em>Nobody else is touched.</em> Colonists who work here stay — they are who this Dome's ordinary housing is for. Seniors and Children stay too, even while homeless: that is the Dome telling you to build more Retirement Homes or Nurseries, and hiding it would not help you.<newline><newline>"
+				.. "Nobody is ever put outside. If there is nowhere suitable to send someone they simply stay, a quarantined Dome releases no one, and your manual Dome assignments always win.<newline><newline>"
+				.. "Current status: <em>" .. (on and "moving out homeless jobseekers" or "homeless jobseekers may stay") .. "</em>"))
 			if on then
-				self:SetRolloverHint(Untranslated("<left_click> Allow homeless residents in this Dome<newline><em>Ctrl + <left_click></em> Allow homeless residents in all Domes"))
-				self:SetRolloverHintGamepad(Untranslated("<ButtonA> Allow homeless residents in this Dome<newline><ButtonY> Allow homeless residents in all Domes"))
+				self:SetRolloverHint(Untranslated("<left_click> Let homeless jobseekers stay in this Dome<newline><em>Ctrl + <left_click></em> Let them stay in all Domes"))
+				self:SetRolloverHintGamepad(Untranslated("<ButtonA> Let homeless jobseekers stay in this Dome<newline><ButtonY> Let them stay in all Domes"))
 			else
-				self:SetRolloverHint(Untranslated("<left_click> Move out residents this Dome cannot house<newline><em>Ctrl + <left_click></em> Do this in all Domes"))
-				self:SetRolloverHintGamepad(Untranslated("<ButtonA> Move out residents this Dome cannot house<newline><ButtonY> Do this in all Domes"))
+				self:SetRolloverHint(Untranslated("<left_click> Move homeless jobseekers out of this Dome<newline><em>Ctrl + <left_click></em> Do this in all Domes"))
+				self:SetRolloverHintGamepad(Untranslated("<ButtonA> Move homeless jobseekers out of this Dome<newline><ButtonY> Do this in all Domes"))
 			end
 		end,
 	}, section, context)
@@ -365,6 +509,8 @@ SMRFixPack.Register("NoHomeless", {
 			  reason = "Colonist.FindEmigrationDome/IsHomeless not found (game update changed it?)" },
 			{ class = "Colonist", method = "CheckForcedDome",
 			  reason = "Colonist.CheckForcedDome not found (game update changed it?)" },
+			{ class = "Colonist", method = "CanWork",
+			  reason = "Colonist.CanWork not found (game update changed the workforce test?)" },
 			{ class = "Residence", method = "IsSuitable",
 			  reason = "Residence.IsSuitable/GetFreeSpace not found (game update changed it?)" },
 			{ class = "Residence", method = "GetFreeSpace",
@@ -377,6 +523,11 @@ SMRFixPack.Register("NoHomeless", {
 			  reason = "emigration transport helpers not found (game update changed them?)" },
 			{ global = "IsLRTransportAvailable",
 			  reason = "emigration transport helpers not found (game update changed them?)" },
+			-- the row states its own consequence through TitleRight; if that
+			-- setter ever goes, say so instead of silently dropping the row
+			-- (shipped precedent: sectionFactionTarget.lua:40)
+			{ class = "InfopanelActiveSection", method = "SetTitleRight",
+			  reason = "InfopanelActiveSection.SetTitleRight not found (game update changed the infopanel row?)" },
 			{ class = "sectionDome", method = "Init",
 			  reason = "sectionDome/sectionMicroGHabitat Init not found (game update changed the infopanel?)" },
 			{ class = "sectionMicroGHabitat", method = "Init",

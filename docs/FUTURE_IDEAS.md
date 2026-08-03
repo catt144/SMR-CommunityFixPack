@@ -147,6 +147,44 @@ owner 2026-07-30. Do not re-propose it as part of this.
 
 ---
 
+## 5. Dome infopanel row labels — the pack's rows read too close to vanilla's — parked 2026-08-02
+
+**What.** The dome infopanel now carries vanilla's quarantine row plus our own
+policy rows, and in their permissive states they read almost alike — vanilla's
+*"Accepts Colonists"* against D03's *"Accepts new residents"*. The owner's ask
+was to relabel vanilla's row to say **quarantine** outright. Two separable
+pieces: (a) rename **our** D03 row so the collision disappears (candidate:
+*"Open to move-ins" / "Closed to move-ins"*), and (b) clarify **vanilla's** row.
+
+**Why it is a good idea.** A new player reads two near-identical rows and cannot
+tell which one seals the dome. Vanilla's row only names itself once it is SET —
+it flips to `T(8736, "Quarantined")`, `sectionDome.generated.lua:189` — so the
+ambiguity sits exactly where a first-time reader meets it.
+
+**Why it is parked.** (a) is cheap but edits **D03, which is `tested`** (PT-49 in
+full plus PT-55), so it wants its row re-checked and it is outside the D12
+prompt's scope fence. (b) is gated on a capability we do not have: ⛔ **a shipped
+string cannot be replaced** — re-using its id discards the replacement (**F98**,
+source-verified and **live-confirmed 2026-08-02: `type(T(8821,"ZZZ"))` printed
+`userdata`**), so the only replacement route is `Untranslated(...)`, which
+**deletes that row's translation for every non-English player**. The fix for that
+is our own `ModItemLocTable` — the F84/D10 work already parked to post-release.
+
+**Where the material lives.** F98 and F84 entries in `BUGS.md`; the append route
+that *is* safe (`shipped_T .. Untranslated("…")` via `TMeta.__concat`, retail
+light-userdata form, shipped precedent `Workplace.lua:293`) is recorded on F98.
+D03's row is `Opt_ResidencyControl.lua:116-175`; the shipped row is
+`sectionDome.generated.lua:177-217`.
+
+**Rough cost.** (a) minutes plus a visual re-check on any attended sitting.
+(b) small once the loc pipeline exists; unshippable before it.
+
+**What it would need to un-park.** (a) an owner decision to touch a `tested`
+module for a cosmetic reason. (b) `ModItemLocTable` landing first — and even
+then, prefer the **append** route over replacement so translations survive.
+
+---
+
 ## 4. Save-rescue framework — proving and extending it — parked 2026-07-31  **[FAQ]**
 
 **What.** The pack ships two automatic save-repair passes (F35 Large Wind

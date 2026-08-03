@@ -403,8 +403,8 @@ return {
 	}),
 	PlaceObj('ModItemOptionToggle', {
 		'name', "NoHomeless",
-		'DisplayName', "No homeless residents (per Dome)",
-		'Help', 'Adds a per-Dome "No homeless residents" policy row to the Dome infopanel. When it is on, Colonists the Dome can never house — because no residence in it accepts them, such as grown Youths left in a Nursery-only Dome — move to the nearest Dome that has housing of a kind they can use. Colonists who simply have no free bed are NOT moved, nobody is ever put outside, and a quarantined Dome still releases no one.',
+		'DisplayName', "Nursery / Retirement Dome policy",
+		'Help', 'For the Dome you dedicate to Children or Seniors. Such a Dome keeps only enough ordinary housing to staff its services, so unhoused jobseekers pile up in it — and once it holds enough homeless it counts as overcrowded and stops receiving anyone, including the cohort it was built for. This adds a per-Dome toggle row: when it is on, UNEMPLOYED Colonists with no home there move to the nearest Dome with housing they can use. Colonists who work there stay, and Seniors and Children stay even while homeless — a homeless Senior in a Retirement Dome is the game telling you to build more Retirement Homes, and hiding it would not help. Nobody is ever put outside, and a quarantined Dome still releases no one.',
 		'DefaultValue', false,
 	}),
 	PlaceObj('ModItemOptionChoice', {
