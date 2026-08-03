@@ -272,15 +272,26 @@ end
 -- Residences, so iterating `labels.Residence` excludes them by construction.
 --
 -- ⛔ EXCEPT THE HOTEL, and this is why the exclusion is explicit rather than
--- assumed. `Hotel` carries `exclusive_trait = "Tourist"` and **is a Residence**
--- — `HotelBase` parents `LivingBase` (`Hotel.lua:1-4`), which parents
--- `Residence` (`Residence.lua:462-466`). Without this clause every dome with a
--- Hotel would have qualified as a "Nursery / Retirement Dome", shown the row,
--- and applied the policy to a tourist dome. Caught 2026-08-02 when the owner
--- asked whether the test followed class or name and whether it covered both
--- nurseries; it covered both nurseries and one building it should never have
--- touched. Tourists are out of scope for this module everywhere else, so
--- excluding tourist housing here is the consistent reading, not a special case.
+-- assumed. `Hotel` ships `exclusive_trait = "Tourist"` and **is a Residence** —
+-- `HotelBase` parents `LivingBase` (`Hotel.lua:1-4`), which parents `Residence`
+-- (`Residence.lua:462-466`). Without this clause every dome with a Hotel would
+-- have qualified as a "Nursery / Retirement Dome", shown the row, and applied
+-- the policy to a tourist dome. Caught 2026-08-02 when the owner asked whether
+-- the test followed class or name and whether it covered both nurseries; it
+-- covered both nurseries and one building it should never have touched.
+--
+-- ⚠️ AND THE HOTEL'S TRAIT IS NOT A FIXED TEMPLATE VALUE — it is a live player
+-- toggle, which the owner flagged as common practice: *"a hotel can be a
+-- residence, it is very commonly flagged for colonists to not be allowed to
+-- move into by players."* `HotelBase:SetTouristOnly` writes
+-- `exclusive_trait = "Tourist"` when restricted and **`false`** when not
+-- (`Hotel.lua:6-27`), driven by the infopanel's Tourists-Only / Any-Colonist
+-- button (`:29-52`). So a Hotel is EITHER tourist-exclusive OR plain ordinary
+-- housing, and this predicate is correct in both states rather than only the
+-- default one: restricted → excluded by the `"Tourist"` clause; unrestricted →
+-- `exclusive_trait` is `false`, so it never reaches the clause at all and the
+-- Hotel counts as the ordinary housing it has become. Nothing here caches the
+-- field, so flipping that button mid-game is picked up on the next read.
 --
 -- STRUCTURAL: a switched-off Nursery still counts, because the player built one
 -- — this asks what the dome IS, not what it is doing this minute.
