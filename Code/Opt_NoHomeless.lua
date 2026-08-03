@@ -204,8 +204,23 @@ SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 
 local FLAG = "SMRFixPack_no_homeless"
 
+-- ⛔ BOTH surfaces, and the second one was missing until 2026-08-02.
+-- `IsActive` reads the registry status, which the Mod Options toggle flips.
+-- `SMRFixPack_Disabled` is the CONSOLE/other-mod veto, and it is what
+-- `PLAYTEST_CHECKLIST.md` PT-62 documents as this module's within-session A/B
+-- lever — but nothing here read it, so `SMRFixPack_Disabled.NoHomeless = true`
+-- was silently ignored and the A/B half of the leg would have run with the
+-- module still live. ⚠️ That is the PT-61 trap exactly: the failure would not
+-- have looked like a broken command, it would have looked like an ANSWER
+-- (colonists still moving, read as the fix misbehaving). Caught when the owner
+-- asked whether the line was correct, before the leg leaned on it.
+-- `Fix_DustDevilSpawnGate` checks both (`:332-334`), which is why its A/B
+-- worked; `SMRFixPack.WhenActive` does the same for OnMsg handlers.
 local function module_active()
-	return SMRFixPack.IsActive("NoHomeless")
+	if not SMRFixPack.IsActive("NoHomeless") then return false end
+	local disabled = rawget(_G, "SMRFixPack_Disabled")
+	if type(disabled) == "table" and disabled.NoHomeless then return false end
+	return true
 end
 
 local function is_flagged(community)
