@@ -4047,6 +4047,133 @@ Pack ruled out for this sighting explicitly: the F74 wrappers in that chain are
 refuse-only (both early-return false for event rockets, everything else defers
 to the shipped body) — verified in-session before filing.
 
+---
+
+#### ⛔ GAME-FREE DESIGN PASS (chain prompt 11, 2026-08-02) — THE RECORDED MECHANISM IS REFUTED, AND THE FORENSIC BOX IS CONSISTENT WITH THE VANILLA FORMULA WORKING
+
+Job 1 of the attended sitting is a source-only re-derivation of the positioning
+path **before** any live work. It was run, and it does not confirm what this
+entry recorded. Three results, each with its own citation; **nothing here is a
+repair yet**, because the measurement that would justify one has not been taken.
+
+**1 · ⛔ "Coordinate-space mismatch" is REFUTED from source.** This entry's
+*Suspected mechanism* says `ResourceItems:Init` anchors in *terminal pixels*
+(`ResourceItems.lua:11`) while `UpdateLayout` consumes the anchor in *scaled
+UI/desktop space* (`:45-71`), so the dialog lands at `anchor/scale`. **There is
+no such division anywhere in the layout path, and the two spaces are the same
+space:**
+* `XWindow.box` is in desktop pixels. `XDesktop:OnSystemSize` sets the desktop
+  box to the raw screen size and the scale *separately* —
+  `self:SetOutsideScale(point(scale,scale))` then `self:SetBox(0,0,x,y)`
+  (`CommonLua/X/XDesktop.lua:447-458`). Scale is never applied to a box.
+* `scale` is a **size** multiplier only. Every consumer runs it through
+  `ScaleXY` against `Margins`/`Padding`/`MinWidth`/`BorderWidth`
+  (`XWindow.lua:763-782`, `:584-590`, `:351-353`) — never against `x`/`y`.
+* **The decisive control:** `XDialog.lua:139` feeds `terminal:GetMousePos()`
+  *directly* into `GetMouseTarget(pt)`, and `GetMouseTarget` hit-tests against
+  `self.box` (`XWindow.lua:1276-1294`). Vanilla itself treats the mouse position
+  and window boxes as one space. If they diverged, **all** mouse targeting in the
+  game would be broken at any UI scale ≠ 100%, not this one dialog.
+* Corollary: `interaction_box` (the only scaled box in the framework,
+  `XWindow.lua:516-529`) is `false` for ordinary windows — its **only** caller
+  outside itself is `XBadge.lua:392`. `PointInWindow` therefore falls back to
+  `.box` here.
+
+⚠️ **This voids this entry's "Fix sketch" and the "Prototype learning that
+redirects the fix" above it.** Converting `align_pos` "into the layout's
+coordinate space" — in `Init` *or* in `UpdateLayout` — would be converting a
+value that is already in the right space, i.e. it would *introduce* the
+displacement the entry set out to remove. The prototype's own observation that
+`self.scale` reads `(1000,1000)` at `Init` is also not reproducible from source:
+`XWindow:Init` calls `SetParent` first (`:150-156`) and `ChildJoining` does
+`child:SetOutsideScale(self.scale)` (`:293-294`), so a parented dialog has its
+scale before `ResourceItems:Init` runs. **Recorded as a fact-to-re-measure, not
+as a correction — the prototype ran in a session that then hard-locked.**
+
+**2 · ✅ THE CLICK-THROUGH IS EXPLAINED, AND IT NEEDS NO HIT-TEST/VISUAL
+DIVERGENCE.** This entry says clicks "cannot be clicked where it is drawn" and
+infers that placement and hit-testing "evidently" diverge from each other. They
+do not have to. The picker takes `SetModal` (`ResourceItems.lua:12`), so
+`XDesktop:UpdateCursor` resolves every click inside the picker's own subtree and
+falls back to the picker itself when nothing matches —
+`target = target or self.modal_window` (`XDesktop.lua:317-321`). The fallback
+then reaches **`ItemMenuBase:OnMouseButtonDown`, which hands left-clicks to the
+world**:
+```lua
+elseif button=="L" then
+    local mode_dialog = GetInGameInterfaceModeDlg()
+    return mode_dialog and mode_dialog:OnMouseButtonDown(pt, button)
+```
+(`Lua/X/ItemsMenu.lua:510-518`, reached via `ResourceItems:OnMouseButtonDown`,
+`ResourceItems.lua:164-170`). The mode dialog selects the object under the
+cursor → `OnMsg.SelectionChange` → `CloseResourceSelector` (`:198-200`). **So a
+single left-click that misses the hex container selects the pipe/depot/transport
+behind it AND closes the picker — exactly the recorded console trail, and
+exactly the player-facing "I just get a noise and nothing loads".** Clicks that
+*do* land on the container are swallowed (`ItemsMenu.lua:71-75` sets
+`idContainer.OnMouseButtonDown` to `return "break"` for non-R buttons), so the
+container is a hard target with a forgiving-looking but inert surround.
+This half is **resolution-independent**, which is the first mechanism on this
+entry that fits the `BUG_LIST_AUDIT.md` §2.2 OG witness on ordinary setups.
+
+**3 · ⚠️⚠️ THE FORENSIC BOX DOES NOT EVIDENCE A POSITIONING DEFECT.** Solving
+`ResourceItems:UpdateLayout` (`:45-71`) backwards for the recorded
+`box=(886,13)-(1054,442)`, size 168×429, `Margins = box(0,0,0,0)` (inherited,
+`ItemsMenu.lua:5`), anchor `= sizebox(align_pos,1,1)`:
+* `x = anchor:minx() + (1 - width)/2` → `886 = a_x - 83` → **a_x ≈ 969**
+* `y = anchor:miny() - height - margins_y2` → `13 = a_y - 429` → **a_y = 442**
+
+Both coordinates fall out of **one** anchor, with **no clamp firing**: the
+flip branch needs `y < safe_area_y1` and `13 ≥ 0`; the fit branches need
+`886+168 > safe_area_x2` and `13+429 > safe_area_y2`. In other words the
+observation is **exactly what vanilla produces for a mouse at ≈(969,442)** —
+dialog centred on the cursor, bottom edge at the cursor, which is the intended
+placement and the same idiom `XBuildMenu`'s rollover uses correctly
+(`Lua/X/BuildMenu.lua:76-110`, `anchor = this:GetAnchor()`).
+⛔ **The recorded `(1731,665)` anchor cannot be paired with this box**: the two
+readings imply scale 1.786 in x and 1.504 in y, and scale is uniform — they are
+**different clicks**, and the probe that produced the box fired on a 2-second
+delay. **No arithmetic linking them is admissible.** The alternative reading
+(both safe-area clamps firing, `safe_area_x2 = 1054`, `safe_area_y1 = 13`) also
+fits, and the two are separated by one console line (below).
+
+**What this means for the sitting.** The entry's premise — "the picker opens far
+from the cursor" — currently rests on a screenshot and a verbal report, and the
+one numeric measurement on file is consistent with correct placement. **Designing
+an anchor repair on top of that would be building a plausible story instead of a
+control.** So job 2 leads with measurement, not with a candidate repair:
+
+| # | measure | command (console, no picker open, zero interaction risk) | discriminates |
+|---|---------|------------------|---------------|
+| M1 | safe area vs screen | `*r local a,b,c,d = UIL.GetSafeArea() ModLog("SAFE "..a.." "..b.." "..c.." "..d.." SCREEN "..tostring(UIL.GetScreenSize()).." DESK "..tostring(terminal.desktop.box).." SCALE "..tostring(terminal.desktop.scale))` | if `c`≈screen width → the clamps are innocent and §3 stands; if `c`≪ screen width → the clamps ARE the defect and the repair is a clamp repair, not an anchor repair. **`UIL.GetSafeArea` is a native with no Lua body — its return convention (absolute vs margin) is unrecorded and `XWindow:GetEffectiveMargins` (`:357-360`) reads it as ABSOLUTE.** Either answer is an `ENGINE_FACTS.md` line. |
+| M2 | anchor vs box, same event | post-wrapper on `ResourceItems.UpdateLayout` logging `self.align_pos`, `self.box`, `self.scale`, `self.measure_width/height` **in one line** | kills the paired-readings problem that voids the current forensics |
+| M3 | container overhang | `self.idContainer.box` in the same line | the drawn hex lives in a container with `Margins = box(-90,0,-90,40)` (`ItemsMenu.lua:59-70`), so it is drawn **outside** the dialog box by `90×scale` per side; M3 says how much of the visible hex is outside the parent box |
+| M4 | the 1080p control | repeat M1-M3 windowed at 1920×1080, UI scale 100% | the entry asserts "at 1080p the error is small enough to pass QA" — **never measured**. If M2 is identical at both resolutions, the defect is not scale-dependent and the OG witness is the same bug, not a coincidence |
+
+**Smallest §1 technique, per outcome** (chosen in advance so the sitting cannot
+rationalise toward whichever answer arrives):
+* **M1 shows a small safe area** → §1.4 chained post-wrapper on
+  `ResourceItems.UpdateLayout` re-running the placement with the desktop box as
+  the clamp rect. Self-check: `ResourceItems.UpdateLayout` exists and is a
+  function, and `UIL.GetSafeArea` returns four numbers.
+* **M2 shows `align_pos` far from the true mouse** → §1.4 post-wrapper on
+  `ResourceItems.Init` re-reading `terminal.GetMousePos()` at *use* time.
+  Self-check: `align_pos` is a point after vanilla `Init`.
+* **M2/M3 show correct placement at both resolutions** → the defect is §2 alone
+  (a hard-to-hit target whose miss both selects the world and closes the
+  picker), and the smallest repair is to stop the picker forwarding the L-click
+  that destroys it — §1.4 post-wrapper on `ResourceItems.OnMouseButtonDown`
+  returning `"break"` for `"L"`. ⚠️ **This overrides a deliberate vanilla
+  behaviour** and must go to the owner before it is built.
+* **No route reachable from Lua** → prompt stop condition 2: record it, offer
+  the `MOD_DESCRIPTION` `[FAQ]` route, do not ship a cosmetic half-fix.
+
+⛔ **Nothing above is claimed as the cause.** Status stays `todo`. The sitting is
+what settles it, and per the prompt's *What may not be claimed*, an
+unreproducible session says "did not reproduce", not "fixed".
+
+---
+
 ### F77 — Extender working-flap tears down and rebuilds the entire uplink hub; fleet-wide Idle churn (P2, med-high)  `[fixed: Code/Fix_ExtenderFlapChurn.lua — chained wrapper on UpdateUplinkRequesters, rebuild deferred 2s + coalesced per root hub (chains resolved); built 2026-07-28 with the D06 core, PT pending. Accepted trade-off: registration stale up to ~2s during the window — the shipped flow already defers reconnects (SetWorkRadius uses DelayedCall(300)). Debounce thread is a mod game-time thread = not persisted (F06 precedent), so a save inside the window is clean]`
 `DroneHubExtenderBase:OnSetWorking` (`DroneHubExtender.lua:171-178`) calls
 `UpdateUplinkRequesters` (:109-112) on EVERY working transition, in BOTH directions

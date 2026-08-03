@@ -39,10 +39,29 @@ the fix must not be either.
 
 ## Jobs (todo list first)
 
-1. **Game-free design first**: from the entry's forensics, locate the
+1. ~~**Game-free design first**: from the entry's forensics, locate the
    positioning path that puts the `ResourceItems` dialog at (886,13) on a
    3751px window; identify the smallest §1-technique repair (anchor/clamp),
-   and its self-check. Write the design on the entry BEFORE any live work.
+   and its self-check. Write the design on the entry BEFORE any live work.~~
+   **✅ DONE 2026-08-02 — written on the `BUGS.md` F76 entry under *GAME-FREE
+   DESIGN PASS*. READ IT BEFORE JOB 2; do not re-derive it, and do not read
+   the rest of this file's framing as still current.**
+   ⛔ **It did not confirm the entry — it refuted it.** The recorded
+   "coordinate-space mismatch" does not exist (boxes and `terminal.GetMousePos()`
+   are one space; vanilla's own `XDialog.lua:139` is the control), the recorded
+   "Fix sketch" would have *introduced* the displacement, the click-through is
+   fully explained by `ItemMenuBase:OnMouseButtonDown` forwarding L-clicks to the
+   world (`ItemsMenu.lua:510-518`), and **the (886,13) box solves backwards to a
+   single anchor ≈(969,442) with no clamp firing — i.e. it is what correct
+   placement looks like.** The separately-recorded `(1731,665)` anchor is from a
+   different click and may not be paired with it.
+   ⚠️ **This job as written above was authored in the confirm-the-conclusion
+   voice** ("locate the positioning path that puts the dialog at (886,13)") on
+   top of a hedge the entry had marked *Suspected*. Filed to prompt 12's job-7
+   seed list as its own axis. **Job 2 therefore leads with measurement (M1-M4 on
+   the entry), not with a candidate repair**, and the §1 technique per outcome is
+   chosen there in advance so the sitting cannot rationalise toward whichever
+   answer arrives.
 2. **Attended verification sitting** (owner at keyboard, fixture save,
    cheats fine): reproduce once, apply the candidate repair via TestKit
    console harness, verify click-through works at the owner's resolution AND

@@ -1086,3 +1086,77 @@ Hotel vs the policy; `TitleRight` set after an `Init` that had already decided
 alignment from its absence; and the push/accept asymmetry that produced the
 loop. **None was findable by reading either side alone.** Four in one day is
 enough for job 7 to name it rather than treat them as anecdotes.
+
+### Added by chain prompt 11 (2026-08-02) — F76's game-free design pass, and a job-7 axis the corpus has the mirror of but not this one
+
+**F76 is NOT closed and NOT built. Its status stays `todo`.** Prompt 11's job 1
+(the source-only design pass that must precede any live work) ran and produced a
+result the prompt did not anticipate: **the mechanism this project recorded for
+F76 is refuted from source, and the one numeric forensic on the entry is
+consistent with the vanilla code working correctly.** Everything is written up
+on the `BUGS.md` **F76 entry** under *GAME-FREE DESIGN PASS*; the short form:
+
+1. **"Coordinate-space mismatch" is refuted.** `XWindow.box` and
+   `terminal.GetMousePos()` are the same space. The decisive control is vanilla's
+   own `XDialog.lua:139`, which feeds the mouse position straight into
+   `GetMouseTarget`, which hit-tests `.box`. `scale` multiplies sizes, never
+   coordinates (`XDesktop.lua:447-458`, `XWindow.lua:763-782`). **The entry's
+   "Fix sketch" would have introduced the very displacement it meant to remove.**
+2. **The click-through needed no second defect.** The picker is modal;
+   `XDesktop.lua:317-321` falls back to the modal window, whose
+   `ItemMenuBase:OnMouseButtonDown` **hands left-clicks to the world**
+   (`ItemsMenu.lua:510-518`) → selection → `OnMsg.SelectionChange` → the picker
+   closes itself (`ResourceItems.lua:198-200`). This half is
+   resolution-independent, which is the first mechanism on the entry that fits
+   the OG witness in `BUG_LIST_AUDIT.md` §2.2.
+3. **The forensic box evidences nothing.** Solving `UpdateLayout` backwards for
+   `box=(886,13)-(1054,442)` gives one self-consistent anchor ≈(969,442) with
+   **no clamp firing** — i.e. exactly correct placement for a mouse there. The
+   separately-recorded anchor `(1731,665)` cannot be paired with it (it would
+   need scale 1.786 in x and 1.504 in y, and scale is uniform); they are
+   different clicks, and the box probe fired on a 2-second delay.
+
+**The sitting is designed and unrun** — four measurements (M1-M4) with the §1
+technique chosen *in advance* per outcome, so the sitting cannot rationalise
+toward whichever answer arrives. **One of the four candidate repairs would
+override a deliberate vanilla behaviour and is flagged to go to the owner before
+it is built.** ⚠️ M1 also has a side-effect worth having regardless of F76:
+`UIL.GetSafeArea()` is a native with no Lua body whose return convention
+(absolute rect vs margins) is **unrecorded**, and `XWindow:GetEffectiveMargins`
+(`:357-360`) reads it as absolute. Either answer is an `ENGINE_FACTS.md` line.
+
+#### Job-7 seed line (chain rule 4b) — a NEW axis: a *suspicion* that hardened into a *route* by being cited
+
+Instance: F76's *Suspected mechanism* was filed on 2026-07-27 honestly hedged
+("Suspected", "to pin in the build leg"). It was then read by a **Fix sketch**
+in the same entry, by `docs/prompts/FABLE_NEXT_PROMPT.md`, by the chain README
+row, and by chain prompt 11's own job 1 — each of which restated it without the
+hedge, and prompt 11's brief instructed the session to "locate the positioning
+path that puts the dialog at (886,13)", i.e. **to confirm a conclusion rather
+than test it**. A live prototype was then built on the suspicion, and the session
+that built it hard-locked. **Nine days and four documents later, thirty minutes
+of source reading refuted it.**
+
+⭐ **Why this is a new axis and not prompt 9's.** Prompt 9 recorded *"a false
+citation under a true conclusion"* and prompt 10 recorded its mirror (*"a true
+citation under a false route"*). This is neither: **every citation was right, the
+conclusion was never asserted, and the drift is that a hedge does not survive
+being quoted.** The corpus has no mechanism for propagating a confidence level
+across a document boundary — a `Suspected` label is a property of the sentence,
+not of the claim, so it is lost the moment the claim is restated elsewhere.
+**Ask job 7 for the concrete practice**: how does a downstream document inherit
+"this is unverified", and what stops a prompt brief from being authored in the
+confirm-the-conclusion voice? The F76 brief is the cleanest specimen the corpus
+has, because the refutation cost half an hour and the belief cost a session.
+
+#### Second job-7 seed line — a prompt that could not be finished by the session it was given to
+
+Prompt 11 is the chain's only **attended** sitting, and jobs 2-4 are all
+downstream of a live run. The chain's own rule 3 (self-split on context
+pressure) covers a session running out of *context*; there is no rule for a
+session running out of *the owner*. The prompt was routed as one unit anyway,
+so the file cannot be consumed and the outbox cannot be written the way the
+chain expects. **This is a routing-shape observation, not a complaint** — see
+also prompt 10's note about an item that could not find a suite run in three
+prompts. Both say the chain's unit of work is the *prompt* when sometimes it is
+the *keyboard*.

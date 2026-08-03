@@ -29,6 +29,25 @@ remediation 3.3). Session legs are append-only in
 > drone project grew its own open design decision, its own frozen tests, and
 > constraints that do not generalise, and sharing a prompt was degrading both.
 
+⛔ **F76 — THE RECORDED MECHANISM IS REFUTED; STATUS STAYS `todo`, NOTHING
+BUILT (chain prompt 11, job 1 only, 2026-08-02).** The game-free design pass ran
+and did not confirm the entry: `XWindow.box` and `terminal.GetMousePos()` are the
+**same** coordinate space (vanilla's own `XDialog.lua:139` is the control), so the
+entry's "coordinate-space mismatch" does not exist and its "Fix sketch" would have
+*introduced* the displacement it meant to remove. The click-through is fully
+explained without a second defect — the modal picker forwards left-clicks to the
+world (`ItemsMenu.lua:510-518`) and then closes on the selection it caused. And
+⚠️ **the one numeric forensic on the entry evidences nothing**: `box=(886,13)-(1054,442)`
+solves backwards to a single anchor ≈(969,442) with **no clamp firing**, i.e. it is
+what *correct* placement looks like; the separately-recorded `(1731,665)` anchor is
+from a different click and may not be paired with it. **Chain prompt 11 is NOT
+consumed** — its jobs 2-4 are an attended sitting and are unrun. The sitting is
+designed on the F76 entry (measurements M1-M4, §1 technique chosen in advance per
+outcome, one candidate flagged for the owner because it overrides deliberate
+vanilla behaviour). ⭐ M1 also settles an unrecorded engine fact regardless of F76:
+`UIL.GetSafeArea()`'s return convention. Counts unchanged (nothing filed, nothing
+built). **PROBE SWEEP: clean**, both repos.
+
 ⚠️ **D12 `Opt_NoHomeless` — BUILT, PT-62 PARTLY RUN 2026-08-02, NOT PASSED.**
 The core seam result is established (vanilla `false nil` → D12 `DomeBasic
 shuttle`) and P5/P8b/P11 passed, but **P4/P6 did not establish** (an inflow
