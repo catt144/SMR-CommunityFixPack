@@ -61,4 +61,64 @@ row 2, delete self, push.
 
 ## Notes from upstream
 
-(none yet)
+**From prompt 1 (Opus, 2026-08-03).** All line numbers below are as of the
+commit that closed prompt 1 — re-derive them after any BUGS.md edit.
+
+**State you inherit.** doccheck v1 is green. The pre-commit hook is **ARMED**
+(`core.hooksPath = tools/hooks` is set in this clone), so every commit you make
+runs doccheck and is refused on red — both paths were verified, not assumed.
+`--no-verify` exists; using it means "the docs are inconsistent and I am
+committing anyway" and must be said in the commit message.
+
+`doccheck.status_word()` is the matcher to import, as your brief says. Two
+behaviours to know: it strips **all** leading non-letters (the markup zoo is
+`**`, `~~`, `` ` ``, ⭐, ⛔, ✅, ⚠️, ⏸️ and growing), and the **tag is
+authoritative** — spec §2 derives from it and the row is deleted, so a row
+that opens with prose instead of a status word is checked by containment and
+reported `warn`, not red. Two today, F82 and F93; both are fine.
+
+D12's row/tag mismatch was red when prompt 1 started and was repaired in
+`b243e3e` by a parallel session — do not re-derive it.
+
+**Correction 1 — there is ONE index table, not two.** Your parser section says
+"the two index tables (F/D table, C table)". Wrong: rows 19–169 are a single
+contiguous table with no interior header, in kind runs **F×63, D×12, F×35,
+C×41**. Region 1 also holds, *after* the table: the `Severity:` legend (171),
+a `---` (173) and `## P1 — gameplay-breaking` (175).
+
+**Correction 2 — three structural lines belong to no entry, and byte-accounting
+cannot catch them.** A naive "entry runs to the next `###`" rule swallows each
+into the *preceding* entry, and the accounting still balances, because nothing
+is lost — the corruption is invisible to your only check. Assert on them:
+
+| line | line content | sits between |
+|---|---|---|
+| 666 | `## P2 — wrong numbers / notable misbehavior` | F11 and F12 |
+| 932 | `## P3 — cosmetic / latent / mod-facing` | F22 and F23 |
+| 1327 | `## Phase 2 findings — details (2026-07-24)` | F29 and F30 |
+
+**⛔ BLOCKER — spec §3a's verification is unsatisfiable as written. STOP AND
+ASK before you split.** There are **151 index rows but only 116 `###` entry
+headings**. Every F and D row has its own heading (98 + 12); **C has 41 rows
+and 6 headings**. So your job-1 abort "row without a heading" fires **35
+times**, and §3a's "regenerated INDEX row-count == 98 F + 12 D + 41 C" cannot
+hold against 116 entry files. Verified breakdown:
+
+- The 35 heading-less rows: **C02**, C04–C11, C13–C38.
+- 34 of them have their text inside two grouped headings — `### C03–C11`
+  (10548–10615) and `### C12–C31` (10616–12293). ⚠️ **The second heading's
+  stated range is stale: it actually holds C12 through C38.**
+- **C02 has an index row and no entry text anywhere in the file.** Its status
+  cell is `runtime-check` and it carries no `(entry)` marker.
+
+The spec never decided what a grouped-section C row becomes. Three routes, and
+the choice is the owner's:
+
+- **(a) recommended** — INDEX carries all 151; a grouped C row's link points at
+  the grouped file plus an anchor; entry files stay 116. The only route that
+  keeps the row count, keeps bytes preserved, and needs no judgment. C02 gets
+  an INDEX row with no target, flagged.
+- (b) split the grouped sections into per-ID files — needs judgment *inside*
+  grouped prose, which collides with binding rule 1 (no hand-editing content).
+- (c) INDEX carries only the 116 and the C rows go to `_notes.md` — loses index
+  coverage of 35 candidates.
