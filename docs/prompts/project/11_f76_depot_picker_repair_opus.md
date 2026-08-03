@@ -92,8 +92,14 @@ beyond `speced`. Counts re-derived by counting: **82 `Code/` files; 81 registere
 modules, 74 default-active** (opt-in adds none); **87 probes**; **110 rows = 98 F
 + 12 D; 40 C**. **PROBE SWEEP: clean**, both repos. Recount, do not inherit.
 
-**1 · ⛔ THE `DustDevilSpawnGate` CONFIRMATION IS ON ITS THIRD HOP AND IT IS NOW
-YOURS.** 8c routed one unrun change to prompt 9 on the basis that it *"rides an
+**1 · ✅ ~~THE `DustDevilSpawnGate` CONFIRMATION~~ — DISCHARGED 2026-08-02, DO NOT
+CHASE IT.** It **PASSED** in log `Mars.exe-20260802-20.43.08` (`78 PASS, 0 FAIL,
+9 SKIP, 0 ERROR`). ⚠️ The first run after this note was written FAILED it — and
+that was a **probe** defect, not a fix defect: the probe used `forbidden` as
+scaffolding and 8c had since given that flag real behaviour. Both were repaired
+and the re-run is clean. History below kept because the routing lesson stands.
+
+**~~1 (as written)~~ — THE CONFIRMATION WAS ON ITS THIRD HOP.** 8c routed one unrun change to prompt 9 on the basis that it *"rides an
 existing suite run"* — the `forbidden` early-return added to
 `Fix_DustDevilSpawnGate` after PT-61, behaviour-neutral **by construction but not
 by measurement**. Prompt 9 built nothing and ran no suite; prompt 10 built code
@@ -105,7 +111,15 @@ it — and consider saying so to the owner, because an item that cannot find a
 suite run in three prompts is telling you something about the routing rule and
 not about the change.
 
-**2 · ⭐ THE F98 LOCALISATION CONTROL IS STILL UNRUN, AND IT IS THIRTY SECONDS.**
+**2 · ✅ ~~THE F98 LOCALISATION CONTROL~~ — RUN 2026-08-02, RESULT `userdata`.**
+It **confirms** F98: a re-used translation id is discarded at `T()` construction,
+so `Fix_TechDescriptionBuilding` never worked in retail and F25 stays demoted.
+F98 no longer rests on source alone. **Do not re-run it.** The rest of this note
+still applies to any UI text F76 adds — new strings go through
+`Untranslated(…)`, appending to a shipped string goes through
+`shipped_T .. Untranslated(…)`. Original text follows.
+
+**~~2 (as written)~~ — STILL UNRUN, AND IT IS THIRTY SECONDS.**
 `*r ModLog(type(T(8821, "ZZZ")))` — `userdata` confirms F98's reading (a re-used
 translation id discards the replacement literal at `T()` construction, which is
 why our shipped `Fix_TechDescriptionBuilding` never worked), `table` refutes it
@@ -140,3 +154,17 @@ prompts that a routed third-party claim paid for itself when checked first.
 
 ⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
 prompt 10.**
+
+
+### Correction appended by chain prompt 10 (2026-08-02, later the same evening)
+
+⚠️ **Two of the three items above are now CLOSED — read their headers, not the
+bodies.** They were routed to you before the suite ran; it then ran, and both
+resolved. Only **C40** (item 3) is still open, and it was never your work.
+
+**D12 also changed substantially after this outbox was written**, so nothing here
+describes it accurately: the subject test became vanilla's own `need_work`, the
+policy gained a dome precondition (a Nursery or Retirement Home must be built),
+tourist housing is excluded, and the infopanel row was rebuilt. `BUGS.md` D12 and
+`PLAYTEST_CHECKLIST.md` PT-62 are current; this section is not. **PT-62 is still
+UNRUN and is still what D12 is waiting on.**
