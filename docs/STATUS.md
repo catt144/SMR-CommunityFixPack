@@ -29,6 +29,18 @@ remediation 3.3). Session legs are append-only in
 > drone project grew its own open design decision, its own frozen tests, and
 > constraints that do not generalise, and sharing a prompt was degrading both.
 
+⚠️ **D12 `Opt_NoHomeless` — BUILT, PT-62 PARTLY RUN 2026-08-02, NOT PASSED.**
+The core seam result is established (vanilla `false nil` → D12 `DomeBasic
+shuttle`) and P5/P8b/P11 passed, but **P4/P6 did not establish** (an inflow
+fought the drain) and **the leg found a loop** — the policy pushed without
+declining, so vanilla re-offered the same dome to the same colonists, measured
+at 6 en route. Three changes built in response and **all UNRUN** (symmetric
+veto, `ChooseDome` filter, and a repair to an A/B lever that was silently
+dead). **The rule changed five times under live review, so its adjudication is
+routed to chain prompt 12, JOB 9** — D12 claims nothing beyond `speced`.
+Counts are UNCHANGED: no new module, no new probe (cases were added to the
+existing `NoHomeless` probe).
+
 **Build state (authoritative counts — stated here and nowhere else):**
 `Code/` = **82 files** (72 `Fix_` + 8 `Opt_` + `00_Core` +
 `90_SaveSanitizer`) = **81 registered modules, 74 default-active** (the 7
