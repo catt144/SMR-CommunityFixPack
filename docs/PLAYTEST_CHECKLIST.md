@@ -5,6 +5,38 @@
 next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
+## Decisions waiting on you
+
+Things that need **your** call, not an agent's. One line each plus where the
+reasoning lives; **an agent strikes a line the moment you decide** — just say so
+in any session. Added 2026-08-03 by the docs-restructure chain (spec §7 / R10):
+these used to be filed only in agent reports, which is where you never read.
+
+- **The mod-page relabel package.** Five shipped fixes (F55 forever-mark, F40
+  android dust sickness, F73(b) shelter reflex, F70 template refill, F97
+  dust-devil gate) are correct repairs whose *bug-ness* is a design judgment.
+  Proposal: a short "judgment calls" section in `MOD_DESCRIPTION.md` so they
+  aren't presented identically to, say, F23 or F12. **The wording is yours.**
+  → `docs/reports/CHAIN_QA_REPORT.md` §3.
+- **The dead `SMRFixPack_Disabled` veto on D03/D07.** The console veto lever
+  does nothing for those two modules — only `IsActive` is consulted. Either
+  honor it per-call in both, or record that the lever exists only for
+  D12/F97-class modules. Nothing measures wrong today, but a future leg that
+  used the lever on D03/D07 would silently run live and you'd read the result
+  as a fix failure. → `CHAIN_QA_REPORT.md` §5.
+- **F46 `Fix_TrainCargoDumping`: move group C → group B.** The record says "no
+  route" and a route demonstrably exists (F90's approved shape); the honest
+  ground for skipping is cost-benefit, not impossibility. Moving it does *not*
+  commit you to ever doing the conversion. → `CHAIN_QA_REPORT.md` §7.
+- **The C36-adjacent mysteries grep.** A cheap sweep of `Lua\Mysteries\` and
+  `Scenario\` for `IsDisasterPredicted` gates, deliberately left unassigned:
+  your call whether it becomes work at all. Not owed. → `CHAIN_QA_REPORT.md` §8.
+- **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
+  (a round-trip step for state-transition claims), R7 (effect-evidencing
+  verdicts), R9 (an ENGINE_FACTS review cadence), R14 (a context budget for
+  agent docs). Adopt, defer, or drop.
+  → `docs/reports/DOC_STRUCTURE_REVIEW.md` §3 and §6.
+
 ⭐ **CONVENTION (added 2026-08-03, chain-12 QA, from `BUG_LIST_AUDIT.md`
 §10.6f(i)): record the SESSION UPTIME next to any error COUNT.** Cross-arm
 count comparisons (this leg's 0 vs that leg's 80) depend on comparable
