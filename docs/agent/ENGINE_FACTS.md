@@ -668,3 +668,46 @@ code suggests.
     2440, ≈ −1.9σ) is not evidence of anything** — it was computed only *because*
     an early sample looked odd, and it pools windows of very different size. Take
     the largest single sample; do not pool after the fact to rescue a suspicion.
+
+- **UI coordinate spaces: `XWindow.box` and `terminal.GetMousePos()` are ONE
+  space (desktop pixels); `scale` multiplies SIZES, never coordinates.**
+  Recorded 2026-08-02 by the F76 design pass, which was sent to confirm the
+  opposite. `XDesktop:OnSystemSize` sets the two independently —
+  `SetOutsideScale(point(scale,scale))` then `SetBox(0,0,x,y)`
+  (`CommonLua/X/XDesktop.lua:447-458`) — and every consumer of `scale` runs it
+  through `ScaleXY` against `Margins`/`Padding`/`MinWidth`/`BorderWidth`
+  (`XWindow.lua:763-782`, `:584-590`, `:351-353`), never against x/y.
+  **The decisive control is vanilla's own `XDialog.lua:139`**, which feeds
+  `terminal:GetMousePos()` straight into `GetMouseTarget(pt)`, which hit-tests
+  `.box` (`XWindow.lua:1276-1294`). If the spaces diverged, ALL mouse targeting
+  would break at any UI scale ≠ 100%.
+  * The one genuinely scaled box is `interaction_box` (`XWindow.lua:516-529`),
+    and its **only** caller outside itself is `XBadge.lua:392` — so for ordinary
+    windows it is `false` and `PointInWindow` falls back to `.box`.
+  * ⛔ **Do not "convert" a mouse-derived anchor into layout space.** There is
+    nothing to convert, and doing it introduces the displacement it looks like
+    it removes.
+
+- **`UIL.GetSafeArea()` returns FOUR ABSOLUTE NUMBERS (x1, y1, x2, y2), and on
+  PC it equals the whole screen.** MEASURED 2026-08-02 (F76 sitting, M1):
+  `UIL.GetSafeArea()` → `0 0 3840 2160` with `UIL.GetScreenSize()` →
+  `(3840, 2160)` and `terminal.desktop.box` → `(0,0)-(3840,2160)`. So
+  `XWindow:GetEffectiveMargins`' absolute reading (`XWindow.lua:357-360`,
+  `area_x2 = w - area_x2`) is correct, and **any "the safe-area clamp moved my
+  dialog" theory is dead on PC** — the clamps in `ResourceItems:UpdateLayout`
+  (`:53-67`) and `XPopupList:UpdateLayout` (`XControl.lua:951-965`) can only
+  fire within a dialog's own width of a screen edge.
+  * ⚠️ **The global `GetSafeArea()` does NOT exist** — `type(GetSafeArea)` →
+    `nil`, despite `CommonLua/LuaExportedDocs/Global/LuaExports.lua:488-490`
+    documenting it as `rect GetSafeArea()`. **The exported doc is stale AND its
+    return type is wrong for the function that does exist.** Treat
+    `LuaExportedDocs` as a hint, not as a signature.
+
+- **`terminal.desktop.scale` is `GetUIScale`'s output INCLUDING the user's UI
+  Scale option**, so it is a single number pair, not a resolution ratio.
+  MEASURED 2026-08-02: at 3840×2160 it read `(1900, 1900)`, which is exactly
+  `GetUIScale`'s raw curve for that resolution — `scale_x = scale_y = 2000`,
+  then `1000 + (2000-1000)*900/1000 = 1900` (`CommonLua/UI/uiScale.lua:2-21`) —
+  **with the user multiplier at 100%**. A slider at 85% would have read 1615.
+  ⚠️ Useful as a *control*: reading 1900 back proves the user UI Scale option
+  is at 100%, whatever the slider looks like.

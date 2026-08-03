@@ -4172,6 +4172,50 @@ rationalise toward whichever answer arrives):
 what settles it, and per the prompt's *What may not be claimed*, an
 unreproducible session says "did not reproduce", not "fixed".
 
+#### ✅ M1 RUN (attended, 2026-08-02) — THE CLAMPS ARE INNOCENT, AND THE CLAMP READING OF THE FORENSIC BOX IS DEAD
+
+Console, bare expressions (the first attempt used `*r … ModLog(…)` and printed
+nothing — `*r` returns nothing to the console and `ModLog` writes to the mod
+message log; `PLAYTEST_HELP.md` already records "prefer a bare expression for a
+simple read", and this is a second instance of its PT-61 *silence reads as a
+dead console* lesson):
+
+| read | result |
+|---|---|
+| `type(UIL.GetSafeArea)` | `function` |
+| `type(GetSafeArea)` | ⚠️ `nil` — the global documented at `LuaExports.lua:488` **does not exist** |
+| `UIL.GetSafeArea()` | **`0 0 3840 2160`** — four absolute numbers, the whole screen |
+| `UIL.GetScreenSize()` | `(3840, 2160)` |
+| `terminal.desktop.box` | `(0,0)-(3840,2160)` |
+| `terminal.desktop.scale` | `(1900, 1900)` |
+
+**What it settles.**
+1. ⛔ **The safe-area clamps cannot have produced `box=(886,13)-(1054,442)`.**
+   That reading required `safe_area_x2 = 1054` and `safe_area_y1 = 13`; the
+   measured rect is `0,0,3840,2160`. With a 168×429 dialog the clamps can only
+   fire within 168px of the right edge or 429px of the bottom. **Dead.**
+2. ⭐ **So the surviving reading is the other one: the box is EXACTLY what
+   vanilla produces for a mouse at ≈(969,442)** — centred on the cursor, bottom
+   edge at the cursor. The flip branch is also excluded (it needs the mouse 12px
+   from the top of a 2160px screen to land at y=13). **On the only numeric
+   evidence this entry has, the picker was placed correctly.** And it explains
+   the "near the top of the screen" report without a defect: the dialog occupies
+   `y = 13..442` *because the cursor was at y≈442*, in the top fifth of the
+   screen; the picker extends upward from the cursor by its own height.
+3. ⚠️ **The environment does not match what this entry pins.** The entry records
+   "fullscreen 3840×2160, UI Scale slider ~80-85%". Measured scale is **1900**,
+   which is `GetUIScale`'s raw curve for 3840×2160 with the user multiplier at
+   **100%** (85% would read 1615). **The reported environment is not the one
+   under measurement**, so M2 must be run at both settings before anything is
+   concluded about scale.
+4. ⚠️ **The brief's "3751px window" is not reproduced** — the desktop box is
+   3840 wide. Unexplained; recorded, not discounted. It may be a windowed-mode
+   reading from the original session, but nothing on file says so.
+5. Three engine facts banked regardless of F76 (now in `ENGINE_FACTS.md`):
+   `UIL.GetSafeArea`'s absolute four-number return; the **stale exported doc**
+   for a global `GetSafeArea` that does not exist; and `terminal.desktop.scale`
+   as a read-back control for the user's UI Scale option.
+
 ---
 
 ### F77 — Extender working-flap tears down and rebuilds the entire uplink hub; fleet-wide Idle churn (P2, med-high)  `[fixed: Code/Fix_ExtenderFlapChurn.lua — chained wrapper on UpdateUplinkRequesters, rebuild deferred 2s + coalesced per root hub (chains resolved); built 2026-07-28 with the D06 core, PT pending. Accepted trade-off: registration stale up to ~2s during the window — the shipped flow already defers reconnects (SetWorkRadius uses DelayedCall(300)). Debounce thread is a mod game-time thread = not persisted (F06 precedent), so a save inside the window is clean]`
