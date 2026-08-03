@@ -9,15 +9,15 @@ the end of every drone session.
 > where something lives or where a new document goes.**
 > `docs/` root = daily truth (`STATUS`, `agent/bugs/`, the playtest files,
 > `FUTURE_IDEAS`, `MOD_DESCRIPTION`) · `docs\agent\` = the binding rules
-> (`agent/facts/`, `FIX_POLICY`, `WORKFLOW`) · `docs\prompts\` = the two
-> standing prompts + live one-offs · `docs\reports\` = reports, plans,
+> (`agent/facts/`, `FIX_POLICY`, `WORKFLOW`) · `docs\agent\prompts\` = the two
+> standing prompts + live one-offs · `docs\agent\reports\` = reports, plans,
 > specs, surveys · `docs\archive\` = spent, plus `SESSION_LOG.md`.
 > **New rules/engine facts go in `agent\`, not buried in a report. Defects go
 > in `agent/bugs/`, never a report and never `FUTURE_IDEAS.md`. Reports are not
 > authority — if a report and `agent/bugs/`/`agent/facts/` disagree, the root/agent
 > document wins.**
 
-> 🚧 **This prompt owns drone work exclusively.** `docs\prompts\FABLE_NEXT_PROMPT.md` is
+> 🚧 **This prompt owns drone work exclusively.** `docs\agent\prompts\FABLE_NEXT_PROMPT.md` is
 > the general prompt; it may *answer questions* about drones but it no longer
 > drives drone work. If you were started from that prompt and the session turns
 > into drone work, **stop and load this file instead.**
@@ -25,7 +25,7 @@ the end of every drone session.
 > 🔗 **ADDENDUM 2026-08-01 (bug-list audit + project chain) — three facts a
 > drone session must know:**
 > 1. **The `Opt_DroneOverhaul` layer-2 carve-out is PRE-CLEARED** (owner
->    blanket clearance, recorded in `docs\prompts\project\README.md`): the
+>    blanket clearance, recorded in `docs\agent\prompts\project\README.md`): the
 >    project chain's prompt 5 will move the module's wrapper call position
 >    for F86 save-safety — surgery on WHERE the wrapper calls, zero drone
 >    design. Expect that change to land from outside this prompt; do not
@@ -58,7 +58,7 @@ If commits landed after that, read them before trusting anything below — this
 project has already had a prompt go stale mid-job.
 
 > 🛑 **F86 CHANGED THE GROUND UNDER THIS PROMPT — read `agent/bugs/` F86 and
-> `docs\reports\SAVE_SAFETY_REDESIGN.md` before touching the D06 decision.** PT-20
+> `docs\agent\reports\SAVE_SAFETY_REDESIGN.md` before touching the D06 decision.** PT-20
 > (2026-07-31) measured **pack code being serialised into the savegame and still
 > running after the mod is removed**, and **`Opt_DroneOverhaul` is one of the two
 > proven sites** — 98 errors per session after removal, and it leaked **with its
@@ -112,7 +112,7 @@ settled by the owner.** Not "while we're in there", not a prototype, not a
 
 **All four research gates are ANSWERED (2026-07-31).** Nothing on the research
 side is owed. Evidence lives on the **D06 entry** in `agent/bugs/` and in
-`docs\reports\DRONE_PRIORITY_SYSTEM.md` §8-§10.
+`docs\agent\reports\DRONE_PRIORITY_SYSTEM.md` §8-§10.
 
 | Gate | Answer |
 |---|---|
@@ -238,11 +238,11 @@ is caught in the freeze.
    game object.
 2. **`agent/bugs/` D06 entry** — the plan of record, including the owner decisions on
    relocation and the cleanup mod.
-3. **`docs\reports\DRONE_PRIORITY_SYSTEM.md` — §8, §9 and §10 especially.** These are the
+3. **`docs\agent\reports\DRONE_PRIORITY_SYSTEM.md` — §8, §9 and §10 especially.** These are the
    new, decisive sections. §1 and §7 carry corrections to earlier claims.
 4. `docs\archive\DRONE_RESEARCH_BRIEF.md` — now historical (all gates answered); keep it
    for the freeze rules and the disclaimer spec.
-5. `docs\reports\DRONE_OVERHAUL_OPTIONS.md` — only if D08 or D06-structural comes up.
+5. `docs\agent\reports\DRONE_OVERHAUL_OPTIONS.md` — only if D08 or D06-structural comes up.
 6. `docs\agent\FIX_POLICY.md` §1.5 and §3 — replacements and savegame footprint.
 7. `docs\FUTURE_IDEAS.md` — the scope brake.
 
@@ -317,7 +317,7 @@ If you cannot cite evidence, **say the narrower true thing instead.**
   **false**; `SaveGameStart` reaches mods. If you repeat the cleanup-mod case,
   make it on grounds that survive that correction.
 - **Do not assume any F86 remedy.** The three-layer redesign in
-  `docs\reports\SAVE_SAFETY_REDESIGN.md` is a **proposal awaiting an owner decision**.
+  `docs\agent\reports\SAVE_SAFETY_REDESIGN.md` is a **proposal awaiting an owner decision**.
   Do not build against it, and do not treat D06's shape as constrained by a
   layer that has not been chosen.
 

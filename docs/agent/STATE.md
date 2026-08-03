@@ -16,11 +16,11 @@ table, and the campaign's ordered top. **The owner is free for the playtest
 campaign** (`docs/PLAYTEST_CHECKLIST.md`; at the keyboard first: PT-62's
 remainder, the load-heal round-trip sweep, the doctrine C-sitting — §9).
 
-📁 **RUNNING, needs no keyboard: the docs-restructure chain**
-(`agent/prompts/docs-restructure/`, executing the DECIDED spec
-`agent/reports/DOC_RESTRUCTURE_SPEC.md`), concurrent with the campaign. Its
-prompt 4 emits `DOCS_RESTRUCTURE_REPORT.md` → a Fable session then REDESIGNS the
-standing prompts against this tree.
+✅ **The docs-restructure chain is COMPLETE (2026-08-03)**, folder empty, spec
+executed, doccheck v3 armed as a pre-commit hook.
+**`agent/reports/DOCS_RESTRUCTURE_REPORT.md`** is the end-state picture:
+conservation CLEAR, three findings (one fixed here), read-path economics, and
+the OBSERVATIONS for the **Fable prompt-redesign session** the owner schedules.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -42,19 +42,19 @@ released.** The unrefuted residue is **not** closed with it — the "icon does n
 appear" witness and the out-of-range-mouse lead are **`C41` (cand)**, instrument
 `F76MISS`; MOD_DESCRIPTION's F76 note is VOID.
 
-✅ **D12 `Opt_NoHomeless` — THE BUILD STANDS** (job 9). Five live-review
-decisions upheld, the veto's D07-independence verified from code; **PT-62's
-remainder is the only gate left**, and D12 claims nothing beyond `speced`.
+✅ **D12 `Opt_NoHomeless` — THE BUILD STANDS** (job 9). Five live-review decisions
+upheld, the veto's D07-independence verified from code; **PT-62's remainder is
+the only gate left**, and D12 claims nothing beyond `speced`.
 
 ## Gates and holds
 
 - **PT-62 remainder** (P4/P6 stable colony, P12 uninstall, P13 veto) → D12.
-- **PT-37** → F48, the last queued save-repair pass.
-- **F42** — `blocked`, wontfix recommended; needs an owner call.
-- **D08 extender overhaul** — five layers speced in
-  `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's stat dials wait on
-  the B2 re-run.
-- **Owner decisions (5 open)** → `docs/PLAYTEST_CHECKLIST.md` "Decisions
+- **PT-37** → F48 · **F42** `blocked`, wontfix recommended, owner call needed.
+- **D08 extender overhaul** — 5 layers speced in
+  `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
+- 🟢 **`agent/prompts/PT_REDESIGN_PROMPT.md` UNBLOCKED** (gate was an empty
+  docs-restructure folder). Rewrites the checklist — not during a sitting.
+- **Owner decisions (6 open)** → `docs/PLAYTEST_CHECKLIST.md` "Decisions
   waiting on you", never only in agent docs.
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
   `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.
