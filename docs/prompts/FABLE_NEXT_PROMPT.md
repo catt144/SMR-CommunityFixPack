@@ -5,7 +5,9 @@ the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
 — this file goes stale the moment another session commits. (The filename keeps
 its historical `FABLE_` prefix so existing references stay valid; nothing in
 it is model-specific.) Staleness anchor: rewritten with the project-chain
-creation commit of 2026-08-01.
+creation commit of 2026-08-01; **F76 block rewritten 2026-08-02 (chain prompt
+11) after its claim was falsified by measurement — the chain folder now holds
+only prompt 12 and its README.**
 
 > 🗂 **THIS PROMPT IS FOR LIVE PLAYTEST SITTINGS ONLY.** All project work —
 > the F86 phases, the audit follow-through, the D10/D12/F76 builds, the final
@@ -76,15 +78,36 @@ For any "nothing should happen" test insist on a **positive control** and an
   Sanctioned speed techs: `AdvancedDroneDrive`, `LowGDrive`,
   `MartianAerodynamics`.
 
-## F76 — READ BEFORE THE USER TOUCHES AN RC TRANSPORT OR DOZER (vanilla P1, unfixed until chain prompt 11 lands)
+## F76 — ⛔ THIS WARNING WAS FALSIFIED 2026-08-02. THE PICKER WORKS; USE IT NORMALLY
 
-The resource picker renders far from the cursor and cannot be clicked on the
-user's setup — and interacting with it can **HARD-LOCK the UI (session
-lost)**. Surface: ANY vehicle whose click-load reaches a storage-depot-class
-object. Avoid the picker paths entirely; loose ground piles are safe;
-route-mode loading works for single-resource depots. Verified workaround:
-`rc:SetCommand("TransferResources", depot, "load", "<Resource>", <amount*1000>, true)`
-**No live UI-internals prototyping in a play session — hard rule.**
+**Rewritten by the chain prompt 11 attended sitting, which measured the claim
+this block used to make and found it wrong.** The old text told you to *"avoid
+the picker paths entirely"*. **Do not.** The resource picker is **vanilla** (the
+pack touches none of it — verified across all 82 `Code/` files) and it anchors
+**exactly at the cursor**: measured `anchor (2051,887)` against live
+`mouse (2058,885)`, box centred on the anchor x with its **bottom edge AT** the
+anchor y, every number matching prediction to the pixel. The owner clicked the
+hex in that sitting and it loaded.
+
+⚠️ **It opens ABOVE the cursor by its own height** (429px at 4K), so a click
+high on the screen puts it near the top of the screen. **That is intended, not
+displacement.** F76's disposition is chain prompt 12 job 10; it is `todo` only
+because the closure was routed rather than self-approved.
+
+**Two things from the old block that DO still stand, for different reasons:**
+- ⛔ **The hard rule survives: NO live UI-internals prototyping in a play
+  session.** The 2026-07-27 lock (`XWindow:SetVisibleInstant` on a destroyed
+  window, every mouse event erroring, Alt-F4) happened under a wrapper that
+  **MUTATED `align_pos`**. The chain-11 sitting was the sanctioned exception and
+  it used **read-only** hooks — call `orig` first, print, mutate nothing.
+- **The workaround still works and is still worth knowing** if a depot ever does
+  refuse a load:
+  `rc:SetCommand("TransferResources", depot, "load", "<Resource>", <amount*1000>, true)`
+
+**If a depot or heap click-load misbehaves, do not report it verbally** — take
+the two read-only console lines on the **F76 recurrence rider** in
+`PLAYTEST_CHECKLIST.md`. A screenshot plus a description is exactly what cost
+this project nine days on this entry.
 
 ## Live-session console facts (hard-won — do not re-derive)
 
@@ -137,8 +160,10 @@ route-mode loading works for single-resource depots. Verified workaround:
    opposite of what code suggests). Then `docs/STATUS.md`.
 2. `docs/PLAYTEST_CHECKLIST.md` (tests + protocol) with
    `docs/PLAYTEST_HELP.md` (ground rules BEFORE handing any console line).
-3. `docs/BUGS.md` — the entries the sitting touches. **F76 before ANY
-   depot-picker interaction** (block above).
+3. `docs/BUGS.md` — the entries the sitting touches. **F76 only if a
+   depot-picker interaction actually misbehaves** — the old "read this before
+   ANY depot-picker interaction" instruction was retired 2026-08-02 with the
+   claim behind it (block above).
 4. `docs/agent/FIX_POLICY.md` — §4a, §3a, §2 binding for any code written.
 5. `docs/reports/REACHABILITY_AUDIT.md` "Challenge review" — before writing
    ANY new fix: tier vocabulary, hard tells, injection-evidence rule.
