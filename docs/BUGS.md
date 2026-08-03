@@ -4281,6 +4281,56 @@ the first thing on this entry that predicts the `BUG_LIST_AUDIT.md` §2.2 OG
 witness on ordinary setups instead of explaining it away. **M4's resolution
 control is therefore no longer the discriminator; the click is.**
 
+#### ⚠️ THE CLICK TEST — **DID NOT REPRODUCE** (attended, 2026-08-02)
+
+Owner, verbatim: *"the picker works fine on my resolution at least when i click
+on it in the box it works perfectly."* Screenshot on file: the picker open with
+its rollover up (*"Order the transport to load Machine Parts"*, the shipped
+`Ctrl + load 5 / load all and exit / confirm and exit` hint line), clicked, and
+the load ordered. **Per the prompt's *What may not be claimed*, this is recorded
+as DID NOT REPRODUCE, not as fixed and not as "no defect exists".** ⚠️ The
+`F76MISS` forwarding hook was **not installed** for this run, so its silence is
+not evidence of anything.
+
+**So both halves of F76 are now unreproduced on the owner's own machine**: the
+positioning half is falsified by measurement (M2 above), and the load half did
+not reproduce in play. The 2026-07-27 report is not withdrawn — it is a real
+observation whose *environment* differs from this sitting in two measured ways
+(the entry pins UI Scale ~80-85%, measured 1900 = **100%**; and it pins a
+**3751px** window against a measured 3840).
+
+#### ⭐⭐ AND THE RUN LEFT ONE ANOMALY, WHICH IS THE FIRST MECHANISM THAT WOULD EXPLAIN THE ORIGINAL REPORT
+
+The eighth and last logged pass reads:
+
+```
+F76#8 anchor (2051, 887) box (1967, 458)-(2135, 887) ... mouse (6148, 2350)
+```
+
+**`terminal.GetMousePos()` returned `(6148, 2350)` on a desktop box of
+`(0,0)-(3840,2160)` — 2308px beyond the right edge and 190px below the
+bottom.** Passes #4-#7 all read `(2058, 885)`, in range; only the last is out.
+
+**Why this matters more than anything else on this entry.** `align_pos` is
+captured from that same call at `Init` (`ResourceItems.lua:11`). Feed an
+out-of-range anchor into `UpdateLayout` and the safe-area clamps — measured
+innocent for an *in-range* anchor, M1 — fire for the first time and **slam the
+dialog against a screen edge**: for `(6148,2350)` they give
+`x = 3840-168 = 3672`, `y = 2160-429 = 1731`, i.e. hard into the bottom-right
+corner, arbitrarily far from where the player's cursor appears to be. **That is
+"renders far from the cursor" with a real mechanism behind it**, and it is
+environment-specific rather than resolution-specific, which is why it would
+survive a 1080p control and why most players never see it.
+
+**The hypothesis to test (M5): `terminal.GetMousePos()` reports VIRTUAL-DESKTOP
+coordinates while `terminal.desktop.box` is window-local.** On a multi-monitor
+layout with the game on a display that is not at the virtual origin, every
+anchor would be offset by that display's origin, permanently. The original
+report's environment — ultrawide, and a **3751px** window that is not any
+standard mode — is exactly the shape that would put the game window somewhere
+other than `(0,0)` of the virtual desktop. ⛔ **Not claimed, not built. It is one
+console line and two questions to the owner.**
+
 ---
 
 ### F77 — Extender working-flap tears down and rebuilds the entire uplink hub; fleet-wide Idle churn (P2, med-high)  `[fixed: Code/Fix_ExtenderFlapChurn.lua — chained wrapper on UpdateUplinkRequesters, rebuild deferred 2s + coalesced per root hub (chains resolved); built 2026-07-28 with the D06 core, PT pending. Accepted trade-off: registration stale up to ~2s during the window — the shipped flow already defers reconnects (SetWorkRadius uses DelayedCall(300)). Debounce thread is a mod game-time thread = not persisted (F06 precedent), so a save inside the window is clean]`
