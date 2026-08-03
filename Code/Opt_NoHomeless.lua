@@ -252,6 +252,36 @@ local function has_free_suitable_home(community, colonist)
 	end) and true or false
 end
 
+-- ⛔ THE DOME PRECONDITION (owner, 2026-08-02): the policy exists — and applies
+-- — only where a **Nursery or a Retirement Home is actually built**. *"Instead
+-- of saying it can't have ordinary housing, make it say it must have either a
+-- nursery OR a retirement home built in the dome. That gives us some safety,
+-- while giving us the flexibility we need."*
+--
+-- Tested through `exclusive_trait` rather than by class name, so it covers the
+-- Nursery (`Child`, via `children_only`, Residence.lua:26-28), the Seniors
+-- Residence (`Senior`, from its template) and any cohort housing a future
+-- update or another mod adds, without an enumeration to keep in step.
+-- STRUCTURAL: a switched-off Nursery still counts, because the player built one
+-- — this asks what the dome IS, not what it is doing this minute.
+--
+-- It buys three things at once:
+--   * safety — the toggle cannot be flipped onto a production dome by someone
+--     who read the row as a "get rid of homeless" button, which is the exact
+--     misread the owner flagged;
+--   * honesty — the row's title claims "Nursery / Retirement Dome", and with
+--     this gate that claim is true wherever the row appears. Without it the
+--     title was a lie on every other dome;
+--   * a self-neutralising policy — demolish the last cohort home and the flag
+--     stops doing anything, because the WRAPPER checks the same predicate the
+--     UI does. The two can never disagree about where the policy applies.
+local function has_cohort_housing(community)
+	return each_residence(community, function(res)
+		local t = res.exclusive_trait
+		return (t and t ~= "") and true or nil
+	end) and true or false
+end
+
 -- The push. Installed at FILE SCOPE (the A2 lesson, FIX_POLICY §5) so the wrap
 -- is in place before class flattening and a FIRST mid-session Mod Options
 -- enable works without a relaunch; guarded by the same existence check apply()
@@ -288,6 +318,13 @@ do
 			--      into a log full of errors, and PT-62's P11 forbids exactly that.
 			local my_dome = self.dome
 			if not is_flagged(my_dome) then return dome, mode, dist, elevator end
+			if not has_cohort_housing(my_dome) then
+				-- the dome precondition, checked HERE and not only in the UI so
+				-- the two can never disagree: a flag left on a dome whose last
+				-- Nursery/Retirement Home was demolished is inert, and a flag
+				-- broadcast onto a dome that never had one does nothing
+				return dome, mode, dist, elevator
+			end
 			if not my_dome.accept_colonists then
 				return dome, mode, dist, elevator -- quarantine: no one enters or leaves
 			end
@@ -386,6 +423,7 @@ end
 -- (sectionDome.generated.lua:141-147), chosen over D03's accept_colonists pair
 -- so the two pack rows are not identical at a glance. Look-check is on the
 -- playtest item.
+
 -- How many colonists in THIS community the policy currently applies to — the
 -- same subject test the wrapper uses, so the number on the row cannot disagree
 -- with the behaviour. Drives TitleRight (see below).
@@ -404,6 +442,13 @@ local function count_movable(community)
 end
 
 local function append_policy_row(section, context)
+	-- ⛔ The dome precondition, UI side: no Nursery and no Retirement Home means
+	-- no row at all. Build one and the row appears the next time the panel is
+	-- opened (infopanel sections are constructed in Init, so an already-open
+	-- panel picks it up on re-selection — acceptable, and noted on PT-62's
+	-- look-check rather than papered over).
+	if not has_cohort_housing(ResolvePropObj(context)) then return end
+
 	local row = InfopanelActiveSection:new({
 		OnContextUpdate = function(self, context, ...)
 			local community = ResolvePropObj(context)
@@ -449,8 +494,29 @@ local function append_policy_row(section, context)
 			end
 			rawset(self, "ProcessToggle", function(self, context, broadcast)
 				local building = ResolvePropObj(context)
-				-- shipped policy machinery: UI-interaction gate, FX, broadcast
-				building:TogglePolicy(FLAG, broadcast)
+				if broadcast then
+					-- ⛔ OUR OWN BROADCAST, deliberately not the shipped one.
+					-- Community:SetPolicyState's broadcast arm writes the field
+					-- onto EVERY community in the city (Community.lua:86-94),
+					-- which would leave the flag on production domes where the
+					-- row is not even shown — inert today, but it would switch
+					-- itself on the day someone built a Nursery there. Ctrl+click
+					-- therefore means "every Nursery/Retirement Dome", which is
+					-- what the row claims to be about. Each dome still goes
+					-- through the shipped per-dome path, so the policy FX and
+					-- ObjModified are vanilla's.
+					if not building:GetUIInteractionState() then return end
+					local state = not building[FLAG]
+					for _, c in ipairs(building.city and building.city.labels
+							and building.city.labels.Community or empty_table) do
+						if has_cohort_housing(c) and c[FLAG] ~= state then
+							c:SetPolicyState(FLAG, false, state)
+						end
+					end
+				else
+					-- shipped policy machinery: UI-interaction gate + FX
+					building:TogglePolicy(FLAG, false)
+				end
 				RebuildInfopanel(building)
 			end)
 			self.OnActivate = function(self, context, gamepad)

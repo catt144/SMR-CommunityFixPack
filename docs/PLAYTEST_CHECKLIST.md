@@ -1458,6 +1458,14 @@ Confirm the population before starting, with the dome selected:
 shows this number** — `off (N would move)` — so it can be read without the
 console, and that is deliberate.
 
+**Trap 1b — the dome must actually HAVE a Nursery or a Retirement Home built in
+it** (owner precondition, 2026-08-02). No cohort housing means **no row at all**
+and an inert flag, checked in the wrapper as well as the UI so the two cannot
+disagree. Two consequences for this leg: a production dome is not a valid
+subject no matter how many unemployed homeless it holds, and **Ctrl+click
+broadcasts to Nursery/Retirement Domes only** — not to every dome in the city,
+which is what the shipped broadcast would have done.
+
 **Trap 2 — the DESTINATION must have housing of a kind they can use.** The module
 will not send a grown Youth from one Nursery-only dome to another. If every dome
 in the colony is specialist, nothing moves and that is **correct behaviour**, not
