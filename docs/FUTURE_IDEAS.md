@@ -428,19 +428,33 @@ a different state from both "owed" and "parked".
 - **Multi-hop passenger routing** — REJECTED by the owner 2026-07-30. Refused,
   not parked. Do not re-propose.
 - **A cohort "attraction" bonus on the D12 dome toggle** (+25 comfort-like score
-  for Seniors/Children on a flagged dome) — **DECLINED 2026-08-02.** Proposed by
-  the owner during the D12 build and closed by the owner's own statement of what
-  this project is for: *"our job is to not make the game easy mode for the
-  player, it's to give players better tools and a bug free environment the devs
-  failed at."* A flat attraction bonus is a **balance change with no defect
-  behind it** — it would make dedicated domes fill faster than the shipped game
-  intends, which is the one thing `MOD_DESCRIPTION` promises the pack does not
-  do (*"Fixes bugs. Only bugs … no balance changes, no redesigns, no
-  opinions"*). Three supporting facts, recorded so this is not re-derived:
-  `Community:GetScoreFor` **already** adds a cohort-scaled term when a dome has
-  free matching cohort housing (`Community.lua:376-391`); the dome traits filter
-  is the existing player-facing dial for the same intent; and
-  `PickEmigrationCommunity` ignores distance entirely (`Colonist.lua:2570-2577`,
-  with a shipped `-- TODO` admitting it), so placing a dedicated dome "out of the
-  way" costs nothing that a bonus would need to compensate for. **Refused, not
-  parked.**
+  for Seniors/Children on a flagged dome) — **DECLINED 2026-08-02, and the
+  reason is NOT the one first written down.** The first pass rejected it as a
+  balance change / "easy mode". ⛔ **That reasoning was wrong and is recorded
+  here only so it is not re-inherited.** The owner's case was that comfort is
+  saturated by the time anyone builds these domes — a randomly sampled colonist
+  in a dome with 63 unemployed and 23 homeless read **Comfort 97** — so comfort
+  is a spare lever rather than a scarce resource, and the goal was a faster draw
+  *at first setup*, not a permanent buff. That case is sound.
+  **It was declined on measurement instead:**
+  * `Community:GetScoreFor` **already** adds the comfort of the best FREE cohort
+    residence matching the colonist's traits (`Community.lua:376-391`), and the
+    ordinary dome they live in contributes **0** to that term because it has no
+    cohort housing. On the owner's colony that is a ~**97**-point pull against a
+    proposed **25** — the bonus would be a quarter the size of the mechanism it
+    was meant to reinforce.
+  * `Dome:ResidencesEval` is only `-500 / +20 / 0` (`Dome.lua:3575-3585`), and
+    **0 on both sides for a housed colonist** — so nothing was suppressing the
+    pull either. ⚠️ This is the fact the first rejection got wrong in the other
+    direction: 25 *would* have registered. Magnitude was never the objection.
+  * ⭐ **And it could not have delivered what was wanted.** `better_eval` is
+    already true the moment a cohort slot frees up, so the DECISION is immediate;
+    the delay at first setup is `next_heavy_update` cadence plus emigration
+    transport — **execution, not attraction**. A larger score does not make an
+    already-winning score win sooner. Confirmed in play: the owner's Seniors
+    *"did eventually make it there."*
+
+  **Refused, not parked** — but on the grounds above, not on the easy-mode
+  grounds. If someone wants faster first-setup migration, the target is the
+  transport/cadence path, and that is a different item with a different risk
+  profile.
