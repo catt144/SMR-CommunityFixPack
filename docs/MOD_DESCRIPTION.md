@@ -608,6 +608,21 @@ its job.
   unmodded game never reads — turning the module off, or removing the pack, is
   clean.
 
+**A second use for a Retirement Dome, and one thing to watch.** `[FAQ]` A
+retirement dome ends up decked out with comfort, services and entertainment —
+that is how you keep a large retired population happy — which makes it an
+accidentally ideal **tourist** dome as well. Keeping unhoused jobseekers out of
+it protects both groups at once: they are not occupying the service and
+entertainment slots your Seniors and your visitors are there for.
+
+⚠️ **If you do put a Hotel in that dome, leave it on "Tourists Only".** Switched
+to "Any Colonist" a Hotel stops being tourist housing and becomes ordinary
+housing — so arriving jobseekers get a *room* there, which means they are no
+longer homeless, which means this policy will not move them out. They stay,
+they use the services, and they occupy rooms you wanted for tourists. The
+"Tourists Only" button keeps the Hotel out of the housing pool entirely, and the
+policy keeps doing its job.
+
 **Classic rocket behavior** (`ClassicRockets`). This one is not a bug fix, and we
 want to be completely transparent about what it changes and what the game offers
 instead:
