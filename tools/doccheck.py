@@ -8,6 +8,12 @@ docs/agent/bugs/ plus a GENERATED INDEX.md, so the row<->tag check moves onto
 front matter, INDEX freshness is checked by regenerating and diffing, and
 `--verify-split` re-runs the migration's byte-accounting against the pre-split
 blob in git.
+v3 (prompt 3, 2026-08-03): the tree moved. Adds the docs/ root allowlist,
+checked BOTH DIRECTIONS **against the README map itself** (the list is PARSED
+out of docs/README.md, never duplicated here, so the map cannot drift from the
+folder it documents); the STATE.md line budget; stub presence; and the same
+front-matter + INDEX-freshness treatment for the 43 files under
+docs/agent/facts/.
 
     python tools/doccheck.py                 # check; exit 1 on any red
     python tools/doccheck.py --emit-counts   # + the pasteable counts block
@@ -25,9 +31,24 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
 
-BUGS = os.path.join(REPO, "docs", "BUGS.md")          # a stub since 2026-08-03
-BUGS_DIR = os.path.join(REPO, "docs", "agent", "bugs")
+DOCS = os.path.join(REPO, "docs")
+BUGS = os.path.join(DOCS, "BUGS.md")                  # a stub since 2026-08-03
+BUGS_DIR = os.path.join(DOCS, "agent", "bugs")
+FACTS_DIR = os.path.join(DOCS, "agent", "facts")
+README = os.path.join(DOCS, "README.md")
+STATE = os.path.join(DOCS, "agent", "STATE.md")
 CODE = os.path.join(REPO, "Code")
+
+STATE_MAX_LINES = 60
+
+# The three stubs spec §3e leaves behind so historical references resolve one
+# hop away. Each must exist, say MOVED, and stay short enough to be a signpost.
+STUBS = {
+    os.path.join(DOCS, "BUGS.md"): "docs/agent/bugs/",
+    os.path.join(DOCS, "STATUS.md"): "docs/agent/STATE.md",
+    os.path.join(DOCS, "agent", "ENGINE_FACTS.md"): "docs/agent/facts/",
+}
+STUB_MAX_LINES = 6
 
 # Index rows. Trap (a): this pattern also matches a rate table inside the F97
 # entry (`| F97 | **50%** (gate fails) | ...`) — dedupe by ID, keep the FIRST.
@@ -227,6 +248,176 @@ def check_index(model, out):
     return False
 
 
+def facts_splitter():
+    import split_facts
+    return split_facts
+
+
+def check_facts(model, out):
+    """Front-matter validation for docs/agent/facts/.
+
+    Deliberately thinner than check_entries: a fact has no index row and no
+    status vocabulary, so what is checkable is that the ids are the contiguous
+    source order the split produced, that the file name states the id, and that
+    every body still opens with the column-0 bullet the fact IS.
+    """
+    sf = facts_splitter()
+    red = []
+    facts = model["facts"]
+    for fact in facts:
+        name = fact["file"]
+        missing = [f for f in sf.FACT_FIELDS if f not in fact]
+        if missing:
+            red.append("%s: front matter is missing %r" % (name, missing))
+            continue
+        if name != fact["id"]:
+            red.append("%s: file name does not match id %r" % (name, fact["id"]))
+        if fact["id"] != "EF-%03d" % fact["seq"]:
+            red.append("%s: id does not match seq %d" % (name, fact["seq"]))
+        if not str(fact["summary"]).strip():
+            red.append("%s: empty summary" % name)
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", str(fact["updated"])):
+            red.append("%s: updated %r is not a date" % (name, fact["updated"]))
+        if fact["verified"] is not None and not re.match(
+                r"^\d{4}-\d{2}-\d{2}$", str(fact["verified"])):
+            red.append("%s: verified %r is neither a date nor null"
+                       % (name, fact["verified"]))
+        body = fact["body"]
+        if not body or not sf.BULLET_RE.match(body[0]):
+            red.append("%s: body does not open with its column-0 `- ` bullet" % name)
+        elif fact["lines"] != len(body):
+            red.append("%s: lines: says %d, body has %d"
+                       % (name, fact["lines"], len(body)))
+    seqs = sorted(f.get("seq", 0) for f in facts)
+    if seqs != list(range(1, len(facts) + 1)):
+        red.append("fact seq is not 1..%d contiguous" % len(facts))
+    dated = len([f for f in facts if f.get("verified")])
+    out.append("FACTS: %d files, %d state an observation date, %d source lines "
+               "preserved" % (len(facts), dated,
+                              sum(len(f.get("body", [])) for f in facts)))
+    for line in red:
+        out.append("  RED  " + line)
+    return not red
+
+
+def check_facts_index(model, out):
+    """INDEX.md is generated: regenerate it and require an empty diff."""
+    sf = facts_splitter()
+    path = os.path.join(FACTS_DIR, "INDEX.md")
+    if not os.path.exists(path):
+        out.append("FACTS INDEX: RED  %s is missing" % path)
+        return False
+    with open(path, encoding="utf-8") as fh:
+        have = fh.read().replace("\r\n", "\n").split("\n")
+    if have and have[-1] == "":
+        have.pop()
+    want = sf.render_index(model)
+    if have == want:
+        out.append("FACTS INDEX: fresh — regenerating from front matter "
+                   "reproduces INDEX.md byte for byte (%d rows)" % len(model["facts"]))
+        return True
+    out.append("FACTS INDEX: RED  regenerated INDEX.md differs from the file "
+               "(%d lines on disk, %d regenerated)" % (len(have), len(want)))
+    for n, (a, b) in enumerate(zip(have, want), 1):
+        if a != b:
+            out.append("  RED  first difference at line %d:" % n)
+            out.append("    on disk:     %r" % a[:100])
+            out.append("    regenerated: %r" % b[:100])
+            break
+    return False
+
+
+def readme_map(out):
+    """-> the set of docs/ root names the README map declares, or None.
+
+    The allowlist is PARSED, never duplicated here: the map and the folder are
+    the two things that must agree, so a second hard-coded copy in this file
+    would just be a third thing to drift. Rows are the fenced-block lines
+    indented EXACTLY two spaces (deeper indents are `agent/`'s contents or a
+    description wrapping onto its own line); a row may name several files
+    separated by ` · `.
+    """
+    if not os.path.exists(README):
+        out.append("ROOT: RED  docs/README.md is missing — nothing to check against")
+        return None
+    lines = read(README)
+    fence = [i for i, line in enumerate(lines) if line.strip() == "```"]
+    names = set()
+    if len(fence) >= 2:
+        for line in lines[fence[0] + 1:fence[1]]:
+            if not re.match(r"^ {2}\S", line):
+                continue
+            field = re.split(r"\s{2,}", line.strip())[0]
+            for part in field.split(" · "):
+                part = part.strip()
+                if part and part != "docs/":
+                    names.add(part.rstrip("/") if part.endswith("/") else part)
+    if not names:
+        # Never pass silently: an unparseable map is a red map.
+        out.append("ROOT: RED  could not read a file list out of docs/README.md's "
+                   "map block — the allowlist has no source")
+        return None
+    return names
+
+
+def check_root(out):
+    """The docs/ root allowlist, BOTH directions, against the README map."""
+    declared = readme_map(out)
+    if declared is None:
+        return False
+    present = set(os.listdir(DOCS))
+    extra = sorted(present - declared)
+    missing = sorted(declared - present)
+    if not extra and not missing:
+        out.append("ROOT: docs/ holds exactly the %d entries docs/README.md's map "
+                   "declares (%s)" % (len(declared), ", ".join(sorted(declared))))
+        return True
+    for name in extra:
+        out.append("  RED  docs/%s exists but the README map does not declare it "
+                   "— move it under agent/ or archive/, or add it to the map" % name)
+    for name in missing:
+        out.append("  RED  the README map declares docs/%s and it is not there" % name)
+    out.append("ROOT: RED  %d undeclared, %d declared-but-absent"
+               % (len(extra), len(missing)))
+    return False
+
+
+def check_state_and_stubs(out):
+    """STATE.md's line budget, and the three stubs spec §3e requires."""
+    red = []
+    if not os.path.exists(STATE):
+        red.append("docs/agent/STATE.md is missing — it is the mandatory read")
+        n_state = None
+    else:
+        n_state = len(read(STATE))
+        if n_state > STATE_MAX_LINES:
+            red.append("STATE.md is %d lines, budget is %d — it is a one-screen "
+                       "current-state doc; the narrative belongs in "
+                       "archive/SESSION_LOG.md" % (n_state, STATE_MAX_LINES))
+    for path, target in sorted(STUBS.items()):
+        rel = os.path.relpath(path, REPO).replace(os.sep, "/")
+        if not os.path.exists(path):
+            red.append("%s: the stub is gone — hundreds of historical references "
+                       "resolve through it" % rel)
+            continue
+        lines = read(path)
+        if len(lines) > STUB_MAX_LINES:
+            red.append("%s: %d lines — a stub is a signpost, not a document"
+                       % (rel, len(lines)))
+        text = "\n".join(lines)
+        if "MOVED" not in text:
+            red.append("%s: the stub does not say MOVED" % rel)
+        if target not in text:
+            red.append("%s: the stub does not point at %s" % (rel, target))
+    out.append("STATE + STUBS: STATE.md %s/%d lines; %d stubs present and "
+               "pointing"
+               % ("?" if n_state is None else n_state, STATE_MAX_LINES,
+                  len([p for p in STUBS if os.path.exists(p)])))
+    for line in red:
+        out.append("  RED  " + line)
+    return not red
+
+
 def lua_files(directory):
     if not os.path.isdir(directory):
         return None
@@ -333,6 +524,10 @@ def main():
     ap.add_argument("--verify-split", nargs="?", const="HEAD~1", metavar="REV",
                     help="re-run the BUGS split accounting against REV's "
                          "docs/BUGS.md and the files on disk (default HEAD~1)")
+    ap.add_argument("--verify-facts-split", metavar="REV",
+                    help="re-run the ENGINE_FACTS split accounting against "
+                         "REV's docs/agent/ENGINE_FACTS.md and the files on "
+                         "disk. No default: pass the pre-split sha.")
     args = ap.parse_args()
 
     # The docs are full of non-cp1252 markup; a Windows console (or a git hook
@@ -344,13 +539,19 @@ def main():
 
     out = []
     sb = splitter()
+    sf = facts_splitter()
     try:
         model = sb.load_from_dir()
         ok = check_entries(model, out)
         ok = check_index(model, out) and ok
+        facts = sf.load_from_dir()
+        ok = check_facts(facts, out) and ok
+        ok = check_facts_index(facts, out) and ok
     except sb.SplitError as exc:
         print("doccheck: RED — %s" % exc)
         return 1
+    ok = check_root(out) and ok
+    ok = check_state_and_stubs(out) and ok
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok
 
@@ -358,6 +559,15 @@ def main():
         try:
             out.append("VERIFY-SPLIT against %s:%s" % (args.verify_split, "docs/BUGS.md"))
             sb.verify_split(args.verify_split, out)
+        except sb.SplitError as exc:
+            out.append("  RED  %s" % exc)
+            ok = False
+
+    if args.verify_facts_split:
+        try:
+            out.append("VERIFY-FACTS-SPLIT against %s:%s"
+                       % (args.verify_facts_split, sf.SOURCE_REL))
+            sf.verify_split(args.verify_facts_split, out)
         except sb.SplitError as exc:
             out.append("  RED  %s" % exc)
             ok = False

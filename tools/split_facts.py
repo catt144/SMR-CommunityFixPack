@@ -448,6 +448,20 @@ def build(rev=None, path=None):
     return enrich(model, blame_dates(rev, len(lines)))
 
 
+def verify_split(rev, out):
+    """doccheck --verify-facts-split: re-run the whole accounting against the
+    pre-split blob and compare it to what is on disk today. Sibling of
+    split_bugs.verify_split; REV must be a commit whose tree still has the
+    unsplit ENGINE_FACTS.md, so pass the sha explicitly."""
+    import subprocess
+    try:
+        model = build(rev=rev)
+    except subprocess.CalledProcessError:
+        raise SplitError("cannot read %s:%s" % (rev, SOURCE_REL))
+    accounting(model, out)
+    verify_written(model, os.path.join(REPO, OUT_REL), out)
+
+
 # --------------------------------------------------------------------------
 # reading the split back — the surface doccheck validates from here on
 # --------------------------------------------------------------------------
