@@ -490,9 +490,21 @@ local function append_policy_row(section, context)
 	-- opened (infopanel sections are constructed in Init, so an already-open
 	-- panel picks it up on re-selection — acceptable, and noted on PT-62's
 	-- look-check rather than papered over).
-	if not has_cohort_housing(ResolvePropObj(context)) then return end
+	local community0 = ResolvePropObj(context)
+	if not has_cohort_housing(community0) then return end
 
+	-- ⛔ TitleRight MUST be seeded HERE, not only in OnContextUpdate.
+	-- InfopanelActiveSection:Init decides the title's alignment ONCE, from
+	-- whether TitleRight is empty at construction
+	-- (`InfopanelActiveSection.generated.lua:157-159`): empty -> the title is
+	-- CENTRED. Setting it later left the title centred and the value
+	-- right-aligned, so the two rendered on top of each other — observed
+	-- 2026-08-02 as "Nursery / Retirement D(28 would move)". Seeding it keeps
+	-- the shipped left/right split every other row gets.
+	local n0 = count_movable(community0)
 	local row = InfopanelActiveSection:new({
+		TitleRight = Untranslated(string.format(
+			is_flagged(community0) and "%d moving out" or "%d would move", n0)),
 		OnContextUpdate = function(self, context, ...)
 			local community = ResolvePropObj(context)
 			local on = is_flagged(community)
@@ -515,9 +527,8 @@ local function append_policy_row(section, context)
 			-- The icon colour carries on/off as well (green permissive, yellow
 			-- restriction), so the state is encoded twice.
 			local n = count_movable(community)
-			self:SetTitleRight(Untranslated(on
-				and string.format("%d moving out", n)
-				or  string.format("off (%d would move)", n)))
+			self:SetTitleRight(Untranslated(string.format(
+				on and "%d moving out" or "%d would move", n)))
 
 			-- ⛔ ICON POLARITY MIRRORS D03's, and the first build had it
 			-- inverted: the OFF state — which is VANILLA — rendered red, so a
