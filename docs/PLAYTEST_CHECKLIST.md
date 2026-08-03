@@ -387,18 +387,25 @@ reachability audit's verdict. → [F34](agent/bugs/F34.md)
 drain fought an inflow (the ping-pong finding), and the three changes built in
 response are UNRUN. This remainder is D12's only gate. → [D12](agent/bugs/D12.md)
 **Requirements:** a STABLE colony — the drain must not fight an inflow /
-restart first (three unrun changes) / D03 "Closed to new residents" available
-for the P4-P6 half / Mod Manager for the uninstall half.
+restart first (**four** unrun changes as of 2026-08-03) / D03 "Closed to new
+residents" available for the P4-P6 half / Mod Manager for the uninstall half /
+**a flagged dome with an open service work slot, for P14**.
 **Setup:**
 1. Restart, then the suite run.
 2. The loop check — must reach 0 and STAY 0 through a rocket landing (entry;
    it is the leading indicator now).
 3. P4/P6: the drain clears the dome, with D03 closed so landings cannot refill
    it. Mind the entry's employed-homeless caveat before reading P6.
-4. P13: the repaired `SMRFixPack_Disabled.NoHomeless` lever mid-drain.
-5. P12: save flag-ON → Mod-Manager disable → load clean.
+4. ⭐ **P14 — the free-work door** (new 2026-08-03): flag a dome that has an
+   open work slot and watch whether the slot **FILLS**. ⚠️ **`0 would move` on
+   a recruiting dome is the door WORKING, not a miss** — that is the reading
+   most likely to be misfiled. If the slot never fills while unemployed
+   homeless sit there, the door needs a dwell bound and D12 does not ship as
+   built.
+5. P13: the repaired `SMRFixPack_Disabled.NoHomeless` lever mid-drain.
+6. P12: save flag-ON → Mod-Manager disable → load clean.
    (Predictions P1-P13 and the four setup traps: archive snapshot; the re-run
-   musts: entry.)
+   musts incl. P14: entry.)
 
 ### PT-53 — Cohort housing, Trigger E (D07) · Status: partial (A-D passed; E owed)
 **Bug:** Seniors/Children in normal housing move to free cohort slots and are

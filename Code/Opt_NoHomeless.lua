@@ -351,6 +351,91 @@ local function is_push_subject(colonist)
 	return true
 end
 
+-- ⭐⭐ THE DOOR IN THE WALL (owner, 2026-08-03). Added BEFORE PT-62's re-run
+-- rather than after, so the leg tests the shape we intend to ship.
+--
+-- ⛔ THE OVER-CORRECTION IT REPAIRS, derived from Src and never yet observed.
+-- The symmetric veto below refuses the class this policy pushes out — and that
+-- class is `need_work`, which is EXACTLY the set vanilla moves toward an open
+-- job. `better_work = not work_available and new_work_available`
+-- (`Colonist.lua:2679`) fires only when `need_work` is true (`:2623-2624`), so a
+-- flagged dome vetoing every `need_work` arrival is a flagged dome that **can
+-- never be staffed from outside**. `ChooseDome` closed the other entrance. For
+-- the pattern this module exists for — the owner's *"2 domes out of the way of
+-- their resources and major production domes"* — there is no passage, so
+-- migration is the ONLY staffing route. Flag such a dome and its service staff
+-- age out or die with no replacement: the services go dark and the player sees
+-- *"my retirement dome isn't working"*, which is the exact confusion this
+-- module's row was designed to prevent, reached from the opposite direction.
+--
+-- ⭐ SO THE WALL OPENS WHEN THERE IS A JOB: a colonist is neither pushed out of
+-- nor refused entry to a flagged dome while that dome has a free workplace THEY
+-- could take. Vanilla computes this — `Workforce:HasFreeWorkplacesAround`
+-- (`Workforce.lua:43-51`): `ui_working and CanWorkHere(colonist) and
+-- HasFreeWorkSlots()`. Reachable on every community this module touches, since
+-- `Community.__parents = { "Workforce" }` (`Community.lua:8-9`) and both `Dome`
+-- (`Dome.lua:376-377`) and `MicroGHabitatBase` (`MicroGHabitat.lua:3-4`) parent
+-- Community.
+--
+-- ⛔ IT MUST BE ON BOTH SIDES, AND THAT IS THE WHOLE DESIGN — an entry-only
+-- door re-opens the PT-62 loop in miniature: let them in for the job, they lose
+-- the slot to someone else, they are now a push subject and go straight back
+-- out, the slot is still free so the entry door is still open, vanilla offers
+-- the dome again. Bounded by work slots rather than the ~97-scoring cohort
+-- slots, but the same defect shape we just spent a sitting finding.
+--
+-- With the SAME predicate on both sides it closes itself, and every branch
+-- terminates:
+--   * a free slot they qualify for exists → they are not pushed, so they stay
+--     and remain a candidate for it;
+--   * they win it → employed → `is_push_subject` false forever → dome staffed;
+--   * someone else wins it → no free slot → the entry door shuts AND they
+--     become pushable → pushed out ONCE, with no re-offer possible.
+-- Race (two colonists admitted for one slot) resolves the same way: the loser
+-- is pushed once when the slot closes. One-way, terminating.
+--
+-- This is the module's existing idiom — one predicate shared by both halves, so
+-- the two can never disagree, exactly as `is_push_subject` is shared by push and
+-- veto and `has_cohort_housing` is shared by the wrapper and the UI.
+--
+-- ⚠️ THE COST, STATED RATHER THAN BURIED, and it is PT-62's to measure: N
+-- homeless jobseekers in a flagged dome with ONE open slot means ALL N are
+-- held, because each of them individually sees a free slot. The expectation is
+-- that this is short-lived — colonists seek work in their own dome first, so
+-- "unemployed resident + a slot they qualify for" should resolve quickly — but
+-- that is an ASSUMPTION and it is not verified. PT-62's re-run reads whether
+-- the slot actually fills. If it does not, this door needs a dwell bound.
+--
+-- ⚠️ Defensive by necessity: a missing method returns FALSE (door shut, i.e.
+-- the pre-2026-08-03 behaviour) rather than erroring. The stand-in tables that
+-- drive this wrapper in the D07 probe carry no Workforce methods, and a method
+-- call on them is what ERRORed that whole probe on 2026-08-02. apply() Requires
+-- the method as well, so a game update that removes it reports a reason string
+-- instead of silently reverting to the sealed-dome behaviour.
+local function has_free_work_for(community, colonist)
+	if type(community) ~= "table" then return false end
+	if type(community.HasFreeWorkplacesAround) ~= "function" then return false end
+	return community:HasFreeWorkplacesAround(colonist) and true or false
+end
+
+-- The same question at the ARRIVAL seam, where there is no colonist to ask
+-- `CanWorkHere` about — see the ChooseDome wrapper. Vanilla's own colonist-
+-- independent count (`GetFreeWorkplacesAround`, `_GameUtils.lua:443-455`)
+-- returns free slots in WORKING buildings; the second return (closed slots) is
+-- deliberately ignored, since a switched-off workplace is not recruiting.
+-- Coarser than the emigration side on purpose: that seam is already trait-based
+-- by necessity, and erring toward LETTING PEOPLE IN is the safe direction there.
+-- ⚠️ Nil-safe on the label because the shipped helper is not.
+local function has_free_work_slots(community)
+	if type(community) ~= "table" then return false end
+	local labels = community.labels
+	if not labels or not labels.Workplace then return false end
+	local get_free = rawget(_G, "GetFreeWorkplacesAround")
+	if type(get_free) ~= "function" then return false end
+	local on = get_free(community)
+	return (on or 0) > 0
+end
+
 -- The push. Installed at FILE SCOPE (the A2 lesson, FIX_POLICY §5) so the wrap
 -- is in place before class flattening and a FIRST mid-session Mod Options
 -- enable works without a relaunch; guarded by the same existence check apply()
@@ -389,8 +474,16 @@ do
 			--     (`Colonist.lua:1604-1609`).
 			-- It also stays order-independent with D07, which only ever moves
 			-- cohort members and therefore never trips this clause.
+			--
+			-- ⭐ …UNLESS THE DOME HAS A JOB FOR THEM (2026-08-03). Vanilla is
+			-- moving this colonist toward that dome precisely BECAUSE it has an
+			-- open workplace (`better_work`, Colonist.lua:2679, which fires only
+			-- for `need_work` — the same set this clause vetoes). Refusing them
+			-- is refusing the dome its own staff. Tested LAST because it walks
+			-- the Workplace label; every cheaper gate has already run.
 			if dome and is_flagged(dome) and has_cohort_housing(dome)
-					and is_push_subject(self) then
+					and is_push_subject(self)
+					and not has_free_work_for(dome, self) then
 				return
 			end
 			-- otherwise only ever ADD a destination; never override one
@@ -433,6 +526,19 @@ do
 			end
 			if self:CheckForcedDome() then
 				return dome, mode, dist, elevator -- player order wins
+			end
+			-- ⭐ THE DOOR, PUSH SIDE (2026-08-03) — and it is what makes the
+			-- entry-side door terminate rather than oscillate; see the header.
+			-- While this dome has a free workplace THIS colonist could take,
+			-- they are a candidate for it, not a subject to move: pushing them
+			-- out empties the dome of the very people who would staff it. Once
+			-- the slot is gone — to them (employed → exempt for good) or to
+			-- someone else — this gate stops holding and the normal push runs.
+			-- Placed last of the gates deliberately: it is the only one that
+			-- walks a label, so it is paid for only by colonists who have
+			-- already passed every cheap test.
+			if has_free_work_for(my_dome, self) then
+				return dome, mode, dist, elevator
 			end
 
 			-- ⛔ THE SUBJECT TEST — vanilla's own `need_work`, verbatim from
@@ -527,7 +633,14 @@ local function count_movable(community)
 		if IsValid(c) and not (c.traits and c.traits.Tourist)
 				and not IsValid(c.reserved_residence)
 				and c:CanWork()
-				and not IsValid(c.workplace) and not c.user_forced_workplace then
+				and not IsValid(c.workplace) and not c.user_forced_workplace
+				-- ⭐ the free-work door counts here TOO (2026-08-03), or the row
+				-- lies: a dome with an open service slot moves NOBODY, and a row
+				-- reading "5 moving out" while five people stay is exactly the
+				-- disagreement between number and behaviour this function exists
+				-- to prevent. On a dome that is recruiting it now reads
+				-- "0 would move", which is both true and informative.
+				and not has_free_work_for(community, c) then
 			n = n + 1
 		end
 	end
@@ -636,6 +749,7 @@ local function append_policy_row(section, context)
 				"For <em>Nursery</em> and <em>Retirement</em> Domes. Those Domes keep only enough ordinary housing to staff their services, so unhoused jobseekers pile up in them — and once a Dome holds enough homeless it counts as overcrowded and stops receiving anyone, including the Children or Seniors it was built for.<newline><newline>"
 				.. "When this is on, <em>unemployed</em> Colonists with no home here move to the nearest Dome that has housing they can use.<newline><newline>"
 				.. "<em>Nobody else is touched.</em> Colonists who work here stay — they are who this Dome's ordinary housing is for. Seniors and Children stay too, even while homeless: that is the Dome telling you to build more Retirement Homes or Nurseries, and hiding it would not help you.<newline><newline>"
+				.. "<em>While this Dome has a job opening, nobody moves and jobseekers may still arrive</em> — otherwise it could never replace the staff its services need.<newline><newline>"
 				.. "Nobody is ever put outside. If there is nowhere suitable to send someone they simply stay, a quarantined Dome releases no one, and your manual Dome assignments always win.<newline><newline>"
 				.. "Current status: <em>" .. (on and "moving out homeless jobseekers" or "homeless jobseekers may stay") .. "</em>"))
 			if on then
@@ -665,7 +779,12 @@ local function append_policy_row(section, context)
 end
 
 SMRFixPack.Register("NoHomeless", {
-	title = 'OPTIONAL: per-dome "no homeless residents" policy — moves out only colonists the dome cannot house',
+	-- ⚠️ title corrected 2026-08-03: it still described the NARROW reading
+	-- ("colonists the dome cannot house"), which was built first and falsified
+	-- live the same evening — the rule is vanilla's `need_work`. `ListFixes()`
+	-- prints this string, so a stale one misreports the module to the leg that
+	-- reads it as account truth.
+	title = 'OPTIONAL: per-dome Nursery/Retirement policy — moves out homeless UNEMPLOYED colonists, unless the dome has a job opening',
 	optional = true,
 	apply = function()
 		if not SMRFixPack.OptionEnabled("NoHomeless") then
@@ -681,6 +800,14 @@ SMRFixPack.Register("NoHomeless", {
 			  reason = "Colonist.CheckForcedDome not found (game update changed it?)" },
 			{ class = "Colonist", method = "CanWork",
 			  reason = "Colonist.CanWork not found (game update changed the workforce test?)" },
+			-- the free-work door (2026-08-03). Required rather than merely
+			-- probed for, because its absence would not error — it would
+			-- silently seal every flagged dome to workforce-age entrants and
+			-- the dome would quietly lose its services. Say so instead.
+			{ class = "Community", method = "HasFreeWorkplacesAround",
+			  reason = "Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed" },
+			{ global = "GetFreeWorkplacesAround",
+			  reason = "GetFreeWorkplacesAround not found (game update changed it?) — the arrival seam needs it to keep a flagged dome staffable" },
 			{ class = "Residence", method = "IsSuitable",
 			  reason = "Residence.IsSuitable/GetFreeSpace not found (game update changed it?)" },
 			{ class = "Residence", method = "GetFreeSpace",
@@ -739,9 +866,18 @@ SMRFixPack.Register("NoHomeless", {
 		local function choose(traits, domes, safety_dome, dome_elevators, ...)
 			if module_active() and type(domes) == "table" and traits
 					and not traits.Tourist and not traits.Child and not traits.Senior then
+				-- ⭐ …AND THE SAME DOOR HERE (2026-08-03): a flagged dome with a
+				-- free workplace is still a valid landing site, because an
+				-- arrival who takes that job is staff, not a jobseeker to be
+				-- kept out. Without this the dome is sealed to workforce-age
+				-- entrants at BOTH seams and can never be restaffed — see the
+				-- header. Colonist-independent here of necessity (no colonist
+				-- exists yet to ask CanWorkHere about), which errs toward
+				-- letting people in; that is the safe direction at this seam.
 				local filtered
 				for i, dome in ipairs(domes) do
-					if is_flagged(dome) and has_cohort_housing(dome) then
+					if is_flagged(dome) and has_cohort_housing(dome)
+							and not has_free_work_slots(dome) then
 						if not filtered then
 							filtered = {}
 							for j = 1, i - 1 do filtered[#filtered + 1] = domes[j] end
