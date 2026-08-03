@@ -390,9 +390,10 @@ response are UNRUN. This remainder is D12's only gate. → [D12](agent/bugs/D12.
 restart first (**four** unrun changes as of 2026-08-03) / Mod Manager for the
 uninstall half / **a flagged dome with an open service work slot, for P14**.
 ⛔ **Do NOT use D03 "Closed to new residents" as a fixture control** — the old
-plan said to; it was withdrawn 2026-08-03 because it does not block landings at
-all (they read the raw field, not D03's wrapped method), it would mask the D12
-guard under test on the path it does block, and it blocks Seniors. Entry.
+plan said to; withdrawn 2026-08-03. It works, and that is the problem: D03 sits
+on the SAME two seams D12's guards do, so it would mask the guard under test and
+make the loop check trivially 0 for the wrong reason. It also blocks Seniors.
+Entry (incl. the same-day correction to an earlier, wrong reason for this).
 **Setup:**
 1. Restart, then the suite run.
 2. The loop check — must reach 0 and STAY 0 through a rocket landing (entry;
