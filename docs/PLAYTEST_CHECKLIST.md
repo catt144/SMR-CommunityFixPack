@@ -1528,6 +1528,19 @@ none), **87 probes** (86 + `NoHomeless`).
 | **P12** | **UNINSTALL (Mod Manager disable, not the toggle):** save with the flag ON, disable the pack, load the same save → clean load, **zero** orphan errors, and the colony behaves as vanilla. The `SMRFixPack_no_homeless` field is still on the dome and is inert | the module leaks. It should not be able to: no threads, no GameVars, no globals, one plain boolean field |
 | **P13** | **toggle off = instantly vanilla**, same session, no reload — set `SMRFixPack_Disabled.NoHomeless = true` mid-drain and the pushes stop | the per-call `IsActive` gate is not being consulted somewhere |
 
+**⚠️ EXPECT THE HOTEL DOME TO BE A POPULAR DESTINATION, and do not report it as
+a defect.** A Hotel set to **"Any Colonist"** has `exclusive_trait = false`
+(`HotelBase:SetTouristOnly`, `Hotel.lua:6-27`), i.e. it is ordinary housing with
+free beds — and hotels live in the best-services, best-comfort dome by
+construction, because that is where players want tourists. D12 prefers a
+destination that can house someone *now* over one that cannot, so pushed
+jobseekers will tend to land there. **That is correct**: it is the only place
+with an actual free bed, those colonists get housed rather than merely relocated,
+and the player opened the hotel themselves. Two things to watch rather than
+assume: whether it eats tourist capacity the player wanted kept, and whether a
+Hotel left on **"Tourists Only"** is correctly never offered (it should be —
+`IsSuitable` fails for a non-Tourist).
+
 **Not predicted, and deliberately so:** how *fast* the dome drains. Emigration
 runs off the colonist heavy update and the destination search is best-effort;
 anything from "over a few hours" to "over a sol" is unremarkable. **Do not read
