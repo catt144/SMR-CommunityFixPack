@@ -12,6 +12,14 @@
 > **The owner is free for the playtest campaign** (`PLAYTEST_CHECKLIST.md`;
 > first at the keyboard: PT-62's remainder, then the load-heal round-trip
 > sweep, then the doctrine C-sitting — QA report §9).
+>
+> 📁 **QUEUED (2026-08-03, owner-approved): the docs-restructure chain** —
+> `docs/prompts/docs-restructure/`, 4 Opus prompts executing the DECIDED
+> spec `docs/reports/DOC_RESTRUCTURE_SPEC.md` (agent-optimized doc tree,
+> per-entry bugs/, doccheck + pre-commit hook, CLAUDE.md). Needs no
+> keyboard; may run concurrently with the campaign. Its prompt 4 emits
+> `DOCS_RESTRUCTURE_REPORT.md`, which the owner then feeds to a Fable
+> session to REDESIGN the standing prompts against the new structure.
 > `FABLE_NEXT_PROMPT.md` was rewritten the same day as a PURE playtest-standby
 > prompt and no longer carries the board — chain-owned work found in a
 > playtest session is routed to the chain, never started there. The spent
