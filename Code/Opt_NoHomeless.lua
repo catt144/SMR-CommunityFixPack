@@ -183,16 +183,35 @@ do
 			if not module_active() then return dome, mode, dist, elevator end
 			-- only ever ADD a destination; never override one
 			if dome then return dome, mode, dist, elevator end
-			if not self:IsHomeless() then return dome, mode, dist, elevator end
-			if IsValid(self.reserved_residence) then
-				return dome, mode, dist, elevator -- mid-move
-			end
-			local traits = self.traits
-			if traits and traits.Tourist then return dome, mode, dist, elevator end
+
+			-- ⛔ GUARD ORDER IS LOAD-BEARING — the FLAG IS TESTED FIRST, before
+			-- any method call on the colonist, and it must stay that way.
+			-- Two reasons, and the second was paid for:
+			--   1. Hot path. This wrapper runs for every colonist on every heavy
+			--      update, and for almost every colonist in almost every game the
+			--      answer is "their dome does not carry the flag". That is a plain
+			--      field read on a table we already have; doing method calls ahead
+			--      of it spends work on the 99% case to learn nothing.
+			--   2. ⚠️ It keeps the module inert for anything that is not a real
+			--      Colonist. The first ordering asked `self:IsHomeless()` up here
+			--      and ERRORed the whole D07 CohortHousing probe — that probe
+			--      drives this same wrapped method with plain-table stand-ins,
+			--      which carry no `IsHomeless` (observed 2026-08-02, log
+			--      `Mars.exe-20260802-20.36.57`: `attempt to call a nil value
+			--      (method 'IsHomeless')`). A real Colonist always has it, so this
+			--      is not reachable in play — but a module that only behaves when
+			--      handed a perfect object is one an unlucky mod interaction turns
+			--      into a log full of errors, and PT-62's P11 forbids exactly that.
 			local my_dome = self.dome
 			if not is_flagged(my_dome) then return dome, mode, dist, elevator end
 			if not my_dome.accept_colonists then
 				return dome, mode, dist, elevator -- quarantine: no one enters or leaves
+			end
+			local traits = self.traits
+			if traits and traits.Tourist then return dome, mode, dist, elevator end
+			if not self:IsHomeless() then return dome, mode, dist, elevator end
+			if IsValid(self.reserved_residence) then
+				return dome, mode, dist, elevator -- mid-move
 			end
 			if self:CheckForcedDome() then
 				return dome, mode, dist, elevator -- player order wins

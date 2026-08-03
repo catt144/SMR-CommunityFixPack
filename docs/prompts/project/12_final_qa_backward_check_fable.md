@@ -987,3 +987,36 @@ opt-in SKIPs around it — there is no reading of that line that says "a file yo
 shipped is not loaded". **Ask job 7 for a cheap invariant** (a probe that
 compares the `Code/` directory against the loaded registry would have caught it
 in the same run that missed it).
+
+**3 · THE SAME AXIS A THIRD TIME IN ONE DAY, WITH THE ROLES REVERSED — and this
+one was a REAL defect, not a probe artefact.** The re-run after the two repairs
+above returned `77 PASS, 0 FAIL, 9 SKIP, **1 ERROR**`: `Opt_NoHomeless.lua:186:
+attempt to call a nil value (method 'IsHomeless')`, reported against the **D07
+`CohortHousing`** probe. D12's new wrapper sits on the same
+`Colonist:FindEmigrationDome` that D07's probe drives with plain-table stand-ins,
+and it called `self:IsHomeless()` before checking whether the colonist's dome
+even carried D12's flag.
+
+⭐ **Why this belongs next to instance 1 rather than on its own.** Instance 1 was
+a *fix* breaking *its own* probe through a shared field; this is a *new module*
+breaking *another module's* probe through a shared seam. Same underlying shape —
+two artefacts, each correct in isolation, colliding on something neither author
+was looking at — and **the corpus now has it in both directions within a single
+day.** Neither was findable by reading; both needed the suite.
+
+⚠️ **But the disposition is different and the difference matters.** Instance 1
+was unobservable in play. This one is a genuine hardening failure: a module that
+only behaves when handed a perfectly formed object is one an unlucky mod
+interaction turns into a log full of `[LUA ERROR]`, which is precisely what
+PT-62's own P11 forbids. Fixed by reordering the guards so the flag — a plain
+field read — is tested before any method call, which is also the correct hot-path
+order (this wrapper runs for every colonist on every heavy update, and for almost
+every colonist the answer is "not flagged"). A regression lock is now case 11 of
+the D12 probe.
+
+**The question for job 7 is a design one, not a documentation one:** two of the
+pack's opt-in modules now wrap the same shipped method, and their probes are no
+longer independent when both are enabled. **Nothing in the project says who is
+responsible for that**, and the answer that fell out here — every wrapper must be
+inert for a foreign object before it touches one — is worth stating as a rule
+rather than rediscovering per module.
