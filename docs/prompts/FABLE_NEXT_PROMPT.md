@@ -4,20 +4,20 @@ Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
 — this file goes stale the moment another session commits. (The filename keeps
 its historical `FABLE_` prefix so existing references stay valid; nothing in
-it is model-specific.) Staleness anchor: rewritten with the project-chain
-creation commit of 2026-08-01; **F76 block rewritten 2026-08-02 (chain prompt
-11) after its claim was falsified by measurement — the chain folder now holds
-only prompt 12 and its README.**
+it is model-specific.) Staleness anchor: **updated 2026-08-03 by chain prompt
+12's close-out commit — THE CHAIN IS COMPLETE and `docs/prompts/project/` is
+EMPTY.** The final QA's verdict, findings, adjudications (F97 keep / D12 stands
+/ F76 closed-refuted, residue = C41) and the ordered campaign top are in
+`docs/reports/CHAIN_QA_REPORT.md`; doc-structure recommendations await the
+owner in `docs/reports/DOC_STRUCTURE_REVIEW.md`.
 
-> 🗂 **THIS PROMPT IS FOR LIVE PLAYTEST SITTINGS ONLY.** All project work —
-> the F86 phases, the audit follow-through, the D10/D12/F76 builds, the final
-> QA — lives in **`docs/prompts/project/`**: a self-consuming, numbered
-> prompt chain run in filename order (its `README.md` is the manifest and its
-> rules bind those sessions). **Do not start project work from this prompt;
-> do not duplicate anything the chain owns.** Until the chain's F86 prompts
-> complete, F86 remains the release blocker and `FIX_POLICY.md` §3a binds any
-> code any session writes. Drone work is separately owned by
-> `docs/prompts/DRONE_PROJECT_PROMPT.md` — same rule.
+> 🗂 **THIS PROMPT IS FOR LIVE PLAYTEST SITTINGS ONLY.** The project chain is
+> **complete and its folder is empty** (2026-08-03) — the campaign this prompt
+> serves is now the main line of work. Standing non-playtest work is listed in
+> `CHAIN_QA_REPORT.md` §8 (D13 is the hard launch dependency, post-campaign;
+> release gates; owner decisions). `FIX_POLICY.md` §3a still binds any code any
+> session writes. Drone work is separately owned by
+> `docs/prompts/DRONE_PROJECT_PROMPT.md` — same rule as before.
 
 > 📁 **DOCS LAYOUT** — `docs/README.md` if unsure where anything lives.
 > Roots: `STATUS.md` (current state; counts live there and nowhere else),
@@ -91,8 +91,11 @@ hex in that sitting and it loaded.
 
 ⚠️ **It opens ABOVE the cursor by its own height** (429px at 4K), so a click
 high on the screen puts it near the top of the screen. **That is intended, not
-displacement.** F76's disposition is chain prompt 12 job 10; it is `todo` only
-because the closure was routed rather than self-approved.
+displacement.** ✅ F76 is **CLOSED — REFUTED** (chain-12 QA, job 10,
+2026-08-03). The one live residue is **C41** (the OG "icon does not appear"
+witness + the out-of-range-mouse lead for game windows off the virtual-desktop
+origin) — if a sitting ever sees the picker fail to APPEAR, install the
+`F76MISS` hook and read where the engine thought the mouse was.
 
 **Two things from the old block that DO still stand, for different reasons:**
 - ⛔ **The hard rule survives: NO live UI-internals prototyping in a play

@@ -215,6 +215,15 @@ affected — achievements keep unlocking normally there with mods enabled.
   thresholds at once only ever collected one bonus, while falling back charged
   both — so satisfaction (and your holiday income) drifted down no matter how well
   you treated them.
+- [DRAFT NOTE — F76 — ⛔⛔ **VOID 2026-08-03 (chain-12 QA, job 10 ruling): F76 is
+  CLOSED — REFUTED, and this note must NEVER publish in any form.** The picker
+  anchors exactly at the cursor and the "can't be clicked" claim is falsified by
+  measurement; publishing it would tell players about a defect that does not
+  exist. The unrefuted residue (the OG "icon does not appear" witness + the
+  out-of-range-mouse lead for other setups) lives on BUGS `C41` as a candidate —
+  if C41 ever earns an F-row, write a NEW note from its evidence; do not revive
+  this one. Text kept verbatim below per project practice. Prior block header
+  follows.]
 - [DRAFT NOTE — F76 — ⛔ **BLOCKED 2026-08-02, DO NOT PUBLISH AS WRITTEN.** The
   claim below ("renders far from the cursor and can't be clicked") was FALSIFIED
   by measurement in the chain prompt 11 attended sitting: the picker anchors

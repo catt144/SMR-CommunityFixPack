@@ -103,7 +103,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | tested — PT-19 PASS 2026-07-28 (entry) |
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested · **⭐ RIVAL-ROCKET REPORT FOUND 2026-08-01 (owner, logged-in Paradox browse): same reporter twice — OG Sep 5 2022 (overflow trigger) and Relaunched May 2 2026 on 1.07 (halt-mid-load trigger), both ending in a PERMANENTLY bricked rocket.** Primary evidence replaces the paraphrase-grade dev note; our guard covers both triggers (entry) |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
-| F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | **todo — ⛔ BOTH CLAIMS UNREPRODUCED 2026-08-02 (chain prompt 11 attended sitting): positioning FALSIFIED by measurement, load failure DID NOT REPRODUCE, and the reporter's premise (that the picker was ours) is corrected. Disposition ROUTED to chain prompt 12 JOB 10 — not self-closed** (entry) |
+| F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | **closed — REFUTED 2026-08-03 (chain-12 QA, job 10):** the named mechanism is falsified by measurement + source (box and mouse are one coordinate space; the original forensic box was correct placement), the load-failure claim did not reproduce, and the reporter's premise (that the picker was ours) is corrected. Nothing built, nothing shipped. **The OG witness (a DIFFERENT symptom — the icon does not appear) and the M5 out-of-range-mouse lead are NOT closed with it — filed as `C41`** (entry) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed 2026-07-28 — PT pending (entry) |
 | F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | **tested 2026-08-01** — fixed 2026-07-29; StormWedgeHeal REORDERED 2026-08-01 (F86 Tier-1 orphan gate, §6.2a-D) and **BOTH §6.2a-D completion branches ran live on the reordered body** (Tier-1 leg 1 forced storm → release branch; the natural storm → force-clean branch; storms keep scheduling after each heal). PT-54 triggers C+D absorbed (entry) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
@@ -166,6 +166,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | ? | cand | filed 2026-08-02 by the C18 sweep — **VERIFIED vs Src**: `CommanderProfilePreset.lua:336-385` enumerates ten labels for an **unqualified** promise and omits `AutomaticMetalsExtractor` and `MicroGAutoWaterExtractor`, both currently buildable and both carrying the modified prop. Sibling tell is the enumeration itself. **§4 package RUN 2026-08-02 (prompt 7) — PASSED → filed as `F95`, approved, routed to prompt **8b** (prompt 8 split under rule 3).** ⭐ The evidence that settles oversight-vs-balance: there **is** a shared `Extractors` label (16 templates) and the designers did **not** use it — and every building it would have added is explained (3 non-extractors: ConcretePlant/MoholeMine/TheExcavator; 2 hidden legacy with `hide_from_build_menu`), leaving **no principled line** that includes `MicroGExtractorExoticMinerals` and excludes `AutomaticMetalsExtractor`. Count closes exactly at 12 buildable / 10 paid. Fix = two additive `Effect_ModifyLabel` entries via `PlaceObj` (**not** `:new` — F87) + a load-time heal; the "retarget to `WaterExtractorBase`" alternative was rejected as too wide (entry) |
 | C39 | `Policy_Automation_ServiceAutomation` cuts `max_workers` by **label** while its performance compensation keys on **class** — the four Workshops are on the label and outside the class | ? | cand | filed 2026-08-02 by the D10 route re-derivation (chain prompt 9) — **VERIFIED vs Src, harm direction NOT determined.** The law's only effect is `LawEffectModifyLabel{Label="ServiceBuildings", Prop="max_workers", Percent=-50}` (`Data\LawDef\LawDef-Technology.lua:227-234`). **23 templates carry that label; all derive from `Service` except `ArtWorkshop`, `VRWorkshop`, `BioroboticsWorkshop` and `TVStudioWorkshopCCP1`**, which are `Workshop = {ElectricityConsumer, Workplace}`. The compensating branch in `Workplace:GetWorkshiftPerformance` is gated on `self:IsKindOf("Service")` (`Workplace.lua:205-217`), so it cannot fire for those four. **Tells: self-contradiction** (one effect targeted by label, its compensation by class) **and an explicit dev comment** — `:209-210` says the code *"assumes that there's a modification in max_workers matching the value on automation_workforce_reduction"*, i.e. it assumes the two sets coincide. ⚠️ **NOT sized, and the sign is genuinely unclear**: `law_scale` appears to *raise* performance (a full reduced shift computes ~200 rather than 100), so the four may be missing an uplift rather than taking a penalty — and workshop `performance` feeds the **Comfort boost** (`ArtWorkshop.lua:24-27`), not resource output, so the player-visible consequence differs from every other member of the label. Next step is a keyboard observation with the law enacted, not more reading (entry) |
 | C40 | "Crowded Living" grants **+3 residence capacity that is added and removed live with the Ministry of Culture's `working` flag**, and every removal EVICTS the tail residents colony-wide | ? | cand | filed 2026-08-02 by chain prompt 10's pre-build check — **MECHANISM VERIFIED vs Src end to end, and it is a PLAYER'S hypothesis that turned out right** ([S37]/[S38], §10.6: *"homes at their capacity would regularly fluctuate because of staffing in the law spire"*). ⛔ **The live gating is INTENDED** — the Ministry of Culture's own description advertises that it boosts this law — so the gating is not the candidate. What is: the **law's** description interpolates only the static `<capacity_increase>`, so the player is told "+3" with no statement that a second +3 is conditional or that losing it costs colonists their homes. **Harm unproven, frequency unmeasured, nothing built.** ⭐ It also decided D12's open question — the narrow reading is immune to it (entry) |
+| C41 | Depot resource picker fails to APPEAR at all (OG witness) — F76's unrefuted residue | ? | cand | filed 2026-08-03 by chain-12 QA (job 10) so F76's refutation-closure buries nothing: the OG §2.2 witness is a DIFFERENT symptom (icon never appears, vs F76's appears-in-the-wrong-place), never reproduced; plus the one measured lead that would produce it — `GetMousePos` CAN return coordinates outside `desktop.box` (observed `(6148,2350)` vs `(0,0)-(3840,2160)`), which would corner-slam the picker on a game window off the virtual-desktop origin; instrument = the F76MISS hook; harm unproven, nothing built (entry) |
 
 Severity: P1 = gameplay-breaking/major loss, P2 = wrong numbers or notable misbehavior, P3 = cosmetic/latent/mod-facing.
 
@@ -1222,10 +1223,12 @@ wrapper can reach the defect, or drop the latent halves. It is a decision owed,
 not a defect found — nothing here is claimed to be wrong.
 
 **📦 PACKAGE 0 PREPARED 2026-08-02 (chain prompt 7) — RECOMMENDATION: CONVERT
-BOTH ITEMS TO §1.4 WRAPPERS. ⛔ OWNER DECISION OWED — nothing built, nothing
-changed.** The blanket pre-clearance does not cover this (it removed the ask for
-*adopting* the rule, not for what the rule then asks of shipped code), so this
-sits until the owner answers.
+BOTH ITEMS TO §1.4 WRAPPERS. ~~⛔ OWNER DECISION OWED — nothing built, nothing
+changed.~~** *(⚠️ banner struck 2026-08-03, chain-12 QA: the decision was TAKEN
+and both conversions BUILT the same day — see the ✅⭐ blocks below. The stale
+banner had outlived its own resolution on the same entry.)* The blanket
+pre-clearance did not cover this (it removed the ask for *adopting* the rule,
+not for what the rule then asks of shipped code).
 
 *Tier re-derived this session, not inherited.* **Item 1 — R3.** Exactly four
 shipped `SA_GetLabelToRegister` sites in all of `Data`, all in Mystery 2
@@ -1755,6 +1758,22 @@ change nothing. Four `ForEachExecuteEffects` hand out the trait — two in
 `HasTrait{Trait="Android", Negate=true}` to each filter list, found by structure rather
 than index. LoadGame pass removes the trait (and the paired
 `StatusEffect_UnableToWork`) from biorobots already infected in a save.
+
+**⚖️ FRAMING NOTE ADDED 2026-08-03 (chain-12 QA, from the blind audit's §9.2).**
+The grant filters contain **no code error** — the only shipped curation is the
+`Child` exclusion, and no android-negate sibling exists anywhere in the storybit
+family (repo grep: only `NutsAndBolts.lua` filters on `Android`, positively). So
+"androids shouldn't catch dust sickness" is a design position, supported by the
+game's own android model and by ChoGGi's years-shipped Relaunched fix for exactly
+this ([S29]: *"It doesn't always cure colonists for some reason and Biorobots
+never die, plus they're robots..."*). ⚠️ One caution recorded against
+over-claiming: the cure path was enumerated this session and does NOT single out
+androids — `DustSickness_CureFound.lua` removes the trait from **every** carrier
+on `TechResearchedTrigger`, so "androids are never cured" is not supported by
+shipped data; ChoGGi's "doesn't always cure" observation remains unlocated in
+source. The fix (grant filter + save heal) stands on the design position; **the
+mod-page label ("bug fix" vs "behavior change") is an OWNER decision, packaged in
+`CHAIN_QA_REPORT.md`.**
 
 ### F41 — Gene Forging tech has no effect (P2, high)  `[tested: Code/Fix_GeneForging.lua — PT-29 PASS 2026-07-29: live console read on a colony with neither tech researched went nil → 50 (Gene Forging alone, was nil = the defect) → 150 (both), confirming the additive sum]`
 `Colonist:GetRareTraitChance` (`Colonist.lua:3541-3550`) reads only
@@ -2529,6 +2548,22 @@ pre-2026-08-01 shipped fix (plain `GameTime()`) are left alone and existing save
 themselves on the next call. **Disposition (FIX_POLICY §3a per-site gate): REPAIRED IN-PACK
 — layer 3, no residue, nothing owed to D13.**
 
+**⚖️ INTENT TELL ADDED 2026-08-03 (chain-12 QA, from the blind audit's §9.1 —
+this entry never carried it, though the module header cites it).** Vanilla's
+write site has its own comment (`Drone.lua:840`, verified this session): *"mark
+it so it is basically unreachable forever, changing the passability version will
+reset it"* — an explicit statement that the forever-mark is intended, with a
+named recovery mechanism. **Both tells now on the record:** (FOR the fix) the
+GOLD Relaunched witness (gjscott1996 [S8] — post-open-dome, buildings breaking
+down unrepaired, drones clustered outside), plus the named recovery being
+ineffective for exactly that harm (after a passability bump the drone re-fails
+and re-marks forever — the module header's own observation), plus the shipped
+5-sol expiry in `CleanUnreachables` being equally shipped code that the mark
+defeats — which of the two shipped mechanisms is vestigial is precisely the
+ambiguity. Under FIX_POLICY §4's intent-first bar the fix passes on the
+player-harm tell; **whether the mod page labels it "bug fix" or "behavior
+change" is an OWNER decision, packaged in `CHAIN_QA_REPORT.md`.**
+
 ### F56 — Auto RC Transports never offload rockets  `[wontfix — user decision 2026-07-26: deliberately maintained design, breaks nothing; same grounds as F62/F63]`
 `RCTransport.lua`: `Automation_Gather` (:884-908) sources only surface deposits;
 `Automation_Unload` (:910-941) excludes rockets as destinations. Manual load/routes work —
@@ -2623,7 +2658,9 @@ reason to skip the ask. (b) is unaffected (additive `OnMsg`, §1.2).
 
 **📦 PACKAGE 0 PREPARED 2026-08-02 (chain prompt 7) — the §1.1–§1.4 route the
 note doubted DOES exist, and it is better than the replacement on three axes.
-RECOMMENDATION: CONVERT. ⛔ OWNER DECISION OWED — nothing built.**
+RECOMMENDATION: CONVERT. ~~⛔ OWNER DECISION OWED — nothing built.~~** *(⚠️
+banner struck 2026-08-03, chain-12 QA: decided and BUILT the same day — see the
+✅⭐ blocks below.)*
 
 *Tier re-derived this session.* **R3.** `FuelResource` still has **no
 assignment anywhere in `ModTools\Src`**, and the legacy `RocketBase` branch
@@ -3123,7 +3160,7 @@ not an eyeball call; full evidence in PLAYTEST_ARCHIVE.md. Headlines:
   flattening never applies, and `OnMsg.ApplyModOptions` re-runs `apply()`
   (`00_Core.lua:129`) on a first mid-session enable.
 
-### D03 — No way to block dome move-ins short of a full quarantine  `[tested 2026-07-28: Code/Opt_ResidencyControl.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-49 PASS in full (archived) — arrivals/tourists proven against an adversarial pad-beside-the-closed-dome setup, quarantine independence, MicroG row (kept on asteroid habitats by user decision), uninstall shape live + reload; PT-55 PASS 2026-07-30 — mid-session first enable clean, "no issues at all"]`
+### D03 — No way to block dome move-ins short of a full quarantine  `[tested 2026-07-28: Code/Opt_ResidencyControl.lua (opt-in, off by default); probe PASS in the opt-in leg; PT-49 PASS in full (archived) — arrivals/tourists proven against an adversarial pad-beside-the-closed-dome setup, quarantine independence, MicroG row (kept on asteroid habitats by user decision), ~~uninstall shape live + reload~~ (⚠️ RE-LABELLED 2026-08-03, chain-12 QA: the step-8 method was the module TOGGLE, which cannot answer an uninstall question — valid as live-toggle pass-through only; the real-uninstall standing is DERIVED (sync-only wrapper, one plain absent-tolerant field), never measured — ENGINE_FACTS "OFF" doctrine); PT-55 PASS 2026-07-30 — mid-session first enable clean, "no issues at all"]`
 Filed 2026-07-27 (user decision, out of PT-14/F61's close — read that entry first). The
 community's long-standing ask: **stop new residents from moving into a dome while its
 residents keep commuting and using services normally.** The shipped game offers only the
@@ -3537,6 +3574,22 @@ collapses to {} with cargo aboard → full unload → F67 empty launch. Explains
 exotics, dumps them back, leaves with junk/nothing". **Fix:** in override, add own cargo
 back before threshold compare; never lower `requested` below `cargo[res].amount` on the
 automode target loc.
+
+**⚠️ LEAD PARAGRAPH RECONCILED 2026-08-03 (chain-12 QA; the tension was
+independently caught by the blind audit, §10.1).** The clause above — *"loaded
+cargo is NOT 'available'"* — was **refuted by this entry's own 2026-07-28 TAP2
+forensics below**: the observed requests matched `ground + 2×aboard − threshold`
+exactly, proving `GetTotalCargoAvailable` **does** count the landed rocket's
+hold on the pinned build. The paragraph was never rewritten (a
+summary-outliving-its-correction instance, routed to the job-7 corpus). The
+reconciled story: the churn class was **real in play** — GOLD witnesses
+(TheNightglow [S14], j1dopeman/turnipofficer [S36]) are **hotfix-1.0.3-era**,
+and the official notes record a dev-side fix (*"Fixed drones endlessly moving
+resources between Landers"* [S5]) — while on the pinned 1.0.7 build the
+hold-counting arithmetic means the ratchet's trigger state may no longer arise
+on the live path. The fix's load-bearing half today is the **post-hoc floor**
+(`requested` never below aboard), which is churn-proof on every path and
+verified by PT-17's attended re-run.
 **FINDING (2026-07-28, PT-17 capacity-edge leg, live colony): the fix OVER-DRAWS
 below the player's GET-WHEN-ABOVE threshold under active mining.** Observed via the
 leaf-class TAP2 console tap: Rare Metals threshold 144, ground stock 184 (~40 units
@@ -3788,6 +3841,19 @@ Suffocating/Freezing/Dehydrated (+ Hypothermia notification) — the status
 effects read the RESIDENCE's life-support state, not the building the
 colonist occupies; cleared instantly on restore.
 
+**⚖️ FRAMING NOTE ADDED 2026-08-03 (chain-12 QA, from the blind audit's §9.3).**
+Half (b) — the Rest-reflex on the oxygen timer — is an **added behavior**:
+vanilla's `Colonist:Idle` has no shelter branch on suffocation, and an absence
+carries no code error. The audit graded it "a feature, not a repair", and on the
+code alone that reading is fair. **What the audit could not see cuts against
+"deliberate absence":** the GOLD witness thread has a **developer reply
+in-thread** (schrolock's suffocating-tourist report [S16], Relaunched), and the
+official patch notes fixed a sibling in the same family (*"colonists were
+starving in Naturalist Habitats that were filled with food"* [S5]) — the
+developers themselves treat colonists-dying-at-a-stocked-habitat as defect
+territory, not design. Half (b) stays shipped on the player-harm tell; **the
+mod-page label is an OWNER decision, packaged in `CHAIN_QA_REPORT.md`.**
+
 ### F74 — RC Transports can be ordered onto trade / refugee rockets (P2, high)  `[tested: Code/Fix_RocketInteractGuard.lua — PT-39 PASS 2026-07-27: cursor + route both refused a landed trade rocket; controls clean (F76 caveat on the entry)]`
 
 **Needs-eyes rider DOWNSIZED 2026-08-01 (bug-list audit §2.2, row F74).** The
@@ -3953,7 +4019,42 @@ entry that already carries a `Condition` is left exactly as found, so a game hot
 deactivates the fix.
 Probe: `LastTransmissionStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
 
-### F76 — RC Transport depot resource picker renders far from the cursor and cannot be clicked (P1, high) `[todo — ⛔ BOTH CLAIMS UNREPRODUCED 2026-08-02 (chain prompt 11, attended): the positioning claim is FALSIFIED by measurement and the load failure DID NOT REPRODUCE. Nothing built. Disposition ROUTED to chain prompt 12 JOB 10 rather than self-closed, because the reporter and the adjudicator are the same person. Original filing 2026-07-27 during PT-39 setup]`
+### F76 — RC Transport depot resource picker renders far from the cursor and cannot be clicked (P1, high) `[closed — REFUTED 2026-08-03 by chain-12 QA (job 10, owner-routed adjudication): mechanism falsified by measurement + source, load failure did not reproduce, reporter's premise corrected. The OG witness and the M5 lead are filed as C41, not closed with this. Original filing 2026-07-27 during PT-39 setup]`
+
+**⚖️ ADJUDICATION (chain-12 QA, job 10, 2026-08-03) — the ruling the owner
+routed here rather than let prompt 11 self-close.** Read prompt 11's full
+record below first; this block only rules on it.
+
+1. **The entry as written is REFUTED, and F76 is CLOSED.** The QA session
+   re-verified the decisive control from Src rather than inheriting it:
+   `XDialog.lua:139` feeds `terminal:GetMousePos()` straight into
+   `GetMouseTarget`, which hit-tests `.box` — one coordinate space, so the
+   recorded "coordinate-space mismatch" cannot occur, and the entry's own Fix
+   sketch would have *introduced* the displacement it named. With M1 (safe area
+   = whole screen), M2 (anchor ≈ mouse to the pixel; `mw 168 / mh 429`
+   byte-identical to the 2026-07-27 forensic, so the original box was correct
+   placement too), the did-not-reproduce click test, and the corrected premise
+   ("this giant machine parts logo isn't normal" was an interpretation — the
+   picker is vanilla, verified across all 82 `Code/` files), **no defect is
+   established anywhere in this entry's own scope.** Prompt 11's hedge —
+   *"'there is no defect here' is one step further than the evidence reaches"* —
+   was correct **because of item 6**, and that residue is preserved, not
+   closed: see `C41`.
+2. **What C41 carries** (so this closure buries nothing): the OG witness
+   (`BUG_LIST_AUDIT.md` §2.2 — *"The icon which should appear when I click on a
+   deposit does not appear!"*, a DIFFERENT symptom, never reproduced); the M5
+   measurement (`terminal.GetMousePos()` **can** return coordinates outside
+   `desktop.box` — observed `(6148, 2350)` against `(0,0)-(3840,2160)` — and an
+   out-of-range anchor makes `UpdateLayout`'s clamps slam the picker into a
+   screen corner, the first mechanism anyone has had for a player-shaped
+   report); the two unexplained environment deltas from the original filing
+   (UI scale ~80–85% noted vs `1900` = 100% measured; a 3751-px window vs 3840
+   measured); and the `F76MISS` forwarding hook as the designed instrument.
+3. **P1 is released with the closure.** Priority belongs to C41 only if it ever
+   earns an F-row.
+4. **`MOD_DESCRIPTION.md`'s F76 draft note is VOID** — it promises players the
+   exact claim measurement falsified — struck in place this commit (text kept,
+   per project practice).
 **Player-visible symptom (how it was reported):** "I tried to take the transport to load
 a resource — I get the icon but just a noise when I go to the depot to load machine
 parts. It won't actually load them." Loading from GROUND piles works (that path issues
@@ -8535,6 +8636,19 @@ wave. **Every number below is the game's own count, not a reading off the map.**
 | **F97, gate passed** | 13 | **6**×4, **7**×7, **8**×2 | all MATCH |
 | **F97, gate failed** | 7 | 0 | all MATCH |
 
+⚠️ **DISCLOSURE ADDED 2026-08-03 (chain-12 QA, from the primary log): the
+vanilla arm ran TEN waves, not nine.** WAVE 10 (sol 9 h 12) read
+`predicted 3..4 | ATTEMPTED 1 | devils made 1 | UNDER — loop broke early?
+(dust storm :220-222, or no passable spot :224-226)` and was dropped from the
+scored table without being mentioned. The exclusion is *defensible* — the
+logger's own diagnostic names two vanilla early-`break` paths that cap the
+spawn loop below the drawn count, so the wave measures interference, not the
+count computation — but it was silent, and this project treats a silently
+dropped non-conforming observation as a defect in the record regardless of
+how the verdict would have gone. The verdict is unchanged: P3 rests on the
+nine clean waves' 3s-and-4s, which WAVE 10 (a 1, capped *below* vanilla's own
+floor by a break, not by the multiply) neither supports nor contradicts.
+
 * **P3 — the defect, measured.** Nine vanilla waves produced **only 3s and 4s.
   Never 0, never 6, 7 or 8.** The authored range did not occur once. Seven 3s to
   two 4s is the predicted 2:1 shape — `Random(6,8) * 50 / 100` truncates draws 6
@@ -8696,6 +8810,22 @@ moves at all**, and the "+50%" row overstates what a player would feel:
 |---|---|---|---|
 | vanilla | **50%** (draw 1 → `1*50/100` = 0) | always exactly 1 | 0.50 |
 | F97 | **50%** (gate fails) | 1 or 2 | 0.75 |
+
+⭐⭐ **THE OG CODE WAS OBTAINED 2026-08-03 (chain-12 QA, job 8) AND IT SETTLES
+THE OPEN COMPLICATION: THE ORIGINAL GAME MULTIPLIES TOO.** OG's scheduler
+disassembles at its line 199 to the identical `Random(count_min, count_max) *
+spawn_chance / 100` (full method and disassembly on the C23 entry). So the
+"shipped rates may have been tuned with the truncation in place" hypothesis now
+holds for the game's ENTIRE life — no player has ever seen the gate — while the
+intent evidence (authored 6..8 unreachable, same help text, same gating
+siblings) also spans both games. **Job 8's verdict — KEEP, WITH RELABELLING**:
+the defect is authored-data-vs-code, broken since day one (the F23/F08/F12
+class), and "tuned around the truncation" fails as a design story because the
+tuning surface designers actually touch is the preset numbers, which every
+control shows were written as gate parameters. But the fix delivers gameplay no
+version ever shipped (up to +125% mean on `VeryHigh_2`, 0% on the default
+`VeryHigh`), so the mod page must say so honestly — it joins the owner's
+relabel package in `CHAIN_QA_REPORT.md`.
 
 **The proportion of empty waves is identical.** All that changes is that a
 non-empty wave can reach the authored maximum of 2. ⭐ **Observed, not derived:**
@@ -9991,7 +10121,7 @@ hold the dial at base for D10's leg.
 
 ## Candidates under investigation
 
-### D12 — Homeless strand in specialist domes; emigration ties never move them  `[SPECED 2026-07-30, user-approved — ⭐⭐ **BUILD UNHELD 2026-08-01** (Tier 1 verified `c6180ad`; Tier 2 verified by PT-58). ✅ **BUILT 2026-08-02 (chain prompt 10) as `Opt_NoHomeless` — own module, Opt_ResidencyControl as donor PATTERN only, zero shared gate. ⚠️ UNRUN: the leg is `PLAYTEST_CHECKLIST.md` PT-62 and no status beyond `speced` is claimed. The open question is DECIDED (narrow reading — see below). The D07-unwind remains the design RATIONALE and is not asserted as verified]`
+### D12 — Homeless strand in specialist domes; emigration ties never move them  `[SPECED 2026-07-30, user-approved — ⭐⭐ **BUILD UNHELD 2026-08-01** (Tier 1 verified `c6180ad`; Tier 2 verified by PT-58). ✅ **BUILT 2026-08-02 (chain prompt 10) as `Opt_NoHomeless` — own module, Opt_ResidencyControl as donor PATTERN only, zero shared gate. ⚠️ PARTLY RUN: the leg is `PLAYTEST_CHECKLIST.md` PT-62 (core seam + suite + exemption established; P4/P6/P12/P13 owed) and no status beyond `speced` is claimed. The open question is DECIDED — ⚠️ tag corrected 2026-08-03 (chain-12 QA): the rule is vanilla's `need_work` predicate, NEITHER specced option ("narrow" was built first and falsified live the same evening — see §4). ⭐ ADJUDICATED 2026-08-03 (chain-12 QA, job 9): the build STANDS — all five contested decisions upheld, the veto's D07-independence claim verified independently from code (subject sets disjoint by construction). The D07-unwind remains the design RATIONALE and is not asserted as verified]`
 
 ---
 
@@ -11109,10 +11239,28 @@ quotes verbatim; sources in the audit report §8.
     scheduler gates and Relaunched's multiplies, these exact numbers were tuned
     under the gate** — and adopting the gate would *restore* the tuned rate
     rather than invent one, which turns item 1 from a judgment call into a clear
-    repair. ⛔ **Still missing: the OG CODE.** No debug menu can supply it — the
-    menu shows *data* (the preset) and the defect is in *code* (the `count =`
-    line). The preset match raises the value of getting that line; it does not
-    substitute for it.
+    repair. ~~⛔ **Still missing: the OG CODE.**~~ ✅⭐⭐ **OBTAINED 2026-08-03
+    (chain-12 QA, job 8) — AND THE ANSWER IS THE ONE NOBODY HAD: OG MULTIPLIES
+    TOO.** `Packs\Lua.hpk` was extracted this session (BPUL container; blocks
+    delimited by `_ENVLZ4` markers, raw-LZ4 payload starting at marker+10,
+    decoded with `lz4.block`; ⚠️ correcting the earlier inference below, the
+    payload is **compiled Lua 5.3 chunks with full debug info**, not source —
+    the legible strings were bytecode constants). OG's `DustDevils.lua`
+    scheduler proto (lines 173–222, locals `descr / spawn_time / warning_time /
+    count / hit_time / pos / devil / new_descr` — no roll local) disassembles at
+    **its line 199** to: `Random(count_min, count_max)` → `GETTABLE
+    spawn_chance` → **`MUL` → `DIV` by constant 100** — byte-for-byte the same
+    multiply as Relaunched's `:216`, with **no comparison instruction anywhere
+    in the computation**. **The multiply is ORIGINAL-GAME code, not a remaster
+    regression.** Consequences, both directions stated: (1) the "adopting the
+    gate *restores* the tuned rate" framing is DEAD — no version ever delivered
+    the gate, and fredware's "restore" naming is historically wrong (his gate
+    implementation is still a correct repair); (2) the intent evidence is
+    UNCHANGED and now spans both games — the presets were authored with gate
+    semantics (`VeryHigh_3`'s 6..8 unreachable in both; the same help text; the
+    same gating siblings) and the code never honoured them in either. This
+    moves F97 into the pack's broken-since-day-one class (F23, F08, F12), and
+    the rate verdict is job 8's — see `CHAIN_QA_REPORT.md`.
   - 🔎 **WHAT WOULD ACTUALLY SETTLE THE RATE — a concrete, un-run check
     (recorded 2026-08-02 so it is not lost).** Relaunched is a remaster, and the
     **original Surviving Mars is installed on this machine**
@@ -12309,8 +12457,50 @@ than a defect one.** This is a **churn** producer of homelessness, not a
 **shortage** producer, and D12's push is aimed at neither — D12 fixes
 *mobility*. Under the BROAD reading of D12's open question a transiently-evicted
 colonist would have been pushed permanently out of their dome over a temporary
-ministry outage. Under the **narrow** reading that was chosen they are untouched.
-See the D12 entry.
+ministry outage. ~~Under the **narrow** reading that was chosen they are
+untouched.~~ *(⚠️ corrected 2026-08-03, chain-12 QA: the rule finally chosen is
+NEITHER specced option — it is vanilla's `need_work` predicate, adopted under
+live owner review the same evening this note was written. Under it,
+churn-evicted **employed** colonists are exempt (the common case — service
+staff), but a churn-evicted **unemployed workforce-age** resident of a flagged
+dome IS pushed — exactly the residual the D12 entry records as "recorded, not
+guarded". This note had frozen the earlier design.)* See the D12 entry.
+
+### C41 — Depot resource picker fails to APPEAR at all (OG witness) — carries F76's unrefuted residue  `[filed 2026-08-03 by chain-12 QA (job 10) so F76's closure buries nothing — cand; unreproduced third-party symptom + one measured lead; nothing built]`
+
+**Why this row exists.** F76 is **closed — refuted** (its named mechanism was
+falsified by measurement and source, and its load-failure claim did not
+reproduce). But two things in its orbit are NOT refuted and must not vanish
+under that closure; the F76 adjudication routes them here.
+
+1. **The OG witness, a DIFFERENT symptom.** `BUG_LIST_AUDIT.md` §2.2: *"The
+   icon which should appear when I click on a deposit does not appear!"* — the
+   picker failing to APPEAR, against F76's appears-in-the-wrong-place. It was
+   the stated reason F76 held P1. OG-era, never reproduced, no mechanism ever
+   attached — but it is a real player report and it was never adjudicated on
+   its own merits until now.
+2. **The one measured lead that would produce exactly that symptom (F76's M5,
+   2026-08-02).** `terminal.GetMousePos()` **can** return coordinates outside
+   `desktop.box` — one logged pass read `mouse (6148, 2350)` against
+   `desktop.box (0,0)-(3840,2160)`. `align_pos` comes from that same call, and
+   an out-of-range anchor makes `UpdateLayout`'s clamps slam the dialog into a
+   screen corner — for a player whose game window is not at the virtual-desktop
+   origin (second monitor, windowed offset), the picker would open somewhere
+   they are not looking, i.e. *"does not appear"*. ⚠️ On THIS machine there is
+   no persistent offset (passes #4-#7 read anchor ≈ mouse; setup unchanged
+   since the original filing), so the lead is for OTHER setups and is untested.
+3. **Two unexplained environment deltas from the 2026-07-27 filing**, recorded
+   not discounted: the entry pinned UI Scale ~80–85% (measured `1900` = 100%),
+   and a **3751-px** window (measured 3840; 3751 is not a standard mode).
+4. **The designed instrument exists:** the `F76MISS` forwarding hook (prompt
+   11's design) — install it, and any click the picker never receives prints
+   where the engine thought the mouse was. One line of console on any setup
+   that ever shows the symptom.
+
+**Disposition: `cand`.** No F-number unless the symptom is ever reproduced or a
+second witness lands with setup details. If a Relaunched player ever reports
+"the picker doesn't show", the first question is their monitor layout, and the
+instrument above is the one-sitting answer.
 
 ## Not yet swept (follow-up targets)
 

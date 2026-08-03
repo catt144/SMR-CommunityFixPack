@@ -5,6 +5,13 @@
 next session *"read PLAYTEST_CHECKLIST.md results"*). See
 **[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
 
+⭐ **CONVENTION (added 2026-08-03, chain-12 QA, from `BUG_LIST_AUDIT.md`
+§10.6f(i)): record the SESSION UPTIME next to any error COUNT.** Cross-arm
+count comparisons (this leg's 0 vs that leg's 80) depend on comparable
+exposure, and the owner's sessions run 1–6 hours — which makes zero-error
+results *stronger* than they read, but only if the uptime is on the record.
+One line per leg: "session ~Nh".
+
 **Completed tests live in [PLAYTEST_ARCHIVE.md](PLAYTEST_ARCHIVE.md)** — 44
 sections as of 2026-08-01, of which one (PT-54) is **retired unrun**, not
 completed. This file carries **only un-run work**: when a test
@@ -391,6 +398,11 @@ flag — tested 2026-07-29, F81 — so no cleanup is owed afterwards.
   registrations defer to vanilla in the closest-hub computation).
 - PT-20-style uninstall shape at session end: save with the toggle ON, flip
   it OFF (or disable the pack), reload — everything vanilla, no errors.
+  *(⚠️ METHOD NOTE 2026-08-03, chain-12 QA: the flip-it-OFF arm CANNOT answer
+  the uninstall question — a toggled-off module reads clean by construction
+  (ENGINE_FACTS, "OFF" IS THREE DIFFERENT THINGS). Only the disable-the-pack
+  arm is an uninstall test. Line kept verbatim because this section is frozen;
+  whoever unfreezes PT-52 must split the two arms into separate steps.)*
 
 **Progress (2026-07-28, first sitting):** module enabled LATE in the session
 via Mod Options — **the first-ever live enable of D06, bridge VERIFIED**

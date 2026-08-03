@@ -1,13 +1,17 @@
 # Project Status — read this first in a new session
 
-> 🔗 **THE PROJECT PROMPT CHAIN (2026-08-01, owner direction) —
-> `docs/prompts/project/`.** All pending project work between the bug-list
-> audit and the F86 adjudication now runs as a numbered, self-consuming
-> prompt chain (13 prompts, model routing in the filenames, mechanics in the
-> folder's README): harness gate → playtest reorg → F86 Phases 0-4 → audit
-> candidate sweeps/decisions → D10 → D12 → F76 → final backward QA. **Run in
-> filename order; each prompt hands notes forward and deletes itself; when
-> the folder is empty the owner is free for the playtest campaign.**
+> ✅✅ **THE PROJECT PROMPT CHAIN IS COMPLETE — 2026-08-03.** All 18 prompt
+> files ran and consumed themselves; the final backward QA (chain prompt 12,
+> Fable) verified the chain end to end and emptied the folder. **Read
+> `docs/reports/CHAIN_QA_REPORT.md` first** — verdict, findings, the doctrine
+> re-verification (it HOLDS), the F97/D12/F76 adjudications, the standing-item
+> table, and the playtest campaign's ordered top. The documentation-structure
+> recommendations the owner requested are `docs/reports/DOC_STRUCTURE_REVIEW.md`
+> (recommendations only — owner decides). `docs/reports/BLIND_AUDIT.md` is now
+> committed with its informed-examination ANNEX; its seal died with the chain.
+> **The owner is free for the playtest campaign** (`PLAYTEST_CHECKLIST.md`;
+> first at the keyboard: PT-62's remainder, then the load-heal round-trip
+> sweep, then the doctrine C-sitting — QA report §9).
 > `FABLE_NEXT_PROMPT.md` was rewritten the same day as a PURE playtest-standby
 > prompt and no longer carries the board — chain-owned work found in a
 > playtest session is routed to the chain, never started there. The spent
@@ -29,43 +33,31 @@ remediation 3.3). Session legs are append-only in
 > drone project grew its own open design decision, its own frozen tests, and
 > constraints that do not generalise, and sharing a prompt was degrading both.
 
-⛔⛔ **F76 — BOTH CLAIMS UNREPRODUCED; `todo` AND P1 HELD, NOTHING BUILT, AND THE
-DISPOSITION IS ROUTED TO CHAIN PROMPT 12 JOB 10 (owner decision, 2026-08-02).**
-The chain prompt 11 attended sitting ran end to end. **The positioning claim is
-FALSIFIED by measurement**: `anchor (2051,887)` vs live `mouse (2058,885)`,
-`box (1967,458)-(2135,887)` — centred on the anchor x, bottom edge AT the anchor
-y, container overhang `90 × 1.425 = 128` per side, every number matching
-prediction to the pixel; and `mw 168 / mh 429` are byte-for-byte the 2026-07-27
-forensic, so **the original reading was correct placement too**. `UIL.GetSafeArea()`
-returns `0 0 3840 2160` (the whole screen), so the clamp reading is dead as well.
-**The load failure DID NOT REPRODUCE** — the owner clicked the hex and it loaded.
-⭐ **And the reporter's premise is corrected**: the picker was believed to be
-*ours*; it is vanilla, verified by grepping all 82 `Code/` files (F74's only hook
-is a refuse-only guard that pass-throughs on a depot). ⛔ **NOT self-closed** —
-this session would be closing a P1 by re-reading the report of the person who is
-also the adjudicator, on partly-negative evidence, so job 10 gets it with the OG
-witness (`BUG_LIST_AUDIT.md` §2.2, *"the icon … does not appear"* — a **different**
-symptom, never reproduced, deliberately NOT filed as a new row) and the
-`MOD_DESCRIPTION` draft note, which is **blocked in place** because it promises
-players the exact claim measurement just falsified. ⭐ Three engine facts banked
-regardless (`ENGINE_FACTS.md`): box/mouse are one coordinate space, `GetSafeArea`'s
-absolute four-number return plus its **stale exported doc**, and
-`terminal.desktop.scale` as a read-back control for the UI Scale option. Counts
-re-derived by counting and **unchanged: 82 `Code/` files; 110 rows = 98 F + 12 D;
-40 C; 87 probes**. **PROBE SWEEP: clean**, both repos. **Chain prompt 11 is
-CONSUMED** — its build job is void because there is nothing to build.
+⚖️ **F76 — CLOSED, REFUTED (chain-12 QA, job 10, 2026-08-03; owner-routed
+adjudication).** The prompt-11 measurements and the source control were
+re-verified rather than inherited: box and mouse are one coordinate space
+(`XDialog.lua:139` control), the original forensic box was correct placement,
+the load failure did not reproduce, and the picker is vanilla. **P1 released.**
+The unrefuted residue is **NOT closed with it** — the OG "icon does not appear"
+witness and the M5 out-of-range-mouse lead are filed as **`C41` (cand)** with
+the `F76MISS` hook as the one-sitting instrument. `MOD_DESCRIPTION`'s F76 draft
+note is struck VOID. Full ruling on the F76 entry; summary in
+`CHAIN_QA_REPORT.md` §6.
 
-⚠️ **D12 `Opt_NoHomeless` — BUILT, PT-62 PARTLY RUN 2026-08-02, NOT PASSED.**
-The core seam result is established (vanilla `false nil` → D12 `DomeBasic
-shuttle`) and P5/P8b/P11 passed, but **P4/P6 did not establish** (an inflow
-fought the drain) and **the leg found a loop** — the policy pushed without
-declining, so vanilla re-offered the same dome to the same colonists, measured
-at 6 en route. Three changes built in response and **all UNRUN** (symmetric
-veto, `ChooseDome` filter, and a repair to an A/B lever that was silently
-dead). **The rule changed five times under live review, so its adjudication is
-routed to chain prompt 12, JOB 9** — D12 claims nothing beyond `speced`.
-Counts are UNCHANGED: no new module, no new probe (cases were added to the
-existing `NoHomeless` probe).
+✅ **D12 `Opt_NoHomeless` — ADJUDICATED 2026-08-03 (chain-12 QA, job 9): THE
+BUILD STANDS.** All five live-review decisions upheld; the symmetric veto's
+D07-independence claim verified independently from code (the veto's subject set
+— workforce-age unemployed — is disjoint from D07's cohort subjects by
+construction, so order-independence holds whichever wrapper is outermost).
+**PT-62's remainder is the only gate left** (P4/P6 on a stable colony, P12
+mod-manager uninstall, P13 veto lever) — D12 still claims nothing beyond
+`speced` until it runs. Two recommendations recorded: a probe case for the
+`ChooseDome` half, and a decision on the pack-wide `SMRFixPack_Disabled` gap
+(the console veto is dead for D03/D07). `CHAIN_QA_REPORT.md` §5.
+
+**Counts after chain-12 QA — re-derived by counting: 82 `Code/` files; 110
+rows = 98 F + 12 D; ⚠️ C rows 40 → 41 (C41 filed by the F76 adjudication); 87
+probes. PROBE SWEEP: clean, both repos.**
 
 **Build state (authoritative counts — stated here and nowhere else):**
 `Code/` = **82 files** (72 `Fix_` + 8 `Opt_` + `00_Core` +

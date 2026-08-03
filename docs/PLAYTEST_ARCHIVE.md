@@ -1690,6 +1690,8 @@ both, and a rocket of applicants on the way (or use the sponsor resupply).
 7. MicroG habitat (asteroid): confirm the row appears on its infopanel too.
 8. Uninstall shape: save with a closed dome, disable the module (or the pack),
    reload — **EXPECTED:** the dome accepts residents again, nothing errors.
+   *(⚠️ 2026-08-03, chain-12 QA: the "disable the module" arm is VOID as an
+   uninstall test — see the re-label on the result below.)*
 
 **Progress (2026-07-27 late, first sitting):** core behavior PASSing — a
 prepped high-comfort dome (Smart Apartment 0/20, comfort 70) closed to new
@@ -1728,6 +1730,17 @@ mechanisms). **Uninstall shape VERIFIED (same sitting):** module toggled off
 → the dome accepts residents again, and the save reloads cleanly with
 identical behavior — no errors either way (step 8 PASS, live toggle AND
 reload both exercised).
+⚠️ **RE-LABELLED 2026-08-03 (chain-12 QA, the "OFF is three different things"
+doctrine): VOID as uninstall evidence, valid as live-toggle pass-through.**
+The method was the Mod Options toggle, and a toggled-off module reads clean
+by construction — the mod env is still present and `Opt_ResidencyControl`'s
+`CanAcceptNewColonists` wrapper installs at FILE SCOPE, so it was still
+installed and passing through during this leg. What the leg genuinely
+verified: the live toggle restores vanilla behaviour and the reload is clean
+*with the pack present*. D03's real-uninstall standing is DERIVED, not
+measured (sync-only wrapper — no capturable frames; one plain persisted
+dome field, absent-tolerant by design). **No Mod-Manager-disable leg has
+ever been run for D03.** Result kept verbatim above; nothing deleted.
 **Step 7 (MicroG row) PASS after a false alarm (same sitting):** the row
 first appeared missing on the asteroid Micro-G Habitat infopanel — the
 tester then caught the cause themselves: the save had been reloaded WITHOUT
