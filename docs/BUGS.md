@@ -4216,6 +4216,71 @@ dead console* lesson):
    for a global `GetSafeArea` that does not exist; and `terminal.desktop.scale`
    as a read-back control for the user's UI Scale option.
 
+#### ⛔⛔ M2 RUN (attended, 2026-08-02) — **"RENDERS FAR FROM THE CURSOR" IS FALSIFIED. THE PICKER OPENS EXACTLY AT THE CURSOR.**
+
+Read-only post-wrapper on `ResourceItems.UpdateLayout`, logging anchor, box,
+container box, scale and the live mouse **in one line at one moment** — which is
+what the 2026-07-27 forensics never had. Four identical passes, plus a
+screenshot of the open picker:
+
+```
+F76#4 anchor (2051, 887) box (1967, 458)-(2135, 887) cont (1839, 458)-(2263, 830)
+      scale (1425, 1425) mw 168 mh 429 mouse (2058, 885)
+```
+
+**Every number is the correct-placement prediction, to the pixel:**
+
+| check | predicted | measured |
+|---|---|---|
+| anchor == live mouse | equal | `(2051,887)` vs `(2058,885)` — 7px, the mouse moved after `Init` |
+| box centred on anchor x | `2051 - 168/2 = 1967` | `minx = 1967` ✔ |
+| box **bottom edge AT** anchor y | `887` | `maxy = 887` ✔ |
+| dialog scale | `1900 × 0.75 (ScaleModifier) = 1425` | `(1425,1425)` ✔ |
+| container overhang | `90 × 1.425 = 128` per side | `1839 = 1967-128`, `2263 = 2135+128` ✔ |
+| container bottom above box bottom | `40 × 1.425 = 57` | `887 - 830 = 57` ✔ |
+
+⭐ **And `mw 168 / mh 429` are byte-for-byte the 2026-07-27 forensic's
+`168 × 429`.** Same measure, therefore same scale, therefore **the original
+session was at the same UI scale as this one** — so the entry's "UI Scale slider
+~80-85%" is wrong (measured 1900 = 100%), *and* the backward solve of
+`box=(886,13)` to a mouse at ≈(969,442) is confirmed by a second, complete
+observation. **The original forensic was correct placement too.**
+
+⛔ **Therefore: F76's headline — "renders far from the cursor", "one giant
+detached hex near the top of the screen" — describes correct behaviour.** The
+picker extends *upward* from the cursor by its own height (429px at this scale),
+so a click in the upper part of the screen puts it near the top of the screen.
+It is not detached and it is not mis-positioned, at 4K or anywhere else. **The
+"ultrawide-only" framing, the `3751px` window, the coordinate-space mismatch and
+the scale theory are all now off the table together.**
+
+**What survives is the player-visible failure, which was never the same claim
+as the positioning one:** *"I get the icon but just a noise… it won't actually
+load them."* The live picker is open and correctly drawn; the open question is
+now only whether the **click lands on the hex**. Two source facts make that
+sharp:
+* **The hex is drawn OUTSIDE the dialog's own box.** Dialog box is 168 wide
+  (`1967..2135`); the container holding the hex is 424 wide (`1839..2263`). If
+  the picker is the modal window, `XDesktop:UpdateCursor` recurses from it and
+  the whole hex is reachable. **If `SetModal` silently no-opped** — and
+  `XDesktop:SetModalWindow` returns early when the window `not IsVisible()` or
+  `not IsOnTop()` (`XDesktop.lua:259-271`), while `ResourceItems:Init` calls
+  `SetModal` *before* `XWindow:Open` runs the fade-in (`XWindow.lua:173-183`) —
+  then targeting walks the desktop instead, tests `ResourceItems.box` (the
+  **narrow** 168px box, `XWindow.lua:1288-1294`), and **the outer ~27% of the
+  visible hex is unclickable**, falling through to the world.
+* **A fall-through produces exactly the reported symptom.** World click →
+  `OnMsg.SelectionChange` → `CloseResourceSelector` → `Close` →
+  `context.on_close_callback` → `ExecuteLoad(self)` with `res_id = nil` and
+  `to_load = {}` → `#transport_resource <= 0` → **bare `return`, nothing
+  transferred, no error** (`Lua/Units/RCTransport.lua:1395-1443`). A sound, and
+  nothing loads.
+This geometry is **scale-invariant** (both the overhang and the box shrink with
+`scale`), so the clickable fraction of the hex is the same at 1080p — which is
+the first thing on this entry that predicts the `BUG_LIST_AUDIT.md` §2.2 OG
+witness on ordinary setups instead of explaining it away. **M4's resolution
+control is therefore no longer the discriminator; the click is.**
+
 ---
 
 ### F77 — Extender working-flap tears down and rebuilds the entire uplink hub; fleet-wide Idle churn (P2, med-high)  `[fixed: Code/Fix_ExtenderFlapChurn.lua — chained wrapper on UpdateUplinkRequesters, rebuild deferred 2s + coalesced per root hub (chains resolved); built 2026-07-28 with the D06 core, PT pending. Accepted trade-off: registration stale up to ~2s during the window — the shipped flow already defers reconnects (SetWorkRadius uses DelayedCall(300)). Debounce thread is a mod game-time thread = not persisted (F06 precedent), so a save inside the window is clean]`
