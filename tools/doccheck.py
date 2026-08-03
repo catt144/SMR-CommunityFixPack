@@ -258,7 +258,11 @@ def main():
     print("doccheck: %s" % ("GREEN" if ok else "RED"))
     if args.emit_counts:
         print()
-        print(counts_block(counts))
+        # Never hand a pasteable block to a red run: the whole point of the
+        # block is that a commit body can quote it as verified state, and the
+        # numbers above a failure are not verified state.
+        print(counts_block(counts) if ok
+              else "BUILD STATE withheld — doccheck is RED; fix it, then re-run.")
     return 0 if ok else 1
 
 
