@@ -8,6 +8,16 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## Evicted from STATE.md 2026-08-03 — the checklist redesign, resolved
+
+Held a slot under "Gates and holds" after it stopped being one. **Checklist
+REDESIGNED 2026-08-03** (owner-approved at the checkpoint): by-system groups,
+Bug/Requirements/Setup format; the pre-redesign snapshot and the old protocol
+are in `docs/archive/PLAYTEST_ARCHIVE.md`. Evicted to make room for D12's
+free-work door under the 60-line cap (`WORKFLOW.md` mechanical rule 8).
+
+---
+
 ## STATUS narrative archived 2026-08-03 (docs-restructure chain)
 
 `docs/STATUS.md` became `docs/agent/STATE.md` — one screen, current only —

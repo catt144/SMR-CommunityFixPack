@@ -42,18 +42,18 @@ released.** The unrefuted residue is **not** closed with it — the "icon does n
 appear" witness and the out-of-range-mouse lead are **`C41` (cand)**, instrument
 `F76MISS`; MOD_DESCRIPTION's F76 note is VOID.
 
-✅ **D12 `Opt_NoHomeless` — THE BUILD STANDS** (job 9). Five live-review decisions
-upheld, the veto's D07-independence verified from code; **PT-62's remainder is
-the only gate left**, and D12 claims nothing beyond `speced`.
+⚖️ **D12 `Opt_NoHomeless` — build STANDS (job 9), then CHANGED AGAIN 2026-08-03:
+the FREE-WORK DOOR.** The symmetric veto refused `need_work` — the very set
+vanilla sends to an open job — so a flagged dome could never be STAFFED. Src-
+derived, unobserved, fixed before the leg. **PT-62 is still the only gate; P14
+added** (does an open slot fill); D12 claims nothing beyond `speced`.
 
 ## Gates and holds
 
-- **PT-62 remainder** (P4/P6 stable colony, P12 uninstall, P13 veto) → D12.
+- **PT-62 remainder** (P4/P6 stable colony, P12 uninstall, P13 veto, P14 door) → D12.
 - **PT-37** → F48 · **F42** `blocked`, wontfix recommended, owner call needed.
 - **D08 extender overhaul** — 5 layers speced in
   `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
-- ✅ **Checklist REDESIGNED 2026-08-03** (owner-approved at the checkpoint):
-  by-system groups, Bug/Requirements/Setup format; snapshot+old protocol archived.
 - **Owner decisions (6 open)** → `docs/PLAYTEST_CHECKLIST.md` "Decisions
   waiting on you", never only in agent docs.
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
