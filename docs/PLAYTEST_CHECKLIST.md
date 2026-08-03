@@ -381,7 +381,7 @@ reachability audit's verdict. → [F34](agent/bugs/F34.md)
 
 # Colonists & domes
 
-### PT-62 — D12 "no homeless" remainder · Status: partial (run 2026-08-02; P4 · P6 · P12 · P13 owed)
+### PT-62 — D12 "no homeless" remainder · Status: ✅ P4/P6 PASSED 2026-08-03 (dome went 23 → 0, overpop cleared) — P12 · P13 · P14 · the landing check still owed. ⛔ NOT a release gate (opt-in; owner, 2026-08-03)
 **Bug:** the module works — same colonist, same moment: vanilla answered
 `false nil`, D12 supplied a reachable suitable dome — but the first sitting's
 drain fought an inflow (the ping-pong finding), and the three changes built in

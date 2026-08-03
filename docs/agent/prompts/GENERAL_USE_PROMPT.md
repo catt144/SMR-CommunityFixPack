@@ -7,7 +7,14 @@ the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
 model-specific; pre-rename documents cite the old name, see the translation
 note in `docs/README.md`.) Staleness anchor: **rewritten 2026-08-03 by the
 standing-prompts redesign session** against the restructured tree — decision
-record in `docs/agent/reports/STANDING_PROMPTS_REDESIGN.md`. The campaign's
+record in `docs/agent/reports/STANDING_PROMPTS_REDESIGN.md`. **Last verified
+against the tree 2026-08-03 at the end of the PT-62 sitting; newest commit then
+was the organic-evidence commit for F02/F78/F81.** That sitting's lessons, both
+binding on any sitting: an "objective counter" is only objective if it can
+FAIL — PT-62's loop check counted the cohort delivery a flagged dome is REQUIRED
+to receive, so it could not — and **read the LOG FILE, not the screen**: two
+live explanations given from on-screen readings that session were wrong, and the
+log refuted both (D12 entry). The campaign's
 verdicts, adjudications (F97 keep / D12 stands / F76 closed-refuted, residue =
 C41) and its ordered top are in `docs/agent/reports/CHAIN_QA_REPORT.md`.
 

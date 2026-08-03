@@ -16,11 +16,8 @@ table, and the campaign's ordered top. **The owner is free for the playtest
 campaign** (`docs/PLAYTEST_CHECKLIST.md`; at the keyboard first: PT-62's
 remainder, the load-heal round-trip sweep, the doctrine C-sitting — §9).
 
-✅ **Docs-restructure chain COMPLETE (2026-08-03)**, spec executed, doccheck v3
-armed as pre-commit hook — end state in `agent/reports/DOCS_RESTRUCTURE_REPORT.md`.
-✅ **Standing prompts REDESIGNED 2026-08-03** — O1–O7 decided, O1/O3/O4/O7
-adopted (WORKFLOW element 8, mech. rules 6/8), both prompts route via the
-INDEXes: `agent/reports/STANDING_PROMPTS_REDESIGN.md`.
+✅ **Docs restructure + standing-prompts redesign COMPLETE 2026-08-03** —
+`agent/reports/DOCS_RESTRUCTURE_REPORT.md`, `STANDING_PROMPTS_REDESIGN.md`.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -42,15 +39,18 @@ released.** The unrefuted residue is **not** closed with it — the "icon does n
 appear" witness and the out-of-range-mouse lead are **`C41` (cand)**, instrument
 `F76MISS`; MOD_DESCRIPTION's F76 note is VOID.
 
-⚖️ **D12 `Opt_NoHomeless` — build STANDS (job 9), then CHANGED AGAIN 2026-08-03:
-the FREE-WORK DOOR.** The symmetric veto refused `need_work` — the very set
-vanilla sends to an open job — so a flagged dome could never be STAFFED. Src-
-derived, unobserved, fixed before the leg. **PT-62 is still the only gate; P14
-added** (does an open slot fill); D12 claims nothing beyond `speced`.
+✅ **D12 — PT-62 P4/P6 PASS 2026-08-03** (attended): the retirement dome ran
+homeless **23 → 10 → 0** and `overpop true → false`; 0 leaked subjects. ⭐ Owner:
+a win needing more testing, and ⛔ **NOT a release gate** — it is opt-in, so no
+release step waits on it. Status stays `speced`. Owed: P12/P13/P14, the split
+loop counter through a landing. ⚠️ The old loop check **could not fail** (it
+counted the cohort delivery a flagged dome must receive) — split form now binds.
 
 ## Gates and holds
 
-- **PT-62 remainder** (P4/P6 stable colony, P12 uninstall, P13 veto, P14 door) → D12.
+- **PT-62 remainder** (P12, P13, P14, landing check) → D12 — ⛔ NOT a release gate.
+- ⭐ **F02 · F78 · F81 fired ORGANICALLY 2026-08-03** in the owner's campaign
+  (storm wedge healed, 14 stray meteors cleared) — evidence upgraded, entries.
 - **PT-37** → F48 · **F42** `blocked`, wontfix recommended, owner call needed.
 - **D08 extender overhaul** — 5 layers speced in
   `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
