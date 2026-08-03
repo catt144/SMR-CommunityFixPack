@@ -189,6 +189,72 @@ provenance, freshness) that the targeted mechanisms above address without
 moving content. The one structural change worth real consideration is R6, and
 it should be earned via R1 rather than adopted on faith.
 
+---
+
+## 5 · Addendum (2026-08-03, same session) — the audience map, and what it changes
+
+The owner supplied the actual readership per document: **human-used** =
+`PLAYTEST_CHECKLIST.md` (heaviest), `PLAYTEST_HELP.md`; **historical reference
+only** = `PLAYTEST_ARCHIVE.md`; **launch-time, not used for work today** =
+`MOD_DESCRIPTION.md`, the public-facing README; **agent-only** = `STATUS.md`,
+`BUGS.md` (near-only — consulted by the owner just when an agent explains
+poorly), `FIX_POLICY.md`, `ENGINE_FACTS.md`, the `reports/` set (agent-tasked,
+agent-read), the `prompts/` folder (owner-invoked, agent-executed).
+
+That map changes four things and leaves the rest standing:
+
+**A — NEW, and the biggest delta: owner decisions must surface where the owner
+actually reads.** Several "ask the owner" items have historically lived in
+BUGS entries and report sections (`BUG_LIST_AUDIT.md` §7.1's web-checks are
+the worked example — they "kept surviving prompts" partly because their home
+was a document the owner does not read). Under the audience map that is a
+structural mis-routing, not owner inattention. **Recommendation R10: a short
+"Decisions waiting on you" section at the top of `PLAYTEST_CHECKLIST.md`** —
+the owner's heaviest document — which agents must mirror every owner-decision
+item into (one line + pointer) and strike when decided. No new document; one
+section; **[WORKFLOW]** one authoring rule ("an owner decision recorded only
+in BUGS/reports is not considered asked"). Today's pending entries would be:
+the mod-page relabel package, the D03/D07 dead-veto choice, the F46 group
+C→B adoption, the C36-adjacent mysteries grep, and this review itself.
+
+**B — `MOD_DESCRIPTION.md`: stop maintaining it continuously; rebuild it at
+launch prep.** Its whole drift class (the expired F86 gate note, the voided
+F76 note — instructions that went wrong *as instructions*) exists because a
+launch-time document is being hand-synced through development it does not
+serve. **Recommendation R11: freeze it under a top banner ("NOT AUTHORITATIVE
+during development — every claim must be re-verified against BUGS at launch
+prep"), move any decision content it uniquely holds into the relevant entries,
+and make "rebuild MOD_DESCRIPTION from entries" an explicit release-gate item**
+(where the §3 relabel package lands anyway). This *deletes* a duplication
+surface for the whole development period at zero ongoing cost. The public
+README gets the same treatment at lower priority.
+
+**C — release BUGS/STATUS from human-readability duty; push harder on machine
+structure.** The owner confirms BUGS is not written for humans and that is
+acceptable — agents translate on demand. So the one objection to aggressive
+structure (tag clutter, generated tables reading poorly) is void. **R6
+(generate the index from the heading tags) upgrades from "earn it via R1" to
+"do it when convenient"** — R1's parser is still the first step, but there is
+no audience reason left to keep the hand-synced pair. R3's provenance tags
+likewise cost nothing socially in agent-only documents.
+
+**D — R2 (execution markers) is re-ranked as a human-safety feature and moves
+to the top with R1.** The written-but-never-run class is most dangerous
+precisely in the two documents the owner acts on at the keyboard without the
+re-derivation discipline agents are bound to (the PT-61 sandboxed console gate
+sat in the checklist; the dead A/B lever was a checklist instruction). The
+limited "write for humans" budget this project has should be concentrated on
+`PLAYTEST_CHECKLIST.md` and `PLAYTEST_HELP.md` — markers, plain-language
+"what a pass means" lines, and the uptime convention — and nowhere else.
+
+Unchanged by the map: R4 (round-trip step — a keyboard fact, audience-neutral),
+R5 (routing preconditions), R7 (effect-evidencing verdicts), R8 (log
+archiving), R9 (ENGINE_FACTS cadence), and the live-with-it column.
+**Revised order: R1 + R2 first, then R10 and R11 (both one-sitting, both
+delete a failure surface outright), then R3/R4/R5, then R6, then R7/R8/R9.**
+
+---
+
 *Recommendations only — the owner decides. Items marked [WORKFLOW] change how
 sessions are authored and therefore need explicit adoption into `WORKFLOW.md` /
 `FIX_POLICY.md` rather than silent practice.*
