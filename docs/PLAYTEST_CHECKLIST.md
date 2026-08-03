@@ -222,7 +222,11 @@ rebuilt — every result it could produce would be evidence about code that will
 not exist. → [D06](agent/bugs/D06.md), [F77](agent/bugs/F77.md),
 `docs/agent/reports/DRONE_OVERHAUL_OPTIONS.md`.
 **Requirements:** ⛔ BLOCKED — waits on the approved drone plan; do not run any
-part of it.
+part of it. ⚠️ For whoever rewrites this test: the old Trigger C rider's
+"uninstall shape" conflated the module TOGGLE with a Mod-Manager disable —
+the toggle arm is VOID as an uninstall test ("OFF is three different things",
+chain-12 QA re-label, in the snapshot); the rewrite must keep the two arms as
+separate steps.
 **Setup:** none until the rebuild. The B2 stress protocol and the CAN/CANNOT
 judging lists are preserved in the archive snapshot — the rebuild's
 verification leg is derived from them.
