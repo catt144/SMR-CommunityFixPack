@@ -387,15 +387,19 @@ reachability audit's verdict. → [F34](agent/bugs/F34.md)
 drain fought an inflow (the ping-pong finding), and the three changes built in
 response are UNRUN. This remainder is D12's only gate. → [D12](agent/bugs/D12.md)
 **Requirements:** a STABLE colony — the drain must not fight an inflow /
-restart first (**four** unrun changes as of 2026-08-03) / D03 "Closed to new
-residents" available for the P4-P6 half / Mod Manager for the uninstall half /
-**a flagged dome with an open service work slot, for P14**.
+restart first (**four** unrun changes as of 2026-08-03) / Mod Manager for the
+uninstall half / **a flagged dome with an open service work slot, for P14**.
+⛔ **Do NOT use D03 "Closed to new residents" as a fixture control** — the old
+plan said to; it was withdrawn 2026-08-03 because it does not block landings at
+all (they read the raw field, not D03's wrapped method), it would mask the D12
+guard under test on the path it does block, and it blocks Seniors. Entry.
 **Setup:**
 1. Restart, then the suite run.
 2. The loop check — must reach 0 and STAY 0 through a rocket landing (entry;
    it is the leading indicator now).
-3. P4/P6: the drain clears the dome, with D03 closed so landings cannot refill
-   it. Mind the entry's employed-homeless caveat before reading P6.
+3. P4/P6: the drain clears the dome, **run clean — no D03 crutch** (above); a
+   dome that refills anyway is a FINDING, not a fixture problem. Mind the
+   entry's employed-homeless caveat before reading P6.
 4. ⭐ **P14 — the free-work door** (new 2026-08-03): flag a dome that has an
    open work slot and watch whether the slot **FILLS**. ⚠️ **`0 would move` on
    a recruiting dome is the door WORKING, not a miss** — that is the reading
