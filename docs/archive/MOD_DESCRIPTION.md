@@ -1,3 +1,10 @@
+> ⛔ **FROZEN during development — NOT authoritative; rebuild from
+> `docs/agent/bugs/` entries at launch prep (CHAIN_QA_REPORT §3 relabel package
+> lands then).** Moved to `docs/archive/` 2026-08-03 by the docs-restructure
+> chain (DOC_RESTRUCTURE_SPEC §3d). Its fix lists, counts and F76 explainer are
+> as of that date and are not maintained; the F76 draft note is struck VOID by
+> the chain-12 adjudication. This banner is the only text added.
+
 # Mod Description (draft) — Community Fix Pack
 
 This file is the working draft of the public mod page text (Paradox Mods /
