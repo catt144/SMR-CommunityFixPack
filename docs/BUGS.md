@@ -103,7 +103,7 @@ Statuses: `todo` → `fixed` (code written) → `tested` (verified in-game) | `w
 | F73 | Asteroid colonists idle outdoors; no shelter reflex      | P1  | med+ | tested — PT-19 PASS 2026-07-28 (entry) |
 | F74 | RC Transports can be ordered onto trade/refugee rockets  | P2  | high | tested · **⭐ RIVAL-ROCKET REPORT FOUND 2026-08-01 (owner, logged-in Paradox browse): same reporter twice — OG Sep 5 2022 (overflow trigger) and Relaunched May 2 2026 on 1.07 (halt-mid-load trigger), both ending in a PERMANENTLY bricked rocket.** Primary evidence replaces the paraphrase-grade dev note; our guard covers both triggers (entry) |
 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | P2 | high | fixed |
-| F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | todo — found 2026-07-27, wave-6 candidate (entry) |
+| F76 | Depot resource picker renders off-cursor, unclickable    | P1  | high | **todo — ⛔ BOTH CLAIMS UNREPRODUCED 2026-08-02 (chain prompt 11 attended sitting): positioning FALSIFIED by measurement, load failure DID NOT REPRODUCE, and the reporter's premise (that the picker was ours) is corrected. Disposition ROUTED to chain prompt 12 JOB 10 — not self-closed** (entry) |
 | F77 | Extender working-flap tears down + rebuilds whole uplink hub; fleet Idle churn | P2 | med+ | fixed 2026-07-28 — PT pending (entry) |
 | F78 | MeteorsDisaster storm wedges forever in its unbounded drain loop | P1 | high | **tested 2026-08-01** — fixed 2026-07-29; StormWedgeHeal REORDERED 2026-08-01 (F86 Tier-1 orphan gate, §6.2a-D) and **BOTH §6.2a-D completion branches ran live on the reordered body** (Tier-1 leg 1 forced storm → release branch; the natural storm → force-clean branch; storms keep scheduling after each heal). PT-54 triggers C+D absorbed (entry) |
 | F79 | Colonists never use trains for services (service search is passage-only) | P3 | high | **`wontfix` 2026-07-31 (owner)** — feature-completion DECLINED: risk of new issues exceeds the benefit, especially on large multi-stop end-game maps (entry) |
@@ -3953,7 +3953,7 @@ entry that already carries a `Condition` is left exactly as found, so a game hot
 deactivates the fix.
 Probe: `LastTransmissionStorage` in `40_Probes_Wave4.lua`. Playtest: PT-42.
 
-### F76 — RC Transport depot resource picker renders far from the cursor and cannot be clicked (P1, high) `[todo — found live 2026-07-27 during PT-39 setup; wave-6 build candidate]`
+### F76 — RC Transport depot resource picker renders far from the cursor and cannot be clicked (P1, high) `[todo — ⛔ BOTH CLAIMS UNREPRODUCED 2026-08-02 (chain prompt 11, attended): the positioning claim is FALSIFIED by measurement and the load failure DID NOT REPRODUCE. Nothing built. Disposition ROUTED to chain prompt 12 JOB 10 rather than self-closed, because the reporter and the adjudicator are the same person. Original filing 2026-07-27 during PT-39 setup]`
 **Player-visible symptom (how it was reported):** "I tried to take the transport to load
 a resource — I get the icon but just a noise when I go to the depot to load machine
 parts. It won't actually load them." Loading from GROUND piles works (that path issues
@@ -4328,8 +4328,79 @@ layout with the game on a display that is not at the virtual origin, every
 anchor would be offset by that display's origin, permanently. The original
 report's environment — ultrawide, and a **3751px** window that is not any
 standard mode — is exactly the shape that would put the game window somewhere
-other than `(0,0)` of the virtual desktop. ⛔ **Not claimed, not built. It is one
-console line and two questions to the owner.**
+other than `(0,0)` of the virtual desktop. ⛔ **Not claimed, not built.**
+⚠️ **And it is WEAKENED by this sitting's own data**: the owner reports the
+setup is unchanged since 2026-07-27, and passes #4-#7 read `anchor ≈ mouse`, so
+there is **no persistent offset on this machine**. A single out-of-range reading
+is what an ordinary cursor excursion onto a second display looks like. What it
+proves is narrower but still real: **`GetMousePos` can return coordinates
+outside `desktop.box`, so a game window not at the virtual origin would anchor
+the picker off-screen for that player.** M5 stays open as a question about
+*other* setups, not this one.
+
+#### ⛔⛔ THE REPORTER'S PREMISE IS CORRECTED, AND IT RE-READS THE ORIGINAL FILING
+
+Owner, 2026-08-02, unprompted: *"I was under the impression that the resource
+picker was a rendering we was doing as a bug fix, not vanilla."*
+
+**It is vanilla, verified not assumed.** Grepping all 82 `Code/` files for
+`ResourceItems`, `ItemMenuBase`, `HexButtonResource`, `OpenResourceSelector` and
+`GetSelectorItems` returns two files, both innocent: `Fix_LakeEntombment.lua:15`
+mentions `BaseRover` in a **comment**, and F74's `Fix_RocketInteractGuard.lua`
+wraps `CanInteractWithObject`/`InteractWithObject` as a **refuse-only** guard —
+`if is_event_rocket(obj) then return false end` then straight to `orig`
+(`:119-132`), and the predicate matches trade/refugee rocket classes only, so a
+`StorageDepot` click is byte-for-byte pass-through. ⚠️ **The assumption was
+reasonable** — the pack does ship UI fixes (the F13/F14/F19/F20 family) — which
+is exactly why it is worth recording rather than waving away.
+
+**What it does to the filing.** The load-bearing observation behind "renders as
+one giant detached hex" was *"this giant machine parts logo isn't normal"*. The
+hex is now measured to be exactly what vanilla draws, where vanilla draws it. If
+it read as abnormal **because it looked mod-injected**, then the abnormality was
+an interpretation — and it is the interpretation this entry is named for.
+The rest of the report fits the same reading with **no defect anywhere**: the
+picker opened correctly, was not recognised as the thing to click, so the next
+click went back to the depot — which falls through to the world, selects it,
+closes the picker via `OnMsg.SelectionChange`, and runs `ExecuteLoad` with an
+empty `to_load` → bare `return`. **A sound, nothing loaded, no error.**
+
+⛔ **This is NOT recorded as "the report was wrong."** It is recorded as: the
+symptom description and the mechanism inferred from it were coupled, and the
+coupling has come apart under measurement. **The 2026-07-27 sighting is not
+withdrawn** — see the two measured environment differences above, and the OG
+witness below.
+
+#### 📋 DISPOSITION — ROUTED TO CHAIN PROMPT 12, JOB 10 (owner decision, 2026-08-02)
+
+**Not self-closed, by the owner's own call**, on the D12 precedent: *"let the
+Fable QA session look at our findings before we make any hard decisions."*
+⭐ **The conflict here is sharper than D12's** — this session would be closing a
+P1 by re-reading the report of the person who is also the adjudicator, on
+evidence that is partly negative (a did-not-reproduce). **F76 keeps `todo` and
+P1 until prompt 12 rules.** What job 10 inherits:
+
+1. **The two measurements** (M1, M2) and what they falsify. These are positive
+   evidence and do not depend on the did-not-reproduce.
+2. **The did-not-reproduce**, which per this prompt's *What may not be claimed*
+   proves nothing on its own.
+3. **The corrected premise**, above — the part that most needs a second reader,
+   because a session that re-reads a witness's own report is exactly where
+   motivated reasoning would not show up from the inside.
+4. ⚠️ **The OG witness is a DIFFERENT SYMPTOM and was never reproduced either.**
+   `BUG_LIST_AUDIT.md` §2.2 quotes *"The icon which should appear when I click
+   on a deposit does not appear!"* — icon **does not appear**, against this
+   entry's icon **appears in the wrong place**. Nothing in this sitting speaks
+   to it. **It was the stated reason F76's priority was raised, so if F76 closes
+   it must not close silently over the top of it** — it needs its own row or its
+   own explicit dismissal. Deliberately **not filed** here: filing it would
+   change the counts on a session whose whole finding is that this entry
+   over-claimed.
+5. **M5**, above — open for other setups, weakened for this one.
+6. ⛔ **`MOD_DESCRIPTION.md`'s F76 `[DRAFT NOTE]` MUST NOT SHIP AS WRITTEN.** It
+   promises players an explainer for a "known vanilla issue" that says the
+   picker *"renders far from the cursor and can't be clicked"* — the exact claim
+   measurement just falsified. Marked blocked in place, in this commit.
 
 ---
 

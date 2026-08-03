@@ -1160,3 +1160,118 @@ chain expects. **This is a routing-shape observation, not a complaint** — see
 also prompt 10's note about an item that could not find a suite run in three
 prompts. Both say the chain's unit of work is the *prompt* when sometimes it is
 the *keyboard*.
+
+---
+
+### ⭐⭐ JOB 10 (added by chain prompt 11, 2026-08-02, BY OWNER DECISION) — adjudicate F76, which this chain could not close for itself
+
+**Owner routed this rather than let prompt 11 self-close it** (same call as job
+9's, and for a sharper reason): prompt 11 would have been closing a **P1** by
+re-reading the report of the person who is also the adjudicator, on evidence
+that is **partly negative**. **F76 keeps `todo` and P1 until you rule.** Nothing
+was built. Counts unchanged and re-derived by counting: **82 `Code/` files;
+110 rows = 98 F + 12 D; 40 C; 87 probes. PROBE SWEEP: clean**, both repos.
+
+Full record is on the `BUGS.md` **F76 entry** (design pass → M1 → M2 → click
+test → corrected premise → this routing). **Read it there; the summary below is
+an index, not a substitute.**
+
+**What is POSITIVE evidence and does not depend on the did-not-reproduce:**
+1. **The recorded mechanism is refuted from source.** `XWindow.box` and
+   `terminal.GetMousePos()` are one coordinate space; `scale` multiplies sizes,
+   never coordinates. The decisive control is vanilla's own `XDialog.lua:139`,
+   which feeds the mouse position straight into `GetMouseTarget`, which
+   hit-tests `.box`. **The entry's "Fix sketch" would have introduced the
+   displacement it meant to remove.**
+2. **M1 measured:** `UIL.GetSafeArea()` → `0 0 3840 2160`, the whole screen. The
+   safe-area-clamp reading of the forensic box is dead.
+3. **M2 measured:** `anchor (2051,887)` vs live `mouse (2058,885)`;
+   `box (1967,458)-(2135,887)` — centred on anchor x, **bottom edge AT anchor
+   y**; container overhang `90 × 1.425 = 128` per side; every number matching
+   prediction to the pixel. ⭐ **`mw 168 / mh 429` are byte-for-byte the
+   2026-07-27 forensic**, so the original session ran at the same scale and
+   **its box was correct placement too** — which the backward solve had already
+   predicted independently.
+
+**What is NOT positive evidence, and is flagged as such:**
+4. **The click test DID NOT REPRODUCE.** Per prompt 11's *What may not be
+   claimed*, that proves nothing on its own. ⚠️ The `F76MISS` forwarding hook
+   was **not installed** on that run, so its silence is not evidence either.
+
+**The part that most needs a second reader:**
+5. ⛔ **The reporter's premise is corrected.** The owner believed the picker was
+   *"a rendering we was doing as a bug fix"*. It is vanilla — verified by
+   grepping all 82 `Code/` files, not assumed (F74's only hook is refuse-only
+   and pass-throughs on a depot). The load-bearing observation behind "one giant
+   detached hex" was *"this giant machine parts logo isn't normal"*; if it read
+   as abnormal **because it looked mod-injected**, the abnormality was an
+   interpretation — **and it is the one the entry is named for.** The rest of
+   the report then fits with no defect anywhere: picker opens correctly, is not
+   recognised as the thing to click, next click goes to the depot, falls through
+   to the world, `SelectionChange` closes the picker, `ExecuteLoad` bare-returns
+   on an empty `to_load` — a sound, nothing loaded, no error.
+   **This is the claim to attack.** A session re-reading a witness's own report
+   is exactly where motivated reasoning would not show up from the inside, and
+   prompt 11 is aware it had every incentive to find the entry over-claimed.
+
+**Four things that must not close silently underneath a closure:**
+6. ⚠️ **The OG witness is a DIFFERENT SYMPTOM and was never reproduced either.**
+   `BUG_LIST_AUDIT.md` §2.2: *"The icon which should appear when I click on a
+   deposit does not appear!"* — icon **does not appear**, against this entry's
+   icon **appears in the wrong place**. It was the stated reason F76's priority
+   was raised to P1. **Deliberately NOT filed as a new row by prompt 11** —
+   filing it would have changed the counts on a session whose whole finding is
+   that this entry over-claimed. It needs its own row or its own explicit
+   dismissal; it must not be closed over the top of.
+7. ⛔ **`MOD_DESCRIPTION.md`'s F76 `[DRAFT NOTE]` is BLOCKED IN PLACE** (marked
+   this commit, original text kept verbatim beneath the block). It promises
+   players a "known vanilla issue" explainer saying the picker *"renders far
+   from the cursor and can't be clicked"* — **the exact claim measurement
+   falsified.** Publishing it would be the inverse of the D02 precedent it
+   invokes. Its fate travels with F76's.
+8. **M5, open for OTHER setups and weakened for this one.** One logged pass read
+   `mouse (6148, 2350)` against `desktop.box (0,0)-(3840,2160)`. `align_pos`
+   comes from that same call, and an out-of-range anchor makes the clamps fire
+   and slams the dialog into a screen corner — the first mechanism anyone has
+   had for the original report. ⚠️ But the owner confirms the setup is unchanged
+   since 2026-07-27 and passes #4-#7 read `anchor ≈ mouse`, so **there is no
+   persistent offset on this machine**. What survives: `GetMousePos` **can**
+   return coordinates outside `desktop.box`, so a game window not at the virtual
+   origin would anchor the picker off-screen for that player. Untested.
+9. **Two measured environment differences from the 2026-07-27 filing**, neither
+   explained: the entry pins UI Scale ~80-85% (measured `1900` = **100%**), and
+   a **3751px** window (measured **3840**). ⚠️ `3751` is not a standard mode.
+   **Recorded, not discounted.**
+
+**Prompt 11's own verdict, offered and not binding:** the entry as written
+over-claims and should not ship a fix or a player-facing note; but *"there is no
+defect here"* is one step further than its evidence reaches, because of item 6.
+**Reversal in either direction is a legitimate outcome of job 10.**
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
+prompt 11.**
+
+#### Three more job-7 seed lines from the same sitting (chain rule 4b)
+
+1. ⭐ **A hedge does not survive being quoted** (the new axis, detailed in
+   prompt 11's earlier note above): F76's *Suspected mechanism* was filed
+   honestly hedged and restated without the hedge by four downstream documents,
+   including prompt 11's own brief, which was authored in the
+   confirm-the-conclusion voice (*"locate the positioning path that puts the
+   dialog at (886,13)"*). A live prototype was built on it and that session
+   hard-locked. **Nine days, four documents; thirty minutes of source reading to
+   refute.**
+2. **A symptom description and the mechanism inferred from it got welded
+   together in one entry, and the entry was named after the inference.** "Renders
+   off-cursor, unclickable" is in the index row, the heading, `STATUS.md`,
+   `FABLE_NEXT_PROMPT.md` and the `MOD_DESCRIPTION` draft — but the *reported*
+   symptom was "it won't load". When the inference fell, five documents were
+   already carrying it as the item's identity. **Ask job 7 whether an entry's
+   title may contain a mechanism at all before that mechanism is confirmed.**
+3. **A count re-derivation nearly went wrong in the safe direction.**
+   `grep -c '^| F[0-9]' docs/BUGS.md` returns **99**, not 98 — one match is a
+   rate table *inside* the F97 entry (`| F97 | 50% (gate fails) | …`), not an
+   index row. The count was only saved by checking what the extra match was.
+   **The project's "re-derive by counting" rule does not say to check the
+   pattern**, and a mechanical recount that agrees with itself across sessions
+   would have carried a wrong number forward looking verified.

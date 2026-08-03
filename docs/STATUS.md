@@ -29,24 +29,31 @@ remediation 3.3). Session legs are append-only in
 > drone project grew its own open design decision, its own frozen tests, and
 > constraints that do not generalise, and sharing a prompt was degrading both.
 
-⛔ **F76 — THE RECORDED MECHANISM IS REFUTED; STATUS STAYS `todo`, NOTHING
-BUILT (chain prompt 11, job 1 only, 2026-08-02).** The game-free design pass ran
-and did not confirm the entry: `XWindow.box` and `terminal.GetMousePos()` are the
-**same** coordinate space (vanilla's own `XDialog.lua:139` is the control), so the
-entry's "coordinate-space mismatch" does not exist and its "Fix sketch" would have
-*introduced* the displacement it meant to remove. The click-through is fully
-explained without a second defect — the modal picker forwards left-clicks to the
-world (`ItemsMenu.lua:510-518`) and then closes on the selection it caused. And
-⚠️ **the one numeric forensic on the entry evidences nothing**: `box=(886,13)-(1054,442)`
-solves backwards to a single anchor ≈(969,442) with **no clamp firing**, i.e. it is
-what *correct* placement looks like; the separately-recorded `(1731,665)` anchor is
-from a different click and may not be paired with it. **Chain prompt 11 is NOT
-consumed** — its jobs 2-4 are an attended sitting and are unrun. The sitting is
-designed on the F76 entry (measurements M1-M4, §1 technique chosen in advance per
-outcome, one candidate flagged for the owner because it overrides deliberate
-vanilla behaviour). ⭐ M1 also settles an unrecorded engine fact regardless of F76:
-`UIL.GetSafeArea()`'s return convention. Counts unchanged (nothing filed, nothing
-built). **PROBE SWEEP: clean**, both repos.
+⛔⛔ **F76 — BOTH CLAIMS UNREPRODUCED; `todo` AND P1 HELD, NOTHING BUILT, AND THE
+DISPOSITION IS ROUTED TO CHAIN PROMPT 12 JOB 10 (owner decision, 2026-08-02).**
+The chain prompt 11 attended sitting ran end to end. **The positioning claim is
+FALSIFIED by measurement**: `anchor (2051,887)` vs live `mouse (2058,885)`,
+`box (1967,458)-(2135,887)` — centred on the anchor x, bottom edge AT the anchor
+y, container overhang `90 × 1.425 = 128` per side, every number matching
+prediction to the pixel; and `mw 168 / mh 429` are byte-for-byte the 2026-07-27
+forensic, so **the original reading was correct placement too**. `UIL.GetSafeArea()`
+returns `0 0 3840 2160` (the whole screen), so the clamp reading is dead as well.
+**The load failure DID NOT REPRODUCE** — the owner clicked the hex and it loaded.
+⭐ **And the reporter's premise is corrected**: the picker was believed to be
+*ours*; it is vanilla, verified by grepping all 82 `Code/` files (F74's only hook
+is a refuse-only guard that pass-throughs on a depot). ⛔ **NOT self-closed** —
+this session would be closing a P1 by re-reading the report of the person who is
+also the adjudicator, on partly-negative evidence, so job 10 gets it with the OG
+witness (`BUG_LIST_AUDIT.md` §2.2, *"the icon … does not appear"* — a **different**
+symptom, never reproduced, deliberately NOT filed as a new row) and the
+`MOD_DESCRIPTION` draft note, which is **blocked in place** because it promises
+players the exact claim measurement just falsified. ⭐ Three engine facts banked
+regardless (`ENGINE_FACTS.md`): box/mouse are one coordinate space, `GetSafeArea`'s
+absolute four-number return plus its **stale exported doc**, and
+`terminal.desktop.scale` as a read-back control for the UI Scale option. Counts
+re-derived by counting and **unchanged: 82 `Code/` files; 110 rows = 98 F + 12 D;
+40 C; 87 probes**. **PROBE SWEEP: clean**, both repos. **Chain prompt 11 is
+CONSUMED** — its build job is void because there is nothing to build.
 
 ⚠️ **D12 `Opt_NoHomeless` — BUILT, PT-62 PARTLY RUN 2026-08-02, NOT PASSED.**
 The core seam result is established (vanilla `false nil` → D12 `DomeBasic

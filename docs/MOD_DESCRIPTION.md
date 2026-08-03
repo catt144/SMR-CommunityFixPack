@@ -215,7 +215,17 @@ affected — achievements keep unlocking normally there with mods enabled.
   thresholds at once only ever collected one bonus, while falling back charged
   both — so satisfaction (and your holiday income) drifted down no matter how well
   you treated them.
-- [DRAFT NOTE — F76 (2026-07-27): before release, add a "known vanilla issue we did
+- [DRAFT NOTE — F76 — ⛔ **BLOCKED 2026-08-02, DO NOT PUBLISH AS WRITTEN.** The
+  claim below ("renders far from the cursor and can't be clicked") was FALSIFIED
+  by measurement in the chain prompt 11 attended sitting: the picker anchors
+  exactly at the cursor (anchor == live mouse, box bottom-centred on it, every
+  number matching prediction to the pixel), and the load failure DID NOT
+  REPRODUCE. Publishing this would tell players about a defect we cannot
+  demonstrate — the opposite of the D02 precedent it invokes. **Its fate is
+  chain prompt 12 JOB 10**, with F76's own disposition; there is no
+  `Fix_ResourcePickerAnchor` and none is specced. Original text kept verbatim
+  below so job 10 can see what was promised:
+  (2026-07-27): before release, add a "known vanilla issue we did
   NOT cause" explainer (D02-precedent) for the RC Transport depot resource picker:
   on scaled/wide displays it renders far from the cursor and can't be clicked, so
   "transports won't load from depots" reads as a mod bug and will generate false
