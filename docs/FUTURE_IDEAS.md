@@ -38,10 +38,10 @@ good ideas — this is not a rejection bin.
 
 ## What NEVER belongs here
 
-- **Defects.** A proven bug stays in `BUGS.md` with a real status (`todo`,
+- **Defects.** A proven bug stays in `agent/bugs/` with a real status (`todo`,
   `fixed`, `wontfix`). Deciding not to fix one is a **`wontfix` with written
   reasoning**, not a filing here. If defects start migrating into this file,
-  `BUGS.md` stops being the authority on defect truth and the whole documented
+  `agent/bugs/` stops being the authority on defect truth and the whole documented
   trail breaks. This is the one rule with no exceptions.
 - **Verification owed on something already shipped.** PT items stay on the
   checklist. Shipping code and then parking its test is how a pack ships
@@ -77,7 +77,7 @@ employed-senior exemption** — a senior who takes a workshop job would stop
 cohort-migrating, which is the behaviour D07 exists to provide. So it is not an
 addition to D10; it is a change to D07's contract.
 
-**Where the material lives.** D10 entry in `BUGS.md` (the "Deferred (recorded,
+**Where the material lives.** D10 entry in `agent/bugs/` (the "Deferred (recorded,
 NOT in this module)" bullet); D07 entry for the exemption it collides with.
 
 **Cost.** Own module or an explicit D07 amendment + own decision + own
@@ -108,7 +108,7 @@ decision on 2026-07-30** and is self-correcting — the rocket picks the behavio
 up on its next landing. **Documented instead of built:** a player-facing note is
 in `MOD_DESCRIPTION.md` under the Classic rocket behavior module.
 
-**Where the material lives.** D01 entry in `BUGS.md` (PT-55 found it; cause
+**Where the material lives.** D01 entry in `agent/bugs/` (PT-55 found it; cause
 confirmed in source).
 
 **Cost.** Small — but it touches a working module's activation path, which is
@@ -136,7 +136,7 @@ decent risk."* Correct — because the 1-passenger limit is **structural**, this
 not a knob change; it means reworking the transport task model that colonist
 movement depends on.
 
-**Where the material lives.** D11 entry in `BUGS.md` (full shuttle-limits
+**Where the material lives.** D11 entry in `agent/bugs/` (full shuttle-limits
 research, all source-verified).
 
 **To un-park.** Post-launch, and only with a clear-eyed look at the task-model
@@ -170,7 +170,7 @@ source-verified and **live-confirmed 2026-08-02: `type(T(8821,"ZZZ"))` printed
 **deletes that row's translation for every non-English player**. The fix for that
 is our own `ModItemLocTable` — the F84/D10 work already parked to post-release.
 
-**Where the material lives.** F98 and F84 entries in `BUGS.md`; the append route
+**Where the material lives.** F98 and F84 entries in `agent/bugs/`; the append route
 that *is* safe (`shipped_T .. Untranslated("…")` via `TMeta.__concat`, retail
 light-userdata form, shipped precedent `Workplace.lua:293`) is recorded on F98.
 D03's row is `Opt_ResidencyControl.lua:116-175`; the shipped row is
@@ -218,7 +218,7 @@ is barred by this file's own rules.
 
 **Where the material lives.** `Code/90_SaveSanitizer.lua` (both passes, with the
 conservatism argument in the header and the F48 exclusion reasoned out); PT-35
-in the checklist; F03/F35/F48 entries in `BUGS.md`.
+in the checklist; F03/F35/F48 entries in `agent/bugs/`.
 
 **To un-park.** A donated broken save, or a credible player report after launch.
 
@@ -373,7 +373,7 @@ and a playtest, and it edits a busy shared system. The *design* call is already
 made (match the original, no invented thresholds), so nothing is lost by
 waiting.
 
-**Material.** D01 entry in `BUGS.md` (research questions listed).
+**Material.** D01 entry in `agent/bugs/` (research questions listed).
 
 ---
 
@@ -386,10 +386,10 @@ waiting.
 - **PT-53 Trigger E, ~~PT-54~~** — verification of shipped code. (~~PT-59~~ PASSED
   IN FULL 2026-07-31 → F83 `tested`, archived. **PT-54 RETIRED UNRUN
   2026-08-01** — not parked either: the code under it is being replaced, and
-  its intent moved onto the F86 Tier-1 build's own legs, BUGS F78/F81.
+  its intent moved onto the F86 Tier-1 build's own legs, agent/bugs/ F78/F81.
   **PT-52 B2 is FROZEN**, not
   parked — it tests D06 v1's design and the design is unsettled; it is
-  drone-owned, see `docs/prompts/DRONE_PROJECT_PROMPT.md`.)
+  drone-owned, see `docs/agent/prompts/DRONE_PROJECT_PROMPT.md`.)
 - **The needs-eyes observations** (Detailed Scan recoverability, F85's tier,
   the storybit reconnect) — minutes each, and they grade **defects**.
 - ~~**The FIX_POLICY §4 amendment**~~ — **APPLIED 2026-08-01**, so it is off
@@ -424,7 +424,7 @@ a different state from both "owed" and "parked".
   post-wraps `Dome:GetService`, a hot path, adding a station walk that scales
   with exactly that map shape. **This is a decision, not a deferral: it is not
   parked, not owed, and F80 must be explained and closed before it could ever be
-  revisited.** Full reasoning on the F79 entry in `BUGS.md`.
+  revisited.** Full reasoning on the F79 entry in `agent/bugs/`.
 - **Multi-hop passenger routing** — REJECTED by the owner 2026-07-30. Refused,
   not parked. Do not re-propose.
 - **A cohort "attraction" bonus on the D12 dome toggle** (+25 comfort-like score

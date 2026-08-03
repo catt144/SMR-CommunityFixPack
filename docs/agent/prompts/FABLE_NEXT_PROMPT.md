@@ -5,11 +5,11 @@ the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
 — this file goes stale the moment another session commits. (The filename keeps
 its historical `FABLE_` prefix so existing references stay valid; nothing in
 it is model-specific.) Staleness anchor: **updated 2026-08-03 by chain prompt
-12's close-out commit — THE CHAIN IS COMPLETE and `docs/prompts/project/` is
+12's close-out commit — THE CHAIN IS COMPLETE and `docs/agent/prompts/project/` is
 EMPTY.** The final QA's verdict, findings, adjudications (F97 keep / D12 stands
 / F76 closed-refuted, residue = C41) and the ordered campaign top are in
-`docs/reports/CHAIN_QA_REPORT.md`; doc-structure recommendations await the
-owner in `docs/reports/DOC_STRUCTURE_REVIEW.md`.
+`docs/agent/reports/CHAIN_QA_REPORT.md`; doc-structure recommendations await the
+owner in `docs/agent/reports/DOC_STRUCTURE_REVIEW.md`.
 
 > 🗂 **THIS PROMPT IS FOR LIVE PLAYTEST SITTINGS ONLY.** The project chain is
 > **complete and its folder is empty** (2026-08-03) — the campaign this prompt
@@ -17,13 +17,13 @@ owner in `docs/reports/DOC_STRUCTURE_REVIEW.md`.
 > `CHAIN_QA_REPORT.md` §8 (D13 is the hard launch dependency, post-campaign;
 > release gates; owner decisions). `FIX_POLICY.md` §3a still binds any code any
 > session writes. Drone work is separately owned by
-> `docs/prompts/DRONE_PROJECT_PROMPT.md` — same rule as before.
+> `docs/agent/prompts/DRONE_PROJECT_PROMPT.md` — same rule as before.
 
 > 📁 **DOCS LAYOUT** — `docs/README.md` if unsure where anything lives.
-> Roots: `STATUS.md` (current state; counts live there and nowhere else),
-> `BUGS.md` (defect truth), `PLAYTEST_CHECKLIST.md` (tests + protocol),
+> Roots: `agent/STATE.md` (current state; counts live there and nowhere else),
+> `agent/bugs/` (defect truth), `PLAYTEST_CHECKLIST.md` (tests + protocol),
 > `PLAYTEST_HELP.md` (all reference material). Rules: `docs/agent/`
-> (`ENGINE_FACTS`, `FIX_POLICY`, `WORKFLOW`). Reports are not authority —
+> (`agent/facts/`, `FIX_POLICY`, `WORKFLOW`). Reports are not authority —
 > if a report and a root/agent doc disagree, the root/agent doc wins.
 
 You are assisting a LIVE PLAYTEST: the user is at the keyboard in the retail
@@ -40,8 +40,9 @@ game with both mods loaded. Your jobs:
    steps using `PLAYTEST_HELP.md`'s verified command table; hand exact
    console lines, **one command per line**.
 2. **Process results as they arrive** — protocol at the bottom of the
-   checklist: PASS → flip status in BOTH BUGS.md places (index row + heading
-   tag) and archive the section; FAIL → diagnose live, file the finding with
+   checklist: PASS → flip status in BOTH places inside `agent/bugs/<ID>.md`
+   (front matter + heading tag; INDEX.md is generated, never hand-edited)
+   and archive the section; FAIL → diagnose live, file the finding with
    the full forensic trail.
 3. **Diagnose surprises** — new defects get an F-number, an entry, a severity
    call. Mechanical repairs may land same-day WITH a re-verified A/B;
@@ -159,18 +160,18 @@ this project nine days on this entry.
 
 ## Read first, from `C:\Dev\SMR-BugFixPack`
 
-1. `docs/agent/ENGINE_FACTS.md` — whole file (several behaviours are the
-   opposite of what code suggests). Then `docs/STATUS.md`.
+1. `docs/agent/facts/` — whole file (several behaviours are the
+   opposite of what code suggests). Then `docs/agent/STATE.md`.
 2. `docs/PLAYTEST_CHECKLIST.md` (tests + protocol) with
    `docs/PLAYTEST_HELP.md` (ground rules BEFORE handing any console line).
-3. `docs/BUGS.md` — the entries the sitting touches. **F76 only if a
+3. `docs/agent/bugs/` — the entries the sitting touches. **F76 only if a
    depot-picker interaction actually misbehaves** — the old "read this before
    ANY depot-picker interaction" instruction was retired 2026-08-02 with the
    claim behind it (block above).
 4. `docs/agent/FIX_POLICY.md` — §4a, §3a, §2 binding for any code written.
-5. `docs/reports/REACHABILITY_AUDIT.md` "Challenge review" — before writing
+5. `docs/agent/reports/REACHABILITY_AUDIT.md` "Challenge review" — before writing
    ANY new fix: tier vocabulary, hard tells, injection-evidence rule.
 
-**End of session:** update `STATUS.md` and this prompt's staleness anchor if
+**End of session:** update `agent/STATE.md` and this prompt's staleness anchor if
 state changed, commit, push, summarize. Chain-owned work discovered → route
-to `docs/prompts/project/`, never start it here.
+to `docs/agent/prompts/project/`, never start it here.

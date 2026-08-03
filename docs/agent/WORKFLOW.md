@@ -2,15 +2,17 @@
 
 ## Reading path for a new session
 
-1. `docs/agent/ENGINE_FACTS.md` — the proven engine behaviors (several are the
+1. `docs/agent/facts/` — the proven engine behaviors (several are the
    opposite of what the code suggests). Read before writing or reviewing any
    fix.
-2. `docs/STATUS.md` — current state: authoritative build counts, open user
+2. `docs/agent/STATE.md` — current state: authoritative build counts, open user
    decisions, next gates. Session history lives in
    `docs/archive/SESSION_LOG.md` (append-only, newest first).
-3. `docs/BUGS.md` — the canonical defect tracker (index + full entries).
-   Update it in the same change that adds or edits a fix; statuses live in
-   TWO places (index row + heading tag) — never flip one without the other.
+3. `docs/agent/bugs/` — the canonical defect tracker, one file per entry.
+   Update the ENTRY in the same change that adds or edits a fix. **`INDEX.md`
+   is GENERATED — never hand-edit it.** A status still lives in two places, but
+   both are now inside the entry file: front-matter `status:` and the heading
+   tag. doccheck goes red if they disagree, and red on a stale INDEX.
 4. `docs/agent/FIX_POLICY.md` — how we patch. Binding for every fix.
 5. `docs/PLAYTEST_CHECKLIST.md` — the owner's live playtest queue and the
    reporting protocol (tests ONLY, split 2026-07-30); its companion
@@ -47,24 +49,24 @@ In-game checks: console `SMRFixPack.ListFixes()` prints each fix's status
 
 ## Per-fix discipline
 
-1. Every fix links to a BUGS.md entry with file:line evidence (FIX_POLICY §4).
+1. Every fix links to an `agent/bugs/` entry with file:line evidence (FIX_POLICY §4).
 2. Before patching, re-verify the target against the cited Src lines; the
    apply() self-check then guards it at runtime and returns a reason string
    (never errors) if a game update changed it.
 3. Parse sweep before any commit that touches Lua: python + `luaparser`,
    `ast.parse(open(f, encoding='utf-8-sig').read())` over every edited file —
    a syntax error in ANY listed file breaks the whole pack at load.
-4. One commit per fix or tight group; BUGS.md updated in the same commit;
+4. One commit per fix or tight group; agent/bugs/ updated in the same commit;
    MOD_DESCRIPTION.md updated in the same commit as the code change it
    describes.
 
 ## fpk verification — RELEASE GATE, re-run after every game update
 
-All BUGS.md line numbers come from `ModTools\Src`; the game executes
+All agent/bugs/ line numbers come from `ModTools\Src`; the game executes
 `Packs\Lua.fpk` + `Data.fpk`. **Parity is PROVEN for the current build
 (1.0.7.396349, extraction diff 2026-07-29): 2,250/2,256 shipped Lua files
 byte-identical to Src; the 5 divergences are engine/tooling only** (details in
-ENGINE_FACTS.md). The discipline guards *future* updates:
+agent/facts/). The discipline guards *future* updates:
 
 1. After every game patch, re-extract `Packs\Lua.fpk` (FLPK container, zstd
    per file) and diff against the new Src tree; re-verify every replacement
@@ -103,12 +105,12 @@ metadata/items lines, commit) or stops and reports.
    in the SAME commit that records the answer (docs-never-lag, applied to
    instrumentation).
 3. **The sweep result is part of the record:** every commit that flips a
-   BUGS.md status, records a MEASURED fact, or reports a PASS/FAIL carries a
+   agent/bugs/ status, records a MEASURED fact, or reports a PASS/FAIL carries a
    `PROBE SWEEP:` line — either `clean` or `armed: <files>, declared by
    <test>`. **A result commit without that line is invalid and gets
    re-verified before anything builds on it.**
 4. Both repos are in scope (the pack AND the TestKit) — the
-   `GetPriorityForRequest` experiment that seeded ENGINE_FACTS lived in the
+   `GetPriorityForRequest` experiment that seeded agent/facts/ lived in the
    PACK's code list.
 
 ## Testing checklist per fix
@@ -125,9 +127,9 @@ metadata/items lines, commit) or stops and reports.
    construction whether or not the module leaks.** `Opt_DroneOverhaul` leaked at
    98 errors/session with its own toggle OFF; that is how F86 Site 2 was found.
    Mod-Manager-disable is measured equivalent to a real uninstall (PT-20: 98 vs
-   98 on the same save). `ENGINE_FACTS.md`, "OFF" IS THREE DIFFERENT THINGS.
-5. Update BUGS.md status to `tested` (both places) per the checklist's
-   reporting protocol.
+   98 on the same save). `agent/facts/`, "OFF" IS THREE DIFFERENT THINGS.
+5. Set the entry's status to `tested` in `agent/bugs/<ID>.md` — front matter
+   AND heading tag — per the checklist's reporting protocol. Not INDEX.md.
 
 The TestKit's `SMRTest.RunAll()` A/B pair (baseline vs full pack) is the
 regression harness; run it as pre-flight when STATUS says one is owed.
@@ -177,11 +179,11 @@ ERROR]` of any origin is cheap and has a track record.
   `short_description`, `ignore_files`, `optional_mod` are already in place
   (audit 2.1). `lua_revision` stays 350453.
 - MOD_DESCRIPTION.md: delete the `[DRAFT NOTE]` markers; do NOT promise the
-  ClassicRockets export half; sync the fix list with BUGS.md statuses.
+  ClassicRockets export half; sync the fix list with agent/bugs/ statuses.
   **Recount the probe number** quoted in the "What we can promise, and what we
   can't" block — it moves whenever a wave file gains or loses a probe, and a
   stale number there is a false claim in player-facing text. Authoritative count
-  is in `STATUS.md`.
+  is in `agent/STATE.md`.
 - **Drone overhaul, if it has shipped by then:** its design-drift disclaimer is
   MANDATORY (owner requirement — spec in `docs/archive/DRONE_RESEARCH_BRIEF.md`). Do not
   publish the module without it.
@@ -192,14 +194,14 @@ ERROR]` of any origin is cheap and has a track record.
   BOTH metadata.lua `code` AND items.lua in the same commit, same order.
 - The TestKit must NOT be uploaded.
 - Credit ChoGGi (Fix Bugs) + LukeH (Martian Express) as prior art — and the
-  prior-art survey (`docs/reports/PRIOR_ART_SURVEY.md`) backs the save-safety claim in
+  prior-art survey (`docs/agent/reports/PRIOR_ART_SURVEY.md`) backs the save-safety claim in
   player-facing text.
 - **Save-exit gates (owner, 2026-07-31 — release blockers alongside the fpk
   diff):**
   1. the **uninstall procedure** is published in MOD_DESCRIPTION ("update,
      load, save, then uninstall", backup-first) and is true (latched heal +
      rains migration shipped and verified);
-  2. the **standalone save-rescue artifact** (`BUGS.md` **D13**) is built and
+  2. the **standalone save-rescue artifact** (`agent/bugs/` **D13**) is built and
      tested, ready to publish (the only console-viable remedy). ⛔ Its spec is
      GATED on Tier 1/2 landing and verifying — scoped against their measured
      output, never today's leak set. ⚠️ **A second shipped artifact doubles
@@ -287,7 +289,7 @@ grep -rn "\[FAQ\]" docs/ Code/
 
 Rules that keep the tag worth having:
 
-- Put it on the **entry that already explains the thing** — a BUGS.md entry, a
+- Put it on the **entry that already explains the thing** — an `agent/bugs/` entry, a
   parked item, a module header. Never create a doc just to hold a tag.
 - Tag **behaviour a player could reasonably mistake for a bug**, or a question
   the design deliberately answers "no" to. Not every quirk.
@@ -300,13 +302,13 @@ Currently tagged (re-derived from `grep -rn "\[FAQ\]" docs/ Code/` on
 2026-08-01 — the previous list named a tag in `MOD_DESCRIPTION.md` that did not
 exist):
 
-- D01's parked-rocket activation limitation — `BUGS.md` D01 entry +
+- D01's parked-rocket activation limitation — `agent/bugs/` D01 entry +
   `FUTURE_IDEAS.md` entry 2.
 - The save-repair framework's honest limits — `FUTURE_IDEAS.md` entry 4.
 - "Put the mod back" as advice for a damaged save, and its F88 caveat —
-  `BUGS.md` F88 entry.
+  `agent/bugs/` F88 entry.
 - The uninstall procedure and the standalone save-rescue artifact —
-  `BUGS.md` D13 + `FIX_POLICY.md` §3a + `F86_EXECUTION_PLAN.md` Phase 5.
+  `agent/bugs/` D13 + `FIX_POLICY.md` §3a + `F86_EXECUTION_PLAN.md` Phase 5.
 - **Why we make a fuss about the savegame footprint at all** — the documented
   engine behaviour (mod code is serialised into saves by design) and the
   community norm we deliberately exceed: `MOD_DESCRIPTION.md`, added

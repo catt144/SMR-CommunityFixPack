@@ -35,7 +35,7 @@ Ranked from most to least preferred:
    assigning `_G[name] = replacement` for an existing global. Works because
    `ModEnvMeta.__newindex` rawsets non-blacklisted existing names into the
    real `_G`, and generated closures (script conditions, sequence code)
-   resolve the name at call time (ENGINE_FACTS.md). Rules: plain assignment,
+   resolve the name at call time (agent/facts/). Rules: plain assignment,
    NOT `rawset(_G, ...)` (that writes only the mod's own env); read the name
    back with `rawget(_G, name)` in apply() to confirm the write landed (F22
    does); prefer a chained wrapper (capture `orig`, delegate) over a body
@@ -142,7 +142,7 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   the latched heal + migration passes, which clear our threads out of the
   save), and the **standalone save-rescue artifact** for saves that already
   lost the pack (the only console-viable remedy). Record + spec gate + open
-  design question: **`BUGS.md` D13**; plan: `F86_EXECUTION_PLAN.md` Phase 5.
+  design question: **`agent/bugs/` D13**; plan: `F86_EXECUTION_PLAN.md` Phase 5.
   ⛔ The artifact is **specced only after Tiers 1+2 land and verify** — its
   target list is their output, never today's leak set. `[FAQ]`
 
@@ -152,7 +152,7 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
 an accepted fact, we will try to be above the normal but its not a lockout …
 We just need to make sure our uninstall methods address them late."* By-value
 thread serialisation is **documented, intentional engine design**
-(`LuaSavegame.md.html`, quoted in ENGINE_FACTS) and the community's norm is to
+(`LuaSavegame.md.html`, quoted in agent/facts/) and the community's norm is to
 accept and silence it (`PRIOR_ART_SURVEY.md`). This pack aims **above that
 norm** — an engineered exit, not accidental residue — so §3a is a **design
 discipline that minimises what the exit path must clean**, not a purity bar.
@@ -212,7 +212,7 @@ not against any count recorded in these docs** (owner, 2026-08-01). Every
 figure on record is an open lower bound from a grep proven blind to
 slot/global/preset assignments, and the builds have since changed the set —
 so "every exposed site" can only be enumerated by re-deriving it at that
-point. See the D13 entry in `BUGS.md` for the requirement and the list of
+point. See the D13 entry in `agent/bugs/` for the requirement and the list of
 places its result must correct.
 
 **The mechanism, as finally established (measured + twice-adjudicated — this
@@ -234,7 +234,7 @@ self-limits, forever if it loops). `Fix_MeteorFrequency` killed a colony's
 meteors permanently this way; `Opt_DroneOverhaul` leaked with its toggle OFF.
 Every design must answer: *if this body is captured anyway, does it die,
 expire, or run forever — and would anyone notice?*
-(`F86_ADJUDICATION.md` §3.1/§5.1/§8; ENGINE_FACTS.)
+(`F86_ADJUDICATION.md` §3.1/§5.1/§8; `agent/facts/`.)
 
 **⛔ THE ORPHAN GATE (owner, 2026-07-31) — loud death is the BACKSTOP, not the
 failure mechanism.** An orphan that dies at its first mod-name lookup dies at
@@ -299,7 +299,7 @@ in, `TrainCargoDumping` out, compliant `CaveInsNoDisasters` counted;
 the 13 and classified one additional inert route-(c) preset-field site** —
 `Fix_LastTransmissionStorage`'s `Condition.eval`, disclosed-no-build,
 adjudication §4.4) and the per-module disposition:
-`docs/reports/SAVE_SAFETY_REDESIGN.md` and BUGS.md F86.
+`docs/agent/reports/SAVE_SAFETY_REDESIGN.md` and agent/bugs/ F86.
 
 ## 4. Only fix proven, reachable, UNINTENDED defects
 
@@ -307,19 +307,19 @@ adjudication §4.4) and the per-module disposition:
 > "Only fix proven defects" rule with the reachability audit's drafted
 > amendment, applied verbatim from `REACHABILITY_AUDIT.md` §4. **Authority:**
 > the owner's blanket pre-clearance of 2026-08-01 (recorded in
-> `docs/prompts/project/README.md`), which clears the approval step for work
+> `docs/agent/prompts/project/README.md`), which clears the approval step for work
 > items derived from the audit-and-adjudication conversation — this adoption
 > named among them. **The blocker that held it back is gone:** the draft
 > contradicted itself while F49(a) shipped a no-op R4 rider against the new
 > "R4 does not ship" line; that guard was **stripped from `Fix_TrainMinors`
-> on 2026-08-01** (BUGS F49; A/B code-gate leg ran clear), so the rule and the
+> on 2026-08-01** (agent/bugs/ F49; A/B code-gate leg ran clear), so the rule and the
 > shipped code now agree. **Live consequence on adoption:** F29 and F57(a) are
 > R3 defects fixed by §1.5 method replacements — the combination the R3 bullet
 > below now makes conditional on an explicit owner decision. Both entries
 > already anticipated this; the decision is routed and owed, not assumed
 > either way.
 
-Every fix links to a BUGS.md entry with file:line evidence, **a recorded
+Every fix links to an `agent/bugs/` entry with file:line evidence, **a recorded
 reachability tier, and a positive intent statement**. Before a fix ships:
 
 - **Intent first.** State why the shipped behaviour is unintended, citing
@@ -475,12 +475,12 @@ module's own maps — byte-identical in all three.
   from a toggle, in a claim or in a test — an uninstall question is only answered
   by Mod-Manager-disable or removal (measured equivalent, PT-20: 98 vs 98 on the
   same save). The three switches and what each one actually removes:
-  `ENGINE_FACTS.md`, "OFF" IS THREE DIFFERENT THINGS.
+  `agent/facts/`, "OFF" IS THREE DIFFERENT THINGS.
 
 ## 6. Engine semantics that bind every fix
 
 - **`error()` and `assert()` in mod code REPORT AND CONTINUE** — they do not
-  unwind (ENGINE_FACTS.md). Never use them for control flow or guards; use
+  unwind (agent/facts/). Never use them for control flow or guards; use
   early returns and reason strings. `pcall` still catches genuine runtime
   errors.
 - **Localization stance:** a T value is a TABLE **in dev — in retail it is often
@@ -495,13 +495,13 @@ module's own maps — byte-identical in all three.
   and **discards your literal** whenever `TranslationTable[id]` exists, which in a
   retail build is always — English included, since English is a loaded table like
   every other language. `Fix_TechDescriptionBuilding` did exactly this and has
-  never changed anything (**BUGS F98**; F25 demoted, and **no longer citable as
+  never changed anything (**agent/bugs/ F98**; F25 demoted, and **no longer citable as
   localisation precedent**).
   ⭐ **To ADD to existing localized text at zero cost in any language, concatenate:
   `shipped_T .. Untranslated("…")`** — supported on the retail userdata form and
   used by shipped code (`Workplace.lua:293`). Concat cannot *delete*, so
   correcting a wrong sentence still means replacing the whole string.
-  Full mechanism, all four routes, and the queued live control: `ENGINE_FACTS.md`,
+  Full mechanism, all four routes, and the queued live control: `agent/facts/`,
   "RE-USING A SHIPPED TRANSLATION ID …". ⭐ **Owner decision 2026-08-02: the pack
   WILL ship its own `ModItemLocTable` translations, post-release** — at which
   point this bullet is revisited, not before.
@@ -527,6 +527,6 @@ module's own maps — byte-identical in all three.
   file listed explicitly in `metadata.lua` `code`.
 - `00_Core.lua` must load first (list order in metadata controls load order).
 - Before release: verify each target against the shipping `Packs\Lua.fpk`
-  (see WORKFLOW.md), test each fix in-game, update BUGS.md statuses, credit
+  (see WORKFLOW.md), test each fix in-game, update agent/bugs/ statuses, credit
   prior art (ChoGGi's Fix Bugs mod documented several of these bug families
   for the original game).

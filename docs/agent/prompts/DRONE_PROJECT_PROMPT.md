@@ -7,14 +7,14 @@ the end of every drone session.
 
 > 📁 **DOCS LAYOUT (reorganised 2026-08-01) — read `docs\README.md` if unsure
 > where something lives or where a new document goes.**
-> `docs/` root = daily truth (`STATUS`, `BUGS`, the playtest files,
+> `docs/` root = daily truth (`STATUS`, `agent/bugs/`, the playtest files,
 > `FUTURE_IDEAS`, `MOD_DESCRIPTION`) · `docs\agent\` = the binding rules
-> (`ENGINE_FACTS`, `FIX_POLICY`, `WORKFLOW`) · `docs\prompts\` = the two
+> (`agent/facts/`, `FIX_POLICY`, `WORKFLOW`) · `docs\prompts\` = the two
 > standing prompts + live one-offs · `docs\reports\` = reports, plans,
 > specs, surveys · `docs\archive\` = spent, plus `SESSION_LOG.md`.
 > **New rules/engine facts go in `agent\`, not buried in a report. Defects go
-> in `BUGS.md`, never a report and never `FUTURE_IDEAS.md`. Reports are not
-> authority — if a report and `BUGS`/`ENGINE_FACTS` disagree, the root/agent
+> in `agent/bugs/`, never a report and never `FUTURE_IDEAS.md`. Reports are not
+> authority — if a report and `agent/bugs/`/`agent/facts/` disagree, the root/agent
 > document wins.**
 
 > 🚧 **This prompt owns drone work exclusively.** `docs\prompts\FABLE_NEXT_PROMPT.md` is
@@ -31,13 +31,13 @@ the end of every drone session.
 >    design. Expect that change to land from outside this prompt; do not
 >    re-do it, do not treat it as a design decision, and rebase any D06
 >    rebuild work on the module as it stands after the chain touches it.
-> 2. **C32 filed (BUGS.md):** buildings can drop out of
+> 2. **C32 filed (agent/bugs/):** buildings can drop out of
 >    `UIColony.labels.ShiftsBuilding` and stop changing workshift —
 >    suspected label rebuild on map transitions (asteroid out-of-range
 >    correlation). Not drone-owned, but any drone sitting that watches
 >    building work states should know the symptom exists so it isn't
 >    misattributed to drone behavior.
-> 3. **C27 filed (BUGS.md):** SkiRich's original-game fix claims Signal
+> 3. **C27 filed (agent/bugs/):** SkiRich's original-game fix claims Signal
 >    Boosters never extend the Drone Hub EXTENDER radius (hubs only) —
 >    F77's file neighborhood. If a drone session touches extenders or hub
 >    range, read C27 first; its Relaunched-presence check is chain prompt
@@ -57,7 +57,7 @@ file was written at **`bd8d831`** and patched at **`bdc2c27`** (the PT-20 leg).
 If commits landed after that, read them before trusting anything below — this
 project has already had a prompt go stale mid-job.
 
-> 🛑 **F86 CHANGED THE GROUND UNDER THIS PROMPT — read `BUGS.md` F86 and
+> 🛑 **F86 CHANGED THE GROUND UNDER THIS PROMPT — read `agent/bugs/` F86 and
 > `docs\reports\SAVE_SAFETY_REDESIGN.md` before touching the D06 decision.** PT-20
 > (2026-07-31) measured **pack code being serialised into the savegame and still
 > running after the mod is removed**, and **`Opt_DroneOverhaul` is one of the two
@@ -98,7 +98,7 @@ disaster fixes, the needs-eyes list, PT-20, the FIX_POLICY §4 amendment, the
 possible pack split.
 
 **If you find something interesting out of scope: FILE IT, DO NOT FIX IT.** Add a
-BUGS.md entry (or a line on the relevant existing entry) with the evidence and
+agent/bugs/ entry (or a line on the relevant existing entry) with the evidence and
 stop there. A drone session that quietly fixes a colonist bug is how this project
 got a mission-creep rule in the first place (`docs\FUTURE_IDEAS.md`).
 
@@ -111,7 +111,7 @@ settled by the owner.** Not "while we're in there", not a prototype, not a
 ## 2 · Where the drone project actually stands
 
 **All four research gates are ANSWERED (2026-07-31).** Nothing on the research
-side is owed. Evidence lives on the **D06 entry** in `BUGS.md` and in
+side is owed. Evidence lives on the **D06 entry** in `agent/bugs/` and in
 `docs\reports\DRONE_PRIORITY_SYSTEM.md` §8-§10.
 
 | Gate | Answer |
@@ -233,10 +233,10 @@ is caught in the freeze.
 
 ## 5 · Reading order for any drone session
 
-1. `docs\agent\ENGINE_FACTS.md` — whole file. **It now carries the closure-persistence
+1. `docs\agent\facts\` — every fact. **It now carries the closure-persistence
    fact**, which is why the overlay option (3) must never store a function on a
    game object.
-2. **`BUGS.md` D06 entry** — the plan of record, including the owner decisions on
+2. **`agent/bugs/` D06 entry** — the plan of record, including the owner decisions on
    relocation and the cleanup mod.
 3. **`docs\reports\DRONE_PRIORITY_SYSTEM.md` — §8, §9 and §10 especially.** These are the
    new, decisive sections. §1 and §7 carry corrections to earlier claims.
@@ -286,7 +286,7 @@ misleads that decision.
 - **You are about to widen the priority range on an existing save.** Don't —
   every hub in it has narrow tables (§8). New game, or top up every hub first.
 - **A fix would store a function on a persisted game object.** That is a
-  permanent, un-removable savegame modification (ENGINE_FACTS).
+  permanent, un-removable savegame modification (agent/facts/).
 - **The work is drifting out of scope** (§1).
 
 ---
@@ -309,7 +309,7 @@ If you cannot cite evidence, **say the narrower true thing instead.**
   expires") described the *priority data* and is still true of it. It is **not**
   true of the module: `Opt_DroneOverhaul`'s `Drone:Idle` wrapper is serialised
   into the save and throws 98 errors per session after removal, toggle OFF
-  included. Measured 2026-07-31, `BUGS.md` F86.
+  included. Measured 2026-07-31, `agent/bugs/` F86.
 - **Do not report a module `tested`** without a playtest. Only the playtest flips
   that status.
 - **Do not describe the cleanup mod as approved.** It is **not approved to
@@ -334,5 +334,5 @@ them). Parse sweep before any commit touching Lua: python + luaparser,
 
 **End of a drone session:** record findings on the D06 entry and in
 `DRONE_PRIORITY_SYSTEM.md`, add a `SESSION_LOG` leg, **update this prompt in
-place**, and — if the general state changed — say so in `STATUS.md`. Then
+place**, and — if the general state changed — say so in `agent/STATE.md`. Then
 summarize for the owner.
