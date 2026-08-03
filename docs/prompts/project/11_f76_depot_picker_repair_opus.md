@@ -80,3 +80,63 @@ push.
 ## Notes from upstream
 
 (prompt 10 appends state here)
+
+### From chain prompt 10 (2026-08-02) — D12 is BUILT and UNRUN, and three things move to you
+
+**State you inherit, not a summary to re-derive.** Prompt 10 built D12 as
+`Opt_NoHomeless` (`14e708f`; probe + `60_Probes_Opt.lua`, TestKit `a979270`) —
+opt-in, off by default, own module, own flag, own gate, `Opt_ResidencyControl`
+as donor PATTERN only. **⚠️ UNRUN: the leg is `PLAYTEST_CHECKLIST.md` PT-62,
+attended, predictions P1-P13 written before any run.** D12 claims no status
+beyond `speced`. Counts re-derived by counting: **82 `Code/` files; 81 registered
+modules, 74 default-active** (opt-in adds none); **87 probes**; **110 rows = 98 F
++ 12 D; 40 C**. **PROBE SWEEP: clean**, both repos. Recount, do not inherit.
+
+**1 · ⛔ THE `DustDevilSpawnGate` CONFIRMATION IS ON ITS THIRD HOP AND IT IS NOW
+YOURS.** 8c routed one unrun change to prompt 9 on the basis that it *"rides an
+existing suite run"* — the `forbidden` early-return added to
+`Fix_DustDevilSpawnGate` after PT-61, behaviour-neutral **by construction but not
+by measurement**. Prompt 9 built nothing and ran no suite; prompt 10 built code
+but its own leg is unrun, so the ride did not exist there either. **F76 is an
+attended sitting: when you run `*r SMRTest.RunAll()`, confirm
+`DustDevilSpawnGate` still PASSes and say so in your notes.** ⚠️ Third hop. If
+your sitting also ends without a suite run, route it onward rather than dropping
+it — and consider saying so to the owner, because an item that cannot find a
+suite run in three prompts is telling you something about the routing rule and
+not about the change.
+
+**2 · ⭐ THE F98 LOCALISATION CONTROL IS STILL UNRUN, AND IT IS THIRTY SECONDS.**
+`*r ModLog(type(T(8821, "ZZZ")))` — `userdata` confirms F98's reading (a re-used
+translation id discards the replacement literal at `T()` construction, which is
+why our shipped `Fix_TechDescriptionBuilding` never worked), `table` refutes it
+and F25 would need restoring in both places. It is written into PT-62 as well, so
+whichever leg runs first takes it. **F98 currently rests on source alone**, and
+F76's own repair is UI work that may well add player-visible text — in which case
+the answer matters to you directly: new strings go through `Untranslated(…)`, and
+appending to a shipped string goes through `shipped_T .. Untranslated(…)`
+(`TMeta.__concat` works on the retail light-userdata form).
+
+**3 · ⚠️ A NEW CANDIDATE THAT TOUCHES NOTHING YOU ARE BUILDING, BUT IS OWED A
+KEYBOARD.** **`C40`** was filed by prompt 10's pre-build check: `Crowded Living`
+grants **+3 `Residence.capacity` gated on the Ministry of Culture's live
+`working` flag**, and every withdrawal **evicts** the tail residents colony-wide
+(`Residence.lua:224-235`). Mechanism verified vs Src end to end; **the gating is
+intended** and the ministry building advertises it, so the open part is the
+**law's own description** — it interpolates the static `<capacity_increase>` only,
+so the player is told +3 and may be receiving +6, with nothing saying that losing
+it takes homes away from people who already have them. **Harm unproven, frequency
+unmeasured, nothing built, not a §4 package.** Its next step is one console
+observation (enact the law, note a Residence's capacity, stop the ministry, read
+it again) — **not your work, do not adopt it**, but it is a cheap rider if your
+sitting happens to be on a colony with the law enacted.
+
+⭐ **Worth one line because it is the reusable lesson, not the finding:** C40 came
+from a **Reddit player's hypothesis** that prompt 10's brief said to *check, not
+adopt*. The player was right about the mechanism, and checking it before building
+is what chose D12's narrow reading over the broad one — under the broad reading
+D12 would have converted a transient ministry outage into permanent migrations.
+**The trap was invisible from the D12 plan.** It is the second time in three
+prompts that a routed third-party claim paid for itself when checked first.
+
+⛔ **The sealed document was NOT read, grepped, or surfaced at any point in
+prompt 10.**
