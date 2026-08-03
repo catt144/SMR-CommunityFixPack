@@ -52,8 +52,8 @@ the only gate left**, and D12 claims nothing beyond `speced`.
 - **PT-37** → F48 · **F42** `blocked`, wontfix recommended, owner call needed.
 - **D08 extender overhaul** — 5 layers speced in
   `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
-- 🟢 **`agent/prompts/PT_REDESIGN_PROMPT.md` UNBLOCKED** (gate was an empty
-  docs-restructure folder). Rewrites the checklist — not during a sitting.
+- 🟡 **Checklist redesign AT ITS ⭐ CHECKPOINT** (2026-08-03): snapshot archived,
+  Trains converted; owner read gates the rest (`agent/prompts/PT_REDESIGN_PROMPT.md`).
 - **Owner decisions (6 open)** → `docs/PLAYTEST_CHECKLIST.md` "Decisions
   waiting on you", never only in agent docs.
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from

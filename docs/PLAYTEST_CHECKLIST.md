@@ -1,9 +1,23 @@
 # Manual Playtest Checklist — Community Fix Pack
 
-**Who this is for:** the project owner, playing the real retail game. Fill in the
-`Result:` line under each test, then hand the file back (commit it, or just tell the
-next session *"read PLAYTEST_CHECKLIST.md results"*). See
-**[Reporting protocol](#reporting-protocol)** at the bottom for what happens next.
+**Who this is for:** the project owner, playing the real retail game **with a
+live agent session alongside**. This file is the work list and nothing else:
+what to test, how to set it up, what each test needs. Expectations,
+predictions, pass/fail readings and console forensics are NOT written here —
+the agent supplies them in the sitting, from each test's linked entry.
+Reference material (ground rules, console facts, the verified command table,
+Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md);
+completed tests move whole to
+[PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) — 44 sections as of
+2026-08-01, plus the 2026-08-03 pre-redesign snapshot.
+
+> Redesigned 2026-08-03 (`docs/agent/prompts/PT_REDESIGN_PROMPT.md`, owner
+> design authority of the same date): tests grouped **by system, not by PT
+> number** — a sitting clears a group — and each test reduced to
+> **Bug / Setup / Requires / Good to have**. PT codes are unchanged; numbering
+> is identity, grouping is order. The full pre-redesign text, recorded results
+> included, is in the archive under the "pre-redesign snapshot 2026-08-03"
+> banner.
 
 ## Decisions waiting on you
 
@@ -43,6 +57,12 @@ these used to be filed only in agent reports, which is where you never read.
   "whole file", which spends the tokens the restructure just saved. The report
   is written for that session as its whole picture. **Your call when to spend
   the top tier on it.** → `docs/agent/reports/DOCS_RESTRUCTURE_REPORT.md` §6.
+- **The Trains-group redesign sample (added 2026-08-03).** The checklist
+  redesign converted its first group (Trains, below) to the new four-field
+  format and STOPPED for your read — your read is the acceptance test for a
+  human doc, and the rest of the file converts only on your go. Say
+  "approve" / "change X" in any session.
+  → `docs/agent/prompts/PT_REDESIGN_PROMPT.md` (checkpoint ⭐, migration §3).
 
 ⭐ **CONVENTION (added 2026-08-03, chain-12 QA, from `BUG_LIST_AUDIT.md`
 §10.6f(i)): record the SESSION UPTIME next to any error COUNT.** Cross-arm
@@ -51,101 +71,155 @@ exposure, and the owner's sessions run 1–6 hours — which makes zero-error
 results *stronger* than they read, but only if the uptime is on the record.
 One line per leg: "session ~Nh".
 
-**Completed tests live in [PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md)** — 44
-sections as of 2026-08-01, of which one (PT-54) is **retired unrun**, not
-completed. This file carries **only un-run work**: when a test
-completes, its whole section moves to the archive and is **deleted from here,
-with no stub or pointer left behind** (see the reporting protocol). The archive
-is the notes-and-documentation half; this file is the live work list.
-(Cross-checked against the archive and the agent/bugs/ index 2026-07-29 — nothing
-below re-tests anything already passed.)
+## Do first — the campaign's ordered top (chain-12 QA, `agent/reports/CHAIN_QA_REPORT.md` §9)
 
-## What a pass here means
+1. **PT-62's remainder** (→ Colonists & domes, below the banner for now) — the
+   only gate left on D12: a stable colony so the drain is not fighting an
+   inflow, then the Mod-Manager uninstall half and the repaired A/B lever.
+2. **The load-heal round-trip sweep** (~1 hour) — save, reload twice, read the
+   heal numbers (the Astrogeologist +10% class of defect; two-for-two
+   defective on the heals actually tested is the project's worst base rate).
+   Design: `CHAIN_QA_REPORT.md` §9 item 2.
+3. **The doctrine C-sitting** — closes the one INFERRED cell in the "OFF is
+   three different things" doctrine, the one the owner said we cannot be wrong
+   about. Protocol ready in `CHAIN_QA_REPORT.md` §1.3; the agent builds the
+   TEMPORARY probe in-sitting and it dies in the result commit.
+4. After those: pick a group and clear it in one sitting. Riders are
+   opportunistic — take them when their situation arises; never schedule one.
 
-The automated A/B probe runs (docs/archive/SESSION_LOG.md) prove the *wiring* across all waves:
-patched functions install and return the right values under synthetic input.
-This checklist is the **human-eyes half** — the things probes cannot see:
+## The protocol — what a sitting is
 
-- how it *feels* in real play (cadence, pacing, does the colony actually recover),
-- **visuals** (does the trimmed track leave a sane-looking remainder?),
-- **UI** (does the number actually render in the panel?),
-- **long-running behavior** (does it still hold after 3 sols, after a save/load?),
-- emergent multi-system interactions the probes stub out.
+A sitting = you at the game + a live agent session reading this file and the
+entries. You supply observations **in the moment**; the agent supplies
+expectations, forensics and log links. Probe-verified ≠ tested: a pass at the
+keyboard is what earns a fix `tested` in `agent/bugs/`.
 
-**A pass here is what earns a fix `tested` status in agent/bugs/.** Probe-verified ≠
-tested. Nothing ships as "verified" on probe evidence alone. If a sitting starts
-oddly, `SMRTest.RunAll` is the quick regression sanity check (expect the same
-PASS/SKIP pattern as the last A/B leg; `[install]` probes SKIP on retail).
+1. **⛔ PT-00 — the stale-probe sweep, BEFORE the game launches** (hard rule,
+   owner, 2026-08-01). The agent runs
+   `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/` and reports
+   **CLEAN** — zero hits, or every hit declared by this sitting's design. Not
+   clean → delete the stale probe (+ its metadata/items lines), commit,
+   re-sweep — or the sitting does not test. No result is recorded without it;
+   the `PROBE SWEEP:` line goes in every result commit. Full rule:
+   `agent/WORKFLOW.md` "Probe hygiene".
+2. **Predictions BEFORE the leg.** The agent writes numbered predictions from
+   the entry before anything runs — the discipline moved from this document
+   into the sitting, and PT-61 is the proof it pays (ten predictions, ten
+   readings, two riders closed free). A prediction that misses is the finding.
+3. **Console steps come from the agent, one command per line**, drawn from the
+   entry and PLAYTEST_HELP's verified command table.
+4. **PT-22 — the log review, after EVERY session, together.** Newest
+   `Mars.exe-*.log` under `%AppData%\Surviving Mars Relaunched\logs`: any
+   `[CommunityFixPack]` error/inactive/deactivation line, any `[LUA ERROR]`
+   naming pack code, any engine error you did not see vanilla,
+   `SMRFixPack.ListFixes()` reading `active` for every default fix (count per
+   `agent/STATE.md`; opt-ins read `inactive` unless you enabled them — and
+   Mod Options survive a Mod-Manager disable, so read the list, never assume).
+   ⛔ **Every unexplained line is reported verbatim with its age** — "not
+   caused by our leg" is an attribution verdict, never a dismissal; every
+   pushback so far has turned up a vanilla defect that was not on our list.
+   Passive watch, no action: if `WATCHDOG — Meteors thread silent` ever
+   appears, report it verbatim (F02).
+5. **Recording (the agent, same sitting or next session):** the result goes on
+   the `agent/bugs/` entry with the date and the **session uptime next to any
+   error count**; a PASS flips status in front matter AND heading tag (INDEX
+   is generated — never hand-edit); a FAIL files a finding and flips nothing;
+   when a status flip will cite a log's numbers, the log is copied into the
+   repo in the same commit (R8); the completed section moves WHOLE to
+   `PLAYTEST_ARCHIVE.md` and is **deleted from here with no stub or pointer
+   left behind**. `python tools/doccheck.py` before every doc commit.
+
+*(This section recreates the checklist's "Reporting protocol", which turned
+out to have been deleted by accident in commit `22d7b36`, 2026-08-02 — the
+top-of-file link had been dangling since. The original text, old paths and
+all, is in git and in the snapshot.)*
+
+---
+
+# Trains — one sitting clears the group
+
+### PT-37 — Can the F48 track repair ship? · Status: unrun
+**Bug:** the game ships a savegame fixup meant to repair track connections on
+old saves, but a misplaced parenthesis makes it do nothing. The corrected call
+rebuilds every track element's connections, and its only failure handling is
+an assert that does not stop execution — so before it can ship it must be seen
+behaving on a real save, especially on a meteor-damaged track. This test
+DECIDES F48: clean → the repair ships in the sanitizer; dirty fail → closes
+`wontfix`. → [agent/bugs/F48.md](agent/bugs/F48.md)
+**Setup:**
+1. Load a save with two or more stations connected by track and at least one
+   route with a running train (extending SAVE-A works).
+2. Get one track meteor-damaged: `CheatTriggerMarsquake()` near a track, or
+   play until one lands.
+3. Console open. The agent hands the case-A (healthy track) commands, then the
+   case-B (damaged track) repeat — full procedure is on the entry.
+4. Save + reload after each case; the agent reads endpoints, route formation
+   and the log against its predictions.
+**Requires:** ≥2 connected stations · a running train · one meteor-broken
+track.
+**Good to have:** after case B, a quick check that the repair site is still
+salvageable (F45 territory — the agent will prompt it).
+
+### Rider — F80: colonists wait at platforms, or walk past working stations · Status: unrun — take it WHEN the symptom appears; never schedule it
+**Bug:** trains sometimes never enumerate a valid destination from a stop —
+one origin/destination pair fails inside an otherwise healthy network, so
+colonists either queue forever or set off overland and suffocate. The
+strongest reported-but-unpinned defect on the list; the mechanism now has an
+exact source predicate but the trigger has never been proven.
+→ [agent/bugs/F80.md](agent/bugs/F80.md)
+**Setup:**
+1. ⛔ **Tap before mitigating** — adding trains is the known workaround and it
+   destroys the evidence. Open the agent session the moment you see either
+   symptom.
+2. Tell the agent which symptom (waiting vs walking) and the exact
+   origin/destination pair that fails.
+3. The agent hands the three reads (classify · enumeration tap · both-ends
+   reachability test) — all read-only, all on the entry.
+**Requires:** the symptom actually occurring — colonists queued while trains
+come and go, or walkers passing a working station.
+**Good to have:** note whether any track segment on the line was under
+construction (the rival explanation the agent must exclude).
+
+### Rider — F11: can crew-gathering desync a train's passengers? · Status: unrun — opportunistic
+**Bug:** the train-wedge fix is shipped and probe-verified; what is left open
+is whether the state it guards against — a passenger yanked out of a moving
+train by a crew-gathering expedition — can actually occur. Either answer is
+useful data. → [agent/bugs/F11.md](agent/bugs/F11.md)
+**Setup:**
+1. In any sitting with a colonist mid-ride on a train, launch an expedition
+   that crew-gathers busy colonists.
+2. The agent inspects `train.units` afterwards (one read, on the entry).
+**Requires:** a running train with a passenger · an expedition ready to
+launch.
+**Good to have:** TrainsLogging on beforehand — its "not in train" warn
+catches the desync on its own.
+
+### Rider — F21: re-earn `tested` for the wait-time fix · Status: unrun — optional
+**Bug:** the fix (platform waiting no longer billed as travel time) passed
+PT-43, but the Tier-2 rewrite replaced the mechanism that pass exercised, so
+F21 was honestly downgraded to `fixed`. Two quick reads on any working train
+line re-earn the tag; skipping costs nothing — it simply stays `fixed`.
+→ [agent/bugs/F21.md](agent/bugs/F21.md)
+**Setup:**
+1. Any sitting with a working train line and commuting colonists.
+2. Let someone wait long at a platform; the agent reads their Comfort log (no
+   "travel time" entry from the wait) and the train's *Travel time (rolling
+   average)* (excludes the wait).
+**Requires:** a working train line.
+**Good to have:** a long platform queue — it makes the discrimination obvious.
 
 ---
 
-**All reference material lives in [PLAYTEST_HELP.md](PLAYTEST_HELP.md)** —
-ground rules, the external-validity rule, cheat discipline, console facts,
-the verified command table, Test Kit helpers + the stress harness, and the
-save-fixture recipes. This file carries ONLY the tests and the reporting
-protocol.
+# ⚠️ REDESIGN IN FLIGHT — everything below is pre-redesign text
 
----
-
-# 1 · Standing watches — every sitting, alongside whatever else you play
-
-## PT-00 — ⛔ The stale-probe gate (BEFORE every sitting; HARD RULE, owner, 2026-08-01)
-
-Before the game is even launched for a test — attended or unattended — the
-assisting session runs:
-
-```
-grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/
-```
-
-**CLEAN** = zero hits, or every hit is a probe this sitting's test design
-explicitly declares. Not clean → delete the stale probe (+ its metadata/items
-lines), commit, re-run the sweep — or the sitting does not test. **No result
-from this checklist may be recorded without the sweep having run first**; the
-`PROBE SWEEP:` line goes in the result commit (see the reporting protocol).
-Rationale + full rule: `WORKFLOW.md` "Probe hygiene" — stale probes contaminate
-both the measurement and the log it is read from, and are how false facts got
-recorded before.
-
-## PT-22 — Log hygiene (after EVERY session, including every test below)
-
-**Where:** `%AppData%\Surviving Mars Relaunched\logs` — take the newest
-`Mars.exe-<date>-<time>.log`.
-
-**Check for:**
-1. Any line containing **`[CommunityFixPack]`** with the word `error`, `inactive`, or a
-   deactivation reason. (Startup lines reporting fixes as `applied` are normal;
-   the opt-in modules reporting `inactive (…opt-in…)` is normal unless you
-   enabled them.)
-2. Any **`[LUA ERROR]`** block whose stack mentions a file under `SMR-BugFixPack\Code\`.
-3. Any `[LUA ERROR]` in shipped game code that you did **not** see in a vanilla session
-   — note the file:line even if it looks unrelated to us.
-4. `SMRFixPack.ListFixes` output at load: **all 68 default fixes should read
-   `active`** (plus whichever opt-in modules you have toggled ON). Any other
-   `inactive`/`error` line means a fix silently self-deactivated (its apply()
-   self-check failed) — that is a FAIL and needs reporting with the reason string.
-
-Paste anything suspicious verbatim into your result line — the exact text matters more
-than a summary.
-
-`Result:` _____________________________________________
-
-## Meteor watchdog (F02) — passive, no action needed
-
-PT-01 passed and is archived, but its silence-watch continues in the background:
-the watchdog self-reports (`WATCHDOG — Meteors thread silent …`) if the meteor
-wedge ever recurs. **If you see that line in the log, report it verbatim.**
-
-## ~~PT-52 Trigger A — drone overhaul passive watch~~ ⛔ FROZEN 2026-07-31
-
-**Do not run this. Do not enable D06 to run it.** See the drone freeze below.
-
-Historical short form, kept only so the archived results stay readable: watch
-who answers wrench icons near idle drones; `SMRFixPack.DroneReport` every
-~30 min; healthy = `vetoed` climbing, `veto_expired` low, `unclaimed` not
-building up.
-
----
+> The Trains group above is the format SAMPLE, awaiting the owner's read
+> (checkpoint ⭐ in `PT_REDESIGN_PROMPT.md`; see "Decisions waiting on you").
+> Everything below this banner is unchanged pre-redesign text and converts
+> group-by-group once the sample is approved. Three items already MOVED UP
+> into Trains and are deleted below: **PT-37**, the **F80** settling rider and
+> the **F11** settling rider. The old header, PT-00/PT-22 sections and the
+> lost reporting protocol are absorbed into "The protocol" above. Nothing else
+> moved.
 
 # ⛔ DRONE PLAYTEST FREEZE — owner decision, 2026-07-31
 
@@ -776,50 +850,6 @@ things it repaired.
 
 `Result (case C, or "no fixture"):` _____________________________________________
 
-### PT-37 — F48 unblock test · decides whether the **F48** repair can ship
-
-F48 is **not implemented** — this test is what decides whether it can be. The shipped
-migration fixup (`Station.lua:1339-1355`) mis-parenthesises one call, so it re-orders
-nothing; the *corrected* call runs `OrderTrackElements`, which rebuilds every element's
-`connections` and `node_idx` on the track it is given, with a non-unwinding `assert` as
-its only failure handling. Before that ever ships in the sanitizer, it has to be seen
-behaving on a real save — both on a healthy network and on the one thing most likely to
-break it: a meteor-damaged track.
-
-**Setup:** a save with **two or more stations** connected by track, at least one route
-with a running train, **and** one track broken by a meteor (trigger one via
-`CheatTriggerMarsquake()` near a track, or play until one lands). Extending SAVE-A
-works. Console open (Enter / Alt-Shift-C).
-
-**Trigger — case A (healthy track):**
-1. Pick an intact track and note its endpoints:
-   `qa_t = MainCity.labels.TrackBase[1]`
-   `print(qa_t.start_el, qa_t.end_el, #qa_t.elements)`
-2. Run the CORRECTED call the F48 repair would ship:
-   `ProcessTrackElements(ResolveMap(qa_t), qa_t.elements)`
-   `qa_t.start_el = qa_t.elements[1]  qa_t.end_el = qa_t.elements[#qa_t.elements]`
-3. Re-print the endpoints; check the route still forms, the train still runs, and
-   nothing visual changed. **Save, reload, check again.**
-
-**Trigger — case B (the damaged track — the risky one):**
-4. Repeat steps 1-3 with `qa_t` set to the meteor-damaged track (pick the right
-   index from `MainCity.labels.TrackBase`). Expect the console to print the
-   "unable to find the expected number of track elements" assert — that is fine
-   *if nothing corrupts*: after it, check the repair site is still salvageable
-   (F45), the rest of the network still routes, and a **save + reload** comes back
-   clean.
-
-- **UNBLOCKS F48 looks like:** case A is a stable no-op-or-better and case B fails
-  *cleanly* (assert printed, network intact after reload) → the repair ships in
-  `90_SaveSanitizer.lua` behind a one-shot flag, skipping tracks that carry repair
-  sites.
-- **CONFIRMS THE BLOCK looks like:** case B leaves a track that will not route, a
-  train stuck, or a save that reloads broken → F48 closes as
-  `wontfix — repair riskier than the defect`, record exactly what broke.
-
-`Result (case A healthy):` _____________________________________________
-
-`Result (case B damaged):` _____________________________________________
 
 ### PT-42 — Last Transmission notices your reserves · covers **F22, F75**
 
@@ -1926,7 +1956,6 @@ visual outcome).
 | **F26** | Watch one Last War volley with the fix off and one with it on — is the spread visible? (this IS PT-47's first result line) |
 | **F22** | Open the Last Transmission faction goals panel in a young politics-enabled colony — where is the corrupted number player-visible before the Martian Assembly stage? (overlaps PT-42) |
 | **F77** | Flap an extender during hub activity, with and without — how big is the fleet Idle-kick? (this IS PT-52 Trigger B's F77 half) |
-| **F11** | Crew-gather a busy train's passenger, then inspect `train.units` — the U-tier settling read |
 | **F81b** | On a vanilla save, catch a blocked `RainsDisasterThreads` activation after a collision; or under the fix, rain resuming within ~7 sols. ~~(overlaps PT-54 Trigger E)~~ → **carried by the F86 Tier-1 `Fix_RainsDeadlock` A/B leg** (PT-54 retired 2026-08-01) |
 
 ### From the popup audit
@@ -1946,7 +1975,8 @@ full reasoning there; these four settle ITS verdicts):**
 **Added 2026-08-01 by the bug-list audit (`BUG_LIST_AUDIT.md`) and the entries
 named on each row — four cheap riders, no sitting of their own. Unlike the two
 tables above, these are not "believed right, verify anyway":**
-**⬇️ THREE REMAIN — the F35 row was taken and closed 2026-08-01** (it rode the
+**⬇️ TWO REMAIN (C32, C25) — the F80 row moved up to the Trains group
+2026-08-03, and the F35 row was taken and closed 2026-08-01** (it rode the
 F86 Phase-0 keyboard sitting, exactly the opportunistic way it was written to be
 taken; row struck through below, full record on agent/bugs/ F35).
 
@@ -1954,7 +1984,6 @@ taken; row struck through below, full record on agent/bugs/ F35).
 |---|---|
 | ~~**F35 live-label check**~~ **✅ TAKEN AND CLOSED 2026-08-01 — no longer a rider.** Measured at the keyboard during the F86 Phase-0 sitting (log `Mars.exe-20260801-14.59.57-6a22b86d.log`): from a **pre-research save**, all three turbine labels read `NO MODIFIERS` before, and after the tech landed all three — **`WindTurbine_Large` included** — carried `prop=electricity_production percent=100` under the vanilla `Effect_ModifyLabel` keys (`id=GameEffect`, not `SMRFixPack_F35_*`), with **Power doubling on every one** (9.3→18.6 / 18.6→37.2 / 29.8→59.5). No reload in the window, so our pass could not have supplied it. **The audit’s live-miss suspicion is dead and F35’s scope is right.** Trigger: the tech was granted with `UIColony:SetTechResearched("FrictionlessComposites")` — it is a Breakthrough and was unobtainable in that colony — which is the same `EffectsApply` funnel natural completion uses (`Research.lua:313`). ⚠️ **Read the trap on the agent/bugs/ F35 entry before repeating this anywhere:** the first attempt read the labels while **Low-G Turbines** was completing, which grants upgrade unlocks and no label modifier at all, and its correct `NO MODIFIERS` result nearly got filed as a P1. Confirm `IsTechResearched("FrictionlessComposites")` first. Full record: agent/bugs/ F35 |
 | **C32 label-membership read** ⚠️ **REWRITTEN 2026-08-01 by the prompt-6 Src sweep — the old row's trigger no longer occurs and its pass/fail rule was wrong; do not take the old version.** | **Trigger (corrected): you must ABANDON an asteroid** — the manual button, `Asteroids:UIAbandonAsteroid` — because on 1.0.7 asteroids never expire on their own (`Asteroids.lua:1, :208, :331-348, :493-500`), so "visiting and leaving" unloads no map and reads nothing. **Read (corrected): destroyed buildings must be excluded, or the first meteor strike will "confirm" C32** — `Building:OnDestroyed` is empty while `ShiftsBuilding:OnDestroyed` de-labels, so every destroyed-but-unrebuilt building legitimately sits in `UICity.labels.Building` and outside the colony label: `*r local n = 0 for _, b in ipairs(UICity.labels.Building or empty_table) do if IsKindOf(b, "ShiftsBuilding") and not b.destroyed and not b.demolishing and not b.bulldozed and not UIColony:IsInLabel("ShiftsBuilding", b) then n = n + 1 end end ConsolePrint("live ShiftsBuilding missing from the colony label: " .. n)` — and note it now tests membership with `IsInLabel` (the engine's own key-map test, `CommonLua\LabelContainer.lua:106-109`), not `table.find`, because the two disagree exactly in the array-vs-key desync case. **A non-zero count is the defect; a zero count still proves nothing** (`UICity` follows the current map, `Lua\_init.lua:12-14`, so read it on the map whose buildings you care about). Decides C32 (agent/bugs/ C32 entry, which the sweep DOWNGRADED — mechanism has no route in current Src) and feeds prompt 7's F04 tier decision |
-| **F80 settling observation** ⭐ **REWRITTEN 2026-08-02 (prompt 6c source audit) — it now discriminates WAITS vs WALKS and tests a named directional prediction** | **Trigger: any train sitting where EITHER symptom appears** — colonists queued at a platform while trains come and go (*waits*), **or** colonists setting off overland past a working station (*walks*). The audit says these are two faces of one enumeration, so **the walk case is now equally valid evidence and is the commoner one in the wild** — do not skip the sitting because nobody is waiting. ⛔ **Tap before mitigating: adding trains destroys the evidence.** Take all three, in order: **(1) Classify.** Waiting or walking? Note which, and the origin/destination **pair** that fails — the audit predicts a *specific pair* failing inside an otherwise healthy network, **not** a network-wide break, so a global failure would falsify the theory outright. **(2) The ready console tap** on the global `ForEachStationAlongTrack` (recorded in the F80 entry) — it prints each stop's enumerated destination set. **(3) ⭐ The directional test, which is the new discriminator and is free**: call `GetReachableStations()` on **both** endpoints of the failing pair. **The predicted signature is a ONE-WAY HOLE** — A's list omits B while B's list contains A (or the mirror). **PASS/consistent-with-F80 = a one-way hole.** **FALSIFIES the enumeration theory = both lists name each other** (the walk is then a decision made downstream of a correct reachable set, and the mechanism is elsewhere entirely). Also record whether a **track segment was under construction** anywhere on the line at the time — that is a legitimate rival explanation the audit confirmed is by-design truncation (`TrainTransport.lua:421`), and it must be excluded before the reading counts. F80 is the audit's strongest reported-but-unpinned defect (§4): Relaunched witness, a dev note, an exact source predicate as of 2026-08-02, and still **no proven trigger** |
 | **C25 Jumbo Cave trigger check** ⭐ **ADDED 2026-08-02 (prompt 6b) — waits for the situation; take it the moment a Jumbo Cave Reinforcement site sticks** | **Only the trigger is unproven** (the wedge chain is Src-verified on the C25 entry) — i.e. does cave geometry actually strand a waste rock? **Take the read WHILE the site is stuck, and while looking at the UNDERGROUND map** (`UICity` follows the current map, `_init.lua:12-14`): `*r local n, rocks, stuck = 0, {}, 0 for _, d in ipairs(UndergroundMap.City.labels.Drone or empty_table) do for b in pairs(d.unreachable_buildings or empty_table) do if IsValid(b) and IsKindOf(b, "WasteRockObstructor") then n = n + 1 if not rocks[b] then rocks[b] = true if b.parent_construction then stuck = stuck + 1 end end end end end local u = 0 for _ in pairs(rocks) do u = u + 1 end ConsolePrint("waste-rock entries in drone unreachable tables: " .. n .. " over " .. u .. " distinct rocks, " .. stuck .. " of them attached to a construction site")` — the `IsValid` guard is required because the table also holds a plain `version` key (`Drone.lua:826`). **Reading: a non-zero `attached to a construction site` count while the site is stuck is the trigger, and C25 earns its F-row; ZERO while stuck means the wedge is something else and C25's mechanism is not the cause** (record that too — it is the more useful result). ⚠️ **Also record the save's vintage.** 1.0.6 replaced the whole Jumbo Cave scenario and the swap is gated on `UndergroundRework106`, which is **false in any save started before 1.0.6** (`UndergroundDome.lua:16-19`) — so state whether this colony was begun pre- or post-1.0.6, or the observation cannot be placed. Decides C25 (agent/bugs/ C25 entry) |
 | **C20 pause-scan observation** ✅ **DONE 2026-08-02 — VERDICT: DEFERRED, NOT LOST; C20 CLOSED** | **Result, kept for the record.** Paused, probe deployed on an unexplored sector: **no `SectorScanned` signal**. On unpause: the **"Sector scanned" voice-over fired**, which proves the `Msg` fired, because `QueueVoice` sits inside `AddHUDNotification` (`HUDNotifications.lua:33-36`) at `Exploration.lua:103`, immediately before `Msg` at `:104`. ⭐ **Internal control, timing confirmed by the observer**: `NewAnomalies` appeared **before** the unpause (synchronous `NotificationPreset`, `Anomaly.lua:444`), `SectorScanned` fired **the instant the game unpaused and not before**. One scan, two notifications, split exactly on the pause boundary — which also proves the scan itself executed under pause and rules out the rival reading that the probe simply never deployed. ⚠️ **This row's original wording was WRONG and cost the observer a step**: it said watch for an "on-screen toast". `SectorScanned` is a **`HUDNotificationPreset`** (`Data\HUDNotificationPreset.lua:55-61`, `button_id = "idOverview"`) — it badges the Overview button and plays a voice line, **there is no popup card**. ⚠️ If anyone ever re-runs the save/reload variant, read `IsHUDNotificationShown("SectorScanned")` and **not** the voice: `QueueVoice` is rate-limited at `const.NotificationVoiceCooldown` = **120 real seconds** per id, so a repeat inside two minutes is silently absent and reads as a false "lost"
 | **F82 timing observation** ✅ **DONE 2026-08-02 — PASSED; MECHANISM PROVEN BY MEASUREMENT** | **Result.** Run on a No-Disasters save so nothing but the player could break a cable. A console watcher on `FindNotification("PowerGridSplit", CurrentMap)` timed both clocks, grid left **unrepaired** in both legs: **`119999` real ms / `600000` game ms at 5x**, and **`120001` real ms / `120000` game ms at 1x**. Against a preset `Expiration = 120000`: **real time constant to within 2 ms across a 5x speed change, game time varying by exactly 5.000x.** ⭐ Both legs left the split **unrepaired and the notification vanished anyway**, so the symmetric half — the colony stops reporting a break that is still there — is measured, not inferred. ⚠️ Method notes for any re-run: **do not click the notification** (`PowerGridSplit` does not set `Dismissable`, which defaults to `true`, so a click ends the measurement), and **stay on the map you cut on** (the preset is `PerMap`)
