@@ -1275,3 +1275,29 @@ prompt 11.**
    **The project's "re-derive by counting" rule does not say to check the
    pattern**, and a mechanical recount that agrees with itself across sessions
    would have carried a wrong number forward looking verified.
+
+#### ⚠️ Addendum to job 10 (chain prompt 11) — C40 was RE-ROUTED, not dropped, and a fourth job-7 seed
+
+**C40 was routed to prompt 11** by prompt 10, as *"a cheap rider if your sitting
+happens to be on a colony with the law enacted"*. Prompt 11's sitting was a
+**sol-4 founder colony** with no `Crowded Living` and no Ministry of Culture, so
+it was never available to take. Per chain rule 2 it has been **re-routed to
+`PLAYTEST_CHECKLIST.md` as a rider** (the C40 Crowded Living capacity rider,
+with the one-minute observation, the eviction watch, and the "ordinary shift
+rotation will NOT trigger it" trap) — **not** carried to prompt 12, because its
+next step needs a *colony state*, not a QA reading. **Nothing is owed to you for
+C40; this note exists so job 10 can confirm the routing rather than discover a
+gap.**
+
+⭐ **Fourth job-7 seed (chain rule 4b) — the routing rule has no notion of a
+precondition.** C40 is now on its **third** hop (prompt 10 → prompt 11 → the
+campaign), and the reason is the same one that put `DustDevilSpawnGate` on three
+hops: an item was routed to a *prompt* when what it actually needed was a
+*situation* — a suite run in that case, an enacted law in this one. **Prompt 10
+already flagged this once** (*"an item that cannot find a suite run in three
+prompts is telling you something about the routing rule"*). It has now happened
+twice, in the same chain, with two unrelated items. **Ask job 7 for the concrete
+change**: routing writes down WHICH prompt owns an item but never writes down
+WHAT MUST BE TRUE for it to be takeable, so every session inherits it, discovers
+the precondition does not hold, and forwards it — and the forwarding looks like
+diligence each time.
