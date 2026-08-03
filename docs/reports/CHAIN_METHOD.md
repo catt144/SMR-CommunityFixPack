@@ -85,8 +85,11 @@ emptiness is the objective done-condition. The final prompt is always an
 10. **The model division of labor is not a convention — it is what makes the
     method affordable AND accurate, and the owner rates it load-bearing.**
     (Owner, 2026-08-03, on the record: the chain was co-designed by the owner
-    with a top-tier session, including which model got which prompt; *"that
-    model division of labor is the only way this works"*.) The economics, both
+    with a top-tier session, and **the per-prompt model assignment was
+    specifically the Fable authoring session's own decision** — the owner
+    could guess at it but not be sure, and rates the resulting division
+    load-bearing: *"that model division of labor is the only way this
+    works"*.) The economics, both
     directions: run everything on the volume tier and accuracy drops exactly
     where error compounds; run everything — or even half — on the scarce top
     tier and usage limits stretch a ~24-hour chain across one to two weeks.
@@ -117,10 +120,15 @@ emptiness is the objective done-condition. The final prompt is always an
 
 ## 4 · The chain template (assemble from these parts)
 
-0. **Author the chain in a top-tier session, WITH the owner, and decide the
-   model placement per prompt as part of the design.** This is how the proven
-   chain was actually made (owner + Fable collaboration, 2026-08-01) — the
-   division of labor in §2.10 is a design input, not an afterthought. Budget
+0. **Author the chain in a top-tier session, WITH the owner — and let the
+   authoring MODEL decide the per-prompt model placement.** This is how the
+   proven chain was actually made (owner + Fable collaboration, 2026-08-01;
+   the placement was Fable's call, which the owner could sanity-check but
+   not derive). The assignment is a judgment about *where errors compound
+   versus where they get caught* — a read on the work's internal risk
+   structure that the authoring session is better positioned to make than
+   anyone outside it. The division of labor in §2.10 is a design input, not
+   an afterthought. Budget
    the scarce tier at roughly 15–20% of prompts, placed at the compounding
    points; if the plan needs more than ~half the chain on the top tier, the
    decomposition is wrong (the specs are not carrying enough of the load).
