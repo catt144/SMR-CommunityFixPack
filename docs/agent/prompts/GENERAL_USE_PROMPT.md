@@ -1,31 +1,34 @@
-# General playtest-standby prompt (model-agnostic) — rewritten 2026-08-01
+# General playtest-standby prompt (model-agnostic) — rewritten 2026-08-03
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
 — this file goes stale the moment another session commits. (Renamed from
 `FABLE_NEXT_PROMPT.md` on 2026-08-03, owner request — nothing in it is
-model-specific and the old name implied otherwise; pre-rename documents cite
-the old name, see the translation note in `docs/README.md`.) Staleness anchor: **updated 2026-08-03 by chain prompt
-12's close-out commit — THE CHAIN IS COMPLETE and `docs/agent/prompts/project/` is
-EMPTY.** The final QA's verdict, findings, adjudications (F97 keep / D12 stands
-/ F76 closed-refuted, residue = C41) and the ordered campaign top are in
-`docs/agent/reports/CHAIN_QA_REPORT.md`; doc-structure recommendations await the
-owner in `docs/agent/reports/DOC_STRUCTURE_REVIEW.md`.
+model-specific; pre-rename documents cite the old name, see the translation
+note in `docs/README.md`.) Staleness anchor: **rewritten 2026-08-03 by the
+standing-prompts redesign session** against the restructured tree — decision
+record in `docs/agent/reports/STANDING_PROMPTS_REDESIGN.md`. The campaign's
+verdicts, adjudications (F97 keep / D12 stands / F76 closed-refuted, residue =
+C41) and its ordered top are in `docs/agent/reports/CHAIN_QA_REPORT.md`.
 
 > 🗂 **THIS PROMPT IS FOR LIVE PLAYTEST SITTINGS ONLY.** The project chain is
-> **complete and its folder is empty** (2026-08-03) — the campaign this prompt
-> serves is now the main line of work. Standing non-playtest work is listed in
-> `CHAIN_QA_REPORT.md` §8 (D13 is the hard launch dependency, post-campaign;
-> release gates; owner decisions). `FIX_POLICY.md` §3a still binds any code any
-> session writes. Drone work is separately owned by
+> **complete and its prompt folder consumed** (2026-08-03) — the campaign this
+> prompt serves is now the main line of work. Standing non-playtest work is
+> listed in `CHAIN_QA_REPORT.md` §8 (D13 is the hard launch dependency,
+> post-campaign; release gates; owner decisions). `FIX_POLICY.md` §3a still
+> binds any code any session writes. Drone work is separately owned by
 > `docs/agent/prompts/DRONE_PROJECT_PROMPT.md` — same rule as before.
 
 > 📁 **DOCS LAYOUT** — `docs/README.md` if unsure where anything lives.
-> Roots: `agent/STATE.md` (current state; counts live there and nowhere else),
-> `agent/bugs/` (defect truth), `PLAYTEST_CHECKLIST.md` (tests + protocol),
-> `PLAYTEST_HELP.md` (all reference material). Rules: `docs/agent/`
-> (`agent/facts/`, `FIX_POLICY`, `WORKFLOW`). Reports are not authority —
-> if a report and a root/agent doc disagree, the root/agent doc wins.
+> Entry points: `agent/STATE.md` (current state; counts live there and nowhere
+> else) · `agent/bugs/INDEX.md` (defect truth, one row per entry — the row
+> answers status/priority/evidence-label; open `<ID>.md` for the narrative)
+> · `agent/facts/INDEX.md` (engine behaviour, 43 one-line rows) ·
+> `PLAYTEST_CHECKLIST.md` (tests + protocol) · `PLAYTEST_HELP.md` (all
+> reference material). Rules: `agent/FIX_POLICY.md`, `agent/WORKFLOW.md`.
+> **Both INDEX.md files are GENERATED — edit the entry or fact file, never the
+> index.** Reports are not authority — if a report and a root/agent doc
+> disagree, the root/agent doc wins.
 
 You are assisting a LIVE PLAYTEST: the user is at the keyboard in the retail
 game with both mods loaded. Your jobs:
@@ -41,15 +44,16 @@ game with both mods loaded. Your jobs:
    steps using `PLAYTEST_HELP.md`'s verified command table; hand exact
    console lines, **one command per line**.
 2. **Process results as they arrive** — protocol at the bottom of the
-   checklist: PASS → flip status in BOTH places inside `agent/bugs/<ID>.md`
-   (front matter + heading tag; INDEX.md is generated, never hand-edited)
-   and archive the section; FAIL → diagnose live, file the finding with
-   the full forensic trail.
+   checklist: PASS → flip status in BOTH places inside `agent/bugs/<ID>.md`,
+   front matter FIRST, then the heading tag to match (`WORKFLOW.md` mechanical
+   rule 6; INDEX.md is generated, never hand-edited) and archive the section;
+   FAIL → diagnose live, file the finding with the full forensic trail.
 3. **Diagnose surprises** — new defects get an F-number, an entry, a severity
    call. Mechanical repairs may land same-day WITH a re-verified A/B;
-   redesigns go to the user. Anything that belongs to the project chain gets
-   ROUTED to the right chain prompt's `## Notes from upstream`, not started
-   here.
+   redesigns go to the user. Anything too big for the sitting gets FILED —
+   an `agent/bugs/` entry, plus a checklist rider when the precondition is a
+   situation (TAKEABLE-WHEN, `WORKFLOW.md` binding rule 3) — never started
+   here. No project chain is active to route to.
 4. **Commit as you go** — every processed result or finding is a commit,
    pushed. Docs never lag play. Todo list per `WORKFLOW.md` element 1: one
    item per commit-and-verify unit, one in progress, current at all times.
@@ -159,20 +163,30 @@ this project nine days on this entry.
   project author config (`WORKFLOW.md`), push the fix pack (TestKit is
   local-only).
 
-## Read first, from `C:\Dev\SMR-BugFixPack`
+## Read first, from `C:\Dev\SMR-BugFixPack` (file granularity — WORKFLOW element 8)
 
-1. `docs/agent/facts/` — whole file (several behaviours are the
-   opposite of what code suggests). Then `docs/agent/STATE.md`.
-2. `docs/PLAYTEST_CHECKLIST.md` (tests + protocol) with
+1. `docs/agent/STATE.md` — state, gates, counts (`CLAUDE.md`, auto-loaded,
+   points here).
+2. `docs/agent/facts/INDEX.md` — scan all 43 one-line rows so you know what
+   exists (several behaviours are the opposite of what code suggests), then
+   open ONLY the fact files the sitting's tests touch. The old "whole file"
+   instruction is retired: reading all 43 facts spends the tokens the
+   2026-08-03 restructure saved.
+3. `docs/PLAYTEST_CHECKLIST.md` (tests + protocol) with
    `docs/PLAYTEST_HELP.md` (ground rules BEFORE handing any console line).
-3. `docs/agent/bugs/` — the entries the sitting touches. **F76 only if a
-   depot-picker interaction actually misbehaves** — the old "read this before
-   ANY depot-picker interaction" instruction was retired 2026-08-02 with the
-   claim behind it (block above).
-4. `docs/agent/FIX_POLICY.md` — §4a, §3a, §2 binding for any code written.
-5. `docs/agent/reports/REACHABILITY_AUDIT.md` "Challenge review" — before writing
-   ANY new fix: tier vocabulary, hard tells, injection-evidence rule.
+4. `docs/agent/bugs/INDEX.md` → the `<ID>.md` entries the sitting touches
+   (the row answers status/priority; the entry has the narrative). **F76 only
+   if a depot-picker interaction actually misbehaves** — the old "read this
+   before ANY depot-picker interaction" instruction was retired 2026-08-02
+   with the claim behind it (block above).
+5. `docs/agent/FIX_POLICY.md` — §4a, §3a, §2 binding for any code written.
+6. `docs/agent/reports/REACHABILITY_AUDIT.md` "Challenge review" — before
+   writing ANY new fix: tier vocabulary, hard tells, injection-evidence rule.
 
-**End of session:** update `agent/STATE.md` and this prompt's staleness anchor if
-state changed, commit, push, summarize. Chain-owned work discovered → route
-to `docs/agent/prompts/project/`, never start it here.
+**End of session:** update `agent/STATE.md` and this prompt's staleness anchor
+if state changed. **STATE.md is hard-capped at 60 lines (doccheck red), so
+adding means evicting** (`WORKFLOW.md` mechanical rule 8): move resolved or
+superseded lines to `docs/archive/SESSION_LOG.md` — append-only, newest-first —
+in the same commit; never evict open gates, holds, owner decisions or the
+counts block. Then commit, push, summarize. Work too big for the sitting was
+FILED as you went (job 3) — say where.

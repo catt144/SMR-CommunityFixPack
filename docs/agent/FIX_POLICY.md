@@ -149,7 +149,7 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   the latched heal + migration passes, which clear our threads out of the
   save), and the **standalone save-rescue artifact** for saves that already
   lost the pack (the only console-viable remedy). Record + spec gate + open
-  design question: **`agent/bugs/` D13**; plan: `F86_EXECUTION_PLAN.md` Phase 5.
+  design question: **`agent/bugs/D13.md`**; plan: `F86_EXECUTION_PLAN.md` Phase 5.
   ⛔ The artifact is **specced only after Tiers 1+2 land and verify** — its
   target list is their output, never today's leak set. `[FAQ]`
 
@@ -306,20 +306,21 @@ in, `TrainCargoDumping` out, compliant `CaveInsNoDisasters` counted;
 the 13 and classified one additional inert route-(c) preset-field site** —
 `Fix_LastTransmissionStorage`'s `Condition.eval`, disclosed-no-build,
 adjudication §4.4) and the per-module disposition:
-`docs/agent/reports/SAVE_SAFETY_REDESIGN.md` and agent/bugs/ F86.
+`docs/agent/reports/SAVE_SAFETY_REDESIGN.md` and `agent/bugs/F86.md`.
 
 ## 4. Only fix proven, reachable, UNINTENDED defects
 
 > **AMENDED AND ADOPTED 2026-08-01.** This section replaces the three-sentence
 > "Only fix proven defects" rule with the reachability audit's drafted
 > amendment, applied verbatim from `REACHABILITY_AUDIT.md` §4. **Authority:**
-> the owner's blanket pre-clearance of 2026-08-01 (recorded in
-> `docs/agent/prompts/project/README.md`), which clears the approval step for work
+> the owner's blanket pre-clearance of 2026-08-01 (recorded in the project
+> chain's manifest, `docs/agent/prompts/project/README.md` — consumed with the
+> chain on 2026-08-03 and now in git history only), which clears the approval step for work
 > items derived from the audit-and-adjudication conversation — this adoption
 > named among them. **The blocker that held it back is gone:** the draft
 > contradicted itself while F49(a) shipped a no-op R4 rider against the new
 > "R4 does not ship" line; that guard was **stripped from `Fix_TrainMinors`
-> on 2026-08-01** (agent/bugs/ F49; A/B code-gate leg ran clear), so the rule and the
+> on 2026-08-01** (`agent/bugs/F49.md`; A/B code-gate leg ran clear), so the rule and the
 > shipped code now agree. **Live consequence on adoption:** F29 and F57(a) are
 > R3 defects fixed by §1.5 method replacements — the combination the R3 bullet
 > below now makes conditional on an explicit owner decision. Both entries
@@ -502,7 +503,7 @@ module's own maps — byte-identical in all three.
   and **discards your literal** whenever `TranslationTable[id]` exists, which in a
   retail build is always — English included, since English is a loaded table like
   every other language. `Fix_TechDescriptionBuilding` did exactly this and has
-  never changed anything (**agent/bugs/ F98**; F25 demoted, and **no longer citable as
+  never changed anything (**`agent/bugs/F98.md`**; F25 demoted, and **no longer citable as
   localisation precedent**).
   ⭐ **To ADD to existing localized text at zero cost in any language, concatenate:
   `shipped_T .. Untranslated("…")`** — supported on the retail userdata form and

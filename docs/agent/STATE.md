@@ -1,10 +1,10 @@
 # Project State — the one mandatory read
 
 Current only, rewritten in place; history is append-only and newest-first in
-`docs/archive/SESSION_LOG.md` (incl. this file's own 1581-line narrative,
-archived verbatim 2026-08-03). Defect truth `agent/bugs/` · engine behaviour
-`agent/facts/` · doc map `docs/README.md` · authoring `agent/WORKFLOW.md` · code
-`agent/FIX_POLICY.md` · efforts over ~2 sessions `agent/reports/CHAIN_METHOD.md`.
+`docs/archive/SESSION_LOG.md`. Defect truth `agent/bugs/INDEX.md` · engine
+behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
+`agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · efforts over ~2 sessions
+`agent/reports/CHAIN_METHOD.md`.
 
 ## Where the project is
 
@@ -16,11 +16,11 @@ table, and the campaign's ordered top. **The owner is free for the playtest
 campaign** (`docs/PLAYTEST_CHECKLIST.md`; at the keyboard first: PT-62's
 remainder, the load-heal round-trip sweep, the doctrine C-sitting — §9).
 
-✅ **The docs-restructure chain is COMPLETE (2026-08-03)**, folder empty, spec
-executed, doccheck v3 armed as a pre-commit hook.
-**`agent/reports/DOCS_RESTRUCTURE_REPORT.md`** is the end-state picture:
-conservation CLEAR, three findings (one fixed here), read-path economics, and
-the OBSERVATIONS for the **Fable prompt-redesign session** the owner schedules.
+✅ **Docs-restructure chain COMPLETE (2026-08-03)**, spec executed, doccheck v3
+armed as pre-commit hook — end state in `agent/reports/DOCS_RESTRUCTURE_REPORT.md`.
+✅ **Standing prompts REDESIGNED 2026-08-03** — O1–O7 decided, O1/O3/O4/O7
+adopted (WORKFLOW element 8, mech. rules 6/8), both prompts route via the
+INDEXes: `agent/reports/STANDING_PROMPTS_REDESIGN.md`.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 

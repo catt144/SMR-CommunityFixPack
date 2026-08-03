@@ -386,7 +386,8 @@ waiting.
 - **PT-53 Trigger E, ~~PT-54~~** — verification of shipped code. (~~PT-59~~ PASSED
   IN FULL 2026-07-31 → F83 `tested`, archived. **PT-54 RETIRED UNRUN
   2026-08-01** — not parked either: the code under it is being replaced, and
-  its intent moved onto the F86 Tier-1 build's own legs, agent/bugs/ F78/F81.
+  its intent moved onto the F86 Tier-1 build's own legs,
+  `agent/bugs/F78.md`/`F81.md`.
   **PT-52 B2 is FROZEN**, not
   parked — it tests D06 v1's design and the design is unsettled; it is
   drone-owned, see `docs/agent/prompts/DRONE_PROJECT_PROMPT.md`.)

@@ -51,13 +51,6 @@ these used to be filed only in agent reports, which is where you never read.
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for
   agent docs). Adopt, defer, or drop.
   → `docs/agent/reports/DOC_STRUCTURE_REVIEW.md` §3 and §6.
-- **Feed `DOCS_RESTRUCTURE_REPORT.md` to a Fable session to redesign the
-  standing prompts.** The docs restructure is done and verified, but
-  `GENERAL_USE_PROMPT.md` and `DRONE_PROJECT_PROMPT.md` still describe the old
-  tree in prose — one of them tells every session to read the engine facts as a
-  "whole file", which spends the tokens the restructure just saved. The report
-  is written for that session as its whole picture. **Your call when to spend
-  the top tier on it.** → `docs/agent/reports/DOCS_RESTRUCTURE_REPORT.md` §6.
 ⭐ **CONVENTION (added 2026-08-03, chain-12 QA, from `BUG_LIST_AUDIT.md`
 §10.6f(i)): record the SESSION UPTIME next to any error COUNT.** Cross-arm
 count comparisons (this leg's 0 vs that leg's 80) depend on comparable

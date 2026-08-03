@@ -5,17 +5,21 @@ gates.** Paste this into a fresh session when the owner wants to work on drones.
 **This prompt is RE-RUNNABLE — it does NOT delete itself.** Update it in place at
 the end of every drone session.
 
-> 📁 **DOCS LAYOUT (reorganised 2026-08-01) — read `docs\README.md` if unsure
+> 📁 **DOCS LAYOUT (restructured 2026-08-03) — read `docs/README.md` if unsure
 > where something lives or where a new document goes.**
-> `docs/` root = daily truth (`STATUS`, `agent/bugs/`, the playtest files,
-> `FUTURE_IDEAS`, `MOD_DESCRIPTION`) · `docs\agent\` = the binding rules
-> (`agent/facts/`, `FIX_POLICY`, `WORKFLOW`) · `docs\agent\prompts\` = the two
-> standing prompts + live one-offs · `docs\agent\reports\` = reports, plans,
-> specs, surveys · `docs\archive\` = spent, plus `SESSION_LOG.md`.
-> **New rules/engine facts go in `agent\`, not buried in a report. Defects go
-> in `agent/bugs/`, never a report and never `FUTURE_IDEAS.md`. Reports are not
-> authority — if a report and `agent/bugs/`/`agent/facts/` disagree, the root/agent
-> document wins.**
+> `docs/` root = the four human docs (`PLAYTEST_CHECKLIST`, `PLAYTEST_HELP`,
+> `FUTURE_IDEAS`, `README`) plus MOVED stubs · `docs/agent/` = agent truth:
+> `STATE.md` (the mandatory read; counts live there), `agent/bugs/` (defect
+> tracker, one file per entry — **entry point `agent/bugs/INDEX.md`**),
+> `agent/facts/` (engine behaviour — **entry point `agent/facts/INDEX.md`**),
+> `FIX_POLICY`, `WORKFLOW` · `docs/agent/prompts/` = the two standing prompts
+> + live one-offs · `docs/agent/reports/` = immutable reports, plans, specs ·
+> `docs/archive/` = append-only spent records, incl. `SESSION_LOG.md` and the
+> frozen `MOD_DESCRIPTION.md`. **Both INDEX.md files are GENERATED — edit the
+> entry or fact file, never the index. New rules/engine facts go in `agent/`,
+> not buried in a report. Defects go in `agent/bugs/`, never a report and
+> never `FUTURE_IDEAS.md`. Reports are not authority — if a report and
+> `agent/bugs/`/`agent/facts/` disagree, the root/agent document wins.**
 
 > 🚧 **This prompt owns drone work exclusively.** `docs\agent\prompts\GENERAL_USE_PROMPT.md` is
 > the general prompt; it may *answer questions* about drones but it no longer
@@ -24,13 +28,14 @@ the end of every drone session.
 
 > 🔗 **ADDENDUM 2026-08-01 (bug-list audit + project chain) — three facts a
 > drone session must know:**
-> 1. **The `Opt_DroneOverhaul` layer-2 carve-out is PRE-CLEARED** (owner
->    blanket clearance, recorded in `docs\agent\prompts\project\README.md`): the
->    project chain's prompt 5 will move the module's wrapper call position
->    for F86 save-safety — surgery on WHERE the wrapper calls, zero drone
->    design. Expect that change to land from outside this prompt; do not
->    re-do it, do not treat it as a design decision, and rebase any D06
->    rebuild work on the module as it stands after the chain touches it.
+> 1. **The `Opt_DroneOverhaul` layer-2 carve-out was PRE-CLEARED and has
+>    LANDED** (owner blanket clearance 2026-08-01, recorded in the project
+>    chain's manifest README — consumed with the chain 2026-08-03, in git
+>    history): the chain moved the module's wrapper call position for F86
+>    save-safety — surgery on WHERE the wrapper calls, zero drone design.
+>    That change landed from outside this prompt; do not re-do it, do not
+>    treat it as a design decision, and rebase any D06 rebuild work on the
+>    module as it stands now.
 > 2. **C32 filed (agent/bugs/):** buildings can drop out of
 >    `UIColony.labels.ShiftsBuilding` and stop changing workshift —
 >    suspected label rebuild on map transitions (asteroid out-of-range
@@ -53,11 +58,14 @@ declared by the test design; every result commit carries a `PROBE SWEEP:`
 line. Full rule: `WORKFLOW.md` "Probe hygiene".
 
 **Staleness check — do this FIRST:** `git log --oneline -10` + `git pull`. This
-file was written at **`bd8d831`** and patched at **`bdc2c27`** (the PT-20 leg).
-If commits landed after that, read them before trusting anything below — this
-project has already had a prompt go stale mid-job.
+file was written at **`bd8d831`** and patched at **`bdc2c27`** (the PT-20 leg);
+its doc-facing scaffolding (layout block, read path, citations — no drone
+content) was rewritten 2026-08-03 by the standing-prompts redesign
+(`docs/agent/reports/STANDING_PROMPTS_REDESIGN.md`). If commits landed after
+that, read them before trusting anything below — this project has already had
+a prompt go stale mid-job.
 
-> 🛑 **F86 CHANGED THE GROUND UNDER THIS PROMPT — read `agent/bugs/` F86 and
+> 🛑 **F86 CHANGED THE GROUND UNDER THIS PROMPT — read `agent/bugs/F86.md` and
 > `docs\agent\reports\SAVE_SAFETY_REDESIGN.md` before touching the D06 decision.** PT-20
 > (2026-07-31) measured **pack code being serialised into the savegame and still
 > running after the mod is removed**, and **`Opt_DroneOverhaul` is one of the two
@@ -231,12 +239,16 @@ is caught in the freeze.
 
 ---
 
-## 5 · Reading order for any drone session
+## 5 · Reading order for any drone session (file granularity — WORKFLOW element 8)
 
-1. `docs\agent\facts\` — every fact. **It now carries the closure-persistence
-   fact**, which is why the overlay option (3) must never store a function on a
-   game object.
-2. **`agent/bugs/` D06 entry** — the plan of record, including the owner decisions on
+1. `docs/agent/facts/INDEX.md` — scan all 43 one-line rows, then open the
+   facts the session touches. **Mandatory opens for drone work:
+   `agent/facts/EF-022.md`** (a mod closure stored on a persisted game object
+   enters the save, survives uninstall and keeps running — why the overlay
+   option (3) must never store a function on a game object),
+   **`EF-023.md`** (what a save actually captures) and **`EF-019.md`**
+   (game-time threads persist by default).
+2. **`agent/bugs/D06.md`** — the plan of record, including the owner decisions on
    relocation and the cleanup mod.
 3. **`docs\agent\reports\DRONE_PRIORITY_SYSTEM.md` — §8, §9 and §10 especially.** These are the
    new, decisive sections. §1 and §7 carry corrections to earlier claims.
@@ -244,7 +256,8 @@ is caught in the freeze.
    for the freeze rules and the disclaimer spec.
 5. `docs\agent\reports\DRONE_OVERHAUL_OPTIONS.md` — only if D08 or D06-structural comes up.
 6. `docs\agent\FIX_POLICY.md` §1.5 and §3 — replacements and savegame footprint.
-7. `docs\FUTURE_IDEAS.md` — the scope brake.
+7. `docs\FUTURE_IDEAS.md` — the scope brake. More entries: `agent/bugs/INDEX.md`
+   (GENERATED — edit entry files, never the index).
 
 **Game source (read-only, NEVER modify):**
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`.
@@ -309,7 +322,7 @@ If you cannot cite evidence, **say the narrower true thing instead.**
   expires") described the *priority data* and is still true of it. It is **not**
   true of the module: `Opt_DroneOverhaul`'s `Drone:Idle` wrapper is serialised
   into the save and throws 98 errors per session after removal, toggle OFF
-  included. Measured 2026-07-31, `agent/bugs/` F86.
+  included. Measured 2026-07-31, `agent/bugs/F86.md`.
 - **Do not report a module `tested`** without a playtest. Only the playtest flips
   that status.
 - **Do not describe the cleanup mod as approved.** It is **not approved to
@@ -334,5 +347,6 @@ them). Parse sweep before any commit touching Lua: python + luaparser,
 
 **End of a drone session:** record findings on the D06 entry and in
 `DRONE_PRIORITY_SYSTEM.md`, add a `SESSION_LOG` leg, **update this prompt in
-place**, and — if the general state changed — say so in `agent/STATE.md`. Then
-summarize for the owner.
+place**, and — if the general state changed — say so in `agent/STATE.md`
+(hard-capped at 60 lines; eviction rule in `WORKFLOW.md` mechanical rule 8).
+Then summarize for the owner.

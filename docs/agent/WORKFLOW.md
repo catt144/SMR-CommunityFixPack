@@ -2,13 +2,17 @@
 
 ## Reading path for a new session
 
-1. `docs/agent/facts/` — the proven engine behaviors (several are the
-   opposite of what the code suggests). Read before writing or reviewing any
-   fix.
-2. `docs/agent/STATE.md` — current state: authoritative build counts, open user
-   decisions, next gates. Session history lives in
-   `docs/archive/SESSION_LOG.md` (append-only, newest first).
-3. `docs/agent/bugs/` — the canonical defect tracker, one file per entry.
+1. `docs/agent/STATE.md` — current state: authoritative build counts, open
+   owner decisions, next gates (`CLAUDE.md`, auto-loaded, points here).
+   Session history lives in `docs/archive/SESSION_LOG.md` (append-only,
+   newest first).
+2. `docs/agent/facts/INDEX.md` — one row per proven engine behavior (several
+   are the opposite of what the code suggests). Scan all 43 rows so you know
+   what exists; OPEN the fact files your job touches and read them before
+   writing or reviewing any fix. Reading all 43 files as a matter of course
+   is the cost the 2026-08-03 restructure removed — don't reinstate it.
+3. `docs/agent/bugs/INDEX.md` — the defect tracker's entry point: status,
+   priority and evidence label per row; the entry file carries the narrative.
    Update the ENTRY in the same change that adds or edits a fix. **`INDEX.md`
    is GENERATED — never hand-edit it.** A status still lives in two places, but
    both are now inside the entry file: front-matter `status:` and the heading
@@ -53,8 +57,18 @@ Two mechanical rules that came with the same restructure:
 6. **`INDEX.md` in `agent/bugs/` and `agent/facts/` is GENERATED.** Edit the
    entry or fact file; doccheck regenerates the index and goes red on any
    difference, and red when front-matter `status:` and the heading tag disagree.
+   **Edit order for a status flip** (adopted 2026-08-03, standing-prompts
+   redesign O4): front-matter `status:` first — the index regenerates from
+   it — then the heading tag to match, in the same edit. A red doccheck means
+   you stopped halfway.
 7. **Run `python tools/doccheck.py` before committing doc changes** — red
    blocks. One-time setup: `git config core.hooksPath tools/hooks`.
+8. **STATE.md's 60-line cap comes with an eviction rule** (adopted 2026-08-03,
+   standing-prompts redesign O7). To add a line at the cap, evict in the same
+   commit: resolved or superseded material moves to
+   `docs/archive/SESSION_LOG.md` (append-only, newest-first). Evict history,
+   never obligations — open gates, holds, owner decisions and the counts
+   block stay.
 
 ## Layout
 
@@ -313,6 +327,13 @@ do not.
 brief must instruct: run the probe sweep (the hard gate above) BEFORE testing,
 put the sweep line in the todo list, and refuse to record results without it.
 A brief that omits this is non-compliant; add the gate before running it.
+
+**8. The read path, declared** (adopted 2026-08-03, standing-prompts redesign
+O1). Name the files the job requires — file granularity, not folders — and the
+index (`agent/bugs/INDEX.md` / `agent/facts/INDEX.md`) that finds more. "Read
+the whole folder" is not a read path: every stale reading instruction the
+restructure report catalogued was a folder-granularity one, and a brief that
+names its files is one whose staleness the next session can check against git.
 
 ## `[FAQ]` — the tag for "a player will ask about this"
 
