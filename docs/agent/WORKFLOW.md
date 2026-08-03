@@ -19,6 +19,43 @@
    `docs/PLAYTEST_HELP.md` carries the ground rules, console facts, the
    verified command table, Test Kit helpers and save-fixture recipes.
 
+## Binding authoring rules (adopted 2026-08-03, DOC_STRUCTURE_REVIEW → spec §7)
+
+Recommendations until this date; **binding from it.** They are cheap at write
+time and each one is named after the miss it prevents.
+
+1. **Execution markers (R2).** Every console line, lever or command printed in a
+   human doc carries `[RAN <date>, log <name>]` or `[NEVER RUN]`. Unmarked, a
+   never-executed snippet reads exactly like a proven one — the PT-61 near-miss
+   was a gate that would have parked a whole attended sitting.
+2. **Provenance words (R3).** Load-bearing claims in entries, specs and briefs
+   are prefixed **MEASURED / SOURCE / INFERRED / INHERITED / GUESS**, and **the
+   ROUTE sentence is tagged separately from its citations** ("therefore the only
+   way is…" is a different claim from the lines it cites — the project has been
+   wrong about a route while every cited line was right, twice). ⛔ **A blanket
+   verification claim over a table is banned: the tag goes per row.**
+3. **TAKEABLE-WHEN on routed items (R5).** Routing names the owner prompt AND
+   the precondition ("needs a suite run" / "a colony with the law enacted" /
+   "the owner at the keyboard"). An item whose precondition is a *situation*
+   goes to the checklist as a rider immediately, not to a prompt that will
+   forward it again.
+4. **Archive load-bearing logs (R8).** If a leg's numbers will be cited by a
+   status flip, copy the log into the repo in the SAME commit. The game's
+   rotation cap is ~20 files and it has already eaten founding measurements.
+   Cannot be applied retroactively, which is the whole argument for now.
+5. **Owner-decision mirroring (R10).** Every item needing the owner's call is
+   mirrored into `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"
+   (one line + pointer), and struck the moment it is decided. **An owner
+   decision recorded only in an entry or a report is not considered asked.**
+
+Two mechanical rules that came with the same restructure:
+
+6. **`INDEX.md` in `agent/bugs/` and `agent/facts/` is GENERATED.** Edit the
+   entry or fact file; doccheck regenerates the index and goes red on any
+   difference, and red when front-matter `status:` and the heading tag disagree.
+7. **Run `python tools/doccheck.py` before committing doc changes** — red
+   blocks. One-time setup: `git config core.hooksPath tools/hooks`.
+
 ## Layout
 
 - **Dev repo (this folder):** `C:\Dev\SMR-BugFixPack` — git-versioned, canonical.

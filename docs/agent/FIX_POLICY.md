@@ -111,6 +111,13 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
     idempotent. The F87 sweep found three sites that had this bug.
   **Both paths must be tested** — a cold boot AND a run where the pack is
   enabled from the main menu. The second one is why F87 shipped.
+- ⛔ **EVERY WRAPPER MUST BE INERT FOR A FOREIGN OBJECT BEFORE IT TOUCHES ONE**
+  (adopted 2026-08-03, spec §7). A wrapper on a shared method is called for
+  every object of every class that inherits it, including objects another mod
+  created and objects our defect has nothing to do with. Decide "is this mine?"
+  and hand the call straight to the original **before** reading a field,
+  allocating, or logging — a wrapper that inspects first is already a behaviour
+  change for everyone else, and it is the shape §4a bars us from shipping.
 - Respect `SMRFixPack_Disabled["<id>"]` so users/other mods can veto single fixes.
 - **Every `OnMsg` handler must re-check BOTH the registry status AND the veto
   itself** (the A1 lesson, audit 2026-07-29): handlers are installed at file
