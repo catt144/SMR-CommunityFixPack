@@ -255,6 +255,63 @@ delete a failure surface outright), then R3/R4/R5, then R6, then R7/R8/R9.**
 
 ---
 
+## 6 · Addendum 2 (2026-08-03, same session) — the constraints just removed, and the recommendations they unlock
+
+The owner has additionally ruled: agent-facing documents may be **heavily tuned
+for agents** at the expense of human readability, if that buys **fewer errors,
+faster tasks, and less agent context**; **document count does not matter**; and
+a **prelaunch overhaul is expected anyway**, so development-era format churn is
+acceptable. That withdraws the exact cost assumptions behind §4's "no splits,
+no new documents" — **§4 is superseded for agent-only documents** (it stands
+for the human pair and the archives). Three upgraded recommendations:
+
+**R12 — Shrink the mandatory session-start surface; make the counts
+machine-emitted.** `STATUS.md` is "read this first" and has grown a long
+historical narrative — every session pays that context tax, and its
+hand-maintained counts are a proven drift class (stale within their own day,
+twice). Split it: a small **current-state file** (target: one screen — build
+state, release gates, active holds, pointers), with the **counts block emitted
+by the R1 script rather than typed**, and the narrative moved to the
+append-only archive where it belongs. This kills the counts class at the root
+instead of protocolizing around it, and cuts the largest fixed context cost in
+the project. **[WORKFLOW]** (changes what "update STATUS" means).
+
+**R13 — Restructure BUGS for machines: per-entry front matter, generated
+index, and (at the same stroke or at prelaunch) per-entry files.** Each entry
+gets a machine block — `id / status / priority / evidence grade / provenance
+tags (R3) / copies-live-at / last-verified` — and the index table is generated
+from those blocks (R6, now executable properly). This makes the R1 checker
+trivial, makes provenance *enforceable by a linter* instead of by writing
+discipline, and lets agents answer status questions from front matter instead
+of parsing a multi-thousand-token entry — the single biggest
+context-per-question saving available. Since document count is free, the full
+form is **one file per entry** (`docs/bugs/F86.md` …) with a generated index:
+the "correction landed in one copy on the same screen" class shrinks when the
+entry *is* the file, per-entry git history becomes legible, and sessions read
+only the entries they need. ⚠️ **Migration rule, non-negotiable: scripted, not
+hand-rewritten, with a verification pass** (extracted text byte-identical,
+counts identical before/after) — a hand migration of 12,000+ lines is itself a
+T1/T2 drift event waiting to happen. One move, not two; verified the way this
+project verifies legs.
+
+**R14 — A context-budget rule for agent docs.** [WORKFLOW] The mandatory-read
+set for a fresh session (current-state file + the agent rules docs' load-bearing
+sections) gets an explicit size budget; everything else is pull-based
+(front matter, greps, per-entry reads). New standing docs are free to create
+(count doesn't matter) but must declare whether they are mandatory-read or
+pull-based — mandatory-read additions cost budget and need a reason.
+
+What this does NOT change: `PLAYTEST_CHECKLIST.md` and `PLAYTEST_HELP.md` stay
+human-first (Addendum 1-D); the archives stay append-only prose; `reports/`
+stay immutable records; and none of this touches content — it moves and
+formats the same facts. **Revised adoption order: R1 + R2 → R10 + R11 → R12 →
+R13 (scripted, when a session has room — it needs no keyboard) → R3/R4/R5
+(enforced via R13's front matter where possible) → R14 → R7/R8/R9.** The
+prelaunch overhaul then inherits clean machine-readable sources to generate
+the public-facing documents from, instead of a second hand migration.
+
+---
+
 *Recommendations only — the owner decides. Items marked [WORKFLOW] change how
 sessions are authored and therefore need explicit adoption into `WORKFLOW.md` /
 `FIX_POLICY.md` rather than silent practice.*
