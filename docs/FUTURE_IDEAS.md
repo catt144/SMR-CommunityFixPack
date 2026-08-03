@@ -427,3 +427,20 @@ a different state from both "owed" and "parked".
   revisited.** Full reasoning on the F79 entry in `BUGS.md`.
 - **Multi-hop passenger routing** — REJECTED by the owner 2026-07-30. Refused,
   not parked. Do not re-propose.
+- **A cohort "attraction" bonus on the D12 dome toggle** (+25 comfort-like score
+  for Seniors/Children on a flagged dome) — **DECLINED 2026-08-02.** Proposed by
+  the owner during the D12 build and closed by the owner's own statement of what
+  this project is for: *"our job is to not make the game easy mode for the
+  player, it's to give players better tools and a bug free environment the devs
+  failed at."* A flat attraction bonus is a **balance change with no defect
+  behind it** — it would make dedicated domes fill faster than the shipped game
+  intends, which is the one thing `MOD_DESCRIPTION` promises the pack does not
+  do (*"Fixes bugs. Only bugs … no balance changes, no redesigns, no
+  opinions"*). Three supporting facts, recorded so this is not re-derived:
+  `Community:GetScoreFor` **already** adds a cohort-scaled term when a dome has
+  free matching cohort housing (`Community.lua:376-391`); the dome traits filter
+  is the existing player-facing dial for the same intent; and
+  `PickEmigrationCommunity` ignores distance entirely (`Colonist.lua:2570-2577`,
+  with a shipped `-- TODO` admitting it), so placing a dedicated dome "out of the
+  way" costs nothing that a bonus would need to compensate for. **Refused, not
+  parked.**
