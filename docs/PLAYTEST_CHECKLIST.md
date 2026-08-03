@@ -396,8 +396,11 @@ make the loop check trivially 0 for the wrong reason. It also blocks Seniors.
 Entry (incl. the same-day correction to an earlier, wrong reason for this).
 **Setup:**
 1. Restart, then the suite run.
-2. The loop check — must reach 0 and STAY 0 through a rocket landing (entry;
-   it is the leading indicator now).
+2. The loop check — ⛔ **use the SPLIT counter, not the old one** (entry,
+   2026-08-03): the blind version counts cohort delivery, which a flagged dome
+   is REQUIRED to keep receiving, so it cannot fail honestly. Only **inbound
+   SUBJECTS** is a leak, and it must be 0 and STAY 0 **through a rocket
+   landing** — a single at-rest reading does not test the `ChooseDome` half.
 3. P4/P6: the drain clears the dome, **run clean — no D03 crutch** (above); a
    dome that refills anyway is a FINDING, not a fixture problem. Mind the
    entry's employed-homeless caveat before reading P6.
