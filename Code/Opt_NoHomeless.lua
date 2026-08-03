@@ -258,10 +258,30 @@ end
 -- nursery OR a retirement home built in the dome. That gives us some safety,
 -- while giving us the flexibility we need."*
 --
--- Tested through `exclusive_trait` rather than by class name, so it covers the
--- Nursery (`Child`, via `children_only`, Residence.lua:26-28), the Seniors
--- Residence (`Senior`, from its template) and any cohort housing a future
--- update or another mod adds, without an enumeration to keep in step.
+-- Tested through `exclusive_trait` rather than by class name, so it needs no
+-- enumeration to keep in step. Verified against the shipped set 2026-08-02 —
+-- exactly three residences carry a cohort trait, and the property route catches
+-- all three without naming any of them:
+--     Nursery              `children_only`            -> "Child"
+--     LargeNurseryCCP1     `children_only`            -> "Child"   (the large one)
+--     SeniorsResidenceCCP1 `exclusive_trait "Senior"`             (the only one)
+-- `children_only` becomes `exclusive_trait = "Child"` at `Residence:GameInit`
+-- (`Residence.lua:25-27`), so both nurseries resolve to the same field by the
+-- time anything reads it. Playground / School / SchoolSpireCCP1 also carry
+-- `children_only`, but they are services and training buildings rather than
+-- Residences, so iterating `labels.Residence` excludes them by construction.
+--
+-- ⛔ EXCEPT THE HOTEL, and this is why the exclusion is explicit rather than
+-- assumed. `Hotel` carries `exclusive_trait = "Tourist"` and **is a Residence**
+-- — `HotelBase` parents `LivingBase` (`Hotel.lua:1-4`), which parents
+-- `Residence` (`Residence.lua:462-466`). Without this clause every dome with a
+-- Hotel would have qualified as a "Nursery / Retirement Dome", shown the row,
+-- and applied the policy to a tourist dome. Caught 2026-08-02 when the owner
+-- asked whether the test followed class or name and whether it covered both
+-- nurseries; it covered both nurseries and one building it should never have
+-- touched. Tourists are out of scope for this module everywhere else, so
+-- excluding tourist housing here is the consistent reading, not a special case.
+--
 -- STRUCTURAL: a switched-off Nursery still counts, because the player built one
 -- — this asks what the dome IS, not what it is doing this minute.
 --
@@ -278,7 +298,7 @@ end
 local function has_cohort_housing(community)
 	return each_residence(community, function(res)
 		local t = res.exclusive_trait
-		return (t and t ~= "") and true or nil
+		return (t and t ~= "" and t ~= "Tourist") and true or nil
 	end) and true or false
 end
 
