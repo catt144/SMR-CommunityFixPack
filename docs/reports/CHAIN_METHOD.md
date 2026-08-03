@@ -82,10 +82,26 @@ emptiness is the objective done-condition. The final prompt is always an
    stopped rather than force a conversion whose route had dissolved; prompt
    11 refused to self-close a P1 where the reporter was also the adjudicator.
    Fences work when they are written in the prompt, not assumed.
-10. **Model routing in filenames, model-neutral bodies.** Volume work ran on
-    Opus; the spec, the Tier-1 build, and the terminal QA ran on Fable. The
-    filename convention made the owner's per-task choice explicit and kept
-    prompts reusable.
+10. **The model division of labor is not a convention — it is what makes the
+    method affordable AND accurate, and the owner rates it load-bearing.**
+    (Owner, 2026-08-03, on the record: the chain was co-designed by the owner
+    with a top-tier session, including which model got which prompt; *"that
+    model division of labor is the only way this works"*.) The economics, both
+    directions: run everything on the volume tier and accuracy drops exactly
+    where error compounds; run everything — or even half — on the scarce top
+    tier and usage limits stretch a ~24-hour chain across one to two weeks.
+    **This chain placed the top tier on 3 of 18 prompts (~17%)**: the spec
+    (prompt 3 — where a wrong decision poisons every downstream build), the
+    highest-risk build (prompt 4, Tier 1 — save-safety code with the worst
+    failure mode), and the terminal QA (prompt 12 — the adversary everything
+    else is checked by). The volume tier ran the sweeps, the spec-guided
+    builds, the legs, and the records — work where the spec-plus-re-derivation
+    discipline bounds the cost of any single error. Routing lives in the
+    FILENAME only; prompt bodies stay model-neutral so the owner can re-route
+    per task. **The placement rule to reuse: the scarce tier goes where errors
+    COMPOUND (design, adjudication, the final audit) and where independence
+    matters (fresh-context QA); the volume tier goes where errors are CAUGHT
+    downstream by a leg, a probe, or the QA.**
 
 ## 3 · Failure modes observed, with the countermeasure each earned
 
@@ -101,6 +117,13 @@ emptiness is the objective done-condition. The final prompt is always an
 
 ## 4 · The chain template (assemble from these parts)
 
+0. **Author the chain in a top-tier session, WITH the owner, and decide the
+   model placement per prompt as part of the design.** This is how the proven
+   chain was actually made (owner + Fable collaboration, 2026-08-01) — the
+   division of labor in §2.10 is a design input, not an afterthought. Budget
+   the scarce tier at roughly 15–20% of prompts, placed at the compounding
+   points; if the plan needs more than ~half the chain on the top tier, the
+   decomposition is wrong (the specs are not carrying enough of the load).
 1. **A folder** (`docs/agent/prompts/<effort>/`), a **README manifest** (table:
    number · file · model · owner-needed? · what it drains; strike rows on
    consumption), and **binding chain rules** in the README: inbox/outbox,
