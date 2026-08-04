@@ -4740,3 +4740,31 @@ other producer. It proves the one producer the shipped dev comment names
 2. **The owner's witness explains the "expeditions never take busy colonists"
    appearance** — the stall is trait scarcity, not busy-refusal, cured by import
    or university training exactly as the owner described. Detail on the entry.
+
+---
+
+## Resolved decision records — moved from "Decisions waiting on you" (worked example, 2026-08-04)
+
+> **Format note (unattended-1 terminal audit, 2026-08-04).** The checklist's
+> documented archive rule covers completed *test sections*; struck-through
+> *decision bullets* are a different shape with no precedent. These two are
+> moved as a **worked example** of the proposed treatment — the resolved
+> bullet moves here WHOLE, verbatim, no stub left behind, only when it is
+> fully closed (nothing owed to the owner) and its durable content already
+> lives in an entry, `SESSION_LOG.md`, or an archived log. **The general
+> question — apply this to the rest of the resolved bullets? — is routed to
+> the owner on the checklist.**
+
+- ~~**Schedule co-run #0**~~ — ✅ **DONE 2026-08-04, you said go and it passed.**
+  It cost you **~1.5 minutes** against the ~10 asked for: no Steam picker, no
+  click needed, no modal, nothing to judge. The whole cycle was **79.9 seconds**
+  launch to desktop, the 56 MB load took **10 seconds**, and there was not one
+  `[LUA ERROR]` in the log. Your `TEST2H TRAIN` save is untouched; the copy and
+  the probe are deleted. → `docs/archive/SESSION_LOG.md` 2026-08-04 (the spec
+  was consumed at chain close 2026-08-04; full text in git,
+  `git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md`).
+- ~~**The vanilla `LawOfficeDoor` missing-asset error — file or ignore?**~~
+  ✅ **DECIDED 2026-08-04: filed as `C44`, `wontfix`, closed.** You asked for a
+  reason on it *"so another agent doesn't get distracted by it again"* — the
+  entry now opens with a **STOP HERE** banner saying exactly that, above the
+  evidence. Nothing is owed and nothing will be built. → `agent/bugs/C44.md`.

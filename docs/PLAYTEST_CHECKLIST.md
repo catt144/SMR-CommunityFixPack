@@ -62,9 +62,16 @@ these used to be filed only in agent reports, which is where you never read.
   the heal fire once and only once. It samples something real whatever the save
   contains, on `TEST2H TRAIN`, with no copy of your campaign involved.
   → `agent/prompts/unattended-1/02_OPUS_RUN.md` §2.
-- ⭐⭐ **DECISION FOR YOU: adopt the co-run sign-off tiers?** (routed 2026-08-04
-  by the corun-rig chain's terminal prompt — this changes sign-off policy,
-  which is yours, so **nothing changes until you say so**.) The problem it
+- ~~⭐⭐ **DECISION FOR YOU: adopt the co-run sign-off tiers?**~~ ✅ **ADOPTED
+  2026-08-04 — you wrote `----Approved` on this item in your own hand;
+  integrated by the unattended-1 terminal audit the same day.** The tiers are
+  now **standing policy** in `agent/WORKFLOW.md` (sign-off tiers block): Tier A
+  witness / Tier B evidence card (incl. the HANDS-ONLY sub-class) / Tier C
+  delegated, with the visible-demotion rule. ⛔ In the item's own words,
+  adoption does **not** touch: *"`tested` still means a pass at the keyboard
+  per WORKFLOW, and no already-granted status is reclassified."* The adopted
+  proposal, kept for the record of what was decided:
+  (routed 2026-08-04 by the corun-rig chain's terminal prompt.) The problem it
   solves is the one you named: for log-only defects you never see the bug or
   the fix, so per-item sign-off is ceremony. The proposal, finalized against
   co-run #1's four REAL evidence cards rather than the draft's guesses:
@@ -96,7 +103,8 @@ these used to be filed only in agent reports, which is where you never read.
   visible-demotion rule.** → `agent/reports/CORUN1_EVIDENCE_CARDS.md` (the
   four cards — transient sign-off artifacts per your anti-sprawl rule; their
   durable content already lives in the entries and archived logs).
-----Approved
+  *(Your `----Approved` marker stood here; consumed into the ✅ heading above
+  once the policy landed in WORKFLOW.)*
 
 - ⭐ **DECISION FOR YOU: does the F11 pre-wrapper rider close on two of its
   three readings?** (2026-08-04) You wrote the rider, so this is yours. Two
@@ -112,13 +120,18 @@ these used to be filed only in agent reports, which is where you never read.
   of three looks right to me. **If you'd rather have the third**, it needs a
   save without `LuxuriousTrains` or a train on a forest track, and it is one
   ride-along in any future co-run. → `agent/bugs/F11.md`.
-- **The mod-page relabel package.** Five shipped fixes (F55 forever-mark, F40
-  android dust sickness, F73(b) shelter reflex, F70 template refill, F97
-  dust-devil gate) are correct repairs whose *bug-ness* is a design judgment.
-  Proposal: a short "judgment calls" section in `MOD_DESCRIPTION.md` so they
-  aren't presented identically to, say, F23 or F12. **The wording is yours.**
-  → `docs/agent/reports/CHAIN_QA_REPORT.md` §3.
-  --approved 
+- **The mod-page relabel package** — ✅ **proposal ADOPTED 2026-08-04 (your
+  `--approved`, in your own hand), ⚠️ but NOT closed: the wording is still
+  owed by you.** Five shipped fixes (F55 forever-mark, F40 android dust
+  sickness, F73(b) shelter reflex, F70 template refill, F97 dust-devil gate)
+  are correct repairs whose *bug-ness* is a design judgment; the adopted
+  proposal is a short "judgment calls" section in `MOD_DESCRIPTION.md` so they
+  aren't presented identically to, say, F23 or F12. **The wording is yours** —
+  the item said so, and approval adopts the proposal, not the words.
+  `MOD_DESCRIPTION.md` is **FROZEN until launch prep**, so this is now a
+  **launch-prep instruction with an owed input**: when the freeze lifts, the
+  section goes in with your wording. This line stays until that wording
+  exists. → `docs/agent/reports/CHAIN_QA_REPORT.md` §3.
 - **The dead `SMRFixPack_Disabled` veto on D03/D07.** The console veto lever
   does nothing for those two modules — only `IsActive` is consulted. Either
   honor it per-call in both, or record that the lever exists only for
@@ -137,7 +150,9 @@ these used to be filed only in agent reports, which is where you never read.
   changes self-check semantics for **all 81 modules** and needs a suite run
   either side); or fix only the misleading reason string. ⚠️ It sits on D12,
   which is under review. → `docs/agent/bugs/F100.md`.
-  ---on hold
+  ⏸️ **ON HOLD (your `---on hold`, in your own hand, 2026-08-04).** Not a
+  decision — the item stays OPEN and stays counted; nobody builds any of the
+  three options until you lift the hold and pick one.
 - **Does F11 keep `P1`?** The F11 rider ran 2026-08-03 and the state its fix
   guards against has **no demonstrated producer** — crew-gathering abduction
   keeps `train.units` synced on both maps. The fix is still a correct repair of
@@ -203,19 +218,20 @@ these used to be filed only in agent reports, which is where you never read.
 - **The C36-adjacent mysteries grep.** A cheap sweep of `Lua\Mysteries\` and
   `Scenario\` for `IsDisasterPredicted` gates, deliberately left unassigned:
   your call whether it becomes work at all. Not owed. → `CHAIN_QA_REPORT.md` §8.
-- ~~**Schedule co-run #0**~~ — ✅ **DONE 2026-08-04, you said go and it passed.**
-  It cost you **~1.5 minutes** against the ~10 asked for: no Steam picker, no
-  click needed, no modal, nothing to judge. The whole cycle was **79.9 seconds**
-  launch to desktop, the 56 MB load took **10 seconds**, and there was not one
-  `[LUA ERROR]` in the log. Your `TEST2H TRAIN` save is untouched; the copy and
-  the probe are deleted. → `docs/archive/SESSION_LOG.md` 2026-08-04 (the spec
-  was consumed at chain close 2026-08-04; full text in git,
-  `git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md`).
-- ~~**The vanilla `LawOfficeDoor` missing-asset error — file or ignore?**~~
-  ✅ **DECIDED 2026-08-04: filed as `C44`, `wontfix`, closed.** You asked for a
-  reason on it *"so another agent doesn't get distracted by it again"* — the
-  entry now opens with a **STOP HERE** banner saying exactly that, above the
-  evidence. Nothing is owed and nothing will be built. → `agent/bugs/C44.md`.
+- ⭐ **DECISION FOR YOU: archive resolved decision bullets the way completed
+  test sections are archived?** (routed 2026-08-04 by the unattended-1
+  terminal audit, per your stale-records ask.) The checklist's documented rule
+  — a completed section moves WHOLE to `PLAYTEST_ARCHIVE.md`, deleted here, no
+  stub — covers *test sections*; the growing layer of struck-through ✅
+  DONE/DECIDED **decision bullets** has no rule. **Two clear cases were moved
+  as a worked example** (co-run #0, and the `LawOfficeDoor`/C44 call — both
+  fully closed, durable content already in `SESSION_LOG`/entries; see the
+  archive's "Resolved decision records" banner). **My recommendation:** adopt
+  the same treatment for the rest — move only bullets that are fully closed
+  with nothing owed to you; anything holding an open ask, an on-hold, or an
+  owed input (the relabel wording) stays here no matter how struck-through it
+  looks. Applying it today would move ~4 more bullets (~60 lines), including
+  the 41-line probe-gate record; cost is one commit. Say go/no-go.
 - ~~**The probe-gate blocker**~~ ✅ **DECIDED 2026-08-04 — you asked for the
   safest option and that is what was adopted: the tool was NOT loosened.**
 
@@ -770,26 +786,44 @@ our copy).
 that stopped happening, falsifies the conversion — say so and the copy form
 comes back from git (`3a6512f^`).
 
-### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through
+### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through · ⭐ mechanism link CLOSED 2026-08-04
 **Bug:** `PassageBase:TraverseTunnel` ends with a raw `unit.holder = nil`
 (`Lua/Passage.lua:1055`), which skips the call that would remove the colonist
 from the last passage element's `units` list. If so, demolishing that passage
 later teleports uninvolved colonists to it and cancels what they were doing.
-⚠️ **Source-only and unobserved** — one link in the chain (`LeadIn` actually
-setting the holder) was not traced, and this read settles it. → [C42](agent/bugs/C42.md)
+⭐ **The untraced link is TRACED and HOLDS (unattended-1 leg F, 2026-08-04;
+re-derived independently by the terminal audit):** a passage element IS a
+`Holder` (`Building`→`BaseBuilding`→`Holder`) and `LeadIn` really does set
+the holder, so the stale-entry mechanism is real as written — refined: **one**
+stale entry per traversal (on the last element entered), not N. The rig's
+post-load read was `C42STALE 0` over **0 unit entries** — UNSAMPLED, and
+nothing establishes `Holder.units` survives a load at all. → [C42](agent/bugs/C42.md)
 **Requirements:** a Passage with traffic. Nothing else; no cheats, no save
-juggling.
+juggling. ⛔ **The read must be WITHIN-SESSION** — after real traversals and
+**before any save or load** (a post-load zero is the F99 mistake shape).
 **Setup:** one console line, any time after some colonists have crossed —
 
 ```
 *r local a=0 for _, c in ipairs(Cities) do for _, p in ipairs(c.labels.Passage or empty_table) do for _, el in ipairs(p.elements or empty_table) do for _, u in ipairs(el.units or empty_table) do if u.holder ~= el then a=a+1 end end end end end ConsolePrint(print_format("C42STALE", a))
 ```
 
-**The counter can fail:** `0` refutes the entry outright and C42 gets closed;
-non-zero confirms the desync and the follow-up is to demolish that passage and
-watch whether an unrelated colonist teleports to it. Either way it is one line.
+**The counter can fail:** ⚠️ *(corrected 2026-08-04 by the unattended-1 audit —
+this line used to say "`0` refutes the entry outright", and that is wrong: a
+`0` counts as a refutation ONLY if the denominator was populated — units
+actually inside passage elements when the read runs, within-session.)* A `0`
+over a non-zero unit-entry population refutes the entry; a `0` over zero
+entries samples nothing. Non-zero confirms the desync and the follow-up is to
+demolish that passage and watch whether an unrelated colonist teleports to it.
 
-### Rider — F99: re-read the track residue BEFORE a reload · Status: unrun · **mode: unattended, STAGEABLE** (routing 2026-08-04 — the rig stages break + cheat + pre-reload read deliberately; owner-rule chain applies: Opus runs, Fable audits. The old TAKEABLE-WHEN framing — wait for a sitting to happen to use the cheat — is superseded)
+### Rider — F99: re-read the track residue BEFORE a reload · Status: **unrun — the rig RAN the recipe 2026-08-04 and the rider's own precondition never arose** · **mode: unattended, STAGEABLE** (routing 2026-08-04 — the rig stages break + cheat + pre-reload read deliberately; owner-rule chain applies: Opus runs, Fable audits. The old TAKEABLE-WHEN framing — wait for a sitting to happen to use the cheat — is superseded)
+⭐ **What the 2026-08-04 attempt (unattended-1 leg B) established:** one staged
+break + `CheatCompleteAllConstructions()` produced **zero** `:805` throws, so
+the "if `:805` appears" gate below never opened — the rider needs a run in
+which the throw actually happens. Gained anyway: `F99RESIDUE 0 0` pre-reload
+is the reading a *healthy* completion produces (so the fixup is no longer the
+only explanation shape); the `BreakTracks({element})` instrument is confirmed
+by execution (`repair_cgs` 0→1); and the counter has a liveness witness. Log:
+`docs/archive/u1c3_Mars.exe-20260804-17.06.05.log`; full record on the entry.
 **Bug:** the `F99RESIDUE 0 0` reading that made F99 look harmless was taken
 **after** a reload, and load runs `SavegameFixups.RebuildBrokenTracksAndConnect`,
 which sweeps exactly what the probe was looking for. The null result is
@@ -860,7 +894,7 @@ reachability audit's verdict. → [F06](agent/bugs/F06.md)
 
 # Any-save & factions
 
-### PT-35 — Save sanitizer does no harm (F35, F03) · Status: unrun (case A only; B/C parked) · **mode: UNATTENDED** (routing 2026-08-04 — all reads numeric + save/reload; owner-rule chain: Opus runs, Fable audits)
+### PT-35 — Save sanitizer does no harm (F35, F03) · Status: unrun (case A only; B/C parked) — ⭐ case A RAN unattended 2026-08-04: do-no-harm half PASSES, turbine half UNSAMPLED (fixture gap, see below) · **mode: UNATTENDED** (routing 2026-08-04 — all reads numeric + save/reload; owner-rule chain: Opus runs, Fable audits)
 **Bug:** the pack's two sanitizer passes run automatically on every load for
 every player, and the F03 pass REMOVES label modifiers from persisted colony
 state — this is the do-no-harm check on auto-running save-writing code, and

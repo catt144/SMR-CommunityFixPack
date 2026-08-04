@@ -395,6 +395,36 @@ not an achievement.
   edit's quoting was mangled, the `metadata.lua` line was silently not added,
   and the game launched unarmed — caught only by reading the tool output).
   Same hazard class as `git commit -m`; same remedy shape as `-F <file>`.
+  ⚠️ **C11 corollary (unattended-1, I2): a script file is not enough if its
+  OUTPUT is piped** — `… | Select-Object -First N` terminates the upstream
+  pipeline and can kill the arming script before its write executes. The game
+  launched unarmed and sat 8 minutes doing nothing, and the owner spotted it
+  before the run's own outside bound did. ⇒ **ARM GATE, binding:** before
+  every launch the launcher reads `metadata.lua` and the probe files back OFF
+  DISK and refuses to launch unarmed. Cost of the whole failure class: 8 min
+  → 0.2 s.
+- ⛔ **Harness-defect classes from unattended-1 (2026-08-04; 8-entry ledger,
+  0 of them the game's fault — 3 of 7 parse-GREEN, Src-verified parked probes
+  still produced wrong answers on their first run). Every brief guards
+  against these:**
+  1. **Resolution cross-check before launch** — diff the helper names USED
+     against the names DEFINED (one command). A parse sweep is a *syntax*
+     verdict, not a resolution one: `U1.ErrorWatchNote` was called by all 7
+     payloads and never existed; every cycle would have died as
+     `PAYLOAD ERROR`.
+  2. **A completion counter names its liveness WITNESS in the brief**
+     (leg-design rule 1, now a brief-authoring requirement): leg C's counter
+     was true on its first evaluation and scored 4 organic repairs having
+     observed none. The witness (damage actually seen before the wait) is
+     what let the re-run's 4/4 mean something.
+  3. **`pcall`'s result is always captured and printed** — two probes
+     discarded it, and in leg E that turned 34 raises into a confident false
+     sentence about vegetation: a swallowed raise and a nil return print
+     identically.
+  4. **Per-chain facts never live in per-process flags** — every cycle is a
+     fresh process; `save_proven=false` made a leg abort citing a proof that
+     had PASSED. Gate on the live check (list-before/list-after), or on the
+     recorded, archived fact — never on process state.
 - **Close-out runs `git status` in BOTH repos.** No gate anywhere checks the
   TestKit's working tree (measured 2026-08-04: a true, verified record sat
   stranded there for a day and surfaced only because a co-run happened to look),
@@ -430,8 +460,16 @@ survives in git — `git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPE
   agent-side with the game closed, because the mod environment has no
   file-delete primitive at all (`io`, `os` and `AsyncFileDelete` are all
   `ModEnvBlacklist` keys). **Save/reload legs are now inside the envelope.**
+  ⭐ **PROVEN 2026-08-04 by the full unattended-1 batch: the 7-cycle
+  unattended shape itself** — 7 good launches ≈ 9 min of machine time, owner
+  cost = the kickoff word. Component costs off the logs' own `Lua` markers
+  (EF-045's instrument): boot→menu **19.0–19.4 s** (the largest fixed cost —
+  batch legs per launch), cold load **9.6–10.1 s**, repeat load same map
+  **5.8–6.0 s**, save **0.58–0.63 s** across 5 saves.
 - **Still UNPROVEN (say so when planning):** the watchdog under a real wedge
-  (proven present, never fired). **DESCOPED, not pending:** Mod-Manager /
+  (proven present, never fired — ⛔ unattended-1's 8-minute unarmed stall was
+  a probe that never STARTED, so that run is NOT the watchdog's first test
+  and must not be quoted as one). **DESCOPED, not pending:** Mod-Manager /
   main-menu driving (blacklisted — the enable click stays human, P8 shape),
   MarsDebug unattended automation (modal asserts make debug legs attended BY
   CONSTRUCTION), OS-level input injection.
@@ -490,13 +528,30 @@ seconds, that is a co-run moment, not a sitting. When scoping any new test,
 name its mode in the brief; a leg that cannot say which mode it is has not
 said what its evidence will be.
 
-**Sign-off tiers: ROUTED 2026-08-04, ⛔ NOT IN FORCE.** The proposal (A
-witness / B evidence card, with a hands-vs-eyes axis / C delegated) is an
-owner decision on `PLAYTEST_CHECKLIST.md` "Decisions waiting on you" — it
-changes sign-off policy, which is the owner's. Until adopted, `tested` and
-per-item sign-off mean exactly what this document already says. ⚠️ The tiers
-are a *sign-off* axis, not this routing axis: the triage above says who is
-present during a leg; the tiers say what the owner reads afterwards.
+**Sign-off tiers: ✅ ADOPTED 2026-08-04 (owner, in their own hand on the
+checklist — `----Approved` on the tiers item; integrated by the unattended-1
+terminal audit).** Standing policy for every leg from here on:
+
+- **Tier A — WITNESS.** The owner's eyes genuinely add information the log
+  cannot carry; they attend the measure moment. Unchanged from before.
+- **Tier B — EVIDENCE CARD.** Log-demonstrable; the owner quick-reads a
+  one-screen card — scenario, forced-vs-organic, the raw before/after log
+  lines, run conditions, the one-sentence falsifier — and OKs it. Sub-class
+  **HANDS-ONLY**: a leg needing the owner's hands (a click, a cursor park)
+  but not their eyes — they do the named act, then read the card as Tier B.
+- **Tier C — DELEGATED.** Mechanically self-verifying (the probe-suite
+  class): ships on the suite verdict; the owner gets a one-line digest per
+  batch and keeps the veto.
+- **Visible demotion:** when a designed-A item's card turns out strictly
+  stronger than the eyes, the demotion is stated ON the card and applies to
+  the NEXT instance — never silently.
+
+⛔ **What adoption does NOT carry, in the item's own words:** *"`tested` still
+means a pass at the keyboard per WORKFLOW, and no already-granted status is
+reclassified."* Neither moves. ⚠️ The tiers are a *sign-off* axis, not this
+routing axis: the triage above says who is present during a leg; the tiers
+say what the owner reads afterwards. Owner-facing record of the decision:
+`PLAYTEST_CHECKLIST.md` "Decisions waiting on you", 2026-08-04.
 
 ## Release steps
 
@@ -507,6 +562,10 @@ present during a leg; the tiers say what the owner reads afterwards.
   (audit 2.1). `lua_revision` stays 350453.
 - MOD_DESCRIPTION.md: delete the `[DRAFT NOTE]` markers; do NOT promise the
   ClassicRockets export half; sync the fix list with agent/bugs/ statuses.
+  ⭐ **Add the "judgment calls" section** (owner ADOPTED the relabel proposal
+  2026-08-04: F55, F40, F73(b), F70, F97 presented as design-judgment repairs,
+  not plain bugs) — ⚠️ **its wording is OWED BY THE OWNER** and must be asked
+  for if it does not exist yet; the checklist line tracks it.
   **Recount the probe number** quoted in the "What we can promise, and what we
   can't" block — it moves whenever a wave file gains or loses a probe, and a
   stale number there is a false claim in player-facing text. Authoritative count
