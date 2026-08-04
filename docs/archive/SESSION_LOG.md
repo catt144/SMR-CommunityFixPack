@@ -8,6 +8,36 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-04 — post-close session (same day, Fable): sweep adopted, doccheck gains a TestKit line, `unattended-1` built and queued
+
+Same session as the chain close below, continuing on owner instructions.
+
+- **Owner GO on the TestKit hardening** → `doccheck.py` prints a
+  `TESTKIT TREE:` line every run (report-only, never blocks); verified on
+  the clean and planted-file paths.
+- **Routing triage written into `WORKFLOW.md`** (unattended / co-run /
+  playtest / organic-only); **owner ADOPTED the full-queue sweep** — 17
+  checklist items re-tagged with modes.
+- ⛔ **Sweep correction, visible on the checklist:** "no verified command
+  forces a dust storm" was table-staleness. `CheatDustStorm(storm_type,
+  setting)` is UNGATED (`DustStorm.lua:540`, `normal`/`great`/
+  `electrostatic`), and a static-charged dust devil is forcible outright
+  (`electro_chance=100` descr copy, `DustDevils.lua:138`). Both in the HELP
+  verified table as `[NEVER RUN]`. **F90 → co-run STAGEABLE**; PT-27/28
+  stop waiting sols for weather.
+- **Owner rules recorded** (WORKFLOW + CHAIN_METHOD): unattended work =
+  Opus-executes + Fable-audits, batches = full chain with terminal Fable
+  audit; terminal reports END with the next-chain kickoff line; mid-chain
+  unattended→co-run escalation is an OFFERED inserted prompt before the
+  audit (decline → checklist rider).
+- ⭐ **`unattended-1` chain BUILT and queued** (`agent/prompts/`, 3
+  prompts): PT-35 · F99 residue + no-cheat discriminator (kickoff = the
+  owner's "say the word") · re-scoped load-heal sweep · both `[NEVER RUN]`
+  executions · C42 ride-along. Known edge binned honestly: programmatic
+  `SaveGame` (`Savegame.lua:1071`) is Src-verified, never executed —
+  cycle 0 proves it before legs lean on it. Kickoff: Opus session on
+  `01_OPUS_PREP.md`.
+
 ## 2026-08-04 — corun-rig chain CLOSED (prompt 4, Fable): the audit held, the economics are real at n=1, the tiers are routed, the folder is empty
 
 **The 4-prompt kill-gated chain is complete.** Prompt 4 audited everything
