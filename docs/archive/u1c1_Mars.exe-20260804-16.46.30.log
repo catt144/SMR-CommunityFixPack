@@ -1,0 +1,488 @@
+					Render 0:00:00:005
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	35%
+					Render 0:00:00:006
+Disk Free      	756701 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:093
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:097
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:500
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:632
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:842
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:532
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:592
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:588
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:590
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:17:931
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:936
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+						Lua 0:00:17:937
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+						Lua 0:00:17:938
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+						Lua 0:00:17:939
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+						Lua 0:00:17:940
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:17:941
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+						Lua 0:00:17:942
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+						Lua 0:00:17:943
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+						Lua 0:00:17:944
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+						Lua 0:00:17:945
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:471
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:549
+Reloading done in 951 ms
+						Lua 0:00:18:895
+[preset] Preset postprocess took 71 ms.
+						Lua 0:00:18:955
+479 / 479 particle streams loaded in 56 ms.
+						Lua 0:00:18:956
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:146
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:203
+[mod] [U1C1] === unattended-1 U1C1 === watchdog 360000ms
+[U1C1] === unattended-1 U1C1 === watchdog 360000ms
+[mod] [U1C1] STEP 1-waiting-menu BEGIN
+[U1C1] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:204
+[PdxSDK] Started up. Took 1606
+						Lua 0:00:19:228
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:19:229
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:645
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:769
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:770
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:664
+[mod] [U1C1] STEP 1-waiting-menu END 2500ms
+[U1C1] STEP 1-waiting-menu END 2500ms
+[mod] [U1C1] STEP 2-load-1-staged BEGIN
+[U1C1] STEP 2-load-1-staged BEGIN
+						Lua 0:00:21:758
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:762
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:786
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:518
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 73.3 MB/s, average read 4948 bytes.
+						Lua 0:00:30:505
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:532
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:549
+Game Loaded in 8791 ms
+						Lua 0:00:30:594
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:380
+Game loaded on map BlankBigCanyonCMix_09 in 9716 ms
+[mod] [U1C1] LOAD OK #1 file=U1STAGE.savegame.sav — LoadGame returned no error
+[U1C1] LOAD OK #1 file=U1STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:687
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:880
+[mod] [U1C1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[U1C1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[mod] [U1C1] STEP 2-load-1-staged END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C1] STEP 2-load-1-staged END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C1] STEP D1-read-load-1 BEGIN
+[U1C1] STEP D1-read-load-1 BEGIN
+						Lua 0:00:46:881
+[mod] [U1C1] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg D1, load 1 — cold load of the staged copy
+[U1C1] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg D1, load 1 — cold load of the staged copy
+[mod] [U1C1] HEAL SWEEP load 1 (cold, staged copy) ----------------------------------------
+[U1C1] HEAL SWEEP load 1 (cold, staged copy) ----------------------------------------
+[mod] [U1C1] HEAL H1 astro: commander_profile=rocketscientist | colony label_modifier counts: AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1 | TOTAL=128
+[U1C1] HEAL H1 astro: commander_profile=rocketscientist | colony label_modifier counts: AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1 | TOTAL=128
+[mod] [U1C1] HEAL H2 saint: 13 dome(s), 12 carrying label modifiers, 47 modifier(s) total | APPLICABLE=true
+[U1C1] HEAL H2 saint: 13 dome(s), 12 carrying label modifiers, 47 modifier(s) total | APPLICABLE=true
+						Lua 0:00:46:883
+[mod] [U1C1] HEAL H3 biorobots: 0 biorobot(s), 0 carrying Dust Sickness | APPLICABLE=false
+[U1C1] HEAL H3 biorobots: 0 biorobot(s), 0 carrying Dust Sickness | APPLICABLE=false
+[mod] [U1C1] HEAL H4 suns: 2 ArtificialSun(s), 4 SolarPanel(s) | APPLICABLE=true
+[U1C1] HEAL H4 suns: 2 ArtificialSun(s), 4 SolarPanel(s) | APPLICABLE=true
+[mod] [U1C1] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[U1C1] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[mod] [U1C1] HEAL H6 rains: g_RainDisaster=false | RainsDisasterThreads=table entries=2 | APPLICABLE=true
+[U1C1] HEAL H6 rains: g_RainDisaster=false | RainsDisasterThreads=table entries=2 | APPLICABLE=true
+[mod] [U1C1] STEP D1-read-load-1 END 0ms
+[U1C1] STEP D1-read-load-1 END 0ms
+[mod] [U1C1] STEP D1-save BEGIN
+[U1C1] STEP D1-save BEGIN
+						Lua 0:00:46:885
+[mod] [U1C1] SAVE writing U1C1HEAL.savegame.sav (58 savegame-tagged files before)
+[U1C1] SAVE writing U1C1HEAL.savegame.sav (58 savegame-tagged files before)
+						Lua 0:00:47:513
+[mod] [U1C1] SAVE returned err=false name=U1C1HEAL.savegame.sav
+[U1C1] SAVE returned err=false name=U1C1HEAL.savegame.sav
+[mod] [U1C1] SAVE listed-after=true (59 savegame-tagged files after)
+[U1C1] SAVE listed-after=true (59 savegame-tagged files after)
+[mod] [U1C1] STEP D1-save END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C1] STEP D1-save END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C1] STEP 3-load-2-roundtrip BEGIN
+[U1C1] STEP 3-load-2-roundtrip BEGIN
+						Lua 0:00:47:651
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:52:800
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:52:826
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:52:843
+Game Loaded in 5193 ms
+						Lua 0:00:52:883
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:53:306
+Game loaded on map BlankBigCanyonCMix_09 in 5793 ms
+[mod] [U1C1] LOAD OK #2 file=U1C1HEAL.savegame.sav — LoadGame returned no error
+[U1C1] LOAD OK #2 file=U1C1HEAL.savegame.sav — LoadGame returned no error
+						Lua 0:00:54:606
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:55:606
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:08:806
+[mod] [U1C1] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[U1C1] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[mod] [U1C1] STEP 3-load-2-roundtrip END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C1] STEP 3-load-2-roundtrip END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C1] STEP D1-read-load-2 BEGIN
+[U1C1] STEP D1-read-load-2 BEGIN
+[mod] [U1C1] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=2 | note=leg D1, load 2 — first reload of the round-trip save
+[U1C1] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=2 | note=leg D1, load 2 — first reload of the round-trip save
+[mod] [U1C1] HEAL SWEEP load 2 (first reload) ----------------------------------------
+[U1C1] HEAL SWEEP load 2 (first reload) ----------------------------------------
+[mod] [U1C1] HEAL H1 astro: commander_profile=rocketscientist | colony label_modifier counts: AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1 | TOTAL=128
+[U1C1] HEAL H1 astro: commander_profile=rocketscientist | colony label_modifier counts: AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1 | TOTAL=128
+[mod] [U1C1] HEAL H2 saint: 13 dome(s), 12 carrying label modifiers, 47 modifier(s) total | APPLICABLE=true
+[U1C1] HEAL H2 saint: 13 dome(s), 12 carrying label modifiers, 47 modifier(s) total | APPLICABLE=true
+						Lua 0:01:08:808
+[mod] [U1C1] HEAL H3 biorobots: 0 biorobot(s), 0 carrying Dust Sickness | APPLICABLE=false
+[U1C1] HEAL H3 biorobots: 0 biorobot(s), 0 carrying Dust Sickness | APPLICABLE=false
+[mod] [U1C1] HEAL H4 suns: 2 ArtificialSun(s), 4 SolarPanel(s) | APPLICABLE=true
+[U1C1] HEAL H4 suns: 2 ArtificialSun(s), 4 SolarPanel(s) | APPLICABLE=true
+[mod] [U1C1] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[U1C1] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[mod] [U1C1] HEAL H6 rains: g_RainDisaster=false | RainsDisasterThreads=table entries=2 | APPLICABLE=true
+[U1C1] HEAL H6 rains: g_RainDisaster=false | RainsDisasterThreads=table entries=2 | APPLICABLE=true
+[mod] [U1C1] HEALDIFF load1->load2 astro: SAME  [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1] -> [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1]
+[U1C1] HEALDIFF load1->load2 astro: SAME  [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1] -> [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1]
+[mod] [U1C1] HEALDIFF load1->load2 saint: SAME  [47] -> [47]
+[U1C1] HEALDIFF load1->load2 saint: SAME  [47] -> [47]
+[mod] [U1C1] HEALDIFF load1->load2 bio: SAME  [0/0] -> [0/0]
+[U1C1] HEALDIFF load1->load2 bio: SAME  [0/0] -> [0/0]
+[mod] [U1C1] HEALDIFF load1->load2 suns: SAME  [2/4] -> [2/4]
+[U1C1] HEALDIFF load1->load2 suns: SAME  [2/4] -> [2/4]
+[mod] [U1C1] HEALDIFF load1->load2 meteor: SAME  [1.0.1|true] -> [1.0.1|true]
+[U1C1] HEALDIFF load1->load2 meteor: SAME  [1.0.1|true] -> [1.0.1|true]
+[mod] [U1C1] HEALDIFF load1->load2 rains: SAME  [false|2] -> [false|2]
+[U1C1] HEALDIFF load1->load2 rains: SAME  [false|2] -> [false|2]
+[mod] [U1C1] HEALDIFF load1->load2 VERDICT: 0 of 6 families changed (prediction: 0)
+[U1C1] HEALDIFF load1->load2 VERDICT: 0 of 6 families changed (prediction: 0)
+[mod] [U1C1] STEP D1-read-load-2 END 0ms
+[U1C1] STEP D1-read-load-2 END 0ms
+[mod] [U1C1] STEP 4-load-3-roundtrip BEGIN
+[U1C1] STEP 4-load-3-roundtrip BEGIN
+						Lua 0:01:08:956
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:01:14:166
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:14:167
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:14:193
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:01:14:211
+Game Loaded in 5255 ms
+						Lua 0:01:14:255
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:14:789
+Game loaded on map BlankBigCanyonCMix_09 in 5980 ms
+[mod] [U1C1] LOAD OK #3 file=U1C1HEAL.savegame.sav — LoadGame returned no error
+[U1C1] LOAD OK #3 file=U1C1HEAL.savegame.sav — LoadGame returned no error
+						Lua 0:01:16:093
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:17:092
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:30:287
+[mod] [U1C1] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[U1C1] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[mod] [U1C1] STEP 4-load-3-roundtrip END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C1] STEP 4-load-3-roundtrip END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C1] STEP D1-read-load-3 BEGIN
+[U1C1] STEP D1-read-load-3 BEGIN
+[mod] [U1C1] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=3 | note=leg D1, load 3 — second reload of the same file
+[U1C1] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=3 | note=leg D1, load 3 — second reload of the same file
+[mod] [U1C1] HEAL SWEEP load 3 (second reload) ----------------------------------------
+[U1C1] HEAL SWEEP load 3 (second reload) ----------------------------------------
+[mod] [U1C1] HEAL H1 astro: commander_profile=rocketscientist | colony label_modifier counts: AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1 | TOTAL=128
+[U1C1] HEAL H1 astro: commander_profile=rocketscientist | colony label_modifier counts: AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1 | TOTAL=128
+[mod] [U1C1] HEAL H2 saint: 13 dome(s), 12 carrying label modifiers, 47 modifier(s) total | APPLICABLE=true
+[U1C1] HEAL H2 saint: 13 dome(s), 12 carrying label modifiers, 47 modifier(s) total | APPLICABLE=true
+						Lua 0:01:30:289
+[mod] [U1C1] HEAL H3 biorobots: 0 biorobot(s), 0 carrying Dust Sickness | APPLICABLE=false
+[U1C1] HEAL H3 biorobots: 0 biorobot(s), 0 carrying Dust Sickness | APPLICABLE=false
+[mod] [U1C1] HEAL H4 suns: 2 ArtificialSun(s), 4 SolarPanel(s) | APPLICABLE=true
+[U1C1] HEAL H4 suns: 2 ArtificialSun(s), 4 SolarPanel(s) | APPLICABLE=true
+[mod] [U1C1] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[U1C1] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[mod] [U1C1] HEAL H6 rains: g_RainDisaster=false | RainsDisasterThreads=table entries=2 | APPLICABLE=true
+[U1C1] HEAL H6 rains: g_RainDisaster=false | RainsDisasterThreads=table entries=2 | APPLICABLE=true
+[mod] [U1C1] HEALDIFF load2->load3 astro: SAME  [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1] -> [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1]
+[U1C1] HEALDIFF load2->load3 astro: SAME  [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1] -> [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1]
+[mod] [U1C1] HEALDIFF load2->load3 saint: SAME  [47] -> [47]
+[U1C1] HEALDIFF load2->load3 saint: SAME  [47] -> [47]
+[mod] [U1C1] HEALDIFF load2->load3 bio: SAME  [0/0] -> [0/0]
+[U1C1] HEALDIFF load2->load3 bio: SAME  [0/0] -> [0/0]
+[mod] [U1C1] HEALDIFF load2->load3 suns: SAME  [2/4] -> [2/4]
+[U1C1] HEALDIFF load2->load3 suns: SAME  [2/4] -> [2/4]
+[mod] [U1C1] HEALDIFF load2->load3 meteor: SAME  [1.0.1|true] -> [1.0.1|true]
+[U1C1] HEALDIFF load2->load3 meteor: SAME  [1.0.1|true] -> [1.0.1|true]
+[mod] [U1C1] HEALDIFF load2->load3 rains: SAME  [false|2] -> [false|2]
+[U1C1] HEALDIFF load2->load3 rains: SAME  [false|2] -> [false|2]
+[mod] [U1C1] HEALDIFF load2->load3 VERDICT: 0 of 6 families changed (prediction: 0)
+[U1C1] HEALDIFF load2->load3 VERDICT: 0 of 6 families changed (prediction: 0)
+[mod] [U1C1] HEALDIFF load1->load3 astro: SAME  [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1] -> [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1]
+[U1C1] HEALDIFF load1->load3 astro: SAME  [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1] -> [128|AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1]
+[mod] [U1C1] HEALDIFF load1->load3 saint: SAME  [47] -> [47]
+[U1C1] HEALDIFF load1->load3 saint: SAME  [47] -> [47]
+[mod] [U1C1] HEALDIFF load1->load3 bio: SAME  [0/0] -> [0/0]
+[U1C1] HEALDIFF load1->load3 bio: SAME  [0/0] -> [0/0]
+[mod] [U1C1] HEALDIFF load1->load3 suns: SAME  [2/4] -> [2/4]
+[U1C1] HEALDIFF load1->load3 suns: SAME  [2/4] -> [2/4]
+[mod] [U1C1] HEALDIFF load1->load3 meteor: SAME  [1.0.1|true] -> [1.0.1|true]
+[U1C1] HEALDIFF load1->load3 meteor: SAME  [1.0.1|true] -> [1.0.1|true]
+[mod] [U1C1] HEALDIFF load1->load3 rains: SAME  [false|2] -> [false|2]
+[U1C1] HEALDIFF load1->load3 rains: SAME  [false|2] -> [false|2]
+[mod] [U1C1] HEALDIFF load1->load3 VERDICT: 0 of 6 families changed (prediction: 0)
+[U1C1] HEALDIFF load1->load3 VERDICT: 0 of 6 families changed (prediction: 0)
+[mod] [U1C1] STEP D1-read-load-3 END 0ms
+[U1C1] STEP D1-read-load-3 END 0ms
+[mod] [U1C1] STEP D1-verdict BEGIN
+[U1C1] STEP D1-verdict BEGIN
+[mod] [U1C1] LEG D1 READING COMPLETE. The verdict is assembled by prompt 2 from THREE things, and all three must be quoted together:
+[U1C1] LEG D1 READING COMPLETE. The verdict is assembled by prompt 2 from THREE things, and all three must be quoted together:
+[mod] [U1C1]   1. the three HEALDIFF VERDICT lines above (prediction: 0 families changed on each);
+[U1C1]   1. the three HEALDIFF VERDICT lines above (prediction: 0 families changed on each);
+[mod] [U1C1]   2. every pack heal line in this log, WITH the load it followed — a heal line after load 2 or load 3 is the defect;
+[U1C1]   2. every pack heal line in this log, WITH the load it followed — a heal line after load 2 or load 3 is the defect;
+[mod] [U1C1]   3. each family's APPLICABLE verdict — a family that read NOT-APPLICABLE was not sampled and must be reported as unsampled, never as clean.
+[U1C1]   3. each family's APPLICABLE verdict — a family that read NOT-APPLICABLE was not sampled and must be reported as unsampled, never as clean.
+[mod] [U1C1] STEP D1-verdict END 0ms
+[U1C1] STEP D1-verdict END 0ms
+[mod] [U1C1] ERRORWATCH U1C1 — every [LUA ERROR] in this log file between the '=== unattended-1 U1C1 ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=D1-verdict loads_this_process=3
+[U1C1] ERRORWATCH U1C1 — every [LUA ERROR] in this log file between the '=== unattended-1 U1C1 ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=D1-verdict loads_this_process=3
+[mod] [U1C1] === cycle 1 (leg D1) complete ===
+[U1C1] === cycle 1 (leg D1) complete ===
+[mod] [U1C1] SHUTDOWN done
+[U1C1] SHUTDOWN done
+						Lua 0:01:33:287
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:33:291
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:33:670
+
+
+*** Debug::Done()
+Time (ms)	93670
+
+

@@ -313,6 +313,26 @@ not by the format.
    heal numbers (the Astrogeologist +10% class of defect; two-for-two
    defective on the heals actually tested is the project's worst base rate).
    Design: `CHAIN_QA_REPORT.md` §9 item 2.
+   ⭐ **HALF DONE UNATTENDED, 2026-08-04, and it cost you nothing** — the
+   `unattended-1` chain re-scoped this into two legs and ran the first.
+   **Leg D1 (natural state) — RESULT: nothing fired, nothing repeated.** Three
+   loads of a staged copy of `TEST2H TRAIN` (load 1 cold, save, reload, reload),
+   pack **81/81 active as READ**, **0 `[LUA ERROR]`**, six heal families read
+   identically at every load: all three `HEALDIFF VERDICT` lines say **0 of 6
+   families changed**, and **not one pack heal line appears anywhere in the log**.
+   Log: `docs/archive/u1c1_Mars.exe-20260804-16.46.30.log`.
+   ⛔ **What that does and does not buy, because the difference is the whole
+   point.** It *does* falsify the F92 shape on this save — the identity-keyed
+   heal that turned 1 modifier into 2 after one save+reload would have shown as a
+   growing count, and `AutomaticMetalsExtractor` read 2 on all three loads — and
+   the F88 shape, the unlatched restart, which would have re-printed every load.
+   It does **not** test any heal doing its job: nothing was broken, so nothing
+   healed. Two families were **not sampled at all** — H1 astro (the colony runs
+   the **rocketscientist** commander, not astrogeologist) and H3 biorobots (0
+   biorobots on the save) — and are reported as unsampled, never as clean.
+   ⇒ **The remaining hour of your time is not owed:** leg D2 forces the defect
+   state and samples the heals firing. Your call is only whether the D2 result
+   plus this one closes the item.
 3. **The doctrine C-sitting** — closes the one INFERRED cell in the "OFF is
    three different things" doctrine, the one the owner said we cannot be wrong
    about. Protocol ready in `CHAIN_QA_REPORT.md` §1.3; the agent builds the
