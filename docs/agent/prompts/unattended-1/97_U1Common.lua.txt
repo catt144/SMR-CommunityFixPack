@@ -608,6 +608,26 @@ function U1.ReadDrones()
 	return #drones, #hubs
 end
 
+---- error-watch marker -------------------------------------------------------
+--
+-- ⚠️ ADDED 2026-08-04 by chain prompt 2's pre-launch probe-hygiene sweep, in the
+-- open (chain rule 5). All seven payload files call U1.ErrorWatchNote() as their
+-- last act and the function did not exist: a nil call raises, sprocall catches it
+-- in U1.Flow, and EVERY cycle would have shut down as "PAYLOAD ERROR at stage
+-- <last step>" with its closing banner missing. The parse sweep could not see
+-- this — 8/8 GREEN is a syntax verdict, not a resolution one.
+--
+-- What it may honestly do: NOT count [LUA ERROR] lines. The engine writes those
+-- straight to the log file and the mod environment has no file read (io and os
+-- are both keys of ModEnvBlacklist, Mod.lua:1424/:1425), so a count printed from
+-- in here would be invented. It prints the boundary a reader greps between
+-- instead, and names the attribution duty (WORKFLOW "never silently discount a
+-- line").
+function U1.ErrorWatchNote()
+	say(fmt("ERRORWATCH %s — every [LUA ERROR] in this log file between the '=== unattended-1 %s ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=%s loads_this_process=%d",
+		tostring(U1.tag), tostring(U1.tag), tostring(U1.stage), U1.loads))
+end
+
 ---- entry point used by every payload file ----------------------------------
 
 function U1.Boot()
