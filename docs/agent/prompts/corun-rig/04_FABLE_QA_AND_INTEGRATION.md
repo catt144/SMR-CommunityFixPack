@@ -98,27 +98,80 @@ CORRECTIONS**, so you run in full. Your primary evidence is `CORUN_RIG_SPEC.md`
 will follow. Three items are handed to you directly — the first two are yours to
 FIX or ROUTE, the third is yours to ADJUDICATE.)*
 
-- ***⛔ C5 IS DECIDED — DO NOT RE-OPEN IT. The owner ruled the same day
-  (2026-08-04), asked for the safest option, and got it: the tool is NOT
-  loosened.*** No declared-probe hatch is built in `doccheck.py`; the sweep stays
-  absolute. The protocol tightened instead — **`WORKFLOW.md` probe hygiene rule
-  5: a probe file is present in `Code/` only while its run is actually
-  happening.** Prep commits carry the probe's source as a fenced block in the
-  brief (inert by construction: the mod loads only files listed in
-  `metadata.lua` `code`), the file lands in `Code/` at the sitting, and it dies
-  in the commit that records its answer. A slipped sitting strands nothing and
-  arms nothing. **Your job on this is integration and audit only:** check that
-  rule 5 and the amended co-run bullet say the same thing, that nothing else in
-  the docs still implies prep may commit an armed probe, and that no session
-  since has quietly used `--no-verify`. ⚠️ If you think the rule is wrong,
-  ROUTE that — the owner's stated priority was safety over convenience and the
-  three candidate fixes below are recorded only so you can see what was
-  rejected: (a) a declared-probe manifest the sweep reads; (b) an explicit
-  `--declare <file>` argument; (c) the adopted one. The original framing follows
-  for context; it is superseded, not live.
+- ***⚖️ C5 — DECIDED AND IN FORCE, BUT THE OWNER HAS EXPLICITLY ASKED YOU TO
+  RECHECK IT. This is a named job, not permission to bikeshed.*** Owner,
+  2026-08-04, on being shown the decision as committed: ***"flag probe gate
+  issue for 04 QA to recheck your findings, my decision, but let it know I am
+  open to recommendations."*** So **both layers are in scope for your audit**:
+  prompt 2's *diagnosis*, and the *rule* adopted on top of it. The rule stays in
+  force while you work — it is not suspended pending your verdict — and if you
+  find something better you **ROUTE it with a recommendation**, which the owner
+  has pre-committed to reading.
 
-  *(Superseded context — `doccheck.py` and `WORKFLOW.md` disagreed about probe
-  hygiene, and the tool was the stricter one.)*
+  **What was decided.** The tool was NOT loosened: no declared-probe hatch in
+  `doccheck.py`, sweep stays absolute, `--no-verify` explicitly rejected
+  (its documented meaning would be a false statement). The protocol tightened
+  instead — **`WORKFLOW.md` probe hygiene rule 5: a probe file is present in
+  `Code/` only while its run is actually happening.** Prep commits the probe's
+  source as a fenced block in the brief; the file lands in `Code/` at the
+  sitting and dies in the commit recording its answer. Rejected alternatives, so
+  you can see the space rather than just the winner: (a) a declared-probe
+  manifest the sweep reads; (b) an explicit `--declare <file>` argument the
+  commit body must quote.
+
+  ***RECHECK 1 — is the diagnosis even right?*** Verify from primary sources,
+  not from prompt 2's summary: that `temporary_sweep()`
+  (`tools/doccheck.py:501-517`) really has no conditional path; that
+  `tools/hooks/pre-commit` really blocks on red; that `WORKFLOW.md`'s CLEAN
+  definition really carries the "or declared" clause prompt 2 quoted. If any of
+  those is misread, the whole decision rests on nothing and the owner needs to
+  know that first.
+
+  ***RECHECK 2 — the load-bearing claim prompt 2 did NOT verify, and says so.***
+  The rule's entire safety argument is that a probe parked in a doc is **inert by
+  construction** because the mod loads only files listed in `metadata.lua`
+  `code`. Prompt 2 asserted this from `95_AutoRun.lua`'s header (mod code cannot
+  test for a file's existence — the sandbox removes every `Async*` file API) plus
+  the items.lua/metadata sync rule, and **did not confirm from `Mod.lua` that
+  `ModsLoadCode` reads only the `code` list.** ⚠️ Tagged as a ROUTE claim per R3.
+  Note the narrower version is much safer and may be all that is needed: a file
+  **outside `Code/` entirely** is not loaded by anything, whatever the loader
+  does with `Code/`. Confirm which version the rule actually needs, and say so.
+
+  ***RECHECK 3 — the strongest objections to the rule, found by prompt 2 against
+  its own recommendation. Do not treat these as settled.***
+  - **It moves probe authoring next to the attended window.** The parse sweep is
+    binding before every launch and can only run on a real file, so a syntax
+    error in the committed *text* is now discovered at the sitting rather than in
+    prep. ⭐ Candidate mitigation worth testing: during prep, paste the file in,
+    run the parse sweep, delete it again, and record `parse sweep GREEN on the
+    committed source at <sha>`. That restores the check to prep at zero risk —
+    but it is untested and adds a step someone can skip.
+  - **It forbids a class of instrument the project actually uses.** An
+    instrument meant to ride along through the owner's ORGANIC play for days
+    (C41's `F76MISS` hook is this shape) cannot exist as a `TEMPORARY` file
+    under rule 5. Prompt 2's reading is that this is the rule working, not
+    failing — armed instrumentation running during organic play IS the
+    2026-07-31 contamination — and that such instruments belong in
+    `90_Loggers.lua` behind an explicit on/off toggle, permanent and
+    non-`TEMPORARY` by design. **Test that reading.** If it holds, say it in
+    `WORKFLOW.md` so the next session does not read rule 5 as banning
+    long-lived instruments outright.
+  - **Nothing verifies the TestKit working tree afterwards.** A probe placed and
+    deleted leaves that repo clean, but no gate checks — same blind spot as the
+    stranded `96_AutoRunFlag.lua` edit below. The two items may share one fix.
+
+  ***RECHECK 4 — integration hygiene, regardless of your verdict.*** Rule 5 and
+  the amended co-run bullet must say the same thing; nothing else in the docs may
+  still imply prep can commit an armed probe; no commit since 2026-08-04 may have
+  quietly used `--no-verify`.
+
+  ⛔ **Tiebreak if you are torn:** the owner's stated priority was **safety over
+  convenience**, in their own words *"I do not want to get back into the
+  situations where armed probes start giving us false problems or issues."* A
+  recommendation that is more convenient and slightly less safe is not
+  responsive to what was asked. One that is *equally* safe and less awkward is
+  exactly what they opened the door for.
   `WORKFLOW.md` "Probe hygiene" defines CLEAN as *"zero hits, **or** every hit is
   a probe that THIS session's test design explicitly declares it needs — named in
   the brief and in the todo list."* `doccheck.py`'s `temporary_sweep()`

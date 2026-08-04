@@ -421,8 +421,13 @@ a re-choice of save — the save is otherwise richer than the record suggested.
   sitting and dies in the commit that records the answer. A slipped sitting then
   strands nothing and arms nothing. ⛔ `--no-verify` was never an option: the
   hook documents its meaning as "the docs are inconsistent, I know", which is a
-  false statement when the only red is a declared probe. **Prompt 4 integrates
-  this decision; it does not re-open it.**
+  false statement when the only red is a declared probe. ⚖️ **The owner has
+  asked prompt 4 to RECHECK both prompt 2's diagnosis and their own decision,
+  and is open to recommendations** (2026-08-04) — the rule stays in force
+  meanwhile. Prompt 4's note carries the four recheck targets, including the one
+  claim prompt 2 did not verify (that `ModsLoadCode` reads only the
+  `metadata.lua` `code` list) and the strongest objections prompt 2 found
+  against its own recommendation.
 
 ### What may NOT be claimed from this run
 

@@ -202,6 +202,15 @@ metadata/items lines, commit) or stops and reports.
    **If the sitting slips, nothing is stranded and nothing is armed** — which is
    the whole point.
 
+   ⚖️ **In force, and under an owner-requested recheck** (2026-08-04): the owner
+   asked corun-rig prompt 4 to audit both the diagnosis behind this rule and the
+   rule itself, and is open to a better recommendation. **Follow it meanwhile.**
+   Two things it does NOT say, so nobody reads them into it: it does not ban
+   long-lived instrumentation (that belongs in `90_Loggers.lua` behind an
+   explicit toggle, permanent and non-`TEMPORARY` by design), and it does not
+   excuse skipping the parse sweep — which now runs at the sitting, on the real
+   file, before the launch, exactly as before.
+
 ## Testing checklist per fix
 
 **Leg-design rules (adopted 2026-08-04, from the first campaign sittings —

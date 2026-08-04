@@ -130,6 +130,16 @@ these used to be filed only in agent reports, which is where you never read.
   loads files listed in `metadata.lua`, all under `Code/` — so it is inert by
   construction, not merely unused. If a sitting slips, nothing is stranded and
   nothing is armed.
+
+  ⚖️ **You asked for it to be rechecked, and it will be.** Prompt 4 of the
+  corun-rig chain now has a named job to audit **both** my diagnosis and your
+  decision, told plainly that you are open to recommendations. It has four
+  specific targets, including the one claim I asserted but did **not** verify
+  from source (that the game loads only the files listed in `metadata.lua` —
+  the rule's entire safety argument rests on it) and the three strongest
+  objections I could find against my own recommendation. The rule is in force
+  meanwhile; if prompt 4 finds something equally safe and less awkward, it comes
+  back to you as a recommendation rather than a change.
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for
