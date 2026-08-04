@@ -39,9 +39,15 @@ experiment.
 units, "OWNER SITS DOWN HERE" marked.
 
 **Job 2 — prep unattended:** probe sweep (record the line); staged save copy;
-scenario scripts as `TEMPORARY` TestKit files; parse sweep; measure-moments
-list with the owner's verdict words pre-written ("train left / train stuck",
-"picker appeared / missing", …).
+~~scenario scripts as `TEMPORARY` TestKit files~~ ⛔ **CORRECTED 2026-08-04 —
+this line is now WRONG and would break a binding rule.** `WORKFLOW.md` probe
+hygiene **rule 5** (owner decision, adopted after this prompt was written): *a
+probe file is present in `Code/` only while its run is actually happening.*
+So prep writes the scenario scripts **as fenced code blocks in this file**, not
+as files in `Code/` — they land in `Code/` at the sitting and die in the commit
+that records their answers. See prompt 2's outbox below for the mechanics;
+`parse sweep`; measure-moments list with the owner's verdict words pre-written
+("train left / train stuck", "picker appeared / missing", …).
 
 **Job 3 — the run**, batched: fixed cost first (launch, load, warm-up per
 spec), then payload items in the order above — owner-needed items
@@ -133,12 +139,39 @@ What changes your jobs:*
   of it MUST be installed on the classdef at mod-FILE scope, before flattening.
   An apply()-time wrap never reaches `Colonist`. Same trap shape as the A2
   lesson; it cost nothing here only because it was caught by reading first.*
-- ***One process wrinkle you inherit (§8 C5):** `doccheck.py` reds on ANY
-  `TEMPORARY` hit with no escape hatch, while `WORKFLOW.md` permits a declared
-  probe. **If your owner window is not immediate, you cannot commit prep.** Plan
-  to land prep and results in one commit as this run did, or take the blocker to
-  prompt 4 — do not reach for `--no-verify`, whose documented meaning would be a
-  false statement.*
+- ***⛔ A BINDING RULE LANDED AFTER YOUR BODY WAS WRITTEN, AND IT CHANGES YOUR
+  JOB 2 (which is struck above).*** `doccheck.py` reds on ANY `TEMPORARY` hit
+  with no escape hatch and the pre-commit hook blocks, so prep **cannot** commit
+  an armed probe (§8 C5). The owner ruled on it the same day and asked for the
+  safest option: the tool was **not** loosened. **`WORKFLOW.md` probe hygiene
+  rule 5 now binds you — a probe file is present in `Code/` only while its run
+  is actually happening.** In practice:
+  1. **Prep commit:** staged save, measure-moments list, doc edits, and each
+     scenario script **as a fenced Lua block inside this prompt file**. A probe
+     parked in a doc is inert by construction — the mod loads only files listed
+     in `metadata.lua` `code`, all under `Code/` — so nothing is armed.
+  2. ⭐ **Still run the parse sweep in prep.** Rule 5's known weak spot is that
+     it pushes syntax errors to the sitting. Untested mitigation, and you are the
+     first to try it: paste the file into `Code/`, parse-sweep it, delete it
+     again, and record `parse sweep GREEN on the source at <sha>` in the prep
+     commit. **Report whether this worked — prompt 4 is auditing rule 5 and this
+     is live evidence.**
+  3. **At the sitting:** write the files into `Code/`, add the metadata lines,
+     parse sweep again, launch.
+  4. **Result commit:** files AND metadata lines deleted, `PROBE SWEEP:` line
+     present. Rule 2 unchanged.
+  ⛔ `--no-verify` is barred — its documented meaning ("the docs are
+  inconsistent, I know") would be a false statement when the only red is a
+  declared probe.*
+- ***Do not sweep the TestKit's stray edit into your commits.*** `C:\Dev\SMR-
+  BugFixPack-TestKit` carries an **uncommitted comment-only change to
+  `Code/96_AutoRunFlag.lua`** from the 2026-08-03 MarsDebug session (an
+  `EXECUTED ONCE` marker for the 87/87 pass). It predates this chain and is not
+  a probe. You WILL be running `git` in that repo. **Do not `git add -A` it into
+  a co-run commit** — that smears provenance across sessions, which is what the
+  drift-evidence rule exists to stop. Leave it, or commit it **alone with its
+  own message**. Flagged to prompt 4 alongside the wider point that nothing
+  anywhere verifies the TestKit's working tree is clean.*
 - ***Not caused by our leg, reported anyway** (WORKFLOW's log rule): two
   `[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_
   idle.hgacl` / `_opening.hgacl` lines fire on every load of this map. They are
