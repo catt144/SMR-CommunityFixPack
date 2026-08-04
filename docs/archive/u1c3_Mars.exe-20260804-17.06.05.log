@@ -1,0 +1,333 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	35%
+Disk Free      	756563 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:090
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:093
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:507
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:637
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:839
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:507
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:561
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:562
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:564
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:17:908
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:912
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:913
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+						Lua 0:00:17:914
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:17:915
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+						Lua 0:00:17:916
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+						Lua 0:00:17:917
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+						Lua 0:00:17:918
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+						Lua 0:00:17:919
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+						Lua 0:00:17:920
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+						Lua 0:00:17:921
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+						Lua 0:00:17:922
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:457
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:532
+Reloading done in 959 ms
+						Lua 0:00:18:861
+[preset] Preset postprocess took 63 ms.
+						Lua 0:00:18:920
+479 / 479 particle streams loaded in 55 ms.
+						Lua 0:00:18:921
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:111
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:165
+[mod] [U1C3] === unattended-1 U1C3 === watchdog 360000ms
+[U1C3] === unattended-1 U1C3 === watchdog 360000ms
+[mod] [U1C3] STEP 1-waiting-menu BEGIN
+[U1C3] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:166
+[PdxSDK] Started up. Took 1593
+						Lua 0:00:19:189
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:614
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:779
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:626
+[mod] [U1C3] STEP 1-waiting-menu END 2500ms
+[U1C3] STEP 1-waiting-menu END 2500ms
+[mod] [U1C3] STEP 2-load-staged BEGIN
+[U1C3] STEP 2-load-staged BEGIN
+						Lua 0:00:21:725
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:732
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:759
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:505
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 72.9 MB/s, average read 4948 bytes.
+						Lua 0:00:30:461
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:489
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:507
+Game Loaded in 8782 ms
+						Lua 0:00:30:556
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:310
+Game loaded on map BlankBigCanyonCMix_09 in 9684 ms
+[mod] [U1C3] LOAD OK #1 file=U1STAGE.savegame.sav — LoadGame returned no error
+[U1C3] LOAD OK #1 file=U1STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:610
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:808
+[mod] [U1C3] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[U1C3] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+						Lua 0:00:46:809
+[mod] [U1C3] STEP 2-load-staged END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C3] STEP 2-load-staged END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C3] STEP B0-baseline BEGIN
+[U1C3] STEP B0-baseline BEGIN
+[mod] [U1C3] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg B, cold load — before any break
+[U1C3] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg B, cold load — before any break
+[mod] [U1C3] TRACKS 17 track(s), 926 element(s), 0 already broken, 0 repair site(s), 896 break-candidate(s)
+[U1C3] TRACKS 17 track(s), 926 element(s), 0 already broken, 0 repair site(s), 896 break-candidate(s)
+[mod] [U1C3] F99RESIDUE 0 0  (B0 baseline, nothing broken yet)
+[U1C3] F99RESIDUE 0 0  (B0 baseline, nothing broken yet)
+[mod] [U1C3] STEP B0-baseline END 0ms
+[U1C3] STEP B0-baseline END 0ms
+[mod] [U1C3] STEP B1-pick BEGIN
+[U1C3] STEP B1-pick BEGIN
+[mod] [U1C3] B1 TARGET element=TrackGridElement#4573 track=TrackBase#4569 | track elements=4 repair_cgs=0 under_construction=0
+[U1C3] B1 TARGET element=TrackGridElement#4573 track=TrackBase#4569 | track elements=4 repair_cgs=0 under_construction=0
+[mod] [U1C3] STEP B1-pick END 0ms
+[U1C3] STEP B1-pick END 0ms
+[mod] [U1C3] STEP B2-break BEGIN
+[U1C3] STEP B2-break BEGIN
+[mod] [U1C3] B2 FORCED: BreakTracks({element}) — the meteor's own funnel, lottery removed
+[U1C3] B2 FORCED: BreakTracks({element}) — the meteor's own funnel, lottery removed
+						Lua 0:00:49:809
+[mod] [U1C3] B2 break call ok=true | element broken=table: 0000023371133218 | track repair_cgs=1 under_construction=1
+[U1C3] B2 break call ok=true | element broken=table: 0000023371133218 | track repair_cgs=1 under_construction=1
+[mod] [U1C3] F99RESIDUE 0 0  (B2 after the break, before any completion)
+[U1C3] F99RESIDUE 0 0  (B2 after the break, before any completion)
+[mod] [U1C3] STEP B2-break END 3000ms
+[U1C3] STEP B2-break END 3000ms
+[mod] [U1C3] STEP B3-settle-site BEGIN
+[U1C3] STEP B3-settle-site BEGIN
+[mod] [U1C3] B3 repair site present=true after wait | under_construction=1
+[U1C3] B3 repair site present=true after wait | under_construction=1
+[mod] [U1C3] STEP B3-settle-site END 0ms
+[U1C3] STEP B3-settle-site END 0ms
+[mod] [U1C3] STEP B4-complete BEGIN
+[U1C3] STEP B4-complete BEGIN
+[mod] [U1C3] B4 FORCED: CheatCompleteAllConstructions() — ⛔ EVERY [LUA ERROR] BETWEEN THIS MARKER AND THE NEXT BELONGS TO THIS CALL
+[U1C3] B4 FORCED: CheatCompleteAllConstructions() — ⛔ EVERY [LUA ERROR] BETWEEN THIS MARKER AND THE NEXT BELONGS TO THIS CALL
+						Lua 0:00:49:813
+
+!!! Quick Build !!!
+						Lua 0:00:54:811
+[mod] [U1C3] B4 completion call ok=true — ⛔ END OF THE COMPLETION WINDOW
+[U1C3] B4 completion call ok=true — ⛔ END OF THE COMPLETION WINDOW
+[mod] [U1C3] STEP B4-complete END 5000ms
+[U1C3] STEP B4-complete END 5000ms
+[mod] [U1C3] STEP B5-residue BEGIN
+[U1C3] STEP B5-residue BEGIN
+[mod] [U1C3] B5 THE READING THIS LEG EXISTS FOR — taken with NO save and NO load anywhere after the break, so RebuildBrokenTracksAndConnect (TrackElement.lua:824-837) has not run.
+[U1C3] B5 THE READING THIS LEG EXISTS FOR — taken with NO save and NO load anywhere after the break, so RebuildBrokenTracksAndConnect (TrackElement.lua:824-837) has not run.
+[mod] [U1C3] F99RESIDUE 0 0  (B5 PRE-RELOAD residue)
+[U1C3] F99RESIDUE 0 0  (B5 PRE-RELOAD residue)
+[mod] [U1C3] TRACKS 17 track(s), 926 element(s), 0 already broken, 0 repair site(s), 896 break-candidate(s)
+[U1C3] TRACKS 17 track(s), 926 element(s), 0 already broken, 0 repair site(s), 896 break-candidate(s)
+[mod] [U1C3] B5 SUMMARY a=0 husk track(s) with an empty element list | b=0 track(s) with outstanding repair_cgs and nothing under construction to clear them
+[U1C3] B5 SUMMARY a=0 husk track(s) with an empty element list | b=0 track(s) with outstanding repair_cgs and nothing under construction to clear them
+[mod] [U1C3] B5 ⛔ WHAT THIS CANNOT SAY: nothing about reachability. One break, one completion, under the cheat. A non-zero b is residue the reload would have hidden; a zero b is a rate bound on ONE forced break in this configuration, not evidence of no damage.
+[U1C3] B5 ⛔ WHAT THIS CANNOT SAY: nothing about reachability. One break, one completion, under the cheat. A non-zero b is residue the reload would have hidden; a zero b is a rate bound on ONE forced break in this configuration, not evidence of no damage.
+[mod] [U1C3] STEP B5-residue END 0ms
+[U1C3] STEP B5-residue END 0ms
+						Lua 0:00:54:812
+[mod] [U1C3] ERRORWATCH U1C3 — every [LUA ERROR] in this log file between the '=== unattended-1 U1C3 ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=B5-residue loads_this_process=1
+[U1C3] ERRORWATCH U1C3 — every [LUA ERROR] in this log file between the '=== unattended-1 U1C3 ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=B5-residue loads_this_process=1
+[mod] [U1C3] === cycle 3 (leg B) complete ===
+[U1C3] === cycle 3 (leg B) complete ===
+[mod] [U1C3] SHUTDOWN done
+[U1C3] SHUTDOWN done
+						Lua 0:00:57:808
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:57:810
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:58:184
+
+
+*** Debug::Done()
+Time (ms)	58184
+
+
