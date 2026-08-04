@@ -52,6 +52,16 @@ CLOSED line (cap 60, evict in-commit). SESSION_LOG: the chain's record,
 newest-first. `CHAIN_METHOD.md`: what this chain teaches (a kill-gated
 build chain is a new shape — §5 candidate).
 
+⛔ **ANTI-SPRAWL RULE (owner, 2026-08-04 — the restructure was hard-won).**
+This chain may create NO new standing document, folder, or document class.
+Evidence cards are TRANSIENT sign-off artifacts: their surviving content is
+the entry's citation of raw log lines plus the archived log (R8), never a
+cards/ collection. Tier C digests live on existing surfaces (the checklist or
+`ListFixes`-style output), not a new doc. The owner-facing surface remains
+exactly `PLAYTEST_CHECKLIST.md` + `PLAYTEST_HELP.md`. If something genuinely
+seems to need a new home, that is an owner decision — ROUTE it, do not create
+it.
+
 **Job 6 — close the chain.** Delete `CORUN_RIG_SPEC.md`, this file and
 `README.md`; folder gone. Same commit carries the outcome where it will be
 found. Then report to the owner: what ran, what it cost them vs. promised,
