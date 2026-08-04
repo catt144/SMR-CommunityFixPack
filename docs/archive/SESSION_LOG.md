@@ -8,6 +8,20 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## Evicted from STATE.md 2026-08-03 — the D12 / PT-62 P4/P6 result, recorded and gated elsewhere
+
+Moved out to pay for the MarsDebug complete-coverage line (mechanical rule 8).
+The gate itself STAYS on STATE.md, with the owner's "not a release gate" call and
+the owed items intact; only the narrative moved. Full record: `agent/bugs/D12.md`.
+
+✅ **D12 — PT-62 P4/P6 PASS 2026-08-03** (attended): dome ran homeless
+**23 → 10 → 0**, `overpop true → false`, 0 leaked subjects. ⭐ Owner: a win
+needing more testing, ⛔ **NOT a release gate** (opt-in). Status stays `speced`.
+Owed: P12/P13/P14 + the split loop counter through a landing. ⚠️ The old loop
+check **could not fail** (it counted delivery a flagged dome must receive).
+
+---
+
 ## Evicted from STATE.md 2026-08-03 — F76 closure + the docs restructure, both resolved
 
 Moved out of STATE.md by the F11-rider sitting to pay for the F11 result and the

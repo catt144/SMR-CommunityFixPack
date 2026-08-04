@@ -417,6 +417,70 @@ different path, the module toggle rather than the pack.)*
 
 ---
 
+## The MarsDebug `[install]` pass — how to get the last 9 probes to report
+
+**✅ EXECUTED ONCE, 2026-08-03 — the procedure is verified, not merely written**
+(the standing rule: a test's own procedure is unverified until it has been run).
+It produced **`87 PASS, 0 FAIL, 0 SKIP, 0 ERROR`** — the first complete probe
+coverage this project has had. Log:
+`docs/archive/logs/MarsDebug.exe-20260803-23.14.05-6a22b8b3.log`.
+
+**Why it exists.** On retail, 8 `[install]` probes SKIP with `introspection
+unavailable (retail sandbox)`: they call `SMRTest.SourceOf(fn)` to confirm the
+patched function's source lives in the fix pack's folder, and `debug.getinfo` is
+unreachable from mod code (`agent/facts/EF-010`). The console is sandboxed with
+the same blacklist, so the bridge cannot be typed either — and `ConsoleExec` is
+itself blacklisted, so it cannot be automated from mod code. **Only an asserts
+build un-sandboxes the console** (`console.lua:36-44`), which is what makes this
+leg possible at all. Rationale in `TestKit/Code/00_TestCore.lua:60-80`.
+
+1. Game fully closed (`tasklist`). Arm **both**: uncomment
+   `"Code/96_AutoRunFlag.lua"` in the TestKit metadata `code` list, AND
+   uncomment `SMRTest_AutoRunSetupOnly = true` inside that file. SetupOnly is
+   what makes it attended — the harness builds the colony, stops its watchdog,
+   and hands over instead of running the suite and quitting
+   (`95_AutoRun.lua:293-296`).
+2. Launch via **Steam's own launch picker → "Play Surviving Mars: Relaunched
+   (debugging mode for mod creators)"**. Leave "Always use this option"
+   unticked. (Running `MarsDebug.exe` directly also works but skips Steam's
+   environment setup; prefer the picker.) `-applaunch 3215050` starts
+   **`Mars.exe`** and is the wrong path for this leg.
+3. ⚠️ **EXPECT MODAL `Assert failed` DIALOGS, and expect more of them AFTER the
+   `SETUP-ONLY: colony ready.` line prints.** Click **Ignore All** on every one
+   (never Debug, never Exit Game); the asserts still reach the log. This is the
+   one thing the written procedure did not warn about and it is why the leg kept
+   getting deferred. They are **vanilla synthetic-map noise the retail build
+   swallows silently** — the 2026-08-03 run had exactly TWO distinct asserts,
+   `Flight.lua:465 objects_to_mark` and `Flight.lua:479 objects_to_unmark`, and
+   every dialog was a repeat of those. No Lua switch suppresses them (the assert
+   dialog is an engine binding). If they become unmanageable, PAUSE the game —
+   the source is game-time rocket-flight code, and `*r SMRTest.RunAll()` runs in
+   a real-time thread so it still executes while paused.
+4. At the console:
+   `SMRTest.EnableIntrospection(debug)` — **must print `true`.** Anything else
+   and the leg is void: it would mean the asserts build's console is still
+   sandboxed and `00_TestCore.lua`'s premise is wrong. Then
+   `*r SMRTest.RunAll()` (the `*r` matters — a bare call has no thread context).
+   Then `FlushLogFile()`.
+5. **Disarm afterwards**: re-comment both lines.
+
+### ⛔ NEVER read a MarsDebug tally as a retail tally
+
+**The debug build's `87/87` is not a better version of retail's `78 PASS / 9
+SKIP` — it is a DIFFERENT measurement, and for at least one probe a misleading
+one.** `TechDescriptionBuilding` SKIPs on retail (`the tech has no description
+T`) and **PASSes on MarsDebug** (`description names Underground Medium Dome`).
+That is not the probe improving: it is **F98** — `T(id, text)` discards the
+replacement literal in a non-dev build (`localization.lua:250-252`) but keeps it
+in a dev build, so `Fix_TechDescriptionBuilding` genuinely works here and is a
+no-op in the build players use. The probe therefore reports green in the only
+environment where the fix works and is silent in the one that matters.
+**Quoting "87 PASS" as evidence the pack is healthy on retail would be wrong,
+specifically about F25/F98.** Retail coverage is `78/87` and the 9 that do not
+report there are a known, enumerated set — that is the number to quote.
+
+---
+
 ## Save fixtures — create these once, reuse them
 
 Make each one, then **save under the given name**. Every open test below names its

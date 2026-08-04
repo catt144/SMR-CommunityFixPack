@@ -30,25 +30,25 @@ Pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 ⚖️ **F76 CLOSED-REFUTED, P1 released** (evicted to SESSION_LOG). Live residue:
 **`C41` (cand)**, instrument `F76MISS`; MOD_DESCRIPTION's F76 note is VOID.
 
-✅ **D12 — PT-62 P4/P6 PASS 2026-08-03** (attended): dome ran homeless
-**23 → 10 → 0**, `overpop true → false`, 0 leaked subjects. ⭐ Owner: a win
-needing more testing, ⛔ **NOT a release gate** (opt-in). Status stays `speced`.
-Owed: P12/P13/P14 + the split loop counter through a landing. ⚠️ The old loop
-check **could not fail** (it counted delivery a flagged dome must receive).
-
-✅ **F11 rider RUN AND SETTLED 2026-08-03** (attended) — abduction keeps
-`train.units` synced on BOTH maps (`table.find` → `nil`, `#units` 6,
-`holder == rocket` true), so F11's guarded state has **no demonstrated producer**
-and the audit's `TransferToMap` hypothesis is refuted by measurement. Old entry
-cited the wrong class in the wrong file; route corrected. ⭐ Owner: keep `P1`?
+✅ **F11 rider RUN AND SETTLED 2026-08-03** — abduction keeps `train.units`
+synced on BOTH maps (`table.find` → `nil`, `#units` 6, `holder == rocket` true):
+**no demonstrated producer**, `TransferToMap` hypothesis refuted by measurement.
+Entry's old citation was the wrong class/file; corrected. ⭐ Owner: keep `P1`?
 
 ⚠️ **F99 filed (`cand`)** — 14 × `TrackElement.lua:805` `start_el` nil in ~1h,
 **every hit under `CheatCompleteAllConstructions()`**; vanilla, no-cheat
 reachability UNPROVEN. ⭐ Owner: severity. (Both new items → checklist.)
 
+⭐ **FIRST COMPLETE PROBE COVERAGE 2026-08-03** — MarsDebug `[install]` pass
+(EXECUTED-ONCE, `PLAYTEST_HELP`): **87 PASS / 0 FAIL / 0 SKIP**. ⛔ **Never quote
+as retail health** — `TechDescriptionBuilding` PASSes there, SKIPs on retail (F98
+from the second side). **Retail coverage is 78/87.**
+
 ## Gates and holds
 
-- **PT-62 remainder** (P12, P13, P14, landing check) → D12 — ⛔ NOT a release gate.
+- **PT-62 remainder** (P12/P13/P14 + the split loop counter through a landing)
+  → D12; P4/P6 PASSED 2026-08-03, ⭐ owner calls it a win needing more testing,
+  ⛔ NOT a release gate (opt-in). Detail evicted to SESSION_LOG.
 - ⭐ **F02 · F78 · F81 fired ORGANICALLY 2026-08-03** in the owner's campaign
   (storm wedge healed, 14 stray meteors cleared) — evidence upgraded, entries.
 - **PT-37** → F48 · **F42** `blocked`, wontfix recommended, owner call needed.

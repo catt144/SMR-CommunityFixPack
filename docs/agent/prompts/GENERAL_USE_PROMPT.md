@@ -161,7 +161,9 @@ this project nine days on this entry.
 - Probe-authoring: every probe ends with an explicit `return "PASS", …`
   (nil → silent SKIP). Stand-in probes assert the MODULE's action, never
   vanilla bookkeeping around stubs.
-- Known synthetic-map noise (benign): ~50-60 `Flight.lua objects_to_mark`,
+- Known synthetic-map noise (benign): ~50-60 `Flight.lua objects_to_mark`
+  **and its sibling `objects_to_unmark` (`Flight.lua:465` / `:479` — BOTH fields
+  appear; the list named only one until 2026-08-03)**,
   a few GameInit nil-calls, the TestKit shutdown artifact, the MultipleSuns
   lift transient, 2 `ResManager LawOfficeDoor` lines.
 - Parse sweep before ANY commit touching Lua (python + luaparser,
