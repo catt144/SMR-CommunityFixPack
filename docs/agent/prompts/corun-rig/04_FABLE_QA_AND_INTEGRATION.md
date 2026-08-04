@@ -412,13 +412,23 @@ U3 holds, but the number is not stable.*
   vanilla `Animations/LawOfficeDoor_*.hgacl` `[ResManager Error]` lines fire on
   every load. Already adjudicated as `C44`, `wontfix`, closed — named here only
   so the next reader does not re-investigate them.*
-- ***⚠️ AN UNEXPLAINED ENVIRONMENT DISAGREEMENT, on the record and not tidied.***
-  Windows reports two monitors (`2560×1440` primary, `2560×1707` at `x=2560`,
-  virtual `5120×1707`); the game reports `screen=(3840,2160)`,
-  `desk=(0,0)-(3840,2160)`, `scale=(1900,1900)`; `GetMousePos` returned `x` to
-  **7665**, beyond both. Three coordinate systems that do not reconcile, and the
-  game's are **not** the ones the 2026-08-02 F76 sitting recorded either. Sits
-  next to C41's two existing unexplained deltas and may share a cause.*
+- ***⭐ AN "UNEXPLAINED DISAGREEMENT" I REPORTED AND THEN HAD TO WITHDRAW — the
+  owner settled it in one screenshot, and it is a lesson worth integrating.***
+  I read the monitor layout with PowerShell `System.Windows.Forms.Screen` and
+  got `2560×1440` / `2560×1707`, which matched neither the game nor the F76
+  record, and I filed it as a three-way mystery. **The process was not DPI-aware
+  and Windows is at 150%** — those were logical units. Actual: Odyssey G7
+  **3840×2160** at `(0,0)`, BenQ RD280UG **3840×2560** at `(3840,0)`, virtual
+  desktop `0..7680 × 0..2560`. **Everything then closes to the pixel** — game
+  box = display 1 exactly, measured `x` max 7665 inside 7680, `y` max 2559
+  inside 2560 — which *upgrades* C41's finding from "supported" to
+  "confirmed by construction". ⛔ **Two claims withdrawn:** that the setup
+  differs from the 2026-08-02 sitting (it is identical), and that the y clamp is
+  unreachable on this geometry (display 2 is 400 px taller than the game box, so
+  it is reachable and merely unsampled). ⭐ **Integration lesson: an OS-side
+  measurement taken from a non-DPI-aware process is not a measurement.** Worth a
+  line in `PLAYTEST_HELP` beside the existing console-facts warnings — this is
+  the same failure shape as "read the log, never the screen".*
 - ***The TestKit's orphaned `96_AutoRunFlag.lua` edit is UNTOUCHED** and is still
   the only thing in that repo's `git status` — staged by path throughout, never
   `-A`, never `checkout`/`restore`. ⚠️ **One thing to know:** I briefly damaged

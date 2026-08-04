@@ -42,10 +42,15 @@ primary `(0,0)-(2560,1440)`, second `(2560,0)-(5120,1707)` — so a cursor
 excursion onto the second monitor is exactly the condition the lead names, and
 it is reproducible on demand. Nothing else in the payload can produce it, and
 no amount of agent-side looping substitutes for the cursor actually being over
-there. ⚠️ **Recorded, not reasoned away:** that monitor layout is *not* the one
-the 2026-08-02 F76 sitting measured (`desk` was 3840×2160 then). The setup has
-changed since, or the game was on a different display. §2 reads `desktop.box`
-live rather than inheriting either number.
+there.
+
+⛔ **CORRECTED AFTER THE RUN (2026-08-04).** This paragraph originally said the
+monitor layout was *not* the one the 2026-08-02 F76 sitting measured, and
+guessed the setup had changed. **Both were wrong, from a bad measurement of
+mine:** the PowerShell `Screen` read was taken from a process that was not
+DPI-aware, at 150% scaling, so it returned logical units. The displays are
+**3840×2160** and **3840×2560**, the setup is **identical** to 2026-08-02, and
+every reading closes to the pixel. Full arithmetic: `agent/bugs/C41.md`.
 
 If moment 2 is not worth it to you, say so and it drops — the rest of the run
 is unaffected and C41 keeps its `cand` status either way.

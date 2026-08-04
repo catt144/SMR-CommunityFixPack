@@ -219,12 +219,16 @@ useful half.**
    monitor.** That is *"renders far from the cursor"* with a measured mechanism
    behind it, on the very entry whose headline claim was falsified for the
    in-range case.
-3. ⛔ **The prediction's "bottom-right CORNER" half is REFUTED.** Only the x
-   clamp fired; `y` stayed at the anchor (`maxy = 1259`, inside `0..2160`), so
-   the placement is *right-edge*, not *corner*. `AT_BOTTOM_RIGHT_CORNER=0/20` is
-   a true negative against a stated prediction, not a null result — the y clamp
-   needs an anchor below 2160, and the second monitor is not tall enough to
-   produce one from this game window.
+3. ⚠️ **The prediction's "bottom-right CORNER" half did not fire — but it is
+   NOT refuted, and this card first said it was.** Only the x clamp fired; `y`
+   stayed at the anchor (`maxy = 1259`, inside `0..2160`), so the *observed*
+   placement is right-edge, not corner. ⛔ **The reason first given — "the second
+   monitor is not tall enough" — is false** (owner's display readouts,
+   2026-08-04): display 2 is **3840×2560**, 400 px taller than the game's box,
+   so a cursor in its bottom ~400 px gives `y > 2160` and fires the y clamp too.
+   **The corner case is reachable and was simply not sampled** — the parked
+   cursor sat at `y≈1259`. ⭐ And F76's pass-#8 `mouse (6148, 2350)` is exactly
+   that anchor: `y = 2350` is past 2160 and inside 2560.
 
 ⛔ **What may NOT be claimed.** **The picker appeared 20/20 in both runs**, so
 C41's OG symptom — *"the icon does not appear"* — **did not reproduce**, and
@@ -234,11 +238,19 @@ owner would have to be clicking a depot *while their cursor is over a second
 monitor*, which is not an ordinary action — reachability for a real player is
 **unproven** and is not claimed.
 
-⚠️ **Recorded, not reasoned away:** Windows reports this machine as two
-monitors, `2560×1440` primary and `2560×1707` at `x=2560`, while the game reads
-`screen=(3840,2160)` and `scale=(1900,1900)`. Those do not reconcile, and the
-game's numbers are also **not** the ones the 2026-08-02 F76 sitting recorded as
-the environment. The discrepancy is unexplained and is left on the record.
+⭐ **ENVIRONMENT RESOLVED (owner's display readouts, 2026-08-04) — and the
+"unexplained disagreement" this card first reported was MY measurement error.**
+Both displays are natively **3840** wide: Odyssey G7 **3840×2160** at `(0,0)`,
+BenQ RD280UG **3840×2560** at `(3840,0)`, so the real virtual desktop is
+`0..7680 × 0..2560`. My PowerShell `Screen` read returned `2560×1440` /
+`2560×1707` because the process was **not DPI-aware** and Windows is at 150%.
+The game's `desktop.box (0,0)-(3840,2160)` is **exactly display 1's native
+pixels**, the measured `x` max of **7665** is inside 7680, and the `y` max of
+**2559** is display 2's 2560. **Everything closes to the pixel**, which upgrades
+the finding: `GetMousePos` returns raw virtual-desktop coordinates while
+`desktop.box` covers the game's display only, so **every** cursor position on
+display 2 is out of range by construction. ⛔ Also withdrawn: the claim that the
+setup differs from the 2026-08-02 F76 sitting — it is identical.
 
 **This card is wrong if:** a repeat with the cursor parked shows the box
 tracking the anchor past `3840`, or if `desktop.box` and `GetMousePos` are ever
