@@ -117,6 +117,7 @@ emptiness is the objective done-condition. The final prompt is always an
 | A prompt that needs the keyboard | prompt 11's jobs 2–4 needed the owner; the file could not self-consume as designed | mark attended prompts as such up front; split attended and unattended halves at authoring time |
 | Context-edge risk | none bitten — because rule 3 existed | keep the self-split rule verbatim; never push a job to the edge of a window |
 | Evidence rotation | the founding logs aged off disk (~20-file cap) before the QA could re-read them | any leg whose numbers a status flip will cite gets its log archived in the same commit |
+| ⛔ A seal the standing rules defeat (f11-f99 chain, 2026-08-03) | the sealed prompt 1 was force-fed sealed material BEFORE it opened its own prompt: `CLAUDE.md` makes STATE.md a mandatory whole-file read (its F11/F99 paragraphs were sealed), and chain rule 1's `git log --oneline -10` prints the sealed commits' subject lines. The attestation was honest and the damage was contained (everything AGREEING with the anchor was discounted; only anchor-contradicting findings were counted) — but the seal was structurally unholdable | seal at the SOURCE, not the reader: before the chain starts, EXTRACT the sealed STATE.md paragraphs into a sealed side-file and leave a one-line pointer in STATE.md; prescribe a subject-hiding staleness check in the sealed prompt (`git log --format=%h -10` + `git pull`); and keep the attestation requirement — a broken seal honestly mapped (what leaked, what it anchors) preserved most of this second opinion's value |
 
 ## 4 · The chain template (assemble from these parts)
 
@@ -165,7 +166,10 @@ emptiness is the objective done-condition. The final prompt is always an
 6. **Optional but proven**: a blind-control document produced by a fresh
    context with the record off-limits, sealed from every prompt except the
    terminal QA. Use when the effort's conclusions would benefit from an
-   unanchored second derivation (audits especially).
+   unanchored second derivation (audits especially). ⛔ **Author the seal
+   against the standing rules** (§3, last row): extract sealed STATE.md
+   material to a side-file first and use a subject-hiding `git log` form,
+   or the mandatory reads will break the seal before the prompt is opened.
 
 ## 5 · Worked outlines for the three named uses
 

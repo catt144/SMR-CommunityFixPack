@@ -8,6 +8,44 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-03/04 — f11-f99-review chain closed (terminal prompt, Fable): F11 converted to a pre-wrapper, F99's mechanism settled by reading, two of the second opinion's own claims overturned
+
+The two-prompt second-opinion chain (sealed derivation `28c253f`, outbox
+`068c5aa`) was audited and drained; the folder is deleted this commit. What the
+terminal audit added on top of prompt 1, sampled against `ModTools\Src`:
+
+- **Seal timing HELD in git** (derivation → outbox → STATE, no F11/F99 edits by
+  prompt 1); the attested informational leak (mandatory STATE.md read + `git
+  log` subjects) is real and is now a CHAIN_METHOD §3 row with countermeasures.
+- **Prompt 1's F11 route claim was itself too strong.** "`OnTransferToMapDone`
+  did it" is not provable from Lua — the Msg raise point is inside the C-side
+  `TransferToMap`. What IS settled: both candidate routes end in
+  `Holder:OnExitHolder` → `table.remove_entry`, the record's "the measurement
+  shows it does not drop the holder link" was an over-claim either way, and the
+  same-map path stays unmeasured. STATE briefly carried prompt 1's version.
+- **Prompt 1's F99 self-reversal conceded too much.** Its outbox called the
+  filed clear-and-rebuild route "mechanically correct"; reading refutes it —
+  `ProcessTrackElements` returns early on an empty list (`Tracks.lua:808`),
+  the `#elements == 1` and invalid-first cases never mutate the array, and
+  every `OrderTrackElements` exit from a non-empty input leaves it non-empty
+  (`:575-576` seed, `:582` no-clear, `:616-620` restore). So the list was empty
+  BEFORE `TrackElement.lua:802`; the drain is `ExpandTrackFromElement:729`'s
+  absorb-walk (the broken element is absorbed — only hidden by
+  `Track.lua:639`, still in the hex grid — while its repair site keeps
+  `params.track_obj`, `:635`). One link stays C-side: the per-hex tie-break.
+- **F11 conversion BUILT** (`3a6512f`): §1.4 pre-wrapper, EF-012-pre, apply-once
+  verified in 00_Core (non-optional entries never re-apply), `const.Scale.Stat`
+  Require dropped, `IsSameMap` added. Declined the `vehicle.units` nil guard —
+  `KickUnitsFromHolder` nils `units` before its kick loop, so shipped play runs
+  `remove_entry(false, unit)` routinely; the guard would break byte-parity with
+  the tested branch. ⛔ NOT `tested`; checklist rider owns earning it back.
+- **F99 stays `cand`, nothing built** — §4 no-cheat reachability unproven,
+  self-heal caps observed harm; fix shape recorded on the entry so it needs no
+  re-derivation. EF-008 misuse in the entry corrected (it is about `assert`;
+  these throws unwound to C). Count corrected everywhere to 7.
+
+---
+
 ## Evicted from STATE.md 2026-08-03 — the D12 / PT-62 P4/P6 result, recorded and gated elsewhere
 
 Moved out to pay for the MarsDebug complete-coverage line (mechanical rule 8).

@@ -57,6 +57,11 @@ these used to be filed only in agent reports, which is where you never read.
   a real `table.remove` misuse in shipped code, so it is not a removal
   question; it is a priority question, and it is not an agent's call.
   → `docs/agent/bugs/F11.md`.
+  *(Update 2026-08-03, chain close: the fix's SHAPE changed — the ~30-line full
+  copy became a 10-line pre-wrapper, so it no longer freezes the two balance
+  expressions a game patch would most plausibly touch. The P1 question is
+  unchanged; the conversion is behaviour-preserving by construction but NOT yet
+  verified at the keyboard — see the rider below.)*
 - **F99 severity, and whether it becomes work at all.** New 2026-08-03 from
   your own log: 14 `TrackElement.lua:805` errors, every one under
   `CheatCompleteAllConstructions()` during your underground build-out.
@@ -75,8 +80,15 @@ these used to be filed only in agent reports, which is where you never read.
   filed; but each throw escaped the console `exec`, so the rest of that cheat
   pass never ran and `ResumeTerrainInvalidations` was skipped **seven times**.
   Also new: the `if not self.broken` guard on the failing block **can never be
-  false** — the line above it already cleared the field. → `DERIVATION.md` in
-  `docs/agent/prompts/f11-f99-review/`, points 9-11.
+  false** — the line above it already cleared the field. → `docs/agent/bugs/F99.md`
+  ("Mechanism settled by reading"; the chain folder is deleted — its sealed
+  derivation survives in git at `28c253f`).
+  *(Chain close 2026-08-03: the terminal prompt settled the mechanism from
+  source — the element list was empty BEFORE the rebuild call; the filed
+  "rebuild comes back empty" route is refuted, and the drain is the engine's
+  own track-merge absorb-walk. This does not change the decision in front of
+  you: no-cheat reachability is still unproven, nothing is built, and the
+  cheap discriminator offer stands.)*
 - **C43 — how do we stop the TestKit printing `[LUA ERROR]` into your logs?**
   Two Wave-5 probes install stubs through `set_global`, which trips the engine's
   strict-global guard on `IsNearDome` and `AddAreaRubble`; both probes then PASS,
@@ -470,6 +482,23 @@ working.
 **Setup:** note a Residence's capacity → stop the ministry (off, or cut power)
 → re-read the same Residence; then watch whether anyone was actually evicted
 (entry details, including why shift rotation will not trigger it).
+
+### Rider — F11: verify the pre-wrapper conversion · Status: unrun — **TAKEABLE WHEN** any sitting runs with the pack ON and a train line carrying passengers
+**Change, not a bug:** 2026-08-03 the F11 fix was converted from a ~30-line full
+method copy to a 10-line pre-wrapper (same repaired branch, original method
+called for everything else). It is behaviour-preserving **by construction** and
+has NOT been verified live — this rider is what earns that back.
+→ [F11](agent/bugs/F11.md)
+**Requirements:** pack ON, any train line that actually moves colonists. No
+cheats, no save juggling — an organic warm-up leg is enough.
+**Setup:** none beyond playing. Watch three things during normal train use:
+`SMRFixPack.ListFixes()` shows `TrainPlatformWedge [active]`; trains unload and
+LEAVE stations normally; passenger comfort/sanity still move on disembark (the
+travel-time penalty and the forest bonus now run vanilla's own lines instead of
+our copy).
+**The check can fail:** a train wedged at a platform, or disembark stat changes
+that stopped happening, falsifies the conversion — say so and the copy form
+comes back from git (`3a6512f^`).
 
 ### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through
 **Bug:** `PassageBase:TraverseTunnel` ends with a raw `unit.holder = nil`

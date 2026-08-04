@@ -9,10 +9,10 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 ## Where the project is
 
 ✅✅ **The 18-prompt project chain is COMPLETE (2026-08-03)**; the playtest
-campaign is the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first** —
-verdict, doctrine re-verification (it HOLDS), F97/D12/F76 adjudications,
-standing items, and §9's ordered top (PT-62 remainder · load-heal round-trip
-sweep · doctrine C-sitting).
+campaign is the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first**
+(verdict · doctrine HOLDS · adjudications · §9 ordered top). ✅ **f11-f99-review
+chain CLOSED 2026-08-04** — folder gone; sealed derivation in git `28c253f`;
+its seal defect is carried to `CHAIN_METHOD.md` §3 (seal at the SOURCE).
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -30,19 +30,19 @@ Pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 ⚖️ **F76 CLOSED-REFUTED, P1 released** (evicted to SESSION_LOG). Live residue:
 **`C41` (cand)**, instrument `F76MISS`; MOD_DESCRIPTION's F76 note is VOID.
 
-✅ **F11 rider RUN 2026-08-03** — abduction keeps `train.units` synced (`nil`,
-`#units` 6, `holder == rocket`): **no demonstrated producer**. ⚠️ But its stated
-ROUTE is wrong (`068c5aa`) — `OnTransferToMapDone` did it. ⭐ Owner: keep `P1`?
+✅ **F11** — rider: **no demonstrated producer**; ⚠️ the cross-map route is not
+provable from Lua (entry). **Fix CONVERTED full-copy → pre-wrapper `3a6512f`**:
+by construction only, ⛔ NOT `tested` — checklist rider. ⭐ Owner: keep `P1`?
 
-⚠️ **F99 (`cand`)** — **7** (not 14) × `TrackElement.lua:805`, all under
-`CheatCompleteAllConstructions()`; no-cheat UNPROVEN. **2nd opinion `068c5aa`**:
-auto-connect SELF-HEALS · `:800` guard DEAD (`:774`) · residue `0 0` post-reload
-· C42 C43 + 2 riders · ⛔ the seal is unholdable (rule 1 + this file leak it).
+⚠️ **F99 (`cand`)** — **7** × `TrackElement.lua:805`, cheat-only observed;
+no-cheat UNPROVEN, nothing built. **Route SETTLED at chain close**: the list is
+empty BEFORE the rebuild (the filed route is refuted); drain =
+`ExpandTrackFromElement:729` absorb-walk + the dead `:800` guard. Fix shape
+known (`F99.md`), blocked on §4 reachability; severity = owner call (checklist).
 
-⭐ **FIRST COMPLETE PROBE COVERAGE 2026-08-03** — MarsDebug `[install]` pass
-(EXECUTED-ONCE, `PLAYTEST_HELP`): **87 PASS / 0 FAIL / 0 SKIP**. ⛔ **Never quote
-as retail health** — `TechDescriptionBuilding` PASSes there, SKIPs on retail (F98
-from the second side). **Retail coverage is 78/87.**
+⭐ **FIRST COMPLETE PROBE COVERAGE 2026-08-03** — MarsDebug `[install]`: **87
+PASS / 0 FAIL / 0 SKIP** (EXECUTED-ONCE, `PLAYTEST_HELP`). ⛔ Never quote as
+retail health (F98 is two-sided); **retail coverage is 78/87.**
 
 ## Gates and holds
 

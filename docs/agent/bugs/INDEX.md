@@ -164,7 +164,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 114 | C39 | `Policy_Automation_ServiceAutomation` cuts `max_workers` by **label** while its performance compensation keys on **class** — the four Workshops are on the label and outside the class | filed | ? | cand | [C39.md](C39.md) |
 | 115 | C40 | "Crowded Living" grants **+3 residence capacity that is added and removed live with the Ministry of Culture's `working` flag**, and every removal EVICTS the tail residents colony-wide | filed | ? | cand | [C40.md](C40.md) |
 | 116 | C41 | Depot resource picker fails to APPEAR at all (OG witness) — F76's unrefuted residue | filed | ? | cand | [C41.md](C41.md) |
-| 117 | F99 | `TrackConstructionSite:Complete` throws on an empty rebuilt element list — `start_el` nil at `TrackElement.lua:805` | filed | ? | cand | [F99.md](F99.md) |
+| 117 | F99 | `TrackConstructionSite:Complete` dereferences an emptied element list — `start_el` nil at `TrackElement.lua:805` | filed | ? | cand | [F99.md](F99.md) |
 | 118 | F100 | **OUR OWN DEFECT:** `Opt_NoHomeless`'s self-check targets `Community` for a method `Workforce` declares, so every boot log carries a false `inactive` line for a module that is actually active | filed | P3 | SOURCE-VERIFIED | [F100.md](F100.md) |
 | 119 | C42 | Passage traversal clears `unit.holder` directly, leaving a stale entry in a passage element's `units` list forever | filed | ? | cand | [C42.md](C42.md) |
 | 120 | C43 | **OUR OWN DEFECT:** the TestKit's `set_global` helper creates real globals, so two Wave-5 probes print `[LUA ERROR] Attempt to create a new global` into the owner's log and then PASS | filed | ? | SOURCE-VERIFIED | [C43.md](C43.md) |
