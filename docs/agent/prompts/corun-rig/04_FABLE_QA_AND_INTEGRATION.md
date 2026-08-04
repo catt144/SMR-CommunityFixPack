@@ -268,14 +268,44 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
      23:22:16 and `b1d2c3d` at 23:24:55, both recording that same MarsDebug
      pass — while the **TestKit** repo's HEAD is still `ab3111b` from **13:25**
      the same day. No stash, no other refs, exactly one modified file.
+  5. ⭐ **The tally itself identifies the run, with no timestamp involved — the
+     OWNER spotted this, not prompt 2** (2026-08-04): *"thats a 0 fail 0 skip 0
+     error. That must mean it was from our final testing run of the night last
+     night when we did the debug mode test. otherwise we would have skips."*
+     **Verified across the whole log corpus and it is exact:** every retail
+     `Mars.exe` RunAll caps at **78 PASS / 0 FAIL / 9 SKIP**, and the single
+     MarsDebug run is the only **0 SKIP** result anywhere. **78 + 9 = 87.** The
+     9 are the `[install]` probes needing `debug.getinfo`, which the retail
+     sandbox never exposes (EF-006/EF-010; `00_TestCore.lua` header) — so
+     `0 SKIP` is reachable *only* by a human typing
+     `SMRTest.EnableIntrospection(debug)` into an asserts-build console. The
+     comment could not have come from any other run.
+
+  **⚠️ What (5) adds beyond confirming the run — it bears on intent, which is
+  the open question.** A MarsDebug `[install]` pass is **attended by
+  construction** (§1 P9: modal `Assert failed` dialogs, and the introspection
+  bridge cannot be automated from mod code), so **the owner was at the keyboard
+  when that marker was written.** And the session did not end there: the pack
+  repo kept committing for **another three hours**, through to `39c5dfe` at
+  02:39 on 08-04, without ever returning to the TestKit. A session that ran three
+  more hours and ~10 more commits in the other repo, never touching this one
+  again, reads much more like an oversight than a deferral. **Still inference —
+  but now supported from three independent directions (timing, tally, and
+  session shape), which is more than prompt 2 could offer alone.**
 
   **ROUTE claim, tagged separately from those citations per R3 — and it is the
   only thing left open:** the session that ran the `[install]` pass wrote the
-  marker immediately after its run and then closed out by committing **only the
-  pack repo**, i.e. it forgot the second repo. The 20-second gap and the two pack
-  commits minutes later make this strong, **but they do not establish intent** —
-  nothing in the record rules out a deliberate deferral. **That adjudication is
-  your job**, and it is the reason the owner declined a quiet commit.
+  marker immediately after its run and then went on committing to the **pack**
+  repo for three more hours without ever returning to the TestKit, i.e. it
+  forgot the second repo. Timing, tally and session shape all point the same
+  way, **but none of them establishes intent** — nothing in the record rules out
+  a deliberate deferral, and no session note anywhere mentions the file.
+  **That adjudication is your job**, and it is the reason the owner declined a
+  quiet commit. ⚠️ **Note what the alternative would have cost:** committing it
+  as housekeeping would have made all five facts above unrecoverable from git in
+  a single stroke — the mtime, the 20-second gap, the orphan state itself. The
+  owner's *"I would be more comfortable having 04 investigate instead of
+  committing and forgetting"* is why the evidence still exists for you to weigh.
 
   ⭐ **Nothing is at risk while you decide.** The fact itself is already recorded
   in `PLAYTEST_HELP.md` ("The MarsDebug `[install]` pass") and in `STATE.md`'s
