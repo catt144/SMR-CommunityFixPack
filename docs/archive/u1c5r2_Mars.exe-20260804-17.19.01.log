@@ -1,0 +1,346 @@
+					Render 0:00:00:005
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+					Render 0:00:00:006
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	35%
+Disk Free      	756558 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:062
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:066
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:472
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:606
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:799
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:472
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:526
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:526
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:529
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:17:863
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:864
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:868
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:869
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:17:870
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:17:871
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:17:872
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:873
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+						Lua 0:00:17:874
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied						Lua 0:00:17:875
+
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+						Lua 0:00:17:876
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+						Lua 0:00:17:877
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+						Lua 0:00:17:878
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:417
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:489
+Reloading done in 951 ms
+						Lua 0:00:18:810
+[preset] Preset postprocess took 61 ms.
+						Lua 0:00:18:868
+479 / 479 particle streams loaded in 55 ms.
+						Lua 0:00:18:870
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:060
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:116
+[mod] [U1C5] === unattended-1 U1C5 === watchdog 540000ms
+[U1C5] === unattended-1 U1C5 === watchdog 540000ms
+[mod] [U1C5] STEP 1-waiting-menu BEGIN
+[U1C5] STEP 1-waiting-menu BEGIN
+[PdxSDK] Started up. Took 1579
+						Lua 0:00:19:141
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:19:142
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:566
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:567
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:719
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:577
+[mod] [U1C5] STEP 1-waiting-menu END 2500ms
+[U1C5] STEP 1-waiting-menu END 2500ms
+[mod] [U1C5] STEP 2-load-staged BEGIN
+[U1C5] STEP 2-load-staged BEGIN
+						Lua 0:00:21:669
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:675
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:700
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:311
+*** Assets reloaded in 2.6 s, read 202.1 MB, read speed 76.7 MB/s, average read 4948 bytes.
+						Lua 0:00:30:215
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:242
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:260
+Game Loaded in 8591 ms
+						Lua 0:00:30:306
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:144
+Game loaded on map BlankBigCanyonCMix_09 in 9567 ms
+[mod] [U1C5] LOAD OK #1 file=U1STAGE.savegame.sav — LoadGame returned no error
+[U1C5] LOAD OK #1 file=U1STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:441
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:641
+[mod] [U1C5] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[U1C5] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[mod] [U1C5] STEP 2-load-staged END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C5] STEP 2-load-staged END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C5] STEP E0-baseline BEGIN
+[U1C5] STEP E0-baseline BEGIN
+[mod] [U1C5] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg E, cold load — before either [NEVER RUN] command
+[U1C5] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg E, cold load — before either [NEVER RUN] command
+[mod] [U1C5] E1 STORM STATE before: HasDustStorm=? | g_DustStorm=false type=great stopped=true start=false end=false duration=0
+[U1C5] E1 STORM STATE before: HasDustStorm=? | g_DustStorm=false type=great stopped=true start=false end=false duration=0
+[mod] [U1C5] STEP E0-baseline END 0ms
+[U1C5] STEP E0-baseline END 0ms
+[mod] [U1C5] STEP E1-duststorm BEGIN
+[U1C5] STEP E1-duststorm BEGIN
+[mod] [U1C5] E1 FIRST EXECUTION EVER of CheatDustStorm("normal", "DustStorm_High") — ⛔ it calls CheatStopDisaster() first, so anything already running ends here
+[U1C5] E1 FIRST EXECUTION EVER of CheatDustStorm("normal", "DustStorm_High") — ⛔ it calls CheatStopDisaster() first, so anything already running ends here
+[mod] [U1C5] E1 call ok=true
+[U1C5] E1 call ok=true
+						Lua 0:00:47:141
+[mod] [U1C5] E1 STORM STARTED=true within 3 min
+[U1C5] E1 STORM STARTED=true within 3 min
+						Lua 0:00:47:142
+[mod] [U1C5] E1 STORM STATE after start attempt: HasDustStorm=table: 000001F7631EA078 | g_DustStorm=table: 000001F7631EA078 type=normal stopped=false start=239276368 end=240532593 duration=1254725
+[U1C5] E1 STORM STATE after start attempt: HasDustStorm=table: 000001F7631EA078 | g_DustStorm=table: 000001F7631EA078 type=normal stopped=false start=239276368 end=240532593 duration=1254725
+[mod] [U1C5] E1 now confirming the STOP half — StopDustStorm() sets g_DustStormStopped (DustStorm.lua:558) and the storm loop exits on it (:343)
+[U1C5] E1 now confirming the STOP half — StopDustStorm() sets g_DustStormStopped (DustStorm.lua:558) and the storm loop exits on it (:343)
+						Lua 0:00:47:642
+[mod] [U1C5] E1 STORM STOPPED=true within 3 min
+[U1C5] E1 STORM STOPPED=true within 3 min
+[mod] [U1C5] E1 STORM STATE after stop attempt: HasDustStorm=? | g_DustStorm=false type=normal stopped=true start=false end=false duration=1254625
+[U1C5] E1 STORM STATE after stop attempt: HasDustStorm=? | g_DustStorm=false type=normal stopped=true start=false end=false duration=1254625
+[mod] [U1C5] STEP E1-duststorm END 1000ms
+[U1C5] STEP E1-duststorm END 1000ms
+[mod] [U1C5] STEP E2-electro-devil BEGIN
+[U1C5] STEP E2-electro-devil BEGIN
+[mod] [U1C5] E2 descr copied from DustDevils_Low | electro_chance 5 -> 100 (the roll at DustDevils.lua:138 is SessionRandom:Random(100) < electro_chance, so this removes the lottery)
+[U1C5] E2 descr copied from DustDevils_Low | electro_chance 5 -> 100 (the roll at DustDevils.lua:138 is SessionRandom:Random(100) < electro_chance, so this removes the lottery)
+[mod] [U1C5] E2 attempt 1: pos=(448775, 123625) — the CALL RAISED: Lua/DustDevils.lua:134: attempt to perform arithmetic on a nil value (field 'duration')
+[U1C5] E2 attempt 1: pos=(448775, 123625) — the CALL RAISED: Lua/DustDevils.lua:134: attempt to perform arithmetic on a nil value (field 'duration')
+						Lua 0:00:47:742
+[mod] [U1C5] E2 attempt 2: pos=(404525, 166275) — the CALL RAISED: Lua/DustDevils.lua:134: attempt to perform arithmetic on a nil value (field 'duration')
+[U1C5] E2 attempt 2: pos=(404525, 166275) — the CALL RAISED: Lua/DustDevils.lua:134: attempt to perform arithmetic on a nil value (field 'duration')
+						Lua 0:00:47:842
+[mod] [U1C5] E2 attempt 3: pos=(261725, 166675) — the CALL RAISED: Lua/DustDevils.lua:134: attempt to perform arithmetic on a nil value (field 'duration')
+[U1C5] E2 attempt 3: pos=(261725, 166675) — the CALL RAISED: Lua/DustDevils.lua:134: attempt to perform arithmetic on a nil value (field 'duration')
+						Lua 0:00:48:342
+[mod] [U1C5] E2 attempt 8: pos=(360625, 214775) — call returned NIL (the :129-131 vegetation early-out is the only nil path in the function)
+[U1C5] E2 attempt 8: pos=(360625, 214775) — call returned NIL (the :129-131 vegetation early-out is the only nil path in the function)
+						Lua 0:00:49:141
+[mod] [U1C5] E2 attempt 16: pos=(369625, 193425) — call returned NIL (the :129-131 vegetation early-out is the only nil path in the function)
+						Lua 0:00:49:142
+[U1C5] E2 attempt 16: pos=(369625, 193425) — call returned NIL (the :129-131 vegetation early-out is the only nil path in the function)
+						Lua 0:00:49:641
+[mod] [U1C5] E2 attempt 21: pos=(325825, 204175) — call returned NIL (the :129-131 vegetation early-out is the only nil path in the function)
+[U1C5] E2 attempt 21: pos=(325825, 204175) — call returned NIL (the :129-131 vegetation early-out is the only nil path in the function)
+						Lua 0:00:51:642
+[mod] [U1C5] E2 ATTEMPT ACCOUNTING after 40 attempt(s): no-position=0, call-raised=34, returned-nil=6, devil=false
+[U1C5] E2 ATTEMPT ACCOUNTING after 40 attempt(s): no-position=0, call-raised=34, returned-nil=6, devil=false
+[mod] [U1C5] E2 FALLBACK — every attempt above took the vegetation early-out, so the map is vegetated at the 10*guim default radius. Retrying the SAME call with an explicit range of 1*guim. ⛔ This is a deviation from the row's recipe and is recorded as one: it shrinks the vegetation test radius AND the devil's movement range.
+[U1C5] E2 FALLBACK — every attempt above took the vegetation early-out, so the map is vegetated at the 10*guim default radius. Retrying the SAME call with an explicit range of 1*guim. ⛔ This is a deviation from the row's recipe and is recorded as one: it shrinks the vegetation test radius AND the devil's movement range.
+						Lua 0:00:53:642
+[mod] [U1C5] E2 FALLBACK produced nothing either after 20 attempt(s).
+[U1C5] E2 FALLBACK produced nothing either after 20 attempt(s).
+[mod] [U1C5] E2 NO DEVIL. Accounting above is the finding: no-position=0, call-raised=34, returned-nil=6. Row stays [NEVER RUN] and the RECORDED REASON MUST MATCH THAT ACCOUNTING, not a guess.
+[U1C5] E2 NO DEVIL. Accounting above is the finding: no-position=0, call-raised=34, returned-nil=6. Row stays [NEVER RUN] and the RECORDED REASON MUST MATCH THAT ACCOUNTING, not a guess.
+[mod] [U1C5] STEP E2-electro-devil END 6000ms
+[U1C5] STEP E2-electro-devil END 6000ms
+[mod] [U1C5] STEP E-verdict BEGIN
+						Lua 0:00:53:643
+[U1C5] STEP E-verdict BEGIN
+[mod] [U1C5] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg E, after both commands
+[U1C5] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg E, after both commands
+[mod] [U1C5] LEG E ⛔ ROW-FLIP RULE: prompt 2 flips a [NEVER RUN] row to [RAN <date>, log <name>] ONLY for the command whose evidence is actually in this log — the storm needs BOTH a start and a stop reading, the devil needs a readable electro mark. A command that ran but produced nothing readable is recorded as run-with-no-confirmation and its row marker stays honest.
+[U1C5] LEG E ⛔ ROW-FLIP RULE: prompt 2 flips a [NEVER RUN] row to [RAN <date>, log <name>] ONLY for the command whose evidence is actually in this log — the storm needs BOTH a start and a stop reading, the devil needs a readable electro mark. A command that ran but produced nothing readable is recorded as run-with-no-confirmation and its row marker stays honest.
+[mod] [U1C5] STEP E-verdict END 0ms
+[U1C5] STEP E-verdict END 0ms
+[mod] [U1C5] ERRORWATCH U1C5 — every [LUA ERROR] in this log file between the '=== unattended-1 U1C5 ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=E-verdict loads_this_process=1
+[U1C5] ERRORWATCH U1C5 — every [LUA ERROR] in this log file between the '=== unattended-1 U1C5 ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=E-verdict loads_this_process=1
+[mod] [U1C5] === cycle 5 (leg E) complete ===
+[U1C5] === cycle 5 (leg E) complete ===
+[mod] [U1C5] SHUTDOWN done
+[U1C5] SHUTDOWN done
+						Lua 0:00:56:641
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:56:646
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:56:941
+
+
+*** Debug::Done()
+Time (ms)	56941
+
+
