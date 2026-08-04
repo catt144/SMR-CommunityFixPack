@@ -8,6 +8,84 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-04 — corun-rig chain CLOSED (prompt 4, Fable): the audit held, the economics are real at n=1, the tiers are routed, the folder is empty
+
+**The 4-prompt kill-gated chain is complete.** Prompt 4 audited everything
+upstream against primary evidence, closed the three owner-named jobs, routed
+the tier decision, integrated the spec's surviving content, and deleted the
+folder. The founding spec's full text survives in git:
+`git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md` (likewise
+`CORUN1_BRIEF.md` and the three `97_CoRun1*.lua.txt` harness sources).
+
+**Audit verdict (every "done" upstream treated as a claim):** every sampled
+verdict verified against the archived logs — card 1's counters (340/0/0/0),
+card 2's TRACE #1–#8, card 3's L2A 29/300 + L2C 20/20 + the run-3 prediction
+logged at +18.8 s against cycle 1 at +23.7 s, card 4's tie-break read, all
+four `Time (ms)` cycle figures, both engine load lines, and run 3's load
+(9,886 ms — §9 said "not re-read"; it was in the log). Forced/organic labels
+present and honest throughout; F11's `tested` was correctly NOT granted (2 of
+3 readings, close routed). **One number drift found and corrected visibly:**
+STATE and C41 said the picker appeared **40/40**; the logs total **52/52**
+(20+20+12, all ALIVE). No verdict changed.
+
+**The probe-gate recheck (owner-named job) — the rule STANDS.** Diagnosis
+re-verified from `temporary_sweep()` and the hook. The unverified load-path
+claim is now SOURCE-verified: `ModDef:LoadCode` executes only
+`metadata.lua` `code` entries (`Mod.lua:490-521`). The syntax-error objection
+is dead (parse sweep is location-independent, measured in prep); the declined
+override measured a hatch's whole value at **0.4 s machine / 0 owner**; the
+long-lived-instrument reading holds (`90_Loggers.lua` is the home, said in
+WORKFLOW). `--no-verify` accounting: **zero uses** — no override commit
+exists, doccheck green, TestKit HEAD untouched through all four launches.
+One hardening routed to the owner: a doccheck report-line on a dirty TestKit
+tree (nothing checks it today).
+
+**The TestKit orphan (owner-named job) — adjudicated and committed
+(`6f4f103` in the TestKit repo).** Verdict: a close-out oversight in the
+~5-minute window when the 2026-08-03 play sitting committed the pack repo
+only; intent not establishable, no note anywhere claims deferral; the
+comment's content is TRUE against the archived log. **Provenance, preserved
+here because the investigation file is deleted:** the 5-line comment block in
+`Code/96_AutoRunFlag.lua` was written whole at **2026-08-03 23:20:03**
+(LastWriteTime = CreationTime, 1,346 bytes), **20 s** after the MarsDebug
+session's last log write (23:19:43); the cited log genuinely reads
+`---- 87 PASS, 0 FAIL, 0 SKIP, 0 ERROR ----` (archived:
+`docs/archive/corun0evidence_MarsDebug.exe-20260803-23.14.05.log`); the
+87/0/0 tally identifies the run uniquely (owner's own identification — retail
+caps at 78/9, only the attended MarsDebug `[install]` pass reaches 0 SKIP);
+the pack repo committed the same result at 23:22:16 (`0dec7f0`) and 23:24:55
+(`b1d2c3d`) while the TestKit's HEAD stayed at `ab3111b` (13:25); the later
+same-night sessions were different jobs with no reason to touch the TestKit.
+
+**Economics (the owner's actual question), from recorded actuals only.**
+A launch cycle costs **~30 s fixed + the payload** (loads stable 9.5–10.0 s
+on the 56 MB save across four cold loads; cycles 64 / 80 / 85 / 398 s).
+Owner-attended: **~1.5 min (co-run #0) + ~6.5 min (co-run #1, three
+launches) ≈ 8 min total, against ~25–30 promised** — the briefs over-promised
+~3×, which future briefs should correct rather than bank as savings. Marginal
+cost of a ride-along item is ~0 owner and seconds of machine (the F99 read
+cost 3 s of a 398 s cycle) — so batching is nearly free and the break-even
+against an all-owner attended sitting is at ONE item that doesn't need
+continuous eyes. ⭐ **The number that matters most is the RE-RUN cost:** runs
+2 and 3 each closed a question run 1 left open for ~85 s / ~64 s of machine
+and ~1 / ~0.5 min of owner — under the old regime both were riders waiting
+for a future sitting. ⛔ Honest limits: one sitting, one save, one machine —
+a data point, not a trend; token actuals were never instrumented (the spec's
+60–150k GUESS stays a guess); and the rig buys nothing on eyes-only or
+organic-evidence items, by design. Verdict: **yes, the rig buys owner time
+back on the classes it covers, and the sitting measured it.**
+
+**Integrated (spec §1–§9 dissolved):** run procedure + cost shape →
+`PLAYTEST_HELP.md` "The co-run rig" (EXECUTED-4×); envelope + tier routing +
+close-out rules (both-repo `git status`, C11 script-file arming) →
+`WORKFLOW.md` "Co-runs"; condition-sampled-negatives rule (C10) +
+detected-gates lesson → WORKFLOW leg-design rules; C8 → `EF-045`; DPI
+measurement warning → PLAYTEST_HELP console facts (`EF-046`); kill-gated
+chain shape → `CHAIN_METHOD.md` §5. Tiers routed on the checklist —
+⛔ NOT adopted; `tested` unchanged. Cards stay at
+`agent/reports/CORUN1_EVIDENCE_CARDS.md` as the routed decision's exhibit,
+transient per the anti-sprawl rule.
+
 ## 2026-08-04 — CO-RUN #1, the first payload run: three launches, ~6.5 owner-minutes, three of four payload items settled
 
 ⭐⭐ **The rig earned its keep.** corun-rig prompt 3 (Opus) prepped unattended,

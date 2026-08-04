@@ -49,6 +49,40 @@ these used to be filed only in agent reports, which is where you never read.
     picker opened.** ⛔ **The picker still appeared 52 times out of 52**, so the
     "icon does not appear" symptom did *not* reproduce: this is a mechanism,
     not a confirmation, and `C41` stays `cand`.
+- ⭐⭐ **DECISION FOR YOU: adopt the co-run sign-off tiers?** (routed 2026-08-04
+  by the corun-rig chain's terminal prompt — this changes sign-off policy,
+  which is yours, so **nothing changes until you say so**.) The problem it
+  solves is the one you named: for log-only defects you never see the bug or
+  the fix, so per-item sign-off is ceremony. The proposal, finalized against
+  co-run #1's four REAL evidence cards rather than the draft's guesses:
+  - **Tier A — WITNESS.** Your eyes genuinely add information the log cannot
+    carry; you attend the measure moment. Unchanged from today.
+  - **Tier B — EVIDENCE CARD.** Log-demonstrable; you quick-read a one-screen
+    card — scenario, what was forced vs organic, the raw before/after log
+    lines, run conditions, and the one-sentence falsifier — and OK it. Under a
+    minute each. ⭐ **New sub-class the run exposed: HANDS-ONLY** — a leg that
+    needs your *hands* (park the cursor on the other monitor, click launch)
+    but none of your *eyes*. You do the named act, then read the card like any
+    Tier B. The draft rule ("would eyes add information?") could not classify
+    this at all, and it was the cheapest ask in the whole payload.
+  - **Tier C — DELEGATED.** Mechanically self-verifying (the probe-suite
+    class): ships on the suite verdict; you get a one-line digest per batch
+    and keep the veto; you are not asked per item.
+  **What the real cards showed:** Card 1 (the F11 train watch, classed A) —
+  your eyes added nothing; the 340-removal counter over 7 trains was strictly
+  stronger than watching one, so that rider class should be **A → B**, and the
+  general rule is: when a designed-A item's card turns out stronger than the
+  eyes, the demotion is stated on the card and applies to the NEXT instance —
+  never silently. Cards 2 and 4 (the two ride-along reads) needed no eyes and
+  the cards alone settle them — the clean Tier B/C cases.
+  **What changes if you adopt:** log-only items stop needing per-item attended
+  sign-off; you read cards (B) or batch digests (C) instead; Tier A is
+  untouched. **What does NOT change without your word:** `tested` still means
+  a pass at the keyboard per WORKFLOW, and no already-granted status is
+  reclassified. **Recommendation: adopt, with the hands axis and the
+  visible-demotion rule.** → `agent/reports/CORUN1_EVIDENCE_CARDS.md` (the
+  four cards — transient sign-off artifacts per your anti-sprawl rule; their
+  durable content already lives in the entries and archived logs).
 - ⭐ **DECISION FOR YOU: does the F11 pre-wrapper rider close on two of its
   three readings?** (2026-08-04) You wrote the rider, so this is yours. Two
   readings passed cleanly — `TrainPlatformWedge [active]`, and 7 trains
@@ -139,8 +173,9 @@ these used to be filed only in agent reports, which is where you never read.
   click needed, no modal, nothing to judge. The whole cycle was **79.9 seconds**
   launch to desktop, the 56 MB load took **10 seconds**, and there was not one
   `[LUA ERROR]` in the log. Your `TEST2H TRAIN` save is untouched; the copy and
-  the probe are deleted. → `agent/prompts/corun-rig/CORUN_RIG_SPEC.md` §8.
-  **The rig works, and co-run #1 (the real payload) is prompt 3.**
+  the probe are deleted. → `docs/archive/SESSION_LOG.md` 2026-08-04 (the spec
+  was consumed at chain close 2026-08-04; full text in git,
+  `git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md`).
 - ~~**The vanilla `LawOfficeDoor` missing-asset error — file or ignore?**~~
   ✅ **DECIDED 2026-08-04: filed as `C44`, `wontfix`, closed.** You asked for a
   reason on it *"so another agent doesn't get distracted by it again"* — the
@@ -177,15 +212,21 @@ these used to be filed only in agent reports, which is where you never read.
   did not want back. Not precedent, not carried to any later co-run, and prompt
   4 audits every condition against git.
 
-  ⚖️ **You asked for it to be rechecked, and it will be.** Prompt 4 of the
-  corun-rig chain now has a named job to audit **both** my diagnosis and your
-  decision, told plainly that you are open to recommendations. It has four
-  specific targets, including the one claim I asserted but did **not** verify
-  from source (that the game loads only the files listed in `metadata.lua` —
-  the rule's entire safety argument rests on it) and the three strongest
-  objections I could find against my own recommendation. The rule is in force
-  meanwhile; if prompt 4 finds something equally safe and less awkward, it comes
-  back to you as a recommendation rather than a change.
+  ⚖️ **You asked for it to be rechecked — DONE 2026-08-04 (prompt 4): your
+  decision holds and the rule stands as written.** The diagnosis re-verified
+  from the tool and the hook themselves. The one claim that had been asserted
+  without source was verified: the game loads **only** the files listed in
+  `metadata.lua` `code` (`Mod.lua:490-521` — both load loops iterate that list,
+  nothing scans directories), so a parked probe genuinely cannot run. The
+  feared cost was measured away — the parse sweep works on the parked file, so
+  prep loses nothing — and declining your override measured what any escape
+  hatch would have bought: **0.4 seconds of machine time and none of yours.**
+  No recommendation to change anything; the safest option was also free.
+- **One cheap hardening from the same investigation, your call:** nothing
+  checks the TestKit repo's working tree — that is how the orphaned edit sat
+  unseen for a day. A doccheck line that *reports* (not blocks on) a dirty
+  TestKit tree would close the gap. Say go and it gets built; costs you
+  nothing either way. → `docs/archive/SESSION_LOG.md` 2026-08-04.
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for

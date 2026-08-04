@@ -10,9 +10,10 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 
 ✅✅ **The 18-prompt project chain is COMPLETE (2026-08-03)**; the playtest
 campaign is the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first**
-(verdict · doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig: CO-RUN #1 RAN ×3
-2026-08-04 — 3 of 4 payload items SETTLED**, owner **~6.5 min** of 15–20; next =
-prompt 4. ⛔ 11 corrections bind: `CORUN_RIG_SPEC` §8–§9 (+ `reports/CORUN1_*`).
+(verdict · doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig chain CLOSED
+2026-08-04** — rig PROVEN over 4 launches (**~30 s fixed + payload**, owner
+~8 min vs ~25–30 promised), 3 of 4 payload items settled; **sign-off tiers
+ROUTED (checklist)**; rule-5 recheck DONE, STANDS. Record: SESSION_LOG.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -29,11 +30,10 @@ Pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 
 ⚖️ **F76 CLOSED-REFUTED, P1 released**. Residue **`C41` (cand)**: ⭐ M5 lead
 **MEASURED 2026-08-04** — an out-of-range mouse displaces the picker; ⛔ it
-appeared 40/40, OG symptom unreproduced. MOD_DESCRIPTION's F76 note is VOID.
+appeared 52/52, OG symptom unreproduced. MOD_DESCRIPTION's F76 note is VOID.
 
-✅ **F11** — ⭐ cross-map route **SETTLED 2026-08-04: route (a)** (the entry had
-it as not provable from Lua). Pre-wrapper WATCHED: **2 of 3** readings pass, ⛔
-NOT `tested` — the stat branch is dead on that save. ⭐ Owner: close on 2/3? `P1`?
+✅ **F11** — ⭐ cross-map route **SETTLED 2026-08-04: route (a)**. Pre-wrapper
+WATCHED: **2 of 3** pass, ⛔ NOT `tested`. ⭐ Owner: close on 2/3? `P1`?
 
 ⚠️ **F99 (`cand`)** — **7** × `TrackElement.lua:805`, cheat-only; no-cheat
 UNPROVEN, nothing built. Drain = `ExpandTrackFromElement:729` absorb-walk + the
@@ -54,7 +54,7 @@ retail health (F98 is two-sided); **retail coverage is 78/87.**
 - **PT-37** → F48 · **F42** `blocked`, wontfix recommended, owner call needed.
 - **D08 extender overhaul** — 5 layers speced in
   `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
-- **Owner decisions (9 open)** → `docs/PLAYTEST_CHECKLIST.md` "Decisions
-  waiting on you", never only in agent docs.
+- **Owner decisions (12 open, incl. the sign-off tiers)** →
+  `docs/PLAYTEST_CHECKLIST.md` "Decisions waiting on you", never only in agent docs.
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
   `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.

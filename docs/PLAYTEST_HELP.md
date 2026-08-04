@@ -196,6 +196,13 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
   expression that renders as empty is NOT a reading — wrap uncertain reads as
   `print_format("label: <1>", tostring(expr))` so a `nil` arrives as a token
   you can see and quote.
+- ⛔ **An OS-side measurement from a non-DPI-aware process is not a
+  measurement** (same failure shape as reading the screen; added 2026-08-04,
+  co-run #1). A PowerShell `System.Windows.Forms.Screen` read at 150% Windows
+  scaling returned logical units (`2560×1440` for a `3840×2160` display) and
+  briefly produced a false three-way coordinate mystery. Monitor geometry
+  comes from the Windows display settings readout or a DPI-aware tool — never
+  from a default PowerShell process. (`agent/facts/EF-046`.)
 - **ONE command per line** — a pasted multi-line block silently concatenates
   into one line and fails `not understood`. And `not understood` means the
   line did not COMPILE — overwhelmingly a `--` comment inside a `*r`/`*g`
@@ -519,6 +526,53 @@ environment where the fix works and is silent in the one that matters.
 **Quoting "87 PASS" as evidence the pack is healthy on retail would be wrong,
 specifically about F25/F98.** Retail coverage is `78/87` and the 9 that do not
 report there are a known, enumerated set — that is the number to quote.
+
+---
+
+## The co-run rig — how an agent-driven launch actually runs
+
+**✅ EXECUTED FOUR TIMES, 2026-08-04** (co-run #0 walking skeleton + co-run #1
+runs 1–3) — every step below ran, none is merely written. Raw logs:
+`docs/archive/corun0_*.log`, `corun1_*.log`, `corun1b_*.log`, `corun1c_*.log`.
+Protocol rules (binding): `agent/WORKFLOW.md` "Co-runs" — this section is the
+mechanics.
+
+1. **Stage the save, game CLOSED:** `Copy-Item` the designated save (owner's
+   pick: `TEST2H TRAIN`) to a new name in
+   `C:\Users\stkot\Saved Games\Surviving Mars Relaunched\76561198020568696\`.
+   The engine lists the copy by FILENAME (`CORUN0.savegame.sav` loads as
+   `"CORUN0.savegame.sav"`); the display name inside is cosmetic. The campaign
+   save is never written; the copy dies in the result commit.
+2. **Arm at the sitting, not in prep** (probe hygiene rule 5): write the probe
+   file into TestKit `Code/97_*.lua`, add its `metadata.lua` line, parse sweep.
+   Arming measured at **0.4 s**; the parse sweep is location-independent, so
+   prep sweeps the parked source. ⛔ The edit is a script FILE, never an inline
+   PowerShell one-liner (rule C11 — an inline edit silently failed and a run
+   launched unarmed).
+3. **Launch:** `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050`
+   — **no `-smrautorun`** (95_AutoRun stands down by itself). No Steam picker
+   interposes: launch→log measured 1–5.2 s across four launches.
+4. **Inside the probe** (patterns: the three co-run #1 harnesses, in git at
+   `git show 93088ba:docs/agent/prompts/corun-rig/97_CoRun1.lua.txt`, `…1b…`,
+   `…1c…`): real-time thread + own watchdog; per-line-flushed `ModLog` markers;
+   poll `GetPreGameMainMenu()`, then `LoadGame("<COPY>.savegame.sav", {})` in
+   the thread. **The loaded save arrives PAUSED** — set a speed
+   (`UIColony:SetGameSpeed(3)`) before any game-time work, or it is dead on
+   arrival. Readiness is synchronous with `LoadGame`'s return; **15 s settle is
+   the measured-sufficient datum** (30 s bought nothing).
+5. **Timing discipline:** the load is timed by the engine's own
+   `Game loaded on map … in N ms` line, the cycle by `Time (ms)` at shutdown,
+   the launch by OS timestamps. ⛔ Never print or trust `RealTime()` deltas
+   across a loading screen (`agent/facts/EF-045` — 11.5× understatement).
+6. **Cost shape, measured:** a cycle is **~30 s of fixed overhead + the
+   payload** (menu poll 2.5 s, load stable 9.5–10 s on the 56 MB save, settle
+   15 s, flush/quit ~1.5 s). Whole cycles ran 64 s / 80 s / 85 s / 398 s.
+   Owner cost is the measure moments only — measured ~1.5 min (co-run #0) and
+   ~6.5 min (co-run #1, three launches).
+7. **Close-out:** delete the probe + its `metadata.lua` line + the staged copy
+   in the commit that records the answers; `PROBE SWEEP:` line; archive any
+   cited log with `git add -f`; **`git status` in BOTH repos** (WORKFLOW
+   co-run close-out rule).
 
 ---
 

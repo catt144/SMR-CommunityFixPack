@@ -57,6 +57,6 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-042 | `UIL.GetSafeArea()` returns FOUR ABSOLUTE NUMBERS (x1, y1, x2, y2), and on PC it equals the whole screen. | 2026-08-02 | 2026-08-02 | 15 | [EF-042.md](EF-042.md) |
 | EF-043 | `terminal.desktop.scale` is `GetUIScale`'s output INCLUDING the user's UI Scale option | 2026-08-02 | 2026-08-02 | 8 | [EF-043.md](EF-043.md) |
 | EF-044 | A probe tally is BUILD-SPECIFIC — MarsDebug and retail run different probe sets, and at least one fix behaves differently by build | 2026-08-03 | 2026-08-04 | 12 | [EF-044.md](EF-044.md) |
-| EF-045 | `RealTime()` does NOT advance across a loading screen — a harness cannot self-time its own load step | 2026-08-04 | 2026-08-04 | 18 | [EF-045.md](EF-045.md) |
+| EF-045 | `RealTime()` does NOT advance across a loading screen — a harness cannot self-time its own load step | 2026-08-04 | 2026-08-04 | 25 | [EF-045.md](EF-045.md) |
 | EF-046 | `terminal.GetMousePos()` returns VIRTUAL-DESKTOP coordinates while `terminal.desktop.box` covers only the game's own display — on a multi-monitor setup they are different spaces | 2026-08-04 | 2026-08-04 | 43 | [EF-046.md](EF-046.md) |
 

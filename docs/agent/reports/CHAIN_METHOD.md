@@ -211,6 +211,42 @@ authored):**
 6. **Terminal backward QA** — full backward check with a launch-blocking
    stop condition; nothing ships if the folder is not empty.
 
+**D — Kill-gated build chain (PROVEN 2026-08-04, the corun-rig chain: 4
+prompts, rig built and paying inside one day):** for building on unproven
+capability when the owner fears a hasty plan needing days of rework.
+Structure: an **inventory prompt** bins every primitive by provenance
+(PROVEN / VERIFIED-IN-SRC / UNKNOWN) under a chain rule that nothing may be
+planned on a primitive outside the bins → a **walking-skeleton prompt**
+executes the smallest end-to-end proof, with per-step predictions and 3×
+abort thresholds written down first, and is **allowed to kill the chain** (a
+clean abort that records why is the gate *working*; the terminal prompt
+carries a pre-written reduced form — post-mortem into this document, route
+the respec/abandon decision, empty the folder — so a kill has somewhere to
+land before the outcome is known) → the **payload prompt** builds only on
+what the skeleton proved, authoring re-runs from each run's own gaps inside
+one sitting → the **terminal QA** audits verdict-by-verdict against the
+archived logs, re-derives the economics from actuals, and integrates.
+Lessons this run banked, beyond the shapes above:
+- **PASS WITH CORRECTIONS is a verdict class.** The skeleton corrected the
+  spec §-by-§ (strike-and-supersede, 11 corrections across two runs) instead
+  of either failing the gate or silently absorbing the drift.
+- **Prediction-vs-actual tables with abort thresholds** turn "the effort
+  model was pessimistic" into a measured finding (5–8 min predicted, 80 s
+  actual) instead of a vibe — and give a kill objective trip-wires.
+- **A declined grant with the alternative timed is a control, not an
+  anecdote.** Prompt 3 declined a one-time rule override and measured what it
+  would have bought (0.4 s); the terminal audit then adjudicated the rule
+  from a number, not an argument. Hand a mid-chain grant back as a
+  measurement when you can.
+- **The owner can inject decisions mid-chain through the outbox mechanism**
+  without breaking self-consumption — three landed here (the probe-gate
+  decision plus its recheck order, the override grant, the run-3 insistence
+  on sampling the corner), and the last one caught the chain's worst error.
+- **Consumed files must name their git grave.** The spec was the only place
+  the rig was described; integration dissolves it into standing docs and the
+  close-out cites `git show <sha>:<path>` for the full text, so deletion
+  costs nothing.
+
 ## 6 · The two sentences to keep if everything else is lost
 
 **Structure work so that finishing is the only way a prompt can disappear,

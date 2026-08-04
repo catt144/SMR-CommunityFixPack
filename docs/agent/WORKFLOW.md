@@ -202,14 +202,26 @@ metadata/items lines, commit) or stops and reports.
    **If the sitting slips, nothing is stranded and nothing is armed** — which is
    the whole point.
 
-   ⚖️ **In force, and under an owner-requested recheck** (2026-08-04): the owner
-   asked corun-rig prompt 4 to audit both the diagnosis behind this rule and the
-   rule itself, and is open to a better recommendation. **Follow it meanwhile.**
-   Two things it does NOT say, so nobody reads them into it: it does not ban
-   long-lived instrumentation (that belongs in `90_Loggers.lua` behind an
-   explicit toggle, permanent and non-`TEMPORARY` by design), and it does not
-   excuse skipping the parse sweep — which now runs at the sitting, on the real
-   file, before the launch, exactly as before.
+   ⚖️ **In force. The owner-requested recheck RAN 2026-08-04 (corun-rig prompt
+   4) and the rule STANDS as written.** The diagnosis re-verified from primary
+   sources (`temporary_sweep()` really has no conditional path,
+   `tools/doccheck.py:501-517`; the hook really blocks on red; the CLEAN clause
+   reads as quoted). The one claim the diagnosis had left unverified is now
+   SOURCE-verified: **`ModDef:LoadCode` executes only the files listed in
+   `metadata.lua` `code`** — both of its loops iterate `ipairs(self.code)`,
+   no directory is scanned (`Mod.lua:490-521`) — so a parked probe is inert by
+   construction in the strong form, not merely the outside-`Code/` form. The
+   feared cost does not exist: the parse sweep is location-independent
+   (measured GREEN on a parked path during co-run #1 prep), and the declined
+   one-time override measured what any hatch would buy — **0.4 s of machine
+   time and zero owner time** — against a red doccheck in the history and a
+   live disarm deadline. No hatch is recommended; none was built.
+   Two things the rule does NOT say, so nobody reads them into it: it does not
+   ban long-lived instrumentation (that belongs in `90_Loggers.lua` behind an
+   explicit toggle, permanent and non-`TEMPORARY` by design — the file exists
+   and is the established home), and it does not excuse skipping the parse
+   sweep — which runs at the sitting, on the real file, before the launch,
+   exactly as before.
 
 ## Testing checklist per fix
 
@@ -226,6 +238,22 @@ logbook):**
   selection half by reconstructing the pool and reading it (F11's
   `SetCommand("EnterTransporter", …)` is verbatim the shipped caller's body —
   an unrunnable rider became a five-minute answer costing zero expeditions).
+- ⛔ **A negative result must state the CONDITION it sampled, not just the
+  count** (adopted 2026-08-04, co-run #1 correction C10). "Absence under N
+  cycles is a rate bound" holds only if the condition the claim needs was
+  actually present in those N cycles; absence of a never-sampled condition is
+  not a negative result at all. The breach that earned this: a pre-registered
+  corner-slam prediction was recorded REFUTED, with a confident false reason,
+  when its y-axis condition had never been sampled — one 64 s re-run sampled
+  it and confirmed the prediction to the pixel. The rate-bound rule is about
+  counts; this one is about conditions; a verdict needs both.
+- **Gates on owner actions DETECT the condition; they never ask for a typed
+  token as the primary signal** (co-run #1, found by the owner). Run 1's brief
+  told the owner to type a gate the code did not contain — the run proceeded
+  without them and only the owner noticed. Run 2 polled until the condition
+  itself held (cursor actually reading out of range) and could neither be
+  mis-documented nor missed. Typed gates still work as a convenience
+  (`GATE 1 RELEASED by owner`); they are one more thing to keep in sync.
 
 1. Load a save (or new game) where the bug reproduces; confirm reproduction
    with the mod disabled.
@@ -362,11 +390,48 @@ not an achievement.
 - **Batch aggressively.** One sitting should drain every co-run-ready rider
   plus all ride-along console reads — the launch and warm-up are the fixed
   cost; unattended-measurable items in the same sitting are free.
+- ⛔ **Arming/disarming edits are a script FILE run by the shell, never an
+  inline one-liner through PowerShell** (co-run #1, correction C11: an inline
+  edit's quoting was mangled, the `metadata.lua` line was silently not added,
+  and the game launched unarmed — caught only by reading the tool output).
+  Same hazard class as `git commit -m`; same remedy shape as `-F <file>`.
+- **Close-out runs `git status` in BOTH repos.** No gate anywhere checks the
+  TestKit's working tree (measured 2026-08-04: a true, verified record sat
+  stranded there for a day and surfaced only because a co-run happened to look),
+  and a co-run touches both repos by construction. A stranded edit is a finding
+  to route, never something to quietly commit or discard.
 
 **Checklist convention:** riders whose precondition is this mode are tagged
 **TAKEABLE IN a co-run** (a rider class alongside TAKEABLE WHEN). Sessions
 scoping work route "needs hours of observation" items there instead of parking
 them.
+
+**The rig's capability envelope** (measured 2026-08-04, co-runs #0 and #1 —
+four launches; run procedure and cost model: `PLAYTEST_HELP.md` "The co-run
+rig". The founding spec, `CORUN_RIG_SPEC.md`, was consumed at chain close and
+survives in git — `git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md`):
+
+- **PROVEN by execution:** agent-driven Steam launch (no picker interposes;
+  launch→log 1–5.2 s across four launches, no room for a human click);
+  staged-copy load by FILENAME from a `CreateRealTimeThread`; a loaded save
+  arrives PAUSED and readiness is synchronous with `LoadGame`'s return;
+  speed set/read-back; scripted state reads; amplification loops (20-cycle
+  forced-open loop, 300-sample 5 Hz poll, 238 s 1 Hz poll); multi-launch
+  sittings with each run authored from the previous one's log; per-line
+  flush + mid-session agent log reads.
+- **Still UNPROVEN (say so when planning):** the watchdog under a real wedge
+  (proven present, never fired). **DESCOPED, not pending:** Mod-Manager /
+  main-menu driving (blacklisted — the enable click stays human, P8 shape),
+  MarsDebug unattended automation (modal asserts make debug legs attended BY
+  CONSTRUCTION), OS-level input injection.
+- **Stays ORGANIC-ONLY by rule:** reachability claims, organic-witnessed
+  evidence upgrades, feel/severity judgments, the owner's own campaign.
+
+**Sign-off tiers: ROUTED 2026-08-04, ⛔ NOT IN FORCE.** The proposal (A
+witness / B evidence card, with a hands-vs-eyes axis / C delegated) is an
+owner decision on `PLAYTEST_CHECKLIST.md` "Decisions waiting on you" — it
+changes sign-off policy, which is the owner's. Until adopted, `tested` and
+per-item sign-off mean exactly what this document already says.
 
 ## Release steps
 
