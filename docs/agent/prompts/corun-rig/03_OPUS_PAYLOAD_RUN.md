@@ -238,15 +238,17 @@ What changes your jobs:*
   ⛔ `--no-verify` is barred — its documented meaning ("the docs are
   inconsistent, I know") would be a false statement when the only red is a
   declared probe.*
-- ***Do not sweep the TestKit's stray edit into your commits.*** `C:\Dev\SMR-
-  BugFixPack-TestKit` carries an **uncommitted comment-only change to
-  `Code/96_AutoRunFlag.lua`** from the 2026-08-03 MarsDebug session (an
-  `EXECUTED ONCE` marker for the 87/87 pass). It predates this chain and is not
-  a probe. You WILL be running `git` in that repo. **Do not `git add -A` it into
-  a co-run commit** — that smears provenance across sessions, which is what the
-  drift-evidence rule exists to stop. Leave it, or commit it **alone with its
-  own message**. Flagged to prompt 4 alongside the wider point that nothing
-  anywhere verifies the TestKit's working tree is clean.*
+- ***⛔ LEAVE THE TESTKIT'S ORPHANED EDIT ALONE — it is under investigation by
+  prompt 4, by the owner's explicit instruction.*** `C:\Dev\SMR-BugFixPack-
+  TestKit\Code\96_AutoRunFlag.lua` carries an uncommitted comment-only change
+  (an `EXECUTED ONCE` marker for the 2026-08-03 87/87 MarsDebug pass). It
+  predates this chain, is not a probe, and the owner declined an offer to commit
+  it standalone — *"I would be more comfortable having 04 investigate instead of
+  committing and forgetting."* **You WILL be running `git` in that repo, and a
+  `git add -A` there would silently absorb it into a co-run commit and destroy
+  the evidence prompt 4 is being asked to weigh.** Stage the TestKit
+  explicitly by path, never with `-A`. If your `git status` there shows anything
+  BEYOND that one file, that is new drift — report it, do not tidy it.*
 - ***Not caused by our leg, reported anyway** (WORKFLOW's log rule): two
   `[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_
   idle.hgacl` / `_opening.hgacl` lines fire on every load of this map. They are

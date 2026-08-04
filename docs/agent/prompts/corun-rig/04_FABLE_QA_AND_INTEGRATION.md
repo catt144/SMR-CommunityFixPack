@@ -242,25 +242,52 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
   open investigation, kill it. The failure mode this row exists to prevent is a
   future session re-deriving a universal, unfixable, cosmetic asset error.
 
-- ***🔍 Drift evidence for your job-2 audit, not mine to resolve.*** The TestKit
-  repo (`C:\Dev\SMR-BugFixPack-TestKit`, own git repo, local-only) carries an
-  **uncommitted working-tree edit to `Code/96_AutoRunFlag.lua`** that predates
-  co-run #0 — a comment-only block added by the **2026-08-03 MarsDebug session**
-  recording that the SETUP-ONLY procedure is EXECUTED ONCE (87 PASS / 0 FAIL /
-  0 SKIP, log `MarsDebug.exe-20260803-23.14.05`) and warning about the modal
-  asserts from the synthetic map. Prompt 2 deliberately did **not** sweep it into
-  the co-run #0 commit: it is not a probe, not this chain's work, and quietly
-  absorbing another session's uncommitted change into an unrelated commit is
-  exactly the provenance smearing the drift-evidence rule exists to stop.
-  **Two things worth your attention, and they are separate.** (1) The content
-  itself is good and load-bearing — an `EXECUTED ONCE` marker per authoring rule
-  R2, sitting uncommitted where a `git clone` of the TestKit would lose it; it
-  should be committed **to the TestKit repo, on its own, with its own message**.
-  (2) The interesting question is the one behind it: **the TestKit is a second
-  repo that nothing checks.** `doccheck.py` reads its `Code/` for the TEMPORARY
-  sweep and its probe count, but nothing anywhere verifies the TestKit's working
-  tree is clean, so a session can leave work stranded there indefinitely and no
-  gate notices. This one sat for a day and was found only because a co-run
-  happened to run `git status` in that repo. **Worth a line in whatever you
-  integrate into `WORKFLOW.md`** — a co-run touches both repos by construction,
-  so the rig makes this more likely, not less.
+- ***🔍 AN ORPHANED EDIT IN THE TESTKIT REPO — the owner has explicitly ASKED
+  YOU to investigate it rather than have it committed.*** Owner, 2026-08-04:
+  *"I don't know what this … is or where it came from and if you don't either I
+  would be more comfortable having 04 investigate instead of committing and
+  forgetting."* Prompt 2 had offered to commit it standalone; **that offer was
+  declined and the item is yours.** ⛔ **Do not commit it as housekeeping.**
+
+  **The thing:** `C:\Dev\SMR-BugFixPack-TestKit\Code\96_AutoRunFlag.lua` carries
+  an uncommitted working-tree change — a comment-only block stating the
+  SETUP-ONLY procedure is EXECUTED ONCE (87 PASS / 0 FAIL / 0 SKIP, log
+  `MarsDebug.exe-20260803-23.14.05`) plus a warning that the synthetic map throws
+  modal asserts (`Flight.lua:465/:479`) that retail swallows.
+
+  **Provenance, MEASURED by prompt 2 so you do not re-derive it** (all four
+  independently checkable):
+  1. File `LastWriteTime` **and** `CreationTime` are both **2026-08-03
+     23:20:03** — identical, so the file was written whole, not edited in place.
+  2. The MarsDebug log it cites last wrote at **23:19:43** — the edit landed
+     **20 seconds** after that session went quiet.
+  3. That log genuinely contains `---- 87 PASS, 0 FAIL, 0 SKIP, 0 ERROR ----`.
+     **The comment's factual claim is TRUE**, verified against the primary
+     source, not against the comment.
+  4. The **pack** repo was committing right through that window — `0dec7f0` at
+     23:22:16 and `b1d2c3d` at 23:24:55, both recording that same MarsDebug
+     pass — while the **TestKit** repo's HEAD is still `ab3111b` from **13:25**
+     the same day. No stash, no other refs, exactly one modified file.
+
+  **ROUTE claim, tagged separately from those citations per R3 — and it is the
+  only thing left open:** the session that ran the `[install]` pass wrote the
+  marker immediately after its run and then closed out by committing **only the
+  pack repo**, i.e. it forgot the second repo. The 20-second gap and the two pack
+  commits minutes later make this strong, **but they do not establish intent** —
+  nothing in the record rules out a deliberate deferral. **That adjudication is
+  your job**, and it is the reason the owner declined a quiet commit.
+
+  ⭐ **Nothing is at risk while you decide.** The fact itself is already recorded
+  in `PLAYTEST_HELP.md` ("The MarsDebug `[install]` pass") and in `STATE.md`'s
+  FIRST COMPLETE PROBE COVERAGE line. Only the in-file R2 marker is orphaned, so
+  there is no urgency pushing you toward a hasty answer.
+
+  **⚠️ And the systemic finding is now MEASURED, not hypothetical: the TestKit
+  is a second repo that nothing checks.** `doccheck.py` reads its `Code/` for the
+  TEMPORARY sweep and the probe count, but **no gate anywhere verifies its
+  working tree is clean**, so a session can strand work there indefinitely. This
+  one sat for a day and surfaced only because a co-run happened to run
+  `git status` in that repo. **A co-run touches both repos by construction, so
+  the rig makes this likelier, not less** — worth a line in whatever you
+  integrate into `WORKFLOW.md`, and possibly a doccheck check, which would also
+  close the override-audit gap above.
