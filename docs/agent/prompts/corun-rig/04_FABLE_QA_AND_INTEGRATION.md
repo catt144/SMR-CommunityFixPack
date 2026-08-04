@@ -281,25 +281,44 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
      `SMRTest.EnableIntrospection(debug)` into an asserts-build console. The
      comment could not have come from any other run.
 
-  **⚠️ What (5) adds beyond confirming the run — it bears on intent, which is
-  the open question.** A MarsDebug `[install]` pass is **attended by
-  construction** (§1 P9: modal `Assert failed` dialogs, and the introspection
-  bridge cannot be automated from mod code), so **the owner was at the keyboard
-  when that marker was written.** And the session did not end there: the pack
-  repo kept committing for **another three hours**, through to `39c5dfe` at
-  02:39 on 08-04, without ever returning to the TestKit. A session that ran three
-  more hours and ~10 more commits in the other repo, never touching this one
-  again, reads much more like an oversight than a deferral. **Still inference —
-  but now supported from three independent directions (timing, tally, and
-  session shape), which is more than prompt 2 could offer alone.**
+  **⚠️ What (5) adds beyond confirming the run.** A MarsDebug `[install]` pass
+  is **attended by construction** (§1 P9: modal `Assert failed` dialogs, and the
+  introspection bridge cannot be automated from mod code), so **the owner was at
+  the keyboard when that marker was written.**
+
+  ⛔ **CORRECTION, and it cuts against prompt 2's own argument — the owner caught
+  it** (2026-08-04): *"when I say last run of the night I mean last run of my
+  play sitting, this chain build out was running and prepping after that."*
+  Prompt 2 had written that the session *"kept committing for another three
+  hours … without ever returning to the TestKit"* and read that as strong
+  evidence of oversight. **That was wrong, because it assumed one continuous
+  session where there were at least three separate efforts**, and the commit
+  messages say so plainly:
+  - **The play sitting closes at ~23:25.** `0dec7f0` (23:22:16) records the
+    87/87 result itself; `b1d2c3d` (23:24:55) is literally titled *"The sitting
+    closes…"*. **That ~5-minute window — not three hours — is the only one in
+    which forgetting the TestKit is meaningful.**
+  - `28c253f` (23:26) → `4898757` (00:01) is the **f11-f99-review chain**, a
+    different job.
+  - `c731d4a` (01:04) → `39c5dfe` (02:39) is the **corun-rig chain build-out**,
+    a third.
+
+  **Those later phases had no reason to be in the TestKit at all, so their
+  silence is not evidence of anything.** The honest inference is therefore
+  narrower and weaker than prompt 2 first wrote it: *the play sitting's own
+  close-out commit went in without the TestKit, about five minutes after the
+  marker was written.* Still consistent with an oversight, no longer the strong
+  case it was presented as. **Weigh it at that strength, not the one it was
+  first given.**
 
   **ROUTE claim, tagged separately from those citations per R3 — and it is the
-  only thing left open:** the session that ran the `[install]` pass wrote the
-  marker immediately after its run and then went on committing to the **pack**
-  repo for three more hours without ever returning to the TestKit, i.e. it
-  forgot the second repo. Timing, tally and session shape all point the same
-  way, **but none of them establishes intent** — nothing in the record rules out
-  a deliberate deferral, and no session note anywhere mentions the file.
+  only thing left open:** the play sitting that ran the `[install]` pass wrote
+  the marker immediately after its run, then closed itself out ~5 minutes later
+  by committing the **pack** repo only — i.e. it forgot the second repo. Timing
+  and tally are solid; **the session-shape argument is much weaker than prompt 2
+  first claimed and has been corrected above.** None of it establishes intent —
+  nothing rules out a deliberate deferral, and no session note anywhere mentions
+  the file.
   **That adjudication is your job**, and it is the reason the owner declined a
   quiet commit. ⚠️ **Note what the alternative would have cost:** committing it
   as housekeeping would have made all five facts above unrecoverable from git in
