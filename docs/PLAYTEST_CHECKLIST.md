@@ -27,17 +27,37 @@ reasoning lives; **an agent strikes a line the moment you decide** — just say 
 in any session. Added 2026-08-03 by the docs-restructure chain (spec §7 / R10):
 these used to be filed only in agent reports, which is where you never read.
 
-- ⭐ **CO-RUN #1 IS PREPPED AND WAITING ON YOUR ~7 MINUTES** (2026-08-04). The
-  save copy is staged, the scripts are written and parse-swept, and the
-  measure-moments list is in one table with your verdict words already filled
-  in. It drains four riders in one sitting: the **F11 pre-wrapper watch** (you
-  watch one unload), **C41's vanishing picker** (amplified 20×, you watch), and
-  two console-grade reads that need no eyes. Promised ~15–20 min, designed for
-  **~7**. ⚖️ **One ask inside it, and you can veto it without affecting
-  anything else:** move your mouse onto your second monitor and back for 60
-  seconds — that is the one condition C41's only measured lead names, and your
-  machine has the two-monitor layout that produces it.
-  → `agent/prompts/corun-rig/CORUN1_BRIEF.md` §1.
+- ~~**CO-RUN #1 IS PREPPED AND WAITING ON YOUR ~7 MINUTES**~~ ✅ **RAN
+  2026-08-04. It cost you about 6 minutes against the 15–20 asked for**, across
+  two launches (398 s and 85 s, zero `[LUA ERROR]` in either). Three of the four
+  payload items settled, one narrowed. **Your `TEST2H TRAIN` is untouched**
+  (same bytes, same timestamp); the copy and both probes are deleted.
+  → `agent/reports/CORUN1_EVIDENCE_CARDS.md` for the four cards.
+  - ⭐ **F11's cross-map question is ANSWERED** — the one the entry said could
+    not be proven from Lua. It is **route (a)**; the removal was watched
+    happening, not inferred afterwards. → `agent/bugs/F11.md`.
+  - ⭐ **F99's last unknown is MEASURED** — the hex returns the hidden element,
+    which is what the seven crashes implied. Still `cand`, nothing built.
+  - ⭐ **C41 got its first real mechanism.** Your mouse genuinely reports
+    coordinates outside the game's own window box (up to `x=7665` against a box
+    ending at `3840`), and feeding that to the picker pins it to the right
+    screen edge ~2200 px from your cursor. ⛔ **But the picker still appeared
+    40 times out of 40** — the "icon does not appear" symptom did *not*
+    reproduce, so this is a mechanism, not a confirmation.
+- ⭐ **DECISION FOR YOU: does the F11 pre-wrapper rider close on two of its
+  three readings?** (2026-08-04) You wrote the rider, so this is yours. Two
+  readings passed cleanly — `TrainPlatformWedge [active]`, and 7 trains
+  completing full unload cycles with 340 passenger removals and **zero** wedges,
+  with you watching one. **The third cannot be taken on that save**:
+  `LuxuriousTrains` is researched so the travel-time comfort call is skipped by
+  design, and no train runs a forest track, so both stat counters read `0` —
+  and `0` is what a working fix and a broken one both produce there.
+  **My recommendation, not a decision:** the two expressions in question are
+  *vanilla's own lines*, so checking they still fire checks vanilla rather than
+  our wrapper — and the wrapper's own behaviour is now witnessed. Closing on two
+  of three looks right to me. **If you'd rather have the third**, it needs a
+  save without `LuxuriousTrains` or a train on a forest track, and it is one
+  ride-along in any future co-run. → `agent/bugs/F11.md`.
 - **The mod-page relabel package.** Five shipped fixes (F55 forever-mark, F40
   android dust sickness, F73(b) shelter reflex, F70 template refill, F97
   dust-devil gate) are correct repairs whose *bug-ness* is a design judgment.
@@ -558,7 +578,15 @@ working.
 → re-read the same Residence; then watch whether anyone was actually evicted
 (entry details, including why shift rotation will not trigger it).
 
-### Rider — F11: verify the pre-wrapper conversion · Status: unrun — **TAKEABLE WHEN** any sitting runs with the pack ON and a train line carrying passengers, or **TAKEABLE IN a co-run** (agent stages the line, you watch one unload)
+### Rider — F11: verify the pre-wrapper conversion · Status: ⚖️ **TWO OF THREE READINGS PASSED 2026-08-04 (co-run #1, you attended)** — the third is unavailable on that save; **your call whether it closes** (decision above). Remainder is **TAKEABLE WHEN** a sitting runs on a save WITHOUT `LuxuriousTrains`, or with a train on a `seen_forest` track
+**What ran.** `TrainPlatformWedge` read `active`; 7 trains completed full
+`GotoStation → UnloadTrain → LoadTrain → GotoStation` cycles over 238 s, **340**
+passenger removals from train holders, **0** wedge candidates, and you watched
+one unload and leave. ⛔ **The stat reading could not be taken** — both shipped
+branches are switched off on that save by design, so `0` and `0` mean nothing.
+⛔ **`tested` is NOT claimed.** Card 1 in `agent/reports/CORUN1_EVIDENCE_CARDS.md`.
+
+
 **Change, not a bug:** 2026-08-03 the F11 fix was converted from a ~30-line full
 method copy to a 10-line pre-wrapper (same repaired branch, original method
 called for everything else). It is behaviour-preserving **by construction** and
