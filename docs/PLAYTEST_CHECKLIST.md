@@ -27,6 +27,17 @@ reasoning lives; **an agent strikes a line the moment you decide** — just say 
 in any session. Added 2026-08-03 by the docs-restructure chain (spec §7 / R10):
 these used to be filed only in agent reports, which is where you never read.
 
+- ⭐ **CO-RUN #1 IS PREPPED AND WAITING ON YOUR ~7 MINUTES** (2026-08-04). The
+  save copy is staged, the scripts are written and parse-swept, and the
+  measure-moments list is in one table with your verdict words already filled
+  in. It drains four riders in one sitting: the **F11 pre-wrapper watch** (you
+  watch one unload), **C41's vanishing picker** (amplified 20×, you watch), and
+  two console-grade reads that need no eyes. Promised ~15–20 min, designed for
+  **~7**. ⚖️ **One ask inside it, and you can veto it without affecting
+  anything else:** move your mouse onto your second monitor and back for 60
+  seconds — that is the one condition C41's only measured lead names, and your
+  machine has the two-monitor layout that produces it.
+  → `agent/prompts/corun-rig/CORUN1_BRIEF.md` §1.
 - **The mod-page relabel package.** Five shipped fixes (F55 forever-mark, F40
   android dust sickness, F73(b) shelter reflex, F70 template refill, F97
   dust-devil gate) are correct repairs whose *bug-ness* is a design judgment.
