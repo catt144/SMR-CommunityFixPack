@@ -830,6 +830,49 @@ upgraded Medical Center in a dome / ~5 minutes.
 3. Save, reload, check again. A bonus that GREW on the second run is the FAIL
    (the pass is not idempotent — record the exact figures).
 
+⭐ **RAN UNATTENDED 2026-08-04 (unattended-1 leg A) — case A's do-no-harm half
+PASSES; half of it is UNSAMPLED. Status stays `unrun`; this is not a `tested`
+grant and cannot be (unattended ceiling is MECHANISM).**
+
+**Run conditions.** Retail `Mars.exe` **1.0.7.396349**, cold load of a staged
+COPY (`U1STAGE.savegame.sav`) of `TEST2H TRAIN`, pack **81/81 active as READ**,
+speed 3, 2 loads, **0 `[LUA ERROR]` lines in the window**. FORCED: nothing but
+the two calls themselves. ORGANIC: nothing. Raw lines:
+`docs/archive/u1c2_Mars.exe-20260804-17.03.10.log`.
+
+| step | reading |
+|---|---|
+| both calls, load 1 | `RepairTurbineBuff ok=true returned=0` · `RepairLeakedUpgradeModifiers ok=true returned=0` |
+| numbers before → after, load 1 | `0 of 7 readings changed` |
+| save → reload, numbers across the round trip | `0 of 7 readings changed` |
+| both calls again, load 2 | both `returned=0` |
+| numbers before → after, load 2 | `0 of 7 readings changed` |
+| start → finish | `0 of 7 readings changed` |
+
+⇒ **Nothing grew, nothing changed, both passes returned 0 twice.** That is
+step 2's "nothing on screen may change" and step 3's FAIL condition, in the
+numbers the entry's own claim is about.
+
+⛔ **What is NOT sampled, stated before anyone quotes the PASS.** The fixture
+this test asks for is **not on this save**: `FrictionlessComposites
+researched=false`, **0 Large Wind Turbines**, **0 Medical Centers** (13 domes,
+47 dome label modifiers).
+
+- **`RepairTurbineBuff`'s 0 is trivially forced and samples nothing.** It
+  early-returns at `Code/90_SaveSanitizer.lua:58` —
+  `if not colony:IsTechResearched("FrictionlessComposites") then return 0 end` —
+  so the pass never reached its body. **UNSAMPLED, not a do-no-harm result.**
+  Re-running this half needs a save with that tech researched.
+- **`RepairLeakedUpgradeModifiers`'s 0 is real but partial.** It ran its full
+  body over the colony, every city and all 13 domes — 175 label-modifier
+  entries — and removed none. So *"it does not strip live state"* is sampled on
+  a real population. *"It clears leaks"* is not: whether the save held any id of
+  the form `<handle>_upgrade<N>_mod_<M>` at all was not measured.
+
+**What it would take to close case A properly:** the same leg on a save with
+Frictionless Composites researched and at least one upgraded building — which is
+a fixture request, not a sitting. ⇒ routed as a gap by unattended-1 prompt 2.
+
 ### PT-42 — Last Transmission notices your reserves (F22, F75) · Status: unrun · **mode: co-run** (routing 2026-08-04 — stock/drain staged at speed; your eyes: the faction panel goals at 3–4 moments)
 **Bug:** the faction's stored-resource goals never cleared no matter how much
 you banked, the Oxygen goal was satisfied by Power, and the penalties became

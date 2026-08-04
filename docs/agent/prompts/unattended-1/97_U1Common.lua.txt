@@ -41,7 +41,21 @@ U1.settle_time    = 15 * 1000
 U1.quit_delay     = 3 * 1000
 U1.watchdog       = 20 * 60 * 1000   -- payload files override before U1.Flow()
 U1.stage          = "idle"
-U1.save_proven    = false            -- flipped true only by a passing U1.Save()
+-- ⚠️ SEEDED true 2026-08-04 by chain prompt 2, in the open (chain rule 5), after
+-- cycle 2 self-aborted on it. It was `false`, and the gate it implements is a
+-- per-CHAIN fact ("cycle 0 proved the primitive") written into a per-PROCESS
+-- flag — but every cycle after 0 is a NEW process that cannot see cycle 0's
+-- proof. Effect as written: leg A's save/reload half reported itself a ROUTED
+-- GAP citing a proof that had PASSED (log u1c0_Mars.exe-20260804-16.37.16.log,
+-- `SAVEPROOF PASS`), and cycle 6 / leg D2 would have aborted at its first line
+-- and produced nothing at all — the only leg that samples anything for leg D.
+-- ⛔ This does NOT weaken README rule 10. The proof is a recorded, archived
+-- fact, and the live check that actually protects a leg is unchanged: U1.Save()
+-- still lists before, refuses to overwrite, and requires the file to appear in
+-- Savegame.ListForTag afterwards, returning false and aborting the leg if the
+-- write does not land. What is removed is only a flag a fresh process had no
+-- way to know. Cycle 0 sets it false explicitly in both of its failure branches.
+U1.save_proven    = true
 U1.loads          = 0
 
 ---- output ------------------------------------------------------------------
