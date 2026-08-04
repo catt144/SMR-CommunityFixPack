@@ -73,6 +73,83 @@ name what the front of the co-run queue looks like instead. If a
 `02b_OPUS_CORUN.md` was inserted upstream, its results were claims like any
 other (Job 1 covers them) and its owner-minutes go into the batch cost.
 
+**Job 6 — the owner answered three decisions in their own hand; integrate
+them (added 2026-08-04 by the owner, via prompt 2).** They are committed
+verbatim in `docs/PLAYTEST_CHECKLIST.md` as informal end-of-bullet markers.
+**Read them in place — do not work from this summary alone**, and do not
+reword or relocate the owner's own text until the decision it carries has
+landed somewhere durable.
+
+| marker | attaches to | what it decides |
+|---|---|---|
+| `----Approved` | the **sign-off TIERS** item (Tier A/B/C + hands axis + visible-demotion rule) | **ADOPTED.** Standing policy, not a per-item call |
+| `--approved` | the **mod-page relabel package** ("judgment calls" section for F55, F40, F73(b), F70, F97) | **ADOPTED as a proposal** |
+| `---on hold` | **F100**, the `NoHomeless` self-check repair | ⛔ **NOT a decision.** Stays open, stays counted in STATE's open-decisions number |
+
+⛔ **Four traps, each of which is a way to take a decision the owner did not
+give:**
+
+1. **The tiers item states its own limits:** *"`tested` still means a pass at
+   the keyboard per WORKFLOW, and no already-granted status is
+   reclassified."* Adoption touches neither. Widening it is not integration.
+2. **The relabel package says "The wording is yours."** Approval adopts the
+   *proposal*; the wording is still **owed by the owner**. And
+   `MOD_DESCRIPTION.md` is **FROZEN** until launch prep — so this becomes a
+   launch-prep instruction with an owed input, not an edit to make now. Route
+   the wording ask back to the checklist.
+3. **`on hold` ≠ resolved.** F100 keeps its decision line; do not strike it,
+   do not archive it, do not decrement the open count for it.
+4. ⚖️ **This prompt's own "What you may not claim" forbids "any tier/sign-off
+   change (still routed, still the owner's)". That was written while the
+   decision was open. It is now ANSWERED, and the prohibition is SUPERSEDED
+   for the tiers item only** — every other item on that list stands
+   unchanged, F99 severity included. Say in your report that you relied on
+   this supersession.
+
+Where an adopted decision changes standing policy, it lands on the standing
+surface (`WORKFLOW.md` sign-off/co-run rules), not only on the checklist —
+and the checklist keeps the owner-facing record of *what they decided and
+when*, per the "owner decisions go in the checklist" rule.
+
+**Job 7 — stale records in the checklist: apply the documented rule, don't
+invent one (owner ask, 2026-08-04).** The checklist is **1,037 lines** and
+carries a growing layer of items that are finished: struck-through decision
+bullets marked `✅ DONE`/`DECIDED`, sections this chain settled, and routing
+notes overtaken by events.
+
+⛔ **The rule already exists — find it before you act.** The checklist's own
+reporting protocol says a completed section **moves WHOLE to
+`docs/archive/PLAYTEST_ARCHIVE.md` and is deleted from the checklist with no
+stub and no pointer left behind**; the header says the same. `docs/archive/`
+is **append-only, never edited**. Anti-sprawl (chain rule 12) still binds: no
+new document, folder, or document class — `PLAYTEST_ARCHIVE.md` is the
+destination that already exists.
+
+**Do this:**
+
+- **Inventory first, move second.** List what you judge stale and why, with
+  line references, before touching anything. A section is stale when its
+  question is *answered and recorded elsewhere* — never merely because it
+  looks old.
+- ⛔ **Never archive an item that still owes the owner something.** A decision
+  bullet with an open ask, an `on hold`, or an owed input (the relabel
+  wording) stays put no matter how much struck-through text surrounds it.
+- ⛔ **Nothing is deleted whose durable content does not already live in an
+  entry, `PLAYTEST_ARCHIVE.md`, `SESSION_LOG.md`, or an archived log.** Check,
+  per item. The checklist is the owner's working surface; a fact that exists
+  only there is not stale, it is unfiled — file it, then archive it.
+- **The class the rule does not cover: resolved DECISION bullets.** The
+  documented rule is written for completed *test sections*. Struck-through
+  decision records are a different shape, and there is no precedent for them.
+  ⛔ **Do not invent one silently.** Pick the treatment you think is right,
+  apply it to at most a couple of clear cases as a worked example, and **route
+  the general question to the owner on the checklist** with your
+  recommendation and what it would cost to apply across the file.
+- **Report the size delta** (lines before → after) and what moved, so the
+  owner can see the effect without reading the diff.
+- doccheck green; `PLAYTEST_ARCHIVE.md` grows by exactly what the checklist
+  lost, verbatim.
+
 ## Stop conditions
 
 - A load-bearing verdict fails its audit and the logs cannot settle it →

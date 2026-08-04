@@ -96,6 +96,8 @@ these used to be filed only in agent reports, which is where you never read.
   visible-demotion rule.** → `agent/reports/CORUN1_EVIDENCE_CARDS.md` (the
   four cards — transient sign-off artifacts per your anti-sprawl rule; their
   durable content already lives in the entries and archived logs).
+----Approved
+
 - ⭐ **DECISION FOR YOU: does the F11 pre-wrapper rider close on two of its
   three readings?** (2026-08-04) You wrote the rider, so this is yours. Two
   readings passed cleanly — `TrainPlatformWedge [active]`, and 7 trains
@@ -116,6 +118,7 @@ these used to be filed only in agent reports, which is where you never read.
   Proposal: a short "judgment calls" section in `MOD_DESCRIPTION.md` so they
   aren't presented identically to, say, F23 or F12. **The wording is yours.**
   → `docs/agent/reports/CHAIN_QA_REPORT.md` §3.
+  --approved 
 - **The dead `SMRFixPack_Disabled` veto on D03/D07.** The console veto lever
   does nothing for those two modules — only `IsActive` is consulted. Either
   honor it per-call in both, or record that the lever exists only for
@@ -134,6 +137,7 @@ these used to be filed only in agent reports, which is where you never read.
   changes self-check semantics for **all 81 modules** and needs a suite run
   either side); or fix only the misleading reason string. ⚠️ It sits on D12,
   which is under review. → `docs/agent/bugs/F100.md`.
+  ---on hold
 - **Does F11 keep `P1`?** The F11 rider ran 2026-08-03 and the state its fix
   guards against has **no demonstrated producer** — crew-gathering abduction
   keeps `train.units` synced on both maps. The fix is still a correct repair of
