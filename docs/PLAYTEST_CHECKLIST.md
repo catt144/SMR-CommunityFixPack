@@ -98,12 +98,28 @@ these used to be filed only in agent reports, which is where you never read.
 - **The C36-adjacent mysteries grep.** A cheap sweep of `Lua\Mysteries\` and
   `Scenario\` for `IsDisasterPredicted` gates, deliberately left unassigned:
   your call whether it becomes work at all. Not owed. → `CHAIN_QA_REPORT.md` §8.
-- **Schedule co-run #0 (~10 min of your time: one launch click, then stand
-  by).** The rig spec is written and every primitive is provenance-binned; the
-  walking skeleton (staged COPY of `TEST2H TRAIN` → scripted load → one trivial
-  read → quit) is defined with abort criteria, and prompt 2 of the corun-rig
-  chain executes it verbatim the session after you say when. Nothing ambitious
-  is built until it passes. → `docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md` §5.
+- ~~**Schedule co-run #0**~~ — ✅ **DONE 2026-08-04, you said go and it passed.**
+  It cost you **~1.5 minutes** against the ~10 asked for: no Steam picker, no
+  click needed, no modal, nothing to judge. The whole cycle was **79.9 seconds**
+  launch to desktop, the 56 MB load took **10 seconds**, and there was not one
+  `[LUA ERROR]` in the log. Your `TEST2H TRAIN` save is untouched; the copy and
+  the probe are deleted. → `agent/prompts/corun-rig/CORUN_RIG_SPEC.md` §8.
+  **The rig works, and co-run #1 (the real payload) is prompt 3.**
+- ⭐ **NEW — a vanilla missing-asset error, your call whether it becomes work.**
+  Every load of this map prints two lines: `[ResManager Error] Cannot find file
+  with base path: Animations/LawOfficeDoor_idle.hgacl` and `…_opening.hgacl`.
+  **Not ours** — they are also in your own 2026-08-03 campaign logs (`21.18.38`
+  and `22.23.59`) and absent from a boot-only session, so it is a shipped Law
+  Office animation the game references and does not ship. Harmless as far as we
+  can tell (a door that does not animate), never on any list, and it is only
+  here because the rule is that unexplained lines get reported rather than
+  filed away. **Want it as a `C`-row, or ignored?**
+- ⚙️ **A process blocker, no decision needed from you — logged so it is not
+  invisible.** `doccheck.py` reds on any `TEMPORARY` marker with no escape
+  hatch, but `WORKFLOW.md` explicitly allows a probe the session declares. That
+  means **a co-run whose sitting is not immediate cannot commit its prep** — it
+  only worked today because you were free straight away. Routed to prompt 4 of
+  the corun-rig chain. → `CORUN_RIG_SPEC.md` §8 C5.
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for

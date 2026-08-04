@@ -40,17 +40,23 @@ schedule, and eyes at measure moments.
 | P10 | **Owner-typed console driving at measure moments** — incl. driving a shipped call site directly (`col:SetCommand("EnterTransporter", rocket)`) | MEASURED 2026-08-03 (F11 settling observation, owner at keyboard, agent supplying lines) |
 | P11 | **Game-speed/pause caveats that shape scenario scripts**: notification windows run on GAME time; compressed `g_Consts` intervals need `RestartPeriodicRepeatThread`; retail player-reachable speed caps at 5× | MEASURED 2026-07-27 / 2026-07-29 / EF-038 (`PLAYTEST_HELP.md`) |
 
+> ⭐ **CO-RUN #0 RAN 2026-08-04 — VERDICT: PASS WITH CORRECTIONS** (prompt 2,
+> Opus). U1 executed end to end on the first attempt; **S1, S2, S4, S5 and S7
+> below are hereby PROMOTED to PROVEN** and their ⚠️ flags are struck. Costs and
+> corrections: §8, appended by that run. Raw lines:
+> `docs/archive/corun0_Mars.exe-20260804-10.51.15.log`.
+
 ### VERIFIED-IN-SRC — cited, never executed by us; ⚠️ = skeleton must prove in co-run #0
 
 | # | Primitive | Source citation | Flag |
 |---|-----------|-----------------|------|
-| S1 | **Load a SPECIFIC save programmatically**: `LoadGame(savename, params)` — `savename` is the on-disk FILE name; the engine's own find-by-display-name pattern is `WaitQuickLoadGame` (`ListForTag("savegame")` → match `save.displayname` → `LoadGame(save.savename, {save_as_last=true})`) | `CommonLua/Savegame.lua:1094-1117`, `:1407-1425` | ⚠️ #0 core proof |
-| S2 | **`LoadGame`/`Savegame` are callable from mod code and console** — neither is in `ModEnvBlacklist` (grep of `Mod.lua:1267-1428` this session: only `GetLuaSaveGameData`, `GetLuaLoadGamePermanents`, `DebugDownloadSavegameMods` match save/load names); `LoadGame` yields (loading screens, render-mode waits) so it MUST run in a thread — `CreateRealTimeThread` per the 95_AutoRun precedent | `Mod.lua:1267-1428`; `Savegame.lua:1098-1110` | ⚠️ #0 — the TestKit-calls-LoadGame composite is the skeleton |
+| S1 | **Load a SPECIFIC save programmatically**: `LoadGame(savename, params)` — `savename` is the on-disk FILE name; the engine's own find-by-display-name pattern is `WaitQuickLoadGame` (`ListForTag("savegame")` → match `save.displayname` → `LoadGame(save.savename, {save_as_last=true})`) | `CommonLua/Savegame.lua:1094-1117`, `:1407-1425` | ~~⚠️ #0 core proof~~ → **PROVEN 2026-08-04**: `LoadGame("CORUN0.savegame.sav", {})` returned no error; the bare filename+ext form is correct (`GetSavePath`, `:541-547`) |
+| S2 | **`LoadGame`/`Savegame` are callable from mod code and console** — neither is in `ModEnvBlacklist` (grep of `Mod.lua:1267-1428` this session: only `GetLuaSaveGameData`, `GetLuaLoadGamePermanents`, `DebugDownloadSavegameMods` match save/load names); `LoadGame` yields (loading screens, render-mode waits) so it MUST run in a thread — `CreateRealTimeThread` per the 95_AutoRun precedent | `Mod.lua:1267-1428`; `Savegame.lua:1098-1110` | ~~⚠️ #0 — the TestKit-calls-LoadGame composite is the skeleton~~ → **PROVEN 2026-08-04** from a `CreateRealTimeThread` body. ⭐ Reason strengthened: `Savegame.Load` is `_Wrap`ped (`:337-344`), and the wrapper itself `WaitThread`s — a thread is required by the wrapper, not merely by the loading screens |
 | S3 | **Where saves live + what a copy is**: `saves:/` (`GetPCSaveFolder`, `AccountStorage.lua:16`) = `C:\Users\stkot\Saved Games\Surviving Mars Relaunched\76561198020568696\` (VERIFIED ON DISK this session — `TEST2H TRAIN.savegame.sav`, 55,667,524 bytes, 2026-08-03 22:21). Name format `<display>.<tag>.sav`, tag `savegame`, ext `config.SaveGameExt = ".sav"` (`config.lua:21`, `Savegame._UniqueName :295-318`) | as cited | — |
-| S4 | **The game SEES a renamed copy**: enumeration is a file listing (`MetadataCache:Enumerate` — `AsyncListFiles(saves:/, *.sav)`), tag parsed from the FILENAME (`_InternalListForTag :479-481`), displayname read from metadata INSIDE the file (`MetadataCache:GetMetadata :85-91`). So `CORUN0.savegame.sav` copied in with the game CLOSED is listed (showing the ORIGINAL display name — cosmetic duplicate in the load menu) and loadable by FILENAME via S1. The engine even ships `Savegame._DefaultCopy` (`:528-535`) — not needed; agent-side file copy is simpler | as cited | ⚠️ #0 |
-| S5 | **Game speed from console/script**: `UIColony:SetGameSpeed(n)` (`Colony.lua:564`); `SetGameSpeedState("ultra")` reaches `SetGameSpeed(20)` unconditionally when called DIRECTLY — the `Platform.debug` gate is only on the +/- cycling lists (`HUD.lua:465-468` vs `:528-544`); needs a live HUD (in-colony). Pause = `SetGameSpeed(0)` | as cited | ⚠️ #0 free ride-along (set 3×, read back) |
+| S4 | **The game SEES a renamed copy**: enumeration is a file listing (`MetadataCache:Enumerate` — `AsyncListFiles(saves:/, *.sav)`), tag parsed from the FILENAME (`_InternalListForTag :479-481`), displayname read from metadata INSIDE the file (`MetadataCache:GetMetadata :85-91`). So `CORUN0.savegame.sav` copied in with the game CLOSED is listed (showing the ORIGINAL display name — cosmetic duplicate in the load menu) and loadable by FILENAME via S1. The engine even ships `Savegame._DefaultCopy` (`:528-535`) — not needed; agent-side file copy is simpler | as cited | ~~⚠️ #0~~ → **PROVEN 2026-08-04**: a plain `Copy-Item` with the game closed produced a file the engine listed and loaded by FILENAME |
+| S5 | **Game speed from console/script**: `UIColony:SetGameSpeed(n)` (`Colony.lua:564`); `SetGameSpeedState("ultra")` reaches `SetGameSpeed(20)` unconditionally when called DIRECTLY — the `Platform.debug` gate is only on the +/- cycling lists (`HUD.lua:465-468` vs `:528-544`); needs a live HUD (in-colony). Pause = `SetGameSpeed(0)` | as cited | ~~⚠️ #0 free ride-along (set 3×, read back)~~ → **PROVEN 2026-08-04**: `UIColony:SetGameSpeed(3)` read back `3` via `GetTimeFactor()/const.DefaultTimeFactor`. ⭐ Bonus: the read BEFORE was **`0`** — a freshly loaded save arrives PAUSED, so any game-time work a script schedules is dead until it sets a speed |
 | S6 | **Real-time threads run while game time is paused** — the watchdog/harness architecture depends on it (`RealTime()`-based waits); the MarsDebug procedure note relies on it (`*r` while paused) | `95_AutoRun.lua` throughout; `PLAYTEST_HELP.md` step 3 | INFERRED from architecture; #0 need not prove it separately |
-| S7 | **Readiness on the LOADED-save path**: `OnMsg.LoadGame` fires (`Lua/_init.lua:77`); `game_is_live` poll should go true after load exactly as after generation | as cited | ⚠️ #0 (the poll has only ever run on the new-colony path) |
+| S7 | **Readiness on the LOADED-save path**: `OnMsg.LoadGame` fires (`Lua/_init.lua:77`); `game_is_live` poll should go true after load exactly as after generation | as cited | ~~⚠️ #0 (the poll has only ever run on the new-colony path)~~ → **PROVEN 2026-08-04, and the poll turns out to be redundant**: `game_is_live` was ALREADY true the instant `LoadGame` returned (`STEP 3-waiting-city END 0ms`). `LoadGame` is synchronous to city-live; the wait costs nothing but proves nothing either |
 | S8 | **Sandbox map** (what executes where): mod/TestKit code sandboxed on ALL builds incl. MarsDebug (EF-006/EF-010, MEASURED 2026-07-26); retail console = same blacklist (`console.lua:27-56`); asserts-build console = real `_G` (`console.lua:36-44`) | as cited | — |
 
 ### UNKNOWN — answered by co-run #0 or descoped
@@ -303,8 +309,116 @@ commit — R10; an ask recorded only here is not asked.
 
 ## §7 Pointers
 
+*(§8 below is appended by co-run #0 itself. §1–§7 are prompt 1's text, corrected
+in place by strike-and-supersede only.)*
+
 Harness patterns: `C:\Dev\SMR-BugFixPack-TestKit\Code\95_AutoRun.lua`,
 `00_TestCore.lua` (deferred verdicts, `set_global`, env-specials guard) ·
 payload entries: `agent/bugs/F11.md`, `F99.md`, `C41.md` · binding process:
 folder README rules 8/10/11, WORKFLOW "Co-runs" + probe hygiene · console
 facts + verified command table: `PLAYTEST_HELP.md`.
+
+## §8 CO-RUN #0 — WHAT ACTUALLY RAN (2026-08-04, prompt 2; ⛔ kill-gate verdict: **PASS WITH CORRECTIONS**)
+
+**Run conditions.** Retail `Mars.exe` **1.0.7.396349**, launched
+`& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050` with **no**
+`-smrautorun` (95_AutoRun stood down as designed). Cold load of
+`CORUN0.savegame.sav`, a `Copy-Item` copy of `TEST2H TRAIN` staged with the game
+closed. Fix pack read **81/81 active, 0 inactive, 0 disabled, 0 error**.
+`PROBE SWEEP: armed: TestKit Code/97_CoRun0.lua, declared by co-run #0` — probe
+and staged save both deleted in the commit carrying this section. Raw lines
+archived: `docs/archive/corun0_Mars.exe-20260804-10.51.15.log`.
+
+### Costs — PREDICTED vs ACTUAL
+
+| step | predicted | abort at | **ACTUAL** |
+|------|-----------|----------|------------|
+| 1. launch → main menu | ≤2 min | 6 min | **~2.7 s** (launch cmd 10:51:13.8 → log 10:51:16.0; menu found 0.5 s after mod load) |
+| 2. harness loads the copy | ≤3 min | 9 min | **9.97 s** (engine clock; ⛔ see correction C1) |
+| 3. readiness + settle | ≤1 min | 3 min | **0 s + 30 s** settle (the 30 s is our own constant) |
+| 4. scripted reads + ride-along | ≤1 min | 3 min | **15 s**, of which 15 s is the ride-along's own `Sleep`; the six reads were sub-frame |
+| 5. flush, quit, desktop back | ≤1 min | 3 min | **~1.5 s** |
+| 6. agent reads log | ≤5 min | — | ~4 min |
+| **whole cycle, launch → desktop** | **5–8 min** | — | **79.9 s** (`Time (ms) 79876`) |
+| **owner-attended minutes** | **~10** | — | **~1.5** — one GO, then watching; no click was needed at all |
+
+Nothing came within 10% of any abort threshold. No `LOADERR`, no watchdog, no
+`[LUA ERROR]`, no `Assert failed`, no modal.
+
+### UNKNOWNS answered
+
+- **U1 — the composite chain: YES.** staged copy → launch → TestKit `LoadGame` at
+  the menu → colony live → scripted reads → flush → `quit()` → agent reads the
+  log ran **end to end on the first attempt**, zero relaunch churn. This is the
+  gate the whole chain existed to pass.
+- **U2 — 56 MB load wall-clock: 9,968 ms.** Source: the engine's own
+  `Game loaded on map BlankBigCanyonCMix_09 in 9968 ms` (`Savegame.lua:1114`,
+  `GetPreciseTicks`). ~3.3× the record's ~3 s-equivalent synthetic legs, and
+  **18× inside** the abort threshold. A launch cycle on the designated save is a
+  **~80 s** affair, not the predicted 5–8 min — the effort model in §3 is
+  **~4–6× pessimistic** and prompt 4 should re-derive the economics from this.
+- **U3 — does the Steam picker interpose: NO.** MEASURED by timestamp: the game
+  log was created **2.2 s** after the launch command returned, which no human
+  click can fit inside. The owner was seated and reported no picker. The
+  budgeted launch click was **not needed**.
+- **U4 — `TEST2H TRAIN` contents:** §6 confirm table below.
+
+### §6 confirm table — READ
+
+| payload | needs | **as read 2026-08-04** |
+|---|---|---|
+| F11 watch + Done-timing | rider aboard a train; landed surface rocket | ✅ **both** — 8 trains, **59 riders aboard**; 5 `AllRockets`, `UniversalZeusRocket` `landed=true` `command=CmdWaitOrder` on the surface map |
+| Hex tie-break read | underground track with a breakable element | ⛔ **GAP** — 926 `TrackGridElement`s, **0** with a live `broken` element |
+| C41 loop | any resource depot or heap | ✅ **abundant** — 11 `UniversalStorageDepot`, 658 `ResourceStockpileBase` |
+| F99 discriminator | damaged track + outstanding repair sites | ⛔ **GAP** — **0** repair construction sites on broken track |
+
+**Both gaps are the ones §6 already anticipated**, and §6's own remedy stands:
+co-run #1 stages a meteor break (`CheatMeteors` at a position — forced upstream,
+named; the repair itself must stay organic for F99). Routed as a gap, **not** as
+a re-choice of save — the save is otherwise richer than the record suggested.
+
+### ⛔ CORRECTIONS to this spec (the "WITH CORRECTIONS" half of the verdict)
+
+- **C1 — `RealTime()` deltas are NOT a valid step timer, and §5 assumed they
+  were.** The same `LoadGame` call measured **864 ms** on the harness's
+  `RealTime()` clock and **9,968 ms** on the engine's. `RealTime` advances per
+  rendered frame and `LoadGame` blocks in `WaitRenderMode` where none run.
+  **Any rig step spanning a loading screen must be timed by the engine's own
+  line, by OS file timestamps, or externally.** Filed as `agent/facts/EF-045`.
+- **C2 — §5's ride-along verdict table is conditional and does not say so.** Its
+  SYNC/DEFERRED → route (a)/(b) mapping is valid **only for a cross-map
+  abduction**. The run's pair was same-map (`cross_map=false`), so `DEFERRED`
+  followed trivially from `TransferToMap` never being called and settled nothing
+  about routes (a)/(b). A cross-map pair must be **selected for** — underground
+  rider + surface rocket. What the run *did* settle (the same-map removal path,
+  previously flagged unmeasured) is recorded in `agent/bugs/F11.md`.
+- **C3 — S7's readiness poll is redundant on the loaded-save path.** `LoadGame`
+  returns with the city already live (`STEP 3-waiting-city END 0ms`). Harmless,
+  but it is not the safety net §5 presented it as; a script that *needs* a
+  post-load settle must schedule it explicitly, as this one did.
+- **C4 — §5 prep 3 does not mention that a freshly loaded save arrives PAUSED.**
+  Game speed read back **`0`** before `SetGameSpeed(3)`. Any game-time thread a
+  scenario schedules is dead on arrival until a speed is set — this run's
+  15 s abduction window only worked because the speed call preceded it.
+- **C5 — the `TEMPORARY` gate and `doccheck.py` disagree, and doccheck wins.**
+  `WORKFLOW.md` probe hygiene defines CLEAN as "zero hits, **or** every hit is a
+  probe this session's design explicitly declares"; `doccheck.py`'s
+  `temporary_sweep()` has **no such escape hatch** and reds on any hit, and the
+  pre-commit hook blocks. Co-run #0 is the first job to arm a probe since
+  doccheck landed (2026-08-03), so it is the first to hit this. It was survivable
+  here only because the owner was available immediately, letting prep and results
+  land in one commit with the probe already deleted. **A co-run that must commit
+  prep before the sitting is blocked today.** Routed to prompt 4 (rig
+  integration) — the fix is a declared-probe hatch in doccheck, not
+  `--no-verify`, whose documented meaning ("the docs are inconsistent, I know")
+  would be a false statement in the record.
+
+### What may NOT be claimed from this run
+
+- Not that the rig "works" beyond these steps. **Amplification loops, multi-cycle
+  legs, watchdog-under-real-wedge and Mod-Manager driving are still unexercised.**
+  The watchdog did not fire, so it is proven present, not proven effective.
+- Not `tested` for F11 or anything else. The ride-along is MECHANISM evidence
+  from a FORCED upstream; F11's evidence label is unchanged.
+- Not owner-minutes savings — prompt 4 owns the economics audit. What is recorded
+  here is one measurement (~1.5 min actual vs ~10 promised), not a trend.

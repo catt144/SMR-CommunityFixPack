@@ -8,6 +8,60 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-04 — CO-RUN #0, the walking skeleton (corun-rig prompt 2, Opus): the rig's first end-to-end run, kill-gate PASSED WITH CORRECTIONS
+
+The first co-run ever run. Everything was prepped unattended; the owner gave one
+GO and watched. **The composite chain (U1) executed end to end on the first
+attempt** — staged save copy → Steam launch → TestKit `LoadGame` at the main
+menu → colony live → six scripted reads → forced ride-along → flush → `quit()` →
+agent reads the log — with **zero relaunch churn**, which §3 named as THE cost
+driver the design had to avoid.
+
+**Costs, measured.** Whole cycle **79.9 s** launch to desktop (predicted 5–8
+min). Launch → main menu **~2.7 s**; the 56 MB load **9,968 ms** (U2, engine's
+own `GetPreciseTicks` line); quit **~1.5 s**. **Owner-attended: ~1.5 min against
+the ~10 promised**, and no click was needed at all — no Steam picker interposed
+(U3 = NO, by timestamp: the game's log existed 2.2 s after the launch command).
+No `LOADERR`, no watchdog, no modal, no `[LUA ERROR]`, no `Assert failed`.
+Spec §1's ⚠️-flagged S1/S2/S4/S5/S7 all answered YES and are now PROVEN.
+
+**Five corrections came out of it** (`CORUN_RIG_SPEC.md` §8 C1–C5), and the
+first one is the sharpest: **`RealTime()` does not advance across a loading
+screen.** The same `LoadGame` call timed **864 ms** on the harness's clock and
+**9,968 ms** on the engine's — an 11.5× understatement, because `RealTime` is
+per rendered frame and `LoadGame` blocks in `WaitRenderMode` where none run. A
+rig that reports its own costs cannot time itself. Filed as `agent/facts/EF-045`.
+Also: a freshly loaded save arrives **PAUSED** (C4), which silently voids any
+game-time work a scenario schedules; the readiness poll is redundant on the
+load path (C3); and `doccheck.py` reds on any `TEMPORARY` marker with no
+declared-probe hatch while `WORKFLOW.md` permits one, so **a co-run whose
+sitting is not immediate cannot commit its prep** (C5, routed to prompt 4).
+
+**The ride-along half-delivered, and the honest half is the interesting one.**
+The F11 Done-timing trace fired, but the pair the script picked was **same-map**,
+so `OnTransferToMapDone` never ran and the cross-map routes (a)/(b) are
+untouched — the spec's verdict table was conditional and did not say so (C2).
+What it *did* settle is the same-map removal path, which the 2026-08-03
+correction block had explicitly left unmeasured. Recorded in `F11.md` with its
+own limits attached: `#train.units` moved 12 → 4 over 15 s of game time, so the
+count delta is not attributable to the abduction, and "the `:1209` route did it"
+is an elimination ROUTE claim that a post-hoc read cannot fully close. The
+instrument that would close it — wrap `Holder.OnExitHolder` and print its
+caller — is named for co-run #1.
+
+**§6 confirm table as read:** 8 trains with 59 riders aboard and a landed
+surface `UniversalZeusRocket` (F11 payload GO); 11 depots and 658 stockpiles
+(C41 GO); but **0 broken track elements and 0 repair sites** out of 926 track
+elements — the hex tie-break and F99 items are gapped and need a staged meteor
+break, exactly as §6 predicted. Routed as a gap, not a re-choice of save.
+
+Probe `97_CoRun0.lua`, its metadata line and `CORUN0.savegame.sav` were all
+deleted in the recording commit; `TEST2H TRAIN` was never written. Log archived
+at `docs/archive/corun0_Mars.exe-20260804-10.51.15.log`. Reported and not filed:
+two `[ResManager Error] … Animations/LawOfficeDoor_*.hgacl` lines that fire on
+every load of this map and also appear in the owner's own 2026-08-03 campaign
+logs — a vanilla missing asset, on the checklist for the owner's call.
+
 ## 2026-08-03/04 — f11-f99-review chain closed (terminal prompt, Fable): F11 converted to a pre-wrapper, F99's mechanism settled by reading, two of the second opinion's own claims overturned
 
 The two-prompt second-opinion chain (sealed derivation `28c253f`, outbox

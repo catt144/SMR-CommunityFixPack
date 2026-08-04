@@ -10,9 +10,9 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 
 ✅✅ **The 18-prompt project chain is COMPLETE (2026-08-03)**; the playtest
 campaign is the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first**
-(verdict · doctrine HOLDS · adjudications · §9 ordered top). ⭐ **corun-rig
-chain OPEN 2026-08-04** (`agent/prompts/corun-rig/`, Fable 1+4 / Opus 2+3) —
-builds the co-run rig, kill-gated; prompts 2–3 need the owner ~10/~20 min.
+(verdict · doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig: CO-RUN #0
+PASSED 2026-08-04 w/ corrections — the rig WORKS**: cycle **79.9 s**, owner
+**1.5 min** of ~10; next = prompt 3. ⛔ 5 corrections bind: `CORUN_RIG_SPEC` §8.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 

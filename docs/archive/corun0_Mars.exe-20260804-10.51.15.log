@@ -1,0 +1,312 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	35%
+Disk Free      	757021 MBytes
+
+
+					Render 0:00:00:007
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:093
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:097
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:950
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:02:083
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:02:277
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:985
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:03:079
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:18:079
+Account storage loaded successfully in 5 ms
+						Lua 0:00:18:088
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:18:470
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:18:471
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:475
+[mod] [CORUN0] +0ms RIDEALONG wrapper installed on the Unit classdef (pre-flattening)
+[CORUN0] +0ms RIDEALONG wrapper installed on the Unit classdef (pre-flattening)
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+						Lua 0:00:18:476
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+						Lua 0:00:18:477
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+						Lua 0:00:18:478
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+						Lua 0:00:18:479
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:18:480
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:18:481
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+						Lua 0:00:18:482
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+						Lua 0:00:18:483
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+						Lua 0:00:18:484
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+						Lua 0:00:18:485
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:19:026
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:19:100
+Reloading done in 969 ms
+						Lua 0:00:19:437
+[preset] Preset postprocess took 71 ms.
+						Lua 0:00:19:498
+479 / 479 particle streams loaded in 56 ms.
+						Lua 0:00:19:499
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:688
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:742
+[mod] [CORUN0] +1ms === CO-RUN #0 — the walking skeleton (CORUN_RIG_SPEC.md §5) ===
+[CORUN0] +1ms === CO-RUN #0 — the walking skeleton (CORUN_RIG_SPEC.md §5) ===
+[mod] [CORUN0] +1ms save file: CORUN0.savegame.sav | watchdog 600000ms | wrapper=true
+[CORUN0] +1ms save file: CORUN0.savegame.sav | watchdog 600000ms | wrapper=true
+[mod] [CORUN0] +1ms STEP 1-waiting-menu BEGIN
+[CORUN0] +1ms STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:744
+[PdxSDK] Started up. Took 1613
+						Lua 0:00:19:770
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:877
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:878
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:080
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:582
+[mod] [CORUN0] +2501ms STEP 1-waiting-menu END 2500ms
+[CORUN0] +2501ms STEP 1-waiting-menu END 2500ms
+[mod] [CORUN0] +2501ms STEP 2-loading-save BEGIN
+[CORUN0] +2501ms STEP 2-loading-save BEGIN
+						Lua 0:00:21:685
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:699
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:725
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:651
+*** Assets reloaded in 3.0 s, read 202.1 MB, read speed 68.5 MB/s, average read 4948 bytes.
+						Lua 0:00:30:627
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:654
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:671
+Game Loaded in 8987 ms
+						Lua 0:00:30:719
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:550
+Game loaded on map BlankBigCanyonCMix_09 in 9968 ms
+[mod] [CORUN0] +3365ms LOAD OK — LoadGame returned no error
+[CORUN0] +3365ms LOAD OK — LoadGame returned no error
+[mod] [CORUN0] +3365ms STEP 2-loading-save END 864ms
+[CORUN0] +3365ms STEP 2-loading-save END 864ms
+[mod] [CORUN0] +3365ms STEP 3-waiting-city BEGIN
+[CORUN0] +3365ms STEP 3-waiting-city BEGIN
+[mod] [CORUN0] +3365ms STEP 3-waiting-city END 0ms
+[CORUN0] +3365ms STEP 3-waiting-city END 0ms
+[mod] [CORUN0] +3365ms STEP 3b-settling BEGIN
+[CORUN0] +3365ms STEP 3b-settling BEGIN
+						Lua 0:00:33:856
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:01:549
+[mod] [CORUN0] +33365ms STEP 3b-settling END 30000ms
+[CORUN0] +33365ms STEP 3b-settling END 30000ms
+[mod] [CORUN0] +33365ms STEP 4-reads BEGIN
+[CORUN0] +33365ms STEP 4-reads BEGIN
+[mod] [CORUN0] +33365ms READ fixpack present: 81/81 active (0 inactive, 0 disabled, 0 error)
+[CORUN0] +33365ms READ fixpack present: 81/81 active (0 inactive, 0 disabled, 0 error)
+[mod] [SMRTest] F64: 2 stored Train prefab(s), 5 train(s) on the map
+[SMRTest] F64: 2 stored Train prefab(s), 5 train(s) on the map
+						Lua 0:01:01:551
+[mod] [CORUN0] +33365ms READ §6 row2 (hex tie-break): 926 TrackGridElement(s) on loaded maps, 0 with a live broken element
+[CORUN0] +33365ms READ §6 row2 (hex tie-break): 926 TrackGridElement(s) on loaded maps, 0 with a live broken element
+[mod] [CORUN0] +33365ms READ §6 row4 (F99): 0 repair construction site(s) on broken track, 0 with a non-numeric node_idx
+[CORUN0] +33365ms READ §6 row4 (F99): 0 repair construction site(s) on broken track, 0 with a non-numeric node_idx
+						Lua 0:01:01:553
+[mod] [CORUN0] +33365ms READ §6 row3 (C41): 11 UniversalStorageDepot(s), 658 ResourceStockpileBase(s)
+[CORUN0] +33365ms READ §6 row3 (C41): 11 UniversalStorageDepot(s), 658 ResourceStockpileBase(s)
+[mod] [CORUN0] +33365ms READ S5 game speed: SetGameSpeed(3) call=ok | before=0 (raw 0/1000) after=3 (raw 3000/1000)
+[CORUN0] +33365ms READ S5 game speed: SetGameSpeed(3) call=ok | before=0 (raw 0/1000) after=3 (raw 3000/1000)
+						Lua 0:01:01:554
+[mod] [CORUN0] +33365ms READ §6 row1 (F11): 8 train(s), 59 rider(s) aboard, rider found=2000021075 | 5 AllRockets, surface Holder candidate=UniversalZeusRocket landed=true command=CmdWaitOrder
+[CORUN0] +33365ms READ §6 row1 (F11): 8 train(s), 59 rider(s) aboard, rider found=2000021075 | 5 AllRockets, surface Holder candidate=UniversalZeusRocket landed=true command=CmdWaitOrder
+[mod] [CORUN0] +33365ms RIDEALONG BEFORE unit=2000021075 holder=Train handle=2000016863 find=1 #units=12 | rocket=UniversalZeusRocket handle=1061 cross_map=false
+[CORUN0] +33365ms RIDEALONG BEFORE unit=2000021075 holder=Train handle=2000016863 find=1 #units=12 | rocket=UniversalZeusRocket handle=1061 cross_map=false
+[mod] [CORUN0] +33365ms RIDEALONG FORCED: col:SetCommand("EnterTransporter", rocket) — the shipped call site, driven on a chosen target
+[CORUN0] +33365ms RIDEALONG FORCED: col:SetCommand("EnterTransporter", rocket) — the shipped call site, driven on a chosen target
+						Lua 0:01:16:549
+[mod] [CORUN0] +48365ms RIDEALONG AFTER  find=nil #units=4 holder_now=UniversalZeusRocket holder_is_rocket=true Done_fired=0
+[CORUN0] +48365ms RIDEALONG AFTER  find=nil #units=4 holder_now=UniversalZeusRocket holder_is_rocket=true Done_fired=0
+[mod] [CORUN0] +48365ms RIDEALONG VERDICT DEFERRED — OnTransferToMapDone never fired for this transfer (cross_map=false); the :1209 SetHolder route did the removal
+[CORUN0] +48365ms RIDEALONG VERDICT DEFERRED — OnTransferToMapDone never fired for this transfer (cross_map=false); the :1209 SetHolder route did the removal
+[mod] [CORUN0] +48365ms STEP 4-reads END 15000ms
+[CORUN0] +48365ms STEP 4-reads END 15000ms
+[mod] [CORUN0] +48365ms === CO-RUN #0 reads complete ===
+[CORUN0] +48365ms === CO-RUN #0 reads complete ===
+[mod] [CORUN0] +48365ms SHUTDOWN done
+[CORUN0] +48365ms SHUTDOWN done
+						Lua 0:01:19:549
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:19:554
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:19:876
+
+
+*** Debug::Done()
+Time (ms)	79876
+
+
