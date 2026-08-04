@@ -1,0 +1,254 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	32%
+Disk Free      	759053 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:063
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:067
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:068
+Language: English
+					Render 0:00:01:403
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:529
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:726
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:371
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:428
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:429
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:432
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:17:768
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:769
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:773
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+						Lua 0:00:17:774
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+						Lua 0:00:17:775
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+						Lua 0:00:17:776
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:17:777
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:778
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+						Lua 0:00:17:779
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+						Lua 0:00:17:780
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+						Lua 0:00:17:781
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+						Lua 0:00:17:782
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+						Lua 0:00:17:783
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+						Lua 0:00:17:784
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:335
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:407
+Reloading done in 968 ms
+						Lua 0:00:18:720
+[preset] Preset postprocess took 49 ms.
+						Lua 0:00:18:768
+479 / 479 particle streams loaded in 44 ms.
+						Lua 0:00:18:770
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:959
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:012
+[PdxSDK] Started up. Took 1573
+						Lua 0:00:19:034
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:459
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:614
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:01:35:078
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:01:35:079
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:01:35:103
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:01:36:778
+*** Assets reloaded in 1.7 s, read 202.1 MB, read speed 119.0 MB/s, average read 4949 bytes.
+						Lua 0:01:42:648
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:42:649
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:42:679
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:01:42:697
+Game Loaded in 7620 ms
+						Lua 0:01:42:730
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:43:352
+Game loaded on map BlankBigCanyonCMix_09 in 8378 ms
+						Lua 0:01:45:658
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:02:42:458
+{ GetMaxAmount_BlackCube = function: 000001F8E4CB6B50, GetMaxAmount_Concrete = function: 000001F8E4CB6B50, GetMaxAmount_Electronics = function: 000001F8E4CB6B50, GetMaxAmount_Food = function: 000001F8E4CB6B50, GetMaxAmount_Fuel = function: 000001F8E4CB6B50, GetMaxAmount_MachineParts = function: 000001F8E4CB6B50, GetMaxAmount_Metals = function: 000001F8E4CB6B50, GetMaxAmount_MysteryResource = function: 000001F8E4CB6B50, GetMaxAmount_Polymers = function: 000001F8E4CB6B50, GetMaxAmount_PreciousMetals = function: 000001F8E4CB6B50, GetMaxAmount_PreciousMinerals = function: 000001F8E4CB6B50, GetMaxAmount_Seeds = function: 000001F8E4CB6B50, GetMaxAmount_WasteRock = function: 000001F8E4CB6B50, GetStored_BlackCube = function: 000001F8E3BC0198, GetStored_Concrete = function: 000001F8E4B9DA90, GetStored_Electronics = function: 000001F8E52270B0, GetStored_Food = function: 000001F8E3FD6490, GetStored_Fuel = function: 000001F8E4F35D48, GetStored_MachineParts = function: 000001F8E3E66498, GetStored_Metals = function: 000001F8E3C65620, GetStored_MysteryResource = function: 000001F8E5067B78, GetStored_Polymers = function: 000001F8E4E61AA8, GetStored_PreciousMetals = function: 000001F8E4BB3FD8, GetStored_PreciousMinerals = function: 000001F8E5086A20, GetStored_Seeds = function: 000001F8E962F648, GetStored_WasteRock = function: 000001F8E9C75C88, assigned_resources = {}, at_spawn_track = false, at_station = false, auto_mode_on = false, base_construction_cost_BlackCube = 0, base_construction_cost_Concrete = 0, base_construction_cost_Electronics = 0, base_construction_cost_MachineParts = 0, base_construction_cost_Metals = 0, base_construction_cost_Polymers = 0, base_construction_cost_PreciousMetals = 0, base_construction_cost_PreciousMinerals = 0, base_construction_cost_WasteRock = 0, base_in_dome_construction_modifier = 100, base_max_shared_storage = 42000, box_height = 100, can_move = true, city = {...}, command = GotoStation, command_centers = {...}, command_destructors = {...}, command_thread = thread: 000001F8E9F7C670, count = 0, cube_attach_spot_idx = 2, current_station = {...}, entrance_fallback = false, full_today = 0, full_yesterday = 4, fx_actor_class = Train, fx_working = true, goto_target = false, handle = 2000035273, initialized = true, interest1 = needFood, last_reset = 0, placed_cubes = {...}, placement_offset = (0, 0, 0), resource = Metals, resource_storage = {...}, spatial_data = {...}, spent_time_sum = 738561.0, spent_time_values = {...}, stockpiled_amount = {...}, thread_running_destructors = false, track = {...}, units = {...}, visitors_lifetime = 57, visitors_per_day = 32, visual_cubes = {...}, working = true, true = userdata: 000001F8813BE9D0 } { DailyHealthRecover = 10000, MinAge_Senior = 81, SMRFixPack_reserved_at = 238370223, age = 21, age_trait = Adult, assigned_to_service = false, avoid_workplace = false, avoid_workplace_start = false, backstory = martianborn, base_DailyHealthRecover = 5000, base_DailySanityRecover = 5000, base_MinAge_Adult = 11, base_MinAge_Child = 0, base_MinAge_Middle Aged = 31, base_MinAge_Senior = 61, base_MinAge_Youth = 6, base_base_morale = 59541, base_birth_comfort_modifier = 0, base_death_age = 78, base_morale = 59541, base_performance = 119, base_preferred_workplace_performance_bonus = 0, birth_comfort_modifier = 0, birthplace = Mars, can_demolish = true, can_move = true, city = {...}, command = BoardVehicle, command_destructors = {...}, command_thread = thread: 000001F8E5881840, daily_interest = interestRelaxation, daily_interest_fail = 0, death_age = 98, dome = {...}, entity_gender = Male, faction_standings = {...}, faction_supported = false, fx_actor_class = ColonistMale, gender = Male, goto_target = false, handle = 2000031263, holder = {...}, infopanel_icon = UI/IconsRemaster/Colonists/IP/IP_Unit_Male_Hs_Adult_02.tga, inner_entity = Unit_Colonist_Male_Hs_Adult_02, ip_specialization_icon = UI/IconsRemaster/Colonists/IP/IP_Colonist_Male.tga, last_meal = 237420000, last_rest = 238158490, last_spot_tried = false, lead_in_out = false, leave_early_for_work = false, log_comfort = {...}, log_health = {...}, log_sanity = {...}, log_satisfaction = {}, modifications = {...}, name = {...}, next_heavy_update = 238490223, outside_start = false, performance = 129, pin_icon = UI/IconsRemaster/Colonists/Pin/Unit_Male_Hs_Adult_02.tga, pin_specialization_icon = UI/IconsRemaster/Colonists/Pin/Colonist_Male.tga, race = 5, reserved_residence = false, residence = {...}, safe_pos_on_failure = false, sols = 21, specialist = none, stat_comfort = 45000, stat_health = 100000, stat_morale = 69541, stat_sanity = 100000, status_effect_sign = StatusEffect_Unemployed, status_effect_sign_visible = false, status_effects = {...}, thread_running_destructors = false, training_points = {...}, traits = {...}, transport_task = false, transport_ticket = {...}, visit_door_opened = false, visit_end_time = 239282532, visit_interrupted = false, visit_restart = false, visit_spot_end_time = false, visit_thread = thread: 000001F8E5881840, workplace = false, workplace_shift = 1, true = userdata: 000001F88144B1E8 } BoardVehicle
+1
+						Lua 0:03:15:211
+true
+						Lua 0:04:16:098
+{ GetMaxAmount_BlackCube = function: 000001F8E4CB6B50, GetMaxAmount_Concrete = function: 000001F8E4CB6B50, GetMaxAmount_Electronics = function: 000001F8E4CB6B50, GetMaxAmount_Food = function: 000001F8E4CB6B50, GetMaxAmount_Fuel = function: 000001F8E4CB6B50, GetMaxAmount_MachineParts = function: 000001F8E4CB6B50, GetMaxAmount_Metals = function: 000001F8E4CB6B50, GetMaxAmount_MysteryResource = function: 000001F8E4CB6B50, GetMaxAmount_Polymers = function: 000001F8E4CB6B50, GetMaxAmount_PreciousMetals = function: 000001F8E4CB6B50, GetMaxAmount_PreciousMinerals = function: 000001F8E4CB6B50, GetMaxAmount_Seeds = function: 000001F8E4CB6B50, GetMaxAmount_WasteRock = function: 000001F8E4CB6B50, GetStored_BlackCube = function: 000001F8E3BC0198, GetStored_Concrete = function: 000001F8E4B9DA90, GetStored_Electronics = function: 000001F8E52270B0, GetStored_Food = function: 000001F8E3FD6490, GetStored_Fuel = function: 000001F8E4F35D48, GetStored_MachineParts = function: 000001F8E3E66498, GetStored_Metals = function: 000001F8E3C65620, GetStored_MysteryResource = function: 000001F8E5067B78, GetStored_Polymers = function: 000001F8E4E61AA8, GetStored_PreciousMetals = function: 000001F8E4BB3FD8, GetStored_PreciousMinerals = function: 000001F8E5086A20, GetStored_Seeds = function: 000001F8E962F648, GetStored_WasteRock = function: 000001F8E9C75C88, assigned_resources = {}, at_spawn_track = false, at_station = false, auto_mode_on = false, base_construction_cost_BlackCube = 0, base_construction_cost_Concrete = 0, base_construction_cost_Electronics = 0, base_construction_cost_MachineParts = 0, base_construction_cost_Metals = 0, base_construction_cost_Polymers = 0, base_construction_cost_PreciousMetals = 0, base_construction_cost_PreciousMinerals = 0, base_construction_cost_WasteRock = 0, base_in_dome_construction_modifier = 100, base_max_shared_storage = 42000, box_height = 100, can_move = true, city = {...}, command = GotoStation, command_centers = {...}, command_destructors = {...}, command_thread = thread: 000001F8E9F7C670, count = 0, cube_attach_spot_idx = 2, current_station = {...}, entrance_fallback = false, full_today = 0, full_yesterday = 4, fx_actor_class = Train, fx_working = true, goto_target = false, handle = 2000035273, initialized = true, interest1 = needFood, last_reset = 0, placed_cubes = {...}, placement_offset = (0, 0, 0), resource = Metals, resource_storage = {...}, spatial_data = {...}, spent_time_sum = 738561.0, spent_time_values = {...}, stockpiled_amount = {...}, thread_running_destructors = false, track = {...}, units = {...}, visitors_lifetime = 57, visitors_per_day = 32, visual_cubes = {...}, working = true, true = userdata: 000001F8813BE9D0 } { DailyHealthRecover = 10000, MinAge_Senior = 81, SMRFixPack_reserved_at = 238370223, age = 21, age_trait = Adult, assigned_to_service = false, avoid_workplace = false, avoid_workplace_start = false, backstory = martianborn, base_DailyHealthRecover = 5000, base_DailySanityRecover = 5000, base_MinAge_Adult = 11, base_MinAge_Child = 0, base_MinAge_Middle Aged = 31, base_MinAge_Senior = 61, base_MinAge_Youth = 6, base_base_morale = 59541, base_birth_comfort_modifier = 0, base_death_age = 78, base_morale = 59541, base_performance = 119, base_preferred_workplace_performance_bonus = 0, birth_comfort_modifier = 0, birthplace = Mars, can_demolish = true, can_move = true, city = {...}, command = BoardVehicle, command_destructors = {...}, command_thread = thread: 000001F8E5881840, daily_interest = interestRelaxation, daily_interest_fail = 0, death_age = 98, dome = {...}, entity_gender = Male, faction_standings = {...}, faction_supported = false, fx_actor_class = ColonistMale, gender = Male, goto_target = false, handle = 2000031263, holder = {...}, infopanel_icon = UI/IconsRemaster/Colonists/IP/IP_Unit_Male_Hs_Adult_02.tga, inner_entity = Unit_Colonist_Male_Hs_Adult_02, ip_specialization_icon = UI/IconsRemaster/Colonists/IP/IP_Colonist_Male.tga, last_meal = 237420000, last_rest = 238158490, last_spot_tried = false, lead_in_out = false, leave_early_for_work = false, log_comfort = {...}, log_health = {...}, log_sanity = {...}, log_satisfaction = {}, modifications = {...}, name = {...}, next_heavy_update = 238490223, outside_start = false, performance = 129, pin_icon = UI/IconsRemaster/Colonists/Pin/Unit_Male_Hs_Adult_02.tga, pin_specialization_icon = UI/IconsRemaster/Colonists/Pin/Colonist_Male.tga, race = 5, reserved_residence = false, residence = {...}, safe_pos_on_failure = false, sols = 21, specialist = none, stat_comfort = 45000, stat_health = 100000, stat_morale = 69541, stat_sanity = 100000, status_effect_sign = StatusEffect_Unemployed, status_effect_sign_visible = false, status_effects = {...}, thread_running_destructors = false, training_points = {...}, traits = {...}, transport_task = false, transport_ticket = {...}, visit_door_opened = false, visit_end_time = 239282532, visit_interrupted = false, visit_restart = false, visit_spot_end_time = false, visit_thread = thread: 000001F8E5881840, workplace = false, workplace_shift = 1, true = userdata: 000001F88144B1E8 } BoardVehicle
+						Lua 0:04:29:947
+not understood
+1
+						Lua 0:04:59:018
+true
+						Lua 0:05:04:318
+true
+						Lua 0:05:27:562
+true
+						Lua 0:08:15:795
+true

@@ -125,7 +125,11 @@ keyboard is what earns a fix `tested` in `agent/bugs/`.
    error count**; a PASS flips status in front matter AND heading tag (INDEX
    is generated — never hand-edit); a FAIL files a finding and flips nothing;
    when a status flip will cite a log's numbers, the log is copied into the
-   repo in the same commit (R8); the completed section moves WHOLE to
+   repo in the same commit (R8) — ⛔ **`.gitignore` line 2 is `*.log`, so a
+   plain `git add` DROPS IT SILENTLY and the commit still looks complete; use
+   `git add -f docs/archive/logs/<name>.log`** (found the hard way 2026-08-03,
+   after one commit shipped claiming logs it had not committed); the completed
+   section moves WHOLE to
    `PLAYTEST_ARCHIVE.md` and is **deleted from here with no stub or pointer
    left behind**. `python tools/doccheck.py` before every doc commit.
 

@@ -1,0 +1,817 @@
+					Render 0:00:00:011
+*** executable info
+					Render 0:00:00:012
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	32%
+Disk Free      	759113 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:116
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:120
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:121
+Language: English
+					Render 0:00:01:957
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:02:090
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:02:284
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:989
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:03:044
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:18:038
+Account storage loaded successfully in 1 ms
+						Lua 0:00:18:056
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:18:434
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:519
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:531
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+						Lua 0:00:18:537
+[mod] [CommunityFixPack] MeteorFrequency: applied
+						Lua 0:00:18:542
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+						Lua 0:00:18:548
+[mod] [CommunityFixPack] NightShiftWork: applied
+						Lua 0:00:18:553
+[mod] [CommunityFixPack] MilestoneCrash: applied
+						Lua 0:00:18:559
+[mod] [CommunityFixPack] WispRewards: applied
+						Lua 0:00:18:563
+[mod] [CommunityFixPack] TouristApplicants: applied
+						Lua 0:00:18:568
+[mod] [CommunityFixPack] TrainsToVoid: applied
+						Lua 0:00:18:574
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:18:579
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+						Lua 0:00:18:584
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+						Lua 0:00:18:590
+[mod] [CommunityFixPack] ShelterReflex: applied
+						Lua 0:00:18:595
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+						Lua 0:00:18:601
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+						Lua 0:00:18:606
+[mod] [CommunityFixPack] LakeEntombment: applied
+						Lua 0:00:18:611
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+						Lua 0:00:18:616
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+						Lua 0:00:18:621
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:18:625
+[mod] [CommunityFixPack] VacuumWalks: applied
+						Lua 0:00:18:630
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:18:635
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+						Lua 0:00:18:639
+[mod] [CommunityFixPack] StaleReservations: applied
+						Lua 0:00:18:644
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+						Lua 0:00:18:649
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+						Lua 0:00:18:654
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+						Lua 0:00:18:659
+[mod] [CommunityFixPack] LowStorageWarning: applied
+						Lua 0:00:18:664
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+						Lua 0:00:18:669
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:18:674
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+						Lua 0:00:18:679
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+						Lua 0:00:18:684
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:18:689
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+						Lua 0:00:18:694
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+						Lua 0:00:18:699
+[mod] [CommunityFixPack] GeneForging: applied
+						Lua 0:00:18:704
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+						Lua 0:00:18:709
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+						Lua 0:00:18:714
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+						Lua 0:00:18:719
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+						Lua 0:00:18:724
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+						Lua 0:00:18:729
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+						Lua 0:00:18:733
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+						Lua 0:00:18:739
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:18:744
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:18:749
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+						Lua 0:00:18:754
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+						Lua 0:00:18:759
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+						Lua 0:00:18:765
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:18:770
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+						Lua 0:00:18:775
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+						Lua 0:00:18:780
+[mod] [CommunityFixPack] TrainWaitTime: applied
+						Lua 0:00:18:785
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+						Lua 0:00:18:790
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+						Lua 0:00:18:795
+[mod] [CommunityFixPack] SequenceLatents: applied
+						Lua 0:00:18:800
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+						Lua 0:00:18:805
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+						Lua 0:00:18:810
+[mod] [CommunityFixPack] LayoutTechLock: applied
+						Lua 0:00:18:814
+[mod] [CommunityFixPack] TrainMinors: applied
+						Lua 0:00:18:819
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+						Lua 0:00:18:825
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+						Lua 0:00:18:834
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+						Lua 0:00:18:839
+[mod] [CommunityFixPack] BombardmentSpread: applied
+						Lua 0:00:18:844
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+						Lua 0:00:18:849
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+						Lua 0:00:18:854
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+						Lua 0:00:18:858
+[mod] [CommunityFixPack] RainsDeadlock: applied
+						Lua 0:00:18:864
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+						Lua 0:00:18:869
+[mod] [CommunityFixPack] SaintBlessing: applied
+						Lua 0:00:18:874
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+						Lua 0:00:18:878
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+						Lua 0:00:18:883
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+						Lua 0:00:18:888
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+						Lua 0:00:18:893
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+						Lua 0:00:18:897
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:18:902
+[mod] [CommunityFixPack] ClassicRockets: applied
+						Lua 0:00:18:907
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+						Lua 0:00:18:913
+[mod] [CommunityFixPack] ResidencyControl: applied
+						Lua 0:00:18:918
+[mod] [CommunityFixPack] MultipleSuns: applied
+						Lua 0:00:18:923
+[mod] [CommunityFixPack] DroneOverhaul: applied
+						Lua 0:00:18:927
+[mod] [CommunityFixPack] CohortHousing: applied
+						Lua 0:00:18:933
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+						Lua 0:00:18:937
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:19:465
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:19:538
+Reloading done in 1442 ms
+						Lua 0:00:19:878
+[preset] Preset postprocess took 70 ms.						Lua 0:00:19:879
+
+						Lua 0:00:19:938
+479 / 479 particle streams loaded in 55 ms.
+						Lua 0:00:19:939
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:989
+[PdxSDK] Started up. Took 1894
+						Lua 0:00:20:123
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:20:217
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:20:282
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:20:284
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:519
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:48:813
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:48:823
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:48:847
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:51:593
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 73.0 MB/s, average read 4948 bytes.
+						Lua 0:00:57:436
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:57:462
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:57:478
+Game Loaded in 8666 ms
+						Lua 0:00:57:516
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:58:023
+Game loaded on map BlankUnderground_04 in 9310 ms
+						Lua 0:00:59:334
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:00:335
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:18:971
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:08:22:871
+ObjCheat CheatDelete
+						Lua 0:08:26:076
+ObjCheat CheatDelete
+						Lua 0:09:52:550
+ObjCheat CheatRepair
+						Lua 0:10:00:577
+
+!!! Quick Build !!!
+						Lua 0:10:12:629
+Story bits: Triggered story bit - UndergroundDeepScanning						Lua 0:10:15:264
+
+!!! Quick Build !!!
+						Lua 0:10:30:627
+[mod] [CommunityFixPack] MeteorStormWedge: WEDGE confirmed - g_MeteorStorm set for 1h+ with no notification and nothing falling (scheduler thread alive but stuck); healing
+[mod] [CommunityFixPack] MeteorStormWedge: scheduler thread restarted - future storms will schedule again
+						Lua 0:10:38:619
+[mod] [CommunityFixPack] MeteorStormWedge: forced storm state clean (14 stray meteor object(s) removed)
+						Lua 0:11:07:171
+Story bits: Reply selected - Metals are fundamental, and more importantly they're what we need right now						Lua 0:12:00:877
+[LUA ERROR] Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+  Lua/Buildings/TrackElement.lua(805):  method Complete
+  Lua/Buildings/ConstructionSite.lua(2483):  method Complete
+  Lua/Cheats.lua(115):   <>
+  [C](-1):  method MapForEach
+  Lua/Cheats.lua(126):  global CheatCompleteAllConstructions
+  [string "ConsolePrint(print_format(CheatCompleteAllCon..."](1):   <>
+  [C](-1):  global pcall
+  CommonLua/console.lua(63):  global ConsoleExec
+  CommonLua/UI/Dev/uiConsole.lua(371):  method Exec
+  CommonLua/UI/Dev/uiConsole.lua(95):  method OnShortcut
+  CommonLua/X/XDesktop.lua(204):  method OnShortcut
+  CommonLua/Core/terminal.lua(101):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackConstructionSite
+	         quick_build |   string quick_build
+	                 igi |   object InGameInterface
+	               track |   object TrackBase at (260000, 183592, 5245) on map 1
+	             element |   object TrackGridElement at (260500, 182726, 5245) on map 1
+	            reselect |  boolean false
+	                 cm1 |   number 4283130509
+	                 cm2 |   number 4283130509
+	                 cm3 |   number 4283130509
+	                 cm4 |   number 4283130509
+	           track_obj |   object TrackBase at (183500, 342070, 5245) on map 1
+	                 el1 |   object TrackGridElement at (183500, 342070, 5245) on map 1
+	                 el2 |   object TrackGridElement at (275500, 144622, 5245) on map 1
+	            start_el |      nil
+	              end_el |      nil
+Error calling Lua function "exec" from C: Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+[LUA ERROR] Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+  Lua/Buildings/TrackElement.lua(805):  method Complete
+  Lua/Cheats.lua(115):   <>
+  [C](-1):  method MapForEach
+  Lua/Cheats.lua(126):  global CheatCompleteAllConstructions
+  [string "ConsolePrint(print_format(CheatCompleteAllCon..."](1):   <>
+  [C](-1):  global pcall
+  CommonLua/console.lua(63):  global ConsoleExec
+  CommonLua/UI/Dev/uiConsole.lua(371):  method Exec
+  CommonLua/UI/Dev/uiConsole.lua(95):  method OnShortcut
+  CommonLua/X/XDesktop.lua(204):  method OnShortcut
+  CommonLua/Core/terminal.lua(101):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackConstructionSite
+	         quick_build |   string quick_build
+	                 igi |   object InGameInterface
+	               track |   object TrackBase at (260000, 183592, 5245) on map 1
+	             element |   object TrackGridElement at (259000, 185324, 5245) on map 1
+	            reselect |  boolean false
+	                 cm1 |   number 4283130509
+	                 cm2 |   number 4283130509
+	                 cm3 |   number 4283130509
+	                 cm4 |   number 4283130509
+	           track_obj |   object TrackBase at (183500, 342070, 5245) on map 1
+	                 el1 |   object TrackGridElement at (183500, 342070, 5245) on map 1
+	                 el2 |   object TrackGridElement at (275500, 144622, 5245) on map 1
+	            start_el |      nil
+	              end_el |      nil
+Error calling Lua function "exec" from C: Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+						Lua 0:12:00:878
+[LUA ERROR] Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+  Lua/Buildings/TrackElement.lua(805):  method Complete
+  Lua/Cheats.lua(115):   <>
+  [C](-1):  method MapForEach
+  Lua/Cheats.lua(126):  global CheatCompleteAllConstructions
+  [string "ConsolePrint(print_format(CheatCompleteAllCon..."](1):   <>
+  [C](-1):  global pcall
+  CommonLua/console.lua(63):  global ConsoleExec
+  CommonLua/UI/Dev/uiConsole.lua(371):  method Exec
+  CommonLua/UI/Dev/uiConsole.lua(95):  method OnShortcut
+  CommonLua/X/XDesktop.lua(204):  method OnShortcut
+  CommonLua/Core/terminal.lua(101):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackConstructionSite
+	         quick_build |   string quick_build
+	                 igi |   object InGameInterface
+	               track |   object TrackBase at (260000, 183592, 5245) on map 1
+	             element |   object TrackGridElement at (259500, 184458, 5245) on map 1
+	            reselect |  boolean false
+	                 cm1 |   number 4283130509
+	                 cm2 |   number 4283130509
+	                 cm3 |   number 4283130509
+	                 cm4 |   number 4283130509
+	           track_obj |   object TrackBase at (183500, 342070, 5245) on map 1
+	                 el1 |   object TrackGridElement at (183500, 342070, 5245) on map 1
+	                 el2 |   object TrackGridElement at (275500, 144622, 5245) on map 1
+	            start_el |      nil
+	              end_el |      nil
+Error calling Lua function "exec" from C: Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+[LUA ERROR] Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+  Lua/Buildings/TrackElement.lua(805):  method Complete
+  Lua/Cheats.lua(115):   <>
+  [C](-1):  method MapForEach
+  Lua/Cheats.lua(126):  global CheatCompleteAllConstructions
+  [string "ConsolePrint(print_format(CheatCompleteAllCon..."](1):   <>
+  [C](-1):  global pcall
+  CommonLua/console.lua(63):  global ConsoleExec
+  CommonLua/UI/Dev/uiConsole.lua(371):  method Exec
+  CommonLua/UI/Dev/uiConsole.lua(95):  method OnShortcut
+  CommonLua/X/XDesktop.lua(204):  method OnShortcut
+  CommonLua/Core/terminal.lua(101):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackConstructionSite
+	         quick_build |   string quick_build
+	                 igi |   object InGameInterface
+	               track |   object TrackBase at (260000, 183592, 5245) on map 1
+	             element |   object TrackGridElement at (258500, 186190, 5245) on map 1
+	            reselect |  boolean false
+	                 cm1 |   number 4283130509
+	                 cm2 |   number 4283130509
+	                 cm3 |   number 4283130509
+	                 cm4 |   number 4283130509
+	           track_obj |   object TrackBase at (183500, 342070, 5245) on map 1
+	                 el1 |   object TrackGridElement at (183500, 342070, 5245) on map 1
+	                 el2 |   object TrackGridElement at (275500, 144622, 5245) on map 1
+	            start_el |      nil
+	              end_el |      nil
+Error calling Lua function "exec" from C: Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+						Lua 0:12:00:879
+[LUA ERROR] Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+  Lua/Buildings/TrackElement.lua(805):  method Complete
+  Lua/Cheats.lua(115):   <>
+  [C](-1):  method MapForEach
+  Lua/Cheats.lua(126):  global CheatCompleteAllConstructions
+  [string "ConsolePrint(print_format(CheatCompleteAllCon..."](1):   <>
+  [C](-1):  global pcall
+  CommonLua/console.lua(63):  global ConsoleExec
+  CommonLua/UI/Dev/uiConsole.lua(371):  method Exec
+  CommonLua/UI/Dev/uiConsole.lua(95):  method OnShortcut
+  CommonLua/X/XDesktop.lua(204):  method OnShortcut
+  CommonLua/Core/terminal.lua(101):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackConstructionSite
+	         quick_build |   string quick_build
+	                 igi |   object InGameInterface
+	               track |   object TrackBase at (260000, 183592, 5245) on map 1
+	             element |   object TrackGridElement at (258000, 187056, 5245) on map 1
+	            reselect |  boolean false
+	                 cm1 |   number 4283130509
+	                 cm2 |   number 4283130509
+	                 cm3 |   number 4283130509
+	                 cm4 |   number 4283130509
+	           track_obj |   object TrackBase at (183500, 342070, 5245) on map 1
+	                 el1 |   object TrackGridElement at (183500, 342070, 5245) on map 1
+	                 el2 |   object TrackGridElement at (275500, 144622, 5245) on map 1
+	            start_el |      nil
+	              end_el |      nil
+Error calling Lua function "exec" from C: Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+[LUA ERROR] Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+  Lua/Buildings/TrackElement.lua(805):  method Complete
+  Lua/Cheats.lua(115):   <>
+  [C](-1):  method MapForEach
+  Lua/Cheats.lua(126):  global CheatCompleteAllConstructions
+  [string "ConsolePrint(print_format(CheatCompleteAllCon..."](1):   <>
+  [C](-1):  global pcall
+  CommonLua/console.lua(63):  global ConsoleExec
+  CommonLua/UI/Dev/uiConsole.lua(371):  method Exec
+  CommonLua/UI/Dev/uiConsole.lua(95):  method OnShortcut
+  CommonLua/X/XDesktop.lua(204):  method OnShortcut
+  CommonLua/Core/terminal.lua(101):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackConstructionSite
+	         quick_build |   string quick_build
+	                 igi |   object InGameInterface
+	               track |   object TrackBase at (260000, 183592, 5245) on map 1
+	             element |   object TrackGridElement at (257500, 187922, 5245) on map 1
+	            reselect |  boolean false
+	                 cm1 |   number 4283130509
+	                 cm2 |   number 4283130509
+	                 cm3 |   number 4283130509
+	                 cm4 |   number 4283130509
+	           track_obj |   object TrackBase at (183500, 342070, 5245) on map 1
+	                 el1 |   object TrackGridElement at (183500, 342070, 5245) on map 1
+	                 el2 |   object TrackGridElement at (275500, 144622, 5245) on map 1
+	            start_el |      nil
+	              end_el |      nil
+Error calling Lua function "exec" from C: Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+						Lua 0:12:00:880
+[LUA ERROR] Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+  Lua/Buildings/TrackElement.lua(805):  method Complete
+  Lua/Cheats.lua(115):   <>
+  [C](-1):  method MapForEach
+  Lua/Cheats.lua(126):  global CheatCompleteAllConstructions
+  [string "ConsolePrint(print_format(CheatCompleteAllCon..."](1):   <>
+  [C](-1):  global pcall
+  CommonLua/console.lua(63):  global ConsoleExec
+  CommonLua/UI/Dev/uiConsole.lua(371):  method Exec
+  CommonLua/UI/Dev/uiConsole.lua(95):  method OnShortcut
+  CommonLua/X/XDesktop.lua(204):  method OnShortcut
+  CommonLua/Core/terminal.lua(101):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackConstructionSite
+	         quick_build |   string quick_build
+	                 igi |   object InGameInterface
+	               track |   object TrackBase at (260000, 183592, 5245) on map 1
+	             element |   object TrackGridElement at (260000, 183592, 5245) on map 1
+	            reselect |  boolean false
+	                 cm1 |   number 4283130509
+	                 cm2 |   number 4283130509
+	                 cm3 |   number 4283130509
+	                 cm4 |   number 4283130509
+	           track_obj |   object TrackBase at (183500, 342070, 5245) on map 1
+	                 el1 |   object TrackGridElement at (183500, 342070, 5245) on map 1
+	                 el2 |   object TrackGridElement at (275500, 144622, 5245) on map 1
+	            start_el |      nil
+	              end_el |      nil
+Error calling Lua function "exec" from C: Lua/Buildings/TrackElement.lua:805: attempt to index a nil value (local 'start_el')
+						Lua 0:12:00:882
+
+!!! Quick Build !!!
+						Lua 0:14:04:778
+ObjCheat CheatEmpty
+						Lua 0:14:05:555
+ObjCheat CheatDelete
+						Lua 0:14:09:893
+ObjCheat CheatDelete
+						Lua 0:15:06:238
+
+!!! Quick Build !!!
+						Lua 0:15:24:921
+
+!!! Quick Build !!!
+						Lua 0:15:46:911
+ObjCheat CheatDelete
+						Lua 0:16:01:181
+Story bits: Triggered story bit - UndergroundDeepScanning_Metal						Lua 0:16:15:198
+
+!!! Quick Build !!!
+						Lua 0:17:07:542
+
+!!! Quick Build !!!
+						Lua 0:17:33:249
+
+!!! Quick Build !!!
+						Lua 0:17:49:020
+
+!!! Quick Build !!!
+						Lua 0:18:01:757
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:18:43:774
+ObjCheat CheatDelete
+						Lua 0:19:30:027
+
+!!! Quick Build !!!
+						Lua 0:19:56:824
+
+!!! Quick Build !!!
+						Lua 0:20:38:533
+ObjCheat CheatDelete
+						Lua 0:21:04:101
+
+!!! Quick Build !!!
+						Lua 0:21:20:444
+ObjCheat CheatDelete
+						Lua 0:21:22:132
+ObjCheat CheatDelete
+						Lua 0:21:23:912
+ObjCheat CheatDelete
+						Lua 0:21:25:379
+ObjCheat CheatDelete
+						Lua 0:21:27:085
+ObjCheat CheatDelete
+						Lua 0:21:28:571
+ObjCheat CheatDelete
+						Lua 0:21:30:343
+ObjCheat CheatDelete
+						Lua 0:21:46:797
+ObjCheat CheatDelete
+						Lua 0:21:48:236
+ObjCheat CheatDelete
+						Lua 0:21:50:977
+ObjCheat CheatDelete
+						Lua 0:21:52:627
+ObjCheat CheatDelete
+						Lua 0:21:54:186
+ObjCheat CheatDelete
+						Lua 0:21:55:509
+ObjCheat CheatDelete
+						Lua 0:21:56:974
+ObjCheat CheatDelete
+						Lua 0:22:00:681
+ObjCheat CheatDelete
+						Lua 0:22:02:191
+ObjCheat CheatDelete
+						Lua 0:22:03:587
+ObjCheat CheatDelete
+						Lua 0:22:06:000
+ObjCheat CheatDelete
+						Lua 0:22:07:626
+ObjCheat CheatDelete
+						Lua 0:22:09:090
+ObjCheat CheatDelete
+						Lua 0:22:10:602
+ObjCheat CheatDelete
+						Lua 0:22:11:931
+ObjCheat CheatDelete
+						Lua 0:22:16:621
+ObjCheat CheatDelete
+						Lua 0:22:18:619
+ObjCheat CheatDelete
+						Lua 0:22:19:999
+ObjCheat CheatDelete
+						Lua 0:22:21:322
+ObjCheat CheatDelete
+						Lua 0:22:23:009
+ObjCheat CheatDelete
+						Lua 0:22:24:579
+ObjCheat CheatDelete
+						Lua 0:22:26:630
+ObjCheat CheatDelete
+						Lua 0:22:28:427
+ObjCheat CheatDelete
+						Lua 0:22:31:568
+Stop sequence BuildingAnomalies - UndergroundArrivalPassage : FinishedStop sequence list BuildingAnomalies						Lua 0:22:32:365
+ObjCheat CheatDelete
+						Lua 0:23:02:252
+ObjCheat CheatDelete
+						Lua 0:23:03:474
+ObjCheat CheatDelete
+						Lua 0:23:04:684
+ObjCheat CheatDelete
+						Lua 0:23:06:092
+ObjCheat CheatDelete
+						Lua 0:23:07:934
+ObjCheat CheatDelete
+						Lua 0:23:39:079
+ObjCheat CheatDelete
+						Lua 0:23:40:472
+ObjCheat CheatDelete
+						Lua 0:23:42:874
+ObjCheat CheatDelete
+						Lua 0:23:44:981
+ObjCheat CheatDelete
+						Lua 0:24:04:215
+ObjCheat CheatDelete
+						Lua 0:24:11:281
+ObjCheat CheatDelete
+						Lua 0:25:44:705
+
+!!! Quick Build !!!
+						Lua 0:25:48:642
+
+!!! Quick Build !!!
+						Lua 0:26:43:743
+
+!!! Quick Build !!!
+						Lua 0:27:13:234
+
+!!! Quick Build !!!
+						Lua 0:28:23:547
+
+!!! Quick Build !!!
+						Lua 0:29:01:086
+
+!!! Quick Build !!!
+						Lua 0:29:07:981
+
+!!! Quick Build !!!
+						Lua 0:29:31:425
+ObjCheat CheatCleanAndFix
+						Lua 0:29:38:204
+
+!!! Quick Build !!!
+						Lua 0:29:44:706
+ObjCheat CheatFill
+						Lua 0:29:52:337
+ObjCheat CheatFill
+						Lua 0:29:55:850
+ObjCheat CheatFill
+						Lua 0:29:59:331
+ObjCheat CheatFill
+						Lua 0:30:03:945
+ObjCheat CheatFill
+						Lua 0:30:07:232
+ObjCheat CheatFill
+						Lua 0:30:10:352
+ObjCheat CheatFill
+						Lua 0:31:29:914
+ObjCheat CheatFill
+						Lua 0:31:34:115
+ObjCheat CheatFill
+						Lua 0:31:38:056
+ObjCheat CheatFill
+						Lua 0:31:41:305
+ObjCheat CheatFill
+						Lua 0:31:45:850
+ObjCheat CheatFill
+						Lua 0:31:49:583
+ObjCheat CheatFill
+						Lua 0:31:54:045
+ObjCheat CheatFill
+						Lua 0:31:58:343
+ObjCheat CheatFill
+						Lua 0:33:47:536
+
+!!! Quick Build !!!
+						Lua 0:34:03:870
+
+!!! Quick Build !!!
+						Lua 0:35:33:054
+
+!!! Quick Build !!!
+						Lua 0:38:47:269
+Stop sequence BuildingAnomalies - UndergroundArrivalPassage : FinishedStop sequence list BuildingAnomalies						Lua 0:40:07:205
+
+!!! Quick Build !!!
+						Lua 0:42:15:660
+
+!!! Quick Build !!!
+						Lua 0:42:28:694
+Story bits: Triggered story bit - Elevator_Malfunction						Lua 0:43:06:823
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:43:26:296
+Story bits: Reply selected - We should take our time and do this well						Lua 0:43:40:680
+ObjCheat CheatFill
+						Lua 0:43:56:883
+ObjCheat CheatRefill
+						Lua 0:44:05:436
+ObjCheat CheatCleanAndFix
+						Lua 0:44:29:206
+
+!!! Quick Build !!!
+						Lua 0:44:54:412
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:45:12:107
+
+!!! Quick Build !!!
+						Lua 0:47:08:907
+Stop sequence UndergroundAnomalies - Hole in the ceiling resource : FinishedStop sequence list UndergroundAnomalies						Lua 0:50:24:519
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:51:05:472
+Story bits: Triggered story bit - Elevator_Final						Lua 0:51:30:946
+ObjCheat CheatRepair
+						Lua 0:51:49:258
+
+!!! Quick Build !!!
+						Lua 0:51:50:906
+ObjCheat CheatFill
+						Lua 0:51:52:683
+ObjCheat CheatFill
+						Lua 0:55:25:943
+{ GetMaxAmount_BlackCube = function: 000001C153A60C80, GetMaxAmount_Concrete = function: 000001C153A60C80, GetMaxAmount_Electronics = function: 000001C153A60C80, GetMaxAmount_Food = function: 000001C153A60C80, GetMaxAmount_Fuel = function: 000001C153A60C80, GetMaxAmount_MachineParts = function: 000001C153A60C80, GetMaxAmount_Metals = function: 000001C153A60C80, GetMaxAmount_MysteryResource = function: 000001C153A60C80, GetMaxAmount_Polymers = function: 000001C153A60C80, GetMaxAmount_PreciousMetals = function: 000001C153A60C80, GetMaxAmount_PreciousMinerals = function: 000001C153A60C80, GetMaxAmount_Seeds = function: 000001C153A60C80, GetMaxAmount_WasteRock = function: 000001C153A60C80, GetStored_BlackCube = function: 000001C1582830F0, GetStored_Concrete = function: 000001C158283178, GetStored_Electronics = function: 000001C15FA40C80, GetStored_Food = function: 000001C15FA40B98, GetStored_Fuel = function: 000001C158282F28, GetStored_MachineParts = function: 000001C158282EB0, GetStored_Metals = function: 000001C158D84600, GetStored_MysteryResource = function: 000001C158283058, GetStored_Polymers = function: 000001C158282FC0, GetStored_PreciousMetals = function: 000001C15FA40B20, GetStored_PreciousMinerals = function: 000001C158E8F600, GetStored_Seeds = function: 000001C15FA40D38, GetStored_WasteRock = function: 000001C1677788C8, assigned_resources = {}, at_spawn_track = false, at_station = false, auto_mode_on = false, base_construction_cost_BlackCube = 0, base_construction_cost_Concrete = 0, base_construction_cost_Electronics = 0, base_construction_cost_MachineParts = 0, base_construction_cost_Metals = 0, base_construction_cost_Polymers = 0, base_construction_cost_PreciousMetals = 0, base_construction_cost_PreciousMinerals = 0, base_construction_cost_WasteRock = 0, base_in_dome_construction_modifier = 100, base_max_shared_storage = 42000, box_height = 100, can_move = true, city = {...}, command = GotoStation, command_centers = {...}, command_destructors = {...}, command_thread = thread: 000001C166A5B938, count = 0, cube_attach_spot_idx = 2, current_station = {...}, entrance_fallback = false, full_today = 0, full_yesterday = 4, fx_actor_class = Train, fx_working = true, goto_target = false, handle = 2000035273, initialized = true, interest1 = needFood, last_reset = 0, placed_cubes = {...}, placement_offset = (0, 0, 0), resource = Metals, resource_storage = {...}, spatial_data = {...}, spent_time_sum = 738561.0, spent_time_values = {...}, stockpiled_amount = {...}, thread_running_destructors = false, track = {...}, units = {...}, visitors_lifetime = 57, visitors_per_day = 32, visual_cubes = {...}, working = true, true = userdata: 000001C101DC4880 } { DailyHealthRecover = 10000, MinAge_Senior = 81, SMRFixPack_reserved_at = 238346648, age = 18, age_trait = Adult, assigned_to_service = false, avoid_workplace = {...}, avoid_workplace_start = 321, backstory = martianborn, base_DailyHealthRecover = 5000, base_DailySanityRecover = 5000, base_MinAge_Adult = 11, base_MinAge_Child = 0, base_MinAge_Middle Aged = 31, base_MinAge_Senior = 61, base_MinAge_Youth = 6, base_base_morale = 44252, base_birth_comfort_modifier = 0, base_death_age = 74, base_morale = 44252, base_performance = 104, base_preferred_workplace_performance_bonus = 0, birth_comfort_modifier = 0, birthplace = Mars, can_demolish = true, can_move = true, city = {...}, command = BoardVehicle, command_destructors = {...}, command_thread = thread: 000001C15FF0B118, daily_interest = interestSocial, daily_interest_fail = 0, death_age = 94, dome = {...}, entity_gender = Male, faction_standings = {...}, faction_supported = false, fx_actor_class = ColonistMale, gender = Male, goto_target = false, handle = 2000032232, holder = {...}, infopanel_icon = UI/IconsRemaster/Colonists/IP/IP_Unit_Male_Hs_Adult_02.tga, inner_entity = Unit_Colonist_Male_Hs_Adult_02, ip_specialization_icon = UI/IconsRemaster/Colonists/IP/IP_Colonist_Male.tga, last_meal = 237420000, last_rest = 237564086, last_spot_tried = false, lead_in_out = false, leave_early_for_work = false, log_comfort = {...}, log_health = {...}, log_sanity = {...}, log_satisfaction = {...}, modifications = {...}, name = {...}, next_heavy_update = 238466648, outside_start = false, performance = 114, pin_icon = UI/IconsRemaster/Colonists/Pin/Unit_Male_Hs_Adult_02.tga, pin_specialization_icon = UI/IconsRemaster/Colonists/Pin/Colonist_Male.tga, race = 5, reserved_residence = false, residence = {...}, safe_pos_on_failure = false, sols = 18, specialist = none, stat_comfort = 35000, stat_health = 100000, stat_morale = 54252, stat_sanity = 100000, stat_satisfaction = 3000, status_effect_sign = StatusEffect_Unemployed, status_effect_sign_visible = false, status_effects = {...}, thread_running_destructors = false, training_points = false, traits = {...}, transport_task = false, transport_ticket = {...}, visit_door_opened = false, visit_end_time = 239282532, visit_interrupted = false, visit_restart = false, visit_spot_end_time = false, visit_thread = thread: 000001C15FF0B118, workplace = false, workplace_shift = 1, true = userdata: 000001C101D72C28 } BoardVehicle
+1
+						Lua 0:55:54:928
+1543 1513
+						Lua 0:56:48:705
+true
+						Lua 0:56:54:902
+false
+						Lua 0:58:38:292
+false true false
+						Lua 0:59:30:556
+true
+						Lua 1:02:32:908
+[string "local el1, el2 = self.track_obj.start_el, sel..."]:1: attempt to index a nil value (global 'self')
+						Lua 1:02:40:929
+[string "local el1, el2 = self.track_obj.start_el, sel..."]:1: attempt to index a nil value (global 'self')
+						Lua 1:03:11:796
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 1:03:11:797
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 1:03:12:123
+
+
+*** Debug::Done()
+Time (ms)	3792123
+
+
