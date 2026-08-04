@@ -338,13 +338,18 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
 
 ---
 
-*(2026-08-04, prompt 3 — Opus. **CO-RUN #1 RAN, TWICE.** Cards:
+*(2026-08-04, prompt 3 — Opus. **CO-RUN #1 RAN THREE TIMES**, each run authored
+from the previous one's gaps, all in one sitting. Cards:
 `agent/reports/CORUN1_EVIDENCE_CARDS.md`. Sitting brief:
-`agent/prompts/corun-rig/CORUN1_BRIEF.md` (its §5/§7 hold both probe sources —
-⛔ **you own emptying this folder, so consume the brief and the two `.lua.txt`
-files with it**). Costs and corrections: `CORUN_RIG_SPEC.md` §9. Raw lines:
-`docs/archive/corun1_Mars.exe-20260804-12.42.47.log` and
-`corun1b_Mars.exe-20260804-12.54.14.log`.*
+`agent/prompts/corun-rig/CORUN1_BRIEF.md` (its §5/§7/§8 hold the three probe
+sources — ⛔ **you own emptying this folder, so consume the brief, the spec and
+the three `.lua.txt` files with it; decide where §1–§9 of the spec should live
+permanently, because it is the only place the rig is described**). Costs and
+corrections: `CORUN_RIG_SPEC.md` §9. Raw lines:
+`docs/archive/corun1_Mars.exe-20260804-12.42.47.log`,
+`corun1b_Mars.exe-20260804-12.54.14.log`,
+`corun1c_Mars.exe-20260804-13.23.08.log`. New engine fact banked:
+`agent/facts/EF-046` (the mouse/desktop coordinate-space split).*
 
 ***VERDICTS.** Item 1 F11 pre-wrapper watch — **2 of 3 readings PASS**, ⛔ not
 `tested`, the third is unavailable on that save and the close decision is routed
@@ -354,15 +359,23 @@ for an out-of-range anchor**, ⛔ but the picker appeared **40/40** so the OG
 symptom did not reproduce; `cand` unchanged. Item 4 F11 cross-map Done-timing —
 **SETTLED: route (a)**, route (b) excluded.*
 
-***ECONOMICS, which is your §-job.** Owner-attended **~6 min against ~15–20
+***ECONOMICS, which is your §-job.** Owner-attended **~6.5 min against ~15–20
 promised** — report it as cost-against-promise, not as a saving (WORKFLOW says
-so explicitly). Two launches: **398 s** and **85 s** whole-cycle
-(`Time (ms) 398115` / `85125`), loads **9,784 ms** and **9,531 ms** by the
-engine's own line. ⚠️ **Prompt 2's ~80 s figure is the FLOOR, not the cycle
-cost** — it measured a run with one 15 s payload; a real payload run is 3–5×
-that, and it is still ~10× inside the abort thresholds. The launch→log delta was
-**5.2 s** here vs **2.2 s** for co-run #0 — still no room for a human click, so
-U3 holds, but the number is not stable.*
+so explicitly). Three launches: **398 s**, **85 s**, **64 s** whole-cycle
+(`Time (ms) 398115 / 85125 / 64362`), loads **9,784 / 9,531 ms** by the engine's
+own line. ⚠️ **Prompt 2's ~80 s figure is the FLOOR, not the cycle cost** — it
+measured a run with one 15 s payload; the honest shape is **fixed ~30 s +
+payload**, and every run stayed ~10× inside the abort thresholds. launch→log
+varied **1–5.2 s** across four launches vs **2.2 s** for co-run #0 — still no
+room for a human click, so U3 holds, but it is not a constant.*
+- ***⭐ And the economics number you should actually lead with is the RE-RUN
+  cost, not the first-run cost.** Runs 2 and 3 each cost **~85 s and ~64 s of
+  machine time and ~1 min and ~0.5 min of the owner** and each closed a question
+  run 1 had left open. **Under the pre-rig regime both would have been riders
+  waiting for a future sitting.** That — turning "route it as a rider" into
+  "fix it and re-run in ninety seconds" — is a bigger change to the project's
+  throughput than the per-cycle wall-clock, and §3's model does not model it
+  at all.*
 
 - ***⭐ THE RULE-5 / OVERRIDE EXPERIMENT — BOTH HALVES, AS ASKED.** The armed-prep
   override was **DECLINED** (reasoning: `CORUN1_BRIEF.md` §6), so there is a

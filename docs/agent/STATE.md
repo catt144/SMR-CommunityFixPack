@@ -10,9 +10,9 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 
 ✅✅ **The 18-prompt project chain is COMPLETE (2026-08-03)**; the playtest
 campaign is the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first**
-(verdict · doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig: CO-RUN #1 RAN ×2
-2026-08-04 — 3 of 4 payload items SETTLED**, owner **~6 min** of 15–20; next =
-prompt 4. ⛔ 9 corrections bind: `CORUN_RIG_SPEC` §8–§9 (+ `reports/CORUN1_*`).
+(verdict · doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig: CO-RUN #1 RAN ×3
+2026-08-04 — 3 of 4 payload items SETTLED**, owner **~6.5 min** of 15–20; next =
+prompt 4. ⛔ 11 corrections bind: `CORUN_RIG_SPEC` §8–§9 (+ `reports/CORUN1_*`).
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
