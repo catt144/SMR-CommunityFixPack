@@ -10,9 +10,9 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 
 ✅✅ **The 18-prompt project chain is COMPLETE (2026-08-03)**; the playtest
 campaign is the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first**
-(verdict · doctrine HOLDS · adjudications · §9 ordered top). ✅ **f11-f99-review
-chain CLOSED 2026-08-04** — folder gone; sealed derivation in git `28c253f`;
-its seal defect is carried to `CHAIN_METHOD.md` §3 (seal at the SOURCE).
+(verdict · doctrine HOLDS · adjudications · §9 ordered top). ⭐ **corun-rig
+chain OPEN 2026-08-04** (`agent/prompts/corun-rig/`, Fable 1+4 / Opus 2+3) —
+builds the co-run rig, kill-gated; prompts 2–3 need the owner ~10/~20 min.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
