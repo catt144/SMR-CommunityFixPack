@@ -43,6 +43,19 @@ these used to be filed only in agent reports, which is where you never read.
   route" and a route demonstrably exists (F90's approved shape); the honest
   ground for skipping is cost-benefit, not impossibility. Moving it does *not*
   commit you to ever doing the conversion. → `CHAIN_QA_REPORT.md` §7.
+- **Does F11 keep `P1`?** The F11 rider ran 2026-08-03 and the state its fix
+  guards against has **no demonstrated producer** — crew-gathering abduction
+  keeps `train.units` synced on both maps. The fix is still a correct repair of
+  a real `table.remove` misuse in shipped code, so it is not a removal
+  question; it is a priority question, and it is not an agent's call.
+  → `docs/agent/bugs/F11.md`.
+- **F99 severity, and whether it becomes work at all.** New 2026-08-03 from
+  your own log: 14 `TrackElement.lua:805` errors, every one under
+  `CheatCompleteAllConstructions()` during your underground build-out.
+  Reachable **without** the cheat is unproven and deliberately not claimed. The
+  cheap discriminator is one no-cheat track completion on a disturbed element
+  list — say the word and it becomes a rider; otherwise it stays `cand`.
+  → `docs/agent/bugs/F99.md`.
 - **The C36-adjacent mysteries grep.** A cheap sweep of `Lua\Mysteries\` and
   `Scenario\` for `IsDisasterPredicted` gates, deliberately left unassigned:
   your call whether it becomes work at all. Not owed. → `CHAIN_QA_REPORT.md` §8.
@@ -166,20 +179,6 @@ queued while trains come and go, or walkers passing a working station.
    reachability test) — all read-only, all on the entry.
 **Good to have:** note whether any track segment on the line was under
 construction (the rival explanation the agent must exclude).
-
-### Rider — F11: can crew-gathering desync a train's passengers? · Status: unrun — opportunistic
-**Bug:** the train-wedge fix is shipped and probe-verified; what is left open
-is whether the state it guards against — a passenger yanked out of a moving
-train by a crew-gathering expedition — can actually occur. Either answer is
-useful data. → [agent/bugs/F11.md](agent/bugs/F11.md)
-**Requirements:** None / any colony with a running train carrying a passenger
-+ an expedition ready to launch.
-**Setup:**
-1. In any sitting with a colonist mid-ride on a train, launch an expedition
-   that crew-gathers busy colonists.
-2. The agent inspects `train.units` afterwards (one read, on the entry).
-**Good to have:** TrainsLogging on beforehand — its "not in train" warn
-catches the desync on its own.
 
 ### Rider — F21: re-earn `tested` for the wait-time fix · Status: unrun — optional
 **Bug:** the fix (platform waiting no longer billed as travel time) passed

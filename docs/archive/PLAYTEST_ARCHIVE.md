@@ -4644,3 +4644,99 @@ description, taken without the one line that would have settled it.
 |---|---|
 | **F76 depot-picker recurrence rider** ⭐ **ADDED 2026-08-02 — take it ONLY if a depot/heap click-load misbehaves again; do NOT go looking for it** | ⛔ **The picker is VANILLA and was measured CORRECT** (`anchor (2051,887)` vs live `mouse (2058,885)`; box centred on the anchor x with its **bottom edge AT** the anchor y; every number matching prediction to the pixel). **It opens ABOVE the cursor by its own height (429px at 4K), which is intended** — do not report that as displacement, and do not avoid the picker on the strength of the old warning. **Preconditions:** an RC Transport or RC Dozer, a StorageDepot or waste-rock heap with stock, Load mode. **If it misbehaves, take BOTH lines before touching anything else** — the second one is the one nobody had: **(1)** `*r local n=0 local o=ResourceItems.UpdateLayout function ResourceItems:UpdateLayout(...) local r=o(self,...) if n<8 then n=n+1 local m=terminal.GetMousePos() ConsolePrint(print_format("F76#"..n, "anchor", self.align_pos, "box", self.box, "cont", self.idContainer and self.idContainer.box, "scale", self.scale, "mw", self.measure_width, "mh", self.measure_height, "mouse", m)) end return r end` — **read: does `anchor` equal `mouse`, and is `box` bottom-centred on it?** **(2)** `*r local o=ItemMenuBase.OnMouseButtonDown function ItemMenuBase:OnMouseButtonDown(pt,button) ConsolePrint(print_format("F76MISS", button, pt)) return o(self,pt,button) end` — **read: does `F76MISS L` print on a click that looked like it hit the hex?** If it does, the click missed the button and was forwarded to the world (`ItemsMenu.lua:510-518`), which selects an object, closes the picker via `OnMsg.SelectionChange`, and runs `ExecuteLoad` on an empty `to_load` → bare `return`: **a sound, nothing loaded, no error.** ⚠️ **Also record `terminal.desktop.box` and whether the game window is on a display that is NOT at the virtual desktop origin** — one pass in the sitting logged `mouse (6148, 2350)` outside a `(0,0)-(3840,2160)` desktop, and an out-of-range anchor is the one mechanism that WOULD slam the dialog into a screen corner (M5 on the F76 entry; unproven, and there is no persistent offset on the owner's machine). ⚠️ **A DIFFERENT symptom is also open and must not be confused with this one:** `BUG_LIST_AUDIT.md` §2.2's original-game witness is *"the icon which should appear … does NOT appear"* — no picker at all, against this entry's picker-in-the-wrong-place. If that is what you see, say so explicitly; it has never been reproduced. ⛔ **Both hooks above are READ-ONLY and that is deliberate** — the 2026-07-27 hard-lock happened under a wrapper that MUTATED `align_pos`, and the no-live-UI-internals-prototyping rule still binds. Full reasoning: agent/bugs/ F76 |
 | **C40 Crowded Living capacity rider** ⭐ **RE-ROUTED HERE 2026-08-02 by chain prompt 11 (chain rule 2 — it was routed TO prompt 11, whose sitting was a sol-4 founder colony with no such law, so it was never available to take). Take it opportunistically the first time a colony has `Crowded Living` enacted AND a Ministry of Culture built.** | ⛔ **Not a defect hunt — the live gating is INTENDED and the ministry advertises it** (`MinistryWelfare.lua:23,:26`). What is open is the **law's own description**, which interpolates only the static `<capacity_increase>` (3), so a player is told "+3" while possibly receiving **+6**, with nothing saying that losing the ministry takes homes away from people who already have them. **The observation (one minute, no fixture):** with the law enacted and the ministry **working**, note a Residence's `capacity`; then stop the ministry (turn it off, or cut its power) and read the same Residence again. **Reading: capacity drops by 3 = both `LawEffectModifyLabel` and `LawEffectModifyLabelMinistryWorking` are live and the description under-reports by half.** ⚠️ **Then watch what the drop does** — `Residence:OnModifiableValueChanged` evicts tail residents colony-wide until each building fits its new capacity (`Residence.lua:224-235`), and re-houses from `dome.labels.Homeless` on the way back up (`:238-242`). **On a colony with no spare beds those colonists go homeless.** Record whether anyone was actually evicted, because **harm is unproven and frequency is unmeasured** and this entry deliberately does not guess. ⚠️ **Do not expect ordinary shift rotation to trigger it**: MinistryBase runs a single shift satisfied by any one worker (`FactionsBuildings.lua:360-362`), so it takes losing the whole shift, a power gap, or a maintenance stop. ⭐ Worth one line of context: C40 came from a **Reddit player's hypothesis** that a chain brief said to *check, not adopt* — the player was right about the mechanism, and checking it before building is what chose D12's narrow reading. Full reasoning: agent/bugs/ C40 |
+
+---
+
+## Rider — F11: can crew-gathering desync a train's passengers? · ✅ **RUN AND SETTLED 2026-08-03 (attended) — NO, IT CANNOT**
+
+> Moved whole from `PLAYTEST_CHECKLIST.md` on 2026-08-03, the sitting that ran
+> it. **This is the reachability audit's settling observation, delivered.** The
+> answer refutes the hypothesis the rider was written to test: crew-gathering
+> abduction keeps `train.units` synced on BOTH maps, so F11's guarded state has
+> no demonstrated producer. Full write-up, citations and the corrected route:
+> `docs/agent/bugs/F11.md`. Evidence log copied to
+> `docs/archive/logs/Mars.exe-20260803-22.23.59-6a22b86d.log`.
+
+### The rider as it stood (pre-run text, verbatim)
+
+**Bug:** the train-wedge fix is shipped and probe-verified; what is left open
+is whether the state it guards against — a passenger yanked out of a moving
+train by a crew-gathering expedition — can actually occur. Either answer is
+useful data. → [F11](../agent/bugs/F11.md)
+**Requirements:** None / any colony with a running train carrying a passenger
++ an expedition ready to launch.
+**Setup:**
+1. In any sitting with a colonist mid-ride on a train, launch an expedition
+   that crew-gathers busy colonists.
+2. The agent inspects `train.units` afterwards (one read, on the entry).
+**Good to have:** TrainsLogging on beforehand — its "not in train" warn
+catches the desync on its own.
+
+⛔ **That setup was NOT RUNNABLE AS WRITTEN, and that is the fifth time a PT's
+own procedure has failed on first execution** (PT-29, PT-11, PT-25, PT-59, now
+this). Two independent reasons: (a) which colonist the gatherer picks is a
+lottery the tester cannot steer, and (b) the owner had exactly one manned
+expedition left in the campaign, so a design that consumes an expedition per
+attempt was unaffordable. The run below consumed **zero** expeditions.
+
+### How it was actually run
+
+**The gathering half was never played — it was settled by reading**, because
+"can the picker reach a rider" is answerable from the pool construction at
+`Lua/Buildings/CargoTransporter.lua:240-251`. Rebuilding that pool live gave
+the rider at index **1513** of **1543**. Since an underground colonist cannot
+be in `MainCity.labels.Colonist`, the only thing that could have put them there
+is the `GetConnectedCitiesForColonists` append — so a surface rocket's crew
+gathering **does** see underground train riders. Reachable, proven, no launch.
+
+**The abduction half was driven by invoking the shipped call site directly** —
+`col:SetCommand("EnterTransporter", rocket)`, verbatim the body of
+`CargoTransporter:ExpeditionLoadCrew` (`CargoTransporter.lua:300-302`) — on a
+chosen target instead of one the gatherer picked. That removes the lottery
+without changing the mechanism.
+
+### Readings
+
+| reading | value | meaning |
+|---|---|---|
+| rider's command aboard | `BoardVehicle` | P1 ✓ — not Idle/Abandoned, so eligible as a busy colonist |
+| `table.find(train.units, col)` before | `1` | the counter reads |
+| pool index / pool size | `1513` / `1543` | P2 ✓ — reachable by a surface rocket's gatherer |
+| `col:GetMap() == MainMap` | `false` | rider is underground |
+| `rocket:GetMap() == MainMap` | `true` | transporter is on the surface |
+| `col.city == MainCity` | `false` | rider belongs to the underground city |
+| `col.holder == rocket` after | `true` | the abduction actually executed |
+| `#train.units` after | `6` | the list is live and populated |
+| **`table.find(train.units, col)` after** | **`nil`** | **the rider was removed cleanly** |
+
+⭐ **The counter is honest and that was designed in, after PT-62's lesson that
+"an objective counter is only objective if it can FAIL."** `#train.units` = 6
+rules out an empty-or-nil-list artifact; `col.holder == rocket` = true rules out
+"the call did nothing". A stale entry would have printed a number. It printed
+`nil`.
+
+### Verdict
+
+**F11's abduction route does not produce the stale state.** `EnterTransporter`
+→ `SetHolder` → `SetHolderOnMap` → `holder:OnExitHolder` → `Holder:OnExitHolder`
+→ `table.remove_entry(self.units, unit)` (`Holder.lua:36-37`) — the correct API,
+and it fires even when `TransferToMap` runs first on the cross-map path. The
+audit's "bottoms out in engine-side `TransferToMap`" hypothesis is **refuted by
+measurement**, and the "not R2" verdict now rests on evidence rather than
+inference. The fix stays — it is a correct repair of a real `table.remove`
+misuse in shipped code — but its hypothesised trigger is measured absent.
+
+⚠️ **What it does NOT prove:** that `train.units` can never go stale by some
+other producer. It proves the one producer the shipped dev comment names
+(`--abducted by CargoTransporter?`) does not do it.
+
+### Two corrections this run forced onto the record
+
+1. **The old entry's citation was the wrong class in the wrong file** —
+   `Lua\Units\CargoTransporterNew.lua:221-234`, where the live path is
+   `Lua/Buildings/CargoTransporter.lua:272-285` and `CargoTransporterNew` is a
+   separate class expedition rockets never touch. The conclusion survived; the
+   route did not. Recorded on the entry rather than quietly fixed.
+2. **The owner's witness explains the "expeditions never take busy colonists"
+   appearance** — the stall is trait scarcity, not busy-refusal, cured by import
+   or university training exactly as the owner described. Detail on the entry.

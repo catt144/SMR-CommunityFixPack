@@ -8,6 +8,25 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## Evicted from STATE.md 2026-08-03 — F76 closure + the docs restructure, both resolved
+
+Moved out of STATE.md by the F11-rider sitting to pay for the F11 result and the
+F99 filing (mechanical rule 8 — adding to a 60-line doc means evicting). Both
+items below are **resolved**; the only live thread either leaves behind is `C41`,
+which stays on STATE.md as a one-liner.
+
+⚖️ **F76 — CLOSED, REFUTED** (QA job 10, owner-routed). Re-verified rather than
+inherited: box and mouse are one coordinate space, the forensic box was correct
+placement, the load failure did not reproduce, the picker is vanilla. **P1
+released.** The unrefuted residue is **not** closed with it — the "icon does not
+appear" witness and the out-of-range-mouse lead are **`C41` (cand)**, instrument
+`F76MISS`; MOD_DESCRIPTION's F76 note is VOID.
+
+✅ **Docs restructure + standing-prompts redesign COMPLETE 2026-08-03** —
+`agent/reports/DOCS_RESTRUCTURE_REPORT.md`, `STANDING_PROMPTS_REDESIGN.md`.
+
+---
+
 ## Evicted from STATE.md 2026-08-03 — the checklist redesign, resolved
 
 Held a slot under "Gates and holds" after it stopped being one. **Checklist
