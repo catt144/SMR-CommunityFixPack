@@ -427,11 +427,42 @@ survives in git — `git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPE
 - **Stays ORGANIC-ONLY by rule:** reachability claims, organic-witnessed
   evidence upgrades, feel/severity judgments, the owner's own campaign.
 
+**Routing any piece of work — unattended, co-run, or playtest (the triage;
+owner asked 2026-08-04).** Start at the cheapest mode that does not weaken
+the evidence — the owner's time is the objective, quality the constraint —
+and route UP only for the moments that genuinely need a human:
+
+1. **UNATTENDED** — every measure in the leg is a log-readable fact on a
+   staged copy: scripted state reads, forced-mechanism traces, amplification
+   counts, A/B probe-suite legs. No eyes, no hands, no judgment anywhere in
+   the measure. Evidence ceiling: MECHANISM / probe-verified — never
+   `tested`, never an organic upgrade.
+2. **CO-RUN** — scriptable except for NAMED moments needing human **eyes**
+   (witnessing behaviour), **hands** (cursor parking, launch or Mod-Manager
+   clicks, console lines at unscheduled moments), or an in-the-moment
+   **judgment call**. The owner attends those moments only; batch every
+   co-run-ready rider and ride-along read into the same sitting.
+3. **PLAYTEST (attended sitting)** — the evidence itself must be a human at
+   the keyboard: `tested` grants, behavioural/feel/severity claims (the
+   EXTERNAL VALIDITY rule), win-calls, anything judged live and throughout.
+4. **ORGANIC-ONLY stays a rider** (TAKEABLE WHEN): reachability claims,
+   organic-witnessed evidence upgrades, symptoms that must arise in real
+   play. Never scheduled, never rigged — the situation arises or it doesn't.
+
+Tie-breakers: if forcing the upstream would answer a DIFFERENT question than
+the one asked (reachability, upgrades), the item is 3 or 4 no matter how
+cheap the rig makes the forced version. If the only human need is hands for
+seconds, that is a co-run moment, not a sitting. When scoping any new test,
+name its mode in the brief; a leg that cannot say which mode it is has not
+said what its evidence will be.
+
 **Sign-off tiers: ROUTED 2026-08-04, ⛔ NOT IN FORCE.** The proposal (A
 witness / B evidence card, with a hands-vs-eyes axis / C delegated) is an
 owner decision on `PLAYTEST_CHECKLIST.md` "Decisions waiting on you" — it
 changes sign-off policy, which is the owner's. Until adopted, `tested` and
-per-item sign-off mean exactly what this document already says.
+per-item sign-off mean exactly what this document already says. ⚠️ The tiers
+are a *sign-off* axis, not this routing axis: the triage above says who is
+present during a leg; the tiers say what the owner reads afterwards.
 
 ## Release steps
 

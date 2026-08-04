@@ -222,11 +222,13 @@ these used to be filed only in agent reports, which is where you never read.
   prep loses nothing — and declining your override measured what any escape
   hatch would have bought: **0.4 seconds of machine time and none of yours.**
   No recommendation to change anything; the safest option was also free.
-- **One cheap hardening from the same investigation, your call:** nothing
-  checks the TestKit repo's working tree — that is how the orphaned edit sat
-  unseen for a day. A doccheck line that *reports* (not blocks on) a dirty
-  TestKit tree would close the gap. Say go and it gets built; costs you
-  nothing either way. → `docs/archive/SESSION_LOG.md` 2026-08-04.
+- ~~**One cheap hardening from the same investigation, your call:** nothing
+  checks the TestKit repo's working tree — a doccheck line that *reports* (not
+  blocks on) a dirty tree would close the gap.~~ ✅ **GO given and BUILT
+  2026-08-04.** Every doccheck run now prints a `TESTKIT TREE:` line — `clean`,
+  or each uncommitted file as a `WARN`. Report-only per your word: it never
+  blocks a commit, so TestKit work-in-progress cannot jam the pack. Verified
+  on both paths (clean, and a planted temp file).
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for

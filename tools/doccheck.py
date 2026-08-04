@@ -26,6 +26,7 @@ the 2026-08-03 QA session that hand-ran these checks. Do not "simplify" them.
 import argparse
 import os
 import re
+import subprocess
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -517,6 +518,36 @@ def temporary_sweep(out):
     return not hits
 
 
+def testkit_tree(out):
+    """REPORT-ONLY (owner GO, 2026-08-04): a dirty TestKit working tree is how
+    a true, verified record sat stranded unseen for a day — no gate checked
+    that repo. This says so on every run; it deliberately does NOT block, so
+    TestKit work-in-progress never jams a pack commit. A reported line is
+    routed or committed, never `git restore`d (uncommitted work has no reflog)."""
+    if not os.path.isdir(os.path.join(TESTKIT, ".git")):
+        out.append("TESTKIT TREE: not checked (no repo at %s)" % TESTKIT)
+        return True
+    try:
+        res = subprocess.run(["git", "-C", TESTKIT, "status", "--porcelain"],
+                             capture_output=True, text=True, timeout=30)
+    except OSError as exc:
+        out.append("TESTKIT TREE: not checked (%s)" % exc)
+        return True
+    if res.returncode != 0:
+        out.append("TESTKIT TREE: not checked (git exited %d)" % res.returncode)
+        return True
+    lines = [ln for ln in res.stdout.splitlines() if ln.strip()]
+    if not lines:
+        out.append("TESTKIT TREE: clean")
+    else:
+        out.append("TESTKIT TREE: %d uncommitted change(s) — report-only, "
+                   "never a block. Route or commit them; never `git restore` "
+                   "(the 2026-08-03 orphan lesson)." % len(lines))
+        for ln in lines:
+            out.append("  WARN " + ln)
+    return True
+
+
 def counts_block(counts):
     """A STATE-ready block; commit bodies may paste it verbatim."""
     lines = [
@@ -570,6 +601,7 @@ def main():
     ok = check_state_and_stubs(out) and ok
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok
+    testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
 
     if args.verify_split:
         try:

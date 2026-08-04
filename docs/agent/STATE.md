@@ -54,7 +54,7 @@ retail health (F98 is two-sided); **retail coverage is 78/87.**
 - **PT-37** → F48 · **F42** `blocked`, wontfix recommended, owner call needed.
 - **D08 extender overhaul** — 5 layers speced in
   `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
-- **Owner decisions (12 open, incl. the sign-off tiers)** →
+- **Owner decisions (11 open, incl. the sign-off tiers)** →
   `docs/PLAYTEST_CHECKLIST.md` "Decisions waiting on you", never only in agent docs.
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
   `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.
