@@ -21,7 +21,7 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 81 registered (74 default-active, 8 optional-gated files)
 - Code/*.lua files: 82
 - TestKit probes: 87
-- BUGS index rows: 100 F + 12 D + 43 C
+- BUGS index rows: 100 F + 12 D + 44 C
 ```
 
 Re-emit after any module or entry change; a red run refuses to hand one out.

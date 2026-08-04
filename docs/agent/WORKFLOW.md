@@ -167,6 +167,40 @@ metadata/items lines, commit) or stops and reports.
 4. Both repos are in scope (the pack AND the TestKit) — the
    `GetPriorityForRequest` experiment that seeded agent/facts/ lived in the
    PACK's code list.
+5. ⛔ **A PROBE FILE IS PRESENT IN `Code/` ONLY WHILE ITS RUN IS ACTUALLY
+   HAPPENING** (owner decision, 2026-08-04 — *"I want to do whatever is safest,
+   I do not want to get back into the situations where armed probes start
+   giving us false problems or issues"*). **Placing the file and running are the
+   same act; deleting it and recording the answer are the same commit.** There
+   is no state in between, and therefore no armed probe can outlive the sitting
+   that needed it.
+
+   **What made this a decision rather than an observation.** `doccheck.py`'s
+   `temporary_sweep()` (`tools/doccheck.py:501-517`) implements only the FIRST
+   half of the CLEAN definition above — any marker in `Code/` is red, no
+   declared-probe exception — and `tools/hooks/pre-commit` blocks on red. So a
+   session may legitimately declare a probe but **cannot commit anything while
+   it is armed**, which collides with the co-run rule that all prep is committed
+   before the owner sits down. Found by co-run #0 (2026-08-04), the first job to
+   arm a probe since doccheck landed. **The tool was NOT loosened, deliberately:
+   a hatch a hurried session can open without saying so re-creates the
+   2026-07-31 incident exactly.** ⛔ **`--no-verify` is not an alternative** —
+   the hook documents its meaning as *"the docs are inconsistent, I know"*,
+   which is a false statement when the only red is a declared probe.
+
+   **How prep works under this rule, and it costs nothing.** Everything else
+   commits normally and early: the staged save copy, the measure-moments list,
+   the entry and checklist edits, and **the probe's source itself as a fenced
+   code block in the session's own brief or spec**. Docs are not swept (the
+   sweep walks `Code/` and TestKit `Code/` only), and a probe parked in a doc is
+   **inert by construction** — the mod loads only files listed in
+   `metadata.lua` `code`, all of which live under `Code/`, so a file that is not
+   there cannot arm anything, log anything, or contaminate a measurement. At the
+   sitting: write the file into `Code/`, add its metadata line, parse sweep,
+   run. Then delete both in the commit that records the answer, per rule 2.
+
+   **If the sitting slips, nothing is stranded and nothing is armed** — which is
+   the whole point.
 
 ## Testing checklist per fix
 
@@ -269,6 +303,10 @@ judgment call are genuinely needed, and free otherwise.
   written, save copy staged, and the brief carries a **measure-moments list** —
   each moment says what the owner will look at and what verdict words to say.
   The owner's attended cost is the sum of the measure moments, nothing else.
+  ⚠️ **"Scripts written" means written and committed AS TEXT IN THE BRIEF, not
+  placed in `Code/`** — probe hygiene rule 5 (owner, 2026-08-04). The file lands
+  in `Code/` at the sitting and dies in the commit that records the answer, so a
+  slipped sitting can never leave a probe armed.
 - **Runs use a designated COPY of a provisioned save, never the campaign
   save** (FIX_POLICY §3a discipline applies to experiments, not just fixes).
 - **The probe-hygiene hard gate applies unchanged** — sweep before, probes

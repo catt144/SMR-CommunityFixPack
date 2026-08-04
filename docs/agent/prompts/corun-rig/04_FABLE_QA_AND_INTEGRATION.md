@@ -98,8 +98,27 @@ CORRECTIONS**, so you run in full. Your primary evidence is `CORUN_RIG_SPEC.md`
 will follow. Three items are handed to you directly — the first two are yours to
 FIX or ROUTE, the third is yours to ADJUDICATE.)*
 
-- ***⚙️ C5 — `doccheck.py` and `WORKFLOW.md` disagree about probe hygiene, and
-  the tool is the stricter one. Yours to fix (job 5, integration).***
+- ***⛔ C5 IS DECIDED — DO NOT RE-OPEN IT. The owner ruled the same day
+  (2026-08-04), asked for the safest option, and got it: the tool is NOT
+  loosened.*** No declared-probe hatch is built in `doccheck.py`; the sweep stays
+  absolute. The protocol tightened instead — **`WORKFLOW.md` probe hygiene rule
+  5: a probe file is present in `Code/` only while its run is actually
+  happening.** Prep commits carry the probe's source as a fenced block in the
+  brief (inert by construction: the mod loads only files listed in
+  `metadata.lua` `code`), the file lands in `Code/` at the sitting, and it dies
+  in the commit that records its answer. A slipped sitting strands nothing and
+  arms nothing. **Your job on this is integration and audit only:** check that
+  rule 5 and the amended co-run bullet say the same thing, that nothing else in
+  the docs still implies prep may commit an armed probe, and that no session
+  since has quietly used `--no-verify`. ⚠️ If you think the rule is wrong,
+  ROUTE that — the owner's stated priority was safety over convenience and the
+  three candidate fixes below are recorded only so you can see what was
+  rejected: (a) a declared-probe manifest the sweep reads; (b) an explicit
+  `--declare <file>` argument; (c) the adopted one. The original framing follows
+  for context; it is superseded, not live.
+
+  *(Superseded context — `doccheck.py` and `WORKFLOW.md` disagreed about probe
+  hygiene, and the tool was the stricter one.)*
   `WORKFLOW.md` "Probe hygiene" defines CLEAN as *"zero hits, **or** every hit is
   a probe that THIS session's test design explicitly declares it needs — named in
   the brief and in the todo list."* `doccheck.py`'s `temporary_sweep()`
@@ -125,8 +144,9 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
   armed for days in 2026-07-31, and a hatch that a hurried session can reach
   without saying so re-creates that failure.
 
-- ***📋 A vanilla defect found in our own run log, reported not filed — the
-  owner's disposition is pending and may be waiting when you run.*** Two
+- ***📋 A vanilla defect found in our own run log — FILED AND CLOSED as `C44`
+  (`wontfix`) on the owner's word, 2026-08-04. Nothing is owed; it is listed
+  here only so you do not mistake it for an open thread.*** Two
   `[ResManager Error] Cannot find file with base path:
   Animations/LawOfficeDoor_idle.hgacl` / `_opening.hgacl` lines. **MEASURED
   scope: universal, once per process, independent of the save.** Across all 19
@@ -141,11 +161,13 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
   lua:33`); the two clips are for its attached `LawOfficeDoor` entity and are
   referenced by the shipped asset manifest but absent from the shipped packs.
   ⛔ **Not fixable by this pack under any circumstances** — it is a missing
-  binary asset, and we patch Lua at runtime; we cannot ship an `.hgacl`. So the
-  only question is whether the record carries it (a `C`-row, `wontfix — not
-  Lua-fixable`, so a future *"the Law Office door is stuck"* report has an answer
-  waiting) or not. **Asked on the checklist 2026-08-04; if the owner has since
-  answered, execute their answer — if not, leave it asked, do not decide it.**
+  binary asset, and we patch Lua at runtime; we cannot ship an `.hgacl`.
+  **Owner's answer, 2026-08-04: file it with a wontfix tag and a reason "so
+  another agent doesn't get distracted by it again."** Done — `agent/bugs/C44.md`
+  opens with a STOP HERE banner saying exactly that. ⚠️ **Your only job here is
+  to make sure that banner works**: if anything in the docs still reads as an
+  open investigation, kill it. The failure mode this row exists to prevent is a
+  future session re-deriving a universal, unfixable, cosmetic asset error.
 
 - ***🔍 Drift evidence for your job-2 audit, not mine to resolve.*** The TestKit
   repo (`C:\Dev\SMR-BugFixPack-TestKit`, own git repo, local-only) carries an

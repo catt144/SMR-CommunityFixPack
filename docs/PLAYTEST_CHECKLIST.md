@@ -105,60 +105,31 @@ these used to be filed only in agent reports, which is where you never read.
   `[LUA ERROR]` in the log. Your `TEST2H TRAIN` save is untouched; the copy and
   the probe are deleted. → `agent/prompts/corun-rig/CORUN_RIG_SPEC.md` §8.
   **The rig works, and co-run #1 (the real payload) is prompt 3.**
-- ⭐ **NEW — a vanilla missing-asset error the game prints for EVERY player, in
-  every session. Your call whether the record carries it.** Two lines:
-  `[ResManager Error] Cannot find file with base path:
-  Animations/LawOfficeDoor_idle.hgacl` and `…_opening.hgacl`.
+- ~~**The vanilla `LawOfficeDoor` missing-asset error — file or ignore?**~~
+  ✅ **DECIDED 2026-08-04: filed as `C44`, `wontfix`, closed.** You asked for a
+  reason on it *"so another agent doesn't get distracted by it again"* — the
+  entry now opens with a **STOP HERE** banner saying exactly that, above the
+  evidence. Nothing is owed and nothing will be built. → `agent/bugs/C44.md`.
+- ~~**The probe-gate blocker**~~ ✅ **DECIDED 2026-08-04 — you asked for the
+  safest option and that is what was adopted: the tool was NOT loosened.**
 
-  **What it is.** The Law Office is a building of the game's content DLC, and
-  its door is a separate attached entity with its own animations. The engine's
-  shipped asset manifest asks for those two animation clips; the shipped data
-  packs do not contain them. Nothing to do with mods, nothing to do with a save.
+  No escape hatch was added to `doccheck.py`. The sweep stays absolute — any
+  `TEMPORARY` marker in `Code/` is red, full stop — because a hatch a hurried
+  session can open without saying so is how 2026-07-31 happened.
 
-  **How sure I am, and why it is a stronger claim than "not ours".** I checked
-  all 19 game logs on this machine. The correlation is exact: **2 lines in every
-  session that enters a game map, 0 in every session that does not** — and
-  always exactly 2, no matter how many maps load. They fire inside the engine's
-  own `*** Reloading assets from folder 'BinAssets/'` pass, and they appear in
-  the MarsDebug session on a *synthetic* map as well as in your campaign ones.
-  So it is **not** specific to `TEST2H TRAIN`, and it does **not** need a Law
-  Office to exist in the colony — it is once per process, universal.
+  **What changed instead is when a probe is allowed to exist at all.** New
+  binding rule (`WORKFLOW.md` probe hygiene, rule 5): **a probe file is present
+  in `Code/` only while its run is actually happening.** Placing it and running
+  are the same act; deleting it and recording the answer are the same commit.
+  There is no state in between, so **no armed probe can outlive the sitting that
+  needed it** — which is the failure you told me to design against.
 
-  **What it probably looks like in play:** a Law Office door that does not
-  animate (or snaps between states) instead of sliding. Unconfirmed — confirming
-  it means building one and watching, which is a five-minute co-run item if you
-  ever want it.
-
-  ⛔ **We cannot fix it, and that is not a judgement call.** It is a missing
-  *binary asset*. This pack patches Lua at runtime and ships no game data; there
-  is no version of us that can supply an `.hgacl` file. So the only question is
-  whether it is written down.
-
-  **My recommendation: file it as a `C`-row, `wontfix — not Lua-fixable`, and
-  never touch it again.** It costs one entry and no work, and it buys one thing:
-  when a player eventually posts *"my Law Office door is broken"*, the answer is
-  already written and it is not us. Say **"file it"** or **"ignore it"**.
-- ⚙️ **A process blocker in our own tooling — no decision needed from you, but
-  you should know it exists because it constrains how co-runs are scheduled.**
-
-  `WORKFLOW.md` says a probe sweep is clean when there are zero `TEMPORARY`
-  markers **or** when every marker is a probe the session has explicitly
-  declared it needs. `doccheck.py` only implements the first half — any marker
-  is red — and the pre-commit hook blocks on red. **So a session may legitimately
-  arm a probe, but cannot commit anything while it is armed.**
-
-  **What that costs in practice:** the co-run protocol says all prep happens
-  unattended *before* you sit down. Today, prep that has to wait for a scheduled
-  sitting **cannot be committed while it waits**. Co-run #0 only sidestepped
-  this because you were free immediately, so prep and results landed in one
-  commit with the probe already deleted. Nothing was lost.
-
-  ⛔ I did not reach for the `--no-verify` escape hatch: the hook documents its
-  meaning as *"the docs are inconsistent, I know"*, which would have been a false
-  statement in the commit record. Routed to prompt 4 of the corun-rig chain with
-  three candidate fixes and a warning that whichever it picks must not be
-  reachable by accident — the sweep exists because probes stayed armed for days
-  on 2026-07-31. → `CORUN_RIG_SPEC.md` §8 C5.
+  **It costs nothing.** Prep still commits early: the staged save, the
+  measure-moments list, the doc edits, and the probe's *source* as a code block
+  in the brief. A probe parked in a doc physically cannot run — the mod only
+  loads files listed in `metadata.lua`, all under `Code/` — so it is inert by
+  construction, not merely unused. If a sitting slips, nothing is stranded and
+  nothing is armed.
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for

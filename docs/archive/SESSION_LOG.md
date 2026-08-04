@@ -8,6 +8,48 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-04 — both of co-run #0's routed items DECIDED by the owner, same day: `C44` filed `wontfix`, and the probe gate resolved by tightening the protocol rather than loosening the tool
+
+**The `LawOfficeDoor` asset error → `C44`, `wontfix`, closed.** The owner's
+instruction was specific and it shaped the entry: *"file with a not fix tag and
+a reason its probably best so another agent doesn't get distracted by it
+again."* So `C44` opens with a **STOP HERE** banner stating that there is no
+work and can never be any, above the evidence rather than below it. The evidence
+itself got stronger than "not caused by our leg": across all 19 logs on this
+machine the correlation is exact — 2 lines in every session that enters a game
+map, 0 in every session that does not, always exactly 2 regardless of how many
+maps load — and they fire inside the engine's own `Reloading assets from folder
+'BinAssets/'` pass, in a MarsDebug session on a **synthetic** map as well as in
+campaign ones. So: universal, once per process, save-independent, and not
+dependent on a Law Office existing. `LawOffice` is a `DLC/thomas` building with
+`entity = "LawOffice"`; the clips belong to its attached `LawOfficeDoor` entity.
+Disposition is **forced, not chosen** — it is a missing *binary* asset and this
+pack patches Lua at runtime, so no technique in FIX_POLICY §1 reaches it.
+
+**The probe gate → the tool stays absolute; the protocol tightens.** Asked to
+choose, the owner asked for the safest option, verbatim: *"I want to do whatever
+is safest, I do not want to get back into the situations where armed probes
+start giving us false problems or issues."* **No declared-probe hatch was built
+in `doccheck.py`** — the rejected options are recorded in prompt 4's notes so
+the reasoning survives, but a hatch a hurried session can open without saying so
+re-creates 2026-07-31 exactly. Adopted instead, as **`WORKFLOW.md` probe hygiene
+rule 5**: *a probe file is present in `Code/` only while its run is actually
+happening.* Placing it and running are the same act; deleting it and recording
+the answer are the same commit; there is no state in between, so no armed probe
+can outlive its sitting. The co-run protocol's "all prep before the owner sits
+down" bullet is amended to match — prep commits the probe's **source as text in
+the brief**, which is inert by construction because the mod loads only files
+listed in `metadata.lua` `code`, all under `Code/`. A slipped sitting now
+strands nothing and arms nothing, and the thing that made co-run #0 survivable
+(owner free immediately) is no longer load-bearing.
+
+Also flagged to prompt 4 and not resolved here: the TestKit is a **second repo
+nothing checks** — doccheck reads its `Code/` for the sweep and the probe count,
+but no gate verifies its working tree is clean, so the comment-only
+`96_AutoRunFlag.lua` edit from the 2026-08-03 MarsDebug session sat uncommitted
+for a day and surfaced only because a co-run happened to run `git status` there.
+A co-run touches both repos by construction, so the rig makes this likelier.
+
 ## 2026-08-04 — CO-RUN #0, the walking skeleton (corun-rig prompt 2, Opus): the rig's first end-to-end run, kill-gate PASSED WITH CORRECTIONS
 
 The first co-run ever run. Everything was prepped unattended; the owner gave one

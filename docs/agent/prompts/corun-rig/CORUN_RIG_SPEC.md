@@ -408,10 +408,21 @@ a re-choice of save — the save is otherwise richer than the record suggested.
   doccheck landed (2026-08-03), so it is the first to hit this. It was survivable
   here only because the owner was available immediately, letting prep and results
   land in one commit with the probe already deleted. **A co-run that must commit
-  prep before the sitting is blocked today.** Routed to prompt 4 (rig
-  integration) — the fix is a declared-probe hatch in doccheck, not
-  `--no-verify`, whose documented meaning ("the docs are inconsistent, I know")
-  would be a false statement in the record.
+  prep before the sitting is blocked today.** ~~Routed to prompt 4 (rig
+  integration) — the fix is a declared-probe hatch in doccheck~~
+  ⭐ **SUPERSEDED — DECIDED BY THE OWNER, 2026-08-04, same day:** *"I want to do
+  whatever is safest, I do not want to get back into the situations where armed
+  probes start giving us false problems or issues."* **The tool is NOT loosened
+  — no declared-probe hatch is built.** The protocol tightens instead:
+  **a probe file is present in `Code/` only while its run is actually happening**
+  (`WORKFLOW.md` probe hygiene rule 5). Prep commits carry the probe's source as
+  a fenced block in the brief — inert by construction, since the mod loads only
+  files listed in `metadata.lua` `code` — and the file lands in `Code/` at the
+  sitting and dies in the commit that records the answer. A slipped sitting then
+  strands nothing and arms nothing. ⛔ `--no-verify` was never an option: the
+  hook documents its meaning as "the docs are inconsistent, I know", which is a
+  false statement when the only red is a declared probe. **Prompt 4 integrates
+  this decision; it does not re-open it.**
 
 ### What may NOT be claimed from this run
 
