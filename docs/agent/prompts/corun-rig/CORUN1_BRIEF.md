@@ -257,5 +257,34 @@ one more thing to keep in sync.)
 
 Run 2's source is parked beside this file as
 [97_CoRun1b.lua.txt](97_CoRun1b.lua.txt); parse sweep GREEN on that exact text.
-Both probe files and their `metadata.lua` lines were deleted, and the staged
-save with them, in the commits that record the answers.
+
+## §8 RUN 3 — closing the corner case, at the owner's insistence
+
+Run 2 recorded the pre-registered corner slam as **REFUTED** and gave a reason
+that was false. The owner declined to leave it there: *"an agent later on can't
+try to decide that some error is because my mouse was at the bottom of the benq,
+get it closed completely."* ⭐ **That is a better reason than the one I gave for
+skipping it** (I had recommended against, on marginal-value grounds): a
+half-closed case is available later as a hand-wave, and a precisely-closed one
+is not.
+
+Run 3 is one leg: detect a cursor with **`x > 3840` AND `y > 2160`**, then open
+the picker. The prediction was computed from the measured dialog size and logged
+before anything opened — `box (2224,1731)-(3840,2160)` — and cycle 1 returned
+that box on all four edges with `CORNER=true`. **64 s cycle, ~30 s of owner
+time.** Source parked as [97_CoRun1c.lua.txt](97_CoRun1c.lua.txt), parse sweep
+GREEN.
+
+⚠️ **A process note against myself.** Run 3's arming was fumbled once: an inline
+Python one-liner passed through PowerShell mangled its own quoting, the
+`metadata.lua` edit silently did not happen, and the game launched **unarmed**.
+Caught by reading the tool output rather than by any check in the procedure. The
+fix used for the retry and the disarm is the rule worth keeping: **write the
+edit as a script FILE and run it, never as an inline one-liner through
+PowerShell** — the same quoting hazard `[[powershell-commit-quotes]]` already
+names for `git commit -m`.
+
+⛔ **Disarm, all three runs:** every probe file, every `metadata.lua` line and
+the staged save are deleted; the final sweep reads clean; the TestKit's
+`metadata.lua` is byte-identical to `HEAD` and its `git status` shows only the
+orphaned `96_AutoRunFlag.lua` edit prompt 4 owns.

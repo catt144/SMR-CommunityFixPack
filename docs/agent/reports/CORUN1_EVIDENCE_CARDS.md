@@ -23,7 +23,9 @@ log, not stronger. Stated because the convention requires uptime next to a count
 **Raw logs, archived in the commit that cites them** (`git add -f`; `.gitignore`
 line 2 is `*.log`):
 `docs/archive/corun1_Mars.exe-20260804-12.42.47.log` (run 1) ·
-`docs/archive/corun1b_Mars.exe-20260804-12.54.14.log` (run 2).
+`docs/archive/corun1b_Mars.exe-20260804-12.54.14.log` (run 2) ·
+`docs/archive/corun1c_Mars.exe-20260804-13.23.08.log` (run 3, 64 s cycle —
+closes card 3's corner case at the owner's request).
 
 **PROBE SWEEP:** clean before, `armed: TestKit Code/97_CoRun1.lua` (run 1) and
 `Code/97_CoRun1b.lua` (run 2) during, clean after — both files and their
@@ -219,16 +221,26 @@ useful half.**
    monitor.** That is *"renders far from the cursor"* with a measured mechanism
    behind it, on the very entry whose headline claim was falsified for the
    in-range case.
-3. ⚠️ **The prediction's "bottom-right CORNER" half did not fire — but it is
-   NOT refuted, and this card first said it was.** Only the x clamp fired; `y`
-   stayed at the anchor (`maxy = 1259`, inside `0..2160`), so the *observed*
-   placement is right-edge, not corner. ⛔ **The reason first given — "the second
-   monitor is not tall enough" — is false** (owner's display readouts,
-   2026-08-04): display 2 is **3840×2560**, 400 px taller than the game's box,
-   so a cursor in its bottom ~400 px gives `y > 2160` and fires the y clamp too.
-   **The corner case is reachable and was simply not sampled** — the parked
-   cursor sat at `y≈1259`. ⭐ And F76's pass-#8 `mouse (6148, 2350)` is exactly
-   that anchor: `y = 2350` is past 2160 and inside 2560.
+3. ⭐⭐ **BOTH clamps fire, and the bottom-right corner slam is CONFIRMED to the
+   pixel** (run 3). ⛔ **This card first recorded the corner half as REFUTED,
+   on the false reason "the second monitor is not tall enough".** Display 2 is
+   **3840×2560**, 400 px taller than the game's box; run 2's parked cursor sat
+   at `y≈1259` and never sampled the case. **"Refuted" was "unsampled".** Run 3
+   sampled it, against a prediction computed from the measured dialog size and
+   written to the log *before* any picker opened:
+
+   ```
+   PREDICTED  box (2224,1731)-(3840,2160)          x = 3840-1616,  y = 2160-429
+   MEASURED   cycle 1/12 anchor=(5305, 2269) x_out=true y_out=true
+              box=(2224, 1731)-(3840, 2160)  CORNER=true  items=9  ALIVE
+   ```
+
+   All four edges match. The flip branch correctly did not fire. ⚠️ **n = 1**
+   (the cursor returned to display 1 afterwards) — but `UpdateLayout` is
+   deterministic arithmetic, not a stochastic effect, so the open question is
+   whether the *anchor* recurs, not whether the *layout* does. ⭐ F76's pass-#8
+   `mouse (6148, 2350)` is exactly this anchor class: `y=2350` is past 2160 and
+   inside 2560.
 
 ⛔ **What may NOT be claimed.** **The picker appeared 20/20 in both runs**, so
 C41's OG symptom — *"the icon does not appear"* — **did not reproduce**, and

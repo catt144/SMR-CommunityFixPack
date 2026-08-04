@@ -8,7 +8,7 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
-## 2026-08-04 — CO-RUN #1, the first payload run: two launches, ~6 owner-minutes, three of four payload items settled
+## 2026-08-04 — CO-RUN #1, the first payload run: three launches, ~6.5 owner-minutes, three of four payload items settled
 
 ⭐⭐ **The rig earned its keep.** corun-rig prompt 3 (Opus) prepped unattended,
 ran the sitting, found two gaps in its own run 1, authored run 2 from run 1's
@@ -29,10 +29,24 @@ the engine's own line; **zero** `[LUA ERROR]` in either. Cards:
   wrapper. Still `cand`, nothing built, reachability untouched.
 - ⭐ **C41 got its first measured mechanism** — `GetMousePos` reports
   virtual-desktop coordinates against a window-local `desktop.box` (`x` to 7665
-  vs a box ending at 3840, 29/300 organic and 20/20 forced), and an out-of-range
-  anchor **does** fire the safe-area clamp, pinning the picker to the screen
-  edge ~2200 px from the cursor. ⛔ **The picker appeared 40/40** — the OG
-  symptom did not reproduce, so this is mechanism, not confirmation. `cand`.
+  vs a box ending at 3840), and an out-of-range anchor fires the safe-area
+  clamps, pinning the picker far from the cursor. **Run 3 reproduced the
+  bottom-right corner box `(2224,1731)-(3840,2160)` to the pixel** against a
+  prediction written to the log before any picker opened. ⛔ **The picker
+  appeared 52/52** — the OG symptom did not reproduce, so this is mechanism,
+  not confirmation. `cand`.
+- ⛔ **A doctrine breach, caught by the owner.** Run 2 recorded that corner
+  prediction as **REFUTED** when the condition had never been sampled, with a
+  confident false reason attached. The project's existing rule (*"absence under
+  N cycles is a rate bound, not a refutation"*) is written about **counts** and
+  did not catch a **sampling** gap. Owner insisted on closing it properly —
+  *"an agent later on can't try to decide that some error is because my mouse
+  was at the bottom of the benq"* — and run 3 cost 64 s and ~30 s of their time.
+  Generalisation routed to prompt 4 as spec correction **C10**.
+- ⚠️ **`C11`: arming edits must be a script FILE.** An inline Python one-liner
+  through PowerShell mangled its own quoting, the `metadata.lua` edit silently
+  did not happen, and **the game launched unarmed**. Same hazard class the
+  project already records for `git commit -m`.
 - ⚖️ **F11's pre-wrapper rider took 2 of its 3 readings** (340 holder removals,
   7 trains, 0 wedges, owner-witnessed) and the third is **unavailable on that
   save**. ⛔ `tested` not claimed; close-on-2/3 routed to the owner.

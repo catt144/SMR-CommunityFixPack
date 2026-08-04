@@ -456,16 +456,16 @@ and the staged save. ⚖️ The armed-prep override was **DECLINED**
 
 ### Costs — and ⚠️ §8's 80 s is the FLOOR, not the cycle cost
 
-| | co-run #0 | **#1 run 1** | **#1 run 2** |
-|---|---|---|---|
-| launch cmd → game log created | 2.2 s | **5.2 s** | **1.7 s** |
-| menu poll | 2.5 s | 2.5 s | 2.5 s |
-| **load, by the engine's own line** | 9,968 ms | **9,784 ms** | **9,531 ms** |
-| readiness | 0 ms | 0 ms | 0 ms |
-| settle (our own constant) | 30 s | 15 s | 15 s |
-| payload | 15 s | **~315 s** | **~35 s** |
-| **whole cycle (`Time (ms)`)** | 79,876 | **398,115** | **85,125** |
-| **owner-attended** | ~1.5 min / ~10 | **~5 min** | **~1 min** — both against **~15–20 promised**, ~6 min total |
+| | co-run #0 | **#1 run 1** | **#1 run 2** | **#1 run 3** |
+|---|---|---|---|---|
+| launch cmd → game log created | 2.2 s | **5.2 s** | **1.7 s** | ~1 s |
+| menu poll | 2.5 s | 2.5 s | 2.5 s | 2.5 s |
+| **load, by the engine's own line** | 9,968 ms | **9,784 ms** | **9,531 ms** | (not re-read) |
+| readiness | 0 ms | 0 ms | 0 ms | 0 ms |
+| settle (our own constant) | 30 s | 15 s | 15 s | 15 s |
+| payload | 15 s | **~315 s** | **~35 s** | **~14 s** |
+| **whole cycle (`Time (ms)`)** | 79,876 | **398,115** | **85,125** | **64,362** |
+| **owner-attended** | ~1.5 min / ~10 | **~5 min** | **~1 min** | **~0.5 min** — three runs against **~15–20 promised**, **~6.5 min total** |
 
 ⚠️ **The load is stable at ~9.5–10.0 s across three cold loads** — that is the
 one number the effort model can lean on. Everything else scales with the
@@ -485,7 +485,7 @@ by anything measured; 15 s is now the datum.
 |---|---|
 | **1 · F11 pre-wrapper watch** (Tier A) | **2 of 3 readings PASS**; ⛔ not `tested` — the stat reading is unavailable on this save (`LuxuriousTrains` researched, 0 forest tracks). 340 holder removals, 7 trains, **0 wedges**. Close decision routed to the owner |
 | **2 · F99 hex tie-break** (ride-along) | ⭐ **SETTLED — the hex returns the HIDDEN ELEMENT**, confirmed twice, against a pre-break control |
-| **3 · C41 amplification** (Tier A) | ⭐ **the M5 lead is MEASURED** (29/300 organic, 20/20 forced; `x` to 7665) **and the clamps fire for an out-of-range anchor** (box pinned to `maxx=3840`); ⛔ picker appeared **40/40**, so the OG symptom did **not** reproduce. `cand` unchanged |
+| **3 · C41 amplification** (Tier A) | ⭐ **the M5 lead is MEASURED** (29/300 organic, 20/20 forced; `x` to 7665) **and BOTH clamps fire for an out-of-range anchor** — run 3 reproduced a pre-registered corner box `(2224,1731)-(3840,2160)` **to the pixel**; ⛔ picker appeared **52/52** across three runs, so the OG symptom did **not** reproduce. `cand` unchanged |
 | **4 · F11 cross-map Done-timing** (ride-along) | ⭐ **SETTLED — route (a)**; route (b) excluded. Run 1 skipped it (one-shot selector, no rider aboard at that instant); run 2's retry loop found the fixture on its first sweep |
 
 ⭐ **The class-2 use case is now exercised, which §8 listed as unproven.**
@@ -515,5 +515,19 @@ not fired, so it stays proven-present, not proven-effective.
   quote the wrong number out of the log. `facts/EF-045` should say so.
 - **C9 — §3's effort model needs re-deriving from payload runs, not from #0.**
   §8 called §3 "~4–6× pessimistic" on the strength of one 15 s-payload cycle.
-  With two real payload runs the honest shape is **fixed ~30 s + payload**, and
-  a fat leg reaches 6.6 min. Prompt 4 owns the re-derivation.
+  With three real payload runs the honest shape is **fixed ~30 s + payload**,
+  and a fat leg reaches 6.6 min. Prompt 4 owns the re-derivation.
+- **C10 — ⛔ a negative result must state the CONDITION it sampled, not just the
+  count.** §5's abort/claim discipline and §8's "absence under N cycles is a rate
+  bound" are both written about **counts**, and that is why neither caught this
+  run's worst error: run 2 recorded a pre-registered prediction as **REFUTED**
+  when the condition it needed had never been sampled, and supplied a confident
+  false reason for it. Run 3 sampled the condition and the prediction was
+  confirmed **to the pixel**. **The rate-bound rule should be generalised to
+  cover sampling gaps, not only rate gaps** (prompt 4).
+- **C11 — arming edits must be a script FILE, never an inline one-liner through
+  PowerShell.** Run 3's `metadata.lua` edit was written as inline Python, whose
+  quoting PowerShell mangled; the edit silently did not happen and **the game
+  launched unarmed**. Nothing in the procedure caught it — only reading the tool
+  output did. Same hazard class the project already records for
+  `git commit -m` (use `-F <file>`).

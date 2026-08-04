@@ -429,6 +429,22 @@ U3 holds, but the number is not stable.*
   measurement taken from a non-DPI-aware process is not a measurement.** Worth a
   line in `PLAYTEST_HELP` beside the existing console-facts warnings — this is
   the same failure shape as "read the log, never the screen".*
+- ***⛔⛔ AND A DOCTRINE BREACH BY ME, WHICH IS THE ONE YOU SHOULD WEIGH HARDEST.***
+  I wrote **"REFUTED"** for the corner-slam prediction when what I had was
+  **"unsampled"** — and I supplied a confident false reason ("the second monitor
+  is not tall enough") that would have made the case look permanently closed to
+  the next reader. **This is exactly the failure `WORKFLOW.md` already names**
+  (*"absence under N forced cycles is a rate bound, not a refutation"*), applied
+  to a *sampling* gap instead of a *rate* gap, and the existing rule did not
+  catch it because it is written about counts, not about conditions. ⭐ **Consider
+  generalising it: a negative result must state the CONDITION it sampled, not
+  just the count.** Run 3 (owner-requested, 64 s cycle, ~30 s of their time)
+  then confirmed the corner **to the pixel** against a prediction written to the
+  log before any picker opened — `box (2224,1731)-(3840,2160)`, all four edges.
+  ⭐ **The owner's reason for insisting is worth quoting into the integration:**
+  *"an agent later on can't try to decide that some error is because my mouse
+  was at the bottom of the benq, get it closed completely."* A precisely-closed
+  case cannot be reached for as a hand-wave; a half-closed one can.*
 - ***The TestKit's orphaned `96_AutoRunFlag.lua` edit is UNTOUCHED** and is still
   the only thing in that repo's `git status` — staged by path throughout, never
   `-A`, never `checkout`/`restore`. ⚠️ **One thing to know:** I briefly damaged

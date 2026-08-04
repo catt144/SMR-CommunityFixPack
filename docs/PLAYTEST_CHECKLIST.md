@@ -38,12 +38,17 @@ these used to be filed only in agent reports, which is where you never read.
     happening, not inferred afterwards. → `agent/bugs/F11.md`.
   - ⭐ **F99's last unknown is MEASURED** — the hex returns the hidden element,
     which is what the seven crashes implied. Still `cand`, nothing built.
-  - ⭐ **C41 got its first real mechanism.** Your mouse genuinely reports
-    coordinates outside the game's own window box (up to `x=7665` against a box
-    ending at `3840`), and feeding that to the picker pins it to the right
-    screen edge ~2200 px from your cursor. ⛔ **But the picker still appeared
-    40 times out of 40** — the "icon does not appear" symptom did *not*
-    reproduce, so this is a mechanism, not a confirmation.
+  - ⭐ **C41 got its first real mechanism, and you were right to make me close
+    it.** Your mouse genuinely reports coordinates outside the game's own window
+    box (up to `x=7665` against a box ending at `3840`) — because `GetMousePos`
+    spans both monitors while the game's box is just the G7. Feeding that to the
+    picker fires the clamps. I first recorded the bottom-right-corner case as
+    **refuted**, on a reason that was simply wrong; it was **unsampled**. Your
+    third run sampled it and the box came back at
+    **`(2224,1731)-(3840,2160)` — the exact four numbers predicted before the
+    picker opened.** ⛔ **The picker still appeared 52 times out of 52**, so the
+    "icon does not appear" symptom did *not* reproduce: this is a mechanism,
+    not a confirmation, and `C41` stays `cand`.
 - ⭐ **DECISION FOR YOU: does the F11 pre-wrapper rider close on two of its
   three readings?** (2026-08-04) You wrote the rider, so this is yours. Two
   readings passed cleanly — `TrainPlatformWedge [active]`, and 7 trains

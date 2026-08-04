@@ -1,0 +1,432 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	35%
+Disk Free      	756886 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:057
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:061
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:401
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:530
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:727
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:401
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:455
+Lua revision: 396349
+						Lua 0:00:02:456
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:457
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:460
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:17:815
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:819
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:820
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:17:821
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+						Lua 0:00:17:822
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+						Lua 0:00:17:823
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:824
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:17:825
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+						Lua 0:00:17:826
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+						Lua 0:00:17:827
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+						Lua 0:00:17:828
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:380
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:455
+Reloading done in 987 ms
+						Lua 0:00:18:790
+[preset] Preset postprocess took 62 ms.
+						Lua 0:00:18:849
+479 / 479 particle streams loaded in 55 ms.
+						Lua 0:00:18:850
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:042
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:099
+[mod] [CORUN1C] +0ms === CO-RUN #1 RUN 3 — the corner case run 2 recorded as refuted and had only left unsampled ===
+[CORUN1C] +0ms === CO-RUN #1 RUN 3 — the corner case run 2 recorded as refuted and had only left unsampled ===
+[mod] [CORUN1C] +0ms STEP 1-waiting-menu BEGIN
+[CORUN1C] +0ms STEP 1-waiting-menu BEGIN
+[PdxSDK] Started up. Took 1631
+						Lua 0:00:19:123
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:19:124
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:552
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:680
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:560
+[mod] [CORUN1C] +2500ms STEP 1-waiting-menu END 2500ms
+[CORUN1C] +2500ms STEP 1-waiting-menu END 2500ms
+[mod] [CORUN1C] +2500ms STEP 2-loading-save BEGIN
+[CORUN1C] +2500ms STEP 2-loading-save BEGIN
+						Lua 0:00:21:660
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:661
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:696
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:542
+*** Assets reloaded in 2.9 s, read 202.1 MB, read speed 70.2 MB/s, average read 4948 bytes.
+						Lua 0:00:30:554
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:583
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:602
+Game Loaded in 8942 ms
+						Lua 0:00:30:646
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:446
+Game loaded on map BlankBigCanyonCMix_09 in 9886 ms
+						Lua 0:00:31:447
+[mod] [CORUN1C] +3326ms LOAD OK
+[CORUN1C] +3326ms LOAD OK
+[mod] [CORUN1C] +3326ms STEP 2-loading-save END 826ms
+[CORUN1C] +3326ms STEP 2-loading-save END 826ms
+[mod] [CORUN1C] +3326ms STEP 3-waiting-city BEGIN
+[CORUN1C] +3326ms STEP 3-waiting-city BEGIN
+[mod] [CORUN1C] +3326ms STEP 3-waiting-city END 0ms
+[CORUN1C] +3326ms STEP 3-waiting-city END 0ms
+[mod] [CORUN1C] +3326ms STEP 3b-settling BEGIN
+[CORUN1C] +3326ms STEP 3b-settling BEGIN
+						Lua 0:00:33:752
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:445
+[mod] [CORUN1C] +18326ms STEP 3b-settling END 15000ms
+[CORUN1C] +18326ms STEP 3b-settling END 15000ms
+[mod] [CORUN1C] +18326ms STEP 4-speed BEGIN
+[CORUN1C] +18326ms STEP 4-speed BEGIN
+						Lua 0:00:46:946
+[mod] [CORUN1C] +18826ms READ game speed: call=true before=0 after=3
+[CORUN1C] +18826ms READ game speed: call=true before=0 after=3
+[mod] [CORUN1C] +18826ms STEP 4-speed END 500ms
+[CORUN1C] +18826ms STEP 4-speed END 500ms
+[mod] [CORUN1C] +18826ms STEP L2D-corner BEGIN
+[CORUN1C] +18826ms STEP L2D-corner BEGIN
+[mod] [CORUN1C] +18826ms L2D env: desk=(0, 0)-(3840, 2160) safe=0 0 3840 2160 screen=(3840, 2160) scale=(1900, 1900)
+[CORUN1C] +18826ms L2D env: desk=(0, 0)-(3840, 2160) safe=0 0 3840 2160 screen=(3840, 2160) scale=(1900, 1900)
+[mod] [CORUN1C] +18826ms L2D ⛔ PREDICTION, computed before any picker opens. With the run-2 dialog size (mw=1616 mh=429) and an anchor whose x>3840 AND y>2160, BOTH clamps must fire and the box must be (2224,1731)-(3840,2160) — the bottom-right corner. The flip branch must NOT fire (it needs y<0; y here starts at anchor.y-height ~= 1921). If instead only the x clamp fires again, the y clamp is unreachable from this geometry after all and run 2's REFUTED verdict was right for the wrong reason.
+[CORUN1C] +18826ms L2D ⛔ PREDICTION, computed before any picker opens. With the run-2 dialog size (mw=1616 mh=429) and an anchor whose x>3840 AND y>2160, BOTH clamps must fire and the box must be (2224,1731)-(3840,2160) — the bottom-right corner. The flip branch must NOT fire (it needs y<0; y here starts at anchor.y-height ~= 1921). If instead only the x clamp fires again, the y clamp is unreachable from this geometry after all and run 2's REFUTED verdict was right for the wrong reason.
+[mod] [CORUN1C] +18826ms L2D ⭐ PUT THE CURSOR IN THE BOTTOM STRIP OF THE BENQ — below y=2160 on the taller monitor — and leave it. Waiting for a mouse read with x>3840 AND y>2160, 3 times running.
+[CORUN1C] +18826ms L2D ⭐ PUT THE CURSOR IN THE BOTTOM STRIP OF THE BENQ — below y=2160 on the taller monitor — and leave it. Waiting for a mouse read with x>3840 AND y>2160, 3 times running.
+						Lua 0:00:51:446
+[mod] [CORUN1C] +23326ms L2D ARMED — cursor at (5305, 2269) (x past 3840 AND y past 2160)
+[CORUN1C] +23326ms L2D ARMED — cursor at (5305, 2269) (x past 3840 AND y past 2160)
+						Lua 0:00:51:454
+[mod] [CORUN1C] +23326ms L2D LAYOUT #1 anchor=(5305, 2269) anchor_x_out=true anchor_y_out=true box=(2224, 1775)-(3840, 2160) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +23326ms L2D LAYOUT #1 anchor=(5305, 2269) anchor_x_out=true anchor_y_out=true box=(2224, 1775)-(3840, 2160) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:51:455
+[mod] [CORUN1C] +23326ms L2D LAYOUT #2 anchor=(5305, 2269) anchor_x_out=true anchor_y_out=true box=(2224, 1731)-(3840, 2160) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +23326ms L2D LAYOUT #2 anchor=(5305, 2269) anchor_x_out=true anchor_y_out=true box=(2224, 1731)-(3840, 2160) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:51:460
+[mod] [CORUN1C] +23338ms L2D LAYOUT #3 anchor=(5305, 2269) anchor_x_out=true anchor_y_out=true box=(2224, 1731)-(3840, 2160) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +23338ms L2D LAYOUT #3 anchor=(5305, 2269) anchor_x_out=true anchor_y_out=true box=(2224, 1731)-(3840, 2160) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:51:846
+[mod] [CORUN1C] +23726ms L2D cycle 1/12 dialog=ALIVE anchor=(5305, 2269) (x_out=true y_out=true) box=(2224, 1731)-(3840, 2160) CORNER=true items=9 mouse=(5305, 2269)
+[CORUN1C] +23726ms L2D cycle 1/12 dialog=ALIVE anchor=(5305, 2269) (x_out=true y_out=true) box=(2224, 1731)-(3840, 2160) CORNER=true items=9 mouse=(5305, 2269)
+						Lua 0:00:52:253
+[mod] [CORUN1C] +24131ms L2D LAYOUT #4 anchor=(6713, 1960) anchor_x_out=true anchor_y_out=false box=(2224, 1575)-(3840, 1960) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +24131ms L2D LAYOUT #4 anchor=(6713, 1960) anchor_x_out=true anchor_y_out=false box=(2224, 1575)-(3840, 1960) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:52:254
+[mod] [CORUN1C] +24131ms L2D LAYOUT #5 anchor=(6713, 1960) anchor_x_out=true anchor_y_out=false box=(2224, 1531)-(3840, 1960) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +24131ms L2D LAYOUT #5 anchor=(6713, 1960) anchor_x_out=true anchor_y_out=false box=(2224, 1531)-(3840, 1960) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:52:645
+[mod] [CORUN1C] +24526ms L2D cycle 2/12 dialog=ALIVE anchor=(6713, 1960) (x_out=true y_out=false) box=(2224, 1531)-(3840, 1960) CORNER=false items=9 mouse=(6713, 1960)
+[CORUN1C] +24526ms L2D cycle 2/12 dialog=ALIVE anchor=(6713, 1960) (x_out=true y_out=false) box=(2224, 1531)-(3840, 1960) CORNER=false items=9 mouse=(6713, 1960)
+						Lua 0:00:53:050
+[mod] [CORUN1C] +24926ms L2D LAYOUT #6 anchor=(6698, 2006) anchor_x_out=true anchor_y_out=false box=(2224, 1621)-(3840, 2006) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +24926ms L2D LAYOUT #6 anchor=(6698, 2006) anchor_x_out=true anchor_y_out=false box=(2224, 1621)-(3840, 2006) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:53:051
+[mod] [CORUN1C] +24926ms L2D LAYOUT #7 anchor=(6698, 2006) anchor_x_out=true anchor_y_out=false box=(2224, 1577)-(3840, 2006) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +24926ms L2D LAYOUT #7 anchor=(6698, 2006) anchor_x_out=true anchor_y_out=false box=(2224, 1577)-(3840, 2006) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:53:057
+[mod] [CORUN1C] +24936ms L2D LAYOUT #8 anchor=(6698, 2006) anchor_x_out=true anchor_y_out=false box=(2224, 1577)-(3840, 2006) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +24936ms L2D LAYOUT #8 anchor=(6698, 2006) anchor_x_out=true anchor_y_out=false box=(2224, 1577)-(3840, 2006) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:53:445
+[mod] [CORUN1C] +25326ms L2D cycle 3/12 dialog=ALIVE anchor=(6698, 2006) (x_out=true y_out=false) box=(2224, 1577)-(3840, 2006) CORNER=false items=9 mouse=(6698, 2006)
+[CORUN1C] +25326ms L2D cycle 3/12 dialog=ALIVE anchor=(6698, 2006) (x_out=true y_out=false) box=(2224, 1577)-(3840, 2006) CORNER=false items=9 mouse=(6698, 2006)
+						Lua 0:00:53:850
+[mod] [CORUN1C] +25726ms L2D LAYOUT #9 anchor=(6655, 2020) anchor_x_out=true anchor_y_out=false box=(2224, 1635)-(3840, 2020) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +25726ms L2D LAYOUT #9 anchor=(6655, 2020) anchor_x_out=true anchor_y_out=false box=(2224, 1635)-(3840, 2020) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:53:851
+[mod] [CORUN1C] +25726ms L2D LAYOUT #10 anchor=(6655, 2020) anchor_x_out=true anchor_y_out=false box=(2224, 1591)-(3840, 2020) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +25726ms L2D LAYOUT #10 anchor=(6655, 2020) anchor_x_out=true anchor_y_out=false box=(2224, 1591)-(3840, 2020) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:53:854
+[mod] [CORUN1C] +25735ms L2D LAYOUT #11 anchor=(6655, 2020) anchor_x_out=true anchor_y_out=false box=(2224, 1591)-(3840, 2020) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +25735ms L2D LAYOUT #11 anchor=(6655, 2020) anchor_x_out=true anchor_y_out=false box=(2224, 1591)-(3840, 2020) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:54:245
+[mod] [CORUN1C] +26126ms L2D cycle 4/12 dialog=ALIVE anchor=(6655, 2020) (x_out=true y_out=false) box=(2224, 1591)-(3840, 2020) CORNER=false items=9 mouse=(6655, 2020)
+[CORUN1C] +26126ms L2D cycle 4/12 dialog=ALIVE anchor=(6655, 2020) (x_out=true y_out=false) box=(2224, 1591)-(3840, 2020) CORNER=false items=9 mouse=(6655, 2020)
+						Lua 0:00:54:656
+[mod] [CORUN1C] +26535ms L2D LAYOUT #12 anchor=(3569, 1683) anchor_x_out=false anchor_y_out=false box=(2224, 1298)-(3840, 1683) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)						Lua 0:00:54:657
+
+[CORUN1C] +26535ms L2D LAYOUT #12 anchor=(3569, 1683) anchor_x_out=false anchor_y_out=false box=(2224, 1298)-(3840, 1683) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:54:658
+[mod] [CORUN1C] +26535ms L2D LAYOUT #13 anchor=(3569, 1683) anchor_x_out=false anchor_y_out=false box=(2224, 1254)-(3840, 1683) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +26535ms L2D LAYOUT #13 anchor=(3569, 1683) anchor_x_out=false anchor_y_out=false box=(2224, 1254)-(3840, 1683) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:54:779
+[mod] [CORUN1C] +26660ms L2D LAYOUT #14 anchor=(3569, 1683) anchor_x_out=false anchor_y_out=false box=(2224, 1254)-(3840, 1683) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +26660ms L2D LAYOUT #14 anchor=(3569, 1683) anchor_x_out=false anchor_y_out=false box=(2224, 1254)-(3840, 1683) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:55:045
+[mod] [CORUN1C] +26926ms L2D cycle 5/12 dialog=ALIVE anchor=(3569, 1683) (x_out=false y_out=false) box=(2224, 1254)-(3840, 1683) CORNER=false items=9 mouse=(3569, 1683)
+[CORUN1C] +26926ms L2D cycle 5/12 dialog=ALIVE anchor=(3569, 1683) (x_out=false y_out=false) box=(2224, 1254)-(3840, 1683) CORNER=false items=9 mouse=(3569, 1683)
+						Lua 0:00:55:451
+[mod] [CORUN1C] +27326ms L2D LAYOUT #15 anchor=(2622, 1510) anchor_x_out=false anchor_y_out=false box=(1814, 1125)-(3430, 1510) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +27326ms L2D LAYOUT #15 anchor=(2622, 1510) anchor_x_out=false anchor_y_out=false box=(1814, 1125)-(3430, 1510) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:55:452
+[mod] [CORUN1C] +27326ms L2D LAYOUT #16 anchor=(2622, 1510) anchor_x_out=false anchor_y_out=false box=(1814, 1081)-(3430, 1510) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +27326ms L2D LAYOUT #16 anchor=(2622, 1510) anchor_x_out=false anchor_y_out=false box=(1814, 1081)-(3430, 1510) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:55:461
+[mod] [CORUN1C] +27339ms L2D LAYOUT #17 anchor=(2622, 1510) anchor_x_out=false anchor_y_out=false box=(1814, 1081)-(3430, 1510) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +27339ms L2D LAYOUT #17 anchor=(2622, 1510) anchor_x_out=false anchor_y_out=false box=(1814, 1081)-(3430, 1510) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:55:845
+[mod] [CORUN1C] +27726ms L2D cycle 6/12 dialog=ALIVE anchor=(2622, 1510) (x_out=false y_out=false) box=(1814, 1081)-(3430, 1510) CORNER=false items=9 mouse=(2622, 1510)
+[CORUN1C] +27726ms L2D cycle 6/12 dialog=ALIVE anchor=(2622, 1510) (x_out=false y_out=false) box=(1814, 1081)-(3430, 1510) CORNER=false items=9 mouse=(2622, 1510)
+						Lua 0:00:56:252
+[mod] [CORUN1C] +28130ms L2D LAYOUT #18 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +28130ms L2D LAYOUT #18 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:56:253
+[mod] [CORUN1C] +28130ms L2D LAYOUT #19 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +28130ms L2D LAYOUT #19 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:56:645
+[mod] [CORUN1C] +28526ms L2D cycle 7/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+[CORUN1C] +28526ms L2D cycle 7/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+						Lua 0:00:57:053
+[mod] [CORUN1C] +28931ms L2D LAYOUT #20 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +28931ms L2D LAYOUT #20 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[mod] [CORUN1C] +28931ms L2D LAYOUT #21 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +28931ms L2D LAYOUT #21 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:57:445
+[mod] [CORUN1C] +29326ms L2D cycle 8/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+[CORUN1C] +29326ms L2D cycle 8/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+						Lua 0:00:57:853
+[mod] [CORUN1C] +29731ms L2D LAYOUT #22 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +29731ms L2D LAYOUT #22 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[mod] [CORUN1C] +29731ms L2D LAYOUT #23 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:57:854
+[CORUN1C] +29731ms L2D LAYOUT #23 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:58:246
+[mod] [CORUN1C] +30126ms L2D cycle 9/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+[CORUN1C] +30126ms L2D cycle 9/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+						Lua 0:00:58:653
+[mod] [CORUN1C] +30529ms L2D LAYOUT #24 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +30529ms L2D LAYOUT #24 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:58:654
+[mod] [CORUN1C] +30529ms L2D LAYOUT #25 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +30529ms L2D LAYOUT #25 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:58:772
+[mod] [CORUN1C] +30653ms L2D LAYOUT #26 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +30653ms L2D LAYOUT #26 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:59:046
+[mod] [CORUN1C] +30926ms L2D cycle 10/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+[CORUN1C] +30926ms L2D cycle 10/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+						Lua 0:00:59:450
+[mod] [CORUN1C] +31326ms L2D LAYOUT #27 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +31326ms L2D LAYOUT #27 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1119)-(3413, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:59:451
+[mod] [CORUN1C] +31326ms L2D LAYOUT #28 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +31326ms L2D LAYOUT #28 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:59:459
+[mod] [CORUN1C] +31337ms L2D LAYOUT #29 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +31337ms L2D LAYOUT #29 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:59:775
+[mod] [CORUN1C] +31656ms L2D LAYOUT #30 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +31656ms L2D LAYOUT #30 anchor=(2605, 1504) anchor_x_out=false anchor_y_out=false box=(1797, 1075)-(3413, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:00:59:846
+[mod] [CORUN1C] +31726ms L2D cycle 11/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+[CORUN1C] +31726ms L2D cycle 11/12 dialog=ALIVE anchor=(2605, 1504) (x_out=false y_out=false) box=(1797, 1075)-(3413, 1504) CORNER=false items=9 mouse=(2605, 1504)
+						Lua 0:01:00:256
+[mod] [CORUN1C] +32134ms L2D LAYOUT #31 anchor=(2607, 1504) anchor_x_out=false anchor_y_out=false box=(1799, 1119)-(3415, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +32134ms L2D LAYOUT #31 anchor=(2607, 1504) anchor_x_out=false anchor_y_out=false box=(1799, 1119)-(3415, 1504) mw=1616 mh=385 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:01:00:257
+[mod] [CORUN1C] +32134ms L2D LAYOUT #32 anchor=(2607, 1504) anchor_x_out=false anchor_y_out=false box=(1799, 1075)-(3415, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+[CORUN1C] +32134ms L2D LAYOUT #32 anchor=(2607, 1504) anchor_x_out=false anchor_y_out=false box=(1799, 1075)-(3415, 1504) mw=1616 mh=429 scale=(1425, 1425) desk=(0, 0)-(3840, 2160)
+						Lua 0:01:00:675
+[mod] [CORUN1C] +32526ms L2D cycle 12/12 dialog=ALIVE anchor=(2607, 1504) (x_out=false y_out=false) box=(1799, 1075)-(3415, 1504) CORNER=false items=9 mouse=(2607, 1504)
+[CORUN1C] +32526ms L2D cycle 12/12 dialog=ALIVE anchor=(2607, 1504) (x_out=false y_out=false) box=(1799, 1075)-(3415, 1504) CORNER=false items=9 mouse=(2607, 1504)
+						Lua 0:01:01:045
+[mod] [CORUN1C] +32926ms L2D ⭐ RESULT 12/12 opened, 0/12 missing | anchors with BOTH x and y out=1 | anchors with x only=3 | boxes in the BOTTOM-RIGHT CORNER=1 | layouts=32
+[CORUN1C] +32926ms L2D ⭐ RESULT 12/12 opened, 0/12 missing | anchors with BOTH x and y out=1 | anchors with x only=3 | boxes in the BOTTOM-RIGHT CORNER=1 | layouts=32
+[mod] [CORUN1C] +32926ms STEP L2D-corner END 14100ms
+[CORUN1C] +32926ms STEP L2D-corner END 14100ms
+[mod] [CORUN1C] +32926ms === CO-RUN #1 RUN 3 complete ===
+[CORUN1C] +32926ms === CO-RUN #1 RUN 3 complete ===
+[mod] [CORUN1C] +32926ms SHUTDOWN done
+[CORUN1C] +32926ms SHUTDOWN done
+						Lua 0:01:04:045
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:04:046
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:04:362
+
+
+*** Debug::Done()
+Time (ms)	64362
+
+
