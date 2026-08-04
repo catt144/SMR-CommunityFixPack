@@ -419,6 +419,17 @@ survives in git — `git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPE
   forced-open loop, 300-sample 5 Hz poll, 238 s 1 Hz poll); multi-launch
   sittings with each run authored from the previous one's log; per-line
   flush + mid-session agent log reads.
+  ⭐ **PROVEN 2026-08-04 by unattended-1 cycle 0, the primitive nobody had ever
+  called: an in-run SAVE.** `SaveGame(display, {savename=…, silent=true,
+  no_screenshot=true})` from a real-time thread returned `err=false`, the file
+  appeared to `Savegame.ListForTag("savegame")` (57→58 tagged files), and
+  `LoadGame` brought it back live with the pack still reading 81/81 — a full
+  write→list→reload round trip, log
+  `docs/archive/u1c0_Mars.exe-20260804-16.37.16.log`. ⛔ `save_as_last` is never
+  passed (it would repoint the owner's *Continue* button); deletion stays
+  agent-side with the game closed, because the mod environment has no
+  file-delete primitive at all (`io`, `os` and `AsyncFileDelete` are all
+  `ModEnvBlacklist` keys). **Save/reload legs are now inside the envelope.**
 - **Still UNPROVEN (say so when planning):** the watchdog under a real wedge
   (proven present, never fired). **DESCOPED, not pending:** Mod-Manager /
   main-menu driving (blacklisted — the enable click stays human, P8 shape),

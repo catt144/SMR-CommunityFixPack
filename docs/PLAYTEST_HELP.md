@@ -570,6 +570,17 @@ mechanics.
    15 s, flush/quit ~1.5 s). Whole cycles ran 64 s / 80 s / 85 s / 398 s.
    Owner cost is the measure moments only — measured ~1.5 min (co-run #0) and
    ~6.5 min (co-run #1, three launches).
+   ⭐ **Three numbers added 2026-08-04 by unattended-1 cycle 0** (log
+   `docs/archive/u1c0_Mars.exe-20260804-16.37.16.log`; all read off the log's own
+   `Lua H:MM:SS:mmm` markers, which DO survive a loading screen — `EF-045`):
+   **(a) an in-run `SaveGame` of the 56 MB save costs 0.60 s** — the one cost
+   nobody had measured, predicted at 10–20 s by analogy with the load, and the
+   prediction was wrong by more than an order of magnitude, so save/reload legs
+   are far cheaper to plan than assumed. **(b) A second load of the same map in
+   the same process costs 5.9 s against the cold load's 10.1 s** — budget
+   ~6 s, not ~10 s, for every load after the first. **(c) Boot to main menu is
+   ~19.4 s of the cycle** and is the single largest fixed cost, which is the
+   real argument for batching legs per launch rather than per cycle.
 7. **Close-out:** delete the probe + its `metadata.lua` line + the staged copy
    in the commit that records the answers; `PROBE SWEEP:` line; archive any
    cited log with `git add -f`; **`git status` in BOTH repos** (WORKFLOW
