@@ -253,6 +253,26 @@ pre-wrapper watch (below), C41's vanishing picker (amplified spawn/open loop),
 F99's no-cheat discriminator (forced break, organic drone repair), plus the
 two C-side console reads that need no eyes at all.
 
+⭐ **ROUTING SWEEP 2026-08-04 (post-rig; the block above predates the rig).**
+Every open item re-triaged under WORKFLOW's routing rule now that the rig is
+proven. ⚠️ Recommendation strength: each converted test still gets its setup
+re-derived in rig terms by the session that runs it — the designs below were
+written assuming you drove everything.
+
+| verdict | items | what you still do |
+|---|---|---|
+| → **UNATTENDED** | **PT-35** (all reads are numbers + save/reload — the "nothing changes on screen" check becomes "the read-back numbers don't change", which is the entry's own claim) · **F99 residue rider** (the rig can STAGE break + cheat + pre-reload read deliberately — it no longer waits for a sitting to happen to use the cheat) · **F99 no-cheat discriminator** (forced break, organic drone repair at speed, log watch — no eyes; still gated on your go, it feeds your severity call) · **load-heal sweep** (Do-first #2 — was ~1 h of you; save/reload cycles are the rig's proven core; re-scope first) | nothing (say go) |
+| → **CO-RUN** (was full playtest) | **PT-37** (break staged via the proven `BreakTrackElement` route, reload cycles rig-driven; your eyes: route formation + the salvage-cursor check) · **PT-47** (agent forces the volley + runs the 5 integrity checks; your eyes: scatter-vs-rank, the one thing that is eyes by nature) · **PT-27/PT-28** (provisioning is the real cost; catch-lists and Health-drop patterns are console reads; PT-28 rides PT-27's storm nearly free) · **PT-42** (agent stages stock/drain at speed; your eyes: the faction panel goals at 3–4 moments) · **PT-53 E** (two hands moments — manual assign, Mod-Manager disable; the load-clean read is log) · **PT-18** (agent stages the landings on a SAVE-E copy; deaths/stranding are counters; ⚠️ SAVE-E itself is still ~30 min of your provisioning) · **PT-10** (setup rig-driven; your eyes: clumping + screenshots) · **PT-15** (reads scripted, `SetLightTrapMode` is a verified command; fixture still needs the mystery pick) · **F74+F53(a)** (harness builds the fresh colony unattended; you: the pack-disable click + the two UI acts) · **PT-60** (suite/reload/log halves rig-side; you keep only the 15–20 min ordinary-play segment) · **PT-20** (you keep the disable click + 10 min play) · riders **F21 · F34(d) · F85 · F38 · popup keystone · §3.6** (each a hands-moment or ride-along once staged) | minutes, named per brief |
+| **stays PLAYTEST** | **PT-62 remainder** (the campaign gate — behavioural drain judgment through a landing; rig can carry P12's save/disable/load mechanics) · **PT-21** (organic play IS the test) · **PT-30** (mystery playthrough, UI actions) · **C39** (explicitly a keyboard judgment) · **doctrine C-sitting** (likely co-runnable — re-scope against `CHAIN_QA_REPORT.md` §1.3 before promising) | the sitting |
+| **stays ORGANIC-ONLY rider** | **F80 · C25 · F06 · F83 · C40 · C32 · F76/C41 recurrence** (situation must arise; the READS are one-line co-run/console asks when it does) · **F90** (no verified command forces a dust storm — stays situation-gated unless a scoping session verifies one) | tap when it happens |
+
+Two consequences worth knowing: **your dominant remaining cost shifts from
+sittings to fixture provisioning** (SAVE-A/D/E builds — cheats are
+scriptable but building placement is UI, so those stay co-op sessions); and
+since co-runs ARE attended, a co-run pass you witness can earn `tested`
+exactly as a sitting does — F11's watch was denied only by a fixture gap,
+not by the format.
+
 ## Do first — the campaign's ordered top (chain-12 QA, `agent/reports/CHAIN_QA_REPORT.md` §9)
 
 1. **PT-62's remainder** (→ Colonists & domes) — the only gate left on D12: a
