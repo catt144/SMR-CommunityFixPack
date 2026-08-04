@@ -9,11 +9,13 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 ## Where the project is
 
 ✅✅ **18-prompt project chain COMPLETE (2026-08-03)**; the playtest campaign is
-the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first** (verdict ·
-doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig chain CLOSED 2026-08-04** —
-rig PROVEN (~30 s fixed + payload; owner ~8 min vs ~25–30 promised), tiers
-ROUTED, rule-5 recheck DONE-STANDS. ⭐ **NEXT: `unattended-1` prep DONE
-2026-08-04 (8 parked probes, 7-cycle plan) — `02_OPUS_RUN.md` awaits KICKOFF.**
+the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first** (verdict · §9
+top). ⭐⭐ **corun-rig CLOSED**; rig PROVEN, tiers ROUTED. ⭐⭐ **`unattended-1`
+RUN 2026-08-04: all 7 cycles, owner cost = the kickoff word.** ✅ SAVE primitive
+**PROVEN** (0.60 s) · legs A–F recorded · **both `[NEVER RUN]` rows flipped** ·
+F99 discriminator **0 in 4 organic repairs** (rate bound; stays `cand`) · 9 logs
+archived · ⛔ **3 of 7 probes rewritten mid-run**, 8-entry ledger.
+⭐ **NEXT: `03_FABLE_AUDIT.md` — Fable, adversarial audit, awaits KICKOFF.**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -28,21 +30,19 @@ BUILD STATE (emitted by tools/doccheck.py)
 Re-emit after any module or entry change; a red run refuses to hand one out.
 Pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 
-⚖️ **F76 CLOSED-REFUTED, P1 released**. Residue **`C41` (cand)**: ⭐ M5 lead
-**MEASURED 2026-08-04** — an out-of-range mouse displaces the picker; ⛔ it
-appeared 52/52, OG symptom unreproduced. MOD_DESCRIPTION's F76 note is VOID.
+⚖️ **F76 CLOSED-REFUTED, P1 released**. Residue **`C41` (cand)**: ⭐ M5 **MEASURED
+2026-08-04** — an out-of-range mouse displaces the picker (52/52; OG symptom
+unreproduced). MOD_DESCRIPTION's F76 note is VOID.
 
 ✅ **F11** — ⭐ cross-map route **SETTLED 2026-08-04: route (a)**. Pre-wrapper
 WATCHED: **2 of 3** pass, ⛔ NOT `tested`. ⭐ Owner: close on 2/3? `P1`?
 
-⚠️ **F99 (`cand`)** — **7** × `TrackElement.lua:805`, cheat-only; no-cheat
-UNPROVEN, nothing built. Drain = `ExpandTrackFromElement:729` absorb-walk + the
-dead `:800` guard; ⭐ the hex tie-break is **MEASURED 2026-08-04** (it returns
-the hidden element). Blocked on §4 reachability; severity = owner (checklist).
+⚠️ **F99 (`cand`)** — **7** × `TrackElement.lua:805`, cheat-only. ⭐ **no-cheat
+discriminator RAN 2026-08-04: 0 in 4 witnessed organic repairs** — a rate bound,
+NOT a refutation; reachability still UNPROVEN, nothing built, severity = owner.
 
-⭐ **FIRST COMPLETE PROBE COVERAGE 2026-08-03** — MarsDebug `[install]`: **87
-PASS / 0 FAIL / 0 SKIP** (EXECUTED-ONCE, `PLAYTEST_HELP`). ⛔ Never quote as
-retail health (F98 is two-sided); **retail coverage is 78/87.**
+⭐ **PROBE COVERAGE 2026-08-03** — MarsDebug `[install]` **87 PASS / 0 FAIL**
+(EXECUTED-ONCE). ⛔ Never quote as retail health; **retail coverage is 78/87.**
 
 ## Gates and holds
 
