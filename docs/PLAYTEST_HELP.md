@@ -177,6 +177,12 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 - Reads and writes of **non-blacklisted** names go straight to the real `_G`
   (`console.lua:48,53`) — so `g_Consts.X = 1`, `CheatFoo()`, `UIColony:Bar()` all
   work normally.
+- ⛔ **Read the LOG FILE, never the screen, and make `nil` visible** (adopted
+  2026-08-04, from the first campaign sittings): two live explanations from
+  on-screen readings were wrong and the log refuted both. A bare console
+  expression that renders as empty is NOT a reading — wrap uncertain reads as
+  `print_format("label: <1>", tostring(expr))` so a `nil` arrives as a token
+  you can see and quote.
 - **Blacklisted names read back as `nil` with no error** (`CommonLua/Classes/Mod.lua:1267-1428`).
   Do not use these in console snippets — they will look like the game is broken:
   `debug`, `io`, `os`, `package`, `lfs`, `_G`, `rawget`, `getmetatable`, `setfenv`,

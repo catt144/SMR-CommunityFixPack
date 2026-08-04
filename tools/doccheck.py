@@ -41,6 +41,14 @@ CODE = os.path.join(REPO, "Code")
 
 STATE_MAX_LINES = 60
 
+# The standing prompt is instructions, not a logbook (rule added 2026-08-04
+# after two sittings appended their lessons to it — the habit that grew the
+# old 43k-token prompt). The cap is a tripwire, not a prohibition: at the cap,
+# relocate per the prompt's own routing rule (WORKFLOW / PLAYTEST_HELP /
+# agent/facts/ / the entry), then trim.
+GENERAL_USE = os.path.join(DOCS, "agent", "prompts", "GENERAL_USE_PROMPT.md")
+GENERAL_USE_MAX_LINES = 220
+
 # The three stubs spec §3e leaves behind so historical references resolve one
 # hop away. Each must exist, say MOVED, and stay short enough to be a signpost.
 STUBS = {
@@ -394,6 +402,14 @@ def check_state_and_stubs(out):
             red.append("STATE.md is %d lines, budget is %d — it is a one-screen "
                        "current-state doc; the narrative belongs in "
                        "archive/SESSION_LOG.md" % (n_state, STATE_MAX_LINES))
+    if os.path.exists(GENERAL_USE):
+        n_gu = len(read(GENERAL_USE))
+        if n_gu > GENERAL_USE_MAX_LINES:
+            red.append("GENERAL_USE_PROMPT.md is %d lines, budget is %d — it is "
+                       "instructions, not a logbook; route sitting lessons per "
+                       "its own header rule (WORKFLOW / PLAYTEST_HELP / "
+                       "agent/facts/ / the entry) and trim"
+                       % (n_gu, GENERAL_USE_MAX_LINES))
     for path, target in sorted(STUBS.items()):
         rel = os.path.relpath(path, REPO).replace(os.sep, "/")
         if not os.path.exists(path):

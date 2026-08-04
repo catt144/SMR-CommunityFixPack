@@ -47,6 +47,10 @@ time and each one is named after the miss it prevents.
    status flip, copy the log into the repo in the SAME commit. The game's
    rotation cap is ~20 files and it has already eaten founding measurements.
    Cannot be applied retroactively, which is the whole argument for now.
+   ⛔ **`.gitignore` line 2 is `*.log`, so the archive copy needs
+   `git add -f`** — a plain `git add` drops it SILENTLY and the commit looks
+   complete (one commit shipped with a false archive claim before this was
+   caught, 2026-08-03).
 5. **Owner-decision mirroring (R10).** Every item needing the owner's call is
    mirrored into `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"
    (one line + pointer), and struck the moment it is decided. **An owner
@@ -165,6 +169,20 @@ metadata/items lines, commit) or stops and reports.
    PACK's code list.
 
 ## Testing checklist per fix
+
+**Leg-design rules (adopted 2026-08-04, from the first campaign sittings —
+relocated here from the standing prompt, which is instructions, not a
+logbook):**
+- **An "objective counter" is only objective if it can FAIL, and it needs a
+  liveness witness beside it.** PT-62's loop check counted a delivery the
+  flagged dome was *required* to receive, so it could not fail; F11's `nil`
+  reading only meant something because `#units` and `holder` were read in the
+  same breath, ruling out an empty list and a call that never fired.
+- **When a test's trigger is a selection you cannot steer, delete the lottery:**
+  invoke the shipped call site directly on a chosen target and settle the
+  selection half by reconstructing the pool and reading it (F11's
+  `SetCommand("EnterTransporter", …)` is verbatim the shipped caller's body —
+  an unrunnable rider became a five-minute answer costing zero expeditions).
 
 1. Load a save (or new game) where the bug reproduces; confirm reproduction
    with the mod disabled.
