@@ -21,7 +21,7 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 81 registered (74 default-active, 8 optional-gated files)
 - Code/*.lua files: 82
 - TestKit probes: 87
-- BUGS index rows: 99 F + 12 D + 41 C
+- BUGS index rows: 100 F + 12 D + 41 C
 ```
 
 Re-emit after any module or entry change; a red run refuses to hand one out.
@@ -54,7 +54,7 @@ reachability UNPROVEN. ⭐ Owner: severity. (Both new items → checklist.)
 - **PT-37** → F48 · **F42** `blocked`, wontfix recommended, owner call needed.
 - **D08 extender overhaul** — 5 layers speced in
   `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
-- **Owner decisions (8 open)** → `docs/PLAYTEST_CHECKLIST.md` "Decisions
+- **Owner decisions (9 open)** → `docs/PLAYTEST_CHECKLIST.md` "Decisions
   waiting on you", never only in agent docs.
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
   `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.
