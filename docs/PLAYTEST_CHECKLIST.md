@@ -43,6 +43,14 @@ these used to be filed only in agent reports, which is where you never read.
   route" and a route demonstrably exists (F90's approved shape); the honest
   ground for skipping is cost-benefit, not impossibility. Moving it does *not*
   commit you to ever doing the conversion. → `CHAIN_QA_REPORT.md` §7.
+- **F100 — how do we repair the `NoHomeless` self-check?** It names `Community`
+  for a method `Workforce` declares, so the module reports itself `inactive` in
+  every boot log and then applies anyway. Three options on the entry: point the
+  `Require` at `Workforce` (checks a different surface than the module calls);
+  teach `00_Core`'s `Require` to accept an inherited method (correct, but
+  changes self-check semantics for **all 81 modules** and needs a suite run
+  either side); or fix only the misleading reason string. ⚠️ It sits on D12,
+  which is under review. → `docs/agent/bugs/F100.md`.
 - **Does F11 keep `P1`?** The F11 rider ran 2026-08-03 and the state its fix
   guards against has **no demonstrated producer** — crew-gathering abduction
   keeps `train.units` synced on both maps. The fix is still a correct repair of
