@@ -155,6 +155,21 @@ these used to be filed only in agent reports, which is where you never read.
   *(2026-08-04: the discriminator is **leg C of the `unattended-1` chain** —
   kicking that chain off is the word. Its RESULT lands back on this line as
   input; the severity decision stays yours either way.)*
+  ⭐ **THE DISCRIMINATOR RAN, 2026-08-04. Result: ZERO occurrences in 4 organic
+  completions — and that is a rate bound, not an all-clear.** Four track
+  elements broken with `BreakTracks` (the meteor's own funnel, lottery removed),
+  each break **witnessed** as real damage (`broken=true sites=1 repair_cgs=1`),
+  each repair finished **by drones with no cheat on the stack**, `0 [LUA ERROR]`
+  in the whole log. Fixture: 244 drones (81 idle), 15 hubs, two tracks (4 and 23
+  elements). Log: `docs/archive/u1c4_Mars.exe-20260804-17.12.54.log`.
+  **What it means for your call:** no-cheat reachability is still **UNPROVEN**,
+  so F99 stays `cand` and nothing gets built — but the failure is now bounded:
+  it did not appear in four clean organic repairs, against seven appearances in
+  ~1 h of your own cheat-driven build-out. **The decision in front of you is
+  unchanged in shape** — severity, and whether this becomes work at all — with
+  one more piece of evidence under it. ⚠️ Four is a small N and the leg can be
+  re-run cheaply on a bigger one if you want a tighter bound; say so and it is
+  ~1 min of machine time per four more.
 - ⚠️ **CORRECTION to the line above, and it cuts both ways.** The second-opinion
   chain re-read the log: **the count is 7, not 14** — the 14 matching lines are
   7 `[LUA ERROR]` headers each paired with a C-side `Error calling Lua function
