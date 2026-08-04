@@ -110,6 +110,18 @@ exposure, and the owner's sessions run 1–6 hours — which makes zero-error
 results *stronger* than they read, but only if the uptime is on the record.
 One line per leg: "session ~Nh".
 
+⭐ **CONVENTION (added 2026-08-04, owner): CO-RUNS — a rider class where the
+agent drives and you are on call, not on duty.** For items with heavy setup and
+a short measure, or intermittent triggers you'd never catch in hours of
+organic play: the agent preps everything unattended (scripts, staged save
+copy, a measure-moments list), launches and drives the game, and you attend
+ONLY the minutes where eyes or a judgment call are needed. Such riders are
+tagged **TAKEABLE IN a co-run**. Protocol and the forced-vs-organic evidence
+rule: `docs/agent/WORKFLOW.md` "Co-runs". First candidates: the F11
+pre-wrapper watch (below), C41's vanishing picker (amplified spawn/open loop),
+F99's no-cheat discriminator (forced break, organic drone repair), plus the
+two C-side console reads that need no eyes at all.
+
 ## Do first — the campaign's ordered top (chain-12 QA, `agent/reports/CHAIN_QA_REPORT.md` §9)
 
 1. **PT-62's remainder** (→ Colonists & domes) — the only gate left on D12: a
@@ -483,7 +495,7 @@ working.
 → re-read the same Residence; then watch whether anyone was actually evicted
 (entry details, including why shift rotation will not trigger it).
 
-### Rider — F11: verify the pre-wrapper conversion · Status: unrun — **TAKEABLE WHEN** any sitting runs with the pack ON and a train line carrying passengers
+### Rider — F11: verify the pre-wrapper conversion · Status: unrun — **TAKEABLE WHEN** any sitting runs with the pack ON and a train line carrying passengers, or **TAKEABLE IN a co-run** (agent stages the line, you watch one unload)
 **Change, not a bug:** 2026-08-03 the F11 fix was converted from a ~30-line full
 method copy to a 10-line pre-wrapper (same repaired branch, original method
 called for everything else). It is behaviour-preserving **by construction** and

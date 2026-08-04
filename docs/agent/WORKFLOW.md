@@ -222,6 +222,54 @@ prediction, not read.
 logs hold evidence no leg was designed to collect.** Mining them for `[LUA
 ERROR]` of any origin is cheap and has a track record.
 
+## Co-runs — attended experiment legs with the labor inverted (adopted 2026-08-04, owner)
+
+**Why this exists.** The owner's attended time is the scarcest resource in the
+project, and by 2026-08-04 the playtest load had grown to where one clean
+playtest a day was a good day — most of the burn was setup, deviations and
+trigger-fishing, none of which needs a human. A **co-run** splits an attended
+leg along the actual skill line: **the agent drives the game** (launch, save
+staging, scenario scripting, amplification loops, log reads) and **the owner is
+on call, not on duty** — present for the minutes where eyes on the screen or a
+judgment call are genuinely needed, and free otherwise.
+
+**Route an item to a co-run when:**
+
+1. **Setup is heavy, the measure is short** — hours to build the exact scenario,
+   five minutes to observe it (the F11-conversion watch, staged fixtures);
+2. **The trigger is intermittent or unknown** — the agent amplifies (loop the
+   suspect path, sweep the timing, force the upstream condition repeatedly)
+   until the thing shows, while the owner watches for what only eyes can see
+   (C41's vanishing picker is the poster child);
+3. **A C-side wall needs a live measurement** — ordering/tie-break questions
+   settle in one launched-game console read and need no eyes at all; they ride
+   along free in any co-run sitting.
+
+**Protocol (binding):**
+
+- **All prep is unattended and happens BEFORE the owner sits down**: scripts
+  written, save copy staged, and the brief carries a **measure-moments list** —
+  each moment says what the owner will look at and what verdict words to say.
+  The owner's attended cost is the sum of the measure moments, nothing else.
+- **Runs use a designated COPY of a provisioned save, never the campaign
+  save** (FIX_POLICY §3a discipline applies to experiments, not just fixes).
+- **The probe-hygiene hard gate applies unchanged** — sweep before, probes
+  deleted in the commit that records their answer.
+- ⛔ **The forced-vs-organic rule (the F99 lesson):** forcing an *upstream
+  condition* is legitimate when the *measured path* stays organic (force the
+  meteor, let the drones repair); forcing the path under test measures the
+  forcing, not the game. Every co-run finding **names what was forced**.
+  Forced repro establishes MECHANISM; evidence upgrades to organic-witnessed
+  still require an organic sighting.
+- **Batch aggressively.** One sitting should drain every co-run-ready rider
+  plus all ride-along console reads — the launch and warm-up are the fixed
+  cost; unattended-measurable items in the same sitting are free.
+
+**Checklist convention:** riders whose precondition is this mode are tagged
+**TAKEABLE IN a co-run** (a rider class alongside TAKEABLE WHEN). Sessions
+scoping work route "needs hours of observation" items there instead of parking
+them.
+
 ## Release steps
 
 - Owner tasks first: preview image (PDX ≤2 MB / Steam ≤1 MB), screenshots,
