@@ -66,6 +66,9 @@ delete this file in the same commit.
   become routed gaps NOW; say so in the outbox; the chain continues.
 - Leg D's re-derivation finds the old design unsound in a way reading cannot
   settle → route the question, park the leg, do not guess.
+- The re-scope reveals a leg needs eyes or hands after all → chain rule 14:
+  route it with the co-run-prompt OFFER (you author the offer, the owner
+  decides; no answer by close-out → checklist rider).
 
 ## ⛔ What you may not claim
 

@@ -171,7 +171,16 @@ emptiness is the objective done-condition. The final prompt is always an
    consistency pass, verification *sampling against primary evidence*, and
    the folder-empty gate. Budget it generously; this run's QA produced new
    primary evidence (the OG bytecode answer) because it had room to chase.
-6. **Optional but proven**: a blind-control document produced by a fresh
+6. **Chain-to-chain handoff and mid-chain escalation (owner rule,
+   2026-08-04).** The owner starts every chain by hand, so the terminal
+   prompt's owner report ends with the kickoff line for the next queued
+   chain (or says none is queued). And when a supposedly unattended item
+   escalates to needing eyes or hands, the discovering prompt OFFERS the
+   owner an inserted attended co-run prompt right before the terminal
+   audit — accept, and the chain ends with a prepped sitting; decline, and
+   the item goes to the checklist as a TAKEABLE IN a co-run rider. The
+   audit stays the last prompt in both cases.
+7. **Optional but proven**: a blind-control document produced by a fresh
    context with the record off-limits, sealed from every prompt except the
    terminal QA. Use when the effort's conclusions would benefit from an
    unanchored second derivation (audits especially). ⛔ **Author the seal

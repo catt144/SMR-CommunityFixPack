@@ -446,6 +446,20 @@ and route UP only for the moments that genuinely need a human:
    lives in filenames; prompt bodies stay model-neutral
    (`CHAIN_METHOD.md` §2.10 / §4.0). Chain mechanics — inbox/outbox,
    self-consumption, folder-empty done-condition — apply at every size.
+   **Two hand-off conventions (owner, 2026-08-04):** (a) the terminal
+   audit's owner report ENDS with the kickoff line for the next queued
+   chain (source: STATE's NEXT pointer; if nothing is queued, say so) — the
+   owner starts every chain by hand, and a report that does not say what to
+   start next leaves them searching. (b) **Mid-chain escalation offer:** if
+   an item routed unattended turns out to need eyes or hands after all, the
+   discovering prompt routes it to the owner WITH an offer — insert an
+   attended co-run prompt into this chain immediately before the terminal
+   audit (measure-moments list, prep per rule 5, cost stated). Owner
+   accepts → the prompt is authored and gets a manifest row, and the chain
+   ends with a prepped sitting; owner declines or does not answer → the
+   item becomes a **TAKEABLE IN a co-run** rider on the checklist and the
+   chain continues without it. The terminal audit is the last prompt
+   either way.
 2. **CO-RUN** — scriptable except for NAMED moments needing human **eyes**
    (witnessing behaviour), **hands** (cursor parking, launch or Mod-Manager
    clicks, console lines at unscheduled moments), or an in-the-moment

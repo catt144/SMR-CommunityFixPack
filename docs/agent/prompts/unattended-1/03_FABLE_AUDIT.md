@@ -66,7 +66,12 @@ pre-deletion sha in the SESSION_LOG record). doccheck green, push. Then
 report to the owner: what ran, what each leg found, what the batch cost
 (against the ~90 s/cycle + zero-owner expectation), what the audit caught,
 the unforeseen-issues verdict for the co-run program, and what is owed or
-routed.
+routed. ⛔ **The report ENDS with the next-chain kickoff** (chain rule 14):
+read `STATE.md`'s NEXT pointer and give the owner the exact line to start —
+which model, which prompt file — or say plainly that nothing is queued and
+name what the front of the co-run queue looks like instead. If a
+`02b_OPUS_CORUN.md` was inserted upstream, its results were claims like any
+other (Job 1 covers them) and its owner-minutes go into the batch cost.
 
 ## Stop conditions
 

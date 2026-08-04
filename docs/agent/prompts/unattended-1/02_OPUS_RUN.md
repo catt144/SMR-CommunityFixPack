@@ -59,6 +59,11 @@ same commit.
 ## Stop conditions
 
 - README chain-wide stops bind (modal/picker/hang → record, quit, route).
+- A leg needs eyes or hands after all → chain rule 14: route it with the
+  offer to author `02b_OPUS_CORUN.md` before the audit (measure-moments
+  list, prep per rule 5, cost stated). Owner yes → build it, add its
+  manifest row, append its handoff needs to the audit's inbox. No answer
+  by your close-out → checklist rider, chain continues.
 - The owner interrupts or needs the machine → finish the current cycle's
   disarm + recording commit, then stop cleanly; the chain resumes later
   from the todo list.

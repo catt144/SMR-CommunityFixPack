@@ -94,6 +94,19 @@ own cycle — cycles cost ~90 s, do not share a cycle to save one.
     would need a hand — is a STOP: record what appeared (it is exactly the
     unforeseen-issue evidence this chain exists to collect), quit the game
     if possible, and route. Never wait for a click that is not coming.
+14. **⭐ Escalation offer + next-chain handoff (owner rule, 2026-08-04).**
+    If any leg turns out to need eyes or hands after all, the discovering
+    prompt routes it to the owner in chat AND on the checklist **with an
+    offer**: author `02b_OPUS_CORUN.md` — an attended co-run prompt
+    inserted immediately before the terminal audit, carrying a
+    measure-moments list, prep per rule 5, and the owner-minutes cost.
+    Owner says yes → build it and add its manifest row here; owner declines
+    or does not answer by the time this prompt must close → the item
+    becomes a **TAKEABLE IN a co-run** rider on the checklist and the chain
+    continues without it. The terminal audit is the last prompt either
+    way. And prompt 3's owner report **ends with the kickoff line for the
+    next queued chain** (source: `STATE.md`'s NEXT pointer; if nothing is
+    queued, say so).
 
 ## Scope fence — the whole chain
 
@@ -102,8 +115,8 @@ recording + integration of results; the unforeseen-issues report.
 **Out:** building any fix (file, don't fix); F99's fix; anything the sweep
 routed to co-run or playtest; changing `tested`/sign-off policy (the tier
 decision is still open with the owner); new fixture builds. If a leg turns
-out to need eyes or hands after all, that IS a finding — route it back to
-co-run with the reason, do not improvise attendance.
+out to need eyes or hands after all, that IS a finding — chain rule 14's
+escalation offer applies; never improvise attendance.
 
 ## Stop conditions (chain-wide)
 
