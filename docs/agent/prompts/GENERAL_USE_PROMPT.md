@@ -8,13 +8,31 @@ model-specific; pre-rename documents cite the old name, see the translation
 note in `docs/README.md`.) Staleness anchor: **rewritten 2026-08-03 by the
 standing-prompts redesign session** against the restructured tree — decision
 record in `docs/agent/reports/STANDING_PROMPTS_REDESIGN.md`. **Last verified
-against the tree 2026-08-03 at the end of the PT-62 sitting; newest commit then
-was the organic-evidence commit for F02/F78/F81.** That sitting's lessons, both
-binding on any sitting: an "objective counter" is only objective if it can
-FAIL — PT-62's loop check counted the cohort delivery a flagged dome is REQUIRED
-to receive, so it could not — and **read the LOG FILE, not the screen**: two
-live explanations given from on-screen readings that session were wrong, and the
-log refuted both (D12 entry). The campaign's
+against the tree 2026-08-03 at the end of the F11-rider / F99 / MarsDebug
+sitting; newest commit then was `0dec7f0` (the MarsDebug `[install]` pass).**
+
+Lessons from the last two sittings, all binding on any sitting:
+- An **"objective counter" is only objective if it can FAIL** (PT-62's loop check
+  counted the cohort delivery a flagged dome is REQUIRED to receive, so it could
+  not) — and **it needs a liveness witness beside it**. F11's `nil` only meant
+  something because `#units` = 6 and `holder == rocket` were read in the same
+  breath, ruling out an empty list and a call that never fired.
+- **Read the LOG FILE, not the screen** — two live explanations from on-screen
+  readings were wrong and the log refuted both (D12). Corollary found 2026-08-03:
+  a bare console expression that renders as empty is NOT a reading; wrap
+  uncertain reads in `tostring(...)` inside a labelled `print_format` so `nil`
+  arrives as a token you can see.
+- **When a test's trigger is a selection you cannot steer, delete the lottery**
+  rather than play it: invoke the shipped call site directly on a chosen target
+  (F11 — `SetCommand("EnterTransporter", …)` is verbatim `ExpeditionLoadCrew`'s
+  body) and settle the selection half by reconstructing the pool and reading it.
+  That turned an unrunnable rider into a five-minute answer costing 0 expeditions.
+- ⛔ **`.gitignore` line 2 is `*.log`**, so R8's "archive the log in the same
+  commit" needs `git add -f` — a plain add drops it SILENTLY and the commit looks
+  complete. One commit shipped with a false claim before this was caught.
+- ⛔ **A probe tally is BUILD-SPECIFIC.** MarsDebug's `87/87` is not a better
+  retail `78/87`; `TechDescriptionBuilding` passes there and skips on retail
+  because F98's `T()` behaviour differs by build. Never quote one as the other. The campaign's
 verdicts, adjudications (F97 keep / D12 stands / F76 closed-refuted, residue =
 C41) and its ordered top are in `docs/agent/reports/CHAIN_QA_REPORT.md`.
 
