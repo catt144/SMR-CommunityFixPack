@@ -19,7 +19,16 @@
 --    1). It says how the heal behaves when it fires; it says nothing about how
 --    often a real save arrives needing it.
 --
--- THE TWO FAMILIES, AND WHY ONLY THESE TWO.
+-- ⭐ WHY THIS CYCLE CARRIES THE LEG. Evidence, not caution: the three archived
+--    co-run #1 loads of a COPY OF THIS VERY SAVE
+--    (docs/archive/corun1*.log, 2026-08-04, pack 81/81) fired **zero** load-time
+--    heal lines between them. So leg D1's natural-state reading is expected to
+--    be "nothing fired, nothing repeated" — true, but weak, because nothing was
+--    going to fire. THIS cycle is where leg D actually samples anything, and two
+--    of its three families are forceable on ANY save whatsoever, so the leg
+--    produces a real measurement no matter what the staged copy contains.
+--
+-- THE THREE FAMILIES, AND WHY ONLY THESE THREE.
 --   H5 Fix_MeteorFrequency (F88). The defect state is one GameVar:
 --      SMRFixPack_MeteorLatch = false. The heal (OnMsg.PostLoadGame,
 --      Fix_MeteorFrequency.lua:164-184) restarts the global "Meteors" game-time
@@ -38,12 +47,25 @@
 --      version re-applied on every load and 1 modifier became 2 after one
 --      save+reload. The pass number to check is therefore EXACTLY 1 per label
 --      after the heal, and still exactly 1 after another round trip.
---   Every other family (H2 Saint, H3 biorobots, H4 suns, H6 rains) is left
---      alone deliberately: forcing them means editing colonist traits, dome
---      membership or disaster structures, which is a bigger mutation than the
---      measurement is worth and would not be reversible by the heal alone.
---      They stay reported as cycle 1 found them — sampled or unsampled, said
---      plainly.
+--   H6 Fix_RainsDeadlock (C34), added 2026-08-04 after the owner said they did
+--      not know what this save carries — which is the right answer, and the fix
+--      for it is to stop needing to know. `RainsDisasterThreads` is a shipped
+--      GameVar (`Lua/TerraformingDisasters.lua:323`), so it exists and persists
+--      on EVERY save; the C34 pass logs `RainsDisasterThreads was %s —
+--      recreated as an empty table` and rebuilds it whenever it is not a table
+--      (`Fix_RainsDeadlock.lua:126-131`). Setting it to `false` is therefore the
+--      module's own documented defect state, reachable with no fixture at all.
+--      ⚠️ It is forced LAST, immediately before the save, because between the
+--      assignment and the reload the shipped code would index a boolean
+--      (`TerraformingDisasters.lua:190/:249/:280/:328`) if a rain event fired in
+--      that window. The window is seconds and the game is not running a rain,
+--      but if a `[LUA ERROR]` naming `TerraformingDisasters.lua` appears there,
+--      it is a CONSEQUENCE OF OUR FORCING — report it as that, not as a defect.
+--   H2 Saint, H3 biorobots and H4 suns are left alone deliberately: forcing them
+--      means editing colonist traits, dome membership or built objects, which is
+--      a bigger mutation than the measurement is worth and is not reversible by
+--      the heal alone. They stay reported as cycle 1 found them — sampled or
+--      unsampled, said plainly.
 --
 -- ⚠️ Requires the SAVE primitive. If cycle 0's proof did not pass, this cycle
 --    is not run at all and leg D2 is a routed gap.
@@ -84,10 +106,23 @@ local function read_astro_exact(when)
 	return table.concat(parts, "/")
 end
 
+-- Reads the C34 structure precisely: its Lua type and how many entries it holds.
+-- "false/0" is the forced defect state; "table/N" is healthy.
+local function read_rains_exact(when)
+	local say, fmt = U1.Say, U1.Fmt
+	local threads = rawget(_G, "RainsDisasterThreads")
+	local n = 0
+	if type(threads) == "table" then for _ in pairs(threads) do n = n + 1 end end
+	local s = fmt("%s/%d", type(threads), n)
+	say(fmt("D2 RAINS %s: RainsDisasterThreads type=%s entries=%d | g_RainDisaster=%s",
+		tostring(when), type(threads), n, tostring(rawget(_G, "g_RainDisaster"))))
+	return s
+end
+
 function U1.Payload()
 	local say, fmt, step = U1.Say, U1.Fmt, U1.Step
 	local astro_applicable = false
-	local a0, a1, a2, latch0, latch1, latch2
+	local a0, a1, a2, latch0, latch1, latch2, r0, r1, r2
 
 	if not U1.save_proven then
 		say("⛔ LEG D2 NOT RUN — the SAVE primitive was not proven in cycle 0. Routed gap.")
@@ -101,14 +136,15 @@ function U1.Payload()
 		U1.ReadAllHeals("D2 baseline")
 		a0 = read_astro_exact("baseline")
 		latch0 = U1.ReadHealMeteorLatch()
+		r0 = read_rains_exact("baseline")
 		local get_profile = rawget(_G, "GetCommanderProfile")
 		local profile = type(get_profile) == "function" and get_profile() or nil
 		local pid = type(profile) == "table" and profile.id or "none"
 		astro_applicable = (pid == "astrogeologist")
-		say(fmt("D2 APPLICABILITY: commander profile=%s | H1 astro forceable=%s | H5 meteor latch forceable=true",
+		say(fmt("D2 APPLICABILITY: commander profile=%s | H1 astro forceable=%s | H5 meteor latch forceable=true | H6 rains structure forceable=true",
 			tostring(pid), tostring(astro_applicable)))
 		if not astro_applicable then
-			say("D2 NOTE — H1 is NOT forceable on this save because the colony does not run the Astrogeologist profile. That family stays UNSAMPLED and must be reported as unsampled, not as clean. H5 is forced below regardless; it is applicable on every save.")
+			say("D2 NOTE — H1 is NOT forceable on this save because the colony does not run the Astrogeologist profile. That family stays UNSAMPLED and must be reported as unsampled, not as clean. H5 and H6 are forced below regardless; both are applicable on every save, which is why this leg produces a real measurement whatever the save contains.")
 		end
 	end) then return end
 
@@ -116,7 +152,7 @@ function U1.Payload()
 	-- Force the defect state
 	----------------------------------------------------------------------
 	if not step("D2-1-force", function()
-		say("D2 FORCED (1/2): SMRFixPack_MeteorLatch = false  — recreating F88's pre-heal state")
+		say("D2 FORCED (1/3): SMRFixPack_MeteorLatch = false  — recreating F88's pre-heal state")
 		SMRFixPack_MeteorLatch = false
 		say(fmt("D2 latch now=%s", tostring(rawget(_G, "SMRFixPack_MeteorLatch"))))
 
@@ -134,11 +170,20 @@ function U1.Payload()
 					removed = removed + 1
 				end
 			end
-			say(fmt("D2 FORCED (2/2): stripped %d Astrogeologist extractor modifier(s) — recreating F92's pre-heal state", removed))
+			say(fmt("D2 FORCED (2/3): stripped %d Astrogeologist extractor modifier(s) — recreating F92's pre-heal state", removed))
 			read_astro_exact("after forcing")
 		else
-			say("D2 FORCED (2/2): SKIPPED — H1 not applicable on this save")
+			say("D2 FORCED (2/3): SKIPPED — H1 not applicable on this save")
 		end
+
+		-- ⛔ LAST, and immediately before the save. Between this assignment and
+		-- the reload the shipped code would index a boolean
+		-- (TerraformingDisasters.lua:190/:249/:280/:328) if a rain event fired.
+		-- The window is seconds; a [LUA ERROR] naming TerraformingDisasters.lua
+		-- inside it is a CONSEQUENCE OF THIS FORCING and is reported as that.
+		say("D2 FORCED (3/3): RainsDisasterThreads = false — recreating C34's structure defect. ⛔ FORCING WINDOW OPENS")
+		RainsDisasterThreads = false
+		read_rains_exact("after forcing")
 	end) then return end
 
 	if not step("D2-2-save-forced", function()
@@ -155,11 +200,13 @@ function U1.Payload()
 
 	if not step("D2-3-read-healed", function()
 		U1.ReadConditions("leg D2, load 2 — the load that should heal")
-		say("D2 ⛔ THE HEAL LINES FOR THIS LOAD ARE THE PACK LINES IMMEDIATELY ABOVE THIS MARKER. Expect exactly one meteor one-shot-heal line, and (if applicable) one Astrogeologist applied-N line with N = 2.")
+		say("D2 ⛔ FORCING WINDOW CLOSED at the load above. THE HEAL LINES FOR THIS LOAD ARE THE PACK LINES IMMEDIATELY ABOVE THIS MARKER. Expect exactly one meteor one-shot-heal line, exactly one C34 'RainsDisasterThreads was false — recreated as an empty table' line, and (if applicable) one Astrogeologist applied-N line with N = 2.")
 		a1 = read_astro_exact("after the healing load")
 		latch1 = U1.ReadHealMeteorLatch()
-		say(fmt("D2 PREDICTION CHECK load 2: astro counts %s -> %s (prediction: back to the baseline %s, and NEVER higher) | latch %s -> %s (prediction: back to the pack version, not false)",
-			tostring(a0), tostring(a1), tostring(a0), tostring(latch0), tostring(latch1)))
+		r1 = read_rains_exact("after the healing load")
+		say(fmt("D2 PREDICTION CHECK load 2: astro counts %s -> %s (prediction: back to the baseline %s, and NEVER higher) | latch %s -> %s (prediction: back to the pack version, not false) | rains %s -> %s (prediction: back to a table)",
+			tostring(a0), tostring(a1), tostring(a0), tostring(latch0), tostring(latch1),
+			tostring(r0), tostring(r1)))
 	end) then return end
 
 	if not step("D2-4-save-healed", function()
@@ -179,17 +226,20 @@ function U1.Payload()
 		say("D2 ⛔ ANY pack heal line between the previous LOAD OK marker and this line is the DEFECT: the state was already correct in the file that was just loaded.")
 		a2 = read_astro_exact("after the idempotence load")
 		latch2 = U1.ReadHealMeteorLatch()
-		say(fmt("D2 PREDICTION CHECK load 3: astro %s -> %s (prediction: identical) | latch %s -> %s (prediction: identical)",
-			tostring(a1), tostring(a2), tostring(latch1), tostring(latch2)))
+		r2 = read_rains_exact("after the idempotence load")
+		say(fmt("D2 PREDICTION CHECK load 3: astro %s -> %s (prediction: identical) | latch %s -> %s (prediction: identical) | rains %s -> %s (prediction: identical)",
+			tostring(a1), tostring(a2), tostring(latch1), tostring(latch2),
+			tostring(r1), tostring(r2)))
 	end) then return end
 
 	if not step("D2-verdict", function()
-		say(fmt("LEG D2 SUMMARY  astro: baseline=%s forced->healed=%s ->idempotence=%s | latch: baseline=%s healed=%s idempotence=%s | H1 sampled=%s H5 sampled=true",
+		say(fmt("LEG D2 SUMMARY  astro: baseline=%s healed=%s idempotence=%s | latch: %s / %s / %s | rains: %s / %s / %s | SAMPLED: H5 yes, H6 yes, H1 %s",
 			tostring(a0), tostring(a1), tostring(a2),
 			tostring(latch0), tostring(latch1), tostring(latch2),
-			tostring(astro_applicable)))
+			tostring(r0), tostring(r1), tostring(r2),
+			astro_applicable and "yes" or "NO — unsampled, say so"))
 		say("LEG D2 PASS requires ALL of: (1) a heal line for each forced family after load 2 and NONE after load 3; (2) the load-2 numbers equal to the baseline, never above it — a number ABOVE baseline is F92's compounding defect reproduced; (3) load-3 numbers identical to load 2.")
-		say("LEG D2 ⛔ CEILING: MECHANISM. It says how these two heals behave when they fire. It says nothing about how often a real save needs them, and nothing at all about the four families it did not force.")
+		say("LEG D2 ⛔ CEILING: MECHANISM. It says how these heals behave when they fire. It says nothing about how often a real save needs them, and nothing at all about H2/H3/H4, which were not forced.")
 	end) then return end
 
 	U1.ErrorWatchNote()

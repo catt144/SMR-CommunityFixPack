@@ -172,21 +172,47 @@ was about. So:
 - **Leg D1** (cycle 1, `98_U1C1`) measures the save as it actually is: load
   staged → read → save → reload → read → reload → read. Every reader prints its
   own `APPLICABLE` verdict.
-- **Leg D2** (cycle 6, `98_U1C6`) **creates** the defect state for the two
+- **Leg D2** (cycle 6, `98_U1C6`) **creates** the defect state for the three
   families whose pre-heal state is exactly and reversibly definable, so they get
-  sampled instead of assumed: `SMRFixPack_MeteorLatch = false` (H5, applicable
-  on every save), and stripping the two labels the astro heal owns —
-  `AutomaticMetalsExtractor`/`production_per_day1` and
-  `MicroGAutoWaterExtractor`/`water_production`, taken from the module's own
-  `MISSING` list (`Fix_AstrogeologistExtractors.lua:67-70`), profile id
-  `astrogeologist` (`:62`) — then save → reload (must heal, **exactly once**,
+  sampled instead of assumed, then save → reload (must heal, **exactly once**,
   landing at exactly the baseline and **never above it**) → save → reload (must
   **not** heal, numbers identical). FORCED: the removal. ORGANIC: nothing.
   Ceiling: MECHANISM.
-  H2/H3/H4/H6 are deliberately **not** forced — doing so means editing colonist
-  traits, dome membership or disaster structures, a bigger mutation than the
-  measurement is worth and not reversible by the heal alone. They are reported
-  as cycle 1 found them, sampled or unsampled, said plainly.
+  - **H5** `SMRFixPack_MeteorLatch = false` — applicable on **every** save.
+  - **H6** `RainsDisasterThreads = false` — also applicable on **every** save:
+    it is a shipped `GameVar` (`Lua/TerraformingDisasters.lua:323`) and the C34
+    pass logs `RainsDisasterThreads was %s — recreated as an empty table` and
+    rebuilds it whenever it is not a table (`Fix_RainsDeadlock.lua:126-131`).
+    ⚠️ Forced **last, immediately before the save**: in the window between the
+    assignment and the reload, shipped code would index a boolean
+    (`TerraformingDisasters.lua:190/:249/:280/:328`) if a rain event fired. A
+    `[LUA ERROR]` naming that file inside the marked window is a **consequence
+    of our forcing** and is reported as that, not as a defect.
+  - **H1** strip the two labels the astro heal owns —
+    `AutomaticMetalsExtractor`/`production_per_day1` and
+    `MicroGAutoWaterExtractor`/`water_production`, from the module's own
+    `MISSING` list (`Fix_AstrogeologistExtractors.lua:67-70`), profile id
+    `astrogeologist` (`:62`). **Conditional** on the colony running that
+    commander; cycle 6 prints `D2 APPLICABILITY` and says `unsampled` if not.
+  - H2/H3/H4 are deliberately **not** forced — doing so means editing colonist
+    traits, dome membership or built objects, a bigger mutation than the
+    measurement is worth and not reversible by the heal alone. They are reported
+    as cycle 1 found them, sampled or unsampled, said plainly.
+
+⭐ **EVIDENCE ADDED 2026-08-04 (owner asked and did not know — so the record was
+asked instead).** The three archived co-run #1 loads of a **copy of this very
+save** — `docs/archive/corun1_*.log`, `corun1b_*`, `corun1c_*`, pack **81/81
+active** — fired **zero** load-time heal lines between them. (What those logs
+*do* show under these module names is the DataPatch work —
+`AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the
+astrogeologist profile`, `SaintBlessing: corrected 1 dome-colonists trait
+modifier label(s) of 2` — which patches PRESETS at boot and is not a per-save
+heal. Do not read those as heal lines.) Consequence: **leg D1 on `TEST2H TRAIN`
+is expected to read "nothing fired, nothing repeated"** — true, and weak,
+because nothing was going to fire. Leg D2 is where the leg samples, and with H5
+and H6 it samples on any save at all. Same logs, useful for cycle 0's other
+confirms: **17 tracks / 926 elements / 0 already broken** (legs B and C have
+abundant fixture), 8 trains, 11 depots, 6 rockets.
 
 ### 3 · The cycle plan
 
@@ -315,12 +341,15 @@ in the same `Remove-Item` step, game closed, in the recording commit.**
 
 ### 8 · Open risks and routed items
 
-- ⚖️ **ROUTED, on the checklist (not a stop):** if cycle 0 finds **no** heal
-  family applicable on `TEST2H TRAIN`, leg D1's result is six unsampled
-  families. The offer put to the owner is to stage a copy of the **campaign**
-  save for leg D only. If they have not answered by the time you reach cycle 1,
-  **run it anyway on `TEST2H TRAIN`**, report the unsampled families as
-  unsampled, and let leg D2 carry the sampling — do not wait.
+- ⚖️ **The campaign-save question is WITHDRAWN, 2026-08-04 — do not re-raise it.**
+  It was routed to the owner, who answered that they do not know what `TEST2H
+  TRAIN` carries. That is the right answer, and the correct response to it was
+  to stop needing to know: the archived logs say no heal has fired on that save
+  in three loads, and leg D2 now forces **two** families (H5, H6) that are
+  applicable on every save in existence. Leg D therefore returns a real sampled
+  measurement without any save-choice decision at all. **Run the plan as
+  written.** If cycle 0 shows the colony runs the Astrogeologist commander, H1
+  is sampled too; if not, say `unsampled` and move on.
 - **No leg needs eyes or hands** (README rule 14 checked leg by leg, and this is
   a finding, not an omission): leg C's organic completion is read from object
   state, not watched; leg E's storm and electro devil are read from GameVars and
