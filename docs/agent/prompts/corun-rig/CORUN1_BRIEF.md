@@ -215,3 +215,42 @@ used.** The reasoning, and the measurement prompt 4 actually asked for:
   encoding='utf-8-sig').read())` and **does not care where the file lives**. It
   ran GREEN during this prep on the source at its parked path, with nothing ever
   placed in `Code/`. Rule 5 costs the parse sweep nothing at all.
+- ⭐ **MEASURED AT THE SITTING: arming cost 0.4 s** of machine time (file write
+  + `metadata.lua` line + parse sweep) and **zero owner time**. That is the
+  whole of what the override would have bought. **Recommendation: rule 5 stands,
+  no permanent hatch is needed.**
+- ⚠️ **A real rule-5 cost, which did bite:** co-run #0's probe source exists
+  **nowhere** — created in `Code/`, run, deleted, never committed — so this
+  session re-authored the harness from `95_AutoRun.lua`. Rule 5's own
+  prescription would have preserved it; co-run #0 simply predates the rule.
+
+## §7 RUN 2 — the two gaps run 1 left
+
+Run 1 settled payload items 1 and 2 and left two things open, both cheap, so a
+second launch was authored from its own log and run in the same sitting:
+
+- **L2C — the C41 discriminator.** Run 1 proved both halves of the lead
+  *separately* and never made them coincide: 29/300 mouse reads out of range,
+  and 20/20 picker opens with 0/51 out-of-range anchors, because by then the
+  cursor was back over the game. L2C waits until the cursor **actually reads**
+  out of range and only then opens the picker. ⭐ **The condition is DETECTED,
+  not typed** — see the gate lesson below.
+- **L3 — the cross-map trace.** Run 1's selector sampled once and found no
+  off-map rider aboard anything, 345 s of speed-3 play after the census had read
+  12. It needed to *wait* for the fixture, not sample for it. The retry version
+  found it on its first sweep.
+
+⛔ **The gate lesson, and the owner found it, not me.** §1's table told the owner
+to type `CoRun1_Go = 2`. **No such gate existed in run 1's code** — it was only
+an early exit from a fixed 60 s timer, so the run proceeded without them. They
+noticed and asked whether that was correct. No evidence was lost, but the brief
+and the probe disagreed and **the brief was the one lying**. Run 2 fixes the
+class rather than the instance: it polls for the condition it needs instead of
+asking for a token. **A detected condition cannot be mis-documented and cannot
+be missed.** (Typed gates do work — `GATE 1 RELEASED by owner` — they are just
+one more thing to keep in sync.)
+
+Run 2's source is parked beside this file as
+[97_CoRun1b.lua.txt](97_CoRun1b.lua.txt); parse sweep GREEN on that exact text.
+Both probe files and their `metadata.lua` lines were deleted, and the staged
+save with them, in the commits that record the answers.

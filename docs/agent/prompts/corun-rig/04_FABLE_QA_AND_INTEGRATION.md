@@ -336,6 +336,97 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
   - `c731d4a` (01:04) → `39c5dfe` (02:39) is the **corun-rig chain build-out**,
     a third.
 
+---
+
+*(2026-08-04, prompt 3 — Opus. **CO-RUN #1 RAN, TWICE.** Cards:
+`agent/reports/CORUN1_EVIDENCE_CARDS.md`. Sitting brief:
+`agent/prompts/corun-rig/CORUN1_BRIEF.md` (its §5/§7 hold both probe sources —
+⛔ **you own emptying this folder, so consume the brief and the two `.lua.txt`
+files with it**). Costs and corrections: `CORUN_RIG_SPEC.md` §9. Raw lines:
+`docs/archive/corun1_Mars.exe-20260804-12.42.47.log` and
+`corun1b_Mars.exe-20260804-12.54.14.log`.*
+
+***VERDICTS.** Item 1 F11 pre-wrapper watch — **2 of 3 readings PASS**, ⛔ not
+`tested`, the third is unavailable on that save and the close decision is routed
+to the owner. Item 2 F99 hex tie-break — **SETTLED**, returns the hidden
+element. Item 3 C41 — **the M5 lead is MEASURED and the clamps are not innocent
+for an out-of-range anchor**, ⛔ but the picker appeared **40/40** so the OG
+symptom did not reproduce; `cand` unchanged. Item 4 F11 cross-map Done-timing —
+**SETTLED: route (a)**, route (b) excluded.*
+
+***ECONOMICS, which is your §-job.** Owner-attended **~6 min against ~15–20
+promised** — report it as cost-against-promise, not as a saving (WORKFLOW says
+so explicitly). Two launches: **398 s** and **85 s** whole-cycle
+(`Time (ms) 398115` / `85125`), loads **9,784 ms** and **9,531 ms** by the
+engine's own line. ⚠️ **Prompt 2's ~80 s figure is the FLOOR, not the cycle
+cost** — it measured a run with one 15 s payload; a real payload run is 3–5×
+that, and it is still ~10× inside the abort thresholds. The launch→log delta was
+**5.2 s** here vs **2.2 s** for co-run #0 — still no room for a human click, so
+U3 holds, but the number is not stable.*
+
+- ***⭐ THE RULE-5 / OVERRIDE EXPERIMENT — BOTH HALVES, AS ASKED.** The armed-prep
+  override was **DECLINED** (reasoning: `CORUN1_BRIEF.md` §6), so there is a
+  measurement rather than an anecdote. **Arming at the sitting cost 0.4 s of
+  machine time** — one file write, one `metadata.lua` line, one parse sweep —
+  and **zero owner time**. That is the entire value of the grant. Against it:
+  a red `doccheck` in the history, a bypassed hook, and a live disarm deadline.
+  ⛔ **Recommendation: rule 5 stands and no permanent hatch is needed.***
+- ***⭐ AND PROMPT 2'S "KNOWN WEAK SPOT" IN RULE 5 DOES NOT EXIST — this is the
+  one you were told to test.** The claim is that rule 5 pushes syntax errors to
+  the sitting, and the proposed mitigation was a `Code/` round trip (paste,
+  sweep, delete). **Unnecessary.** The parse sweep is
+  `ast.parse(open(f, encoding='utf-8-sig').read())` and **does not care where
+  the file lives**. It ran GREEN in prep on the source at its parked path with
+  nothing ever placed in `Code/`. Rule 5 costs the parse sweep exactly nothing.*
+- ***⚠️ A REAL rule-5 cost you should weigh instead, because it bit this run.**
+  **Co-run #0's probe source does not exist anywhere** — not in either repo's
+  history, not in the archive. It was created in `Code/`, run, and deleted
+  without ever being committed, so co-run #1 had to re-author the whole harness
+  from `95_AutoRun.lua`. Rule 5's own prescription (source as a fenced block in
+  the brief) would have preserved it. **The rule is fine; co-run #0 predates it.
+  Say so in the integration so the next session inherits a harness.***
+- ***⛔ FOUR CORRECTIONS TO THE SPEC, all in §9.** C6 the `CheatMeteors` route is
+  worse than driving `BreakTracks`' own call site; C7 "print its caller" is
+  impossible (`debug` is blacklisted) and ordering replaces it; C8 §5's
+  `RealTime()`-timed steps mislead even where they are honest; C9 §3's cycle
+  prediction should be re-derived from two real payload runs, not from #0.*
+- ***⭐ TWO THINGS FOR YOUR §4 TIER WORK, from the cards' own self-audit.**
+  (i) **Card 1 says the eyes added nothing** — 340 removals across 7 trains for
+  238 s is strictly stronger than a human watching one, and the counter can
+  fail. **Recommend reclassifying the F11 watch A → B.** (ii) **The draft tier
+  rule has a hole:** C41's discriminator needed the owner's *hands* (park the
+  cursor off-window) and none of their *eyes*. "Would eyes add information the
+  log cannot carry" does not classify that, and it is the cheapest owner ask in
+  the whole payload. **Add a hands-vs-eyes axis.***
+- ***⭐ A gate-design lesson worth carrying, found by the owner not by me.** The
+  brief told them to type `CoRun1_Go = 2`; **no such gate existed in the code** —
+  it was only an early exit from a fixed timer, so the run proceeded without
+  them and they noticed and asked. No evidence was lost, but **the brief and the
+  probe disagreed and the brief was the one lying.** Run 2 fixed the class of
+  problem rather than the instance: its gate **detects the condition** (poll
+  until the cursor actually reads out of range) instead of asking for a typed
+  token. **Detected conditions beat typed gates — there is nothing to
+  mis-document and nothing to miss.** Console assignment itself is confirmed
+  working (`GATE 1 RELEASED by owner`).*
+- ***Not caused by our leg, reported anyway** (WORKFLOW's log rule): the same two
+  vanilla `Animations/LawOfficeDoor_*.hgacl` `[ResManager Error]` lines fire on
+  every load. Already adjudicated as `C44`, `wontfix`, closed — named here only
+  so the next reader does not re-investigate them.*
+- ***⚠️ AN UNEXPLAINED ENVIRONMENT DISAGREEMENT, on the record and not tidied.***
+  Windows reports two monitors (`2560×1440` primary, `2560×1707` at `x=2560`,
+  virtual `5120×1707`); the game reports `screen=(3840,2160)`,
+  `desk=(0,0)-(3840,2160)`, `scale=(1900,1900)`; `GetMousePos` returned `x` to
+  **7665**, beyond both. Three coordinate systems that do not reconcile, and the
+  game's are **not** the ones the 2026-08-02 F76 sitting recorded either. Sits
+  next to C41's two existing unexplained deltas and may share a cause.*
+- ***The TestKit's orphaned `96_AutoRunFlag.lua` edit is UNTOUCHED** and is still
+  the only thing in that repo's `git status` — staged by path throughout, never
+  `-A`, never `checkout`/`restore`. ⚠️ **One thing to know:** I briefly damaged
+  `metadata.lua`'s encoding there (PowerShell `Set-Content` added a BOM and
+  mojibaked three em-dashes) and restored it byte-for-byte from `HEAD:metadata.lua`
+  via `git show` — **not** via `git checkout`, precisely so the orphaned file was
+  never in reach. Verified: that repo's status is back to one modified file.)*
+
   **Those later phases had no reason to be in the TestKit at all, so their
   silence is not evidence of anything.** The honest inference is therefore
   narrower and weaker than prompt 2 first wrote it: *the play sitting's own

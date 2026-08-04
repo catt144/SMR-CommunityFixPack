@@ -1,0 +1,503 @@
+-- SMR Community Fix Pack — Test Kit :: CO-RUN #1 run 2 (the two gaps).  TEMPORARY
+--
+-- Declared by: corun-rig chain prompt 3 (co-run #1), CORUN1_BRIEF.md §7.
+-- Probe hygiene rule 5: present in Code/ only while its run is happening; it
+-- and its metadata.lua line die in the commit that records the answers.
+--
+-- WHY THERE IS A RUN 2. Run 1 (log Mars.exe-20260804-12.42.47) left exactly
+-- two gaps, and both are cheap:
+--
+--   L2C  Run 1 proved BOTH halves of C41's lead separately and never made them
+--        coincide: 29/300 mouse reads landed outside desktop.box (up to
+--        x=7665), and the picker opened 20/20 with 0/51 anchors out of range,
+--        because by then the cursor was back over the game. So "an
+--        out-of-range anchor slams the picker into a screen corner" — the one
+--        mechanism C41 has for a player-shaped report — is still UNTESTED.
+--        This leg waits for the cursor to actually be out of range and only
+--        then opens the picker. The condition is DETECTED, not typed: no
+--        console line, no gate to miss.
+--
+--   L3   Run 1's cross-map selector took one shot and found no off-map rider
+--        aboard anything — 345 s of speed-3 play after the census had read 12.
+--        It needed to WAIT for a rider, not sample once. This one retries.
+--
+-- ⛔ THE PREDICTION IS WRITTEN INTO THE LOG BEFORE THE LOOP RUNS (the PT-58
+-- shape: an agent that states what it should see cannot rationalise toward
+-- whatever arrives). ResourceItems:UpdateLayout's safe-area clamps
+-- (ResourceItems.lua:58-67) against the measured safe area 0 0 3840 2160 give,
+-- for any anchor beyond the right/bottom edge, x = 3840 - width and
+-- y = 2160 - height - margins. The leg computes and logs that before opening
+-- anything, then compares.
+--
+-- The classdef wraps and the harness are run 1's, unchanged. Same reasons:
+-- Unit.OnTransferToMapDone is a COMBINED method (_cobject.lua:158) so the wrap
+-- must sit on the classdef at mod-file scope, and Colonist.ExitVehicle is NOT
+-- wrapped because it is the F11 fix's own target.
+
+CoRun1 = rawget(_G, "CoRun1") or {}
+
+CoRun1.save_file    = "CORUN1.savegame.sav"
+CoRun1.menu_timeout = 5 * 60 * 1000
+CoRun1.settle_time  = 15 * 1000
+CoRun1.watchdog     = 20 * 60 * 1000
+CoRun1.quit_delay   = 3 * 1000
+
+CoRun1.stage      = "idle"
+CoRun1.seq        = 0
+CoRun1.trace      = false
+CoRun1.trace_unit = false
+CoRun1.picker_log = false
+CoRun1.count = { done_fired = 0, picker_layouts = 0, picker_anchor_out = 0, picker_items = -1 }
+
+---- output ------------------------------------------------------------------
+
+local t0 = false
+local function say(msg)
+	if not t0 then t0 = RealTime() end
+	msg = "[CORUN1B] +" .. tostring(RealTime() - t0) .. "ms " .. tostring(msg)
+	local modlog = rawget(_G, "ModLog")
+	if modlog then
+		modlog((msg:gsub("%%", "%%%%")))
+	else
+		local dbg = rawget(_G, "DebugPrint")
+		if dbg then dbg(msg .. "\n") end
+	end
+	print(msg)
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then pcall(flush) end
+end
+
+local function fmt(...)
+	local ok, s = pcall(string.format, ...)
+	return ok and s or "<fmt error>"
+end
+
+local function id_of(obj)
+	if not obj then return "nil" end
+	if type(obj) ~= "table" then return tostring(obj) end
+	return tostring(obj.class or "?") .. "#" .. tostring(rawget(obj, "handle"))
+end
+
+local function find_in_holder(unit)
+	local h = unit and unit.holder
+	if not h or type(h) ~= "table" then return "no-holder" end
+	local units = h.units
+	if not units then return "units=nil" end
+	return tostring(table.find(units, unit)) .. "/" .. tostring(#units)
+end
+
+---- classdef wraps, at mod-file scope ---------------------------------------
+
+do
+	local Unit = rawget(_G, "Unit")
+	if Unit and type(Unit.OnTransferToMapDone) == "function" then
+		local orig = Unit.OnTransferToMapDone
+		function Unit:OnTransferToMapDone(old_map)
+			if CoRun1.trace and self == CoRun1.trace_unit then
+				CoRun1.seq = CoRun1.seq + 1
+				local n = CoRun1.seq
+				CoRun1.count.done_fired = CoRun1.count.done_fired + 1
+				say(fmt("TRACE #%d OnTransferToMapDone ENTER unit=%s holder=%s find=%s",
+					n, id_of(self), id_of(self.holder), find_in_holder(self)))
+				local r = orig(self, old_map)
+				CoRun1.seq = CoRun1.seq + 1
+				say(fmt("TRACE #%d OnTransferToMapDone EXIT  unit=%s holder=%s find=%s",
+					CoRun1.seq, id_of(self), id_of(self.holder), find_in_holder(self)))
+				return r
+			end
+			return orig(self, old_map)
+		end
+		CoRun1.wrap_done = true
+	end
+
+	if Unit and type(Unit.EnterTransporter) == "function" then
+		local orig = Unit.EnterTransporter
+		function Unit:EnterTransporter(transporter)
+			if CoRun1.trace and self == CoRun1.trace_unit then
+				CoRun1.seq = CoRun1.seq + 1
+				say(fmt("TRACE #%d EnterTransporter ENTER unit=%s holder=%s find=%s cross_map=%s",
+					CoRun1.seq, id_of(self), id_of(self.holder), find_in_holder(self),
+					tostring(transporter:GetMap() ~= self:GetMap())))
+				local r = orig(self, transporter)
+				CoRun1.seq = CoRun1.seq + 1
+				say(fmt("TRACE #%d EnterTransporter EXIT  unit=%s holder=%s",
+					CoRun1.seq, id_of(self), id_of(self.holder)))
+				return r
+			end
+			return orig(self, transporter)
+		end
+		CoRun1.wrap_enter = true
+	end
+
+	if Unit and type(Unit.TransferToMap) == "function" then
+		local orig = Unit.TransferToMap
+		function Unit:TransferToMap(...)
+			if CoRun1.trace and self == CoRun1.trace_unit then
+				CoRun1.seq = CoRun1.seq + 1
+				say(fmt("TRACE #%d TransferToMap ENTER unit=%s holder=%s find=%s",
+					CoRun1.seq, id_of(self), id_of(self.holder), find_in_holder(self)))
+				local r = orig(self, ...)
+				CoRun1.seq = CoRun1.seq + 1
+				say(fmt("TRACE #%d TransferToMap EXIT  unit=%s holder=%s find=%s",
+					CoRun1.seq, id_of(self), id_of(self.holder), find_in_holder(self)))
+				return r
+			end
+			return orig(self, ...)
+		end
+		CoRun1.wrap_transfer = true
+	end
+
+	local Holder = rawget(_G, "Holder")
+	if Holder and type(Holder.OnExitHolder) == "function" then
+		local orig = Holder.OnExitHolder
+		function Holder:OnExitHolder(unit)
+			if CoRun1.trace and unit == CoRun1.trace_unit then
+				CoRun1.seq = CoRun1.seq + 1
+				local units = self.units
+				say(fmt("TRACE #%d Holder.OnExitHolder holder=%s unit=%s find_before=%s #units=%s",
+					CoRun1.seq, id_of(self), id_of(unit),
+					tostring(units and table.find(units, unit) or "units=nil"),
+					tostring(units and #units or "nil")))
+			end
+			return orig(self, unit)
+		end
+		CoRun1.wrap_exit_holder = true
+	end
+
+	local Unit2 = rawget(_G, "Unit")
+	if Unit2 and type(Unit2.SetHolder) == "function" then
+		local orig = Unit2.SetHolder
+		function Unit2:SetHolder(building)
+			if CoRun1.trace and self == CoRun1.trace_unit then
+				CoRun1.seq = CoRun1.seq + 1
+				say(fmt("TRACE #%d SetHolder ENTER unit=%s new_holder=%s old_holder=%s",
+					CoRun1.seq, id_of(self), id_of(building), id_of(self.holder)))
+				local r = orig(self, building)
+				CoRun1.seq = CoRun1.seq + 1
+				say(fmt("TRACE #%d SetHolder EXIT  unit=%s holder=%s", CoRun1.seq, id_of(self), id_of(self.holder)))
+				return r
+			end
+			return orig(self, building)
+		end
+		CoRun1.wrap_setholder = true
+	end
+
+	local RI = rawget(_G, "ResourceItems")
+	if RI and type(RI.UpdateLayout) == "function" then
+		local orig = RI.UpdateLayout
+		function RI:UpdateLayout()
+			local r = orig(self)
+			if CoRun1.picker_log then
+				CoRun1.count.picker_layouts = CoRun1.count.picker_layouts + 1
+				local mouse = terminal.GetMousePos()
+				local dbox  = terminal.desktop.box
+				local out = not dbox:Point2DInside(self.align_pos or mouse)
+				if out then CoRun1.count.picker_anchor_out = CoRun1.count.picker_anchor_out + 1 end
+				say(fmt("L2C LAYOUT #%d anchor=%s ANCHOR_OUT=%s box=%s cont=%s scale=%s mw=%s mh=%s mouse=%s desk=%s",
+					CoRun1.count.picker_layouts, tostring(self.align_pos), tostring(out),
+					tostring(self.box), tostring(self.idContainer and self.idContainer.box),
+					tostring(self.scale), tostring(self.measure_width), tostring(self.measure_height),
+					tostring(mouse), tostring(dbox)))
+			end
+			return r
+		end
+		CoRun1.wrap_picker = true
+	end
+
+	if RI and type(RI.GetItems) == "function" then
+		local orig = RI.GetItems
+		function RI:GetItems(category_id)
+			local buttons = orig(self, category_id)
+			if CoRun1.picker_log then
+				CoRun1.count.picker_items = #(buttons or empty_table)
+			end
+			return buttons
+		end
+		CoRun1.wrap_getitems = true
+	end
+end
+
+---- flow helpers ------------------------------------------------------------
+
+local function shutdown(reason)
+	CoRun1.stage = "done"
+	say("SHUTDOWN " .. tostring(reason))
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then flush() end
+	Sleep(CoRun1.quit_delay)
+	quit()
+end
+
+local function step(name, fn)
+	CoRun1.stage = name
+	local t = RealTime()
+	say("STEP " .. name .. " BEGIN")
+	local ok, res = sprocall(fn)
+	if not ok then
+		say("STEP " .. name .. " ERROR")
+		shutdown("ERROR " .. name)
+		return false
+	end
+	say(fmt("STEP %s END %dms", name, RealTime() - t))
+	if res == false then
+		shutdown("TIMEOUT " .. name)
+		return false
+	end
+	return true
+end
+
+local function wait_for(timeout, ready)
+	local deadline = RealTime() + timeout
+	while not ready() do
+		if RealTime() - deadline >= 0 then return false end
+		Sleep(500)
+	end
+	return true
+end
+
+local function game_is_live()
+	local city, colony = rawget(_G, "MainCity"), rawget(_G, "UIColony")
+	return not not (city and city.labels and colony and colony.labels)
+end
+
+local function label_all(name)
+	local out = {}
+	for _, city in ipairs(rawget(_G, "Cities") or empty_table) do
+		for _, o in ipairs((city.labels or empty_table)[name] or empty_table) do
+			out[#out + 1] = o
+		end
+	end
+	return out
+end
+
+---- L2C: the C41 discriminator ----------------------------------------------
+
+local function leg2c_picker_out_of_range()
+	local dbox = terminal.desktop.box
+
+	local rc = false
+	for _, v in ipairs(label_all("RCTransport")) do
+		if IsValid(v) then rc = v break end
+	end
+	local depot = false
+	for _, d in ipairs(label_all("UniversalStorageDepot")) do
+		local ok, stored = pcall(function() return d:GetStoredAmount() end)
+		if IsValid(d) and ok and (stored or 0) > 0 and #(d.resource or empty_table) > 0 then
+			depot = d break
+		end
+	end
+	if not (rc and depot) then
+		say(fmt("L2C SKIP — need an RCTransport and a stocked depot (rc=%s depot=%s)", id_of(rc), id_of(depot)))
+		return
+	end
+
+	-- ⛔ PRE-REGISTERED PREDICTION, logged before the loop runs.
+	-- ResourceItems.lua:58-67 clamps against the safe area; run 1 measured it
+	-- as 0 0 3840 2160 (the whole screen), and F76's M2 measured the dialog at
+	-- 168 x 429 with scale 1425. For an anchor beyond the right/bottom edge the
+	-- clamps must produce x = safe_x2 - width and y = safe_y2 - height.
+	local sx1, sy1, sx2, sy2 = UIL.GetSafeArea()
+	say(fmt("L2C PREDICTION: safe area %s %s %s %s. If the anchor is out of range to the right/bottom, the clamps must put the dialog at x = %s - width and y = %s - height - margins, i.e. hard into the BOTTOM-RIGHT corner, far from where the cursor appears to be. If instead the box tracks the anchor as usual, the clamps are innocent and C41's M5 lead does NOT produce the reported symptom.",
+		tostring(sx1), tostring(sy1), tostring(sx2), tostring(sy2), tostring(sx2), tostring(sy2)))
+
+	-- The condition is DETECTED, not typed. No console line to miss.
+	say(fmt("L2C ⭐ PARK THE CURSOR ON THE SECOND MONITOR AND LEAVE IT THERE. Waiting for terminal.GetMousePos() to read outside desk=%s for 3 consecutive reads.", tostring(dbox)))
+	local streak, armed = 0, false
+	local deadline = RealTime() + 120 * 1000
+	while RealTime() < deadline do
+		local p = terminal.GetMousePos()
+		if not dbox:Point2DInside(p) then
+			streak = streak + 1
+			if streak >= 3 then
+				say(fmt("L2C ARMED — cursor is out of range at %s (3 consecutive reads)", tostring(p)))
+				armed = true
+				break
+			end
+		else
+			streak = 0
+		end
+		Sleep(300)
+	end
+	if not armed then
+		say("L2C NOT ARMED — the cursor never read out of range inside 120 s. The discriminator is UNTESTED; this is a gap, not a negative result.")
+		return
+	end
+
+	CoRun1.picker_log = true
+	local appeared, missing, out_anchors, corner = 0, 0, 0, 0
+	for i = 1, 20 do
+		local mouse = terminal.GetMousePos()
+		local in_range = dbox:Point2DInside(mouse)
+		CoRun1.count.picker_items = -1
+		local before_out = CoRun1.count.picker_anchor_out
+		local ok, err = pcall(function()
+			OpenResourceSelector(rc, { target = depot, meta_key = const.vkControl,
+				close_on_rmb = true, interaction_mode = "load" })
+		end)
+		Sleep(400)
+		local dlg = GetDialog("ResourceItems")
+		if CoRun1.count.picker_anchor_out > before_out then out_anchors = out_anchors + 1 end
+		if dlg then
+			appeared = appeared + 1
+			local b = dlg.box
+			local at_corner = b and (b:maxx() >= sx2 - 4) and (b:maxy() >= sy2 - 4)
+			if at_corner then corner = corner + 1 end
+			say(fmt("L2C cycle %d/20 dialog=ALIVE mouse=%s mouse_in_range=%s anchor=%s box=%s AT_BOTTOM_RIGHT_CORNER=%s items=%d",
+				i, tostring(mouse), tostring(in_range), tostring(dlg.align_pos), tostring(b),
+				tostring(at_corner), CoRun1.count.picker_items))
+		else
+			missing = missing + 1
+			say(fmt("L2C cycle %d/20 dialog=MISSING mouse=%s mouse_in_range=%s ok=%s err=%s items=%d",
+				i, tostring(mouse), tostring(in_range), tostring(ok), tostring(err), CoRun1.count.picker_items))
+		end
+		pcall(CloseResourceSelector)
+		Sleep(400)
+	end
+	CoRun1.picker_log = false
+	say(fmt("L2C ⭐ RESULT %d/20 opened, %d/20 missing | cycles whose ANCHOR was out of range=%d | cycles whose box landed in the BOTTOM-RIGHT CORNER=%d | layouts logged=%d",
+		appeared, missing, out_anchors, corner, CoRun1.count.picker_layouts))
+end
+
+---- L3: cross-map Done-timing, this time WAITING for the fixture ------------
+
+local function leg3_done_timing()
+	local rocket = false
+	for _, r in ipairs(label_all("AllRockets")) do
+		if IsValid(r) and r:GetMap() == MainMap and r.landed and IsKindOf(r, "Holder") then
+			rocket = r break
+		end
+	end
+	if not rocket then
+		say("L3 SKIP — no landed surface rocket Holder")
+		return
+	end
+
+	-- Run 1's failure was sampling once. Off-map trains cycle their riders in
+	-- seconds at speed 3, so the fixture is intermittent, not absent: retry.
+	local col, train = false, false
+	local deadline = RealTime() + 180 * 1000
+	local tries = 0
+	while RealTime() < deadline do
+		tries = tries + 1
+		for _, t in ipairs(label_all("Train")) do
+			if IsValid(t) and t:GetMap() ~= rocket:GetMap() then
+				for _, u in ipairs(t.units or empty_table) do
+					if IsValid(u) and IsKindOf(u, "Colonist") and u:GetMap() ~= rocket:GetMap() then
+						col, train = u, t
+						break
+					end
+				end
+			end
+			if col then break end
+		end
+		if col then break end
+		Sleep(1000)
+	end
+	if not col then
+		say(fmt("L3 SKIP — no off-map train rider appeared in 180 s across %d sweeps. Gap, not a failure.", tries))
+		return
+	end
+	say(fmt("L3 FIXTURE found after %d sweep(s): rider=%s train=%s rider_map=%s rocket=%s rocket_map=%s",
+		tries, id_of(col), id_of(train), tostring(col:GetMap()), id_of(rocket), tostring(rocket:GetMap())))
+
+	local cross = rocket:GetMap() ~= col:GetMap()
+	say(fmt("L3 cross_map=%s", tostring(cross)))
+	if not cross then
+		say("L3 ABORT — cross_map false; this leg refuses to repeat co-run #0's same-map result")
+		return
+	end
+
+	say(fmt("L3 BEFORE find=%s holder=%s #units=%s",
+		find_in_holder(col), id_of(col.holder),
+		tostring(col.holder and #(col.holder.units or empty_table))))
+
+	-- The instrument is ORDER: debug is on ModEnvBlacklist so a caller cannot
+	-- be printed from mod code. Five wraps share one sequence counter, so an
+	-- OnExitHolder BETWEEN OnTransferToMapDone ENTER and EXIT is route (a),
+	-- and one inside EnterTransporter with no Done bracketing it is route (b).
+	CoRun1.trace_unit = col
+	CoRun1.trace = true
+	CoRun1.count.done_fired = 0
+	say("L3 FORCED: col:SetCommand(\"EnterTransporter\", rocket) — verbatim CargoTransporter:ExpeditionLoadCrew's body (CargoTransporter.lua:300-302), on a chosen target")
+	col:SetCommand("EnterTransporter", rocket)
+	Sleep(15 * 1000)
+	CoRun1.trace = false
+
+	say(fmt("L3 AFTER find=%s holder=%s holder_is_rocket=%s Done_fired=%d",
+		find_in_holder(col), id_of(col.holder), tostring(col.holder == rocket), CoRun1.count.done_fired))
+end
+
+---- the leg body ------------------------------------------------------------
+
+function CoRun1.Flow()
+	CreateRealTimeThread(function()
+		local deadline = RealTime() + CoRun1.watchdog
+		while CoRun1.stage ~= "done" do
+			if RealTime() - deadline >= 0 then
+				say("WATCHDOG TIMEOUT at stage " .. tostring(CoRun1.stage))
+				local flush = rawget(_G, "FlushLogFile")
+				if flush then flush() end
+				Sleep(1000)
+				quit()
+				return
+			end
+			Sleep(1000)
+		end
+	end)
+
+	say("=== CO-RUN #1 RUN 2 — the two gaps run 1 left ===")
+
+	if not step("1-waiting-menu", function()
+		if not wait_for(CoRun1.menu_timeout, function() return not not GetPreGameMainMenu() end) then return false end
+		Sleep(2000)
+	end) then return end
+
+	if not step("2-loading-save", function()
+		local err = LoadGame(CoRun1.save_file, {})
+		if err then say("LOADERR " .. tostring(err)) return false end
+		say("LOAD OK")
+	end) then return end
+
+	if not step("3-waiting-city", function() return wait_for(5 * 60 * 1000, game_is_live) end) then return end
+	if not step("3b-settling", function() Sleep(CoRun1.settle_time) end) then return end
+
+	if not step("4-census", function()
+		local pack = rawget(_G, "SMRFixPack")
+		local active, n = 0, 0
+		for _, id in ipairs((pack and pack.order) or empty_table) do
+			n = n + 1
+			if pack.fixes[id] and pack.fixes[id].status == "active" then active = active + 1 end
+		end
+		say(fmt("READ fixpack: %d/%d active", active, n))
+		say(fmt("READ wraps: done=%s enter=%s transfer=%s exit_holder=%s setholder=%s picker=%s",
+			tostring(CoRun1.wrap_done), tostring(CoRun1.wrap_enter), tostring(CoRun1.wrap_transfer),
+			tostring(CoRun1.wrap_exit_holder), tostring(CoRun1.wrap_setholder), tostring(CoRun1.wrap_picker)))
+		say(fmt("READ C41 env: desk=%s scale=%s screen=%s mouse=%s",
+			tostring(terminal.desktop.box), tostring(terminal.desktop.scale),
+			tostring(UIL.GetScreenSize()), tostring(terminal.GetMousePos())))
+	end) then return end
+
+	if not step("4b-speed", function()
+		local before = GetTimeFactor() / const.DefaultTimeFactor
+		local ok = pcall(function() UIColony:SetGameSpeed(3) end)
+		Sleep(500)
+		say(fmt("READ game speed: call=%s before=%s after=%s", tostring(ok), tostring(before),
+			tostring(GetTimeFactor() / const.DefaultTimeFactor)))
+	end) then return end
+
+	if not step("L2C-picker-out-of-range", leg2c_picker_out_of_range) then return end
+	say("=== OWNER IS FREE — L3 needs no eyes ===")
+	if not step("L3-done-timing", leg3_done_timing) then return end
+
+	say("=== CO-RUN #1 RUN 2 legs complete ===")
+	shutdown("done")
+end
+
+CreateRealTimeThread(function()
+	Sleep(1)
+	if rawget(_G, "SMRTest_EnablePathLeg") then
+		say("standing down: 98_EnablePathLeg.lua drives this session")
+		return
+	end
+	CoRun1.Flow()
+end)

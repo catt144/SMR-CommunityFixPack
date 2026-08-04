@@ -434,7 +434,86 @@ a re-choice of save — the save is otherwise richer than the record suggested.
 - Not that the rig "works" beyond these steps. **Amplification loops, multi-cycle
   legs, watchdog-under-real-wedge and Mod-Manager driving are still unexercised.**
   The watchdog did not fire, so it is proven present, not proven effective.
+  *(⭐ Amplification loops and multi-cycle legs are now exercised — §9.)*
 - Not `tested` for F11 or anything else. The ride-along is MECHANISM evidence
   from a FORCED upstream; F11's evidence label is unchanged.
 - Not owner-minutes savings — prompt 4 owns the economics audit. What is recorded
   here is one measurement (~1.5 min actual vs ~10 promised), not a trend.
+
+## §9 CO-RUN #1 — THE PAYLOAD RUN (2026-08-04, prompt 3; ran TWICE)
+
+**Run conditions.** Retail `Mars.exe` **1.0.7.396349**,
+`steam.exe -applaunch 3215050` with no `-smrautorun` (95_AutoRun stood down as
+designed, both times). COLD load of `CORUN1.savegame.sav`, a `Copy-Item` copy of
+`TEST2H TRAIN` staged with the game closed; the campaign save read the same
+55,667,524 bytes / 2026-08-03 22:21 afterwards. Fix pack **81/81 active**.
+**Zero** `[LUA ERROR]`, **zero** `Assert failed`, **zero** modals, both runs.
+`PROBE SWEEP: armed: TestKit Code/97_CoRun1.lua (run 1), Code/97_CoRun1b.lua
+(run 2), declared by co-run #1` — both deleted with their `metadata.lua` lines
+and the staged save. ⚖️ The armed-prep override was **DECLINED**
+(`CORUN1_BRIEF.md` §6). Logs archived: `docs/archive/corun1_*.log`,
+`corun1b_*.log`. Cards: `agent/reports/CORUN1_EVIDENCE_CARDS.md`.
+
+### Costs — and ⚠️ §8's 80 s is the FLOOR, not the cycle cost
+
+| | co-run #0 | **#1 run 1** | **#1 run 2** |
+|---|---|---|---|
+| launch cmd → game log created | 2.2 s | **5.2 s** | **1.7 s** |
+| menu poll | 2.5 s | 2.5 s | 2.5 s |
+| **load, by the engine's own line** | 9,968 ms | **9,784 ms** | **9,531 ms** |
+| readiness | 0 ms | 0 ms | 0 ms |
+| settle (our own constant) | 30 s | 15 s | 15 s |
+| payload | 15 s | **~315 s** | **~35 s** |
+| **whole cycle (`Time (ms)`)** | 79,876 | **398,115** | **85,125** |
+| **owner-attended** | ~1.5 min / ~10 | **~5 min** | **~1 min** — both against **~15–20 promised**, ~6 min total |
+
+⚠️ **The load is stable at ~9.5–10.0 s across three cold loads** — that is the
+one number the effort model can lean on. Everything else scales with the
+payload. **A cycle costs `~30 s of fixed overhead + the payload`**, and the
+payload is whatever the legs are; §3's "5–8 min per cycle" is still pessimistic
+for a *thin* leg and roughly right for a *fat* one, which is a different claim
+from §8's. ⚠️ **launch→log varied 1.7–5.2 s across three launches** — no human
+click fits in any of them (U3 holds), but the figure is not a constant.
+
+⭐ **Halving the settle from 30 s to 15 s cost nothing observable** — 81/81 read
+active, every label read populated, no `[LUA ERROR]`. §5's 30 s is unjustified
+by anything measured; 15 s is now the datum.
+
+### What ran, and what it settled
+
+| item | verdict |
+|---|---|
+| **1 · F11 pre-wrapper watch** (Tier A) | **2 of 3 readings PASS**; ⛔ not `tested` — the stat reading is unavailable on this save (`LuxuriousTrains` researched, 0 forest tracks). 340 holder removals, 7 trains, **0 wedges**. Close decision routed to the owner |
+| **2 · F99 hex tie-break** (ride-along) | ⭐ **SETTLED — the hex returns the HIDDEN ELEMENT**, confirmed twice, against a pre-break control |
+| **3 · C41 amplification** (Tier A) | ⭐ **the M5 lead is MEASURED** (29/300 organic, 20/20 forced; `x` to 7665) **and the clamps fire for an out-of-range anchor** (box pinned to `maxx=3840`); ⛔ picker appeared **40/40**, so the OG symptom did **not** reproduce. `cand` unchanged |
+| **4 · F11 cross-map Done-timing** (ride-along) | ⭐ **SETTLED — route (a)**; route (b) excluded. Run 1 skipped it (one-shot selector, no rider aboard at that instant); run 2's retry loop found the fixture on its first sweep |
+
+⭐ **The class-2 use case is now exercised, which §8 listed as unproven.**
+Amplification loops ran (20-cycle picker loop ×2, a 300-sample 5 Hz poll, a
+238 s 1 Hz train poll) and a **multi-cycle leg** ran (two launches in one
+sitting, second one authored from the first one's gaps). The watchdog still has
+not fired, so it stays proven-present, not proven-effective.
+
+### ⛔ CORRECTIONS TO THIS SPEC (co-run #1)
+
+- **C6 — §6's `CheatMeteors` remedy is the worse of two routes.** `BreakTracks`
+  (`Meteors.lua:599-607`) — what the cheat eventually reaches — calls
+  `track:BreakTrackElement(element, cg)` on every element that is neither
+  `start_el` nor `end_el` and carries no station. **Drive that site directly on
+  a chosen element**: same mechanism, no disaster thread, no collateral, lottery
+  removed, ~3 s instead of a disaster's game time. `WORKFLOW.md` leg-design
+  rule 2 already says so; §6 predates it.
+- **C7 — "wrap `Holder.OnExitHolder` and print its caller" is impossible.**
+  `debug` is on `ModEnvBlacklist`, so mod code cannot read a stack at all.
+  ⭐ **Ordering replaces it and is better:** several wraps sharing one sequence
+  counter make nesting directly readable, which brackets the *transfer* as well
+  as naming the *remover*. That is what settled payload item 4.
+- **C8 — §5's `RealTime()`-timed step lines mislead even where C1 is honoured.**
+  The probe printed `STEP 2-loading-save END 874ms` beside an engine line
+  reading `9784 ms`. C1 says do not *trust* them; **the stronger rule is do not
+  PRINT them for a step that spans a loading screen** — a future reader will
+  quote the wrong number out of the log. `facts/EF-045` should say so.
+- **C9 — §3's effort model needs re-deriving from payload runs, not from #0.**
+  §8 called §3 "~4–6× pessimistic" on the strength of one 15 s-payload cycle.
+  With two real payload runs the honest shape is **fixed ~30 s + payload**, and
+  a fat leg reaches 6.6 min. Prompt 4 owns the re-derivation.

@@ -10,9 +10,9 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 
 ✅✅ **The 18-prompt project chain is COMPLETE (2026-08-03)**; the playtest
 campaign is the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first**
-(verdict · doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig: CO-RUN #0
-PASSED 2026-08-04 w/ corrections — the rig WORKS**: cycle **79.9 s**, owner
-**1.5 min** of ~10; next = prompt 3. ⛔ 5 corrections bind: `CORUN_RIG_SPEC` §8.
+(verdict · doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig: CO-RUN #1 RAN ×2
+2026-08-04 — 3 of 4 payload items SETTLED**, owner **~6 min** of 15–20; next =
+prompt 4. ⛔ 9 corrections bind: `CORUN_RIG_SPEC` §8–§9 (+ `reports/CORUN1_*`).
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -27,18 +27,18 @@ BUILD STATE (emitted by tools/doccheck.py)
 Re-emit after any module or entry change; a red run refuses to hand one out.
 Pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 
-⚖️ **F76 CLOSED-REFUTED, P1 released** (evicted to SESSION_LOG). Live residue:
-**`C41` (cand)**, instrument `F76MISS`; MOD_DESCRIPTION's F76 note is VOID.
+⚖️ **F76 CLOSED-REFUTED, P1 released**. Residue **`C41` (cand)**: ⭐ M5 lead
+**MEASURED 2026-08-04** — an out-of-range mouse displaces the picker; ⛔ it
+appeared 40/40, OG symptom unreproduced. MOD_DESCRIPTION's F76 note is VOID.
 
-✅ **F11** — rider: **no demonstrated producer**; ⚠️ the cross-map route is not
-provable from Lua (entry). **Fix CONVERTED full-copy → pre-wrapper `3a6512f`**:
-by construction only, ⛔ NOT `tested` — checklist rider. ⭐ Owner: keep `P1`?
+✅ **F11** — ⭐ cross-map route **SETTLED 2026-08-04: route (a)** (the entry had
+it as not provable from Lua). Pre-wrapper WATCHED: **2 of 3** readings pass, ⛔
+NOT `tested` — the stat branch is dead on that save. ⭐ Owner: close on 2/3? `P1`?
 
-⚠️ **F99 (`cand`)** — **7** × `TrackElement.lua:805`, cheat-only observed;
-no-cheat UNPROVEN, nothing built. **Route SETTLED at chain close**: the list is
-empty BEFORE the rebuild (the filed route is refuted); drain =
-`ExpandTrackFromElement:729` absorb-walk + the dead `:800` guard. Fix shape
-known (`F99.md`), blocked on §4 reachability; severity = owner call (checklist).
+⚠️ **F99 (`cand`)** — **7** × `TrackElement.lua:805`, cheat-only; no-cheat
+UNPROVEN, nothing built. Drain = `ExpandTrackFromElement:729` absorb-walk + the
+dead `:800` guard; ⭐ the hex tie-break is **MEASURED 2026-08-04** (it returns
+the hidden element). Blocked on §4 reachability; severity = owner (checklist).
 
 ⭐ **FIRST COMPLETE PROBE COVERAGE 2026-08-03** — MarsDebug `[install]`: **87
 PASS / 0 FAIL / 0 SKIP** (EXECUTED-ONCE, `PLAYTEST_HELP`). ⛔ Never quote as

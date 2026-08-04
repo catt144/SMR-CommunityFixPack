@@ -8,6 +8,44 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-04 — CO-RUN #1, the first payload run: two launches, ~6 owner-minutes, three of four payload items settled
+
+⭐⭐ **The rig earned its keep.** corun-rig prompt 3 (Opus) prepped unattended,
+ran the sitting, found two gaps in its own run 1, authored run 2 from run 1's
+log, and ran that in the same sitting. Owner-attended **~6 min against ~15–20
+promised**; whole cycles **398 s** and **85 s**; loads **9,784 / 9,531 ms** by
+the engine's own line; **zero** `[LUA ERROR]` in either. Cards:
+`agent/reports/CORUN1_EVIDENCE_CARDS.md`. Costs + 4 corrections:
+`CORUN_RIG_SPEC.md` §9. Logs: `docs/archive/corun1_*.log`, `corun1b_*.log`.
+
+- ⭐ **F11's cross-map route is SETTLED — route (a).** The entry had it as *"not
+  provable from Lua"*; the removal was observed happening, inside the
+  `OnTransferToMapDone` bracket, not inferred from a post-hoc `nil`. The
+  requested instrument (wrap `OnExitHolder`, print its caller) is **impossible**
+  — `debug` is blacklisted — and shared-sequence ordering replaced it.
+- ⭐ **F99's last unknown is MEASURED** — `HexGetTrackGridElement` returns the
+  hidden element, which is what the seven crashes implied. The entry's "not
+  readable from Lua (C binding)" framing was too strong: it is a one-line Lua
+  wrapper. Still `cand`, nothing built, reachability untouched.
+- ⭐ **C41 got its first measured mechanism** — `GetMousePos` reports
+  virtual-desktop coordinates against a window-local `desktop.box` (`x` to 7665
+  vs a box ending at 3840, 29/300 organic and 20/20 forced), and an out-of-range
+  anchor **does** fire the safe-area clamp, pinning the picker to the screen
+  edge ~2200 px from the cursor. ⛔ **The picker appeared 40/40** — the OG
+  symptom did not reproduce, so this is mechanism, not confirmation. `cand`.
+- ⚖️ **F11's pre-wrapper rider took 2 of its 3 readings** (340 holder removals,
+  7 trains, 0 wedges, owner-witnessed) and the third is **unavailable on that
+  save**. ⛔ `tested` not claimed; close-on-2/3 routed to the owner.
+- ⚖️ **The armed-prep override was DECLINED**, replaced by a measurement:
+  arming at the sitting costs **0.4 s** and zero owner time, which is the whole
+  of what the grant would have bought. **Rule 5 stands.** And prompt 2's "known
+  weak spot" in rule 5 — that it pushes syntax errors to the sitting — **does
+  not exist**: the parse sweep does not care where the file lives.
+- ⚠️ **A real rule-5 cost, found the hard way:** co-run #0's probe source exists
+  nowhere, so this session re-authored the harness from `95_AutoRun.lua`.
+
+---
+
 ## 2026-08-04 — both of co-run #0's routed items DECIDED by the owner, same day: `C44` filed `wontfix`, and the probe gate resolved by tightening the protocol rather than loosening the tool
 
 **The `LawOfficeDoor` asset error → `C44`, `wontfix`, closed.** The owner's
