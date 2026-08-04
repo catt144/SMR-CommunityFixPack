@@ -1,0 +1,176 @@
+-- SMR Community Fix Pack — Test Kit :: unattended-1 CYCLE 5 — LEG E.  TEMPORARY
+--
+-- Declared by: unattended-1 chain prompt 1, for prompt 2. Armed with
+-- 97_U1Common.lua; both die in the commit that records this cycle's answers.
+--
+-- LEG E — execute the two [NEVER RUN] rows of the verified command table
+-- (PLAYTEST_HELP.md "Verified command reference"). Both were source-verified
+-- 2026-08-04 and never executed; the table says "execute once before any leg
+-- leans on it", and this is that execution.
+--
+--   E1  CheatDustStorm(storm_type, setting) — DustStorm.lua:540. The
+--       deterministic form: WITH a `setting` it takes the else branch and
+--       creates a GAME-TIME thread that calls StartDustStorm(storm_type, descr,
+--       MainMap) (:550-556). Without a setting it only fires
+--       Msg("TriggerDustStorm") and nudges the scheduler — which is why the
+--       setting is passed and why the game must not be paused when it is.
+--       ⚠️ It calls CheatStopDisaster() FIRST (:541), so it ends whatever
+--       disaster is running. Confirmed start/stop is read from HasDustStorm(map)
+--       and the g_DustStorm* GameVars (:31-37), polled either side.
+--
+--   E2  the forced static-charged dust devil — DustDevils.lua:128-158. The
+--       electro roll is a plain read of the descr table, so a copied descr with
+--       electro_chance = 100 removes the lottery.
+--       ⚠️ DRIFT CORRECTION to the PLAYTEST_HELP row, recorded not applied
+--       silently (chain rule 5): the row says the roll is `Random(100) <
+--       descr.electro_chance`. Read this session at DustDevils.lua:138 it is
+--       `SessionRandom:Random(100) < descr.electro_chance`. The mechanism and
+--       the conclusion are unchanged (SessionRandom:Random(100) yields 0..99,
+--       so < 100 is always true), but the row's snippet names a function that
+--       is not the one on the line.
+--       ⚠️ SECOND CORRECTION, and this one changes the call: the row aims with
+--       GetTerrainCursorClamped(). ⛔ THERE IS NO MOUSE IN AN UNATTENDED RUN —
+--       the cursor sits wherever it was left, which is not a measurement. And
+--       GenerateDustDevilIn returns NIL EARLY if VegetationAround(pos, map,
+--       range or 10*guim) is true (:129-131), so a badly chosen point silently
+--       produces nothing. This leg therefore uses GetRandomPassable(MainMap)
+--       and RETRIES, and reports how many attempts it took.
+--       ⚠️ The electro variant is CONFIRMED BY READING THE OBJECT, not by
+--       eyes: electro sets devil.fx_actor_class to "DustDevilElectro" /
+--       "DustDevilMajorElectro" (:152-154) and devil.drone_battery to
+--       descr.electro_battery (:148). If neither is readable, this leg says so
+--       and the [NEVER RUN] row marker stays honest.
+--
+-- MUTATING LEG, AND THE MOST DESTRUCTIVE ONE IN THE CHAIN — a storm and a
+-- charged devil damage the colony. It runs LAST among the world-mutating
+-- cycles for that reason. One load, no save, no reload; the staged copy on disk
+-- is never written and the damage dies with the process.
+
+U1 = rawget(_G, "U1") or {}
+U1.tag       = "U1C5"
+U1.watchdog  = 9 * 60 * 1000      -- 3x the ~3 min prediction; also >= the two 3 min storm waits + overhead
+U1.save_file = "U1STAGE.savegame.sav"
+
+local function storm_state(when)
+	local say, fmt = U1.Say, U1.Fmt
+	local map = rawget(_G, "MainMap")
+	local has = rawget(_G, "HasDustStorm")
+	say(fmt("E1 STORM STATE %s: HasDustStorm=%s | g_DustStorm=%s type=%s stopped=%s start=%s end=%s duration=%s",
+		tostring(when),
+		tostring(type(has) == "function" and has(map) or "?"),
+		tostring(rawget(_G, "g_DustStorm")), tostring(rawget(_G, "g_DustStormType")),
+		tostring(rawget(_G, "g_DustStormStopped")), tostring(rawget(_G, "g_DustStormStart")),
+		tostring(rawget(_G, "g_DustStormEnd")), tostring(rawget(_G, "g_DustStormDuration"))))
+	return type(has) == "function" and has(map) or nil
+end
+
+function U1.Payload()
+	local say, fmt, step = U1.Say, U1.Fmt, U1.Step
+
+	if not step("2-load-staged", function() return U1.Load(U1.save_file, 3) end, true) then return end
+
+	if not step("E0-baseline", function()
+		U1.ReadConditions("leg E, cold load — before either [NEVER RUN] command")
+		storm_state("before")
+	end) then return end
+
+	----------------------------------------------------------------------
+	-- E1 — CheatDustStorm, deterministic form
+	----------------------------------------------------------------------
+	if not step("E1-duststorm", function()
+		local cheat = rawget(_G, "CheatDustStorm")
+		if type(cheat) ~= "function" then
+			say("E1 SKIP — CheatDustStorm unreachable from this environment. The [NEVER RUN] row stays [NEVER RUN]; record why.")
+			return
+		end
+		local presets = ((rawget(_G, "Presets") or empty_table).MapSettings or empty_table).DustStorm or empty_table
+		local setting = presets.DustStorm_High and "DustStorm_High" or nil
+		if not setting then
+			for k in pairs(presets) do setting = k break end
+		end
+		if not setting then
+			say("E1 SKIP — no Presets.MapSettings.DustStorm entry to pass; without a setting the cheat only nudges the scheduler, which is not what the row claims. Row stays [NEVER RUN].")
+			return
+		end
+		say(fmt("E1 FIRST EXECUTION EVER of CheatDustStorm(\"normal\", %q) — ⛔ it calls CheatStopDisaster() first, so anything already running ends here", setting))
+		local ok = pcall(cheat, "normal", setting)
+		say(fmt("E1 call ok=%s", tostring(ok)))
+
+		local started = U1.WaitFor(3 * 60 * 1000, function()
+			local has = rawget(_G, "HasDustStorm")
+			return type(has) == "function" and has(rawget(_G, "MainMap")) and true or false
+		end)
+		say(fmt("E1 STORM STARTED=%s within 3 min", tostring(started)))
+		storm_state("after start attempt")
+
+		if started then
+			say("E1 now confirming the STOP half — StopDustStorm() sets g_DustStormStopped (DustStorm.lua:558) and the storm loop exits on it (:343)")
+			local stop = rawget(_G, "StopDustStorm")
+			if type(stop) == "function" then pcall(stop) end
+			local stopped = U1.WaitFor(3 * 60 * 1000, function()
+				local has = rawget(_G, "HasDustStorm")
+				return not (type(has) == "function" and has(rawget(_G, "MainMap")))
+			end)
+			say(fmt("E1 STORM STOPPED=%s within 3 min", tostring(stopped)))
+			storm_state("after stop attempt")
+		end
+	end) then return end
+
+	----------------------------------------------------------------------
+	-- E2 — the forced static-charged dust devil
+	----------------------------------------------------------------------
+	if not step("E2-electro-devil", function()
+		local gen = rawget(_G, "GenerateDustDevilIn")
+		if type(gen) ~= "function" then
+			say("E2 SKIP — GenerateDustDevilIn unreachable. Row stays [NEVER RUN]; record why.")
+			return
+		end
+		local map = rawget(_G, "MainMap")
+		local all = ((rawget(_G, "Presets") or empty_table).MapSettings or empty_table).DustDevils or empty_table
+		local key = map and map.mapdata and map.mapdata.MapSettings_DustDevils
+		local base = all[key] or all.DustDevils_VeryLow
+		if type(base) ~= "table" then
+			say("E2 SKIP — no DustDevils descr preset resolved. Row stays [NEVER RUN].")
+			return
+		end
+		local d = table.copy(base)
+		d.electro_chance = 100
+		say(fmt("E2 descr copied from %s | electro_chance %s -> 100 (the roll at DustDevils.lua:138 is SessionRandom:Random(100) < electro_chance, so this removes the lottery)",
+			tostring(key or "DustDevils_VeryLow"), tostring(base.electro_chance)))
+
+		-- GenerateDustDevilIn returns nil early on a vegetated point (:129-131),
+		-- so retry rather than report a false negative.
+		local devil, tries = nil, 0
+		local rp = rawget(_G, "GetRandomPassable")
+		for i = 1, 12 do
+			tries = i
+			local pos = type(rp) == "function" and rp(map) or nil
+			if pos then
+				local ok, res = pcall(gen, pos, map, d)
+				if ok and res then devil = res break end
+			end
+			Sleep(200)
+		end
+		if not devil then
+			say(fmt("E2 NO DEVIL after %d attempt(s) — GenerateDustDevilIn returned nil every time (its vegetation early-out, :129-131, is the documented cause). Row stays [NEVER RUN]; record the attempt count.", tries))
+			return
+		end
+		local ok_start = pcall(function() devil:Start() end)
+		say(fmt("E2 DEVIL CREATED after %d attempt(s): %s | Start() ok=%s", tries, U1.IdOf(devil), tostring(ok_start)))
+		say(fmt("E2 ELECTRO CONFIRMATION (read off the object, not off the screen): fx_actor_class=%s drone_battery=%s | ELECTRO=%s",
+			tostring(devil.fx_actor_class), tostring(devil.drone_battery),
+			tostring(devil.fx_actor_class == "DustDevilElectro" or devil.fx_actor_class == "DustDevilMajorElectro")))
+		Sleep(20000)
+		say(fmt("E2 devil 20 s later: valid=%s fx_actor_class=%s", tostring(IsValid(devil)), tostring(devil.fx_actor_class)))
+	end) then return end
+
+	if not step("E-verdict", function()
+		U1.ReadConditions("leg E, after both commands")
+		say("LEG E ⛔ ROW-FLIP RULE: prompt 2 flips a [NEVER RUN] row to [RAN <date>, log <name>] ONLY for the command whose evidence is actually in this log — the storm needs BOTH a start and a stop reading, the devil needs a readable electro mark. A command that ran but produced nothing readable is recorded as run-with-no-confirmation and its row marker stays honest.")
+	end) then return end
+
+	U1.ErrorWatchNote()
+	say("=== cycle 5 (leg E) complete ===")
+end
+
+U1.Boot()

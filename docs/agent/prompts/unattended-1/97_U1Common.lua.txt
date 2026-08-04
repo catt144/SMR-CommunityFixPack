@@ -1,0 +1,625 @@
+-- SMR Community Fix Pack — Test Kit :: unattended-1 SHARED HARNESS.  TEMPORARY
+--
+-- Declared by: unattended-1 chain prompt 1 (01_OPUS_PREP.md), for prompt 2.
+-- Probe hygiene rule 5: this file exists in TestKit Code/ only while a cycle is
+-- actually running; it and its metadata.lua line die in the commit that records
+-- that cycle's answers. Its source of truth is this parked .lua.txt.
+--
+-- WHAT IT IS
+--   The harness half of every unattended-1 cycle probe. It is armed TOGETHER
+--   with exactly one 98_U1C<N>.lua payload file, and the payload file is what
+--   starts the run. This file starts nothing on its own — arming it alone is a
+--   no-op, which is deliberate: a stranded harness cannot drive anything.
+--
+-- WHY THE SHAPE
+--   Copied from the proven co-run #1 driver
+--   (git show 93088ba:docs/agent/prompts/corun-rig/97_CoRun1.lua.txt), itself
+--   copied from Code/95_AutoRun.lua: real-time thread + Sleep(1) so the class
+--   world is loaded; own watchdog; sprocall for yielding steps; ModLog +
+--   FlushLogFile per line so a wedged-then-killed run still leaves its trace.
+--   It does NOT arm 96_AutoRunFlag and the launch omits -smrautorun, so
+--   95_AutoRun stands down by itself (MEASURED, co-run #0).
+--
+-- BINDING CORRECTIONS CARRIED FORWARD
+--   EF-045 / C1  RealTime() does not advance across a loading screen. Loads are
+--                timed by the engine's own "Game loaded on map ... in Nms"
+--                line ONLY, and this harness prints NO step line for a step
+--                that spans a load (the C8 half of EF-045: do not even print
+--                it, a future reader would quote the wrong number).
+--   C4           A freshly loaded save arrives PAUSED. U1.Load() sets and reads
+--                back a speed after every load, or game-time work is dead.
+--
+-- ⛔ SAVE PRIMITIVE — Src-verified this session, NEVER EXECUTED BY US.
+--   U1.Save() is the first execution. Every payload that calls it must abort
+--   cleanly to a routed gap if it fails; see U1.save_proven.
+
+U1 = rawget(_G, "U1") or {}
+
+U1.tag            = U1.tag or "U1"
+U1.menu_timeout   = 5 * 60 * 1000
+U1.settle_time    = 15 * 1000
+U1.quit_delay     = 3 * 1000
+U1.watchdog       = 20 * 60 * 1000   -- payload files override before U1.Flow()
+U1.stage          = "idle"
+U1.save_proven    = false            -- flipped true only by a passing U1.Save()
+U1.loads          = 0
+
+---- output ------------------------------------------------------------------
+
+-- ModLog is the only print path proven to reach the log file on disk
+-- (Mod.lua:109-132). Its emitter formats its single argument a second time
+-- (lib.lua:164-174), so a literal '%' raises there — escape it. Flush per line
+-- so a killed run still shows how far it got.
+local t0 = false
+local function say(msg)
+	if not t0 then t0 = RealTime() end
+	msg = "[" .. tostring(U1.tag) .. "] " .. tostring(msg)
+	local modlog = rawget(_G, "ModLog")
+	if modlog then
+		modlog((msg:gsub("%%", "%%%%")))
+	else
+		local dbg = rawget(_G, "DebugPrint")
+		if dbg then dbg(msg .. "\n") end
+	end
+	print(msg)
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then pcall(flush) end
+end
+U1.Say = say
+
+local function fmt(...)
+	local ok, s = pcall(string.format, ...)
+	return ok and s or "<fmt error>"
+end
+U1.Fmt = fmt
+
+local function id_of(obj)
+	if not obj then return "nil" end
+	if type(obj) ~= "table" then return tostring(obj) end
+	return tostring(obj.class or "?") .. "#" .. tostring(rawget(obj, "handle"))
+end
+U1.IdOf = id_of
+
+---- flow helpers ------------------------------------------------------------
+
+local function shutdown(reason)
+	U1.stage = "done"
+	say("SHUTDOWN " .. tostring(reason))
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then flush() end
+	Sleep(U1.quit_delay)
+	quit()
+end
+U1.Shutdown = shutdown
+
+-- Steps Sleep, so sprocall is mandatory (pcall cannot survive a yield).
+--
+-- untimed = true suppresses the END timing line entirely (EF-045, correction
+-- C8: do not even PRINT a RealTime() delta for such a step, because a future
+-- reader will quote it). ⛔ It is set for SAVE steps as well as LOAD steps, and
+-- that is not caution: SaveGame's first act is WaitRenderMode("ui")
+-- (CommonLua/Savegame.lua:1079) — the same no-frames-render block that made
+-- LoadGame under-report itself 11.5x — so a saved step's RealTime delta is
+-- wrong for exactly EF-045's reason. A save has no engine-printed duration
+-- line either, so its honest report is no number at all.
+local function step(name, fn, untimed)
+	U1.stage = name
+	local t = RealTime()
+	say("STEP " .. name .. " BEGIN")
+	local ok, res = sprocall(fn)
+	if not ok then
+		say("STEP " .. name .. " ERROR")
+		shutdown("ERROR " .. name)
+		return false
+	end
+	if untimed then
+		say("STEP " .. name .. " END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)")
+	else
+		say(fmt("STEP %s END %dms", name, RealTime() - t))
+	end
+	if res == false then
+		shutdown("STOP " .. name .. " — the step asked to stop; its reason is the last line before this one")
+		return false
+	end
+	return true
+end
+U1.Step = step
+
+-- Never raises: error() does not unwind mod code in this engine, so a raising
+-- wait would spin until the watchdog killed the process (95_AutoRun's lesson).
+local function wait_for(timeout, ready)
+	local deadline = RealTime() + timeout
+	while not ready() do
+		if RealTime() - deadline >= 0 then return false end
+		Sleep(500)
+	end
+	return true
+end
+U1.WaitFor = wait_for
+
+local function game_is_live()
+	local city   = rawget(_G, "MainCity")
+	local colony = rawget(_G, "UIColony")
+	return not not (city and city.labels and colony and colony.labels)
+end
+U1.GameIsLive = game_is_live
+
+local function label_all(name)
+	local out = {}
+	for _, city in ipairs(rawget(_G, "Cities") or empty_table) do
+		for _, o in ipairs((city.labels or empty_table)[name] or empty_table) do
+			out[#out + 1] = o
+		end
+	end
+	return out
+end
+U1.LabelAll = label_all
+
+---- load / speed ------------------------------------------------------------
+
+-- Returns true on success. Sets a speed and reads it back every time: a loaded
+-- save arrives PAUSED (C4) and every game-time thread below it is dead until
+-- this runs.
+function U1.Load(savefile, speed)
+	local err = LoadGame(savefile, {})            -- ⛔ never pass save_as_last
+	if err then
+		say("LOADERR " .. tostring(savefile) .. " " .. tostring(err))
+		return false
+	end
+	U1.loads = U1.loads + 1
+	say(fmt("LOAD OK #%d file=%s — LoadGame returned no error", U1.loads, tostring(savefile)))
+	if not wait_for(5 * 60 * 1000, game_is_live) then
+		say("LOADERR " .. tostring(savefile) .. " — city never came live")
+		return false
+	end
+	Sleep(U1.settle_time)                          -- 15 s is the MEASURED-sufficient datum
+	speed = speed or 3
+	local before = GetTimeFactor() / const.DefaultTimeFactor
+	local ok = pcall(function() UIColony:SetGameSpeed(speed) end)
+	Sleep(500)
+	local after = GetTimeFactor() / const.DefaultTimeFactor
+	say(fmt("READ speed: SetGameSpeed(%d) call=%s | before=%s after=%s",
+		speed, tostring(ok), tostring(before), tostring(after)))
+	return true
+end
+
+---- the SAVE primitive ------------------------------------------------------
+--
+-- SaveGame(display_name, params) — CommonLua/Savegame.lua:1071. Src-verified
+-- 2026-08-04 (chain prompt 1), never executed by us before this chain:
+--   * plain global, and NOT a key of ModEnvBlacklist
+--     (CommonLua/Classes/Mod.lua:1267-1428, re-derived this session);
+--   * it YIELDS — WaitRenderMode("ui") at :1079, DoSaveGame's WaitChangeMapDone
+--     / WaitSaveGameDone at :1038-1039, and Savegame._WrappedSave (= _Wrap of
+--     _InternalSave, :874) which does WaitThread → CreateRealTimeThread →
+--     WaitThread (:337-344). It must therefore be called from a REAL-TIME
+--     thread, exactly as LoadGame had to be (corun-rig S2);
+--   * params.savename routes to Savegame.WithName (:1051 → :895), bypassing
+--     _UniqueName, so the filename on disk is EXACTLY what we pass. Both
+--     WithName and WithTag set params.backup = false (:908/:890) — no .bak;
+--   * params.silent skips LoadingScreenOpen/Close (:1075-1077, :1088-1090) —
+--     required by chain rule 13, an unattended run may not raise a screen it
+--     cannot dismiss;
+--   * params.no_screenshot skips the scene render-mode round trip
+--     (:1010-1023);
+--   * ⛔ params.save_as_last is NEVER passed: it writes LocalStorage.last_save
+--     (:1057-1059), i.e. it would repoint the owner's Continue button at our
+--     throwaway file. This is a do-no-harm hazard, not a preference.
+--
+-- Returns true only if the file is afterwards visible to
+-- Savegame.ListForTag("savegame") (= _Wrap(_InternalListForTag), :941/:469;
+-- the tag is parsed back OUT of the filename by ^.*%.([%w_]+)%.sav$ at :477,
+-- which is why every throwaway name must end ".savegame.sav").
+
+local function list_saves()
+	local sg = rawget(_G, "Savegame")
+	if type(sg) ~= "table" or type(sg.ListForTag) ~= "function" then
+		return nil, "Savegame.ListForTag unavailable"
+	end
+	local err, list = sg.ListForTag("savegame")
+	if err then return nil, tostring(err) end
+	return list or {}
+end
+U1.ListSaves = list_saves
+
+local function has_save(list, savename)
+	for _, e in ipairs(list or empty_table) do
+		if e.savename == savename then return true end
+	end
+	return false
+end
+U1.HasSave = has_save
+
+-- savename MUST end in ".savegame.sav".
+function U1.Save(savename, display)
+	if type(rawget(_G, "SaveGame")) ~= "function" then
+		say("SAVEFAIL SaveGame is not a function in this environment — the primitive is env-blacklisted after all")
+		return false
+	end
+	local before, lerr = list_saves()
+	if not before then
+		say("SAVEFAIL cannot list saves: " .. tostring(lerr))
+		return false
+	end
+	if has_save(before, savename) then
+		say(fmt("SAVEFAIL %s already exists before we wrote it — refusing to overwrite anything", savename))
+		return false
+	end
+	say(fmt("SAVE writing %s (%d savegame-tagged files before)", savename, #before))
+	local err, name = SaveGame(display or savename, {
+		savename     = savename,
+		silent       = true,
+		no_screenshot = true,
+	})
+	say(fmt("SAVE returned err=%s name=%s", tostring(err), tostring(name)))
+	if err then return false end
+	local after = list_saves()
+	local seen = has_save(after, savename)
+	say(fmt("SAVE listed-after=%s (%d savegame-tagged files after)", tostring(seen), #(after or empty_table)))
+	if not seen then return false end
+	U1.save_proven = true
+	return true
+end
+
+---- watchdog + flow ---------------------------------------------------------
+--
+-- The payload file sets U1.watchdog and U1.Payload, then calls U1.Flow().
+
+function U1.Flow()
+	CreateRealTimeThread(function()
+		local deadline = RealTime() + U1.watchdog
+		while U1.stage ~= "done" do
+			if RealTime() - deadline >= 0 then
+				say("WATCHDOG TIMEOUT at stage " .. tostring(U1.stage))
+				local flush = rawget(_G, "FlushLogFile")
+				if flush then flush() end
+				Sleep(1000)
+				quit()
+				return
+			end
+			Sleep(1000)
+		end
+	end)
+
+	say(fmt("=== unattended-1 %s === watchdog %dms", tostring(U1.tag), U1.watchdog))
+
+	if not step("1-waiting-menu", function()
+		if not wait_for(U1.menu_timeout, function() return not not GetPreGameMainMenu() end) then
+			return false
+		end
+		Sleep(2000)
+	end) then return end
+
+	local ok = sprocall(U1.Payload)
+	if not ok then
+		say("PAYLOAD ERROR at stage " .. tostring(U1.stage))
+		shutdown("ERROR payload")
+		return
+	end
+	shutdown("done")
+end
+
+---- shared readers ----------------------------------------------------------
+--
+-- Every one of these PRINTS and RETURNS. The printed line is the record; the
+-- return value is what a payload compares across loads. Each reader states its
+-- own APPLICABLE verdict, because a count of 0 taken where the condition does
+-- not exist is an UNSAMPLED condition, not a negative result.
+
+-- Run-conditions header (WORKFLOW EXTERNAL VALIDITY rule). Pack count is READ,
+-- never assumed — the owner's campaign runs every opt-in ON, which is not
+-- default config.
+function U1.ReadConditions(note)
+	local pack = rawget(_G, "SMRFixPack")
+	local active, total, inactive = 0, 0, {}
+	if pack and pack.order then
+		for _, id in ipairs(pack.order) do
+			total = total + 1
+			local f = pack.fixes and pack.fixes[id]
+			local st = f and f.status or "missing"
+			if st == "active" then active = active + 1 else inactive[#inactive + 1] = id .. "=" .. st end
+		end
+	end
+	say(fmt("CONDITIONS pack=%d/%d active | map=%s | speed=%s | loads_this_process=%d | note=%s",
+		active, total, tostring(rawget(_G, "CurrentMapName")),
+		tostring(GetTimeFactor() / const.DefaultTimeFactor), U1.loads, tostring(note or "-")))
+	if #inactive > 0 then
+		say("CONDITIONS not-active: " .. table.concat(inactive, ", "))
+	end
+	return active, total
+end
+
+-- H1 — Fix_AstrogeologistExtractors (F92). The 2026-08-02 defect was an
+-- identity test that missed on every load and re-applied: 1 modifier became 2
+-- after one save+reload, i.e. +20% instead of +10%. So the number that matters
+-- is the COUNT of colony label modifiers per label, not the presence of one.
+function U1.ReadHealAstro()
+	local colony = rawget(_G, "UIColony")
+	local mods = colony and colony.label_modifiers
+	local get_profile = rawget(_G, "GetCommanderProfile")
+	local profile = type(get_profile) == "function" and get_profile() or nil
+	local pid = type(profile) == "table" and profile.id or "none"
+	if type(mods) ~= "table" then
+		say("HEAL H1 astro: NOT-APPLICABLE (no UIColony.label_modifiers)")
+		return nil
+	end
+	local total, detail = 0, {}
+	for label, by_id in pairs(mods) do
+		local all = 0
+		for _ in pairs(by_id or empty_table) do all = all + 1 end
+		if all > 0 then
+			total = total + all
+			detail[#detail + 1] = fmt("%s=%d", tostring(label), all)
+		end
+	end
+	table.sort(detail)
+	say(fmt("HEAL H1 astro: commander_profile=%s | colony label_modifier counts: %s | TOTAL=%d",
+		tostring(pid), table.concat(detail, " "), total))
+	return total, table.concat(detail, " ")
+end
+
+-- H2 — Fix_SaintBlessing (F95). Dome-side label modifiers keyed by colonist.
+function U1.ReadHealSaint()
+	local domes = U1.LabelAll("Dome")
+	local total, with_mods = 0, 0
+	for _, dome in ipairs(domes) do
+		local by_label = dome.label_modifiers
+		if type(by_label) == "table" then
+			local n = 0
+			for _, by_id in pairs(by_label) do
+				for _ in pairs(by_id or empty_table) do n = n + 1 end
+			end
+			if n > 0 then with_mods = with_mods + 1 end
+			total = total + n
+		end
+	end
+	say(fmt("HEAL H2 saint: %d dome(s), %d carrying label modifiers, %d modifier(s) total | APPLICABLE=%s",
+		#domes, with_mods, total, tostring(#domes > 0)))
+	return total
+end
+
+-- H3 — Fix_DustSicknessBiorobots. The heal clears the state, so a second load
+-- must find nothing left to clear.
+function U1.ReadHealBiorobots()
+	local n, sick = 0, 0
+	local each = rawget(_G, "AllMapsForEach")
+	if type(each) ~= "function" then
+		say("HEAL H3 biorobots: NOT-APPLICABLE (AllMapsForEach unavailable)")
+		return nil
+	end
+	each(true, "Colonist", function(c)
+		if not IsValid(c) then return end
+		local traits = c.traits
+		if type(traits) == "table" and traits.Android then
+			n = n + 1
+			if traits.DustSickness or c.dust_sickness then sick = sick + 1 end
+		end
+	end)
+	say(fmt("HEAL H3 biorobots: %d biorobot(s), %d carrying Dust Sickness | APPLICABLE=%s", n, sick, tostring(n > 0)))
+	return sick, n
+end
+
+-- H4 — Opt_MultipleSuns. Solar panels reconnected to an Artificial Sun.
+function U1.ReadHealSuns()
+	local suns = U1.LabelAll("ArtificialSun")
+	local panels = U1.LabelAll("SolarPanel")
+	say(fmt("HEAL H4 suns: %d ArtificialSun(s), %d SolarPanel(s) | APPLICABLE=%s",
+		#suns, #panels, tostring(#suns > 0)))
+	return #suns, #panels
+end
+
+-- H5 — Fix_MeteorFrequency (F88). The latch is a GameVar and therefore lives IN
+-- THE SAVE: after one healed load and a save, a reload must find it already set
+-- and must NOT print the heal line again. That is the whole F88 repair, and it
+-- is the only family here that is applicable on every save unconditionally.
+function U1.ReadHealMeteorLatch()
+	local latch = rawget(_G, "SMRFixPack_MeteorLatch")
+	local thread = rawget(_G, "Meteors")
+	local isvalid = rawget(_G, "IsValidThread")
+	local valid = type(isvalid) == "function" and tostring(isvalid(thread)) or "?"
+	say(fmt("HEAL H5 meteor latch: SMRFixPack_MeteorLatch=%s | global Meteors thread valid=%s | APPLICABLE=true",
+		tostring(latch), valid))
+	return tostring(latch), valid
+end
+
+-- H6 — Fix_RainsDeadlock (C34). Structure, not a count.
+function U1.ReadHealRains()
+	local rd = rawget(_G, "g_RainDisaster")
+	local threads = rawget(_G, "RainsDisasterThreads")
+	local n = 0
+	if type(threads) == "table" then for _ in pairs(threads) do n = n + 1 end end
+	say(fmt("HEAL H6 rains: g_RainDisaster=%s | RainsDisasterThreads=%s entries=%d | APPLICABLE=%s",
+		tostring(rd), type(threads), n, tostring(type(threads) == "table")))
+	return tostring(rd), n
+end
+
+function U1.ReadAllHeals(when)
+	say("HEAL SWEEP " .. tostring(when) .. " ----------------------------------------")
+	local astro_total, astro_detail = U1.ReadHealAstro()
+	local saint_total = U1.ReadHealSaint()
+	local bio_sick, bio_n = U1.ReadHealBiorobots()
+	local sun_n, panel_n = U1.ReadHealSuns()
+	local latch, thread_valid = U1.ReadHealMeteorLatch()
+	local rain_state, rain_n = U1.ReadHealRains()
+	return {
+		astro  = tostring(astro_total) .. "|" .. tostring(astro_detail),
+		saint  = tostring(saint_total),
+		bio    = tostring(bio_sick) .. "/" .. tostring(bio_n),
+		suns   = tostring(sun_n) .. "/" .. tostring(panel_n),
+		meteor = tostring(latch) .. "|" .. tostring(thread_valid),
+		rains  = tostring(rain_state) .. "|" .. tostring(rain_n),
+	}
+end
+
+-- Compares two ReadAllHeals() results and prints one verdict line per family.
+function U1.CompareHeals(a, b, label)
+	local keys = { "astro", "saint", "bio", "suns", "meteor", "rains" }
+	local changed = 0
+	for _, k in ipairs(keys) do
+		local same = a[k] == b[k]
+		if not same then changed = changed + 1 end
+		say(fmt("HEALDIFF %s %s: %s  [%s] -> [%s]", tostring(label), k,
+			same and "SAME" or "CHANGED", tostring(a[k]), tostring(b[k])))
+	end
+	say(fmt("HEALDIFF %s VERDICT: %d of 6 families changed (prediction: 0)", tostring(label), changed))
+	return changed
+end
+
+-- Leg A — PT-35 numbers. Reads only; the sanitizer calls are the payload's.
+function U1.ReadSanitizerNumbers()
+	local colony = rawget(_G, "UIColony")
+	local researched = colony and colony.IsTechResearched and colony:IsTechResearched("FrictionlessComposites")
+	local labels = { "WindTurbine", "WindTurbine_Large", "WindTurbine_Diffuser" }
+	local out = {}
+	for _, label in ipairs(labels) do
+		local by_id = (colony and type(colony.label_modifiers) == "table" and colony.label_modifiers[label]) or nil
+		local n, pct = 0, {}
+		for id, m in pairs(by_id or empty_table) do
+			if type(m) == "table" and m.prop == "electricity_production" then
+				n = n + 1
+				pct[#pct + 1] = fmt("%s:%s", tostring(id), tostring(m.percent))
+			end
+		end
+		table.sort(pct)
+		out[label] = fmt("%d[%s]", n, table.concat(pct, ","))
+		say(fmt("PT35 label %s: %d electricity_production modifier(s) [%s]", label, n, table.concat(pct, ",")))
+	end
+	local turbines = U1.LabelAll("WindTurbine_Large")
+	local tdetail = {}
+	for i, t in ipairs(turbines) do
+		if i > 3 then break end
+		tdetail[#tdetail + 1] = fmt("%s=%s", id_of(t), tostring(t.electricity_production))
+		say(fmt("PT35 LargeWindTurbine %s electricity_production=%s", id_of(t), tostring(t.electricity_production)))
+	end
+	local domes = U1.LabelAll("Dome")
+	local dome_mods = 0
+	for _, d in ipairs(domes) do
+		for _, by_id in pairs(d.label_modifiers or empty_table) do
+			for _ in pairs(by_id or empty_table) do dome_mods = dome_mods + 1 end
+		end
+	end
+	say(fmt("PT35 fixture: FrictionlessComposites researched=%s | %d Large Wind Turbine(s) | %d dome(s), %d dome label modifier(s)",
+		tostring(researched), #turbines, #domes, dome_mods))
+	out.turbines   = tostring(#turbines) .. "|" .. table.concat(tdetail, ",")
+	out.domes      = tostring(#domes)
+	out.dome_mods  = tostring(dome_mods)
+	out.researched = tostring(researched)
+	return out
+end
+
+function U1.CompareSanitizer(a, b, label)
+	local keys = { "WindTurbine", "WindTurbine_Large", "WindTurbine_Diffuser",
+		"turbines", "domes", "dome_mods", "researched" }
+	local changed = 0
+	for _, k in ipairs(keys) do
+		local same = a[k] == b[k]
+		if not same then changed = changed + 1 end
+		say(fmt("PT35DIFF %s %s: %s  [%s] -> [%s]", tostring(label), k,
+			same and "SAME" or "CHANGED", tostring(a[k]), tostring(b[k])))
+	end
+	say(fmt("PT35DIFF %s VERDICT: %d of %d readings changed (prediction: 0)", tostring(label), changed, #keys))
+	return changed
+end
+
+-- Legs B and C — the F99 residue read, in the exact shape the checklist rider
+-- wrote (PLAYTEST_CHECKLIST.md:724). a = tracks with an EMPTY element list;
+-- b = tracks with outstanding repair_cgs and nothing under construction left to
+-- clear them.
+function U1.ReadF99Residue(when)
+	local a, b = 0, 0
+	for _, c in ipairs(rawget(_G, "Cities") or empty_table) do
+		for _, t in ipairs((c.labels or empty_table).TrackBase or empty_table) do
+			if #(t.elements or empty_table) == 0 then a = a + 1 end
+			if t.repair_cgs and #t.repair_cgs > 0 and #(t.elements_under_construction or empty_table) == 0 then
+				b = b + 1
+			end
+		end
+	end
+	say(fmt("F99RESIDUE %d %d  (%s)", a, b, tostring(when)))
+	return a, b
+end
+
+-- Leg F — C42, ride-along. A stale entry is a unit in a passage element's
+-- `units` list whose own `holder` is something else.
+function U1.ReadC42()
+	local stale, elements, units, passages = 0, 0, 0, 0
+	for _, c in ipairs(rawget(_G, "Cities") or empty_table) do
+		for _, p in ipairs((c.labels or empty_table).Passage or empty_table) do
+			passages = passages + 1
+			for _, el in ipairs(p.elements or empty_table) do
+				elements = elements + 1
+				for _, u in ipairs(el.units or empty_table) do
+					units = units + 1
+					if u.holder ~= el then stale = stale + 1 end
+				end
+			end
+		end
+	end
+	say(fmt("C42STALE %d  | %d passage(s), %d element(s), %d unit entr(ies) | APPLICABLE=%s",
+		stale, passages, elements, units, tostring(passages > 0)))
+	return stale, passages, elements, units
+end
+
+-- Track fixture read (legs B and C need to know what is there before they act).
+function U1.ReadTracks()
+	local tracks = U1.LabelAll("TrackBase")
+	local els, broken, sites, candidates = 0, 0, 0, 0
+	for _, tr in ipairs(tracks) do
+		local list = tr.elements or empty_table
+		els = els + #list
+		sites = sites + #(tr.elements_under_construction or empty_table)
+		for _, el in ipairs(list) do
+			if el.broken then broken = broken + 1 end
+			-- BreakTracks' own filter, Meteors.lua:601: neither endpoint, no station
+			if el ~= tr.start_el and el ~= tr.end_el and not el.station and not el.broken then
+				candidates = candidates + 1
+			end
+		end
+	end
+	say(fmt("TRACKS %d track(s), %d element(s), %d already broken, %d repair site(s), %d break-candidate(s)",
+		#tracks, els, broken, sites, candidates))
+	return #tracks, candidates
+end
+
+-- Picks one element matching BreakTracks' own filter (Meteors.lua:601).
+function U1.PickBreakCandidate()
+	for _, tr in ipairs(U1.LabelAll("TrackBase")) do
+		for _, el in ipairs(tr.elements or empty_table) do
+			if el ~= tr.start_el and el ~= tr.end_el and not el.station and not el.broken then
+				return el, tr
+			end
+		end
+	end
+	return nil
+end
+
+-- Drone/repair fixture read — leg C's organic path needs drones and resources
+-- reachable from the track, and a leg that cannot say so has not sampled it.
+function U1.ReadDrones()
+	local drones = U1.LabelAll("Drone")
+	local hubs   = U1.LabelAll("DroneHub")
+	local rcs    = U1.LabelAll("RocketLanding")
+	local idle = 0
+	for _, d in ipairs(drones) do
+		if d.command == "Idle" then idle = idle + 1 end
+	end
+	say(fmt("DRONES %d drone(s) (%d idle), %d hub(s), %d rocket landing pad(s)",
+		#drones, idle, #hubs, #rcs))
+	return #drones, #hubs
+end
+
+---- entry point used by every payload file ----------------------------------
+
+function U1.Boot()
+	CreateRealTimeThread(function()
+		-- CreateRealTimeThread runs its body synchronously up to the first
+		-- yield, so this Sleep is what puts everything below after
+		-- ModsLoadCode().
+		Sleep(1)
+		if rawget(_G, "SMRTest_EnablePathLeg") then
+			say("standing down: 98_EnablePathLeg.lua drives this session")
+			return
+		end
+		U1.Flow()
+	end)
+end

@@ -1,0 +1,128 @@
+-- SMR Community Fix Pack — Test Kit :: unattended-1 CYCLE 3 — LEG B.  TEMPORARY
+--
+-- Declared by: unattended-1 chain prompt 1, for prompt 2. Armed with
+-- 97_U1Common.lua; both die in the commit that records this cycle's answers.
+--
+-- LEG B — the F99 residue read taken BEFORE any reload.
+--
+-- WHY THE LEG EXISTS. F99.md, "Severity, both directions": the F99RESIDUE 0 0
+-- reading that made F99 look harmless was taken AFTER a reload, and load runs
+-- SavegameFixups.RebuildBrokenTracksAndConnect (TrackElement.lua:824-837),
+-- which sweeps exactly what the probe looks for. So that zero measured the
+-- fixup, not the damage. This cycle stages the damage and reads it with no save
+-- and no load anywhere after the break.
+--
+-- ⚠️ DRIFT CORRECTION TO THIS CHAIN'S OWN README, recorded rather than applied
+--    silently (chain rule 5). The README's leg B says
+--    `CheatMeteors("single", nil, pos)` "because the meteor path is what
+--    populates repair_cgs (Meteors.lua:609)". The citation is right and the
+--    conclusion about repair_cgs is right, but the cheat is the wrong instrument
+--    for it. Read this session in 1.0.7.396349 Src:
+--      BaseMeteor:HitTracks (Meteors.lua:615-621) collects elements and calls
+--      the PLAIN GLOBAL BreakTracks(elements) (:599-613), and it is BreakTracks
+--      — not the meteor, not the disaster thread — that filters to elements
+--      which are neither start_el nor end_el and carry no station (:601), calls
+--      track:BreakTrackElement (:603), does table.insert(track.repair_cgs, cg)
+--      (:609) and fires Msg("TrackBroken", track, true) (:610).
+--    So BreakTracks({element}) IS the meteor's own track-breaking funnel with
+--    the lottery, the disaster thread and the collateral removed — WORKFLOW
+--    leg-design rule 2, and the same improvement co-run #1 made when it drove
+--    BreakTrackElement directly instead of CheatMeteors. The difference from
+--    co-run #1 matters here and is why this leg calls BreakTracks and not
+--    BreakTrackElement: BreakTrackElement alone does NOT populate repair_cgs,
+--    and repair_cgs is half of what this leg reads.
+--
+-- ⛔ FORCED vs ORGANIC (README rule 11). FORCED: the break, and the completion
+--    (CheatCompleteAllConstructions is the configuration under which all seven
+--    filed throws happened — reproducing it is the point of THIS leg).
+--    ORGANIC: nothing. This leg establishes RESIDUE, never reachability; leg C
+--    is the reachability discriminator and it is a different cycle for exactly
+--    that reason.
+--
+-- MUTATING LEG — one load, no save, no reload. The staged copy on disk is never
+-- written; the mutation dies with the process.
+
+U1 = rawget(_G, "U1") or {}
+U1.tag       = "U1C3"
+U1.watchdog  = 6 * 60 * 1000      -- 3x the ~1.7 min prediction; also >= the 60 s site wait + overhead
+U1.save_file = "U1STAGE.savegame.sav"
+
+function U1.Payload()
+	local say, fmt, step = U1.Say, U1.Fmt, U1.Step
+	local target_el, target_track
+
+	if not step("2-load-staged", function() return U1.Load(U1.save_file, 3) end, true) then return end
+
+	if not step("B0-baseline", function()
+		U1.ReadConditions("leg B, cold load — before any break")
+		U1.ReadTracks()
+		U1.ReadF99Residue("B0 baseline, nothing broken yet")
+	end) then return end
+
+	if not step("B1-pick", function()
+		target_el, target_track = U1.PickBreakCandidate()
+		if not target_el then
+			say("LEG B SKIP — no track element matches BreakTracks' own filter (neither endpoint, no station, not already broken). This is a fixture failure, not a result: route it as a gap, do not re-choose the save.")
+			return false
+		end
+		say(fmt("B1 TARGET element=%s track=%s | track elements=%d repair_cgs=%d under_construction=%d",
+			U1.IdOf(target_el), U1.IdOf(target_track),
+			#(target_track.elements or empty_table),
+			#(target_track.repair_cgs or empty_table),
+			#(target_track.elements_under_construction or empty_table)))
+	end) then return end
+
+	if not step("B2-break", function()
+		local bt = rawget(_G, "BreakTracks")
+		if type(bt) ~= "function" then
+			say("LEG B ABORT — BreakTracks is not reachable from this environment. Record verbatim and route; do not substitute CheatMeteors, which would add a disaster thread this leg deliberately removed.")
+			return false
+		end
+		say("B2 FORCED: BreakTracks({element}) — the meteor's own funnel, lottery removed")
+		local ok = pcall(bt, { target_el })
+		Sleep(3000)
+		say(fmt("B2 break call ok=%s | element broken=%s | track repair_cgs=%d under_construction=%d",
+			tostring(ok), tostring(target_el.broken),
+			#(target_track.repair_cgs or empty_table),
+			#(target_track.elements_under_construction or empty_table)))
+		U1.ReadF99Residue("B2 after the break, before any completion")
+	end) then return end
+
+	if not step("B3-settle-site", function()
+		-- The repair site must actually exist before the cheat can complete it.
+		local ok = U1.WaitFor(60 * 1000, function()
+			return #(target_track.elements_under_construction or empty_table) > 0
+		end)
+		say(fmt("B3 repair site present=%s after wait | under_construction=%d",
+			tostring(ok), #(target_track.elements_under_construction or empty_table)))
+		if not ok then
+			say("LEG B NOTE — no repair site appeared within 60 s. The completion step below will have nothing to complete; record that and let it run anyway, the residue read is still meaningful.")
+		end
+	end) then return end
+
+	if not step("B4-complete", function()
+		local cheat = rawget(_G, "CheatCompleteAllConstructions")
+		if type(cheat) ~= "function" then
+			say("LEG B ABORT — CheatCompleteAllConstructions unreachable. Record verbatim and route.")
+			return false
+		end
+		say("B4 FORCED: CheatCompleteAllConstructions() — ⛔ EVERY [LUA ERROR] BETWEEN THIS MARKER AND THE NEXT BELONGS TO THIS CALL")
+		local ok = pcall(cheat)
+		Sleep(5000)
+		say(fmt("B4 completion call ok=%s — ⛔ END OF THE COMPLETION WINDOW", tostring(ok)))
+	end) then return end
+
+	if not step("B5-residue", function()
+		say("B5 THE READING THIS LEG EXISTS FOR — taken with NO save and NO load anywhere after the break, so RebuildBrokenTracksAndConnect (TrackElement.lua:824-837) has not run.")
+		local a, b = U1.ReadF99Residue("B5 PRE-RELOAD residue")
+		U1.ReadTracks()
+		say(fmt("B5 SUMMARY a=%d husk track(s) with an empty element list | b=%d track(s) with outstanding repair_cgs and nothing under construction to clear them",
+			a, b))
+		say("B5 ⛔ WHAT THIS CANNOT SAY: nothing about reachability. One break, one completion, under the cheat. A non-zero b is residue the reload would have hidden; a zero b is a rate bound on ONE forced break in this configuration, not evidence of no damage.")
+	end) then return end
+
+	U1.ErrorWatchNote()
+	say("=== cycle 3 (leg B) complete ===")
+end
+
+U1.Boot()

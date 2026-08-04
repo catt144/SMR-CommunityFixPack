@@ -1,0 +1,107 @@
+-- SMR Community Fix Pack — Test Kit :: unattended-1 CYCLE 1 — LEG D1.  TEMPORARY
+--
+-- Declared by: unattended-1 chain prompt 1, for prompt 2. Armed with
+-- 97_U1Common.lua; both die in the commit that records this cycle's answers.
+--
+-- LEG D1 — THE LOAD-HEAL ROUND-TRIP SWEEP, natural-state half.
+--
+-- ⛔ RE-DERIVED, NOT INHERITED. CHAIN_QA_REPORT.md §9 item 2 says only "save,
+--    reload twice, read the numbers (Astrogeologist +10% class of defect)" and
+--    assumed the OWNER drove it on the owner's own campaign. Re-derived from
+--    the code the entries point at, in rig terms, 2026-08-04:
+--
+--    WHICH LINES PRINT ON LOAD. Only six pack modules print a heal line from a
+--    load handler, and every one of them prints ONLY when it actually healed
+--    something (`if healed > 0 then log(...)`). So silence is a result, not an
+--    absence of instrumentation:
+--      H1 Fix_AstrogeologistExtractors  "applied %d Astrogeologist extractor
+--                                        bonus(es) this save started without"
+--                                        / "removed %d duplicate extractor
+--                                        modifier(s) left by the identity-keyed
+--                                        heal"          (OnMsg.LoadGame :174)
+--      H2 Fix_SaintBlessing             "re-based %d dome blessing(s)"  (:151)
+--      H3 Fix_DustSicknessBiorobots     "cleared Dust Sickness from %d
+--                                        Biorobot(s)"                  (:167)
+--      H4 Opt_MultipleSuns              "reconnected %d solar panel(s)" (:206)
+--      H5 Fix_MeteorFrequency           "one-shot heal ... (latch %s -> %s)"
+--                                        (OnMsg.PostLoadGame :164)
+--      H6 Fix_RainsDeadlock             C34 structure-repair + migration lines
+--                                        (OnMsg.PostLoadGame :210)
+--    90_SaveSanitizer (F35/F03) prints NOTHING from PostLoadGame unless a pass
+--    throws — it is leg A's subject, driven directly, not watched here.
+--
+--    ON WHICH LOADS THEY MUST APPEAR ONCE AND THEN NOT REPEAT. Every one of
+--    these heals writes PERSISTED state (colony/dome label_modifiers, colonist
+--    traits, the SMRFixPack_MeteorLatch GameVar, the rains structures). So a
+--    heal that fires on load 1 must be IN the save we write immediately after,
+--    and loads 2 and 3 of that saved file must print nothing. A line that
+--    reappears on load 2 or 3 is the defect — it is exactly F92's shape
+--    (identity test misses on every load, 1 modifier becomes 2 after one
+--    save+reload) and exactly F88's shape (unlatched restart on every load).
+--
+--    WHAT NUMBERS GET COMPARED. Not the lines — the counts behind them, read
+--    identically at every load by U1.ReadAllHeals(). Prediction: every family
+--    identical across loads 1, 2 and 3, and no heal line after load 1.
+--
+--    THE HONEST LIMIT, STATED BEFORE ANY NUMBER IS QUOTED. A family whose
+--    condition does not exist on this save is UNSAMPLED, not refuted. Each
+--    reader prints its own APPLICABLE verdict for that reason. Cycle 6 (leg D2)
+--    is what turns unsampled families into sampled ones, by forcing the defect
+--    state; this cycle measures the save as it actually is.
+--
+-- ⚠️ Requires the SAVE primitive. If cycle 0's proof did not pass, this cycle
+--    is not run at all — leg D becomes a routed gap (README stop condition 1).
+
+U1 = rawget(_G, "U1") or {}
+U1.tag        = "U1C1"
+U1.watchdog   = 6 * 60 * 1000     -- 3x the ~1.7 min prediction, 6 min floor
+U1.save_file  = "U1STAGE.savegame.sav"
+U1.round_save = "U1C1HEAL.savegame.sav"
+
+function U1.Payload()
+	local say, fmt, step = U1.Say, U1.Fmt, U1.Step
+	local r1, r2, r3
+
+	if not step("2-load-1-staged", function() return U1.Load(U1.save_file, 3) end, true) then return end
+
+	if not step("D1-read-load-1", function()
+		U1.ReadConditions("leg D1, load 1 — cold load of the staged copy")
+		r1 = U1.ReadAllHeals("load 1 (cold, staged copy)")
+	end) then return end
+
+	if not step("D1-save", function()
+		if not U1.Save(U1.round_save, "U1C1HEAL") then
+			say("LEG D1 ABORT — the save primitive failed here even though cycle 0 proved it. Record this verbatim: it is an unforeseen-issue finding, not a leg result.")
+			return false
+		end
+	end, true) then return end
+
+	if not step("3-load-2-roundtrip", function() return U1.Load(U1.round_save, 3) end, true) then return end
+
+	if not step("D1-read-load-2", function()
+		U1.ReadConditions("leg D1, load 2 — first reload of the round-trip save")
+		r2 = U1.ReadAllHeals("load 2 (first reload)")
+		U1.CompareHeals(r1, r2, "load1->load2")
+	end) then return end
+
+	if not step("4-load-3-roundtrip", function() return U1.Load(U1.round_save, 3) end, true) then return end
+
+	if not step("D1-read-load-3", function()
+		U1.ReadConditions("leg D1, load 3 — second reload of the same file")
+		r3 = U1.ReadAllHeals("load 3 (second reload)")
+		U1.CompareHeals(r2, r3, "load2->load3")
+		U1.CompareHeals(r1, r3, "load1->load3")
+	end) then return end
+
+	if not step("D1-verdict", function()
+		say("LEG D1 READING COMPLETE. The verdict is assembled by prompt 2 from THREE things, and all three must be quoted together:")
+		say("  1. the three HEALDIFF VERDICT lines above (prediction: 0 families changed on each);")
+		say("  2. every pack heal line in this log, WITH the load it followed — a heal line after load 2 or load 3 is the defect;")
+		say("  3. each family's APPLICABLE verdict — a family that read NOT-APPLICABLE was not sampled and must be reported as unsampled, never as clean.")
+	end) then return end
+
+	U1.ErrorWatchNote()
+	say("=== cycle 1 (leg D1) complete ===")
+end
+
+U1.Boot()

@@ -15,7 +15,7 @@ knowledge.** Model placement lives in the filenames; bodies are model-neutral.
 
 | # | file | model | owner needed? | what it drains |
 |---|------|-------|---------------|----------------|
-| 1 | `01_OPUS_PREP.md` | Opus | No | Re-scopes the load-heal sweep in rig terms; Src-verifies + bins the SAVE primitive; authors every probe as parked source; predictions + abort thresholds per leg; fixture confirm-list |
+| 1 | ~~`01_OPUS_PREP.md`~~ **DONE 2026-08-04, file consumed** | Opus | No | ✅ SAVE primitive BINNED (Src-verified, deletion route decided agent-side) · leg D re-derived and **split into D1 natural / D2 forced-defect** · **8 parked sources, parse sweep GREEN** (`97_U1Common` + `98_U1C0..C6`) · 7-cycle plan with predictions + 3× watchdogs · run-conditions template + per-leg falsifiers · 3 drift corrections in the open · 1 decision routed to the checklist. Handoff: `02_OPUS_RUN.md` "Notes from upstream" |
 | 2 | `02_OPUS_RUN.md` | Opus | **Kickoff word only** (machine must be free; no sitting) | Executes all legs across launch cycles; proves the save primitive FIRST; records with run-conditions headers; archives logs; flips the two `[NEVER RUN]` markers |
 | 3 | `03_FABLE_AUDIT.md` | Fable | No (routes decisions) | Adversarial audit vs archived logs; the unforeseen-issues report (the run's second product); integration; folder empty |
 
@@ -26,10 +26,22 @@ knowledge.** Model placement lives in the filenames; bodies are model-neutral.
   primitive and a fixture confirm (Large Wind Turbine + upgraded Medical
   Center in a dome — unverified on `TEST2H TRAIN`).
 - **Leg B — F99 residue BEFORE a reload** (checklist rider, superseded
-  TAKEABLE-WHEN). Meteor at a track (`CheatMeteors("single", nil, pos)` —
-  the meteor path is what populates `repair_cgs`, `Meteors.lua:609`), then
+  TAKEABLE-WHEN). Break a track element, then
   `CheatCompleteAllConstructions()`, watch for `TrackElement.lua:805`, take
   the F99RESIDUE read **before any save/load**.
+  ⚠️ **Instrument corrected 2026-08-04 by prompt 1 (chain rule 5).** This
+  bullet said `CheatMeteors("single", nil, pos)` "because the meteor path is
+  what populates `repair_cgs`, `Meteors.lua:609`". The citation and the
+  `repair_cgs` point stand; the instrument does not. `BaseMeteor:HitTracks`
+  (`:615-621`) just collects elements and calls the **plain global**
+  `BreakTracks(elements)` (`:599-613`) — and it is `BreakTracks` that filters
+  to neither-endpoint/no-station (`:601`), calls `BreakTrackElement` (`:603`),
+  does `table.insert(track.repair_cgs, cg)` (`:609`) and fires
+  `Msg("TrackBroken", track, true)` (`:610`). So `BreakTracks({element})` is
+  the meteor's own funnel with the lottery, the disaster thread and the
+  collateral removed (WORKFLOW leg-design rule 2) — and it is specifically
+  **not** co-run #1's bare `BreakTrackElement`, which does not populate
+  `repair_cgs`.
 - **Leg C — F99 no-cheat discriminator.** Forced break; **ORGANIC drone
   repair** at speed (the measured path — never completion-cheat it); watch
   for `:805` on the organic completion. ⚖️ The owner's kickoff of this chain

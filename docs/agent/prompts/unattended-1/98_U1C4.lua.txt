@@ -1,0 +1,134 @@
+-- SMR Community Fix Pack — Test Kit :: unattended-1 CYCLE 4 — LEG C.  TEMPORARY
+--
+-- Declared by: unattended-1 chain prompt 1, for prompt 2. Armed with
+-- 97_U1Common.lua; both die in the commit that records this cycle's answers.
+--
+-- LEG C — the F99 NO-CHEAT DISCRIMINATOR.
+--
+-- WHAT F99 ITSELF ASKS FOR ("What would settle it", F99.md:243-246): complete a
+-- track segment normally — drones, no cheat — on a track whose element list has
+-- been disturbed, and watch for the same line. A single no-cheat occurrence of
+-- TrackElement.lua:805 moves F99 off `cand`.
+--
+-- ⛔ THE RULE THAT DEFINES THIS LEG (README rule 11, WORKFLOW forced-vs-organic).
+--    FORCED: the break only — BreakTracks({element}), the meteor's own funnel
+--    with the lottery removed (see 98_U1C3's derivation).
+--    ORGANIC: the REPAIR. Drones must claim and finish the repair site by
+--    themselves, at speed. ⛔ CheatCompleteAllConstructions is NEVER called on
+--    this cycle — completing the path under test measures the forcing, not the
+--    game, and would destroy the leg outright.
+--
+-- AMPLIFICATION IS THE WHOLE POINT OF RUNNING IT ON THE RIG. The owner would
+-- get one break per sitting; this cycle runs the break/organic-repair loop up
+-- to U1.rounds times, each on a different element, and reports the count that
+-- actually completed organically. That count IS the sampled condition.
+--
+-- ⛔ WHAT THIS LEG MAY NOT CLAIM, WHATEVER IT FINDS.
+--    * Zero occurrences is a RATE BOUND on the configuration sampled — N
+--      organic repairs, on this save, on these tracks — never "unreachable",
+--      never "refuted". The condition must be reported as SAMPLED with its N.
+--    * A repair that never completes is an UNSAMPLED round, not a zero. The
+--      completed count and the attempted count are reported separately for
+--      exactly that reason.
+--    * The SEVERITY decision stays the owner's either way (F99 disposition,
+--      PLAYTEST_CHECKLIST "Decisions waiting on you"). This leg feeds it; it
+--      does not make it.
+--
+-- MUTATING LEG — one load, no save, no reload.
+
+U1 = rawget(_G, "U1") or {}
+U1.tag        = "U1C4"
+-- Budget arithmetic, stated so it can be checked rather than trusted: the
+-- watchdog must exceed the WORST case, not the prediction, or a slow run dies
+-- mid-leg and reports nothing. Worst case = 30 s cycle overhead + rounds x
+-- (3 s break + repair_wait) = 30 s + 4 x 4 min = 16.5 min. Prediction is
+-- ~6 min (a repair that is going to happen at speed 20 happens in well under a
+-- minute of real time); watchdog is 3x that AND above the worst case.
+U1.watchdog    = 18 * 60 * 1000   -- 3x the ~6 min prediction, and > the 16.5 min worst case
+U1.save_file   = "U1STAGE.savegame.sav"
+U1.rounds      = 4                -- break/repair attempts
+U1.repair_wait = 4 * 60 * 1000    -- per-round patience for the drones
+
+function U1.Payload()
+	local say, fmt, step = U1.Say, U1.Fmt, U1.Step
+	local attempted, completed, timed_out = 0, 0, 0
+
+	if not step("2-load-staged", function() return U1.Load(U1.save_file, 20) end, true) then return end
+
+	if not step("C0-baseline", function()
+		U1.ReadConditions("leg C, cold load — speed 20, before any break")
+		U1.ReadTracks()
+		U1.ReadF99Residue("C0 baseline")
+		local n, hubs = U1.ReadDrones()
+		if n == 0 or hubs == 0 then
+			say("LEG C FIXTURE FAILURE — no drones and/or no hub. An ORGANIC repair cannot happen, so every round below would be unsampled. Prompt 2 records SKIP <no drones/hub reachable> and routes the gap; it does NOT substitute a cheat completion.")
+			return false
+		end
+	end) then return end
+
+	for round = 1, U1.rounds do
+		local el, track
+		local label = "C" .. tostring(round)
+
+		if not step(label .. "-pick", function()
+			el, track = U1.PickBreakCandidate()
+			if not el then
+				say(fmt("%s no break candidate left — stopping the loop after %d attempt(s)", label, attempted))
+				return
+			end
+			say(fmt("%s TARGET element=%s track=%s elements=%d repair_cgs=%d",
+				label, U1.IdOf(el), U1.IdOf(track), #(track.elements or empty_table),
+				#(track.repair_cgs or empty_table)))
+		end) then return end
+
+		if not el then break end
+
+		if not step(label .. "-break", function()
+			local bt = rawget(_G, "BreakTracks")
+			if type(bt) ~= "function" then
+				say("LEG C ABORT — BreakTracks unreachable. Record verbatim and route.")
+				return false
+			end
+			attempted = attempted + 1
+			say(fmt("%s FORCED: BreakTracks({element}) — ⛔ ORGANIC WINDOW OPENS AFTER THIS LINE; any [LUA ERROR] until the CLOSE marker happened with NO cheat on the stack", label))
+			pcall(bt, { el })
+			Sleep(3000)
+			say(fmt("%s broken=%s | under_construction=%d", label, tostring(el.broken),
+				#(track.elements_under_construction or empty_table)))
+		end) then return end
+
+		if not step(label .. "-organic-repair", function()
+			-- Done when the track has nothing under construction any more AND the
+			-- element is no longer flagged broken. Polled, never forced.
+			local ok = U1.WaitFor(U1.repair_wait, function()
+				return #(track.elements_under_construction or empty_table) == 0 and not el.broken
+			end)
+			if ok then
+				completed = completed + 1
+				say(fmt("%s ORGANIC REPAIR COMPLETED by drones — no cheat was called", label))
+			else
+				timed_out = timed_out + 1
+				say(fmt("%s ORGANIC REPAIR DID NOT COMPLETE within %dms — this round is UNSAMPLED, not a zero. under_construction=%d broken=%s",
+					label, U1.repair_wait,
+					#(track.elements_under_construction or empty_table), tostring(el.broken)))
+			end
+			say(fmt("%s ⛔ ORGANIC WINDOW CLOSES", label))
+			U1.ReadF99Residue(label .. " after the organic round")
+		end) then return end
+	end
+
+	if not step("C-verdict", function()
+		U1.ReadTracks()
+		local a, b = U1.ReadF99Residue("C final, pre-reload")
+		say(fmt("LEG C SAMPLED CONDITION: %d break(s) forced, %d repaired ORGANICALLY to completion, %d timed out (unsampled). Final residue a=%d b=%d.",
+			attempted, completed, timed_out, a, b))
+		say("LEG C ⛔ THE ONLY TWO SENTENCES PROMPT 2 MAY WRITE FROM THIS:")
+		say("  if TrackElement.lua:805 appears inside an ORGANIC WINDOW above -> F99 has a no-cheat occurrence; it moves off `cand`; severity is still the owner's.")
+		say("  if it does not -> zero occurrences across the N ORGANIC completions named above, on this save, in this configuration. That is a rate bound with its condition stated. It is NOT a refutation and NOT evidence of unreachability.")
+	end) then return end
+
+	U1.ErrorWatchNote()
+	say("=== cycle 4 (leg C) complete ===")
+end
+
+U1.Boot()

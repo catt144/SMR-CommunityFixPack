@@ -49,6 +49,25 @@ these used to be filed only in agent reports, which is where you never read.
     picker opened.** ⛔ **The picker still appeared 52 times out of 52**, so the
     "icon does not appear" symptom did *not* reproduce: this is a mechanism,
     not a confirmation, and `C41` stays `cand`.
+- ⭐ **DECISION FOR YOU, CHEAP AND CONDITIONAL: may the load-heal sweep use a
+  COPY of your CAMPAIGN save if `TEST2H TRAIN` turns out to have nothing to
+  measure?** (routed 2026-08-04 by `unattended-1` prompt 1; ⛔ **no attendance
+  either way — this is a save-choice question, not an eyes question.**) The
+  sweep checks that the pack's six load-time heal passes fire **once** and then
+  never repeat across reloads; two of the heals actually tested so far were
+  defective, which is why it is on the Do-first list. The catch the old design
+  could not see: those heals only *have* something to heal on a save that
+  carries the condition — an Astrogeologist commander, a Saint in a dome,
+  biorobots, Artificial Suns. **`TEST2H TRAIN` may carry none of them**, in
+  which case the reading is six *unsampled* families, not six clean ones, and I
+  will say so rather than dress it up. Your campaign save (81/81, long-running)
+  almost certainly carries several. **Cost to you: nothing** — the run stages a
+  COPY, game closed, your file is never written, the copy dies in the recording
+  commit (the same discipline that left `TEST2H TRAIN` byte-identical after
+  co-run #1). **If you do not answer before the run reaches that cycle, it goes
+  ahead on `TEST2H TRAIN`** and reports the unsampled families as unsampled; a
+  second forced-defect cycle samples the two families that can be forced without
+  your save either way. → `agent/prompts/unattended-1/02_OPUS_RUN.md` §2, §8.
 - ⭐⭐ **DECISION FOR YOU: adopt the co-run sign-off tiers?** (routed 2026-08-04
   by the corun-rig chain's terminal prompt — this changes sign-off policy,
   which is yours, so **nothing changes until you say so**.) The problem it

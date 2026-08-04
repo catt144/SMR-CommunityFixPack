@@ -8,12 +8,12 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 
 ## Where the project is
 
-✅✅ **The 18-prompt project chain is COMPLETE (2026-08-03)**; the playtest
-campaign is the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first**
-(verdict · doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig chain CLOSED
-2026-08-04** — rig PROVEN (~30 s fixed + payload; owner ~8 min vs ~25–30
-promised), tiers ROUTED, rule-5 recheck DONE-STANDS (SESSION_LOG). ⭐ **NEXT:
-`unattended-1` chain BUILT (`agent/prompts/`) — 3 prompts, awaiting KICKOFF.**
+✅✅ **18-prompt project chain COMPLETE (2026-08-03)**; the playtest campaign is
+the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first** (verdict ·
+doctrine HOLDS · §9 ordered top). ⭐⭐ **corun-rig chain CLOSED 2026-08-04** —
+rig PROVEN (~30 s fixed + payload; owner ~8 min vs ~25–30 promised), tiers
+ROUTED, rule-5 recheck DONE-STANDS. ⭐ **NEXT: `unattended-1` prep DONE
+2026-08-04 (8 parked probes, 7-cycle plan) — `02_OPUS_RUN.md` awaits KICKOFF.**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
