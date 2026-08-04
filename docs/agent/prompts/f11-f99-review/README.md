@@ -16,7 +16,7 @@ fixing it."* This chain may **not** re-open that. What it may decide is the
 
 | # | file | model | owner needed? | what it drains |
 |---|------|-------|---------------|----------------|
-| 1 | `01_OPUS_RESET_THE_THEORY.md` | **Opus** | **NO — unattended** | Independent re-derivation of both findings from primary sources, sealed from the 2026-08-03 write-ups until its own derivation is committed |
+| ~~1~~ | ~~`01_OPUS_RESET_THE_THEORY.md`~~ | ~~Opus~~ | — | ✅ **DRAINED 2026-08-03.** Derivation committed sealed (`28c253f`) then diffed; verdicts, 8 disagreements and one self-reversal in prompt 2's `## Notes from upstream`; working kept as `DERIVATION.md`. ⛔ **The seal could not be held** — chain rule 1 and `CLAUDE.md`'s mandatory STATE.md read both hand over sealed material before the prompt is opened; attested in full and owed to `CHAIN_METHOD.md`. Filed `C42`, `C43`, two riders |
 | 2 | `02_FABLE_QA_AND_BUILD.md` | **Fable** | **NO — unattended** | Audits prompt 1, adjudicates, builds the F11 conversion or declines it, decides F99's disposition, empties this folder |
 
 ⭐ **Model placement ASSIGNED BY THE OWNER, 2026-08-03** (`CHAIN_METHOD.md` §4.0

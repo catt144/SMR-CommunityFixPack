@@ -64,6 +64,25 @@ these used to be filed only in agent reports, which is where you never read.
   cheap discriminator is one no-cheat track completion on a disturbed element
   list — say the word and it becomes a rider; otherwise it stays `cand`.
   → `docs/agent/bugs/F99.md`.
+- ⚠️ **CORRECTION to the line above, and it cuts both ways.** The second-opinion
+  chain re-read the log: **the count is 7, not 14** — the 14 matching lines are
+  7 `[LUA ERROR]` headers each paired with a C-side `Error calling Lua function
+  "exec" from C` report of the same throw. The old figure is left standing above
+  rather than edited, per the drift-evidence rule. Two things the re-read also
+  found, pulling severity in opposite directions: the auto-connect work
+  **self-heals** (the queue entry is set one line *before* the throw and the
+  engine's own 500 ms repeater redoes it correctly), which makes it milder than
+  filed; but each throw escaped the console `exec`, so the rest of that cheat
+  pass never ran and `ResumeTerrainInvalidations` was skipped **seven times**.
+  Also new: the `if not self.broken` guard on the failing block **can never be
+  false** — the line above it already cleared the field. → `DERIVATION.md` in
+  `docs/agent/prompts/f11-f99-review/`, points 9-11.
+- **C43 — how do we stop the TestKit printing `[LUA ERROR]` into your logs?**
+  Two Wave-5 probes install stubs through `set_global`, which trips the engine's
+  strict-global guard on `IsNearDome` and `AddAreaRubble`; both probes then PASS,
+  so the cost is entirely two alarming lines in the log next to real errors.
+  ⚠️ **Second instance in one day** of the pack logging its own authoring noise
+  (F100 is the first). Three options on the entry. → `docs/agent/bugs/C43.md`.
 - **The C36-adjacent mysteries grep.** A cheap sweep of `Lua\Mysteries\` and
   `Scenario\` for `IsDisasterPredicted` gates, deliberately left unassigned:
   your call whether it becomes work at all. Not owed. → `CHAIN_QA_REPORT.md` §8.
@@ -451,6 +470,45 @@ working.
 **Setup:** note a Residence's capacity → stop the ministry (off, or cut power)
 → re-read the same Residence; then watch whether anyone was actually evicted
 (entry details, including why shift rotation will not trigger it).
+
+### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through
+**Bug:** `PassageBase:TraverseTunnel` ends with a raw `unit.holder = nil`
+(`Lua/Passage.lua:1055`), which skips the call that would remove the colonist
+from the last passage element's `units` list. If so, demolishing that passage
+later teleports uninvolved colonists to it and cancels what they were doing.
+⚠️ **Source-only and unobserved** — one link in the chain (`LeadIn` actually
+setting the holder) was not traced, and this read settles it. → [C42](agent/bugs/C42.md)
+**Requirements:** a Passage with traffic. Nothing else; no cheats, no save
+juggling.
+**Setup:** one console line, any time after some colonists have crossed —
+
+```
+*r local a=0 for _, c in ipairs(Cities) do for _, p in ipairs(c.labels.Passage or empty_table) do for _, el in ipairs(p.elements or empty_table) do for _, u in ipairs(el.units or empty_table) do if u.holder ~= el then a=a+1 end end end end end ConsolePrint(print_format("C42STALE", a))
+```
+
+**The counter can fail:** `0` refutes the entry outright and C42 gets closed;
+non-zero confirms the desync and the follow-up is to demolish that passage and
+watch whether an unrelated colonist teleports to it. Either way it is one line.
+
+### Rider — F99: re-read the track residue BEFORE a reload · Status: unrun — **TAKEABLE WHEN** the next sitting uses `CheatCompleteAllConstructions()` on a map with damaged track (meteor break or cave-in)
+**Bug:** the `F99RESIDUE 0 0` reading that made F99 look harmless was taken
+**after** a reload, and load runs `SavegameFixups.RebuildBrokenTracksAndConnect`,
+which sweeps exactly what the probe was looking for. The null result is
+therefore not evidence of no damage. → [F99](agent/bugs/F99.md)
+**Requirements:** the cheat, plus at least one outstanding repair group —
+`repair_cgs` is only ever populated by meteor strikes and disaster damage, so on
+a clean build-out there is nothing for the probe to find and `0 0` is
+guaranteed regardless.
+**Setup:** run the cheat, and if `TrackElement.lua:805` appears in the log,
+**read this before saving or loading anything**:
+
+```
+*r local a,b=0,0 for _, c in ipairs(Cities) do for _, t in ipairs(c.labels.TrackBase or empty_table) do if #(t.elements or empty_table) == 0 then a=a+1 end if t.repair_cgs and #t.repair_cgs > 0 and #(t.elements_under_construction or empty_table) == 0 then b=b+1 end end end ConsolePrint(print_format("F99RESIDUE", a, b))
+```
+
+**The counter can fail:** a non-zero `b` is a track stuck showing damage and
+refusing to be salvaged, and would move F99 off `cand` on the spot. Note the
+session uptime next to the count (the 2026-08-03 convention above).
 
 ### Rider — C39: Service Automation and the four Workshops · Status: unrun — take it when the law is enactable
 **Bug:** the law halves staffing by LABEL while its performance compensation
