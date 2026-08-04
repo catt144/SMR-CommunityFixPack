@@ -247,8 +247,17 @@ What changes your jobs:*
   committing and forgetting."* **You WILL be running `git` in that repo, and a
   `git add -A` there would silently absorb it into a co-run commit and destroy
   the evidence prompt 4 is being asked to weigh.** Stage the TestKit
-  explicitly by path, never with `-A`. If your `git status` there shows anything
-  BEYOND that one file, that is new drift — report it, do not tidy it.*
+  explicitly by path, never with `-A`. ⛔ **And never `git checkout --` /
+  `git restore` in that repo** — the change is 5 uncommitted lines with no
+  reflog behind them. If your `git status` there shows anything BEYOND that one
+  file, that is new drift — report it, do not tidy it.*
+- ***⚠️ LOG ROTATION IS AT THE LINE — your launches will push evidence out.***
+  The cap is ~20 files and the folder held **19** at the end of co-run #0. The
+  load-bearing MarsDebug log is already archived
+  (`docs/archive/corun0evidence_MarsDebug.exe-20260803-23.14.05.log`), but
+  **anything YOUR run needs must be archived in the commit that cites it**
+  (R8, `git add -f` — `.gitignore` line 2 eats `*.log` and a plain `git add`
+  drops it SILENTLY). Assume every launch you make evicts an older log.*
 - ***Not caused by our leg, reported anyway** (WORKFLOW's log rule): two
   `[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_
   idle.hgacl` / `_opening.hgacl` lines fire on every load of this map. They are

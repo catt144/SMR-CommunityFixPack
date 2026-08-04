@@ -255,6 +255,39 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
   `MarsDebug.exe-20260803-23.14.05`) plus a warning that the synthetic map throws
   modal asserts (`Flight.lua:465/:479`) that retail swallows.
 
+  ⭐ **THE EVIDENCE IS PRESERVED HERE, because none of it was safe where it
+  lived** (owner asked, 2026-08-04: *"we don't lose that evidence?"* — the answer
+  was **no, not yet**, and this block is the fix). Three things were exposed and
+  all three are now captured:
+  - **The change itself is 5 uncommitted lines.** A single `git checkout --` or
+    `git restore` in the TestKit destroys them irrecoverably — uncommitted work
+    has no reflog. **Verbatim, so it survives regardless:**
+    ```diff
+    @@ -13,4 +13,9 @@ SMRTest_AutoRunEnabled = true
+      -- Uncomment for an ATTENDED leg (used for the MarsDebug [install] pass): the
+      -- harness builds the colony, stops the watchdog, and hands the session to the
+      -- human at the console instead of running RunAll and quitting.
+    +-- ⭐ EXECUTED ONCE, 2026-08-03 — the procedure is verified, not merely written:
+    +-- it produced 87 PASS / 0 FAIL / 0 SKIP (log MarsDebug.exe-20260803-23.14.05).
+    +-- ⚠️ Expect MODAL assert dialogs from the synthetic map (Flight.lua:465/:479),
+    +-- which retail swallows silently — click Ignore All, including after the
+    +-- SETUP-ONLY line prints. See PLAYTEST_HELP "The MarsDebug [install] pass".
+      -- SMRTest_AutoRunSetupOnly = true
+    ```
+  - **The mtime is filesystem-only.** `LastWriteTime` = `CreationTime` =
+    **2026-08-03 23:20:03**, `Length` 1346 bytes. Committing or even touching the
+    file destroys corroboration (1) permanently; git records commit dates, not
+    original mtimes. **The value above IS the record now.**
+  - **The cited log was one launch from deletion.** The rotation cap is ~20 files
+    and the folder held **19** when this was written, with co-run #1 about to add
+    more. It is **irreplaceable** — reproducing it needs another attended
+    MarsDebug sitting — so it is archived per R8 (`git add -f`, since
+    `.gitignore` eats `*.log`) at
+    **`docs/archive/corun0evidence_MarsDebug.exe-20260803-23.14.05.log`**.
+    ⚠️ The retail-side comparison in (5) is *not* archived and does not need to
+    be: every retail run reproduces 78/9, and the per-file tallies are recorded
+    in this brief. **Cite the archived copy, not the live logs folder.**
+
   **Provenance, MEASURED by prompt 2 so you do not re-derive it** (all four
   independently checkable):
   1. File `LastWriteTime` **and** `CreationTime` are both **2026-08-03
