@@ -348,6 +348,35 @@ not by the format.
    ⇒ **The remaining hour of your time is not owed:** leg D2 forces the defect
    state and samples the heals firing. Your call is only whether the D2 result
    plus this one closes the item.
+   ⭐⭐ **LEG D2 RAN TOO — DONE, and it PASSES. Nothing here is owed to you.**
+   Two families were driven from their actual defect state on a staged copy and
+   watched through a save/reload/save/reload cycle
+   (`docs/archive/u1c6_Mars.exe-20260804-17.24.57.log`):
+
+   | family | forced to | after the healing load | after a further save+reload |
+   |---|---|---|---|
+   | **H5** `Fix_MeteorFrequency` (F88) | `SMRFixPack_MeteorLatch = false` | one `one-shot heal … (latch false -> 1.0.1)` line, latch `1.0.1` | **no line**, latch `1.0.1` |
+   | **H6** `Fix_RainsDeadlock` (C34) | `RainsDisasterThreads = false` | one `RainsDisasterThreads was false — recreated as an empty table` line, `type=table entries=2` | **no line**, `type=table entries=2` |
+
+   All three PASS conditions hold: a heal line for each forced family after the
+   healing load, **none** after the idempotence load, and every number back to
+   **exactly** the baseline — never above it, which is the F92 compounding shape
+   that would have been the failure.
+   ⛔ **Ceiling and honest gaps, stated with the result rather than after it.**
+   This is **MECHANISM**, not `tested` — it says how these heals behave when they
+   fire, not how often a real save needs them. **H1** (Astrogeologist) stayed
+   **unsampled**: the colony runs the **rocketscientist** commander, so there was
+   nothing to strip. **H2 / H3 / H4** were deliberately not forced — doing so
+   means editing colonist traits, dome membership or built objects, a bigger
+   mutation than the measurement is worth — so they stand as leg D1 found them.
+   ⭐ **A vanilla fact fell out of the forcing:** with `RainsDisasterThreads`
+   set to `false`, shipped code threw `attempt to index a boolean value (upvalue
+   'old_threads')` at `TerraformingDisasters.lua:411`. The state C34 repairs is
+   not merely untidy — vanilla indexes that GameVar with no type check and
+   raises. That error is **ours**, inside the probe's marked forcing window, and
+   is reported as a consequence of the forcing, not as a new defect.
+   ⇒ **Do-first item 2 is complete to its unattended ceiling.** What is left is
+   your judgment call on whether that closes it, not an hour of your play.
 3. **The doctrine C-sitting** — closes the one INFERRED cell in the "OFF is
    three different things" doctrine, the one the owner said we cannot be wrong
    about. Protocol ready in `CHAIN_QA_REPORT.md` §1.3; the agent builds the

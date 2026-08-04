@@ -1,0 +1,526 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	35%
+Disk Free      	756577 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:076
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:080
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:448
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:575
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:764
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:439
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:493
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:493
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:496
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:17:841
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:846
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied						Lua 0:00:17:847
+
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+						Lua 0:00:17:848
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:17:849
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:17:850
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+						Lua 0:00:17:851
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:852
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied						Lua 0:00:17:853
+
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+						Lua 0:00:17:854
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+						Lua 0:00:17:855
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+						Lua 0:00:17:856
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+						Lua 0:00:17:857
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:395
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:469
+Reloading done in 965 ms
+						Lua 0:00:18:800
+[preset] Preset postprocess took 62 ms.
+						Lua 0:00:18:859
+479 / 479 particle streams loaded in 55 ms.
+						Lua 0:00:18:860
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted						Lua 0:00:18:861
+
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:049
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:104
+[mod] [U1C6] === unattended-1 U1C6 === watchdog 480000ms
+[U1C6] === unattended-1 U1C6 === watchdog 480000ms
+[mod] [U1C6] STEP 1-waiting-menu BEGIN
+[U1C6] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:105
+[PdxSDK] Started up. Took 1601
+						Lua 0:00:19:127
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:547
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:678
+[Braze] SessionStart error The server name or address could not be resolved
+						Lua 0:00:19:679
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:566
+[mod] [U1C6] STEP 1-waiting-menu END 2500ms
+[U1C6] STEP 1-waiting-menu END 2500ms
+[mod] [U1C6] STEP 2-load-staged BEGIN
+[U1C6] STEP 2-load-staged BEGIN
+						Lua 0:00:21:677
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:685
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:712
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:346
+*** Assets reloaded in 2.7 s, read 202.1 MB, read speed 76.0 MB/s, average read 4948 bytes.
+						Lua 0:00:30:381
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:411
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:430
+Game Loaded in 8754 ms
+						Lua 0:00:30:474
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:267
+Game loaded on map BlankBigCanyonCMix_09 in 9701 ms
+[mod] [U1C6] LOAD OK #1 file=U1STAGE.savegame.sav — LoadGame returned no error
+[U1C6] LOAD OK #1 file=U1STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:573
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:767
+[mod] [U1C6] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[U1C6] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[mod] [U1C6] STEP 2-load-staged END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C6] STEP 2-load-staged END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C6] STEP D2-0-baseline BEGIN
+[U1C6] STEP D2-0-baseline BEGIN
+[mod] [U1C6] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg D2, cold load — before any forcing
+[U1C6] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=leg D2, cold load — before any forcing
+[mod] [U1C6] HEAL SWEEP D2 baseline ----------------------------------------
+[U1C6] HEAL SWEEP D2 baseline ----------------------------------------
+						Lua 0:00:46:768
+[mod] [U1C6] HEAL H1 astro: commander_profile=rocketscientist | colony label_modifier counts: AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1 | TOTAL=128
+[U1C6] HEAL H1 astro: commander_profile=rocketscientist | colony label_modifier counts: AllRockets=1 AtomicBattery=1 AutomaticMetalsExtractor=2 Battery_WaterFuelCell=1 Building=2 CargoShuttle=2 Colonist=2 ConcretePlant=2 Consts=37 Decorations=1 Decorations_Construction=2 Diner=1 Dome=1 DomeBasic=1 DomeHexa=1 DomeMicro=1 Domes=2 Drone=3 DroneHub=2 DroneHubExtender=1 ExplorerRover=1 Farm=2 HydroponicFarm=1 InsideBuildings=3 InsideBuildings_Construction=2 LandscapeLake=2 LargeWaterTank=1 MegaMall=1 MetalsExtractor=4 MicroGAutoExtractor=2 MicroGWaterExtractor=2 MoholeMine=4 OpenFarm=1 OutsideBuildings=1 OutsideBuildings_Construction=2 OxygenTank=1 OxygenTank_Large=1 PreciousMetalsExtractor=5 RCRoverAndChildren=2 RCTransportAndChildren=2 RegolithExtractor=2 ResearchEffectDeposit=2 SensorTower=2 ShopsFood=1 ShopsFood_Small=1 ShuttleHub=2 SolarPanelBase=1 TheExcavator=2 WaterExtractor=2 WaterTank=1 botanist=1 engineer=1 geologist=1 medic=1 scientist=1 security=1 | TOTAL=128
+[mod] [U1C6] HEAL H2 saint: 13 dome(s), 12 carrying label modifiers, 47 modifier(s) total | APPLICABLE=true
+[U1C6] HEAL H2 saint: 13 dome(s), 12 carrying label modifiers, 47 modifier(s) total | APPLICABLE=true
+						Lua 0:00:46:769
+[mod] [U1C6] HEAL H3 biorobots: 0 biorobot(s), 0 carrying Dust Sickness | APPLICABLE=false
+[U1C6] HEAL H3 biorobots: 0 biorobot(s), 0 carrying Dust Sickness | APPLICABLE=false
+						Lua 0:00:46:770
+[mod] [U1C6] HEAL H4 suns: 2 ArtificialSun(s), 4 SolarPanel(s) | APPLICABLE=true
+[U1C6] HEAL H4 suns: 2 ArtificialSun(s), 4 SolarPanel(s) | APPLICABLE=true
+[mod] [U1C6] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[U1C6] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[mod] [U1C6] HEAL H6 rains: g_RainDisaster=false | RainsDisasterThreads=table entries=2 | APPLICABLE=true
+[U1C6] HEAL H6 rains: g_RainDisaster=false | RainsDisasterThreads=table entries=2 | APPLICABLE=true
+[mod] [U1C6] D2 ASTRO baseline AutomaticMetalsExtractor(production_per_day1): 2 modifier(s) [table: 000001DA678BC430:10,table: 000001DA678BC528:0]
+[U1C6] D2 ASTRO baseline AutomaticMetalsExtractor(production_per_day1): 2 modifier(s) [table: 000001DA678BC430:10,table: 000001DA678BC528:0]
+[mod] [U1C6] D2 ASTRO baseline MicroGAutoWaterExtractor(water_production): 0 modifier(s) []
+[U1C6] D2 ASTRO baseline MicroGAutoWaterExtractor(water_production): 0 modifier(s) []
+[mod] [U1C6] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[U1C6] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[mod] [U1C6] D2 RAINS baseline: RainsDisasterThreads type=table entries=2 | g_RainDisaster=false
+[U1C6] D2 RAINS baseline: RainsDisasterThreads type=table entries=2 | g_RainDisaster=false
+[mod] [U1C6] D2 APPLICABILITY: commander profile=rocketscientist | H1 astro forceable=false | H5 meteor latch forceable=true | H6 rains structure forceable=true
+[U1C6] D2 APPLICABILITY: commander profile=rocketscientist | H1 astro forceable=false | H5 meteor latch forceable=true | H6 rains structure forceable=true
+[mod] [U1C6] D2 NOTE — H1 is NOT forceable on this save because the colony does not run the Astrogeologist profile. That family stays UNSAMPLED and must be reported as unsampled, not as clean. H5 and H6 are forced below regardless; both are applicable on every save, which is why this leg produces a real measurement whatever the save contains.
+[U1C6] D2 NOTE — H1 is NOT forceable on this save because the colony does not run the Astrogeologist profile. That family stays UNSAMPLED and must be reported as unsampled, not as clean. H5 and H6 are forced below regardless; both are applicable on every save, which is why this leg produces a real measurement whatever the save contains.
+[mod] [U1C6] STEP D2-0-baseline END 0ms
+[U1C6] STEP D2-0-baseline END 0ms
+[mod] [U1C6] STEP D2-1-force BEGIN
+[U1C6] STEP D2-1-force BEGIN
+[mod] [U1C6] D2 FORCED (1/3): SMRFixPack_MeteorLatch = false  — recreating F88's pre-heal state
+[U1C6] D2 FORCED (1/3): SMRFixPack_MeteorLatch = false  — recreating F88's pre-heal state
+[mod] [U1C6] D2 latch now=false
+[U1C6] D2 latch now=false
+[mod] [U1C6] D2 FORCED (2/3): SKIPPED — H1 not applicable on this save
+[U1C6] D2 FORCED (2/3): SKIPPED — H1 not applicable on this save
+[mod] [U1C6] D2 FORCED (3/3): RainsDisasterThreads = false — recreating C34's structure defect. ⛔ FORCING WINDOW OPENS
+[U1C6] D2 FORCED (3/3): RainsDisasterThreads = false — recreating C34's structure defect. ⛔ FORCING WINDOW OPENS
+[mod] [U1C6] D2 RAINS after forcing: RainsDisasterThreads type=boolean entries=0 | g_RainDisaster=false
+[U1C6] D2 RAINS after forcing: RainsDisasterThreads type=boolean entries=0 | g_RainDisaster=false
+[mod] [U1C6] STEP D2-1-force END 0ms
+[U1C6] STEP D2-1-force END 0ms
+[mod] [U1C6] STEP D2-2-save-forced BEGIN
+[U1C6] STEP D2-2-save-forced BEGIN
+						Lua 0:00:46:775
+[mod] [U1C6] SAVE writing U1C6FORCED.savegame.sav (60 savegame-tagged files before)
+[U1C6] SAVE writing U1C6FORCED.savegame.sav (60 savegame-tagged files before)
+						Lua 0:00:47:373
+[LUA ERROR] attempt to index a boolean value (upvalue 'old_threads')
+  Lua/TerraformingDisasters.lua(411):  local process
+  Lua/TerraformingDisasters.lua(434):  upvalue func
+  CommonLua/Core/lib.lua(1811):   <>
+        --- end of stack
+Locals:
+	            settings |   object MapSettings_RainsDisaster 'Normal_VeryLow'
+	                   i |   number 1
+	               count |   number 3
+	           rain_type |   string normal
+	    atmosphere_start |   number 40
+	      atmosphere_end |   number 101
+	   temperature_start |   number 40
+	     temperature_end |   number 101
+	         water_start |   number 10
+	           water_end |   number 101
+	  atmosphere_start_i |   number 40
+	 temperature_start_i |   number 40
+	       water_start_i |   number 10
+	    atmosphere_end_i |   number 60
+	   temperature_end_i |   number 60
+	         water_end_i |   number 40
+	         new_threads |    table 0x000001DA64B1F9C8 #0
+	toxic_atmosphere_start |   number 25
+	toxic_atmosphere_end |   number 55
+	toxic_temperature_start |   number 25
+	toxic_temperature_end |   number 55
+	   toxic_water_start |   number 0
+	     toxic_water_end |   number 5
+	normal_atmosphere_start |   number 40
+	normal_atmosphere_end |   number 101
+	normal_temperature_start |   number 40
+	normal_temperature_end |   number 101
+	  normal_water_start |   number 10
+	    normal_water_end |   number 101
+	          atmosphere |   number 59
+	         temperature |   number 72
+	               water |   number 61
+	         old_threads |  boolean false
+	        keep_threads |    table 0x000001DA64B1FA08 #0
+	       started_rains |    table 0x000001DA64B1F908 #0
+[mod] [U1C6] SAVE returned err=false name=U1C6FORCED.savegame.sav
+[U1C6] SAVE returned err=false name=U1C6FORCED.savegame.sav
+						Lua 0:00:47:374
+[mod] [U1C6] SAVE listed-after=true (61 savegame-tagged files after)
+[U1C6] SAVE listed-after=true (61 savegame-tagged files after)
+[mod] [U1C6] STEP D2-2-save-forced END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C6] STEP D2-2-save-forced END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C6] STEP 3-load-healing BEGIN
+[U1C6] STEP 3-load-healing BEGIN
+						Lua 0:00:47:498
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:52:540
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:52:564
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:52:578
+[mod] [CommunityFixPack] MeteorFrequency: one-shot heal — persisted Meteors thread was alive; restarting onto vanilla's body (latch false -> 1.0.1)
+[mod] [CommunityFixPack] RainsDeadlock: RainsDisasterThreads was false — recreated as an empty table (C34 structure repair)
+						Lua 0:00:52:581
+Game Loaded in 5083 ms
+						Lua 0:00:52:613
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:53:078
+Game loaded on map BlankBigCanyonCMix_09 in 5704 ms
+[mod] [U1C6] LOAD OK #2 file=U1C6FORCED.savegame.sav — LoadGame returned no error
+[U1C6] LOAD OK #2 file=U1C6FORCED.savegame.sav — LoadGame returned no error
+						Lua 0:00:54:380
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:55:379
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:08:578
+[mod] [U1C6] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[U1C6] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[mod] [U1C6] STEP 3-load-healing END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C6] STEP 3-load-healing END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C6] STEP D2-3-read-healed BEGIN
+[U1C6] STEP D2-3-read-healed BEGIN
+[mod] [U1C6] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=2 | note=leg D2, load 2 — the load that should heal
+[U1C6] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=2 | note=leg D2, load 2 — the load that should heal
+[mod] [U1C6] D2 ⛔ FORCING WINDOW CLOSED at the load above. THE HEAL LINES FOR THIS LOAD ARE THE PACK LINES IMMEDIATELY ABOVE THIS MARKER. Expect exactly one meteor one-shot-heal line, exactly one C34 'RainsDisasterThreads was false — recreated as an empty table' line, and (if applicable) one Astrogeologist applied-N line with N = 2.
+[U1C6] D2 ⛔ FORCING WINDOW CLOSED at the load above. THE HEAL LINES FOR THIS LOAD ARE THE PACK LINES IMMEDIATELY ABOVE THIS MARKER. Expect exactly one meteor one-shot-heal line, exactly one C34 'RainsDisasterThreads was false — recreated as an empty table' line, and (if applicable) one Astrogeologist applied-N line with N = 2.
+[mod] [U1C6] D2 ASTRO after the healing load AutomaticMetalsExtractor(production_per_day1): 2 modifier(s) [table: 000001DA67FC4258:10,table: 000001DA67FC4490:0]
+[U1C6] D2 ASTRO after the healing load AutomaticMetalsExtractor(production_per_day1): 2 modifier(s) [table: 000001DA67FC4258:10,table: 000001DA67FC4490:0]
+[mod] [U1C6] D2 ASTRO after the healing load MicroGAutoWaterExtractor(water_production): 0 modifier(s) []
+[U1C6] D2 ASTRO after the healing load MicroGAutoWaterExtractor(water_production): 0 modifier(s) []
+[mod] [U1C6] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[U1C6] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[mod] [U1C6] D2 RAINS after the healing load: RainsDisasterThreads type=table entries=2 | g_RainDisaster=false
+[U1C6] D2 RAINS after the healing load: RainsDisasterThreads type=table entries=2 | g_RainDisaster=false
+[mod] [U1C6] D2 PREDICTION CHECK load 2: astro counts 2/0 -> 2/0 (prediction: back to the baseline 2/0, and NEVER higher) | latch 1.0.1 -> 1.0.1 (prediction: back to the pack version, not false) | rains table/2 -> table/2 (prediction: back to a table)
+[U1C6] D2 PREDICTION CHECK load 2: astro counts 2/0 -> 2/0 (prediction: back to the baseline 2/0, and NEVER higher) | latch 1.0.1 -> 1.0.1 (prediction: back to the pack version, not false) | rains table/2 -> table/2 (prediction: back to a table)
+[mod] [U1C6] STEP D2-3-read-healed END 0ms
+[U1C6] STEP D2-3-read-healed END 0ms
+[mod] [U1C6] STEP D2-4-save-healed BEGIN
+[U1C6] STEP D2-4-save-healed BEGIN
+						Lua 0:01:08:579
+[mod] [U1C6] SAVE writing U1C6HEALED.savegame.sav (61 savegame-tagged files before)
+[U1C6] SAVE writing U1C6HEALED.savegame.sav (61 savegame-tagged files before)
+						Lua 0:01:09:176
+[mod] [U1C6] SAVE returned err=false name=U1C6HEALED.savegame.sav
+[U1C6] SAVE returned err=false name=U1C6HEALED.savegame.sav
+[mod] [U1C6] SAVE listed-after=true (62 savegame-tagged files after)
+[U1C6] SAVE listed-after=true (62 savegame-tagged files after)
+[mod] [U1C6] STEP D2-4-save-healed END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C6] STEP D2-4-save-healed END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C6] STEP 4-load-idempotence BEGIN
+[U1C6] STEP 4-load-idempotence BEGIN
+						Lua 0:01:09:296
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:01:14:382
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:14:408
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:01:14:422
+[mod] [CommunityFixPack] RainsDeadlock: 'normal' rain loop migrated onto vanilla's body (settings 'Normal_VeryLow', version 1.0.1)
+						Lua 0:01:14:425
+Game Loaded in 5129 ms
+						Lua 0:01:14:459
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:15:009
+Game loaded on map BlankBigCanyonCMix_09 in 5833 ms
+[mod] [U1C6] LOAD OK #3 file=U1C6HEALED.savegame.sav — LoadGame returned no error
+[U1C6] LOAD OK #3 file=U1C6HEALED.savegame.sav — LoadGame returned no error
+						Lua 0:01:16:311
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:17:309
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:30:508
+[mod] [U1C6] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[U1C6] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[mod] [U1C6] STEP 4-load-idempotence END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[U1C6] STEP 4-load-idempotence END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [U1C6] STEP D2-5-read-idempotence BEGIN
+[U1C6] STEP D2-5-read-idempotence BEGIN
+						Lua 0:01:30:509
+[mod] [U1C6] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=3 | note=leg D2, load 3 — the idempotence load
+[U1C6] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=3 | note=leg D2, load 3 — the idempotence load
+[mod] [U1C6] D2 ⛔ ANY pack heal line between the previous LOAD OK marker and this line is the DEFECT: the state was already correct in the file that was just loaded.
+[U1C6] D2 ⛔ ANY pack heal line between the previous LOAD OK marker and this line is the DEFECT: the state was already correct in the file that was just loaded.
+[mod] [U1C6] D2 ASTRO after the idempotence load AutomaticMetalsExtractor(production_per_day1): 2 modifier(s) [table: 000001DA6BB49710:10,table: 000001DA6BB497D0:0]
+[U1C6] D2 ASTRO after the idempotence load AutomaticMetalsExtractor(production_per_day1): 2 modifier(s) [table: 000001DA6BB49710:10,table: 000001DA6BB497D0:0]
+[mod] [U1C6] D2 ASTRO after the idempotence load MicroGAutoWaterExtractor(water_production): 0 modifier(s) []
+[U1C6] D2 ASTRO after the idempotence load MicroGAutoWaterExtractor(water_production): 0 modifier(s) []
+[mod] [U1C6] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[U1C6] HEAL H5 meteor latch: SMRFixPack_MeteorLatch=1.0.1 | global Meteors thread valid=true | APPLICABLE=true
+[mod] [U1C6] D2 RAINS after the idempotence load: RainsDisasterThreads type=table entries=2 | g_RainDisaster=false
+[U1C6] D2 RAINS after the idempotence load: RainsDisasterThreads type=table entries=2 | g_RainDisaster=false
+[mod] [U1C6] D2 PREDICTION CHECK load 3: astro 2/0 -> 2/0 (prediction: identical) | latch 1.0.1 -> 1.0.1 (prediction: identical) | rains table/2 -> table/2 (prediction: identical)
+[U1C6] D2 PREDICTION CHECK load 3: astro 2/0 -> 2/0 (prediction: identical) | latch 1.0.1 -> 1.0.1 (prediction: identical) | rains table/2 -> table/2 (prediction: identical)
+[mod] [U1C6] STEP D2-5-read-idempotence END 0ms
+[U1C6] STEP D2-5-read-idempotence END 0ms
+[mod] [U1C6] STEP D2-verdict BEGIN
+[U1C6] STEP D2-verdict BEGIN
+[mod] [U1C6] LEG D2 SUMMARY  astro: baseline=2/0 healed=2/0 idempotence=2/0 | latch: 1.0.1 / 1.0.1 / 1.0.1 | rains: table/2 / table/2 / table/2 | SAMPLED: H5 yes, H6 yes, H1 NO — unsampled, say so
+[U1C6] LEG D2 SUMMARY  astro: baseline=2/0 healed=2/0 idempotence=2/0 | latch: 1.0.1 / 1.0.1 / 1.0.1 | rains: table/2 / table/2 / table/2 | SAMPLED: H5 yes, H6 yes, H1 NO — unsampled, say so
+[mod] [U1C6] LEG D2 PASS requires ALL of: (1) a heal line for each forced family after load 2 and NONE after load 3; (2) the load-2 numbers equal to the baseline, never above it — a number ABOVE baseline is F92's compounding defect reproduced; (3) load-3 numbers identical to load 2.
+[U1C6] LEG D2 PASS requires ALL of: (1) a heal line for each forced family after load 2 and NONE after load 3; (2) the load-2 numbers equal to the baseline, never above it — a number ABOVE baseline is F92's compounding defect reproduced; (3) load-3 numbers identical to load 2.
+[mod] [U1C6] LEG D2 ⛔ CEILING: MECHANISM. It says how these heals behave when they fire. It says nothing about how often a real save needs them, and nothing at all about H2/H3/H4, which were not forced.
+[U1C6] LEG D2 ⛔ CEILING: MECHANISM. It says how these heals behave when they fire. It says nothing about how often a real save needs them, and nothing at all about H2/H3/H4, which were not forced.
+[mod] [U1C6] STEP D2-verdict END 0ms
+[U1C6] STEP D2-verdict END 0ms
+[mod] [U1C6] ERRORWATCH U1C6 — every [LUA ERROR] in this log file between the '=== unattended-1 U1C6 ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=D2-verdict loads_this_process=3
+[U1C6] ERRORWATCH U1C6 — every [LUA ERROR] in this log file between the '=== unattended-1 U1C6 ===' banner and this line happened inside this cycle. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=D2-verdict loads_this_process=3
+[mod] [U1C6] === cycle 6 (leg D2) complete ===
+[U1C6] === cycle 6 (leg D2) complete ===
+[mod] [U1C6] SHUTDOWN done
+[U1C6] SHUTDOWN done
+						Lua 0:01:33:507
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:33:509
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:33:874
+
+
+*** Debug::Done()
+Time (ms)	93874
+
+
