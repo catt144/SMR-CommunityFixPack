@@ -8,6 +8,89 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-04 — `unattended-1` CLOSED (prompt 3, Fable terminal audit): every verdict sustained, the owner's three answers integrated, the folder is empty
+
+**The first fully unattended batch is complete** — 3 prompts, self-consuming,
+run entirely under the owner's Opus-executes/Fable-audits rule. The chain's
+files (README, this prompt, the 8 parked probe sources with their mid-run
+rewrite headers) survive in git at `a433e42`
+(`git show a433e42:docs/agent/prompts/unattended-1/README.md` etc.); the
+folder is deleted in this commit.
+
+**Audit verdict (Job 1, every upstream "done" treated as a claim): EVERY
+per-leg verdict SUSTAINED against its archived log.** Leg C's four organic
+repairs re-verified line-by-line (four distinct elements, each break witnessed
+`broken=true sites=1 repair_cgs=1`, completion transitions real, no cheat call
+in the log, zero `:805`); the SAVE-primitive proof reads exactly as promoted
+(57→58 listed, load-back live, pack 81/81, 0.60 s off the log's own `Lua`
+markers — EF-045's instrument); the C42 mechanism trace re-derived
+independently against ModTools Src and HOLDS, all seven links; leg E's row
+flips carried by real evidence including the two-sided `table.copy` control;
+the one `[LUA ERROR]` in all 11 logs is cycle 6's forced C34 throw, inside its
+marked window, attributed (`TerraformingDisasters.lua:411`,
+`UpdateRainsThreads` — prompt 1's prediction right in kind, wrong in every
+specific). Commit discipline clean: `PROBE SWEEP:` on all 7 recording commits,
+no probe leftovers in either repo, all 11 cited logs actually committed, all
+six U1 throwaway saves deleted, `TEST2H TRAIN` byte-identical (55,667,524 B,
+2026-08-03 22:21:48).
+
+**What the audit caught — hygiene, no verdict moved:** F99.md's leg-B heading
+still carried the withdrawn "rider is discharged" claim (corrected, visibly);
+"9 logs archived" was a miscount for 11 (7 good + 4 void); the C42 rider's
+"`0` refutes outright" line predated the condition-sampled lesson (corrected);
+ledger I5 conflates leg E's two void runs; **and `CORUN1.savegame.sav` sat in
+the saves folder beside the ledger's `CORUN0`** — both byte-identical staged
+copies of `TEST2H TRAIN` from the closed corun-rig chain, both now deleted
+agent-side (routed gap 5, widened by one and discharged).
+
+**Verdicts as they stand:** SAVE primitive PROVEN and in the envelope · leg
+D1 nothing-fired/nothing-repeated (H1/H3 unsampled) · leg D2 PASSES all three
+conditions at MECHANISM ceiling (H5/H6 forced, H1 unsampled — rocketscientist
+profile) · leg A do-no-harm half PASSES, turbine half UNSAMPLED (fixture gap:
+FrictionlessComposites unresearched, 0 turbines) · leg B rider precondition
+never arose (`:805` did not throw), rider stays `unrun` · leg C **0 in 4
+witnessed organic completions** — a rate bound with its condition stated, F99
+stays `cand`, severity stays the owner's · leg F C42 limit 2 CLOSED, the zero
+UNSAMPLED (0 unit entries, post-load) · both `[NEVER RUN]` rows flipped, the
+devil row's documented recipe MEASURED BROKEN (34/40 raises) and corrected in
+the HELP table.
+
+**Economics of the batch, against the ~90 s/cycle + zero-owner expectation:**
+7 good launches ≈ **9 min** machine time (61–97 s/cycle, predictions
+~1.5–6 min); **≈ 21 min** including 4 wasted launches and the 8-minute
+unarmed stall. Owner cost: **the kickoff word, plus one unprompted mid-run
+message** — which caught the stall before the run's own outside bound did,
+the single most important datum for the co-run program. Token actuals:
+unrecorded. Component costs now in WORKFLOW's envelope (boot 19 s · cold load
+10 s · warm load 6 s · save 0.6 s).
+
+**Unforeseen-issues report (the run's second product): 8 entries, 0 the
+game's fault, 3 of 7 parse-GREEN Src-verified parked probes wrong on first
+run.** All eight are recorded in the recording commits and the rewrite
+headers; the four brief-authoring classes (resolution cross-check; ARM GATE +
+C11 piping corollary; liveness witness named in the brief; `pcall` always
+printed; per-chain facts never in per-process flags) are now **binding in
+WORKFLOW Co-runs**. CHAIN_METHOD gains the method lesson: on a run whose
+executor self-corrects visibly, the audit floor's yield is certification plus
+residue, not rescue — keep the tier, keep the void-log-beside-good-log
+practice.
+
+**Owner decisions integrated (their own hand, committed verbatim at
+`f477cf4`):** sign-off tiers **ADOPTED** → standing policy in WORKFLOW,
+limits kept verbatim; relabel package **adopted as proposal**, wording still
+OWED, landed as a launch-prep instruction; F100 **ON HOLD** — not a decision,
+stays open and counted. Stale-records sweep: two resolved decision bullets
+moved WHOLE to `PLAYTEST_ARCHIVE.md` as a worked example; the general
+treatment ROUTED to the owner (the documented rule covers test sections, not
+decision bullets).
+
+**Owed to the owner after this chain — decisions only:** F99 severity (the
+0-in-4 lands on their existing line as input); whether D1+D2 close Do-first
+item 2; the stale-bullet archiving go/no-go; the relabel wording (when launch
+prep comes). Routed gaps, none owner-blocking: C42 within-session read · PT-35
+turbine-half fixture (a fixture request, not a sitting) · F99 residue rider
+still needs a run where `:805` throws · leg C's N widens at ~1 min per 4.
+
 ## 2026-08-04 — post-close session (same day, Fable): sweep adopted, doccheck gains a TestKit line, `unattended-1` built and queued
 
 Same session as the chain close below, continuing on owner instructions.
