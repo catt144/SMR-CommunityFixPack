@@ -1,0 +1,1424 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	34%
+Disk Free      	757093 MBytes
+
+
+					Render 0:00:00:008
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:097
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:100
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:583
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:723
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:923
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:735
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:798
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:797
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:800
+[mod] Loaded mod def Community Fix Pack â€” Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:18:139
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:18:142
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:146
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:147
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+						Lua 0:00:18:148
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:18:149
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:18:150
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:18:151
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:18:152
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+						Lua 0:00:18:153
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+						Lua 0:00:18:154
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+						Lua 0:00:18:155
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:697
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:770
+Reloading done in 962 ms
+						Lua 0:00:19:123
+[preset] Preset postprocess took 83 ms.
+						Lua 0:00:19:183
+479 / 479 particle streams loaded in 55 ms.
+						Lua 0:00:19:184
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:377
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:432
+[mod] [CORUN1] +0ms === CO-RUN #1 — the payload run (03_OPUS_PAYLOAD_RUN.md) ===
+[CORUN1] +0ms === CO-RUN #1 — the payload run (03_OPUS_PAYLOAD_RUN.md) ===
+[mod] [CORUN1] +0ms save file: CORUN1.savegame.sav | watchdog 1800000ms
+[CORUN1] +0ms save file: CORUN1.savegame.sav | watchdog 1800000ms
+[mod] [CORUN1] +0ms STEP 1-waiting-menu BEGIN
+[CORUN1] +0ms STEP 1-waiting-menu BEGIN
+[PdxSDK] Started up. Took 1624
+						Lua 0:00:19:455
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:875
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:066
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:894
+[mod] [CORUN1] +2500ms STEP 1-waiting-menu END 2500ms						Lua 0:00:21:895
+
+[CORUN1] +2500ms STEP 1-waiting-menu END 2500ms
+[mod] [CORUN1] +2500ms STEP 2-loading-save BEGIN
+[CORUN1] +2500ms STEP 2-loading-save BEGIN
+						Lua 0:00:22:007
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:22:014
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:22:040
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:886
+*** Assets reloaded in 2.9 s, read 202.1 MB, read speed 70.4 MB/s, average read 4948 bytes.
+						Lua 0:00:30:776
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:806
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:824
+Game Loaded in 8817 ms
+						Lua 0:00:30:875
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:679
+Game loaded on map BlankBigCanyonCMix_09 in 9784 ms
+[mod] [CORUN1] +3374ms LOAD OK — LoadGame returned no error
+[CORUN1] +3374ms LOAD OK — LoadGame returned no error
+[mod] [CORUN1] +3374ms STEP 2-loading-save END 874ms
+[CORUN1] +3374ms STEP 2-loading-save END 874ms
+[mod] [CORUN1] +3374ms STEP 3-waiting-city BEGIN
+[CORUN1] +3374ms STEP 3-waiting-city BEGIN
+[mod] [CORUN1] +3374ms STEP 3-waiting-city END 0ms
+[CORUN1] +3374ms STEP 3-waiting-city END 0ms
+[mod] [CORUN1] +3374ms STEP 3b-settling BEGIN
+[CORUN1] +3374ms STEP 3b-settling BEGIN
+						Lua 0:00:33:982
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:677
+[mod] [CORUN1] +18374ms STEP 3b-settling END 15000ms
+[CORUN1] +18374ms STEP 3b-settling END 15000ms
+[mod] [CORUN1] +18374ms STEP 4-census BEGIN
+[CORUN1] +18374ms STEP 4-census BEGIN
+[mod] [CORUN1] +18374ms READ fixpack: 81/81 active
+[CORUN1] +18374ms READ fixpack: 81/81 active
+[mod] [CORUN1] +18374ms READ F11 module TrainPlatformWedge status=active detail=
+[CORUN1] +18374ms READ F11 module TrainPlatformWedge status=active detail=
+[mod] [CORUN1] +18374ms READ wraps installed: done=true enter=true exit_holder=true comfort=true sanity=true picker=true
+[CORUN1] +18374ms READ wraps installed: done=true enter=true exit_holder=true comfort=true sanity=true picker=true
+[mod] [CORUN1] +18374ms READ C41 env: desk=(0, 0)-(3840, 2160) scale=(1900, 1900) screen=(3840, 2160) mouse=(6710, 2294)
+[CORUN1] +18374ms READ C41 env: desk=(0, 0)-(3840, 2160) scale=(1900, 1900) screen=(3840, 2160) mouse=(6710, 2294)
+[mod] [CORUN1] +18374ms READ C41 safe area: 0 0 3840 2160
+[CORUN1] +18374ms READ C41 safe area: 0 0 3840 2160
+[mod] [CORUN1] +18374ms READ L1 branch liveness: LuxuriousTrains researched=1 (true => the 'travel time' comfort call is SKIPPED by design)
+[CORUN1] +18374ms READ L1 branch liveness: LuxuriousTrains researched=1 (true => the 'travel time' comfort call is SKIPPED by design)
+[mod] [CORUN1] +18374ms READ L1 fixture: 8 train(s), 59 rider(s) aboard, 0 train(s) on a seen_forest track
+[CORUN1] +18374ms READ L1 fixture: 8 train(s), 59 rider(s) aboard, 0 train(s) on a seen_forest track
+[mod] [CORUN1] +18374ms READ L2 fixture: 11 UniversalStorageDepot(s)
+[CORUN1] +18374ms READ L2 fixture: 11 UniversalStorageDepot(s)
+[mod] [CORUN1] +18374ms READ L4 fixture: 17 track(s), 926 element(s), 0 already broken
+[CORUN1] +18374ms READ L4 fixture: 17 track(s), 926 element(s), 0 already broken
+[mod] [CORUN1] +18374ms READ L3 fixture: 6 rocket(s), 4 landed surface Holder(s)
+[CORUN1] +18374ms READ L3 fixture: 6 rocket(s), 4 landed surface Holder(s)
+[mod] [CORUN1] +18374ms READ L3 fixture: 12 rider(s) aboard trains NOT on MainMap (cross-map candidates)
+[CORUN1] +18374ms READ L3 fixture: 12 rider(s) aboard trains NOT on MainMap (cross-map candidates)
+[mod] [CORUN1] +18374ms STEP 4-census END 0ms
+[CORUN1] +18374ms STEP 4-census END 0ms
+[mod] [CORUN1] +18374ms STEP 4b-speed BEGIN
+[CORUN1] +18374ms STEP 4b-speed BEGIN
+						Lua 0:00:47:178
+[mod] [CORUN1] +18874ms READ S5 game speed: SetGameSpeed(3) call=true | before=0 after=3
+[CORUN1] +18874ms READ S5 game speed: SetGameSpeed(3) call=true | before=0 after=3
+[mod] [CORUN1] +18874ms STEP 4b-speed END 500ms
+[CORUN1] +18874ms STEP 4b-speed END 500ms
+[mod] [CORUN1] +18874ms === OWNER SITS DOWN NOW — legs 1 and 2 need your eyes; see CORUN1_BRIEF.md ===
+[CORUN1] +18874ms === OWNER SITS DOWN NOW — legs 1 and 2 need your eyes; see CORUN1_BRIEF.md ===
+[mod] [CORUN1] +18874ms STEP L1-f11-watch BEGIN
+[CORUN1] +18874ms STEP L1-f11-watch BEGIN
+[mod] [CORUN1] +18874ms L1 TARGET train=Train#2000015562 units=12 command=GotoStation station=StationSmall#4842 map=MainMap
+[CORUN1] +18874ms L1 TARGET train=Train#2000015562 units=12 command=GotoStation station=StationSmall#4842 map=MainMap
+[mod] [CORUN1] +18874ms L1 camera moved to the target train (ViewAndSelectObject)
+[CORUN1] +18874ms L1 camera moved to the target train (ViewAndSelectObject)
+						Lua 0:00:48:177
+[mod] [CORUN1] +19874ms L1 TRAIN Train#2000016863 GotoStation(12) -> UnloadTrain(5) station=StationSmall#12472
+[CORUN1] +19874ms L1 TRAIN Train#2000016863 GotoStation(12) -> UnloadTrain(5) station=StationSmall#12472
+						Lua 0:00:49:180
+[mod] [CORUN1] +20874ms L1 TRAIN Train#2000035260 GotoStation(4) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +20874ms L1 TRAIN Train#2000035260 GotoStation(4) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +20874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[CORUN1] +20874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+						Lua 0:00:50:177
+[mod] [CORUN1] +21874ms L1 TRAIN Train#2000016863 UnloadTrain(5) -> LoadTrain(5) station=StationSmall#12472
+[CORUN1] +21874ms L1 TRAIN Train#2000016863 UnloadTrain(5) -> LoadTrain(5) station=StationSmall#12472
+						Lua 0:00:51:178
+[mod] [CORUN1] +22874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(7) station=StationSmall#13408
+[CORUN1] +22874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(7) station=StationSmall#13408
+[mod] [CORUN1] +22874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[CORUN1] +22874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+						Lua 0:00:52:177
+[mod] [CORUN1] +23874ms L1 TRAIN Train#2000016863 LoadTrain(5) -> GotoStation(5) station=StationSmall#12472
+[CORUN1] +23874ms L1 TRAIN Train#2000016863 LoadTrain(5) -> GotoStation(5) station=StationSmall#12472
+[mod] [CORUN1] +23874ms L1 TRAIN Train#2000015807 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+[CORUN1] +23874ms L1 TRAIN Train#2000015807 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+						Lua 0:00:53:178
+[mod] [CORUN1] +24874ms L1 TRAIN Train#2000035260 LoadTrain(7) -> GotoStation(7) station=StationSmall#13408
+[CORUN1] +24874ms L1 TRAIN Train#2000035260 LoadTrain(7) -> GotoStation(7) station=StationSmall#13408
+[mod] [CORUN1] +24874ms L1 TRAIN Train#2000035273 GotoStation(8) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +24874ms L1 TRAIN Train#2000035273 GotoStation(8) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +24874ms L1 TRAIN Train#2000016894 GotoStation(2) -> UnloadTrain(2) station=StationSmall#4792
+[CORUN1] +24874ms L1 TRAIN Train#2000016894 GotoStation(2) -> UnloadTrain(2) station=StationSmall#4792
+						Lua 0:00:54:178
+[mod] [CORUN1] +25874ms L1 TRAIN Train#2000015807 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[CORUN1] +25874ms L1 TRAIN Train#2000015807 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+						Lua 0:00:55:178
+[mod] [CORUN1] +26874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(4) station=StationSmall#13944
+[CORUN1] +26874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(4) station=StationSmall#13944
+[mod] [CORUN1] +26874ms L1 TRAIN Train#2000016894 UnloadTrain(2) -> LoadTrain(4) station=StationSmall#4792
+[CORUN1] +26874ms L1 TRAIN Train#2000016894 UnloadTrain(2) -> LoadTrain(4) station=StationSmall#4792
+						Lua 0:00:56:179
+[mod] [CORUN1] +27874ms L1 TRAIN Train#2000015807 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+[CORUN1] +27874ms L1 TRAIN Train#2000015807 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+						Lua 0:00:57:177
+[mod] [CORUN1] +28874ms L1 TRAIN Train#2000035273 LoadTrain(4) -> GotoStation(4) station=StationSmall#13944
+[CORUN1] +28874ms L1 TRAIN Train#2000035273 LoadTrain(4) -> GotoStation(4) station=StationSmall#13944
+[mod] [CORUN1] +28874ms L1 TRAIN Train#2000016894 LoadTrain(4) -> GotoStation(4) station=StationSmall#4792
+[CORUN1] +28874ms L1 TRAIN Train#2000016894 LoadTrain(4) -> GotoStation(4) station=StationSmall#4792
+						Lua 0:00:58:177
+[mod] [CORUN1] +29874ms L1 TRAIN Train#2000016863 GotoStation(5) -> UnloadTrain(5) station=StationSmall#12496
+[CORUN1] +29874ms L1 TRAIN Train#2000016863 GotoStation(5) -> UnloadTrain(5) station=StationSmall#12496
+						Lua 0:00:59:177
+[mod] [CORUN1] +30874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +30874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+						Lua 0:01:00:178
+[mod] [CORUN1] +31874ms L1 TRAIN Train#2000035260 GotoStation(7) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +31874ms L1 TRAIN Train#2000035260 GotoStation(7) -> UnloadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +31874ms L1 TRAIN Train#2000016863 UnloadTrain(5) -> LoadTrain(5) station=StationSmall#12496
+[CORUN1] +31874ms L1 TRAIN Train#2000016863 UnloadTrain(5) -> LoadTrain(5) station=StationSmall#12496
+						Lua 0:01:01:177
+[mod] [CORUN1] +32874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(11) station=StationSmall#13408
+[CORUN1] +32874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(11) station=StationSmall#13408
+						Lua 0:01:02:177
+[mod] [CORUN1] +33874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[CORUN1] +33874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +33874ms L1 TRAIN Train#2000016863 LoadTrain(5) -> GotoStation(5) station=StationSmall#12496
+[CORUN1] +33874ms L1 TRAIN Train#2000016863 LoadTrain(5) -> GotoStation(5) station=StationSmall#12496
+[mod] [CORUN1] +33874ms L1 TRAIN Train#2000015807 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12472
+[CORUN1] +33874ms L1 TRAIN Train#2000015807 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12472
+						Lua 0:01:03:177
+[mod] [CORUN1] +34874ms L1 TRAIN Train#2000035396 LoadTrain(11) -> GotoStation(11) station=StationSmall#13408
+[CORUN1] +34874ms L1 TRAIN Train#2000035396 LoadTrain(11) -> GotoStation(11) station=StationSmall#13408
+						Lua 0:01:04:178
+[mod] [CORUN1] +35874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[CORUN1] +35874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[mod] [CORUN1] +35874ms L1 TRAIN Train#2000015807 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#12472
+[CORUN1] +35874ms L1 TRAIN Train#2000015807 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#12472
+						Lua 0:01:06:177
+[mod] [CORUN1] +37874ms L1 TRAIN Train#2000015807 LoadTrain(1) -> GotoStation(1) station=StationSmall#12472						Lua 0:01:06:178
+
+[CORUN1] +37874ms L1 TRAIN Train#2000015807 LoadTrain(1) -> GotoStation(1) station=StationSmall#12472
+						Lua 0:01:08:177
+[mod] [CORUN1] +39874ms L1 TRAIN Train#2000035273 GotoStation(4) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +39874ms L1 TRAIN Train#2000035273 GotoStation(4) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +39874ms L1 TRAIN Train#2000016894 GotoStation(4) -> UnloadTrain(4) station=StationSmall#4552
+[CORUN1] +39874ms L1 TRAIN Train#2000016894 GotoStation(4) -> UnloadTrain(4) station=StationSmall#4552
+						Lua 0:01:09:177
+[mod] [CORUN1] +40874ms L1 TRAIN Train#2000016863 GotoStation(5) -> UnloadTrain(0) station=StationSmall#12631
+[CORUN1] +40874ms L1 TRAIN Train#2000016863 GotoStation(5) -> UnloadTrain(0) station=StationSmall#12631
+						Lua 0:01:10:177
+[mod] [CORUN1] +41874ms L1 TRAIN Train#2000016849 GotoStation(9) -> UnloadTrain(9) station=StationSmall#4842
+[CORUN1] +41874ms L1 TRAIN Train#2000016849 GotoStation(9) -> UnloadTrain(9) station=StationSmall#4842
+						Lua 0:01:10:178
+[mod] [CORUN1] +41874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(9) station=StationSmall#13408
+[CORUN1] +41874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(9) station=StationSmall#13408
+[mod] [CORUN1] +41874ms L1 TRAIN Train#2000016894 UnloadTrain(4) -> LoadTrain(6) station=StationSmall#4552
+[CORUN1] +41874ms L1 TRAIN Train#2000016894 UnloadTrain(4) -> LoadTrain(6) station=StationSmall#4552
+						Lua 0:01:11:177
+[mod] [CORUN1] +42874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12631
+[CORUN1] +42874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12631
+						Lua 0:01:12:177
+[mod] [CORUN1] +43874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +43874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +43874ms L1 TRAIN Train#2000016849 UnloadTrain(9) -> LoadTrain(12) station=StationSmall#4842
+[CORUN1] +43874ms L1 TRAIN Train#2000016849 UnloadTrain(9) -> LoadTrain(12) station=StationSmall#4842
+[mod] [CORUN1] +43874ms L1 TRAIN Train#2000035273 LoadTrain(9) -> GotoStation(9) station=StationSmall#13408
+[CORUN1] +43874ms L1 TRAIN Train#2000035273 LoadTrain(9) -> GotoStation(9) station=StationSmall#13408
+[mod] [CORUN1] +43874ms L1 TRAIN Train#2000016894 LoadTrain(6) -> GotoStation(6) station=StationSmall#4552
+[CORUN1] +43874ms L1 TRAIN Train#2000016894 LoadTrain(6) -> GotoStation(6) station=StationSmall#4552
+						Lua 0:01:13:177
+[mod] [CORUN1] +44874ms L1 TRAIN Train#2000016863 LoadTrain(12) -> GotoStation(12) station=StationSmall#12631
+[CORUN1] +44874ms L1 TRAIN Train#2000016863 LoadTrain(12) -> GotoStation(12) station=StationSmall#12631
+						Lua 0:01:14:177
+[mod] [CORUN1] +45874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#13408
+[CORUN1] +45874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#13408
+						Lua 0:01:14:178
+[mod] [CORUN1] +45874ms L1 TRAIN Train#2000035396 GotoStation(11) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +45874ms L1 TRAIN Train#2000035396 GotoStation(11) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +45874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+[CORUN1] +45874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+[mod] [CORUN1] +45874ms L1 TRAIN Train#2000015562 GotoStation(12) -> UnloadTrain(4) station=StationSmall#12472
+[CORUN1] +45874ms L1 TRAIN Train#2000015562 GotoStation(12) -> UnloadTrain(4) station=StationSmall#12472
+						Lua 0:01:16:179
+[mod] [CORUN1] +47874ms L1 TRAIN Train#2000035260 LoadTrain(1) -> GotoStation(1) station=StationSmall#13408
+[CORUN1] +47874ms L1 TRAIN Train#2000035260 LoadTrain(1) -> GotoStation(1) station=StationSmall#13408
+[mod] [CORUN1] +47874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13944
+[CORUN1] +47874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +47874ms L1 TRAIN Train#2000015562 UnloadTrain(4) -> LoadTrain(10) station=StationSmall#12472
+[CORUN1] +47874ms L1 TRAIN Train#2000015562 UnloadTrain(4) -> LoadTrain(10) station=StationSmall#12472
+						Lua 0:01:17:177
+[mod] [CORUN1] +48874ms L1 TRAIN Train#2000016894 GotoStation(6) -> UnloadTrain(6) station=StationSmall#4627
+[CORUN1] +48874ms L1 TRAIN Train#2000016894 GotoStation(6) -> UnloadTrain(6) station=StationSmall#4627
+						Lua 0:01:18:177
+[mod] [CORUN1] +49874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13944
+[CORUN1] +49874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13944
+[mod] [CORUN1] +49874ms L1 TRAIN Train#2000015562 LoadTrain(10) -> GotoStation(10) station=StationSmall#12472
+[CORUN1] +49874ms L1 TRAIN Train#2000015562 LoadTrain(10) -> GotoStation(10) station=StationSmall#12472
+						Lua 0:01:19:177
+[mod] [CORUN1] +50874ms L1 TRAIN Train#2000016894 UnloadTrain(6) -> LoadTrain(6) station=StationSmall#4627
+[CORUN1] +50874ms L1 TRAIN Train#2000016894 UnloadTrain(6) -> LoadTrain(6) station=StationSmall#4627
+						Lua 0:01:20:203
+[mod] [CORUN1] +51874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(10) station=StationSmall#4792
+[CORUN1] +51874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(10) station=StationSmall#4792
+[mod] [CORUN1] +51874ms L1 TRAIN Train#2000016863 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+[CORUN1] +51874ms L1 TRAIN Train#2000016863 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+[mod] [CORUN1] +51874ms L1 TRAIN Train#2000035273 GotoStation(9) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +51874ms L1 TRAIN Train#2000035273 GotoStation(9) -> UnloadTrain(0) station=StationSmall#13376
+						Lua 0:01:21:177
+[mod] [CORUN1] +52874ms L1 TRAIN Train#2000016894 LoadTrain(6) -> GotoStation(6) station=StationSmall#4627
+[CORUN1] +52874ms L1 TRAIN Train#2000016894 LoadTrain(6) -> GotoStation(6) station=StationSmall#4627
+						Lua 0:01:22:177
+[mod] [CORUN1] +53874ms L1 TRAIN Train#2000016849 UnloadTrain(10) -> LoadTrain(12) station=StationSmall#4792
+[CORUN1] +53874ms L1 TRAIN Train#2000016849 UnloadTrain(10) -> LoadTrain(12) station=StationSmall#4792
+[mod] [CORUN1] +53874ms L1 TRAIN Train#2000016863 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[CORUN1] +53874ms L1 TRAIN Train#2000016863 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[mod] [CORUN1] +53874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[CORUN1] +53874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+						Lua 0:01:24:178
+[mod] [CORUN1] +55874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[CORUN1] +55874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[mod] [CORUN1] +55874ms L1 TRAIN Train#2000016863 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+[CORUN1] +55874ms L1 TRAIN Train#2000016863 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+[mod] [CORUN1] +55874ms L1 TRAIN Train#2000035273 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[CORUN1] +55874ms L1 TRAIN Train#2000035273 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+						Lua 0:01:25:177
+[mod] [CORUN1] +56874ms L1 TRAIN Train#2000015562 GotoStation(10) -> UnloadTrain(10) station=StationSmall#12496
+[CORUN1] +56874ms L1 TRAIN Train#2000015562 GotoStation(10) -> UnloadTrain(10) station=StationSmall#12496
+						Lua 0:01:27:177
+[mod] [CORUN1] +58874ms L1 TRAIN Train#2000035260 GotoStation(1) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +58874ms L1 TRAIN Train#2000035260 GotoStation(1) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +58874ms L1 TRAIN Train#2000015562 UnloadTrain(10) -> LoadTrain(10) station=StationSmall#12496
+[CORUN1] +58874ms L1 TRAIN Train#2000015562 UnloadTrain(10) -> LoadTrain(10) station=StationSmall#12496
+						Lua 0:01:29:177
+[mod] [CORUN1] +60874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#13944
+[CORUN1] +60874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#13944
+[mod] [CORUN1] +60874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +60874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +60874ms L1 TRAIN Train#2000016894 GotoStation(6) -> UnloadTrain(0) station=StationSmall#6286
+[CORUN1] +60874ms L1 TRAIN Train#2000016894 GotoStation(6) -> UnloadTrain(0) station=StationSmall#6286
+[mod] [CORUN1] +60874ms L1 TRAIN Train#2000015562 LoadTrain(10) -> GotoStation(10) station=StationSmall#12496
+[CORUN1] +60874ms L1 TRAIN Train#2000015562 LoadTrain(10) -> GotoStation(10) station=StationSmall#12496
+						Lua 0:01:30:177
+[mod] [CORUN1] +61874ms L1 TRAIN Train#2000016863 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12472
+[CORUN1] +61874ms L1 TRAIN Train#2000016863 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12472
+						Lua 0:01:31:177
+[mod] [CORUN1] +62874ms L1 TRAIN Train#2000035260 LoadTrain(2) -> GotoStation(2) station=StationSmall#13944
+[CORUN1] +62874ms L1 TRAIN Train#2000035260 LoadTrain(2) -> GotoStation(2) station=StationSmall#13944
+[mod] [CORUN1] +62874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(4) station=StationSmall#13408
+[CORUN1] +62874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(4) station=StationSmall#13408
+[mod] [CORUN1] +62874ms L1 TRAIN Train#2000035273 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +62874ms L1 TRAIN Train#2000035273 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +62874ms L1 TRAIN Train#2000016894 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#6286
+[CORUN1] +62874ms L1 TRAIN Train#2000016894 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#6286
+						Lua 0:01:32:177
+[mod] [CORUN1] +63874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#12472
+[CORUN1] +63874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#12472
+						Lua 0:01:33:177
+[mod] [CORUN1] +64874ms L1 TRAIN Train#2000035396 LoadTrain(4) -> GotoStation(4) station=StationSmall#13408
+[CORUN1] +64874ms L1 TRAIN Train#2000035396 LoadTrain(4) -> GotoStation(4) station=StationSmall#13408
+[mod] [CORUN1] +64874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(8) station=StationSmall#13408
+[CORUN1] +64874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(8) station=StationSmall#13408
+[mod] [CORUN1] +64874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#6286
+[CORUN1] +64874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#6286
+						Lua 0:01:34:177
+[mod] [CORUN1] +65874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#12472
+[CORUN1] +65874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#12472
+						Lua 0:01:35:177
+[mod] [CORUN1] +66874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(8) station=StationSmall#4552						Lua 0:01:35:178
+
+[CORUN1] +66874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(8) station=StationSmall#4552
+[mod] [CORUN1] +66874ms L1 TRAIN Train#2000035273 LoadTrain(8) -> GotoStation(8) station=StationSmall#13408
+[CORUN1] +66874ms L1 TRAIN Train#2000035273 LoadTrain(8) -> GotoStation(8) station=StationSmall#13408
+[mod] [CORUN1] +66874ms L1 TRAIN Train#2000015562 GotoStation(10) -> UnloadTrain(0) station=StationSmall#12631
+[CORUN1] +66874ms L1 TRAIN Train#2000015562 GotoStation(10) -> UnloadTrain(0) station=StationSmall#12631
+						Lua 0:01:37:180
+[mod] [CORUN1] +68874ms L1 TRAIN Train#2000016849 UnloadTrain(8) -> LoadTrain(8) station=StationSmall#4552
+[CORUN1] +68874ms L1 TRAIN Train#2000016849 UnloadTrain(8) -> LoadTrain(8) station=StationSmall#4552
+[mod] [CORUN1] +68874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12631
+[CORUN1] +68874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12631
+						Lua 0:01:39:178
+[mod] [CORUN1] +70874ms L1 TRAIN Train#2000016849 LoadTrain(8) -> GotoStation(8) station=StationSmall#4552
+[CORUN1] +70874ms L1 TRAIN Train#2000016849 LoadTrain(8) -> GotoStation(8) station=StationSmall#4552
+[mod] [CORUN1] +70874ms L1 TRAIN Train#2000015562 LoadTrain(12) -> GotoStation(12) station=StationSmall#12631
+[CORUN1] +70874ms L1 TRAIN Train#2000015562 LoadTrain(12) -> GotoStation(12) station=StationSmall#12631
+						Lua 0:01:41:177
+[mod] [CORUN1] +72874ms L1 TRAIN Train#2000035396 GotoStation(4) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +72874ms L1 TRAIN Train#2000035396 GotoStation(4) -> UnloadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +72874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4627
+[CORUN1] +72874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4627
+[mod] [CORUN1] +72874ms L1 TRAIN Train#2000015807 GotoStation(1) -> UnloadTrain(1) station=StationSmall#4842
+[CORUN1] +72874ms L1 TRAIN Train#2000015807 GotoStation(1) -> UnloadTrain(1) station=StationSmall#4842
+						Lua 0:01:42:180
+[mod] [CORUN1] +73874ms L1 TRAIN Train#2000035260 GotoStation(2) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +73874ms L1 TRAIN Train#2000035260 GotoStation(2) -> UnloadTrain(0) station=StationSmall#13408
+						Lua 0:01:43:177
+[mod] [CORUN1] +74874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[CORUN1] +74874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +74874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4627
+[CORUN1] +74874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4627
+						Lua 0:01:43:178
+[mod] [CORUN1] +74874ms L1 TRAIN Train#2000015807 UnloadTrain(1) -> LoadTrain(1) station=StationSmall#4842
+[CORUN1] +74874ms L1 TRAIN Train#2000015807 UnloadTrain(1) -> LoadTrain(1) station=StationSmall#4842
+						Lua 0:01:44:177
+[mod] [CORUN1] +75874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[CORUN1] +75874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +75874ms L1 TRAIN Train#2000016849 GotoStation(8) -> UnloadTrain(8) station=StationSmall#4627
+[CORUN1] +75874ms L1 TRAIN Train#2000016849 GotoStation(8) -> UnloadTrain(8) station=StationSmall#4627
+						Lua 0:01:45:178
+[mod] [CORUN1] +76874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[CORUN1] +76874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[mod] [CORUN1] +76874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#4627
+[CORUN1] +76874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#4627
+[mod] [CORUN1] +76874ms L1 TRAIN Train#2000015807 LoadTrain(1) -> GotoStation(1) station=StationSmall#4842
+[CORUN1] +76874ms L1 TRAIN Train#2000015807 LoadTrain(1) -> GotoStation(1) station=StationSmall#4842
+						Lua 0:01:46:178
+[mod] [CORUN1] +77874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[CORUN1] +77874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[mod] [CORUN1] +77874ms L1 TRAIN Train#2000016849 UnloadTrain(8) -> LoadTrain(8) station=StationSmall#4627
+[CORUN1] +77874ms L1 TRAIN Train#2000016849 UnloadTrain(8) -> LoadTrain(8) station=StationSmall#4627
+[mod] [CORUN1] +77874ms L1 TRAIN Train#2000035273 GotoStation(8) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +77874ms L1 TRAIN Train#2000035273 GotoStation(8) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +77874ms L1 TRAIN Train#2000015562 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+[CORUN1] +77874ms L1 TRAIN Train#2000015562 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+						Lua 0:01:48:177
+[mod] [CORUN1] +79874ms L1 TRAIN Train#2000016849 LoadTrain(8) -> GotoStation(8) station=StationSmall#4627
+[CORUN1] +79874ms L1 TRAIN Train#2000016849 LoadTrain(8) -> GotoStation(8) station=StationSmall#4627
+[mod] [CORUN1] +79874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#13944
+[CORUN1] +79874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#13944
+[mod] [CORUN1] +79874ms L1 TRAIN Train#2000015562 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[CORUN1] +79874ms L1 TRAIN Train#2000015562 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+						Lua 0:01:50:177
+[mod] [CORUN1] +81874ms L1 TRAIN Train#2000035273 LoadTrain(1) -> GotoStation(1) station=StationSmall#13944
+[CORUN1] +81874ms L1 TRAIN Train#2000035273 LoadTrain(1) -> GotoStation(1) station=StationSmall#13944
+[mod] [CORUN1] +81874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4552
+[CORUN1] +81874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4552
+[mod] [CORUN1] +81874ms L1 TRAIN Train#2000015562 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+[CORUN1] +81874ms L1 TRAIN Train#2000015562 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+						Lua 0:01:51:178
+[mod] [CORUN1] +82874ms L1 TRAIN Train#2000015807 GotoStation(1) -> UnloadTrain(0) station=StationSmall#4792
+[CORUN1] +82874ms L1 TRAIN Train#2000015807 GotoStation(1) -> UnloadTrain(0) station=StationSmall#4792
+						Lua 0:01:52:180
+[mod] [CORUN1] +83874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +83874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +83874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4552
+[CORUN1] +83874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4552
+						Lua 0:01:53:177
+[mod] [CORUN1] +84874ms L1 TRAIN Train#2000015807 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4792
+[CORUN1] +84874ms L1 TRAIN Train#2000015807 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4792
+						Lua 0:01:54:180
+[mod] [CORUN1] +85874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +85874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +85874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#13408
+[CORUN1] +85874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#13408
+[mod] [CORUN1] +85874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#4552
+[CORUN1] +85874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#4552
+						Lua 0:01:55:178
+[mod] [CORUN1] +86874ms L1 TRAIN Train#2000015807 LoadTrain(0) -> GotoStation(0) station=StationSmall#4792
+[CORUN1] +86874ms L1 TRAIN Train#2000015807 LoadTrain(0) -> GotoStation(0) station=StationSmall#4792
+						Lua 0:01:56:178
+[mod] [CORUN1] +87874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[CORUN1] +87874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +87874ms L1 TRAIN Train#2000035396 LoadTrain(12) -> GotoStation(12) station=StationSmall#13408
+[CORUN1] +87874ms L1 TRAIN Train#2000035396 LoadTrain(12) -> GotoStation(12) station=StationSmall#13408
+[mod] [CORUN1] +87874ms L1 TRAIN Train#2000016849 GotoStation(8) -> UnloadTrain(0) station=StationSmall#6286
+[CORUN1] +87874ms L1 TRAIN Train#2000016849 GotoStation(8) -> UnloadTrain(0) station=StationSmall#6286
+[mod] [CORUN1] +87874ms L1 TRAIN Train#2000015562 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12472
+[CORUN1] +87874ms L1 TRAIN Train#2000015562 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12472
+						Lua 0:01:58:177
+[mod] [CORUN1] +89874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[CORUN1] +89874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[mod] [CORUN1] +89874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#6286
+[CORUN1] +89874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#6286
+[mod] [CORUN1] +89874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#12472
+[CORUN1] +89874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#12472
+						Lua 0:02:00:179
+[mod] [CORUN1] +91874ms L1 TRAIN Train#2000016849 LoadTrain(0) -> GotoStation(0) station=StationSmall#6286
+[CORUN1] +91874ms L1 TRAIN Train#2000016849 LoadTrain(0) -> GotoStation(0) station=StationSmall#6286
+[mod] [CORUN1] +91874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#12472
+[CORUN1] +91874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#12472
+						Lua 0:02:02:178
+[mod] [CORUN1] +93874ms L1 TRAIN Train#2000035273 GotoStation(1) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +93874ms L1 TRAIN Train#2000035273 GotoStation(1) -> UnloadTrain(0) station=StationSmall#13408
+						Lua 0:02:04:177
+[mod] [CORUN1] +95874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(6) station=StationSmall#13408
+[CORUN1] +95874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(6) station=StationSmall#13408
+						Lua 0:02:05:178
+[mod] [CORUN1] +96874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +96874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+						Lua 0:02:06:177
+[mod] [CORUN1] +97874ms L1 TRAIN Train#2000035273 LoadTrain(6) -> GotoStation(6) station=StationSmall#13408
+[CORUN1] +97874ms L1 TRAIN Train#2000035273 LoadTrain(6) -> GotoStation(6) station=StationSmall#13408
+[mod] [CORUN1] +97874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4792
+[CORUN1] +97874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4792
+[mod] [CORUN1] +97874ms L1 TRAIN Train#2000015807 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4552
+[CORUN1] +97874ms L1 TRAIN Train#2000015807 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4552
+						Lua 0:02:07:177
+[mod] [CORUN1] +98874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#13408
+[CORUN1] +98874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#13408
+[mod] [CORUN1] +98874ms L1 TRAIN Train#2000035396 GotoStation(12) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +98874ms L1 TRAIN Train#2000035396 GotoStation(12) -> UnloadTrain(0) station=StationSmall#13944
+						Lua 0:02:08:178
+[mod] [CORUN1] +99874ms L1 TRAIN Train#2000016849 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4627
+[CORUN1] +99874ms L1 TRAIN Train#2000016849 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4627
+[mod] [CORUN1] +99874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4792
+[CORUN1] +99874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4792
+[mod] [CORUN1] +99874ms L1 TRAIN Train#2000015807 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#4552
+[CORUN1] +99874ms L1 TRAIN Train#2000015807 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#4552
+						Lua 0:02:09:177
+[mod] [CORUN1] +100874ms L1 TRAIN Train#2000035260 LoadTrain(2) -> GotoStation(2) station=StationSmall#13408
+[CORUN1] +100874ms L1 TRAIN Train#2000035260 LoadTrain(2) -> GotoStation(2) station=StationSmall#13408
+[mod] [CORUN1] +100874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#13944
+[CORUN1] +100874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#13944
+[mod] [CORUN1] +100874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4842
+[CORUN1] +100874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4842
+						Lua 0:02:10:178
+[mod] [CORUN1] +101874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4627
+[CORUN1] +101874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4627
+[mod] [CORUN1] +101874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[CORUN1] +101874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[mod] [CORUN1] +101874ms L1 TRAIN Train#2000015807 LoadTrain(1) -> GotoStation(1) station=StationSmall#4552
+[CORUN1] +101874ms L1 TRAIN Train#2000015807 LoadTrain(1) -> GotoStation(1) station=StationSmall#4552
+						Lua 0:02:11:177
+[mod] [CORUN1] +102874ms L1 TRAIN Train#2000035396 LoadTrain(1) -> GotoStation(1) station=StationSmall#13944
+[CORUN1] +102874ms L1 TRAIN Train#2000035396 LoadTrain(1) -> GotoStation(1) station=StationSmall#13944
+[mod] [CORUN1] +102874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4842
+[CORUN1] +102874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4842
+						Lua 0:02:12:177
+[mod] [CORUN1] +103874ms L1 TRAIN Train#2000016849 LoadTrain(0) -> GotoStation(0) station=StationSmall#4627
+[CORUN1] +103874ms L1 TRAIN Train#2000016849 LoadTrain(0) -> GotoStation(0) station=StationSmall#4627
+						Lua 0:02:13:177
+[mod] [CORUN1] +104874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#4842						Lua 0:02:13:178
+
+[CORUN1] +104874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#4842
+[mod] [CORUN1] +104874ms L1 TRAIN Train#2000035273 GotoStation(6) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +104874ms L1 TRAIN Train#2000035273 GotoStation(6) -> UnloadTrain(0) station=StationSmall#13376
+						Lua 0:02:15:177
+[mod] [CORUN1] +106874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#13376
+[CORUN1] +106874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#13376
+[mod] [CORUN1] +106874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4842
+[CORUN1] +106874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4842
+[mod] [CORUN1] +106874ms L1 TRAIN Train#2000015807 GotoStation(1) -> UnloadTrain(1) station=StationSmall#4627
+[CORUN1] +106874ms L1 TRAIN Train#2000015807 GotoStation(1) -> UnloadTrain(1) station=StationSmall#4627
+						Lua 0:02:17:184
+[mod] [CORUN1] +108874ms L1 TRAIN Train#2000016849 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4552
+[CORUN1] +108874ms L1 TRAIN Train#2000016849 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4552
+[mod] [CORUN1] +108874ms L1 TRAIN Train#2000035273 LoadTrain(2) -> GotoStation(2) station=StationSmall#13376
+[CORUN1] +108874ms L1 TRAIN Train#2000035273 LoadTrain(2) -> GotoStation(2) station=StationSmall#13376
+						Lua 0:02:17:185
+[mod] [CORUN1] +108874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4842
+[CORUN1] +108874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4842
+[mod] [CORUN1] +108874ms L1 TRAIN Train#2000015807 UnloadTrain(1) -> LoadTrain(1) station=StationSmall#4627
+[CORUN1] +108874ms L1 TRAIN Train#2000015807 UnloadTrain(1) -> LoadTrain(1) station=StationSmall#4627
+						Lua 0:02:19:177
+[mod] [CORUN1] +110874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#4552
+[CORUN1] +110874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#4552
+[mod] [CORUN1] +110874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4792
+[CORUN1] +110874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4792
+[mod] [CORUN1] +110874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+[CORUN1] +110874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+[mod] [CORUN1] +110874ms L1 TRAIN Train#2000015807 LoadTrain(1) -> GotoStation(1) station=StationSmall#4627
+[CORUN1] +110874ms L1 TRAIN Train#2000015807 LoadTrain(1) -> GotoStation(1) station=StationSmall#4627
+						Lua 0:02:21:177
+[mod] [CORUN1] +112874ms L1 TRAIN Train#2000035260 GotoStation(2) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +112874ms L1 TRAIN Train#2000035260 GotoStation(2) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +112874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4552
+[CORUN1] +112874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4552
+[mod] [CORUN1] +112874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#4792
+[CORUN1] +112874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#4792
+						Lua 0:02:23:177
+[mod] [CORUN1] +114874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(3) station=StationSmall#13944
+[CORUN1] +114874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(3) station=StationSmall#13944
+[mod] [CORUN1] +114874ms L1 TRAIN Train#2000035396 GotoStation(1) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +114874ms L1 TRAIN Train#2000035396 GotoStation(1) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +114874ms L1 TRAIN Train#2000016863 LoadTrain(2) -> GotoStation(2) station=StationSmall#4792
+[CORUN1] +114874ms L1 TRAIN Train#2000016863 LoadTrain(2) -> GotoStation(2) station=StationSmall#4792
+						Lua 0:02:25:183
+[mod] [CORUN1] +116874ms L1 TRAIN Train#2000035260 LoadTrain(3) -> GotoStation(3) station=StationSmall#13944
+[CORUN1] +116874ms L1 TRAIN Train#2000035260 LoadTrain(3) -> GotoStation(3) station=StationSmall#13944
+[mod] [CORUN1] +116874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(6) station=StationSmall#13408
+[CORUN1] +116874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(6) station=StationSmall#13408
+[mod] [CORUN1] +116874ms L1 TRAIN Train#2000035273 GotoStation(2) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +116874ms L1 TRAIN Train#2000035273 GotoStation(2) -> UnloadTrain(0) station=StationSmall#13408
+						Lua 0:02:27:177
+[mod] [CORUN1] +118874ms L1 TRAIN Train#2000035396 LoadTrain(6) -> GotoStation(6) station=StationSmall#13408
+[CORUN1] +118874ms L1 TRAIN Train#2000035396 LoadTrain(6) -> GotoStation(6) station=StationSmall#13408
+[mod] [CORUN1] +118874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(6) station=StationSmall#13408
+[CORUN1] +118874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(6) station=StationSmall#13408
+						Lua 0:02:28:177
+[mod] [CORUN1] +119874ms L1 TRAIN Train#2000015807 GotoStation(1) -> UnloadTrain(0) station=StationSmall#6286
+[CORUN1] +119874ms L1 TRAIN Train#2000015807 GotoStation(1) -> UnloadTrain(0) station=StationSmall#6286
+						Lua 0:02:29:177
+[mod] [CORUN1] +120874ms L1 TRAIN Train#2000035273 LoadTrain(6) -> GotoStation(6) station=StationSmall#13408
+[CORUN1] +120874ms L1 TRAIN Train#2000035273 LoadTrain(6) -> GotoStation(6) station=StationSmall#13408
+						Lua 0:02:30:177
+[mod] [CORUN1] +121874ms L1 TRAIN Train#2000015807 UnloadTrain(0) -> LoadTrain(6) station=StationSmall#6286
+[CORUN1] +121874ms L1 TRAIN Train#2000015807 UnloadTrain(0) -> LoadTrain(6) station=StationSmall#6286
+						Lua 0:02:32:177
+[mod] [CORUN1] +123874ms L1 TRAIN Train#2000015807 LoadTrain(6) -> GotoStation(6) station=StationSmall#6286
+[CORUN1] +123874ms L1 TRAIN Train#2000015807 LoadTrain(6) -> GotoStation(6) station=StationSmall#6286
+						Lua 0:02:33:177
+[mod] [CORUN1] +124874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4792
+[CORUN1] +124874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4792
+						Lua 0:02:34:177
+[mod] [CORUN1] +125874ms L1 TRAIN Train#2000035396 GotoStation(6) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +125874ms L1 TRAIN Train#2000035396 GotoStation(6) -> UnloadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +125874ms L1 TRAIN Train#2000016863 GotoStation(2) -> UnloadTrain(0) station=StationSmall#4552
+[CORUN1] +125874ms L1 TRAIN Train#2000016863 GotoStation(2) -> UnloadTrain(0) station=StationSmall#4552
+						Lua 0:02:35:177
+[mod] [CORUN1] +126874ms L1 TRAIN Train#2000016849 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4792
+[CORUN1] +126874ms L1 TRAIN Train#2000016849 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4792
+						Lua 0:02:36:177
+[mod] [CORUN1] +127874ms L1 TRAIN Train#2000035260 GotoStation(3) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +127874ms L1 TRAIN Train#2000035260 GotoStation(3) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +127874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(7) station=StationSmall#13376
+[CORUN1] +127874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(7) station=StationSmall#13376
+[mod] [CORUN1] +127874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4552
+[CORUN1] +127874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4552
+[mod] [CORUN1] +127874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4842
+[CORUN1] +127874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4842
+						Lua 0:02:37:178
+[mod] [CORUN1] +128874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[CORUN1] +128874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+						Lua 0:02:38:177
+[mod] [CORUN1] +129874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[CORUN1] +129874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +129874ms L1 TRAIN Train#2000035396 LoadTrain(7) -> GotoStation(7) station=StationSmall#13376
+[CORUN1] +129874ms L1 TRAIN Train#2000035396 LoadTrain(7) -> GotoStation(7) station=StationSmall#13376
+[mod] [CORUN1] +129874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#4552
+[CORUN1] +129874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#4552
+[mod] [CORUN1] +129874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#4842
+[CORUN1] +129874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#4842
+						Lua 0:02:40:177
+[mod] [CORUN1] +131874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[CORUN1] +131874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[mod] [CORUN1] +131874ms L1 TRAIN Train#2000035273 GotoStation(6) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +131874ms L1 TRAIN Train#2000035273 GotoStation(6) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +131874ms L1 TRAIN Train#2000015562 LoadTrain(2) -> GotoStation(2) station=StationSmall#4842
+[CORUN1] +131874ms L1 TRAIN Train#2000015562 LoadTrain(2) -> GotoStation(2) station=StationSmall#4842
+						Lua 0:02:42:178
+[mod] [CORUN1] +133874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4842
+[CORUN1] +133874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4842
+[mod] [CORUN1] +133874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13944
+[CORUN1] +133874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13944
+						Lua 0:02:43:178
+[mod] [CORUN1] +134874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4627
+[CORUN1] +134874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4627
+[mod] [CORUN1] +134874ms L1 TRAIN Train#2000015807 GotoStation(6) -> UnloadTrain(6) station=StationSmall#4552
+[CORUN1] +134874ms L1 TRAIN Train#2000015807 GotoStation(6) -> UnloadTrain(6) station=StationSmall#4552
+						Lua 0:02:44:177
+[mod] [CORUN1] +135874ms L1 TRAIN Train#2000016849 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4842
+[CORUN1] +135874ms L1 TRAIN Train#2000016849 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4842
+[mod] [CORUN1] +135874ms L1 TRAIN Train#2000035273 LoadTrain(0) -> GotoStation(0) station=StationSmall#13944
+[CORUN1] +135874ms L1 TRAIN Train#2000035273 LoadTrain(0) -> GotoStation(0) station=StationSmall#13944
+						Lua 0:02:45:177
+[mod] [CORUN1] +136874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4627
+[CORUN1] +136874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4627
+[mod] [CORUN1] +136874ms L1 TRAIN Train#2000015807 UnloadTrain(6) -> LoadTrain(12) station=StationSmall#4552
+[CORUN1] +136874ms L1 TRAIN Train#2000015807 UnloadTrain(6) -> LoadTrain(12) station=StationSmall#4552
+[mod] [CORUN1] +136874ms L1 TRAIN Train#2000015562 GotoStation(2) -> UnloadTrain(2) station=StationSmall#4792
+[CORUN1] +136874ms L1 TRAIN Train#2000015562 GotoStation(2) -> UnloadTrain(2) station=StationSmall#4792
+						Lua 0:02:46:177
+[mod] [CORUN1] +137874ms L1 TRAIN Train#2000035396 GotoStation(7) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +137874ms L1 TRAIN Train#2000035396 GotoStation(7) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +137874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+[CORUN1] +137874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+						Lua 0:02:47:177
+[mod] [CORUN1] +138874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +138874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +138874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#4627
+[CORUN1] +138874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#4627
+						Lua 0:02:47:178
+[mod] [CORUN1] +138874ms L1 TRAIN Train#2000015807 LoadTrain(12) -> GotoStation(12) station=StationSmall#4552
+[CORUN1] +138874ms L1 TRAIN Train#2000015807 LoadTrain(12) -> GotoStation(12) station=StationSmall#4552
+[mod] [CORUN1] +138874ms L1 TRAIN Train#2000015562 UnloadTrain(2) -> LoadTrain(2) station=StationSmall#4792
+[CORUN1] +138874ms L1 TRAIN Train#2000015562 UnloadTrain(2) -> LoadTrain(2) station=StationSmall#4792
+						Lua 0:02:48:177
+[mod] [CORUN1] +139874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[CORUN1] +139874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+						Lua 0:02:49:177
+[mod] [CORUN1] +140874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[CORUN1] +140874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +140874ms L1 TRAIN Train#2000015562 LoadTrain(2) -> GotoStation(2) station=StationSmall#4792
+[CORUN1] +140874ms L1 TRAIN Train#2000015562 LoadTrain(2) -> GotoStation(2) station=StationSmall#4792
+						Lua 0:02:50:180
+[mod] [CORUN1] +141874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[CORUN1] +141874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+						Lua 0:02:51:177
+[mod] [CORUN1] +142874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[CORUN1] +142874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+						Lua 0:02:55:178
+[mod] [CORUN1] +146874ms L1 TRAIN Train#2000035273 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +146874ms L1 TRAIN Train#2000035273 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +146874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(9) station=StationSmall#12472
+[CORUN1] +146874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(9) station=StationSmall#12472
+						Lua 0:02:56:177
+[mod] [CORUN1] +147874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#6286
+[CORUN1] +147874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#6286
+						Lua 0:02:57:178
+[mod] [CORUN1] +148874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +148874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +148874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[CORUN1] +148874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +148874ms L1 TRAIN Train#2000016894 UnloadTrain(9) -> LoadTrain(12) station=StationSmall#12472
+[CORUN1] +148874ms L1 TRAIN Train#2000016894 UnloadTrain(9) -> LoadTrain(12) station=StationSmall#12472
+						Lua 0:02:58:178
+[mod] [CORUN1] +149874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#6286
+[CORUN1] +149874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#6286
+						Lua 0:02:59:178
+[mod] [CORUN1] +150874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +150874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +150874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[CORUN1] +150874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +150874ms L1 TRAIN Train#2000035273 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[CORUN1] +150874ms L1 TRAIN Train#2000035273 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[mod] [CORUN1] +150874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12472
+[CORUN1] +150874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12472
+[mod] [CORUN1] +150874ms L1 TRAIN Train#2000015807 GotoStation(12) -> UnloadTrain(11) station=StationSmall#4792
+[CORUN1] +150874ms L1 TRAIN Train#2000015807 GotoStation(12) -> UnloadTrain(11) station=StationSmall#4792
+						Lua 0:03:00:177
+[mod] [CORUN1] +151874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#6286
+[CORUN1] +151874ms L1 TRAIN Train#2000016863 LoadTrain(0) -> GotoStation(0) station=StationSmall#6286
+						Lua 0:03:01:177
+[mod] [CORUN1] +152874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[CORUN1] +152874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +152874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[CORUN1] +152874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[mod] [CORUN1] +152874ms L1 TRAIN Train#2000015807 UnloadTrain(11) -> LoadTrain(12) station=StationSmall#4792
+[CORUN1] +152874ms L1 TRAIN Train#2000015807 UnloadTrain(11) -> LoadTrain(12) station=StationSmall#4792
+[mod] [CORUN1] +152874ms L1 TRAIN Train#2000015562 GotoStation(2) -> UnloadTrain(0) station=StationSmall#4552
+[CORUN1] +152874ms L1 TRAIN Train#2000015562 GotoStation(2) -> UnloadTrain(0) station=StationSmall#4552
+						Lua 0:03:03:178
+[mod] [CORUN1] +154874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[CORUN1] +154874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[mod] [CORUN1] +154874ms L1 TRAIN Train#2000015807 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[CORUN1] +154874ms L1 TRAIN Train#2000015807 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[mod] [CORUN1] +154874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4552
+[CORUN1] +154874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4552
+						Lua 0:03:05:177
+[mod] [CORUN1] +156874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#4552
+[CORUN1] +156874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#4552
+						Lua 0:03:06:177
+[mod] [CORUN1] +157874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496						Lua 0:03:06:178
+
+[CORUN1] +157874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+						Lua 0:03:07:178
+[mod] [CORUN1] +158874ms L1 TRAIN Train#2000035273 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +158874ms L1 TRAIN Train#2000035273 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13376
+						Lua 0:03:08:177
+[mod] [CORUN1] +159874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[CORUN1] +159874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[mod] [CORUN1] +159874ms L1 TRAIN Train#2000015807 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4842
+[CORUN1] +159874ms L1 TRAIN Train#2000015807 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4842
+						Lua 0:03:09:178
+[mod] [CORUN1] +160874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +160874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +160874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+[CORUN1] +160874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13376
+						Lua 0:03:10:177
+[mod] [CORUN1] +161874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496						Lua 0:03:10:178
+
+[CORUN1] +161874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+[mod] [CORUN1] +161874ms L1 TRAIN Train#2000015807 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4842
+[CORUN1] +161874ms L1 TRAIN Train#2000015807 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4842
+[mod] [CORUN1] +161874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4627
+[CORUN1] +161874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4627
+						Lua 0:03:11:177
+[mod] [CORUN1] +162874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[CORUN1] +162874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +162874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4552
+[CORUN1] +162874ms L1 TRAIN Train#2000016863 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4552
+[mod] [CORUN1] +162874ms L1 TRAIN Train#2000035273 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+[CORUN1] +162874ms L1 TRAIN Train#2000035273 LoadTrain(0) -> GotoStation(0) station=StationSmall#13376
+						Lua 0:03:12:177
+[mod] [CORUN1] +163874ms L1 TRAIN Train#2000015807 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+[CORUN1] +163874ms L1 TRAIN Train#2000015807 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+[mod] [CORUN1] +163874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4627
+[CORUN1] +163874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4627
+						Lua 0:03:13:180
+[mod] [CORUN1] +164874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[CORUN1] +164874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[mod] [CORUN1] +164874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(10) station=StationSmall#4552
+[CORUN1] +164874ms L1 TRAIN Train#2000016863 UnloadTrain(0) -> LoadTrain(10) station=StationSmall#4552
+						Lua 0:03:14:178
+[mod] [CORUN1] +165874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +165874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +165874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#4627
+[CORUN1] +165874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#4627
+						Lua 0:03:15:177
+[mod] [CORUN1] +166874ms L1 TRAIN Train#2000016863 LoadTrain(10) -> GotoStation(10) station=StationSmall#4552
+[CORUN1] +166874ms L1 TRAIN Train#2000016863 LoadTrain(10) -> GotoStation(10) station=StationSmall#4552
+						Lua 0:03:16:177
+[mod] [CORUN1] +167874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13944
+[CORUN1] +167874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +167874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12631
+[CORUN1] +167874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12631
+						Lua 0:03:18:177
+[mod] [CORUN1] +169874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13944
+[CORUN1] +169874ms L1 TRAIN Train#2000035260 LoadTrain(0) -> GotoStation(0) station=StationSmall#13944
+[mod] [CORUN1] +169874ms L1 TRAIN Train#2000035273 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +169874ms L1 TRAIN Train#2000035273 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +169874ms L1 TRAIN Train#2000016894 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12631
+[CORUN1] +169874ms L1 TRAIN Train#2000016894 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12631
+						Lua 0:03:20:178
+[mod] [CORUN1] +171874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#13408
+[CORUN1] +171874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(2) station=StationSmall#13408
+[mod] [CORUN1] +171874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12631
+[CORUN1] +171874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12631
+						Lua 0:03:22:177
+[mod] [CORUN1] +173874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12472
+[CORUN1] +173874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12472
+[mod] [CORUN1] +173874ms L1 TRAIN Train#2000035273 LoadTrain(2) -> GotoStation(2) station=StationSmall#13408
+[CORUN1] +173874ms L1 TRAIN Train#2000035273 LoadTrain(2) -> GotoStation(2) station=StationSmall#13408
+[mod] [CORUN1] +173874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#6286
+[CORUN1] +173874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#6286
+						Lua 0:03:24:177
+[mod] [CORUN1] +175874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12472
+[CORUN1] +175874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12472
+[mod] [CORUN1] +175874ms L1 TRAIN Train#2000035273 GotoStation(2) -> LoadTrain(2) station=StationSmall#13408
+[CORUN1] +175874ms L1 TRAIN Train#2000035273 GotoStation(2) -> LoadTrain(2) station=StationSmall#13408
+[mod] [CORUN1] +175874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#6286
+[CORUN1] +175874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#6286
+						Lua 0:03:26:178
+[mod] [CORUN1] +177874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +177874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +177874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#12472
+[CORUN1] +177874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#12472
+[mod] [CORUN1] +177874ms L1 TRAIN Train#2000035273 LoadTrain(2) -> GotoStation(2) station=StationSmall#13408
+[CORUN1] +177874ms L1 TRAIN Train#2000035273 LoadTrain(2) -> GotoStation(2) station=StationSmall#13408
+[mod] [CORUN1] +177874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#6286
+[CORUN1] +177874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#6286
+						Lua 0:03:27:177
+[mod] [CORUN1] +178874ms L1 TRAIN Train#2000016863 GotoStation(10) -> UnloadTrain(10) station=StationSmall#4792
+[CORUN1] +178874ms L1 TRAIN Train#2000016863 GotoStation(10) -> UnloadTrain(10) station=StationSmall#4792
+[mod] [CORUN1] +178874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+[CORUN1] +178874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+						Lua 0:03:28:177
+[mod] [CORUN1] +179874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13944
+[CORUN1] +179874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13944
+						Lua 0:03:29:177
+[mod] [CORUN1] +180874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +180874ms L1 TRAIN Train#2000035260 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +180874ms L1 TRAIN Train#2000016863 UnloadTrain(10) -> LoadTrain(12) station=StationSmall#4792
+[CORUN1] +180874ms L1 TRAIN Train#2000016863 UnloadTrain(10) -> LoadTrain(12) station=StationSmall#4792
+[mod] [CORUN1] +180874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[CORUN1] +180874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+						Lua 0:03:30:177
+[mod] [CORUN1] +181874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13944
+[CORUN1] +181874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13944
+						Lua 0:03:31:177
+[mod] [CORUN1] +182874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#13408
+[CORUN1] +182874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(1) station=StationSmall#13408
+[mod] [CORUN1] +182874ms L1 TRAIN Train#2000016863 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[CORUN1] +182874ms L1 TRAIN Train#2000016863 LoadTrain(12) -> GotoStation(12) station=StationSmall#4792
+[mod] [CORUN1] +182874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+[CORUN1] +182874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+						Lua 0:03:32:177
+[mod] [CORUN1] +183874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+[CORUN1] +183874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12496
+						Lua 0:03:33:178
+[mod] [CORUN1] +184874ms L1 TRAIN Train#2000035260 LoadTrain(1) -> GotoStation(1) station=StationSmall#13408
+[CORUN1] +184874ms L1 TRAIN Train#2000035260 LoadTrain(1) -> GotoStation(1) station=StationSmall#13408
+						Lua 0:03:34:179
+[mod] [CORUN1] +185874ms L1 TRAIN Train#2000016849 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[CORUN1] +185874ms L1 TRAIN Train#2000016849 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12496
+[mod] [CORUN1] +185874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4627
+[CORUN1] +185874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4627
+						Lua 0:03:36:177
+[mod] [CORUN1] +187874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+[CORUN1] +187874ms L1 TRAIN Train#2000016849 LoadTrain(12) -> GotoStation(12) station=StationSmall#12496
+[mod] [CORUN1] +187874ms L1 TRAIN Train#2000016863 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4842
+[CORUN1] +187874ms L1 TRAIN Train#2000016863 GotoStation(12) -> UnloadTrain(12) station=StationSmall#4842
+[mod] [CORUN1] +187874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4627
+[CORUN1] +187874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#4627
+						Lua 0:03:37:177
+[mod] [CORUN1] +188874ms L1 TRAIN Train#2000035273 GotoStation(2) -> UnloadTrain(0) station=StationSmall#13944
+[CORUN1] +188874ms L1 TRAIN Train#2000035273 GotoStation(2) -> UnloadTrain(0) station=StationSmall#13944
+[mod] [CORUN1] +188874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12472
+[CORUN1] +188874ms L1 TRAIN Train#2000016894 GotoStation(12) -> UnloadTrain(12) station=StationSmall#12472
+						Lua 0:03:38:177
+[mod] [CORUN1] +189874ms L1 TRAIN Train#2000016863 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4842
+						Lua 0:03:38:178
+[CORUN1] +189874ms L1 TRAIN Train#2000016863 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#4842
+[mod] [CORUN1] +189874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#4627
+[CORUN1] +189874ms L1 TRAIN Train#2000015562 LoadTrain(0) -> GotoStation(0) station=StationSmall#4627
+						Lua 0:03:39:177
+[mod] [CORUN1] +190874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(10) station=StationSmall#13944
+[CORUN1] +190874ms L1 TRAIN Train#2000035273 UnloadTrain(0) -> LoadTrain(10) station=StationSmall#13944
+[mod] [CORUN1] +190874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12472
+[CORUN1] +190874ms L1 TRAIN Train#2000016894 UnloadTrain(12) -> LoadTrain(12) station=StationSmall#12472
+						Lua 0:03:40:177
+[mod] [CORUN1] +191874ms L1 TRAIN Train#2000016863 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+[CORUN1] +191874ms L1 TRAIN Train#2000016863 LoadTrain(12) -> GotoStation(12) station=StationSmall#4842
+						Lua 0:03:41:177
+[mod] [CORUN1] +192874ms L1 TRAIN Train#2000035260 GotoStation(1) -> UnloadTrain(0) station=StationSmall#13376
+[CORUN1] +192874ms L1 TRAIN Train#2000035260 GotoStation(1) -> UnloadTrain(0) station=StationSmall#13376
+[mod] [CORUN1] +192874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[CORUN1] +192874ms L1 TRAIN Train#2000035396 GotoStation(0) -> UnloadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +192874ms L1 TRAIN Train#2000035273 LoadTrain(10) -> GotoStation(10) station=StationSmall#13944
+[CORUN1] +192874ms L1 TRAIN Train#2000035273 LoadTrain(10) -> GotoStation(10) station=StationSmall#13944
+[mod] [CORUN1] +192874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12472
+[CORUN1] +192874ms L1 TRAIN Train#2000016894 LoadTrain(12) -> GotoStation(12) station=StationSmall#12472
+						Lua 0:03:43:180
+[mod] [CORUN1] +194874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(7) station=StationSmall#13376
+[CORUN1] +194874ms L1 TRAIN Train#2000035260 UnloadTrain(0) -> LoadTrain(7) station=StationSmall#13376
+[mod] [CORUN1] +194874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[CORUN1] +194874ms L1 TRAIN Train#2000035396 UnloadTrain(0) -> LoadTrain(0) station=StationSmall#13408
+[mod] [CORUN1] +194874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12631
+[CORUN1] +194874ms L1 TRAIN Train#2000016849 GotoStation(12) -> UnloadTrain(0) station=StationSmall#12631
+[mod] [CORUN1] +194874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4552
+[CORUN1] +194874ms L1 TRAIN Train#2000015562 GotoStation(0) -> UnloadTrain(0) station=StationSmall#4552
+						Lua 0:03:45:178
+[mod] [CORUN1] +196874ms L1 TRAIN Train#2000035260 LoadTrain(7) -> GotoStation(7) station=StationSmall#13376
+[CORUN1] +196874ms L1 TRAIN Train#2000035260 LoadTrain(7) -> GotoStation(7) station=StationSmall#13376
+[mod] [CORUN1] +196874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[CORUN1] +196874ms L1 TRAIN Train#2000035396 LoadTrain(0) -> GotoStation(0) station=StationSmall#13408
+[mod] [CORUN1] +196874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12631
+[CORUN1] +196874ms L1 TRAIN Train#2000016849 UnloadTrain(0) -> LoadTrain(12) station=StationSmall#12631
+[mod] [CORUN1] +196874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(5) station=StationSmall#4552
+[CORUN1] +196874ms L1 TRAIN Train#2000015562 UnloadTrain(0) -> LoadTrain(5) station=StationSmall#4552
+						Lua 0:03:47:177
+[mod] [CORUN1] +198874ms GATE 1 WAITING (L1 F11 watch — say when you have seen one unload) — owner types in the console:  CoRun1_Go = 1
+[CORUN1] +198874ms GATE 1 WAITING (L1 F11 watch — say when you have seen one unload) — owner types in the console:  CoRun1_Go = 1
+						Lua 0:04:45:677
+[mod] [CORUN1] +257374ms GATE 1 RELEASED by owner
+[CORUN1] +257374ms GATE 1 RELEASED by owner
+[mod] [CORUN1] +257374ms L1 COUNTERS over the window: train-holder removals=340, 'travel time' comfort calls=0, 'seen forest' sanity calls=0, wedge candidates=0
+[CORUN1] +257374ms L1 COUNTERS over the window: train-holder removals=340, 'travel time' comfort calls=0, 'seen forest' sanity calls=0, wedge candidates=0
+[mod] [CORUN1] +257374ms STEP L1-f11-watch END 238500ms
+[CORUN1] +257374ms STEP L1-f11-watch END 238500ms
+[mod] [CORUN1] +257374ms STEP L2-c41-amplify BEGIN
+[CORUN1] +257374ms STEP L2-c41-amplify BEGIN
+[mod] [CORUN1] +257374ms L2A mouse-range poll BEGIN desk=(0, 0)-(3840, 2160) — owner: move the cursor over both monitors
+[CORUN1] +257374ms L2A mouse-range poll BEGIN desk=(0, 0)-(3840, 2160) — owner: move the cursor over both monitors
+						Lua 0:05:07:278
+[mod] [CORUN1] +278974ms L2A ⭐ OUT-OF-RANGE mouse=(4075, 1459) desk=(0, 0)-(3840, 2160) (hit 1 of 109 reads)
+[CORUN1] +278974ms L2A ⭐ OUT-OF-RANGE mouse=(4075, 1459) desk=(0, 0)-(3840, 2160) (hit 1 of 109 reads)
+						Lua 0:05:07:477
+[mod] [CORUN1] +279174ms L2A ⭐ OUT-OF-RANGE mouse=(4746, 1425) desk=(0, 0)-(3840, 2160) (hit 2 of 110 reads)
+[CORUN1] +279174ms L2A ⭐ OUT-OF-RANGE mouse=(4746, 1425) desk=(0, 0)-(3840, 2160) (hit 2 of 110 reads)
+						Lua 0:05:07:677
+[mod] [CORUN1] +279374ms L2A ⭐ OUT-OF-RANGE mouse=(5360, 1353) desk=(0, 0)-(3840, 2160) (hit 3 of 111 reads)
+[CORUN1] +279374ms L2A ⭐ OUT-OF-RANGE mouse=(5360, 1353) desk=(0, 0)-(3840, 2160) (hit 3 of 111 reads)
+						Lua 0:05:07:877
+[mod] [CORUN1] +279574ms L2A ⭐ OUT-OF-RANGE mouse=(5844, 1327) desk=(0, 0)-(3840, 2160) (hit 4 of 112 reads)
+[CORUN1] +279574ms L2A ⭐ OUT-OF-RANGE mouse=(5844, 1327) desk=(0, 0)-(3840, 2160) (hit 4 of 112 reads)
+						Lua 0:05:08:077
+[mod] [CORUN1] +279774ms L2A ⭐ OUT-OF-RANGE mouse=(6226, 1262) desk=(0, 0)-(3840, 2160) (hit 5 of 113 reads)
+[CORUN1] +279774ms L2A ⭐ OUT-OF-RANGE mouse=(6226, 1262) desk=(0, 0)-(3840, 2160) (hit 5 of 113 reads)
+						Lua 0:05:18:877
+[mod] [CORUN1] +290574ms L2A ⭐ OUT-OF-RANGE mouse=(3917, 890) desk=(0, 0)-(3840, 2160) (hit 25 of 167 reads)
+[CORUN1] +290574ms L2A ⭐ OUT-OF-RANGE mouse=(3917, 890) desk=(0, 0)-(3840, 2160) (hit 25 of 167 reads)
+						Lua 0:05:45:677
+[mod] [CORUN1] +317374ms L2A RESULT 29/300 reads outside desktop.box | x range 0..7665 | y range 0..2559 | desk=(0, 0)-(3840, 2160)
+[CORUN1] +317374ms L2A RESULT 29/300 reads outside desktop.box | x range 0..7665 | y range 0..2559 | desk=(0, 0)-(3840, 2160)
+[mod] [CORUN1] +317374ms L2B amplification BEGIN rc=RCTransport#2000000331 depot=UniversalStorageDepot#1073 stored=56051 resources=10 cycles=20 — owner: watch for the picker FAILING to appear
+[CORUN1] +317374ms L2B amplification BEGIN rc=RCTransport#2000000331 depot=UniversalStorageDepot#1073 stored=56051 resources=10 cycles=20 — owner: watch for the picker FAILING to appear
+						Lua 0:05:45:681
+[mod] [CORUN1] +317374ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +317374ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:45:690
+[mod] [CORUN1] +317374ms L2 LAYOUT #1 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +317374ms L2 LAYOUT #1 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:45:691
+[mod] [CORUN1] +317374ms L2 LAYOUT #2 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false						Lua 0:05:45:692
+
+[CORUN1] +317374ms L2 LAYOUT #2 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:45:698
+[mod] [CORUN1] +317391ms L2 LAYOUT #3 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +317391ms L2 LAYOUT #3 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:46:078
+[mod] [CORUN1] +317774ms L2B cycle 1/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +317774ms L2B cycle 1/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:46:479
+[mod] [CORUN1] +318174ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +318174ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:46:483
+[mod] [CORUN1] +318174ms L2 LAYOUT #4 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +318174ms L2 LAYOUT #4 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:46:484
+[mod] [CORUN1] +318174ms L2 LAYOUT #5 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +318174ms L2 LAYOUT #5 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:46:491
+[mod] [CORUN1] +318185ms L2 LAYOUT #6 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +318185ms L2 LAYOUT #6 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:46:877
+[mod] [CORUN1] +318574ms L2B cycle 2/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +318574ms L2B cycle 2/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:47:279
+[mod] [CORUN1] +318974ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +318974ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:47:284
+[mod] [CORUN1] +318977ms L2 LAYOUT #7 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +318977ms L2 LAYOUT #7 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:47:285
+[mod] [CORUN1] +318977ms L2 LAYOUT #8 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +318977ms L2 LAYOUT #8 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:47:680
+[mod] [CORUN1] +319374ms L2B cycle 3/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +319374ms L2B cycle 3/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:48:081
+[mod] [CORUN1] +319774ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +319774ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:48:087
+[mod] [CORUN1] +319775ms L2 LAYOUT #9 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +319775ms L2 LAYOUT #9 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:48:088
+[mod] [CORUN1] +319775ms L2 LAYOUT #10 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +319775ms L2 LAYOUT #10 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:48:478
+[mod] [CORUN1] +320174ms L2B cycle 4/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +320174ms L2B cycle 4/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:48:882
+[mod] [CORUN1] +320574ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +320574ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:48:887
+[mod] [CORUN1] +320575ms L2 LAYOUT #11 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +320575ms L2 LAYOUT #11 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:48:888
+[mod] [CORUN1] +320575ms L2 LAYOUT #12 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +320575ms L2 LAYOUT #12 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:49:277
+[mod] [CORUN1] +320974ms L2B cycle 5/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +320974ms L2B cycle 5/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:49:680
+[mod] [CORUN1] +321374ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +321374ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:49:684
+[mod] [CORUN1] +321374ms L2 LAYOUT #13 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +321374ms L2 LAYOUT #13 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:49:685
+[mod] [CORUN1] +321374ms L2 LAYOUT #14 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +321374ms L2 LAYOUT #14 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:49:692
+[mod] [CORUN1] +321385ms L2 LAYOUT #15 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +321385ms L2 LAYOUT #15 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:49:994
+[mod] [CORUN1] +321690ms L2 LAYOUT #16 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +321690ms L2 LAYOUT #16 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:50:077
+[mod] [CORUN1] +321774ms L2B cycle 6/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +321774ms L2B cycle 6/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:50:479
+[mod] [CORUN1] +322174ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +322174ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:50:489
+[mod] [CORUN1] +322181ms L2 LAYOUT #17 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +322181ms L2 LAYOUT #17 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:50:490
+[mod] [CORUN1] +322181ms L2 LAYOUT #18 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +322181ms L2 LAYOUT #18 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:50:878
+[mod] [CORUN1] +322574ms L2B cycle 7/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +322574ms L2B cycle 7/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:51:280
+[mod] [CORUN1] +322974ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +322974ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:51:288
+[mod] [CORUN1] +322979ms L2 LAYOUT #19 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +322979ms L2 LAYOUT #19 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:51:289
+[mod] [CORUN1] +322979ms L2 LAYOUT #20 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +322979ms L2 LAYOUT #20 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:51:678
+[mod] [CORUN1] +323374ms L2B cycle 8/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +323374ms L2B cycle 8/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:52:080
+[mod] [CORUN1] +323774ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +323774ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:52:086
+[mod] [CORUN1] +323774ms L2 LAYOUT #21 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +323774ms L2 LAYOUT #21 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:52:087
+[mod] [CORUN1] +323774ms L2 LAYOUT #22 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +323774ms L2 LAYOUT #22 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:52:095
+[mod] [CORUN1] +323787ms L2 LAYOUT #23 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +323787ms L2 LAYOUT #23 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:52:477
+[mod] [CORUN1] +324174ms L2B cycle 9/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +324174ms L2B cycle 9/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:52:879
+[mod] [CORUN1] +324574ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +324574ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:52:886
+[mod] [CORUN1] +324579ms L2 LAYOUT #24 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +324579ms L2 LAYOUT #24 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:52:887
+[mod] [CORUN1] +324579ms L2 LAYOUT #25 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +324579ms L2 LAYOUT #25 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:52:986
+[mod] [CORUN1] +324681ms L2 LAYOUT #26 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +324681ms L2 LAYOUT #26 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:53:278
+[mod] [CORUN1] +324974ms L2B cycle 10/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +324974ms L2B cycle 10/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:53:680
+[mod] [CORUN1] +325374ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +325374ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:53:689
+[mod] [CORUN1] +325381ms L2 LAYOUT #27 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +325381ms L2 LAYOUT #27 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:53:690
+[mod] [CORUN1] +325381ms L2 LAYOUT #28 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +325381ms L2 LAYOUT #28 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:53:988
+[mod] [CORUN1] +325685ms L2 LAYOUT #29 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +325685ms L2 LAYOUT #29 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:54:077
+[mod] [CORUN1] +325774ms L2B cycle 11/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +325774ms L2B cycle 11/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:54:479
+[mod] [CORUN1] +326174ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +326174ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:54:484
+[mod] [CORUN1] +326174ms L2 LAYOUT #30 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +326174ms L2 LAYOUT #30 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:54:485
+[mod] [CORUN1] +326174ms L2 LAYOUT #31 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +326174ms L2 LAYOUT #31 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:54:494
+[mod] [CORUN1] +326185ms L2 LAYOUT #32 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +326185ms L2 LAYOUT #32 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:54:877
+[mod] [CORUN1] +326574ms L2B cycle 12/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +326574ms L2B cycle 12/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:55:280
+[mod] [CORUN1] +326974ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +326974ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:55:286
+[mod] [CORUN1] +326975ms L2 LAYOUT #33 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +326975ms L2 LAYOUT #33 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:55:287
+[mod] [CORUN1] +326975ms L2 LAYOUT #34 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +326975ms L2 LAYOUT #34 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:55:678
+[mod] [CORUN1] +327374ms L2B cycle 13/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +327374ms L2B cycle 13/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:56:080
+[mod] [CORUN1] +327774ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)						Lua 0:05:56:081
+
+[CORUN1] +327774ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:56:090
+[mod] [CORUN1] +327780ms L2 LAYOUT #35 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +327780ms L2 LAYOUT #35 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:56:091
+[mod] [CORUN1] +327780ms L2 LAYOUT #36 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +327780ms L2 LAYOUT #36 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:56:438
+[mod] [CORUN1] +328134ms L2 LAYOUT #37 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +328134ms L2 LAYOUT #37 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:56:478
+[mod] [CORUN1] +328174ms L2B cycle 14/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +328174ms L2B cycle 14/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:56:880
+[mod] [CORUN1] +328574ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +328574ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:56:886
+[mod] [CORUN1] +328575ms L2 LAYOUT #38 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +328575ms L2 LAYOUT #38 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:56:887
+[mod] [CORUN1] +328575ms L2 LAYOUT #39 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +328575ms L2 LAYOUT #39 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:56:992
+[mod] [CORUN1] +328688ms L2 LAYOUT #40 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +328688ms L2 LAYOUT #40 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:57:278
+[mod] [CORUN1] +328974ms L2B cycle 15/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +328974ms L2B cycle 15/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:57:680
+[mod] [CORUN1] +329374ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +329374ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:57:689
+[mod] [CORUN1] +329380ms L2 LAYOUT #41 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +329380ms L2 LAYOUT #41 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:57:690
+[mod] [CORUN1] +329380ms L2 LAYOUT #42 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +329380ms L2 LAYOUT #42 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:58:078
+[mod] [CORUN1] +329774ms L2B cycle 16/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +329774ms L2B cycle 16/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:58:481
+[mod] [CORUN1] +330174ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +330174ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:58:489
+[mod] [CORUN1] +330175ms L2 LAYOUT #43 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +330175ms L2 LAYOUT #43 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:58:490
+[mod] [CORUN1] +330175ms L2 LAYOUT #44 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +330175ms L2 LAYOUT #44 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:58:878
+[mod] [CORUN1] +330574ms L2B cycle 17/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +330574ms L2B cycle 17/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:05:59:280
+[mod] [CORUN1] +330974ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +330974ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:05:59:291
+[mod] [CORUN1] +330982ms L2 LAYOUT #45 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +330982ms L2 LAYOUT #45 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:59:292
+[mod] [CORUN1] +330982ms L2 LAYOUT #46 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +330982ms L2 LAYOUT #46 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:05:59:678
+[mod] [CORUN1] +331374ms L2B cycle 18/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +331374ms L2B cycle 18/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:06:00:079
+[mod] [CORUN1] +331774ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +331774ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:06:00:090
+[mod] [CORUN1] +331780ms L2 LAYOUT #47 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +331780ms L2 LAYOUT #47 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:06:00:091
+[mod] [CORUN1] +331780ms L2 LAYOUT #48 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +331780ms L2 LAYOUT #48 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:06:00:478
+[mod] [CORUN1] +332174ms L2B cycle 19/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +332174ms L2B cycle 19/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:06:00:880
+[mod] [CORUN1] +332574ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+[CORUN1] +332574ms L2 GETITEMS items=10 (0 means the dialog closes itself — a DATA condition, not C41)
+						Lua 0:06:00:889
+[mod] [CORUN1] +332580ms L2 LAYOUT #49 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +332580ms L2 LAYOUT #49 anchor=(1712, 1571) box=(814, 1186)-(2611, 1571) cont=(686, 1186)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=385 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:06:00:890
+[mod] [CORUN1] +332580ms L2 LAYOUT #50 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +332580ms L2 LAYOUT #50 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:06:00:994
+[mod] [CORUN1] +332691ms L2 LAYOUT #51 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+[CORUN1] +332691ms L2 LAYOUT #51 anchor=(1712, 1571) box=(814, 1142)-(2611, 1571) cont=(686, 1142)-(2739, 1514) scale=(1425, 1425) mw=1797 mh=429 mouse=(1712, 1571) desk=(0, 0)-(3840, 2160) anchor_out=false
+						Lua 0:06:01:278
+[mod] [CORUN1] +332974ms L2B cycle 20/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+[CORUN1] +332974ms L2B cycle 20/20 dialog=ALIVE box=(814, 1142)-(2611, 1571) items=10 mouse_at_open=(1712, 1571)
+						Lua 0:06:01:678
+[mod] [CORUN1] +333374ms L2B RESULT 20/20 opened, 0/20 missing | layouts logged=51, of which anchor outside desktop.box=0
+[CORUN1] +333374ms L2B RESULT 20/20 opened, 0/20 missing | layouts logged=51, of which anchor outside desktop.box=0
+[mod] [CORUN1] +333374ms STEP L2-c41-amplify END 76000ms
+[CORUN1] +333374ms STEP L2-c41-amplify END 76000ms
+[mod] [CORUN1] +333374ms === OWNER IS FREE — the remaining legs need no eyes ===
+[CORUN1] +333374ms === OWNER IS FREE — the remaining legs need no eyes ===
+[mod] [CORUN1] +333374ms GATE 3 WAITING (you may leave; ride-alongs start now) — owner types in the console:  CoRun1_Go = 3
+[CORUN1] +333374ms GATE 3 WAITING (you may leave; ride-alongs start now) — owner types in the console:  CoRun1_Go = 3
+						Lua 0:06:31:678
+[mod] [CORUN1] +363374ms GATE 3 TIMED OUT — proceeding on the clock
+[CORUN1] +363374ms GATE 3 TIMED OUT — proceeding on the clock
+[mod] [CORUN1] +363374ms STEP L3-done-timing BEGIN
+[CORUN1] +363374ms STEP L3-done-timing BEGIN
+[mod] [CORUN1] +363374ms L3 SKIP — cross-map pair not available (rocket=UniversalZeusRocket#1061, off-map rider=nil). This is a §6 gap, not a failure.
+[CORUN1] +363374ms L3 SKIP — cross-map pair not available (rocket=UniversalZeusRocket#1061, off-map rider=nil). This is a §6 gap, not a failure.
+[mod] [CORUN1] +363374ms STEP L3-done-timing END 0ms
+[CORUN1] +363374ms STEP L3-done-timing END 0ms
+[mod] [CORUN1] +363374ms STEP L4-hex-tiebreak BEGIN
+[CORUN1] +363374ms STEP L4-hex-tiebreak BEGIN
+[mod] [CORUN1] +363374ms L4 CONTROL (before the break) hex=(129,450) HexGetTrackGridElement -> TrackGridElement#4573 | is the element itself=true
+[CORUN1] +363374ms L4 CONTROL (before the break) hex=(129,450) HexGetTrackGridElement -> TrackGridElement#4573 | is the element itself=true
+[mod] [CORUN1] +363374ms L4 FORCED: track:BreakTrackElement(element) — the shipped call site BreakTracks uses (Meteors.lua:604), on a chosen element. track=TrackBase#4569 element=TrackGridElement#4573
+[CORUN1] +363374ms L4 FORCED: track:BreakTrackElement(element) — the shipped call site BreakTracks uses (Meteors.lua:604), on a chosen element. track=TrackBase#4569 element=TrackGridElement#4573
+						Lua 0:06:32:678
+[mod] [CORUN1] +364374ms L4 STATE after break: element=TrackGridElement#4573 visible=false | site=TrackConstructionSite#14605 site.broken==element=true | site is a TrackGridElement=true
+[CORUN1] +364374ms L4 STATE after break: element=TrackGridElement#4573 visible=false | site=TrackConstructionSite#14605 site.broken==element=true | site is a TrackGridElement=true
+[mod] [CORUN1] +364374ms L4 both candidates occupy the same hex: element q,r=(129,450) site q,r=(129,450)
+[CORUN1] +364374ms L4 both candidates occupy the same hex: element q,r=(129,450) site q,r=(129,450)
+[mod] [CORUN1] +364374ms L4 ⭐ TIE-BREAK READ: HexGetTrackGridElement(hex_grid, 129, 450) -> TrackGridElement#4573  ==> THE HIDDEN ELEMENT
+[CORUN1] +364374ms L4 ⭐ TIE-BREAK READ: HexGetTrackGridElement(hex_grid, 129, 450) -> TrackGridElement#4573  ==> THE HIDDEN ELEMENT
+[mod] [CORUN1] +364374ms L4 F99 consequence: process_alien_elements' neighbour walk (TrackElement.lua:705-711) sees THE HIDDEN ELEMENT on this hex
+[CORUN1] +364374ms L4 F99 consequence: process_alien_elements' neighbour walk (TrackElement.lua:705-711) sees THE HIDDEN ELEMENT on this hex
+						Lua 0:06:34:677
+[mod] [CORUN1] +366374ms L4 CONFIRM (2 s later): -> TrackGridElement#4573 | same as first read=true
+[CORUN1] +366374ms L4 CONFIRM (2 s later): -> TrackGridElement#4573 | same as first read=true
+[mod] [CORUN1] +366374ms STEP L4-hex-tiebreak END 3000ms
+[CORUN1] +366374ms STEP L4-hex-tiebreak END 3000ms
+[mod] [CORUN1] +366374ms === CO-RUN #1 legs complete ===
+[CORUN1] +366374ms === CO-RUN #1 legs complete ===
+[mod] [CORUN1] +366374ms SHUTDOWN done
+[CORUN1] +366374ms SHUTDOWN done
+						Lua 0:06:37:678
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:06:37:683
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:06:38:115
+
+
+*** Debug::Done()
+Time (ms)	398115
+
+
