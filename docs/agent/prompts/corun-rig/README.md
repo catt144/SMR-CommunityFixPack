@@ -19,8 +19,11 @@ runs before anything ambitious is built on it.
   get a compact **evidence card** the owner can quick-read and OK. Prompt 1
   drafts the tiers, prompt 4 finalizes and ROUTES them (they change the
   `tested` policy, which is the owner's, not ours).
-- **The designated experiment save is NOT yet chosen** — prompt 1 routes that
-  choice with a recommendation (what the save must contain).
+- **The designated experiment save is `TEST2H TRAIN`** (owner, 2026-08-04) —
+  the large multihop line with underground track. Prompt 1 VALIDATES it
+  against the skeleton's needs instead of routing the choice; if it lacks
+  something a payload item requires, route the gap, not a new choice. All
+  runs stage a COPY; the save itself is never written.
 
 ## Manifest
 

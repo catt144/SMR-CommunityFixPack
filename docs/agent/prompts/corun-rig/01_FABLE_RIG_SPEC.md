@@ -88,10 +88,13 @@ trace from `F11.md` — wrap the binding, print the ordering verdict), and the
 ABORT CRITERIA that trip the kill-gate (each UNKNOWN that fails, each step
 that exceeds its predicted cost by 3×).
 
-**Job 7 — route to the owner** (checklist "Decisions waiting on you", with
-recommendations): the designated experiment save (name what it must contain:
-at minimum a working passenger train line for the F11 watch; ideally
-underground track for tie-break work) and the GO for co-run #0 scheduling.
+**Job 7 — validate the designated save and route the GO.** The owner chose
+`TEST2H TRAIN` (README, on the record). Confirm from the record — or list for
+co-run #0 to confirm in-game — that it carries what the payloads need (a
+working passenger train line for the F11 watch; underground track for the
+tie-break; a depot or the makings of one for C41). A gap is routed as a gap
+("needs X staged"), never as a re-choice. Then route the GO for co-run #0
+scheduling to the checklist.
 
 **Job 8 — write `CORUN_RIG_SPEC.md` in this folder** holding jobs 2–6's
 output, then close: append your outbox to prompt 2's `## Notes from
