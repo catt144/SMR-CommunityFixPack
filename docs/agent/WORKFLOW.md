@@ -294,6 +294,39 @@ staging, scenario scripting, amplification loops, log reads) and **the owner is
 on call, not on duty** — present for the minutes where eyes on the screen or a
 judgment call are genuinely needed, and free otherwise.
 
+⭐ **WHAT THE GOAL ACTUALLY IS, IN THE OWNER'S OWN WORDS (2026-08-04) — read
+this before optimising anything:** *"As much that can be optimized while not
+reducing quality it probably the better framing of it. Keep a good balance of
+quality and minimal time investment as there is only one of me."* And, on the
+same day: *"This whole method isn't to take me completely out of the loop, its
+to take my time commitment to a more reasonable level and streamline."*
+
+> **The owner's time is the OBJECTIVE to minimise. QUALITY is the CONSTRAINT
+> that binds.** Optimise their involvement as hard as it will go — and stop
+> exactly where going further would cost evidence quality, not one step before.
+
+Both failure modes are real and this rule names both:
+
+- ⛔ **Do not buy time savings with evidence.** If removing the owner from a
+  moment means the finding gets weaker — an unwitnessed behaviour, a forced path
+  standing in for an organic one, a verdict nobody competent to disagree ever
+  saw — **the saving is not available.** Route the item; do not quietly
+  downgrade what it proves. This is the reading "minimise owner contact" gets
+  wrong.
+- ⛔ **Do not spend an hour of engineering to dodge thirty seconds of their
+  hands.** Asking is legitimate when the ask genuinely beats the alternative on
+  the quality/time trade — say what you need, why, and how long it takes them,
+  in the measure-moments list up front and batched with moments they are already
+  sitting for. But asking is **not free and not a default**: every ask competes
+  with the ones that actually need eyes.
+- **"Needs the owner" is a precondition to route** (a TAKEABLE-WHEN rider),
+  never a reason to descope. They stay in the loop by design; what changed is
+  that they are no longer doing the setup.
+
+⛔ **And do not report owner-minutes saved as if zero were the target.** Report
+cost against promise. A sitting that came in under its promise is a measurement,
+not an achievement.
+
 **Route an item to a co-run when:**
 
 1. **Setup is heavy, the measure is short** — hours to build the exact scenario,

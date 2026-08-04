@@ -163,8 +163,28 @@ FIX or ROUTE, the third is yours to ADJUDICATE.)*
 
   ***RECHECK 4 — integration hygiene, regardless of your verdict.*** Rule 5 and
   the amended co-run bullet must say the same thing; nothing else in the docs may
-  still imply prep can commit an armed probe; no commit since 2026-08-04 may have
-  quietly used `--no-verify`.
+  still imply prep can commit an armed probe; **and every `--no-verify` since
+  2026-08-04 must be accounted for** — see the override below, which is the only
+  authorised one.
+
+  ***RECHECK 5 — the override, and the natural experiment it creates.*** The
+  owner granted **prompt 3 a one-time override of rule 5 for its prep only**
+  (2026-08-04), letting it commit armed probes under five conditions: one named
+  commit, `--no-verify` authorised for that commit alone with a body stating
+  exactly what is red and why, **a hard disarm-before-session-end deadline**,
+  a `PROBE SWEEP: armed: …, owner override 2026-08-04` line, and rule 2
+  untouched. **Audit every condition against git** — especially the disarm
+  deadline, which is the condition the grant's safety rests on. ⛔ The grant is
+  **not precedent** (FIX_POLICY §4a procedure: never inferred, never carried to
+  a second case); if any later work cites it as one, that is a finding.
+  ⭐ **And it hands you evidence you would otherwise have had to guess at:**
+  prompt 3 is the only session ever to work under the override, and is required
+  to report whether armed prep actually bought anything over committing the
+  scripts as fenced blocks and pasting them at the sitting. **That report is a
+  direct input to RECHECK 3 — use it rather than reasoning about it.** Little
+  bought → rule 5 stands as written. A lot bought → the case for a permanent,
+  accident-proof hatch is real, and routing it is what the owner opened the door
+  for.
 
   ⛔ **Tiebreak if you are torn:** the owner's stated priority was **safety over
   convenience**, in their own words *"I do not want to get back into the

@@ -131,6 +131,16 @@ these used to be filed only in agent reports, which is where you never read.
   construction, not merely unused. If a sitting slips, nothing is stranded and
   nothing is armed.
 
+  ⚖️ **One-time override granted 2026-08-04, recorded here so it is not
+  invisible.** You gave prompt 3 an override of this rule **for its prep only**.
+  It may commit armed probes in **one named commit**, using the `--no-verify`
+  bypass with a body stating exactly what is red and why — and ⛔ **if the
+  sitting does not happen in the same working session it must delete the probes
+  before it stops.** That deadline is the condition the grant rests on: an armed
+  probe never survives a session boundary, which is the situation you said you
+  did not want back. Not precedent, not carried to any later co-run, and prompt
+  4 audits every condition against git.
+
   ⚖️ **You asked for it to be rechecked, and it will be.** Prompt 4 of the
   corun-rig chain now has a named job to audit **both** my diagnosis and your
   decision, told plainly that you are open to recommendations. It has four

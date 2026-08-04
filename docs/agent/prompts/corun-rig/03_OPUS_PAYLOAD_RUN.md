@@ -39,15 +39,57 @@ experiment.
 units, "OWNER SITS DOWN HERE" marked.
 
 **Job 2 — prep unattended:** probe sweep (record the line); staged save copy;
-~~scenario scripts as `TEMPORARY` TestKit files~~ ⛔ **CORRECTED 2026-08-04 —
-this line is now WRONG and would break a binding rule.** `WORKFLOW.md` probe
-hygiene **rule 5** (owner decision, adopted after this prompt was written): *a
-probe file is present in `Code/` only while its run is actually happening.*
-So prep writes the scenario scripts **as fenced code blocks in this file**, not
-as files in `Code/` — they land in `Code/` at the sitting and die in the commit
-that records their answers. See prompt 2's outbox below for the mechanics;
-`parse sweep`; measure-moments list with the owner's verdict words pre-written
+scenario scripts as `TEMPORARY` TestKit files — ⚖️ **permitted for YOU ONLY, by
+a one-time owner override; read the override block below before using it**;
+parse sweep; measure-moments list with the owner's verdict words pre-written
 ("train left / train stuck", "picker appeared / missing", …).
+
+### ⚖️ ONE-TIME OWNER OVERRIDE — armed prep, granted to this prompt only (2026-08-04)
+
+`WORKFLOW.md` probe hygiene **rule 5** says a probe file is present in `Code/`
+only while its run is actually happening, so prep may not commit an armed probe.
+**The owner has granted this prompt a one-time override of that rule for its
+prep**, verbatim: *"You can give prompt 3 a one time owner override for its
+prep."* You may therefore write the scenario scripts as real `TEMPORARY` files
+in `Code/` and commit them **before** the sitting.
+
+**This is an override, not a repeal.** Overrides in this project are *"never
+inferred, never assumed from precedent, and never carried forward to a second
+case"* (FIX_POLICY §4a's procedure, applied here). Rule 5 is unchanged for
+everyone else and for every later co-run. **Do not cite this grant as
+precedent** and do not extend it past your own prep.
+
+**Conditions — all five, and they are the reason the grant is safe:**
+
+1. **ONE prep commit may be armed.** Name it in your todo list. Every other
+   commit you make is subject to rule 5 normally.
+2. **`doccheck.py` will be RED and the hook will block; `--no-verify` is
+   authorised for that single commit and nothing else.** The commit body MUST
+   state, plainly: that doccheck is red, that the ONLY red is the TEMPORARY
+   sweep, the exact files armed, the test that declares each, and this override
+   with its date. That is a true and complete statement — which is the whole of
+   what the hook asks for. A body that says less than that is the failure mode.
+3. ⛔ **DISARM DEADLINE — the condition the grant actually rests on. If the
+   sitting does not happen in the same working session, DELETE the probe files
+   and their metadata lines before you stop.** An armed probe may never survive
+   a session boundary. The owner's stated fear is verbatim *"I do not want to
+   get back into the situations where armed probes start giving us false
+   problems or issues"*; a probe armed for days is exactly that, and 2026-07-31
+   is what it looks like. Re-arming next session costs a paste.
+4. **`PROBE SWEEP:` line in every affected commit reads
+   `armed: <files>, declared by <test>, owner override 2026-08-04`** — never
+   just `armed`. A reader must see the authorisation without leaving the log.
+5. **Rule 2 is untouched:** the probes still die in the commit that records
+   their answers.
+
+⭐ **You are also live evidence for prompt 4's rule-5 audit — report both
+halves.** The owner asked prompt 4 to recheck rule 5 and is open to
+recommendations. You are the first and only session to work under the override,
+so say plainly at close: **did armed prep actually buy anything** over
+committing the scripts as fenced blocks and pasting them at the sitting? If it
+bought little, that is a finding that strengthens rule 5; if it bought a lot,
+that is a finding that argues for a permanent hatch. Do not editorialise —
+report what it cost and what it saved.
 
 **Job 3 — the run**, batched: fixed cost first (launch, load, warm-up per
 spec), then payload items in the order above — owner-needed items
@@ -64,6 +106,39 @@ labels on everything; TEMPORARY probes deleted in the recording commits;
 they live), actual costs vs. spec, owner-minutes used vs. promised, and your
 honest note on which payload items the cards alone would have settled; delete
 this file in the same commit; doccheck green; push.
+
+## ⭐ You may ASK the owner to act on your blocked items — inside a stated balance
+
+Owner, 2026-08-04, on being shown that two of your four payload items are
+blocked on a gap: *"for its blocked items it can ask me to assist if it needs me
+to do something. This whole method isn't to take me completely out of the loop,
+its to take my time commitment to a more reasonable level and streamline."* And,
+sharpening it: *"As much that can be optimized while not reducing quality it
+probably the better framing of it. Keep a good balance of quality and minimal
+time investment as there is only one of me."*
+
+> **Their time is the objective to minimise; quality is the constraint that
+> binds.** Optimise as hard as it will go, and stop where going further would
+> cost evidence quality. Asking is legitimate when the ask genuinely beats the
+> alternative on that trade — **not because asking is permitted.** Every ask
+> competes with the moments that actually need their eyes.
+
+Standing framing: `WORKFLOW.md` "Co-runs". What it means concretely here:
+
+- **The hex tie-break and F99 items are gapped** — the save carries 926 track
+  elements and **zero** broken ones, so both need damage staged. `CheatMeteors`
+  at a position is the agent-side route (forced upstream, named). **If that
+  turns out to be fiddly, or if a player-driven break would give better
+  evidence, ask them** — it is their colony and they know where the track is.
+  ⚠️ F99's constraint is unchanged either way: the BREAK may be forced, the
+  **REPAIR must stay organic**.
+- **Any ask goes in the measure-moments list up front**, with what they do, why,
+  and how long — not sprung on them mid-sitting. Batch it with the moments they
+  are already sitting for.
+- ⛔ **Do not silently drop an item because it needs a human.** "Needs the
+  owner" is a precondition to route, never a reason to descope. If you run out
+  of their window, the item becomes a TAKEABLE-WHEN rider with the measured cost
+  attached so they can price it.
 
 ## Scope fence
 
