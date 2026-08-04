@@ -738,3 +738,5 @@ that is the different, never-reproduced C41 witness: say so explicitly.
 Load click that misfires.
 **Setup:** the agent hands the two hooks (entry) and records the desktop box /
 multi-display geometry alongside.
+**Good to have:** the known-good workaround while capturing (verified command):
+`rc:SetCommand("TransferResources", depot, "load", "<Resource>", <amount*1000>, true)`.

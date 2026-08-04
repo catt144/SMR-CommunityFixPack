@@ -29,7 +29,15 @@ findable there and commands are findable here.
    that save's further unlocks on retail (`Network.lua:241-255`) — so cheated
    fixture saves police themselves; you may still pop legitimate achievements in
    the minutes before the first cheat.
-5. If a step's setup fails, write that down. "Could not set this up" is a valid and
+5. ⛔ **NO live UI-internals prototyping in a play session — HARD RULE**
+   (relocated 2026-08-04 from the standing prompt; the story was living there
+   as an F76 block long after F76 closed). The 2026-07-27 hard-lock
+   (`XWindow:SetVisibleInstant` on a destroyed window, every mouse event
+   erroring, Alt-F4) happened under a wrapper that **MUTATED `align_pos`**.
+   The one sanctioned pattern, used by the chain-11 sitting: **read-only
+   hooks** — call `orig` first, print, mutate nothing. Anything more is a
+   MarsDebug/fixture job, never a live colony.
+6. If a step's setup fails, write that down. "Could not set this up" is a valid and
    useful result.
 5a. ⭐ **ON A ONE-OFF CHECK THE DEFAULT IS A WARMED-UP SAVE, NOT AN AS-SAVED ONE — this
    governs how a rider must be WRITTEN** (owner, stated directly 2026-08-02). Before a
@@ -52,7 +60,7 @@ findable there and commands are findable here.
      same claim. (Worked example: the C26 dumps of 2026-08-02 were taken ~1 minute after
      load *because the instruction said to* — their strength is the colony's 288 sols of
      history, not live play during the reading.)
-6. **The console AUTO-OPENS shortly after a colony is up — loads AND new
+7. **The console AUTO-OPENS shortly after a colony is up — loads AND new
    games** (Test Kit; the 2026-07-26 build waits for the loading screen to
    close, fixing the dead console every NEW save used to get — takes effect
    from the next game launch). If closed, reopen with **Ctrl-Alt-C** (the

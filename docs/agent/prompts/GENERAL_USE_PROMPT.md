@@ -96,40 +96,12 @@ For any "nothing should happen" test insist on a **positive control** and an
 - Cheat use is logged per save and blocks achievements — fixture saves only.
   Sanctioned speed techs: `AdvancedDroneDrive`, `LowGDrive`,
   `MartianAerodynamics`.
-
-## F76 — ⛔ THIS WARNING WAS FALSIFIED 2026-08-02. THE PICKER WORKS; USE IT NORMALLY
-
-**Rewritten by the chain prompt 11 attended sitting, which measured the claim
-this block used to make and found it wrong.** The old text told you to *"avoid
-the picker paths entirely"*. **Do not.** The resource picker is **vanilla** (the
-pack touches none of it — verified across all 82 `Code/` files) and it anchors
-**exactly at the cursor**: measured `anchor (2051,887)` against live
-`mouse (2058,885)`, box centred on the anchor x with its **bottom edge AT** the
-anchor y, every number matching prediction to the pixel. The owner clicked the
-hex in that sitting and it loaded.
-
-⚠️ **It opens ABOVE the cursor by its own height** (429px at 4K), so a click
-high on the screen puts it near the top of the screen. **That is intended, not
-displacement.** ✅ F76 is **CLOSED — REFUTED** (chain-12 QA, job 10,
-2026-08-03). The one live residue is **C41** (the OG "icon does not appear"
-witness + the out-of-range-mouse lead for game windows off the virtual-desktop
-origin) — if a sitting ever sees the picker fail to APPEAR, install the
-`F76MISS` hook and read where the engine thought the mouse was.
-
-**Two things from the old block that DO still stand, for different reasons:**
-- ⛔ **The hard rule survives: NO live UI-internals prototyping in a play
-  session.** The 2026-07-27 lock (`XWindow:SetVisibleInstant` on a destroyed
-  window, every mouse event erroring, Alt-F4) happened under a wrapper that
-  **MUTATED `align_pos`**. The chain-11 sitting was the sanctioned exception and
-  it used **read-only** hooks — call `orig` first, print, mutate nothing.
-- **The workaround still works and is still worth knowing** if a depot ever does
-  refuse a load:
-  `rc:SetCommand("TransferResources", depot, "load", "<Resource>", <amount*1000>, true)`
-
-**If a depot or heap click-load misbehaves, do not report it verbally** — take
-the two read-only console lines on the **F76 recurrence rider** in
-`PLAYTEST_CHECKLIST.md`. A screenshot plus a description is exactly what cost
-this project nine days on this entry.
+- ⛔ **NO live UI-internals prototyping in a play session** — hard rule; the
+  lock story and the one sanctioned pattern (read-only hooks) are
+  `PLAYTEST_HELP.md` ground rule 5. If a depot/heap click-load ever
+  misbehaves: the **F76/C41 recurrence rider** in the checklist (hooks +
+  workaround there), never a verbal report — a screenshot plus a description
+  once cost this project nine days.
 
 ## Live-session console facts (hard-won — do not re-derive)
 
