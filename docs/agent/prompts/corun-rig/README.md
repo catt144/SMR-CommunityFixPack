@@ -29,7 +29,7 @@ runs before anything ambitious is built on it.
 
 | # | file | model | owner needed? | what it drains |
 |---|------|-------|---------------|----------------|
-| 1 | `01_FABLE_RIG_SPEC.md` | Fable | No (routes decisions out) | Feasibility inventory vs. EXECUTED-ONCE provenance; capability envelope; risk register + effort model; sign-off tier draft + evidence-card template; defines co-run #0; writes `CORUN_RIG_SPEC.md` |
+| 1 | ✅ DONE 2026-08-04 (file consumed; output = `CORUN_RIG_SPEC.md`) | Fable | No (schedule ask routed to checklist) | Delivered: inventory (11 PROVEN / 8 Src-verified / 6 UNKNOWN, §1); envelope (§2); risks + effort (§3); tier DRAFT + card template (§4); co-run #0 definition (§5); `TEST2H TRAIN` validated on disk, gaps routed (§6). No stop condition tripped: the skeleton rests on nothing outside the bins, and owner time stays ~10 min |
 | 2 | `02_OPUS_SKELETON_RUN.md` | Opus | **YES, ~10 min** | Co-run #0: the walking skeleton. ⛔ KILL-GATE — fails or overruns → chain STOPS and routes findings |
 | 3 | `03_OPUS_PAYLOAD_RUN.md` | Opus | **YES, ~15–20 min** | Co-run #1: drains the tagged riders (F11 watch · hex tie-break · C41 loop · Done-timing if not done in #0); produces the first evidence cards |
 | 4 | `04_FABLE_QA_AND_INTEGRATION.md` | Fable | No (routes the tier decision) | Adversarial audit of rig + results + ECONOMICS (did it save owner time?); finalizes+routes sign-off tiers; integrates the spec into WORKFLOW/PLAYTEST_HELP; CHAIN_METHOD lessons; empties this folder |

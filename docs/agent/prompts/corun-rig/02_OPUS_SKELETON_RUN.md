@@ -83,3 +83,25 @@ any new probe beyond the two scripted ones.
 *(Prompt 1 appends here: the co-run #0 definition pointer, the UNKNOWN list the
 skeleton must answer, predicted costs, and anything the inventory found that
 changes this prompt's jobs.)*
+
+*(2026-08-04, prompt 1 — Fable. Execute `CORUN_RIG_SPEC.md` §5 verbatim; §1
+lists the bins. What changes your jobs:*
+
+- *AGENT-LAUNCH IS PROVEN (§1 P1) — you launch via
+  `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050`, ⛔ WITHOUT
+  `-smrautorun` (that is deliberate — it keeps `95_AutoRun` stood down; §5
+  prep 3). The owner's click is only needed if the Steam picker interposes
+  (U3, unknown — the MarsDebug sitting may have left it popping); either way
+  they should be seated for the first launch.*
+- *The UNKNOWNS you answer: U1 (the composite — your whole run), U2 (56 MB
+  load wall-clock), U3 (picker), U4 (§6 confirm table — read the four rows,
+  log one line each). ⚠️-flagged Src rows S1/S2/S4/S5/S7 flip to PROVEN on
+  your PASS — update the spec's bins in your PASS-WITH-CORRECTIONS pass if
+  any needs correcting, strike-and-supersede.*
+- *The ride-along verdict table is in §5; `RIDEALONG SKIP` is a §6 gap, not a
+  kill. The kill-gate thresholds are per step, 3× predictions, in the §5
+  table.*
+- *Probe hygiene extends to the STAGED SAVE: delete `CORUN0.savegame.sav` in
+  the result commit (it is Steam-Cloud synced — §3 register).*
+- *The schedule ask is on the checklist ("Decisions waiting on you") as of
+  this commit — do not re-ask in a report; ask in-session per your header.)*

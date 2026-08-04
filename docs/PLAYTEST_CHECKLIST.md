@@ -98,6 +98,12 @@ these used to be filed only in agent reports, which is where you never read.
 - **The C36-adjacent mysteries grep.** A cheap sweep of `Lua\Mysteries\` and
   `Scenario\` for `IsDisasterPredicted` gates, deliberately left unassigned:
   your call whether it becomes work at all. Not owed. → `CHAIN_QA_REPORT.md` §8.
+- **Schedule co-run #0 (~10 min of your time: one launch click, then stand
+  by).** The rig spec is written and every primitive is provenance-binned; the
+  walking skeleton (staged COPY of `TEST2H TRAIN` → scripted load → one trivial
+  read → quit) is defined with abort criteria, and prompt 2 of the corun-rig
+  chain executes it verbatim the session after you say when. Nothing ambitious
+  is built until it passes. → `docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md` §5.
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for
