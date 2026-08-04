@@ -101,6 +101,11 @@ way. Full analysis on the D06 entry — it is the model for how to write these u
 
 ### Cheating without contaminating results
 
+**Sanctioned speed techs** (relocated 2026-08-04 from the standing prompt):
+`AdvancedDroneDrive`, `LowGDrive`, `MartianAerodynamics` — setup accelerators
+with no bearing on any fix under test. Everything else: judge by the rule
+below.
+
 Cheat the **setup**, never the **mechanism under observation**. The fixes patch
 decision logic; cheats inject state (money, goods, people, buildings) — state
 injection is exactly what the scenarios need. Each PT's Setup line names its
@@ -191,6 +196,17 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
   expression that renders as empty is NOT a reading — wrap uncertain reads as
   `print_format("label: <1>", tostring(expr))` so a `nil` arrives as a token
   you can see and quote.
+- **ONE command per line** — a pasted multi-line block silently concatenates
+  into one line and fails `not understood`. And `not understood` means the
+  line did not COMPILE — overwhelmingly a `--` comment inside a `*r`/`*g`
+  snippet (they splice onto one line); never write a console snippet with a
+  trailing comment. Bare expression for simple reads; `*r`/`*g` for
+  multi-statement snippets and assignments (an assignment is not an
+  expression).
+- **`ModLog(...)` is the ONLY path proven to reach the log file**; the buffer
+  flushes at exit, and `FlushLogFile()` forces it mid-session.
+- **Runtime console wrappers must target the LEAF class** (pre-build patches
+  propagate through flattening; runtime ones do not — `EF-002`).
 - **Blacklisted names read back as `nil` with no error** (`CommonLua/Classes/Mod.lua:1267-1428`).
   Do not use these in console snippets — they will look like the game is broken:
   `debug`, `io`, `os`, `package`, `lfs`, `_G`, `rawget`, `getmetatable`, `setfenv`,
@@ -371,6 +387,17 @@ without it. Total clearance time is still NOT a D06 score.
 Turn loggers **off** when a test is done — they print every tick and will bury the log.
 
 ---
+
+### Harness quick facts (relocated 2026-08-04 from the standing prompt)
+
+- **Baseline** = the fix-pack `metadata.lua` with an **emptied `code` list** —
+  keep `default_options`; restore from a saved copy, NOT `git checkout`; never
+  `git commit -a` while that edit is in the tree.
+- **Probe-authoring:** every probe ends with an explicit `return "PASS", …`
+  (nil → silent SKIP). Stand-in probes assert the MODULE's action, never
+  vanilla bookkeeping around stubs.
+- Launch timing: a leg ≈75 s but `Mars.exe` may take minutes to appear —
+  never kill on a short timeout (25-min guard).
 
 ## The ENABLE-PATH leg — the session shape the harness never measured (added 2026-07-31, F87)
 
