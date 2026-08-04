@@ -21,7 +21,7 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 81 registered (74 default-active, 8 optional-gated files)
 - Code/*.lua files: 82
 - TestKit probes: 87
-- BUGS index rows: 100 F + 12 D + 41 C
+- BUGS index rows: 100 F + 12 D + 43 C
 ```
 
 Re-emit after any module or entry change; a red run refuses to hand one out.
@@ -30,14 +30,14 @@ Pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 ⚖️ **F76 CLOSED-REFUTED, P1 released** (evicted to SESSION_LOG). Live residue:
 **`C41` (cand)**, instrument `F76MISS`; MOD_DESCRIPTION's F76 note is VOID.
 
-✅ **F11 rider RUN AND SETTLED 2026-08-03** — abduction keeps `train.units`
-synced on BOTH maps (`table.find` → `nil`, `#units` 6, `holder == rocket` true):
-**no demonstrated producer**, `TransferToMap` hypothesis refuted by measurement.
-Entry's old citation was the wrong class/file; corrected. ⭐ Owner: keep `P1`?
+✅ **F11 rider RUN 2026-08-03** — abduction keeps `train.units` synced (`nil`,
+`#units` 6, `holder == rocket`): **no demonstrated producer**. ⚠️ But its stated
+ROUTE is wrong (`068c5aa`) — `OnTransferToMapDone` did it. ⭐ Owner: keep `P1`?
 
-⚠️ **F99 filed (`cand`)** — 14 × `TrackElement.lua:805` `start_el` nil in ~1h,
-**every hit under `CheatCompleteAllConstructions()`**; vanilla, no-cheat
-reachability UNPROVEN. ⭐ Owner: severity. (Both new items → checklist.)
+⚠️ **F99 (`cand`)** — **7** (not 14) × `TrackElement.lua:805`, all under
+`CheatCompleteAllConstructions()`; no-cheat UNPROVEN. **2nd opinion `068c5aa`**:
+auto-connect SELF-HEALS · `:800` guard DEAD (`:774`) · residue `0 0` post-reload
+· C42 C43 + 2 riders · ⛔ the seal is unholdable (rule 1 + this file leak it).
 
 ⭐ **FIRST COMPLETE PROBE COVERAGE 2026-08-03** — MarsDebug `[install]` pass
 (EXECUTED-ONCE, `PLAYTEST_HELP`): **87 PASS / 0 FAIL / 0 SKIP**. ⛔ **Never quote
