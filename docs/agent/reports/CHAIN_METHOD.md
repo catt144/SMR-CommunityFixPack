@@ -140,6 +140,14 @@ emptiness is the objective done-condition. The final prompt is always an
    the scarce tier at roughly 15–20% of prompts, placed at the compounding
    points; if the plan needs more than ~half the chain on the top tier, the
    decomposition is wrong (the specs are not carrying enough of the load).
+   **Owner rule for UNATTENDED work (2026-08-04), the floor on chain size:**
+   even a single truly unattended item is a minimum chain of two — the
+   volume tier executes, the top tier audits adversarially against the
+   archived logs. Batches of unattended items are a full chain, volume tier
+   throughout (top tier mid-chain only where a step is genuinely
+   complicated), always closed by a terminal top-tier audit. Precedent for
+   the shape: the corun-rig close — execution upstream, adversarial audit
+   terminal, every "done" treated as a claim.
 1. **A folder** (`docs/agent/prompts/<effort>/`), a **README manifest** (table:
    number · file · model · owner-needed? · what it drains; strike rows on
    consumption), and **binding chain rules** in the README: inbox/outbox,

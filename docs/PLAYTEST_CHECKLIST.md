@@ -255,16 +255,31 @@ two C-side console reads that need no eyes at all.
 
 ⭐ **ROUTING SWEEP 2026-08-04 (post-rig; the block above predates the rig).**
 Every open item re-triaged under WORKFLOW's routing rule now that the rig is
-proven. ⚠️ Recommendation strength: each converted test still gets its setup
-re-derived in rig terms by the session that runs it — the designs below were
-written assuming you drove everything.
+proven. ✅ **ADOPTED by the owner same day** — each item's Status line now
+carries its mode; ⚠️ each converted test still gets its setup re-derived in
+rig terms by the session that runs it — the designs below were written
+assuming the owner drove everything.
+
+⚖️ **Execution rule for unattended work (owner, 2026-08-04):** a truly
+unattended item runs as a **two-prompt chain — Opus executes, Fable audits**.
+Batched unattended work runs as a **full chain: Opus throughout** (top tier
+mid-chain only where something is genuinely complicated), **closed by a
+terminal Fable audit**. Full form: `agent/WORKFLOW.md` routing triage.
+
+⚠️ **CORRECTED same day, and it upgrades two verdicts:** the sweep first
+claimed "no verified command forces a dust storm". **Wrong — table-staleness,
+not a source fact.** `CheatDustStorm(storm_type, setting)` exists, ungated,
+with `"normal"` / `"great"` / `"electrostatic"` types (`DustStorm.lua:540`),
+and a **static-charged dust devil** can be forced outright (both now in the
+HELP verified table, `[NEVER RUN]`). So **F90 moves from organic-only to
+co-run STAGEABLE**, and PT-27/PT-28 no longer wait sols for a storm.
 
 | verdict | items | what you still do |
 |---|---|---|
 | → **UNATTENDED** | **PT-35** (all reads are numbers + save/reload — the "nothing changes on screen" check becomes "the read-back numbers don't change", which is the entry's own claim) · **F99 residue rider** (the rig can STAGE break + cheat + pre-reload read deliberately — it no longer waits for a sitting to happen to use the cheat) · **F99 no-cheat discriminator** (forced break, organic drone repair at speed, log watch — no eyes; still gated on your go, it feeds your severity call) · **load-heal sweep** (Do-first #2 — was ~1 h of you; save/reload cycles are the rig's proven core; re-scope first) | nothing (say go) |
 | → **CO-RUN** (was full playtest) | **PT-37** (break staged via the proven `BreakTrackElement` route, reload cycles rig-driven; your eyes: route formation + the salvage-cursor check) · **PT-47** (agent forces the volley + runs the 5 integrity checks; your eyes: scatter-vs-rank, the one thing that is eyes by nature) · **PT-27/PT-28** (provisioning is the real cost; catch-lists and Health-drop patterns are console reads; PT-28 rides PT-27's storm nearly free) · **PT-42** (agent stages stock/drain at speed; your eyes: the faction panel goals at 3–4 moments) · **PT-53 E** (two hands moments — manual assign, Mod-Manager disable; the load-clean read is log) · **PT-18** (agent stages the landings on a SAVE-E copy; deaths/stranding are counters; ⚠️ SAVE-E itself is still ~30 min of your provisioning) · **PT-10** (setup rig-driven; your eyes: clumping + screenshots) · **PT-15** (reads scripted, `SetLightTrapMode` is a verified command; fixture still needs the mystery pick) · **F74+F53(a)** (harness builds the fresh colony unattended; you: the pack-disable click + the two UI acts) · **PT-60** (suite/reload/log halves rig-side; you keep only the 15–20 min ordinary-play segment) · **PT-20** (you keep the disable click + 10 min play) · riders **F21 · F34(d) · F85 · F38 · popup keystone · §3.6** (each a hands-moment or ride-along once staged) | minutes, named per brief |
 | **stays PLAYTEST** | **PT-62 remainder** (the campaign gate — behavioural drain judgment through a landing; rig can carry P12's save/disable/load mechanics) · **PT-21** (organic play IS the test) · **PT-30** (mystery playthrough, UI actions) · **C39** (explicitly a keyboard judgment) · **doctrine C-sitting** (likely co-runnable — re-scope against `CHAIN_QA_REPORT.md` §1.3 before promising) | the sitting |
-| **stays ORGANIC-ONLY rider** | **F80 · C25 · F06 · F83 · C40 · C32 · F76/C41 recurrence** (situation must arise; the READS are one-line co-run/console asks when it does) · **F90** (no verified command forces a dust storm — stays situation-gated unless a scoping session verifies one) | tap when it happens |
+| **stays ORGANIC-ONLY rider** | **F80 · C25 · F06 · F83 · C40 · C32 · F76/C41 recurrence** (situation must arise; the READS are one-line co-run/console asks when it does) · ~~F90~~ (moved to co-run — see the correction above) | tap when it happens |
 
 Two consequences worth knowing: **your dominant remaining cost shifts from
 sittings to fixture provisioning** (SAVE-A/D/E builds — cheats are
@@ -344,7 +359,7 @@ all, is in git and in the snapshot.)*
 
 # Trains — one sitting clears the group
 
-### PT-37 — Can the F48 track repair ship? · Status: unrun
+### PT-37 — Can the F48 track repair ship? · Status: unrun · **mode: co-run** (routing 2026-08-04 — your eyes: route formation + the salvage cursor; break staged, reloads rig-driven)
 **Bug:** the game ships a savegame fixup meant to repair track connections on
 old saves, but a misplaced parenthesis makes it do nothing. The corrected call
 rebuilds every track element's connections, and its only failure handling is
@@ -386,7 +401,7 @@ queued while trains come and go, or walkers passing a working station.
 **Good to have:** note whether any track segment on the line was under
 construction (the rival explanation the agent must exclude).
 
-### Rider — F21: re-earn `tested` for the wait-time fix · Status: unrun — optional
+### Rider — F21: re-earn `tested` for the wait-time fix · Status: unrun — optional · **mode: co-run ride-along** (routing 2026-08-04)
 **Bug:** the fix (platform waiting no longer billed as travel time) passed
 PT-43, but the Tier-2 rewrite replaced the mechanism that pass exercised, so
 F21 was honestly downgraded to `fixed`. Two quick reads on any working train
@@ -429,7 +444,7 @@ separate steps.
 judging lists are preserved in the archive snapshot — the rebuild's
 verification leg is derived from them.
 
-### PT-10 — Open-roof drone observation (F55) · Status: unrun · ❓ open question
+### PT-10 — Open-roof drone observation (F55) · Status: unrun · ❓ open question · **mode: co-run** (routing 2026-08-04 — your eyes: clumping + screenshots; setup rig-driven)
 **Bug:** no expected answer — either result is useful data. The forever-cache
 half is fixed and probe-verified; whether opening a dome's roof destroys the
 dome-entrance attaches carrying the only drone pathfinding tunnels in is engine
@@ -467,7 +482,7 @@ drone PT when the rebuild lands. → [F77](agent/bugs/F77.md)
 
 # Disasters
 
-### PT-27 — Biorobots and Dust Sickness (F40) · Status: unrun
+### PT-27 — Biorobots and Dust Sickness (F40) · Status: unrun · **mode: co-run** (routing 2026-08-04 — `CheatDustStorm` forces the storm, HELP table; catch-lists are console reads)
 **Bug:** Dust Sickness infected Biorobots — androids bled Health every storm
 until cure tech. Fixed: only organic colonists catch it; a load-time heal
 clears already-sick Biorobots. → [F40](agent/bugs/F40.md)
@@ -483,7 +498,7 @@ storm.
 **Good to have:** load a save with already-sick Biorobots — the heal log line
 (entry). Run PT-28 in the same storm; same save, same sitting.
 
-### PT-28 — Dust Sickness damage spread (F17) · Status: unrun
+### PT-28 — Dust Sickness damage spread (F17) · Status: unrun · **mode: unattended ride-along** (routing 2026-08-04 — pure numeric pattern; rides PT-27's storm sitting)
 **Bug:** the per-colonist damage roll was computed then discarded — every
 carrier lost a flat 10 Health/sol instead of 5-14. Fixed: the losses spread.
 → [F17](agent/bugs/F17.md)
@@ -495,7 +510,7 @@ Dust Sickness carriers (PT-27 gets you there).
 3. Compare the drops — the agent reads the pattern (not exact numbers) against
    the entry.
 
-### PT-47 — Bombardment volley shape (F26) · Status: unrun
+### PT-47 — Bombardment volley shape (F26) · Status: unrun · **mode: co-run** (routing 2026-08-04 — your eyes: scatter-vs-rank; forcing + integrity checks rig-side)
 **Bug:** Mystery 7 bombardment missiles flew in a parallel rank instead of a
 scatter. The fix is the pack's largest copied function (100 lines), so
 "nothing else about a bombardment broke" is half the test. → [F26](agent/bugs/F26.md)
@@ -509,7 +524,7 @@ scatter. The fix is the pack's largest copied function (100 lines), so
 **Good to have:** an off/on A/B of the spread — that is the reachability
 audit's settling observation for F26.
 
-### Rider — F90: underground breaks during a surface storm · Status: unrun — take it the first storm on an elevator colony
+### Rider — F90: underground breaks during a surface storm · Status: unrun · **mode: co-run, STAGEABLE** (routing correction 2026-08-04 — `CheatDustStorm` is real and ungated, so the storm can be forced on a staged elevator-colony copy; the break DISTRIBUTION stays the organic measured path. An organic storm sighting still counts — take it if one arrives first)
 **Bug:** surface dust storms could break cables/pipes on the underground map
 through the merged elevator grid. The defect is a victim *distribution*, so
 one quiet session proves nothing — the read is zero NEW underground leak
@@ -526,7 +541,7 @@ map's notifications; the agent excludes cave-ins and reads per the entry
 
 # Rockets & landers
 
-### PT-18 — Arrival deaths, including the elevator path (F53) · Status: unrun
+### PT-18 — Arrival deaths, including the elevator path (F53) · Status: unrun · **mode: co-run** (routing 2026-08-04 — landings staged, deaths/strandings are counters; ⚠️ SAVE-E provisioning is still yours, ~30 min)
 **Bug:** newly arrived colonists could walk toward unreachable domes and
 suffocate, and the reworked fix's broken case WAS the elevator path — so that
 path is tested deliberately. Fixed = nobody dies on arrival: safe drop spots,
@@ -543,7 +558,7 @@ only via the Elevator / a surface rocket landing pad.
 3. Case C — land where the nearest dome by straight line is unwalkable while a
    walkable one exists further away.
 
-### Rider — F74 + F53(a): the never-modded fresh-colony pair · Status: unrun
+### Rider — F74 + F53(a): the never-modded fresh-colony pair · Status: unrun · **mode: co-run** (routing 2026-08-04 — the harness builds the fresh colony; you: the pack-disable click + the two UI acts)
 **Bug:** two "is the vanilla harm real at all" observations that need a true
 vanilla control — a pack-lineage save cannot serve (persisted thread stacks
 carry pack code). F74's half no longer decides anything (two outside witnesses
@@ -576,7 +591,7 @@ about.
 **Setup:** after abandoning, the agent hands the corrected membership read
 (entry).
 
-### Rider — F34(d): landscape mark over a loading rocket · Status: unrun
+### Rider — F34(d): landscape mark over a loading rocket · Status: unrun · **mode: co-run** (routing 2026-08-04 — staging rig-side; your eyes on the yank)
 **Bug:** drop a landscape mark over a rocket actively loading drones — is a
 mid-"Embark" drone visibly yanked, or does it recover silently? Settles the
 reachability audit's verdict. → [F34](agent/bugs/F34.md)
@@ -620,7 +635,7 @@ Entry (incl. the same-day correction to an earlier, wrong reason for this).
    (Predictions P1-P13 and the four setup traps: archive snapshot; the re-run
    musts incl. P14: entry.)
 
-### PT-53 — Cohort housing, Trigger E (D07) · Status: partial (A-D passed; E owed)
+### PT-53 — Cohort housing, Trigger E (D07) · Status: partial (A-D passed; E owed) · **mode: co-run** (routing 2026-08-04 — two hands moments: the manual assign, the Mod-Manager disable; the load-clean read is log)
 **Bug:** Seniors/Children in normal housing move to free cohort slots and are
 otherwise left alone — triggers A-D passed live ("it worked wonderfully").
 Only E remains: player-order precedence and the uninstall shape.
@@ -690,7 +705,7 @@ juggling.
 non-zero confirms the desync and the follow-up is to demolish that passage and
 watch whether an unrelated colonist teleports to it. Either way it is one line.
 
-### Rider — F99: re-read the track residue BEFORE a reload · Status: unrun — **TAKEABLE WHEN** the next sitting uses `CheatCompleteAllConstructions()` on a map with damaged track (meteor break or cave-in)
+### Rider — F99: re-read the track residue BEFORE a reload · Status: unrun · **mode: unattended, STAGEABLE** (routing 2026-08-04 — the rig stages break + cheat + pre-reload read deliberately; owner-rule chain applies: Opus runs, Fable audits. The old TAKEABLE-WHEN framing — wait for a sitting to happen to use the cheat — is superseded)
 **Bug:** the `F99RESIDUE 0 0` reading that made F99 look harmless was taken
 **after** a reload, and load runs `SavegameFixups.RebuildBrokenTracksAndConnect`,
 which sweeps exactly what the probe was looking for. The null result is
@@ -724,7 +739,7 @@ workshop vs control (entry).
 
 # Mysteries
 
-### PT-15 — Wisp power output (F07, + F15 bonus) · Status: unrun
+### PT-15 — Wisp power output (F07, + F15 bonus) · Status: unrun · **mode: co-run** (routing 2026-08-04 — reads scripted, `SetLightTrapMode` verified; the SAVE-D mystery fixture is the real cost)
 **Bug:** freeing the wisps rewarded ~1/1000 of the promised power — a trickle
 instead of kilowatts. Fixed: ~1000 × wisp count, a real power source.
 → [F07](agent/bugs/F07.md), [F15](agent/bugs/F15.md)
@@ -761,7 +776,7 @@ reachability audit's verdict. → [F06](agent/bugs/F06.md)
 
 # Any-save & factions
 
-### PT-35 — Save sanitizer does no harm (F35, F03) · Status: unrun (case A only; B/C parked)
+### PT-35 — Save sanitizer does no harm (F35, F03) · Status: unrun (case A only; B/C parked) · **mode: UNATTENDED** (routing 2026-08-04 — all reads numeric + save/reload; owner-rule chain: Opus runs, Fable audits)
 **Bug:** the pack's two sanitizer passes run automatically on every load for
 every player, and the F03 pass REMOVES label modifiers from persisted colony
 state — this is the do-no-harm check on auto-running save-writing code, and
@@ -779,7 +794,7 @@ upgraded Medical Center in a dome / ~5 minutes.
 3. Save, reload, check again. A bonus that GREW on the second run is the FAIL
    (the pass is not idempotent — record the exact figures).
 
-### PT-42 — Last Transmission notices your reserves (F22, F75) · Status: unrun
+### PT-42 — Last Transmission notices your reserves (F22, F75) · Status: unrun · **mode: co-run** (routing 2026-08-04 — stock/drain staged at speed; your eyes: the faction panel goals at 3–4 moments)
 **Bug:** the faction's stored-resource goals never cleared no matter how much
 you banked, the Oxygen goal was satisfied by Power, and the penalties became
 unreachable once a second map was loaded. Probes prove the reserve maths; only
@@ -805,7 +820,7 @@ Assembly stage?
 
 # Cross-cutting — once per era of the pack
 
-### PT-60 — The chain-8b batch leg (F90-F96 + eight conversions) · Status: unrun · ⭐ attended
+### PT-60 — The chain-8b batch leg (F90-F96 + eight conversions) · Status: unrun · ⭐ attended · **mode: co-run** (routing 2026-08-04 — suite/reload/log halves rig-side; you keep the 15–20 min ordinary-play segment)
 **Bug:** seven approved fixes and eight technique-only conversions have never
 executed in a game; a byte-equivalence argument is not an observation. Nothing
 from that batch may be called verified until this leg's numbers are quoted.
@@ -840,7 +855,7 @@ over a real session of ordinary play.
    broken track — Test Kit, PLAYTEST_HELP).
 3. Log review per the protocol.
 
-### PT-20 — Uninstall safety · Status: standing — re-run per era and before release
+### PT-20 — Uninstall safety · Status: standing — re-run per era and before release · **mode: co-run** (routing 2026-08-04 — you keep the disable click + the 10 min play; save/reload/log reads rig-side)
 **Bug:** the pack must never hold a save hostage. Steps 1-4 passed 2026-07-31;
 step 5's hunt found F86 (both sites since repaired — PT-58 measured the same
 shape at ZERO errors against leg 5's 80). This is the per-era re-check, not an
@@ -856,25 +871,25 @@ minutes.
 4. Log: zero errors naming pack code. The agent pulls the full step-5 hunt and
    the 2026-07-31 method corrections from the archive snapshot before running.
 
-### Rider — popup-audit keystone: storybits survive save/load · Status: unrun
+### Rider — popup-audit keystone: storybits survive save/load · Status: unrun · **mode: co-run ride-along** (routing 2026-08-04)
 **Bug:** the ~5-minute console check that a popup-carrying storybit thread
 survives a save taken under its corner notification, and that answering it
 afterwards still applies the outcome. Settles the popup audit's keystone.
 → `docs/agent/reports/POPUP_CONSEQUENCE_AUDIT.md` §8 (procedure).
 **Requirements:** any save / console open.
 
-### Rider — F85: quicksave under a choice popup · Status: unrun
+### Rider — F85: quicksave under a choice popup · Status: unrun · **mode: co-run moment** (routing 2026-08-04 — the rebind + keypress are hands)
 **Bug:** rebind Quick Save to F9, open any choice popup (a launch-issue prompt
 is cheapest), press it — does a save land, and does loading it void the
 choice? → [F85](agent/bugs/F85.md)
 **Requirements:** any save / a cheap choice popup.
 
-### Rider — §3.6 corner (optional): the sol-change autosave under a popup · Status: unrun
+### Rider — §3.6 corner (optional): the sol-change autosave under a popup · Status: unrun · **mode: co-run ride-along** (routing 2026-08-04)
 **Bug:** with the distress-call popup left open, does the sol-change autosave
 fire under it? → `POPUP_CONSEQUENCE_AUDIT.md` §3.6.
 **Requirements:** any save approaching a sol change.
 
-### Rider — F38: tunnel-ruin routing (vanilla read) · Status: unrun
+### Rider — F38: tunnel-ruin routing (vanilla read) · Status: unrun · **mode: co-run** (routing 2026-08-04 — the pack-disable click is hands; the rest stages)
 **Bug:** destroy a tunnel, save/load IN VANILLA, order a colonist or rover
 across — does the route still use the ruin? → [F38](agent/bugs/F38.md)
 **Requirements:** a vanilla control (pack disabled is fine for this read) / a

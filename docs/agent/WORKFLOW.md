@@ -437,6 +437,15 @@ and route UP only for the moments that genuinely need a human:
    counts, A/B probe-suite legs. No eyes, no hands, no judgment anywhere in
    the measure. Evidence ceiling: MECHANISM / probe-verified — never
    `tested`, never an organic upgrade.
+   ⚖️ **Execution shape (owner rule, 2026-08-04): a truly unattended item
+   runs as a TWO-PROMPT chain — a volume-tier (Opus) prompt executes, a
+   top-tier (Fable) prompt audits adversarially against the archived logs.
+   Batched unattended work runs as a FULL chain: volume-tier prompts
+   throughout (top tier mid-chain only where something is genuinely
+   complicated), always closed by a terminal top-tier audit.** Placement
+   lives in filenames; prompt bodies stay model-neutral
+   (`CHAIN_METHOD.md` §2.10 / §4.0). Chain mechanics — inbox/outbox,
+   self-consumption, folder-empty done-condition — apply at every size.
 2. **CO-RUN** — scriptable except for NAMED moments needing human **eyes**
    (witnessing behaviour), **hands** (cursor parking, launch or Mod-Manager
    clicks, console lines at unscheduled moments), or an in-the-moment
