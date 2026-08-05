@@ -222,3 +222,41 @@ repos, both working trees clean, all four staged/throwaway saves deleted, and
 `TEST2H TRAIN` verified byte-identical (MD5 `103B320A1434513BC8773553096A8958`,
 LastWriteTime still 2026-08-03 22:21:48) — the campaign save was never opened,
 let alone written.
+
+## 8. ⚖️ OWNER OVERRIDE on the owner-minutes measurement (2026-08-05, verbatim)
+
+> *"You can add notes to the fable audit that I will not count this time vs
+> approximation against the run, because I specifically deveated to chase my own
+> leads so thats considered an owner over ride"*
+
+⇒ **The ~2 h vs ~24 min figure is NOT to be audited as a cost overrun.** The
+owner ruled that the excess was their own deliberate deviation — the F99
+hypothesis hunt, the underground test, the dev-cheat exploration that produced
+F101 — and an owner choosing to spend their own time is not the rig missing an
+estimate. Prompt 3 must not score the sitting against the 24-minute promise, and
+must not present the difference as a failure of the brief's model.
+
+**What prompt 3 SHOULD still audit, because the override does not cover it:**
+the brief's estimate for the legs it actually planned. Two components are
+separable and only one is overridden:
+
+- **OWNER-DIRECTED (overridden, do not count):** the F99 investigation across
+  both maps, the dev-cheat exploration, the two static audits it triggered, and
+  the late restart attempt. This is where most of the wall clock went, and it is
+  the owner's prerogative — it also produced `F101` and both F99 samples, which
+  were worth more than several planned legs.
+- **NOT overridden, and still a real estimate miss:** **M1 was budgeted 3
+  minutes and consumed roughly 25 before it was routed**, because prep's
+  measured fixture (23 Seniors in normal housing against 31 free Senior slots)
+  had evaporated by the time the sitting ran, so the fixture had to be *built*
+  live. That is the rig's own miss, not the owner's deviation, and ledger S2
+  (no instrument could even find M1's subject) compounds it. **Audit that one.**
+
+⚠️ **This override is scoped to the minutes, not to the record.** PT-47, M5, M6
+and M7 are still NEVER RUN and still routed; §0 and §5 stand unchanged. The
+override changes how the cost is *scored*, not what was *measured*.
+
+⛔ **And the standing rule still binds:** do not convert this into a claim that
+the sitting came in cheap, and do not report minutes "saved". The correct
+statement is that the owner declined to have their own deviation counted against
+the estimate — which is a scoping decision, not a performance result.

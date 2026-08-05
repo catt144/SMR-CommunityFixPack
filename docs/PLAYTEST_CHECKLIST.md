@@ -29,12 +29,14 @@ these used to be filed only in agent reports, which is where you never read.
 
 ### ⭐ NEW 2026-08-05 — from the `corun-batch-1` sitting (four calls, all yours)
 
-**Cost, honestly: the brief promised ~24 attended minutes and the sitting ran
-about two hours of your time.** The reasons are recorded, not smoothed over —
-M1's fixture had to be *built* live because prep's expected one had evaporated,
-you drove the console yourself (the rig has no input path into a running game),
-and you spent a large part of it on your own F99 investigation, which was worth
-it. → `agent/prompts/corun-batch-1/03_FABLE_AUDIT.md`.
+**Cost: the brief promised ~24 attended minutes and the sitting ran about two
+hours — but you ruled that this one is not scored against the estimate**, since
+the excess was your own deliberate deviation to chase F99 and the dev-cheat
+leads (which is where `F101` came from). Recorded as an **owner override** in
+the audit. The one piece it does *not* cover is still logged as a real miss:
+**M1 was budgeted 3 minutes and took ~25**, because prep's measured fixture had
+evaporated and it had to be built live.
+→ `agent/prompts/corun-batch-1/03_FABLE_AUDIT.md` §8.
 
 1. **⚖️ Does PT-37's result unblock F48?** Case A passed and did **better than a
    no-op** — it removed one stale connection (559 → 558, exactly the clean-chain
