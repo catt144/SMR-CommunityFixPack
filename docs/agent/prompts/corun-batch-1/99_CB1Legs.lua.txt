@@ -219,12 +219,39 @@ end
 -- ⚠️ StartBombard only spawns a GAME-TIME thread and returns instantly. Nothing
 --    happens while the game is paused (C4). Set a speed first.
 
+-- ⭐ CORRECTED 2026-08-04 BY PROMPT 2's PRE-SITTING G1 PASS, visibly (chain rule 5).
+--    WaitBombard — the SHIPPED one (Bombardment.lua:55) and the PACK's replacement
+--    (Fix_BombardmentSpread.lua:91) alike — opens with `local map = MainMap` and
+--    NEVER derives the map from `obj`. CB1.LabelAll walks every city in `Cities`,
+--    so a dome on any non-main map could be handed back as index 1. Two things
+--    then break at once, and both destroy the Tier-A moment:
+--      * GetRandomPassableAroundOnMap(MainMap, <off-map pos>, radius) yields nil,
+--        so each missile falls back to GetRandomPassable(MainMap) — 8 missiles
+--        scattered across the whole map, NONE of them in the owner's camera. This
+--        is the exact failure prep identified for MainCity, reached by a second
+--        route the corrected form did not close.
+--      * the volley watcher polled ResolveMap(dome).g_IncomingMissiles while
+--        WaitBombard writes MainMap.g_IncomingMissiles (a MapVar,
+--        Bombardment.lua:52), so an off-main dome would report peak=0 and the
+--        harness would say "the volley NEVER STARTED" about a volley that ran.
+--        A reader whose negative result is indistinguishable from an absent
+--        fixture — prep's own P2 class, in prep's own instrument.
+--    ⇒ the map is now NAMED, the pick prefers a MainMap dome, and Leg2Bombard
+--      REFUSES an off-main one rather than measuring the wrong table.
 function CB1.PickDome(index)
 	local domes = CB1.LabelAll("Dome")
-	local d = domes[index or 1]
+	local main = rawget(_G, "MainMap")
+	local on_main = {}
 	for i, x in ipairs(domes) do
-		say(fmt("DOME[%d] %s pos=%s", i, id_of(x), tostring(IsValid(x) and x:GetPos() or "?")))
+		local m = IsValid(x) and ResolveMap(x) or nil
+		local is_main = (m ~= nil and m == main)
+		if is_main then on_main[#on_main + 1] = x end
+		say(fmt("DOME[%d] %s pos=%s on_MainMap=%s", i, id_of(x),
+			tostring(IsValid(x) and x:GetPos() or "?"), tostring(is_main)))
 	end
+	local d = index and domes[index] or on_main[1] or domes[1]
+	say(fmt("DOME %d of %d dome(s) are on MainMap — WaitBombard hard-codes MainMap, so only these are usable",
+		#on_main, #domes))
 	say(fmt("PickDome -> %s (pass an index to choose another; put the camera on it and keep it LOW)", id_of(d)))
 	CB1.dome = d
 	return d
@@ -236,7 +263,16 @@ function CB1.Leg2Bombard(dome, count, radius)
 	if not IsValid(dome) then say("LEG2 SKIP <no valid dome to centre the volley on>") return end
 	count = count or 8
 	radius = radius or 40 * guim
-	local map = ResolveMap(dome)
+	-- ⛔ CORRECTED 2026-08-04 (see the PickDome header): the map is MainMap by
+	--    construction, because that is what WaitBombard uses. Reading any other
+	--    map's g_IncomingMissiles would measure a table nothing writes to.
+	local map = rawget(_G, "MainMap")
+	local dome_map = ResolveMap(dome)
+	if dome_map ~= map then
+		say(fmt("⛔ LEG2 REFUSED — dome %s resolves to map %s but WaitBombard hard-codes MainMap (Bombardment.lua:55 / Fix_BombardmentSpread.lua:91). The volley would land somewhere the camera is not, and the watcher would poll a table nothing writes to. Pick a dome whose PickDome line reads on_MainMap=true.",
+			id_of(dome), tostring(dome_map)))
+		return
+	end
 	local speed = GetTimeFactor() / const.DefaultTimeFactor
 	if speed == 0 then
 		say("⛔ LEG2 REFUSED — the game is PAUSED and StartBombard only spawns a game-time thread; nothing would happen. Unpause and call again.")
@@ -317,7 +353,99 @@ end
 --    the module reads `active`. Either those 23 sit in domes with no reachable
 --    free Senior slot, or the in-dome/cross-dome pass is not reaching them.
 --    Whichever it is, it is a finding, and it is read BEFORE the owner's click.
+-- ⭐ ADDED 2026-08-04 BY PROMPT 2's PRE-SITTING PASS, visibly (chain rule 5).
+--    Two gaps in the brief's M1, both found by reading the moment against the
+--    harness rather than against the prose:
+--
+--    (1) OWNER TIME. M1 is budgeted 3 minutes for "select a Senior living in a
+--        NORMAL residence, manually assign them a residence" — and NOTHING in
+--        the harness could point at one. 184 Seniors, 108 residences: finding a
+--        qualifying colonist by hand is a UI hunt that would have eaten the
+--        moment. This names one and puts the camera and the selection on them
+--        (ViewAndSelectObject, InGameInterface.lua:299-317), so the owner's
+--        minutes are spent on the ACT, not the search.
+--
+--    (2) ⛔ EVIDENCE, and this one matters more. "The module did not move them"
+--        is only a precedence PASS if the module would otherwise have wanted to
+--        move them (G2: a counter that cannot be false is not a measurement). So
+--        the subject is chosen to MAXIMISE the module's motive — a Senior in a
+--        normal residence in a dome that has a free Senior cohort slot — and if
+--        no such colonist exists, that is SAID OUT LOUD and the precedence read
+--        is recorded as the weaker sample it is, not as a clean pass.
+--
+--    ⚠️ The same walk answers prediction 10's falsifier for free: the count of
+--       Seniors sitting in a normal residence while a free Senior slot exists in
+--       THEIR OWN DOME. Prediction 10 says that count is 0 (the 23 are gated by
+--       reachability, i.e. the module is behaving). Any other number is the
+--       in-dome pass failing, and that is a DEFECT, not a fixture note.
+function CB1.Leg4Pick(index)
+	local free_senior_by_dome, free_senior_total = {}, 0
+	for _, r in ipairs(CB1.LabelAll("Residence")) do
+		local trait = r.exclusive_trait
+		if trait == "Senior" then
+			local cap  = tonumber(r.capacity) or 0
+			local used = type(r.colonists) == "table" and #r.colonists or 0
+			local free = cap - used
+			if free > 0 then
+				local d = r.parent_dome
+				free_senior_total = free_senior_total + free
+				if d then free_senior_by_dome[d] = (free_senior_by_dome[d] or 0) + free end
+			end
+		end
+	end
+	local subjects, in_dome_with_slot = {}, 0
+	local each = rawget(_G, "AllMapsForEach")
+	if type(each) == "function" then
+		each(true, "Colonist", function(c)
+			if not IsValid(c) then return end
+			local traits = c.traits
+			if type(traits) ~= "table" or not traits.Senior then return end
+			local res = c.residence
+			if not res then return end
+			local trait = res.exclusive_trait
+			if trait and trait ~= "" and trait ~= false then return end
+			local d = c.dome or res.parent_dome
+			local free_here = free_senior_by_dome[d] or 0
+			if free_here > 0 then in_dome_with_slot = in_dome_with_slot + 1 end
+			subjects[#subjects + 1] = { c = c, dome = d, free_here = free_here, res = res }
+		end)
+	end
+	-- Strongest sample first: the module has an in-dome slot it wants them in.
+	table.sort(subjects, function(a, b) return a.free_here > b.free_here end)
+	for i, s in ipairs(subjects) do
+		if i > 5 then break end
+		say(fmt("LEG4PICK candidate[%d] %s residence=%s dome=%s free_SENIOR_slots_in_THAT_dome=%d",
+			i, id_of(s.c), id_of(s.res), id_of(s.dome), s.free_here))
+	end
+	say(fmt("LEG4PICK %d Senior(s) live in a NORMAL residence | %d of them are in a dome that HAS a free Senior slot | %d free Senior slot(s) colony-wide",
+		#subjects, in_dome_with_slot, free_senior_total))
+	-- Prediction 10's falsifier, stated as its own reading.
+	CB1.Applicable("D07-trigger-E-in-dome-pass(prediction 10)", in_dome_with_slot, #subjects,
+		"every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME")
+	if in_dome_with_slot > 0 then
+		say(fmt("⛔ LEG4PICK PREDICTION 10 FALSIFIED — %d Senior(s) sit in a normal residence while a free Senior cohort slot exists in their OWN dome. That is the in-dome pass failing, and it is a DEFECT to file against D07, not a fixture note.", in_dome_with_slot))
+	else
+		say("LEG4PICK prediction 10 HOLDS so far — no Senior in a normal residence has a free Senior slot in their own dome, so reachability is the gate and the module is behaving on the in-dome pass.")
+	end
+	local s = subjects[index or 1]
+	if not s then
+		say("LEG4PICK SKIP <no Senior lives in a normal residence on this save — M1 is UNSAMPLED, not a pass>")
+		return nil
+	end
+	CB1.leg4_subject = s.c
+	if s.free_here > 0 then
+		say("LEG4PICK subject chosen with an IN-DOME free Senior slot — the module demonstrably wants to move them, so 'it did not move them' is a real precedence reading.")
+	else
+		say("⚠️ LEG4PICK NO candidate has an in-dome free Senior slot. The subject below is the WEAKER sample: the module's motive rests on cross-dome reachability, which this reader does not establish. Record M1's result with that limit stated — do not write it up as a clean precedence PASS.")
+	end
+	CB1.Try("ViewAndSelectObject(subject)", function() return ViewAndSelectObject(s.c) end)
+	say(fmt("LEG4PICK ⇒ OWNER: %s is now SELECTED and on screen, living in %s (dome %s). Manually assign them a residence, then say 'assigned'.",
+		id_of(s.c), id_of(s.res), id_of(s.dome)))
+	return s.c
+end
+
 function CB1.Leg4Before(colonist)
+	colonist = colonist or CB1.leg4_subject
 	CB1.ReadCohort()
 	if colonist then
 		CB1.leg4_colonist = colonist
@@ -333,7 +461,7 @@ end
 -- Run AFTER the owner's manual assignment. Precedence = the manual choice wins
 -- and the module does not move them back.
 function CB1.Leg4After(colonist)
-	colonist = colonist or CB1.leg4_colonist
+	colonist = colonist or CB1.leg4_colonist or CB1.leg4_subject
 	if not colonist then say("LEG4 SKIP <no subject recorded>") return end
 	local r = colonist.residence
 	say(fmt("LEG4 AFTER subject %s residence=%s exclusive_trait=%s user_forced_residence=%s",
