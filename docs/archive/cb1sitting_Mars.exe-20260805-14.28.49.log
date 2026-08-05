@@ -1,0 +1,1286 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	37%
+Disk Free      	753610 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:088
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:098
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:912
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:02:045
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:02:248
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:933
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:997
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:999
+Account storage loaded successfully in 1 ms
+						Lua 0:00:18:010
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:18:397
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:18:398
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:402
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:403
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+						Lua 0:00:18:404
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+						Lua 0:00:18:405
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+						Lua 0:00:18:406
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+						Lua 0:00:18:407
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:18:408
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+						Lua 0:00:18:409
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+						Lua 0:00:18:410
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+						Lua 0:00:18:411
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+						Lua 0:00:18:412
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+						Lua 0:00:18:413
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:960
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:19:035
+Reloading done in 984 ms
+						Lua 0:00:19:380
+[preset] Preset postprocess took 65 ms.
+						Lua 0:00:19:439
+479 / 479 particle streams loaded in 55 ms.
+						Lua 0:00:19:440
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:646
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:701
+[PdxSDK] Started up. Took 1651
+						Lua 0:00:19:733
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:897
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:904
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:071
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:20:073
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:07:17:140
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:07:17:152
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:07:17:177
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:07:20:172
+*** Assets reloaded in 3.0 s, read 202.1 MB, read speed 66.9 MB/s, average read 4948 bytes.
+						Lua 0:07:26:063
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:26:090
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:07:26:108
+Game Loaded in 8967 ms
+						Lua 0:07:26:153
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:27:019
+Game loaded on map BlankBigCanyonCMix_09 in 9991 ms
+[mod] [CB1] LOAD OK #1 file=CB1STAGE.savegame.sav — LoadGame returned no error
+[CB1] LOAD OK #1 file=CB1STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:07:29:322
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:42:520
+[mod] [CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+						Lua 0:08:22:511
+[mod] [CB1] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=corun-batch-1 SITTING
+[CB1] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=corun-batch-1 SITTING
+[mod] [CB1] CONDITIONS by-name CohortHousing = active
+[CB1] CONDITIONS by-name CohortHousing = active
+[mod] [CB1] CONDITIONS by-name BombardmentSpread = active
+[CB1] CONDITIONS by-name BombardmentSpread = active
+[mod] [CB1] CONDITIONS by-name TrainWaitTime = active
+[CB1] CONDITIONS by-name TrainWaitTime = active
+[mod] [CB1] CONDITIONS by-name GridGlobalStorage = active
+[CB1] CONDITIONS by-name GridGlobalStorage = active
+[mod] [CB1] CONDITIONS by-name LastTransmissionStorage = active
+[CB1] CONDITIONS by-name LastTransmissionStorage = active
+						Lua 0:08:28:611
+[mod] [CB1] FACTIONS assembly_buildings=1 | active_factions(5): ChurchOfTheNewArk, FlatMars, MartianFirst, ProsperityForMars, UnitedColonistFront
+[CB1] FACTIONS assembly_buildings=1 | active_factions(5): ChurchOfTheNewArk, FlatMars, MartianFirst, ProsperityForMars, UnitedColonistFront
+[mod] [CB1] FACTIONS legislature seats: ChurchOfTheNewArk=1 FlatMars=1 MartianFirst=32 ProsperityForMars=40 UnitedColonistFront=26
+[CB1] FACTIONS legislature seats: ChurchOfTheNewArk=1 FlatMars=1 MartianFirst=32 ProsperityForMars=40 UnitedColonistFront=26
+[mod] [CB1] FACTIONS LastTransmission approval=300 polarization=7500 likes_data=11
+[CB1] FACTIONS LastTransmission approval=300 polarization=7500 likes_data=11
+[mod] [CB1] FACTIONS   like TLEWaterStorage2Sols value=1500
+[CB1] FACTIONS   like TLEWaterStorage2Sols value=1500
+[mod] [CB1] FACTIONS   like TLEOxygenStorage2Sols value=1500
+[CB1] FACTIONS   like TLEOxygenStorage2Sols value=1500
+[mod] [CB1] READ LastTransmission-active = false | population=5 | APPLICABLE=true | witness=active_factions list read off g_FactionsHolder, non-empty
+[CB1] READ LastTransmission-active = false | population=5 | APPLICABLE=true | witness=active_factions list read off g_FactionsHolder, non-empty
+						Lua 0:12:34:674
+Story bits: Triggered story bit - ChildrenOfTomorrow						Lua 0:12:57:451
+Story bits: Reply selected - Intriguing! Let's just sit back and watch the development						Lua 0:13:49:984
+[mod] [CommunityFixPack] MeteorFrequency: WATCHDOG — no meteor resolved for 192 game hours (thread ALIVE but stuck); restarting onto vanilla's body
+						Lua 0:14:35:672
+[mod] [CB1] C42 ⛔ this reading is only worth anything if NO save and NO load has happened since the traffic was generated. State which, on the card.
+[CB1] C42 ⛔ this reading is only worth anything if NO save and NO load has happened since the traffic was generated. State which, on the card.
+[mod] [CB1] C42STALE 0  | 4 passage(s), 50 element(s), 0 unit entr(ies) | when=within-session, traffic generated at speed 20, NO save/load since
+[CB1] C42STALE 0  | 4 passage(s), 50 element(s), 0 unit entr(ies) | when=within-session, traffic generated at speed 20, NO save/load since
+[mod] [CB1] READ C42-stale-entries = 0 | population=0 | APPLICABLE=false | witness=unit ENTRIES is the denominator; passages>0 is NOT the condition
+[CB1] READ C42-stale-entries = 0 | population=0 | APPLICABLE=false | witness=unit ENTRIES is the denominator; passages>0 is NOT the condition
+						Lua 0:14:41:851
+[mod] [CB1] F21 train Train#2000015562 command=GotoStation spent_time=nil passengers=0
+[CB1] F21 train Train#2000015562 command=GotoStation spent_time=nil passengers=0
+[mod] [CB1] F21 train Train#2000015807 command=GotoStation spent_time=nil passengers=1
+[CB1] F21 train Train#2000015807 command=GotoStation spent_time=nil passengers=1
+[mod] [CB1] F21 train Train#2000016849 command=GotoStation spent_time=nil passengers=3
+[CB1] F21 train Train#2000016849 command=GotoStation spent_time=nil passengers=3
+[mod] [CB1] F21 train Train#2000016863 command=GotoStation spent_time=nil passengers=5
+[CB1] F21 train Train#2000016863 command=GotoStation spent_time=nil passengers=5
+[mod] [CB1] F21 11 station(s) holding 21 colonist(s) waiting for a train | 8 train(s) | when=during warm-up train activity
+[CB1] F21 11 station(s) holding 21 colonist(s) waiting for a train | 8 train(s) | when=during warm-up train activity
+[mod] [CB1] READ F21-platform-wait-population = 21 | population=11 | APPLICABLE=true | witness=station.waiting_for_train walked this load
+[CB1] READ F21-platform-wait-population = 21 | population=11 | APPLICABLE=true | witness=station.waiting_for_train walked this load
+						Lua 0:14:54:482
+[mod] [CB1] LEG4PICK candidate[1] Colonist#2000018989 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[CB1] LEG4PICK candidate[1] Colonist#2000018989 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[mod] [CB1] LEG4PICK candidate[2] Colonist#2000019259 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[CB1] LEG4PICK candidate[2] Colonist#2000019259 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[mod] [CB1] LEG4PICK candidate[3] Colonist#2000019266 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[CB1] LEG4PICK candidate[3] Colonist#2000019266 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[mod] [CB1] LEG4PICK candidate[4] Colonist#2000019208 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[CB1] LEG4PICK candidate[4] Colonist#2000019208 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[mod] [CB1] LEG4PICK candidate[5] Colonist#2000019267 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[CB1] LEG4PICK candidate[5] Colonist#2000019267 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=6
+[mod] [CB1] LEG4PICK 70 Senior(s) live in a NORMAL residence | 9 of them are in a dome that HAS a free Senior slot | 6 free Senior slot(s) colony-wide
+[CB1] LEG4PICK 70 Senior(s) live in a NORMAL residence | 9 of them are in a dome that HAS a free Senior slot | 6 free Senior slot(s) colony-wide
+[mod] [CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 9 | population=70 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 9 | population=70 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[mod] [CB1] ⛔ LEG4PICK PREDICTION 10 FALSIFIED — 9 Senior(s) sit in a normal residence while a free Senior cohort slot exists in their OWN dome. That is the in-dome pass failing, and it is a DEFECT to file against D07, not a fixture note.
+[CB1] ⛔ LEG4PICK PREDICTION 10 FALSIFIED — 9 Senior(s) sit in a normal residence while a free Senior cohort slot exists in their OWN dome. That is the in-dome pass failing, and it is a DEFECT to file against D07, not a fixture note.
+[mod] [CB1] LEG4PICK subject chosen with an IN-DOME free Senior slot — the module demonstrably wants to move them, so 'it did not move them' is a real precedence reading.
+[CB1] LEG4PICK subject chosen with an IN-DOME free Senior slot — the module demonstrably wants to move them, so 'it did not move them' is a real precedence reading.
+[mod] [CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[mod] [CB1] LEG4PICK ⇒ OWNER: Colonist#2000018989 is now SELECTED and on screen, living in SmartApartmentsCCP1#7353 (dome DomeMega#5276). Manually assign them a residence, then say 'assigned'.
+[CB1] LEG4PICK ⇒ OWNER: Colonist#2000018989 is now SELECTED and on screen, living in SmartApartmentsCCP1#7353 (dome DomeMega#5276). Manually assign them a residence, then say 'assigned'.
+						Lua 0:17:10:148
+[mod] [CB1] COHORT residences=108 (18 cohort / 90 normal) | free slots: cohort=125 [Child=125 Senior=0] normal=198
+[CB1] COHORT residences=108 (18 cohort / 90 normal) | free slots: cohort=125 [Child=125 Senior=0] normal=198
+[mod] [CB1] COHORT seniors=257 (256 housed, 64 of them in a NORMAL residence, 0 employed)
+[CB1] COHORT seniors=257 (256 housed, 64 of them in a NORMAL residence, 0 employed)
+[mod] [CB1] READ PT53E-fixture(senior-in-normal x free-cohort-slot) = 64 x 125 | population=1 | APPLICABLE=true | witness=both halves counted off live labels this load
+[CB1] READ PT53E-fixture(senior-in-normal x free-cohort-slot) = 64 x 125 | population=1 | APPLICABLE=true | witness=both halves counted off live labels this load
+[mod] [CB1] LEG4 subject Colonist#2000018989 residence=SmartApartmentsCCP1#7353 exclusive_trait=false user_forced_residence=nil workplace=nil
+[CB1] LEG4 subject Colonist#2000018989 residence=SmartApartmentsCCP1#7353 exclusive_trait=false user_forced_residence=nil workplace=nil
+						Lua 0:17:56:137
+not understood
+						Lua 0:18:07:885
+not understood
+						Lua 0:23:05:312
+[mod] [CB1] LEG4PICK candidate[1] Colonist#2000019100 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[CB1] LEG4PICK candidate[1] Colonist#2000019100 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[mod] [CB1] LEG4PICK candidate[2] Colonist#2000019259 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[CB1] LEG4PICK candidate[2] Colonist#2000019259 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[mod] [CB1] LEG4PICK candidate[3] Colonist#2000019267 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[CB1] LEG4PICK candidate[3] Colonist#2000019267 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[mod] [CB1] LEG4PICK candidate[4] Colonist#2000019272 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[CB1] LEG4PICK candidate[4] Colonist#2000019272 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[mod] [CB1] LEG4PICK candidate[5] Colonist#2000019208 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[CB1] LEG4PICK candidate[5] Colonist#2000019208 residence=SmartApartmentsCCP1#7353 dome=DomeMega#5276 free_SENIOR_slots_in_THAT_dome=18
+[mod] [CB1] LEG4PICK 76 Senior(s) live in a NORMAL residence | 7 of them are in a dome that HAS a free Senior slot | 18 free Senior slot(s) colony-wide
+[CB1] LEG4PICK 76 Senior(s) live in a NORMAL residence | 7 of them are in a dome that HAS a free Senior slot | 18 free Senior slot(s) colony-wide
+[mod] [CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 7 | population=76 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 7 | population=76 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[mod] [CB1] ⛔ LEG4PICK PREDICTION 10 FALSIFIED — 7 Senior(s) sit in a normal residence while a free Senior cohort slot exists in their OWN dome. That is the in-dome pass failing, and it is a DEFECT to file against D07, not a fixture note.
+[CB1] ⛔ LEG4PICK PREDICTION 10 FALSIFIED — 7 Senior(s) sit in a normal residence while a free Senior cohort slot exists in their OWN dome. That is the in-dome pass failing, and it is a DEFECT to file against D07, not a fixture note.
+[mod] [CB1] LEG4PICK subject chosen with an IN-DOME free Senior slot — the module demonstrably wants to move them, so 'it did not move them' is a real precedence reading.
+[CB1] LEG4PICK subject chosen with an IN-DOME free Senior slot — the module demonstrably wants to move them, so 'it did not move them' is a real precedence reading.
+						Lua 0:23:05:313
+[mod] [CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[mod] [CB1] LEG4PICK ⇒ OWNER: Colonist#2000019100 is now SELECTED and on screen, living in SmartApartmentsCCP1#7353 (dome DomeMega#5276). Manually assign them a residence, then say 'assigned'.
+[CB1] LEG4PICK ⇒ OWNER: Colonist#2000019100 is now SELECTED and on screen, living in SmartApartmentsCCP1#7353 (dome DomeMega#5276). Manually assign them a residence, then say 'assigned'.
+						Lua 0:25:11:143
+[mod] [CB1] COHORT residences=109 (19 cohort / 90 normal) | free slots: cohort=143 [Child=141 Senior=2] normal=198
+[CB1] COHORT residences=109 (19 cohort / 90 normal) | free slots: cohort=143 [Child=141 Senior=2] normal=198
+[mod] [CB1] COHORT seniors=267 (267 housed, 61 of them in a NORMAL residence, 0 employed)
+[CB1] COHORT seniors=267 (267 housed, 61 of them in a NORMAL residence, 0 employed)
+[mod] [CB1] READ PT53E-fixture(senior-in-normal x free-cohort-slot) = 61 x 143 | population=1 | APPLICABLE=true | witness=both halves counted off live labels this load
+[CB1] READ PT53E-fixture(senior-in-normal x free-cohort-slot) = 61 x 143 | population=1 | APPLICABLE=true | witness=both halves counted off live labels this load
+[mod] [CB1] LEG4 subject LifeSupportGridElement#6569 residence=nil exclusive_trait=nil user_forced_residence=nil workplace=nil
+[CB1] LEG4 subject LifeSupportGridElement#6569 residence=nil exclusive_trait=nil user_forced_residence=nil workplace=nil
+						Lua 0:28:41:626
+[mod] [CommunityFixPack] RainsDeadlock: rain activation collided with an active/predicted disaster — posting RainDisasterEnd so the loop re-rolls
+						Lua 0:28:45:682
+[mod] [CB1] LEG4PICK candidate[1] Colonist#2000018631 residence=SmartApartmentsCCP1#9010 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[1] Colonist#2000018631 residence=SmartApartmentsCCP1#9010 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[2] Colonist#2000019412 residence=SmartApartmentsCCP1#9018 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[2] Colonist#2000019412 residence=SmartApartmentsCCP1#9018 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[3] Colonist#2000018825 residence=SmartApartmentsCCP1#9009 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+						Lua 0:28:45:683
+[CB1] LEG4PICK candidate[3] Colonist#2000018825 residence=SmartApartmentsCCP1#9009 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[4] Colonist#2000019532 residence=SmartApartmentsCCP1#8318 dome=GeoscapeDome#8299 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[4] Colonist#2000019532 residence=SmartApartmentsCCP1#8318 dome=GeoscapeDome#8299 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[5] Colonist#2000023771 residence=SmartApartmentsCCP1#3194 dome=DomeMega#2962 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[5] Colonist#2000023771 residence=SmartApartmentsCCP1#3194 dome=DomeMega#2962 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK 48 Senior(s) live in a NORMAL residence | 0 of them are in a dome that HAS a free Senior slot | 53 free Senior slot(s) colony-wide
+[CB1] LEG4PICK 48 Senior(s) live in a NORMAL residence | 0 of them are in a dome that HAS a free Senior slot | 53 free Senior slot(s) colony-wide
+[mod] [CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 0 | population=48 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 0 | population=48 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[mod] [CB1] LEG4PICK prediction 10 HOLDS so far — no Senior in a normal residence has a free Senior slot in their own dome, so reachability is the gate and the module is behaving on the in-dome pass.
+[CB1] LEG4PICK prediction 10 HOLDS so far — no Senior in a normal residence has a free Senior slot in their own dome, so reachability is the gate and the module is behaving on the in-dome pass.
+[mod] [CB1] ⚠️ LEG4PICK NO candidate has an in-dome free Senior slot. The subject below is the WEAKER sample: the module's motive rests on cross-dome reachability, which this reader does not establish. Record M1's result with that limit stated — do not write it up as a clean precedence PASS.
+[CB1] ⚠️ LEG4PICK NO candidate has an in-dome free Senior slot. The subject below is the WEAKER sample: the module's motive rests on cross-dome reachability, which this reader does not establish. Record M1's result with that limit stated — do not write it up as a clean precedence PASS.
+[mod] [CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[mod] [CB1] LEG4PICK ⇒ OWNER: Colonist#2000018631 is now SELECTED and on screen, living in SmartApartmentsCCP1#9010 (dome DomeMedium#8984). Manually assign them a residence, then say 'assigned'.
+[CB1] LEG4PICK ⇒ OWNER: Colonist#2000018631 is now SELECTED and on screen, living in SmartApartmentsCCP1#9010 (dome DomeMedium#8984). Manually assign them a residence, then say 'assigned'.
+						Lua 0:29:18:913
+[mod] [CB1] LEG4PICK candidate[1] Colonist#2000023771 residence=SmartApartmentsCCP1#3194 dome=DomeMega#2962 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[1] Colonist#2000023771 residence=SmartApartmentsCCP1#3194 dome=DomeMega#2962 free_SENIOR_slots_in_THAT_dome=0
+						Lua 0:29:18:914
+[mod] [CB1] LEG4PICK candidate[2] Colonist#2000019412 residence=SmartApartmentsCCP1#9018 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[2] Colonist#2000019412 residence=SmartApartmentsCCP1#9018 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[3] Colonist#2000019532 residence=SmartApartmentsCCP1#8318 dome=GeoscapeDome#8299 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[3] Colonist#2000019532 residence=SmartApartmentsCCP1#8318 dome=GeoscapeDome#8299 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[4] Colonist#2000019118 residence=SmartHome_Small#2916 dome=DomeBasic#1243 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[4] Colonist#2000019118 residence=SmartHome_Small#2916 dome=DomeBasic#1243 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[5] Colonist#2000018825 residence=SmartApartmentsCCP1#9009 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[5] Colonist#2000018825 residence=SmartApartmentsCCP1#9009 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK 37 Senior(s) live in a NORMAL residence | 0 of them are in a dome that HAS a free Senior slot | 43 free Senior slot(s) colony-wide
+[CB1] LEG4PICK 37 Senior(s) live in a NORMAL residence | 0 of them are in a dome that HAS a free Senior slot | 43 free Senior slot(s) colony-wide
+[mod] [CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 0 | population=37 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 0 | population=37 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[mod] [CB1] LEG4PICK prediction 10 HOLDS so far — no Senior in a normal residence has a free Senior slot in their own dome, so reachability is the gate and the module is behaving on the in-dome pass.
+[CB1] LEG4PICK prediction 10 HOLDS so far — no Senior in a normal residence has a free Senior slot in their own dome, so reachability is the gate and the module is behaving on the in-dome pass.
+[mod] [CB1] ⚠️ LEG4PICK NO candidate has an in-dome free Senior slot. The subject below is the WEAKER sample: the module's motive rests on cross-dome reachability, which this reader does not establish. Record M1's result with that limit stated — do not write it up as a clean precedence PASS.
+[CB1] ⚠️ LEG4PICK NO candidate has an in-dome free Senior slot. The subject below is the WEAKER sample: the module's motive rests on cross-dome reachability, which this reader does not establish. Record M1's result with that limit stated — do not write it up as a clean precedence PASS.
+[mod] [CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[mod] [CB1] LEG4PICK ⇒ OWNER: Colonist#2000023771 is now SELECTED and on screen, living in SmartApartmentsCCP1#3194 (dome DomeMega#2962). Manually assign them a residence, then say 'assigned'.
+[CB1] LEG4PICK ⇒ OWNER: Colonist#2000023771 is now SELECTED and on screen, living in SmartApartmentsCCP1#3194 (dome DomeMega#2962). Manually assign them a residence, then say 'assigned'.
+						Lua 0:29:22:144
+[mod] [CB1] LEG4PICK candidate[1] Colonist#2000018918 residence=SmartApartmentsCCP1#3202 dome=DomeMedium#1367 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[1] Colonist#2000018918 residence=SmartApartmentsCCP1#3202 dome=DomeMedium#1367 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[2] Colonist#2000018825 residence=SmartApartmentsCCP1#9009 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[2] Colonist#2000018825 residence=SmartApartmentsCCP1#9009 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[3] Colonist#2000019412 residence=SmartApartmentsCCP1#9018 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[3] Colonist#2000019412 residence=SmartApartmentsCCP1#9018 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[4] Colonist#2000019532 residence=SmartApartmentsCCP1#8318 dome=GeoscapeDome#8299 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[4] Colonist#2000019532 residence=SmartApartmentsCCP1#8318 dome=GeoscapeDome#8299 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK candidate[5] Colonist#2000019032 residence=SmartApartmentsCCP1#8998 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[CB1] LEG4PICK candidate[5] Colonist#2000019032 residence=SmartApartmentsCCP1#8998 dome=DomeMedium#8984 free_SENIOR_slots_in_THAT_dome=0
+[mod] [CB1] LEG4PICK 37 Senior(s) live in a NORMAL residence | 0 of them are in a dome that HAS a free Senior slot | 43 free Senior slot(s) colony-wide
+[CB1] LEG4PICK 37 Senior(s) live in a NORMAL residence | 0 of them are in a dome that HAS a free Senior slot | 43 free Senior slot(s) colony-wide
+[mod] [CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 0 | population=37 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[CB1] READ D07-trigger-E-in-dome-pass(prediction 10) = 0 | population=37 | APPLICABLE=true | witness=every Senior in a normal residence walked against free Senior slots IN THEIR OWN DOME
+[mod] [CB1] LEG4PICK prediction 10 HOLDS so far — no Senior in a normal residence has a free Senior slot in their own dome, so reachability is the gate and the module is behaving on the in-dome pass.
+[CB1] LEG4PICK prediction 10 HOLDS so far — no Senior in a normal residence has a free Senior slot in their own dome, so reachability is the gate and the module is behaving on the in-dome pass.
+[mod] [CB1] ⚠️ LEG4PICK NO candidate has an in-dome free Senior slot. The subject below is the WEAKER sample: the module's motive rests on cross-dome reachability, which this reader does not establish. Record M1's result with that limit stated — do not write it up as a clean precedence PASS.
+[CB1] ⚠️ LEG4PICK NO candidate has an in-dome free Senior slot. The subject below is the WEAKER sample: the module's motive rests on cross-dome reachability, which this reader does not establish. Record M1's result with that limit stated — do not write it up as a clean precedence PASS.
+						Lua 0:29:22:145
+[mod] [CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[CB1] TRY ViewAndSelectObject(subject) ok=true result=nil
+[mod] [CB1] LEG4PICK ⇒ OWNER: Colonist#2000018918 is now SELECTED and on screen, living in SmartApartmentsCCP1#3202 (dome DomeMedium#1367). Manually assign them a residence, then say 'assigned'.
+[CB1] LEG4PICK ⇒ OWNER: Colonist#2000018918 is now SELECTED and on screen, living in SmartApartmentsCCP1#3202 (dome DomeMedium#1367). Manually assign them a residence, then say 'assigned'.
+						Lua 0:29:55:687
+[mod] [CB1] LEG4 AFTER subject LifeSupportGridElement#6569 residence=nil exclusive_trait=nil user_forced_residence=nil
+[CB1] LEG4 AFTER subject LifeSupportGridElement#6569 residence=nil exclusive_trait=nil user_forced_residence=nil
+[mod] [CB1] LEG4 let the sim run a while at speed, then call CB1.Leg4After(...) again — the module must NOT have moved them.
+[CB1] LEG4 let the sim run a while at speed, then call CB1.Leg4After(...) again — the module must NOT have moved them.
+						Lua 1:01:05:667
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:01:38:137
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:01:55:904
+[mod] [CommunityFixPack] MeteorStormWedge: WEDGE confirmed - g_MeteorStorm set for 1h+ with no notification and nothing falling (scheduler thread alive but stuck); healing
+						Lua 1:01:55:909
+[mod] [CommunityFixPack] MeteorStormWedge: scheduler thread restarted - future storms will schedule again
+Story bits: Triggered story bit - GeoLife						Lua 1:02:03:890
+[mod] [CommunityFixPack] MeteorStormWedge: forced storm state clean (11 stray meteor object(s) removed)
+						Lua 1:02:07:886
+Story bits: Triggered story bit - ChildrenOfTomorrow_TheAdvent1						Lua 1:02:20:786
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:02:23:638
+ObjCheat CheatFill
+						Lua 1:02:27:365
+ObjCheat CheatFill
+						Lua 1:02:33:357
+ObjCheat CheatFill
+						Lua 1:02:36:223
+ObjCheat CheatFill
+						Lua 1:02:41:641
+ObjCheat CheatFill
+						Lua 1:02:50:136
+Story bits: Reply selected - Follow the protocol and sterilize the Geoscape Dome. Perhaps there is an unseen danger there						Lua 1:02:51:352
+ObjCheat CheatFill
+						Lua 1:03:14:811
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:03:28:196
+[mod] [CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[mod] [CB1] TRACKS train commands: GotoStation=7 UnloadTrain=1
+[CB1] TRACKS train commands: GotoStation=7 UnloadTrain=1
+[mod] [CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[mod] [CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[mod] [CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+						Lua 1:03:28:197
+[mod] [CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[mod] [CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[mod] [CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[mod] [CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[mod] [CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[mod] [CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[mod] [CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=559 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=559 duplicate_node_idx=[]
+						Lua 1:03:34:814
+[mod] [CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[mod] [CB1] TRACKS train commands: GotoStation=6 LoadTrain=1 UnloadTrain=1
+[CB1] TRACKS train commands: GotoStation=6 LoadTrain=1 UnloadTrain=1
+[mod] [CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[mod] [CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[mod] [CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[mod] [CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[mod] [CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[mod] [CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[mod] [CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[mod] [CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+						Lua 1:03:34:815
+[mod] [CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[mod] [CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=559 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=559 duplicate_node_idx=[]
+						Lua 1:05:13:414
+[mod] [CB1] SNAP leg1-caseA-BEFORE-call TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=559 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-BEFORE-call TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=559 duplicate_node_idx=[]
+[mod] [CB1] LEG1A FORCED: the corrected savegame-fixup call, run by hand. MEASURED: whether the track survives it.
+[CB1] LEG1A FORCED: the corrected savegame-fixup call, run by hand. MEASURED: whether the track survives it.
+						Lua 1:05:13:417
+[mod] [CB1] TRY ProcessTrackElements(ResolveMap(t), t.elements) [FIRST EXECUTION] ok=true result=nil
+[CB1] TRY ProcessTrackElements(ResolveMap(t), t.elements) [FIRST EXECUTION] ok=true result=nil
+[mod] [CB1] SNAP leg1-caseA-AFTER-call TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-AFTER-call TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[mod] [CB1] LEG1A VERDICT signature CHANGED — compare the two SNAP lines above
+[CB1] LEG1A VERDICT signature CHANGED — compare the two SNAP lines above
+						Lua 1:08:54:935
+ObjCheat CheatFill
+						Lua 1:09:16:525
+[mod] [CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[mod] [CB1] TRACKS train commands: GotoStation=6 LoadTrain=1 UnloadTrain=1
+[CB1] TRACKS train commands: GotoStation=6 LoadTrain=1 UnloadTrain=1
+[mod] [CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[mod] [CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[mod] [CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[mod] [CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[mod] [CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[mod] [CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[mod] [CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[mod] [CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[mod] [CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+						Lua 1:09:16:526
+[mod] [CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+						Lua 1:09:22:392
+[mod] [CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[mod] [CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+[CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+						Lua 1:09:22:394
+[mod] [CB1] LEG5SAVE list-before ok=true
+[CB1] LEG5SAVE list-before ok=true
+						Lua 1:09:22:967
+[mod] [CB1] LEG5SAVE SaveGame returned err=false name=CB1CASEA.savegame.sav
+[CB1] LEG5SAVE SaveGame returned err=false name=CB1CASEA.savegame.sav
+[mod] [CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[mod] [CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+[CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+						Lua 1:09:27:879
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:09:33:323
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:09:33:372
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 1:09:33:391
+Game Loaded in 5512 ms
+						Lua 1:09:33:444
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:09:33:998
+Game loaded on map BlankBigCanyonCMix_09 in 6270 ms
+[mod] [CB1] LOAD OK #2 file=CB1CASEA.savegame.sav — LoadGame returned no error
+[CB1] LOAD OK #2 file=CB1CASEA.savegame.sav — LoadGame returned no error
+						Lua 1:09:35:308
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:09:36:309
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:09:38:456
+[mod] [CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[mod] [CB1] TRACKS train commands: GotoStation=5 LoadTrain=2 UnloadTrain=1
+[CB1] TRACKS train commands: GotoStation=5 LoadTrain=2 UnloadTrain=1
+[mod] [CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[mod] [CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[mod] [CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[mod] [CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[mod] [CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43						Lua 1:09:38:457
+
+[CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[mod] [CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[mod] [CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[mod] [CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[mod] [CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[mod] [CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+						Lua 1:09:49:497
+[mod] [CB1] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[CB1] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+						Lua 1:10:48:843
+[mod] [CB1] LEG1DMG FORCED: meteor at (227000, 233820, 5245) (mid element TrackGridElement#12275 of TrackBase#12454). MEASURED: nothing yet — this only stages the fixture.
+[CB1] LEG1DMG FORCED: meteor at (227000, 233820, 5245) (mid element TrackGridElement#12275 of TrackBase#12454). MEASURED: nothing yet — this only stages the fixture.
+[mod] [CB1] TRY CheatMeteors single at the element position ok=true result=nil
+[CB1] TRY CheatMeteors single at the element position ok=true result=nil
+[mod] [CB1] LEG1DMG watch for the impact, then run CB1.Leg1CaseBCheck()
+[CB1] LEG1DMG watch for the impact, then run CB1.Leg1CaseBCheck()
+						Lua 1:10:58:616
+[mod] [CB1] LEG1B damage state: 8 broken element(s), 8 repair site(s), 1 repair_cgs
+[CB1] LEG1B damage state: 8 broken element(s), 8 repair site(s), 1 repair_cgs
+[mod] [CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[mod] [CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[mod] [CB1] SNAP leg1-caseB-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseB-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[mod] [CB1] ⛔ LEG1B THE DECIDER IS UNSAMPLED: the hex grid still hands the walk the track's own elements, so OrderTrackElements will SUCCEED and this is case A again. Running the call anyway would produce a 'clean pass' that proves nothing about the risk F48 is blocked on. Break another element, or record leg 1 as SKIP <case B could not be made unwalkable> and leave F48 blocked.
+[CB1] ⛔ LEG1B THE DECIDER IS UNSAMPLED: the hex grid still hands the walk the track's own elements, so OrderTrackElements will SUCCEED and this is case A again. Running the call anyway would produce a 'clean pass' that proves nothing about the risk F48 is blocked on. Break another element, or record leg 1 as SKIP <case B could not be made unwalkable> and leave F48 blocked.
+						Lua 1:15:49:883
+
+!!! Quick Build !!!
+						Lua 1:21:19:305
+[mod] [CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[CB1] TRACKS 17 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 0 repair site(s)
+[mod] [CB1] TRACKS train commands: GotoStation=7 UnloadTrain=1
+[CB1] TRACKS train commands: GotoStation=7 UnloadTrain=1
+[mod] [CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[mod] [CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[mod] [CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[mod] [CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[mod] [CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[mod] [CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[mod] [CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[mod] [CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[mod] [CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+						Lua 1:21:19:306
+[mod] [CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+						Lua 1:21:54:315
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:24:19:218
+[mod] [CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[mod] [CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+[CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+						Lua 1:24:19:219
+[mod] [CB1] LEG5SAVE list-before ok=true
+[CB1] LEG5SAVE list-before ok=true
+						Lua 1:24:19:917
+[mod] [CB1] LEG5SAVE SaveGame returned err=false name=F99UG.savegame.sav
+[CB1] LEG5SAVE SaveGame returned err=false name=F99UG.savegame.sav
+[mod] [CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[mod] [CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+[CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+						Lua 1:25:27:567
+not understood
+						Lua 1:25:32:995
+not understood
+						Lua 1:25:38:231
+
+!!! Quick Build !!!
+						Lua 1:25:50:472
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:25:55:965
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:25:56:001
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 1:25:56:018
+Game Loaded in 5546 						Lua 1:25:56:019
+ms
+						Lua 1:25:56:059
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:25:56:487
+Game loaded on map BlankUnderground_04 in 6199 ms
+[mod] [CB1] LOAD OK #3 file=F99UG.savegame.sav — LoadGame returned no error
+[CB1] LOAD OK #3 file=F99UG.savegame.sav — LoadGame returned no error
+						Lua 1:25:57:800
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:25:57:801
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:25:58:799
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:26:11:984
+[mod] [CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+						Lua 1:26:38:410
+[mod] [CB1] TRACKS 20 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 201 repair site(s)
+[CB1] TRACKS 20 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 926 element(s), 0 broken element(s), 201 repair site(s)
+[mod] [CB1] TRACKS train commands: GotoStation=6 UnloadTrain=2
+[CB1] TRACKS train commands: GotoStation=6 UnloadTrain=2
+[mod] [CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[mod] [CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[CB1] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[mod] [CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[mod] [CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[mod] [CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[mod] [CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=20 | APPLICABLE=true | witness=TrackBase label walked this load
+[CB1] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=20 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[mod] [CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+						Lua 1:26:38:411
+[mod] [CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[mod] [CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[mod] [CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+						Lua 1:26:43:196
+
+!!! Quick Build !!!
+						Lua 1:28:03:999
+[mod] [CB1] TRACKS 18 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 1127 element(s), 0 broken element(s), 0 repair site(s)
+[CB1] TRACKS 18 track(s) (0 with stations_connected — see the note, NOT a connectivity verdict), 1127 element(s), 0 broken element(s), 0 repair site(s)
+[mod] [CB1] TRACKS train commands: GotoStation=5 LoadTrain=2 UnloadTrain=1
+[CB1] TRACKS train commands: GotoStation=5 LoadTrain=2 UnloadTrain=1
+[mod] [CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[CB1] TRACKS 11 station(s), 8 train(s) (8 with a route or moving)
+[mod] [CB1] TRACKS healthy multi-element tracks=14 | already-damaged tracks=0
+[CB1] TRACKS healthy multi-element tracks=14 | already-damaged tracks=0
+[mod] [CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[CB1] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[mod] [CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[CB1] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[mod] [CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[CB1] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[mod] [CB1] READ PT37-caseA-fixture(healthy multi-element track) = 14 | population=18 | APPLICABLE=true | witness=TrackBase label walked this load
+[CB1] READ PT37-caseA-fixture(healthy multi-element track) = 14 | population=18 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[CB1] READ PT37-train-activity(F21 ride-along) = 8 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[mod] [CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[CB1] LEG1 case-A track picked: TrackBase#12454 with 280 elements
+[mod] [CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1] WALK track=TrackBase#12454 elements=280 checked=280 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[mod] [CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1] READ PT37-caseB-samples-the-failure-path = false | population=280 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[mod] [CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+[CB1] SNAP leg1-caseA-BEFORE TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 node_idx=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280] connections_total=558 duplicate_node_idx=[]
+						Lua 1:30:52:732
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:30:58:170
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:30:58:203
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 1:30:58:221
+Game Loaded in 5489 ms
+						Lua 1:30:58:257
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:30:58:726
+Game loaded on map BlankUnderground_04 in 6264 ms
+[mod] [CB1] LOAD OK #4 file=F99UG.savegame.sav — LoadGame returned no error
+[CB1] LOAD OK #4 file=F99UG.savegame.sav — LoadGame returned no error
+						Lua 1:31:00:028
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:31:00:029
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:31:01:028
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:31:06:890
+[mod] [CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[mod] [CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+[CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+						Lua 1:31:06:891
+[mod] [CB1] LEG5SAVE list-before ok=true
+[CB1] LEG5SAVE list-before ok=true
+						Lua 1:31:07:568
+[mod] [CB1] LEG5SAVE SaveGame returned err=false name=F99UG.savegame.sav
+[CB1] LEG5SAVE SaveGame returned err=false name=F99UG.savegame.sav
+[mod] [CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[mod] [CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+[CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+						Lua 1:31:14:225
+[mod] [CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+						Lua 1:31:15:149
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:31:20:603
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:31:20:637
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 1:31:20:655
+Game Loaded in 5506 ms
+						Lua 1:31:20:690
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:31:21:083
+Game loaded on map BlankUnderground_04 in 6136 ms
+[mod] [CB1] LOAD OK #5 file=F99UG.savegame.sav — LoadGame returned no error
+[CB1] LOAD OK #5 file=F99UG.savegame.sav — LoadGame returned no error
+						Lua 1:31:22:390
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:31:23:390
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:31:25:527
+
+!!! Quick Build !!!
+						Lua 1:31:36:584
+[mod] [CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+						Lua 1:32:12:093
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:32:17:722
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:32:17:756
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 1:32:17:775
+Game Loaded in 5681 ms
+						Lua 1:32:17:808
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:32:18:221
+Game loaded on map BlankUnderground_04 in 6360 ms
+[mod] [CB1] LOAD OK #6 file=F99UG.savegame.sav — LoadGame returned no error
+[CB1] LOAD OK #6 file=F99UG.savegame.sav — LoadGame returned no error
+						Lua 1:32:19:527
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:32:20:527
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:32:27:155
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:32:33:721
+[mod] [CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[CB1] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+						Lua 1:32:36:627
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:32:41:905
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:32:46:527
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:32:49:483
+
+!!! Quick Build !!!
+						Lua 1:32:52:598
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:33:45:017
+[mod] [CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind						Lua 1:33:45:018
+
+[CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[mod] [CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+[CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+[mod] [CB1] LEG5SAVE list-before ok=true
+[CB1] LEG5SAVE list-before ok=true
+						Lua 1:33:45:779
+[mod] [CB1] LEG5SAVE SaveGame returned err=false name=F99UG.savegame.sav
+[CB1] LEG5SAVE SaveGame returned err=false name=F99UG.savegame.sav
+[mod] [CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[mod] [CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+[CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+						Lua 1:33:52:593
+
+!!! Quick Build !!!
+						Lua 1:35:38:925
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:35:44:439
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:35:44:469
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 1:35:44:488
+Game Loaded in 5564 ms
+						Lua 1:35:44:529
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:35:45:060
+Game loaded on map BlankBigCanyonCMix_09 in 6406 ms
+[mod] [CB1] LOAD OK #7 file=F99UG.savegame.sav — LoadGame returned no error
+[CB1] LOAD OK #7 file=F99UG.savegame.sav — LoadGame returned no error
+						Lua 1:35:46:364
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:35:47:364
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:35:48:962
+
+!!! Quick Build !!!
+						Lua 1:36:00:559
+[mod] [CB1] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[CB1] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+						Lua 1:36:03:787
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:36:34:957
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:36:43:636
+ObjCheat CheatBreakElement
+						Lua 1:36:45:756
+ObjCheat CheatBreakElement
+						Lua 1:36:47:474
+ObjCheat CheatBreakElement
+						Lua 1:36:50:939
+ObjCheat CheatMeteorHit
+[LUA ERROR] Lua/Buildings/TrackElement.lua:441: attempt to call a nil value (global 'TestMeteor')
+  Lua/Buildings/TrackElement.lua(441):  field ?
+  CommonLua/Libs/Network/Network.lua(213):   <>
+  [C](-1):  global procall
+  CommonLua/Libs/Network/Network.lua(223):  field ?
+  CommonLua/_Network.lua(25):   <>
+  [C](-1):  global procall
+  CommonLua/_Network.lua(35):  global NetSyncEvent
+  Lua/X/Infopanel.lua(49):  method OnAction
+  CommonLua/X/XActions.lua(624):  method OnAction
+  CommonLua/X/XButton.lua(90):  upvalue on_press
+  CommonLua/X/XToolBar.lua(69):  method OnPress
+  CommonLua/X/XButton.lua(70):  method Press
+  CommonLua/X/XButton.lua(141):   <>
+  CommonLua/X/XDesktop.lua(404):   <>
+  CommonLua/Core/terminal.lua(28):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackGridElement at (137500, 168870, 5245) on map 1
+						Lua 1:36:57:032
+ObjCheat CheatMeteorHit
+[LUA ERROR] Lua/Buildings/TrackElement.lua:441: attempt to call a nil value (global 'TestMeteor')
+  Lua/Buildings/TrackElement.lua(441):  field ?
+  CommonLua/Libs/Network/Network.lua(213):   <>
+  [C](-1):  global procall
+  CommonLua/Libs/Network/Network.lua(223):  field ?
+  CommonLua/_Network.lua(25):   <>
+  [C](-1):  global procall
+  CommonLua/_Network.lua(35):  global NetSyncEvent
+  Lua/X/Infopanel.lua(49):  method OnAction
+  CommonLua/X/XActions.lua(624):  method OnAction
+  CommonLua/X/XButton.lua(90):  upvalue on_press
+  CommonLua/X/XToolBar.lua(69):  method OnPress
+  CommonLua/X/XButton.lua(70):  method Press
+  CommonLua/X/XButton.lua(141):   <>
+  CommonLua/X/XDesktop.lua(404):   <>
+  CommonLua/Core/terminal.lua(28):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackGridElement at (130500, 180994, 5245) on map 1
+						Lua 1:37:04:202
+ObjCheat CheatMeteorHit
+[LUA ERROR] Lua/Buildings/TrackElement.lua:441: attempt to call a nil value (global 'TestMeteor')
+  Lua/Buildings/TrackElement.lua(441):  field ?
+  CommonLua/Libs/Network/Network.lua(213):   <>
+  [C](-1):  global procall
+  CommonLua/Libs/Network/Network.lua(223):  field ?
+  CommonLua/_Network.lua(25):   <>
+  [C](-1):  global procall
+  CommonLua/_Network.lua(35):  global NetSyncEvent
+  Lua/X/Infopanel.lua(49):  method OnAction
+  CommonLua/X/XActions.lua(624):  method OnAction
+  CommonLua/X/XButton.lua(90):  upvalue on_press
+  CommonLua/X/XToolBar.lua(69):  method OnPress
+  CommonLua/X/XButton.lua(70):  method Press
+  CommonLua/X/XButton.lua(141):   <>
+  CommonLua/X/XDesktop.lua(404):   <>
+  CommonLua/Core/terminal.lua(28):   <>
+        --- end of stack
+Locals:
+	                self |   object TrackGridElement at (126500, 194850, 5245) on map 1
+						Lua 1:37:12:038
+ObjCheat CheatBreakElement
+						Lua 1:37:15:334
+ObjCheat CheatBreakElement
+						Lua 1:39:14:303
+not understood
+						Lua 1:39:16:461
+not understood
+						Lua 1:39:20:281
+
+!!! Quick Build !!!
+						Lua 1:44:57:894
+[LUA ERROR] CommonLua/GedGameObjectEditor.lua:104: attempt to call a nil value (global 'GetSpotNameColor')
+  CommonLua/GedGameObjectEditor.lua(104):  global EditorShowSpots
+  CommonLua/GedGameObjectEditor.lua(64):  global ToggleSpotVisibility
+  CommonLua/Classes/_cobject.lua(1576):  field ?
+  Lua/X/Infopanel.lua(47):  method OnAction
+  CommonLua/X/XActions.lua(624):  method OnAction
+  CommonLua/X/XButton.lua(90):  upvalue on_press
+  CommonLua/X/XToolBar.lua(69):  method OnPress
+  CommonLua/X/XButton.lua(70):  method Press
+  CommonLua/X/XButton.lua(141):   <>
+  CommonLua/X/XDesktop.lua(404):   <>
+  CommonLua/Core/terminal.lua(28):   <>
+        --- end of stack
+Locals:
+	                 obj |   object TrackGridElement at (134500, 163674, 5245) on map 1
+	           spot_type |      nil
+	          annotation |      nil
+	       show_spot_idx |      nil
+	      disabled_spots |      nil
+	                objs |    table 0x00000236EE0339A0 #0
+						Lua 1:44:57:895
+	            start_id |   number 0
+	              end_id |   number 9
+	               scale |   number 100
+	         pos_to_text |    table 0x00000236EE0339E0 #0
+	         (for index) |   number 0
+	         (for limit) |   number 9
+	          (for step) |   number 1
+	                   i |   number 0
+	           spot_name |   string Enter1
+	     spot_annotation |   string TrackPillar
+	         shown_spots |    table 0x00000236CD204B10 #0
+Error calling Lua function "MouseEvent" from C: CommonLua/GedGameObjectEditor.lua:104: attempt to call a nil value (global 'GetSpotNameColor')
+						Lua 1:45:06:361
+[LUA ERROR] CommonLua/GedGameObjectEditor.lua:104: attempt to call a nil value (global 'GetSpotNameColor')
+  CommonLua/GedGameObjectEditor.lua(104):  global EditorShowSpots
+  CommonLua/GedGameObjectEditor.lua(64):  global ToggleSpotVisibility
+  CommonLua/Classes/_cobject.lua(1576):  field ?
+  Lua/X/Infopanel.lua(47):  method OnAction
+  CommonLua/X/XActions.lua(624):  method OnAction
+  CommonLua/X/XButton.lua(90):  upvalue on_press
+  CommonLua/X/XToolBar.lua(69):  method OnPress
+  CommonLua/X/XButton.lua(70):  method Press
+  CommonLua/X/XButton.lua(141):   <>
+  CommonLua/X/XDesktop.lua(404):   <>
+  CommonLua/Core/terminal.lua(28):   <>
+        --- end of stack
+Locals:
+	                 obj |   object TrackGridElement at (134500, 163674, 5245) on map 1
+	           spot_type |      nil
+	          annotation |      nil
+	       show_spot_idx |      nil
+	      disabled_spots |      nil
+	                objs |    table 0x00000236E0CDFB08 #0
+	            start_id |   number 0
+	              end_id |   number 9
+	               scale |   number 100
+	         pos_to_text |    table 0x00000236E0CDFB48 #0
+	         (for index) |   number 0
+	         (for limit) |   number 9
+	          (for step) |   number 1
+	                   i |   number 0
+	           spot_name |   string Enter1
+	     spot_annotation |   string TrackPillar
+	         shown_spots |    table 0x00000236CD204B10 #0
+Error calling Lua function "MouseEvent" from C: CommonLua/GedGameObjectEditor.lua:104: attempt to call a nil value (global 'GetSpotNameColor')
+						Lua 1:45:12:240
+Initializing ged app: GedInspector
+						Lua 1:45:12:242
+[ged] Opened GedInspector with class nil, id 1919529913034496356
+						Lua 1:45:32:536
+[ged] Closed GedInspector with id 1919529913034496356
+						Lua 1:51:00:841
+ObjCheat CheatDelete
+						Lua 1:51:03:473
+ObjCheat CheatDelete
+						Lua 1:51:06:491
+ObjCheat CheatDelete
+						Lua 1:51:13:326
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:51:15:292
+ObjCheat CheatDelete
+						Lua 1:51:19:229
+ObjCheat CheatDelete
+						Lua 1:51:23:011
+ObjCheat CheatDelete
+						Lua 1:53:10:531
+
+!!! Quick Build !!!
+						Lua 1:57:53:080
+[mod] [CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[CB1] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[mod] [CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+[CB1] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+						Lua 1:57:53:081
+[mod] [CB1] LEG5SAVE list-before ok=true
+[CB1] LEG5SAVE list-before ok=true
+						Lua 1:57:53:947
+[mod] [CB1] LEG5SAVE SaveGame returned err=false name=F99UG.savegame.sav
+[CB1] LEG5SAVE SaveGame returned err=false name=F99UG.savegame.sav
+[mod] [CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[CB1] TRY SaveGame fixture (yielding) ok=true result=false
+[mod] [CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+[CB1] LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.
+						Lua 1:58:18:235
+Story bits: Triggered story bit - ChildrenOfTomorrow_TheAdvent1_Repeatable						Lua 1:58:21:107
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:58:26:705
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:58:26:740
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 1:58:26:759
+Game Loaded in 5652 ms
+						Lua 1:58:26:802
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:58:27:328
+Game loaded on map BlankUnderground_04 in 6475 ms
+[mod] [CB1] LOAD OK #8 file=F99UG.savegame.sav — LoadGame returned no error
+[CB1] LOAD OK #8 file=F99UG.savegame.sav — LoadGame returned no error
+						Lua 1:58:28:581
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:58:29:581
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:58:31:632
+
+!!! Quick Build !!!
+						Lua 1:58:42:776
+[mod] [CB1] READ speed: SetGameSpeed(3) call=true | before=5 after=3
+[CB1] READ speed: SetGameSpeed(3) call=true | before=5 after=3

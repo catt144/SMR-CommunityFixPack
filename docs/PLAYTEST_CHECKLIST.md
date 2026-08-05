@@ -27,6 +27,50 @@ reasoning lives; **an agent strikes a line the moment you decide** — just say 
 in any session. Added 2026-08-03 by the docs-restructure chain (spec §7 / R10):
 these used to be filed only in agent reports, which is where you never read.
 
+### ⭐ NEW 2026-08-05 — from the `corun-batch-1` sitting (four calls, all yours)
+
+**Cost, honestly: the brief promised ~24 attended minutes and the sitting ran
+about two hours of your time.** The reasons are recorded, not smoothed over —
+M1's fixture had to be *built* live because prep's expected one had evaporated,
+you drove the console yourself (the rig has no input path into a running game),
+and you spent a large part of it on your own F99 investigation, which was worth
+it. → `agent/prompts/corun-batch-1/03_FABLE_AUDIT.md`.
+
+1. **⚖️ Does PT-37's result unblock F48?** Case A passed and did **better than a
+   no-op** — it removed one stale connection (559 → 558, exactly the clean-chain
+   value) and that survived save+reload. Case B could not be sampled *at all*:
+   we measured that the hex grid hands the walk the hidden original element, so
+   `OrderTrackElements` **succeeds** on a meteor-damaged track and the assert
+   path is unreachable that way. Your unblock criterion said *"case B failing
+   cleanly"*; what we got is *"case B does not fail"* — a different answer, and
+   arguably stronger. **Ship the sanitizer repair, or hold for a route that does
+   reach the assert?** → `agent/bugs/F48.md`, 2026-08-05 block.
+2. **⚖️ Should pinning a colonist to a residence also pin them to their dome?**
+   D07's in-dome pass respects `CheckForcedResidence`; the cross-dome pass
+   checks `CheckForcedDome` instead, so a Senior you pin to a residence can
+   still be emigrated out of the dome when no local cohort slot exists. The
+   module's header calls this deliberate. Derived from source, no fixture
+   needed. → `agent/bugs/D07.md`.
+3. **⚖️ How much do the two new dev-tool defects matter?** `F101` — every
+   building's **Meteor Hit** infopanel button throws on retail, and so does
+   opening the **object inspector** (`~<expr>`), which this project's own HELP
+   recommended until today. Both vanilla, no pack code, both need dev tooling to
+   reach — but you noted mods routinely expose these outside a dev build.
+   **Severity is yours; both are wrappable if you want them fixed.**
+   → `agent/bugs/F101.md`.
+4. **⚖️ `Opt_NoHomeless` self-deactivates at the main menu** because its
+   preflight names `Community` while `HasFreeWorkplacesAround` is declared on
+   the `Workforce` mixin — the F64 mistake again. It recovers (81/81 active by
+   load) and the runtime is separately guarded, so nothing broke. **Fix the
+   preflight target, or leave it?** → `agent/bugs/D12.md`.
+
+**Not decisions, just so you know where things stand:** D07 is **4-of-5**, not
+3-of-5 — trigger A passed on 2026-07-30 with your Forever Young A/B and the
+entry had been stale for five days; you caught that from memory during the
+sitting. PT-47, M5 and M7 never ran and stay routed. F99 did not fire once in
+two hours; the one condition it names is still untested and the recipe for
+building it is on the entry.
+
 - ~~**CO-RUN #1 IS PREPPED AND WAITING ON YOUR ~7 MINUTES**~~ ✅ **RAN
   2026-08-04. It cost you about 6 minutes against the 15–20 asked for**, across
   two launches (398 s and 85 s, zero `[LUA ERROR]` in either). Three of the four

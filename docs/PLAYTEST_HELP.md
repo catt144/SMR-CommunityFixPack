@@ -228,7 +228,36 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
   | `g_Consts.MarsquakeSpawnTime = 1` | statement → executed |
   | `*r <code>` | runs `<code>` in a **real-time thread** (use for multi-statement snippets) |
   | `*g <code>` | runs `<code>` in a **game-time thread** (use when you need `Sleep`) |
-  | `~<expr>` | opens the object inspector on `<expr>` |
+  | `~<expr>` | opens the object inspector on `<expr>` — ⛔ **THROWS on retail, measured 2026-08-05**, see the warning below |
+- ⛔⛔ **DEV TOOLS THAT THROW ON RETAIL — measured live 2026-08-05, entry `F101`.**
+  Two things this document previously recommended or described are broken on a
+  shipped build, and both throw rather than doing nothing:
+  - **The object inspector `~<expr>`.** Opening it and moving the mouse throws
+    `CommonLua/GedGameObjectEditor.lua:104: attempt to call a nil value (global
+    'GetSpotNameColor')`. `GetSpotNameColor` lives only in
+    `CommonLua/Libs/DevToolsPublic/debug.lua:359`, and that **entire library is
+    absent** from a retail build — this is not a `Platform.cheats` gate, so no
+    cheat flag turns it on. Witnessed 2×.
+  - **The `!` console prefix** (`uiConsole.lua:357` → `ShowMe(...)`) has the
+    same shape — `ShowMe` is also `DevToolsPublic`-only. **Not yet witnessed**;
+    recorded as a lead, do not cite it as measured.
+  - **Infopanel `Meteor Hit` cheat buttons.** `TestMeteor` exists only inside
+    `if Platform.cheats then` (`Meteors.lua:1086`) but three ungated callers
+    invoke it, including `Building:CheatMeteorHit` on the **base class** — so
+    every building's Meteor-Hit button throws. Witnessed 3×. The neighbouring
+    **`Break Element`** button (`TrackGridElement:CheatBreakElement` →
+    `BreakTracks`, ungated) **does work** — use `SelectedObj:CheatBreakElement()`
+    when you need to damage a specific track element.
+- ⛔ **CORRECTION 2026-08-05 to the infopanel-cheat row below:** it claims those
+  buttons "render but silently NO-OP" on retail. **They do not silently no-op —
+  they execute.** The stack proves it: the `NetSyncEvent` was delivered,
+  `procall` ran the handler, and it reached `TrackElement.lua:441` before
+  throwing. `AreCheatsEnabled()` and `Platform.cheats` are **different things**:
+  the Test Kit sets the console/cheat-enable flag every session, so dispatch
+  happens, while `Platform.cheats` is a build flag that is false at Lua load and
+  therefore never defines the dev-only functions. Accurate rule: **infopanel
+  cheat buttons DO run on retail, and any one that calls a `Platform.cheats`-
+  gated global throws.**
 - ⚠️ **NEVER put a `--` comment in a `*r` / `*g` snippet** (found the hard way
   2026-07-29). Those rules splice your code into a template **on one line**:
   `CreateRealTimeThread(function() %s end) return` (`uiConsole.lua:360`). A
