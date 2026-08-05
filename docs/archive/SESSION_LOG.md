@@ -8,6 +8,114 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-05 — `corun-batch-1` CLOSED (prompt 3, Fable terminal audit): every verdict sustained, one attribution corrected, the owner's override honored, the folder is empty
+
+**The first BATCHED attended co-run chain is complete** — 3 prompts,
+self-consuming, prep unattended (Opus) → sitting attended (Opus, owner at the
+keyboard) → this audit (Fable). The chain's files (README, this prompt, the 4
+parked probe sources) survive in git at **`530df63`**
+(`git show 530df63:docs/agent/prompts/corun-batch-1/README.md` etc.); the
+folder is deleted in this commit.
+
+**Audit verdict (Job 1, every upstream claim vs the archived log): EVERY
+per-leg verdict SUSTAINED.** The archived log is a **byte-faithful prefix** of
+the on-disk original (0 of 1286 shared lines differ; the unarchived 18-line
+tail is one story bit + a clean exit-code-0 shutdown at uptime 2:18 — the
+process idled ~20 min after the last read). Case A's table verifies cell by
+cell (`559 → 558`, endpoints/`n`/`node_idx` untouched, 558 again after LOAD OK
+#2 — persisted); case B's refusal is real (`8 broken / 8 sites / 1 repair_cgs`
+yet `WALK … shadowed=0 missing=0`, the gate printed its refusal and the call
+never ran); PT-42's SKIP was re-confirmed live (5 active factions, Last
+Transmission not among them, 0 seats); D07's drain reads all match
+(70/9/6 → 76/7/18 → 48/0/53 → 37/0/43, seniors 257→267, 0 employed
+throughout); both F99 samples carry their completion witnesses (sites 8→0;
+underground 926+201=1127 with tracks 20→18 — the merge demonstrably ran);
+F101's five throws are all present with full stacks; D12's lines sit at
+161-162/185 as cited; `ProcessTrackElements`' first execution printed its
+`pcall` (`ok=true result=nil`); `StartBombard` appears nowhere (PT-47 truly
+never ran, F26 stays `[NEVER RUN]`). Commit discipline clean: both cited logs
+archived and `git show`-verified, all staged/throwaway saves gone from the
+save dir, `TEST2H TRAIN` byte-identical (MD5 `103B320A…8958`, mtime 2026-08-03
+22:21:48), both repos' trees clean, no probe residue in either `Code/`, no
+leg-5 FIXTURE save exists because leg 5 never ran (none is claimed). The §7
+aborted-relaunch amendment is corroborated by the second process's 9.9 KB
+boot-only log (16:49:31, uncited, nothing ran). No `tested` was granted
+anywhere, so the adopted tiers had nothing to demote.
+
+**What the audit caught — one attribution correction, plus hygiene:**
+
+- ⛔ **F101 mechanism (b)'s trigger was misattributed, and the correction is
+  visible on the entry, HELP, and the owner's decision item 3.** The record
+  said the 2 × `GetSpotNameColor` throws came from *"opening the object
+  inspector (`~<expr>`) and moving the mouse"* (the owner's honest live
+  recollection). The archived stacks say: `Infopanel.lua(47) OnAction →
+  ToggleSpotVisibility → EditorShowSpots (GedGameObjectEditor.lua:104)` — an
+  **infopanel spot-visibility dev button**, same surface class as the
+  Meteor-Hit mechanism — and the session's one real GedInspector open
+  (1:45:12–1:45:32) was **clean**, and came *after* both throws. The defect
+  stands measured; the `~<expr>` claim is demoted to a static lead beside
+  `!`/`ShowMe`. The truncated stack quote on the entry had hidden exactly the
+  frames that contradicted the story.
+- Ledger S4 overcounts: "PREDICTION 10 FALSIFIED" printed **twice** (0:14:54
+  with 9 subjects, 0:23:05 with 7), not three times. The lesson stands.
+- F21's "all trains `spent_time=nil`" was 4 of 8 trains sampled, all nil; the
+  penalty half stays UNMEASURED either way.
+- Two organic pack healings the sitting's own log review missed, now on their
+  entries: **F78** storm-wedge heal at 1:01:55 (11 strays removed) and
+  **F81** rains re-roll at 0:28:41 — with F02's watchdog at 0:13:49, all
+  three 2026-08-03 organics fired again in one sitting.
+- FYI, routed not cleaned: the game wrote its own `Autosave Sol 351/356`
+  during the sitting window — rolling autosaves of the *staged lineage*, in
+  the owner's save list; they rotate out on their own but predate nothing.
+
+**Economics, scored per the owner's override (§8, their words: the detour was
+their deliberate deviation and is not counted against the run).** Wall clock:
+one process, uptime 1:58:42 at the close-out flush, 8 loads, save lineage
+`CB1STAGE → CB1CASEA → F99UG`, ~2 h of owner time against a ~24-minute
+promise. **Not scored:** the F99 hunt across both maps, the dev-cheat
+exploration and its two static audits, the aborted restart — the
+owner-directed block, which also produced the sitting's best finds (`F101`,
+both F99 samples, the D07 staleness catch). **Scored, the rig's own miss:**
+M1 budgeted 3 min, consumed ~25 — prep's measured fixture had evaporated by
+sitting time and no instrument could find M1's subject (ledger S2 compounds
+it). Both now bind as Co-runs rules (fixture re-confirm at sitting time;
+subject-finder instrument per moment). ⛔ Not claimed: that the sitting came
+in cheap, or that minutes were "saved" — the correct statement is that the
+owner declined to have their own deviation counted, a scoping decision.
+
+**Unforeseen-issues delta vs unattended-1's ledger (8 entries then, 8 now):**
+2 recurrences — S1 (wrong-map aim, prep's P2 family; caught by the G1
+pre-flight, the guardrail's second earn) and S7 ("recorded facts are claims
+too", which recurred DESPITE being a standing rule: D07's entry sat 5 days
+stale against PLAYTEST_ARCHIVE, prep inherited it, the brief repeated it to
+the owner twice, the owner corrected it from memory — a guardrail that failed
+twice, repaired as the new archive cross-check rule). 6 NEW, all attended-only
+classes the unattended ledger could not see: a measure moment with no
+subject-finder (S2); a no-BOM parked `.ps1` (S3, the BOM defect's mirror
+image); mid-chain instruments without witness discipline (S4's
+snapshot-FALSIFIED prints, S5's untyped `SelectedObj` capture — G2 applied to
+legs but not to the day's own tooling); and the structural one, S6: **the rig
+has no input path into a running game**, so the owner typed every console
+line and the measure-moments model undercounts every attended sitting. S8:
+two static audits produced four false-positive classes; only 2 of ~45
+candidates were source-verified and only those filed. All routed into
+WORKFLOW "Co-runs" (6 new attended-brief rules) and one CHAIN_METHOD row (an
+attended brief is a priority queue, not a schedule; separate owner deviation
+from rig misses before scoring; only the owner may rule their own time out).
+
+**Owed to the owner — decisions only, all on the checklist:** F48 ship/hold
+(case A better-than-no-op + case B unreachable-by-meteor is a STRONGER answer
+than the criterion anticipated, but it is not the answer as written — routed,
+not taken) · D07 forced-residence vs forced-dome · F101 severity (with the
+corrected mechanism description) · D12 preflight fix. **Routed gaps, none
+owner-blocking:** PT-47/M5/M6/M7 (never ran; M7 needs owner hands) · C42
+within-session (now known to need a traversal WITNESS, not traffic) · F21
+penalty half (reader gap, `spent_time` nil) · F99's untested cell
+(repair-path × multi-track merge; instrument on the entry) · F101's third
+instance (`!` → `ShowMe`, static only) · the dev-gate audit's ~43 unread
+candidates · PT-35's turbine fixture (still a fixture request; re-confirmed
+absent on every load).
+
 ## 2026-08-04 — `corun-batch-1` BUILT and queued (same session, Fable): the first batched co-run sitting, three prompts, owner sits once
 
 Owner order ("Go ahead and build them out"), same session as the

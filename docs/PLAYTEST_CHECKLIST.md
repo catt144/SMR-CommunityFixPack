@@ -54,9 +54,12 @@ evaporated and it had to be built live.
    module's header calls this deliberate. Derived from source, no fixture
    needed. → `agent/bugs/D07.md`.
 3. **⚖️ How much do the two new dev-tool defects matter?** `F101` — every
-   building's **Meteor Hit** infopanel button throws on retail, and so does
-   opening the **object inspector** (`~<expr>`), which this project's own HELP
-   recommended until today. Both vanilla, no pack code, both need dev tooling to
+   building's **Meteor Hit** infopanel button throws on retail, and so does the
+   infopanel's **spot-visibility dev toggle** *(audit correction 2026-08-05:
+   this was first recorded as "opening the object inspector" — the archived
+   stacks say it was the toggle button, and the log's one inspector open was
+   clean; `~<expr>` stays withdrawn from HELP as a static risk, unwitnessed)*.
+   Both vanilla, no pack code, both need dev tooling to
    reach — but you noted mods routinely expose these outside a dev build.
    **Severity is yours; both are wrappable if you want them fixed.**
    → `agent/bugs/F101.md`.
@@ -505,27 +508,13 @@ all, is in git and in the snapshot.)*
 
 # Trains — one sitting clears the group
 
-### PT-37 — Can the F48 track repair ship? · Status: unrun · **mode: co-run** (routing 2026-08-04 — your eyes: route formation + the salvage cursor; break staged, reloads rig-driven)
-**Bug:** the game ships a savegame fixup meant to repair track connections on
-old saves, but a misplaced parenthesis makes it do nothing. The corrected call
-rebuilds every track element's connections, and its only failure handling is
-an assert that does not stop execution — so before it can ship it must be seen
-behaving on a real save, especially on a meteor-damaged track. This test
-DECIDES F48: clean → the repair ships in the sanitizer; dirty fail → closes
-`wontfix`. → [agent/bugs/F48.md](agent/bugs/F48.md)
-**Requirements:** Any train colony (SAVE-A extended works) / ≥2 connected
-stations + a running train / one meteor-broken track / console open.
-**Setup:**
-1. Load a save with two or more stations connected by track and at least one
-   route with a running train (extending SAVE-A works).
-2. Get one track meteor-damaged: `CheatTriggerMarsquake()` near a track, or
-   play until one lands.
-3. Console open. The agent hands the case-A (healthy track) commands, then the
-   case-B (damaged track) repeat — full procedure is on the entry.
-4. Save + reload after each case; the agent reads endpoints, route formation
-   and the log against its predictions.
-**Good to have:** after case B, a quick check that the repair site is still
-salvageable (F45 territory — the agent will prompt it).
+> ✅ **PT-37 RAN 2026-08-05 (corun-batch-1 sitting, attended) and moved WHOLE
+> to `archive/PLAYTEST_ARCHIVE.md`.** Case A PASS (better than a no-op:
+> 559→558 connections, persisted through save+reload; you watched a train pass
+> through every station); case B UNSAMPLED — the harness refused to run it
+> because the walk cannot fail via meteor damage, which contradicts F48's
+> blocking premise for its cited scenario. **The F48 ship/hold decision is
+> yours — "Decisions waiting on you", item 1.**
 
 ### Rider — F80: colonists wait at platforms, or walk past working stations · Status: unrun — take it WHEN the symptom appears; never schedule it
 **Bug:** trains sometimes never enumerate a valid destination from a stop —
@@ -547,7 +536,7 @@ queued while trains come and go, or walkers passing a working station.
 **Good to have:** note whether any track segment on the line was under
 construction (the rival explanation the agent must exclude).
 
-### Rider — F21: re-earn `tested` for the wait-time fix · Status: unrun — optional · **mode: co-run ride-along** (routing 2026-08-04)
+### Rider — F21: re-earn `tested` for the wait-time fix · Status: unrun — optional · **mode: co-run ride-along** (routing 2026-08-04) · ⚠️ 2026-08-05 HALF measured: the platform-population read ran live (11 stations / 21 colonists waiting / 8 trains) but the penalty half is UNMEASURED — every train sampled read `spent_time=nil` (4 of 8 sampled), a reader gap, not a verdict; stays `fixed`, not re-earned
 **Bug:** the fix (platform waiting no longer billed as travel time) passed
 PT-43, but the Tier-2 rewrite replaced the mechanism that pass exercised, so
 F21 was honestly downgraded to `fixed`. Two quick reads on any working train
@@ -781,7 +770,7 @@ Entry (incl. the same-day correction to an earlier, wrong reason for this).
    (Predictions P1-P13 and the four setup traps: archive snapshot; the re-run
    musts incl. P14: entry.)
 
-### PT-53 — Cohort housing, Trigger E (D07) · Status: partial (A-D passed; E owed) · **mode: co-run** (routing 2026-08-04 — two hands moments: the manual assign, the Mod-Manager disable; the load-clean read is log)
+### PT-53 — Cohort housing, Trigger E (D07) · Status: partial (A-D passed; E owed) · **mode: co-run** (routing 2026-08-04 — two hands moments: the manual assign, the Mod-Manager disable; the load-clean read is log) · ⚠️ 2026-08-05: E's precedence half ROUTED (fixture unholdable — every slot created was consumed in seconds; a design decision went to you instead, item 2 above); in-dome pass MEASURED at colony scale (76→37); **only the uninstall half below is still runnable as written**
 **Bug:** Seniors/Children in normal housing move to free cohort slots and are
 otherwise left alone — triggers A-D passed live ("it worked wonderfully").
 Only E remains: player-order precedence and the uninstall shape.
@@ -790,7 +779,9 @@ Only E remains: player-order precedence and the uninstall shape.
 assign to a normal residence / Mod Manager for the uninstall half.
 **Setup:**
 1. Manually assign a Senior to a normal residence (player order) — they must
-   STAY.
+   STAY. ⚠️ 2026-08-05: build the pin BEFORE any free cohort slot exists —
+   pin first, create the motive second (three failed attempts and the 5-sol
+   pin timeout are on the entry).
 2. Toggle the module off — instantly vanilla (behaviour check).
 3. Save with it ON → disable the PACK in the Mod Manager → load: clean, no
    `[LUA ERROR]` naming pack code. (A toggle cannot answer an uninstall
@@ -832,7 +823,7 @@ our copy).
 that stopped happening, falsifies the conversion — say so and the copy form
 comes back from git (`3a6512f^`).
 
-### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through · ⭐ mechanism link CLOSED 2026-08-04
+### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through · ⭐ mechanism link CLOSED 2026-08-04 · ⚠️ 2026-08-05: a WITHIN-SESSION read finally ran (no save/load since traffic) and was STILL unsampled — 0 unit entries over 4 passages; the gap now needs a **traversal witness** (a colonist seen inside a passage element), not merely generated traffic
 **Bug:** `PassageBase:TraverseTunnel` ends with a raw `unit.holder = nil`
 (`Lua/Passage.lua:1055`), which skips the call that would remove the colonist
 from the last passage element's `units` list. If so, demolishing that passage
@@ -1000,8 +991,12 @@ researched=false`, **0 Large Wind Turbines**, **0 Medical Centers** (13 domes,
 **What it would take to close case A properly:** the same leg on a save with
 Frictionless Composites researched and at least one upgraded building — which is
 a fixture request, not a sitting. ⇒ routed as a gap by unattended-1 prompt 2.
+⚠️ 2026-08-05: the corun-batch-1 sitting re-read the fixture on every load —
+still `FrictionlessComposites researched=false`, 0 Large Wind Turbines — and
+the sitting ended before its optional leg-5 fixture build was reached. The
+fixture request stands; no FIXTURE save exists.
 
-### PT-42 — Last Transmission notices your reserves (F22, F75) · Status: unrun · **mode: co-run** (routing 2026-08-04 — stock/drain staged at speed; your eyes: the faction panel goals at 3–4 moments)
+### PT-42 — Last Transmission notices your reserves (F22, F75) · Status: unrun · **mode: co-run** (routing 2026-08-04 — stock/drain staged at speed; your eyes: the faction panel goals at 3–4 moments) · ⚠️ 2026-08-05 SKIP re-confirmed LIVE, not on prep's word: Last Transmission read `active=false` on the staged `TEST2H TRAIN` copy — 5 active factions, none it, 0 legislature seats — so the fixture requirement below is real and still unmet
 **Bug:** the faction's stored-resource goals never cleared no matter how much
 you banked, the Oxygen goal was satisfied by Power, and the penalties became
 unreachable once a second map was loaded. Probes prove the reserve maths; only

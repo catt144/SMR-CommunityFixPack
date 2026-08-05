@@ -4768,3 +4768,58 @@ other producer. It proves the one producer the shipped dev comment names
   reason on it *"so another agent doesn't get distracted by it again"* — the
   entry now opens with a **STOP HERE** banner saying exactly that, above the
   evidence. Nothing is owed and nothing will be built. → `agent/bugs/C44.md`.
+
+---
+
+## PT-37 — Can the F48 track repair ship? · ✅ RAN 2026-08-05 (corun-batch-1 sitting, attended) — case A PASS, better than a no-op; case B UNSAMPLED, the DECIDER refused
+
+> **Result (recorded by the sitting, audited against the archived log by the
+> terminal prompt the same week).** Log:
+> `docs/archive/cb1sitting_Mars.exe-20260805-14.28.49.log`; save `CB1STAGE`, a
+> `Copy-Item` of `TEST2H TRAIN`; full readings on `agent/bugs/F48.md`
+> (2026-08-05 block).
+>
+> **Case A (healthy 280-element track): PASS, and it is a repair, not merely a
+> no-op.** `ProcessTrackElements(ResolveMap(t), t.elements)` — first execution
+> ever, `pcall` ok — left `start_el`/`end_el`/element count/`node_idx` sequence
+> untouched and moved `connections_total` **559 → 558**, exactly the clean-chain
+> value (2 × 279); the 558 **survived save + reload**. Labelled an inference
+> from a count on the entry (no per-connection dump). Owner Tier-A verbatim:
+> *"I seen a train pass through every station atleast once."*
+>
+> **Case B (meteor-damaged track): THE DECIDER IS UNSAMPLED.** A forced meteor
+> broke 8 elements (8 repair sites), and the pre-mutation gate read every
+> element's own hex: `shadowed=0 missing=0` — the hex grid hands the walk the
+> **hidden original element**, so `OrderTrackElements` SUCCEEDS on a damaged
+> track and the assert F48 is blocked on is unreachable via meteor damage. The
+> harness **refused to run the call** rather than produce a clean pass that
+> proved nothing. This contradicts F48's blocking premise for its cited
+> scenario (F45's situation does not make a track unwalkable) — it does NOT
+> prove the repair safe in general.
+>
+> **Disposition:** F48 stays `blocked` pending the owner's ship/hold call —
+> `PLAYTEST_CHECKLIST.md` "Decisions waiting on you", item 1 (2026-08-05).
+
+The test as written, moved here whole per the documented rule:
+
+### PT-37 — Can the F48 track repair ship? · Status: unrun · **mode: co-run** (routing 2026-08-04 — your eyes: route formation + the salvage cursor; break staged, reloads rig-driven)
+**Bug:** the game ships a savegame fixup meant to repair track connections on
+old saves, but a misplaced parenthesis makes it do nothing. The corrected call
+rebuilds every track element's connections, and its only failure handling is
+an assert that does not stop execution — so before it can ship it must be seen
+behaving on a real save, especially on a meteor-damaged track. This test
+DECIDES F48: clean → the repair ships in the sanitizer; dirty fail → closes
+`wontfix`. → `agent/bugs/F48.md`
+**Requirements:** Any train colony (SAVE-A extended works) / ≥2 connected
+stations + a running train / one meteor-broken track / console open.
+**Setup:**
+1. Load a save with two or more stations connected by track and at least one
+   route with a running train (extending SAVE-A works).
+2. Get one track meteor-damaged: `CheatTriggerMarsquake()` near a track, or
+   play until one lands.
+3. Console open. The agent hands the case-A (healthy track) commands, then the
+   case-B (damaged track) repeat — full procedure is on the entry.
+4. Save + reload after each case; the agent reads endpoints, route formation
+   and the log against its predictions.
+**Good to have:** after case B, a quick check that the repair site is still
+salvageable (F45 territory — the agent will prompt it).

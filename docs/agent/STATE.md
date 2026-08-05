@@ -1,27 +1,30 @@
 # Project State — the one mandatory read
 
-Current only, rewritten in place; history is append-only and newest-first in
+Current only, rewritten in place; history newest-first in
 `docs/archive/SESSION_LOG.md`. Defect truth `agent/bugs/INDEX.md` · engine
-behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
-`agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · efforts over ~2 sessions
-`agent/reports/CHAIN_METHOD.md`.
+facts `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
+`agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Where the project is
 
 ✅✅ 18-prompt chain COMPLETE 2026-08-03 (`agent/reports/CHAIN_QA_REPORT.md` §9);
 playtest campaign is the main line. ⭐⭐ corun-rig + `unattended-1` CLOSED
-2026-08-04 — SAVE primitive PROVEN, `[NEVER RUN]` rows flipped, tiers ADOPTED,
-8-entry ledger → binding Co-runs guardrails (detail: SESSION_LOG).
-⭐⭐ **`corun-batch-1` SITTING RAN 2026-08-05** (`archive/cb1sitting_Mars.exe-
-20260805-14.28.49.log`, uptime 1:58, 8 loads, ~2 h owner vs 24 min promised).
-**PT-37 case A PASS**, better than a no-op (559→558 connections, persisted
-through save+reload; owner saw a train through every station). **Case B
-UNSAMPLED — the hex grid returns the hidden element, so the assert is
-unreachable via meteor damage and F48's blocking premise is contradicted for the
-scenario it cites.** D07 drain MEASURED (76→37) and **4-of-5** (A passed
-2026-07-30; entry stale 5 days). PT-42 SKIP live. ⭐ **NEW `F101`** (5 witnessed).
-⛔ **PT-47 / M5 / M7 never ran — routed.** ⇒ **NEXT: prompt 3's Fable audit,
-`agent/prompts/corun-batch-1/03_FABLE_AUDIT.md`.**
+2026-08-04 — SAVE primitive PROVEN, tiers ADOPTED, ledger → Co-runs guardrails.
+⭐⭐ **`corun-batch-1` CLOSED 2026-08-05** (terminal audit; record SESSION_LOG;
+log `archive/cb1sitting_Mars.exe-20260805-14.28.49.log`). Every leg verdict
+SUSTAINED. **PT-37 case A PASS**, better than a no-op (559→558, survived
+save+reload; owner saw a train through every station); **case B UNSAMPLED —
+the hex grid returns the hidden element, so the assert is unreachable via
+meteor damage; F48's blocking premise contradicted for its cited scenario** ⇒
+ship/hold = owner decision 1. D07 drain MEASURED (76→37), **4-of-5**; PT-53 E
+precedence ROUTED (decision 2). PT-42 SKIP re-confirmed live. ⭐ **NEW `F101`**
+(5 witnessed; ⛔ audit: mechanism (b) is the infopanel spot-toggle, NOT the
+inspector — `~<expr>` is a static lead). Owner override: their ~2 h deviation
+is NOT scored vs the 24-min promise; the rig's miss (M1 3→25 min) is — now a
+Co-runs rule. ⛔ **PT-47 / M5 / M7 / PT-53-uninstall / popup trio+F85 never
+ran — routed.** ⇒ **NEXT: nothing queued**; front of queue = `corun-batch-2`
+from the never-ran remainder (uninstall half LAST), per CHAIN_METHOD + the
+new attended Co-runs rules.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -33,22 +36,20 @@ BUILD STATE (emitted by tools/doccheck.py)
 - BUGS index rows: 101 F + 12 D + 44 C
 ```
 
-Re-emit after any module or entry change; a red run refuses to hand one out.
-Pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
+Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 
 ⚖️ **F76 CLOSED-REFUTED**, residue **`C41`**. ✅ **F11** route (a) SETTLED, ⛔ NOT
-`tested`. ⚠️ **F99 (`cand`)** cheat-only — **0-in-4 organic + 0-in-2 cheat-driven
-2026-08-05**, rate bounds NOT refutation; one untested cell named on the entry.
-⭐ **PROBE COVERAGE** — `[install]` **87/0** (EXECUTED-ONCE); ⛔ never quote as
-retail health, **retail coverage is 78/87.**
+`tested`. ⚠️ **F99 (`cand`)** cheat-only — 0-in-4 organic + 0-in-2 cheat-driven
+2026-08-05, rate bounds NOT refutation; untested cell on the entry. ⭐ **PROBE
+COVERAGE** — `[install]` 87/0 (EXECUTED-ONCE); ⛔ **retail coverage is 78/87.**
 
 ## Gates and holds
 
 - **PT-62 remainder** (P12/P13/P14 + split loop counter through a landing) →
   D12; P4/P6 PASSED 2026-08-03, ⛔ NOT a release gate (opt-in). ⚠️ D12's
   preflight names the wrong class (F64 shape) — self-deactivates, recovers.
-- ⭐ **F02 · F78 · F81 ORGANIC 2026-08-03**; F02's watchdog fired + healed again
-  2026-08-05 (`MeteorFrequency: WATCHDOG … restarting onto vanilla's body`).
+- ⭐ **F02 · F78 · F81 ORGANIC 2026-08-03 — and ALL THREE again 2026-08-05**
+  (watchdog restart · storm-wedge heal, 11 strays · rains re-roll; on entries).
 - **PT-37 RAN** → F48 owner call · **F42** `blocked`, wontfix recommended.
 - **D08 extender overhaul** — speced in `agent/reports/DRONE_OVERHAUL_OPTIONS.md`,
   unbuilt; D06's dials wait on B2.

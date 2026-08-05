@@ -430,6 +430,38 @@ not an achievement.
   stranded there for a day and surfaced only because a co-run happened to look),
   and a co-run touches both repos by construction. A stranded edit is a finding
   to route, never something to quietly commit or discard.
+- ⛔ **Attended-sitting classes from `corun-batch-1` (2026-08-05; 8-entry
+  ledger, first BATCHED attended sitting — the classes the unattended ledger
+  could not see). Every attended brief guards against these:**
+  1. **Prep re-verifies every briefed entry's status against
+     `PLAYTEST_ARCHIVE.md`, not the entry alone** — "recorded facts are claims
+     too" RECURRED despite being a standing rule: D07's entry was 5 days stale
+     against the archive, prep inherited it, wrote a false SKIP line, and the
+     brief repeated it to the owner twice before the owner corrected it from
+     memory. A guardrail that failed twice is a broken guardrail; the archive
+     cross-check is the repair.
+  2. **Every measure moment names the instrument that FINDS its subject**, and
+     prep confirms the subject still exists at sitting time — M1 was budgeted
+     3 minutes and consumed ~25 because its measured fixture (23 Seniors
+     against 31 free slots) had evaporated and no instrument could locate a
+     replacement subject among 184 candidates.
+  3. **Instruments added mid-chain obey the same witness discipline as legs.**
+     The sitting's own reader printed "PREDICTION 10 FALSIFIED — a DEFECT to
+     file" twice off single snapshots with no settling window, and a
+     before/after helper stored whatever `SelectedObj` happened to be
+     (a `LifeSupportGridElement`) without a type check. Both are the
+     liveness-witness rule applied to legs but not to the day's own tooling.
+  4. **The rig has no input path into a running game** — a console-driven
+     attended sitting means the owner types every line, which the
+     measure-moments model does not count. Until an input path exists, an
+     attended brief's estimate must budget the console driving, not just the
+     eyes/hands moments.
+  5. **A parked `.ps1` needs a BOM** — PS 5.1 reads a no-BOM `.ps1` as ANSI
+     and em-dashes break the parse (exact mirror of the earlier
+     BOM-where-unwanted defect; the same file class fails in both directions).
+  6. **Static-audit sweeps over-claim**: two scripted audits produced four
+     distinct false-positive classes; only per-candidate source reading may
+     file. Claim only what was read.
 
 **Checklist convention:** riders whose precondition is this mode are tagged
 **TAKEABLE IN a co-run** (a rider class alongside TAKEABLE WHEN). Sessions

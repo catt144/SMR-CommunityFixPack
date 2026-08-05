@@ -228,16 +228,25 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
   | `g_Consts.MarsquakeSpawnTime = 1` | statement → executed |
   | `*r <code>` | runs `<code>` in a **real-time thread** (use for multi-statement snippets) |
   | `*g <code>` | runs `<code>` in a **game-time thread** (use when you need `Sleep`) |
-  | `~<expr>` | opens the object inspector on `<expr>` — ⛔ **THROWS on retail, measured 2026-08-05**, see the warning below |
+  | `~<expr>` | opens the object inspector on `<expr>` — ⚠️ **static risk on retail, unwitnessed** (corrected 2026-08-05 by the terminal audit), see the warning below |
 - ⛔⛔ **DEV TOOLS THAT THROW ON RETAIL — measured live 2026-08-05, entry `F101`.**
-  Two things this document previously recommended or described are broken on a
-  shipped build, and both throw rather than doing nothing:
-  - **The object inspector `~<expr>`.** Opening it and moving the mouse throws
+  Retail core code calls dev-only globals that a shipped build does not define,
+  and the callers throw rather than doing nothing:
+  - **The infopanel spot-visibility dev toggle.** Pressing it throws
     `CommonLua/GedGameObjectEditor.lua:104: attempt to call a nil value (global
-    'GetSpotNameColor')`. `GetSpotNameColor` lives only in
-    `CommonLua/Libs/DevToolsPublic/debug.lua:359`, and that **entire library is
-    absent** from a retail build — this is not a `Platform.cheats` gate, so no
-    cheat flag turns it on. Witnessed 2×.
+    'GetSpotNameColor')` — stack: `Infopanel.lua(47) OnAction →
+    ToggleSpotVisibility (GedGameObjectEditor.lua:64) → EditorShowSpots (:104)`,
+    plus a paired `MouseEvent` re-entry of the same line. `GetSpotNameColor`
+    lives only in `CommonLua/Libs/DevToolsPublic/debug.lua:359`, and that
+    **entire library is absent** from a retail build — this is not a
+    `Platform.cheats` gate, so no cheat flag turns it on. Witnessed 2×.
+    ⛔ **CORRECTION 2026-08-05 (terminal audit):** this block first attributed
+    the 2 throws to *opening the object inspector `~<expr>`*. The archived
+    stacks say otherwise, and the session's one GedInspector open
+    (`1:45:12–1:45:32`) was **clean** — and came AFTER both throws. The
+    inspector claim is therefore **demoted to a static lead**: `:104` is in the
+    inspector's own file, so treat `~<expr>` as risky, but nothing has measured
+    it throwing.
   - **The `!` console prefix** (`uiConsole.lua:357` → `ShowMe(...)`) has the
     same shape — `ShowMe` is also `DevToolsPublic`-only. **Not yet witnessed**;
     recorded as a lead, do not cite it as measured.
