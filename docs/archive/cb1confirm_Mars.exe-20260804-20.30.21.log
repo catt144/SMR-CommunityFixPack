@@ -1,0 +1,421 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	36%
+Disk Free      	755681 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+					Render 0:00:00:007
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:116
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:120
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:944
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:02:093
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:02:313
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:03:098
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:03:160
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:18:158
+Account storage loaded successfully in 1 ms
+						Lua 0:00:18:169
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:18:557
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:18:558
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:562
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:563
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+						Lua 0:00:18:564
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+						Lua 0:00:18:565
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+						Lua 0:00:18:566
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+						Lua 0:00:18:567
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:18:568
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:18:569
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+						Lua 0:00:18:570
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+						Lua 0:00:18:571
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:18:572
+[mod] [CommunityFixPack] ClassicRockets: applied
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+						Lua 0:00:18:573
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed)
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:19:138
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:19:214
+Reloading done in 1003 ms
+						Lua 0:00:19:562
+[preset] Preset postprocess took 74 ms.
+						Lua 0:00:19:623
+479 / 479 particle streams loaded in 57 ms.
+						Lua 0:00:19:624
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:818
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2						Lua 0:00:19:819
+
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:888
+[mod] [CB1CONFIRM] === corun-batch-1 CB1CONFIRM === watchdog 720000ms
+[CB1CONFIRM] === corun-batch-1 CB1CONFIRM === watchdog 720000ms
+[mod] [CB1CONFIRM] STEP 1-waiting-menu BEGIN
+[CB1CONFIRM] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:889
+[PdxSDK] Started up. Took 1678
+						Lua 0:00:19:924
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:988
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:216
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:20:217
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:695
+[mod] [CB1CONFIRM] STEP 1-waiting-menu END 2500ms
+[CB1CONFIRM] STEP 1-waiting-menu END 2500ms
+[mod] [CB1CONFIRM] STEP 2-load-staged-copy BEGIN
+[CB1CONFIRM] STEP 2-load-staged-copy BEGIN
+						Lua 0:00:21:790
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:803
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:829
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:559
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 73.3 MB/s, average read 4949 bytes.
+						Lua 0:00:30:427
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:453
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:471
+Game Loaded in 8681 ms
+						Lua 0:00:30:518
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:188
+Game loaded on map BlankBigCanyonCMix_09 in 9493 ms
+[mod] [CB1CONFIRM] LOAD OK #1 file=CB1STAGE.savegame.sav — LoadGame returned no error
+[CB1CONFIRM] LOAD OK #1 file=CB1STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:491
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:687
+[mod] [CB1CONFIRM] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[CB1CONFIRM] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[mod] [CB1CONFIRM] STEP 2-load-staged-copy END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[CB1CONFIRM] STEP 2-load-staged-copy END (no timing — this step blocks render mode; a load takes its number from the engine's own 'Game loaded on map ... in Nms' line, a save has none)
+[mod] [CB1CONFIRM] STEP 3-conditions BEGIN
+[CB1CONFIRM] STEP 3-conditions BEGIN
+[mod] [CB1CONFIRM] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=corun-batch-1 fixture confirm, one cycle, READ ONLY
+[CB1CONFIRM] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=corun-batch-1 fixture confirm, one cycle, READ ONLY
+[mod] [CB1CONFIRM] CONDITIONS by-name CohortHousing = active
+[CB1CONFIRM] CONDITIONS by-name CohortHousing = active
+[mod] [CB1CONFIRM] CONDITIONS by-name Opt_CohortHousing = NOT REGISTERED
+[CB1CONFIRM] CONDITIONS by-name Opt_CohortHousing = NOT REGISTERED
+[mod] [CB1CONFIRM] CONDITIONS by-name BombardmentSpread = active
+[CB1CONFIRM] CONDITIONS by-name BombardmentSpread = active
+[mod] [CB1CONFIRM] CONDITIONS by-name TrainWaitTime = active
+[CB1CONFIRM] CONDITIONS by-name TrainWaitTime = active
+[mod] [CB1CONFIRM] CONDITIONS by-name GridGlobalStorage = active
+[CB1CONFIRM] CONDITIONS by-name GridGlobalStorage = active
+[mod] [CB1CONFIRM] CONDITIONS by-name LastTransmissionStorage = active
+[CB1CONFIRM] CONDITIONS by-name LastTransmissionStorage = active
+[mod] [CB1CONFIRM] STEP 3-conditions END 0ms
+[CB1CONFIRM] STEP 3-conditions END 0ms
+[mod] [CB1CONFIRM] STEP 4-leg3-gate-factions BEGIN
+[CB1CONFIRM] STEP 4-leg3-gate-factions BEGIN
+[mod] [CB1CONFIRM] FACTIONS assembly_buildings=1 | active_factions(5): ChurchOfTheNewArk, FlatMars, MartianFirst, ProsperityForMars, UnitedColonistFront
+[CB1CONFIRM] FACTIONS assembly_buildings=1 | active_factions(5): ChurchOfTheNewArk, FlatMars, MartianFirst, ProsperityForMars, UnitedColonistFront
+[mod] [CB1CONFIRM] FACTIONS legislature seats: ChurchOfTheNewArk=1 FlatMars=1 MartianFirst=32 ProsperityForMars=40 UnitedColonistFront=26
+[CB1CONFIRM] FACTIONS legislature seats: ChurchOfTheNewArk=1 FlatMars=1 MartianFirst=32 ProsperityForMars=40 UnitedColonistFront=26
+[mod] [CB1CONFIRM] FACTIONS LastTransmission approval=300 polarization=7500 likes_data=11
+[CB1CONFIRM] FACTIONS LastTransmission approval=300 polarization=7500 likes_data=11
+						Lua 0:00:46:688
+[mod] [CB1CONFIRM] FACTIONS   like TLEWaterStorage2Sols value=1500
+[CB1CONFIRM] FACTIONS   like TLEWaterStorage2Sols value=1500
+[mod] [CB1CONFIRM] FACTIONS   like TLEOxygenStorage2Sols value=1500
+[CB1CONFIRM] FACTIONS   like TLEOxygenStorage2Sols value=1500
+[mod] [CB1CONFIRM] READ LastTransmission-active = false | population=5 | APPLICABLE=true | witness=active_factions list read off g_FactionsHolder, non-empty
+[CB1CONFIRM] READ LastTransmission-active = false | population=5 | APPLICABLE=true | witness=active_factions list read off g_FactionsHolder, non-empty
+[mod] [CB1CONFIRM] STEP 4-leg3-gate-factions END 0ms
+[CB1CONFIRM] STEP 4-leg3-gate-factions END 0ms
+[mod] [CB1CONFIRM] STEP 5-leg4-cohort-fixture BEGIN
+[CB1CONFIRM] STEP 5-leg4-cohort-fixture BEGIN
+						Lua 0:00:46:690
+[mod] [CB1CONFIRM] COHORT residences=108 (18 cohort / 90 normal) | free slots: cohort=86 [Child=55 Senior=31] normal=384
+[CB1CONFIRM] COHORT residences=108 (18 cohort / 90 normal) | free slots: cohort=86 [Child=55 Senior=31] normal=384
+[mod] [CB1CONFIRM] COHORT seniors=184 (184 housed, 23 of them in a NORMAL residence, 0 employed)
+[CB1CONFIRM] COHORT seniors=184 (184 housed, 23 of them in a NORMAL residence, 0 employed)
+[mod] [CB1CONFIRM] READ PT53E-fixture(senior-in-normal x free-cohort-slot) = 23 x 86 | population=1 | APPLICABLE=true | witness=both halves counted off live labels this load
+[CB1CONFIRM] READ PT53E-fixture(senior-in-normal x free-cohort-slot) = 23 x 86 | population=1 | APPLICABLE=true | witness=both halves counted off live labels this load
+[mod] [CB1CONFIRM] STEP 5-leg4-cohort-fixture END 0ms
+[CB1CONFIRM] STEP 5-leg4-cohort-fixture END 0ms
+[mod] [CB1CONFIRM] STEP 6-leg1-track-fixture BEGIN
+[CB1CONFIRM] STEP 6-leg1-track-fixture BEGIN
+[mod] [CB1CONFIRM] TRACKS 17 track(s) (0 grid-connected), 926 element(s), 0 broken element(s), 0 repair site(s)
+[CB1CONFIRM] TRACKS 17 track(s) (0 grid-connected), 926 element(s), 0 broken element(s), 0 repair site(s)
+[mod] [CB1CONFIRM] TRACKS 11 station(s), 8 train(s) (0 with a route or moving)
+[CB1CONFIRM] TRACKS 11 station(s), 8 train(s) (0 with a route or moving)
+[mod] [CB1CONFIRM] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[CB1CONFIRM] TRACKS healthy multi-element tracks=13 | already-damaged tracks=0
+[mod] [CB1CONFIRM] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[CB1CONFIRM] TRACKS   healthy[1] TrackBase#4569 start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 #elements=4
+[mod] [CB1CONFIRM] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[CB1CONFIRM] TRACKS   healthy[2] TrackBase#4619 start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 #elements=23
+[mod] [CB1CONFIRM] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[CB1CONFIRM] TRACKS   healthy[3] TrackBase#4730 start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 #elements=43
+[mod] [CB1CONFIRM] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[CB1CONFIRM] READ PT37-caseA-fixture(healthy multi-element track) = 13 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [CB1CONFIRM] READ PT37-train-activity(F21 ride-along) = 0 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[CB1CONFIRM] READ PT37-train-activity(F21 ride-along) = 0 | population=8 | APPLICABLE=true | witness=Train label walked this load
+[mod] [CB1CONFIRM] WALK control on a HEALTHY track — prediction: SUCCEEDS
+[CB1CONFIRM] WALK control on a HEALTHY track — prediction: SUCCEEDS
+[mod] [CB1CONFIRM] WALK track=TrackBase#4569 elements=4 checked=4 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[CB1CONFIRM] WALK track=TrackBase#4569 elements=4 checked=4 shadowed=0 missing=0 | PREDICTED OrderTrackElements walk: SUCCEEDS (no gap — a damaged track here does NOT sample the decider)
+[mod] [CB1CONFIRM] READ PT37-caseB-samples-the-failure-path = false | population=4 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[CB1CONFIRM] READ PT37-caseB-samples-the-failure-path = false | population=4 | APPLICABLE=true | witness=every element's own hex queried against the live object_hex_grid
+[mod] [CB1CONFIRM] SNAP confirm-cycle-healthy TrackBase#4569 :: start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 n=4 node_idx=[1,2,3,4] connections_total=7 duplicate_node_idx=[]
+[CB1CONFIRM] SNAP confirm-cycle-healthy TrackBase#4569 :: start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 n=4 node_idx=[1,2,3,4] connections_total=7 duplicate_node_idx=[]
+[mod] [CB1CONFIRM] WALK no already-damaged track on this save — the sitting stages case B's damage itself (FORCED)
+[CB1CONFIRM] WALK no already-damaged track on this save — the sitting stages case B's damage itself (FORCED)
+[mod] [CB1CONFIRM] STEP 6-leg1-track-fixture END 0ms
+[CB1CONFIRM] STEP 6-leg1-track-fixture END 0ms
+[mod] [CB1CONFIRM] STEP 7-c42-ride-along BEGIN
+[CB1CONFIRM] STEP 7-c42-ride-along BEGIN
+[mod] [CB1CONFIRM] C42STALE 0  | 4 passage(s), 50 element(s), 0 unit entr(ies) | when=post-load baseline, NOT a C42 result
+[CB1CONFIRM] C42STALE 0  | 4 passage(s), 50 element(s), 0 unit entr(ies) | when=post-load baseline, NOT a C42 result
+[mod] [CB1CONFIRM] READ C42-stale-entries = 0 | population=0 | APPLICABLE=false | witness=unit ENTRIES is the denominator; passages>0 is NOT the condition
+[CB1CONFIRM] READ C42-stale-entries = 0 | population=0 | APPLICABLE=false | witness=unit ENTRIES is the denominator; passages>0 is NOT the condition
+[mod] [CB1CONFIRM] STEP 7-c42-ride-along END 0ms
+[CB1CONFIRM] STEP 7-c42-ride-along END 0ms
+[mod] [CB1CONFIRM] STEP 8-leg2-defences BEGIN
+[CB1CONFIRM] STEP 8-leg2-defences BEGIN
+[mod] [CB1CONFIRM] DEFENCES 0 defence tower(s) (0 working) | 13 dome(s)
+[CB1CONFIRM] DEFENCES 0 defence tower(s) (0 working) | 13 dome(s)
+[mod] [CB1CONFIRM] DEFENCES   dome[1] DomeBasic#1243 pos=(264500, 435598, 19946)
+[CB1CONFIRM] DEFENCES   dome[1] DomeBasic#1243 pos=(264500, 435598, 19946)
+						Lua 0:00:46:691
+[mod] [CB1CONFIRM] DEFENCES   dome[2] DomeMedium#1367 pos=(258000, 457248, 19946)
+[CB1CONFIRM] DEFENCES   dome[2] DomeMedium#1367 pos=(258000, 457248, 19946)
+[mod] [CB1CONFIRM] DEFENCES   dome[3] DomeBasic#1506 pos=(335500, 449454, 19946)
+[CB1CONFIRM] DEFENCES   dome[3] DomeBasic#1506 pos=(335500, 449454, 19946)
+[mod] [CB1CONFIRM] DEFENCES   dome[4] DomeMedium#2285 pos=(287000, 450320, 19946)
+[CB1CONFIRM] DEFENCES   dome[4] DomeMedium#2285 pos=(287000, 450320, 19946)
+[mod] [CB1CONFIRM] DEFENCES   dome[5] DomeMedium#2653 pos=(451500, 317822, 5245)
+[CB1CONFIRM] DEFENCES   dome[5] DomeMedium#2653 pos=(451500, 317822, 5245)
+[mod] [CB1CONFIRM] READ PT47-interception-check = 0 | population=0 | APPLICABLE=false | witness=DefenceTowerBase label walked this load
+[CB1CONFIRM] READ PT47-interception-check = 0 | population=0 | APPLICABLE=false | witness=DefenceTowerBase label walked this load
+[mod] [CB1CONFIRM] READ PT47-dome-crack-check = 13 | population=13 | APPLICABLE=true | witness=Dome label walked this load
+[CB1CONFIRM] READ PT47-dome-crack-check = 13 | population=13 | APPLICABLE=true | witness=Dome label walked this load
+[mod] [CB1CONFIRM] STEP 8-leg2-defences END 0ms
+[CB1CONFIRM] STEP 8-leg2-defences END 0ms
+[mod] [CB1CONFIRM] STEP 9-popup-route BEGIN
+[CB1CONFIRM] STEP 9-popup-route BEGIN
+[mod] [CB1CONFIRM] POPUP rocket UniversalZeusRocket#1061 state=CmdWaitOrder GetLaunchIssue ok=true issue=no_target | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[CB1CONFIRM] POPUP rocket UniversalZeusRocket#1061 state=CmdWaitOrder GetLaunchIssue ok=true issue=no_target | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[mod] [CB1CONFIRM] POPUP rocket UniversalZeusRocket#1064 state=CmdWaitOrder GetLaunchIssue ok=true issue=no_target | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[CB1CONFIRM] POPUP rocket UniversalZeusRocket#1064 state=CmdWaitOrder GetLaunchIssue ok=true issue=no_target | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[mod] [CB1CONFIRM] POPUP rocket UniversalZeusRocket#1063 state=CmdWaitOrder GetLaunchIssue ok=true issue=no_target | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[CB1CONFIRM] POPUP rocket UniversalZeusRocket#1063 state=CmdWaitOrder GetLaunchIssue ok=true issue=no_target | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[mod] [CB1CONFIRM] POPUP rocket UniversalZeusRocket#1062 state=CmdOnEarth GetLaunchIssue ok=true issue=fuel | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[CB1CONFIRM] POPUP rocket UniversalZeusRocket#1062 state=CmdOnEarth GetLaunchIssue ok=true issue=fuel | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[mod] [CB1CONFIRM] POPUP rocket UniversalLanderRocket#4641 state=CmdWaitOrder GetLaunchIssue ok=true issue=no_target | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[CB1CONFIRM] POPUP rocket UniversalLanderRocket#4641 state=CmdWaitOrder GetLaunchIssue ok=true issue=no_target | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[mod] [CB1CONFIRM] POPUP rocket UniversalLanderRocket#4104 state=CmdWaitInOrbit GetLaunchIssue ok=true issue=nil | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[CB1CONFIRM] POPUP rocket UniversalLanderRocket#4104 state=CmdWaitInOrbit GetLaunchIssue ok=true issue=nil | popup-for-that-issue=false (GetLaunchIssuePopups ok=false)
+[mod] [CB1CONFIRM] READ popup-route(rocket launch issue) = 5 | population=6 | APPLICABLE=true | witness=every rocket on the map queried for a live launch issue
+[CB1CONFIRM] READ popup-route(rocket launch issue) = 5 | population=6 | APPLICABLE=true | witness=every rocket on the map queried for a live launch issue
+[mod] [CB1CONFIRM] STEP 9-popup-route END 0ms
+[CB1CONFIRM] STEP 9-popup-route END 0ms
+[mod] [CB1CONFIRM] STEP 10-leg5-turbine-fixture BEGIN
+[CB1CONFIRM] STEP 10-leg5-turbine-fixture BEGIN
+[mod] [CB1CONFIRM] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[CB1CONFIRM] PT35 FrictionlessComposites researched=false (read ok=true) | 0 Large Wind Turbine(s), 6 turbine(s) of any kind
+[mod] [CB1CONFIRM] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+[CB1CONFIRM] READ PT35-turbine-half-fixture = 0 | population=0 | APPLICABLE=false | witness=WindTurbine_Large label walked this load — 0 is why leg A's turbine half was UNSAMPLED in unattended-1
+[mod] [CB1CONFIRM] STEP 10-leg5-turbine-fixture END 0ms
+[CB1CONFIRM] STEP 10-leg5-turbine-fixture END 0ms
+[mod] [CB1CONFIRM] STEP 11-f21-ride-along BEGIN
+[CB1CONFIRM] STEP 11-f21-ride-along BEGIN
+[mod] [CB1CONFIRM] F21 train Train#2000015562 command=GotoStation spent_time=nil passengers=12
+[CB1CONFIRM] F21 train Train#2000015562 command=GotoStation spent_time=nil passengers=12
+[mod] [CB1CONFIRM] F21 train Train#2000015807 command=GotoStation spent_time=nil passengers=12
+[CB1CONFIRM] F21 train Train#2000015807 command=GotoStation spent_time=nil passengers=12
+[mod] [CB1CONFIRM] F21 train Train#2000016849 command=GotoStation spent_time=nil passengers=9
+[CB1CONFIRM] F21 train Train#2000016849 command=GotoStation spent_time=nil passengers=9
+[mod] [CB1CONFIRM] F21 train Train#2000016863 command=GotoStation spent_time=nil passengers=12
+[CB1CONFIRM] F21 train Train#2000016863 command=GotoStation spent_time=nil passengers=12
+[mod] [CB1CONFIRM] F21 11 station(s) holding 117 colonist(s) waiting for a train | 8 train(s) | when=confirm-cycle baseline
+[CB1CONFIRM] F21 11 station(s) holding 117 colonist(s) waiting for a train | 8 train(s) | when=confirm-cycle baseline
+[mod] [CB1CONFIRM] READ F21-platform-wait-population = 117 | population=11 | APPLICABLE=true | witness=station.waiting_for_train walked this load
+[CB1CONFIRM] READ F21-platform-wait-population = 117 | population=11 | APPLICABLE=true | witness=station.waiting_for_train walked this load
+[mod] [CB1CONFIRM] STEP 11-f21-ride-along END 0ms
+[CB1CONFIRM] STEP 11-f21-ride-along END 0ms
+[mod] [CB1CONFIRM] ERRORWATCH CB1CONFIRM — every [LUA ERROR] in this log file between the '=== corun-batch-1 CB1CONFIRM ===' banner and this line happened inside this run. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=11-f21-ride-along loads_this_process=1
+[CB1CONFIRM] ERRORWATCH CB1CONFIRM — every [LUA ERROR] in this log file between the '=== corun-batch-1 CB1CONFIRM ===' banner and this line happened inside this run. Attribute each one against the FORCED / ORGANIC window markers printed above; report every unexplained line verbatim with its position, never discount one. stage_at_close=11-f21-ride-along loads_this_process=1
+[mod] [CB1CONFIRM] SHUTDOWN done
+[CB1CONFIRM] SHUTDOWN done
+						Lua 0:00:49:687
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:49:689
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:49:996
+
+
+*** Debug::Done()
+Time (ms)	49996
+
+

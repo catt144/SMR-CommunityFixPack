@@ -1,0 +1,425 @@
+-- SMR Community Fix Pack — Test Kit :: corun-batch-1 SITTING LIBRARY.  TEMPORARY
+--
+-- Declared by: corun-batch-1 chain prompt 1 (01_OPUS_PREP.md), Job 3, for
+-- prompt 2's attended sitting. Armed together with 97_CB1Common.lua.
+--
+-- Probe hygiene rule 5: present in TestKit Code/ only while the sitting is
+-- actually happening; it and its metadata.lua line die in the commit that
+-- records the sitting's answers. Source of truth is this parked .lua.txt.
+--
+-- ⛔ IT STARTS NOTHING. There is no CB1.Boot() here and no autorun flow: the
+--    sitting is ATTENDED, so the game must not drive itself. Every entry point
+--    below is invoked from the console, ONE LINE PER MOMENT, so the owner's
+--    keyboard cost is a single short line rather than a transcribed procedure.
+--    Arming this file alone changes nothing about a launch.
+--
+-- ⛔ THE FIVE GUARDRAILS, as they apply to THIS file:
+--   G1 RESOLUTION CROSS-CHECK — every CB1.* name here is diffed against
+--      97_CB1Common.lua's definitions before the launch that arms it; the diff
+--      is quoted in the sitting's record. Parse-GREEN is a SYNTAX verdict.
+--   G2 LIVENESS WITNESS — the two counters that can lie are named on their own
+--      lines: CB1.Leg1CaseB's "the assert fired" (witness: CB1.ReadWalkability
+--      predicted a FAILING walk on this very track BEFORE the call) and
+--      CB1.Leg2Bombard's "the volley ENDED" (witness: g_IncomingMissiles was
+--      non-empty at least once while we watched — a volley that never started
+--      also has an empty missile table).
+--   G3 pcall RESULT ALWAYS PRINTED — every first execution goes through
+--      CB1.Try / CB1.TryYield, which print ok AND the error text. This is not
+--      optional here: BOTH instruments this file drives are [NEVER RUN].
+--   G4 NO PER-CHAIN FACT IN A PER-PROCESS FLAG — nothing here gates on an
+--      earlier cycle having proved anything. Each entry point re-reads live
+--      state and says what it found.
+--   G5 ARM GATE — the launcher reads metadata.lua and both files back off disk
+--      and refuses to launch unarmed.
+--
+-- ⛔ FORCED-VS-ORGANIC (chain rule 11). Everything this file does to the world
+--    is a FORCED upstream condition and prints itself as such: the meteor that
+--    breaks a track, the bombardment volley, the research grant. The MEASURED
+--    paths — whether the corrected fixup corrupts, how the missiles fly, where
+--    drones route the repair — stay the game's own.
+
+CB1.tag = CB1.tag or "CB1SITTING"
+
+local say = CB1.Say
+local fmt = CB1.Fmt
+local id_of = CB1.IdOf
+
+---- LEG 1 — PT-37 / F48, the DECIDER --------------------------------------
+--
+-- ⭐ Two Src corrections from prep, both of which change what this leg means.
+--    They are stated here because this file is what runs, and a future reader
+--    will find the entry before they find the prompt.
+--
+-- (1) THE FAILURE PATH IS NARROWER THAN F48.md SAYS. OrderTrackElements'
+--     failure branch (Tracks.lua:614-620) is
+--       assert(false, "unable to find the expected number of track elements")
+--       for i, el in ipairs(all_elements) do elements[i] = el end
+--       return                                        -- nil, i.e. falsy
+--     assert does not unwind (EF-008), so the ORIGINAL ELEMENT ORDER IS
+--     RESTORED from the table.copy taken at :569, and ProcessTrackElements then
+--     hits `if not OrderTrackElements(...) then return end` (:818) and returns
+--     BEFORE any Z-repositioning, section building or pillar work. F48's stated
+--     risk — "the caller repositions every element in Z and recomputes pillars
+--     and sections" — DOES NOT HAPPEN on the failure path.
+--
+-- (2) BUT THE RESIDUE IS REAL, AND F48 UNDER-STATES IT. The restore fixes the
+--     ARRAY ORDER only. Left behind permanently, and saved:
+--       * start_el.connections = {} and every element the walk reached has its
+--         `connections` REPLACED (Tracks.lua:578-580, :606-617);
+--       * start_el.node_idx = 1 is forced (:579) while the success-path
+--         renumbering (:632-635) never runs — a DUPLICATE node_idx is the
+--         signature, and CB1.SnapTrack prints exactly that;
+--       * `elements` keeps leftover hash keys elements[<el>] = true, never
+--         cleared (#elements and ipairs are unaffected).
+--
+-- (3) ⛔ AND CASE B MAY NOT SAMPLE THE FAILURE PATH AT ALL. BreakTrackElement
+--     (Track.lua:618-659) does NOT remove the element from track.elements — it
+--     sets element.broken = <site>, hides it, and places a TrackConstructionSite
+--     whose __parents are { "ConstructionSite", "TrackGridElement" }
+--     (TrackElement.lua:580-583). Two TrackGridElements now sit on the broken
+--     hex; the walk's HexGetTrackGridElement is hex_grid:GetObject(q, r,
+--     "TrackGridElement") (TrackElement.lua:1-3) and returns ONE of them. Which
+--     one is a C-side question the source cannot settle.
+--     ⇒ CB1.ReadWalkability answers it BEFORE the mutation, and CB1.Leg1CaseB
+--       REFUSES TO RUN if the walk is predicted to succeed. A "clean pass" on a
+--       track that was never unwalkable is not a pass, it is an UNSAMPLED
+--       decider wearing a pass's clothes.
+
+-- One line. Prints the fixture, picks the case-A track, snapshots it.
+function CB1.Leg1Read()
+	local n, st, tr, routed, healthy, damaged = CB1.ReadTrackFixture()
+	local pick = nil
+	-- Prefer a LONG healthy track: more elements = more of the rewrite exercised.
+	for _, t in ipairs(healthy or empty_table) do
+		if not pick or #(t.elements or empty_table) > #(pick.elements or empty_table) then pick = t end
+	end
+	CB1.caseA = pick
+	if pick then
+		say(fmt("LEG1 case-A track picked: %s with %d elements", id_of(pick), #(pick.elements or empty_table)))
+		CB1.ReadWalkability(pick)
+		CB1.SnapTrack(pick, "leg1-caseA-BEFORE")
+	else
+		say("LEG1 NO healthy multi-element track — case A is SKIP <no fixture>")
+	end
+	return pick
+end
+
+-- Case A. The CORRECTED call the repair would ship, on a healthy track.
+-- ⚠️ F48's procedure also assigns start_el/end_el by hand afterwards. That is
+--    REDUNDANT on the success path (ProcessTrackElements sets both itself,
+--    Tracks.lua:820-822) and, worse, on the FAILURE path it would write
+--    endpoints the shipped repair would never write — making case B look more
+--    destructive than the repair actually is. We do NOT hand-assign; we run
+--    exactly what would ship and read what it did.
+function CB1.Leg1CaseA()
+	local t = CB1.caseA
+	if not t then say("LEG1A SKIP <no case-A track; run CB1.Leg1Read() first>") return end
+	local before = CB1.SnapTrack(t, "leg1-caseA-BEFORE-call")
+	say("LEG1A FORCED: the corrected savegame-fixup call, run by hand. MEASURED: whether the track survives it.")
+	CB1.Try("ProcessTrackElements(ResolveMap(t), t.elements) [FIRST EXECUTION]", function()
+		return ProcessTrackElements(ResolveMap(t), t.elements)
+	end)
+	local after = CB1.SnapTrack(t, "leg1-caseA-AFTER-call")
+	say(fmt("LEG1A VERDICT signature %s", before == after and "UNCHANGED (stable no-op)" or "CHANGED — compare the two SNAP lines above"))
+	return before, after
+end
+
+-- Stage case B's damage. FORCED, and it says so.
+-- HELP's meteor row is binding: pos is the THIRD argument, always pass one.
+-- A mid-track element is chosen deliberately — BreakTracks' own filter skips
+-- both endpoints and any station element (Meteors.lua:601).
+function CB1.Leg1Damage(track)
+	track = track or CB1.caseA
+	if not track then say("LEG1DMG SKIP <no track>") return end
+	local list = track.elements or empty_table
+	if #list < 5 then say("LEG1DMG SKIP <track too short to break a middle element safely>") return end
+	local el = list[1 + DivRound(#list, 2)]
+	if el == track.start_el or el == track.end_el or el.station then
+		say("LEG1DMG SKIP <mid element is an endpoint or a station element; BreakTracks would skip it>")
+		return
+	end
+	say(fmt("LEG1DMG FORCED: meteor at %s (mid element %s of %s). MEASURED: nothing yet — this only stages the fixture.",
+		tostring(el:GetPos()), id_of(el), id_of(track)))
+	CB1.Try("CheatMeteors single at the element position", function()
+		return CheatMeteors("single", nil, el:GetPos())
+	end)
+	CB1.damaged = track
+	say("LEG1DMG watch for the impact, then run CB1.Leg1CaseBCheck()")
+	return el
+end
+
+-- The gate. Reads whether the damage actually made the track unwalkable.
+function CB1.Leg1CaseBCheck()
+	local t = CB1.damaged or CB1.caseA
+	if not t then say("LEG1B SKIP <no damaged track>") return end
+	local broken, sites = 0, #(t.elements_under_construction or empty_table)
+	for _, el in ipairs(t.elements or empty_table) do if el.broken then broken = broken + 1 end end
+	say(fmt("LEG1B damage state: %d broken element(s), %d repair site(s), %d repair_cgs",
+		broken, sites, #(t.repair_cgs or empty_table)))
+	local shadowed, missing = CB1.ReadWalkability(t)
+	CB1.SnapTrack(t, "leg1-caseB-BEFORE")
+	CB1.caseB_samples = ((shadowed or 0) > 0 or (missing or 0) > 0)
+	if not CB1.caseB_samples then
+		say("⛔ LEG1B THE DECIDER IS UNSAMPLED: the hex grid still hands the walk the track's own elements, so OrderTrackElements will SUCCEED and this is case A again. Running the call anyway would produce a 'clean pass' that proves nothing about the risk F48 is blocked on. Break another element, or record leg 1 as SKIP <case B could not be made unwalkable> and leave F48 blocked.")
+	else
+		say("LEG1B the walk is predicted to FAIL — this track DOES sample the decider. CB1.Leg1CaseB() is now allowed.")
+	end
+	return CB1.caseB_samples
+end
+
+-- Case B. ⛔ Refuses to run unless the gate above says the decider is sampled.
+function CB1.Leg1CaseB()
+	if not CB1.caseB_samples then
+		say("⛔ LEG1B REFUSED — run CB1.Leg1CaseBCheck() first, and it must report a FAILING predicted walk. (G2: the liveness witness for 'the assert fired' is that reading, taken before the call.)")
+		return
+	end
+	local t = CB1.damaged
+	local before = CB1.SnapTrack(t, "leg1-caseB-BEFORE-call")
+	say("LEG1B FORCED: meteor damage + the corrected fixup call. MEASURED: what the failure path leaves behind.")
+	say("LEG1B ⛔ EXPECT an assert line 'unable to find the expected number of track elements' in the log. That is the DESIGNED path, not a crash — EF-008, it does not unwind.")
+	CB1.Try("ProcessTrackElements on the DAMAGED track [FIRST EXECUTION]", function()
+		return ProcessTrackElements(ResolveMap(t), t.elements)
+	end)
+	local after = CB1.SnapTrack(t, "leg1-caseB-AFTER-call")
+	say(fmt("LEG1B VERDICT signature %s", before == after and "UNCHANGED" or "CHANGED — read duplicate_node_idx and connections_total in the two SNAP lines"))
+	say("LEG1B now the owner's eyes: does the route still form, does the train still run, is the repair site still salvageable (F45 cursor)? Then save + reload and run CB1.Leg1Read() again.")
+	return before, after
+end
+
+---- LEG 2 — PT-47 / F26, the bombardment volley -----------------------------
+--
+-- ⛔⛔ THE ENTRY'S RECIPE DOES NOT WORK. F26.md documents
+--        StartBombard(UIColony:GetCityAtMap(MainMap), 40*guim, 8, 500, 1500)
+--     and `GetCityAtMap` DOES NOT EXIST ANYWHERE IN Src (zero hits across the
+--     whole tree, prep 2026-08-04). Colony's real accessors are GetCityLabels /
+--     GetActiveColonyMaps; a map's city is map.City (_init.lua:22) and the
+--     surface city is the global MainCity. The documented call raises
+--     "attempt to call method 'GetCityAtMap' (a nil value)" and the leg would
+--     produce nothing. This is the SECOND chain running to find a [NEVER RUN]
+--     recipe broken as documented (unattended-1's table.copy devil row was the
+--     first) — which is exactly why rule 10 exists.
+--
+-- ⛔ AND THE OBVIOUS REPAIR IS ALSO WRONG. StartBombard's first argument is
+--    resolved as `IsValid(obj) and obj:GetPos() or IsPoint(obj) and obj or
+--    GetRandomPassable(map)` (Bombardment.lua:57). City.__parents includes
+--    Object (City.lua:1-2), so IsValid(MainCity) is TRUE and MainCity:GetPos()
+--    resolves — but a City is never placed, so that position is meaningless.
+--    Feeding it to GetRandomPassableAroundOnMap either yields nil (→ the
+--    per-missile fallback GetRandomPassable(map), i.e. 8 missiles scattered
+--    across the WHOLE MAP, none of them in the owner's camera) or garbage.
+--    Either way the Tier-A read — eight trails in one frame — is destroyed.
+--
+-- ✅ THE CORRECTED FORM: pass a DOME. It is a valid placed Object, so
+--    obj:GetPos() is a real position; it puts the volley where the camera
+--    already is; and it is what makes the dome-crack integrity check reachable
+--    at all (missile:HitsDome, Bombardment.lua:86).
+--
+-- What runs is the PACK's WaitBombard (Fix_BombardmentSpread replaces the
+-- global; StartBombard resolves the name at call time, Bombardment.lua:158).
+-- ⚠️ StartBombard only spawns a GAME-TIME thread and returns instantly. Nothing
+--    happens while the game is paused (C4). Set a speed first.
+
+function CB1.PickDome(index)
+	local domes = CB1.LabelAll("Dome")
+	local d = domes[index or 1]
+	for i, x in ipairs(domes) do
+		say(fmt("DOME[%d] %s pos=%s", i, id_of(x), tostring(IsValid(x) and x:GetPos() or "?")))
+	end
+	say(fmt("PickDome -> %s (pass an index to choose another; put the camera on it and keep it LOW)", id_of(d)))
+	CB1.dome = d
+	return d
+end
+
+-- One line at the moment the owner is watching. count/radius are the entry's.
+function CB1.Leg2Bombard(dome, count, radius)
+	dome = dome or CB1.dome or CB1.LabelAll("Dome")[1]
+	if not IsValid(dome) then say("LEG2 SKIP <no valid dome to centre the volley on>") return end
+	count = count or 8
+	radius = radius or 40 * guim
+	local map = ResolveMap(dome)
+	local speed = GetTimeFactor() / const.DefaultTimeFactor
+	if speed == 0 then
+		say("⛔ LEG2 REFUSED — the game is PAUSED and StartBombard only spawns a game-time thread; nothing would happen. Unpause and call again.")
+		return
+	end
+	local before = 0
+	for _ in pairs(map.g_IncomingMissiles or empty_table) do before = before + 1 end
+	say(fmt("LEG2 FORCED: StartBombard(<dome %s>, %d, %d, 500, 1500) — a volley that would not otherwise happen. MEASURED: the SPREAD (owner's eyes) and the five integrity readings. speed=%s g_IncomingMissiles_before=%d",
+		id_of(dome), radius, count, tostring(speed), before))
+	say("LEG2 ⛔ FIRST EXECUTION of StartBombard by this project. The entry's own recipe was measured BROKEN in prep; this is the corrected form.")
+	CB1.bombard_seen = false
+	CB1.Try("StartBombard [FIRST EXECUTION]", function()
+		return StartBombard(dome, radius, count, 500, 1500)
+	end)
+	-- G2 LIVENESS WITNESS for "the volley ENDED": an empty missile table also
+	-- describes a volley that never started, so we watch it become NON-EMPTY
+	-- first and record that as the witness.
+	CreateRealTimeThread(function()
+		local deadline = RealTime() + 3 * 60 * 1000
+		local peak = 0
+		while RealTime() < deadline do
+			local n = 0
+			for _ in pairs(map.g_IncomingMissiles or empty_table) do n = n + 1 end
+			if n > peak then peak = n end
+			if peak > 0 then CB1.bombard_seen = true end
+			if peak > 0 and n == 0 then
+				say(fmt("LEG2 VOLLEY ENDED — peak in-flight missiles = %d (WITNESS: the table was non-empty, so this zero is a real end, not a volley that never started)", peak))
+				CB1.ReadBombardResidue(map)
+				return
+			end
+			Sleep(1000)
+		end
+		say(fmt("⛔ LEG2 3-MINUTE BOUND HIT — peak in-flight missiles = %d, still %s. If peak is 0 the volley NEVER STARTED (read the TRY line above for the raise); if peak > 0 the volley did not end and F26's fix should be reverted per the entry.",
+			peak, peak > 0 and "in flight" or "nothing ever spawned"))
+	end)
+	say("LEG2 watching for up to 3 minutes; the END line prints itself. Owner: eyes on the sky NOW — scatter (different incoming angles) or a rank of parallel trails?")
+end
+
+-- The agent-side half of the five integrity checks.
+function CB1.ReadBombardResidue(map)
+	map = map or MainMap
+	local decals = 0
+	local each = rawget(_G, "MapGet")
+	local ok, res = pcall(function() return map:MapGet("map", "DecRocketSplatter") end)
+	if ok and type(res) == "table" then decals = #res end
+	local cracked, domes = 0, CB1.LabelAll("Dome")
+	for _, d in ipairs(domes) do
+		local n = d.crack_visuals or d.cracks or d.dome_cracks
+		if type(n) == "table" and #n > 0 then cracked = cracked + 1
+		elseif type(n) == "number" and n > 0 then cracked = cracked + 1 end
+	end
+	say(fmt("LEG2 residue: scorch decals on map=%s (read ok=%s) | %d of %d dome(s) reading as cracked",
+		tostring(decals), tostring(ok), cracked, #domes))
+	CB1.Applicable("PT47-decals", decals, decals, "DecRocketSplatter queried on the map after the volley")
+	CB1.Applicable("PT47-dome-crack", cracked, #domes, "Dome label walked after the volley")
+	-- ⛔ interception: with no defence tower on this save it is UNSAMPLED, and
+	-- prep measured exactly that (0 defence towers on CB1STAGE).
+	local towers = CB1.LabelAll("DefenceTowerBase")
+	CB1.Applicable("PT47-interception", 0, #towers,
+		"DefenceTowerBase label — 0 towers means UNSAMPLED, not 'no interception happened'")
+end
+
+---- LEG 3 — PT-42 / F22 / F75 ----------------------------------------------
+-- FIXTURE-GATED. Prep measured Last Transmission NOT in g_FactionsHolder
+-- .active_factions and holding 0 legislature seats on CB1STAGE, so the brief
+-- routes this leg as SKIP. This reader stays here so the sitting can re-check
+-- in one line rather than take prep's word for it (G4: no per-chain flag).
+function CB1.Leg3Gate()
+	return CB1.ReadFactions()
+end
+
+---- LEG 4 — PT-53 E / D07, precedence + uninstall ---------------------------
+--
+-- The manual-assign half is the owner's HANDS. This side records the state
+-- around it so the card has before/after rather than a memory.
+-- ⚠️ Prep measured something the brief turns into a prediction: 23 Seniors are
+--    living in NORMAL residences while 31 free Senior cohort slots exist and
+--    the module reads `active`. Either those 23 sit in domes with no reachable
+--    free Senior slot, or the in-dome/cross-dome pass is not reaching them.
+--    Whichever it is, it is a finding, and it is read BEFORE the owner's click.
+function CB1.Leg4Before(colonist)
+	CB1.ReadCohort()
+	if colonist then
+		CB1.leg4_colonist = colonist
+		local r = colonist.residence
+		say(fmt("LEG4 subject %s residence=%s exclusive_trait=%s user_forced_residence=%s workplace=%s",
+			id_of(colonist), id_of(r), tostring(r and r.exclusive_trait),
+			tostring(rawget(colonist, "user_forced_residence")), id_of(colonist.workplace)))
+	else
+		say("LEG4 pass the selected colonist: CB1.Leg4Before(SelectedObj)")
+	end
+end
+
+-- Run AFTER the owner's manual assignment. Precedence = the manual choice wins
+-- and the module does not move them back.
+function CB1.Leg4After(colonist)
+	colonist = colonist or CB1.leg4_colonist
+	if not colonist then say("LEG4 SKIP <no subject recorded>") return end
+	local r = colonist.residence
+	say(fmt("LEG4 AFTER subject %s residence=%s exclusive_trait=%s user_forced_residence=%s",
+		id_of(colonist), id_of(r), tostring(r and r.exclusive_trait),
+		tostring(rawget(colonist, "user_forced_residence"))))
+	say("LEG4 let the sim run a while at speed, then call CB1.Leg4After(...) again — the module must NOT have moved them.")
+end
+
+---- LEG 5 — PT-35 turbine fixture -------------------------------------------
+--
+-- Prep measured FrictionlessComposites unresearched and 0 Large Wind Turbines
+-- on CB1STAGE — the same gap that made unattended-1's leg A turbine half
+-- UNSAMPLED. CheatResearchAll is the verified grant (HELP table, Cheats.lua:78);
+-- it skips UNDISCOVERED breakthroughs, which FrictionlessComposites is not.
+function CB1.Leg5Grant()
+	CB1.ReadTurbineFixture()
+	say("LEG5 FORCED: CheatResearchAll(). MEASURED: nothing — this only builds a fixture for a later unattended chain.")
+	CB1.Try("CheatResearchAll", function() return CheatResearchAll() end)
+	CB1.ReadTurbineFixture()
+	say("LEG5 owner's HANDS: place ONE Large Wind Turbine and apply ONE building upgrade. Placement is UI — the one thing the rig cannot do.")
+end
+
+-- Call after the owner has placed. Saves the FIXTURE (the one deliberate
+-- survivor of this sitting, per chain rule 7).
+function CB1.Leg5Save(name)
+	name = name or "PT35FIXTURE.savegame.sav"
+	CB1.ReadTurbineFixture()
+	local sg = rawget(_G, "Savegame")
+	local before = 0
+	local ok, err_or_list, list = pcall(function() return sg.ListForTag("savegame") end)
+	say(fmt("LEG5SAVE list-before ok=%s", tostring(ok)))
+	CB1.TryYield("SaveGame fixture", function()
+		local err, nm = SaveGame(name, { savename = name, silent = true, no_screenshot = true })
+		say(fmt("LEG5SAVE SaveGame returned err=%s name=%s", tostring(err), tostring(nm)))
+		return err
+	end)
+	say("LEG5SAVE ⛔ save_as_last was NOT passed — the owner's Continue button is untouched.")
+end
+
+---- RIDE-ALONGS --------------------------------------------------------------
+
+-- C42, the WITHIN-SESSION read the unattended-1 gap asked for. ⛔ Must be taken
+-- BEFORE any save or load in this session: Holder.units is populated only by
+-- runtime holder transitions (Unit:SetHolderOnMap is the sole caller of
+-- OnEnterHolder), so a load may simply rebuild it empty — which is why leg F's
+-- 0 was UNSAMPLED. Generate passage traffic at speed first.
+function CB1.RideC42(when)
+	say("C42 ⛔ this reading is only worth anything if NO save and NO load has happened since the traffic was generated. State which, on the card.")
+	return CB1.ReadC42(when or "within-session, no save/load since traffic")
+end
+
+-- F21, during leg 1's train activity. Prep measured a strong fixture on
+-- CB1STAGE: 11 stations holding 117 colonists waiting, 8 trains all GotoStation
+-- with 9-12 passengers aboard.
+function CB1.RideF21(when)
+	return CB1.ReadTrainStats(when or "during leg 1 train activity")
+end
+
+-- Popup trio. ⛔ The route documented in POPUP_CONSEQUENCE_AUDIT §8 item 3 —
+-- "a launch-issue prompt is the cheapest" — was MEASURED NOT AVAILABLE on
+-- CB1STAGE by prep: of 6 rockets, 5 report a launch issue but 4 of those are
+-- `no_target`, which is NOT a key of RocketBase:GetLaunchIssuePopups
+-- (RocketBase.lua:2210-2219: missions_suspended / not_landed / fuel /
+-- maintenance / disabled / unloading), and the one `fuel` rocket is on Earth.
+-- Worse, GetLaunchIssuePopups RAISED on every rocket queried (the pcall result
+-- was printed, per G3 — a nil return and a raise print identically otherwise).
+-- ⇒ The route below is the Src-verified alternative, and it has the virtue of
+--    being one of F85's OWN four sites rather than a stand-in:
+--    ShowBreakthroughChoicePopup (Anomaly.lua:696-714), preset
+--    "SubsurfaceAnomalyBreakthrough" (Anomaly.lua:393).
+--    ⚠️ Precondition: UIColony:UpdateAvailableBreackthroughTechs() must be
+--    non-empty. This prints the count first and refuses if it is zero, rather
+--    than opening nothing and calling it a refusal.
+--    ⚠️ Answering it DISCOVERS a breakthrough. Staged copy only.
+function CB1.PopupOpen()
+	local ok, techs = pcall(function() return UIColony:UpdateAvailableBreackthroughTechs() end)
+	local n = (ok and type(techs) == "table") and #techs or -1
+	say(fmt("POPUP available breakthrough techs = %s (read ok=%s)", tostring(n), tostring(ok)))
+	if n <= 0 then
+		say("⛔ POPUP REFUSED — no undiscovered breakthroughs left on this save, so ShowBreakthroughChoicePopup returns immediately (Anomaly.lua:698). The popup trio is SKIP <no choice popup reachable> unless another route is found live.")
+		return false
+	end
+	say("POPUP FORCED: opening a breakthrough choice popup. MEASURED: whether a rebound Quick Save can land inside its window (F85's U tier).")
+	CB1.Try("ShowBreakthroughChoicePopup [FIRST EXECUTION]", function()
+		return ShowBreakthroughChoicePopup("SubsurfaceAnomalyBreakthrough", techs)
+	end)
+	say("POPUP owner's HANDS: with the popup open, press the rebound Quick Save key (F9). Did a save land? Then answer the popup, load that save, and check whether the popup — and its breakthrough — are gone.")
+	return true
+end

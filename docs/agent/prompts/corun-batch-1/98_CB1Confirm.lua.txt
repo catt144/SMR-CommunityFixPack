@@ -1,0 +1,117 @@
+-- SMR Community Fix Pack — Test Kit :: corun-batch-1 FIXTURE CONFIRM CYCLE.  TEMPORARY
+--
+-- Declared by: corun-batch-1 chain prompt 1 (01_OPUS_PREP.md), Job 1.
+-- Armed together with 97_CB1Common.lua; this file is what starts the run.
+--
+-- Probe hygiene rule 5: present in TestKit Code/ only while this cycle is
+-- actually running; it and its metadata.lua line die in the commit that records
+-- the cycle's answers. Source of truth is this parked .lua.txt.
+--
+-- ⛔ WHAT IT MAY DO: READ. Nothing in this file mutates game state — no cheat,
+--    no save, no ProcessTrackElements, no StartBombard, no speed beyond the one
+--    CB1.Load must set to keep the sim alive (C4). A reader that mutates is a
+--    design smell in prep; a failed confirm is a `SKIP <reason>` in the brief,
+--    never a re-choice of save.
+--
+-- ⛔ THE FIVE GUARDRAILS, as they apply to THIS file:
+--   G1 RESOLUTION CROSS-CHECK — every CB1.* name used below is diffed against
+--      97_CB1Common.lua's definitions before launch; the diff output is quoted
+--      in the run record. Parse-GREEN is a syntax verdict, not a resolution one.
+--   G2 LIVENESS WITNESS — this cycle scores no completions, so it has no
+--      completion counter. What it does have is COUNTS, and every one goes
+--      through CB1.Applicable with its population and the observation that
+--      sampled it. A zero over an empty population is UNSAMPLED, not a
+--      negative.
+--   G3 pcall RESULT PRINTED — the two reads that can legitimately raise on a
+--      save without the subsystem (IsTechResearched, GetLaunchIssue) are inside
+--      CB1.Try / pcall-with-print in the harness. No result is discarded.
+--   G4 NO PER-CHAIN FACT IN A PER-PROCESS FLAG — this cycle gates on nothing.
+--      It reads what is in front of it and prints it.
+--   G5 ARM GATE — the launcher reads metadata.lua and both probe files back off
+--      disk and refuses to launch unarmed. This file cannot enforce that; the
+--      arming script does.
+--
+-- WHAT IT ANSWERS (01_OPUS_PREP Job 1's list, in order):
+--   pack count AS READ + Opt_CohortHousing BY NAME · Last Transmission active?
+--   (leg 3's gate) · Seniors + normal residences + free cohort slots (leg 4) ·
+--   tracks / stations / running trains (leg 1) + a walkability control ·
+--   passages with element counts (C42 ride-along) · dust-defence presence
+--   (leg 2's interception check) · a cheap choice popup route (popup trio) ·
+--   turbine fixture (leg 5).
+
+CB1.tag      = "CB1CONFIRM"
+CB1.watchdog = 12 * 60 * 1000
+
+local SAVE = "CB1STAGE.savegame.sav"
+
+function CB1.Payload()
+	if not CB1.Step("2-load-staged-copy", function()
+		return CB1.Load(SAVE, 3)
+	end, "untimed") then return end
+
+	CB1.Step("3-conditions", function()
+		CB1.ReadConditions("corun-batch-1 fixture confirm, one cycle, READ ONLY",
+			{ "CohortHousing", "Opt_CohortHousing", "BombardmentSpread",
+			  "TrainWaitTime", "GridGlobalStorage", "LastTransmissionStorage" })
+	end)
+
+	CB1.Step("4-leg3-gate-factions", function()
+		CB1.ReadFactions()
+	end)
+
+	CB1.Step("5-leg4-cohort-fixture", function()
+		CB1.ReadCohort()
+	end)
+
+	CB1.Step("6-leg1-track-fixture", function()
+		local _, _, _, _, healthy, damaged = CB1.ReadTrackFixture()
+		-- Walkability CONTROL. Run on a HEALTHY track, where the predicted
+		-- answer is "SUCCEEDS": that is what proves the reader can distinguish,
+		-- rather than always printing the same verdict. If this save already
+		-- carries a damaged track, read that one too — the sitting would then
+		-- not have to stage the damage at all.
+		if healthy and healthy[1] then
+			CB1.Say("WALK control on a HEALTHY track — prediction: SUCCEEDS")
+			CB1.ReadWalkability(healthy[1])
+			CB1.SnapTrack(healthy[1], "confirm-cycle-healthy")
+		else
+			CB1.Say("WALK NOT-APPLICABLE — no healthy multi-element track on this save")
+		end
+		if damaged and damaged[1] then
+			CB1.Say("WALK on an ALREADY-DAMAGED track found on this save — prediction: see the reader's own line")
+			CB1.ReadWalkability(damaged[1])
+			CB1.SnapTrack(damaged[1], "confirm-cycle-damaged")
+		else
+			CB1.Say("WALK no already-damaged track on this save — the sitting stages case B's damage itself (FORCED)")
+		end
+	end)
+
+	CB1.Step("7-c42-ride-along", function()
+		-- ⛔ This is a POST-LOAD read and therefore carries leg F's own limit:
+		-- Holder.units is populated only by runtime holder transitions
+		-- (Unit:SetHolderOnMap is the sole caller of OnEnterHolder), so a load
+		-- may simply rebuild it empty. It is recorded as the sitting's BEFORE
+		-- baseline, not as a C42 result.
+		CB1.ReadC42("post-load baseline, NOT a C42 result")
+	end)
+
+	CB1.Step("8-leg2-defences", function()
+		CB1.ReadDefences()
+	end)
+
+	CB1.Step("9-popup-route", function()
+		CB1.ReadPopupRoute()
+	end)
+
+	CB1.Step("10-leg5-turbine-fixture", function()
+		CB1.ReadTurbineFixture()
+	end)
+
+	CB1.Step("11-f21-ride-along", function()
+		CB1.ReadTrainStats("confirm-cycle baseline")
+	end)
+
+	CB1.ErrorWatchNote()
+end
+
+CB1.Boot()

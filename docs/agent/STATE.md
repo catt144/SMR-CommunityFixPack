@@ -15,9 +15,9 @@ verdict SUSTAINED vs the 11 archived logs; catches hygiene-only —
 SESSION_LOG). ✅ SAVE primitive PROVEN · `[NEVER RUN]` rows flipped · D1+D2
 PASS at MECHANISM · ⭐ **tiers ADOPTED** (owner hand → WORKFLOW) · 8-entry
 ledger → binding Co-runs guardrails.
-⭐ **NEXT: `corun-batch-1` BUILT, awaits kickoff** — Opus on
-`agent/prompts/corun-batch-1/01_OPUS_PREP.md` (prep unattended; the sitting
-runs when the owner sits: PT-37 · PT-47 · PT-42 · PT-53 E + rides, ~15–25 min).
+⭐ **NEXT: `corun-batch-1` PREPPED 2026-08-04, awaits the OWNER SITTING** —
+Opus on `agent/prompts/corun-batch-1/02_OPUS_SITTING.md` (brief + probes
+parked; **~24 owner-min**; PT-42 SKIP — Last Transmission not active).
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 

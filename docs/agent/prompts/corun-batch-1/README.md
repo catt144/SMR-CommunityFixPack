@@ -16,7 +16,7 @@ Model placement lives in the filenames; bodies are model-neutral.
 
 | # | file | model | owner needed? | what it drains |
 |---|------|-------|---------------|----------------|
-| 1 | `01_OPUS_PREP.md` | Opus | No | fixture confirms on a staged copy (one unattended confirm cycle) · every leg re-derived in rig terms from its ENTRY · probe sources parked here as `.lua.txt` · the sitting brief with its **measure-moments list** (each moment: what the owner does/looks at, verdict words, minutes) · predictions per leg · Src-verification of the two `[NEVER RUN]` recipes the sitting will execute |
+| 1 | ~~`01_OPUS_PREP.md`~~ **CONSUMED 2026-08-04** | Opus | No | ✅ **DONE.** Confirm cycle RAN on `CB1STAGE` (log `docs/archive/cb1confirm_Mars.exe-20260804-20.30.21.log`, 0 engine error lines, all reads, no mutations) · brief written into `02_OPUS_SITTING.md` "Notes from upstream" (measure-moments ≈ **24 owner-minutes**, predictions 1–15, SKIP lines, card skeletons, 6-entry prep ledger) · probes parked here as `97_CB1Common.lua.txt` / `98_CB1Confirm.lua.txt` / `99_CB1Legs.lua.txt` + `CB1_ARM.ps1.txt`, parse **and** resolution GREEN · both `[NEVER RUN]` instruments Src-verified, **F26's recipe MEASURED BROKEN** and F48's failure path corrected on the entries |
 | 2 | `02_OPUS_SITTING.md` | Opus | **YES — the sitting.** Attended for the NAMED moments only (est. 15–25 min of attention across the batch; exact minutes come from prompt 1's brief) | the batch: legs 1–5 + ride-alongs, results recorded on entries, evidence cards per the ADOPTED tiers |
 | 3 | `03_FABLE_AUDIT.md` | Fable | No (routes decisions) | adversarial audit vs archived logs · integration · unforeseen-issues delta vs unattended-1's ledger · folder empty |
 
