@@ -8,6 +8,25 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-04 — `corun-batch-1` BUILT and queued (same session, Fable): the first batched co-run sitting, three prompts, owner sits once
+
+Owner order ("Go ahead and build them out"), same session as the
+unattended-1 close below. `agent/prompts/corun-batch-1/` — README +
+`01_OPUS_PREP` (unattended: fixture confirms on a staged copy, rig-terms
+re-derivation from the entries, parked probes, the measure-moments brief
+with per-moment tiers and minutes) + `02_OPUS_SITTING` (the attended batch:
+PT-37 as the F48 DECIDER · PT-47 · PT-42 fixture-gated on Last Transmission ·
+PT-53 E with its uninstall half DEAD LAST · F21/C42/popup-trio ride-alongs ·
+optional PT-35 turbine-fixture build, ~3–5 owner min) + `03_FABLE_AUDIT`
+(terminal; audits `tested` grants against named Tier-A moments per the
+adopted tiers). Unattended-1's five guardrails bind by rule; both `[NEVER
+RUN]` instruments the sitting executes (`StartBombard`,
+`ProcessTrackElements`) get prep-time Src-verification plus first-execution
+discipline — leg E's broken-recipe lesson applied forward. Estimated owner
+cost: one sitting, 15–25 attended minutes, exact minutes named per moment in
+prompt 1's brief. Kickoff: Opus on `01_OPUS_PREP.md`; the sitting runs only
+when the owner sits.
+
 ## 2026-08-04 — `unattended-1` CLOSED (prompt 3, Fable terminal audit): every verdict sustained, the owner's three answers integrated, the folder is empty
 
 **The first fully unattended batch is complete** — 3 prompts, self-consuming,

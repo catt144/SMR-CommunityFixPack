@@ -10,14 +10,14 @@ behaviour `agent/facts/INDEX.md` · doc map `docs/README.md` · authoring
 
 ✅✅ **18-prompt project chain COMPLETE (2026-08-03)**; the playtest campaign is
 the main line. **Read `agent/reports/CHAIN_QA_REPORT.md` first** (verdict · §9
-top). ⭐⭐ **corun-rig CLOSED · `unattended-1` CLOSED 2026-08-04** (terminal
-audit: **every leg verdict SUSTAINED** against the 11 archived logs; catches
-were hygiene-only — SESSION_LOG has the record). ✅ SAVE primitive PROVEN
-(0.60 s, in the envelope) · both `[NEVER RUN]` rows flipped · D1+D2 heal sweep
-PASSES at MECHANISM ceiling · ⭐ **sign-off tiers ADOPTED** (owner hand →
-WORKFLOW) · 8-entry ledger → binding Co-runs guardrails.
-⭐ **NEXT: nothing queued.** Front of the queue = the first co-run batch
-(PT-37 · PT-47 · PT-42 · PT-53 E + ride-along reads); brief on owner word.
+top). ⭐⭐ **corun-rig + `unattended-1` CLOSED 2026-08-04** (audit: every leg
+verdict SUSTAINED vs the 11 archived logs; catches hygiene-only —
+SESSION_LOG). ✅ SAVE primitive PROVEN · `[NEVER RUN]` rows flipped · D1+D2
+PASS at MECHANISM · ⭐ **tiers ADOPTED** (owner hand → WORKFLOW) · 8-entry
+ledger → binding Co-runs guardrails.
+⭐ **NEXT: `corun-batch-1` BUILT, awaits kickoff** — Opus on
+`agent/prompts/corun-batch-1/01_OPUS_PREP.md` (prep unattended; the sitting
+runs when the owner sits: PT-37 · PT-47 · PT-42 · PT-53 E + rides, ~15–25 min).
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
