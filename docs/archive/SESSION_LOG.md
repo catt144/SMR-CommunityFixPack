@@ -8,6 +8,28 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-05 — `corun-batch-2` BUILT and queued (same session, Fable): the never-ran remainder, simplest first by owner design
+
+Owner order ("Ok go ahead and build out our next chain"), same session as the
+batch-1 close below. `agent/prompts/corun-batch-2/` — README + 3 prompts
+(Opus prep → Opus sitting → Fable audit). Payload, in run order: C42
+traversal-WITNESSED read + F21 penalty read (iff prep solves the reader) →
+popup trio + F85 → F99's untested cell (2+ tracks, `CheatBreakElement`,
+forced both halves) → PT-47 bombardment (`StartBombard` first execution) →
+PT-35 turbine FIXTURE build (the one surviving save) → PT-53 E uninstall
+half dead last. ⭐ **The ordering is the owner's design input, recorded
+verbatim in the README:** simplest first, *"so that if we run into somthing
+that requires a course change we don't burn up all our context on the first
+or 2nd task"* — composed with reads-first/process-mutations-dead-last, plus
+a bank-incrementally rule (each leg's card written the moment it completes).
+Prep must resurrect batch-1's corrected parked instruments from git
+`530df63` rather than rewrite, archive-cross-check every briefed entry (the
+S7 repair), name a subject-finder per moment (S2), and write an estimate
+that includes console driving (S6). Excluded on purpose: PT-53's precedence
+half (owner design decision, not a test), the dev-gate audit's ~43
+candidates, and everything batch-1 already excluded. Kickoff: Opus session
+on `01_OPUS_PREP.md`.
+
 ## 2026-08-05 — `corun-batch-1` CLOSED (prompt 3, Fable terminal audit): every verdict sustained, one attribution corrected, the owner's override honored, the folder is empty
 
 **The first BATCHED attended co-run chain is complete** — 3 prompts,

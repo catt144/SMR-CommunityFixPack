@@ -21,10 +21,10 @@ precedence ROUTED (decision 2). PT-42 SKIP re-confirmed live. ⭐ **NEW `F101`**
 (5 witnessed; ⛔ audit: mechanism (b) is the infopanel spot-toggle, NOT the
 inspector — `~<expr>` is a static lead). Owner override: their ~2 h deviation
 is NOT scored vs the 24-min promise; the rig's miss (M1 3→25 min) is — now a
-Co-runs rule. ⛔ **PT-47 / M5 / M7 / PT-53-uninstall / popup trio+F85 never
-ran — routed.** ⇒ **NEXT: nothing queued**; front of queue = `corun-batch-2`
-from the never-ran remainder (uninstall half LAST), per CHAIN_METHOD + the
-new attended Co-runs rules.
+Co-runs rule. ⭐ **`corun-batch-2` BUILT and queued 2026-08-05** — the
+never-ran remainder + C42 witness + F99's cell, SIMPLEST FIRST (owner
+ordering rule, README) with the uninstall half dead last.
+⇒ **NEXT: Opus session on `agent/prompts/corun-batch-2/01_OPUS_PREP.md`.**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
