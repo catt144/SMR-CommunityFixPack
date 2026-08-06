@@ -350,6 +350,21 @@ Both failure modes are real and this rule names both:
 - **"Needs the owner" is a precondition to route** (a TAKEABLE-WHEN rider),
   never a reason to descope. They stay in the loop by design; what changed is
   that they are no longer doing the setup.
+- ⛔ **AN OWNER OVERRIDE IS A COURSE CHANGE, NOT A VARIANCE TO MANAGE (owner
+  rule, 2026-08-05):** *"My time is valuable and is a major concern. But if I
+  decide to over ride and follow a lead, a session shouldn't remind me nearly
+  every message that we should get back on track. Which makes trouble shooting
+  hard when I am trying to keep track of what I have sent to it to check and
+  what I have not."* Two binding halves:
+  - **State the plan's position ONCE when the deviation starts** (so the
+    remaining legs are on record), then drop it. No back-on-track reminders
+    until the lead closes, the owner asks, or the sitting is ending. The
+    time-is-the-objective rule above is about *authoring* cheap sittings —
+    it is never license to nag the owner off their own lead.
+  - **During the deviation the session carries the bookkeeping**: a live
+    ledger of what has been handed to the owner to check, what came back, and
+    what is still outstanding — that is the tracking the reminders were
+    breaking. The owner troubleshoots; the session keeps the score.
 
 ⛔ **And do not report owner-minutes saved as if zero were the target.** Report
 cost against promise. A sitting that came in under its promise is a measurement,
