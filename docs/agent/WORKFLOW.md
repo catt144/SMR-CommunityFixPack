@@ -355,7 +355,14 @@ Both failure modes are real and this rule names both:
   decide to over ride and follow a lead, a session shouldn't remind me nearly
   every message that we should get back on track. Which makes trouble shooting
   hard when I am trying to keep track of what I have sent to it to check and
-  what I have not."* Two binding halves:
+  what I have not."* And the owner's leads are not a tolerated cost — they are
+  a **proven discovery channel** (owner, same day: past leads *"found multiple
+  new bugs or changed the outcome of our tests"* — the record agrees: even the
+  2026-08-05 lead the owner scored as a miss on its own target banked `F101`
+  and both F99 samples, and earlier leads produced the F02 watchdog challenge
+  that overturned a false-positive reading and the D07 staleness catch). Treat
+  a lead as first-class work to instrument and witness, not a detour to wait
+  out. Two binding halves:
   - **State the plan's position ONCE when the deviation starts** (so the
     remaining legs are on record), then drop it. No back-on-track reminders
     until the lead closes, the owner asks, or the sitting is ending. The
