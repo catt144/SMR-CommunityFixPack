@@ -8,6 +8,119 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-10 — `corun-batch-2` THE ATTENDED SITTING (Opus, owner at the keyboard): all seven legs ran, nine predictions held, and the rig broke in fourteen places
+
+**Logs** `archive/cb2sitting_Mars.exe-20260810-15.30.16.log` (152,783 B, 2,881
+lines) + `archive/cb2uninstall_Mars.exe-20260810-17.20.20.log` (6,667 B), both
+`git add -f`, both verified byte-identical to the on-disk originals by `cmp`.
+Retail 1.0.7.396349, staged `CB2SIT` copy of `TEST2H TRAIN`
+(MD5 `103B320A…8958`), map `BlankBigCanyonCMix_09`, sol 333→335, pack 81/81
+active as read, **0 `[LUA ERROR]` across both processes**.
+
+**Cost: ≈75 attended minutes against a 33–36 estimate.** Reported as cost, not
+as anything else. Every minute of overrun is itemised in the ledger below and
+all of it is rig-side. The owner's three deviations each BOUGHT evidence.
+
+### What each leg found
+
+- **F21 ride-along — PASS.** The restamp was WITNESSED on a named subject across
+  a real, unforced boarding: `Colonist#2000038450`, `start_wait 239310758 ->
+  239344642`, **+33,884 ms**, after 205 polls reading `Waiting`. The fix
+  observed doing its work rather than inferred from an average. NOT re-earned as
+  `tested`.
+- **Leg P (a), the popup keystone — PASS, both predictions.** A storybit's
+  popup-carrying thread SURVIVES a save/load (`g_StoryBitActive=1` before and
+  after, thread handle rebuilt …ACC4F98→…C596698) **and answering it afterwards
+  still applies the outcome** (the reply's named target, an RC Explorer, present
+  in the pre-answer save and gone after). The POPUP_CONSEQUENCE_AUDIT §8 item 1
+  keystone, answered. ⚠️ **Run 1 was VOID and is recorded, not discarded** — an
+  8-minute conversational gap between activation and save with no reading in
+  between made its `1 → 0` uninterpretable.
+- **Leg P (b), F85 — defect CONFIRMED, route REFUTED, and the entry's own fork
+  cannot express it.** A timer-driven save landed **39 s inside the open
+  `ShowBreakthroughChoicePopup` modal**; reloading it voided the choice (popup
+  gone, techs still 50). But the retail key-bindings screen has **no save action
+  at all**, so "rebind Quick Save to F9" is not a route. Third cell ⇒ owner.
+- **Leg Q, F99 — zero throws over a genuinely built cell.** Two distinct tracks,
+  breaks witnessed three ways each, sites 2→0, no `TrackElement.lua:805`. The
+  2×2's last empty cell is filled. Both halves forced ⇒ rate datum only, and
+  **weaker than sample 2** (2 sites vs 201), so the bound did not tighten.
+- **Leg R, PT-47/F26 — PASS on every sampled check.** Five volleys, all ENDED
+  (peaks 5/6/6/7/7, each with its liveness witness), spread reads as a scatter
+  from a low camera, dome cracked ("Hoffman #1 - 3 fractures"), notification
+  appeared. Decal fade UNSAMPLED.
+- **Leg S, PT-35 — `PT35FIXTURE.savegame.sav` BUILT**, the one deliberate
+  survivor: FrictionlessComposites researched, one Large Wind Turbine, one
+  applied building upgrade (Remote Medic on a Hospital). Unblocks the turbine
+  half, UNSAMPLED since 2026-08-04.
+- **Leg T, PT-53 E — CLEAN, on the second attempt.** `pack=0/0 active`, zero
+  engine errors, zero new log lines after a minute of sim.
+
+### ⭐ The owner's three deviations, all of which bought evidence
+
+1. **Disabling the MDS lasers for volleys 4–5**, unprompted. Turned an
+   interception check the brief had written off as UNSAMPLED into a controlled
+   A/B: peak in-flight **5, 6, 6 (on) → 7, 7 (off)** — a quantitative
+   signature independent of the eyes, agreeing with what the eyes saw.
+2. **Pushing back on an abandoned baseline.** The session declined a
+   confirmation as "not worth it"; the owner asked whether that meant a re-run
+   later. Re-pricing showed the load was already owed to the next leg, so the
+   true cost was ~1 minute — and it closed prediction 2's outcome half.
+   **The standing "do not pre-decline a cheap confirmation" rule was violated
+   and recovered by the owner, not by the session.**
+3. **Reading the key-bindings list twice and challenging the instruction** —
+   which is what refuted F85's route instead of leaving it assumed.
+
+### ⛔ The ledger — 14 entries, 0 of them the game's fault
+
+Full text in the audit prompt's inbox. The load-bearing ones:
+
+- **Three engine-name reader defects in ONE function** (`CB2.RResidue`):
+  `DefenceTowerBase` (the class is `MDSLaser`, and the save carries **23**),
+  the `DecRocketSplatter` decal read (returns a non-table), and the dome-crack
+  field guess (printed 0/13 while a dome carried 3 fractures). **All three are
+  the F21 `spent_time` class, and G1 cannot see any of them** because it only
+  resolves the harness's own namespace. ⇒ **prep's "0 defence towers on this
+  save" is REFUTED**, and it had been inherited rather than re-read.
+- **The brief's console lines could not have executed as written** — four
+  `Sleep()`-carrying entry points with no `*r`, and the bare console has no
+  thread context. Caught at pre-flight.
+- **No UI path exists to load a staged copy** — `Copy-Item` duplicates the
+  display name, so every staged save shows as "TEST2H TRAIN" in the load list.
+- **The SAVE primitive's liveness witness is dead** — `Savegame.ListForTag`
+  returned a non-table on all five saves (`-1 -> -1`); it read 57→58 in
+  `unattended-1`. Saves were witnessed by on-disk bytes and by loading them back.
+- **A Mod-Manager disable needs a FULL PROCESS RESTART**, and the intermediate
+  state is a NEW one: `pack=81/81 active` with the mod's persisted permanent
+  ALREADY GONE. **"OFF is three different things" is now four** (D13), and any
+  prior uninstall reading taken without a restart measured the wrong state —
+  PT-20 is the named case to re-check.
+- **Prep's save-directory cleanup did not happen.** `CB1STAGE`, `CORUN0`,
+  `CORUN1`, `U1STAGE` — the exact four batch-1's audit ALSO recorded deleting on
+  2026-08-05 — were still on disk, with five more. **Two independent sessions
+  have now recorded the same deletion falsely.** 15 removed at this close-out
+  (~780 MB). ⭐ **Untested hypothesis: Steam Cloud restores saves deleted while
+  Steam is running** (`steam_autocloud.vdf` is in that directory).
+- **The working tree was dirty at sitting start and prep reported it clean** —
+  the F101 decision plus prep's own routing, including an owner-typed D07 answer
+  recorded nowhere as a decision. Carried into this commit.
+
+### Open, and deliberately not closed
+
+M3 (the §3.6 sol-change corner) never ran. **One modal popup at ~16:02 is
+UNATTRIBUTED** — it blocked the console, the owner had to click it, and it is in
+no log; recorded rather than dismissed. Decal fade and the notification's
+CLEARING are unsampled. C42 stayed SKIP as prep ruled.
+
+### Close-out
+
+`DISARM GATE: GREEN` · `PROBE SWEEP: clean` · both `Code/` trees swept ·
+`metadata.lua` restored no-BOM · **save directory checked, which is P5's whole
+point** · `TEST2H TRAIN` MD5 and mtime UNCHANGED · `last_save` still points at
+it after five in-run saves, confirming the `save_as_last` discipline
+empirically for the first time.
+
+
 ## 2026-08-05 — `corun-batch-2` BUILT and queued (same session, Fable): the never-ran remainder, simplest first by owner design
 
 Owner order ("Ok go ahead and build out our next chain"), same session as the

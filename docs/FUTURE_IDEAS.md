@@ -224,6 +224,55 @@ in the checklist; F03/F35/F48 entries in `agent/bugs/`.
 
 ---
 
+## 6. A SEPARATE mod: dev/cheat tooling that actually works on retail — parked 2026-08-10 by owner decision
+
+**What.** A standalone mod (**not this pack**) that exposes the game's own dev
+affordances to players on a retail build and repairs the ones that throw there.
+The owner's framing when they put F101 out of scope: *"If a modder wants to build
+out a toolkit for users then that should be something they fix… put the info we
+found in future ideas if we ever made a separate mod that gives this access to
+users."*
+
+**Why it is a good idea.** The affordances already exist and are already drawn —
+`InfopanelObj:CreateCheatActions` (`Infopanel.lua:22-52`) builds a toolbar button
+for every `Cheat*`/`AsyncCheat*` method on the selected object's class, and
+`CheatToggleInfopanelCheats()` (`Cheats.lua:290`) is a shipped, localized cheat-menu
+entry. A toolkit mod would be surfacing shipped functionality, not inventing it.
+
+**Why it is parked.** It is a different product with a different audience, and
+this pack fixes vanilla defects that harm players — FIX_POLICY §4a. Nothing here
+is owed and nothing about it is work.
+
+**Where the material lives — this is the part worth keeping.**
+`agent/bugs/F101.md` (`wontfix`) holds the whole derivation, and a toolkit mod
+would hit exactly these walls on day one:
+- **The gate is `AreCheatsEnabled() = Platform.cheats or AreModdingToolsActive()`**
+  (`gamelib.lua:1035`, `Mod.lua:145`). `NetSyncEvents.ObjCheat` returns early
+  without it (`Network.lua:219`), so on retail **no infopanel cheat button
+  executes at all** unless a Ged mod-tool app is open — which also blocks
+  achievements (`GedModEditor.lua:23-25`). Widening that gate is the toolkit's
+  first design decision, and its first ethical one.
+- **Two shipped buttons then throw once the gate is open**: `TestMeteor` is
+  defined only under `if Platform.cheats` (`Meteors.lua:1086-1088`) while three
+  callers are ungated — including `Building:CheatMeteorHit` on the BASE class, so
+  it is every building — and `GetSpotNameColor` lives only in the absent
+  `DevToolsPublic` library while `GedGameObjectEditor.lua:104` calls it
+  unconditionally. Both repairs are sketched on the F101 entry, including the
+  route that needs **no new global** (inline `TestMeteor`'s six lines; every
+  symbol it uses is ungated) and therefore dodges C43's strict-global guard.
+- **The working instrument to copy from:** `CheatBreakElement` =
+  `BreakTracks({self})` (`TrackElement.lua:436-438`), ungated, works on retail —
+  three lines above the broken one.
+
+**Rough cost.** Unknown and irrelevant until it exists; the two repairs above are
+~60-80 lines, the gate/UX design is the real work.
+
+**What it would need to un-park.** Launch first, then an explicit owner decision
+to start a second mod. ⛔ It never un-parks *into this pack* — F101 stays
+`wontfix` either way.
+
+---
+
 # ⏸️ PROPOSED for parking — awaiting the owner's yes/no
 
 Listed, not moved. Each is still live on the board until the owner answers.

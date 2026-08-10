@@ -169,5 +169,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 119 | C42 | Passage traversal clears `unit.holder` directly, leaving a stale entry in a passage element's `units` list forever | filed | ? | cand | [C42.md](C42.md) |
 | 120 | C43 | **OUR OWN DEFECT:** the TestKit's `set_global` helper creates real globals, so two Wave-5 probes print `[LUA ERROR] Attempt to create a new global` into the owner's log and then PASS | filed | ? | SOURCE-VERIFIED | [C43.md](C43.md) |
 | 121 | C44 | Vanilla missing asset: `Animations/LawOfficeDoor_idle.hgacl` / `_opening.hgacl` are referenced by the shipped manifest and absent from the shipped packs | wontfix | - | MEASURED | [C44.md](C44.md) |
-| 122 | F101 | Retail calls tooling-only globals: `CheatMeteorHit` → `TestMeteor` and the object inspector → `GetSpotNameColor` both throw on a shipped build | filed | ? | MEASURED | [F101.md](F101.md) |
+| 122 | F101 | Retail calls tooling-only globals: `CheatMeteorHit` → `TestMeteor` and the object inspector → `GetSpotNameColor` both throw on a shipped build | wontfix | - | MEASURED | [F101.md](F101.md) |
 

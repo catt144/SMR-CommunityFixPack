@@ -27,6 +27,66 @@ reasoning lives; **an agent strikes a line the moment you decide** — just say 
 in any session. Added 2026-08-03 by the docs-restructure chain (spec §7 / R10):
 these used to be filed only in agent reports, which is where you never read.
 
+### ⭐⭐ NEW 2026-08-10 — from the `corun-batch-2` SITTING (four calls, all yours)
+
+**Cost, stated honestly: the brief promised 33–36 attended minutes and it took
+about 75.** All seven legs ran and nothing was cut. The overrun is ours and it
+is itemised — a keybinding the brief invented, three broken readers in one
+function, a save witness that stopped witnessing, a leg that had to run twice
+because it took no reading before its own save, an uninstall that needed a
+restart nobody knew about, and one console line of mine that produced nothing.
+**Your three deviations all bought evidence and none is scored against you.**
+
+⭐ **What went right, so the list below reads in proportion:** the popup-audit
+keystone is ANSWERED (a storybit popup survives a save/load *and* still applies
+its outcome when you answer it afterwards), F21's fix was WITNESSED firing on a
+real boarding, PT-47 passed every check it could sample, F99's last untested
+cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder**
+— keep it, it unblocks a test that has been stuck since 2026-08-04.
+
+5. **⚖️ `F85` — the defect is real, and the route we told you about doesn't
+   exist. What do you want done?** A save **landed 39 seconds inside the open
+   breakthrough-choice popup**, and reloading it **voided the choice** — popup
+   gone, breakthrough never discovered. So the entry is right that the save
+   system doesn't protect you. **But the entry's route is dead:** it said "rebind
+   Quick Save to F9", and you established there is no save action in the
+   key-bindings screen at all. The entry's own fork only has two outcomes
+   ("R2-by-rebind" or "drop to I/R4, documentation") and **neither fits** — the
+   defect is real and unreachable by the one route anyone had named.
+   **Your call: severity, and whether anything gets built.** ⚠️ The half worth
+   your attention now is the **distress-call popup** (audit §3.6) — it's the
+   game's one popup that *doesn't* pause, so it's the only place a normal
+   autosave could land inside a popup window with no rebind involved. That
+   rider didn't run. → `agent/bugs/F85.md`.
+6. **⚖️ Disabling a mod needs a full game restart — does `PT-20` need redoing?**
+   We found a state nobody had named: disable the pack in the Mod Manager, go
+   back to the main menu, load a save, and **all 81 modules are still live**
+   while the mod's saved data has *already* been discarded. It takes a full
+   restart to actually unload. Done properly it's completely clean (0 errors,
+   nothing in the log after a minute of play). **The question is backwards-looking:
+   any earlier uninstall test done without a restart was measuring that middle
+   state, not an uninstall — and `PT-20`'s 98-vs-98 comparison is the one to
+   re-check.** Cheap to redo if you want it. → `agent/bugs/D13.md`.
+7. **⚖️ Our save-folder cleanup has now failed twice, and we may know why.**
+   `CB1STAGE`, `CORUN0`, `CORUN1`, `U1STAGE` — the exact four that batch-1's
+   audit said it deleted on 2026-08-05, and that this morning's prep *also* said
+   it deleted — **were still in your save folder tonight**, along with five more
+   from earlier chains. All 15 are gone now (~780 MB) and `PT35FIXTURE` is the
+   only agent save left. ⭐ **Hypothesis worth one line from you: Steam Cloud.**
+   There's a `steam_autocloud.vdf` in that folder, and a deletion made while
+   Steam is running would get restored from the cloud — which would explain two
+   honest sessions both recording a deletion that didn't stick. **Unverified.**
+   If you'd rather we stop deleting your saves entirely and just list them for
+   you, say so — that's a reasonable answer too.
+8. **⚖️ There is uncommitted work in the repo that isn't ours, including an
+   answer of yours nobody recorded.** The `F101` decision and this morning's prep
+   routing were both left uncommitted (prep reported clean trees and pushed
+   without them); they're in tonight's commit now. **One of those lines is yours**
+   — on checklist item 2 you typed *"It should not pin them to the dome, seems
+   like a risk for a bunch of weird bug cases"*. That reads like a **decision on
+   `D07`**, and it isn't recorded as one anywhere. **Confirm and we'll strike the
+   item; correct us and we'll fix it.** → `agent/bugs/D07.md`.
+
 ### ⭐ NEW 2026-08-05 — from the `corun-batch-1` sitting (four calls, all yours)
 
 **Cost: the brief promised ~24 attended minutes and the sitting ran about two
@@ -53,21 +113,56 @@ evaporated and it had to be built live.
    still be emigrated out of the dome when no local cohort slot exists. The
    module's header calls this deliberate. Derived from source, no fixture
    needed. → `agent/bugs/D07.md`.
-3. **⚖️ How much do the two new dev-tool defects matter?** `F101` — every
-   building's **Meteor Hit** infopanel button throws on retail, and so does the
-   infopanel's **spot-visibility dev toggle** *(audit correction 2026-08-05:
-   this was first recorded as "opening the object inspector" — the archived
-   stacks say it was the toggle button, and the log's one inspector open was
-   clean; `~<expr>` stays withdrawn from HELP as a static risk, unwitnessed)*.
-   Both vanilla, no pack code, both need dev tooling to
-   reach — but you noted mods routinely expose these outside a dev build.
-   **Severity is yours; both are wrappable if you want them fixed.**
-   → `agent/bugs/F101.md`.
+   -It should not pin them to the dome, seems like a risk for a bunch of weird bug cases
+3. ~~**⚖️ How much do the two new dev-tool defects matter?**~~ ✅ **DECIDED
+   2026-08-10 — OUT OF SCOPE, `F101` is `wontfix`. Nothing gets built.** Your
+   ruling, in your own words: *"If it works fine from what we can tell in dev
+   mode then its not in this mods scope. If a modder wants to build out a
+   toolkit for users then that should be something they fix."* ⭐ **What the
+   session found before you ruled, because it is the reason the question was
+   answerable at all:** neither throw is *possible* on a build where those
+   buttons belong — `TestMeteor` is missing precisely because `Platform.cheats`
+   is false, and `GetSpotNameColor` precisely because the `DevToolsPublic`
+   library is absent — so there is nothing to reproduce in dev mode. On retail
+   the button only executed because the engine's own gate passed first
+   (`ObjCheat CheatMeteorHit` prints one line ABOVE each throw), and that gate
+   is `Platform.cheats or AreModdingToolsActive()` — so a **Ged mod-tool window
+   was open**, the same state that blocks achievements. ⛔ **And it was not our
+   TestKit forcing it:** the kit enables only the console, which is not part of
+   that gate, and neither repo writes the cheat flags at all. Pressing them
+   damages nothing (the meteor button throws before it runs anything, under
+   `procall`; the spot toggle only leaves its own dev-UI state one click out of
+   phase). → `agent/bugs/F101.md`, "The reachability gate".
+   **The dev-tools-for-players idea is parked** in
+   [FUTURE_IDEAS.md](FUTURE_IDEAS.md) as a SEPARATE post-launch mod — not this
+   pack, and not work.
 4. **⚖️ `Opt_NoHomeless` self-deactivates at the main menu** because its
    preflight names `Community` while `HasFreeWorkplacesAround` is declared on
    the `Workforce` mixin — the F64 mistake again. It recovers (81/81 active by
    load) and the runtime is separately guarded, so nothing broke. **Fix the
    preflight target, or leave it?** → `agent/bugs/D12.md`.
+
+### ⭐ NEW 2026-08-10 — from `corun-batch-2` prep (nothing needs your call; two are cleanup already done)
+
+**FYI, and it is a gap in our own gate.** Four agent-created staged saves —
+`CB1STAGE`, `CORUN0`, `CORUN1`, `U1STAGE`, about **223 MB**, all byte-identical
+copies of `TEST2H TRAIN` — were still sitting in your save folder and in your
+in-game load list, while `corun-batch-1`'s terminal audit had recorded *"all
+staged/throwaway saves gone from the save dir"*. **Deleted this session**, with
+`TEST2H TRAIN` re-verified byte-identical (MD5 `103B320A…8958`, mtime unchanged).
+⛔ **The cause is structural, not a slip:** the co-run close-out gate runs
+`git status` in both repos and **never looks at the save directory at all**, so
+a staged copy that outlives its commit is invisible to every check we have. The
+next chain's close-out is told to check it; whether that becomes a standing
+WORKFLOW rule is worth one line from you if you care.
+
+**Also, two entries had results that never reached them** — C42's and F21's
+2026-08-05 readings were on their checklist riders only. Both entries corrected;
+the archive cross-check rule you got from batch-1 caught both on its first use.
+**And F21's "penalty half unmeasured" turned out to be our reader**: `spent_time`
+is not a field on any class in the game, so that `nil` was guaranteed. The real
+statistic reads fine — station rolling average **516,309** against its trains'
+**47,968–183,186**, which is the shape F21 predicts.
 
 **Not decisions, just so you know where things stand:** D07 is **4-of-5**, not
 3-of-5 — trigger A passed on 2026-07-30 with your Forever Young A/B and the
@@ -536,7 +631,7 @@ queued while trains come and go, or walkers passing a working station.
 **Good to have:** note whether any track segment on the line was under
 construction (the rival explanation the agent must exclude).
 
-### Rider — F21: re-earn `tested` for the wait-time fix · Status: unrun — optional · **mode: co-run ride-along** (routing 2026-08-04) · ⚠️ 2026-08-05 HALF measured: the platform-population read ran live (11 stations / 21 colonists waiting / 8 trains) but the penalty half is UNMEASURED — every train sampled read `spent_time=nil` (4 of 8 sampled), a reader gap, not a verdict; stays `fixed`, not re-earned
+### Rider — F21: re-earn `tested` for the wait-time fix · Status: unrun — optional · ⭐⭐ **2026-08-10 THE PENALTY HALF IS MEASURED AND THE FIX WAS WITNESSED FIRING** (`corun-batch-2`): one named colonist watched across a real, unforced boarding — `start_wait 239310758 -> 239344642`, **+33,884 ms to the boarding moment**, after 205 polls reading `Waiting`. The 2026-08-05 `spent_time=nil` was our reader, not the game. ⚠️ Still NOT re-earned as `tested` — one boarding is an instance, not a keyboard pass · **mode: co-run ride-along** (routing 2026-08-04) · ⚠️ 2026-08-05 HALF measured: the platform-population read ran live (11 stations / 21 colonists waiting / 8 trains) but the penalty half is UNMEASURED — every train sampled read `spent_time=nil` (4 of 8 sampled), a reader gap, not a verdict; stays `fixed`, not re-earned
 **Bug:** the fix (platform waiting no longer billed as travel time) passed
 PT-43, but the Tier-2 rewrite replaced the mechanism that pass exercised, so
 F21 was honestly downgraded to `fixed`. Two quick reads on any working train
@@ -645,7 +740,7 @@ Dust Sickness carriers (PT-27 gets you there).
 3. Compare the drops — the agent reads the pattern (not exact numbers) against
    the entry.
 
-### PT-47 — Bombardment volley shape (F26) · Status: unrun · **mode: co-run** (routing 2026-08-04 — your eyes: scatter-vs-rank; forcing + integrity checks rig-side)
+### PT-47 — Bombardment volley shape (F26) · Status: ⭐ **RAN 2026-08-10** (`corun-batch-2` leg R, five forced volleys) — spread reads as a **scatter** from a low camera (your words: "trails seemed scattered"), volley **ENDS 5/5**, dome crack **POSITIVE** ("Hoffman #1 - 3 fractures"), notification **appears**, interception **POSITIVE** via your own MDS-on/off A/B (peak 5/6/6 → 7/7). Only **decal fade** is unsampled — no working instrument. ⛔ NOT `tested`: the volley is forced. Full readings + the three reader defects on `agent/bugs/F26.md` · **mode: co-run** (routing 2026-08-04 — your eyes: scatter-vs-rank; forcing + integrity checks rig-side)
 **Bug:** Mystery 7 bombardment missiles flew in a parallel rank instead of a
 scatter. The fix is the pack's largest copied function (100 lines), so
 "nothing else about a bombardment broke" is half the test. → [F26](agent/bugs/F26.md)
@@ -770,7 +865,7 @@ Entry (incl. the same-day correction to an earlier, wrong reason for this).
    (Predictions P1-P13 and the four setup traps: archive snapshot; the re-run
    musts incl. P14: entry.)
 
-### PT-53 — Cohort housing, Trigger E (D07) · Status: partial (A-D passed; E owed) · **mode: co-run** (routing 2026-08-04 — two hands moments: the manual assign, the Mod-Manager disable; the load-clean read is log) · ⚠️ 2026-08-05: E's precedence half ROUTED (fixture unholdable — every slot created was consumed in seconds; a design decision went to you instead, item 2 above); in-dome pass MEASURED at colony scale (76→37); **only the uninstall half below is still runnable as written**
+### PT-53 — Cohort housing, Trigger E (D07) · Status: partial (A-D passed; E owed) · **mode: co-run** (routing 2026-08-04 — two hands moments: the manual assign, the Mod-Manager disable; the load-clean read is log) · ⚠️ 2026-08-05: E's precedence half ROUTED (fixture unholdable — every slot created was consumed in seconds; a design decision went to you instead, item 2 above); in-dome pass MEASURED at colony scale (76→37); **only the uninstall half below is still runnable as written**; ⭐ **the UNINSTALL half RAN 2026-08-10 (`corun-batch-2` leg T) and is CLEAN** — `pack=0/0 active`, zero engine errors, zero new log lines after a minute of play. ⛔ **But it took two attempts: a Mod-Manager disable does NOT take effect until a full game restart** (first attempt read `pack=81/81` and would have banked a clean log of the pack RUNNING). See decision 6 above and `agent/bugs/D13.md`
 **Bug:** Seniors/Children in normal housing move to free cohort slots and are
 otherwise left alone — triggers A-D passed live ("it worked wonderfully").
 Only E remains: player-order precedence and the uninstall shape.
@@ -852,7 +947,7 @@ over a non-zero unit-entry population refutes the entry; a `0` over zero
 entries samples nothing. Non-zero confirms the desync and the follow-up is to
 demolish that passage and watch whether an unrelated colonist teleports to it.
 
-### Rider — F99: re-read the track residue BEFORE a reload · Status: **unrun — the rig RAN the recipe 2026-08-04 and the rider's own precondition never arose** · **mode: unattended, STAGEABLE** (routing 2026-08-04 — the rig stages break + cheat + pre-reload read deliberately; owner-rule chain applies: Opus runs, Fable audits. The old TAKEABLE-WHEN framing — wait for a sitting to happen to use the cheat — is superseded)
+### Rider — F99: re-read the track residue BEFORE a reload · Status: **unrun — the rig RAN the recipe 2026-08-04 and the rider's own precondition never arose; ⚠️ 2026-08-05 added TWO MORE witnessed attempts (meteor repairs on one track, 201 new-build sites across three tracks with the merge confirmed) and `TrackElement.lua:805` did not fire in either, so the gate still never opened — three attempts, zero throws, rate bounds only** · **mode: unattended, STAGEABLE** (routing 2026-08-04 — the rig stages break + cheat + pre-reload read deliberately; owner-rule chain applies: Opus runs, Fable audits. The old TAKEABLE-WHEN framing — wait for a sitting to happen to use the cheat — is superseded)
 ⭐ **What the 2026-08-04 attempt (unattended-1 leg B) established:** one staged
 break + `CheatCompleteAllConstructions()` produced **zero** `:805` throws, so
 the "if `:805` appears" gate below never opened — the rider needs a run in
@@ -931,7 +1026,7 @@ reachability audit's verdict. → [F06](agent/bugs/F06.md)
 
 # Any-save & factions
 
-### PT-35 — Save sanitizer does no harm (F35, F03) · Status: unrun (case A only; B/C parked) — ⭐ case A RAN unattended 2026-08-04: do-no-harm half PASSES, turbine half UNSAMPLED (fixture gap, see below) · **mode: UNATTENDED** (routing 2026-08-04 — all reads numeric + save/reload; owner-rule chain: Opus runs, Fable audits)
+### PT-35 — Save sanitizer does no harm (F35, F03) · Status: unrun (case A only; B/C parked) — ⭐ case A RAN unattended 2026-08-04: do-no-harm half PASSES, turbine half UNSAMPLED (fixture gap, see below) · ✅✅ **THE FIXTURE GAP IS CLOSED 2026-08-10** — `PT35FIXTURE.savegame.sav` is in your save folder (`corun-batch-2` leg S): FrictionlessComposites researched, **one Large Wind Turbine**, **one applied building upgrade** (Remote Medic on a Hospital, for the F03 half). **The turbine-half re-run is now an unblocked 2-prompt unattended chain** — nothing of yours needed. ⛔ Do not delete that save · **mode: UNATTENDED** (routing 2026-08-04 — all reads numeric + save/reload; owner-rule chain: Opus runs, Fable audits)
 **Bug:** the pack's two sanitizer passes run automatically on every load for
 every player, and the F03 pass REMOVES label modifiers from persisted colony
 state — this is the do-no-harm check on auto-running save-writing code, and
