@@ -452,6 +452,13 @@ not an achievement.
   stranded there for a day and surfaced only because a co-run happened to look),
   and a co-run touches both repos by construction. A stranded edit is a finding
   to route, never something to quietly commit or discard.
+  ⛔ **And close-out LISTS THE SAVE DIRECTORY against the brief's expected
+  survivors (adopted 2026-08-10)** — the git gate never looks there, and the
+  same four staged saves were falsely recorded deleted by TWO independent
+  sessions (batch-1's audit and batch-2's prep) before batch-2's sitting made
+  the listing part of close-out and the audit re-checked it hours later
+  (deletion held). A "deleted" claim without a directory listing after it is
+  not a record. The Steam-Cloud restore hypothesis stays open (checklist).
 - ⛔ **Attended-sitting classes from `corun-batch-1` (2026-08-05; 8-entry
   ledger, first BATCHED attended sitting — the classes the unattended ledger
   could not see). Every attended brief guards against these:**
@@ -484,6 +491,47 @@ not an achievement.
   6. **Static-audit sweeps over-claim**: two scripted audits produced four
      distinct false-positive classes; only per-candidate source reading may
      file. Claim only what was read.
+- ⛔ **Attended-sitting classes from `corun-batch-2` (2026-08-10; 14-entry
+  ledger, 0 the game's fault — and rules 1 and 3 above BOTH recurred: prep
+  inherited nothing and still briefed three wrong facts, because the failures
+  were its own readers, not staleness). Every attended brief also guards
+  against these:**
+  1. **Every owner-typed console line is pre-flighted for THREAD CONTEXT, not
+     just resolution** — four `Sleep()`-carrying entry points were briefed
+     bare, and the bare console has no thread context (`PLAYTEST_HELP.md`);
+     a resolution gate cannot see this. The `*r` prefix is part of the
+     briefed line, never assumed.
+  2. **The brief names the LOAD MECHANISM for every staged copy** —
+     `Copy-Item` duplicates the display name, so staged saves are
+     indistinguishable in the in-game load list; loading is a console
+     `CB2.Load("<filename>")` line, and the brief budgets it.
+  3. **Engine-name resolution is part of the pre-flight** — three reader
+     defects in ONE function (`DefenceTowerBase`→`MDSLaser`, a `MapGet` key
+     returning non-table, a guessed field name) each printed a plausible
+     zero forever, and a gate that only resolves the harness's own namespace
+     (G1) sees none of them. Every engine label/key/field a reader consumes
+     gets one live read at confirm time.
+  4. **A leg whose measure crosses its own save takes a reading IMMEDIATELY
+     before the save, inside the same call** (run 1 of the keystone was void
+     for want of one — and cost the leg a full re-run); **a leg that ANSWERS
+     a popup counts the outcome's named target BEFORE answering** (the reply
+     text names it for free; only a leftover save rescued the card).
+  5. **Save liveness is witnessed by the file system, not the API** —
+     `Savegame.ListForTag` regressed from proven (57→58) to non-table on the
+     same build six days later ([[EF-049]]). On-disk size/mtime + load-back.
+  6. **Absence verdicts never come from a mid-session log read** — the engine
+     flushes a large tail only at exit ([[EF-047]]); a mid-sitting instrument
+     recorded "zero output" whose five lines are all in the final log. Read
+     for PRESENCE mid-session; read for ABSENCE only in the archived file.
+  7. **A process-mutation leg states its RESTART requirement, and a
+     `ReadConditions`-class gate precedes every post-mutation reading** — a
+     Mod-Manager disable without a full restart leaves code live with its
+     permanent gone (D13's fourth OFF state); the gate is the only reason a
+     clean log of the pack RUNNING was not banked as a clean uninstall.
+  8. **Source line numbers in a brief are marked Src-verified or
+     trust-carried** — the sitting machine has no `ModTools\Src`, so nothing
+     can be Src-checked live; an unmarked line number reads as verified and
+     is not.
 
 **Checklist convention:** riders whose precondition is this mode are tagged
 **TAKEABLE IN a co-run** (a rider class alongside TAKEABLE WHEN). Sessions

@@ -77,7 +77,11 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    Steam is running would get restored from the cloud — which would explain two
    honest sessions both recording a deletion that didn't stick. **Unverified.**
    If you'd rather we stop deleting your saves entirely and just list them for
-   you, say so — that's a reasonable answer too.
+   you, say so — that's a reasonable answer too. *(Audit re-check, later the
+   same day: the deletion HELD this time — none of the 15 have returned, and
+   `PT35FIXTURE` + `TEST2H TRAIN` verify byte-exact. So either the hypothesis
+   is wrong, or the earlier deletions were made under a condition this one
+   avoided. The one-line question above still stands.)*
 8. **⚖️ There is uncommitted work in the repo that isn't ours, including an
    answer of yours nobody recorded.** The `F101` decision and this morning's prep
    routing were both left uncommitted (prep reported clean trees and pushed
@@ -86,6 +90,20 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    like a risk for a bunch of weird bug cases"*. That reads like a **decision on
    `D07`**, and it isn't recorded as one anywhere. **Confirm and we'll strike the
    item; correct us and we'll fix it.** → `agent/bugs/D07.md`.
+
+**⚖️ What the audit changed (2026-08-10, terminal audit of the sitting — every
+verdict above SUSTAINED; four corrections to the record, none of which flips a
+result):** the "unattributed modal" at ~16:02 **is in the log** — it was the
+keystone test's own first storybit, whose popup was answered after a reload
+(the sitting's "it's in no log" was wrong; run 1 stays void, run 2 carries the
+pass). The mid-sitting instrument recorded as "produced zero output" **did
+print** — the game only flushes its log tail at exit, so the check couldn't
+see it (that flush behavior is now a recorded fact). The keystone's run-1 gap
+was ~15 minutes, not ~8. And prep's wrong "0 defence towers" figure was NOT
+inherited from batch-1 — prep re-read it live through the same broken reader.
+⭐ One NEW find from reading the whole log: a single vanilla engine error line
+during the bombardment window (a rocket departure hitting an invalid station
+position) — filed as `C45`, one occurrence, nothing owed from you.
 
 ### ⭐ NEW 2026-08-05 — from the `corun-batch-1` sitting (four calls, all yours)
 
@@ -740,20 +758,6 @@ Dust Sickness carriers (PT-27 gets you there).
 3. Compare the drops — the agent reads the pattern (not exact numbers) against
    the entry.
 
-### PT-47 — Bombardment volley shape (F26) · Status: ⭐ **RAN 2026-08-10** (`corun-batch-2` leg R, five forced volleys) — spread reads as a **scatter** from a low camera (your words: "trails seemed scattered"), volley **ENDS 5/5**, dome crack **POSITIVE** ("Hoffman #1 - 3 fractures"), notification **appears**, interception **POSITIVE** via your own MDS-on/off A/B (peak 5/6/6 → 7/7). Only **decal fade** is unsampled — no working instrument. ⛔ NOT `tested`: the volley is forced. Full readings + the three reader defects on `agent/bugs/F26.md` · **mode: co-run** (routing 2026-08-04 — your eyes: scatter-vs-rank; forcing + integrity checks rig-side)
-**Bug:** Mystery 7 bombardment missiles flew in a parallel rank instead of a
-scatter. The fix is the pack's largest copied function (100 lines), so
-"nothing else about a bombardment broke" is half the test. → [F26](agent/bugs/F26.md)
-**Requirements:** a Mystery 7 bombardment, or any save + the console force
-(the agent hands it, entry) / a low camera angle so the trails are visible.
-**Setup:**
-1. Watch a volley arrive — scatter, not a rank.
-2. The agent walks the five integrity checks from the entry (decals, dome
-   cracks, notification, interception, and the volley ENDING).
-3. Log check for bombardment errors.
-**Good to have:** an off/on A/B of the spread — that is the reachability
-audit's settling observation for F26.
-
 ### Rider — F90: underground breaks during a surface storm · Status: unrun · **mode: co-run, STAGEABLE** (routing correction 2026-08-04 — `CheatDustStorm` is real and ungated, so the storm can be forced on a staged elevator-colony copy; the break DISTRIBUTION stays the organic measured path. An organic storm sighting still counts — take it if one arrives first)
 **Bug:** surface dust storms could break cables/pipes on the underground map
 through the merged elevator grid. The defect is a victim *distribution*, so
@@ -918,7 +922,7 @@ our copy).
 that stopped happening, falsifies the conversion — say so and the copy form
 comes back from git (`3a6512f^`).
 
-### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through · ⭐ mechanism link CLOSED 2026-08-04 · ⚠️ 2026-08-05: a WITHIN-SESSION read finally ran (no save/load since traffic) and was STILL unsampled — 0 unit entries over 4 passages; the gap now needs a **traversal witness** (a colonist seen inside a passage element), not merely generated traffic
+### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through · ⭐ mechanism link CLOSED 2026-08-04 · ⚠️ 2026-08-05: a WITHIN-SESSION read finally ran (no save/load since traffic) and was STILL unsampled — 0 unit entries over 4 passages; the gap now needs a **traversal witness** (a colonist seen inside a passage element), not merely generated traffic · ⛔ 2026-08-10: the dedicated witness poller ran (`corun-batch-2` prep) — **90 tries × 1 s at speed 20, `units` empty every sweep** — so THIS save cannot sample it; the TAKEABLE-WHEN condition is now "a colony where passages are demonstrably a colonist route", and no zero from `TEST2H TRAIN` may be quoted against the entry (C42 entry, 2026-08-10)
 **Bug:** `PassageBase:TraverseTunnel` ends with a raw `unit.holder = nil`
 (`Lua/Passage.lua:1055`), which skips the call that would remove the colonist
 from the last passage element's `units` list. If so, demolishing that passage
@@ -947,7 +951,7 @@ over a non-zero unit-entry population refutes the entry; a `0` over zero
 entries samples nothing. Non-zero confirms the desync and the follow-up is to
 demolish that passage and watch whether an unrelated colonist teleports to it.
 
-### Rider — F99: re-read the track residue BEFORE a reload · Status: **unrun — the rig RAN the recipe 2026-08-04 and the rider's own precondition never arose; ⚠️ 2026-08-05 added TWO MORE witnessed attempts (meteor repairs on one track, 201 new-build sites across three tracks with the merge confirmed) and `TrackElement.lua:805` did not fire in either, so the gate still never opened — three attempts, zero throws, rate bounds only** · **mode: unattended, STAGEABLE** (routing 2026-08-04 — the rig stages break + cheat + pre-reload read deliberately; owner-rule chain applies: Opus runs, Fable audits. The old TAKEABLE-WHEN framing — wait for a sitting to happen to use the cheat — is superseded)
+### Rider — F99: re-read the track residue BEFORE a reload · Status: **unrun — the rig RAN the recipe 2026-08-04 and the rider's own precondition never arose; ⚠️ 2026-08-05 added TWO MORE witnessed attempts (meteor repairs on one track, 201 new-build sites across three tracks with the merge confirmed) and `TrackElement.lua:805` did not fire in either, so the gate still never opened — three attempts, zero throws, rate bounds only; ⭐ 2026-08-10 a FOURTH witnessed zero (`corun-batch-2` leg Q — the 2×2's last empty cell: repair sites on 2 DISTINCT tracks completed together, sites 2→0, residue read `0 0` before any save/load) — the `:805` gate has still never opened** · **mode: unattended, STAGEABLE** (routing 2026-08-04 — the rig stages break + cheat + pre-reload read deliberately; owner-rule chain applies: Opus runs, Fable audits. The old TAKEABLE-WHEN framing — wait for a sitting to happen to use the cheat — is superseded)
 ⭐ **What the 2026-08-04 attempt (unattended-1 leg B) established:** one staged
 break + `CheatCompleteAllConstructions()` produced **zero** `:805` throws, so
 the "if `:805` appears" gate below never opened — the rider needs a run in
@@ -1152,7 +1156,7 @@ over a real session of ordinary play.
    broken track — Test Kit, PLAYTEST_HELP).
 3. Log review per the protocol.
 
-### PT-20 — Uninstall safety · Status: standing — re-run per era and before release · **mode: co-run** (routing 2026-08-04 — you keep the disable click + the 10 min play; save/reload/log reads rig-side)
+### PT-20 — Uninstall safety · Status: standing — re-run per era and before release · ⛔ **2026-08-10: a Mod-Manager disable does NOT take effect until a FULL game restart** (D13, measured) — the prior 98-vs-98 comparison may have sampled the mixed state, and whether it gets redone is **decision 6 above**; any future run of this test restarts the game after the disable click · **mode: co-run** (routing 2026-08-04 — you keep the disable click + the 10 min play; save/reload/log reads rig-side)
 **Bug:** the pack must never hold a save hostage. Steps 1-4 passed 2026-07-31;
 step 5's hunt found F86 (both sites since repaired — PT-58 measured the same
 shape at ZERO errors against leg 5's 80). This is the per-era re-check, not an
@@ -1168,20 +1172,7 @@ minutes.
 4. Log: zero errors naming pack code. The agent pulls the full step-5 hunt and
    the 2026-07-31 method corrections from the archive snapshot before running.
 
-### Rider — popup-audit keystone: storybits survive save/load · Status: unrun · **mode: co-run ride-along** (routing 2026-08-04)
-**Bug:** the ~5-minute console check that a popup-carrying storybit thread
-survives a save taken under its corner notification, and that answering it
-afterwards still applies the outcome. Settles the popup audit's keystone.
-→ `docs/agent/reports/POPUP_CONSEQUENCE_AUDIT.md` §8 (procedure).
-**Requirements:** any save / console open.
-
-### Rider — F85: quicksave under a choice popup · Status: unrun · **mode: co-run moment** (routing 2026-08-04 — the rebind + keypress are hands)
-**Bug:** rebind Quick Save to F9, open any choice popup (a launch-issue prompt
-is cheapest), press it — does a save land, and does loading it void the
-choice? → [F85](agent/bugs/F85.md)
-**Requirements:** any save / a cheap choice popup.
-
-### Rider — §3.6 corner (optional): the sol-change autosave under a popup · Status: unrun · **mode: co-run ride-along** (routing 2026-08-04)
+### Rider — §3.6 corner (optional): the sol-change autosave under a popup · Status: unrun — was M3 in `corun-batch-2` (2026-08-10) and was NOT reached (no sol boundary came near); ⭐ **now the interesting popup half**: F85's route refutation makes this the one popup that does NOT pause, i.e. the only place a vanilla autosave can reach a save under a popup with no rebind involved (F85 entry, 2026-08-10) · **mode: co-run ride-along** (routing 2026-08-04)
 **Bug:** with the distress-call popup left open, does the sol-change autosave
 fire under it? → `POPUP_CONSEQUENCE_AUDIT.md` §3.6.
 **Requirements:** any save approaching a sol change.

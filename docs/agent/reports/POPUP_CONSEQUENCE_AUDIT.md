@@ -444,6 +444,14 @@ entries, not F83):
    g_StoryBitActive[1].run_thread)` — expect **true** (thread survived) → click
    the notification → popup must open; answer it → outcome popup/effects must
    run. Also confirms sequence popups by mechanism-identity. ~5 min.
+   ⭐⭐ **ANSWERED 2026-08-10 (`corun-batch-2` leg P): BOTH HALVES PASS** —
+   thread survives (active=1 before/after, handle rebuilt across the load) and
+   the post-reload answer applies its named outcome (owner-verified against
+   the pre-answer save). §1c/§4 are CONFIRMED BY EXECUTION, no longer
+   inference. Record: `PLAYTEST_ARCHIVE.md` (keystone rider) + SESSION_LOG
+   2026-08-10. ⚠️ The sitting's void first run left one open margin note: a
+   storybit popup was answerable after a reload while `g_StoryBitActive` read
+   0 — unread state, recorded on the archived rider, does not touch the pass.
 2. **Detailed Scan recoverability** (grades F83's second site, §7.2): let a
    `ReconCenterDiscoveryAsteroid` popup die across a reload (or just decline
    choice 2 on a live one), then check whether the planetary view / asteroid UI
@@ -455,6 +463,12 @@ entries, not F83):
    the cheapest), press F9. Does a save land? Then load it: the popup should be
    gone and its consequence gone with it. If the binding UI refuses or the
    save is blocked, F85 drops toward I/R4 and is a documentation note only.
+   ⛔⛔ **RAN 2026-08-10 (`corun-batch-2` leg P) and this fork CANNOT EXPRESS
+   THE RESULT** — there is NO save action in the retail key-bindings screen
+   (the rebind route is dead), while a timer-driven save DID land 39 s inside
+   the open modal and voided the choice on reload. Defect real, named route
+   nonexistent — third cell, routed to the owner (checklist item 5, F85
+   entry 2026-08-10). §3.6 (item 4 below) is now the interesting half.
 4. **(Optional, completes §3.6)** With the distress-call popup left open, let a
    sol tick pass and confirm the autosave fires under it (the only popup window
    where the game runs). Confirms the compound corner's precondition; the

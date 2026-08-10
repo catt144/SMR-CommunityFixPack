@@ -8,6 +8,126 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-10 — `corun-batch-2` CLOSED (prompt 3, Fable terminal audit): every leg verdict sustained, five record corrections, one new vanilla candidate, the folder is empty
+
+**The second batched attended co-run chain is complete** — prep (Opus,
+unattended) → sitting (Opus, owner at the keyboard) → this audit (Fable). The
+chain's files (README, this prompt, the 4 parked sources) survive in git at
+**`7110384`** (`git show 7110384:docs/agent/prompts/corun-batch-2/README.md`
+etc.); the folder is deleted in this commit.
+
+**Audit verdict (Job 1, every upstream claim vs the archived logs): EVERY
+per-leg verdict SUSTAINED.** Both new logs are byte-identical to the on-disk
+originals over their FULL length — the first chain with no unarchived tail,
+because the sitting archived after process exit — and all three cited logs
+`git show`-verify. Cell-by-cell: the keystone's three same-subject reads with
+the middle one immediately before the save, thread handle rebuilt across the
+load; F85's ordering witness holds in the log's own line order (popup
+`1:10:59` → save `1:11:38-39`, techs 50 on both sides); leg Q's two 3-way
+break witnesses, sites 2→0, zero `:805` anywhere; **all five `StartBombard`
+first-executions carry printed `pcall` results**, plus one PAUSED refusal the
+gate caught; leg S's grant before/after (`researched false→1`,
+`discovered nil→163`) and the fixture save; leg T's attempt-1 void is real
+(`pack=81/81` after the disable) and attempt-2's process is clean with all six
+pack-naming lines accounted for. Commit discipline clean: probes deleted,
+sweeps present, staged saves dead, `PT35FIXTURE.savegame.sav` named in the
+recording commit and on disk (54,424,001 B), `TEST2H TRAIN` MD5
+`103B320A…8958` / mtime 2026-08-03 22:21:48 unchanged, both trees clean.
+Ledger claims audited too: S10's cited line numbers (2787/2829) are exact;
+**S11 re-checked hours after close-out — the deletion HELD**, none of the 15
+returned (a datum consistent with the Steam-Cloud hypothesis being wrong, not
+a test of it — the owner question stands).
+
+**What the audit caught — five corrections (none flips a verdict), one filing:**
+
+- ⛔ **The "unattributed modal at ~16:02" IS in the log, and it was the
+  keystone's own.** `Story bits: Reply selected - I can't say no to a hopeless
+  romantic; let's have us some fireworks!` — sitting log line 378, uptime
+  0:32:15 ≈ wall 16:02:31: run 1's `AnythingForLove`, answered ~95 s after the
+  reload whose read said `g_StoryBitActive=0`. The handoff's "it is in NO log"
+  and "it was not the keystone's" are both wrong, and run 1's "it expired
+  before the save" story is amended: the bit reached its POPUP phase and was
+  still answerable post-reload while the active table read empty — a state
+  nothing read, recorded as an open margin note (archived rider + POPUP audit
+  §8), touching nothing in run 2's pass.
+- ⛔ **Ledger S5 is factually wrong: `PEFFECT` printed.** Five `[mod]` lines at
+  0:32:18 (log:379-383) — the def plus 4 children (2 replies/2 outcomes: the
+  2-reply bit it was inspecting). "ModLog is not reachable from the console
+  sandbox" is refuted by those lines' own prefix. The false record's cause is
+  the flush trap the handoff itself discovered: an ABSENCE verdict taken from
+  a mid-session read of a lazily-flushed log (→ `facts/EF-047`). The
+  witness-discipline recurrence stands — with a printed `pcall` the session
+  would have known it ran.
+- **Run 1's gap was ~15 m 20 s** (activation 0:15:06 → save 0:30:26), not the
+  "~8 minutes" in the card, the commit message and the sitting record below.
+  Run 1 stays VOID either way.
+- **Prep's "0 defence towers" was NOT inherited** — `cb2confirm` STEP 6 walked
+  `DefenceTowerBase` LIVE that morning (0 of a label that is not the class).
+  A broken reader replicating its own zero, not a staleness failure; corrected
+  on F26. The distinction matters: the archive cross-check rule WORKED — the
+  missing guard is live verification of engine names and UI routes.
+- **Leg R's "0 engine error lines across the whole log" was true only of
+  `[LUA ERROR]`.** One vanilla `[ERROR]` with an 11-frame stack sits at
+  1:28:33, between volleys 3 and 4: `Quantum Comet invalid pos with no holder`
+  — a departing rocket's colonist-route read (`GenerateDepartures` →
+  `CanReachByTrain` → `GetStartingPoint` → `Station.lua:1254`). First-seen in
+  any archived log, no pack frame, unreported upstream. **Filed as `C45`**
+  (cand, ONE occurrence, bombardment-collateral vs organic NOT established,
+  settling = a passive grep of future logs). A/B confounds also annotated on
+  F26 (volley 3 hit a different dome; volley 5 ran at speed 1; the same-dome
+  same-speed signature 5, 6 → 7 stands).
+
+**Integration.** PT-47 and the keystone + F85 riders moved WHOLE to
+`PLAYTEST_ARCHIVE.md` with their verdicts (PT-47's decal-fade and
+notification-CLEARING residue recorded THERE as not-owed — no working
+instrument and no live line left open); the §3.6 rider stays and is now the
+interesting popup half (the one `dont_pause` window); F99's rider records a
+4th witnessed zero; C42's rider records that this save cannot sample it;
+PT-20 carries the full-restart rule. New facts: `EF-047` (log tail flushes
+only at exit — mid-session reads are partial), `EF-048` (four truthy
+non-boolean returns; `== true` is a reader defect), `EF-049` (`ListForTag`
+witness regression). D13, F85, F99, F21, F26, F35, F101 verified carrying
+their verdicts as written by the sitting.
+
+**Ledger delta vs batch-1's 8 (and unattended-1's 8): 14 entries, 3
+recurrences.** RECURRING — and a rule that fails twice is a broken rule:
+**S4** (engine-name reader defects, the F21 `spent_time` class's third
+appearance; repair = Co-runs batch-2 rule 3, every engine name a reader
+consumes gets one live read at confirm time); **S5** (mid-chain instrument
+without witness discipline — batch-1's rule 3 recurring, compounded by the
+flush trap; rules 4 and 6); **S11** (a false "deleted" record for the SAME
+four files, second independent session; repair = the save-directory listing
+is now part of close-out — WORKFLOW Co-runs — and its first enforced run
+held). NEW: S1/S2/S3/S6/S7/S9/S10/S12/S14 → the batch-2 block, rules 1–8.
+
+**Economics, scored per the override rule — the owner made NO scoring ruling
+this sitting, so everything is scorable; their three deviations each BOUGHT
+evidence (the MDS A/B, the ~1-minute baseline recovery that closed prediction
+2, the keybind challenge that refuted F85's route).** ≈75 attended minutes
+against 33–36 promised, every overrun minute rig-side and itemised: M1 ~16 vs
+6 (no pre-save read; the ~15-minute conversational gap), M2 ~15 vs 5 (~2 min
+hunting a keybinding that does not exist), M5 ~12 vs 4 (five volleys including
+the owner's A/B — overrun that bought the control), M7 ~10 vs 5 (the restart
+nobody knew was required), console ~12 vs 8 (28 lines typed vs 16 budgeted).
+⛔ Not claimed: minutes "saved", anywhere; or that the co-run program is
+validated — this is the delta, reported.
+
+**`CHAIN_METHOD.md`: deliberately NO new row.** The simplest-first ordering
+rule was queued for its first real test and never got one — no course change
+happened, no split, no stop condition fired. A 2× overrun with zero legs cut
+says nothing about ordering either way. Bank-incrementally did its work (seven
+cards written the moment each leg closed; all seven audit-verified against the
+logs) — but that is batch-1's lesson already on record, not a new one.
+
+**Owed to the owner — 4 decisions, all already on the checklist (items 5–8):**
+F85's third cell · the 4th OFF state + whether PT-20 gets redone · the
+save-directory gate + Steam-Cloud hypothesis (now with the audit's
+deletion-held datum) · the uncommitted-tree/D07-answer confirmation. **Routed
+gaps, none owner-blocking:** §3.6/M3 (TAKEABLE, now the interesting half) ·
+decal fade (no instrument on either side) · notification CLEARING · C42
+(needs a passage-traffic fixture, not a better poller) · C45 (passive grep of
+future logs) · the active=0-but-answerable storybit state (margin note).
+
 ## 2026-08-10 — `corun-batch-2` THE ATTENDED SITTING (Opus, owner at the keyboard): all seven legs ran, nine predictions held, and the rig broke in fourteen places
 
 **Logs** `archive/cb2sitting_Mars.exe-20260810-15.30.16.log` (152,783 B, 2,881

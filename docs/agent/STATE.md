@@ -8,20 +8,22 @@ Current only, rewritten in place; history newest-first in
 ## Where the project is
 
 ✅✅ 18-prompt chain COMPLETE 2026-08-03; playtest campaign is the main line.
-⭐⭐ corun-rig + `unattended-1` CLOSED 2026-08-04 (SAVE primitive PROVEN, tiers
-ADOPTED) · **`corun-batch-1` CLOSED 2026-08-05**, every verdict SUSTAINED —
-PT-37 case A PASS, case B UNSAMPLED, D07 4-of-5, E's precedence ROUTED.
-⭐⭐ **`corun-batch-2` SITTING RAN 2026-08-10 — ALL 7 LEGS, 9 predictions HELD, 0
-FALSIFIED, 0 `[LUA ERROR]`** (logs `archive/cb2sitting_…15.30.16.log` +
-`cb2uninstall_…17.20.20.log`; ≈75 attended min vs 33–36, overrun all rig-side):
-⭐ **popup KEYSTONE ANSWERED** (a storybit popup survives save/load AND still
-applies its outcome); ⭐ **F21 restamp WITNESSED** organically (+33,884 ms), NOT
-`tested`; **F85 CONFIRMED on its own site, ROUTE REFUTED** ⇒ owner; **F99's last
-2×2 cell FILLED**, 0 throws, rate datum only; **PT-47 PASS** on every sampled
-check; **`PT35FIXTURE.savegame.sav` BUILT** (unblocks PT-35's turbine half);
-**PT-53 E CLEAN, but only after a FULL RESTART** ⇒ D13. ⛔ 14-entry ledger, 0 of
-them the game's fault. ⇒ **NEXT: prompt 3 of `agent/prompts/corun-batch-2/` —
-the terminal audit; it empties the folder and closes the chain.**
+⭐⭐ corun-rig + `unattended-1` CLOSED 2026-08-04 (SAVE primitive PROVEN; its
+`ListForTag` witness later died → `EF-049`) · **`corun-batch-1` CLOSED 2026-08-05**.
+⭐⭐ **`corun-batch-2` CLOSED 2026-08-10 — terminal audit: EVERY leg verdict
+SUSTAINED** (7 legs, 9 predictions HELD, 0 `[LUA ERROR]`; ≈75 attended min vs
+33–36, all rig-side): popup KEYSTONE ANSWERED by execution (POPUP audit §8
+item 1); **F21 restamp WITNESSED organically**, NOT `tested`; **F85 CONFIRMED,
+ROUTE REFUTED** ⇒ owner (3rd cell); **F99's 2×2 FULL** (4th zero, stays
+`cand`); **PT-47 PASS** ⇒ ARCHIVED (+ keystone/F85 riders);
+**`PT35FIXTURE.savegame.sav` BUILT, audit-verified**; **PT-53 E CLEAN after a
+FULL RESTART** ⇒ D13's 4th OFF state. ⚖️ 5 audit corrections, all
+verdict-neutral (the ~16:02 modal IS in the log — run 1's own storybit; the
+"zero output" instrument DID print — flush-at-exit `EF-047`; details
+SESSION_LOG). ⭐ NEW: **C45** (vanilla rocket-departure `[ERROR]`, one
+occurrence) · facts EF-047/048/049 · WORKFLOW "Co-runs" batch-2 rules 1–8.
+⇒ **NEXT: PT-35 leg A turbine-half re-run — a cheap 2-prompt UNATTENDED chain
+(Opus runs, Fable audits); fixture exists; the chain is NOT YET AUTHORED.**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -30,15 +32,14 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 81 registered (74 default-active, 8 optional-gated files)
 - Code/*.lua files: 82
 - TestKit probes: 87
-- BUGS index rows: 101 F + 12 D + 44 C
+- BUGS index rows: 101 F + 12 D + 45 C
 ```
 
 Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 
 ⚖️ **F76 CLOSED-REFUTED**, residue **`C41`**. ✅ **F11** route (a) SETTLED, ⛔ NOT
-`tested`. ⚠️ **F99 (`cand`)** cheat-only — 0-in-4 organic + 0-in-3 cheat-driven,
-**2×2 now FULL**; rate bounds NOT refutation. ⚠️ **C42 (`cand`)** 3 empty
-denominators. ⭐ **PROBE COVERAGE** — `[install]` 87/0; ⛔ **retail 78/87.**
+`tested`. ⚠️ **F99 (`cand`)** — 2×2 FULL, 4 witnessed zeros, NOT refutation.
+⚠️ **C42 (`cand`)** — this save cannot sample it. ⛔ **retail probes 78/87.**
 
 ## Gates and holds
 
@@ -47,14 +48,13 @@ denominators. ⭐ **PROBE COVERAGE** — `[install]` 87/0; ⛔ **retail 78/87.**
 - ⭐ **F02 · F78 · F81 ORGANIC 2026-08-03 and ALL THREE again 2026-08-05** (entries).
 - **F42** `blocked`, wontfix recommended. **D08 extender overhaul** speced in
   `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
-- ⛔⛔ **Close-out save-dir gate hole — FAILED TWICE.** Batch-1's audit AND
-  batch-2's prep each recorded deleting the same four staged copies; all four
-  were still on disk 2026-08-10. 15 deleted (~780 MB), `PT35FIXTURE` kept.
-  ⭐ **Untested: does Steam Cloud restore saves deleted while Steam runs?**
-- ⛔ **A Mod-Manager disable needs a FULL RESTART** to unload (D13, measured
-  2026-08-10) — main-menu-only leaves code live with its permanent already gone.
-- **Owner decisions (19 open** — F101 DECIDED `wontfix`; ⭐ 4 NEW from the sitting:
-  F85's third cell · the 4th OFF state + PT-20 · the save-dir gate · the
+- ⛔ **Save-dir close-out gate FAILED TWICE** (same 4 files) — batch-2 listed
+  the dir (15 deleted ~780 MB), audit re-check HELD; now a standing Co-runs
+  rule. ⭐ Steam-Cloud restore hypothesis untested → checklist 7.
+- ⛔ **Mod-Manager disable needs a FULL RESTART** (D13, measured 2026-08-10) —
+  code stays live, permanent already gone; PT-20 re-check = decision 6.
+- **Owner decisions (19 open** — F101 DECIDED `wontfix`; 4 NEW 2026-08-10:
+  F85's third cell · 4th OFF state + PT-20 · save-dir/Steam-Cloud · the
   uncommitted tree incl. an unrecorded D07 answer) → checklist. Relabel OWED.
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
   `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.

@@ -13,6 +13,96 @@ banner says so; nothing in it is a result.
 
 ---
 
+## PT-47 — Bombardment volley shape (F26) — ⭐ **RAN 2026-08-10 (`corun-batch-2` leg R): PASS on every SAMPLED check** · NOT `tested` (volley forced) · moved here by the batch-2 terminal audit
+
+**Result (sitting 2026-08-10, owner at the keyboard; full readings and the
+three agent-side reader defects on `agent/bugs/F26.md`):** five forced
+`StartBombard` volleys — spread reads as a **scatter** from a low camera
+(owner: *"trails seemed scattered"*), volley **ENDS 5/5** (peaks 5/6/6/7/7,
+each with its liveness witness), dome crack **POSITIVE** ("Hoffman #1 - 3
+fractures"), "Incoming Missile" notification **appears**, interception
+**POSITIVE** via the owner's own MDS-on/off A/B (peak 5/6 → 7 same dome, same
+speed). Logs `archive/cb2sitting_Mars.exe-20260810-15.30.16.log`.
+
+⚠️ **Residue, deliberately NOT owed anywhere:** decal fade is UNSAMPLED (no
+working instrument on either side — the `DecRocketSplatter` read returns a
+non-table) and the notification's CLEARING half was not separately confirmed.
+Neither has a live checklist line: F26 stays `fixed`, the entry records both
+gaps, and re-sampling them is only worth scheduling if F26 ever regresses.
+⚖️ Audit note: one vanilla engine `[ERROR]` line sits in the leg's window
+(→ `agent/bugs/C45.md`); it does not name pack code and no verdict rests on it.
+
+The section as it stood on the live checklist, verbatim:
+
+> ### PT-47 — Bombardment volley shape (F26) · **mode: co-run** (routing
+> 2026-08-04 — your eyes: scatter-vs-rank; forcing + integrity checks rig-side)
+> **Bug:** Mystery 7 bombardment missiles flew in a parallel rank instead of a
+> scatter. The fix is the pack's largest copied function (100 lines), so
+> "nothing else about a bombardment broke" is half the test. → F26
+> **Requirements:** a Mystery 7 bombardment, or any save + the console force
+> (the agent hands it, entry) / a low camera angle so the trails are visible.
+> **Setup:**
+> 1. Watch a volley arrive — scatter, not a rank.
+> 2. The agent walks the five integrity checks from the entry (decals, dome
+>    cracks, notification, interception, and the volley ENDING).
+> 3. Log check for bombardment errors.
+> **Good to have:** an off/on A/B of the spread — that is the reachability
+> audit's settling observation for F26. *(The owner supplied exactly this,
+> unprompted, by disabling the MDS lasers for volleys 4–5.)*
+
+## Rider — popup-audit keystone: storybits survive save/load — ⭐⭐ **ANSWERED 2026-08-10 (`corun-batch-2` leg P): BOTH HALVES PASS** · moved here by the batch-2 terminal audit
+
+**Result:** a storybit popup-carrying thread **survives a save/load**
+(`g_StoryBitActive=1` before and after with the read taken immediately before
+the save; run_thread handle rebuilt …ACC4F98 → …C596698 across the load) **and
+answering it after the reload still applies the outcome** (`ArcadiaCross`
+reply 1 taken; its named consequence — an RC Explorer removed — verified by
+the owner's eyes against the pre-answer save: *"yes it disappears"*). This is
+`POPUP_CONSEQUENCE_AUDIT.md` §8 item 1, answered: storybit popups are NOT in
+F85's voidable class — they wait in game time.
+
+⚠️ **Run 1 (`AnythingForLove`) was VOID as a keystone sample** — no read
+between activation and save (the gap was ~15 min by the log's own timestamps,
+not the ~8 min the sitting recorded). ⚖️ **Audit attribution 2026-08-10:** the
+sitting's "unattributed modal at ~16:02, in no log" IS in the log —
+`Story bits: Reply selected - I can't say no to a hopeless romantic…`
+(`cb2sitting…log:378`, 0:32:15 ≈ 16:02:31): run 1's own storybit, whose popup
+was opened and answered ~95 s after a reload whose read said
+`g_StoryBitActive=0`. The bit reached its popup phase rather than vanishing;
+what that active=0-but-answerable state IS was never read and stays an open
+mechanism question on the keystone's margin — it does not touch run 2's PASS.
+
+The rider as it stood, verbatim:
+
+> ### Rider — popup-audit keystone: storybits survive save/load · **mode:
+> co-run ride-along** (routing 2026-08-04)
+> **Bug:** the ~5-minute console check that a popup-carrying storybit thread
+> survives a save taken under its corner notification, and that answering it
+> afterwards still applies the outcome. Settles the popup audit's keystone.
+> → `docs/agent/reports/POPUP_CONSEQUENCE_AUDIT.md` §8 (procedure).
+> **Requirements:** any save / console open.
+
+## Rider — F85: quicksave under a choice popup — ⛔⛔ **RAN 2026-08-10 (`corun-batch-2` leg P): DEFECT CONFIRMED, ROUTE REFUTED — third cell, owner decision** · moved here by the batch-2 terminal audit
+
+**Result:** the rider as written cannot run — **there is no save action in the
+retail key-bindings screen at all** (owner read it twice), so "rebind Quick
+Save to F9" is not a route on this build. A timer-driven save then **landed
+39 s inside the open `ShowBreakthroughChoicePopup` modal** and reloading it
+**voided the choice** (popup gone, available techs still 50). Defect real,
+named route dead — the entry's two-way fork cannot express it. **Severity and
+disposition are the owner's: "Decisions waiting on you" item 5.** Full
+readings: `agent/bugs/F85.md`. The §3.6 distress-call corner is now the
+interesting half and stays live on the checklist.
+
+The rider as it stood, verbatim:
+
+> ### Rider — F85: quicksave under a choice popup · **mode: co-run moment**
+> (routing 2026-08-04 — the rebind + keypress are hands)
+> **Bug:** rebind Quick Save to F9, open any choice popup (a launch-issue
+> prompt is cheapest), press it — does a save land, and does loading it void
+> the choice? → F85
+> **Requirements:** any save / a cheap choice popup.
+
 ## ~~PT-54~~ — Disaster prediction leak, storm wedge, rains deadlock · covered **F78 `Fix_MeteorStormWedge`, F81 `Fix_DisasterPredictionLeak` + `Fix_RainsDeadlock`** — ⛔ **RETIRED UNRUN 2026-08-01, NO RESULTS**
 
 > **This test was never run and must not be run.** Retired by the project
