@@ -1,0 +1,123 @@
+﻿# corun-batch-2 ARM / DISARM script.  Parked source; copy to a scratch .ps1 and run.
+#
+# Rule C11: arming is a script FILE, never an inline one-liner - an inline edit's
+# quoting was mangled once and the game launched unarmed.
+# C11 corollary (unattended-1 I2): never pipe this script's output through
+# Select-Object - a piped consumer terminates the upstream pipeline and can kill
+# the script before its write executes. Nothing here is piped.
+#
+# G5 ARM GATE (binding): after writing, EVERY piece is read BACK OFF DISK and the
+# script exits non-zero if any is missing. A launch never happens on the word of
+# the writer. Cost of the whole failure class it removes: 8 min -> 0.2 s.
+#
+# S3 (corun-batch-1 ledger, 2026-08-05): THIS PARKED FILE CARRIES A BOM. PS 5.1
+#    reads a no-BOM .ps1 as ANSI and any non-ASCII character breaks the parse.
+#    The exact mirror of the BOM-where-unwanted defect below: the same file class
+#    fails in BOTH directions, so the rule is per-file, not global.
+#    Belt and braces, this script's own body is kept ASCII-only.
+#
+# ENCODING, learned the hard way in prep (2026-08-04): PowerShell 5.1's
+#    Set-Content -Encoding utf8 writes a BOM, and it silently prefixed one onto
+#    metadata.lua. The game tolerated it, but it is a diff-visible corruption of a
+#    file that must stay byte-identical when disarmed. Use WriteAllLines with an
+#    explicit NO-BOM encoder for metadata.lua, as below.
+#
+#   Usage:  .\CB2_ARM.ps1 arm-confirm   # 97_CB2Common + 98_CB2Confirm  (prep's own cycle; it DRIVES the game)
+#           .\CB2_ARM.ps1 arm-sitting   # 97_CB2Common + 99_CB2Legs     (the attended sitting; starts nothing)
+#           .\CB2_ARM.ps1 disarm        # deletes all three, restores metadata, sweeps both repos
+
+param([Parameter(Mandatory = $true)][ValidateSet("arm-confirm", "arm-sitting", "disarm")][string]$mode)
+
+$ErrorActionPreference = "Stop"
+$park = "c:\Dev\SMR-BugFixPack\docs\agent\prompts\corun-batch-2"
+$kit  = "c:\Dev\SMR-BugFixPack-TestKit"
+$meta = Join-Path $kit "metadata.lua"
+$noBom = New-Object System.Text.UTF8Encoding($false)
+
+$common  = @{ src = "97_CB2Common.lua.txt";  dst = "Code\97_CB2Common.lua" }
+$confirm = @{ src = "98_CB2Confirm.lua.txt"; dst = "Code\98_CB2Confirm.lua" }
+$legs    = @{ src = "99_CB2Legs.lua.txt";    dst = "Code\99_CB2Legs.lua" }
+
+if ($mode -eq "arm-confirm") { $pairs = @($common, $confirm) }
+elseif ($mode -eq "arm-sitting") { $pairs = @($common, $legs) }
+else { $pairs = @($common, $confirm, $legs) }
+
+$arming = ($mode -ne "disarm")
+
+if ($arming) {
+  foreach ($p in $pairs) {
+    Copy-Item -LiteralPath (Join-Path $park $p.src) -Destination (Join-Path $kit $p.dst) -Force
+    Write-Output ("WROTE " + $p.dst)
+  }
+  $lines = Get-Content -LiteralPath $meta -Encoding UTF8
+  $out = New-Object System.Collections.Generic.List[string]
+  $inserted = $false
+  foreach ($l in $lines) {
+    $out.Add($l)
+    if (-not $inserted -and $l -match '99_FixtureCarry\.lua') {
+      foreach ($p in $pairs) {
+        $leaf = Split-Path $p.dst -Leaf
+        $out.Add(("`t`t`"Code/" + $leaf + "`",  -- TEMPORARY corun-batch-2"))
+      }
+      $inserted = $true
+    }
+  }
+  if (-not $inserted) { Write-Output "ARM FAIL: anchor 99_FixtureCarry.lua not found"; exit 1 }
+  [System.IO.File]::WriteAllLines($meta, $out, $noBom)
+  Write-Output "WROTE metadata.lua (no BOM)"
+} else {
+  foreach ($p in $pairs) {
+    $f = Join-Path $kit $p.dst
+    if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force; Write-Output ("DELETED " + $p.dst) }
+  }
+  $lines = Get-Content -LiteralPath $meta -Encoding UTF8
+  $kept = $lines | Where-Object { $_ -notmatch 'Code/9[789]_CB2' }
+  [System.IO.File]::WriteAllLines($meta, $kept, $noBom)
+  Write-Output ("metadata.lua: removed " + ($lines.Count - $kept.Count) + " line(s), no BOM")
+}
+
+# ---- gate (both directions) --------------------------------------------------
+$fail = $false
+$m = Get-Content -LiteralPath $meta -Raw -Encoding UTF8
+foreach ($p in $pairs) {
+  $f = Join-Path $kit $p.dst
+  $present = Test-Path -LiteralPath $f
+  $listed  = $m -match [regex]::Escape('"Code/' + (Split-Path $p.dst -Leaf) + '"')
+  if ($arming) {
+    if (-not $present) { Write-Output ("ARM GATE FAIL: missing " + $p.dst); $fail = $true }
+    elseif ((Get-Content -LiteralPath $f -Raw -Encoding UTF8) -notmatch 'TEMPORARY') {
+      Write-Output ("ARM GATE FAIL: no TEMPORARY marker in " + $p.dst); $fail = $true
+    } else { Write-Output ("ARM GATE OK   " + $p.dst) }
+    if (-not $listed) { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
+    else { Write-Output ("ARM GATE OK   metadata lists " + $p.dst) }
+  } else {
+    if ($present) { Write-Output ("DISARM FAIL: still present " + $p.dst); $fail = $true }
+    if ($listed)  { Write-Output ("DISARM FAIL: metadata still lists " + $p.dst); $fail = $true }
+  }
+}
+# The SITTING library must NOT start anything by itself - it is console-driven,
+# and the sitting is attended. The CONFIRM payload must, because prep is not.
+if ($mode -eq "arm-sitting") {
+  $legsText = Get-Content -LiteralPath (Join-Path $kit "Code\99_CB2Legs.lua") -Raw -Encoding UTF8
+  if ($legsText -match '(?m)^\s*CB2\.Boot\(\)') { Write-Output "ARM GATE FAIL: 99_CB2Legs calls CB2.Boot() - the sitting is ATTENDED and the game must not drive itself"; $fail = $true }
+  else { Write-Output "ARM GATE OK   99_CB2Legs starts nothing on its own" }
+  if (Test-Path -LiteralPath (Join-Path $kit "Code\98_CB2Confirm.lua")) { Write-Output "ARM GATE FAIL: 98_CB2Confirm is still armed - it DRIVES the game and would fight the sitting"; $fail = $true }
+  else { Write-Output "ARM GATE OK   98_CB2Confirm is not armed" }
+}
+if ($mode -eq "arm-confirm") {
+  $confText = Get-Content -LiteralPath (Join-Path $kit "Code\98_CB2Confirm.lua") -Raw -Encoding UTF8
+  if ($confText -match '(?m)^\s*CB2\.Boot\(\)') { Write-Output "ARM GATE OK   98_CB2Confirm drives itself (unattended by design)" }
+  else { Write-Output "ARM GATE FAIL: 98_CB2Confirm does not call CB2.Boot() - the cycle would launch and do nothing"; $fail = $true }
+}
+# stale-probe sweep, BOTH repos (WORKFLOW probe hygiene rule 4)
+$hits = @()
+foreach ($dir in @("c:\Dev\SMR-BugFixPack\Code", "c:\Dev\SMR-BugFixPack-TestKit\Code")) {
+  $hits += (Select-String -Path (Join-Path $dir "*.lua") -Pattern "TEMPORARY" -List | ForEach-Object { $_.Path })
+}
+if ($arming) { Write-Output ("PROBE SWEEP: armed: " + (($hits | ForEach-Object { Split-Path $_ -Leaf }) -join ", ") + " - declared by corun-batch-2") }
+elseif ($hits.Count -eq 0) { Write-Output "PROBE SWEEP: clean" }
+else { Write-Output ("PROBE SWEEP: ARMED AFTER DISARM - " + ($hits -join ", ")); $fail = $true }
+
+if ($fail) { Write-Output ($mode.ToUpper() + " GATE: RED"); exit 1 }
+Write-Output ($mode.ToUpper() + " GATE: GREEN")
+exit 0
