@@ -57,15 +57,16 @@ of the 14 came back.** So the restore mechanism looks dead. The formal
 retirement of our "never say gone" rule is the chain audit's call — it needs to
 check our working, not take our word — but nothing is owed from you.
 
-❓ **One small question for you, and it's the only thing outstanding.** The
-count doesn't quite square: 55 files before, and afterwards 53 of the old ones
-plus the 3 you made this morning. **Two of the old saves are unaccounted for.**
-Almost certainly the game rotating out old autosaves — and it can't be a Steam
-restore, because a restore *adds* files and this is two *fewer*. But we only
-ever recorded the number 55, never the list, so there's nothing to compare
-against. ⇒ **Did you delete a couple of old saves this morning?** If yes, that
-closes it on the spot. If not, no harm — from now on close-outs record names
-instead of a count, and it closes forward.
+✅ **The one loose thread is closed too — nothing is missing.** The count looked
+two short (55 before; afterwards 53 old ones plus the 3 you made). You confirmed
+you hadn't deleted anything, so we went looking, and an earlier session had
+already written the answer down: the game had two rolling autosaves of its own,
+**`Autosave Sol 351` and `Autosave Sol 356`**, noted at the time as files that
+"rotate out on their own". Your new colony's autosaves — **Sol 11 and Sol 16**,
+the same two slots, the same 5-sol spacing — replaced them.
+It reconciles exactly: 55 − 2 rotated out + 2 new autosaves + `PT-15` = 56.
+⇒ **No file left that folder except by the game's own housekeeping.** Nothing
+for you to do; the audit will re-check the working rather than take our word.
 
 ## Decisions waiting on you
 

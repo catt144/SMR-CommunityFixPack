@@ -560,12 +560,15 @@ named strays came back**. Full evidence table in `agent/facts/EF-051`.
 ⇒ **the sitting's listings are now a SECOND sample, not the first.** Do not
 present them as the falsifier; present them as confirmation. The caveat's
 retirement is the audit's call and EF-051 says so.
-⚠️ **And one thing does not reconcile — do not let it drop.** 56 `.sav` minus
-the 3 created that morning leaves **53** pre-existing against a **55** baseline:
-**two short**. It does not weaken the verdict (a restore *adds* files; this is a
-shortfall) and autosave rotation is the likely cause — but **the 55 was recorded
-as a count, never as a list**, so nothing can be diffed. ⇒ **this chain's
-close-out lists NAMES, not a number**, so the question closes forward.
+✅ **The two-file shortfall this raised is RESOLVED — the whole delta
+reconciles.** 53 pre-existing against a 55 baseline looked two short; the owner
+confirmed they deleted nothing, and `archive/SESSION_LOG.md` (corun-batch-1
+close) had already recorded the pair: the game's own rolling `Autosave Sol
+351/356`, "they rotate out on their own", replaced by the new colony's `Autosave
+Sol 11/16` — same two slots, same 5-sol spacing. 55 − 2 + 2 + 1 = **56** ✓.
+⚠️ **But the lesson binds this chain: the 55 was a COUNT, not a LIST**, which is
+why a five-second diff became a search through an old session record. ⇒ **this
+chain's close-out lists NAMES, not a number.**
 ⚠️ Also: `CP15STAGE` carries the *same* metadata shape as a Cloud restore
 (fresh `CreationTime`, old `LastWriteTime`) because `Copy-Item` preserves the
 write time. Diff against expected survivors, never against the shape.

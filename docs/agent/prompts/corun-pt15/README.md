@@ -39,10 +39,12 @@ Four items:
    PASSED, on the owner's own launch 3 minutes after the untick; none of the 14
    strays returned** (evidence table in `agent/facts/EF-051`). ⇒ this item is
    now a SECOND sample, not the first, and prompt 3 rules on the caveat's
-   retirement. ⚠️ Two files of the 55 baseline are unaccounted for (probably
-   autosave rotation, unprovable because the baseline was a count and not a
-   list) — so **close-out lists NAMES this time**, and the question closes
-   forward rather than backward.
+   retirement. ✅ The two-file shortfall it raised is RESOLVED — the game's own
+   rolling `Autosave Sol 351/356` rotated out for the new colony's `Sol 11/16`
+   (owner confirmed no deletions; the pair was already recorded in
+   `archive/SESSION_LOG.md`), and 55 − 2 + 2 + 1 = 56 exactly. ⚠️ The lesson
+   binds anyway: **close-out lists NAMES, not a count** — a count cannot survive
+   one play session.
 
 **Facts this chain stands on, Src-verified 2026-08-11 by the authoring session**
 (1.0.7.396349, `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`):

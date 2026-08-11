@@ -38,18 +38,21 @@ on-disk original over the FULL length; read the whole sitting log. Per item:
   routed the caveat's retirement HERE rather than retiring it itself. **Audit
   that finding as a claim like any other** (the commit time, the
   `steam_autocloud.vdf` write, the absence of all 14) before you lean on it.
-  ⚠️ **The open thread you must not drop: 53 pre-existing `.sav` against a 55
-  baseline — two unaccounted for.** Autosave rotation is the hypothesis; it is
-  unprovable backwards because the baseline was recorded as a COUNT, never a
-  LIST. Rule on whether that gap blocks retirement (it is a shortfall, and the
-  mechanism under test produces a surplus — but say so explicitly rather than
-  assuming it). If the owner answered whether they deleted anything, that
-  settles it; if not, say it stays open and that the fix is forward-looking.
-  ⚠️ **Methodology finding to land in EF-051 either way:** record NAMES, not
-  counts — a count cannot survive one ordinary play session. And a `Copy-Item`
+  ✅ **The two-file shortfall that briefly looked like a hole is RESOLVED, and
+  the resolution is itself a claim to check.** 53 pre-existing against a 55
+  baseline; the owner confirmed *"I haven't deleted any old saves"*, and
+  `archive/SESSION_LOG.md` (corun-batch-1 close) had already recorded the
+  missing pair — the game's own rolling `Autosave Sol 351/356`, described there
+  as files that "rotate out on their own", replaced by the new colony's
+  `Autosave Sol 11/16`. **Re-derive the arithmetic yourself** (55 − 2 + 2 + 1 =
+  56) and check the archive quote before letting it clear the retirement.
+  ⚠️ **Two methodology findings already landed in EF-051 — confirm they read
+  correctly and are not overstated:** (1) baselines must be recorded as NAMES,
+  never a count — a count cannot survive one play session, since two rotations
+  and three creations net to +1 and hide both movements; (2) a `Copy-Item`
   byte-copy has the SAME metadata shape as a Cloud restore (fresh
-  `CreationTime`, old `LastWriteTime`), so the shape is not diagnostic once
-  anyone has staged a save.
+  `CreationTime`, old `LastWriteTime`), so the signature that originally
+  identified the restore is not diagnostic once anyone has staged a save.
 * Whole-log sweep: F99 `TrackElement.lua:805` (an ORGANIC hit reopens F99 —
   route it), C45 `invalid pos with no holder` (second occurrence — record
   per entry), unexplained lines verbatim with age. ⛔ A missing archived log
