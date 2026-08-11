@@ -5184,3 +5184,63 @@ result supersedes the possibly-mixed-state 98-vs-98. Records as they stood:
   so the cost is entirely two alarming lines in the log next to real errors.
   ⚠️ **Second instance in one day** of the pack logging its own authoring noise
   (F100 is the first). Three options on the entry. → `docs/agent/bugs/C43.md`.
+
+### Moved 2026-08-11 — decision drive round 4 (F99 severity + the save-folder policy)
+
+**Verdicts (owner, 2026-08-11):** **F99 → PASSIVE WATCH** — stays `cand`,
+zero work: every future log is grepped for `TrackElement.lua:805` (already
+routine); one ORGANIC throw reopens it as real work; cheat-driven throws stay
+out of scope, consistent with the F101 dev-tools ruling. Four organic
+completions and three forced cells, all zero, bound the rate. **Save folder →
+KEEP DELETING + VERIFY** — the close-out directory listing is the standing
+gate (it held on the audit re-check); the Steam-Cloud hypothesis stays parked
+until a deleted save ever returns. **F85's disposition stayed OPEN by owner
+challenge** (the "no retail quicksave" claim is an inference chain — the
+10-second Ctrl-F9 empirical check now rides the PT-20 redo sitting; live
+record on the checklist item and the entry). The F99 record as it stood:
+
+- **F99 severity, and whether it becomes work at all.** New 2026-08-03 from
+  your own log: 14 `TrackElement.lua:805` errors, every one under
+  `CheatCompleteAllConstructions()` during your underground build-out.
+  Reachable **without** the cheat is unproven and deliberately not claimed. The
+  cheap discriminator is one no-cheat track completion on a disturbed element
+  list — say the word and it becomes a rider; otherwise it stays `cand`.
+  → `docs/agent/bugs/F99.md`.
+  *(2026-08-04: the discriminator is **leg C of the `unattended-1` chain** —
+  kicking that chain off is the word. Its RESULT lands back on this line as
+  input; the severity decision stays yours either way.)*
+  ⭐ **THE DISCRIMINATOR RAN, 2026-08-04. Result: ZERO occurrences in 4 organic
+  completions — and that is a rate bound, not an all-clear.** Four track
+  elements broken with `BreakTracks` (the meteor's own funnel, lottery removed),
+  each break **witnessed** as real damage (`broken=true sites=1 repair_cgs=1`),
+  each repair finished **by drones with no cheat on the stack**, `0 [LUA ERROR]`
+  in the whole log. Fixture: 244 drones (81 idle), 15 hubs, two tracks (4 and 23
+  elements). Log: `docs/archive/u1c4_Mars.exe-20260804-17.12.54.log`.
+  **What it means for your call:** no-cheat reachability is still **UNPROVEN**,
+  so F99 stays `cand` and nothing gets built — but the failure is now bounded:
+  it did not appear in four clean organic repairs, against seven appearances in
+  ~1 h of your own cheat-driven build-out. **The decision in front of you is
+  unchanged in shape** — severity, and whether this becomes work at all — with
+  one more piece of evidence under it. ⚠️ Four is a small N and the leg can be
+  re-run cheaply on a bigger one if you want a tighter bound; say so and it is
+  ~1 min of machine time per four more.
+- ⚠️ **CORRECTION to the line above, and it cuts both ways.** The second-opinion
+  chain re-read the log: **the count is 7, not 14** — the 14 matching lines are
+  7 `[LUA ERROR]` headers each paired with a C-side `Error calling Lua function
+  "exec" from C` report of the same throw. The old figure is left standing above
+  rather than edited, per the drift-evidence rule. Two things the re-read also
+  found, pulling severity in opposite directions: the auto-connect work
+  **self-heals** (the queue entry is set one line *before* the throw and the
+  engine's own 500 ms repeater redoes it correctly), which makes it milder than
+  filed; but each throw escaped the console `exec`, so the rest of that cheat
+  pass never ran and `ResumeTerrainInvalidations` was skipped **seven times**.
+  Also new: the `if not self.broken` guard on the failing block **can never be
+  false** — the line above it already cleared the field. → `docs/agent/bugs/F99.md`
+  ("Mechanism settled by reading"; the chain folder is deleted — its sealed
+  derivation survives in git at `28c253f`).
+  *(Chain close 2026-08-03: the terminal prompt settled the mechanism from
+  source — the element list was empty BEFORE the rebuild call; the filed
+  "rebuild comes back empty" route is refuted, and the drain is the engine's
+  own track-merge absorb-walk. This does not change the decision in front of
+  you: no-cheat reachability is still unproven, nothing is built, and the
+  cheap discriminator offer stands.)*

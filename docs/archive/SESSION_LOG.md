@@ -8,6 +8,27 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — decision drive, round 4: F99 goes to passive watch, the save-folder policy is ratified, and the owner's challenge holds F85 open
+
+1. **F99 → PASSIVE WATCH** (owner): stays `cand`, zero work — every log
+   grepped for `:805` (routine), cheat throws out of scope per the F101
+   ruling, ONE organic throw reopens it as work. No more sampling ordered.
+2. **Save folder → KEEP DELETING + VERIFY** (owner, decision 7 closed): the
+   close-out directory listing is the standing gate; Steam-Cloud hypothesis
+   parked until a deleted save ever returns.
+3. ⚖️ **F85 stays OPEN — the owner challenged the "no quicksave on retail"
+   claim, and the challenge is CORRECT as method:** the only sampled fact is
+   the bindings screen's missing save row; "Ctrl-F9 does nothing on retail"
+   is an inference chain (generated code gates `idQuickSave` under a measured
+   `Platform.cheats=false`) that has never been pressed. A source-derived UI
+   claim briefed without eyes is the exact failure that produced the dead
+   F9-rebind advice this entry already carries. **The 10-second Ctrl-F9
+   empirical check now rides the PT-20 redo sitting** and the disposition
+   waits on it. Entry and checklist item 5 both carry the challenge verbatim.
+
+F99's record moved to the archive; decision 7 struck in place. Open
+decisions: **7**.
+
 ## 2026-08-10 (evening) — decision drive, round 3: our own noise gets fixed, the F100 hold lifts, PT-20 redo ordered
 
 1. **C43 → option 2** (owner): `set_global` restricted to names that already

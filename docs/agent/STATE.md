@@ -53,8 +53,8 @@ Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fp
   rule. ⭐ Steam-Cloud restore hypothesis untested → checklist 7.
 - ⛔ **Mod-Manager disable needs a FULL RESTART** (D13, measured 2026-08-10) —
   code stays live, permanent already gone; PT-20 re-check = decision 6.
-- **Owner decisions: 9 open** (9 CLOSED 2026-08-10 pm — F11 ×2, C43, F100,
-  PT-20 redo ordered, F46, C36, veto, archive rule; closed records MOVE to
-  the archive). ⭐⭐ **Src FOUND** — installdir `Project Spark` (EF-014).
+- **Owner decisions: 7 open** (11 CLOSED in the 08-10/11 drive; F99 → passive
+  watch; save-dir ratified; ⚖️ F85 held OPEN by owner challenge — the 10-s
+  Ctrl-F9 check rides the PT-20 redo). ⭐⭐ **Src FOUND**: `Project Spark` dir.
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
   `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.

@@ -62,27 +62,28 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    game's one popup that *doesn't* pause, so it's the only place a normal
    autosave could land inside a popup window with no rebind involved. That
    rider didn't run. → `agent/bugs/F85.md`.
+   ⚖️ **2026-08-11 — you challenged the "no quicksave on retail" claim and the
+   challenge holds: STILL OPEN by your call.** The only *sampled* fact is that
+   the bindings screen has no save row. Source (including the generated
+   executable) says the one Quick Save action is **Ctrl-F9** and only exists
+   when `Platform.cheats` is on — but that's an inference chain, and nobody
+   has ever pressed Ctrl-F9 on retail. **The 10-second check rides your PT-20
+   redo sitting**: press Ctrl-F9 in a colony — a quicksave landing makes the
+   default binding a live route into this defect and changes the whole
+   disposition; nothing happening confirms the source read. Decision waits.
 6. ~~**⚖️ Disabling a mod needs a full game restart — does `PT-20` need
    redoing?**~~ ✅ **DECIDED 2026-08-10 — REDO NOW.** A dedicated PT-20 redo
    co-run is queued (your part: the Mod-Manager disable click, a **full game
    restart**, ~10 min of ordinary play; save/reload/log reads are rig-side).
    Its result supersedes the old 98-vs-98 comparison, which may have measured
    the half-disabled middle state. → `agent/bugs/D13.md`, PT-20 section below.
-7. **⚖️ Our save-folder cleanup has now failed twice, and we may know why.**
-   `CB1STAGE`, `CORUN0`, `CORUN1`, `U1STAGE` — the exact four that batch-1's
-   audit said it deleted on 2026-08-05, and that this morning's prep *also* said
-   it deleted — **were still in your save folder tonight**, along with five more
-   from earlier chains. All 15 are gone now (~780 MB) and `PT35FIXTURE` is the
-   only agent save left. ⭐ **Hypothesis worth one line from you: Steam Cloud.**
-   There's a `steam_autocloud.vdf` in that folder, and a deletion made while
-   Steam is running would get restored from the cloud — which would explain two
-   honest sessions both recording a deletion that didn't stick. **Unverified.**
-   If you'd rather we stop deleting your saves entirely and just list them for
-   you, say so — that's a reasonable answer too. *(Audit re-check, later the
-   same day: the deletion HELD this time — none of the 15 have returned, and
-   `PT35FIXTURE` + `TEST2H TRAIN` verify byte-exact. So either the hypothesis
-   is wrong, or the earlier deletions were made under a condition this one
-   avoided. The one-line question above still stands.)*
+7. ~~**⚖️ Our save-folder cleanup has now failed twice, and we may know
+   why.**~~ ✅ **DECIDED 2026-08-11 — KEEP DELETING + VERIFY.** Agent saves
+   keep dying in their recording commits; the close-out directory listing
+   (now a standing WORKFLOW rule, and it held on the audit's re-check — none
+   of the 15 returned) verifies each deletion stuck. The Steam-Cloud
+   hypothesis stays parked: if a deleted save ever returns again, that run
+   tests it. → WORKFLOW "Co-runs" close-out rule.
 8. **⚖️ There is uncommitted work in the repo that isn't ours, including an
    answer of yours nobody recorded.** The `F101` decision and this morning's prep
    routing were both left uncommitted (prep reported clean trees and pushed
@@ -203,51 +204,6 @@ building it is on the entry.
   **launch-prep instruction with an owed input**: when the freeze lifts, the
   section goes in with your wording. This line stays until that wording
   exists. → `docs/agent/reports/CHAIN_QA_REPORT.md` §3.
-- **F99 severity, and whether it becomes work at all.** New 2026-08-03 from
-  your own log: 14 `TrackElement.lua:805` errors, every one under
-  `CheatCompleteAllConstructions()` during your underground build-out.
-  Reachable **without** the cheat is unproven and deliberately not claimed. The
-  cheap discriminator is one no-cheat track completion on a disturbed element
-  list — say the word and it becomes a rider; otherwise it stays `cand`.
-  → `docs/agent/bugs/F99.md`.
-  *(2026-08-04: the discriminator is **leg C of the `unattended-1` chain** —
-  kicking that chain off is the word. Its RESULT lands back on this line as
-  input; the severity decision stays yours either way.)*
-  ⭐ **THE DISCRIMINATOR RAN, 2026-08-04. Result: ZERO occurrences in 4 organic
-  completions — and that is a rate bound, not an all-clear.** Four track
-  elements broken with `BreakTracks` (the meteor's own funnel, lottery removed),
-  each break **witnessed** as real damage (`broken=true sites=1 repair_cgs=1`),
-  each repair finished **by drones with no cheat on the stack**, `0 [LUA ERROR]`
-  in the whole log. Fixture: 244 drones (81 idle), 15 hubs, two tracks (4 and 23
-  elements). Log: `docs/archive/u1c4_Mars.exe-20260804-17.12.54.log`.
-  **What it means for your call:** no-cheat reachability is still **UNPROVEN**,
-  so F99 stays `cand` and nothing gets built — but the failure is now bounded:
-  it did not appear in four clean organic repairs, against seven appearances in
-  ~1 h of your own cheat-driven build-out. **The decision in front of you is
-  unchanged in shape** — severity, and whether this becomes work at all — with
-  one more piece of evidence under it. ⚠️ Four is a small N and the leg can be
-  re-run cheaply on a bigger one if you want a tighter bound; say so and it is
-  ~1 min of machine time per four more.
-- ⚠️ **CORRECTION to the line above, and it cuts both ways.** The second-opinion
-  chain re-read the log: **the count is 7, not 14** — the 14 matching lines are
-  7 `[LUA ERROR]` headers each paired with a C-side `Error calling Lua function
-  "exec" from C` report of the same throw. The old figure is left standing above
-  rather than edited, per the drift-evidence rule. Two things the re-read also
-  found, pulling severity in opposite directions: the auto-connect work
-  **self-heals** (the queue entry is set one line *before* the throw and the
-  engine's own 500 ms repeater redoes it correctly), which makes it milder than
-  filed; but each throw escaped the console `exec`, so the rest of that cheat
-  pass never ran and `ResumeTerrainInvalidations` was skipped **seven times**.
-  Also new: the `if not self.broken` guard on the failing block **can never be
-  false** — the line above it already cleared the field. → `docs/agent/bugs/F99.md`
-  ("Mechanism settled by reading"; the chain folder is deleted — its sealed
-  derivation survives in git at `28c253f`).
-  *(Chain close 2026-08-03: the terminal prompt settled the mechanism from
-  source — the element list was empty BEFORE the rebuild call; the filed
-  "rebuild comes back empty" route is refuted, and the drain is the engine's
-  own track-merge absorb-walk. This does not change the decision in front of
-  you: no-cheat reachability is still unproven, nothing is built, and the
-  cheap discriminator offer stands.)*
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for
