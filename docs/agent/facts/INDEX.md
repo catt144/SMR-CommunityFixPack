@@ -26,7 +26,7 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-011 | Patch points that work: `PeriodicRepeatInfo[name]` slots (THREAD/SLEEP/FUNC/COND = | — | 2026-07-29 | 5 | [EF-011.md](EF-011.md) |
 | EF-012 | A post-wrapper on a **command** method (anything ending | — | 2026-07-29 | 3 | [EF-012.md](EF-012.md) |
 | EF-013 | Mod registry: every fix goes through `SMRFixPack.Register(id, {title | — | 2026-07-29 | 4 | [EF-013.md](EF-013.md) |
-| EF-014 | All line numbers reference `ModTools\Src`; the game executes | 2026-07-29 | 2026-07-29 | 21 | [EF-014.md](EF-014.md) |
+| EF-014 | All line numbers reference `ModTools\Src`; the game executes | 2026-07-29 | 2026-08-10 | 31 | [EF-014.md](EF-014.md) |
 | EF-015 | `print` does NOT reach the log file — it goes ON-SCREEN | 2026-07-29 | 2026-07-29 | 12 | [EF-015.md](EF-015.md) |
 | EF-016 | Sample mod format in `<game>\ModTools\Samples\Mods`; docs in `ModTools\Docs\index.md.html`. | — | 2026-07-29 | 1 | [EF-016.md](EF-016.md) |
 | EF-017 | Replacing an EXISTING global from mod code works | — | 2026-07-29 | 6 | [EF-017.md](EF-017.md) |

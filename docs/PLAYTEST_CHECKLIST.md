@@ -26,6 +26,10 @@ Things that need **your** call, not an agent's. One line each plus where the
 reasoning lives; **an agent strikes a line the moment you decide** — just say so
 in any session. Added 2026-08-03 by the docs-restructure chain (spec §7 / R10):
 these used to be filed only in agent reports, which is where you never read.
+⭐ **And fully-CLOSED decision records move whole to `PLAYTEST_ARCHIVE.md`
+(rule adopted by you 2026-08-10)** — same treatment as completed test
+sections, but only when nothing is owed to you; anything on-hold or holding an
+owed input stays here no matter how struck-through it looks.
 
 ### ⭐⭐ NEW 2026-08-10 — from the `corun-batch-2` SITTING (four calls, all yours)
 
@@ -189,85 +193,6 @@ sitting. PT-47, M5 and M7 never ran and stay routed. F99 did not fire once in
 two hours; the one condition it names is still untested and the recipe for
 building it is on the entry.
 
-- ~~**CO-RUN #1 IS PREPPED AND WAITING ON YOUR ~7 MINUTES**~~ ✅ **RAN
-  2026-08-04. It cost you about 6 minutes against the 15–20 asked for**, across
-  two launches (398 s and 85 s, zero `[LUA ERROR]` in either). Three of the four
-  payload items settled, one narrowed. **Your `TEST2H TRAIN` is untouched**
-  (same bytes, same timestamp); the copy and both probes are deleted.
-  → `agent/reports/CORUN1_EVIDENCE_CARDS.md` for the four cards.
-  - ⭐ **F11's cross-map question is ANSWERED** — the one the entry said could
-    not be proven from Lua. It is **route (a)**; the removal was watched
-    happening, not inferred afterwards. → `agent/bugs/F11.md`.
-  - ⭐ **F99's last unknown is MEASURED** — the hex returns the hidden element,
-    which is what the seven crashes implied. Still `cand`, nothing built.
-  - ⭐ **C41 got its first real mechanism, and you were right to make me close
-    it.** Your mouse genuinely reports coordinates outside the game's own window
-    box (up to `x=7665` against a box ending at `3840`) — because `GetMousePos`
-    spans both monitors while the game's box is just the G7. Feeding that to the
-    picker fires the clamps. I first recorded the bottom-right-corner case as
-    **refuted**, on a reason that was simply wrong; it was **unsampled**. Your
-    third run sampled it and the box came back at
-    **`(2224,1731)-(3840,2160)` — the exact four numbers predicted before the
-    picker opened.** ⛔ **The picker still appeared 52 times out of 52**, so the
-    "icon does not appear" symptom did *not* reproduce: this is a mechanism,
-    not a confirmation, and `C41` stays `cand`.
-- ~~**DECISION: may the load-heal sweep use a COPY of your CAMPAIGN save?**~~
-  ✅ **WITHDRAWN the same day, 2026-08-04 — nothing needed from you.** I asked
-  whether `TEST2H TRAIN` carries the conditions the pack's load-time heal passes
-  repair; you said you did not know. That was the right answer, and the fix was
-  to stop needing to know. **The record already knew:** three archived co-run #1
-  loads of a copy of that save (81/81 active) fired **zero** heal lines between
-  them — so the sweep would have measured a save with nothing to heal. **And two
-  of the six heal families turn out to be forceable on any save at all** (the
-  meteor latch and the C34 rains structure are both shipped persistent
-  variables), so the sweep now creates the defect state deliberately and watches
-  the heal fire once and only once. It samples something real whatever the save
-  contains, on `TEST2H TRAIN`, with no copy of your campaign involved.
-  → `agent/prompts/unattended-1/02_OPUS_RUN.md` §2.
-- ~~⭐⭐ **DECISION FOR YOU: adopt the co-run sign-off tiers?**~~ ✅ **ADOPTED
-  2026-08-04 — you wrote `----Approved` on this item in your own hand;
-  integrated by the unattended-1 terminal audit the same day.** The tiers are
-  now **standing policy** in `agent/WORKFLOW.md` (sign-off tiers block): Tier A
-  witness / Tier B evidence card (incl. the HANDS-ONLY sub-class) / Tier C
-  delegated, with the visible-demotion rule. ⛔ In the item's own words,
-  adoption does **not** touch: *"`tested` still means a pass at the keyboard
-  per WORKFLOW, and no already-granted status is reclassified."* The adopted
-  proposal, kept for the record of what was decided:
-  (routed 2026-08-04 by the corun-rig chain's terminal prompt.) The problem it
-  solves is the one you named: for log-only defects you never see the bug or
-  the fix, so per-item sign-off is ceremony. The proposal, finalized against
-  co-run #1's four REAL evidence cards rather than the draft's guesses:
-  - **Tier A — WITNESS.** Your eyes genuinely add information the log cannot
-    carry; you attend the measure moment. Unchanged from today.
-  - **Tier B — EVIDENCE CARD.** Log-demonstrable; you quick-read a one-screen
-    card — scenario, what was forced vs organic, the raw before/after log
-    lines, run conditions, and the one-sentence falsifier — and OK it. Under a
-    minute each. ⭐ **New sub-class the run exposed: HANDS-ONLY** — a leg that
-    needs your *hands* (park the cursor on the other monitor, click launch)
-    but none of your *eyes*. You do the named act, then read the card like any
-    Tier B. The draft rule ("would eyes add information?") could not classify
-    this at all, and it was the cheapest ask in the whole payload.
-  - **Tier C — DELEGATED.** Mechanically self-verifying (the probe-suite
-    class): ships on the suite verdict; you get a one-line digest per batch
-    and keep the veto; you are not asked per item.
-  **What the real cards showed:** Card 1 (the F11 train watch, classed A) —
-  your eyes added nothing; the 340-removal counter over 7 trains was strictly
-  stronger than watching one, so that rider class should be **A → B**, and the
-  general rule is: when a designed-A item's card turns out stronger than the
-  eyes, the demotion is stated on the card and applies to the NEXT instance —
-  never silently. Cards 2 and 4 (the two ride-along reads) needed no eyes and
-  the cards alone settle them — the clean Tier B/C cases.
-  **What changes if you adopt:** log-only items stop needing per-item attended
-  sign-off; you read cards (B) or batch digests (C) instead; Tier A is
-  untouched. **What does NOT change without your word:** `tested` still means
-  a pass at the keyboard per WORKFLOW, and no already-granted status is
-  reclassified. **Recommendation: adopt, with the hands axis and the
-  visible-demotion rule.** → `agent/reports/CORUN1_EVIDENCE_CARDS.md` (the
-  four cards — transient sign-off artifacts per your anti-sprawl rule; their
-  durable content already lives in the entries and archived logs).
-  *(Your `----Approved` marker stood here; consumed into the ✅ heading above
-  once the policy landed in WORKFLOW.)*
-
 - ⭐ **DECISION FOR YOU: does the F11 pre-wrapper rider close on two of its
   three readings?** (2026-08-04) You wrote the rider, so this is yours. Two
   readings passed cleanly — `TrainPlatformWedge [active]`, and 7 trains
@@ -300,10 +225,6 @@ building it is on the entry.
   D12/F97-class modules. Nothing measures wrong today, but a future leg that
   used the lever on D03/D07 would silently run live and you'd read the result
   as a fix failure. → `CHAIN_QA_REPORT.md` §5.
-- **F46 `Fix_TrainCargoDumping`: move group C → group B.** The record says "no
-  route" and a route demonstrably exists (F90's approved shape); the honest
-  ground for skipping is cost-benefit, not impossibility. Moving it does *not*
-  commit you to ever doing the conversion. → `CHAIN_QA_REPORT.md` §7.
 - **F100 — how do we repair the `NoHomeless` self-check?** It names `Community`
   for a method `Workforce` declares, so the module reports itself `inactive` in
   every boot log and then applies anyway. Three options on the entry: point the
@@ -377,71 +298,6 @@ building it is on the entry.
   so the cost is entirely two alarming lines in the log next to real errors.
   ⚠️ **Second instance in one day** of the pack logging its own authoring noise
   (F100 is the first). Three options on the entry. → `docs/agent/bugs/C43.md`.
-- **The C36-adjacent mysteries grep.** A cheap sweep of `Lua\Mysteries\` and
-  `Scenario\` for `IsDisasterPredicted` gates, deliberately left unassigned:
-  your call whether it becomes work at all. Not owed. → `CHAIN_QA_REPORT.md` §8.
-- ⭐ **DECISION FOR YOU: archive resolved decision bullets the way completed
-  test sections are archived?** (routed 2026-08-04 by the unattended-1
-  terminal audit, per your stale-records ask.) The checklist's documented rule
-  — a completed section moves WHOLE to `PLAYTEST_ARCHIVE.md`, deleted here, no
-  stub — covers *test sections*; the growing layer of struck-through ✅
-  DONE/DECIDED **decision bullets** has no rule. **Two clear cases were moved
-  as a worked example** (co-run #0, and the `LawOfficeDoor`/C44 call — both
-  fully closed, durable content already in `SESSION_LOG`/entries; see the
-  archive's "Resolved decision records" banner). **My recommendation:** adopt
-  the same treatment for the rest — move only bullets that are fully closed
-  with nothing owed to you; anything holding an open ask, an on-hold, or an
-  owed input (the relabel wording) stays here no matter how struck-through it
-  looks. Applying it today would move ~4 more bullets (~60 lines), including
-  the 41-line probe-gate record; cost is one commit. Say go/no-go.
-- ~~**The probe-gate blocker**~~ ✅ **DECIDED 2026-08-04 — you asked for the
-  safest option and that is what was adopted: the tool was NOT loosened.**
-
-  No escape hatch was added to `doccheck.py`. The sweep stays absolute — any
-  `TEMPORARY` marker in `Code/` is red, full stop — because a hatch a hurried
-  session can open without saying so is how 2026-07-31 happened.
-
-  **What changed instead is when a probe is allowed to exist at all.** New
-  binding rule (`WORKFLOW.md` probe hygiene, rule 5): **a probe file is present
-  in `Code/` only while its run is actually happening.** Placing it and running
-  are the same act; deleting it and recording the answer are the same commit.
-  There is no state in between, so **no armed probe can outlive the sitting that
-  needed it** — which is the failure you told me to design against.
-
-  **It costs nothing.** Prep still commits early: the staged save, the
-  measure-moments list, the doc edits, and the probe's *source* as a code block
-  in the brief. A probe parked in a doc physically cannot run — the mod only
-  loads files listed in `metadata.lua`, all under `Code/` — so it is inert by
-  construction, not merely unused. If a sitting slips, nothing is stranded and
-  nothing is armed.
-
-  ⚖️ **One-time override granted 2026-08-04, recorded here so it is not
-  invisible.** You gave prompt 3 an override of this rule **for its prep only**.
-  It may commit armed probes in **one named commit**, using the `--no-verify`
-  bypass with a body stating exactly what is red and why — and ⛔ **if the
-  sitting does not happen in the same working session it must delete the probes
-  before it stops.** That deadline is the condition the grant rests on: an armed
-  probe never survives a session boundary, which is the situation you said you
-  did not want back. Not precedent, not carried to any later co-run, and prompt
-  4 audits every condition against git.
-
-  ⚖️ **You asked for it to be rechecked — DONE 2026-08-04 (prompt 4): your
-  decision holds and the rule stands as written.** The diagnosis re-verified
-  from the tool and the hook themselves. The one claim that had been asserted
-  without source was verified: the game loads **only** the files listed in
-  `metadata.lua` `code` (`Mod.lua:490-521` — both load loops iterate that list,
-  nothing scans directories), so a parked probe genuinely cannot run. The
-  feared cost was measured away — the parse sweep works on the parked file, so
-  prep loses nothing — and declining your override measured what any escape
-  hatch would have bought: **0.4 seconds of machine time and none of yours.**
-  No recommendation to change anything; the safest option was also free.
-- ~~**One cheap hardening from the same investigation, your call:** nothing
-  checks the TestKit repo's working tree — a doccheck line that *reports* (not
-  blocks on) a dirty tree would close the gap.~~ ✅ **GO given and BUILT
-  2026-08-04.** Every doccheck run now prints a `TESTKIT TREE:` line — `clean`,
-  or each uncommitted file as a `WARN`. Report-only per your word: it never
-  blocks a commit, so TestKit work-in-progress cannot jam the pack. Verified
-  on both paths (clean, and a planted temp file).
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for

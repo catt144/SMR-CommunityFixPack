@@ -8,6 +8,53 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-10 (evening) — decision drive, round 1 (same session as the batch-2 close): three owner calls landed, and looking for Src found it — behind the wrong folder name
+
+**Format: the owner asked for the open decisions three at a time and answered
+the first three.** Recorded, struck, and (per the new rule) moved:
+
+1. **F46 `Fix_TrainCargoDumping`: group C → group B** (owner). A
+   behaviourally-exact route exists (the `storable_resources` pre-wrapper) and
+   is skipped on §3a cost-benefit, so "no route" was the wrong cell. Counts
+   5/4/10/3 → **5/5/9/3**; nothing scheduled. `F46.md` +
+   `SAVE_SAFETY_REDESIGN.md` §5.4, both annotated.
+2. **The C36-adjacent mysteries grep: GO — and it RAN the same hour, CLEAN.**
+   `IsDisasterPredicted` has exactly **9 references in the whole Src tree**;
+   the only Mysteries hit is `Dream.lua:26` (C36's own site), no `Scenario\`
+   tree exists, and every other hit is already on F81's victim list
+   (`WaitCurrentDisaster` verified by read). **No other mystery carries the
+   gate; nothing new filed.** Recorded on the C36 row.
+3. **Archive rule for closed decision bullets: ADOPTED and applied** — seven
+   fully-closed records moved whole to `PLAYTEST_ARCHIVE.md` (co-run #1, the
+   load-heal withdrawal, the sign-off tiers, the probe-gate record, the
+   TestKit-tree hardening, plus F46 and the C36 grep as they closed); the rule
+   is in the checklist preamble. Anything on-hold or holding an owed input
+   stays live (F100, the relabel wording).
+
+⭐⭐ **THE SIDE FIND: `ModTools\Src` IS on this machine — batch-2 ledger S12 is
+CORRECTED.** The Relaunched Steam `installdir` is literally **`Project
+Spark`** (`A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`), so
+every folder-name search missed it, and the old 2018 game's Src-less
+`ModTools` folder made the absence look confirmed. Recorded on EF-014 and in
+the Co-runs rules. Three loops it unblocked were closed immediately:
+- **F85's route refutation upgraded eyes-negative → SOURCE-CONFIRMED**: the
+  game's only Quick Save action (`idQuickSave`, `GameCheatShortcuts.lua:1990`,
+  `Ctrl-F9`, `ActionBindable`) is a child of the `__condition
+  Platform.cheats` node (`:11-17`) — on retail it does not exist to bind,
+  list, or fire. The owner's two bindings-screen reads were exactly right.
+- **C45's mechanism source-read**: `Colonist:GetStartingPoint`
+  (`ColonistTransport.lua:30-37`) logs `invalid pos with no holder` for a
+  colonist with no `arriving`/`holder` on an invalid/out-of-bounds position,
+  then falls through non-fatally. "Quantum Comet" is the COLONIST's name (the
+  entry's rocket guess corrected); the producer state stays open, one line in
+  the Src's favor of the C42/F11 desync neighborhood. Stays `cand`.
+- The C36 sweep above, which needed the tree.
+
+Open decisions after this round: **15 by the live enumeration** (4 from the
+batch-2 sitting · F48, D07-pin, NoHomeless-preflight from batch-1 · relabel
+wording, D03/D07 veto, F100-on-hold, F11-P1, F11-close, F99-severity, C43,
+DOC_REVIEW from the older layer). Rounds 2+ continue next.
+
 ## 2026-08-10 — `corun-batch-2` CLOSED (prompt 3, Fable terminal audit): every leg verdict sustained, five record corrections, one new vanilla candidate, the folder is empty
 
 **The second batched attended co-run chain is complete** — prep (Opus,

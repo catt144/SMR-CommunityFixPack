@@ -484,12 +484,24 @@ Each was checked against the shipped body, not inferred from our header.
 | `Fix_RocketDroneChurn` | wrapper pair — flag on `AddCargoDemandRequest`, no-op the Connect/Disconnect unless set | Two coupled wrappers replacing one body; may not be simpler |
 | `Fix_LandscapeUnitFilter` | wrap `Landscape_ForEachObject` and apply the dropped filter to the callback | Must key on the unit params so the **stockpile** path, which already passes its own filter correctly, is untouched |
 
+> ⚖️ **2026-08-10 (owner decision): `Fix_TrainCargoDumping` joins THIS group
+> from group C**, making the counts **5 / 5 / 9 / 3**. A behaviourally-exact
+> route exists (the pre-wrapper swapping `station.storable_resources` under
+> `pcall`, F90's shape — BUGS **F46**); it was rejected on **§3a cost-benefit**
+> (temporary mutation of a persisted property on a live station inside a
+> command path), not for want of a route, so "no route" was the wrong cell.
+> Its open-question row: whether any keying makes the swap safe enough to beat
+> the copy — nobody is committed to answering it.
+
 #### C. No route — the body copy is the right technique (9 → **10** as of 2026-08-02)
 
 **`Fix_TrainCargoDumping`** joins this group — see group A's withdrawal note and
 BUGS **F46**. The one route the sweep named is native code behind a savegame
 permanent; the one route that would work mutates a persisted property on a live
 object, which §3a ranks below simply keeping the copy.
+⚖️ *(2026-08-10, owner decision: moved on to group B — the sentence above
+describes a route that EXISTS and is skipped on cost-benefit, which is group
+B's definition, not this group's. See the note under the group B table.)*
 
 `Fix_LowStorageWarning` (its header already proves a wrapper cannot work: the
 unreachable add-branch means vanilla's else-branch *removes* the entry every
@@ -527,7 +539,9 @@ so patching it would reach story bits and staffing; rejected).
 **4 more have a route worth designing**, **9 are correctly full replacements**,
 and **3 are already at the best available technique**.~~
 ⭐ **CORRECTED 2026-08-02 after the conversions were actually built (chain prompt
-8): 5 / 4 / 10 / 3.** Five converted and shipped; `Fix_TrainCargoDumping`'s
+8): 5 / 4 / 10 / 3.** ⚖️ *(→ **5 / 5 / 9 / 3** as of 2026-08-10:
+`Fix_TrainCargoDumping` C → B by owner decision, group B note.)*
+Five converted and shipped; `Fix_TrainCargoDumping`'s
 "verified feasible" row was inferred rather than checked and moved to group C. None of it is urgent and
 none of it blocks F86 — but the 6 in group A are cheap, individually testable,
 and each permanently removes a body copy from the per-update re-verification

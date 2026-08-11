@@ -529,9 +529,14 @@ not an achievement.
      permanent gone (D13's fourth OFF state); the gate is the only reason a
      clean log of the pack RUNNING was not banked as a clean uninstall.
   8. **Source line numbers in a brief are marked Src-verified or
-     trust-carried** — the sitting machine has no `ModTools\Src`, so nothing
-     can be Src-checked live; an unmarked line number reads as verified and
-     is not.
+     trust-carried** — an unmarked line number reads as verified and is not.
+     ⚖️ *(Amended 2026-08-10: the sitting's "no `ModTools\Src` on this
+     machine" was WRONG — Src exists at
+     `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`; the
+     Relaunched Steam installdir is literally `Project Spark` (EF-014), which
+     is why every folder-name search missed it. Live Src checks ARE available
+     to sittings; the marking rule stands because trust-carried lines still
+     occur.)*
 
 **Checklist convention:** riders whose precondition is this mode are tagged
 **TAKEABLE IN a co-run** (a rider class alongside TAKEABLE WHEN). Sessions
