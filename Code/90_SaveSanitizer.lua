@@ -9,18 +9,14 @@
 -- Contents:
 --   F35  Large Wind Turbine buff lost by a broken migration fixup
 --   F03  upgrade modifiers leaked onto domes and the colony by salvaged buildings
+--   F48  station-connector track elements never re-ordered (paren misplaced)
 --
--- Both passes are read-only until they find something they can positively
+-- All three passes are read-only until they find something they can positively
 -- identify as wrong, run on every PostLoadGame (after the shipped savegame
 -- fixups — see the note on the handler below), and are idempotent — a second
--- run finds nothing.
---
--- NOT included, deliberately: F48 (station-connector fixup). See its BUGS.md
--- entry — the "corrected pass" re-runs OrderTrackElements, which rebuilds
--- `el.connections` and rewrites `node_idx` for every element of every track
--- (Tracks.lua:520-624) and whose only failure handling is an `assert(false, ...)`
--- that does not unwind in this engine. That is not a repair we can ship without
--- an in-game test, and its impact is P3.
+-- run finds nothing. F35 and F03 re-derive their answer every load; F48 also
+-- carries a one-shot flag, because its work is a re-ordering rather than a
+-- comparison and there is no reason to redo it on a save it has already fixed.
 
 local FIX_ID = "SaveSanitizer"
 
@@ -171,12 +167,136 @@ local function repair_leaked_upgrade_modifiers()
 end
 
 --------------------------------------------------------------------------------
+-- F48 — the station-connector migration fixup re-ordered nothing
+--
+-- Defect (Src-verified 2026-08-11 against 1.0.7.396349):
+-- SavegameFixups.A_StationConnectorElements3 (Lua\Buildings\Station.lua:1339-1355)
+-- calls, at :1346,
+--     ProcessTrackElements(ResolveMap(track, track.elements))
+-- with the closing paren one argument too late. `ResolveMap` is a C global taking
+-- ONE argument (CommonLua\LuaExportedDocs\Game\realm.lua:92), so `track.elements`
+-- is silently dropped; `ProcessTrackElements(map, elements, start_element,
+-- adjust_iter)` (Tracks.lua:807) receives nil for `elements`, and `#elements == 0`
+-- is true for nil in this engine (:808), so the function returns before doing
+-- anything. The migration has therefore never re-ordered a single track element
+-- in any save. The correction is the paren:
+--     ProcessTrackElements(ResolveMap(track), track.elements)
+--
+-- Why this ships, and why it did not until now. The entry was `blocked` from
+-- 2026-07-25 on the fear that a track the walk cannot complete gets its
+-- connections half-rewritten (OrderTrackElements' only failure handling is
+-- `assert(false, ...)`, and assert does not unwind here — agent/facts/EF-008).
+-- PT-37 measured both halves on 2026-08-05, owner attended, on a copy of the
+-- owner's own save (log docs/archive/cb1sitting_Mars.exe-20260805-14.28.49.log):
+--   * CASE A, a healthy 280-element track: start_el, end_el, the 1..280 node_idx
+--     sequence and the element count were all unchanged, and the connection total
+--     moved 559 -> 558 — exactly the 2 x 279 a linear 280-element chain holds, so
+--     the call removed one stale or asymmetric connection. It stayed 558 across
+--     save + reload. The corrected call is a repair, not merely a no-op.
+--   * CASE B, the risky path: a forced meteor produced 8 broken elements and 8
+--     repair sites, and the pre-mutation gate still found all 280 elements on the
+--     hex grid — HexGetTrackGridElement hands the walk the hidden ORIGINAL
+--     element, not the TrackConstructionSite sitting on the same hex. So
+--     OrderTrackElements SUCCEEDS on a meteor-damaged track and the assert path
+--     is not reachable that way at all. The harness refused to run case B rather
+--     than bank a clean pass on an unsampled decider.
+-- Owner decision 2026-08-11: SHIP. ⛔ What that evidence does NOT establish is
+-- that the assert is unreachable by every route — only by the one the block was
+-- written about. Hence the shape below.
+--
+-- Conservative, in four specific ways:
+--   1. It counts an EFFECT, not an execution. Each track's connection total and
+--      duplicate-node_idx count are read before and after; a track is counted
+--      repaired only if one of them moved. On a save the pass has already fixed
+--      the count is 0, which is what makes PT-35's do-no-harm read meaningful.
+--   2. It is one-shot per save (a plain SMRFixPack_* boolean on UIColony, absent
+--      on saves we have never touched and harmless if the mod is later removed),
+--      so it cannot re-run on every load the way F35's and F03's comparisons do.
+--   3. Every call is pcall'd per track, so a track that raises costs that track
+--      and not the rest of the network — and the raise is logged by name.
+--   4. It does NOT hand-assign track.start_el / track.end_el. The shipped fixup
+--      does (Station.lua:1347-1348) and ProcessTrackElements sets both itself on
+--      the success path (Tracks.lua:820-822); on the FAILURE path the shipped
+--      lines would write endpoints derived from an order the engine has just
+--      restored, which is strictly worse than leaving them alone.
+--
+-- ⚠️ ProcessTrackElements / ResolveMap are NOT in this module's apply() Require
+-- list, deliberately: if a game update moves them, this pass should decline and
+-- say so, not deactivate the F35 and F03 repairs alongside it.
+local F48_FLAG = "SMRFixPack_F48_StationConnectors"
+
+-- The signature PT-37 compared. `connections` is rebuilt wholesale by
+-- OrderTrackElements (Tracks.lua:578-580, :606-617) and node_idx is renumbered
+-- on the success path (:632-635) while the failure path forces start_el.node_idx
+-- = 1 (:579) — so a duplicate node_idx is the residue tell, and both numbers
+-- together are what "did this call change anything" means for a track.
+local function track_signature(track)
+	local conn, dup, seen = 0, 0, {}
+	for _, el in ipairs(track.elements or empty_table) do
+		local n = el.node_idx
+		if n ~= nil then
+			if seen[n] then dup = dup + 1 end
+			seen[n] = true
+		end
+		conn = conn + #(el.connections or empty_table)
+	end
+	return conn, dup
+end
+
+local function repair_station_connectors()
+	local process = rawget(_G, "ProcessTrackElements")
+	local resolve = rawget(_G, "ResolveMap")
+	if type(process) ~= "function" or type(resolve) ~= "function" then
+		log("%s: F48 station-connector pass declined — ProcessTrackElements/ResolveMap not found as globals (a game update moved them); F35 and F03 are unaffected", FIX_ID)
+		return 0
+	end
+
+	local repaired, walked, raised = 0, 0, 0
+	for _, city in ipairs(rawget(_G, "Cities") or empty_table) do
+		local labels = city.labels
+		for _, track in ipairs((labels and labels.TrackBase) or empty_table) do
+			local elements = track.elements
+			-- The shipped fixup's own guard (Station.lua:1345).
+			if type(elements) == "table" and #elements > 0 then
+				walked = walked + 1
+				local before_conn, before_dup = track_signature(track)
+				local ok, err = pcall(process, resolve(track), elements)
+				if not ok then
+					raised = raised + 1
+					log("%s: F48 pass raised on TrackBase#%s (%d element(s)): %s — that track is left as the engine restored it",
+						FIX_ID, tostring(rawget(track, "handle")), #elements, tostring(err))
+				else
+					local after_conn, after_dup = track_signature(track)
+					if after_conn ~= before_conn or after_dup ~= before_dup then
+						repaired = repaired + 1
+						log("%s: F48 repaired TrackBase#%s — %d element(s), connections %d -> %d, duplicate node_idx %d -> %d",
+							FIX_ID, tostring(rawget(track, "handle")), #elements,
+							before_conn, after_conn, before_dup, after_dup)
+					end
+				end
+			end
+		end
+	end
+	-- ⛔ Printed even when it is zero, and that is the point: PT-35's do-no-harm
+	-- read and the R7 effect rule both need to see a ZERO on a clean save, and an
+	-- absence of lines cannot be told from an absence of the pass.
+	log("%s: F48 station-connector pass repaired %d of %d track(s) walked (%d raised)",
+		FIX_ID, repaired, walked, raised)
+	return repaired
+end
+
+--------------------------------------------------------------------------------
 
 -- Exposed so the passes can be re-run from the console on a suspect save (and so
--- the Test Kit can drive them). Both return how many things they repaired.
+-- the Test Kit can drive them). All three return how many things they repaired.
+-- ⚠️ RepairStationConnectors deliberately IGNORES the one-shot flag: the flag
+-- belongs to the automatic handler, and a direct call that short-circuited on it
+-- would return a zero that samples nothing (the PT-35 lesson about a pass that
+-- early-returns before its own body).
 SMRFixPack.Sanitizer = {
 	RepairTurbineBuff = repair_turbine_buff,
 	RepairLeakedUpgradeModifiers = repair_leaked_upgrade_modifiers,
+	RepairStationConnectors = repair_station_connectors,
 }
 
 SMRFixPack.Register(FIX_ID, {
@@ -208,4 +328,16 @@ OnMsg.PostLoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 
 	ok, err = pcall(repair_leaked_upgrade_modifiers)
 	if not ok then log("%s: upgrade-modifier pass failed: %s", FIX_ID, tostring(err)) end
+
+	-- F48 is one-shot per save: the flag lives on UIColony, so it travels with
+	-- the savegame and a save this pass has already re-ordered is never
+	-- re-ordered again. A save from before the pack (or from before this build)
+	-- simply has no flag, which is the "tolerate their absence" contract in
+	-- FIX_POLICY §3.
+	local colony = rawget(_G, "UIColony")
+	if type(colony) == "table" and not colony[F48_FLAG] then
+		colony[F48_FLAG] = true
+		ok, err = pcall(repair_station_connectors)
+		if not ok then log("%s: station-connector pass failed: %s", FIX_ID, tostring(err)) end
+	end
 end)

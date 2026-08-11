@@ -805,7 +805,17 @@ SMRFixPack.Register("NoHomeless", {
 			-- silently seal every flagged dome to workforce-age entrants and
 			-- the dome would quietly lose its services. Say so instead.
 			{ class = "Community", method = "HasFreeWorkplacesAround",
-			  reason = "Community.HasFreeWorkplacesAround not found (game update changed the Workforce mixin?) — without it a flagged dome could never be staffed" },
+			  -- F100: the old string said "game update changed the Workforce mixin?"
+			  -- and that is not what happens. This check names Community while
+			  -- Workforce DECLARES the method, so on the first load pass — mod code
+			  -- runs before the class hierarchy is built (agent/facts/EF-001) — the
+			  -- inherited method is not there to find, the check fails, and the
+			  -- module applies cleanly on the second pass. The preceding
+			  -- "authoring error, not a game update" line (00_Core.lua) is the
+			  -- correct diagnosis; this string now agrees with it instead of
+			  -- contradicting it. Owner decision 2026-08-10: reason string ONLY —
+			  -- the Require target does not move until D12's review settles.
+			  reason = "Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed" },
 			{ global = "GetFreeWorkplacesAround",
 			  reason = "GetFreeWorkplacesAround not found (game update changed it?) — the arrival seam needs it to keep a flagged dome staffable" },
 			{ class = "Residence", method = "IsSuitable",
