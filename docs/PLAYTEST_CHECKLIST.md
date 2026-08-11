@@ -791,19 +791,38 @@ front on a staged COPY (`CP15STAGE.savegame.sav`, byte-identical, MD5-verified �
 your save is protected and survives), with the C39 law observation and the F85
 Ctrl-F9 check riding the same sitting.
 
+⭐ **Where the save is, 2026-08-11 (your report):** *"The save just came out of
+the founder stage I think."* That means the mystery's first timer is **running**,
+so the opening beat is **10–20 sols away and no more** — the wait has a
+guaranteed end (~12 real minutes at ultra). ⚠️ The game keeps no record of *when*
+approval fired, so your report is the only source for it and the rig treats it as
+your word, not a reading; it will say so out loud if the save disagrees.
+⇒ **Useful consequence: roughly the first 10 sols are dead time.** The sitting
+should spend them on the C39 law observation and the Ctrl-F9 check rather than
+watching an empty map.
+
 ⚠️⚠️ **READ THIS BEFORE YOU SIT DOWN — the mystery is much longer than this
 section used to say, and the correction came from reading the whole sequence
 rather than its first beat** (prep 2026-08-11, `Mystery 11.generated.lua`).
-The 10–20 sols after founder approval is only the FIRST beat. Between it and the
-wisp choice the sequence sleeps **another ~30–60 sols** in four more scripted
-waits (the largest is 15–30 sols on its own) and gates on things only you can
-do: **scan two sinkhole anomalies**, **build a Large Water Tank and fill it to
-80%**, **build a Light Trap**, and then **catch 30 wisps** (`fireflies_caught >
-29` is the literal gate on the choice) at roughly one or two per night.
-⇒ **A single sitting is very unlikely to reach the wisp choice.** Derived, not
+That first beat is only the beginning. Between it and the wisp choice the
+sequence sleeps **another ~30–60 sols** in four more scripted waits (the largest
+is 15–30 sols on its own) and gates on things only you can do: **scan two
+sinkhole anomalies**, **build a Large Water Tank and fill it to 80%**, **build a
+Light Trap**, and then reach **30 wisp catches** (`fireflies_caught > 29` is the
+literal gate on the choice).
+⇒ **A single sitting is still unlikely to reach the wisp choice.** Derived, not
 measured: 40–80 sols of scripted sleep alone is ~25–50 real minutes at ultra
 (1 sol = 720,000 game-ms, measured; ultra = 20×), before any of the player-gated
-stages or the wisp catching.
+stages.
+⭐ **Two things that make it cheaper than that sounds.** (1) The 30 is **catch
+events, not 30 different wisps** — wisps fly home at 4 AM and come back the next
+night, so the same few keep counting; a correction to prep's own first estimate,
+which was an order of magnitude too pessimistic. (2) Three of the five stages
+above have standing accelerators: `CheatCompleteAllConstructions` and
+`CheatFillAllStorages` cover the water tank and the Light Trap outright.
+⇒ **The one thing that really controls the wisp rate is placement: build the
+traps hard against the sinkholes** (they are only found within 400m of one) and
+keep them powered.
 **What the sitting therefore does:** reads exactly where the mystery stands
 (`CP15.MysteryWhere()` — the founder stage is measurable to the game-second; the
 10–20 sol sleep is **not** exposed to Lua and is reported as a bound, never as a

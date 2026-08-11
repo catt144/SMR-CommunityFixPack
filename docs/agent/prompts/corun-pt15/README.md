@@ -5,6 +5,17 @@
 saved as **`PT-15.savegame.sav`**, 45.6 MB, St. Elmo's Fire picked at new-game
 setup, **tech NOT cheat-researched**, colony new-ish/small) and ordered the
 next chain built around it plus whatever rides well on a new-ish colony.
+⭐ **Fixture state, owner report 2026-08-11 (a CLAIM, and the hedge is theirs):**
+*"The save just came out of the founder stage I think."* ⇒ the mystery's
+`WaitMsg("ColonyApprovalPassed")` has been released and the **10–20 sol sleep is
+running**. ⛔ The game keeps NO record of when approval fired — `-1` overwrites
+the timer (`ColonyViability.lua:95-97`) and `OnMsg.ColonyApprovalPassed` removes
+the `FounderStageDuration` notification (`Legislature.lua:1522-1523`) — so this
+claim can never be upgraded to a measurement after the fact, and the payload
+carries it as `CP15.approval_claim` with that stated. The *state* is confirmable
+(`g_ColonyNotViableUntil` must read `-1`) and `CP15.MysteryWhere()` prints a
+refutation line if it does not. **Planning consequence: the first ~10 sols of
+the march are dead time by construction** — spend them on C39 and Ctrl-F9.
 Four items:
 
 1. **PT-15 — Wisp power output (F07 + F15 bonus), THE FRONT.** Owner-attended

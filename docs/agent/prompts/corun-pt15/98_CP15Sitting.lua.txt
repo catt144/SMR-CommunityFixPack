@@ -27,6 +27,17 @@ CP15 = rawget(_G, "CP15") or {}
 CP15.rehearsal = REHEARSAL
 CP15.mode      = REHEARSAL and "HARNESS REHEARSAL (every verdict VOID)" or "REAL"
 
+-- ⚖️ AN OWNER CLAIM ABOUT THE FIXTURE, carried here so the countdown read can
+--    put a floor under its bound — and marked as a claim so nothing downstream
+--    can mistake it for a reading. Owner, 2026-08-11: "The save just came out of
+--    the founder stage I think." The hedge is theirs and is preserved.
+--    The game keeps no record of when approval fired (see CP15.MysteryWhere),
+--    so this is the ONLY source for it and it can never be upgraded after the
+--    fact. ⇒ CP15.MysteryWhere() CONFIRMS the state (g_ColonyNotViableUntil
+--    must read -1) but can never confirm the TIMING. If the state reads
+--    anything other than -1, this claim is refuted and the leg says so.
+CP15.approval_claim = "owner report 2026-08-11 (hedged, 'I think'): the founder stage ended just before PT-15.savegame.sav was written, so approval is roughly this save's own start point"
+
 local say  = CP15.Say
 local fmt  = CP15.Fmt
 local idof = CP15.IdOf
@@ -264,6 +275,31 @@ function CP15.MysteryWhere()
 		((viable ~= -1) and "NOT ARMED — still waiting on ColonyApprovalPassed" or
 		 "PAST IT — the sinkhole stage has begun or the sequence is elsewhere")))
 	say("MYSTERY countdown :: ⛔ DEGRADED READ. The remaining sleep is NOT exposed to Lua (no wake-time accessor; script sequences carry no ip). The only true statement is the BOUND: 0 to 20 sols from the moment approval passed, uniform over 10-20 sols in total. Sleep(7200000 + InteractionRand(7200000, seq_id)) — Mystery 11.generated.lua:76.")
+
+	-- ⭐ THE BOUND IS TIGHTER THAN "0 TO 20" WHEN THE APPROVAL MOMENT IS KNOWN,
+	--    and on THIS fixture it is — from the owner, not from the game.
+	-- ⛔ The stamp is DESTROYED when approval fires: g_ColonyNotViableUntil is
+	--    overwritten to -1 (ColonyViability.lua:95-97) and OnMsg.
+	--    ColonyApprovalPassed calls RemoveNotification("FounderStageDuration")
+	--    (Legislature.lua:1522-1523). Nothing persists the time. So an approval
+	--    moment can only ever enter this run as a CLAIM, and it is printed as
+	--    one — never folded into a derived figure without its source attached.
+	if armed then
+		CP15.armed_seen = CP15.armed_seen or gt
+		say(fmt("MYSTERY countdown :: CEILING (sound, no claim needed) — approval passed at or before this reading, so the sinkhole beat fires no later than GameTime %d, i.e. within %s of now. The march has a guaranteed end.",
+			gt + 20 * CP15.MS_PER_SOL, CP15.Sols(20 * CP15.MS_PER_SOL)))
+		if CP15.approval_claim then
+			say(fmt("MYSTERY countdown :: FLOOR from a CLAIM, not a measurement :: %s ⇒ the beat cannot fire before roughly GameTime %d (about %s from now). Treat as a planning figure only.",
+				tostring(CP15.approval_claim), gt + 10 * CP15.MS_PER_SOL,
+				CP15.Sols(10 * CP15.MS_PER_SOL)))
+			say("MYSTERY countdown :: ⇒ SCHEDULING CONSEQUENCE — the first stretch of the march is dead time by construction. Spend it on the C39 leg and the Ctrl-F9 check rather than watching an empty map.")
+		else
+			say("MYSTERY countdown :: NO FLOOR AVAILABLE — nothing in this run knows when approval passed, and the game does not keep it. Set CP15.approval_claim to the owner's own words if they have them; leave it unset rather than guessing.")
+		end
+	elseif CP15.approval_claim and viable ~= -1 then
+		say(fmt("MYSTERY countdown :: ⛔⛔ THE CARRIED OWNER CLAIM IS REFUTED BY THIS READING. The claim was: %s — but g_ColonyNotViableUntil reads %s, which is not -1, so approval has NOT passed. Record the refutation, drop the floor, and re-plan the march from the founder-stage figure above (which IS exact).",
+			tostring(CP15.approval_claim), tostring(viable)))
+	end
 	CP15.Applicable("PT15-countdown-read(a Trigger sequence state exists to read)",
 		trig and 1 or 0, trig and 1 or 0,
 		"player.seq_states walked this load; 'Trigger' is the mystery's main sequence (Mystery 11.generated.lua:37)")

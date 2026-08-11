@@ -226,9 +226,36 @@ any owner-gated stage and before catching 30 wisps.
 
 **Wisp supply, Src-verified** (`Fireflies.lua:230-252`): each `SinkholeBase`
 spawns `starting_fireflies = 2` on its first night (hour 22), then **1 in 3 per
-night** thereafter, capped at `max_firefly_number = 10`. With three sinkholes
-that is a handful up front and roughly one a night after — 30 caught wisps is
-tens of sols on its own.
+night** thereafter, capped at `max_firefly_number = 10`.
+
+⚠️⚠️ **CORRECTION TO THIS SECTION'S FIRST DRAFT — it said "30 caught wisps is
+tens of sols on its own" and that was WRONG, in the pessimistic direction. The
+gate counts CATCH EVENTS, not distinct wisps.** `fireflies_caught` increments
+**every time** a wisp attaches to a `LightTrap`, inside `Firefly:Drain`
+(`Fireflies.lua:535`), with no once-per-wisp guard — and `Firefly:GoHome`
+(`:408-424`) does **not** destroy the wisp at 4 AM: it detaches, flies back into
+the sinkhole and hides (`SetVisible(false)`). The object survives and re-drains
+the next night. ⇒ **the same wisps are re-caught nightly**, so 30 is a few
+nights' throughput once several traps exist, not 30 spawns. (The first draft was
+inference from the spawn rate; this is the counter and the destructor read.)
+
+**⇒ The one thing that actually controls the rate is PLACEMENT.** Wisps pick a
+water source via `SinkholeBase:FindWaterSource` (`:154-184`), which searches
+within `water_seeking_radius = 400 * guim` **of the sinkhole** and admits a
+`LightTrapBase` on one condition only — `obj.working` (`:159-161`). Before the
+choice the mode is `"none"`, so traps compete with `WaterStorage` in the same
+query (`:181`); after `"free"` traps are searched **exclusively first** (`:175-179`).
+⇒ **build traps hard against the sinkholes, and keep them working.**
+
+⚠️ Also noted, deliberately NOT used: `MassFireflySpawn(sinkhole)`
+(`Fireflies.lua:730-735`) raises a sinkhole's cap to 30 and fills it
+immediately. It is a plain ungated global with **no caller anywhere in the
+tree** — dev scaffolding. It would collapse this gate to seconds. Chain rule 12
+forbids it as written ("nothing injected into wisps"); the argument that it is
+*setup* rather than *mechanism* (F07's verdict is a ratio, correct at any
+non-zero wisp count, and the catch itself stays organic) is real but is **an
+owner decision, not this chain's to take**. Recorded here so nobody rediscovers
+it mid-sitting and treats it as obviously fine.
 
 ## 3. F15 rider — the entry's implied instrument is WRONG, and here is the right one
 
@@ -315,8 +342,30 @@ than the entry had.** `g_ColonyNotViableUntil` is a GameVar
 ⇒ when it is `> 0`, remaining founder time is exactly `value − GameTime()`, and
 `CP15.MysteryWhere()` prints both raw numbers and the derived figure.
 
-⛔ **The 10–20 sol sleep is NOT readable, and the leg is DEGRADED by design
-rather than guessed** (prompt 1's stop condition). Lua is given no wake-time
+⭐⭐ **THE FIXTURE'S STATE IS NOW KNOWN, AND IT TIGHTENS THE BOUND** (owner,
+2026-08-11: *"The save just came out of the founder stage I think"* — a CLAIM,
+hedge preserved, carried in the payload as `CP15.approval_claim`).
+⇒ approval has passed, the sleep is **running**, and the beat is 10–20 sols out
+rather than unknown. Two consequences the sitting should plan around:
+
+* **CEILING — sound, needs no claim.** Approval passed at or before the first
+  reading, so the sinkhole beat fires **no later than that reading + 20 sols**.
+  At 20× that is ~12 real minutes; the march has a guaranteed end.
+* **FLOOR — from the claim only.** If approval really was just before the save,
+  **nothing can happen for the first ~10 sols.** ⇒ **run leg 2 (C39) and leg 1
+  (Ctrl-F9) inside that window** instead of watching an empty map. This is the
+  single cheapest re-ordering available to the sitting.
+
+⛔ **The claim can never be upgraded.** `g_ColonyNotViableUntil` is overwritten
+to `-1` (`ColonyViability.lua:95-97`) and `OnMsg.ColonyApprovalPassed` calls
+`RemoveNotification("FounderStageDuration")` (`Legislature.lua:1522-1523`) — the
+timestamp is destroyed, so no later reading can recover it. The *state* is
+confirmable and `CP15.MysteryWhere()` prints an explicit **refutation line** if
+`g_ColonyNotViableUntil` reads anything but `-1`; if that fires, drop the floor
+and re-plan from the founder-stage figure, which is exact.
+
+⛔ **The 10–20 sol sleep itself is still NOT readable, and the leg is DEGRADED by
+design rather than guessed** (prompt 1's stop condition). Lua is given no wake-time
 accessor: the sleeping coroutine's deadline lives engine-side, `ThreadsRegister`
 is `dbg()`-gated (`CommonLua\Core\cthreads.lua:87-104`), and a **script**
 sequence has no instruction pointer to read — `StartSequenceScript`
@@ -453,7 +502,11 @@ on top of the file count.
 1. The mystery is roughly an order of magnitude longer than "10–20 sols" — the
    choice this whole chain is named for is 40–80 sols of sleep plus five
    owner-gated stages away (§2). The checklist now says so; the owner should not
-   discover it at the keyboard.
+   discover it at the keyboard. ⚠️ **But my first pass over-charged the wisp
+   gate by an order of magnitude** — it counts catch events and wisps survive
+   the night, so it is a few nights, not tens of sols (§2 correction). The
+   scripted-sleep figure was read off the sequence and stands; the wisp figure
+   was inference and did not.
 2. F15's reward has no counter to read, three multipliers on it, a 3.3-game-hour
    delay, and exactly one attempt (§3).
 3. Enacting the C39 law **fires workers**, which is both the trap (a half-staffed
