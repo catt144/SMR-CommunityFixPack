@@ -24,9 +24,9 @@ Audit residue: 2 citation drifts + 1 stale checklist token, corrected visibly.
 ⭐ `EF-050` (savename verbatim) · **`EF-051` Steam Cloud restores deletions,
 confirmed twice** · WORKFLOW rule 7 amended (gate at EVERY run top, must STOP;
 audit-approved) · CHAIN_METHOD +1 row (declared-VOID rehearsal).
-⇒ **NEXT: AUTHOR the PT-20 REDO co-run chain (attended; + the 10-s Ctrl-F9
-check that settles F85) — NOT yet authored. ✅ Steam Cloud UNTICKED 08-11 +
-14 strays cleared to the 55-file baseline; next launch's listing confirms.**
+⇒ **NEXT: `corun-pt15` prompt 1 (BUILT 08-11, owner order: PT-15 mystery
+sitting on the owner's NEW `PT-15.savegame.sav` fixture + C39 observed + F85
+Ctrl-F9 RE-ROUTED here + EF-051 post-untick confirm). PT-20 redo follows.**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 

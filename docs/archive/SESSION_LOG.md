@@ -8,6 +8,48 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — `corun-pt15` BUILT and queued (owner order): the PT-15 mystery sitting, with C39 finally observed and F85's Ctrl-F9 check re-routed to ride it
+
+Owner built the PT-15 fixture themselves (*"I setup a basic save for the
+PT-15 with the mystery selected"* — `PT-15.savegame.sav`, 45.6 MB, St. Elmo's
+Fire picked at new-game, tech deliberately un-cheated) and ordered the next
+chain built around it, plus *"anything else you think would go well with it"*
+and the C39 law question (*"laws are hidden until you progress down the
+chain… either know what branch to focus on or a way to focus it"*).
+
+**Authored: `agent/prompts/corun-pt15/`** — README + `01_OPUS_PREP` (game-
+closed: Src-verify every scripted read, park the instruments resurrected from
+`e5dca6f`, stage the fixture copy) + `02_OPUS_SITTING` (attended priority
+queue: gate/fixture → **F85 Ctrl-F9, 10 s** → **C39 leg** → mystery march at
+ultra, owner playing → **PT-15 wisp reading with R4** → F15 rider) +
+`03_FABLE_AUDIT` (terminal; folder empty; kickoff = PT-20 redo). Owner eyes
+present ⇒ PT-15 can earn `tested` (verbatim-quote rule binds).
+
+**The C39 research that unblocked its leg (Src 2026-08-11, 1.0.7.396349):**
+the law's policy `Automation` sits **10th of 11** in the Technology branch
+(`Data\PolicyDef.lua:740-747`, SortKey 900) — that is why organic play never
+surfaces it. **`LawDefs.Policy_Automation_ServiceAutomation:Activate()` is
+the exact call a passed vote executes** (`Legislature:EnactLaw` ends in it,
+`Legislature.lua:512-553`; `Activate`/`Deactivate` at
+`ClassDef-Factions.generated.lua:1778-1813`, revert restores the policy
+default), is not cheat-gated, and is console-reachable — first-execution
+discipline binds. Vote-flow alternatives recorded (`g_AllPoliciesVisibleCheat`,
+`g_QuickSessionsCheat` — plain GameVars; `CheatEnactAllLaws` is cheat-gated,
+retail-dead per F101). **Mystery timing Src-read** (`Mystery 11.generated.
+lua:74-78`): `ColonyApprovalPassed` + 10–20 sols uniform; game-time, so ultra
+compresses it to 6–12 real minutes.
+
+**Chain-shape calls, stated:** PT-20 redo deliberately NOT folded in (pack-
+off run condition does not mix with a mystery sitting mid-flow; it stays the
+named next front) — but **F85's Ctrl-F9 check re-routes here** (its only
+requirement is a colony; answers the owner's open decision sooner; checklist
+note appended without touching the owner's ruling text). `PT-15.savegame.sav`
+joins the protected-fixture list (THREE now). The chain's first launch doubles
+as **EF-051's post-untick falsifier** (listings scripted into prep + close-
+out). D10 stays parked per C39's own warning.
+
+STATE NEXT → corun-pt15 prompt 1. doccheck GREEN, pushed.
+
 ## 2026-08-11 — Steam Cloud unticked by the owner; the 14 strays are cleared to the pre-restore baseline
 
 Owner, same day as EF-051's measurement: *"Steam settings done."* With the

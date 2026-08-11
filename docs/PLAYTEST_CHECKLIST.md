@@ -106,6 +106,9 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    redo sitting**: press Ctrl-F9 in a colony — a quicksave landing makes the
    default binding a live route into this defect and changes the whole
    disposition; nothing happening confirms the source read. Decision waits.
+   ⭐ **Re-routed 2026-08-11 (your corun-pt15 order): the Ctrl-F9 check now
+   rides the PT-15 sitting** — any colony works and it answers sooner. The
+   PT-20 redo is unchanged otherwise.
 6. ~~**⚖️ Disabling a mod needs a full game restart — does `PT-20` need
    redoing?**~~ ✅ **DECIDED 2026-08-10 — REDO NOW.** A dedicated PT-20 redo
    co-run is queued (your part: the Mod-Manager disable click, a **full game
@@ -774,6 +777,12 @@ instead of kilowatts. Fixed: ~1000 × wisp count, a real power source.
 **Requirements:** SAVE-D — St. Elmo's Fire mystery with Light Traps holding
 wisps (pick the mystery at new-game setup; the console route is on the entry —
 disclose if used).
+⭐ **QUEUED 2026-08-11 — you built the fixture yourself** (`PT-15.savegame.sav`,
+mystery selected, tech un-cheated): the **`corun-pt15`** chain runs this as its
+front on a staged COPY (your save is protected and survives), with the C39 law
+observation and the F85 Ctrl-F9 check riding the same sitting. Mystery timing,
+Src-read: first beat lands 10–20 sols after founder approval; ultra speed (20×)
+makes that 6–12 real minutes.
 **Setup:**
 1. Choose "free the wisps" (or the console form, entry).
 2. The agent reads a trap's output (entry): trickle = broken, ~1000×wisps =
