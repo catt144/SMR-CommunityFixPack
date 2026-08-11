@@ -294,10 +294,18 @@ not by the format.
 
 ## Do first — the campaign's ordered top (chain-12 QA, `agent/reports/CHAIN_QA_REPORT.md` §9)
 
-1. **PT-62's remainder** (→ Colonists & domes) — the only gate left on D12: a
-   stable colony so the drain is not fighting an inflow, then the Mod-Manager
-   uninstall half and the repaired A/B lever.
-2. **The load-heal round-trip sweep** (~1 hour) — save, reload twice, read the
+1. **PT-62's remainder** (→ Colonists & domes) — D12's only gate, ⛔ NOT a
+   release gate (opt-in; owner, 2026-08-03). ✅ P4/P6 PASSED 2026-08-03 (dome
+   23 → 0, overpop cleared); still owed: **P12 · P13 · P14 + the landing
+   check** — the PT-62 block is the truth, this line is its summary.
+   *(Queue line re-synced 2026-08-11 by a doc sweep — it had frozen the
+   pre-08-03 remainder while the block below moved on.)*
+2. ✅ **The load-heal round-trip sweep — BOTH LEGS RAN AND PASS** (unattended,
+   2026-08-04: D1 natural-state ×3 loads clean, D2 forced-defect heals fire
+   once and hold; details annotated below). **The only residue is your close
+   call** — whether D1+D2 close the item (two families reported unsampled,
+   never clean). Not owed keyboard time.
+   *(Original ask, kept for the annotations that follow:)* save, reload twice, read the
    heal numbers (the Astrogeologist +10% class of defect; two-for-two
    defective on the heals actually tested is the project's worst base rate).
    Design: `CHAIN_QA_REPORT.md` §9 item 2.
