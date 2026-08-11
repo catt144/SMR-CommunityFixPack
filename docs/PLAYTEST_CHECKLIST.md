@@ -122,6 +122,20 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    ⭐ **Re-routed 2026-08-11 (your corun-pt15 order): the Ctrl-F9 check now
    rides the PT-15 sitting** — any colony works and it answers sooner. The
    PT-20 redo is unchanged otherwise.
+   ✅✅ **THE CHECK RAN 2026-08-11 IN THE PT-15 SITTING — Ctrl-F9 IS NOT A
+   ROUTE, and you were right to make us press it.** You pressed it; nothing
+   happened on all three witnesses (no new save file, no `Game saved:` or
+   `Save failed:` line, nothing on your screen). But three absences aren't a
+   mechanism, so we took a structural read instead: **the Quick Save action is
+   never built on retail.** `Platform.cheats` is falsy, so the block containing
+   `idQuickSave` never runs — and `idQuickSave` reads `nil` against **437
+   actions, 433 with ids, with the lookup proven working on a known-present
+   id**. There is no save-the-game action in the entire set; the only
+   `save`-ish entries are map/camera editor tools. ⚠️ Note the save was **not**
+   refused — `CanSaveGame()` came back truthy. The action simply isn't there.
+   ⇒ **your original challenge is fully vindicated and the observation is
+   closed. Only the disposition is still yours** (severity, tier, whether
+   anything gets built).
    ⭐ **Prep 2026-08-11 — the check now has three witnesses instead of one, so
    "nothing happened" will be a measurement rather than an impression.** (1) a
    new save file appearing in the save directory, which we list before and
@@ -777,24 +791,80 @@ guaranteed regardless.
 refusing to be salvaged, and would move F99 off `cand` on the spot. Note the
 session uptime next to the count (the 2026-08-03 convention above).
 
-### Rider — C39: Service Automation and the four Workshops · Status: unrun — take it when the law is enactable
+### Rider — C39: Service Automation and the four Workshops · Status: ✅ **RUN 2026-08-11 (corun-pt15 sitting) — ANSWERED**
 **Bug:** the law halves staffing by LABEL while its performance compensation
 keys on CLASS; the four Workshops sit on the wrong side of that line. The sign
-of the harm is genuinely unclear — this is a keyboard observation, not more
+of the harm was genuinely unclear — this was a keyboard observation, not more
 reading. → [C39](agent/bugs/C39.md)
-**Requirements:** Service Automation enacted / a staffed Workshop plus a
-Diner or Spacebar in the same dome as the in-family control.
-**Setup:** read workers-per-shift, performance and the Comfort the shift pays,
-workshop vs control (entry).
+
+⭐⭐ **RESULT: the Workshops are MISSING AN UPLIFT, not taking a penalty.** With
+the game **paused** (both readings at the same game instant, so drift cannot
+explain it), your TV Studio Workshop and a Diner in the same dome **both** took
+the identical −50% staffing cut — and only the Diner was paid back for it:
+
+| | before | law on | after revert |
+|---|---|---|---|
+| **Workshop** performance | 127 | **131** | 129 |
+| **Workshop** workers/shift | 12 | **6** | 12 |
+| **Diner** performance | 114 | **268** | 124 |
+| **Diner** workers/shift | 2 | **1** | 2 |
+
+The Diner's **114 → 268 → 124** reverses when the law is deactivated, which is
+what makes it a measurement rather than a coincidence. Your words, kept in the
+record: *"more than double when I reverted it dropped to 124 for the dinner."*
+⇒ those four buildings lose ~half their output whenever Service Automation
+passes.
+
+⚖️ **YOUR CALL — nothing is built.** The chain's scope fence makes C39 an
+observation only; if you want a repair, that is a new decision. Severity is also
+open: it needs a late-game Technology policy (SortKey 900, 10th of 11) to be
+voted through before it can bite anyone.
+⛔ **Honest limit:** only **one** of the four Workshops (`TVStudioWorkshopCCP1`)
+existed in the colony. The other three share the same class chain so the same
+result is expected — but it is inferred for them, not measured.
 
 ---
 
 # Mysteries
 
-### PT-15 — Wisp power output (F07, + F15 bonus) · Status: unrun · **mode: co-run** (routing 2026-08-04 — reads scripted, `SetLightTrapMode` verified; the SAVE-D mystery fixture is the real cost)
+### PT-15 — Wisp power output (F07, + F15 bonus) · Status: ✅✅ **PASSED 2026-08-11 — F07 is now `tested`, F15 confirmed too**
 **Bug:** freeing the wisps rewarded ~1/1000 of the promised power — a trickle
 instead of kilowatts. Fixed: ~1000 × wisp count, a real power source.
 → [F07](agent/bugs/F07.md), [F15](agent/bugs/F15.md)
+
+⭐⭐ **RESULT — you played the whole mystery and the fix works.** Your Light Trap
+held **95 wisps and produced 95 power** on a 218.5 grid — **43% of your colony's
+entire supply, about 47 Solar Panels' worth.** Vanilla's line would have given
+**0.095**. It survived a save/reload unchanged. Your verdict, kept verbatim:
+*"the screen shot is what I see, so it is working."*
+
+**F15 also passed**, on the same trapful: destroying 15 wisps posted **zero**
+research points at the instant of the kill (the vanilla double-grant is gone) and
+the notification's **1,500** matched `wisps × 100` exactly.
+
+⛔ **Two honest limits** — the fix is verified, but the *broken* behaviour was
+never seen (the pack was on throughout), and the final enact had to be **forced**
+by us because your organic click landed at 2 PM with an empty trap. That last
+part was our scheduling error, not yours; see the entry.
+
+🗄️ **Two saves were kept at your request** (they are not strays — do not delete):
+* **`CP15PT15.savegame.sav`** — 95 wisps held, mode `free`. Rebuilding it
+  organically costs another ~3-hour mystery playthrough.
+* **`CP15F15.savegame.sav`** — the post-destroy state that evidences C46 below.
+
+### ⚖️ NEW 2026-08-11 — a defect we found by accident, and it needs your call
+**C46 — an emptied Light Trap keeps producing power forever.** Choosing
+*"Experiment upon them"* kills every wisp but never clears the trap's power
+modifier, and the same choice stops all wisp spawning, so nothing ever resets it.
+Measured: **0 wisps, still 15 power, indefinitely** — and it scales with whatever
+the trap held when you clicked (95 wisps would leave 95 power standing).
+→ [C46](agent/bugs/C46.md)
+**It's vanilla, and our own fix inherits the omission.** The sign favours the
+player (free power), so it's a plausibility defect rather than a harm.
+**Your call: is this worth fixing at all?** Nothing is built. ⚠️ One cheap gap if
+you say yes — we saved the state but never reloaded it, so whether the phantom
+power survives a save/load is still untested; that costs one load of
+`CP15F15.savegame.sav`.
 **Requirements:** SAVE-D — St. Elmo's Fire mystery with Light Traps holding
 wisps (pick the mystery at new-game setup; the console route is on the entry —
 disclose if used).

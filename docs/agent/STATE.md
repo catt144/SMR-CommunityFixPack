@@ -12,21 +12,21 @@ Current only, rewritten in place; history newest-first in
 **`corun-batch-2` CLOSED 08-10, EVERY leg verdict SUSTAINED** (keystone ANSWERED,
 F21 WITNESSED, F85 route REFUTED ⇒ owner, F99 2×2 FULL, PT-47 ARCHIVED,
 **`PT35FIXTURE` BUILT**, D13's 4th OFF state).
-✅✅ **`unattended-2` CLOSED 2026-08-11 — terminal audit SUSTAINED ALL FOUR
-VERDICTS** (logs byte-verified + read whole, per-probe diff RE-DERIVED, every Src
-site re-read). **F48 `fixed`** (7 tracks to clean-chain `2×(n−1)` incl. PT-37's
-own 559→558, held across both R4 round trips, honest zero ×3) · **C43 `fixed`**
-(0 TestKit `[LUA ERROR]`, one declared flip, 77/0/10/0; `CaveInRubble` locals
-CONFIRMED — dead-stub disposal is an OWNER call, entry) · **F100 `fixed`** ·
-**PT-35 leg A case A COMPLETE** (0 of 14 everywhere, both halves sampled; B/C
-parked; NOT `tested`). Residue: 2 citation drifts + 1 stale token, fixed visibly.
-⭐ `EF-050` (savename verbatim) · **`EF-051` Steam Cloud restores deletions, 2×**
+✅✅ **`unattended-2` CLOSED 08-11 — audit SUSTAINED ALL FOUR**: F48/C43/F100
+`fixed`, PT-35 leg A case A COMPLETE (B/C parked). ⭐ `EF-050` · **`EF-051`**
 · WORKFLOW rule 7 amended (gate at EVERY run top, must STOP) · CHAIN_METHOD +1.
-⇒ **NEXT: `corun-pt15` prompt 2 — THE ATTENDED SITTING.** Prep CLOSED 08-11:
-routes re-derived, instruments parked (parse GREEN, nothing armed), `CP15STAGE`
-staged, EF-051 baseline LISTED at **57 `.sav`**, C39 shift-boundary Q ANSWERED.
-⚠️ The wisp choice is **40–80 sols + 5 owner-gated stages** away — one sitting
-likely misses it (checklist fixed). PT-20 redo follows.
+⭐⭐ **`corun-pt15` SITTING RAN 2026-08-11 — every leg landed, both options
+resolved.** **PT-15 PASSED ⇒ F07 `tested`** (95 wisps → 95,000 internal, 43% of
+the grid, ~47 Solar Panels; R4 held; owner-witnessed) · **F15 confirmed** (batch
+grant Δ=0 while paused; notification 1,500 = wisps×100) · **C39 ANSWERED =
+MISSING UPLIFT** (control 114→268→124 REVERSES, subject 127→131→129 — repair is
+an OWNER call) · **F85 CLOSED, Ctrl-F9 NOT a route** (`idQuickSave` never built,
+`Platform.cheats=nil`, poscontrol=true) · **EF-051 2nd sample PASSES** (59
+`.sav`, every delta NAMED, 0 strays). 0 `[LUA ERROR]` · 0 F99 · 0 C45.
+⭐ NEW **`C46`** (emptied trap produces forever — vanilla, OWNER call) ·
+**`EF-052`** (50× is the real ceiling; SpeedRamp's own 400× pick is WRONG) ·
+F78 +2 · F02 +1 ORGANIC firings. Saves KEPT: `CP15PT15` `CP15F15` (not strays).
+⇒ **NEXT: `corun-pt15` prompt 3 — terminal Fable audit.** Then the PT-20 redo.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -35,7 +35,7 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 81 registered (74 default-active, 8 optional-gated files)
 - Code/*.lua files: 82
 - TestKit probes: 87
-- BUGS index rows: 101 F + 12 D + 45 C
+- BUGS index rows: 101 F + 12 D + 46 C
 ```
 
 Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
