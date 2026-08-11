@@ -55,6 +55,8 @@ function CP15.Menu()
 	say("MENU  PT-15 read   : CP15.TrapRead(when)   [call BEFORE the choice and IMMEDIATELY after it]")
 	say("MENU  F15 rider    : CP15.RPRead(when)  CP15.F15Destroy()   [FORCED — read the leg's own warning first]")
 	say("MENU  C39          : CP15.C39Scan()  CP15.C39Set(i,j)  CP15.C39Before()  CP15.C39Enact()  CP15.C39After()  CP15.C39Revert()")
+	say("MENU  ⚖️ OPTION A  : CP15.SpeedRamp()  CP15.SpeedProbe(factor, secs)   [owner call at the keyboard — measures how fast the march can safely run]")
+	say("MENU  ⚖️ OPTION B  : CP15.MassWisps(\"OWNER-SAID-YES\")                 [owner call at the keyboard — AMENDS chain rule 12; read the leg's banner first]")
 	say("MENU  bookkeeping  : CP15.Note(text)  CP15.SaveNamed(name)  CP15.Close()")
 	return true
 end
@@ -727,6 +729,202 @@ function CP15.C39Revert()
 	c39_read_one("subject", "after-revert", CP15.c39_subject)
 	c39_read_one("control", "after-revert", CP15.c39_control)
 	say("C39 REVERT :: ⚠️ workers fired by the enactment do NOT snap back. CheckWorkForUnemployed re-hires over game time, so an after-revert reading below the baseline is expected and is NOT evidence of a second defect.")
+	return true
+end
+
+---- ⚖️ OPTION A — the speed ceiling, MEASURED ------------------------------
+--
+-- Owner-authorised 2026-08-11 as an OPTION, decided at the keyboard. Parked and
+-- callable; nothing runs it automatically.
+--
+-- ⭐ WHY THIS EXISTS. "Ultra" is 20x by UI convention only. const.MaxTimeFactor
+--    is 100,000,000 against const.DefaultTimeFactor 1000 — a 100,000x ceiling —
+--    and UIColony:SetGameSpeed applies its argument through
+--    SetTimeFactor(const.DefaultTimeFactor * factor) with NO Lua-side clamp
+--    (Lua\Colony.lua:564-592). So the plan's 25-50 real minutes of scripted
+--    sleep is a choice, not a limit.
+--
+-- ⛔⛔ AND WHY IT CANNOT JUST BE CRANKED — the failure mode is SILENT.
+--    Buildings poll on a game-time thread that Sleep()s building_update_time
+--    and then reads UIColony.hour (Building:StartUpdateThread,
+--    Lua\Buildings\Building.lua:776-795). The mystery's own logic tests that
+--    hour for EQUALITY: wisps spawn at `hour == 22`, go home at `hour == 4`
+--    (Fireflies.lua:231/257), and a Light Trap's water draw switches at
+--    `hour == 21` / `hour == 5` (:566-572). SinkholeBase polls every 5000
+--    game-ms. Once ONE rendered frame advances more than 5000 game-ms, a poll
+--    is skipped, an hour value is never observed, the equality never matches —
+--    and no wisps spawn that night, with no error and no log line.
+--
+-- ⇒ THE INSTRUMENT IS THE SAME CADENCE AS THE CODE AT RISK. A game-time thread
+--   Sleep(5000)ing and recording every hour it observes reproduces exactly the
+--   poll that would fail. A gap in the observed hour sequence IS the failure.
+--   The effective multiplier is measured alongside, because a factor the sim
+--   cannot sustain buys nothing: game-ms advanced divided by real-ms elapsed.
+--
+-- ⚠️ WHEN TO RUN IT: during the countdown's dead window. Before the sinkhole
+--    exists there is nothing hour-gated to damage, the 10-20 sols have to pass
+--    anyway, and the ramp IS the march. Running it later risks eating a wisp
+--    night for a measurement.
+local function speed_probe_body(factor, real_seconds)
+	local requested = tonumber(factor) or 20
+	local budget    = (tonumber(real_seconds) or 20) * 1000
+	local hours_per_day = (rawget(_G, "const") or empty_table).HoursPerDay or 24
+
+	local ok_set = pcall(function() UIColony:SetGameSpeed(requested) end)
+	Sleep(500)
+	local applied = GetTimeFactor() / const.DefaultTimeFactor
+
+	local seen, gaps, last = 0, {}, nil
+	local g0, r0 = GameTime(), RealTime()
+	CP15.speed_probe_running = true
+	CreateGameTimeThread(function()
+		while CP15.speed_probe_running do
+			local h = rawget(_G, "UIColony") and UIColony.hour
+			if type(h) == "number" and h ~= last then
+				if last ~= nil then
+					local step = (h - last) % hours_per_day
+					if step > 1 then
+						gaps[#gaps + 1] = fmt("%d->%d (skipped %d)", last, h, step - 1)
+					end
+				end
+				seen = seen + 1
+				last = h
+			end
+			Sleep(5000)   -- the EXACT cadence SinkholeBase polls at
+		end
+	end)
+	Sleep(budget)
+	CP15.speed_probe_running = false
+	local dg, dr = GameTime() - g0, Max(1, RealTime() - r0)
+	local eff100 = MulDivRound(dg, 100, dr)
+
+	local verdict
+	if seen == 0 then
+		verdict = "NOT-APPLICABLE — no hour transition was observed in the budget; give it more real seconds or more speed"
+	elseif #gaps > 0 then
+		verdict = fmt("UNSAFE — %d skipped hour(s): %s. At this factor the mystery's hour==22 spawn can silently never fire.",
+			#gaps, table.concat(gaps, ", "))
+	else
+		verdict = "SAFE at this factor — every hour in the window was observed by a 5000ms poller"
+	end
+	say(fmt("%sSPEED requested=%sx applied=%sx (SetGameSpeed ok=%s) | effective=%d.%02dx MEASURED (%d game-ms over %d real-ms) | hour transitions seen=%d | %s",
+		CP15.Void(), tostring(requested), tostring(applied), tostring(ok_set),
+		eff100 / 100, eff100 % 100, dg, dr, seen, verdict))
+	return { requested = requested, applied = applied, eff100 = eff100,
+		seen = seen, gaps = #gaps, safe = (seen > 0 and #gaps == 0) }
+end
+
+function CP15.SpeedProbe(factor, real_seconds)
+	if not CP15.Guard("SpeedProbe") then return false end
+	CP15.Label("FORCED", "game speed probe at " .. tostring(factor) .. "x",
+		"speed is a harness accelerator and is disclosed per reading; it changes only how fast game time advances, never what the sim computes")
+	CreateRealTimeThread(function() speed_probe_body(factor, real_seconds) end)
+	say("SPEED probe started in a real-time thread; its line lands when the budget expires. Do not stack probes.")
+	return true
+end
+
+-- The ramp. Default rungs bracket the ~300x boundary the poll arithmetic
+-- predicts (a 60fps frame at 300x advances ~5000 game-ms) — but the number that
+-- matters is MEASURED, not predicted, which is the whole point of the leg.
+function CP15.SpeedRamp(list, real_seconds)
+	if not CP15.Guard("SpeedRamp") then return false end
+	CP15.Label("FORCED", "game speed ramp",
+		"a sequence of speed probes; the sitting's own march runs inside it")
+	list = list or { 20, 50, 100, 200, 400 }
+	real_seconds = real_seconds or 20
+	CreateRealTimeThread(function()
+		local rows, best = {}, nil
+		for _, f in ipairs(list) do
+			local r = speed_probe_body(f, real_seconds)
+			rows[#rows + 1] = fmt("%sx->eff %d.%02dx %s", tostring(f),
+				r.eff100 / 100, r.eff100 % 100, r.safe and "SAFE" or "UNSAFE")
+			if r.safe then best = f end
+		end
+		say(fmt("%sSPEEDRAMP :: %s", CP15.Void(), table.concat(rows, " | ")))
+		if best then
+			say(fmt("%sSPEEDRAMP ⭐ HIGHEST FACTOR WITH ZERO SKIPPED HOURS = %sx. Use it for the march. ⚠️ This is one machine on one save at one moment — record it as a measurement with those conditions, not as a property of the game.",
+				CP15.Void(), tostring(best)))
+		else
+			say("SPEEDRAMP ⛔ NO SAFE RUNG. Every factor tried skipped hours or saw no transition. Fall back to 20x and say so.")
+		end
+		local ok = pcall(function() UIColony:SetGameSpeed(best or 20) end)
+		Sleep(500)
+		say(fmt("SPEEDRAMP restored speed: SetGameSpeed(%s) ok=%s, read back %sx",
+			tostring(best or 20), tostring(ok),
+			tostring(GetTimeFactor() / const.DefaultTimeFactor)))
+	end)
+	return true
+end
+
+---- ⚖️ OPTION B — MassFireflySpawn, the wisp-gate shortcut ------------------
+--
+-- Owner-authorised 2026-08-11 as an OPTION, decided at the keyboard. ⛔ It is
+-- NOT the default and the leg refuses without an explicit confirm token.
+--
+-- WHAT IT IS. MassFireflySpawn(sinkhole) (Fireflies.lua:730-735) raises that
+-- sinkhole's max_firefly_number to 30 and spawns up to the new cap. It is a
+-- plain ungated global with NO CALLER ANYWHERE IN THE TREE — dev scaffolding.
+--
+-- ⭐ WHAT IT DOES NOT DO, and this is the part that decides the trade:
+--   * It does NOT start the wisps. SpawnFirefly ends with SetCommand(false)
+--     (Fireflies.lua:132-145) — the wisps sit dormant at the sinkhole until the
+--     next night's FirefliesStart (:198-206), driven by the ordinary hour==22
+--     BuildingUpdate. ⇒ the flight, the water-source choice
+--     (SinkholeBase:FindWaterSource, :154-184) and the catch all stay ORGANIC.
+--   * It does NOT touch a trap, a modifier, or SetLightTrapMode. F07's verdict
+--     is a RATIO — electricity_production equals the wisp count (broken) or
+--     1000x it (fixed) — and that is correct at any non-zero wisp count. This
+--     changes the count, not the arithmetic being tested.
+--
+-- ⚠️ WHAT IT DOES COST:
+--   * The trapful at read time is manufactured SUPPLY. A `tested` grant must
+--     say so in the same sentence as the grant; it is not the shipped player
+--     route to having wisps.
+--   * max_firefly_number = 30 is a PERMANENT mutation of this sinkhole on the
+--     staged copy. Fine on a copy; it must appear in the record.
+--   * Chain README rule 12 forbids injecting into wisps as written. Using this
+--     is an AMENDMENT the owner makes at the keyboard, logged by this leg, not
+--     a quiet exception.
+-- (Sibling, recorded so nobody reaches for it by accident:
+--  SinkholeBase:TestSpawnFireflyAndGo (:147-152) spawns ONE and starts it
+--  immediately — that one DOES bypass the night cycle. Not used, not wrapped.)
+function CP15.MassWisps(confirm)
+	if not CP15.Guard("MassWisps") then return false end
+	if confirm ~= "OWNER-SAID-YES" then
+		say("MASSWISPS ⛔ REFUSED. Call CP15.MassWisps(\"OWNER-SAID-YES\"). This is an owner decision taken at the keyboard, and it amends chain rule 12 — it may not be typed by reflex.")
+		return false
+	end
+	local sinks = CP15.LabelAll("Sinkhole")
+	if #sinks == 0 then
+		say("MASSWISPS ⛔ NOT RUN — no Sinkhole exists yet. The mystery has not spawned one, so there is nothing to fill.")
+		CP15.Applicable("PT15-masswisps-population(a sinkhole exists to fill)", 0, 0,
+			"Sinkhole label walked across every city this load")
+		return false
+	end
+	CP15.Label("FORCED", "MassFireflySpawn on every sinkhole",
+		"⚠️ AMENDS chain rule 12 by explicit owner decision; wisp SUPPLY is manufactured, the catch and the trap arithmetic stay untouched")
+	local colony = rawget(_G, "UIColony")
+	local mystery = colony and colony.mystery
+	say(fmt("MASSWISPS BEFORE :: fireflies_caught=%s | %d sinkhole(s)",
+		tostring(mystery and mystery.fireflies_caught), #sinks))
+	for i, s in ipairs(sinks) do
+		say(fmt("MASSWISPS BEFORE :: #%d %s fireflies=%d max_firefly_number=%s",
+			i, idof(s), #(rawget(s, "fireflies") or empty_table),
+			tostring(rawget(s, "max_firefly_number"))))
+	end
+	for i, s in ipairs(sinks) do
+		CP15.Try(fmt("MassFireflySpawn(sinkhole #%d) [FIRST EXECUTION]", i), function()
+			MassFireflySpawn(s)
+			return #(rawget(s, "fireflies") or empty_table)
+		end)
+	end
+	for i, s in ipairs(sinks) do
+		say(fmt("%sMASSWISPS AFTER :: #%d %s fireflies=%d max_firefly_number=%s",
+			CP15.Void(), i, idof(s), #(rawget(s, "fireflies") or empty_table),
+			tostring(rawget(s, "max_firefly_number"))))
+	end
+	say("MASSWISPS :: ⏳ the new wisps are DORMANT (SetCommand(false)). They fly on the NEXT night's hour==22 FirefliesStart — so this saves nights of accumulation, not the night cycle itself. Watch fireflies_caught climb from the following morning.")
+	say("MASSWISPS :: ⛔ THE RECORD MUST CARRY THIS. Any PT-15 verdict taken on a trapful that this leg supplied says so in the same sentence, and a `tested` grant names it as forced supply.")
 	return true
 end
 

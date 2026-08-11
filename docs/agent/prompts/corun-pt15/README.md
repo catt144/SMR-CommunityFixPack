@@ -127,6 +127,23 @@ Four items:
     accelerators fine for C39's workshop setup (research/build); NOTHING
     injected into wisps, traps, or the mystery sequence itself — the mystery
     is played, not forced. Disclose every cheat in the reading it enabled.
+    ⚖️ **AMENDED 2026-08-11 by owner order** (*"Add them both to the sitting as
+    options and we will decide when we are running"*). Two named exceptions are
+    **parked, built and confirm-token-gated**, and neither is default:
+    **(A)** `CP15.SpeedRamp()` — raising the time factor above ultra is a
+    harness accelerator, not an injection, but it has a **silent** failure mode
+    (skipped hour polls kill the `hour == 22` wisp spawn), so it is *measured*
+    before it is used; run it in the countdown's dead window.
+    **(B)** `CP15.MassWisps("OWNER-SAID-YES")` — `MassFireflySpawn` fills a
+    sinkhole to 30 dormant wisps. This IS an injection into wisps and would
+    otherwise be barred by this rule. It is permitted **only** on an explicit
+    owner decision taken at the keyboard, logged by the leg, and it does not
+    forfeit F07's arithmetic (a ratio, correct at any count) but it does forfeit
+    "wisp supply as shipped" — any `tested` grant must name it. The catch,
+    flight and trap paths stay organic either way (`SetCommand(false)`,
+    `Fireflies.lua:132-145`).
+    ⛔ Everything else this rule forbids stays forbidden — in particular
+    `SinkholeBase:TestSpawnFireflyAndGo`, which bypasses the night cycle.
 13. **⛔ D10 stays parked** (C39 entry warning): no capacity-dial work rides
     this chain; the C39 leg holds everything else at base.
 14. **⭐ Kickoff + next-chain handoff.** Prompt 3's owner report ENDS with the

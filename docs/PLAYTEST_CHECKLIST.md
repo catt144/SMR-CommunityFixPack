@@ -846,6 +846,26 @@ found: the reward arrives **3.3 game hours late** (each wisp's death sleeps
 first), and once destroy mode is on **no further wisps spawn at all** — so it is
 a one-shot rider, taken last.
 
+⚖️ **Two calls that are yours to make DURING the sitting** (your order,
+2026-08-11 — both built and parked, neither runs unless you say so; the agent
+will put each to you once, at the moment it would help):
+
+1. **Measure how fast this save can safely run.** "Ultra" is 20× by UI
+   convention only — the engine allows far more, and the march is mostly
+   waiting. Costs ~2 minutes, and it is nearly free because it runs during the
+   countdown's dead window, so the measuring *is* the marching. ⚠️ It has to be
+   measured rather than guessed: past a certain speed the game skips the hourly
+   check that spawns wisps, and it does so **silently** — no error, just a night
+   where nothing appears. The rig finds the fastest setting where that never
+   happens.
+2. **Fill the sinkholes with wisps.** There is an unused developer function that
+   tops a sinkhole up to 30. It would collapse the 30-catch gate to a night or
+   two. The wisps still have to wake up, fly out and get caught normally, and it
+   does not touch the power maths the test is actually about — but it does mean
+   we can no longer say the wisps arrived the way a player's would, so a full
+   `tested` verdict would have to name it. **Your call, not ours**; it is the one
+   thing here that overrides a standing rule of the chain.
+
 ### PT-30 — Finished Mirror Sphere site (F16) · Status: unrun
 **Bug:** a finished excavation site kept offering its actions, wasting drone
 work on a site that cannot progress. Fixed: the finished site starts nothing;

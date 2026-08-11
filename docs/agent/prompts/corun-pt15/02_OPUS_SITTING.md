@@ -80,6 +80,73 @@ quick read).
 **Leg 5 — F15 rider (good-to-have).** If a second trapful exists: destroy
 mode, research-points read either side. N/A is a fine answer; say why.
 
+## ⚖️ Two OPTIONS, parked and built — the owner decides at the keyboard
+
+**Owner, 2026-08-11: *"Add them both to the sitting as options and we will
+decide when we are running."*** Both are implemented, gated behind explicit
+confirm tokens, and **not in the queue above**. Neither runs unless asked.
+Put each to the owner ONCE, at the moment it would help, with its cost — then
+take the answer and move on (no nagging; batch-1 lesson).
+
+### Option A — `CP15.SpeedRamp()` · the march, measured instead of assumed
+
+**The ask, in one sentence for the owner:** *"Ultra is 20× by UI convention
+only — the engine allows far more. Shall I spend ~2 minutes measuring how fast
+this save can safely run, and then march at that?"*
+
+**Why it is nearly free:** ⭐ run it **inside the countdown's dead window**
+(§5 — the first ~10 sols, when no sinkhole exists and nothing hour-gated can be
+damaged). The sols have to pass anyway, so **the ramp IS the march**. Running it
+later risks eating a wisp night for a measurement — don't.
+
+**What it measures, and why the naive version is dangerous:** `SetGameSpeed`
+applies its argument with no Lua-side clamp (`Colony.lua:564-592`;
+`const.MaxTimeFactor` / `const.DefaultTimeFactor` = a 100,000× ceiling). But
+buildings poll `UIColony.hour` from a game-time thread that sleeps
+`building_update_time` (`Building.lua:776-795`), and the mystery tests that hour
+for **equality** — wisps spawn at `hour == 22`, go home at `hour == 4`. Once one
+frame advances more than the 5,000 game-ms `SinkholeBase` polls at, an hour is
+never observed, the equality never matches, **and no wisps spawn that night —
+silently.** The leg reproduces that exact poll (a game-time thread at the same
+5,000 ms cadence) and reports any gap in the observed hour sequence, alongside
+the **measured** effective multiplier, since a factor the sim cannot sustain
+buys nothing. Output: the highest rung with zero skipped hours.
+
+⚠️ Record the result as a measurement **with its conditions** (this machine,
+this save, this moment) — not as a property of the game. Default rungs
+`{20, 50, 100, 200, 400}` bracket the ~300× boundary the arithmetic predicts;
+the point of the leg is that the real number is measured, not predicted.
+
+### Option B — `CP15.MassWisps("OWNER-SAID-YES")` · the wisp-gate shortcut
+
+**The ask, in one sentence for the owner:** *"There's an unused dev function
+that fills a sinkhole to 30 wisps. It would collapse the 30-catch gate, the
+catch itself stays organic, and it costs us the ability to call the wisp supply
+'as shipped'. Use it?"*
+
+**What it is:** `MassFireflySpawn(sinkhole)` (`Fireflies.lua:730-735`) — raises
+that sinkhole's `max_firefly_number` to 30 and fills it. Ungated global, **no
+caller anywhere in the tree**, dev scaffolding.
+
+**⭐ What it does NOT do — the part that decides the trade.** `SpawnFirefly`
+ends with `SetCommand(false)` (`:132-145`): the wisps sit **dormant** until the
+next night's ordinary `hour == 22` `FirefliesStart` (`:198-206`). The flight,
+the water-source choice (`FindWaterSource`, `:154-184`) and the catch all stay
+**organic**. It touches no trap, no modifier, no `SetLightTrapMode` — and F07's
+verdict is a **ratio** (production `== wisps` vs `== wisps × 1000`), correct at
+any non-zero count. It changes the input, not the arithmetic under test.
+
+**⚠️ What it costs.** (1) The trapful is manufactured **supply** — a `tested`
+grant must say so in the same sentence. (2) `max_firefly_number = 30` is a
+permanent mutation of that sinkhole on the staged copy; record it. (3) It
+**amends chain README rule 12**, which forbids injecting into wisps as written
+— by explicit owner decision, logged by the leg, never as a quiet exception.
+(4) It does not skip the night cycle, only the accumulation.
+
+⛔ **Do not reach for `SinkholeBase:TestSpawnFireflyAndGo` (`:147-152`)** — it
+spawns one wisp and starts it *immediately*, bypassing the night cycle. Nothing
+wraps it and nothing should.
+
 ## Recording (incremental, per leg)
 
 Bank each leg's readings to the entries/checklist AS THEY LAND (self-split
