@@ -20,10 +20,10 @@ ROUTE REFUTED** ⇒ owner (3rd cell); **F99's 2×2 FULL** (4th zero, stays
 FULL RESTART** ⇒ D13's 4th OFF state. ⚖️ 5 audit corrections, all
 verdict-neutral (SESSION_LOG). ⭐ NEW: **C45** · facts EF-047/048/049 ·
 WORKFLOW "Co-runs" batch-2 rules 1–9 + adopted R4/R7.
-⇒ **NEXT: the UNATTENDED build+verify chain (NOT YET AUTHORED) — F48
-sanitizer build (SHIP, 2026-08-11) + C43 `set_global` fix + F100 string fix +
-PT-35 leg A, one launch verifies all; then the PT-20 REDO co-run (+ the 10-s
-Ctrl-F9 check that settles F85).**
+⇒ **NEXT: `unattended-2` AUTHORED 2026-08-11 (`agent/prompts/unattended-2/`,
+2 prompts) — F48 build + C43 fix + F100 fix + PT-35 leg A, one launch.
+Kickoff: Opus session on `01_OPUS_RUN.md`. Then the PT-20 REDO co-run
+(+ the 10-s Ctrl-F9 check that settles F85; chain unauthored).**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 

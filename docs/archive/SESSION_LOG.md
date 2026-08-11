@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — `unattended-2` BUILT and queued (same session): the decision-drive build batch, two prompts, owner kicks off before bed
+
+Owner order ("Do the unattended build and I will kick that off before I call
+it a night"), same session as the decision drive below.
+`agent/prompts/unattended-2/` — README + `01_OPUS_RUN` (build F48's corrected
+sanitizer pass + C43's `set_global` restriction + F100's reason string, then
+ONE launch on a COPY of `PT35FIXTURE.savegame.sav` verifying all of it:
+fixture confirm → F100 boot line → PT-35 leg A turbine half with R4 round
+trips → F48 staged case-A acceptance incl. do-no-harm zero → C43 suite run)
++ `02_FABLE_AUDIT` (terminal: shipped-diff-vs-entry-vs-Src audit, R4/R7
+enforcement, F99/C45 passive-watch greps, folder empty, kickoff line).
+Binding: the full harness-rule stack (unattended-1 1–4, batch-1 1–6, batch-2
+1–9, R4/R7), EF-047/048/049 read disciplines, Src at the `Project Spark`
+path, **PT35FIXTURE and TEST2H TRAIN protected — the fixture is loaded as a
+COPY and survives**. Stop conditions: F48 failing its own acceptance reverts
+rather than ships; a broken fixture SKIPs leg A but never blocks the builds.
+Kickoff: Opus session on `01_OPUS_RUN.md`.
+
 ## 2026-08-11 — decision drive, round 5: F48 ships, D07's ruling is recorded, and the decision board is nearly clear
 
 1. **F48 → SHIP** (owner): the block lifts on evidence stronger than the
