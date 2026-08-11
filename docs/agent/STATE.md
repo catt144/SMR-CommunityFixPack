@@ -13,20 +13,20 @@ Current only, rewritten in place; history newest-first in
 F21 WITNESSED, F85 route REFUTED ⇒ owner, F99 2×2 FULL, PT-47 ARCHIVED,
 **`PT35FIXTURE` BUILT**, D13's 4th OFF state).
 ✅✅ **`unattended-2` CLOSED 2026-08-11 — terminal audit SUSTAINED ALL FOUR
-VERDICTS** (logs byte-verified + read whole, per-probe diff RE-DERIVED, every
-Src site re-read). **F48 `fixed`** (7 tracks to clean-chain `2×(n−1)` incl.
-PT-37's own 559→558, held across both R4 round trips, honest zero ×3) · **C43
-`fixed`** (0 TestKit `[LUA ERROR]`, exactly one declared flip, 77/0/10/0; the
-`CaveInRubble` locals CONFIRMED — dead-stub disposal is an OWNER call, entry) ·
-**F100 `fixed`** (boot line verbatim, Require unmoved) · **PT-35 leg A case A
-COMPLETE** (0 of 14 everywhere, both halves sampled; B/C parked; NOT `tested`).
-Audit residue: 2 citation drifts + 1 stale checklist token, corrected visibly.
-⭐ `EF-050` (savename verbatim) · **`EF-051` Steam Cloud restores deletions,
-confirmed twice** · WORKFLOW rule 7 amended (gate at EVERY run top, must STOP;
-audit-approved) · CHAIN_METHOD +1 row (declared-VOID rehearsal).
-⇒ **NEXT: `corun-pt15` prompt 1 (BUILT 08-11, owner order: PT-15 mystery
-sitting on the owner's NEW `PT-15.savegame.sav` fixture + C39 observed + F85
-Ctrl-F9 RE-ROUTED here + EF-051 post-untick confirm). PT-20 redo follows.**
+VERDICTS** (logs byte-verified + read whole, per-probe diff RE-DERIVED, every Src
+site re-read). **F48 `fixed`** (7 tracks to clean-chain `2×(n−1)` incl. PT-37's
+own 559→558, held across both R4 round trips, honest zero ×3) · **C43 `fixed`**
+(0 TestKit `[LUA ERROR]`, one declared flip, 77/0/10/0; `CaveInRubble` locals
+CONFIRMED — dead-stub disposal is an OWNER call, entry) · **F100 `fixed`** ·
+**PT-35 leg A case A COMPLETE** (0 of 14 everywhere, both halves sampled; B/C
+parked; NOT `tested`). Residue: 2 citation drifts + 1 stale token, fixed visibly.
+⭐ `EF-050` (savename verbatim) · **`EF-051` Steam Cloud restores deletions, 2×**
+· WORKFLOW rule 7 amended (gate at EVERY run top, must STOP) · CHAIN_METHOD +1.
+⇒ **NEXT: `corun-pt15` prompt 2 — THE ATTENDED SITTING.** Prep CLOSED 08-11:
+routes re-derived, instruments parked (parse GREEN, nothing armed), `CP15STAGE`
+staged, EF-051 baseline LISTED at **57 `.sav`**, C39 shift-boundary Q ANSWERED.
+⚠️ The wisp choice is **40–80 sols + 5 owner-gated stages** away — one sitting
+likely misses it (checklist fixed). PT-20 redo follows.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 

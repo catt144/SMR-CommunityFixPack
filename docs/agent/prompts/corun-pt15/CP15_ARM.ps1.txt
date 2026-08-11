@@ -1,0 +1,204 @@
+# corun-pt15 ARM / DISARM script.  Parked source; copy to a scratch .ps1 and run.
+#
+# Rule C11: arming is a script FILE, never an inline one-liner - an inline edit's
+# quoting was mangled once and the game launched unarmed.
+# C11 corollary (unattended-1 I2): never pipe this script's output through
+# Select-Object - a piped consumer terminates the upstream pipeline and can kill
+# the script before its write executes. Nothing here is piped.
+#
+# G5 ARM GATE (binding): after writing, EVERY piece is read BACK OFF DISK and the
+# script exits non-zero if any is missing. A launch never happens on the word of
+# the writer.
+#
+# S3 (corun-batch-1 ledger): a parked .ps1 needs a BOM, because PS 5.1 reads a
+#    no-BOM .ps1 as ANSI and any non-ASCII character breaks the parse. This body
+#    is kept ASCII-only as well, belt and braces.
+#
+# ENCODING: PowerShell 5.1's Set-Content -Encoding utf8 writes a BOM and once
+#    silently prefixed one onto metadata.lua. Use WriteAllLines with an explicit
+#    no-BOM encoder for metadata.lua, as below.
+#
+#   Usage:  .\CP15_ARM.ps1 arm            # 97_CP15Common + 98_CP15Sitting, REAL
+#           .\CP15_ARM.ps1 arm-rehearsal  # same, but flips REHEARSAL to true
+#           .\CP15_ARM.ps1 disarm         # deletes both, restores metadata, sweeps
+#
+# ------------------------------------------------------------------------------
+# THE ONE GATE THAT IS INVERTED FROM unattended-2's, and why.
+#
+# unattended-2 was UNATTENDED: its gate FAILED a payload that did not call
+# U2.Boot(), because nobody would be there to start it. This chain is an ATTENDED
+# SITTING: the owner plays and the agent types legs into the console. A payload
+# that self-drives here would race the owner's play and mutate a save under them.
+# So the gate is reversed - it FAILS if EITHER file starts a flow at file scope.
+# ------------------------------------------------------------------------------
+
+param([Parameter(Mandatory = $true)][ValidateSet("arm", "arm-rehearsal", "disarm")][string]$mode)
+
+$ErrorActionPreference = "Stop"
+$park = "c:\Dev\SMR-BugFixPack\docs\agent\prompts\corun-pt15"
+$kit  = "c:\Dev\SMR-BugFixPack-TestKit"
+$meta = Join-Path $kit "metadata.lua"
+$noBom = New-Object System.Text.UTF8Encoding($false)
+
+$common = @{ src = "97_CP15Common.lua.txt";  dst = "Code\97_CP15Common.lua" }
+$sit    = @{ src = "98_CP15Sitting.lua.txt"; dst = "Code\98_CP15Sitting.lua" }
+$pairs  = @($common, $sit)
+
+# The brief. Every CP15.* name it tells the agent to type must resolve.
+$brief = Join-Path $park "02_OPUS_SITTING.md"
+
+$arming = ($mode -ne "disarm")
+$rehearsal = ($mode -eq "arm-rehearsal")
+
+if ($arming) {
+  foreach ($p in $pairs) {
+    Copy-Item -LiteralPath (Join-Path $park $p.src) -Destination (Join-Path $kit $p.dst) -Force
+    Write-Output ("WROTE " + $p.dst)
+  }
+  if ($rehearsal) {
+    $rf = Join-Path $kit "Code\98_CP15Sitting.lua"
+    $rt = [System.IO.File]::ReadAllText($rf)
+    $rt2 = $rt.Replace("local REHEARSAL = false", "local REHEARSAL = true")
+    if ($rt2 -eq $rt) { Write-Output "ARM FAIL: could not find 'local REHEARSAL = false' to flip"; exit 1 }
+    [System.IO.File]::WriteAllText($rf, $rt2, $noBom)
+    Write-Output "WROTE 98_CP15Sitting.lua with REHEARSAL flipped to true"
+  }
+  $lines = Get-Content -LiteralPath $meta -Encoding UTF8
+  $out = New-Object System.Collections.Generic.List[string]
+  $inserted = $false
+  foreach ($l in $lines) {
+    $out.Add($l)
+    if (-not $inserted -and $l -match '99_FixtureCarry\.lua') {
+      foreach ($p in $pairs) {
+        $leaf = Split-Path $p.dst -Leaf
+        $out.Add(("`t`t`"Code/" + $leaf + "`",  -- TEMPORARY corun-pt15"))
+      }
+      $inserted = $true
+    }
+  }
+  if (-not $inserted) { Write-Output "ARM FAIL: anchor 99_FixtureCarry.lua not found"; exit 1 }
+  [System.IO.File]::WriteAllLines($meta, $out, $noBom)
+  Write-Output "WROTE metadata.lua (no BOM)"
+} else {
+  foreach ($p in $pairs) {
+    $f = Join-Path $kit $p.dst
+    if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force; Write-Output ("DELETED " + $p.dst) }
+  }
+  $lines = Get-Content -LiteralPath $meta -Encoding UTF8
+  $kept = $lines | Where-Object { $_ -notmatch 'Code/9[78]_CP15' }
+  [System.IO.File]::WriteAllLines($meta, $kept, $noBom)
+  Write-Output ("metadata.lua: removed " + ($lines.Count - $kept.Count) + " line(s), no BOM")
+}
+
+# ---- gate (both directions) --------------------------------------------------
+$fail = $false
+$m = Get-Content -LiteralPath $meta -Raw -Encoding UTF8
+foreach ($p in $pairs) {
+  $f = Join-Path $kit $p.dst
+  $present = Test-Path -LiteralPath $f
+  $listed  = $m -match [regex]::Escape('"Code/' + (Split-Path $p.dst -Leaf) + '"')
+  if ($arming) {
+    if (-not $present) { Write-Output ("ARM GATE FAIL: missing " + $p.dst); $fail = $true }
+    elseif ((Get-Content -LiteralPath $f -Raw -Encoding UTF8) -notmatch 'TEMPORARY') {
+      Write-Output ("ARM GATE FAIL: no TEMPORARY marker in " + $p.dst); $fail = $true
+    } else { Write-Output ("ARM GATE OK   " + $p.dst) }
+    if (-not $listed) { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
+    else { Write-Output ("ARM GATE OK   metadata lists " + $p.dst) }
+  } else {
+    if ($present) { Write-Output ("DISARM FAIL: still present " + $p.dst); $fail = $true }
+    if ($listed)  { Write-Output ("DISARM FAIL: metadata still lists " + $p.dst); $fail = $true }
+  }
+}
+
+if ($arming) {
+  $comText = Get-Content -LiteralPath (Join-Path $kit "Code\97_CP15Common.lua") -Raw -Encoding UTF8
+  $sitText = Get-Content -LiteralPath (Join-Path $kit "Code\98_CP15Sitting.lua") -Raw -Encoding UTF8
+
+  # --- INVERTED SELF-DRIVE GATE. An attended sitting must start NOTHING. ---
+  $selfDrive = $false
+  foreach ($pair in @(@("97_CP15Common", $comText), @("98_CP15Sitting", $sitText))) {
+    if ($pair[1] -match '(?m)^\s*CP15\.(Boot|Flow)\s*\(') {
+      Write-Output ("ARM GATE FAIL: " + $pair[0] + " starts a flow at file scope - this sitting is ATTENDED and a self-driving payload would race the owner's play")
+      $selfDrive = $true; $fail = $true
+    }
+  }
+  if (-not $selfDrive) { Write-Output "ARM GATE OK   neither file starts anything (attended sitting by design)" }
+
+  # Read the mode back OFF DISK. A run armed as a rehearsal must say so here and
+  # a real run must say so here; neither may be inferred from the command typed.
+  if ($sitText -match '(?m)^\s*local REHEARSAL = true') {
+    Write-Output "ARM GATE OK   MODE ON DISK = HARNESS REHEARSAL (every verdict in that sitting is VOID by construction)"
+    if (-not $rehearsal) { Write-Output "ARM GATE FAIL: 'arm' was requested but the armed file says REHEARSAL = true"; $fail = $true }
+  } elseif ($sitText -match '(?m)^\s*local REHEARSAL = false') {
+    Write-Output "ARM GATE OK   MODE ON DISK = REAL SITTING (every leg gates on the pack and refuses to run if it is off)"
+    if ($rehearsal) { Write-Output "ARM GATE FAIL: 'arm-rehearsal' was requested but the armed file says REHEARSAL = false"; $fail = $true }
+  } else { Write-Output "ARM GATE FAIL: cannot read the REHEARSAL mode off disk"; $fail = $true }
+
+  # --- THE PER-LEG GATE MUST ACTUALLY BE PER-LEG (WORKFLOW rule 7). ---
+  # A menu has no single run top, so the rule is only satisfied if every public
+  # leg calls CP15.Guard first. Count definitions against Guard call sites.
+  $legDefs = [regex]::Matches($sitText, '(?m)^function\s+CP15\.(\w+)')
+  $ungated = @()
+  foreach ($d in $legDefs) {
+    $name = $d.Groups[1].Value
+    if ($name -eq "Menu" -or $name -eq "Note" -or $name -eq "Close") { continue }  # declared gate-free: they read nothing and change nothing
+    $body = $sitText.Substring($d.Index)
+    $end = $body.IndexOf("`nend")
+    if ($end -gt 0) { $body = $body.Substring(0, $end) }
+    if ($body -notmatch 'CP15\.Guard\(') { $ungated += $name }
+  }
+  if ($ungated.Count -gt 0) {
+    Write-Output ("ARM GATE FAIL: leg(s) without a CP15.Guard() call - WORKFLOW rule 7 needs the gate at every leg top: " + ($ungated -join ", "))
+    $fail = $true
+  } else {
+    Write-Output ("ARM GATE OK   every gated leg calls CP15.Guard() first (" + $legDefs.Count + " legs defined)")
+  }
+
+  # --- G1 RESOLUTION CROSS-CHECK (unattended-1 harness-defect class 1). ---
+  # A parse sweep is a SYNTAX verdict, not a resolution one: U1.ErrorWatchNote
+  # was called by all 7 payloads and never existed. Diff every CP15.* name USED
+  # by the payload AND BY THE BRIEF against the names DEFINED by either file.
+  $defined = @{}
+  foreach ($t in @($comText, $sitText)) {
+    foreach ($mm in [regex]::Matches($t, '(?m)^\s*(?:function\s+CP15\.(\w+)|CP15\.(\w+)\s*=)')) {
+      $n = $mm.Groups[1].Value; if (-not $n) { $n = $mm.Groups[2].Value }
+      if ($n) { $defined[$n] = $true }
+    }
+  }
+  $missing = @()
+  foreach ($mm in [regex]::Matches($sitText, 'CP15\.(\w+)\s*\(')) {
+    $n = $mm.Groups[1].Value
+    if (-not $defined.ContainsKey($n)) { $missing += ("payload:" + $n) }
+  }
+  if (Test-Path -LiteralPath $brief) {
+    $briefText = Get-Content -LiteralPath $brief -Raw -Encoding UTF8
+    foreach ($mm in [regex]::Matches($briefText, 'CP15\.(\w+)\s*\(')) {
+      $n = $mm.Groups[1].Value
+      if (-not $defined.ContainsKey($n)) { $missing += ("brief:" + $n) }
+    }
+    Write-Output ("ARM GATE OK   brief read for cross-check: " + $brief)
+  } else {
+    Write-Output ("ARM GATE FAIL: brief not found at " + $brief + " - the names the agent will type cannot be checked")
+    $fail = $true
+  }
+  $missing = $missing | Sort-Object -Unique
+  if ($missing.Count -gt 0) {
+    Write-Output ("ARM GATE FAIL: undefined CP15 names: " + ($missing -join ", "))
+    $fail = $true
+  } else {
+    Write-Output ("ARM GATE OK   resolution cross-check: every CP15.* the payload and the brief call is defined (" + $defined.Count + " definitions)")
+  }
+}
+
+# stale-probe sweep, BOTH repos (WORKFLOW probe hygiene rule 4)
+$hits = @()
+foreach ($dir in @("c:\Dev\SMR-BugFixPack\Code", "c:\Dev\SMR-BugFixPack-TestKit\Code")) {
+  $hits += (Select-String -Path (Join-Path $dir "*.lua") -Pattern "TEMPORARY" -List | ForEach-Object { $_.Path })
+}
+if ($arming) { Write-Output ("PROBE SWEEP: armed: " + (($hits | ForEach-Object { Split-Path $_ -Leaf }) -join ", ") + " - declared by corun-pt15") }
+elseif ($hits.Count -eq 0) { Write-Output "PROBE SWEEP: clean" }
+else { Write-Output ("PROBE SWEEP: ARMED AFTER DISARM - " + ($hits -join ", ")); $fail = $true }
+
+if ($fail) { Write-Output ($mode.ToUpper() + " GATE: RED"); exit 1 }
+Write-Output ($mode.ToUpper() + " GATE: GREEN")
+exit 0

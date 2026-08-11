@@ -109,6 +109,14 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    ⭐ **Re-routed 2026-08-11 (your corun-pt15 order): the Ctrl-F9 check now
    rides the PT-15 sitting** — any colony works and it answers sooner. The
    PT-20 redo is unchanged otherwise.
+   ⭐ **Prep 2026-08-11 — the check now has three witnesses instead of one, so
+   "nothing happened" will be a measurement rather than an impression.** (1) a
+   new save file appearing in the save directory, which we list before and
+   after; (2) the game's own log line — the quicksave routine prints either
+   `Game saved: <name>` or `Save failed: <err>`, so **either line falsifies the
+   source read**; (3) your eyes on the quicksave loading screen. Expected file
+   name if one lands: `QuickSave.savegame.sav`. **Still your decision either
+   way** — the sitting brings evidence, not a verdict.
 6. ~~**⚖️ Disabling a mod needs a full game restart — does `PT-20` need
    redoing?**~~ ✅ **DECIDED 2026-08-10 — REDO NOW.** A dedicated PT-20 redo
    co-run is queued (your part: the Mod-Manager disable click, a **full game
@@ -779,16 +787,45 @@ wisps (pick the mystery at new-game setup; the console route is on the entry —
 disclose if used).
 ⭐ **QUEUED 2026-08-11 — you built the fixture yourself** (`PT-15.savegame.sav`,
 mystery selected, tech un-cheated): the **`corun-pt15`** chain runs this as its
-front on a staged COPY (your save is protected and survives), with the C39 law
-observation and the F85 Ctrl-F9 check riding the same sitting. Mystery timing,
-Src-read: first beat lands 10–20 sols after founder approval; ultra speed (20×)
-makes that 6–12 real minutes.
+front on a staged COPY (`CP15STAGE.savegame.sav`, byte-identical, MD5-verified —
+your save is protected and survives), with the C39 law observation and the F85
+Ctrl-F9 check riding the same sitting.
+
+⚠️⚠️ **READ THIS BEFORE YOU SIT DOWN — the mystery is much longer than this
+section used to say, and the correction came from reading the whole sequence
+rather than its first beat** (prep 2026-08-11, `Mystery 11.generated.lua`).
+The 10–20 sols after founder approval is only the FIRST beat. Between it and the
+wisp choice the sequence sleeps **another ~30–60 sols** in four more scripted
+waits (the largest is 15–30 sols on its own) and gates on things only you can
+do: **scan two sinkhole anomalies**, **build a Large Water Tank and fill it to
+80%**, **build a Light Trap**, and then **catch 30 wisps** (`fireflies_caught >
+29` is the literal gate on the choice) at roughly one or two per night.
+⇒ **A single sitting is very unlikely to reach the wisp choice.** Derived, not
+measured: 40–80 sols of scripted sleep alone is ~25–50 real minutes at ultra
+(1 sol = 720,000 game-ms, measured; ultra = 20×), before any of the player-gated
+stages or the wisp catching.
+**What the sitting therefore does:** reads exactly where the mystery stands
+(`CP15.MysteryWhere()` — the founder stage is measurable to the game-second; the
+10–20 sol sleep is **not** exposed to Lua and is reported as a bound, never as a
+number), marches at ultra as far as it gets, and if the choice is not reached it
+saves the progress under a chain name and hands PT-15 to a follow-up sitting.
+C39 and the Ctrl-F9 check do not depend on any of this and complete regardless.
+**Requirements for the sitting:** the staged copy is already made; ultra speed is
+FORCED and disclosed; **you** play the colony and answer the mystery's choice
+prompts — the rig only reads. Nothing is injected into wisps, traps or the
+mystery sequence (the mystery is played, not forced).
 **Setup:**
-1. Choose "free the wisps" (or the console form, entry).
-2. The agent reads a trap's output (entry): trickle = broken, ~1000×wisps =
-   fixed.
+1. Choose "free the wisps" **at the game's own choice prompt** when it appears.
+2. The agent reads the trap **immediately** (`CP15.TrapRead(...)`): output equal
+   to the wisp count = broken, 1000× the wisp count = fixed.
+   ⚠️ **Immediately matters.** The broken value is overwritten by the next wisp
+   event — typically the 4 AM release — because every other code path already
+   multiplies correctly. A late read shows a healthy number either way.
 **Good to have:** on a separate trapful, destroy mode — the research points
-granted must MATCH the notification's number (the F15 half).
+granted must MATCH the notification's number (the F15 half). ⚠️ Two things prep
+found: the reward arrives **3.3 game hours late** (each wisp's death sleeps
+first), and once destroy mode is on **no further wisps spawn at all** — so it is
+a one-shot rider, taken last.
 
 ### PT-30 — Finished Mirror Sphere site (F16) · Status: unrun
 **Bug:** a finished excavation site kept offering its actions, wasting drone
