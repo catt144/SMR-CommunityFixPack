@@ -20,25 +20,21 @@ completed tests move whole to
 > recorded results included, is in the archive under the "pre-redesign
 > snapshot 2026-08-03" banner.
 
-## ⛔⛔ TWO TICKS BEFORE ANYTHING ELSE — added 2026-08-11 by `unattended-2`
+## ⛔ ONE TICK LEFT — added 2026-08-11 by `unattended-2`
 
-Neither is a decision. Both are things only your hands can do, and the first one
-is blocking a finished build from being verified at all.
+Not a decision; a thing only your hands can do.
 
-**1. The Community Fix Pack is DISABLED in your Mod Manager, and has been since
-2026-08-10.** `corun-batch-2`'s last leg turned it off on purpose to test the
-uninstall, and nothing turned it back on. Tonight's verification launch read
-`pack=0/0 active` and the engine printed *"This savegame tries to load Mod
-Community Fix Pack …, which is present, but not loaded"*. **If you have played
-since Sunday evening, you played without the pack.**
-⇒ **Mod Manager → tick "Community Fix Pack" → then a FULL RESTART of the game**
-(D13: a Mod-Manager change does not take effect in the running process).
-⇒ It cannot be scripted — `AccountStorage`, `SaveAccountStorage` and
+**1. ~~The Community Fix Pack is DISABLED in your Mod Manager~~ ✅ DONE — you
+re-enabled it at 01:57 and the re-run measured `81/81 active`.** Recorded
+because it cost the night's first launch and because the cause is worth knowing:
+`corun-batch-2`'s last leg turned the pack off on purpose to test the uninstall
+on 2026-08-10 and nothing turned it back on, so **anything you played between
+Sunday evening and last night ran without the pack.** ⚠️ For next time: after
+any leg that disables the pack, re-enabling it is part of that leg's close-out —
+the rig cannot do it (`AccountStorage`, `SaveAccountStorage` and
 `ModsReloadItems` are all engine-blacklisted for mod code, and there is no
-console at the main menu. That is why this is on your list and not on ours.
-⇒ **What it unblocks:** everything `unattended-2` built tonight (F48's corrected
-sanitizer pass, C43's suite reading, F100's boot line, PT-35 leg A's turbine
-half) and the PT-20 redo co-run queued behind it.
+console at the main menu), so it has to be handed back to you explicitly.
+**Everything it was blocking is now verified and closed.**
 
 **2. Steam Cloud is putting your deleted staged saves back, and we finally
 caught it doing it.** The save-folder gate that "failed twice" was never a
@@ -52,9 +48,12 @@ all written **before the game process even started**. Details: `agent/facts/EF-0
 game saves in the Steam Cloud"**, and we will clear the strays for good on the
 next session (~750 MB).
 ⇒ Until then no session can honestly claim a staged save is *gone*, only that it
-was deleted. ⛔ This also means tonight's `U2STAGE`/`U2RT1`/`U2RT2` — deleted at
-01:28 — are expected back on your next launch; that is the prediction, and the
-next session re-checks it.
+was deleted. ⛔ **The prediction was written down and then CHECKED, and it held:**
+`U2STAGE`, `U2RT1` and `U2RT2` were deleted at 01:28 and all three were back by
+01:57:47 — your launch — with creation stamps from that minute and their original
+modification dates. So the mechanism is confirmed twice, not once. (They have
+been deleted again, and a fourth artifact Steam had also restored went with
+them.) **Until you untick it, expect them back once more.**
 
 ## Decisions waiting on you
 
@@ -797,7 +796,7 @@ reachability audit's verdict. → [F06](agent/bugs/F06.md)
 
 # Any-save & factions
 
-### PT-35 — Save sanitizer does no harm (F35, F03) · Status: unrun (case A only; B/C parked) — ⭐ case A RAN unattended 2026-08-04: do-no-harm half PASSES, turbine half UNSAMPLED (fixture gap, see below) · ✅✅ **THE FIXTURE GAP IS CLOSED 2026-08-10** — `PT35FIXTURE.savegame.sav` is in your save folder (`corun-batch-2` leg S): FrictionlessComposites researched, **one Large Wind Turbine**, **one applied building upgrade** (Remote Medic on a Hospital, for the F03 half). **The turbine-half re-run is now an unblocked 2-prompt unattended chain** — nothing of yours needed. ⛔ Do not delete that save · **mode: UNATTENDED** (routing 2026-08-04 — all reads numeric + save/reload; owner-rule chain: Opus runs, Fable audits) · ⛔⛔ **2026-08-11: RAN AND COULD NOT MEASURE — the fix pack was disabled in your Mod Manager, so no sanitizer pass executed and every do-no-harm reading is void. THE FIXTURE ITSELF IS RE-CONFIRMED GOOD on a fresh load: 1 Large Wind Turbine, `researched=1 discovered=163`, 144 upgraded buildings, 3 live upgrade-shaped modifier ids across 13 domes — `APPLICABLE=true` on BOTH halves at last. The leg needs one relaunch after tick 1 at the top of this file; nothing else about it changed.**
+### PT-35 — Save sanitizer does no harm (F35, F03) · Status: unrun (case A only; B/C parked) — ⭐ case A RAN unattended 2026-08-04: do-no-harm half PASSES, turbine half UNSAMPLED (fixture gap, see below) · ✅✅ **THE FIXTURE GAP IS CLOSED 2026-08-10** — `PT35FIXTURE.savegame.sav` is in your save folder (`corun-batch-2` leg S): FrictionlessComposites researched, **one Large Wind Turbine**, **one applied building upgrade** (Remote Medic on a Hospital, for the F03 half). **The turbine-half re-run is now an unblocked 2-prompt unattended chain** — nothing of yours needed. ⛔ Do not delete that save · **mode: UNATTENDED** (routing 2026-08-04 — all reads numeric + save/reload; owner-rule chain: Opus runs, Fable audits) · ✅✅ **CASE A IS COMPLETE 2026-08-11 (`unattended-2`, re-run after the pack was re-enabled): BOTH halves sampled on a real population for the first time. Three loads, two save+reload round trips, six pass calls, and **0 of 14 readings changed at every single comparison including start-to-finish**. `RepairTurbineBuff`'s zero is no longer the trivially-forced early return — the tech IS researched, so the pass walked its whole body and its already-buffed guard did the skipping; `RepairLeakedUpgradeModifiers` returned 0 with **3 live upgrade-shaped modifier ids and 144 upgraded buildings** in front of it. 0 `[LUA ERROR]` in the whole log. ⛔ Still not `tested` — unattended ceiling is MECHANISM — and cases B/C stay parked.** → `agent/bugs/F35.md`, log `archive/u2run3_Mars.exe-20260811-02.01.06.log`
 **Bug:** the pack's two sanitizer passes run automatically on every load for
 every player, and the F03 pass REMOVES label modifiers from persisted colony
 state — this is the do-no-harm check on auto-running save-writing code, and

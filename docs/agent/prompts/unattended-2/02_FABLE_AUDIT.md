@@ -84,136 +84,132 @@ name what authoring it takes.
 
 ## Notes from upstream
 
-### ⛔ READ THIS FIRST: THE CHAIN IS BLOCKED, NOT FINISHED
+### The chain was blocked for one launch, then unblocked and completed. Audit the SECOND run.
 
-**All three builds shipped. Not one acceptance reading exists.** The launch
-that was to take them found **the Community Fix Pack DISABLED in the owner's
-Mod Manager** — `pack=0/0 active`, and the engine's own line reads *"This
-savegame tries to load Mod Community Fix Pack …, which is present, but not
-loaded"*. `corun-batch-2`'s leg T turned it off on 2026-08-10 to test the
-uninstall and nothing turned it back on. It is one human click, and it is
-**source-proven unscriptable**: `AccountStorage`, `SaveAccountStorage` and
-`ModsReloadItems` are all `ModEnvBlacklist` keys (`Mod.lua`) and there is no
-console at the main menu. Routed as **tick 1** in a new block at the top of
-`PLAYTEST_CHECKLIST.md`.
+The night ran in two halves. The first launch was **VOID** — the Community Fix
+Pack was disabled in the owner's Mod Manager (leg T residue from 2026-08-10),
+`pack=0/0 active`. The owner re-enabled it, said plainly *"there is no point in
+doing an audit for a pack off run"*, and the run was redone. **All four items
+then passed their acceptance in full.**
 
-⇒ **Your Job 1 has almost nothing to audit against logs, and your Job 2's
-status question is already answered: F48 stays `directed`, C43 and F100 stay
-`filed`.** What you CAN audit in full is the shipped code against the entries
-and against Src (which prompt 2's own brief says is the raised floor), plus
-everything in this outbox. Your stop condition "the run was partial" is the
-live one.
+⇒ **Audit `docs/archive/u2run3_Mars.exe-20260811-02.01.06.log`.** The two
+earlier logs are archived and cited, but they are evidence about the harness and
+the blocker, not about the fixes.
 
-⇒ **The folder-empty rule collides with the re-run.** The parked instruments
-(`97_U2Common.lua.txt`, `98_U2Run.lua.txt`, `U2_ARM.ps1.txt`) are what the
-re-run needs. Your brief tells you to empty the folder even on a partial run,
-so delete them and **cite the pre-deletion sha in the SESSION_LOG record** —
-the re-run resurrects them the way batch-1's and batch-2's are resurrected.
-State the exact `git show` path in the owner report so it is one command.
-
-### What ran, and what each log may be quoted for
-
-| log (archived, `cmp`-verified) | what it is |
+| log | what it may be quoted for |
 |---|---|
-| `docs/archive/u2run1void_Mars.exe-20260811-01.17.34.log` | run 1. **VOID for every pack-dependent claim.** Quotable for: the blocker itself, and the fixture confirm (which needs no pack). |
-| `docs/archive/u2run2rehearsal_Mars.exe-20260811-01.24.25.log` | run 2, a **declared HARNESS REHEARSAL** — it says so in its own `MODE` banner and stamps `VOID(pack not loaded)` on every verdict line. Quotable for the flow working and **for nothing else**. |
+| `u2run3_Mars.exe-20260811-02.01.06.log` | **THE RUN.** Every verdict below. |
+| `u2run1void_Mars.exe-20260811-01.17.34.log` | the blocker, and the fixture confirm (pack-independent). Nothing else. |
+| `u2run2rehearsal_Mars.exe-20260811-01.24.25.log` | a declared HARNESS REHEARSAL (its own `MODE` banner says so, every verdict line stamped VOID). The flow working, and nothing else. ⚠️ Its 0 `[LUA ERROR]` and 0 `set_global refused` are absent for the WRONG reason — with no pack, probes FAIL before reaching their stubs. Do not quote them for C43. |
 
-⚠️ **One trap, stated so you do not walk into it:** the rehearsal log carries
-**0 `[LUA ERROR]`** and a full `RunAll` (1 PASS / 71 FAIL / 15 SKIP / 0 ERROR).
-That is **not** C43 evidence. With the pack absent, `SMRTest.FixMissing` FAILs
-nearly every probe before it reaches a stub — `AnomalyCaveInMap` included, which
-returns at its step 2 and never reaches the `:415` call that raises. The two
-error lines are absent for the wrong reason. Zero `set_global refused` lines
-appeared for the same reason.
+### Statuses moved, and here is what each one rests on
 
-### Job 1 findings you should verify rather than inherit
+**F48 → `fixed`.** (a) The automatic pass repaired **7 of 17 tracks, 0 raised**,
+and every one landed on `2 × (n−1)`: `#4569` 7→6, `#4619` 45→44, `#4730` 86→84,
+**`#12454` 559→558**, `#12528` 63→62, `#12637` 34→32, `#13418` 133→132. That
+fourth one is PT-37's own track and its own numbers, reproduced by shipped code.
+The seven together upgrade this entry's *"consistent with removing one stale
+connection"* from an inference to a measurement — two tracks shed two
+connections, and all seven hit the clean-chain value exactly. Held across BOTH
+round trips (`0 of 17` on the full per-track signature, twice). (b) Zero three
+ways on the clean save, including a direct call that ignores the one-shot flag
+by design, so the zero is sampled rather than an early return; the flag itself
+was **read** (`= true (type=boolean truthy=true)`), not inferred from missing
+lines. (c) The count line prints on every run including the zeros.
+⇒ **Verify the shipped diff against Src yourself** (README rule 13) — the entry
+claims `Station.lua:1346`, `Tracks.lua:807/:808/:820-822`.
 
-1. **F48's shipped diff.** Src-verify `Station.lua:1346` and
-   `Tracks.lua:807/:808/:820-822` yourself. Check specifically that the pass
-   counts an EFFECT (connection total + duplicate `node_idx` either side of each
-   call), that the summary line prints on zero, that the console entry point
-   **ignores** the one-shot flag, and that no `start_el`/`end_el` is
-   hand-assigned (correction (d), applied to shipped code this time).
-2. **C43's real finding, which is bigger than the noise it fixes.**
-   `IsNearDome` and `AddAreaRubble` are **`local function`s** —
-   `CaveInRubble.lua:79` and `:38`. Those stubs could never have worked through
-   `_G`. Verify it; if it holds, the open question for the owner is whether the
-   two dead stub entries should simply be deleted (which would restore the PASS
-   honestly and remove the SKIP). Nothing was deleted, deliberately.
-3. **A correction to the record itself:** there are not "two Wave-5 probes".
-   One probe, two undeclared names, one `TryWithGlobals` call. The C43 entry's
-   own log quote said so; every downstream summary — including this chain's
-   prompt 1 — read it as two probes.
-4. **The static half of C43's un-counted gap is counted** (60 stub call sites /
-   10 probe files, 6 direct `SetGlobal` calls, 1 in the core; no third
-   file-local among the engine-name targets). The **live** half is honestly
-   UNSAMPLED and says so on the entry.
-5. **PT-35's fixture is re-confirmed good and APPLICABLE=true on BOTH halves**
-   (1 Large turbine; 144 upgraded buildings; 3 live upgrade-shaped modifier ids
-   across 13 domes). Stop condition 3 is NOT triggered. ⚠️ The Remote Medic
-   upgrade specifically was **not** identified — 144 upgraded buildings were,
-   with four `SmartHome_Small` examples printed. Do not let that gap close
-   silently.
+**C43 → `fixed`.** Zero TestKit `[LUA ERROR]` in 1,009 lines; the refusal fired
+by name exactly twice; `AnomalyCaveInMap` SKIPs with a message stating what did
+and did not get exercised; `77/0/10/0` against the baseline's `78/0/9/0` with a
+per-probe diff over all 87 rows returning **exactly one line**. The un-counted
+gap is answered by execution: **no other caller** hit the undeclared case across
+60 stub call sites. ⚠️ Scope I wrote onto the entry and you should check I kept:
+10 probes SKIPped for want of game state, so this is "no other caller reached it
+in this run", not a proof over unreachable code.
 
-### ⭐⭐ The out-of-scope discovery, already routed
+**F100 → `fixed`.** New line verbatim at `:159`, between `00_Core`'s
+authoring-error line at `:158` and `NoHomeless: applied` at `:190`;
+`81/81 active`; `NoHomeless` probe PASS. The `Require` target deliberately did
+not move.
 
-**Steam Cloud restores deleted savegames at launch.** 55 `.sav` files before
-launch 1, **69** after launch 2 — **14** staged saves this project had
-verifiably deleted came back, each with a `CreationTime` inside the
-01:17:04–01:17:33 launch window, its original modification date preserved, and
-**all written before `Mars.exe`'s process start at 01:17:34**. `EF-051`. This
-**clears two sessions recorded as having failed the save-dir gate** — they had
-deleted the files. Checklist item 7's parked hypothesis is closed by
-measurement; the remedy is checklist tick 2. ⛔ **Prediction with its
-falsifier, for you to check:** `U2STAGE`, `U2RT1`, `U2RT2` (deleted 01:28) are
-expected BACK after the next launch. If they are not, EF-051's mechanism is
-wrong and needs re-deriving.
+**PT-35 leg A case A → COMPLETE** (not `tested`, and the checklist says so).
+`0 of 14 readings changed` at every comparison including start-to-finish over
+three loads, two round trips and six pass calls. ⭐ The two zeros that matter:
+`RepairTurbineBuff` no longer early-returns (tech researched, whole body walked,
+already-buffed guard did the skipping — `unattended-1`'s zero was UNSAMPLED),
+and `RepairLeakedUpgradeModifiers` returned 0 with **3 live upgrade-shaped ids
+and 144 upgraded buildings** in front of it.
 
-### Job 3 — the ledger, mine, and what I already repaired
+### Findings to verify rather than inherit
 
-**Two harness defects, both mine, zero the game's fault.**
+1. **`IsNearDome` and `AddAreaRubble` are `local function`s** —
+   `CaveInRubble.lua:79` and `:38`. Those stubs never worked through `_G`,
+   before or after the fix. ⚖️ **Open for the owner:** deleting the two dead stub
+   entries would restore the PASS honestly and remove the SKIP. That is a
+   different repair from the one decided, so nothing was deleted.
+2. **There are not "two Wave-5 probes"** — one probe, two names, one call. The
+   original log said so; every summary since, including this chain's own prompt
+   1, read it as two.
+3. **EF-051 (Steam Cloud restores deleted saves) was predicted and then
+   CONFIRMED**: the three saves deleted at 01:28 were all back by 01:57:47 —
+   the owner's launch — plus a fourth artifact. Two independent launches. The
+   listing rule caught the fourth at close-out.
 
-* **U1 — no run-condition gate.** `ReadConditions` printed `pack=0/0 active` and
-  the payload ran six more steps taking readings about code that never
-  executed. **batch-2 rule 7 RECURRED**, in a new way: it bound a reading taken
-  after a mutation *inside* a sitting, and said nothing about a process that
-  simply STARTS in the state a previous sitting left. A rule that fails twice is
-  broken, so I repaired it in `WORKFLOW.md` surgically — the gate now binds at
-  the top of EVERY run and **must STOP the run, not merely print**. Mechanised
-  as `U2.RequirePackLoaded`, default stop. ⇒ **Review that edit; it is mine and
-  it is unaudited.**
-* **U2 — `savename` is written VERBATIM** (`EF-050`). Asking for `U2RT1`
-  produced a file called `U2RT1`; `LoadGame("U2RT1.savegame.sav")` returned
-  `File Not Found`, and `SaveGame`'s own `err=false` said nothing about it.
-  Every earlier caller passed the extension by habit, so the logs read as though
-  the engine appended one. **Resurrecting a primitive means resurrecting its
-  ARGUMENT CONVENTION, not just its body** — that is the class, and it is new.
-* **Both were fixed and then PROVEN**, not merely asserted: the rehearsal drove
-  all 15 steps, three loads and two save/reload round trips clean, with the
-  corrected names appearing as `name=U2RT1.savegame.sav` /
-  `name=U2RT2.savegame.sav` and the gate firing exactly as designed.
+### Job 3 — the ledger
 
-**A judgment call you should second-guess.** `account.dat` holds
+**Two harness defects, both mine, zero the game's fault, both fixed and then
+proven by a rehearsal before the real run.**
+
+* **No run-condition gate.** batch-2 rule 7 RECURRED in a new shape — it bound
+  readings after a mutation *inside* a sitting, not a process that starts in the
+  state a previous sitting left. Repaired surgically in `WORKFLOW.md`: the gate
+  binds at the top of every run and **must STOP it**. ⇒ **That edit is mine and
+  unaudited; review it.** Mechanised as `U2.RequirePackLoaded`, and it fired
+  correctly in both later runs.
+* **`savename` is written VERBATIM** (`EF-050`). `err=false` said nothing about
+  a file `LoadGame` could not find. Class: resurrecting a primitive means
+  resurrecting its ARGUMENT convention, not just its body.
+* **A third, caught not committed:** a Python read/write on `C43.md` silently
+  turned a stray `CR` byte into a newline, mangling a line unrelated to the
+  edit. Found by reading the diff instead of trusting the tool; restored
+  byte-for-byte. The project's PS 5.1 encoding rule has a Python sibling and the
+  SESSION_LOG now says so.
+
+**Also mine, and I would like it second-guessed:** `account.dat` holds
 `AccountStorage.LoadMods`. I opened it, found a `BPUL` container with a
-plaintext metadata header and a compressed body, and **did not write to it** —
-flipping a checkbox is not worth a hard-to-reverse write to the owner's account
-state at 1 am without authorisation. If you disagree, say so; it is the one
-place tonight where a different call would have unblocked everything.
+plaintext header and a compressed body, and **did not write to it** — a
+hard-to-reverse write to the owner's account state at 1 am to flip a checkbox.
+The owner's own re-enable made it moot, but say if you think the call was wrong.
 
-**Whole-log review, both logs.** 0 `[LUA ERROR]`, 0 `TrackElement.lua:805`
-(F99), 0 `invalid pos with no holder` (C45). Two `[ResManager Error]` lines for
-missing `LawOfficeDoor` animations — reported, not discounted, and their age is
-the answer: identical pairs appear in **all 26 archived logs** back to
-2026-08-03, and they are already on record. ⚠️ Note the F99/C45 zeros are over a
-window with **no pack loaded and no track mutation**, so they are not a sample
-of either condition.
+**Whole-log review, run 3.** 0 `[LUA ERROR]`, 0 `TrackElement.lua:805` (F99),
+0 `invalid pos with no holder` (C45). ⚠️ Both zeros are over a window with **17
+healthy tracks, 0 broken elements and 0 repair sites** and no track mutation —
+so neither condition was sampled and neither is a negative result. Two
+`[ResManager Error]` lines for missing `LawOfficeDoor` animations: reported, not
+discounted, and their age is the answer — identical pairs sit in every archived
+log back to 2026-08-03.
 
-**Economics.** ≈9 minutes of machine time over two launches; owner cost was the
-kickoff word. Nothing to report as saved — the run did not deliver its purpose.
+**Economics.** ~13 minutes of machine time across three launches. Owner cost:
+the kickoff word, one Mod-Manager tick, and one sentence.
 
-**Close-out state.** Both trees clean, probes disarmed (`PROBE SWEEP: clean`),
-all staged saves deleted and the save directory listed, both protected files
+### Close-out state, and the folder
+
+Probes disarmed (`PROBE SWEEP: clean`), all staged saves deleted — including
+one Steam had restored between runs, which the listing rule caught — save
+directory listed at 69 files with **no `U2*` leftovers**; both protected files
 byte-verified (`PT35FIXTURE` MD5 `D721329D1EE18604B3D6C89401F74738`;
 `TEST2H TRAIN` MD5 `103B320A1434513BC8773553096A8958`, mtime 2026-08-03
-22:21:48). doccheck GREEN. Everything FORCED/staged; no `tested` granted
-anywhere; no owner decision assumed.
+22:21:48). Both trees clean, doccheck GREEN, pushed.
+
+⇒ **The folder still holds `97_U2Common.lua.txt`, `98_U2Run.lua.txt` and
+`U2_ARM.ps1.txt`.** They are inert (the mod loads only what `metadata.lua`
+lists). Your done-condition is an empty folder, so delete them in the closing
+commit and **cite the pre-deletion sha in the SESSION_LOG record** — they
+survive in git the way batch-1's and batch-2's parked instruments do, and the
+`git show` path belongs in your owner report.
+
+⇒ **The owner's remaining tick is Steam Cloud** (checklist top block). The next
+kickoff after you is the **PT-20 redo co-run** (+ the Ctrl-F9 check that settles
+F85) — **its chain is not authored**, so say so plainly and name what authoring
+it takes.

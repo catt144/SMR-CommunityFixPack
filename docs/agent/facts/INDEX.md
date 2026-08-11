@@ -63,5 +63,5 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-048 | Engine predicates return TRUTHY NON-BOOLEANS — `== true` tests read false on values that are semantically true | 2026-08-10 | 2026-08-10 | 18 | [EF-048.md](EF-048.md) |
 | EF-049 | `Savegame.ListForTag("savegame")` is NOT a stable save-liveness witness — proven working 2026-08-04, returned a non-table on every call 2026-08-10, same build | 2026-08-10 | 2026-08-10 | 20 | [EF-049.md](EF-049.md) |
 | EF-050 | `SaveGame`'s `savename` is written VERBATIM — the engine appends no `.savegame.sav`, so an extensionless name produces a file `LoadGame` cannot find | 2026-08-11 | 2026-08-11 | 24 | [EF-050.md](EF-050.md) |
-| EF-051 | Steam Cloud RESTORES deleted savegames at launch — an agent-side deletion with the game closed does not survive the next start, which is why the save-dir close-out gate 'failed' twice | 2026-08-11 | 2026-08-11 | 42 | [EF-051.md](EF-051.md) |
+| EF-051 | Steam Cloud RESTORES deleted savegames at launch — an agent-side deletion with the game closed does not survive the next start, which is why the save-dir close-out gate 'failed' twice | 2026-08-11 | 2026-08-11 | 48 | [EF-051.md](EF-051.md) |
 

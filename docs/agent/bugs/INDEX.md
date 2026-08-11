@@ -60,7 +60,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 45 | F45 | Damaged tracks can't be salvaged at all (sort crash) | tested | P1 | high | [F45.md](F45.md) |
 | 46 | F46 | Trains dump cargo at stations with resource disabled | tested | P2 | high | [F46.md](F46.md) |
 | 47 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | tested | P3 | high | [F47.md](F47.md) |
-| 48 | F48 | Station-connector savegame fixup no-op (paren misplaced) | directed | P3 | high | [F48.md](F48.md) |
+| 48 | F48 | Station-connector savegame fixup no-op (paren misplaced) | fixed | P3 | high | [F48.md](F48.md) |
 | 49 | F49 | Train minors bundle (palette, split kills trains, etc.) | fixed* | P3 | med | [F49.md](F49.md) |
 | 50 | F50 | Auto-rockets kick approaching drones to Idle every hour | tested | P1 | high | [F50.md](F50.md) |
 | 51 | F51 | Transport-mode cache never sees new shuttles (homeless) | tested | P1 | high | [F51.md](F51.md) |
@@ -165,9 +165,9 @@ the row order below is the old index table's own. Generated from the front matte
 | 115 | C40 | "Crowded Living" grants **+3 residence capacity that is added and removed live with the Ministry of Culture's `working` flag**, and every removal EVICTS the tail residents colony-wide | filed | ? | cand | [C40.md](C40.md) |
 | 116 | C41 | Depot resource picker fails to APPEAR at all (OG witness) — F76's unrefuted residue | filed | ? | cand | [C41.md](C41.md) |
 | 117 | F99 | `TrackConstructionSite:Complete` dereferences an emptied element list — `start_el` nil at `TrackElement.lua:805` | filed | ? | cand | [F99.md](F99.md) |
-| 118 | F100 | **OUR OWN DEFECT:** `Opt_NoHomeless`'s self-check targets `Community` for a method `Workforce` declares, so every boot log carries a false `inactive` line for a module that is actually active | filed | P3 | SOURCE-VERIFIED | [F100.md](F100.md) |
+| 118 | F100 | **OUR OWN DEFECT:** `Opt_NoHomeless`'s self-check targets `Community` for a method `Workforce` declares, so every boot log carries a false `inactive` line for a module that is actually active | fixed | P3 | SOURCE-VERIFIED | [F100.md](F100.md) |
 | 119 | C42 | Passage traversal clears `unit.holder` directly, leaving a stale entry in a passage element's `units` list forever | filed | ? | cand | [C42.md](C42.md) |
-| 120 | C43 | **OUR OWN DEFECT:** the TestKit's `set_global` helper creates real globals, so two Wave-5 probes print `[LUA ERROR] Attempt to create a new global` into the owner's log and then PASS | filed | ? | SOURCE-VERIFIED | [C43.md](C43.md) |
+| 120 | C43 | **OUR OWN DEFECT:** the TestKit's `set_global` helper creates real globals, so two Wave-5 probes print `[LUA ERROR] Attempt to create a new global` into the owner's log and then PASS | fixed | ? | SOURCE-VERIFIED | [C43.md](C43.md) |
 | 121 | C44 | Vanilla missing asset: `Animations/LawOfficeDoor_idle.hgacl` / `_opening.hgacl` are referenced by the shipped manifest and absent from the shipped packs | wontfix | - | MEASURED | [C44.md](C44.md) |
 | 122 | F101 | Retail calls tooling-only globals: `CheatMeteorHit` → `TestMeteor` and the object inspector → `GetSpotNameColor` both throw on a shipped build | wontfix | - | MEASURED | [F101.md](F101.md) |
 | 123 | C45 | Vanilla `[ERROR] Quantum Comet invalid pos with no holder` — a departing rocket's `GenerateDepartures` walks a colonist train-route read into an invalid starting point (one occurrence) | filed | ? | cand | [C45.md](C45.md) |

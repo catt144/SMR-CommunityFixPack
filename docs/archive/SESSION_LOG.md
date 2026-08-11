@@ -8,6 +8,91 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — `unattended-2` prompt 1 REDONE after the owner re-enabled the pack: ALL FOUR ITEMS VERIFIED, and F48's inference became a measurement
+
+Owner, on reading the blocker: *"I haved re enabled the pack, re do your run,
+there is no point in doing an audit for a pack off run."* Re-staged, re-armed in
+REAL mode, relaunched. **Retail 1.0.7.396349, pack 81/81 active AS READ (the
+gate line, not an assumption), three loads, two save+reload round trips, 0
+`[LUA ERROR]` in the whole 1,009-line final log.** Log
+`docs/archive/u2run3_Mars.exe-20260811-02.01.06.log`. Everything FORCED/staged;
+no `tested` granted anywhere.
+
+⭐⭐ **F48 → `fixed`, and the shipped pass did better than the hand-run it had to
+reproduce.** The automatic `PostLoadGame` pass repaired **7 of 17 tracks, 0
+raised**, and every single one landed on `2 × (n−1)` — the value a linear chain
+must hold:
+
+| track | n | connections | target |
+|---|---|---|---|
+| `#4569` | 4 | 7 → 6 | 6 |
+| `#4619` | 23 | 45 → 44 | 44 |
+| `#4730` | 43 | 86 → 84 | 84 |
+| **`#12454`** | **280** | **559 → 558** | **558** |
+| `#12528` | 32 | 63 → 62 | 62 |
+| `#12637` | 17 | 34 → 32 | 32 |
+| `#13418` | 67 | 133 → 132 | 132 |
+
+`#12454` is PT-37's own track and PT-37's own numbers, reproduced independently
+by the shipped code — which was the stated acceptance. But the seven together
+say something PT-37 could not: its 559 → 558 was recorded as *"consistent with
+removing one stale connection"*, an inference from a single track. **Seven
+tracks of five different lengths, two of them shedding two connections rather
+than one, all landing exactly on the clean-chain value, is not an inference.**
+Nine stale connections removed. The repair **held across BOTH round trips**
+(`0 of 17` on the full per-track signature, twice), the one-shot flag was **read
+off `UIColony`** rather than inferred from an absence of lines, and the
+already-clean save reported **zero three separate ways** — including a direct
+call that deliberately ignores the flag, so the zero is honestly sampled rather
+than an early return.
+
+✅ **C43 → `fixed`, and the entry's un-counted gap is answered by execution: no
+other caller.** `77 PASS / 0 FAIL / 10 SKIP / 0 ERROR` against the retail
+baseline's `78 / 0 / 9 / 0`; a per-probe diff of all 87 rows returns **exactly
+one line** — the declared `AnomalyCaveInMap` PASS → SKIP. Zero TestKit
+`[LUA ERROR]` lines, and the refusal fired by name exactly twice, for exactly
+the two names this entry was filed for. Across 60 stub call sites the suite
+found no third undeclared target.
+
+✅ **F100 → `fixed`.** The new line is in the boot log verbatim at `:159`,
+between `00_Core`'s `authoring error, not a game update` at `:158` and
+`NoHomeless: applied` at `:190` — the log no longer contradicts itself, and it
+now tells a reader how to tell this apart from the real regression.
+
+✅ **PT-35 leg A case A is COMPLETE, both halves sampled for the first time.**
+`0 of 14 readings changed` at every comparison — after each pass call, across
+both R4 round trips, and start-to-finish over three loads and six calls.
+⭐ `RepairTurbineBuff`'s zero is **no longer trivially forced**: `unattended-1`'s
+came from the early return on an unresearched tech and was recorded UNSAMPLED;
+here the tech reads researched, so the pass walked its whole body over all three
+`Effect_ModifyLabel` entries and its already-buffed guard did the skipping.
+⭐ `RepairLeakedUpgradeModifiers` returned 0 with **3 live upgrade-shaped
+modifier ids and 144 upgraded buildings** in front of it — *"it does not strip
+live state"* is now sampled on a real population instead of an unmeasured one.
+
+⚖️ **EF-051's prediction was written down and then checked, and it held.** The
+three saves deleted at 01:28 were all back by **01:57:47** — the owner's own
+launch — creation stamps from that minute, original modification dates intact,
+plus a fourth artifact Steam had also restored. Two independent launches by two
+different people. They have been deleted again; expect them back until the
+Steam Cloud tick.
+
+**Statuses flipped honestly, corrections left visible.** The three "BUILT but
+BLOCKED" sections written an hour earlier were not rewritten away — each now
+carries a note saying what it first claimed and why it changed. ⚠️ One
+self-inflicted scare worth recording: a Python read/write on `C43.md` silently
+converted a stray `CR` byte into a newline, mangling a line the edit had nothing
+to do with. Caught by reading the diff rather than trusting the tool, restored
+byte-for-byte. **`Edit`, not a script, for these files — the memory rule about
+PS 5.1 mangling no-BOM UTF-8 has a Python sibling.**
+
+Close-out: probes disarmed (`PROBE SWEEP: clean`), all staged saves deleted —
+including one Steam had restored between runs, which the listing rule caught —
+save directory listed at 69 files with **no `U2*` leftovers**, both protected
+files byte-verified (`PT35FIXTURE` `D721329D…`, `TEST2H TRAIN` `103B320A…`),
+log archived and `cmp`-verified, both trees clean, doccheck GREEN.
+⇒ **NEXT: `02_FABLE_AUDIT.md`, which now has a real run to audit.**
+
 ## 2026-08-11 — `unattended-2` prompt 1: all three builds SHIPPED, and the launch that was to verify them found the pack switched off
 
 **Machine time ~9 min across two launches; owner cost the kickoff word. Nothing
