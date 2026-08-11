@@ -62,15 +62,12 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    game's one popup that *doesn't* pause, so it's the only place a normal
    autosave could land inside a popup window with no rebind involved. That
    rider didn't run. → `agent/bugs/F85.md`.
-6. **⚖️ Disabling a mod needs a full game restart — does `PT-20` need redoing?**
-   We found a state nobody had named: disable the pack in the Mod Manager, go
-   back to the main menu, load a save, and **all 81 modules are still live**
-   while the mod's saved data has *already* been discarded. It takes a full
-   restart to actually unload. Done properly it's completely clean (0 errors,
-   nothing in the log after a minute of play). **The question is backwards-looking:
-   any earlier uninstall test done without a restart was measuring that middle
-   state, not an uninstall — and `PT-20`'s 98-vs-98 comparison is the one to
-   re-check.** Cheap to redo if you want it. → `agent/bugs/D13.md`.
+6. ~~**⚖️ Disabling a mod needs a full game restart — does `PT-20` need
+   redoing?**~~ ✅ **DECIDED 2026-08-10 — REDO NOW.** A dedicated PT-20 redo
+   co-run is queued (your part: the Mod-Manager disable click, a **full game
+   restart**, ~10 min of ordinary play; save/reload/log reads are rig-side).
+   Its result supersedes the old 98-vs-98 comparison, which may have measured
+   the half-disabled middle state. → `agent/bugs/D13.md`, PT-20 section below.
 7. **⚖️ Our save-folder cleanup has now failed twice, and we may know why.**
    `CB1STAGE`, `CORUN0`, `CORUN1`, `U1STAGE` — the exact four that batch-1's
    audit said it deleted on 2026-08-05, and that this morning's prep *also* said
@@ -158,11 +155,12 @@ evaporated and it had to be built live.
    **The dev-tools-for-players idea is parked** in
    [FUTURE_IDEAS.md](FUTURE_IDEAS.md) as a SEPARATE post-launch mod — not this
    pack, and not work.
-4. **⚖️ `Opt_NoHomeless` self-deactivates at the main menu** because its
-   preflight names `Community` while `HasFreeWorkplacesAround` is declared on
-   the `Workforce` mixin — the F64 mistake again. It recovers (81/81 active by
-   load) and the runtime is separately guarded, so nothing broke. **Fix the
-   preflight target, or leave it?** → `agent/bugs/D12.md`.
+4. ~~**⚖️ `Opt_NoHomeless` self-deactivates at the main menu**~~ ✅ **DECIDED
+   2026-08-10 — the F100 hold is LIFTED and the repair is the reason-string
+   fix ONLY** (the log line stops crying wolf; the preflight target stays as
+   is until D12's own review settles). Queued with the C43 TestKit fix into
+   the next unattended chain, which verifies both against a live boot.
+   → `agent/bugs/F100.md`.
 
 ### ⭐ NEW 2026-08-10 — from `corun-batch-2` prep (nothing needs your call; two are cleanup already done)
 
@@ -205,17 +203,6 @@ building it is on the entry.
   **launch-prep instruction with an owed input**: when the freeze lifts, the
   section goes in with your wording. This line stays until that wording
   exists. → `docs/agent/reports/CHAIN_QA_REPORT.md` §3.
-- **F100 — how do we repair the `NoHomeless` self-check?** It names `Community`
-  for a method `Workforce` declares, so the module reports itself `inactive` in
-  every boot log and then applies anyway. Three options on the entry: point the
-  `Require` at `Workforce` (checks a different surface than the module calls);
-  teach `00_Core`'s `Require` to accept an inherited method (correct, but
-  changes self-check semantics for **all 81 modules** and needs a suite run
-  either side); or fix only the misleading reason string. ⚠️ It sits on D12,
-  which is under review. → `docs/agent/bugs/F100.md`.
-  ⏸️ **ON HOLD (your `---on hold`, in your own hand, 2026-08-04).** Not a
-  decision — the item stays OPEN and stays counted; nobody builds any of the
-  three options until you lift the hold and pick one.
 - **F99 severity, and whether it becomes work at all.** New 2026-08-03 from
   your own log: 14 `TrackElement.lua:805` errors, every one under
   `CheatCompleteAllConstructions()` during your underground build-out.
@@ -261,12 +248,6 @@ building it is on the entry.
   own track-merge absorb-walk. This does not change the decision in front of
   you: no-cheat reachability is still unproven, nothing is built, and the
   cheap discriminator offer stands.)*
-- **C43 — how do we stop the TestKit printing `[LUA ERROR]` into your logs?**
-  Two Wave-5 probes install stubs through `set_global`, which trips the engine's
-  strict-global guard on `IsNearDome` and `AddAreaRubble`; both probes then PASS,
-  so the cost is entirely two alarming lines in the log next to real errors.
-  ⚠️ **Second instance in one day** of the pack logging its own authoring noise
-  (F100 is the first). Three options on the entry. → `docs/agent/bugs/C43.md`.
 - **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
   (a round-trip step for state-transition claims), R7 (effect-evidencing
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for
@@ -956,7 +937,7 @@ over a real session of ordinary play.
    broken track — Test Kit, PLAYTEST_HELP).
 3. Log review per the protocol.
 
-### PT-20 — Uninstall safety · Status: standing — re-run per era and before release · ⛔ **2026-08-10: a Mod-Manager disable does NOT take effect until a FULL game restart** (D13, measured) — the prior 98-vs-98 comparison may have sampled the mixed state, and whether it gets redone is **decision 6 above**; any future run of this test restarts the game after the disable click · **mode: co-run** (routing 2026-08-04 — you keep the disable click + the 10 min play; save/reload/log reads rig-side)
+### PT-20 — Uninstall safety · Status: standing — re-run per era and before release · ⛔ **2026-08-10: a Mod-Manager disable does NOT take effect until a FULL game restart** (D13, measured) — the prior 98-vs-98 comparison may have sampled the mixed state · ⭐ **REDO ORDERED (your decision 6, 2026-08-10): a dedicated redo co-run is QUEUED** — disable click + full restart + ~10 min play are yours, everything else rig-side; its result supersedes the old comparison · **mode: co-run** (routing 2026-08-04 — you keep the disable click + the 10 min play; save/reload/log reads rig-side)
 **Bug:** the pack must never hold a save hostage. Steps 1-4 passed 2026-07-31;
 step 5's hunt found F86 (both sites since repaired — PT-58 measured the same
 shape at ZERO errors against leg 5's 80). This is the per-era re-check, not an

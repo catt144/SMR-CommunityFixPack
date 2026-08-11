@@ -22,8 +22,9 @@ verdict-neutral (the ~16:02 modal IS in the log — run 1's own storybit; the
 "zero output" instrument DID print — flush-at-exit `EF-047`; details
 SESSION_LOG). ⭐ NEW: **C45** (vanilla rocket-departure `[ERROR]`, one
 occurrence) · facts EF-047/048/049 · WORKFLOW "Co-runs" batch-2 rules 1–8.
-⇒ **NEXT: PT-35 leg A turbine-half re-run — a cheap 2-prompt UNATTENDED chain
-(Opus runs, Fable audits); fixture exists; the chain is NOT YET AUTHORED.**
+⇒ **NEXT: the 2-prompt UNATTENDED chain (NOT YET AUTHORED) — PT-35 leg A
+(fixture exists) + C43 `set_global` fix + F100 reason-string fix, one launch
+verifies all three; then the PT-20 REDO co-run (ordered 2026-08-10).**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -37,9 +38,8 @@ BUILD STATE (emitted by tools/doccheck.py)
 
 Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 
-⚖️ **F76 CLOSED-REFUTED**, residue **`C41`**. ✅ **F11** route (a) SETTLED, ⛔ NOT
-`tested`. ⚠️ **F99 (`cand`)** — 2×2 FULL, 4 witnessed zeros, NOT refutation.
-⚠️ **C42 (`cand`)** — this save cannot sample it. ⛔ **retail probes 78/87.**
+⚖️ **F76 CLOSED-REFUTED** → `C41`. ✅ **F11** settled, P2, NOT `tested`.
+⚠️ **F99/C42 (`cand`)** — rate bounds only. ⛔ **retail probes 78/87.**
 
 ## Gates and holds
 
@@ -53,8 +53,8 @@ Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fp
   rule. ⭐ Steam-Cloud restore hypothesis untested → checklist 7.
 - ⛔ **Mod-Manager disable needs a FULL RESTART** (D13, measured 2026-08-10) —
   code stays live, permanent already gone; PT-20 re-check = decision 6.
-- **Owner decisions: 12 open** (6 CLOSED 2026-08-10 pm incl. F11 P1→P2 +
-  rider closed; closed records MOVE to the archive). ⭐⭐ **Src FOUND** —
-  installdir is `Project Spark` (EF-014); F85 SOURCE-CONFIRMED. Relabel OWED.
+- **Owner decisions: 9 open** (9 CLOSED 2026-08-10 pm — F11 ×2, C43, F100,
+  PT-20 redo ordered, F46, C36, veto, archive rule; closed records MOVE to
+  the archive). ⭐⭐ **Src FOUND** — installdir `Project Spark` (EF-014).
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
   `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.

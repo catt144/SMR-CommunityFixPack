@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-10 (evening) — decision drive, round 3: our own noise gets fixed, the F100 hold lifts, PT-20 redo ordered
+
+1. **C43 → option 2** (owner): `set_global` restricted to names that already
+   exist; probes whose stub target is undeclared SKIP with a stated reason.
+   Queued into the next unattended chain (suite-verified; the un-counted
+   "how many probes do this" gap is in the same leg's scope).
+2. **F100: hold LIFTED, reason-string fix ONLY** (owner) — the boot log stops
+   crying wolf; the preflight target waits for D12's review. Same chain,
+   boot-verified.
+3. **PT-20: REDO NOW** (owner, decision 6) — a dedicated redo co-run is
+   queued: disable click + FULL RESTART + ~10 min play owner-side, the rest
+   rig-side; result supersedes the possibly-mixed-state 98-vs-98.
+
+⇒ The queued unattended chain is now **PT-35 leg A + C43 fix + F100 string
+fix** (one game launch verifies all three); the **PT-20 redo co-run** queues
+behind it as the next ATTENDED item. Records moved/struck per the archive
+rule. Open decisions: **9**.
+
 ## 2026-08-10 (evening) — decision drive, round 2: the F11 pair closes and the veto limit is recorded
 
 1. **F11 rider CLOSED on 2-of-3 readings** (owner) — the wrapper's behaviour

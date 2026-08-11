@@ -5153,3 +5153,34 @@ our copy).
 **The check can fail:** a train wedged at a platform, or disembark stat changes
 that stopped happening, falsifies the conversion — say so and the copy form
 comes back from git (`3a6512f^`).
+
+### Moved 2026-08-10 — decision drive round 3 (our own noise, the F100 hold, PT-20)
+
+**Verdicts (owner, 2026-08-10):** **C43 → option 2** — `set_global` will be
+restricted to names that already exist, with probes SKIPping (stated reason)
+when their stub target is undeclared; queued into the next unattended chain,
+which verifies it against a live suite run. **F100's hold is LIFTED and the
+repair is the reason-string fix ONLY** — the boot log stops crying wolf; the
+preflight target itself waits for D12's own review; same chain, verified by a
+live boot. **PT-20: REDO NOW** — a dedicated redo co-run is queued (disable
+click + FULL RESTART + ~10 min play are the owner's; the rest rig-side); its
+result supersedes the possibly-mixed-state 98-vs-98. Records as they stood:
+
+- **F100 — how do we repair the `NoHomeless` self-check?** It names `Community`
+  for a method `Workforce` declares, so the module reports itself `inactive` in
+  every boot log and then applies anyway. Three options on the entry: point the
+  `Require` at `Workforce` (checks a different surface than the module calls);
+  teach `00_Core`'s `Require` to accept an inherited method (correct, but
+  changes self-check semantics for **all 81 modules** and needs a suite run
+  either side); or fix only the misleading reason string. ⚠️ It sits on D12,
+  which is under review. → `docs/agent/bugs/F100.md`.
+  ⏸️ **ON HOLD (your `---on hold`, in your own hand, 2026-08-04).** Not a
+  decision — the item stays OPEN and stays counted; nobody builds any of the
+  three options until you lift the hold and pick one.
+
+- **C43 — how do we stop the TestKit printing `[LUA ERROR]` into your logs?**
+  Two Wave-5 probes install stubs through `set_global`, which trips the engine's
+  strict-global guard on `IsNearDome` and `AddAreaRubble`; both probes then PASS,
+  so the cost is entirely two alarming lines in the log next to real errors.
+  ⚠️ **Second instance in one day** of the pack logging its own authoring noise
+  (F100 is the first). Three options on the entry. → `docs/agent/bugs/C43.md`.
