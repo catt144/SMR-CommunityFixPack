@@ -8,6 +8,96 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — `unattended-2` prompt 1: all three builds SHIPPED, and the launch that was to verify them found the pack switched off
+
+**Machine time ~9 min across two launches; owner cost the kickoff word. Nothing
+verified, and the reason is not a code failure.**
+
+**Job 1 — the three decided builds, all landed, all parse-GREEN** (pack
+`3c1ccc8`, TestKit `d8e1fbf`). **F48**: the corrected pass in
+`Code/90_SaveSanitizer.lua`, Src-re-derived first (`Station.lua:1346` verbatim,
+`ProcessTrackElements` at `Tracks.lua:807`, the endpoint assignment at
+`:820-822`). It counts an EFFECT — connection total and duplicate `node_idx`
+either side of each call — so a clean save reports a truthful zero; one-shot
+behind an `SMRFixPack_*` flag on `UIColony`; the console entry point ignores the
+flag on purpose so a direct call can never return a trivially-forced zero.
+**C43**: `set_global` may replace a global, never create one; the refusal is
+returned as a third result and logged by name; `WithGlobals` defers a SKIP that
+applies only when a probe came back empty-handed, so no existing PASS can flip
+silently. **F100**: the reason string only.
+
+⭐ **The C43 build turned up a better finding than the noise it was fixing.**
+`IsNearDome` and `AddAreaRubble` are **`local function`s** in the shipped source
+(`CaveInRubble.lua:79` / `:38`). A file local is unreachable through `_G`, so
+those two stubs **never took effect, before or after this change** — the pair of
+`[LUA ERROR]` lines was the only thing they ever produced. `AnomalyCaveInMap`
+now SKIPs per the owner's decision, applied literally; deleting the dead stubs
+would be a *different* repair, so they stay put and stay visible. Also
+corrected: there are not "two Wave-5 probes" — there is one probe with two
+undeclared names in a single call, which the original log said plainly and
+everything downstream read as two. The un-counted gap is counted on the static
+side (60 stub call sites across 10 probe files, 6 direct `SetGlobal` calls, 1 in
+the core; no third file-local among the engine names) and is honestly UNSAMPLED
+on the live side.
+
+**⛔ Job 2 — VOID. The Community Fix Pack is disabled in the owner's Mod
+Manager**, left that way by `corun-batch-2`'s leg T on 2026-08-10.
+`pack=0/0 active`; the engine's own line reads *"present, but not loaded"*.
+Source-proven unscriptable — `AccountStorage`, `SaveAccountStorage`,
+`ModsReloadItems` are all `ModEnvBlacklist` keys, and there is no console at the
+main menu. `account.dat` was examined and **deliberately not written**: it is a
+compressed container holding the owner's settings, and flipping a checkbox is
+not worth a hard-to-reverse write to their account state at 1 am. Routed to the
+checklist as tick 1.
+
+**Two harness defects, both mine, both fixed and then PROVEN by a second
+launch.** (i) `SaveGame`'s `savename` is written **verbatim** — asking for
+`U2RT1` produced a file called `U2RT1`, which `LoadGame("U2RT1.savegame.sav")`
+could not find, and `err=false` said nothing about it (**EF-050**). Every prior
+caller had passed the extension by accident of habit. (ii) The payload had **no
+run-condition gate**: `ReadConditions` printed the zero and six more steps ran
+anyway. Repaired in `WORKFLOW` surgically — batch-2 rule 7 now binds at the top
+of EVERY run and must STOP it, since a gate whose only output is a log line is
+not a gate. A declared HARNESS REHEARSAL (`REHEARSAL = true`, stamped in the
+banner and on every verdict line as VOID) then drove all 15 steps, three loads
+and two save/reload round trips clean.
+
+⭐⭐ **And the close-out caught something nobody had been able to test: STEAM
+CLOUD RESTORES DELETED SAVES.** 55 `.sav` files before the first launch, **69**
+after the second — **14** staged saves this project had verifiably deleted
+(`CB1STAGE`, `CB2STAGE`, `CORUN0`, `CORUN1`, `U1STAGE`, `CB2F85`, `CB2PKEY`,
+`CB2PKEY2`, `CB2UNINSTALL`, `U1C0PROOF`, `U1C1HEAL`, `U1C2PT35`, `U1C6FORCED`,
+`U1C6HEALED`), each with a creation stamp inside the 01:17:04–01:17:33 launch
+window and its original modification date preserved, **all written before
+`Mars.exe` started at 01:17:34**. That is Steam's pre-launch sync, and it
+**clears two sessions recorded as having failed the save-dir gate**: they had
+deleted the files. `agent/facts/EF-051`; the remedy is one owner tick and it is
+checklist tick 2. Checklist item 7's parked hypothesis is now closed by
+measurement.
+
+**What IS banked, because it needs no pack:** `PT35FIXTURE.savegame.sav` is
+**re-confirmed good** on a fresh load — `researched=1 discovered=163` (EF-048's
+truthy-non-boolean shape, second sighting), 1 Large / 6 plain / 12 Diffuser
+turbines, 144 upgraded buildings, 3 live upgrade-shaped modifier ids across 13
+domes. **`APPLICABLE=true` on both halves of PT-35 leg A at last** — the
+population that read 0 for `unattended-1` and again for `corun-batch-1`. The
+chain's stop condition 3 is not triggered: the fixture is fine, the pack was off.
+
+Whole-log review, both logs: **0 `[LUA ERROR]`**, 0 `TrackElement.lua:805`
+(F99), 0 `invalid pos with no holder` (C45). Two `[ResManager Error]` lines for
+missing `LawOfficeDoor` animations — reported rather than discounted, and their
+age is the answer: identical pairs sit in all 26 archived logs back to
+2026-08-03. ⚠️ The rehearsal's 0-error count may NOT be quoted for C43: with the
+pack absent every probe FAILs before reaching its stubs, so the two error lines
+are absent for the wrong reason.
+
+Statuses unchanged and honest — **F48 stays `directed`, C43 and F100 stay
+`filed`**; no `tested` anywhere; every reading FORCED/staged. Logs archived
+`u2run1void_*` and `u2run2rehearsal_*`, both `cmp`-verified. Saves deleted and
+the directory listed; both protected files byte-verified (`PT35FIXTURE`
+`D721329D…`, `TEST2H TRAIN` `103B320A…`). ⇒ **NEXT: the owner ticks the Mod
+Manager, and one relaunch takes every reading this chain owes.**
+
 ## 2026-08-11 — `unattended-2` BUILT and queued (same session): the decision-drive build batch, two prompts, owner kicks off before bed
 
 Owner order ("Do the unattended build and I will kick that off before I call

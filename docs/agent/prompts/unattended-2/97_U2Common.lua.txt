@@ -207,7 +207,23 @@ end
 -- ⛔ G4: the witness is the on-disk file (read agent-side, game closed) plus the
 --    LoadGame that follows in this very run. ListForTag is printed and is NOT
 --    the witness (EF-049).
+-- ⛔⛔ `savename` IS WRITTEN VERBATIM — the engine appends NOTHING (MEASURED
+--    2026-08-11, run 1 of this chain: SaveGame("U2RT1", {savename = "U2RT1"})
+--    returned err=false and produced a file literally called `U2RT1`, with no
+--    extension, which LoadGame("U2RT1.savegame.sav") then could not find).
+--    batch-2's SaveNamed looked like it appended one only because every caller
+--    happened to pass the extension already (`CB2.SSave` defaults to
+--    "PT35FIXTURE.savegame.sav"). Resurrecting a primitive means resurrecting
+--    its ARGUMENT CONVENTION, not just its body — this guard is here so the
+--    next session cannot make the same trade.
+local SAVE_EXT = ".savegame.sav"
+
 function U2.Save(name)
+	name = tostring(name)
+	if name:sub(-#SAVE_EXT) ~= SAVE_EXT then
+		say(fmt("SAVE ⚠️ name '%s' carries no %s suffix — the engine writes savename VERBATIM, so this would produce an extensionless file no LoadGame could find. Appending it.", name, SAVE_EXT))
+		name = name .. SAVE_EXT
+	end
 	local landed = false
 	U2.TryYield("SaveGame " .. tostring(name), function()
 		local err, nm = SaveGame(name, { savename = name, silent = true, no_screenshot = true })
@@ -254,6 +270,55 @@ function U2.ReadConditions(note, named)
 			tostring(f and f.status or "NOT REGISTERED"), tostring(f and f.detail or "-")))
 	end
 	return active, total
+end
+
+---- ⛔ THE RUN-CONDITION GATE (added 2026-08-11, after run 1 was VOIDED) -----
+--
+-- Run 1 of this chain read `pack=0/0 active` and carried on for six more steps,
+-- producing readings that could not mean anything: the Community Fix Pack was
+-- DISABLED in the Mod Manager, left that way by corun-batch-2's leg T uninstall
+-- test on 2026-08-10. ReadConditions PRINTED the zero and nothing acted on it.
+--
+-- batch-2 harness rule 7 already says a ReadConditions-class gate precedes every
+-- post-mutation reading. It was written for a reading taken after a mutation
+-- INSIDE a sitting; it did not bind the case where the mutation happened in a
+-- PREVIOUS sitting and the process simply starts in the mutated state. That is
+-- the same failure with a longer gap, so the gate belongs at the top of every
+-- run, not just after a mutation.
+--
+-- ⛔ THE DEFAULT IS TO STOP. `allow` exists for a declared HARNESS REHEARSAL —
+--    a run whose purpose is to prove the instrument, not to measure anything —
+--    and when it is used, every subsequent verdict is void by construction and
+--    this gate says so in a line no reader can skim past.
+function U2.RequirePackLoaded(note, allow)
+	local pack = rawget(_G, "SMRFixPack")
+	local active, total = 0, 0
+	if pack and pack.order then
+		for _, id in ipairs(pack.order) do
+			total = total + 1
+			local f = pack.fixes and pack.fixes[id]
+			if f and f.status == "active" then active = active + 1 end
+		end
+	end
+	U2.pack_loaded = active > 0
+	if U2.pack_loaded then
+		say(fmt("GATE pack-loaded OK :: %d/%d modules active :: %s", active, total, tostring(note)))
+		return true
+	end
+	say(fmt("GATE ⛔ PACK NOT LOADED :: %d/%d active. The Community Fix Pack mod is present on disk but not enabled in the Mod Manager. Every reading about F48, F100, PT-35 or the probe suite is VOID in this state — the pack's code never ran. :: %s",
+		active, total, tostring(note)))
+	say("GATE ⛔ THIS IS NOT SCRIPTABLE. AccountStorage, SaveAccountStorage and ModsReloadItems are all ModEnvBlacklist keys (Mod.lua), and there is no console at the main menu — so no mod-side or console-side path can tick the box. It is one human click in the Mod Manager, followed by a FULL RESTART (D13).")
+	if allow then
+		say("GATE ⚠️ CONTINUING ANYWAY: this run is a declared HARNESS REHEARSAL. It exists to prove the load/save/reload flow works, and NOTHING it prints about the pack is a result. Every verdict below is VOID.")
+		return true
+	end
+	return false
+end
+
+-- Prefix for any line that would otherwise read like a verdict.
+function U2.Void(label)
+	if U2.pack_loaded then return "" end
+	return "VOID(pack not loaded) "
 end
 
 ---- FIXTURE CONFIRM ---------------------------------------------------------
@@ -399,7 +464,7 @@ function U2.ReadSanitizerNumbers(when)
 
 	local parts = {}
 	for _, r in ipairs(out) do parts[#parts + 1] = r.name .. "=" .. r.value end
-	say(fmt("PT35NUM %s :: %s", tostring(when), table.concat(parts, " ")))
+	say(fmt("%sPT35NUM %s :: %s", U2.Void(), tostring(when), table.concat(parts, " ")))
 
 	-- the do-no-harm population, stated with what sampled it
 	U2.Applicable("PT35-F03-do-no-harm-population(live upgrade-shaped modifier ids)",
@@ -423,7 +488,7 @@ function U2.DiffNumbers(a, b, what)
 				ra and ra.value or "<absent>", rb and rb.value or "<absent>")
 		end
 	end
-	say(fmt("PT35DIFF %s :: %d of %d readings changed%s", tostring(what), #changed, n,
+	say(fmt("%sPT35DIFF %s :: %d of %d readings changed%s", U2.Void(), tostring(what), #changed, n,
 		#changed > 0 and (" — " .. table.concat(changed, " | ")) or ""))
 	return #changed
 end
@@ -442,8 +507,8 @@ function U2.RunHealFamily(when)
 	local _, a = U2.Try("Sanitizer.RepairTurbineBuff " .. tostring(when), s.RepairTurbineBuff)
 	local _, b = U2.Try("Sanitizer.RepairLeakedUpgradeModifiers " .. tostring(when), s.RepairLeakedUpgradeModifiers)
 	r.turbine, r.upgrades = a, b
-	say(fmt("HEAL %s :: RepairTurbineBuff returned %s | RepairLeakedUpgradeModifiers returned %s",
-		tostring(when), tostring(a), tostring(b)))
+	say(fmt("%sHEAL %s :: RepairTurbineBuff returned %s | RepairLeakedUpgradeModifiers returned %s",
+		U2.Void(), tostring(when), tostring(a), tostring(b)))
 	return r
 end
 
@@ -482,8 +547,8 @@ function U2.SnapAllTracks(when)
 		sites = sites + #(tr.repair_cgs or empty_table)
 		out[#out + 1] = { name = id_of(tr), value = U2.SnapTrack(tr, when) }
 	end
-	say(fmt("SNAPALL %s :: %d track(s), %d broken element(s), %d repair site(s)",
-		tostring(when), #out, broken, sites))
+	say(fmt("%sSNAPALL %s :: %d track(s), %d broken element(s), %d repair site(s)",
+		U2.Void(), tostring(when), #out, broken, sites))
 	U2.Applicable("F48-track-population(tracks with elements to re-order)", #out, #out,
 		"TrackBase label walked this load")
 	return out
@@ -507,8 +572,8 @@ function U2.RunF48(when)
 		return nil
 	end
 	local _, n = U2.Try("Sanitizer.RepairStationConnectors " .. tostring(when), s.RepairStationConnectors)
-	say(fmt("F48 %s :: direct call repaired %s track(s) — the pass's own count line above carries the per-track effect",
-		tostring(when), tostring(n)))
+	say(fmt("%sF48 %s :: direct call repaired %s track(s) — the pass's own count line above carries the per-track effect",
+		U2.Void(), tostring(when), tostring(n)))
 	return n
 end
 

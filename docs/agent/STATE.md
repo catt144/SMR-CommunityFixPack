@@ -8,22 +8,24 @@ Current only, rewritten in place; history newest-first in
 ## Where the project is
 
 ✅✅ 18-prompt chain COMPLETE 2026-08-03; playtest campaign is the main line.
-⭐⭐ corun-rig + `unattended-1` CLOSED 2026-08-04 (SAVE primitive PROVEN; its
-`ListForTag` witness later died → `EF-049`) · **`corun-batch-1` CLOSED 2026-08-05**.
-⭐⭐ **`corun-batch-2` CLOSED 2026-08-10 — terminal audit: EVERY leg verdict
-SUSTAINED** (7 legs, 9 predictions HELD, 0 `[LUA ERROR]`; ≈75 attended min vs
-33–36, all rig-side): popup KEYSTONE ANSWERED by execution (POPUP audit §8
-item 1); **F21 restamp WITNESSED organically**, NOT `tested`; **F85 CONFIRMED,
-ROUTE REFUTED** ⇒ owner (3rd cell); **F99's 2×2 FULL** (4th zero, stays
-`cand`); **PT-47 PASS** ⇒ ARCHIVED (+ keystone/F85 riders);
-**`PT35FIXTURE.savegame.sav` BUILT, audit-verified**; **PT-53 E CLEAN after a
-FULL RESTART** ⇒ D13's 4th OFF state. ⚖️ 5 audit corrections, all
-verdict-neutral (SESSION_LOG). ⭐ NEW: **C45** · facts EF-047/048/049 ·
-WORKFLOW "Co-runs" batch-2 rules 1–9 + adopted R4/R7.
-⇒ **NEXT: `unattended-2` AUTHORED 2026-08-11 (`agent/prompts/unattended-2/`,
-2 prompts) — F48 build + C43 fix + F100 fix + PT-35 leg A, one launch.
-Kickoff: Opus session on `01_OPUS_RUN.md`. Then the PT-20 REDO co-run
-(+ the 10-s Ctrl-F9 check that settles F85; chain unauthored).**
+⭐⭐ corun-rig + `unattended-1` CLOSED 08-04 · **`corun-batch-1` CLOSED 08-05** ·
+**`corun-batch-2` CLOSED 08-10, EVERY leg verdict SUSTAINED** (keystone ANSWERED,
+F21 WITNESSED, F85 route REFUTED ⇒ owner, F99 2×2 FULL, PT-47 ARCHIVED,
+**`PT35FIXTURE` BUILT**, D13's 4th OFF state). Detail: SESSION_LOG.
+⛔⛔ **`unattended-2` prompt 1 RAN 2026-08-11: ALL THREE BUILDS SHIPPED
+(F48 sanitizer pass · C43 `set_global` · F100 string; `3c1ccc8` + TestKit
+`d8e1fbf`, parse GREEN) — and NOTHING IS VERIFIED. The Community Fix Pack is
+DISABLED in the owner's Mod Manager** (leg T residue; `pack=0/0 active`,
+"present, but not loaded"), and the enable is source-proven unscriptable.
+⭐ C43 finding: `IsNearDome`/`AddAreaRubble` are **file locals** — those stubs
+never worked; the entry's "two probes" is ONE probe, two names. ⭐⭐ **STEAM
+CLOUD RESTORES DELETED SAVES — 14 came back pre-process (`EF-051`), clearing
+both "failed" close-outs.** ⭐ NEW `EF-050` (savename verbatim) · WORKFLOW
+batch-2 rule 7 amended (the gate must STOP, at every run).
+⇒ **NEXT: the owner's TWO TICKS (checklist top block) — Mod Manager enable +
+full restart, and untick Steam Cloud saves. Then ONE relaunch takes every reading
+this chain owes and `02_FABLE_AUDIT.md` closes it; then the PT-20 REDO co-run
+(+ the Ctrl-F9 check that settles F85; chain unauthored).**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -36,9 +38,8 @@ BUILD STATE (emitted by tools/doccheck.py)
 ```
 
 Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
-
-⚖️ **F76 CLOSED-REFUTED** → `C41`. ✅ **F11** settled, P2, NOT `tested`.
-⚠️ **F99/C42 (`cand`)** — rate bounds only. ⛔ **retail probes 78/87.**
+⚖️ **F76 CLOSED-REFUTED** → `C41`. ✅ **F11** settled, P2, NOT `tested`. ⚠️
+**F99/C42 (`cand`)** — rate bounds only. ⛔ **retail probes 78/87.**
 
 ## Gates and holds
 
@@ -47,11 +48,10 @@ Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fp
 - ⭐ **F02 · F78 · F81 ORGANIC 2026-08-03 and ALL THREE again 2026-08-05** (entries).
 - **F42** `blocked`, wontfix recommended. **D08 extender overhaul** speced in
   `agent/reports/DRONE_OVERHAUL_OPTIONS.md`, unbuilt; D06's dials wait on B2.
-- ⛔ **Save-dir close-out gate FAILED TWICE** (same 4 files) — batch-2 listed
-  the dir (15 deleted ~780 MB), audit re-check HELD; now a standing Co-runs
-  rule. ⭐ Steam-Cloud restore hypothesis untested → checklist 7.
-- ⛔ **Mod-Manager disable needs a FULL RESTART** (D13, measured 2026-08-10) —
-  code stays live, permanent already gone; PT-20 re-check = decision 6.
+- ✅ **Save-dir "failures" EXPLAINED: Steam Cloud restores them at launch
+  (`EF-051`)** — record "deleted, listing verified", never "gone", until untick.
+- ⛔ **Mod-Manager disable needs a FULL RESTART** (D13) — PT-20 re-check =
+  decision 6; **the pack has been OFF since that leg → checklist tick 1.**
 - **Owner decisions: 2 open** (11 CLOSED in the 08-10/11 drive incl. ⭐ F48
   SHIP, D07 no-dome-pin, R4/R7 adopted): **F85** (evidence-gated — Ctrl-F9
   check rides the PT-20 redo) · **relabel WORDING** (owner text, launch prep).

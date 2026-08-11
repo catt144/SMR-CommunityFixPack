@@ -458,7 +458,16 @@ not an achievement.
   sessions (batch-1's audit and batch-2's prep) before batch-2's sitting made
   the listing part of close-out and the audit re-checked it hours later
   (deletion held). A "deleted" claim without a directory listing after it is
-  not a record. The Steam-Cloud restore hypothesis stays open (checklist).
+  not a record.
+  ⛔ **AND A LISTING PROVES THE DELETION HAPPENED, NEVER THAT IT HELD (measured
+  2026-08-11, `agent/facts/EF-051`): Steam Cloud restores deleted savegames at
+  the next launch** — 14 of them came back, written before the game process even
+  started, with creation stamps from tonight and modification dates a week old.
+  That is what the two "failed" close-outs were: they deleted the files and
+  Steam put them back. Until the owner unticks cloud saves for this title
+  (checklist, top block), a close-out may record **"deleted, listing verified"**
+  and may **not** record "gone" — and the next session re-lists rather than
+  inheriting the claim.
 - ⛔ **Attended-sitting classes from `corun-batch-1` (2026-08-05; 8-entry
   ledger, first BATCHED attended sitting — the classes the unattended ledger
   could not see). Every attended brief guards against these:**
@@ -528,6 +537,18 @@ not an achievement.
      Mod-Manager disable without a full restart leaves code live with its
      permanent gone (D13's fourth OFF state); the gate is the only reason a
      clean log of the pack RUNNING was not banked as a clean uninstall.
+     ⛔ **AMENDED 2026-08-11, after this rule failed a second time: THE GATE
+     RUNS AT THE TOP OF EVERY RUN, AND IT MUST *STOP* THE RUN, NOT MERELY
+     PRINT.** As written it bound a reading taken after a mutation *inside* a
+     sitting; it said nothing about a process that simply STARTS in the mutated
+     state because a previous sitting left it there. `unattended-2` run 1 did
+     exactly that — `corun-batch-2`'s leg T had disabled the pack the day
+     before, `ReadConditions` printed `pack=0/0 active`, and the payload carried
+     on for six more steps taking readings about code that never ran. **A gate
+     whose only output is a line in a log is not a gate**; the same rule failing
+     twice in two different ways is the rule being under-specified, not the
+     sessions being careless. Mechanised in the run harness as
+     `RequirePackLoaded`, whose default is to stop.
   8. **Source line numbers in a brief are marked Src-verified or
      trust-carried** — an unmarked line number reads as verified and is not.
   9. **A brief that wants a module dark states HOW it goes dark**: the

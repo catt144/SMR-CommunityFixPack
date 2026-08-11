@@ -38,11 +38,29 @@
 U2.tag      = "U2RUN"
 U2.watchdog = 25 * 60 * 1000
 
+-- ⛔⛔ THE ONE SWITCH IN THIS FILE, AND IT IS DECLARED IN THE BANNER.
+--
+--   false = the REAL run. If the Community Fix Pack is not loaded, the run
+--           STOPS at the gate rather than banking readings about code that
+--           never executed. This is the setting the chain's acceptance needs.
+--   true  = a HARNESS REHEARSAL. The run proceeds with the pack absent, every
+--           verdict-bearing line is stamped VOID, and its log may be quoted for
+--           the flow working and for NOTHING ELSE.
+--
+-- Run 1 (2026-08-11 01:17) had no gate at all and was voided by a disabled
+-- pack six steps in. Run 2 was the rehearsal that proved the corrected save
+-- names and the three-load flow. The re-run the owner unblocks sets this false.
+local REHEARSAL = false
+
+-- ⛔ FULL FILENAMES. The engine writes `savename` VERBATIM and appends nothing:
+--    run 1 asked for "U2RT1", got a file called `U2RT1`, and could not load it
+--    back. U2.Save now guards this as well; both belts are deliberate.
 local STAGE = "U2STAGE.savegame.sav"
-local RT1   = "U2RT1"
-local RT2   = "U2RT2"
+local RT1   = "U2RT1.savegame.sav"
+local RT2   = "U2RT2.savegame.sav"
 
 local say = U2.Say
+local fmt = U2.Fmt
 
 -- banked across loads
 local S1, S1b, S2, S3          -- track signature sets
@@ -54,13 +72,17 @@ function U2.Payload()
 		return U2.Load(STAGE, 3)
 	end, "untimed") then return end
 
-	U2.Step("3-conditions", function()
+	if not U2.Step("3-conditions-and-gate", function()
+		say(fmt("MODE %s", REHEARSAL
+			and "HARNESS REHEARSAL — this run proves the load/save/reload flow and NOTHING about F48, C43, F100 or PT-35. Every verdict below is void by construction."
+			or "REAL VERIFICATION RUN — the gate below stops the run if the pack is not loaded."))
 		-- ⚠️ REGISTERED ids, not file names (corun-batch-1 asked for
 		-- "Opt_CohortHousing" and got NOT REGISTERED beside "CohortHousing").
 		U2.ReadConditions("unattended-2 verification run, load 1 of 3, staged copy of PT35FIXTURE",
 			{ "SaveSanitizer", "NoHomeless" })
 		say("F100 ⛔ the acceptance reading for F100 is NOT taken here — the deactivation line prints at mod load, long before this payload runs, and an absence verdict may only come from the FINAL archived log (EF-047). The line above records what the module's status is NOW; the boot lines are read agent-side after this process exits.")
-	end)
+		return U2.RequirePackLoaded("load 1, before any verdict-bearing read", REHEARSAL)
+	end) then return end
 
 	U2.Step("4-fixture-confirm", function()
 		U2.ReadTurbineFixture("load 1, staged copy")
@@ -89,7 +111,7 @@ function U2.Payload()
 
 	----------------------------------------------------------------- load 2 --
 	if not U2.Step("8-load-round-trip-1", function()
-		return U2.Load(RT1 .. ".savegame.sav", 3)
+		return U2.Load(RT1, 3)
 	end, "untimed") then return end
 
 	U2.Step("9-f48-across-the-round-trip", function()
@@ -121,7 +143,7 @@ function U2.Payload()
 
 	----------------------------------------------------------------- load 3 --
 	if not U2.Step("13-load-round-trip-2", function()
-		return U2.Load(RT2 .. ".savegame.sav", 3)
+		return U2.Load(RT2, 3)
 	end, "untimed") then return end
 
 	U2.Step("14-pt35-leg-a-round-trip-2", function()

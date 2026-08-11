@@ -1,0 +1,336 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	29%
+Disk Free      	758290 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:062
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:064
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:451
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:584
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:782
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:465
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:524
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:525
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:527
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:17:866
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:870
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:490
+Reloading done in 955 ms
+						Lua 0:00:18:806
+[preset] Preset postprocess took 52 ms.
+						Lua 0:00:18:850
+479 / 479 particle streams loaded in 39 ms.
+						Lua 0:00:19:095
+[mod] [U2RUN] === unattended-2 U2RUN === watchdog 1500000ms
+[U2RUN] === unattended-2 U2RUN === watchdog 1500000ms
+[mod] [U2RUN] STEP 1-waiting-menu BEGIN
+[U2RUN] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:096
+[PdxSDK] Started up. Took 1560
+						Lua 0:00:19:104
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit
+						Lua 0:00:19:557
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:675
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:677
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:557
+[mod] [U2RUN] STEP 1-waiting-menu END 2500ms
+[U2RUN] STEP 1-waiting-menu END 2500ms
+[mod] [U2RUN] STEP 2-load-staged-copy BEGIN
+[U2RUN] STEP 2-load-staged-copy BEGIN
+						Lua 0:00:21:663
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:670
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:694
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:23:395
+*** Assets reloaded in 1.7 s, read 202.1 MB, read speed 117.2 MB/s, average read 4949 bytes.
+						Lua 0:00:26:361
+Unpersist missing permanent: Mod/SMR_CommunityFixPack | Fallback permanent: table: 0000019B4D22C058 [7]
+						Lua 0:00:26:448
+[mod] This savegame tries to load Mod Community Fix Pack (id SMR_CommunityFixPack, v1.00-001), which is present, but not loaded
+						Lua 0:00:29:235
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:29:281
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:29:299
+Game Loaded in 7636 ms
+						Lua 0:00:29:336
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:040
+Game loaded on map BlankBigCanyonCMix_09 in 8483 ms
+[mod] [U2RUN] LOAD OK #1 file=U2STAGE.savegame.sav — LoadGame returned no error
+[U2RUN] LOAD OK #1 file=U2STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:32:349
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:45:540
+[mod] [U2RUN] READ speed: SetGameSpeed(3) call=true | before=5 after=3
+[U2RUN] READ speed: SetGameSpeed(3) call=true | before=5 after=3
+[mod] [U2RUN] STEP 2-load-staged-copy END (no timing — this step blocks render mode)
+[U2RUN] STEP 2-load-staged-copy END (no timing — this step blocks render mode)
+[mod] [U2RUN] STEP 3-conditions BEGIN
+[U2RUN] STEP 3-conditions BEGIN
+[mod] [U2RUN] CONDITIONS pack=0/0 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=unattended-2 verification run, load 1 of 3, staged copy of PT35FIXTURE
+[U2RUN] CONDITIONS pack=0/0 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | note=unattended-2 verification run, load 1 of 3, staged copy of PT35FIXTURE
+[mod] [U2RUN] CONDITIONS by-name SaveSanitizer = NOT REGISTERED | detail=-
+[U2RUN] CONDITIONS by-name SaveSanitizer = NOT REGISTERED | detail=-
+[mod] [U2RUN] CONDITIONS by-name NoHomeless = NOT REGISTERED | detail=-
+[U2RUN] CONDITIONS by-name NoHomeless = NOT REGISTERED | detail=-
+[mod] [U2RUN] F100 ⛔ the acceptance reading for F100 is NOT taken here — the deactivation line prints at mod load, long before this payload runs, and an absence verdict may only come from the FINAL archived log (EF-047). The line above records what the module's status is NOW; the boot lines are read agent-side after this process exits.
+[U2RUN] F100 ⛔ the acceptance reading for F100 is NOT taken here — the deactivation line prints at mod load, long before this payload runs, and an absence verdict may only come from the FINAL archived log (EF-047). The line above records what the module's status is NOW; the boot lines are read agent-side after this process exits.
+[mod] [U2RUN] STEP 3-conditions END 0ms
+[U2RUN] STEP 3-conditions END 0ms
+[mod] [U2RUN] STEP 4-fixture-confirm BEGIN
+[U2RUN] STEP 4-fixture-confirm BEGIN
+[mod] [U2RUN] PT35 FrictionlessComposites researched=1 (type=number truthy=true ok=true) discovered=163 (type=number truthy=true ok=true) | 1 Large, 6 plain, 12 Diffuser turbine(s) | when=load 1, staged copy
+[U2RUN] PT35 FrictionlessComposites researched=1 (type=number truthy=true ok=true) discovered=163 (type=number truthy=true ok=true) | 1 Large, 6 plain, 12 Diffuser turbine(s) | when=load 1, staged copy
+[mod] [U2RUN] READ PT35-turbine-half-fixture(a Large Wind Turbine exists) = 1 | population=1 | APPLICABLE=true | witness=WindTurbine_Large label walked this load — 0 is exactly why unattended-1's leg A turbine half was UNSAMPLED
+[U2RUN] READ PT35-turbine-half-fixture(a Large Wind Turbine exists) = 1 | population=1 | APPLICABLE=true | witness=WindTurbine_Large label walked this load — 0 is exactly why unattended-1's leg A turbine half was UNSAMPLED
+						Lua 0:00:45:545
+[mod] [U2RUN] PT35 upgraded buildings=144 | examples: SmartHome_Small#2910{1,SmartHome_HomeCollective} SmartHome_Small#2912{1,SmartHome_HomeCollective} SmartHome_Small#2913{1,SmartHome_HomeCollective} SmartHome_Small#2916{1,SmartHome_HomeCollective} | when=load 1, staged copy
+[U2RUN] PT35 upgraded buildings=144 | examples: SmartHome_Small#2910{1,SmartHome_HomeCollective} SmartHome_Small#2912{1,SmartHome_HomeCollective} SmartHome_Small#2913{1,SmartHome_HomeCollective} SmartHome_Small#2916{1,SmartHome_HomeCollective} | when=load 1, staged copy
+[mod] [U2RUN] READ PT35-F03-half-fixture(an APPLIED building upgrade exists) = 144 | population=144 | APPLICABLE=true | witness=every label of every city walked this load, upgrades_built read per object — the fixture's Remote Medic is the intended subject
+[U2RUN] READ PT35-F03-half-fixture(an APPLIED building upgrade exists) = 144 | population=144 | APPLICABLE=true | witness=every label of every city walked this load, upgrades_built read per object — the fixture's Remote Medic is the intended subject
+[mod] [U2RUN] STEP 4-fixture-confirm END 0ms
+[U2RUN] STEP 4-fixture-confirm END 0ms
+[mod] [U2RUN] STEP 5-f48-after-the-automatic-pass BEGIN
+[U2RUN] STEP 5-f48-after-the-automatic-pass BEGIN
+[mod] [U2RUN] F48FLAG load 1, after PostLoadGame :: UIColony.SMRFixPack_F48_StationConnectors = nil (type=nil truthy=false)
+[U2RUN] F48FLAG load 1, after PostLoadGame :: UIColony.SMRFixPack_F48_StationConnectors = nil (type=nil truthy=false)
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#4569 :: start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 n=4 connections_total=7 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#4569 :: start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 n=4 connections_total=7 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#4619 :: start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 n=23 connections_total=45 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#4619 :: start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 n=23 connections_total=45 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#4730 :: start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 n=43 connections_total=86 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#4730 :: start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 n=43 connections_total=86 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#5361 :: start_el=TrackGridElement#4796 end_el=TrackGridElement#4554 n=113 connections_total=224 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#5361 :: start_el=TrackGridElement#4796 end_el=TrackGridElement#4554 n=113 connections_total=224 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#5956 :: start_el=TrackGridElement#6293 end_el=TrackGridElement#4631 n=74 connections_total=146 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#5956 :: start_el=TrackGridElement#6293 end_el=TrackGridElement#4631 n=74 connections_total=146 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#8553 :: start_el=nil end_el=nil n=1 connections_total=0 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#8553 :: start_el=nil end_el=nil n=1 connections_total=0 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#9876 :: start_el=TrackGridElement#12430 end_el=TrackGridElement#4844 n=113 connections_total=224 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#9876 :: start_el=TrackGridElement#12430 end_el=TrackGridElement#4844 n=113 connections_total=224 duplicate_node_idx=[]
+						Lua 0:00:45:546
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 connections_total=559 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 connections_total=559 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#12511 :: start_el=TrackGridElement#12474 end_el=TrackGridElement#12507 n=14 connections_total=26 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#12511 :: start_el=TrackGridElement#12474 end_el=TrackGridElement#12507 n=14 connections_total=26 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#12528 :: start_el=TrackGridElement#12509 end_el=TrackGridElement#12498 n=32 connections_total=63 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#12528 :: start_el=TrackGridElement#12509 end_el=TrackGridElement#12498 n=32 connections_total=63 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#12632 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#12632 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#12637 :: start_el=TrackGridElement#12635 end_el=TrackGridElement#12723 n=17 connections_total=34 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#12637 :: start_el=TrackGridElement#12635 end_el=TrackGridElement#12723 n=17 connections_total=34 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#12727 :: start_el=TrackGridElement#12725 end_el=TrackGridElement#12500 n=32 connections_total=62 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#12727 :: start_el=TrackGridElement#12725 end_el=TrackGridElement#12500 n=32 connections_total=62 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#13411 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#13411 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#13418 :: start_el=TrackGridElement#13416 end_el=TrackGridElement#13410 n=67 connections_total=133 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#13418 :: start_el=TrackGridElement#13416 end_el=TrackGridElement#13410 n=67 connections_total=133 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#13945 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#13945 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-auto-pass TrackBase#13950 :: start_el=TrackGridElement#13948 end_el=TrackGridElement#13414 n=110 connections_total=218 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-auto-pass TrackBase#13950 :: start_el=TrackGridElement#13948 end_el=TrackGridElement#13414 n=110 connections_total=218 duplicate_node_idx=[]
+[mod] [U2RUN] SNAPALL load1-after-auto-pass :: 17 track(s), 0 broken element(s), 0 repair site(s)
+[U2RUN] SNAPALL load1-after-auto-pass :: 17 track(s), 0 broken element(s), 0 repair site(s)
+[mod] [U2RUN] READ F48-track-population(tracks with elements to re-order) = 17 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[U2RUN] READ F48-track-population(tracks with elements to re-order) = 17 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [U2RUN] F48 the automatic pass has already run (PostLoadGame fires inside LoadGame). Its own per-track 'connections A -> B' lines and its 'repaired N of M track(s) walked' line are ABOVE this one — that pair is acceptance (c) and the first half of (a).
+[U2RUN] F48 the automatic pass has already run (PostLoadGame fires inside LoadGame). Its own per-track 'connections A -> B' lines and its 'repaired N of M track(s) walked' line are ABOVE this one — that pair is acceptance (c) and the first half of (a).
+[mod] [U2RUN] F48 NOT-APPLICABLE (SMRFixPack.Sanitizer.RepairStationConnectors missing) :: load1-immediate-rerun (idempotence, PRE-RELOAD)
+[U2RUN] F48 NOT-APPLICABLE (SMRFixPack.Sanitizer.RepairStationConnectors missing) :: load1-immediate-rerun (idempotence, PRE-RELOAD)
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#4569 :: start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 n=4 connections_total=7 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#4569 :: start_el=TrackGridElement#4567 end_el=TrackGridElement#4546 n=4 connections_total=7 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#4619 :: start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 n=23 connections_total=45 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#4619 :: start_el=TrackGridElement#4575 end_el=TrackGridElement#4629 n=23 connections_total=45 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#4730 :: start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 n=43 connections_total=86 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#4730 :: start_el=TrackGridElement#4846 end_el=TrackGridElement#4794 n=43 connections_total=86 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#5361 :: start_el=TrackGridElement#4796 end_el=TrackGridElement#4554 n=113 connections_total=224 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#5361 :: start_el=TrackGridElement#4796 end_el=TrackGridElement#4554 n=113 connections_total=224 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#5956 :: start_el=TrackGridElement#6293 end_el=TrackGridElement#4631 n=74 connections_total=146 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#5956 :: start_el=TrackGridElement#6293 end_el=TrackGridElement#4631 n=74 connections_total=146 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#8553 :: start_el=nil end_el=nil n=1 connections_total=0 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#8553 :: start_el=nil end_el=nil n=1 connections_total=0 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#9876 :: start_el=TrackGridElement#12430 end_el=TrackGridElement#4844 n=113 connections_total=224 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#9876 :: start_el=TrackGridElement#12430 end_el=TrackGridElement#4844 n=113 connections_total=224 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 connections_total=559 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#12454 :: start_el=TrackGridElement#12432 end_el=TrackGridElement#12476 n=280 connections_total=559 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#12511 :: start_el=TrackGridElement#12474 end_el=TrackGridElement#12507 n=14 connections_total=26 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#12511 :: start_el=TrackGridElement#12474 end_el=TrackGridElement#12507 n=14 connections_total=26 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#12528 :: start_el=TrackGridElement#12509 end_el=TrackGridElement#12498 n=32 connections_total=63 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#12528 :: start_el=TrackGridElement#12509 end_el=TrackGridElement#12498 n=32 connections_total=63 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#12632 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#12632 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#12637 :: start_el=TrackGridElement#12635 end_el=TrackGridElement#12723 n=17 connections_total=34 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#12637 :: start_el=TrackGridElement#12635 end_el=TrackGridElement#12723 n=17 connections_total=34 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#12727 :: start_el=TrackGridElement#12725 end_el=TrackGridElement#12500 n=32 connections_total=62 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#12727 :: start_el=TrackGridElement#12725 end_el=TrackGridElement#12500 n=32 connections_total=62 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#13411 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#13411 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#13418 :: start_el=TrackGridElement#13416 end_el=TrackGridElement#13410 n=67 connections_total=133 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#13418 :: start_el=TrackGridElement#13416 end_el=TrackGridElement#13410 n=67 connections_total=133 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#13945 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#13945 :: start_el=nil end_el=nil n=1 connections_total=1 duplicate_node_idx=[]
+[mod] [U2RUN] SNAP load1-after-direct-rerun TrackBase#13950 :: start_el=TrackGridElement#13948 end_el=TrackGridElement#13414 n=110 connections_total=218 duplicate_node_idx=[]
+						Lua 0:00:45:547
+[U2RUN] SNAP load1-after-direct-rerun TrackBase#13950 :: start_el=TrackGridElement#13948 end_el=TrackGridElement#13414 n=110 connections_total=218 duplicate_node_idx=[]
+[mod] [U2RUN] SNAPALL load1-after-direct-rerun :: 17 track(s), 0 broken element(s), 0 repair site(s)
+[U2RUN] SNAPALL load1-after-direct-rerun :: 17 track(s), 0 broken element(s), 0 repair site(s)
+[mod] [U2RUN] READ F48-track-population(tracks with elements to re-order) = 17 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[U2RUN] READ F48-track-population(tracks with elements to re-order) = 17 | population=17 | APPLICABLE=true | witness=TrackBase label walked this load
+[mod] [U2RUN] PT35DIFF F48 idempotence within load 1 (PRE-RELOAD ONLY — the round trip is load 2) :: 0 of 17 readings changed
+[U2RUN] PT35DIFF F48 idempotence within load 1 (PRE-RELOAD ONLY — the round trip is load 2) :: 0 of 17 readings changed
+[mod] [U2RUN] STEP 5-f48-after-the-automatic-pass END 0ms
+[U2RUN] STEP 5-f48-after-the-automatic-pass END 0ms
+[mod] [U2RUN] STEP 6-pt35-leg-a-load-1 BEGIN
+[U2RUN] STEP 6-pt35-leg-a-load-1 BEGIN
+[mod] [U2RUN] PT35   turbine label WindTurbine carries id=table: 0000019B52715CC0 prop=electricity_production percent=100 amount=0 | when=load1-before-heal-calls
+[U2RUN] PT35   turbine label WindTurbine carries id=table: 0000019B52715CC0 prop=electricity_production percent=100 amount=0 | when=load1-before-heal-calls
+[mod] [U2RUN] PT35   turbine label WindTurbine_Large carries id=table: 0000019B52DA4DC8 prop=electricity_production percent=100 amount=0 | when=load1-before-heal-calls
+[U2RUN] PT35   turbine label WindTurbine_Large carries id=table: 0000019B52DA4DC8 prop=electricity_production percent=100 amount=0 | when=load1-before-heal-calls
+[mod] [U2RUN] PT35   turbine label WindTurbine_Diffuser carries id=table: 0000019B527159F0 prop=electricity_production percent=100 amount=0 | when=load1-before-heal-calls
+[U2RUN] PT35   turbine label WindTurbine_Diffuser carries id=table: 0000019B527159F0 prop=electricity_production percent=100 amount=0 | when=load1-before-heal-calls
+[mod] [U2RUN] PT35NUM load1-before-heal-calls :: turbine_label_modifiers=3 turbine_percent_sum=300 large_turbine_electricity_production_own=29008 large_turbine_electricity_production_resolved=29008 colony_label_modifiers=131 colony_upgrade_shaped_ids=0 city_label_modifiers=8 city_upgrade_shaped_ids=0 dome_count=13 dome_label_modifiers=48 dome_upgrade_shaped_ids=3 turbines_large=1 turbines_plain=6 turbines_diffuser=12
+[U2RUN] PT35NUM load1-before-heal-calls :: turbine_label_modifiers=3 turbine_percent_sum=300 large_turbine_electricity_production_own=29008 large_turbine_electricity_production_resolved=29008 colony_label_modifiers=131 colony_upgrade_shaped_ids=0 city_label_modifiers=8 city_upgrade_shaped_ids=0 dome_count=13 dome_label_modifiers=48 dome_upgrade_shaped_ids=3 turbines_large=1 turbines_plain=6 turbines_diffuser=12
+[mod] [U2RUN] READ PT35-F03-do-no-harm-population(live upgrade-shaped modifier ids) = 3 | population=3 | APPLICABLE=true | witness=colony + every city + every dome label_modifiers walked this load
+[U2RUN] READ PT35-F03-do-no-harm-population(live upgrade-shaped modifier ids) = 3 | population=3 | APPLICABLE=true | witness=colony + every city + every dome label_modifiers walked this load
+[mod] [U2RUN] HEAL NOT-APPLICABLE (SMRFixPack.Sanitizer is not a table) :: load 1
+[U2RUN] HEAL NOT-APPLICABLE (SMRFixPack.Sanitizer is not a table) :: load 1
+[mod] [U2RUN] PT35   turbine label WindTurbine carries id=table: 0000019B52715CC0 prop=electricity_production percent=100 amount=0 | when=load1-after-heal-calls
+[U2RUN] PT35   turbine label WindTurbine carries id=table: 0000019B52715CC0 prop=electricity_production percent=100 amount=0 | when=load1-after-heal-calls
+[mod] [U2RUN] PT35   turbine label WindTurbine_Large carries id=table: 0000019B52DA4DC8 prop=electricity_production percent=100 amount=0 | when=load1-after-heal-calls
+[U2RUN] PT35   turbine label WindTurbine_Large carries id=table: 0000019B52DA4DC8 prop=electricity_production percent=100 amount=0 | when=load1-after-heal-calls
+[mod] [U2RUN] PT35   turbine label WindTurbine_Diffuser carries id=table: 0000019B527159F0 prop=electricity_production percent=100 amount=0 | when=load1-after-heal-calls
+[U2RUN] PT35   turbine label WindTurbine_Diffuser carries id=table: 0000019B527159F0 prop=electricity_production percent=100 amount=0 | when=load1-after-heal-calls
+[mod] [U2RUN] PT35NUM load1-after-heal-calls :: turbine_label_modifiers=3 turbine_percent_sum=300 large_turbine_electricity_production_own=29008 large_turbine_electricity_production_resolved=29008 colony_label_modifiers=131 colony_upgrade_shaped_ids=0 city_label_modifiers=8 city_upgrade_shaped_ids=0 dome_count=13 dome_label_modifiers=48 dome_upgrade_shaped_ids=3 turbines_large=1 turbines_plain=6 turbines_diffuser=12
+[U2RUN] PT35NUM load1-after-heal-calls :: turbine_label_modifiers=3 turbine_percent_sum=300 large_turbine_electricity_production_own=29008 large_turbine_electricity_production_resolved=29008 colony_label_modifiers=131 colony_upgrade_shaped_ids=0 city_label_modifiers=8 city_upgrade_shaped_ids=0 dome_count=13 dome_label_modifiers=48 dome_upgrade_shaped_ids=3 turbines_large=1 turbines_plain=6 turbines_diffuser=12
+[mod] [U2RUN] READ PT35-F03-do-no-harm-population(live upgrade-shaped modifier ids) = 3 | population=3 | APPLICABLE=true | witness=colony + every city + every dome label_modifiers walked this load
+[U2RUN] READ PT35-F03-do-no-harm-population(live upgrade-shaped modifier ids) = 3 | population=3 | APPLICABLE=true | witness=colony + every city + every dome label_modifiers walked this load
+[mod] [U2RUN] PT35DIFF PT-35 leg A do-no-harm, load 1, both passes called (PRE-RELOAD ONLY) :: 0 of 14 readings changed
+[U2RUN] PT35DIFF PT-35 leg A do-no-harm, load 1, both passes called (PRE-RELOAD ONLY) :: 0 of 14 readings changed
+[mod] [U2RUN] STEP 6-pt35-leg-a-load-1 END 0ms
+[U2RUN] STEP 6-pt35-leg-a-load-1 END 0ms
+[mod] [U2RUN] STEP 7-save-round-trip-1 BEGIN
+[U2RUN] STEP 7-save-round-trip-1 BEGIN
+						Lua 0:00:46:192
+[mod] [U2RUN] SAVE SaveGame returned err=false name=U2RT1
+[U2RUN] SAVE SaveGame returned err=false name=U2RT1
+[mod] [U2RUN] TRY SaveGame U2RT1 (yielding) ok=true result=false
+[U2RUN] TRY SaveGame U2RT1 (yielding) ok=true result=false
+						Lua 0:00:46:622
+[mod] [U2RUN] TRY Savegame.ListForTag (EF-049 open question, NOT the witness) ok=true result=non-table:nil
+[U2RUN] TRY Savegame.ListForTag (EF-049 open question, NOT the witness) ok=true result=non-table:nil
+[mod] [U2RUN] SAVE WITNESS for U2RT1 = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+[U2RUN] SAVE WITNESS for U2RT1 = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+[mod] [U2RUN] STEP 7-save-round-trip-1 END (no timing — this step blocks render mode)
+[U2RUN] STEP 7-save-round-trip-1 END (no timing — this step blocks render mode)
+[mod] [U2RUN] STEP 8-load-round-trip-1 BEGIN
+[U2RUN] STEP 8-load-round-trip-1 BEGIN
+						Lua 0:00:47:869
+LoadGame error: File Not Found
+[mod] [U2RUN] LOADERR U2RT1.savegame.sav File Not Found
+[U2RUN] LOADERR U2RT1.savegame.sav File Not Found
+[mod] [U2RUN] STEP 8-load-round-trip-1 END (no timing — this step blocks render mode)
+[U2RUN] STEP 8-load-round-trip-1 END (no timing — this step blocks render mode)
+[mod] [U2RUN] SHUTDOWN STOP 8-load-round-trip-1 — the step asked to stop; its reason is the line above
+[U2RUN] SHUTDOWN STOP 8-load-round-trip-1 — the step asked to stop; its reason is the line above
+						Lua 0:00:50:869
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+[mod] [U2RUN] SHUTDOWN done
+[U2RUN] SHUTDOWN done
+					Render 0:00:50:870
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:51:178
+
+
+*** Debug::Done()
+Time (ms)	51178
+
+

@@ -18,10 +18,18 @@
 #    silently prefixed one onto metadata.lua. Use WriteAllLines with an explicit
 #    no-BOM encoder for metadata.lua, as below.
 #
-#   Usage:  .\U2_ARM.ps1 arm      # 97_U2Common + 98_U2Run
-#           .\U2_ARM.ps1 disarm   # deletes both, restores metadata, sweeps both repos
+#   Usage:  .\U2_ARM.ps1 arm            # 97_U2Common + 98_U2Run, REAL run
+#           .\U2_ARM.ps1 arm-rehearsal  # same, but flips REHEARSAL to true
+#           .\U2_ARM.ps1 disarm         # deletes both, restores metadata, sweeps
+#
+# arm-rehearsal exists so the parked source stays authoritative at REHEARSAL =
+# false (the setting the chain's acceptance needs) while a deliberate
+# instrument-proving run can still be armed by a SCRIPT rather than a hand edit
+# (C11). The flip is read back off disk and printed, and the run's own MODE
+# banner repeats it in the log, so a rehearsal can never be mistaken for a
+# measurement after the fact.
 
-param([Parameter(Mandatory = $true)][ValidateSet("arm", "disarm")][string]$mode)
+param([Parameter(Mandatory = $true)][ValidateSet("arm", "arm-rehearsal", "disarm")][string]$mode)
 
 $ErrorActionPreference = "Stop"
 $park = "c:\Dev\SMR-BugFixPack\docs\agent\prompts\unattended-2"
@@ -33,12 +41,21 @@ $common = @{ src = "97_U2Common.lua.txt"; dst = "Code\97_U2Common.lua" }
 $run    = @{ src = "98_U2Run.lua.txt";    dst = "Code\98_U2Run.lua" }
 $pairs  = @($common, $run)
 
-$arming = ($mode -eq "arm")
+$arming = ($mode -ne "disarm")
+$rehearsal = ($mode -eq "arm-rehearsal")
 
 if ($arming) {
   foreach ($p in $pairs) {
     Copy-Item -LiteralPath (Join-Path $park $p.src) -Destination (Join-Path $kit $p.dst) -Force
     Write-Output ("WROTE " + $p.dst)
+  }
+  if ($rehearsal) {
+    $rf = Join-Path $kit "Code\98_U2Run.lua"
+    $rt = [System.IO.File]::ReadAllText($rf)
+    $rt2 = $rt.Replace("local REHEARSAL = false", "local REHEARSAL = true")
+    if ($rt2 -eq $rt) { Write-Output "ARM FAIL: could not find 'local REHEARSAL = false' to flip"; exit 1 }
+    [System.IO.File]::WriteAllText($rf, $rt2, $noBom)
+    Write-Output "WROTE 98_U2Run.lua with REHEARSAL flipped to true"
   }
   $lines = Get-Content -LiteralPath $meta -Encoding UTF8
   $out = New-Object System.Collections.Generic.List[string]
@@ -93,6 +110,15 @@ if ($arming) {
   $runText = Get-Content -LiteralPath (Join-Path $kit "Code\98_U2Run.lua") -Raw -Encoding UTF8
   if ($runText -match '(?m)^\s*U2\.Boot\(\)') { Write-Output "ARM GATE OK   98_U2Run drives itself (unattended by design)" }
   else { Write-Output "ARM GATE FAIL: 98_U2Run does not call U2.Boot() - the run would launch and do nothing"; $fail = $true }
+  # Read the mode back OFF DISK. A run armed as a rehearsal must say so here and
+  # a real run must say so here; neither may be inferred from the command typed.
+  if ($runText -match '(?m)^\s*local REHEARSAL = true') {
+    Write-Output "ARM GATE OK   MODE ON DISK = HARNESS REHEARSAL (every verdict in that run is VOID by construction)"
+    if (-not $rehearsal) { Write-Output "ARM GATE FAIL: 'arm' was requested but the armed file says REHEARSAL = true"; $fail = $true }
+  } elseif ($runText -match '(?m)^\s*local REHEARSAL = false') {
+    Write-Output "ARM GATE OK   MODE ON DISK = REAL VERIFICATION RUN (stops at the gate if the pack is not loaded)"
+    if ($rehearsal) { Write-Output "ARM GATE FAIL: 'arm-rehearsal' was requested but the armed file says REHEARSAL = false"; $fail = $true }
+  } else { Write-Output "ARM GATE FAIL: cannot read the REHEARSAL mode off disk"; $fail = $true }
   $comText = Get-Content -LiteralPath (Join-Path $kit "Code\97_U2Common.lua") -Raw -Encoding UTF8
   if ($comText -match '(?m)^\s*U2\.Boot\(\)') { Write-Output "ARM GATE FAIL: 97_U2Common calls U2.Boot() at file scope - two flows would race"; $fail = $true }
   else { Write-Output "ARM GATE OK   97_U2Common starts nothing on its own" }
