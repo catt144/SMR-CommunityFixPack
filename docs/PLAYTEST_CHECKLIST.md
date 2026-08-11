@@ -50,10 +50,22 @@ even started**. Details: `agent/facts/EF-051`.
 `U1C6HEALED`), **732 MB reclaimed**, directory verified at **55 `.sav` files**
 — the exact pre-restore baseline — with `PT35FIXTURE` and `TEST2H TRAIN` both
 MD5-verified untouched.
-⇒ **The one reading still owed: your next launch.** If the listing still shows
-55 afterwards (no stray returned), the restore mechanism is dead and close-outs
-may say "gone" again; any session alongside your next launch takes that
-listing. If one returns, EF-051 needs re-deriving — say so.
+⭐⭐ **AND THAT READING IS IN — it was your own launch this morning, and it
+passed.** You unticked and we cleared at **09:43**; Steam's launch marker was
+rewritten at **09:47**; you then played (two autosaves and `PT-15`). **Not one
+of the 14 came back.** So the restore mechanism looks dead. The formal
+retirement of our "never say gone" rule is the chain audit's call — it needs to
+check our working, not take our word — but nothing is owed from you.
+
+❓ **One small question for you, and it's the only thing outstanding.** The
+count doesn't quite square: 55 files before, and afterwards 53 of the old ones
+plus the 3 you made this morning. **Two of the old saves are unaccounted for.**
+Almost certainly the game rotating out old autosaves — and it can't be a Steam
+restore, because a restore *adds* files and this is two *fewer*. But we only
+ever recorded the number 55, never the list, so there's nothing to compare
+against. ⇒ **Did you delete a couple of old saves this morning?** If yes, that
+closes it on the spot. If not, no harm — from now on close-outs record names
+instead of a count, and it closes forward.
 
 ## Decisions waiting on you
 

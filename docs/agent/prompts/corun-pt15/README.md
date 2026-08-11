@@ -35,6 +35,14 @@ Four items:
    This chain's FIRST launch is the falsifier: pre-launch and post-launch
    save-dir listings decide whether the WORKFLOW "never say gone" caveat
    retires. Costs one listing, already scripted into close-out.
+   ⭐⭐ **SUPERSEDED 2026-08-11 by prompt 1 — the falsifier already ran and
+   PASSED, on the owner's own launch 3 minutes after the untick; none of the 14
+   strays returned** (evidence table in `agent/facts/EF-051`). ⇒ this item is
+   now a SECOND sample, not the first, and prompt 3 rules on the caveat's
+   retirement. ⚠️ Two files of the 55 baseline are unaccounted for (probably
+   autosave rotation, unprovable because the baseline was a count and not a
+   list) — so **close-out lists NAMES this time**, and the question closes
+   forward rather than backward.
 
 **Facts this chain stands on, Src-verified 2026-08-11 by the authoring session**
 (1.0.7.396349, `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`):

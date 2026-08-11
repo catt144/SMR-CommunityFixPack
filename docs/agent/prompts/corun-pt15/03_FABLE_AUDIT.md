@@ -31,6 +31,25 @@ on-disk original over the FULL length; read the whole sitting log. Per item:
   listing → retire the WORKFLOW "never say gone" clause (dated edit) and
   close EF-051's falsifier ⭐; a returned stray → EF-051 re-opens, say so
   everywhere it is cited.
+  ⭐⭐ **CHANGED 2026-08-11 — you now have TWO samples, not one, and the first
+  is not ours.** Prompt 1 found that the post-untick launch already happened
+  (owner's own, 09:47:15, three minutes after the untick commit) and that none
+  of the 14 strays returned — evidence table in `agent/facts/EF-051`, which
+  routed the caveat's retirement HERE rather than retiring it itself. **Audit
+  that finding as a claim like any other** (the commit time, the
+  `steam_autocloud.vdf` write, the absence of all 14) before you lean on it.
+  ⚠️ **The open thread you must not drop: 53 pre-existing `.sav` against a 55
+  baseline — two unaccounted for.** Autosave rotation is the hypothesis; it is
+  unprovable backwards because the baseline was recorded as a COUNT, never a
+  LIST. Rule on whether that gap blocks retirement (it is a shortfall, and the
+  mechanism under test produces a surplus — but say so explicitly rather than
+  assuming it). If the owner answered whether they deleted anything, that
+  settles it; if not, say it stays open and that the fix is forward-looking.
+  ⚠️ **Methodology finding to land in EF-051 either way:** record NAMES, not
+  counts — a count cannot survive one ordinary play session. And a `Copy-Item`
+  byte-copy has the SAME metadata shape as a Cloud restore (fresh
+  `CreationTime`, old `LastWriteTime`), so the shape is not diagnostic once
+  anyone has staged a save.
 * Whole-log sweep: F99 `TrackElement.lua:805` (an ORGANIC hit reopens F99 —
   route it), C45 `invalid pos with no holder` (second occurrence — record
   per entry), unexplained lines verbatim with age. ⛔ A missing archived log

@@ -551,6 +551,25 @@ Test2 H, test2 J, TEST2H TRAIN, TestE, TestF, USA Sol 2, USA Sol 298,
 USA Sol 3, USA Sol 302, USA Sol 55, USA Sol 59        [+ CP15STAGE = 57]
 ```
 
+⭐⭐ **ITEM 4's FALSIFIER HAS ALREADY RUN — OUTSIDE THIS CHAIN, AND IT PASSED.**
+Found by prompt 1 from file-system metadata after the owner mentioned playing:
+the untick + stray deletion was committed **09:43:57**, `steam_autocloud.vdf`
+was rewritten **09:47:15** (the launch marker this fact records), the owner then
+played (autosaves 10:53 and 11:11, `PT-15` 10:58), and **not one of the fourteen
+named strays came back**. Full evidence table in `agent/facts/EF-051`.
+⇒ **the sitting's listings are now a SECOND sample, not the first.** Do not
+present them as the falsifier; present them as confirmation. The caveat's
+retirement is the audit's call and EF-051 says so.
+⚠️ **And one thing does not reconcile — do not let it drop.** 56 `.sav` minus
+the 3 created that morning leaves **53** pre-existing against a **55** baseline:
+**two short**. It does not weaken the verdict (a restore *adds* files; this is a
+shortfall) and autosave rotation is the likely cause — but **the 55 was recorded
+as a count, never as a list**, so nothing can be diffed. ⇒ **this chain's
+close-out lists NAMES, not a number**, so the question closes forward.
+⚠️ Also: `CP15STAGE` carries the *same* metadata shape as a Cloud restore
+(fresh `CreationTime`, old `LastWriteTime`) because `Copy-Item` preserves the
+write time. Diff against expected survivors, never against the shape.
+
 ⇒ **the EF-051 test is exact**: after this chain's first launch, the count must
 still be **57 plus only what the sitting itself wrote**. Any of the fourteen
 2026-08-11 strays returning (`CB1STAGE`, `CB2STAGE`, `CORUN0`, `CORUN1`,
