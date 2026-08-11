@@ -5081,3 +5081,75 @@ on the C36 row, gent/bugs/C12-C38.md).
   or each uncommitted file as a `WARN`. Report-only per your word: it never
   blocks a commit, so TestKit work-in-progress cannot jam the pack. Verified
   on both paths (clean, and a planted temp file).
+
+
+### Moved 2026-08-10 — decision drive round 2 (F11 pair + the veto lever)
+
+**Verdicts (owner, 2026-08-10):** the F11 pre-wrapper rider **CLOSES on 2-of-3
+readings** (the wrapper's own behaviour is witnessed; the third reading tests
+vanilla's lines and is untakeable on this save — if it ever becomes takeable it
+is one free ride-along, recorded on the entry). **F11's priority drops P1 → P2**
+(correct repair of a real `table.remove` misuse, but the guarded state has no
+demonstrated producer and no wedge was ever seen live). **The
+`SMRFixPack_Disabled` veto limit is RECORDED, not coded** — the lever covers
+only D12/F97-class modules; test briefs toggling D03/D07 use `IsActive`
+(notes on D03, D07, and WORKFLOW Co-runs). Records as they stood:
+
+- ⭐ **DECISION FOR YOU: does the F11 pre-wrapper rider close on two of its
+  three readings?** (2026-08-04) You wrote the rider, so this is yours. Two
+  readings passed cleanly — `TrainPlatformWedge [active]`, and 7 trains
+  completing full unload cycles with 340 passenger removals and **zero** wedges,
+  with you watching one. **The third cannot be taken on that save**:
+  `LuxuriousTrains` is researched so the travel-time comfort call is skipped by
+  design, and no train runs a forest track, so both stat counters read `0` —
+  and `0` is what a working fix and a broken one both produce there.
+  **My recommendation, not a decision:** the two expressions in question are
+  *vanilla's own lines*, so checking they still fire checks vanilla rather than
+  our wrapper — and the wrapper's own behaviour is now witnessed. Closing on two
+  of three looks right to me. **If you'd rather have the third**, it needs a
+  save without `LuxuriousTrains` or a train on a forest track, and it is one
+  ride-along in any future co-run. → `agent/bugs/F11.md`.
+
+- **Does F11 keep `P1`?** The F11 rider ran 2026-08-03 and the state its fix
+  guards against has **no demonstrated producer** — crew-gathering abduction
+  keeps `train.units` synced on both maps. The fix is still a correct repair of
+  a real `table.remove` misuse in shipped code, so it is not a removal
+  question; it is a priority question, and it is not an agent's call.
+  → `docs/agent/bugs/F11.md`.
+  *(Update 2026-08-03, chain close: the fix's SHAPE changed — the ~30-line full
+  copy became a 10-line pre-wrapper, so it no longer freezes the two balance
+  expressions a game patch would most plausibly touch. The P1 question is
+  unchanged; the conversion is behaviour-preserving by construction but NOT yet
+  verified at the keyboard — see the rider below.)*
+
+- **The dead `SMRFixPack_Disabled` veto on D03/D07.** The console veto lever
+  does nothing for those two modules — only `IsActive` is consulted. Either
+  honor it per-call in both, or record that the lever exists only for
+  D12/F97-class modules. Nothing measures wrong today, but a future leg that
+  used the lever on D03/D07 would silently run live and you'd read the result
+  as a fix failure. → `CHAIN_QA_REPORT.md` §5.
+
+### Rider — F11: verify the pre-wrapper conversion · Status: ⚖️ **TWO OF THREE READINGS PASSED 2026-08-04 (co-run #1, you attended)** — the third is unavailable on that save; **your call whether it closes** (decision above). Remainder is **TAKEABLE WHEN** a sitting runs on a save WITHOUT `LuxuriousTrains`, or with a train on a `seen_forest` track
+**What ran.** `TrainPlatformWedge` read `active`; 7 trains completed full
+`GotoStation → UnloadTrain → LoadTrain → GotoStation` cycles over 238 s, **340**
+passenger removals from train holders, **0** wedge candidates, and you watched
+one unload and leave. ⛔ **The stat reading could not be taken** — both shipped
+branches are switched off on that save by design, so `0` and `0` mean nothing.
+⛔ **`tested` is NOT claimed.** Card 1 in `agent/reports/CORUN1_EVIDENCE_CARDS.md`.
+
+
+**Change, not a bug:** 2026-08-03 the F11 fix was converted from a ~30-line full
+method copy to a 10-line pre-wrapper (same repaired branch, original method
+called for everything else). It is behaviour-preserving **by construction** and
+has NOT been verified live — this rider is what earns that back.
+→ [F11](agent/bugs/F11.md)
+**Requirements:** pack ON, any train line that actually moves colonists. No
+cheats, no save juggling — an organic warm-up leg is enough.
+**Setup:** none beyond playing. Watch three things during normal train use:
+`SMRFixPack.ListFixes()` shows `TrainPlatformWedge [active]`; trains unload and
+LEAVE stations normally; passenger comfort/sanity still move on disembark (the
+travel-time penalty and the forest bonus now run vanilla's own lines instead of
+our copy).
+**The check can fail:** a train wedged at a platform, or disembark stat changes
+that stopped happening, falsifies the conversion — say so and the copy form
+comes back from git (`3a6512f^`).

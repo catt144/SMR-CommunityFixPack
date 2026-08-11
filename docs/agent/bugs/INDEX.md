@@ -23,7 +23,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 8 | F08 | Tourist star-rating applicant bonus inverted | tested | P1 | high | [F08.md](F08.md) |
 | 9 | F09 | Tourist Satisfaction drifts down (asymmetric thresholds) | fixed | P1 | high | [F09.md](F09.md) |
 | 10 | F10 | Faction funding conditions always error (BlueSun/Brazil/Russia) | wontfix | P1 | high | [F10.md](F10.md) |
-| 11 | F11 | Train wedges at platform (`table.remove` misuse) | fixed | P1 | high | [F11.md](F11.md) |
+| 11 | F11 | Train wedges at platform (`table.remove` misuse) | fixed | P2 | high | [F11.md](F11.md) |
 | 12 | F12 | "Low Storage" warning never fires for Food/maintenance | tested | P2 | high | [F12.md](F12.md) |
 | 13 | F13 | Command Center resource rows show no numbers | tested | P2 | high | [F13.md](F13.md) |
 | 14 | F14 | Domes Overview red low-stat highlight dead | tested | P2 | high | [F14.md](F14.md) |

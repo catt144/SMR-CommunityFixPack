@@ -8,6 +8,22 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-10 (evening) — decision drive, round 2: the F11 pair closes and the veto limit is recorded
+
+1. **F11 rider CLOSED on 2-of-3 readings** (owner) — the wrapper's behaviour
+   is witnessed; the third reading tests vanilla's own lines and is untakeable
+   on this save (`LuxuriousTrains` + no forest track). If it ever becomes
+   takeable it is one free ride-along — recorded on the entry, not owed.
+2. **F11 priority P1 → P2** (owner) — correct repair, no demonstrated
+   producer, no wedge ever seen live. Front matter + INDEX updated.
+3. **`SMRFixPack_Disabled` veto limit RECORDED, not coded** (owner) — the
+   lever covers only D12/F97-class modules; D03/D07 consult only `IsActive`.
+   Notes on both entries + WORKFLOW Co-runs brief rule 9. No code change to
+   two shipped `tested` modules for zero player benefit.
+
+All three records + the completed F11 rider moved to `PLAYTEST_ARCHIVE.md`
+per the round-1 rule. Open decisions: **12**.
+
 ## 2026-08-10 (evening) — decision drive, round 1 (same session as the batch-2 close): three owner calls landed, and looking for Src found it — behind the wrong folder name
 
 **Format: the owner asked for the open decisions three at a time and answered

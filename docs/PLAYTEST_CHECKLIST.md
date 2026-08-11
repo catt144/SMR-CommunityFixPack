@@ -193,20 +193,6 @@ sitting. PT-47, M5 and M7 never ran and stay routed. F99 did not fire once in
 two hours; the one condition it names is still untested and the recipe for
 building it is on the entry.
 
-- ⭐ **DECISION FOR YOU: does the F11 pre-wrapper rider close on two of its
-  three readings?** (2026-08-04) You wrote the rider, so this is yours. Two
-  readings passed cleanly — `TrainPlatformWedge [active]`, and 7 trains
-  completing full unload cycles with 340 passenger removals and **zero** wedges,
-  with you watching one. **The third cannot be taken on that save**:
-  `LuxuriousTrains` is researched so the travel-time comfort call is skipped by
-  design, and no train runs a forest track, so both stat counters read `0` —
-  and `0` is what a working fix and a broken one both produce there.
-  **My recommendation, not a decision:** the two expressions in question are
-  *vanilla's own lines*, so checking they still fire checks vanilla rather than
-  our wrapper — and the wrapper's own behaviour is now witnessed. Closing on two
-  of three looks right to me. **If you'd rather have the third**, it needs a
-  save without `LuxuriousTrains` or a train on a forest track, and it is one
-  ride-along in any future co-run. → `agent/bugs/F11.md`.
 - **The mod-page relabel package** — ✅ **proposal ADOPTED 2026-08-04 (your
   `--approved`, in your own hand), ⚠️ but NOT closed: the wording is still
   owed by you.** Five shipped fixes (F55 forever-mark, F40 android dust
@@ -219,12 +205,6 @@ building it is on the entry.
   **launch-prep instruction with an owed input**: when the freeze lifts, the
   section goes in with your wording. This line stays until that wording
   exists. → `docs/agent/reports/CHAIN_QA_REPORT.md` §3.
-- **The dead `SMRFixPack_Disabled` veto on D03/D07.** The console veto lever
-  does nothing for those two modules — only `IsActive` is consulted. Either
-  honor it per-call in both, or record that the lever exists only for
-  D12/F97-class modules. Nothing measures wrong today, but a future leg that
-  used the lever on D03/D07 would silently run live and you'd read the result
-  as a fix failure. → `CHAIN_QA_REPORT.md` §5.
 - **F100 — how do we repair the `NoHomeless` self-check?** It names `Community`
   for a method `Workforce` declares, so the module reports itself `inactive` in
   every boot log and then applies anyway. Three options on the entry: point the
@@ -236,17 +216,6 @@ building it is on the entry.
   ⏸️ **ON HOLD (your `---on hold`, in your own hand, 2026-08-04).** Not a
   decision — the item stays OPEN and stays counted; nobody builds any of the
   three options until you lift the hold and pick one.
-- **Does F11 keep `P1`?** The F11 rider ran 2026-08-03 and the state its fix
-  guards against has **no demonstrated producer** — crew-gathering abduction
-  keeps `train.units` synced on both maps. The fix is still a correct repair of
-  a real `table.remove` misuse in shipped code, so it is not a removal
-  question; it is a priority question, and it is not an agent's call.
-  → `docs/agent/bugs/F11.md`.
-  *(Update 2026-08-03, chain close: the fix's SHAPE changed — the ~30-line full
-  copy became a 10-line pre-wrapper, so it no longer freezes the two balance
-  expressions a game patch would most plausibly touch. The P1 question is
-  unchanged; the conversion is behaviour-preserving by construction but NOT yet
-  verified at the keyboard — see the rider below.)*
 - **F99 severity, and whether it becomes work at all.** New 2026-08-03 from
   your own log: 14 `TrackElement.lua:805` errors, every one under
   `CheatCompleteAllConstructions()` during your underground build-out.
@@ -752,31 +721,6 @@ working.
 **Setup:** note a Residence's capacity → stop the ministry (off, or cut power)
 → re-read the same Residence; then watch whether anyone was actually evicted
 (entry details, including why shift rotation will not trigger it).
-
-### Rider — F11: verify the pre-wrapper conversion · Status: ⚖️ **TWO OF THREE READINGS PASSED 2026-08-04 (co-run #1, you attended)** — the third is unavailable on that save; **your call whether it closes** (decision above). Remainder is **TAKEABLE WHEN** a sitting runs on a save WITHOUT `LuxuriousTrains`, or with a train on a `seen_forest` track
-**What ran.** `TrainPlatformWedge` read `active`; 7 trains completed full
-`GotoStation → UnloadTrain → LoadTrain → GotoStation` cycles over 238 s, **340**
-passenger removals from train holders, **0** wedge candidates, and you watched
-one unload and leave. ⛔ **The stat reading could not be taken** — both shipped
-branches are switched off on that save by design, so `0` and `0` mean nothing.
-⛔ **`tested` is NOT claimed.** Card 1 in `agent/reports/CORUN1_EVIDENCE_CARDS.md`.
-
-
-**Change, not a bug:** 2026-08-03 the F11 fix was converted from a ~30-line full
-method copy to a 10-line pre-wrapper (same repaired branch, original method
-called for everything else). It is behaviour-preserving **by construction** and
-has NOT been verified live — this rider is what earns that back.
-→ [F11](agent/bugs/F11.md)
-**Requirements:** pack ON, any train line that actually moves colonists. No
-cheats, no save juggling — an organic warm-up leg is enough.
-**Setup:** none beyond playing. Watch three things during normal train use:
-`SMRFixPack.ListFixes()` shows `TrainPlatformWedge [active]`; trains unload and
-LEAVE stations normally; passenger comfort/sanity still move on disembark (the
-travel-time penalty and the forest bonus now run vanilla's own lines instead of
-our copy).
-**The check can fail:** a train wedged at a platform, or disembark stat changes
-that stopped happening, falsifies the conversion — say so and the copy form
-comes back from git (`3a6512f^`).
 
 ### Rider — C42: does a passage traversal leave a stale passenger behind? · Status: unrun — **TAKEABLE WHEN** any colony has a built Passage that colonists actually walk through · ⭐ mechanism link CLOSED 2026-08-04 · ⚠️ 2026-08-05: a WITHIN-SESSION read finally ran (no save/load since traffic) and was STILL unsampled — 0 unit entries over 4 passages; the gap now needs a **traversal witness** (a colonist seen inside a passage element), not merely generated traffic · ⛔ 2026-08-10: the dedicated witness poller ran (`corun-batch-2` prep) — **90 tries × 1 s at speed 20, `units` empty every sweep** — so THIS save cannot sample it; the TAKEABLE-WHEN condition is now "a colony where passages are demonstrably a colonist route", and no zero from `TEST2H TRAIN` may be quoted against the entry (C42 entry, 2026-08-10)
 **Bug:** `PassageBase:TraverseTunnel` ends with a raw `unit.holder = nil`

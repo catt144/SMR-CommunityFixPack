@@ -530,6 +530,11 @@ not an achievement.
      clean log of the pack RUNNING was not banked as a clean uninstall.
   8. **Source line numbers in a brief are marked Src-verified or
      trust-carried** — an unmarked line number reads as verified and is not.
+  9. **A brief that wants a module dark states HOW it goes dark**: the
+     `SMRFixPack_Disabled` console veto covers only D12/F97-class modules —
+     **D03/D07 consult only `IsActive`** (owner decision 2026-08-10: the limit
+     is recorded, not coded; a leg using the lever there silently runs live
+     and reads as a fix failure).
      ⚖️ *(Amended 2026-08-10: the sitting's "no `ModTools\Src` on this
      machine" was WRONG — Src exists at
      `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`; the
