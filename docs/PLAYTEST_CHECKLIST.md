@@ -84,14 +84,11 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    of the 15 returned) verifies each deletion stuck. The Steam-Cloud
    hypothesis stays parked: if a deleted save ever returns again, that run
    tests it. → WORKFLOW "Co-runs" close-out rule.
-8. **⚖️ There is uncommitted work in the repo that isn't ours, including an
-   answer of yours nobody recorded.** The `F101` decision and this morning's prep
-   routing were both left uncommitted (prep reported clean trees and pushed
-   without them); they're in tonight's commit now. **One of those lines is yours**
-   — on checklist item 2 you typed *"It should not pin them to the dome, seems
-   like a risk for a bunch of weird bug cases"*. That reads like a **decision on
-   `D07`**, and it isn't recorded as one anywhere. **Confirm and we'll strike the
-   item; correct us and we'll fix it.** → `agent/bugs/D07.md`.
+8. ~~**⚖️ There is uncommitted work in the repo that isn't ours, including an
+   answer of yours nobody recorded.**~~ ✅ **CLOSED 2026-08-11** — the
+   uncommitted work landed in the sitting's commit, and you CONFIRMED the
+   typed line as your D07 ruling (item 2 above). Recorded on
+   `agent/bugs/D07.md`; nothing further owed.
 
 **⚖️ What the audit changed (2026-08-10, terminal audit of the sitting — every
 verdict above SUSTAINED; four corrections to the record, none of which flips a
@@ -118,22 +115,17 @@ the audit. The one piece it does *not* cover is still logged as a real miss:
 evaporated and it had to be built live.
 → `agent/prompts/corun-batch-1/03_FABLE_AUDIT.md` §8.
 
-1. **⚖️ Does PT-37's result unblock F48?** Case A passed and did **better than a
-   no-op** — it removed one stale connection (559 → 558, exactly the clean-chain
-   value) and that survived save+reload. Case B could not be sampled *at all*:
-   we measured that the hex grid hands the walk the hidden original element, so
-   `OrderTrackElements` **succeeds** on a meteor-damaged track and the assert
-   path is unreachable that way. Your unblock criterion said *"case B failing
-   cleanly"*; what we got is *"case B does not fail"* — a different answer, and
-   arguably stronger. **Ship the sanitizer repair, or hold for a route that does
-   reach the assert?** → `agent/bugs/F48.md`, 2026-08-05 block.
-2. **⚖️ Should pinning a colonist to a residence also pin them to their dome?**
-   D07's in-dome pass respects `CheckForcedResidence`; the cross-dome pass
-   checks `CheckForcedDome` instead, so a Senior you pin to a residence can
-   still be emigrated out of the dome when no local cohort slot exists. The
-   module's header calls this deliberate. Derived from source, no fixture
-   needed. → `agent/bugs/D07.md`.
-   -It should not pin them to the dome, seems like a risk for a bunch of weird bug cases
+1. ~~**⚖️ Does PT-37's result unblock F48?**~~ ✅ **DECIDED 2026-08-11 — SHIP.**
+   The evidence beat the criterion: case A removed a real stale connection
+   from your own save lineage and survived reload; case B's assert is
+   measured unreachable by meteor. The corrected pass is queued into the next
+   unattended chain; PT-35's do-no-harm run covers it in the same launch.
+   → `agent/bugs/F48.md`.
+2. ~~**⚖️ Should pinning a colonist to a residence also pin them to their
+   dome?**~~ ✅ **DECIDED 2026-08-11 — NO DOME PIN**, your 2026-08-10 line
+   confirmed as the ruling: *"It should not pin them to the dome, seems like a
+   risk for a bunch of weird bug cases."* The module's deliberate split
+   stands; no code change. → `agent/bugs/D07.md`.
 3. ~~**⚖️ How much do the two new dev-tool defects matter?**~~ ✅ **DECIDED
    2026-08-10 — OUT OF SCOPE, `F101` is `wontfix`. Nothing gets built.** Your
    ruling, in your own words: *"If it works fine from what we can tell in dev
@@ -204,11 +196,6 @@ building it is on the entry.
   **launch-prep instruction with an owed input**: when the freeze lifts, the
   section goes in with your wording. This line stays until that wording
   exists. → `docs/agent/reports/CHAIN_QA_REPORT.md` §3.
-- **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
-  (a round-trip step for state-transition claims), R7 (effect-evidencing
-  verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for
-  agent docs). Adopt, defer, or drop.
-  → `docs/agent/reports/DOC_STRUCTURE_REVIEW.md` §3 and §6.
 ⭐ **CONVENTION (added 2026-08-03, chain-12 QA, from `BUG_LIST_AUDIT.md`
 §10.6f(i)): record the SESSION UPTIME next to any error COUNT.** Cross-arm
 count comparisons (this leg's 0 vs that leg's 80) depend on comparable

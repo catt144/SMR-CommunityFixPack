@@ -5244,3 +5244,21 @@ record on the checklist item and the entry). The F99 record as it stood:
   own track-merge absorb-walk. This does not change the decision in front of
   you: no-cheat reachability is still unproven, nothing is built, and the
   cheap discriminator offer stands.)*
+
+### Moved 2026-08-11 — decision drive round 5 (F48, D07, the doc-review remainder)
+
+**Verdicts (owner, 2026-08-11):** **F48 → SHIP** (evidence beat the criterion;
+build queued into the next unattended chain, covered by PT-35's do-no-harm
+run — entry + `SAVE` records on `agent/bugs/F48.md`). **D07 → NO DOME
+PIN**, the owner's 2026-08-10 typed line confirmed as the ruling (recorded on
+`agent/bugs/D07.md`; closed items 2 and 8 together). **DOC_STRUCTURE_REVIEW:
+R4 + R7 ADOPTED as binding WORKFLOW rules** (state-transition claims carry a
+save/reload round-trip step; verdicts evidence their EFFECT, not just their
+execution), **R9 + R14 DROPPED** (standing maintenance overhead with no
+incident behind them). The bullet as it stood:
+
+- **The `DOC_STRUCTURE_REVIEW` recommendations this chain does not adopt** — R4
+  (a round-trip step for state-transition claims), R7 (effect-evidencing
+  verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for
+  agent docs). Adopt, defer, or drop.
+  → `docs/agent/reports/DOC_STRUCTURE_REVIEW.md` §3 and §6.

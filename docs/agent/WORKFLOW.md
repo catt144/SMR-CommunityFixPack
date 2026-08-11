@@ -535,6 +535,15 @@ not an achievement.
      **D03/D07 consult only `IsActive`** (owner decision 2026-08-10: the limit
      is recorded, not coded; a leg using the lever there silently runs live
      and reads as a fix failure).
+- ⭐ **Adopted 2026-08-11 (owner — `DOC_STRUCTURE_REVIEW` R4 + R7; R9/R14
+  dropped). Two binding evidence rules for every leg and entry:**
+  1. **R4 — a state-transition claim carries a save/reload ROUND-TRIP step.**
+     "X changed and stays changed" is two claims; the second needs the
+     round trip taken and read, or the entry says PRE-RELOAD ONLY.
+  2. **R7 — a verdict evidences its EFFECT, not its execution.** "The call
+     returned ok" or "the pass ran" is not a PASS; the reading that shows the
+     intended effect (the count moved, the state persisted, the line printed)
+     is. A verdict without an effect reading is demoted to an execution note.
      ⚖️ *(Amended 2026-08-10: the sitting's "no `ModTools\Src` on this
      machine" was WRONG — Src exists at
      `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`; the

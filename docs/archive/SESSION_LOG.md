@@ -8,6 +8,30 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — decision drive, round 5: F48 ships, D07's ruling is recorded, and the decision board is nearly clear
+
+1. **F48 → SHIP** (owner): the block lifts on evidence stronger than the
+   criterion asked for (case A better-than-no-op on the owner's own lineage +
+   case B's assert measured unreachable). Status `blocked` → `directed`; the
+   corrected pass is queued into the next unattended chain, where PT-35 leg
+   A's do-no-harm run covers it in the same launch.
+2. **D07 → NO DOME PIN** (owner, confirming their 2026-08-10 typed line
+   verbatim): the module's deliberate split stands, no code change. Closed
+   checklist items 2 AND 8.
+3. **DOC_STRUCTURE_REVIEW: R4 + R7 ADOPTED** as binding WORKFLOW rules
+   (round-trip step for state-transition claims; effect-evidencing verdicts);
+   **R9 + R14 DROPPED**. Disposition note on the report's §3.
+
+⚠️ Count correction: rounds 1–4 said "15 → 7" but the 15 double-counted the
+NoHomeless-preflight/F100 pair (one question, two list entries). True board
+after round 5: **2 open** — F85 (evidence-gated on the Ctrl-F9 check riding
+the PT-20 redo) and the relabel WORDING (owed owner text, unlocks at launch
+prep). Eleven distinct decisions were taken across the drive.
+
+⇒ **The queued unattended chain is now: F48 sanitizer build + C43
+`set_global` fix + F100 reason-string fix + PT-35 leg A (verifying all of
+them in one launch) — then the PT-20 redo co-run (+ the 10-s Ctrl-F9 check).**
+
 ## 2026-08-11 — decision drive, round 4: F99 goes to passive watch, the save-folder policy is ratified, and the owner's challenge holds F85 open
 
 1. **F99 → PASSIVE WATCH** (owner): stays `cand`, zero work — every log

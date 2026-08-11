@@ -103,6 +103,12 @@ record.
 
 ## 3 · Recommendations, cheapest-highest-value first
 
+> ⚖️ **Final disposition of the unadopted remainder, 2026-08-11 (owner):
+> R4 + R7 ADOPTED** — now binding in `WORKFLOW.md` "Co-runs" (the
+> round-trip step for state-transition claims; effect-evidencing verdicts).
+> **R9 + R14 DROPPED** (standing maintenance overhead, no incident behind
+> them). This closes the checklist decision item that pointed here.
+
 **R1 — A mechanical `bugsync` check (T1's worst pair).** ~50 lines of Python:
 parse BUGS.md, compare every index row's status word against its heading tag,
 plus recount rows/files/probes and diff against STATUS's stated counts; run it

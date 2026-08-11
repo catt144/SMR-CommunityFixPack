@@ -60,7 +60,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 45 | F45 | Damaged tracks can't be salvaged at all (sort crash) | tested | P1 | high | [F45.md](F45.md) |
 | 46 | F46 | Trains dump cargo at stations with resource disabled | tested | P2 | high | [F46.md](F46.md) |
 | 47 | F47 | Track salvage refunds ~1 hex for whole track / 0 partial | tested | P3 | high | [F47.md](F47.md) |
-| 48 | F48 | Station-connector savegame fixup no-op (paren misplaced) | blocked | P3 | high | [F48.md](F48.md) |
+| 48 | F48 | Station-connector savegame fixup no-op (paren misplaced) | directed | P3 | high | [F48.md](F48.md) |
 | 49 | F49 | Train minors bundle (palette, split kills trains, etc.) | fixed* | P3 | med | [F49.md](F49.md) |
 | 50 | F50 | Auto-rockets kick approaching drones to Idle every hour | tested | P1 | high | [F50.md](F50.md) |
 | 51 | F51 | Transport-mode cache never sees new shuttles (homeless) | tested | P1 | high | [F51.md](F51.md) |

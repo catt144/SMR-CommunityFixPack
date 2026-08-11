@@ -18,13 +18,12 @@ ROUTE REFUTED** ⇒ owner (3rd cell); **F99's 2×2 FULL** (4th zero, stays
 `cand`); **PT-47 PASS** ⇒ ARCHIVED (+ keystone/F85 riders);
 **`PT35FIXTURE.savegame.sav` BUILT, audit-verified**; **PT-53 E CLEAN after a
 FULL RESTART** ⇒ D13's 4th OFF state. ⚖️ 5 audit corrections, all
-verdict-neutral (the ~16:02 modal IS in the log — run 1's own storybit; the
-"zero output" instrument DID print — flush-at-exit `EF-047`; details
-SESSION_LOG). ⭐ NEW: **C45** (vanilla rocket-departure `[ERROR]`, one
-occurrence) · facts EF-047/048/049 · WORKFLOW "Co-runs" batch-2 rules 1–8.
-⇒ **NEXT: the 2-prompt UNATTENDED chain (NOT YET AUTHORED) — PT-35 leg A
-(fixture exists) + C43 `set_global` fix + F100 reason-string fix, one launch
-verifies all three; then the PT-20 REDO co-run (ordered 2026-08-10).**
+verdict-neutral (SESSION_LOG). ⭐ NEW: **C45** · facts EF-047/048/049 ·
+WORKFLOW "Co-runs" batch-2 rules 1–9 + adopted R4/R7.
+⇒ **NEXT: the UNATTENDED build+verify chain (NOT YET AUTHORED) — F48
+sanitizer build (SHIP, 2026-08-11) + C43 `set_global` fix + F100 string fix +
+PT-35 leg A, one launch verifies all; then the PT-20 REDO co-run (+ the 10-s
+Ctrl-F9 check that settles F85).**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -53,8 +52,9 @@ Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fp
   rule. ⭐ Steam-Cloud restore hypothesis untested → checklist 7.
 - ⛔ **Mod-Manager disable needs a FULL RESTART** (D13, measured 2026-08-10) —
   code stays live, permanent already gone; PT-20 re-check = decision 6.
-- **Owner decisions: 7 open** (11 CLOSED in the 08-10/11 drive; F99 → passive
-  watch; save-dir ratified; ⚖️ F85 held OPEN by owner challenge — the 10-s
-  Ctrl-F9 check rides the PT-20 redo). ⭐⭐ **Src FOUND**: `Project Spark` dir.
+- **Owner decisions: 2 open** (11 CLOSED in the 08-10/11 drive incl. ⭐ F48
+  SHIP, D07 no-dome-pin, R4/R7 adopted): **F85** (evidence-gated — Ctrl-F9
+  check rides the PT-20 redo) · **relabel WORDING** (owner text, launch prep).
+  ⭐⭐ **Src FOUND**: `Project Spark` dir (EF-014).
 - **Release** — `docs/archive/MOD_DESCRIPTION.md` is FROZEN, rebuilt from
   `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.
