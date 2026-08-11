@@ -8,6 +8,78 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — `unattended-2` prompt 2 (terminal audit): ALL FOUR VERDICTS SUSTAINED, three nits corrected visibly, the chain closes and its folder is empty
+
+**Audit method, so the floor is checkable:** all three archived logs
+byte-compared to their on-disk originals (MD5-identical over the full length),
+the 1,009-line run-3 log read WHOLE, the C43 per-probe diff **re-derived by the
+audit itself** (87 rows parsed from both logs — exactly one line,
+`AnomalyCaveInMap` PASS→SKIP, against a genuine `78/0/9/0` baseline), and every
+load-bearing Src citation re-read at
+`A:\…\Project Spark\ModTools\Src` rather than trust-carried.
+
+**Sustained, with what each re-derivation found:**
+* **F48 `fixed`** — the seven per-track repair lines, both `0 of 17` round-trip
+  diffs, the three-way clean-save zero and the boolean flag reads all at their
+  quoted values; `Station.lua:1346` carries the misplaced paren verbatim;
+  `ResolveMap` is one-argument (`realm.lua:92`); `Tracks.lua:807/:808` exact;
+  the shipped pass calls `process(resolve(track), elements)` — the corrected
+  paren, nothing else. **No stop-condition breach**: the build commit preceding
+  the launch was the chain's design, and no acceptance was failed and shipped.
+* **C43 `fixed`** — 0 `[LUA ERROR]` of any kind in run 3; the refusal by name
+  exactly twice; the SKIP verbatim; **`CaveInRubble.lua:38`/`:79` re-read: both
+  really are `local function`s**, so the dead-stub finding is CONFIRMED and the
+  disposal of the two dead stub entries stays an owner call (on the entry, not
+  a checklist decision — nothing is blocked on it). "One probe, not two"
+  confirmed by the diff itself.
+* **F100 `fixed`** — the diff moves the reason string only; the new string
+  matches the log's `:159` character for character; `81/81` on all three loads.
+* **PT-35 leg A case A COMPLETE** — all six `0 of 14` diffs located at their
+  claimed comparisons; populations printed on every read (1 turbine, 144
+  upgraded buildings, 3 live upgrade-shaped ids); the turbine zero sampled
+  (`researched=1`, truthy number), not an early return.
+
+**Findings — three, none touching a verdict, all corrected visibly:** (1) the
+checklist's PT-35 status token still read `unrun` beside its own completion
+record — flipped, with a note; the section STAYS (cases B/C are parked in it).
+(2) `Tracks.lua:820-822` for the endpoint assignment was carried under a
+"Src-verified" stamp in F48's build record; the audit's read puts it at
+`:822-824`. (3) `Mod.lua:1556-1562` in C43's build record is one line shy
+(`:1557-1563`). Both corrected on the entries; the shipped code comments carry
+the same drift and were left as shipped. ⚠️ The class is the standing one —
+*recorded facts are claims* — this time as verified-stamped line numbers two
+lines off; the substance survived both times.
+
+**Whole-log sweep, run 3:** 0 `[LUA ERROR]` · 0 `TrackElement.lua:805` (F99
+stays passive-watch, nothing to route) · 0 `invalid pos with no holder` (C45
+unsampled here — 17 healthy tracks, no mutation; the zero is not a negative
+result). The `[Braze]` block (6 lines) and the `LawOfficeDoor` pair (2): present
+identically in **all 26 archived logs** back to 2026-08-03 — age is the answer.
+
+**Ledger review (Job 3):** the WORKFLOW rule-7 amendment is **approved as
+written** — surgical, sits on the failing rule, and the mechanised gate is
+proven in both later logs (it STOPPED nothing it shouldn't and stamped the
+rehearsal VOID on every verdict line). The `account.dat` non-write is
+**endorsed**: a hard-to-reverse write to owner account state to save one human
+click — a click the owner then made in minutes — was correctly refused.
+EF-050/EF-051 records check out (save dir re-listed by the audit: 69 files, no
+`U2*`, both protected files MD5-identical to their recorded values). NEW and
+caught-not-committed: the Python CR→newline mangle (recorded upstream; the PS
+5.1 encoding rule has a Python sibling). RECURRED and repaired upstream:
+batch-2 rule 7. Nothing else in the standing blocks (u1 1–4, b1 1–6, b2 1–9)
+was hit. **Economics:** ~13 min machine time for the whole run night + one
+audit session; owner cost the kickoff word, one Mod-Manager tick, one sentence.
+
+**Close:** `CHAIN_METHOD.md` +1 row (the declared-VOID rehearsal pattern and
+the run-top gate on externally-mutable state). The chain folder's remaining
+five files (README, 02_FABLE_AUDIT, 97_U2Common.lua.txt, 98_U2Run.lua.txt,
+U2_ARM.ps1.txt) are deleted in this commit — **pre-deletion sha `e5dca6f`**;
+the parked instruments survive at
+`git show e5dca6f:docs/agent/prompts/unattended-2/97_U2Common.lua.txt` (and
+siblings), the way batch-1's and batch-2's do. doccheck GREEN, pushed.
+⇒ **NEXT: author the PT-20 redo co-run chain (attended) + the Ctrl-F9/F85
+check riding it. It does not exist yet.**
+
 ## 2026-08-11 — `unattended-2` prompt 1 REDONE after the owner re-enabled the pack: ALL FOUR ITEMS VERIFIED, and F48's inference became a measurement
 
 Owner, on reading the blocker: *"I haved re enabled the pack, re do your run,

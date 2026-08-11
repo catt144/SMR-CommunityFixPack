@@ -12,21 +12,21 @@ Current only, rewritten in place; history newest-first in
 **`corun-batch-2` CLOSED 08-10, EVERY leg verdict SUSTAINED** (keystone ANSWERED,
 F21 WITNESSED, F85 route REFUTED ⇒ owner, F99 2×2 FULL, PT-47 ARCHIVED,
 **`PT35FIXTURE` BUILT**, D13's 4th OFF state).
-✅✅ **`unattended-2` prompt 1 DONE 2026-08-11 — ALL FOUR ITEMS BUILT AND
-VERIFIED** (`3c1ccc8` + TestKit `d8e1fbf`; log `u2run3_*`, 81/81 active AS READ,
-3 loads, 2 R4 round trips, **0 `[LUA ERROR]`**). **F48 → `fixed`: 7 tracks
-repaired, every one to the clean-chain `2×(n−1)`, incl. PT-37's own 280-element
-559→558; held across BOTH round trips; zero on the clean save.** **C43 →
-`fixed`**: 77/0/10/0 vs baseline 78/0/9/0 — one declared flip, zero TestKit
-errors, gap answered (**no other caller**). **F100 → `fixed`**: new boot line
-verbatim. **PT-35 leg A case A COMPLETE** — 0 of 14 at every comparison, both
-halves sampled at last. ⚠️ First launch VOID (pack disabled; owner re-enabled).
-⭐ NEW `EF-050` (savename verbatim) · **`EF-051` STEAM CLOUD RESTORES DELETED
-SAVES — predicted, then confirmed twice; clears both "failed" close-outs** ·
-WORKFLOW batch-2 rule 7 amended (the gate must STOP, at every run).
-⇒ **NEXT: `02_FABLE_AUDIT.md` (terminal audit, folder must end empty). Owner has
-ONE tick left — untick Steam Cloud saves (checklist top). Then the PT-20 REDO
-co-run (+ the Ctrl-F9 check that settles F85; chain unauthored).**
+✅✅ **`unattended-2` CLOSED 2026-08-11 — terminal audit SUSTAINED ALL FOUR
+VERDICTS** (logs byte-verified + read whole, per-probe diff RE-DERIVED, every
+Src site re-read). **F48 `fixed`** (7 tracks to clean-chain `2×(n−1)` incl.
+PT-37's own 559→558, held across both R4 round trips, honest zero ×3) · **C43
+`fixed`** (0 TestKit `[LUA ERROR]`, exactly one declared flip, 77/0/10/0; the
+`CaveInRubble` locals CONFIRMED — dead-stub disposal is an OWNER call, entry) ·
+**F100 `fixed`** (boot line verbatim, Require unmoved) · **PT-35 leg A case A
+COMPLETE** (0 of 14 everywhere, both halves sampled; B/C parked; NOT `tested`).
+Audit residue: 2 citation drifts + 1 stale checklist token, corrected visibly.
+⭐ `EF-050` (savename verbatim) · **`EF-051` Steam Cloud restores deletions,
+confirmed twice** · WORKFLOW rule 7 amended (gate at EVERY run top, must STOP;
+audit-approved) · CHAIN_METHOD +1 row (declared-VOID rehearsal).
+⇒ **NEXT: AUTHOR the PT-20 REDO co-run chain (attended; + the 10-s Ctrl-F9
+check that settles F85) — NOT yet authored. Owner: untick Steam Cloud saves
+(checklist top), then the disable/full-restart sitting once it is ready.**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
