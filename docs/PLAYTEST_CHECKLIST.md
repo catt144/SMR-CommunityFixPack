@@ -20,9 +20,10 @@ completed tests move whole to
 > recorded results included, is in the archive under the "pre-redesign
 > snapshot 2026-08-03" banner.
 
-## ⛔ ONE TICK LEFT — added 2026-08-11 by `unattended-2`
+## ✅ BOTH TICKS DONE — added 2026-08-11 by `unattended-2`, closed the same day
 
-Not a decision; a thing only your hands can do.
+Not decisions; things only your hands could do. Both are done; the block stays
+until the next launch confirms the second one stuck.
 
 **1. ~~The Community Fix Pack is DISABLED in your Mod Manager~~ ✅ DONE — you
 re-enabled it at 01:57 and the re-run measured `81/81 active`.** Recorded
@@ -36,24 +37,23 @@ the rig cannot do it (`AccountStorage`, `SaveAccountStorage` and
 console at the main menu), so it has to be handed back to you explicitly.
 **Everything it was blocking is now verified and closed.**
 
-**2. Steam Cloud is putting your deleted staged saves back, and we finally
-caught it doing it.** The save-folder gate that "failed twice" was never a
-diligence problem: we delete the files, and Steam restores them at the next
-launch. Measured tonight — **14 saves** (`CB1STAGE`, `CB2STAGE`, `CORUN0`,
-`CORUN1`, `U1STAGE`, `CB2F85`, `CB2PKEY`, `CB2PKEY2`, `CB2UNINSTALL`,
-`U1C0PROOF`, `U1C1HEAL`, `U1C2PT35`, `U1C6FORCED`, `U1C6HEALED`) reappeared with
-creation timestamps of 01:17 tonight and modification dates from a week ago,
-all written **before the game process even started**. Details: `agent/facts/EF-051`.
-⇒ **Steam → Surviving Mars: Relaunched → Properties → General → untick "Keep
-game saves in the Steam Cloud"**, and we will clear the strays for good on the
-next session (~750 MB).
-⇒ Until then no session can honestly claim a staged save is *gone*, only that it
-was deleted. ⛔ **The prediction was written down and then CHECKED, and it held:**
-`U2STAGE`, `U2RT1` and `U2RT2` were deleted at 01:28 and all three were back by
-01:57:47 — your launch — with creation stamps from that minute and their original
-modification dates. So the mechanism is confirmed twice, not once. (They have
-been deleted again, and a fourth artifact Steam had also restored went with
-them.) **Until you untick it, expect them back once more.**
+**2. ~~Steam Cloud is putting your deleted staged saves back~~ ✅ DONE — you
+unticked it 2026-08-11 ("Steam settings done"), and the strays are cleared.**
+The save-folder gate that "failed twice" was never a diligence problem: we
+delete the files, and Steam restores them at the next launch — measured on two
+independent launches, 14 saves restored with creation stamps inside the launch
+window and week-old modification dates, all written **before the game process
+even started**. Details: `agent/facts/EF-051`.
+✅ **Cleanup executed right after your untick:** all **14 strays deleted**
+(`CB1STAGE`, `CB2STAGE`, `CORUN0`, `CORUN1`, `U1STAGE`, `CB2F85`, `CB2PKEY`,
+`CB2PKEY2`, `CB2UNINSTALL`, `U1C0PROOF`, `U1C1HEAL`, `U1C2PT35`, `U1C6FORCED`,
+`U1C6HEALED`), **732 MB reclaimed**, directory verified at **55 `.sav` files**
+— the exact pre-restore baseline — with `PT35FIXTURE` and `TEST2H TRAIN` both
+MD5-verified untouched.
+⇒ **The one reading still owed: your next launch.** If the listing still shows
+55 afterwards (no stray returned), the restore mechanism is dead and close-outs
+may say "gone" again; any session alongside your next launch takes that
+listing. If one returns, EF-051 needs re-deriving — say so.
 
 ## Decisions waiting on you
 

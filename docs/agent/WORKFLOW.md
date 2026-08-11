@@ -468,6 +468,11 @@ not an achievement.
   (checklist, top block), a close-out may record **"deleted, listing verified"**
   and may **not** record "gone" — and the next session re-lists rather than
   inheriting the claim.
+  ⭐ **Unticked 2026-08-11** ("Steam settings done"); the 14 strays were
+  deleted the same day and the directory verified at the 55-file pre-restore
+  baseline. ⛔ The caveat above RETIRES only when the first post-untick launch
+  lists 55 — a setting change is not a sampled behaviour. Until that listing
+  is taken, keep recording "deleted, listing verified".
 - ⛔ **Attended-sitting classes from `corun-batch-1` (2026-08-05; 8-entry
   ledger, first BATCHED attended sitting — the classes the unattended ledger
   could not see). Every attended brief guards against these:**

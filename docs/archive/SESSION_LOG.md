@@ -8,6 +8,23 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — Steam Cloud unticked by the owner; the 14 strays are cleared to the pre-restore baseline
+
+Owner, same day as EF-051's measurement: *"Steam settings done."* With the
+game closed, the 14 Steam-restored strays (`CB1STAGE`, `CB2STAGE`, `CORUN0`,
+`CORUN1`, `U1STAGE`, `CB2F85`, `CB2PKEY`, `CB2PKEY2`, `CB2UNINSTALL`,
+`U1C0PROOF`, `U1C1HEAL`, `U1C2PT35`, `U1C6FORCED`, `U1C6HEALED`) were deleted
+— **732 MB** — and the directory re-listed at **55 `.sav` files**, exactly
+EF-051's pre-restore baseline, zero strays and zero `U2*` remaining. Both
+protected fixtures MD5-verified untouched (`PT35FIXTURE`
+`D721329D1EE18604B3D6C89401F74738`; `TEST2H TRAIN`
+`103B320A1434513BC8773553096A8958`, mtime 2026-08-03 22:21:48).
+⛔ **Recorded as "deleted, listing verified" — NOT "gone".** The untick is a
+setting change, not yet a sampled behaviour; the first post-untick launch is
+the falsifier (listing still 55 → the WORKFLOW caveat retires; a stray back →
+EF-051 needs re-deriving). Checklist top block: both ticks now DONE, the
+block stays until that launch listing. EF-051, WORKFLOW and STATE updated.
+
 ## 2026-08-11 — `unattended-2` prompt 2 (terminal audit): ALL FOUR VERDICTS SUSTAINED, three nits corrected visibly, the chain closes and its folder is empty
 
 **Audit method, so the floor is checkable:** all three archived logs
