@@ -92,6 +92,31 @@ the design (as amended by the QA block at its top) wins:
 parse sweeps, greps, byte diffs and `--emit-counts`. The game was closed for the
 whole session, so this prompt owns every claim about a running game.
 
+### ⛔ TWO PRECONDITIONS THE BUILD COULD NOT DISCHARGE — read before planning the legs
+
+**(i) The opt-in mod has never been enabled in the Mod Manager.** It was created
+2026-08-12; a mod that did not exist cannot be in `AccountStorage.LoadMods`.
+(Not verifiable statically — `account.dat` is a compressed BPUL container, like
+the saves.) ⇒ **The owner ticks it ONCE before cell (a) can measure anything**,
+full restart. Routed to them at prompt 3's close.
+⛔ **And they were told NOT to re-tick the seven toggles / two dials while doing
+it** — cell (a1)'s entire prediction is FRESH ACCOUNT DEFAULTS (`1/8`, seven
+modules `inactive`). If the gate reads `8/8` at (a1), the account state moved:
+that is a changed precondition, not a port defect, and it must be recorded as
+such before any tally is compared.
+
+**(ii) This prompt's "owner NOT needed at the keyboard" does not hold for the
+whole matrix, and pretending it does will stall the leg.** Cells (a)/(b)/(c) are
+three different MOD-MANAGER configurations; a disable takes effect only after a
+FULL PROCESS RESTART (D13's four-states rule) and **re-enable is owner-only**
+(`STATE.md`). Each individual LAUNCH is unattended — the toggles between them
+are not. ⇒ **Sequence the cells to minimise toggles, state up front how many
+owner visits the plan costs, and batch them into one ask.** The alternative —
+writing `AccountStorage.LoadMods` from an instrument — touches the owner's
+account state, is exactly what the §4.4 instrument was designed to avoid, and
+⛔ **needs the owner's explicit say-so before it is used**, not an agent's
+judgement call.
+
 ### Shas — verify these against the working trees before anything launches
 
 | repo | HEAD at close | remote |
