@@ -477,6 +477,15 @@ not an achievement.
   restore *signature* (fresh `CreationTime`, old `LastWriteTime`) is not
   diagnostic once anyone has byte-copied a save** (`Copy-Item` produces the
   same shape). A stray ever returning re-opens `EF-051` and this clause with it.
+  ⚠️ **HOLD 2026-08-12 (owner action, deliberate and temporary): Steam Cloud is
+  back ON** — the owner re-ticked it for an independent test of their own and
+  *"will inform an agent when I turn it back off"*. While it is ON the restore
+  mechanism is ARMED: close-outs record **"deleted, listing verified" — never
+  "gone"** — and a returning stray is EF-051's measured mechanism, owner-armed
+  (attribute it, inventory it for the post-untick cleanup, never file it as a
+  finding). This is a dated suspension of the retirement, not a re-opening;
+  the retirement resumes when the owner reports the re-untick and one
+  post-untick listing verifies.
 - ⛔ **Attended-sitting classes from `corun-batch-1` (2026-08-05; 8-entry
   ledger, first BATCHED attended sitting — the classes the unattended ledger
   could not see). Every attended brief guards against these:**

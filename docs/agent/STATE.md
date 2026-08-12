@@ -24,9 +24,10 @@ reach the free→destroy sequence) · **F85 = BUILD the `dont_pause` flip**
 **C39 = EXTEND COMPENSATION + sweep all 3 automation labels**
 (`FactoryBuildings` sibling CONFIRMED; delabel declined) · **load-heal sweep
 CLOSED** · relabel wording deferred to launch prep. Both builds queued.
-⇒ **NEXT: the `unattended-3` build chain — F85 flip + C39 compensation + label
-sweep, verify on a `CP15PT15` staged copy — then the PT-20 redo co-run.
-NEITHER chain is authored yet.**
+⇒ **NEXT: `corun-pt60` — AUTHORED 08-12 (owner order): the chain-8b batch leg
+on a staged `USA Sol 302` copy. Kickoff = prompt 1 (unattended prep), sitting
+~40–60 min when the owner sits.** Behind it: the `unattended-3` build chain
+(F85 flip + C39 compensation + 3-label sweep) and the PT-20 redo — unauthored.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -49,8 +50,9 @@ Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fp
 - ⭐ **F02 · F78 · F81 ORGANIC 08-03, all three again 08-05; F78 +2 · F02 +1 08-11.**
 - **F42** wontfix (owner 07-25; STATE had gone stale as "blocked"). **D08
   extender overhaul** speced, unbuilt (`DRONE_OVERHAUL_OPTIONS.md`); D06 → B2.
-- ✅ **EF-051 CLOSED** — Steam Cloud restore dead; close-outs may record "gone"
-  again, verified by a NAMED listing (names, never counts — the surviving rule).
+- ⚠️ **EF-051 ON HOLD 08-12 — owner re-ticked Steam Cloud ON** (temporary,
+  their own test; they announce the untick). Record "deleted, listing
+  verified", never "gone"; returning strays = the mechanism, NOT findings.
 - ⛔ **Mod-Manager disable needs a FULL RESTART** (D13); the PT-20 redo is NEXT.
   ⚠️ **A leg that disables the pack HANDS THE RE-ENABLE BACK — unscriptable.**
 - **Owner decisions: 1 open**: **relabel WORDING** (launch prep, owner text).

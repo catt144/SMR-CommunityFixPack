@@ -8,6 +8,44 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — `corun-pt60` AUTHORED (owner order) · ⚠️ Steam Cloud re-ticked ON by the owner (temporary) — EF-051's retirement goes on a dated hold
+
+Owner picked PT-60 from the attended-backlog breakdown (*"Lets build the
+pt-60 one"*). **Authored `agent/prompts/corun-pt60/`** — README +
+`01_OPUS_PREP` (game closed: annotate the 2026-08-02 prediction set P1–P9 for
+today's build — the archived counts are stale, 79/85-era vs today's 81/87
+with 8 retail `[install]` SKIPs; verify + stage the fixture; resurrect
+corun-pt15's harness from `f289b11` as CP60) + `02_OPUS_SITTING` (attended
+priority queue, ~40–60 min honest incl. console driving: load banks the P8
+heal lines free → ListFixes + suite vs predictions → save/reload + P9 →
+owner's 15–20 min organic play with F21/F34(d)/F90/C42 riders gate-read, never
+forced) + `03_FABLE_AUDIT` (terminal; per-prediction re-derivation; folder
+empty; kickoff = `unattended-3`).
+
+**Authoring facts (Src/disk/git-verified this session):** fixture =
+`USA Sol 302.savegame.sav` (owner campaign lineage, LastWriteTime 2026-08-01
+17:55, the latest save predating the batch — protected file #4 for the chain;
+fallback `USA Sol 298`; `T1/T2-UNINSTALL*` excluded as uninstall lineage).
+Status reality folded in so nothing is re-tested: F92/F93/F95 already
+`tested` post-batch; the leg's real targets are F90/F91/F94/F96 execution
+evidence, the eight conversions, P8 heal idempotence (pre-batch save only),
+and P9. ⚠️ P8 annotation requirement: boot-time preset heals fire on EVERY
+launch (seen in the cp15 log on an unrelated save) and must not be counted as
+save-state heals.
+
+**⚠️ Mid-session owner note, recorded verbatim and bound into everything:**
+*"I am turning steam cloud saves back on, I need cloud save access for a
+hypothesis I am testing independantly, I will inform an agent when I turn it
+back off."* ⇒ EF-051's 08-11 retirement goes on a **dated HOLD** (fact +
+WORKFLOW clause + STATE + chain rule 12): while ON, close-outs record
+"deleted, listing verified" — never "gone" — and a returning stray is the
+measured mechanism, owner-armed: attributed and inventoried for post-untick
+cleanup, never filed as a finding. The retirement resumes on the owner's
+announced untick + one verified listing.
+
+STATE NEXT → corun-pt60 prompt 1, then `unattended-3`, then the PT-20 redo.
+doccheck GREEN, pushed.
+
 ## 2026-08-12 — the decision sitting: four open calls walked one at a time (AskUserQuestion), four rulings, two builds queued
 
 Owner asked for the pending decisions *"one at a time through ask user a

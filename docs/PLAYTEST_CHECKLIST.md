@@ -963,7 +963,7 @@ Assembly stage?
 
 # Cross-cutting — once per era of the pack
 
-### PT-60 — The chain-8b batch leg (F90-F96 + eight conversions) · Status: unrun · ⭐ attended · **mode: co-run** (routing 2026-08-04 — suite/reload/log halves rig-side; you keep the 15–20 min ordinary-play segment)
+### PT-60 — The chain-8b batch leg (F90-F96 + eight conversions) · Status: unrun · ⭐ attended · **mode: co-run** (routing 2026-08-04 — suite/reload/log halves rig-side; you keep the 15–20 min ordinary-play segment) · ⭐⭐ **QUEUED 2026-08-12 — the `corun-pt60` chain is AUTHORED** (`agent/prompts/corun-pt60/`, your order): a staged COPY of your `USA Sol 302` (now a protected file — the original is never touched), the 2026-08-02 prediction set annotated for today's build, riders (F21/F34(d)/F90/C42) taken only if their situation arises during your play. Your part: **~40–60 min** including the 15–20 min of ordinary play. Kickoff: a session on `01_OPUS_PREP.md` (unattended); the sitting runs when you sit. ⚠️ Steam Cloud is ON by your 08-12 note — staged-save deletions record "deleted, listing verified" until you announce the untick
 **Bug:** seven approved fixes and eight technique-only conversions have never
 executed in a game; a byte-equivalence argument is not an observation. Nothing
 from that batch may be called verified until this leg's numbers are quoted.
