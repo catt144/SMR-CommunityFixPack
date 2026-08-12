@@ -439,6 +439,16 @@ in its second line and it shipped anyway. That is the failure this rule stops.
 
 ## 5. Optional modules (`Opt_*`)
 
+> ⛔ **N/A IN THIS PACK SINCE 2026-08-12 — and kept, not deleted.** All eight
+> `Opt_` modules and the whole Mod Options surface moved to the standalone
+> **Community Opt-In Pack** (`C:\Dev\SMR-OptInPack`), where this section is the
+> live spec. It stays here for three reasons: `00_Core.lua` still carries the
+> `optional`/`OptionEnabled`/`ApplyModOptions` machinery (dormant, not removed);
+> a hundred historical entries and reports cite "FIX_POLICY §5"; and **the rule
+> below is the test for what does NOT belong in this pack.** ⇒ If a proposal
+> here needs a toggle, it is not a fix — it is that mod's, and §4's
+> unintended-defect test is what decides.
+
 Not bug fixes: opt-in behavior changes, off by default, one Mod Options
 toggle each (`ModItemOptionToggle.name` == the Register id == the
 `default_options` key — all three are load-bearing).

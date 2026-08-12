@@ -124,6 +124,23 @@ owed input stays here no matter how struck-through it looks.
     declares it in its brief (a Mod-Manager toggle needs a full restart).
     Your ordinary play doubles as the continuous both-mods compatibility
     soak. Nothing owed.
+    ⭐⭐ **BUILT 2026-08-12 (chain prompt 3). The mod exists: `C:\Dev\SMR-OptInPack`,
+    junction installed, NOT launched — the verification leg is the next step and
+    is unattended.** ⛔ **ONE MINUTE OWED FROM YOU, AND ONLY AFTER THAT LEG
+    REPORTS CLEAN: enable "Community Opt-In Pack" in the Mod Manager (a full
+    restart), then Options → Mod Options and re-tick the seven toggles and two
+    dials you had on.** They come up OFF / at base because the mod id changed,
+    which is a new key in account storage — predicted, not a defect. Your old
+    values stay under the fix pack's key and go inert. ⚠️ **Your savegames are
+    untouched**: every field and modifier id these modules write kept its exact
+    `SMRFixPack_` bytes, on purpose, and the verification leg reads them back
+    off a real save to prove it. Until you re-tick, expect the opt-in gate to
+    read `1/8` (only the drone dials are active-at-base) — that is the correct
+    fresh-default reading, not a broken port.
+    ⚠️ Two smaller things the build learned, neither needing a call: the fix
+    pack now has **no Mod Options page at all** (it has no options left, so the
+    engine correctly stops listing it — do not report it as missing), and the
+    display name above is still a PLACEHOLDER awaiting your launch-prep call.
 
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
 

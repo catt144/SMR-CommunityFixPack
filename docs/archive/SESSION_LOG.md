@@ -8,6 +8,74 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — THE SPLIT IS BUILT: 8 opt-in modules + a framework copy are a second mod, and this pack loses its options page (chain `split-optins`, prompt 3)
+
+Executed against `90_DESIGN.md` and its QA gate's eight MUST-FIXes, all
+applied. Game closed throughout; the verification matrix is prompt 4's and has
+NOT run — nothing here is a measured claim about the running game.
+
+**Built:** `C:\Dev\SMR-OptInPack` (local git, no remote — rule 9), mod id
+`SMR_CommunityOptInPack`, global `SMROptInPack`, prefix `[CommunityOptInPack]`,
+junction installed. Four commits: scaffold (policies, facts, tooling,
+PROVENANCE) → `00_Core.lua` → the 8 modules + manifests → the 9 entries.
+Counts land exactly on the design's predictions — **here 75 files / 74
+registered / 0 optional / 74 default-active; there 9 / 8 / 7 / 1; 88 probes;
+index rows unchanged at 102 F + 12 D + 46 C** (nine D entries are now
+tombstones).
+
+**What the build found that the design and its QA had not** — three real
+things, each recorded rather than smoothed over:
+1. `Opt_DroneOverhaul` carries its OWN cloned logger with its own
+   `[CommunityFixPack]` literal (`:280`), not Core's. Left alone, the new mod
+   would have printed the fix pack's prefix and broken cell (b)'s
+   "zero CommunityFixPack occurrences" prediction for a non-port reason.
+2. `Opt_ResidencyControl` and `Opt_NoHomeless` each name the mod in a
+   player-visible infopanel ROLLOVER TITLE. Not persisted (window instances),
+   so they carry the placeholder display name like every other UI string.
+3. `doccheck.py`'s `default_active` was a hard-coded `modules - 7`. Run against
+   the post-split tree it printed **67** where the truth is 74. The obvious
+   generalisation was ALSO wrong: `optional` counted the bare substring
+   `optional = true`, which matched a COMMENT in `Opt_DroneStatDials.lua` and
+   reported 8 for 7 files — so the constant was accidentally right and the
+   count silently wrong, and neither could correct the other because the count
+   was never used. Both repaired; the repair was re-run against the pre-split
+   tree as a control and reproduces the old 75 exactly.
+
+**Also fixed en route, pre-existing gaps the split surfaced:** the TestKit's
+`99_FixtureCarry` `INSTANCE_FIELDS` never listed `SMRFixPack_no_homeless` (the
+third Opt-written persisted field, missing since D12 shipped) and the
+`OptionsMenu` probe's `WANT` list never included `NoHomeless` (it asserted six
+toggles while seven shipped).
+
+**The save contract held and was CHECKED, not assumed.** The port script
+classifies every `SMRFixPack_*` token before renaming anything, refuses on an
+unrecognised one, and counts each persisted name before and after: all five
+identical. All 11 surviving `SMRFixPack` tokens in the new repo's `Code/` are
+exactly those five names (5 definitions, 6 comments) — zero references.
+
+**The fix pack side:** the 8 files, their `items.lua` entries and the WHOLE
+`default_options` field are gone, so ⭐ **this pack correctly stops appearing in
+Options → Mod Options at all** (`ModDef:HasOptions`). `00_Core.lua` is
+UNCHANGED — its `optional` machinery is dormant, not wrong. `FIX_POLICY` §5 is
+kept and marked N/A-here, because it is now the test for what does NOT belong
+in this pack. Human docs were corrected in the same commits that made them
+wrong: PT-62's P13 lever is `SMROptInPack_Disabled.NoHomeless` (the old name is
+inert there and would silently run the module LIVE — the PT-61 trap), the
+`ListFixes` HELP row reads `74/74` in every configuration now, and the
+toggles-OFF recipe's instrument drop moved to the other repo.
+
+**New engine fact, in both repos:** EF-054 — inter-mod load order is the user's
+enable order (`AccountStorage.LoadMods`), with one branch the QA's citation
+chain did not carry: `LoadAllMods` makes it alphabetical instead. Both
+deterministic, neither ours to set.
+
+**Owed by the owner, ~1 minute, and only after prompt 4 reports clean:** enable
+the new mod (full restart) and re-tick seven toggles + two dials, which come up
+fresh because a new mod id is a new account-storage key. Predicted in the
+design, not a defect. Checklist item 15 carries it.
+
+---
+
 ## 2026-08-12 — the owner declares the post-split rig config: BOTH mods stay loaded — recorded as a dormant WORKFLOW rule the split audit activates
 
 Owner, right after the chain was authored: *"Once we get it seperated I will

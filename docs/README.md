@@ -28,16 +28,26 @@ docs/
 
 ## The two split folders
 
-**`agent/bugs/` — 116 entry files** (`F*.md`, `D*.md`, `C*.md`), **2 of them
+**`agent/bugs/` — 125 entry files** (`F*.md`, `D*.md`, `C*.md`), **2 of them
 grouped** (`C03-C11.md`, `C12-C38.md` — several candidates share one body, and
 the file name states what it holds). `INDEX.md` is **generated** and carries
-all 151 index rows. `_notes.md` is the residue that belonged to no entry: the
+all 160 index rows. ⚠️ **Nine of the `D` entries are TOMBSTONES** (D01–D07, D09,
+D12, since 2026-08-12): their modules moved to the Community Opt-In Pack and so
+did their records — `C:\Dev\SMR-OptInPack\docs\agent\bugs\`. The stubs stay
+because `INDEX.md` is generated from contiguous `seq`, and because hundreds of
+references resolve through them. *(These counts are prose, and doccheck does not
+check prose — they read 116/151 until 2026-08-12, an era stale. Re-derive from
+`INDEX.md` before quoting them.)* `_notes.md` is the residue that belonged to no entry: the
 old intro, the five `##` section dividers, the "Not yet swept" backlog, and
 C02's row, which points at entry text that never existed.
 
-**`agent/facts/` — 43 fact files** (`EF-001` … `EF-043`), one per top-level
-bullet of the old ENGINE_FACTS.md, in source order, ids stable. `INDEX.md` is
-**generated**; `_preamble.md` is the prose that opened the old file.
+**`agent/facts/` — 54 fact files** (`EF-001` … `EF-054`; the first 43 are one
+per top-level bullet of the old ENGINE_FACTS.md, in source order, ids stable).
+`INDEX.md` is **generated**; `_preamble.md` is the prose that opened the old
+file. ⭐ **This folder was COPIED WHOLE into the Community Opt-In Pack on
+2026-08-12** — engine facts describe the GAME and both mods need them. The two
+copies **diverge from that date**: a fact learned here should usually be carried
+across, and one learned there will not appear here by itself.
 
 ⚠️ **`INDEX.md` is generated in both folders and is never hand-edited.** Edit
 the entry or fact file; doccheck regenerates the index and fails on any
