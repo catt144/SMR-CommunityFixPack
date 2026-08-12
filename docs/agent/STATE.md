@@ -18,11 +18,11 @@ the bar) · **trains = OPTION A, queue CLOSED** (checklist 12 + route report) ·
 **D13 BLOCKING at hours-scale** · riders C42/F99/F80/F96-R2 → post-release
 WATCH, out of chain freight.
 ⇒ **NEXT — the release front is the ONLY main line:**
-⓪ **Opt-in SPLIT chain** (owner order 08-12, checklist 15): the 8 `optional`
-modules → a STANDALONE mod. Map framework coupling FIRST (registry/logging/
-Mod Options bridge); move files + probes; re-derive every baseline the split
-resets (gate 81/81 → pair, tally, counts). Before D13 so the derivation sees
-final sets. ∥ `unattended-3` (F85+C39, `CP15PT15` copy; Opus runs, Fable audits).
+⓪ **Opt-in SPLIT chain AUTHORED 08-12** (`agent/prompts/split-optins/`, 5
+prompts: design → fresh-QA GATE → build → verify matrix → Fable audit). ⛔ TRUE
+STANDALONE (works ± fix pack) · persisted names are SAVE CONTRACT (no renames)
+· policies/facts/tooling port + no-retraining scaffolding. **Kickoff =
+`01_OPUS_DESIGN`.** ∥ `unattended-3` (F85+C39; Opus runs, Fable audits).
 ① **D13 chain** (agent): derive exposed set over BOTH post-split trees (NO
 inherited count) → spec (⚠️ owner design Q asked there; ONE artifact, both
 mods) → build + probe + curated keep/remove list (F35 modifiers ARE the repair).

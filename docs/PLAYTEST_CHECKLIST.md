@@ -85,6 +85,19 @@ owed input stays here no matter how struck-through it looks.
     description, preview image and portal pass at launch, and the D13 rescue
     artifact covers residue from BOTH mods (one artifact — spec-time detail).
     Nothing owed by you until its verification lands in the combined sitting.
+    ⭐ **CHAIN AUTHORED 2026-08-12, same session, to your sharpened order**
+    (*"true standalone… work with or without the bug fix mod… all our hard
+    fault work makes it over… cleanly load its folders and just work on it"*):
+    `agent/prompts/split-optins/` — design → fresh-context QA gate → build →
+    three-cell verification matrix (+ a save-compat witness on a `CP15PT15`
+    copy) → terminal audit with a no-retraining acceptance test run from the
+    new repo alone. Binding invariants: zero `SMRFixPack` references in the
+    standalone; **persisted names keep their exact bytes** (your saves are the
+    contract); module behaviour unchanged. Three small calls come back to you
+    later, none blocking: the mod's display name (launch prep), whether the 8
+    default ON or stay opt-in-OFF in their own mod (design will recommend),
+    and a one-minute Mod Options re-tick after the split (new mod id = fresh
+    toggle state).
 
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
 

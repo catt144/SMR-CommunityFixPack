@@ -8,6 +8,42 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — the split-optins chain is AUTHORED: five prompts, a fresh-QA gate, and the owner's three requirements written as invariants
+
+Same session, the owner sharpened the split order: *"I want the opt in to be
+a true standalone mod, so it can work with or without the bug fix mod… a very
+good and cautious chain… make sure all our hard fault work makes it over…
+like engine, fix, documentation policies ect… when I work on it, i want to be
+able to cleanly load its folders and just work on it instead of having to
+retrain the system."* Authored `agent/prompts/split-optins/` (README + 5):
+01 OPUS design (authoritative coupling map, ⛔⛔ persisted-name inventory,
+disjointness proof over both mods' patch points, repo/namespace/TestKit/doc
+migration design, verification-matrix predictions) → 02 FABLE fresh-context
+QA — a GATE, build may not run without a BUILD verdict (house
+fresh-context-QA rule) → 03 OPUS build (scaffold `C:\Dev\SMR-OptInPack`,
+port `00_Core.lua` under `SMROptInPack`, move the 8 `Opt_*` files
+namespace-only, both metadatas, doc migration, static acceptance, NO launch)
+→ 04 OPUS verify (three-cell matrix: both / opt-in alone / fix pack alone,
+each a fresh launch under D13's full-restart rule, plus a save-compat
+witness reading the persisted-name inventory back live on a `CP15PT15`
+copy, R4 round trip) → 05 FABLE audit (byte-compare + re-derive everything,
+re-prove the invariants on the shipped trees, ⭐ the NO-RETRAINING ACCEPTANCE
+TEST answered from the new repo alone with this repo closed, folder empty,
+kickoff = D13). **Invariants (chain constitution, README rule 6):** zero
+`SMRFixPack` in the standalone's executable code; no vanilla patch point
+owned by both mods (proof or stop); persisted names keep EXACT bytes —
+renames forbidden; byte-conservative port (behaviour unchanged, PT-52's
+freeze travels); fix pack re-derives its own counts after. Scouted this
+session to author against reality: framework = `00_Core.lua` alone (504
+lines, 12 public functions + defs/fixes; per-symbol usage counts recorded in
+the README), options = metadata `default_options` + items toggles + 2 D09
+dial strings. Owner asks routed, none blocking: display name (launch prep),
+opt-in default ON/OFF (design recommends), one-minute options re-tick (mod-id
+change resets account toggles). Scaffolding memory: docs/archive stays here
+append-only; the new repo gets facts copied whole, adapted policies (N/A-
+marked, never silently dropped), a PROVENANCE page, its own STATE contract.
+doccheck GREEN, pushed.
+
 ## 2026-08-12 — the opt-in modules are ORDERED into a standalone mod, sequenced BEFORE D13 by D13's own derivation rule
 
 Same session as the ship-line rulings, immediately after. Owner: *"one thing
