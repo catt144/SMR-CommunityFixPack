@@ -62,21 +62,16 @@ are what made C39 readable at all and are not scored against you.**
    **(c)** measure the other three Workshops first (only `TVStudioWorkshopCCP1`
    was observed; the rest share the class chain, so the result is inferred for
    them). → `agent/bugs/C39.md` + the rider record below.
-10. **⚖️ `C46` — ⚖️ RE-GRADED 2026-08-12 after your challenge, and you were
-    right to push: the phantom-power state we measured CANNOT be reached by
-    normal play on current source.** Every code path that writes the trap's
-    power value only runs in "free" mode — a trap before the choice has never
-    had it written and makes 0 power even while holding wisps — and the only
-    two calls to the mode function in the whole game are the choice's own
-    once-only branches. So an organic *"Experiment upon them"* click arrives
-    with 0 and leaves 0: **no phantom**. The 15-power-forever we measured was
-    manufactured by our forced free→destroy flip, a sequence the game never
-    performs. What stays true: the shipped destroy branch really does forget
-    to clear the value (we re-read the lines), so the omission is real but
-    apparently unreachable. **Your call is now smaller:** wontfix/document is
-    the natural default; a defensive one-line clear in our own replacement
-    function is available as belt-and-braces if you want it. (Caveat stated:
-    this is a source derivation, not a played destroy-first run.)
+10. ~~**⚖️ `C46` — re-graded 2026-08-12 after your challenge: the phantom-power
+    state we measured cannot be reached by normal play.**~~ ✅ **DECIDED
+    2026-08-12 — WONTFIX, your ruling in your own words:** *"Lets just write
+    that one off since its not a true bug."* Your challenge was what caught
+    it: the omission is real in the shipped code, but every path that writes
+    the trap's power value only runs in "free" mode and the once-only choice
+    means the game can never reach the free→destroy sequence our rig forced —
+    so organically there is no phantom. Nothing is built; the defensive
+    one-liner was declined with this ruling. `CP15F15.savegame.sav` is no
+    longer needed for any open question — keep or delete it as you like.
     → `agent/bugs/C46.md`.
 
 ### ⭐⭐ NEW 2026-08-10 — from the `corun-batch-2` SITTING (four calls, all yours)

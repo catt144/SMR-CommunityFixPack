@@ -171,5 +171,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 121 | C44 | Vanilla missing asset: `Animations/LawOfficeDoor_idle.hgacl` / `_opening.hgacl` are referenced by the shipped manifest and absent from the shipped packs | wontfix | - | MEASURED | [C44.md](C44.md) |
 | 122 | F101 | Retail calls tooling-only globals: `CheatMeteorHit` → `TestMeteor` and the object inspector → `GetSpotNameColor` both throw on a shipped build | wontfix | - | MEASURED | [F101.md](F101.md) |
 | 123 | C45 | Vanilla `[ERROR] Quantum Comet invalid pos with no holder` — a departing rocket's `GenerateDepartures` walks a colonist train-route read into an invalid starting point (one occurrence) | filed | ? | cand | [C45.md](C45.md) |
-| 124 | C46 | St. Elmo's Fire — the `"destroy"` branch kills every wisp but never clears `el_prod_modifier`, so an emptied Light Trap keeps producing its old power FOREVER | filed | ? | **OBSERVED (forced-state only)** | [C46.md](C46.md) |
+| 124 | C46 | St. Elmo's Fire — the `"destroy"` branch kills every wisp but never clears `el_prod_modifier`, so an emptied Light Trap keeps producing its old power FOREVER | wontfix | ? | **OBSERVED (forced-state only)** | [C46.md](C46.md) |
 

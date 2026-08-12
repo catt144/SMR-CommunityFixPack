@@ -8,6 +8,16 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — C46 CLOSED `wontfix` (owner ruling, same session as the re-grade)
+
+Owner, on the re-grade: *"Lets just write that one off since its not a true
+bug."* Status → `wontfix` (front matter + tag), checklist decision 10 struck,
+STATE synced (owner decisions 4 → 3; also fixed a STATE staleness — F42 was
+shown "blocked, wontfix recommended" but has been ruled `wontfix` since
+07-25). Defensive `Change(0)` declined with the ruling; `CP15F15.savegame.sav`
+no longer load-bearing (owner's file to keep or delete). Re-opens only on a
+route to free→destroy or a `"none"`-mode modifier write.
+
 ## 2026-08-12 — owner challenge re-grades C46: the phantom-power harm is FORCED-ONLY; the omission is real but no organic route to it exists
 
 Owner, day after the chain close: *"We destroyed the wisps via a command no
