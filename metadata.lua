@@ -1,12 +1,13 @@
 return PlaceObj('ModDef', {
 	'title', "Community Fix Pack",
-	'description', "Fixes bugs in Surviving Mars: Relaunched gameplay code. Every fix targets a verified defect in the game's Lua source and patches at runtime in a mod-compatible way (no game files are modified). The optional modules — six toggles plus Drone speed and carry-capacity dials — are controlled in-game via Mod Options on every platform; individual bug fixes can additionally be disabled on PC (via the console or a companion mod). See the mod page for the full list of fixes.",
-	'short_description', "Dozens of verified bug fixes for Surviving Mars: Relaunched, applied at runtime in a mod-compatible way — no game files modified. Plus optional quality-of-life modules — six toggles and two Drone stat dials — all off/at base by default.",
-	-- the count below = Fix_*.lua files + 90_SaveSanitizer (66 + 1 as of
-	-- 2026-07-30 late). It drifts every time a fix is retired or added — it read
-	-- 68 until F24 and F28 were closed `wontfix`, then 66, and F83's
-	-- Fix_FirstAsteroidPrefabs brought it to 67. Recount before every release.
-	'last_changes', "Initial release: 67 bug fixes, 6 optional modules and Drone speed/carry dials (all in Mod Options).",
+	'description', "Fixes bugs in Surviving Mars: Relaunched gameplay code. Every fix targets a verified defect in the game's Lua source and patches at runtime in a mod-compatible way (no game files are modified). Individual fixes can be disabled on PC (via the console or a companion mod). See the mod page for the full list of fixes. The optional quality-of-life modules that used to ship with this pack are now a separate mod, the Community Opt-In Pack — installing it is optional and the two work together.",
+	'short_description', "Dozens of verified bug fixes for Surviving Mars: Relaunched, applied at runtime in a mod-compatible way — no game files modified. The optional quality-of-life modules are now a separate mod (Community Opt-In Pack).",
+	-- ⚠️ `last_changes` no longer quotes a fix COUNT, on purpose: every previous
+	-- wording carried one and it drifted every time a fix was retired or added
+	-- (68 -> 66 after F24/F28 went `wontfix`, 67 after F83). If launch prep puts
+	-- a number back, recount it from `python tools/doccheck.py --emit-counts`
+	-- in the same commit — never from this comment.
+	'last_changes', "Initial release: the bug fixes. The optional modules moved to their own mod, the Community Opt-In Pack.",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	'version', 1,
@@ -29,23 +30,15 @@ return PlaceObj('ModDef', {
 		"*README.md",
 		"*.gitignore",
 	},
-	-- Mod Options defaults (D05): must mirror items.lua's ModItemOptionToggle
-	-- names, all false. This field is what makes Options → Mod Options list the
-	-- pack (ModDef:HasOptions reads it, Mod.lua:473-475), and the engine seeds
-	-- CurrentModOptions from it before our code loads. The two D09 dial
-	-- entries are ModItemOptionChoice values — base STRINGS, byte-identical
-	-- to items.lua's ChoiceList and Opt_DroneStatDials.lua's maps, not false.
-	'default_options', {
-		ClassicRockets = false,
-		AcknowledgedWarnings = false,
-		ResidencyControl = false,
-		MultipleSuns = false,
-		DroneOverhaul = false,
-		CohortHousing = false,
-		NoHomeless = false,
-		DroneSpeedDial = "1x (base)",
-		DroneCarryDial = "+0 (base)",
-	},
+	-- ⛔ NO `default_options` FIELD, AND THAT IS THE POINT (2026-08-12, the
+	-- opt-in split). This field is what makes Options → Mod Options list a mod
+	-- at all (ModDef:HasOptions reads it, Mod.lua:473-475). The pack's eight
+	-- optional modules — and every toggle and dial they owned — moved to the
+	-- standalone Community Opt-In Pack (SMR_CommunityOptInPack), so this pack
+	-- has nothing for a player to set and correctly stops appearing on that
+	-- page. 00_Core.lua keeps its `optional`/OptionEnabled/ApplyModOptions
+	-- machinery: dormant, not wrong, and not worth an unforced edit to the one
+	-- file every fix depends on.
 	'code', {
 		"Code/00_Core.lua",
 		"Code/Fix_CaveInsNoDisasters.lua",
@@ -122,15 +115,6 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DustDevilSpawnGate.lua",
 		"Code/Fix_ExoticDepositSign.lua",
 		"Code/90_SaveSanitizer.lua",
-		-- optional modules, off by default (see SMRFixPack_Optional)
-		"Code/Opt_ClassicRockets.lua",
-		"Code/Opt_AcknowledgedWarnings.lua",
-		"Code/Opt_ResidencyControl.lua",
-		"Code/Opt_MultipleSuns.lua",
-		"Code/Opt_DroneOverhaul.lua",
-		"Code/Opt_CohortHousing.lua",
-		"Code/Opt_NoHomeless.lua",
-		"Code/Opt_DroneStatDials.lua",
 	},
 	'TagGameplay', true,
 })

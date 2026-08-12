@@ -441,6 +441,24 @@ def lua_files(directory):
     return sorted(f for f in os.listdir(directory) if f.endswith(".lua"))
 
 
+# The optional-module def field, ANCHORED (repaired 2026-08-12, the opt-in
+# split). The bare substring "optional = true" also matched a COMMENT — in
+# Opt_DroneStatDials.lua, saying the module registers *without* it — so the
+# count read 8 where 7 files carried the field. It was never used in the
+# arithmetic below, which hid it.
+OPTIONAL_FIELD_RE = re.compile(r"^\s+optional = true,\s*$", re.M)
+
+
+def files_matching(directory, names, pattern):
+    hits = []
+    for name in names:
+        with open(os.path.join(directory, name), encoding="utf-8-sig",
+                  errors="replace") as fh:
+            if pattern.search(fh.read()):
+                hits.append(name)
+    return hits
+
+
 def files_containing(directory, names, needle):
     hits = []
     for name in names:
@@ -469,10 +487,13 @@ def recount(model, out):
     registered = files_containing(CODE, names, "SMRFixPack.Register(")
     # 00_Core.lua defines Register; it is not itself a registered module.
     counts["modules"] = len([n for n in registered if n != "00_Core.lua"])
-    counts["optional"] = len(files_containing(CODE, names, "optional = true"))
-    # Opt_DroneStatDials is the 8th optional but reports active at base, so
-    # default-active is modules - 7, not modules - len(optional).
-    counts["default_active"] = counts["modules"] - 7
+    counts["optional"] = len(files_matching(CODE, names, OPTIONAL_FIELD_RE))
+    # Every module that is NOT option-gated is active as shipped. ⛔ REPAIRED
+    # 2026-08-12 (the opt-in split): this was a hard-coded `modules - 7`, which
+    # was accidentally right only while the pack held exactly 7 gated modules —
+    # the moment they left it would have reported 67 default-active instead of
+    # 74. Derived now, from the anchored count above.
+    counts["default_active"] = counts["modules"] - counts["optional"]
 
     tk_code = os.path.join(TESTKIT, "Code")
     tk_names = lua_files(tk_code)

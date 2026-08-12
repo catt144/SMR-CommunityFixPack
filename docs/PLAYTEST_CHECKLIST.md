@@ -928,7 +928,11 @@ Entry (incl. the same-day correction to an earlier, wrong reason for this).
    most likely to be misfiled. If the slot never fills while unemployed
    homeless sit there, the door needs a dwell bound and D12 does not ship as
    built.
-5. P13: the repaired `SMRFixPack_Disabled.NoHomeless` lever mid-drain.
+5. P13: the repaired `SMROptInPack_Disabled.NoHomeless` lever mid-drain.
+   ⛔ **RENAMED 2026-08-12 with the opt-in split** — `Opt_NoHomeless` lives in
+   the Community Opt-In Pack now and reads `SMROptInPack_Disabled`. The old
+   name is inert there: setting it silently runs the module LIVE, which is the
+   exact PT-61 trap this lever was written after.
 6. P12: save flag-ON → Mod-Manager disable → load clean.
    (Predictions P1-P13 and the four setup traps: archive snapshot; the re-run
    musts incl. P14: entry.)

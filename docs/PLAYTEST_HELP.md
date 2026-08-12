@@ -385,7 +385,8 @@ with `ConsoleSetEnabled(true)` + `ReloadShortcuts()`.)
 | `SMRTest.ReportReservations` | counts stale residence reservations — **PT-21** |
 | `SMRTest.ReportTrains` | stored train prefabs vs trains on the map — **PT-21** |
 | `SMRTest.RunAll` | re-run the whole probe suite (sanity check before/after a session) |
-| `SMRFixPack.ListFixes` | per-fix status. ⭐ **The denominator is the REGISTERED total, not the default-active one** — the leg line is `log("fix pack present: %d/%d fixes active", active, #SMRFixPack.order)` (`TestKit/Code/00_TestCore.lua:351` — re-read 2026-08-12; this row said `:286`, an era stale), so `#SMRFixPack.order` = **81** today. **Default config reads `74/81`**; a config with every opt-in toggled ON reads **`81/81`** — ⭐ **MEASURED 2026-08-03 on the owner's campaign: `fix pack present: 81/81 fixes active`, suite `78 PASS, 0 FAIL, 9 SKIP, 0 ERROR`** (log `Mars.exe-20260803-22.23.59`). The **8** `Opt_` modules read `inactive` unless toggled ON, except `DroneStatDials`, which is active-at-base = armed, vanilla behavior (`Code/00_Core.lua`). ⚠️ **Account state is READ, never assumed** — the owner's campaign currently runs every opt-in ON, which is NOT default config, so never compare a leg's number against another leg's without checking the toggles. `agent/STATE.md` holds the authoritative registered/default-active counts (`python tools/doccheck.py --emit-counts`). *(This row said `68/74` until 2026-08-03 — an era stale, and it was the row an agent consults before reading a live `ListFixes`. Corrected against a measured reading, not against arithmetic.)* |
+| `SMRFixPack.ListFixes` | per-fix status. ⭐ **The denominator is the REGISTERED total, not the default-active one** — the leg line is `log("fix pack present: %d/%d fixes active", active, #SMRFixPack.order)` (`TestKit/Code/00_TestCore.lua:351` — re-read 2026-08-12; this row said `:286`, an era stale), so `#SMRFixPack.order` = **74** ⛔ **SINCE THE OPT-IN SPLIT (2026-08-12)** — the 8 `Opt_` modules moved to their own mod, and with them every toggle, so **every registered fix in this pack is now default-active and the gate reads `74/74` in every configuration**. The historical readings are era-stale and are kept only so an old log is legible: `68/74` (until 2026-08-03), then `74/81` default / `81/81` all-opt-ins-ON — ⭐ **the last MEASURED single-pack reading was `fix pack present: 81/81 fixes active`, suite `78 PASS, 0 FAIL, 9 SKIP, 0 ERROR`** (2026-08-03, log `Mars.exe-20260803-22.23.59`), and it counts 7 modules this pack no longer ships. ⚠️ **Account state is still READ, never assumed** — it now governs the OTHER mod's gate line, not this one. `agent/STATE.md` holds the authoritative registered/default-active counts (`python tools/doccheck.py --emit-counts`); the post-split number is a PREDICTION until a leg measures it. |
+| `SMROptInPack.ListFixes` | ⭐ **the OPT-IN MOD's registry** (a different mod, `SMR_CommunityOptInPack`, since 2026-08-12) — per-module status for the 8 modules that used to live in this pack. Its own leg line is `opt-in pack present: %d/%d modules active`, and at fresh account defaults it reads **`1/8`**: the 7 toggles come up OFF (a new mod id = a new Mod Options key, so the owner re-ticks once), and `DroneStatDials` is active-at-base = armed, vanilla behavior. ⛔ **Two mods, two log prefixes: grep the FULL bracketed token** — `[CommunityOptInPack]` vs `[CommunityFixPack]`; `Pack]` matches both. |
 
 **Drone dispatch STRESS HARNESS** (`Code/91_Stress.lua`, added 2026-07-29;
 **v2 lifecycle-tracing rebuild 2026-07-29** after the first run proved the v1
@@ -493,12 +494,20 @@ control and you should look for both: `ENABLE-PATH: ARMED — the pack is OFF`
 before the click and `ENABLE DETECTED — the pack loaded through an in-place mod
 reload` after it. `95_AutoRun` logs `standing down` at boot.
 
-⚠️ **A toggles-OFF run leaves the optional modules uncovered.** All five `Opt_`
-probes SKIP. To exercise them on this path, do NOT ask the owner to flip
-toggles — drop a temporary `Code/97_OptInLeg.lua` into the FIX PACK right after
-`00_Core` setting `SMRFixPack_Optional`, which overrides an OFF toggle
-(`OptionEnabled`, `00_Core.lua:51-55`, checks the bridge first) and leaves
-account state alone. Delete the file and its metadata line after the leg.
+⚠️ **A toggles-OFF run leaves the optional modules uncovered.** All eight `Opt_`
+probes SKIP (the row said "five" until 2026-08-12 — era-stale). To exercise them
+on this path, do NOT ask the owner to flip toggles — drop a temporary
+`Code/97_OptInLeg.lua` **into the OPT-IN MOD** (`C:\Dev\SMR-OptInPack`, ⛔ NOT
+this pack, since 2026-08-12) right after its `00_Core` setting
+`SMROptInPack_Optional`, which overrides an OFF toggle (`OptionEnabled`,
+`00_Core.lua:51-55`, checks the bridge first) and leaves account state alone.
+Delete the file and its metadata line after the leg.
+⚠️ **The pre-load lever cannot be set from a companion mod** — inter-mod load
+order is the account's enable order and is not ours to set (`agent/facts/`
+EF-054). Setting it from inside the mod's own folder, as above, is the path that
+works; the in-session alternative is `rawset(Mods["SMR_CommunityOptInPack"].options, id, true)`
+followed by `Msg("ApplyModOptions", "SMR_CommunityOptInPack")`, fired AFTER
+`ClassesBuilt`.
 *(This does NOT bear on audit A2, which PT-55 answered in play 2026-07-30 — a
 different path, the module toggle rather than the pack.)*
 
