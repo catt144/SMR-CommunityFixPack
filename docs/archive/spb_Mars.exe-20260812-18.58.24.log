@@ -1,0 +1,428 @@
+					Render 0:00:00:005
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	40%
+					Render 0:00:00:006
+Disk Free      	760333 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:122
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:125
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:510
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:640
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:834
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:503
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:559
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:557
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:559
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Opt-In Pack (id SMR_CommunityOptInPack, v0.01-000) unpacked from appdata
+						Lua 0:00:17:903
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:908
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:909
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+						Lua 0:00:17:910
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:534
+Reloading done in 967 ms
+						Lua 0:00:18:866
+[preset] Preset postprocess took 59 ms.
+						Lua 0:00:18:926
+479 / 479 particle streams loaded in 56 ms.
+						Lua 0:00:18:927
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:123
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:178
+[mod] [SP-b] === split-optins SP-b === watchdog 1800000ms
+[SP-b] === split-optins SP-b === watchdog 1800000ms
+[mod] [SP-b] STEP 1-waiting-menu BEGIN
+[SP-b] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:179
+[PdxSDK] Started up. Took 1612
+						Lua 0:00:19:203
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:633
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:737
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:738
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:640
+[mod] [SP-b] STEP 1-waiting-menu END 2500ms
+[SP-b] STEP 1-waiting-menu END 2500ms
+[mod] [SP-b] MODE ON DISK = CELL b — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[SP-b] MODE ON DISK = CELL b — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[mod] [SP-b] STEP 2-config-gate BEGIN
+[SP-b] STEP 2-config-gate BEGIN
+[mod] [SP-b] GATES config-gate/b ------------------------------------------------
+[SP-b] GATES config-gate/b ------------------------------------------------
+[mod] [SP-b] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[SP-b] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+						Lua 0:00:21:641
+[mod] [SP-b] GATEREAD opt-in pack :: 8/8 active
+[SP-b] GATEREAD opt-in pack :: 8/8 active
+[mod] [SP-b] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[SP-b] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[mod] [SP-b] GATES config-gate/b :: fix pack 0/0 | opt-in pack 8/8 | map= | speed=1 | loads_this_process=0
+[SP-b] GATES config-gate/b :: fix pack 0/0 | opt-in pack 8/8 | map= | speed=1 | loads_this_process=0
+[mod] [SP-b] MODORDER config-gate/b :: 2 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityOptInPack
+[SP-b] MODORDER config-gate/b :: 2 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityOptInPack
+[mod] [SP-b] DIALOPTS config-gate/b :: DroneSpeedDial=5x (type=string) | DroneCarryDial=+2 (type=string) — ⛔ the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[SP-b] DIALOPTS config-gate/b :: DroneSpeedDial=5x (type=string) | DroneCarryDial=+2 (type=string) — ⛔ the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[mod] [SP-b] DIALOPTS config-gate/b :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[SP-b] DIALOPTS config-gate/b :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [SP-b] CONFIGGATE OK :: cell b :: fix pack present=false (wanted false) | opt-in present=true (wanted true) :: 0/0 and 8/8
+[SP-b] CONFIGGATE OK :: cell b :: fix pack present=false (wanted false) | opt-in present=true (wanted true) :: 0/0 and 8/8
+[mod] [SP-b] STEP 2-config-gate END 0ms
+[SP-b] STEP 2-config-gate END 0ms
+[mod] [SP-b] STEP 3-load-suite-world BEGIN
+[SP-b] STEP 3-load-suite-world BEGIN
+						Lua 0:00:21:745
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:748
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:850
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:514
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 73.1 MB/s, average read 4948 bytes.
+						Lua 0:00:27:636
+Unpersist missing permanent: Mod/SMR_CommunityFixPack | Fallback permanent: table: 00000193F4F293D0 [7]
+						Lua 0:00:27:730
+[mod] Savegame references Mod Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) which is not present
+						Lua 0:00:30:574
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:626
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:645
+Game Loaded in 8901 ms
+						Lua 0:00:30:696
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:502
+Game loaded on map BlankBigCanyonCMix_09 in 9861 ms
+[mod] [SP-b] LOAD OK #1 file=SPSTAGE.savegame.sav — LoadGame returned no error
+[SP-b] LOAD OK #1 file=SPSTAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:804
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:47:002
+[mod] [SP-b] READ speed: SetGameSpeed(3) call=true | before=5 after=3
+[SP-b] READ speed: SetGameSpeed(3) call=true | before=5 after=3
+[mod] [SP-b] STEP 3-load-suite-world END (no timing — this step blocks render mode)
+[SP-b] STEP 3-load-suite-world END (no timing — this step blocks render mode)
+[mod] [SP-b] STEP 5-suite BEGIN
+[SP-b] STEP 5-suite BEGIN
+[mod] [SP-b] GATES immediately-before-RunAll ------------------------------------------------
+[SP-b] GATES immediately-before-RunAll ------------------------------------------------
+[mod] [SP-b] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[SP-b] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[mod] [SP-b] GATEREAD opt-in pack :: 8/8 active
+[SP-b] GATEREAD opt-in pack :: 8/8 active
+[mod] [SP-b] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[SP-b] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[mod] [SP-b] GATES immediately-before-RunAll :: fix pack 0/0 | opt-in pack 8/8 | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1
+[SP-b] GATES immediately-before-RunAll :: fix pack 0/0 | opt-in pack 8/8 | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1
+[mod] [SMRTest] ---- RunAll (all probes) ----
+[SMRTest] ---- RunAll (all probes) ----
+[mod] [SMRTest] fix pack NOT loaded — probes should FAIL (baseline run)
+[SMRTest] fix pack NOT loaded — probes should FAIL (baseline run)
+[mod] [SMRTest] opt-in pack present: 8/8 modules active
+[SMRTest] opt-in pack present: 8/8 modules active
+[mod] [SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] FAIL  MeteorFrequency          [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  MeteorFrequency          [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  UpgradeModifierLeak      [behavior] modifier survived salvage (leaks onto the dome forever)
+[SMRTest] FAIL  UpgradeModifierLeak      [behavior] modifier survived salvage (leaks onto the dome forever)
+[mod] [SMRTest] FAIL  NightShiftWork           [behavior] hour 0 -> nil, hour 1 -> nil (colonists skip the rest of the night shift)
+[SMRTest] FAIL  NightShiftWork           [behavior] hour 0 -> nil, hour 1 -> nil (colonists skip the rest of the night shift)
+[mod] [SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] FAIL  WispPower                [behavior] 3 wisps produced 3 power units, expected 3000
+[SMRTest] FAIL  WispPower                [behavior] 3 wisps produced 3 power units, expected 3000
+[mod] [SMRTest] FAIL  WispResearch             [behavior] batch branch granted 300 extra RP on top of the per-wisp 300 (notification says 300)
+[SMRTest] FAIL  WispResearch             [behavior] batch branch granted 300 extra RP on top of the per-wisp 300 (notification says 300)
+[mod] [SMRTest] FAIL  TouristApplicants        [behavior] 1-star gave 242 bonuses, 2-star gave 80 over 400 rolls (chance roll inverted)
+[SMRTest] FAIL  TouristApplicants        [behavior] 1-star gave 242 bonuses, 2-star gave 80 over 400 rolls (chance roll inverted)
+[mod] [SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[mod] [SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] FAIL  LanderEmptyLaunch        [behavior] empty auto rocket reports ready — it launches with nothing and comes straight back
+[SMRTest] FAIL  LanderEmptyLaunch        [behavior] empty auto rocket reports ready — it launches with nothing and comes straight back
+[mod] [SMRTest] FAIL  LanderCargoRatchet       [behavior] request dropped to 0 with 300000 aboard -> status 'unloading', drones haul it back out
+[SMRTest] FAIL  LanderCargoRatchet       [behavior] request dropped to 0 with 300000 aboard -> status 'unloading', drones haul it back out
+[mod] [SMRTest] ERROR LanderReturnFuel         [behavior] Mod/SMR_CommunityOptInPack/Code/Opt_ClassicRockets.lua:89: attempt to call a nil value (method 'IsPlayerControlled')
+[SMRTest] ERROR LanderReturnFuel         [behavior] Mod/SMR_CommunityOptInPack/Code/Opt_ClassicRockets.lua:89: attempt to call a nil value (method 'IsPlayerControlled')
+[mod] [SMRTest] FAIL  ShelterReflex            [behavior] habitat is 'unsuitable' while its life support is momentarily down — residents lose their home
+[SMRTest] FAIL  ShelterReflex            [behavior] habitat is 'unsuitable' while its life support is momentarily down — residents lose their home
+						Lua 0:00:47:005
+[mod] [SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[mod] [SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+						Lua 0:00:47:007
+[mod] [SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+						Lua 0:00:47:008
+[mod] [SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] FAIL  RocketDroneChurn         [behavior] a routine cargo refresh disconnects the command centers — every drone en route is sent to Idle
+[SMRTest] FAIL  RocketDroneChurn         [behavior] a routine cargo refresh disconnects the command centers — every drone en route is sent to Idle
+[mod] [SMRTest] FAIL  ShuttleTransportCache    [behavior] asking the same question twice recomputed it — the cache has been defeated rather than keyed correctly
+[SMRTest] FAIL  ShuttleTransportCache    [behavior] asking the same question twice recomputed it — the cache has been defeated rather than keyed correctly
+[mod] [SMRTest] FAIL  VacuumWalks              [behavior] no passage route looked up in vacuum — the colonist walks the surface on its oxygen timer
+[SMRTest] FAIL  VacuumWalks              [behavior] no passage route looked up in vacuum — the colonist walks the surface on its oxygen timer
+[mod] [SMRTest] FAIL  ArrivalDeaths            [behavior] an arrival standing on impassable ground was left there (SetPos false) — F53(a)'s snap is not installed
+[SMRTest] FAIL  ArrivalDeaths            [behavior] an arrival standing on impassable ground was left there (SetPos false) — F53(a)'s snap is not installed
+[mod] [SMRTest] FAIL  DroneUnreachableForever  [behavior] the failure is still stamped 2147483647 ms in the future after CleanUnreachables — vanilla's expiry can never reach it
+[SMRTest] FAIL  DroneUnreachableForever  [behavior] the failure is still stamped 2147483647 ms in the future after CleanUnreachables — vanilla's expiry can never reach it
+[mod] [SMRTest] FAIL  StaleReservations        [behavior] reservation carries no timestamp — nothing can ever release it
+[SMRTest] FAIL  StaleReservations        [behavior] reservation carries no timestamp — nothing can ever release it
+[mod] [SMRTest] FAIL  CrystalMysteryHang       [install] no CrystalFlyAway handler — the one-shot message is still unrecoverable if missed
+[SMRTest] FAIL  CrystalMysteryHang       [install] no CrystalFlyAway handler — the one-shot message is still unrecoverable if missed
+[mod] [SMRTest] FAIL  TouristSatisfaction      [behavior] 0->100 pays 20000 but 100->0 charges -40000 — satisfaction drifts down by 20000 per round trip
+[SMRTest] FAIL  TouristSatisfaction      [behavior] 0->100 pays 20000 but 100->0 charges -40000 — satisfaction drifts down by 20000 per round trip
+[mod] [SMRTest] FAIL  TrainPlatformWedge       [behavior] the guard raises (Lua/Units/ColonistTransport.lua:544: bad argument #2 to 'remove' (number expected, got table)) — the ticket is never discarded and the train never departs
+[SMRTest] FAIL  TrainPlatformWedge       [behavior] the guard raises (Lua/Units/ColonistTransport.lua:544: bad argument #2 to 'remove' (number expected, got table)) — the ticket is never discarded and the train never departs
+[mod] [SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] FAIL  CommandCenterNumbers     [behavior] 11 getter(s) missing (Metals, Concrete, Food, PreciousMetals, Polymers, MachineParts, Fuel, Electronics, Seeds, PreciousMinerals, WasteRock) — those rows render empty
+[SMRTest] FAIL  CommandCenterNumbers     [behavior] 11 getter(s) missing (Metals, Concrete, Food, PreciousMetals, Polymers, MachineParts, Fuel, Electronics, Seeds, PreciousMinerals, WasteRock) — those rows render empty
+[mod] [SMRTest] FAIL  DomeOverviewHighlight    [behavior] a below-threshold stat renders as 20 — the red tag is discarded
+[SMRTest] FAIL  DomeOverviewHighlight    [behavior] a below-threshold stat renders as 20 — the red tag is discarded
+[mod] [SMRTest] FAIL  PayloadTemplateRefill    [behavior] a row the player emptied comes back as 20 from the flight-policy template every time the dialog opens
+[SMRTest] FAIL  PayloadTemplateRefill    [behavior] a row the player emptied comes back as 20 from the flight-policy template every time the dialog opens
+[mod] [SMRTest] PASS  ClassicRockets           [behavior] a parked player rocket keeps 3500 fuel requested
+[SMRTest] PASS  ClassicRockets           [behavior] a parked player rocket keeps 3500 fuel requested
+[mod] [SMRTest] FAIL  SaveSanitizerTurbineBuff [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  SaveSanitizerTurbineBuff [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  SaveSanitizerUpgradeLeak [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  SaveSanitizerUpgradeLeak [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  LandscapeUnitFilter      [behavior] a colonist in the middle of boarding is reported as standing under the landscaping site — the scatter pass yanks them out of the vehicle they are entering
+[SMRTest] FAIL  LandscapeUnitFilter      [behavior] a colonist in the middle of boarding is reported as standing under the landscaping site — the scatter pass yanks them out of the vehicle they are entering
+[mod] [SMRTest] FAIL  SmallLandscapeSites      [behavior] a small landscaping site raises when a drone approaches it (Lua/Landscape/LandscapeConstructionSiteBase.lua:189: attempt to index a nil value (field '?')) — the drone's command thread dies and the job is never worked
+[SMRTest] FAIL  SmallLandscapeSites      [behavior] a small landscaping site raises when a drone approaches it (Lua/Landscape/LandscapeConstructionSiteBase.lua:189: attempt to index a nil value (field '?')) — the drone's command thread dies and the job is never worked
+[mod] [SMRTest] FAIL  DomeFreeSpaceMismatch    [behavior] a residence whose power is out counts as zero free space — the dome reads as full for births and immigration while ChooseResidence keeps assigning colonists into it
+[SMRTest] FAIL  DomeFreeSpaceMismatch    [behavior] a residence whose power is out counts as zero free space — the dome reads as full for births and immigration while ChooseResidence keeps assigning colonists into it
+[mod] [SMRTest] FAIL  FreedHousingNotice       [behavior] a home that just fell vacant does not offer itself to the dome's homeless — they wait for their own update, up to 12 game hours in a large colony
+[SMRTest] FAIL  FreedHousingNotice       [behavior] a home that just fell vacant does not offer itself to the dome's homeless — they wait for their own update, up to 12 game hours in a large colony
+[mod] [SMRTest] FAIL  ShuttleHubOffAvailable   [behavior] a hub switched off by the player still counts as available transport — colonists wait outside for shuttles that never launch
+[SMRTest] FAIL  ShuttleHubOffAvailable   [behavior] a hub switched off by the player still counts as available transport — colonists wait outside for shuttles that never launch
+[mod] [SMRTest] FAIL  AsteroidLanderAvailable  [behavior] a lander on the pad unloading is not counted — the player is told there are no available landers while it sits there
+[SMRTest] FAIL  AsteroidLanderAvailable  [behavior] a lander on the pad unloading is not counted — the player is told there are no available landers while it sits there
+[mod] [SMRTest] FAIL  AutoExportPriority       [behavior] a full hold went to Concrete (50000) and none to PreciousMinerals — capacity is handed out alphabetically, so bulk crowds the valuables out
+[SMRTest] FAIL  AutoExportPriority       [behavior] a full hold went to Concrete (50000) and none to PreciousMinerals — capacity is handed out alphabetically, so bulk crowds the valuables out
+[mod] [SMRTest] FAIL  MirrorSphereSite         [behavior] a finished site still evaluates actions — drones can be sent to work an excavation that is already complete
+[SMRTest] FAIL  MirrorSphereSite         [behavior] a finished site still evaluates actions — drones can be sent to work an excavation that is already complete
+[mod] [SMRTest] FAIL  GeneForging              [behavior] Gene Forging alone gives a rare-trait bonus of 0 instead of 50 — the tech is researched and then ignored
+[SMRTest] FAIL  GeneForging              [behavior] Gene Forging alone gives a rare-trait bonus of 0 instead of 50 — the tech is researched and then ignored
+[mod] [SMRTest] FAIL  DustSicknessDamage       [behavior] damage is a flat 10 whatever the roll — the randomised `change` the code computes is thrown away
+[SMRTest] FAIL  DustSicknessDamage       [behavior] damage is a flat 10 whatever the roll — the randomised `change` the code computes is thrown away
+						Lua 0:00:47:009
+[mod] [SMRTest] FAIL  DustSicknessBiorobots    [behavior] 4 of 4 Dust Sickness infection effects still accept Biorobots
+[SMRTest] FAIL  DustSicknessBiorobots    [behavior] 4 of 4 Dust Sickness infection effects still accept Biorobots
+[mod] [SMRTest] FAIL  DestroyedTunnels         [behavior] a destroyed tunnel still registers its pathfinding shortcut — rovers route through a ruin after every load
+[SMRTest] FAIL  DestroyedTunnels         [behavior] a destroyed tunnel still registers its pathfinding shortcut — rovers route through a ruin after every load
+[mod] [SMRTest] FAIL  UniversityOvertraining   [behavior] an automated extractor still asks for 12 geologists — universities keep graduating them for jobs nobody has to do
+[SMRTest] FAIL  UniversityOvertraining   [behavior] an automated extractor still asks for 12 geologists — universities keep graduating them for jobs nobody has to do
+[mod] [SMRTest] FAIL  TrainCargoDumping        [behavior] 5000 WasteRock dumped into a station with that resource switched off — the cargo planner hauls it straight back out
+[SMRTest] FAIL  TrainCargoDumping        [behavior] 5000 WasteRock dumped into a station with that resource switched off — the cargo planner hauls it straight back out
+[mod] [SMRTest] FAIL  RocketInteractGuard      [behavior] an RC Transport will still accept a load order on a UniversalTradeRocket — the shipped guard (RCTransport.lua:341) only names the pre-Relaunched TradeRocketBase
+[SMRTest] FAIL  RocketInteractGuard      [behavior] an RC Transport will still accept a load order on a UniversalTradeRocket — the shipped guard (RCTransport.lua:341) only names the pre-Relaunched TradeRocketBase
+[mod] [SMRTest] FAIL  TrackConnectorPingPong   [behavior] a building still destroys a live neighbour's connector element — the neighbour rebuilds it (TrackElement.lua:193-199) and the two ping-pong forever
+[SMRTest] FAIL  TrackConnectorPingPong   [behavior] a building still destroys a live neighbour's connector element — the neighbour rebuilds it (TrackElement.lua:193-199) and the two ping-pong forever
+[mod] [SMRTest] FAIL  TrackTunnelPowerBridge   [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  TrackTunnelPowerBridge   [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  GridGlobalStorage        [behavior] a colony with one hour of power reserve reports more than 2 sols (30030000 vs threshold 1440000) because an idle second map contributes a ~41-sol sentinel
+[SMRTest] FAIL  GridGlobalStorage        [behavior] a colony with one hour of power reserve reports more than 2 sols (30030000 vs threshold 1440000) because an idle second map contributes a ~41-sol sentinel
+[mod] [SMRTest] FAIL  LastTransmissionStorage  [behavior] 6 of 6 storage conditions have no Condition, so FactionLikeGlobalCondition:Eval returns 0 for them forever: TLEPowerStorage2Sols, TLENoPowerStorage, TLEWaterStorage2Sols, TLENoWaterStorage, TLEOxygenStorage2Sols, TLENoOxygenStorage
+[SMRTest] FAIL  LastTransmissionStorage  [behavior] 6 of 6 storage conditions have no Condition, so FactionLikeGlobalCondition:Eval returns 0 for them forever: TLEPowerStorage2Sols, TLENoPowerStorage, TLEWaterStorage2Sols, TLENoWaterStorage, TLEOxygenStorage2Sols, TLENoOxygenStorage
+[mod] [SMRTest] FAIL  TrainWaitTime            [behavior] after boarding, the travel clock still reaches 90000 back (the whole 90000-long platform wait) — ExitVehicle charges it again as Comfort and as train/track spent time
+[SMRTest] FAIL  TrainWaitTime            [behavior] after boarding, the travel clock still reaches 90000 back (the whole 90000-long platform wait) — ExitVehicle charges it again as Comfort and as train/track spent time
+[mod] [SMRTest] FAIL  GraphConsumedCaption     [behavior] the MachineParts caption reports 1 consumed but the bar beside it plots 10 — maintenance is missing from the caption
+[SMRTest] FAIL  GraphConsumedCaption     [behavior] the MachineParts caption reports 1 consumed but the bar beside it plots 10 — maintenance is missing from the caption
+[mod] [SMRTest] FAIL  MoraleComfortTooltip     [behavior] the Morale tooltip still sees Comfort as 75 (>= the high mark 70), so it prints a bonus UpdateMorale no longer applies (Colonist.lua:3963-3966)
+[SMRTest] FAIL  MoraleComfortTooltip     [behavior] the Morale tooltip still sees Comfort as 75 (>= the high mark 70), so it prints a bonus UpdateMorale no longer applies (Colonist.lua:3963-3966)
+[mod] [SMRTest] FAIL  StorageRateModifiers     [behavior] the grid element still charges at 1000/1000 after the rate properties changed to 7777/8888 — SupplyGrid.lua:167-168 reads these, and OnModifiableValueChanged never copies them
+[SMRTest] FAIL  StorageRateModifiers     [behavior] the grid element still charges at 1000/1000 after the rate properties changed to 7777/8888 — SupplyGrid.lua:167-168 reads these, and OnModifiableValueChanged never copies them
+[mod] [SMRTest] FAIL  SequenceLatents          [behavior] asked for 3 random objects of a 10-object label and got 10 — SA_Filters.lua:30-40 computes the count, shuffles, and returns the whole list
+[SMRTest] FAIL  SequenceLatents          [behavior] asked for 3 random objects of a 10-object label and got 10 — SA_Filters.lua:30-40 computes the count, shuffles, and returns the whole list
+[mod] [SMRTest] FAIL  FounderTraitNotification [behavior] a Founder gained the Gamer trait (group Positive) and no FounderGainsTrait notification was raised — ColonyViability.lua:282-286 indexes an array with a group name, so the check is always nil
+[SMRTest] FAIL  FounderTraitNotification [behavior] a Founder gained the Gamer trait (group Positive) and no FounderGainsTrait notification was raised — ColonyViability.lua:282-286 indexes an array with a group name, so the check is always nil
+[mod] [SMRTest] FAIL  IndependenceTerraforming [behavior] the tech discounts special projects by 10% while its own param1 ("decrease percent") says 20% — every other Independence tech has param1 equal to its effect
+[SMRTest] FAIL  IndependenceTerraforming [behavior] the tech discounts special projects by 10% while its own param1 ("decrease percent") says 20% — every other Independence tech has param1 equal to its effect
+[mod] [SMRTest] FAIL  TrackSalvageRefund       [behavior] a track paid for as three construction groups refunds 100 Metals instead of 300 — Track.lua:291 reads the stamp of elements[#elements] only, so every group but the last is uncounted
+[SMRTest] FAIL  TrackSalvageRefund       [behavior] a track paid for as three construction groups refunds 100 Metals instead of 300 — Track.lua:291 reads the stamp of elements[#elements] only, so every group but the last is uncounted
+[mod] [SMRTest] FAIL  LayoutTechLock           [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  LayoutTechLock           [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  TrainMinors              [behavior] after a salvage left the track with 4 elements its train cap is still 2 — Track.lua:65 is the only assignment to max_vehicles in the game and it runs once, at GameInit
+[SMRTest] FAIL  TrainMinors              [behavior] after a salvage left the track with 4 elements its train cap is still 2 — Track.lua:65 is the only assignment to max_vehicles in the game and it runs once, at GameInit
+[mod] [SMRTest] FAIL  DroneTransportMinors     [behavior] after a passability change the drone's unreachable_buildings is a plain table — Drone.lua:855 builds `{}` with no weak_keys_meta, so every unreachable building is now held alive by the drone that failed to reach it
+[SMRTest] FAIL  DroneTransportMinors     [behavior] after a passability change the drone's unreachable_buildings is a plain table — Drone.lua:855 builds `{}` with no weak_keys_meta, so every unreachable building is now held alive by the drone that failed to reach it
+[mod] [SMRTest] FAIL  AnomalyCaveInMap         [behavior] TriggerCaveIn(false, pos) raised (Lua/Buildings/CaveInRubble.lua:101: attempt to index a boolean value (local 'map')) — CaveInRubble.lua:101 calls map:MapFindNearest with no check, and UndergroundMap is a GameVar defaulting to false, which eight scenario call sites pass in unconditionally
+[SMRTest] FAIL  AnomalyCaveInMap         [behavior] TriggerCaveIn(false, pos) raised (Lua/Buildings/CaveInRubble.lua:101: attempt to index a boolean value (local 'map')) — CaveInRubble.lua:101 calls map:MapFindNearest with no check, and UndergroundMap is a GameVar defaulting to false, which eight scenario call sites pass in unconditionally
+[mod] [SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[mod] [SMRTest] FAIL  BombardmentSpread        [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  BombardmentSpread        [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  DisasterPredictionLeak   [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  DisasterPredictionLeak   [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  MeteorStormWedge         [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  MeteorStormWedge         [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  RainsDeadlock            [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  RainsDeadlock            [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  FirstAsteroidPrefabs     [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  FirstAsteroidPrefabs     [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  UpdateReport             [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  UpdateReport             [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  TrackShellLeak           [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  TrackShellLeak           [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  SaintBlessing            [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  SaintBlessing            [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  DustDevilsDescrMap       [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  DustDevilsDescrMap       [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  AsteroidVisitPrecedence  [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  AsteroidVisitPrecedence  [behavior] fix pack not loaded (bug reproduces)
+						Lua 0:00:47:010
+[mod] [SMRTest] FAIL  AstrogeologistExtractors [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  AstrogeologistExtractors [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  SinkholeIndestructible   [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  SinkholeIndestructible   [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  DustStormBreakMapFilter  [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  DustStormBreakMapFilter  [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] FAIL  DustDevilSpawnGate       [behavior] fix pack not loaded (bug reproduces)
+[SMRTest] FAIL  DustDevilSpawnGate       [behavior] fix pack not loaded (bug reproduces)
+[mod] [SMRTest] PASS  AcknowledgedWarnings     [behavior] dismissal stamps listed buildings, blocks their re-adds, skips the id-wide window; recovery re-arms
+[SMRTest] PASS  AcknowledgedWarnings     [behavior] dismissal stamps listed buildings, blocks their re-adds, skips the id-wide window; recovery re-arms
+[mod] [SMRTest] PASS  ResidencyControl         [behavior] closed dome refused to resettlers and arrivals; tourists and the safety fallback untouched
+[SMRTest] PASS  ResidencyControl         [behavior] closed dome refused to resettlers and arrivals; tourists and the safety fallback untouched
+[mod] [SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panel picks up whichever Artificial Sun is actually in range
+[SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panel picks up whichever Artificial Sun is actually in range
+[mod] [SMRTest] PASS  CohortHousing            [behavior] in-dome move + cross-dome tie-bypass work; employed/forced/no-slot/quarantine all left vanilla
+[SMRTest] PASS  CohortHousing            [behavior] in-dome move + cross-dome tie-bypass work; employed/forced/no-slot/quarantine all left vanilla
+[mod] [SMRTest] PASS  NoHomeless               [behavior] only the workforce-age UNEMPLOYED are pushed out, and only from a dome that has a Nursery or Retirement Home built and NO job opening they could take; employed/Senior/Child/tourist/housed/hotel-only/ping-pong/unsuitable/quarantine all left vanilla, the free-work door holds on BOTH sides so a flagged dome can still staff itself, and a shipped answer is never overridden except for the symmetric veto
+[SMRTest] PASS  NoHomeless               [behavior] only the workforce-age UNEMPLOYED are pushed out, and only from a dome that has a Nursery or Retirement Home built and NO job opening they could take; employed/Senior/Child/tourist/housed/hotel-only/ping-pong/unsuitable/quarantine all left vanilla, the free-work door holds on BOTH sides so a flagged dome can still staff itself, and a shipped answer is never overridden except for the symmetric veto
+						Lua 0:00:47:011
+[mod] [SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 2) and base removed both by id; account carry dial OFF BASE on entry (const 4 vs base 2) — set it to base before any human baseline read
+[SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 2) and base removed both by id; account carry dial OFF BASE on entry (const 4 vs base 2) — set it to base before any human baseline read
+[mod] [SMRTest] PASS  OptionsMenuOptIn         [behavior] default_options + 7 toggles + 2 D09 dials present, names match the opt-in registry, bridge helpers installed
+[SMRTest] PASS  OptionsMenuOptIn         [behavior] default_options + 7 toggles + 2 D09 dials present, names match the opt-in registry, bridge helpers installed
+[mod] [SMRTest] SKIP  OptionsMenuFixPack       [behavior] fix pack not loaded
+[SMRTest] SKIP  OptionsMenuFixPack       [behavior] fix pack not loaded
+[mod] [SMRTest] ---- 9 PASS, 68 FAIL, 10 SKIP, 1 ERROR ----
+[SMRTest] ---- 9 PASS, 68 FAIL, 10 SKIP, 1 ERROR ----
+[mod] [SP-b] TRY SMRTest.RunAll() b ok=true result=PASS=9 FAIL=68 SKIP=10 ERROR=1
+[SP-b] TRY SMRTest.RunAll() b ok=true result=PASS=9 FAIL=68 SKIP=10 ERROR=1
+[mod] [SP-b] SUITEBYNAME b :: FAIL (68) :: MeteorFrequency UpgradeModifierLeak NightShiftWork WispPower WispResearch TouristApplicants LanderEmptyLaunch LanderCargoRatchet ShelterReflex RocketDroneChurn ShuttleTransportCache VacuumWalks ArrivalDeaths DroneUnreachableForever StaleReservations CrystalMysteryHang TouristSatisfaction TrainPlatformWedge CommandCenterNumbers DomeOverviewHighlight PayloadTemplateRefill SaveSanitizerTurbineBuff SaveSanitizerUpgradeLeak LandscapeUnitFilter SmallLandscapeSites DomeFreeSpaceMismatch FreedHousingNotice ShuttleHubOffAvailable AsteroidLanderAvailable AutoExportPriority MirrorSphereSite GeneForging DustSicknessDamage DustSicknessBiorobots DestroyedTunnels UniversityOvertraining TrainCargoDumping RocketInteractGuard TrackConnectorPingPong TrackTunnelPowerBridge GridGlobalStorage LastTransmissionStorage TrainWaitTime GraphConsumedCaption MoraleComfortTooltip StorageRateModifiers SequenceLatents FounderTraitNotification IndependenceTerraforming TrackSalvageRefund LayoutTechLock TrainMinors DroneTransportMinors AnomalyCaveInMap BombardmentSpread DisasterPredictionLeak MeteorStormWedge RainsDeadlock FirstAsteroidPrefabs UpdateReport TrackShellLeak SaintBlessing DustDevilsDescrMap AsteroidVisitPrecedence AstrogeologistExtractors SinkholeIndestructible DustStormBreakMapFilter DustDevilSpawnGate
+[SP-b] SUITEBYNAME b :: FAIL (68) :: MeteorFrequency UpgradeModifierLeak NightShiftWork WispPower WispResearch TouristApplicants LanderEmptyLaunch LanderCargoRatchet ShelterReflex RocketDroneChurn ShuttleTransportCache VacuumWalks ArrivalDeaths DroneUnreachableForever StaleReservations CrystalMysteryHang TouristSatisfaction TrainPlatformWedge CommandCenterNumbers DomeOverviewHighlight PayloadTemplateRefill SaveSanitizerTurbineBuff SaveSanitizerUpgradeLeak LandscapeUnitFilter SmallLandscapeSites DomeFreeSpaceMismatch FreedHousingNotice ShuttleHubOffAvailable AsteroidLanderAvailable AutoExportPriority MirrorSphereSite GeneForging DustSicknessDamage DustSicknessBiorobots DestroyedTunnels UniversityOvertraining TrainCargoDumping RocketInteractGuard TrackConnectorPingPong TrackTunnelPowerBridge GridGlobalStorage LastTransmissionStorage TrainWaitTime GraphConsumedCaption MoraleComfortTooltip StorageRateModifiers SequenceLatents FounderTraitNotification IndependenceTerraforming TrackSalvageRefund LayoutTechLock TrainMinors DroneTransportMinors AnomalyCaveInMap BombardmentSpread DisasterPredictionLeak MeteorStormWedge RainsDeadlock FirstAsteroidPrefabs UpdateReport TrackShellLeak SaintBlessing DustDevilsDescrMap AsteroidVisitPrecedence AstrogeologistExtractors SinkholeIndestructible DustStormBreakMapFilter DustDevilSpawnGate
+[mod] [SP-b] SUITEBYNAME b :: ERROR (1) :: LanderReturnFuel
+[SP-b] SUITEBYNAME b :: ERROR (1) :: LanderReturnFuel
+[mod] [SP-b] SUITEBYNAME b :: SKIP (10) :: CaveInsNoDisasters MilestoneCrash TrainsToVoid BrokenTrackSalvage TrackSalvageWipe LakeEntombment GhostFarmOxygen LowStorageWarning TechDescriptionBuilding OptionsMenuFixPack
+[SP-b] SUITEBYNAME b :: SKIP (10) :: CaveInsNoDisasters MilestoneCrash TrainsToVoid BrokenTrackSalvage TrackSalvageWipe LakeEntombment GhostFarmOxygen LowStorageWarning TechDescriptionBuilding OptionsMenuFixPack
+[mod] [SP-b] SUITEBYNAME b :: PASS (9) :: FactionFundingCheck ClassicRockets AcknowledgedWarnings ResidencyControl MultipleSuns CohortHousing NoHomeless DroneStatDials OptionsMenuOptIn
+[SP-b] SUITEBYNAME b :: PASS (9) :: FactionFundingCheck ClassicRockets AcknowledgedWarnings ResidencyControl MultipleSuns CohortHousing NoHomeless DroneStatDials OptionsMenuOptIn
+[mod] [SP-b] STEP 5-suite END 0ms
+[SP-b] STEP 5-suite END 0ms
+[mod] [SP-b] ERRORWATCH SP-b — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== split-optins SP-b ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=5-suite loads_this_process=1
+[SP-b] ERRORWATCH SP-b — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== split-optins SP-b ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=5-suite loads_this_process=1
+[mod] [SP-b] SHUTDOWN done
+[SP-b] SHUTDOWN done
+						Lua 0:00:50:001
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:50:002
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:50:347
+
+
+*** Debug::Done()
+Time (ms)	50347
+
+

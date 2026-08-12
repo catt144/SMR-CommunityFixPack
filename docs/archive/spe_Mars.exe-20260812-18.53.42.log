@@ -1,0 +1,630 @@
+					Render 0:00:00:006
+*** executable info
+					Render 0:00:00:007
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	40%
+Disk Free      	760392 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:064
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:067
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:472
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:606
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:805
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:485
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:544
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:546
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:549
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Opt-In Pack (id SMR_CommunityOptInPack, v0.01-000) unpacked from appdata
+						Lua 0:00:17:892
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:896
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:897
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+						Lua 0:00:17:898
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+						Lua 0:00:17:899
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+						Lua 0:00:17:900
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+						Lua 0:00:17:901
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:902
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:17:903
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+						Lua 0:00:17:904
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+						Lua 0:00:17:905
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+						Lua 0:00:17:906
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+						Lua 0:00:17:907
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:459
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:532
+Reloading done in 975 ms
+						Lua 0:00:18:862
+[preset] Preset postprocess took 60 ms.
+						Lua 0:00:18:926
+479 / 479 particle streams loaded in 59 ms.
+						Lua 0:00:18:927
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:119
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:173
+[mod] [SP-e] === split-optins SP-e === watchdog 1200000ms
+[SP-e] === split-optins SP-e === watchdog 1200000ms
+[mod] [SP-e] STEP 1-waiting-menu BEGIN
+[SP-e] STEP 1-waiting-menu BEGIN
+[PdxSDK] Started up. Took 1617
+						Lua 0:00:19:200
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:620
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:722
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:723
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:635
+[mod] [SP-e] STEP 1-waiting-menu END 2500ms
+[SP-e] STEP 1-waiting-menu END 2500ms
+[mod] [SP-e] MODE ON DISK = CELL e — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[SP-e] MODE ON DISK = CELL e — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[mod] [SP-e] STEP 2-config-gate BEGIN
+[SP-e] STEP 2-config-gate BEGIN
+[mod] [SP-e] GATES config-gate/e ------------------------------------------------
+[SP-e] GATES config-gate/e ------------------------------------------------
+[mod] [SP-e] GATEREAD fix pack :: 74/74 active
+[SP-e] GATEREAD fix pack :: 74/74 active
+[mod] [SP-e] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[SP-e] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[mod] [SP-e] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[SP-e] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[mod] [SP-e] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[SP-e] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[mod] [SP-e] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[SP-e] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[mod] [SP-e] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[SP-e] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[mod] [SP-e] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[SP-e] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[mod] [SP-e] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[SP-e] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[mod] [SP-e] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[SP-e] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[mod] [SP-e] GATEREAD opt-in pack :: 8/8 active
+[SP-e] GATEREAD opt-in pack :: 8/8 active
+[mod] [SP-e] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[SP-e] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[mod] [SP-e] GATES config-gate/e :: fix pack 74/74 | opt-in pack 8/8 | map= | speed=1 | loads_this_process=0
+[SP-e] GATES config-gate/e :: fix pack 74/74 | opt-in pack 8/8 | map= | speed=1 | loads_this_process=0
+						Lua 0:00:21:636
+[mod] [SP-e] MODORDER config-gate/e :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[SP-e] MODORDER config-gate/e :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[mod] [SP-e] CONFIGGATE OK :: cell e :: fix pack present=true (wanted true) | opt-in present=true (wanted true) :: 74/74 and 8/8
+[SP-e] CONFIGGATE OK :: cell e :: fix pack present=true (wanted true) | opt-in present=true (wanted true) :: 74/74 and 8/8
+[mod] [SP-e] STEP 2-config-gate END 0ms
+[SP-e] STEP 2-config-gate END 0ms
+[mod] [SP-e] STEP 3-load-contract-world BEGIN
+[SP-e] STEP 3-load-contract-world BEGIN
+						Lua 0:00:21:741
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:748
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:781
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:525
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 72.8 MB/s, average read 4948 bytes.
+						Lua 0:00:30:498
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:505
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:30:554
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:570
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4569 — 4 element(s), connections 7 -> 6, duplicate node_idx 0 -> 0
+						Lua 0:00:30:571
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4619 — 23 element(s), connections 45 -> 44, duplicate node_idx 0 -> 0
+						Lua 0:00:30:574
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4730 — 43 element(s), connections 86 -> 84, duplicate node_idx 0 -> 0
+						Lua 0:00:30:579
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#12454 — 280 element(s), connections 559 -> 558, duplicate node_idx 0 -> 0
+						Lua 0:00:30:581
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#12528 — 32 element(s), connections 63 -> 62, duplicate node_idx 0 -> 0
+						Lua 0:00:30:587
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#12637 — 17 element(s), connections 34 -> 32, duplicate node_idx 0 -> 0
+						Lua 0:00:30:593
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#13418 — 67 element(s), connections 133 -> 132, duplicate node_idx 0 -> 0
+						Lua 0:00:30:595
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 7 of 17 track(s) walked (0 raised)
+						Lua 0:00:30:599
+Game Loaded in 8858 ms
+						Lua 0:00:30:651
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:466
+Game loaded on map BlankBigCanyonCMix_09 in 9830 ms
+[mod] [SP-e] LOAD OK #1 file=SPSTAGE.savegame.sav — LoadGame returned no error
+[SP-e] LOAD OK #1 file=SPSTAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:773
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:964
+[mod] [SP-e] READ speed: SetGameSpeed(1) call=true | before=5 after=1
+[SP-e] READ speed: SetGameSpeed(1) call=true | before=5 after=1
+[mod] [SP-e] STEP 3-load-contract-world END (no timing — this step blocks render mode)
+[SP-e] STEP 3-load-contract-world END (no timing — this step blocks render mode)
+[mod] [SP-e] STEP 4-write-contract BEGIN
+[SP-e] STEP 4-write-contract BEGIN
+[mod] [SP-e] GATES contract-world-loaded ------------------------------------------------
+[SP-e] GATES contract-world-loaded ------------------------------------------------
+[mod] [SP-e] GATEREAD fix pack :: 74/74 active
+[SP-e] GATEREAD fix pack :: 74/74 active
+[mod] [SP-e] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[SP-e] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[mod] [SP-e] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[SP-e] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[mod] [SP-e] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[SP-e] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[mod] [SP-e] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[SP-e] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[mod] [SP-e] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[SP-e] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[mod] [SP-e] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[SP-e] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[mod] [SP-e] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[SP-e] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[mod] [SP-e] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[SP-e] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[mod] [SP-e] GATEREAD opt-in pack :: 8/8 active
+[SP-e] GATEREAD opt-in pack :: 8/8 active
+[mod] [SP-e] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[SP-e] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[mod] [SP-e] GATES contract-world-loaded :: fix pack 74/74 | opt-in pack 8/8 | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=1
+[SP-e] GATES contract-world-loaded :: fix pack 74/74 | opt-in pack 8/8 | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=1
+[mod] [SP-e] DIALOPTS before-forcing-the-dials :: DroneSpeedDial=5x (type=string) | DroneCarryDial=+2 (type=string) — ⛔ the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[SP-e] DIALOPTS before-forcing-the-dials :: DroneSpeedDial=5x (type=string) | DroneCarryDial=+2 (type=string) — ⛔ the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[mod] [SP-e] DIALOPTS before-forcing-the-dials :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[SP-e] DIALOPTS before-forcing-the-dials :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [SP-e] INVENTORY before-write ==========================================
+[SP-e] INVENTORY before-write ==========================================
+[mod] [SP-e] INVROW before-write :: label_modifiers[Drone][SMRFixPack_DroneSpeedDial] = table: 0000018C85ADA858 (type=table truthy=true) | prop=move_speed percent=400 amount=0 id=false | modifiers on that label = 4 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[SP-e] INVROW before-write :: label_modifiers[Drone][SMRFixPack_DroneSpeedDial] = table: 0000018C85ADA858 (type=table truthy=true) | prop=move_speed percent=400 amount=0 id=false | modifiers on that label = 4 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[mod] [SP-e] INVROW before-write :: label_modifiers[Consts][SMRFixPack_DroneCarryDial] = table: 0000018C85ADD4B0 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 id=false | modifiers on that label = 38 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[SP-e] INVROW before-write :: label_modifiers[Consts][SMRFixPack_DroneCarryDial] = table: 0000018C85ADD4B0 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 id=false | modifiers on that label = 38 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[mod] [SP-e] INVROW before-write :: CONTROL UIColony.SMRFixPack_F48_StationConnectors = true (type=boolean truthy=true) — fix-pack side, never moved
+[SP-e] INVROW before-write :: CONTROL UIColony.SMRFixPack_F48_StationConnectors = true (type=boolean truthy=true) — fix-pack side, never moved
+						Lua 0:00:46:970
+[mod] [SP-e] INVPOP before-write :: scanned 3406 distinct labelled object(s) | Dome/MicroGHabitatBase = 11 | Building = 618
+[SP-e] INVPOP before-write :: scanned 3406 distinct labelled object(s) | Dome/MicroGHabitatBase = 11 | Building = 618
+[mod] [SP-e] INVROW before-write :: SMRFixPack_ack_notworking on 1 object(s) of 618 Building (Opt_AcknowledgedWarnings) | examples: MDSLaser#9057=true
+[SP-e] INVROW before-write :: SMRFixPack_ack_notworking on 1 object(s) of 618 Building (Opt_AcknowledgedWarnings) | examples: MDSLaser#9057=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_ack_notworking) = 1 | population=618 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_ack_notworking) = 1 | population=618 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVROW before-write :: SMRFixPack_closed_to_new_residents on 4 object(s) of 11 Dome/MicroGHabitatBase (Opt_ResidencyControl) | examples: DomeMedium#2285=false DomeMega#5276=false DomeMedium#6396=false GeoscapeDome#8299=true
+[SP-e] INVROW before-write :: SMRFixPack_closed_to_new_residents on 4 object(s) of 11 Dome/MicroGHabitatBase (Opt_ResidencyControl) | examples: DomeMedium#2285=false DomeMega#5276=false DomeMedium#6396=false GeoscapeDome#8299=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_closed_to_new_residents) = 4 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_closed_to_new_residents) = 4 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVROW before-write :: SMRFixPack_no_homeless on 2 object(s) of 11 Dome/MicroGHabitatBase (Opt_NoHomeless) | examples: DomeMega#5276=true DomeMedium#6396=true
+[SP-e] INVROW before-write :: SMRFixPack_no_homeless on 2 object(s) of 11 Dome/MicroGHabitatBase (Opt_NoHomeless) | examples: DomeMega#5276=true DomeMedium#6396=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_no_homeless) = 2 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_no_homeless) = 2 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVENTORY before-write END =======================================
+[SP-e] INVENTORY before-write END =======================================
+						Lua 0:00:46:974
+[mod] [SP-e] CONTRACT write :: subjects available :: 11 Dome/MicroGHabitatBase, 607 other Building
+[SP-e] CONTRACT write :: subjects available :: 11 Dome/MicroGHabitatBase, 607 other Building
+[mod] [SP-e] CONTRACT write :: FORCED WRITE :: SMRFixPack_closed_to_new_residents + SMRFixPack_no_homeless on every one of 11 dome(s); SMRFixPack_ack_notworking on 3 building(s)
+[SP-e] CONTRACT write :: FORCED WRITE :: SMRFixPack_closed_to_new_residents + SMRFixPack_no_homeless on every one of 11 dome(s); SMRFixPack_ack_notworking on 3 building(s)
+						Lua 0:00:46:983
+[mod] [SP-e] CONTRACT write :: SMRFixPack_ack_notworking now on 4 object(s), handles=[2851,5342,6300,9057]
+[SP-e] CONTRACT write :: SMRFixPack_ack_notworking now on 4 object(s), handles=[2851,5342,6300,9057]
+						Lua 0:00:46:984
+[mod] [SP-e] CONTRACT write :: SMRFixPack_closed_to_new_residents now on 11 object(s), handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[SP-e] CONTRACT write :: SMRFixPack_closed_to_new_residents now on 11 object(s), handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[mod] [SP-e] CONTRACT write :: SMRFixPack_no_homeless now on 11 object(s), handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[SP-e] CONTRACT write :: SMRFixPack_no_homeless now on 11 object(s), handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[mod] [SP-e] DIALSET contract :: entry values DroneSpeedDial=5x DroneCarryDial=+2 (restored in every branch)
+[SP-e] DIALSET contract :: entry values DroneSpeedDial=5x DroneCarryDial=+2 (restored in every branch)
+[mod] [SP-e] TRY Msg ApplyModOptions (dials -> 3x / +2) ok=true result=sent
+[SP-e] TRY Msg ApplyModOptions (dials -> 3x / +2) ok=true result=sent
+[mod] [SP-e] DIALOPTS after-forcing-the-dials :: DroneSpeedDial=3x (type=string) | DroneCarryDial=+2 (type=string) — ⛔ the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[SP-e] DIALOPTS after-forcing-the-dials :: DroneSpeedDial=3x (type=string) | DroneCarryDial=+2 (type=string) — ⛔ the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[mod] [SP-e] DIALOPTS after-forcing-the-dials :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[SP-e] DIALOPTS after-forcing-the-dials :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [SP-e] INVENTORY after-write ==========================================
+[SP-e] INVENTORY after-write ==========================================
+[mod] [SP-e] INVROW after-write :: label_modifiers[Drone][SMRFixPack_DroneSpeedDial] = table: 0000018C85DC3B30 (type=table truthy=true) | prop=move_speed percent=200 amount=0 id=false | modifiers on that label = 4 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[SP-e] INVROW after-write :: label_modifiers[Drone][SMRFixPack_DroneSpeedDial] = table: 0000018C85DC3B30 (type=table truthy=true) | prop=move_speed percent=200 amount=0 id=false | modifiers on that label = 4 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[mod] [SP-e] INVROW after-write :: label_modifiers[Consts][SMRFixPack_DroneCarryDial] = table: 0000018C854A66F8 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 id=false | modifiers on that label = 38 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[SP-e] INVROW after-write :: label_modifiers[Consts][SMRFixPack_DroneCarryDial] = table: 0000018C854A66F8 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 id=false | modifiers on that label = 38 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[mod] [SP-e] INVROW after-write :: CONTROL UIColony.SMRFixPack_F48_StationConnectors = true (type=boolean truthy=true) — fix-pack side, never moved						Lua 0:00:46:985
+
+[SP-e] INVROW after-write :: CONTROL UIColony.SMRFixPack_F48_StationConnectors = true (type=boolean truthy=true) — fix-pack side, never moved
+						Lua 0:00:46:990
+[mod] [SP-e] INVPOP after-write :: scanned 3406 distinct labelled object(s) | Dome/MicroGHabitatBase = 11 | Building = 618
+[SP-e] INVPOP after-write :: scanned 3406 distinct labelled object(s) | Dome/MicroGHabitatBase = 11 | Building = 618
+[mod] [SP-e] INVROW after-write :: SMRFixPack_ack_notworking on 4 object(s) of 618 Building (Opt_AcknowledgedWarnings) | examples: Spacebar#2851=true Spacebar#5342=true Spacebar_Small#6300=true MDSLaser#9057=true
+[SP-e] INVROW after-write :: SMRFixPack_ack_notworking on 4 object(s) of 618 Building (Opt_AcknowledgedWarnings) | examples: Spacebar#2851=true Spacebar#5342=true Spacebar_Small#6300=true MDSLaser#9057=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_ack_notworking) = 4 | population=618 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_ack_notworking) = 4 | population=618 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVROW after-write :: SMRFixPack_closed_to_new_residents on 11 object(s) of 11 Dome/MicroGHabitatBase (Opt_ResidencyControl) | examples: DomeBasic#1243=true DomeMedium#1367=true DomeBasic#1506=true DomeMedium#2285=true DomeMedium#2653=true DomeMega#2962=true
+[SP-e] INVROW after-write :: SMRFixPack_closed_to_new_residents on 11 object(s) of 11 Dome/MicroGHabitatBase (Opt_ResidencyControl) | examples: DomeBasic#1243=true DomeMedium#1367=true DomeBasic#1506=true DomeMedium#2285=true DomeMedium#2653=true DomeMega#2962=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_closed_to_new_residents) = 11 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_closed_to_new_residents) = 11 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVROW after-write :: SMRFixPack_no_homeless on 11 object(s) of 11 Dome/MicroGHabitatBase (Opt_NoHomeless) | examples: DomeBasic#1243=true DomeMedium#1367=true DomeBasic#1506=true DomeMedium#2285=true DomeMedium#2653=true DomeMega#2962=true
+[SP-e] INVROW after-write :: SMRFixPack_no_homeless on 11 object(s) of 11 Dome/MicroGHabitatBase (Opt_NoHomeless) | examples: DomeBasic#1243=true DomeMedium#1367=true DomeBasic#1506=true DomeMedium#2285=true DomeMedium#2653=true DomeMega#2962=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_no_homeless) = 11 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_no_homeless) = 11 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVENTORY after-write END =======================================
+[SP-e] INVENTORY after-write END =======================================
+[mod] [SP-e] STEP 4-write-contract END 0ms
+[SP-e] STEP 4-write-contract END 0ms
+[mod] [SP-e] STEP 5-save-and-reload BEGIN
+[SP-e] STEP 5-save-and-reload BEGIN
+						Lua 0:00:47:571
+[mod] [SP-e] SAVE SaveGame returned err=false name=SPCONRT.savegame.sav
+[SP-e] SAVE SaveGame returned err=false name=SPCONRT.savegame.sav
+[mod] [SP-e] TRY SaveGame SPCONRT.savegame.sav (yielding) ok=true result=false
+[SP-e] TRY SaveGame SPCONRT.savegame.sav (yielding) ok=true result=false
+						Lua 0:00:48:048
+[mod] [SP-e] SAVE WITNESS for SPCONRT.savegame.sav = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+[SP-e] SAVE WITNESS for SPCONRT.savegame.sav = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+						Lua 0:00:48:178
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:53:360
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:53:367
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:53:386
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+						Lua 0:00:53:387
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:53:404
+Game Loaded in 5226 ms
+						Lua 0:00:53:448
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:54:056
+Game loaded on map BlankBigCanyonCMix_09 in 6008 ms
+[mod] [SP-e] LOAD OK #2 file=SPCONRT.savegame.sav — LoadGame returned no error
+[SP-e] LOAD OK #2 file=SPCONRT.savegame.sav — LoadGame returned no error
+						Lua 0:00:55:360
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:56:359
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:09:555
+[mod] [SP-e] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[SP-e] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+						Lua 0:01:09:556
+[mod] [SP-e] STEP 5-save-and-reload END (no timing — this step blocks render mode)
+[SP-e] STEP 5-save-and-reload END (no timing — this step blocks render mode)
+[mod] [SP-e] STEP 6-verify-contract BEGIN
+[SP-e] STEP 6-verify-contract BEGIN
+[mod] [SP-e] GATES contract-round-tripped ------------------------------------------------
+[SP-e] GATES contract-round-tripped ------------------------------------------------
+[mod] [SP-e] GATEREAD fix pack :: 74/74 active
+[SP-e] GATEREAD fix pack :: 74/74 active
+[mod] [SP-e] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[SP-e] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[mod] [SP-e] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[SP-e] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[mod] [SP-e] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[SP-e] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[mod] [SP-e] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[SP-e] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[mod] [SP-e] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[SP-e] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[mod] [SP-e] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[SP-e] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[mod] [SP-e] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[SP-e] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[mod] [SP-e] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[SP-e] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[mod] [SP-e] GATEREAD opt-in pack :: 8/8 active
+[SP-e] GATEREAD opt-in pack :: 8/8 active
+[mod] [SP-e] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[SP-e] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[mod] [SP-e] GATES contract-round-tripped :: fix pack 74/74 | opt-in pack 8/8 | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=2
+[SP-e] GATES contract-round-tripped :: fix pack 74/74 | opt-in pack 8/8 | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=2
+[mod] [SP-e] DIALOPTS after-round-trip :: DroneSpeedDial=3x (type=string) | DroneCarryDial=+2 (type=string) — ⛔ the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[SP-e] DIALOPTS after-round-trip :: DroneSpeedDial=3x (type=string) | DroneCarryDial=+2 (type=string) — ⛔ the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[mod] [SP-e] DIALOPTS after-round-trip :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[SP-e] DIALOPTS after-round-trip :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [SP-e] INVENTORY after-round-trip ==========================================
+[SP-e] INVENTORY after-round-trip ==========================================
+[mod] [SP-e] INVROW after-round-trip :: label_modifiers[Drone][SMRFixPack_DroneSpeedDial] = table: 0000018C8E0E8F90 (type=table truthy=true) | prop=move_speed percent=200 amount=0 id=false | modifiers on that label = 4 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[SP-e] INVROW after-round-trip :: label_modifiers[Drone][SMRFixPack_DroneSpeedDial] = table: 0000018C8E0E8F90 (type=table truthy=true) | prop=move_speed percent=200 amount=0 id=false | modifiers on that label = 4 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[mod] [SP-e] INVROW after-round-trip :: label_modifiers[Consts][SMRFixPack_DroneCarryDial] = table: 0000018C8E0E9030 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 id=false | modifiers on that label = 38 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[SP-e] INVROW after-round-trip :: label_modifiers[Consts][SMRFixPack_DroneCarryDial] = table: 0000018C8E0E9030 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 id=false | modifiers on that label = 38 — read this beside the DIALOPTS line: ABSENT is correct at a BASE dial, PRESENT is correct at a non-base dial (Opt_DroneStatDials.lua:42-44)
+[mod] [SP-e] INVROW after-round-trip :: CONTROL UIColony.SMRFixPack_F48_StationConnectors = true (type=boolean truthy=true) — fix-pack side, never moved
+[SP-e] INVROW after-round-trip :: CONTROL UIColony.SMRFixPack_F48_StationConnectors = true (type=boolean truthy=true) — fix-pack side, never moved
+						Lua 0:01:09:562
+[mod] [SP-e] INVPOP after-round-trip :: scanned 3411 distinct labelled object(s) | Dome/MicroGHabitatBase = 11 | Building = 618
+[SP-e] INVPOP after-round-trip :: scanned 3411 distinct labelled object(s) | Dome/MicroGHabitatBase = 11 | Building = 618
+[mod] [SP-e] INVROW after-round-trip :: SMRFixPack_ack_notworking on 4 object(s) of 618 Building (Opt_AcknowledgedWarnings) | examples: Spacebar#2851=true Spacebar#5342=true Spacebar_Small#6300=true MDSLaser#9057=true
+[SP-e] INVROW after-round-trip :: SMRFixPack_ack_notworking on 4 object(s) of 618 Building (Opt_AcknowledgedWarnings) | examples: Spacebar#2851=true Spacebar#5342=true Spacebar_Small#6300=true MDSLaser#9057=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_ack_notworking) = 4 | population=618 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_ack_notworking) = 4 | population=618 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVROW after-round-trip :: SMRFixPack_closed_to_new_residents on 11 object(s) of 11 Dome/MicroGHabitatBase (Opt_ResidencyControl) | examples: DomeBasic#1243=true DomeMedium#1367=true DomeBasic#1506=true DomeMedium#2285=true DomeMedium#2653=true DomeMega#2962=true
+[SP-e] INVROW after-round-trip :: SMRFixPack_closed_to_new_residents on 11 object(s) of 11 Dome/MicroGHabitatBase (Opt_ResidencyControl) | examples: DomeBasic#1243=true DomeMedium#1367=true DomeBasic#1506=true DomeMedium#2285=true DomeMedium#2653=true DomeMega#2962=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_closed_to_new_residents) = 11 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_closed_to_new_residents) = 11 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVROW after-round-trip :: SMRFixPack_no_homeless on 11 object(s) of 11 Dome/MicroGHabitatBase (Opt_NoHomeless) | examples: DomeBasic#1243=true DomeMedium#1367=true DomeBasic#1506=true DomeMedium#2285=true DomeMedium#2653=true DomeMega#2962=true
+[SP-e] INVROW after-round-trip :: SMRFixPack_no_homeless on 11 object(s) of 11 Dome/MicroGHabitatBase (Opt_NoHomeless) | examples: DomeBasic#1243=true DomeMedium#1367=true DomeBasic#1506=true DomeMedium#2285=true DomeMedium#2653=true DomeMega#2962=true
+[mod] [SP-e] READ cell-d-row(SMRFixPack_no_homeless) = 11 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[SP-e] READ cell-d-row(SMRFixPack_no_homeless) = 11 | population=11 | APPLICABLE=true | witness=every labelled object of every city walked this load; own keys only, `next` never walks the metatable chain
+[mod] [SP-e] INVENTORY after-round-trip END =======================================
+[SP-e] INVENTORY after-round-trip END =======================================
+						Lua 0:01:09:565
+[mod] [SP-e] CONTRACTVERIFY after-round-trip :: SMRFixPack_ack_notworking :: before 4 object(s) [2851,5342,6300,9057] -> after 4 object(s) [2851,5342,6300,9057] :: IDENTICAL — the exact bytes survived the round trip on the same objects
+[SP-e] CONTRACTVERIFY after-round-trip :: SMRFixPack_ack_notworking :: before 4 object(s) [2851,5342,6300,9057] -> after 4 object(s) [2851,5342,6300,9057] :: IDENTICAL — the exact bytes survived the round trip on the same objects
+						Lua 0:01:09:568
+[mod] [SP-e] CONTRACTVERIFY after-round-trip :: SMRFixPack_closed_to_new_residents :: before 11 object(s) [1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984] -> after 11 object(s) [1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984] :: IDENTICAL — the exact bytes survived the round trip on the same objects
+[SP-e] CONTRACTVERIFY after-round-trip :: SMRFixPack_closed_to_new_residents :: before 11 object(s) [1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984] -> after 11 object(s) [1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984] :: IDENTICAL — the exact bytes survived the round trip on the same objects
+						Lua 0:01:09:571
+[mod] [SP-e] CONTRACTVERIFY after-round-trip :: SMRFixPack_no_homeless :: before 11 object(s) [1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984] -> after 11 object(s) [1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984] :: IDENTICAL — the exact bytes survived the round trip on the same objects
+[SP-e] CONTRACTVERIFY after-round-trip :: SMRFixPack_no_homeless :: before 11 object(s) [1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984] -> after 11 object(s) [1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984] :: IDENTICAL — the exact bytes survived the round trip on the same objects
+[mod] [SP-e] CONTRACTVERIFY after-round-trip :: 0 of 3 field(s) broke the save contract
+[SP-e] CONTRACTVERIFY after-round-trip :: 0 of 3 field(s) broke the save contract
+[mod] [SMRTest][carry] === FIXTURE CARRY DUMP ===
+=== FIXTURE CARRY DUMP ===
+[mod] [SMRTest][carry] -- GameVars --
+-- GameVars --
+[mod] [SMRTest][carry]   SMRFixPack_FirstAsteroidPrefabs = false
+  SMRFixPack_FirstAsteroidPrefabs = false
+[mod] [SMRTest][carry]   SMRFixPack_DroneSpeedDial = (absent)
+  SMRFixPack_DroneSpeedDial = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_DroneCarryDial = (absent)
+  SMRFixPack_DroneCarryDial = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_MeteorLatch = 1.0.1
+  SMRFixPack_MeteorLatch = 1.0.1
+[mod] [SMRTest][carry] -- RainsDisasterThreads (loop_version = migrated; legacy = pre-rewrite) --
+-- RainsDisasterThreads (loop_version = migrated; legacy = pre-rewrite) --
+[mod] [SMRTest][carry]   normal: loop_version=1.0.1  legacy_fixed_loop=nil  thread_alive=true  id=Normal_VeryLow
+  normal: loop_version=1.0.1  legacy_fixed_loop=nil  thread_alive=true  id=Normal_VeryLow
+[mod] [SMRTest][carry]   toxic: loop_version=nil  legacy_fixed_loop=nil  thread_alive=false  id=nil
+  toxic: loop_version=nil  legacy_fixed_loop=nil  thread_alive=false  id=nil
+[mod] [SMRTest][carry]   NOTE: loop_version = the pack version whose migration pass last
+  NOTE: loop_version = the pack version whose migration pass last
+[mod] [SMRTest][carry]   moved this loop onto vanilla's body; a differing/absent version
+  moved this loop onto vanilla's body; a differing/absent version
+[mod] [SMRTest][carry]   migrates on next load. legacy_fixed_loop=true means the fixture
+  migrates on next load. legacy_fixed_loop=true means the fixture
+[mod] [SMRTest][carry]   has not been loaded since the 2026-08-01 rewrite.
+  has not been loaded since the 2026-08-01 rewrite.
+[mod] [SMRTest][carry] -- patched global threads (body identity is NOT readable: no debug) --
+-- patched global threads (body identity is NOT readable: no debug) --
+[mod] [SMRTest][carry]   Meteors: thread: 0000018C8DFF0B28, valid=true
+  Meteors: thread: 0000018C8DFF0B28, valid=true
+[mod] [SMRTest][carry]   MeteorStorm: thread: 0000018C8C464080, valid=true
+  MeteorStorm: thread: 0000018C8C464080, valid=true
+[mod] [SMRTest][carry] -- instance fields on live objects --
+-- instance fields on live objects --
+						Lua 0:01:09:634
+[mod] [SMRTest][carry]   scanned 3411 distinct labelled objects
+  scanned 3411 distinct labelled objects
+[mod] [SMRTest][carry]     SMRFixPack_reserved_at on 1336 object(s)
+    SMRFixPack_reserved_at on 1336 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_rocket_fuel_key on 0 object(s)
+    SMRFixPack_rocket_fuel_key on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_payload_set on 3 object(s)
+    SMRFixPack_payload_set on 3 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_shelter_try on 0 object(s)
+    SMRFixPack_shelter_try on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_closed_to_new_residents on 11 object(s)
+    SMRFixPack_closed_to_new_residents on 11 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_ack_notworking on 4 object(s)
+    SMRFixPack_ack_notworking on 4 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_no_homeless on 11 object(s)
+    SMRFixPack_no_homeless on 11 object(s)
+[mod] [SMRTest][carry]     (no unexpected SMRFixPack_* fields)
+    (no unexpected SMRFixPack_* fields)
+[mod] [SMRTest][carry] -- label modifiers --
+-- label modifiers --
+[mod] [SMRTest][carry]   NOT INSPECTABLE from here — the modifier store was not found by a
+  NOT INSPECTABLE from here — the modifier store was not found by a
+[mod] [SMRTest][carry]   shallow scan. Absence here is NOT evidence of absence.
+  shallow scan. Absence here is NOT evidence of absence.
+[mod] [SMRTest][carry] === END DUMP ===
+=== END DUMP ===
+[mod] [SP-e] TRY SMRTest.FixtureCarry() (contract) ok=true result=done
+[SP-e] TRY SMRTest.FixtureCarry() (contract) ok=true result=done
+[mod] [SP-e] STEP 6-verify-contract END 0ms
+[SP-e] STEP 6-verify-contract END 0ms
+[mod] [SP-e] STEP 7-restore-dials BEGIN
+[SP-e] STEP 7-restore-dials BEGIN
+						Lua 0:01:09:635
+[mod] [SP-e] TRY Msg ApplyModOptions (dials RESTORE) ok=true result=sent
+[SP-e] TRY Msg ApplyModOptions (dials RESTORE) ok=true result=sent
+[mod] [SP-e] DIALSET contract :: entry values restored
+[SP-e] DIALSET contract :: entry values restored
+[mod] [SP-e] STEP 7-restore-dials END 0ms
+[SP-e] STEP 7-restore-dials END 0ms
+[mod] [SP-e] ERRORWATCH SP-e — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== split-optins SP-e ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=7-restore-dials loads_this_process=2
+[SP-e] ERRORWATCH SP-e — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== split-optins SP-e ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=7-restore-dials loads_this_process=2
+[mod] [SP-e] SHUTDOWN done
+[SP-e] SHUTDOWN done
+						Lua 0:01:12:555
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:12:556
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:12:914
+
+
+*** Debug::Done()
+Time (ms)	72914
+
+

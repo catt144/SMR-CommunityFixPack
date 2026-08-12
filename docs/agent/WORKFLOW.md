@@ -480,6 +480,18 @@ not an achievement.
   slipped sitting can never leave a probe armed.
 - **Runs use a designated COPY of a provisioned save, never the campaign
   save** (FIX_POLICY §3a discipline applies to experiments, not just fixes).
+  ⛔⛔ **AMENDED 2026-08-12 (`agent/facts/EF-056`), after this rule proved to
+  protect the wrong thing: A COPY OF A CAMPAIGN IS STILL THAT CAMPAIGN, and its
+  AUTOSAVE keeps running.** The `split-optins` matrix loaded copies of `CP60RT`
+  and `Autosave Sol 311`, the game wrote its own `Autosave Sol 311(2)`, and
+  `Autosave()`'s rotation (`Savegame.lua:1524-1526`, a loop starting **AT**
+  `AutosaveCount`, not after it) then deleted the owner's `Autosave Sol 306` and
+  `Sol 311`. `Sol 311` came back only because the leg happened to hold a byte
+  copy of it; **`Sol 306` is unrecoverable.** ⇒ **Any leg that loads a copy of a
+  real campaign BYTE-COPIES EVERY AUTOSAVE FIRST and lists them by name at
+  close-out** — the same discipline already applied to saves a leg stages
+  deliberately. The rule as written protected the campaign FILE and said nothing
+  about the save DIRECTORY, which is where the damage happened.
 - **The probe-hygiene hard gate applies unchanged** — sweep before, probes
   deleted in the commit that records their answer.
 - ⛔ **The forced-vs-organic rule (the F99 lesson):** forcing an *upstream

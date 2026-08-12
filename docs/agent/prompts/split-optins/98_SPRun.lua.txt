@@ -1,0 +1,209 @@
+-- SMR Community Fix Pack — Test Kit :: split-optins MATRIX PAYLOAD. TEMPORARY
+--
+-- Declared by: split-optins chain prompt 4 (04_OPUS_VERIFY.md).
+--
+-- ONE file, one CELL per launch. SP_ARM.ps1 rewrites the CELL line below off
+-- disk and reads it back, so a cell can never be mistaken for another after the
+-- fact (the REHEARSAL-flag shape from unattended-2, generalised to six values).
+--
+-- ⛔ EVERY CELL IS A DIFFERENT MOD CONFIGURATION and a Mod-Manager/junction
+--    change needs a FULL PROCESS RESTART (D13's four-states rule). SP.RequireConfig
+--    STOPS the run when the process is not the cell it claims to be — the amended
+--    batch-2 rule 7: a gate whose only output is a line in a log is not a gate.
+--
+-- THE CELLS (predictions come from 90_DESIGN.md §6.2 as amended by prompt 3):
+--   a2       both mods, opt-in toggles ON      fix 74/74 + opt 8/8 | 78/0/10/0 of 88
+--   a1       both mods, toggles OFF in-session fix 74/74 + opt 1/8 | 72/0/16/0 of 88
+--   c        fix pack ALONE (opt-in absent)    fix 74/74 + opt ABSENT | 70/0/18/0 of 88
+--   b        opt-in ALONE (fix pack absent)    fix ABSENT + opt 8/8 | the 8 opt probes
+--                                              as in a2; every other probe FAIL or
+--                                              SKIP and NONE PASS
+--   d        save witness, both mods           the persisted-name inventory, twice
+--   restore  both mods, standing config        gate read only — the close-out control
+--
+-- ⛔ THE SUITE WORLD IS FIXED ACROSS CELLS. Every suite cell loads the SAME
+--    staged copy, because the displaced baseline (77/0/10/0, u2run3 log :983)
+--    was measured on this world and a tally taken on a different one is not
+--    comparable — the [state] probes read the colony. Cell (d) uses its own
+--    witness save and is deliberately NOT tallied against the baseline.
+
+local CELL = "a2"   -- ⛔ REWRITTEN BY SP_ARM.ps1 AND READ BACK OFF DISK
+
+local SUITE_SAVE  = "SPSTAGE.savegame.sav"   -- byte copy of PT35FIXTURE
+local CONTRACT_RT = "SPCONRT.savegame.sav"   -- cell (e)'s R4 round trip, written in-run
+
+-- ⛔ Copy-only, every one of them (EF-051). Names are VERBATIM (EF-050).
+local WITNESSES = {
+	{ name = "SPWIT",  file = "SPWIT.savegame.sav",  origin = "CP15PT15 (KEPT save, MD5 D2887D754C44134141B6CCC4C9020446)" },
+	{ name = "SPWITB", file = "SPWITB.savegame.sav", origin = "CP60RT (HELD save, MD5 7467573DB43EF0D61ED36FE50A131EE6)" },
+	{ name = "SPWITC", file = "SPWITC.savegame.sav", origin = "Autosave Sol 311 (HELD save, MD5 D5BCCF2CB758D5E5EA0706D671602AF5)" },
+}
+
+SP.tag = "SP-" .. CELL
+
+local CONFIG = {
+	a2      = { fix = true,  opt = true  },
+	a1      = { fix = true,  opt = true  },
+	c       = { fix = true,  opt = false },
+	b       = { fix = false, opt = true  },
+	d       = { fix = true,  opt = true  },
+	e       = { fix = true,  opt = true  },
+	restore = { fix = true,  opt = true  },
+}
+
+local WATCHDOG = {
+	a2 = 30 * 60 * 1000, a1 = 30 * 60 * 1000, c  = 30 * 60 * 1000,
+	b  = 30 * 60 * 1000, d  = 30 * 60 * 1000, e  = 20 * 60 * 1000,
+	restore = 10 * 60 * 1000,
+}
+SP.watchdog = WATCHDOG[CELL] or 25 * 60 * 1000
+
+function SP.Payload()
+	SP.Say("MODE ON DISK = CELL " .. tostring(CELL)
+		.. " — this banner is the cell's identity; the ARM gate printed the same value off disk before launch")
+
+	local cfg = CONFIG[CELL]
+	if not cfg then
+		SP.Say("PAYLOAD ⛔ unknown CELL '" .. tostring(CELL) .. "' — nothing will be measured")
+		return
+	end
+
+	-- ⛔ THE CONFIG GATE, BEFORE ANY READING. It stops.
+	if not SP.Step("2-config-gate", function()
+		return SP.RequireConfig(CELL, cfg.fix, cfg.opt)
+	end) then return end
+
+	if CELL == "restore" then
+		-- The close-out control: prove the rig is back in its STANDING
+		-- configuration (README rule 12) after the junction round trips, with
+		-- both registries reading what cell (a2) read. No save is touched.
+		SP.Step("3-standing-config-readback", function()
+			SP.ReadGates("standing-config")
+			SP.ReadModOrder("standing-config")
+		end)
+		SP.ErrorWatchNote()
+		return
+	end
+
+	if CELL == "d" then
+		-- ============ CELL (d) — THE PASSIVE SAVE WITNESSES ============
+		-- ⛔ Byte COPIES of KEPT/HELD saves (EF-051 copy-only). Every original's
+		--    MD5 is taken agent-side before and after; nothing here writes to one.
+		-- ⛔ THREE witnesses, because run 1 proved ONE is not enough: CP15PT15
+		--    read 0/0/0 against a population of ONE dome, which is the design's
+		--    own "thin witness" clause firing. CP60RT and Autosave Sol 311 are
+		--    the owner's real 300-sol campaign and carry the domes a policy flag
+		--    could ever have been set on.
+		SP.Step("3-dial-positions", function()
+			-- ⛔ read BEFORE any load: this is the account state the dial
+			--    prediction actually rests on, and run 1 could not adjudicate
+			--    its own miss without it.
+			SP.ReadDialOptions("before-any-load")
+		end)
+		for i, w in ipairs(WITNESSES) do
+			local first, second
+			if not SP.Step(SP.Fmt("%d-load-witness-%s", 3 + i, w.name), function()
+				return SP.Load(w.file, 1) and true or false
+			end, true) then return end
+			SP.Step(SP.Fmt("%d-inventory-%s", 3 + i, w.name), function()
+				SP.Say("WITNESS " .. w.name .. " = a byte copy of " .. w.origin
+					.. " — savename VERBATIM (EF-050), copy-only (EF-051)")
+				SP.ReadGates("witness-" .. w.name)
+				SP.ReadDialOptions("witness-" .. w.name)
+				first = SP.ReadInventory(w.name .. "/after-load")
+				-- the kit's own independent reader, over BOTH prefixes, as a
+				-- cross-check on the one above (two readers, one answer)
+				local kit = rawget(_G, "SMRTest")
+				if kit and kit.FixtureCarry then SP.Try("SMRTest.FixtureCarry() " .. w.name, kit.FixtureCarry) end
+			end)
+			-- R4: save + reload once, then read every row again.
+			local rt = w.name .. "RT.savegame.sav"
+			if not SP.Step(SP.Fmt("%d-round-trip-%s", 3 + i, w.name), function()
+				if not SP.Save(rt) then return false end
+				return SP.Load(rt, 1) and true or false
+			end, true) then return end
+			SP.Step(SP.Fmt("%d-inventory-rt-%s", 3 + i, w.name), function()
+				second = SP.ReadInventory(w.name .. "/after-round-trip")
+				SP.DiffInventory(first, second, w.name .. " load -> save -> reload")
+			end)
+		end
+		SP.ErrorWatchNote()
+		return
+	end
+
+	if CELL == "e" then
+		-- ============ CELL (e) — THE ACTIVE SAVE-CONTRACT ROUND TRIP ============
+		-- Not in the design. It exists because cell (d) run 1 measured a THIN
+		-- witness and a passive read cannot be argued out of that: if the owner
+		-- never used these policies, no staged save carries them. This writes
+		-- the contract through the same act the player's click performs, saves,
+		-- reloads, and reads the EXACT BYTES back off the same objects.
+		local rec, restore_dials
+		if not SP.Step("3-load-contract-world", function()
+			return SP.Load(SUITE_SAVE, 1) and true or false
+		end, true) then return end
+
+		SP.Step("4-write-contract", function()
+			SP.ReadGates("contract-world-loaded")
+			SP.ReadDialOptions("before-forcing-the-dials")
+			SP.ReadInventory("before-write")
+			rec = SP.WriteContract("write", 3)
+			-- ⛔ the dials are moved through the module's REAL Apply path, so the
+			--    persisted modifier ids are written by the PORTED module itself.
+			restore_dials = SP.SetDials("3x", "+2", "contract")
+			SP.ReadDialOptions("after-forcing-the-dials")
+			SP.ReadInventory("after-write")
+		end)
+
+		if not SP.Step("5-save-and-reload", function()
+			if not SP.Save(CONTRACT_RT) then return false end
+			return SP.Load(CONTRACT_RT, 1) and true or false
+		end, true) then return end
+
+		SP.Step("6-verify-contract", function()
+			SP.ReadGates("contract-round-tripped")
+			SP.ReadDialOptions("after-round-trip")
+			SP.ReadInventory("after-round-trip")
+			SP.VerifyContract(rec, "after-round-trip")
+			local kit = rawget(_G, "SMRTest")
+			if kit and kit.FixtureCarry then SP.Try("SMRTest.FixtureCarry() (contract)", kit.FixtureCarry) end
+		end)
+
+		if restore_dials then SP.Step("7-restore-dials", function() restore_dials() end) end
+		SP.ErrorWatchNote()
+		return
+	end
+
+	-- ============ THE SUITE CELLS: a2 / a1 / c / b ============
+	if not SP.Step("3-load-suite-world", function()
+		return SP.Load(SUITE_SAVE, 3) and true or false
+	end, true) then return end
+
+	local restore
+	if CELL == "a1" then
+		-- ⛔ (a1) IS AN APPROXIMATION AND SAYS SO IN THE LOG. A true fresh-default
+		--    boot is unreachable now: the owner enabled the mod and ticked the
+		--    seven toggles at 2026-08-12 18:30, which WROTE the account key. This
+		--    turns them off IN-SESSION through the same §4.4 path in the opposite
+		--    direction (00_Core.lua:434-445 flips status to "inactive" and calls
+		--    on_deactivate), which is what the modules' hooks consult per call.
+		--    It is NOT identical to never having activated them: the hooks are
+		--    installed and any on_activate side effect already ran this process.
+		SP.Step("4-deactivate-optins", function()
+			SP.Say("CELL a1 ⚠️ APPROXIMATION: modules are DEACTIVATED IN-SESSION, not booted at fresh defaults. The true fresh-default gate read (1/8, seven × inactive) is banked in the owner's own log Mars.exe-20260812-18.30.09, lines 277-285.")
+			restore = SP.SetOptIns(false, "a1-deactivate")
+		end)
+	end
+
+	SP.Step("5-suite", function()
+		SP.ReadGates("immediately-before-RunAll")
+		SP.RunSuite(CELL)
+	end)
+
+	if restore then
+		SP.Step("6-restore-optins", function() restore() end)
+	end
+	SP.ErrorWatchNote()
+end
+
+SP.Boot()

@@ -124,23 +124,55 @@ owed input stays here no matter how struck-through it looks.
     declares it in its brief (a Mod-Manager toggle needs a full restart).
     Your ordinary play doubles as the continuous both-mods compatibility
     soak. Nothing owed.
-    ⭐⭐ **BUILT 2026-08-12 (chain prompt 3). The mod exists: `C:\Dev\SMR-OptInPack`,
-    junction installed, NOT launched — the verification leg is the next step and
-    is unattended.** ⛔ **ONE MINUTE OWED FROM YOU, AND ONLY AFTER THAT LEG
-    REPORTS CLEAN: enable "Community Opt-In Pack" in the Mod Manager (a full
-    restart), then Options → Mod Options and re-tick the seven toggles and two
-    dials you had on.** They come up OFF / at base because the mod id changed,
-    which is a new key in account storage — predicted, not a defect. Your old
-    values stay under the fix pack's key and go inert. ⚠️ **Your savegames are
-    untouched**: every field and modifier id these modules write kept its exact
-    `SMRFixPack_` bytes, on purpose, and the verification leg reads them back
-    off a real save to prove it. Until you re-tick, expect the opt-in gate to
-    read `1/8` (only the drone dials are active-at-base) — that is the correct
-    fresh-default reading, not a broken port.
+    ⭐⭐ **BUILT 2026-08-12 (chain prompt 3), and ✅✅ VERIFIED THE SAME EVENING
+    (prompt 4): the whole matrix is GREEN and it cost you ZERO minutes.**
+    ✅ **Your minute is already spent — you did it at 18:30, before the leg ran**
+    (enabled the mod, re-ticked the seven toggles and both dials at `5x` / `+2`).
+    Nothing further is owed here, and ⭐ **your run turned out to be evidence**:
+    it is the only recording that will ever exist of the fresh-default state, and
+    it read exactly the predicted `1/8` with all seven modules `inactive`.
+    **What the verification proved, in your terms:**
+    * **Your saves are fine, and this was tested two different ways.** Four of
+      your saves were read back (a copy of `CP15PT15`, a copy of `CP60RT`, a copy
+      of `Autosave Sol 311`, and the PT-35 fixture): every dome policy and every
+      drone dial the old single-mod pack ever wrote into them is still found, by
+      the new mod, under its exact original name. Then the leg *wrote* all three
+      policy fields onto 11 domes and 4 buildings, saved, reloaded, and got every
+      one of them back on the same objects — **0 of 3 broke**.
+    * **The bug-fix pack is untouched.** Across all 88 automated probes the only
+      difference from before the split is the one deliberate change (the Mod
+      Options check split in two, because there are two pages now). 86 of 86
+      shared results are identical.
+    * **Both mods work alone and together.** The opt-in mod ran with the fix pack
+      completely uninstalled, and the fix pack ran with the opt-in mod completely
+      uninstalled, both clean, no errors anywhere.
     ⚠️ Two smaller things the build learned, neither needing a call: the fix
     pack now has **no Mod Options page at all** (it has no options left, so the
     engine correctly stops listing it — do not report it as missing), and the
     display name above is still a PLACEHOLDER awaiting your launch-prep call.
+
+### ⛔ NEW 2026-08-12 — I DELETED ONE OF YOUR AUTOSAVES. Telling you straight.
+
+16. ⛔ **`Autosave Sol 306` is gone and I cannot get it back. `Autosave Sol 311`
+    is fine — I restored it byte-for-byte.** No decision is owed; this is a
+    report, and the only thing you might want to do is check whether Steam Cloud
+    puts `Sol 306` back next time you launch (cloud is still ON).
+    **What happened.** The verification leg loaded *copies* of `CP60RT` and
+    `Autosave Sol 311` to read your dome policies back off real saves. Copies are
+    the rule precisely so your originals are never touched — and the originals
+    weren't. But a copy of your campaign **is still your campaign**, so the
+    game's own autosave timer kept running, wrote a fresh `Autosave Sol 311(2)`,
+    and its rotation then deleted the older autosaves to stay under your autosave
+    count. That is vanilla behaviour (`Savegame.lua:1484-1528`), triggered by me.
+    **`Sol 311` survived only by luck** — the leg happened to be holding a byte
+    copy of it as a witness, so I put it back with its exact bytes and its
+    original timestamp. `Sol 306` was never copied, so there is nothing to
+    restore from.
+    **What stops it recurring:** recorded as `agent/facts/EF-056` — any future
+    leg that loads a copy of a real campaign must byte-copy every autosave first
+    and list them by name at close-out. "Use a designated copy" protected the
+    file; it did not protect the folder, and nothing in the rules had noticed
+    that gap before tonight.
 
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
 
