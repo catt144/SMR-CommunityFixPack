@@ -98,6 +98,23 @@ owed input stays here no matter how struck-through it looks.
     default ON or stay opt-in-OFF in their own mod (design will recommend),
     and a one-minute Mod Options re-tick after the split (new mod id = fresh
     toggle state).
+    ⭐ **DESIGN'S RECOMMENDATION IS IN (2026-08-12, chain prompt 1): keep them
+    OFF by default — one line from you either way, and the build proceeds with
+    OFF unless you say otherwise.** Why: flipping the default is itself a
+    behaviour change (outside the chain's scope fence), and three of the eight
+    are not things you'd want on unasked — `DroneOverhaul` is labelled
+    *experimental* on its own toggle and is frozen pending PT-52,
+    `NoHomeless` moves colonists between domes with an unwind that is still
+    unverified, and `CohortHousing` re-homes Seniors and Children.
+    `ResidencyControl` and `NoHomeless` also each add a row to every Dome
+    infopanel. Installing the mod buys the *choice*; the page costs one visit,
+    which the re-tick above already asks of you once. ⚠️ Counter-argument,
+    recorded so it is your call and not a fait accompli: everyone who installs
+    that mod has already opted in once, so a second opt-in per module is
+    friction — and if you prefer ON it is two lines per module in
+    `items.lua` + `metadata.lua`, **nothing in `Code/`**, so it stays cheap to
+    revisit after release. Reasoning: `agent/prompts/split-optins/90_DESIGN.md`
+    §3.7.
     ⭐ **Your standing condition, recorded 2026-08-12:** *"Once we get it
     seperated I will keep the opt ins loaded in as they make testing easier."*
     → now a dormant WORKFLOW rule the split's audit activates: both-mods
