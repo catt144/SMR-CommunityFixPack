@@ -20,7 +20,7 @@ forced element named in the grant · **C39 ANSWERED = MISSING UPLIFT** (control
 decision 9) · **F85: Ctrl-F9 NOT a route** (`idQuickSave` never built on
 retail; disposition = owner decision 5) · **F15 double-grant half MEASURED
 gone** (paused Δ=0 at the kill; audit filled the entry the sitting missed) ·
-**C46 NEW** (emptied trap produces forever, PRE-RELOAD ONLY; owner decision 10)
+**C46 NEW — re-graded 08-12: harm FORCED-ONLY, no organic route (decision 10)**
 · **EF-051 CLOSED — WORKFLOW "never say gone" RETIRED** (two post-untick
 launches restored nothing; listings are NAMES, never counts) · **EF-052** (50×
 is the real speed ceiling) · F78 +2 · F02 +1 organic · rule 12(B) withdrawn

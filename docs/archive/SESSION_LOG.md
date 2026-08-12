@@ -8,6 +8,32 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — owner challenge re-grades C46: the phantom-power harm is FORCED-ONLY; the omission is real but no organic route to it exists
+
+Owner, day after the chain close: *"We destroyed the wisps via a command no
+normal play could reach. Could our way of destroying the wisps be why we
+observed a defect?"* Re-derived from Src the same day, and the challenge
+lands — the **fourth** challenge-driven correction, and the second where the
+ROUTE was wrong while every cited line was right.
+
+Precision first: the command itself IS reachable — `SetLightTrapMode
+("destroy")` is verbatim the player's *Experiment upon them* payload
+(`Mystery 11.generated.lua:470-471`), and the destroy branch + the wisps' own
+death path (`Fireflies.lua:676-688`, `:533-545`, `:313-321`) genuinely never
+touch `el_prod_modifier` — the omission stands. **What normal play cannot
+reach is the SEQUENCE the rig performed: free→destroy.** All three modifier
+writers are gated on mode `"free"` (`:346`, `:479`, `:692`), so a pre-choice
+(`"none"`) trap has never had the modifier written and produces 0 while
+holding wisps; `SetLightTrapMode` has exactly two callers in the tree — the
+once-only choice's own branches. ⇒ an organic destroy click arrives with
+`amount=0` and leaves no phantom; the measured 15,000 stood only because the
+rig flipped a consumed-choice save from free to destroy. Player-visible
+defect claim WITHDRAWN (source-derived, not play-sampled; re-opens on any
+route to free→destroy or a `"none"`-mode write). C46 entry re-graded +
+heading tag synced, checklist decision 10 re-framed (wontfix/document now the
+natural default; defensive `Change(0)` in our replacement offered), STATE
+synced, index regenerated. doccheck GREEN, pushed.
+
 ## 2026-08-11 — `corun-pt15` CLOSED by the terminal audit: every leg SUSTAINED, F07's `tested` grant STANDS, EF-051's caveat retired
 
 Terminal audit of the PT-15 mystery chain (prompts consumed at `f289b11` —

@@ -62,12 +62,21 @@ are what made C39 readable at all and are not scored against you.**
    **(c)** measure the other three Workshops first (only `TVStudioWorkshopCCP1`
    was observed; the rest share the class chain, so the result is inferred for
    them). → `agent/bugs/C39.md` + the rider record below.
-10. **⚖️ `C46` — an emptied Light Trap keeps producing its old power forever
-    (vanilla; our own fix inherits the omission). Worth fixing at all?** The
-    sign favours the player — free power, not lost power. Measured: 0 wisps,
-    still 15 power, permanently; it scales with whatever the trap held at the
-    click. ⚠️ One cheap gap if you say yes: whether the phantom survives a
-    save/reload is untested — it costs one load of `CP15F15.savegame.sav`.
+10. **⚖️ `C46` — ⚖️ RE-GRADED 2026-08-12 after your challenge, and you were
+    right to push: the phantom-power state we measured CANNOT be reached by
+    normal play on current source.** Every code path that writes the trap's
+    power value only runs in "free" mode — a trap before the choice has never
+    had it written and makes 0 power even while holding wisps — and the only
+    two calls to the mode function in the whole game are the choice's own
+    once-only branches. So an organic *"Experiment upon them"* click arrives
+    with 0 and leaves 0: **no phantom**. The 15-power-forever we measured was
+    manufactured by our forced free→destroy flip, a sequence the game never
+    performs. What stays true: the shipped destroy branch really does forget
+    to clear the value (we re-read the lines), so the omission is real but
+    apparently unreachable. **Your call is now smaller:** wontfix/document is
+    the natural default; a defensive one-line clear in our own replacement
+    function is available as belt-and-braces if you want it. (Caveat stated:
+    this is a source derivation, not a played destroy-first run.)
     → `agent/bugs/C46.md`.
 
 ### ⭐⭐ NEW 2026-08-10 — from the `corun-batch-2` SITTING (four calls, all yours)
