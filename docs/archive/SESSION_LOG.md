@@ -8,6 +8,112 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — `corun-pt60` CLOSED by the terminal audit: every sitting verdict SUSTAINED, three corrections integrated, the trains agenda answered, the folder emptied
+
+**The chain's files last exist at `c3bccd4` (pre-deletion sha); this session's
+closing commit deletes `agent/prompts/corun-pt60/` whole (README,
+03_FABLE_AUDIT, the three parked instruments).** TestKit tree verified
+disarmed (no `CP60*` in `Code/`, status clean).
+
+**Job 1 — the record, re-derived rather than inherited.** Archived log
+`cp60sitting_Mars.exe-20260812-13.38.15.log` byte-compared against the AppData
+original over the FULL length (`fc /b`: no differences; MD5
+`2642D7FC4CA7DD3AEB1323B96B11DC6D` both; 116,417 bytes; 1,082 lines — an
+earlier 1,052 count was `Measure-Object -Line` skipping blanks) and read
+whole. Every P1–P9 verdict recomputed from the file's own lines; every count
+recounted (suite 77/0/10/0 re-tallied by grepping the verdict lines
+themselves; all 10 SKIPs matched BY NAME; the 08-11 baseline traced to
+`u2run3_Mars.exe-20260811-02.01.06.log:983` and the `AsteroidLanderAvailable`
+PASS message verified byte-identical). P6 settled on the archived file: 0
+`[LUA ERROR]`, 0 `TrackElement.lua:805` (F99 stays rate-only), 0
+`invalid pos` (C45 unchanged), 0 asserts. P8's three heal lines grepped by
+exact wording: `SaintBlessing: re-based` 7 hits = 1 real (`:329`, load 1) + 6
+harness reminders; `TrackSalvageWipe: deleted` 6 = all reminders (controlled
+zero, 7 tracks walked); `AstrogeologistExtractors: applied` **7, not the
+notes' 6** — the extra is `:146`, the boot module-REGISTRATION line, ⭐ a THIRD
+look-alike beyond prep's two (verdict unchanged: 0 real save-heals). Cheat
+markers reconcile exactly: 9 `ObjCheat` hits = 6 real `CheatFill` (`:867-877`)
++ 3 copies of the owner's own disclosure Note quoting the string. Save dir
+listed BY NAME (82 files): `CP60STAGE` deleted and NOT resurfaced; `CP60RT` +
+`Autosave Sol 306/311` HELD (the owner's ~11 sols; not released — inventoried,
+EF-051 hold); all FOUR protected files MD5-MATCH, **`USA Sol 302` untouched to
+the byte**.
+
+**Three corrections, all integrated in place:** (1) ⭐ **F34(d)'s
+ONE-live-route claim is SUSTAINED, and the audit closed its residue** — the
+entry's six-site Embark list left three sites unruled; re-derived from Src:
+`Drone.lua:567` is the inside-the-RC-Commander state (same route);
+`RocketExpedition.lua:941` and `CargoTransporterNew.lua:835` flag drones
+`Embark` at a spawn spot INSIDE a landed rocket's footprint
+(`CargoTransporterNew`'s only inheritor is `UniversalRocket`,
+`UniversalRocket.lua:37`), killed by the same `Building` obstruction the owner
+screenshot-witnessed. Two off-by-one Src cites fixed (`:1515`/`:1502`, were
+`:1516`/`:1503`). (2) The "nine minutes before any save loaded" wording on the
+boot look-alikes was imprecise — the owner's in-game list load came ~4.5 min
+after boot; ~9 min is the distance to the FIXTURE load; F92 entry corrected
+(the conclusion — wrong side of every load boundary — stands). (3) The heal
+line-3 occurrence count above.
+
+**Rulings the audit owed:** **P7** graded MET AT ITS OWN STRENGTH — the
+owner's `:1033` sentence is a general whole-session normalcy read, NOT a
+per-system elicitation; per-system support comes from the suite's probes (each
+named conversion system PASSed individually), so P7 grounds "no visible
+behaviour change observed", never per-system in-play claims. **Transcript-only
+quotes ruled on explicitly (corun-pt15 rule 3):** no `tested` grant was made
+or moved, so none rests on one; checklist item 12's trains quote and the
+WORKFLOW cheats-rule tail ("And unless a chain truely needs…") are
+transcript-only but ground DECISION/PROCEDURE text addressed to the owner
+(who can correct them trivially), not measurement verdicts — acceptable, noted
+here. The cheat-rule's operative first half is log-anchored (`:903`).
+
+**Job 2 — ledger vs the standing stacks (u1 1–4, b1 1–6, b2 1–9, cp15 1–3):**
+RECURRING: the cheat-disclosure ask (b2 class) — repaired by the sitting
+itself as the owner-ruled WORKFLOW section; the audit sustains it. NEW (4):
+the brief's console order assumed a main-menu console (echo≠execution —
+CHAIN_METHOD row added); the harness F95 line editorialises wrongly on a
+non-astro colony (parked source; noted on F95); `CP60.Fixture` reads
+`UIColony.sponsor` (dead read, `sponsor=nil` while the engine dump says NASA);
+`RocketBase` walks 0 while 6 rockets exist (EF-053's silent-zero trap, fact
+recorded). No harness resolution defect, no self-drive, ARM/DISARM gates
+GREEN, PROBE SWEEP clean. **Owner-time honesty: promised 40–60, actual ~95**
+(13:38:15 launch → 15:15:53 last log write) — ~45 owner-directed (three
+challenges + two stagings, ALL of which changed the record; only the owner
+rules that time out of scope), ~10 ours (console-order defect ~2 min owner +
+agent derivation waits), measurement legs on budget. **Economics, one line:
+one attended sitting bought the unrepeatable P8 decider, a full P1–P5 confirm,
+four unplanned findings, EF-053, a binding WORKFLOW rule, the F34 route
+rewrite, and the trains agenda deliverable.**
+
+**Job 3 — integration:** per-entry execution evidence added for the six
+conversion entries that lacked it (F03/F04/F29/F33/F41/F54 — each cites its
+own probe verdict line; F57 had its P9 record from the sitting) — the eight
+conversions now ALL carry entry-level records; statuses moved nowhere
+(F90/F91/F94/F96 `fixed`, F92/F93/F95 `tested`, F34 `fixed*` — heading tags
+and generated INDEX agree). PT-60 moved WHOLE to `PLAYTEST_ARCHIVE.md` (results
+banner + pre-run spec retitled + the checklist tracker preserved verbatim);
+checklist keeps a one-line completion stub. ⭐ **Trains AGENDA (checklist 12)
+delivered: `agent/reports/TRAIN_SHIP_READY_ROUTE.md`** — F11/F48/F91 cannot
+honestly be upgraded at any price (no organic producer / log-only artifact);
+F21 (~10–15 min) + F64 (~5–10 min) are buyable as ONE rider block on the
+PT-20 redo; ship-standard decision framed as A (ship at `fixed`, 0 min) vs B
+(buy the block) — owner's call, nothing blocked. CHAIN_METHOD +1 row
+(pre-flight covers STATE assumptions, not just syntax; menu console executes
+without echo). STATE rewritten (chain CLOSED, NEXT = author `unattended-3`).
+
+**Standing conditions restated for the next chain:** EF-051 HOLD unchanged —
+the owner has NOT announced the Steam-Cloud untick; close-outs keep "deleted,
+listing verified"; post-untick cleanup inventory now includes `CP60STAGE`
+(if it returns) alongside the 18 strays of 08-12 12:29. The rig has cheats
+enabled (owner-disclosed): every "on retail" claim names it, and the
+infopanel `Inspect`/`Properties` capability question is worth a targeted
+check before the next co-run designs its instruments. ⚠️ The sitting's
+`81/81` predates `5a1508b` (F102): tree is 82 registered / 83 files — not a
+module failure.
+
+STATE NEXT → author `unattended-3` (F85 flip + C39 compensation + 3-label
+sweep, `CP15PT15` staged copy), then the PT-20 redo (+ optional F21/F64
+block). doccheck GREEN, pushed.
+
 ## 2026-08-12 — F102 filed AND built in one session: the community's asteroid Exotic-Minerals freeze gets a gameplay-preserving fix, shipped disclaimered (owner ruling)
 
 Started from the owner's screenshot of a Steam thread (VasjaTheOx, Linux

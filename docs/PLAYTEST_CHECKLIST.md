@@ -120,6 +120,19 @@ it needed a save written before 2026-08-02, and `USA Sol 302` was the only one.*
     ever be organic or is forced-only, and what it would cost you in attended
     minutes — so that the ship/no-ship standard becomes one decision in one
     sitting instead of a recurring ask.
+    ✅ **ROUTE DELIVERED 2026-08-12 — `agent/reports/TRAIN_SHIP_READY_ROUTE.md`
+    (the PT-60 audit).** The one-paragraph version: **three of the five
+    unwitnessed `fixed` items (F11, F48, F91) cannot honestly be upgraded by
+    any leg at any price** — their guarded states have no organic producer, so
+    `fixed` on mechanism evidence is their ceiling and the report says why per
+    item. **The two that CAN be bought are F21 (~10–15 min) and F64
+    (~5–10 min), together one ~20–30 min rider block on any co-run that stages
+    `TEST2H TRAIN`** — the natural host is the PT-20 redo already in the
+    queue. F80/F99/C45 stay watch-only (zero scheduled minutes). **So the
+    standard question collapses to one decision: ship the train group at
+    `fixed` (option A, 0 minutes) or buy the F21+F64 block first (option B,
+    one rider block).** Either answer closes the queue; nothing re-proposes
+    afterwards.
 
 13. ~~**⚖️ Are cheats on a playtest save a confound that needs defending every
     time?**~~ ✅ **DECIDED 2026-08-12, your ruling mid-sitting — NO, they are
@@ -1066,31 +1079,7 @@ Assembly stage?
 
 # Cross-cutting — once per era of the pack
 
-### PT-60 — The chain-8b batch leg (F90-F96 + eight conversions) · Status: unrun · ⭐ attended · **mode: co-run** (routing 2026-08-04 — suite/reload/log halves rig-side; you keep the 15–20 min ordinary-play segment) · ⭐⭐ **QUEUED 2026-08-12 — the `corun-pt60` chain is AUTHORED** (`agent/prompts/corun-pt60/`, your order): a staged COPY of your `USA Sol 302` (now a protected file — the original is never touched), the 2026-08-02 prediction set annotated for today's build, riders (F21/F34(d)/F90/C42) taken only if their situation arises during your play. Your part: **~40–60 min** including the 15–20 min of ordinary play. Kickoff: a session on `01_OPUS_PREP.md` (unattended); the sitting runs when you sit. ⚠️ Steam Cloud is ON by your 08-12 note — staged-save deletions record "deleted, listing verified" until you announce the untick · ⭐⭐ **PREP RAN 2026-08-12 — the sitting is ready to go and nothing more is owed by you before it.** Your copy is staged and MD5-verified against the original; the harness, the arm script and the annotated predictions are parked. Two things prep found that change what the leg can promise, stated here rather than buried: **(a)** one of the nine predictions (**P9**, the cleared rocket-fuel key) turns out to be **unfalsifiable on any normal save** — the field it looks for could never have been written, so that read becomes a free negative control instead of evidence; **(b)** two of the three "heal" lines the leg greps for have look-alikes that print on **every launch** before any save loads, so the brief now names both wordings — an earlier reading would have scored the leg a pass on the wrong lines. Nothing here needs a decision from you
-**Bug:** seven approved fixes and eight technique-only conversions have never
-executed in a game; a byte-equivalence argument is not an observation. Nothing
-from that batch may be called verified until this leg's numbers are quoted.
-→ entries [F90](agent/bugs/F90.md)-[F96](agent/bugs/F96.md); the conversions
-and the dated prediction set: the archive snapshot.
-**Requirements:** a save PREDATING 2026-08-02 (that is what makes the heal and
-idempotence predictions readable) / pack on / **~40-60 attended minutes**, of
-which 15-20 is your ordinary play — the rest is console driving, which is your
-time too and is counted here. *(This line read "~30-40 minutes" until 2026-08-12;
-it predated the co-run routing and did not count the console driving.)*
-⭐ The pre-batch save is already staged for you: a byte copy of `USA Sol 302`.
-**Setup:**
-1. Load the pre-batch save; note the heal log lines immediately.
-2. Suite run + `ListFixes()` — the agent reads the counts and probe verdicts
-   against the prediction set written 2026-08-02 (preserved in the snapshot —
-   use it, do not re-derive it after the fact).
-3. 15-20 minutes of ordinary play — zero pack-named errors, zero visible
-   behaviour change from the conversions.
-4. Save and reload — no heal line repeats; the cleared rocket-fuel key stays
-   absent.
-5. Log review per the protocol.
-**Good to have:** the F90 rider if a storm arrives on an elevator colony.
-⚠️ F92/F95 change real morale/production numbers on load — do not read them as
-drift in any A/B taken across this leg.
+### ~~PT-60 — The chain-8b batch leg (F90-F96 + eight conversions)~~ ✅ **RUN 2026-08-12 (`corun-pt60` co-run) — all nine predictions resolved, audit sustained.** Moved WHOLE to `archive/PLAYTEST_ARCHIVE.md` (results banner + the pre-run spec + this tracker). Highlights: the P8 decider taken on your `USA Sol 302` copy (heal fired once, zero on reload, effect persisted); suite 77/0/10/0 with every SKIP matched by name; 0 errors in the whole log; F48 repaired 3 of 7 tracks in your campaign and the repair stuck; F34(d) re-derived on your challenges and observed reachable 20/20. Your original save byte-verified untouched. Decisions that came out of it: items 12 and 13 above.
 
 ### PT-21 — Long-save soak · Status: unrun
 **Bug:** the whole-pack background check — nothing drifts, leaks or degrades

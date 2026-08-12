@@ -3819,7 +3819,74 @@ constantly.)
    leg bounds the pack's uninstall behaviour on this save; it does not retire
    the Tier-3 residual, which stays accepted by owner decision.
 
-## PT-60 — The chain-8b batch leg · covers **F90-F96 AND prompt 8's eight unrun conversions** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 8b
+## ~~PT-60 — The chain-8b batch leg~~ ✅ **RUN 2026-08-12 WITH THE OWNER (`corun-pt60`) — P1–P6 + P8 MET, P7 met at its own strength, P9 a held negative control; AUDIT SUSTAINED 2026-08-12**
+
+> **Result, in one place.** Fixture: a staged byte copy of the owner's own
+> campaign save `USA Sol 302` (written 2026-08-01, the latest save predating the
+> 2026-08-02 batch — the only save that could give P8). Log
+> `cp60sitting_Mars.exe-20260812-13.38.15.log` (1,082 lines, MD5-verified,
+> byte-compared full-length at audit). Every verdict below re-derived by the
+> terminal audit from the archived file, not inherited.
+> **P1** 81/81 registered/active, all 8 opt-ins read `active` · **P2** 5/5 new
+> modules `active`, empty detail (the `:163` `SaintBlessing: inactive` line is a
+> first-pass boot artifact that resolved — a grep for `inactive` files a FALSE
+> miss) · **P3** 7/7 conversion modules `active` (8 conversions;
+> `SequenceLatents` holds F29 items 1+3) · **P4** 7/7 new probes PASS · **P5**
+> no regression: `77 PASS, 0 FAIL, 10 SKIP, 0 ERROR`, identical to the 08-11
+> retail baseline (`u2run3`), all 10 SKIPs matched BY NAME, the
+> `AsteroidLanderAvailable` message byte-identical · **P6** 0 `[LUA ERROR]` in
+> the whole archived file (3 `LUA-ERROR` strings are the harness's own
+> ERRORWATCH sentence) · **P7** owner verbatim in the log (`:1033`, general
+> whole-session normalcy — NOT elicited per system; per-system support is the
+> probes') · ⭐⭐ **P8 THE DECIDER: `SaintBlessing: re-based 10 dome blessing(s)`
+> fired ONCE (`:329`, load 1), ZERO on the reload; effect 10-of-10 held through
+> the round trip; F91 a controlled zero (0 shells / 7 tracks both loads); the
+> F95 half non-discriminating (rocketscientist commander, heal returns early).
+> The two boot look-alikes fired once each at `:174`/`:178`, before any load —
+> the trap held. ⚠️ A third look-alike the audit added: the module-registration
+> line `AstrogeologistExtractors: applied` (`:146`) also matches a naive grep**
+> · **P9** 0 carriers / population 19 — negative control held (prep Src-proved
+> the field unwritable on shipped data; never "the removal half ran").
+> **Unplanned:** F48 repaired 3 of 7 tracks on the owner's campaign and the
+> repair PERSISTED (R4) · F34(d)'s route re-derived on the owner's two
+> challenges — RC Commander is the ONE live route (audit closed the last three
+> Embark sites too), and the staged rider closed the "unobserved in play" gap
+> 20/20 · EF-053 (mix-in walks; `RocketBase` silent-zero trap) · cheats-ruling
+> → WORKFLOW rule · trains agenda → `agent/reports/TRAIN_SHIP_READY_ROUTE.md`.
+> **Owner time: promised 40–60 min, actual ~95** — ~45 min was the owner's own
+> challenges/staging (all three challenges changed the record), ~10 min ours (a
+> brief defect: main-menu console executes but does not echo). Full record:
+> entries F03/F04/F29/F33/F34/F41/F48/F54/F57/F90–F96, `archive/SESSION_LOG.md`
+> 2026-08-12, checklist items 12/13.
+
+### PT-60 — the checklist tracker section as it stood at close (moved whole from `PLAYTEST_CHECKLIST.md` by the audit, 2026-08-12, per the house rule)
+
+> ### PT-60 — The chain-8b batch leg (F90-F96 + eight conversions) · Status: unrun · ⭐ attended · **mode: co-run** (routing 2026-08-04 — suite/reload/log halves rig-side; you keep the 15–20 min ordinary-play segment) · ⭐⭐ **QUEUED 2026-08-12 — the `corun-pt60` chain is AUTHORED** (`agent/prompts/corun-pt60/`, your order): a staged COPY of your `USA Sol 302` (now a protected file — the original is never touched), the 2026-08-02 prediction set annotated for today's build, riders (F21/F34(d)/F90/C42) taken only if their situation arises during your play. Your part: **~40–60 min** including the 15–20 min of ordinary play. Kickoff: a session on `01_OPUS_PREP.md` (unattended); the sitting runs when you sit. ⚠️ Steam Cloud is ON by your 08-12 note — staged-save deletions record "deleted, listing verified" until you announce the untick · ⭐⭐ **PREP RAN 2026-08-12 — the sitting is ready to go and nothing more is owed by you before it.** Your copy is staged and MD5-verified against the original; the harness, the arm script and the annotated predictions are parked. Two things prep found that change what the leg can promise, stated here rather than buried: **(a)** one of the nine predictions (**P9**, the cleared rocket-fuel key) turns out to be **unfalsifiable on any normal save** — the field it looks for could never have been written, so that read becomes a free negative control instead of evidence; **(b)** two of the three "heal" lines the leg greps for have look-alikes that print on **every launch** before any save loads, so the brief now names both wordings — an earlier reading would have scored the leg a pass on the wrong lines. Nothing here needs a decision from you
+> **Bug:** seven approved fixes and eight technique-only conversions have never
+> executed in a game; a byte-equivalence argument is not an observation. Nothing
+> from that batch may be called verified until this leg's numbers are quoted.
+> → entries F90–F96; the conversions and the dated prediction set: this snapshot.
+> **Requirements:** a save PREDATING 2026-08-02 (that is what makes the heal and
+> idempotence predictions readable) / pack on / **~40-60 attended minutes**, of
+> which 15-20 is your ordinary play — the rest is console driving, which is your
+> time too and is counted here. *(This line read "~30-40 minutes" until 2026-08-12;
+> it predated the co-run routing and did not count the console driving.)*
+> ⭐ The pre-batch save is already staged for you: a byte copy of `USA Sol 302`.
+> **Setup:**
+> 1. Load the pre-batch save; note the heal log lines immediately.
+> 2. Suite run + `ListFixes()` — the agent reads the counts and probe verdicts
+>    against the prediction set written 2026-08-02 (preserved in the snapshot —
+>    use it, do not re-derive it after the fact).
+> 3. 15-20 minutes of ordinary play — zero pack-named errors, zero visible
+>    behaviour change from the conversions.
+> 4. Save and reload — no heal line repeats; the cleared rocket-fuel key stays
+>    absent.
+> 5. Log review per the protocol.
+> **Good to have:** the F90 rider if a storm arrives on an elevator colony.
+> ⚠️ F92/F95 change real morale/production numbers on load — do not read them as
+> drift in any A/B taken across this leg.
+
+## PT-60 (as written before the run) — The chain-8b batch leg · covers **F90-F96 AND prompt 8's eight unrun conversions** ⭐ ATTENDED, OWNED BY CHAIN PROMPT 8b
 
 **One leg for the whole batch.** Two independent bodies of work land on it and
 neither has ever executed in a game:
