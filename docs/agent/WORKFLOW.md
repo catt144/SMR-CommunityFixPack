@@ -464,15 +464,19 @@ not an achievement.
   the next launch** — 14 of them came back, written before the game process even
   started, with creation stamps from tonight and modification dates a week old.
   That is what the two "failed" close-outs were: they deleted the files and
-  Steam put them back. Until the owner unticks cloud saves for this title
-  (checklist, top block), a close-out may record **"deleted, listing verified"**
-  and may **not** record "gone" — and the next session re-lists rather than
-  inheriting the claim.
-  ⭐ **Unticked 2026-08-11** ("Steam settings done"); the 14 strays were
-  deleted the same day and the directory verified at the 55-file pre-restore
-  baseline. ⛔ The caveat above RETIRES only when the first post-untick launch
-  lists 55 — a setting change is not a sampled behaviour. Until that listing
-  is taken, keep recording "deleted, listing verified".
+  Steam put them back.
+  ✅ **RETIRED 2026-08-11 (`corun-pt15` terminal audit).** The owner unticked
+  cloud saves 2026-08-11 ("Steam settings done") and **two post-untick launches
+  are now sampled** — the owner's own (09:47, nothing restored, every directory
+  delta reconciled by NAME) and the PT-15 sitting's (15:09, all 14 strays still
+  absent at the audit's re-listing, 59 `.sav` reconciled by name). Close-outs
+  may again record **"gone — verified by a NAMED listing"**. ⛔ Two clauses
+  survive the retirement: **(1) baselines and listings are NAMES, never a
+  count** — a count cannot survive one play session (two autosave rotations and
+  three creations net to +1 and hide both movements — `EF-051`); **(2) the
+  restore *signature* (fresh `CreationTime`, old `LastWriteTime`) is not
+  diagnostic once anyone has byte-copied a save** (`Copy-Item` produces the
+  same shape). A stray ever returning re-opens `EF-051` and this clause with it.
 - ⛔ **Attended-sitting classes from `corun-batch-1` (2026-08-05; 8-entry
   ledger, first BATCHED attended sitting — the classes the unattended ledger
   could not see). Every attended brief guards against these:**
@@ -561,6 +565,30 @@ not an achievement.
      **D03/D07 consult only `IsActive`** (owner decision 2026-08-10: the limit
      is recorded, not coded; a leg using the lever there silently runs live
      and reads as a fix failure).
+- ⛔ **Attended-sitting classes from `corun-pt15` (2026-08-11; the mystery
+  sitting's ledger, 0 the game's fault). Every attended brief also guards
+  against these:**
+  1. **No stop-orders while a time-sensitive gate is open.** An agent
+     instruction to hold ("STOP — do not answer yet") is an INTERVENTION in
+     game state, not a pause: the wisp-choice popup does not hold game time,
+     the clock ran from night into afternoon while the agent read source, and
+     the organic reading died on an empty trap (`Change(0)`, APPLICABLE=false).
+     Before asking the owner to hold anything, read the clock and the gate's
+     own timeout behaviour — or take the reading first and hold afterwards.
+  2. **An owner-facing instruction that depends on UI state is marked
+     eyes-verified or source-derived** — second occurrence of the class that
+     produced F85's dead F9-rebind advice: this chain's brief and payload menu
+     both said "call TrapRead BEFORE the choice", which is impossible at the
+     keyboard (the choice modal locks the console — owner, verbatim, on the
+     F07 entry). A source-derived instruction is a claim; the brief says so.
+  3. **Every owner verbatim spoken at a measure moment is pushed through the
+     harness note primitive (`*.Note(...)`) the moment it is spoken.** This
+     sitting archived one of four owner quotes (F85's); the other three exist
+     only in the session transcript, and the terminal audit had to rule on a
+     `tested` grant whose verdict the archived log cannot show. Transcript
+     quotes remain quotable — chat is where the owner speaks, and owner
+     rulings have always been recorded from it — but a log-resident quote is
+     re-readable forever, and the sitting prompt mandates the relay.
 - ⭐ **Adopted 2026-08-11 (owner — `DOC_STRUCTURE_REVIEW` R4 + R7; R9/R14
   dropped). Two binding evidence rules for every leg and entry:**
   1. **R4 — a state-transition claim carries a save/reload ROUND-TRIP step.**

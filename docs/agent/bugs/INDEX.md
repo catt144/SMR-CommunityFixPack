@@ -27,7 +27,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 12 | F12 | "Low Storage" warning never fires for Food/maintenance | tested | P2 | high | [F12.md](F12.md) |
 | 13 | F13 | Command Center resource rows show no numbers | tested | P2 | high | [F13.md](F13.md) |
 | 14 | F14 | Domes Overview red low-stat highlight dead | tested | P2 | high | [F14.md](F14.md) |
-| 15 | F15 | Mystery 11 wisp RP rewards double/silent | fixed* | P2 | high | [F15.md](F15.md) |
+| 15 | F15 | Mystery 11 wisp RP rewards double/silent | fixed* | P2 | **MEASURED (batch half)** | [F15.md](F15.md) |
 | 16 | F16 | Mirror Sphere site usable after completion | fixed | P2 | med | [F16.md](F16.md) |
 | 17 | F17 | Dust Sickness damage not randomized | fixed | P2 | med+ | [F17.md](F17.md) |
 | 18 | F18 | Independence terraforming tech gives 10% not 20% | fixed | P2 | med | [F18.md](F18.md) |

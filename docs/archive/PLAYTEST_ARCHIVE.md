@@ -5262,3 +5262,191 @@ incident behind them). The bullet as it stood:
   verdicts), R9 (an agent/facts/ review cadence), R14 (a context budget for
   agent docs). Adopt, defer, or drop.
   → `docs/agent/reports/DOC_STRUCTURE_REVIEW.md` §3 and §6.
+
+---
+
+# Moved whole from PLAYTEST_CHECKLIST.md on 2026-08-11 by the `corun-pt15` terminal audit
+
+Two blocks, verbatim as they last stood on the checklist. (1) The completed
+PT-15 section with the C46 discovery note and the pre-sitting setup/march text
+that the sitting consumed; results audit-sustained 2026-08-11 — the C39-repair
+and C46 decisions stay live on the checklist. (2) The closed 2026-08-11
+"BOTH TICKS DONE" block, confirmed by the audit (two post-untick launches
+restored nothing; EF-051 closed, "never say gone" retired).
+
+## (1) PT-15 — Wisp power output (completed 2026-08-11)
+
+### PT-15 — Wisp power output (F07, + F15 bonus) · Status: ✅✅ **PASSED 2026-08-11 — F07 is now `tested`, F15 confirmed too**
+**Bug:** freeing the wisps rewarded ~1/1000 of the promised power — a trickle
+instead of kilowatts. Fixed: ~1000 × wisp count, a real power source.
+→ [F07](agent/bugs/F07.md), [F15](agent/bugs/F15.md)
+
+⭐⭐ **RESULT — you played the whole mystery and the fix works.** Your Light Trap
+held **95 wisps and produced 95 power** on a 218.5 grid — **43% of your colony's
+entire supply, about 47 Solar Panels' worth.** Vanilla's line would have given
+**0.095**. It survived a save/reload unchanged. Your verdict, kept verbatim:
+*"the screen shot is what I see, so it is working."*
+
+**F15 also passed**, on the same trapful: destroying 15 wisps posted **zero**
+research points at the instant of the kill (the vanilla double-grant is gone) and
+the notification's **1,500** matched `wisps × 100` exactly.
+
+⛔ **Two honest limits** — the fix is verified, but the *broken* behaviour was
+never seen (the pack was on throughout), and the final enact had to be **forced**
+by us because your organic click landed at 2 PM with an empty trap. That last
+part was our scheduling error, not yours; see the entry.
+
+🗄️ **Two saves were kept at your request** (they are not strays — do not delete):
+* **`CP15PT15.savegame.sav`** — 95 wisps held, mode `free`. Rebuilding it
+  organically costs another ~3-hour mystery playthrough.
+* **`CP15F15.savegame.sav`** — the post-destroy state that evidences C46 below.
+
+### ⚖️ NEW 2026-08-11 — a defect we found by accident, and it needs your call
+**C46 — an emptied Light Trap keeps producing power forever.** Choosing
+*"Experiment upon them"* kills every wisp but never clears the trap's power
+modifier, and the same choice stops all wisp spawning, so nothing ever resets it.
+Measured: **0 wisps, still 15 power, indefinitely** — and it scales with whatever
+the trap held when you clicked (95 wisps would leave 95 power standing).
+→ [C46](agent/bugs/C46.md)
+**It's vanilla, and our own fix inherits the omission.** The sign favours the
+player (free power), so it's a plausibility defect rather than a harm.
+**Your call: is this worth fixing at all?** Nothing is built. ⚠️ One cheap gap if
+you say yes — we saved the state but never reloaded it, so whether the phantom
+power survives a save/load is still untested; that costs one load of
+`CP15F15.savegame.sav`.
+**Requirements:** SAVE-D — St. Elmo's Fire mystery with Light Traps holding
+wisps (pick the mystery at new-game setup; the console route is on the entry —
+disclose if used).
+⭐ **QUEUED 2026-08-11 — you built the fixture yourself** (`PT-15.savegame.sav`,
+mystery selected, tech un-cheated): the **`corun-pt15`** chain runs this as its
+front on a staged COPY (`CP15STAGE.savegame.sav`, byte-identical, MD5-verified —
+your save is protected and survives), with the C39 law observation and the F85
+Ctrl-F9 check riding the same sitting.
+
+⭐ **Where the save is, 2026-08-11 (your report):** *"The save just came out of
+the founder stage I think."* That means the mystery's first timer is **running**,
+so the opening beat is **10–20 sols away and no more** — the wait has a
+guaranteed end (~12 real minutes at ultra). ⚠️ The game keeps no record of *when*
+approval fired, so your report is the only source for it and the rig treats it as
+your word, not a reading; it will say so out loud if the save disagrees.
+⇒ **Useful consequence: roughly the first 10 sols are dead time.** The sitting
+should spend them on the C39 law observation and the Ctrl-F9 check rather than
+watching an empty map.
+
+⚠️⚠️ **READ THIS BEFORE YOU SIT DOWN — the mystery is much longer than this
+section used to say, and the correction came from reading the whole sequence
+rather than its first beat** (prep 2026-08-11, `Mystery 11.generated.lua`).
+That first beat is only the beginning. Between it and the wisp choice the
+sequence sleeps **another ~30–60 sols** in four more scripted waits (the largest
+is 15–30 sols on its own) and gates on things only you can do: **scan two
+sinkhole anomalies**, **build a Large Water Tank and fill it to 80%**, **build a
+Light Trap**, and then reach **30 wisp catches** (`fireflies_caught > 29` is the
+literal gate on the choice).
+⇒ **A single sitting is still unlikely to reach the wisp choice.** Derived, not
+measured: 40–80 sols of scripted sleep alone is ~25–50 real minutes at ultra
+(1 sol = 720,000 game-ms, measured; ultra = 20×), before any of the player-gated
+stages.
+⭐ **Two things that make it cheaper than that sounds.** (1) The 30 is **catch
+events, not 30 different wisps** — wisps fly home at 4 AM and come back the next
+night, so the same few keep counting; a correction to prep's own first estimate,
+which was an order of magnitude too pessimistic. (2) Three of the five stages
+above have standing accelerators: `CheatCompleteAllConstructions` and
+`CheatFillAllStorages` cover the water tank and the Light Trap outright.
+⇒ **The one thing that really controls the wisp rate is placement: build the
+traps hard against the sinkholes** (they are only found within 400m of one) and
+keep them powered.
+**What the sitting therefore does:** reads exactly where the mystery stands
+(`CP15.MysteryWhere()` — the founder stage is measurable to the game-second; the
+10–20 sol sleep is **not** exposed to Lua and is reported as a bound, never as a
+number), marches at ultra as far as it gets, and if the choice is not reached it
+saves the progress under a chain name and hands PT-15 to a follow-up sitting.
+C39 and the Ctrl-F9 check do not depend on any of this and complete regardless.
+**Requirements for the sitting:** the staged copy is already made; ultra speed is
+FORCED and disclosed; **you** play the colony and answer the mystery's choice
+prompts — the rig only reads. Nothing is injected into wisps, traps or the
+mystery sequence (the mystery is played, not forced).
+**Setup:**
+1. Choose "free the wisps" **at the game's own choice prompt** when it appears.
+2. The agent reads the trap **immediately** (`CP15.TrapRead(...)`): output equal
+   to the wisp count = broken, 1000× the wisp count = fixed.
+   ⚠️ **Immediately matters.** The broken value is overwritten by the next wisp
+   event — typically the 4 AM release — because every other code path already
+   multiplies correctly. A late read shows a healthy number either way.
+**Good to have:** on a separate trapful, destroy mode — the research points
+granted must MATCH the notification's number (the F15 half). ⚠️ Two things prep
+found: the reward arrives **3.3 game hours late** (each wisp's death sleeps
+first), and once destroy mode is on **no further wisps spawn at all** — so it is
+a one-shot rider, taken last.
+
+⚖️ **Two calls that are yours to make DURING the sitting** (your order,
+2026-08-11 — both built and parked, neither runs unless you say so; the agent
+will put each to you once, at the moment it would help):
+
+1. **Measure how fast this save can safely run.** "Ultra" is 20× by UI
+   convention only — the engine allows far more, and the march is mostly
+   waiting. Costs ~2 minutes, and it is nearly free because it runs during the
+   countdown's dead window, so the measuring *is* the marching. ⚠️ It has to be
+   measured rather than guessed: past a certain speed the game skips the hourly
+   check that spawns wisps, and it does so **silently** — no error, just a night
+   where nothing appears. The rig finds the fastest setting where that never
+   happens.
+2. **Fill the sinkholes with wisps.** There is an unused developer function that
+   tops a sinkhole up to 30. It would collapse the 30-catch gate to a night or
+   two. The wisps still have to wake up, fly out and get caught normally, and it
+   does not touch the power maths the test is actually about — but it does mean
+   we can no longer say the wisps arrived the way a player's would, so a full
+   `tested` verdict would have to name it. **Your call, not ours**; it is the one
+   thing here that overrides a standing rule of the chain.
+
+
+## (2) ✅ BOTH TICKS DONE — added 2026-08-11 by `unattended-2`, closed the same day, CONFIRMED by the corun-pt15 audit
+
+Not decisions; things only your hands could do. Both are done; the block stays
+until the next launch confirms the second one stuck. *(It did — audit,
+2026-08-11.)*
+
+**1. ~~The Community Fix Pack is DISABLED in your Mod Manager~~ ✅ DONE — you
+re-enabled it at 01:57 and the re-run measured `81/81 active`.** Recorded
+because it cost the night's first launch and because the cause is worth knowing:
+`corun-batch-2`'s last leg turned the pack off on purpose to test the uninstall
+on 2026-08-10 and nothing turned it back on, so **anything you played between
+Sunday evening and last night ran without the pack.** ⚠️ For next time: after
+any leg that disables the pack, re-enabling it is part of that leg's close-out —
+the rig cannot do it (`AccountStorage`, `SaveAccountStorage` and
+`ModsReloadItems` are all engine-blacklisted for mod code, and there is no
+console at the main menu), so it has to be handed back to you explicitly.
+**Everything it was blocking is now verified and closed.**
+
+**2. ~~Steam Cloud is putting your deleted staged saves back~~ ✅ DONE — you
+unticked it 2026-08-11 ("Steam settings done"), and the strays are cleared.**
+The save-folder gate that "failed twice" was never a diligence problem: we
+delete the files, and Steam restores them at the next launch — measured on two
+independent launches, 14 saves restored with creation stamps inside the launch
+window and week-old modification dates, all written **before the game process
+even started**. Details: `agent/facts/EF-051`.
+✅ **Cleanup executed right after your untick:** all **14 strays deleted**
+(`CB1STAGE`, `CB2STAGE`, `CORUN0`, `CORUN1`, `U1STAGE`, `CB2F85`, `CB2PKEY`,
+`CB2PKEY2`, `CB2UNINSTALL`, `U1C0PROOF`, `U1C1HEAL`, `U1C2PT35`, `U1C6FORCED`,
+`U1C6HEALED`), **732 MB reclaimed**, directory verified at **55 `.sav` files**
+— the exact pre-restore baseline — with `PT35FIXTURE` and `TEST2H TRAIN` both
+MD5-verified untouched.
+⭐⭐ **AND THAT READING IS IN — it was your own launch this morning, and it
+passed.** You unticked and we cleared at **09:43**; Steam's launch marker was
+rewritten at **09:47**; you then played (two autosaves and `PT-15`). **Not one
+of the 14 came back.** So the restore mechanism looks dead. The formal
+retirement of our "never say gone" rule is the chain audit's call — it needs to
+check our working, not take our word — but nothing is owed from you.
+*(Audit 2026-08-11: working re-checked and confirmed; retired. A third data
+point landed free — the strays were still absent after the sitting's own 15:09
+launch.)*
+
+✅ **The one loose thread is closed too — nothing is missing.** The count looked
+two short (55 before; afterwards 53 old ones plus the 3 you made). You confirmed
+you hadn't deleted anything, so we went looking, and an earlier session had
+already written the answer down: the game had two rolling autosaves of its own,
+**`Autosave Sol 351` and `Autosave Sol 356`**, noted at the time as files that
+"rotate out on their own". Your new colony's autosaves — **Sol 11 and Sol 16**,
+the same two slots, the same 5-sol spacing — replaced them.
+It reconciles exactly: 55 − 2 rotated out + 2 new autosaves + `PT-15` = 56.
+⇒ **No file left that folder except by the game's own housekeeping.** Nothing
+for you to do; the audit re-checked the working and it holds.

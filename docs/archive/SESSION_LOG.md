@@ -8,6 +8,107 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-11 — `corun-pt15` CLOSED by the terminal audit: every leg SUSTAINED, F07's `tested` grant STANDS, EF-051's caveat retired
+
+Terminal audit of the PT-15 mystery chain (prompts consumed at `f289b11` —
+the pre-deletion sha; the folder is emptied in this record's own commit).
+
+**Job 1 — the record, audited against the archived log.**
+`cp15sitting_Mars.exe-20260811-15.09.30.log` byte-compared over the FULL
+206,861 bytes against the on-disk original (`…-6a22b86d.log`) — IDENTICAL, MD5
+`491483C73FC1E935A9A3A8945E5C296B` as claimed — and read whole (1,659 lines).
+Sweep: **0 `[LUA ERROR]` · 0 `TrackElement` (F99) · 0 `invalid pos` (C45)**;
+no `Game saved:`/`Save failed:` anywhere; cheat markers recounted **exactly**
+as disclosed (`CheatFill` ×16, `CheatRepair` ×2, `!!! Quick Build !!!` ×4);
+every unexplained line matches the notes' attribution (Braze offline telemetry,
+the two `LawOfficeDoor` vanilla asset lines at load, one console typo of ours).
+Pack organics re-attributed: F78's storm-wedge heal ×2 (1:00:53, 2:28:25),
+F02's watchdog (2:42:44) — both entries already carry them.
+
+* **PT-15/F07 — SUSTAINED, and the `tested` grant STANDS.** Recomputed from
+  the log: `wisps=95`, `amount=95000` ⇒ ×1000 exactly; 95,000/218,520 = 43.5%
+  of grid production; 95,000/2,000 = 47.5 Solar Panels. Four agreeing reads at
+  one paused `GameTime()`; R4 held (`CP15PT15` saved, `LOAD OK #2`, identical
+  readings; 47,370,762 bytes on disk, MD5 verified today). **Ruling grounds:**
+  owner eyes attended the measure moment (Tier A — infopanel screenshot read
+  against the log's internal values, UI÷1000 stated), the verdict is quoted
+  verbatim on the entry (*"the screen shot is what I see, so it is working"*),
+  and everything forced is named IN the grant (the decisive enact was FORCED
+  after the organic click died; broken behaviour never observed). The quote is
+  transcript-resident, not log-resident — recorded as exposure, not a strike:
+  no rule requires log residency, owner rulings are recorded from chat
+  project-wide, and the F85 quote's log copy is the same chat relayed through
+  `CP15.Note`. Fixed FORWARD in WORKFLOW (new rule 3 below).
+* **C39 — SUSTAINED; conclusion re-derived from the logged numbers alone.**
+  Both members took the identical `max_workers{percent=50}` cut; only the
+  control was compensated (114→268, ×2.35) while the subject sat in a 4-point
+  band (127→131) with shifts 12/12/12→6/6/6. Revert restored both
+  (`ActiveLaws=nil`, max_workers 12 and 2, perfs 129/124 ≈ baseline). ⇒
+  **MISSING UPLIFT**, exactly as recorded; `cand` → confirmed-observed. Both
+  `Activate`/`Deactivate` first executions pcall-printed with liveness
+  witnesses. Repair options put to the owner (checklist decision 9); heading
+  tag updated to agree with the row. Prep's "fired workers do not snap back"
+  refutation confirmed in-log (full counts immediately after revert).
+* **F85 — verified recorded-and-routed, decided nowhere.** Three negative
+  witnesses + the structural control (`idQuickSave=nil` against 437 actions,
+  `poscontrol=true`, `Platform.cheats=nil` corrected from `false`) all in the
+  log at L408/L412. Disposition stays owner decision 5; STATE's stale "rides
+  the PT-20 redo" line fixed.
+* **F15 — the sitting's ONE integration gap: the entry was never updated.**
+  The log supports it (paused immediate Δ=0 at the kill = the batch grant is
+  gone; notification 1,500 = 15×100; delayed reading CONTAMINATED, ratio
+  banned from quotation) — the audit wrote the 08-11 section and row_status.
+  Stays `fixed*`; batch half MEASURED.
+* **C46 — sustained as filed: OBSERVED, FORCED mode change, PRE-RELOAD ONLY**
+  (one load of `CP15F15` closes the R4 gap — stated on entry + decision 10).
+* **EF-051 — CLOSED; the WORKFLOW "never say gone" clause is RETIRED** (dated
+  edit). Audit re-checked the working, not the word: untick commit `d03e4ef`
+  09:43:57 verified in git; 55−2+2+1=56 re-derived; the corun-batch-1 archive
+  quote read at source (*"they rotate out on their own"*); today's re-listing =
+  **59 `.sav`, every name matching the sitting's list, 0 of 14 strays, no
+  extensionless file** — a free THIRD data point (strays still absent after the
+  sitting's own 15:09 launch). All three protected saves MD5-identical
+  (`PT-15` `5D0D…C06`, `TEST2H TRAIN` `103B…958`, `PT35FIXTURE` `D721…738`).
+  Surviving rules: names-never-counts; the byte-copy/restore signature
+  ambiguity. Both methodology findings read correctly, not overstated.
+* **EF-052 — sustained with one nit corrected:** conditions said "6 sinkholes";
+  the log reads `sinkholes=1` minutes before the probes (6 was day-70).
+* **Chain rule 12(B) — WITHDRAWN, premise refuted.** `MassFireflySpawn` is
+  called by the mystery itself (`Mystery 11.generated.lua:337-351`, Src
+  re-verified by this audit: sinkhole near the 80% Large Water Tank, wait
+  `hour == 4`, spawn). Option B was never offered, never used; the 95-wisp
+  trapful is the shipped mechanic — F07's "wisp supply as shipped" carries no
+  asterisk. Third Src-refutation of a recorded fact in the project's history.
+
+**Job 3 — the ledger.** Recurred vs the standing blocks: **rule-class
+"source-derived UI claim briefed without eyes" recurred across chains** (F85's
+dead F9-rebind advice → this brief's impossible "TrapRead BEFORE the choice";
+now WORKFLOW corun-pt15 rule 2). NEW classes: the **stop-order during an open
+time-sensitive gate** (the sitting's own biggest miss — the lost organic wisp
+reading; rule 1) and **transcript-only owner verbatims** (one of four quotes
+reached the log; rule 3 + CHAIN_METHOD row). Small harness nits recorded in
+place: `C39Revert` takes no clock line (pause state at revert unevidenced —
+on the entry); SpeedRamp's wrong selector (EF-052, harness-lesson bullet).
+**Owner-time honesty:** promised ~45–90 min, actual **~3h10m attended** —
+ours to own except the march (the owner playing their own colony; prep had
+warned the mystery was far longer than first planned). Rig-side costs: the
+lost organic reading, the 400× recommendation overridden by hand, the HUD
+silently dropping the march to 1×, three asks for the cheat disclosure.
+Owner deviations (extra passenger rocket, all-shifts activation) bought the
+C39 reading and are not scored. **Economics, one line: ~3h10m of owner time
+bought the campaign's first `tested` grant, two answered candidates (C39 sign,
+F85 route), a measured fix half (F15), two new records (C46, EF-052), a second
+EF-051 sample, and three organic watch firings.**
+
+**Job 4 — integration.** F15 entry written (the gap above); C39 heading tag
+synced; EF-051/EF-052 updated; WORKFLOW "never say gone" retired + 3 new
+attended-sitting rules; CHAIN_METHOD +1 row (transcript-only verbatims / the
+sitting's correct deferral of the grant ruling); checklist — PT-15 section and
+the closed two-ticks block moved WHOLE to `PLAYTEST_ARCHIVE.md`, decisions 9
+(C39 repair) and 10 (C46) added, sitting cost stated honestly; STATE rewritten
+(chain CLOSED, NEXT = PT-20 redo, owner decisions 4 open). Chain folder
+emptied in this commit (pre-deletion sha `f289b11`). doccheck GREEN, pushed.
+
 ## 2026-08-11 — `corun-pt15` BUILT and queued (owner order): the PT-15 mystery sitting, with C39 finally observed and F85's Ctrl-F9 check re-routed to ride it
 
 Owner built the PT-15 fixture themselves (*"I setup a basic save for the
