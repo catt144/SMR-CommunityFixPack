@@ -330,6 +330,10 @@ return {
 		'CodeFileName', "Code/Fix_DustDevilSpawnGate.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_ExoticDepositSign",
+		'CodeFileName', "Code/Fix_ExoticDepositSign.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

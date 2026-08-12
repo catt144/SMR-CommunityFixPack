@@ -33,10 +33,10 @@ shipped data)**. Behind it: `unattended-3` (F85+C39+3-label) · PT-20 redo.
 
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 81 registered (74 default-active, 8 optional-gated files)
-- Code/*.lua files: 82
+- modules: 82 registered (75 default-active, 8 optional-gated files)
+- Code/*.lua files: 83
 - TestKit probes: 87
-- BUGS index rows: 101 F + 12 D + 46 C
+- BUGS index rows: 102 F + 12 D + 46 C
 ```
 
 Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).

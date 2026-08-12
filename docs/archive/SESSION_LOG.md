@@ -8,6 +8,37 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — F102 filed AND built in one session: the community's asteroid Exotic-Minerals freeze gets a gameplay-preserving fix, shipped disclaimered (owner ruling)
+
+Started from the owner's screenshot of a Steam thread (VasjaTheOx, Linux
+Mint/Proton, hard freeze visiting "blue" asteroids; DrFromage recommending the
+community "Hotfix 1.0.7 asteroid freeze" mod). Established the pack did NOT
+cover it, then — owner: *"can we actually fix it with something other than an
+asset swap"* — extracted the community mod (6-line `PlaceDeposit` resource
+swap, gameplay-lossy) and ran asset forensics: the deposit class has no unique
+logic; its sign material is the game's only sign with `VertexNoise: noiseTree`
+(7/2,455 materials), visibly hand-hacked, while the remaster's clean
+`SignRareMineralsDeposit` ships complete and orphaned (zero references,
+entities.dat record verified). **Two negative repros, both owner-run this
+session:** console-spawned D-type on the Windows rig (3 subsurface exotic
+deposits rendered ~5 min, log flushed: zero `[LUA ERROR]`, all other lines
+known noise + one legitimate F89 wedge heal) and a fresh-generated visit on
+Steam Deck/RADV — freeze is configuration-gated (witness class: NVIDIA
+proprietary under Linux; a VM repro was considered and ruled out on mechanism
+grounds — it replaces the layer under suspicion). **Owner ruling: option 3
+("Lets do option 3, its the easiest and safest, and we will just disclaimer
+it")** over dual-boot repro and community outreach (outreach stays available).
+Built same session: `Code/Fix_ExoticDepositSign.lua` (§1.1 class-default
+entity retarget + vanilla-pattern LoadGame `UpdateEntity` sweep, layer 3,
+uninstall-clean — both sign entities ship in vanilla), entry `F102.md`
+(seq 125, row 160) with the verification boundary, disclaimer draft for
+launch prep, and the do-not-conclude list; INDEX regenerated; checklist
+decision record #11 with the owed one-minute sign-render check on
+`Sylmacaink BH25`. ⚠️ Committed `--no-verify` under the hook's stated escape:
+doccheck's only RED is the corun-pt60 sitting payload armed in the TestKit
+tree (`97/98_CP60*.lua` TEMPORARY) — the concurrent chain's material, not
+this session's; everything this session touched checks green.
+
 ## 2026-08-12 — `corun-pt60` AUTHORED (owner order) · ⚠️ Steam Cloud re-ticked ON by the owner (temporary) — EF-051's retirement goes on a dated hold
 
 Owner picked PT-60 from the attended-backlog breakdown (*"Lets build the

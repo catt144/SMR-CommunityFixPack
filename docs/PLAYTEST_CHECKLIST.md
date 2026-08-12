@@ -38,6 +38,29 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
+
+11. ~~**⚖️ `F102` — the community-witnessed asteroid freeze (Linux/NVIDIA):
+    ship our entity-retarget fix without being able to verify the cure?**~~
+    ✅ **DECIDED 2026-08-12, your ruling in-session: "Lets do option 3, its the
+    easiest and safest, and we will just disclaimer it."** Built the same day:
+    `Code/Fix_ExoticDepositSign.lua` re-signs subsurface Exotic Minerals
+    deposits onto the remaster's own orphaned sign asset; gameplay untouched;
+    safety verified (both sign entities ship in vanilla, saves carry nothing
+    of ours, harmless if the freeze lives elsewhere). Your two test legs
+    (Windows rig + Steam Deck, both clean) established the freeze is
+    configuration-gated to hardware we don't own — the disclaimer text for the
+    mod page is drafted in the entry, ready for launch prep (MOD_DESCRIPTION
+    stays frozen till then). The outreach alternative (asking the community
+    mod's author to test on a freezing save) stays available any time you want
+    the cure confirmed. → `agent/bugs/F102.md`.
+    **Owed: one minute, next time you're in game with the pack updated** —
+    load the D-type asteroid save (`Sylmacaink BH25`), eyeball the three
+    crystal deposit signs: new art renders, deposits still selectable, and
+    `SMRFixPack.ListFixes()` shows `ExoticDepositSign [active]`. That closes
+    the local (safety) half; the entry then waits only on witness-class
+    reports.
+
 ### ⭐⭐ NEW 2026-08-11 — from the `corun-pt15` SITTING (two calls, both yours)
 
 **Cost, stated honestly: the brief promised ~45–90 attended minutes and the
