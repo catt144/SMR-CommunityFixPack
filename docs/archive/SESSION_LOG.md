@@ -8,6 +8,26 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — the opt-in modules are ORDERED into a standalone mod, sequenced BEFORE D13 by D13's own derivation rule
+
+Same session as the ship-line rulings, immediately after. Owner: *"one thing
+I have decided is our opt ins is going to seperate into a stand alone opt in
+mod"* — asked whether it or D13 runs first. **Answer: the split first**, and
+the reason is D13's own sequencing principle (spec against the OUTPUT):
+moving the 8 `optional = true` modules changes both mods' residue sets, both
+uninstall stories, and the disposition table — D13-first means deriving the
+exposed set and disposition twice. Recorded as checklist item 15; STATE
+NEXT re-pointed: ⓪ split chain (∥ `unattended-3`) → ① D13 over BOTH
+post-split trees → ② combined sitting (+ both-mods smoke) → ③ descriptions
+×2 → ④ owner launch tasks (now two portal passes). Scope notes the owner
+accepted: second mod carries its own metadata/description/preview/portal
+pass; the rescue artifact covers residue from both mods (one artifact).
+Technical unknown routed to split prep, FIRST job: the shared-framework
+coupling (registry, logging, Mod Options bridge — slim copy vs deliberate
+dependency); plus every baseline the split resets (gate reads, suite tally,
+doccheck counts, prediction arithmetic) is re-derived, never inherited.
+doccheck GREEN, pushed.
+
 ## 2026-08-12 — THE SHIP LINE: the owner reviews an outside process audit, rules the evidence campaign FROZEN, closes the trains queue, and keeps D13 blocking at hours-scale
 
 Same day as the `corun-pt60` close, immediately after it. The owner brought a

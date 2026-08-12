@@ -71,6 +71,21 @@ owed input stays here no matter how struck-through it looks.
     that prompted this: your process-audit artifact + `agent/reports/`
     replies, SESSION_LOG 2026-08-12.
 
+15. ✅ **DECIDED 2026-08-12, your order: the 8 opt-in modules split into a
+    STANDALONE opt-in mod** (ClassicRockets, AcknowledgedWarnings,
+    ResidencyControl, MultipleSuns, DroneOverhaul, CohortHousing, NoHomeless,
+    DroneStatDials — the `optional = true` files). **Sequenced BEFORE D13, by
+    D13's own rule:** the cleaner's exposed-set derivation must see the FINAL
+    module sets, or it gets done twice. What the split chain owns: map the
+    shared-framework coupling first (registry, logging, Mod Options bridge —
+    the standalone mod needs its own slim copy or a deliberate dependency);
+    move the files + their probes; re-derive every baseline the split resets
+    (gate reads 81/81 → main + opt-in pairs, suite tally, doccheck counts).
+    ⚠️ Scope you accepted with it: a second mod = its own metadata,
+    description, preview image and portal pass at launch, and the D13 rescue
+    artifact covers residue from BOTH mods (one artifact — spec-time detail).
+    Nothing owed by you until its verification lands in the combined sitting.
+
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
 
 11. ~~**⚖️ `F102` — the community-witnessed asteroid freeze (Linux/NVIDIA):

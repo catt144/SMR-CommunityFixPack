@@ -12,24 +12,24 @@ verdict (`unattended-1..2` · `batch-1..2` · `corun-pt15` F07 `tested` ·
 `corun-pt60` 08-12: P8 decider taken, PT-60 whole to archive — SESSION_LOG).
 RULINGS 08-12: C46 `wontfix` · F85 = `dont_pause` flip · C39 = extend
 compensation, 3 labels · load-heal CLOSED · F102 shipped w/ disclaimer.
-⭐⭐ **SHIP LINE RULED 08-12 (owner, process-audit review — checklist 14):**
-**evidence campaign FROZEN pre-release** — `fixed` + suite + self-checks + the
-verified save-safety tier IS the shipping bar; `tested` upgrades resume
-post-launch only if wanted · **trains = OPTION A**, queue CLOSED at `fixed`
-(checklist 12; `agent/reports/TRAIN_SHIP_READY_ROUTE.md`) · **D13 stays
-BLOCKING at hours-scale** (owner corrected the week estimate: build + probe +
-big-save uninstall + after-sweep) · riders C42/F99/F80/F96-R2 → post-release
+⭐⭐ **SHIP LINE RULED 08-12 (owner — checklist 14): evidence campaign FROZEN
+pre-release** (`fixed` + suite + self-checks + verified save-safety tier IS
+the bar) · **trains = OPTION A, queue CLOSED** (checklist 12 + route report) ·
+**D13 BLOCKING at hours-scale** · riders C42/F99/F80/F96-R2 → post-release
 WATCH, out of chain freight.
 ⇒ **NEXT — the release front is the ONLY main line:**
-① **D13 chain** (agent): derive the exposed set from current `Code/`
-(authoritative — inherits NO recorded count) → spec (⚠️ asks the owner the
-reserved design Q: run-after-removal / keep-installed / pack-is-own-cleaner)
-→ build + probe + curated keep/remove list (F35 modifiers ARE the repair).
-Runs ∥ **`unattended-3`** (F85+C39 on a `CP15PT15` copy; Opus runs, Fable audits).
-② **ONE combined sitting**: PT-20 redo (D13's verify method, full-restart
-rule) + D13 after-sweep on a big save + F102's 1-min sign check (`Sylmacaink BH25`).
-③ MOD_DESCRIPTION rebuild + disposition table + metadata bump (agent) → ④
-owner launch tasks ~1–2 h (wordings, images, portal — WORKFLOW "Release steps").
+⓪ **Opt-in SPLIT chain** (owner order 08-12, checklist 15): the 8 `optional`
+modules → a STANDALONE mod. Map framework coupling FIRST (registry/logging/
+Mod Options bridge); move files + probes; re-derive every baseline the split
+resets (gate 81/81 → pair, tally, counts). Before D13 so the derivation sees
+final sets. ∥ `unattended-3` (F85+C39, `CP15PT15` copy; Opus runs, Fable audits).
+① **D13 chain** (agent): derive exposed set over BOTH post-split trees (NO
+inherited count) → spec (⚠️ owner design Q asked there; ONE artifact, both
+mods) → build + probe + curated keep/remove list (F35 modifiers ARE the repair).
+② **ONE combined sitting**: PT-20 redo (D13's verify method) + D13 after-sweep
+on a big save + both-mods load/suite smoke + F102's 1-min check (`Sylmacaink BH25`).
+③ MOD_DESCRIPTION ×2 + disposition table + metadata (agent) → ④ owner launch
+tasks (~2 h; now TWO portal passes — WORKFLOW "Release steps").
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
