@@ -54,7 +54,7 @@ below. Do not file a returning stray as a finding.
 
 | # | file | owner needed? | what it does |
 |---|------|---------------|--------------|
-| 1 | `01_OPUS_PREP.md` | No — game closed | re-derive the prediction set's numbers for today's build · verify fixture + stage the COPY · resurrect + park the instruments · pre-flight every console line · checklist banner |
+| 1 | ~~`01_OPUS_PREP.md`~~ ✅ **RAN 2026-08-12, self-consumed** | No — game closed | re-derive the prediction set's numbers for today's build · verify fixture + stage the COPY · resurrect + park the instruments · pre-flight every console line · checklist banner. **Outbox = prompt 2's `## Notes from upstream`.** Parked instruments now in this folder: `97_CP60Common.lua.txt` · `98_CP60Sitting.lua.txt` · `CP60_ARM.ps1.txt` (all three die with the folder at prompt 3). ⛔ Two prep findings the sitting must not re-discover: **P9 is DEGRADED** (the field it looks for could never have been written on shipped data — Src-verified) and **two boot-time preset lines masquerade as P8 heals**. |
 | 2 | `02_OPUS_SITTING.md` | **YES — attended co-run, ~40–60 min** (15–20 min is their ordinary play) | load the pre-batch copy (heal lines land) → ListFixes + suite vs predictions → save/reload idempotence + P9 → owner plays → riders if their situation arises → log archived |
 | 3 | `03_FABLE_AUDIT.md` | No (routes decisions) | byte-compare + read the whole log · per-prediction re-derivation · status honesty · ledger · integrate · folder EMPTY · kickoff |
 

@@ -963,14 +963,18 @@ Assembly stage?
 
 # Cross-cutting — once per era of the pack
 
-### PT-60 — The chain-8b batch leg (F90-F96 + eight conversions) · Status: unrun · ⭐ attended · **mode: co-run** (routing 2026-08-04 — suite/reload/log halves rig-side; you keep the 15–20 min ordinary-play segment) · ⭐⭐ **QUEUED 2026-08-12 — the `corun-pt60` chain is AUTHORED** (`agent/prompts/corun-pt60/`, your order): a staged COPY of your `USA Sol 302` (now a protected file — the original is never touched), the 2026-08-02 prediction set annotated for today's build, riders (F21/F34(d)/F90/C42) taken only if their situation arises during your play. Your part: **~40–60 min** including the 15–20 min of ordinary play. Kickoff: a session on `01_OPUS_PREP.md` (unattended); the sitting runs when you sit. ⚠️ Steam Cloud is ON by your 08-12 note — staged-save deletions record "deleted, listing verified" until you announce the untick
+### PT-60 — The chain-8b batch leg (F90-F96 + eight conversions) · Status: unrun · ⭐ attended · **mode: co-run** (routing 2026-08-04 — suite/reload/log halves rig-side; you keep the 15–20 min ordinary-play segment) · ⭐⭐ **QUEUED 2026-08-12 — the `corun-pt60` chain is AUTHORED** (`agent/prompts/corun-pt60/`, your order): a staged COPY of your `USA Sol 302` (now a protected file — the original is never touched), the 2026-08-02 prediction set annotated for today's build, riders (F21/F34(d)/F90/C42) taken only if their situation arises during your play. Your part: **~40–60 min** including the 15–20 min of ordinary play. Kickoff: a session on `01_OPUS_PREP.md` (unattended); the sitting runs when you sit. ⚠️ Steam Cloud is ON by your 08-12 note — staged-save deletions record "deleted, listing verified" until you announce the untick · ⭐⭐ **PREP RAN 2026-08-12 — the sitting is ready to go and nothing more is owed by you before it.** Your copy is staged and MD5-verified against the original; the harness, the arm script and the annotated predictions are parked. Two things prep found that change what the leg can promise, stated here rather than buried: **(a)** one of the nine predictions (**P9**, the cleared rocket-fuel key) turns out to be **unfalsifiable on any normal save** — the field it looks for could never have been written, so that read becomes a free negative control instead of evidence; **(b)** two of the three "heal" lines the leg greps for have look-alikes that print on **every launch** before any save loads, so the brief now names both wordings — an earlier reading would have scored the leg a pass on the wrong lines. Nothing here needs a decision from you
 **Bug:** seven approved fixes and eight technique-only conversions have never
 executed in a game; a byte-equivalence argument is not an observation. Nothing
 from that batch may be called verified until this leg's numbers are quoted.
 → entries [F90](agent/bugs/F90.md)-[F96](agent/bugs/F96.md); the conversions
 and the dated prediction set: the archive snapshot.
 **Requirements:** a save PREDATING 2026-08-02 (that is what makes the heal and
-idempotence predictions readable) / pack on / ~30-40 minutes.
+idempotence predictions readable) / pack on / **~40-60 attended minutes**, of
+which 15-20 is your ordinary play — the rest is console driving, which is your
+time too and is counted here. *(This line read "~30-40 minutes" until 2026-08-12;
+it predated the co-run routing and did not count the console driving.)*
+⭐ The pre-batch save is already staged for you: a byte copy of `USA Sol 302`.
 **Setup:**
 1. Load the pre-batch save; note the heal log lines immediately.
 2. Suite run + `ListFixes()` — the agent reads the counts and probe verdicts

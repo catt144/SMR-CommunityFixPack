@@ -1,0 +1,456 @@
+-- SMR Community Fix Pack — Test Kit :: corun-pt60 SITTING PAYLOAD.  TEMPORARY
+--
+-- Declared by: corun-pt60 chain prompt 1 (01_OPUS_PREP.md), Job 3.
+-- Requires 97_CP60Common.lua (loaded first by metadata order).
+--
+-- ⛔⛔ THIS FILE STARTS NOTHING. It is a MENU of legs the agent hands to the
+--    owner to type while they play. Every leg gates first (CP60.Guard), prints
+--    its FORCED/ORGANIC label, and reads the EFFECT rather than the call (R7).
+--    The ARM gate FAILS if it finds a Boot()/Flow() call in either file.
+--
+-- HOW TO CALL A LEG (retail console; PLAYTEST_HELP "Console input forms"):
+--    *r CP60.Menu()
+--    *r CP60.Fixture("after load 1")
+--    *r CP60.Suite()
+--  ⚠️ EVERY leg here is handed with the `*r` prefix, without exception. Two
+--    independent reasons, both measured, neither optional:
+--      (a) the bare console has NO THREAD CONTEXT, so `SMRTest.RunAll()` typed
+--          bare runs with a falsy CurrentThread() and probes needing a real
+--          thread identity SKIP with a note (PLAYTEST_HELP, measured
+--          2026-08-01) — CP60.Suite would silently under-report;
+--      (b) CP60.SaveNamed yields (SaveGame), and CP60.Load Sleeps.
+--    Rather than brief four forms and get one wrong (corun-batch-2 rule 1),
+--    the brief hands `*r` on all of them. ⛔ NEVER put a `--` comment on a
+--    console line: `*r` splices onto ONE line and the chunk stops compiling.
+--
+-- ⛔ FIRST-EXECUTION DISCIPLINE (chain README rule 10) binds three things here,
+--    none of which this project has ever driven:
+--      (a) AllMapsForEach on the MIX-IN class DroneControl  — CP60.P9
+--      (b) a relay of SMRFixPack.ListFixes through the log  — CP60.Fixes
+--      (c) the astrogeologist colony-label modifier read    — CP60.Heals
+--    Each is pcall-wrapped with the result PRINTED, each prints a liveness
+--    witness, and each states its population so a zero cannot pass as a result.
+
+local REHEARSAL = false      -- flipped ONLY by CP60_ARM.ps1 arm-rehearsal (C11)
+
+CP60 = rawget(_G, "CP60") or {}
+CP60.rehearsal = REHEARSAL
+CP60.mode      = REHEARSAL and "HARNESS REHEARSAL (every verdict VOID)" or "REAL"
+
+-- ⚖️ THE FIXTURE'S LINEAGE IS A CLAIM UNTIL THIS SITTING READS IT.
+--    Prep MEASURED the file (USA Sol 302.savegame.sav, MD5
+--    2E1B12FCF48905EC6A725DE7862B00A6, 54,842,984 bytes, LastWriteTime
+--    2026-08-01 17:55:48) and byte-copied it to CP60STAGE.savegame.sav at
+--    2026-08-12 12:52:59. What prep could NOT do with the game closed is
+--    confirm it is the owner's campaign, that the pack was on when it was
+--    written, or that it predates the 2026-08-02 batch in the only sense that
+--    matters — that its colony has never seen F90-F96. CP60.Fixture reads that
+--    at the gate. ⛔ If it fails, the leg falls back to USA Sol 298 (MD5
+--    AC305FA61FE9BADD168C948AB020186D) and P8 is re-taken there.
+CP60.fixture_claim = "prep 2026-08-12: CP60STAGE.savegame.sav is a byte copy (MD5-verified identical) of USA Sol 302.savegame.sav, written 2026-08-01 17:55:48 — the latest owner-campaign save predating the 2026-08-02 batch. CONFIRMED AT THE GATE BY READS, never assumed."
+
+-- ⭐ The three save-state heal LINES, current wording read from module source
+--    2026-08-12 (Job 1). The close-out greps the archived log for these exact
+--    strings. ⚠️⚠️ THEY ARE NOT THE BOOT-TIME LINES — see CP60.Heals.
+CP60.heal_lines = {
+	"TrackSalvageWipe: deleted %d invisible track shell(s) left behind by a whole-track salvage (F91)",
+	"SaintBlessing: re-based %d dome blessing(s) onto the label colonists are actually filed under",
+	"AstrogeologistExtractors: applied %d Astrogeologist extractor bonus(es) this save started without",
+}
+
+local say  = CP60.Say
+local fmt  = CP60.Fmt
+local idof = CP60.IdOf
+
+-- The batch, by REGISTERED fix id (all twelve Src-verified present in
+-- Code/ 2026-08-12; the ids below are the Register() first arguments).
+local NEW_FIVE = {
+	"SaintBlessing", "DustDevilsDescrMap", "AstrogeologistExtractors",
+	"SinkholeIndestructible", "DustStormUndergroundBreaks",
+}
+local CONVERTED = {
+	"SmallLandscapeSites", "NightShiftWork", "GeneForging",
+	"ShuttleHubOffAvailable", "UpgradeModifierLeak",
+	"SequenceLatents",        -- F29 items 1 AND 3 — two conversions, one module
+	"DroneTransportMinors",   -- F57(a)
+}
+-- amended in place, so their apply verdict must not move either
+local TOUCHED = { "TrackSalvageWipe", "AsteroidLanderAvailable" }
+
+local NEW_PROBES = {
+	"TrackShellLeak", "SaintBlessing", "DustDevilsDescrMap",
+	"AsteroidVisitPrecedence", "AstrogeologistExtractors",
+	"SinkholeIndestructible", "DustStormBreakMapFilter",
+}
+
+---- the banner + the menu ---------------------------------------------------
+
+function CP60.Menu()
+	say("=== corun-pt60 CP60 === MODE = " .. tostring(CP60.mode))
+	if REHEARSAL then
+		say("MODE ⚠️⚠️ HARNESS REHEARSAL. This sitting proves the legs run. NOTHING it prints is a measurement; every verdict is VOID by construction.")
+	end
+	say("MENU  ⓪ gate       : *r CP60.Gate()   then   *r CP60.Load(\"CP60STAGE.savegame.sav\")   then   *r CP60.Fixture(\"after load 1\")")
+	say("MENU  ⓪ heals      : *r CP60.Heals(\"after load 1\")      [P8 EFFECT read — the LINES come from the archived log]")
+	say("MENU  ① P1-P3      : *r CP60.Fixes()")
+	say("MENU  ② P4-P5      : *r CP60.Suite()")
+	say("MENU  ③ round trip : *r CP60.SaveNamed(\"CP60RT\")   then   *r CP60.Load(\"CP60RT.savegame.sav\")   then   *r CP60.Heals(\"after load 2\")   then   *r CP60.P9()")
+	say("MENU  bookkeeping  : *r CP60.Note(\"...\")   *r CP60.Close()")
+	say("MENU  ⚠️ EVERY line above carries *r. The bare console has no thread context and CP60.Suite/SaveNamed/Load need one.")
+	return true
+end
+
+function CP60.Note(text)
+	say("NOTE " .. tostring(text))
+	return true
+end
+
+function CP60.Gate()
+	if not CP60.Guard("Gate") then return false end
+	CP60.ReadConditions("sitting opening gate", NEW_FIVE)
+	CP60.Now("gate")
+	say("GATE fixture claim :: " .. tostring(CP60.fixture_claim))
+	return true
+end
+
+function CP60.SaveNamed(name)
+	if not CP60.Guard("SaveNamed") then return false end
+	CP60.Label("FORCED", "save", "a chain-named save, taken by the harness, not by the player's own save flow")
+	return CP60.Save(name)
+end
+
+function CP60.Close()
+	CP60.ReadConditions("sitting close", NEW_FIVE)
+	CP60.Now("close")
+	CP60.Flush("sitting close")
+	CP60.ErrorWatchNote()
+	return true
+end
+
+---- ⓪ FIXTURE CONFIRM + every rider precondition, in one read ---------------
+--
+-- ⛔ EF-048 (G6): every predicate is printed with its RAW value and type.
+--    IsTechResearched returned 1 and IsTechDiscovered returned 163 on a prior
+--    fixture — numbers, not booleans.
+-- ⭐ corun-batch-1 class 2: every measure moment names the instrument that
+--    FINDS its subject. The riders in this leg's scope (F21 trains, F34(d)
+--    rocket, C42 passages, F90 elevator+storm) all have their precondition
+--    READ HERE, before anything is promised to the owner. A rider whose
+--    precondition reads zero is NOT OFFERED — it is inventoried as TAKEABLE.
+function CP60.Fixture(when)
+	if not CP60.Guard("Fixture") then return false end
+	CP60.Label("FORCED", "fixture confirm", "a staged byte copy loaded by filename; the colony inside it is the owner's own and untouched")
+	local colony = rawget(_G, "UIColony")
+
+	-- lineage: is this the pre-batch campaign save prep believes it is?
+	local get_profile = rawget(_G, "GetCommanderProfile")
+	local profile = type(get_profile) == "function" and get_profile() or nil
+	say(fmt("FIXTURE %s :: map=%s | UIColony.day=%s (prep expects ~302) | sponsor=%s | commander profile id=%s (type=%s)",
+		tostring(when), tostring(rawget(_G, "CurrentMapName")),
+		tostring(colony and colony.day),
+		tostring(colony and colony.sponsor and colony.sponsor.id or (colony and colony.sponsor)),
+		tostring(profile and profile.id), type(profile and profile.id)))
+	local mystery = colony and colony.mystery
+	say(fmt("FIXTURE %s :: mystery=%s scenario=%s", tostring(when),
+		tostring(mystery and mystery.class), tostring(mystery and mystery.scenario_name)))
+
+	-- ⭐ THE ONE READ THAT DECIDES WHICH P8 BRANCH THIS SAVE IS IN.
+	--    Fix_AstrogeologistExtractors' LoadGame heal returns immediately unless
+	--    GetCommanderProfile().id == "astrogeologist" (module source :174-178,
+	--    read 2026-08-12). On any other profile the heal is SILENT and that
+	--    SILENCE IS CORRECT — not a P8 miss. Nothing downstream may treat a
+	--    missing line as a failure without this reading beside it.
+	local is_astro = profile and profile.id == "astrogeologist"
+	say(fmt("FIXTURE %s :: ⭐ P8 BRANCH :: astrogeologist=%s ⇒ the F95 save-state heal line is %s on this save",
+		tostring(when), tostring(not not is_astro),
+		is_astro and "EXPECTED (this save started without the bonus)" or "EXPECTED ABSENT (the heal returns early on a non-astrogeologist colony — silence is CORRECT, not a miss)"))
+
+	-- colony scale
+	local domes = CP60.LabelAll("Dome")
+	local col   = (colony and colony.labels and colony.labels.Colonist) or empty_table
+	say(fmt("FIXTURE %s :: %d dome(s), %d colonist(s)", tostring(when), #domes, #col))
+
+	-- F92's population: dome Saints. Zero here ⇒ the F92 heal is silent and
+	-- the SaintBlessing probe's live half reads "nothing to read" — both fine.
+	local saints, blessed = 0, 0
+	local want = (type(rawget(_G, "GetTraitLabel")) == "function") and GetTraitLabel("Religious") or "TraitReligious"
+	local walker = rawget(_G, "AllMapsForEach")
+	if type(walker) == "function" then
+		CP60.Try("count dome Saints", walker, true, "Colonist", function(c)
+			if IsValid(c) and c.dome and type(c.traits) == "table" and c.traits.Saint then
+				saints = saints + 1
+				local mods = type(c.dome.label_modifiers) == "table" and c.dome.label_modifiers[want]
+				if mods and mods[c] then blessed = blessed + 1 end
+			end
+		end)
+	end
+	CP60.Applicable("P8/F92 population (Saints sitting in a dome)", saints, saints,
+		"the walk above also counted " .. tostring(#col) .. " colonists, so a zero here is a real zero and not a dead walk")
+	say(fmt("FIXTURE %s :: dome Saints=%d, of which already carrying a %s modifier=%d (label read live, not assumed)",
+		tostring(when), saints, tostring(want), blessed))
+
+	-- F91's population: TrackBase shells, plus the total so a zero is controlled.
+	local tracks = CP60.Count("TrackBase")
+	local shells = 0
+	for _, t in ipairs(tracks) do
+		if IsValid(t) and t.elements == false and t.elements_under_construction == false
+				and t.assigned_vehicles == false and t.demolishing then
+			shells = shells + 1
+		end
+	end
+	CP60.Applicable("P8/F91 population (TrackBase objects walked)", shells, #tracks,
+		"shells counted against the total TrackBase population, so 0 shells out of 0 tracks is NOT the same reading as 0 out of N")
+
+	-- rider preconditions, all four, read rather than promised
+	local elevators = CP60.LabelAll("Elevator")
+	local passages  = CP60.Count("Passage")
+	local trains    = CP60.Count("Train")
+	local rockets   = (colony and colony.labels and colony.labels.AllRockets)
+		or (rawget(_G, "MainCity") and MainCity.labels and MainCity.labels.AllRockets) or empty_table
+	local sinkholes = CP60.Count("Sinkhole")
+	say(fmt("FIXTURE %s :: RIDER PRECONDITIONS :: elevators=%d (F90 needs >=1 AND a surface storm) | passages=%d (C42 needs traffic, not just existence) | trains=%d + tracks=%d (F21 needs a WORKING line) | rockets=%d (F34(d) needs one loading) | sinkholes=%d (F96 R2 needs a meteor coincidence — do NOT wait for it)",
+		tostring(when), #elevators, #passages, #trains, #tracks, #rockets, #sinkholes))
+	say(fmt("FIXTURE %s :: ⛔ A rider whose precondition reads 0 above is NOT OFFERED to the owner. It is inventoried as TAKEABLE WHEN and the close-out says which read decided it.", tostring(when)))
+
+	CP60.Now(when)
+	CP60.Flush("fixture " .. tostring(when))
+	return true
+end
+
+---- ① P1/P2/P3 — the registry, relayed through the log ---------------------
+--
+-- ⭐ THE RELAY IS THE POINT. SMRFixPack.ListFixes prints through
+--    SMRFixPack.Log, whose `[CommunityFixPack]` lines are BUFFERED and do not
+--    reach disk until exit (PLAYTEST_HELP). A sitting that reads them off the
+--    screen is reading the screen, which this project has twice been wrong
+--    doing. So: call it, flush it, and then print our OWN per-id verdict lines
+--    (which flush per line) so the two are side by side in the archived file.
+function CP60.Fixes()
+	if not CP60.Guard("Fixes") then return false end
+	CP60.Label("FORCED", "registry read", "a console-driven read of the pack's own registry; it changes nothing")
+	local pack = rawget(_G, "SMRFixPack")
+	if type(pack) ~= "table" or type(pack.ListFixes) ~= "function" then
+		say("FIXES ⛔ SMRFixPack.ListFixes is not callable — nothing relayed, and P1-P3 have no reading")
+		return false
+	end
+	say("FIXES relaying SMRFixPack.ListFixes() — the [CommunityFixPack] lines that follow are the PACK's own output, one per registered fix")
+	CP60.Try("SMRFixPack.ListFixes", pack.ListFixes)
+	CP60.Flush("after ListFixes relay")
+
+	-- P1: registered vs active, printed by ReadConditions with the P1 line.
+	local active, total = CP60.ReadConditions("P1 — registered/active", nil)
+
+	-- P2 and P3: named, one line each, with the detail string.
+	local function verdict(tag, ids)
+		local ok_n, bad = 0, {}
+		for _, id in ipairs(ids) do
+			local f = pack.fixes and pack.fixes[id]
+			local st = f and f.status or "NOT REGISTERED"
+			local detail = f and f.detail or ""
+			if st == "active" then ok_n = ok_n + 1 else bad[#bad + 1] = id .. "=" .. st end
+			say(fmt("FIXES %s :: %-26s status=%-12s detail=%s", tag, id, st,
+				(detail ~= "" and detail) or "(empty — which is what P2/P3 predict)"))
+		end
+		CP60.Applicable(tag .. " active", ok_n, #ids,
+			"every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error")
+		if #bad > 0 then
+			say(fmt("FIXES %s ⛔ NOT ACTIVE: %s — read the detail string above before concluding anything (the archive's own P1 instruction)",
+				tag, table.concat(bad, ", ")))
+		end
+		return ok_n
+	end
+	verdict("P2 five-new", NEW_FIVE)
+	verdict("P3 conversions", CONVERTED)
+	verdict("P5 amended-in-place", TOUCHED)
+	CP60.Flush("after P1-P3 verdicts")
+	return true
+end
+
+---- ② P4/P5 — the probe suite ----------------------------------------------
+--
+-- ⚠️ MUST be reached through `*r` (thread context). The header line
+--    `fix pack present: %d/%d fixes active` is P1's instrument; the per-probe
+--    lines are P4's and P5's.
+-- ⭐ Prep's baseline, from the last RETAIL suite run before this leg
+--    (docs/archive/u2run3_Mars.exe-20260811-02.01.06.log, 2026-08-11): 81/81
+--    active, `77 PASS, 0 FAIL, 10 SKIP, 0 ERROR`, and all seven new probes PASS
+--    with the exact message strings quoted in the brief. Eight of the ten SKIPs
+--    are the standing retail `[install]` introspection SKIPs (enumerated in the
+--    brief); the other two were save-state SKIPs on THAT save. The archive's
+--    own rule stands: quote the header and the seven new verdicts, do NOT chase
+--    a total.
+function CP60.Suite()
+	if not CP60.Guard("Suite") then return false end
+	CP60.Label("FORCED", "probe suite", "a scripted suite run; probes drive their targets with stand-ins and change no colony state")
+	local kit = rawget(_G, "SMRTest")
+	if type(kit) ~= "table" or type(kit.RunAll) ~= "function" then
+		say("SUITE ⛔ SMRTest.RunAll is not callable — the Test Kit is not loaded, and P4/P5 have no reading")
+		return false
+	end
+	say(fmt("SUITE thread context :: CurrentThread()=%s (⚠️ falsy means this was typed WITHOUT *r and probes needing a real thread identity will SKIP — re-run it with *r before quoting any verdict)",
+		tostring(rawget(_G, "CurrentThread") and CurrentThread())))
+	local counts
+	CP60.Try("SMRTest.RunAll", function() counts = kit.RunAll() return "ran" end)
+	if type(counts) == "table" then
+		say(fmt("SUITE tally :: PASS=%s FAIL=%s SKIP=%s ERROR=%s (baseline 2026-08-11 retail, a DIFFERENT save: 77/0/10/0)",
+			tostring(counts.PASS), tostring(counts.FAIL), tostring(counts.SKIP), tostring(counts.ERROR)))
+	end
+	say("SUITE ⭐ P4 reads the SEVEN new probes' verdicts, named: " .. table.concat(NEW_PROBES, ", "))
+	say("SUITE ⭐ P5 reads the two at risk from this batch: AsteroidLanderAvailable (F94 rewrote the body it drives — it stubs IsKindOf to answer true only for UniversalRocketBase, so all five of its cases take the FIRST branch and never reach the corrected elseif; Src-verified 2026-08-12) and TrackSalvageWipe (F91 amended its module — ⚠️ that probe is kind=install and SKIPS on retail for want of introspection, so TrackShellLeak is the one that actually reads F91 here)")
+	CP60.Flush("after suite")
+	return true
+end
+
+---- ⓪/③ P8 — the three heals, read as EFFECTS (R7) -------------------------
+--
+-- ⛔⛔ THE TRAP THIS LEG EXISTS TO AVOID. Two of the pack's lines that LOOK
+--    like heals are BOOT-TIME PRESET PATCHES that fire on EVERY launch, before
+--    any save is loaded, and have nothing to do with the save's state:
+--       [CommunityFixPack] AstrogeologistExtractors: added N missing extractor
+--           entr(y/ies) to the astrogeologist profile (M already present)
+--       [CommunityFixPack] SaintBlessing: corrected N dome-colonists trait
+--           modifier label(s) of M
+--    Both are visible at lines 174 and 178 of the corun-pt15 sitting log
+--    (docs/archive/cp15sitting_Mars.exe-20260811-15.09.30.log), printed on an
+--    UNRELATED save, and again in u2run3. Counting either as a P8 save heal is
+--    a wrong reading, and it is the reading a careless grep produces.
+--    THE THREE SAVE-STATE HEAL LINES ARE THE ONES IN CP60.heal_lines.
+--
+-- ⚠️ All three are guarded on `count > 0` in module source (read 2026-08-12:
+--    Fix_TrackSalvageWipe.lua:361, Fix_SaintBlessing.lua:178,
+--    Fix_AstrogeologistExtractors.lua:212). A save with nothing to heal prints
+--    NOTHING, and that is not a miss — the archived prediction says "AT MOST
+--    one line each". The miss is a line appearing TWICE, or reappearing on the
+--    second load.
+function CP60.Heals(when)
+	if not CP60.Guard("Heals") then return false end
+	CP60.Label("FORCED", "heal effect read", "a console read taken immediately after a scripted load; the heals themselves ran on the game's own LoadGame path")
+	local colony = rawget(_G, "UIColony")
+
+	-- F91 — the shells are gone (effect), not "the sweep ran" (execution).
+	local tracks = CP60.Count("TrackBase")
+	local shells = 0
+	for _, t in ipairs(tracks) do
+		if IsValid(t) and t.elements == false and t.elements_under_construction == false
+				and t.assigned_vehicles == false and t.demolishing then
+			shells = shells + 1
+		end
+	end
+	CP60.Applicable("HEALS " .. tostring(when) .. " :: F91 shells surviving", shells, #tracks,
+		"the TrackBase walk itself; #tracks is the liveness witness for the zero")
+
+	-- F92 — every dome Saint carries the corrected label's modifier.
+	local want = (type(rawget(_G, "GetTraitLabel")) == "function") and GetTraitLabel("Religious") or "TraitReligious"
+	local saints, blessed = 0, 0
+	local walker = rawget(_G, "AllMapsForEach")
+	if type(walker) == "function" then
+		CP60.Try("HEALS walk Colonist for dome Saints", walker, true, "Colonist", function(c)
+			if IsValid(c) and c.dome and type(c.traits) == "table" and c.traits.Saint then
+				saints = saints + 1
+				local mods = type(c.dome.label_modifiers) == "table" and c.dome.label_modifiers[want]
+				if mods and mods[c] then blessed = blessed + 1 end
+			end
+		end)
+	end
+	say(fmt("HEALS %s :: F92 dome Saints=%d, carrying a %s modifier=%d (want equal; a shortfall is the re-base not reaching them)",
+		tostring(when), saints, tostring(want), blessed))
+	CP60.Applicable("HEALS " .. tostring(when) .. " :: F92 blessed", blessed, saints,
+		"saints counted in the same walk, so 0 of 0 is a save with no dome Saint and NOT a failed heal")
+
+	-- F95 — the two added extractor labels, and the DUPLICATE count, which is
+	-- the property the 2026-08-02 keyboard failure turned on (identity-keyed
+	-- presence test re-applied on every load: 1 became 2 became 3, +10% each
+	-- time). One entry per label after a save/reload round trip is the fix.
+	local get_profile = rawget(_G, "GetCommanderProfile")
+	local profile = type(get_profile) == "function" and get_profile() or nil
+	local is_astro = profile and profile.id == "astrogeologist"
+	local labels = { "AutomaticMetalsExtractor", "MicroGAutoWaterExtractor",
+		"MetalsExtractor", "WaterExtractor" }   -- last two are vanilla's own: the positive control
+	local total_entries = 0
+	for _, label in ipairs(labels) do
+		local mods = type(colony) == "table" and type(colony.label_modifiers) == "table"
+			and colony.label_modifiers[label]
+		local n = 0
+		if type(mods) == "table" then for _ in pairs(mods) do n = n + 1 end end
+		total_entries = total_entries + n
+		say(fmt("HEALS %s :: F95 colony.label_modifiers[%s] entries=%d (type=%s) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression",
+			tostring(when), label, n, type(mods)))
+	end
+	CP60.Applicable("HEALS " .. tostring(when) .. " :: F95 label modifier entries (4 labels)", total_entries,
+		is_astro and 4 or 0,
+		is_astro and "commander profile read as astrogeologist at the gate"
+			or "⛔ commander profile is NOT astrogeologist — the F95 heal returns early by design, so this whole reading has population 0 and CANNOT DISCRIMINATE. Silence here is correct.")
+
+	say(fmt("HEALS %s :: ⚠️ the three save-state heal LINES are read from the ARCHIVED log at close-out (EF-047), never from here. Grep for, verbatim: %s",
+		tostring(when), table.concat(CP60.heal_lines, "  ||  ")))
+	CP60.Flush("heals " .. tostring(when))
+	return true
+end
+
+---- ③ P9 — SMRFixPack_rocket_fuel_key must be absent -----------------------
+--
+-- ⛔⛔ PREP'S FINDING, AND IT CHANGES WHAT THIS LEG CAN CONCLUDE. P9 predicts
+--    the field is ABSENT from DroneControl after one load-and-save, "including
+--    from saves that already carry it". Src-verified 2026-08-12: NO SHIPPED
+--    SAVE CAN CARRY IT. The §1.5 shape this conversion replaced wrote the field
+--    at exactly one line, `if r.FuelResource ~= "Fuel" then
+--    self.SMRFixPack_rocket_fuel_key = r.FuelResource end`
+--    (git show 8f58f30^:Code/Fix_DroneTransportMinors.lua:173-175) — and
+--    `FuelResource` is a template property declared `default = "Fuel"`
+--    (UniversalRocket.lua:47) with ZERO assignments anywhere in ModTools\Src or
+--    Data (grep run 2026-08-12). The guard was therefore never true on shipped
+--    data and the field was never written into any save.
+--
+--    ⇒ An ABSENT reading here is TRUE and WORTH TAKING (it is the current
+--      build's behaviour, and it is free), but it CANNOT DISCRIMINATE: it would
+--      read absent whether or not 8f58f30's clearing line works. The leg says
+--      so in its own output rather than banking a clean-looking zero — G2, and
+--      "refuted requires the condition was SAMPLED".
+--    ⇒ A PRESENT reading would be a genuine surprise and a finding: it would
+--      mean either a non-"Fuel" FuelResource exists somewhere after all, or the
+--      field arrived by a route nobody has enumerated. Report it verbatim.
+function CP60.P9()
+	if not CP60.Guard("P9") then return false end
+	CP60.Label("FORCED", "P9 field read", "a console read over every DroneControl; it changes nothing")
+
+	local carriers, seen = {}, 0
+	local base, base_ok = CP60.Count("DroneControl")
+	for _, o in ipairs(base) do
+		seen = seen + 1
+		local v = o.SMRFixPack_rocket_fuel_key
+		if v ~= nil then
+			carriers[#carriers + 1] = idof(o) .. "=" .. tostring(v) .. "(" .. type(v) .. ")"
+		end
+	end
+
+	-- ⭐ THE LIVENESS WITNESS FOR THE ENUMERATION ITSELF (unattended-1 class 2).
+	--    DroneControl is a MIX-IN parent (of DroneHub, RocketBase, RCRover —
+	--    Src-verified 2026-08-12), not a placed template, and this project has
+	--    never walked one. A base walk of 0 while the concrete walks find
+	--    objects means the WALK failed, and a zero from a failed walk is the
+	--    exact shape of a false clean result.
+	local concrete = 0
+	for _, cls in ipairs({ "DroneHub", "RocketBase", "RCRover" }) do
+		local objs = CP60.Count(cls)
+		concrete = concrete + #objs
+		for _, o in ipairs(objs) do
+			local v = o.SMRFixPack_rocket_fuel_key
+			if v ~= nil then
+				carriers[#carriers + 1] = idof(o) .. "=" .. tostring(v) .. "(" .. type(v) .. ") [via " .. cls .. "]"
+			end
+		end
+	end
+	say(fmt("P9 enumeration witness :: base-class DroneControl walk saw %d (ok=%s) | concrete DroneHub+RocketBase+RCRover walks saw %d. ⛔ base=0 with concrete>0 means the MIX-IN walk does not work and the base number is NOT evidence of absence.",
+		seen, tostring(base_ok), concrete))
+
+	local population = (seen > 0) and seen or concrete
+	CP60.Applicable("P9 DroneControls carrying SMRFixPack_rocket_fuel_key", #carriers, population,
+		"the two independent walks above; the population is what makes a zero mean anything")
+	if #carriers > 0 then
+		say("P9 ⭐⭐ PRESENT — this is a FINDING, not a pass. Prep derived that no shipped save can carry this field (see this leg's header). Report verbatim: " .. table.concat(carriers, "; "))
+	else
+		say("P9 ABSENT on " .. tostring(population) .. " DroneControl(s). ⚠️ TRUE BUT NON-DISCRIMINATING: prep Src-verified that the removed §1.5 shape could never have written this field on shipped data (FuelResource defaults to \"Fuel\", UniversalRocket.lua:47, zero assignments in Src/Data), so this reads absent either way. Record it as a NEGATIVE CONTROL HELD, never as 'the field-removal half ran'.")
+	end
+	CP60.Flush("P9")
+	return true
+end

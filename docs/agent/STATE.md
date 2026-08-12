@@ -24,10 +24,10 @@ reach the free→destroy sequence) · **F85 = BUILD the `dont_pause` flip**
 **C39 = EXTEND COMPENSATION + sweep all 3 automation labels**
 (`FactoryBuildings` sibling CONFIRMED; delabel declined) · **load-heal sweep
 CLOSED** · relabel wording deferred to launch prep. Both builds queued.
-⇒ **NEXT: `corun-pt60` — AUTHORED 08-12 (owner order): the chain-8b batch leg
-on a staged `USA Sol 302` copy. Kickoff = prompt 1 (unattended prep), sitting
-~40–60 min when the owner sits.** Behind it: the `unattended-3` build chain
-(F85 flip + C39 compensation + 3-label sweep) and the PT-20 redo — unauthored.
+⇒ **NEXT: `corun-pt60` — PREP RAN 08-12; the SITTING (prompt 2, ~40–60 min
+attended) is the next action.** `CP60STAGE` staged + MD5-verified off `USA Sol
+302`, harness/ARM parked, P1–P9 annotated — ⛔ **P9 DEGRADED (unfalsifiable on
+shipped data)**. Behind it: `unattended-3` (F85+C39+3-label) · PT-20 redo.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -41,7 +41,7 @@ BUILD STATE (emitted by tools/doccheck.py)
 
 Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fpk parity — `agent/facts/EF-014`).
 ⚖️ **F76 CLOSED-REFUTED** → `C41`. ✅ **F11** settled, P2, NOT `tested`. ⚠️
-**F99/C42 (`cand`)** — rate bounds only. ⛔ **retail probes 78/87.**
+**F99/C42 (`cand`)** — rate only. ⛔ **retail: 79/87 run, 8 `[install]` SKIP.**
 
 ## Gates and holds
 
@@ -50,9 +50,9 @@ Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fp
 - ⭐ **F02 · F78 · F81 ORGANIC 08-03, all three again 08-05; F78 +2 · F02 +1 08-11.**
 - **F42** wontfix (owner 07-25; STATE had gone stale as "blocked"). **D08
   extender overhaul** speced, unbuilt (`DRONE_OVERHAUL_OPTIONS.md`); D06 → B2.
-- ⚠️ **EF-051 ON HOLD 08-12 — owner re-ticked Steam Cloud ON** (temporary,
-  their own test; they announce the untick). Record "deleted, listing
-  verified", never "gone"; returning strays = the mechanism, NOT findings.
+- ⚠️ **EF-051 ON HOLD 08-12 — owner re-ticked Steam Cloud ON** (temporary;
+  they announce the untick). ⭐ **18 strays DID return 08-12 12:29** — the
+  mechanism, NOT findings; record "deleted, listing verified", never "gone".
 - ⛔ **Mod-Manager disable needs a FULL RESTART** (D13); the PT-20 redo is NEXT.
   ⚠️ **A leg that disables the pack HANDS THE RE-ENABLE BACK — unscriptable.**
 - **Owner decisions: 1 open**: **relabel WORDING** (launch prep, owner text).
