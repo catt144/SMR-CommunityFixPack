@@ -57,3 +57,69 @@ emitted post-split counts (both sides), the persisted-name inventory verbatim
 design (updated for anything the build learned), and every deviation from the
 design with its ruling. doccheck green ×2, commit (`-F`), push what has a
 remote, delete this file in the same commit.
+
+---
+
+## Notes from upstream (prompt 2 — QA, 2026-08-12, HEAD `1c00819`)
+
+**VERDICT: BUILD.** The full findings block is at the top of `90_DESIGN.md` —
+read it with the design; it is part of the spec. Staleness was clean in both
+repos; nothing was launched. The QA closed the design's one open Src hole
+itself: `GetFuelResourceRequest` is argument-free at declaration
+(`UniversalRocket.lua:1639`) and at all 17 shipped call sites.
+
+### MUST-FIX-IN-BUILD (each one line, each checkable)
+
+1. ⛔ **Core port procedure = whole-file token rename FIRST** (`SMRFixPack` →
+   `SMROptInPack`, `SMRFixPack_Disabled` → `SMROptInPack_Disabled`,
+   `SMRFixPack_Optional` → `SMROptInPack_Optional`), THEN the design's listed
+   literal adaptations (prefix `:27`, id `:64`/`:401`, dialog `:512-514`, log
+   text `:412`) — the §1.3 table's "COPY verbatim" for `Register`/`DataPatch`
+   is WRONG at `:384`/`:270` (fix-pack-absent = nil-index crash at every
+   Register). Check: `grep -c SMRFixPack <new>/Code/00_Core.lua` → 0 outside
+   comments; prompt 5's byte-compare diff-list includes `:270`, `:384`, `:412`.
+2. ⛔ **Do NOT add varargs to `Fix_LanderReturnFuel`** — the §1.4a "repair if
+   false" branch is dead (Src-verified argfree); the only edit owed is the
+   citation into the design record, which the QA block already carries.
+3. **TestKit `99_FixtureCarry.lua`:** add `SMRFixPack_no_homeless` to
+   `INSTANCE_FIELDS` (third Opt-written persisted field, pre-existing gap),
+   exact bytes, "(opt-in mod)" comment — alongside the design's two-prefix
+   scan change.
+4. **The §4.4 activation instrument fires AFTER ClassesBuilt** (RunAll-time
+   or a late OnMsg like LoadGame/CityStart), else NoHomeless's F100
+   second-pass Require fails again in (a2)/(b); restore original option
+   values in every branch (the DroneStatDials probe's shape).
+5. **Tombstones are NINE entries, explicitly:** D01 D02 D03 D04 D05 D06 D07
+   D09 D12 (§5.1's "D01.md…D05.md, D09.md, D12.md" shorthand drops D06/D07).
+   Index rows here stay `102 F + 12 D + 46 C`; §3.5's "102 F + 4 D"
+   alternative is the rejected shape.
+6. **The new repo carries its own copies of the bans:** the §2.1
+   persisted-name inventory verbatim (FIX_POLICY §3 addendum or PROVENANCE)
+   and a repo-local "how to run the suite" pointer (TestKit path, OptStatus
+   surface, gate-line shapes) — rule 8's "what is banned?" and "how do I run
+   the suite?" must cite new-repo files.
+7. **Record the load-order fact** (QA-pinned): inter-mod order =
+   `AccountStorage.LoadMods` enable order (`Mod.lua:1992`, `:2110-2114`,
+   `:2256`) — new-repo facts copy gains it dated from the copy; prompt 4
+   still logs the observed order.
+8. **Record the two extra fix→opt consumer edges** beside §1.5's
+   `IsLRTransportAvailable`: `Fix_ArrivalDeaths:192` → `ChooseDome`;
+   `Fix_LowStorageWarning`/`Fix_BombardmentSpread` →
+   `AddObjectToNotification`/`RemoveObjectFromNotification`. Call-time global
+   reads; order-independent; record-only, no code change.
+
+### The three weakest claims that still passed (attack order for prompts 4/5)
+
+1. **"The other 80 probes are state-independent between legs"** (§6.2's
+   arithmetic rests on it) — assumption, not measurement; prompt 4 diffs all
+   88 verdicts BY NAME against u2run3's rows (the C43 precedent), never
+   totals.
+2. **`CP15PT15`'s witness value is unverified** — if it carries no ack
+   stamps, no policy flags and base dials, cell (d) samples far less than it
+   claims; report population sizes per row (the "close cases completely"
+   rule) and stage a second save BEFORE the run if the copy proves thin.
+3. **The doccheck count-fix** (`optional` = anchored def-field count;
+   `default_active = modules - optional`) — arithmetic verified today
+   (7 def-fields; 75/74/0/74 predicted here, 9/8/7/1 new repo), but the
+   emitted `--emit-counts` is the adjudicator; a mismatch is a finding, not a
+   retype.

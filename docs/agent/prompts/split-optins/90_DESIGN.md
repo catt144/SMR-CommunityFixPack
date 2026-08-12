@@ -1,5 +1,84 @@
 # 90_DESIGN — the opt-in split, mapped before anything moves
 
+> ## ⭐ VERDICT: **BUILD** — 2026-08-12, prompt 2 QA (fresh context, adversarial)
+>
+> Every load-bearing claim was re-derived from Src/code, not read for tone.
+> **Sustained:** the §2.1 persisted-name inventory (independent sweep of all
+> non-local assignments, thread/GameVar/rawset/label-modifier greps, and
+> `git log --all -p` history — five names, no rename in any era; the
+> `NotWorkingBuildings` history hit is D02's vanilla notification id, never a
+> Register id); the §1.4 disjointness enumeration (own method: exhaustive
+> Opt-side patch-point read × whole-tree symbol grep — exactly TWO cross-set
+> sites, no third under any install shape); the §1.4a ruling (both sites
+> traced through both nesting orders to identical execution; the README stop
+> condition's own qualifier is "cannot be duplicated", and chained wrap
+> points are duplicable by the pack's founding design, `00_Core.lua:4-6`);
+> the §6.2 baseline (u2run3 log re-read: `77/0/10/0`, the 10 SKIPs matched BY
+> NAME, all 8 opt probes PASS); the cell-(d) dial-absent prediction (verified
+> against `Opt_DroneStatDials.lua:37-44,110-138`); the §4.4 instrument
+> (byte-matches the DroneStatDials probe's proven path,
+> `60_Probes_Opt.lua:789-793`); §5.1's tombstone mechanics (doccheck
+> `status_word`/INDEX-regeneration tolerate the shape); the §3.7 OFF-default
+> recommendation (scope-fence-consistent); and the §5.5 rule-8 deviation
+> (checklist/HELP single-sourced here — rule 8's question list does not
+> include them; the owner plays one game; SUSTAINED as written).
+>
+> **CLOSED by this QA — the §1.4a/§7.1 residual:** Src opened.
+> `UniversalRocketBase:GetFuelResourceRequest()` is declared with NO
+> parameters (`UniversalRocket.lua:1639`) and every shipped call site — 17,
+> enumerated across `UniversalRocket.lua`, `CargoTransporterNew.lua`,
+> `City.lua`, `FlightPolicyDef.lua` — passes no arguments. F69's no-vararg
+> wrapper is inert in either load order. **No fix-pack-side edit is needed or
+> permitted** (MUST-FIX B2).
+>
+> **New fact pinned (QA):** inter-mod load order is `AccountStorage.LoadMods`
+> — the user's ENABLE order (`Mod.lua:1992` via `GetModsToLoad()`, filled
+> into `ModsLoaded` at `:2110-2114`, iterated by `ModsLoadCode` `:2256`). So
+> the order is deterministic per account and the opt-in mod, enabled later,
+> loads AFTER the fix pack on this rig. §1.4a's order-independence is
+> defense-in-depth, not a live coin flip. Prompt 4 still records the observed
+> order (hazard 5's datum).
+>
+> **Defects found — all build-fixable, none architectural (the MUST-FIX list
+> lives in prompt 3's Notes-from-upstream):**
+> 1. ⛔ **§1.3's "COPY verbatim" is wrong for `Register` and `DataPatch`.**
+>    `00_Core.lua:384` reads the bare global `SMRFixPack_Disabled` and `:270`
+>    rawgets the string `"SMRFixPack_Disabled"`. Ported literally per the
+>    table, the new mod crashes at every `Register` call with the fix pack
+>    ABSENT (nil index — cell (b) dead on arrival) and reads the WRONG veto
+>    table with it present. The whole-file token rename §2.3 intends must be
+>    stated as the build procedure, and prompt 5's byte-compare expected-diff
+>    list must include `:270`, `:384` (and `:412`'s log-text mention).
+> 2. §1.5's "one found" is incomplete: two more fix→opt consumer edges exist
+>    (`Fix_ArrivalDeaths:192` calls `ChooseDome`, which RC/NH replace;
+>    `Fix_LowStorageWarning` + `Fix_BombardmentSpread` call
+>    `AddObjectToNotification`/`RemoveObjectFromNotification`, which AW
+>    wraps). All call-time global reads — order-independent, composition
+>    unchanged from today; record them so both-installed log differences are
+>    not misread later.
+> 3. §4.1.5 inherits a pre-existing TestKit gap without noticing:
+>    `99_FixtureCarry.lua` `INSTANCE_FIELDS` lists only two of the THREE
+>    Opt-written persisted flag fields — `SMRFixPack_no_homeless` is missing.
+> 4. §5.1's tombstone enumeration "D01.md…D05.md, D09.md, D12.md" drops
+>    D06/D07; the true list is NINE (D01–D07, D09, D12), as its own "9 D
+>    entries" line says. §3.5's alternative "102 F + 4 D" row shape is the
+>    rejected one; rows stay 102 F + 12 D + 46 C.
+> 5. §4.4's instrument must fire AFTER ClassesBuilt (RunAll-time or a late
+>    OnMsg), or NoHomeless's F100 second pass fails again and cell (a2)
+>    misses its prediction for a reason that is not a port regression.
+> 6. Prompt 4's body still carried the stale `8/8` cell-(a)/(b) predictions
+>    and a cell-(d) phrasing contradicting §6.2's dial-absent row — corrected
+>    by this QA in a dated block appended to `04_OPUS_VERIFY.md`.
+>
+> One inventory nuance recorded so nobody re-derives it as a miss:
+> `Opt_MultipleSuns` DOES leave persisted state on `SolarPanelBase` objects —
+> the vanilla `artificial_sun` member, written via the shipped
+> `SetArtificialSun` with a vanilla value. Not ours to rename; port-proof;
+> its header's "Savegame footprint: none" means "no NEW names", which is the
+> inventory's contract.
+>
+> *— prompt 2 QA, 2026-08-12, HEAD `1c00819` (pack) / `d8e1fbf` (TestKit)*
+
 Chain `split-optins`, prompt 1 (design). Written 2026-08-12, game closed, no
 code moved. **Everything here is a claim** (chain rule 3); every load-bearing
 one carries the file:line or command it came from so prompt 2 can re-derive it.
