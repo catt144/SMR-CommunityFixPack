@@ -311,6 +311,51 @@ prediction, not read.
 logs hold evidence no leg was designed to collect.** Mining them for `[LUA
 ERROR]` of any origin is cheap and has a track record.
 
+### ⛔ Cheats on playtest saves are the NORMAL condition, not a deviation (owner rule, 2026-08-12)
+
+**Adopted mid-sitting during `corun-pt60`, in the owner's own words, after a leg
+flagged six `ObjCheat CheatFill` markers as if they needed defending:**
+
+> *"We really need a standing rule that these saves are play testing saves with
+> colonies that are over sized and underindustrialized. They cannot support
+> themselves so cheats are needed to keep the colonies alive and functional. So
+> filling food, and maintance materials are needed for the game to run without
+> all the colonists dieing or buildings breaking. And unless a chain truely
+> needs a no cheat setup we will continue to have to use it, and we will need to
+> prep a save with alot of reasouces if we need a no cheat run"*
+
+**What binds, for every future leg:**
+
+1. **The baseline expectation is that cheats WILL appear in a playtest log.**
+   Every save in the owner's folder is a heavily-loaded test colony built to
+   exercise defects, not a balanced economy — it cannot feed or maintain itself.
+   `CheatFill` on food and maintenance resources is **life support for the
+   fixture**, and without it the colony dies or its buildings break, which
+   destroys the very state the leg was provisioned to read.
+2. **Still count them, still name them, still put the reason in the log** —
+   the reporting duty is unchanged (`git`-archived logs are the record). What
+   changes is the FRAMING: a cheat marker is **attributed**, not excused, and
+   **⛔ ask for the reason ONCE.** (`corun-batch-2`'s own ledger records that
+   the cheat disclosure took three asks; that is the failure mode this rule
+   retires.)
+3. **⛔ A cheat is only a confound if the reading intersects what it changed,
+   and the agent must NAME the intersection or state there is none.** "Cheats
+   were used" is not by itself a caveat on a verdict — e.g. filled storages do
+   not touch track shells, dome-Saint modifiers, colony `label_modifiers` or a
+   field on `DroneControl`, so PT-60's P8/P9 readings were unaffected and said
+   so.
+4. **A leg that genuinely needs a no-cheat run must DECLARE it in its brief and
+   PREP a resource-rich save in advance.** It cannot be improvised on an
+   existing playtest save, and it may not be satisfied by asking the owner to
+   stop using cheats on a colony that needs them to survive. Provisioning that
+   save is prep-side work with a stated cost, like any other fixture.
+
+**Why this is a rule and not a note:** the owner has now justified the same
+practice across multiple sittings, and every re-ask spends the one resource the
+co-run model exists to protect. See also the standing fixture rule — playtest
+saves are PROVISIONED before an agent ever reads them, so their state is never
+"fresh".
+
 ## Co-runs — attended experiment legs with the labor inverted (adopted 2026-08-04, owner)
 
 **Why this exists.** The owner's attended time is the scarcest resource in the

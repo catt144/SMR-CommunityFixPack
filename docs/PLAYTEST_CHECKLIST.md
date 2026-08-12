@@ -61,6 +61,86 @@ owed input stays here no matter how struck-through it looks.
     the local (safety) half; the entry then waits only on witness-class
     reports.
 
+### ⭐ NEW 2026-08-12 — raised by you mid-sitting during `corun-pt60`
+
+**Cost, stated honestly: the brief promised ~40–60 attended minutes and the
+sitting took about 95** (13:38 launch → 15:15 quit). **Roughly 45 of those
+minutes were your own three challenges and two staged attempts, and every one of
+them changed the record** — the trains question became item 12 below, and your two
+F34 challenges (the rocket's reserved pad zone, then transports) rewrote that
+fix's route documentation from three wrong claims to one correct route. That is
+not overrun and is not scored against you. **Ours is about 10 minutes:** the
+brief's console order could not be run as written (it assumed a console at the
+main menu), and I compounded it by concluding main-menu input didn't work at all
+— the log shows it *did* execute and simply never echoed to the screen, so the
+extra load I asked you for was avoidable. The measurement legs themselves ran to
+budget. ⭐ **What your minutes bought: the P8 decider, which was unrepeatable —
+it needed a save written before 2026-08-02, and `USA Sol 302` was the only one.**
+
+12. **⚖️ TRAINS — do the remaining train items get any more of your attended
+    time, or do we stop?** Your words, spoken during the PT-60 sitting and
+    recorded here rather than only in an agent doc: *"I feel like I have been
+    working on trains since day one of this mod and we still aren't done trying
+    to fix and verify trains."* **That is a fair reading of the record, and here
+    is the record so the call is yours on facts, not on mood.** Fifteen entries
+    in `agent/bugs/` are train/track/platform defects — **`tested` (4):** F44,
+    F45, F46, F47 · **`fixed`, never owner-witnessed as `tested` (5):** F11,
+    F21, F48, F64, F91 · **`fixed*` (1):** F49 · **`wontfix` (2):** F62, F79 ·
+    **still open (3):** F80 `investigating`, F99 `filed`, C45 `filed`. Four of
+    the checklist's own test legs are train legs. **What that inventory says:
+    the train FIXES are done — twelve of fifteen are built or deliberately
+    written off, and nothing on the list is waiting on a train repair.** What
+    keeps trains coming back to you is **verification**, not fixing: F21's
+    re-earn rider, F80's symptom-triggered tap, and the two `filed` items that
+    are rate questions. ⚠️ **F80 is the one that would genuinely cost you** —
+    it can only be taken WHEN the symptom appears in your own game, and its
+    entry says tapping must happen before you mitigate. **Your call, and any of
+    these is a legitimate answer:** (a) close the train verification queue —
+    F21 stays `fixed` forever, F80 stays `investigating`, and no future chain
+    proposes a train leg; (b) keep only F80's opportunistic tap, drop the rest;
+    (c) keep the queue as it stands. This sitting declined F21's rider on its
+    own (no instrument in the armed harness) and **nothing here is blocked on
+    your answer** — it decides what future chains are allowed to ask you for.
+    → the sitting's own record lands in `agent/reports/` at close-out.
+    ⭐⭐ **YOUR EXPLICIT ASK, 2026-08-12 — an AGENDA ITEM for the PT-60 audit,
+    not a note.** You want the audit session to work out **a route that moves
+    the train items into the ready-to-ship column**, instead of every chain
+    re-proposing a train leg. ⚠️ **Two corrections the audit must carry into
+    that discussion, because they change the question being asked:** (1)
+    **nothing train-related blocks the release today** — F21 already ships as
+    `fixed` and PT-62's remainder is explicitly NOT a release gate, so this is
+    a question about what STANDARD you want (is `fixed` enough to ship, or do
+    you want owner-witnessed `tested` on the train fixes before launch?), not
+    about unfinished repairs; (2) **C42 is NOT a train item** — it is
+    `PassageBase:TraverseTunnel` (dome passages), and it sat beside F21 in this
+    sitting's skip list only because both fail for the same reason, a missing
+    instrument in the armed harness. ⛔ **The audit does not get to answer the
+    standard question itself.** What it owes you is a COSTED ROUTE per
+    remaining train item — which instrument each read needs, whether it can
+    ever be organic or is forced-only, and what it would cost you in attended
+    minutes — so that the ship/no-ship standard becomes one decision in one
+    sitting instead of a recurring ask.
+
+13. ~~**⚖️ Are cheats on a playtest save a confound that needs defending every
+    time?**~~ ✅ **DECIDED 2026-08-12, your ruling mid-sitting — NO, they are
+    the normal condition and there is now a standing rule.** Your words:
+    *"We really need a standing rule that these saves are play testing saves
+    with colonies that are over sized and underindustrialized. They cannot
+    support themselves so cheats are needed to keep the colonies alive and
+    functional… And unless a chain truely needs a no cheat setup we will
+    continue to have to use it, and we will need to prep a save with alot of
+    reasouces if we need a no cheat run."* Written into
+    `agent/WORKFLOW.md` as a binding rule: cheat markers are **expected** in a
+    playtest log and get attributed, not excused; the reason is asked **once**;
+    a cheat is a confound **only** where the reading intersects what it changed,
+    and the agent must name the intersection or say there is none; and a leg
+    that truly needs a no-cheat run must **declare it in its brief and prep a
+    resource-rich save**, never improvise on an existing playtest colony.
+    **Nothing is owed by you** — this is recorded so no future sitting spends
+    your minutes re-litigating it. Trigger: six `ObjCheat CheatFill` markers in
+    the PT-60 sitting log, which cost you an explanation you should not have
+    had to give.
+
 ### ⭐⭐ NEW 2026-08-11 — from the `corun-pt15` SITTING (two calls, both yours)
 
 **Cost, stated honestly: the brief promised ~45–90 attended minutes and the

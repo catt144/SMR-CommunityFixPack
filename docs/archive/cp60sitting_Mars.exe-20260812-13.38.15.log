@@ -1,0 +1,1082 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	33%
+Disk Free      	752936 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:066
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:068
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:520
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:647
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:842
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:531
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:593
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:587
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:590
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:17:947
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:948
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:952
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:953
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+						Lua 0:00:17:954
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:17:955
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:17:956
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:957
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:17:958
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+						Lua 0:00:17:959
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+						Lua 0:00:17:960
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityFixPack] ClassicRockets: applied
+						Lua 0:00:17:961
+[mod] [CommunityFixPack] AcknowledgedWarnings: applied
+[mod] [CommunityFixPack] ResidencyControl: applied
+[mod] [CommunityFixPack] MultipleSuns: applied
+[mod] [CommunityFixPack] DroneOverhaul: applied
+[mod] [CommunityFixPack] CohortHousing: applied
+[mod] [CommunityFixPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityFixPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+						Lua 0:00:17:962
+[mod] [CommunityFixPack] DroneStatDials: applied
+						Lua 0:00:18:496
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:570
+Reloading done in 958 ms
+						Lua 0:00:18:900
+[preset] Preset postprocess took 58 ms.
+						Lua 0:00:18:946
+479 / 479 particle streams loaded in 41 ms.
+						Lua 0:00:18:947
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+						Lua 0:00:18:948
+[mod] [CommunityFixPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:140
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2						Lua 0:00:19:141
+
+[mod] [CommunityFixPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:197
+[PdxSDK] Started up. Took 1586
+						Lua 0:00:19:219
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+[mod] [CommunityFixPack] NoHomeless: applied
+						Lua 0:00:19:653
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:654
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:846
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:02:44:390
+not understood
+						Lua 0:02:57:633
+[mod] [CP60] === corun-pt60 CP60 === MODE = REAL
+[CP60] === corun-pt60 CP60 === MODE = REAL
+[CP60] === corun-pt60 CP60 === MODE = REAL
+[mod] [CP60] MENU  ⓪ gate       : *r CP60.Gate()   then   *r CP60.Load("CP60STAGE.savegame.sav")   then   *r CP60.Fixture("after load 1")
+[CP60] MENU  ⓪ gate       : *r CP60.Gate()   then   *r CP60.Load("CP60STAGE.savegame.sav")   then   *r CP60.Fixture("after load 1")
+[CP60] MENU  ⓪ gate       : *r CP60.Gate()   then   *r CP60.Load("CP60STAGE.savegame.sav")   then   *r CP60.Fixture("after load 1")
+[mod] [CP60] MENU  ⓪ heals      : *r CP60.Heals("after load 1")      [P8 EFFECT read — the LINES come from the archived log]
+[CP60] MENU  ⓪ heals      : *r CP60.Heals("after load 1")      [P8 EFFECT read — the LINES come from the archived log]
+[CP60] MENU  ⓪ heals      : *r CP60.Heals("after load 1")      [P8 EFFECT read — the LINES come from the archived log]
+[mod] [CP60] MENU  ① P1-P3      : *r CP60.Fixes()
+[CP60] MENU  ① P1-P3      : *r CP60.Fixes()
+[CP60] MENU  ① P1-P3      : *r CP60.Fixes()
+[mod] [CP60] MENU  ② P4-P5      : *r CP60.Suite()
+[CP60] MENU  ② P4-P5      : *r CP60.Suite()
+[CP60] MENU  ② P4-P5      : *r CP60.Suite()
+[mod] [CP60] MENU  ③ round trip : *r CP60.SaveNamed("CP60RT")   then   *r CP60.Load("CP60RT.savegame.sav")   then   *r CP60.Heals("after load 2")   then   *r CP60.P9()
+[CP60] MENU  ③ round trip : *r CP60.SaveNamed("CP60RT")   then   *r CP60.Load("CP60RT.savegame.sav")   then   *r CP60.Heals("after load 2")   then   *r CP60.P9()
+[CP60] MENU  ③ round trip : *r CP60.SaveNamed("CP60RT")   then   *r CP60.Load("CP60RT.savegame.sav")   then   *r CP60.Heals("after load 2")   then   *r CP60.P9()
+[mod] [CP60] MENU  bookkeeping  : *r CP60.Note("...")   *r CP60.Close()
+[CP60] MENU  bookkeeping  : *r CP60.Note("...")   *r CP60.Close()
+[CP60] MENU  bookkeeping  : *r CP60.Note("...")   *r CP60.Close()
+[mod] [CP60] MENU  ⚠️ EVERY line above carries *r. The bare console has no thread context and CP60.Suite/SaveNamed/Load need one.
+[CP60] MENU  ⚠️ EVERY line above carries *r. The bare console has no thread context and CP60.Suite/SaveNamed/Load need one.
+[CP60] MENU  ⚠️ EVERY line above carries *r. The bare console has no thread context and CP60.Suite/SaveNamed/Load need one.
+						Lua 0:04:48:016
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:04:48:019
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:04:48:047
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:04:49:960
+*** Assets reloaded in 1.9 s, read 202.1 MB, read speed 104.1 MB/s, average read 4949 bytes.
+						Lua 0:04:54:220
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:04:54:234
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: BlueSun, Brazil
+    mystery_random: 
+    game_rules: UnlockedPolicies, MoreApplicants, EasyResearch
+more_game_settings: save_game_id: UR-Hx4vC131ZHsAM, mystery: LightsMystery, coordinates: 1N134W, landing_spot: , logo: ColonizationEffort
+map_conditions: altitude: 1379, temperature: -1, cold_wave: 0, dust_devils: 83, dust_storm: 219, meteors: 73
+map_resources: concrete: 146, metals: 110, precious_metals: 110, water: 146
+						Lua 0:04:54:265
+Game Loaded in 6250 ms
+						Lua 0:04:54:299
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:04:55:494
+Game loaded on map BlankBigTerraceCMix_10 in 7575 ms
+						Lua 0:04:57:794
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:05:07:961
+[mod] [CP60] === corun-pt60 CP60 === MODE = REAL
+[CP60] === corun-pt60 CP60 === MODE = REAL
+[CP60] === corun-pt60 CP60 === MODE = REAL
+[mod] [CP60] MENU  ⓪ gate       : *r CP60.Gate()   then   *r CP60.Load("CP60STAGE.savegame.sav")   then   *r CP60.Fixture("after load 1")
+[CP60] MENU  ⓪ gate       : *r CP60.Gate()   then   *r CP60.Load("CP60STAGE.savegame.sav")   then   *r CP60.Fixture("after load 1")
+[CP60] MENU  ⓪ gate       : *r CP60.Gate()   then   *r CP60.Load("CP60STAGE.savegame.sav")   then   *r CP60.Fixture("after load 1")
+[mod] [CP60] MENU  ⓪ heals      : *r CP60.Heals("after load 1")      [P8 EFFECT read — the LINES come from the archived log]
+[CP60] MENU  ⓪ heals      : *r CP60.Heals("after load 1")      [P8 EFFECT read — the LINES come from the archived log]
+[CP60] MENU  ⓪ heals      : *r CP60.Heals("after load 1")      [P8 EFFECT read — the LINES come from the archived log]
+[mod] [CP60] MENU  ① P1-P3      : *r CP60.Fixes()
+[CP60] MENU  ① P1-P3      : *r CP60.Fixes()
+[CP60] MENU  ① P1-P3      : *r CP60.Fixes()
+[mod] [CP60] MENU  ② P4-P5      : *r CP60.Suite()
+[CP60] MENU  ② P4-P5      : *r CP60.Suite()
+[CP60] MENU  ② P4-P5      : *r CP60.Suite()
+[mod] [CP60] MENU  ③ round trip : *r CP60.SaveNamed("CP60RT")   then   *r CP60.Load("CP60RT.savegame.sav")   then   *r CP60.Heals("after load 2")   then   *r CP60.P9()
+[CP60] MENU  ③ round trip : *r CP60.SaveNamed("CP60RT")   then   *r CP60.Load("CP60RT.savegame.sav")   then   *r CP60.Heals("after load 2")   then   *r CP60.P9()
+[CP60] MENU  ③ round trip : *r CP60.SaveNamed("CP60RT")   then   *r CP60.Load("CP60RT.savegame.sav")   then   *r CP60.Heals("after load 2")   then   *r CP60.P9()
+[mod] [CP60] MENU  bookkeeping  : *r CP60.Note("...")   *r CP60.Close()
+[CP60] MENU  bookkeeping  : *r CP60.Note("...")   *r CP60.Close()
+[CP60] MENU  bookkeeping  : *r CP60.Note("...")   *r CP60.Close()
+[mod] [CP60] MENU  ⚠️ EVERY line above carries *r. The bare console has no thread context and CP60.Suite/SaveNamed/Load need one.
+[CP60] MENU  ⚠️ EVERY line above carries *r. The bare console has no thread context and CP60.Suite/SaveNamed/Load need one.
+[CP60] MENU  ⚠️ EVERY line above carries *r. The bare console has no thread context and CP60.Suite/SaveNamed/Load need one.
+						Lua 0:08:25:767
+[mod] [CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Gate
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Gate
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Gate
+[mod] [CP60] CONDITIONS pack=81/81 active | map=BlankBigTerraceCMix_10 | speed=0 | loads_this_process=0 | mode=REAL | note=sitting opening gate
+[CP60] CONDITIONS pack=81/81 active | map=BlankBigTerraceCMix_10 | speed=0 | loads_this_process=0 | mode=REAL | note=sitting opening gate
+[CP60] CONDITIONS pack=81/81 active | map=BlankBigTerraceCMix_10 | speed=0 | loads_this_process=0 | mode=REAL | note=sitting opening gate
+[mod] [CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[mod] [CP60] CONDITIONS by-name SaintBlessing = active | detail=
+[CP60] CONDITIONS by-name SaintBlessing = active | detail=
+[CP60] CONDITIONS by-name SaintBlessing = active | detail=
+[mod] [CP60] CONDITIONS by-name DustDevilsDescrMap = active | detail=
+[CP60] CONDITIONS by-name DustDevilsDescrMap = active | detail=
+[CP60] CONDITIONS by-name DustDevilsDescrMap = active | detail=
+[mod] [CP60] CONDITIONS by-name AstrogeologistExtractors = active | detail=
+[CP60] CONDITIONS by-name AstrogeologistExtractors = active | detail=
+[CP60] CONDITIONS by-name AstrogeologistExtractors = active | detail=
+[mod] [CP60] CONDITIONS by-name SinkholeIndestructible = active | detail=
+[CP60] CONDITIONS by-name SinkholeIndestructible = active | detail=
+[CP60] CONDITIONS by-name SinkholeIndestructible = active | detail=
+[mod] [CP60] CONDITIONS by-name DustStormUndergroundBreaks = active | detail=
+[CP60] CONDITIONS by-name DustStormUndergroundBreaks = active | detail=
+[CP60] CONDITIONS by-name DustStormUndergroundBreaks = active | detail=
+[mod] [CP60] CLOCK gate :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=495293
+[CP60] CLOCK gate :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=495293
+[CP60] CLOCK gate :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=495293
+[mod] [CP60] GATE fixture claim :: prep 2026-08-12: CP60STAGE.savegame.sav is a byte copy (MD5-verified identical) of USA Sol 302.savegame.sav, written 2026-08-01 17:55:48 — the latest owner-campaign save predating the 2026-08-02 batch. CONFIRMED AT THE GATE BY READS, never assumed.
+[CP60] GATE fixture claim :: prep 2026-08-12: CP60STAGE.savegame.sav is a byte copy (MD5-verified identical) of USA Sol 302.savegame.sav, written 2026-08-01 17:55:48 — the latest owner-campaign save predating the 2026-08-02 batch. CONFIRMED AT THE GATE BY READS, never assumed.
+[CP60] GATE fixture claim :: prep 2026-08-12: CP60STAGE.savegame.sav is a byte copy (MD5-verified identical) of USA Sol 302.savegame.sav, written 2026-08-01 17:55:48 — the latest owner-campaign save predating the 2026-08-02 batch. CONFIRMED AT THE GATE BY READS, never assumed.
+						Lua 0:09:10:366
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit 
+						Lua 0:09:15:246
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:09:15:251
+[mod] [CommunityFixPack] SaintBlessing: re-based 10 dome blessing(s) onto the label colonists are actually filed under
+						Lua 0:09:15:292
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:09:15:307
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4569 — 4 element(s), connections 7 -> 6, duplicate node_idx 0 -> 0
+						Lua 0:09:15:308
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4619 — 23 element(s), connections 45 -> 44, duplicate node_idx 0 -> 0
+						Lua 0:09:15:310
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4730 — 43 element(s), connections 85 -> 84, duplicate node_idx 0 -> 0
+						Lua 0:09:15:314
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 3 of 7 track(s) walked (0 raised)
+						Lua 0:09:15:317
+Game Loaded in 4951 ms
+						Lua 0:09:15:361
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:09:15:961
+Game loaded on map BlankBigCanyonCMix_09 in 5695 ms
+[mod] [CP60] LOAD OK #1 file=CP60STAGE.savegame.sav — LoadGame returned no error
+[CP60] LOAD OK #1 file=CP60STAGE.savegame.sav — LoadGame returned no error
+[CP60] LOAD OK #1 file=CP60STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:09:17:247
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:09:18:247
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:09:31:448
+[mod] [CP60] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[CP60] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[CP60] READ speed: SetGameSpeed(3) call=true | before=0 after=3
+[mod] [CP60] FLUSH after load #1 — the F91/F92/F95 save-state heal lines, if any fired, are now on disk above this line :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after load #1 — the F91/F92/F95 save-state heal lines, if any fired, are now on disk above this line :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after load #1 — the F91/F92/F95 save-state heal lines, if any fired, are now on disk above this line :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+						Lua 0:15:11:319
+[mod] [CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Fixture
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Fixture
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Fixture
+[mod] [CP60] FORCED :: fixture confirm :: a staged byte copy loaded by filename; the colony inside it is the owner's own and untouched
+[CP60] FORCED :: fixture confirm :: a staged byte copy loaded by filename; the colony inside it is the owner's own and untouched
+[CP60] FORCED :: fixture confirm :: a staged byte copy loaded by filename; the colony inside it is the owner's own and untouched
+[mod] [CP60] FIXTURE after load 1 :: map=BlankBigCanyonCMix_09 | UIColony.day=303 (prep expects ~302) | sponsor=nil | commander profile id=rocketscientist (type=string)
+[CP60] FIXTURE after load 1 :: map=BlankBigCanyonCMix_09 | UIColony.day=303 (prep expects ~302) | sponsor=nil | commander profile id=rocketscientist (type=string)
+[CP60] FIXTURE after load 1 :: map=BlankBigCanyonCMix_09 | UIColony.day=303 (prep expects ~302) | sponsor=nil | commander profile id=rocketscientist (type=string)
+[mod] [CP60] FIXTURE after load 1 :: mystery=false scenario=false
+[CP60] FIXTURE after load 1 :: mystery=false scenario=false
+[CP60] FIXTURE after load 1 :: mystery=false scenario=false
+[mod] [CP60] FIXTURE after load 1 :: ⭐ P8 BRANCH :: astrogeologist=false ⇒ the F95 save-state heal line is EXPECTED ABSENT (the heal returns early on a non-astrogeologist colony — silence is CORRECT, not a miss) on this save
+[CP60] FIXTURE after load 1 :: ⭐ P8 BRANCH :: astrogeologist=false ⇒ the F95 save-state heal line is EXPECTED ABSENT (the heal returns early on a non-astrogeologist colony — silence is CORRECT, not a miss) on this save
+[CP60] FIXTURE after load 1 :: ⭐ P8 BRANCH :: astrogeologist=false ⇒ the F95 save-state heal line is EXPECTED ABSENT (the heal returns early on a non-astrogeologist colony — silence is CORRECT, not a miss) on this save
+[mod] [CP60] FIXTURE after load 1 :: 10 dome(s), 1246 colonist(s)
+[CP60] FIXTURE after load 1 :: 10 dome(s), 1246 colonist(s)
+[CP60] FIXTURE after load 1 :: 10 dome(s), 1246 colonist(s)
+						Lua 0:15:11:321
+[mod] [CP60] TRY count dome Saints ok=true result=nil
+[CP60] TRY count dome Saints ok=true result=nil
+[CP60] TRY count dome Saints ok=true result=nil
+[mod] [CP60] READ P8/F92 population (Saints sitting in a dome) = 10 | population=10 | APPLICABLE=true | witness=the walk above also counted 1246 colonists, so a zero here is a real zero and not a dead walk
+[CP60] READ P8/F92 population (Saints sitting in a dome) = 10 | population=10 | APPLICABLE=true | witness=the walk above also counted 1246 colonists, so a zero here is a real zero and not a dead walk
+[CP60] READ P8/F92 population (Saints sitting in a dome) = 10 | population=10 | APPLICABLE=true | witness=the walk above also counted 1246 colonists, so a zero here is a real zero and not a dead walk
+[mod] [CP60] FIXTURE after load 1 :: dome Saints=10, of which already carrying a TraitReligious modifier=10 (label read live, not assumed)
+[CP60] FIXTURE after load 1 :: dome Saints=10, of which already carrying a TraitReligious modifier=10 (label read live, not assumed)
+[CP60] FIXTURE after load 1 :: dome Saints=10, of which already carrying a TraitReligious modifier=10 (label read live, not assumed)
+[mod] [CP60] COUNT TrackBase :: n=7 | walk ok=true
+[CP60] COUNT TrackBase :: n=7 | walk ok=true
+[CP60] COUNT TrackBase :: n=7 | walk ok=true
+[mod] [CP60] READ P8/F91 population (TrackBase objects walked) = 0 | population=7 | APPLICABLE=true | witness=shells counted against the total TrackBase population, so 0 shells out of 0 tracks is NOT the same reading as 0 out of N
+[CP60] READ P8/F91 population (TrackBase objects walked) = 0 | population=7 | APPLICABLE=true | witness=shells counted against the total TrackBase population, so 0 shells out of 0 tracks is NOT the same reading as 0 out of N
+[CP60] READ P8/F91 population (TrackBase objects walked) = 0 | population=7 | APPLICABLE=true | witness=shells counted against the total TrackBase population, so 0 shells out of 0 tracks is NOT the same reading as 0 out of N
+[mod] [CP60] COUNT Passage :: n=5 | walk ok=true
+[CP60] COUNT Passage :: n=5 | walk ok=true
+[CP60] COUNT Passage :: n=5 | walk ok=true
+						Lua 0:15:11:322
+[mod] [CP60] COUNT Train :: n=5 | walk ok=true
+[CP60] COUNT Train :: n=5 | walk ok=true
+[CP60] COUNT Train :: n=5 | walk ok=true
+[mod] [CP60] COUNT Sinkhole :: n=0 | walk ok=true
+[CP60] COUNT Sinkhole :: n=0 | walk ok=true
+[CP60] COUNT Sinkhole :: n=0 | walk ok=true
+[mod] [CP60] FIXTURE after load 1 :: RIDER PRECONDITIONS :: elevators=0 (F90 needs >=1 AND a surface storm) | passages=5 (C42 needs traffic, not just existence) | trains=5 + tracks=7 (F21 needs a WORKING line) | rockets=6 (F34(d) needs one loading) | sinkholes=0 (F96 R2 needs a meteor coincidence — do NOT wait for it)
+[CP60] FIXTURE after load 1 :: RIDER PRECONDITIONS :: elevators=0 (F90 needs >=1 AND a surface storm) | passages=5 (C42 needs traffic, not just existence) | trains=5 + tracks=7 (F21 needs a WORKING line) | rockets=6 (F34(d) needs one loading) | sinkholes=0 (F96 R2 needs a meteor coincidence — do NOT wait for it)
+[CP60] FIXTURE after load 1 :: RIDER PRECONDITIONS :: elevators=0 (F90 needs >=1 AND a surface storm) | passages=5 (C42 needs traffic, not just existence) | trains=5 + tracks=7 (F21 needs a WORKING line) | rockets=6 (F34(d) needs one loading) | sinkholes=0 (F96 R2 needs a meteor coincidence — do NOT wait for it)
+[mod] [CP60] FIXTURE after load 1 :: ⛔ A rider whose precondition reads 0 above is NOT OFFERED to the owner. It is inventoried as TAKEABLE WHEN and the close-out says which read decided it.
+[CP60] FIXTURE after load 1 :: ⛔ A rider whose precondition reads 0 above is NOT OFFERED to the owner. It is inventoried as TAKEABLE WHEN and the close-out says which read decided it.
+[CP60] FIXTURE after load 1 :: ⛔ A rider whose precondition reads 0 above is NOT OFFERED to the owner. It is inventoried as TAKEABLE WHEN and the close-out says which read decided it.
+[mod] [CP60] CLOCK after load 1 :: GameTime()=217578433 (302.19 sols since game start) | UIColony.day=303 hour=10 | speed=3x | RealTime()=895798
+[CP60] CLOCK after load 1 :: GameTime()=217578433 (302.19 sols since game start) | UIColony.day=303 hour=10 | speed=3x | RealTime()=895798
+[CP60] CLOCK after load 1 :: GameTime()=217578433 (302.19 sols since game start) | UIColony.day=303 hour=10 | speed=3x | RealTime()=895798
+[mod] [CP60] FLUSH fixture after load 1 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH fixture after load 1 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH fixture after load 1 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+						Lua 0:30:03:517
+[mod] [CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Heals
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Heals
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Heals
+[mod] [CP60] FORCED :: heal effect read :: a console read taken immediately after a scripted load; the heals themselves ran on the game's own LoadGame path
+[CP60] FORCED :: heal effect read :: a console read taken immediately after a scripted load; the heals themselves ran on the game's own LoadGame path
+[CP60] FORCED :: heal effect read :: a console read taken immediately after a scripted load; the heals themselves ran on the game's own LoadGame path
+[mod] [CP60] COUNT TrackBase :: n=7 | walk ok=true
+[CP60] COUNT TrackBase :: n=7 | walk ok=true
+[CP60] COUNT TrackBase :: n=7 | walk ok=true
+[mod] [CP60] READ HEALS after load 1 :: F91 shells surviving = 0 | population=7 | APPLICABLE=true | witness=the TrackBase walk itself; #tracks is the liveness witness for the zero
+[CP60] READ HEALS after load 1 :: F91 shells surviving = 0 | population=7 | APPLICABLE=true | witness=the TrackBase walk itself; #tracks is the liveness witness for the zero
+[CP60] READ HEALS after load 1 :: F91 shells surviving = 0 | population=7 | APPLICABLE=true | witness=the TrackBase walk itself; #tracks is the liveness witness for the zero
+						Lua 0:30:03:519
+[mod] [CP60] TRY HEALS walk Colonist for dome Saints ok=true result=nil
+[CP60] TRY HEALS walk Colonist for dome Saints ok=true result=nil
+[CP60] TRY HEALS walk Colonist for dome Saints ok=true result=nil
+[mod] [CP60] HEALS after load 1 :: F92 dome Saints=10, carrying a TraitReligious modifier=10 (want equal; a shortfall is the re-base not reaching them)
+[CP60] HEALS after load 1 :: F92 dome Saints=10, carrying a TraitReligious modifier=10 (want equal; a shortfall is the re-base not reaching them)
+[CP60] HEALS after load 1 :: F92 dome Saints=10, carrying a TraitReligious modifier=10 (want equal; a shortfall is the re-base not reaching them)
+[mod] [CP60] READ HEALS after load 1 :: F92 blessed = 10 | population=10 | APPLICABLE=true | witness=saints counted in the same walk, so 0 of 0 is a save with no dome Saint and NOT a failed heal
+[CP60] READ HEALS after load 1 :: F92 blessed = 10 | population=10 | APPLICABLE=true | witness=saints counted in the same walk, so 0 of 0 is a save with no dome Saint and NOT a failed heal
+[CP60] READ HEALS after load 1 :: F92 blessed = 10 | population=10 | APPLICABLE=true | witness=saints counted in the same walk, so 0 of 0 is a save with no dome Saint and NOT a failed heal
+[mod] [CP60] HEALS after load 1 :: F95 colony.label_modifiers[AutomaticMetalsExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 1 :: F95 colony.label_modifiers[AutomaticMetalsExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 1 :: F95 colony.label_modifiers[AutomaticMetalsExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[mod] [CP60] HEALS after load 1 :: F95 colony.label_modifiers[MicroGAutoWaterExtractor] entries=0 (type=nil) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 1 :: F95 colony.label_modifiers[MicroGAutoWaterExtractor] entries=0 (type=nil) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 1 :: F95 colony.label_modifiers[MicroGAutoWaterExtractor] entries=0 (type=nil) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[mod] [CP60] HEALS after load 1 :: F95 colony.label_modifiers[MetalsExtractor] entries=4 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 1 :: F95 colony.label_modifiers[MetalsExtractor] entries=4 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 1 :: F95 colony.label_modifiers[MetalsExtractor] entries=4 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[mod] [CP60] HEALS after load 1 :: F95 colony.label_modifiers[WaterExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 1 :: F95 colony.label_modifiers[WaterExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 1 :: F95 colony.label_modifiers[WaterExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[mod] [CP60] READ HEALS after load 1 :: F95 label modifier entries (4 labels) = 8 | population=0 | APPLICABLE=false | witness=⛔ commander profile is NOT astrogeologist — the F95 heal returns early by design, so this whole reading has population 0 and CANNOT DISCRIMINATE. Silence here is correct.
+[CP60] READ HEALS after load 1 :: F95 label modifier entries (4 labels) = 8 | population=0 | APPLICABLE=false | witness=⛔ commander profile is NOT astrogeologist — the F95 heal returns early by design, so this whole reading has population 0 and CANNOT DISCRIMINATE. Silence here is correct.
+[CP60] READ HEALS after load 1 :: F95 label modifier entries (4 labels) = 8 | population=0 | APPLICABLE=false | witness=⛔ commander profile is NOT astrogeologist — the F95 heal returns early by design, so this whole reading has population 0 and CANNOT DISCRIMINATE. Silence here is correct.
+[mod] [CP60] HEALS after load 1 :: ⚠️ the three save-state heal LINES are read from the ARCHIVED log at close-out (EF-047), never from here. Grep for, verbatim: TrackSalvageWipe: deleted %d invisible track shell(s) left behind by a whole-track salvage (F91)  ||  SaintBlessing: re-based %d dome blessing(s) onto the label colonists are actually filed under  ||  AstrogeologistExtractors: applied %d Astrogeologist extractor bonus(es) this save started without
+[CP60] HEALS after load 1 :: ⚠️ the three save-state heal LINES are read from the ARCHIVED log at close-out (EF-047), never from here. Grep for, verbatim: TrackSalvageWipe: deleted %d invisible track shell(s) left behind by a whole-track salvage (F91)  ||  SaintBlessing: re-based %d dome blessing(s) onto the label colonists are actually filed under  ||  AstrogeologistExtractors: applied %d Astrogeologist extractor bonus(es) this save started without
+[CP60] HEALS after load 1 :: ⚠️ the three save-state heal LINES are read from the ARCHIVED log at close-out (EF-047), never from here. Grep for, verbatim: TrackSalvageWipe: deleted %d invisible track shell(s) left behind by a whole-track salvage (F91)  ||  SaintBlessing: re-based %d dome blessing(s) onto the label colonists are actually filed under  ||  AstrogeologistExtractors: applied %d Astrogeologist extractor bonus(es) this save started without
+[mod] [CP60] FLUSH heals after load 1 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH heals after load 1 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH heals after load 1 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+						Lua 0:31:16:182
+[mod] [CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Fixes
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Fixes
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Fixes
+[mod] [CP60] FORCED :: registry read :: a console-driven read of the pack's own registry; it changes nothing
+[CP60] FORCED :: registry read :: a console-driven read of the pack's own registry; it changes nothing
+[CP60] FORCED :: registry read :: a console-driven read of the pack's own registry; it changes nothing
+[mod] [CP60] FIXES relaying SMRFixPack.ListFixes() — the [CommunityFixPack] lines that follow are the PACK's own output, one per registered fix
+[CP60] FIXES relaying SMRFixPack.ListFixes() — the [CommunityFixPack] lines that follow are the PACK's own output, one per registered fix
+[CP60] FIXES relaying SMRFixPack.ListFixes() — the [CommunityFixPack] lines that follow are the PACK's own output, one per registered fix
+[mod] [CommunityFixPack] CaveInsNoDisasters [active] Cave-ins no longer occur when the "No Disasters" game rule is active
+[mod] [CommunityFixPack] MeteorFrequency [active] Meteors strike on their designed 35-115h schedule instead of ~every 6 hours
+[mod] [CommunityFixPack] UpgradeModifierLeak [active] Salvaging an upgraded building now removes its dome/colony-wide upgrade bonuses
+[mod] [CommunityFixPack] NightShiftWork [active] Night-shift colonists go to work after midnight instead of skipping their shift
+[mod] [CommunityFixPack] MilestoneCrash [active] Completing all milestones no longer errors in No Terraforming / No Politics games
+[mod] [CommunityFixPack] WispRewards [active] Mystery 11: "free the wisps" produces real power; destroyed-wisp rewards match the notification
+[mod] [CommunityFixPack] TouristApplicants [active] Higher tourist ratings now correctly give more bonus applicants (roll was inverted)
+[mod] [CommunityFixPack] TrainsToVoid [active] Demolishing a station stores its trains instead of permanently deleting them
+						Lua 0:31:16:183
+[mod] [CommunityFixPack] LanderEmptyLaunch [active] Automatic rockets and asteroid landers wait for cargo instead of launching empty
+[mod] [CommunityFixPack] LanderCargoRatchet [active] Automatic rockets stop unloading the cargo they just loaded, and fill up with the valuable resources first
+[mod] [CommunityFixPack] LanderReturnFuel [active] Asteroid landers keep their return fuel instead of unloading it on the asteroid
+[mod] [CommunityFixPack] ShelterReflex [active] Asteroid colonists take shelter before suffocating, and keep their habitat through power blips
+[mod] [CommunityFixPack] BrokenTrackSalvage [active] Meteor-damaged tracks can be salvaged again
+[mod] [CommunityFixPack] TrackSalvageWipe [active] Salvaging one track piece no longer deletes the whole track and its trains
+[mod] [CommunityFixPack] LakeEntombment [active] Building an artificial lake no longer entombs the RC Constructor and drones
+[mod] [CommunityFixPack] GhostFarmOxygen [active] Salvaging a farm removes the oxygen it was giving its dome
+[mod] [CommunityFixPack] RocketDroneChurn [active] Landed rockets stop sending their delivery drones back to Idle every hour
+[mod] [CommunityFixPack] ShuttleTransportCache [active] New Shuttle Hubs are noticed: colonists stop being stuck with a cached 'unreachable'
+[mod] [CommunityFixPack] VacuumWalks [active] Colonists use the passages instead of crossing vacuum on foot between nearby domes
+[mod] [CommunityFixPack] ArrivalDeaths [active] Arriving colonists no longer hike to unreachable domes or land in impassable ground
+[mod] [CommunityFixPack] DroneUnreachableForever [active] Drones re-try buildings they once failed to reach instead of writing them off forever
+[mod] [CommunityFixPack] StaleReservations [active] Housing reserved for colonists that never arrive is released again
+[mod] [CommunityFixPack] CrystalMysteryHang [active] The Philosopher's Stone mystery can no longer hang forever at the finale
+[mod] [CommunityFixPack] TouristSatisfaction [active] Tourist satisfaction stops drifting down (threshold awards are now symmetric)
+[mod] [CommunityFixPack] TrainPlatformWedge [active] A stale passenger no longer wedges a train at the platform forever
+[mod] [CommunityFixPack] LowStorageWarning [active] The "Insufficient Resources" warning works again for Food and maintenance resources
+[mod] [CommunityFixPack] CommandCenterNumbers [active] Command Center resource rows show their numbers again
+[mod] [CommunityFixPack] DomeOverviewHighlight [active] Domes Overview marks low colonist stats in red again
+[mod] [CommunityFixPack] TrainCargoDumping [active] Trains stop dumping cargo at stations where that resource is switched off
+[mod] [CommunityFixPack] UniversityOvertraining [active] Universities stop training specialists for workplaces that run themselves
+[mod] [CommunityFixPack] DestroyedTunnels [active] Destroyed tunnels stay closed after loading a save instead of rejoining pathfinding
+[mod] [CommunityFixPack] DustSicknessBiorobots [active] Dust Sickness no longer infects Biorobots
+[mod] [CommunityFixPack] DustSicknessDamage [active] Dust Sickness deals its intended random damage instead of the maximum every sol
+[mod] [CommunityFixPack] GeneForging [active] The Gene Forging tech actually increases the rare-trait chance
+[mod] [CommunityFixPack] MirrorSphereSite [active] A completed Mirror Sphere site no longer accepts more drone work
+[mod] [CommunityFixPack] PayloadTemplateRefill [active] Edit Payload keeps the amounts you set instead of refilling them from the flight-policy template
+[mod] [CommunityFixPack] AsteroidLanderAvailable [active] The asteroid-expedition gate counts landed landers, and stops counting supply rockets
+[mod] [CommunityFixPack] ShuttleHubOffAvailable [active] Shuttle Hubs switched off no longer count as available colonist transport
+[mod] [CommunityFixPack] FreedHousingNotice [active] A home falling vacant is offered to the dome's homeless straight away
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch [active] A dome's free-housing total counts the same residences the game assigns colonists to
+[mod] [CommunityFixPack] SmallLandscapeSites [active] Drones no longer error out when sent to a small landscaping site
+[mod] [CommunityFixPack] LandscapeUnitFilter [active] Landscaping over a boarding point no longer drags boarding colonists out
+[mod] [CommunityFixPack] RocketInteractGuard [active] RC Transports stay off trade and refugee rockets again
+[mod] [CommunityFixPack] TrackConnectorPingPong [active] A station and a tunnel one hex apart stop stealing each other's track connector
+[mod] [CommunityFixPack] TrackTunnelPowerBridge [active] A station attached to a train tunnel bridges the power grid again
+[mod] [CommunityFixPack] GridGlobalStorage [active] Colony-wide power/water/oxygen reserve is measured as one ratio again
+[mod] [CommunityFixPack] LastTransmissionStorage [active] Last Transmission's power/water/oxygen storage opinions actually count
+[mod] [CommunityFixPack] GraphConsumedCaption [active] Command Center graph captions count maintenance, like the bars do
+[mod] [CommunityFixPack] MoraleComfortTooltip [active] Morale tooltip stops listing a Comfort bonus the game does not apply
+[mod] [CommunityFixPack] TrainWaitTime [active] Waiting on a train platform no longer counts as time spent riding
+[mod] [CommunityFixPack] FounderTraitNotification [active] The notification for a Founder gaining a trait fires again
+[mod] [CommunityFixPack] StorageRateModifiers [active] Charge and discharge rate modifiers on batteries and tanks take effect
+[mod] [CommunityFixPack] SequenceLatents [active] Sequence label sampling and the Digger timing swap behave as written
+[mod] [CommunityFixPack] IndependenceTerraforming [active] Independent Terraforming discounts special projects by the 20% it advertises
+[mod] [CommunityFixPack] TrackSalvageRefund [active] Salvaging a track refunds what the whole track cost, not one hex
+[mod] [CommunityFixPack] LayoutTechLock [active] Layout construction respects research locks
+[mod] [CommunityFixPack] TrainMinors [active] Train cap follows track length
+[mod] [CommunityFixPack] DroneTransportMinors [active] A passability change no longer corrupts each drone's unreachable-buildings table
+[mod] [CommunityFixPack] AnomalyCaveInMap [active] A cave-in on a map that does not exist is declined instead of crashing the sequence
+[mod] [CommunityFixPack] TechDescriptionBuilding [active] The Underground Medium Dome tech description names the building it actually unlocks
+[mod] [CommunityFixPack] BombardmentSpread [active] Bombardment missiles come in from spread directions instead of in parallel
+[mod] [CommunityFixPack] ExtenderFlapChurn [active] Extender power flickers no longer tear down and rebuild the whole hub (fleet-wide Idle churn)
+[mod] [CommunityFixPack] DisasterPredictionLeak [active] A finished meteor storm no longer disables rains, cold waves and dust storms forever
+[mod] [CommunityFixPack] MeteorStormWedge [active] A wedged meteor storm is detected and released instead of blocking storms forever
+[mod] [CommunityFixPack] RainsDeadlock [active] A rain that collides with another disaster retries instead of never raining again
+[mod] [CommunityFixPack] FirstAsteroidPrefabs [active] The First Asteroid prefabs still arrive if the popup was left unanswered across a save/load
+[mod] [CommunityFixPack] SaintBlessing [active] A Saint's blessing reaches the Religious colonists in their dome
+[mod] [CommunityFixPack] DustDevilsDescrMap [active] Dust devils on the surface use the surface's settings, not the map the camera is on
+[mod] [CommunityFixPack] AstrogeologistExtractors [active] The Astrogeologist bonus reaches every buildable extractor, as its own text promises
+[mod] [CommunityFixPack] SinkholeIndestructible [active] A meteor can no longer destroy the St. Elmo's Fire sinkhole
+[mod] [CommunityFixPack] DustStormUndergroundBreaks [active] A surface dust storm can no longer break cables and pipes underground
+[mod] [CommunityFixPack] DustDevilSpawnGate [active] Dust devil waves use their authored count range instead of being scaled down by the spawn chance
+[mod] [CommunityFixPack] SaveSanitizer [active] Savegame repair: lost Wind Turbine tech buff, leaked upgrade bonuses
+[mod] [CommunityFixPack] ClassicRockets [active] OPTIONAL: rockets refuel while parked, without a destination selected
+[mod] [CommunityFixPack] AcknowledgedWarnings [active] OPTIONAL: dismissing "Building Not Working" acknowledges those buildings until they recover
+[mod] [CommunityFixPack] ResidencyControl [active] OPTIONAL: per-dome "closed to new residents" policy — no quarantine involved
+[mod] [CommunityFixPack] MultipleSuns [active] OPTIONAL: build more than one Artificial Sun (and panels bind to any sun in range)
+[mod] [CommunityFixPack] DroneOverhaul [active] OPTIONAL: drone dispatch overhaul — closest fleet gets first claim on repairs; idle drones help overloaded neighbor hubs
+[mod] [CommunityFixPack] CohortHousing [active] OPTIONAL: Seniors/Children auto-move to free Retirement Home/Nursery slots
+[mod] [CommunityFixPack] NoHomeless [active] OPTIONAL: per-dome Nursery/Retirement policy — moves out homeless UNEMPLOYED colonists, unless the dome has a job opening
+[mod] [CommunityFixPack] DroneStatDials [active] OPTIONAL: Drone speed / carry capacity dials (set them in Mod Options)
+[mod] [CP60] TRY SMRFixPack.ListFixes ok=true result=nil
+[CP60] TRY SMRFixPack.ListFixes ok=true result=nil
+[CP60] TRY SMRFixPack.ListFixes ok=true result=nil
+[mod] [CP60] FLUSH after ListFixes relay :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after ListFixes relay :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after ListFixes relay :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[mod] [CP60] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | mode=REAL | note=P1 — registered/active
+[CP60] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | mode=REAL | note=P1 — registered/active
+[CP60] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=3 | loads_this_process=1 | mode=REAL | note=P1 — registered/active
+[mod] [CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[mod] [CP60] FIXES P2 five-new :: SaintBlessing              status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: SaintBlessing              status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: SaintBlessing              status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P2 five-new :: DustDevilsDescrMap         status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: DustDevilsDescrMap         status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: DustDevilsDescrMap         status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P2 five-new :: AstrogeologistExtractors   status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: AstrogeologistExtractors   status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: AstrogeologistExtractors   status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P2 five-new :: SinkholeIndestructible     status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: SinkholeIndestructible     status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: SinkholeIndestructible     status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P2 five-new :: DustStormUndergroundBreaks status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: DustStormUndergroundBreaks status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P2 five-new :: DustStormUndergroundBreaks status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] READ P2 five-new active = 5 | population=5 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+[CP60] READ P2 five-new active = 5 | population=5 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+[CP60] READ P2 five-new active = 5 | population=5 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+[mod] [CP60] FIXES P3 conversions :: SmallLandscapeSites        status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: SmallLandscapeSites        status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: SmallLandscapeSites        status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P3 conversions :: NightShiftWork             status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: NightShiftWork             status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: NightShiftWork             status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P3 conversions :: GeneForging                status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: GeneForging                status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: GeneForging                status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P3 conversions :: ShuttleHubOffAvailable     status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: ShuttleHubOffAvailable     status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: ShuttleHubOffAvailable     status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P3 conversions :: UpgradeModifierLeak        status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: UpgradeModifierLeak        status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: UpgradeModifierLeak        status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P3 conversions :: SequenceLatents            status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: SequenceLatents            status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: SequenceLatents            status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P3 conversions :: DroneTransportMinors       status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: DroneTransportMinors       status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P3 conversions :: DroneTransportMinors       status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] READ P3 conversions active = 7 | population=7 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+[CP60] READ P3 conversions active = 7 | population=7 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+[CP60] READ P3 conversions active = 7 | population=7 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+[mod] [CP60] FIXES P5 amended-in-place :: TrackSalvageWipe           status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P5 amended-in-place :: TrackSalvageWipe           status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P5 amended-in-place :: TrackSalvageWipe           status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] FIXES P5 amended-in-place :: AsteroidLanderAvailable    status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P5 amended-in-place :: AsteroidLanderAvailable    status=active       detail=(empty — which is what P2/P3 predict)
+[CP60] FIXES P5 amended-in-place :: AsteroidLanderAvailable    status=active       detail=(empty — which is what P2/P3 predict)
+[mod] [CP60] READ P5 amended-in-place active = 2 | population=2 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+						Lua 0:31:16:184
+[CP60] READ P5 amended-in-place active = 2 | population=2 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+[CP60] READ P5 amended-in-place active = 2 | population=2 | APPLICABLE=true | witness=every id in this list was Src-verified present in Code/ at prep, so a NOT REGISTERED here is a load failure, not a naming error
+[mod] [CP60] FLUSH after P1-P3 verdicts :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after P1-P3 verdicts :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after P1-P3 verdicts :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+						Lua 0:34:05:185
+Story bits: Triggered story bit - SmokeOnTheWater						Lua 0:37:43:991
+Story bits: Reply selected - That's a bit too much						Lua 0:37:53:220
+[mod] [CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Suite
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Suite
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Suite
+[mod] [CP60] FORCED :: probe suite :: a scripted suite run; probes drive their targets with stand-ins and change no colony state
+[CP60] FORCED :: probe suite :: a scripted suite run; probes drive their targets with stand-ins and change no colony state
+[CP60] FORCED :: probe suite :: a scripted suite run; probes drive their targets with stand-ins and change no colony state
+[mod] [CP60] SUITE thread context :: CurrentThread()=thread: 000001E288F55AE8 (⚠️ falsy means this was typed WITHOUT *r and probes needing a real thread identity will SKIP — re-run it with *r before quoting any verdict)
+[CP60] SUITE thread context :: CurrentThread()=thread: 000001E288F55AE8 (⚠️ falsy means this was typed WITHOUT *r and probes needing a real thread identity will SKIP — re-run it with *r before quoting any verdict)
+[CP60] SUITE thread context :: CurrentThread()=thread: 000001E288F55AE8 (⚠️ falsy means this was typed WITHOUT *r and probes needing a real thread identity will SKIP — re-run it with *r before quoting any verdict)
+[mod] [SMRTest] ---- RunAll (all probes) ----
+[SMRTest] ---- RunAll (all probes) ----
+[mod] [SMRTest] fix pack present: 81/81 fixes active
+[SMRTest] fix pack present: 81/81 fixes active
+[mod] [SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[mod] [CommunityFixPack] MeteorFrequency: WATCHDOG — no meteor resolved for 99 game hours (thread ALIVE but stuck); restarting onto vanilla's body
+[mod] [SMRTest] PASS  MeteorFrequency          [behavior] wrapper stretches only the Meteors thread's roll; body copy gone; watchdog restarts a stalled thread and spares a fresh one
+[SMRTest] PASS  MeteorFrequency          [behavior] wrapper stretches only the Meteors thread's roll; body copy gone; watchdog restarts a stalled thread and spares a fresh one
+[mod] [SMRTest] PASS  UpgradeModifierLeak      [behavior] modifier turned off
+[SMRTest] PASS  UpgradeModifierLeak      [behavior] modifier turned off
+[mod] [SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[mod] [SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[mod] [SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[mod] [SMRTest] PASS  TouristApplicants        [behavior] 1-star 162 < 2-star 323 over 400 rolls
+[SMRTest] PASS  TouristApplicants        [behavior] 1-star 162 < 2-star 323 over 400 rolls
+[mod] [SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[mod] [SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready
+[SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready
+[mod] [SMRTest] PASS  LanderCargoRatchet       [behavior] request 300000 >= 300000 aboard
+[SMRTest] PASS  LanderCargoRatchet       [behavior] request 300000 >= 300000 aboard
+[mod] [SMRTest] PASS  LanderReturnFuel         [behavior] parked lander keeps 3500 fuel requested
+[SMRTest] PASS  LanderReturnFuel         [behavior] parked lander keeps 3500 fuel requested
+[mod] [SMRTest] PASS  ShelterReflex            [behavior] life-support blip tolerated; Idle wrapper unverified (introspection unavailable (retail sandbox))
+[SMRTest] PASS  ShelterReflex            [behavior] life-support blip tolerated; Idle wrapper unverified (introspection unavailable (retail sandbox))
+						Lua 0:37:53:222
+[mod] [SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[mod] [SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+						Lua 0:37:53:224
+[mod] [SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+						Lua 0:37:53:225
+[mod] [SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[mod] [SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[mod] [SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[mod] [SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[mod] [SMRTest] PASS  DroneUnreachableForever  [behavior] failure normalised to now+0 ms; expires after 3600000 ms
+[SMRTest] PASS  DroneUnreachableForever  [behavior] failure normalised to now+0 ms; expires after 3600000 ms
+[mod] [SMRTest] F58: 3 residence(s) hold 3 reserved slot(s); 1 are clearly stale
+[SMRTest] F58: 3 residence(s) hold 3 reserved slot(s); 1 are clearly stale
+[mod] [SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (3 reserved slot(s) in this save, 1 clearly stale)
+[SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (3 reserved slot(s) in this save, 1 clearly stale)
+[mod] [SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: )
+[SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: )
+[mod] [SMRTest] PASS  TouristSatisfaction      [behavior] 0->100 pays 40000, 100->0 charges -40000
+[SMRTest] PASS  TouristSatisfaction      [behavior] 0->100 pays 40000, 100->0 charges -40000
+[mod] [SMRTest] PASS  TrainPlatformWedge       [behavior] stale passenger removed and ticket discarded
+[SMRTest] PASS  TrainPlatformWedge       [behavior] stale passenger removed and ticket discarded
+[mod] [SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  CommandCenterNumbers     [behavior] all 11 getters present
+[SMRTest] PASS  CommandCenterNumbers     [behavior] all 11 getters present
+[mod] [SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[mod] [SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20) but never overrides a configured one
+[SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20) but never overrides a configured one
+[mod] [SMRTest] PASS  ClassicRockets           [behavior] a parked player rocket keeps 3500 fuel requested
+[SMRTest] PASS  ClassicRockets           [behavior] a parked player rocket keeps 3500 fuel requested
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine label (+100% electricity_production)
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine_Large label (+100% electricity_production)
+[mod] [SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[mod] [CommunityFixPack] SaveSanitizer: removed 1 leaked upgrade modifier(s) from salvaged buildings
+[mod] [SMRTest] PASS  SaveSanitizerUpgradeLeak [behavior] orphaned upgrade bonus removed; live building's and unrelated modifiers untouched
+[SMRTest] PASS  SaveSanitizerUpgradeLeak [behavior] orphaned upgrade bonus removed; live building's and unrelated modifiers untouched
+[mod] [SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[mod] [SMRTest] PASS  SmallLandscapeSites      [behavior] two-hex site returns 2 destinations, nine-hex site still returns the closest 5
+[SMRTest] PASS  SmallLandscapeSites      [behavior] two-hex site returns 2 destinations, nine-hex site still returns the closest 5
+[mod] [SMRTest] PASS  DomeFreeSpaceMismatch    [behavior] tally follows the player's switch, matching ChooseResidence
+[SMRTest] PASS  DomeFreeSpaceMismatch    [behavior] tally follows the player's switch, matching ChooseResidence
+						Lua 0:37:53:226
+[mod] [SMRTest] PASS  FreedHousingNotice       [behavior] vacated home notifies the dome's homeless; a residence with no free slot does not
+[SMRTest] PASS  FreedHousingNotice       [behavior] vacated home notifies the dome's homeless; a residence with no free slot does not
+[mod] [SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[mod] [SMRTest] PASS  AsteroidLanderAvailable  [behavior] busy-but-unassigned landers on the pad count; assigned and off-world ones do not
+[SMRTest] PASS  AsteroidLanderAvailable  [behavior] busy-but-unassigned landers on the pad count; assigned and off-world ones do not
+[mod] [SMRTest] PASS  AutoExportPriority       [behavior] the scarce hold goes to PreciousMinerals; with room to spare both are still requested
+[SMRTest] PASS  AutoExportPriority       [behavior] the scarce hold goes to PreciousMinerals; with room to spare both are still requested
+[mod] [SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[mod] [SMRTest] PASS  GeneForging              [behavior] Gene Forging +50, Gene Selection +100, both +150
+[SMRTest] PASS  GeneForging              [behavior] Gene Forging +50, Gene Selection +100, both +150
+[mod] [SMRTest] PASS  DustSicknessDamage       [behavior] damage rolls 5..14 instead of a flat 10
+[SMRTest] PASS  DustSicknessDamage       [behavior] damage rolls 5..14 instead of a flat 10
+[mod] [SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[mod] [SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[mod] [SMRTest] PASS  UniversityOvertraining   [behavior] automated extractor needs 0, manned extractor still needs 12
+[SMRTest] PASS  UniversityOvertraining   [behavior] automated extractor needs 0, manned extractor still needs 12
+[mod] [SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped
+[SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped
+[mod] [SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[mod] [SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex; an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex; an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[mod] [SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[mod] [SMRTest] PASS  GridGlobalStorage        [behavior] 1h reserve reads 180000, empty reads 0, 100h reads 3000000 (2-sol mark is 1440000)
+[SMRTest] PASS  GridGlobalStorage        [behavior] 1h reserve reads 180000, empty reads 0, 100h reads 3000000 (2-sol mark is 1440000)
+[mod] [SMRTest] PASS  LastTransmissionStorage  [behavior] all 6 storage conditions are on Condition and read their own grid
+[SMRTest] PASS  LastTransmissionStorage  [behavior] all 6 storage conditions are on Condition and read their own grid
+[mod] [SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[mod] [SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+						Lua 0:37:53:227
+[mod] [SMRTest] PASS  MoraleComfortTooltip     [behavior] Comfort reads 69 (below the 70 mark); other stats untouched
+[SMRTest] PASS  MoraleComfortTooltip     [behavior] Comfort reads 69 (below the 70 mark); other stats untouched
+[mod] [SMRTest] PASS  StorageRateModifiers     [behavior] rates reached the element (7777/8888), UpdateStorage ran 2 time(s)
+[SMRTest] PASS  StorageRateModifiers     [behavior] rates reached the element (7777/8888), UpdateStorage ran 2 time(s)
+[mod] [SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[mod] [SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Lazy (Negative) raises the notification
+[SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Lazy (Negative) raises the notification
+[mod] [CommunityFixPack] IndependenceTerraforming: corrected the already-researched tech's stored discount from 10% to 20% (savegame sweep)
+[mod] [SMRTest] PASS  IndependenceTerraforming [behavior] discount is 20%, matching param1; the savegame sweep replaces a stale stored modifier and leaves a correct one alone
+[SMRTest] PASS  IndependenceTerraforming [behavior] discount is 20%, matching param1; the savegame sweep replaces a stale stored modifier and leaves a correct one alone
+[mod] [SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[mod] [SMRTest] PASS  LayoutTechLock           [behavior] locked entries drop; researched, prefab-package and owned-prefab entries and grid runs all survive
+[SMRTest] PASS  LayoutTechLock           [behavior] locked entries drop; researched, prefab-package and owned-prefab entries and grid runs all survive
+[mod] [SMRTest] PASS  TrainMinors              [behavior] train cap recomputed 4->1, 40->2, 0->0
+[SMRTest] PASS  TrainMinors              [behavior] train cap recomputed 4->1, 40->2, 0->0
+[mod] [SMRTest] PASS  DroneTransportMinors     [behavior] weak keys restored; count corrected 4 -> 2
+[SMRTest] PASS  DroneTransportMinors     [behavior] weak keys restored; count corrected 4 -> 2
+[mod] [SMRTest] set_global refused 'AddAreaRubble' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[SMRTest] set_global refused 'AddAreaRubble' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[mod] [SMRTest] set_global refused 'IsNearDome' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[SMRTest] set_global refused 'IsNearDome' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[mod] [SMRTest] SKIP  AnomalyCaveInMap         [behavior] stub target undeclared on this build: AddAreaRubble, IsNearDome — steps 1-3 held (the false map was declined, SMRFixPack.AnomalyCaveInMap.IsUsableMap is installed, and a usable map still reached the shipped body), but the cave-in ran against the shipped rubble/dome helpers rather than this probe's stand-ins, so the last step is not the controlled exercise it claims to be
+[SMRTest] SKIP  AnomalyCaveInMap         [behavior] stub target undeclared on this build: AddAreaRubble, IsNearDome — steps 1-3 held (the false map was declined, SMRFixPack.AnomalyCaveInMap.IsUsableMap is installed, and a usable map still reached the shipped body), but the cave-in ran against the shipped rubble/dome helpers rather than this probe's stand-ins, so the last step is not the controlled exercise it claims to be
+[mod] [SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[mod] [SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[mod] [CommunityFixPack] DisasterPredictionLeak: cleared stranded prediction flag 'DisasterMeteorStorm' (no live notification behind it)
+[mod] [SMRTest] PASS  DisasterPredictionLeak   [behavior] stranded flag cleared, notification-backed flag kept (1 cleared)
+[SMRTest] PASS  DisasterPredictionLeak   [behavior] stranded flag cleared, notification-backed flag kept (1 cleared)
+[mod] [SMRTest] PASS  MeteorStormWedge         [behavior] all four watchdog states correct: no-storm, live storm protected, signature arms, sustained heals
+[SMRTest] PASS  MeteorStormWedge         [behavior] all four watchdog states correct: no-storm, live storm protected, signature arms, sustained heals
+[mod] [CommunityFixPack] RainsDeadlock: stale-ACTIVE rain 'probe_legacy' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)
+[mod] [CommunityFixPack] RainsDeadlock: 'probe_legacy' rain loop migrated onto vanilla's body (settings 'Toxic_VeryLow', version 1.0.1)
+[mod] [SMRTest] PASS  RainsDeadlock            [behavior] 1 loop(s) migrated and stamped, current-version entry untouched, stale-ACTIVE healed (no unique-type preset in the live group: id-less sub-check skipped)
+[SMRTest] PASS  RainsDeadlock            [behavior] 1 loop(s) migrated and stamped, current-version entry untouched, stale-ACTIVE healed (no unique-type preset in the live group: id-less sub-check skipped)
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: First Asteroid prefabs recovered after a save/load (3 granted)
+[mod] [SMRTest] PASS  FirstAsteroidPrefabs     [behavior] stranded save granted 1/1/1 and latched; already-healed and non-FirstAsteroid states granted nothing
+[SMRTest] PASS  FirstAsteroidPrefabs     [behavior] stranded save granted 1/1/1 and latched; already-healed and non-FirstAsteroid states granted nothing
+[mod] [SMRTest] PASS  UpdateReport             [behavior] healthy registry clean; 4 rot shapes flagged, 4 healthy shapes ignored
+[SMRTest] PASS  UpdateReport             [behavior] healthy registry clean; 4 rot shapes flagged, 4 healthy shapes ignored
+						Lua 0:37:53:228
+[mod] [SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+[SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+						Lua 0:37:53:229
+[mod] [SMRTest] PASS  SaintBlessing            [behavior] Saint's modifier names TraitReligious, and all 10 dome Saint(s) have it registered
+[SMRTest] PASS  SaintBlessing            [behavior] Saint's modifier names TraitReligious, and all 10 dome Saint(s) have it registered
+[mod] [SMRTest] PASS  DustDevilsDescrMap       [behavior] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins
+[SMRTest] PASS  DustDevilsDescrMap       [behavior] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins
+[mod] [SMRTest] PASS  AsteroidVisitPrecedence  [behavior] supply rockets no longer open the picker; landers and F72's unloading case still do
+[SMRTest] PASS  AsteroidVisitPrecedence  [behavior] supply rockets no longer open the picker; landers and F72's unloading case still do
+						Lua 0:37:53:230
+[mod] [SMRTest] PASS  AstrogeologistExtractors [behavior] all 12 buildable extractors are paid (12 Effect_ModifyLabel entries on the profile)
+[SMRTest] PASS  AstrogeologistExtractors [behavior] all 12 buildable extractors are paid (12 Effect_ModifyLabel entries on the profile)
+[mod] [SMRTest] PASS  SinkholeIndestructible   [behavior] Sinkhole is indestructible on the class and the template; 0 instance(s) inspected, none overriding
+[SMRTest] PASS  SinkholeIndestructible   [behavior] Sinkhole is indestructible on the class and the template; 0 instance(s) inspected, none overriding
+[mod] [SMRTest] PASS  DustStormBreakMapFilter  [behavior] merged fragments are filtered to MainMap connectors, single-map fragments pass straight through, and the persisted array is restored by identity in both cases
+[SMRTest] PASS  DustStormBreakMapFilter  [behavior] merged fragments are filtered to MainMap connectors, single-map fragments pass straight through, and the persisted array is restored by identity in both cases
+[mod] [SMRTest] PASS  DustDevilSpawnGate       [behavior] the authored 6..8 range is reachable on a passed gate and the count is exactly 0 on a failed one, the shared preset is copied not mutated, class-default properties survive the copy, and full-chance presets, other disasters and nil all pass through untouched
+[SMRTest] PASS  DustDevilSpawnGate       [behavior] the authored 6..8 range is reachable on a passed gate and the count is exactly 0 on a failed one, the shared preset is copied not mutated, class-default properties survive the copy, and full-chance presets, other disasters and nil all pass through untouched
+[mod] [SMRTest] PASS  AcknowledgedWarnings     [behavior] dismissal stamps listed buildings, blocks their re-adds, skips the id-wide window; recovery re-arms
+[SMRTest] PASS  AcknowledgedWarnings     [behavior] dismissal stamps listed buildings, blocks their re-adds, skips the id-wide window; recovery re-arms
+[mod] [SMRTest] PASS  ResidencyControl         [behavior] closed dome refused to resettlers and arrivals; tourists and the safety fallback untouched
+[SMRTest] PASS  ResidencyControl         [behavior] closed dome refused to resettlers and arrivals; tourists and the safety fallback untouched
+[mod] [SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panel picks up whichever Artificial Sun is actually in range
+[SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panel picks up whichever Artificial Sun is actually in range
+[mod] [SMRTest] PASS  CohortHousing            [behavior] in-dome move + cross-dome tie-bypass work; employed/forced/no-slot/quarantine all left vanilla
+[SMRTest] PASS  CohortHousing            [behavior] in-dome move + cross-dome tie-bypass work; employed/forced/no-slot/quarantine all left vanilla
+[mod] [SMRTest] PASS  NoHomeless               [behavior] only the workforce-age UNEMPLOYED are pushed out, and only from a dome that has a Nursery or Retirement Home built and NO job opening they could take; employed/Senior/Child/tourist/housed/hotel-only/ping-pong/unsuitable/quarantine all left vanilla, the free-work door holds on BOTH sides so a flagged dome can still staff itself, and a shipped answer is never overridden except for the symmetric veto
+						Lua 0:37:53:231
+[SMRTest] PASS  NoHomeless               [behavior] only the workforce-age UNEMPLOYED are pushed out, and only from a dome that has a Nursery or Retirement Home built and NO job opening they could take; employed/Senior/Child/tourist/housed/hotel-only/ping-pong/unsuitable/quarantine all left vanilla, the free-work door holds on BOTH sides so a flagged dome can still staff itself, and a shipped answer is never overridden except for the symmetric veto
+[mod] [SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 2) and base removed both by id; account carry dial OFF BASE on entry (const 4 vs base 2) — set it to base before any human baseline read
+[SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 2) and base removed both by id; account carry dial OFF BASE on entry (const 4 vs base 2) — set it to base before any human baseline read
+[mod] [SMRTest] PASS  OptionsMenu              [behavior] default_options + 6 toggles + 2 D09 dials present, names match the registry, bridge helpers installed
+[SMRTest] PASS  OptionsMenu              [behavior] default_options + 6 toggles + 2 D09 dials present, names match the registry, bridge helpers installed
+[mod] [SMRTest] ---- 77 PASS, 0 FAIL, 10 SKIP, 0 ERROR ----
+[SMRTest] ---- 77 PASS, 0 FAIL, 10 SKIP, 0 ERROR ----
+						Lua 0:37:53:232
+[mod] [CP60] TRY SMRTest.RunAll ok=true result=ran
+[CP60] TRY SMRTest.RunAll ok=true result=ran
+[CP60] TRY SMRTest.RunAll ok=true result=ran
+[mod] [CP60] SUITE tally :: PASS=77 FAIL=0 SKIP=10 ERROR=0 (baseline 2026-08-11 retail, a DIFFERENT save: 77/0/10/0)
+[CP60] SUITE tally :: PASS=77 FAIL=0 SKIP=10 ERROR=0 (baseline 2026-08-11 retail, a DIFFERENT save: 77/0/10/0)
+[CP60] SUITE tally :: PASS=77 FAIL=0 SKIP=10 ERROR=0 (baseline 2026-08-11 retail, a DIFFERENT save: 77/0/10/0)
+[mod] [CP60] SUITE ⭐ P4 reads the SEVEN new probes' verdicts, named: TrackShellLeak, SaintBlessing, DustDevilsDescrMap, AsteroidVisitPrecedence, AstrogeologistExtractors, SinkholeIndestructible, DustStormBreakMapFilter
+[CP60] SUITE ⭐ P4 reads the SEVEN new probes' verdicts, named: TrackShellLeak, SaintBlessing, DustDevilsDescrMap, AsteroidVisitPrecedence, AstrogeologistExtractors, SinkholeIndestructible, DustStormBreakMapFilter
+[CP60] SUITE ⭐ P4 reads the SEVEN new probes' verdicts, named: TrackShellLeak, SaintBlessing, DustDevilsDescrMap, AsteroidVisitPrecedence, AstrogeologistExtractors, SinkholeIndestructible, DustStormBreakMapFilter
+[mod] [CP60] SUITE ⭐ P5 reads the two at risk from this batch: AsteroidLanderAvailable (F94 rewrote the body it drives — it stubs IsKindOf to answer true only for UniversalRocketBase, so all five of its cases take the FIRST branch and never reach the corrected elseif; Src-verified 2026-08-12) and TrackSalvageWipe (F91 amended its module — ⚠️ that probe is kind=install and SKIPS on retail for want of introspection, so TrackShellLeak is the one that actually reads F91 here)
+[CP60] SUITE ⭐ P5 reads the two at risk from this batch: AsteroidLanderAvailable (F94 rewrote the body it drives — it stubs IsKindOf to answer true only for UniversalRocketBase, so all five of its cases take the FIRST branch and never reach the corrected elseif; Src-verified 2026-08-12) and TrackSalvageWipe (F91 amended its module — ⚠️ that probe is kind=install and SKIPS on retail for want of introspection, so TrackShellLeak is the one that actually reads F91 here)
+[CP60] SUITE ⭐ P5 reads the two at risk from this batch: AsteroidLanderAvailable (F94 rewrote the body it drives — it stubs IsKindOf to answer true only for UniversalRocketBase, so all five of its cases take the FIRST branch and never reach the corrected elseif; Src-verified 2026-08-12) and TrackSalvageWipe (F91 amended its module — ⚠️ that probe is kind=install and SKIPS on retail for want of introspection, so TrackShellLeak is the one that actually reads F91 here)
+[mod] [CP60] FLUSH after suite :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after suite :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after suite :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+						Lua 0:38:57:197
+ObjCheat CheatFill
+						Lua 0:39:01:286
+ObjCheat CheatFill
+						Lua 0:39:04:817
+ObjCheat CheatFill
+						Lua 0:39:12:378
+ObjCheat CheatFill
+						Lua 0:39:18:844
+ObjCheat CheatFill
+						Lua 0:39:22:473
+ObjCheat CheatFill
+						Lua 0:39:51:125
+[mod] [CP60] GATE pack-loaded OK :: 81/81 modules active :: leg SaveNamed
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg SaveNamed
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg SaveNamed
+[mod] [CP60] FORCED :: save :: a chain-named save, taken by the harness, not by the player's own save flow
+[CP60] FORCED :: save :: a chain-named save, taken by the harness, not by the player's own save flow
+[CP60] FORCED :: save :: a chain-named save, taken by the harness, not by the player's own save flow
+[mod] [CP60] SAVE ⚠️ name 'CP60RT' carries no .savegame.sav suffix — the engine writes savename VERBATIM, so this would produce an extensionless file no LoadGame could find. Appending it.
+[CP60] SAVE ⚠️ name 'CP60RT' carries no .savegame.sav suffix — the engine writes savename VERBATIM, so this would produce an extensionless file no LoadGame could find. Appending it.
+[CP60] SAVE ⚠️ name 'CP60RT' carries no .savegame.sav suffix — the engine writes savename VERBATIM, so this would produce an extensionless file no LoadGame could find. Appending it.
+						Lua 0:39:51:766
+[mod] [CP60] SAVE SaveGame returned err=false name=CP60RT.savegame.sav
+[CP60] SAVE SaveGame returned err=false name=CP60RT.savegame.sav
+[CP60] SAVE SaveGame returned err=false name=CP60RT.savegame.sav
+[mod] [CP60] TRY SaveGame CP60RT.savegame.sav (yielding) ok=true result=false
+[CP60] TRY SaveGame CP60RT.savegame.sav (yielding) ok=true result=false
+[CP60] TRY SaveGame CP60RT.savegame.sav (yielding) ok=true result=false
+						Lua 0:39:52:256
+[mod] [CP60] TRY Savegame.ListForTag (EF-049 open question, NOT the witness) ok=true result=non-table:nil
+[CP60] TRY Savegame.ListForTag (EF-049 open question, NOT the witness) ok=true result=non-table:nil
+[CP60] TRY Savegame.ListForTag (EF-049 open question, NOT the witness) ok=true result=non-table:nil
+[mod] [CP60] SAVE WITNESS for CP60RT.savegame.sav = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+[CP60] SAVE WITNESS for CP60RT.savegame.sav = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+[CP60] SAVE WITNESS for CP60RT.savegame.sav = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+						Lua 0:49:47:274
+[mod] [CP60] NOTE OWNER cheat disclosure, verbatim: these saves are play testing saves with colonies that are over sized and underindustrialized. They cannot support themselves so cheats are needed to keep the colonies alive and functional. So filling food, and maintance materials are needed for the game to run without all the colonists dieing or buildings breaking. 6x ObjCheat CheatFill at Lua 0:38:57-0:39:22, before SaveNamed CP60RT. Intersection with this leg's readings: NONE - P8 reads shells, dome Saints and colony label_modifiers, P9 reads a DroneControl field
+[CP60] NOTE OWNER cheat disclosure, verbatim: these saves are play testing saves with colonies that are over sized and underindustrialized. They cannot support themselves so cheats are needed to keep the colonies alive and functional. So filling food, and maintance materials are needed for the game to run without all the colonists dieing or buildings breaking. 6x ObjCheat CheatFill at Lua 0:38:57-0:39:22, before SaveNamed CP60RT. Intersection with this leg's readings: NONE - P8 reads shells, dome Saints and colony label_modifiers, P9 reads a DroneControl field
+[CP60] NOTE OWNER cheat disclosure, verbatim: these saves are play testing saves with colonies that are over sized and underindustrialized. They cannot support themselves so cheats are needed to keep the colonies alive and functional. So filling food, and maintance materials are needed for the game to run without all the colonists dieing or buildings breaking. 6x ObjCheat CheatFill at Lua 0:38:57-0:39:22, before SaveNamed CP60RT. Intersection with this leg's readings: NONE - P8 reads shells, dome Saints and colony label_modifiers, P9 reads a DroneControl field
+						Lua 0:49:57:829
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:50:02:892
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:50:02:940
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:50:02:958
+Game Loaded in 5129 ms
+						Lua 0:50:03:010
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:50:03:527
+Game loaded on map BlankBigCanyonCMix_09 in 5889 ms
+[mod] [CP60] LOAD OK #2 file=CP60RT.savegame.sav — LoadGame returned no error
+[CP60] LOAD OK #2 file=CP60RT.savegame.sav — LoadGame returned no error
+[CP60] LOAD OK #2 file=CP60RT.savegame.sav — LoadGame returned no error
+						Lua 0:50:04:832
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:50:05:831
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:50:19:026
+[mod] [CP60] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[CP60] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[CP60] READ speed: SetGameSpeed(3) call=true | before=3 after=3
+[mod] [CP60] FLUSH after load #2 — the F91/F92/F95 save-state heal lines, if any fired, are now on disk above this line :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after load #2 — the F91/F92/F95 save-state heal lines, if any fired, are now on disk above this line :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH after load #2 — the F91/F92/F95 save-state heal lines, if any fired, are now on disk above this line :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+						Lua 0:51:18:072
+[mod] [CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Heals
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Heals
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg Heals
+[mod] [CP60] FORCED :: heal effect read :: a console read taken immediately after a scripted load; the heals themselves ran on the game's own LoadGame path
+[CP60] FORCED :: heal effect read :: a console read taken immediately after a scripted load; the heals themselves ran on the game's own LoadGame path
+[CP60] FORCED :: heal effect read :: a console read taken immediately after a scripted load; the heals themselves ran on the game's own LoadGame path
+						Lua 0:51:18:073
+[mod] [CP60] COUNT TrackBase :: n=7 | walk ok=true
+[CP60] COUNT TrackBase :: n=7 | walk ok=true
+[CP60] COUNT TrackBase :: n=7 | walk ok=true
+[mod] [CP60] READ HEALS after load 2 :: F91 shells surviving = 0 | population=7 | APPLICABLE=true | witness=the TrackBase walk itself; #tracks is the liveness witness for the zero
+[CP60] READ HEALS after load 2 :: F91 shells surviving = 0 | population=7 | APPLICABLE=true | witness=the TrackBase walk itself; #tracks is the liveness witness for the zero
+[CP60] READ HEALS after load 2 :: F91 shells surviving = 0 | population=7 | APPLICABLE=true | witness=the TrackBase walk itself; #tracks is the liveness witness for the zero
+						Lua 0:51:18:074
+[mod] [CP60] TRY HEALS walk Colonist for dome Saints ok=true result=nil
+[CP60] TRY HEALS walk Colonist for dome Saints ok=true result=nil
+[CP60] TRY HEALS walk Colonist for dome Saints ok=true result=nil
+[mod] [CP60] HEALS after load 2 :: F92 dome Saints=10, carrying a TraitReligious modifier=10 (want equal; a shortfall is the re-base not reaching them)
+[CP60] HEALS after load 2 :: F92 dome Saints=10, carrying a TraitReligious modifier=10 (want equal; a shortfall is the re-base not reaching them)
+[CP60] HEALS after load 2 :: F92 dome Saints=10, carrying a TraitReligious modifier=10 (want equal; a shortfall is the re-base not reaching them)
+[mod] [CP60] READ HEALS after load 2 :: F92 blessed = 10 | population=10 | APPLICABLE=true | witness=saints counted in the same walk, so 0 of 0 is a save with no dome Saint and NOT a failed heal
+[CP60] READ HEALS after load 2 :: F92 blessed = 10 | population=10 | APPLICABLE=true | witness=saints counted in the same walk, so 0 of 0 is a save with no dome Saint and NOT a failed heal
+[CP60] READ HEALS after load 2 :: F92 blessed = 10 | population=10 | APPLICABLE=true | witness=saints counted in the same walk, so 0 of 0 is a save with no dome Saint and NOT a failed heal
+[mod] [CP60] HEALS after load 2 :: F95 colony.label_modifiers[AutomaticMetalsExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 2 :: F95 colony.label_modifiers[AutomaticMetalsExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 2 :: F95 colony.label_modifiers[AutomaticMetalsExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[mod] [CP60] HEALS after load 2 :: F95 colony.label_modifiers[MicroGAutoWaterExtractor] entries=0 (type=nil) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 2 :: F95 colony.label_modifiers[MicroGAutoWaterExtractor] entries=0 (type=nil) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 2 :: F95 colony.label_modifiers[MicroGAutoWaterExtractor] entries=0 (type=nil) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[mod] [CP60] HEALS after load 2 :: F95 colony.label_modifiers[MetalsExtractor] entries=4 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 2 :: F95 colony.label_modifiers[MetalsExtractor] entries=4 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 2 :: F95 colony.label_modifiers[MetalsExtractor] entries=4 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[mod] [CP60] HEALS after load 2 :: F95 colony.label_modifiers[WaterExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 2 :: F95 colony.label_modifiers[WaterExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[CP60] HEALS after load 2 :: F95 colony.label_modifiers[WaterExtractor] entries=2 (type=table) — want exactly 1 on an astrogeologist colony, and 1 AFTER a reload; 2 is the identity-keyed regression
+[mod] [CP60] READ HEALS after load 2 :: F95 label modifier entries (4 labels) = 8 | population=0 | APPLICABLE=false | witness=⛔ commander profile is NOT astrogeologist — the F95 heal returns early by design, so this whole reading has population 0 and CANNOT DISCRIMINATE. Silence here is correct.
+[CP60] READ HEALS after load 2 :: F95 label modifier entries (4 labels) = 8 | population=0 | APPLICABLE=false | witness=⛔ commander profile is NOT astrogeologist — the F95 heal returns early by design, so this whole reading has population 0 and CANNOT DISCRIMINATE. Silence here is correct.
+[CP60] READ HEALS after load 2 :: F95 label modifier entries (4 labels) = 8 | population=0 | APPLICABLE=false | witness=⛔ commander profile is NOT astrogeologist — the F95 heal returns early by design, so this whole reading has population 0 and CANNOT DISCRIMINATE. Silence here is correct.
+[mod] [CP60] HEALS after load 2 :: ⚠️ the three save-state heal LINES are read from the ARCHIVED log at close-out (EF-047), never from here. Grep for, verbatim: TrackSalvageWipe: deleted %d invisible track shell(s) left behind by a whole-track salvage (F91)  ||  SaintBlessing: re-based %d dome blessing(s) onto the label colonists are actually filed under  ||  AstrogeologistExtractors: applied %d Astrogeologist extractor bonus(es) this save started without
+[CP60] HEALS after load 2 :: ⚠️ the three save-state heal LINES are read from the ARCHIVED log at close-out (EF-047), never from here. Grep for, verbatim: TrackSalvageWipe: deleted %d invisible track shell(s) left behind by a whole-track salvage (F91)  ||  SaintBlessing: re-based %d dome blessing(s) onto the label colonists are actually filed under  ||  AstrogeologistExtractors: applied %d Astrogeologist extractor bonus(es) this save started without
+[CP60] HEALS after load 2 :: ⚠️ the three save-state heal LINES are read from the ARCHIVED log at close-out (EF-047), never from here. Grep for, verbatim: TrackSalvageWipe: deleted %d invisible track shell(s) left behind by a whole-track salvage (F91)  ||  SaintBlessing: re-based %d dome blessing(s) onto the label colonists are actually filed under  ||  AstrogeologistExtractors: applied %d Astrogeologist extractor bonus(es) this save started without
+[mod] [CP60] FLUSH heals after load 2 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH heals after load 2 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH heals after load 2 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+						Lua 0:51:23:828
+[mod] [CP60] GATE pack-loaded OK :: 81/81 modules active :: leg P9
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg P9
+[CP60] GATE pack-loaded OK :: 81/81 modules active :: leg P9
+[mod] [CP60] FORCED :: P9 field read :: a console read over every DroneControl; it changes nothing
+[CP60] FORCED :: P9 field read :: a console read over every DroneControl; it changes nothing
+[CP60] FORCED :: P9 field read :: a console read over every DroneControl; it changes nothing
+						Lua 0:51:23:830
+[mod] [CP60] COUNT DroneControl :: n=19 | walk ok=true
+[CP60] COUNT DroneControl :: n=19 | walk ok=true
+[CP60] COUNT DroneControl :: n=19 | walk ok=true
+						Lua 0:51:23:831
+[mod] [CP60] COUNT DroneHub :: n=11 | walk ok=true
+[CP60] COUNT DroneHub :: n=11 | walk ok=true
+[CP60] COUNT DroneHub :: n=11 | walk ok=true
+[mod] [CP60] COUNT RocketBase :: n=0 | walk ok=true
+[CP60] COUNT RocketBase :: n=0 | walk ok=true
+[CP60] COUNT RocketBase :: n=0 | walk ok=true
+[mod] [CP60] COUNT RCRover :: n=2 | walk ok=true
+[CP60] COUNT RCRover :: n=2 | walk ok=true
+[CP60] COUNT RCRover :: n=2 | walk ok=true
+[mod] [CP60] P9 enumeration witness :: base-class DroneControl walk saw 19 (ok=true) | concrete DroneHub+RocketBase+RCRover walks saw 13. ⛔ base=0 with concrete>0 means the MIX-IN walk does not work and the base number is NOT evidence of absence.
+[CP60] P9 enumeration witness :: base-class DroneControl walk saw 19 (ok=true) | concrete DroneHub+RocketBase+RCRover walks saw 13. ⛔ base=0 with concrete>0 means the MIX-IN walk does not work and the base number is NOT evidence of absence.
+[CP60] P9 enumeration witness :: base-class DroneControl walk saw 19 (ok=true) | concrete DroneHub+RocketBase+RCRover walks saw 13. ⛔ base=0 with concrete>0 means the MIX-IN walk does not work and the base number is NOT evidence of absence.
+[mod] [CP60] READ P9 DroneControls carrying SMRFixPack_rocket_fuel_key = 0 | population=19 | APPLICABLE=true | witness=the two independent walks above; the population is what makes a zero mean anything
+[CP60] READ P9 DroneControls carrying SMRFixPack_rocket_fuel_key = 0 | population=19 | APPLICABLE=true | witness=the two independent walks above; the population is what makes a zero mean anything
+[CP60] READ P9 DroneControls carrying SMRFixPack_rocket_fuel_key = 0 | population=19 | APPLICABLE=true | witness=the two independent walks above; the population is what makes a zero mean anything
+[mod] [CP60] P9 ABSENT on 19 DroneControl(s). ⚠️ TRUE BUT NON-DISCRIMINATING: prep Src-verified that the removed §1.5 shape could never have written this field on shipped data (FuelResource defaults to "Fuel", UniversalRocket.lua:47, zero assignments in Src/Data), so this reads absent either way. Record it as a NEGATIVE CONTROL HELD, never as 'the field-removal half ran'.
+[CP60] P9 ABSENT on 19 DroneControl(s). ⚠️ TRUE BUT NON-DISCRIMINATING: prep Src-verified that the removed §1.5 shape could never have written this field on shipped data (FuelResource defaults to "Fuel", UniversalRocket.lua:47, zero assignments in Src/Data), so this reads absent either way. Record it as a NEGATIVE CONTROL HELD, never as 'the field-removal half ran'.
+[CP60] P9 ABSENT on 19 DroneControl(s). ⚠️ TRUE BUT NON-DISCRIMINATING: prep Src-verified that the removed §1.5 shape could never have written this field on shipped data (FuelResource defaults to "Fuel", UniversalRocket.lua:47, zero assignments in Src/Data), so this reads absent either way. Record it as a NEGATIVE CONTROL HELD, never as 'the field-removal half ran'.
+[mod] [CP60] FLUSH P9 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH P9 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH P9 :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+						Lua 1:37:19:686
+[mod] [CP60] NOTE OWNER F34d rider verbatim: I parked an rc commander, ordered them to return to the commander and board while dropping a flatten land. There was a very brief moment when i dropped the landscape they all stopped and frozen and then they recovered and boarded (maybe a 2 second pause in the embark process). Result 20/20 drones aboard, no ExitImpassable, no error line. OWNER DISCLOSURE: cheats are enabled on this rig and NONE were used on the RC Commander during this test. Agent attribution: consistent with RebuildPassability re-pathing, NOT with the scatter defect - no A/B available
+[CP60] NOTE OWNER F34d rider verbatim: I parked an rc commander, ordered them to return to the commander and board while dropping a flatten land. There was a very brief moment when i dropped the landscape they all stopped and frozen and then they recovered and boarded (maybe a 2 second pause in the embark process). Result 20/20 drones aboard, no ExitImpassable, no error line. OWNER DISCLOSURE: cheats are enabled on this rig and NONE were used on the RC Commander during this test. Agent attribution: consistent with RebuildPassability re-pathing, NOT with the scatter defect - no A/B available
+[CP60] NOTE OWNER F34d rider verbatim: I parked an rc commander, ordered them to return to the commander and board while dropping a flatten land. There was a very brief moment when i dropped the landscape they all stopped and frozen and then they recovered and boarded (maybe a 2 second pause in the embark process). Result 20/20 drones aboard, no ExitImpassable, no error line. OWNER DISCLOSURE: cheats are enabled on this rig and NONE were used on the RC Commander during this test. Agent attribution: consistent with RebuildPassability re-pathing, NOT with the scatter defect - no A/B available
+						Lua 1:37:24:472
+[mod] [CP60] NOTE OWNER P7 verbatim: I have been messing around in game and everything seems normal for most of this sitting
+[CP60] NOTE OWNER P7 verbatim: I have been messing around in game and everything seems normal for most of this sitting
+[CP60] NOTE OWNER P7 verbatim: I have been messing around in game and everything seems normal for most of this sitting
+						Lua 1:37:29:995
+[mod] [CP60] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=2 | mode=REAL | note=sitting close
+[CP60] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=2 | mode=REAL | note=sitting close
+[CP60] CONDITIONS pack=81/81 active | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=2 | mode=REAL | note=sitting close
+[mod] [CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[CP60] CONDITIONS P1 :: registered=81 (prep PREDICTED 81 from metadata.lua's code list) | active=81 (READ, never predicted — opt-in toggles are account state)
+[mod] [CP60] CONDITIONS by-name SaintBlessing = active | detail=
+[CP60] CONDITIONS by-name SaintBlessing = active | detail=
+[CP60] CONDITIONS by-name SaintBlessing = active | detail=
+[mod] [CP60] CONDITIONS by-name DustDevilsDescrMap = active | detail=
+[CP60] CONDITIONS by-name DustDevilsDescrMap = active | detail=
+[CP60] CONDITIONS by-name DustDevilsDescrMap = active | detail=
+[mod] [CP60] CONDITIONS by-name AstrogeologistExtractors = active | detail=
+[CP60] CONDITIONS by-name AstrogeologistExtractors = active | detail=
+[CP60] CONDITIONS by-name AstrogeologistExtractors = active | detail=
+[mod] [CP60] CONDITIONS by-name SinkholeIndestructible = active | detail=
+[CP60] CONDITIONS by-name SinkholeIndestructible = active | detail=
+[CP60] CONDITIONS by-name SinkholeIndestructible = active | detail=
+[mod] [CP60] CONDITIONS by-name DustStormUndergroundBreaks = active | detail=
+[CP60] CONDITIONS by-name DustStormUndergroundBreaks = active | detail=
+[CP60] CONDITIONS by-name DustStormUndergroundBreaks = active | detail=
+[mod] [CP60] CLOCK close :: GameTime()=225359686 (312.99 sols since game start) | UIColony.day=314 hour=5 | speed=1x | RealTime()=5829073
+[CP60] CLOCK close :: GameTime()=225359686 (312.99 sols since game start) | UIColony.day=314 hour=5 | speed=1x | RealTime()=5829073
+[CP60] CLOCK close :: GameTime()=225359686 (312.99 sols since game start) | UIColony.day=314 hour=5 | speed=1x | RealTime()=5829073
+[mod] [CP60] FLUSH sitting close :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH sitting close :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[CP60] FLUSH sitting close :: FlushLogFile called=true (pack lines are buffered; this makes them readable NOW. Absence is still only read from the archived file — EF-047)
+[mod] [CP60] ERRORWATCH CP60 — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== corun-pt60 CP60 ===' banner and this line happened inside this sitting. P6 is exactly this sweep, restricted to the five new files and the seven converted modules; report every OTHER unexplained line verbatim with its position and its age and never discount one (WORKFLOW log-review rule). stage_at_close=P9 loads_this_process=2 mode=REAL
+[CP60] ERRORWATCH CP60 — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== corun-pt60 CP60 ===' banner and this line happened inside this sitting. P6 is exactly this sweep, restricted to the five new files and the seven converted modules; report every OTHER unexplained line verbatim with its position and its age and never discount one (WORKFLOW log-review rule). stage_at_close=P9 loads_this_process=2 mode=REAL
+[CP60] ERRORWATCH CP60 — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== corun-pt60 CP60 ===' banner and this line happened inside this sitting. P6 is exactly this sweep, restricted to the five new files and the seven converted modules; report every OTHER unexplained line verbatim with its position and its age and never discount one (WORKFLOW log-review rule). stage_at_close=P9 loads_this_process=2 mode=REAL
+						Lua 1:37:37:098
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 1:37:37:100
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 1:37:37:491
+
+
+*** Debug::Done()
+Time (ms)	5857491
+
+
