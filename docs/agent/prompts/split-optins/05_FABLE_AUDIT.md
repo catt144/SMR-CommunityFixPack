@@ -56,10 +56,14 @@ honestly whether it earned a row).
 
 Both repos: entries carry verdicts; checklist item 15 gets its final state;
 STATE both repos (this one: split DONE + NEXT = D13 chain; new one: its own
-honest state + what is owed); SESSION_LOG record newest-first HERE (cite the
-pre-deletion sha; the new repo's log records its own birth); delete every
-remaining file in this folder in the closing commit. doccheck GREEN ×2, push
-what has a remote. **The owner report ENDS with the next kickoff: the D13
+honest state + what is owed); **ACTIVATE the dormant WORKFLOW clause
+"BOTH MODS LOADED is the rig's NORMAL condition" here (strike its dormancy
+note, stamp cell (a)'s measured baseline into it) and install its twin in the
+new repo's WORKFLOW** (README rule 12 — the owner keeps both mods loaded from
+here on; STATE gate-read expectations in both repos say so); SESSION_LOG
+record newest-first HERE (cite the pre-deletion sha; the new repo's log
+records its own birth); delete every remaining file in this folder in the
+closing commit. doccheck GREEN ×2, push what has a remote. **The owner report ENDS with the next kickoff: the D13
 chain — derive the exposed set over BOTH post-split trees (it is not
 authored; say what authoring takes).** Also carry to the owner: the display
 name + description decision (launch prep), the GitHub-remote question, the

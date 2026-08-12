@@ -20,7 +20,10 @@ predictions — a miss is a finding, chase its mechanism before filing.**
   (predicted `74/74` fix pack + `8/8` opt-in — the emitted numbers from
   prompt 3 are the prediction); suite runs; tally vs predicted; both Mod
   Options pages present (harness-readable or screenshot-free log evidence per
-  design); zero `[LUA ERROR]`; zero cross-mod lines.
+  design); zero `[LUA ERROR]`; zero cross-mod lines. ⭐ **This cell is the
+  rig's standing configuration from here on (README rule 12)** — its measured
+  numbers are the baseline every future leg quotes, so read them with that
+  weight.
 * **(b) OPT-IN ALONE** (fix pack disabled + full restart): loads clean,
   `8/8`, its options seed from its own `default_options`; ⛔ zero
   `SMRFixPack`-named lines beyond a loaded save's own recorded-mod-list echo

@@ -98,6 +98,15 @@ owed input stays here no matter how struck-through it looks.
     default ON or stay opt-in-OFF in their own mod (design will recommend),
     and a one-minute Mod Options re-tick after the split (new mod id = fresh
     toggle state).
+    ⭐ **Your standing condition, recorded 2026-08-12:** *"Once we get it
+    seperated I will keep the opt ins loaded in as they make testing easier."*
+    → now a dormant WORKFLOW rule the split's audit activates: both-mods
+    -loaded is the rig's NORMAL config; agents expect it, attribute opt-in
+    lines instead of flagging them, name a confound only where a reading
+    intersects what an opt-in changes, and any leg needing the opt-ins OFF
+    declares it in its brief (a Mod-Manager toggle needs a full restart).
+    Your ordinary play doubles as the continuous both-mods compatibility
+    soak. Nothing owed.
 
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
 

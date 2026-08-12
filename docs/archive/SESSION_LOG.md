@@ -8,6 +8,29 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — the owner declares the post-split rig config: BOTH mods stay loaded — recorded as a dormant WORKFLOW rule the split audit activates
+
+Owner, right after the chain was authored: *"Once we get it seperated I will
+keep the opt ins loaded in as they make testing easier. So the agents should
+be aware of that, and it shouldn't be an issue because we should be
+compatible as well."* Same shape as the cheats ruling — a standing rig
+condition agents must EXPECT, not flag. Recorded four ways: (1) WORKFLOW
+gains "BOTH MODS LOADED is the rig's NORMAL condition" beside the cheats
+rule — dormant until the split chain closes; binds: gate reads show two
+registries and every "the pack" claim names WHICH pack; opt-in lines in
+fix-pack logs are attributed background; confound only where a reading
+intersects what an opt-in changes (name it or say NONE); opt-ins-OFF legs
+declare it in the brief and budget the full-restart toggle (D13 rule). (2)
+split-optins README rule 12: matrix cell (a) is not just a test cell — it is
+the rig's standing config, and its measured numbers become the baseline
+every future leg quotes; (b)/(c) are the exceptional configs. (3) Prompt 5
+activates the clause here and installs the twin in the new repo's WORKFLOW.
+(4) Checklist item 15 carries the owner's words. ⭐ Free consequence, stated
+to the owner: their ordinary testing is now a CONTINUOUS both-mods
+compatibility soak — any cross-mod interference the matrix misses surfaces
+there first, and whole-log reviews watch for it as a named class routing to
+both repos. doccheck GREEN, pushed.
+
 ## 2026-08-12 — the split-optins chain is AUTHORED: five prompts, a fresh-QA gate, and the owner's three requirements written as invariants
 
 Same session, the owner sharpened the split order: *"I want the opt in to be

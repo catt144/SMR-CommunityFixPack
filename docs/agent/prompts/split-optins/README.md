@@ -120,6 +120,14 @@ touches only core fixes.
     save (copy only).
 11. **Model placement:** prompts 1/3/4 = Opus executes; prompts 2/5 = Fable
     (fresh-context QA gate; terminal audit). Bodies are model-neutral.
+12. **⭐ BOTH-MODS-LOADED is the rig's future NORMAL (owner rule 2026-08-12,
+    given at authoring):** *"Once we get it seperated I will keep the opt ins
+    loaded in as they make testing easier."* Matrix cell (a) is therefore not
+    just a test cell — it is the rig's standing configuration from the split
+    onward, and its measured gate reads/tally become the standing baseline
+    every future leg quotes. Cells (b)/(c) are the EXCEPTIONAL configs. The
+    WORKFLOW clause exists (dormant, dated 08-12); prompt 5 ACTIVATES it here
+    and installs the twin in the new repo's WORKFLOW at close.
 
 ## Scope fence — the whole chain
 

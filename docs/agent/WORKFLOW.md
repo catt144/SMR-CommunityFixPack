@@ -356,6 +356,40 @@ co-run model exists to protect. See also the standing fixture rule — playtest
 saves are PROVISIONED before an agent ever reads them, so their state is never
 "fresh".
 
+### ⛔ BOTH MODS LOADED is the rig's NORMAL condition once the opt-in split lands (owner rule, 2026-08-12 — effective at split close)
+
+**The owner's words, given while the `split-optins` chain was authored:**
+*"Once we get it seperated I will keep the opt ins loaded in as they make
+testing easier. So the agents should be aware of that, and it shouldn't be an
+issue because we should be compatible as well."*
+
+**What binds, for every leg after the split chain closes:**
+
+1. **The baseline rig configuration is BOTH mods enabled** — the fix pack AND
+   the standalone opt-in mod. A gate read shows two registries (post-split
+   expected shape: `74/74` + `8/8` — quote the audit-measured numbers, never
+   these), and **every "the pack" claim names WHICH pack.** An opt-in-mod line
+   in a fix-pack leg's log is expected background: attributed, never flagged
+   as foreign.
+2. **Same confound rule as cheats:** a loaded opt-in module is only a confound
+   where the reading intersects what it changes (D09 dials touch drone
+   speed/carry; NoHomeless/CohortHousing move colonists; MultipleSuns touches
+   build limits) — **name the intersection or state there is none.** "The
+   opt-in mod was loaded" is not by itself a caveat.
+3. **A leg that genuinely needs the opt-in mod OFF must DECLARE it in its
+   brief** — and budget the toggle honestly: a Mod-Manager disable takes
+   effect only after a FULL PROCESS RESTART (D13's four-states rule), and the
+   re-enable is handed back to the owner like any pack re-enable.
+4. **The standing configuration is also the compatibility soak.** The owner's
+   ordinary testing IS continuous both-mods exposure; any cross-mod
+   interference that survives the split chain's matrix will surface here
+   first — whole-log reviews watch for it as a named class, and a hit routes
+   to BOTH repos' records.
+
+⚠️ Until the split chain closes, this section is dormant and the single-pack
+gate reads stay authoritative. The `split-optins` terminal audit activates it
+here and installs the twin clause in the new repo's WORKFLOW.
+
 ## Co-runs — attended experiment legs with the labor inverted (adopted 2026-08-04, owner)
 
 **Why this exists.** The owner's attended time is the scarcest resource in the
