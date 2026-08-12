@@ -11,24 +11,22 @@ Current only, rewritten in place; history newest-first in
 ⭐⭐ corun-rig + `unattended-1` CLOSED 08-04 · `corun-batch-1` 08-05 ·
 `corun-batch-2` 08-10 · `unattended-2` 08-11 — every audit sustained every
 verdict (F48/C43/F100 `fixed`, PT-35 leg A case A COMPLETE, B/C parked).
-⭐⭐ **`corun-pt15` CLOSED 2026-08-11 — the terminal audit SUSTAINED EVERY LEG**
-(log byte-compared and read whole; 0 `[LUA ERROR]` · 0 F99 · 0 C45):
-**F07 `tested` STANDS** — 95 wisps → 95,000 internal (43% of the grid, ~47
-Solar Panels), R4 held, owner-witnessed, verdict verbatim on the entry, every
-forced element named in the grant · **C39 ANSWERED = MISSING UPLIFT** (control
-114→268→124 round-trips on the law, subject 127→131→129; repair = owner
-decision 9) · **F85: Ctrl-F9 NOT a route** (`idQuickSave` never built on
-retail; disposition = owner decision 5) · **F15 double-grant half MEASURED
-gone** (paused Δ=0 at the kill; audit filled the entry the sitting missed) ·
-**C46 WONTFIX 08-12 (owner: harm forced-only, not a true bug — entry)**
-· **EF-051 CLOSED — WORKFLOW "never say gone" RETIRED** (two post-untick
-launches restored nothing; listings are NAMES, never counts) · **EF-052** (50×
-is the real speed ceiling) · F78 +2 · F02 +1 organic · rule 12(B) withdrawn
-(`MassFireflySpawn` is the mystery's own call) · saves KEPT: `CP15PT15`
-`CP15F15` (not strays) · WORKFLOW +3 rules · CHAIN_METHOD +1.
-⇒ **NEXT: the PT-20 redo co-run — its chain is NOT AUTHORED.** One session
-builds `agent/prompts/corun-pt20/` (prep→sitting→audit; pack-off run condition;
-owner: disable click + FULL restart + ~10 min play + re-enable hand-back).
+⭐⭐ **`corun-pt15` CLOSED 08-11, every leg SUSTAINED: F07 `tested`** (95 wisps
+→ 95,000 = 43% of grid; R4 held; owner-witnessed) · **C39 = MISSING UPLIFT**
+(control 114→268→124, subject 127→131→129) · **F85 Ctrl-F9 NOT a route** ·
+**F15 batch-half MEASURED gone** · **EF-051 CLOSED, "never say gone" RETIRED**
+· **EF-052** (50× real ceiling) · F78 +2 · F02 +1 · saves KEPT `CP15PT15`
+`CP15F15` · WORKFLOW +3 · CHAIN_METHOD +1 (full record: SESSION_LOG 08-11).
+⭐⭐ **RULINGS 08-12** (challenge re-grade + decision sitting; verbatims on the
+checklist/entries): **C46 wontfix** (harm forced-only — normal play cannot
+reach the free→destroy sequence) · **F85 = BUILD the `dont_pause` flip**
+(owner's own fix; the distress dialog is the game's ONLY non-pausing popup) ·
+**C39 = EXTEND COMPENSATION + sweep all 3 automation labels**
+(`FactoryBuildings` sibling CONFIRMED; delabel declined) · **load-heal sweep
+CLOSED** · relabel wording deferred to launch prep. Both builds queued.
+⇒ **NEXT: the `unattended-3` build chain — F85 flip + C39 compensation + label
+sweep, verify on a `CP15PT15` staged copy — then the PT-20 redo co-run.
+NEITHER chain is authored yet.**
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 
@@ -55,6 +53,6 @@ Re-emit after any module/entry change (red refuses); pinned **1.0.7.396349** (fp
   again, verified by a NAMED listing (names, never counts — the surviving rule).
 - ⛔ **Mod-Manager disable needs a FULL RESTART** (D13); the PT-20 redo is NEXT.
   ⚠️ **A leg that disables the pack HANDS THE RE-ENABLE BACK — unscriptable.**
-- **Owner decisions: 3 open** (checklist): **F85 disposition** (evidence done
-  08-11) · **relabel WORDING** · **C39 repair** (+ load-heal close call, Do-first 2).
+- **Owner decisions: 1 open**: **relabel WORDING** (launch prep, owner text).
+  F85/C39/C46/load-heal all RULED 08-12 (checklist + entries carry verbatims).
 - **Release** — `archive/MOD_DESCRIPTION.md` FROZEN, rebuilt from `agent/bugs/` at launch prep; four `[DRAFT NOTE]` markers die first.

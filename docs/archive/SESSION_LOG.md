@@ -8,6 +8,44 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — the decision sitting: four open calls walked one at a time (AskUserQuestion), four rulings, two builds queued
+
+Owner asked for the pending decisions *"one at a time through ask user a
+question interactions so that we don't get anything confused by my typing."*
+Each question carried the summary + recommended-first options; every owner
+counter-question was answered from a live Src re-read before re-asking.
+
+1. **F85 — BUILD the `dont_pause` flip, the owner's own proposed fix.** Their
+   two challenges en route corrected the audit's summary: (a) most event
+   popups are notification-first (`SequenceAction.lua:83` default
+   `start_minimized=true` — their lived experience was right); the no-click
+   class is only `immediate` storybits + notification TIMEOUTS
+   (`_StoryBits.lua:564/:574-579`) + planetary-view popups; (b) then they
+   asked why not just flip the flag — and `dont_pause=true` has exactly ONE
+   user in the game (`RivalColonies.lua:546`), so pausing it closes the
+   entire reachable surface. Build = chained wrapper on
+   `PopupNotification.Init` (all popups pause; degrades gracefully),
+   disclosed as a design-judgment tweak. Per-site rewrite DECLINED.
+2. **C39 — EXTEND THE COMPENSATION; sweep all three automation labels.**
+   Their questions surfaced: the `FactoryBuildings` sibling law (CONFIRMED,
+   `LawDef-Technology.lua:70-76`) and the never-swept Factory/Research
+   labels; the balance answer (performance feeds ONLY the Workshop shift-end
+   Comfort payment, `ArtWorkshop.lua:24`; consumption scales with staffing
+   fraction, `:35-39`, untouched by performance AND by the law); and the
+   intent fork (their employment-sink theory → the delabel repair, put to
+   them explicitly and DECLINED — the Workshops take the cut, measured, and
+   the dev comment states the coincidence assumption). Verify = same paused
+   bracket on a `CP15PT15` staged copy.
+3. **Relabel wording — DEFERRED to launch prep** (unchanged, owner text owed).
+4. **Load-heal sweep — CLOSED.** D1+D2 suffice; unsampled families stay
+   recorded as unsampled and return as findings if ever organic.
+
+Checklist items 5/9 and Do-first 2 struck with verbatims; F85/C39 entries
+carry the rulings + the new Src facts; STATE: owner decisions → 1 open
+(relabel), NEXT = the `unattended-3` build chain (F85 flip + C39 compensation
++ label sweep, verify on `CP15PT15` copy) then the PT-20 redo — neither
+authored yet.
+
 ## 2026-08-12 — C46 CLOSED `wontfix` (owner ruling, same session as the re-grade)
 
 Owner, on the re-grade: *"Lets just write that one off since its not a true

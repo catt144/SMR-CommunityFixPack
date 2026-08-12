@@ -51,17 +51,23 @@ silently dropping the march to 1×, and the cheat disclosure took three asks.
 **Your deviations (the extra passenger rocket, activating all three shifts)
 are what made C39 readable at all and are not scored against you.**
 
-9. **⚖️ `C39` — the four Workshops lose half their staffing with NO offsetting
-   uplift whenever Service Automation passes. Repair or not?** The sitting
-   settled the sign (your Diner was paid back 114 → 268; your TV Studio
-   Workshop got nothing while its shifts halved) and the audit re-derived it
-   from the archived log. Options, none built: **(a)** extend the compensation
-   to the four Workshop-family buildings (a behaviour change to a shipped
-   law); **(b)** wontfix + document (it needs a late-game Technology policy —
-   10th of 11 in its category — to be voted through before it bites);
-   **(c)** measure the other three Workshops first (only `TVStudioWorkshopCCP1`
-   was observed; the rest share the class chain, so the result is inferred for
-   them). → `agent/bugs/C39.md` + the rider record below.
+9. ~~**⚖️ `C39` — the four Workshops lose half their staffing with NO
+   offsetting uplift whenever Service Automation passes. Repair or not?**~~
+   ✅✅ **DECIDED 2026-08-12 — EXTEND THE COMPENSATION, plus the sibling-label
+   sweep your questions surfaced.** Ruled after a full walkthrough: the
+   Workshops DO take the cut (measured 12→6) and only miss the payback; the
+   dev comment states the assumption they violate; performance feeds only the
+   shift-end Comfort payment (consumption scales with staffing fraction and is
+   untouched, so balance exposure ≈ nil — the fix restores the exact
+   conservation your Diner already gets). ⭐ Your questions also found that
+   **sibling automation laws exist for `FactoryBuildings` (confirmed in data)
+   and `ResearchBuildings`**, never swept for the same label-vs-class
+   mismatch — the build enumerates all three labels and covers every mismatch
+   found, not just the four Workshops. The delabel alternative (your
+   employment-sink intent theory) was considered and declined in favour of the
+   dev comment's stated intent. Queued into the next unattended build chain;
+   verification re-runs the same paused bracket on a `CP15PT15` staged copy
+   (it holds the measured TV Studio Workshop). → `agent/bugs/C39.md`.
 10. ~~**⚖️ `C46` — re-graded 2026-08-12 after your challenge: the phantom-power
     state we measured cannot be reached by normal play.**~~ ✅ **DECIDED
     2026-08-12 — WONTFIX, your ruling in your own words:** *"Lets just write
@@ -139,6 +145,15 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    source read**; (3) your eyes on the quicksave loading screen. Expected file
    name if one lands: `QuickSave.savegame.sav`. **Still your decision either
    way** — the sitting brings evidence, not a verdict.
+   ✅✅ **DECIDED 2026-08-12 — BUILD THE `dont_pause` FLIP (your pick, on your
+   own proposed fix).** You asked the question that found the better repair:
+   the distress-call dialog is the game's ONLY non-pausing popup, and flipping
+   it to pause like every other popup closes F85's entire remaining reachable
+   surface in one property change (no autosave can land, nothing can queue
+   behind it). Built as a chained wrapper, disclosed as a design-judgment
+   tweak; queued into the next unattended build chain with its verification
+   launch. The bigger per-site rewrite was declined; the distress-call watch
+   rider below retires when the fix verifies.
 6. ~~**⚖️ Disabling a mod needs a full game restart — does `PT-20` need
    redoing?**~~ ✅ **DECIDED 2026-08-10 — REDO NOW.** A dedicated PT-20 redo
    co-run is queued (your part: the Mod-Manager disable click, a **full game
@@ -333,11 +348,14 @@ not by the format.
    check** — the PT-62 block is the truth, this line is its summary.
    *(Queue line re-synced 2026-08-11 by a doc sweep — it had frozen the
    pre-08-03 remainder while the block below moved on.)*
-2. ✅ **The load-heal round-trip sweep — BOTH LEGS RAN AND PASS** (unattended,
-   2026-08-04: D1 natural-state ×3 loads clean, D2 forced-defect heals fire
-   once and hold; details annotated below). **The only residue is your close
-   call** — whether D1+D2 close the item (two families reported unsampled,
-   never clean). Not owed keyboard time.
+2. ✅✅ **The load-heal round-trip sweep — CLOSED 2026-08-12 by your call.**
+   Both legs ran and passed (unattended, 2026-08-04: D1 natural-state ×3 loads
+   clean, D2 forced-defect heals fire once and hold; details annotated below).
+   You ruled D1+D2 close it: everything sampleable passed in both directions,
+   the unsampled families (H1 astro — wrong commander; H3 biorobots — none on
+   the save; H2/H4 deliberately unforced) stay recorded as unsampled, never
+   clean, and return as their own findings if one ever misbehaves organically.
+   Nothing further owed.
    *(Original ask, kept for the annotations that follow:)* save, reload twice, read the
    heal numbers (the Astrogeologist +10% class of defect; two-for-two
    defective on the heals actually tested is the project's worst base rate).
