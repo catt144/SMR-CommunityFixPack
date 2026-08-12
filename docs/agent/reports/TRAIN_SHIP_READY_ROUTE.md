@@ -1,5 +1,14 @@
 # Trains — the costed route to ship-ready (PT-60 audit deliverable, 2026-08-12)
 
+> ✅ **RULED 2026-08-12, same day — the owner chose OPTION A: the train group
+> ships at `fixed` and the verification queue is CLOSED** (checklist item 12).
+> No future chain may propose a train leg; F80's symptom-triggered tap is the
+> only surviving ask. Decided alongside the pre-release freeze of the whole
+> `fixed`→`tested` campaign (checklist item 14). ⭐ Inventory correction from
+> the audit review: **F65 and F66** (station↔tunnel grid + connector, both
+> `tested`) belong to this group too — 17 entries, not 15, and two more of
+> them keyboard-verified than the table below counts.
+
 **Why this exists.** Owner ask, mid-`corun-pt60` sitting (checklist item 12):
 *"a route that moves the train items into the ready-to-ship column, instead of
 every chain re-proposing a train leg."* The sitting recorded two framing

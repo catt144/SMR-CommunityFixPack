@@ -38,6 +38,39 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ⭐⭐ NEW 2026-08-12 — THE SHIP LINE (three rulings, decided in the process-audit review session)
+
+14. ~~**⚖️ Is `fixed` + suite + self-checks enough to ship, or does the
+    evidence campaign finish first?**~~ ✅ **DECIDED 2026-08-12, your ruling:
+    "I don't want to drop quality, but I think in some ways we are over
+    testing… if there are things that we can say 90+% chance this is good, I
+    am not sure its worth the added hours."** Three parts, all recorded:
+    * **The `fixed`→`tested` evidence campaign is FROZEN until after release.**
+      The shipping bar is what already runs mechanically — the 87-probe suite
+      (77/0/10/0, measured twice), per-fix runtime self-checks, the fail-safe
+      registry and per-fix veto, and the completed save-safety tier (F86
+      Tiers 1+2, verified). Keyboard re-witnessing stops being scheduled work;
+      it may resume against the released mod if you still want it.
+    * **Perpetual riders → post-release WATCH items** (C42, F99, F80, the
+      F96 meteor coincidence): each has failed to produce its own precondition
+      3+ times; they leave every chain's freight. A symptom appearing in your
+      game still takes its tap.
+    * **D13 stays BLOCKING, at hours-scale.** You challenged the audit-review
+      estimate ("adds a week") and you were right — testing is: build the
+      artifact, probe it, uninstall on a big save, run the after-sweep — a few
+      hours unless it finds something. The heavy part is agent-side (the
+      authoritative exposed-set derivation + the curated keep/remove list —
+      some residue IS the repair and must survive). ⚠️ One design question is
+      yours at spec time, deliberately reserved on the entry: what the player
+      DOES with the artifact (run-after-removal / keep-installed /
+      pack-is-own-cleaner). The spec session asks it; nothing owed before then.
+    **What this buys: the release front is now the only main line** — D13
+    chain + `unattended-3` in parallel (agent), then ONE combined sitting
+    (PT-20 redo + D13 verify + the F102 minute), then MOD_DESCRIPTION +
+    disposition table (agent), then your ~1–2 h of launch tasks. → the review
+    that prompted this: your process-audit artifact + `agent/reports/`
+    replies, SESSION_LOG 2026-08-12.
+
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
 
 11. ~~**⚖️ `F102` — the community-witnessed asteroid freeze (Linux/NVIDIA):
@@ -77,8 +110,19 @@ extra load I asked you for was avoidable. The measurement legs themselves ran to
 budget. ⭐ **What your minutes bought: the P8 decider, which was unrepeatable —
 it needed a save written before 2026-08-02, and `USA Sol 302` was the only one.**
 
-12. **⚖️ TRAINS — do the remaining train items get any more of your attended
-    time, or do we stop?** Your words, spoken during the PT-60 sitting and
+12. ~~**⚖️ TRAINS — do the remaining train items get any more of your attended
+    time, or do we stop?**~~ ✅ **DECIDED 2026-08-12 — OPTION A: the train
+    group ships at `fixed`; the verification queue is CLOSED.** F21 stays
+    `fixed` (its restamp was already witnessed organically 08-10), F64 ships
+    on the family-witnessed evidence, F11/F48/F91 were at their honest ceiling
+    regardless (`agent/reports/TRAIN_SHIP_READY_ROUTE.md`). F80's tap survives
+    ONLY as a symptom-triggered watch — no chain may schedule a train leg
+    again. ⭐ One correction in your favor found during the audit review: F65
+    and F66 (station↔tunnel grid + connector) are ALSO train-group entries and
+    both are already `tested` — the group was more keyboard-verified than the
+    inventory below said. The original question and record, kept for the
+    reasoning:
+    Your words, spoken during the PT-60 sitting and
     recorded here rather than only in an agent doc: *"I feel like I have been
     working on trains since day one of this mod and we still aren't done trying
     to fix and verify trains."* **That is a fair reading of the record, and here

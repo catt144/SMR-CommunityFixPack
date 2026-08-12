@@ -8,6 +8,69 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — THE SHIP LINE: the owner reviews an outside process audit, rules the evidence campaign FROZEN, closes the trains queue, and keeps D13 blocking at hours-scale
+
+Same day as the `corun-pt60` close, immediately after it. The owner brought a
+read-only process-audit artifact (computed at `ddd9208`, before the sitting
+landed) with the verdict "the mod has been finished in all but name since
+08-02; the verification campaign became the main line while the release
+blockers sat idle" — and asked for a review, noting they did not agree with
+all of it.
+
+**The review, verified against the repo:** the artifact's sharp numbers are
+EXACT (763 commits at `ddd9208`; 2 of 37 commits since 08-05 touched
+`Code/`; D13 `directed` and owner-promoted HARD LAUNCH DEPENDENCY with zero
+sessions ever pointed at it; doc:code re-measured ~3.9:1). Its best catch:
+**the corun-pt60 close-out's NEXT queue (rule-14 kickoff) did not contain the
+one hard launch dependency** — sustained, and the queue is now re-pointed.
+Its trains table found F65/F66 (both `tested`) missing from checklist item
+12's inventory — the group was MORE verified than recorded. Pushed back on:
+the "0 findings the game's fault" statistic (circular — it quotes the misses
+ledgers, which are process-compliance instruments by construction; the same
+three sittings produced F101, F102-shipped, the F34 route rewrite, F48
+organic evidence, EF-053 and a vanilla asset bug); the doc:code ratio as
+waste evidence (owner licensed machine-tuned agent docs; owner minutes are
+the currency, not lines); "unreachable by construction" (queues do close —
+the asymmetry is that rules mint faster than they retire); and its P9
+"died at load" row (prep re-scoped P9 BEFORE the sitting and banked it as a
+negative control — the apparatus working, not failing).
+
+**Three rulings, taken one at a time (AskUserQuestion), owner verbatim on
+the framing:** *"I don't want to drop quality, but I think in some ways we
+are over testing… if there are things that we can say 90+% chance this is
+good, then I am not sure its worth the added hours. My concern is we are
+still gonna be slow crawling this for another 3 weeks."*
+
+1. **Evidence campaign FROZEN pre-release** (checklist item 14). The
+   shipping bar = suite (77/0/10/0 ×2) + runtime self-checks + fail-safe
+   registry/veto + the verified save-safety tier. `fixed`→`tested` upgrades
+   stop being scheduled work; may resume post-launch. Perpetual riders
+   (C42/F99/F80/F96-R2) → post-release WATCH items, out of chain freight.
+2. **Trains = OPTION A** (checklist item 12 DECIDED): the group ships at
+   `fixed`, the verification queue CLOSES, no chain may schedule a train leg
+   again; F80's symptom tap survives. Route report stamped with the ruling.
+3. **D13 stays BLOCKING — and the owner corrected the audit-review session's
+   own cost estimate** ("adds a week"): *"We build the new mod out, create a
+   test probe for it, set it up, uninstall on one of our big saves and run an
+   after fix sweep… the testing part shouldn't be more than a few hours
+   unless we find major issues."* Correct — the week figure was serialized
+   calendar-time, not effort. The heavy part is agent-side (authoritative
+   exposed-set derivation, curated keep/remove list — F35 modifiers ARE the
+   repair and must survive). The reserved design question (run-after-removal
+   / keep-installed / pack-is-own-cleaner) goes to the owner AT SPEC TIME.
+
+**Queue re-pointed (STATE):** ① D13 derive→spec→build (agent) ∥ unattended-3
+· ② ONE combined sitting (PT-20 redo = D13's verify method + D13 after-sweep
++ F102's one-minute sign check) · ③ MOD_DESCRIPTION + disposition + metadata
+(agent) · ④ owner launch tasks ~1–2 h. Owner-facing cost to ship from here:
+one sitting + ~1–2 unhurried hours. Adopted from the artifact's
+recommendations besides the freeze: the 3-strikes rider rule (as ruling 1's
+watch-item clause). Its R5 ("a new binding rule must retire or mechanize an
+old one") was NOT adopted — WORKFLOW surgery on the meta-level waits for an
+explicit owner ask; noted here so the idea isn't lost.
+
+doccheck GREEN, pushed.
+
 ## 2026-08-12 — `corun-pt60` CLOSED by the terminal audit: every sitting verdict SUSTAINED, three corrections integrated, the trains agenda answered, the folder emptied
 
 **The chain's files last exist at `c3bccd4` (pre-deletion sha); this session's
