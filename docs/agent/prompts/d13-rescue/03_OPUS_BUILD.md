@@ -337,3 +337,16 @@ doubt 1 for E7 if a yield-free thread can be caught in its creation window.
   probe edited, counts re-emitted), **not** a measurement of the baseline.
 * **Not claimed:** orphan behaviour verified (nothing launched); baseline
   measured; anything about how these bodies behave in a real save.
+
+⚠️ **Tree note (read before you `git add`).** A parallel `public-docs` session
+was editing this repo while I ran. I committed only my seven paths and left
+theirs (`.gitignore`, `agent/prompts/public-docs/*`, untracked `.github/` and
+`public-site/`) — **except one I could not separate:** their new
+**checklist item 21** (GitHub Pages ruling + the "which repo hosts the site"
+question) was sitting unstaged in `PLAYTEST_CHECKLIST.md`, the same file my
+item-19 close-out edits, so it rode my commit `91fc5d0` under a message that
+does not describe it. Nothing of theirs was altered or lost; their next commit
+simply finds that block already in — which is what happened: they committed
+`d2970cf` minutes later, and the tree is theirs-and-mine, both pushed. (Item 21
+says "a working scaffold is committed at `public-site/`"; that was untrue at
+`91fc5d0`, where the folder was still untracked, and became true at `d2970cf`.)
