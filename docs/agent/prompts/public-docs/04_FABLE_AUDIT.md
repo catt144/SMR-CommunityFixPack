@@ -189,3 +189,128 @@ and never copied. ⚠️ **It has already moved twice during this chain.**
 - Publish anything, anywhere, or create an external account.
 - Lift the `MOD_DESCRIPTION.md` freeze or overturn STATE's release sequencing.
 - Write the fix list or any site page — that is prompt 5.
+
+---
+
+# Notes from upstream — prompt 3 (`03_BUILD_STORE.md`, consumed 2026-08-13)
+
+**Both descriptions are written, swept by six subagents, arbitrated and
+committed. Nothing was handed off; there was no seam** — so **job 1b does not
+apply** and its budget goes to job 1.
+
+## What is DONE — with the file and section to go and look at
+
+| # | deliverable | where | commit |
+|---|---|---|---|
+| 1 | **Fix pack store description** | `agent/reports/STORE_FIXPACK.md` — player text between the two `PLAYER TEXT` rules; notes and the claim-trace table below them | `ed5724b`, arbitrated `6669b58` |
+| 2 | **Opt-in store description** | `agent/reports/STORE_OPTIN.md`, same shape. ⛔ **Lives in this repo on purpose** — one voice, one audit target; **release prep copies the player text to `C:\Dev\SMR-OptInPack`** | `38239d8`, arbitrated `6669b58` |
+| 3 | **`metadata.lua` strings ×2** | `agent/reports/STORE_METADATA_STRINGS.md` — **drafted, NOT applied.** `metadata.lua` is code and outside the chain's fence; routed to release prep, which opens that file anyway for the version bump and checklist 23 | `38239d8` |
+| 4 | **The audit ledger** | `agent/reports/STORE_BUILD_AUDIT.md` — **this is your job 1 comparison target.** Per sweep: what was searched, what came back, a verdict on every finding, the negative half written out, and one section naming what the sweeps did **not** cover | `4543715` |
+
+**Judgment calls (job 3 of my brief):** four of §9's five bullets ship verbatim
+in `STORE_FIXPACK.md`. **The fifth is a one-line `⛔ HOLE`** — 22b was still
+unstruck when I closed. The replacement bullet is written out in that file's
+notes, ready to paste, in the approved *"on some map settings"* phrasing.
+
+## What is NOT started, or deliberately not done
+
+* ⛔ **`docs/agent/STATE.md` and `docs/PLAYTEST_CHECKLIST.md` were not written**,
+  per my concurrency rules — the owner's combined sitting owns both. **What I owe
+  them is in "For the checklist and STATE" below.** ⚠️ **Check whether the
+  sitting has landed before you write either file.**
+* **No site page, no fix list, no FAQ** — prompt 5's.
+* **The modder-facing per-fix disable paragraph is not written as prose.** §9.1
+  told me to rewrite it; `02_QA.md` §5 then ruled it belongs on the site, because
+  it is useless without an identifier and rule 4 bars identifiers from player
+  text. ⇒ **What shipped on the card is one identifier-free sentence** naming the
+  companion-mod route, its limit, and the absence of any in-game switch. **The
+  identifier-carrying instructions are prompt 5's to write on a modders page.**
+* **`STORE_METADATA_STRINGS.md` went through sweep 6 only.** Its two
+  `description` strings have **not** been through the rule-4, vocabulary,
+  evidence, route or standalone sweeps. **Treat them as unaudited.**
+
+## The sweep and arbitration ledger
+
+Full record in `STORE_BUILD_AUDIT.md`. Headline: **six sweeps, 43 findings — 27
+confirmed and fixed, 5 confirmed and deliberate, 8 refuted, 3 routed.** Nothing
+is left un-adjudicated.
+
+⭐ **The two that would have shipped a false instruction:**
+
+1. **The drone-dial uninstall recipe was wrong** — I wrote *"set both dials to
+   base, load once, then uninstall"*, and the missing step is **save**. Setting
+   the dials to base strips the modifiers from the running colony only; the file
+   on disk keeps the boost until a new save is written. The frozen file had it
+   right and I broke it.
+2. **"What it writes is inert without it"** covered the one item that is
+   deliberately not inert — the restored bonus that IS the repair.
+
+⛔ **One whole sweep verdict was overruled, and you should look at it hardest.**
+The evidence sweep called four of the opt-in page's eight module blocks
+*unearned* because their design entries read `built` / `speced` / `opt-in`. I
+refused it: that is the fix pack's F-entry status vocabulary applied to the
+opt-in mod's design entries, where the word tracks the playtest item rather than
+whether the module ships. My reasoning and what the sweep missed are in the
+ledger's last section. ⚠️ **If you disagree, four module blocks come out — the
+behavioural corrections that came out of those same blocks stand either way.**
+
+## ⛔ RE-DERIVE THIS — do not inherit any of it from me
+
+* **Every count.** `--emit-counts` in **both** repos at your own moment. The
+  suite number appears in the fix pack's player text and it moved twice inside
+  this chain.
+* **Checklist 22b's state.** If it came back while I was closing, the hole gets
+  filled from that file's notes — and check the shipped wording against what the
+  owner actually said, not against my draft.
+* **Three facts I could only source-verify**, which the combined sitting may have
+  since measured: hole 11 (does the list command put anything on screen — **no
+  surface of mine says it does**), hole 4's play half (a toggle without a
+  restart — **I state it plainly, sourced from all eight module headers**), and
+  **D13's `tested`**, which is what lets the uninstall half stop being a shape.
+* **The claim-trace tables at the bottom of both descriptions.** They are my
+  claims about my own evidence, and the evidence sweep found real gaps in them.
+* **The route facts.** All source-derived, none play-verified — including the
+  restart claim, the Apply claim, and the controller equivalents for Ctrl+click.
+
+## Job 3's landmine list — my answers, for you to check rather than trust
+
+1. **`F76`** — neither block crossed over in any form. 2. **No exposed-set
+count** anywhere, in any form. 3. **22b** — unstruck at my close, so **neither
+wording shipped**; the bullet is a hole. 4. **The four known-false claims** — all
+absent; no console veto, no dials in the fix pack, no override-table name, no
+*Mod Options → Community Fix Pack* path in either player text. 5. **The trains
+overstatement** — the clause is **cut**, not softened; the route sweep confirmed
+the button's own rollover names Metals and Electronics. 6. **`ListFixes()`** — no
+surface mentions it at all. 7. **The uninstall-cleanliness sentence** — not
+placed. 8. **The rescue artifact** — not named, not linked; one marked hole.
+9. **The display name** — used throughout, both files. 10. **Rule 4** — clean;
+the modder paragraph is the identifier-free sentence described above.
+
+## Open, and routed
+
+* **Load order** (design hole 3) — still unmeasured. My companion-mod sentence
+  states the condition and promises no method; if you can derive an answer, the
+  sentence can get shorter.
+* **Store and site links** — three marked holes in the fix pack text, two in the
+  opt-in. They exist when the owner uploads and turns Pages on.
+* **The `%AppData%` path under the Microsoft Store's redirection** — neither the
+  sweep nor I could verify it. Hedged to "usually in", which costs nothing.
+* **Steam Deck** — the bug reporter is gated off there
+  (`IsBugReporterEnabled()`); the copy now says so. Worth a second pair of eyes,
+  because it is the kind of clause that reads as a defect if it is wrong.
+
+## For the checklist and STATE — mine to hand over, not to write
+
+⛔ **I did not touch either file.** Whoever writes them next lands these:
+
+* **`PLAYTEST_CHECKLIST.md`** — nothing new is owed by the owner from my
+  session. **22b is still the only open ask**, and its recommendation is
+  unchanged: go back to *"on some map settings"*. ⭐ **Say the word and one line
+  gets struck and one bullet pasted.** (22c — the hostile-reader page — is still
+  open and is prompt 5's if the owner says yes.)
+* **`STATE.md` ⑤** — the public-docs chain's line should read: descriptions
+  **BUILT + swept + arbitrated 2026-08-13** (`reports/STORE_FIXPACK.md`,
+  `STORE_OPTIN.md`, ledger `STORE_BUILD_AUDIT.md`, strings routed in
+  `STORE_METADATA_STRINGS.md`); **next `04_FABLE_AUDIT.md`**; ③ is now assembly.
+  ⛔ **Re-derive the wording and the counts before landing it**, and mind the
+  60/60 line cap.
