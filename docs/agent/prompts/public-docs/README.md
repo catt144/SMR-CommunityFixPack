@@ -88,7 +88,15 @@ git history (checklist 20) and the third-party roster wording (Job 9).
 ## ✅ Platform: DECIDED 2026-08-13 — GitHub Pages
 
 Owner ruling, after the alternatives were priced against the peer GitBook site.
-A working scaffold is committed: **`public-site/`** (MkDocs + Material —
+⚠️ **UPDATED 2026-08-13 evening — the scaffold has MOVED OUT OF THIS REPO.**
+Checklist 21 was ruled the same day: the site lives in its own public repo,
+**`catt144/SMR-CommunityMods`** (local clone `C:\Dev\SMR-CommunityMods`), with
+`mkdocs.yml` and `content/` at its root and the publish workflow beside them.
+The `public-site/` folder and `.github/workflows/publish-site.yml` are **deleted
+from the fix pack**. ⛔ Still nothing on the public web. The paragraph below is
+the pre-move record; translate its paths, do not edit it.
+
+A working scaffold was committed: **`public-site/`** (MkDocs + Material —
 sidebar tree, `Ctrl K` search, right-hand page TOC, dark/light, callouts) with
 `.github/workflows/publish-site.yml` to build it. ⛔ **The workflow is
 `workflow_dispatch` only and Pages is not enabled**, so nothing is on the public

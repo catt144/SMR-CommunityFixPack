@@ -22,6 +22,12 @@ Reviewed next by that chain's `02_QA.md`; built by prompts 3 and 4.
 | index rows | 102 F + 12 D + 46 C = 160, in 125 entry files | 0 F + 9 D + 0 C = 9 |
 | TestKit probes | 88 (one shared kit, serves both mods) | 88 (same kit) |
 
+⛔ **The probe count went stale within hours of this table being written** — a
+re-emit the same evening read **94**, because D13's prompt 3 landed a third mod
+and its probes. **That is the point of §4.5's rule**: the suite number appears in
+player-facing text and must be re-derived at the moment it is written, never
+copied — including from here. The module and entry counts above were unaffected.
+
 **F-row status distribution, counted off `agent/bugs/INDEX.md`:** 41 `fixed` ·
 40 `tested` · 11 `wontfix` · 3 `filed` · 2 `open` · 2 `closed` · 1 `todo` ·
 1 `investigating` · 1 `folded`. ⇒ **81 F-entries carry a shipping status,
@@ -158,10 +164,31 @@ in `Src`, so it is **unverified in both directions** — `public-site/`,
 depend on it. ⛔ **Not fixed here** — `metadata.lua` is code and this chain's
 scope fence excludes it. Routed to the release checklist as item 23 (§9).
 
-### ⚖️ THE RECOMMENDATION: its own repo
+### ✅✅ DECIDED SAME DAY: its own repo — and it has already moved
 
-Already the owner's open question as checklist item 21. The recommendation
-stands and is now stronger:
+⭐ **Owner ruling 2026-08-13 (checklist 21), acted on the same evening.** The
+site is now **`github.com/catt144/SMR-CommunityMods`** (public), local clone
+`C:\Dev\SMR-CommunityMods`. `mkdocs.yml` and `content/` sit at that repo's root
+— the `public-site/` wrapper folder existed only to isolate the site *inside*
+the mod repo and had no reason to survive the move. The publish workflow moved
+with them, still `workflow_dispatch` only, Pages still not enabled. **Both are
+deleted from this repo.**
+
+⇒ **§2's packaging problem is gone rather than mitigated**, and item 23 shrinks
+to `tools/` · `CLAUDE.md` · `LICENSE` · `.gitattributes` (+ `.github/`, still
+unverified). ⛔ **`ignore_files` is still under-specified and item 23 still
+stands** — the site leaving does not fix the others.
+
+⚠️ **Three content deltas landed with the move**, so prompts 3 and 4 inherit
+them: `index.md` now carries the decided display name (§0 delta 1); `install.md`
+no longer claims the name is unchosen; and `install.md`'s restart line is now
+**labelled `⛔ do not publish as written`** rather than left as a silent
+contradiction (§12 hole 4 — still open, now visible on the page itself).
+
+⚠️ **Paths in this report that read `public-site/…` are pre-move.** Translate to
+the new repo's root; do not edit the record.
+
+**The reasoning as it stood, kept because the QA prompt re-derives it:**
 
 * **Its own repo** (e.g. `SMR-CommunityMods`) ← **recommended.** One site
   serving both shipped mods and the rescue artifact when it lands · a neutral
@@ -814,9 +841,9 @@ it asked for composition rather than approval.
 
 | # | decision | status |
 |---|---|---|
-| 21 | **Site topology** — own repo vs fix-pack repo | ⚖️ **already open**; §2 adds the packaging finding and re-states the recommendation |
+| 21 | **Site topology** — own repo vs fix-pack repo | ✅✅ **DECIDED + DONE 2026-08-13** — own repo, `catt144/SMR-CommunityMods`, scaffold moved, both copies gone from here (§2) |
 | 22 | **The judgment-calls wording** | ⚖️ **new** — draft in §9, owner approves or edits |
-| 23 | **`ignore_files` packaging hygiene** | ⚖️ **new** — `public-site/`, `tools/`, `CLAUDE.md`, `LICENSE` currently pack into the upload (§2) |
+| 23 | **`ignore_files` packaging hygiene** | ⚖️ **new** — `tools/`, `CLAUDE.md`, `LICENSE`, `.gitattributes` pack into the upload, in every mod repo (§2). The site was on this list until it moved out |
 | 24 | **Preview art ×2** | ⚖️ **new** — the only unbounded item; routed early on purpose |
 | 25 | **The third-party roster wording** | ⚖️ **new** — §11 |
 
@@ -831,7 +858,14 @@ deletes the other's line.
 
 > **Requested line** (release front, after ①): *"⑤ **public-docs chain** —
 > design DONE 2026-08-13 (`reports/PUBLIC_DOCS_DESIGN.md`); next `02_QA.md`.
-> Platform Pages ✅, topology ⚖️ck21. Feeds ③."*
+> ⭐ **A FOURTH REPO EXISTS: the site, `C:\Dev\SMR-CommunityMods`**
+> (`catt144/SMR-CommunityMods`, public, unpublished). Feeds ③."*
+>
+> ⚠️ **Re-derive before landing it.** This wording is post-move (2026-08-13
+> evening) and supersedes the "topology ⚖️ck21" version; STATE has also changed
+> underneath it since — D13's prompt 3 landed as `689a396` and a **third mod**
+> now exists at `C:\Dev\SMR-CommunitySaveRescue`. ⛔ The repo count in any line
+> you write must be counted, not copied.
 >
 > **What to drop for it, if the cap binds:** the `⛔ Pre-split 82/75/8 …
 > ERA-STALE` sentence in "Build state" — it names three superseded number

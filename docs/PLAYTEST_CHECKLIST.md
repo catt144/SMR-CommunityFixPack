@@ -333,15 +333,30 @@ deleted when the chain closes).
     publicly until you choose to turn it on. The four pages in it are marked
     LAYOUT SPECIMENS on their own face — they are there so you can judge the
     feel, not to be published.
-    **To look at it, either:**
+    **To look at it, either** (⭐ paths updated for the move — these are the
+    live ones, run them from `C:\Dev\SMR-CommunityMods`)**:**
     * **locally** — `python -m pip install mkdocs-material` then
-      `python -m mkdocs serve -f public-site/mkdocs.yml`, open the address it
-      prints; or
+      `python -m mkdocs serve`, open the address it prints; or
     * **live but private-ish** — Settings → Pages → Source: *GitHub Actions*,
       then run *Publish docs site* from the Actions tab. ⚠️ That URL is public
       the moment it builds, so do this only if you are content for specimens to
       be visible for a while.
-    ⚖️ **THE ONE THING BACK TO YOU: which repo should host the site?**
+    ✅✅ **TOPOLOGY DECIDED 2026-08-13, your ruling: ITS OWN REPO — and you
+    created it the same evening.** Live at
+    `github.com/catt144/SMR-CommunityMods`, public, and the scaffold is already
+    moved: local clone `C:\Dev\SMR-CommunityMods`, `mkdocs.yml` and `content/`
+    now sit at that repo's root, the manual publish workflow moved with them,
+    and both are **gone from the fix pack repo**. ⛔ **Still nothing on the
+    public web** — the workflow is still `workflow_dispatch` only and Pages is
+    still not enabled; the four pages are still marked layout specimens.
+    ⭐ **Two things fixed on the way in, and one deliberately left broken:** the
+    sibling mod's decided display name replaced the dead working title, and this
+    page stopped claiming that name was unchosen. ⛔ The line about whether an
+    opt-in toggle needs a restart is now labelled *do not publish* rather than
+    guessed at — two of our own documents claim it both ways and neither has
+    been checked against the code. The `public-docs` chain settles it.
+    **Nothing further owed by you here.** ~~The ask as it stood:~~
+    ⚖️ ~~**THE ONE THING BACK TO YOU: which repo should host the site?**~~
     * **Its own repo** (e.g. `SMR-CommunityMods`) ← **my recommendation.** One
       site covering both mods and the rescue tool later, a neutral URL, and
       nothing ships inside either mod. It is also how the peer site works —
@@ -395,9 +410,13 @@ approval, one is the only open item with no ceiling on it.
     every file that does not match one of the `ignore_files` patterns in
     `metadata.lua`. We ignore eight patterns: `.git`, `.svn`, `Source`,
     `SourceData`, `docs`, `.claude`, `README.md`, `.gitignore`.
-    **What that misses today:** `public-site/`, `tools/`, `CLAUDE.md`,
-    `LICENSE`, `.gitattributes` (and the same list minus the site in the opt-in
-    repo). None of it *runs* — only files listed in `metadata.lua` execute — so
+    **What that misses today:** `tools/`, `CLAUDE.md`, `LICENSE`,
+    `.gitattributes`, in every mod repo — and now that there are three mods,
+    the rescue mod's own `metadata.lua` has never been checked for this at all.
+    ⭐ **The docs site used to be on this list and no longer is** — it moved to
+    its own repo the same evening (item 21), which is the one part of this that
+    fixed itself. The rest did not.
+    None of it *runs* — only files listed in `metadata.lua` execute — so
     nothing is broken and nothing is a security problem. But `CLAUDE.md` is
     agent instructions, and shipping it inside a player's download is the exact
     "player lands in our working notes" problem the whole docs-site design

@@ -11,6 +11,3 @@ __pycache__/
 Thumbs.db
 Desktop.ini
 .claude/
-
-# MkDocs build output (the site is built in CI; the artifact is never committed)
-public-site/site/
