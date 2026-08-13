@@ -65,6 +65,66 @@ evidence supports today, and flag it for prompt 4 to upgrade:
 
 ---
 
+## ⭐⭐ HOW TO RUN THIS — write serially, audit in parallel, arbitrate everything
+
+**Owner instruction 2026-08-13:** use subagents for the sweeps and act as their
+auditor. ⭐ **Adopted, with one boundary**, because the split is not arbitrary:
+
+### ⛔ Phase 1 — WRITE. One agent, no fan-out.
+
+**Both descriptions are written by you, in one voice, start to finish.** Do not
+hand sections to subagents. §4's whole design is that the three tiers *stand
+alone but never contradict each other*, and the standalone test — *"if a reader
+stops here and acts, is anything they now believe false?"* — is a property of the
+whole document, not of any paragraph. Split the prose and you get seams a reader
+feels and a tier-1 claim that tier-2 quietly widens. The frozen file is 748 lines
+in one voice and that voice is the raw material.
+
+### ⭐ Phase 2 — AUDIT. Fan out, one rule per agent, all on the finished draft.
+
+⚠️ **This is where the value is, and the reason is on the record: an author
+cannot see their own text.** The `F76` draft "sat in the file ready to publish
+for a week — nothing about its prose flags it." §5.1's inverted rate claim was
+written by a careful prompt, passed its own review, and was caught only by a
+fresh reader with the entry open. **Three false claims have now reached a
+player-facing draft in this project and not one was caught by its author.**
+
+Launch these **concurrently**, each with the finished draft and its ONE rule:
+
+| # | sweep | the rule it enforces | shape |
+|---|---|---|---|
+| 1 | **Rule 4** | no file path, function name, `F##`/`D##` id, or house word (`gate read`, `probe`, `co-run`, `disposition`) in anything a player reads | mechanical, high recall |
+| 2 | **Vocabulary** | §4.5's forbidden list, plus the two forbidden *moves* — never quote our internal status words, never compare against another mod | mechanical |
+| 3 | ⭐ **Evidence** | every factual sentence traced to its `agent/bugs/` entry or `agent/facts/` fact. ⛔ **The bar is `fixed` + suite + self-checks + the verified save-safety tier — nothing more** | expensive; must open the entry |
+| 4 | ⭐ **Route** | every *"you can X"* names its route and confirms a retail player on **PC, Xbox and PlayStation** can walk it | has already caught two false claims |
+| 5 | **Standalone** | per tier: *"if a reader stops here and acts, is anything they now believe false?"* | needs the whole draft |
+| 6 | **Staleness** | counts re-derived at write time, not copied; post-split facts (Mod Options lives in the opt-in mod; the override table is `SMROptInPack_*`; the display name is decided) | mechanical |
+
+⚠️ **Sweeps 3 and 4 are the ones that find real defects and the ones most likely
+to hand you a confident wrong answer.** Give them the evidence bar and the
+entries, and expect false positives.
+
+### ⛔ Phase 3 — ARBITRATE. You are the auditor, and auditing means re-deriving.
+
+⛔⛔ **Do not act on a subagent's finding because it sounds right.** Open the
+entry, the fact or the source line yourself and confirm it before you change a
+word — and equally, **do not dismiss one because it is inconvenient**. This is
+the house rule that produced every good result in this project's chain history,
+and it is the rule the `F97` error slipped past when a *recorded* claim was
+trusted instead of re-derived.
+
+**For each finding, record one of three verdicts:** *confirmed → fixed* ·
+*confirmed → deliberate, and why* · *refuted, and what the sweep missed*.
+⛔ **A sweep that returns nothing is a result and gets recorded as one** — silence
+is not the same as clean, and an empty report usually means the rule was wrong.
+
+⚠️ **Honest expectation: this does not make the job much faster.** The writing is
+the bulk and it stays serial. **What it buys is that the adversarial read happens
+now, inside prompt 3, instead of in prompt 5 after two more prompts have built on
+the error.** That is worth more than the hours.
+
+---
+
 ## Job 0 — read what you are building from
 
 `agent/reports/PUBLIC_DOCS_DESIGN.md` **whole** — it is the design and it now
