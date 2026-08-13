@@ -8,6 +8,124 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — `split-optins` CLOSED by the terminal audit: every matrix verdict SUSTAINED, the no-retraining test passes from the new repo alone, both repos' both-mods clause goes ACTIVE
+
+**The chain's files last exist at `9509065` (pre-deletion sha); this session's
+closing commit deletes `agent/prompts/split-optins/` whole (README, 90_DESIGN,
+05_FABLE_AUDIT, the three parked instruments).** TestKit tree verified clean;
+staleness checked in all three repos at open.
+
+**Job 1 — the record, re-derived rather than inherited.** All NINE archived
+logs (`sp*_Mars.exe-20260812-*.log`) byte-compared over the FULL length against
+their AppData originals (`cmp`: identical, all nine; MD5s recorded in this
+audit's transcript) and read whole (~5,200 lines; spa2 raw, the rest as
+verified-boilerplate-stripped whole reads over the byte-identical files). Every
+suite tally recounted from the `^[SMRTest] <VERDICT>` lines themselves:
+**(a2) 78/0/10/0 · (a1) 72/0/16/0 · (c) 70/0/18/0 · (b) run 1 9/68/10/1 ·
+(b) run 2 9/69/10/0 — all five EXACT as reported**, SKIP/PASS sets matched BY
+NAME (the (a1) flips are exactly the six toggle probes; (b)'s SKIP set
+correctly swaps `AnomalyCaveInMap`→`OptionsMenuFixPack`). ⭐ The 88-row diff vs
+`u2run3` re-derived from scratch: the ONLY row change in the whole suite is
+`OptionsMenu` → `OptionsMenuFixPack` + `OptionsMenuOptIn`. ⚖️ **One precision
+correction:** upstream's "86 rows byte-identical" holds for VERDICTS (86/86);
+five rows' message TEXT differs benignly (colonists-walking 6→2, trait
+Celebrity→Empath, reservation counts, tourist RNG, and DroneStatDials "AT
+BASE"→"OFF BASE (const 4 vs base 2)" — the last independently corroborating
+the owner's dial change). Cell (b)'s absence settled from the archived bytes:
+`SMRFixPack` global nil at both gate reads, 2 mods loaded, the only fix-pack
+strings being the save header + the engine's own `Unpersist missing permanent
+… Fallback` path. Cells (d)/(d2)/(e) re-read row by row: CP60RT and Sol 311
+agree on the same four dome handles (#2285/#5276/#8299/#8367); cell (e)'s
+CONTRACTVERIFY handle sets identical before/after (`0 of 3 fields broke`);
+dials `percent=400`/`amount=2` ⇒ `5x`/`+2`, moved to `3x`→`percent=200` and
+back. Whole-log sweep: **0 `[LUA ERROR]` · 0 `TrackElement.lua:805` (F99) ·
+0 `invalid pos` (C45) · 0 cheat markers · 0 asserts**; every remaining line
+attributed (Braze offline, LawOfficeDoor pair, F100's self-documented
+first-pass message, probe-forced watchdog lines, per-load F48 sanitizer
+repairs — identical 7 tracks each suite load).
+
+**Invariants re-proven on the SHIPPED trees, not inherited.** 6a: the new
+repo's `Code/` holds exactly 11 `SMRFixPack` tokens = 5 persisted-string
+definitions + 6 comments, zero references. 6c: the five persisted names
+re-derived from shipped code and matched name-by-name to the live readings
+(three instance flags, two modifier ids read with their own fields); dial
+choice strings byte-identical across `metadata.lua`/`items.lua`/module maps;
+no other persistence route (no GameVars, no named threads, `rawget`-based
+scanner verified in the parked instrument source). 6b: cross-grep of each
+pack's global-replacement set over the other's tree — EMPTY both ways;
+`IsLRTransportAvailable` confirmed consumer-only in the opt pack. ⭐ The
+design's one unconfirmed Src claim (F69's no-varargs wrapper) settled by
+enumerating ALL 23 `GetFuelResourceRequest` call sites in Src: every one
+argument-free — leaving F69 unchanged was correct, not a missed MUST-FIX.
+⭐ **EF-055, the leg's load-bearing claim, SUSTAINED by full re-derivation:**
+`GetModsToLoad` filters a missing id into a LOCAL list with a non-modal
+`ModMessage` (blacklist branch requires `Mods[id]` present — a pulled junction
+skips it); the ONLY `TurnModOff`+`SaveAccountStorage`+modal routine is
+`WaitErrorLoadingMods` (`Mod.lua:2033-2061`), reached solely from
+`OnMsg.PreGameMenuOpen` (`:2240`); `Msg("PreGameMenuOpen")` exists ONCE in the
+whole Src (`CommonLua/UI/MainMenu.lua:15`) inside the `OpenPreGameMainMenu`
+that Relaunched's `Lua/init.lua:1` redefines without it. Dead code, plus the
+measured restore half (sprestore: `74/74`+`8/8`, same order, dials intact).
+
+**Rulings the audit owed (upstream items 1–6):** (2) the `IsPlayerControlled`
+fixture repair is INERT outside cell (b) — guard order puts the borrowed
+method behind `(amount or 0) <= 0`, false wherever the fix pack answers, and
+the wrapper itself absent in (c); no re-runs owed. (3) `FactionFundingCheck`
+RULED: correct probe behaviour, but a PASS that cannot fail against its defect
+is an execution note (R7), not evidence — repair (PASS→SKIP) queued ON THE
+PROBE ITSELF (TestKit `62f03da`) to ride the next suite-touching chain, since
+it moves the just-measured baseline to 77/0/11/0. (4) cell (a1)'s tally is
+quotable ONLY as the in-session-deactivation reading (a real player state);
+the fresh-default TALLY was never measured and is now unmeasurable — its GATE
+half (1/8, seven predicted `inactive` strings) is banked from the owner's
+18:30 log, which this audit verified line by line and **archived**
+(`spowner_Mars.exe-20260812-18.30.09.log`, byte-identical — it was
+load-bearing, owner-produced, and sitting on a ~20-file rotation: an R8-class
+miss, repaired). (5) Sol 306: routing honest (checklist 16); **first
+cloud-check taken — NOT returned** (79 `.sav` re-listed by name, all four
+protected MD5s match, `Sol 311(2)` inventoried); no launch had occurred since
+the leg, so the live check stays the owner's next boot. (6) owner-time claim
+honest: the matrix consumed ZERO owner minutes; the chain's total owner cost
+is the ~1 promised re-tick minute (spent early, 18:30, on prompt 3's ask) —
+plus one unrecoverable autosave (EF-056), which is the chain's real cost.
+
+**Job 2 — the no-retraining acceptance test: PASS.** Run with this repo's docs
+closed; all six answers (build state · policies · module records+history ·
+suite/gate · bans · provenance) cited from the new repo's own files; doccheck
+ran GREEN there during the test. Transcript = the new repo's SESSION_LOG top
+entry (`a90d128`). The one deliberate cross-repo pointer (owner decisions
+single-sourced on this repo's checklist) is documented design, not a gap.
+
+**Job 3 — ledger vs the standing stacks.** RECURRED: **R8 (evidence
+rotation)** — third instance of the class, first with an owner-produced log
+("banked" is a citation; a citation archives). NEW (method-grade, CHAIN_METHOD
+row added): a matrix PREDICTION falsified by its PREMISE going stale while its
+mechanism stayed right — the owner acted early on a routed ask, and only the
+harness's premise-read (`DIALOPTS` beside `INVROW`) kept the falsification
+diagnosable; countermeasures now in the row (premises read at run top; routed
+asks can be acted on anytime; owner hands priced against the file system —
+EF-055's junction route killed three predicted Mod-Manager visits). Also
+sustained as prompt 4 filed them: EF-056 (the chain's one harness-defect
+casualty), deviation 1 (TestKit fixture gap, repaired, correct FAIL on
+re-run), deviation 2 (pre-existing probe-design gap, now ruled). No harness
+resolution defect, ARM/DISARM gates green in-log, PROBE SWEEP clean ×3 trees.
+**Owner-time honesty: promised ~1 min, actual ~1 min (spent early) + one lost
+autosave; the audit itself cost zero.** **Economics, one line: five prompts and
+nine unattended launches turned one mod into two shipping-shaped mods, proved
+the split changed exactly one deliberate thing, banked EF-054/EF-055/EF-056,
+and left both repos self-describing — for one owner minute.**
+
+**Job 4 — integration (commit `9509065` + this one):** WORKFLOW both-mods
+clause ACTIVE in BOTH repos with the audit-recounted baseline stamped in
+(`74/74`+`8/8` · `78/0/10/0` of 88, SKIPs by name, order = enable order);
+STATE both repos rewritten (this one: split CLOSED, NEXT = D13 chain; new one:
+nothing owed); checklist 14 era-fixed, 15 audit-stamped with the three open
+calls, 16 carries the cloud-check; PLAYTEST_HELP retail-coverage sentence
+era-fixed; EF-056 gains the first-check sample; CHAIN_METHOD +1 row. doccheck
+GREEN ×2, TestKit committed, folder emptied in this commit.
+
+---
+
 ## 2026-08-12 — THE SPLIT IS BUILT: 8 opt-in modules + a framework copy are a second mod, and this pack loses its options page (chain `split-optins`, prompt 3)
 
 Executed against `90_DESIGN.md` and its QA gate's eight MUST-FIXes, all
