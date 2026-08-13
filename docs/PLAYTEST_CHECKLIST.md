@@ -38,6 +38,43 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ⭐ NEW 2026-08-13 — the SITE is built (unpublished): one small question, and two things for your awareness
+
+27. ⚖️ **WHERE DOES A BUG REPORT GO? One line from you, and it is not urgent.**
+    The site's new "something is broken and you think it might be us" section
+    (item 22c, built today) tells a player exactly what to include in a report —
+    and then cannot tell them **where to send it**, because nothing is published
+    yet. That is honest today and it is a hole at launch.
+    * **The two routes that could exist**, both checked rather than assumed:
+      **(a)** the mod page's own comments, once you upload — costs nothing, and
+      it is where people will post anyway. **(b)** the public repositories'
+      issue trackers — ⭐ **already enabled on both mod repos** (checked live
+      today), which gives you a place people can attach a save or a log to, and
+      an email when one arrives. A reporter needs a free GitHub account; a
+      console player can do it from a phone.
+    * ⭐ **Recommendation: both, comments named first** — the comments are where
+      the traffic will be, the tracker is for the reports worth keeping. ⚠️ The
+      real cost of (b) is that an issue tracker is a place you have promised to
+      look; if you would rather not carry that, say (a) and the page will name
+      only the comments.
+    * **Until you answer, the page says the truthful thing** ("this page will
+      name the place once the mods are published"), so nothing is blocked.
+    ℹ️ **Awareness, no decision owed — the frozen description has TWO MORE false
+    claims than the four on record, and both are the `F76` shape.** Writing the
+    fix list meant asking, for each of its bullets, *which shipped module
+    delivers this?* — and two had no module at all: the **dome-plumbing**
+    bullet describes `F24` and the **research-counter** bullet describes `F28`,
+    both closed `wontfix` on 2026-07-30 with their code files deleted. Neither
+    ever reached a store card. ⛔ They are recorded in
+    `agent/reports/SITE_BUILD_AUDIT.md` so the release-prep rebuild of that file
+    cannot inherit them.
+    ℹ️ **Awareness — the Sensor Tower sentence in that same file is backwards,
+    and so was the site's own specimen.** It says towers *made meteors worse*;
+    the code says the opposite — towers added warning time, warning time WAS the
+    interval, so towers accidentally spaced strikes out and the players actually
+    hurt were early colonies without them. The site now says the true version.
+    Nothing shipped is affected: neither store card mentions Sensor Towers.
+
 ### ⭐⭐ NEW 2026-08-13 — D13 CHAIN CLOSED; the ONE combined sitting is READY (step ② — the release line's next move is yours)
 
 26b. ⭐ **THE COMBINED SITTING IS PREPPED AND WAITING ON YOUR CHAIR.** The
