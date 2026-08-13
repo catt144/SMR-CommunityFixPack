@@ -40,25 +40,18 @@ owed input stays here no matter how struck-through it looks.
 
 ### ⭐ NEW 2026-08-13 — the SITE is built (unpublished): one small question, and two things for your awareness
 
-27. ⚖️ **WHERE DOES A BUG REPORT GO? One line from you, and it is not urgent.**
-    The site's new "something is broken and you think it might be us" section
-    (item 22c, built today) tells a player exactly what to include in a report —
-    and then cannot tell them **where to send it**, because nothing is published
-    yet. That is honest today and it is a hole at launch.
-    * **The two routes that could exist**, both checked rather than assumed:
-      **(a)** the mod page's own comments, once you upload — costs nothing, and
-      it is where people will post anyway. **(b)** the public repositories'
-      issue trackers — ⭐ **already enabled on both mod repos** (checked live
-      today), which gives you a place people can attach a save or a log to, and
-      an email when one arrives. A reporter needs a free GitHub account; a
-      console player can do it from a phone.
-    * ⭐ **Recommendation: both, comments named first** — the comments are where
-      the traffic will be, the tracker is for the reports worth keeping. ⚠️ The
-      real cost of (b) is that an issue tracker is a place you have promised to
-      look; if you would rather not carry that, say (a) and the page will name
-      only the comments.
-    * **Until you answer, the page says the truthful thing** ("this page will
-      name the place once the mods are published"), so nothing is blocked.
+27. ~~⚖️ **WHERE DOES A BUG REPORT GO?**~~ ✅ **DECIDED 2026-08-13, same session:
+    BOTH, COMMENTS NAMED FIRST — and it is written into the site already**
+    (`content/faq.md` → "Where do I tell you?"). The mod page's comments are the
+    main route, read first, needing no account a player does not already have
+    and working on every platform; the project's issue tracker is named once,
+    for the reporter who has a **save file or a log**, because a comment section
+    cannot carry either. One tracker covers both mods. ⚠️ **What you took on:**
+    a tracker is a place you have said you will look — issues are open on both
+    mod repos (verified live). ⛔ The store-page link is still a hole until you
+    upload. ℹ️ Offered, not built: a short issue form that asks for platform,
+    when it started, whether it survives a save and reload, and the save — say
+    the word and it is ten minutes of agent time.
     ℹ️ **Awareness, no decision owed — the frozen description has TWO MORE false
     claims than the four on record, and both are the `F76` shape.** Writing the
     fix list meant asking, for each of its bullets, *which shipped module

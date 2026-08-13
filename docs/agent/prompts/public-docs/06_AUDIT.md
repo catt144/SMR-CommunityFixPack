@@ -61,9 +61,12 @@ Everything is in `C:\Dev\SMR-CommunityMods`, committed and pushed, **unpublished
 
 ## What is NOT done, explicitly
 
-* **Nothing is published**, and no store link exists on any page. The "where do I
-  send a bug report" answer names no destination — that is checklist 27 and it is
-  the only thing on the site waiting on the owner.
+* **Nothing is published**, and no store link exists on any page. ✅ The "where do
+  I send a bug report" answer WAS routed (checklist 27) and **the owner decided in
+  the same session**: mod-page comments first, the project's issue tracker named
+  once for reports carrying a save or a log. It is written into `faq.md`. ⛔ The
+  store-page half stays a hole until upload. ⚠️ Re-check that both trackers are
+  still open — the page now points a player at one.
 * **No opt-in module page exists on the site.** The eight modules are described on
   their store card and reachable in the game; the site describes them only where a
   question needs them. ⚖️ Prompt 6 may rule that this is a gap.

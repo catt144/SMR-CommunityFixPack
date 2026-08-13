@@ -130,7 +130,7 @@ missed.
 |---|---|---|
 | R1 | ⛔ **The FIX PACK'S STORE CARD still overstates patch-retirement.** `STORE_FIXPACK.md:71-74` — *"an official patch that changes the code a fix was written for **retires our version of it**"*. Our own core says the opposite of the general case: `00_Core.lua:492-497` — *"self-checks … CANNOT notice a same-named function edited in place"* | This is checklist **22d item 1** incompletely landed: the conditional was narrowed to "changes the code", and a body rewrite *is* a change to the code. ⛔ **Not edited here** — it is owner-approved text in another surface's file. Prompt 6 reads both surfaces and owns this |
 | R2 | `Fix_TechDescriptionBuilding` ships and reports `patched` while being a retail no-op (S1) | code + owner decision, not a page: the repair is `ModItemLocTable` work already scheduled post-release with D10 |
-| R3 | Where bug reports go | checklist item 27 (new) |
+| R3 | Where bug reports go | checklist item 27 — ✅ **CLOSED the same session: comments first, the issue tracker named once for reports carrying a save or a log.** Written into `faq.md`; the store-page link stays a hole |
 | R4 | The screenshot fixtures that cannot be seen from outside the game | `CAPTURE_SITTING.md`, amended in place with drop rules |
 | R5 | `F22` has no fix-list entry of its own — it is described inside the Last Transmission entry, so a modder searching "power reserve" will not find it | deliberate for now; noted for prompt 6 to rule on |
 
