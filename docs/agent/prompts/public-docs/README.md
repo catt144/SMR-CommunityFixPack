@@ -44,21 +44,46 @@ for work that runs BESIDE it.
 work ③ needs so ③ becomes assembly rather than authoring. **It may not lift the
 `MOD_DESCRIPTION.md` freeze** — see stop conditions.
 
-## ⛔⛔ THE EXPOSURE HAZARD — read before proposing any platform
+## ⛔ WHY `docs/` IS NOT THE SITE — and the correction that produced this section
 
-**`docs/` MUST NEVER become the published site.** It holds the entire agent
-corpus and `PLAYTEST_CHECKLIST.md`, which carries the owner's personal notes,
-open decisions, save names and session history. On 2026-08-13 a hard-coded save
-path carrying the owner's Windows username and SteamID64 was scrubbed from three
-files in this repo and one in the opt-in repo — **and it is still in git history
-on both public repos** (104 of 828 commits here; checklist decision 20 has the
-options priced). A docs site generated from `docs/` would republish all of it,
-prettier and more findable.
+⚠️ **An earlier draft of this README said "`docs/` must never become the
+published site" in a way that implied SECRECY. That was wrong and the owner
+caught it** (2026-08-13): *"its already on a public repo. Part of the reason to
+do these big mods on github is so people can be sure they aren't adding anything
+sketchy."* They are right, and the corrected framing is load-bearing for this
+whole chain:
 
-⇒ **Player-facing content lives in its own tree**, written for players from the
-start, never generated from agent docs. ⚠️ And `docs/` root is doccheck-enforced
-against `docs/README.md`'s map (folder contract), so a new player-docs folder
-CANNOT simply be dropped in `docs/` — placement is prompt 1's Job 2 to propose.
+⭐ **`docs/` being public is a FEATURE, not a leak.** It is the receipts behind
+every claim the mods make, and the working notes — corrections included — are a
+*stronger* trust signal than a polished page. **Nothing in this chain should try
+to hide it, and no future session should read this folder as "docs/ is
+sensitive".**
+
+**The reason the site is separate is AUDIENCE and JOB, and there are exactly
+three:**
+1. A player searching *"is my bug fixed"* must not land in agent workflow docs.
+2. A generated site reads as **published documentation**. Working notes carry
+   superseded numbers and in-progress wrong answers — fine as receipts, bad as
+   something people quote back at you.
+3. A site adds search-engine indexing and implied endorsement that a repo folder
+   does not.
+
+⇒ **Player-facing content is WRITTEN for players in its own tree**, never
+generated from agent docs. ⚠️ `docs/` root is separately doccheck-enforced
+against `docs/README.md`'s map, which is why the scaffold sits at repo root.
+
+### ✅ The public-exposure audit RAN 2026-08-13 — inherit the result, re-derive before acting
+
+Scanned both public repos. **Credentials / tokens / API keys / passwords: ZERO.
+Emails: only `…@users.noreply.github.com`, GitHub's own privacy address. Git
+author: the project identity, not a real name. Personal / health / financial:
+none.** Game source is **cited, not reproduced** — ~1,478 fenced lines across all
+of `docs/`, only three blocks over 25 lines and two of those are false positives;
+real excerpts run 17–27 lines inside a bug entry, and the house discipline is
+`file:line` citation. Machine paths survive in 12 files but carry no username
+since the scrub. ⇒ **No emergency, and no reason to change the repo's public
+posture.** Two items remain, both DECISIONS not defects: the SteamID64 still in
+git history (checklist 20) and the third-party roster wording (Job 9).
 
 ## ✅ Platform: DECIDED 2026-08-13 — GitHub Pages
 

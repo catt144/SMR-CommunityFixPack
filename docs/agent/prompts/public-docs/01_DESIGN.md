@@ -182,12 +182,44 @@ your job is to make it operational so prompts 3 and 4 never guess.
 
 ---
 
+## Job 9 — the third-party roster: one wording call, and it is about real people
+
+⚠️ **Surfaced by the 2026-08-13 exposure audit** (result summarised in the
+README — inherit it, but re-derive before acting on any of it).
+
+`docs/agent/reports/BUG_LIST_AUDIT.md:355-370` is a competitive-landscape roster
+that names real modders under a heading reading **"Rejected (with reasons)"** —
+`Ayzo` (*"an aggregator repack"*), `Thorik` (*"AI redesigns, not defect repair,
+no source"*), `Fizzle Fuze`, `akarnokd`, `FirestormMk3`, `LukeH`, and
+**`Silva/Dash`** (*"content-only, both games"*).
+
+**Read it in full before judging it.** In context it is fair and technical:
+"rejected" means *rejected as a SOURCE of bug reports for our list*, not "bad
+mod". Nothing there is untrue or hostile. But the header word is harsh out of
+context, "repack" is loaded, and ⭐ **`Dash` is the author of the GitBook site
+the owner cited as the model for this very chain** — so the odds of one of these
+people reading it are not hypothetical.
+
+* ⛔ **This is a wording call about other people's work, and it belongs to the
+  owner.** Recommend, do not rewrite unasked; a recommendation already on the
+  table is retitling to something like *"Not used as sources, and why"* and
+  dropping "repack", which keeps every assessment and drops the verdict tone.
+* ⚠️ The file is in `reports/`, **not** `archive/`, so it CAN be edited — the
+  append-only rule does not protect it. That makes the decision live rather than
+  academic.
+* ⭐ **And it points at a rule this chain needs anyway:** the public surfaces
+  will inevitably touch compatibility with other mods. Propose the standing line
+  on **how we talk about other people's mods in public** — naming, comparisons,
+  and whether "this fixes what mod X doesn't" is ever something we say. Get that
+  right once here rather than per-page later.
+
 ## Job 8 — route the owner decisions, block on none
 
-Expected: platform choice · the opt-in mod's DISPLAY NAME (open since 08-12,
-placeholders in the opt-in repo's `PROVENANCE.md` §3) · the relabel wording
-(ADOPTED 08-04, wording still owed — ⭐ draft it here so they approve rather than
-compose) · whether the fix list ships as a site or another form · preview art.
+Expected: ✅ platform is DECIDED (Pages) — **site TOPOLOGY is not** (Job 2, and
+it is already checklist item 21) · the opt-in mod's DISPLAY NAME (open since
+08-12, placeholders in the opt-in repo's `PROVENANCE.md` §3) · the relabel
+wording (ADOPTED 08-04, wording still owed — ⭐ draft it here so they approve
+rather than compose) · **the Job 9 roster wording** · preview art.
 **Each goes to `PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"** (rule R10:
 a decision recorded only in a report has not been asked), each with a
 recommendation so the owner rules rather than designs.
