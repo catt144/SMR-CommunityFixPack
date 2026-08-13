@@ -281,7 +281,12 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
 
 ### ⚖️ NEW 2026-08-13 — your Steam ID is scrubbed from the live docs, but NOT from git history
 
-20. ⚖️ **Do we rewrite the public repos' history to remove your SteamID64, or
+20. ✅ **DECIDED 2026-08-13, your ruling: LEAVE IT.** No history rewrite, ever,
+    unless you re-open this: the ID is already on your public Steam profile,
+    the live docs are scrubbed so it spreads no further, and every sha
+    citation in three repos stays valid. CLOSED — nothing is scheduled and
+    nothing rides prompt 5. The ask as it stood:
+    ⚖️ **Do we rewrite the public repos' history to remove your SteamID64, or
     leave it?** The live files are clean as of today; the string is still in the
     commits behind them, and GitHub serves those to anyone.
     **Measured, both public repos:** fix pack **104 of 828 commits**, across 9
