@@ -460,8 +460,21 @@ than moving to the archive only because item 24's artifact is not built yet.
     will not offer the console route, because it works for an unpredictable few
     and a player has no way to tell which. Recorded so the file is not wrong.
 
-22b. ⚖️⚖️ **ONE LINE FROM YOU — a factual error inside a sentence you already
-    approved, and it points the warning at the wrong players.** ⛔ Not a
+22b. ~~**⚖️⚖️ ONE LINE FROM YOU — a factual error inside a sentence you already
+    approved, and it points the warning at the wrong players.**~~ ✅ **DECIDED
+    2026-08-13, your words in the build session: *"You can change any wordings
+    to their accurate versions."* SHIPPED as the phrasing you approved on
+    08-02 — "on some map settings"** — now the fifth judgment-call bullet in
+    the fix pack store description (`agent/reports/STORE_FIXPACK.md`), with
+    the six-row rate table recorded beside it per the process rule below.
+    The terminal audit re-derived the bullet from the entry's own table
+    (`agent/bugs/F97.md`: the heaviest preset is the one that does not change
+    at all; the increases land on the light and middle presets; and the OG
+    disassembly shows the defect spans both games, so "than the game has ever
+    actually delivered" holds) and sustained the shipped wording. "Most map
+    settings" was deliberately NOT used — truer-sounding, never approved.
+    The original ask, kept for the record:
+    ⛔ Not a
     re-litigation: the fifth judgment-call bullet's **substance is right and
     stays**. One phrase in it is backwards.
     * **What it says now:** *"On the heaviest settings that means noticeably
