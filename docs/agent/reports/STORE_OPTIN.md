@@ -79,7 +79,8 @@ you the drone techs.
   positions are exactly the unmodded game. Honest expectations: this is relief
   rather than a cure. Most of a colony's drone time goes on hauling resources
   about, so faster, roomier drones help without changing what is underneath.
-- ⚠️ **Set both dials back to base and save before you uninstall.** A dial that
+- ⚠️ **Set both dials back to base (press Apply) and save before you
+  uninstall.** A dial that
   is not at base is stored in your save as an ordinary bonus, and it goes on
   boosting your drones after the mod is gone — permanently, with nothing left in
   the game to say where it came from. Setting the dials to base clears it from
@@ -121,9 +122,9 @@ it is.)
 
 **Multiple Artificial Suns.** The game hard-limits the Artificial Sun to one per
 colony. This module lifts that limit — and ships the repair that makes a second
-sun actually work. There is a real defect in the game here: solar panels only
-ever check the *first* sun you built, so panels around a second sun produce as
-if it were not there — which is why lifting the limit without repairing the
+sun actually work. There is a real defect in the game here: a solar panel built
+near a second sun never connects to it, so those panels produce as if the sun
+were not there — which is why lifting the limit without repairing the
 binding is not worth doing. This module fixes the panel binding at the same
 time, including panels already sitting dark beside a second sun in an existing
 save. With the module off, the game's one-sun limit governs what you build from
@@ -145,6 +146,10 @@ care about proximity.
 - **Repair and cleaning jobs go to the closest hub's fleet first.** A farther
   fleet steps in if the near one does not respond within a few seconds, so a
   broken-down near fleet never means the job goes undone.
+- Honest note from our own measurements: most repairs that need parts are
+  decided by which hub delivers them — a hand-off this module deliberately
+  leaves alone — so the change matters most for repairs and cleaning that
+  need no resources.
 - **Idle drones pitch in next door.** A drone with nothing to do takes a nearby
   repair from a neighbouring hub whose own drones are all busy.
 - **Your orders always win.** Directly commanding a drone is untouched — the
@@ -185,10 +190,11 @@ unhoused jobseekers drift in and pile up, and once it holds enough homeless the
 game counts it as overcrowded and **stops sending it anyone at all**, including
 the Children or Seniors it was built for. It quietly stops doing its job.
 
-- A new toggle row on every dome and asteroid habitat infopanel (Ctrl+click, or
-  the button the row names on a controller, applies it everywhere at once). The
-  row shows what it will do *before* you
-  click it — `off (3 would move)` becomes `3 moving out`.
+- A new toggle row on every dome and asteroid habitat infopanel that has a
+  Nursery or Retirement Home (Ctrl+click, or the button the row names on a
+  controller, applies it to every such dome at once). The row shows what it
+  will do *before* you click it — *"Nursery / Retirement Dome (3 would move)"*
+  becomes *"(3 moving out)"*.
 - When it is on, **unemployed** colonists with no home in that dome move to the
   nearest dome with housing they can use, using the game's own migration rules —
   unless that dome still has a job standing open that one of them could take, in
@@ -197,7 +203,10 @@ the Children or Seniors it was built for. It quietly stops doing its job.
   exists for, and moving them out is how you break its services.
 - **Seniors and Children stay, even while homeless.** That is not an oversight:
   a homeless Senior in your Retirement Dome is the game telling you to build
-  more Retirement Homes, and hiding that from you would not help you.
+  more Retirement Homes, and hiding that from you would not help you. *(The one
+  exception follows the game's own rules: in a colony where Seniors can work —
+  the Forever Young / "Put Them To Work" unlocks — an unemployed Senior counts
+  as a jobseeker like anyone else and can be moved.)*
 - **Nobody is ever put outside.** If there is nowhere suitable to send someone
   they simply stay. A quarantined dome still releases no one, and your manual
   dome assignments always win.
@@ -245,7 +254,7 @@ colony stays done: colonists a housing module moved do not move back.
 dials.** A dial that is not at its base position is stored in your save as an
 ordinary bonus of the kind the game hands out itself, and it goes on boosting
 your drones after the mod is gone. Two steps avoid that: **set both dials back
-to base, then save the game** — and then uninstall. Setting them to base clears
+to base and press Apply, then save the game** — and then uninstall. Setting them to base clears
 the boost from the colony you are playing; the file on disk only loses it when
 you write a new save. ⛔ HOLE — [the rescue tool, for anyone who uninstalled
 already; see notes, hole 1].

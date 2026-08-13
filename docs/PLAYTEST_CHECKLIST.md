@@ -497,8 +497,10 @@ than moving to the archive only because item 24's artifact is not built yet.
     with its evidence beside it** (here: the six-row rate table would have
     settled it in ten seconds). That is now written into the chain.
 
-22c. ⚖️ **YES/NO — do we owe a page to the player whose game is broken and who
-    thinks it is us?** The QA review found this is the one reader our whole
+22c. ~~⚖️ **YES/NO — do we owe a page to the player whose game is broken and who
+    thinks it is us?**~~ ✅ **DECIDED 2026-08-13: YES, as a small section** —
+    written into prompt 5's brief (`agent/prompts/public-docs/05_BUILD_SITE.md`
+    job 4). The original ask: The QA review found this is the one reader our whole
     surface plan has no home for. They arrive annoyed and want three things:
     *is it you · how do I get you out · where do I tell you*. Today the honest
     answer to the middle one is "remove the whole mod and restart", and it is
@@ -511,14 +513,14 @@ than moving to the archive only because item 24's artifact is not built yet.
     * **Recommendation: yes, but as a small section rather than its own page** —
       it is three answers, not a chapter.
 
-22d. ⚖️ **ONE WORD APPLIES EIGHT CORRECTIONS; ITEM 9 IS A SMALL CHOICE.** The
-    terminal audit re-ran the store sweeps with fresh eyes and found nine
-    claims the six build sweeps missed — none re-opens anything you decided;
-    every one is a sentence saying more than its record supports. Each was
-    re-derived from code or the entry before it went on this list; the audit's
-    brief routes wording to you rather than applying it quietly.
-    * ⭐ **Recommendation: approve the batch — say the word and an agent
-      applies 1–8 (and 9a unless you pick otherwise), then re-runs doccheck.**
+22d. ~~⚖️ **ONE WORD APPLIES EIGHT CORRECTIONS; ITEM 9 IS A SMALL CHOICE.**~~
+    ✅ **DECIDED 2026-08-13: batch APPROVED, and 9(a) chosen — all nine
+    corrections are APPLIED to `STORE_FIXPACK.md` / `STORE_OPTIN.md`, doccheck
+    GREEN, same session.** The terminal audit re-ran the store sweeps with
+    fresh eyes and found nine claims the six build sweeps missed — none
+    re-opened anything you decided; every one was a sentence saying more than
+    its record supports, each re-derived from code or the entry before it went
+    on this list. The list as it was put to you, kept for the record:
     1. Fix pack, twice: *"an official patch that repairs a bug retires our
        version"* — only true when the patch changes the code's shape; our core
        says self-checks **cannot** notice a same-named function edited in

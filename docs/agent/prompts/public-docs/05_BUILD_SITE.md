@@ -27,9 +27,11 @@ the owner flips it live.
   card ships one identifier-free sentence pointing at this page). ⚠️ The
   load-order half is design hole 3 and is YOURS: derive a measured/sourced
   answer or state plainly that none exists — never promise a method.
-* **Job 4 — the hostile-reader section, IF checklist 22c came back yes** (the
-  recommendation was yes-as-a-section). If it is still open, leave a marked
-  hole and say so in your outbox.
+* **Job 4 — the hostile-reader section.** ✅ **22c DECIDED YES 2026-08-13
+  (small section, not a page)** — three answers: *is it you · how do I get you
+  out · where do I tell you*. The honest middle answer today is "remove the
+  whole mod and restart"; write it from the store texts' uninstall sections
+  and the entries, not from memory.
 * **Job 5 — screenshot fixtures** (design §12 hole 9): check the save fixtures
   against `CAPTURE_SITTING.md` (as amended by the QA) before the sitting is
   scheduled.
@@ -48,8 +50,9 @@ the owner flips it live.
   tier by word choice. If a sentence needs evidence we do not have, cut it.
 - Put an exposed-set count on any player surface, in any form.
 - Lift the `MOD_DESCRIPTION.md` freeze or overturn STATE's release sequencing.
-- Copy a store-text sentence that checklist **22d** lists as wrong (below)
-  into any site page while 22d is unapplied.
+- Copy a store-text sentence from any commit BEFORE the 22d corrections
+  landed — quote the current files only (22d was approved and applied
+  2026-08-13, same day this file was written).
 
 ---
 
@@ -90,15 +93,15 @@ the owner flips it live.
 
 ## ⛔ The nine routed corrections — checklist 22d, NOT applied at my close
 
-The full list with evidence lines is `docs/PLAYTEST_CHECKLIST.md` **22d**
-(fix pack: patch-retires universal ×2 · F50 "automatic" · "several"→two ×2;
-opt-in: Nursery row "every dome" + "everywhere" · row literal · Seniors
-carve-out · dial recipe "press Apply" ×2 · suns direction · D06 dispatch
-overstatement, the one with a real owner choice). ⛔ **Re-derive their state at
-your moment:** if the owner approved, verify the corrections were APPLIED
-before you quote any affected sentence; if not, the store texts still carry
-them — build your pages from the corrected form regardless (the defects are
-real either way; 22d only gates the STORE files' wording).
+The full list with evidence lines is `docs/PLAYTEST_CHECKLIST.md` **22d** —
+✅ **APPROVED by the owner and APPLIED the same day (9a chosen)**: fix pack —
+patch-retires universal ×2 · F50 "automatic" · "several"→"a couple" ×2;
+opt-in — Nursery row scoped to cohort-housing domes · real row literal ·
+Seniors carve-out (Forever Young / "Put Them To Work") · "press Apply" in both
+dial recipes · suns direction (built-near-second-sun) · the dispatch block's
+honest measurement note. ⛔ Quote the CURRENT store files only; the defects
+listed in 22d are also defects anywhere you might independently restate those
+facts, so carry the corrected forms into your pages.
 
 ## What the audit changed (hygiene, in place)
 

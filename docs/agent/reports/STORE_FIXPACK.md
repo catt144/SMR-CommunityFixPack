@@ -36,7 +36,7 @@ want this.**
   taken shelter, a "the player has set this payload" flag on a rocket, and a
   handful of small stamps and flags that let a repair know it has already run,
   or hold one decision for as long as a single weather event lasts. None of that
-  means anything to the game without the pack, several of the stamps clear
+  means anything to the game without the pack, a couple of the stamps clear
   themselves the next time you save, and older ones left by earlier versions are
   deleted as they are found. **One item is deliberately not inert:** where a
   repair put back a bonus
@@ -70,8 +70,8 @@ affected — achievements keep unlocking there with mods enabled.
 
 **What stands behind that, plainly.** Every fix inspects the game's own code
 before it patches anything and switches itself off if the game no longer looks
-the way that fix expects — so an official patch that repairs a bug retires our
-version of it instead of fighting it. Nothing is patched on disk; the mod wraps
+the way that fix expects — so an official patch that changes the code a fix was
+written for retires our version of it instead of fighting it. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
 suite of 94 checks is run against the game with the pack and without it.
 
@@ -95,9 +95,9 @@ when you load it, wherever the pack can positively identify what went wrong.
 - **Colonists & domes** — colonists walking between two nearby domes went across
   the surface instead of through the passage you built for them, a walk their
   oxygen only survives if nothing delays them.
-- **Drones & logistics** — a landed rocket cancelled the orders of every drone
-  walking towards it, once per game hour, so any delivery that took longer than
-  an hour could never finish no matter what priority you set.
+- **Drones & logistics** — a landed automatic rocket cancelled the orders of
+  every drone walking towards it, once per game hour, so any delivery that took
+  longer than an hour could never finish no matter what priority you set.
 - **Buildings & economy** — salvaging an upgraded building left its dome-wide
   and colony-wide bonuses behind forever, and rebuilding stacked another copy on
   top. Bonuses already leaked into your save are cleaned up when you load it.
@@ -157,8 +157,8 @@ build replacement trains at any station for Metals and Electronics.
 
 **Removing the pack.** It comes out as cleanly as we could make it: the bugs
 come back, the repairs already applied to your save stay, and the bookkeeping
-fields listed at the top sit there unread by the unmodded game — several of them
-clear themselves the next time you save. If a save happened to catch the pack
+fields listed at the top sit there unread by the unmodded game — a couple of
+them clear themselves the next time you save. If a save happened to catch the pack
 part-way through a piece of work, that leftover finishes on the game's own code
 and stops. Turning this pack off in the mod manager takes effect after you
 restart the game. If you also use *Community Fix
@@ -170,8 +170,8 @@ page tells you the two steps that avoid it.
 
 Built to coexist. We patch the smallest thing that fixes each bug, chain
 politely with other mods' hooks, and every fix checks the game's code first — so
-if an official patch fixes a bug, our version of that fix stands down instead of
-fighting it. The pack is built against game version 1.0.7.396349, and a fix that
+if an official patch changes the code a fix was written for, our version of that
+fix stands down instead of fighting it. The pack is built against game version 1.0.7.396349, and a fix that
 no longer recognises the code it was written for switches itself off rather than
 guessing.
 
