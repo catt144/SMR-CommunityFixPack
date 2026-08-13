@@ -1,0 +1,448 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	39%
+Disk Free      	747407 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:068
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:071
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:428
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:582
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:779
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:431
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:464
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:463
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:466
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v0.01-000) unpacked from appdata
+						Lua 0:00:17:801
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:802
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:806
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:807
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+						Lua 0:00:17:808
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+						Lua 0:00:17:809
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+						Lua 0:00:17:810
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+						Lua 0:00:17:811
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:812
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+						Lua 0:00:17:813
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+						Lua 0:00:17:814
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+						Lua 0:00:17:815
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+						Lua 0:00:17:816
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+						Lua 0:00:17:817
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:341
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:418
+Reloading done in 944 ms
+						Lua 0:00:18:743
+[preset] Preset postprocess took 60 ms.
+						Lua 0:00:18:790
+479 / 479 particle streams loaded in 43 ms.
+						Lua 0:00:18:791
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:980
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:031
+[mod] [CS] === combined-sitting CS === attended=false
+[CS] === combined-sitting CS === attended=false
+[mod] [CS] STEP 1-waiting-menu BEGIN
+[CS] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:032
+[PdxSDK] Started up. Took 1558
+						Lua 0:00:19:055
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:508
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:700
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:493
+[mod] [CS] STEP 1-waiting-menu END 2500ms
+[CS] STEP 1-waiting-menu END 2500ms
+[mod] [dry] CELL dry :: wants fix=true opt-in=true rescue=false | attended=false | savefile=CSSWEEP.savegame.sav
+[dry] CELL dry :: wants fix=true opt-in=true rescue=false | attended=false | savefile=CSSWEEP.savegame.sav
+[mod] [dry] STEP 2-config-gate BEGIN
+[dry] STEP 2-config-gate BEGIN
+[mod] [dry] GATES config-gate/dry ------------------------------------------------
+[dry] GATES config-gate/dry ------------------------------------------------
+[mod] [dry] GATEREAD fix pack :: 74/74 active
+[dry] GATEREAD fix pack :: 74/74 active
+[mod] [dry] GATEREAD opt-in pack :: 8/8 active
+[dry] GATEREAD opt-in pack :: 8/8 active
+[mod] [dry] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[dry] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[mod] [dry] GATES config-gate/dry :: pack=74/74 | opt-in=8/8 | save-rescue=0/0 | map= | speed=1 | loads_this_process=0
+[dry] GATES config-gate/dry :: pack=74/74 | opt-in=8/8 | save-rescue=0/0 | map= | speed=1 | loads_this_process=0
+[mod] [dry] MODORDER config-gate/dry :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[dry] MODORDER config-gate/dry :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[mod] [dry] DIALOPTS config-gate/dry :: DroneSpeedDial=5x | DroneCarryDial=+2 | toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[dry] DIALOPTS config-gate/dry :: DroneSpeedDial=5x | DroneCarryDial=+2 | toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [dry] CONFIGGATE OK :: cell dry :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=false (wanted false) :: 74/74, 8/8, 0/0
+[dry] CONFIGGATE OK :: cell dry :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=false (wanted false) :: 74/74, 8/8, 0/0
+[mod] [dry] STEP 2-config-gate END 0ms
+[dry] STEP 2-config-gate END 0ms
+[mod] [dry] STEP 3-load BEGIN
+[dry] STEP 3-load BEGIN
+						Lua 0:00:21:594
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:21:602
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:631
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:23:489
+*** Assets reloaded in 1.9 s, read 202.1 MB, read speed 107.1 MB/s, average read 4949 bytes.
+						Lua 0:00:29:336
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:29:343
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:29:364
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:29:383
+Game Loaded in 7789 ms
+						Lua 0:00:29:421
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:267
+Game loaded on map 						Lua 0:00:30:268
+BlankBigCanyonCMix_09 in 8774 ms
+[mod] [dry] LOAD OK #1 file=CSSWEEP.savegame.sav — LoadGame returned no error
+[dry] LOAD OK #1 file=CSSWEEP.savegame.sav — LoadGame returned no error
+						Lua 0:00:32:576
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:45:767
+[mod] [dry] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[dry] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[mod] [dry] STEP 3-load END (no timing — this step blocks render mode)
+[dry] STEP 3-load END (no timing — this step blocks render mode)
+[mod] [dry] STEP 4-f102 BEGIN
+						Lua 0:00:45:768
+[dry] STEP 4-f102 BEGIN
+[mod] [dry] LISTFIXES dry :: ExoticDepositSign status=active detail=
+[dry] LISTFIXES dry :: ExoticDepositSign status=active detail=
+[mod] [CommunityFixPack] CaveInsNoDisasters [active] Cave-ins no longer occur when the "No Disasters" game rule is active
+[mod] [CommunityFixPack] MeteorFrequency [active] Meteors strike on their designed 35-115h schedule instead of ~every 6 hours
+[mod] [CommunityFixPack] UpgradeModifierLeak [active] Salvaging an upgraded building now removes its dome/colony-wide upgrade bonuses
+[mod] [CommunityFixPack] NightShiftWork [active] Night-shift colonists go to work after midnight instead of skipping their shift
+[mod] [CommunityFixPack] MilestoneCrash [active] Completing all milestones no longer errors in No Terraforming / No Politics games
+[mod] [CommunityFixPack] WispRewards [active] Mystery 11: "free the wisps" produces real power; destroyed-wisp rewards match the notification
+[mod] [CommunityFixPack] TouristApplicants [active] Higher tourist ratings now correctly give more bonus applicants (roll was inverted)
+[mod] [CommunityFixPack] TrainsToVoid [active] Demolishing a station stores its trains instead of permanently deleting them
+[mod] [CommunityFixPack] LanderEmptyLaunch [active] Automatic rockets and asteroid landers wait for cargo instead of launching empty
+[mod] [CommunityFixPack] LanderCargoRatchet [active] Automatic rockets stop unloading the cargo they just loaded, and fill up with the valuable resources first
+[mod] [CommunityFixPack] LanderReturnFuel [active] Asteroid landers keep their return fuel instead of unloading it on the asteroid
+[mod] [CommunityFixPack] ShelterReflex [active] Asteroid colonists take shelter before suffocating, and keep their habitat through power blips
+[mod] [CommunityFixPack] BrokenTrackSalvage [active] Meteor-damaged tracks can be salvaged again
+[mod] [CommunityFixPack] TrackSalvageWipe [active] Salvaging one track piece no longer deletes the whole track and its trains
+[mod] [CommunityFixPack] LakeEntombment [active] Building an artificial lake no longer entombs the RC Constructor and drones
+[mod] [CommunityFixPack] GhostFarmOxygen [active] Salvaging a farm removes the oxygen it was giving its dome
+[mod] [CommunityFixPack] RocketDroneChurn [active] Landed rockets stop sending their delivery drones back to Idle every hour
+[mod] [CommunityFixPack] ShuttleTransportCache [active] New Shuttle Hubs are noticed: colonists stop being stuck with a cached 'unreachable'
+[mod] [CommunityFixPack] VacuumWalks [active] Colonists use the passages instead of crossing vacuum on foot between nearby domes
+[mod] [CommunityFixPack] ArrivalDeaths [active] Arriving colonists no longer hike to unreachable domes or land in impassable ground
+[mod] [CommunityFixPack] DroneUnreachableForever [active] Drones re-try buildings they once failed to reach instead of writing them off forever
+[mod] [CommunityFixPack] StaleReservations [active] Housing reserved for colonists that never arrive is released again
+[mod] [CommunityFixPack] CrystalMysteryHang [active] The Philosopher's Stone mystery can no longer hang forever at the finale
+[mod] [CommunityFixPack] TouristSatisfaction [active] Tourist satisfaction stops drifting down (threshold awards are now symmetric)
+[mod] [CommunityFixPack] TrainPlatformWedge [active] A stale passenger no longer wedges a train at the platform forever
+[mod] [CommunityFixPack] LowStorageWarning [active] The "Insufficient Resources" warning works again for Food and maintenance resources
+[mod] [CommunityFixPack] CommandCenterNumbers [active] Command Center resource rows show their numbers again
+[mod] [CommunityFixPack] DomeOverviewHighlight [active] Domes Overview marks low colonist stats in red again
+[mod] [CommunityFixPack] TrainCargoDumping [active] Trains stop dumping cargo at stations where that resource is switched off
+[mod] [CommunityFixPack] UniversityOvertraining [active] Universities stop training specialists for workplaces that run themselves
+[mod] [CommunityFixPack] DestroyedTunnels [active] Destroyed tunnels stay closed after loading a save instead of rejoining pathfinding
+[mod] [CommunityFixPack] DustSicknessBiorobots [active] Dust Sickness no longer infects Biorobots
+[mod] [CommunityFixPack] DustSicknessDamage [active] Dust Sickness deals its intended random damage instead of the maximum every sol
+[mod] [CommunityFixPack] GeneForging [active] The Gene Forging tech actually increases the rare-trait chance
+[mod] [CommunityFixPack] MirrorSphereSite [active] A completed Mirror Sphere site no longer accepts more drone work
+[mod] [CommunityFixPack] PayloadTemplateRefill [active] Edit Payload keeps the amounts you set instead of refilling them from the flight-policy template
+[mod] [CommunityFixPack] AsteroidLanderAvailable [active] The asteroid-expedition gate counts landed landers, and stops counting supply rockets
+[mod] [CommunityFixPack] ShuttleHubOffAvailable [active] Shuttle Hubs switched off no longer count as available colonist transport
+[mod] [CommunityFixPack] FreedHousingNotice [active] A home falling vacant is offered to the dome's homeless straight away
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch [active] A dome's free-housing total counts the same residences the game assigns colonists to
+[mod] [CommunityFixPack] SmallLandscapeSites [active] Drones no longer error out when sent to a small landscaping site
+[mod] [CommunityFixPack] LandscapeUnitFilter [active] Landscaping over a boarding point no longer drags boarding colonists out
+[mod] [CommunityFixPack] RocketInteractGuard [active] RC Transports stay off trade and refugee rockets again
+[mod] [CommunityFixPack] TrackConnectorPingPong [active] A station and a tunnel one hex apart stop stealing each other's track connector
+[mod] [CommunityFixPack] TrackTunnelPowerBridge [active] A station attached to a train tunnel bridges the power grid again
+[mod] [CommunityFixPack] GridGlobalStorage [active] Colony-wide power/water/oxygen reserve is measured as one ratio again
+[mod] [CommunityFixPack] LastTransmissionStorage [active] Last Transmission's power/water/oxygen storage opinions actually count
+[mod] [CommunityFixPack] GraphConsumedCaption [active] Command Center graph captions count maintenance, like the bars do
+[mod] [CommunityFixPack] MoraleComfortTooltip [active] Morale tooltip stops listing a Comfort bonus the game does not apply
+[mod] [CommunityFixPack] TrainWaitTime [active] Waiting on a train platform no longer counts as time spent riding
+[mod] [CommunityFixPack] FounderTraitNotification [active] The notification for a Founder gaining a trait fires again
+[mod] [CommunityFixPack] StorageRateModifiers [active] Charge and discharge rate modifiers on batteries and tanks take effect
+[mod] [CommunityFixPack] SequenceLatents [active] Sequence label sampling and the Digger timing swap behave as written
+[mod] [CommunityFixPack] IndependenceTerraforming [active] Independent Terraforming discounts special projects by the 20% it advertises
+[mod] [CommunityFixPack] TrackSalvageRefund [active] Salvaging a track refunds what the whole track cost, not one hex
+[mod] [CommunityFixPack] LayoutTechLock [active] Layout construction respects research locks
+[mod] [CommunityFixPack] TrainMinors [active] Train cap follows track length
+[mod] [CommunityFixPack] DroneTransportMinors [active] A passability change no longer corrupts each drone's unreachable-buildings table
+[mod] [CommunityFixPack] AnomalyCaveInMap [active] A cave-in on a map that does not exist is declined instead of crashing the sequence
+[mod] [CommunityFixPack] TechDescriptionBuilding [active] The Underground Medium Dome tech description names the building it actually unlocks
+[mod] [CommunityFixPack] BombardmentSpread [active] Bombardment missiles come in from spread directions instead of in parallel
+[mod] [CommunityFixPack] ExtenderFlapChurn [active] Extender power flickers no longer tear down and rebuild the whole hub (fleet-wide Idle churn)
+[mod] [CommunityFixPack] DisasterPredictionLeak [active] A finished meteor storm no longer disables rains, cold waves and dust storms forever
+[mod] [CommunityFixPack] MeteorStormWedge [active] A wedged meteor storm is detected and released instead of blocking storms forever
+[mod] [CommunityFixPack] RainsDeadlock [active] A rain that collides with another disaster retries instead of never raining again
+[mod] [CommunityFixPack] FirstAsteroidPrefabs [active] The First Asteroid prefabs still arrive if the popup was left unanswered across a save/load
+[mod] [CommunityFixPack] SaintBlessing [active] A Saint's blessing reaches the Religious colonists in their dome
+[mod] [CommunityFixPack] DustDevilsDescrMap [active] Dust devils on the surface use the surface's settings, not the map the camera is on
+[mod] [CommunityFixPack] AstrogeologistExtractors [active] The Astrogeologist bonus reaches every buildable extractor, as its own text promises
+[mod] [CommunityFixPack] SinkholeIndestructible [active] A meteor can no longer destroy the St. Elmo's Fire sinkhole
+[mod] [CommunityFixPack] DustStormUndergroundBreaks [active] A surface dust storm can no longer break cables and pipes underground
+[mod] [CommunityFixPack] DustDevilSpawnGate [active] Dust devil waves use their authored count range instead of being scaled down by the spawn chance
+[mod] [CommunityFixPack] ExoticDepositSign [active] Subsurface Exotic Minerals deposits use the remaster's own sign — believed to stop the asteroid-visit freeze reported on Linux/NVIDIA systems
+[mod] [CommunityFixPack] SaveSanitizer [active] Savegame repair: lost Wind Turbine tech buff, leaked upgrade bonuses
+[mod] [dry] TRY SMRFixPack.ListFixes ok=true result=nil
+[dry] TRY SMRFixPack.ListFixes ok=true result=nil
+[mod] [dry] F102 dry :: class present=true | class-default entity=SignRareMineralsDeposit | shipped sign was 'SignPreciousMineralsDeposit', the fix retargets to 'SignRareMineralsDeposit'
+[dry] F102 dry :: class present=true | class-default entity=SignRareMineralsDeposit | shipped sign was 'SignPreciousMineralsDeposit', the fix retargets to 'SignRareMineralsDeposit'
+[mod] [dry] F102 dry :: IsValidEntity('SignRareMineralsDeposit')=true IsValidEntity('SignPreciousMineralsDeposit')=true
+[dry] F102 dry :: IsValidEntity('SignRareMineralsDeposit')=true IsValidEntity('SignPreciousMineralsDeposit')=true
+[mod] [dry] F102 dry :: LoadedMaps = 4 :: slot=1:BlankBigCanyonCMix_09 slot=2:BlankUnderground_04 slot=3:BlankAsteroidDonut_01 slot=4:BlankAsteroidBranchOut_01
+[dry] F102 dry :: LoadedMaps = 4 :: slot=1:BlankBigCanyonCMix_09 slot=2:BlankUnderground_04 slot=3:BlankAsteroidDonut_01 slot=4:BlankAsteroidBranchOut_01
+						Lua 0:00:45:769
+[mod] [dry] TRY AllMapsForEach SubsurfaceDepositPreciousMinerals ok=true result=nil
+[dry] TRY AllMapsForEach SubsurfaceDepositPreciousMinerals ok=true result=nil
+[mod] [dry] F102 dry :: deposit 1/1 SubsurfaceDepositPreciousMinerals#2000010866 :: entity=SignRareMineralsDeposit | map_slot=3 | on_current_map=false | revealed=true | amount=14935000
+[dry] F102 dry :: deposit 1/1 SubsurfaceDepositPreciousMinerals#2000010866 :: entity=SignRareMineralsDeposit | map_slot=3 | on_current_map=false | revealed=true | amount=14935000
+[mod] [dry] READ F102 subsurface Exotic Minerals deposits = 1 | population=1 | APPLICABLE=true | witness=AllMapsForEach over LoadedMaps — a zero here means the loaded maps carry none, which is a DIFFERENT fact from the fix not working
+[dry] READ F102 subsurface Exotic Minerals deposits = 1 | population=1 | APPLICABLE=true | witness=AllMapsForEach over LoadedMaps — a zero here means the loaded maps carry none, which is a DIFFERENT fact from the fix not working
+[mod] [dry] TRY ViewObjectAndChangeMap ok=true result=nil
+[dry] TRY ViewObjectAndChangeMap ok=true result=nil
+						Lua 0:00:46:783
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:49:767
+[mod] [dry] F102 SHOW :: after the camera move, CurrentMapName=BlankAsteroidDonut_01 | the deposit reports on_current_map=true | selected=SubsurfaceDepositPreciousMinerals#2000010866
+[dry] F102 SHOW :: after the camera move, CurrentMapName=BlankAsteroidDonut_01 | the deposit reports on_current_map=true | selected=SubsurfaceDepositPreciousMinerals#2000010866
+[mod] [dry] F102 VERDICT-INPUT dry :: deposits found = 1. ⛔ The verdict words are the OWNER'S EYES: 'signs render / selectable: yes-no'. This log can prove the entity string and the sweep count; it cannot prove anything rendered.
+[dry] F102 VERDICT-INPUT dry :: deposits found = 1. ⛔ The verdict words are the OWNER'S EYES: 'signs render / selectable: yes-no'. This log can prove the entity string and the sweep count; it cannot prove anything rendered.
+[mod] [dry] STEP 4-f102 END 4000ms
+[dry] STEP 4-f102 END 4000ms
+[mod] [dry] STEP 5-residue BEGIN
+[dry] STEP 5-residue BEGIN
+[mod] [dry] RESIDUE dry/after-load ==========================================
+[dry] RESIDUE dry/after-load ==========================================
+						Lua 0:00:49:780
+[mod] [dry] RESIDUEPOP dry/after-load :: scanned 4516 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[dry] RESIDUEPOP dry/after-load :: scanned 4516 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+						Lua 0:00:49:781
+[mod] [dry] RESIDUEROW dry/after-load :: D5   FP SMRFixPack_reserved_at                 n=1534 handles=2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,2000016825,2000016826,2000016846,2000016850,2000016853,2000016862,2000016867,2000016909,2000016970,2000016978,2000016984,2000017025,2000017030,2000017031,2000017034,2000017039,2000017040,2000017068,2000017079,2000017083,2000017089,2000017093,2000017095,2000017096,2000017100,2000017103,2000017104,2000017105,2000017106,2000017110,2000017113,2000017152,2000017154,2000017156,2000017174,2000017189,2000017190,2000017192,2000017193,2000017194,2000017195,2000017202,2000017203,2000017213,2000017214,2000017218,2000017219,2000017223,2000017225,2000017228,2000017231,2000017233,2000017236,2000017237,2000017286,2000017294,2000017299,2000017307,2000017308,2000017322,2000017327,2000017336,2000017337,2000017339,2000017342,2000017344,2000017346,2000017351,2000017354,2000017380,2000017382,2000017385,2000017394,2000017415,2000017416,2000017419,2000017421,2000017448,2000017456,2000017457,2000017458,2000017464,2000017466,2000017469,2000017470,2000017484,2000017537,2000017539,2000017541,2000017542,2000017545,2000017546,2000017576,2000017626,2000017627,2000017632,2000017634,2000017635,2000017638,2000017640,2000017641,2000017642,2000017651,2000017652,2000017654,2000017665,2000017667,2000017668,2000017671,2000017674,2000017675,2000017743,2000017745,2000017749,2000017753,2000017758,2000017760,2000017761,2000017762,2000017866,2000017869,2000017908,2000017913,2000017987,2000017988,2000018007,2000018008,2000018009,2000018014,2000018016,2000018017,2000018019,2000018023,2000018024,2000018045,2000018050,2000018070,2000018071,2000018072,2000018076,2000018079,2000018081,2000018083,2000018114,2000018116,2000018128,2000018142,2000018145,2000018146,2000018150,2000018153,2000018160,2000018161,2000018186,2000018188,2000018246,2000018247,2000018249,2000018250,2000018253,2000018254,2000018257,2000018280,2000018281,2000018352,2000018354,2000018368,2000018370,2000018371,2000018394,2000018401,2000018408,2000018413,2000018416,2000018432,2000018434,2000018436,2000018439,2000018442,2000018446,2000018448,2000018453,2000018454,2000018455,2000018458,2000018468,2000018474,2000018479,2000018480,2000018481,2000018483,2000018486,2000018488,2000018556,2000018559,2000018561,2000018567,2000018570,2000018579,2000018592,2000018596,2000018598,2000018603,2000018604,2000018608,2000018611,2000018612,2000018617,2000018627,2000018629,2000018631,2000018632,2000018637,2000018638,2000018688,2000018689,2000018695,2000018697,2000018703,2000018705,2000018728,2000018729,2000018733,2000018734,2000018740,2000018745,2000018748,2000018750,2000018756,2000018765,2000018772,2000018773,2000018791,2000018793,2000018794,2000018795,2000018802,2000018811,2000018817,2000018818,2000018821,2000018823,2000018825,2000018827,2000018828,2000018829,2000018832,2000018834,2000018840,2000018841,2000018852,2000018863,2000018865,2000018896,2000018898,2000018899,2000018901,2000018902,2000018903,2000018904,2000018905,2000018907,2000018913,2000018914,2000018918,2000018919,2000018925,2000018926,2000018928,2000018942,2000018943,2000018947,2000018950,2000018955,2000018956,2000018958,2000018962,2000018971,2000018974,2000018978,2000018980,2000018989,2000018991,2000018998,2000018999,2000019000,2000019007,2000019011,2000019020,2000019024,2000019032,2000019060,2000019067,2000019068,2000019071,2000019075,2000019083,2000019084,2000019086,2000019089,2000019090,2000019095,2000019096,2000019099,2000019100,2000019103,2000019106,2000019107,2000019108,2000019113,2000019118,2000019127,2000019131,2000019138,2000019139,2000019144,2000019149,2000019151,2000019153,2000019157,2000019159,2000019161,2000019166,2000019167,2000019171,2000019172,2000019173,2000019174,2000019177,2000019206,2000019208,2000019236,2000019238,2000019240,2000019241,2000019259,2000019261,2000019264,2000019266,2000019267,2000019268,2000019272,2000019275,2000019279,2000019281,2000019284,2000019294,2000019309,2000019311,2000019338,2000019340,2000019350,2000019355,2000019356,2000019367,2000019373,2000019374,2000019376,2000019381,2000019382,2000019383,2000019389,2000019390,2000019403,2000019406,2000019410,2000019411,2000019412,2000019417,2000019421,2000019424,2000019426,2000019427,2000019429,2000019448,2000019449,2000019451,2000019453,2000019456,2000019481,2000019483,2000019484,2000019485,2000019490,2000019505,2000019506,2000019507,2000019510,2000019528,2000019529,2000019530,2000019532,2000019534,2000019536,2000019542,2000019543,2000019585,2000019587,2000019644,2000019645,2000019648,2000019651,2000019653,2000019665,2000019666,2000019678,2000019679,2000019688,2000019689,2000019722,2000019724,2000019726,2000019728,2000019733,2000019739,2000019740,2000019756,2000019761,2000019925,2000019929,2000019930,2000019931,2000019990,2000019991,2000019998,2000020001,2000020003,2000020014,2000020023,2000020034,2000020035,2000020038,2000020076,2000020078,2000020081,2000020110,2000020200,2000020208,2000020212,2000020213,2000020222,2000020223,2000020255,2000020262,2000020269,2000020271,2000020273,2000020274,2000020337,2000020338,2000020343,2000020344,2000020345,2000020367,2000020371,2000020406,2000020420,2000020423,2000020428,2000020432,2000020437,2000020443,2000020444,2000020445,2000020448,2000020452,2000020462,2000020465,2000020467,2000020471,2000020479,2000020482,2000020483,2000020490,2000020497,2000020500,2000020508,2000020586,2000020590,2000020594,2000020602,2000020603,2000020621,2000020643,2000020658,2000020684,2000020693,2000020701,2000020716,2000020726,2000020728,2000020731,2000020735,2000020736,2000020758,2000020763,2000020765,2000020768,2000020799,2000020815,2000020831,2000020834,2000020840,2000020842,2000020903,2000020904,2000020916,2000020923,2000020928,2000020934,2000020937,2000020964,2000020966,2000020975,2000020979,2000020983,2000021002,2000021008,2000021023,2000021050,2000021075,2000021080,2000021082,2000021083,2000021135,2000021142,2000021178,2000021180,2000021213,2000021243,2000021297,2000021299,2000021301,2000021336,2000021338,2000021361,2000021365,2000021367,2000021416,2000021419,2000021424,2000021428,2000021431,2000021458,2000021480,2000021485,2000021530,2000021532,2000021536,2000021541,2000021570,2000021599,2000022082,2000022083,2000022116,2000022128,2000022154,2000022175,2000022176,2000022178,2000022181,2000022216,2000022220,2000022225,2000022231,2000022608,2000022609,2000022610,2000022617,2000022618,2000022622,2000022730,2000022734,2000022736,2000022746,2000022785,2000022786,2000022787,2000022789,2000022808,2000022811,2000022812,2000022855,2000022867,2000022870,2000022873,2000022879,2000022973,2000022987,2000022988,2000022990,2000023000,2000023047,2000023051,2000023057,2000023059,2000023173,2000023174,2000023180,2000023182,2000023188,2000023197,2000023202,2000023270,2000023271,2000023276,2000023278,2000023358,2000023359,2000023361,2000023367,2000023379,2000023440,2000023443,2000023444,2000023445,2000023447,2000023449,2000023503,2000023504,2000023508,2000023510,2000023516,2000023517,2000023520,2000023521,2000023522,2000023523,2000023525,2000023527,2000023528,2000023529,2000023531,2000023532,2000023533,2000023534,2000023536,2000023538,2000023545,2000023546,2000023571,2000023649,2000023651,2000023666,2000023672,2000023735,2000023736,2000023740,2000023748,2000023749,2000023753,2000023755,2000023756,2000023758,2000023759,2000023761,2000023763,2000023765,2000023767,2000023769,2000023770,2000023771,2000023830,2000023831,2000023833,2000023845,2000023847,2000023851,2000023855,2000023857,2000023955,2000023967,2000023972,2000023978,2000023979,2000024045,2000024053,2000024054,2000024095,2000024096,2000024207,2000024208,2000024243,2000024244,2000024251,2000024252,2000024257,2000024261,2000024340,2000024354,2000024359,2000024373,2000024391,2000024472,2000024473,2000024479,2000024486,2000024496,2000024555,2000024561,2000024567,2000024602,2000024708,2000024736,2000024743,2000024745,2000024749,2000024756,2000024827,2000024838,2000024840,2000024848,2000024862,2000024973,2000024981,2000025052,2000025054,2000025056,2000025067,2000025167,2000025168,2000025171,2000025176,2000025189,2000025191,2000025198,2000025200,2000025292,2000025309,2000025407,2000025410,2000025422,2000025437,2000025439,2000025446,2000025520,2000025526,2000025550,2000025557,2000025669,2000025672,2000025682,2000025747,2000025754,2000025755,2000025756,2000025759,2000025760,2000025761,2000025762,2000025763,2000025764,2000025765,2000025766,2000025773,2000025774,2000025775,2000025776,2000025777,2000025779,2000025782,2000025783,2000025785,2000025787,2000025793,2000025794,2000025878,2000025889,2000025912,2000025998,2000026049,2000026050,2000026053,2000026059,2000026132,2000026143,2000026170,2000026274,2000026275,2000026301,2000026307,2000026378,2000026387,2000026392,2000026403,2000026497,2000026499,2000026544,2000026554,2000026624,2000026634,2000026663,2000026749,2000026799,2000026800,2000026880,2000026890,2000026904,2000026992,2000027007,2000027015,2000027055,2000027183,2000027189,2000027312,2000027321,2000027322,2000027335,2000027441,2000027458,2000027471,2000027491,2000027596,2000027603,2000027606,2000027617,2000027709,2000027720,2000027741,2000027847,2000027861,2000027889,2000027907,2000027992,2000027994,2000028030,2000028093,2000028104,2000028118,2000028189,2000028192,2000028288,2000028298,2000028336,2000028386,2000028637,2000028647,2000028654,2000028663,2000028807,2000028849,2000028852,2000028854,2000028884,2000029346,2000029347,2000029360,2000029361,2000029371,2000029375,2000029387,2000029454,2000029475,2000029478,2000029480,2000029481,2000029497,2000029498,2000029502,2000029507,2000029525,2000029526,2000029588,2000029592,2000029606,2000029609,2000029612,2000029617,2000029629,2000029630,2000029635,2000029636,2000029644,2000029703,2000029704,2000029705,2000029707,2000029712,2000029716,2000029719,2000029720,2000029723,2000029725,2000029728,2000029731,2000029734,2000029738,2000029788,2000029791,2000029796,2000029801,2000029804,2000029805,2000029807,2000029808,2000029810,2000029811,2000029820,2000029826,2000029833,2000029898,2000029903,2000029906,2000029911,2000029912,2000029915,2000029917,2000029923,2000029925,2000029932,2000029935,2000029948,2000029951,2000029952,2000029956,2000029965,2000030036,2000030130,2000030131,2000030141,2000030164,2000030165,2000030180,2000030182,2000030186,2000030191,2000030194,2000030195,2000030267,2000030270,2000030277,2000030278,2000030279,2000030284,2000030288,2000030290,2000030322,2000030323,2000030324,2000030326,2000030331,2000030337,2000030341,2000030511,2000030513,2000030524,2000030527,2000030529,2000030530,2000030535,2000030536,2000030538,2000030541,2000030542,2000030545,2000030552,2000030621,2000030623,2000030625,2000030659,2000030660,2000030662,2000030671,2000030674,2000030686,2000030688,2000030762,2000030763,2000030770,2000030771,2000030772,2000030776,2000030777,2000030778,2000030779,2000030780,2000030782,2000030788,2000030796,2000030806,2000030808,2000030813,2000030928,2000030972,2000030975,2000030986,2000030989,2000030991,2000030993,2000030995,2000030996,2000031029,2000031030,2000031031,2000031032,2000031033,2000031035,2000031097,2000031102,2000031104,2000031107,2000031108,2000031115,2000031116,2000031117,2000031132,2000031144,2000031182,2000031184,2000031200,2000031251,2000031252,2000031253,2000031254,2000031255,2000031256,2000031263,2000031264,2000031265,2000031268,2000031269,2000031272,2000031304,2000031311,2000031318,2000031320,2000031422,2000031423,2000031426,2000031430,2000031446,2000031447,2000031449,2000031450,2000031456,2000031457,2000031459,2000031460,2000031477,2000031480,2000031481,2000031490,2000031498,2000031500,2000031563,2000031565,2000031566,2000031568,2000031572,2000031585,2000031595,2000031602,2000031603,2000031605,2000031606,2000031813,2000031815,2000031890,2000031891,2000031894,2000031898,2000031902,2000031906,2000031932,2000031963,2000031982,2000031983,2000031985,2000031988,2000031994,2000031996,2000032077,2000032079,2000032082,2000032083,2000032088,2000032103,2000032104,2000032106,2000032109,2000032115,2000032118,2000032125,2000032127,2000032130,2000032135,2000032197,2000032198,2000032214,2000032216,2000032223,2000032225,2000032228,2000032232,2000032233,2000032241,2000032267,2000032278,2000032286,2000032287,2000032292,2000032296,2000032403,2000032408,2000032409,2000032412,2000032425,2000032429,2000032432,2000032436,2000032445,2000032449,2000032452,2000032455,2000032456,2000032531,2000032532,2000032533,2000032534,2000032538,2000032548,2000032557,2000032558,2000032566,2000032572,2000032573,2000032574,2000032578,2000032581,2000032586,2000032671,2000032676,2000032679,2000032688,2000032690,2000032691,2000032693,2000032697,2000032706,2000032709,2000032715,2000032749,2000032752,2000032818,2000032822,2000032830,2000032832,2000032841,2000032844,2000032848,2000032852,2000032853,2000032883,2000032886,2000032889,2000032897,2000033029,2000033030,2000033041,2000033042,2000033056,2000033058,2000033060,2000033065,2000033066,2000033073,2000033078,2000033081,2000033082,2000033088,2000033090,2000033210,2000033213,2000033218,2000033241,2000033250,2000033251,2000033308,2000033316,2000033317,2000033330,2000033338,2000033347,2000033349,2000033477,2000033479,2000033481,2000033487,2000033488,2000033494,2000033498,2000033499,2000033501,2000033521,2000033522,2000033524,2000033526,2000033528,2000033529,2000033663,2000033666,2000033669,2000033678,2000033689,2000033697,2000033701,2000033702,2000033705,2000033708,2000033709,2000033710,2000033712,2000033716,2000033722,2000033734,2000033878,2000033883,2000033890,2000033893,2000033895,2000033896,2000033906,2000033912,2000033914,2000033921,2000034122,2000034123,2000034127,2000034132,2000034138,2000034141,2000034143,2000034145,2000034150,2000034165,2000034167,2000034172,2000034175,2000034177,2000034179,2000034357,2000034359,2000034360,2000034368,2000034374,2000034390,2000034396,2000034398,2000034401,2000034407,2000034408,2000034412,2000034557,2000034559,2000034568,2000034575,2000034585,2000034587,2000034592,2000034604,2000034618,2000034625,2000034773,2000034775,2000034782,2000034787,2000034788,2000034791,2000034793,2000034797,2000034798,2000034799,2000034802,2000034815,2000034821,2000034823,2000034832,2000034945,2000034953,2000034996,2000034999,2000035007,2000035011,2000035015,2000035021,2000035025,2000035145,2000035146,2000035147,2000035150,2000035152,2000035158,2000035169,2000035181,2000035182,2000035184,2000035187,2000035189,2000035245,2000035248,2000035254,2000035257,2000035258,2000035259,2000035261,2000035272,2000035274,2000035278,2000035280,2000035390,2000035403,2000035404,2000035406,2000035410,2000035413,2000035415,2000035418,2000035419,2000035493,2000035520,2000035540,2000035545,2000035558,2000035560,2000035562,2000035583,2000035661,2000035662,2000035666,2000035668,2000035682,2000035702,2000035703,2000035705,2000035773,2000035785,2000035788,2000035791,2000035794,2000035796,2000035802,2000035804,2000035898,2000035901,2000035903,2000036013,2000036014,2000036019,2000036021,2000036027,2000036029,2000036031,2000036037,2000036041,2000036142,2000036150,2000036154,2000036155,2000036156,2000036174,2000036178,2000036244,2000036245,2000036249,2000036257,2000036258,2000036263,2000036272,2000036274,2000036276,2000036283,2000036385,2000036394,2000036426,2000036427,2000036430,2000036431,2000036434,2000036516,2000036588,2000036589,2000036685,2000036709,2000036722,2000036723,2000036752,2000036799,2000036813,2000036889,2000036921,2000036938,2000036960,2000036961,2000036985,2000037186,2000037187,2000037188,2000037194,2000037195,2000037290,2000037291,2000037305,2000037308,2000037309,2000037313,2000037322,2000037328,2000037432,2000037433,2000037435,2000037436,2000037438,2000037439,2000037463,2000037465,2000037466,2000037471,2000037472,2000037473,2000037474,2000037475,2000037567,2000037570,2000037572,2000037575,2000037578,2000037584,2000037592,2000037648,2000037657,2000037665,2000037666,2000037669,2000037675,2000037684,2000037685,2000037687,2000037690,2000037775,2000037776,2000037784,2000037787,2000037788,2000037790,2000037805,2000037806,2000037807,2000037882,2000037886,2000037890,2000037925,2000037927,2000037931,2000037935,2000037938,2000037939,2000037942,2000037948,2000038034,2000038036,2000038040,2000038047,2000038051,2000038054,2000038057,2000038061,2000038062,2000038069,2000038138,2000038144,2000038147,2000038151,2000038153,2000038156,2000038160,2000038163,2000038166,2000038168,2000038182,2000038184,2000038263,2000038265,2000038266,2000038270,2000038274,2000038280,2000038284,2000038292,2000038301,2000038304,2000038306,2000038309,2000038310,2000038312,2000038314,2000038320,2000038392,2000038395,2000038435,2000038448,2000038450,2000038483,2000038507,2000038513,2000038588,2000038606,2000038663,2000038747,2000038789,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039035,2000039041,2000039050
+[dry] RESIDUEROW dry/after-load :: D5   FP SMRFixPack_reserved_at                 n=1534 handles=2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,2000016825,2000016826,2000016846,2000016850,2000016853,2000016862,2000016867,2000016909,2000016970,2000016978,2000016984,2000017025,2000017030,2000017031,2000017034,2000017039,2000017040,2000017068,2000017079,2000017083,2000017089,2000017093,2000017095,2000017096,2000017100,2000017103,2000017104,2000017105,2000017106,2000017110,2000017113,2000017152,2000017154,2000017156,2000017174,2000017189,2000017190,2000017192,2000017193,2000017194,2000017195,2000017202,2000017203,2000017213,2000017214,2000017218,2000017219,2000017223,2000017225,2000017228,2000017231,2000017233,2000017236,2000017237,2000017286,2000017294,2000017299,2000017307,2000017308,2000017322,2000017327,2000017336,2000017337,2000017339,2000017342,2000017344,2000017346,2000017351,2000017354,2000017380,2000017382,2000017385,2000017394,2000017415,2000017416,2000017419,2000017421,2000017448,2000017456,2000017457,2000017458,2000017464,2000017466,2000017469,2000017470,2000017484,2000017537,2000017539,2000017541,2000017542,2000017545,2000017546,2000017576,2000017626,2000017627,2000017632,2000017634,2000017635,2000017638,2000017640,2000017641,2000017642,2000017651,2000017652,2000017654,2000017665,2000017667,2000017668,2000017671,2000017674,2000017675,2000017743,2000017745,2000017749,2000017753,2000017758,2000017760,2000017761,2000017762,2000017866,2000017869,2000017908,2000017913,2000017987,2000017988,2000018007,2000018008,2000018009,2000018014,2000018016,2000018017,2000018019,2000018023,2000018024,2000018045,2000018050,2000018070,2000018071,2000018072,2000018076,2000018079,2000018081,2000018083,2000018114,2000018116,2000018128,2000018142,2000018145,2000018146,2000018150,2000018153,2000018160,2000018161,2000018186,2000018188,2000018246,2000018247,2000018249,2000018250,2000018253,2000018254,2000018257,2000018280,2000018281,2000018352,2000018354,2000018368,2000018370,2000018371,2000018394,2000018401,2000018408,2000018413,2000018416,2000018432,2000018434,2000018436,2000018439,2000018442,2000018446,2000018448,2000018453,2000018454,2000018455,2000018458,2000018468,2000018474,2000018479,2000018480,2000018481,2000018483,2000018486,2000018488,2000018556,2000018559,2000018561,2000018567,2000018570,2000018579,2000018592,2000018596,2000018598,2000018603,2000018604,2000018608,2000018611,2000018612,2000018617,2000018627,2000018629,2000018631,2000018632,2000018637,2000018638,2000018688,2000018689,2000018695,2000018697,2000018703,2000018705,2000018728,2000018729,2000018733,2000018734,2000018740,2000018745,2000018748,2000018750,2000018756,2000018765,2000018772,2000018773,2000018791,2000018793,2000018794,2000018795,2000018802,2000018811,2000018817,2000018818,2000018821,2000018823,2000018825,2000018827,2000018828,2000018829,2000018832,2000018834,2000018840,2000018841,2000018852,2000018863,2000018865,2000018896,2000018898,2000018899,2000018901,2000018902,2000018903,2000018904,2000018905,2000018907,2000018913,2000018914,2000018918,2000018919,2000018925,2000018926,2000018928,2000018942,2000018943,2000018947,2000018950,2000018955,2000018956,2000018958,2000018962,2000018971,2000018974,2000018978,2000018980,2000018989,2000018991,2000018998,2000018999,2000019000,2000019007,2000019011,2000019020,2000019024,2000019032,2000019060,2000019067,2000019068,2000019071,2000019075,2000019083,2000019084,2000019086,2000019089,2000019090,2000019095,2000019096,2000019099,2000019100,2000019103,2000019106,2000019107,2000019108,2000019113,2000019118,2000019127,2000019131,2000019138,2000019139,2000019144,2000019149,2000019151,2000019153,2000019157,2000019159,2000019161,2000019166,2000019167,2000019171,2000019172,2000019173,2000019174,2000019177,2000019206,2000019208,2000019236,2000019238,2000019240,2000019241,2000019259,2000019261,2000019264,2000019266,2000019267,2000019268,2000019272,2000019275,2000019279,2000019281,2000019284,2000019294,2000019309,2000019311,2000019338,2000019340,2000019350,2000019355,2000019356,2000019367,2000019373,2000019374,2000019376,2000019381,2000019382,2000019383,2000019389,2000019390,2000019403,2000019406,2000019410,2000019411,2000019412,2000019417,2000019421,2000019424,2000019426,2000019427,2000019429,2000019448,2000019449,2000019451,2000019453,2000019456,2000019481,2000019483,2000019484,2000019485,2000019490,2000019505,2000019506,2000019507,2000019510,2000019528,2000019529,2000019530,2000019532,2000019534,2000019536,2000019542,2000019543,2000019585,2000019587,2000019644,2000019645,2000019648,2000019651,2000019653,2000019665,2000019666,2000019678,2000019679,2000019688,2000019689,2000019722,2000019724,2000019726,2000019728,2000019733,2000019739,2000019740,2000019756,2000019761,2000019925,2000019929,2000019930,2000019931,2000019990,2000019991,2000019998,2000020001,2000020003,2000020014,2000020023,2000020034,2000020035,2000020038,2000020076,2000020078,2000020081,2000020110,2000020200,2000020208,2000020212,2000020213,2000020222,2000020223,2000020255,2000020262,2000020269,2000020271,2000020273,2000020274,2000020337,2000020338,2000020343,2000020344,2000020345,2000020367,2000020371,2000020406,2000020420,2000020423,2000020428,2000020432,2000020437,2000020443,2000020444,2000020445,2000020448,2000020452,2000020462,2000020465,2000020467,2000020471,2000020479,2000020482,2000020483,2000020490,2000020497,2000020500,2000020508,2000020586,2000020590,2000020594,2000020602,2000020603,2000020621,2000020643,2000020658,2000020684,2000020693,2000020701,2000020716,2000020726,2000020728,2000020731,2000020735,2000020736,2000020758,2000020763,2000020765,2000020768,2000020799,2000020815,2000020831,2000020834,2000020840,2000020842,2000020903,2000020904,2000020916,2000020923,2000020928,2000020934,2000020937,2000020964,2000020966,2000020975,2000020979,2000020983,2000021002,2000021008,2000021023,2000021050,2000021075,2000021080,2000021082,2000021083,2000021135,2000021142,2000021178,2000021180,2000021213,2000021243,2000021297,2000021299,2000021301,2000021336,2000021338,2000021361,2000021365,2000021367,2000021416,2000021419,2000021424,2000021428,2000021431,2000021458,2000021480,2000021485,2000021530,2000021532,2000021536,2000021541,2000021570,2000021599,2000022082,2000022083,2000022116,2000022128,2000022154,2000022175,2000022176,2000022178,2000022181,2000022216,2000022220,2000022225,2000022231,2000022608,2000022609,2000022610,2000022617,2000022618,2000022622,2000022730,2000022734,2000022736,2000022746,2000022785,2000022786,2000022787,2000022789,2000022808,2000022811,2000022812,2000022855,2000022867,2000022870,2000022873,2000022879,2000022973,2000022987,2000022988,2000022990,2000023000,2000023047,2000023051,2000023057,2000023059,2000023173,2000023174,2000023180,2000023182,2000023188,2000023197,2000023202,2000023270,2000023271,2000023276,2000023278,2000023358,2000023359,2000023361,2000023367,2000023379,2000023440,2000023443,2000023444,2000023445,2000023447,2000023449,2000023503,2000023504,2000023508,2000023510,2000023516,2000023517,2000023520,2000023521,2000023522,2000023523,2000023525,2000023527,2000023528,2000023529,2000023531,2000023532,2000023533,2000023534,2000023536,2000023538,2000023545,2000023546,2000023571,2000023649,2000023651,2000023666,2000023672,2000023735,2000023736,2000023740,2000023748,2000023749,2000023753,2000023755,2000023756,2000023758,2000023759,2000023761,2000023763,2000023765,2000023767,2000023769,2000023770,2000023771,2000023830,2000023831,2000023833,2000023845,2000023847,2000023851,2000023855,2000023857,2000023955,2000023967,2000023972,2000023978,2000023979,2000024045,2000024053,2000024054,2000024095,2000024096,2000024207,2000024208,2000024243,2000024244,2000024251,2000024252,2000024257,2000024261,2000024340,2000024354,2000024359,2000024373,2000024391,2000024472,2000024473,2000024479,2000024486,2000024496,2000024555,2000024561,2000024567,2000024602,2000024708,2000024736,2000024743,2000024745,2000024749,2000024756,2000024827,2000024838,2000024840,2000024848,2000024862,2000024973,2000024981,2000025052,2000025054,2000025056,2000025067,2000025167,2000025168,2000025171,2000025176,2000025189,2000025191,2000025198,2000025200,2000025292,2000025309,2000025407,2000025410,2000025422,2000025437,2000025439,2000025446,2000025520,2000025526,2000025550,2000025557,2000025669,2000025672,2000025682,2000025747,2000025754,2000025755,2000025756,2000025759,2000025760,2000025761,2000025762,2000025763,2000025764,2000025765,2000025766,2000025773,2000025774,2000025775,2000025776,2000025777,2000025779,2000025782,2000025783,2000025785,2000025787,2000025793,2000025794,2000025878,2000025889,2000025912,2000025998,2000026049,2000026050,2000026053,2000026059,2000026132,2000026143,2000026170,2000026274,2000026275,2000026301,2000026307,2000026378,2000026387,2000026392,2000026403,2000026497,2000026499,2000026544,2000026554,2000026624,2000026634,2000026663,2000026749,2000026799,2000026800,2000026880,2000026890,2000026904,2000026992,2000027007,2000027015,2000027055,2000027183,2000027189,2000027312,2000027321,2000027322,2000027335,2000027441,2000027458,2000027471,2000027491,2000027596,2000027603,2000027606,2000027617,2000027709,2000027720,2000027741,2000027847,2000027861,2000027889,2000027907,2000027992,2000027994,2000028030,2000028093,2000028104,2000028118,2000028189,2000028192,2000028288,2000028298,2000028336,2000028386,2000028637,2000028647,2000028654,2000028663,2000028807,2000028849,2000028852,2000028854,2000028884,2000029346,2000029347,2000029360,2000029361,2000029371,2000029375,2000029387,2000029454,2000029475,2000029478,2000029480,2000029481,2000029497,2000029498,2000029502,2000029507,2000029525,2000029526,2000029588,2000029592,2000029606,2000029609,2000029612,2000029617,2000029629,2000029630,2000029635,2000029636,2000029644,2000029703,2000029704,2000029705,2000029707,2000029712,2000029716,2000029719,2000029720,2000029723,2000029725,2000029728,2000029731,2000029734,2000029738,2000029788,2000029791,2000029796,2000029801,2000029804,2000029805,2000029807,2000029808,2000029810,2000029811,2000029820,2000029826,2000029833,2000029898,2000029903,2000029906,2000029911,2000029912,2000029915,2000029917,2000029923,2000029925,2000029932,2000029935,2000029948,2000029951,2000029952,2000029956,2000029965,2000030036,2000030130,2000030131,2000030141,2000030164,2000030165,2000030180,2000030182,2000030186,2000030191,2000030194,2000030195,2000030267,2000030270,2000030277,2000030278,2000030279,2000030284,2000030288,2000030290,2000030322,2000030323,2000030324,2000030326,2000030331,2000030337,2000030341,2000030511,2000030513,2000030524,2000030527,2000030529,2000030530,2000030535,2000030536,2000030538,2000030541,2000030542,2000030545,2000030552,2000030621,2000030623,2000030625,2000030659,2000030660,2000030662,2000030671,2000030674,2000030686,2000030688,2000030762,2000030763,2000030770,2000030771,2000030772,2000030776,2000030777,2000030778,2000030779,2000030780,2000030782,2000030788,2000030796,2000030806,2000030808,2000030813,2000030928,2000030972,2000030975,2000030986,2000030989,2000030991,2000030993,2000030995,2000030996,2000031029,2000031030,2000031031,2000031032,2000031033,2000031035,2000031097,2000031102,2000031104,2000031107,2000031108,2000031115,2000031116,2000031117,2000031132,2000031144,2000031182,2000031184,2000031200,2000031251,2000031252,2000031253,2000031254,2000031255,2000031256,2000031263,2000031264,2000031265,2000031268,2000031269,2000031272,2000031304,2000031311,2000031318,2000031320,2000031422,2000031423,2000031426,2000031430,2000031446,2000031447,2000031449,2000031450,2000031456,2000031457,2000031459,2000031460,2000031477,2000031480,2000031481,2000031490,2000031498,2000031500,2000031563,2000031565,2000031566,2000031568,2000031572,2000031585,2000031595,2000031602,2000031603,2000031605,2000031606,2000031813,2000031815,2000031890,2000031891,2000031894,2000031898,2000031902,2000031906,2000031932,2000031963,2000031982,2000031983,2000031985,2000031988,2000031994,2000031996,2000032077,2000032079,2000032082,2000032083,2000032088,2000032103,2000032104,2000032106,2000032109,2000032115,2000032118,2000032125,2000032127,2000032130,2000032135,2000032197,2000032198,2000032214,2000032216,2000032223,2000032225,2000032228,2000032232,2000032233,2000032241,2000032267,2000032278,2000032286,2000032287,2000032292,2000032296,2000032403,2000032408,2000032409,2000032412,2000032425,2000032429,2000032432,2000032436,2000032445,2000032449,2000032452,2000032455,2000032456,2000032531,2000032532,2000032533,2000032534,2000032538,2000032548,2000032557,2000032558,2000032566,2000032572,2000032573,2000032574,2000032578,2000032581,2000032586,2000032671,2000032676,2000032679,2000032688,2000032690,2000032691,2000032693,2000032697,2000032706,2000032709,2000032715,2000032749,2000032752,2000032818,2000032822,2000032830,2000032832,2000032841,2000032844,2000032848,2000032852,2000032853,2000032883,2000032886,2000032889,2000032897,2000033029,2000033030,2000033041,2000033042,2000033056,2000033058,2000033060,2000033065,2000033066,2000033073,2000033078,2000033081,2000033082,2000033088,2000033090,2000033210,2000033213,2000033218,2000033241,2000033250,2000033251,2000033308,2000033316,2000033317,2000033330,2000033338,2000033347,2000033349,2000033477,2000033479,2000033481,2000033487,2000033488,2000033494,2000033498,2000033499,2000033501,2000033521,2000033522,2000033524,2000033526,2000033528,2000033529,2000033663,2000033666,2000033669,2000033678,2000033689,2000033697,2000033701,2000033702,2000033705,2000033708,2000033709,2000033710,2000033712,2000033716,2000033722,2000033734,2000033878,2000033883,2000033890,2000033893,2000033895,2000033896,2000033906,2000033912,2000033914,2000033921,2000034122,2000034123,2000034127,2000034132,2000034138,2000034141,2000034143,2000034145,2000034150,2000034165,2000034167,2000034172,2000034175,2000034177,2000034179,2000034357,2000034359,2000034360,2000034368,2000034374,2000034390,2000034396,2000034398,2000034401,2000034407,2000034408,2000034412,2000034557,2000034559,2000034568,2000034575,2000034585,2000034587,2000034592,2000034604,2000034618,2000034625,2000034773,2000034775,2000034782,2000034787,2000034788,2000034791,2000034793,2000034797,2000034798,2000034799,2000034802,2000034815,2000034821,2000034823,2000034832,2000034945,2000034953,2000034996,2000034999,2000035007,2000035011,2000035015,2000035021,2000035025,2000035145,2000035146,2000035147,2000035150,2000035152,2000035158,2000035169,2000035181,2000035182,2000035184,2000035187,2000035189,2000035245,2000035248,2000035254,2000035257,2000035258,2000035259,2000035261,2000035272,2000035274,2000035278,2000035280,2000035390,2000035403,2000035404,2000035406,2000035410,2000035413,2000035415,2000035418,2000035419,2000035493,2000035520,2000035540,2000035545,2000035558,2000035560,2000035562,2000035583,2000035661,2000035662,2000035666,2000035668,2000035682,2000035702,2000035703,2000035705,2000035773,2000035785,2000035788,2000035791,2000035794,2000035796,2000035802,2000035804,2000035898,2000035901,2000035903,2000036013,2000036014,2000036019,2000036021,2000036027,2000036029,2000036031,2000036037,2000036041,2000036142,2000036150,2000036154,2000036155,2000036156,2000036174,2000036178,2000036244,2000036245,2000036249,2000036257,2000036258,2000036263,2000036272,2000036274,2000036276,2000036283,2000036385,2000036394,2000036426,2000036427,2000036430,2000036431,2000036434,2000036516,2000036588,2000036589,2000036685,2000036709,2000036722,2000036723,2000036752,2000036799,2000036813,2000036889,2000036921,2000036938,2000036960,2000036961,2000036985,2000037186,2000037187,2000037188,2000037194,2000037195,2000037290,2000037291,2000037305,2000037308,2000037309,2000037313,2000037322,2000037328,2000037432,2000037433,2000037435,2000037436,2000037438,2000037439,2000037463,2000037465,2000037466,2000037471,2000037472,2000037473,2000037474,2000037475,2000037567,2000037570,2000037572,2000037575,2000037578,2000037584,2000037592,2000037648,2000037657,2000037665,2000037666,2000037669,2000037675,2000037684,2000037685,2000037687,2000037690,2000037775,2000037776,2000037784,2000037787,2000037788,2000037790,2000037805,2000037806,2000037807,2000037882,2000037886,2000037890,2000037925,2000037927,2000037931,2000037935,2000037938,2000037939,2000037942,2000037948,2000038034,2000038036,2000038040,2000038047,2000038051,2000038054,2000038057,2000038061,2000038062,2000038069,2000038138,2000038144,2000038147,2000038151,2000038153,2000038156,2000038160,2000038163,2000038166,2000038168,2000038182,2000038184,2000038263,2000038265,2000038266,2000038270,2000038274,2000038280,2000038284,2000038292,2000038301,2000038304,2000038306,2000038309,2000038310,2000038312,2000038314,2000038320,2000038392,2000038395,2000038435,2000038448,2000038450,2000038483,2000038507,2000038513,2000038588,2000038606,2000038663,2000038747,2000038789,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039035,2000039041,2000039050
+[mod] [dry] RESIDUEROW dry/after-load :: D6   FP SMRFixPack_shelter_try                 n=0 handles=
+[dry] RESIDUEROW dry/after-load :: D6   FP SMRFixPack_shelter_try                 n=0 handles=
+[mod] [dry] RESIDUEROW dry/after-load :: D7   FP SMRFixPack_payload_set                 n=4 handles=1061,1062,4104,4641
+[dry] RESIDUEROW dry/after-load :: D7   FP SMRFixPack_payload_set                 n=4 handles=1061,1062,4104,4641
+[mod] [dry] RESIDUEROW dry/after-load :: D8   FP SMRFixPack_rocket_fuel_key             n=0 handles=
+[dry] RESIDUEROW dry/after-load :: D8   FP SMRFixPack_rocket_fuel_key             n=0 handles=
+[mod] [dry] RESIDUEROW dry/after-load :: D12  OP SMRFixPack_ack_notworking              n=4 handles=2851,5342,6300,9057
+[dry] RESIDUEROW dry/after-load :: D12  OP SMRFixPack_ack_notworking              n=4 handles=2851,5342,6300,9057
+[mod] [dry] RESIDUEROW dry/after-load :: D13  OP SMRFixPack_closed_to_new_residents     n=11 handles=1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984
+[dry] RESIDUEROW dry/after-load :: D13  OP SMRFixPack_closed_to_new_residents     n=11 handles=1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984
+[mod] [dry] RESIDUEROW dry/after-load :: D14  OP SMRFixPack_no_homeless                 n=11 handles=1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984
+[dry] RESIDUEROW dry/after-load :: D14  OP SMRFixPack_no_homeless                 n=11 handles=1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984
+[mod] [dry] RESIDUEMOD dry/after-load :: D15a  SMRFixPack_DroneSpeedDial      present=true on label=Drone
+[dry] RESIDUEMOD dry/after-load :: D15a  SMRFixPack_DroneSpeedDial      present=true on label=Drone
+[mod] [dry] RESIDUEMOD dry/after-load :: D15b  SMRFixPack_DroneCarryDial      present=true on label=Consts
+[dry] RESIDUEMOD dry/after-load :: D15b  SMRFixPack_DroneCarryDial      present=true on label=Consts
+[mod] [dry] RESIDUEKEEP dry/after-load :: D10 SMRFixPack_F35_* modifier(s) = 0 :: NONE
+[dry] RESIDUEKEEP dry/after-load :: D10 SMRFixPack_F35_* modifier(s) = 0 :: NONE
+[mod] [dry] RESIDUEKEEP dry/after-load :: D11 SMRFixPack_F48_StationConnectors = true
+[dry] RESIDUEKEEP dry/after-load :: D11 SMRFixPack_F48_StationConnectors = true
+[mod] [dry] RESIDUEENTRY dry/after-load :: rains['normal'] :: SMRFixPack_loop_version=1.0.1 SMRFixPack_fixed_loop=nil | activation_thread valid=true | main_thread valid=false
+[dry] RESIDUEENTRY dry/after-load :: rains['normal'] :: SMRFixPack_loop_version=1.0.1 SMRFixPack_fixed_loop=nil | activation_thread valid=true | main_thread valid=false
+[mod] [dry] RESIDUEENTRY dry/after-load :: rains['toxic'] :: SMRFixPack_loop_version=nil SMRFixPack_fixed_loop=nil | activation_thread valid=false | main_thread valid=false
+[dry] RESIDUEENTRY dry/after-load :: rains['toxic'] :: SMRFixPack_loop_version=nil SMRFixPack_fixed_loop=nil | activation_thread valid=false | main_thread valid=false
+[mod] [dry] READ rains entries = 2 | population=2 | APPLICABLE=true | witness=RainsDisasterThreads keys
+[dry] READ rains entries = 2 | population=2 | APPLICABLE=true | witness=RainsDisasterThreads keys
+[mod] [dry] RESIDUEMETEOR dry/after-load :: Meteors thread valid = true
+[dry] RESIDUEMETEOR dry/after-load :: Meteors thread valid = true
+[mod] [dry] RESIDUEGAMEVAR dry/after-load :: SMRFixPack_MeteorLatch=1.0.1 FirstAsteroidPrefabs=false — ⛔ these are mod-registered GameVars, dropped by the ENGINE on any pack-less load; never report their absence as something a tool removed
+[dry] RESIDUEGAMEVAR dry/after-load :: SMRFixPack_MeteorLatch=1.0.1 FirstAsteroidPrefabs=false — ⛔ these are mod-registered GameVars, dropped by the ENGINE on any pack-less load; never report their absence as something a tool removed
+[mod] [dry] STEP 5-residue END 0ms
+[dry] STEP 5-residue END 0ms
+[mod] [dry] ERRORWATCH dry — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting dry ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=5-residue loads_this_process=1
+[dry] ERRORWATCH dry — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting dry ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=5-residue loads_this_process=1
+[mod] [dry] CELL dry :: unattended — closing cleanly so the log tail flushes (EF-047).
+[dry] CELL dry :: unattended — closing cleanly so the log tail flushes (EF-047).
+[mod] [dry] SHUTDOWN done
+[dry] SHUTDOWN done
+						Lua 0:00:52:767
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:52:774
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:53:080
+
+
+*** Debug::Done()
+Time (ms)	53080
+
+

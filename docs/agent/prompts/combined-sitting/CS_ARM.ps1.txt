@@ -1,0 +1,330 @@
+# combined-sitting ARM / DISARM / CONFIG script.  Parked source; copy to a
+# scratch .ps1 and run.  Resurrected from d13-rescue's RS_ARM.ps1
+# (git show 6b75e11:docs/agent/prompts/d13-rescue/RS_ARM.ps1.txt).
+#
+# Rule C11: arming is a script FILE, never an inline one-liner - an inline edit's
+# quoting was mangled once and the game launched unarmed.
+# C11 corollary (unattended-1 I2): never pipe this script's output through
+# Select-Object - a piped consumer terminates the upstream pipeline and can kill
+# the script before its write executes. Nothing here is piped.
+#
+# G5 ARM GATE (binding): after writing, EVERY piece is read BACK OFF DISK and the
+# script exits non-zero if any is missing - or listed twice. The double-listing
+# half is not theoretical: cell r1 of the d13-rescue matrix was armed on top of
+# armed-r0, metadata listed the payload twice, it executed twice, two racing
+# payload flows ran in one process and the cell was VOID while every gate line
+# read GREEN (D13_VERIFICATION.md 4.6).
+#
+# S3 (corun-batch-1 ledger): a parked .ps1 needs a BOM, because PS 5.1 reads a
+#    no-BOM .ps1 as ANSI and any non-ASCII character breaks the parse. This body
+#    is kept ASCII-only, which makes the two decodings identical.
+#
+# ENCODING: PS 5.1's Set-Content -Encoding utf8 writes a BOM and once silently
+#    prefixed one onto metadata.lua. Use WriteAllLines with an explicit no-BOM
+#    encoder. The instrument files are copied BYTE FOR BYTE (Copy-Item), so
+#    their own UTF-8 survives untouched.
+#
+#   Usage:  .\CS_ARM.ps1 arm dry                    # cells: dry c1 a1 b1 b2 zrestore
+#           .\CS_ARM.ps1 arm b2 D13SWEEP.savegame.sav   # optional 3rd arg overrides SAVEFILE
+#           .\CS_ARM.ps1 disarm
+#           .\CS_ARM.ps1 config rescue-out          # rescue-out | rescue-in
+#
+# ⛔ WHAT THIS SCRIPT DOES *NOT* CONTROL, AND IT IS THE WHOLE SHAPE OF THIS
+#    SITTING.  The two PACKS are switched by the OWNER in the Mod Manager, and
+#    their junctions stay in place from the first launch to the last.  A
+#    junction read therefore says NOTHING about whether a pack's code ran - that
+#    is D13 state (3), where the def loads and the code does not.  So the only
+#    junction this script moves is the RESCUE mod's (EF-055: a pull is a real
+#    uninstall, agent-side, and it does not cost the owner their tick), and the
+#    authoritative configuration check is the in-game CS.RequireConfig gate,
+#    which reads the GLOBALS and STOPS.
+
+param(
+  [Parameter(Mandatory = $true)][ValidateSet("arm", "disarm", "config")][string]$mode,
+  [Parameter(Mandatory = $false)][string]$arg,
+  [Parameter(Mandatory = $false)][string]$savefile
+)
+
+$ErrorActionPreference = "Stop"
+$park = "c:\Dev\SMR-BugFixPack\docs\agent\prompts\combined-sitting"
+$kit  = "c:\Dev\SMR-BugFixPack-TestKit"
+$meta = Join-Path $kit "metadata.lua"
+$mods = "C:\Users\stkot\AppData\Roaming\Surviving Mars Relaunched\Mods"
+$saveDir = "C:\Users\stkot\Saved Games\Surviving Mars Relaunched\76561198020568696"
+$noBom = New-Object System.Text.UTF8Encoding($false)
+
+$common = @{ src = "97_CSCommon.lua.txt"; dst = "Code\97_CSCommon.lua" }
+$run    = @{ src = "98_CSRun.lua.txt";    dst = "Code\98_CSRun.lua" }
+$pairs  = @($common, $run)
+
+$CELLS = @("dry", "c1", "a1", "b1", "b2", "zrestore")
+
+# cell -> whether the RESCUE junction must be on disk. fix/opt/kit are always
+# present; the packs' on/off is the owner's Mod-Manager state and is checked
+# in-game, not here.
+$CELLRES = @{
+  dry      = $false
+  c1       = $false
+  a1       = $false
+  b1       = $true
+  b2       = $true
+  zrestore = $false
+}
+
+# cell -> the staged save it will ask the engine for. A LoadGame of a missing
+# file is a wasted 20-second boot - and in an ATTENDED cell it is a wasted
+# minute of the owner's, which is the resource this whole model exists to
+# protect.
+$CELLSAVES = @{
+  dry      = "CSHOST.savegame.sav"
+  c1       = "CSHOST.savegame.sav"
+  a1       = "CSHOST.savegame.sav"
+  b1       = "CSSWEEP.savegame.sav"
+  b2       = "D13SWEEP.savegame.sav"    # written BY THE OWNER at moment B step 3
+  zrestore = ""
+}
+
+# ---- mod configuration -------------------------------------------------------
+
+$JUNCTIONS = @(
+  @{ name = "SMR-BugFixPack";           target = "C:\Dev\SMR-BugFixPack";           key = "fix" },
+  @{ name = "SMR-BugFixPack-TestKit";   target = "C:\Dev\SMR-BugFixPack-TestKit";   key = "kit" },
+  @{ name = "SMR-OptInPack";            target = "C:\Dev\SMR-OptInPack";            key = "opt" },
+  @{ name = "SMR-CommunitySaveRescue";  target = "C:\Dev\SMR-CommunitySaveRescue";  key = "res" }
+)
+
+function Test-IsJunction([string]$path) {
+  if (-not (Test-Path -LiteralPath $path)) { return $false }
+  $item = Get-Item -LiteralPath $path -Force
+  return (($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0)
+}
+
+function Remove-Junction([string]$path) {
+  if (-not (Test-Path -LiteralPath $path)) { Write-Output ("CONFIG already absent: " + $path); return $true }
+  if (-not (Test-IsJunction $path)) {
+    Write-Output ("CONFIG REFUSING: " + $path + " is not a reparse point - it is a REAL directory. Nothing was touched.")
+    return $false
+  }
+  # rmdir WITHOUT /s removes the reparse point only and can never reach the
+  # target. Remove-Item -Recurse on a junction is the hazard being avoided.
+  cmd /c rmdir "$path" | Out-Null
+  if (Test-Path -LiteralPath $path) { Write-Output ("CONFIG FAIL: rmdir did not remove " + $path); return $false }
+  Write-Output ("CONFIG removed junction " + $path)
+  return $true
+}
+
+function Add-Junction([string]$path, [string]$target) {
+  if (Test-Path -LiteralPath $path) {
+    if (Test-IsJunction $path) { Write-Output ("CONFIG already present: " + $path); return $true }
+    Write-Output ("CONFIG REFUSING: " + $path + " exists and is not a reparse point.")
+    return $false
+  }
+  cmd /c mklink /J "$path" "$target" | Out-Null
+  if (-not (Test-IsJunction $path)) { Write-Output ("CONFIG FAIL: mklink did not create " + $path); return $false }
+  Write-Output ("CONFIG created junction " + $path + " -> " + $target)
+  return $true
+}
+
+if ($mode -eq "config") {
+  $SETS = @{
+    "rescue-out" = @{ fix = $true; kit = $true; opt = $true; res = $false }
+    "rescue-in"  = @{ fix = $true; kit = $true; opt = $true; res = $true  }
+  }
+  if (-not $SETS.ContainsKey($arg)) {
+    Write-Output "CONFIG FAIL: config takes rescue-out | rescue-in"; exit 1
+  }
+  $want = $SETS[$arg]
+  $bad = $false
+  foreach ($j in $JUNCTIONS) {
+    $p = Join-Path $mods $j.name
+    if ($want[$j.key]) { if (-not (Add-Junction $p $j.target)) { $bad = $true } }
+    else               { if (-not (Remove-Junction $p))        { $bad = $true } }
+  }
+  # gate: read the ACTUAL directory back off disk, never the intent
+  foreach ($j in $JUNCTIONS) {
+    $p = Join-Path $mods $j.name
+    $present = Test-IsJunction $p
+    $expect = [bool]$want[$j.key]
+    if ($present -ne $expect) {
+      Write-Output ("CONFIG GATE FAIL: " + $j.name + " present=" + $present + " wanted=" + $expect); $bad = $true
+    } else {
+      Write-Output ("CONFIG GATE OK   " + $j.name + " present=" + $present)
+    }
+    if ($expect) {
+      $mp = Join-Path $p "metadata.lua"
+      if (Test-Path -LiteralPath $mp) { Write-Output ("CONFIG GATE OK   metadata.lua readable through " + $j.name) }
+      else { Write-Output ("CONFIG GATE FAIL: metadata.lua NOT readable through " + $j.name); $bad = $true }
+    }
+  }
+  if ($bad) { Write-Output ("CONFIG GATE: RED (" + $arg + ")"); exit 1 }
+  Write-Output ("CONFIG GATE: GREEN (" + $arg + ") - this takes effect on the NEXT process, D13's full-restart rule")
+  exit 0
+}
+
+# ---- arm / disarm ------------------------------------------------------------
+
+$arming = ($mode -eq "arm")
+
+if ($arming) {
+  if (-not ($CELLS -contains $arg)) {
+    Write-Output ("ARM FAIL: arm needs a cell, one of: " + ($CELLS -join " ")); exit 1
+  }
+  $wantSave = $CELLSAVES[$arg]
+  if ($savefile) { $wantSave = $savefile }
+
+  foreach ($p in $pairs) {
+    Copy-Item -LiteralPath (Join-Path $park $p.src) -Destination (Join-Path $kit $p.dst) -Force
+    Write-Output ("WROTE " + $p.dst)
+  }
+
+  $rf = Join-Path $kit "Code\98_CSRun.lua"
+  $rt = [System.IO.File]::ReadAllText($rf)
+  $rt2 = [System.Text.RegularExpressions.Regex]::Replace(
+    $rt, '(?m)^local CELL = "[a-z0-9]+"', ('local CELL = "' + $arg + '"'), 1)
+  if ($rt2 -eq $rt -and $rt -notmatch ('(?m)^local CELL = "' + $arg + '"')) {
+    Write-Output "ARM FAIL: could not rewrite the CELL line"; exit 1
+  }
+  if ($wantSave) {
+    $rt3 = [System.Text.RegularExpressions.Regex]::Replace(
+      $rt2, '(?m)^local SAVEFILE = "[^"]*"', ('local SAVEFILE = "' + $wantSave + '"'), 1)
+    if ($rt3 -eq $rt2 -and $rt2 -notmatch ('(?m)^local SAVEFILE = "' + [regex]::Escape($wantSave) + '"')) {
+      Write-Output "ARM FAIL: could not rewrite the SAVEFILE line"; exit 1
+    }
+    $rt2 = $rt3
+  }
+  [System.IO.File]::WriteAllText($rf, $rt2, $noBom)
+  Write-Output ("WROTE 98_CSRun.lua with CELL = " + $arg + " SAVEFILE = " + $wantSave)
+
+  # ARM IS IDEMPOTENT, and it is idempotent because it was not (see header).
+  $lines = @(Get-Content -LiteralPath $meta -Encoding UTF8 | Where-Object { $_ -notmatch 'Code/9[78]_CS' })
+  $out = New-Object System.Collections.Generic.List[string]
+  $inserted = $false
+  foreach ($l in $lines) {
+    $out.Add($l)
+    if (-not $inserted -and $l -match '99_FixtureCarry\.lua') {
+      foreach ($p in $pairs) {
+        $leaf = Split-Path $p.dst -Leaf
+        $out.Add(("`t`t`"Code/" + $leaf + "`",  -- TEMPORARY combined-sitting"))
+      }
+      $inserted = $true
+    }
+  }
+  if (-not $inserted) { Write-Output "ARM FAIL: anchor 99_FixtureCarry.lua not found"; exit 1 }
+  [System.IO.File]::WriteAllLines($meta, $out, $noBom)
+  Write-Output "WROTE metadata.lua (no BOM)"
+} else {
+  foreach ($p in $pairs) {
+    $f = Join-Path $kit $p.dst
+    if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force; Write-Output ("DELETED " + $p.dst) }
+  }
+  $lines = Get-Content -LiteralPath $meta -Encoding UTF8
+  $kept = $lines | Where-Object { $_ -notmatch 'Code/9[78]_CS' }
+  [System.IO.File]::WriteAllLines($meta, $kept, $noBom)
+  Write-Output ("metadata.lua: removed " + ($lines.Count - $kept.Count) + " line(s), no BOM")
+}
+
+# ---- gate (both directions) --------------------------------------------------
+$fail = $false
+$m = Get-Content -LiteralPath $meta -Raw -Encoding UTF8
+foreach ($p in $pairs) {
+  $f = Join-Path $kit $p.dst
+  $present = Test-Path -LiteralPath $f
+  $leaf = Split-Path $p.dst -Leaf
+  # COUNT, never "does it appear". A -match is true for one listing and for two.
+  $listed = ([regex]::Matches($m, [regex]::Escape('"Code/' + $leaf + '"'))).Count
+  if ($arming) {
+    if (-not $present) { Write-Output ("ARM GATE FAIL: missing " + $p.dst); $fail = $true }
+    elseif ((Get-Content -LiteralPath $f -Raw -Encoding UTF8) -notmatch 'TEMPORARY') {
+      Write-Output ("ARM GATE FAIL: no TEMPORARY marker in " + $p.dst); $fail = $true
+    } else { Write-Output ("ARM GATE OK   " + $p.dst) }
+    if ($listed -eq 1) { Write-Output ("ARM GATE OK   metadata lists " + $p.dst + " exactly once") }
+    elseif ($listed -eq 0) { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
+    else { Write-Output ("ARM GATE FAIL: metadata lists " + $p.dst + " " + $listed + " TIMES - it would execute " + $listed + " times and start that many payload flows"); $fail = $true }
+  } else {
+    if ($present) { Write-Output ("DISARM FAIL: still present " + $p.dst); $fail = $true }
+    if ($listed -gt 0)  { Write-Output ("DISARM FAIL: metadata still lists " + $p.dst + " x" + $listed); $fail = $true }
+  }
+}
+
+if ($arming) {
+  $runText = Get-Content -LiteralPath (Join-Path $kit "Code\98_CSRun.lua") -Raw -Encoding UTF8
+  $comText = Get-Content -LiteralPath (Join-Path $kit "Code\97_CSCommon.lua") -Raw -Encoding UTF8
+
+  if ($runText -match '(?m)^\s*CS\.Boot\(\)') { Write-Output "ARM GATE OK   98_CSRun drives itself" }
+  else { Write-Output "ARM GATE FAIL: 98_CSRun does not call CS.Boot() - the run would launch and do nothing"; $fail = $true }
+  if ($comText -match '(?m)^\s*CS\.Boot\(\)') { Write-Output "ARM GATE FAIL: 97_CSCommon calls CS.Boot() at file scope - two flows would race"; $fail = $true }
+  else { Write-Output "ARM GATE OK   97_CSCommon starts nothing on its own" }
+
+  # Read the CELL and the SAVEFILE back OFF DISK. Neither may be inferred from
+  # the command that was typed.
+  $cellOnDisk = $null
+  $mm = [System.Text.RegularExpressions.Regex]::Match($runText, '(?m)^local CELL = "([a-z0-9]+)"')
+  if ($mm.Success) { $cellOnDisk = $mm.Groups[1].Value }
+  if (-not $cellOnDisk) { Write-Output "ARM GATE FAIL: cannot read the CELL off disk"; $fail = $true }
+  elseif ($cellOnDisk -ne $arg) {
+    Write-Output ("ARM GATE FAIL: '" + $arg + "' was requested but the armed file says CELL = " + $cellOnDisk); $fail = $true
+  } else { Write-Output ("ARM GATE OK   CELL ON DISK = " + $cellOnDisk) }
+
+  $saveOnDisk = $null
+  $sm = [System.Text.RegularExpressions.Regex]::Match($runText, '(?m)^local SAVEFILE = "([^"]*)"')
+  if ($sm.Success) { $saveOnDisk = $sm.Groups[1].Value }
+  Write-Output ("ARM GATE OK   SAVEFILE ON DISK = " + $saveOnDisk)
+
+  # The rescue junction the armed cell declares, against what is actually there.
+  if ($cellOnDisk -and $CELLRES.ContainsKey($cellOnDisk)) {
+    $haveKit = Test-IsJunction (Join-Path $mods "SMR-BugFixPack-TestKit")
+    if (-not $haveKit) { Write-Output "ARM GATE FAIL: the Test Kit junction is absent - the instruments cannot load at all"; $fail = $true }
+    else { Write-Output "ARM GATE OK   Test Kit junction present" }
+    foreach ($n in @("SMR-BugFixPack", "SMR-OptInPack")) {
+      $have = Test-IsJunction (Join-Path $mods $n)
+      if (-not $have) { Write-Output ("ARM GATE FAIL: " + $n + " junction is absent. This sitting NEVER pulls a pack junction - the packs go off in the MOD MANAGER (state 3), and a pulled junction would take the mod out of the Mod Manager list entirely, so the owner could not turn it back on."); $fail = $true }
+      else { Write-Output ("ARM GATE OK   " + $n + " junction present (its Mod-Manager state is the owner's and is checked IN GAME)") }
+    }
+    $haveRes = Test-IsJunction (Join-Path $mods "SMR-CommunitySaveRescue")
+    $wantRes = [bool]$CELLRES[$cellOnDisk]
+    if ($haveRes -ne $wantRes) {
+      Write-Output ("ARM GATE FAIL: cell " + $cellOnDisk + " wants the rescue junction present=" + $wantRes + " but it reads " + $haveRes + " - run: CS_ARM.ps1 config " + $(if ($wantRes) { "rescue-in" } else { "rescue-out" })); $fail = $true
+    } else { Write-Output ("ARM GATE OK   rescue junction present=" + $haveRes + " matches cell " + $cellOnDisk) }
+  }
+
+  # G1 RESOLUTION CROSS-CHECK (unattended-1 harness-defect class 1). A parse
+  # sweep is a SYNTAX verdict, not a resolution one: U1.ErrorWatchNote was
+  # called by all 7 payloads and never existed.
+  $defined = @{}
+  foreach ($d in [regex]::Matches($comText, '(?m)^\s*(?:function\s+CS\.(\w+)|CS\.(\w+)\s*=)')) {
+    $n = $d.Groups[1].Value; if (-not $n) { $n = $d.Groups[2].Value }
+    if ($n) { $defined[$n] = $true }
+  }
+  $missing = @()
+  foreach ($u in [regex]::Matches($runText, 'CS\.(\w+)\s*\(')) {
+    $n = $u.Groups[1].Value
+    if (-not $defined.ContainsKey($n) -and $n -ne "Payload") { $missing += $n }
+  }
+  $missing = $missing | Sort-Object -Unique
+  if ($missing.Count -gt 0) { Write-Output ("ARM GATE FAIL: 98_CSRun calls undefined CS names: " + ($missing -join ", ")); $fail = $true }
+  else { Write-Output ("ARM GATE OK   resolution cross-check: every CS.* the payload calls is defined (" + $defined.Count + " definitions)") }
+
+  # The staged save the armed cell will ask the engine for must exist BEFORE the
+  # launch - and for b2 it is a save THE OWNER writes by hand at moment B, so
+  # this gate is also the typo check on that name.
+  if ($saveOnDisk) {
+    if (Test-Path -LiteralPath (Join-Path $saveDir $saveOnDisk)) { Write-Output ("ARM GATE OK   staged save present: " + $saveOnDisk) }
+    else { Write-Output ("ARM GATE FAIL: staged save MISSING: " + $saveOnDisk + " - if this is cell b2, the owner's in-game save did not land under that name. List the save directory and re-arm with the real name as the 3rd argument rather than guessing."); $fail = $true }
+  }
+}
+
+# stale-probe sweep, ALL FOUR repos (WORKFLOW probe hygiene rule 4)
+$hits = @()
+foreach ($dir in @("c:\Dev\SMR-BugFixPack\Code", "c:\Dev\SMR-BugFixPack-TestKit\Code",
+                   "c:\Dev\SMR-OptInPack\Code", "c:\Dev\SMR-CommunitySaveRescue\Code")) {
+  if (Test-Path -LiteralPath $dir) {
+    $hits += (Select-String -Path (Join-Path $dir "*.lua") -Pattern "TEMPORARY" -List | ForEach-Object { $_.Path })
+  }
+}
+if ($arming) { Write-Output ("PROBE SWEEP: armed: " + (($hits | ForEach-Object { Split-Path $_ -Leaf }) -join ", ") + " - declared by COMBINED_SITTING.md") }
+elseif ($hits.Count -eq 0) { Write-Output "PROBE SWEEP: clean" }
+else { Write-Output ("PROBE SWEEP: ARMED AFTER DISARM - " + ($hits -join ", ")); $fail = $true }
+
+if ($fail) { Write-Output ($mode.ToUpper() + " GATE: RED"); exit 1 }
+Write-Output ($mode.ToUpper() + " GATE: GREEN")
+exit 0

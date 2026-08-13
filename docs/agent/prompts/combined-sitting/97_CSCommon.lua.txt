@@ -1,0 +1,777 @@
+-- SMR Community Fix Pack — Test Kit :: COMBINED SITTING harness. TEMPORARY
+--
+-- Declared by: docs/agent/prompts/COMBINED_SITTING.md (the ONE attended sitting:
+-- PT-20 redo state-3 + D13 attended after-sweep + F102's minute). Predictions
+-- are in that brief §4, committed BEFORE the first launch.
+--
+-- Probe hygiene rule 5: this file lives in TestKit Code/ only while a launch is
+-- happening; it and its metadata.lua line die in the commit that records the
+-- answers. This .lua.txt is the parked source of truth.
+--
+-- ⭐ RESURRECTED, NOT REWRITTEN. say/Fmt/IdOf/Try/TryYield/Applicable/Step/
+--    WaitFor/Load/Save/ReadPackRegistry/ReadRescueRegistry/ReadGates/
+--    ReadModOrder/ReadDialOptions/RequireConfig/WalkObjects come from
+--    d13-rescue's 97_RSCommon
+--    (git show 8136d05:docs/agent/prompts/d13-rescue/97_RSCommon.lua.txt),
+--    which took them from split-optins, unattended-2 and corun-batch-2.
+--
+-- ⛔⛔ WHAT IS GENUINELY NEW HERE, AND WHY — THIS IS THE FIRST ATTENDED CELL
+--    THE RIG HAS EVER RUN.  Every previous harness ends `shutdown("done")`,
+--    which calls `quit()`.  In an attended cell that would close the game in
+--    the owner's face the moment prep finished.  So:
+--      * CS.attended = true  ⇒  the payload HANDS OVER and parks.  No quit, no
+--        watchdog kill, ever.  The owner ends the process by quitting normally,
+--        which is also what flushes the log's tail (EF-047).
+--      * the watchdog becomes a HEARTBEAT: it prints where the sitting is, so
+--        the attended minutes are measurable off the log afterwards instead of
+--        estimated.
+--      * every load the OWNER performs is instrumented, because they will load
+--        and save by hand: OnMsg.PostLoadGame arms a 5 s-deferred reader, which
+--        is what puts our read AFTER the rescue mod's synchronous pass (the kit
+--        loads first, so an undeferred handler would read the pre-pass state).
+--
+-- GUARDRAILS (WORKFLOW "Co-runs"):
+--   G1  every CS.* name the payload uses is diffed against this file's
+--       definitions before launch (CS_ARM.ps1) — a parse sweep is a SYNTAX
+--       verdict, not a resolution one (unattended-1 I1).
+--   G2  no count is a result unless its population is non-empty — CS.Applicable.
+--   G3  every call that can raise is inside pcall/sprocall and the RESULT IS
+--       PRINTED (unattended-1 I3).
+--   G4  save liveness is witnessed by the FILE SYSTEM plus the load-back, never
+--       by Savegame.ListForTag (EF-049).
+--   G5  the launcher reads metadata.lua and every instrument back off disk,
+--       COUNTS the listings, and refuses to launch unarmed or double-armed
+--       (CS_ARM.ps1; the r1-void lesson, D13_VERIFICATION §4.6).
+--   G6  EF-048: engine predicates return truthy NON-BOOLEANS — never print one
+--       raw as a verdict; `not not` it or print what it actually is.
+--   G7  ⛔ the config gate STOPS. An attended cell in the wrong mod state would
+--       burn the owner's minutes measuring nothing, so a mismatch quits within
+--       seconds and the closed game IS the signal to call the agent.
+
+CS = rawget(_G, "CS") or {}
+
+CS.tag          = CS.tag or "CS"
+CS.menu_timeout = 5 * 60 * 1000
+CS.settle_time  = 15 * 1000
+CS.quit_delay   = 3 * 1000
+-- ⛔ DEFAULT false, and it is false because of a defect the prep dry run caught.
+--    CS.Flow() runs BEFORE CS.Payload(), so a default of `true` disabled the
+--    watchdog in the unattended prep cell — an unattended hang would have sat
+--    there forever with every gate line reading GREEN. 98_CSRun now sets this at
+--    FILE SCOPE, before CS.Boot(), so the flag is right by the time Flow reads it.
+CS.attended     = false
+CS.heartbeat    = 60 * 1000
+CS.watchdog     = 25 * 60 * 1000  -- only consulted when CS.attended == false
+CS.stage        = "idle"
+CS.loads        = 0
+CS.t0           = false
+
+---- output ------------------------------------------------------------------
+--
+-- ModLog is the only print path proven to reach the log file on disk
+-- (Mod.lua:109-132). Its emitter formats its single argument a second time
+-- (lib.lua:164-174), so a literal '%' raises there — escape it. Flush per line
+-- so a killed run still shows how far it got.
+local function say(msg)
+	msg = "[" .. tostring(CS.tag) .. "] " .. tostring(msg)
+	local modlog = rawget(_G, "ModLog")
+	if modlog then
+		modlog((msg:gsub("%%", "%%%%")))
+	else
+		local dbg = rawget(_G, "DebugPrint")
+		if dbg then dbg(msg .. "\n") end
+	end
+	print(msg)
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then pcall(flush) end
+end
+CS.Say = say
+
+local function fmt(...)
+	local ok, s = pcall(string.format, ...)
+	return ok and s or "<fmt error>"
+end
+CS.Fmt = fmt
+
+local function id_of(obj)
+	if not obj then return "nil" end
+	if type(obj) ~= "table" then return tostring(obj) end
+	return tostring(obj.class or "?") .. "#" .. tostring(rawget(obj, "handle"))
+end
+CS.IdOf = id_of
+
+-- G3. The ONLY sanctioned call wrapper. Prints ok and the error text, always.
+-- ⛔ pcall cannot survive a yield — use CS.TryYield for anything that Sleeps.
+function CS.Try(what, fn, ...)
+	local ok, a, b = pcall(fn, ...)
+	say(fmt("TRY %s ok=%s result=%s%s", tostring(what), tostring(ok),
+		tostring(a), b ~= nil and (" / " .. tostring(b)) or ""))
+	return ok, a, b
+end
+
+function CS.TryYield(what, fn, ...)
+	local ok, a, b = sprocall(fn, ...)
+	say(fmt("TRY %s (yielding) ok=%s result=%s%s", tostring(what), tostring(ok),
+		tostring(a), b ~= nil and (" / " .. tostring(b)) or ""))
+	return ok, a, b
+end
+
+-- G2. The condition-sampled rule, mechanised (co-run #1 correction C10): a zero
+-- found among 0 candidates is not a negative result, it is an unsampled one.
+function CS.Applicable(label, count, population, witness)
+	local applicable = (population or 0) > 0
+	say(fmt("READ %s = %s | population=%s | APPLICABLE=%s | witness=%s",
+		tostring(label), tostring(count), tostring(population),
+		tostring(applicable), tostring(witness or "-- NONE NAMED --")))
+	return applicable
+end
+
+---- flow helpers ------------------------------------------------------------
+
+local function shutdown(reason)
+	CS.stage = "done"
+	say("SHUTDOWN " .. tostring(reason))
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then flush() end
+	Sleep(CS.quit_delay)
+	quit()
+end
+CS.Shutdown = shutdown
+
+-- untimed = true suppresses the END timing line (EF-045 correction C8): a step
+-- spanning a load or a save blocks render mode and under-reports itself by up
+-- to 11.5x. Loads take their number from the engine's own line.
+local function step(name, fn, untimed)
+	CS.stage = name
+	local t = RealTime()
+	say("STEP " .. name .. " BEGIN")
+	local ok, res = sprocall(fn)
+	if not ok then
+		say("STEP " .. name .. " ERROR")
+		shutdown("ERROR " .. name)
+		return false
+	end
+	if untimed then
+		say("STEP " .. name .. " END (no timing — this step blocks render mode)")
+	else
+		say(fmt("STEP %s END %dms", name, RealTime() - t))
+	end
+	if res == false then
+		shutdown("STOP " .. name .. " — the step asked to stop; its reason is the line above")
+		return false
+	end
+	return true
+end
+CS.Step = step
+
+local function wait_for(timeout, ready)
+	local deadline = RealTime() + timeout
+	while not ready() do
+		if RealTime() - deadline >= 0 then return false end
+		Sleep(500)
+	end
+	return true
+end
+CS.WaitFor = wait_for
+
+local function game_is_live()
+	local city   = rawget(_G, "MainCity")
+	local colony = rawget(_G, "UIColony")
+	return not not (city and city.labels and colony and colony.labels)
+end
+CS.GameIsLive = game_is_live
+
+---- load / save -------------------------------------------------------------
+
+function CS.Load(savefile, speed)
+	local err = LoadGame(savefile, {})            -- ⛔ never pass save_as_last
+	if err then
+		say("LOADERR " .. tostring(savefile) .. " " .. tostring(err))
+		return false
+	end
+	CS.loads = CS.loads + 1
+	say(fmt("LOAD OK #%d file=%s — LoadGame returned no error", CS.loads, tostring(savefile)))
+	if not wait_for(5 * 60 * 1000, game_is_live) then
+		say("LOADERR " .. tostring(savefile) .. " — city never came live")
+		return false
+	end
+	-- 15 s is the MEASURED-sufficient settle datum (30 s bought nothing), and it
+	-- is also longer than the rescue mod's report thread takes to reach its
+	-- WaitMessage (RT thread, Sleep(2000) — 10_SaveRescue.lua:550-557).
+	Sleep(CS.settle_time)
+	speed = speed or 1
+	local before = GetTimeFactor() / const.DefaultTimeFactor
+	local ok = pcall(function() UIColony:SetGameSpeed(speed) end)
+	Sleep(500)
+	local after = GetTimeFactor() / const.DefaultTimeFactor
+	say(fmt("READ speed: SetGameSpeed(%d) call=%s | before=%s after=%s",
+		speed, tostring(ok), tostring(before), tostring(after)))
+	return true
+end
+
+-- ⛔ save_as_last is NEVER passed — it would repoint the owner's Continue button.
+-- ⛔⛔ `savename` IS WRITTEN VERBATIM (EF-050) — the engine appends NOTHING.
+local SAVE_EXT = ".savegame.sav"
+
+function CS.Save(name)
+	name = tostring(name)
+	if name:sub(-#SAVE_EXT) ~= SAVE_EXT then
+		say(fmt("SAVE ⚠️ name '%s' carries no %s suffix — the engine writes savename VERBATIM (EF-050). Appending it.", name, SAVE_EXT))
+		name = name .. SAVE_EXT
+	end
+	local landed = false
+	CS.TryYield("SaveGame " .. tostring(name), function()
+		local err, nm = SaveGame(name, { savename = name, silent = true, no_screenshot = true })
+		say(fmt("SAVE SaveGame returned err=%s name=%s", tostring(err), tostring(nm)))
+		landed = not err
+		return err
+	end)
+	Sleep(1000)
+	say("SAVE WITNESS for " .. tostring(name)
+		.. " = the on-disk file read agent-side after this process exits, plus a LoadGame of it. NOT ListForTag (EF-049).")
+	return landed
+end
+
+---- ⛔⛔ THE THREE-REGISTRY GATE READ ----------------------------------------
+--
+-- ⛔ THREE LINES, NOT TWO: the rig has three mods that can be present or absent
+--    independently, and a leg that quotes fewer numbers than the configuration
+--    has mods describes part of the rig. All three print even when a registry is
+--    absent, because "absent" is itself a cell's expected reading (D13's
+--    four-OFF-states doctrine).
+
+local function read_pack_registry(global_name, label)
+	local pack = rawget(_G, global_name)
+	if type(pack) ~= "table" or type(pack.order) ~= "table" then
+		say(fmt("GATEREAD %s :: REGISTRY ABSENT (global %s is %s) — the mod's code did not run in this process",
+			tostring(label), tostring(global_name), type(pack)))
+		return 0, 0, nil
+	end
+	local active, total, rows = 0, 0, {}
+	for _, id in ipairs(pack.order) do
+		total = total + 1
+		local f = pack.fixes and pack.fixes[id]
+		local st = f and f.status or "MISSING"
+		if st == "active" then active = active + 1 end
+		rows[#rows + 1] = id .. "=" .. st
+	end
+	say(fmt("GATEREAD %s :: %d/%d active", tostring(label), active, total))
+	return active, total, pack
+end
+CS.ReadPackRegistry = read_pack_registry
+
+-- ⚠️ The rescue mod's registry is NOT the packs' shape: it keys
+--    `modules[id].status`, not `fixes[id].status` (00_Core.lua:112-137).
+local function read_rescue_registry(label)
+	local mod = rawget(_G, "SMRSaveRescue")
+	if type(mod) ~= "table" or type(mod.order) ~= "table" then
+		say(fmt("GATEREAD %s :: REGISTRY ABSENT (global SMRSaveRescue is %s) — the mod's code did not run in this process",
+			tostring(label), type(mod)))
+		return 0, 0, nil
+	end
+	local active, total, rows = 0, 0, {}
+	for _, id in ipairs(mod.order) do
+		total = total + 1
+		local m = mod.modules and mod.modules[id]
+		local st = m and m.status or "MISSING"
+		if st == "active" then active = active + 1 end
+		rows[#rows + 1] = id .. "=" .. st .. (m and m.detail and m.detail ~= "" and ("(" .. m.detail .. ")") or "")
+	end
+	say(fmt("GATEREAD %s :: %d/%d active", tostring(label), active, total))
+	say(fmt("GATEROW %s :: %s", tostring(label), table.concat(rows, " ")))
+	local ver = type(mod.ModVersion) == "function" and select(2, pcall(mod.ModVersion)) or nil
+	say(fmt("GATEREAD %s :: mod version reported by the mod itself = %s", tostring(label), tostring(ver)))
+	return active, total, mod
+end
+CS.ReadRescueRegistry = read_rescue_registry
+
+function CS.ReadGates(when)
+	say(fmt("GATES %s ------------------------------------------------", tostring(when)))
+	local fa, ft = read_pack_registry("SMRFixPack",   "fix pack")
+	local oa, ot = read_pack_registry("SMROptInPack", "opt-in pack")
+	local ra, rt = read_rescue_registry("save-rescue")
+	say(fmt("GATES %s :: pack=%d/%d | opt-in=%d/%d | save-rescue=%d/%d | map=%s | speed=%s | loads_this_process=%d",
+		tostring(when), fa, ft, oa, ot, ra, rt, tostring(rawget(_G, "CurrentMapName")),
+		tostring(GetTimeFactor() / const.DefaultTimeFactor), CS.loads))
+	return fa, ft, oa, ot, ra, rt
+end
+
+-- Which mods actually loaded CODE this process, read off ModsLoaded rather than
+-- inferred from our own globals (Mod.lua:2110-2114's own output).
+function CS.ReadModOrder(when)
+	local loaded = rawget(_G, "ModsLoaded")
+	if type(loaded) ~= "table" then
+		say(fmt("MODORDER %s :: NOT INSPECTABLE — ModsLoaded is %s", tostring(when), type(loaded)))
+		return {}
+	end
+	local ids = {}
+	for i, m in ipairs(loaded) do
+		ids[#ids + 1] = fmt("%d:%s", i, tostring(type(m) == "table" and m.id or m))
+	end
+	say(fmt("MODORDER %s :: %d mod(s) loaded, in load order :: %s",
+		tostring(when), #loaded, table.concat(ids, " ")))
+	return ids
+end
+
+CS.OPT_IDS = { "ClassicRockets", "AcknowledgedWarnings", "ResidencyControl",
+               "MultipleSuns", "DroneOverhaul", "CohortHousing", "NoHomeless" }
+
+function CS.ReadDialOptions(when)
+	local mods = rawget(_G, "Mods")
+	local def  = type(mods) == "table" and mods["SMR_CommunityOptInPack"]
+	local opts = def and def.options
+	if type(opts) ~= "table" then
+		say(fmt("DIALOPTS %s :: NOT INSPECTABLE — Mods[SMR_CommunityOptInPack] = %s, .options = %s",
+			tostring(when), type(def), type(opts)))
+		return nil
+	end
+	local parts = {}
+	for _, id in ipairs(CS.OPT_IDS) do
+		parts[#parts + 1] = id .. "=" .. tostring(rawget(opts, id))
+	end
+	say(fmt("DIALOPTS %s :: DroneSpeedDial=%s | DroneCarryDial=%s | toggles :: %s",
+		tostring(when), tostring(rawget(opts, "DroneSpeedDial")),
+		tostring(rawget(opts, "DroneCarryDial")), table.concat(parts, " ")))
+	return { speed = rawget(opts, "DroneSpeedDial"), carry = rawget(opts, "DroneCarryDial") }
+end
+
+---- ⛔⛔ THE CONFIG GATE — IT STOPS THE RUN ----------------------------------
+--
+-- WORKFLOW batch-2 harness rule 7, AMENDED 2026-08-11: "A gate whose only
+-- output is a line in a log is not a gate."
+--
+-- ⚠️ THIS SITTING'S CONFIGURATION IS SET TWO DIFFERENT WAYS AND THE GATE MUST
+--    NOT CARE WHICH.  The rescue mod is junction-controlled (agent-side,
+--    EF-055).  The two packs are MOD-MANAGER-controlled (owner-side, state 3,
+--    D13's four states) — their junctions stay in place the whole sitting and
+--    say NOTHING about whether their code ran.  So the only honest reading is
+--    the one below: the GLOBALS, in this process, after ModsLoadCode.
+function CS.RequireConfig(cell, want_fix, want_opt, want_rescue)
+	local fa, ft, oa, ot, ra, rt = CS.ReadGates("config-gate/" .. tostring(cell))
+	CS.ReadModOrder("config-gate/" .. tostring(cell))
+	CS.ReadDialOptions("config-gate/" .. tostring(cell))
+	local have_fix = type(rawget(_G, "SMRFixPack"))     == "table"
+	local have_opt = type(rawget(_G, "SMROptInPack"))   == "table"
+	local have_res = type(rawget(_G, "SMRSaveRescue"))  == "table"
+	local ok = (have_fix == not not want_fix)
+		and (have_opt == not not want_opt)
+		and (have_res == not not want_rescue)
+	if ok then
+		say(fmt("CONFIGGATE OK :: cell %s :: fix=%s (wanted %s) | opt-in=%s (wanted %s) | rescue=%s (wanted %s) :: %d/%d, %d/%d, %d/%d",
+			tostring(cell), tostring(have_fix), tostring(not not want_fix),
+			tostring(have_opt), tostring(not not want_opt),
+			tostring(have_res), tostring(not not want_rescue), fa, ft, oa, ot, ra, rt))
+		return true
+	end
+	say(fmt("CONFIGGATE ⛔ WRONG CONFIGURATION :: cell %s wanted fix=%s opt=%s rescue=%s but this process has fix=%s opt=%s rescue=%s. EVERY reading this run could take is VOID — the cell is not the cell. STOPPING.",
+		tostring(cell), tostring(not not want_fix), tostring(not not want_opt), tostring(not not want_rescue),
+		tostring(have_fix), tostring(have_opt), tostring(have_res)))
+	say("CONFIGGATE ⛔ OWNER-FACING: the game is about to close by itself. That is this gate, not a crash. The two packs are turned off in the MOD MANAGER and the change needs a FULL PROCESS RESTART (D13's four states); the rescue mod is turned on and off agent-side by its junction (EF-055). Call the agent — nothing is broken and nothing was measured.")
+	return false
+end
+
+---- ⛔ THE RESIDUE READ — BY NAME, AS HANDLE SETS ---------------------------
+--
+-- The curated table of D13_EXPOSED_SET.md §10.2. These names are SAVE CONTRACT
+-- (they kept the legacy `SMRFixPack_` prefix through the opt-in split on
+-- purpose) and this reader must never "tidy" one.
+--
+-- ⛔ Handles, not counts. Handles survive a save/reload; Lua table identity does
+--    not. A count that matches while the handle set differs is not a pass —
+--    that is how D13_VERIFICATION §4.4 caught the live pack still writing
+--    `reserved_at` between two cells that both read 1533.
+
+local FIELD_ROWS = {
+	{ id = "D5",  name = "SMRFixPack_reserved_at",              owner = "FP" },
+	{ id = "D6",  name = "SMRFixPack_shelter_try",              owner = "FP" },
+	{ id = "D7",  name = "SMRFixPack_payload_set",              owner = "FP" },
+	{ id = "D8",  name = "SMRFixPack_rocket_fuel_key",          owner = "FP" },
+	{ id = "D12", name = "SMRFixPack_ack_notworking",           owner = "OP" },
+	{ id = "D13", name = "SMRFixPack_closed_to_new_residents",  owner = "OP" },
+	{ id = "D14", name = "SMRFixPack_no_homeless",              owner = "OP" },
+}
+local MODIFIER_ROWS = {
+	{ id = "D15a", label = "Drone",  name = "SMRFixPack_DroneSpeedDial" },
+	{ id = "D15b", label = "Consts", name = "SMRFixPack_DroneCarryDial" },
+}
+local ENTRY_ROWS  = { "SMRFixPack_loop_version", "SMRFixPack_fixed_loop" }
+CS.KEEP_MODIFIER_PREFIX = "SMRFixPack_F35_"
+CS.KEEP_COLONY_FIELD    = "SMRFixPack_F48_StationConnectors"
+
+-- ⛔ The walk is the ARTIFACT'S OWN WALK: `Cities`, then every list in
+--    city.labels, each object visited once. Reading with a different traversal
+--    than the code under test measures a different population.
+function CS.WalkObjects(visit)
+	local cities = rawget(_G, "Cities")
+	if type(cities) ~= "table" then return 0, {} end
+	local seen, scanned = {}, 0
+	local pops = { Colonist = 0, Building = 0, Dome = 0, DroneControl = 0, Rocket = 0 }
+	local function look(obj)
+		if type(obj) ~= "table" or seen[obj] then return end
+		seen[obj] = true
+		scanned = scanned + 1
+		if IsKindOf(obj, "Colonist")     then pops.Colonist = pops.Colonist + 1 end
+		if IsKindOf(obj, "Building")     then pops.Building = pops.Building + 1 end
+		if IsKindOf(obj, "Dome") or IsKindOf(obj, "MicroGHabitatBase") then pops.Dome = pops.Dome + 1 end
+		if IsKindOf(obj, "DroneControl") then pops.DroneControl = pops.DroneControl + 1 end
+		if IsKindOf(obj, "RocketBase")   then pops.Rocket = pops.Rocket + 1 end
+		visit(obj)
+	end
+	for _, city in ipairs(cities) do
+		if type(city) == "table" then
+			look(city)
+			local labels = city.labels
+			if type(labels) == "table" then
+				for _, list in pairs(labels) do
+					if type(list) == "table" then
+						for _, obj in ipairs(list) do look(obj) end
+					end
+				end
+			end
+		end
+	end
+	return scanned, pops
+end
+
+local function handles_line(list)
+	local parts = {}
+	for i = 1, #list do parts[#parts + 1] = tostring(list[i]) end
+	return table.concat(parts, ",")
+end
+CS.HandlesLine = handles_line
+
+function CS.ReadResidue(when)
+	say(fmt("RESIDUE %s ==========================================", tostring(when)))
+	local rec = { fields = {}, mods = {}, entries = {}, keep = {} }
+	for _, row in ipairs(FIELD_ROWS) do rec.fields[row.name] = {} end
+
+	local scanned, pops = CS.WalkObjects(function(obj)
+		for _, row in ipairs(FIELD_ROWS) do
+			-- rawget: a class-table default could never read as an instance field
+			if rawget(obj, row.name) ~= nil then
+				local hs = rec.fields[row.name]
+				hs[#hs + 1] = rawget(obj, "handle") or -1
+			end
+		end
+	end)
+	rec.scanned, rec.pops = scanned, pops
+	say(fmt("RESIDUEPOP %s :: scanned %d distinct labelled object(s) | Colonist=%d Building=%d Dome/Habitat=%d DroneControl=%d Rocket=%d",
+		tostring(when), scanned, pops.Colonist, pops.Building, pops.Dome, pops.DroneControl, pops.Rocket))
+
+	for _, row in ipairs(FIELD_ROWS) do
+		local hs = rec.fields[row.name]
+		table.sort(hs)
+		say(fmt("RESIDUEROW %s :: %-4s %s %-38s n=%d handles=%s",
+			tostring(when), row.id, row.owner, row.name, #hs, handles_line(hs)))
+	end
+
+	-- label modifiers (D15a/b) + the KEEP census (D10 prefix, D11 colony field)
+	local colony = rawget(_G, "UIColony")
+	local lm = type(colony) == "table" and rawget(colony, "label_modifiers")
+	if type(lm) ~= "table" then
+		say(fmt("RESIDUEMOD %s :: label_modifiers NOT INSPECTABLE (%s) — the D15/D10 rows are UNSAMPLED in this read, not zero",
+			tostring(when), type(lm)))
+	else
+		local keep_ids = {}
+		for label, byid in pairs(lm) do
+			if type(byid) == "table" then
+				for id in pairs(byid) do
+					local sid = tostring(id)
+					if sid:sub(1, #CS.KEEP_MODIFIER_PREFIX) == CS.KEEP_MODIFIER_PREFIX then
+						keep_ids[#keep_ids + 1] = tostring(label) .. "/" .. sid
+					end
+					for _, row in ipairs(MODIFIER_ROWS) do
+						if sid == row.name then
+							rec.mods[row.name] = tostring(label)
+						end
+					end
+				end
+			end
+		end
+		table.sort(keep_ids)
+		for _, row in ipairs(MODIFIER_ROWS) do
+			say(fmt("RESIDUEMOD %s :: %-5s %-30s present=%s on label=%s",
+				tostring(when), row.id, row.name,
+				tostring(rec.mods[row.name] ~= nil), tostring(rec.mods[row.name] or "-")))
+		end
+		rec.keep.d10 = keep_ids
+		say(fmt("RESIDUEKEEP %s :: D10 %s* modifier(s) = %d :: %s",
+			tostring(when), CS.KEEP_MODIFIER_PREFIX, #keep_ids,
+			#keep_ids > 0 and table.concat(keep_ids, " ") or "NONE"))
+	end
+	rec.keep.d11 = type(colony) == "table" and rawget(colony, CS.KEEP_COLONY_FIELD) or nil
+	say(fmt("RESIDUEKEEP %s :: D11 %s = %s", tostring(when), CS.KEEP_COLONY_FIELD, tostring(rec.keep.d11)))
+
+	-- D3/D4: fields inside the vanilla RainsDisasterThreads GameVar entries
+	local rains = rawget(_G, "RainsDisasterThreads")
+	if type(rains) ~= "table" then
+		say(fmt("RESIDUEENTRY %s :: RainsDisasterThreads NOT INSPECTABLE (%s) — D3/D4 UNSAMPLED",
+			tostring(when), type(rains)))
+	else
+		local n = 0
+		for key, entry in pairs(rains) do
+			n = n + 1
+			if type(entry) == "table" then
+				local parts = {}
+				for _, name in ipairs(ENTRY_ROWS) do
+					parts[#parts + 1] = name .. "=" .. tostring(rawget(entry, name))
+				end
+				rec.entries[tostring(key)] = table.concat(parts, " ")
+				say(fmt("RESIDUEENTRY %s :: rains['%s'] :: %s | activation_thread valid=%s | main_thread valid=%s",
+					tostring(when), tostring(key), table.concat(parts, " "),
+					tostring(not not IsValidThread(rawget(entry, "activation_thread"))),
+					tostring(not not IsValidThread(rawget(entry, "main_thread")))))
+			end
+		end
+		CS.Applicable("rains entries", n, n, "RainsDisasterThreads keys")
+	end
+
+	say(fmt("RESIDUEMETEOR %s :: Meteors thread valid = %s", tostring(when),
+		tostring(not not IsValidThread(rawget(_G, "Meteors")))))
+	-- ⛔ D1/D2 are the engine's GameVar mechanism, NOT the artifact's doing
+	--    (persist.lua:136-142, promoted SOURCE->MEASURED by D13_VERIFICATION
+	--    §4.3). Printed so nobody reports their absence as a removal.
+	say(fmt("RESIDUEGAMEVAR %s :: SMRFixPack_MeteorLatch=%s FirstAsteroidPrefabs=%s — ⛔ these are mod-registered GameVars, dropped by the ENGINE on any pack-less load; never report their absence as something a tool removed",
+		tostring(when), tostring(rawget(_G, "SMRFixPack_MeteorLatch")),
+		tostring(rawget(_G, "SMRFixPack_FirstAsteroidPrefabs"))))
+	return rec
+end
+
+-- The §10.9 contract, evaluated in one line so a verdict cannot be assembled by
+-- eye afterwards. REMOVE survivors > 0 or a missing KEEP name is a STOP.
+function CS.AssertCleared(rec, what)
+	local survivors = {}
+	for _, row in ipairs(FIELD_ROWS) do
+		local hs = rec.fields[row.name] or {}
+		if #hs > 0 then survivors[#survivors + 1] = fmt("%s=%d", row.name, #hs) end
+	end
+	for _, row in ipairs(MODIFIER_ROWS) do
+		if rec.mods[row.name] then survivors[#survivors + 1] = row.name end
+	end
+	for key, line in pairs(rec.entries) do
+		if line:find("=true") or line:find("=1%.") then
+			survivors[#survivors + 1] = "rains[" .. key .. "] " .. line
+		end
+	end
+	local keep_n = rec.keep.d10 and #rec.keep.d10 or 0
+	local keep_ok = (keep_n > 0) or (rec.keep.d11 ~= nil)
+	say(fmt("CLEARED %s :: REMOVE-list survivors = %d%s", tostring(what), #survivors,
+		#survivors > 0 and (" :: " .. table.concat(survivors, " | ")) or " — every REMOVE name reads ABSENT by name"))
+	say(fmt("CLEARED %s :: KEEP-list present = %s :: D10 x%d | D11 = %s%s",
+		tostring(what), tostring(keep_ok), keep_n, tostring(rec.keep.d11),
+		keep_ok and "" or "  ⛔ STOP-THE-LEG CONDITION (spec 10.9 clause 1)"))
+	return #survivors, keep_ok
+end
+
+---- ⭐ F102's minute — the instrument that FINDS its subject ------------------
+--
+-- corun-batch-1 ledger 2: "every measure moment names the instrument that FINDS
+-- its subject, and prep confirms the subject still exists at sitting time." M1
+-- was budgeted 3 minutes and ate ~25 because its fixture had evaporated.
+--
+-- ⛔ The fixture named in every earlier draft (a save called `Sylmacaink BH25`)
+--    DOES NOT EXIST — all 90 saves were read at their metadata headers and
+--    nothing on disk carries that name. What the owner's campaign DOES carry is
+--    two already-generated asteroid maps (BlankAsteroidDonut_01,
+--    BlankAsteroidBranchOut_01, read out of the save header 2026-08-13), and a
+--    deposit placed in an OLD save is the half of F102's fix that the
+--    2026-08-12 console-spawn leg never touched: the class-default retarget
+--    covers deposits placed AFTER load, the OnMsg.LoadGame UpdateEntity sweep
+--    covers the ones already there (Fix_ExoticDepositSign.lua:84-95).
+function CS.CensusDeposits(when)
+	local cls = rawget(_G, "SubsurfaceDepositPreciousMinerals")
+	say(fmt("F102 %s :: class present=%s | class-default entity=%s | shipped sign was 'SignPreciousMineralsDeposit', the fix retargets to 'SignRareMineralsDeposit'",
+		tostring(when), tostring(type(cls) == "table"),
+		tostring(type(cls) == "table" and rawget(cls, "entity") or "n/a")))
+	say(fmt("F102 %s :: IsValidEntity('SignRareMineralsDeposit')=%s IsValidEntity('SignPreciousMineralsDeposit')=%s",
+		tostring(when), tostring(not not IsValidEntity("SignRareMineralsDeposit")),
+		tostring(not not IsValidEntity("SignPreciousMineralsDeposit"))))
+
+	local maps = rawget(_G, "LoadedMaps")
+	local mapnames = {}
+	for _, m in ipairs(type(maps) == "table" and maps or {}) do
+		mapnames[#mapnames + 1] = fmt("slot=%s:%s", tostring(rawget(m, "slot")), tostring(rawget(m, "name") or rawget(m, "map")))
+	end
+	say(fmt("F102 %s :: LoadedMaps = %d :: %s", tostring(when), #mapnames, table.concat(mapnames, " ")))
+
+	local found, first = {}, nil
+	local for_each = rawget(_G, "AllMapsForEach")
+	if type(for_each) ~= "function" then
+		say(fmt("F102 %s :: AllMapsForEach NOT INSPECTABLE — the census is UNSAMPLED, not zero", tostring(when)))
+		return {}, nil
+	end
+	CS.Try("AllMapsForEach SubsurfaceDepositPreciousMinerals", function()
+		for_each("map", "SubsurfaceDepositPreciousMinerals", function(obj)
+			found[#found + 1] = obj
+			if not first then first = obj end
+		end)
+	end)
+	for i, obj in ipairs(found) do
+		local ent, slot, sel
+		pcall(function() ent  = obj:GetEntity() end)
+		pcall(function() slot = obj:GetMapSlot() end)
+		pcall(function() sel  = obj:IsKindOf("SubsurfaceDeposit") and obj.working ~= nil end)
+		say(fmt("F102 %s :: deposit %d/%d %s :: entity=%s | map_slot=%s | on_current_map=%s | revealed=%s | amount=%s",
+			tostring(when), i, #found, id_of(obj), tostring(ent), tostring(slot),
+			tostring(not not (obj.IsOnCurrentMap and obj:IsOnCurrentMap())),
+			tostring(rawget(obj, "revealed")), tostring(rawget(obj, "amount"))))
+	end
+	CS.Applicable("F102 subsurface Exotic Minerals deposits", #found, #found,
+		"AllMapsForEach over LoadedMaps — a zero here means the loaded maps carry none, which is a DIFFERENT fact from the fix not working")
+	return found, first
+end
+
+-- Put the owner's eyes on it. ViewObjectAndChangeMap is vanilla's own
+-- cross-map viewer (Lua/UI/InGameInterface.lua:289-297): it changes the map slot
+-- when the object is elsewhere and then cycles the camera onto it, all inside a
+-- real-time thread of its own — so this never yields on a game-time frame.
+function CS.ShowDeposit(obj)
+	if type(obj) ~= "table" then
+		say("F102 SHOW :: nothing to show — the census found no deposit")
+		return false
+	end
+	local ok = false
+	CS.Try("ViewObjectAndChangeMap", function()
+		local f = rawget(_G, "ViewObjectAndChangeMap")
+		if type(f) ~= "function" then error("ViewObjectAndChangeMap is " .. type(f)) end
+		f(obj)
+		ok = true
+	end)
+	Sleep(4000)
+	say(fmt("F102 SHOW :: after the camera move, CurrentMapName=%s | the deposit reports on_current_map=%s | selected=%s",
+		tostring(rawget(_G, "CurrentMapName")),
+		tostring(not not (obj.IsOnCurrentMap and obj:IsOnCurrentMap())),
+		tostring(id_of(rawget(_G, "SelectedObj")))))
+	return ok
+end
+
+-- The owner-visible form of the same reading. ListFixes prints one line per
+-- module through the pack's own logger, so the `ExoticDepositSign [active]`
+-- the checklist asks for lands in this same log verbatim.
+function CS.ListFixes(when)
+	local pack = rawget(_G, "SMRFixPack")
+	if type(pack) ~= "table" then
+		say(fmt("LISTFIXES %s :: SMRFixPack absent — nothing to list", tostring(when)))
+		return
+	end
+	local f = pack.fixes and pack.fixes["ExoticDepositSign"]
+	say(fmt("LISTFIXES %s :: ExoticDepositSign status=%s detail=%s",
+		tostring(when), tostring(f and f.status), tostring(f and f.detail)))
+	CS.Try("SMRFixPack.ListFixes", function() pack.ListFixes() end)
+end
+
+---- ⭐ attended park + per-load instrumentation -------------------------------
+--
+-- The owner will load and save BY HAND from here on. An OnMsg.PostLoadGame
+-- handler catches every one of those loads — but it must not read in the same
+-- frame: the Test Kit loads FIRST (EF-054 order), so an undeferred handler
+-- would read the state BEFORE the rescue mod's synchronous pass had run. The
+-- 5 s real-time deferral is what puts our read after both the pass and the
+-- 2 s-deferred report dialog.
+CS.per_load_read = false
+
+function CS.InstrumentOwnerLoads(residue)
+	CS.per_load_read = true
+	CS.residue_on_load = not not residue
+	OnMsg.PostLoadGame = function()
+		CreateRealTimeThread(function()
+			Sleep(5000)
+			CS.loads = CS.loads + 1
+			say(fmt("OWNERLOAD #%d ---------------------------------------------- a load happened that this payload did not drive; everything below is read 5 s after it, i.e. AFTER any synchronous PostLoadGame pass", CS.loads))
+			CS.ReadGates("owner-load#" .. CS.loads)
+			if CS.residue_on_load then
+				local rec = CS.ReadResidue("owner-load#" .. CS.loads)
+				CS.AssertCleared(rec, "owner-load#" .. CS.loads)
+			end
+		end)
+	end
+	say("OWNERLOAD instrumentation ARMED — every subsequent load prints a gate read"
+		.. (residue and " and a full residue read" or ""))
+end
+
+-- ⛔ It may NOT count engine error lines: the engine writes those straight to
+--    the log file and the mod environment has no file read (io/os are both
+--    ModEnvBlacklist keys). A count printed from here would be invented.
+-- ⚠️ The token an error sweep greps for is spelled AROUND, not written.
+function CS.ErrorWatchNote()
+	say(fmt("ERRORWATCH %s — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting %s ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=%s loads_this_process=%d",
+		tostring(CS.tag), tostring(CS.tag), tostring(CS.stage), CS.loads))
+end
+
+-- ⛔⛔ THE ATTENDED PARK. This is the one thing no previous harness has done.
+--     It must never quit: the owner is at the keyboard and the process is
+--     theirs from here. The heartbeat exists so the sitting's real attended
+--     cost is MEASURED off this log afterwards rather than estimated —
+--     WORKFLOW: "do not report owner-minutes saved as if zero were the target;
+--     report cost against promise."
+function CS.Handover(lines)
+	CS.stage = "handover"
+	CS.t0 = RealTime()
+	say("================================================================")
+	say("HANDOVER — the rig is done. The keyboard is yours.")
+	for _, l in ipairs(lines or {}) do say("HANDOVER :: " .. tostring(l)) end
+	say("HANDOVER :: when this moment is finished, QUIT THE GAME NORMALLY (main menu -> Quit). A graceful exit is what flushes this log's tail; a killed process loses it (EF-047).")
+	say("================================================================")
+	CreateRealTimeThread(function()
+		while true do
+			Sleep(CS.heartbeat)
+			local sols = "?"
+			pcall(function() sols = tostring(UIColony.day) end)
+			say(fmt("HEARTBEAT %s :: parked %d s of attended time so far | map=%s | speed=%s | sol=%s | loads=%d  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps",
+				tostring(CS.tag), (RealTime() - CS.t0) / 1000,
+				tostring(rawget(_G, "CurrentMapName")),
+				tostring(GetTimeFactor() / const.DefaultTimeFactor), sols, CS.loads))
+		end
+	end)
+end
+
+---- watchdog + flow ---------------------------------------------------------
+
+function CS.Flow()
+	-- ⛔ THE WATCHDOG ONLY KILLS AN UNATTENDED CELL. Quitting the game under an
+	--    owner who is mid-sitting would destroy the very thing being measured.
+	if not CS.attended then
+		CreateRealTimeThread(function()
+			local deadline = RealTime() + CS.watchdog
+			while CS.stage ~= "done" do
+				if RealTime() - deadline >= 0 then
+					say("WATCHDOG TIMEOUT at stage " .. tostring(CS.stage))
+					local flush = rawget(_G, "FlushLogFile")
+					if flush then flush() end
+					Sleep(1000)
+					quit()
+					return
+				end
+				Sleep(1000)
+			end
+		end)
+	else
+		say("WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.")
+	end
+
+	say(fmt("=== combined-sitting %s === attended=%s", tostring(CS.tag), tostring(CS.attended)))
+
+	if not step("1-waiting-menu", function()
+		if not wait_for(CS.menu_timeout, function() return not not GetPreGameMainMenu() end) then
+			return false
+		end
+		Sleep(2000)
+	end) then return end
+
+	local ok = sprocall(CS.Payload)
+	if not ok then
+		say("PAYLOAD ERROR at stage " .. tostring(CS.stage))
+		shutdown("ERROR payload")
+		return
+	end
+	if not CS.attended then shutdown("done") end
+end
+
+function CS.Boot()
+	CreateRealTimeThread(function()
+		-- CreateRealTimeThread runs its body synchronously up to the first yield,
+		-- so this Sleep is what puts everything below after ModsLoadCode().
+		Sleep(1)
+		CS.Flow()
+	end)
+end

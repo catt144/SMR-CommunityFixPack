@@ -70,28 +70,47 @@ owed input stays here no matter how struck-through it looks.
 
 ### ⭐⭐ NEW 2026-08-13 — D13 CHAIN CLOSED; the ONE combined sitting is READY (step ② — the release line's next move is yours)
 
-26b. ⭐ **THE COMBINED SITTING IS PREPPED AND WAITING ON YOUR CHAIR.** The
-    d13-rescue chain is closed audit-sustained (artifact built + verified
-    unattended: 9 launches, removed 1617 by name, kept both repairs, zero Lua
-    errors, residue-zero measured; your cost was the one 15-second tick).
-    **Kickoff: open a session on `agent/prompts/COMBINED_SITTING.md` and say
-    "run the combined sitting"** — all prep is agent-side with the game
-    closed; your attended part is ~25–40 min. The measure-moments, each with
-    its instrument and verdict words (full table in the brief):
-    * **F102's minute** (packs ON): load `Sylmacaink BH25`, eyeball the three
-      crystal deposit signs render + selectable; `ListFixes` shows
-      `ExoticDepositSign [active]`. Closes item 11's local half.
-    * **PT-20 redo done RIGHT**: your Mod-Manager disable + **full restart**
-      (state 3 — the old 98-vs-98 may have measured the half-disabled state) +
-      ~10 min ordinary play; every rig reading carries its `pack=0/0` gate
-      line; result recorded as superseding/confirming the old comparison.
+26b. ⭐⭐ **THE COMBINED SITTING'S PREP IS *DONE AND MEASURED* — IT IS WAITING ON
+    YOUR CHAIR ONLY** (2026-08-13). Three unattended dry-run launches have
+    already happened with the game closed and nobody at the keyboard; every
+    fixture is verified to exist, the harness is proven, and the predictions
+    are committed. **Sit down and say "run the combined sitting"** on a session
+    opened at `agent/prompts/COMBINED_SITTING.md`. **Your part: ~30–45 min, four
+    launches, two Mod-Manager visits.** The measure-moments (full table in the
+    brief):
+    * **F102's minute** (packs ON). ⛔ **Two corrections you would otherwise have
+      hit at the keyboard.** There is **no save called `Sylmacaink BH25`** — all
+      88 were read at their headers and nothing carries that name. And there is
+      **ONE** deposit sign on your campaign's asteroid, not three. ⭐ The rig
+      switches to the asteroid map and *selects the deposit for you*; you only
+      look. Everything else is already measured: the fix's LoadGame sweep fired
+      on it (`1 … re-signed onto the clean entity`), the deposit reads the new
+      entity, and `ExoticDepositSign [active]` is in the log. Your words:
+      **"sign renders: yes/no"**, **"selectable: yes/no"**. Closes item 11's
+      local half.
+    * **PT-20 redo done RIGHT**: your Mod-Manager disable of **both** packs
+      (Test Kit stays) + **full restart** (state 3 — the old 98-vs-98 may have
+      measured the half-disabled state) + ~10 min ordinary play + one save and
+      reload; every rig reading carries its `pack=0/0` gate line.
     * ⭐ **D13 attended after-sweep, same state-3 window**: you load a staged
       big-save copy and WATCH — the two dialogs write no log line, so your
       eyes are the only instrument that can ever sample them (report dialog
       raises with the frozen text; second load silent; stand-down dialog once
       after you re-enable). **A clean run here is what finally grants D13
-      `tested`.**
-    * Optional: the CAPTURE_SITTING passes that fold in (item 24).
+      `tested`.** ⭐ The staged save carries **both Drone stat dials natively**,
+      so you will watch the artifact take off the one piece of residue that keeps
+      changing a player's game after they uninstall.
+    * Optional: the CAPTURE_SITTING passes that fold in (item 24) — prep worked
+      out which pass rides which launch, and they cost no extra restarts.
+    ℹ️ **Two things prep found and fixed, no decision owed.** (1) Leaving Save
+    Rescue installed for the PT-20 leg would have silently voided it — it would
+    have stripped the very leftovers PT-20 exists to prove are harmless. It is
+    now pulled for that leg and restored afterwards, agent-side, at no cost to
+    you. (2) ⛔ **A byte copy of an autosave is still an autosave to the game's
+    rotation, and it deleted this sitting's own fixture *and* your held
+    `Autosave Sol 311` during prep.** `Sol 311` was **restored byte-exact** from
+    the pre-copy; the fixture was re-staged from a save that is not an autosave;
+    `EF-056` is amended. Nothing of yours is lost.
     ⚖️ **One small call, batched from the chain (answer whenever):** the
     status vocabulary has no word for "verified-unattended" (`doccheck`
     rejects `verified`), so that truth lives in narrative only.
