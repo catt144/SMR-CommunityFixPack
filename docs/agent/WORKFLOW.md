@@ -839,8 +839,19 @@ say what the owner reads afterwards. Owner-facing record of the decision:
 - Owner tasks first: preview image (PDX ≤2 MB / Steam ≤1 MB), screenshots,
   portal rules check for console publishing (`docs/archive/AUDIT_FINDINGS.md` plan 2.5).
 - metadata.lua: bump `version_major`/`version_minor`, refresh `last_changes`.
-  `short_description`, `ignore_files`, `optional_mod` are already in place
-  (audit 2.1). `lua_revision` stays 350453.
+  `short_description`, `optional_mod` are already in place (audit 2.1).
+  `lua_revision` stays 350453.
+  ⛔ **`ignore_files` is NOT already in place — owner ruling 2026-08-13
+  (checklist 23), do it in this pass, in ALL THREE mods.** The upload packs the
+  **entire mod folder recursively** and filters only on these patterns
+  (`ModTools\Src\CommonLua\Classes\GedModEditor.lua:678-741`), so everything
+  unlisted ships inside the player's download. Missing today: **`tools/`,
+  `CLAUDE.md`, `LICENSE`, `.gitattributes`** — and the save-rescue mod's
+  `metadata.lua` has never been audited for this at all. Nothing *runs* (only
+  `code`-listed files execute), but `CLAUDE.md` is agent instructions and does
+  not belong on a player's disk. ⚠️ Whether `.github/` escapes the `*.git/*`
+  pattern is **unverified** — `MatchWildcard` is an engine function with no Lua
+  body; confirm empirically by packing once and listing the archive.
 - MOD_DESCRIPTION.md: delete the `[DRAFT NOTE]` markers; do NOT promise the
   ClassicRockets export half; sync the fix list with agent/bugs/ statuses.
   ⭐ **Add the "judgment calls" section** (owner ADOPTED the relabel proposal

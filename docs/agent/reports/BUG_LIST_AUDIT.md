@@ -355,13 +355,19 @@ API-read quote; his GitHub is the remaining watch channel, and the §7.1
 subscribe suggestion is moot until/unless it returns); **GromGor** (5 fix/workaround mods, no readable source); **Oxygenus**
 (Asteroid Rocket Waste Fix, 397 subs); MyNutzYurFace (underground lighting).
 
-**Rejected (with reasons):** **LukeH** — one genuine fix mod (Martian Express
+**Not used as sources, and why:** *(heading reworded 2026-08-13 by owner
+decision — checklist 25. It read "Rejected (with reasons)", which is accurate
+inside this section and harsh to anyone who lands on this line without the
+paragraphs above it. Every assessment below is unchanged; only the verdict tone
+went. These are real people, these repos are public on purpose, and one of them
+authored the site this project took as its documentation model.)*
+**LukeH** — one genuine fix mod (Martian Express
 Patch — and its description witnesses the OG-DLC train families) but
 content-first, no readable repo; note he IS active on Relaunched and his
 recreation's description witnesses a vanilla SM:R defect ("Colonists can work
 in any interior buildings of a dome in the range of their destination
 station... (not working properly in vanilla SM:R)"). **Ayzo** — the "Martian
-Express Fix Pack" is his, not LukeH's, and is an aggregator repack. **Fizzle
+Express Fix Pack" is his, not LukeH's, and aggregates other authors' fixes. **Fizzle
 Fuze** (one-line fix corpus), **Silva/Dash** (content-only, both games),
 **Thorik** (AI redesigns, not defect repair, no source), **akarnokd**
 (automation QoL), **FirestormMk3** ("patch" = mission-patch decal), plus nine

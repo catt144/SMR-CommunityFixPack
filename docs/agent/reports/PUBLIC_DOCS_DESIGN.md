@@ -819,19 +819,61 @@ entries (§5's label beat):**
 >   devils than the game has ever actually delivered, in either the original or
 >   the remaster. *(restores authored settings — more devils on some maps)*
 >
-> If you disagree with any of these, they can each be switched off individually
-> on PC. We would rather tell you they exist than have you find one.
+✅✅ **APPROVED BY THE OWNER 2026-08-13, in exactly the form above** — the five
+bullets ship, and **the draft's closing line was CUT.** Checklist 22 CLOSED
+after nine days open. The five entries and their labels come from
+`CHAIN_QA_REPORT.md` §3 (F55, F40, F73(b), F70, F97); their player-facing
+descriptions were written from the entries, not from that table's shorthand.
 
-⚠️ **The last line is conditional** — the per-fix switch is PC-only (it needs
-the console or a companion mod). ⛔ Prompt 3 must either qualify it on the spot
-or drop it, and must not let it stand unqualified where a console player reads
-it. The five entries and their labels come from `CHAIN_QA_REPORT.md` §3
-(F55, F40, F73(b), F70, F97); their player-facing descriptions above were
-written from the entries, not from that table's shorthand.
+### ⛔ 9.1 — the cut line, and a FALSE CLAIM sitting in the frozen file
 
-**⇒ The owner's job here is 15 minutes of reading and either "yes" or edits.**
-That is the whole point of drafting it: the item has been open nine days because
-it asked for composition rather than approval.
+The cut line read *"If you disagree with any of these, they can each be switched
+off individually on PC. We would rather tell you they exist than have you find
+one."* ⛔ **The owner challenged it — *"as far as I know right now, we have no
+way to switch off parts of the fix module"* — and was right.** Source-verified
+in response:
+
+`SMRFixPack_Disabled["<id>"] = true` genuinely vetoes a fix. `Register` returns
+before `run_apply` (`00_Core.lua:384-388`), and all five judgment-call modules
+are `apply = function()` installers, so the veto is **complete for exactly the
+five the line was about**. ⛔ **But `Register` runs at mod load**, and that is the
+whole of the constraint:
+
+| route | works? |
+|---|---|
+| a companion mod that loads before ours | ✅ yes — a **modder** operation, not a player one |
+| **the developer console, in game** | ⛔ **NO.** The fix is applied long before a player can type |
+| Mod Options | ⛔ the fix pack has **no options page at all** — every setting moved to the opt-in mod at the split |
+
+⚠️ One partial exception that proves the rule: `Fix_DustSicknessBiorobots` routes
+its **retroactive cure** through `SMRFixPack.WhenActive` (`00_Core.lua:180-188`),
+which does re-read the table mid-session — but not its ongoing behaviour. The
+other four have no mid-session path at all. ⚠️ And **none of the five live in the
+opt-in pack**, whose Mod Options toggles are the real every-platform switch.
+`EF-002` records the general mechanism; `CHAIN_QA_REPORT.md:331` already flagged
+a related dead-console-veto gap for D03/D07, so the project half-knew.
+
+⛔⛔ **THE CORRECTION PROMPT 3 MUST MAKE.** `MOD_DESCRIPTION.md:487-493` —
+frozen, and the raw material for the real store page — currently tells players:
+*"Set `SMRFixPack_Disabled = { FixIdHere = true }` **in the console** or in a
+tiny mod that loads before this one."* **The console half is false and would
+have shipped.** Prompt 3 rewrites that paragraph to name the companion-mod route
+only, and to say plainly that it is a modder-level facility. ⚠️ **This is the
+SECOND rule-6 violation found in that file** after the F76 draft (§5.6) — two in
+one reading of one document. Treat every remaining claim in it as unverified.
+
+⚠️ **Source-verified, NOT play-verified.** PT-62's `P13` veto lever has never
+been exercised live; the finding is derived from shipped code and a recorded
+fact, not from a leg.
+
+⭐ **The design lesson, which is bigger than this paragraph.** The owner caught
+it from play instinct, against a sentence that had passed a design pass, the
+frozen file's own review and a chain QA. **A claim about what a player can DO
+needs a ROUTE check, not a source citation.** A mechanism existing in the code is
+not the same as a player being able to reach it — and only the second is what a
+store page promises. ⇒ **Standing instruction for prompts 3, 4 and 5: for every
+sentence of the form "you can X", name the route and confirm a retail player on
+each platform can walk it.**
 
 ---
 
@@ -842,10 +884,14 @@ it asked for composition rather than approval.
 | # | decision | status |
 |---|---|---|
 | 21 | **Site topology** — own repo vs fix-pack repo | ✅✅ **DECIDED + DONE 2026-08-13** — own repo, `catt144/SMR-CommunityMods`, scaffold moved, both copies gone from here (§2) |
-| 22 | **The judgment-calls wording** | ⚖️ **new** — draft in §9, owner approves or edits |
-| 23 | **`ignore_files` packaging hygiene** | ⚖️ **new** — `tools/`, `CLAUDE.md`, `LICENSE`, `.gitattributes` pack into the upload, in every mod repo (§2). The site was on this list until it moved out |
-| 24 | **Preview art ×2** | ⚖️ **new** — the only unbounded item; routed early on purpose |
-| 25 | **The third-party roster wording** | ⚖️ **new** — §11 |
+| 22 | **The judgment-calls wording** | ✅✅ **DECIDED 2026-08-13** — §9's five bullets ship, closing line CUT. ⛔ And the challenge exposed a false claim in the frozen file (§9.1) |
+| 23 | **`ignore_files` packaging hygiene** | ✅ **DECIDED 2026-08-13** — add the patterns **at launch prep, all THREE mods**; recorded on `WORKFLOW.md`'s release steps |
+| 24 | **Preview art ×2** | ✅ **DECIDED 2026-08-13** — build a plain text-on-image **floor** now so launch is never art-blocked; replaceable at zero cost. **Queued agent work, not yet built** |
+| 25 | **The third-party roster wording** | ✅✅ **DECIDED + DONE 2026-08-13** — both edits applied to `BUG_LIST_AUDIT.md`; every assessment byte-unchanged |
+
+⭐⭐ **ALL FIVE ROUTED DECISIONS CLOSED THE SAME DAY THEY WERE ROUTED** (21 too,
+§2). The chain has **no owner-side blocker left**. The only unbuilt artifact is
+item 24's placeholder art.
 
 ✅ **Closed, and this chain's brief was stale on it:** the opt-in mod's display
 name. Decided and swept 2026-08-13 (§0).

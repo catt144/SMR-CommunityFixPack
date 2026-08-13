@@ -374,34 +374,48 @@ deleted when the chain closes).
     keep the site out of the upload, forever"; its own repo makes that
     impossible to forget. Still your call, still 15 seconds either way.
 
-### ⭐ NEW 2026-08-13 — public documentation, part 2: four things back to you
+### ✅✅ 2026-08-13 — public documentation, part 2: ALL FOUR DECIDED, same day
 
-The `public-docs` chain's design prompt is done. Full reasoning for all four:
-`agent/reports/PUBLIC_DOCS_DESIGN.md`. **None of them blocks the chain** — the
-QA prompt runs next regardless. Two are quick reads, one is a 15-minute
-approval, one is the only open item with no ceiling on it.
+The `public-docs` chain's design prompt is done and **you cleared every item it
+routed, in one sitting.** Full reasoning: `agent/reports/PUBLIC_DOCS_DESIGN.md`.
+⭐ **Nothing in this section is owed by you any more** — it stays here rather
+than moving to the archive only because item 24's artifact is not built yet.
 
-22. ⚖️ **The "judgment calls" wording — DRAFTED, so you approve rather than
-    compose.** This has been open since 2026-08-04, when you adopted the
-    proposal (`--approved`) and the wording stayed owed. It asked you to write
-    prose, which is why nine days passed. **So I wrote it.**
-    **What it is:** five of the shipped fixes are correct repairs whose
-    *bug-ness* is a design judgment (drones writing a building off after one
-    blocked approach · Biorobots catching Dust Sickness · colonists sheltering
-    in vacuum · Edit Payload remembering what you told it · dust-devil wave
-    sizes). The adopted proposal is that these five not be presented on the mod
-    page identically to a plain defect repair.
-    **The draft is `PUBLIC_DOCS_DESIGN.md` §9** — about 20 lines, in the mod
-    page's own voice, with a one-line honest label on each of the five.
-    ⚠️ **One line in it needs your eye specifically:** it ends *"if you disagree
-    with any of these, they can each be switched off individually on PC"* —
-    true, but the per-fix switch needs the developer console, so it means
-    nothing to an Xbox or PlayStation player reading the same page. Keep it
-    qualified, or cut it. **Recommendation: keep it, qualified.**
-    ⇒ **Your job: read §9 and say "yes" or hand back edits.** ~15 minutes.
+22. ~~**⚖️ The "judgment calls" wording — DRAFTED, so you approve rather than
+    compose.**~~ ✅✅ **DECIDED 2026-08-13: the five bullets SHIP as drafted
+    (`PUBLIC_DOCS_DESIGN.md` §9), and the closing line is CUT.** Open since
+    2026-08-04; closed after nine days.
+    ⭐⭐ **AND YOU CAUGHT A FALSE CLAIM DOING IT.** You challenged the line that
+    said the five could each be switched off individually on PC — *"as far as I
+    know right now, we have no way to switch off parts of the fix module"* —
+    and you were right. What the code says, checked in response:
+    * The per-fix veto **is real** and would fully disable all five. But it is
+      read at mod load (`00_Core.lua:384-388`), so it only works from **a
+      companion mod that loads before ours** — a modder's tool, not a player's.
+    * ⛔ **The developer console does NOT work.** By the time anyone can type,
+      the fixes are already applied.
+    * ⛔ The fix pack has **no Mod Options page** — everything settable moved to
+      the opt-in mod at the split, and none of these five are in it.
+    ⛔⛔ **The consequence, and it is bigger than the cut line.**
+    `archive/MOD_DESCRIPTION.md:487-493` — the frozen text the real store page
+    gets built from — tells players to set the veto *"in the console"*. **That
+    is false and it would have shipped.** It is now recorded as a correction the
+    chain's build prompt must make (§9.1). ⚠️ **Second false claim found in that
+    one file** after the F76 explainer; everything else in it is now treated as
+    unverified until re-checked.
+    ⭐ The standing lesson written down from this: *a claim about what a player
+    can DO needs a route check, not a source citation.* The sentence had passed
+    a design pass, that file's own review and a chain QA before your instinct
+    caught it.
 
-23. ⚖️ **Folders in this repo that aren't part of the mod are currently going
-    into what players download — including `CLAUDE.md`.** Found while checking
+23. ~~**⚖️ Folders in this repo that aren't part of the mod are currently going
+    into what players download — including `CLAUDE.md`.**~~ ✅ **DECIDED
+    2026-08-13, your ruling: YES, add the missing patterns — AT LAUNCH PREP.**
+    Recorded on the release step list so it lands in the same pass that bumps
+    the version and refreshes `last_changes`. ⛔ **All THREE mods**, including
+    the rescue mod, whose `metadata.lua` nobody has checked for this yet.
+    Nothing owed by you. The finding as it stood:
+    Found while checking
     something else for item 21, and I did not fix it because it is a code change
     and outside that chain's fence.
     **What I verified, in the game's own source:** uploading a mod runs
@@ -429,8 +443,16 @@ approval, one is the only open item with no ceiling on it.
     ⇒ **Your job: a yes.** If you would rather ship them, that is fine too and
     I will record it; I would just rather you chose it than inherited it.
 
-24. ⚖️ **Preview art ×2 (×3 if the rescue tool publishes) — routing this NOW
-    because it is the only launch item with no ceiling.** Everything else in
+24. ~~**⚖️ Preview art ×2 (×3 if the rescue tool publishes)**~~ ✅ **DECIDED
+    2026-08-13, your ruling: BUILD A PLAIN TREATMENT NOW AS A FLOOR.** An agent
+    produces a simple, clean text-on-image preview for each mod inside the size
+    limits, so **launch can never be blocked on art**. ⭐ It is explicitly a
+    floor, not a ceiling — replacing it later costs nothing and touches nothing
+    else. **Queued as agent work; nothing owed by you.** ⚠️ It is the one item
+    here with no artifact yet, which is why this section has not moved to the
+    archive. The reasoning as it stood:
+    Routed NOW
+    because it is the only launch item with no ceiling. Everything else in
     the public-docs plan is agent hours or a decision from you; the preview
     image is neither. It does not get better with agent time, it is not a
     screenshot, and it is the first thing anyone sees on a store card.
@@ -446,8 +468,17 @@ approval, one is the only open item with no ceiling on it.
     **one sitting, 45–60 minutes, two game restarts**. Nothing owed until the
     chain gets there.
 
-25. ⚖️ **How one of our own research files talks about real modders — a wording
-    call, and it is yours because it is about other people's work.**
+25. ~~**⚖️ How one of our own research files talks about real modders**~~
+    ✅✅ **DECIDED 2026-08-13, your ruling: BOTH EDITS — ✅ DONE the same
+    minute.** `BUG_LIST_AUDIT.md`'s heading now reads **"Not used as sources,
+    and why"**, and *"an aggregator repack"* now reads *"aggregates other
+    authors' fixes"*. **Every assessment is byte-unchanged**; only the verdict
+    tone went, and the reworded heading carries a short note saying why so no
+    future session reads it as a softening of the findings. Nothing owed.
+    ⭐ The related standing rule needed no decision and is now recorded
+    (`PUBLIC_DOCS_DESIGN.md` §7): the public pages credit other authors
+    generously, never say what another mod gets wrong, and never say
+    "this fixes what mod X doesn't". The ask as it stood:
     `agent/reports/BUG_LIST_AUDIT.md:355-370` lists modders under a heading
     reading **"Rejected (with reasons)"** — `LukeH`, `Ayzo`, `Fizzle Fuze`,
     `Silva/Dash`, `Thorik`, `akarnokd`, `FirestormMk3`.
