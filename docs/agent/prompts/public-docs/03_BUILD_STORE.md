@@ -70,6 +70,23 @@ evidence supports today, and flag it for prompt 4 to upgrade:
 **Owner instruction 2026-08-13:** use subagents for the sweeps and act as their
 auditor. ⭐ **Adopted, with one boundary**, because the split is not arbitrary:
 
+⛔⛔ **BEFORE YOU WRITE A WORD — read `README.md`'s `context` handoff section and
+obey its precondition from your first paragraph.** This is the chain's longest
+build so far, the owner watches context use, and **one word from them stops
+you.** The precondition is not something you do at the trigger:
+
+* **The draft goes to its real file immediately** and grows in place. ⛔ Never
+  hold drafted prose in the conversation — a half-written document on disk is
+  recoverable, one in context is not.
+* **Commit at every natural boundary** — a finished section, a finished sweep, a
+  finished arbitration. Explicit paths, never `git add -A`.
+* **Keep the live todo list current per item.** ⭐ It is how the owner reads your
+  progress without reading your context, and it is the first thing your successor
+  reads.
+
+⇒ **Done this way a handoff costs one commit and one file.** The cost is paid up
+front or it is paid in lost work.
+
 ### ⛔ Phase 1 — WRITE. One agent, no fan-out.
 
 **Both descriptions are written by you, in one voice, start to finish.** Do not

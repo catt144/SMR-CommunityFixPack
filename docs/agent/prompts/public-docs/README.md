@@ -125,6 +125,103 @@ on their own face. ⚖️ **Still open: which repo hosts it** — prompt 1 Job 2
    save-safety tier — a store page may not upgrade that to "tested" or "proven"
    by word choice. If a sentence needs evidence we do not have, cut it.
 7. **Doc-facing changes still run `python tools/doccheck.py`; red blocks.**
+8. ⭐⭐ **THE `context` HANDOFF — binding on every prompt in this chain.** See the
+   section below. Two of these prompts are long builds (3 at ~4–6 agent hours,
+   **5 at ~8–10**), and a session that runs out of room mid-document loses work
+   that was never written down. **The owner watches context use and can stop any
+   session with one word.**
+
+## ⭐⭐ The `context` handoff — owner instruction 2026-08-13
+
+**The owner checks session progress intermittently. If context use looks high
+(their working line is ~50%), they say one word — `context` — and the session
+hands off.** ⛔ **This is a standing instruction, not a suggestion, and it binds
+every prompt in this chain.**
+
+### ⛔ The precondition that makes it safe — do this from the START, not on trigger
+
+**A handoff can only be clean if the work is already on disk.** ⛔ **Never hold
+drafted text in the conversation.** From your first paragraph:
+
+* **Write the draft to its real file immediately** and grow it in place. A
+  half-written document on disk is recoverable; a half-written document in
+  context is not.
+* **Commit at every natural boundary** — a finished section, a finished sweep, a
+  finished arbitration. Small commits, explicit paths. ⛔ Never `git add -A`.
+* **Keep the live todo list current per item** (rule 1). ⭐ It is what lets the
+  owner see how far along you are *without reading your context*, and it is what
+  the successor reads first.
+
+⇒ **Done properly, a handoff costs one commit and one file.** Done improperly, it
+costs the session's work. The cost is paid up front, not at the trigger.
+
+### The trigger
+
+**The bare word `context`** in an owner message. ⚠️ The word also occurs
+naturally (*"what's the context here?"*). **If the usage is ambiguous, ask in one
+line and keep working** — do not silently ignore it, and do not hand off on a
+false positive.
+
+### What to do, in order
+
+1. ⛔ **STOP at the nearest SAFE boundary — do not push on to finish "just this
+   one thing".** Safe boundaries:
+   * ✅ a completed document, or a completed top-level section of one
+   * ✅ after the write phase, before the sweeps
+   * ✅ after all sweeps have returned, before arbitration
+   * ✅ between two arbitration verdicts
+   * ⛔ **NOT** mid-document, mid-sentence, mid-sweep, or with a subagent still
+     running — **wait for it to return, record its output, then stop**
+   * ⛔ **NOT** with a finding raised and un-adjudicated and unrecorded
+2. **Commit everything on disk**, doccheck GREEN.
+3. **Write the successor** — `<NN>_<NAME>_B.md` beside this file
+   (`03_BUILD_STORE_B.md`; a second handoff makes `_C`). ⭐ **The model is
+   inherited** — the filename carries no model marker, so it runs where the
+   predecessor ran unless the owner renames it.
+4. **Delete your own file in the same commit** (rule 2 — a prompt always
+   consumes itself), and tell the owner in one line: what stopped, where, and
+   what the successor picks up.
+
+### ⛔ What the successor file must and must not contain
+
+⭐ **The governing principle: hand on STATE and POSITION, never FACTS.** A fact
+handed on in prose is a fact that stops being re-derived — which is chain rule 3,
+and it is the specific way this project has been wrong more than once.
+
+**MUST contain:**
+
+* ⛔ **What is DONE — each item naming the file and section a reader can go
+  LOOK at.** "Tier 1 written" is worthless; "tier 1 is `<file>` §2, committed
+  `<sha>`" is a handoff.
+* ⛔ **What is NOT started**, explicitly, including anything deliberately skipped
+  and why. **A quiet omission is the failure mode this whole protocol exists to
+  prevent.**
+* ⭐ **The sweep and arbitration ledger** — for each sweep: launched or not,
+  returned or not, and for every finding its verdict (*confirmed → fixed* ·
+  *confirmed → deliberate, and why* · *refuted, and what the sweep missed*).
+  ⛔ **An un-adjudicated finding is handed on AS un-adjudicated.** Never resolve
+  one hastily just to leave a tidy note.
+* **Open questions and anything routed to the owner** that has not come back.
+* ⛔ **An explicit RE-DERIVE list** — every count, every claim, every number the
+  successor must re-emit rather than inherit from you.
+
+**MUST NOT contain:**
+
+* ⛔ Counts, statuses or claims quoted as settled. **Point at the source; make
+  the successor re-emit.** The probe count moved 88 → 94 within hours during
+  this very chain.
+* ⛔ A tidier story than the work supports. ⭐ **If you are behind, say you are
+  behind** — the successor budgets against your honest position, and the owner
+  reads this too.
+* ⛔ Drafted prose that exists only here. If it is worth keeping, it belongs in
+  the real file, committed, before you write this one.
+
+### ⚠️ The seam is a drift risk, and the audit is told so
+
+Two sessions writing one document is exactly where tier 1 and tier 2 stop
+agreeing. **The successor's first act is to read what its predecessor wrote —
+all of it — before adding a word**, and `04_FABLE_AUDIT.md` checks the seam
+specifically.
 
 ## Scope fence
 

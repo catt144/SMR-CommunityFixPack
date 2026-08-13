@@ -65,6 +65,33 @@ wrong answer:
 ⚠️ **A sweep that reported nothing is the one to look at hardest.** Silence is not
 the same as clean, and an empty report usually means the rule was mis-specified.
 
+## ⭐ Job 1b — if prompt 3 handed off, the SEAM is your highest-yield target
+
+⚠️ **Check first whether `03_BUILD_STORE_B.md` (or `_C`) ever existed** —
+`git log --diff-filter=A -- 'docs/agent/prompts/public-docs/03*'`. The owner can
+stop a session with the word `context` (`README.md`, chain rule 8), so this build
+may have been written by two or three sessions in sequence.
+
+**If it was, the handoff seam is where drift concentrates**, and the successor's
+honesty is the thing to test:
+
+* ⛔ **The successor was required to hand on STATE and POSITION, never FACTS.**
+  Check its handoff note for counts, statuses or claims quoted as settled rather
+  than pointed at. A fact handed on in prose is a fact that stopped being
+  re-derived.
+* ⛔ **Check the RE-DERIVE list was actually honoured**, not just received.
+* ⭐ **Check the ledger survived the seam.** Every sweep finding handed on as
+  un-adjudicated must have an adjudication now — or be handed on again, still
+  marked. **A finding that quietly disappeared across a handoff is the single
+  worst outcome this protocol can produce**, and it is invisible unless you go
+  looking in the predecessor's note.
+* **Check for the tidier story.** A session under context pressure has every
+  incentive to describe itself as further along than it was.
+* **Read across the seam for voice and terminology**, then apply Job 2 normally.
+
+⇒ **If there was no handoff, say so and skip this job.** ⛔ Do not report it as
+checked if you did not check whether one happened.
+
 ## Job 2 — drift across the session
 
 * **Read tier 0, tier 1 and tier 2 against each other**, in both descriptions.
