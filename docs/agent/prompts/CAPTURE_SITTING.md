@@ -43,6 +43,28 @@ captured — by file name — wherever the images land.
    `F13` needs nothing — any Command Center will do — which is why it is the
    pair to rely on if `F14`'s fixture is missing.
 
+   ⭐⭐ **THE FIXTURE CHECK RAN 2026-08-13 (`public-docs/05_BUILD_SITE.md`, job 5),
+   from the save directory itself — not from prose.** Method: every
+   `*.savegame.sav` in `…\Saved Games\Surviving Mars Relaunched\<id>\` read at
+   its plain-text metadata header (`displayname`, `elapsed_sols`, `loaded_maps`,
+   `active_mods`); 90 files, all readable without launching the game. What it
+   settles and what it cannot:
+
+   | shot | verdict from the directory | what to do |
+   |---|---|---|
+   | `F102-signs` (E) | ⛔ **RE-ROUTE. There is no save named `Sylmacaink BH25`** — the name in `COMBINED_SITTING.md` moment C and in `F102.md`'s playtest item matches nothing on disk. Worse, **no save anywhere carries the leg's map**: the only asteroid maps in the whole directory are `BlankAsteroidDonut_01` and `BlankAsteroidBranchOut_01` (the campaign's own two), and the 2026-08-12 negative-repro leg ran on a console-spawned `BlankAsteroidSlim_02`, which was never saved. `TEST2 AST` despite its name has **no asteroid map loaded at all** | ⛔ Do not send the owner looking for that save. Either **respawn** the D-type with `F102.md`'s own recorded call (`UIColony:SpawnAsteroid(Presets.DiscoveryAsteroidPreset.Default["Asteroid_D"], true)`) — a rig action, not colony-building — or take the shot on one of the campaign's two existing asteroids **only if** a subsurface Exotic Minerals deposit is actually on them, which the metadata cannot tell us. If neither is quick, **drop the shot** |
+   | `optin-*` (C) | ✅ nothing needed from a save — the Mod Options page is reachable from the main menu. (For the record: only 6 saves were written with the opt-in pack loaded, all 2026-08-12 `SPWIT*`/`SPCONRT` and one `Autosave Sol 311`) | proceed |
+   | `optin-nohomeless-on` | ⚠️ **UNKNOWABLE from outside the game** — no metadata field carries "this dome has jobseekers in it" | the row itself is the instrument: it reads `(N would move)` before you click. **If every dome reads `(0 would move)`, drop the pair** and say so. ⛔ Do not build the state |
+   | `F14-before`/`after` | ⚠️ **UNKNOWABLE from outside the game** | check it in Pass A before spending the restart; if no dome shows low stats, fall back to the `F13` pair as the brief already says |
+   | `F19-after` | ✅ any campaign save has the history — the directory holds 30+ saves at 285–336 sols | proceed |
+   | `multiplesuns` (D) | ⚠️ **UNKNOWABLE, and it is the one shot that would cost real colony-building** — a second sun has to be *built*. `D04`'s PT-50/PT-55 legs (2026-07-27 / 07-30) did build one, but no save from those dates in this directory is identifiable as carrying it | check once, early. ⛔ If a second sun is not already standing, **drop the shot** rather than asking for one — it is a store-card nicety, not a claim anything rests on |
+   | Pass G | ✅ any | proceed |
+
+   ⚠️ **What this check does NOT establish.** Metadata carries maps, sols, mods
+   and timestamps — nothing about colony contents. Three of the six fixtures are
+   therefore still open at the keyboard, which is exactly why they are written
+   above as *checks with a drop rule* rather than as shots.
+
 ## ⚠️ Why the order matters
 
 **A Mod-Manager toggle needs a FULL game restart.** A naive shot list costs one
