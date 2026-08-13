@@ -8,6 +8,37 @@ prompt 2's verdict must be BUILD (its Notes below), and BOTH owner answers
 nothing but the report note, leave this file in place. The chain resumes here
 when the owner answers.** Game closed throughout; nothing here launches.
 
+## ⭐ CONCURRENCY — you are not alone in this tree, and YOU have priority
+
+The `public-docs` chain (`agent/prompts/public-docs/01_DESIGN.md`) runs
+**concurrently with you**, by owner decision 2026-08-13, in this same working
+tree. ⭐ **D13 is the priority chain: on any clash — a file, a fact, a count, a
+checklist item, a rebase — YOUR version wins and theirs re-derives.** You do not
+wait for them, ask them, or soften a correction because their draft quotes the
+old number.
+
+**What that buys you, and the three rules it costs:**
+
+1. ⭐ **You own `docs/agent/STATE.md`.** They are fenced off it (their STATE
+   request rides their outbox and the checklist instead). Edit it freely — but
+   the budget is a hard doccheck red at 60 lines and the file sits at 60/60, so
+   every line you add costs a line you delete. Move the NEXT pointer to
+   `04_OPUS_VERIFY.md` at your close.
+2. ⛔ **Stage by explicit path. Never `git add -A` / `-u` / `.`** — a shared
+   tree means unstaged work that is not yours, and `git add <path>` takes the
+   WHOLE file including their unstaged edits to it (this already happened once
+   today: see the tree note at the end of this file). `git pull --rebase`
+   immediately before each commit; a rebase conflict resolves YOUR way.
+3. ⛔ **Not yours, do not touch, do not sweep, do not "fix":** `public-site/`,
+   `.github/`, `agent/prompts/public-docs/`. If your Job-3 count sweep finds a
+   superseded number inside any of them, **route it in your outbox instead of
+   editing it** — that content is mid-authoring and player-facing, and their
+   chain re-derives every number from `--emit-counts` anyway.
+
+⚠️ `docs/PLAYTEST_CHECKLIST.md` is written by BOTH chains (they add owner
+decisions; you read it for your rule-7 gate). If you must edit it, re-read it
+first — the copy in your context may be minutes stale.
+
 ## Job 1 — freeze the spec
 
 From the QA-corrected `90_DERIVATION.md` + the owner's Q-A answer: write the

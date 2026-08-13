@@ -4,6 +4,48 @@
 language) and the ⛔⛔ exposure hazard.** Staleness check across all three repos,
 live todo list updated per item.
 
+## ⭐ CONCURRENCY — the D13 chain runs beside you, and IT has priority
+
+Owner decision 2026-08-13: this chain runs **concurrently with
+`agent/prompts/d13-rescue/03_OPUS_BUILD.md`**, in this same working tree, on
+purpose. That prompt scaffolds the rescue artifact, freezes its spec, and
+corrects every doc that states an exposed-set count. ⛔ **D13 is the priority
+chain. On any clash — a file, a fact, a count, a checklist item, a rebase —
+THEIR version wins and yours re-derives.** Your work is prep; theirs is a hard
+launch dependency.
+
+Substantively you barely overlap (different trees, different deliverables, and
+their corrected numbers — "≥13", "12 exposed" — are exposed-set counts that no
+player surface may ever contain). The overlap is mechanical, so:
+
+1. ⛔ **Do NOT edit `docs/agent/STATE.md`.** It is D13's while their chain runs:
+   the NEXT pointer is the mandatory read's most important line, and doccheck
+   caps the file at 60 lines where it already sits at 60/60, so two editors mean
+   one of you silently deletes the other's line. Your Close's STATE update
+   becomes a **request in your outbox plus a checklist line** — say exactly what
+   line you want added and what you would drop for it; the next prompt in your
+   chain lands it once D13's is quiet.
+2. ⛔ **Stage by explicit path. Never `git add -A` / `-u` / `.`** — and note
+   that even `git add <path>` takes the WHOLE file, including the other
+   session's unstaged edits to it. That already happened today: an unstaged
+   checklist item 21 rode a D13 commit under a message that did not describe it.
+   `git pull --rebase` immediately before each commit.
+3. ⛔ **Not yours, do not touch:** `agent/prompts/d13-rescue/`,
+   `agent/bugs/D13.md`, `agent/facts/EF-023.md`, and
+   `agent/reports/D13_EXPOSED_SET.md` (D13's prompt 3 creates it).
+4. ⚠️ **`agent/bugs/D13.md` is being rewritten while you read it** — its status
+   tag and its tables change mid-flight. Job 7's seam must therefore be drawn
+   from THIS chain's README and the checklist, and every uninstall-flavoured
+   sentence stays a **marked hole**, never a quote from a doc in motion.
+5. ⚠️ `docs/PLAYTEST_CHECKLIST.md` is written by both chains. Re-read it
+   immediately before you add your Job-8 decisions — your copy goes stale in
+   minutes, and appending blind will drop or duplicate an item.
+
+If a doccheck run goes red for something you did not touch, it is probably their
+in-flight edit: `git status`, confirm whose it is, and do not "fix" it.
+
+---
+
 **You are DESIGNING, not writing the pages.** The deliverable is decisions with
 reasons, an honest inventory, and a seed of each surface — enough that prompts 3
 and 4 assemble rather than invent. ⛔ **Do not draft 74 fix blurbs here.** Draft
