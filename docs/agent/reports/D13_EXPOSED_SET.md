@@ -982,6 +982,27 @@ own gate returns a zero that samples nothing):
    absence of the pass).
 4. **Artifact-absent:** with the rescue's junction pulled, the save loads with
    zero lines naming it and zero `[LUA ERROR]`.
+   ⛔ **CORRECTED 2026-08-13 BY MEASUREMENT (`D13_VERIFICATION.md` §4.5, log
+   `archive/rs_r3_Mars.exe-20260813-11.54.59.log`): "zero lines naming it" is
+   FALSE as written.** Zero `[LUA ERROR]` held, and zero lines came from the
+   artifact's own code — but the ENGINE prints one:
+   `Savegame references Mod Save Rescue (id SMR_CommunitySaveRescue,
+   v0.01-000) which is not present`. It is a standing behaviour, not this
+   artifact's: the same pair printed for **Community Fix Pack** and **Community
+   Opt-In Pack** when a pack-written save was loaded with the packs pulled
+   (`archive/rs_r2pre_…:140-141`), because every mod loaded at save time is
+   recorded in the savegame's mod-reference list. ⭐ **It self-clears on the
+   first save without the mod** — that list is regenerated from whatever is
+   loaded when the save is written, so both pack references were gone from the
+   very next save (`mods: SMR_CommunityFixPackTestKit`). ⇒ The true clause is
+   *zero lines from the artifact's own code, and one engine line that every mod
+   including both packs produces and that disappears on the next save.*
+   ⚠️ Player-facing consequence, and it belongs in the description rather than
+   here: someone who uninstalls sees one notice on their next load, so the
+   report's *"it stores nothing in your save"* is true about STATE (measured:
+   zero artifact-namespace names over 4510 objects, `UIColony`, every rains
+   entry and all 440 `PersistableGlobals` names) but should not be read as
+   "you will see nothing".
 5. **Bounds:** the meteor restart happens at most once per load, and not at all
    when the thread is alive; a second consecutive load of the same save performs
    **no** heal and **no** removal (idempotence, which is what replaces the latch).

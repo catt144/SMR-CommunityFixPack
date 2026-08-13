@@ -15,14 +15,14 @@ C42/F99/F80/F96-R2 → post-release WATCH. ⇒ **NEXT — release front only:**
 verdict re-derived from archived logs, save contract held, no-retraining test PASSED). A SECOND MOD
 EXISTS: `C:\Dev\SMR-OptInPack`** (`SMR_CommunityOptInPack` / `SMROptInPack` / `[CommunityOptInPack]`;
 junction in, public remote 08-13; D01-D07/D09/D12 → tombstones here; ⛔ NO Mod Options page — nor the fix pack).
-⇒ **NEXT = `d13-rescue/04_OPUS_VERIFY.md`** (1/2/2b/3 CONSUMED 08-12/13) ∥ `unattended-3`.
-① **D13 chain** — ⭐⭐ **BUILT 08-13 (prompts 1-3 consumed; QA verdict BUILD, membership diff ZERO).
-Authoritative record AND frozen spec (§10): `agent/reports/D13_EXPOSED_SET.md` — 27 sites, BOTH trees,
-all dispositioned.** ⭐ **A THIRD MOD EXISTS: `C:\Dev\SMR-CommunitySaveRescue`** (`SMR_CommunitySaveRescue` /
-`SMRSaveRescue` / `[CommunitySaveRescue]`; public remote, junction in, ⛔ **NOT ENABLED — owner tick + FULL
-RESTART before prompt 4 = checklist 26**). ⛔ UNVERIFIED, nothing launched. Every "13"/"12 exposed"/"≥13"
-CORRECTED 08-13 across 9 files + 2 the QA sweep called clean (OPT-pack `EF-023` + `FIX_POLICY`); `EF-023`'s
-"nothing in `Code/`" ANNOTATED true-again (never re-falsified). E5/E6/E7 gated in-pack 08-13; D10 → prompt 4.
+⇒ **NEXT = `d13-rescue/05_FABLE_AUDIT.md`** (1/2/2b/3/4 CONSUMED 08-12/13) ∥ `unattended-3`.
+① **D13** — ⭐⭐ **BUILT *AND VERIFIED IN GAME* 08-13** (prompts 1-4 consumed). Spec `D13_EXPOSED_SET.md` §10 ·
+verification + predictions-written-first `agent/reports/D13_VERIFICATION.md` · 9 logs `archive/rs_*`.
+⭐ **THIRD MOD `C:\Dev\SMR-CommunitySaveRescue`** (`SMR_CommunitySaveRescue`/`SMRSaveRescue`/`[CommunitySaveRescue]`;
+remote public; ⛔ junction PULLED — NOT a standing rig mod; owner tick SPENT, 26 STRUCK). **9 launches, owner cost
+ZERO, 0 `[LUA ERROR]`: auto pass removed 1617 BY NAME, BOTH KEEP kept (D10 SAMPLED at last — ⚠️ witness SYNTHETIC),
+heals 1+1, threads valid, 2nd load 0, residue-zero measured.** ⚠️ §10.9(4) CORRECTED: one ENGINE savegame-mod-ref
+line (both packs same, self-clears next save) → uninstall text. D1/D2 SOURCE→MEASURED · `EF-055` holds for mod 3 · ⛔ `tested` NOT granted.
 ② **ONE combined sitting**: PT-20 redo + D13 after-sweep + F102's minute.
 ③ MOD_DESCRIPTION **×2** + disposition table + metadata → ④ owner launch tasks.
 
@@ -41,8 +41,8 @@ F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
 ## Gates and holds
 - ⭐ **BOTH MODS LOADED is the rig's NORMAL config** (owner 08-12; WORKFLOW clause
   ACTIVE). Two gate lines — grep the FULL bracketed token. ⭐ **BASELINE (cell a2,
-  audit-recounted): `74/74` + `8/8` · `78/0/10/0` of ~~88~~ **94 — ⛔ PENDING RE-MEASURE
-  (6 rescue probes added 08-13, never run; `FactionFundingCheck` repair still queued)**; order TestKit→fix→opt-in
+  audit-recounted): `74/74` + `8/8` · ⭐ **RE-MEASURED 08-13: `78/0/16/0` of 94** (`archive/rs_r0_*`;
+  `84/0/10/0` with the rescue mod loaded, `rs_r1_*`; `FactionFundingCheck` still PASS, repair still queued)**; order TestKit→fix→opt-in
   (opt-in wrappers OUTERMOST, `EF-054`). ✅ Owner re-tick SPENT 08-12 (`5x`/`+2`).
 - ⛔ **`EF-056`: loading a COPY of a real campaign still runs that campaign's
   AUTOSAVE, whose rotation deletes the owner's autosaves** — it ate `Autosave Sol
@@ -55,6 +55,6 @@ F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
   (D13); re-enable is owner-only. ⚠️ **EF-051 ON HOLD — Steam Cloud ON (owner
   08-12, temporary):** say "deleted, listing verified", NEVER "gone"; `CP60RT` +
   `Autosave Sol 311` HELD.
-- **Owner decisions open: 2** — ⭐ **26: tick "Save Rescue" in the Mod Manager + FULL RESTART (blocks
-  prompt 4; the optional family-prefix rename rides it)** · relabel WORDING (owner prose, launch prep). ✅ 08-13: D13 17-19 ((c) · mod-shaped · gates GO; launch dep REAFFIRMED, build ≠ publish) · opt-in remote PUBLIC · display name **"Community Fix Pack: Opt-In Modules"** (swept, `e17586b`) · default-OFF RATIFIED · rescue naming RATIFIED + remote pre-created (`catt144/SMR-CommunitySaveRescue`, empty).
+- **Owner decisions open: 1** — relabel WORDING (owner prose, launch prep). ✅ 08-13: **26 STRUCK — tick
+  DONE 11:16, matrix ran off it**; the optional family-prefix rename is all that survives it (release prep). ✅ 08-13: D13 17-19 ((c) · mod-shaped · gates GO; launch dep REAFFIRMED, build ≠ publish) · opt-in remote PUBLIC · display name **"Community Fix Pack: Opt-In Modules"** (swept, `e17586b`) · default-OFF RATIFIED · rescue naming RATIFIED + remote pre-created (`catt144/SMR-CommunitySaveRescue`, empty).
 - **Release** — now **THREE** products (rescue publishes = a release-time call, checklist 17), each with its own metadata/description/preview/portal pass; `archive/MOD_DESCRIPTION.md` FROZEN, rebuilt at prep.

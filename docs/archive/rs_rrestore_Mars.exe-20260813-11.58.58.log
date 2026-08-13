@@ -1,0 +1,417 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	34%
+Disk Free      	752231 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:059
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:061
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:437
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:568
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:769
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:396
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:490
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:487
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:490
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v0.01-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:17:824
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+						Lua 0:00:17:825
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:829
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:830
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+						Lua 0:00:17:831
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+						Lua 0:00:17:832
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+						Lua 0:00:17:833
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+						Lua 0:00:17:834
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+						Lua 0:00:17:835
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+						Lua 0:00:17:836
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+						Lua 0:00:17:837
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+						Lua 0:00:17:838
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+						Lua 0:00:17:839
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:375
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:444
+Reloading done in 946 ms
+						Lua 0:00:18:751
+[preset] Preset postprocess took 48 ms.
+						Lua 0:00:18:795
+479 / 479 particle streams loaded in 40 ms.
+						Lua 0:00:18:796
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:983
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:036
+[mod] [RS-rrestore] === d13-rescue RS-rrestore === watchdog 1200000ms
+[RS-rrestore] === d13-rescue RS-rrestore === watchdog 1200000ms
+[mod] [RS-rrestore] STEP 1-waiting-menu BEGIN
+[RS-rrestore] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:037
+[PdxSDK] Started up. Took 1539
+						Lua 0:00:19:060
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:500
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:632
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:498
+[mod] [RS-rrestore] STEP 1-waiting-menu END 2500ms
+[RS-rrestore] STEP 1-waiting-menu END 2500ms
+[mod] [RS-rrestore] MODE ON DISK = CELL rrestore — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+						Lua 0:00:21:499
+[RS-rrestore] MODE ON DISK = CELL rrestore — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[mod] [RS-rrestore] STEP 2-config-gate BEGIN
+[RS-rrestore] STEP 2-config-gate BEGIN
+[mod] [RS-rrestore] GATES config-gate/rrestore ------------------------------------------------
+[RS-rrestore] GATES config-gate/rrestore ------------------------------------------------
+[mod] [RS-rrestore] GATEREAD fix pack :: 74/74 active
+[RS-rrestore] GATEREAD fix pack :: 74/74 active
+[mod] [RS-rrestore] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[RS-rrestore] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[mod] [RS-rrestore] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[RS-rrestore] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[mod] [RS-rrestore] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[RS-rrestore] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[mod] [RS-rrestore] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[RS-rrestore] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[mod] [RS-rrestore] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[RS-rrestore] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[mod] [RS-rrestore] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[RS-rrestore] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[mod] [RS-rrestore] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[RS-rrestore] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[mod] [RS-rrestore] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[RS-rrestore] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[mod] [RS-rrestore] GATEREAD opt-in pack :: 8/8 active
+[RS-rrestore] GATEREAD opt-in pack :: 8/8 active
+[mod] [RS-rrestore] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[RS-rrestore] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[mod] [RS-rrestore] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[RS-rrestore] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[mod] [RS-rrestore] GATES config-gate/rrestore :: fix pack 74/74 | opt-in pack 8/8 | save-rescue 0/0 | map= | speed=1 | loads_this_process=0
+[RS-rrestore] GATES config-gate/rrestore :: fix pack 74/74 | opt-in pack 8/8 | save-rescue 0/0 | map= | speed=1 | loads_this_process=0
+[mod] [RS-rrestore] MODORDER config-gate/rrestore :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[RS-rrestore] MODORDER config-gate/rrestore :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[mod] [RS-rrestore] DIALOPTS config-gate/rrestore :: DroneSpeedDial=5x | DroneCarryDial=+2 — the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[RS-rrestore] DIALOPTS config-gate/rrestore :: DroneSpeedDial=5x | DroneCarryDial=+2 — the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[mod] [RS-rrestore] DIALOPTS config-gate/rrestore :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[RS-rrestore] DIALOPTS config-gate/rrestore :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [RS-rrestore] CONFIGGATE OK :: cell rrestore :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=false (wanted false) :: 74/74, 8/8, 0/0
+[RS-rrestore] CONFIGGATE OK :: cell rrestore :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=false (wanted false) :: 74/74, 8/8, 0/0
+[mod] [RS-rrestore] STEP 2-config-gate END 0ms
+[RS-rrestore] STEP 2-config-gate END 0ms
+[mod] [RS-rrestore] STEP 3-load-suite-world BEGIN
+[RS-rrestore] STEP 3-load-suite-world BEGIN
+						Lua 0:00:21:599
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:609
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:634
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:227
+*** Assets reloaded in 2.6 s, read 202.1 MB, read speed 77.2 MB/s, average read 4948 bytes.
+						Lua 0:00:30:186
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:193
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:30:245
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:261
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4569 — 4 element(s), connections 7 -> 6, duplicate node_idx 0 -> 0
+						Lua 0:00:30:262
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4619 — 23 element(s), connections 45 -> 44, duplicate node_idx 0 -> 0
+						Lua 0:00:30:265
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#4730 — 43 element(s), connections 86 -> 84, duplicate node_idx 0 -> 0
+						Lua 0:00:30:270
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#12454 — 280 element(s), connections 559 -> 558, duplicate node_idx 0 -> 0
+						Lua 0:00:30:272
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#12528 — 32 element(s), connections 63 -> 62, duplicate node_idx 0 -> 0
+						Lua 0:00:30:278
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#12637 — 17 element(s), connections 34 -> 32, duplicate node_idx 0 -> 0
+						Lua 0:00:30:284
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#13418 — 67 element(s), connections 133 -> 132, duplicate node_idx 0 -> 0
+						Lua 0:00:30:286
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 7 of 17 track(s) walked (0 raised)
+						Lua 0:00:30:291
+Game Loaded in 8693 ms
+						Lua 0:00:30:340
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:177
+Game loaded on map BlankBigCanyonCMix_09 in 9678 ms
+[mod] [RS-rrestore] LOAD OK #1 file=RESCUESTAGE.savegame.sav — LoadGame returned no error
+[RS-rrestore] LOAD OK #1 file=RESCUESTAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:477
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:676
+[mod] [RS-rrestore] READ speed: SetGameSpeed(1) call=true | before=5 after=1
+[RS-rrestore] READ speed: SetGameSpeed(1) call=true | before=5 after=1
+[mod] [RS-rrestore] STEP 3-load-suite-world END (no timing — this step blocks render mode)
+[RS-rrestore] STEP 3-load-suite-world END (no timing — this step blocks render mode)
+[mod] [RS-rrestore] STEP 4-standing-config-readback BEGIN
+[RS-rrestore] STEP 4-standing-config-readback BEGIN
+[mod] [RS-rrestore] GATES standing-config ------------------------------------------------
+[RS-rrestore] GATES standing-config ------------------------------------------------
+[mod] [RS-rrestore] GATEREAD fix pack :: 74/74 active
+[RS-rrestore] GATEREAD fix pack :: 74/74 active
+[mod] [RS-rrestore] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[RS-rrestore] GATEROW fix pack :: CaveInsNoDisasters=active MeteorFrequency=active UpgradeModifierLeak=active NightShiftWork=active MilestoneCrash=active WispRewards=active TouristApplicants=active TrainsToVoid=active LanderEmptyLaunch=active LanderCargoRatchet=active
+[mod] [RS-rrestore] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[RS-rrestore] GATEROW fix pack :: LanderReturnFuel=active ShelterReflex=active BrokenTrackSalvage=active TrackSalvageWipe=active LakeEntombment=active GhostFarmOxygen=active RocketDroneChurn=active ShuttleTransportCache=active VacuumWalks=active ArrivalDeaths=active
+[mod] [RS-rrestore] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[RS-rrestore] GATEROW fix pack :: DroneUnreachableForever=active StaleReservations=active CrystalMysteryHang=active TouristSatisfaction=active TrainPlatformWedge=active LowStorageWarning=active CommandCenterNumbers=active DomeOverviewHighlight=active TrainCargoDumping=active UniversityOvertraining=active
+[mod] [RS-rrestore] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[RS-rrestore] GATEROW fix pack :: DestroyedTunnels=active DustSicknessBiorobots=active DustSicknessDamage=active GeneForging=active MirrorSphereSite=active PayloadTemplateRefill=active AsteroidLanderAvailable=active ShuttleHubOffAvailable=active FreedHousingNotice=active DomeFreeSpaceMismatch=active
+[mod] [RS-rrestore] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[RS-rrestore] GATEROW fix pack :: SmallLandscapeSites=active LandscapeUnitFilter=active RocketInteractGuard=active TrackConnectorPingPong=active TrackTunnelPowerBridge=active GridGlobalStorage=active LastTransmissionStorage=active GraphConsumedCaption=active MoraleComfortTooltip=active TrainWaitTime=active
+[mod] [RS-rrestore] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[RS-rrestore] GATEROW fix pack :: FounderTraitNotification=active StorageRateModifiers=active SequenceLatents=active IndependenceTerraforming=active TrackSalvageRefund=active LayoutTechLock=active TrainMinors=active DroneTransportMinors=active AnomalyCaveInMap=active TechDescriptionBuilding=active
+[mod] [RS-rrestore] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[RS-rrestore] GATEROW fix pack :: BombardmentSpread=active ExtenderFlapChurn=active DisasterPredictionLeak=active MeteorStormWedge=active RainsDeadlock=active FirstAsteroidPrefabs=active SaintBlessing=active DustDevilsDescrMap=active AstrogeologistExtractors=active SinkholeIndestructible=active
+[mod] [RS-rrestore] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[RS-rrestore] GATEROW fix pack :: DustStormUndergroundBreaks=active DustDevilSpawnGate=active ExoticDepositSign=active SaveSanitizer=active
+[mod] [RS-rrestore] GATEREAD opt-in pack :: 8/8 active
+[RS-rrestore] GATEREAD opt-in pack :: 8/8 active
+[mod] [RS-rrestore] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[RS-rrestore] GATEROW opt-in pack :: ClassicRockets=active AcknowledgedWarnings=active ResidencyControl=active MultipleSuns=active DroneOverhaul=active CohortHousing=active NoHomeless=active DroneStatDials=active
+[mod] [RS-rrestore] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[RS-rrestore] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+						Lua 0:00:46:677
+[mod] [RS-rrestore] GATES standing-config :: fix pack 74/74 | opt-in pack 8/8 | save-rescue 0/0 | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=1
+[RS-rrestore] GATES standing-config :: fix pack 74/74 | opt-in pack 8/8 | save-rescue 0/0 | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=1
+[mod] [RS-rrestore] MODORDER standing-config :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[RS-rrestore] MODORDER standing-config :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[mod] [RS-rrestore] DIALOPTS standing-config :: DroneSpeedDial=5x | DroneCarryDial=+2 — the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[RS-rrestore] DIALOPTS standing-config :: DroneSpeedDial=5x | DroneCarryDial=+2 — the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions
+[mod] [RS-rrestore] DIALOPTS standing-config :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[RS-rrestore] DIALOPTS standing-config :: toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [RS-rrestore] RESIDUE rrestore/baseline-world ==========================================
+[RS-rrestore] RESIDUE rrestore/baseline-world ==========================================
+						Lua 0:00:46:687
+[mod] [RS-rrestore] RESIDUEPOP rrestore/baseline-world :: scanned 4517 distinct labelled object(s) | Colonist=1591 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[RS-rrestore] RESIDUEPOP rrestore/baseline-world :: scanned 4517 distinct labelled object(s) | Colonist=1591 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+						Lua 0:00:46:688
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D5    FP SMRFixPack_reserved_at             on 1533 object(s) of 1591 Colonist | handles=[2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,...,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039034,2000039042]
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D5    FP SMRFixPack_reserved_at             on 1533 object(s) of 1591 Colonist | handles=[2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,...,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039034,2000039042]
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D6    FP SMRFixPack_shelter_try             on 0 object(s) of 1591 Colonist | handles=[]
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D6    FP SMRFixPack_shelter_try             on 0 object(s) of 1591 Colonist | handles=[]
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D7    FP SMRFixPack_payload_set             on 4 object(s) of 0 AllRockets | handles=[1061,1062,4104,4641]
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D7    FP SMRFixPack_payload_set             on 4 object(s) of 0 AllRockets | handles=[1061,1062,4104,4641]
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D8    FP SMRFixPack_rocket_fuel_key         on 0 object(s) of 25 DroneControl | handles=[]
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D8    FP SMRFixPack_rocket_fuel_key         on 0 object(s) of 25 DroneControl | handles=[]
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D12   OP SMRFixPack_ack_notworking          on 1 object(s) of 1073 Building | handles=[9057]
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D12   OP SMRFixPack_ack_notworking          on 1 object(s) of 1073 Building | handles=[9057]
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D13   OP SMRFixPack_closed_to_new_residents on 4 object(s) of 14 Dome/MicroGHabitatBase | handles=[2285,5276,6396,8299]
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D13   OP SMRFixPack_closed_to_new_residents on 4 object(s) of 14 Dome/MicroGHabitatBase | handles=[2285,5276,6396,8299]
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D14   OP SMRFixPack_no_homeless             on 2 object(s) of 14 Dome/MicroGHabitatBase | handles=[5276,6396]
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D14   OP SMRFixPack_no_homeless             on 2 object(s) of 14 Dome/MicroGHabitatBase | handles=[5276,6396]
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = table: 000002827BEEA1E0 (type=table truthy=true) | prop=move_speed percent=400 amount=0 | modifiers on that label = 4
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = table: 000002827BEEA1E0 (type=table truthy=true) | prop=move_speed percent=400 amount=0 | modifiers on that label = 4
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = table: 000002827BEECE70 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 | modifiers on that label = 38
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = table: 000002827BEECE70 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 | modifiers on that label = 38
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 0 modifier(s) :: <none — the KEEP condition is NOT sampled in this state>
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 0 modifier(s) :: <none — the KEEP condition is NOT sampled in this state>
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D3/D4 rains['normal'] :: loop_version=1.0.1 fixed_loop=nil | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D3/D4 rains['normal'] :: loop_version=1.0.1 fixed_loop=nil | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: g_RainDisaster = false (type=boolean) | Meteors thread valid = true | MeteorStorm valid = true
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: g_RainDisaster = false (type=boolean) | Meteors thread valid = true | MeteorStorm valid = true
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: GameVar SMRFixPack_MeteorLatch             = 1.0.1 (type=string) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: GameVar SMRFixPack_MeteorLatch             = 1.0.1 (type=string) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-rrestore] RESIDUEROW rrestore/baseline-world :: GameVar SMRFixPack_FirstAsteroidPrefabs    = false (type=boolean) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-rrestore] RESIDUEROW rrestore/baseline-world :: GameVar SMRFixPack_FirstAsteroidPrefabs    = false (type=boolean) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-rrestore] RESIDUE rrestore/baseline-world END ======================================
+[RS-rrestore] RESIDUE rrestore/baseline-world END ======================================
+[mod] [RS-rrestore] RESTORE rrestore :: compare this inventory with r0/baseline-world — same bytes, same world, seven junction round trips apart. EF-055's claim is that a junction pull leaves the account untouched; the DIALOPTS line and this inventory are the two independent witnesses.
+[RS-rrestore] RESTORE rrestore :: compare this inventory with r0/baseline-world — same bytes, same world, seven junction round trips apart. EF-055's claim is that a junction pull leaves the account untouched; the DIALOPTS line and this inventory are the two independent witnesses.
+[mod] [RS-rrestore] STEP 4-standing-config-readback END 0ms
+[RS-rrestore] STEP 4-standing-config-readback END 0ms
+[mod] [RS-rrestore] ERRORWATCH RS-rrestore — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== d13-rescue RS-rrestore ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=4-standing-config-readback loads_this_process=1
+[RS-rrestore] ERRORWATCH RS-rrestore — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== d13-rescue RS-rrestore ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=4-standing-config-readback loads_this_process=1
+[mod] [RS-rrestore] SHUTDOWN done
+[RS-rrestore] SHUTDOWN done
+						Lua 0:00:49:677
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:49:680
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:50:012
+
+
+*** Debug::Done()
+Time (ms)	50012
+
+

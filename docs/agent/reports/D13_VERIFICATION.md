@@ -242,5 +242,209 @@ and the forced call would be the weaker evidence.
 
 ## 4. Measured results
 
-*(written after the run — see §2 of the same name in the commit that carries the
-archived logs)*
+⭐ **THE MATRIX RAN. Nine launches, ~8 minutes of machine time, owner cost ZERO
+minutes** (predicted zero; nobody was at the keyboard and no owner action was
+required at any point). Every cell's config gate read GREEN before it measured
+anything, and **not one `[LUA ERROR]` appeared in any log, in any cell.** Every
+row below is MEASURED off an archived log unless tagged otherwise.
+
+| # | cell | log (archived this commit) | verdict |
+|---|---|---|---|
+| 1 | r0 | `rs_r0_Mars.exe-20260813-11.42.08.log` | ✅ all predictions, P0.5 refuted |
+| — | r1 (void) | `rs_r1void_Mars.exe-20260813-11.44.37.log` | ⛔ VOID — my harness, §4.6 |
+| 2 | r1 | `rs_r1_Mars.exe-20260813-11.48.07.log` | ✅ all predictions |
+| 3 | r2pre | `rs_r2pre_Mars.exe-20260813-11.49.44.log` | ✅ fixture built and R4-verified |
+| 4 | **r2** | `rs_r2_Mars.exe-20260813-11.51.57.log` | ⭐ ✅ the rescue case, in full |
+| 5 | r2b | `rs_r2b_Mars.exe-20260813-11.53.42.log` | ✅ idempotent in a fresh process |
+| 6 | r3 | `rs_r3_Mars.exe-20260813-11.54.59.log` | ✅ residue-zero, with one correction |
+| 7 | r3z | `rs_r3z_Mars.exe-20260813-11.57.16.log` | ✅ zero-mods read, clean exit |
+| 8 | r-restore | `rs_rrestore_Mars.exe-20260813-11.58.58.log` | ✅ rig as the owner left it |
+| — | owner's tick | `rs_ownertick_Mars.exe-20260813-11.16.44.log` | the item-26 measurement |
+
+### 4.1 ⭐ The rescue case (r2) — §10.9's contract, clause by clause
+
+The pass fired through its **real `OnMsg.PostLoadGame`**, not through
+`force = true`. The probe surface exists because the rig's normal config stands
+the pass down; here the packs were genuinely absent, so the real trigger fired
+and a forced call would have been the weaker evidence.
+
+```
+pass: removed 1617 entries (SMRFixPack_DroneCarryDial=1, SMRFixPack_DroneSpeedDial=1,
+  SMRFixPack_ack_notworking=4, SMRFixPack_closed_to_new_residents=11,
+  SMRFixPack_fixed_loop=1, SMRFixPack_loop_version=1, SMRFixPack_no_homeless=11,
+  SMRFixPack_payload_set=4, SMRFixPack_reserved_at=1533,
+  SMRFixPack_rocket_fuel_key=25, SMRFixPack_shelter_try=25)
+  | kept 1 track re-order latch · 1 wind turbine repair
+  | heals: meteors 1, rains restarted 1, rains ended 0 | skipped 0
+```
+
+| §10.9 clause | measured |
+|---|---|
+| **1. KEEP survives** | ⭐ `CLEARED :: KEEP-list present = 2 :: D10 F35 x1 [WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large] \| D11 F48 = true`. ⚠️ The D10 witness is **SYNTHETIC** (§1) — but the condition is now **SAMPLED**, which is what §6 doubt 3 asked for |
+| **2. REMOVE goes** | ⭐ `CLEARED :: REMOVE-list survivors = 0 — every REMOVE name reads ABSENT by name`. All **11** names, each count matching the before-inventory row for row; 1617 is their exact sum. Re-read absent in r2b and r3, both from disk bytes + load-back (EF-049) |
+| **3. The no-op** | r1: `pass: removed 0 entries \| heals: meteors 0, rains restarted 0, rains ended 0`, preceded by `thread heals skipped — the Community Fix Pack is installed and heals its own`. The zero is **printed**, not inferred |
+| **4. Artifact-absent** | r3: zero lines from the artifact's own code — ⚠️ **but not zero lines, see §4.5** |
+| **5. Bounds** | ⭐ Both halves. Second pass in the same process: `removed=0 … skipped=1`, the skip being *"meteor thread is alive and left alone"* — the ambiguity rule declining to touch the thread the first pass had just restarted. Fresh process (r2b): `removed 0 … heals 0,0,0`, no dialog |
+| **6. Fixtures** | §1: 8 of 11 REMOVE rows and 1 of 2 KEEP rows NATIVE; 3 REMOVE rows, the dead `Meteors` thread and the D10 witness MANUFACTURED and declared |
+
+**Threads left valid, not merely restarted** — R7, effect not execution:
+`rains['normal'] :: loop_version=nil fixed_loop=nil | activation_thread valid=true`
+and `Meteors thread valid = true`. Both stamps gone, both bodies vanilla, both
+alive. **Cost paid, on a fixture copy: one rain re-roll and one meteor re-roll**,
+exactly as costed.
+
+### 4.2 The probe interlock (r1) — the reading I most expected to go wrong
+
+The six rescue probes drive **forced** passes, and a forced pass on a live colony
+would really strip 1533 real timestamps and really take a Drone dial's boost off
+the session. `RESIDUEDIFF r1 BEFORE RunAll -> AFTER RunAll :: 0 reading(s)
+changed — IDENTICAL`, on handle sets. The `WithGlobals` / `g_RainDisaster=false`
+/ `MainMap=false` interlocks hold. `Scan()` on the live colony likewise:
+`0 reading(s) changed`, while counting **1547** entries by name — and those
+counts match my independently-written r0 inventory row for row. Two readers
+built from opposite ends, one answer.
+
+Suite: **r0 `78/0/16/0 of 94`** (the re-measurement STATE carried as PENDING —
+the audit-recounted 78/0/10/0 plus exactly six `save-rescue mod not installed`
+SKIPs, `FactionFundingCheck` still PASS so its repair is still genuinely queued)
+→ **r1 `84/0/10/0 of 94`**, all six rescue probes PASS.
+
+### 4.3 ⭐ Two source-tier claims promoted to MEASURED, and one refuted
+
+1. **D1/D2 really are unreachable.** With the packs loaded (r0):
+   `SMRFixPack_MeteorLatch = 1.0.1`, `FirstAsteroidPrefabs = false`. With the
+   packs pulled (r2pre), **before the artifact did anything**: both `nil`.
+   §10.2 argued this from `persist.lua:136-142`; it is now measured. ⛔ And it
+   is exactly why a `MeteorLatch` absence must never be reported as a removal
+   the tool performed.
+2. **`EF-055` holds for a third mod.** The rescue junction was pulled for r0 and
+   restored for r1, and the mod came back **enabled with no owner action** —
+   `save-rescue present: 1/1`, load order
+   `1:TestKit 2:FixPack 3:OptInPack 4:SaveRescue`. The owner's tick survives a
+   junction round trip. That is the primitive the whole matrix rests on.
+3. ⛔ **P0.5 REFUTED, in the good direction.** I predicted a
+   `Couldn't find mod …` line in r0's log from the pulled junction. There is **no
+   trace of the rescue mod anywhere in r0**, and r3z — every junction pulled while
+   the account still lists four enabled mods — produced **zero** such lines for
+   any of the four. I had read `EF-055`'s "non-modal log line" as a line in the
+   log FILE; `ModMessage` appends to `ModMessageLog` and returns. **A junction
+   pull is completely silent**, so "the artifact is not a standing rig mod" costs
+   the owner nothing at all, and the question I was going to route does not exist.
+
+### 4.4 The close-out control (r-restore), and the one row that moved
+
+`74/74` · `8/8` · save-rescue ABSENT; load order back to the three;
+`DroneSpeedDial=5x`, `DroneCarryDial=+2`, all seven toggles `true` — the owner's
+dials exactly as `sprestore` recorded them on 2026-08-12.
+
+Diffing r-restore's inventory of the baseline world against r0's, eight junction
+round trips apart: **every residue row from D6 onward is byte-identical.** Two
+rows moved and both have a mechanism:
+
+* `scanned 4513 → 4517` — four transient objects, with `Colonist`, `Building`,
+  `Dome/Habitat` and `DroneControl` populations all identical.
+* `SMRFixPack_reserved_at` — still **1533** objects of **1591**, but two handles
+  at the tail differ (`…2000039035,2000039041` → `…2000039034,2000039042`).
+  ⇒ **The live fix pack writes that field while the game runs**, and the two
+  cells settled for 15 s at different speeds. This is the pack working, not
+  residue drift — and it is the argument for comparing handle sets rather than
+  counts: a count would have shown 1533 both times and said nothing.
+
+### 4.5 ⛔ The correction this matrix owes the spec — §10.9(4)
+
+§10.9(4) says the save loads with **"zero lines naming it"**. That is **false as
+written.** r3's log contains one:
+
+```
+Savegame references Mod Save Rescue (id SMR_CommunitySaveRescue, v0.01-000) which is not present
+```
+
+Chased across all eight logs before being framed, and the result narrows it
+rather than alarming:
+
+* **It is a standing engine behaviour, not something the artifact introduces.**
+  r2pre — a save written under the packs, loaded with the packs pulled — printed
+  the identical pair for *Community Fix Pack* and *Community Opt-In Pack*. Every
+  mod loaded at save time is recorded in the savegame's mod-reference list.
+* ⭐ **It self-clears on the first save without the mod.** The list is
+  regenerated from whatever is loaded when the save is written: after r2pre saved
+  `RESCUEDMG` from a kit-only session, both pack references were **gone**
+  (`mods: SMR_CommunityFixPackTestKit`). Same shape as the GameVar mechanism.
+
+⇒ **The accurate claim:** *zero lines from the artifact's own code; one line from
+the engine's savegame mod-reference list, which every mod including both packs
+produces, and which disappears on the next save.* The player-facing sentence
+*"it stores nothing in your save"* stays true **about state** — the
+`ARTIFACTSCAN` found **0** artifact-namespace names across 4510 objects,
+`UIColony`, every rains entry and all 440 `PersistableGlobals` names — but a
+player who uninstalls will see one engine notice on their next load. That belongs
+in the description. ⚠️ It is the same class of player-route claim the
+`public-docs` chain caught next door this morning (`cc67adf`): a sentence about
+what a player will SEE has to be walked, not derived.
+
+### 4.6 ⛔ The void run, and the harness defect that caused it
+
+**The first r1 launch is VOID and its log is archived as
+`rs_r1void_Mars.exe-20260813-11.44.37.log`.** It showed the artifact's automatic
+pass running twice and the fix pack's own `SaveSanitizer` F48 pass running twice
+on the same tracks. My first reading — that the engine raises `PostLoadGame`
+twice per load — was **wrong**, and what killed it was checking the age of the
+behaviour: every archived log has ONE F48 pass, and so did r0 six minutes
+earlier.
+
+**The cause was `RS_ARM.ps1`, not the game and not the artifact.** `arm` appended
+the two instrument lines after its anchor without removing any previous pair, and
+r1 was armed on top of armed-r0. `metadata.lua` listed `98_RSRun.lua` twice, so
+it executed twice, so `RS.Boot()` started **two racing payload flows** — two
+payloads, two loads, two automatic passes, in one process.
+
+⛔ **The ARM gate passed it GREEN**, because it asked *"does metadata list this
+file"* — a `-match`, equally true for one listing and for two. That is the same
+class of miss as unattended-1's unarmed launch, in the opposite direction: the
+gate built to stop a launch with nothing armed was blind to one with everything
+armed twice. **Both halves are fixed in the parked source:** `arm` strips any
+previous pair before inserting, and the gate **counts** occurrences and fails on
+anything but exactly one (`metadata lists … exactly once`). Re-run: one flow, one
+F48 pass, all predictions hit.
+
+### 4.7 Instrument defects in my own reader, stated so nothing quotes them
+
+1. ⚠️ **A wrong population denominator.** The D7 row prints
+   `on 4 object(s) of 0 AllRockets` — that row's population resolves through
+   `IsKindOf(obj, "RocketBase")`, which matched nothing on this world. **The
+   count and the handle set are right; the denominator is wrong.** No verdict
+   rests on it (every verdict is a handle set), and it was **deliberately not
+   fixed mid-matrix** — changing the instrument between cells would have broken
+   the cell-to-cell comparability the whole design rests on.
+2. **`DroneControl` includes rockets** — its 25 handles overlap `payload_set`'s.
+   A class-hierarchy fact, not an error, but it means "25 DroneControls" is not
+   "25 drone hubs".
+3. ⚠️ **A deferred-deletion trap worth recording.** Immediately after
+   `DeleteThread(Meteors)` the instrument read `IsValidThread = true` and I was
+   ready to record the meteor restart as UNSAMPLED. **After the round trip it
+   read `false`** — deletion is deferred within the frame, and only the
+   save/reload makes it visible. The pre-registered wording ("its value in the
+   line above IS the answer") is what stopped a false UNSAMPLED being filed.
+
+### 4.8 Close-out inventory
+
+* **`EF-056`:** both autosaves byte-identical to their pre-copies
+  (`Autosave Sol 311` `D5BCC…`, `Autosave Sol 311(2)` `98F55…`); **no new
+  autosave was written** — the rotation never fired, since every cell ran under
+  a minute at speed 1–3.
+* **Protected four, MD5 re-read, all unchanged:** `CP15PT15`
+  `D2887D754C44134141B6CCC4C9020446` · `CP60RT`
+  `7467573DB43EF0D61ED36FE50A131EE6` · `PT35FIXTURE`
+  `D721329D1EE18604B3D6C89401F74738` · `Autosave Sol 311`
+  `D5BCCF2CB758D5E5EA0706D671602AF5`.
+* **Staged saves — deleted, listing verified BY NAME** (⚠️ `EF-051` HOLD stands,
+  so never "gone"): `RESCUESTAGE` · `RESCUEWIT` · `RESCUEDMG` · `RESCUECLEAN`,
+  each `present=False` on re-listing.
+* **Save directory reconciled BY NAME: 92 entries at open, 92 at close, ADDED
+  none, REMOVED none.**
+* **DISARM GATE: GREEN** — both instruments deleted, `metadata.lua` lines
+  removed, `PROBE SWEEP: clean` over all four `Code/` trees, TestKit tree clean.
+* ⚠️ Cheats: the rig has them enabled and the fixture lineage was built on
+  cheated playtest colonies. **Intersection with these readings: NONE** — every
+  reading here is a persisted mod-authored name, a label modifier, a thread
+  handle or a registry count, and no cheat writes or clears any of them.

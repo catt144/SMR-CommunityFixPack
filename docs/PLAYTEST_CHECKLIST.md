@@ -47,10 +47,15 @@ owed input stays here no matter how struck-through it looks.
     am not sure its worth the added hours."** Three parts, all recorded:
     * **The `fixed`→`tested` evidence campaign is FROZEN until after release.**
       The shipping bar is what already runs mechanically — the automated suite
-      (⛔ post-split 2026-08-12 the suite is 88 probes and the both-mods read is
-      **78/0/10/0**, audit-recounted; the 77/0/10/0-of-87 this ruling was made
-      against is the same bar pre-split — the only verdict change is the
-      deliberate Mod-Options check split), per-fix runtime self-checks, the
+      (⛔ **RE-MEASURED 2026-08-13** — the suite is now **94** probes and the
+      both-mods read is **78 pass / 0 fail / 16 skip / 0 error**, the six extra
+      skips being the new Save Rescue probes standing down because that mod is
+      not part of your standing rig; with it loaded the same run reads
+      **84/0/10/0**. Log `archive/rs_r0_Mars.exe-20260813-11.42.08.log`. The
+      88-probe 78/0/10/0 this ruling was made against is the same bar, and the
+      pre-split 77/0/10/0-of-87 before that — the only verdict change in the
+      whole sequence is the deliberate Mod-Options check split),
+      per-fix runtime self-checks, the
       fail-safe registry and per-fix veto, and the completed save-safety tier
       (F86 Tiers 1+2, verified). Keyboard re-witnessing stops being scheduled work;
       it may resume against the released mod if you still want it.
@@ -290,35 +295,40 @@ deleted when the chain closes).
     cleaner is not a scoping escape hatch" — your words). Say go and it rides
     the chain; say no and all three get recorded as accepted residue instead.
 
-26. ⚖️ **ONE 15-SECOND ACTION, and it is the only thing standing between the
-    rescue tool and its testing: tick "Save Rescue" in the Mod Manager and
-    restart the game once.** ✅ **The tool is built and installed** — a third
-    mod, `Save Rescue`, sitting next to the other two, pushed to the public
-    repo you made for it. It removes what the two packs leave in a savegame
-    *after* they are uninstalled — above all a non-base Drone dial, which
-    otherwise keeps boosting your Drones forever with nothing left to take it
-    off. It keeps the leftovers that ARE repairs (the Wind Turbine buff), and
-    it writes nothing of its own into a save.
-    **Why I cannot do this bit:** installing a mod is a folder link and I can
-    do that; *enabling* one is your click, and by this project's own measured
-    finding a Mod-Manager change does not take effect until a **full game
-    restart** — so the next verification run cannot reach the tool at all
-    until it has been ticked once. Everything after that tick is unattended.
-    ⚠️ **Two things to know before you tick it, neither urgent:**
-    * **It is deliberately inert while the packs are installed** — it stands
-      down per mod and says so in a dialog, because an installed pack cleans
-      up after itself. So ticking it changes nothing about your normal play;
-      it will simply do nothing until a save actually needs it.
-    * **Nothing about it has been run in a game yet** — not by me, not by
-      anyone. Everything I have said about it is read off the source. That is
-      exactly what the next run is for.
-    ⚖️ **The one thing genuinely for you to decide, and it can wait for
-    release prep:** the display name is **"Save Rescue"** as you ratified it,
-    but the same day you renamed the opt-in mod to *"Community Fix Pack:
-    Opt-In Modules"* so the family sorts together in mod lists. As it stands
-    the third mod does not sort with them. Say the word and it becomes
-    *"Community Fix Pack: Save Rescue"*; say nothing and it ships as ratified.
-    No work either way — it is one line in one file.
+26. ~~**⚖️ ONE 15-SECOND ACTION: tick "Save Rescue" and restart**~~
+    ✅✅ **DONE BY YOU 2026-08-13 at 11:16, and the tool has now been TESTED on
+    the back of it. Nothing here is owed from you any more.**
+    Your tick is in the game's own log (`SaveRescue: ready`), and the whole
+    verification ran unattended off it: **nine launches, about eight minutes of
+    machine time, zero minutes of yours.**
+    ⭐ **What it actually did, on a real save carrying real leftovers:** it
+    removed **1617** items across all eleven names it targets — including both
+    Drone dials, the ones that otherwise keep boosting your drones forever with
+    the mod gone — **kept both of the leftovers that ARE repairs** (the Wind
+    Turbine buff and the track latch), restarted a stalled rain cycle and a dead
+    meteor timer, and left **nothing of its own** anywhere in the save. Loading
+    the cleaned save a second time it correctly did nothing at all. No errors in
+    any cell.
+    ⚠️ **One honest caveat, and it is small.** We claimed the tool leaves "zero
+    lines" behind once removed. Measured, there is exactly one — the game itself
+    notes `Savegame references Mod Save Rescue … which is not present` on the
+    first load after you uninstall it. **This is not special to this tool: the
+    Fix Pack and the Opt-In Modules do exactly the same**, and the note
+    disappears the next time you save. It will be said plainly in the mod's
+    description rather than papered over.
+    ⚖️ **Still genuinely yours to decide, and it can wait for release prep:**
+    the display name is **"Save Rescue"** as you ratified it, but the same day
+    you renamed the opt-in mod to *"Community Fix Pack: Opt-In Modules"* so the
+    family sorts together in mod lists. As it stands the third mod does not sort
+    with them. Say the word and it becomes *"Community Fix Pack: Save Rescue"*;
+    say nothing and it ships as ratified. No work either way — one line in one
+    file.
+    ⚠️ **Your rig is exactly as you left it** — both packs back at `74/74` and
+    `8/8`, drone dials still `5x` / `+2`, all seven opt-in toggles still on, and
+    every save you own byte-identical (the four protected ones were MD5-checked
+    either side). Save Rescue itself is installed but **not** loaded, by design:
+    it is a repair tool, not a standing mod, and leaving it out costs you
+    nothing — measured, a pulled mod produces no log line at all.
 
 ### ⭐ NEW 2026-08-13 — public documentation: platform decided, one question back to you
 
@@ -463,10 +473,20 @@ than moving to the archive only because item 24's artifact is not built yet.
     not a technical one. The reason it is on your list today rather than at
     launch is simply that the other three items have known endings and this one
     does not.
-    ⭐ **Separate and much cheaper: the screenshots.** Those ARE planned —
-    `PUBLIC_DOCS_DESIGN.md` §8B is a shot list ordered so the whole set costs
-    **one sitting, 45–60 minutes, two game restarts**. Nothing owed until the
-    chain gets there.
+    ⭐⭐ **CORRECTED BY YOU 2026-08-13, and it improves the plan: the art needs
+    the game open, so it cannot run beside D13 and it does not belong on its
+    own.** A text-on-image preview wants a backdrop, and a backdrop is a
+    screenshot — so **the art and the screenshots are now ONE sitting**, and the
+    brief for it exists and is fireable:
+    ⇒ **`agent/prompts/CAPTURE_SITTING.md`** — every shot with its framing note,
+    ordered so the whole set costs **two game restarts, not one per pair**,
+    with the `EF-056` autosave rule at the top and the preview-art backdrops as
+    its Pass G. ⛔ **Do not fire it while the D13 chain is live** — that leg
+    needs the game too.
+    ⚖️ **One thing for whoever schedules it:** `STATE.md` already plans ② ONE
+    combined sitting (PT-20 redo + D13 after-sweep + F102's minute). **Most of
+    the capture list should ride that sitting rather than be a second one** —
+    the brief says which passes fold in and which may need their own save.
 
 25. ~~**⚖️ How one of our own research files talks about real modders**~~
     ✅✅ **DECIDED 2026-08-13, your ruling: BOTH EDITS — ✅ DONE the same

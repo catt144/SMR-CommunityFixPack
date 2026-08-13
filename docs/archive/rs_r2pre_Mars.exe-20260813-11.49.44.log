@@ -1,0 +1,538 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	34%
+Disk Free      	752324 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:094
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:097
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:451
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:579
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:766
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:406
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:500
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:495
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:497
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:17:830
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:835
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:435
+Reloading done in 930 ms
+						Lua 0:00:18:812
+[preset] Preset postprocess took 59 ms.
+						Lua 0:00:18:867
+479 / 479 particle streams loaded in 51 ms.
+						Lua 0:00:19:104
+[mod] [RS-r2pre] === d13-rescue RS-r2pre === watchdog 1800000ms
+[RS-r2pre] === d13-rescue RS-r2pre === watchdog 1800000ms
+[mod] [RS-r2pre] STEP 1-waiting-menu BEGIN
+[RS-r2pre] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:105
+[PdxSDK] Started up. Took 1600
+						Lua 0:00:19:112
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit
+						Lua 0:00:19:555
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:556
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:680
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:566
+[mod] [RS-r2pre] STEP 1-waiting-menu END 2500ms
+[RS-r2pre] STEP 1-waiting-menu END 2500ms
+[mod] [RS-r2pre] MODE ON DISK = CELL r2pre — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[RS-r2pre] MODE ON DISK = CELL r2pre — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[mod] [RS-r2pre] STEP 2-config-gate BEGIN
+[RS-r2pre] STEP 2-config-gate BEGIN
+[mod] [RS-r2pre] GATES config-gate/r2pre ------------------------------------------------
+[RS-r2pre] GATES config-gate/r2pre ------------------------------------------------
+[mod] [RS-r2pre] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[RS-r2pre] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[mod] [RS-r2pre] GATEREAD opt-in pack :: REGISTRY ABSENT (global SMROptInPack is nil) — the mod's code did not run in this process
+[RS-r2pre] GATEREAD opt-in pack :: REGISTRY ABSENT (global SMROptInPack is nil) — the mod's code did not run in this process
+[mod] [RS-r2pre] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[RS-r2pre] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[mod] [RS-r2pre] GATES config-gate/r2pre :: fix pack 0/0 | opt-in pack 0/0 | save-rescue 0/0 | map= | speed=1 | loads_this_process=0
+[RS-r2pre] GATES config-gate/r2pre :: fix pack 0/0 | opt-in pack 0/0 | save-rescue 0/0 | map= | speed=1 | loads_this_process=0
+[mod] [RS-r2pre] MODORDER config-gate/r2pre :: 1 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit
+[RS-r2pre] MODORDER config-gate/r2pre :: 1 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit
+[mod] [RS-r2pre] DIALOPTS config-gate/r2pre :: NOT INSPECTABLE — Mods[SMR_CommunityOptInPack] = nil, .options = nil
+[RS-r2pre] DIALOPTS config-gate/r2pre :: NOT INSPECTABLE — Mods[SMR_CommunityOptInPack] = nil, .options = nil
+[mod] [RS-r2pre] CONFIGGATE OK :: cell r2pre :: fix=false (wanted false) | opt-in=false (wanted false) | rescue=false (wanted false) :: 0/0, 0/0, 0/0
+[RS-r2pre] CONFIGGATE OK :: cell r2pre :: fix=false (wanted false) | opt-in=false (wanted false) | rescue=false (wanted false) :: 0/0, 0/0, 0/0
+[mod] [RS-r2pre] STEP 2-config-gate END 0ms
+[RS-r2pre] STEP 2-config-gate END 0ms
+[mod] [RS-r2pre] STEP 3-load-witness BEGIN
+[RS-r2pre] STEP 3-load-witness BEGIN
+						Lua 0:00:21:667
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:21:672
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:702
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:450
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 72.8 MB/s, average read 4948 bytes.
+						Lua 0:00:27:524
+Unpersist missing permanent: Mod/SMR_CommunityFixPack | Fallback permanent: table: 000001A7D0628E90 [7]
+						Lua 0:00:27:549
+[mod] Savegame references Mod Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) which is not present
+[mod] Savegame references Mod Community Opt-In Pack (id SMR_CommunityOptInPack, v0.01-000) which is not present
+						Lua 0:00:30:302
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:322
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:339
+Game Loaded in 8671 ms
+						Lua 0:00:30:386
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:288
+Game loaded on map BlankBigCanyonCMix_09 in 9722 ms
+[mod] [RS-r2pre] LOAD OK #1 file=RESCUEWIT.savegame.sav — LoadGame returned no error
+[RS-r2pre] LOAD OK #1 file=RESCUEWIT.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:590
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:785
+[mod] [RS-r2pre] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[RS-r2pre] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[mod] [RS-r2pre] STEP 3-load-witness END (no timing — this step blocks render mode)
+[RS-r2pre] STEP 3-load-witness END (no timing — this step blocks render mode)
+[mod] [RS-r2pre] STEP 4-before-inventory BEGIN
+[RS-r2pre] STEP 4-before-inventory BEGIN
+[mod] [RS-r2pre] WITNESS RESCUEWIT.savegame.sav = a byte copy of SPCONRT.savegame.sav (MD5 8A7639341C536816BFE18E35150AEDDE), the split-optins cell-(e) contract round trip — savename VERBATIM (EF-050), copy-only (EF-051)
+[RS-r2pre] WITNESS RESCUEWIT.savegame.sav = a byte copy of SPCONRT.savegame.sav (MD5 8A7639341C536816BFE18E35150AEDDE), the split-optins cell-(e) contract round trip — savename VERBATIM (EF-050), copy-only (EF-051)
+[mod] [RS-r2pre] RESIDUE r2pre/before ==========================================
+[RS-r2pre] RESIDUE r2pre/before ==========================================
+						Lua 0:00:46:796
+[mod] [RS-r2pre] RESIDUEPOP r2pre/before :: scanned 4516 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[RS-r2pre] RESIDUEPOP r2pre/before :: scanned 4516 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D5    FP SMRFixPack_reserved_at             on 1533 object(s) of 1593 Colonist | handles=[2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,...,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039035,2000039041]
+[RS-r2pre] RESIDUEROW r2pre/before :: D5    FP SMRFixPack_reserved_at             on 1533 object(s) of 1593 Colonist | handles=[2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,...,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039035,2000039041]
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D6    FP SMRFixPack_shelter_try             on 0 object(s) of 1593 Colonist | handles=[]
+[RS-r2pre] RESIDUEROW r2pre/before :: D6    FP SMRFixPack_shelter_try             on 0 object(s) of 1593 Colonist | handles=[]
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D7    FP SMRFixPack_payload_set             on 4 object(s) of 0 AllRockets | handles=[1061,1062,4104,4641]
+[RS-r2pre] RESIDUEROW r2pre/before :: D7    FP SMRFixPack_payload_set             on 4 object(s) of 0 AllRockets | handles=[1061,1062,4104,4641]
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D8    FP SMRFixPack_rocket_fuel_key         on 0 object(s) of 25 DroneControl | handles=[]
+[RS-r2pre] RESIDUEROW r2pre/before :: D8    FP SMRFixPack_rocket_fuel_key         on 0 object(s) of 25 DroneControl | handles=[]
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D12   OP SMRFixPack_ack_notworking          on 4 object(s) of 1073 Building | handles=[2851,5342,6300,9057]
+[RS-r2pre] RESIDUEROW r2pre/before :: D12   OP SMRFixPack_ack_notworking          on 4 object(s) of 1073 Building | handles=[2851,5342,6300,9057]
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D13   OP SMRFixPack_closed_to_new_residents on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[RS-r2pre] RESIDUEROW r2pre/before :: D13   OP SMRFixPack_closed_to_new_residents on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D14   OP SMRFixPack_no_homeless             on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[RS-r2pre] RESIDUEROW r2pre/before :: D14   OP SMRFixPack_no_homeless             on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = table: 000001A7D470B0F0 (type=table truthy=true) | prop=move_speed percent=200 amount=0 | modifiers on that label = 4
+[RS-r2pre] RESIDUEROW r2pre/before :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = table: 000001A7D470B0F0 (type=table truthy=true) | prop=move_speed percent=200 amount=0 | modifiers on that label = 4
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = table: 000001A7D931A360 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 | modifiers on that label = 38
+[RS-r2pre] RESIDUEROW r2pre/before :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = table: 000001A7D931A360 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 | modifiers on that label = 38
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 0 modifier(s) :: <none — the KEEP condition is NOT sampled in this state>
+[RS-r2pre] RESIDUEROW r2pre/before :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 0 modifier(s) :: <none — the KEEP condition is NOT sampled in this state>
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[RS-r2pre] RESIDUEROW r2pre/before :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[RS-r2pre] RESIDUEROW r2pre/before :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D3/D4 rains['normal'] :: loop_version=1.0.1 fixed_loop=nil | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[RS-r2pre] RESIDUEROW r2pre/before :: D3/D4 rains['normal'] :: loop_version=1.0.1 fixed_loop=nil | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[RS-r2pre] RESIDUEROW r2pre/before :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: g_RainDisaster = false (type=boolean) | Meteors thread valid = true | MeteorStorm valid = true						Lua 0:00:46:797
+
+[RS-r2pre] RESIDUEROW r2pre/before :: g_RainDisaster = false (type=boolean) | Meteors thread valid = true | MeteorStorm valid = true
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: GameVar SMRFixPack_MeteorLatch             = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-r2pre] RESIDUEROW r2pre/before :: GameVar SMRFixPack_MeteorLatch             = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-r2pre] RESIDUEROW r2pre/before :: GameVar SMRFixPack_FirstAsteroidPrefabs    = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-r2pre] RESIDUEROW r2pre/before :: GameVar SMRFixPack_FirstAsteroidPrefabs    = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-r2pre] RESIDUE r2pre/before END ======================================
+[RS-r2pre] RESIDUE r2pre/before END ======================================
+[mod] [RS-r2pre] CARGO r2pre/before :: UniversalZeusRocket#1064 holds 2 unit(s) that are OUT of the labels — the disclosed label-walk incompleteness (spec 10.2)
+[RS-r2pre] CARGO r2pre/before :: UniversalZeusRocket#1064 holds 2 unit(s) that are OUT of the labels — the disclosed label-walk incompleteness (spec 10.2)
+[mod] [RS-r2pre] CARGO r2pre/before :: 2 labelled-rocket occupant(s) total — this is the population a surviving reserved_at/shelter_try would have to come from before it is a defect
+[RS-r2pre] CARGO r2pre/before :: 2 labelled-rocket occupant(s) total — this is the population a surviving reserved_at/shelter_try would have to come from before it is a defect
+[mod] [SMRTest][carry] === FIXTURE CARRY DUMP ===
+=== FIXTURE CARRY DUMP ===
+[mod] [SMRTest][carry] -- GameVars --
+-- GameVars --
+[mod] [SMRTest][carry]   SMRFixPack_FirstAsteroidPrefabs = (absent)
+  SMRFixPack_FirstAsteroidPrefabs = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_DroneSpeedDial = (absent)
+  SMRFixPack_DroneSpeedDial = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_DroneCarryDial = (absent)
+  SMRFixPack_DroneCarryDial = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_MeteorLatch = (absent)
+  SMRFixPack_MeteorLatch = (absent)
+[mod] [SMRTest][carry] -- RainsDisasterThreads (loop_version = migrated; legacy = pre-rewrite) --
+-- RainsDisasterThreads (loop_version = migrated; legacy = pre-rewrite) --
+[mod] [SMRTest][carry]   normal: loop_version=1.0.1  legacy_fixed_loop=nil  thread_alive=true  id=Normal_VeryLow
+  normal: loop_version=1.0.1  legacy_fixed_loop=nil  thread_alive=true  id=Normal_VeryLow
+[mod] [SMRTest][carry]   toxic: loop_version=nil  legacy_fixed_loop=nil  thread_alive=false  id=nil
+  toxic: loop_version=nil  legacy_fixed_loop=nil  thread_alive=false  id=nil
+[mod] [SMRTest][carry]   NOTE: loop_version = the pack version whose migration pass last
+  NOTE: loop_version = the pack version whose migration pass last
+[mod] [SMRTest][carry]   moved this loop onto vanilla's body; a differing/absent version
+  moved this loop onto vanilla's body; a differing/absent version
+[mod] [SMRTest][carry]   migrates on next load. legacy_fixed_loop=true means the fixture
+  migrates on next load. legacy_fixed_loop=true means the fixture
+[mod] [SMRTest][carry]   has not been loaded since the 2026-08-01 rewrite.
+  has not been loaded since the 2026-08-01 rewrite.
+[mod] [SMRTest][carry] -- patched global threads (body identity is NOT readable: no debug) --
+-- patched global threads (body identity is NOT readable: no debug) --
+[mod] [SMRTest][carry]   Meteors: thread: 000001A7D4D0F908, valid=true
+  Meteors: thread: 000001A7D4D0F908, valid=true
+[mod] [SMRTest][carry]   MeteorStorm: thread: 000001A7D3902C10, valid=true
+  MeteorStorm: thread: 000001A7D3902C10, valid=true
+[mod] [SMRTest][carry] -- instance fields on live objects --
+-- instance fields on live objects --
+						Lua 0:00:46:858
+[mod] [SMRTest][carry]   scanned 3411 distinct labelled objects
+  scanned 3411 distinct labelled objects
+[mod] [SMRTest][carry]     SMRFixPack_reserved_at on 1335 object(s)
+    SMRFixPack_reserved_at on 1335 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_rocket_fuel_key on 0 object(s)
+    SMRFixPack_rocket_fuel_key on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_payload_set on 3 object(s)
+    SMRFixPack_payload_set on 3 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_shelter_try on 0 object(s)
+    SMRFixPack_shelter_try on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_closed_to_new_residents on 11 object(s)
+    SMRFixPack_closed_to_new_residents on 11 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_ack_notworking on 4 object(s)
+    SMRFixPack_ack_notworking on 4 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_no_homeless on 11 object(s)
+    SMRFixPack_no_homeless on 11 object(s)
+[mod] [SMRTest][carry]     (no unexpected SMRFixPack_* fields)
+    (no unexpected SMRFixPack_* fields)
+[mod] [SMRTest][carry] -- label modifiers --
+-- label modifiers --
+						Lua 0:00:46:859
+[mod] [SMRTest][carry]   NOT INSPECTABLE from here — the modifier store was not found by a
+  NOT INSPECTABLE from here — the modifier store was not found by a
+[mod] [SMRTest][carry]   shallow scan. Absence here is NOT evidence of absence.
+  shallow scan. Absence here is NOT evidence of absence.
+[mod] [SMRTest][carry] === END DUMP ===
+=== END DUMP ===
+[mod] [RS-r2pre] TRY SMRTest.FixtureCarry() before ok=true result=done
+[RS-r2pre] TRY SMRTest.FixtureCarry() before ok=true result=done
+[mod] [RS-r2pre] STEP 4-before-inventory END 0ms
+[RS-r2pre] STEP 4-before-inventory END 0ms
+[mod] [RS-r2pre] STEP 5-manufacture BEGIN
+[RS-r2pre] STEP 5-manufacture BEGIN
+[mod] [RS-r2pre] TRY SetLabelModifier(WindTurbine_Large, SMRFixPack_F35_WindTurbine_Large) ok=true result=written
+[RS-r2pre] TRY SetLabelModifier(WindTurbine_Large, SMRFixPack_F35_WindTurbine_Large) ok=true result=written
+[mod] [RS-r2pre] KEEPWITNESS r2pre :: ⚠️ SYNTHETIC — this save carried NO F35 modifier, so one was planted with the exact id and shape 90_SaveSanitizer:84 writes (label 'WindTurbine_Large', +100% electricity_production). landed=true. ⛔ The record must call this witness synthetic
+[RS-r2pre] KEEPWITNESS r2pre :: ⚠️ SYNTHETIC — this save carried NO F35 modifier, so one was planted with the exact id and shape 90_SaveSanitizer:84 writes (label 'WindTurbine_Large', +100% electricity_production). landed=true. ⛔ The record must call this witness synthetic
+[mod] [RS-r2pre] MANUFACTURE r2pre :: ⛔ everything this step writes is SYNTHETIC and is declared so in the record
+[RS-r2pre] MANUFACTURE r2pre :: ⛔ everything this step writes is SYNTHETIC and is declared so in the record
+						Lua 0:00:46:866
+[mod] [RS-r2pre] MANUFACTURE r2pre :: D6 SMRFixPack_shelter_try written on 25 Colonist(s) handles=[2000016755,2000017096,2000017156,2000017174,2000017214,2000017219,2000017223,2000017299,2000017327,2000017337,2000017394,2000017749,2000017866,2000017987,2000018050,2000018354,2000018368,2000018401,2000018416,2000018432,2000018453,2000018598,2000018629,2000018637,2000018852]
+[RS-r2pre] MANUFACTURE r2pre :: D6 SMRFixPack_shelter_try written on 25 Colonist(s) handles=[2000016755,2000017096,2000017156,2000017174,2000017214,2000017219,2000017223,2000017299,2000017327,2000017337,2000017394,2000017749,2000017866,2000017987,2000018050,2000018354,2000018368,2000018401,2000018416,2000018432,2000018453,2000018598,2000018629,2000018637,2000018852]
+[mod] [RS-r2pre] MANUFACTURE r2pre :: D8 SMRFixPack_rocket_fuel_key written on 25 DroneControl(s) handles=[1061,1062,1063,1064,1078,1457,2074,2608,3564,4078,4104,4230,4641,4967,6619,8285,8591,9430,9431,9437,12768,12942,14563,2000000330,2000003944]
+[RS-r2pre] MANUFACTURE r2pre :: D8 SMRFixPack_rocket_fuel_key written on 25 DroneControl(s) handles=[1061,1062,1063,1064,1078,1457,2074,2608,3564,4078,4104,4230,4641,4967,6619,8285,8591,9430,9431,9437,12768,12942,14563,2000000330,2000003944]
+						Lua 0:00:46:867
+[mod] [RS-r2pre] MANUFACTURE r2pre :: D4 SMRFixPack_fixed_loop = true written on rains['normal'] (settings id=Normal_VeryLow), whose activation_thread is ALIVE — the legacy-body shape the heal detects
+[RS-r2pre] MANUFACTURE r2pre :: D4 SMRFixPack_fixed_loop = true written on rains['normal'] (settings id=Normal_VeryLow), whose activation_thread is ALIVE — the legacy-body shape the heal detects
+[mod] [RS-r2pre] TRY DeleteThread(Meteors) ok=true result=true
+[RS-r2pre] TRY DeleteThread(Meteors) ok=true result=true
+[mod] [RS-r2pre] MANUFACTURE r2pre :: Meteors thread killed in-session; IsValidThread now = true. ⚠️ the question is whether this survives the round trip
+[RS-r2pre] MANUFACTURE r2pre :: Meteors thread killed in-session; IsValidThread now = true. ⚠️ the question is whether this survives the round trip
+[mod] [RS-r2pre] RESIDUE r2pre/after-manufacture ==========================================
+[RS-r2pre] RESIDUE r2pre/after-manufacture ==========================================
+						Lua 0:00:46:877
+[mod] [RS-r2pre] RESIDUEPOP r2pre/after-manufacture :: scanned 4516 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[RS-r2pre] RESIDUEPOP r2pre/after-manufacture :: scanned 4516 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+						Lua 0:00:46:878
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D5    FP SMRFixPack_reserved_at             on 1533 object(s) of 1593 Colonist | handles=[2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,...,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039035,2000039041]
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D5    FP SMRFixPack_reserved_at             on 1533 object(s) of 1593 Colonist | handles=[2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,...,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039035,2000039041]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D6    FP SMRFixPack_shelter_try             on 25 object(s) of 1593 Colonist | handles=[2000016755,2000017096,2000017156,2000017174,2000017214,2000017219,2000017223,2000017299,2000017327,2000017337,2000017394,2000017749,...,2000017987,2000018050,2000018354,2000018368,2000018401,2000018416,2000018432,2000018453,2000018598,2000018629,2000018637,2000018852]
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D6    FP SMRFixPack_shelter_try             on 25 object(s) of 1593 Colonist | handles=[2000016755,2000017096,2000017156,2000017174,2000017214,2000017219,2000017223,2000017299,2000017327,2000017337,2000017394,2000017749,...,2000017987,2000018050,2000018354,2000018368,2000018401,2000018416,2000018432,2000018453,2000018598,2000018629,2000018637,2000018852]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D7    FP SMRFixPack_payload_set             on 4 object(s) of 0 AllRockets | handles=[1061,1062,4104,4641]
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D7    FP SMRFixPack_payload_set             on 4 object(s) of 0 AllRockets | handles=[1061,1062,4104,4641]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D8    FP SMRFixPack_rocket_fuel_key         on 25 object(s) of 25 DroneControl | handles=[1061,1062,1063,1064,1078,1457,2074,2608,3564,4078,4104,4230,...,4967,6619,8285,8591,9430,9431,9437,12768,12942,14563,2000000330,2000003944]
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D8    FP SMRFixPack_rocket_fuel_key         on 25 object(s) of 25 DroneControl | handles=[1061,1062,1063,1064,1078,1457,2074,2608,3564,4078,4104,4230,...,4967,6619,8285,8591,9430,9431,9437,12768,12942,14563,2000000330,2000003944]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D12   OP SMRFixPack_ack_notworking          on 4 object(s) of 1073 Building | handles=[2851,5342,6300,9057]
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D12   OP SMRFixPack_ack_notworking          on 4 object(s) of 1073 Building | handles=[2851,5342,6300,9057]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D13   OP SMRFixPack_closed_to_new_residents on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D13   OP SMRFixPack_closed_to_new_residents on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D14   OP SMRFixPack_no_homeless             on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D14   OP SMRFixPack_no_homeless             on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = table: 000001A7D470B0F0 (type=table truthy=true) | prop=move_speed percent=200 amount=0 | modifiers on that label = 4
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = table: 000001A7D470B0F0 (type=table truthy=true) | prop=move_speed percent=200 amount=0 | modifiers on that label = 4
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = table: 000001A7D931A360 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 | modifiers on that label = 38
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = table: 000001A7D931A360 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 | modifiers on that label = 38
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 1 modifier(s) :: WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 1 modifier(s) :: WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D3/D4 rains['normal'] :: loop_version=1.0.1 fixed_loop=true | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D3/D4 rains['normal'] :: loop_version=1.0.1 fixed_loop=true | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: g_RainDisaster = false (type=boolean) | Meteors thread valid = false | MeteorStorm valid = true
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: g_RainDisaster = false (type=boolean) | Meteors thread valid = false | MeteorStorm valid = true
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: GameVar SMRFixPack_MeteorLatch             = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: GameVar SMRFixPack_MeteorLatch             = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-manufacture :: GameVar SMRFixPack_FirstAsteroidPrefabs    = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-r2pre] RESIDUEROW r2pre/after-manufacture :: GameVar SMRFixPack_FirstAsteroidPrefabs    = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-r2pre] RESIDUE r2pre/after-manufacture END ======================================
+[RS-r2pre] RESIDUE r2pre/after-manufacture END ======================================
+[mod] [RS-r2pre] MANUFACTURE r2pre :: KEEP witness kind = synthetic
+[RS-r2pre] MANUFACTURE r2pre :: KEEP witness kind = synthetic
+[mod] [RS-r2pre] STEP 5-manufacture END 0ms
+[RS-r2pre] STEP 5-manufacture END 0ms
+[mod] [RS-r2pre] STEP 6-round-trip BEGIN
+[RS-r2pre] STEP 6-round-trip BEGIN
+						Lua 0:00:47:467
+[mod] [RS-r2pre] SAVE SaveGame returned err=false name=RESCUEDMG.savegame.sav
+[RS-r2pre] SAVE SaveGame returned err=false name=RESCUEDMG.savegame.sav
+[mod] [RS-r2pre] TRY SaveGame RESCUEDMG.savegame.sav (yielding) ok=true result=false
+[RS-r2pre] TRY SaveGame RESCUEDMG.savegame.sav (yielding) ok=true result=false
+						Lua 0:00:47:946
+[mod] [RS-r2pre] SAVE WITNESS for RESCUEDMG.savegame.sav = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+[RS-r2pre] SAVE WITNESS for RESCUEDMG.savegame.sav = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).
+						Lua 0:00:48:080
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit 
+						Lua 0:00:53:422
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:53:442
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:53:460
+Game Loaded in 5380 ms
+						Lua 0:00:53:505
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:54:067
+Game loaded on map BlankBigCanyonCMix_09 in 6121 ms
+[mod] [RS-r2pre] LOAD OK #2 file=RESCUEDMG.savegame.sav — LoadGame returned no error
+[RS-r2pre] LOAD OK #2 file=RESCUEDMG.savegame.sav — LoadGame returned no error
+						Lua 0:00:55:368
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:56:369
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:09:566
+[mod] [RS-r2pre] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[RS-r2pre] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[mod] [RS-r2pre] STEP 6-round-trip END (no timing — this step blocks render mode)
+[RS-r2pre] STEP 6-round-trip END (no timing — this step blocks render mode)
+[mod] [RS-r2pre] STEP 7-after-round-trip BEGIN
+[RS-r2pre] STEP 7-after-round-trip BEGIN
+[mod] [RS-r2pre] RESIDUE r2pre/after-round-trip ==========================================
+[RS-r2pre] RESIDUE r2pre/after-round-trip ==========================================
+						Lua 0:01:09:577
+[mod] [RS-r2pre] RESIDUEPOP r2pre/after-round-trip :: scanned 4513 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[RS-r2pre] RESIDUEPOP r2pre/after-round-trip :: scanned 4513 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D5    FP SMRFixPack_reserved_at             on 1533 object(s) of 1593 Colonist | handles=[2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,...,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039035,2000039041]
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D5    FP SMRFixPack_reserved_at             on 1533 object(s) of 1593 Colonist | handles=[2000016166,2000016225,2000016260,2000016459,2000016579,2000016595,2000016609,2000016643,2000016722,2000016741,2000016755,2000016782,...,2000038790,2000038828,2000038833,2000038910,2000038911,2000038917,2000038939,2000038953,2000038956,2000039032,2000039035,2000039041]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D6    FP SMRFixPack_shelter_try             on 25 object(s) of 1593 Colonist | handles=[2000016755,2000017096,2000017156,2000017174,2000017214,2000017219,2000017223,2000017299,2000017327,2000017337,2000017394,2000017749,...,2000017987,2000018050,2000018354,2000018368,2000018401,2000018416,2000018432,2000018453,2000018598,2000018629,2000018637,2000018852]
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D6    FP SMRFixPack_shelter_try             on 25 object(s) of 1593 Colonist | handles=[2000016755,2000017096,2000017156,2000017174,2000017214,2000017219,2000017223,2000017299,2000017327,2000017337,2000017394,2000017749,...,2000017987,2000018050,2000018354,2000018368,2000018401,2000018416,2000018432,2000018453,2000018598,2000018629,2000018637,2000018852]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D7    FP SMRFixPack_payload_set             on 4 object(s) of 0 AllRockets | handles=[1061,1062,4104,4641]
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D7    FP SMRFixPack_payload_set             on 4 object(s) of 0 AllRockets | handles=[1061,1062,4104,4641]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D8    FP SMRFixPack_rocket_fuel_key         on 25 object(s) of 25 DroneControl | handles=[1061,1062,1063,1064,1078,1457,2074,2608,3564,4078,4104,4230,...,4967,6619,8285,8591,9430,9431,9437,12768,12942,14563,2000000330,2000003944]
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D8    FP SMRFixPack_rocket_fuel_key         on 25 object(s) of 25 DroneControl | handles=[1061,1062,1063,1064,1078,1457,2074,2608,3564,4078,4104,4230,...,4967,6619,8285,8591,9430,9431,9437,12768,12942,14563,2000000330,2000003944]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D12   OP SMRFixPack_ack_notworking          on 4 object(s) of 1073 Building | handles=[2851,5342,6300,9057]						Lua 0:01:09:578
+
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D12   OP SMRFixPack_ack_notworking          on 4 object(s) of 1073 Building | handles=[2851,5342,6300,9057]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D13   OP SMRFixPack_closed_to_new_residents on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D13   OP SMRFixPack_closed_to_new_residents on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D14   OP SMRFixPack_no_homeless             on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D14   OP SMRFixPack_no_homeless             on 11 object(s) of 14 Dome/MicroGHabitatBase | handles=[1243,1367,1506,2285,2653,2962,5276,6396,8299,8631,8984]
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = table: 000001A7D0A121A8 (type=table truthy=true) | prop=move_speed percent=200 amount=0 | modifiers on that label = 4
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = table: 000001A7D0A121A8 (type=table truthy=true) | prop=move_speed percent=200 amount=0 | modifiers on that label = 4
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = table: 000001A7D2C5BE08 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 | modifiers on that label = 38
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = table: 000001A7D2C5BE08 (type=table truthy=true) | prop=DroneResourceCarryAmount percent=0 amount=2 | modifiers on that label = 38
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 1 modifier(s) :: WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 1 modifier(s) :: WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D3/D4 rains['normal'] :: loop_version=1.0.1 fixed_loop=true | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D3/D4 rains['normal'] :: loop_version=1.0.1 fixed_loop=true | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: g_RainDisaster = false (type=boolean) | Meteors thread valid = false | MeteorStorm valid = true
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: g_RainDisaster = false (type=boolean) | Meteors thread valid = false | MeteorStorm valid = true
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: GameVar SMRFixPack_MeteorLatch             = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: GameVar SMRFixPack_MeteorLatch             = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-r2pre] RESIDUEROW r2pre/after-round-trip :: GameVar SMRFixPack_FirstAsteroidPrefabs    = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-r2pre] RESIDUEROW r2pre/after-round-trip :: GameVar SMRFixPack_FirstAsteroidPrefabs    = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-r2pre] RESIDUE r2pre/after-round-trip END ======================================
+[RS-r2pre] RESIDUE r2pre/after-round-trip END ======================================
+[mod] [RS-r2pre] RESIDUEDIFF r2pre manufacture -> save -> reload (R4) :: 1 reading(s) changed — scanned population: 4516 -> 4513
+[RS-r2pre] RESIDUEDIFF r2pre manufacture -> save -> reload (R4) :: 1 reading(s) changed — scanned population: 4516 -> 4513
+[mod] [RS-r2pre] ROUNDTRIP r2pre :: ⚠️ the one row that could legitimately move is the Meteors thread — a thread killed in-session may or may not persist as dead. Its value in the line above IS the answer, and if it reads valid the meteor restart stays UNSAMPLED rather than refuted.
+[RS-r2pre] ROUNDTRIP r2pre :: ⚠️ the one row that could legitimately move is the Meteors thread — a thread killed in-session may or may not persist as dead. Its value in the line above IS the answer, and if it reads valid the meteor restart stays UNSAMPLED rather than refuted.
+[mod] [SMRTest][carry] === FIXTURE CARRY DUMP ===
+=== FIXTURE CARRY DUMP ===
+[mod] [SMRTest][carry] -- GameVars --
+-- GameVars --
+[mod] [SMRTest][carry]   SMRFixPack_FirstAsteroidPrefabs = (absent)
+  SMRFixPack_FirstAsteroidPrefabs = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_DroneSpeedDial = (absent)
+  SMRFixPack_DroneSpeedDial = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_DroneCarryDial = (absent)
+  SMRFixPack_DroneCarryDial = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_MeteorLatch = (absent)
+  SMRFixPack_MeteorLatch = (absent)
+[mod] [SMRTest][carry] -- RainsDisasterThreads (loop_version = migrated; legacy = pre-rewrite) --
+-- RainsDisasterThreads (loop_version = migrated; legacy = pre-rewrite) --
+[mod] [SMRTest][carry]   normal: loop_version=1.0.1  legacy_fixed_loop=true  thread_alive=true  id=Normal_VeryLow
+  normal: loop_version=1.0.1  legacy_fixed_loop=true  thread_alive=true  id=Normal_VeryLow
+[mod] [SMRTest][carry]   toxic: loop_version=nil  legacy_fixed_loop=nil  thread_alive=false  id=nil
+  toxic: loop_version=nil  legacy_fixed_loop=nil  thread_alive=false  id=nil
+[mod] [SMRTest][carry]   NOTE: loop_version = the pack version whose migration pass last
+  NOTE: loop_version = the pack version whose migration pass last
+[mod] [SMRTest][carry]   moved this loop onto vanilla's body; a differing/absent version
+  moved this loop onto vanilla's body; a differing/absent version
+[mod] [SMRTest][carry]   migrates on next load. legacy_fixed_loop=true means the fixture
+  migrates on next load. legacy_fixed_loop=true means the fixture
+[mod] [SMRTest][carry]   has not been loaded since the 2026-08-01 rewrite.
+  has not been loaded since the 2026-08-01 rewrite.
+[mod] [SMRTest][carry] -- patched global threads (body identity is NOT readable: no debug) --
+-- patched global threads (body identity is NOT readable: no debug) --
+[mod] [SMRTest][carry]   Meteors: thread: 000001A7D7C0A568, valid=false
+  Meteors: thread: 000001A7D7C0A568, valid=false
+[mod] [SMRTest][carry]   MeteorStorm: thread: 000001A7D7C141C8, valid=true
+  MeteorStorm: thread: 000001A7D7C141C8, valid=true
+[mod] [SMRTest][carry] -- instance fields on live objects --
+-- instance fields on live objects --
+						Lua 0:01:09:640
+[mod] [SMRTest][carry]   scanned 3408 distinct labelled objects
+  scanned 3408 distinct labelled objects
+[mod] [SMRTest][carry]     SMRFixPack_reserved_at on 1335 object(s)
+    SMRFixPack_reserved_at on 1335 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_rocket_fuel_key on 19 object(s)
+    SMRFixPack_rocket_fuel_key on 19 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_payload_set on 3 object(s)
+    SMRFixPack_payload_set on 3 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_shelter_try on 25 object(s)
+    SMRFixPack_shelter_try on 25 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_closed_to_new_residents on 11 object(s)
+    SMRFixPack_closed_to_new_residents on 11 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_ack_notworking on 4 object(s)
+    SMRFixPack_ack_notworking on 4 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_no_homeless on 11 object(s)
+    SMRFixPack_no_homeless on 11 object(s)
+[mod] [SMRTest][carry]     (no unexpected SMRFixPack_* fields)
+    (no unexpected SMRFixPack_* fields)
+[mod] [SMRTest][carry] -- label modifiers --
+-- label modifiers --
+[mod] [SMRTest][carry]   NOT INSPECTABLE from here — the modifier store was not found by a
+  NOT INSPECTABLE from here — the modifier store was not found by a
+[mod] [SMRTest][carry]   shallow scan. Absence here is NOT evidence of absence.
+  shallow scan. Absence here is NOT evidence of absence.
+[mod] [SMRTest][carry] === END DUMP ===
+=== END DUMP ===
+[mod] [RS-r2pre] TRY SMRTest.FixtureCarry() after-round-trip ok=true result=done
+[RS-r2pre] TRY SMRTest.FixtureCarry() after-round-trip ok=true result=done
+[mod] [RS-r2pre] STEP 7-after-round-trip END 0ms
+[RS-r2pre] STEP 7-after-round-trip END 0ms
+[mod] [RS-r2pre] ERRORWATCH RS-r2pre — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== d13-rescue RS-r2pre ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=7-after-round-trip loads_this_process=2
+[RS-r2pre] ERRORWATCH RS-r2pre — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== d13-rescue RS-r2pre ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=7-after-round-trip loads_this_process=2
+[mod] [RS-r2pre] SHUTDOWN done
+[RS-r2pre] SHUTDOWN done
+						Lua 0:01:12:566
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:12:570
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:12:880
+
+
+*** Debug::Done()
+Time (ms)	72880
+
+

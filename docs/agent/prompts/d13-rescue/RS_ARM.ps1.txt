@@ -190,7 +190,14 @@ if ($arming) {
   [System.IO.File]::WriteAllText($rf, $rt2, $noBom)
   Write-Output ("WROTE 98_RSRun.lua with CELL = " + $arg)
 
-  $lines = Get-Content -LiteralPath $meta -Encoding UTF8
+  # ARM IS IDEMPOTENT, and it is idempotent because it was not.
+  # MEASURED 2026-08-13, cell r1: arming a second cell without disarming the
+  # first appended the two lines AGAIN, so 98_RSRun.lua was listed twice,
+  # executed twice, and RS.Boot() started TWO racing flows - two payloads, two
+  # loads of the same save, two automatic passes, in one process. The cell's
+  # readings were void and the double pass looked at first like an engine
+  # behaviour. Strip any previous pair before inserting.
+  $lines = @(Get-Content -LiteralPath $meta -Encoding UTF8 | Where-Object { $_ -notmatch 'Code/9[78]_RS' })
   $out = New-Object System.Collections.Generic.List[string]
   $inserted = $false
   foreach ($l in $lines) {
@@ -223,17 +230,24 @@ $m = Get-Content -LiteralPath $meta -Raw -Encoding UTF8
 foreach ($p in $pairs) {
   $f = Join-Path $kit $p.dst
   $present = Test-Path -LiteralPath $f
-  $listed  = $m -match [regex]::Escape('"Code/' + (Split-Path $p.dst -Leaf) + '"')
+  # ⛔ COUNT, never "does it appear". A -match is true for one listing and for
+  # two, and a file listed twice is EXECUTED twice - which is exactly how cell
+  # r1 came to run two racing payload flows while every gate line read GREEN.
+  # The gate that exists to stop an unarmed launch was blind to a doubly-armed
+  # one; it is the same class of miss and it now costs a count instead of a run.
+  $leaf = Split-Path $p.dst -Leaf
+  $listed = ([regex]::Matches($m, [regex]::Escape('"Code/' + $leaf + '"'))).Count
   if ($arming) {
     if (-not $present) { Write-Output ("ARM GATE FAIL: missing " + $p.dst); $fail = $true }
     elseif ((Get-Content -LiteralPath $f -Raw -Encoding UTF8) -notmatch 'TEMPORARY') {
       Write-Output ("ARM GATE FAIL: no TEMPORARY marker in " + $p.dst); $fail = $true
     } else { Write-Output ("ARM GATE OK   " + $p.dst) }
-    if (-not $listed) { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
-    else { Write-Output ("ARM GATE OK   metadata lists " + $p.dst) }
+    if ($listed -eq 1) { Write-Output ("ARM GATE OK   metadata lists " + $p.dst + " exactly once") }
+    elseif ($listed -eq 0) { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
+    else { Write-Output ("ARM GATE FAIL: metadata lists " + $p.dst + " " + $listed + " TIMES - it would execute " + $listed + " times and start that many payload flows"); $fail = $true }
   } else {
     if ($present) { Write-Output ("DISARM FAIL: still present " + $p.dst); $fail = $true }
-    if ($listed)  { Write-Output ("DISARM FAIL: metadata still lists " + $p.dst); $fail = $true }
+    if ($listed -gt 0)  { Write-Output ("DISARM FAIL: metadata still lists " + $p.dst + " x" + $listed); $fail = $true }
   }
 }
 

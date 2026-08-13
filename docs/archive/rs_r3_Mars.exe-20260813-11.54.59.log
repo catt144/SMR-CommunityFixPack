@@ -1,0 +1,322 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	34%
+Disk Free      	752246 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:075
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:078
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:467
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:598
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:787
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:426
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:522
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:517
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:519
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:17:854
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:855
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:859
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:468
+Reloading done in 941 ms
+						Lua 0:00:18:791
+[preset] Preset postprocess took 59 ms.
+						Lua 0:00:18:853
+479 / 479 particle streams loaded in 57 ms.
+						Lua 0:00:19:098
+[mod] [RS-r3] === d13-rescue RS-r3 === watchdog 1200000ms
+[RS-r3] === d13-rescue RS-r3 === watchdog 1200000ms
+[mod] [RS-r3] STEP 1-waiting-menu BEGIN
+[RS-r3] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:099
+[PdxSDK] Started up. Took 1573
+						Lua 0:00:19:107
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit
+						Lua 0:00:19:569
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:570
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:667
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:560
+[mod] [RS-r3] STEP 1-waiting-menu END 2500ms
+[RS-r3] STEP 1-waiting-menu END 2500ms
+[mod] [RS-r3] MODE ON DISK = CELL r3 — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[RS-r3] MODE ON DISK = CELL r3 — this banner is the cell's identity; the ARM gate printed the same value off disk before launch
+[mod] [RS-r3] STEP 2-config-gate BEGIN
+[RS-r3] STEP 2-config-gate BEGIN
+[mod] [RS-r3] GATES config-gate/r3 ------------------------------------------------
+[RS-r3] GATES config-gate/r3 ------------------------------------------------
+[mod] [RS-r3] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[RS-r3] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[mod] [RS-r3] GATEREAD opt-in pack :: REGISTRY ABSENT (global SMROptInPack is nil) — the mod's code did not run in this process
+[RS-r3] GATEREAD opt-in pack :: REGISTRY ABSENT (global SMROptInPack is nil) — the mod's code did not run in this process
+[mod] [RS-r3] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[RS-r3] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[mod] [RS-r3] GATES config-gate/r3 :: fix pack 0/0 | opt-in pack 0/0 | save-rescue 0/0 | map= | speed=1 | loads_this_process=0
+[RS-r3] GATES config-gate/r3 :: fix pack 0/0 | opt-in pack 0/0 | save-rescue 0/0 | map= | speed=1 | loads_this_process=0
+[mod] [RS-r3] MODORDER config-gate/r3 :: 1 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit
+[RS-r3] MODORDER config-gate/r3 :: 1 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit
+[mod] [RS-r3] DIALOPTS config-gate/r3 :: NOT INSPECTABLE — Mods[SMR_CommunityOptInPack] = nil, .options = nil
+[RS-r3] DIALOPTS config-gate/r3 :: NOT INSPECTABLE — Mods[SMR_CommunityOptInPack] = nil, .options = nil
+[mod] [RS-r3] CONFIGGATE OK :: cell r3 :: fix=false (wanted false) | opt-in=false (wanted false) | rescue=false (wanted false) :: 0/0, 0/0, 0/0
+[RS-r3] CONFIGGATE OK :: cell r3 :: fix=false (wanted false) | opt-in=false (wanted false) | rescue=false (wanted false) :: 0/0, 0/0, 0/0
+[mod] [RS-r3] STEP 2-config-gate END 0ms
+[RS-r3] STEP 2-config-gate END 0ms
+[mod] [RS-r3] STEP 3-load-cleaned BEGIN
+[RS-r3] STEP 3-load-cleaned BEGIN
+						Lua 0:00:21:661
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunitySaveRescue 
+						Lua 0:00:21:670
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:694
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:439
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 73.0 MB/s, average read 4948 bytes.
+						Lua 0:00:27:603
+[mod] Savegame references Mod Save Rescue (id SMR_CommunitySaveRescue, v0.01-000) which is not present
+						Lua 0:00:30:380
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:399
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:416
+Game Loaded in 8755 ms
+						Lua 0:00:30:461
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:315
+Game loaded on map BlankBigCanyonCMix_09 in 9755 ms
+[mod] [RS-r3] LOAD OK #1 file=RESCUECLEAN.savegame.sav — LoadGame returned no error
+[RS-r3] LOAD OK #1 file=RESCUECLEAN.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:616
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:813
+[mod] [RS-r3] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[RS-r3] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[mod] [RS-r3] STEP 3-load-cleaned END (no timing — this step blocks render mode)
+[RS-r3] STEP 3-load-cleaned END (no timing — this step blocks render mode)
+[mod] [RS-r3] STEP 4-artifact-absent-inventory BEGIN
+[RS-r3] STEP 4-artifact-absent-inventory BEGIN
+[mod] [RS-r3] GATES cleaned-save-loaded-with-no-mods-but-the-kit ------------------------------------------------
+[RS-r3] GATES cleaned-save-loaded-with-no-mods-but-the-kit ------------------------------------------------
+[mod] [RS-r3] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[RS-r3] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[mod] [RS-r3] GATEREAD opt-in pack :: REGISTRY ABSENT (global SMROptInPack is nil) — the mod's code did not run in this process
+[RS-r3] GATEREAD opt-in pack :: REGISTRY ABSENT (global SMROptInPack is nil) — the mod's code did not run in this process
+[mod] [RS-r3] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[RS-r3] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[mod] [RS-r3] GATES cleaned-save-loaded-with-no-mods-but-the-kit :: fix pack 0/0 | opt-in pack 0/0 | save-rescue 0/0 | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=1
+[RS-r3] GATES cleaned-save-loaded-with-no-mods-but-the-kit :: fix pack 0/0 | opt-in pack 0/0 | save-rescue 0/0 | map=BlankBigCanyonCMix_09 | speed=1 | loads_this_process=1
+[mod] [RS-r3] RESIDUE r3/artifact-absent ==========================================
+[RS-r3] RESIDUE r3/artifact-absent ==========================================
+						Lua 0:00:46:825
+[mod] [RS-r3] RESIDUEPOP r3/artifact-absent :: scanned 4510 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[RS-r3] RESIDUEPOP r3/artifact-absent :: scanned 4510 distinct labelled object(s) | Colonist=1593 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D5    FP SMRFixPack_reserved_at             on 0 object(s) of 1593 Colonist | handles=[]
+[RS-r3] RESIDUEROW r3/artifact-absent :: D5    FP SMRFixPack_reserved_at             on 0 object(s) of 1593 Colonist | handles=[]
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D6    FP SMRFixPack_shelter_try             on 0 object(s) of 1593 Colonist | handles=[]
+[RS-r3] RESIDUEROW r3/artifact-absent :: D6    FP SMRFixPack_shelter_try             on 0 object(s) of 1593 Colonist | handles=[]
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D7    FP SMRFixPack_payload_set             on 0 object(s) of 0 AllRockets | handles=[]
+[RS-r3] RESIDUEROW r3/artifact-absent :: D7    FP SMRFixPack_payload_set             on 0 object(s) of 0 AllRockets | handles=[]
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D8    FP SMRFixPack_rocket_fuel_key         on 0 object(s) of 25 DroneControl | handles=[]
+[RS-r3] RESIDUEROW r3/artifact-absent :: D8    FP SMRFixPack_rocket_fuel_key         on 0 object(s) of 25 DroneControl | handles=[]
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D12   OP SMRFixPack_ack_notworking          on 0 object(s) of 1073 Building | handles=[]
+[RS-r3] RESIDUEROW r3/artifact-absent :: D12   OP SMRFixPack_ack_notworking          on 0 object(s) of 1073 Building | handles=[]
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D13   OP SMRFixPack_closed_to_new_residents on 0 object(s) of 14 Dome/MicroGHabitatBase | handles=[]
+[RS-r3] RESIDUEROW r3/artifact-absent :: D13   OP SMRFixPack_closed_to_new_residents on 0 object(s) of 14 Dome/MicroGHabitatBase | handles=[]
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D14   OP SMRFixPack_no_homeless             on 0 object(s) of 14 Dome/MicroGHabitatBase | handles=[]
+[RS-r3] RESIDUEROW r3/artifact-absent :: D14   OP SMRFixPack_no_homeless             on 0 object(s) of 14 Dome/MicroGHabitatBase | handles=[]
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = nil (type=nil truthy=false) | prop=false percent=false amount=false | modifiers on that label = 3
+[RS-r3] RESIDUEROW r3/artifact-absent :: D15a  OP SMRFixPack_DroneSpeedDial          on label 'Drone' = nil (type=nil truthy=false) | prop=false percent=false amount=false | modifiers on that label = 3
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = nil (type=nil truthy=false) | prop=false percent=false amount=false | modifiers on that label = 37
+[RS-r3] RESIDUEROW r3/artifact-absent :: D15b  OP SMRFixPack_DroneCarryDial          on label 'Consts' = nil (type=nil truthy=false) | prop=false percent=false amount=false | modifiers on that label = 37
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 1 modifier(s) :: WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large
+[RS-r3] RESIDUEROW r3/artifact-absent :: D10   FP SMRFixPack_F35_<label>             ⛔ KEEP :: 1 modifier(s) :: WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[RS-r3] RESIDUEROW r3/artifact-absent :: ⛔ artifact modifier ids (must be ZERO) :: 0 :: <none>
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[RS-r3] RESIDUEROW r3/artifact-absent :: D11   FP SMRFixPack_F48_StationConnectors   ⛔ KEEP :: UIColony field = true (type=boolean truthy=true)
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D3/D4 rains['normal'] :: loop_version=nil fixed_loop=nil | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[RS-r3] RESIDUEROW r3/artifact-absent :: D3/D4 rains['normal'] :: loop_version=nil fixed_loop=nil | activation_thread valid=true | main_thread valid=false | settings id=Normal_VeryLow
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[RS-r3] RESIDUEROW r3/artifact-absent :: D3/D4 rains['toxic'] :: loop_version=nil fixed_loop=nil | activation_thread valid=false | main_thread valid=false | settings id=nil
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: g_RainDisaster = false (type=boolean) | Meteors thread valid = true | MeteorStorm valid = true
+[RS-r3] RESIDUEROW r3/artifact-absent :: g_RainDisaster = false (type=boolean) | Meteors thread valid = true | MeteorStorm valid = true
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: GameVar SMRFixPack_MeteorLatch             = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-r3] RESIDUEROW r3/artifact-absent :: GameVar SMRFixPack_MeteorLatch             = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-r3] RESIDUEROW r3/artifact-absent :: GameVar SMRFixPack_FirstAsteroidPrefabs    = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[RS-r3] RESIDUEROW r3/artifact-absent :: GameVar SMRFixPack_FirstAsteroidPrefabs    = nil (type=nil) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way
+[mod] [RS-r3] RESIDUE r3/artifact-absent END ======================================
+[RS-r3] RESIDUE r3/artifact-absent END ======================================
+[mod] [RS-r3] CLEARED r3/artifact-absent :: REMOVE-list survivors = 0 — every REMOVE name reads ABSENT by name
+[RS-r3] CLEARED r3/artifact-absent :: REMOVE-list survivors = 0 — every REMOVE name reads ABSENT by name
+[mod] [RS-r3] CLEARED r3/artifact-absent :: KEEP-list present = 2 :: D10 F35 x1 [WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large] | D11 F48 = true
+[RS-r3] CLEARED r3/artifact-absent :: KEEP-list present = 2 :: D10 F35 x1 [WindTurbine_Large/SMRFixPack_F35_WindTurbine_Large] | D11 F48 = true
+						Lua 0:00:46:863
+[mod] [RS-r3] ARTIFACTSCAN r3 :: PersistableGlobals walked, 440 registered name(s) — a name enters a savegame ONLY through this table (persist.lua:117-134), so it IS the question
+[RS-r3] ARTIFACTSCAN r3 :: PersistableGlobals walked, 440 registered name(s) — a name enters a savegame ONLY through this table (persist.lua:117-134), so it IS the question
+[mod] [RS-r3] ARTIFACTSCAN r3 :: 4510 object(s) walked | artifact-namespace names found = 0 :: <none>
+[RS-r3] ARTIFACTSCAN r3 :: 4510 object(s) walked | artifact-namespace names found = 0 :: <none>
+[mod] [RS-r3] READ artifact-name-scan = 0 | population=4510 | APPLICABLE=true | witness=every labelled object of every city, UIColony, every rains entry and PersistableGlobals walked this load
+[RS-r3] READ artifact-name-scan = 0 | population=4510 | APPLICABLE=true | witness=every labelled object of every city, UIColony, every rains entry and PersistableGlobals walked this load
+[mod] [RS-r3] RESCUETABLE r3 :: NOT AVAILABLE (SMRSaveRescue is nil)
+[RS-r3] RESCUETABLE r3 :: NOT AVAILABLE (SMRSaveRescue is nil)
+[mod] [SMRTest][carry] === FIXTURE CARRY DUMP ===
+=== FIXTURE CARRY DUMP ===
+[mod] [SMRTest][carry] -- GameVars --
+-- GameVars --
+[mod] [SMRTest][carry]   SMRFixPack_FirstAsteroidPrefabs = (absent)
+  SMRFixPack_FirstAsteroidPrefabs = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_DroneSpeedDial = (absent)
+  SMRFixPack_DroneSpeedDial = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_DroneCarryDial = (absent)
+  SMRFixPack_DroneCarryDial = (absent)
+[mod] [SMRTest][carry]   SMRFixPack_MeteorLatch = (absent)
+  SMRFixPack_MeteorLatch = (absent)
+[mod] [SMRTest][carry] -- RainsDisasterThreads (loop_version = migrated; legacy = pre-rewrite) --
+-- RainsDisasterThreads (loop_version = migrated; legacy = pre-rewrite) --
+[mod] [SMRTest][carry]   normal: loop_version=nil  legacy_fixed_loop=nil  thread_alive=true  id=Normal_VeryLow
+  normal: loop_version=nil  legacy_fixed_loop=nil  thread_alive=true  id=Normal_VeryLow
+[mod] [SMRTest][carry]   toxic: loop_version=nil  legacy_fixed_loop=nil  thread_alive=false  id=nil
+  toxic: loop_version=nil  legacy_fixed_loop=nil  thread_alive=false  id=nil
+[mod] [SMRTest][carry]   NOTE: loop_version = the pack version whose migration pass last
+  NOTE: loop_version = the pack version whose migration pass last
+[mod] [SMRTest][carry]   moved this loop onto vanilla's body; a differing/absent version
+  moved this loop onto vanilla's body; a differing/absent version
+[mod] [SMRTest][carry]   migrates on next load. legacy_fixed_loop=true means the fixture
+  migrates on next load. legacy_fixed_loop=true means the fixture
+[mod] [SMRTest][carry]   has not been loaded since the 2026-08-01 rewrite.
+  has not been loaded since the 2026-08-01 rewrite.
+[mod] [SMRTest][carry] -- patched global threads (body identity is NOT readable: no debug) --
+-- patched global threads (body identity is NOT readable: no debug) --
+[mod] [SMRTest][carry]   Meteors: thread: 0000020A83B4EEC0, valid=true
+  Meteors: thread: 0000020A83B4EEC0, valid=true
+[mod] [SMRTest][carry]   MeteorStorm: thread: 0000020A85C88EB8, valid=true
+  MeteorStorm: thread: 0000020A85C88EB8, valid=true
+[mod] [SMRTest][carry] -- instance fields on live objects --
+-- instance fields on live objects --
+						Lua 0:00:46:925
+[mod] [SMRTest][carry]   scanned 3405 distinct labelled objects
+  scanned 3405 distinct labelled objects
+[mod] [SMRTest][carry]     SMRFixPack_reserved_at on 0 object(s)
+    SMRFixPack_reserved_at on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_rocket_fuel_key on 0 object(s)
+    SMRFixPack_rocket_fuel_key on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_payload_set on 0 object(s)
+    SMRFixPack_payload_set on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_shelter_try on 0 object(s)
+    SMRFixPack_shelter_try on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_closed_to_new_residents on 0 object(s)
+    SMRFixPack_closed_to_new_residents on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_ack_notworking on 0 object(s)
+    SMRFixPack_ack_notworking on 0 object(s)
+[mod] [SMRTest][carry]     SMRFixPack_no_homeless on 0 object(s)
+    SMRFixPack_no_homeless on 0 object(s)
+[mod] [SMRTest][carry]     (no unexpected SMRFixPack_* fields)
+    (no unexpected SMRFixPack_* fields)
+[mod] [SMRTest][carry] -- label modifiers --
+-- label modifiers --
+[mod] [SMRTest][carry]   NOT INSPECTABLE from here — the modifier store was not found by a
+  NOT INSPECTABLE from here — the modifier store was not found by a
+[mod] [SMRTest][carry]   shallow scan. Absence here is NOT evidence of absence.						Lua 0:00:46:926
+
+  shallow scan. Absence here is NOT evidence of absence.
+[mod] [SMRTest][carry] === END DUMP ===
+=== END DUMP ===
+[mod] [RS-r3] TRY SMRTest.FixtureCarry() artifact-absent ok=true result=done
+[RS-r3] TRY SMRTest.FixtureCarry() artifact-absent ok=true result=done
+[mod] [RS-r3] STEP 4-artifact-absent-inventory END 0ms
+[RS-r3] STEP 4-artifact-absent-inventory END 0ms
+[mod] [RS-r3] ERRORWATCH RS-r3 — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== d13-rescue RS-r3 ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=4-artifact-absent-inventory loads_this_process=1
+[RS-r3] ERRORWATCH RS-r3 — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== d13-rescue RS-r3 ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=4-artifact-absent-inventory loads_this_process=1
+[mod] [RS-r3] SHUTDOWN done
+[RS-r3] SHUTDOWN done
+						Lua 0:00:49:813
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:49:816
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:50:159
+
+
+*** Debug::Done()
+Time (ms)	50159
+
+
