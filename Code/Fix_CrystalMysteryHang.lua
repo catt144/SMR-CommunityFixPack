@@ -23,6 +23,33 @@
 -- and it is restarted on LoadGame (the hang typically outlives a save/reload). The
 -- message has exactly one consumer in the shipped content — that WaitMsg — so
 -- repeating it cannot do anything else.
+--
+-- Save footprint / §3a orphan gate (2026-08-13; D13 exposed-set derivation site
+-- E5). This module persists nothing of its own — no GameVar, no object field,
+-- no mod-created name in the save — but it DOES own a game-time thread body,
+-- the repeater closure at :71-85, and a save captures every BLOCKED game-time
+-- thread by value, that one included (`agent/facts/EF-023`; the by-name model
+-- — "a body written to a global name is not persisted" — is disproven, and the
+-- LoadGame comment below used to state it). The body touches only vanilla
+-- globals and its own upvalues, which under EF-023 is precisely the shape that
+-- KEEPS EXECUTING in an uninstalled player's save instead of dying: an orphan
+-- would go on broadcasting CrystalFlyAway hourly for up to its frozen 10-sol
+-- deadline. Bounded and silent, but ours and undisclosed — so the body now
+-- opens each wake with the FIX_POLICY §3a orphan gate (form copied from
+-- `Fix_MeteorStormWedge:154/:165`, the pack's proven precedent). It sets no
+-- vanilla state, so a bare `return` satisfies §3a's reset clause vacuously.
+-- With the pack installed `SMRFixPack` is always present, the gate is always
+-- true, and this module behaves exactly as before.
+--
+-- ⚠️ Disclosed, NOT repaired here (2026-08-13 — this pass was gate-insertion
+-- only; SOURCE-derived, unmeasured, routed to the D13 chain): because persist
+-- restores a thread's upvalues BY VALUE, a repeater restored with a save holds
+-- its own copies of `repeater_gen`/`my_gen`, while `stop_repeater` below acts
+-- on the freshly loaded chunk's locals. So with the pack installed, loading a
+-- save taken during an active Crystals mystery leaves the restored repeater
+-- running BESIDE the one LoadGame starts — duplicate hourly broadcasts, each
+-- lineage still self-limited by the mystery check and its own deadline. Inert
+-- (one consumer, and that consumer wants the message), but real.
 
 local repeater_running = false
 local repeater_gen = 0
@@ -45,6 +72,10 @@ local function start_repeater()
 		local deadline = GameTime() + 10 * const.DayDuration
 		while GameTime() < deadline and my_gen == repeater_gen do
 			Sleep(const.HourDuration)
+			-- ⛔ orphan gate (FIX_POLICY §3a; header above). Re-checked after the
+			-- yield, per the precedent at Fix_MeteorStormWedge:154/:165. No vanilla
+			-- state is set here, so a bare return complies vacuously.
+			if not SMRFixPack then return end
 			if my_gen ~= repeater_gen or not crystals_mystery_active() then break end
 			Msg("CrystalFlyAway") -- re-announce for a listener that was still in the Epilogue popup
 		end
@@ -76,7 +107,10 @@ function OnMsg.MysteryEnd()
 end
 
 OnMsg.LoadGame = SMRFixPack.WhenActive("CrystalMysteryHang", function()
-	stop_repeater() -- the thread from before the save is gone
+	-- bump THIS chunk's generation so a repeater started before the load exits.
+	-- ⚠️ It does not reach one RESTORED with the save (own upvalue copies) —
+	-- header, "Disclosed, NOT repaired here"; that lineage self-limits.
+	stop_repeater()
 	if crystals_mystery_active() and not IsValid(UIColony.mystery.crystal) then
 		-- the crystal has already left (or has not been composed yet — in which case
 		-- nothing is listening and the extra broadcasts are ignored)

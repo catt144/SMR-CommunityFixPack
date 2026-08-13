@@ -258,9 +258,18 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
     naming/listing problem for the store page, never re-checked, not a code
     one.
 
-19. ✅ **DECIDED 2026-08-13: GO — build the three gates in-pack.** The inserted
-    build prompt (`agent/prompts/d13-rescue/02b_OPUS_GATES.md`) is authored and
-    queued before prompt 3. The ask as it stood:
+19. ✅ **DECIDED 2026-08-13: GO — build the three gates in-pack. ✅✅ DONE the
+    same day** — all three gates inserted (`Fix_CrystalMysteryHang:78`,
+    `Fix_ExtenderFlapChurn:96`, `Fix_TrackConnectorPingPong:179`), the four
+    modules' save-footprint disclosure rewritten, parse sweep and doccheck
+    GREEN, module/file/probe counts unchanged. **Nothing for you here** — no
+    behaviour change while installed and nothing to look at in game; the gates
+    only matter in a save the pack has been removed from. One thing found on
+    the way and NOT changed, disclosed in the code and routed to the next
+    prompt: after a load, the crystal repeater restored with the save cannot be
+    stopped by the handler that stops the fresh one, so during that mystery the
+    hourly re-announce can double up — inert (the message has exactly one
+    listener, which wants it), unmeasured. The ask as it stood:
     ⚖️ **Three of our own background threads have no "the mod is gone" exit,
     and I want to fix that in the packs before building any cleaner.** The
     rule we wrote says every mod-owned background body must check whether the
@@ -278,6 +287,39 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
     step.** Our own policy bars handing this to the cleaner instead ("the
     cleaner is not a scoping escape hatch" — your words). Say go and it rides
     the chain; say no and all three get recorded as accepted residue instead.
+
+### ⭐ NEW 2026-08-13 — public documentation: platform decided, one question back to you
+
+21. ✅ **DECIDED 2026-08-13, your ruling: GITHUB PAGES** for the player-facing
+    docs site. A working scaffold is committed at `public-site/` (MkDocs +
+    Material — the sidebar tree, `Ctrl K` search, right-hand page TOC, dark
+    theme and callout boxes you saw on the peer GitBook site). It is **free**
+    on a public repo, and everything stays as markdown in the repo, which is
+    how you already work.
+    ⛔ **Nothing is on the public web.** The build workflow is manual-trigger
+    only and Pages is not enabled on the repo, so the site does not exist
+    publicly until you choose to turn it on. The four pages in it are marked
+    LAYOUT SPECIMENS on their own face — they are there so you can judge the
+    feel, not to be published.
+    **To look at it, either:**
+    * **locally** — `python -m pip install mkdocs-material` then
+      `python -m mkdocs serve -f public-site/mkdocs.yml`, open the address it
+      prints; or
+    * **live but private-ish** — Settings → Pages → Source: *GitHub Actions*,
+      then run *Publish docs site* from the Actions tab. ⚠️ That URL is public
+      the moment it builds, so do this only if you are content for specimens to
+      be visible for a while.
+    ⚖️ **THE ONE THING BACK TO YOU: which repo should host the site?**
+    * **Its own repo** (e.g. `SMR-CommunityMods`) ← **my recommendation.** One
+      site covering both mods and the rescue tool later, a neutral URL, and
+      nothing ships inside either mod. It is also how the peer site works —
+      "Dash's Vault" is one site with a mod tree under it. Costs you the same
+      15 seconds as the last repo; the scaffold was built to move in one command.
+    * **Leave it in the fix pack repo.** No new repo, but this repo *is* the mod
+      (the game's Mods folder is a junction into it), so the site rides along
+      inside the fix pack, and the URL would read `…/SMR-CommunityFixPack/` for
+      a site that also documents the opt-in pack.
+    Nothing is blocked on this — the `public-docs` chain can start either way.
 
 ### ⚖️ NEW 2026-08-13 — your Steam ID is scrubbed from the live docs, but NOT from git history
 

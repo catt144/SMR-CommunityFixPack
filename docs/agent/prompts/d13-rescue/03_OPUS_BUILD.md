@@ -204,3 +204,136 @@ set that as `origin`, push; align the local folder name to the remote
 `SMR-SaveRescue`. Also decided the same day, opt-in side (not yours to act
 on, but your doc sweeps will see it): display name = "Community Fix Pack:
 Opt-In Modules" (swept, opt-pack `e17586b`), default-OFF ratified.
+
+### From prompt 2b (Opus, the three orphan gates — 2026-08-13, CONSUMED)
+
+Staleness at my run: fix-pack `0a21da1`, opt-pack `e17586b`, TestKit `62f03da`,
+all three trees clean. Nothing in either `Code/` had changed since this prompt
+was authored (the five commits after `ea81faa` are docs only), so the line
+numbers it gave were still live. Game closed throughout — **every claim below
+is source/parse tier; nothing was launched or measured.**
+
+#### Job 1 — the three §3a gates, inserted (final line numbers)
+
+| module | gate (final line) | placement | §3a reset clause |
+|---|---|---|---|
+| `Code/Fix_CrystalMysteryHang.lua` | **`:78`** | first statement after `Sleep(const.HourDuration)` (`:74`), ahead of the generation/mystery check | vacuous — the loop body sets no vanilla state, so a bare `return` complies |
+| `Code/Fix_ExtenderFlapChurn.lua` | **`:96`** | first statement after `Sleep(DEBOUNCE)` (`:91`), ahead of `pending[hub] = nil` and the hub rebuild | vacuous — nothing vanilla is touched before it |
+| `Code/Fix_TrackConnectorPingPong.lua` | **`:179`** | the created closure's first statement (`CreateGameTimeThread(function(station)` at `:174`) | vacuous |
+
+All three are the identical one-liner `if not SMRFixPack then return end`, form
+copied from the proven precedent `Fix_MeteorStormWedge` — whose gate lines are
+now **`:154` (first statement) and `:165` (re-arm after the `Sleep`)**, having
+moved from `:145`/`:156` because my Job-2 comment rewrite in that file is
+longer than what it replaced. Every insertion comment cites the precedent by
+file and those FINAL line numbers, and every header citation in the four files
+was re-read and corrected after the edits (closure ranges: CrystalMysteryHang
+`:71-85`, ExtenderFlapChurn `:90-102`, TrackConnectorPingPong `:174-183`).
+
+**Installed-path claim, STRUCTURAL and by eye — not a measurement:** the pack
+creates the real global `SMRFixPack` before any of these bodies can run, so on
+the installed path all three gates evaluate true and the three modules behave
+byte-identically. Reading a nil global is safe; the gate is false only when the
+mod is gone. No behaviour change, no new persisted state, no interval change.
+
+**No probe reads a touched line** (checked, not assumed): the only probes naming
+these modules are `20_Probes_Wave2.lua:720` (asserts a `CrystalFlyAway` handler
+is registered — never enters the repeater closure) and `40_Probes_Wave4.lua:146`
+(drives `CreateConnectorElements` directly, and its reclaim leg at `:224-250`
+**stubs `CreateGameTimeThread` to capture the station argument without running
+the closure** — so the new gate line is never executed by it). TestKit tree
+untouched and clean; the queued `FactionFundingCheck` PASS→SKIP repair is still
+queued (not mine).
+
+#### Job 2 — disclosure
+
+1. **Three module headers** now carry a `Save footprint / §3a orphan gate`
+   paragraph: what the GT thread body is (with its line range), that a save
+   captures blocked GT threads BY VALUE per `EF-023`, what an orphan does
+   (E5: hourly `CrystalFlyAway` to a frozen 10-sol deadline · E6: one hub
+   disconnect/reconnect cycle, then ends · E7: one connector rebuild, and only
+   if a created-but-never-run thread is captured at all), that the body now
+   gates, and that the module persists no name/GameVar/field of its own. E7's
+   paragraph states its INFERRED status and `EF-029` window explicitly, and
+   says the gate makes that open question moot rather than load-bearing.
+2. **`Fix_MeteorStormWedge` `:138-141`** (the comment adjudication §3.4 ordered
+   in Tier 1 and only half-did) is rewritten: the "persist-safe by name … not
+   persisted (F06/F77 precedent)" model is struck, replaced by the by-value
+   rule, and the zero-upvalue discipline is now explained by its INVERTED
+   reason (global lookups make an orphan die loudly). It now agrees with the
+   header 80 lines above instead of contradicting it.
+3. **`Fix_MeteorStormWedge` header `:65`** no longer reads as a completeness
+   claim: it says this was the one GATED mod-owned GT thread, names E5/E6/E7 as
+   the three the D13 derivation found ungated, and records that all three
+   gained this gate form on 2026-08-13.
+
+#### ⚠️ Prompt 1's item-2 finding was INCOMPLETE — two more files carried the model
+
+`Fix_MeteorStormWedge:138-141` was not the only surviving statement of the
+disproven by-name persistence belief in `Code/`. Also found and corrected in
+this pass, as part of Job 2 item 1:
+
+* **`Fix_ExtenderFlapChurn`, the whole "Savegame note" (old `:35-40`)** —
+  *"the debounce thread is a mod game-time thread — those are **NOT persisted
+  across save/load** (F06 precedent: 'the thread from before the save is
+  gone')"*. That is the disproven model stated flatly, and it was the module's
+  entire save-footprint disclosure. Replaced by the corrected paragraph, marked
+  `⚠️ REWRITTEN 2026-08-13`.
+* **`Fix_CrystalMysteryHang`, the LoadGame inline comment (old `:79`)** —
+  *"the thread from before the save is gone"*, the F06 sentence the Extender
+  note was quoting. Corrected in place (comment only; the `stop_repeater()`
+  call is unchanged).
+
+**⇒ EF-023 comment-state note, for your Job 3.** After this commit, EF-023's
+closing line *"nothing in `Code/` states it any more"* is **TRUE AGAIN** — I
+swept `Code/` for the belief and corrected all three surviving sites. So
+**annotate it, do not re-falsify it**: the accurate correction is that the line
+was FALSE from the Tier-1 rewrite until 2026-08-13, that its "two shipped file
+headers" count was wrong (four files carried it: `Fix_MeteorFrequency` and
+`Fix_RainsDeadlock`, fixed in Tier 1, plus `Fix_MeteorStormWedge` and
+`Fix_ExtenderFlapChurn`, fixed here, and a fifth inline site in
+`Fix_CrystalMysteryHang`), and that it is true again as of the fix-pack commit
+that carries this outbox (2026-08-13). STATE.md's warning line is flipped to
+match.
+
+#### ⚠️ Owed — one live-path observation I disclosed but did NOT repair
+
+Found while writing E5's disclosure; **SOURCE-derived, unmeasured**, and left
+alone because my scope fence was gate insertion plus comments only. Recorded in
+the `Fix_CrystalMysteryHang` header under "Disclosed, NOT repaired here":
+
+> Persist restores a thread's upvalues **by value**, so a repeater restored with
+> a save holds its own copies of `repeater_gen` / `my_gen`, while the LoadGame
+> handler's `stop_repeater()` bumps the **freshly loaded chunk's** locals. The
+> two lineages cannot see each other. With the pack INSTALLED, loading a save
+> taken during an active Crystals mystery therefore leaves the restored repeater
+> running beside the one LoadGame starts — duplicate hourly `CrystalFlyAway`
+> broadcasts, one extra lineage per save/load cycle inside the mystery, each
+> still self-limited by its own mystery check and 10-sol deadline.
+
+Inert as far as I can tell (the message has exactly one consumer, a `WaitMsg`
+that wants it), which is why I did not file it as a defect on my own authority —
+but it is a live-path effect of the corrected persistence model, not an orphan
+question, and it belongs to somebody. **Route:** yours to file or to hand to the
+owner (a bug entry changes the BUGS row counts, which my close was told to leave
+unchanged). It is also the cheapest possible witness for the model itself.
+
+#### Optional leg for prompt 4 (offered, nothing gates on it)
+
+The three gates become measurable in the junction-pull legs at near-zero extra
+cost: with a save taken while one of these bodies is asleep, pull the junction
+(EF-055 → off-state 4) and load back — a gated body returns silently at its
+first wake, and the E5 case is directly observable as `CrystalFlyAway` traffic
+stopping rather than continuing for 10 sols. The same leg would settle §6
+doubt 1 for E7 if a yield-free thread can be caught in its creation window.
+
+#### Close state
+
+* Parse sweep: **77/77 Lua files OK, 0 FAIL** (`luaparser` over `Code/**` + root).
+* `python tools/doccheck.py`: **GREEN**.
+* `--emit-counts`: **74 modules / 75 `Code/*.lua` / 88 probes**, index rows
+  102 F + 12 D + 46 C — unchanged, as expected: no module, file, or probe added.
+  ⛔ This is a STRUCTURAL assertion that the suite baseline is untouched (no
+  probe edited, counts re-emitted), **not** a measurement of the baseline.
+* **Not claimed:** orphan behaviour verified (nothing launched); baseline
+  measured; anything about how these bodies behave in a real save.

@@ -17,14 +17,14 @@ no-retraining test PASSED). A SECOND MOD EXISTS: `C:\Dev\SMR-OptInPack`**
 (`SMR_CommunityOptInPack` / `SMROptInPack` / `[CommunityOptInPack]`; junction
 installed, public remote `catt144/SMR-CommunityOptInPack` 08-13; D01-D07/D09/D12 → tombstones here;
 ⛔ this pack has NO Mod Options page — correct, and neither does the fix pack).
-⇒ **NEXT = `d13-rescue/02b_OPUS_GATES.md` (inserted, owner GO) → `03` (17-19 ANSWERED 08-13)** ∥ `unattended-3`.
+⇒ **NEXT = `d13-rescue/03_OPUS_BUILD.md`** (2b CONSUMED 08-13: gates in; 17-19 ANSWERED) ∥ `unattended-3`.
 ① **D13 chain** — ⭐⭐ **QA-SUSTAINED (prompts 1+2 CONSUMED 08-12/13; membership
 diff ZERO, verdict BUILD; fixes in `90_DERIVATION.md` `[QA 2026-08-13]` tags):
-27 sites, BOTH trees**, all dispositioned; ⛔ **3 ROUTED under 6f** → checklist
-**17-19**. QA deltas (detail = prompt 3's Notes): D2 REMOVE dissolved · 2
+27 sites, BOTH trees**, all dispositioned; ✅ **the 3 sites 6f-ROUTED (E5/E6/E7)
+are GATED IN-PACK 08-13**. QA deltas (detail = prompt 3's Notes): D2 REMOVE dissolved · 2
 one-shot vanilla-body thread heals KEPT (pre-rewrite saves) · D10 → prompt 4. ⛔ Every "13"/"12 exposed"/"≥13"
-is SUPERSEDED (§4.3 lists the 9 doc sites); ⚠️ `EF-023`'s "nothing in `Code/`
-states it any more" is FALSE (`Fix_MeteorStormWedge:138-141`).
+is SUPERSEDED (§4.3 lists the 9 doc sites); ✅ `EF-023`'s "nothing in `Code/`
+states it any more" is TRUE AGAIN (08-13, 3 sites fixed) — prompt 3 ANNOTATES, never re-falsifies.
 ② **ONE combined sitting**: PT-20 redo + D13 after-sweep + F102's minute.
 ③ MOD_DESCRIPTION **×2** + disposition table + metadata → ④ owner launch tasks.
 

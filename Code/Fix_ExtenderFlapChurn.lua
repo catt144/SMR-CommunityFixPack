@@ -32,12 +32,25 @@
 -- about this either (SetWorkRadius already defers its reconnect via
 -- DelayedCall(300), DroneControl.lua:776).
 --
--- Savegame note: the debounce thread is a mod game-time thread — those are
--- NOT persisted across save/load (F06 precedent: "the thread from before the
--- save is gone"). A save landing inside the window simply keeps the pre-flap
--- registration, which is exactly what that save's state describes; the next
--- extender event after load reconnects normally. No persisted state, no
--- object flags (FIX_POLICY §3).
+-- Save footprint / §3a orphan gate (⚠️ REWRITTEN 2026-08-13; D13 exposed-set
+-- derivation site E6 — the note that stood here claimed mod game-time threads
+-- are "NOT persisted across save/load", which is the by-name persistence model
+-- `agent/facts/EF-023` disproved). The truth: this module persists nothing of
+-- its own — no GameVar, no object field, no mod-created name in the save
+-- (FIX_POLICY §3) — but a save captures every BLOCKED game-time thread BY
+-- VALUE, and the debounce thread at :90-102 sleeps. A save landing inside the
+-- window therefore carries that thread, and its body touches only vanilla
+-- names plus the `pending`/`DEBOUNCE` upvalues — under EF-023 exactly the shape
+-- that KEEPS EXECUTING in an uninstalled player's save rather than dying: an
+-- orphan would wake once and run one full hub Disconnect/ConnectTaskRequesters
+-- cycle, then end. One-shot and all-vanilla, but ours — so the body now opens
+-- after its yield with the FIX_POLICY §3a orphan gate (form copied from
+-- `Fix_MeteorStormWedge:154/:165`). Nothing vanilla is touched before it, so a
+-- bare `return` satisfies §3a's reset clause. With the pack installed the gate
+-- is always true and behaviour is unchanged: on load the restored thread runs
+-- its one rebuild (idempotent — it is the rebuild the flap asked for, against
+-- the CURRENT topology, read at fire time) and the freshly loaded chunk's
+-- `pending` table starts empty, so the next extender event schedules normally.
 
 local DEBOUNCE = 2000 -- game-ms; flaps within this window coalesce into one rebuild
 
@@ -76,6 +89,11 @@ if not install_error then
 		if IsValidThread(pending[hub]) then return end -- a rebuild is already scheduled
 		pending[hub] = CreateGameTimeThread(function(hub)
 			Sleep(DEBOUNCE)
+			-- ⛔ orphan gate (FIX_POLICY §3a; header above), first statement after
+			-- the yield, per the precedent at Fix_MeteorStormWedge:154/:165. No
+			-- vanilla state has been touched yet — the rebuild is below — so a bare
+			-- return complies.
+			if not SMRFixPack then return end
 			pending[hub] = nil
 			if IsValid(hub) and hub.can_control_drones then
 				hub:DisconnectTaskRequesters()

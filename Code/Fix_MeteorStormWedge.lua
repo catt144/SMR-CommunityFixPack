@@ -62,8 +62,12 @@
 -- completion path clears vanilla state BEFORE its first SMRFixPack.* touch
 -- (logging last), and `StormWedge.healing = false` stays last (mod state — an
 -- orphan losing it is harmless; the per-save PostLoadGame reset covers it).
--- After the reorder this is the pack's one mod-owned GT thread in Tier-1
--- scope, and it is gate-compliant.
+-- After the reorder this was the pack's one GATED mod-owned GT thread — NOT a
+-- completeness claim about the pack's threads, and read as one it was wrong:
+-- the D13 exposed-set derivation (2026-08-13) found three more mod-owned GT
+-- thread bodies, all ungated (`Fix_CrystalMysteryHang` E5,
+-- `Fix_ExtenderFlapChurn` E6, `Fix_TrackConnectorPingPong` E7). All three
+-- gained this module's gate form on 2026-08-13.
 
 local FIX_ID = "MeteorStormWedge"
 
@@ -135,10 +139,15 @@ function SMRFixPack.StormWedgeCheck(opts)
 	return "healing"
 end
 
--- The heal itself. A global function (persist-safe by name) with only global
--- lookups plus locals; the thread it runs on is a mod game-time thread and is
--- not persisted (F06/F77 precedent) — an interrupted heal simply re-arms after
--- the next load (state reset below).
+-- The heal itself. A global function with only global lookups plus locals.
+-- ⚠️ CORRECTED 2026-08-13 (D13 derivation §3; this comment still carried the
+-- by-name persistence model its own header disproved 80 lines above): writing a
+-- body to a global name does NOT keep it out of a save. Persistence is BY VALUE
+-- — a save captures every blocked game-time thread with its stack, this one
+-- included while it sleeps in the pulse loop below (`agent/facts/EF-023`,
+-- header :53-66). The zero-upvalue discipline is kept for the INVERTED reason:
+-- global lookups make an orphan die loudly instead of running on. That is what
+-- the gate below exists for; per-save watchdog state is reset on PostLoadGame.
 function SMRFixPack.StormWedgeHeal()
 	-- ⛔ orphan gate (see header): first statement, and re-armed after every
 	-- Sleep — vanilla state is reset INSIDE the gate, before the return

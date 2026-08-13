@@ -74,6 +74,24 @@
 -- exist and el.station == self), so overshooting the radius costs nothing and
 -- there is no global rebuild. done_map teardown early-returns exactly like the
 -- shipped body.
+--
+-- Save footprint / §3a orphan gate (2026-08-13; D13 exposed-set derivation site
+-- E7). This module persists nothing of its own — no GameVar, no object field,
+-- no mod-created name in the save (FIX_POLICY §3) — but the reclaim helper
+-- creates a game-time thread (:174-183), and a save captures game-time threads
+-- BY VALUE (`agent/facts/EF-023`; the by-name model is disproven). ⚠️ This one
+-- is the derivation's weakest route and is tagged INFERRED there: the body has
+-- no yield at all, so it can only be captured in the window between creation
+-- and its first run (creation defers — `agent/facts/EF-029`), and whether a
+-- created-but-never-run GT thread is persisted was not settled from Lua source
+-- (the machinery is C-side). Worst case if it is: an orphan wakes once in an
+-- uninstalled player's save and rebuilds one connector element from an
+-- all-vanilla body — it would not die, because it touches no mod-created name.
+-- The gate below is the same one-line §3a form the other three thread bodies
+-- carry (precedent `Fix_MeteorStormWedge:154/:165`); it costs nothing on the
+-- installed path, where `SMRFixPack` is always present, and it makes the open
+-- question moot rather than load-bearing. No vanilla state is set before it,
+-- so a bare `return` satisfies §3a's reset clause.
 
 SMRFixPack.Register("TrackConnectorPingPong", {
 	title = "A station and a tunnel one hex apart stop stealing each other's track connector",
@@ -154,6 +172,11 @@ SMRFixPack.Register("TrackConnectorPingPong", {
 						-- the engine's own deferred-rebuild idiom, in-thread
 						-- revalidation included (TrackElement.lua:194-198)
 						CreateGameTimeThread(function(station)
+							-- ⛔ orphan gate (FIX_POLICY §3a; header above), the body's
+							-- first statement — precedent Fix_MeteorStormWedge:154/:165.
+							-- Yield-free body: this can only be false if the thread was
+							-- captured before it ever ran.
+							if not SMRFixPack then return end
 							if IsValid(station) and not IsBeingDestructed(station) then
 								station:CreateConnectorElements()
 							end
