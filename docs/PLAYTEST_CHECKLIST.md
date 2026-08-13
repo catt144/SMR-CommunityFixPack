@@ -253,6 +253,34 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
     cleaner is not a scoping escape hatch" — your words). Say go and it rides
     the chain; say no and all three get recorded as accepted residue instead.
 
+### ⚖️ NEW 2026-08-13 — your Steam ID is scrubbed from the live docs, but NOT from git history
+
+20. ⚖️ **Do we rewrite the public repos' history to remove your SteamID64, or
+    leave it?** The live files are clean as of today; the string is still in the
+    commits behind them, and GitHub serves those to anyone.
+    **Measured, both public repos:** fix pack **104 of 828 commits**, across 9
+    files — `PLAYTEST_HELP`, `PLAYTEST_CHECKLIST`, `EF-050`, and six consumed
+    prompt/spec docs (`corun-pt15`, `corun-pt60` ×2, `corun-rig`,
+    `split-optins` ×2). Opt-in repo **7 of 7 commits**, one file (`EF-050`,
+    which arrived by the whole-facts-folder copy at the split). The TestKit is
+    clean and has no remote anyway.
+    **What removing it costs, and this is the real reason it is your call:**
+    it means `git filter-repo` + a force-push, which **rewrites every sha in
+    both repos**. This project cites shas constantly — `90_DERIVATION.md:11`
+    pins the D13 derivation to fix-pack `155869a` / opt-pack `a90d128` /
+    TestKit `62f03da`; SESSION_LOG and the archived records cite dozens more;
+    several docs tell a future session to run `git show <sha>:<path>` to
+    recover a consumed prompt. **Every one of those pointers would break**, and
+    the D13 chain is mid-flight right now.
+    **The three ways out:**
+    * **Leave it.** Costs nothing, breaks nothing. A SteamID64 is not a secret
+      in the way a token is — it is on your public Steam profile already; what
+      it adds is a link between this GitHub account and that profile.
+    * **Rewrite after D13 ships**, when no chain is mid-flight and the sha
+      citations can be re-pinned in the same pass. Cheapest safe version.
+    * **Rewrite now** — I would not recommend it while D13 is live.
+    ⚠️ Whichever you pick, the scrub already done stops it spreading further.
+
 ### ⛔ NEW 2026-08-12 — I DELETED ONE OF YOUR AUTOSAVES. Telling you straight.
 
 16. ⛔ **`Autosave Sol 306` is gone and I cannot get it back. `Autosave Sol 311`
