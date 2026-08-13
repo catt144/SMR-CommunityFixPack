@@ -170,6 +170,69 @@ owed input stays here no matter how struck-through it looks.
     line either way) · whether the new repo gets a GitHub remote (it is local
     git until you say).** The re-tick minute is spent; nothing else is owed.
 
+### ⭐⭐ NEW 2026-08-12 — THE SAVE-RESCUE ARTIFACT: three calls, and the derivation is done
+
+The D13 chain's first prompt has finished the hard agent-side part — the
+authoritative exposed-set derivation over BOTH shipped mods, from source, no
+inherited count. **27 sites, every one with a disposition.** These three are
+yours. Items 17 and 18 were reserved for you on the entry; item 19 is new and
+is the one thing the derivation found that I will not decide alone.
+Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
+
+17. ⚖️ **What does the player actually DO with the rescue artifact?**
+    (a) run-it-after-removal · (b) keep-it-installed as a permanent runtime ·
+    **(c) the packs already clean themselves and the artifact serves ONLY the
+    already-uninstalled case ← my recommendation, and the derivation now backs
+    it with specifics rather than architecture.** Why (c): the two residues
+    that ever *did* anything after uninstall are already healed on load by the
+    packs themselves (the meteor thread restarts onto the game's own body; the
+    rain loops migrate onto the game's own body). What is left is inert named
+    data — **except one thing**: a save made with a drone dial off base keeps
+    that boost **permanently** after you uninstall, and a player who has
+    already uninstalled cannot run any in-pack pass. That is a real population
+    and it is what the artifact is for. **Cost of each option:** (c) is the
+    smallest — one load-time pass, no UI, no extra surface; (a) adds an invoke
+    path that has to work on a gamepad for console players; (b) is not a
+    cleaner at all but a mod you maintain forever, and it re-opens the "what
+    does *it* leave in the save" question we just closed. ⭐ Under (c) the
+    artifact may end up with **no thread surgery whatsoever**, which would make
+    it markedly smaller and safer than every earlier sizing — one open
+    question in the derivation decides that, and the QA prompt attacks it next.
+
+18. ⚖️ **Confirm the artifact is built AS A MOD (not a console procedure) —
+    and that this makes the channel question stop blocking.** I verified the
+    argument against your own Paradox Mods check (2026-08-01), not from
+    assumption: that audience has no console, so a rescue path that means
+    typing commands reaches **nobody** there — while a mod-shaped cleaner
+    installs through whichever channel the player already uses, on PC and on
+    Xbox/PS5 alike. Its reach is a strict superset on every platform, so
+    "which channel do we publish to" no longer changes what the artifact *is*.
+    **Recommendation: confirm mod-shaped**; it costs a third small repo (I have
+    the scaffolding proposal ready, deliberately thinner than the opt-in
+    pack's — no options page, no toggle machinery). ⚠️ Channel note, separate
+    and still open from your own browse: searching Paradox Mods for `bug` or
+    `fix` returned **zero** hits while searching your author name worked — a
+    naming/listing problem for the store page, never re-checked, not a code
+    one.
+
+19. ⚖️ **Three of our own background threads have no "the mod is gone" exit,
+    and I want to fix that in the packs before building any cleaner.** The
+    rule we wrote says every mod-owned background body must check whether the
+    mod still exists each time it wakes. One of four does
+    (`MeteorStormWedge`). The other three — the crystal-mystery repeater, the
+    extender-flap debounce, the track-connector reclaim — are written entirely
+    in the game's own vocabulary, which under the corrected rules is exactly
+    the case that **keeps running after you uninstall** rather than stopping.
+    Worst case today is small and not an error (the crystal one re-broadcasts
+    a message hourly for up to 10 sols in a save we no longer occupy), but it
+    is undisclosed, and a cleaner cannot reach it by construction — those
+    bodies run *from* the save the moment it loads. **Recommendation: build
+    the fix in-pack now — three one-line insertions, no behaviour change while
+    installed, no new save state, one short prompt inserted before the build
+    step.** Our own policy bars handing this to the cleaner instead ("the
+    cleaner is not a scoping escape hatch" — your words). Say go and it rides
+    the chain; say no and all three get recorded as accepted residue instead.
+
 ### ⛔ NEW 2026-08-12 — I DELETED ONE OF YOUR AUTOSAVES. Telling you straight.
 
 16. ⛔ **`Autosave Sol 306` is gone and I cannot get it back. `Autosave Sol 311`

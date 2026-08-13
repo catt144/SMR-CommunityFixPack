@@ -12,16 +12,19 @@ FROZEN pre-release** (`fixed` + suite + self-checks + verified save-safety tier 
 the bar) · **trains = OPTION A, queue CLOSED** · **D13 BLOCKING** · riders
 C42/F99/F80/F96-R2 → post-release WATCH. ⇒ **NEXT — release front only:**
 ⓪ ✅✅ **OPT-IN SPLIT CLOSED — built, verified, audit-SUSTAINED (08-12; chain
-consumed). A SECOND MOD EXISTS: `C:\Dev\SMR-OptInPack`** (`SMR_CommunityOptInPack`
-/ `SMROptInPack` / `[CommunityOptInPack]`; junction installed, LOCAL git — no
-remote unasked; D01-D07/D09/D12 → tombstones here; ⛔ this pack has NO Mod Options
-page — correct). ⭐⭐ Audit re-derived EVERY matrix verdict from the archived logs
-(9/9 byte-identical, read whole; tallies recounted; 6a/6b/6c re-proven on shipped
-trees; EF-055 re-derived from Src): only verdict change vs pre-split = the
-deliberate `OptionsMenu` split; save contract held; no-retraining test PASSED
-from the new repo alone. ⇒ **NEXT = `agent/prompts/d13-rescue/01_OPUS_DERIVE.md`**
-(chain AUTHORED 08-12; prompt 3 gates on 2 owner answers it routes) ∥ `unattended-3`.
-① **D13 chain** (authored — derive/QA/build/verify/audit, NO inherited count).
+consumed; every matrix verdict re-derived from archived logs, save contract held,
+no-retraining test PASSED). A SECOND MOD EXISTS: `C:\Dev\SMR-OptInPack`**
+(`SMR_CommunityOptInPack` / `SMROptInPack` / `[CommunityOptInPack]`; junction
+installed, LOCAL git — no remote unasked; D01-D07/D09/D12 → tombstones here;
+⛔ this pack has NO Mod Options page — correct, and neither does the fix pack).
+⇒ **NEXT = `agent/prompts/d13-rescue/02_FABLE_QA.md`** ∥ `unattended-3`.
+① **D13 chain** — ⭐ **DERIVATION LANDED (prompt 1 CONSUMED 08-12; draft
+`90_DERIVATION.md`): 27 sites over BOTH trees, from source, NO inherited count**
+= 12 capturable-code + 15 persisted-data, all dispositioned; ⛔ **3 ROUTED under
+rule 6f** (Crystal/ExtenderFlap/TrackConnector GT bodies lack the §3a orphan
+gate) → prompt 3 gates on checklist **17-19**. ⛔ Every "13"/"12 exposed"/"≥13"
+is SUPERSEDED (§4.3 lists the 9 doc sites); ⚠️ `EF-023`'s "nothing in `Code/`
+states it any more" is FALSE (`Fix_MeteorStormWedge:138-141`).
 ② **ONE combined sitting**: PT-20 redo + D13 after-sweep + F102's minute.
 ③ MOD_DESCRIPTION **×2** + disposition table + metadata → ④ owner launch tasks.
 
@@ -39,15 +42,13 @@ F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
 
 ## Gates and holds
 - ⭐ **BOTH MODS LOADED is the rig's NORMAL config** (owner 08-12; WORKFLOW clause
-  ACTIVE since the audit). Two gate lines — grep the FULL bracketed token.
-  ⭐ **BASELINE (cell a2, audit-recounted): `74/74` + `8/8` · `78/0/10/0` of 88**;
-  order TestKit→fix→opt-in (opt-in wrappers OUTERMOST, `EF-054`). ✅ Owner's
-  re-tick minute SPENT 08-12 (dials `5x`/`+2`).
+  ACTIVE). Two gate lines — grep the FULL bracketed token. ⭐ **BASELINE (cell a2,
+  audit-recounted): `74/74` + `8/8` · `78/0/10/0` of 88**; order TestKit→fix→opt-in
+  (opt-in wrappers OUTERMOST, `EF-054`). ✅ Owner re-tick SPENT 08-12 (`5x`/`+2`).
 - ⛔ **`EF-056`: loading a COPY of a real campaign still runs that campaign's
   AUTOSAVE, whose rotation deletes the owner's autosaves** — it ate `Autosave Sol
-  306` (unrecoverable; still absent at the audit's re-listing), `Sol 311` restored
-  byte-exact; pre-copy every autosave first. ⭐ **`EF-055`: a junction can be
-  pulled/restored agent-side** — real uninstall, account untouched, zero owner cost.
+  306` (unrecoverable); pre-copy every autosave first. ⭐ **`EF-055`: a junction
+  can be pulled/restored agent-side** — real uninstall, zero owner cost.
 - **PT-62 remainder** → D12 (record now in the opt-in repo); ⛔ NOT a release gate.
   ⚠️ Its P13 lever renamed: `SMROptInPack_Disabled.NoHomeless`. ⭐ **F02/F78/F81
   ORGANIC watch**; F42 wontfix; D08 speced, unbuilt. ⚠️ **Rig has CHEATS ENABLED**
@@ -55,6 +56,5 @@ F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
   (D13); re-enable is owner-only. ⚠️ **EF-051 ON HOLD — Steam Cloud ON (owner
   08-12, temporary):** say "deleted, listing verified", NEVER "gone"; `CP60RT` +
   `Autosave Sol 311` HELD.
-- **Owner decisions open: 5** — relabel WORDING · D13 design Q · opt-in DISPLAY
-  NAME · opt-in default-OFF ratification (built OFF) · new repo's GitHub remote.
+- **Owner decisions open: 7** — relabel WORDING · **D13 ×3 (player story · mod-shaped confirm · ⛔ 3 ungated GT bodies — checklist 17-19)** · opt-in DISPLAY NAME · opt-in default-OFF ratification (built OFF) · new repo's GitHub remote.
 - **Release** — now **TWO** products, each with its own metadata/description/preview/portal pass; `archive/MOD_DESCRIPTION.md` FROZEN, rebuilt at prep.
