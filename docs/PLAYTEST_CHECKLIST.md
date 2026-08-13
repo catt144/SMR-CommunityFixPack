@@ -190,7 +190,17 @@ yours. Items 17 and 18 were reserved for you on the entry; item 19 is new and
 is the one thing the derivation found that I will not decide alone.
 Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
 
-17. ⚖️ **What does the player actually DO with the rescue artifact?**
+17. ✅ **DECIDED 2026-08-13, your ruling: (c) — the packs are their own
+    cleaner; the artifact serves ONLY the already-uninstalled.** You first
+    challenged the premise ("nobody but me has ever run the pack — why build a
+    cleaner at all?") and then **reaffirmed the 2026-08-01 launch-dependency
+    ruling** on the honest version of the case: the population is empty until
+    launch and the residue never expires (the tool works retroactively), so
+    the real reasons to build NOW are the open sequencing window (derivation
+    frozen + QA'd against exactly these trees) and day-one messaging — and
+    **build ≠ publish**: whether/when the rescue goes to a store stays a
+    release-time call (noted for the release checklist). The ask as it stood:
+    ⚖️ **What does the player actually DO with the rescue artifact?**
     (a) run-it-after-removal · (b) keep-it-installed as a permanent runtime ·
     **(c) the packs already clean themselves and the artifact serves ONLY the
     already-uninstalled case ← my recommendation, and the derivation now backs
@@ -219,7 +229,8 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
     the tool will say out loud). **Nothing about the (a)/(b)/(c) choice
     changes — (c) is still the recommendation.**
 
-18. ⚖️ **Confirm the artifact is built AS A MOD (not a console procedure) —
+18. ✅ **DECIDED 2026-08-13: CONFIRMED — mod-shaped.** The ask as it stood:
+    ⚖️ **Confirm the artifact is built AS A MOD (not a console procedure) —
     and that this makes the channel question stop blocking.** I verified the
     argument against your own Paradox Mods check (2026-08-01), not from
     assumption: that audience has no console, so a rescue path that means
@@ -235,7 +246,10 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
     naming/listing problem for the store page, never re-checked, not a code
     one.
 
-19. ⚖️ **Three of our own background threads have no "the mod is gone" exit,
+19. ✅ **DECIDED 2026-08-13: GO — build the three gates in-pack.** The inserted
+    build prompt (`agent/prompts/d13-rescue/02b_OPUS_GATES.md`) is authored and
+    queued before prompt 3. The ask as it stood:
+    ⚖️ **Three of our own background threads have no "the mod is gone" exit,
     and I want to fix that in the packs before building any cleaner.** The
     rule we wrote says every mod-owned background body must check whether the
     mod still exists each time it wakes. One of four does

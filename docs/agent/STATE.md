@@ -17,7 +17,7 @@ no-retraining test PASSED). A SECOND MOD EXISTS: `C:\Dev\SMR-OptInPack`**
 (`SMR_CommunityOptInPack` / `SMROptInPack` / `[CommunityOptInPack]`; junction
 installed, public remote `catt144/SMR-CommunityOptInPack` 08-13; D01-D07/D09/D12 → tombstones here;
 ⛔ this pack has NO Mod Options page — correct, and neither does the fix pack).
-⇒ **NEXT = `d13-rescue/03_OPUS_BUILD.md` ⛔ GATED on checklist 17-19** ∥ `unattended-3`.
+⇒ **NEXT = `d13-rescue/02b_OPUS_GATES.md` (inserted, owner GO) → `03` (17-19 ANSWERED 08-13)** ∥ `unattended-3`.
 ① **D13 chain** — ⭐⭐ **QA-SUSTAINED (prompts 1+2 CONSUMED 08-12/13; membership
 diff ZERO, verdict BUILD; fixes in `90_DERIVATION.md` `[QA 2026-08-13]` tags):
 27 sites, BOTH trees**, all dispositioned; ⛔ **3 ROUTED under 6f** → checklist
@@ -56,5 +56,5 @@ F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
   (D13); re-enable is owner-only. ⚠️ **EF-051 ON HOLD — Steam Cloud ON (owner
   08-12, temporary):** say "deleted, listing verified", NEVER "gone"; `CP60RT` +
   `Autosave Sol 311` HELD.
-- **Owner decisions open: 6** — relabel WORDING · **D13 ×3 (player story · mod-shaped confirm · ⛔ 3 ungated GT bodies — checklist 17-19)** · opt-in DISPLAY NAME · opt-in default-OFF ratification (built OFF). ✅ Opt-in remote DECIDED 08-13: public.
+- **Owner decisions open: 3** — relabel WORDING · opt-in DISPLAY NAME · opt-in default-OFF ratification (built OFF). ✅ 08-13: opt-in remote PUBLIC · **D13 17-19 ANSWERED ((c) · mod-shaped · gates GO; launch dependency REAFFIRMED, build ≠ publish)**.
 - **Release** — now **TWO** products, each with its own metadata/description/preview/portal pass; `archive/MOD_DESCRIPTION.md` FROZEN, rebuilt at prep.
