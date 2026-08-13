@@ -8,6 +8,38 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-12 — the `d13-rescue` chain is AUTHORED: five prompts, a triple-derivation spine, and the two reserved owner questions asked at the moment the spec gate opened
+
+Authored the same evening the split closed (owner kickoff on the audit
+report's own line). `agent/prompts/d13-rescue/` — README + 5, split-optins
+shape: 01 OPUS derive (five-shape + §3a-capture-route enumeration over BOTH
+shipped trees, NO inherited count; reconciliation vs every historical number
+BOTH ways; curated KEEP/REMOVE draft; disposition-table draft; artifact
+sketch; the two owner questions packaged with recommendations) → 02 FABLE
+fresh-context QA — a GATE that re-derives the set INDEPENDENTLY before
+reading the draft's arguments and attacks the three historical blindness
+classes by name → 03 OPUS build (⛔ STOPS unless BOTH owner answers are on
+the checklist: Q-A player story a/b/c, Q-B mod-shaped/channel confirmation;
+freezes spec, scaffolds the artifact repo, builds cleaner + TestKit probes,
+corrects every count-stating doc against `D13_EXPOSED_SET.md`) → 04 OPUS
+verify (unattended matrix with JUNCTION-PULL configs — EF-055 is the
+uninstall primitive, so state-4 cells cost zero owner minutes; EF-056
+autosave pre-copies mandatory; residue-zero proven by kit-instrumented
+inventory PLUS a zero-mods archived-log absence read) → 05 FABLE audit
+(the exposed set gets a THIRD derivation; §3a release-gate acceptance test;
+folder empty; kickoff = the ONE combined sitting, whose prepped brief is the
+audit's deliverable). Constitution highlights: some residue IS the repair
+(F35 trap generalised — every REMOVE carries why-safe, every KEEP why-kept,
+a name on neither list is a derivation gap); the four-OFF-states doctrine
+binds every uninstall-flavored reading to its `pack=n/n` gate line; a newly
+derived site with a reachable in-pack repair ROUTES (§3a build-first) rather
+than being fed to the cleaner. Method carry-over from the split audit:
+premises read beside predictions, R8 on all cited logs, per-row provenance
+tags, archive-tier docs never edited. STATE NEXT →
+`d13-rescue/01_OPUS_DERIVE.md`. doccheck GREEN, pushed.
+
+---
+
 ## 2026-08-12 — `split-optins` CLOSED by the terminal audit: every matrix verdict SUSTAINED, the no-retraining test passes from the new repo alone, both repos' both-mods clause goes ACTIVE
 
 **The chain's files last exist at `9509065` (pre-deletion sha); this session's

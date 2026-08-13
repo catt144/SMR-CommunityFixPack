@@ -19,11 +19,11 @@ page — correct). ⭐⭐ Audit re-derived EVERY matrix verdict from the archive
 (9/9 byte-identical, read whole; tallies recounted; 6a/6b/6c re-proven on shipped
 trees; EF-055 re-derived from Src): only verdict change vs pre-split = the
 deliberate `OptionsMenu` split; save contract held; no-retraining test PASSED
-from the new repo alone. ⇒ **NEXT = author + run the D13 chain** ∥ `unattended-3`.
-① **D13 chain**: exposed set over BOTH trees (NO inherited count) → spec (⚠️ owner
-design Q) → build + probe + curated keep/remove list. ② **ONE combined sitting**:
-PT-20 redo + D13 after-sweep + F102's minute. ③ MOD_DESCRIPTION **×2** +
-disposition table + metadata → ④ owner launch tasks.
+from the new repo alone. ⇒ **NEXT = `agent/prompts/d13-rescue/01_OPUS_DERIVE.md`**
+(chain AUTHORED 08-12; prompt 3 gates on 2 owner answers it routes) ∥ `unattended-3`.
+① **D13 chain** (authored — derive/QA/build/verify/audit, NO inherited count).
+② **ONE combined sitting**: PT-20 redo + D13 after-sweep + F102's minute.
+③ MOD_DESCRIPTION **×2** + disposition table + metadata → ④ owner launch tasks.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
