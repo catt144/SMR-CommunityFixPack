@@ -590,7 +590,8 @@ mechanics.
 
 1. **Stage the save, game CLOSED:** `Copy-Item` the designated save (owner's
    pick: `TEST2H TRAIN`) to a new name in
-   `C:\Users\stkot\Saved Games\Surviving Mars Relaunched\76561198020568696\`.
+   `%USERPROFILE%\Saved Games\Surviving Mars Relaunched\<steam-id>\` — one
+   numeric folder, the signed-in account's; glob it rather than hard-coding it.
    The engine lists the copy by FILENAME (`CORUN0.savegame.sav` loads as
    `"CORUN0.savegame.sav"`); the display name inside is cosmetic. The campaign
    save is never written; the copy dies in the result commit.

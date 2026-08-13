@@ -173,13 +173,13 @@ owed input stays here no matter how struck-through it looks.
     `github.com/catt144/SMR-CommunityOptInPack` — all 6 commits pushed, tree
     clean, `git pull` resolves (so the D13 chain's staleness check reads it
     without tripping). ⚠️ **One thing that came out of doing it, and it is not
-    caused by it:** your Windows username and Steam ID are in the public docs of
-    BOTH repos (`agent/facts/EF-050.md:15` and `PLAYTEST_HELP.md:593` carry
-    `C:\Users\stkot\Saved Games\...\76561198020568696\`, and a SteamID64 resolves
-    to your Steam profile). The fix pack has been public with that string for a
-    while, so the opt-in repo duplicates the exposure rather than creating it.
-    Say the word and I scrub both in one pass — the paths document nothing that
-    `%USERPROFILE%\Saved Games\...\<steam-id>` would not.
+    caused by it:** your Windows username and SteamID64 were written into the
+    public docs of BOTH repos (a hard-coded save-folder path in `EF-050` and
+    `PLAYTEST_HELP`), and a SteamID64 resolves to your Steam profile. ✅ **SCRUBBED
+    2026-08-13 at your word** — every live doc in both repos now says
+    `%USERPROFILE%\Saved Games\Surviving Mars Relaunched\<steam-id>\`, which is
+    equally usable. ⛔ **Read the sibling item below before assuming that closed
+    it: the string is still in git HISTORY on both public repos.**
 
 ### ⭐⭐ NEW 2026-08-12 — THE SAVE-RESCUE ARTIFACT: three calls, and the derivation is done
 
@@ -209,6 +209,15 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
     artifact may end up with **no thread surgery whatsoever**, which would make
     it markedly smaller and safer than every earlier sizing — one open
     question in the derivation decides that, and the QA prompt attacks it next.
+    **QA update (2026-08-13): the attack ran, and the answer is "smaller, but
+    not zero."** The derivation held up everywhere else, but "no thread
+    surgery" only covered saves the *current* pack has touched — the rescue's
+    real audience includes people who uninstalled an **older** version, whose
+    saves can still carry a dead meteor timer or an old rain loop. The QA
+    verdict keeps two small, one-shot repairs in the plan (both re-use the
+    game's own machinery; the meteor one costs a one-time timer re-roll, which
+    the tool will say out loud). **Nothing about the (a)/(b)/(c) choice
+    changes — (c) is still the recommendation.**
 
 18. ⚖️ **Confirm the artifact is built AS A MOD (not a console procedure) —
     and that this makes the channel question stop blocking.** I verified the

@@ -83,3 +83,108 @@ every uncertainty. Delete this file in the same commit.
   which change is pending measurement.
 
 ## Notes from upstream (prompt 2 appends here)
+
+**From prompt 2 (Fable QA gate, 2026-08-13). Verdict: ⭐ BUILD — with
+MUST-FIXes, every one already applied in place in `90_DERIVATION.md`
+(strike-and-supersede, tagged `[QA 2026-08-13]`). You build from the corrected
+doc; nothing below is left for you to re-derive, but every MUST-FIX carries a
+spec obligation you must honor.** Staleness at my run: fix-pack `8908367`,
+opt-pack `a90d128`, TestKit `62f03da`, all clean (a parallel session's
+uncommitted owner-decision edits — opt-in remote now PUBLIC — landed mid-run
+and ride this commit; they do not touch the derivation's substance).
+
+### The membership diff: ZERO differences, by a genuinely different route
+
+Independent sweep, different axes than prompt 1's: `SetGlobal(` call-site
+inventory + direct `_G` writes (catches the F87 latch paths) · whole-`Src`
+regex classification of all 17 replaced names (252 occurrences, exactly ONE
+non-call use = `TerraformingDisasters.lua:313`, E1's route — **§1.4 re-confirmed
+independently**, including the `PersistableGlobals` whitelist mechanism read
+at `persist.lua:119-143`) · literal persisted-name token sweep · own-thread /
+`rawset` / `= function` / notification-closure / label-modifier axes · the
+instrument re-run on the preserved 80-row list (verdict pattern reproduced,
+same four false positives, Colonist again absent from the Idle summary line).
+Chases that settled to no-finding: `Fix_RainsDeadlock:195` (entry value is
+vanilla's `RainsDisasterLoop`, never replaced), `Opt_NoHomeless:52`
+(comment-only mention), the opt pack's `ProcessToggle` rawsets (UI windows,
+§2c's class), `Fix_MilestoneCrash:41`'s popup (vanilla-valued params, vanilla
+id). §1.3's reconciliation verified at source 4-for-4 (DestroySilent decider
+at `Train.lua:183-184` + `Demolishable.lua:91/104`; MirrorSphere's yield is in
+the nested closure at `MirrorSphere.lua:836`; RCTransport dispatch body;
+both recovered `Colonist:Idle` yields — second cite corrected to `:1796`).
+
+### MUST-FIXes applied — and what each obliges YOU to do
+
+1. **D2 (and D1) — the GameVar rows were wrongly treated as cleaner-visible.**
+   Mod-registered GameVars are DROPPED on any load without the registering mod
+   and never re-saved (`persist.lua:136-142`, verified at source). D2's REMOVE
+   was unexecutable; its "least-certain placement" dissolves. **Spec: the
+   cleaner's list must NOT contain D1 or D2, and the artifact must NEVER
+   register a `GameVar` to reach a value (that re-persists the name — 6d).**
+2. **§8.3 "no thread surgery whatsoever" — struck.** Doubt 4 is SUSTAINED
+   (captured frames unreachable, §2a inert-accepted wholesale), but the
+   artifact's population includes PRE-REWRITE-LINEAGE saves the current pack
+   never touched (uninstalled before Tier 1/2) — the D13 entry's own expected
+   leftover classes. **Spec: keep TWO one-shot bounded heals, vanilla bodies
+   only: `Meteors` restart only-if-dead/foreign (cost: one 35-115 h re-roll,
+   stated to the player) and the rains stale-ACTIVE/dead-loop heal via
+   `FinishRainProcedure` / recreate-onto-vanilla-`RainsDisasterLoop` (the
+   pack's proven C34 recipe; cost: one rain re-roll). Never repeated;
+   skip-and-report on ambiguity. Your Job 1 already demands the per-thread
+   cost lines.** Checklist item 17 got an owner-facing QA update saying
+   "smaller, not zero"; the (c) recommendation is unchanged.
+3. **Count corrections inside the draft** (the project's own defect class):
+   §4.1's summary arithmetic ("Removed: 5", "14−5+1") contradicted its own
+   table — now 14−4=10, +E3+E12=12; RT thread count 2→**3**; "14 distinct
+   persisted names"→**16** (15 rows, F35 family as one, D15 as two).
+4. **Cite corrections:** D9's second cite `:173`→`:201` (write) + `:209`
+   (guard); `Colonist:Idle` `:1795`→`:1796`; D11 `:339` and D12 `:105`
+   verified CORRECT (variable-keyed writes my literal grep couldn't see).
+5. **Report dialog placement (spec requirement added to §8.3):** the
+   `WaitMessage` report MUST ride a real-time thread (00_Core:498's pattern);
+   the clean pass stays synchronous. A yield on the load-path GT frame would
+   be the exact shape the artifact exists to avoid.
+
+### Rulings you can lean on
+
+* **E7 defanged** (still INFERRED, no longer load-bearing): the own-thread
+  axis is exhaustive — exactly 6 GT creations in both trees, E7's the only
+  yield-free body — so neither answer to the created-never-run question
+  changes any list or disposition; the 6f gate covers its worst case. An
+  optional prompt-4 probe leg is sketched in §6 doubt 1.
+* **Doubt 5 settled** (option tables are not save state — mechanism verified).
+* **Doubt 2 extended** (zero `Sleep`/`Wait*` tokens anywhere in
+  `UIStatUpdate` :2932-3133); still conditional on indirect helpers, still
+  disclosed, not a gate item.
+* **§4.3's doc-correction list verified complete** by an independent sweep
+  (all 9 files confirmed; no unlisted file; TestKit + opt-pack docs clean).
+* **KEEP/REMOVE ran per-name, both directions**: D15's removal path is the
+  module's own base-position call (`SetLabelModifier(label, id, nil)`,
+  labels "Drone"/"Consts", ids at `:64-65`); D5/D6/D7 absence semantics
+  verified at `:81-83`/`:65-70`/`:97`; D10's re-add guard at
+  `90_SaveSanitizer:69-76` confirms a pattern sweep would re-break F35.
+  6f routings verified by my own reads (gates present only in StormWedge,
+  `:145`/`:156`; E5/E6/E7 ungated; the stale `:138-141` comment confirmed —
+  EF-023's closing claim is FALSE and rides your Job 3).
+
+### Observation, not a MUST-FIX
+
+E9/E10 (and the "frame" wording generally): both Idle wrappers end in strict
+tail calls with yield-free pre-work; under proper-tail-call semantics those
+frames are elided before vanilla's Sleep, so E9/E10 are likely over-included.
+Kept deliberately — same basis as the historical counts, no disposition
+changes either way, and un-measurable without a game. Do not cite them as
+capture-proven.
+
+### What I did NOT get to (named residue for prompt 5)
+
+* **No game launch** — E7 unmeasured (optional probe sketched); the
+  tail-call elision observation unmeasured.
+* **D10 still UNSAMPLED** — ROUTED to prompt 4: the damaged-fixture leg must
+  plant/manufacture an F35-affected witness and read the modifier back
+  (absent ≠ refuted; the house rule requires the condition SAMPLED).
+* **E12's indirect-helper yield audit** — token scan only; the conditional
+  tag stands.
+* The parallel session's owner-decision edits (checklist item 15, STATE's
+  remote line) were in the tree uncommitted at my close; they ride my commit
+  unreviewed beyond a read of their diff.

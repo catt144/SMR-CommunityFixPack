@@ -79,7 +79,7 @@ way to see it, which is the original CaveIns blindness restated.
 
 1. **`Colonist:Idle` — AMBIGUOUS by name, but the class we patch DOES yield.**
    `Colonist.lua:1770-…` contains `Sleep(1000)` (`:1783`) and `Sleep(2000)`
-   (`:1795`), and it is a **command**, so it runs on a persistable command GT
+   (~~`:1795`~~ `:1796` `[QA 2026-08-13: re-read; :1795 is the if-line]`), and it is a **command**, so it runs on a persistable command GT
    thread. The instrument reported "8 of 24 defs yield directly:
    AlienDigger, Metatron, MirrorSphere, PastureAnimal" — Colonist was not
    among the four it named, so a reader trusting the summary line would have
@@ -135,10 +135,10 @@ cited lines; **INFERRED** = argued from engine semantics not observed here.
 | E4 | FP `Fix_MeteorStormWedge` | `:134` → `:142-198` | own GT thread → **(a)** | `SMRFixPack.StormWedgeHeal` frame; `Sleep(4000)` ×≤10 (`:155`) | **dies cleanly at the gate**, vanilla state reset first | ✅ **yes** — `:145` and re-armed `:156` | Tier-1 §6.2a-D reorder landed | SOURCE |
 | E5 | FP `Fix_CrystalMysteryHang` | `:44-54` | own GT thread → **(a)** | the repeater closure **plus, by value, the module-local function `crystals_mystery_active`** (upvalue) | ⛔ **runs on** — every name it touches is vanilla or an upvalue; it keeps posting `Msg("CrystalFlyAway")` hourly until its **frozen 10-sol deadline**. Bounded, silent, and arguably still doing its job | ⛔ **NONE** | no | SOURCE |
 | E6 | FP `Fix_ExtenderFlapChurn` | `:77-84` | own GT thread → **(a)** | the debounce closure; upvalues `pending`, `DEBOUNCE` | ⛔ **runs on once** — `Sleep(DEBOUNCE)` then one all-vanilla hub rebuild, then ends | ⛔ **NONE** | no | SOURCE |
-| E7 | FP `Fix_TrackConnectorPingPong` | `:156-160` | own GT thread → **(a)** | the reclaim closure. ⚠️ **The body contains no yield**, so this rests on a created-but-not-yet-run GT thread being persisted (creation defers, `EF-029`) | ⛔ **runs on once** if captured — all-vanilla body | ⛔ **NONE** | no | ⚠️ **INFERRED** — see §6 doubt 1 |
+| E7 | FP `Fix_TrackConnectorPingPong` | `:156-160` | own GT thread → **(a)** | the reclaim closure. ⚠️ **The body contains no yield**, so this rests on a created-but-not-yet-run GT thread being persisted (creation defers, `EF-029`) | ⛔ **runs on once** if captured — all-vanilla body | ⛔ **NONE** | no | ⚠️ **INFERRED** — see §6 doubt 1 `[QA 2026-08-13: held, and DEFANGED — see the doubt]` |
 | E8 | FP `Fix_CaveInsNoDisasters` | `:35-43` | **table-slot** → **(b)** + (a) | our FUNC-slot wrapper, held in the engine's live `info` local across the yielding vanilla `UndergroundMarsquake` FUNC. ~1 in 9 Underground-map saves | **dies harmlessly** — layer-2 shaped tail call | n/a (layer 2) | no — "compliant, no work" | SOURCE (adjudication §3.1, route re-read) |
-| E9 | FP `Fix_ArrivalDeaths` | `:171-…` | class-method wrap → **(a)** | the `Colonist:Idle` wrapper frame, below `Sleep(1000)`/`Sleep(2000)` on a command GT thread | **dies harmlessly** — work before, `return orig_idle(...)` after | n/a (layer 2) | ✅ Tier 2 (half b is layer-3'd; the Idle hook is layer-2 compliant) | SOURCE |
-| E10 | FP `Fix_ShelterReflex` | `:58-74` | class-method wrap → **(a)** | same frame, second wrapper | **dies harmlessly** — layer 2 | n/a | no — "already compliant" | SOURCE |
+| E9 | FP `Fix_ArrivalDeaths` | `:171-…` | class-method wrap → **(a)** | the `Colonist:Idle` wrapper frame, below `Sleep(1000)`/`Sleep(2000)` on a command GT thread | **dies harmlessly** — work before, `return orig_idle(...)` after | n/a (layer 2) | ✅ Tier 2 (half b is layer-3'd; the Idle hook is layer-2 compliant) | SOURCE `[QA 2026-08-13: likely OVER-included — both wrappers end in a strict tail call with yield-free pre-work, and a proper tail call elides the frame before vanilla's Sleep. Kept: the historical counts used the same basis, and either reading changes no disposition. Unmeasured; do not cite as capture-proven]` |
+| E10 | FP `Fix_ShelterReflex` | `:58-74` | class-method wrap → **(a)** | same frame, second wrapper | **dies harmlessly** — layer 2 | n/a | no — "already compliant" | SOURCE `[QA 2026-08-13: same tail-call observation as E9]` |
 | E11 | FP `Fix_LastTransmissionStorage` | `:134-136` | **preset-field** → **(c)** | the `Condition.eval` closure (upvalues: a comparator, a grid-type string, a number), reached via `g_FactionsHolder` **GameVar** (`Factions.lua:196`) → `factions_approval[id].likes_data[i].like` = the preset **sub-object** (`ClassDef-Factions.generated.lua:180`; permanents gather preset **roots** only) | **inert** — nothing ever calls `.eval` on the persisted copy; fresh evaluations go through live presets. Even if invoked: vanilla names only, zero errors | n/a | no — disclosed-no-build (§4.4) | SOURCE (route re-derived from Src this session, not inherited) |
 | E12 | FP `Fix_MoraleComfortTooltip` | `:101-110` | instance-field → **(c)**, *bounded* | a `GetProperty` closure `rawset` onto a **Colonist instance**, restored 9 lines later | **cannot be captured** so long as the window stays synchronous: `pcall(shipped, w)` is the only thing between set and restore, and Lua here is cooperative — no save can interleave without a yield | n/a | no | SOURCE — ⚠️ conditional, see §6 doubt 2 |
 
@@ -146,15 +146,15 @@ cited lines; **INFERRED** = argued from engine semantics not observed here.
 
 | # | repo/module | file:line | name | carrier | value | after uninstall | prov |
 |---|---|---|---|---|---|---|---|
-| D1 | FP `Fix_MeteorFrequency` | `:76`, `:184` | `SMRFixPack_MeteorLatch` | **GameVar** | version string / `false` | inert data | **MEASURED** (`= 1.0.1`, `spd2`/`spe` dumps) |
-| D2 | FP `Fix_FirstAsteroidPrefabs` | `:104`,`:115` | `SMRFixPack_FirstAsteroidPrefabs` | **GameVar** | boolean | inert data | **MEASURED** (`= false`) |
+| D1 | FP `Fix_MeteorFrequency` | `:76`, `:184` | `SMRFixPack_MeteorLatch` | **GameVar** | version string / `false` | inert data — `[QA 2026-08-13: and SELF-CLEARING: PersistLoad restores only names still in `PersistableGlobals` and PersistSave writes only registered names (`persist.lua:119-143`), so a load without the registering mod drops the value and the next save omits it]` | **MEASURED** (`= 1.0.1`, `spd2`/`spe` dumps) |
+| D2 | FP `Fix_FirstAsteroidPrefabs` | `:104`,`:115` | `SMRFixPack_FirstAsteroidPrefabs` | **GameVar** | boolean | inert data — `[QA 2026-08-13: SELF-CLEARING, same mechanism as D1 — and therefore UNREACHABLE by a cleaner: the value never survives the load into a cleaner-equipped session unless the cleaner re-registers the name, which would re-persist it]` | **MEASURED** (`= false`) |
 | D3 | FP `Fix_RainsDeadlock` | `:196` | `SMRFixPack_loop_version` | field inside a `RainsDisasterThreads` GameVar entry | version string | inert data | SOURCE |
 | D4 | FP `Fix_RainsDeadlock` | `:197` | `SMRFixPack_fixed_loop` (**legacy**) | same | boolean | inert; **the pack clears it as entries migrate** | SOURCE |
 | D5 | FP `Fix_StaleReservations` | `:52`, `:83` | `SMRFixPack_reserved_at` | Colonist instance field | GameTime number | inert data | **MEASURED — 1257 / 1260 / 1336 objects** |
 | D6 | FP `Fix_ShelterReflex` | `:65`,`:69` | `SMRFixPack_shelter_try` | Colonist instance field | GameTime number | inert data | **MEASURED — 0–1 objects** |
 | D7 | FP `Fix_PayloadTemplateRefill` | `:76`,`:97` | `SMRFixPack_payload_set` | transporter instance field | boolean | inert data | **MEASURED — 3 objects** |
 | D8 | FP `Fix_DroneTransportMinors` | `:203-204` | `SMRFixPack_rocket_fuel_key` (**legacy**) | DroneControl instance field | any | **the module deletes it from existing saves** | **MEASURED — 0 objects** (the deletion works) |
-| D9 | FP `Fix_DustDevilSpawnGate` | `:151`,`:173` | `SMRFixPack_spawn_gate` | field on a plain-data descriptor copy held in vanilla's scheduler-thread local | boolean | self-replaces with vanilla data **within one wave** | **MEASURED** (PT-61 P9/P10) |
+| D9 | FP `Fix_DustDevilSpawnGate` | `:151`,~~`:173`~~`:201` (write), `:209` (guard) `[QA 2026-08-13: cite corrected]` | `SMRFixPack_spawn_gate` | field on a plain-data descriptor copy held in vanilla's scheduler-thread local | boolean | self-replaces with vanilla data **within one wave** | **MEASURED** (PT-61 P9/P10) |
 | D10 | FP `90_SaveSanitizer` | `:84-89` | `SMRFixPack_F35_<label>` | LabelModifier ids in `colony.label_modifiers` | `{amount, percent, prop, id}` | ⭐ **THE RESIDUE IS THE REPAIR** | SOURCE — ⚠️ **not sampled**, see §6 doubt 3 |
 | D11 | FP `90_SaveSanitizer` | `:226`,`:339` | `SMRFixPack_F48_StationConnectors` | `UIColony` field | boolean | inert one-shot latch | **MEASURED** (`= true`) |
 | D12 | OP `Opt_AcknowledgedWarnings` | `:68`,`:105` | `SMRFixPack_ack_notworking` | Building instance field | boolean | inert (nothing reads it) | **MEASURED — 4 objects, byte-identical across a save round trip** |
@@ -187,8 +187,11 @@ exactly the advice a player who has *already* uninstalled cannot take.)
 * **`Fix_CommandCenterNumbers:41`** (`RO[name] = function…`) and
   **`Fix_StorageRateModifiers:54`** (`class.OnModifiableValueChanged = …`) —
   writes onto **class tables**, which are permanents.
-* **Both real-time threads** (`00_Core:498` in each pack,
-  `Fix_MilestoneCrash:40`) — real-time threads are never persisted.
+* ~~**Both**~~ **All three real-time threads** (`00_Core:498` in each pack,
+  `Fix_MilestoneCrash:40`) `[QA 2026-08-13: count corrected]` — real-time
+  threads are persisted only when flagged `threadPersist`
+  (`persist.lua:128-131`); none of ours is flagged (`MakeThreadPersistable`
+  appears nowhere in either tree) and none is referenced from persisted data.
 * **`SMRFixPack_Disabled` / `SMRFixPack_Optional` / `SMROptInPack_*`** — plain
   mod-created globals, absent from `PersistableGlobals`; they are a
   console/other-mod veto surface, **not** save state. They are not on the
@@ -291,13 +294,17 @@ recorded 13+1 (fix pack only)**.
 | `Fix_LastTransmissionStorage` (the "+1") | ✅ **KEPT (E11)** | route re-derived from `Src` this session rather than inherited. |
 | ~~`Fix_TrainCargoDumping`~~ | already off | correctly removed by §5.2 — `Train:UnloadAll` is synchronous; re-confirmed clear. |
 
-**Removed: 5** (MeteorFrequency, DroneUnreachableForever, TrainWaitTime,
-DroneOverhaul — all Tier 1/2 repairs — plus the split of Bombardment being a
-*gain*, not a loss). **Added: 1** (the Bombardment per-missile closure, E3).
-14 − 5 + 1 = **10**… and the derived code count is 12. The two extra are **E12**
-(the MoraleComfortTooltip instance-closure window, never on any list) and the
-E9/E10 pair being counted as **two sites on one method** rather than two
-modules. Both differences are definitional, and both are stated rather than
+~~**Removed: 5** (…) 14 − 5 + 1 = **10**… and the derived code count is 12. The
+two extra are **E12** (…) and the E9/E10 pair being counted as **two sites on
+one method** rather than two modules.~~
+`[QA 2026-08-13: the summary arithmetic contradicted its own table (4 ⬇️ rows,
+not 5) and double-counted the split. Superseded:]` **Removed: 4**
+(MeteorFrequency, DroneUnreachableForever, TrainWaitTime, DroneOverhaul — all
+Tier 1/2 repairs). 14 − 4 = **10** kept from the record (E9/E10 were already
+two members there: ArrivalDeaths and ShelterReflex). **Added: 2** — **E3** (the
+Bombardment per-missile closure; the record counted the module once) and
+**E12** (the MoraleComfortTooltip instance-closure window, never keyed at all).
+10 + 2 = **12**. The additions are definitional and stated rather than
 smoothed.
 
 ### 4.2 The direction the old greps were blind in
@@ -312,7 +319,11 @@ lives.
 ### 4.3 Docs that state a count and must be corrected (prompt 3)
 
 The D13 entry's table is 2026-08-01-era with pre-restructure paths. Re-swept,
-translated, and re-verified live this session:
+translated, and re-verified live this session
+`[QA 2026-08-13: independently re-swept (stale-count patterns over docs/ of all
+three repos + loose numeric sweep of the three files my patterns missed): all 9
+files confirmed, NO unlisted file found; TestKit and opt-pack docs clean;
+archive + chain-internal hits correctly excluded]`:
 
 | file (current path) | what is there |
 |---|---|
@@ -343,7 +354,7 @@ sweep would delete D10, which is the repair.
 |---|---|---|
 | **`SMRFixPack_F35_<label>`** (D10) | ⭐⭐ **the residue IS the repair.** These LabelModifiers are the Frictionless Composites buff the shipped `WindTurbine_Large_ReapplyModifiers` fixup never re-applied | the Large Wind Turbine buff vanishes from the save — F35 returns, permanently, and the pack is no longer installed to redo it |
 | **`SMRFixPack_F48_StationConnectors`** (D11) | inert one-shot latch, but removing it is a *silent* invitation to re-run a track re-ordering pass on a save that has already had one | nothing immediately; but the guarantee "this save was re-ordered exactly once" is lost |
-| **`SMRFixPack_MeteorLatch`** (D1) | same shape: the latch records that this save lineage was healed under a given pack version | a reinstalling player pays one extra meteor-timer re-roll. Harmless, but it is data the pack authored *about* the save, and deleting it makes the pack lie to itself later |
+| **`SMRFixPack_MeteorLatch`** (D1) | same shape: the latch records that this save lineage was healed under a given pack version. `[QA 2026-08-13: KEEP is also the only executable call — a mod-registered GameVar is dropped on any load without its registering mod (persist.lua:136-142), so the cleaner never sees it; it self-clears on the first modless save cycle regardless]` | a reinstalling player pays one extra meteor-timer re-roll. Harmless, but it is data the pack authored *about* the save, and deleting it makes the pack lie to itself later |
 | every **captured frame** in §2a | not removable by a cleaner at all — see §6 doubt 4 | n/a |
 
 ### REMOVE — safe, and here is why
@@ -362,18 +373,28 @@ sweep would delete D10, which is the repair.
 | **`SMRFixPack_closed_to_new_residents`** (D13) | boolean; nil means vanilla by the module's own contract | only `Opt_ResidencyControl` | vanilla |
 | **`SMRFixPack_no_homeless`** (D14) | boolean; nil means vanilla | only `Opt_NoHomeless` | vanilla |
 | **`SMRFixPack_spawn_gate`** (D9) | ⚠️ **listed, but the cleaner should NOT hunt it** — it lives in a scheduler-thread local, self-replaces within one wave (PT-61-measured), and reaching it means touching a vanilla thread's locals | nothing after one wave | vanilla |
-| **`SMRFixPack_FirstAsteroidPrefabs`** (D2) | ⚠️ **judgement call — see below** | only that module | vanilla, and the popup grant is long past |
+| ~~**`SMRFixPack_FirstAsteroidPrefabs`** (D2)~~ | ~~⚠️ **judgement call — see below**~~ | | |
 
-⚠️ **The one list placement I am least sure of is D2.** Removing it is safe for
-a save that already got its prefabs (the notification is gone, so no second
-grant path exists — the module's own "why remove the notification" argument at
-`:66-71`). But if a player reinstalls the pack on a cleaned save whose stranded
-notification somehow survived, the latch's absence permits a second grant.
-I have put it on REMOVE because the cleaner's population is *already-removed*
-players; prompt 2 should second-guess it.
+~~⚠️ **The one list placement I am least sure of is D2.** … I have put it on
+REMOVE because the cleaner's population is *already-removed* players; prompt 2
+should second-guess it.~~
 
-**Nothing is on neither list.** Every one of the 14 persisted names and every
-one of the 12 capturable bodies has a row above or in §2a.
+`[QA 2026-08-13: D2's REMOVE row is struck — the judgement call DISSOLVES ON
+MECHANISM. D2 is a mod-registered GameVar: `OnMsg.PersistLoad` restores only
+names still present in `PersistableGlobals` and `OnMsg.PersistSave` writes only
+registered names (persist.lua:119-143, verified at source this session). A
+cleaner that does not register the name can neither see nor remove the value —
+and registering it in order to remove it would persist the name as the
+artifact's own residue, violating 6d. The value self-clears on the player's
+first save/load cycle without the pack. Disposition: NO ACTION — self-clearing,
+unreachable by construction. The reinstall/double-grant corner the row worried
+about is thereby untouched by the artifact either way, and remains the narrow,
+low-harm corner the module's own flag ordering (:174-206) already bounds.]`
+
+**Nothing is on neither list.** Every one of the ~~14~~ **16** persisted names
+(15 rows, F35 family as one, D15 as two `[QA 2026-08-13]`) and every one of the
+12 capturable bodies has a row above or in §2a — D2's row is the NO-ACTION
+entry above, not an absence.
 
 ⛔ **Never rename, never rewrite** — persisted names are save contract in both
 packs (opt pack `PROVENANCE.md` §2). The five opt-side names keep the legacy
@@ -389,17 +410,40 @@ packs (opt pack `PROVENANCE.md` §2). The five opt-side names keep the legacy
    has no yield, and the persist machinery for threads is C-side
    (`threadPersist` flag, `cthreads.lua:224`) — I could not settle it from Lua
    source. If the answer is "no", E7 leaves the set and its routing (§3) is
-   optional tidiness. If "yes", the same reasoning may add sites I dismissed.
-   **This is the derivation's single load-bearing INFERRED row.**
+   optional tidiness. ~~If "yes", the same reasoning may add sites I dismissed.
+   **This is the derivation's single load-bearing INFERRED row.**~~
+   `[QA 2026-08-13: HELD as INFERRED but DEFANGED — it is not load-bearing.
+   The own-thread axis is exhaustive: both trees create exactly 6 GT threads,
+   and E7's is the ONLY yield-free body (the other five are E3/E4/E5/E6 plus
+   RainsDeadlock:195, whose entry value is vanilla's own `RainsDisasterLoop`,
+   read live from _G at create time — the pack never replaces that global).
+   So a "yes" answer adds NO site beyond E7 itself, and a "no" answer removes
+   only E7. Neither answer changes any list, any disposition, or the 6f gate
+   repair (which E5/E6 need regardless and which covers E7's worst case).
+   Optional: prompt 4 could measure it cheaply — probe-create a yield-free GT
+   thread, save before unpausing, load back and look for it — but nothing
+   gates on the answer.]`
 2. ⚠️ **E12's synchronicity argument.** I claim no save can interleave
    `rawset` … `pcall(shipped, w)` … `rawset` because nothing there yields. That
    rests on `Colonist:UIStatUpdate`'s 201-line body and its rollover path being
    yield-free, which I checked for *direct* yields only.
+   `[QA 2026-08-13: extended — a token scan of the whole body (:2932-3133)
+   finds zero `Sleep`/`Wait*` of any kind, and the wrapper runs in UI/rollover
+   context where the save command shares the same cooperative thread domain.
+   Indirect-helper yields remain unaudited; the row's "conditional" tag
+   stands. Disclosed residue, not a gate item.]`
 3. ⚠️ **D10 was never sampled.** The FixtureCarry dumps show no
    `SMRFixPack_F35_*` — but those saves may simply not be affected saves
    (F35 fires only when Frictionless Composites is researched and the label is
    unbuffed). **Absent ≠ refuted**; I have not measured the modifier that the
    whole KEEP list's headline entry is about.
+   `[QA 2026-08-13: STANDS — still unsampled (this prompt was game-free). The
+   mechanism was source-verified instead (write shape at 90_SaveSanitizer:84-89,
+   re-add guard at :69-76). ROUTED to prompt 4: its damaged-fixture leg must
+   SAMPLE the condition — plant or manufacture an F35-affected witness
+   (synthetic residue via probe is acceptable) and read the modifier back, per
+   the house rule that "refuted/measured" requires the condition sampled, not a
+   zero count.]`
 4. ⚠️ **Can a cleaner do anything at all about §2a's captured frames?** My
    working assumption is no — the frames are inside vanilla threads' stacks,
    `debug` is blacklisted, and adjudication §8.5 confirms there is no lever to
@@ -407,9 +451,22 @@ packs (opt pack `PROVENANCE.md` §2). The five opt-side names keep the legacy
    disposition is "inert-accepted", and the artifact's real scope is §2b.
    I believe this is right and it materially shrinks the artifact — which is
    exactly why it deserves a hostile read.
+   `[QA 2026-08-13: SUSTAINED for what it claims — no lever reaches a frame
+   inside another thread's stack, so §2a is inert-accepted wholesale. ⛔ But
+   the conclusion drawn from it in §8.3 ("no thread surgery whatsoever") does
+   NOT follow and is corrected there: captured FRAMES are not the same thing
+   as whole ORPHANED THREADS with stale entry bodies (pre-rewrite-lineage
+   `Meteors` / old-body rains loops), which ARE reachable — vanilla's own
+   `RestartGlobalGameTimeThread` / `FinishRainProcedure` / `DeleteThread`+
+   recreate-onto-vanilla-body primitives — and which the artifact's population
+   (saves the current pack never touched) still carries.]`
 5. ⚠️ **`SMRFixPack_Disabled`/`_Optional` exclusion.** I proved they are not in
    `PersistableGlobals`, so not save state. If that is wrong, five more names
    join the table.
+   `[QA 2026-08-13: SETTLED — the whitelist mechanism itself was verified at
+   persist.lua:119-143 (save writes and load restores iterate
+   `PersistableGlobals`, never the data), and the option tables are created by
+   plain assignment, never `GameVar`. Not save state.]`
 6. ⚠️ **Site-vs-module counting.** E9/E10 are two wrappers on one method; E2/E3
    are two bodies in one module. A reviewer could defensibly call that 10 code
    sites, or 12. I chose the finer grain because the disposition table is
@@ -433,8 +490,8 @@ packs (opt pack `PROVENANCE.md` §2). The five opt-side names keep the legacy
 | E10 ShelterReflex Idle | **inert-accepted** (level 2) | already compliant, nothing owed |
 | E11 LastTransmission eval | **inert-accepted** (level 2, disclosed) | adjudication §4.4; route re-derived |
 | E12 MoraleComfort GetProperty | **inert-accepted** (level 2) | window is one synchronous call — pending doubt 2 |
-| D1 MeteorLatch | **KEEP** | latch semantics |
-| D2 FirstAsteroidPrefabs | **cleaner-target (REMOVE)** ⚠️ | least-certain list placement |
+| D1 MeteorLatch | **KEEP** | latch semantics — `[QA 2026-08-13: also self-clearing and cleaner-unreachable (mod-registered GameVar); KEEP = no action, trivially satisfied]` |
+| D2 FirstAsteroidPrefabs | ~~**cleaner-target (REMOVE)** ⚠️ least-certain list placement~~ **NO ACTION — self-clearing, cleaner-unreachable** `[QA 2026-08-13: mod-registered GameVar, dropped on any modless load and never re-saved (persist.lua:136-142); a cleaner would have to re-register the name to touch it, which 6d bars. The least-certain placement dissolves]` |
 | D3 loop_version | **cleaner-target (REMOVE)** | inert stamp |
 | D4 fixed_loop | **repaired-in-pack** (cleared on migration) + **cleaner-target** for never-migrated saves | legacy |
 | D5 reserved_at | **cleaner-target (REMOVE)** | 1257×-measured; inert |
@@ -521,16 +578,39 @@ artifact is a **rescue**, and rescues are self-motivating.
   **KEEP entries are never touched**, and the pass reads its own list rather
   than deriving anything.
 * **Thread restarts: one-shot and bounded, or not at all.** Trap 2 stands —
-  restarting `Meteors` resets a 35-115 h interval. Under doubt 4 the artifact
+  restarting `Meteors` resets a 35-115 h interval. ~~Under doubt 4 the artifact
   may need *no* restart at all: the two thread classes that mattered are
   already vanilla-bodied in any save the current pack touched, and §2a's
   remaining frames are unreachable. **If prompt 2 sustains doubt 4, the
   artifact has no thread surgery in it whatsoever** — which would make it
-  dramatically smaller and safer than every prior sizing.
+  dramatically smaller and safer than every prior sizing.~~
+  `[QA 2026-08-13: doubt 4 IS sustained, and the conclusion still does not
+  follow — it conflates unreachable captured FRAMES (§2a, true, no surgery
+  possible) with reachable ORPHANED THREADS carrying stale entry bodies. The
+  qualifier "in any save the current pack touched" excludes exactly the
+  artifact's population: a save whose pack was removed BEFORE the Tier-1/2
+  era never ran the meteor latched heal or the rains migration, and carries
+  the D13 entry's named legacy classes (dead/old-body `Meteors`, old-body
+  rains loops). SUPERSEDED BY: the spec KEEPS two one-shot bounded heals,
+  both via vanilla primitives and vanilla bodies only (6d-compatible, no
+  artifact code enters the save): (1) `RestartGlobalGameTimeThread("Meteors")`
+  ONLY when the scheduler thread is dead or its body is not vanilla-reachable
+  — cost: one 35-115 h interval re-roll, stated to the player; (2) the rains
+  heal — stale-ACTIVE via vanilla `FinishRainProcedure`, dead/foreign
+  `activation_thread` via `DeleteThread` + `CreateGameTimeThread(RainsDisasterLoop,
+  settings)` with vanilla's own global, the pack's proven C34/migration recipe
+  — cost: one rain re-roll. Never blanket-repeated; skip-and-report when
+  detection is ambiguous. Prompt 3's Job 1 already requires the per-thread
+  interval cost in the frozen spec.]`
 * **Reporting:** a `WaitMessage` dialog (the same gamepad-native surface
   `00_Core:509-515` already uses, so it reaches console), naming counts per
   name — *"removed 1257 reservation timestamps, 2 drone dials, 11 dome
   flags; kept 3 turbine repairs"* — plus the same line to `ModLog`.
+  `[QA 2026-08-13, spec requirement: the dialog MUST ride a REAL-TIME thread
+  exactly as 00_Core:498 does — `WaitMessage` yields, and a yield on the
+  load-path game-time frame would be a blocked GT frame, the precise shape
+  this artifact exists to avoid. The clean pass itself stays synchronous;
+  only the report detaches.]`
 * **Self-removal story:** residue-zero by construction (6d) — no threads, no
   GameVars, no persisted names of its own, no `optional` machinery, nothing
   after any call that can block. Its own uninstall is "delete it"; the R8

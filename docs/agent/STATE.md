@@ -17,12 +17,12 @@ no-retraining test PASSED). A SECOND MOD EXISTS: `C:\Dev\SMR-OptInPack`**
 (`SMR_CommunityOptInPack` / `SMROptInPack` / `[CommunityOptInPack]`; junction
 installed, public remote `catt144/SMR-CommunityOptInPack` 08-13; D01-D07/D09/D12 → tombstones here;
 ⛔ this pack has NO Mod Options page — correct, and neither does the fix pack).
-⇒ **NEXT = `agent/prompts/d13-rescue/02_FABLE_QA.md`** ∥ `unattended-3`.
-① **D13 chain** — ⭐ **DERIVATION LANDED (prompt 1 CONSUMED 08-12; draft
-`90_DERIVATION.md`): 27 sites over BOTH trees, from source, NO inherited count**
-= 12 capturable-code + 15 persisted-data, all dispositioned; ⛔ **3 ROUTED under
-rule 6f** (Crystal/ExtenderFlap/TrackConnector GT bodies lack the §3a orphan
-gate) → prompt 3 gates on checklist **17-19**. ⛔ Every "13"/"12 exposed"/"≥13"
+⇒ **NEXT = `d13-rescue/03_OPUS_BUILD.md` ⛔ GATED on checklist 17-19** ∥ `unattended-3`.
+① **D13 chain** — ⭐⭐ **QA-SUSTAINED (prompts 1+2 CONSUMED 08-12/13; membership
+diff ZERO, verdict BUILD; fixes in `90_DERIVATION.md` `[QA 2026-08-13]` tags):
+27 sites, BOTH trees**, all dispositioned; ⛔ **3 ROUTED under 6f** → checklist
+**17-19**. QA deltas (detail = prompt 3's Notes): D2 REMOVE dissolved · 2
+one-shot vanilla-body thread heals KEPT (pre-rewrite saves) · D10 → prompt 4. ⛔ Every "13"/"12 exposed"/"≥13"
 is SUPERSEDED (§4.3 lists the 9 doc sites); ⚠️ `EF-023`'s "nothing in `Code/`
 states it any more" is FALSE (`Fix_MeteorStormWedge:138-141`).
 ② **ONE combined sitting**: PT-20 redo + D13 after-sweep + F102's minute.
