@@ -211,7 +211,7 @@ platform, what happened, when it started, whether it survives a save and reload
 | # | hole | who closes it |
 |---|---|---|
 | 1 | **Site links ×3** (fix list · save-repair detail · for-modders page) | the site is `workflow_dispatch` only and Pages is off; links exist when the owner turns it on |
-| 2 | ~~**The fifth judgment-call bullet** — the dust-devil scale word~~ ✅ **CLOSED 2026-08-13 by the owner** (*"change any wordings to their accurate versions"*). The bullet is in the text above, in the phrasing approved 08-02: *"on some map settings"*. ⛔ **The checklist line itself is NOT struck** — see below | done |
+| 2 | ~~**The fifth judgment-call bullet** — the dust-devil scale word~~ ✅ **CLOSED 2026-08-13 by the owner** (*"change any wordings to their accurate versions"*). The bullet is in the text above, in the phrasing approved 08-02: *"on some map settings"*. ✅ Checklist line struck by the terminal audit 2026-08-13 after re-deriving the bullet from `F97.md` | done |
 | 3 | **Store links** to the companion mod | do not exist until upload (design §12 hole 8) |
 | 4 | **The uninstall-cleanliness sentence** | ⛔ deliberately **not placed** — Reading A vs B is an owner call at launch (design §8) |
 
@@ -239,12 +239,13 @@ to the class defaults: that row is `CrystalBig`/`CrystalSmall`, both
 `use_in_gen = false` and marker-driven, and the entry says their
 natural-scheduler numbers are probably dead.
 
-⛔ **STILL OWED: the checklist line 22b is not struck.** The owner answered in
-the build session, and the concurrency rule in force forbids this session from
-writing `docs/PLAYTEST_CHECKLIST.md` while the combined sitting's briefs are
-still in place. **The next prompt strikes it** — see `04_FABLE_AUDIT.md`'s Notes
-from upstream. ⚠️ The bullet above therefore landed **after** the six sweeps and
-has not been through them; it was checked by hand against rule 4 and §4.5 only.
+✅ **The checklist line 22b was struck by the terminal audit 2026-08-13** after
+independently re-deriving the bullet from `F97.md` (rate table `:334-352`; the
+both-games clause from the OG disassembly `:407-421`) — the shipped wording is
+the owner-approved 08-02 phrase and it is accurate. ⚠️ The bullet landed
+**after** the six sweeps; it has now been through the terminal audit's
+independent evidence and route sweeps in addition to the by-hand rule-4/§4.5
+check, and it passed all of them.
 
 ### Deliberate departures from the design, and why
 
@@ -305,8 +306,10 @@ has not been through them; it was checked by hand against rule 4 and §4.5 only.
 
 ### Owed elsewhere
 
-* `metadata.lua`'s `description` and `short_description` — drafted in
-  `STORE_METADATA_STRINGS.md`, **not applied**: `metadata.lua` is code and the
-  chain's scope fence excludes it. ⚠️ The live `description` there still carries
-  the false console claim and the dead working title *"Community Opt-In Pack"*.
+* `metadata.lua`'s `description` and `short_description` — ✅ **APPLIED at the
+  owner's word 2026-08-13 (`1ac1187`)**, superseding the fence routing: the live
+  `description` had carried the false console claim and the dead working title,
+  and the draft strings carried the same two faults, corrected before apply.
+  ⚠️ Portal character limits are still unchecked (`STORE_METADATA_STRINGS.md`)
+  — that half stays with release prep.
 * This text becomes release item ③'s input, not a replacement for it.

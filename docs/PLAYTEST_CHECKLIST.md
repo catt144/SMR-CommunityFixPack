@@ -511,6 +511,70 @@ than moving to the archive only because item 24's artifact is not built yet.
     * **Recommendation: yes, but as a small section rather than its own page** —
       it is three answers, not a chapter.
 
+22d. ⚖️ **ONE WORD APPLIES EIGHT CORRECTIONS; ITEM 9 IS A SMALL CHOICE.** The
+    terminal audit re-ran the store sweeps with fresh eyes and found nine
+    claims the six build sweeps missed — none re-opens anything you decided;
+    every one is a sentence saying more than its record supports. Each was
+    re-derived from code or the entry before it went on this list; the audit's
+    brief routes wording to you rather than applying it quietly.
+    * ⭐ **Recommendation: approve the batch — say the word and an agent
+      applies 1–8 (and 9a unless you pick otherwise), then re-runs doccheck.**
+    1. Fix pack, twice: *"an official patch that repairs a bug retires our
+       version"* — only true when the patch changes the code's shape; our core
+       says self-checks **cannot** notice a same-named function edited in
+       place (`00_Core.lua:492-497`). Fix: the conditional already live in
+       `metadata.lua` — stands down *"if an official patch changes what it was
+       written for"*.
+    2. Fix pack, drones example: *"a landed rocket cancelled the orders…"* —
+       `F50` scopes the defect to **automatic** rockets. Fix: one word.
+    3. Fix pack, twice: *"**several** of the stamps clear themselves the next
+       time you save"* — exactly **two** do (`D13_EXPOSED_SET.md` §2b D1/D2).
+       Fix: "a couple".
+    4. Opt-in, Nursery/Retirement policy: *"A new toggle row on **every**
+       dome"* — the row deliberately does not exist on domes without cohort
+       housing (`Opt_NoHomeless.lua:650-656`), and its Ctrl+click deliberately
+       applies to every *such* dome, not everywhere (`:712-732`). The phrase
+       is true for the Residency row; the Nursery block copied the phrase, not
+       the behaviour. Fix: "on every dome that has a Nursery or Retirement
+       Home", "applies it to every such dome".
+    5. Opt-in, same block: the quoted row text `off (3 would move)` is not
+       what the UI shows — the real title is *"Nursery / Retirement Dome
+       (3 would move)"* → *"(3 moving out)"* (`Opt_NoHomeless.lua:700-702`;
+       the page matched the design record, the code had moved on). Fix: quote
+       the real strings.
+    6. Opt-in: *"Seniors and Children stay, even while homeless"* — under
+       Forever Young / "Put Them To Work", an **unemployed** Senior is
+       workforce and IS movable, on purpose (`Opt_NoHomeless.lua:140-150`:
+       "in such a colony a jobless Senior is not a retirement signal"). Fix:
+       one clause carving out senior-work colonies.
+    7. Both texts: the dial uninstall recipe never says **press Apply** — the
+       dials only change on Apply or load (`Opt_DroneStatDials.lua:142-149`);
+       a player who sets the dropdowns and backs out of Options has cleared
+       nothing, then saves, then uninstalls, and keeps the boost the warning
+       exists to prevent. Fix: "(press Apply)" inside both recipes.
+    8. Opt-in, Multiple Suns: *"solar panels only ever check the first sun"* —
+       the recorded defect is one-directional (`F39`: panels **built** near a
+       second sun never bind; the reverse direction works). Fix: "panels
+       built near a second sun never connect to it".
+    9. ⚖️ Opt-in, drone dispatch overhaul — the page states *"repair and
+       cleaning jobs go to the closest hub's fleet first"* as delivered
+       behaviour. The only A/B (PT-52 B2) measured the gate firing **once in
+       25 malfunctions** — the entry's verdict: *"the claim gate did
+       essentially nothing"*, because resource-needing repairs go to the
+       **delivering** drone before dispatch ever runs — and you ordered a v1
+       rebuild 2026-07-31 (`D06.md:46-69`). "Experimental" is kept, but it
+       discloses immaturity, not a measured null.
+       * **(a) Recommended:** keep the mechanism claims, add one honest
+         sentence — most repairs are decided by who delivers the parts, which
+         this module leaves alone; it matters most for repairs and cleaning
+         that need no resources.
+       * **(b)** Leave it until the rebuild lands and rewrite then.
+    ⚠️ Noted for awareness, no action owed: every console/controller route in
+    both texts is source-derived, none play-verified (the build ledger says
+    the same); and "back it up" names no backup route a console player can
+    walk — the honest console form, if you want it, is "make an extra named
+    save first".
+
 23. ~~**⚖️ Folders in this repo that aren't part of the mod are currently going
     into what players download — including `CLAUDE.md`.**~~ ✅ **DECIDED
     2026-08-13, your ruling: YES, add the missing patterns — AT LAUNCH PREP.**
