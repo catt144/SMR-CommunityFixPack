@@ -231,9 +231,13 @@ table name, the decided display name, and the module counts all verified
   4 and 11), and prompt 4 should upgrade what it settles.
 * **`STORE_METADATA_STRINGS.md` was audited only by sweep 6**, and only for
   staleness. Its two `description` strings have not been through sweeps 1–5.
-* **The judgment-calls section's fifth bullet is a hole**, so no sweep could test
-  the page's balance disclosure end to end. It is the one gap where the audited
-  artifact is knowingly incomplete.
+* ⚠️ **The judgment-calls section's fifth bullet is NOT covered by any sweep.**
+  It was a hole while the six ran; the owner closed 22b immediately afterwards
+  (*"change any wordings to their accurate versions"*) and the bullet was pasted
+  in the approved 2026-08-02 phrasing. **It has been checked by hand against
+  rule 4 and §4.5 and re-derived from `F97.md:334-352`, and by nothing else.**
+  ⇒ **Prompt 4 should treat that one bullet as unswept text**, and it is a fair
+  target for the control in job 1.
 
 ## Where I overruled a sweep, in one place
 

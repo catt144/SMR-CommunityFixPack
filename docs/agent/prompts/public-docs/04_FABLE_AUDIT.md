@@ -207,10 +207,33 @@ apply** and its budget goes to job 1.
 | 3 | **`metadata.lua` strings ×2** | `agent/reports/STORE_METADATA_STRINGS.md` — **drafted, NOT applied.** `metadata.lua` is code and outside the chain's fence; routed to release prep, which opens that file anyway for the version bump and checklist 23 | `38239d8` |
 | 4 | **The audit ledger** | `agent/reports/STORE_BUILD_AUDIT.md` — **this is your job 1 comparison target.** Per sweep: what was searched, what came back, a verdict on every finding, the negative half written out, and one section naming what the sweeps did **not** cover | `4543715` |
 
-**Judgment calls (job 3 of my brief):** four of §9's five bullets ship verbatim
-in `STORE_FIXPACK.md`. **The fifth is a one-line `⛔ HOLE`** — 22b was still
-unstruck when I closed. The replacement bullet is written out in that file's
-notes, ready to paste, in the approved *"on some map settings"* phrasing.
+**Judgment calls (job 3 of my brief):** all five of §9's bullets now ship in
+`STORE_FIXPACK.md`.
+
+⭐ **22b CAME BACK — the owner answered it after the sweeps had returned**, in
+the build session, in these words: *"You can change any wordings to their
+accurate versions."* ⇒ the fifth bullet was pasted in the phrasing approved
+2026-08-02, **"on some map settings"**. "Most" was deliberately not used even
+though it is defensible at five of six presets — drifting from an approved
+phrase is what 22b exists to stop.
+
+⛔ **TWO THINGS THIS LEAVES YOU, AND BOTH ARE YOURS:**
+
+1. **`docs/PLAYTEST_CHECKLIST.md` item 22b is NOT struck.** The owner decided;
+   the concurrency rule forbade this session from writing that file while the
+   combined sitting's briefs sit in `agent/prompts/`. **Strike it — and check
+   the shipped bullet against what the owner actually said rather than against
+   my paraphrase of it.** ⚠️ `STATE.md`'s *"Owner decisions open: 2"* line is
+   also stale in both directions: it counts the relabel wording, which closed as
+   item 22 on 08-13, and it misses 22c and item 5 (`F85`). **Re-derive that
+   count; do not copy mine.**
+2. ⚠️ **That bullet is UNSWEPT TEXT.** It landed after all six sweeps had
+   returned, and has been checked by hand against rule 4 and §4.5 and re-derived
+   from `F97.md:334-352` — and by nothing else. **It is the fairest target in
+   either document for job 1's control.** ⛔ Do not quote the +170% figure the
+   design report attributes to the class defaults: that row is
+   `CrystalBig`/`CrystalSmall`, both `use_in_gen = false` and marker-driven, and
+   the entry says their natural-scheduler numbers are probably dead.
 
 ## What is NOT started, or deliberately not done
 

@@ -134,7 +134,10 @@ menus on any platform, and here is what each one is:
 - **Edit Payload remembering what you told it** — treating the flight policy's
   list as a *default* rather than a *refill* is arguably how it was designed. We
   think a row you deliberately emptied should stay empty. *(design judgment)*
-- ⛔ HOLE — [the dust-devil bullet; see notes, hole 2].
+- **Dust devil wave sizes** — this restores the wave sizes the map settings were
+  written for. On some map settings that means noticeably more dust devils than
+  the game has ever actually delivered, in either the original or the remaster.
+  *(restores authored settings — more devils on some maps)*
 
 ### Your save, and what happens when the pack is gone
 
@@ -208,21 +211,40 @@ platform, what happened, when it started, whether it survives a save and reload
 | # | hole | who closes it |
 |---|---|---|
 | 1 | **Site links ×3** (fix list · save-repair detail · for-modders page) | the site is `workflow_dispatch` only and Pages is off; links exist when the owner turns it on |
-| 2 | **The fifth judgment-call bullet** — the dust-devil one. Its substance is approved and correct; one phrase in it points the warning at the wrong players, so neither wording ships yet | checklist **22b** — one owner line; replacement text below, ready to paste |
+| 2 | ~~**The fifth judgment-call bullet** — the dust-devil scale word~~ ✅ **CLOSED 2026-08-13 by the owner** (*"change any wordings to their accurate versions"*). The bullet is in the text above, in the phrasing approved 08-02: *"on some map settings"*. ⛔ **The checklist line itself is NOT struck** — see below | done |
 | 3 | **Store links** to the companion mod | do not exist until upload (design §12 hole 8) |
 | 4 | **The uninstall-cleanliness sentence** | ⛔ deliberately **not placed** — Reading A vs B is an owner call at launch (design §8) |
 
-### 22b's replacement bullet, ready to paste when the line is struck
+### 22b — closed by the owner 2026-08-13, and what is still owed
 
-> - **Dust devil wave sizes** — this restores the wave sizes the map settings
->   were written for. On some map settings that means noticeably more dust
->   devils than the game has ever actually delivered, in either the original or
->   the remaster. *(restores authored settings — more devils on some maps)*
+**The owner's words:** *"You can change any wordings to their accurate
+versions."* ⇒ the fifth bullet is now in the player text above, in the phrasing
+approved 2026-08-02 — *"on some map settings"*. ⛔ **"Most" was NOT used**, even
+though it is defensible at five of six presets: drifting from an approved phrase
+is the exact failure 22b was raised to stop, and the approved phrase is true.
 
-Derived from the entry's own per-preset rate table, not from prose: the heaviest
-shipped preset is the one that does **not** change; the light and middle ones
-move about half again, and one moves more than double. The recommendation on the
-checklist is the approved 2026-08-02 phrasing, *"on some map settings"*.
+**Re-derived from `F97.md:334-352` — the entry's own table, not from prose:**
+
+| preset | change |
+|---|---|
+| `Low` · `High` | +50% each |
+| **`VeryHigh` — the heaviest shipped preset** | **0%, the only untouched one** |
+| `VeryHigh_1` | +25% |
+| `VeryHigh_2` | **+125%** |
+| `VeryHigh_3` | +5% |
+
+⚠️ Five of the six map-selectable presets rise (`VeryLow` is `forbidden = true`
+and excluded). ⛔ **Do not quote the +170% figure** the design report attributes
+to the class defaults: that row is `CrystalBig`/`CrystalSmall`, both
+`use_in_gen = false` and marker-driven, and the entry says their
+natural-scheduler numbers are probably dead.
+
+⛔ **STILL OWED: the checklist line 22b is not struck.** The owner answered in
+the build session, and the concurrency rule in force forbids this session from
+writing `docs/PLAYTEST_CHECKLIST.md` while the combined sitting's briefs are
+still in place. **The next prompt strikes it** — see `04_FABLE_AUDIT.md`'s Notes
+from upstream. ⚠️ The bullet above therefore landed **after** the six sweeps and
+has not been through them; it was checked by hand against rule 4 and §4.5 only.
 
 ### Deliberate departures from the design, and why
 
