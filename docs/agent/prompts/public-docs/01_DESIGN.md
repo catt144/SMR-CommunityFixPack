@@ -1,0 +1,206 @@
+# Chain prompt 1 — the public-docs design: who reads what, where it lives, and how to beat TL;DR
+
+**Read `README.md` first — binding chain rules apply, especially rule 4 (player
+language) and the ⛔⛔ exposure hazard.** Staleness check across all three repos,
+live todo list updated per item.
+
+**You are DESIGNING, not writing the pages.** The deliverable is decisions with
+reasons, an honest inventory, and a seed of each surface — enough that prompts 3
+and 4 assemble rather than invent. ⛔ **Do not draft 74 fix blurbs here.** Draft
+FIVE as specimens and prove the format works on the hardest cases.
+
+---
+
+## Job 0 — read the constraints before deciding anything
+
+`STATE.md` · `docs/README.md` (the folder contract) ·
+`docs/archive/MOD_DESCRIPTION.md` (748 lines, FROZEN, the existing tone) ·
+`docs/PLAYTEST_CHECKLIST.md` "Decisions waiting on you" (the relabel package,
+decisions 14/15/17/20) · a sample of 10 `docs/agent/bugs/` entries across F/D/C ·
+the opt-in repo's `README.md` + `PROVENANCE.md` §3 (placeholder display names).
+
+⛔ **Re-derive the counts with `python tools/doccheck.py --emit-counts` in both
+repos.** The prose numbers in this chain's README are claims.
+
+---
+
+## Job 1 — the audience split, and it is the whole design
+
+Three readers arrive by different doors and want different things. Name them,
+then decide what each surface owes each one:
+
+* **The scroller** — sees the Paradox Mods card, gives you ~15 seconds. Wants:
+  what is this, is it safe for my 300-sol save, will it change my game's balance.
+  **If they do not get all three in the first screen, they leave.**
+* **The searcher** — has a specific bug and wants to know if it is fixed. This is
+  the biggest group after launch and the store page CANNOT serve them: 74 fixes
+  is not a readable list, it is a database.
+* **The evaluator** — a careful player or another modder. Wants the reasoning,
+  the compatibility story, the uninstall truth. Small group, high influence,
+  writes the forum replies that everyone else reads.
+
+⭐ **Reframe the owner's question deliberately.** They asked "do we need a
+separate FAQ, like the big mod creators?" The FAQ is not the interesting surface.
+Those creators split docs off because the store description is one unformatted
+blob with a length limit and no search — the split is forced by the *platform*,
+not by having many mods. Our shape is the opposite (two large mods), and our real
+problem is **the searcher**: a 74-item list nobody can scan. Say so plainly, and
+decide the surface set on that basis rather than by copying the pattern.
+
+---
+
+## Job 2 — where it lives, and the exposure gate
+
+⛔ **Re-read the README's exposure hazard. `docs/` is not publishable.** Also
+confirm from `tools/doccheck.py` that `docs/` root membership is enforced against
+`docs/README.md`'s map, so a new player-docs folder needs an explicit home.
+
+Evaluate and **recommend one**, with the owner's actual constraints weighted:
+they work through agents, in markdown, in-repo, with doccheck as the gate; and
+they have said GitHub "can look really confusing to a lot of people".
+
+* **GitHub Pages from a dedicated in-repo folder** (e.g. a root `site/`), with a
+  docs theme that gives a sidebar + client-side search. Markdown, agent-
+  maintainable, doccheck-coverable, free, no external account, one URL.
+  ⚠️ Requires the folder to be provably free of agent material — the exposure
+  gate becomes a build-time check, and prompt 4 should mechanise it.
+* **GitBook**, which is the proven pattern in this exact community — the peer
+  mod `Rx - Mars Framework` links from its Paradox description to
+  `dash-mods.gitbook.io`, whose sidebar (Install/Update/Loadorder · Guide and
+  Gameplay · Buildings & Technologies) is a working model of what players use.
+  Polished with zero CSS work; costs an external account and a sync path.
+* **A GitHub wiki**, or **no site at all** (store description only, which is what
+  most small mods do and is a legitimate answer if the fix list can be made to
+  fit some other way).
+
+⭐ **Answer the owner's actual worry**, which is not "which tool" but *"will a
+player land somewhere that looks like a code repository and bounce?"* A bare
+GitHub repo front page absolutely does that. A Pages site or a GitBook does not.
+Whatever you recommend, the test is: **paste the URL to someone who has never
+seen a repo — do they know what to do in five seconds?**
+
+---
+
+## Job 3 — the honest content inventory
+
+Table, one row per surface, with **what already exists vs what must be written**:
+the frozen `MOD_DESCRIPTION.md` is real raw material in the right voice, but it
+is 748 lines, dated 2026-08-03, and its counts and F76 explainer are stale.
+`docs/agent/bugs/` holds the truth per fix but in agent language.
+
+⛔ **Size it in hours honestly, and say which parts are agent-cheap and which are
+owner-expensive.** The owner's time is the scarce resource: their expensive items
+here are the relabel wording, the display name, screenshots (in-game, their
+hands) and the preview art. Everything else is agent work.
+
+---
+
+## Job 4 — the TL;DR problem, solved concretely
+
+The owner named this directly. Design the answer, do not gesture at it:
+
+* **Progressive disclosure in three tiers** — one sentence, then ~10 lines, then
+  everything. Each tier must stand alone; a reader who stops at tier 1 should not
+  be misled by what they missed.
+* **Answer the install-gating questions FIRST**, above any feature list. For this
+  mod they are: *is it safe for my existing save · does it change balance · do I
+  need anything else · what happens if I remove it.* Three of those four have
+  strong, earned answers — lead with them.
+* **The searcher never scrolls a list.** Whatever the fix list becomes, the entry
+  point is search or category, never "read 74 bullets".
+* **Kill the count as a headline.** "74 fixes" impresses nobody and invites
+  "which ones?"; a player cares whether *their* bug is in there.
+* ⛔ **Rule 6 applies to phrasing, not just facts:** the frozen evidence bar is
+  `fixed` + suite + self-checks + verified save-safety. Words like "proven",
+  "guaranteed", "fully tested" upgrade that bar silently. Propose the vocabulary
+  the surfaces are allowed to use, and the words they are not.
+
+---
+
+## Job 5 — the screenshot plan, for a mod that is invisible when it works
+
+⚠️ **This is genuinely hard and the plan must admit it.** A bug fix looks like
+nothing happening. Peer mods screenshot new buildings; we mostly cannot.
+
+Derive the actually-capturable surface from the entries and name each shot's
+job. Candidates to assess (verify each against its entry before promising it):
+* **Mod Options** — the opt-in pack's toggles and dials. Real, visual, and it
+  shows the product is configurable.
+* **`ListFixes()` console output** — appeals to the evaluator, proves liveness.
+  ⚠️ Decide whether a console screenshot reads as "technical and trustworthy" or
+  "this mod is for programmers". It may belong on the site, not the store card.
+* **Fixes with visible output** — the F102 deposit signs (new art renders), the
+  dome infopanel policy rows the opt-in modules add, multiple Artificial Suns,
+  command-centre numbers, graph captions. These are the only true before/after
+  pairs; confirm which survived the split and which repo they now belong to.
+* **The preview image** is an ART problem, not a writing one. Name it, size it,
+  route it — do not pretend a screenshot substitutes.
+
+⛔ **Every shot is owner time in-game.** Produce a shot LIST with framing notes
+so one sitting captures all of them, and ⚠️ **that sitting must respect
+`EF-056`** (loading a campaign copy runs its autosave and the rotation eats the
+owner's autosaves — pre-copy every autosave first).
+
+---
+
+## Job 6 — seed the FAQ from real questions, not imagined ones
+
+⛔ **Mine, do not invent.** Sources: `PLAYTEST_CHECKLIST.md` (every question the
+owner actually asked is a question a player will ask), the `docs/agent/bugs/`
+entries' own caveats, `FUTURE_IDEAS.md`, and the split's own consequences.
+
+Questions known to be real, each with a short earned answer or a marked hole:
+* Is it safe on my existing save? Can I remove it mid-game?
+* What is the opt-in pack, do I need it, and does the fix pack need it?
+  (⚠️ Neither needs the other — measured 2026-08-12, both directions.)
+* Why did my drone dials/toggles reset? (Mod id changed at the split.)
+* ⛔ **If I remove the mod with a drone dial off base, the boost stays in my
+  save permanently.** Real, known, and the single most important uninstall
+  caveat — checklist 17 names it as the reason the rescue artifact exists.
+* Does this change balance? Why is *X* not fixed / why is *X* optional?
+* Load order, and does it work with other mods?
+* Console/gamepad players — anything different?
+* Which game version, and what happens when the game updates?
+
+⭐ **Then ask the harder question:** which of these belong in the store
+description because they gate installation, and which belong in an FAQ because
+they only matter afterwards? That split is the deliverable, not the list.
+
+---
+
+## Job 7 — draw the D13 seam explicitly
+
+One short section listing, item by item: **safe to write now · write the skeleton
+and mark the hole · do not touch until D13 closes.** The README states the seam;
+your job is to make it operational so prompts 3 and 4 never guess.
+
+---
+
+## Job 8 — route the owner decisions, block on none
+
+Expected: platform choice · the opt-in mod's DISPLAY NAME (open since 08-12,
+placeholders in the opt-in repo's `PROVENANCE.md` §3) · the relabel wording
+(ADOPTED 08-04, wording still owed — ⭐ draft it here so they approve rather than
+compose) · whether the fix list ships as a site or another form · preview art.
+**Each goes to `PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"** (rule R10:
+a decision recorded only in a report has not been asked), each with a
+recommendation so the owner rules rather than designs.
+
+---
+
+## Close
+
+Append Notes-from-upstream to `02_QA.md`: every decision with its reason, the
+inventory with its sizing, the specimen blurbs, the FAQ seed, the screenshot
+list, the D13 seam, and every hole you marked. Update `STATE.md` (this chain
+becomes a real line item on the release front) and the checklist. doccheck GREEN,
+commit (`-F`), push what has a remote, delete this file in the same commit.
+
+## ⛔ What you may not do
+
+- Publish anything, anywhere, or create an external account.
+- Generate a site from `docs/` — re-read the README's exposure hazard.
+- Lift the `MOD_DESCRIPTION.md` freeze or overturn STATE's release sequencing.
+- Write a claim the frozen evidence bar does not support.
+- Decide the display name, the relabel wording, or the platform **for** the
+  owner. Recommend, with reasons, and let them rule.
