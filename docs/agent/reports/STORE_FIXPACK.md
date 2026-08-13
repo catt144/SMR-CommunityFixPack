@@ -31,17 +31,26 @@ have already played.
 want this.**
 
 - **Your existing save is fine, including a long one.** The pack writes almost
-  nothing into your savegame, and what it writes is inert without it: a
-  timestamp on a housing reservation, a "the player has set this payload" flag
-  on a rocket, a couple of bookkeeping stamps that let a repair know it has
-  already run — and, where a repair put back something a broken patch migration
-  dropped, an ordinary bonus of the kind the game hands out itself. That list is
-  the whole of it, and it is a list rather than a summary on purpose.
-- **It fixes bugs; it does not rebalance the game.** Every fix targets a defect
-  we verified in the game's own code — the code says one thing and does another,
-  and we make it do what it says. Preferences and features are not in here; they
-  live in a separate mod you do not need. **Five of the fixes are judgment calls
-  rather than plain repairs, and they are listed further down** rather than
+  nothing into your savegame, and here is everything it stores by name: a
+  timestamp on a housing reservation, a timestamp on a colonist who has just
+  taken shelter, a "the player has set this payload" flag on a rocket, and a
+  handful of small stamps and flags that let a repair know it has already run,
+  or hold one decision for as long as a single weather event lasts. None of that
+  means anything to the game without the pack, several of the stamps clear
+  themselves the next time you save, and older ones left by earlier versions are
+  deleted as they are found. **One item is deliberately not inert:** where a
+  repair put back a bonus
+  that a broken patch migration dropped, that bonus is an ordinary one of the
+  kind the game hands out itself, and it goes on working without us — which is
+  the entire point of restoring it. It is a list rather than a summary on
+  purpose.
+- **It fixes bugs rather than rebalancing the game.** Almost every fix targets
+  something we verified in the game's own code: the code says one thing, does
+  another, and we make it do what it says. Preferences and features are not in
+  here; they live in a separate mod you do not need. **Five of them are judgment
+  calls rather than plain repairs** — in two of those the game's code is not
+  wrong at all and we made a call anyway, and one of them changes how the game
+  feels. All five are listed further down, with our reasoning, rather than
   quietly folded in.
 - **You do not need anything else.** The pack works on its own. There is a
   companion mod, *Community Fix Pack: Opt-In Modules*, and neither mod needs the
@@ -53,13 +62,18 @@ want this.**
   removed, the game itself prints a notice that the save refers to a mod that is
   not there. It disappears as soon as you save again.
 
+**Playing on Xbox, PlayStation or the Microsoft Store version?** One platform
+rule to know before you install, and it applies to every mod rather than to this
+one: **while any mod is enabled, the game does not unlock achievements on Xbox,
+PlayStation or the Microsoft Store.** Steam and other PC versions are not
+affected — achievements keep unlocking there with mods enabled.
+
 **What stands behind that, plainly.** Every fix inspects the game's own code
 before it patches anything and switches itself off if the game no longer looks
 the way that fix expects — so an official patch that repairs a bug retires our
 version of it instead of fighting it. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
-suite of 94 checks, covering this pack and its companion mods, runs against the
-game with the pack and without it before a release goes out.
+suite of 94 checks is run against the game with the pack and without it.
 
 **And what does not.** We cannot test every combination of other mods, every
 colony shape, every save state or every future game patch. If a save matters to
@@ -67,18 +81,12 @@ you, back it up before adding *any* mod to it for the first time — that advice
 is not specific to this pack, it is just true, and most people learn it the
 expensive way.
 
-**Playing on Xbox, PlayStation or the Microsoft Store version?** One platform
-rule to know before you install, and it applies to every mod rather than to this
-one: **while any mod is enabled, the game does not unlock achievements on Xbox,
-PlayStation or the Microsoft Store.** Steam and other PC versions are not
-affected — achievements keep unlocking there with mods enabled.
-
 ### What it fixes
 
 Rather than a list of every repair, here is the shape of what is in scope, with
-one example each. ⛔ HOLE — the full searchable list lives at **[site link, once
-the site is live]**, where you can search for what went wrong in your colony
-instead of scrolling.
+one example each. Some of these also repair damage already sitting in your save
+when you load it, wherever the pack can positively identify what went wrong.
+⛔ HOLE — [site link: the full searchable fix list].
 
 - **Disasters & weather** — a meteor storm that ended could switch your weather
   off for the rest of the colony's life: no rains, no cold waves, no dust
@@ -109,7 +117,8 @@ Almost everything in this pack is a plain repair: the game's code says one
 thing, does another, and we make it do what it says. **Five are not that
 simple.** They are still repairs we stand behind — but each one required us to
 decide what the game *meant*, and reasonable people could decide differently.
-They are marked in the list, and here is what each one is:
+They are marked in the list, they cannot be switched off from the game's own
+menus on any platform, and here is what each one is:
 
 - **Drones writing a building off after one blocked approach** — a comment in
   the game's own code says that permanent mark is deliberate. In a real colony
@@ -125,10 +134,7 @@ They are marked in the list, and here is what each one is:
 - **Edit Payload remembering what you told it** — treating the flight policy's
   list as a *default* rather than a *refill* is arguably how it was designed. We
   think a row you deliberately emptied should stay empty. *(design judgment)*
-- ⛔ HOLE — **the dust-devil bullet, blocked on checklist 22b.** Its substance is
-  approved and correct; one phrase in it points the warning at the wrong
-  players. Neither wording ships until that line is struck. Replacement text is
-  in this file's notes, ready to paste.
+- ⛔ HOLE — [the dust-devil bullet; see notes, hole 2].
 
 ### Your save, and what happens when the pack is gone
 
@@ -139,23 +145,23 @@ tries: every time you load, it looks for specific damage already sitting in your
 save and undoes what it can positively identify. Every pass is deliberately
 conservative, does nothing when unsure, and does nothing at all the second time
 it runs. It is a genuine attempt at repairing an already-damaged save, not a
-promise that it will repair *yours*. ⛔ HOLE — [site link: what it repairs, and
-what it cannot].
+promise that it will repair *yours*. ⛔ HOLE — [site link: the save-repair page].
 
 **History that is gone stays gone.** Colonists who already died stay dead,
 destroyed buildings stay destroyed, expeditions lost to the lander bugs are
 lost. Trains voided by the station bug cannot be restored exactly — but you can
-build replacement trains at any station for Metals and Electronics, which the
-game lets you do and does not go out of its way to tell you.
+build replacement trains at any station for Metals and Electronics.
 
 **Removing the pack.** It comes out as cleanly as we could make it: the bugs
-come back, the repairs already applied to your save stay, and the handful of
-bookkeeping fields listed at the top sit there unread by the unmodded game —
-several of them clear themselves the next time you save. Turning any mod off
-takes a full restart of the game before it stops running. If you also use the
-opt-in modules mod, read the uninstall note on **its** page before you remove
-it: it has one setting that leaves something behind, and its page tells you how
-to avoid that.
+come back, the repairs already applied to your save stay, and the bookkeeping
+fields listed at the top sit there unread by the unmodded game — several of them
+clear themselves the next time you save. If a save happened to catch the pack
+part-way through a piece of work, that leftover finishes on the game's own code
+and stops. Turning this pack off in the mod manager takes effect after you
+restart the game. If you also use *Community Fix
+Pack: Opt-In Modules*, read the uninstall note on that mod's page before you
+remove **it**: it has settings that leave something behind in your save, and its
+page tells you the two steps that avoid it.
 
 ### Other mods
 
@@ -168,16 +174,17 @@ guessing.
 
 Individual fixes can be switched off, but only by a companion mod that loads
 before this one — a modder's facility rather than a player's, and there is no
-in-game switch for it on any platform. ⛔ HOLE — [site link: the for-modders
-page, once it exists].
+in-game switch for it on any platform. ⛔ HOLE — [site link: the modders page].
 
 ### Reporting a bug
 
 Tell us what happened, roughly when it started, and whether it survives a
 save and reload. A save file where the bug reliably happens is worth a thousand
-words. On PC the game's logs live in your `%AppData%\Surviving Mars Relaunched\logs`
-folder, and Ctrl+F1 opens the official bug reporter. On Xbox and PlayStation
-there are no logs or console commands to collect, and a plain description —
+words. On PC the game's logs are usually in your
+`%AppData%\Surviving Mars Relaunched\logs` folder, and Ctrl+F1 opens the
+official bug reporter (on Steam Deck the game leaves that one out). On Xbox and
+PlayStation there are no logs or console commands to collect, and a plain
+description —
 platform, what happened, when it started, whether it survives a save and reload
 — is still genuinely useful.
 
@@ -201,7 +208,7 @@ platform, what happened, when it started, whether it survives a save and reload
 | # | hole | who closes it |
 |---|---|---|
 | 1 | **Site links ×3** (fix list · save-repair detail · for-modders page) | the site is `workflow_dispatch` only and Pages is off; links exist when the owner turns it on |
-| 2 | **The fifth judgment-call bullet** | checklist **22b** — one owner line; replacement text below |
+| 2 | **The fifth judgment-call bullet** — the dust-devil one. Its substance is approved and correct; one phrase in it points the warning at the wrong players, so neither wording ships yet | checklist **22b** — one owner line; replacement text below, ready to paste |
 | 3 | **Store links** to the companion mod | do not exist until upload (design §12 hole 8) |
 | 4 | **The uninstall-cleanliness sentence** | ⛔ deliberately **not placed** — Reading A vs B is an owner call at launch (design §8) |
 
@@ -221,15 +228,17 @@ checklist is the approved 2026-08-02 phrasing, *"on some map settings"*.
 
 1. **Tier 0 does not say "it does not change how the game is balanced."** §4.1's
    draft sentence did. Under the design's own §5.1 refutation that is a tier-0
-   claim tier 2 has to widen (five judgment calls; more dust devils on most
+   claim tier 2 has to widen (five judgment calls; more dust devils on some map
    settings), which is exactly what §4.1 forbids. *"Repairs defects in the
    game's own code rather than rebalancing the game"* survives the standalone
-   test and keeps the install-gating force.
+   test and keeps the install-gating force. ⚠️ **The tier-1 bullet was the same
+   defect and was caught in arbitration, not in the write** — see
+   `STORE_BUILD_AUDIT.md`, sweep 5 finding F2/F7.
 2. **Seven category lines, not §4.2's "four or five".** §4.3 proposes eight
    buckets; seven is the honest merge (interface and story share a line). Bucket
    sizes are prompt 5's to re-derive, and the count is not load-bearing here.
 3. **The per-fix disable paragraph is one identifier-free sentence on the card,
-   and the modder instructions are routed off it.** `02_QA.md` §5 flagged the
+   and the modder instructions are routed off it.** the chain's QA prompt flagged the
    tension — the rewritten paragraph is useless without an identifier, and rule
    4 bars identifiers from player text. Silence is worse than a pointer, because
    the frozen file promised something here; so the card names the route and its
@@ -260,7 +269,7 @@ checklist is the approved 2026-08-02 phrasing, *"on some map settings"*.
 | repairs already applied stay | §2b D10 (`SMRFixPack_F35_*`) + D11, both on the KEEP list (§5) |
 | suite of **94** checks, modded vs unmodded | `python tools/doccheck.py --emit-counts`, re-emitted 2026-08-13; A/B pair `WORKFLOW.md:274` |
 | game version 1.0.7.396349, self-check stand-down | `EF-014`; per-fix `apply()` self-checks |
-| achievements on Xbox / PlayStation / Microsoft Store | `Achievement.lua:61-63`, consumed `:77`; re-derived by `02_QA.md` |
+| achievements on Xbox / PlayStation / Microsoft Store | `Achievement.lua:61-63`, consumed `:77`; re-derived by the chain QA, recorded `PUBLIC_DOCS_DESIGN.md` §6.2 |
 | neither mod needs the other | opt-in split chain, measured both directions 2026-08-12 (checklist 15) |
 | disasters example | `F81` (`tested`, PROVEN; heal-on-load observed organically 2026-08-02) |
 | colonists example | `F52` (`tested`) |
@@ -269,7 +278,7 @@ checklist is the approved 2026-08-02 phrasing, *"on some map settings"*.
 | trains example | `F44` (`tested`, PT-03 PASS post-rework) |
 | rockets example | `F69` (`tested`, PT-16 PASS) |
 | interface + story examples | `F13` (`tested`, PT-08 PASS) · `F07` (`tested`, MEASURED + owner-witnessed) |
-| replacement trains for Metals + Electronics | `02_QA.md` §2 route sweep — walkable on all three platforms; the "game never tells you" claim was cut as overstated |
+| replacement trains for Metals + Electronics | chain QA route sweep, re-walked by this build's sweep 4 (`customStation.generated.lua:14-29`, `Station.lua:628-634`) — walkable on all three platforms; the "game never tells you" claim was cut as overstated |
 | mod disable needs a full restart | D13 / `STATE.md` gate line |
 
 ### Owed elsewhere

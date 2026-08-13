@@ -24,11 +24,14 @@ Eight opt-in modules for *Surviving Mars: Relaunched* — every one of them off,
 or sitting at the game's own setting, until you turn it on.
 
 **What this is, and why it is a separate mod.** Its companion, the *Community
-Fix Pack*, repairs defects in the game's own code and nothing else — no
-preferences, no redesigns. These eight are the opposite: they change designed
-behaviour because someone wanted them to. Keeping them out of the fix pack is
-what lets that mod promise it only fixes bugs, and it is what lets this one
-offer things the developers deliberately decided against.
+Fix Pack*, sticks to repairing defects in the game's own code: it carries no
+preferences and no features, and where it had to make a judgment call it says so
+on its own page. These eight are the other side of that line — they change
+designed behaviour because someone wanted them to. Keeping them out of the fix
+pack is what lets that mod stay a bug-fix mod, and it is what lets this one
+offer things the developers deliberately decided against. *(One of the eight
+also carries a real repair, because lifting a limit the game set walks you into
+a defect the game never had to handle. It is described below.)*
 
 - **You do not need the fix pack for this, and it does not need you.** Each mod
   works on its own, and they work together. We ran both ways round and measured
@@ -40,13 +43,15 @@ offer things the developers deliberately decided against.
   behaviour.
 - **The switches are in the game, on every platform.** *Options → Mod Options →
   Community Fix Pack: Opt-In Modules*, from the main menu or in game, and they
-  work with a controller. Toggles take effect immediately, in both directions —
-  no restart needed. *(Turning the whole mod on or off in the mod manager is
-  different: that needs a full restart of the game, as it does for any mod.)*
+  work with a controller. Toggles take effect as soon as you press Apply, in
+  both directions — no restart needed. *(Turning the whole mod itself on or off
+  in the mod manager is different: that takes effect after you restart the
+  game.)*
 - **Nothing is patched on disk.** The mod wraps the game's own code while it
   runs, and no game files are modified.
-- **Your existing save is fine.** Turning a module off puts the game back to its
-  own behaviour. What these modules store in your save is four small things: a
+- **Your existing save is fine.** Turning a module off puts the game's own
+  behaviour back. What a module has already done stays done — a colonist one of
+  the housing modules moved lives where it moved them — but it stops doing more. What these modules store in your save is four small things: a
   "you have seen this warning" mark on a building, a "closed to new residents"
   flag on a dome, a "move jobseekers out" flag on a dome, and — only if you move
   a drone dial off its base setting — an ordinary bonus of the kind the game
@@ -64,19 +69,21 @@ Steam and other PC versions are not affected.
 drone logistics cannot keep up — or where the breakthrough lottery never dealt
 you the drone techs.
 
-- **Drone speed** — 1x (base) / 2x / 3x / 5x. Adds that multiple of base drone
-  speed on top of whatever speed techs your save already has. Drones only;
-  rovers and shuttles are untouched.
+- **Drone speed** — 1x (base) / 2x / 3x / 5x. The label is the total: 2x adds
+  one more helping of the drone's base speed on top of whatever speed techs your
+  save already has, 3x adds two, 5x adds four. Drones only; rovers and shuttles
+  are untouched.
 - **Drone carry capacity** — +0 (base) / +1 / +2 extra units per trip on top of
   the base 1. The Artificial Muscles breakthrough still stacks.
-- Both take effect immediately, in both directions, and the base positions are
-  exactly the unmodded game. Honest expectations: this is relief, not a cure —
-  in our own stress tests colony-scale repair time was dominated by trip count
-  and distance, so faster, roomier drones help without changing the underlying
-  logistics.
-- ⚠️ **Set both dials back to base before you uninstall.** A dial that is not at
-  base is stored in your save as an ordinary bonus, which means it stays there
-  after the mod is gone — harmless, but permanent.
+- Both take effect as soon as you press Apply, in both directions, and the base
+  positions are exactly the unmodded game. Honest expectations: this is relief
+  rather than a cure. Most of a colony's drone time goes on hauling resources
+  about, so faster, roomier drones help without changing what is underneath.
+- ⚠️ **Set both dials back to base and save before you uninstall.** A dial that
+  is not at base is stored in your save as an ordinary bonus, and it goes on
+  boosting your drones after the mod is gone — permanently, with nothing left in
+  the game to say where it came from. Setting the dials to base clears it from
+  the colony you are playing; **saving is what clears it from the file.**
 
 **Acknowledged warnings.** Changes what dismissing a **"Building Not Working"**
 warning means. The game silences that warning for a fixed quiet window and then
@@ -101,24 +108,32 @@ leaves, and story events rely on that. This module leaves quarantine exactly as
 it is.)
 
 - A new toggle row on every dome and asteroid habitat infopanel. Ctrl+click
-  applies it to every dome at once.
+  applies it to every dome at once, and on a controller the row names the button
+  that does the same.
 - A closed dome takes no new residents: colonists looking to resettle skip it,
-  and new arrivals from rockets and elevators are routed elsewhere.
+  and new arrivals from rockets and landers are routed elsewhere.
 - Its **current** residents notice nothing — they keep commuting, working,
   shopping and training through passages exactly as before.
 - You stay in charge: manually relocating a colonist into a closed dome still
   works, tourists still check into its hotels, and births are unaffected.
-- A colonist stranded outside with nowhere else to go is still let in. The
-  policy never suffocates anyone.
+- A colonist stranded outside with nowhere else to go is still let in — the
+  policy is built so that it is never the reason someone is left out there.
 
 **Multiple Artificial Suns.** The game hard-limits the Artificial Sun to one per
 colony. This module lifts that limit — and ships the repair that makes a second
 sun actually work. There is a real defect in the game here: solar panels only
 ever check the *first* sun you built, so panels around a second sun produce as
-if it were not there. Anyone who lifts the limit with a generic "multiple
-wonders" mod walks straight into it. This module fixes the panel binding at the
-same time, including panels already sitting dark beside a second sun in an
-existing save. With the module off, the game's one-sun limit applies untouched.
+if it were not there — which is why lifting the limit without repairing the
+binding is not worth doing. This module fixes the panel binding at the same
+time, including panels already sitting dark beside a second sun in an existing
+save. With the module off, the game's one-sun limit governs what you build from
+then on, and suns you have already built are ordinary buildings that keep
+working either way.
+
+⚠️ **One thing if you switch it on mid-game:** panels that were already
+standing keep ignoring a second sun until you save and load. Panels built after
+you switch it on bind straight away, and a reload snaps the older ones into
+place.
 
 **Drone dispatch overhaul — experimental.** In a colony with overlapping Drone
 Hub coverage, and especially with Hub Extenders, the game happily lets a hub on
@@ -138,9 +153,9 @@ care about proximity.
   swarming a build is good), rover fleets, rockets and shuttles.
 - It does not move drones between hubs. Balancing fleet sizes is still your
   call; the module stops distance-blind claims and lets idle neighbours help.
-- Marked **experimental** while it is being play-tuned. Turning it off restores
-  the game's own behaviour instantly and completely, and saves made with it on
-  are unaffected without it.
+- Marked **experimental** while it is being play-tuned. Turning it off hands
+  dispatch straight back to the game's own behaviour, and saves made with it on
+  load without the mod.
 
 **Cohort housing — Seniors & Children.** Nurseries and Retirement Homes never
 fill on their own: the game only ever relocates a housed colonist for a strictly
@@ -153,8 +168,11 @@ on:
   game's own migration rules (walk, passage, shuttle, train or elevator).
 - When no such slot exists anywhere, they are left completely alone.
 - Employed Seniors keep their jobs and are not moved.
-- Your manual residence and dome assignments always win; quarantined domes and
-  domes closed to new residents are respected; tourists are ignored entirely.
+- Your manual dome assignments always win, and pinning a colonist to a
+  particular home stops them being re-housed inside their own dome. It does not
+  pin them to that dome: a pinned Senior whose dome has no free cohort slot can
+  still move to one that has. Quarantined domes and domes closed to new
+  residents are respected; tourists are ignored entirely.
 - When a Child comes of age the Nursery slot frees up immediately, instead of at
   the next housing shuffle.
 - No dome designation needed: put the cohort buildings where you want the cohort
@@ -167,11 +185,14 @@ unhoused jobseekers drift in and pile up, and once it holds enough homeless the
 game counts it as overcrowded and **stops sending it anyone at all**, including
 the Children or Seniors it was built for. It quietly stops doing its job.
 
-- A new toggle row on every dome and asteroid habitat infopanel (Ctrl+click
-  applies it everywhere at once). The row shows what it will do *before* you
+- A new toggle row on every dome and asteroid habitat infopanel (Ctrl+click, or
+  the button the row names on a controller, applies it everywhere at once). The
+  row shows what it will do *before* you
   click it — `off (3 would move)` becomes `3 moving out`.
 - When it is on, **unemployed** colonists with no home in that dome move to the
-  nearest dome with housing they can use, using the game's own migration rules.
+  nearest dome with housing they can use, using the game's own migration rules —
+  unless that dome still has a job standing open that one of them could take, in
+  which case nobody is moved out, because staffing the place is the point.
 - **Colonists who work there stay.** They are who that dome's ordinary housing
   exists for, and moving them out is how you break its services.
 - **Seniors and Children stay, even while homeless.** That is not an oversight:
@@ -214,18 +235,20 @@ completely transparent about what it changes and what the game offers instead.
 
 ### Your save, and removing the mod
 
-Turning a module off puts the game back to its own behaviour, and a save made
-with a module on loads perfectly well without the mod. Remove the mod and the
-marks it left — the acknowledged-warning stamps and the two dome policy flags —
-sit there unread; the unmodded game has no idea they exist.
+Turning a module off puts the game's own behaviour back, and a save made with a
+module on loads without the mod. Remove the mod and the marks it left — the
+acknowledged-warning stamps and the two dome policy flags — sit there unread;
+the unmodded game has no idea they exist. What a module already did to your
+colony stays done: colonists a housing module moved do not move back.
 
 ⚠️ **The one exception, and it is worth thirty seconds of your time: the drone
 dials.** A dial that is not at its base position is stored in your save as an
-ordinary bonus of the kind the game hands out itself, and that bonus stays in
-the save after the mod is gone. **Set both dials back to base, load once, and
-then uninstall** if you want a clean unmodded save. ⛔ HOLE — [the rescue tool
-for people who have already uninstalled: name, link and whether it is published
-at all are a release-time decision, and nothing about it is promised here].
+ordinary bonus of the kind the game hands out itself, and it goes on boosting
+your drones after the mod is gone. Two steps avoid that: **set both dials back
+to base, then save the game** — and then uninstall. Setting them to base clears
+the boost from the colony you are playing; the file on disk only loses it when
+you write a new save. ⛔ HOLE — [the rescue tool, for anyone who uninstalled
+already; see notes, hole 1].
 
 One more thing you will see, and it is not ours: the first time you load a save
 that was made with any mod you have since removed, the game itself prints a
@@ -243,10 +266,11 @@ rather than guessing. Built against game version 1.0.7.396349.
 
 Tell us what happened, roughly when it started, which modules you had on, and
 whether it survives a save and reload. A save file where it reliably happens is
-worth a thousand words. On PC the game's logs live in your
+worth a thousand words. On PC the game's logs are usually in your
 `%AppData%\Surviving Mars Relaunched\logs` folder, and Ctrl+F1 opens the
-official bug reporter. On Xbox and PlayStation there are no logs to collect, and
-a plain description is still genuinely useful.
+official bug reporter (on Steam Deck the game leaves that one out). On Xbox and
+PlayStation there are no logs to collect, and a plain description is still
+genuinely useful.
 
 ═══════════════════════════ PLAYER TEXT — END ═══════════════════════════
 
@@ -292,7 +316,7 @@ a plain description is still genuinely useful.
 | claim | source |
 |---|---|
 | both mods stand alone, measured both directions | opt-in `STATE.md` — 9 launches 2026-08-12, this mod at `8/8` with the fix pack uninstalled, the fix pack at `74/74` with this one uninstalled; audit-sustained |
-| toggles take effect immediately, both directions | all eight module headers state the mechanism (per-call `IsActive`; `Opt_MultipleSuns` uses `on_activate`/`on_deactivate`); design §12 hole 4 CLOSED by `02_QA.md`. ⚠️ **SOURCE-VERIFIED, not play-verified** — the combined sitting measures one flip |
+| toggles take effect immediately, both directions | all eight module headers state the mechanism (per-call `IsActive`; `Opt_MultipleSuns` uses `on_activate`/`on_deactivate`); design `PUBLIC_DOCS_DESIGN.md` §12 hole 4, CLOSED by the chain QA. ⚠️ **SOURCE-VERIFIED, not play-verified** — the combined sitting measures one flip |
 | mod enable/disable needs a full game restart | D13 / fix-pack `STATE.md` |
 | save footprint: three inert flags + the dial bonus | `D13_EXPOSED_SET.md` §2b rows D12–D15; §2c "the whole opt pack has no game-time thread and no GameVar" |
 | the dial boost survives uninstall permanently | §2b D15, MEASURED; the module's own header says so |
@@ -303,6 +327,13 @@ a plain description is still genuinely useful.
 | the four-game-hour re-nag window is designed behaviour | `D02` (`tested`), measured live in PT-38 |
 | specialist domes strand homeless colonists | `D12` — observed in play 2026-07-30 (68 free Child slots, 28 homeless), vanilla tie re-verified against the pinned build 2026-08-02 |
 | the display name | owner decision 2026-08-13, swept `e17586b` |
+| achievements on Xbox / PlayStation / Microsoft Store | `Achievement.lua:61-63`, consumed `:77`; `FIX_POLICY.md` §7 for the no-logs half |
+| the Hotel "Tourists Only" wrinkle | `Opt_NoHomeless.lua:289-312` (citing `Hotel.lua:6-27`, `Residence.lua:462-466`) — ⚠️ **NOT** the frozen file, which is the design report's only citation for it |
+| drone dial arithmetic (2x adds one more helping of base) | `D09` PT-56, measured `1728 → 3168` = +1440 = one× base; module header "+(N-1)×100% of BASE" |
+| the free-work door (a dome with an open job holds its jobseekers) | `D12` — logic proven at the wrapper; ⚠️ **P14 unmeasured in play**, so the page states the rule, not an outcome |
+| pinning a home does not pin the dome | `D07` — in-dome pass checks forced residence, cross-dome pass checks forced dome only; owner-ruled 2026-08-11 |
+| second-sun panels bind on reload, not on a mid-session flip | `D04` PT-55 — the entry itself says this is "worth saying in player-facing text" |
+| hauling dominates drone time | `D06` B2 — hauling 3h03m of a 3h27m leg. ⚠️ The **distance** reading from that leg was WITHDRAWN, so the page claims hauling only |
 | game version 1.0.7.396349 | `EF-014` |
 
 ### Owed elsewhere
