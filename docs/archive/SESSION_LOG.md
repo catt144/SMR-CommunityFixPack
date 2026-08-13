@@ -8,6 +8,121 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-13 — `d13-rescue` CLOSED by the terminal audit: every verdict SUSTAINED, the exposed set survives its THIRD derivation with zero differences, the release line's next move is the owner's chair
+
+**The chain's files last exist at `7e19f07` (pre-deletion sha); this session's
+closing commit deletes `agent/prompts/d13-rescue/` whole (README,
+05_FABLE_AUDIT with prompt 4's appended notes, 90_DERIVATION, the three parked
+instruments).** Staleness checked in all FOUR repos at open (fix `7e19f07` ·
+opt `98c37ea` · TestKit `da432f8` · rescue `aaff837`); the concurrent
+`public-docs` chain's flagged unstaged work had landed in its own commits
+(`93c7de2`, `7e19f07`) — its `CAPTURE_SITTING.md` constraint ("not while d13 is
+live") RELEASES with this close.
+
+**Job 1 — the record, re-derived rather than inherited.** All TEN archived
+`rs_*` logs byte-compared over the FULL length against their AppData originals
+(length + MD5 + `fc /B`: identical, all ten) and read whole (~5,400 lines; the
+`[mod]`-echo duplicate lines deduplicated after byte-verification, every
+distinct line read). Every tally recounted from the bare `[SMRTest] <VERDICT>`
+lines: **r0 78/0/16/0 of 94 · r1 84/0/10/0 of 94 — both EXACT**, SKIP sets
+matched BY NAME (r0's 16 = the historical 10 + the six `SaveRescue*` stand-downs;
+`FactionFundingCheck` still PASS, its repair still queued); the void log counts
+exactly double (168/0/20/0), consistent with its two racing flows and nothing
+else. r2's `removed 1617` re-summed by name and matched the r2pre
+after-manufacture inventory row-for-row; KEEP read present in r2/r2b/r3; both
+residue-zero halves re-run from archived bytes (kit inventory zero + 0
+`[CommunitySaveRescue]` lines in r3; r3z zero mod lines, zero mod defs — and
+zero "Couldn't find mod" lines, so the P0.5/P3z.2 refutation is CONFIRMED, a
+junction pull is completely silent). §10.9(4)'s engine line re-read verbatim
+(`rs_r3_*:120`, pack pair `rs_r2pre_*:140-141`). Four-OFF-states discipline:
+every instrumented cell carries its `pack=n/n`/REGISTRY-ABSENT gate lines
+beside every reading (r3z has no banner — no mod loaded to print one; identity
+by timestamp + ARM sequence, noted in `D13_VERIFICATION.md` §5). The void run
+audited against its re-run: two banners, two Load Games, two F48 passes with
+identical repairs — §4.6's harness diagnosis holds in the bytes. Whole-log
+sweep: zero `[LUA ERROR]`/`[ERROR]` anywhere; F99 `:805` and C45
+`Quantum Comet` watches ZERO in all ten; every residual line explained WITH AGE
+(LawOfficeDoor asset pair since ≥08-04 in 33/36 older logs; Braze offline noise
+35/36; r2pre's one `Unpersist missing permanent` = the D13 entry's 2026-08-10
+measured mechanism, ruled in §5). **The THIRD derivation** ran from the shipped
+trees at audit time: 6 GT + 3 RT thread sites, 17 replaced globals (13+4, none
+in any `GameVar`/`PersistableGlobals` context in Src — re-swept name-by-name),
+E1's by-value route re-read at `TerraformingDisasters.lua:313`, token census
+exactly 16 persisted names + 4 option globals, E8-E12 shapes read at source,
+`Code/` deltas since the derivation baseline = ONLY the 2b gates (`91fc5d0`) +
+comment fixes + opt display-name strings. **Membership: 27 sites, ZERO
+differences. KEEP/REMOVE re-derived and sustained; the artifact's own printed
+16-row table matches §10.2 name-for-name in the logs.** Save close-out
+re-verified from disk at audit time: 92 entries, all four staged saves ABSENT
+by name (EF-051 hold stands), the protected four MD5s + `Autosave Sol 311(2)`'s
+pre-copy hash all EXACT, junctions = standing config (packs + kit IN, rescue
+OUT). Corrections, none moving a verdict, recorded visibly in
+`D13_VERIFICATION.md` **§5**: the §1 "1336" was a live-pack read (as-saved =
+1335); the seven-vs-eight round-trips color count; ⛔ the two DIALOGS ruled
+unattended-UNSAMPLEABLE (no log line exists in either direction — the raise
+halves of P1.4/P2.7/P2b.2 ride the attended sitting); §10.7's "the string
+GameVar appears nowhere" corrected to "never CALLS GameVar" (comments/data
+strings exist, zero call sites).
+
+**Job 2 — the §3a release-gate acceptance test: PASSES after two fixes made in
+place.** Every one of the 27 sites carries a disposition with its reason and
+the table's denominator is its own derivation's — but E5/E6/E7 still read
+"ROUTED" although the routing was consumed (owner answered checklist 19,
+prompt 2b built the gates, `91fc5d0`); corrected to **repaired-in-pack** with
+the audit's source re-reads cited. And the D13 entry was missing two owed
+pieces, both added: the player-facing **uninstall-procedure DRAFT** now
+includes the §4.5 engine-notice sentence (the one sentence prompt 4 said the
+text owed), and the **version-skew statement** (spec §10.6) is now on the
+entry. Step ③'s inputs are enumerated on the entry BY NAME (9 items). The
+three-prompts-homeless Crystals repeater is FILED as **F103** (source-derived,
+unmeasured, harm nil, remedy sketch recorded, post-release WATCH under the
+frozen ship line) — filed rather than killed; "no harm found" is a verdict,
+not an un-recording. Doc sweep for stale counts across all four repos' current
+docs: WORKFLOW's both-mods clause updated to the re-measured 94-probe numbers
+(BOTH repos' copies), PLAYTEST_HELP's "88 probes" and "PREDICTION until
+measured" lines updated, D13's "PENDING RE-MEASUREMENT" annotated satisfied;
+81/81-era mentions inside dated evidence blocks left as era-stamped history
+(WORKFLOW's own rule). Old-display-name survivors ("Community Opt-In Pack" in
+FIX_POLICY:452 etc.) noted for the public-docs chain/step ③ — names, not
+counts, and that sweep is theirs.
+
+**Job 3 — the ledger.** Sitting-class misses: NONE recurred from the standing
+stacks; two NEW method nuances recorded rather than WORKFLOW-patched —
+(1) provenance numbers for fixture contents must be read in the FROZEN state
+(the 1336/1335 live-writer lesson; the handle-set rule already covers the
+verdict tier, this extends it to color numbers), (2) a prediction the run MODE
+cannot adjudicate (UI with no log signature) should be tagged
+attended-only AT PREDICTION TIME — prompt 4 predicted dialog raises an
+unattended run could never witness. Owner-time honesty: the chain predicted
+zero keyboard minutes and spent **zero at the matrix + one 15-second tick**
+(item 26, spent before the leg began); decision-reading cost: four same-day
+checklist answers (17/18/19/26) earlier in the chain; the audit itself
+consumed zero owner minutes and COST NOTHING beyond minutes — saves 92→92
+reconciled by name, autosaves byte-identical, no lost-autosave repeat.
+Economics, one line: **five prompts + one inserted, nine launches, ~8 min
+machine time, one 15-second owner action → a third shipped-quality mod, its
+verification record, and the release line's last unattended gap closed.**
+CHAIN_METHOD: **no new row** — a second clean run of the split-audit shape
+(predictions-first, junction-pull matrix, terminal third-derivation audit);
+the ARM double-arm lesson is a rig fix recorded in §4.6, not a method change.
+
+**Job 4 — integrated and closed.** D13 entry: audit section + drafts (status
+stays `built`; ⛔ `tested` waits for the sitting — the vocabulary question is
+batched to the owner with a LEAVE recommendation, checklist 26b). Rescue repo:
+README/CLAUDE state lines now carry verified-unattended + the honest
+not-`tested` boundary (committed + pushed there). STATE: chain CLOSED, NEXT =
+the combined sitting, decisions open 2, counts re-emitted (103 F). Checklist:
+block 26b — the sitting is READY, measure-moments named with instruments and
+verdict words. ⭐ **The sitting brief is the audit's deliverable:
+`agent/prompts/COMBINED_SITTING.md`** (owner kickoff: "run the combined
+sitting"; ~25-40 attended min; F102 minute → PT-20 state-3 redo → D13
+after-sweep riding the same disable window, dialogs eyes-only, clean run
+grants `tested` → optional capture passes). Queued behind it: step ③
+MOD_DESCRIPTION ×2(+1) with its 9 named inputs waiting. doccheck GREEN (fix +
+opt); pushed everywhere a remote exists.
+
+---
+
 ## 2026-08-12 — the `d13-rescue` chain is AUTHORED: five prompts, a triple-derivation spine, and the two reserved owner questions asked at the moment the spec gate opened
 
 Authored the same evening the split closed (owner kickoff on the audit

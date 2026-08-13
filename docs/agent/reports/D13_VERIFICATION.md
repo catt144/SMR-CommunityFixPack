@@ -448,3 +448,68 @@ F48 pass, all predictions hit.
   cheated playtest colonies. **Intersection with these readings: NONE** — every
   reading here is a persisted mod-authored name, a label modifier, a thread
   handle or a registry count, and no cheat writes or clears any of them.
+
+## 5. Terminal-audit findings and corrections (chain prompt 5, 2026-08-13)
+
+**What the audit did:** all ten archived `rs_*` logs byte-compared against
+their on-disk originals over the FULL length (length + MD5 + `fc /B`: all ten
+IDENTICAL), each read whole; every tally recounted from the verdict lines
+themselves (r0 `78/0/16/0 of 94`, r1 `84/0/10/0 of 94`, void exactly double at
+`168/0/20/0` — consistent with its two flows); every matrix-cell verdict
+re-derived; the r2 `removed 1617` line re-summed by name
+(1+1+4+11+1+1+11+4+1533+25+25 = 1617) and matched row-for-row against the
+r2pre after-manufacture inventory; both absence halves of residue-zero re-run
+from the archived bytes (r3: 0 `[CommunitySaveRescue]`/pack-tag lines, kit
+lines only; ARTIFACTSCAN 0 over 4510 objects + 440 `PersistableGlobals`); the
+§10.9(4) engine line re-read verbatim at `rs_r3_*:120` and its pack pair at
+`rs_r2pre_*:140-141`; F99 (`:805`) and C45 (`Quantum Comet`) watches ZERO in
+all ten logs; zero `[LUA ERROR]` and zero `[ERROR]` confirmed mechanically.
+**The exposed set got its third derivation** from the shipped trees at audit
+time: 6 GT + 3 RT creation sites, 17 replaced globals (13 FP + 4 OP; none in a
+`GameVar`/`PersistableGlobals` context anywhere in Src — re-swept), E1's
+by-value route re-read at `TerraformingDisasters.lua:313`, token census
+exactly 16 persisted names + 4 non-persisted `_Disabled`/`_Optional` globals,
+E8/E9/E10/E11/E12 shapes confirmed at source. `Code/` deltas since the
+derivation baseline are ONLY the 2b orphan gates + comment corrections (fix,
+`91fc5d0`) and display-name strings (opt). ⇒ **Membership: 27 sites, ZERO
+differences. Every §2/§4 verdict above SUSTAINED.**
+
+**Corrections and rulings — none moves a verdict:**
+
+1. ⚠️ **§1's D5 "1336 objects" was a LIVE read, not the save's bytes.** The
+   spe carry dump was taken after load-back with the fix pack running — and
+   the live pack writes `reserved_at` during play (§4.4's own mechanism). The
+   same instrument on the same bytes pack-absent (r2pre, scan population 3411
+   both times) reads **1335**. The kit walker's 1533-handle read, which every
+   verdict keys on, matched row-for-row throughout; the carry number was
+   provenance color only.
+2. **"Eight junction round trips apart" (§4.4) vs the instrument's own
+   "seven … apart" banner (`rs_rrestore_*` RESTORE line):** a color count
+   neither log can settle; nothing rests on it. Stated here so the two
+   numbers' disagreement is on the record.
+3. ⛔ **P1.4/P2.7/P2b.2's DIALOG halves are UNSAMPLED in this mode, and
+   ruled so.** `WaitMessage` UI produces **no log line in either direction**
+   — there is no witness for "the dialog raised" (r2) or "no dialog" (r2b) in
+   any archived log. §4 above never claimed them measured (correctly), but
+   the predictions went unadjudicated; the adjudication is: the no-`[LUA
+   ERROR]` halves HELD, the raise/no-raise halves are untestable unattended
+   and ride the ATTENDED after-sweep (the one D13 item the sitting still
+   owes, beside `tested` itself).
+4. **`rs_r2pre_*:138` `Unpersist missing permanent: Mod/SMR_CommunityFixPack`**
+   — present in the archived bytes, unlisted by §4. Ruled EXPLAINED: the
+   engine's unpersist of the fix pack's mod permanent when a pack-written
+   save loads pack-less — the exact line and mechanism the D13 entry measured
+   2026-08-10 (cb2 logs; age 3 days; fires once, fix pack only — the opt pack
+   registers no permanent of its own; the state-(2)/(4) non-diagnosticity
+   caveat stands, and this cell's gate line `fix pack 0/0` sat beside it).
+5. **r3z carries no cell banner** — with every junction pulled there is no
+   mod to print one, so that cell's identity rests on the filename timestamp
+   sitting between r3 and r-restore plus the ARM sequence. Accepted; stated
+   so nobody later mistakes the banner-less log for an orphan.
+6. Standing engine lines, aged: `[ResManager Error] … LawOfficeDoor_*` (every
+   save-loading cell; present in 33 of 36 pre-chain archived logs back to
+   2026-08-04) and the `[Braze]` offline-telemetry failures (35 of 36) —
+   both pre-date the chain and touch nothing it measures.
+7. §4.1's clause-3 quote of the r1 no-op line elided `kept 1 track re-order
+   latch` and `skipped 1` from the measured line; the full line is at
+   `rs_r1_*` (dedup ~:296). Substance unchanged.

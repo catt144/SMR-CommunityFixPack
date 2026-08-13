@@ -38,6 +38,41 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ⭐⭐ NEW 2026-08-13 — D13 CHAIN CLOSED; the ONE combined sitting is READY (step ② — the release line's next move is yours)
+
+26b. ⭐ **THE COMBINED SITTING IS PREPPED AND WAITING ON YOUR CHAIR.** The
+    d13-rescue chain is closed audit-sustained (artifact built + verified
+    unattended: 9 launches, removed 1617 by name, kept both repairs, zero Lua
+    errors, residue-zero measured; your cost was the one 15-second tick).
+    **Kickoff: open a session on `agent/prompts/COMBINED_SITTING.md` and say
+    "run the combined sitting"** — all prep is agent-side with the game
+    closed; your attended part is ~25–40 min. The measure-moments, each with
+    its instrument and verdict words (full table in the brief):
+    * **F102's minute** (packs ON): load `Sylmacaink BH25`, eyeball the three
+      crystal deposit signs render + selectable; `ListFixes` shows
+      `ExoticDepositSign [active]`. Closes item 11's local half.
+    * **PT-20 redo done RIGHT**: your Mod-Manager disable + **full restart**
+      (state 3 — the old 98-vs-98 may have measured the half-disabled state) +
+      ~10 min ordinary play; every rig reading carries its `pack=0/0` gate
+      line; result recorded as superseding/confirming the old comparison.
+    * ⭐ **D13 attended after-sweep, same state-3 window**: you load a staged
+      big-save copy and WATCH — the two dialogs write no log line, so your
+      eyes are the only instrument that can ever sample them (report dialog
+      raises with the frozen text; second load silent; stand-down dialog once
+      after you re-enable). **A clean run here is what finally grants D13
+      `tested`.**
+    * Optional: the CAPTURE_SITTING passes that fold in (item 24).
+    ⚖️ **One small call, batched from the chain (answer whenever):** the
+    status vocabulary has no word for "verified-unattended" (`doccheck`
+    rejects `verified`), so that truth lives in narrative only.
+    **Recommendation: leave it** — D13 earns plain `tested` at this sitting
+    anyway; add a vocab word only if a second artifact ever needs it.
+    ℹ️ Also for your awareness, no decision owed: the audit FILED **F103**
+    (our Crystals-mystery repeater can double its hourly broadcast after a
+    mid-mystery load — harm nil, one consumer that wants the message,
+    self-limiting three ways; remedy sketch recorded) as post-release WATCH
+    under your frozen ship line.
+
 ### ⭐⭐ NEW 2026-08-12 — THE SHIP LINE (three rulings, decided in the process-audit review session)
 
 14. ~~**⚖️ Is `fixed` + suite + self-checks enough to ship, or does the

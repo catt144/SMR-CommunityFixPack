@@ -385,7 +385,7 @@ with `ConsoleSetEnabled(true)` + `ReloadShortcuts()`.)
 | `SMRTest.ReportReservations` | counts stale residence reservations — **PT-21** |
 | `SMRTest.ReportTrains` | stored train prefabs vs trains on the map — **PT-21** |
 | `SMRTest.RunAll` | re-run the whole probe suite (sanity check before/after a session) |
-| `SMRFixPack.ListFixes` | per-fix status. ⭐ **The denominator is the REGISTERED total, not the default-active one** — the leg line is `log("fix pack present: %d/%d fixes active", active, #SMRFixPack.order)` (`TestKit/Code/00_TestCore.lua:351` — re-read 2026-08-12; this row said `:286`, an era stale), so `#SMRFixPack.order` = **74** ⛔ **SINCE THE OPT-IN SPLIT (2026-08-12)** — the 8 `Opt_` modules moved to their own mod, and with them every toggle, so **every registered fix in this pack is now default-active and the gate reads `74/74` in every configuration**. The historical readings are era-stale and are kept only so an old log is legible: `68/74` (until 2026-08-03), then `74/81` default / `81/81` all-opt-ins-ON — ⭐ **the last MEASURED single-pack reading was `fix pack present: 81/81 fixes active`, suite `78 PASS, 0 FAIL, 9 SKIP, 0 ERROR`** (2026-08-03, log `Mars.exe-20260803-22.23.59`), and it counts 7 modules this pack no longer ships. ⚠️ **Account state is still READ, never assumed** — it now governs the OTHER mod's gate line, not this one. `agent/STATE.md` holds the authoritative registered/default-active counts (`python tools/doccheck.py --emit-counts`); the post-split number is a PREDICTION until a leg measures it. |
+| `SMRFixPack.ListFixes` | per-fix status. ⭐ **The denominator is the REGISTERED total, not the default-active one** — the leg line is `log("fix pack present: %d/%d fixes active", active, #SMRFixPack.order)` (`TestKit/Code/00_TestCore.lua:351` — re-read 2026-08-12; this row said `:286`, an era stale), so `#SMRFixPack.order` = **74** ⛔ **SINCE THE OPT-IN SPLIT (2026-08-12)** — the 8 `Opt_` modules moved to their own mod, and with them every toggle, so **every registered fix in this pack is now default-active and the gate reads `74/74` in every configuration**. The historical readings are era-stale and are kept only so an old log is legible: `68/74` (until 2026-08-03), then `74/81` default / `81/81` all-opt-ins-ON — ⭐ **the last MEASURED single-pack reading was `fix pack present: 81/81 fixes active`, suite `78 PASS, 0 FAIL, 9 SKIP, 0 ERROR`** (2026-08-03, log `Mars.exe-20260803-22.23.59`), and it counts 7 modules this pack no longer ships. ⚠️ **Account state is still READ, never assumed** — it now governs the OTHER mod's gate line, not this one. `agent/STATE.md` holds the authoritative registered/default-active counts (`python tools/doccheck.py --emit-counts`); ✅ the post-split `74/74` is MEASURED — every leg since 2026-08-12 read it (split matrix a2, and all five pack-loaded `rs_*` cells on 2026-08-13). |
 | `SMROptInPack.ListFixes` | ⭐ **the OPT-IN MOD's registry** (a different mod, `SMR_CommunityOptInPack`, since 2026-08-12) — per-module status for the 8 modules that used to live in this pack. Its own leg line is `opt-in pack present: %d/%d modules active`, and at fresh account defaults it reads **`1/8`**: the 7 toggles come up OFF (a new mod id = a new Mod Options key, so the owner re-ticks once), and `DroneStatDials` is active-at-base = armed, vanilla behavior. ⛔ **Two mods, two log prefixes: grep the FULL bracketed token** — `[CommunityOptInPack]` vs `[CommunityFixPack]`; `Pack]` matches both. |
 
 **Drone dispatch STRESS HARNESS** (`Code/91_Stress.lua`, added 2026-07-29;
@@ -573,10 +573,12 @@ no-op in the build players use. The probe therefore reports green in the only
 environment where the fix works and is silent in the one that matters.
 **Quoting "87 PASS" as evidence the pack is healthy on retail would be wrong,
 specifically about F25/F98.** Retail coverage was `78/87` in the single-mod era;
-⛔ **post-split (2026-08-12) the suite is 88 probes and the both-mods retail
-read is `78 PASS / 10 SKIP` (audit-recounted), SKIPs enumerated BY NAME in
-`agent/STATE.md`** — the non-reporting set is known and enumerated; that is the
-number to quote.
+⛔ **as of 2026-08-13 the suite is 94 probes and the both-mods retail read is
+`78 PASS / 16 SKIP` (measured, log `archive/rs_r0_*`)** — the six SKIPs added
+since the 88-probe era are the Save Rescue probes standing down because that
+separate rescue mod is not part of your standing rig (with it loaded the same
+run reads `84 PASS / 10 SKIP`). SKIPs enumerated BY NAME in `agent/STATE.md`
+— the non-reporting set is known and enumerated; that is the number to quote.
 
 ---
 

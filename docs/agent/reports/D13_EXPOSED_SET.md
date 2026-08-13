@@ -252,7 +252,12 @@ when the mod is gone), no new persisted state, no playtest beyond a parse sweep
 and the existing baseline. Estimated one short build prompt.
 
 **Recommendation: BUILD IT IN-PACK, as an inserted prompt between prompt 2 and
-prompt 3.** The alternative — dispositioning three orphan bodies to a cleaner
+prompt 3.** `[AUDIT 2026-08-13: DONE — the owner took the recommendation
+(checklist 19) and prompt 2b built all three gates plus the fourth
+(comment-only) item in commit 91fc5d0; the terminal audit re-read all three
+gate lines and the corrected Fix_MeteorStormWedge comment in shipped source,
+and EF-023's "nothing in Code/ states it any more" was re-trued the same day.
+§7's three rows now read repaired-in-pack.]` The alternative — dispositioning three orphan bodies to a cleaner
 that by construction cannot reach them (a cleaner runs on load; these bodies
 run *from* the save the moment it loads) — is the "cleaner as scoping escape
 hatch" that FIX_POLICY §3a bars in the owner's own words.
@@ -493,9 +498,9 @@ packs (opt pack `PROVENANCE.md` §2). The five opt-side names keep the legacy
 | E2 Bombardment `WaitBombard` | **inert-accepted** (level 2) | no layer-3 route (§5.3); orphan completes correctly; D3 = keep the fix |
 | E3 Bombardment per-missile | **inert-accepted** (level 2) | same |
 | E4 StormWedgeHeal | **repaired-in-pack** (Tier 1 §6.2a-D orphan-gate reorder) | gated; dies cleanly |
-| **E5 CrystalMysteryHang** | ⛔ **ROUTED** (rule 6f) | ungated mod-owned thread body; one-line in-pack repair reachable — §3 |
-| **E6 ExtenderFlapChurn** | ⛔ **ROUTED** (rule 6f) | same |
-| **E7 TrackConnectorPingPong** | ⛔ **ROUTED** (rule 6f) | same, pending doubt 1 |
+| **E5 CrystalMysteryHang** | ~~⛔ **ROUTED** (rule 6f)~~ **repaired-in-pack** `[AUDIT 2026-08-13: the routing was CONSUMED — owner answered checklist 19 and prompt 2b built the §3a orphan gate in-pack, commit 91fc5d0; gate verified in shipped source at Fix_CrystalMysteryHang.lua:78 by the terminal audit. Installed path unchanged (74/74 + suite PASS, r0/r1). The orphan path itself is source-tier: it can only execute in an uninstalled player's save, where no log reaches us]` | was: ungated mod-owned thread body; one-line in-pack repair reachable — §3 |
+| **E6 ExtenderFlapChurn** | ~~⛔ **ROUTED** (rule 6f)~~ **repaired-in-pack** `[AUDIT 2026-08-13: same — gate at Fix_ExtenderFlapChurn.lua:96, commit 91fc5d0]` | same |
+| **E7 TrackConnectorPingPong** | ~~⛔ **ROUTED** (rule 6f)~~ **repaired-in-pack** `[AUDIT 2026-08-13: same — gate at Fix_TrackConnectorPingPong.lua:179, commit 91fc5d0; doubt 1 stays INFERRED and defanged either way]` | same, pending doubt 1 |
 | E8 CaveIns FUNC slot | **inert-accepted** (level 2) | compliant; ~1 in 9 Underground saves; dead weight |
 | E9 ArrivalDeaths Idle | **repaired-in-pack** (Tier 2, half b) + **inert-accepted** | layer-2 compliant |
 | E10 ShelterReflex Idle | **inert-accepted** (level 2) | already compliant, nothing owed |
@@ -933,7 +938,7 @@ Point by point, with the mechanism each rests on:
 
 | 6d clause | how the build satisfies it | mechanism / cite |
 |---|---|---|
-| no GameVars | the string `GameVar` appears nowhere in the artifact — it never registers a name, not even to reach D1/D2 | §5's QA ruling; `persist.lua:119-143` |
+| no GameVars | it never CALLS `GameVar` — no registration anywhere, not even to reach D1/D2 `[AUDIT 2026-08-13: wording corrected — the STRING does appear in comments and as the table's "gamevar" kind-tag (00_Core.lua:8, 10_SaveRescue.lua:99-102 etc.); what the audit verified is zero `GameVar(` call sites in the tree]` | §5's QA ruling; `persist.lua:119-143` |
 | no persisted names of its own | it performs **no write of any name**: every mutation is `field = nil` or `SetLabelModifier(label, id, nil)`. Its two globals (`SMRSaveRescue`, `SMRSaveRescue_Disabled`) are plain mod globals, absent from `PersistableGlobals` — §2c's proven class, not save state | `persist.lua:117-134` |
 | no threads (in the save) | the clean pass is synchronous inside `PostLoadGame`. The ONE thread it creates is the report's **real-time** thread, and RT threads persist only when flagged `threadPersist`; `MakeThreadPersistable` appears nowhere in the tree | `persist.lua:128-131`, §2c |
 | — the rains heal creates a GT thread | ⚠️ stated plainly: it does, and it is **vanilla's**. `CreateGameTimeThread(RainsDisasterLoop, settings)` takes the entry body from vanilla's own global read live at create time, and stores it in vanilla's own `RainsDisasterThreads` entry field. Nothing of the artifact is captured — the same argument, and the same recipe, the pack's own migration already ships | `Fix_RainsDeadlock:195`; §6 doubt 1's exhaustive own-thread axis |
