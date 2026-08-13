@@ -10,16 +10,58 @@ three of which change what you are allowed to write.
 
 ---
 
-## ✅ CONCURRENCY IS OVER — the D13 chain is gone
+## ⭐ CONCURRENCY IS BACK ON — the OWNER-ATTENDED SITTING outranks you
 
-`agent/prompts/d13-rescue/` no longer exists (chain consumed, `f08a3fc`).
-`docs/agent/STATE.md` and `docs/PLAYTEST_CHECKLIST.md` are **normal files
-again** — prompt 2 wrote both. Stage by explicit path anyway; `git add <path>`
-still takes the whole file.
+⚠️ **Amended 2026-08-13, ~30 minutes after this file was written.** The D13 chain
+is gone (`agent/prompts/d13-rescue/` no longer exists, consumed `f08a3fc`) — but
+the owner is starting **the combined sitting** (`agent/prompts/COMBINED_SITTING.md`,
+plus folded-in passes from `agent/prompts/CAPTURE_SITTING.md`) while you run.
 
-⛔ **Still not yours:** `agent/bugs/D13.md`, `agent/facts/EF-023.md`,
-`agent/reports/D13_EXPOSED_SET.md` — they are closed records now, not in-flight
-work, and nothing in your job needs them edited.
+⛔ **THEIR SESSION HAS PRIORITY AND IT IS NOT CLOSE.** It is owner-attended, its
+readings are perishable (two D13 dialogs write no log line — the owner's eyes are
+the only instrument that can ever sample them), and it is what grants D13
+`tested`. **You are writing prose that will still be there in an hour.** On any
+clash — a file, a count, a checklist item, a rebase — **their version wins and
+yours re-derives.**
+
+1. ⛔ **Do NOT write `docs/agent/STATE.md` or `docs/PLAYTEST_CHECKLIST.md`.**
+   The sitting writes both: it strikes 26b, records the PT-20 redo, and lands
+   D13's `tested`. ⇒ **Put anything you owe those files in your outbox**
+   (`04_BUILD_SITE.md`'s Notes from upstream) and let a later prompt land it.
+   ⚠️ **Re-reading first is NOT protection and has failed twice in this tree:**
+   `git add <path>` takes the **whole file**, so the other session staging its
+   own legitimate edit carries yours into their commit under their message.
+   That is how prompt 1's item-24 rewrite ended up inside D13's `6b75e11` —
+   text intact, provenance wrong.
+2. ⛔ **Never `git add -A` / `-u` / `.`** Stage by explicit path, every time.
+   `git pull --rebase` immediately before each commit.
+3. ⛔ **Not yours:** `agent/prompts/COMBINED_SITTING.md` ·
+   `agent/prompts/CAPTURE_SITTING.md` · `agent/bugs/D13.md` ·
+   `agent/facts/EF-023.md` · `agent/reports/D13_EXPOSED_SET.md`.
+4. ⚖️ **Checklist 22b may come back while you work** (the dust-devil scale word —
+   see Job 3). ⛔ **Do not strike it yourself even if the owner answers it in
+   your session.** Record the answer in your outbox and use it; striking the
+   line is a checklist write, which rule 1 forbids you.
+
+⚠️ **If doccheck goes red for something you did not touch, it is probably the
+sitting's in-flight edit:** `git status`, confirm whose it is, do not "fix" it.
+
+⭐ **When the sitting is over** (the folder's briefs are deleted — that is their
+done-condition), rules 1 and 4 lift and both files are normal again.
+
+### ⭐ Three of your facts are about to become measured
+
+The sitting settles things this chain currently holds as source-verified. **Do
+not write around them and do not pre-empt them** — write the sentence the
+evidence supports today, and flag it for prompt 4 to upgrade:
+
+* **Hole 11** — whether `SMRFixPack.ListFixes()` puts anything ON SCREEN
+  (Pass F is now a check, not a capture). ⛔ Until it answers, no surface says
+  the console **shows** a list.
+* **Hole 4's play half** — whether an opt-in toggle really applies without a
+  restart (Pass C, one toggle flip).
+* **D13's `tested`** — which is what finally lets the uninstall half of §4.2's
+  fourth answer stop being a shape.
 
 ---
 
