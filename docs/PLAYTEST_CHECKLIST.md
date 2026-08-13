@@ -320,6 +320,121 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
       inside the fix pack, and the URL would read `…/SMR-CommunityFixPack/` for
       a site that also documents the opt-in pack.
     Nothing is blocked on this — the `public-docs` chain can start either way.
+    ⭐ **UPDATE 2026-08-13 (the chain's design prompt ran): the recommendation
+    is unchanged but the argument got harder.** I checked whether extra folders
+    in this repo actually reach the file players download — see item 23 — and
+    they do. So "leave it in the fix pack repo" now also means "remember to
+    keep the site out of the upload, forever"; its own repo makes that
+    impossible to forget. Still your call, still 15 seconds either way.
+
+### ⭐ NEW 2026-08-13 — public documentation, part 2: four things back to you
+
+The `public-docs` chain's design prompt is done. Full reasoning for all four:
+`agent/reports/PUBLIC_DOCS_DESIGN.md`. **None of them blocks the chain** — the
+QA prompt runs next regardless. Two are quick reads, one is a 15-minute
+approval, one is the only open item with no ceiling on it.
+
+22. ⚖️ **The "judgment calls" wording — DRAFTED, so you approve rather than
+    compose.** This has been open since 2026-08-04, when you adopted the
+    proposal (`--approved`) and the wording stayed owed. It asked you to write
+    prose, which is why nine days passed. **So I wrote it.**
+    **What it is:** five of the shipped fixes are correct repairs whose
+    *bug-ness* is a design judgment (drones writing a building off after one
+    blocked approach · Biorobots catching Dust Sickness · colonists sheltering
+    in vacuum · Edit Payload remembering what you told it · dust-devil wave
+    sizes). The adopted proposal is that these five not be presented on the mod
+    page identically to a plain defect repair.
+    **The draft is `PUBLIC_DOCS_DESIGN.md` §9** — about 20 lines, in the mod
+    page's own voice, with a one-line honest label on each of the five.
+    ⚠️ **One line in it needs your eye specifically:** it ends *"if you disagree
+    with any of these, they can each be switched off individually on PC"* —
+    true, but the per-fix switch needs the developer console, so it means
+    nothing to an Xbox or PlayStation player reading the same page. Keep it
+    qualified, or cut it. **Recommendation: keep it, qualified.**
+    ⇒ **Your job: read §9 and say "yes" or hand back edits.** ~15 minutes.
+
+23. ⚖️ **Folders in this repo that aren't part of the mod are currently going
+    into what players download — including `CLAUDE.md`.** Found while checking
+    something else for item 21, and I did not fix it because it is a code change
+    and outside that chain's fence.
+    **What I verified, in the game's own source:** uploading a mod runs
+    `CreatePackageForUpload` (`ModTools\Src\CommonLua\Classes\GedModEditor.lua`
+    `:678-741`), which lists **the entire mod folder recursively** and packs
+    every file that does not match one of the `ignore_files` patterns in
+    `metadata.lua`. We ignore eight patterns: `.git`, `.svn`, `Source`,
+    `SourceData`, `docs`, `.claude`, `README.md`, `.gitignore`.
+    **What that misses today:** `public-site/`, `tools/`, `CLAUDE.md`,
+    `LICENSE`, `.gitattributes` (and the same list minus the site in the opt-in
+    repo). None of it *runs* — only files listed in `metadata.lua` execute — so
+    nothing is broken and nothing is a security problem. But `CLAUDE.md` is
+    agent instructions, and shipping it inside a player's download is the exact
+    "player lands in our working notes" problem the whole docs-site design
+    exists to prevent, just delivered to their disk instead of their browser.
+    ⚠️ **One sub-case I could NOT verify:** whether `.github/` slips past the
+    `.git` pattern depends on an engine function with no readable source. The
+    other four match nothing under any reading.
+    **Recommendation: add the missing patterns to both repos' `ignore_files` at
+    launch prep** — a handful of lines, no behaviour change, no new save state.
+    ⇒ **Your job: a yes.** If you would rather ship them, that is fine too and
+    I will record it; I would just rather you chose it than inherited it.
+
+24. ⚖️ **Preview art ×2 (×3 if the rescue tool publishes) — routing this NOW
+    because it is the only launch item with no ceiling.** Everything else in
+    the public-docs plan is agent hours or a decision from you; the preview
+    image is neither. It does not get better with agent time, it is not a
+    screenshot, and it is the first thing anyone sees on a store card.
+    **Constraints already on record:** Paradox Mods ≤ 2 MB, Steam ≤ 1 MB.
+    **The options, priced honestly:** make them yourself · commission them ·
+    or ship a plain text-on-image treatment that is *fine* and takes an hour.
+    ⚠️ There is no recommendation here because it is a taste-and-budget call,
+    not a technical one. The reason it is on your list today rather than at
+    launch is simply that the other three items have known endings and this one
+    does not.
+    ⭐ **Separate and much cheaper: the screenshots.** Those ARE planned —
+    `PUBLIC_DOCS_DESIGN.md` §8B is a shot list ordered so the whole set costs
+    **one sitting, 45–60 minutes, two game restarts**. Nothing owed until the
+    chain gets there.
+
+25. ⚖️ **How one of our own research files talks about real modders — a wording
+    call, and it is yours because it is about other people's work.**
+    `agent/reports/BUG_LIST_AUDIT.md:355-370` lists modders under a heading
+    reading **"Rejected (with reasons)"** — `LukeH`, `Ayzo`, `Fizzle Fuze`,
+    `Silva/Dash`, `Thorik`, `akarnokd`, `FirestormMk3`.
+    **I read the whole section first, and in context it is fair and accurate.**
+    "Rejected" means *rejected as a source of bug reports for our list*, not
+    "bad mod" — and the surrounding text is generous (`fredware` is called "the
+    one to watch"; `LukeH`'s entry credits a genuine fix mod). **Nothing in it
+    is untrue and nothing in it is hostile.**
+    **Three things still bother me:** the header word reads harshly to anyone
+    who lands on that line without the paragraphs above it · "an aggregator
+    repack" is a loaded phrase for a factual observation · and ⭐ **`Silva/Dash`
+    is the author of the GitBook site you pointed me at as the model for this
+    whole documentation chain.** These repos are public on purpose and we are
+    about to send players to them, so "will they ever read it" is not
+    hypothetical.
+    ⚠️ The file is in `reports/`, not `archive/`, so it can be edited — this is
+    a live decision, not an academic one.
+    **Recommendation: two edits, no facts touched** — retitle *"Rejected (with
+    reasons)"* → *"Not used as sources, and why"*, and change *"an aggregator
+    repack"* → *"aggregates other authors' fixes"*. Every assessment stays;
+    only the verdict tone goes. ⇒ **Your job: yes, no, or your own wording.**
+    ⭐ Related and *not* needing a decision from you: the design also proposes a
+    standing rule for how the public pages talk about other people's mods —
+    credit generously, never say what another mod gets wrong, never
+    "this fixes what mod X doesn't". Recorded in §7; say the word if you
+    disagree.
+
+> ⛔ **Nothing owed by you in this note — it is here so the pending change is
+> visible somewhere you read.** `STATE.md` does not yet mention the public-docs
+> chain, and I deliberately did not add it: that file is capped at 60 lines,
+> sits at 60/60, and the D13 chain is editing it right now, so two writers means
+> one of us silently deletes the other's line. **The line I want added**, once
+> D13's chain is quiet: *"⑤ **public-docs chain** — design DONE 2026-08-13
+> (`reports/PUBLIC_DOCS_DESIGN.md`); next `02_QA.md`. Platform Pages ✅,
+> topology ⚖️ck21. Feeds ③."* **What I would drop for it if the cap binds:** the
+> `⛔ Pre-split 82/75/8 … ERA-STALE` sentence — it exists only to stop someone
+> quoting three superseded number triples, and both places those numbers are
+> now read from re-derive them instead. The next prompt in the chain lands it.
 
 ### ⚖️ NEW 2026-08-13 — your Steam ID is scrubbed from the live docs, but NOT from git history
 
