@@ -572,8 +572,11 @@ in a dev build, so `Fix_TechDescriptionBuilding` genuinely works here and is a
 no-op in the build players use. The probe therefore reports green in the only
 environment where the fix works and is silent in the one that matters.
 **Quoting "87 PASS" as evidence the pack is healthy on retail would be wrong,
-specifically about F25/F98.** Retail coverage is `78/87` and the 9 that do not
-report there are a known, enumerated set — that is the number to quote.
+specifically about F25/F98.** Retail coverage was `78/87` in the single-mod era;
+⛔ **post-split (2026-08-12) the suite is 88 probes and the both-mods retail
+read is `78 PASS / 10 SKIP` (audit-recounted), SKIPs enumerated BY NAME in
+`agent/STATE.md`** — the non-reporting set is known and enumerated; that is the
+number to quote.
 
 ---
 

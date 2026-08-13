@@ -46,10 +46,13 @@ owed input stays here no matter how struck-through it looks.
     testing… if there are things that we can say 90+% chance this is good, I
     am not sure its worth the added hours."** Three parts, all recorded:
     * **The `fixed`→`tested` evidence campaign is FROZEN until after release.**
-      The shipping bar is what already runs mechanically — the 87-probe suite
-      (77/0/10/0, measured twice), per-fix runtime self-checks, the fail-safe
-      registry and per-fix veto, and the completed save-safety tier (F86
-      Tiers 1+2, verified). Keyboard re-witnessing stops being scheduled work;
+      The shipping bar is what already runs mechanically — the automated suite
+      (⛔ post-split 2026-08-12 the suite is 88 probes and the both-mods read is
+      **78/0/10/0**, audit-recounted; the 77/0/10/0-of-87 this ruling was made
+      against is the same bar pre-split — the only verdict change is the
+      deliberate Mod-Options check split), per-fix runtime self-checks, the
+      fail-safe registry and per-fix veto, and the completed save-safety tier
+      (F86 Tiers 1+2, verified). Keyboard re-witnessing stops being scheduled work;
       it may resume against the released mod if you still want it.
     * **Perpetual riders → post-release WATCH items** (C42, F99, F80, the
       F96 meteor coincidence): each has failed to produce its own precondition
@@ -150,6 +153,22 @@ owed input stays here no matter how struck-through it looks.
     pack now has **no Mod Options page at all** (it has no options left, so the
     engine correctly stops listing it — do not report it as missing), and the
     display name above is still a PLACEHOLDER awaiting your launch-prep call.
+    ⚖️⚖️ **AUDITED AND CLOSED 2026-08-12 (chain prompt 5, terminal audit): every
+    matrix verdict re-derived from the archived logs and SUSTAINED.** All nine
+    logs byte-compared identical to their originals and read whole; every tally
+    recounted from the verdict lines themselves; the standalone claim re-proven
+    by my own greps (fix-pack global nil in cell b; zero `SMRFixPack` references
+    in the new mod's code); every persisted name re-derived from the shipped
+    code and matched to the save readings name-by-name; the junction route
+    (EF-055) re-derived from Src leg by leg. Two precision corrections, neither
+    touching a verdict: "86 byte-identical rows" means 86 identical VERDICTS
+    (5 rows' message text differs benignly — save-state/RNG, one of them
+    independently confirming your dial change), and the 18:30 log you produced
+    is now archived in the repo (it was load-bearing and only on the rotation).
+    **Still yours, none blocking: the display name (launch prep) · whether the
+    modules stay OFF by default (design recommends OFF, build took OFF — one
+    line either way) · whether the new repo gets a GitHub remote (it is local
+    git until you say).** The re-tick minute is spent; nothing else is owed.
 
 ### ⛔ NEW 2026-08-12 — I DELETED ONE OF YOUR AUTOSAVES. Telling you straight.
 
@@ -173,6 +192,11 @@ owed input stays here no matter how struck-through it looks.
     and list them by name at close-out. "Use a designated copy" protected the
     file; it did not protect the folder, and nothing in the rules had noticed
     that gap before tonight.
+    ⚖️ **Audit check, 2026-08-12 evening: `Sol 306` has NOT come back** — the
+    save folder re-listed by name during the terminal audit; 79 `.sav`, no
+    `Autosave Sol 306`, `Autosave Sol 311` still byte-exact (MD5 re-read), the
+    leg's own `Autosave Sol 311(2)` still present (inventoried for the
+    post-untick cleanup). The Steam-Cloud check at your next launch stays live.
 
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
 

@@ -356,7 +356,7 @@ co-run model exists to protect. See also the standing fixture rule — playtest
 saves are PROVISIONED before an agent ever reads them, so their state is never
 "fresh".
 
-### ⛔ BOTH MODS LOADED is the rig's NORMAL condition once the opt-in split lands (owner rule, 2026-08-12 — effective at split close)
+### ⛔ BOTH MODS LOADED is the rig's NORMAL condition (owner rule 2026-08-12 — ⚖️ ACTIVE since the `split-optins` terminal audit, same date)
 
 **The owner's words, given while the `split-optins` chain was authored:**
 *"Once we get it seperated I will keep the opt ins loaded in as they make
@@ -366,9 +366,14 @@ issue because we should be compatible as well."*
 **What binds, for every leg after the split chain closes:**
 
 1. **The baseline rig configuration is BOTH mods enabled** — the fix pack AND
-   the standalone opt-in mod. A gate read shows two registries (post-split
-   expected shape: `74/74` + `8/8` — quote the audit-measured numbers, never
-   these), and **every "the pack" claim names WHICH pack.** An opt-in-mod line
+   the standalone opt-in mod. A gate read shows two registries. ⭐ **MEASURED
+   BASELINE (cell a2, 2026-08-12, audit-recounted from
+   `archive/spa2_Mars.exe-20260812-18.44.24.log`): `fix pack present: 74/74` ·
+   `opt-in pack present: 8/8` · suite `78 PASS / 0 FAIL / 10 SKIP / 0 ERROR`
+   of 88, SKIPs BY NAME in `agent/STATE.md`; load order
+   `1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack
+   3:SMR_CommunityOptInPack` (enable order, `EF-054` — opt-in wrappers sit
+   OUTERMOST).** Every "the pack" claim names WHICH pack. An opt-in-mod line
    in a fix-pack leg's log is expected background: attributed, never flagged
    as foreign.
 2. **Same confound rule as cheats:** a loaded opt-in module is only a confound
@@ -386,9 +391,10 @@ issue because we should be compatible as well."*
    first — whole-log reviews watch for it as a named class, and a hit routes
    to BOTH repos' records.
 
-⚠️ Until the split chain closes, this section is dormant and the single-pack
-gate reads stay authoritative. The `split-optins` terminal audit activates it
-here and installs the twin clause in the new repo's WORKFLOW.
+⚖️ **ACTIVATED 2026-08-12 by the `split-optins` terminal audit** (the twin
+clause in the new repo's WORKFLOW was activated in the same close). Single-pack
+gate reads (`81/81`-era and earlier) are history — legible via
+`PLAYTEST_HELP.md`'s era table, quotable never.
 
 ## Co-runs — attended experiment legs with the labor inverted (adopted 2026-08-04, owner)
 
