@@ -1,0 +1,983 @@
+-- SMR Community Fix Pack — Test Kit :: d13-rescue VERIFICATION HARNESS. TEMPORARY
+--
+-- Declared by: d13-rescue chain prompt 4 (04_OPUS_VERIFY.md), the eight-cell
+-- junction-pull matrix. Predictions: agent/reports/D13_VERIFICATION.md §2,
+-- committed BEFORE the first launch.
+--
+-- Probe hygiene rule 5: this file lives in TestKit Code/ only while the run is
+-- happening; it and its metadata.lua line die in the commit that records the
+-- answers. This .lua.txt is the parked source of truth and is deleted at chain
+-- close — it survives in git, the way every parked instrument since batch-1 does.
+--
+-- ⭐ RESURRECTED, NOT REWRITTEN. say/Fmt/IdOf/Try/TryYield/Applicable/Step/
+--    WaitFor/Load/Save/Flow/Boot/RunSuite/ReadDialOptions come from the
+--    split-optins 97_SPCommon
+--    (git show ada5cbb^:docs/agent/prompts/split-optins/97_SPCommon.lua.txt),
+--    which took them from unattended-2's 97_U2Common and corun-batch-2's
+--    97_CB2Common. What is NEW here is only what nothing existed for: a THREE
+--    registry gate read, the full 16-name residue inventory as HANDLE SETS, the
+--    manufacture of pre-rewrite-lineage residue, and the artifact-name scan.
+--
+-- GUARDRAILS (WORKFLOW "Co-runs"; chain README rule 5):
+--   G1  every RS.* name the payload uses is diffed against this file's
+--       definitions before launch (RS_ARM.ps1). A parse sweep is a SYNTAX
+--       verdict, not a resolution one (unattended-1 I1).
+--   G2  no count is a result unless its population is non-empty — RS.Applicable.
+--   G3  every call that can raise is inside pcall/sprocall and the RESULT IS
+--       PRINTED (unattended-1 I3).
+--   G4  save liveness is witnessed by the FILE SYSTEM plus the load-back, never
+--       by Savegame.ListForTag (EF-049).
+--   G5  the launcher reads metadata.lua and every instrument back off disk and
+--       refuses to launch unarmed (RS_ARM.ps1).
+--   G6  ⛔ EF-048: engine predicates return truthy NON-BOOLEANS. Truthiness and
+--       type only; nothing here tests `== true` on an engine answer.
+--   G7  ⛔ EF-047: absence verdicts come from the ARCHIVED file after exit, never
+--       from a mid-session read. Nothing here reads the log.
+--   C4  a freshly loaded save arrives PAUSED — RS.Load sets and reads back a speed.
+--   EF-008  error()/assert() do NOT unwind mod code, so every wait is bounded.
+--
+-- ⛔ THE ONE RULE THIS FILE ADDS TO THAT LIST. A count is not a reading here.
+--    Every residue row reports its HANDLE SET, because handles survive a save
+--    and Lua table identity does not — a count that matches while the handles
+--    differ is not a pass. Rows also report their POPULATION: a zero found among
+--    3411 objects and a zero found among 0 objects are different facts, and only
+--    the first is evidence.
+
+RS = rawget(_G, "RS") or {}
+
+RS.tag          = RS.tag or "RS"
+RS.menu_timeout = 5 * 60 * 1000
+RS.settle_time  = 15 * 1000
+RS.quit_delay   = 3 * 1000
+RS.watchdog     = 25 * 60 * 1000   -- the payload overrides before RS.Flow()
+RS.stage        = "idle"
+RS.loads        = 0
+
+---- output ------------------------------------------------------------------
+--
+-- ModLog is the only print path proven to reach the log file on disk
+-- (Mod.lua:109-132). Its emitter formats its single argument a second time
+-- (lib.lua:164-174), so a literal '%' raises there — escape it. Flush per line
+-- so a killed run still shows how far it got.
+local function say(msg)
+	msg = "[" .. tostring(RS.tag) .. "] " .. tostring(msg)
+	local modlog = rawget(_G, "ModLog")
+	if modlog then
+		modlog((msg:gsub("%%", "%%%%")))
+	else
+		local dbg = rawget(_G, "DebugPrint")
+		if dbg then dbg(msg .. "\n") end
+	end
+	print(msg)
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then pcall(flush) end
+end
+RS.Say = say
+
+local function fmt(...)
+	local ok, s = pcall(string.format, ...)
+	return ok and s or "<fmt error>"
+end
+RS.Fmt = fmt
+
+local function id_of(obj)
+	if not obj then return "nil" end
+	if type(obj) ~= "table" then return tostring(obj) end
+	return tostring(obj.class or "?") .. "#" .. tostring(rawget(obj, "handle"))
+end
+RS.IdOf = id_of
+
+-- G3. The ONLY sanctioned call wrapper. Prints ok and the error text, always.
+-- ⛔ pcall cannot survive a yield — use RS.TryYield for anything that Sleeps.
+function RS.Try(what, fn, ...)
+	local ok, a, b = pcall(fn, ...)
+	say(fmt("TRY %s ok=%s result=%s%s", tostring(what), tostring(ok),
+		tostring(a), b ~= nil and (" / " .. tostring(b)) or ""))
+	return ok, a, b
+end
+
+function RS.TryYield(what, fn, ...)
+	local ok, a, b = sprocall(fn, ...)
+	say(fmt("TRY %s (yielding) ok=%s result=%s%s", tostring(what), tostring(ok),
+		tostring(a), b ~= nil and (" / " .. tostring(b)) or ""))
+	return ok, a, b
+end
+
+-- G2. The condition-sampled rule, mechanised.
+function RS.Applicable(label, count, population, witness)
+	local applicable = (population or 0) > 0
+	say(fmt("READ %s = %s | population=%s | APPLICABLE=%s | witness=%s",
+		tostring(label), tostring(count), tostring(population),
+		tostring(applicable), tostring(witness or "-- NONE NAMED --")))
+	return applicable
+end
+
+---- flow helpers ------------------------------------------------------------
+
+local function shutdown(reason)
+	RS.stage = "done"
+	say("SHUTDOWN " .. tostring(reason))
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then flush() end
+	Sleep(RS.quit_delay)
+	quit()
+end
+RS.Shutdown = shutdown
+
+-- untimed = true suppresses the END timing line (EF-045 correction C8): a step
+-- spanning a load or a save blocks render mode and under-reports itself by up
+-- to 11.5x. Loads take their number from the engine's own line.
+local function step(name, fn, untimed)
+	RS.stage = name
+	local t = RealTime()
+	say("STEP " .. name .. " BEGIN")
+	local ok, res = sprocall(fn)
+	if not ok then
+		say("STEP " .. name .. " ERROR")
+		shutdown("ERROR " .. name)
+		return false
+	end
+	if untimed then
+		say("STEP " .. name .. " END (no timing — this step blocks render mode)")
+	else
+		say(fmt("STEP %s END %dms", name, RealTime() - t))
+	end
+	if res == false then
+		shutdown("STOP " .. name .. " — the step asked to stop; its reason is the line above")
+		return false
+	end
+	return true
+end
+RS.Step = step
+
+local function wait_for(timeout, ready)
+	local deadline = RealTime() + timeout
+	while not ready() do
+		if RealTime() - deadline >= 0 then return false end
+		Sleep(500)
+	end
+	return true
+end
+RS.WaitFor = wait_for
+
+local function game_is_live()
+	local city   = rawget(_G, "MainCity")
+	local colony = rawget(_G, "UIColony")
+	return not not (city and city.labels and colony and colony.labels)
+end
+RS.GameIsLive = game_is_live
+
+---- load / save -------------------------------------------------------------
+
+function RS.Load(savefile, speed)
+	local err = LoadGame(savefile, {})            -- ⛔ never pass save_as_last
+	if err then
+		say("LOADERR " .. tostring(savefile) .. " " .. tostring(err))
+		return false
+	end
+	RS.loads = RS.loads + 1
+	say(fmt("LOAD OK #%d file=%s — LoadGame returned no error", RS.loads, tostring(savefile)))
+	if not wait_for(5 * 60 * 1000, game_is_live) then
+		say("LOADERR " .. tostring(savefile) .. " — city never came live")
+		return false
+	end
+	-- ⛔ 15 s is the MEASURED-sufficient settle datum, and in THIS matrix it is
+	--    also what lets the artifact's own report thread (RT, 2 s Sleep, then
+	--    WaitMessage) get as far as it is going to get before anything is read.
+	Sleep(RS.settle_time)
+	speed = speed or 1
+	local before = GetTimeFactor() / const.DefaultTimeFactor
+	local ok = pcall(function() UIColony:SetGameSpeed(speed) end)
+	Sleep(500)
+	local after = GetTimeFactor() / const.DefaultTimeFactor
+	say(fmt("READ speed: SetGameSpeed(%d) call=%s | before=%s after=%s",
+		speed, tostring(ok), tostring(before), tostring(after)))
+	return true
+end
+
+-- ⛔ save_as_last is NEVER passed — it would repoint the owner's Continue button.
+-- ⛔⛔ `savename` IS WRITTEN VERBATIM — the engine appends NOTHING (MEASURED
+--    2026-08-11, unattended-2 run 1: SaveGame("U2RT1", {savename = "U2RT1"})
+--    produced a file literally called `U2RT1`, with no extension, which
+--    LoadGame("U2RT1.savegame.sav") could not then find). That extensionless
+--    file is still in the save folder today. The guard below is why this run
+--    cannot repeat it.
+local SAVE_EXT = ".savegame.sav"
+
+function RS.Save(name)
+	name = tostring(name)
+	if name:sub(-#SAVE_EXT) ~= SAVE_EXT then
+		say(fmt("SAVE ⚠️ name '%s' carries no %s suffix — the engine writes savename VERBATIM. Appending it.", name, SAVE_EXT))
+		name = name .. SAVE_EXT
+	end
+	local landed = false
+	RS.TryYield("SaveGame " .. tostring(name), function()
+		local err, nm = SaveGame(name, { savename = name, silent = true, no_screenshot = true })
+		say(fmt("SAVE SaveGame returned err=%s name=%s", tostring(err), tostring(nm)))
+		landed = not err
+		return err
+	end)
+	Sleep(1000)
+	say("SAVE WITNESS for " .. tostring(name)
+		.. " = the on-disk file read agent-side after this process exits, plus the LoadGame of it below. NOT ListForTag (EF-049).")
+	return landed
+end
+
+---- ⛔⛔ THE THREE-REGISTRY GATE READ ----------------------------------------
+--
+-- ⛔ THREE LINES, NOT TWO (the split matrix's rule, extended): the rig now has
+--    three mods that can be present or absent independently, and a leg that
+--    quotes fewer numbers than the configuration has mods describes part of the
+--    rig. All three print even when the registry is absent, because "absent" is
+--    itself a cell's expected reading (four-OFF-states doctrine).
+
+-- The packs: pack.order + pack.fixes[id].status
+local function read_pack_registry(global_name, label)
+	local pack = rawget(_G, global_name)
+	if type(pack) ~= "table" or type(pack.order) ~= "table" then
+		say(fmt("GATEREAD %s :: REGISTRY ABSENT (global %s is %s) — the mod's code did not run in this process",
+			tostring(label), tostring(global_name), type(pack)))
+		return 0, 0, nil
+	end
+	local active, total, rows = 0, 0, {}
+	for _, id in ipairs(pack.order) do
+		total = total + 1
+		local f = pack.fixes and pack.fixes[id]
+		local st = f and f.status or "MISSING"
+		if st == "active" then active = active + 1 end
+		rows[#rows + 1] = id .. "=" .. st
+	end
+	say(fmt("GATEREAD %s :: %d/%d active", tostring(label), active, total))
+	local chunk = {}
+	for i = 1, #rows do
+		chunk[#chunk + 1] = rows[i]
+		if #chunk == 10 or i == #rows then
+			say(fmt("GATEROW %s :: %s", tostring(label), table.concat(chunk, " ")))
+			chunk = {}
+		end
+	end
+	return active, total, pack
+end
+RS.ReadPackRegistry = read_pack_registry
+
+-- ⚠️ The rescue mod's registry is NOT the packs' shape: it keys
+--    `modules[id].status`, not `fixes[id].status` (00_Core.lua:112-137). A
+--    reader that assumed the pack shape would print a plausible 0/1 forever —
+--    the corun-batch-2 reader-defect class, avoided by reading the real field.
+local function read_rescue_registry(label)
+	local mod = rawget(_G, "SMRSaveRescue")
+	if type(mod) ~= "table" or type(mod.order) ~= "table" then
+		say(fmt("GATEREAD %s :: REGISTRY ABSENT (global SMRSaveRescue is %s) — the mod's code did not run in this process",
+			tostring(label), type(mod)))
+		return 0, 0, nil
+	end
+	local active, total, rows = 0, 0, {}
+	for _, id in ipairs(mod.order) do
+		total = total + 1
+		local m = mod.modules and mod.modules[id]
+		local st = m and m.status or "MISSING"
+		if st == "active" then active = active + 1 end
+		rows[#rows + 1] = id .. "=" .. st .. (m and m.detail and m.detail ~= "" and ("(" .. m.detail .. ")") or "")
+	end
+	say(fmt("GATEREAD %s :: %d/%d active", tostring(label), active, total))
+	say(fmt("GATEROW %s :: %s", tostring(label), table.concat(rows, " ")))
+	local ver = type(mod.ModVersion) == "function" and select(2, pcall(mod.ModVersion)) or nil
+	say(fmt("GATEREAD %s :: mod version reported by the mod itself = %s", tostring(label), tostring(ver)))
+	return active, total, mod
+end
+RS.ReadRescueRegistry = read_rescue_registry
+
+function RS.ReadGates(when)
+	say(fmt("GATES %s ------------------------------------------------", tostring(when)))
+	local fa, ft = read_pack_registry("SMRFixPack",   "fix pack")
+	local oa, ot = read_pack_registry("SMROptInPack", "opt-in pack")
+	local ra, rt = read_rescue_registry("save-rescue")
+	say(fmt("GATES %s :: fix pack %d/%d | opt-in pack %d/%d | save-rescue %d/%d | map=%s | speed=%s | loads_this_process=%d",
+		tostring(when), fa, ft, oa, ot, ra, rt, tostring(rawget(_G, "CurrentMapName")),
+		tostring(GetTimeFactor() / const.DefaultTimeFactor), RS.loads))
+	return fa, ft, oa, ot, ra, rt
+end
+
+-- Which mods actually loaded CODE this process, read off ModsLoaded rather than
+-- inferred from our own globals — the independent second reader for the config
+-- gate below (corun-batch-2 ledger 3: one live read per engine name a reader
+-- consumes; ModsLoaded is Mod.lua:2110-2114's own output).
+function RS.ReadModOrder(when)
+	local loaded = rawget(_G, "ModsLoaded")
+	if type(loaded) ~= "table" then
+		say(fmt("MODORDER %s :: NOT INSPECTABLE — ModsLoaded is %s", tostring(when), type(loaded)))
+		return {}
+	end
+	local ids = {}
+	for i, m in ipairs(loaded) do
+		ids[#ids + 1] = fmt("%d:%s", i, tostring(type(m) == "table" and m.id or m))
+	end
+	say(fmt("MODORDER %s :: %d mod(s) loaded, in load order :: %s",
+		tostring(when), #loaded, table.concat(ids, " ")))
+	return ids
+end
+
+-- ⛔ The account's dial/toggle positions, read rather than assumed. The r0 and
+--    r-restore cells use this as the independent witness that the junction round
+--    trips left the owner's account exactly as they left it (EF-055's claim).
+RS.OPT_IDS = { "ClassicRockets", "AcknowledgedWarnings", "ResidencyControl",
+               "MultipleSuns", "DroneOverhaul", "CohortHousing", "NoHomeless" }
+
+function RS.ReadDialOptions(when)
+	local mods = rawget(_G, "Mods")
+	local def  = type(mods) == "table" and mods["SMR_CommunityOptInPack"]
+	local opts = def and def.options
+	if type(opts) ~= "table" then
+		say(fmt("DIALOPTS %s :: NOT INSPECTABLE — Mods[SMR_CommunityOptInPack] = %s, .options = %s",
+			tostring(when), type(def), type(opts)))
+		return nil
+	end
+	local parts = {}
+	for _, id in ipairs(RS.OPT_IDS) do
+		parts[#parts + 1] = id .. "=" .. tostring(rawget(opts, id))
+	end
+	local speed, carry = rawget(opts, "DroneSpeedDial"), rawget(opts, "DroneCarryDial")
+	say(fmt("DIALOPTS %s :: DroneSpeedDial=%s | DroneCarryDial=%s — the choice VALUE is the choice STRING itself (Mod.lua:2764-2771); '1x (base)' and '+0 (base)' are the base positions",
+		tostring(when), tostring(speed), tostring(carry)))
+	say(fmt("DIALOPTS %s :: toggles :: %s", tostring(when), table.concat(parts, " ")))
+	return { speed = speed, carry = carry }
+end
+
+---- ⛔⛔ THE CONFIG GATE — IT STOPS THE RUN ----------------------------------
+--
+-- WORKFLOW batch-2 harness rule 7, AMENDED 2026-08-11: "A gate whose only
+-- output is a line in a log is not a gate." unattended-2 run 1 started in a
+-- state a PREVIOUS sitting had left it in, printed pack=0/0, and carried on for
+-- six steps taking readings about code that never ran.
+--
+-- This matrix makes that failure mode the NORMAL case: seven of its eight cells
+-- are deliberately-different mod configurations, so every launch MUST prove it
+-- is the cell it says it is before it measures anything. A mismatch in ANY of
+-- the three directions stops.
+function RS.RequireConfig(cell, want_fix, want_opt, want_rescue)
+	local fa, ft, oa, ot, ra, rt = RS.ReadGates("config-gate/" .. tostring(cell))
+	RS.ReadModOrder("config-gate/" .. tostring(cell))
+	RS.ReadDialOptions("config-gate/" .. tostring(cell))
+	local have_fix = type(rawget(_G, "SMRFixPack"))     == "table"
+	local have_opt = type(rawget(_G, "SMROptInPack"))   == "table"
+	local have_res = type(rawget(_G, "SMRSaveRescue"))  == "table"
+	local ok = (have_fix == not not want_fix)
+		and (have_opt == not not want_opt)
+		and (have_res == not not want_rescue)
+	if ok then
+		say(fmt("CONFIGGATE OK :: cell %s :: fix=%s (wanted %s) | opt-in=%s (wanted %s) | rescue=%s (wanted %s) :: %d/%d, %d/%d, %d/%d",
+			tostring(cell), tostring(have_fix), tostring(not not want_fix),
+			tostring(have_opt), tostring(not not want_opt),
+			tostring(have_res), tostring(not not want_rescue), fa, ft, oa, ot, ra, rt))
+		return true
+	end
+	say(fmt("CONFIGGATE ⛔ WRONG CONFIGURATION :: cell %s wanted fix=%s opt=%s rescue=%s but this process has fix=%s opt=%s rescue=%s. EVERY reading this run could take is VOID — the cell is not the cell. STOPPING.",
+		tostring(cell), tostring(not not want_fix), tostring(not not want_opt), tostring(not not want_rescue),
+		tostring(have_fix), tostring(have_opt), tostring(have_res)))
+	say("CONFIGGATE ⛔ THIS IS NOT SCRIPTABLE FROM HERE. AccountStorage, SaveAccountStorage and ModsReloadItems are all ModEnvBlacklist keys (Mod.lua), so no mod-side path can change which mods loaded. The configuration is set agent-side with the game CLOSED by pulling/restoring a junction (EF-055), and it takes a FULL PROCESS RESTART (D13's four-states rule).")
+	return false
+end
+
+---- ⛔⛔ THE RESIDUE INVENTORY — ALL 16 NAMES, AS HANDLE SETS ----------------
+--
+-- The curated table of D13_EXPOSED_SET.md §10.2, read back live BY EXACT BYTES.
+-- These names are SAVE CONTRACT: they kept their `SMRFixPack_` prefix through
+-- the opt-in split on purpose, and this reader must never "tidy" one.
+--
+-- ⛔ Handles, not counts. Handles survive a save/reload; Lua table identity does
+--    not. A count that matches while the handle set differs is not a pass.
+
+local FIELD_ROWS = {
+	{ id = "D5",  name = "SMRFixPack_reserved_at",              owner = "FP", pop = "Colonist" },
+	{ id = "D6",  name = "SMRFixPack_shelter_try",              owner = "FP", pop = "Colonist" },
+	{ id = "D7",  name = "SMRFixPack_payload_set",              owner = "FP", pop = "AllRockets" },
+	{ id = "D8",  name = "SMRFixPack_rocket_fuel_key",          owner = "FP", pop = "DroneControl" },
+	{ id = "D12", name = "SMRFixPack_ack_notworking",           owner = "OP", pop = "Building" },
+	{ id = "D13", name = "SMRFixPack_closed_to_new_residents",  owner = "OP", pop = "Dome/MicroGHabitatBase" },
+	{ id = "D14", name = "SMRFixPack_no_homeless",              owner = "OP", pop = "Dome/MicroGHabitatBase" },
+}
+RS.FIELD_ROWS = FIELD_ROWS
+
+local MODIFIER_ROWS = {
+	{ id = "D15a", label = "Drone",  name = "SMRFixPack_DroneSpeedDial" },
+	{ id = "D15b", label = "Consts", name = "SMRFixPack_DroneCarryDial" },
+}
+local ENTRY_ROWS = { "SMRFixPack_loop_version", "SMRFixPack_fixed_loop" }
+local GAMEVAR_ROWS = { "SMRFixPack_MeteorLatch", "SMRFixPack_FirstAsteroidPrefabs" }
+local KEEP_MODIFIER_PREFIX = "SMRFixPack_F35_"
+local KEEP_COLONY_FIELD = "SMRFixPack_F48_StationConnectors"
+RS.KEEP_MODIFIER_PREFIX = KEEP_MODIFIER_PREFIX
+RS.KEEP_COLONY_FIELD = KEEP_COLONY_FIELD
+
+local function handles_line(list)
+	local parts = {}
+	for i = 1, #list do parts[#parts + 1] = tostring(list[i]) end
+	return table.concat(parts, ",")
+end
+RS.HandlesLine = handles_line
+
+-- ⛔ The walk is the ARTIFACT'S OWN WALK: `Cities`, then every list in
+--    city.labels, each object visited once. Reading with a different traversal
+--    than the code under test measures a different population and the diff
+--    would be meaningless.
+function RS.WalkObjects(visit)
+	local cities = rawget(_G, "Cities")
+	if type(cities) ~= "table" then return 0, {} end
+	local seen, scanned = {}, 0
+	local pops = { Colonist = 0, Building = 0, Dome = 0, DroneControl = 0, Rocket = 0 }
+	local function look(obj)
+		if type(obj) ~= "table" or seen[obj] then return end
+		seen[obj] = true
+		scanned = scanned + 1
+		if IsKindOf(obj, "Colonist") then pops.Colonist = pops.Colonist + 1 end
+		if IsKindOf(obj, "Building") then pops.Building = pops.Building + 1 end
+		if IsKindOf(obj, "Dome") or IsKindOf(obj, "MicroGHabitatBase") then pops.Dome = pops.Dome + 1 end
+		if IsKindOf(obj, "DroneControl") then pops.DroneControl = pops.DroneControl + 1 end
+		if IsKindOf(obj, "RocketBase") then pops.Rocket = pops.Rocket + 1 end
+		visit(obj)
+	end
+	for _, city in ipairs(cities) do
+		if type(city) == "table" then
+			look(city)
+			local labels = city.labels
+			if type(labels) == "table" then
+				for _, list in pairs(labels) do
+					if type(list) == "table" then
+						for _, obj in ipairs(list) do look(obj) end
+					end
+				end
+			end
+		end
+	end
+	return scanned, pops
+end
+
+-- Which labels an object is reachable through — used ONLY to adjudicate the
+-- disclosed label-walk incompleteness (a colonist riding a rocket leaves the
+-- labels: CargoTransporter.keep_cargo_in_labels = false).
+function RS.CargoCheck(when)
+	local cities = rawget(_G, "Cities")
+	if type(cities) ~= "table" then return end
+	local riders = 0
+	for _, city in ipairs(cities) do
+		local list = type(city) == "table" and type(city.labels) == "table" and city.labels.AllRockets
+		for _, r in ipairs(list or empty_table) do
+			local cargo = type(r) == "table" and (rawget(r, "colonists_in_hold") or rawget(r, "units"))
+			if type(cargo) == "table" then
+				local n = 0
+				for _ in pairs(cargo) do n = n + 1 end
+				if n > 0 then
+					riders = riders + n
+					say(fmt("CARGO %s :: %s holds %d unit(s) that are OUT of the labels — the disclosed label-walk incompleteness (spec 10.2)",
+						tostring(when), id_of(r), n))
+				end
+			end
+		end
+	end
+	say(fmt("CARGO %s :: %d labelled-rocket occupant(s) total — this is the population a surviving reserved_at/shelter_try would have to come from before it is a defect",
+		tostring(when), riders))
+	return riders
+end
+
+function RS.ReadResidue(when)
+	say(fmt("RESIDUE %s ==========================================", tostring(when)))
+	local rec = { fields = {}, counts = {}, mods = {}, entries = {}, keep = {}, gamevars = {} }
+
+	-- rows 1-7: object fields, as handle sets
+	for _, row in ipairs(FIELD_ROWS) do rec.fields[row.name] = {} end
+	local scanned, pops = RS.WalkObjects(function(obj)
+		for _, row in ipairs(FIELD_ROWS) do
+			-- rawget: a class-table default could never read as an instance field
+			if rawget(obj, row.name) ~= nil then
+				local hs = rec.fields[row.name]
+				hs[#hs + 1] = rawget(obj, "handle") or -1
+			end
+		end
+	end)
+	rec.scanned = scanned
+	rec.pops = pops
+	say(fmt("RESIDUEPOP %s :: scanned %d distinct labelled object(s) | Colonist=%d Building=%d Dome/Habitat=%d DroneControl=%d Rocket=%d",
+		tostring(when), scanned, pops.Colonist, pops.Building, pops.Dome, pops.DroneControl, pops.Rocket))
+	local POPMAP = { Colonist = "Colonist", ["AllRockets"] = "Rocket", DroneControl = "DroneControl",
+	                 Building = "Building", ["Dome/MicroGHabitatBase"] = "Dome" }
+	for _, row in ipairs(FIELD_ROWS) do
+		local hs = rec.fields[row.name]
+		table.sort(hs)
+		rec.counts[row.name] = #hs
+		local popn = pops[POPMAP[row.pop] or "Building"] or 0
+		local shown = hs
+		if #hs > 24 then
+			shown = {}
+			for i = 1, 12 do shown[i] = hs[i] end
+			shown[13] = "..."
+			for i = #hs - 11, #hs do shown[#shown + 1] = hs[i] end
+		end
+		say(fmt("RESIDUEROW %s :: %-5s %-2s %-34s on %d object(s) of %d %s | handles=[%s]",
+			tostring(when), row.id, row.owner, row.name, #hs, popn, row.pop, handles_line(shown)))
+	end
+
+	-- rows 8-9: the D15 dial modifiers, by EXACT id, in their own containers
+	local colony = rawget(_G, "UIColony")
+	local lm = type(colony) == "table" and rawget(colony, "label_modifiers")
+	if type(lm) ~= "table" then
+		say(fmt("RESIDUEROW %s :: label modifiers NOT INSPECTABLE — UIColony.label_modifiers is %s. Absence here is NOT evidence of absence.",
+			tostring(when), type(lm)))
+	else
+		for _, row in ipairs(MODIFIER_ROWS) do
+			local bucket = lm[row.label]
+			local n = 0
+			if type(bucket) == "table" then for _ in pairs(bucket) do n = n + 1 end end
+			local mod = type(bucket) == "table" and bucket[row.name]
+			rec.mods[row.name] = mod and true or false
+			say(fmt("RESIDUEROW %s :: %-5s OP %-34s on label '%s' = %s (type=%s truthy=%s) | prop=%s percent=%s amount=%s | modifiers on that label = %d",
+				tostring(when), row.id, row.name, tostring(row.label), tostring(mod),
+				type(mod), tostring(not not mod),
+				tostring(type(mod) == "table" and mod.prop),
+				tostring(type(mod) == "table" and mod.percent),
+				tostring(type(mod) == "table" and mod.amount), n))
+		end
+		-- ⛔⛔ D10 — THE KEEP HEADLINE, which has never been observed. Every
+		--    label is enumerated and every modifier id matching the F35 prefix is
+		--    named, so "kept" is a set comparison and not a count.
+		local f35 = {}
+		for label, mods in pairs(lm) do
+			if type(mods) == "table" then
+				for id in pairs(mods) do
+					if type(id) == "string" and id:sub(1, #KEEP_MODIFIER_PREFIX) == KEEP_MODIFIER_PREFIX then
+						f35[#f35 + 1] = tostring(label) .. "/" .. id
+					end
+				end
+			end
+		end
+		table.sort(f35)
+		rec.keep.f35 = f35
+		say(fmt("RESIDUEROW %s :: D10   FP %-34s ⛔ KEEP :: %d modifier(s) :: %s",
+			tostring(when), KEEP_MODIFIER_PREFIX .. "<label>", #f35,
+			#f35 > 0 and table.concat(f35, " ") or "<none — the KEEP condition is NOT sampled in this state>"))
+		-- and any modifier id belonging to the ARTIFACT, which must never exist
+		local artifact_ids = {}
+		for label, mods in pairs(lm) do
+			if type(mods) == "table" then
+				for id in pairs(mods) do
+					if type(id) == "string" and id:find("SaveRescue", 1, true) then
+						artifact_ids[#artifact_ids + 1] = tostring(label) .. "/" .. id
+					end
+				end
+			end
+		end
+		rec.keep.artifact_mods = artifact_ids
+		say(fmt("RESIDUEROW %s :: ⛔ artifact modifier ids (must be ZERO) :: %d :: %s",
+			tostring(when), #artifact_ids, #artifact_ids > 0 and table.concat(artifact_ids, " ") or "<none>"))
+	end
+
+	-- row 10: the other KEEP name, on the colony
+	local ctrl = type(colony) == "table" and rawget(colony, KEEP_COLONY_FIELD)
+	rec.keep.f48 = ctrl
+	say(fmt("RESIDUEROW %s :: D11   FP %-34s ⛔ KEEP :: UIColony field = %s (type=%s truthy=%s)",
+		tostring(when), KEEP_COLONY_FIELD, tostring(ctrl), type(ctrl), tostring(not not ctrl)))
+
+	-- rows 11-12: fields inside vanilla's RainsDisasterThreads entries, plus the
+	-- thread validity the heal's verdict rests on
+	local threads = rawget(_G, "RainsDisasterThreads")
+	if type(threads) ~= "table" then
+		say(fmt("RESIDUEROW %s :: D3/D4 :: RainsDisasterThreads is %s — no entries to read",
+			tostring(when), type(threads)))
+	else
+		for rain_type, data in sorted_pairs(threads) do
+			if type(data) == "table" then
+				local e = {
+					loop_version = rawget(data, "SMRFixPack_loop_version"),
+					fixed_loop   = rawget(data, "SMRFixPack_fixed_loop"),
+					activation   = IsValidThread(data.activation_thread) and true or false,
+					main         = IsValidThread(data.main_thread) and true or false,
+					id           = data.id,
+				}
+				rec.entries[rain_type] = e
+				say(fmt("RESIDUEROW %s :: D3/D4 rains['%s'] :: loop_version=%s fixed_loop=%s | activation_thread valid=%s | main_thread valid=%s | settings id=%s",
+					tostring(when), tostring(rain_type), tostring(e.loop_version), tostring(e.fixed_loop),
+					tostring(e.activation), tostring(e.main), tostring(e.id)))
+			end
+		end
+	end
+	rec.g_rain = rawget(_G, "g_RainDisaster")
+	rec.meteors = IsValidThread(rawget(_G, "Meteors")) and true or false
+	say(fmt("RESIDUEROW %s :: g_RainDisaster = %s (type=%s) | Meteors thread valid = %s | MeteorStorm valid = %s",
+		tostring(when), tostring(rec.g_rain), type(rec.g_rain), tostring(rec.meteors),
+		tostring(IsValidThread(rawget(_G, "MeteorStorm")) and true or false)))
+
+	-- rows 13-14: the two mod-registered GameVars. ⛔ These are the engine's own
+	-- mechanism, NOT the artifact's work — a MeteorLatch absence here is
+	-- persist.lua dropping an unregistered name, and must never be reported as a
+	-- removal the tool performed.
+	for _, name in ipairs(GAMEVAR_ROWS) do
+		local v = rawget(_G, name)
+		rec.gamevars[name] = v
+		say(fmt("RESIDUEROW %s :: GameVar %-34s = %s (type=%s) — mod-registered: dropped by persist.lua on any load without its registering mod. NOT the artifact's doing either way",
+			tostring(when), name, tostring(v), type(v)))
+	end
+
+	say(fmt("RESIDUE %s END ======================================", tostring(when)))
+	return rec
+end
+
+-- ⛔ Names every row that moved between two takings, and compares HANDLE SETS
+--    rather than counts.
+function RS.DiffResidue(a, b, what)
+	if type(a) ~= "table" or type(b) ~= "table" then
+		say("RESIDUEDIFF NOT-APPLICABLE (a reading is missing) :: " .. tostring(what))
+		return nil
+	end
+	local changed = {}
+	for _, row in ipairs(FIELD_ROWS) do
+		local x, y = a.fields[row.name] or {}, b.fields[row.name] or {}
+		local same = (#x == #y)
+		if same then for i = 1, #x do if x[i] ~= y[i] then same = false break end end end
+		if not same then
+			changed[#changed + 1] = fmt("%s: %d handle(s) -> %d handle(s)", row.name, #x, #y)
+		end
+	end
+	for _, row in ipairs(MODIFIER_ROWS) do
+		if a.mods[row.name] ~= b.mods[row.name] then
+			changed[#changed + 1] = fmt("%s: %s -> %s", row.name, tostring(a.mods[row.name]), tostring(b.mods[row.name]))
+		end
+	end
+	local af, bf = (a.keep and a.keep.f35) or {}, (b.keep and b.keep.f35) or {}
+	local samef = (#af == #bf)
+	if samef then for i = 1, #af do if af[i] ~= bf[i] then samef = false break end end end
+	if not samef then
+		changed[#changed + 1] = fmt("⛔ KEEP D10 F35 set MOVED: [%s] -> [%s]",
+			table.concat(af, " "), table.concat(bf, " "))
+	end
+	if (a.keep and a.keep.f48) ~= (b.keep and b.keep.f48) then
+		changed[#changed + 1] = fmt("⛔ KEEP D11 F48: %s -> %s", tostring(a.keep and a.keep.f48), tostring(b.keep and b.keep.f48))
+	end
+	if a.scanned ~= b.scanned then
+		changed[#changed + 1] = fmt("scanned population: %s -> %s", tostring(a.scanned), tostring(b.scanned))
+	end
+	say(fmt("RESIDUEDIFF %s :: %d reading(s) changed%s", tostring(what), #changed,
+		#changed > 0 and (" — " .. table.concat(changed, " | ")) or " — IDENTICAL"))
+	return #changed
+end
+
+-- ⛔ Names the rows that are still PRESENT, which is the (r2) verdict shape:
+--    "every REMOVE name absent" is only a claim if the reader would have said so.
+function RS.AssertCleared(rec, what)
+	local survivors, kept = {}, {}
+	for _, row in ipairs(FIELD_ROWS) do
+		local hs = rec.fields[row.name] or {}
+		if #hs > 0 then
+			survivors[#survivors + 1] = fmt("%s on %d object(s) handles=[%s]", row.name, #hs, handles_line(hs))
+		end
+	end
+	for _, row in ipairs(MODIFIER_ROWS) do
+		if rec.mods[row.name] then survivors[#survivors + 1] = row.name .. " (label modifier)" end
+	end
+	for rain_type, e in sorted_pairs(rec.entries or empty_table) do
+		if e.loop_version ~= nil then survivors[#survivors + 1] = "SMRFixPack_loop_version on rains['" .. tostring(rain_type) .. "']" end
+		if e.fixed_loop ~= nil then survivors[#survivors + 1] = "SMRFixPack_fixed_loop on rains['" .. tostring(rain_type) .. "']" end
+	end
+	if rec.keep and #(rec.keep.f35 or empty_table) > 0 then
+		kept[#kept + 1] = fmt("D10 F35 x%d [%s]", #rec.keep.f35, table.concat(rec.keep.f35, " "))
+	end
+	if rec.keep and rec.keep.f48 ~= nil then kept[#kept + 1] = "D11 F48 = " .. tostring(rec.keep.f48) end
+	say(fmt("CLEARED %s :: REMOVE-list survivors = %d%s", tostring(what), #survivors,
+		#survivors > 0 and (" ⛔ :: " .. table.concat(survivors, " | ")) or " — every REMOVE name reads ABSENT by name"))
+	say(fmt("CLEARED %s :: KEEP-list present = %d :: %s", tostring(what), #kept,
+		#kept > 0 and table.concat(kept, " | ") or "⛔ NOTHING KEPT — if a KEEP name was present before the pass this is a stop-the-leg condition"))
+	return #survivors, #kept
+end
+
+---- ⛔⛔ THE ARTIFACT-NAME SCAN (the residue-zero half that is not a log read) -
+--
+-- Spec 10.7 argues residue-zero by construction. This is the measurement: walk
+-- every labelled object, the colony, the rains entries and PersistableGlobals,
+-- and name anything carrying the artifact's namespace. It runs in the cells
+-- where the artifact is ABSENT, because a name it left behind is only residue
+-- if it is still there when the mod is not.
+function RS.ScanArtifactNames(when)
+	local hits = {}
+	local function look(container, label)
+		if type(container) ~= "table" then return end
+		local ok = pcall(function()
+			for k in pairs(container) do
+				if type(k) == "string" and k:find("SaveRescue", 1, true) then
+					hits[#hits + 1] = tostring(label) .. "." .. k
+				end
+			end
+		end)
+		if not ok then hits[#hits + 1] = tostring(label) .. " <not enumerable>" end
+	end
+	local n = 0
+	RS.WalkObjects(function(obj) n = n + 1 if n <= 4000 then look(obj, id_of(obj)) end end)
+	look(rawget(_G, "UIColony"), "UIColony")
+	local threads = rawget(_G, "RainsDisasterThreads")
+	if type(threads) == "table" then
+		for t, data in sorted_pairs(threads) do look(data, "RainsDisasterThreads." .. tostring(t)) end
+	end
+	local persistable = rawget(_G, "PersistableGlobals")
+	if type(persistable) ~= "table" then
+		say(fmt("ARTIFACTSCAN %s :: PersistableGlobals NOT READABLE (%s) — that half is not sampled",
+			tostring(when), type(persistable)))
+	else
+		local pn = 0
+		for k, v in pairs(persistable) do
+			pn = pn + 1
+			if v and type(k) == "string" and k:find("SMRSaveRescue", 1, true) then
+				hits[#hits + 1] = "PersistableGlobals." .. k
+			end
+		end
+		say(fmt("ARTIFACTSCAN %s :: PersistableGlobals walked, %d registered name(s) — a name enters a savegame ONLY through this table (persist.lua:117-134), so it IS the question",
+			tostring(when), pn))
+	end
+	say(fmt("ARTIFACTSCAN %s :: %d object(s) walked | artifact-namespace names found = %d :: %s",
+		tostring(when), n, #hits, #hits > 0 and table.concat(hits, " ") or "<none>"))
+	RS.Applicable("artifact-name-scan", #hits, n,
+		"every labelled object of every city, UIColony, every rains entry and PersistableGlobals walked this load")
+	return hits
+end
+
+---- ⛔⛔ THE MANUFACTURE (cell r2pre) ----------------------------------------
+--
+-- ⛔ NAME WHAT IS FORCED (the forced-vs-organic rule). The derivation's claim is
+--    that a PRE-REWRITE-LINEAGE population exists in the wild — never that this
+--    project holds one. No save in the folder carries `SMRFixPack_fixed_loop` or
+--    a dead `Meteors` thread, because every save the current pack has loaded was
+--    migrated and latched by the pack itself. So the class is MANUFACTURED here,
+--    on a byte COPY, and every row this function writes is declared SYNTHETIC in
+--    the record.
+--
+-- ⛔ It writes the exact bytes the packs write, through the same shapes:
+--    plain instance fields (the modules' own `obj[FLAG] = value`), a field on
+--    vanilla's own RainsDisasterThreads entry, and vanilla's DeleteThread.
+function RS.Manufacture(when, n_colonists)
+	n_colonists = n_colonists or 25
+	local out = { shelter = {}, fuel = {}, fixed_loop = nil, meteors_killed = false, f35 = nil }
+	say(fmt("MANUFACTURE %s :: ⛔ everything this step writes is SYNTHETIC and is declared so in the record", tostring(when)))
+
+	-- D6 shelter_try — a rate-limit timestamp on Colonists. Value shape: the
+	-- module writes a game-time stamp; GameTime() is the same source.
+	-- D8 rocket_fuel_key — legacy string key on DroneControl.
+	local colonists, hubs = {}, {}
+	RS.WalkObjects(function(obj)
+		if IsKindOf(obj, "Colonist") and #colonists < n_colonists then colonists[#colonists + 1] = obj end
+		if IsKindOf(obj, "DroneControl") then hubs[#hubs + 1] = obj end
+	end)
+	local now = GameTime()
+	for _, c in ipairs(colonists) do
+		c.SMRFixPack_shelter_try = now
+		out.shelter[#out.shelter + 1] = rawget(c, "handle") or -1
+	end
+	for _, h in ipairs(hubs) do
+		h.SMRFixPack_rocket_fuel_key = "Fuel"
+		out.fuel[#out.fuel + 1] = rawget(h, "handle") or -1
+	end
+	table.sort(out.shelter) table.sort(out.fuel)
+	say(fmt("MANUFACTURE %s :: D6 SMRFixPack_shelter_try written on %d Colonist(s) handles=[%s]",
+		tostring(when), #out.shelter, handles_line(out.shelter)))
+	say(fmt("MANUFACTURE %s :: D8 SMRFixPack_rocket_fuel_key written on %d DroneControl(s) handles=[%s]",
+		tostring(when), #out.fuel, handles_line(out.fuel)))
+
+	-- D4 fixed_loop — ⭐ THE pre-rewrite row, and it only means anything on an
+	-- entry whose activation_thread is ALIVE: that pair is exactly the shape the
+	-- legacy-loop heal detects (spec 10.4). An entry with a dead thread would
+	-- make the heal decline and prove nothing.
+	local threads = rawget(_G, "RainsDisasterThreads")
+	if type(threads) ~= "table" then
+		say(fmt("MANUFACTURE %s :: ⛔ RainsDisasterThreads is %s — the D4 row CANNOT be manufactured on this world",
+			tostring(when), type(threads)))
+	else
+		local picked
+		for rain_type, data in sorted_pairs(threads) do
+			if type(data) == "table" and IsValidThread(data.activation_thread) and not picked then
+				picked = rain_type
+				data.SMRFixPack_fixed_loop = true
+			end
+		end
+		out.fixed_loop = picked
+		if picked then
+			say(fmt("MANUFACTURE %s :: D4 SMRFixPack_fixed_loop = true written on rains['%s'] (settings id=%s), whose activation_thread is ALIVE — the legacy-body shape the heal detects",
+				tostring(when), tostring(picked), tostring(threads[picked].id)))
+		else
+			say(fmt("MANUFACTURE %s :: ⛔ no rains entry has a LIVE activation_thread — the D4 heal condition CANNOT be sampled on this world, and the record says UNSAMPLED rather than refuted",
+				tostring(when)))
+		end
+	end
+
+	-- the dead Meteors thread. ⛔ Whether deadness SURVIVES the save/reload is
+	-- itself the measurement — a dead thread that comes back alive means the
+	-- meteor restart stays UNSAMPLED, and that is reported, not worked around.
+	local meteors = rawget(_G, "Meteors")
+	if IsValidThread(meteors) then
+		local del = rawget(_G, "DeleteThread")
+		if type(del) == "function" then
+			RS.Try("DeleteThread(Meteors)", del, meteors)
+			out.meteors_killed = not IsValidThread(rawget(_G, "Meteors"))
+			say(fmt("MANUFACTURE %s :: Meteors thread killed in-session; IsValidThread now = %s. ⚠️ the question is whether this survives the round trip",
+				tostring(when), tostring(out.meteors_killed)))
+		end
+	else
+		say(fmt("MANUFACTURE %s :: Meteors thread was already invalid — nothing to kill", tostring(when)))
+	end
+
+	return out
+end
+
+-- ⛔⛔ D10 — plant a KEEP witness ONLY if the save carries none. `absent` is not
+--    `refuted`: the KEEP headline has never been observed, so the condition must
+--    be SAMPLED one way or the other. A native one is used as found and said so;
+--    a planted one is written with the EXACT id shape 90_SaveSanitizer:84 uses
+--    and declared SYNTHETIC.
+function RS.EnsureKeepWitness(when, existing)
+	if type(existing) == "table" and #existing > 0 then
+		say(fmt("KEEPWITNESS %s :: ⭐ NATIVE — this save already carries %d SMRFixPack_F35_* modifier(s): %s. Nothing planted; the KEEP condition is sampled on real bytes",
+			tostring(when), #existing, table.concat(existing, " ")))
+		return "native", existing
+	end
+	local colony = rawget(_G, "UIColony")
+	if type(colony) ~= "table" or type(colony.SetLabelModifier) ~= "function" then
+		say(fmt("KEEPWITNESS %s :: ⛔ UIColony/SetLabelModifier unavailable — the KEEP condition CANNOT be sampled and the record says UNSAMPLED", tostring(when)))
+		return "unsampled", {}
+	end
+	-- the label the shipped repair targets, and the exact id shape it writes
+	local label = "WindTurbine_Large"
+	local id = RS.KEEP_MODIFIER_PREFIX .. label
+	RS.Try("SetLabelModifier(" .. label .. ", " .. id .. ")", function()
+		colony:SetLabelModifier(label, id, {
+			amount = 0, percent = 100, prop = "electricity_production", id = "GameEffect",
+		})
+		return "written"
+	end)
+	local lm = rawget(colony, "label_modifiers")
+	local landed = type(lm) == "table" and type(lm[label]) == "table" and lm[label][id] ~= nil
+	say(fmt("KEEPWITNESS %s :: ⚠️ SYNTHETIC — this save carried NO F35 modifier, so one was planted with the exact id and shape 90_SaveSanitizer:84 writes (label '%s', +100%% electricity_production). landed=%s. ⛔ The record must call this witness synthetic",
+		tostring(when), label, tostring(landed)))
+	return landed and "synthetic" or "unsampled", landed and { label .. "/" .. id } or {}
+end
+
+---- the artifact's own surfaces, read rather than assumed --------------------
+
+function RS.ReadRescueTable(when)
+	local mod = rawget(_G, "SMRSaveRescue")
+	if type(mod) ~= "table" or type(mod.ResidueNames) ~= "function" then
+		say(fmt("RESCUETABLE %s :: NOT AVAILABLE (SMRSaveRescue is %s)", tostring(when), type(mod)))
+		return nil
+	end
+	local ok, names = pcall(mod.ResidueNames)
+	if not ok or type(names) ~= "table" then
+		say(fmt("RESCUETABLE %s :: ResidueNames() failed: %s", tostring(when), tostring(names)))
+		return nil
+	end
+	say(fmt("RESCUETABLE %s :: the mod's own curated table names %d row(s) :: %s",
+		tostring(when), #names, table.concat(names, " ")))
+	if type(mod.ListResidue) == "function" then RS.Try("SMRSaveRescue.ListResidue()", mod.ListResidue) end
+	return names
+end
+
+---- the suite ---------------------------------------------------------------
+--
+-- ⛔ SKIPs BY NAME, never as a total (STATE's standing rule). SMRTest.last
+--    carries every probe's verdict after RunAll, so the per-probe rows are
+--    re-emitted as one greppable line per status class.
+function RS.RunSuite(when)
+	local kit = rawget(_G, "SMRTest")
+	if not (kit and kit.RunAll) then
+		say("SUITE ⛔ SMRTest.RunAll is missing (00_TestCore.lua did not load) :: " .. tostring(when))
+		return nil
+	end
+	local counts
+	RS.Try("SMRTest.RunAll() " .. tostring(when), function()
+		counts = kit.RunAll()
+		return fmt("PASS=%s FAIL=%s SKIP=%s ERROR=%s",
+			tostring(counts and counts.PASS), tostring(counts and counts.FAIL),
+			tostring(counts and counts.SKIP), tostring(counts and counts.ERROR))
+	end)
+	local last = kit.last
+	if type(last) ~= "table" then
+		say("SUITE ⚠️ SMRTest.last is not a table — per-probe rows NOT re-emitted; read them off the RunAll block above")
+		return counts
+	end
+	local by = { PASS = {}, FAIL = {}, SKIP = {}, ERROR = {} }
+	for _, id in ipairs(kit.order or empty_table) do
+		local r = last[id]
+		local st = r and r.status or "MISSING"
+		local bucket = by[st] or by.ERROR
+		bucket[#bucket + 1] = id
+	end
+	for _, st in ipairs({ "FAIL", "ERROR", "SKIP", "PASS" }) do
+		local names = by[st]
+		say(fmt("SUITEBYNAME %s :: %s (%d) :: %s", tostring(when), st, #names,
+			#names > 0 and table.concat(names, " ") or "<none>"))
+	end
+	-- ⛔ the six rescue probes, called out by name, because their verdicts are
+	--    this matrix's subject and a total would hide one flipping to SKIP.
+	local rescue = { "SaveRescueCleanPass", "SaveRescueStandDown", "SaveRescueIdempotent",
+	                 "SaveRescueHealBounds", "SaveRescueSelfClean", "SaveRescueResidueTable" }
+	local rows = {}
+	for _, id in ipairs(rescue) do
+		local r = last[id]
+		rows[#rows + 1] = fmt("%s=%s", id, r and r.status or "MISSING")
+	end
+	say(fmt("SUITERESCUE %s :: %s", tostring(when), table.concat(rows, " ")))
+	for _, id in ipairs(rescue) do
+		local r = last[id]
+		if r then say(fmt("SUITERESCUEMSG %s :: %s [%s] %s", tostring(when), id, tostring(r.status), tostring(r.msg))) end
+	end
+	return counts
+end
+
+---- error-watch marker ------------------------------------------------------
+--
+-- ⛔ It may NOT count engine error lines: the engine writes those straight to
+--    the log file and the mod environment has no file read (io/os are both
+--    ModEnvBlacklist keys). A count printed from here would be invented. It
+--    prints the boundary a reader greps between.
+-- ⚠️ The token an error sweep greps for is spelled AROUND, not written.
+function RS.ErrorWatchNote()
+	say(fmt("ERRORWATCH %s — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== d13-rescue %s ===' banner and this line happened inside this run. Report every unexplained line VERBATIM with its position and its age; never discount one. stage_at_close=%s loads_this_process=%d",
+		tostring(RS.tag), tostring(RS.tag), tostring(RS.stage), RS.loads))
+end
+
+---- watchdog + flow ---------------------------------------------------------
+
+function RS.Flow()
+	CreateRealTimeThread(function()
+		local deadline = RealTime() + RS.watchdog
+		while RS.stage ~= "done" do
+			if RealTime() - deadline >= 0 then
+				say("WATCHDOG TIMEOUT at stage " .. tostring(RS.stage))
+				local flush = rawget(_G, "FlushLogFile")
+				if flush then flush() end
+				Sleep(1000)
+				quit()
+				return
+			end
+			Sleep(1000)
+		end
+	end)
+
+	say(fmt("=== d13-rescue %s === watchdog %dms", tostring(RS.tag), RS.watchdog))
+
+	if not step("1-waiting-menu", function()
+		if not wait_for(RS.menu_timeout, function() return not not GetPreGameMainMenu() end) then
+			return false
+		end
+		Sleep(2000)
+	end) then return end
+
+	local ok = sprocall(RS.Payload)
+	if not ok then
+		say("PAYLOAD ERROR at stage " .. tostring(RS.stage))
+		shutdown("ERROR payload")
+		return
+	end
+	shutdown("done")
+end
+
+function RS.Boot()
+	CreateRealTimeThread(function()
+		-- CreateRealTimeThread runs its body synchronously up to the first yield,
+		-- so this Sleep is what puts everything below after ModsLoadCode().
+		Sleep(1)
+		RS.Flow()
+	end)
+end
