@@ -151,6 +151,17 @@ D13's deliverables; lifting the `MOD_DESCRIPTION.md` freeze; preview-image ART
 |---|------|---------------|--------------|
 | 1 | `01_DESIGN.md` | No — decisions routed, none blocking | audience + surfaces + platform + inventory + TL;DR strategy + screenshot plan + FAQ seed. Outbox = prompt 2 |
 | 2 | `02_QA.md` | No | fresh-context adversarial review: is the architecture right, is any claim unearned, is anything exposed |
-| 3 | `03_BUILD_STORE.md` | No | the two store descriptions + the relabel wording draft, to the owner for approval |
-| 4 | `04_BUILD_SITE.md` | No | the fix list + FAQ + site scaffold, unpublished |
-| 5 | `05_AUDIT.md` | No (routes decisions) | read every surface as a player would, re-check the exposure gate, empty the folder |
+| 3 | `03_BUILD_STORE.md` | No | the two store descriptions + the relabel wording draft, to the owner for approval. ⭐ Writes serially, fans the six sweeps out to subagents, arbitrates |
+| 4 | `04_FABLE_AUDIT.md` | No | ⭐ **ADDED 2026-08-13 by owner instruction** — terminal audit of prompt 3, targeting **context-degradation** rather than authorship blindness: every "done" is a claim, and job 1 is a control that re-runs two of prompt 3's own sweeps and compares yields |
+| 5 | `05_BUILD_SITE.md` | No | the fix list + FAQ + site scaffold, unpublished |
+| 6 | `06_AUDIT.md` | No (routes decisions) | read every surface as a player would, re-check the exposure gate, empty the folder |
+
+⚠️ **The manifest changed after the chain started.** Prompts 1 and 2 were
+consumed against the five-prompt version; the audit tier was inserted at prompt
+3's tail because prompt 3 is the chain's first genuinely long build (~4–6 agent
+hours across two documents) and long sessions fail differently from short ones.
+**Model placement lives in the FILENAME only; bodies stay model-neutral** so the
+owner can re-route per task (`CHAIN_METHOD.md` §2.10). ⚖️ `CHAIN_METHOD.md` §4.0
+says a chain of **6+ prompts** should have its decomposition and model placement
+set by a top-tier session unless the owner overrides — **the owner assigned this
+one directly, which is that override.**

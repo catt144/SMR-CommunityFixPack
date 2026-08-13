@@ -27,7 +27,7 @@ yours re-derives.**
 1. ⛔ **Do NOT write `docs/agent/STATE.md` or `docs/PLAYTEST_CHECKLIST.md`.**
    The sitting writes both: it strikes 26b, records the PT-20 redo, and lands
    D13's `tested`. ⇒ **Put anything you owe those files in your outbox**
-   (`04_BUILD_SITE.md`'s Notes from upstream) and let a later prompt land it.
+   (`04_FABLE_AUDIT.md`'s Notes from upstream) and let a later prompt land it.
    ⚠️ **Re-reading first is NOT protection and has failed twice in this tree:**
    `git add <path>` takes the **whole file**, so the other session staging its
    own legitimate edit carries yours into their commit under their message.
@@ -179,9 +179,19 @@ the strings for a release-prep pass.
 
 ## Close
 
-* Append **Notes from upstream** to `04_BUILD_SITE.md` (create it — the manifest
-  in `README.md` describes it).
-* Update `docs/PLAYTEST_CHECKLIST.md` if 22b comes back.
+* Append **Notes from upstream** to **`04_FABLE_AUDIT.md`** (it already exists —
+  ⛔ **append to it, do not create or overwrite it**). ⚠️ The chain gained a
+  terminal audit after this file was written; `05_BUILD_SITE.md` is now prompt 5
+  and is **not** your outbox.
+* ⛔ **Write your audit log where the auditor can find it.** Prompt 4's first job
+  is a control that re-runs two of your six sweeps and compares yields, so it
+  needs, per sweep: **what was searched, what came back, and the verdict on each
+  finding** (*confirmed → fixed* · *confirmed → deliberate, and why* · *refuted,
+  and what the sweep missed*). A sweep recorded only as "clean" cannot be
+  audited and will be treated as never having run.
+* ⛔ **Do not write `docs/PLAYTEST_CHECKLIST.md`** while the sitting is live
+  (concurrency rule 1). If 22b comes back, record it in your outbox and use the
+  answer; a later prompt strikes the line.
 * `python tools/doccheck.py` GREEN. Commit with `-F`, push, **delete this file in
   the same commit.**
 
