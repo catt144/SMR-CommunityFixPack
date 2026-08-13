@@ -188,3 +188,19 @@ capture-proven.
 * The parallel session's owner-decision edits (checklist item 15, STATE's
   remote line) were in the tree uncommitted at my close; they ride my commit
   unreviewed beyond a read of their diff.
+
+**Addendum (same session, 2026-08-13, post-verdict decision batch):** the
+owner answered everything you were gated on and more — all recorded on the
+checklist. For you specifically: **Q-A = (c)** (launch dependency REAFFIRMED
+after an explicit challenge; build ≠ publish — store publication is a
+release-time call) · **Q-B = mod-shaped CONFIRMED** · **item 19 = GO** (the
+inserted `02b_OPUS_GATES.md` runs before you; read its outbox above yours) ·
+**naming RATIFIED as proposed** (display "Save Rescue", mod id
+`SMR_CommunitySaveRescue`, log tag `[CommunitySaveRescue]`) · ⭐ **the owner
+pre-created the artifact's PUBLIC remote themselves:
+`github.com/catt144/SMR-CommunitySaveRescue` (empty)** — scaffold locally,
+set that as `origin`, push; align the local folder name to the remote
+(`C:\Dev\SMR-CommunitySaveRescue`) rather than the proposal's shorter
+`SMR-SaveRescue`. Also decided the same day, opt-in side (not yours to act
+on, but your doc sweeps will see it): display name = "Community Fix Pack:
+Opt-In Modules" (swept, opt-pack `e17586b`), default-OFF ratified.

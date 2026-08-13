@@ -56,5 +56,5 @@ F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
   (D13); re-enable is owner-only. ⚠️ **EF-051 ON HOLD — Steam Cloud ON (owner
   08-12, temporary):** say "deleted, listing verified", NEVER "gone"; `CP60RT` +
   `Autosave Sol 311` HELD.
-- **Owner decisions open: 3** — relabel WORDING · opt-in DISPLAY NAME · opt-in default-OFF ratification (built OFF). ✅ 08-13: opt-in remote PUBLIC · **D13 17-19 ANSWERED ((c) · mod-shaped · gates GO; launch dependency REAFFIRMED, build ≠ publish)**.
+- **Owner decisions open: 1** — relabel WORDING (owner prose, launch prep). ✅ 08-13: D13 17-19 ((c) · mod-shaped · gates GO; launch dep REAFFIRMED, build ≠ publish) · opt-in remote PUBLIC · display name **"Community Fix Pack: Opt-In Modules"** (swept, `e17586b`) · default-OFF RATIFIED · rescue naming RATIFIED + remote pre-created (`catt144/SMR-CommunitySaveRescue`, empty).
 - **Release** — now **TWO** products, each with its own metadata/description/preview/portal pass; `archive/MOD_DESCRIPTION.md` FROZEN, rebuilt at prep.

@@ -165,9 +165,14 @@ owed input stays here no matter how struck-through it looks.
     (5 rows' message text differs benignly — save-state/RNG, one of them
     independently confirming your dial change), and the 18:30 log you produced
     is now archived in the repo (it was load-bearing and only on the rotation).
-    **Still yours, none blocking: the display name (launch prep) · whether the
-    modules stay OFF by default (design recommends OFF, build took OFF — one
-    line either way).** The re-tick minute is spent; nothing else is owed.
+    ✅ ~~Still yours, none blocking: the display name · the OFF default~~
+    **BOTH DECIDED 2026-08-13, your rulings:** display name =
+    **"Community Fix Pack: Opt-In Modules"** (family-prefixed so the two mods
+    sort together — swept the same day across all 15 player-visible sites in
+    11 files, parse sweep GREEN, pushed `e17586b`; mod id / global / log tag
+    unchanged, they are save contract) · **default-OFF RATIFIED** (as built
+    and verified; two-line flip stays cheap post-release if you change your
+    mind). The re-tick minute is spent; nothing else is owed.
     ✅ ~~whether the new repo gets a GitHub remote~~ **DECIDED 2026-08-13, your
     ruling: PUBLIC, same as the fix pack.** Live at
     `github.com/catt144/SMR-CommunityOptInPack` — all 6 commits pushed, tree
@@ -229,7 +234,14 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
     the tool will say out loud). **Nothing about the (a)/(b)/(c) choice
     changes — (c) is still the recommendation.**
 
-18. ✅ **DECIDED 2026-08-13: CONFIRMED — mod-shaped.** The ask as it stood:
+18. ✅ **DECIDED 2026-08-13: CONFIRMED — mod-shaped.** Same day you also
+    **ratified the naming proposal** (display "Save Rescue" · repo
+    `SMR-SaveRescue` · mod id `SMR_CommunitySaveRescue` · log tag
+    `[CommunitySaveRescue]`) and **pre-created the public remote yourself**:
+    `github.com/catt144/SMR-CommunitySaveRescue`, empty — prompt 3 scaffolds
+    into it (note: the remote's name differs from the proposal's repo folder
+    name; prompt 3 aligns the local folder to the remote). Publishing the MOD
+    to a store stays a release-time call. The ask as it stood:
     ⚖️ **Confirm the artifact is built AS A MOD (not a console procedure) —
     and that this makes the channel question stop blocking.** I verified the
     argument against your own Paradox Mods check (2026-08-01), not from
