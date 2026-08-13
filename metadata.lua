@@ -1,7 +1,15 @@
 return PlaceObj('ModDef', {
 	'title', "Community Fix Pack",
-	'description', "Fixes bugs in Surviving Mars: Relaunched gameplay code. Every fix targets a verified defect in the game's Lua source and patches at runtime in a mod-compatible way (no game files are modified). Individual fixes can be disabled on PC (via the console or a companion mod). See the mod page for the full list of fixes. The optional quality-of-life modules that used to ship with this pack are now a separate mod, the Community Opt-In Pack — installing it is optional and the two work together.",
-	'short_description', "Dozens of verified bug fixes for Surviving Mars: Relaunched, applied at runtime in a mod-compatible way — no game files modified. The optional quality-of-life modules are now a separate mod (Community Opt-In Pack).",
+	-- ⚠️ REWRITTEN 2026-08-13 (owner instruction, public-docs chain prompt 3).
+	-- The previous `description` carried TWO defects that would have shipped:
+	-- it told players individual fixes can be disabled "via the console", which
+	-- is FALSE (Register reads the veto table at mod load, 00_Core.lua:384-388 —
+	-- the fixes are applied long before anyone can type), and it named the
+	-- sibling mod by its dead working title "Community Opt-In Pack". Both are
+	-- corrected below. Full pages + the claim traces: docs/agent/reports/
+	-- STORE_FIXPACK.md and STORE_METADATA_STRINGS.md.
+	'description', "Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect verified in the game's own code — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs rather than rebalancing the game: preferences and features live in a separate mod, Community Fix Pack: Opt-In Modules, and neither mod needs the other. Nothing is patched on disk; the mod wraps the game's own code at runtime and no game files are modified. Safe to add to a save you have already played — the pack writes almost nothing into your savegame, and removing it simply lets the original bugs come back. Every fix checks the game's code before it patches anything and stands down if an official patch changes what it was written for. Five of the fixes are judgment calls rather than plain repairs, and the mod page says which and why.",
+	'short_description', "Bug fixes for Surviving Mars: Relaunched — it repairs defects verified in the game's own code rather than rebalancing the game, and it is safe to add to a save you have already played.",
 	-- ⚠️ `last_changes` no longer quotes a fix COUNT, on purpose: every previous
 	-- wording carried one and it drifted every time a fix was retired or added
 	-- (68 -> 66 after F24/F28 went `wontfix`, 67 after F83). If launch prep puts

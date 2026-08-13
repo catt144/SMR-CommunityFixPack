@@ -1,21 +1,27 @@
-# `metadata.lua` strings ×2 — drafted, NOT applied
+# `metadata.lua` strings ×2 — drafted, and the corrections APPLIED
 
 **Built 2026-08-13 by `agent/prompts/public-docs/03_BUILD_STORE.md` (Job 4).**
 Full pages: `STORE_FIXPACK.md` · `STORE_OPTIN.md`.
 
-⛔ **NOT APPLIED, deliberately.** `metadata.lua` is code, and this chain's scope
-fence (`prompts/public-docs/README.md`) excludes code. These strings are routed
-to the **release-prep pass** — the same pass that bumps the version, refreshes
-`last_changes` and adds the `ignore_files` patterns (checklist 23), so the file
-is opened once rather than three times.
+✅✅ **APPLIED 2026-08-13 ON THE OWNER'S INSTRUCTION** (*"yes fix that"*), after
+they were told the live fix-pack string carried a false claim. The scope fence
+excludes code, so this was an owner call and not an agent's — text-only fields,
+no behaviour, no version bump. **What shipped is below and is what is in the two
+`metadata.lua` files now.**
 
-⚠️ **Both live `description` fields are wrong today**, which is why this is
-routed rather than merely drafted:
+⚠️ **The drafts as first written carried two of the same defects the six sweeps
+found in the pages**, and were corrected before being pasted: *"Every fix targets
+a defect…"* (two of the five judgment calls are not code-contradiction) and
+*"what it writes is inert without it"* (the restored bonus is deliberately not
+inert). ⇒ **A string drafted from the same source as a page inherits the page's
+defects.** Anything else drafted here needs the sweeps before it ships.
 
-| file | what is wrong now |
+**What was wrong before the change, for the record:**
+
+| file | what was wrong |
 |---|---|
-| fix pack `metadata.lua` | *"Individual fixes can be disabled on PC (via the console or a companion mod)"* — **the console half is false** (`PUBLIC_DOCS_DESIGN.md` §9.1, owner-caught). It also names the sibling mod by its **dead working title**, *"Community Opt-In Pack"*; the decided name is *"Community Fix Pack: Opt-In Modules"* |
-| opt-in `metadata.lua` | accurate, but pre-dates the tiering and does not match tier 0 |
+| fix pack `metadata.lua` | *"Individual fixes can be disabled on PC (via the console or a companion mod)"* — **the console half is false** (`PUBLIC_DOCS_DESIGN.md` §9.1, owner-caught). It also named the sibling mod by its **dead working title**, *"Community Opt-In Pack"*; the decided name is *"Community Fix Pack: Opt-In Modules"* |
+| opt-in `metadata.lua` | one clause of the uninstall instruction was incomplete in the way that costs a player their save — corrected in place; the rest is accurate but pre-dates the tiering |
 
 ⚠️ Neither string was counted against a store character limit; release prep
 checks Paradox Mods' and Steam's limits before pasting.
@@ -30,20 +36,25 @@ checks Paradox Mods' and Steam's limits before pasting.
 > game's own code rather than rebalancing the game, and it is safe to add to a
 > save you have already played.
 
-**`description`** (the metadata blurb, not the mod page):
+**`description`** — ✅ **as shipped** (the metadata blurb, not the mod page):
 
-> Bug fixes for Surviving Mars: Relaunched. Every fix targets a defect verified
-> in the game's own code — the code says one thing, does another, and the fix
-> makes it do what it says. No rebalancing and no redesigns: preferences and
-> features live in a separate mod, Community Fix Pack: Opt-In Modules, and
-> neither mod needs the other. Nothing is patched on disk; the mod wraps the
-> game's own code at runtime and no game files are modified. Safe to add to a
-> save you have already played: the pack writes almost nothing into your
-> savegame, what it writes is inert without it, and removing the pack simply
-> lets the original bugs come back. Every fix checks the game's code before it
-> patches anything and stands down if an official patch changes what it was
-> written for. Five of the fixes are judgment calls rather than plain repairs,
-> and the mod page says which and why.
+> Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect
+> verified in the game's own code — the code says one thing, does another, and
+> the fix makes it do what it says. It fixes bugs rather than rebalancing the
+> game: preferences and features live in a separate mod, Community Fix Pack:
+> Opt-In Modules, and neither mod needs the other. Nothing is patched on disk;
+> the mod wraps the game's own code at runtime and no game files are modified.
+> Safe to add to a save you have already played — the pack writes almost nothing
+> into your savegame, and removing it simply lets the original bugs come back.
+> Every fix checks the game's code before it patches anything and stands down if
+> an official patch changes what it was written for. Five of the fixes are
+> judgment calls rather than plain repairs, and the mod page says which and why.
+
+⛔ **The per-fix disable claim is simply gone**, rather than corrected in place.
+The accurate version needs a modder's identifier to be useful, and the blurb has
+no room to say "a companion mod that loads before this one, and there is no
+in-game switch on any platform". The mod page carries it; the blurb does not
+raise it.
 
 ## Opt-in modules — `SMR_CommunityOptInPack`
 
@@ -68,18 +79,39 @@ checks Paradox Mods' and Steam's limits before pasting.
 > on disk: the mod wraps the game's own code at runtime, and a module you leave
 > off behaves exactly like the unmodded game. Works with or without the
 > Community Fix Pack — neither needs the other. One thing to know before you
-> ever uninstall: set both drone dials back to base first, because a dial left
-> off base leaves its boost in the savegame.
+> ever uninstall: set both drone dials back to base and then save, because
+> setting them to base clears the boost from the colony you are playing and
+> saving is what clears it from the file.
+
+⛔ **That last sentence was corrected 2026-08-13 and the correction is the point
+of this whole file.** As first drafted it said *"set both drone dials back to
+base first"* and stopped there — which is the instruction that does **not** save
+the player's save. Anyone pasting this draft must paste the corrected form.
 
 ---
 
+## What was actually changed in each file
+
+| file | field | change |
+|---|---|---|
+| `SMR-BugFixPack/metadata.lua` | `description` | **replaced.** Removed the false *"disabled on PC (via the console…)"* claim and the dead working title *"Community Opt-In Pack"*; rewritten to tier 0 + the four gating answers in miniature |
+| | `short_description` | **replaced** with the tier-0 sentence |
+| `SMR-OptInPack/metadata.lua` | `description` | ⭐ **one clause fixed, and it is the consequential one.** It read *"Set both Drone dials back to base before uninstalling"* — the same incomplete recipe sweep 4 caught on the page. **Setting the dials to base clears the running colony; only saving clears the file.** Now says both steps |
+| | `short_description` | **unchanged** — accurate as written (*"all off or at base"*), and it predates nothing |
+
+⚠️ **The opt-in `description` was NOT swapped for the draft below.** The live
+string is post-split, accurate and good; replacing it wholesale would have been
+change for its own sake, and the draft's improvements (a tier-0 lede, the
+second-sun clause saying the module ships the panel repair too) are worth having
+but are release-prep's call alongside the display-name and preview-art pass.
+
 ## Notes
 
-* The opt-in `description` above keeps the live string's structure and its
+* The opt-in `description` draft below keeps the live string's structure and its
   uninstall warning almost intact — the live one was written after the split and
-  is good. What changes: the lede matches tier 0, the second-sun clause says
-  what the module actually ships (the limit **and** the panel repair), and the
-  Mod Options path is spelled out.
+  is good. What it would change: the lede matches tier 0, the second-sun clause
+  says what the module actually ships (the limit **and** the panel repair), and
+  the Mod Options path is spelled out.
 * ⛔ **No count of fixes in either string**, per `PUBLIC_DOCS_DESIGN.md` §4.4.
   `last_changes` is where a count may live if release prep wants one, and it is
   recounted with `--emit-counts` in the same commit — never copied from prose.
