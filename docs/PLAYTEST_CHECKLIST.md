@@ -167,8 +167,19 @@ owed input stays here no matter how struck-through it looks.
     is now archived in the repo (it was load-bearing and only on the rotation).
     **Still yours, none blocking: the display name (launch prep) · whether the
     modules stay OFF by default (design recommends OFF, build took OFF — one
-    line either way) · whether the new repo gets a GitHub remote (it is local
-    git until you say).** The re-tick minute is spent; nothing else is owed.
+    line either way).** The re-tick minute is spent; nothing else is owed.
+    ✅ ~~whether the new repo gets a GitHub remote~~ **DECIDED 2026-08-13, your
+    ruling: PUBLIC, same as the fix pack.** Live at
+    `github.com/catt144/SMR-CommunityOptInPack` — all 6 commits pushed, tree
+    clean, `git pull` resolves (so the D13 chain's staleness check reads it
+    without tripping). ⚠️ **One thing that came out of doing it, and it is not
+    caused by it:** your Windows username and Steam ID are in the public docs of
+    BOTH repos (`agent/facts/EF-050.md:15` and `PLAYTEST_HELP.md:593` carry
+    `C:\Users\stkot\Saved Games\...\76561198020568696\`, and a SteamID64 resolves
+    to your Steam profile). The fix pack has been public with that string for a
+    while, so the opt-in repo duplicates the exposure rather than creating it.
+    Say the word and I scrub both in one pass — the paths document nothing that
+    `%USERPROFILE%\Saved Games\...\<steam-id>` would not.
 
 ### ⭐⭐ NEW 2026-08-12 — THE SAVE-RESCUE ARTIFACT: three calls, and the derivation is done
 

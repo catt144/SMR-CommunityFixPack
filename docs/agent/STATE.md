@@ -15,7 +15,7 @@ C42/F99/F80/F96-R2 → post-release WATCH. ⇒ **NEXT — release front only:**
 consumed; every matrix verdict re-derived from archived logs, save contract held,
 no-retraining test PASSED). A SECOND MOD EXISTS: `C:\Dev\SMR-OptInPack`**
 (`SMR_CommunityOptInPack` / `SMROptInPack` / `[CommunityOptInPack]`; junction
-installed, LOCAL git — no remote unasked; D01-D07/D09/D12 → tombstones here;
+installed, public remote `catt144/SMR-CommunityOptInPack` 08-13; D01-D07/D09/D12 → tombstones here;
 ⛔ this pack has NO Mod Options page — correct, and neither does the fix pack).
 ⇒ **NEXT = `agent/prompts/d13-rescue/02_FABLE_QA.md`** ∥ `unattended-3`.
 ① **D13 chain** — ⭐ **DERIVATION LANDED (prompt 1 CONSUMED 08-12; draft
@@ -56,5 +56,5 @@ F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
   (D13); re-enable is owner-only. ⚠️ **EF-051 ON HOLD — Steam Cloud ON (owner
   08-12, temporary):** say "deleted, listing verified", NEVER "gone"; `CP60RT` +
   `Autosave Sol 311` HELD.
-- **Owner decisions open: 7** — relabel WORDING · **D13 ×3 (player story · mod-shaped confirm · ⛔ 3 ungated GT bodies — checklist 17-19)** · opt-in DISPLAY NAME · opt-in default-OFF ratification (built OFF) · new repo's GitHub remote.
+- **Owner decisions open: 6** — relabel WORDING · **D13 ×3 (player story · mod-shaped confirm · ⛔ 3 ungated GT bodies — checklist 17-19)** · opt-in DISPLAY NAME · opt-in default-OFF ratification (built OFF). ✅ Opt-in remote DECIDED 08-13: public.
 - **Release** — now **TWO** products, each with its own metadata/description/preview/portal pass; `archive/MOD_DESCRIPTION.md` FROZEN, rebuilt at prep.

@@ -1,9 +1,12 @@
 # D13 — the authoritative exposed-set derivation (chain prompt 1 draft)
 
-**Status: DRAFT. Prompt 2 (`02_FABLE_QA.md`) is its adversarial gate; prompt 3
+**Status: DRAFT, QA-CORRECTED (prompt 2, Fable, 2026-08-13 — verdict: BUILD
+with MUST-FIXes, every fix applied in place below, tagged `[QA 2026-08-13]`).
+Membership survived an independent re-derivation with ZERO differences; the
+corrections are dispositions, counts and cites, not members. Prompt 3
 promotes the corrected version to `agent/reports/D13_EXPOSED_SET.md`.** Nothing
-here may be cited as "complete" — that word belongs to prompt 2's verdict and
-prompt 5's re-derivation (prompt 1 constraint).
+here may be cited as "complete" — that word belongs to prompt 5's
+re-derivation (prompt 1 constraint).
 
 Derived 2026-08-12 at fix-pack `155869a` / opt-pack `a90d128` / TestKit
 `62f03da` (staleness check run; all three clean, all three at the commits this
@@ -31,8 +34,8 @@ source:
 | table-slot write | `<t>[<k>] =` | 66, of which **2** store a function value |
 | global assignment | `SetGlobal(` / `_G[…] =` / `rawset(_G` | **17** distinct replaced globals |
 | preset-field write | function-value assignment to a non-local target | **1** (`like.Condition.eval`) |
-| own thread | `CreateGameTimeThread` / `CreateRealTimeThread` / `GlobalGameTimeThread` / `MakeThreadPersistable` | **6 GT sites, 2 RT sites** |
-| route (c) named state | `SMRFixPack_*` / `SMROptInPack_*` token sweep | **14** distinct persisted names + 2 non-persisted option tables |
+| own thread | `CreateGameTimeThread` / `CreateRealTimeThread` / `GlobalGameTimeThread` / `MakeThreadPersistable` | **6 GT sites, ~~2~~ 3 RT sites** `[QA 2026-08-13: fix 00_Core:498 + opt 00_Core:498 + Fix_MilestoneCrash:40]` |
+| route (c) named state | `SMRFixPack_*` / `SMROptInPack_*` token sweep | ~~**14**~~ **16** distinct persisted names (15 rows; the `F35_<label>` family counted once, D15 counted as two) + 2 non-persisted option tables `[QA 2026-08-13]` |
 
 ### 1.2 The instrument
 
@@ -562,8 +565,10 @@ field is a no-op; the counts simply read zero on the second load). That keeps
   write any `SMRFixPack_*`/`SMROptInPack_*` name — it only *removes* them.
 * **Third junction**, installed the same way as the opt pack's, so `EF-055`'s
   agent-side pull works for its own verification legs. Local git, **no remote
-  unasked** (the opt-pack precedent; the owner's GitHub-remote decision is
-  already open on the checklist).
+  unasked** — ⚠️ **and the opt-pack precedent has since MOVED: the owner ruled
+  its remote PUBLIC on 2026-08-13** (`github.com/catt144/SMR-CommunityOptInPack`).
+  That ruling was for THAT repo and does not carry to this one; a third public
+  repo is still its own ask, and the rule as written stands.
 * **Scaffolding depth — deliberately LESS than the opt pack's.** It needs:
   `metadata.lua`, `Code/00_Core.lua` (a much smaller one — registry + log +
   `Require`; **no** Mod Options page, **no** `optional` machinery, **no**
