@@ -117,7 +117,7 @@ around it. (r0) and (r-restore) still run.
 | repo | sha | what |
 |---|---|---|
 | **`C:\Dev\SMR-CommunitySaveRescue`** (NEW) | `1b88a47` + `aaff837` | the artifact. `metadata.lua` · `Code/00_Core.lua` · `Code/10_SaveRescue.lua` · `README.md` · `CLAUDE.md` · `docs/PROVENANCE.md` · MIT `LICENSE`. Public remote `catt144/SMR-CommunitySaveRescue`, **pushed**. Parse sweep 3/3 OK |
-| `C:\Dev\SMR-BugFixPack-TestKit` | `b0c9d91` | `Code/65_Probes_Rescue.lua` (6 probes) · `RescueStatus`/`RescueMissing` · the third `RunAll` gate line · README. **PARSE SWEEP: 19/19 OK, 0 FAIL** |
+| `C:\Dev\SMR-BugFixPack-TestKit` | `b0c9d91` + `da432f8` | `Code/65_Probes_Rescue.lua` (6 probes) · `RescueStatus`/`RescueMissing` · the third `RunAll` gate line · README. **PARSE SWEEP: 19/19 OK, 0 FAIL** |
 | `C:\Dev\SMR-BugFixPack` | this commit | `agent/reports/D13_EXPOSED_SET.md` (promoted + §10 spec) · the count sweep · D13/F86/EF-023/FIX_POLICY · STATE · checklist 26 |
 
 Ids, all owner-ratified: `SMR_CommunitySaveRescue` · global `SMRSaveRescue` ·
@@ -200,8 +200,19 @@ for `PostLoadGame` could never sample the pass. Drive it directly:
 ⚠️ **The six new probes never touch the real save** — they stub a synthetic city
 and colony through `WithGlobals` first, because a forced pass on a live colony
 would really strip its timestamps and really take a Drone dial's boost off the
-session in progress. ⛔ **Keep that property in any probe you add.** In
-particular the dead-meteor restart is deliberately NOT exercised by the suite:
+session in progress. ⛔ **Keep that property in any probe you add**, and note
+**both interlocks** (`da432f8` — one of them was missing on the first cut, found
+by re-reading rather than by running):
+
+* `g_RainDisaster = false` is stubbed by a `stubs()` helper **no probe may
+  bypass**. The rain heal reads that global from the REAL session and then looks
+  its entry up in the stubbed `RainsDisasterThreads` — a rain actually falling
+  resolves to "no entry, known type", the exact stale-ACTIVE shape, and the heal
+  would fire vanilla's `FinishRainProcedure` at the live weather.
+* `MainMap = false` is passed wherever the meteor half is not the subject, so
+  its designed-silence guard declines.
+
+In particular the dead-meteor restart is deliberately NOT exercised by the suite:
 proving it costs a real 35-115 h re-roll. **That leg is yours, on a fixture.**
 
 ### Fixtures — one class exists, one must be manufactured
