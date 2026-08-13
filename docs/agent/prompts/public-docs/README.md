@@ -32,9 +32,13 @@ for work that runs BESIDE it.
    checklist 17 decided the artifact's SHAPE (option (c), 2026-08-13) but
    recorded ⛔ **"build ≠ publish"** in the same breath. Write the section's
    skeleton; leave the artifact's name, link and publish status as a marked hole.
-2. **Anything downstream of checklist 19** (the 3 ungated GT bodies). If the
-   owner rules that they get exits, that is a code change to the fix pack, and
-   until then no doc may describe those threads' uninstall behaviour.
+2. ~~**Anything downstream of checklist 19** (the 3 ungated GT bodies).~~
+   ✅ **UNBLOCKED 2026-08-13, same day this chain was authored:** the owner ruled
+   GO and the three gates were built in-pack (`Fix_CrystalMysteryHang`,
+   `Fix_ExtenderFlapChurn`, `Fix_TrackConnectorPingPong`), with the four
+   modules' save-footprint disclosure rewritten and counts unchanged. ⚠️ **Do not
+   inherit that summary** — re-read the entries and the checklist item before
+   any uninstall sentence rests on it.
 ⚠️ Also note `STATE.md` sequences MOD_DESCRIPTION as release item ③, AFTER D13
 (①) and the combined sitting (②). This chain does not overturn that: it does the
 work ③ needs so ③ becomes assembly rather than authoring. **It may not lift the
@@ -55,6 +59,16 @@ prettier and more findable.
 start, never generated from agent docs. ⚠️ And `docs/` root is doccheck-enforced
 against `docs/README.md`'s map (folder contract), so a new player-docs folder
 CANNOT simply be dropped in `docs/` — placement is prompt 1's Job 2 to propose.
+
+## ✅ Platform: DECIDED 2026-08-13 — GitHub Pages
+
+Owner ruling, after the alternatives were priced against the peer GitBook site.
+A working scaffold is committed: **`public-site/`** (MkDocs + Material —
+sidebar tree, `Ctrl K` search, right-hand page TOC, dark/light, callouts) with
+`.github/workflows/publish-site.yml` to build it. ⛔ **The workflow is
+`workflow_dispatch` only and Pages is not enabled**, so nothing is on the public
+web; the four pages in `public-site/content/` are LAYOUT SPECIMENS that say so
+on their own face. ⚖️ **Still open: which repo hosts it** — prompt 1 Job 2.
 
 ## Binding chain rules
 

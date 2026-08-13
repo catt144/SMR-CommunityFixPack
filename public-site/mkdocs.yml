@@ -1,0 +1,73 @@
+# Community Mods docs site — MkDocs + Material.
+#
+# ⛔⛔ THE EXPOSURE GATE IS THIS ONE LINE: `docs_dir: content`.
+#     The build reads ONLY public-site/content/. The repo's docs/ folder — which
+#     holds the entire agent corpus and PLAYTEST_CHECKLIST.md with the owner's
+#     personal notes, save names and open decisions — is NEVER an input. Do not
+#     add a second docs_dir, do not symlink into docs/, do not "just include"
+#     one agent file. Player-facing content is WRITTEN for players, here.
+#
+# ⚠️ PORTABLE BY DESIGN. This folder is self-contained so it can move to its own
+#    repo with a `git mv` + push when the owner rules on topology (see
+#    docs/agent/prompts/public-docs/README.md). Nothing outside this folder is
+#    referenced, and nothing here is referenced from the mod.
+#
+# LOCAL PREVIEW (optional, needs one install):
+#     python -m pip install mkdocs-material
+#     python -m mkdocs serve -f public-site/mkdocs.yml
+#   then open http://127.0.0.1:8000 . The GitHub Actions build needs none of
+#   this — it installs its own copy.
+
+site_name: Community Mods for Surviving Mars
+site_description: Bug fixes and optional modules for Surviving Mars: Relaunched.
+docs_dir: content
+
+theme:
+  name: material
+  language: en
+  palette:
+    # dark first, matching the game and the peer sites players already read
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  features:
+    - navigation.instant      # no full page reload between pages
+    - navigation.tracking
+    - navigation.sections     # the left tree, like the peer site's sidebar
+    - navigation.top
+    - toc.follow              # the right-hand "on this page" rail
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - admonition                # the coloured Note/Warning callouts
+  - attr_list                 # the .md-button links on the landing page
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details          # `???` collapsible entries (the fix list)
+  - pymdownx.superfences
+  - pymdownx.keys             # ++ctrl+k++ renders as key caps, not literal text
+  - pymdownx.tabbed:          # the `=== "Tab"` blocks on the landing page
+      alternate_style: true
+  - tables
+
+nav:
+  - Start here: index.md
+  - Installing: install.md
+  - Is my bug fixed?: fix-list.md
+  - Questions: faq.md
+
+# No analytics, no trackers, no external fonts beyond the theme's own.

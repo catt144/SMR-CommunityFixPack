@@ -49,35 +49,41 @@ decide the surface set on that basis rather than by copying the pattern.
 
 ---
 
-## Job 2 — where it lives, and the exposure gate
+## Job 2 — ✅ PLATFORM DECIDED; what is left is TOPOLOGY
 
-⛔ **Re-read the README's exposure hazard. `docs/` is not publishable.** Also
-confirm from `tools/doccheck.py` that `docs/` root membership is enforced against
-`docs/README.md`'s map, so a new player-docs folder needs an explicit home.
+⭐ **The owner ruled GitHub Pages on 2026-08-13. Do not re-open it.** A working
+scaffold already exists at `public-site/` (MkDocs + Material, deploy workflow at
+`.github/workflows/publish-site.yml`, manual-trigger only). Your job is the
+question the scaffold deliberately left open.
 
-Evaluate and **recommend one**, with the owner's actual constraints weighted:
-they work through agents, in markdown, in-repo, with doccheck as the gate; and
-they have said GitHub "can look really confusing to a lot of people".
+⛔ **Re-read the README's exposure hazard first.** The scaffold enforces it two
+ways — `docs_dir: content` in `mkdocs.yml`, and a build step that FAILS if that
+line changes or any path escapes `public-site/`. Keep both. `docs/` root
+membership is separately enforced by doccheck against `docs/README.md`'s map,
+which is why the site sits at repo root rather than inside `docs/`.
 
-* **GitHub Pages from a dedicated in-repo folder** (e.g. a root `site/`), with a
-  docs theme that gives a sidebar + client-side search. Markdown, agent-
-  maintainable, doccheck-coverable, free, no external account, one URL.
-  ⚠️ Requires the folder to be provably free of agent material — the exposure
-  gate becomes a build-time check, and prompt 4 should mechanise it.
-* **GitBook**, which is the proven pattern in this exact community — the peer
-  mod `Rx - Mars Framework` links from its Paradox description to
-  `dash-mods.gitbook.io`, whose sidebar (Install/Update/Loadorder · Guide and
-  Gameplay · Buildings & Technologies) is a working model of what players use.
-  Polished with zero CSS work; costs an external account and a sync path.
-* **A GitHub wiki**, or **no site at all** (store description only, which is what
-  most small mods do and is a legitimate answer if the fix list can be made to
-  fit some other way).
+**⚖️ THE OPEN QUESTION — which repo hosts the site?** It is genuinely open and it
+is the owner's:
 
-⭐ **Answer the owner's actual worry**, which is not "which tool" but *"will a
-player land somewhere that looks like a code repository and bounce?"* A bare
-GitHub repo front page absolutely does that. A Pages site or a GitBook does not.
-Whatever you recommend, the test is: **paste the URL to someone who has never
-seen a repo — do they know what to do in five seconds?**
+* **Stay in the fix pack repo** (where the scaffold is now). Zero new repos.
+  ⚠️ But this repo IS the mod — the junction points the game's Mods folder at it,
+  so the site ships inside the fix pack's folder and counts toward what gets
+  packaged for the portal. And the URL reads
+  `catt144.github.io/SMR-CommunityFixPack/` for a site that also documents the
+  opt-in pack, which is lopsided.
+* **Its own repo** (e.g. `SMR-CommunityMods`) — ⭐ **the recommendation.** One
+  site serving BOTH shipped mods and the D13 rescue artifact when it lands; a
+  neutral URL; nothing ships inside either mod; and the exposure gate becomes
+  structural rather than configured, because a docs-only repo has no agent
+  corpus to leak. This is also the peer pattern: "Dash's Vault" is one site with
+  a mod tree under it, not a site per mod. Cost: 15 seconds of owner time, and
+  the scaffold moves with a `git mv` — it was built self-contained for exactly
+  this.
+
+⚠️ **Verify before recommending:** whether extra root folders actually reach the
+uploaded package. `Mod.lua:490-521` proves they cannot be LOADED (only files
+listed in `metadata.lua` `code` execute), but "inert at load" and "not in the
+upload" are different claims and only the first is proven.
 
 ---
 
