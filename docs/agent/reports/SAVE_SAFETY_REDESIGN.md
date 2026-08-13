@@ -1,5 +1,17 @@
 # Save-safety redesign — the F86 remedy
 
+> ⛔⛔ **EVERY EXPOSED-SET COUNT IN THIS FILE IS SUPERSEDED (2026-08-13).** The
+> authoritative enumeration is **`agent/reports/D13_EXPOSED_SET.md`**, derived
+> from source over BOTH shipped trees with no inherited count: **27 sites = 12
+> capturable-code + 15 persisted-data**, every one dispositioned (§7 there).
+> This file's "12" and "at least 13" were open lower bounds over capturable CODE
+> in the fix pack only, taken before Tiers 1/2 changed the set from underneath
+> them; the like-for-like figure is now **12**, and §4.1 of that report
+> reconciles this file's list module by module, in both directions. ⚠️ The
+> *reasoning* below is not superseded — the layer doctrine, the disposition
+> method and the sweep's evidence all stand, and D13 was built on them. Only the
+> numbers moved. Inline marks below tag each site.
+
 **Status: DECIDED and the BUILD IS AUTHORISED (owner, 2026-07-31). The layer
 ordering is ADOPTED and lives in `FIX_POLICY.md` §3a as a hard rule. The sweep
 has RUN and is discharged (§5). The authorised build is §6 — Tiers 1 and 2,
@@ -12,7 +24,8 @@ this file is the *how*.
 > ✅ **THE SWEEP IS COMPLETE — §5, BOTH HALVES. Decision 2 is discharged and
 > nothing further is owed on it.**
 > - **Exposed set (§5.3):** one module was missing from the list and one never
->   belonged on it; **five of the twelve have a layer-3 or layer-2 route out**, so
+>   belonged on it; **five of the twelve have a layer-3 or layer-2 route out**
+>   `[count superseded 2026-08-13 — D13_EXPOSED_SET.md]`, so
 >   only four own-thread modules plus `BombardmentSpread` are candidates for the
 >   dangerous layer 1.
 > - **Non-exposed set (§5.4, all 22):** **6 convert cleanly to a chained
@@ -55,7 +68,8 @@ Two properties make this tractable rather than terrifying:
   engine frame, or stored in persisted state, also enters the save.
   `Fix_CaveInsNoDisasters` is capturable today via the engine's periodic-repeat
   `info` local (inert — layer-2 shape; no build needed), which makes the
-  exposed-set count **at least 13** and proves the method grep blind to
+  exposed-set count **at least 13** `[superseded 2026-08-13 —
+  D13_EXPOSED_SET.md: 12 code + 15 data]` and proves the method grep blind to
   slot/global/preset assignments. `docs/reports/F86_ADJUDICATION.md` §3.1/§5.1.
 - **Real-time threads are not persisted at all.** `00_Core`'s update-report
   thread is a `CreateRealTimeThread` and is already fine.
@@ -185,7 +199,7 @@ A/B plus a long-interval soak.
 
 ---
 
-## 3. Per-module disposition (12 exposed — membership corrected BOTH ways by the sweep: see §4a for the addition and §5.2 for the removal)
+## 3. Per-module disposition (~~12 exposed~~ — membership corrected BOTH ways by the sweep: see §4a for the addition and §5.2 for the removal) `[⛔ denominator superseded 2026-08-13 — the complete, authoritative per-site disposition table is D13_EXPOSED_SET.md §7: 27 sites, both trees]`
 
 > ⭐ **A 14th site was approved in 2026-08-02 and did not materialise — see §8.**
 > C23 item 1 (`F97`) was owner-approved *with* a mod-owned sleeping game-time
@@ -355,7 +369,7 @@ Names with a mix are reported AMBIGUOUS and read by hand against the specific
 class we patch. That gives **633 of 15,106 names yielding directly**, which is a
 believable figure, and every ambiguous case resolved cleanly.
 
-### 5.2 ⚠️ The exposed set is ~~12~~ **at least 13 (adjudication 2026-07-31)**, and the membership changed BOTH ways
+### 5.2 ⚠️ The exposed set is ~~12~~ ~~**at least 13 (adjudication 2026-07-31)**~~ **12 code + 15 data over both trees (D13_EXPOSED_SET.md, 2026-08-13)**, and the membership changed BOTH ways
 
 > ⚠️ **Adjudication correction:** `Fix_CaveInsNoDisasters` is capturable (live
 > `info` local in the engine's periodic-repeat loop while the yielding
@@ -384,7 +398,7 @@ The count returns to 12, but it is not the original 12:
 > whether the function can be on the stack while the thread is blocked — which
 > means reading what it *calls*, transitively.
 
-### 5.3 Result — 5 of the 12 have a layer-3 or layer-2 route out
+### 5.3 Result — 5 of the 12 have a layer-3 or layer-2 route out `[denominator superseded 2026-08-13 — D13_EXPOSED_SET.md §4.1]`
 
 Every "input" named below was checked and is **synchronous**, so each is a
 legitimate layer-3 target rather than a guess.

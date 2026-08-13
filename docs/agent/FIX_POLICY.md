@@ -300,12 +300,20 @@ failure is:
 **This binds new fixes as well as repairs.** Anything that replaces a blocking
 body, wraps a command method, or creates its own game-time thread must state in
 its header which layer it is on and why. Full analysis, the exposure list
-(**13** after two same-day membership corrections — `DroneUnreachableForever`
+(~~**13** after two same-day membership corrections — `DroneUnreachableForever`
 in, `TrainCargoDumping` out, compliant `CaveInsNoDisasters` counted;
 **re-derived 2026-08-01 by the five-shape Phase-1 enumeration, which confirmed
 the 13 and classified one additional inert route-(c) preset-field site** —
 `Fix_LastTransmissionStorage`'s `Condition.eval`, disclosed-no-build,
-adjudication §4.4) and the per-module disposition:
+adjudication §4.4~~ ⛔ **SUPERSEDED 2026-08-13 — the authoritative figure is
+`agent/reports/D13_EXPOSED_SET.md`: 27 sites over BOTH shipped trees = 12
+capturable-code + 15 persisted-data. The "13+1" was an open lower bound over
+capturable CODE in the fix pack only; the like-for-like number is 12, and §4.1
+there reconciles the difference row by row in both directions. The 15
+persisted-data sites were never on any exposure list at all — the historical
+enumeration key was a key for code, not for state**) and the per-module
+disposition: **`agent/reports/D13_EXPOSED_SET.md` §7** (complete, every site
+called), with the older analysis at
 `docs/agent/reports/SAVE_SAFETY_REDESIGN.md` and `agent/bugs/F86.md`.
 
 ## 4. Only fix proven, reachable, UNINTENDED defects

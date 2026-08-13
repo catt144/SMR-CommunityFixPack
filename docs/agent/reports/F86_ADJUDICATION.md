@@ -287,7 +287,11 @@ frame. **What breaks is the bookkeeping, not the build:**
   `Fix_FirstAsteroidPrefabs` persists one boolean GameVar;
   `Fix_LastTransmissionStorage`'s preset-eval write is the one residual —
   §4.4). The practical scope survives; the *rule* and the *count* do not.
-- **The exposure list is at least 13 by its own definition** (it already counts
+- **The exposure list is at least 13 by its own definition** `[⛔ COUNT
+  SUPERSEDED 2026-08-13 — `agent/reports/D13_EXPOSED_SET.md` derives 27 sites
+  over BOTH shipped trees (12 capturable-code + 15 persisted-data) and closes
+  this open bound; the reasoning in this bullet — that the bound is open and the
+  grep structurally blind — is exactly what that derivation confirmed]` (it already counts
   the compliant `Fix_ShelterReflex`); `Fix_CaveInsNoDisasters` belongs on it
   with disposition "compliant — no work". And the enumeration method is proven
   incomplete: the sweep's key (`grep 'function C:m('` over `Code/`) structurally
@@ -541,7 +545,8 @@ in the redesign doc.
    (§4.2, probe already armed). Record both in ENGINE_FACTS.
 2. **Land the rule corrections** — done in this commit: capture rule
    (ENGINE_FACTS + FIX_POLICY §3a), exposure count ≥13 with CaveIns compliant
-   (BUGS F86 + redesign §5.2), BombardmentSpread harm (redesign §6.3).
+   `[superseded 2026-08-13 — D13_EXPOSED_SET.md]` (BUGS F86 + redesign §5.2),
+   BombardmentSpread harm (redesign §6.3).
 3. **File the per-load restart** as its own F-number (recommendation D1), fix
    delivered by the F02 rewrite.
 4. **Build Tier 1 with two spec amendments:** `Fix_MeteorFrequency` — layer-3

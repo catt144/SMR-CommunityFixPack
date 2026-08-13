@@ -198,7 +198,7 @@ shape and can **undo the official fix**. Written into FIX_POLICY §1 in `0fb7f31
 
 ## 3. The sweep result (owner decision 2, discharged)
 
-### 3.1 Exposed set — 5 of 12 have a route out
+### 3.1 Exposed set — 5 of 12 have a route out `[⛔ DENOMINATOR SUPERSEDED 2026-08-13 — `agent/reports/D13_EXPOSED_SET.md`: 27 sites over both trees (12 capturable-code + 15 persisted-data), each with a recorded disposition in §7]`
 
 Every "input" named was separately checked and is **synchronous**.
 

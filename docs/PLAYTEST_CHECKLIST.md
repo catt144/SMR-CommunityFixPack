@@ -193,7 +193,9 @@ authoritative exposed-set derivation over BOTH shipped mods, from source, no
 inherited count. **27 sites, every one with a disposition.** These three are
 yours. Items 17 and 18 were reserved for you on the entry; item 19 is new and
 is the one thing the derivation found that I will not decide alone.
-Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
+Reasoning for all three: **`agent/reports/D13_EXPOSED_SET.md`** (promoted
+2026-08-13 to its permanent home — the chain folder it was drafted in is
+deleted when the chain closes).
 
 17. ✅ **DECIDED 2026-08-13, your ruling: (c) — the packs are their own
     cleaner; the artifact serves ONLY the already-uninstalled.** You first
@@ -287,6 +289,36 @@ Reasoning for all three: `agent/prompts/d13-rescue/90_DERIVATION.md`.
     step.** Our own policy bars handing this to the cleaner instead ("the
     cleaner is not a scoping escape hatch" — your words). Say go and it rides
     the chain; say no and all three get recorded as accepted residue instead.
+
+26. ⚖️ **ONE 15-SECOND ACTION, and it is the only thing standing between the
+    rescue tool and its testing: tick "Save Rescue" in the Mod Manager and
+    restart the game once.** ✅ **The tool is built and installed** — a third
+    mod, `Save Rescue`, sitting next to the other two, pushed to the public
+    repo you made for it. It removes what the two packs leave in a savegame
+    *after* they are uninstalled — above all a non-base Drone dial, which
+    otherwise keeps boosting your Drones forever with nothing left to take it
+    off. It keeps the leftovers that ARE repairs (the Wind Turbine buff), and
+    it writes nothing of its own into a save.
+    **Why I cannot do this bit:** installing a mod is a folder link and I can
+    do that; *enabling* one is your click, and by this project's own measured
+    finding a Mod-Manager change does not take effect until a **full game
+    restart** — so the next verification run cannot reach the tool at all
+    until it has been ticked once. Everything after that tick is unattended.
+    ⚠️ **Two things to know before you tick it, neither urgent:**
+    * **It is deliberately inert while the packs are installed** — it stands
+      down per mod and says so in a dialog, because an installed pack cleans
+      up after itself. So ticking it changes nothing about your normal play;
+      it will simply do nothing until a save actually needs it.
+    * **Nothing about it has been run in a game yet** — not by me, not by
+      anyone. Everything I have said about it is read off the source. That is
+      exactly what the next run is for.
+    ⚖️ **The one thing genuinely for you to decide, and it can wait for
+    release prep:** the display name is **"Save Rescue"** as you ratified it,
+    but the same day you renamed the opt-in mod to *"Community Fix Pack:
+    Opt-In Modules"* so the family sorts together in mod lists. As it stands
+    the third mod does not sort with them. Say the word and it becomes
+    *"Community Fix Pack: Save Rescue"*; say nothing and it ships as ratified.
+    No work either way — it is one line in one file.
 
 ### ⭐ NEW 2026-08-13 — public documentation: platform decided, one question back to you
 

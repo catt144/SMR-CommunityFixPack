@@ -1,12 +1,23 @@
-# D13 — the authoritative exposed-set derivation (chain prompt 1 draft)
+# D13 — the authoritative exposed-set derivation, disposition table and artifact spec
 
-**Status: DRAFT, QA-CORRECTED (prompt 2, Fable, 2026-08-13 — verdict: BUILD
-with MUST-FIXes, every fix applied in place below, tagged `[QA 2026-08-13]`).
-Membership survived an independent re-derivation with ZERO differences; the
-corrections are dispositions, counts and cites, not members. Prompt 3
-promotes the corrected version to `agent/reports/D13_EXPOSED_SET.md`.** Nothing
-here may be cited as "complete" — that word belongs to prompt 5's
-re-derivation (prompt 1 constraint).
+⭐ **THIS FILE IS THE AUTHORITATIVE RECORD.** It supersedes every count and
+per-module denominator recorded before 2026-08-13 (§4 reconciles them one by
+one, in both directions). Any doc that disagrees with it is wrong, and §4.3
+lists the ones that were corrected to match.
+
+**Lineage.** Derived by chain `d13-rescue` prompt 1 (2026-08-12) · re-derived
+independently and adversarially by prompt 2 (2026-08-13, verdict **BUILD** with
+MUST-FIXes — **membership survived with ZERO differences**; every fix is applied
+in place below and tagged `[QA 2026-08-13]`, so a struck line is history, not an
+instruction) · **promoted here unchanged by prompt 3 (2026-08-13), which added
+§10, the frozen artifact spec, and built to it.** The chain's working copy stays
+at `agent/prompts/d13-rescue/90_DERIVATION.md` until prompt 5 deletes that
+folder; this is the copy that outlives the chain.
+
+⛔ **The word "complete" belongs to prompt 5's re-derivation, not to this
+document** (prompt 1 constraint, unchanged by promotion). ⛔ **Nothing here is
+measured in a running game unless a row says MEASURED** — §10 in particular is
+design tier throughout.
 
 Derived 2026-08-12 at fix-pack `155869a` / opt-pack `a90d128` / TestKit
 `62f03da` (staleness check run; all three clean, all three at the commits this

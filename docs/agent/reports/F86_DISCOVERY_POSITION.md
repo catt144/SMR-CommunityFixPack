@@ -1,5 +1,13 @@
 # F86 — the discovery session's position, stated for adversarial review
 
+> ⛔ **EVERY COUNT IN THIS FILE IS SUPERSEDED (2026-08-13) by
+> `agent/reports/D13_EXPOSED_SET.md`** — 27 sites over BOTH shipped trees (12
+> capturable-code + 15 persisted-data), derived from source with no inherited
+> number. "12 modules" / "only 12 exposed" / "62 safe" below are this session's
+> **open lower bound**, and §3's own warning that the bound rests on an
+> untested inference is precisely what that derivation went and tested. The
+> position's *reasoning* is left intact; only its arithmetic is retired.
+
 **Written 2026-07-31 by the session that found F86 (the PT-20 leg), at the
 owner's request, to be compared against `docs/reports/F86_SESSION_FINDINGS.md` by an
 independent reviewer.**
@@ -128,7 +136,7 @@ write — and leaked anyway, because the route into the save was a **thread
 stack**, not the storage location. That is the correction that makes the filter
 necessary.
 
-## 4. The exposure list (12 modules)
+## 4. The exposure list (~~12 modules~~) `[⛔ SUPERSEDED 2026-08-13 — D13_EXPOSED_SET.md §2/§4.1: 12 capturable-code sites over both trees, plus 15 persisted-data sites this key could never see]`
 
 **INFERRED, built by grep + reading, NOT by testing each module.** Method:
 `Sleep|WaitMsg|WaitWakeup` across `Code/`, every `CreateGameTimeThread`, every
