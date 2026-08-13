@@ -452,6 +452,51 @@ than moving to the archive only because item 24's artifact is not built yet.
     can DO needs a route check, not a source citation.* The sentence had passed
     a design pass, that file's own review and a chain QA before your instinct
     caught it.
+    ⚠️ **AMENDED 2026-08-13 by the QA prompt** — you were right about the *each*,
+    and the answer we wrote back was slightly too broad in the other direction.
+    Re-reading all five modules: `F97` (dust devils) **can** be switched off from
+    the console mid-session, because it re-checks the switch every time it runs.
+    The other four cannot. **Nothing you decided changes** — the store page still
+    will not offer the console route, because it works for an unpredictable few
+    and a player has no way to tell which. Recorded so the file is not wrong.
+
+22b. ⚖️⚖️ **ONE LINE FROM YOU — a factual error inside a sentence you already
+    approved, and it points the warning at the wrong players.** ⛔ Not a
+    re-litigation: the fifth judgment-call bullet's **substance is right and
+    stays**. One phrase in it is backwards.
+    * **What it says now:** *"On the heaviest settings that means noticeably
+      more dust devils than the game has ever actually delivered."*
+    * **What the numbers say** (the per-fix rate table, re-derived from our own
+      entry): the **heaviest** setting is the one that does **not change at
+      all**. The settings that change most are the light and middle ones — about
+      half again as many devils on the common ones, and more than double on one.
+    * **How it happened:** an earlier report of ours said "the default preset is
+      untouched", the draft trusted it, and the wording drifted from the phrase
+      that was actually approved back on 08-02 — *"on **some map settings**"*.
+    * ⭐ **Recommendation: go back to "on some map settings."** It is the
+      approved phrasing, it is true, and it is shorter. **Say the word and an
+      agent strikes this line.**
+    ⚠️ **The process point, which matters more than the sentence.** This is the
+    second time in a week a decision reached you as *wording with its evidence
+    left behind* — the console line was the first, and you caught that one by
+    instinct. Nobody caught this one, because it sounded like the phrasing that
+    had already been approved. ⇒ **From now on a wording decision comes to you
+    with its evidence beside it** (here: the six-row rate table would have
+    settled it in ten seconds). That is now written into the chain.
+
+22c. ⚖️ **YES/NO — do we owe a page to the player whose game is broken and who
+    thinks it is us?** The QA review found this is the one reader our whole
+    surface plan has no home for. They arrive annoyed and want three things:
+    *is it you · how do I get you out · where do I tell you*. Today the honest
+    answer to the middle one is "remove the whole mod and restart", and it is
+    written down nowhere a player would look.
+    * **Cost:** ~1 agent hour, one short page on the site. **No cost to you**
+      beyond this yes/no.
+    * ⭐ **Why it may be worth more than it costs:** this is the reader who
+      writes the negative review, and they write it from whatever they could
+      find in five minutes.
+    * **Recommendation: yes, but as a small section rather than its own page** —
+      it is three answers, not a chapter.
 
 23. ~~**⚖️ Folders in this repo that aren't part of the mod are currently going
     into what players download — including `CLAUDE.md`.**~~ ✅ **DECIDED

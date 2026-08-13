@@ -436,6 +436,45 @@ fix*.
 > has ever delivered — in either the original or the remaster. The default
 > setting is unaffected.
 
+⛔⛔ **REFUTED BY `02_QA.md`, 2026-08-13 — THE LAST TWO SENTENCES ARE BACKWARDS.**
+Re-derived from `F97`'s own per-preset rate table (entry §"THE RATE CHANGE,
+DERIVED FOR EVERY SHIPPED PRESET"), which is the table `CHAIN_QA_REPORT.md` §4
+says the decision must be read off:
+
+| preset | chance | change |
+|---|---|---|
+| `Low` | 50 | **+50%** |
+| `High` | 75 | **+50%** |
+| `VeryHigh` | 100 | **0% — the ONLY untouched preset** |
+| `VeryHigh_1` | 75 | +25% |
+| `VeryHigh_2` | 75 | **+125%** |
+| `VeryHigh_3` | 50 | +5% |
+
+1. ⛔ **"On the heaviest dust-devil settings" is the wrong end of the scale.**
+   The heaviest shipped preset (`VeryHigh`, `spawn_chance` 100) changes by
+   **zero** — it is the one setting a player cannot notice this on. The largest
+   changes are `VeryHigh_2` (+125%) and the two light/mid presets (+50%).
+2. ⛔ **"The default setting is unaffected" does not survive either reading.**
+   If "default" means the untouched preset, that preset is `VeryHigh` — the
+   *heaviest*, which contradicts sentence 1 in the same breath. If it means the
+   class property defaults (`spawn_chance` 30, `count` 2..4 — `DustDevils.lua:8-10`),
+   those move **+170%**, the biggest change in the table. Inherited from
+   `CHAIN_QA_REPORT.md` §4's *"the default preset is untouched"*, which is a
+   recorded fact and therefore a claim (chain rule 3) — it does not hold as
+   written.
+3. ⚠️ **It also drifted from the approved relabel wording.** `CHAIN_QA_REPORT.md`
+   §4 condition (1) is *"on **some map settings** that means noticeably more dust
+   devils than the game has ever delivered"*. "Some map settings" is right and
+   "the heaviest" is not; the drift happened between the report and this draft.
+
+⇒ **Prompt 3 writes this beat from the table, not from this draft.** What the
+evidence supports, in player words: *more dust devils on most map settings, by
+roughly half again on the common ones and more than double on one of them; one
+setting is unchanged.* ⛔ The blurb's first three beats are UNAFFECTED and
+survive review — this correction touches the fourth beat only. ⛔ And §5.1's own
+standing warning still holds in the other direction: do not soften "more devils"
+into "as intended".
+
 ⭐ **Why this is the hardest case in the pack:** it is the only entry where the
 honest description of a correct repair is *"you will get more of a bad thing"*.
 The blurb refuses the word "restores" in the body (the entry proves no shipped
@@ -819,6 +858,17 @@ entries (§5's label beat):**
 >   devils than the game has ever actually delivered, in either the original or
 >   the remaster. *(restores authored settings — more devils on some maps)*
 >
+⛔⛔ **THE FIFTH BULLET CARRIES THE §5.1 ERROR AND WAS APPROVED WITH IT IN PLACE
+(`02_QA.md`, 2026-08-13).** *"On the heaviest settings that means noticeably more
+dust devils"* is the wrong end of the scale — see §5.1's refutation table. The
+approval is not re-opened and the bullet's **substance** (this restores authored
+settings; it means more devils than any shipped version delivered; it is a
+judgment call we defend) is untouched and correct. **What must change is the
+scale word**, back to the wording `CHAIN_QA_REPORT.md` §4 actually approved:
+*"on some map settings"*. ⚠️ **This is a factual correction inside an
+owner-approved sentence, so it is routed rather than applied** — checklist 22b.
+Prompt 3 does not ship either wording until that is struck.
+
 ✅✅ **APPROVED BY THE OWNER 2026-08-13, in exactly the form above** — the five
 bullets ship, and **the draft's closing line was CUT.** Checklist 22 CLOSED
 after nine days open. The five entries and their labels come from
@@ -848,7 +898,31 @@ whole of the constraint:
 ⚠️ One partial exception that proves the rule: `Fix_DustSicknessBiorobots` routes
 its **retroactive cure** through `SMRFixPack.WhenActive` (`00_Core.lua:180-188`),
 which does re-read the table mid-session — but not its ongoing behaviour. The
-other four have no mid-session path at all. ⚠️ And **none of the five live in the
+other four have no mid-session path at all.
+
+⛔ **CORRECTED BY `02_QA.md`, 2026-08-13 — it is the other THREE, and the
+exception is not partial.** Re-derived by reading all five modules:
+
+| module (`F##`) | mid-session veto route |
+|---|---|
+| `Fix_DustDevilSpawnGate` (`F97`) | ⭐ **FULL.** Its wrapper re-reads `rawget(_G, "SMRFixPack_Disabled")[FIX_ID]` on **every** descriptor call and returns the vanilla descriptor when set (`Fix_DustDevilSpawnGate.lua:332-334`). The fix becomes a pass-through from the next wave — the entry already measures uninstall self-healing "within one wave" |
+| `Fix_DustSicknessBiorobots` (`F40`) | partial — the retroactive cure only (`:167`) |
+| `Fix_DroneUnreachableForever` (`F55`) · `Fix_ShelterReflex` (`F73`) · `Fix_PayloadTemplateRefill` (`F70`) | ⛔ none. Method replacements installed at apply, no per-call veto read |
+
+⇒ **"The developer console cannot disable a fix" is too strong as a general
+claim.** The accurate statement: *the console cannot **un-apply** a fix, and for
+most fixes that is the end of it — but a fix whose effect is re-decided per call
+does honour the table mid-session, and `F97`, the one judgment call a player is
+most likely to want off, is exactly that shape.* (`Fix_MeteorFrequency.lua:168`
+is a second such fix outside the five.)
+
+⛔ **This does NOT revive the cut line, and prompt 3's instruction below is
+unchanged.** The store page still may not offer the console route, for a reason
+the correction sharpens rather than weakens: **the route works for an
+unpredictable minority and a player has no way to tell which** — `ListFixes()`
+prints status, not vetoability. An instruction that silently works for some
+fixes and not others is worse than one that is simply absent. ⇒ The rewrite
+still names the companion-mod route only. ⚠️ And **none of the five live in the
 opt-in pack**, whose Mod Options toggles are the real every-platform switch.
 `EF-002` records the general mechanism; `CHAIN_QA_REPORT.md:331` already flagged
 a related dead-console-veto gap for D03/D07, so the project half-knew.
@@ -971,10 +1045,48 @@ Routed as checklist item 25. ⛔ Nothing is rewritten unasked.
 | 1 | The rescue artifact's **name, link and publish status** | D13 + a release-time owner call ("build ≠ publish") |
 | 2 | The **uninstall-cleanliness sentence** — Reading A or B | owner, at launch, against the residual set that exists then |
 | 3 | **Load order** — we have no measured answer | prompt 4: derive one or say plainly that we have not measured it |
-| 4 | **The restart question** for opt-in toggles — the specimen and the frozen file disagree | prompt 4, from the opt-in pack's own code |
+| 4 | ~~**The restart question** for opt-in toggles~~ ✅ **CLOSED by `02_QA.md` 2026-08-13 — the FROZEN FILE IS RIGHT, the site specimen was wrong.** See below | — |
 | 5 | **Per-fix "why isn't X fixed"** answers | not drafted; needs each `wontfix` entry read individually |
 | 6 | **Entry→module mapping** (81 entries / 74 modules) | prompt 4 if a count is ever needed; §4.4 says it should not be |
-| 7 | **`.github/` vs the `*.git/*` filter** | unverifiable from `Src` (`MatchWildcard` is an engine function); resolve empirically at packaging time |
+| 7 | ~~**`.github/` vs the `*.git/*` filter**~~ ✅ **MOOT + narrowed by `02_QA.md` 2026-08-13** — the fix pack has no `.github/` any more (it left with the site), and no mod repo has one. `MatchWildcard` confirmed to have no Lua body anywhere in `Src` (one call site, no definition, no exported-doc stub), so the *general* wildcard semantics stay engine-side | see below — one narrower question survives |
 | 8 | **Store links** for the install page | do not exist until the mods are uploaded |
-| 9 | **Passes D and E screenshot state** (two suns, an asteroid with subsurface Exotic Minerals) | prompt 4 checks the save fixtures before the sitting is scheduled |
+| 9 | **Passes D and E screenshot state** (two suns, an asteroid with subsurface Exotic Minerals) | prompt 4 checks the save fixtures before the sitting is scheduled — ⚠️ **`02_QA.md` widened this: passes A/B and one Pass C shot need colony state too** (`CAPTURE_SITTING.md`, amended) |
 | 10 | **Preview art** | owner or a commission; unbounded |
+| 11 | ⭐ **NEW (`02_QA.md`) — does `SMRFixPack.ListFixes()` put anything ON SCREEN?** Its output goes `SMRFixPack.Log` → `ModLog` → `ModPrint` → `DebugPrint` (`Mod.lua:109-132`), and **nothing in `Src` routes `DebugPrint` into the visible console log** (`AddConsoleLog`/`ConsolePrint` are fed separately; both are engine exports with no Lua body). The frozen file's *"console: `SMRFixPack.ListFixes()` shows them and their status"* and §8B's `listfixes-*` shots both assume it does | one minute of the capture sitting settles it — Pass F is now written as a check, not a capture (`CAPTURE_SITTING.md`, amended). ⛔ No surface claims the console **shows** a list until that shot exists |
+
+### ✅ Hole 4, closed — the answer, with its route
+
+**Opt-in module toggles take effect immediately. No restart.** The frozen file
+(`MOD_DESCRIPTION.md:501`) is correct; the site specimen's *"then restart"* was
+not. Re-derived from the opt-in pack's own code, all eight modules:
+
+* `OnMsg.ApplyModOptions` fires when the engine loads saved options at startup
+  **and every time the player presses Apply** (opt-in `Code/00_Core.lua:400-445`,
+  citing `Mod.lua:746`, `:2170`).
+* **Seven** modules' hooks consult `IsActive` per call, so flipping a toggle
+  turns installed wrappers into pass-throughs on the next call.
+* **`Opt_MultipleSuns`** is the one that cannot work that way — a build limit is
+  read once — so it carries explicit `on_activate` / `on_deactivate` handlers
+  that flip it live (`Opt_MultipleSuns.lua:122-123`).
+
+⚠️ **SOURCE-VERIFIED, NOT PLAY-VERIFIED** — the §9.1 lesson applies to this
+answer too. The capture sitting already opens the Mod Options page (Pass C);
+**one toggle flipped and one observation converts this to measured** at zero
+extra owner cost, and the amended brief now asks for it.
+
+⛔ **A different restart claim on the same page is TRUE and must not be
+collateral damage:** enabling or disabling a **mod** in the Mod Manager needs a
+full game restart (D13; `STATE.md`). `install.md` states both, and only the
+toggle one was wrong.
+
+### ⚠️ Hole 7's narrower survivor
+
+`.github/` is gone, but the same unknown still sits under a filter we rely on:
+**whether `*` in an `ignore_files` pattern crosses `/`.** If it does not,
+`*/docs/*` filters only files sitting directly in `docs/` and the whole
+`docs/agent/` tree ships. The engine's **own default list** is the evidence that
+it does — `{"*.git/*", "*.svn/*", "*/Source/*", "*/SourceData/*"}`
+(`Mod.lua:255`) is aimed at deeply nested trees and does nothing otherwise — but
+that is an inference from the developers' intent, not a proof. ⇒ **Settle it the
+way item 23 is being done anyway:** pack once with `DbgPackMod`, list the
+archive, confirm `docs/` is absent. One command at launch prep.

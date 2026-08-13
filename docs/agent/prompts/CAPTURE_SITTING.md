@@ -25,10 +25,23 @@ captured — by file name — wherever the images land.
    so a caption never implies otherwise.
 3. ⛔ **PT-00 stale-probe sweep** if the TestKit is loaded, per the standing rule.
 4. ⭐ **Check the save fixtures FIRST and re-route anything whose state does not
-   already exist.** Passes D, E and G need real colony state (two Artificial
-   Suns; an asteroid with subsurface Exotic Minerals; a photogenic vista).
-   ⛔ **Do not ask the owner to BUILD colony state for a screenshot** — drop or
-   substitute the shot instead, and record which.
+   already exist.** ⛔ **Do not ask the owner to BUILD colony state for a
+   screenshot** — drop or substitute the shot instead, and record which.
+   ⚠️ **AMENDED 2026-08-13 (`public-docs/02_QA.md`): the original list named only
+   Passes D, E and G, and it was short by three.** The full set of shots that
+   need state the save may not have:
+
+   | shot | state it needs |
+   |---|---|
+   | `F14-before` / `F14-after` | ⭐ **a dome with colonists whose stats are actually low** — no low stats, no red highlight, and the pair has no subject at all. **Check this before Pass A**, because it is the only fixture that has to hold across *both* restarts |
+   | `F19-after` | a Command Center graph with enough history that maintenance is visibly part of "Consumed" |
+   | `optin-nohomeless-on` | a dome that actually has jobseekers in it (was already flagged inline; it belongs here) |
+   | `multiplesuns` (D) | two Artificial Suns built |
+   | `F102-signs` (E) | an asteroid with subsurface Exotic Minerals |
+   | Pass G | a photogenic vista |
+
+   `F13` needs nothing — any Command Center will do — which is why it is the
+   pair to rely on if `F14`'s fixture is missing.
 
 ## ⚠️ Why the order matters
 
@@ -59,6 +72,23 @@ still between shots so the pair matches.
 
 ⭐ **The strongest material the project has.** Take your time here.
 
+⭐⭐ **ONE FREE MEASUREMENT WHILE THE PAGE IS OPEN (added 2026-08-13, `02_QA.md`).**
+The page is already on screen for `optin-modoptions`, so this costs nothing:
+**flip one toggle, press Apply, and look at the game without restarting it.**
+`Opt_MultipleSuns` is the sharpest one — its effect (the Artificial Sun build
+limit) is visible immediately in the build menu.
+
+* **Expected:** the change takes effect at once. Source says every module has a
+  live route — seven consult their active flag per call, `MultipleSuns` carries
+  explicit activate/deactivate handlers.
+* **Why it is worth a minute:** this is a *store-page claim about what a player
+  can do*, and it is currently **source-verified and never play-verified** — the
+  exact shape of claim that has already been wrong twice on this project. Two of
+  our own documents contradicted each other on it until this week.
+* **Verdict words:** "toggle took effect without a restart" / "needed a restart"
+  / "could not tell". ⛔ Any of the three is a result; "could not tell" is not a
+  failure and must be recorded rather than retried into a better answer.
+
 | shot | frame |
 |---|---|
 | `optin-modoptions` | Options → Mod Options → the opt-in pack: 7 toggles + 2 dials on one page |
@@ -86,10 +116,36 @@ photographed a cure.
 
 ## Pass F — console, PC only
 
+⛔⛔ **REWRITTEN 2026-08-13 (`02_QA.md`): THIS IS A CHECK FIRST AND A CAPTURE
+SECOND, because we are not sure there is anything to photograph.**
+
+`ListFixes()` does not return a list — it writes lines through the pack's logger,
+which goes `ModLog` → `ModPrint` → `DebugPrint`. **Nothing in the game's Lua
+routes `DebugPrint` into the visible console log** (the console's own text comes
+from a different engine call). Both are engine functions with no readable body,
+so this cannot be settled from source in either direction — but it means the
+shot may come back empty, and a claim on two of our surfaces rests on it.
+
+**Do this, in order:**
+
+1. Open the console, type `SMRFixPack.ListFixes()`, and **look at the screen.**
+2. **If lines appear** → capture `listfixes-pack`, then `SMROptInPack.ListFixes()`
+   as `listfixes-optin`. Proceed as originally planned.
+3. **If nothing appears** → ⛔ **do not hunt for a workaround and do not stage a
+   substitute.** Record "no visible output" and move on. The shot is dropped and
+   two sentences change instead (below).
+
+⇒ **What rides on the answer.** `MOD_DESCRIPTION.md:487-488` tells players
+*"console: `SMRFixPack.ListFixes()` shows them and their status"*, and design
+report §8B plans this image as the evaluator's proof-of-liveness. ⛔ **If nothing
+appears on screen, neither ships as written** — the pack still logs what it did,
+but "shows you" would be false, and it is a claim a curious player checks in
+thirty seconds.
+
 | shot | frame |
 |---|---|
-| `listfixes-pack` | `SMRFixPack.ListFixes()` output |
-| `listfixes-optin` | `SMROptInPack.ListFixes()` output |
+| `listfixes-pack` | `SMRFixPack.ListFixes()` output — **only if step 1 showed something** |
+| `listfixes-optin` | `SMROptInPack.ListFixes()` output — same condition |
 
 ⚖️ **Site only — never a store card.** On a card this tells a 15-second scroller
 "you will need a developer console", and tells console players about something
@@ -136,6 +192,13 @@ would do is the failure mode to avoid.
 
 * Record every captured file **by name**, and every shot **dropped** and why.
   ⛔ A silently missing shot reads as "we got everything" when we did not.
+* ⛔ **THE SHOT NAMES IN THIS BRIEF ARE INTERNAL AND MUST NOT BECOME CAPTIONS**
+  (added 2026-08-13, `02_QA.md`). `F13-before`, `F102-signs`, `listfixes-pack`
+  are filing labels. Chain rule 4 bars `F##` ids, file names and function names
+  from anything a player reads, and a caption lifted from a filename is the
+  easiest way for one to slip through onto a store card.
+* Record the Pass C toggle observation and the Pass F visibility answer — both
+  settle standing claims and neither produces an image on its own.
 * ⛔ **Re-list the autosave folder by name** and confirm nothing went missing
   (`EF-056`).
 * Route the images to the public-docs chain (`03_BUILD_STORE` / `04_BUILD_SITE`)

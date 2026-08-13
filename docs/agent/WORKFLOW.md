@@ -848,13 +848,25 @@ say what the owner reads afterwards. Owner-facing record of the decision:
   (checklist 23), do it in this pass, in ALL THREE mods.** The upload packs the
   **entire mod folder recursively** and filters only on these patterns
   (`ModTools\Src\CommonLua\Classes\GedModEditor.lua:678-741`), so everything
-  unlisted ships inside the player's download. Missing today: **`tools/`,
-  `CLAUDE.md`, `LICENSE`, `.gitattributes`** — and the save-rescue mod's
-  `metadata.lua` has never been audited for this at all. Nothing *runs* (only
-  `code`-listed files execute), but `CLAUDE.md` is agent instructions and does
-  not belong on a player's disk. ⚠️ Whether `.github/` escapes the `*.git/*`
-  pattern is **unverified** — `MatchWildcard` is an engine function with no Lua
-  body; confirm empirically by packing once and listing the archive.
+  unlisted ships inside the player's download. Nothing *runs* (only `code`-listed
+  files execute), but `CLAUDE.md` is agent instructions and does not belong on a
+  player's disk. ⭐ **Re-derived per mod 2026-08-13 (`public-docs/02_QA.md`) —
+  the three lists are NOT the same:**
+  | mod | add |
+  |---|---|
+  | fix pack | `tools/` · `CLAUDE.md` · `LICENSE` · `.gitattributes` |
+  | opt-in pack | the same four |
+  | **save rescue** | **`LICENSE` only** — it already ships a `*CLAUDE.md`
+    pattern the other two lack, and has no `tools/` and no `.gitattributes` |
+  ⭐ **Copy the rescue mod's `*CLAUDE.md` line into the other two** rather than
+  inventing a pattern. ✅ `.github/` is no longer a question — the fix pack has
+  none since the site moved out, and neither of the others ever had one.
+  ⚠️ **One wildcard question survives and one command settles it:** whether `*`
+  crosses `/` decides whether `*/docs/*` filters the whole `docs/` tree or only
+  its top level. The engine's own defaults (`*.git/*`, `*/Source/*` —
+  `Mod.lua:255`) only make sense if it does, but `MatchWildcard` is an engine
+  function with no Lua body. ⇒ **Pack once with `DbgPackMod`, list the archive,
+  confirm `docs/` is absent** — do it in this same pass.
 - MOD_DESCRIPTION.md: delete the `[DRAFT NOTE]` markers; do NOT promise the
   ClassicRockets export half; sync the fix list with agent/bugs/ statuses.
   ⭐ **Add the "judgment calls" section** (owner ADOPTED the relabel proposal

@@ -25,6 +25,7 @@ heals 1+1, threads valid, 2nd load 0, residue-zero measured.** ⚠️ §10.9(4) 
 line (both packs same, self-clears next save) → uninstall text. D1/D2 SOURCE→MEASURED · `EF-055` holds for mod 3 · ⛔ `tested` NOT granted.
 ② **ONE combined sitting** (brief: `agent/prompts/COMBINED_SITTING.md`): PT-20 redo state-3 + D13 after-sweep (⛔ dialogs are EYES-ONLY — no log line exists; clean run grants `tested`) + F102's minute.
 ③ MOD_DESCRIPTION **×2** + disposition table + metadata → ④ owner launch tasks.
+⑤ **public-docs chain** ∥ (`agent/prompts/public-docs/`) — design DONE + fresh-context QA **BUILD** 2026-08-13 (`reports/PUBLIC_DOCS_DESIGN.md`, QA corrections inline); next `03_BUILD_STORE.md`. Feeds ③, does not overtake it. ⭐ **FOUR repos now + the shared TestKit** — fix pack · opt-in · rescue · **site `C:\Dev\SMR-CommunityMods`** (`catt144/SMR-CommunityMods`, public, ⛔ nothing on the web: `workflow_dispatch` only, Pages OFF). ⛔ QA REFUTED the `F97` "heaviest settings / default unaffected" wording **inside the owner-approved judgment-calls bullet** → checklist **22b**; `MOD_DESCRIPTION.md` now has **4 known-false claims** — treat every claim in it as unverified.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
@@ -34,9 +35,8 @@ BUILD STATE (emitted by tools/doccheck.py)
 - TestKit probes: 94
 - BUGS index rows: 103 F + 12 D + 46 C
 ```
-⛔ Pre-split `82/75/8` / `81/81` / `77/0/10/0` are ERA-STALE. Re-emit after any
-change; pinned **1.0.7.396349** (`EF-014`). F76 → `C41` · F11 settled P2 ·
-F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
+Re-emit after any change; pinned **1.0.7.396349** (`EF-014`). F76 → `C41` ·
+F11 settled P2 · F99/C42 rate-only · ⛔ **SKIPs BY NAME, never a total.**
 
 ## Gates and holds
 - ⭐ **BOTH MODS LOADED is the rig's NORMAL config** (owner 08-12; WORKFLOW clause
