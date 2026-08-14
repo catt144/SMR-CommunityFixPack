@@ -79,6 +79,15 @@ owed input stays here no matter how struck-through it looks.
     exactly what it prints. → `agent/reports/D13_EXPOSED_SET.md` §10.5's
     correction block (three more mismatches found there, all cosmetic bar this
     one), `agent/bugs/D13.md`.
+    ℹ️ **Your launch-day sheet now exists and answers item 28 in context:**
+    `agent/reports/RELEASE_PORTAL_PREP.md` — read it top to bottom when you sit
+    down. ⛔ **One thing on it you should know before you book the afternoon: the
+    preview art you ruled on (item 24) is still not built, and it needs the game
+    open.** Either the capture sitting runs first or you upload with whatever
+    image the portal accepts and swap it later — which costs nothing and was the
+    point of calling it a floor. ⚖️ Also on that sheet: the opt-in mod is set to
+    ship as **0.1** while its own changelog calls it an initial release
+    (recommendation: 1.0). The full ④ list comes to you from this chain's audit.
 
 ### ⭐ NEW 2026-08-13 — the SITE is built (unpublished): one small question, and two things for your awareness
 

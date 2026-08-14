@@ -34,6 +34,20 @@ return PlaceObj('ModDef', {
 	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
 	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
 	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.
+	-- ⭐ THREE PATTERNS ADDED 2026-08-14 AT LAUNCH PREP (release-3 prompt 1) —
+	-- checklist item 23, the owner's ruling "YES, add the missing patterns, at
+	-- launch prep", all three mods. MEASURED before and after over the real
+	-- tree: without them this package shipped `CLAUDE.md`, `.gitattributes` and
+	-- all TEN files of `tools/` into a player's download — 90 files where 78
+	-- belong. Nothing there ever RUNS (only `code` executes), but CLAUDE.md is
+	-- agent instructions and `tools/` is our build machinery.
+	-- ⚠️ `LICENSE` is NOT excluded, deliberately: item 23 listed it, but the
+	-- rescue mod built afterwards states "LICENSE ships on purpose" and a licence
+	-- inside the package is right. All three mods now agree on that.
+	-- ℹ️ Item 23's one unverifiable sub-case — whether `.github/` slips past the
+	-- `.git` pattern — is MOOT here: no mod repo has a `.github/` directory
+	-- (checked in all three, 2026-08-14). Only the site repo does, and it is not
+	-- a mod.
 	'ignore_files', {
 		"*.git/*",
 		"*.svn/*",
@@ -41,8 +55,11 @@ return PlaceObj('ModDef', {
 		"*/SourceData/*",
 		"*/docs/*",
 		"*/.claude/*",
+		"*/tools/*",
 		"*README.md",
+		"*CLAUDE.md",
 		"*.gitignore",
+		"*.gitattributes",
 	},
 	-- ⛔ NO `default_options` FIELD, AND THAT IS THE POINT (2026-08-12, the
 	-- opt-in split). This field is what makes Options → Mod Options list a mod
