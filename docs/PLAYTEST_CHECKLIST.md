@@ -56,9 +56,12 @@ for post-release reports; its fill-in marker and the assembly's rescue section
 deleted per their defaults · **28** closes with 17 → ship as built ·
 **cleanliness sentence** Reading A (the pack alone) → no text change, the
 card's deliberate absence stands · **opt-in version** → **1.0.0 applied** in
-its `metadata.lua`. ⇒ **④ is now: preview art, upload, links, Pages — no
-decisions left in the way.** The preview art is the one open piece: agent
-candidates first, you pick (below).
+its `metadata.lua`. ✅ **And the preview art is CHOSEN the same day — C1 for
+both mods** (item 24's floor, built as designed Mars backdrops without a game
+launch; `agent/reports/preview_art/FINAL_*.png`, both ~40 KB against a 1 MB
+limit; alternates kept, vista-swap possible later). ⇒ **④ is now fully
+prepared: upload two mods with their previews → links → Pages. Nothing left
+waits on a decision.**
 
 29. ✅ **RULED 2026-08-14: STRIKE — and struck the same day on every surface**
     (both cards, the rescue card, the assembly, the site FAQ; trace rows and

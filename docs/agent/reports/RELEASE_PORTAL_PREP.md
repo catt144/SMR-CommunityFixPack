@@ -13,20 +13,22 @@ yours.
 
 **Two things can stop ④ from finishing, and one of them is not a decision.**
 
-### (a) ⛔ The preview art does not exist yet, and it needs the game open
+### (a) ✅ The preview art EXISTS and is CHOSEN — the blocker is cleared
 
-You ruled on it (checklist 24): **build a plain text-on-image treatment as a
-floor, so launch can never be blocked on art.** ⛔ **That artifact has not been
-made.** It needs a backdrop, a backdrop is a screenshot, and screenshots need the
-game running — which is why it was folded into `agent/prompts/CAPTURE_SITTING.md`
-as Pass G, and why it could not ride the D13 chain.
+You ruled the floor (checklist 24: text-on-image), the agent painted six
+candidates without opening the game (designed Mars backdrops, no screenshot
+needed), and **you picked C1 for both mods, 2026-08-14**. The files to upload:
 
-⇒ **Either the capture sitting runs before ④, or you upload with whatever image
-the portal will accept and replace it later.** Replacing a preview image later
-costs nothing and touches nothing else — that was the whole point of calling it a
-floor. **Size limits already on record: Paradox Mods ≤ 2 MB, Steam ≤ 1 MB.**
-⚠️ This is the only launch item with no ceiling and no artifact. Decide it before
-you sit down, not during.
+* `docs/agent/reports/preview_art/FINAL_fixpack_preview.png` (40 KB)
+* `docs/agent/reports/preview_art/FINAL_optin_preview.png` (37 KB)
+
+Both 1024×1024, far under the recorded limits (**Paradox Mods ≤ 2 MB, Steam
+≤ 1 MB**). The four unchosen candidates stay in the same folder as alternates.
+ℹ️ The floor stays replaceable: if a capture sitting ever produces real vistas
+(Pass G), the same lettering drops onto one and the portal image is swapped —
+costs nothing, touches nothing else. No rescue-mod art exists or is needed
+(17 hold-off); if the contingency fires, the C1 template makes a third in
+minutes.
 
 ### (b) + (c) ✅✅ ALL FIVE CALLS RULED 2026-08-14 AND APPLIED — nothing here waits on you any more
 
@@ -38,7 +40,8 @@ you sit down, not during.
 | *cleanliness sentence* | **Reading A — the pack alone** | ✅ no text change; the card's deliberate absence stands |
 | *opt-in version* | **1.0** | ✅ `metadata.lua` set to 1.0.0 |
 
-⇒ **④ is now decision-free: preview art → upload two mods → links → Pages.**
+⇒ **④ is now decision-free AND art-complete: upload two mods (with their FINAL
+previews from §0(a)) → links → Pages.**
 
 ---
 
@@ -216,5 +219,5 @@ standing rules are live:
 | `metadata.lua` ×3 | ✅ applied, counted; 2 defects corrected by prompt 1, 2 more (rescue) by the audit; opt-in version set 1.0.0 |
 | Packaging | ✅ item 23 done, measured; ✅ versions ruled and set |
 | Site | ✅ built + audited + item-29 strike applied, ⛔ **nothing on the web**; needs step 2 then step 3 |
-| Preview art | ⛔ **the one open piece** — agent candidates first, owner picks (§0(a)) |
-| Decisions owed by you | **0** — all five ruled 2026-08-14 (§0(b)) |
+| Preview art | ✅ **chosen 2026-08-14 — C1 for both mods**, FINAL files named in §0(a), sizes verified under both limits |
+| Decisions owed by you | **0** — all five ruled 2026-08-14 (§0(b)), art chosen |

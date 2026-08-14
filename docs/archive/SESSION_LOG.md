@@ -8,6 +8,22 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-14 — preview art chosen: C1 for both mods, and ④ is fully prepared
+
+Six text-on-image candidates were painted with PIL over designed Mars backdrops
+— no game launch, no screenshot (none existed on disk; the only cache found was
+other creators' mod thumbnails, unusable) — satisfying item 24's ruled floor.
+The owner picked **C1 ("Horizon": planet arc, starfield, check badge) for both
+mods**; the chosen files are stamped `FINAL_fixpack_preview.png` /
+`FINAL_optin_preview.png` in `agent/reports/preview_art/` (1024×1024, ~40 KB
+each against Steam's 1 MB / PDX's 2 MB), alternates kept beside them, and the
+lettering can drop onto a real Pass-G vista later at zero cost. Sheet §0(a),
+§0(b) and §7, the checklist ④ block and STATE all updated: **④ owes no
+decisions and no artifacts — upload two mods with their previews → links →
+Pages.**
+
+---
+
 ## 2026-08-14 — the owner ruled all five ④ calls in one message, and every ruling is applied: ④ is decision-free
 
 Same day as the audit, the owner ruled: **29 = STRIKE** — the "you will see one
