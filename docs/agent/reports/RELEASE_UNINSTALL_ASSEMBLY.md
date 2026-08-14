@@ -142,12 +142,6 @@ repairs, not leftovers:** the Large Wind Turbine bonus the game's own patch
 migration dropped, and a one-shot mark that stops a track repair being done
 twice. Deleting either would bring its bug back with no mod left to fix it.
 
-**One notice you will see, and it is not damage.** The first time you load a save
-that was made with any mod you have since removed, the game itself prints a line
-saying the save refers to a mod that is not there — one per removed mod. Every
-mod that was loaded when a save was written is recorded in that save's mod list.
-It disappears the first time you save without the mod.
-
 ### Removing the Opt-In Modules — do this one thing first
 
 ⚠️ **If either drone dial is off its base setting, deal with it before you
@@ -168,19 +162,17 @@ a building, and two dome policy flags. The unmodded game has no idea they exist.
 What a module already did stays done — colonists a housing module moved do not
 move back.
 
-### If you already uninstalled and the dials were not at base
-
-The boost is still in that save and nothing in the game will remove it. There is
-a separate one-shot tool for exactly this case.
->>> FILL-IN — the Save Rescue paragraph, ONLY if it is published (checklist 17); otherwise DELETE THIS WHOLE SECTION <<<
-
 ═══════════════════════════ PLAYER TEXT — END ═══════════════════════════
 
-⚠️ **The last section is publish-gated and its default is DELETE.** If Save
-Rescue is not published, the honest text ends at the previous section and the
-player is told nothing they cannot act on. The paragraph to paste if it *is*
-published is the one drafted in `RELEASE_DESCRIPTION_OPTIN.md` (FILL-IN 2), which
-carries its own shipped-module control.
+✅ **RULED 2026-08-14, both gates:** checklist **17** — Save Rescue is **not
+published at launch**, held as a contingency for post-release reports; the
+publish-gated "already uninstalled" section was therefore **deleted** per its
+default (the honest text ends above, and the player is told nothing they cannot
+act on). And checklist **29** — the "one notice you will see" paragraph was
+**struck from every surface** (it promised a screen event the game never shows
+for `optional_mod` mods; see §2(d)). If Save Rescue ever launches, the ready
+paragraph is `RELEASE_DESCRIPTION_OPTIN.md`'s drafted FILL-IN 2 sentence, which
+carries its own shipped-module control and the audit's save step.
 
 ---
 

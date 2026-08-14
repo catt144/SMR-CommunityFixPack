@@ -259,11 +259,6 @@ the boost from the colony you are playing; the file on disk only loses it when
 you write a new save. ⛔ HOLE — [the rescue tool, for anyone who uninstalled
 already; see notes, hole 1].
 
-One more thing you will see, and it is not ours: the first time you load a save
-that was made with any mod you have since removed, the game itself prints a
-notice that the save refers to a mod that is not there. It disappears as soon as
-you save again.
-
 ### Other mods, and the game version
 
 Built to coexist. Each module wraps the smallest thing it needs, chains politely
@@ -330,7 +325,7 @@ genuinely useful.
 | save footprint: three inert flags + the dial bonus | `D13_EXPOSED_SET.md` §2b rows D12–D15; §2c "the whole opt pack has no game-time thread and no GameVar" |
 | the dial boost survives uninstall permanently | §2b D15, MEASURED; the module's own header says so |
 | cohort housing stores nothing | `Opt_CohortHousing.lua` header — "zero persisted state" |
-| the engine's mod-reference notice, self-clearing | `D13_EXPOSED_SET.md` §10.9(4) as corrected by measurement |
+| ~~the engine's mod-reference notice, self-clearing~~ **STRUCK from the card 2026-08-14 (checklist 29, owner-ruled)**: LOG-only; the screen warning skips `optional_mod` mods | `D13_EXPOSED_SET.md` §10.9(4); route: `Mod.lua:1199`, `SavegameMetadata.lua:97-99` |
 | Mod Options page exists and is controller-friendly | `D05` (`tested`); the split verification read the page at `1/8` on fresh defaults |
 | second-sun panel binding is a real vanilla defect | `F39` (folded into this module) + `D04`; module header cites the build-once enforcement |
 | the four-game-hour re-nag window is designed behaviour | `D02` (`tested`), measured live in PT-38 |

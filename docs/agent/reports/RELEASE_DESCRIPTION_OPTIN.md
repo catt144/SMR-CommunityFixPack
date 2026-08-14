@@ -15,12 +15,12 @@ portal-prep sheet). ⛔ **Not published. Rule 5.**
 
 ---
 
-## Before you paste — the three fill-ins
+## Before you paste — the fill-ins (two live; number 2 resolved by the 17 ruling)
 
 | n | where | needs | if it does not exist yet |
 |---|---|---|---|
 | **1** | "You do not need the fix pack for this" bullet | **store link** to the *Community Fix Pack* | delete the marker line — the sentence names the mod already |
-| **2** | end of "Your save, and removing the mod", right after the drone-dial warning | ⛔ **the Save Rescue sentence — GATED on checklist 17** | ⛔ **delete the marker line.** This is the default and it is safe: the paragraph above it already tells the reader the two steps that avoid the problem entirely |
+| **2** | ~~end of "Your save, and removing the mod"~~ | ✅ **RESOLVED 2026-08-14 — owner ruled checklist 17 "hold off": the marker is DELETED from the text below**, per its default | nothing to do. The drafted sentence below stays as the ready text if Save Rescue ever launches as a contingency |
 | **3** | end of the "Acknowledged warnings" block | *optional* site link to the FAQ's fuller answer | delete the marker line. It is an offer of more detail, nothing depends on it |
 
 ### FILL-IN 2 — the one that is a decision, not a link
@@ -309,12 +309,6 @@ your drones after the mod is gone. Two steps avoid that: **set both dials back
 to base and press Apply, then save the game** — and then uninstall. Setting them to base clears
 the boost from the colony you are playing; the file on disk only loses it when
 you write a new save.
->>> FILL-IN 2 — the Save Rescue sentence, ONLY if you publish it; otherwise DELETE THIS LINE <<<
-
-One more thing you will see, and it is not ours: the first time you load a save
-that was made with any mod you have since removed, the game itself prints a
-notice that the save refers to a mod that is not there. It disappears as soon as
-you save again.
 
 ### Other mods, and the game version
 
@@ -380,9 +374,10 @@ reasoning: `RELEASE_DESCRIPTION_RESCUE.md`, audit section). ⚖️ And the
 engine-notice premise in the paragraph above is now **routed as checklist item
 29**: the measured line is a log write, and the on-screen missing-mods warning
 excludes `optional_mod` mods — which all three of ours are — so the card
-paragraph it leans on promises a notice the game does not show. Left as-written
-pending that one ruling, because the same sentence sits on both audited cards
-and the site.
+paragraph it leaned on promised a notice the game does not show. ✅ **Owner
+ruled 2026-08-14: STRIKE — the paragraph is deleted from every surface**, and
+the FILL-IN 2 marker itself was deleted the same day per the 17 ruling (hold
+off publishing; the drafted sentence above stays as the contingency text).
 
 ### What changed between `STORE_OPTIN.md` and this file
 

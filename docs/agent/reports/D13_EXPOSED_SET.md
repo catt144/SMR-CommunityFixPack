@@ -1105,6 +1105,16 @@ own gate returns a zero that samples nothing):
    zero artifact-namespace names over 4510 objects, `UIColony`, every rains
    entry and all 440 `PersistableGlobals` names) but should not be read as
    "you will see nothing".
+   ⛔ **CORRECTED 2026-08-14 (release-3 terminal audit; owner-ruled checklist
+   29): the "sees one notice" clause above is FALSE — the player sees NOTHING.**
+   The measured line is `ModLog` (`Mod.lua:1199`), a log-file write; the only
+   on-screen missing-mods warning is built by `GetMissingMods`
+   (`SavegameMetadata.lua:97-99`), which skips mods marked `optional` — and all
+   three mods ship `optional_mod = true`, recorded into the save metadata at
+   save time. The aside was an inference from rig logs, where the console
+   overlay draws the log on screen; a retail player has no overlay. The
+   "you will see a notice" sentence was STRUCK from every player surface the
+   same day. The engine line itself and its self-clearing are real — in the log.
 5. **Bounds:** the meteor restart happens at most once per load, and not at all
    when the thread is alive; a second consecutive load of the same save performs
    **no** heal and **no** removal (idempotence, which is what replaces the latch).

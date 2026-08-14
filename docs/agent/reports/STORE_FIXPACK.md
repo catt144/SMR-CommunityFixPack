@@ -57,10 +57,7 @@ want this.**
   other — each works alone, and they work together.
 - **You can take it out again.** It is built to be safe to add or remove at any
   time. Remove it and the bugs it was holding back come back; repairs it already
-  made to your save stay made. There is one thing you will see and it is not
-  ours: the first time you load a save that was made with any mod you have since
-  removed, the game itself prints a notice that the save refers to a mod that is
-  not there. It disappears as soon as you save again.
+  made to your save stay made.
 
 **Playing on Xbox, PlayStation or the Microsoft Store version?** One platform
 rule to know before you install, and it applies to every mod rather than to this
@@ -306,7 +303,7 @@ release prep re-checks portal limits anyway and can adopt the shape wording then
 | claim | source |
 |---|---|
 | save footprint enumeration | `D13_EXPOSED_SET.md` §2b rows D1–D11 (fix-pack rows only), MEASURED where marked; §2c for the negative half |
-| the engine's mod-reference notice on the next load, self-clearing | `D13_EXPOSED_SET.md` §10.9(4) as corrected by measurement (`D13_VERIFICATION.md` §4.5) |
+| ~~the engine's mod-reference notice on the next load, self-clearing~~ **STRUCK from the card 2026-08-14 (checklist 29, owner-ruled)**: the measured line is LOG-only and the on-screen warning skips `optional_mod` mods — no player of this mod ever sees it | `D13_EXPOSED_SET.md` §10.9(4) — whose "sees one notice" aside was a rig-console inference; route: `Mod.lua:1199` (ModLog), `SavegameMetadata.lua:97-99` (optional filter) |
 | repairs already applied stay | §2b D10 (`SMRFixPack_F35_*`) + D11, both on the KEEP list (§5) |
 | suite of **94** checks, modded vs unmodded | `python tools/doccheck.py --emit-counts`, re-emitted 2026-08-13; A/B pair `WORKFLOW.md:274` |
 | game version 1.0.7.396349, self-check stand-down | `EF-014`; per-fix `apply()` self-checks |

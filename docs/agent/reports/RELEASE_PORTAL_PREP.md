@@ -28,33 +28,17 @@ floor. **Size limits already on record: Paradox Mods ≤ 2 MB, Steam ≤ 1 MB.**
 ⚠️ This is the only launch item with no ceiling and no artifact. Decide it before
 you sit down, not during.
 
-### (b) Three decisions that must be answered together, in this order
+### (b) + (c) ✅✅ ALL FIVE CALLS RULED 2026-08-14 AND APPLIED — nothing here waits on you any more
 
-They are one question wearing three hats. Answering them out of order wastes the
-answer.
+| item | ruling | applied |
+|---|---|---|
+| **29** the notice paragraph | **STRIKE** | ✅ deleted from both cards, the rescue card, the assembly and the site FAQ; source records corrected |
+| **17** Save Rescue publish | **HOLD OFF** — reserve; launch only if post-release reports show players stuck with dial residue | ✅ fill-in marker + assembly section deleted per defaults; card kept as the ready contingency draft |
+| **28** the rescue dialog | closes with 17: **ship as built** — re-decide (incl. the save-step line) before upload if the contingency fires | ✅ recorded on item 17 |
+| *cleanliness sentence* | **Reading A — the pack alone** | ✅ no text change; the card's deliberate absence stands |
+| *opt-in version* | **1.0** | ✅ `metadata.lua` set to 1.0.0 |
 
-| order | item | the question | what it unblocks |
-|---|---|---|---|
-| **1st** | **17** | **Does Save Rescue get published at all?** | everything below it |
-| 2nd | **28** *(new)* | if yes: fix the dialog text first, at the cost of one launch of yours? | the rescue mod's version and upload |
-| 3rd | *the cleanliness sentence* | which uninstall wording the fix-pack card ships — "the pack alone" or "the pack plus a cleaner" | one paragraph of the fix-pack card |
-
-**If item 17 is NO, all three are answered in one word** and ④ gets simpler:
-delete two fill-ins, ship the two cards, ignore the third mod entirely. Both
-cards were deliberately written to stand without it.
-→ reasoning: `RELEASE_DESCRIPTION_FIXPACK.md` §"One sentence is deliberately
-absent", `PLAYTEST_CHECKLIST.md` items 17 and 28.
-
-### (c) ⭐ NEW from the terminal audit — one more call, and it comes BEFORE any paste
-
-**Item 29 — both cards promise a notice the game does not show.** The "you will
-see one notice after removing the mod" paragraph (both cards, the site FAQ, the
-rescue card) traces to a **log** line; the on-screen missing-mods warning
-excludes `optional` mods, and all three of ours ship `optional_mod = true` — a
-player who removes them sees nothing. Rule before pasting: strike/reword the
-paragraph (agent work once ruled, every surface in one sweep), or ship as
-written (harm is a promised notice that never appears). Full route + evidence:
-`PLAYTEST_CHECKLIST.md` item 29.
+⇒ **④ is now decision-free: preview art → upload two mods → links → Pages.**
 
 ---
 
@@ -65,7 +49,7 @@ doing them backwards means going back to edit a live page.
 
 | # | step | what it creates | who |
 |---|---|---|---|
-| 1 | **Upload both mods** (three if Save Rescue publishes) | ⭐ the **store URLs**. They do not exist until now | you |
+| 1 | **Upload both mods** (⛔ not Save Rescue — held in reserve, item 17) | ⭐ the **store URLs**. They do not exist until now | you |
 | 2 | **Put the store links into the site pages** | the site stops saying "no store links yet" | ⛔ **agent work, ~10 min, already filed** — see §5 |
 | 3 | **Switch GitHub Pages on** | ⭐ the **site URL**. GitHub prints it on the Pages settings screen — copy it from there, do not type it | you |
 | 4 | **Fill the site links into the store cards** and re-save them | the cards' FILL-IN markers close | you |
@@ -86,21 +70,22 @@ other) become available at the end of step 1, not step 4.
 |---|---|---|
 | **Community Fix Pack** | `RELEASE_DESCRIPTION_FIXPACK.md`, everything between the two `═══ PLAYER TEXT ═══` rules | the mod page body |
 | **Opt-In Modules** | `RELEASE_DESCRIPTION_OPTIN.md`, same block | the mod page body |
-| **Save Rescue** *(only if 17 = yes)* | `RELEASE_DESCRIPTION_RESCUE.md`, same block | the mod page body |
+| ~~Save Rescue~~ | ✅ 17 ruled **hold off** — nothing pasted; the card waits as the contingency draft | — |
 
 ⛔ **Search each pasted block for `>>> FILL-IN` before you save the page.** Every
-marker sits on its own line and every one tells you how to delete itself. Nine
-markers across the three cards: **4** in the fix pack, **3** in the opt-in, **2**
-in Save Rescue.
+marker sits on its own line and every one tells you how to delete itself. **Six
+markers across the two cards: 4 in the fix pack, 2 in the opt-in** (the opt-in's
+third was the Save Rescue sentence, deleted with the 17 ruling; the 08-14 strike
+of the notice paragraph also shortened both bodies below).
 
-**Body sizes, re-measured 2026-08-14 by the terminal audit** (markers excluded;
-the rescue card grew — the audit added the save step, §0(b) item 29 note):
+**Body sizes, re-measured 2026-08-14 after the item-29 strike and the 17
+ruling** (markers excluded):
 
 | card | characters | words |
 |---|---|---|
-| Community Fix Pack | 10,822 | 1,903 |
-| Opt-In Modules | 16,161 | 2,827 |
-| Save Rescue | 4,492 | 852 |
+| Community Fix Pack | 10,560 | 1,849 |
+| Opt-In Modules | 15,907 | 2,774 |
+| ~~Save Rescue~~ *(contingency draft, not pasted)* | 4,202 | 792 |
 
 ---
 
@@ -180,11 +165,8 @@ directory** (checked in all three). Only the site repo does, and it is not a mod
 | mod | ships as | its changelog says | note |
 |---|---|---|---|
 | Community Fix Pack | **1.0** | "Initial release" | ✅ consistent, nothing to do |
-| Opt-In Modules | **0.1** | "Initial release" | ⚠️ **these disagree.** A 0.1 reads as a beta to anyone scanning; the text calls it a release. **Recommendation: 1.0**, to match both its own changelog and its sibling |
-| Save Rescue | **0.1** | "Initial pre-release" | ✅ consistent — and if you publish it, publishing a stated pre-release is honest. Its own file says launch prep sets the ship value |
-
-⛔ **Not changed by an agent.** A version number is a product statement, and it
-is one keystroke for you in the same pass.
+| Opt-In Modules | **1.0** | "Initial release" | ✅ **RULED 2026-08-14 ("we go 1.0, especially with the amount of QA we have done") and APPLIED** — `metadata.lua` now 1.0.0 |
+| Save Rescue | **0.1** | "Initial pre-release" | ✅ consistent; not publishing at launch (item 17 hold-off) |
 
 ---
 
@@ -227,12 +209,12 @@ standing rules are live:
 
 | | state |
 |---|---|
-| Fix-pack card | ✅ **paste-ready**, 4 fill-ins, every one deletable — ⚖️ minus the item-29 paragraph call |
-| Opt-in card | ✅ **paste-ready**, 3 fill-ins, every one deletable — ⚖️ same item-29 call |
-| Save Rescue card | ✅ written + audit-corrected (save step, stand-down wording), ⛔ **gated on item 17** — dead paper if you say no |
+| Fix-pack card | ✅ **paste-ready** (item-29 strike applied), 4 fill-ins, every one deletable |
+| Opt-in card | ✅ **paste-ready** (item-29 strike + 17 marker deletion applied), 2 fill-ins, every one deletable |
+| Save Rescue card | ✅ **held in reserve** (17 hold-off) — audit-corrected contingency draft, nothing pasted at launch |
 | Uninstall story | ✅ reconciled; **four** defects in the inherited draft found and corrected — three by assembly, the missing save step by the audit (`RELEASE_UNINSTALL_ASSEMBLY.md` §2) |
-| `metadata.lua` ×3 | ✅ applied, counted; 2 defects corrected by prompt 1, 2 more (rescue) by the audit |
-| Packaging | ✅ item 23 done, measured; ⚖️ version numbers yours |
-| Site | ✅ built + audited, ⛔ **nothing on the web**; needs step 2 then step 3 |
-| Preview art | ⛔ **decided, not built** — §0(a) |
-| Decisions owed by you | **5** — **29 (before any paste)**, 17, 28, the cleanliness sentence, and the opt-in version |
+| `metadata.lua` ×3 | ✅ applied, counted; 2 defects corrected by prompt 1, 2 more (rescue) by the audit; opt-in version set 1.0.0 |
+| Packaging | ✅ item 23 done, measured; ✅ versions ruled and set |
+| Site | ✅ built + audited + item-29 strike applied, ⛔ **nothing on the web**; needs step 2 then step 3 |
+| Preview art | ⛔ **the one open piece** — agent candidates first, owner picks (§0(a)) |
+| Decisions owed by you | **0** — all five ruled 2026-08-14 (§0(b)) |

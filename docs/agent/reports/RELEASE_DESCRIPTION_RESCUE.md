@@ -3,13 +3,13 @@
 **Assembled 2026-08-14 by `agent/prompts/release-3/01_BUILD_DESCRIPTIONS.md`,
 Job 1's "+1".**
 
-⛔⛔ **BUILD ≠ PUBLISH.** Checklist **17** approved the *shape* of this artifact
-and recorded "build ≠ publish" in the same breath. **Whether this mod goes on any
-store is an unmade owner decision**, and this file exists so that the answer
-"yes" costs no drafting time — not because the answer is assumed. If the owner
-rules "no", **this file is dead paper and nothing else changes**: both other
-cards are written to stand without it (the opt-in card's Save Rescue sentence is
-a fill-in whose default is *delete*).
+✅ **RULED 2026-08-14 (checklist 17): NOT published at launch — held in reserve.**
+The owner's word: hold off publishing, and launch it **if post-release reports
+show players stuck with the problem it solves**. Both other cards stand without
+it (the opt-in card's fill-in was deleted per its default). **This file is the
+ready draft for that contingency** — if the day comes, item 28 (the dialog text,
+plus the audit's save-step line) is decided then, before upload. Item 28 was
+closed "ship as built" by the same ruling.
 
 ⭐ **This is assembly, not authorship.** Every sentence below already existed, in
 an already-written player-facing string or an already-verified statement. The
@@ -91,11 +91,6 @@ Nothing. No flags of its own, no saved variables, no background work left
 running. A save this tool has run on is a save with *less* in it, never more —
 which is why you can delete the tool once you have saved.
 
-One thing you will still see, and it is not this tool's doing: the first time you
-load a save that was made with any mod you have since removed — including this
-one — the game itself prints a notice that the save refers to a mod that is not
-there. It disappears as soon as you save again.
-
 ### Which versions it knows about
 
 The list of what to remove was derived over the Community Fix Pack and the
@@ -144,7 +139,7 @@ last two chains were each wrong in exactly this way and each control caught it.
 | "it tells you what it did … removed / repaired / kept on purpose" | `report_text()` | ⭐ the report dialog was **witnessed raising** 2026-08-14 with text matching the built function. ⛔ **The wording quoted to a player here is the BUILT text, per §10.5's 2026-08-14 correction — never the frozen design text** |
 | "loading the same save a second time does nothing at all" | idempotence — which is what the spec chose *instead of* a persisted latch | spec §10.5/§10.9(5); measured `removed 0` on the second consecutive load, and again at the sitting |
 | "nothing. No flags of its own, no saved variables, no background work left running" | no `GameVar(` call site anywhere; every mutation is a clear; the one thread is real-time and unflagged for persistence | §10.7's clause-by-clause table; **residue-zero MEASURED** — 0 names of its own over 4510 objects, `UIColony`, every rains entry and all 440 persistable globals |
-| the engine's mod-reference notice, self-clearing on the next save | not ours — the engine's savegame mod list | `D13_EXPOSED_SET.md` §10.9(4) **as corrected by measurement**; both packs produce the identical line |
+| ~~the engine's mod-reference notice, self-clearing on the next save~~ **STRUCK 2026-08-14 — see audit finding 3 below** (checklist 29, owner-ruled) | the claim had no screen delivery: the line is `ModLog` (log-only) and the screen warning skips `optional_mod` mods | `Mod.lua:1199`, `SavegameMetadata.lua:97-99` |
 | "it cannot tell which version of a pack wrote your save … check for a newer Save Rescue" | ⭐ **the spec requires this sentence**: version skew is answered by disclosure because detection is impossible (the only version-stamped name is dropped by the engine on the first load without the pack) | spec §10.6 |
 | "a name it does not know is left untouched; it never sweeps" | the too-old case: the table is a whitelist | spec §10.6 |
 | "no options and no settings page" | ⛔ **no `default_options`** in `metadata.lua`, stated there as a deliberate absence | the shipped file |
@@ -216,13 +211,13 @@ had passed:
    would not help them. Table row "witnessed 2026-08-14" is real but was the
    both-packs case; the mixed case is where the sentence failed. Reworded here
    and in `metadata.lua`.
-3. ⚖️ **ROUTED — "One thing you will still see … the game itself prints a
-   notice."** The measured evidence behind §10.9(4) is a **log** line
+3. ⚖️ **ROUTED, then RULED — "One thing you will still see … the game itself
+   prints a notice."** The measured evidence behind §10.9(4) is a **log** line
    (`ModLog`, `Mod.lua:1199`); the only on-screen missing-mods warning is built
    by `GetMissingMods` (`SavegameMetadata.lua:97-99`), which **excludes mods
    marked optional — and all three of our mods ship `optional_mod = true`**, so
-   a player who removes them sees nothing on screen. The same sentence sits on
+   a player who removes them sees nothing on screen. The same sentence sat on
    both audited store cards, the uninstall assembly's reference text and the
-   site FAQ, so the wording is one owner decision, not four edits — routed as
-   **checklist item 29**. The paragraph above is left as-written until that
-   ruling so every surface changes together.
+   site FAQ — routed as **checklist item 29**. ✅ **Owner ruled 2026-08-14:
+   STRIKE.** The paragraph is deleted from every surface in the same sweep —
+   both cards, this card, the assembly, the site FAQ.

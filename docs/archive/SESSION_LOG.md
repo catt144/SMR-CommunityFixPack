@@ -8,6 +8,33 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-14 — the owner ruled all five ④ calls in one message, and every ruling is applied: ④ is decision-free
+
+Same day as the audit, the owner ruled: **29 = STRIKE** — the "you will see one
+notice" paragraph deleted from both store cards (+ their RELEASE copies,
+verbatim re-proven post-strike: only marker/HOLE diffs remain), the rescue card,
+the assembly's reference text, and the site FAQ (the FILED site edit executed on
+the ruling); trace rows struck-and-annotated in both STORE files, and the source
+of the error corrected at `D13_EXPOSED_SET.md` §10.9(4) + D13.md's superseded
+draft, so nothing can re-inherit it. **17 = HOLD OFF** — Save Rescue is not
+published at launch, held as a contingency "to be launched if we get reports of
+problems"; the opt-in card's FILL-IN 2 marker and the assembly's publish-gated
+section deleted per their defaults, the card kept as the ready draft, and **28
+closes with it: ship as built** (if the contingency fires, re-open the dialog
+text before upload and add the audit's save-step line in the same one-launch
+re-witness — recorded on item 17, the card header, and the checklist).
+**Cleanliness sentence = Reading A** (the pack alone) — no text change, the
+card's deliberate absence stands. **Opt-in version = 1.0** ("especially with
+the amount of QA we have done") — `metadata.lua` set to 1.0.0. Bodies
+re-measured post-strike (fix pack 10,560 · opt-in 15,907 · rescue 4,202 chars;
+six live markers: 4 + 2); sheet §0/§1/§2/§4/§7 and the checklist's ④ block
+rewritten to the ruled state; open decisions back to the 3 standing non-release
+items. Also this message: **pushing is standing-allowed** — all four repos
+pushed and in sync from here on. ⇒ **④ is decision-free: preview art (agent
+candidates first, owner picks) → upload two mods → links → Pages.**
+
+---
+
 ## 2026-08-14 — release-3 chain CLOSED: the firewalled control caught the streak's third miss, two fixes landed, one call routed pre-paste, folder emptied — ④ is the owner's
 
 **The control ran firewalled and the streak held: third chain, third catch.** Over

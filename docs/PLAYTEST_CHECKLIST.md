@@ -48,19 +48,23 @@ packaging measured. **When you sit down for launch, read
 afternoon in order** (upload → links → Pages → fill-ins), and it names
 everything below in context.
 
-**Five calls it needs from you, in this order** — 29 (below, **before any
-paste**) · 17 (does Save Rescue publish) · 28 (the rescue dialog text) · the
-cleanliness sentence (`RELEASE_DESCRIPTION_FIXPACK.md` §"One sentence is
-deliberately absent") · the opt-in version number (**ships 0.1, its changelog
-says "Initial release" — recommendation 1.0**). Plus the one blocker that is
-not a decision: **the preview art you ruled on (24) is still not built** and
-needs the game open — capture sitting first, or upload with any image and swap
-later.
+✅✅ **ALL FIVE CALLS RULED 2026-08-14, applied the same day:**
+**29** strike → the notice paragraph is deleted from both cards, the rescue
+card, the assembly and the site FAQ, with the source records corrected ·
+**17** hold off → Save Rescue not published at launch, held as a contingency
+for post-release reports; its fill-in marker and the assembly's rescue section
+deleted per their defaults · **28** closes with 17 → ship as built ·
+**cleanliness sentence** Reading A (the pack alone) → no text change, the
+card's deliberate absence stands · **opt-in version** → **1.0.0 applied** in
+its `metadata.lua`. ⇒ **④ is now: preview art, upload, links, Pages — no
+decisions left in the way.** The preview art is the one open piece: agent
+candidates first, you pick (below).
 
-29. ⚖️ **Both store cards promise an on-screen notice the game never shows for
-    our mods — strike/reword that paragraph before you paste, or ship it as
-    written?** The sentence (both cards, the site FAQ, the rescue card, the
-    uninstall assembly): *"the first time you load a save that was made with
+29. ✅ **RULED 2026-08-14: STRIKE — and struck the same day on every surface**
+    (both cards, the rescue card, the assembly, the site FAQ; trace rows and
+    the §10.9(4)/D13 source records corrected so it cannot be re-inherited).
+    The question as it stood: both store cards promised an on-screen notice
+    the game never shows for our mods. The sentence: *"the first time you load a save that was made with
     any mod you have since removed, the game itself prints a notice that the
     save refers to a mod that is not there."*
     **What the route shows:** the measured evidence behind it is a **log-file
@@ -92,10 +96,10 @@ only edits the loaded colony; the player's save is what writes it into the
 file. Corrected on every editable surface (rescue card, its `metadata.lua`,
 the opt-in card's Save Rescue fill-in sentence). ⚠️ The rescue's **on-screen
 dialog** has the same omission ("You can remove Save Rescue whenever you like")
-— that is a code string: **if you rule "fix the dialog" on item 28, the same
-launch should add the save-step line too; same cost, same one re-witness.** If
-you rule "ship as built", the paper instructions now carry the step and the
-dialog merely doesn't repeat it.
+— a code string. ✅ With 17 ruled hold-off and 28 closed **ship as built**,
+nothing ships with it; ⛔ **if the contingency ever fires, re-open the dialog
+text before upload and add the save-step line in the same one-launch
+re-witness** (recorded on item 17 and in the rescue card's header).
 
 ### ⭐ NEW 2026-08-14 — the release descriptions are being written: ONE question, and it is bundled with a call you already owe
 
@@ -154,8 +158,10 @@ the store card's patch-retirement sentence is narrowed to its accurate
 shape-of-the-code version, under your 22d item-1 approval. Still nothing on the
 web; publishing remains yours. Open decisions stay at 3.
 *(Superseded the same day: the release-description chain added **item 28**
-above, so open decisions became **4** — and its terminal audit added **item
-29**, so they are now **5**.)*
+above, so open decisions became **4** — its terminal audit added **item 29**
+for **5** — and the owner then ruled all five release calls in one sitting
+(29 strike · 17 hold-off · 28 ship-as-built · cleanliness A · opt-in 1.0), so
+open decisions are back to the **3** standing non-release items.)*
 
 27. ~~⚖️ **WHERE DOES A BUG REPORT GO?**~~ ✅ **DECIDED 2026-08-13, same session:
     BOTH, COMMENTS NAMED FIRST — and it is written into the site already**
@@ -438,7 +444,13 @@ Reasoning for all three: **`agent/reports/D13_EXPOSED_SET.md`** (promoted
 2026-08-13 to its permanent home — the chain folder it was drafted in is
 deleted when the chain closes).
 
-17. ✅ **DECIDED 2026-08-13, your ruling: (c) — the packs are their own
+17. ✅ **PUBLISH HALF RULED 2026-08-14: hold off.** Save Rescue is **not
+    published at launch** — held in reserve, to be launched **if post-release
+    reports show players stuck with the problem it solves** (the dial residue).
+    The card stays ready (`RELEASE_DESCRIPTION_RESCUE.md`); item **28** closes
+    with this ruling: **ship as built** (re-decide the dialog text before
+    upload if the contingency ever fires — including the audit's save-step
+    line). ✅ **DECIDED 2026-08-13, your ruling: (c) — the packs are their own
     cleaner; the artifact serves ONLY the already-uninstalled.** You first
     challenged the premise ("nobody but me has ever run the pack — why build a
     cleaner at all?") and then **reaffirmed the 2026-08-01 launch-dependency

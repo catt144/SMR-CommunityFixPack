@@ -128,10 +128,7 @@ want this.**
 >>> FILL-IN 2 — store link to the opt-in mod, or DELETE THIS LINE <<<
 - **You can take it out again.** It is built to be safe to add or remove at any
   time. Remove it and the bugs it was holding back come back; repairs it already
-  made to your save stay made. There is one thing you will see and it is not
-  ours: the first time you load a save that was made with any mod you have since
-  removed, the game itself prints a notice that the save refers to a mod that is
-  not there. It disappears as soon as you save again.
+  made to your save stay made.
 
 **Playing on Xbox, PlayStation or the Microsoft Store version?** One platform
 rule to know before you install, and it applies to every mod rather than to this
