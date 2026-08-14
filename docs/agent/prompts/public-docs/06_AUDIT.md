@@ -80,9 +80,21 @@ Everything is in `C:\Dev\SMR-CommunityMods`, committed and pushed, **unpublished
 ## ⛔ RE-DERIVE THIS — inherit nothing from me
 
 * Every count — `--emit-counts` in both mod repos at your moment.
-* Checklist **27**'s state, and whether 26b's sitting has run (STATE ②). Several
-  page sentences are pitched at source-tier because it had not: the console
-  listing command's on-screen behaviour, the opt-in toggle flip, D13's `tested`.
+* Checklist **27**'s state (it was closed the same session; verify).
+* ⛔⛔ **THE SITTING RAN 2026-08-14 AND DID NOT SETTLE THE TWO THINGS THE SITE
+  HEDGES ON. Do not read "the sitting ran" as licence to upgrade them.** Verify
+  each at its own source before touching a sentence:
+  * **Does the listing command put anything ON SCREEN?** Still open.
+    `COMBINED_SITTING.md:367` — *"prep narrowed this but did not answer it…
+    whether anything appears on the in-game CONSOLE is still the open question"*.
+    Its output reaching the **log** is measured; that is a different claim, and
+    `install.md` + `for-modders.md` are written to say exactly that much and no
+    more. Pass F rides `CAPTURE_SITTING.md`, which has **not** run.
+  * **The opt-in toggle flip** (design hole 4's play half) was not taken either —
+    the pages' "takes effect on Apply" remains source-verified only.
+  * What the sitting DID settle: **D13 is `tested`**, F102's local half, PT-20 in
+    state 3, and F102's uninstall revert SOURCE→MEASURED. None of those is
+    claimed on any site page, so none of them is a licence to add one.
 * The five judgment calls, from the entries.
 * **The site build itself.** `python -m pip install mkdocs-material` then
   `python -m mkdocs build --strict` in the site repo. It took one YAML fix to
