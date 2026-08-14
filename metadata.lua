@@ -15,7 +15,13 @@ return PlaceObj('ModDef', {
 	-- (68 -> 66 after F24/F28 went `wontfix`, 67 after F83). If launch prep puts
 	-- a number back, recount it from `python tools/doccheck.py --emit-counts`
 	-- in the same commit — never from this comment.
-	'last_changes', "Initial release: the bug fixes. The optional modules moved to their own mod, the Community Opt-In Pack.",
+	-- ⛔ CORRECTED 2026-08-14 (release-3 prompt 1): this field STILL carried the
+	-- dead working title "Community Opt-In Pack" that the comment ten lines above
+	-- says was corrected — the 08-13 pass fixed `description` and missed this
+	-- string. A player told to look for that name would find nothing on any
+	-- store. Licence: the owner's standing 22b word ("change any wordings to
+	-- their accurate versions"); text-only, no behaviour, no version bump.
+	'last_changes', "Initial release: the bug fixes. The optional modules moved to their own mod, Community Fix Pack: Opt-In Modules.",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	'version', 1,
