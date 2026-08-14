@@ -1,0 +1,381 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	39%
+Disk Free      	746495 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:061
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:064
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:458
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:587
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:785
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:454
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:551
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:541
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:545
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v0.01-000) unpacked from appdata
+[mod] Loaded mod def Save Rescue (id SMR_CommunitySaveRescue, v0.01-000) unpacked from appdata
+						Lua 0:00:17:887
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:888
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:892
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:893
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+						Lua 0:00:17:894
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+						Lua 0:00:17:895
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+						Lua 0:00:17:896
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+						Lua 0:00:17:897
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+						Lua 0:00:17:898
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:17:899
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+						Lua 0:00:17:900
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+						Lua 0:00:17:901
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+						Lua 0:00:17:902
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:17:903
+[mod] [CommunitySaveRescue] SaveRescue: ready
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+						Lua 0:00:17:904
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:441
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+						Lua 0:00:18:442
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:515
+Reloading done in 962 ms
+						Lua 0:00:18:844
+[preset] Preset postprocess took 59 ms.
+						Lua 0:00:18:907
+479 / 479 particle streams loaded in 58 ms.
+						Lua 0:00:18:908
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:097
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:151
+[mod] [CS] WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.
+[CS] WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.
+[mod] [CS] === combined-sitting CS === attended=true
+[CS] === combined-sitting CS === attended=true
+[mod] [CS] STEP 1-waiting-menu BEGIN
+[CS] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:152
+[PdxSDK] Started up. Took 1599
+						Lua 0:00:19:174
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunitySaveRescue, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:595
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:745
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:613
+[mod] [CS] STEP 1-waiting-menu END 2500ms
+[CS] STEP 1-waiting-menu END 2500ms
+[mod] [b2] CELL b2 :: wants fix=true opt-in=true rescue=true | attended=true | savefile=D13SWEEP.savegame.sav
+[b2] CELL b2 :: wants fix=true opt-in=true rescue=true | attended=true | savefile=D13SWEEP.savegame.sav
+[mod] [b2] STEP 2-config-gate BEGIN
+[b2] STEP 2-config-gate BEGIN
+[mod] [b2] GATES config-gate/b2 ------------------------------------------------
+[b2] GATES config-gate/b2 ------------------------------------------------
+[mod] [b2] GATEREAD fix pack :: 74/74 active
+[b2] GATEREAD fix pack :: 74/74 active
+[mod] [b2] GATEREAD opt-in pack :: 8/8 active
+[b2] GATEREAD opt-in pack :: 8/8 active
+[mod] [b2] GATEREAD save-rescue :: 1/1 active
+[b2] GATEREAD save-rescue :: 1/1 active
+[mod] [b2] GATEROW save-rescue :: SaveRescue=active
+[b2] GATEROW save-rescue :: SaveRescue=active
+[mod] [b2] GATEREAD save-rescue :: mod version reported by the mod itself = 0.1.0
+[b2] GATEREAD save-rescue :: mod version reported by the mod itself = 0.1.0
+[mod] [b2] GATES config-gate/b2 :: pack=74/74 | opt-in=8/8 | save-rescue=1/1 | map= | speed=1 | loads_this_process=0
+[b2] GATES config-gate/b2 :: pack=74/74 | opt-in=8/8 | save-rescue=1/1 | map= | speed=1 | loads_this_process=0
+[mod] [b2] MODORDER config-gate/b2 :: 4 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunitySaveRescue 4:SMR_CommunityOptInPack
+[b2] MODORDER config-gate/b2 :: 4 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunitySaveRescue 4:SMR_CommunityOptInPack
+[mod] [b2] DIALOPTS config-gate/b2 :: DroneSpeedDial=5x | DroneCarryDial=+2 | toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[b2] DIALOPTS config-gate/b2 :: DroneSpeedDial=5x | DroneCarryDial=+2 | toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [b2] CONFIGGATE OK :: cell b2 :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=true (wanted true) :: 74/74, 8/8, 1/1
+[b2] CONFIGGATE OK :: cell b2 :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=true (wanted true) :: 74/74, 8/8, 1/1
+[mod] [b2] STEP 2-config-gate END 0ms
+[b2] STEP 2-config-gate END 0ms
+[mod] [b2] STEP 3-load BEGIN
+[b2] STEP 3-load BEGIN
+						Lua 0:00:21:711
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunitySaveRescue 
+						Lua 0:00:21:721
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:746
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:461
+*** Assets reloaded in 2.7 s, read 202.1 MB, read speed 73.8 MB/s, average read 4948 bytes.
+						Lua 0:00:30:335
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:342
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:30:361
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:375
+[mod] [CommunityFixPack] MeteorFrequency: one-shot heal — persisted Meteors thread was alive; restarting onto vanilla's body (latch false -> 1.0.1)
+[mod] [CommunityFixPack] RainsDeadlock: 'normal' rain loop migrated onto vanilla's body (settings 'Normal_VeryLow', version 1.0.1)
+[mod] [CommunitySaveRescue] Save Rescue 0.1.0 — list derived over Community Fix Pack cdbcd9d / Opt-In Modules e17586b (2026-08-13)
+[mod] [CommunitySaveRescue] skipped: thread heals skipped — the Community Fix Pack is installed and heals its own
+						Lua 0:00:30:384
+[mod] [CommunitySaveRescue] pass: removed 0 entries | kept 1 track re-order latch | heals: meteors 0, rains restarted 0, rains ended 0 | skipped 1
+						Lua 0:00:30:388
+Game Loaded in 8678 ms
+						Lua 0:00:30:434
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony						Lua 0:00:30:435
+
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:346
+Game loaded on map BlankBigCanyonCMix_09 in 9733 ms
+[mod] [b2] LOAD OK #1 file=D13SWEEP.savegame.sav — LoadGame returned no error
+[b2] LOAD OK #1 file=D13SWEEP.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:654
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:846
+[mod] [b2] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[b2] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[mod] [b2] STEP 3-load END (no timing — this step blocks render mode)
+[b2] STEP 3-load END (no timing — this step blocks render mode)
+						Lua 0:00:46:847
+[mod] [b2] STEP 5-residue BEGIN
+[b2] STEP 5-residue BEGIN
+[mod] [b2] RESIDUE b2/after-load ==========================================
+[b2] RESIDUE b2/after-load ==========================================
+						Lua 0:00:46:858
+[mod] [b2] RESIDUEPOP b2/after-load :: scanned 4502 distinct labelled object(s) | Colonist=1595 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[b2] RESIDUEPOP b2/after-load :: scanned 4502 distinct labelled object(s) | Colonist=1595 Building=1073 Dome/Habitat=14 DroneControl=25 Rocket=0
+[mod] [b2] RESIDUEROW b2/after-load :: D5   FP SMRFixPack_reserved_at                 n=13 handles=2000020758,2000029738,2000029912,2000031603,2000032125,2000033669,2000034360,2000034559,2000035258,2000035804,2000036588,2000036960,2000037309
+[b2] RESIDUEROW b2/after-load :: D5   FP SMRFixPack_reserved_at                 n=13 handles=2000020758,2000029738,2000029912,2000031603,2000032125,2000033669,2000034360,2000034559,2000035258,2000035804,2000036588,2000036960,2000037309
+[mod] [b2] RESIDUEROW b2/after-load :: D6   FP SMRFixPack_shelter_try                 n=0 handles=
+[b2] RESIDUEROW b2/after-load :: D6   FP SMRFixPack_shelter_try                 n=0 handles=
+[mod] [b2] RESIDUEROW b2/after-load :: D7   FP SMRFixPack_payload_set                 n=0 handles=
+[b2] RESIDUEROW b2/after-load :: D7   FP SMRFixPack_payload_set                 n=0 handles=
+[mod] [b2] RESIDUEROW b2/after-load :: D8   FP SMRFixPack_rocket_fuel_key             n=0 handles=
+[b2] RESIDUEROW b2/after-load :: D8   FP SMRFixPack_rocket_fuel_key             n=0 handles=
+[mod] [b2] RESIDUEROW b2/after-load :: D12  OP SMRFixPack_ack_notworking              n=0 handles=
+[b2] RESIDUEROW b2/after-load :: D12  OP SMRFixPack_ack_notworking              n=0 handles=
+[mod] [b2] RESIDUEROW b2/after-load :: D13  OP SMRFixPack_closed_to_new_residents     n=0 handles=
+[b2] RESIDUEROW b2/after-load :: D13  OP SMRFixPack_closed_to_new_residents     n=0 handles=
+[mod] [b2] RESIDUEROW b2/after-load :: D14  OP SMRFixPack_no_homeless                 n=0 handles=
+[b2] RESIDUEROW b2/after-load :: D14  OP SMRFixPack_no_homeless                 n=0 handles=
+[mod] [b2] RESIDUEMOD b2/after-load :: D15a  SMRFixPack_DroneSpeedDial      present=true on label=Drone
+[b2] RESIDUEMOD b2/after-load :: D15a  SMRFixPack_DroneSpeedDial      present=true on label=Drone
+[mod] [b2] RESIDUEMOD b2/after-load :: D15b  SMRFixPack_DroneCarryDial      present=true on label=Consts
+[b2] RESIDUEMOD b2/after-load :: D15b  SMRFixPack_DroneCarryDial      present=true on label=Consts
+[mod] [b2] RESIDUEKEEP b2/after-load :: D10 SMRFixPack_F35_* modifier(s) = 0 :: NONE
+[b2] RESIDUEKEEP b2/after-load :: D10 SMRFixPack_F35_* modifier(s) = 0 :: NONE
+[mod] [b2] RESIDUEKEEP b2/after-load :: D11 SMRFixPack_F48_StationConnectors = true
+[b2] RESIDUEKEEP b2/after-load :: D11 SMRFixPack_F48_StationConnectors = true
+[mod] [b2] RESIDUEENTRY b2/after-load :: rains['toxic'] :: SMRFixPack_loop_version=nil SMRFixPack_fixed_loop=nil | activation_thread valid=false | main_thread valid=false
+[b2] RESIDUEENTRY b2/after-load :: rains['toxic'] :: SMRFixPack_loop_version=nil SMRFixPack_fixed_loop=nil | activation_thread valid=false | main_thread valid=false
+[mod] [b2] RESIDUEENTRY b2/after-load :: rains['normal'] :: SMRFixPack_loop_version=1.0.1 SMRFixPack_fixed_loop=nil | activation_thread valid=true | main_thread valid=false
+[b2] RESIDUEENTRY b2/after-load :: rains['normal'] :: SMRFixPack_loop_version=1.0.1 SMRFixPack_fixed_loop=nil | activation_thread valid=true | main_thread valid=false
+[mod] [b2] READ rains entries = 2 | population=2 | APPLICABLE=true | witness=RainsDisasterThreads keys
+[b2] READ rains entries = 2 | population=2 | APPLICABLE=true | witness=RainsDisasterThreads keys
+[mod] [b2] RESIDUEMETEOR b2/after-load :: Meteors thread valid = true
+[b2] RESIDUEMETEOR b2/after-load :: Meteors thread valid = true
+[mod] [b2] RESIDUEGAMEVAR b2/after-load :: SMRFixPack_MeteorLatch=1.0.1 FirstAsteroidPrefabs=false — ⛔ these are mod-registered GameVars, dropped by the ENGINE on any pack-less load; never report their absence as something a tool removed
+[b2] RESIDUEGAMEVAR b2/after-load :: SMRFixPack_MeteorLatch=1.0.1 FirstAsteroidPrefabs=false — ⛔ these are mod-registered GameVars, dropped by the ENGINE on any pack-less load; never report their absence as something a tool removed
+[mod] [b2] CLEARED b2/after-load :: REMOVE-list survivors = 4 :: SMRFixPack_reserved_at=13 | SMRFixPack_DroneSpeedDial | SMRFixPack_DroneCarryDial | rains[normal] SMRFixPack_loop_version=1.0.1 SMRFixPack_fixed_loop=nil
+[b2] CLEARED b2/after-load :: REMOVE-list survivors = 4 :: SMRFixPack_reserved_at=13 | SMRFixPack_DroneSpeedDial | SMRFixPack_DroneCarryDial | rains[normal] SMRFixPack_loop_version=1.0.1 SMRFixPack_fixed_loop=nil
+[mod] [b2] CLEARED b2/after-load :: KEEP-list present = true :: D10 x0 | D11 = true
+[b2] CLEARED b2/after-load :: KEEP-list present = true :: D10 x0 | D11 = true
+[mod] [b2] STEP 5-residue END 0ms
+[b2] STEP 5-residue END 0ms
+[mod] [b2] ERRORWATCH b2 — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting b2 ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=5-residue loads_this_process=1
+[b2] ERRORWATCH b2 — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting b2 ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=5-residue loads_this_process=1
+[mod] [b2] ================================================================
+[b2] ================================================================
+[mod] [b2] HANDOVER — the rig is done. The keyboard is yours.
+[b2] HANDOVER — the rig is done. The keyboard is yours.
+[mod] [b2] HANDOVER :: MOMENT B(4) — the stand-down, with both packs back on.
+[b2] HANDOVER :: MOMENT B(4) — the stand-down, with both packs back on.
+[mod] [b2] HANDOVER :: 1. EXPECTED: ONE 'Save Rescue' dialog saying there is nothing to do because the packs are still installed. Say 'stand-down dialog ONCE: yes-no'.
+[b2] HANDOVER :: 1. EXPECTED: ONE 'Save Rescue' dialog saying there is nothing to do because the packs are still installed. Say 'stand-down dialog ONCE: yes-no'.
+[mod] [b2] HANDOVER :: 2. The log line above should read removed 0.
+[b2] HANDOVER :: 2. The log line above should read removed 0.
+[mod] [b2] HANDOVER :: 3. QUIT THE GAME COMPLETELY. The agent then pulls the rescue junction and puts the rig back to standing config.
+[b2] HANDOVER :: 3. QUIT THE GAME COMPLETELY. The agent then pulls the rescue junction and puts the rig back to standing config.
+[mod] [b2] HANDOVER :: when this moment is finished, QUIT THE GAME NORMALLY (main menu -> Quit). A graceful exit is what flushes this log's tail; a killed process loses it (EF-047).
+[b2] HANDOVER :: when this moment is finished, QUIT THE GAME NORMALLY (main menu -> Quit). A graceful exit is what flushes this log's tail; a killed process loses it (EF-047).
+[mod] [b2] ================================================================
+[b2] ================================================================
+[mod] [b2] OWNERLOAD instrumentation ARMED — every subsequent load prints a gate read and a full residue read
+[b2] OWNERLOAD instrumentation ARMED — every subsequent load prints a gate read and a full residue read
+						Lua 0:01:46:846
+[mod] [b2] HEARTBEAT b2 :: parked 60 s of attended time so far | map=BlankBigCanyonCMix_09 | speed=1 | sol=335 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps						Lua 0:01:46:847
+
+[b2] HEARTBEAT b2 :: parked 60 s of attended time so far | map=BlankBigCanyonCMix_09 | speed=1 | sol=335 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+						Lua 0:02:30:640
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:02:30:642
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:02:30:977
+
+
+*** Debug::Done()
+Time (ms)	150977
+
+

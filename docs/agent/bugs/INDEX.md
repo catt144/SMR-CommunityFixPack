@@ -87,7 +87,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 107 | D10 | Workshops: capacity can't scale late-game; unemployment's real cost invisible | parked | dsgn | med | [D10.md](D10.md) |
 | 108 | D11 | Shuttles fly ONE passenger per trip even for identical dome pairs | candidate | dsgn | low | [D11.md](D11.md) |
 | 109 | D12 | Homeless strand in specialist domes; emigration ties never move them | speced | dsgn | med | [D12.md](D12.md) |
-| 110 | D13 | Save-exit deliverables: uninstall procedure + standalone save-rescue artifact | built | dsgn | high | [D13.md](D13.md) |
+| 110 | D13 | Save-exit deliverables: uninstall procedure + standalone save-rescue artifact | tested | dsgn | high | [D13.md](D13.md) |
 | 69 | F64 | Station demolition permanently leaks train prefabs | fixed | P1 | high | [F64.md](F64.md) |
 | 70 | F65 | Station-at-tunnel never bridges the power grid | tested | P2 | med | [F65.md](F65.md) |
 | 71 | F66 | Station↔tunnel connector hex ping-pong (never connects) | tested | P2 | med+ | [F66.md](F66.md) |

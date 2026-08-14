@@ -70,7 +70,36 @@ owed input stays here no matter how struck-through it looks.
 
 ### ⭐⭐ NEW 2026-08-13 — D13 CHAIN CLOSED; the ONE combined sitting is READY (step ② — the release line's next move is yours)
 
-26b. ⭐⭐ **THE COMBINED SITTING'S PREP IS *DONE AND MEASURED* — IT IS WAITING ON
+26b. ✅✅✅ **THE COMBINED SITTING RAN 2026-08-14 AND ALL THREE MOMENTS PASSED.
+    ⭐⭐ D13 IS `tested`. NOTHING HERE IS OWED BY YOU ANY MORE.**
+    **Your cost: 34 minutes** of parked handover time measured off the harness
+    heartbeats, against a 30–45 promise — inside a ~67-minute wall clock whose
+    difference is your own landscaping lead and one stalled launch. Six logs
+    archived byte-verified (`archive/cs_*`). **0 `[LUA ERROR]` in every cell.**
+    * **F102's minute** → item 11 above, struck. Sign renders, selectable.
+    * **PT-20 redo** → state 3 confirmed (`pack=0/0` + `opt-in=0/0`, kit alone in
+      `Loaded mod items for:`), all 8 pack-naming lines accounted, ~21 min of your
+      ordinary play + a save + a reload, **zero errors in the flushed file**.
+      Recorded as **superseding** the old 98-vs-98, not confirming it — that was an
+      error count from the F86 era and F86 is repaired.
+    * ⭐⭐ **D13 after-sweep** → `removed 1566` by name on a NATIVE witness,
+      **matching a prediction committed before the sitting row for row and skip for
+      skip**; the F48 repair kept; `heals: 0, 0, 0` because nothing was broken. And
+      the three readings no log can ever hold: **report dialog raised** with the
+      right text, **cleaned reload silent** (with `save-rescue=1/1 active` beside
+      it, so the silence means something), **stand-down exactly once**.
+    ⚠️ **Three things went wrong and none of them was the mod.** (1) Save Rescue
+    came back from its junction round trip **not enabled** — that cost you one
+    Mod-Manager visit and a launch, and it contradicts `EF-055`; two candidate
+    causes recorded, neither ruled out. (2) The frozen spec promises the dialog
+    says *"(drone speed and carry capacity are back to the game's own values)"* and
+    the code prints a bare *"2 drone stat dials"* — step ③ would have shipped a
+    text the build does not produce. (3) Two defects in my own instruments (the
+    Test Kit's on-screen output covered the dialog it was there to witness; a
+    reader applied the removal contract in a packs-present cell and cried wolf).
+    ℹ️ Your landscaping-overlay lead is carried as a rider and costs you nothing.
+    *The prep note that preceded it:*
+    ~~⭐⭐ **THE COMBINED SITTING'S PREP IS *DONE AND MEASURED* — IT IS WAITING ON
     YOUR CHAIR ONLY** (2026-08-13). Three unattended dry-run launches have
     already happened with the game closed and nobody at the keyboard; every
     fixture is verified to exist, the harness is proven, and the predictions
@@ -110,7 +139,13 @@ owed input stays here no matter how struck-through it looks.
     rotation, and it deleted this sitting's own fixture *and* your held
     `Autosave Sol 311` during prep.** `Sol 311` was **restored byte-exact** from
     the pre-copy; the fixture was re-staged from a save that is not an autosave;
-    `EF-056` is amended. Nothing of yours is lost.
+    `EF-056` is amended. Nothing of yours is lost.~~
+    ⚠️ **The autosave rotation fired twice more DURING the sitting** — it took
+    `Autosave Sol 311` and `Autosave Sol 311(2)` while you played, and wrote
+    `Autosave Sol 316`. **Both restored byte-exact**, and every autosave was
+    re-verified at close-out. That is the amended rule paying for itself three
+    times in two days, and it is why it now says reconcile after *every* launch
+    rather than reason about which one will fire.
     ⚖️ **One small call, batched from the chain (answer whenever):** the
     status vocabulary has no word for "verified-unattended" (`doccheck`
     rejects `verified`), so that truth lives in narrative only.
@@ -809,7 +844,24 @@ than moving to the archive only because item 24's artifact is not built yet.
 
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
 
-11. ~~**⚖️ `F102` — the community-witnessed asteroid freeze (Linux/NVIDIA):
+11. ✅✅ **DONE 2026-08-14 — THE OWED MINUTE IS PAID, nothing further owed by you.**
+    Moment C of the combined sitting. ⛔ Two things the item had wrong and you
+    would have hit at the keyboard: **there is no save called `Sylmacaink BH25`**
+    (all 88 read at their headers) and your campaign's asteroid carries **ONE**
+    deposit sign, not three. The rig switched maps and selected it for you.
+    **Your verdict: the sign RENDERS and is SELECTABLE** — it opened
+    `Underground Exotic Minerals · 14,935/14,935 · Grade: Very high`, whose number
+    is the log's `amount=14935000` read a second way. Log side: `ExoticDepositSign
+    [active]`, `1 … re-signed onto the clean entity`, 0 `[LUA ERROR]`.
+    ⭐ **One already-placed deposit beat three spawned ones**: it exercised the
+    `OnMsg.LoadGame` sweep that the 2026-08-12 console-spawn leg never touched.
+    ⭐⭐ **And moment A threw in a free measurement**: with both packs disabled the
+    same deposit reverted to the vanilla sign with zero re-sign lines, so
+    "uninstall is clean" stops being a source argument and becomes a reading.
+    ⛔ **The CURE is still unverified and still ships disclaimered** — that has not
+    moved and only a Linux/NVIDIA player's report moves it. → `agent/bugs/F102.md`.
+    *The original item, for the record:*
+    ~~**⚖️ `F102` — the community-witnessed asteroid freeze (Linux/NVIDIA):
     ship our entity-retarget fix without being able to verify the cure?**~~
     ✅ **DECIDED 2026-08-12, your ruling in-session: "Lets do option 3, its the
     easiest and safest, and we will just disclaimer it."** Built the same day:
@@ -1878,7 +1930,39 @@ over a real session of ordinary play.
    broken track — Test Kit, PLAYTEST_HELP).
 3. Log review per the protocol.
 
-### PT-20 — Uninstall safety · Status: standing — re-run per era and before release · ⛔ **2026-08-10: a Mod-Manager disable does NOT take effect until a FULL game restart** (D13, measured) — the prior 98-vs-98 comparison may have sampled the mixed state · ⭐ **REDO ORDERED (your decision 6, 2026-08-10): a dedicated redo co-run is QUEUED** — disable click + full restart + ~10 min play are yours, everything else rig-side; its result supersedes the old comparison · **mode: co-run** (routing 2026-08-04 — you keep the disable click + the 10 min play; save/reload/log reads rig-side)
+### PT-20 — Uninstall safety · Status: ✅✅ **REDO RAN CLEAN 2026-08-14 in state 3 — this per-era re-check is DONE for this era** · standing (re-run per era and before release) · **mode: co-run**
+✅✅ **THE REDO (your decision 6, 2026-08-10) IS PAID.** Combined sitting moment A,
+log `archive/cs_a1_Mars.exe-20260814-11.57.50.log`. Both packs Mod-Manager-disabled
+**with a full process restart**, so this is state (3) and not the mixed state (2)
+the old reading may have sampled.
+* **The gate, beside every reading:** `pack=0/0 | opt-in=0/0 | save-rescue=0/0`,
+  all three registries ABSENT, and `MODORDER :: 1 mod(s) loaded ::
+  1:SMR_CommunityFixPackTestKit` — the kit alone.
+* **All 8 pack-naming lines accounted:** three mod-**def** loads (the def loads in
+  state 3, the code does not) · `Loaded mod items for: …TestKit` · the save's own
+  recorded mod list · one `Unpersist missing permanent: Mod/SMR_CommunityFixPack`
+  · two *"…which is present, but not loaded"*. ⚠️ The `Unpersist` line is **not
+  diagnostic** — it fires in state (2) with the pack fully live; it is only
+  readable next to the `pack=0/0` gate.
+* **~21 minutes of the owner's ordinary play** (building, trains, workers —
+  *"everything seems normal"*), then a save as `PT20REDO` and a reload, which
+  printed its own gate line.
+* ⭐ **Verdict: 0 `[LUA ERROR]`, 0 `[ERROR]`** in the flushed file (absence read
+  only from the archived file, `EF-047`). F99 `:805` and C45 `Quantum Comet`
+  watches zero.
+* **The leg's own point held:** the save still carried its leftovers throughout —
+  `reserved_at ×1260`, `payload_set ×4`, `closed_to_new_residents ×4`, both Drone
+  dial modifiers, the F48 latch — *and it behaved normally anyway.*
+* ⛔ **Recorded as SUPERSEDING the 98-vs-98, not confirming it.** That was an error
+  **count** comparison from the F86 era and F86 is repaired (PT-58 measured the
+  same shape at zero); a clean state-3 run replaces it, it does not reproduce it.
+* ⚠️ **One deliberate deviation from the setup below:** *both* packs were disabled,
+  not the fix pack only. The host save was written with both, so disabling both is
+  the true "the player uninstalled our mods" configuration — and it is what the
+  D13 after-sweep in the same window required. ⛔ **Save Rescue was pulled for this
+  leg**: left installed it would have stripped the residue two seconds into the
+  load and the leg would have sampled nothing.
+Earlier framing: ⛔ **2026-08-10: a Mod-Manager disable does NOT take effect until a FULL game restart** (D13, measured) — the prior 98-vs-98 comparison may have sampled the mixed state · redo ordered by your decision 6, 2026-08-10
 **Bug:** the pack must never hold a save hostage. Steps 1-4 passed 2026-07-31;
 step 5's hunt found F86 (both sites since repaired — PT-58 measured the same
 shape at ZERO errors against leg 5's 80). This is the per-era re-check, not an

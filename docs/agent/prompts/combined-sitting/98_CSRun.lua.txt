@@ -37,7 +37,16 @@ local CELLS = {
 	--    loaded Save Rescue would strip this save's residue in the first two
 	--    seconds and PT-20 would no longer be sampling the thing it exists to
 	--    sample (see the brief §3, the one deviation this prep took).
-	a1       = { fix = false, opt = false, res = false, attended = true,  load = true,  f102 = false, residue = true  },
+	-- ⭐ f102 = true here, ADDED 2026-08-14 mid-sitting after the owner asked
+	--    "is this the new art?" at moment C. It is the same deposit on the same
+	--    asteroid with the packs GONE, so this cell measures something F102's
+	--    safety case has only ever ARGUED from source: that the class-default
+	--    retarget REVERTS on uninstall and the vanilla entity is still there.
+	--    Expected: entity reads back 'SignPreciousMineralsDeposit', and NO
+	--    're-signed' line, because the fix's OnMsg.LoadGame handler is gone with
+	--    it. It also gives the owner the matching half of a before/after they can
+	--    photograph. Read-only; it touches nothing PT-20 measures.
+	a1       = { fix = false, opt = false, res = false, attended = true,  load = true,  f102 = true,  residue = true  },
 
 	-- ⭐ moment B — the D13 attended after-sweep. Same state-3 window, rescue IN.
 	b1       = { fix = false, opt = false, res = true,  attended = true,  load = true,  f102 = false, residue = true  },
@@ -135,8 +144,16 @@ function CS.Payload()
 	if CELL == "c1" then
 		script = {
 			"MOMENT C — F102's minute (checklist item 11, local half).",
-			"1. LOOK at the three deposit signs the camera is parked on: does the new art render, and can you click one and see its panel?",
-			"2. Say the verdict words: 'signs render / selectable: yes-no'.",
+			-- ⛔ ONE sign, not three. Measured in prep on this exact fixture and
+			--    again at this cell's own census line above: the campaign carries
+			--    a single subsurface Exotic Minerals deposit, on slot 3. The
+			--    'three signs' of checklist item 11 came from the 2026-08-12
+			--    console-spawned D-type, which is a different map that no save on
+			--    disk carries. Do not send the owner hunting for two that are not
+			--    there. (This line said 'three' on the first attended run,
+			--    2026-08-14, and the count printed right above it said 1.)
+			"1. LOOK at the ONE deposit sign the camera is parked on and has already selected: does the new art render, and does its panel come up when you click it?",
+			"2. Say the verdict words: 'sign renders: yes-no' and 'selectable: yes-no'.",
 			"3. Then: main menu -> MOD MANAGER -> turn OFF 'Community Fix Pack' AND 'Community Fix Pack: Opt-In Modules'. LEAVE the Test Kit ON.",
 			"4. QUIT THE GAME COMPLETELY. ⛔ The disable does NOT take effect until a full process restart (D13, measured 2026-08-10) — a return to the main menu leaves the mixed state (2) that made the old PT-20 comparison unreadable.",
 		}
@@ -144,6 +161,7 @@ function CS.Payload()
 		script = {
 			"MOMENT A — the PT-20 redo, done RIGHT (state 3: both packs off AND restarted).",
 			"1. Check the gate line above says pack=0/0 and opt-in=0/0. If it does not, the game will already have closed itself.",
+			"1b. FREE RIDE-ALONG (added at the owner's question, moment C): the camera is parked on the SAME deposit as moment C, with the packs GONE. This is the uninstall half of F102 — the entity line above says whether the retarget reverted. Photograph it if you want the before/after pair, then fly back to the colony.",
 			"2. Play ~10 minutes of ORDINARY play. Nothing special, nothing forced. The original bugs coming back is expected and fine.",
 			"3. Then SAVE from the in-game menu under the name: PT20REDO",
 			"4. Then LOAD PT20REDO back from the load list. The save must behave normally.",

@@ -1,0 +1,665 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	39%
+Disk Free      	746947 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:098
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:101
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:953
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:02:084
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:02:275
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:982
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:03:376
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:18:370
+Account storage loaded successfully in 2 ms
+						Lua 0:00:18:388
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v0.01-000) unpacked from appdata
+						Lua 0:00:18:761
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:765
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:766
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+						Lua 0:00:18:767
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+						Lua 0:00:18:768
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+						Lua 0:00:18:769
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:18:770
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:18:771
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:18:772
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+						Lua 0:00:18:773
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+						Lua 0:00:18:774
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+						Lua 0:00:18:775
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+						Lua 0:00:18:776
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:19:312
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:19:396
+Reloading done in 969 ms
+						Lua 0:00:19:724
+[preset] Preset postprocess took 70 ms.
+						Lua 0:00:19:787
+479 / 479 particle streams loaded in 59 ms.
+						Lua 0:00:19:788
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:977
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:20:030
+[mod] [CS] WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.
+[CS] WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.
+[mod] [CS] === combined-sitting CS === attended=true
+[CS] === combined-sitting CS === attended=true
+[mod] [CS] STEP 1-waiting-menu BEGIN
+[CS] STEP 1-waiting-menu BEGIN
+[PdxSDK] Started up. Took 1604
+						Lua 0:00:20:070
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:20:139
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:20:140
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:333
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:878
+[mod] [CS] STEP 1-waiting-menu END 2500ms
+[CS] STEP 1-waiting-menu END 2500ms
+[mod] [c1] CELL c1 :: wants fix=true opt-in=true rescue=false | attended=true | savefile=CSHOST.savegame.sav
+[c1] CELL c1 :: wants fix=true opt-in=true rescue=false | attended=true | savefile=CSHOST.savegame.sav
+[mod] [c1] STEP 2-config-gate BEGIN
+[c1] STEP 2-config-gate BEGIN
+[mod] [c1] GATES config-gate/c1 ------------------------------------------------
+[c1] GATES config-gate/c1 ------------------------------------------------
+[mod] [c1] GATEREAD fix pack :: 74/74 active
+[c1] GATEREAD fix pack :: 74/74 active
+[mod] [c1] GATEREAD opt-in pack :: 8/8 active
+[c1] GATEREAD opt-in pack :: 8/8 active
+[mod] [c1] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[c1] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[mod] [c1] GATES config-gate/c1 :: pack=74/74 | opt-in=8/8 | save-rescue=0/0 | map= | speed=1 | loads_this_process=0
+[c1] GATES config-gate/c1 :: pack=74/74 | opt-in=8/8 | save-rescue=0/0 | map= | speed=1 | loads_this_process=0
+[mod] [c1] MODORDER config-gate/c1 :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[c1] MODORDER config-gate/c1 :: 3 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack 3:SMR_CommunityOptInPack
+[mod] [c1] DIALOPTS config-gate/c1 :: DroneSpeedDial=5x | DroneCarryDial=+2 | toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[c1] DIALOPTS config-gate/c1 :: DroneSpeedDial=5x | DroneCarryDial=+2 | toggles :: ClassicRockets=true AcknowledgedWarnings=true ResidencyControl=true MultipleSuns=true DroneOverhaul=true CohortHousing=true NoHomeless=true
+[mod] [c1] CONFIGGATE OK :: cell c1 :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=false (wanted false) :: 74/74, 8/8, 0/0
+[c1] CONFIGGATE OK :: cell c1 :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=false (wanted false) :: 74/74, 8/8, 0/0
+[mod] [c1] STEP 2-config-gate END 0ms
+[c1] STEP 2-config-gate END 0ms
+[mod] [c1] STEP 3-load BEGIN
+[c1] STEP 3-load BEGIN
+						Lua 0:00:21:980
+Load Game: 
+	lua_revision: 396349 						Lua 0:00:21:981
+
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:21:988
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:22:018
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:797
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 72.0 MB/s, average read 4949 bytes.
+						Lua 0:00:30:604
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:610
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:30:630
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:647
+Game Loaded in 						Lua 0:00:30:648
+8667 ms
+						Lua 0:00:30:694
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:564
+Game loaded on map BlankBigCanyonCMix_09 in 9686 ms
+[mod] [c1] LOAD OK #1 file=CSHOST.savegame.sav — LoadGame returned no error
+[c1] LOAD OK #1 file=CSHOST.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:869
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:47:062
+[mod] [c1] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[c1] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[mod] [c1] STEP 3-load END (no timing — this step blocks render mode)
+[c1] STEP 3-load END (no timing — this step blocks render mode)
+[mod] [c1] STEP 4-f102 BEGIN
+[c1] STEP 4-f102 BEGIN
+[mod] [c1] LISTFIXES c1 :: ExoticDepositSign status=active detail=
+[c1] LISTFIXES c1 :: ExoticDepositSign status=active detail=
+[mod] [CommunityFixPack] CaveInsNoDisasters [active] Cave-ins no longer occur when the "No Disasters" game rule is active
+[mod] [CommunityFixPack] MeteorFrequency [active] Meteors strike on their designed 35-115h schedule instead of ~every 6 hours
+[mod] [CommunityFixPack] UpgradeModifierLeak [active] Salvaging an upgraded building now removes its dome/colony-wide upgrade bonuses
+[mod] [CommunityFixPack] NightShiftWork [active] Night-shift colonists go to work after midnight instead of skipping their shift
+[mod] [CommunityFixPack] MilestoneCrash [active] Completing all milestones no longer errors in No Terraforming / No Politics games
+[mod] [CommunityFixPack] WispRewards [active] Mystery 11: "free the wisps" produces real power; destroyed-wisp rewards match the notification
+[mod] [CommunityFixPack] TouristApplicants [active] Higher tourist ratings now correctly give more bonus applicants (roll was inverted)
+[mod] [CommunityFixPack] TrainsToVoid [active] Demolishing a station stores its trains instead of permanently deleting them
+[mod] [CommunityFixPack] LanderEmptyLaunch [active] Automatic rockets and asteroid landers wait for cargo instead of launching empty
+[mod] [CommunityFixPack] LanderCargoRatchet [active] Automatic rockets stop unloading the cargo they just loaded, and fill up with the valuable resources first
+[mod] [CommunityFixPack] LanderReturnFuel [active] Asteroid landers keep their return fuel instead of unloading it on the asteroid
+[mod] [CommunityFixPack] ShelterReflex [active] Asteroid colonists take shelter before suffocating, and keep their habitat through power blips
+[mod] [CommunityFixPack] BrokenTrackSalvage [active] Meteor-damaged tracks can be salvaged again
+[mod] [CommunityFixPack] TrackSalvageWipe [active] Salvaging one track piece no longer deletes the whole track and its trains
+[mod] [CommunityFixPack] LakeEntombment [active] Building an artificial lake no longer entombs the RC Constructor and drones
+[mod] [CommunityFixPack] GhostFarmOxygen [active] Salvaging a farm removes the oxygen it was giving its dome
+[mod] [CommunityFixPack] RocketDroneChurn [active] Landed rockets stop sending their delivery drones back to Idle every hour
+[mod] [CommunityFixPack] ShuttleTransportCache [active] New Shuttle Hubs are noticed: colonists stop being stuck with a cached 'unreachable'
+[mod] [CommunityFixPack] VacuumWalks [active] Colonists use the passages instead of crossing vacuum on foot between nearby domes
+[mod] [CommunityFixPack] ArrivalDeaths [active] Arriving colonists no longer hike to unreachable domes or land in impassable ground
+[mod] [CommunityFixPack] DroneUnreachableForever [active] Drones re-try buildings they once failed to reach instead of writing them off forever
+[mod] [CommunityFixPack] StaleReservations [active] Housing reserved for colonists that never arrive is released again
+[mod] [CommunityFixPack] CrystalMysteryHang [active] The Philosopher's Stone mystery can no longer hang forever at the finale
+[mod] [CommunityFixPack] TouristSatisfaction [active] Tourist satisfaction stops drifting down (threshold awards are now symmetric)
+[mod] [CommunityFixPack] TrainPlatformWedge [active] A stale passenger no longer wedges a train at the platform forever
+[mod] [CommunityFixPack] LowStorageWarning [active] The "Insufficient Resources" warning works again for Food and maintenance resources
+[mod] [CommunityFixPack] CommandCenterNumbers [active] Command Center resource rows show their numbers again
+[mod] [CommunityFixPack] DomeOverviewHighlight [active] Domes Overview marks low colonist stats in red again
+[mod] [CommunityFixPack] TrainCargoDumping [active] Trains stop dumping cargo at stations where that resource is switched off
+[mod] [CommunityFixPack] UniversityOvertraining [active] Universities stop training specialists for workplaces that run themselves
+[mod] [CommunityFixPack] DestroyedTunnels [active] Destroyed tunnels stay closed after loading a save instead of rejoining pathfinding
+[mod] [CommunityFixPack] DustSicknessBiorobots [active] Dust Sickness no longer infects Biorobots
+[mod] [CommunityFixPack] DustSicknessDamage [active] Dust Sickness deals its intended random damage instead of the maximum every sol
+[mod] [CommunityFixPack] GeneForging [active] The Gene Forging tech actually increases the rare-trait chance
+[mod] [CommunityFixPack] MirrorSphereSite [active] A completed Mirror Sphere site no longer accepts more drone work
+[mod] [CommunityFixPack] PayloadTemplateRefill [active] Edit Payload keeps the amounts you set instead of refilling them from the flight-policy template
+[mod] [CommunityFixPack] AsteroidLanderAvailable [active] The asteroid-expedition gate counts landed landers, and stops counting supply rockets
+[mod] [CommunityFixPack] ShuttleHubOffAvailable [active] Shuttle Hubs switched off no longer count as available colonist transport
+[mod] [CommunityFixPack] FreedHousingNotice [active] A home falling vacant is offered to the dome's homeless straight away
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch [active] A dome's free-housing total counts the same residences the game assigns colonists to
+[mod] [CommunityFixPack] SmallLandscapeSites [active] Drones no longer error out when sent to a small landscaping site
+[mod] [CommunityFixPack] LandscapeUnitFilter [active] Landscaping over a boarding point no longer drags boarding colonists out
+[mod] [CommunityFixPack] RocketInteractGuard [active] RC Transports stay off trade and refugee rockets again
+[mod] [CommunityFixPack] TrackConnectorPingPong [active] A station and a tunnel one hex apart stop stealing each other's track connector
+[mod] [CommunityFixPack] TrackTunnelPowerBridge [active] A station attached to a train tunnel bridges the power grid again
+[mod] [CommunityFixPack] GridGlobalStorage [active] Colony-wide power/water/oxygen reserve is measured as one ratio again
+[mod] [CommunityFixPack] LastTransmissionStorage [active] Last Transmission's power/water/oxygen storage opinions actually count
+[mod] [CommunityFixPack] GraphConsumedCaption [active] Command Center graph captions count maintenance, like the bars do
+[mod] [CommunityFixPack] MoraleComfortTooltip [active] Morale tooltip stops listing a Comfort bonus the game does not apply
+[mod] [CommunityFixPack] TrainWaitTime [active] Waiting on a train platform no longer counts as time spent riding
+[mod] [CommunityFixPack] FounderTraitNotification [active] The notification for a Founder gaining a trait fires again
+[mod] [CommunityFixPack] StorageRateModifiers [active] Charge and discharge rate modifiers on batteries and tanks take effect
+[mod] [CommunityFixPack] SequenceLatents [active] Sequence label sampling and the Digger timing swap behave as written
+[mod] [CommunityFixPack] IndependenceTerraforming [active] Independent Terraforming discounts special projects by the 20% it advertises
+[mod] [CommunityFixPack] TrackSalvageRefund [active] Salvaging a track refunds what the whole track cost, not one hex
+[mod] [CommunityFixPack] LayoutTechLock [active] Layout construction respects research locks
+[mod] [CommunityFixPack] TrainMinors [active] Train cap follows track length
+[mod] [CommunityFixPack] DroneTransportMinors [active] A passability change no longer corrupts each drone's unreachable-buildings table
+[mod] [CommunityFixPack] AnomalyCaveInMap [active] A cave-in on a map that does not exist is declined instead of crashing the sequence
+[mod] [CommunityFixPack] TechDescriptionBuilding [active] The Underground Medium Dome tech description names the building it actually unlocks
+[mod] [CommunityFixPack] BombardmentSpread [active] Bombardment missiles come in from spread directions instead of in parallel
+[mod] [CommunityFixPack] ExtenderFlapChurn [active] Extender power flickers no longer tear down and rebuild the whole hub (fleet-wide Idle churn)
+[mod] [CommunityFixPack] DisasterPredictionLeak [active] A finished meteor storm no longer disables rains, cold waves and dust storms forever
+[mod] [CommunityFixPack] MeteorStormWedge [active] A wedged meteor storm is detected and released instead of blocking storms forever
+[mod] [CommunityFixPack] RainsDeadlock [active] A rain that collides with another disaster retries instead of never raining again
+[mod] [CommunityFixPack] FirstAsteroidPrefabs [active] The First Asteroid prefabs still arrive if the popup was left unanswered across a save/load
+[mod] [CommunityFixPack] SaintBlessing [active] A Saint's blessing reaches the Religious colonists in their dome
+[mod] [CommunityFixPack] DustDevilsDescrMap [active] Dust devils on the surface use the surface's settings, not the map the camera is on
+[mod] [CommunityFixPack] AstrogeologistExtractors [active] The Astrogeologist bonus reaches every buildable extractor, as its own text promises
+[mod] [CommunityFixPack] SinkholeIndestructible [active] A meteor can no longer destroy the St. Elmo's Fire sinkhole
+[mod] [CommunityFixPack] DustStormUndergroundBreaks [active] A surface dust storm can no longer break cables and pipes underground
+[mod] [CommunityFixPack] DustDevilSpawnGate [active] Dust devil waves use their authored count range instead of being scaled down by the spawn chance
+[mod] [CommunityFixPack] ExoticDepositSign [active] Subsurface Exotic Minerals deposits use the remaster's own sign — believed to stop the asteroid-visit freeze reported on Linux/NVIDIA systems
+[mod] [CommunityFixPack] SaveSanitizer [active] Savegame repair: lost Wind Turbine tech buff, leaked upgrade bonuses
+[mod] [c1] TRY SMRFixPack.ListFixes ok=true result=nil
+[c1] TRY SMRFixPack.ListFixes ok=true result=nil
+[mod] [c1] F102 c1 :: class present=true | class-default entity=SignRareMineralsDeposit | shipped sign was 'SignPreciousMineralsDeposit', the fix retargets to 'SignRareMineralsDeposit'
+[c1] F102 c1 :: class present=true | class-default entity=SignRareMineralsDeposit | shipped sign was 'SignPreciousMineralsDeposit', the fix retargets to 'SignRareMineralsDeposit'
+[mod] [c1] F102 c1 :: IsValidEntity('SignRareMineralsDeposit')=true IsValidEntity('SignPreciousMineralsDeposit')=true
+[c1] F102 c1 :: IsValidEntity('SignRareMineralsDeposit')=true IsValidEntity('SignPreciousMineralsDeposit')=true
+[mod] [c1] F102 c1 :: LoadedMaps = 4 :: slot=1:BlankBigCanyonCMix_09 slot=2:BlankUnderground_04 slot=3:BlankAsteroidDonut_01 slot=4:BlankAsteroidBranchOut_01
+[c1] F102 c1 :: LoadedMaps = 4 :: slot=1:BlankBigCanyonCMix_09 slot=2:BlankUnderground_04 slot=3:BlankAsteroidDonut_01 slot=4:BlankAsteroidBranchOut_01
+						Lua 0:00:47:063
+[mod] [c1] TRY AllMapsForEach SubsurfaceDepositPreciousMinerals ok=true result=nil
+[c1] TRY AllMapsForEach SubsurfaceDepositPreciousMinerals ok=true result=nil
+[mod] [c1] F102 c1 :: deposit 1/1 SubsurfaceDepositPreciousMinerals#2000010866 :: entity=SignRareMineralsDeposit | map_slot=3 | on_current_map=false | revealed=true | amount=14935000
+[c1] F102 c1 :: deposit 1/1 SubsurfaceDepositPreciousMinerals#2000010866 :: entity=SignRareMineralsDeposit | map_slot=3 | on_current_map=false | revealed=true | amount=14935000
+[mod] [c1] READ F102 subsurface Exotic Minerals deposits = 1 | population=1 | APPLICABLE=true | witness=AllMapsForEach over LoadedMaps — a zero here means the loaded maps carry none, which is a DIFFERENT fact from the fix not working
+[c1] READ F102 subsurface Exotic Minerals deposits = 1 | population=1 | APPLICABLE=true | witness=AllMapsForEach over LoadedMaps — a zero here means the loaded maps carry none, which is a DIFFERENT fact from the fix not working
+[mod] [c1] TRY ViewObjectAndChangeMap ok=true result=nil
+[c1] TRY ViewObjectAndChangeMap ok=true result=nil
+						Lua 0:00:48:096
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:51:064
+[mod] [c1] F102 SHOW :: after the camera move, CurrentMapName=BlankAsteroidDonut_01 | the deposit reports on_current_map=true | selected=SubsurfaceDepositPreciousMinerals#2000010866
+[c1] F102 SHOW :: after the camera move, CurrentMapName=BlankAsteroidDonut_01 | the deposit reports on_current_map=true | selected=SubsurfaceDepositPreciousMinerals#2000010866
+[mod] [c1] F102 VERDICT-INPUT c1 :: deposits found = 1. ⛔ The verdict words are the OWNER'S EYES: 'signs render / selectable: yes-no'. This log can prove the entity string and the sweep count; it cannot prove anything rendered.
+[c1] F102 VERDICT-INPUT c1 :: deposits found = 1. ⛔ The verdict words are the OWNER'S EYES: 'signs render / selectable: yes-no'. This log can prove the entity string and the sweep count; it cannot prove anything rendered.
+[mod] [c1] STEP 4-f102 END 4000ms
+[c1] STEP 4-f102 END 4000ms
+[mod] [c1] ERRORWATCH c1 — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting c1 ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=4-f102 loads_this_process=1
+[c1] ERRORWATCH c1 — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting c1 ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=4-f102 loads_this_process=1
+[mod] [c1] ================================================================
+[c1] ================================================================
+[mod] [c1] HANDOVER — the rig is done. The keyboard is yours.
+[c1] HANDOVER — the rig is done. The keyboard is yours.
+[mod] [c1] HANDOVER :: MOMENT C — F102's minute (checklist item 11, local half).
+[c1] HANDOVER :: MOMENT C — F102's minute (checklist item 11, local half).
+[mod] [c1] HANDOVER :: 1. LOOK at the three deposit signs the camera is parked on: does the new art render, and can you click one and see its panel?
+[c1] HANDOVER :: 1. LOOK at the three deposit signs the camera is parked on: does the new art render, and can you click one and see its panel?
+[mod] [c1] HANDOVER :: 2. Say the verdict words: 'signs render / selectable: yes-no'.
+[c1] HANDOVER :: 2. Say the verdict words: 'signs render / selectable: yes-no'.
+[mod] [c1] HANDOVER :: 3. Then: main menu -> MOD MANAGER -> turn OFF 'Community Fix Pack' AND 'Community Fix Pack: Opt-In Modules'. LEAVE the Test Kit ON.
+[c1] HANDOVER :: 3. Then: main menu -> MOD MANAGER -> turn OFF 'Community Fix Pack' AND 'Community Fix Pack: Opt-In Modules'. LEAVE the Test Kit ON.
+[mod] [c1] HANDOVER :: 4. QUIT THE GAME COMPLETELY. ⛔ The disable does NOT take effect until a full process restart (D13, measured 2026-08-10) — a return to the main menu leaves the mixed state (2) that made the old PT-20 comparison unreadable.
+[c1] HANDOVER :: 4. QUIT THE GAME COMPLETELY. ⛔ The disable does NOT take effect until a full process restart (D13, measured 2026-08-10) — a return to the main menu leaves the mixed state (2) that made the old PT-20 comparison unreadable.
+[mod] [c1] HANDOVER :: when this moment is finished, QUIT THE GAME NORMALLY (main menu -> Quit). A graceful exit is what flushes this log's tail; a killed process loses it (EF-047).
+[c1] HANDOVER :: when this moment is finished, QUIT THE GAME NORMALLY (main menu -> Quit). A graceful exit is what flushes this log's tail; a killed process loses it (EF-047).
+[mod] [c1] ================================================================
+[c1] ================================================================
+[mod] [c1] OWNERLOAD instrumentation ARMED — every subsequent load prints a gate read
+[c1] OWNERLOAD instrumentation ARMED — every subsequent load prints a gate read
+						Lua 0:01:51:063
+[mod] [c1] HEARTBEAT c1 :: parked 60 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=311 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+[c1] HEARTBEAT c1 :: parked 60 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=311 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+						Lua 0:02:51:062
+[mod] [c1] HEARTBEAT c1 :: parked 120 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=311 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+[c1] HEARTBEAT c1 :: parked 120 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=311 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+						Lua 0:03:51:062
+[mod] [c1] HEARTBEAT c1 :: parked 180 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=311 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+[c1] HEARTBEAT c1 :: parked 180 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=311 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+						Lua 0:04:51:063
+[mod] [c1] HEARTBEAT c1 :: parked 240 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=312 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+[c1] HEARTBEAT c1 :: parked 240 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=312 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+						Lua 0:05:51:063
+[mod] [c1] HEARTBEAT c1 :: parked 300 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=312 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+[c1] HEARTBEAT c1 :: parked 300 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=312 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+						Lua 0:06:51:062
+[mod] [c1] HEARTBEAT c1 :: parked 360 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=312 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+[c1] HEARTBEAT c1 :: parked 360 s of attended time so far | map=BlankAsteroidDonut_01 | speed=1 | sol=312 | loads=1  ⚠️ elapsed is RealTime and is NOT trustworthy across a loading screen (EF-045); the wall-clock truth is this log's own line stamps
+						Lua 0:07:00:963
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:19:166
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:07:19:170
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:07:19:898
+Reloading done in 1229 ms
+						Lua 0:07:19:965
+[mod] [c1] WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.
+[c1] WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.
+[mod] [c1] === combined-sitting c1 === attended=true
+[c1] === combined-sitting c1 === attended=true
+[mod] [c1] STEP 1-waiting-menu BEGIN
+[c1] STEP 1-waiting-menu BEGIN
+						Lua 0:07:19:971
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit
+						Lua 0:07:21:885
+[mod] [c1] STEP 1-waiting-menu END 2000ms
+[c1] STEP 1-waiting-menu END 2000ms
+[mod] [c1] CELL c1 :: wants fix=true opt-in=true rescue=false | attended=true | savefile=CSHOST.savegame.sav
+[c1] CELL c1 :: wants fix=true opt-in=true rescue=false | attended=true | savefile=CSHOST.savegame.sav
+[mod] [c1] STEP 2-config-gate BEGIN
+[c1] STEP 2-config-gate BEGIN
+[mod] [c1] GATES config-gate/c1 ------------------------------------------------
+[c1] GATES config-gate/c1 ------------------------------------------------
+[mod] [c1] GATEREAD fix pack :: 74/74 active
+[c1] GATEREAD fix pack :: 74/74 active
+						Lua 0:07:21:886
+[mod] [c1] GATEREAD opt-in pack :: 8/8 active
+[c1] GATEREAD opt-in pack :: 8/8 active
+[mod] [c1] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[c1] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[mod] [c1] GATES config-gate/c1 :: pack=74/74 | opt-in=8/8 | save-rescue=0/0 | map= | speed=1 | loads_this_process=0
+[c1] GATES config-gate/c1 :: pack=74/74 | opt-in=8/8 | save-rescue=0/0 | map= | speed=1 | loads_this_process=0
+[mod] [c1] MODORDER config-gate/c1 :: 1 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit
+[c1] MODORDER config-gate/c1 :: 1 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit
+[mod] [c1] DIALOPTS config-gate/c1 :: DroneSpeedDial=nil | DroneCarryDial=nil | toggles :: ClassicRockets=nil AcknowledgedWarnings=nil ResidencyControl=nil MultipleSuns=nil DroneOverhaul=nil CohortHousing=nil NoHomeless=nil
+[c1] DIALOPTS config-gate/c1 :: DroneSpeedDial=nil | DroneCarryDial=nil | toggles :: ClassicRockets=nil AcknowledgedWarnings=nil ResidencyControl=nil MultipleSuns=nil DroneOverhaul=nil CohortHousing=nil NoHomeless=nil
+[mod] [c1] CONFIGGATE OK :: cell c1 :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=false (wanted false) :: 74/74, 8/8, 0/0
+[c1] CONFIGGATE OK :: cell c1 :: fix=true (wanted true) | opt-in=true (wanted true) | rescue=false (wanted false) :: 74/74, 8/8, 0/0
+[mod] [c1] STEP 2-config-gate END 0ms
+[c1] STEP 2-config-gate END 0ms
+[mod] [c1] STEP 3-load BEGIN
+[c1] STEP 3-load BEGIN
+						Lua 0:07:22:006
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:07:24:196
+Unpersist missing permanent: Mod/SMR_CommunityFixPack | Fallback permanent: table: 0000016B847F3258 [7]
+						Lua 0:07:24:202
+[mod] This savegame tries to load Mod Community Fix Pack (id SMR_CommunityFixPack, v1.00-001), which is present, but not loaded
+[mod] This savegame tries to load Mod Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v0.01-000), which is present, but not loaded
+						Lua 0:07:27:098
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:27:116
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:07:27:133
+Game Loaded in 5127 ms
+						Lua 0:07:27:177
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:27:812
+Game loaded on map BlankBigCanyonCMix_09 in 5926 ms
+[mod] [c1] LOAD OK #1 file=CSHOST.savegame.sav — LoadGame returned no error
+[c1] LOAD OK #1 file=CSHOST.savegame.sav — LoadGame returned no error
+						Lua 0:07:30:119
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:43:312
+[mod] [c1] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[c1] READ speed: SetGameSpeed(1) call=true | before=1 after=1
+[mod] [c1] STEP 3-load END (no timing — this step blocks render mode)
+[c1] STEP 3-load END (no timing — this step blocks render mode)
+[mod] [c1] STEP 4-f102 BEGIN
+[c1] STEP 4-f102 BEGIN
+[mod] [c1] LISTFIXES c1 :: ExoticDepositSign status=active detail=
+[c1] LISTFIXES c1 :: ExoticDepositSign status=active detail=
+[mod] [CommunityFixPack] CaveInsNoDisasters [active] Cave-ins no longer occur when the "No Disasters" game rule is active
+[mod] [CommunityFixPack] MeteorFrequency [active] Meteors strike on their designed 35-115h schedule instead of ~every 6 hours
+[mod] [CommunityFixPack] UpgradeModifierLeak [active] Salvaging an upgraded building now removes its dome/colony-wide upgrade bonuses
+[mod] [CommunityFixPack] NightShiftWork [active] Night-shift colonists go to work after midnight instead of skipping their shift
+[mod] [CommunityFixPack] MilestoneCrash [active] Completing all milestones no longer errors in No Terraforming / No Politics games
+[mod] [CommunityFixPack] WispRewards [active] Mystery 11: "free the wisps" produces real power; destroyed-wisp rewards match the notification
+[mod] [CommunityFixPack] TouristApplicants [active] Higher tourist ratings now correctly give more bonus applicants (roll was inverted)
+[mod] [CommunityFixPack] TrainsToVoid [active] Demolishing a station stores its trains instead of permanently deleting them
+[mod] [CommunityFixPack] LanderEmptyLaunch [active] Automatic rockets and asteroid landers wait for cargo instead of launching empty
+[mod] [CommunityFixPack] LanderCargoRatchet [active] Automatic rockets stop unloading the cargo they just loaded, and fill up with the valuable resources first
+[mod] [CommunityFixPack] LanderReturnFuel [active] Asteroid landers keep their return fuel instead of unloading it on the asteroid
+[mod] [CommunityFixPack] ShelterReflex [active] Asteroid colonists take shelter before suffocating, and keep their habitat through power blips						Lua 0:07:43:313
+
+[mod] [CommunityFixPack] BrokenTrackSalvage [active] Meteor-damaged tracks can be salvaged again
+[mod] [CommunityFixPack] TrackSalvageWipe [active] Salvaging one track piece no longer deletes the whole track and its trains
+[mod] [CommunityFixPack] LakeEntombment [active] Building an artificial lake no longer entombs the RC Constructor and drones
+[mod] [CommunityFixPack] GhostFarmOxygen [active] Salvaging a farm removes the oxygen it was giving its dome
+[mod] [CommunityFixPack] RocketDroneChurn [active] Landed rockets stop sending their delivery drones back to Idle every hour
+[mod] [CommunityFixPack] ShuttleTransportCache [active] New Shuttle Hubs are noticed: colonists stop being stuck with a cached 'unreachable'
+[mod] [CommunityFixPack] VacuumWalks [active] Colonists use the passages instead of crossing vacuum on foot between nearby domes
+[mod] [CommunityFixPack] ArrivalDeaths [active] Arriving colonists no longer hike to unreachable domes or land in impassable ground
+[mod] [CommunityFixPack] DroneUnreachableForever [active] Drones re-try buildings they once failed to reach instead of writing them off forever
+[mod] [CommunityFixPack] StaleReservations [active] Housing reserved for colonists that never arrive is released again
+[mod] [CommunityFixPack] CrystalMysteryHang [active] The Philosopher's Stone mystery can no longer hang forever at the finale
+[mod] [CommunityFixPack] TouristSatisfaction [active] Tourist satisfaction stops drifting down (threshold awards are now symmetric)
+[mod] [CommunityFixPack] TrainPlatformWedge [active] A stale passenger no longer wedges a train at the platform forever
+[mod] [CommunityFixPack] LowStorageWarning [active] The "Insufficient Resources" warning works again for Food and maintenance resources
+[mod] [CommunityFixPack] CommandCenterNumbers [active] Command Center resource rows show their numbers again
+[mod] [CommunityFixPack] DomeOverviewHighlight [active] Domes Overview marks low colonist stats in red again
+[mod] [CommunityFixPack] TrainCargoDumping [active] Trains stop dumping cargo at stations where that resource is switched off
+[mod] [CommunityFixPack] UniversityOvertraining [active] Universities stop training specialists for workplaces that run themselves
+[mod] [CommunityFixPack] DestroyedTunnels [active] Destroyed tunnels stay closed after loading a save instead of rejoining pathfinding
+[mod] [CommunityFixPack] DustSicknessBiorobots [active] Dust Sickness no longer infects Biorobots
+[mod] [CommunityFixPack] DustSicknessDamage [active] Dust Sickness deals its intended random damage instead of the maximum every sol
+[mod] [CommunityFixPack] GeneForging [active] The Gene Forging tech actually increases the rare-trait chance
+[mod] [CommunityFixPack] MirrorSphereSite [active] A completed Mirror Sphere site no longer accepts more drone work
+[mod] [CommunityFixPack] PayloadTemplateRefill [active] Edit Payload keeps the amounts you set instead of refilling them from the flight-policy template
+[mod] [CommunityFixPack] AsteroidLanderAvailable [active] The asteroid-expedition gate counts landed landers, and stops counting supply rockets
+[mod] [CommunityFixPack] ShuttleHubOffAvailable [active] Shuttle Hubs switched off no longer count as available colonist transport
+[mod] [CommunityFixPack] FreedHousingNotice [active] A home falling vacant is offered to the dome's homeless straight away
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch [active] A dome's free-housing total counts the same residences the game assigns colonists to
+[mod] [CommunityFixPack] SmallLandscapeSites [active] Drones no longer error out when sent to a small landscaping site
+[mod] [CommunityFixPack] LandscapeUnitFilter [active] Landscaping over a boarding point no longer drags boarding colonists out
+[mod] [CommunityFixPack] RocketInteractGuard [active] RC Transports stay off trade and refugee rockets again
+[mod] [CommunityFixPack] TrackConnectorPingPong [active] A station and a tunnel one hex apart stop stealing each other's track connector
+[mod] [CommunityFixPack] TrackTunnelPowerBridge [active] A station attached to a train tunnel bridges the power grid again
+[mod] [CommunityFixPack] GridGlobalStorage [active] Colony-wide power/water/oxygen reserve is measured as one ratio again
+[mod] [CommunityFixPack] LastTransmissionStorage [active] Last Transmission's power/water/oxygen storage opinions actually count
+[mod] [CommunityFixPack] GraphConsumedCaption [active] Command Center graph captions count maintenance, like the bars do
+[mod] [CommunityFixPack] MoraleComfortTooltip [active] Morale tooltip stops listing a Comfort bonus the game does not apply
+[mod] [CommunityFixPack] TrainWaitTime [active] Waiting on a train platform no longer counts as time spent riding
+[mod] [CommunityFixPack] FounderTraitNotification [active] The notification for a Founder gaining a trait fires again
+[mod] [CommunityFixPack] StorageRateModifiers [active] Charge and discharge rate modifiers on batteries and tanks take effect
+[mod] [CommunityFixPack] SequenceLatents [active] Sequence label sampling and the Digger timing swap behave as written
+[mod] [CommunityFixPack] IndependenceTerraforming [active] Independent Terraforming discounts special projects by the 20% it advertises
+[mod] [CommunityFixPack] TrackSalvageRefund [active] Salvaging a track refunds what the whole track cost, not one hex
+[mod] [CommunityFixPack] LayoutTechLock [active] Layout construction respects research locks
+[mod] [CommunityFixPack] TrainMinors [active] Train cap follows track length
+[mod] [CommunityFixPack] DroneTransportMinors [active] A passability change no longer corrupts each drone's unreachable-buildings table
+[mod] [CommunityFixPack] AnomalyCaveInMap [active] A cave-in on a map that does not exist is declined instead of crashing the sequence
+[mod] [CommunityFixPack] TechDescriptionBuilding [active] The Underground Medium Dome tech description names the building it actually unlocks
+[mod] [CommunityFixPack] BombardmentSpread [active] Bombardment missiles come in from spread directions instead of in parallel
+[mod] [CommunityFixPack] ExtenderFlapChurn [active] Extender power flickers no longer tear down and rebuild the whole hub (fleet-wide Idle churn)
+[mod] [CommunityFixPack] DisasterPredictionLeak [active] A finished meteor storm no longer disables rains, cold waves and dust storms forever
+[mod] [CommunityFixPack] MeteorStormWedge [active] A wedged meteor storm is detected and released instead of blocking storms forever
+[mod] [CommunityFixPack] RainsDeadlock [active] A rain that collides with another disaster retries instead of never raining again
+[mod] [CommunityFixPack] FirstAsteroidPrefabs [active] The First Asteroid prefabs still arrive if the popup was left unanswered across a save/load
+[mod] [CommunityFixPack] SaintBlessing [active] A Saint's blessing reaches the Religious colonists in their dome
+[mod] [CommunityFixPack] DustDevilsDescrMap [active] Dust devils on the surface use the surface's settings, not the map the camera is on
+[mod] [CommunityFixPack] AstrogeologistExtractors [active] The Astrogeologist bonus reaches every buildable extractor, as its own text promises
+[mod] [CommunityFixPack] SinkholeIndestructible [active] A meteor can no longer destroy the St. Elmo's Fire sinkhole
+[mod] [CommunityFixPack] DustStormUndergroundBreaks [active] A surface dust storm can no longer break cables and pipes underground
+[mod] [CommunityFixPack] DustDevilSpawnGate [active] Dust devil waves use their authored count range instead of being scaled down by the spawn chance
+[mod] [CommunityFixPack] ExoticDepositSign [active] Subsurface Exotic Minerals deposits use the remaster's own sign — believed to stop the asteroid-visit freeze reported on Linux/NVIDIA systems
+[mod] [CommunityFixPack] SaveSanitizer [active] Savegame repair: lost Wind Turbine tech buff, leaked upgrade bonuses
+[mod] [c1] TRY SMRFixPack.ListFixes ok=true result=nil
+[c1] TRY SMRFixPack.ListFixes ok=true result=nil
+[mod] [c1] F102 c1 :: class present=true | class-default entity=SignPreciousMineralsDeposit | shipped sign was 'SignPreciousMineralsDeposit', the fix retargets to 'SignRareMineralsDeposit'
+[c1] F102 c1 :: class present=true | class-default entity=SignPreciousMineralsDeposit | shipped sign was 'SignPreciousMineralsDeposit', the fix retargets to 'SignRareMineralsDeposit'
+[mod] [c1] F102 c1 :: IsValidEntity('SignRareMineralsDeposit')=true IsValidEntity('SignPreciousMineralsDeposit')=true
+[c1] F102 c1 :: IsValidEntity('SignRareMineralsDeposit')=true IsValidEntity('SignPreciousMineralsDeposit')=true
+[mod] [c1] F102 c1 :: LoadedMaps = 4 :: slot=1:BlankBigCanyonCMix_09 slot=2:BlankUnderground_04 slot=3:BlankAsteroidDonut_01 slot=4:BlankAsteroidBranchOut_01
+[c1] F102 c1 :: LoadedMaps = 4 :: slot=1:BlankBigCanyonCMix_09 slot=2:BlankUnderground_04 slot=3:BlankAsteroidDonut_01 slot=4:BlankAsteroidBranchOut_01
+[mod] [c1] TRY AllMapsForEach SubsurfaceDepositPreciousMinerals ok=true result=nil
+[c1] TRY AllMapsForEach SubsurfaceDepositPreciousMinerals ok=true result=nil
+[mod] [c1] F102 c1 :: deposit 1/1 SubsurfaceDepositPreciousMinerals#2000010866 :: entity=SignPreciousMineralsDeposit | map_slot=3 | on_current_map=false | revealed=true | amount=14935000
+[c1] F102 c1 :: deposit 1/1 SubsurfaceDepositPreciousMinerals#2000010866 :: entity=SignPreciousMineralsDeposit | map_slot=3 | on_current_map=false | revealed=true | amount=14935000
+[mod] [c1] READ F102 subsurface Exotic Minerals deposits = 1 | population=1 | APPLICABLE=true | witness=AllMapsForEach over LoadedMaps — a zero here means the loaded maps carry none, which is a DIFFERENT fact from the fix not working
+						Lua 0:07:43:314
+[c1] READ F102 subsurface Exotic Minerals deposits = 1 | population=1 | APPLICABLE=true | witness=AllMapsForEach over LoadedMaps — a zero here means the loaded maps carry none, which is a DIFFERENT fact from the fix not working
+[mod] [c1] TRY ViewObjectAndChangeMap ok=true result=nil
+[c1] TRY ViewObjectAndChangeMap ok=true result=nil
+						Lua 0:07:44:342
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:47:311
+[mod] [c1] F102 SHOW :: after the camera move, CurrentMapName=BlankAsteroidDonut_01 | the deposit reports on_current_map=true | selected=SubsurfaceDepositPreciousMinerals#2000010866
+[c1] F102 SHOW :: after the camera move, CurrentMapName=BlankAsteroidDonut_01 | the deposit reports on_current_map=true | selected=SubsurfaceDepositPreciousMinerals#2000010866
+[mod] [c1] F102 VERDICT-INPUT c1 :: deposits found = 1. ⛔ The verdict words are the OWNER'S EYES: 'signs render / selectable: yes-no'. This log can prove the entity string and the sweep count; it cannot prove anything rendered.
+[c1] F102 VERDICT-INPUT c1 :: deposits found = 1. ⛔ The verdict words are the OWNER'S EYES: 'signs render / selectable: yes-no'. This log can prove the entity string and the sweep count; it cannot prove anything rendered.
+[mod] [c1] STEP 4-f102 END 4000ms
+[c1] STEP 4-f102 END 4000ms
+[mod] [c1] ERRORWATCH c1 — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting c1 ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=4-f102 loads_this_process=1
+[c1] ERRORWATCH c1 — every engine error line (the bracketed LUA-ERROR marker) in this log after the '=== combined-sitting c1 ===' banner happened inside this cell. Report every unexplained line VERBATIM with its position and its age; never discount one (WORKFLOW, owner rule 2026-08-01). stage=4-f102 loads_this_process=1
+[mod] [c1] ================================================================
+[c1] ================================================================
+[mod] [c1] HANDOVER — the rig is done. The keyboard is yours.
+[c1] HANDOVER — the rig is done. The keyboard is yours.
+[mod] [c1] HANDOVER :: MOMENT C — F102's minute (checklist item 11, local half).
+[c1] HANDOVER :: MOMENT C — F102's minute (checklist item 11, local half).
+[mod] [c1] HANDOVER :: 1. LOOK at the three deposit signs the camera is parked on: does the new art render, and can you click one and see its panel?
+[c1] HANDOVER :: 1. LOOK at the three deposit signs the camera is parked on: does the new art render, and can you click one and see its panel?
+[mod] [c1] HANDOVER :: 2. Say the verdict words: 'signs render / selectable: yes-no'.
+[c1] HANDOVER :: 2. Say the verdict words: 'signs render / selectable: yes-no'.
+[mod] [c1] HANDOVER :: 3. Then: main menu -> MOD MANAGER -> turn OFF 'Community Fix Pack' AND 'Community Fix Pack: Opt-In Modules'. LEAVE the Test Kit ON.
+[c1] HANDOVER :: 3. Then: main menu -> MOD MANAGER -> turn OFF 'Community Fix Pack' AND 'Community Fix Pack: Opt-In Modules'. LEAVE the Test Kit ON.
+[mod] [c1] HANDOVER :: 4. QUIT THE GAME COMPLETELY. ⛔ The disable does NOT take effect until a full process restart (D13, measured 2026-08-10) — a return to the main menu leaves the mixed state (2) that made the old PT-20 comparison unreadable.
+[c1] HANDOVER :: 4. QUIT THE GAME COMPLETELY. ⛔ The disable does NOT take effect until a full process restart (D13, measured 2026-08-10) — a return to the main menu leaves the mixed state (2) that made the old PT-20 comparison unreadable.
+[mod] [c1] HANDOVER :: when this moment is finished, QUIT THE GAME NORMALLY (main menu -> Quit). A graceful exit is what flushes this log's tail; a killed process loses it (EF-047).
+[c1] HANDOVER :: when this moment is finished, QUIT THE GAME NORMALLY (main menu -> Quit). A graceful exit is what flushes this log's tail; a killed process loses it (EF-047).
+[mod] [c1] ================================================================
+[c1] ================================================================
+[mod] [c1] OWNERLOAD instrumentation ARMED — every subsequent load prints a gate read
+[c1] OWNERLOAD instrumentation ARMED — every subsequent load prints a gate read
+						Lua 0:07:52:338
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:07:52:339
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:07:52:666
+
+
+*** Debug::Done()
+Time (ms)	472666
+
+

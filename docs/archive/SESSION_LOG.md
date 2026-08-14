@@ -8,6 +8,163 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-14 — THE ONE COMBINED SITTING RAN: PT-20 redo clean in state 3, F102's local half closed, and ⭐⭐ **D13 GRANTED `tested`** — the three dialog readings no log can ever hold are witnessed
+
+**Owner cost: 34 minutes** of parked handover time, measured off the harness
+heartbeats rather than estimated, against a 30–45 minute promise. Wall clock from
+first launch to last quit was ~67 min; the difference is the owner's own
+landscaping lead (and it produced a rider) and one stalled launch (below).
+**Six logs, all archived byte-verified:** `archive/cs_c1_*` (moment C) ·
+`cs_a1_*` (PT-20 redo) · `cs_b1void_*` (the gate-stopped run) · `cs_b1_*` (the
+after-sweep) · `cs_b2_*` (the stand-down) · `cs_zrestore_*` (the close-out
+control). ⛔ **0 `[LUA ERROR]` and 0 `[ERROR]` in every flushed cell**; F99 `:805`
+and C45 `Quantum Comet` watches zero throughout.
+
+### Prep, the day before — three unattended dry runs that changed the sitting
+
+Prep is committed at `6867552` with its own three logs (`archive/csprep_*`). It
+was not ceremony: it found four things the owner would otherwise have hit with
+their hands on the keyboard.
+
+1. ⛔ **The fixture the brief named did not exist.** All 88 saves read at their
+   metadata headers: no `Sylmacaink BH25`, and no save carries the 2026-08-12
+   leg's `BlankAsteroidSlim_02` map. The campaign's OWN asteroid maps do carry a
+   deposit — **one**, not three — and that turned out to be the better witness.
+2. ⛔ **Leaving Save Rescue installed would have voided the PT-20 redo.** In state
+   3 both packs are absent, so its per-pack stand-down does not fire; it would
+   have stripped the residue PT-20 exists to prove is harmless, two seconds into
+   the load. Its junction was pulled for moments C and A and restored for B.
+3. ⛔⛔ **`EF-056` AMENDED, and the amendment saved the sitting.** `autosave = true`
+   lives in the savegame header, `Copy-Item` carries it, and `Autosave()`'s
+   rotation enumerates by that tag — so **a byte copy of an autosave IS an autosave
+   to the rotation.** It deleted the freshly staged fixture, the owner's held
+   `Autosave Sol 311`, and `SPWITC` in one sweep. `Sol 311` came back byte-exact
+   from the pre-copy (the first time that rule has been the thing that saved a file
+   rather than a precaution nobody needed); the fixture was re-staged from a save
+   with no `autosave` key; `SPWITC` was not pre-copied and is gone (a split-optins
+   artifact, on no protected list — inventoried, not filed). ⚠️ Firing is
+   **timer-driven and unpredictable**: a third dry run of the same shape deleted
+   nothing, and during the sitting it fired again and took two. Hence the new
+   clause: reconcile by name after EVERY launch, never reason about it.
+4. **A harness defect:** `CS.Flow()` reads the attended flag before `CS.Payload()`
+   writes it, so the unattended prep cell ran with **no watchdog** while every gate
+   line read GREEN. Same class as the `r1`-void ARM defect: a guard read earlier
+   than it is written. Fixed at file scope.
+
+### Moment C — F102's minute, and a free promotion
+
+`ExoticDepositSign [active]`; `ExoticDepositSign: 1 Exotic Minerals deposit(s)
+re-signed onto the clean entity`; deposit `#2000010866` reads
+`entity=SignRareMineralsDeposit`. ⭐ **The already-placed deposit exercised the
+`OnMsg.LoadGame` `UpdateEntity` sweep that the 2026-08-12 console-spawn leg never
+touched** — that leg only ever tested the class-default path. **Owner's eyes: the
+sign RENDERS and is SELECTABLE**, opening `Underground Exotic Minerals ·
+14,935/14,935 · Grade: Very high`, whose number is the log's `amount=14935000`
+read a second way.
+
+⭐⭐ **And moment A promoted F102's uninstall claim SOURCE → MEASURED.** The owner
+asked *"is this the new art?"*, which is a question the picture cannot answer and
+the entity string can — and answering it exposed a free measurement nobody had
+planned: the same deposit, same save, both packs disabled, reads back
+`SignPreciousMineralsDeposit` with **zero** re-sign lines. "Both entities ship in
+vanilla so a save made with the fix loads clean after uninstall" stops being an
+argument and becomes a reading.
+
+### Moment A — the PT-20 redo, done RIGHT
+
+State (3) confirmed: `pack=0/0 | opt-in=0/0 | save-rescue=0/0`, all three
+registries ABSENT, `MODORDER :: 1 mod(s) loaded :: 1:SMR_CommunityFixPackTestKit`.
+**All 8 pack-naming lines accounted** against the D13 entry's state-3 template
+(three mod-def loads, the kit's items load, the save's own mod list, one
+`Unpersist missing permanent`, two *"present, but not loaded"*). ~21 minutes of
+ordinary play — owner, verbatim: *"I built some stuff, watched trains, workers,
+everything seems normal"* — then a save and a reload, the reload printing its own
+gate line. **Zero errors in the flushed file.**
+⛔ **Recorded as SUPERSEDING the 98-vs-98, not confirming it**: that was an error
+count from the F86 era and F86 is repaired. And the leg's point held — the save
+carried its leftovers the whole time (`reserved_at ×1260`, both Drone dials, the
+F48 latch) **and behaved normally anyway.**
+
+### ⭐⭐ Moment B — the after-sweep, on a NATIVE witness, against a sealed prediction
+
+⛔ Not a re-run of the `r2` matrix cell: `r2` ran on manufactured residue, this ran
+on `SPCONRT` bytes carrying only what the shipped packs really wrote. **First run
+of the artifact against what a real player's save actually looks like.**
+
+```
+pass: removed 1566 entries (DroneCarryDial=1, DroneSpeedDial=1, ack_notworking=4,
+  closed_to_new_residents=11, loop_version=1, no_homeless=11, payload_set=4,
+  reserved_at=1533) | kept 1 track re-order latch
+  | heals: meteors 0, rains restarted 0, rains ended 0 | skipped 1
+```
+
+⭐ **Every number and the skip count were committed at `6867552` before the first
+attended launch**, and the prediction was derived rather than guessed: it
+reconciles to the archived `r2` line to the unit (`r2`'s 1617 is exactly this plus
+its three manufactured rows). **Zero heals was the predicted and correct answer** —
+the `Meteors` thread is alive so the ambiguity rule declined it, and the rains
+entry was already migrated by the pack.
+
+**The three readings unattended mode can never take, all witnessed:** the report
+dialog RAISED with text matching `report_text()` and its own arithmetic
+reconciling to the pass line; the cleaned save's reload **SILENT** with
+`save-rescue=1/1 active` beside it and the second pass printing its `removed 0`;
+the stand-down raising **exactly once**, verbatim per §10.5, on the packs-restored
+load. ⇒ **`tested` GRANTED.**
+
+### Three findings, none of them the mod's
+
+1. ⛔ **`EF-055` has a measured LIMIT.** The rescue mod came back from its junction
+   round trip **not enabled** — def loaded, code did not run, `SMRSaveRescue` nil.
+   The config gate stopped the run before it measured anything (the gate earning
+   its keep: `unattended-2` run 1 took six readings in exactly this situation).
+   Repair was one owner tick + restart. ⚠️ **Two candidate causes and this leg did
+   not distinguish them** — the owner's Mod-Manager visit while the folder was
+   absent (something the 08-13 matrix never did), or a tick already lost at the
+   08-13 close-out. `account.dat` is compressed and settles neither. The structural
+   half of the fact stands; the "comes back enabled, zero owner cost" half may no
+   longer be assumed, and the cheap disambiguating experiment is recorded on it.
+2. ⚠️ **Frozen spec §10.5 promises a sentence the build does not print.** The
+   spec's drone-dial line carries *"(drone speed and carry capacity are back to the
+   game's own values)"*; `report_text()` emits bare `N noun` pairs. The player is
+   told "2 drone stat dials" for the one piece of residue that keeps changing their
+   game. **Step ③ inherits §10.5 as the frozen player-facing text and would have
+   shipped words the code does not produce.** Found by putting eyes on the dialog.
+3. ⚠️ **Two defects in this session's own instruments.** The Test Kit's `print()`
+   output is drawn ON-SCREEN (`EF-015`) and covered the very dialog the moment
+   existed to witness. And `CS.AssertCleared` ran the §10.9 REMOVE contract in a
+   **packs-present** cell, printing `REMOVE-list survivors = 4` — which is the
+   reinstalled packs writing their own state (`[CommunityOptInPack] DroneStatDials:
+   applied`, controlled against the same save read pack-absent minutes earlier).
+   Unchallenged it reads as "the artifact failed". Same class as the
+   `corun-batch-2` reader defects: a clause applied outside the configuration it
+   was written for.
+
+### An owner lead, carried as a rider
+
+Mid-play the owner found an isolated hex overlay they could not interact with.
+Attribution was immediate and cheap — **the packs were OFF in that process, so it
+cannot be ours**. Source read: landscaping orders live in `map.landscape_grid` and
+are read back with `LandscapeCheck` (`Construction/ConstructionControllers.lua:82-85`,
+`Buildings/DroneControl.lua:362-386`), i.e. **grid data with no object behind it**,
+which is why clicking does nothing. It cleared when the owner opened the
+landscaping tool. ⚠️ **What is NOT established: that the order is gone rather than
+hidden** — the tool forces that layer to redraw. `PT20REDO` captured whatever the
+grid holds, so the question settles unattended at zero owner cost.
+
+### Close-out
+
+Rescue junction pulled; the close-out control read the rig back as the owner left
+it (`74/74` · `8/8` · save-rescue absent, load order `1:TestKit 2:FixPack
+3:OptInPack`, dials `5x`/`+2`, all seven toggles `true`, 0 errors). DISARM GATE
+GREEN, `PROBE SWEEP: clean` over all four `Code/` trees, both repos' trees clean.
+Staged fixtures `CSHOST` · `CSSWEEP` · `D13SWEEP` **deleted, listing verified by
+name** (⚠️ `EF-051` HOLD stands — Steam Cloud is ON by the owner's temporary
+choice, so never "gone"; four `RESCUE*` strays returned during prep with the
+restore signature and are inventoried for the post-untick cleanup, attributed and
+not filed). All four autosaves reconciled by name and byte-verified against their
+pre-copies; the protected four re-read unchanged.
+
 ## 2026-08-13 — `d13-rescue` CLOSED by the terminal audit: every verdict SUSTAINED, the exposed set survives its THIRD derivation with zero differences, the release line's next move is the owner's chair
 
 **The chain's files last exist at `7e19f07` (pre-deletion sha); this session's

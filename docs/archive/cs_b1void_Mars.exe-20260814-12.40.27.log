@@ -1,0 +1,147 @@
+					Render 0:00:00:005
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	41%
+Disk Free      	746581 MBytes
+
+					Render 0:00:00:006
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:103
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:105
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:614
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:749
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:946
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:619
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:975
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:970
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:986
+[mod] Loaded mod def Save Rescue (id SMR_CommunitySaveRescue, v0.01-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v0.01-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:18:333
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:338
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:972
+Reloading done in 978 ms
+						Lua 0:00:19:315
+[preset] Preset postprocess took 69 ms.
+						Lua 0:00:19:377
+479 / 479 particle streams loaded in 57 ms.
+						Lua 0:00:19:627
+[mod] [CS] WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.
+[CS] WATCHDOG DISABLED — attended cell. Nothing in this harness will close the game except the config gate, which fires before anything is measured.
+[mod] [CS] === combined-sitting CS === attended=true
+[CS] === combined-sitting CS === attended=true
+[mod] [CS] STEP 1-waiting-menu BEGIN
+[CS] STEP 1-waiting-menu BEGIN
+						Lua 0:00:19:628
+[PdxSDK] Started up. Took 1634
+						Lua 0:00:19:636
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit
+						Lua 0:00:19:712
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:713
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:917
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:453
+[mod] [CS] STEP 1-waiting-menu END 2500ms
+[CS] STEP 1-waiting-menu END 2500ms
+[mod] [b1] CELL b1 :: wants fix=false opt-in=false rescue=true | attended=true | savefile=CSSWEEP.savegame.sav
+[b1] CELL b1 :: wants fix=false opt-in=false rescue=true | attended=true | savefile=CSSWEEP.savegame.sav
+[mod] [b1] STEP 2-config-gate BEGIN
+[b1] STEP 2-config-gate BEGIN
+[mod] [b1] GATES config-gate/b1 ------------------------------------------------
+[b1] GATES config-gate/b1 ------------------------------------------------
+[mod] [b1] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[b1] GATEREAD fix pack :: REGISTRY ABSENT (global SMRFixPack is nil) — the mod's code did not run in this process
+[mod] [b1] GATEREAD opt-in pack :: REGISTRY ABSENT (global SMROptInPack is nil) — the mod's code did not run in this process
+[b1] GATEREAD opt-in pack :: REGISTRY ABSENT (global SMROptInPack is nil) — the mod's code did not run in this process
+[mod] [b1] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[b1] GATEREAD save-rescue :: REGISTRY ABSENT (global SMRSaveRescue is nil) — the mod's code did not run in this process
+[mod] [b1] GATES config-gate/b1 :: pack=0/0 | opt-in=0/0 | save-rescue=0/0 | map= | speed=1 | loads_this_process=0
+[b1] GATES config-gate/b1 :: pack=0/0 | opt-in=0/0 | save-rescue=0/0 | map= | speed=1 | loads_this_process=0
+[mod] [b1] MODORDER config-gate/b1 :: 1 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit
+[b1] MODORDER config-gate/b1 :: 1 mod(s) loaded, in load order :: 1:SMR_CommunityFixPackTestKit
+[mod] [b1] DIALOPTS config-gate/b1 :: DroneSpeedDial=nil | DroneCarryDial=nil | toggles :: ClassicRockets=nil AcknowledgedWarnings=nil ResidencyControl=nil MultipleSuns=nil DroneOverhaul=nil CohortHousing=nil NoHomeless=nil
+[b1] DIALOPTS config-gate/b1 :: DroneSpeedDial=nil | DroneCarryDial=nil | toggles :: ClassicRockets=nil AcknowledgedWarnings=nil ResidencyControl=nil MultipleSuns=nil DroneOverhaul=nil CohortHousing=nil NoHomeless=nil
+[mod] [b1] CONFIGGATE ⛔ WRONG CONFIGURATION :: cell b1 wanted fix=false opt=false rescue=true but this process has fix=false opt=false rescue=false. EVERY reading this run could take is VOID — the cell is not the cell. STOPPING.
+[b1] CONFIGGATE ⛔ WRONG CONFIGURATION :: cell b1 wanted fix=false opt=false rescue=true but this process has fix=false opt=false rescue=false. EVERY reading this run could take is VOID — the cell is not the cell. STOPPING.
+[mod] [b1] CONFIGGATE ⛔ OWNER-FACING: the game is about to close by itself. That is this gate, not a crash. The two packs are turned off in the MOD MANAGER and the change needs a FULL PROCESS RESTART (D13's four states); the rescue mod is turned on and off agent-side by its junction (EF-055). Call the agent — nothing is broken and nothing was measured.
+[b1] CONFIGGATE ⛔ OWNER-FACING: the game is about to close by itself. That is this gate, not a crash. The two packs are turned off in the MOD MANAGER and the change needs a FULL PROCESS RESTART (D13's four states); the rescue mod is turned on and off agent-side by its junction (EF-055). Call the agent — nothing is broken and nothing was measured.
+[mod] [b1] STEP 2-config-gate END 0ms
+[b1] STEP 2-config-gate END 0ms
+[mod] [b1] SHUTDOWN STOP 2-config-gate — the step asked to stop; its reason is the line above
+[b1] SHUTDOWN STOP 2-config-gate — the step asked to stop; its reason is the line above
+						Lua 0:00:24:453
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:24:454
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:24:662
+
+
+*** Debug::Done()
+Time (ms)	24662
+
+
