@@ -8,6 +8,33 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-14 — the owner re-ordered the queue ("finish the f85 first"), the unattended-3 chain is authored, and the Steam-Cloud hold is lifted with an 888 MB cleanup
+
+Three owner words in one evening, all executed: **(1) "steam cloud is off"** —
+EF-051's hold lifts on its own resumption clause. The hold window turned out to
+have sampled the mechanism a third time at full scale: **all 17 named 08-11
+strays were back**, every one created 2026-08-12 12:29:54–12:30:35 (the first
+launch after the re-tick) with week-old `LastWriteTime` — 888 MB. Deleted with
+the game closed (process checked), directory re-listed at **76 `.sav` by
+name**, zero strays, all held saves intact; prediction-with-falsifier written
+on the fact (none of the 17 return at the next launch). WORKFLOW's dated hold
+lifted; "gone — NAMED listing" legal again; facts INDEX regenerated via the
+splitter's own renderer after the front-matter update. **(2) "finish the f85
+first since its all unattended"** — the `unattended-3` chain is AUTHORED
+(README + 3 prompts, Opus builds → Opus verifies → Fable audits): the F85
+`dont_pause` flip and the C39 compensation extension, both ruled 2026-08-12,
+with the C39 three-label sweep as the coverage contract, EF-056 bracketing on
+every launch, the screen-claim boundary named (an unattended run may read the
+flag, never claim the pause was seen — the item-29 lesson), and the terminal
+audit owning the count sweep the two new modules force across the cards,
+`metadata.lua`, the site and the portal sheet (including whether "five
+judgment calls" becomes six, settled one way everywhere). ④ follows the
+chain's close, per the owner's ordering; STATE's NEXT points at
+`unattended-3/01_BUILD_OPUS.md`. **(3) C1 chosen for both previews** — the
+entry below.
+
+---
+
 ## 2026-08-14 — preview art chosen: C1 for both mods, and ④ is fully prepared
 
 Six text-on-image candidates were painted with PIL over designed Mars backdrops

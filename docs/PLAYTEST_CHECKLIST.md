@@ -59,9 +59,17 @@ card's deliberate absence stands · **opt-in version** → **1.0.0 applied** in
 its `metadata.lua`. ✅ **And the preview art is CHOSEN the same day — C1 for
 both mods** (item 24's floor, built as designed Mars backdrops without a game
 launch; `agent/reports/preview_art/FINAL_*.png`, both ~40 KB against a 1 MB
-limit; alternates kept, vista-swap possible later). ⇒ **④ is now fully
-prepared: upload two mods with their previews → links → Pages. Nothing left
-waits on a decision.**
+limit; alternates kept, vista-swap possible later). ⇒ **④ is fully prepared:
+upload two mods with their previews → links → Pages. Nothing waits on a
+decision.**
+⭐ **Ordering, your word (2026-08-14 evening): the F85 + C39 builds run
+FIRST** — "finish the f85 first since its all unattended." The `unattended-3`
+chain is authored (`agent/prompts/unattended-3/`, Opus builds → Opus verifies →
+Fable audits, including re-truing every card/site count the two new modules
+move) and ④ follows its close. Also done on your word the same evening:
+**Steam Cloud re-untick recorded** — the 17 strays the hold window restored
+(888 MB) are deleted, the save directory re-listed by name at 76 files, and
+"gone" claims are legal again (`EF-051`).
 
 29. ✅ **RULED 2026-08-14: STRIKE — and struck the same day on every surface**
     (both cards, the rescue card, the assembly, the site FAQ; trace rows and
