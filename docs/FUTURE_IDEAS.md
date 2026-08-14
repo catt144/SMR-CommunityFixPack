@@ -271,6 +271,16 @@ would hit exactly these walls on day one:
 to start a second mod. ⛔ It never un-parks *into this pack* — F101 stays
 `wontfix` either way.
 
+⚖️ **Destination amended by the owner, 2026-08-14:** *"dev/cheat tool would be
+opt in territory though since its not a bug fix"* — if this is ever built, it
+lands in the **Opt-In Modules mod**, not a separate product. Recorded with the
+counterweight the entry already carries so the future decision is honest: the
+opt-in card currently promises "eight opt-in gameplay modules", and the gate
+this toolkit must widen (`AreCheatsEnabled`) is the entry's named first
+ethical decision — on PC, mods do not block Steam achievements, so a cheat
+surface inside the gameplay mod changes what that product is. Still parked;
+nothing owed until after launch.
+
 ---
 
 # ⏸️ PROPOSED for parking — awaiting the owner's yes/no
