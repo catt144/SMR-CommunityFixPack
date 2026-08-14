@@ -1,0 +1,312 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	41%
+Disk Free      	746477 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:072
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:075
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:492
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:627
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:821
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:495
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:846
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:848
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:850
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v0.01-000) unpacked from appdata
+						Lua 0:00:18:186
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:191
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:199
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+						Lua 0:00:18:200
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:18:201
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:18:202
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+						Lua 0:00:18:203
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+						Lua 0:00:18:204
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+						Lua 0:00:18:205
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+						Lua 0:00:18:206
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+						Lua 0:00:18:207
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+						Lua 0:00:18:208
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:744
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:815
+Reloading done in 956 ms
+						Lua 0:00:19:134
+[preset] Preset postprocess took 57 ms.
+						Lua 0:00:19:181
+479 / 479 particle streams loaded in 42 ms.
+						Lua 0:00:19:182
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:371
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:425
+[PdxSDK] Started up. Took 1567
+						Lua 0:00:19:448
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:887
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:971
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:988
+Load Game: 						Lua 0:00:21:989
+
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit 
+						Lua 0:00:21:996
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:22:023
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:788
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 72.4 MB/s, average read 4948 bytes.
+						Lua 0:00:30:668
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:674
+[mod] [CommunityFixPack] SaintBlessing: re-based 5 dome blessing(s) onto the label colonists are actually filed under
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:30:715
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:729
+[mod] [CommunityFixPack] MeteorFrequency: one-shot heal — persisted Meteors thread was alive; restarting onto vanilla's body (latch false -> 1.0.1)
+						Lua 0:00:30:733
+Game Loaded in 8745 ms
+						Lua 0:00:30:781
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:630
+Game loaded on map BlankBigCanyonCMix_09 in 9743 ms
+[mod] [CSL] LOAD OK file=PT20REDO.savegame.sav
+[CSL] LOAD OK file=PT20REDO.savegame.sav
+						Lua 0:00:33:932
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:630
+[mod] [CSL] LANDSCAPE PT20REDO =========================================
+[CSL] LANDSCAPE PT20REDO =========================================
+[mod] [CSL] LANDSCAPE PT20REDO :: LoadedMaps = 4
+[CSL] LANDSCAPE PT20REDO :: LoadedMaps = 4
+[mod] [CSL] LANDSCAPE PT20REDO :: LandscapeConstructionSiteBase      n=0
+[CSL] LANDSCAPE PT20REDO :: LandscapeConstructionSiteBase      n=0
+						Lua 0:00:46:631
+[mod] [CSL] LANDSCAPE PT20REDO :: LandscapeConstructionSite          n=0
+[CSL] LANDSCAPE PT20REDO :: LandscapeConstructionSite          n=0
+[mod] [CSL] LANDSCAPE PT20REDO :: LandscapeBuilding                  n=0
+[CSL] LANDSCAPE PT20REDO :: LandscapeBuilding                  n=0
+[mod] [CSL] LANDSCAPE PT20REDO :: LandscapeLake                      n=10
+[CSL] LANDSCAPE PT20REDO :: LandscapeLake                      n=10
+[mod] [CSL] LANDSCAPE PT20REDO ::    [1] LandscapeLakeHuge#6343 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [1] LandscapeLakeHuge#6343 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [2] LandscapeLakeHuge#6345 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [2] LandscapeLakeHuge#6345 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [3] LandscapeLakeHuge#6347 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [3] LandscapeLakeHuge#6347 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [4] LandscapeLakeMid#8567 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [4] LandscapeLakeMid#8567 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [5] LandscapeLakeBig#6962 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [5] LandscapeLakeBig#6962 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [6] LandscapeLakeHuge#3794 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [6] LandscapeLakeHuge#3794 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [7] LandscapeLakeSmall#2795 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [7] LandscapeLakeSmall#2795 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [8] LandscapeLakeBig#6336 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [8] LandscapeLakeBig#6336 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [9] LandscapeLakeSmall#4091 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [9] LandscapeLakeSmall#4091 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO ::    [10] LandscapeLakeMid#7007 | map_slot=1 | mark=nil | mode=construction
+[CSL] LANDSCAPE PT20REDO ::    [10] LandscapeLakeMid#7007 | map_slot=1 | mark=nil | mode=construction
+[mod] [CSL] LANDSCAPE PT20REDO :: LandscapeRamp                      n=0
+[CSL] LANDSCAPE PT20REDO :: LandscapeRamp                      n=0
+						Lua 0:00:46:632
+[mod] [CSL] LANDSCAPE PT20REDO :: LandscapeTerrace                   n=0
+[CSL] LANDSCAPE PT20REDO :: LandscapeTerrace                   n=0
+[mod] [CSL] LANDSCAPE PT20REDO :: LandscapeClearWasteRockBuilding    n=0
+[CSL] LANDSCAPE PT20REDO :: LandscapeClearWasteRockBuilding    n=0
+[mod] [CSL] LANDSCAPE PT20REDO :: map slot=1 landscape_grid present=true (bits NOT decoded — deliberately)
+[CSL] LANDSCAPE PT20REDO :: map slot=1 landscape_grid present=true (bits NOT decoded — deliberately)
+[mod] [CSL] LANDSCAPE PT20REDO :: map slot=2 landscape_grid present=true (bits NOT decoded — deliberately)
+[CSL] LANDSCAPE PT20REDO :: map slot=2 landscape_grid present=true (bits NOT decoded — deliberately)
+[mod] [CSL] LANDSCAPE PT20REDO :: map slot=3 landscape_grid present=true (bits NOT decoded — deliberately)
+[CSL] LANDSCAPE PT20REDO :: map slot=3 landscape_grid present=true (bits NOT decoded — deliberately)
+[mod] [CSL] LANDSCAPE PT20REDO :: map slot=4 landscape_grid present=true (bits NOT decoded — deliberately)
+[CSL] LANDSCAPE PT20REDO :: map slot=4 landscape_grid present=true (bits NOT decoded — deliberately)
+[mod] [CSL] LANDSCAPE PT20REDO :: ⭐ TOTAL PLACED LANDSCAPE ORDERS = 10  ⇒  STILL PENDING — the tool cleared the VISUAL, not the order. The work is now invisible.
+[CSL] LANDSCAPE PT20REDO :: ⭐ TOTAL PLACED LANDSCAPE ORDERS = 10  ⇒  STILL PENDING — the tool cleared the VISUAL, not the order. The work is now invisible.
+[mod] [CSL] done
+[CSL] done
+						Lua 0:00:49:630
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:49:634
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:49:935
+
+
+*** Debug::Done()
+Time (ms)	49935
+
+

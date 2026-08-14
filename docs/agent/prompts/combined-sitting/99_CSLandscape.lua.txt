@@ -1,0 +1,144 @@
+-- SMR Community Fix Pack — Test Kit :: the landscaping rider census. TEMPORARY
+--
+-- Declared by: the combined sitting's owner lead (2026-08-14). The owner found an
+-- isolated hex overlay on the surface that could not be clicked, and it cleared
+-- when they opened the landscaping tool. Their read was "stuck from a previous
+-- save"; ⛔ that is an inference, and the tool forcing a REDRAW would look
+-- identical to it forcing a CANCEL.
+--
+-- The question, stated so the answer can falsify it:
+--   Does `PT20REDO` (saved AFTER the overlay disappeared) still contain a pending
+--   landscaping order?
+--     objects > 0  ⇒ the order is STILL THERE and only the visual went — worse
+--                    than it looked, because it is now invisible pending work.
+--     objects = 0  ⇒ nothing pending; the hexes were a stale visual and the
+--                    tool cleared it. Benign.
+--
+-- ⛔ WHY OBJECTS AND NOT THE GRID. `map.landscape_grid` is a raw grid whose
+--    marks are read through `LandscapeCheck(grid, q, r, true)`
+--    (`Lua/Landscape/Landscaping.lua:380`), and a mark's meaning is bound up with
+--    the site that owns it (`LandscapeConstructionSiteBase:...`,
+--    `LandscapeConstructionSiteBase.lua:51-56, 173-174`). A placed order is a real
+--    object — `DefineClass.LandscapeConstructionSiteBase = { __parents =
+--    { "ConstructionSite" } }` (`:24`) — so enumerating the objects answers the
+--    question directly, without this reader having to interpret grid bits it has
+--    never seen the semantics of. The grid is read too, but only as colour.
+--
+-- ⚠️ Runs UNATTENDED with the standing rig config; it is read-only and touches
+--    nothing. Owner cost: zero.
+
+CSL = rawget(_G, "CSL") or {}
+
+local function say(msg)
+	msg = "[CSL] " .. tostring(msg)
+	local modlog = rawget(_G, "ModLog")
+	if modlog then modlog((msg:gsub("%%", "%%%%"))) end
+	print(msg)
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then pcall(flush) end
+end
+
+local function fmt(...)
+	local ok, s = pcall(string.format, ...)
+	return ok and s or "<fmt error>"
+end
+
+-- Every landscape class the shipped tree defines a placed order for. Named
+-- explicitly rather than pattern-matched: a class that does not exist is
+-- reported as NOT INSPECTABLE, which is a different fact from zero instances.
+local SITE_CLASSES = {
+	"LandscapeConstructionSiteBase",
+	"LandscapeConstructionSite",
+	"LandscapeBuilding",
+	"LandscapeLake",
+	"LandscapeRamp",
+	"LandscapeTerrace",
+	"LandscapeClearWasteRockBuilding",
+}
+
+function CSL.Census(when)
+	say(fmt("LANDSCAPE %s =========================================", tostring(when)))
+
+	local maps = rawget(_G, "LoadedMaps")
+	say(fmt("LANDSCAPE %s :: LoadedMaps = %d", tostring(when),
+		type(maps) == "table" and #maps or -1))
+
+	local for_each = rawget(_G, "AllMapsForEach")
+	if type(for_each) ~= "function" then
+		say(fmt("LANDSCAPE %s :: AllMapsForEach NOT INSPECTABLE — the census is UNSAMPLED, not zero", tostring(when)))
+		return
+	end
+
+	local total = 0
+	for _, cls in ipairs(SITE_CLASSES) do
+		if type(rawget(_G, cls)) ~= "table" then
+			say(fmt("LANDSCAPE %s :: %-34s CLASS NOT PRESENT in this build — unsampled, not zero", tostring(when), cls))
+		else
+			local found = {}
+			local ok, err = pcall(function()
+				for_each("map", cls, function(obj)
+					found[#found + 1] = obj
+				end)
+			end)
+			if not ok then
+				say(fmt("LANDSCAPE %s :: %-34s READ FAILED: %s", tostring(when), cls, tostring(err)))
+			else
+				total = total + #found
+				say(fmt("LANDSCAPE %s :: %-34s n=%d", tostring(when), cls, #found))
+				for i, obj in ipairs(found) do
+					local slot, mark, cm
+					pcall(function() slot = obj:GetMapSlot() end)
+					pcall(function() mark = rawget(obj, "mark") end)
+					pcall(function() cm = obj.construction_mode end)
+					say(fmt("LANDSCAPE %s ::    [%d] %s#%s | map_slot=%s | mark=%s | mode=%s",
+						tostring(when), i, tostring(obj.class), tostring(rawget(obj, "handle")),
+						tostring(slot), tostring(mark), tostring(cm)))
+				end
+			end
+		end
+	end
+
+	-- Colour only: does the grid object even exist on each map. ⛔ No attempt is
+	-- made to interpret its bits — this reader has never seen their semantics and
+	-- a guessed decode would print a plausible number forever (the corun-batch-2
+	-- reader-defect class).
+	for _, m in ipairs(type(maps) == "table" and maps or {}) do
+		local g = rawget(m, "landscape_grid")
+		say(fmt("LANDSCAPE %s :: map slot=%s landscape_grid present=%s (bits NOT decoded — deliberately)",
+			tostring(when), tostring(rawget(m, "slot")), tostring(g ~= nil)))
+	end
+
+	say(fmt("LANDSCAPE %s :: ⭐ TOTAL PLACED LANDSCAPE ORDERS = %d  ⇒  %s",
+		tostring(when), total,
+		total > 0
+			and "STILL PENDING — the tool cleared the VISUAL, not the order. The work is now invisible."
+			or  "NOTHING PENDING — the hexes were a stale visual and opening the tool cleared it. Benign."))
+	return total
+end
+
+CreateRealTimeThread(function()
+	Sleep(1)
+	local deadline = RealTime() + 5 * 60 * 1000
+	while not GetPreGameMainMenu() do
+		if RealTime() - deadline >= 0 then say("TIMEOUT waiting for the menu"); quit(); return end
+		Sleep(500)
+	end
+	Sleep(2000)
+	local err = LoadGame("PT20REDO.savegame.sav", {})
+	if err then say("LOADERR " .. tostring(err)); Sleep(2000); quit(); return end
+	say("LOAD OK file=PT20REDO.savegame.sav")
+	local live_deadline = RealTime() + 5 * 60 * 1000
+	while not (rawget(_G, "MainCity") and rawget(_G, "UIColony")) do
+		if RealTime() - live_deadline >= 0 then say("city never came live"); quit(); return end
+		Sleep(500)
+	end
+	Sleep(15000)
+	-- ⛔ speed is NEVER raised: this is a copy of a real campaign and its autosave
+	--    timer is that campaign's (EF-056). Read and get out.
+	sprocall(CSL.Census, "PT20REDO")
+	say("done")
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then flush() end
+	Sleep(3000)
+	quit()
+end)

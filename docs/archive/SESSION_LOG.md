@@ -140,6 +140,38 @@ load. ⇒ **`tested` GRANTED.**
    `corun-batch-2` reader defects: a clause applied outside the configuration it
    was written for.
 
+### ✅ The owner's lead, SETTLED the same session — and my reader got it wrong first
+
+**Answer: NOTHING WAS PENDING. The hexes were a stale visual and opening the tool
+cleared it.** Censused unattended off `PT20REDO` at zero owner cost (log
+`archive/cs_rider_*`, 0 `[LUA ERROR]`):
+
+```
+LandscapeConstructionSiteBase   n=0      LandscapeRamp                    n=0
+LandscapeConstructionSite       n=0      LandscapeTerrace                 n=0
+LandscapeBuilding               n=0      LandscapeClearWasteRockBuilding  n=0
+LandscapeLake                   n=10
+```
+
+⛔ **The reader printed `TOTAL PLACED LANDSCAPE ORDERS = 10 ⇒ STILL PENDING`, and
+that headline is WRONG.** `LandscapeLake` is a **finished building** —
+`__parents = { "Building", "LifeSupportConsumer", "TerraformingBuildingBase",
+"SoilOverlayInfopanelButtonBuilding" }` (`Buildings/LandscapeLake.lua:1-2`) — so
+those ten are completed lakes in a sol-318 terraforming colony, entirely normal.
+And the `mode=construction` beside each is `construction_mode`, a class property
+naming which controller PLACES the thing, not a state saying it is being built
+(`LandscapeConstructionSiteBase.lua:18`). **The rows that answer the question are
+the construction-site ones, and every one of them is zero.**
+⇒ **This is the THIRD instrument defect of the sitting and the same class as the
+other two:** a label applied outside the thing it means. It is recorded rather than
+quietly fixed because the summary line would otherwise have entered the record as
+a finding about the owner's colony.
+⚠️ **The honest boundary:** zero construction sites is measured. An orphaned GRID
+mark with no owning site is NOT ruled out — the reader deliberately did not decode
+`landscape_grid` bits it has never seen the semantics of (all four maps report the
+grid present). An orphaned mark with no owning construction is arguably what "a
+stale visual" IS, so this does not change the disposition; it bounds it.
+
 ### An owner lead, carried as a rider
 
 Mid-play the owner found an isolated hex overlay they could not interact with.
@@ -148,9 +180,24 @@ cannot be ours**. Source read: landscaping orders live in `map.landscape_grid` a
 are read back with `LandscapeCheck` (`Construction/ConstructionControllers.lua:82-85`,
 `Buildings/DroneControl.lua:362-386`), i.e. **grid data with no object behind it**,
 which is why clicking does nothing. It cleared when the owner opened the
-landscaping tool. ⚠️ **What is NOT established: that the order is gone rather than
-hidden** — the tool forces that layer to redraw. `PT20REDO` captured whatever the
-grid holds, so the question settles unattended at zero owner cost.
+landscaping tool. ⚠️ At the time, what was NOT established was whether the order
+was gone or merely hidden — the tool forces that layer to redraw. `PT20REDO`
+captured whatever the grid held, and the census above settled it.
+
+### Close-out
+
+⚠️ **`EF-051` fired at the very end, and it is the clearest demonstration yet of
+why its wording clause exists.** The three staged fixtures were deleted with the
+game closed and the listing verified — and the rider launch's Steam pre-launch sync
+**put all three back**: `CSHOST` 13:06:45, `CSSWEEP` 13:06:47, `D13SWEEP` 13:06:52,
+each with a fresh `CreationTime` and its ORIGINAL `LastWriteTime`, alongside
+`steam_autocloud.vdf` rewritten at 13:06:52. That is the 2026-08-11 signature
+exactly. Steam Cloud is ON by the owner's deliberate temporary choice, so this is
+the **owner-armed mechanism working**: attributed, inventoried for the post-untick
+cleanup, ⛔ **not filed as a finding**. They were deleted again afterwards and the
+listing re-verified — **"deleted, listing verified", never "gone"**, which is the
+whole point of the clause and the reason both this close-out and yesterday's used
+that wording.
 
 ### Close-out
 
