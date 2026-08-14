@@ -38,6 +38,48 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ⭐ NEW 2026-08-14 — the release descriptions are being written: ONE question, and it is bundled with a call you already owe
+
+28. ⚖️ **The Save Rescue dialog buries the one line it exists to print. Fix the
+    code (costs you one launch) or ship it as built (costs nothing)?**
+    **Answer this together with item 17** — whether the rescue tool publishes at
+    all — because better dialog text is only worth anything if a player ever
+    sees it. If the tool does not publish, this is already answered: ship as
+    built, and say so and I strike the line.
+    **What you saw at the sitting**, reconstructed exactly from the counts in
+    your own dialog:
+    > Removed: 1 rain loop stamp · 1533 reservation timestamps · **2 drone stat
+    > dials** · 22 dome flags · 4 building flags · 4 rocket payload flags
+
+    The tool exists for the **drone dials** — they are the one leftover that
+    keeps changing your game after you uninstall; everything else on that line
+    is inert. It printed **third of six**, with no explanation, next to 1533
+    timestamps. That is not a design choice: the groups are sorted as *text*, so
+    they line up by the digits of their counts, and the drone line lands wherever
+    its "2" happens to sort.
+    **What the fix would look like:**
+    > Removed: **2 drone stat dials (drone speed and carry capacity are back to
+    > the game's own values)** · 1 rain loop stamp · 4 building flags · …
+
+    **What it costs you:** the changed text has never been on a screen, and the
+    only instrument that can ever check a dialog is your eyes — no log records
+    one. The gloss also makes that line much longer on a dialog built for a
+    gamepad, and whether it wraps badly is exactly the thing a log cannot tell
+    us. So: I re-stage the save (my time, but note it is the copy-an-autosave
+    hazard again, so it is not free of risk to *your* saves), you take **one
+    launch, one Mod-Manager visit, and about five minutes** reading one dialog.
+    **My recommendation: decide item 17 first.** Publishing → do the fix, it is
+    the tool's entire user interface and it is currently unreadable at the one
+    place it matters. Not publishing → ship as built.
+    ℹ️ **Nothing is blocked either way.** The descriptions being written now do
+    not quote the dialog; they say in plain words, on the page you read *before*
+    installing, that a non-base drone speed/carry dial keeps working forever
+    after uninstall. And your `tested` verdict on the rescue tool is untouched —
+    it was granted against the text the build really prints, which is still
+    exactly what it prints. → `agent/reports/D13_EXPOSED_SET.md` §10.5's
+    correction block (three more mismatches found there, all cosmetic bar this
+    one), `agent/bugs/D13.md`.
+
 ### ⭐ NEW 2026-08-13 — the SITE is built (unpublished): one small question, and two things for your awareness
 
 ℹ️ **2026-08-14 — the site chain is CLOSED; nothing here is owed by you.** The
@@ -48,6 +90,8 @@ issue trackers are really open, and applied the one correction routed to it:
 the store card's patch-retirement sentence is narrowed to its accurate
 shape-of-the-code version, under your 22d item-1 approval. Still nothing on the
 web; publishing remains yours. Open decisions stay at 3.
+*(Superseded the same day: the release-description chain added **item 28**
+above, so open decisions are now **4**.)*
 
 27. ~~⚖️ **WHERE DOES A BUG REPORT GO?**~~ ✅ **DECIDED 2026-08-13, same session:
     BOTH, COMMENTS NAMED FIRST — and it is written into the site already**

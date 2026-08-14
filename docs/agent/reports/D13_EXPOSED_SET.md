@@ -907,6 +907,103 @@ cleaned save: nothing found, no dialog, no state.
 > nothing for this tool to do: while those mods are installed they clean up after
 > themselves. Uninstall them first, then load this save again.
 
+### ⛔ CORRECTED 2026-08-14 BY RE-DERIVATION (chain `release-3` prompt 1, Job 0) — the frozen REPORT text above is not what the build prints
+
+The blocks above are the **design** text and are preserved as written. The built
+`report_text()` (`10_SaveRescue.lua:508-537`, rescue repo) differs from the
+report block in **four** places — the eyes at the sitting found one; re-deriving
+both sides at their sources found the other three. ⭐ **The second is confirmed
+by the WITNESSED dialog itself**, not by reading code alone.
+⚠️ The **stand-down** block is word-for-word what the code shows
+(`10_SaveRescue.lua:712-713`); it differs only by a paragraph break. Nothing
+below touches it.
+
+| # | frozen §10.5 says | the build prints | class |
+|---|---|---|---|
+| 1 | `2 drone stat dials (drone speed and carry capacity are back to the game's own values)` | `2 drone stat dials` | ⛔ SUBSTANTIVE — the one non-inert residue loses its explanation |
+| 2 | groups in table order — the drone dials FIRST | `join()` runs `table.sort` over the already-formatted `"N noun"` strings, so groups order by the **digits of each count read as characters** | ⛔ SUBSTANTIVE — the line that matters lands wherever its first digit sorts |
+| 3 | `35–115 hour window` (en dash) | `35-115 hour window` (ASCII hyphen) | cosmetic |
+| 4 | `(one re-roll)` | `(one re-roll each)` | cosmetic — and the **build's is better**: it is correct in the plural, which the design text is not |
+
+**Evidence for #2, from the sitting's own witness — not from reading the code.**
+The report dialog witnessed 2026-08-14 (the reading that carries D13 `tested`)
+reconciles as `1 + 1533 + 2 + 22 + 4 + 4 = 1566` (D13 entry, dialog reading 1).
+Those six counts *in that order* are exactly `table.sort` over
+`"1 rain loop stamp"`, `"1533 reservation timestamps"`, `"2 drone stat dials"`,
+`"22 dome flags"`, `"4 building flags"`, `"4 rocket payload flags"` — the noun
+sums the `CSSWEEP` pass line produces. ⇒ On the only witness that has ever
+carried what a real player's save really holds, **the line this tool exists for
+printed THIRD of six, wedged between 1533 reservation timestamps and 22 dome
+flags, with no indication of what it meant.** That is worse than the gap as
+first written, and it is measured, not inferred.
+
+### The resolution — SPEC-AMEND, PROVISIONAL, and why the code was not touched
+
+**This section is now a record of two texts: the design text (above, frozen,
+superseded as a quotable source) and the built text (below, authoritative).**
+⛔ **No player surface may quote the frozen block.** ③ quotes the built text or
+nothing.
+
+The trade was priced, not assumed:
+
+* **A code fix re-opens a witnessed claim.** The witness is *"text matching
+  `report_text()` exactly"* — the code was the reference. Changing the string
+  keeps the mechanism claim (function output reaches the screen verbatim) but
+  leaves the **new** string unsampled. ⛔ And the new string is the risk: the
+  gloss adds ~60 characters to one line of a **gamepad-native `WaitMessage`**,
+  and wrapping/overflow on that surface is a screen-only property **no log can
+  ever adjudicate** (the terminal audit's own ruling, D13). It also happened
+  that the sitting's screenshot was **partly covered by Test Kit `print()`
+  output** (harness defect 1), so the dialog's rendering at full width is the
+  least-observed thing about it. A longer line is precisely the change that
+  needs eyes.
+* **The re-witness is an owner visit**, and `EF-055`'s measured LIMIT says a
+  junction round trip cost one Mod-Manager visit + restart on 2026-08-14 with
+  two candidate causes still undistinguished. So the floor is one owner visit,
+  not zero.
+* **The audience may not exist.** The rescue artifact's publish is itself a
+  release-time call (checklist 17, "build ≠ publish").
+* **The evidence campaign is FROZEN pre-release** (owner, checklist 14).
+
+⇒ Spec-amend is the **no-cost branch** and it is taken, marked provisional; the
+owner call is routed as one line (`PLAYTEST_CHECKLIST.md`, "Decisions waiting on
+you", item 28) and **bundled with checklist 17**, because "is better dialog text
+worth an owner visit?" is downstream of "is this being published at all?"
+
+⭐ **What ③ does about the substance, at zero cost:** the information the gloss
+carried does not depend on the dialog. It is the same fact D13's uninstall text
+already states — *a non-base Drone speed/carry dial keeps working forever after
+uninstall* — so ③ carries it in **words on the rescue description and in the
+uninstall story**, surfaces ③ owns outright and no code touches. The player who
+installs the tool has read why before the dialog ever raises.
+
+### ⭐ The built report text — AUTHORITATIVE, this is what ③ may quote
+
+Derived from `report_text()` (`10_SaveRescue.lua:508-537`) at 2026-08-14, with
+the sitting's own witnessed counts substituted so the ordering is visible:
+
+> **Save Rescue**
+>
+> This save still carried leftovers from the Community Fix Pack mods. They are
+> now removed. Nothing was added to your save.
+>
+> Removed: 1 rain loop stamp · 1533 reservation timestamps · 2 drone stat dials ·
+> 22 dome flags · 4 building flags · 4 rocket payload flags
+>
+> Kept on purpose: 1 track re-order latch. These entries repair a bug in your
+> save; deleting them would bring it back.
+>
+> You can remove Save Rescue whenever you like — it stores nothing in your save.
+
+Rules the build follows, so a quoter can reconstruct any case: **empty groups
+are omitted** entirely (the witnessed run had no *Repaired* section at all,
+because `heals` were `0, 0, 0`); groups are joined with ` · `; each group is
+`N noun` with an `s` added when `N ~= 1`; the *Repaired* line, when it appears,
+reads `the meteor timer was restarted — the next meteor is re-rolled from its
+normal 35-115 hour window` and/or `N rain cycle(s) restarted on the game's own
+timer (one re-roll each)` and/or `N rain(s) that the save thought was still
+running was ended`.
+
 ## 10.6 Version skew — answered by disclosure, because detection is impossible
 
 ⛔ **The artifact CANNOT know which pack version wrote a save.** The only stamp
