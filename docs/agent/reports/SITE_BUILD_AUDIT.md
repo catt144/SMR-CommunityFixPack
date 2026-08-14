@@ -147,6 +147,61 @@ missed.
 | X7 | *the dust-devil entry's "heaviest setting" is heaviest by name, not by mean* | true of the arithmetic, but "heaviest shipped preset" is the card's own re-derived phrasing and the owner-approved frame; changing it on the site alone would create the drift this sweep exists to catch |
 | X8 | *the Philosopher's Stone entry should carry an `F103` caveat* | `F103` is a post-release WATCH with **harm nil** and one consumer that wants the message. A player-facing caveat about a harmless duplicate broadcast is noise |
 
+## Prompt 6 — the terminal audit's dispositions (2026-08-14, `06_AUDIT.md`, chain closed)
+
+**The control ran first and firewalled** — the "which shipped module delivers
+this?" question over the store cards and the site prose, with this ledger unread
+until the pass returned. **Verdict: CLEAN — no new false claim found.** Every
+chased claim resolved to a shipped module whose own header says what the page
+says, including the ones this ledger corrected (S2's eleven getters, S4's latent
+restrictor at `Fix_DroneTransportMinors.lua:45-63`, F48 delivered by
+`90_SaveSanitizer.lua:170-`, the F35 restore living in the sanitizer, the
+one-wave `SMRFixPack_spawn_gate` behind "holds one decision for as long as a
+single weather event lasts", the veto/ListFixes/stand-down mechanics in both
+cores, all eight `Opt_*` headers). The two per-call veto re-readers the modders
+page calls "a small number" are exactly two (`Fix_DustDevilSpawnGate`,
+`Fix_MeteorFrequency`).
+
+**Re-derived at audit time, none inherited:** counts 74/75/94 + 103F/12D/46C and
+opt-in 8 (1 default-active) via `--emit-counts` both repos · `mkdocs build
+--strict` GREEN · both issue trackers live-verified open via the GitHub API
+(`has_issues: true`, public, unarchived — checklist 27's ground truth) ·
+exposure gate intact (`docs_dir: content`, CI guard's own greps re-run locally
+and passing, dispatch-only, content/ = exactly the five pages, `site/`
+gitignored) · both open hedges verified still open at source
+(`COMBINED_SITTING.md:367` console question; toggle-flip pass C untaken,
+`CAPTURE_SITTING.md` unconsumed) — and verified the pages claim log-only and
+say "we have not confirmed" in the right places.
+
+| item | disposition |
+|---|---|
+| **R1** | ✅ **APPLIED** to `STORE_FIXPACK.md` (both occurrences → "changes the **shape** of the code"; tier 1 carries the two-sentence honest limit). Licence 22d(1) + 22b; record in that file's notes. `metadata.lua` keeps its 22d(1)-approved conditional — awareness, not a defect |
+| **R5** | ⚖️ **RULED: leave folded.** The Last Transmission entry carries the storage-figure half a player can meet; the general half's audience is a storybit modder, and the fix list is a player surface. This ledger is the record |
+| no opt-in module page on the site | ⚖️ **RULED: not a launch gap.** The store card is the canonical module surface and the site describes modules where a question needs them; duplicating eight module blocks is a second surface to keep true for no reader who lacks one. Revisit only if post-launch questions outgrow the card |
+| workflow header comment | fixed in the site repo — it still called content/ "LAYOUT SPECIMENS", which stopped being true on 2026-08-13 and would have misled the owner at publish time |
+| X1–X8 | **all eight refusals SUSTAINED** (X2 and X3 independently re-walked in code during the control) |
+
+**Raised by this audit's player reading and REFUSED, with the reasons on record:**
+
+* *"written out by name" vs the fourth bullet's "handful of small stamps and
+  flags"* (landing, installing, tier 1) — refused: literal names for the tail
+  are the pack's internal identifiers, which the player-language gate bars from
+  every surface; "by name" here means itemised rather than waved at, the
+  construction shipped through the store build's six sweeps plus its terminal
+  audit, and re-wording the site alone would create the card/site drift sweep 7
+  exists to catch.
+* *the FAQ's one-test ("if the problem is still there, it is not a mod, ours
+  included") has a counterexample in the dial residue* — refused: the residue is
+  a boost, which cannot present as the problem a player is debugging; the
+  engine's mod-reference notice (the other survivor of the test) is answered in
+  the very next paragraph; and the dial warning box sits on the same page.
+
+**Routed onward (nothing new owed by the owner):** the stale *"Options → Mod
+Options → Community Fix Pack"* path in `Opt_DroneOverhaul.lua`'s header comment
+stays with release prep's copy-in (already recorded in `STORE_OPTIN.md` "Owed
+elsewhere") · portal character limits for both `metadata.lua` strings stay with
+release prep (`STORE_METADATA_STRINGS.md`).
+
 ### ⚠️ Deliberate calls a later reader should not mistake for oversights
 
 1. **The page covers 73 of 74 registered modules** (S1). Nothing on the page states a module count, so nothing on the page is now false; the ledger is the record.

@@ -70,8 +70,12 @@ affected — achievements keep unlocking there with mods enabled.
 
 **What stands behind that, plainly.** Every fix inspects the game's own code
 before it patches anything and switches itself off if the game no longer looks
-the way that fix expects — so an official patch that changes the code a fix was
-written for retires our version of it instead of fighting it. Nothing is patched on disk; the mod wraps
+the way that fix expects — so an official patch that changes the shape of the
+code a fix was written for retires our version of it instead of fighting it.
+That check notices shape: a function renamed, removed or restructured. A patch
+that quietly rewrites the inside of the same function is beyond it, which is why
+we watch official patches and update rather than promising the pack retires
+itself. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
 suite of 94 checks is run against the game with the pack and without it.
 
@@ -170,8 +174,8 @@ page tells you the two steps that avoid it.
 
 Built to coexist. We patch the smallest thing that fixes each bug, chain
 politely with other mods' hooks, and every fix checks the game's code first — so
-if an official patch changes the code a fix was written for, our version of that
-fix stands down instead of fighting it. The pack is built against game version 1.0.7.396349, and a fix that
+if an official patch changes the shape of the code a fix was written for, our
+version of that fix stands down instead of fighting it. The pack is built against game version 1.0.7.396349, and a fix that
 no longer recognises the code it was written for switches itself off rather than
 guessing.
 
@@ -246,6 +250,20 @@ the owner-approved 08-02 phrase and it is accurate. ⚠️ The bullet landed
 **after** the six sweeps; it has now been through the terminal audit's
 independent evidence and route sweeps in addition to the by-hand rule-4/§4.5
 check, and it passed all of them.
+
+### R1 — applied 2026-08-14 by the site chain's terminal audit (`06_AUDIT.md`)
+
+The patch-retirement claim was narrowed in both places it appears: "changes the
+code a fix was written for" → "changes the **shape** of the code", and the tier-1
+version now carries the honest limit in two sentences (shape = renamed / removed /
+restructured; a same-named body rewrite is invisible to the check, so we watch
+patches rather than promising self-retirement). Re-derived from
+`00_Core.lua:492-497` at apply time. Licence: 22d item 1 (this exact claim,
+approved 2026-08-13) + the 22b standing word ("change any wordings to their
+accurate versions"). ⚠️ `metadata.lua`'s `description` keeps the conditional the
+owner approved verbatim in 22d(1) ("stands down if an official patch changes what
+it was written for") — one notch softer than the site's shape-formulation;
+release prep re-checks portal limits anyway and can adopt the shape wording then.
 
 ### Deliberate departures from the design, and why
 

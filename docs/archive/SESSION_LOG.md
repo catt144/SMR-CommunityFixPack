@@ -8,6 +8,28 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-14 — public-docs chain CLOSED: the terminal audit read every surface as a player, re-ran the shipped-module control firewalled, and emptied the folder
+
+**The control came back CLEAN** — "which shipped module delivers this?" over both
+store cards and the site's prose, with `SITE_BUILD_AUDIT.md` unread until the
+pass returned: every chased claim resolved to a shipped module whose own header
+says what the page says (the ledger's S2/S4/F48/F35 corrections all confirmed
+independently; the "small number" of per-call veto re-readers is exactly two).
+**Re-derived, none inherited:** counts 74/75/94 + 103F/12D/46C, opt-in 8 (1+7) ·
+`mkdocs build --strict` GREEN · both issue trackers verified open via the live
+GitHub API · exposure gate intact with the CI guard's greps re-run locally · both
+open hedges (console screen, toggle flip) still open at source and correctly
+hedged on every page. **Applied:** R1 — the fix-pack card's patch-retirement
+claim narrowed to "changes the *shape* of the code" with the honest limit spelled
+out (licence 22d item 1 + 22b; `metadata.lua` keeps its owner-approved
+conditional) · the site workflow's stale "LAYOUT SPECIMENS" comment corrected.
+**Ruled:** R5 stays folded · no opt-in module page is not a launch gap · two
+findings this audit's own player reading raised were refused with reasons on the
+ledger. **Routed:** nothing new to the owner; open decisions stay at 3. Full
+dispositions: `reports/SITE_BUILD_AUDIT.md` "Prompt 6" section. The chain's
+folder (`agent/prompts/public-docs/`) is EMPTY — README and `06_AUDIT.md`
+deleted in the closing commit, per chain rule 2.
+
 ## 2026-08-14 — THE ONE COMBINED SITTING RAN: PT-20 redo clean in state 3, F102's local half closed, and ⭐⭐ **D13 GRANTED `tested`** — the three dialog readings no log can ever hold are witnessed
 
 **Owner cost: 34 minutes** of parked handover time, measured off the harness

@@ -40,6 +40,15 @@ owed input stays here no matter how struck-through it looks.
 
 ### ⭐ NEW 2026-08-13 — the SITE is built (unpublished): one small question, and two things for your awareness
 
+ℹ️ **2026-08-14 — the site chain is CLOSED; nothing here is owed by you.** The
+terminal audit read all five pages and both store cards as a player, re-ran the
+"which shipped module delivers this?" control firewalled from the ledger
+(**clean — no new false claim**), re-verified the exposure gate and that both
+issue trackers are really open, and applied the one correction routed to it:
+the store card's patch-retirement sentence is narrowed to its accurate
+shape-of-the-code version, under your 22d item-1 approval. Still nothing on the
+web; publishing remains yours. Open decisions stay at 3.
+
 27. ~~⚖️ **WHERE DOES A BUG REPORT GO?**~~ ✅ **DECIDED 2026-08-13, same session:
     BOTH, COMMENTS NAMED FIRST — and it is written into the site already**
     (`content/faq.md` → "Where do I tell you?"). The mod page's comments are the
