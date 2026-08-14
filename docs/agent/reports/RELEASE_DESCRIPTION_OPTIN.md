@@ -44,7 +44,7 @@ put through the shipped-module control at assembly, see Provenance):
 
 > If you have already uninstalled without doing that, there is a separate
 > one-shot tool — **Save Rescue**. Install it, load the save once, read what it
-> tells you it removed, and delete it again.
+> tells you it removed, save, and delete it again.
 
 …followed by its store link once that link exists.
 
@@ -371,6 +371,18 @@ page's defects.**
 deleting it: they will see the engine's one mod-reference notice, exactly as the
 paragraph three lines below already explains for any removed mod
 (`D13_EXPOSED_SET.md` §10.9(4), corrected by measurement).
+
+**Terminal audit, 2026-08-14 (prompt 2):** the firewalled re-run of this control
+made two changes. ⛔ **"save," added to the sentence** — the pass edits the
+loaded colony and only the player's next save writes the cleaned state into the
+file; "load once … delete it again" without a save loses the cleanup (full
+reasoning: `RELEASE_DESCRIPTION_RESCUE.md`, audit section). ⚖️ And the
+engine-notice premise in the paragraph above is now **routed as checklist item
+29**: the measured line is a log write, and the on-screen missing-mods warning
+excludes `optional_mod` mods — which all three of ours are — so the card
+paragraph it leans on promises a notice the game does not show. Left as-written
+pending that one ruling, because the same sentence sits on both audited cards
+and the site.
 
 ### What changed between `STORE_OPTIN.md` and this file
 

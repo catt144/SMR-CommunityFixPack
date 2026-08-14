@@ -8,6 +8,49 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-14 — release-3 chain CLOSED: the firewalled control caught the streak's third miss, two fixes landed, one call routed pre-paste, folder emptied — ④ is the owner's
+
+**The control ran firewalled and the streak held: third chain, third catch.** Over
+every prompt-1 sentence that is not verbatim audited card text, "which shipped
+module delivers this?" — with prompt 1's own control tables unread until my pass
+was written — found **three claims the tables had passed**: ⛔ (1) the rescue
+flow's *"load once, read, delete it again"* **never says SAVE**, and the clean
+pass only edits the loaded colony — a player who quits without saving and
+deletes the tool keeps the dial boost forever, with the tool gone (the same
+mechanism the opt-in dial warning already states); **FIXED** on every editable
+surface — rescue card, rescue `metadata.lua` (22b licence, `4d816b6`), opt-in
+FILL-IN 2, assembly §2(d) — and noted under item 28 for the dialog string, which
+has the same omission and is priced by the same re-witness. ⛔ (2) *"while
+either mod is installed this tool deliberately does nothing"* contradicts the
+shipped **per-mod** stand-down — the mixed case (one mod removed) is the code's
+own stated common case and the tool serves it; **FIXED**, same surfaces. ⚖️ (3)
+the *"you will still see one notice"* paragraph — on BOTH audited cards, the
+site FAQ, the rescue card and the assembly — traces to a **log** line
+(`ModLog`, `Mod.lua:1199`); the only on-screen missing-mods warning
+(`GetMissingMods`, `SavegameMetadata.lua:97-99`) skips `optional` mods, all
+three of ours ship `optional_mod = true`, so no retail player ever sees it.
+§10.9(4)'s "sees one notice" aside was an inference from rig logs, where the
+console overlay draws the log on screen. **ROUTED as checklist 29** — one
+pre-paste owner ruling, every surface changes together; site stays FILED-only.
+**Re-derived, none inherited:** 94 probes · 8 (1+7) · `78/0/16/0` re-tallied
+from the archived log's own lines · 5 judgment calls at their fix-list lines ·
+12+15=27 at the §2 tables · packaged 78/12/4 re-simulated over the real trees
+against `ignore_files` · both card bodies re-diffed VERBATIM to their audited
+sources (only HOLE→FILL-IN swaps) · both hedges (console screen, toggle flip)
+still open at source — the sitting took no capture pass, and no assembled text
+upgraded either. **Also corrected:** the ④ sheet's rescue metadata cells were
+transposed (`description`/`last_changes`), re-measured after the fixes; the
+rescue repo README's stale "that sitting is scheduled" replaced with the
+witnessed 08-14 record (`tested`, kept — a shipping repo may state its
+verification tier, but only in the past tense). **Routed to the owner as the ④
+kickoff** (checklist, "④ IS CUT" block): read `RELEASE_PORTAL_PREP.md` top to
+bottom; five calls in order — 29 pre-paste · 17 · 28 · cleanliness sentence ·
+opt-in version (rec 1.0) — plus the preview-art blocker. The chain's folder
+(`agent/prompts/release-3/`) is EMPTY — README and `02_AUDIT.md` deleted in the
+closing commit, per chain rule 2.
+
+---
+
 ## 2026-08-14 — public-docs chain CLOSED: the terminal audit read every surface as a player, re-ran the shipped-module control firewalled, and emptied the folder
 
 **The control came back CLEAN** — "which shipped module delivers this?" over both

@@ -45,6 +45,17 @@ cards were deliberately written to stand without it.
 → reasoning: `RELEASE_DESCRIPTION_FIXPACK.md` §"One sentence is deliberately
 absent", `PLAYTEST_CHECKLIST.md` items 17 and 28.
 
+### (c) ⭐ NEW from the terminal audit — one more call, and it comes BEFORE any paste
+
+**Item 29 — both cards promise a notice the game does not show.** The "you will
+see one notice after removing the mod" paragraph (both cards, the site FAQ, the
+rescue card) traces to a **log** line; the on-screen missing-mods warning
+excludes `optional` mods, and all three of ours ship `optional_mod = true` — a
+player who removes them sees nothing. Rule before pasting: strike/reword the
+paragraph (agent work once ruled, every surface in one sweep), or ship as
+written (harm is a promised notice that never appears). Full route + evidence:
+`PLAYTEST_CHECKLIST.md` item 29.
+
 ---
 
 ## 1. The order of operations — links only exist after the step that creates them
@@ -82,13 +93,14 @@ marker sits on its own line and every one tells you how to delete itself. Nine
 markers across the three cards: **4** in the fix pack, **3** in the opt-in, **2**
 in Save Rescue.
 
-**Body sizes, measured 2026-08-14** (markers excluded):
+**Body sizes, re-measured 2026-08-14 by the terminal audit** (markers excluded;
+the rescue card grew — the audit added the save step, §0(b) item 29 note):
 
 | card | characters | words |
 |---|---|---|
-| Community Fix Pack | 10,820 | 1,903 |
-| Opt-In Modules | 16,159 | 2,827 |
-| Save Rescue | 4,323 | 817 |
+| Community Fix Pack | 10,822 | 1,903 |
+| Opt-In Modules | 16,161 | 2,827 |
+| Save Rescue | 4,492 | 852 |
 
 ---
 
@@ -121,9 +133,13 @@ counter or refuse the field, and both answers arrive in two seconds.
 |---|---|---|---|---|
 | Community Fix Pack | 18 | 184 | 844 | 112 |
 | Opt-In Modules | 34 | 177 | 884 | 100 |
-| Save Rescue | 11 | 136 | 442 | 672 |
+| Save Rescue | 11 | 147 | 732 | 442 |
 
-*(characters, measured 2026-08-14 from the three `metadata.lua` files)*
+*(characters, re-measured 2026-08-14 by the terminal audit from the three
+`metadata.lua` files. ⛔ Two corrections to the original table: the Save Rescue
+`description`/`last_changes` cells were TRANSPOSED as first written, and the
+rescue strings then grew — the audit added the missing save step and fixed the
+stand-down sentence, per its record in `RELEASE_DESCRIPTION_RESCUE.md`.)*
 
 ⭐ **The one thing worth eyeballing at the paste**, and it is measurable locally:
 **the Opt-In Modules `description` is the only string carrying characters beyond
@@ -211,12 +227,12 @@ standing rules are live:
 
 | | state |
 |---|---|
-| Fix-pack card | ✅ **paste-ready**, 4 fill-ins, every one deletable |
-| Opt-in card | ✅ **paste-ready**, 3 fill-ins, every one deletable |
-| Save Rescue card | ✅ written, ⛔ **gated on item 17** — dead paper if you say no |
-| Uninstall story | ✅ reconciled across all surfaces; three defects in the inherited draft found and corrected (`RELEASE_UNINSTALL_ASSEMBLY.md` §2) |
-| `metadata.lua` ×3 | ✅ applied, counted, 2 more defects corrected today |
+| Fix-pack card | ✅ **paste-ready**, 4 fill-ins, every one deletable — ⚖️ minus the item-29 paragraph call |
+| Opt-in card | ✅ **paste-ready**, 3 fill-ins, every one deletable — ⚖️ same item-29 call |
+| Save Rescue card | ✅ written + audit-corrected (save step, stand-down wording), ⛔ **gated on item 17** — dead paper if you say no |
+| Uninstall story | ✅ reconciled; **four** defects in the inherited draft found and corrected — three by assembly, the missing save step by the audit (`RELEASE_UNINSTALL_ASSEMBLY.md` §2) |
+| `metadata.lua` ×3 | ✅ applied, counted; 2 defects corrected by prompt 1, 2 more (rescue) by the audit |
 | Packaging | ✅ item 23 done, measured; ⚖️ version numbers yours |
 | Site | ✅ built + audited, ⛔ **nothing on the web**; needs step 2 then step 3 |
 | Preview art | ⛔ **decided, not built** — §0(a) |
-| Decisions owed by you | **4** — 17, 28, the cleanliness sentence, and the opt-in version |
+| Decisions owed by you | **5** — **29 (before any paste)**, 17, 28, the cleanliness sentence, and the opt-in version |

@@ -38,6 +38,65 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ⭐ NEW 2026-08-14 (later) — ④ IS CUT: your launch afternoon reads ONE sheet, and the audit found one more call that comes before any paste
+
+**The release-3 chain is closed** — both cards paste-ready and diff-proven
+verbatim to their audited sources, the third card written and gated, the
+uninstall story reconciled, the metadata strings applied and counted, the
+packaging measured. **When you sit down for launch, read
+`agent/reports/RELEASE_PORTAL_PREP.md` top to bottom — it is the whole
+afternoon in order** (upload → links → Pages → fill-ins), and it names
+everything below in context.
+
+**Five calls it needs from you, in this order** — 29 (below, **before any
+paste**) · 17 (does Save Rescue publish) · 28 (the rescue dialog text) · the
+cleanliness sentence (`RELEASE_DESCRIPTION_FIXPACK.md` §"One sentence is
+deliberately absent") · the opt-in version number (**ships 0.1, its changelog
+says "Initial release" — recommendation 1.0**). Plus the one blocker that is
+not a decision: **the preview art you ruled on (24) is still not built** and
+needs the game open — capture sitting first, or upload with any image and swap
+later.
+
+29. ⚖️ **Both store cards promise an on-screen notice the game never shows for
+    our mods — strike/reword that paragraph before you paste, or ship it as
+    written?** The sentence (both cards, the site FAQ, the rescue card, the
+    uninstall assembly): *"the first time you load a save that was made with
+    any mod you have since removed, the game itself prints a notice that the
+    save refers to a mod that is not there."*
+    **What the route shows:** the measured evidence behind it is a **log-file
+    line** (`Savegame references Mod … which is not present` — engine
+    bookkeeping, written to the log only). The one thing the game puts **on
+    screen** for missing mods is the "missing or outdated mods" warning, and it
+    deliberately skips mods marked *optional* — **which all three of ours are**
+    (the same flag that stops the game nagging players who removed the mod,
+    set on purpose in all three `metadata.lua` files). A player who removes our
+    mods sees **nothing**: no notice, nothing to dismiss, nothing that
+    "disappears when you save". The record's "you will see one notice" was an
+    inference from rig logs — the rig draws the log on screen; a retail player
+    has no such overlay. Nobody has ever watched a retail-shaped load show one.
+    **Recommendation: strike it** (or let the for-modders page alone carry the
+    accurate log-line version). One agent sweep fixes every surface the same
+    way once you rule — cards, rescue card, assembly, site FAQ (site edits are
+    FILED, awaiting exactly this ruling). Shipping it as written is the
+    harmless direction (players told to expect a notice just never see one),
+    but it is a false statement of fact on every card, which is the exact class
+    the whole evidence bar exists to keep off a store page.
+    → route + evidence: `RELEASE_DESCRIPTION_RESCUE.md` audit section (engine
+    cites: `Mod.lua:1199`, `SavegameMetadata.lua:97-99`); `D13_EXPOSED_SET.md`
+    §10.9(4) is where the log measurement lives and where the "you will see"
+    aside crept in.
+
+ℹ️ **Also fixed by the audit, no call needed:** the rescue tool's instructions
+("load once … delete it again") never said to **save** — and the clean pass
+only edits the loaded colony; the player's save is what writes it into the
+file. Corrected on every editable surface (rescue card, its `metadata.lua`,
+the opt-in card's Save Rescue fill-in sentence). ⚠️ The rescue's **on-screen
+dialog** has the same omission ("You can remove Save Rescue whenever you like")
+— that is a code string: **if you rule "fix the dialog" on item 28, the same
+launch should add the save-step line too; same cost, same one re-witness.** If
+you rule "ship as built", the paper instructions now carry the step and the
+dialog merely doesn't repeat it.
+
 ### ⭐ NEW 2026-08-14 — the release descriptions are being written: ONE question, and it is bundled with a call you already owe
 
 28. ⚖️ **The Save Rescue dialog buries the one line it exists to print. Fix the
@@ -79,15 +138,10 @@ owed input stays here no matter how struck-through it looks.
     exactly what it prints. → `agent/reports/D13_EXPOSED_SET.md` §10.5's
     correction block (three more mismatches found there, all cosmetic bar this
     one), `agent/bugs/D13.md`.
-    ℹ️ **Your launch-day sheet now exists and answers item 28 in context:**
-    `agent/reports/RELEASE_PORTAL_PREP.md` — read it top to bottom when you sit
-    down. ⛔ **One thing on it you should know before you book the afternoon: the
-    preview art you ruled on (item 24) is still not built, and it needs the game
-    open.** Either the capture sitting runs first or you upload with whatever
-    image the portal accepts and swap it later — which costs nothing and was the
-    point of calling it a floor. ⚖️ Also on that sheet: the opt-in mod is set to
-    ship as **0.1** while its own changelog calls it an initial release
-    (recommendation: 1.0). The full ④ list comes to you from this chain's audit.
+    ℹ️ **Your launch-day sheet exists:** `agent/reports/RELEASE_PORTAL_PREP.md`.
+    The full ④ picture — the five calls in order, the preview-art blocker, and
+    one more audit finding that touches this item's "fix the dialog" branch —
+    is the **④ IS CUT** block above this one.
 
 ### ⭐ NEW 2026-08-13 — the SITE is built (unpublished): one small question, and two things for your awareness
 
@@ -100,7 +154,8 @@ the store card's patch-retirement sentence is narrowed to its accurate
 shape-of-the-code version, under your 22d item-1 approval. Still nothing on the
 web; publishing remains yours. Open decisions stay at 3.
 *(Superseded the same day: the release-description chain added **item 28**
-above, so open decisions are now **4**.)*
+above, so open decisions became **4** — and its terminal audit added **item
+29**, so they are now **5**.)*
 
 27. ~~⚖️ **WHERE DOES A BUG REPORT GO?**~~ ✅ **DECIDED 2026-08-13, same session:
     BOTH, COMMENTS NAMED FIRST — and it is written into the site already**

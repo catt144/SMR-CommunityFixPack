@@ -25,7 +25,7 @@ already-audited surfaces and are **not** replaced by it.
 
 ---
 
-## 2. ⛔ The route-check D13 demanded — and the frozen draft fails it three ways
+## 2. ⛔ The route-check D13 demanded — and the frozen draft fails it three ways (a fourth, (d), found by the terminal audit)
 
 D13's draft carries its own instruction: *"step ③ owns final wording and MUST
 route-check every 'you can/do X' line per the walked-not-derived rule."* Walked,
@@ -78,6 +78,28 @@ apply, in the middle of a procedure where every other step matters. Written as
 an unconditional instruction it teaches the reader that some of these steps are
 decoration. ⇒ **the assembled text keeps the step, makes it conditional, and says
 what it is for.**
+
+### (d) Found by the terminal audit, 2026-08-14 (prompt 2): the rescue flow never says SAVE — and the notice sentence promises a screen event the game does not show
+
+⛔ **The draft's rescue instruction — "load the save once, read what it removed,
+and delete it again" — loses its own work if followed literally.** The clean
+pass edits the **loaded** colony; only the player's next save writes the cleaned
+state into the file. Load → read → quit-without-saving → delete leaves the dial
+boost in the file forever, with the tool gone. The corrected sentence (with
+**save** in the sequence) is now in `RELEASE_DESCRIPTION_OPTIN.md` FILL-IN 2 and
+throughout the rescue card and its `metadata.lua`; this file's fill-in section
+inherits the fix by pointing there. ⚠️ The shipped report dialog has the same
+omission — a code string, priced with item 28's re-witness, noted there.
+
+⚖️ **And the §1 row above that says the engine-notice sentence "holds, unchanged"
+inherited an unverified extrapolation.** The §4.5 measurement is a **log** line
+(`ModLog`, `Mod.lua:1199`); the only on-screen missing-mods warning
+(`GetMissingMods`, `SavegameMetadata.lua:97-99`) **excludes mods marked
+`optional` — all three of ours**. So §3's "One notice you will see" paragraph
+describes a notice no player of these mods will see. It sits verbatim on both
+audited cards and the site FAQ, so it is **routed as checklist item 29** and the
+§3 text below is left matching the cards until the owner rules — one decision,
+every surface changes together.
 
 ### What the route-check did NOT find
 

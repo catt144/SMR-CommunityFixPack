@@ -42,12 +42,13 @@ is OFF and the publish workflow is `workflow_dispatch`-only.
 
 A one-shot cleanup tool for savegames that were played with the **Community Fix
 Pack** or the **Community Fix Pack: Opt-In Modules** and then lost them. Load
-your save once, read what it tells you, and you can delete it again.
+your save once, read what it tells you, save your game, and you can delete it
+again.
 
-**Install it only after you have uninstalled those mods.** While either of them
-is still installed this tool deliberately does nothing and says so once — they
-clean up after themselves, which is what makes this one unnecessary until they
-are gone.
+**Install it only after you have uninstalled those mods.** An installed mod
+cleans up after itself, so this tool only removes what a mod that is gone left
+behind — and if the mods are still installed and there is nothing for it to do,
+it says so once.
 
 ### When you need this — and when you do not
 
@@ -79,14 +80,16 @@ already dealt with and you need nothing further.
 - **It tells you what it did**, in one message listing what was removed, anything
   that was repaired, and anything it kept on purpose. If it found nothing, it
   says nothing.
-- **Loading the same save a second time does nothing at all** — there is nothing
-  left to find, and it does not run twice.
+- **Once you have saved, loading that save again does nothing at all** — there
+  is nothing left for it to find. Saving is the step that writes the cleaned
+  colony into the file; until you save, the file still carries what the tool
+  just removed from the game you are looking at.
 
 ### What it puts in your save
 
 Nothing. No flags of its own, no saved variables, no background work left
 running. A save this tool has run on is a save with *less* in it, never more —
-which is why you can delete the tool the moment it has done its job.
+which is why you can delete the tool once you have saved.
 
 One thing you will still see, and it is not this tool's doing: the first time you
 load a save that was made with any mod you have since removed — including this
@@ -184,3 +187,42 @@ the attended pass ran, `removed 1566` on a native witness, all three dialog
 readings witnessed, `tested` granted. Not edited here because it is outside this
 prompt's named deliverables and the audit should decide whether a status
 paragraph belongs in a shipping repo's README at all.
+
+---
+
+## Terminal audit, 2026-08-14 (release-3 prompt 2) — the firewalled control re-run: three findings, two fixed here, one routed
+
+The control was re-run over the player text **before** reading the table above,
+per the chain design. It confirmed most rows and caught three claims the table
+had passed:
+
+1. ⛔ **FIXED — the missing SAVE step.** *"Load your save once, read what it
+   tells you, and you can delete it again"* described a procedure that loses its
+   own work: the pass edits the **loaded** colony on `PostLoadGame`, and only the
+   player's next save writes the cleaned state into the file. A player who loads,
+   reads, quits without saving and deletes the tool keeps the dial boost forever
+   — with the tool gone. The instruction now says **save your game** before
+   deleting, here, in `metadata.lua`'s `description`/`short_description`, and in
+   the opt-in card's FILL-IN 2 sentence. (Same mechanism the opt-in dial warning
+   already states: *"saving is what clears it from the file."*) ⚠️ **The shipped
+   report dialog also omits the save step** (`10_SaveRescue.lua`'s closing line
+   invites removal without it) — that is a code string, priced by the same
+   owner re-witness as item 28, and is noted there rather than edited.
+2. ⛔ **FIXED — "while either of them is still installed this tool deliberately
+   does nothing."** The shipped gate is **per-mod** (`owner_present`/
+   `owner_blocked`): with only one mod removed, the tool DOES clean that mod's
+   leftovers — the code's own comment calls the mixed case "the common one" and
+   serves it deliberately. The old sentence told exactly that player the tool
+   would not help them. Table row "witnessed 2026-08-14" is real but was the
+   both-packs case; the mixed case is where the sentence failed. Reworded here
+   and in `metadata.lua`.
+3. ⚖️ **ROUTED — "One thing you will still see … the game itself prints a
+   notice."** The measured evidence behind §10.9(4) is a **log** line
+   (`ModLog`, `Mod.lua:1199`); the only on-screen missing-mods warning is built
+   by `GetMissingMods` (`SavegameMetadata.lua:97-99`), which **excludes mods
+   marked optional — and all three of our mods ship `optional_mod = true`**, so
+   a player who removes them sees nothing on screen. The same sentence sits on
+   both audited store cards, the uninstall assembly's reference text and the
+   site FAQ, so the wording is one owner decision, not four edits — routed as
+   **checklist item 29**. The paragraph above is left as-written until that
+   ruling so every surface changes together.
