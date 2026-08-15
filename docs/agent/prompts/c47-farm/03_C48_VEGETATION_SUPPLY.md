@@ -125,23 +125,45 @@ At minimum:
 
 ---
 
-## Job 4 — the side-question, if the budget allows
+## Job 4 — ⭐⭐ THE SPEED LADDER. Co-equal deliverable with Job 3, not optional.
 
-**Why did the owner's 1x attended session flap ~13x more than the 5x unattended
-runs on the same save?** Four candidate causes have already been **refuted**:
+**Why did the owner's 1x attended session stall the farm 52% of samples while the
+5x unattended runs stalled it 3.6% on the same save?** Four causes are already
+**refuted**:
 
 1. drone contention from player construction — owner: *"nothing but normal
    maintenance"*
 2. run-to-run variance — the gap is far outside the 2/0/4 spread
 3. crop cost per hex — the two farms **spent almost identically** (9,425 vs 9,520)
 4. request disconnection while stalled — `UpdateRequestConnectivity` tests
-   `ui_working`, which is the **player's on/off switch**, not the stall state
+   `ui_working`, the **player's on/off switch**, not the stall state
 
-The clean discriminator is **one unattended run at 5x with this same instrument**,
-compared against the 1x run. If the flap rate tracks speed, it is speed. If not,
-something about a live session is involved. ⛔ Do not offer a fifth cause without
-a control — the owner pushes back on stated root causes and has been right every
-time.
+⭐ **The owner named the fifth and designed the test** (2026-08-15):
+
+> *"my guess is the speed… do a variable speed test, fire at 1x speed for X min
+> poll, then repeat for each speed level. I noticed that the frequencys would
+> change on how often it ran out of stock depending on the speed I was on, it
+> seems like the faster the speed is the less it runs out of stock."*
+
+**It is already built** — `98_C48Veg.lua.txt` runs the ladder `1x → 3x → 5x → 20x`
+in ONE process, on ONE colony, with the same drones and the same vegetation
+offers, so the only variable between segments is the time factor. Two separate
+launches would have carried every cross-run confound; this does not.
+
+⛔ **Segments are equal in GAME time (3.5 game hours each), not real time**, and
+that is forced: the colony's clock stops at day 385 hour 0 and starts at day 384
+hour 8, so the whole budget is ~16 game hours regardless of speed. Equal
+real-time segments would give 20x eight times the simulated exposure of 1x.
+⇒ ⛔ **Read the per-game-hour columns in the `LADDER ROW` lines, never the raw
+counts.** A rung with `took=false` is VOID; `complete=false` is PARTIAL; a rung
+that never ran is UNSAMPLED, never zero.
+
+**Commit the owner's prediction as theirs before running:** stalled-% falls
+monotonically as speed rises. ⭐ **A refutation is worth more than a
+confirmation** — it would mean the 52%-vs-3.6% gap has a cause still unfound.
+
+⛔ Do not offer a sixth cause without a control. The owner pushes back on stated
+root causes and has been right every time so far.
 
 ---
 

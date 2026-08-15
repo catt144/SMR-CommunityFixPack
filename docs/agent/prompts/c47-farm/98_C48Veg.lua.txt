@@ -37,12 +37,38 @@ C47.mode = "REAL"
 
 local STAGED_SAVE = "C48STAGE.savegame.sav"
 
-C47.speed        = 1            -- ⭐ 1x, matching the owner's attended session
+C47.speed        = 1            -- the ladder's first rung; C47.Load sets this
 C47.sample_ms    = 200          -- fine enough that one delivery = one sample
 C47.window_ms    = 60 * 1000
-C47.max_real_ms  = 20 * 60 * 1000
-C47.watchdog     = 30 * 60 * 1000
+C47.max_real_ms  = 25 * 60 * 1000
+C47.watchdog     = 35 * 60 * 1000
 C47.freeze_samples = 100        -- 100 x 200ms = 20 s of an unmoving clock
+
+-- ⭐⭐ THE SPEED LADDER — the owner's design, 2026-08-15, and it is better than
+--    the two-launch comparison this leg was originally going to run:
+--      *"do a variable speed test, fire at 1x speed for X min poll, then repeat
+--       for each speed level. I noticed that the frequencys would change on how
+--       often it ran out of stock depending on the speed I was on, it seems like
+--       the faster the speed is the less it runs out of stock."*
+--    One process, one colony, one drone fleet, one set of vegetation offers —
+--    so the ONLY thing that varies between segments is the time factor. Two
+--    launches at different speeds would have carried every cross-run confound.
+--    It also matches the existing readings: the 1x attended sitting stalled the
+--    subject farm 52% of samples, the 5x unattended runs 3.6%.
+--
+-- ⛔ SEGMENTS ARE EQUAL IN **GAME** TIME, NOT REAL TIME, and that is forced by
+--    the save: this colony's clock stops dead at day 385 hour 0 (see
+--    C47.FreezeDiagnostic), and it starts at day 384 hour 8 — so the ENTIRE
+--    budget is ~16 game hours no matter how fast the game runs. Equal real-time
+--    segments would hand 20x eight times the simulated exposure of 1x and the
+--    comparison would be worthless. Equal game-time segments are the fair test;
+--    they simply cost wildly different amounts of wall clock (a 3.5 game-hour
+--    segment is ~105 real s at 1x and ~5 real s at 20x).
+-- ⚠️ Speeds are the game's own named rungs: const.mediumGameSpeed = 3,
+--    fastGameSpeed = 5, ultraGameSpeed = 20 (Lua/_GameConst.lua:26-28).
+C47.ladder        = { 1, 3, 5, 20 }
+C47.segment_gt    = 3 * 30000 + 15000   -- 3.5 game hours per rung (12 rungs' worth of ticks)
+C47.segments      = nil
 
 -- File-scope state, so the ARM script's resolution cross-check sees every name.
 C47.farms      = nil
@@ -204,40 +230,79 @@ local function sample_once()
 	end
 end
 
+-- Snapshot the per-farm counters, so a segment's numbers are that segment's and
+-- not a running total. ⛔ Re-emit the DIFFERENCES in the report; never let a
+-- reader subtract two cumulative figures by eye.
+local function snapshot()
+	local s = {}
+	for i, rec in ipairs(C47.farms or empty_table) do
+		s[i] = { stalled = rec.stalled, n = rec.n, deliveries = rec.deliveries,
+			delivered = rec.delivered, drains = rec.drains, drain_total = rec.drain_total }
+	end
+	return s
+end
+
 function C47.Sample()
 	if not C47.Guard("Sample") then return false end
-	C47.Label("ORGANIC", "200 ms buffer sampling with depot and vegetation scans",
-		"nothing is forced; the colony runs at the set speed and the instrument watches")
+	C47.Label("FORCED", "the game speed, and ONLY the game speed",
+		"the ladder sets the time factor between segments; nothing else about the colony is touched, and the farms/drones/vegetation are the same objects throughout")
 	C47.start_gt, C47.start_rt = GameTime(), RealTime()
-	say(fmt("SAMPLE BEGIN :: GameTime=%d | speed=%sx | every %d real ms | cap %d real ms",
-		C47.start_gt, tostring(GetTimeFactor() / const.DefaultTimeFactor),
-		C47.sample_ms, C47.max_real_ms))
-	local next_window = C47.start_rt + C47.window_ms
-	local last_gt, still, widx = C47.start_gt, 0, 0
-	while true do
-		sample_once()
-		local gt, rt = GameTime(), RealTime()
-		if gt == last_gt then
-			still = still + 1
-			if still == C47.freeze_samples then
-				say(fmt("SAMPLE ⛔ CLOCK STOPPED for %d consecutive samples — diagnosing and closing the window (the C47 runs found this save pauses at day 385 under a PopupNotification's XPauseLayer)", still))
-				C47.FreezeDiagnostic("clock stopped at " .. tostring(gt))
-				C47.frozen_at = gt
+	C47.segments = {}
+	say(fmt("SAMPLE BEGIN :: GameTime=%d | ladder=%s | %d game ms per rung | sampling every %d real ms | real cap %d ms",
+		C47.start_gt, table.concat(C47.ladder, "x, ") .. "x",
+		C47.segment_gt, C47.sample_ms, C47.max_real_ms))
+
+	local last_gt, still = C47.start_gt, 0
+	local aborted = false
+
+	for rung, speed in ipairs(C47.ladder) do
+		if aborted then break end
+		-- ⛔ read the speed BACK; a rung whose speed did not take is void, and
+		--    saying so is cheaper than discovering it in the numbers later.
+		local ok_set = C47.Try("UIColony:SetGameSpeed(" .. tostring(speed) .. ") [rung " .. rung .. "]",
+			function() UIColony:SetGameSpeed(speed) return true end)
+		Sleep(500)
+		local actual = GetTimeFactor() / const.DefaultTimeFactor
+		local seg = { speed = speed, wanted = speed, actual = actual,
+			took = (actual == speed), start_gt = GameTime(), start_rt = RealTime(),
+			before = snapshot() }
+		say(fmt("LADDER rung %d :: wanted %sx, GetTimeFactor reads %sx, TOOK=%s (set ok=%s) | segment target %d game ms from GameTime=%d",
+			rung, tostring(speed), tostring(actual), tostring(seg.took), tostring(ok_set),
+			C47.segment_gt, seg.start_gt))
+		C47.DepotScan("rung " .. rung .. " open")
+		C47.VegScan("rung " .. rung .. " open")
+
+		local target = seg.start_gt + C47.segment_gt
+		while true do
+			sample_once()
+			local gt, rt = GameTime(), RealTime()
+			if gt == last_gt then
+				still = still + 1
+				if still == C47.freeze_samples then
+					say(fmt("SAMPLE ⛔ CLOCK STOPPED for %d consecutive samples during rung %d (%sx) — this save pauses at day 385 under a PopupNotification's XPauseLayer. Every rung after this one is UNSAMPLED, not zero.",
+						still, rung, tostring(speed)))
+					C47.FreezeDiagnostic("clock stopped at " .. tostring(gt))
+					C47.frozen_at = gt
+					aborted = true
+					break
+				end
+			else still = 0; last_gt = gt end
+			if gt - target >= 0 then break end
+			if rt - (C47.start_rt + C47.max_real_ms) >= 0 then
+				say(fmt("SAMPLE ⛔ REAL-TIME CAP during rung %d (%sx) — this rung is PARTIAL and every later rung is UNSAMPLED.", rung, tostring(speed)))
+				aborted = true
 				break
 			end
-		else still = 0; last_gt = gt end
-		if rt - (C47.start_rt + C47.max_real_ms) >= 0 then
-			say("SAMPLE END :: real-time cap")
-			break
+			Sleep(C47.sample_ms)
 		end
-		if rt - next_window >= 0 then
-			widx = widx + 1
-			next_window = rt + C47.window_ms
-			C47.Now("w" .. widx)
-			C47.DepotScan("w" .. widx)
-			C47.VegScan("w" .. widx)
-		end
-		Sleep(C47.sample_ms)
+
+		seg.end_gt, seg.end_rt = GameTime(), RealTime()
+		seg.after = snapshot()
+		seg.complete = (not aborted)
+		C47.segments[#C47.segments + 1] = seg
+		say(fmt("LADDER rung %d CLOSED :: %sx | game %d ms | real %d ms | complete=%s",
+			rung, tostring(speed), seg.end_gt - seg.start_gt, seg.end_rt - seg.start_rt,
+			tostring(seg.complete)))
 	end
 	return true
 end
@@ -264,6 +329,38 @@ function C47.Report()
 			idof(rec.obj), #parts > 0 and table.concat(parts, ", ") or "(none sampled)",
 			tostring(const and const.ResourceScale)))
 	end
+	-- ⭐⭐ THE LADDER TABLE — the owner's test, one row per speed per farm, every
+	--    figure a DIFFERENCE across that segment rather than a running total.
+	--    Their prediction, recorded 2026-08-15: stall frequency FALLS as speed
+	--    RISES. The existing readings agree in direction (52% at 1x attended,
+	--    3.6% at 5x unattended) but were taken in different processes; this is
+	--    the same colony throughout, so it is the real test.
+	for _, seg in ipairs(C47.segments or empty_table) do
+		local gt = seg.end_gt - seg.start_gt
+		local hours = gt / C47.MS_PER_HOUR
+		for i, rec in ipairs(C47.farms or empty_table) do
+			local b, a = seg.before[i], seg.after[i]
+			if b and a then
+				local n = a.n - b.n
+				local stalled = a.stalled - b.stalled
+				local dl = a.deliveries - b.deliveries
+				local dv = a.delivered - b.delivered
+				local dr = a.drains - b.drains
+				local dt = a.drain_total - b.drain_total
+				say(fmt("LADDER ROW :: speed %sx (took=%s, complete=%s) | %s | game %d ms = %s h | STALLED %d of %d samples = %s%% | deliveries=%d totalling %d (mean %s) | drains=%d totalling %d | per GAME HOUR: drained %s, received %s",
+					tostring(seg.speed), tostring(seg.took), tostring(seg.complete),
+					idof(rec.obj), gt, tostring(hours),
+					stalled, n, n > 0 and tostring(stalled * 100 / n) or "n/a",
+					dl, dv, dl > 0 and tostring(dv / dl) or "n/a",
+					dr, dt,
+					hours > 0 and tostring(dt / hours) or "n/a",
+					hours > 0 and tostring(dv / hours) or "n/a"))
+			end
+		end
+	end
+	say("LADDER ⛔ READ THE PER-GAME-HOUR COLUMNS, NOT THE RAW COUNTS: the rungs are equal in GAME time and wildly unequal in real time, so a raw count comparison across speeds is meaningless. ⛔ A rung whose took=false is VOID. A rung whose complete=false is PARTIAL. A rung that never ran is UNSAMPLED, never zero.")
+	say("LADDER ⭐ THE OWNER'S PREDICTION, committed before this ran: stall frequency FALLS as speed RISES. If the stalled-% column does not fall monotonically, say so plainly — a refutation here is worth more than a confirmation, because it would mean the 52%-vs-3.6% gap between the attended and unattended legs has some other cause still unfound.")
+
 	C47.DepotScan("at close")
 	C47.VegScan("at close")
 	say("REPORT ⛔ NOT CLAIMED: that a drone CHOSE a vegetation offer over a depot. This leg measures offer counts, depot stock and delivery sizes. If the depots sit flat while a farm's buffer sawtooths on small deliveries, that is strong circumstantial evidence — it is not a read of the drone's decision.")
