@@ -1,8 +1,8 @@
-# C48 — measure the vegetation seed-supply routing (UNATTENDED, owner cost zero)
+﻿# C48 — measure the vegetation seed-supply routing (UNATTENDED, owner cost zero)
 
 **Authored 2026-08-15**, at the close of the `C47` attended sitting, by the
 session that ran it. Paste into a fresh session. ⛔ **This prompt DELETES ITSELF
-at close-out**; `02_AUDIT.md` remains the terminal audit for the whole folder and
+at close-out**; `03_AUDIT.md` remains the terminal audit for the whole folder and
 burns it.
 
 **Start with `git log --oneline -10` and `git pull` in all four repos.**
@@ -202,4 +202,4 @@ root causes and has been right every time so far.
 * ⭐ **`EF-051` reconcile: list the save directory BY NAME**, and account for
   every difference. **Restore any autosave the rotation ate**, as this session did.
 * `git status` in BOTH repos. Commit, push (standing owner permission).
-* **Delete this file.** `02_AUDIT.md` then audits the whole folder and burns it.
+* **Delete this file.** `03_AUDIT.md` then audits the whole folder and burns it.
