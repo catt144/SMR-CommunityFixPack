@@ -79,7 +79,17 @@ foreach ($p in @($common, $payload, $ride, $veg)) {
 $lines = Get-Content -LiteralPath $meta -Encoding UTF8
 $kept = @()
 foreach ($l in $lines) {
-  if ($l -match 'Code/9[78]_C47') { continue }
+  # DEFECT FOUND 2026-08-15 (C48 leg, before its first launch) AND FIXED HERE.
+  # (ASCII-only body, per the S3 note at the top of this file.)
+  #    This pattern read 'Code/9[78]_C47', which matches 97_C47Common and
+  #    98_C47Sampler/98_C47Ride but NOT 98_C48Veg - the payload named after the
+  #    case it measures, C48, not C47. So every arm-veg added a metadata line
+  #    that no later run could strip, the file itself WAS deleted by the loop
+  #    above (it iterates the pair records, not this regex), and two commits that
+  #    say "metadata returns to its shipped shape" (a9d5c43, f4d3bb0) each ADDED
+  #    a stray line pointing at a file that is not on disk. The class family is
+  #    what must match, never one case id.
+  if ($l -match 'Code/9[78]_C4[78]') { continue }
   if ($l -match [regex]::Escape($autorunLine)) { continue }
   $kept += $l
 }
@@ -341,7 +351,9 @@ if ($mode -eq "disarm") {
   foreach ($p in @($common, $payload, $ride, $veg)) {
     if (Test-Path -LiteralPath (Join-Path $kit $p.dst)) { Write-Output ("DISARM FAIL: still present " + $p.dst); $fail = $true }
   }
-  if ($m -match 'Code/9[678]_(C47|AutoRunFlag)') { Write-Output "DISARM FAIL: metadata still lists an arming line"; $fail = $true }
+  # Same defect, same fix: this gate could not see a C48 line either, so the
+  #    disarm that left two of them behind still reported DISARM OK.
+  if ($m -match 'Code/9[678]_(C4[78]|AutoRunFlag)') { Write-Output "DISARM FAIL: metadata still lists an arming line"; $fail = $true }
   if (-not $fail) { Write-Output "DISARM OK - kit is clean, and the permanent wave-11 probe is intact" }
 }
 

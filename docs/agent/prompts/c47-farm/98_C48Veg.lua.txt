@@ -81,8 +81,68 @@ C47.veg_hist   = nil
 
 ---- the vegetation seed offers ----------------------------------------------
 
+-- ⛔⛔ DEFECT IN THIS FILE, FOUND AT SOURCE BEFORE THE FIRST LAUNCH (2026-08-15)
+--    AND REPAIRED HERE — it would have lost the headline reading entirely.
+--
+--    The first draft asked each farm for `work_radius or service_area_radius`
+--    and counted offers in a world-distance circle of that size. Neither field
+--    exists on a farm:
+--      * `work_radius` is declared on `DroneNode` — drone hubs, RC Rovers and
+--        drone extenders (`Lua/Buildings/DroneControl.lua:40`), NOT on
+--        buildings. `OpenFarm.lua` never sets it and no building class does.
+--      * `service_area_radius` does not appear anywhere in the shipped tree.
+--    ⇒ both farms would have logged "no serving radius resolved, comparison
+--      NOT SAMPLED", and the one number this whole leg exists to produce would
+--      have been absent. Same defect family as the three the C47 leg disclosed:
+--      trusting HOW a value is read instead of checking WHAT it is.
+--
+-- ⭐ THE REPAIR USES THE GAME'S OWN SEARCH SHAPE, which is also exactly the
+--    owner's hypothesis. A drone does not search around the farm; it searches
+--    around the COMMAND CENTRES that serve the farm, and it recurses through
+--    their working extenders:
+--        FindTaskRequesters(node)
+--          local taskrequesters = node:MapGet(node, "hex", node.work_radius, "TaskRequester")
+--          for _, extender in ipairs(node.linked_extenders) do
+--              if extender.working then ... FindTaskRequesters(extender) ... end
+--                                          -- Lua/Buildings/DroneControl.lua:315-324
+--    Every building carries the list of centres serving it (`command_centers`,
+--    `Lua/_TaskRequest.lua:298-323`), so the count this leg wants is: the union,
+--    deduplicated by handle, of the VegetationTaskRequesters inside every centre
+--    that serves this farm and every working extender hanging off those centres.
+--    ⭐ That IS the owner's sentence — *"the drone extenders in that area give
+--    the drones a much larger area to look for vegetation seeds"* — measured in
+--    the units the engine uses (HEXES, not world distance).
+-- ⚠️ A second, independent proxy is taken as well: offers within a FIXED hex
+--    radius of the farm itself (`const.CommandCenterDefaultRadius`). It answers
+--    the simpler half — "is this farm standing in denser vegetation" — without
+--    depending on the colony's extender topology, and it still reads if
+--    `command_centers` comes back empty.
+
+-- The centres serving a farm, plus their working extenders, deduplicated.
+local function serving_centers(farm)
+	local out, seen = {}, {}
+	local ok, list = pcall(function() return farm.command_centers end)
+	if not ok or type(list) ~= "table" then return out, false end
+	local function add(node, depth)
+		if not node or depth > 4 then return end
+		local h = rawget(node, "handle")
+		if h and seen[h] then return end
+		if h then seen[h] = true end
+		out[#out + 1] = node
+		local ok_e, ext = pcall(function() return node.linked_extenders end)
+		if ok_e and type(ext) == "table" then
+			for _, e in ipairs(ext) do
+				local ok_w, working = pcall(function() return e.working end)
+				if ok_w and working then add(e, depth + 1) end
+			end
+		end
+	end
+	for _, c in ipairs(list) do add(c, 1) end
+	return out, true
+end
+
 -- ⭐ THE HEADLINE READING. Every live VegetationTaskRequester on the map, and
---    how many sit inside each farm's own drone-coverage radius.
+--    how many sit inside the drone coverage that actually serves each farm.
 function C47.VegScan(when)
 	local map = rawget(_G, "CurrentMap")
 	if not (map and map.MapGet) then
@@ -114,19 +174,81 @@ function C47.VegScan(when)
 			tostring(select(2, pcall(function() return sample.preset and sample.preset.id end)))))
 	end
 
-	-- per farm: how many offers sit inside the radius its drones actually serve
+	-- ⭐ WHAT ONE OFFER IS WORTH, which is the other half of the delivery-size
+	--    question. `VegetationTaskRequester:CreateResourceRequests` posts
+	--    `AddSupplyRequest(preset.output_resource, GetVegOutputAmount(preset, self), 0, 4)`
+	--    (`Lua/Vegetation.lua:1848-1851`), and `output_resource` defaults to
+	--    "Seeds" with `output_amount` defaulting to 1000
+	--    (`ClassDef-PresetDefs.generated.lua:1917-1920`). In the shipped data
+	--    only three presets can raise one: Bush **200**, Tree **1000** (default,
+	--    unset) and Broadleaf **2000**; Grass and Lichen sit at 0 and are gated
+	--    out. `GetVegOutputAmount` then adds a soil-quality bonus of
+	--    `(sq - min_soil_quality)/2` percent, so the ceiling at perfect soil is
+	--    280 / 1300 / 2600. ⛔ This histogram is the SOURCE claim being measured,
+	--    not an assumption to report as a reading.
+	local hist, n_sampled, cap = {}, 0, 400
+	for i = 1, #list do
+		if n_sampled >= cap then break end
+		local o = list[i]
+		local ok_a, amt = pcall(function() return o.request and o.request:GetActualAmount() end)
+		local ok_i, pid = pcall(function() return o.preset and o.preset.id end)
+		local key = tostring(ok_i and pid or "?") .. ":" .. tostring(ok_a and amt or "?")
+		hist[key] = (hist[key] or 0) + 1
+		n_sampled = n_sampled + 1
+	end
+	local parts = {}
+	for k, c in pairs(hist) do parts[#parts + 1] = fmt("%s x%d", k, c) end
+	table.sort(parts)
+	say(fmt("VEG %s :: OFFER SIZES (preset:amount x count) over %d of %d requester(s)%s :: %s",
+		tostring(when), n_sampled, #list,
+		#list > cap and " ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it" or "",
+		#parts > 0 and table.concat(parts, ", ") or "(none)"))
+
+	-- per farm: how many offers sit inside the drone coverage that serves it
 	for _, rec in ipairs(C47.farms or empty_table) do
-		local radius = rec.work_radius
-		if radius and radius > 0 then
-			local ok_n, near = pcall(function()
-				return map:MapCount(rec.obj:GetPos(), radius, "VegetationTaskRequester")
-			end)
-			say(fmt("VEG %s :: %s (%s) has %s offer(s) within its serving radius of %s (ok=%s) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few",
-				tostring(when), idof(rec.obj), rec.role, tostring(near), tostring(radius), tostring(ok_n)))
+		local centers, ok_list = serving_centers(rec.obj)
+		if #centers == 0 then
+			say(fmt("VEG %s :: %s (%s) — command_centers resolved=%s but yielded ZERO centres, so the serving-coverage count is ⛔ NOT SAMPLED for this farm (⛔ not zero offers: no search area was resolved)",
+				tostring(when), idof(rec.obj), rec.role, tostring(ok_list)))
 		else
-			say(fmt("VEG %s :: %s (%s) — no serving radius resolved, comparison NOT SAMPLED for this farm",
-				tostring(when), idof(rec.obj), rec.role))
+			local seen, offers, all_reqs, detail = {}, 0, 0, {}
+			for _, c in ipairs(centers) do
+				local ok_r, radius = pcall(function() return c.work_radius end)
+				local n_here = "n/a"
+				if ok_r and type(radius) == "number" and radius > 0 then
+					local ok_g, list_v = pcall(function()
+						return c:MapGet(c, "hex", radius, "VegetationTaskRequester")
+					end)
+					if ok_g and type(list_v) == "table" then
+						n_here = #list_v
+						for _, o in ipairs(list_v) do
+							local h = rawget(o, "handle")
+							if h and not seen[h] then seen[h] = true; offers = offers + 1 end
+						end
+					else
+						n_here = "READ FAILED"
+					end
+					local ok_t, list_t = pcall(function()
+						return c:MapGet(c, "hex", radius, "TaskRequester")
+					end)
+					if ok_t and type(list_t) == "table" then all_reqs = all_reqs + #list_t end
+				end
+				detail[#detail + 1] = fmt("%s r=%s working=%s veg=%s",
+					idof(c), tostring(ok_r and radius), tostring(rawget(c, "working")), tostring(n_here))
+			end
+			rec.veg_offers = offers
+			say(fmt("VEG %s :: %s (%s) ⭐ SERVING COVERAGE: %d centre(s)/extender(s) — %s | ⭐⭐ %d DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | %d TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few",
+				tostring(when), idof(rec.obj), rec.role, #centers,
+				table.concat(detail, " · "), offers, all_reqs))
 		end
+		-- the topology-independent proxy: density around the farm itself
+		local ok_p, near = pcall(function()
+			return rec.obj:MapGet(rec.obj, "hex", const.CommandCenterDefaultRadius, "VegetationTaskRequester")
+		end)
+		rec.veg_local = (ok_p and type(near) == "table") and #near or nil
+		say(fmt("VEG %s :: %s (%s) LOCAL DENSITY PROXY: %s offer(s) within a fixed %s-hex radius of the farm itself (ok=%s) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area",
+			tostring(when), idof(rec.obj), rec.role,
+			tostring(rec.veg_local), tostring(const and const.CommandCenterDefaultRadius), tostring(ok_p)))
 	end
 end
 
@@ -158,10 +280,13 @@ function C47.Census()
 	local map = rawget(_G, "CurrentMap")
 	local farms = C47.LabelAll("OpenFarmBase")
 	for i, b in ipairs(farms) do
-		local ok_r, radius = pcall(function() return b.work_radius or b.service_area_radius end)
+		-- ⛔ NOT b.work_radius: a farm has no such field (see the defect note above
+		--    the veg scan). The serving area is the union of the CENTRES that
+		--    serve it, resolved live at every scan.
+		local centers_at_census = select(1, serving_centers(b))
 		local rec = {
 			obj = b, role = "FARM", handle = rawget(b, "handle"),
-			work_radius = (ok_r and type(radius) == "number") and radius or nil,
+			veg_offers = nil, veg_local = nil,
 			min = nil, max = nil, last_buf = nil,
 			deliveries = 0, delivered = 0, sizes = {},
 			drains = 0, drain_total = 0,
@@ -169,11 +294,11 @@ function C47.Census()
 		}
 		C47.farms[#C47.farms + 1] = rec
 		local ok_ms, maxs = pcall(function() return b.consumption_max_storage end)
-		say(fmt("CENSUS FARM [%d] %s :: stored=%s of %s | consumption_amount=%s | tick=%s ms | working=%s | serving radius=%s (ok=%s)",
+		say(fmt("CENSUS FARM [%d] %s :: stored=%s of %s | consumption_amount=%s | tick=%s ms | working=%s | serving centres+extenders=%d (⛔ a farm has NO work_radius of its own — DroneControl.lua:40)",
 			i, idof(b), tostring(rawget(b, "consumption_stored_resources")), tostring(maxs),
 			tostring(rawget(b, "consumption_amount")),
 			tostring(select(2, pcall(function() return b.building_update_time end))),
-			tostring(rawget(b, "working")), tostring(rec.work_radius), tostring(ok_r)))
+			tostring(rawget(b, "working")), #centers_at_census))
 	end
 	C47.Applicable("C48-population(OpenFarmBase)", #C47.farms, #C47.farms,
 		"city labels walked this load")
@@ -320,11 +445,12 @@ function C47.Report()
 		for s, c in pairs(rec.sizes) do sizes[#sizes + 1] = { s = s, c = c } end
 		table.sort(sizes, function(a, b) return a.s < b.s end)
 		for _, e in ipairs(sizes) do parts[#parts + 1] = fmt("%dx%d", e.s, e.c) end
-		say(fmt("REPORT FARM %s :: buffer min=%s max=%s | stalled %d of %d samples | deliveries=%d totalling %d (mean %s) | drains=%d totalling %d | serving radius=%s",
+		say(fmt("REPORT FARM %s :: buffer min=%s max=%s | stalled %d of %d samples | deliveries=%d totalling %d (mean %s) | drains=%d totalling %d | veg offers reachable at the last scan=%s | offers within %s hexes of the farm=%s",
 			idof(rec.obj), tostring(rec.min), tostring(rec.max),
 			rec.stalled, rec.n, rec.deliveries, rec.delivered,
 			rec.deliveries > 0 and tostring(rec.delivered / rec.deliveries) or "n/a",
-			rec.drains, rec.drain_total, tostring(rec.work_radius)))
+			rec.drains, rec.drain_total, tostring(rec.veg_offers),
+			tostring(const and const.CommandCenterDefaultRadius), tostring(rec.veg_local)))
 		say(fmt("REPORT FARM %s :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): %s — a wall of small values is the C48 signature; values near %s x DroneResourceCarryAmount would mean bulk depot pickups",
 			idof(rec.obj), #parts > 0 and table.concat(parts, ", ") or "(none sampled)",
 			tostring(const and const.ResourceScale)))
