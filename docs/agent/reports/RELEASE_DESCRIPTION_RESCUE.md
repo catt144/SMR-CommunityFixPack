@@ -11,6 +11,19 @@ ready draft for that contingency** — if the day comes, item 28 (the dialog tex
 plus the audit's save-step line) is decided then, before upload. Item 28 was
 closed "ship as built" by the same ruling.
 
+⭐ **PRE-UPLOAD CHECKLIST for that day, owner-ruled, do not skip:**
+1. ✅ **Display name becomes "Community Fix Pack: Save Rescue"** (owner
+   2026-08-15, checklist 26: *"This is fine for if we ever need it"*) — so the
+   three mods sort together, as the opt-in pack already does. One line in
+   `metadata.lua`; sweep this card and every player-visible string with it.
+   ⛔ Mod id / global / log tag are save contract and do NOT change.
+2. Re-decide item 28's dialog text (the drone-dial line buried third of six).
+3. Add the audit's **save-step** sentence to the on-screen dialog string — the
+   "load once … delete it again" flow never tells the player to SAVE, and only
+   their save writes the clean pass into the file. Fixed everywhere else
+   already; the code string is the one surface left.
+4. Items 2+3 are one re-witness launch together, per item 28's ruling.
+
 ⭐ **This is assembly, not authorship.** Every sentence below already existed, in
 an already-written player-facing string or an already-verified statement. The
 per-sentence trace is at the bottom, and ⚠️ **prompt 2 re-runs the shipped-module

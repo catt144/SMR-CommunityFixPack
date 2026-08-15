@@ -268,8 +268,22 @@ logbook):**
    98 errors/session with its own toggle OFF; that is how F86 Site 2 was found.
    Mod-Manager-disable is measured equivalent to a real uninstall (PT-20: 98 vs
    98 on the same save). `agent/facts/`, "OFF" IS THREE DIFFERENT THINGS.
-5. Set the entry's status to `tested` in `agent/bugs/<ID>.md` — front matter
-   AND heading tag — per the checklist's reporting protocol. Not INDEX.md.
+5. Set the entry's status in `agent/bugs/<ID>.md` — front matter AND heading
+   tag — per the checklist's reporting protocol. Not INDEX.md.
+   ⚖️ **Which word (owner ruling 2026-08-15, checklist 26b):**
+   * **`tested-attended`** — the owner was at the keyboard when it was
+     confirmed. The strongest word the project has; it is what a
+     troubleshooting session is entitled to lean on, because it carries both
+     agent instrumentation and human eyes.
+   * **`tested-unattended`** — confirmed by real launches with nobody watching.
+     Full weight for anything an instrument can read; ⛔ **never for a screen
+     event** — "the flag read false" is a measurement, "the popup visibly
+     paused" is not, and no unattended leg may claim the second.
+   * ⛔ **`tested` (bare) is LEGACY and closed to new work.** The 46 entries
+     holding it predate this rule and their attendance was never recorded —
+     17 carry the bare word with no narrative at all — so it means "attendance
+     unaudited", not "attended". Do not promote one without re-deriving it
+     from the archived record; do not read one as if it were attended.
 
 The TestKit's `SMRTest.RunAll()` A/B pair (baseline vs full pack) is the
 regression harness; run it as pre-flight when STATUS says one is owed.

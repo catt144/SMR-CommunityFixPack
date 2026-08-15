@@ -72,10 +72,23 @@ HEAD_RE = re.compile(r"^### ([FDC]\d+)\b")
 # is the LAST `[...]` group on the line, never the first backtick group.
 TAG_RE = re.compile(r"`\[(.*)\]`\s*$")
 
-# Status vocabulary, longest-first so `fixed*` is never read as `fixed`.
+# Status vocabulary, longest-first so `fixed*` is never read as `fixed` and
+# `tested-attended` is never read as `tested` (status_word() uses startswith).
+#
+# ⚖️ Owner ruling 2026-08-15 (checklist 26b, reversing the same day's "leave the
+# vocabulary alone"): `tested` SPLITS by who was present.
+#   tested-attended    — a human was at the keyboard when it was confirmed.
+#                        The strongest word we have; lean on it when debugging.
+#   tested-unattended  — confirmed by real launches with nobody watching:
+#                        measurements are real, screen events are NOT claimable.
+#   tested             — ⛔ LEGACY ONLY, pre-2026-08-15. Attendance is NOT
+#                        recorded for these and must not be assumed either way
+#                        (17 of the 46 carry the bare word and no narrative at
+#                        all). Never apply it to new work.
 STATUS_WORDS = sorted(
     [
-        "tested", "fixed*", "fixed", "wontfix", "blocked", "todo", "open",
+        "tested-unattended", "tested-attended", "tested",
+        "fixed*", "fixed", "wontfix", "blocked", "todo", "open",
         "investigating", "closed", "built", "directed", "parked", "opt-in",
         "candidate", "folded", "filed", "speced", "cand", "dsgn",
     ],
