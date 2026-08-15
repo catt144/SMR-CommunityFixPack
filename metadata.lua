@@ -8,7 +8,7 @@ return PlaceObj('ModDef', {
 	-- sibling mod by its dead working title "Community Opt-In Pack". Both are
 	-- corrected below. Full pages + the claim traces: docs/agent/reports/
 	-- STORE_FIXPACK.md and STORE_METADATA_STRINGS.md.
-	'description', "Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect verified in the game's own code — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs rather than rebalancing the game: preferences and features live in a separate mod, Community Fix Pack: Opt-In Modules, and neither mod needs the other. Nothing is patched on disk; the mod wraps the game's own code at runtime and no game files are modified. Safe to add to a save you have already played — the pack writes almost nothing into your savegame, and removing it simply lets the original bugs come back. Every fix checks the game's code before it patches anything and stands down if an official patch changes what it was written for. Six of the fixes are judgment calls rather than plain repairs, and the mod page says which and why.",
+	'description', "Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect verified in the game's own code — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs rather than rebalancing the game: preferences and features live in a separate mod, Community Fix Pack: Opt-In Modules, and neither mod needs the other. Nothing is patched on disk; the mod wraps the game's own code at runtime and no game files are modified. Safe to add to a save you have already played — the pack writes almost nothing into your savegame, and removing it simply lets the original bugs come back. Every fix checks the game's code before it patches anything and stands down if an official patch changes what it was written for. Five of the fixes are judgment calls rather than plain repairs, and the mod page says which and why.",
 	'short_description', "Bug fixes for Surviving Mars: Relaunched — it repairs defects verified in the game's own code rather than rebalancing the game, and it is safe to add to a save you have already played.",
 	-- ⚠️ `last_changes` no longer quotes a fix COUNT, on purpose: every previous
 	-- wording carried one and it drifted every time a fix was retired or added
@@ -16,10 +16,14 @@ return PlaceObj('ModDef', {
 	-- a number back, recount it from `python tools/doccheck.py --emit-counts`
 	-- in the same commit — never from this comment.
 	-- ⚖️ 2026-08-15 (unattended-3 audit): "Five of the fixes are judgment calls"
-	-- → "Six" in `description` — the F85 distress-popup flip ships disclosed as
-	-- a design-judgment tweak (its module header carries the ⚖️ DISCLOSURE), and
-	-- the count is settled as SIX consistently across card, this string, site
-	-- FAQ and fix list. Reasoning recorded in STORE_FIXPACK.md notes.
+	-- → "Six", because the F85 distress-popup flip shipped as a design-judgment
+	-- tweak. ⛔ REVERTED TO **FIVE** the same day (owner ruling, checklist 31):
+	-- F85's module was REMOVED — the popup it paused is dead-coded out of the
+	-- retail build, so the fix could never fire for a player. The count is
+	-- settled as FIVE consistently across card, this string, site FAQ and fix
+	-- list; the removed module is preserved verbatim with a re-arm trigger in
+	-- docs/agent/reports/SHELVED_F85_DISTRESS_PAUSE.md, and re-applying it puts
+	-- this number BACK to six. Reasoning: STORE_FIXPACK.md notes, F85.md.
 	-- ⛔ CORRECTED 2026-08-14 (release-3 prompt 1): this field STILL carried the
 	-- dead working title "Community Opt-In Pack" that the comment ten lines above
 	-- says was corrected — the 08-13 pass fixed `description` and missed this
@@ -150,7 +154,6 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DustStormUndergroundBreaks.lua",
 		"Code/Fix_DustDevilSpawnGate.lua",
 		"Code/Fix_ExoticDepositSign.lua",
-		"Code/Fix_DistressPopupPause.lua",
 		"Code/Fix_AutomationLawCompensation.lua",
 		"Code/90_SaveSanitizer.lua",
 	},

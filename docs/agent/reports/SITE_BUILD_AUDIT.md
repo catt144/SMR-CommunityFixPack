@@ -241,3 +241,44 @@ ledger records move with them:
   claim anywhere: the entry describes what the code now does; nobody watched a
   clock, and the wording never says anyone did.
 * `mkdocs build --strict` GREEN after the edits (1.4 s, no warnings).
+
+## ⛔ 2026-08-15 (later, same day) — the F85 entry is REMOVED again, with its module (owner ruling, checklist 31)
+
+The section immediately above recorded adding two fix-list entries. **One of
+them came straight back out**, hours later, on the owner's ruling: the F85
+`Fix_DistressPopupPause` module was removed from the pack because the dialog it
+pauses is dead-coded out of the retail build — `DistressCallPopup`'s only caller
+sits behind a literal `local cond = false`
+(`Lua\XDef\POIAdditionalContent.generated.lua:89-111`), so no player can raise
+it and the fix could never fire. Derivation: `agent/bugs/F85.md` §2026-08-15
+(later); shelf record: `SHELVED_F85_DISTRESS_PAUSE.md`.
+
+⚠️ **Why the entry was wrong quite apart from the removal, and it is worth
+keeping on the record:** it opened **"What you saw:"** and then described the
+clock running behind a window nobody can open. That is the item-29 class exactly
+— a claim about what a player *sees*, resting on a mechanism that is real in
+source and absent from the retail screen. It passed the build pass, the site's
+own review and this ledger's firewalled shipped-module control, all of which
+confirmed the *mechanism* and none of which walked the *route*.
+
+**Counts as they now stand** (re-emitted with `--emit-counts` after the removal,
+never inherited from the block above):
+
+* **Coverage: 74 of 75 registered modules** (F98 exclusion unchanged and still
+  deliberate).
+* **Fix-list entries: 77** (78 − the F85 entry).
+* **Judgment calls: FIVE** (five → six → back to five in one day). Swept the
+  same way it was set, in all three FAQ places plus the card, `metadata.lua`
+  `description`, and `STORE_FIXPACK.md`'s trace rows: the *"Five other judgment
+  calls"* bullet is now *"Four other judgment calls … All five"*, and *"Six:"*
+  under **Which fixes are judgment calls?** is now *"Five:"* with the
+  distress-call clause deleted. ⛔ The C39 Automation bullet added in the same
+  session is untouched — that module ships.
+* **Suite: 95 checks** (96 − the F85 probe), on both the card and its source.
+* `mkdocs build --strict` **GREEN** after these edits, no warnings; `site/`
+  build artefact removed again (it is not committed).
+
+⭐ **If the module is ever re-applied** (`SHELVED_F85_DISTRESS_PAUSE.md` §2 has
+the re-arm trigger), every count above moves back by one and the fix-list entry
+must be **rewritten, not restored** — the struck text's "What you saw" framing
+was never true and would not become true just because the feature came back.

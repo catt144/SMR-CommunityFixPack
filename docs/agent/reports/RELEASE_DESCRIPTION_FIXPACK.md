@@ -117,10 +117,10 @@ want this.**
 - **It fixes bugs rather than rebalancing the game.** Almost every fix targets
   something we verified in the game's own code: the code says one thing, does
   another, and we make it do what it says. Preferences and features are not in
-  here; they live in a separate mod you do not need. **Six of them are judgment
-  calls rather than plain repairs** — in three of those the game's code is not
+  here; they live in a separate mod you do not need. **Five of them are judgment
+  calls rather than plain repairs** — in two of those the game's code is not
   wrong at all and we made a call anyway, and one of them changes how the game
-  feels. All six are listed further down, with our reasoning, rather than
+  feels. All five are listed further down, with our reasoning, rather than
   quietly folded in.
 - **You do not need anything else.** The pack works on its own. There is a
   companion mod, *Community Fix Pack: Opt-In Modules*, and neither mod needs the
@@ -145,7 +145,7 @@ that quietly rewrites the inside of the same function is beyond it, which is why
 we watch official patches and update rather than promising the pack retires
 itself. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
-suite of 96 checks is run against the game with the pack and without it.
+suite of 95 checks is run against the game with the pack and without it.
 
 **And what does not.** We cannot test every combination of other mods, every
 colony shape, every save state or every future game patch. If a save matters to
@@ -196,7 +196,7 @@ always meant to leave them.
 ### A few of these are judgment calls, and we would rather say so
 
 Almost everything in this pack is a plain repair: the game's code says one
-thing, does another, and we make it do what it says. **Six are not that
+thing, does another, and we make it do what it says. **Five are not that
 simple.** They are still repairs we stand behind — but each one required us to
 decide what the game *meant*, and reasonable people could decide differently.
 They are marked in the list, they cannot be switched off from the game's own
@@ -216,11 +216,6 @@ menus on any platform, and here is what each one is:
 - **Edit Payload remembering what you told it** — treating the flight policy's
   list as a *default* rather than a *refill* is arguably how it was designed. We
   think a row you deliberately emptied should stay empty. *(design judgment)*
-- **The distress-call confirmation and the game clock** — every other popup
-  window pauses the game while it is open; the confirmation for broadcasting a
-  distress call deliberately did not. The game's code is not wrong here — we
-  overrode the developers' choice, so that no save, including an automatic one,
-  can ever land inside an open popup window. *(design judgment)*
 - **Dust devil wave sizes** — this restores the wave sizes the map settings were
   written for. On some map settings that means noticeably more dust devils than
   the game has ever actually delivered, in either the original or the remaster.

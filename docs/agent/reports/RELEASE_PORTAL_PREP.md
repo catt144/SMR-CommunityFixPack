@@ -89,7 +89,7 @@ STORE file after the change):
 
 | card | characters | words |
 |---|---|---|
-| Community Fix Pack | 11,581 | 2,018 |
+| Community Fix Pack | **11,542** | 2,011 |
 | Opt-In Modules | 15,907 | 2,774 |
 | ~~Save Rescue~~ *(contingency draft, not pasted)* | 4,202 | 792 |
 
@@ -122,13 +122,19 @@ counter or refuse the field, and both answers arrive in two seconds.
 
 | mod | `title` | `short_description` | `description` | `last_changes` |
 |---|---|---|---|---|
-| Community Fix Pack | 18 | 184 | 843 | 112 |
+| Community Fix Pack | 18 | 184 | **844** | 112 |
 | Opt-In Modules | 34 | 177 | 884 | 100 |
 | Save Rescue | 11 | 147 | 732 | 442 |
 
 *(fix-pack `description` re-measured 2026-08-15: "Five of the fixes are
 judgment calls" → "Six", 844 → 843 — the only string the `unattended-3` chain
 moved; the other cells were re-measured unchanged.)*
+⛔ **RE-MEASURED AGAIN 2026-08-15 (later), after the item-31 removal: back to
+"Five", 843 → 844.** The F85 module was pulled (its popup is dead-coded out of
+retail), so the judgment-call count reverted everywhere. The **card** lost its
+distress bullet with it and re-measures **11,581 → 11,542 characters**. Both
+figures above are the post-removal ones; no other cell moved.
+→ `agent/bugs/F85.md` §2026-08-15, `SHELVED_F85_DISTRESS_PAUSE.md`.
 
 *(characters, re-measured 2026-08-14 by the terminal audit from the three
 `metadata.lua` files. ⛔ Two corrections to the original table: the Save Rescue
@@ -168,6 +174,11 @@ chain's two new modules (`Fix_DistressPopupPause.lua`,
 real tree with the shipped `ignore_files` (the same method as the table above):
 **80 = 77 `Code/*.lua` (emitter-matched) + `items.lua` + `metadata.lua` +
 `LICENSE`**, nothing else. The opt-in and rescue packages are untouched.
+⛔ **CORRECTED THE SAME DAY — it ships 79.** `Fix_DistressPopupPause.lua` was
+removed on the owner's item-31 ruling and its row pulled from `metadata.lua`'s
+file list, so the true figure is **79 = 76 `Code/*.lua` + `items.lua` +
+`metadata.lua` + `LICENSE`**. Counts re-emitted with `--emit-counts`, not
+hand-adjusted.
 
 ⚠️ **`LICENSE` still ships, deliberately.** Item 23 listed it among the misses,
 but the rescue mod — built later — states *"LICENSE ships on purpose"*, and a

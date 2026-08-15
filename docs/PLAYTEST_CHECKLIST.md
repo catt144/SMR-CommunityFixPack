@@ -38,10 +38,52 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
-### ℹ️ NEW 2026-08-15 — one 54 MB leftover file, one word from you, zero urgency
+### ⭐ NEW 2026-08-15 (evening) — YOUR OPEN FARM OBSERVATION IS FILED AS `C47`, and the source answer is clear
 
-32. ⚖️ **`U2RT1` (no file extension, 54 MB) is still in your save folder — delete
-    it or leave it?** It is the one member of the 08-12 cloud-restore batch the
+ℹ️ **No decision owed — this is your rider, recorded so your own testing has
+something to argue with.** You asked two questions and for a comparison; all
+three are answered at source, on the pinned build.
+
+* **Is the storage right?** ⛔ **It was never set.** `OpenFarm.lua` has no
+  `consumption_max_storage` line at all, so it takes the editor default of
+  **5** — which is the `0/5` on your screen.
+* **Is the consumption right?** ⭐ **The consumption is the half that WAS
+  deliberately tuned**, which is what makes the pair look wrong. Open Farm
+  overrides its planting interval from the class default **2.0 in-game hours to
+  0.3** (a 6.7× speed-up), plants **3–5 hexes every tick**, and at **Potato**
+  each hex costs **600** — so a single tick can cost **3000 against a 5000
+  buffer**. It can never bank two ticks, and a drone only carries **1000** per
+  trip. That is why a full depot and 24 idle drones do not help.
+* **The comparison you asked for, and it is decisive.** The only other Seeds
+  consumer and only other plant-building, **`ForestationPlant`, SETS its storage
+  to 10000 explicitly, keeps the 2.0 h tick, and plants ONE hex** (two under the
+  Forestation Effort law). Runway on a full buffer: **~40 in-game hours for
+  Forestation vs ~0.5 for the Open Farm — about 80×.** Even your cheapest crop
+  (Cover Crops) only buys ~3 hours.
+* **Across the whole game:** 287 templates, 29 consumers. Ten leave the storage
+  at default — but ⭐ **Open Farm is the only one of those that also tuned its
+  consumption cadence.** Everyone who made a building drink faster also made
+  the cup bigger. One half of a paired change, the same shape as `C39`.
+
+⛔ **What I am NOT claiming.** No code comment ties the two fields, so this is
+an *unset field*, not the self-contradiction `C39` was — "farms are meant to be
+supply-hungry" is a defensible reading, and the popup is the game correctly
+reporting a genuinely empty buffer. And **nobody has measured it in game** —
+your observation is the only runtime evidence. So it is filed as a candidate,
+not a defect, and **nothing is built**.
+→ full derivation, every citation, and three unranked repair shapes (size the
+buffer · debounce the notification only · document and do nothing):
+`agent/bugs/C47.md`.
+
+### ✅ 2026-08-15 — the 54 MB leftover is DELETED (was: one word from you)
+
+32. ✅ **RULED + DONE 2026-08-15: DELETED.** Your word: *"You can delete that
+    save."* Removed and verified absent; the save directory now holds **77
+    entries**, and the only non-`.sav` files left are `account.dat`,
+    `account.dat.bak` and `steam_autocloud.vdf` — i.e. nothing of ours and no
+    stray from the 08-12 cloud-restore batch. `EF-051`'s falsifier stands.
+    ~~`U2RT1` (no file extension, 54 MB) is still in your save folder — delete
+    it or leave it?~~ It is the one member of the 08-12 cloud-restore batch the
     08-14 cleanup missed: that sweep listed `*.sav` files and this artifact has
     no extension (a quirk this project's own testing produced — `EF-050`). Both
     of last night's launches were checked by creation-time window: **neither
@@ -54,9 +96,32 @@ owed input stays here no matter how struck-through it looks.
 
 ### ⛔⛔ NEW 2026-08-15 (later) — pricing your "quick playtest?" question found that the F85 dialog CANNOT BE OPENED IN THE GAME AT ALL, and two player-facing pages describe it as if you had seen it
 
-31. ⚖️ **The distress-call dialog is dead-coded out of the shipped game. The fix
-    is fine; the two places that describe it to players are not. How do you want
-    them worded?**
+31. ✅✅ **RULED 2026-08-15 — REMOVE IT, BUT KEEP IT RE-APPLIABLE. DONE THE SAME
+    DAY, ACROSS EVERY SURFACE.** Your words: *"I think we remove it but document
+    it, so we can easily re apply it as a fix, if something ever player facing
+    comes out we already know how to fix it."*
+    ⭐ **The shelf record is `agent/reports/SHELVED_F85_DISTRESS_PAUSE.md`** — it
+    carries the module and its probe **verbatim** (byte-compared before the
+    originals were deleted), the trigger that would make them worth shipping
+    again, a 30-second source check that answers that trigger, a six-step
+    re-apply checklist, and a table of everything already proven so none of it
+    is ever redone. ⛔ Deliberately NOT "it's in git history" — that is the
+    hand-wave the file exists to prevent.
+    **What moved:** module deleted (and its row pulled from `metadata.lua`'s
+    file list — that one would have broken the mod); probe deleted; this entry
+    → `wontfix`; the judgment bullet gone from the card and the whole entry gone
+    from the site fix list; the judgment-call count five→six→**five** again in
+    all six places it appears; suite **96 → 95**; modules **76 → 75**. doccheck
+    GREEN, `mkdocs build --strict` GREEN.
+    ⇒ ✅ **Item 5 closes with it** — `P3` / LATENT / tier U is exactly right for a
+    defect that is real, reproduced and unreachable.
+    ⛔ **One number is PREDICTED, not measured, and I will not quote it as a
+    reading:** the suite baseline should become `79/0/16/0 of 95` and the gate
+    `75/75`. No launch has run since the removal — the next unattended leg
+    measures it. Nothing is owed by you either way.
+    *The question as it stood, kept for the record:*
+    ~~The distress-call dialog is dead-coded out of the shipped game. The fix
+    is fine; the two places that describe it to players are not.~~
     **How this surfaced:** you asked whether I was proposing a quick playtest for
     F85. Pricing that meant working out how anyone *raises* that dialog — a route
     nobody had ever checked, because the record simply said "open it from the
@@ -1491,13 +1556,14 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
      your check, 08-11);
    * the one non-pausing popup is **dead-coded** (this finding);
    * and our wrapper pauses it anyway if a patch ever brings it back.
-   ⇒ **Recommendation: LEAVE it at `P3` / LATENT / tier U, and close item 5.**
+   ✅✅ **RULED + CLOSED 2026-08-15 with item 31: LEAVE it at `P3` / LATENT / tier U.**
+   ⇒ *Recommendation as it stood:* **LEAVE it at `P3` / LATENT / tier U.**
    The label is now exactly right: the defect is real and reproducible (a save
    *was* landed inside a popup and *did* void the choice), and it is
    unreachable by any player route. Bumping it would overstate; dropping it
    would understate a reproduced fault. **One word from you closes this.**
-   ⛔ What stays open regardless is item **31** — the two player-facing pages
-   that describe this fix as something you saw happen.
+   ✅ Item **31** is ruled and applied too — the module is removed and shelved,
+   and both player-facing pages are corrected. **Nothing is owed on F85.**
    ✅✅ **THE CHECK RAN 2026-08-11 IN THE PT-15 SITTING — Ctrl-F9 IS NOT A
    ROUTE, and you were right to make us press it.** You pressed it; nothing
    happened on all three witnesses (no new save file, no `Game saved:` or
