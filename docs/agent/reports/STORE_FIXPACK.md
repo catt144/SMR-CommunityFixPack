@@ -47,10 +47,10 @@ want this.**
 - **It fixes bugs rather than rebalancing the game.** Almost every fix targets
   something we verified in the game's own code: the code says one thing, does
   another, and we make it do what it says. Preferences and features are not in
-  here; they live in a separate mod you do not need. **Five of them are judgment
-  calls rather than plain repairs** — in two of those the game's code is not
+  here; they live in a separate mod you do not need. **Six of them are judgment
+  calls rather than plain repairs** — in three of those the game's code is not
   wrong at all and we made a call anyway, and one of them changes how the game
-  feels. All five are listed further down, with our reasoning, rather than
+  feels. All six are listed further down, with our reasoning, rather than
   quietly folded in.
 - **You do not need anything else.** The pack works on its own. There is a
   companion mod, *Community Fix Pack: Opt-In Modules*, and neither mod needs the
@@ -74,7 +74,7 @@ that quietly rewrites the inside of the same function is beyond it, which is why
 we watch official patches and update rather than promising the pack retires
 itself. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
-suite of 94 checks is run against the game with the pack and without it.
+suite of 96 checks is run against the game with the pack and without it.
 
 **And what does not.** We cannot test every combination of other mods, every
 colony shape, every save state or every future game patch. If a save matters to
@@ -112,10 +112,20 @@ when you load it, wherever the pack can positively identify what went wrong.
   Center's resource panel rendered as blank space; freeing the wisps in St.
   Elmo's Fire produced about a thousandth of the power the game promised.
 
+**One fix moves numbers you will see.** The Automation policies take half the
+workers from every building they cover and are meant to raise output per worker
+so overall production stays where it was; some of the buildings on those
+policies — the Workshops, the Security Stations and Posts, the Drone Assembler
+and the *Experiment 1: Big Drop* site — never received that pay-back and lost
+roughly half their output. Now they receive it like everything else, so while
+one of those policies is active, their numbers — workshop comfort, security
+coverage, drone production, research — visibly rise to where the policy was
+always meant to leave them.
+
 ### A few of these are judgment calls, and we would rather say so
 
 Almost everything in this pack is a plain repair: the game's code says one
-thing, does another, and we make it do what it says. **Five are not that
+thing, does another, and we make it do what it says. **Six are not that
 simple.** They are still repairs we stand behind — but each one required us to
 decide what the game *meant*, and reasonable people could decide differently.
 They are marked in the list, they cannot be switched off from the game's own
@@ -135,6 +145,11 @@ menus on any platform, and here is what each one is:
 - **Edit Payload remembering what you told it** — treating the flight policy's
   list as a *default* rather than a *refill* is arguably how it was designed. We
   think a row you deliberately emptied should stay empty. *(design judgment)*
+- **The distress-call confirmation and the game clock** — every other popup
+  window pauses the game while it is open; the confirmation for broadcasting a
+  distress call deliberately did not. The game's code is not wrong here — we
+  overrode the developers' choice, so that no save, including an automatic one,
+  can ever land inside an open popup window. *(design judgment)*
 - **Dust devil wave sizes** — this restores the wave sizes the map settings were
   written for. On some map settings that means noticeably more dust devils than
   the game has ever actually delivered, in either the original or the remaster.
@@ -248,6 +263,32 @@ the owner-approved 08-02 phrase and it is accurate. ⚠️ The bullet landed
 independent evidence and route sweeps in addition to the by-hand rule-4/§4.5
 check, and it passed all of them.
 
+### unattended-3 — applied 2026-08-15 by that chain's terminal audit (`03_AUDIT_FABLE.md`)
+
+Five player-text edits, forced by the two modules that chain shipped (F85
+`Fix_DistressPopupPause`, C39 `Fix_AutomationLawCompensation`), all counts from
+`--emit-counts` at edit time, all claims control-checked against Src/modules
+BEFORE the entries' own reasoning was read (the firewall):
+
+1. "Five of them are judgment calls … in two of those … All five" → **Six … in
+   three … All six** (tier 0). The F85 flip meets the card's own definition
+   exactly — the game's code is not wrong and we overrode a deliberate dev
+   choice — and its module header carries the ⚖️ DISCLOSURE. Settled as SIX
+   everywhere (card, metadata, site FAQ, fix list), reasoning here.
+2. "suite of 94 checks" → **96** (emitted; delta is exactly the two new probes).
+3. "Six are not that simple." + a sixth judgment-call bullet (distress-call
+   confirmation), placed before the dust-devils closer, same `*(design
+   judgment)*` tag family.
+4. NEW paragraph after the category bullets — the C39 disclosure the owner's
+   08-15 ruling still owed ("the card must still say this moves
+   gameplay-visible numbers"). Names are display names; the four families never
+   watched in a game are not upgraded by the wording ("meant to", "rise to
+   where the policy was always meant to leave them" — no per-building
+   measurement implied).
+5. No change to the tier-1 save-footprint list: both new modules persist
+   NOTHING (F85 Layer 3, C39 Layer 2 by construction — stated on both modules
+   and both entries), so the enumerated footprint is unchanged.
+
 ### R1 — applied 2026-08-14 by the site chain's terminal audit (`06_AUDIT.md`)
 
 The patch-retirement claim was narrowed in both places it appears: "changes the
@@ -305,7 +346,10 @@ release prep re-checks portal limits anyway and can adopt the shape wording then
 | save footprint enumeration | `D13_EXPOSED_SET.md` §2b rows D1–D11 (fix-pack rows only), MEASURED where marked; §2c for the negative half |
 | ~~the engine's mod-reference notice on the next load, self-clearing~~ **STRUCK from the card 2026-08-14 (checklist 29, owner-ruled)**: the measured line is LOG-only and the on-screen warning skips `optional_mod` mods — no player of this mod ever sees it | `D13_EXPOSED_SET.md` §10.9(4) — whose "sees one notice" aside was a rig-console inference; route: `Mod.lua:1199` (ModLog), `SavegameMetadata.lua:97-99` (optional filter) |
 | repairs already applied stay | §2b D10 (`SMRFixPack_F35_*`) + D11, both on the KEEP list (§5) |
-| suite of **94** checks, modded vs unmodded | `python tools/doccheck.py --emit-counts`, re-emitted 2026-08-13; A/B pair `WORKFLOW.md:274` |
+| suite of **96** checks, modded vs unmodded | `python tools/doccheck.py --emit-counts`, re-emitted 2026-08-15 (94 → 96, the two `unattended-3` probes); A/B pair `WORKFLOW.md:274` |
+| six judgment calls (was five) | the six modules by name: `Fix_DroneUnreachableForever` · `Fix_DustSicknessBiorobots` · `Fix_ShelterReflex` · `Fix_PayloadTemplateRefill` · `Fix_DustDevilSpawnGate` · `Fix_DistressPopupPause` (⚖️ DISCLOSURE in its header); census re-run 2026-08-15 |
+| Automation-policy disclosure paragraph | `C39.md` §2026-08-15 (owner ruling: scope ships as built, disclosure still owed); building names are DISPLAY names re-read at the templates 2026-08-15 (`BottomlessPitResearchCenter` displays as **"Experiment 1: Big Drop"** — never call it "the Bottomless Pit" in player text); consumers `SecurityStation.lua:13`, `DroneFactory.lua:75-79`, `BottomlessPitResearchCenter.lua:45`, `TVStudioWorkshop.lua:100`, `ArtWorkshop.lua:24` |
+| distress-call judgment bullet | `F85.md` §2026-08-15 (`fixed`, no screen claim — the bullet describes what the code now does, not a watched clock); sole setter `RivalColonies.lua:546` re-derived 2026-08-15 |
 | game version 1.0.7.396349, self-check stand-down | `EF-014`; per-fix `apply()` self-checks |
 | achievements on Xbox / PlayStation / Microsoft Store | `Achievement.lua:61-63`, consumed `:77`; re-derived by the chain QA, recorded `PUBLIC_DOCS_DESIGN.md` §6.2 |
 | neither mod needs the other | opt-in split chain, measured both directions 2026-08-12 (checklist 15) |

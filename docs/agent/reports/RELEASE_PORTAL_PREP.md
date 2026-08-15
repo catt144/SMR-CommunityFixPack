@@ -81,12 +81,15 @@ markers across the two cards: 4 in the fix pack, 2 in the opt-in** (the opt-in's
 third was the Save Rescue sentence, deleted with the 17 ruling; the 08-14 strike
 of the notice paragraph also shortened both bodies below).
 
-**Body sizes, re-measured 2026-08-14 after the item-29 strike and the 17
-ruling** (markers excluded):
+**Body sizes, re-measured 2026-08-15 by the `unattended-3` terminal audit**
+(markers excluded; the fix-pack card grew by that chain's two modules — the
+Automation-policy disclosure paragraph, the sixth judgment-call bullet, and the
+five→six / 94→96 count edits, all diff-proven VERBATIM against the audited
+STORE file after the change):
 
 | card | characters | words |
 |---|---|---|
-| Community Fix Pack | 10,560 | 1,849 |
+| Community Fix Pack | 11,581 | 2,018 |
 | Opt-In Modules | 15,907 | 2,774 |
 | ~~Save Rescue~~ *(contingency draft, not pasted)* | 4,202 | 792 |
 
@@ -119,9 +122,13 @@ counter or refuse the field, and both answers arrive in two seconds.
 
 | mod | `title` | `short_description` | `description` | `last_changes` |
 |---|---|---|---|---|
-| Community Fix Pack | 18 | 184 | 844 | 112 |
+| Community Fix Pack | 18 | 184 | 843 | 112 |
 | Opt-In Modules | 34 | 177 | 884 | 100 |
 | Save Rescue | 11 | 147 | 732 | 442 |
+
+*(fix-pack `description` re-measured 2026-08-15: "Five of the fixes are
+judgment calls" → "Six", 844 → 843 — the only string the `unattended-3` chain
+moved; the other cells were re-measured unchanged.)*
 
 *(characters, re-measured 2026-08-14 by the terminal audit from the three
 `metadata.lua` files. ⛔ Two corrections to the original table: the Save Rescue
@@ -154,6 +161,13 @@ real trees, before and after:
 
 The 78 and 12 reconcile to the emitter exactly: 75 + 9 code files, plus
 `items.lua`, `metadata.lua` and `LICENSE` each.
+
+⭐ **2026-08-15 (`unattended-3` audit): the fix pack now ships 80 files** — the
+chain's two new modules (`Fix_DistressPopupPause.lua`,
+`Fix_AutomationLawCompensation.lua`) land in `Code/`. Re-simulated over the
+real tree with the shipped `ignore_files` (the same method as the table above):
+**80 = 77 `Code/*.lua` (emitter-matched) + `items.lua` + `metadata.lua` +
+`LICENSE`**, nothing else. The opt-in and rescue packages are untouched.
 
 ⚠️ **`LICENSE` still ships, deliberately.** Item 23 listed it among the misses,
 but the rescue mod — built later — states *"LICENSE ships on purpose"*, and a

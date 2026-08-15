@@ -38,6 +38,122 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ℹ️ NEW 2026-08-15 — one 54 MB leftover file, one word from you, zero urgency
+
+32. ⚖️ **`U2RT1` (no file extension, 54 MB) is still in your save folder — delete
+    it or leave it?** It is the one member of the 08-12 cloud-restore batch the
+    08-14 cleanup missed: that sweep listed `*.sav` files and this artifact has
+    no extension (a quirk this project's own testing produced — `EF-050`). Both
+    of last night's launches were checked by creation-time window: **neither
+    touched it**, so the cloud-off retirement stands and nothing is wrong. It is
+    unattended-2's leftover, not a save you made, and nothing reads it.
+    **Rec: DELETE** — same population, same license as the 888 MB you already
+    ordered swept; it was left only because deleting it unattended felt like a
+    daylight call. Say the word either way; "leave it" costs only the 54 MB.
+    → `agent/facts/EF-051.md`, the 2026-08-15 bullet.
+
+### ⛔⛔ NEW 2026-08-15 (later) — pricing your "quick playtest?" question found that the F85 dialog CANNOT BE OPENED IN THE GAME AT ALL, and two player-facing pages describe it as if you had seen it
+
+31. ⚖️ **The distress-call dialog is dead-coded out of the shipped game. The fix
+    is fine; the two places that describe it to players are not. How do you want
+    them worded?**
+    **How this surfaced:** you asked whether I was proposing a quick playtest for
+    F85. Pricing that meant working out how anyone *raises* that dialog — a route
+    nobody had ever checked, because the record simply said "open it from the
+    console". The answer is that **nothing can raise it**.
+    **What the game's own code says**, re-read at Src today and traced
+    exhaustively: the dialog has exactly **one** caller in the entire tree — the
+    `DISTRESS CALL` button on the rival-colony action bar — and that button sits
+    inside a condition the shipped executable compiles to the literal
+    `local cond = false / if cond then …`. The button is never built. Every other
+    piece of the feature (the cooldown, the "allowed?" check, the resource
+    request) is used by that dead button and nothing else. **The developers
+    switched the whole feature off and left the code in place.**
+    ⚠️ **This is the second time in this one entry.** The same shape retired the
+    Quick Save route on 08-11 (`idQuickSave` compiled out behind
+    `Platform.cheats`). You are the one who forced that check, against a
+    confident source citation, and you were right then too.
+    ⇒ **NO, there is no playtest to propose** — see item 5 for the whole answer.
+    ⇒ **The fix still ships and is not touched.** It is a wrapper that pauses any
+    popup declaring itself non-pausing; it is measured idempotent, measured not
+    to disturb popups that already pause, and it no-ops if the flag ever
+    disappears. On this game version it has **no live symptom** — it is a defence
+    of the rule ("no save lands inside an open popup"), not a repair of something
+    you could ever hit.
+    ⛔ **What is actually wrong is the writing, on two surfaces**, and it is the
+    same class as item 29 which you ruled STRIKE — a claim about what a player
+    *sees*, resting on a mechanism that is real in source and absent from the
+    retail screen:
+    * the **store card** (`RELEASE_DESCRIPTION_FIXPACK.md`): *"every other popup
+      window pauses the game while it is open; the confirmation for broadcasting
+      a distress call deliberately did not"* — present tense, about a window no
+      player can open.
+    * the **site fix list** — worse: its entry opens **"What you saw:"** and then
+      describes the clock running behind a window nobody can raise.
+
+    ⭐⭐ **AND YOU IMMEDIATELY ASKED THE BIGGER QUESTION, WHICH I SHOULD HAVE
+    ASKED FIRST:** *"if that is a button not built, and not something a player
+    can ever get to — why are we building a fix for it?"* **I do not have a good
+    answer, and I now think we should not be.** The question is no longer how to
+    word the description; it is whether the module ships at all.
+
+    **The case against keeping it, which I find decisive:**
+    * ⛔ **It repairs nothing.** This repo's own premise (CLAUDE.md) is that
+      *every fix repairs a verified defect in the game's shipped Lua*. On
+      1.0.7.396349 no reachable popup sets the flag, so the branch that does the
+      work **can never execute**. It is not a small fix; it is a dead one.
+    * ⛔ **It is not free — it sits in a hot path.** The wrapper patches
+      `PopupNotification:Init`, so it runs for **every popup the player ever
+      sees**, forever, to evaluate a condition that is provably false. Zero
+      benefit, non-zero surface. That trade is the wrong way round.
+    * ⛔ **It overrides a deliberate developer choice to no effect.** We
+      disclosed it as a design-judgment tweak precisely because the game's code
+      is not wrong. Overriding a dev decision to fix something reachable is a
+      judgment call; overriding it to fix nothing is just noise in the tree.
+    * ⛔ **The one case where it CAN fire is arguably a harm.** Its own
+      disclosure says so: *"a popup created by a future patch — or by another
+      mod — that sets `dont_pause` would also be paused by this module."* Since
+      no vanilla popup can reach it, **the only live scenario left is us
+      silently overriding another modder's deliberate choice.**
+    * ⛔ **This entry's own rule already prescribed the answer.** F85's original
+      fork read: route real → owner decision; *"if the binding or save is
+      refused, this drops to I/R4 and stays documentation."* Every route is now
+      refused. The entry's own discipline says documentation.
+    * ⚠️ **And your 08-12 ruling rested on a fact that has since been falsified.**
+      You ruled build-it on the basis that *"the distress dialog is the game's
+      ONLY non-pausing popup, so pausing it closes this entry's entire reachable
+      surface"*. The first half is still true. The unstated half — that the
+      surface is **reachable** — is false. Recommending removal is not
+      overturning your judgment; it is reporting that the ground under it moved.
+
+    **The case for keeping it**, stated fairly so you are not being nudged: it is
+    a cheap class defence, so if a future patch re-enables the distress feature
+    or introduces a new non-pausing popup, we are already covered. ⚠️ But that is
+    exactly the "perpetual rider" class **you already ruled on** in item 14 —
+    things that keep failing to produce their own precondition become
+    post-release WATCH items rather than freight. A precondition that *cannot
+    occur on the shipped build* is the limit case of that ruling.
+
+    | | what happens | cost |
+    |---|---|---|
+    | **A. REMOVE the module ← recommendation** | delete `Fix_DistressPopupPause.lua` + its probe; F85 becomes documentation-only (`wontfix`, real defect / no reachable route); card bullet and fix-list entry deleted because there is no fix to describe | counts move 76→75 modules and 96→95 probes, and the suite gate re-baselines — ⭐ **prompt 03 was already re-truing every one of those numbers**, so this is close to free if ruled now. Reversible: if a patch ever revives the feature, the module is one file in git history. |
+    | B. Keep it, ship it silently | module stays; card bullet + fix-list entry struck (item 29 treatment) | the fix list would then describe 75 fixes while 76 ship — an undisclosed module, which is its own small dishonesty, and the dead branch stays in every popup's constructor. |
+    | C. Keep and describe it honestly | *"a dialog the shipped game no longer uses…"* | ⛔ worst of both: keeps the cost, and spends a player's attention explaining a non-event. |
+    | D. Ship exactly as written | nothing changes | ⛔ present-tense false statement on a store page, plus a **"What you saw:"** for something nobody saw. Not recommended. |
+
+    **Recommendation: A — remove it.** ⇒ ⭐ **Ruling A also CLOSES item 5**: with
+    no fix, F85 is a documented, reproduced, unreachable defect, which is exactly
+    `P3` / LATENT / tier U as already labelled. One word from you settles both.
+    → the full derivation, every grep and the generated-file quote:
+    `agent/bugs/F85.md` §2026-08-15 (later).
+    ℹ️ *(Terminal-audit addendum, same day: the judgment-call COUNT rides this
+    ruling too. It was settled at SIX this morning across the card, the
+    mod-page blurb, the site FAQ, the landing page and the fix list; under A
+    or B it reverts to FIVE on every one of those surfaces, under C it stays
+    six. The full surface map is staged, the sweep is minutes. The C39
+    disclosure paragraph and the "96 checks" sentence are independent of this
+    item — though A also moves "96 checks" to 95 when the probe goes.)*
+
 ### ⭐ NEW 2026-08-15 — the C39 repair you ruled turns out to touch TWICE as many buildings as the ruling pictured. ✅ CONFIRMED THE SAME DAY.
 
 30. ✅ **RULED 2026-08-15: SHIP AS BUILT — all eight families, no list.** Your
@@ -126,10 +242,13 @@ owed input stays here no matter how struck-through it looks.
     reasoning: `agent/bugs/C39.md` §2026-08-15.
 
 ℹ️ **Also for awareness, no call needed:** the **F85** fix you ruled on 08-12
-is built the same evening — the distress-call dialog now pauses the game like
-every other popup. ⛔ Nothing is verified yet: both builds still owe an
-unattended suite run and an in-game reading (the next prompt in the chain), and
-neither counts as fixed until then.
+is built the same evening — the distress-call dialog's non-pausing flag is
+cleared so the game's own code builds its pause layer. ✅ **2026-08-15: both
+builds are VERIFIED** — the suite passed in a real launch (80/0/16/0 of 96)
+and both repairs were read working in a second launch on your own colony copy;
+both entries now carry `tested-unattended` under your 26b vocabulary. ⚠️ The
+same day's route check found the dialog itself is dead-coded on retail —
+item 31 above owns what that means for the two player-facing descriptions.
 
 ### ⭐ NEW 2026-08-14 (later) — ④ IS CUT: your launch afternoon reads ONE sheet, and the audit found one more call that comes before any paste
 
@@ -163,6 +282,15 @@ move) and ④ follows its close. Also done on your word the same evening:
 **Steam Cloud re-untick recorded** — the 17 strays the hold window restored
 (888 MB) are deleted, the save directory re-listed by name at 76 files, and
 "gone" claims are legal again (`EF-051`).
+✅✅ **2026-08-15: THE `unattended-3` CHAIN IS CLOSED — terminal audit consumed,
+folder empty.** Both builds sustained end to end (routes re-derived at source,
+the C39 coverage list reproduced by an independent sweep, both launch logs
+re-counted line by line), and every count the two modules moved is re-trued on
+the cards, the mod-page blurb, the site and the portal sheet. ⛔ **One thing
+now stands between you and the ④ paste: item 31 above** — the same-day route
+check found the F85 dialog dead-coded, so rule 31 (one word; it also closes
+item 5) and the staged minutes-scale sweep trues the last surfaces. C39's
+disclosure and everything else on the sheet are ready as written.
 
 29. ✅ **RULED 2026-08-14: STRIKE — and struck the same day on every surface**
     (both cards, the rescue card, the assembly, the site FAQ; trace rows and
@@ -373,11 +501,49 @@ open decisions are back to the **3** standing non-release items.)*
     re-verified at close-out. That is the amended rule paying for itself three
     times in two days, and it is why it now says reconcile after *every* launch
     rather than reason about which one will fire.
-    ⚖️ **One small call, batched from the chain (answer whenever):** the
-    status vocabulary has no word for "verified-unattended" (`doccheck`
-    rejects `verified`), so that truth lives in narrative only.
-    **Recommendation: leave it** — D13 earns plain `tested` at this sitting
-    anyway; add a vocab word only if a second artifact ever needs it.
+    ✅✅ **RULED 2026-08-15, AND THEN AMENDED THE SAME DAY BY YOU — THE SPLIT IS
+    ADOPTED AND IT IS ALREADY BUILT.** Your first answer was "a sitting with me
+    at the keyboard earns `tested`", which would have left every unattended
+    verification stuck at `fixed`. You then backtracked on exactly that
+    consequence: *"If we are changing rules I think I would be more comfortable
+    with labeling things tested - unattended / tested attended. It still gives
+    unattended appropriate weight, but allows the attended tested to have more
+    serious weight if we are troubleshooting, because that has the approval of
+    the agent and human hands on."* **Adopted as written.** The vocabulary now
+    has three words and `doccheck` enforces them:
+    * **`tested-attended`** — you were at the keyboard. The strongest word the
+      project has, and the one a troubleshooting session is entitled to lean
+      on: agent instrumentation *and* human eyes.
+    * **`tested-unattended`** — real launches, nobody watching. Full weight for
+      anything an instrument can read; ⛔ **never for a screen event** — "the
+      flag read false" is a measurement, "the popup visibly paused" is not.
+    * ⛔ **bare `tested`** — LEGACY, closed to new work. See the honest caveat
+      below.
+    ⭐ **Applied immediately, and it pays today:** `F85` and `C39` were verified
+    unattended last night with real launches and zero errors, and they move
+    **`fixed` → `tested-unattended`** rather than being stranded. No evidence
+    changed; the word for it did. What `tested-attended` would still buy is
+    named on each entry (F85: the screen witness — does the popup visibly
+    pause; C39: seven of eight families still SOURCE, and the law was enacted
+    directly rather than voted).
+    ⚠️ **The honest caveat, and it is why the old word survives.** 46 entries
+    already carry bare `tested` and **their attendance was never recorded** —
+    29 at least cite a sitting or co-run, but **17 carry the literal word
+    `tested` and no narrative at all** (`F03`, `F44`, `F66` and 14 others).
+    Retro-labelling them would mean stamping an attendance claim on entries
+    whose record cannot support one, which is the exact failure mode the
+    evidence bar exists to stop. So bare `tested` now means **"attendance
+    unaudited"** — not "attended" — and no agent may read it as the stronger
+    word or promote it without re-deriving from the archived record.
+    ✅ **RULED 2026-08-15: NO RETRO-PASS.** The 46 legacy labels are left exactly
+    as they are and are never upgraded in bulk. ⛔ **Standing consequence, for
+    any agent reading one:** bare `tested` is an unaudited label — cite it as
+    "recorded `tested`, attendance unknown", never as evidence a human watched.
+    If a specific legacy entry ever becomes load-bearing in a real
+    investigation, re-derive that ONE entry from the archived record; do not
+    reason from the word. ~~whether you want that retro-pass done at all.~~
+    ~~the status vocabulary has no word for "verified-unattended" (`doccheck`
+    rejects `verified`), so that truth lives in narrative only.~~
     ℹ️ Also for your awareness, no decision owed: the audit FILED **F103**
     (our Crystals-mystery repeater can double its hourly broadcast after a
     mid-mystery load — harm nil, one consumer that wants the message,
@@ -668,13 +834,17 @@ deleted when the chain closes).
     Fix Pack and the Opt-In Modules do exactly the same**, and the note
     disappears the next time you save. It will be said plainly in the mod's
     description rather than papered over.
-    ⚖️ **Still genuinely yours to decide, and it can wait for release prep:**
-    the display name is **"Save Rescue"** as you ratified it, but the same day
+    ✅ **RULED 2026-08-15: the display name becomes "Community Fix Pack: Save
+    Rescue" — pre-approved, applied only IF the tool ever publishes.** Your
+    words: *"This is fine for if we ever need it."* ⛔ **Deliberately NOT applied
+    today:** item 17 holds the tool unpublished, so the rename rides the
+    pre-upload pass that the contingency already mandates — the same pass that
+    re-decides item 28's dialog text and adds the audit's missing save-step
+    line. Recorded at the point of use in the rescue card's header so it cannot
+    be forgotten there. One line in one file when the day comes.
+    ~~the display name is **"Save Rescue"** as you ratified it, but the same day
     you renamed the opt-in mod to *"Community Fix Pack: Opt-In Modules"* so the
-    family sorts together in mod lists. As it stands the third mod does not sort
-    with them. Say the word and it becomes *"Community Fix Pack: Save Rescue"*;
-    say nothing and it ships as ratified. No work either way — one line in one
-    file.
+    family sorts together in mod lists.~~
     ⚠️ **Your rig is exactly as you left it** — both packs back at `74/74` and
     `8/8`, drone dials still `5x` / `+2`, all seven opt-in toggles still on, and
     every save you own byte-identical (the four protected ones were MD5-checked
@@ -1304,6 +1474,30 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    ⭐ **Re-routed 2026-08-11 (your corun-pt15 order): the Ctrl-F9 check now
    rides the PT-15 sitting** — any colony works and it answers sooner. The
    PT-20 redo is unchanged otherwise.
+   ⛔⛔ **2026-08-15 — ANSWERING YOUR "quick playtest?" QUESTION: NO, AND THERE
+   CANNOT BE ONE.** The distress dialog is the last reachable surface this entry
+   had, and today's route check found it is **dead-coded out of the shipped
+   game** — its only caller is a button the executable compiles behind
+   `local cond = false` (full derivation: item **31** above, and `F85.md`
+   §2026-08-15 later). It cannot be reached by playing; the only way to put it
+   on a screen is an agent console-call, which would prove the wrapper works and
+   say **nothing** about retail play. So a sitting buys no knowledge here, and I
+   am not proposing one.
+   ⇒ ⭐ **The severity question is now answerable on evidence instead of taste,
+   and every route into this entry's harm is closed:**
+   * the breakthrough and Assembly popups **pause**, so no autosave can land in
+     them;
+   * there is **no save action on retail at all** (`idQuickSave` compiled out —
+     your check, 08-11);
+   * the one non-pausing popup is **dead-coded** (this finding);
+   * and our wrapper pauses it anyway if a patch ever brings it back.
+   ⇒ **Recommendation: LEAVE it at `P3` / LATENT / tier U, and close item 5.**
+   The label is now exactly right: the defect is real and reproducible (a save
+   *was* landed inside a popup and *did* void the choice), and it is
+   unreachable by any player route. Bumping it would overstate; dropping it
+   would understate a reproduced fault. **One word from you closes this.**
+   ⛔ What stays open regardless is item **31** — the two player-facing pages
+   that describe this fix as something you saw happen.
    ✅✅ **THE CHECK RAN 2026-08-11 IN THE PT-15 SITTING — Ctrl-F9 IS NOT A
    ROUTE, and you were right to make us press it.** You pressed it; nothing
    happened on all three witnesses (no new save file, no `Game saved:` or
@@ -1335,6 +1529,19 @@ cell is filled, and **`PT35FIXTURE.savegame.sav` now exists in your save folder*
    tweak; queued into the next unattended build chain with its verification
    launch. The bigger per-site rewrite was declined; the distress-call watch
    rider below retires when the fix verifies.
+   ✅✅ **BUILT AND VERIFIED 2026-08-15 (`unattended-3`, owner cost zero), and
+   the terminal audit sustained it the same day.** The flag was read cleared
+   in two real launches (once on a flattened tree after your own 47 MB colony
+   copy loaded), an already-pausing popup untouched, a flagless popup left
+   alone, the pass idempotent; the suite passed 80/0/16/0 of 96 around it. The
+   §3.6 autosave rider is retired on its own condition. The entry carries
+   **`tested-unattended`** under your 26b vocabulary — nothing here claims
+   anyone watched a clock stop. ⚠️ **The screen-witness add-on this line once
+   promised is MOOT by item 31**: the dialog is dead-coded on retail, so a
+   screen witness could only be a console-raise that proves the wrapper and
+   says nothing about play — item 31 owns the consequences.
+   **Still yours here: severity/tier only** (rec on STATE: leave `P3`/latent-U
+   — the defect's one reachable half is repaired, the rest was never reachable).
 6. ~~**⚖️ Disabling a mod needs a full game restart — does `PT-20` need
    redoing?**~~ ✅ **DECIDED 2026-08-10 — REDO NOW.** A dedicated PT-20 redo
    co-run is queued (your part: the Mod-Manager disable click, a **full game

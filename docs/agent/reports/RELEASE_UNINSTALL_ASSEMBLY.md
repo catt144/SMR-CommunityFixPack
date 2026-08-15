@@ -266,3 +266,7 @@ failure)"*.
 without it."* ⚠️ **That sentence is exactly right and must not drift into
 "94 passing"** — 78 pass and 16 skip in that cell, and a skip is not a pass. The
 card does not say passing, and rule 6 is why.
+*(⭐ 2026-08-15, `unattended-3` audit: the card's number is now **96** — two
+probes added with that chain's two modules; the suite read `80/0/16/0` of 96,
+SKIP set unchanged BY NAME from the list above. The must-not-drift rule is
+unchanged.)*

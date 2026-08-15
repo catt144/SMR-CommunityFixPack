@@ -204,8 +204,40 @@ release prep (`STORE_METADATA_STRINGS.md`).
 
 ### ⚠️ Deliberate calls a later reader should not mistake for oversights
 
-1. **The page covers 73 of 74 registered modules** (S1). Nothing on the page states a module count, so nothing on the page is now false; the ledger is the record.
+1. **The page covers 73 of 74 registered modules** (S1). Nothing on the page states a module count, so nothing on the page is now false; the ledger is the record. ⭐ **2026-08-15: 75 of 76** — see the dated note below.
 2. **Nine categories on the site against the card's seven lines.** The card merges story with interface; the site splits them and adds *Under the hood*. All nine buckets hold ≥4 entries, re-derived at write time, so §4.3's merge rule is satisfied.
 3. **"Under the hood" is on the player page at all.** Four invisible repairs, labelled as invisible, with the reason they are in scope. The alternative — silence — reads as a shorter fix list than the mod delivers.
 4. **The search behaviour is described, not promised.** See the measurement above.
 5. **The console/controller routes are source-derived and still not play-verified** — the same standing gap the terminal audit noted for the cards. The combined sitting is where it closes.
+
+## 2026-08-15 — two entries added by the `unattended-3` terminal audit (F85 + C39)
+
+The two modules that chain shipped (`Fix_DistressPopupPause`,
+`Fix_AutomationLawCompensation`) land on the fix list, and the counts this
+ledger records move with them:
+
+* **Coverage: 75 of 76 registered modules** (was 73 of 74; the F98 exclusion is
+  unchanged and still deliberate). Modules re-emitted with `--emit-counts` at
+  edit time. Neither player page states a count, so nothing on a page went
+  false in the interim; this note is the record.
+* **Fix-list entries: 78** (76 + the two). C39 → *Buildings & economy*
+  (`success`); F85 → *Story & mysteries* (`question`, marked *judgment call*).
+* **Judgment calls: SIX** (was five) — settled ONE way across card, `metadata.lua`
+  `description`, site FAQ and fix list; reasoning in `STORE_FIXPACK.md`'s
+  2026-08-15 note. FAQ updated in all three places it counts them ("Five other
+  judgment calls" bullet + a new Automation bullet under *Things we do on
+  purpose*; "Three honest notes" under *Does this change game balance?*; "Six:"
+  under *Which fixes are judgment calls?*).
+* **Shipped-module control, firewalled:** every sentence in both new entries and
+  the FAQ additions was derived from Src/module reads taken BEFORE the entries'
+  own reasoning was read this session (drafts pinned to the session scratchpad
+  first). Building names are DISPLAY names re-read at the templates —
+  ⛔ `BottomlessPitResearchCenter` displays as **"Experiment 1: Big Drop"**;
+  "Bottomless Pit" appears nowhere on a player surface.
+* **Honest-limit lines carried into the entries:** C39 — "we measured one
+  building type live … the others follow the same verified rule in the code"
+  (one family MEASURED, seven SOURCE, per the entry); the at-most-one-policy
+  blast-radius fact (engine-enforced, `LawDef:Activate`). F85 — no screen
+  claim anywhere: the entry describes what the code now does; nobody watched a
+  clock, and the wording never says anyone did.
+* `mkdocs build --strict` GREEN after the edits (1.4 s, no warnings).

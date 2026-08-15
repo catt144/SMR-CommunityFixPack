@@ -8,6 +8,67 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-15 — the unattended-3 terminal audit: both builds sustained, every count re-trued, and a live collision with the owner sitting that found the F85 dialog dead-coded
+
+**The audit (this session, Fable).** Both builds re-derived at Src
+1.0.7.396349 from scratch, the route not the citations: F85's `dont_pause` has
+exactly four occurrences tree-wide (sole setter `RivalColonies.lua:546`), the
+combined-method/composite machinery checked at its own lines, persist-only-sync
+confirmed; C39's gate/law_scale/loop re-read, the delta algebra proven exact,
+the discriminator's `id = self` registration and per-activation instances
+confirmed, and — the load-bearing piece — **an independent label sweep (289
+templates, own class-graph parser) reproduced the eight-family mismatch list,
+the four non-Workplace exclusions and the clean Research label EXACTLY.** Both
+archived logs re-counted rather than quoted: suite verdicts deduped by hand to
+**80/0/16/0 of 96** with the SKIP set matching baseline BY NAME; all four
+bracket reads confirmed at one `GameTime`/`speed=0x` including the revert
+(subject 102→253/+127, `vanilla-would-have-said` 126, control delta 0 at every
+read); the F85 flip table verbatim (true→false / false→false / nil→nil /
+idempotent, witness ×3). **Both builds SUSTAINED; the firewalled
+shipped-module control ran over every new player sentence BEFORE the entries'
+reasoning was read** (drafts pinned to scratchpad first) — and it caught one
+real naming trap: `BottomlessPitResearchCenter`'s display name is
+**"Experiment 1: Big Drop"**, so no player surface says "Bottomless Pit".
+
+**The count sweep.** Judgment calls settled **SIX** one way (the F85 module
+carries the ⚖️ DISCLOSURE; the card's own definition captures it) across card,
+`metadata.lua` description (843 chars), site FAQ ×3, landing page and fix
+list; "94 checks" → 96; the owner-owed C39 disclosure paragraph written onto
+the card (security, drone production, research, workshop comfort move; at most
+one Automation policy active — engine-enforced at `LawDef:Activate`); two
+fix-list entries in player language; STORE↔RELEASE VERBATIM re-proven
+post-edit (194 lines each, markers excluded); `mkdocs build --strict` GREEN;
+packaging re-simulated **80 files = 77 Code + items + metadata + LICENSE**;
+portal sheet §2/§3/§4 re-measured (11,581 chars · 843 · 80); ledger notes in
+`SITE_BUILD_AUDIT.md`, `STORE_METADATA_STRINGS.md`, `RELEASE_UNINSTALL_ASSEMBLY.md`.
+
+**The collision, reported as it happened.** Mid-audit, an owner sitting ran in
+parallel in this same working tree (uncommitted): it applied the **26b
+vocabulary split** (`tested-attended` / `tested-unattended` / bare `tested`
+legacy — doccheck STATUS_WORDS, WORKFLOW picker, F85+C39 relabelled
+`fixed` → `tested-unattended`, INDEX regenerated), ruled the rescue
+display-name pre-approval, ruled the retro-pass OUT — and then, pricing the
+owner's "quick playtest?" question, made the route check this audit had NOT
+made: **`DistressCallPopup` is dead-coded on retail** (sole caller inside
+`local cond = false`, `POIAdditionalContent.generated.lua:89-111`). This audit
+re-verified that at Src with its own grep and reads before accepting it. ⇒ The
+F85 card bullet and fix-list entry this audit wrote OVERCLAIM (a "What you
+saw:" for a window nobody can raise) — the third instance of the
+player-route ≠ source-citation lesson, the second inside F85 alone, and this
+audit's own control asked "which module delivers this?" but never "which
+route raises the symptom?". **Item 31 routes it** (rec: remove the module;
+ruling it also closes item 5); the count cascade is annotated on the item and
+the sweep map is staged in scratch. The audit's closing commit carries the
+sitting's verified change set with this attribution, since it stopped without
+committing; doccheck GREEN over the combined tree.
+
+**Also closed:** the U2RT1 leftover routed as checklist item 32 (one word,
+rec DELETE); checklist item 5 tail updated to verified state (screen-witness
+ask MOOT per item 31); ④ line updated — chain closed, one word on 31 stands
+between the owner and the paste.
+
+---
+
 ## 2026-08-14 — the owner re-ordered the queue ("finish the f85 first"), the unattended-3 chain is authored, and the Steam-Cloud hold is lifted with an 888 MB cleanup
 
 Three owner words in one evening, all executed: **(1) "steam cloud is off"** —

@@ -47,8 +47,14 @@ checks Paradox Mods' and Steam's limits before pasting.
 > Safe to add to a save you have already played — the pack writes almost nothing
 > into your savegame, and removing it simply lets the original bugs come back.
 > Every fix checks the game's code before it patches anything and stands down if
-> an official patch changes what it was written for. Five of the fixes are
+> an official patch changes what it was written for. Six of the fixes are
 > judgment calls rather than plain repairs, and the mod page says which and why.
+
+*(⚖️ 2026-08-15, `unattended-3` terminal audit: "Five of the fixes" → "Six" —
+the F85 distress-popup flip ships disclosed as a design-judgment tweak, and the
+count is settled as SIX across card, this string, site FAQ and fix list.
+Re-measured at 843 characters; the applied string in `metadata.lua` is the
+authority.)*
 
 ⛔ **The per-fix disable claim is simply gone**, rather than corrected in place.
 The accurate version needs a modder's identifier to be useful, and the blurb has
