@@ -1,0 +1,199 @@
+# c47-farm ARM / DISARM script.  Parked source; copy to a scratch .ps1 and run.
+#
+# Rule C11: arming is a script FILE, never an inline one-liner - an inline edit's
+# quoting was mangled once and the game launched unarmed.
+# C11 corollary (unattended-1 I2): never pipe this script's output through
+# Select-Object - a piped consumer terminates the upstream pipeline and can kill
+# the script before its write executes. Nothing here is piped.
+#
+# G5 ARM GATE (binding): after writing, EVERY piece is read BACK OFF DISK and the
+# script exits non-zero if any is missing. A launch never happens on the word of
+# the writer.
+#
+# S3 (corun-batch-1 ledger): a parked .ps1 needs a BOM, because PS 5.1 reads a
+#    no-BOM .ps1 as ANSI and any non-ASCII character breaks the parse. This body
+#    is kept ASCII-only as well, belt and braces.
+#
+# ENCODING: PowerShell 5.1's Set-Content -Encoding utf8 writes a BOM and once
+#    silently prefixed one onto metadata.lua. Use WriteAllLines with an explicit
+#    no-BOM encoder for metadata.lua, as below.
+#
+#   Usage:  .\C47_ARM.ps1 arm-suite     # 96_AutoRunFlag only: the Job 1 full-suite launch
+#           .\C47_ARM.ps1 arm-sampler   # 97_C47Common + 98_C47Sampler: the Job 2/4 launch
+#           .\C47_ARM.ps1 disarm        # removes everything this script can add
+#
+# ------------------------------------------------------------------------------
+# WHAT THIS SCRIPT DOES *NOT* TOUCH: Code/61_Probes_Wave11.lua and its
+# metadata.lua line. That probe is PERMANENT - it is the Job 1 half of this leg
+# and ships with the kit. Only the two sampler files and the autorun flag are
+# arming state. A disarm that removed the wave-11 line would silently drop the
+# suite from 96 probes back to 95.
+#
+# THE SELF-DRIVE GATE, and why it points the way it does.
+# corun-pt15 was an ATTENDED sitting: its gate FAILED a payload that started a
+# flow at file scope, because a self-driving payload would race the owner's play.
+# THIS chain is UNATTENDED - nobody is at the keyboard - so the gate is the
+# unattended-2/3 one: it FAILS a sampler payload that does NOT self-drive.
+# ------------------------------------------------------------------------------
+
+param([Parameter(Mandatory = $true)][ValidateSet("arm-suite", "arm-sampler", "disarm")][string]$mode)
+
+$ErrorActionPreference = "Stop"
+$park = "c:\Dev\SMR-BugFixPack\docs\agent\prompts\c47-farm"
+$kit  = "c:\Dev\SMR-BugFixPack-TestKit"
+$meta = Join-Path $kit "metadata.lua"
+$noBom = New-Object System.Text.UTF8Encoding($false)
+
+$common  = @{ src = "97_C47Common.lua.txt";  dst = "Code\97_C47Common.lua" }
+$payload = @{ src = "98_C47Sampler.lua.txt"; dst = "Code\98_C47Sampler.lua" }
+$pairs   = @()
+if ($mode -eq "arm-sampler") { $pairs = @($common, $payload) }
+
+$autorunLine = 'Code/96_AutoRunFlag.lua'
+
+# --- clean slate every time: strip anything this script can add ---------------
+foreach ($p in @($common, $payload)) {
+  $f = Join-Path $kit $p.dst
+  if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force; Write-Output ("DELETED " + $p.dst) }
+}
+$lines = Get-Content -LiteralPath $meta -Encoding UTF8
+$kept = @()
+foreach ($l in $lines) {
+  if ($l -match 'Code/9[78]_C47') { continue }
+  if ($l -match [regex]::Escape($autorunLine)) { continue }
+  $kept += $l
+}
+[System.IO.File]::WriteAllLines($meta, $kept, $noBom)
+Write-Output ("metadata.lua: stripped " + ($lines.Count - $kept.Count) + " arming line(s)")
+
+# --- arm ----------------------------------------------------------------------
+if ($mode -ne "disarm") {
+  foreach ($p in $pairs) {
+    Copy-Item -LiteralPath (Join-Path $park $p.src) -Destination (Join-Path $kit $p.dst) -Force
+    Write-Output ("WROTE " + $p.dst)
+  }
+  $lines = Get-Content -LiteralPath $meta -Encoding UTF8
+  $out = New-Object System.Collections.Generic.List[string]
+  $inserted = $false
+  foreach ($l in $lines) {
+    $out.Add($l)
+    if (-not $inserted -and $l -match '99_FixtureCarry\.lua') {
+      if ($mode -eq "arm-suite") {
+        $out.Add(("`t`t`"" + $autorunLine + "`",  -- TEMPORARY c47-farm suite launch"))
+      } else {
+        foreach ($p in $pairs) {
+          $leaf = Split-Path $p.dst -Leaf
+          $out.Add(("`t`t`"Code/" + $leaf + "`",  -- TEMPORARY c47-farm"))
+        }
+      }
+      $inserted = $true
+    }
+  }
+  if (-not $inserted) { Write-Output "ARM FAIL: anchor 99_FixtureCarry.lua not found"; exit 1 }
+  [System.IO.File]::WriteAllLines($meta, $out, $noBom)
+  Write-Output "WROTE metadata.lua (no BOM)"
+}
+
+# ---- gate --------------------------------------------------------------------
+$fail = $false
+$m = Get-Content -LiteralPath $meta -Raw -Encoding UTF8
+
+# The permanent Job 1 probe must survive every mode of this script.
+if ($m -match [regex]::Escape('"Code/61_Probes_Wave11.lua"')) {
+  Write-Output "GATE OK       metadata still lists the permanent Code/61_Probes_Wave11.lua"
+} else {
+  Write-Output "GATE FAIL: metadata no longer lists Code/61_Probes_Wave11.lua - the Job 1 probe was dropped"; $fail = $true
+}
+if (Test-Path -LiteralPath (Join-Path $kit "Code\61_Probes_Wave11.lua")) {
+  Write-Output "GATE OK       Code/61_Probes_Wave11.lua is on disk"
+} else {
+  Write-Output "GATE FAIL: Code/61_Probes_Wave11.lua is missing from disk"; $fail = $true
+}
+
+if ($mode -eq "arm-suite") {
+  if ($m -match [regex]::Escape('"' + $autorunLine + '"')) { Write-Output "ARM GATE OK   metadata lists 96_AutoRunFlag.lua" }
+  else { Write-Output "ARM GATE FAIL: metadata does not list 96_AutoRunFlag.lua"; $fail = $true }
+  $flag = Get-Content -LiteralPath (Join-Path $kit "Code\96_AutoRunFlag.lua") -Raw -Encoding UTF8
+  if ($flag -match '(?m)^\s*SMRTest_AutoRunEnabled\s*=\s*true') { Write-Output "ARM GATE OK   96_AutoRunFlag sets SMRTest_AutoRunEnabled = true" }
+  else { Write-Output "ARM GATE FAIL: 96_AutoRunFlag does not set the flag"; $fail = $true }
+  if ($flag -match '(?m)^\s*SMRTest_AutoRunSetupOnly\s*=\s*true') {
+    Write-Output "ARM GATE FAIL: SetupOnly is UNCOMMENTED - that is the ATTENDED shape and this launch is unattended"; $fail = $true
+  } else { Write-Output "ARM GATE OK   SetupOnly is commented out (unattended shape)" }
+  foreach ($p in @($common, $payload)) {
+    if (Test-Path -LiteralPath (Join-Path $kit $p.dst)) { Write-Output ("ARM GATE FAIL: sampler payload still present " + $p.dst); $fail = $true }
+  }
+}
+
+if ($mode -eq "arm-sampler") {
+  if ($m -match [regex]::Escape('"' + $autorunLine + '"')) {
+    Write-Output "ARM GATE FAIL: 96_AutoRunFlag is still listed - it would start a NEW COLONY and race this payload's LoadGame"; $fail = $true
+  } else { Write-Output "ARM GATE OK   96_AutoRunFlag is NOT listed (no new-colony flow)" }
+  foreach ($p in $pairs) {
+    $f = Join-Path $kit $p.dst
+    if (-not (Test-Path -LiteralPath $f)) { Write-Output ("ARM GATE FAIL: missing " + $p.dst); $fail = $true; continue }
+    $t = Get-Content -LiteralPath $f -Raw -Encoding UTF8
+    if ($t -notmatch 'TEMPORARY') { Write-Output ("ARM GATE FAIL: no TEMPORARY marker in " + $p.dst); $fail = $true }
+    else { Write-Output ("ARM GATE OK   " + $p.dst) }
+    if ($m -match [regex]::Escape('"Code/' + (Split-Path $p.dst -Leaf) + '"')) { Write-Output ("ARM GATE OK   metadata lists " + $p.dst) }
+    else { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
+  }
+
+  # --- SELF-DRIVE GATE. An unattended payload must start itself. ---
+  $payText = Get-Content -LiteralPath (Join-Path $kit $payload.dst) -Raw -Encoding UTF8
+  if ($payText -match '(?m)^\s*C47\.Boot\s*\(') { Write-Output "ARM GATE OK   payload self-drives (C47.Boot() at file scope)" }
+  else { Write-Output "ARM GATE FAIL: payload does not call C47.Boot() at file scope - nobody would start it"; $fail = $true }
+  if ($payText -match 'quit\s*\(') { Write-Output "ARM GATE OK   payload quits the process itself" }
+  else { Write-Output "ARM GATE FAIL: payload never calls quit() - the process would hang"; $fail = $true }
+
+  # --- THE READ-ONLY GATE. This leg measures a colony; it must not change one.
+  #     GetCurrentHarvestType MUTATES current_harvest_idx on entry
+  #     (ThreeHarvestTypesBuilding.lua:41-42), so calling it to "read the crop"
+  #     would advance every farm's rotation on every sample.
+  #     The scan runs over CODE ONLY: every line whose first non-space
+  #     characters are "--" is dropped first, because the payload names these
+  #     calls in its header precisely to say it does not make them, and a gate
+  #     that cannot tell a warning from a call is a gate nobody will trust.
+  $codeOnly = ($payText -split "`r?`n" | Where-Object { $_ -notmatch '^\s*--' }) -join "`n"
+  $writes = @()
+  foreach ($banned in @('GetCurrentHarvestType', 'SaveGame', 'CheatFill', 'SetHarvestType',
+                        'Activate', 'Deactivate', 'PlaceVegetation', 'Consume_Internal')) {
+    if ($codeOnly -match ([regex]::Escape($banned) + '\s*\(')) { $writes += $banned }
+  }
+  if ($writes.Count -gt 0) {
+    Write-Output ("ARM GATE FAIL: the payload CALLS " + ($writes -join ", ") + " - this leg is read-only apart from the game speed, and GetCurrentHarvestType in particular MUTATES current_harvest_idx (ThreeHarvestTypesBuilding.lua:41-42), which would advance every farm's rotation on every sample")
+    $fail = $true
+  } else {
+    Write-Output "ARM GATE OK   payload calls none of the mutating reads/writes (GetCurrentHarvestType, SaveGame, CheatFill, SetHarvestType, Activate, Deactivate, PlaceVegetation, Consume_Internal) - the only thing it changes is the game speed"
+  }
+
+  # --- G1 RESOLUTION CROSS-CHECK. A parse sweep is a SYNTAX verdict, not a
+  #     resolution one (unattended-1 I1). Every C47.<Name> the payload USES must
+  #     be DEFINED in one of the two files.
+  $comText = Get-Content -LiteralPath (Join-Path $kit $common.dst) -Raw -Encoding UTF8
+  $both = $comText + "`n" + $payText
+  $defined = @{}
+  foreach ($mm in [regex]::Matches($both, '(?m)^\s*function\s+C47\.([A-Za-z_]\w*)')) { $defined[$mm.Groups[1].Value] = $true }
+  foreach ($mm in [regex]::Matches($both, '(?m)^\s*C47\.([A-Za-z_]\w*)\s*=')) { $defined[$mm.Groups[1].Value] = $true }
+  $used = @{}
+  foreach ($mm in [regex]::Matches($payText, 'C47\.([A-Za-z_]\w*)')) { $used[$mm.Groups[1].Value] = $true }
+  $unresolved = @()
+  foreach ($k in $used.Keys) { if (-not $defined.ContainsKey($k)) { $unresolved += $k } }
+  if ($unresolved.Count -gt 0) {
+    Write-Output ("ARM GATE FAIL: unresolved C47.* names used by the payload: " + ($unresolved -join ", "))
+    $fail = $true
+  } else {
+    Write-Output ("ARM GATE OK   all " + $used.Count + " C47.* names used by the payload resolve to a definition")
+  }
+}
+
+if ($mode -eq "disarm") {
+  foreach ($p in @($common, $payload)) {
+    if (Test-Path -LiteralPath (Join-Path $kit $p.dst)) { Write-Output ("DISARM FAIL: still present " + $p.dst); $fail = $true }
+  }
+  if ($m -match 'Code/9[678]_(C47|AutoRunFlag)') { Write-Output "DISARM FAIL: metadata still lists an arming line"; $fail = $true }
+  if (-not $fail) { Write-Output "DISARM OK - kit is clean, and the permanent wave-11 probe is intact" }
+}
+
+if ($fail) { Write-Output "GATE RESULT: FAIL - DO NOT LAUNCH"; exit 1 }
+Write-Output "GATE RESULT: PASS"
+exit 0

@@ -1,0 +1,319 @@
+-- SMR Community Fix Pack — Test Kit :: c47-farm SHARED HARNESS.  TEMPORARY
+--
+-- Declared by: chain c47-farm prompt 01 (01_BUILD_AND_MEASURE.md), Job 2/4.
+--
+-- Probe hygiene rule 5 (owner, 2026-08-04): this file is present in TestKit
+-- Code/ only while the launch is actually happening; it and its metadata.lua
+-- line die in the commit that records the answers. THIS .lua.txt is the parked
+-- source of truth and is deleted by the terminal audit — it survives in git,
+-- the way unattended-3's, corun-pt15's and unattended-2's parked instruments do.
+--
+-- ⭐ RESURRECTED, NOT REWRITTEN (CHAIN_METHOD rule). say/Fmt/IdOf/Try/TryYield/
+--    Applicable/Label/WaitFor/GameIsLive/LabelAll/Now/Sols/ReadConditions/
+--    Guard/Void/ErrorWatchNote come from unattended-3's 97_U3Common
+--    (git show 93b51c5^:docs/agent/prompts/unattended-3/97_U3Common.lua.txt),
+--    which resurrected them from corun-pt15's 97_CP15Common, unattended-2's
+--    97_U2Common, corun-batch-2's 97_CB2Common and corun-batch-1's 97_CB1Common.
+--
+-- ⛔⛔ THE STRUCTURAL DIFFERENCE FROM unattended-3's, and it is the reading
+--    itself: **U3.Load forced the game to 0x. C47.Load does the opposite.**
+--    U3's leg was a PAUSED bracket, by the 2026-08-12 ruling, so drift could not
+--    explain a delta. THIS leg is a DRAIN CURVE OVER TIME: with the clock
+--    stopped nothing is measured at all. So C47.Load sets an explicit speed,
+--    reads it back, and ABORTS if the engine did not take it — corun-pt15's C4
+--    rule ("a loaded save arrives PAUSED — set a speed or game-time work is dead
+--    on arrival") in its original, correct form.
+--
+-- ⛔⛔ THE SECOND DIFFERENCE: THE PACK GATE IS A REPORTING GATE, NOT AN ABORT.
+--    U3 aborted when the fix pack was not loaded, and was right to: it was
+--    measuring two of our own repairs, so an unloaded pack made every reading
+--    void. C47 measures VANILLA behaviour of a vanilla building. The pack being
+--    absent would not void it — if anything it is the cleaner configuration.
+--    What matters instead is the OPPOSITE question, and this harness asks it by
+--    name in C47.ReadConditions: **does anything we ship touch the path being
+--    measured?** A whole-tree grep of both mods' Code/ on 2026-08-15 found
+--    exactly one module that does — `Opt_AcknowledgedWarnings` (opt-in pack,
+--    D02), which wraps `AddObjectToNotification` / `RemoveObjectFromNotification`
+--    for the id `NotWorkingBuildings`, i.e. precisely the two messages this leg
+--    counts. It is OFF BY DEFAULT and its apply() returns before installing any
+--    wrapper while off, so the shipped path is untouched in the rig's normal
+--    state — but that is a thing to READ, never to assume.
+--    ⇒ C47.BannerVoid() returns a VOID prefix whenever that module reads
+--      `active`, and every flap line carries it.
+--
+-- THE GUARDRAILS THIS FILE IMPLEMENTS (WORKFLOW "Co-runs"):
+--   G1  every C47.* name used by the payload is diffed against the definitions
+--       before launch; a parse sweep is a SYNTAX verdict, not a resolution one
+--       (unattended-1 I1).
+--   G2  no count is a result unless its population is non-empty — C47.Applicable.
+--   G3  every call that can legitimately raise is inside a pcall/sprocall whose
+--       RESULT IS PRINTED (unattended-1 I3).
+--   G5  the launcher reads metadata.lua and every probe file back off disk and
+--       refuses to launch unarmed (C47_ARM.ps1).
+--   G6  ⛔ EF-048: engine predicates return truthy NON-BOOLEANS. Nothing here
+--       tests `== true`; truthiness and type only, raw value always printed.
+--   G7  ⛔ EF-047: a mid-session log read sees a PARTIAL file. Nothing here reads
+--       the log; every absence verdict is taken from the archived file after the
+--       process has exited.
+--   EF-008  error()/assert() do NOT unwind mod code; every wait is bounded.
+--   EF-045  never trust RealTime() deltas across a loading screen.
+
+C47 = rawget(_G, "C47") or {}
+
+C47.tag         = C47.tag or "C47"
+C47.settle_time = 15 * 1000        -- the MEASURED-sufficient datum (co-run #1)
+C47.stage       = "boot"
+C47.loads       = 0
+C47.mode        = C47.mode or "REAL"
+
+---- output ------------------------------------------------------------------
+--
+-- ModLog is the only print path proven to reach the log file on disk
+-- (Mod.lua:109-132). Its emitter formats its single argument a second time
+-- (lib.lua:164-174), so a literal '%' raises there — escape it. Flush per line
+-- so an abandoned run still shows how far it got.
+local function say(msg)
+	msg = "[" .. tostring(C47.tag) .. "] " .. tostring(msg)
+	local modlog = rawget(_G, "ModLog")
+	if modlog then
+		modlog((msg:gsub("%%", "%%%%")))
+	else
+		local dbg = rawget(_G, "DebugPrint")
+		if dbg then dbg(msg .. "\n") end
+	end
+	print(msg)
+	local flush = rawget(_G, "FlushLogFile")
+	if flush then pcall(flush) end
+end
+C47.Say = say
+
+local function fmt(...)
+	local ok, s = pcall(string.format, ...)
+	return ok and s or "<fmt error>"
+end
+C47.Fmt = fmt
+
+local function id_of(obj)
+	if not obj then return "nil" end
+	if type(obj) ~= "table" then return tostring(obj) end
+	return tostring(rawget(obj, "class") or "?") .. "#" .. tostring(rawget(obj, "handle"))
+end
+C47.IdOf = id_of
+
+-- G3. The ONLY sanctioned call wrapper. Prints ok and the error text, always.
+-- ⛔ pcall cannot survive a yield — use C47.TryYield for anything that Sleeps.
+function C47.Try(what, fn, ...)
+	local ok, a, b = pcall(fn, ...)
+	say(fmt("TRY %s ok=%s result=%s%s", tostring(what), tostring(ok),
+		tostring(a), b ~= nil and (" / " .. tostring(b)) or ""))
+	return ok, a, b
+end
+
+function C47.TryYield(what, fn, ...)
+	local ok, a, b = sprocall(fn, ...)
+	say(fmt("TRY %s (yielding) ok=%s result=%s%s", tostring(what), tostring(ok),
+		tostring(a), b ~= nil and (" / " .. tostring(b)) or ""))
+	return ok, a, b
+end
+
+-- G2. The condition-sampled rule, mechanised. ⛔ "Refuted" requires the
+-- condition was SAMPLED, not merely that the count was zero.
+function C47.Applicable(label, count, population, witness)
+	local applicable = (population or 0) > 0
+	say(fmt("READ %s = %s | population=%s | APPLICABLE=%s | witness=%s",
+		tostring(label), tostring(count), tostring(population),
+		tostring(applicable), tostring(witness or "-- NONE NAMED --")))
+	return applicable
+end
+
+-- EVERY reading declares which side of the forced/organic line it is on.
+function C47.Label(kind, what, detail)
+	kind = tostring(kind):upper()
+	if kind ~= "FORCED" and kind ~= "ORGANIC" then
+		kind = "UNLABELLED(⚠️ neither FORCED nor ORGANIC was declared)"
+	end
+	say(fmt("%s :: %s :: %s", kind, tostring(what), tostring(detail or "-")))
+	return kind
+end
+
+---- small helpers -----------------------------------------------------------
+
+local function wait_for(timeout, ready)
+	local deadline = RealTime() + timeout
+	while not ready() do
+		if RealTime() - deadline >= 0 then return false end
+		Sleep(500)
+	end
+	return true
+end
+C47.WaitFor = wait_for
+
+local function game_is_live()
+	local city   = rawget(_G, "MainCity")
+	local colony = rawget(_G, "UIColony")
+	return not not (city and city.labels and colony and colony.labels)
+end
+C47.GameIsLive = game_is_live
+
+local function label_all(name)
+	local out = {}
+	for _, city in ipairs(rawget(_G, "Cities") or empty_table) do
+		for _, o in ipairs((city.labels or empty_table)[name] or empty_table) do
+			out[#out + 1] = o
+		end
+	end
+	return out
+end
+C47.LabelAll = label_all
+
+-- Game time, printed raw beside every derived figure.
+-- 30,000 game-ms = 1 game hour is MEASURED (PLAYTEST_HELP); a sol is 24 of them.
+C47.MS_PER_HOUR = 30000
+C47.MS_PER_SOL  = 24 * 30000
+
+function C47.Sols(ms)
+	if type(ms) ~= "number" then return "n/a" end
+	return fmt("%d.%02d sols", ms / C47.MS_PER_SOL,
+		((ms % C47.MS_PER_SOL) * 100) / C47.MS_PER_SOL)
+end
+
+-- ⭐ BOTH CLOCKS AT EVERY READ, and this leg needs both for a reason the
+--    unattended-3 leg did not: `VoicesCooldown` is keyed on RealTime()
+--    (CommonLua/Voice.lua:355-358) while the drain is game-time driven, so at
+--    any speed above 1x the two diverge — which IS the owner's condition.
+function C47.Now(when)
+	local colony = rawget(_G, "UIColony")
+	local gt = GameTime()
+	say(fmt("CLOCK %s :: GameTime()=%s (%s since game start) | UIColony.day=%s hour=%s | speed=%sx | RealTime()=%s",
+		tostring(when), tostring(gt), C47.Sols(gt),
+		tostring(colony and colony.day), tostring(colony and colony.hour),
+		tostring(GetTimeFactor() / const.DefaultTimeFactor), tostring(RealTime())))
+	return gt
+end
+
+---- load --------------------------------------------------------------------
+--
+-- ⛔ A SPEED IS SET, AND THE RUN ABORTS IF IT DOES NOT TAKE. See the header:
+--    unattended-3 forced 0x because its bracket was paused; this leg measures a
+--    drain over game time and a paused game measures nothing at all.
+function C47.Load(savefile, speed)
+	local err = LoadGame(savefile, {})            -- ⛔ never pass save_as_last
+	if err then
+		say("LOADERR " .. tostring(savefile) .. " " .. tostring(err))
+		return false
+	end
+	C47.loads = C47.loads + 1
+	say(fmt("LOAD OK #%d file=%s — LoadGame returned no error", C47.loads, tostring(savefile)))
+	if not wait_for(5 * 60 * 1000, game_is_live) then
+		say("LOADERR " .. tostring(savefile) .. " — city never came live")
+		return false
+	end
+	Sleep(C47.settle_time)                         -- 15 s is the MEASURED datum
+	local before = GetTimeFactor() / const.DefaultTimeFactor
+	C47.Try("UIColony:SetGameSpeed(" .. tostring(speed) .. ")", function()
+		UIColony:SetGameSpeed(speed)
+		return GetTimeFactor() / const.DefaultTimeFactor
+	end)
+	Sleep(1000)
+	local after = GetTimeFactor() / const.DefaultTimeFactor
+	say(fmt("READ speed after load: before=%sx after=%sx | wanted=%sx | RUNNING=%s — the whole sampling window below is VOID if this is not the wanted speed (a loaded save arrives PAUSED: corun-pt15 rule C4)",
+		tostring(before), tostring(after), tostring(speed), tostring(after == speed)))
+	return after == speed
+end
+
+---- run conditions ----------------------------------------------------------
+--
+-- WORKFLOW EXTERNAL VALIDITY rule: the mod counts are READ, never assumed —
+-- and read for all THREE mods, because a leg that quotes one line describes a
+-- third of the rig (TestKit README).
+function C47.ReadConditions(note)
+	local pack = rawget(_G, "SMRFixPack")
+	local active, total, inactive = 0, 0, {}
+	if pack and pack.order then
+		for _, id in ipairs(pack.order) do
+			total = total + 1
+			local f = pack.fixes and pack.fixes[id]
+			local st = f and f.status or "missing"
+			if st == "active" then active = active + 1 else inactive[#inactive + 1] = id .. "=" .. st end
+		end
+	end
+	say(fmt("CONDITIONS pack=%d/%d active | map=%s | speed=%sx | loads_this_process=%d | mode=%s | note=%s",
+		active, total, tostring(rawget(_G, "CurrentMapName")),
+		tostring(GetTimeFactor() / const.DefaultTimeFactor), C47.loads,
+		tostring(C47.mode), tostring(note or "-")))
+	if #inactive > 0 then
+		say("CONDITIONS not-active: " .. table.concat(inactive, ", "))
+	end
+	local opt = rawget(_G, "SMROptInPack")
+	if opt and opt.order then
+		local oa, ot = 0, 0
+		for _, id in ipairs(opt.order) do
+			ot = ot + 1
+			local m = opt.fixes and opt.fixes[id]
+			if m and m.status == "active" then oa = oa + 1 end
+		end
+		say(fmt("CONDITIONS opt-in pack=%d/%d active", oa, ot))
+	else
+		say("CONDITIONS opt-in pack = NOT PRESENT in this process")
+	end
+	local rescue = rawget(_G, "SMRSaveRescue")
+	say(fmt("CONDITIONS save-rescue mod = %s", rescue and "PRESENT" or "NOT PRESENT in this process"))
+	C47.ReadBannerGate()
+	return active, total
+end
+
+---- ⛔ THE GATE THAT MATTERS TO *THIS* LEG ----------------------------------
+--
+-- Not "is the fix pack loaded" (this is a vanilla measurement) but "does
+-- anything we ship sit on the path being measured". Exactly one module in
+-- either mod does: Opt_AcknowledgedWarnings (opt-in pack, D02) wraps
+-- AddObjectToNotification and RemoveObjectFromNotification for the id
+-- NotWorkingBuildings — the two messages this leg counts. Its apply() returns
+-- BEFORE installing any wrapper while the module is off (Opt_AcknowledgedWarnings
+-- .lua:78-80), and it is off by default, so the shipped path is untouched in
+-- the rig's normal state. That is a thing to READ.
+function C47.ReadBannerGate()
+	local opt = rawget(_G, "SMROptInPack")
+	local m = opt and opt.fixes and opt.fixes.AcknowledgedWarnings
+	local status = m and m.status or "NOT PRESENT"
+	C47.banner_clean = (status ~= "active")
+	if C47.banner_clean then
+		say(fmt("GATE banner-path CLEAN :: Opt_AcknowledgedWarnings status=%s detail='%s' — it is the ONLY module in either mod that touches AddObjectToNotification/RemoveObjectFromNotification for '%s', and while it is not active it installs no wrapper at all, so the add/remove counts below are the SHIPPED game's own.",
+			tostring(status), tostring(m and m.detail or "-"), "NotWorkingBuildings"))
+	else
+		say(fmt("GATE ⛔ BANNER PATH CONTAMINATED :: Opt_AcknowledgedWarnings is ACTIVE (detail='%s'). It wraps AddObjectToNotification and drops re-adds for acknowledged buildings, which is exactly the count this leg is taking. Every flap number below measures OUR module, not the game. The census and the buffer curve are unaffected.",
+			tostring(m and m.detail or "-")))
+	end
+	return C47.banner_clean
+end
+
+-- Prefix for any flap line that would otherwise read like a vanilla verdict.
+function C47.BannerVoid()
+	if C47.banner_clean == false then return "VOID(banner path wrapped by Opt_AcknowledgedWarnings) " end
+	return ""
+end
+
+function C47.Guard(leg)
+	C47.stage = tostring(leg)
+	if game_is_live() then return true end
+	say(fmt("GATE ⛔ LEG '%s' NOT RUN — no live colony. Nothing was read and nothing was changed.", tostring(leg)))
+	return false
+end
+
+-- Kept for symmetry with the resurrected harness; nothing in this leg is void
+-- for want of the fix pack, so it returns empty unless a caller says otherwise.
+function C47.Void()
+	return ""
+end
+
+---- error-watch marker ------------------------------------------------------
+--
+-- ⛔ It may NOT count engine error lines: the engine writes those straight to
+--    the log file and the mod environment has no file read (io/os are both
+--    ModEnvBlacklist keys). A count printed from here would be invented. It
+--    prints the boundary a reader greps between.
+-- ⚠️ The token an error sweep greps for is spelled AROUND, not written.
+function C47.ErrorWatchNote()
+	say(fmt("ERRORWATCH %s — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== c47-farm %s ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one (owner rule 2026-08-01). stage_at_close=%s loads_this_process=%d mode=%s",
+		tostring(C47.tag), tostring(C47.tag), tostring(C47.stage), C47.loads, tostring(C47.mode)))
+end
