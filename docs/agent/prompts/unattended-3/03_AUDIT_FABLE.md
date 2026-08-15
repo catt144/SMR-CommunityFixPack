@@ -195,9 +195,20 @@ was deleted with the game closed. The staged `U3C39BR` was byte-identical to
 
 ### Open, for you
 
-* ⚖️ **Checklist item 30 (C39's 8-family footprint) is still OPEN** — reading
-  only, blocks nothing, but you need the answer before card text. Still: do not
-  describe the fix as "the four Workshops" anywhere.
+* ✅ **Checklist item 30 is CLOSED — ruled 2026-08-15, the day it was raised:
+  C39 SHIPS AS BUILT, all eight families, no list.** Owner's principle: *"true
+  to the code… a true to code bugfix as much as possible"*, which selects the
+  shipped build because the module carries **no building list** and restricting
+  it would have meant ADDING one. **Your Job 2 therefore writes card and
+  fix-list text against the real eight-family footprint** — ⛔ do not describe
+  the fix as "the four Workshops" anywhere.
+  ⛔ **The ruling settles SCOPE ONLY.** It is NOT permission to describe the
+  change quietly: the card and site must still say this moves gameplay-visible
+  numbers (security, drone throughput, research), and it does NOT upgrade the
+  seven SOURCE families to measured. ⭐ Carry the mitigating fact into the text
+  if it helps a player: all three Automation laws share the `Automation` policy
+  slot, so at most one is active at a time — four Workshops + two Security
+  buildings, **or** the Drone Assembler + Bottomless Pit, never all eight.
 * ⚖️ **Checklist item 5 (F85 severity/tier) is still OPEN**; its queue note now
   needs updating to *verified*, which your Job 3 owns.
 * **An F85 screen-witness ask is OPTIONAL, not owed** — `fixed` was granted

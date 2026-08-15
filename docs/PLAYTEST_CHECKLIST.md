@@ -38,15 +38,37 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
-### ⭐ NEW 2026-08-15 — the C39 repair you ruled turns out to touch TWICE as many buildings as the ruling pictured. One confirm, reading only.
+### ⭐ NEW 2026-08-15 — the C39 repair you ruled turns out to touch TWICE as many buildings as the ruling pictured. ✅ CONFIRMED THE SAME DAY.
 
-30. ⚖️ **You ruled "extend the compensation" on 2026-08-12 looking at four
-    Workshops. The sweep you asked for found EIGHT building families, across
-    two laws — and four of them are things nobody had looked at. Ship the
-    repair as built (recommended), or restrict it to the four Workshops?**
-    **TAKEABLE-WHEN: any time. No colony, no launch, no game — this is a
-    reading item.** Nothing is blocked: the module is built and behaves as
-    described; restricting it later is a small edit.
+30. ✅ **RULED 2026-08-15: SHIP AS BUILT — all eight families, no list.** Your
+    words: *"Lets go with whatever is supposed to be true to the code, which
+    fits this mod as a true to code bugfix as much as possible."* You also
+    challenged the framing first (*"I thought we decided on this awhile ago?"*)
+    and you were right — 08-12 already ruled "extend the compensation" and
+    widened the sweep yourself; this was a confirm on the size of what the
+    sweep returned, not a re-opening.
+    ⭐ **Why the principle picks this option and not a narrower one.** The
+    shipped module carries **no building list at all**: at runtime it asks the
+    building in front of it two questions — does it carry *this active law's own
+    effect object* as a `max_workers` modifier, and does it fail all three class
+    gates — and pays back exactly the delta vanilla's own loop would have
+    produced. Coverage is therefore "whatever actually has the defect", which is
+    what true-to-code means here. **Restricting it to the four Workshops would
+    have required ADDING a hardcoded template list that does not exist today**,
+    purely to leave identically-broken buildings broken. That is the less
+    faithful option, not the safer one.
+    ⭐ **And it is faithful to the law's own player-facing text**, which is the
+    other half of "true to code": the law reads *"Service buildings require 50%
+    less workers"* — the trade is labour, nothing else. The declined delabel
+    alternative would have made the law quietly not apply to those buildings,
+    contradicting its own description; extending the compensation keeps the
+    promise the law prints. (Comfort is not the law's trade — it is merely what
+    the four *Workshops* happen to produce with their performance, which is why
+    the 08-11/08-12 conversations were all about comfort.)
+    ⇒ **Nothing to do. No code change, no re-run.** Prompt 03 writes the card
+    and fix-list text against the real eight-family footprint.
+    ~~Ship the repair as built, or restrict it to the four Workshops?~~ — the
+    original question and its full breakdown are kept below for the record.
 
     **Why you are being asked at all.** Your ruling explicitly widened the
     scope — *sweep all three automation labels and cover every mismatch found* —
@@ -79,14 +101,27 @@ owed input stays here no matter how struck-through it looks.
     number, no balance invention. Each affected building rides to roughly double
     performance on half the staff, which is the "overall performance is
     maintained" the code says it is aiming for.
-    **Recommendation: ship as built.** Restricting it to Workshops would mean
-    deliberately leaving Security Stations and the Drone Assembler broken while
-    fixing their neighbours, with no principle separating them.
+    **Recommendation: ship as built.** ✅ **This is what you ruled.** Restricting
+    it to Workshops would mean deliberately leaving Security Stations and the
+    Drone Assembler broken while fixing their neighbours, with no principle
+    separating them.
     ⚠️ **What you should know either way:** these are gameplay-visible numbers
     (security, drone throughput, research), so a player who has been running
     Automation laws will notice the difference. That is the repair working — but
     it is a bigger visible change than "Workshops pay slightly more Comfort",
-    and prompt 03 will have to say so on the store card.
+    and prompt 03 will have to say so on the store card. ⛔ **That disclosure
+    survives the ruling** — shipping as built settles the SCOPE, not whether the
+    card mentions it.
+    ⭐ **Mitigating fact, from the sweep:** all three Automation laws share the
+    `Automation` policy slot, so **at most one can be active at a time**. In any
+    one game the repair reaches the four Workshops + two Security buildings
+    (Service law) *or* the Drone Assembler + Bottomless Pit (Factory law) —
+    never all eight at once.
+    ⚠️ **Evidence honesty, unchanged by the ruling:** only `TVStudioWorkshopCCP1`
+    is MEASURED (08-11 unfixed, 08-15 fixed). The other seven are SOURCE — a
+    class-graph resolution with every row re-read by hand at its declaring file.
+    The runtime discriminator bounds the risk: the code can only fire on a
+    building that genuinely carries the cut and genuinely fails the gates.
     → the full sweep, every class chain re-read at source, and the design
     reasoning: `agent/bugs/C39.md` §2026-08-15.
 
