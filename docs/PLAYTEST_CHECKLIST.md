@@ -40,10 +40,36 @@ owed input stays here no matter how struck-through it looks.
 
 ### ⭐⭐ NEW 2026-08-15 (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from you would explain that.
 
-33. ⭐ **ONE QUESTION, and it is the whole case: when you saw the endless
-    "waiting for Seeds" popups — had you just done something to those farms?**
-    Built one, made one bigger, changed which crops it was growing, or watched
-    crops wither? Any of those, or "no, they'd been sitting there for ages".
+33. ✅✅ **ANSWERED BY YOU THE SAME EVENING, AT THE KEYBOARD — and then you went
+    considerably further than the question.** Your answer was *"nothing but
+    normal maintenance, not player build construction ongoing"*, which rules out
+    the free-hex transient I had proposed. We then watched your save together and
+    **the symptom reproduced**: your Potato farm was **stopped for 52% of the
+    session** with its seed buffer hitting a true zero, while your other farm and
+    all 36 Forestation Plants never stopped once. You typed the banner sighting
+    into the log, so for the first time this project can say a player *saw* it
+    rather than that a counter fired.
+
+    ⭐ **And you found the thing underneath it, which none of my instruments
+    would have caught.** You noticed drones fetching single seed crates out of the
+    landscape while a full 4,000 depot stood beside the farm, and guessed there
+    was "a hidden rate at which vegetation offers seeds". There is — it is called
+    `seed_cooldowns`, and grown plants offer their seeds to your drones through an
+    invisible requester object. **That requester gets no distance penalty at all**,
+    while the one comparable scattered source in the game was deliberately given a
+    50% penalty by the developers. So on your carpeted map, hundreds of one-plant
+    trickles compete with your depot on equal footing. You also explained why one
+    farm is always silent — it sits in sparser ground with less drone-extender
+    coverage, so its drones fall back on the depot.
+
+    ⇒ **Filed as `C48`, credited to you, and it may be the real defect** — in
+    which case enlarging the farm's buffer would only have hidden it. ⛔ **No fix
+    will be built for either case until `C48` is measured**, which is a
+    zero-cost unattended run I have already built the instrument for.
+    → `agent/bugs/C48.md`, and the original question is kept below.
+
+    ~~**When you saw the endless "waiting for Seeds" popups — had you just done
+    something to those farms?**~~
 
     **Why it is the only thing left to ask.** We ran your save `C47FARM` seven
     times unattended tonight (your cost: zero) and watched both of your Open

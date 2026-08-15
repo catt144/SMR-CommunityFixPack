@@ -286,15 +286,40 @@ function C47.ReadBannerGate()
 		say(fmt("GATE banner-path CLEAN :: Opt_AcknowledgedWarnings status=%s detail='%s' — it is the ONLY module in either mod that touches AddObjectToNotification/RemoveObjectFromNotification for '%s', and while it is not active it installs no wrapper at all, so the add/remove counts below are the SHIPPED game's own.",
 			tostring(status), tostring(m and m.detail or "-"), "NotWorkingBuildings"))
 	else
-		say(fmt("GATE ⛔ BANNER PATH CONTAMINATED :: Opt_AcknowledgedWarnings is ACTIVE (detail='%s'). It wraps AddObjectToNotification and drops re-adds for acknowledged buildings, which is exactly the count this leg is taking. Every flap number below measures OUR module, not the game. The census and the buffer curve are unaffected.",
+		-- ⚖️ OWNER RULING, 2026-08-15 attended sitting, verbatim: *"U had it on
+		--    when I had my issue originally so would like to keep it exactly as
+		--    is for this test."* The agent had asked for it to be switched off to
+		--    protect the flap counts; the owner overruled that on EXTERNAL
+		--    VALIDITY, and they were right — the configuration under test is the
+		--    one the symptom was seen in. The word "VOID" was withdrawn from
+		--    these lines on that ruling; it said the counts were worthless when
+		--    what they actually are is the rig as configured.
+		-- ⭐ AND THE AGENT'S WORRY WAS LARGELY UNFOUNDED, checked at source
+		--    rather than assumed: the wrapper suppresses only a building it has
+		--    STAMPED, it stamps only on a player dismissal, and the stamp is
+		--    CLEARED on that building's next recovery (Opt_AcknowledgedWarnings
+		--    .lua:124-129, and the module's own header says so). A FLAPPING
+		--    building — one that empties, is resupplied and empties again —
+		--    therefore clears its own acknowledgment every cycle and cannot be
+		--    quieted by this module at all. It can only help a permanently
+		--    broken building, which is the entombed-building case it was built
+		--    for. ⇒ For a starving farm it is a no-op BY CONSTRUCTION.
+		-- ⛔ Still measured rather than trusted: the census reads
+		--    SMRFixPack_ack_notworking on every object, so if it ever does
+		--    engage, the log shows it instead of the record guessing.
+		say(fmt("GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='%s') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.",
 			tostring(m and m.detail or "-")))
 	end
 	return C47.banner_clean
 end
 
--- Prefix for any flap line that would otherwise read like a vanilla verdict.
+-- Prefix marking any flap line taken while the D02 wrapper is installed. ⛔ NOT
+-- the word "void": the owner ruled the module stays on for fidelity to the
+-- conditions the symptom was seen in, so these counts are the rig as configured
+-- and are the ones that matter. The tag exists so a reader can grep which lines
+-- were taken under that wrapper, not to discount them.
 function C47.BannerVoid()
-	if C47.banner_clean == false then return "VOID(banner path wrapped by Opt_AcknowledgedWarnings) " end
+	if C47.banner_clean == false then return "ACK-ON(D02 wrapper installed, owner ruling — see the banner-path gate line) " end
 	return ""
 end
 
@@ -309,6 +334,50 @@ end
 -- for want of the fix pack, so it returns empty unless a caller says otherwise.
 function C47.Void()
 	return ""
+end
+
+---- frozen-clock diagnostic -------------------------------------------------
+--
+-- ⭐ PROMOTED HERE from the C47 sampler payload so every leg gets it. MEASURED
+--    three times on 2026-08-15: the `C47FARM` colony's clock stops dead at
+--    `UIColony.day=385 hour=0` with `GetTimeFactor()` still reading 5x. A time
+--    factor above zero while game time does not advance IS `Pause(reason)`
+--    (cthreads.lua:148-160), which halts game time without touching the factor.
+--    Diagnosed rather than inferred: `IsPaused()=1`, one entry in PauseReasons
+--    rendering as `XPauseLayer`, and `PopupNotification` in the open-dialog
+--    registry. A popup opens at the sol boundary and nobody is there to close
+--    it. ⛔ No unattended run on that save can pass day 385.
+function C47.FreezeDiagnostic(when)
+	local reasons = rawget(_G, "PauseReasons")
+	local as_str = rawget(_G, "_GetPauseReasonsStr")
+	local names = {}
+	if type(reasons) == "table" then
+		for reason in pairs(reasons) do
+			names[#names + 1] = type(reason) == "table"
+				and (tostring(rawget(reason, "class")) .. "(table)") or tostring(reason)
+		end
+		table.sort(names)
+	end
+	local ok_s, str = pcall(function() return as_str and as_str() end)
+	local ok_p, paused = pcall(function() return IsPaused() end)
+	say(fmt("FREEZE %s :: GameTime()=%s | GetTimeFactor()=%sx | IsPaused()=%s (ok=%s) | PauseReasons keys=%d [%s] | _GetPauseReasonsStr()='%s' (ok=%s)",
+		tostring(when), tostring(GameTime()),
+		tostring(GetTimeFactor() / const.DefaultTimeFactor),
+		tostring(paused), tostring(ok_p), #names, table.concat(names, ", "),
+		tostring(str), tostring(ok_s)))
+	local dialogs = rawget(_G, "Dialogs")
+	local listed = 0
+	if type(dialogs) == "table" then
+		for k, dlg in pairs(dialogs) do
+			listed = listed + 1
+			if listed <= 20 then
+				local ok_c, cls = pcall(function() return dlg.class end)
+				say(fmt("FREEZE %s :: open dialog [%s] class=%s", tostring(when),
+					tostring(k), tostring(ok_c and cls or "?")))
+			end
+		end
+	end
+	say(fmt("FREEZE %s :: %d entries in the Dialogs registry (XDialog.lua:2)", tostring(when), listed))
 end
 
 ---- error-watch marker ------------------------------------------------------

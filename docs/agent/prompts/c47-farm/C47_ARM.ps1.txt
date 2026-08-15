@@ -19,8 +19,24 @@
 #    no-BOM encoder for metadata.lua, as below.
 #
 #   Usage:  .\C47_ARM.ps1 arm-suite     # 96_AutoRunFlag only: the Job 1 full-suite launch
-#           .\C47_ARM.ps1 arm-sampler   # 97_C47Common + 98_C47Sampler: the Job 2/4 launch
+#           .\C47_ARM.ps1 arm-sampler   # 97_C47Common + 98_C47Sampler: the UNATTENDED leg
+#           .\C47_ARM.ps1 arm-ride      # 97_C47Common + 98_C47Ride: the ATTENDED sitting
 #           .\C47_ARM.ps1 disarm        # removes everything this script can add
+#
+# ------------------------------------------------------------------------------
+# THE TWO GATES POINT IN OPPOSITE DIRECTIONS, AND THAT IS THE POINT.
+#
+#   arm-sampler is UNATTENDED. Nobody is at the keyboard, so the payload MUST
+#   self-drive: it loads a staged save, sets a speed, samples and quits. A
+#   payload that waited to be typed at would sit there until the watchdog killed
+#   it, so the gate FAILS one that does not call C47.Boot() and quit().
+#
+#   arm-ride is ATTENDED. The owner is playing their own campaign, so the
+#   payload MUST NOT drive the game at all: a LoadGame would throw away the
+#   colony they are sitting in, a SetGameSpeed would fight their hands, and a
+#   quit() would close the game under them. The gate therefore FAILS a payload
+#   that calls ANY of those - the corun-pt15 rule, mechanised.
+# ------------------------------------------------------------------------------
 #
 # ------------------------------------------------------------------------------
 # WHAT THIS SCRIPT DOES *NOT* TOUCH: Code/61_Probes_Wave11.lua and its
@@ -36,7 +52,7 @@
 # unattended-2/3 one: it FAILS a sampler payload that does NOT self-drive.
 # ------------------------------------------------------------------------------
 
-param([Parameter(Mandatory = $true)][ValidateSet("arm-suite", "arm-sampler", "disarm")][string]$mode)
+param([Parameter(Mandatory = $true)][ValidateSet("arm-suite", "arm-sampler", "arm-ride", "arm-veg", "disarm")][string]$mode)
 
 $ErrorActionPreference = "Stop"
 $park = "c:\Dev\SMR-BugFixPack\docs\agent\prompts\c47-farm"
@@ -46,13 +62,17 @@ $noBom = New-Object System.Text.UTF8Encoding($false)
 
 $common  = @{ src = "97_C47Common.lua.txt";  dst = "Code\97_C47Common.lua" }
 $payload = @{ src = "98_C47Sampler.lua.txt"; dst = "Code\98_C47Sampler.lua" }
+$ride    = @{ src = "98_C47Ride.lua.txt";    dst = "Code\98_C47Ride.lua" }
+$veg     = @{ src = "98_C48Veg.lua.txt";     dst = "Code\98_C48Veg.lua" }
 $pairs   = @()
 if ($mode -eq "arm-sampler") { $pairs = @($common, $payload) }
+if ($mode -eq "arm-ride")    { $pairs = @($common, $ride) }
+if ($mode -eq "arm-veg")     { $pairs = @($common, $veg) }
 
 $autorunLine = 'Code/96_AutoRunFlag.lua'
 
 # --- clean slate every time: strip anything this script can add ---------------
-foreach ($p in @($common, $payload)) {
+foreach ($p in @($common, $payload, $ride, $veg)) {
   $f = Join-Path $kit $p.dst
   if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force; Write-Output ("DELETED " + $p.dst) }
 }
@@ -119,8 +139,127 @@ if ($mode -eq "arm-suite") {
   if ($flag -match '(?m)^\s*SMRTest_AutoRunSetupOnly\s*=\s*true') {
     Write-Output "ARM GATE FAIL: SetupOnly is UNCOMMENTED - that is the ATTENDED shape and this launch is unattended"; $fail = $true
   } else { Write-Output "ARM GATE OK   SetupOnly is commented out (unattended shape)" }
-  foreach ($p in @($common, $payload)) {
-    if (Test-Path -LiteralPath (Join-Path $kit $p.dst)) { Write-Output ("ARM GATE FAIL: sampler payload still present " + $p.dst); $fail = $true }
+  foreach ($p in @($common, $payload, $ride, $veg)) {
+    if (Test-Path -LiteralPath (Join-Path $kit $p.dst)) { Write-Output ("ARM GATE FAIL: sampler/ride payload still present " + $p.dst); $fail = $true }
+  }
+}
+
+# ---- C48: same unattended gate as arm-sampler, on the veg payload ------------
+if ($mode -eq "arm-veg") {
+  if ($m -match [regex]::Escape('"' + $autorunLine + '"')) {
+    Write-Output "ARM GATE FAIL: 96_AutoRunFlag is still listed - it would start a NEW COLONY and race this payload's LoadGame"; $fail = $true
+  } else { Write-Output "ARM GATE OK   96_AutoRunFlag is NOT listed" }
+  foreach ($p in $pairs) {
+    $f = Join-Path $kit $p.dst
+    if (-not (Test-Path -LiteralPath $f)) { Write-Output ("ARM GATE FAIL: missing " + $p.dst); $fail = $true; continue }
+    $t = Get-Content -LiteralPath $f -Raw -Encoding UTF8
+    if ($t -notmatch 'TEMPORARY') { Write-Output ("ARM GATE FAIL: no TEMPORARY marker in " + $p.dst); $fail = $true }
+    else { Write-Output ("ARM GATE OK   " + $p.dst) }
+    if ($m -match [regex]::Escape('"Code/' + (Split-Path $p.dst -Leaf) + '"')) { Write-Output ("ARM GATE OK   metadata lists " + $p.dst) }
+    else { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
+  }
+  $vegText = Get-Content -LiteralPath (Join-Path $kit $veg.dst) -Raw -Encoding UTF8
+  $vegCode = ($vegText -split "`r?`n" | ForEach-Object { ($_ -replace '--.*$', '') } | Where-Object { $_.Trim() -ne '' }) -join "`n"
+  $vegCode = $vegCode -replace 'OnMsg\.[A-Za-z_]\w*', 'OnMsgHandler'
+  if ($vegCode -match '(?m)^\s*C47\.Boot\s*\(') { Write-Output "ARM GATE OK   payload self-drives (C47.Boot() at file scope)" }
+  else { Write-Output "ARM GATE FAIL: payload does not call C47.Boot() at file scope"; $fail = $true }
+  if ($vegCode -match 'quit\s*\(') { Write-Output "ARM GATE OK   payload quits the process itself" }
+  else { Write-Output "ARM GATE FAIL: payload never calls quit()"; $fail = $true }
+  # read-only apart from the game speed
+  $w = @()
+  foreach ($banned in @('GetCurrentHarvestType', 'SaveGame', 'CheatFill', 'SetHarvestType',
+                        'PlaceVegetation', 'Consume_Internal', 'DoneObject', 'SetAmount')) {
+    if ($vegCode -match ([regex]::Escape($banned) + '\s*\(')) { $w += $banned }
+  }
+  if ($w.Count -gt 0) { Write-Output ("ARM GATE FAIL: the payload CALLS " + ($w -join ", ") + " - C48 is read-only apart from the game speed"); $fail = $true }
+  else { Write-Output "ARM GATE OK   payload calls none of the mutating reads/writes" }
+  # the C48 headline reading must actually be attempted
+  if ($vegCode -match 'VegetationTaskRequester') { Write-Output "ARM GATE OK   payload scans VegetationTaskRequester (the C48 headline)" }
+  else { Write-Output "ARM GATE FAIL: payload never mentions VegetationTaskRequester - it is not measuring C48"; $fail = $true }
+  $comText = Get-Content -LiteralPath (Join-Path $kit $common.dst) -Raw -Encoding UTF8
+  $both = $comText + "`n" + $vegText
+  $defined = @{}
+  foreach ($mm in [regex]::Matches($both, '(?m)^\s*function\s+C47\.([A-Za-z_]\w*)')) { $defined[$mm.Groups[1].Value] = $true }
+  foreach ($mm in [regex]::Matches($both, '(?m)^\s*C47\.([A-Za-z_]\w*)\s*=')) { $defined[$mm.Groups[1].Value] = $true }
+  $used = @{}
+  foreach ($mm in [regex]::Matches($vegCode, 'C47\.([A-Za-z_]\w*)')) { $used[$mm.Groups[1].Value] = $true }
+  $un = @(); foreach ($k in $used.Keys) { if (-not $defined.ContainsKey($k)) { $un += $k } }
+  if ($un.Count -gt 0) { Write-Output ("ARM GATE FAIL: unresolved C47.* names: " + ($un -join ", ")); $fail = $true }
+  else { Write-Output ("ARM GATE OK   all " + $used.Count + " C47.* names resolve") }
+}
+
+# ---- ATTENDED: the gate that points the other way ----------------------------
+if ($mode -eq "arm-ride") {
+  if ($m -match [regex]::Escape('"' + $autorunLine + '"')) {
+    Write-Output "ARM GATE FAIL: 96_AutoRunFlag is still listed - it would start a NEW COLONY under the owner"; $fail = $true
+  } else { Write-Output "ARM GATE OK   96_AutoRunFlag is NOT listed (no new-colony flow)" }
+  if (Test-Path -LiteralPath (Join-Path $kit $payload.dst)) {
+    Write-Output "ARM GATE FAIL: the UNATTENDED sampler is still in the kit - it would load a staged save out from under the owner"; $fail = $true
+  } else { Write-Output "ARM GATE OK   the unattended sampler is NOT present" }
+  foreach ($p in $pairs) {
+    $f = Join-Path $kit $p.dst
+    if (-not (Test-Path -LiteralPath $f)) { Write-Output ("ARM GATE FAIL: missing " + $p.dst); $fail = $true; continue }
+    $t = Get-Content -LiteralPath $f -Raw -Encoding UTF8
+    if ($t -notmatch 'TEMPORARY') { Write-Output ("ARM GATE FAIL: no TEMPORARY marker in " + $p.dst); $fail = $true }
+    else { Write-Output ("ARM GATE OK   " + $p.dst) }
+    if ($m -match [regex]::Escape('"Code/' + (Split-Path $p.dst -Leaf) + '"')) { Write-Output ("ARM GATE OK   metadata lists " + $p.dst) }
+    else { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
+  }
+
+  $rideText = Get-Content -LiteralPath (Join-Path $kit $ride.dst) -Raw -Encoding UTF8
+  $rideCode = ($rideText -split "`r?`n" | ForEach-Object { ($_ -replace '--.*$', '') } | Where-Object { $_.Trim() -ne '' }) -join "`n"
+  # ⚠️ SUBSCRIBING to a message is not CALLING the thing it is named after, and
+  #    the first arming attempt (2026-08-15 16:5x) failed on exactly that:
+  #    `function OnMsg.LoadGame()` declares a handler the engine calls when the
+  #    OWNER loads, and the banned-call scan below read it as a call to
+  #    LoadGame(). Blank the OnMsg handler names first, so the scan sees calls
+  #    only. ⛔ Deliberately NOT done by dropping LoadGame from the banned list:
+  #    a real LoadGame() in an attended payload is exactly the disaster this
+  #    gate exists to stop.
+  $rideCode = $rideCode -replace 'OnMsg\.[A-Za-z_]\w*', 'OnMsgHandler'
+
+  # ⛔ THE ATTENDED GATE. The owner is at the keyboard. The payload may observe
+  #    and it may write to the log; it may not touch the game in any way.
+  $drives = @()
+  foreach ($banned in @('LoadGame', 'SetGameSpeed', 'SetTimeFactor', 'quit', 'SaveGame',
+                        'GetCurrentHarvestType', 'CheatFill', 'SetHarvestType',
+                        'Activate', 'Deactivate', 'PlaceVegetation', 'Consume_Internal',
+                        'NewGame', 'ChangeMap')) {
+    if ($rideCode -match ([regex]::Escape($banned) + '\s*\(')) { $drives += $banned }
+  }
+  if ($drives.Count -gt 0) {
+    Write-Output ("ARM GATE FAIL: an ATTENDED payload CALLS " + ($drives -join ", ") + " - it would drive the game out from under the owner. Observe only.")
+    $fail = $true
+  } else {
+    Write-Output "ARM GATE OK   payload drives NOTHING (no LoadGame / SetGameSpeed / SetTimeFactor / quit / SaveGame / NewGame / ChangeMap and no mutating building call) - it observes and writes to the log"
+  }
+
+  # It must arm itself on the OWNER's load rather than waiting to be typed at:
+  # the symptom is unpredictable and anything before the first console line
+  # would be missed.
+  if ($rideText -match 'function\s+OnMsg\.LoadGame') { Write-Output "ARM GATE OK   payload arms on the owner's own load (OnMsg.LoadGame)" }
+  else { Write-Output "ARM GATE FAIL: payload does not arm on OnMsg.LoadGame - it would miss everything before the owner reached the console"; $fail = $true }
+
+  # And the owner needs the witness primitives, or the sitting measures nothing
+  # a machine could not have measured alone.
+  foreach ($needed in @('Saw', 'Heard', 'Mark', 'Report', 'Farms')) {
+    if ($rideCode -match ('function\s+C47\.' + $needed + '\s*\(')) { Write-Output ("ARM GATE OK   owner primitive C47." + $needed + " is defined") }
+    else { Write-Output ("ARM GATE FAIL: owner primitive C47." + $needed + " is missing - the human witness has no way into the log"); $fail = $true }
+  }
+
+  $comText = Get-Content -LiteralPath (Join-Path $kit $common.dst) -Raw -Encoding UTF8
+  $both = $comText + "`n" + $rideText
+  $defined = @{}
+  foreach ($mm in [regex]::Matches($both, '(?m)^\s*function\s+C47\.([A-Za-z_]\w*)')) { $defined[$mm.Groups[1].Value] = $true }
+  foreach ($mm in [regex]::Matches($both, '(?m)^\s*C47\.([A-Za-z_]\w*)\s*=')) { $defined[$mm.Groups[1].Value] = $true }
+  $used = @{}
+  foreach ($mm in [regex]::Matches($rideCode, 'C47\.([A-Za-z_]\w*)')) { $used[$mm.Groups[1].Value] = $true }
+  $unresolved = @()
+  foreach ($k in $used.Keys) { if (-not $defined.ContainsKey($k)) { $unresolved += $k } }
+  if ($unresolved.Count -gt 0) {
+    Write-Output ("ARM GATE FAIL: unresolved C47.* names used by the ride payload: " + ($unresolved -join ", ")); $fail = $true
+  } else {
+    Write-Output ("ARM GATE OK   all " + $used.Count + " C47.* names used by the ride payload resolve to a definition")
   }
 }
 
@@ -199,7 +338,7 @@ if ($mode -eq "arm-sampler") {
 }
 
 if ($mode -eq "disarm") {
-  foreach ($p in @($common, $payload)) {
+  foreach ($p in @($common, $payload, $ride, $veg)) {
     if (Test-Path -LiteralPath (Join-Path $kit $p.dst)) { Write-Output ("DISARM FAIL: still present " + $p.dst); $fail = $true }
   }
   if ($m -match 'Code/9[678]_(C47|AutoRunFlag)') { Write-Output "DISARM FAIL: metadata still lists an arming line"; $fail = $true }
