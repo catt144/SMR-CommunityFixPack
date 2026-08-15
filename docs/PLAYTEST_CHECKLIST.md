@@ -38,11 +38,55 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
-### ⭐ NEW 2026-08-15 (evening) — YOUR OPEN FARM OBSERVATION IS FILED AS `C47`, and the source answer is clear
+### ⭐⭐ NEW 2026-08-15 (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from you would explain that.
 
-ℹ️ **No decision owed — this is your rider, recorded so your own testing has
-something to argue with.** You asked two questions and for a comparison; all
-three are answered at source, on the pinned build.
+33. ⭐ **ONE QUESTION, and it is the whole case: when you saw the endless
+    "waiting for Seeds" popups — had you just done something to those farms?**
+    Built one, made one bigger, changed which crops it was growing, or watched
+    crops wither? Any of those, or "no, they'd been sitting there for ages".
+
+    **Why it is the only thing left to ask.** We ran your save `C47FARM` seven
+    times unattended tonight (your cost: zero) and watched both of your Open
+    Farms for 15 in-game hours — about 51 planting ticks. **The buffer never
+    once hit empty.** The Potato farm's lowest reading was 305 of 5000; the
+    other farm's was 1661, and that one never raised a single "not working"
+    event in any run. The Potato farm raised 2, then 0, then 4. That is nothing
+    like what you saw.
+
+    **We also found out why, and it is a real correction to our own filing.** We
+    had assumed a farm plants 3–5 hexes every tick and pays for all of them. It
+    doesn't: it only pays when it finds an EMPTY hex, or one growing the wrong
+    crop. Your farms are fully planted, so they averaged **2.2 hexes a tick and
+    spent nothing at all on about a quarter of the ticks** — roughly 40% of what
+    we told you. Which means the drain we described is real but it is the rate a
+    farm hits when it has hexes to fill: right after you build it, enlarge it,
+    change its crops (every existing hex becomes "wrong" at once), or after a
+    wither. **A terraforming speed-run is when a player does all of those.**
+
+    ⇒ If the answer is "yes, I'd just been fiddling with them", the case is
+    explained and we can talk about whether it is worth repairing. If the answer
+    is "no, they were untouched", then something we have not found yet is going
+    on, and it is worth another look.
+    ⛔ **Nothing is built, nothing is decided, and no repair is proposed** — this
+    is still a candidate, not a confirmed defect.
+    → full readings, every prediction and how it fared, and the three defects we
+    found in our own instruments: `agent/bugs/C47.md`.
+
+**Two smaller things worth knowing, neither needing a decision:**
+
+* **Your drones carry 3 loads, not 1** (the Drone carry capacity dial in Mod
+  Options, set to +2). So a Seeds trip is 3000, not the 1000 we quoted you. It
+  makes your observation more striking, not less.
+* **That save cannot be run past Sol 385 by an agent.** At the sol boundary the
+  game opens a popup, which pauses the clock, and with nobody at the keyboard it
+  stays paused forever. It is normal game behaviour; it just caps how far any
+  unattended run of ours can get on that colony.
+
+<details><summary>The original source answer, from earlier the same day — kept because the two numbers in it are still exactly right</summary>
+
+ℹ️ **No decision was owed on this part** — it is your rider, recorded so your own
+testing has something to argue with. You asked two questions and for a
+comparison; all three are answered at source, on the pinned build.
 
 * **Is the storage right?** ⛔ **It was never set.** `OpenFarm.lua` has no
   `consumption_max_storage` line at all, so it takes the editor default of
@@ -74,6 +118,16 @@ not a defect, and **nothing is built**.
 → full derivation, every citation, and three unranked repair shapes (size the
 buffer · debounce the notification only · document and do nothing):
 `agent/bugs/C47.md`.
+
+⚠️ **Superseded the same night by the measurement above, in two places:** the
+"3–5 hexes every tick" and the runway figures that follow from it describe a
+farm with hexes to fill, not a planted one; and the "80×" comparison is a
+template ratio, which the run could not turn into a measured multiple because
+the control never flapped at all. The two template numbers — the buffer that was
+never set and the cadence that was — are confirmed in the running game and a
+permanent check now re-tests them on every run.
+
+</details>
 
 ### ✅ 2026-08-15 — the 54 MB leftover is DELETED (was: one word from you)
 

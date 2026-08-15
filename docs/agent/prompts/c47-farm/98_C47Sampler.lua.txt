@@ -90,8 +90,25 @@ C47.speed        = 5
 C47.target_sols  = 5
 C47.sample_ms    = 500          -- real ms between buffer samples
 C47.window_ms    = 60 * 1000    -- real ms between interim summary lines
-C47.max_real_ms  = 16 * 60 * 1000   -- hard real-time cap on the sampling window
-C47.watchdog     = 24 * 60 * 1000   -- hard stop for the whole process
+-- ⛔⛔ MEASURED TWICE, 2026-08-15 15:23 and 15:44, and it caps every unattended
+--    run on this save: **THE GAME CLOCK STOPS DEAD AT `UIColony.day=385
+--    hour=0`.** Run 1 froze at GameTime 276,300,009; run 2, given 2.5x the wall
+--    clock, froze at 276,300,001 and then sat there for a further 37 real
+--    minutes producing 2,880 more samples over an unmoving clock. Both runs
+--    therefore measured the SAME 459,005 ms of game time.
+--    ⚠️ The engine is NOT slow and the speed request is NOT ignored: over the
+--    first window the clock advanced 300,000 game ms in 60,000 real ms —
+--    **exactly the 5.0x that was asked for** — and `GetTimeFactor()` still reads
+--    5x after the freeze. A time factor that is still 5 while game time does not
+--    advance is the signature of `Pause(reason)` (CommonLua/Core/cthreads.lua:
+--    148-160), which halts game time WITHOUT touching the factor — i.e. a modal
+--    dialog opened at the sol boundary and nobody is at the keyboard to close it.
+--    ⇒ The freeze diagnostic below names the pause reasons and the open dialogs
+--      rather than leaving that as a plausible story, and ends the window as
+--      soon as it fires so no more real time is burned on a stopped clock.
+C47.freeze_samples = 40             -- consecutive unmoving-clock samples = frozen
+C47.max_real_ms  = 40 * 60 * 1000   -- hard real-time cap on the sampling window
+C47.watchdog     = 50 * 60 * 1000   -- hard stop for the whole process
 
 -- File-scope state, declared here so the ARM script's G1 resolution
 -- cross-check can see every name.
@@ -110,6 +127,7 @@ C47.end_gt         = nil
 C47.end_rt         = nil
 C47.samples        = 0
 C47.census_done    = false
+C47.frozen_at      = nil    -- GameTime at which the clock stopped, if it did
 
 local VOICE_COOLDOWN_MS = 60 * 1000   -- read back live in the census; this is the fallback
 
@@ -280,20 +298,42 @@ function C47.Census()
 				refills = 0, refill_amount = 0, last_buf = nil,
 				not_working_samples = 0, consumption_reason_samples = 0,
 				reasons = {},
+				-- ⭐⭐ THE DRAIN SIDE, added for the second run after the first
+				--    one refuted this entry's tick-cost model. Each negative
+				--    step in the buffer is one tick's actual spend, and dividing
+				--    it by this farm's own mean cost per hex gives the number of
+				--    hexes the tick really planted. `TryPlantVegetation` runs
+				--    3 + Random(3) ITERATIONS, but an iteration only reaches
+				--    PlaceVegetation -> Consume_Internal when it finds a FREE hex
+				--    or an over-represented one to replace (TerraformingBuilding
+				--    .lua:943-961). On a mature farm most iterations find neither
+				--    and cost nothing, which is the difference between the
+				--    entry's 3-5 hexes a tick and what the first run measured.
+				drains = 0, drain_total = 0, drain_max = nil,
+				hexes = {},   -- implied hexes per drain event -> count
+				mean_hex_cost = crop_n > 0 and (crop_sum / crop_n) or nil,
 			}
 			C47.tracked[#C47.tracked + 1] = rec
 			if rec.handle then C47.by_handle[rec.handle] = rec end
 
 			local ok_r, reason = pcall(function() return b:GetNotWorkingReason() end)
-			say(fmt("CENSUS %s [%d] %s :: crops=%s (sum over the 3 slots=%d, %d selected ⇒ mean per hex=%s) | consumption_amount=%s | consumption_max_storage=%s | consumption_stored_resources=%s | building_update_time=%s ms (%s game hours) | working=%s | GetNotWorkingReason=%s (ok=%s) | parent_dome=%s",
+			-- ⚠️ `consumption_max_storage` and `building_update_time` come from
+			--    the CLASS unless the instance overrode them, so rawget returns
+			--    nil for them and the first run logged "max_storage=nil" on every
+			--    object. Index normally. Tick length is printed in TENTHS of a
+			--    game hour because integer division made "9000 ms (0 game hours)"
+			--    out of a 0.3 h tick in that same run.
+			local ok_ms, max_store = pcall(function() return b.consumption_max_storage end)
+			local ok_bu, upd = pcall(function() return b.building_update_time end)
+			say(fmt("CENSUS %s [%d] %s :: crops=%s (sum over the 3 slots=%d, %d selected ⇒ mean per hex=%s) | consumption_amount=%s | consumption_max_storage=%s (ok=%s) | consumption_stored_resources=%s | building_update_time=%s ms = %s tenths of a game hour (ok=%s) | working=%s | GetNotWorkingReason=%s (ok=%s) | acknowledged-flag SMRFixPack_ack_notworking=%s | parent_dome=%s",
 				g.role, i, idof(b), crops, crop_sum, crop_n,
 				crop_n > 0 and tostring(crop_sum / crop_n) or "n/a",
 				tostring(rawget(b, "consumption_amount")),
-				tostring(rawget(b, "consumption_max_storage")),
+				tostring(max_store), tostring(ok_ms),
 				tostring(rawget(b, "consumption_stored_resources")),
-				tostring(rawget(b, "building_update_time")),
-				tostring((rawget(b, "building_update_time") or 0) / C47.MS_PER_HOUR),
+				tostring(upd), tostring(((upd or 0) * 10) / C47.MS_PER_HOUR), tostring(ok_bu),
 				tostring(rawget(b, "working")), tostring(reason), tostring(ok_r),
+				tostring(rawget(b, "SMRFixPack_ack_notworking")),
 				tostring(rawget(b, "parent_dome"))))
 		end
 		-- ⛔ the condition-sampled rule: a zero here is UNSAMPLED, not refuted
@@ -329,6 +369,19 @@ local function sample_once()
 			if rec.last_buf and cur > rec.last_buf then
 				rec.refills = rec.refills + 1
 				rec.refill_amount = rec.refill_amount + (cur - rec.last_buf)
+			elseif rec.last_buf and cur < rec.last_buf then
+				-- one tick's actual spend
+				local spend = rec.last_buf - cur
+				rec.drains = rec.drains + 1
+				rec.drain_total = rec.drain_total + spend
+				if not rec.drain_max or spend > rec.drain_max then rec.drain_max = spend end
+				if rec.mean_hex_cost and rec.mean_hex_cost > 0 then
+					-- implied hexes, rounded to nearest, against this farm's own
+					-- rotating mean. The entry predicts 3-5; the first run's
+					-- totals implied ~1.5.
+					local hexes = (spend + rec.mean_hex_cost / 2) / rec.mean_hex_cost
+					rec.hexes[hexes] = (rec.hexes[hexes] or 0) + 1
+				end
 			end
 			rec.last_buf = cur
 		end
@@ -359,6 +412,48 @@ local function window_line(tag)
 		C47.BannerVoid(), tostring(tag), NOTIF_ID, C47.adds_total, C47.removes_total,
 		C47.adds_untracked, C47.voice_eligible, C47.voice_perobj))
 	C47.Now(tostring(tag))
+end
+
+-- ⭐ THE FREEZE DIAGNOSTIC. Called when the game clock has not moved for
+--    C47.freeze_samples consecutive samples. Names the pause reasons and every
+--    open dialog, so "a modal opened at the sol boundary" stops being an
+--    inference about a signature and becomes a reading.
+function C47.FreezeDiagnostic(when)
+	local reasons = rawget(_G, "PauseReasons")
+	local as_str = rawget(_G, "_GetPauseReasonsStr")
+	local names = {}
+	if type(reasons) == "table" then
+		for reason in pairs(reasons) do
+			names[#names + 1] = type(reason) == "table"
+				and (tostring(rawget(reason, "class")) .. "(table)") or tostring(reason)
+		end
+		table.sort(names)
+	end
+	local ok_s, str = pcall(function() return as_str and as_str() end)
+	local ok_p, paused = pcall(function() return IsPaused() end)
+	say(fmt("FREEZE %s :: GameTime()=%s | GetTimeFactor()=%sx | IsPaused()=%s (ok=%s) | PauseReasons keys=%d [%s] | _GetPauseReasonsStr()='%s' (ok=%s) — ⛔ a time factor still above 0 while game time does not advance IS Pause(reason) (cthreads.lua:148-160), not a slow engine",
+		tostring(when), tostring(GameTime()),
+		tostring(GetTimeFactor() / const.DefaultTimeFactor),
+		tostring(paused), tostring(ok_p),
+		#names, table.concat(names, ", "), tostring(str), tostring(ok_s)))
+
+	local dialogs = rawget(_G, "Dialogs")
+	local listed = 0
+	if type(dialogs) == "table" then
+		for k, dlg in pairs(dialogs) do
+			listed = listed + 1
+			if listed <= 20 then
+				local cls = type(dlg) == "table" and rawget(dlg, "class") or nil
+				if not cls then
+					local ok_c, c = pcall(function() return dlg.class end)
+					cls = ok_c and c or nil
+				end
+				say(fmt("FREEZE %s :: open dialog [%s] class=%s", tostring(when),
+					tostring(k), tostring(cls)))
+			end
+		end
+	end
+	say(fmt("FREEZE %s :: %d entries in the Dialogs registry (XDialog.lua:2)", tostring(when), listed))
 end
 
 -- The live witness that the cooldown really is keyed on the TEXT: print the
@@ -400,9 +495,25 @@ function C47.Sample()
 
 	local next_window = C47.start_rt + C47.window_ms
 	local window_idx = 0
+	local last_gt, still = C47.start_gt, 0
 	while true do
 		sample_once()
 		local gt, rt = GameTime(), RealTime()
+		-- ⭐ the frozen-clock detector: burning 37 real minutes on a stopped
+		--    clock, as run 2 did, is not sampling — it is waiting.
+		if gt == last_gt then
+			still = still + 1
+			if still == C47.freeze_samples then
+				say(fmt("SAMPLE ⛔ THE GAME CLOCK HAS NOT MOVED FOR %d CONSECUTIVE SAMPLES (%d real ms). Diagnosing, then closing the window here — every sample after this point would describe a stopped game.",
+					still, still * C47.sample_ms))
+				C47.FreezeDiagnostic("clock stopped at GameTime " .. tostring(gt))
+				C47.frozen_at = gt
+				break
+			end
+		else
+			still = 0
+			last_gt = gt
+		end
 		if gt - target_gt >= 0 then
 			say(fmt("SAMPLE END :: reached the game-time target (GameTime=%d, %s)", gt, C47.Sols(gt)))
 			break
@@ -432,9 +543,12 @@ function C47.Report()
 	local span_gt = (C47.end_gt or GameTime()) - (C47.start_gt or 0)
 	local span_rt = (C47.end_rt or RealTime()) - (C47.start_rt or 0)
 	local sols = span_gt / C47.MS_PER_SOL
-	say(fmt("REPORT SPAN :: game time %d ms = %s | real time %d ms | samples taken=%d | speed asked=%sx, speed at close=%sx",
-		span_gt, C47.Sols(span_gt), span_rt, C47.samples,
-		tostring(C47.speed), tostring(GetTimeFactor() / const.DefaultTimeFactor)))
+	say(fmt("REPORT SPAN :: game time %d ms = %s (%s game hours) | real time %d ms | samples taken=%d | speed asked=%sx, speed at close=%sx | clock frozen at=%s | ⛔ EVERY per-sol figure below is this window SCALED UP, not a sol that was watched — the window is %s of a sol",
+		span_gt, C47.Sols(span_gt), tostring(span_gt / C47.MS_PER_HOUR),
+		span_rt, C47.samples,
+		tostring(C47.speed), tostring(GetTimeFactor() / const.DefaultTimeFactor),
+		tostring(C47.frozen_at or "not frozen"),
+		tostring((span_gt * 100) / C47.MS_PER_SOL) .. " hundredths"))
 	if span_gt <= 0 then
 		say("REPORT ⛔ THE GAME CLOCK DID NOT ADVANCE. Every rate below would be a division by zero and nothing was measured. This is the corun-pt15 C4 failure (a loaded save arrives paused).")
 		return false
@@ -451,7 +565,7 @@ function C47.Report()
 			tostring(rec.min), tostring(rec.max),
 			rec.sum, rec.n,
 			rec.n > 0 and tostring(rec.sum / rec.n) or "n/a",
-			tostring(rawget(rec.obj, "consumption_max_storage")),
+			tostring(select(2, pcall(function() return rec.obj.consumption_max_storage end))),
 			rec.zero, rec.n, rec.n > 0 and tostring(rec.zero * 100 / rec.n) or "n/a",
 			rec.refills, rec.refill_amount,
 			rec.refills > 0 and tostring(rec.refill_amount / rec.refills) or "n/a",
@@ -468,9 +582,30 @@ function C47.Report()
 		say(fmt("%sREPORT %s %s :: not-working reason histogram over the window: %s",
 			C47.BannerVoid(), rec.role, idof(rec.obj),
 			#reasons > 0 and table.concat(reasons, ", ") or "(never sampled not-working)"))
+
+		-- ⭐⭐ THE LINE THE FIRST RUN DID NOT HAVE, and the one that tests this
+		--    entry's tick-cost model directly. C47 says a tick costs 3-5 hexes
+		--    at the rotating mean. If the implied-hex histogram is dominated by
+		--    1s and 2s, the entry's figure is the CEILING of a farm with free
+		--    hexes to fill, not the operating cost of a planted one.
+		local hexes = {}
+		for h, count in pairs(rec.hexes) do
+			hexes[#hexes + 1] = { h = h, count = count }
+		end
+		table.sort(hexes, function(a, b) return a.h < b.h end)
+		local parts = {}
+		for _, e in ipairs(hexes) do parts[#parts + 1] = fmt("%sx%d", tostring(e.h), e.count) end
+		say(fmt("%sREPORT %s %s :: DRAIN EVENTS=%d totalling %d seeds (max single step %s) | mean spend per drain=%s against this farm's own mean cost per hex of %s ⇒ mean hexes actually planted per drain=%s | implied-hex histogram (hexes x events): %s | ⛔ C47's arithmetic assumes 3-5 hexes EVERY tick; an iteration only spends when it finds a free or over-represented hex (TerraformingBuilding.lua:943-961)",
+			C47.BannerVoid(), rec.role, idof(rec.obj),
+			rec.drains, rec.drain_total, tostring(rec.drain_max),
+			rec.drains > 0 and tostring(rec.drain_total / rec.drains) or "n/a",
+			tostring(rec.mean_hex_cost),
+			(rec.drains > 0 and rec.mean_hex_cost and rec.mean_hex_cost > 0)
+				and tostring((rec.drain_total * 100 / rec.drains) / rec.mean_hex_cost .. " hundredths") or "n/a",
+			#parts > 0 and table.concat(parts, ", ") or "(no drain event sampled)"))
 	end
 
-	say(fmt("%sREPORT COLONY :: adds on '%s' across ALL objects=%d | removes=%d | of those, adds on objects outside this leg's census=%d | voice-eligible SHIPPED model=%d over %d real seconds (ceiling is one per %d real s = %s) | voice-eligible under the entry's assumed per-object model=%d",
+	say(fmt("%sREPORT COLONY :: adds on '%s' across ALL objects=%d | removes=%d | of those, adds on objects outside this leg's census=%d | voice-eligible SHIPPED model=%d over %d real seconds (the ceiling is one per %d real MILLISECONDS, i.e. at most %s in this window, colony-wide and shared with every other stalled building) | voice-eligible under the entry's assumed per-object model=%d",
 		C47.BannerVoid(), NOTIF_ID, C47.adds_total, C47.removes_total, C47.adds_untracked,
 		C47.voice_eligible, span_rt / 1000, VOICE_COOLDOWN_MS,
 		tostring(span_rt / VOICE_COOLDOWN_MS), C47.voice_perobj))

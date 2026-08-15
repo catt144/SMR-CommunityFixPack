@@ -149,11 +149,18 @@ if ($mode -eq "arm-sampler") {
   #     GetCurrentHarvestType MUTATES current_harvest_idx on entry
   #     (ThreeHarvestTypesBuilding.lua:41-42), so calling it to "read the crop"
   #     would advance every farm's rotation on every sample.
-  #     The scan runs over CODE ONLY: every line whose first non-space
-  #     characters are "--" is dropped first, because the payload names these
-  #     calls in its header precisely to say it does not make them, and a gate
-  #     that cannot tell a warning from a call is a gate nobody will trust.
-  $codeOnly = ($payText -split "`r?`n" | Where-Object { $_ -notmatch '^\s*--' }) -join "`n"
+  #     The scan runs over CODE ONLY: every Lua comment is removed first - whole
+  #     comment lines AND trailing ones - because the payload names these calls
+  #     in its header precisely to say it does not make them, and a gate that
+  #     cannot tell a warning from a call is a gate nobody will trust. Both
+  #     forms bit this leg on 2026-08-15: the header comments first, then a
+  #     trailing "-- the model C47.md ASSUMED" on a real assignment, which the
+  #     resolution check below read as a call to an undefined C47.md.
+  #     ⚠️ Known limit, stated rather than hidden: this strips a literal "--"
+  #     inside a Lua string too. The payload contains none (it uses em dashes in
+  #     prose); if one is ever added, this gate reports a false PASS on that
+  #     line, not a false FAIL, so re-check by eye when adding string content.
+  $codeOnly = ($payText -split "`r?`n" | ForEach-Object { ($_ -replace '--.*$', '') } | Where-Object { $_.Trim() -ne '' }) -join "`n"
   $writes = @()
   foreach ($banned in @('GetCurrentHarvestType', 'SaveGame', 'CheatFill', 'SetHarvestType',
                         'Activate', 'Deactivate', 'PlaceVegetation', 'Consume_Internal')) {
@@ -174,8 +181,13 @@ if ($mode -eq "arm-sampler") {
   $defined = @{}
   foreach ($mm in [regex]::Matches($both, '(?m)^\s*function\s+C47\.([A-Za-z_]\w*)')) { $defined[$mm.Groups[1].Value] = $true }
   foreach ($mm in [regex]::Matches($both, '(?m)^\s*C47\.([A-Za-z_]\w*)\s*=')) { $defined[$mm.Groups[1].Value] = $true }
+  # ⚠️ USES are collected from CODE ONLY, for the same reason the write-scan is:
+  #    the payload's header cites "C47.md §(c)" and other prose, and the first
+  #    arming attempt (2026-08-15 15:23) failed this gate on the unresolved name
+  #    "md". A gate that cannot tell a citation from a call gets switched off by
+  #    the next person in a hurry, which is worse than no gate.
   $used = @{}
-  foreach ($mm in [regex]::Matches($payText, 'C47\.([A-Za-z_]\w*)')) { $used[$mm.Groups[1].Value] = $true }
+  foreach ($mm in [regex]::Matches($codeOnly, 'C47\.([A-Za-z_]\w*)')) { $used[$mm.Groups[1].Value] = $true }
   $unresolved = @()
   foreach ($k in $used.Keys) { if (-not $defined.ContainsKey($k)) { $unresolved += $k } }
   if ($unresolved.Count -gt 0) {

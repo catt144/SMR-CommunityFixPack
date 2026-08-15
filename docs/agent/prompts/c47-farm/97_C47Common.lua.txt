@@ -93,10 +93,15 @@ local function fmt(...)
 end
 C47.Fmt = fmt
 
+-- ⚠️ `class` is a CLASS-table field, not an instance own key, so rawget returns
+--    nil for it and the first sampler run (2026-08-15 15:23) logged every object
+--    as "?#15779". Index it normally; keep rawget only for `handle`, which IS an
+--    own key. Same trap the wave-11 probe hit from the other direction.
 local function id_of(obj)
 	if not obj then return "nil" end
 	if type(obj) ~= "table" then return tostring(obj) end
-	return tostring(rawget(obj, "class") or "?") .. "#" .. tostring(rawget(obj, "handle"))
+	local ok, cls = pcall(function() return obj.class end)
+	return tostring((ok and cls) or rawget(obj, "class") or "?") .. "#" .. tostring(rawget(obj, "handle"))
 end
 C47.IdOf = id_of
 
