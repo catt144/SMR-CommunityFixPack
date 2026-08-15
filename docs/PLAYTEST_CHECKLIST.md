@@ -38,6 +38,64 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ⭐ NEW 2026-08-15 — the C39 repair you ruled turns out to touch TWICE as many buildings as the ruling pictured. One confirm, reading only.
+
+30. ⚖️ **You ruled "extend the compensation" on 2026-08-12 looking at four
+    Workshops. The sweep you asked for found EIGHT building families, across
+    two laws — and four of them are things nobody had looked at. Ship the
+    repair as built (recommended), or restrict it to the four Workshops?**
+    **TAKEABLE-WHEN: any time. No colony, no launch, no game — this is a
+    reading item.** Nothing is blocked: the module is built and behaves as
+    described; restricting it later is a small edit.
+
+    **Why you are being asked at all.** Your ruling explicitly widened the
+    scope — *sweep all three automation labels and cover every mismatch found* —
+    so what shipped **is** what you ruled. But the picture in front of you at
+    the time was "four Workshops whose Comfort payment is short", and the honest
+    version of that picture is now bigger, so you get to see it before it
+    reaches a store page.
+
+    **The defect, unchanged:** all three Automation laws cut a building's
+    workers by **label**, while the code that pays the workers back keys on
+    **class**. Buildings on the wrong side of that line lose half their staff
+    and get nothing back — roughly half their output. The game's own comment
+    says the two lists are assumed to match.
+
+    | | what the law halves | what it costs today |
+    |---|---|---|
+    | Art / Biorobotics / VR Workshop | ✅ already known | the Comfort their shift pays |
+    | TV Studio (CCP) | ✅ **measured 08-11** | Comfort **+ TV-show progress** |
+    | ⭐ **Security Station** | new | **renegades neutralised** — half the security you paid for |
+    | ⭐ **Security Post (CCP)** | new | same |
+    | ⭐ **Drone Assembler** | new | **drone and android build time** |
+    | ⭐ **Bottomless Pit Research Center** | new | **resources processed into research** |
+
+    The last four sit on `Service Automation` (the Security pair) and
+    `Factory Automation` (the other two) — the Factory law had never been swept.
+    Research Automation is clean.
+
+    **What the fix does to them:** exactly what the game already does for a
+    Diner or an Electronics Factory under the same law — nothing new, no new
+    number, no balance invention. Each affected building rides to roughly double
+    performance on half the staff, which is the "overall performance is
+    maintained" the code says it is aiming for.
+    **Recommendation: ship as built.** Restricting it to Workshops would mean
+    deliberately leaving Security Stations and the Drone Assembler broken while
+    fixing their neighbours, with no principle separating them.
+    ⚠️ **What you should know either way:** these are gameplay-visible numbers
+    (security, drone throughput, research), so a player who has been running
+    Automation laws will notice the difference. That is the repair working — but
+    it is a bigger visible change than "Workshops pay slightly more Comfort",
+    and prompt 03 will have to say so on the store card.
+    → the full sweep, every class chain re-read at source, and the design
+    reasoning: `agent/bugs/C39.md` §2026-08-15.
+
+ℹ️ **Also for awareness, no call needed:** the **F85** fix you ruled on 08-12
+is built the same evening — the distress-call dialog now pauses the game like
+every other popup. ⛔ Nothing is verified yet: both builds still owe an
+unattended suite run and an in-game reading (the next prompt in the chain), and
+neither counts as fixed until then.
+
 ### ⭐ NEW 2026-08-14 (later) — ④ IS CUT: your launch afternoon reads ONE sheet, and the audit found one more call that comes before any paste
 
 **The release-3 chain is closed** — both cards paste-ready and diff-proven

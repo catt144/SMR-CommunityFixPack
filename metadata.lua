@@ -145,6 +145,8 @@ return PlaceObj('ModDef', {
 		"Code/Fix_DustStormUndergroundBreaks.lua",
 		"Code/Fix_DustDevilSpawnGate.lua",
 		"Code/Fix_ExoticDepositSign.lua",
+		"Code/Fix_DistressPopupPause.lua",
+		"Code/Fix_AutomationLawCompensation.lua",
 		"Code/90_SaveSanitizer.lua",
 	},
 	'TagGameplay', true,
