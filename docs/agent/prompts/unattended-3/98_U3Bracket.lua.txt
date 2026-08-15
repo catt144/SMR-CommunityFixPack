@@ -1,0 +1,471 @@
+-- SMR Community Fix Pack — Test Kit :: unattended-3 PAYLOAD.  TEMPORARY
+--
+-- Declared by: chain unattended-3 prompt 02 (02_VERIFY_OPUS.md), Jobs 2 and 3.
+-- Runs UNATTENDED: it self-drives from file scope, carries its own watchdog and
+-- quits the process itself. Nobody is at the keyboard.
+--
+-- WHAT IT DOES, in order:
+--   boot -> wait for the pre-game main menu
+--        -> GATE: the fix pack must be loaded, or every reading below is void
+--        -> load the STAGED COPY of CP15PT15 (never the original)
+--        -> confirm the game is PAUSED and keep it paused for the whole bracket
+--        -> LEG F85: the flip reading, on the decision the module exposes
+--        -> LEG C39: scan / before / enact / after / revert, clock at EVERY read
+--        -> quit
+--
+-- ⛔⛔ THE TWO BOUNDARIES THIS FILE IS WRITTEN TO RESPECT
+--
+--  1. **F85 is a VALUE reading, never a screen claim.** This file reads the
+--     `dont_pause` decision through `SMRFixPack.defs.DistressPopupPause.
+--     clear_pause_flag` and reports the fix registry's own status. It does NOT
+--     call `PopupNotification:Init`. That method is the engine's GENERATED
+--     COMPOSITE after flattening (DefineCombinedMethod "Init",
+--     CommonLua\PropertyObject.lua:1663; the composite is built from
+--     classdefs[class].Init at CommonLua\Core\classes.lua:1636-1652), and its
+--     shipped body is `XCameraLockLayer:new(nil, self) /
+--     XSuppressInputLayer:new(nil, self) / if not self.dont_pause then
+--     XPauseLayer:new(nil, self) end` (Lua\UI\PopupNotification.lua:7-13) — i.e.
+--     calling it means parenting three real layers to a real XWindow, which is
+--     A MODAL DIALOG ON A SCREEN NOBODY IS SITTING AT. Prompt 01 ruled this out
+--     for the suite probe and the same reasoning binds here.
+--     ⇒ "the popup visibly pauses the game" IS NOT CLAIMED BY THIS RUN and no
+--       line below may be read as claiming it.
+--
+--  2. **C39's bracket is PAUSED, because the 08-12 ruling says so.** Both the
+--     enact and the revert happen at a standing GameTime so that drift cannot
+--     explain a delta, exactly as the 08-11 observation was taken. ⭐ The one
+--     recorded harness gap in that observation was that `CP15.C39Revert` took no
+--     clock line, so the pause state at revert was never evidenced. Fixed here:
+--     U3.Now() is called at EVERY read including the revert.
+--
+-- ⚠️ PREDICTION, WRITTEN BEFORE THE RUN (prompt 02's Notes-from-upstream): with
+--    `Fix_AutomationLawCompensation` active the subject `TVStudioWorkshopCCP1
+--    #1526` (12 -> 6 workers) should ride from ~127 toward roughly DOUBLE, in
+--    the shape the `Diner#1475` control was measured taking (114 -> 268 -> 124),
+--    and the revert should restore both. The arithmetic says the delta on a full
+--    reduced shift of SIX IDENTICAL workers is exactly +100 (uncompensated 100
+--    -> compensated 200); a real colony's workers differ from each other, so the
+--    SHAPE is predicted, not that literal number.
+-- ⚠️ AND THE AFTER-REVERT READING IS NOT THE BEFORE READING. Enacting FIRES the
+--    overflow workers (Workplace.lua:378-390) and they do NOT snap back; with
+--    the game paused `CheckWorkForUnemployed` cannot re-hire at all. The 08-11
+--    control went 114 -> 268 -> **124**, not back to 114. A revert that lands
+--    near-but-not-at the baseline is the EXPECTED shape, not a second defect.
+
+local say = U3.Say
+local fmt = U3.Fmt
+local idof = U3.IdOf
+
+U3.tag  = "U3B"
+U3.mode = "REAL"
+
+local STAGED_SAVE = "U3C39BR.savegame.sav"
+local C39_LAW     = "Policy_Automation_ServiceAutomation"
+
+-- The state this payload carries between legs, declared at file scope so the
+-- ARM script's G1 resolution cross-check can see every name (a mid-line or
+-- multi-target assignment inside a function body is a real definition, but it
+-- is not one a static gate can find — and weakening the gate to find it would
+-- be the wrong repair).
+U3.subject = nil
+U3.control = nil
+U3.c39_mismatched = nil
+U3.before_s = nil
+U3.before_c = nil
+U3.after_s = nil
+U3.after_c = nil
+
+-- The eight families the 2026-08-15 static sweep found on an automation label,
+-- that ARE Workplaces, and that fail all three IsKindOf gates. Printed against
+-- what this colony actually holds, so "not measured" is a named absence rather
+-- than a silence (docs/agent/bugs/C39.md §2026-08-15).
+local MISMATCH_FAMILIES = {
+	"ArtWorkshop", "BioroboticsWorkshop", "VRWorkshop", "TVStudioWorkshopCCP1",
+	"SecurityStation", "SecurityPostCCP1",
+	"DroneFactory", "BottomlessPitResearchCenter",
+}
+local AUTOMATION_LABELS = { "ServiceBuildings", "FactoryBuildings", "ResearchBuildings" }
+
+---- LEG F85 — the flip reading ----------------------------------------------
+--
+-- Everything here is a VALUE read. Read the header's boundary 1 before quoting
+-- any of it.
+function U3.F85()
+	if not U3.Guard("F85") then return false end
+	U3.Label("FORCED", "SMRFixPack.defs.DistressPopupPause.clear_pause_flag driven with fixtures",
+		"the module's own decision, called directly — the live call site is a modal dialog and is deliberately NOT touched")
+	U3.Now("F85 reading")
+
+	local pack = rawget(_G, "SMRFixPack")
+	local entry = pack and pack.fixes and pack.fixes.DistressPopupPause
+	say(fmt("F85 INSTALL :: SMRFixPack.fixes.DistressPopupPause.status=%s detail='%s' — ⭐ THIS IS THE INSTALL WITNESS BY DESIGN: apply() reads PopupNotification.Init back after assigning it and returns a reason string if the write did not land, so a status of 'active' means the class write landed. `debug.getinfo` cannot see the wrapper (after flattening the method is the generated composite, whose source is classes.lua), which is why an [install] probe was not built.",
+		tostring(entry and entry.status), tostring(entry and entry.detail)))
+
+	-- the mechanism is still the mechanism, read live on the flattened class
+	local C = rawget(_G, "PopupNotification")
+	say(fmt("F85 MECHANISM :: PopupNotification present=%s | class-default dont_pause=%s (type %s; vanilla ships false, PopupNotification.lua:5) | XPauseLayer present=%s | StdMessageDialog present=%s",
+		tostring(C ~= nil), tostring(C and rawget(C, "dont_pause")),
+		type(C and rawget(C, "dont_pause")),
+		tostring(rawget(_G, "XPauseLayer") ~= nil),
+		tostring(rawget(_G, "StdMessageDialog") ~= nil)))
+
+	local def = pack and pack.defs and pack.defs.DistressPopupPause
+	local clear = type(def) == "table" and def.clear_pause_flag
+	if type(clear) ~= "function" then
+		say("F85 ⛔ clear_pause_flag is not exposed — nothing sampled. This is a build mismatch, not a result.")
+		return false
+	end
+
+	-- 1. the subject: the distress dialog's own state. OpenPopupNotification
+	--    hands the flag to the constructor (PopupNotification.lua:153), so by
+	--    the time Init runs `self.dont_pause` is the context's `true`.
+	local subject = { dont_pause = true, marker = "subject" }
+	U3.Try("clear_pause_flag{dont_pause=true} [the distress dialog's shape]", clear, subject)
+	say(fmt("F85 SUBJECT   :: dont_pause true -> %s (type %s) | other field untouched=%s | ⇒ vanilla's own Init would now take its `if not self.dont_pause` branch and construct XPauseLayer",
+		tostring(subject.dont_pause), type(subject.dont_pause),
+		tostring(subject.marker == "subject")))
+
+	-- 2. the negative control: every other popup in the game
+	local control = { dont_pause = false, marker = "control" }
+	U3.Try("clear_pause_flag{dont_pause=false} [every other popup]", clear, control)
+	say(fmt("F85 CONTROL   :: dont_pause false -> %s (type %s) — an already-pausing popup must be unchanged",
+		tostring(control.dont_pause), type(control.dont_pause)))
+
+	-- 3. the absent-flag control: `false` would read the same to Init but is a
+	--    write we have no business making (FIX_POLICY §2, foreign objects)
+	local absent = { marker = "absent" }
+	U3.Try("clear_pause_flag{no dont_pause field at all}", clear, absent)
+	say(fmt("F85 ABSENT    :: dont_pause nil -> %s (type %s) — the field must still be ABSENT, not false",
+		tostring(absent.dont_pause), type(absent.dont_pause)))
+
+	-- 4. idempotence
+	U3.Try("clear_pause_flag second pass over the subject", clear, subject)
+	say(fmt("F85 IDEMPOTENT:: second pass leaves dont_pause=%s", tostring(subject.dont_pause)))
+
+	U3.Applicable("F85-fixtures-driven(the whole contract: subject, already-pausing control, absent-flag control, idempotence)",
+		4, 4, "SMRFixPack.defs.DistressPopupPause.clear_pause_flag called in this live process, after flattening, with the pack loaded")
+	say("F85 ⛔ NOT CLAIMED BY THIS RUN: that the distress dialog visibly pauses the game on screen. That is a SCREEN EVENT and no log line can witness it. What is claimed is exactly this: the flag the shipped Init branches on is cleared for the one popup that sets it, and for nothing else.")
+	U3.Now("F85 done")
+	return true
+end
+
+---- LEG C39 — the paused bracket --------------------------------------------
+
+local function c39_read_one(tag, when, b)
+	if not b then
+		say(fmt("C39 %s %s :: NOT-APPLICABLE — no such building in this colony.", tostring(tag), tostring(when)))
+		return nil
+	end
+	local ok_s, is_service = pcall(function() return b:IsKindOf("Service") end)
+	local ok_f, is_factory = pcall(function() return b:IsKindOf("Factory") end)
+	local ok_r, is_res     = pcall(function() return b:IsKindOf("ResearchBuilding") end)
+	local ok_w, is_wp      = pcall(function() return b:IsKindOf("Workplace") end)
+	local shifts = {}
+	for i, list in ipairs(rawget(b, "workers") or empty_table) do
+		shifts[i] = tostring(#list)
+	end
+	local perf = rawget(b, "performance")
+
+	-- ⭐ the LIVE method, called directly — this is the number the repair moves,
+	--    read from the game's own call rather than from the cached field.
+	local shift = rawget(b, "current_shift") or 1
+	if (rawget(b, "active_shift") or 0) > 0 then shift = rawget(b, "active_shift") end
+	local ok_g, live = pcall(function() return b:GetWorkshiftPerformance(shift) end)
+
+	-- ⭐ and OUR OWN correction, on this very object, so the log carries what the
+	--    repair contributed rather than only the sum
+	local defs = rawget(_G, "SMRFixPack")
+	local dfn  = defs and defs.defs and defs.defs.AutomationLawCompensation
+	local delta_of = type(dfn) == "table" and dfn.compensation_delta
+	local ok_d, delta = false, nil
+	if type(delta_of) == "function" then
+		ok_d, delta = pcall(delta_of, b, shift, rawget(_G, "ActiveLaws"))
+	end
+
+	say(fmt("C39 %s %s :: %s | Workplace=%s Service=%s (raw=%s) Factory=%s ResearchBuilding=%s | base_max_workers=%s max_workers=%s | current_shift=%s active_shift=%s | shifts=%s | performance(field)=%s | GetWorkshiftPerformance(%s)=%s (ok=%s) | OUR delta on this object=%s (ok=%s) | vanilla-would-have-said=%s",
+		tostring(tag), tostring(when), idof(b),
+		tostring(not not is_wp), tostring(not not is_service), tostring(is_service),
+		tostring(not not is_factory), tostring(not not is_res),
+		tostring(rawget(b, "base_max_workers")), tostring(rawget(b, "max_workers")),
+		tostring(rawget(b, "current_shift")), tostring(rawget(b, "active_shift")),
+		"{" .. table.concat(shifts, "/") .. "}",
+		tostring(perf), tostring(shift), tostring(live), tostring(ok_g),
+		tostring(delta), tostring(ok_d),
+		tostring((type(live) == "number" and type(delta) == "number") and (live - delta) or "n/a")))
+
+	local mods = rawget(b, "modifications")
+	local mw = mods and mods.max_workers
+	if mw and mw[1] then
+		say(fmt("C39 %s %s :: modifications.max_workers[1]{amount=%s percent=%s} count=%d — this is where the law's -50%% lands, and it is what the repair's discriminator matches on",
+			tostring(tag), tostring(when), tostring(mw[1].amount), tostring(mw[1].percent), #mw))
+	else
+		say(fmt("C39 %s %s :: modifications.max_workers = none", tostring(tag), tostring(when)))
+	end
+	return { perf = perf, live = live, delta = delta,
+		max_workers = rawget(b, "max_workers"), shifts = table.concat(shifts, "/") }
+end
+
+-- Walk every automation label and split it on the class gates. This is C39's
+-- whole claim, measured on the live colony instead of counted in a data file.
+function U3.C39Scan()
+	if not U3.Guard("C39Scan") then return false end
+	U3.Label("ORGANIC", "C39 label scan", "reads only, no law enacted yet")
+	local colony = rawget(_G, "UIColony")
+	U3.c39_mismatched = {}
+	local total_members, total_outside = 0, 0
+
+	for _, label in ipairs(AUTOMATION_LABELS) do
+		local list = (colony and colony.labels and colony.labels[label]) or empty_table
+		local inside, outside = 0, 0
+		for i, b in ipairs(list) do
+			local ok_s, is_service = pcall(function() return b:IsKindOf("Service") end)
+			local ok_f, is_factory = pcall(function() return b:IsKindOf("Factory") end)
+			local ok_r, is_res     = pcall(function() return b:IsKindOf("ResearchBuilding") end)
+			local ok_w, is_wp      = pcall(function() return b:IsKindOf("Workplace") end)
+			local gated = (is_service or is_factory or is_res) and true or false
+			if gated then inside = inside + 1 else outside = outside + 1 end
+			if is_wp and not gated then
+				U3.c39_mismatched[#U3.c39_mismatched + 1] = b
+			end
+			say(fmt("C39SCAN %s [%d] %s | Workplace=%s | Service=%s Factory=%s ResearchBuilding=%s (ok=%s/%s/%s) | reaches-the-compensating-branch=%s | base_max_workers=%s max_workers=%s performance=%s",
+				label, i, idof(b), tostring(not not is_wp),
+				tostring(not not is_service), tostring(not not is_factory), tostring(not not is_res),
+				tostring(ok_s), tostring(ok_f), tostring(ok_r), tostring(gated),
+				tostring(rawget(b, "base_max_workers")), tostring(rawget(b, "max_workers")),
+				tostring(rawget(b, "performance"))))
+		end
+		total_members = total_members + #list
+		total_outside = total_outside + outside
+		say(fmt("C39SCAN %s :: %d member(s) — %d reach the compensating branch (Workplace.lua:205-217), %d do NOT",
+			label, #list, inside, outside))
+		U3.Applicable("C39-population(" .. label .. ")", #list, #list,
+			"UIColony.labels." .. label .. " walked this load — the same container LawEffectModifyLabel:OnStart writes to")
+	end
+
+	U3.Applicable("C39-subject-population(automation-label members that ARE Workplaces and fail all three class gates — the mismatch set)",
+		#U3.c39_mismatched, total_members, "IsKindOf evaluated per member this load, over all three automation labels")
+
+	-- name the eight families against what this colony holds, so an absence is
+	-- an absence BY NAME and never a silence
+	for _, family in ipairs(MISMATCH_FAMILIES) do
+		local n = 0
+		for _, b in ipairs(U3.c39_mismatched) do
+			if tostring(rawget(b, "class")) == family then n = n + 1 end
+		end
+		say(fmt("C39SCAN family %s :: %d present in this colony%s", family, n,
+			n == 0 and " — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)" or ""))
+	end
+	return true
+end
+
+function U3.C39Set()
+	if not U3.Guard("C39Set") then return false end
+	-- the 08-11 subject and control, resolved BY HANDLE so the bracket is the
+	-- same two objects the sign was settled on
+	local colony = rawget(_G, "UIColony")
+	local svc = (colony and colony.labels and colony.labels.ServiceBuildings) or empty_table
+	for _, b in ipairs(svc) do
+		local h = rawget(b, "handle")
+		if h == 1526 then U3.subject = b end
+		if h == 1475 then U3.control = b end
+	end
+	-- fall back to CLASS if the handles moved: any mismatched Workplace as
+	-- subject, any Service member in the same dome as control
+	if not U3.subject then
+		U3.subject = (U3.c39_mismatched or empty_table)[1]
+		if U3.subject then say("C39SET ⚠️ handle 1526 did not resolve — falling back to the first mismatched Workplace found. SAY SO in the record; this is not the 08-11 subject.") end
+	end
+	if not U3.control then
+		for _, b in ipairs(svc) do
+			local ok, is_service = pcall(function() return b:IsKindOf("Service") end)
+			if is_service and rawget(b, "max_workers") then U3.control = b; break end
+		end
+		if U3.control then say("C39SET ⚠️ handle 1475 did not resolve — falling back to the first staffed Service member. SAY SO in the record.") end
+	end
+	say(fmt("C39SET :: subject=%s (want TVStudioWorkshopCCP1#1526) | control=%s (want Diner#1475) | same dome=%s",
+		idof(U3.subject), idof(U3.control),
+		tostring(U3.subject and U3.control and rawget(U3.subject, "parent_dome") == rawget(U3.control, "parent_dome"))))
+	return U3.subject ~= nil
+end
+
+local function c39_law()
+	local defs = rawget(_G, "LawDefs") or empty_table
+	return defs[C39_LAW]
+end
+
+function U3.C39Before()
+	if not U3.Guard("C39Before") then return false end
+	U3.Label("ORGANIC", "C39 baseline", "reads only, law not yet enacted")
+	local active = (rawget(_G, "ActiveLaws") or empty_table)[C39_LAW]
+	local law = c39_law()
+	local ok_p, param = pcall(function() return (active or law):GetParameterValue("automation_workforce_reduction") end)
+	say(fmt("C39 BEFORE :: ActiveLaws.%s=%s (truthy=%s) | LawDefs.%s=%s | automation_workforce_reduction=%s (ok=%s; the LawDef Parameters block says -50)",
+		C39_LAW, tostring(active), tostring(not not active), C39_LAW, tostring(law),
+		tostring(param), tostring(ok_p)))
+	if active then
+		say("C39 BEFORE ⚠️ THE LAW IS ALREADY ACTIVE on this save. The before/after bracket cannot be taken from here — record the state; do not report a delta.")
+	end
+	U3.Now("C39 before")
+	U3.before_s = c39_read_one("subject", "before", U3.subject)
+	U3.before_c = c39_read_one("control", "before", U3.control)
+	return true
+end
+
+function U3.C39Enact()
+	if not U3.Guard("C39Enact") then return false end
+	U3.Label("FORCED", "LawDefs." .. C39_LAW .. ":Activate()",
+		"the enactment a passed Assembly vote would perform, called directly — the vote flow is skipped, the effect path is identical")
+	local law = c39_law()
+	if not law then
+		say("C39 ⛔ LawDefs." .. C39_LAW .. " is nil. Nothing enacted.")
+		return false
+	end
+	U3.Try("LawDefs." .. C39_LAW .. ":Activate() [FIRST EXECUTION]", function()
+		law:Activate()
+		return (rawget(_G, "ActiveLaws") or empty_table)[C39_LAW] ~= nil
+	end)
+	local active = (rawget(_G, "ActiveLaws") or empty_table)[C39_LAW]
+	say(fmt("%sC39 ENACT :: ActiveLaws.%s after the call = %s (truthy=%s) — this is the liveness witness, not the absence of an error",
+		U3.Void(), C39_LAW, tostring(active), tostring(not not active)))
+	return not not active
+end
+
+local function delta_line(tag, a, b)
+	if not a or not b then
+		say(fmt("%sC39DELTA %s :: NOT COMPARABLE — a reading is missing", U3.Void(), tag))
+		return
+	end
+	say(fmt("%sC39DELTA %s :: max_workers %s -> %s | shifts %s -> %s | performance(field) %s -> %s | GetWorkshiftPerformance %s -> %s | OUR delta %s -> %s",
+		U3.Void(), tag, tostring(a.max_workers), tostring(b.max_workers),
+		tostring(a.shifts), tostring(b.shifts),
+		tostring(a.perf), tostring(b.perf),
+		tostring(a.live), tostring(b.live),
+		tostring(a.delta), tostring(b.delta)))
+end
+
+function U3.C39After()
+	if not U3.Guard("C39After") then return false end
+	U3.Now("C39 after enact")
+	local s = c39_read_one("subject", "after-enact", U3.subject)
+	local c = c39_read_one("control", "after-enact", U3.control)
+	delta_line("subject(outside the compensated classes — the repair's target)", U3.before_s, s)
+	delta_line("control(inside the compensated classes — vanilla already pays it)", U3.before_c, c)
+	-- every mismatched Workplace in the colony, not only the named subject
+	for i, b in ipairs(U3.c39_mismatched or empty_table) do
+		c39_read_one("mismatched[" .. i .. "]", "after-enact", b)
+	end
+	say("C39 AFTER :: ⚖️ THE READING. With the repair active the SUBJECT should now ride toward roughly double, in the shape the control was measured taking on 2026-08-11 (114 -> 268). Report the raw numbers; the CONTROL must be unchanged from vanilla's own behaviour — our delta on it must read 0, because the shipped gate already pays it and paying twice would be the defect we introduced.")
+	say("C39 AFTER :: ⚠️ if the subject's worker count fell below its new max_workers the shift is NOT full and the ~2x arithmetic does not apply — say so instead of comparing.")
+	U3.after_s, U3.after_c = s, c
+	return true
+end
+
+function U3.C39Revert()
+	if not U3.Guard("C39Revert") then return false end
+	U3.Label("FORCED", "LawDefs." .. C39_LAW .. ":Deactivate()",
+		"reverts the enactment and restores the policy default (ClassDef-Factions.generated.lua:1796-1813)")
+	local law = c39_law()
+	if not law then say("C39 ⛔ LawDefs." .. C39_LAW .. " is nil. Nothing reverted.") return false end
+	U3.Try("LawDefs." .. C39_LAW .. ":Deactivate() [FIRST EXECUTION]", function()
+		law:Deactivate()
+		return (rawget(_G, "ActiveLaws") or empty_table)[C39_LAW] == nil
+	end)
+	local active = (rawget(_G, "ActiveLaws") or empty_table)[C39_LAW]
+	say(fmt("%sC39 REVERT :: ActiveLaws.%s after the call = %s (truthy=%s)",
+		U3.Void(), C39_LAW, tostring(active), tostring(not not active)))
+	-- ⭐ THE LINE THE 08-11 BRACKET DID NOT TAKE. Clock first, then the reads.
+	U3.Now("C39 after revert")
+	local s = c39_read_one("subject", "after-revert", U3.subject)
+	local c = c39_read_one("control", "after-revert", U3.control)
+	delta_line("subject enact->revert", U3.after_s, s)
+	delta_line("control enact->revert", U3.after_c, c)
+	say("C39 REVERT :: ⚠️ workers fired by the enactment do NOT snap back, and with the game PAUSED CheckWorkForUnemployed cannot re-hire at all — the 08-11 control went 114 -> 268 -> 124, not back to 114. An after-revert reading near-but-not-at the baseline is the EXPECTED shape, not a second defect.")
+	say("C39 REVERT :: ⭐ our delta must read 0 on every object once the law is gone — that is the repair standing down, and it is the check that it is not a standing bonus.")
+	return true
+end
+
+---- the leg body ------------------------------------------------------------
+
+U3.watchdog = 12 * 60 * 1000
+
+function U3.Boot()
+	CreateRealTimeThread(function()
+		Sleep(1)
+		say("=== unattended-3 U3B === payload loaded. Mode " .. tostring(U3.mode)
+			.. ". Staged save: " .. STAGED_SAVE)
+
+		-- watchdog in its own thread, so it still fires if the flow wedges
+		CreateRealTimeThread(function()
+			local deadline = RealTime() + U3.watchdog
+			while U3.stage ~= "done" do
+				if RealTime() - deadline >= 0 then
+					say("TIMEOUT " .. tostring(U3.stage))
+					local flush = rawget(_G, "FlushLogFile")
+					if flush then flush() end
+					Sleep(1000)
+					quit()
+					return
+				end
+				Sleep(1000)
+			end
+		end)
+
+		-- an unattended session has no one to click the welcome popup
+		if rawget(_G, "ShowStartGamePopup") then
+			ShowStartGamePopup = function() end
+			say("ShowStartGamePopup neutered for this unattended run")
+		end
+
+		U3.stage = "waiting-menu"
+		if not U3.WaitFor(5 * 60 * 1000, function() return not not GetPreGameMainMenu() end) then
+			say("TIMEOUT waiting-menu")
+			U3.stage = "done" Sleep(2000) quit() return
+		end
+		Sleep(2000)
+
+		-- ⛔ THE RUN-TOP GATE. Default is to stop.
+		U3.stage = "gate"
+		if not U3.RequirePackLoaded("run top, at the main menu, before anything is loaded") then
+			say("⛔ RUN ABANDONED AT THE GATE. Nothing was loaded, read or changed.")
+			U3.ErrorWatchNote()
+			U3.stage = "done" Sleep(2000) quit() return
+		end
+		U3.ReadConditions("main menu, before the load",
+			{ "DistressPopupPause", "AutomationLawCompensation" })
+
+		U3.stage = "loading"
+		local load_ok, load_res = U3.TryYield("load " .. STAGED_SAVE, function() return U3.Load(STAGED_SAVE) end)
+		if not (load_ok and load_res) then
+			say("⛔ LOAD FAILED — no bracket. Nothing below this line exists.")
+			U3.ErrorWatchNote()
+			U3.stage = "done" Sleep(2000) quit() return
+		end
+		U3.ReadConditions("after the load, in the colony",
+			{ "DistressPopupPause", "AutomationLawCompensation" })
+
+		U3.stage = "F85"
+		U3.TryYield("leg F85", U3.F85)
+
+		U3.stage = "C39"
+		U3.TryYield("leg C39Scan",   U3.C39Scan)
+		U3.TryYield("leg C39Set",    U3.C39Set)
+		U3.TryYield("leg C39Before", U3.C39Before)
+		U3.TryYield("leg C39Enact",  U3.C39Enact)
+		Sleep(2000)                                  -- let OnModifiableValueChanged settle
+		U3.TryYield("leg C39After",  U3.C39After)
+		U3.TryYield("leg C39Revert", U3.C39Revert)
+		Sleep(2000)
+
+		U3.stage = "closing"
+		U3.ReadConditions("at close", { "DistressPopupPause", "AutomationLawCompensation" })
+		U3.Now("close")
+		U3.ErrorWatchNote()
+		say("=== unattended-3 U3B === DONE. Quitting. ⛔ Nothing was saved: this run never calls SaveGame, so the staged copy on disk is byte-identical to the one staged before the launch.")
+		U3.stage = "done"
+		Sleep(3000)
+		quit()
+	end)
+end
+
+say("[U3B] 98_U3Bracket loaded — self-driving in 1 tick.")
+U3.Boot()

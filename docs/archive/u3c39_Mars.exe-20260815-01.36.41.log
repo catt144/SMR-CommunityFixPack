@@ -1,0 +1,478 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	45%
+Disk Free      	743245 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:069
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:072
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:398
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:524
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:717
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:364
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:418
+Lua revision: 396349
+Assets revision: 31031
+						Lua 0:00:02:419
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:416
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:418
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:17:762
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:763
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:768
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:769
+[mod] [U3B] [U3B] 98_U3Bracket loaded — self-driving in 1 tick.
+[U3B] [U3B] 98_U3Bracket loaded — self-driving in 1 tick.
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+						Lua 0:00:17:770
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+						Lua 0:00:17:771
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+						Lua 0:00:17:772
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:17:773
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:774
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+						Lua 0:00:17:775
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+						Lua 0:00:17:776
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+						Lua 0:00:17:777
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] DistressPopupPause: applied
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+						Lua 0:00:17:778
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+						Lua 0:00:17:779
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:329
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:403
+Reloading done in 976 ms
+						Lua 0:00:18:736
+[preset] Preset postprocess took 65 ms.
+						Lua 0:00:18:784
+479 / 479 particle streams loaded in 44 ms.
+						Lua 0:00:18:785
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:978
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:032
+[mod] [U3B] === unattended-3 U3B === payload loaded. Mode REAL. Staged save: U3C39BR.savegame.sav
+[U3B] === unattended-3 U3B === payload loaded. Mode REAL. Staged save: U3C39BR.savegame.sav
+[mod] [U3B] ShowStartGamePopup neutered for this unattended run
+[U3B] ShowStartGamePopup neutered for this unattended run
+						Lua 0:00:19:033
+[PdxSDK] Started up. Took 1607
+						Lua 0:00:19:058
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:475
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+						Lua 0:00:19:476
+[Braze] Failed to init
+						Lua 0:00:19:556
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:493
+[mod] [U3B] GATE pack-loaded OK :: 76/76 modules active :: run top, at the main menu, before anything is loaded
+[U3B] GATE pack-loaded OK :: 76/76 modules active :: run top, at the main menu, before anything is loaded
+[mod] [U3B] CONDITIONS pack=76/76 active | map= | speed=1 | loads_this_process=0 | mode=REAL | note=main menu, before the load
+[U3B] CONDITIONS pack=76/76 active | map= | speed=1 | loads_this_process=0 | mode=REAL | note=main menu, before the load
+[mod] [U3B] CONDITIONS opt-in pack=8/8 active
+[U3B] CONDITIONS opt-in pack=8/8 active
+[mod] [U3B] CONDITIONS by-name DistressPopupPause = active | detail=
+[U3B] CONDITIONS by-name DistressPopupPause = active | detail=
+[mod] [U3B] CONDITIONS by-name AutomationLawCompensation = active | detail=
+[U3B] CONDITIONS by-name AutomationLawCompensation = active | detail=
+						Lua 0:00:21:588
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:21:597
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:622
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:23:393
+*** Assets reloaded in 1.8 s, read 202.1 MB, read speed 112.5 MB/s, average read 4949 bytes.
+						Lua 0:00:27:587
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:27:600
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: BlueSun, Brazil
+    mystery_random: 
+    game_rules: EasyResearch, MoreApplicants, UnlockedPolicies
+more_game_settings: save_game_id: UR-Hx4vC131ZHsAM, mystery: LightsMystery, coordinates: 1N134W, landing_spot: , logo: ColonizationEffort
+map_conditions: altitude: 1379, temperature: -1, cold_wave: 0, dust_devils: 83, dust_storm: 219, meteors: 73
+map_resources: concrete: 146, metals: 110, precious_metals: 110, water: 146
+						Lua 0:00:27:631
+Game Loaded in 6043 ms
+						Lua 0:00:27:663
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:28:560
+Game loaded on map BlankBigTerraceCMix_10 in 7067 ms
+[mod] [U3B] LOAD OK #1 file=U3C39BR.savegame.sav — LoadGame returned no error
+[U3B] LOAD OK #1 file=U3C39BR.savegame.sav — LoadGame returned no error
+						Lua 0:00:30:865
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:43:561
+[mod] [U3B] READ speed after load: before=0x after=0x | forced_to_zero=false | PAUSED=true — the bracket below is void if this is not 0x
+[U3B] READ speed after load: before=0x after=0x | forced_to_zero=false | PAUSED=true — the bracket below is void if this is not 0x
+[mod] [U3B] TRY load U3C39BR.savegame.sav (yielding) ok=true result=true
+[U3B] TRY load U3C39BR.savegame.sav (yielding) ok=true result=true
+[mod] [U3B] CONDITIONS pack=76/76 active | map=BlankBigTerraceCMix_10 | speed=0 | loads_this_process=1 | mode=REAL | note=after the load, in the colony
+[U3B] CONDITIONS pack=76/76 active | map=BlankBigTerraceCMix_10 | speed=0 | loads_this_process=1 | mode=REAL | note=after the load, in the colony
+[mod] [U3B] CONDITIONS opt-in pack=8/8 active
+[U3B] CONDITIONS opt-in pack=8/8 active
+[mod] [U3B] CONDITIONS by-name DistressPopupPause = active | detail=
+[U3B] CONDITIONS by-name DistressPopupPause = active | detail=
+[mod] [U3B] CONDITIONS by-name AutomationLawCompensation = active | detail=
+[U3B] CONDITIONS by-name AutomationLawCompensation = active | detail=
+[mod] [U3B] GATE pack-loaded OK :: 76/76 modules active :: leg F85
+[U3B] GATE pack-loaded OK :: 76/76 modules active :: leg F85
+[mod] [U3B] FORCED :: SMRFixPack.defs.DistressPopupPause.clear_pause_flag driven with fixtures :: the module's own decision, called directly — the live call site is a modal dialog and is deliberately NOT touched
+[U3B] FORCED :: SMRFixPack.defs.DistressPopupPause.clear_pause_flag driven with fixtures :: the module's own decision, called directly — the live call site is a modal dialog and is deliberately NOT touched
+[mod] [U3B] CLOCK F85 reading :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=33473
+[U3B] CLOCK F85 reading :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=33473
+[mod] [U3B] F85 INSTALL :: SMRFixPack.fixes.DistressPopupPause.status=active detail='' — ⭐ THIS IS THE INSTALL WITNESS BY DESIGN: apply() reads PopupNotification.Init back after assigning it and returns a reason string if the write did not land, so a status of 'active' means the class write landed. `debug.getinfo` cannot see the wrapper (after flattening the method is the generated composite, whose source is classes.lua), which is why an [install] probe was not built.
+[U3B] F85 INSTALL :: SMRFixPack.fixes.DistressPopupPause.status=active detail='' — ⭐ THIS IS THE INSTALL WITNESS BY DESIGN: apply() reads PopupNotification.Init back after assigning it and returns a reason string if the write did not land, so a status of 'active' means the class write landed. `debug.getinfo` cannot see the wrapper (after flattening the method is the generated composite, whose source is classes.lua), which is why an [install] probe was not built.
+[mod] [U3B] F85 MECHANISM :: PopupNotification present=true | class-default dont_pause=false (type boolean; vanilla ships false, PopupNotification.lua:5) | XPauseLayer present=true | StdMessageDialog present=true
+[U3B] F85 MECHANISM :: PopupNotification present=true | class-default dont_pause=false (type boolean; vanilla ships false, PopupNotification.lua:5) | XPauseLayer present=true | StdMessageDialog present=true
+[mod] [U3B] TRY clear_pause_flag{dont_pause=true} [the distress dialog's shape] ok=true result=table: 00000254008540B8
+[U3B] TRY clear_pause_flag{dont_pause=true} [the distress dialog's shape] ok=true result=table: 00000254008540B8
+[mod] [U3B] F85 SUBJECT   :: dont_pause true -> false (type boolean) | other field untouched=true | ⇒ vanilla's own Init would now take its `if not self.dont_pause` branch and construct XPauseLayer
+[U3B] F85 SUBJECT   :: dont_pause true -> false (type boolean) | other field untouched=true | ⇒ vanilla's own Init would now take its `if not self.dont_pause` branch and construct XPauseLayer
+[mod] [U3B] TRY clear_pause_flag{dont_pause=false} [every other popup] ok=true result=table: 00000254007E27C8
+[U3B] TRY clear_pause_flag{dont_pause=false} [every other popup] ok=true result=table: 00000254007E27C8
+[mod] [U3B] F85 CONTROL   :: dont_pause false -> false (type boolean) — an already-pausing popup must be unchanged
+[U3B] F85 CONTROL   :: dont_pause false -> false (type boolean) — an already-pausing popup must be unchanged
+[mod] [U3B] TRY clear_pause_flag{no dont_pause field at all} ok=true result=table: 000002540070F628
+[U3B] TRY clear_pause_flag{no dont_pause field at all} ok=true result=table: 000002540070F628
+[mod] [U3B] F85 ABSENT    :: dont_pause nil -> nil (type nil) — the field must still be ABSENT, not false
+[U3B] F85 ABSENT    :: dont_pause nil -> nil (type nil) — the field must still be ABSENT, not false
+[mod] [U3B] TRY clear_pause_flag second pass over the subject ok=true result=table: 00000254008540B8
+[U3B] TRY clear_pause_flag second pass over the subject ok=true result=table: 00000254008540B8
+[mod] [U3B] F85 IDEMPOTENT:: second pass leaves dont_pause=false
+[U3B] F85 IDEMPOTENT:: second pass leaves dont_pause=false
+[mod] [U3B] READ F85-fixtures-driven(the whole contract: subject, already-pausing control, absent-flag control, idempotence) = 4 | population=4 | APPLICABLE=true | witness=SMRFixPack.defs.DistressPopupPause.clear_pause_flag called in this live process, after flattening, with the pack loaded
+[U3B] READ F85-fixtures-driven(the whole contract: subject, already-pausing control, absent-flag control, idempotence) = 4 | population=4 | APPLICABLE=true | witness=SMRFixPack.defs.DistressPopupPause.clear_pause_flag called in this live process, after flattening, with the pack loaded
+[mod] [U3B] F85 ⛔ NOT CLAIMED BY THIS RUN: that the distress dialog visibly pauses the game on screen. That is a SCREEN EVENT and no log line can witness it. What is claimed is exactly this: the flag the shipped Init branches on is cleared for the one popup that sets it, and for nothing else.
+[U3B] F85 ⛔ NOT CLAIMED BY THIS RUN: that the distress dialog visibly pauses the game on screen. That is a SCREEN EVENT and no log line can witness it. What is claimed is exactly this: the flag the shipped Init branches on is cleared for the one popup that sets it, and for nothing else.
+[mod] [U3B] CLOCK F85 done :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=33473
+[U3B] CLOCK F85 done :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=33473
+[mod] [U3B] TRY leg F85 (yielding) ok=true result=true
+[U3B] TRY leg F85 (yielding) ok=true result=true
+[mod] [U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Scan
+[U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Scan
+[mod] [U3B] ORGANIC :: C39 label scan :: reads only, no law enacted yet
+[U3B] ORGANIC :: C39 label scan :: reads only, no law enacted yet
+[mod] [U3B] C39SCAN ServiceBuildings [1] MegaMall#1471 | Workplace=true | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=5 max_workers=5 performance=90
+[U3B] C39SCAN ServiceBuildings [1] MegaMall#1471 | Workplace=true | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=5 max_workers=5 performance=90
+[mod] [U3B] C39SCAN ServiceBuildings [2] ShopsFood#1474 | Workplace=true | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=1 max_workers=nil performance=107
+[U3B] C39SCAN ServiceBuildings [2] ShopsFood#1474 | Workplace=true | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=1 max_workers=nil performance=107
+[mod] [U3B] C39SCAN ServiceBuildings [3] Diner#1475 | Workplace=true | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=2 max_workers=2 performance=130
+[U3B] C39SCAN ServiceBuildings [3] Diner#1475 | Workplace=true | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=2 max_workers=2 performance=130
+[mod] [U3B] C39SCAN ServiceBuildings [4] OpenAirGym#1476 | Workplace=false | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=nil max_workers=nil performance=nil
+[U3B] C39SCAN ServiceBuildings [4] OpenAirGym#1476 | Workplace=false | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=nil max_workers=nil performance=nil
+[mod] [U3B] C39SCAN ServiceBuildings [5] Spacebar_Small#1478 | Workplace=true | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=1 max_workers=nil performance=103
+[U3B] C39SCAN ServiceBuildings [5] Spacebar_Small#1478 | Workplace=true | Service=true Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=true | base_max_workers=1 max_workers=nil performance=103
+[mod] [U3B] C39SCAN ServiceBuildings [6] TVStudioWorkshopCCP1#1526 | Workplace=true | Service=false Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=false | base_max_workers=12 max_workers=12 performance=102
+[U3B] C39SCAN ServiceBuildings [6] TVStudioWorkshopCCP1#1526 | Workplace=true | Service=false Factory=false ResearchBuilding=false (ok=true/true/true) | reaches-the-compensating-branch=false | base_max_workers=12 max_workers=12 performance=102
+						Lua 0:00:43:562
+[mod] [U3B] C39SCAN ServiceBuildings :: 6 member(s) — 5 reach the compensating branch (Workplace.lua:205-217), 1 do NOT
+[U3B] C39SCAN ServiceBuildings :: 6 member(s) — 5 reach the compensating branch (Workplace.lua:205-217), 1 do NOT
+[mod] [U3B] READ C39-population(ServiceBuildings) = 6 | population=6 | APPLICABLE=true | witness=UIColony.labels.ServiceBuildings walked this load — the same container LawEffectModifyLabel:OnStart writes to
+[U3B] READ C39-population(ServiceBuildings) = 6 | population=6 | APPLICABLE=true | witness=UIColony.labels.ServiceBuildings walked this load — the same container LawEffectModifyLabel:OnStart writes to
+[mod] [U3B] C39SCAN FactoryBuildings :: 0 member(s) — 0 reach the compensating branch (Workplace.lua:205-217), 0 do NOT
+[U3B] C39SCAN FactoryBuildings :: 0 member(s) — 0 reach the compensating branch (Workplace.lua:205-217), 0 do NOT
+[mod] [U3B] READ C39-population(FactoryBuildings) = 0 | population=0 | APPLICABLE=false | witness=UIColony.labels.FactoryBuildings walked this load — the same container LawEffectModifyLabel:OnStart writes to
+[U3B] READ C39-population(FactoryBuildings) = 0 | population=0 | APPLICABLE=false | witness=UIColony.labels.FactoryBuildings walked this load — the same container LawEffectModifyLabel:OnStart writes to
+[mod] [U3B] C39SCAN ResearchBuildings :: 0 member(s) — 0 reach the compensating branch (Workplace.lua:205-217), 0 do NOT
+[U3B] C39SCAN ResearchBuildings :: 0 member(s) — 0 reach the compensating branch (Workplace.lua:205-217), 0 do NOT
+[mod] [U3B] READ C39-population(ResearchBuildings) = 0 | population=0 | APPLICABLE=false | witness=UIColony.labels.ResearchBuildings walked this load — the same container LawEffectModifyLabel:OnStart writes to
+[U3B] READ C39-population(ResearchBuildings) = 0 | population=0 | APPLICABLE=false | witness=UIColony.labels.ResearchBuildings walked this load — the same container LawEffectModifyLabel:OnStart writes to
+[mod] [U3B] READ C39-subject-population(automation-label members that ARE Workplaces and fail all three class gates — the mismatch set) = 1 | population=6 | APPLICABLE=true | witness=IsKindOf evaluated per member this load, over all three automation labels
+[U3B] READ C39-subject-population(automation-label members that ARE Workplaces and fail all three class gates — the mismatch set) = 1 | population=6 | APPLICABLE=true | witness=IsKindOf evaluated per member this load, over all three automation labels
+[mod] [U3B] C39SCAN family ArtWorkshop :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[U3B] C39SCAN family ArtWorkshop :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[mod] [U3B] C39SCAN family BioroboticsWorkshop :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[U3B] C39SCAN family BioroboticsWorkshop :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[mod] [U3B] C39SCAN family VRWorkshop :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[U3B] C39SCAN family VRWorkshop :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[mod] [U3B] C39SCAN family TVStudioWorkshopCCP1 :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[U3B] C39SCAN family TVStudioWorkshopCCP1 :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[mod] [U3B] C39SCAN family SecurityStation :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[U3B] C39SCAN family SecurityStation :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[mod] [U3B] C39SCAN family SecurityPostCCP1 :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[U3B] C39SCAN family SecurityPostCCP1 :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[mod] [U3B] C39SCAN family DroneFactory :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[U3B] C39SCAN family DroneFactory :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[mod] [U3B] C39SCAN family BottomlessPitResearchCenter :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[U3B] C39SCAN family BottomlessPitResearchCenter :: 0 present in this colony — ⛔ ABSENT, so this run measures NOTHING about it and its coverage stays SOURCE (static sweep, C39.md §2026-08-15)
+[mod] [U3B] TRY leg C39Scan (yielding) ok=true result=true
+[U3B] TRY leg C39Scan (yielding) ok=true result=true
+[mod] [U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Set
+[U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Set
+[mod] [U3B] C39SET :: subject=TVStudioWorkshopCCP1#1526 (want TVStudioWorkshopCCP1#1526) | control=Diner#1475 (want Diner#1475) | same dome=true
+[U3B] C39SET :: subject=TVStudioWorkshopCCP1#1526 (want TVStudioWorkshopCCP1#1526) | control=Diner#1475 (want Diner#1475) | same dome=true
+[mod] [U3B] TRY leg C39Set (yielding) ok=true result=true
+[U3B] TRY leg C39Set (yielding) ok=true result=true
+[mod] [U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Before
+[U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Before
+[mod] [U3B] ORGANIC :: C39 baseline :: reads only, law not yet enacted
+[U3B] ORGANIC :: C39 baseline :: reads only, law not yet enacted
+[mod] [U3B] C39 BEFORE :: ActiveLaws.Policy_Automation_ServiceAutomation=nil (truthy=false) | LawDefs.Policy_Automation_ServiceAutomation=table: 00000253FA51B788 | automation_workforce_reduction=-50 (ok=true; the LawDef Parameters block says -50)
+[U3B] C39 BEFORE :: ActiveLaws.Policy_Automation_ServiceAutomation=nil (truthy=false) | LawDefs.Policy_Automation_ServiceAutomation=table: 00000253FA51B788 | automation_workforce_reduction=-50 (ok=true; the LawDef Parameters block says -50)
+[mod] [U3B] CLOCK C39 before :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=33473
+[U3B] CLOCK C39 before :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=33473
+[mod] [U3B] C39 subject before :: TVStudioWorkshopCCP1#1526 | Workplace=true Service=false (raw=nil) Factory=false ResearchBuilding=false | base_max_workers=12 max_workers=12 | current_shift=3 active_shift=nil | shifts={10/10/10} | performance(field)=102 | GetWorkshiftPerformance(3)=102 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=102
+[U3B] C39 subject before :: TVStudioWorkshopCCP1#1526 | Workplace=true Service=false (raw=nil) Factory=false ResearchBuilding=false | base_max_workers=12 max_workers=12 | current_shift=3 active_shift=nil | shifts={10/10/10} | performance(field)=102 | GetWorkshiftPerformance(3)=102 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=102
+[mod] [U3B] C39 subject before :: modifications.max_workers = none
+[U3B] C39 subject before :: modifications.max_workers = none
+[mod] [U3B] C39 control before :: Diner#1475 | Workplace=true Service=true (raw=true) Factory=false ResearchBuilding=false | base_max_workers=2 max_workers=2 | current_shift=3 active_shift=nil | shifts={2/2/2} | performance(field)=130 | GetWorkshiftPerformance(3)=130 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=130
+[U3B] C39 control before :: Diner#1475 | Workplace=true Service=true (raw=true) Factory=false ResearchBuilding=false | base_max_workers=2 max_workers=2 | current_shift=3 active_shift=nil | shifts={2/2/2} | performance(field)=130 | GetWorkshiftPerformance(3)=130 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=130
+[mod] [U3B] C39 control before :: modifications.max_workers = none
+[U3B] C39 control before :: modifications.max_workers = none
+[mod] [U3B] TRY leg C39Before (yielding) ok=true result=true
+[U3B] TRY leg C39Before (yielding) ok=true result=true
+[mod] [U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Enact
+[U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Enact
+[mod] [U3B] FORCED :: LawDefs.Policy_Automation_ServiceAutomation:Activate() :: the enactment a passed Assembly vote would perform, called directly — the vote flow is skipped, the effect path is identical
+[U3B] FORCED :: LawDefs.Policy_Automation_ServiceAutomation:Activate() :: the enactment a passed Assembly vote would perform, called directly — the vote flow is skipped, the effect path is identical
+						Lua 0:00:43:565
+[mod] [U3B] TRY LawDefs.Policy_Automation_ServiceAutomation:Activate() [FIRST EXECUTION] ok=true result=true
+[U3B] TRY LawDefs.Policy_Automation_ServiceAutomation:Activate() [FIRST EXECUTION] ok=true result=true
+[mod] [U3B] C39 ENACT :: ActiveLaws.Policy_Automation_ServiceAutomation after the call = table: 00000253FA5804C0 (truthy=true) — this is the liveness witness, not the absence of an error
+[U3B] C39 ENACT :: ActiveLaws.Policy_Automation_ServiceAutomation after the call = table: 00000253FA5804C0 (truthy=true) — this is the liveness witness, not the absence of an error
+[mod] [U3B] TRY leg C39Enact (yielding) ok=true result=true
+[U3B] TRY leg C39Enact (yielding) ok=true result=true
+						Lua 0:00:45:560
+[mod] [U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39After
+[U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39After
+[mod] [U3B] CLOCK C39 after enact :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=35473
+[U3B] CLOCK C39 after enact :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=35473
+[mod] [U3B] C39 subject after-enact :: TVStudioWorkshopCCP1#1526 | Workplace=true Service=false (raw=nil) Factory=false ResearchBuilding=false | base_max_workers=12 max_workers=6 | current_shift=3 active_shift=nil | shifts={6/6/6} | performance(field)=253 | GetWorkshiftPerformance(3)=253 (ok=true) | OUR delta on this object=127 (ok=true) | vanilla-would-have-said=126
+[U3B] C39 subject after-enact :: TVStudioWorkshopCCP1#1526 | Workplace=true Service=false (raw=nil) Factory=false ResearchBuilding=false | base_max_workers=12 max_workers=6 | current_shift=3 active_shift=nil | shifts={6/6/6} | performance(field)=253 | GetWorkshiftPerformance(3)=253 (ok=true) | OUR delta on this object=127 (ok=true) | vanilla-would-have-said=126
+[mod] [U3B] C39 subject after-enact :: modifications.max_workers[1]{amount=0 percent=-50} count=1 — this is where the law's -50% lands, and it is what the repair's discriminator matches on
+[U3B] C39 subject after-enact :: modifications.max_workers[1]{amount=0 percent=-50} count=1 — this is where the law's -50% lands, and it is what the repair's discriminator matches on
+[mod] [U3B] C39 control after-enact :: Diner#1475 | Workplace=true Service=true (raw=true) Factory=false ResearchBuilding=false | base_max_workers=2 max_workers=1 | current_shift=3 active_shift=nil | shifts={1/1/1} | performance(field)=228 | GetWorkshiftPerformance(3)=228 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=228
+[U3B] C39 control after-enact :: Diner#1475 | Workplace=true Service=true (raw=true) Factory=false ResearchBuilding=false | base_max_workers=2 max_workers=1 | current_shift=3 active_shift=nil | shifts={1/1/1} | performance(field)=228 | GetWorkshiftPerformance(3)=228 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=228
+[mod] [U3B] C39 control after-enact :: modifications.max_workers[1]{amount=0 percent=-50} count=1 — this is where the law's -50% lands, and it is what the repair's discriminator matches on
+[U3B] C39 control after-enact :: modifications.max_workers[1]{amount=0 percent=-50} count=1 — this is where the law's -50% lands, and it is what the repair's discriminator matches on
+[mod] [U3B] C39DELTA subject(outside the compensated classes — the repair's target) :: max_workers 12 -> 6 | shifts 10/10/10 -> 6/6/6 | performance(field) 102 -> 253 | GetWorkshiftPerformance 102 -> 253 | OUR delta 0 -> 127
+[U3B] C39DELTA subject(outside the compensated classes — the repair's target) :: max_workers 12 -> 6 | shifts 10/10/10 -> 6/6/6 | performance(field) 102 -> 253 | GetWorkshiftPerformance 102 -> 253 | OUR delta 0 -> 127
+[mod] [U3B] C39DELTA control(inside the compensated classes — vanilla already pays it) :: max_workers 2 -> 1 | shifts 2/2/2 -> 1/1/1 | performance(field) 130 -> 228 | GetWorkshiftPerformance 130 -> 228 | OUR delta 0 -> 0
+[U3B] C39DELTA control(inside the compensated classes — vanilla already pays it) :: max_workers 2 -> 1 | shifts 2/2/2 -> 1/1/1 | performance(field) 130 -> 228 | GetWorkshiftPerformance 130 -> 228 | OUR delta 0 -> 0
+[mod] [U3B] C39 mismatched[1] after-enact :: TVStudioWorkshopCCP1#1526 | Workplace=true Service=false (raw=nil) Factory=false ResearchBuilding=false | base_max_workers=12 max_workers=6 | current_shift=3 active_shift=nil | shifts={6/6/6} | performance(field)=253 | GetWorkshiftPerformance(3)=253 (ok=true) | OUR delta on this object=127 (ok=true) | vanilla-would-have-said=126
+[U3B] C39 mismatched[1] after-enact :: TVStudioWorkshopCCP1#1526 | Workplace=true Service=false (raw=nil) Factory=false ResearchBuilding=false | base_max_workers=12 max_workers=6 | current_shift=3 active_shift=nil | shifts={6/6/6} | performance(field)=253 | GetWorkshiftPerformance(3)=253 (ok=true) | OUR delta on this object=127 (ok=true) | vanilla-would-have-said=126
+[mod] [U3B] C39 mismatched[1] after-enact :: modifications.max_workers[1]{amount=0 percent=-50} count=1 — this is where the law's -50% lands, and it is what the repair's discriminator matches on
+[U3B] C39 mismatched[1] after-enact :: modifications.max_workers[1]{amount=0 percent=-50} count=1 — this is where the law's -50% lands, and it is what the repair's discriminator matches on
+[mod] [U3B] C39 AFTER :: ⚖️ THE READING. With the repair active the SUBJECT should now ride toward roughly double, in the shape the control was measured taking on 2026-08-11 (114 -> 268). Report the raw numbers; the CONTROL must be unchanged from vanilla's own behaviour — our delta on it must read 0, because the shipped gate already pays it and paying twice would be the defect we introduced.
+[U3B] C39 AFTER :: ⚖️ THE READING. With the repair active the SUBJECT should now ride toward roughly double, in the shape the control was measured taking on 2026-08-11 (114 -> 268). Report the raw numbers; the CONTROL must be unchanged from vanilla's own behaviour — our delta on it must read 0, because the shipped gate already pays it and paying twice would be the defect we introduced.
+[mod] [U3B] C39 AFTER :: ⚠️ if the subject's worker count fell below its new max_workers the shift is NOT full and the ~2x arithmetic does not apply — say so instead of comparing.
+[U3B] C39 AFTER :: ⚠️ if the subject's worker count fell below its new max_workers the shift is NOT full and the ~2x arithmetic does not apply — say so instead of comparing.
+[mod] [U3B] TRY leg C39After (yielding) ok=true result=true
+[U3B] TRY leg C39After (yielding) ok=true result=true
+[mod] [U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Revert
+[U3B] GATE pack-loaded OK :: 76/76 modules active :: leg C39Revert
+[mod] [U3B] FORCED :: LawDefs.Policy_Automation_ServiceAutomation:Deactivate() :: reverts the enactment and restores the policy default (ClassDef-Factions.generated.lua:1796-1813)
+[U3B] FORCED :: LawDefs.Policy_Automation_ServiceAutomation:Deactivate() :: reverts the enactment and restores the policy default (ClassDef-Factions.generated.lua:1796-1813)
+						Lua 0:00:45:562
+[mod] [U3B] TRY LawDefs.Policy_Automation_ServiceAutomation:Deactivate() [FIRST EXECUTION] ok=true result=true
+[U3B] TRY LawDefs.Policy_Automation_ServiceAutomation:Deactivate() [FIRST EXECUTION] ok=true result=true
+[mod] [U3B] C39 REVERT :: ActiveLaws.Policy_Automation_ServiceAutomation after the call = nil (truthy=false)
+[U3B] C39 REVERT :: ActiveLaws.Policy_Automation_ServiceAutomation after the call = nil (truthy=false)
+[mod] [U3B] CLOCK C39 after revert :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=35473
+[U3B] CLOCK C39 after revert :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=35473
+[mod] [U3B] C39 subject after-revert :: TVStudioWorkshopCCP1#1526 | Workplace=true Service=false (raw=nil) Factory=false ResearchBuilding=false | base_max_workers=12 max_workers=12 | current_shift=3 active_shift=nil | shifts={6/6/6} | performance(field)=64 | GetWorkshiftPerformance(3)=64 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=64
+[U3B] C39 subject after-revert :: TVStudioWorkshopCCP1#1526 | Workplace=true Service=false (raw=nil) Factory=false ResearchBuilding=false | base_max_workers=12 max_workers=12 | current_shift=3 active_shift=nil | shifts={6/6/6} | performance(field)=64 | GetWorkshiftPerformance(3)=64 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=64
+[mod] [U3B] C39 subject after-revert :: modifications.max_workers = none
+[U3B] C39 subject after-revert :: modifications.max_workers = none
+[mod] [U3B] C39 control after-revert :: Diner#1475 | Workplace=true Service=true (raw=true) Factory=false ResearchBuilding=false | base_max_workers=2 max_workers=2 | current_shift=3 active_shift=nil | shifts={2/2/2} | performance(field)=115 | GetWorkshiftPerformance(3)=115 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=115
+[U3B] C39 control after-revert :: Diner#1475 | Workplace=true Service=true (raw=true) Factory=false ResearchBuilding=false | base_max_workers=2 max_workers=2 | current_shift=3 active_shift=nil | shifts={2/2/2} | performance(field)=115 | GetWorkshiftPerformance(3)=115 (ok=true) | OUR delta on this object=0 (ok=true) | vanilla-would-have-said=115
+[mod] [U3B] C39 control after-revert :: modifications.max_workers = none
+[U3B] C39 control after-revert :: modifications.max_workers = none
+[mod] [U3B] C39DELTA subject enact->revert :: max_workers 6 -> 12 | shifts 6/6/6 -> 6/6/6 | performance(field) 253 -> 64 | GetWorkshiftPerformance 253 -> 64 | OUR delta 127 -> 0
+[U3B] C39DELTA subject enact->revert :: max_workers 6 -> 12 | shifts 6/6/6 -> 6/6/6 | performance(field) 253 -> 64 | GetWorkshiftPerformance 253 -> 64 | OUR delta 127 -> 0
+[mod] [U3B] C39DELTA control enact->revert :: max_workers 1 -> 2 | shifts 1/1/1 -> 2/2/2 | performance(field) 228 -> 115 | GetWorkshiftPerformance 228 -> 115 | OUR delta 0 -> 0
+[U3B] C39DELTA control enact->revert :: max_workers 1 -> 2 | shifts 1/1/1 -> 2/2/2 | performance(field) 228 -> 115 | GetWorkshiftPerformance 228 -> 115 | OUR delta 0 -> 0
+[mod] [U3B] C39 REVERT :: ⚠️ workers fired by the enactment do NOT snap back, and with the game PAUSED CheckWorkForUnemployed cannot re-hire at all — the 08-11 control went 114 -> 268 -> 124, not back to 114. An after-revert reading near-but-not-at the baseline is the EXPECTED shape, not a second defect.
+[U3B] C39 REVERT :: ⚠️ workers fired by the enactment do NOT snap back, and with the game PAUSED CheckWorkForUnemployed cannot re-hire at all — the 08-11 control went 114 -> 268 -> 124, not back to 114. An after-revert reading near-but-not-at the baseline is the EXPECTED shape, not a second defect.
+[mod] [U3B] C39 REVERT :: ⭐ our delta must read 0 on every object once the law is gone — that is the repair standing down, and it is the check that it is not a standing bonus.
+[U3B] C39 REVERT :: ⭐ our delta must read 0 on every object once the law is gone — that is the repair standing down, and it is the check that it is not a standing bonus.
+[mod] [U3B] TRY leg C39Revert (yielding) ok=true result=true
+[U3B] TRY leg C39Revert (yielding) ok=true result=true
+						Lua 0:00:47:560
+[mod] [U3B] CONDITIONS pack=76/76 active | map=BlankBigTerraceCMix_10 | speed=0 | loads_this_process=1 | mode=REAL | note=at close
+[U3B] CONDITIONS pack=76/76 active | map=BlankBigTerraceCMix_10 | speed=0 | loads_this_process=1 | mode=REAL | note=at close
+[mod] [U3B] CONDITIONS opt-in pack=8/8 active
+[U3B] CONDITIONS opt-in pack=8/8 active
+[mod] [U3B] CONDITIONS by-name DistressPopupPause = active | detail=
+[U3B] CONDITIONS by-name DistressPopupPause = active | detail=
+[mod] [U3B] CONDITIONS by-name AutomationLawCompensation = active | detail=
+[U3B] CONDITIONS by-name AutomationLawCompensation = active | detail=
+[mod] [U3B] CLOCK close :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=37473
+[U3B] CLOCK close :: GameTime()=61108784 (84.87 sols since game start) | UIColony.day=86 hour=2 | speed=0x | RealTime()=37473
+[mod] [U3B] ERRORWATCH U3B — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== unattended-3 U3B ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one. stage_at_close=closing loads_this_process=1 mode=REAL
+[U3B] ERRORWATCH U3B — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== unattended-3 U3B ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one. stage_at_close=closing loads_this_process=1 mode=REAL
+[mod] [U3B] === unattended-3 U3B === DONE. Quitting. ⛔ Nothing was saved: this run never calls SaveGame, so the staged copy on disk is byte-identical to the one staged before the launch.
+[U3B] === unattended-3 U3B === DONE. Quitting. ⛔ Nothing was saved: this run never calls SaveGame, so the staged copy on disk is byte-identical to the one staged before the launch.
+						Lua 0:00:50:561
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:50:563
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:50:817
+
+
+*** Debug::Done()
+Time (ms)	50817
+
+

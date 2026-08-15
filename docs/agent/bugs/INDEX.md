@@ -109,7 +109,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 87 | F82 | Split power/life-support grid notification lingers ~a sol after the grid is rejoined | closed | P3 | med | [F82.md](F82.md) |
 | 88 | F83 | Minimized story popups lose their callback across a load — First Asteroid silently withholds 3 promised prefabs | tested | P2 | PROVEN | [F83.md](F83.md) |
 | 89 | F84 | Universal Tunnel description is wrong twice: claims rovers cannot use it (they can), omits life-support bridging | todo | P3 | PROVEN | [F84.md](F84.md) |
-| 90 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | built | P3 | latent | [F85.md](F85.md) |
+| 90 | F85 | Breakthrough choice popups + Assembly "Colony Values" choice ride real-time waiters — a save in their open window voids the choice | fixed | P3 | latent | [F85.md](F85.md) |
 | 91 | F86 | **OUR OWN DEFECT** — pack code blocked on a persisted game-time thread is serialised INTO the player's savegame and outlives the mod's removal | open | P1 | **DECIDED — sweep reported** | [F86.md](F86.md) |
 | 92 | F87 | **OUR OWN DEFECT** — `Fix_DustSicknessBiorobots` throws at apply when the player enables the mod (`HasTrait:new` before class flattening), so F40 is silently unfixed for that whole session | fixed | P2 | **OBSERVED** | [F87.md](F87.md) |
 | 93 | F88 | **OUR OWN DEFECT** — `Fix_MeteorFrequency` restarts the meteor timer on EVERY load, so a player who loads more often than the rolled 35-115h interval never gets a meteor | fixed | P2 | SOURCE-VERIFIED | [F88.md](F88.md) |
@@ -161,7 +161,7 @@ the row order below is the old index table's own. Generated from the front matte
 |  | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | closed | ? | **CLOSED — promoted** | grouped → [C12-C38.md](C12-C38.md) |
 |  | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
 |  | C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-| 114 | C39 | `Policy_Automation_ServiceAutomation` cuts `max_workers` by **label** while its performance compensation keys on **class** — the four Workshops are on the label and outside the class | built | ? | **OBSERVED** | [C39.md](C39.md) |
+| 114 | C39 | `Policy_Automation_ServiceAutomation` cuts `max_workers` by **label** while its performance compensation keys on **class** — the four Workshops are on the label and outside the class | fixed | ? | **OBSERVED** | [C39.md](C39.md) |
 | 115 | C40 | "Crowded Living" grants **+3 residence capacity that is added and removed live with the Ministry of Culture's `working` flag**, and every removal EVICTS the tail residents colony-wide | filed | ? | cand | [C40.md](C40.md) |
 | 116 | C41 | Depot resource picker fails to APPEAR at all (OG witness) — F76's unrefuted residue | filed | ? | cand | [C41.md](C41.md) |
 | 117 | F99 | `TrackConstructionSite:Complete` dereferences an emptied element list — `start_el` nil at `TrackElement.lua:805` | filed | ? | cand | [F99.md](F99.md) |
