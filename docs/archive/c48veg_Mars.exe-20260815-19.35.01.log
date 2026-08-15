@@ -1,0 +1,912 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	47%
+					Render 0:00:00:007
+Disk Free      	740887 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:106
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:110
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:590
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:728
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:929
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:600
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:636
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:638
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:640
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+						Lua 0:00:17:991
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:992
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:997
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [C48V] [C48V] 98_C48Veg loaded — self-driving in 1 tick.
+[C48V] [C48V] 98_C48Veg loaded — self-driving in 1 tick.
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+						Lua 0:00:17:998
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+						Lua 0:00:17:999
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+						Lua 0:00:18:000
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:18:001
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:18:002
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+						Lua 0:00:18:003
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+						Lua 0:00:18:004
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+						Lua 0:00:18:005
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+						Lua 0:00:18:006
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+						Lua 0:00:18:007
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+						Lua 0:00:18:008
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:558
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:635
+Reloading done in 986 ms
+						Lua 0:00:18:985
+[preset] Preset postprocess took 78 ms.
+						Lua 0:00:19:051
+479 / 479 particle streams loaded in 62 ms.
+						Lua 0:00:19:052
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:249
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:304
+[mod] [C48V] === c47-farm C48V === payload loaded. Staged save: C48STAGE.savegame.sav
+[C48V] === c47-farm C48V === payload loaded. Staged save: C48STAGE.savegame.sav
+						Lua 0:00:19:305
+[PdxSDK] Started up. Took 1656
+						Lua 0:00:19:329
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:752
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:753
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:857
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:858
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:766
+[mod] [C48V] CONDITIONS pack=75/75 active | map= | speed=1x | loads_this_process=0 | mode=REAL | note=main menu, before the load
+[C48V] CONDITIONS pack=75/75 active | map= | speed=1x | loads_this_process=0 | mode=REAL | note=main menu, before the load
+[mod] [C48V] CONDITIONS opt-in pack=8/8 active
+[C48V] CONDITIONS opt-in pack=8/8 active
+[mod] [C48V] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[C48V] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48V] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48V] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+						Lua 0:00:21:866
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:21:874
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:901
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:819
+*** Assets reloaded in 2.9 s, read 202.1 MB, read speed 68.6 MB/s, average read 4948 bytes.
+						Lua 0:00:30:922
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:932
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:30:957
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:977
+Game Loaded in 9111 ms
+						Lua 0:00:31:025
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:799
+Game loaded on map BlankBigCanyonCMix_09 in 10033 ms
+[mod] [C48V] LOAD OK #1 file=C48STAGE.savegame.sav — LoadGame returned no error
+[C48V] LOAD OK #1 file=C48STAGE.savegame.sav — LoadGame returned no error
+						Lua 0:00:34:100
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:34:101
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:798
+[mod] [C48V] TRY UIColony:SetGameSpeed(1) ok=true result=1
+[C48V] TRY UIColony:SetGameSpeed(1) ok=true result=1
+						Lua 0:00:47:798
+[mod] [C48V] READ speed after load: before=1x after=1x | wanted=1x | RUNNING=true — the whole sampling window below is VOID if this is not the wanted speed (a loaded save arrives PAUSED: corun-pt15 rule C4)
+[C48V] READ speed after load: before=1x after=1x | wanted=1x | RUNNING=true — the whole sampling window below is VOID if this is not the wanted speed (a loaded save arrives PAUSED: corun-pt15 rule C4)
+[mod] [C48V] TRY load C48STAGE.savegame.sav (yielding) ok=true result=true
+[C48V] TRY load C48STAGE.savegame.sav (yielding) ok=true result=true
+[mod] [C48V] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=1x | loads_this_process=1 | mode=REAL | note=after the load
+[C48V] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=1x | loads_this_process=1 | mode=REAL | note=after the load
+[mod] [C48V] CONDITIONS opt-in pack=8/8 active
+[C48V] CONDITIONS opt-in pack=8/8 active
+[mod] [C48V] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[C48V] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48V] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48V] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[mod] [C48V] ORGANIC :: census of farms, Seeds depots and vegetation seed offers :: reads only; the only thing this leg changes is the game speed
+[C48V] ORGANIC :: census of farms, Seeds depots and vegetation seed offers :: reads only; the only thing this leg changes is the game speed
+[mod] [C48V] CLOCK census :: GameTime()=275836964 (383.10 sols since game start) | UIColony.day=384 hour=8 | speed=1x | RealTime()=34360
+[C48V] CLOCK census :: GameTime()=275836964 (383.10 sols since game start) | UIColony.day=384 hour=8 | speed=1x | RealTime()=34360
+[mod] [C48V] CENSUS FARM [1] OpenFarm#15779 :: stored=3385 of 5000 | consumption_amount=400 | tick=9000 ms | working=true | serving centres+extenders=6 (⛔ a farm has NO work_radius of its own — DroneControl.lua:40)
+[C48V] CENSUS FARM [1] OpenFarm#15779 :: stored=3385 of 5000 | consumption_amount=400 | tick=9000 ms | working=true | serving centres+extenders=6 (⛔ a farm has NO work_radius of its own — DroneControl.lua:40)
+[mod] [C48V] CENSUS FARM [2] OpenFarm#15974 :: stored=3700 of 5000 | consumption_amount=200 | tick=9000 ms | working=true | serving centres+extenders=1 (⛔ a farm has NO work_radius of its own — DroneControl.lua:40)
+[C48V] CENSUS FARM [2] OpenFarm#15974 :: stored=3700 of 5000 | consumption_amount=200 | tick=9000 ms | working=true | serving centres+extenders=1 (⛔ a farm has NO work_radius of its own — DroneControl.lua:40)
+[mod] [C48V] READ C48-population(OpenFarmBase) = 2 | population=2 | APPLICABLE=true | witness=city labels walked this load
+[C48V] READ C48-population(OpenFarmBase) = 2 | population=2 | APPLICABLE=true | witness=city labels walked this load
+						Lua 0:00:47:799
+[mod] [C48V] READ C48-population(Seeds-accepting depots) = 34 | population=34 | APPLICABLE=true | witness=CurrentMap:MapGet over four depot classes, filtered on DoesAcceptResource('Seeds')
+[C48V] READ C48-population(Seeds-accepting depots) = 34 | population=34 | APPLICABLE=true | witness=CurrentMap:MapGet over four depot classes, filtered on DoesAcceptResource('Seeds')
+[mod] [C48V] DEPOT census :: StationSmall#12472 stored Seeds=222157 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StationSmall#12472 stored Seeds=222157 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#9296 stored Seeds=144605 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalStorageDepot#9296 stored Seeds=144605 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StationSmall#12496 stored Seeds=199531 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StationSmall#12496 stored Seeds=199531 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StationSmall#12631 stored Seeds=204993 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StationSmall#12631 stored Seeds=204993 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#15036 stored Seeds=113000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold						Lua 0:00:47:800
+
+[C48V] DEPOT census :: UniversalStorageDepot#15036 stored Seeds=113000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StationSmall#4627 stored Seeds=200832 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StationSmall#4627 stored Seeds=200832 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StationSmall#4552 stored Seeds=189243 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StationSmall#4552 stored Seeds=189243 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#1073 stored Seeds=57844 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalStorageDepot#1073 stored Seeds=57844 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StationSmall#6286 stored Seeds=165590 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StationSmall#6286 stored Seeds=165590 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#1471 stored Seeds=149139 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalStorageDepot#1471 stored Seeds=149139 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalStorageDepot#2870 stored Seeds=265094 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalStorageDepot#2870 stored Seeds=265094 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StationSmall#4792 stored Seeds=187904 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StationSmall#4792 stored Seeds=187904 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: StationSmall#4842 stored Seeds=197350 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: StationSmall#4842 stored Seeds=197350 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT census :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT census :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:00:47:802
+[mod] [C48V] VEG census :: 3584 live VegetationTaskRequester(s) on the map						Lua 0:00:47:803
+
+[C48V] VEG census :: 3584 live VegetationTaskRequester(s) on the map
+[mod] [C48V] VEG census :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48V] VEG census :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48V] VEG census :: OFFER SIZES (preset:amount x count) over 400 of 3584 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x384, Bush:76 x1, Bush:8 x1
+[C48V] VEG census :: OFFER SIZES (preset:amount x count) over 400 of 3584 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x384, Bush:76 x1, Bush:8 x1
+						Lua 0:00:47:807
+[mod] [C48V] VEG census :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=262 · DroneHubExtender#1360 r=50 working=true veg=320 · DroneHub#1457 r=50 working=true veg=374 · DroneHubExtender#2341 r=50 working=true veg=235 · DroneHubExtender#2869 r=50 working=true veg=336 · UniversalZeusRocket#1063 r=35 working=true veg=218 | ⭐⭐ 533 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5459 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG census :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=262 · DroneHubExtender#1360 r=50 working=true veg=320 · DroneHub#1457 r=50 working=true veg=374 · DroneHubExtender#2341 r=50 working=true veg=235 · DroneHubExtender#2869 r=50 working=true veg=336 · UniversalZeusRocket#1063 r=35 working=true veg=218 | ⭐⭐ 533 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5459 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG census :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 142 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG census :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 142 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:00:47:808
+[mod] [C48V] VEG census :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=490 | ⭐⭐ 490 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 888 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG census :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=490 | ⭐⭐ 490 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 888 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG census :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 127 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG census :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 127 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[mod] [C48V] TRY leg Census (yielding) ok=true result=true
+[C48V] TRY leg Census (yielding) ok=true result=true
+[mod] [C48V] FORCED :: the game speed, and ONLY the game speed :: the ladder sets the time factor between segments; nothing else about the colony is touched, and the farms/drones/vegetation are the same objects throughout
+[C48V] FORCED :: the game speed, and ONLY the game speed :: the ladder sets the time factor between segments; nothing else about the colony is touched, and the farms/drones/vegetation are the same objects throughout
+[mod] [C48V] SAMPLE BEGIN :: GameTime=275836964 | ladder=1x, 3x, 5x, 20x | 105000 game ms per rung | sampling every 200 real ms | real cap 1500000 ms
+[C48V] SAMPLE BEGIN :: GameTime=275836964 | ladder=1x, 3x, 5x, 20x | 105000 game ms per rung | sampling every 200 real ms | real cap 1500000 ms
+[mod] [C48V] TRY UIColony:SetGameSpeed(1) [rung 1] ok=true result=true
+[C48V] TRY UIColony:SetGameSpeed(1) [rung 1] ok=true result=true
+						Lua 0:00:48:299
+[mod] [C48V] LADDER rung 1 :: wanted 1x, GetTimeFactor reads 1x, TOOK=true (set ok=true) | segment target 105000 game ms from GameTime=275837464
+[C48V] LADDER rung 1 :: wanted 1x, GetTimeFactor reads 1x, TOOK=true (set ok=true) | segment target 105000 game ms from GameTime=275837464
+[mod] [C48V] DEPOT rung 1 open :: StationSmall#12472 stored Seeds=222157 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StationSmall#12472 stored Seeds=222157 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#9296 stored Seeds=144605 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#9296 stored Seeds=144605 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StationSmall#12496 stored Seeds=199531 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StationSmall#12496 stored Seeds=199531 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StationSmall#12631 stored Seeds=204993 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StationSmall#12631 stored Seeds=204993 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#15036 stored Seeds=113000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#15036 stored Seeds=113000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StationSmall#4627 stored Seeds=200832 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StationSmall#4627 stored Seeds=200832 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StationSmall#4552 stored Seeds=189243 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StationSmall#4552 stored Seeds=189243 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#4544 stored Seeds=58938 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#4544 stored Seeds=58938 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#1073 stored Seeds=57844 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#1073 stored Seeds=57844 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StationSmall#6286 stored Seeds=165590 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StationSmall#6286 stored Seeds=165590 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#1471 stored Seeds=149139 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#1471 stored Seeds=149139 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:00:48:300
+[mod] [C48V] DEPOT rung 1 open :: UniversalStorageDepot#2870 stored Seeds=265094 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalStorageDepot#2870 stored Seeds=265094 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StationSmall#4792 stored Seeds=187904 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StationSmall#4792 stored Seeds=187904 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: StationSmall#4842 stored Seeds=197350 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: StationSmall#4842 stored Seeds=197350 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 1 open :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 1 open :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:00:48:302
+[mod] [C48V] VEG rung 1 open :: 3583 live VegetationTaskRequester(s) on the map
+[C48V] VEG rung 1 open :: 3583 live VegetationTaskRequester(s) on the map
+[mod] [C48V] VEG rung 1 open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48V] VEG rung 1 open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48V] VEG rung 1 open :: OFFER SIZES (preset:amount x count) over 400 of 3583 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:0 x1, Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x383, Bush:76 x1, Bush:8 x1
+[C48V] VEG rung 1 open :: OFFER SIZES (preset:amount x count) over 400 of 3583 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:0 x1, Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x383, Bush:76 x1, Bush:8 x1
+						Lua 0:00:48:307
+[mod] [C48V] VEG rung 1 open :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=261 · DroneHubExtender#1360 r=50 working=true veg=319 · DroneHub#1457 r=50 working=true veg=373 · DroneHubExtender#2341 r=50 working=true veg=234 · DroneHubExtender#2869 r=50 working=true veg=336 · UniversalZeusRocket#1063 r=35 working=true veg=217 | ⭐⭐ 532 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5454 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG rung 1 open :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=261 · DroneHubExtender#1360 r=50 working=true veg=319 · DroneHub#1457 r=50 working=true veg=373 · DroneHubExtender#2341 r=50 working=true veg=234 · DroneHubExtender#2869 r=50 working=true veg=336 · UniversalZeusRocket#1063 r=35 working=true veg=217 | ⭐⭐ 532 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5454 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG rung 1 open :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 141 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG rung 1 open :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 141 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:00:48:309
+[mod] [C48V] VEG rung 1 open :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=490 | ⭐⭐ 490 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 888 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG rung 1 open :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=490 | ⭐⭐ 490 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 888 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG rung 1 open :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 127 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG rung 1 open :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 127 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:02:33:499
+[mod] [C48V] LADDER rung 1 CLOSED :: 1x | game 105199 ms | real 105200 ms | complete=true
+[C48V] LADDER rung 1 CLOSED :: 1x | game 105199 ms | real 105200 ms | complete=true
+[mod] [C48V] TRY UIColony:SetGameSpeed(3) [rung 2] ok=true result=true
+[C48V] TRY UIColony:SetGameSpeed(3) [rung 2] ok=true result=true
+						Lua 0:02:33:999
+[mod] [C48V] LADDER rung 2 :: wanted 3x, GetTimeFactor reads 3x, TOOK=true (set ok=true) | segment target 105000 game ms from GameTime=275944166
+[C48V] LADDER rung 2 :: wanted 3x, GetTimeFactor reads 3x, TOOK=true (set ok=true) | segment target 105000 game ms from GameTime=275944166
+[mod] [C48V] DEPOT rung 2 open :: StationSmall#12472 stored Seeds=205276 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StationSmall#12472 stored Seeds=205276 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#9296 stored Seeds=140501 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#9296 stored Seeds=140501 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StationSmall#12496 stored Seeds=232719 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StationSmall#12496 stored Seeds=232719 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StationSmall#12631 stored Seeds=196110 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StationSmall#12631 stored Seeds=196110 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#15036 stored Seeds=112000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#15036 stored Seeds=112000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StationSmall#4627 stored Seeds=201832 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StationSmall#4627 stored Seeds=201832 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StationSmall#4552 stored Seeds=182342 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StationSmall#4552 stored Seeds=182342 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#1073 stored Seeds=55856 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#1073 stored Seeds=55856 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StationSmall#6286 stored Seeds=186551 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StationSmall#6286 stored Seeds=186551 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#1471 stored Seeds=150137 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#1471 stored Seeds=150137 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalStorageDepot#2870 stored Seeds=266647 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalStorageDepot#2870 stored Seeds=266647 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StationSmall#4792 stored Seeds=197203 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StationSmall#4792 stored Seeds=197203 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: StationSmall#4842 stored Seeds=198014 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: StationSmall#4842 stored Seeds=198014 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold						Lua 0:02:34:000
+
+[C48V] DEPOT rung 2 open :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 2 open :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 2 open :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:02:34:002
+[mod] [C48V] VEG rung 2 open :: 3457 live VegetationTaskRequester(s) on the map
+[C48V] VEG rung 2 open :: 3457 live VegetationTaskRequester(s) on the map
+[mod] [C48V] VEG rung 2 open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48V] VEG rung 2 open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48V] VEG rung 2 open :: OFFER SIZES (preset:amount x count) over 400 of 3457 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x383, Bush:32 x1, Bush:76 x1, Bush:8 x1
+[C48V] VEG rung 2 open :: OFFER SIZES (preset:amount x count) over 400 of 3457 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x383, Bush:32 x1, Bush:76 x1, Bush:8 x1
+						Lua 0:02:34:006
+[mod] [C48V] VEG rung 2 open :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=233 · DroneHubExtender#1360 r=50 working=true veg=299 · DroneHub#1457 r=50 working=true veg=343 · DroneHubExtender#2341 r=50 working=true veg=208 · DroneHubExtender#2869 r=50 working=true veg=308 · UniversalZeusRocket#1063 r=35 working=true veg=191 | ⭐⭐ 498 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5300 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG rung 2 open :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=233 · DroneHubExtender#1360 r=50 working=true veg=299 · DroneHub#1457 r=50 working=true veg=343 · DroneHubExtender#2341 r=50 working=true veg=208 · DroneHubExtender#2869 r=50 working=true veg=308 · UniversalZeusRocket#1063 r=35 working=true veg=191 | ⭐⭐ 498 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5300 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG rung 2 open :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 115 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG rung 2 open :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 115 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:02:34:007
+[mod] [C48V] VEG rung 2 open :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=460 | ⭐⭐ 460 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 854 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG rung 2 open :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=460 | ⭐⭐ 460 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 854 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG rung 2 open :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 98 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG rung 2 open :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 98 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:03:08:998
+[mod] [C48V] LADDER rung 2 CLOSED :: 3x | game 105000 ms | real 35000 ms | complete=true
+[C48V] LADDER rung 2 CLOSED :: 3x | game 105000 ms | real 35000 ms | complete=true
+[mod] [C48V] TRY UIColony:SetGameSpeed(5) [rung 3] ok=true result=true
+[C48V] TRY UIColony:SetGameSpeed(5) [rung 3] ok=true result=true
+						Lua 0:03:09:499
+[mod] [C48V] LADDER rung 3 :: wanted 5x, GetTimeFactor reads 5x, TOOK=true (set ok=true) | segment target 105000 game ms from GameTime=276051666
+[C48V] LADDER rung 3 :: wanted 5x, GetTimeFactor reads 5x, TOOK=true (set ok=true) | segment target 105000 game ms from GameTime=276051666
+[mod] [C48V] DEPOT rung 3 open :: StationSmall#12472 stored Seeds=187070 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StationSmall#12472 stored Seeds=187070 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#9296 stored Seeds=144744 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#9296 stored Seeds=144744 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StationSmall#12496 stored Seeds=184045 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StationSmall#12496 stored Seeds=184045 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StationSmall#12631 stored Seeds=185908 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StationSmall#12631 stored Seeds=185908 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#15036 stored Seeds=112000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#15036 stored Seeds=112000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StationSmall#4627 stored Seeds=201832 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StationSmall#4627 stored Seeds=201832 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StationSmall#4552 stored Seeds=190614 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StationSmall#4552 stored Seeds=190614 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#1073 stored Seeds=55856 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#1073 stored Seeds=55856 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:03:09:500
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StationSmall#6286 stored Seeds=178052 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StationSmall#6286 stored Seeds=178052 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#1471 stored Seeds=154372 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#1471 stored Seeds=154372 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalStorageDepot#2870 stored Seeds=264664 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalStorageDepot#2870 stored Seeds=264664 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StationSmall#4792 stored Seeds=185059 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StationSmall#4792 stored Seeds=185059 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: StationSmall#4842 stored Seeds=200389 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: StationSmall#4842 stored Seeds=200389 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 3 open :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 3 open :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:03:09:503
+[mod] [C48V] VEG rung 3 open :: 3304 live VegetationTaskRequester(s) on the map
+[C48V] VEG rung 3 open :: 3304 live VegetationTaskRequester(s) on the map
+[mod] [C48V] VEG rung 3 open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48V] VEG rung 3 open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48V] VEG rung 3 open :: OFFER SIZES (preset:amount x count) over 400 of 3304 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:184 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x382, Bush:32 x1, Bush:76 x1, Bush:8 x1
+[C48V] VEG rung 3 open :: OFFER SIZES (preset:amount x count) over 400 of 3304 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:184 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x382, Bush:32 x1, Bush:76 x1, Bush:8 x1
+						Lua 0:03:09:507
+[mod] [C48V] VEG rung 3 open :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=204 · DroneHubExtender#1360 r=50 working=true veg=271 · DroneHub#1457 r=50 working=true veg=313 · DroneHubExtender#2341 r=50 working=true veg=173 · DroneHubExtender#2869 r=50 working=true veg=270 · UniversalZeusRocket#1063 r=35 working=true veg=160 | ⭐⭐ 450 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5124 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG rung 3 open :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=204 · DroneHubExtender#1360 r=50 working=true veg=271 · DroneHub#1457 r=50 working=true veg=313 · DroneHubExtender#2341 r=50 working=true veg=173 · DroneHubExtender#2869 r=50 working=true veg=270 · UniversalZeusRocket#1063 r=35 working=true veg=160 | ⭐⭐ 450 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5124 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+						Lua 0:03:09:508
+[mod] [C48V] VEG rung 3 open :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 82 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG rung 3 open :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 82 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:03:09:509
+[mod] [C48V] VEG rung 3 open :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=431 | ⭐⭐ 431 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 829 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG rung 3 open :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=431 | ⭐⭐ 431 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 829 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG rung 3 open :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 67 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG rung 3 open :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 67 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:03:30:698
+[mod] [C48V] LADDER rung 3 CLOSED :: 5x | game 106000 ms | real 21200 ms | complete=true
+[C48V] LADDER rung 3 CLOSED :: 5x | game 106000 ms | real 21200 ms | complete=true
+[mod] [C48V] TRY UIColony:SetGameSpeed(20) [rung 4] ok=true result=true
+[C48V] TRY UIColony:SetGameSpeed(20) [rung 4] ok=true result=true
+						Lua 0:03:31:198
+[mod] [C48V] LADDER rung 4 :: wanted 20x, GetTimeFactor reads 20x, TOOK=true (set ok=true) | segment target 105000 game ms from GameTime=276167666
+[C48V] LADDER rung 4 :: wanted 20x, GetTimeFactor reads 20x, TOOK=true (set ok=true) | segment target 105000 game ms from GameTime=276167666
+[mod] [C48V] DEPOT rung 4 open :: StationSmall#12472 stored Seeds=202735 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StationSmall#12472 stored Seeds=202735 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#9296 stored Seeds=137692 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#9296 stored Seeds=137692 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StationSmall#12496 stored Seeds=176045 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StationSmall#12496 stored Seeds=176045 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StationSmall#12631 stored Seeds=185208 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StationSmall#12631 stored Seeds=185208 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#15036 stored Seeds=112000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#15036 stored Seeds=112000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StationSmall#4627 stored Seeds=221870 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StationSmall#4627 stored Seeds=221870 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StationSmall#4552 stored Seeds=219916 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StationSmall#4552 stored Seeds=219916 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#1073 stored Seeds=56102 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#1073 stored Seeds=56102 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StationSmall#6286 stored Seeds=163376 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StationSmall#6286 stored Seeds=163376 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#1471 stored Seeds=137725 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#1471 stored Seeds=137725 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalStorageDepot#2870 stored Seeds=263933 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalStorageDepot#2870 stored Seeds=263933 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StationSmall#4792 stored Seeds=188830 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StationSmall#4792 stored Seeds=188830 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: StationSmall#4842 stored Seeds=191385 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: StationSmall#4842 stored Seeds=191385 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT rung 4 open :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT rung 4 open :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:03:31:201
+[mod] [C48V] VEG rung 4 open :: 3637 live VegetationTaskRequester(s) on the map
+[C48V] VEG rung 4 open :: 3637 live VegetationTaskRequester(s) on the map
+[mod] [C48V] VEG rung 4 open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48V] VEG rung 4 open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48V] VEG rung 4 open :: OFFER SIZES (preset:amount x count) over 400 of 3637 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x384, Bush:76 x1, Bush:8 x1
+[C48V] VEG rung 4 open :: OFFER SIZES (preset:amount x count) over 400 of 3637 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x384, Bush:76 x1, Bush:8 x1
+						Lua 0:03:31:206
+[mod] [C48V] VEG rung 4 open :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=274 · DroneHubExtender#1360 r=50 working=true veg=317 · DroneHub#1457 r=50 working=true veg=388 · DroneHubExtender#2341 r=50 working=true veg=261 · DroneHubExtender#2869 r=50 working=true veg=343 · UniversalZeusRocket#1063 r=35 working=true veg=240 | ⭐⭐ 556 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5560 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG rung 4 open :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=274 · DroneHubExtender#1360 r=50 working=true veg=317 · DroneHub#1457 r=50 working=true veg=388 · DroneHubExtender#2341 r=50 working=true veg=261 · DroneHubExtender#2869 r=50 working=true veg=343 · UniversalZeusRocket#1063 r=35 working=true veg=240 | ⭐⭐ 556 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5560 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG rung 4 open :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 171 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG rung 4 open :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 171 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:03:31:207
+[mod] [C48V] VEG rung 4 open :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=520 | ⭐⭐ 520 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 916 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG rung 4 open :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=520 | ⭐⭐ 520 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 916 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG rung 4 open :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 142 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG rung 4 open :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 142 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:03:36:599
+[mod] [C48V] LADDER rung 4 CLOSED :: 20x | game 108000 ms | real 5400 ms | complete=true
+[C48V] LADDER rung 4 CLOSED :: 20x | game 108000 ms | real 5400 ms | complete=true
+[mod] [C48V] TRY leg Sample (yielding) ok=true result=true
+[C48V] TRY leg Sample (yielding) ok=true result=true
+[mod] [C48V] REPORT SPAN :: game time 438702 ms (14 game hours) | real time 168800 ms | samples=838 at 200 ms | frozen at=not frozen
+[C48V] REPORT SPAN :: game time 438702 ms (14 game hours) | real time 168800 ms | samples=838 at 200 ms | frozen at=not frozen
+[mod] [C48V] REPORT FARM OpenFarm#15779 :: buffer min=905 max=4230 | stalled 0 of 838 samples | deliveries=71 totalling 23765 (mean 334) | drains=30 totalling 22920 | veg offers reachable at the last scan=556 | offers within 35 hexes of the farm=171
+[C48V] REPORT FARM OpenFarm#15779 :: buffer min=905 max=4230 | stalled 0 of 838 samples | deliveries=71 totalling 23765 (mean 334) | drains=30 totalling 22920 | veg offers reachable at the last scan=556 | offers within 35 hexes of the farm=171
+[mod] [C48V] REPORT FARM OpenFarm#15779 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 80x1, 280x59, 560x9, 725x1, 1400x1 — a wall of small values is the C48 signature; values near 1000 x DroneResourceCarryAmount would mean bulk depot pickups
+[C48V] REPORT FARM OpenFarm#15779 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 80x1, 280x59, 560x9, 725x1, 1400x1 — a wall of small values is the C48 signature; values near 1000 x DroneResourceCarryAmount would mean bulk depot pickups
+[mod] [C48V] REPORT FARM OpenFarm#15974 :: buffer min=1681 max=5000 | stalled 0 of 838 samples | deliveries=63 totalling 22921 (mean 363) | drains=36 totalling 22560 | veg offers reachable at the last scan=520 | offers within 35 hexes of the farm=142
+[C48V] REPORT FARM OpenFarm#15974 :: buffer min=1681 max=5000 | stalled 0 of 838 samples | deliveries=63 totalling 22921 (mean 363) | drains=36 totalling 22560 | veg offers reachable at the last scan=520 | offers within 35 hexes of the farm=142
+[mod] [C48V] REPORT FARM OpenFarm#15974 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 80x1, 121x1, 180x1, 280x53, 560x2, 1081x1, 1300x1, 1339x1, 1341x1, 1519x1 — a wall of small values is the C48 signature; values near 1000 x DroneResourceCarryAmount would mean bulk depot pickups
+[C48V] REPORT FARM OpenFarm#15974 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 80x1, 121x1, 180x1, 280x53, 560x2, 1081x1, 1300x1, 1339x1, 1341x1, 1519x1 — a wall of small values is the C48 signature; values near 1000 x DroneResourceCarryAmount would mean bulk depot pickups
+[mod] [C48V] LADDER ROW :: speed 1x (took=true, complete=true) | OpenFarm#15779 | game 105199 ms = 3 h | STALLED 0 of 527 samples = 0% | deliveries=23 totalling 6720 (mean 292) | drains=9 totalling 7400 | per GAME HOUR: drained 2466, received 2240
+[C48V] LADDER ROW :: speed 1x (took=true, complete=true) | OpenFarm#15779 | game 105199 ms = 3 h | STALLED 0 of 527 samples = 0% | deliveries=23 totalling 6720 (mean 292) | drains=9 totalling 7400 | per GAME HOUR: drained 2466, received 2240
+[mod] [C48V] LADDER ROW :: speed 1x (took=true, complete=true) | OpenFarm#15974 | game 105199 ms = 3 h | STALLED 0 of 527 samples = 0% | deliveries=21 totalling 7021 (mean 334) | drains=11 totalling 7500 | per GAME HOUR: drained 2500, received 2340
+[C48V] LADDER ROW :: speed 1x (took=true, complete=true) | OpenFarm#15974 | game 105199 ms = 3 h | STALLED 0 of 527 samples = 0% | deliveries=21 totalling 7021 (mean 334) | drains=11 totalling 7500 | per GAME HOUR: drained 2500, received 2340
+[mod] [C48V] LADDER ROW :: speed 3x (took=true, complete=true) | OpenFarm#15779 | game 105000 ms = 3 h | STALLED 0 of 176 samples = 0% | deliveries=25 totalling 7560 (mean 302) | drains=10 totalling 6920 | per GAME HOUR: drained 2306, received 2520
+[C48V] LADDER ROW :: speed 3x (took=true, complete=true) | OpenFarm#15779 | game 105000 ms = 3 h | STALLED 0 of 176 samples = 0% | deliveries=25 totalling 7560 (mean 302) | drains=10 totalling 6920 | per GAME HOUR: drained 2306, received 2520
+[mod] [C48V] LADDER ROW :: speed 3x (took=true, complete=true) | OpenFarm#15974 | game 105000 ms = 3 h | STALLED 0 of 176 samples = 0% | deliveries=16 totalling 6520 (mean 407) | drains=12 totalling 6920 | per GAME HOUR: drained 2306, received 2173
+[C48V] LADDER ROW :: speed 3x (took=true, complete=true) | OpenFarm#15974 | game 105000 ms = 3 h | STALLED 0 of 176 samples = 0% | deliveries=16 totalling 6520 (mean 407) | drains=12 totalling 6920 | per GAME HOUR: drained 2306, received 2173
+[mod] [C48V] LADDER ROW :: speed 5x (took=true, complete=true) | OpenFarm#15779 | game 106000 ms = 3 h | STALLED 0 of 107 samples = 0% | deliveries=22 totalling 8085 (mean 367) | drains=11 totalling 8600 | per GAME HOUR: drained 2866, received 2695
+[C48V] LADDER ROW :: speed 5x (took=true, complete=true) | OpenFarm#15779 | game 106000 ms = 3 h | STALLED 0 of 107 samples = 0% | deliveries=22 totalling 8085 (mean 367) | drains=11 totalling 8600 | per GAME HOUR: drained 2866, received 2695
+[mod] [C48V] LADDER ROW :: speed 5x (took=true, complete=true) | OpenFarm#15974 | game 106000 ms = 3 h | STALLED 0 of 107 samples = 0% | deliveries=22 totalling 7119 (mean 323) | drains=11 totalling 7240 | per GAME HOUR: drained 2413, received 2373
+[C48V] LADDER ROW :: speed 5x (took=true, complete=true) | OpenFarm#15974 | game 106000 ms = 3 h | STALLED 0 of 107 samples = 0% | deliveries=22 totalling 7119 (mean 323) | drains=11 totalling 7240 | per GAME HOUR: drained 2413, received 2373
+[mod] [C48V] LADDER ROW :: speed 20x (took=true, complete=true) | OpenFarm#15779 | game 108000 ms = 3 h | STALLED 0 of 28 samples = 0% | deliveries=1 totalling 1400 (mean 1400) | drains=0 totalling 0 | per GAME HOUR: drained 0, received 466
+[C48V] LADDER ROW :: speed 20x (took=true, complete=true) | OpenFarm#15779 | game 108000 ms = 3 h | STALLED 0 of 28 samples = 0% | deliveries=1 totalling 1400 (mean 1400) | drains=0 totalling 0 | per GAME HOUR: drained 0, received 466
+[mod] [C48V] LADDER ROW :: speed 20x (took=true, complete=true) | OpenFarm#15974 | game 108000 ms = 3 h | STALLED 0 of 28 samples = 0% | deliveries=4 totalling 2261 (mean 565) | drains=2 totalling 900 | per GAME HOUR: drained 300, received 753
+[C48V] LADDER ROW :: speed 20x (took=true, complete=true) | OpenFarm#15974 | game 108000 ms = 3 h | STALLED 0 of 28 samples = 0% | deliveries=4 totalling 2261 (mean 565) | drains=2 totalling 900 | per GAME HOUR: drained 300, received 753
+[mod] [C48V] LADDER ⛔ READ THE PER-GAME-HOUR COLUMNS, NOT THE RAW COUNTS: the rungs are equal in GAME time and wildly unequal in real time, so a raw count comparison across speeds is meaningless. ⛔ A rung whose took=false is VOID. A rung whose complete=false is PARTIAL. A rung that never ran is UNSAMPLED, never zero.
+[C48V] LADDER ⛔ READ THE PER-GAME-HOUR COLUMNS, NOT THE RAW COUNTS: the rungs are equal in GAME time and wildly unequal in real time, so a raw count comparison across speeds is meaningless. ⛔ A rung whose took=false is VOID. A rung whose complete=false is PARTIAL. A rung that never ran is UNSAMPLED, never zero.
+[mod] [C48V] LADDER ⭐ THE OWNER'S PREDICTION, committed before this ran: stall frequency FALLS as speed RISES. If the stalled-% column does not fall monotonically, say so plainly — a refutation here is worth more than a confirmation, because it would mean the 52%-vs-3.6% gap between the attended and unattended legs has some other cause still unfound.
+[C48V] LADDER ⭐ THE OWNER'S PREDICTION, committed before this ran: stall frequency FALLS as speed RISES. If the stalled-% column does not fall monotonically, say so plainly — a refutation here is worth more than a confirmation, because it would mean the 52%-vs-3.6% gap between the attended and unattended legs has some other cause still unfound.
+[mod] [C48V] DEPOT at close :: StationSmall#12472 stored Seeds=194688 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StationSmall#12472 stored Seeds=194688 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#9296 stored Seeds=139739 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#9296 stored Seeds=139739 (ok=true) | desired_amount=15000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#14612 stored Seeds=180000 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#14619 stored Seeds=122000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:03:36:600
+[mod] [C48V] DEPOT at close :: StationSmall#12496 stored Seeds=202045 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StationSmall#12496 stored Seeds=202045 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#6617 stored Seeds=179994 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#6615 stored Seeds=84000 (ok=true) | desired_amount=5000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StationSmall#12631 stored Seeds=194795 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StationSmall#12631 stored Seeds=194795 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#15037 stored Seeds=179960 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#15036 stored Seeds=111000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#15036 stored Seeds=111000 (ok=true) | desired_amount=8000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#15986 stored Seeds=180000 (ok=true) | desired_amount=50000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#7017 stored Seeds=180000 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StationSmall#4627 stored Seeds=213870 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StationSmall#4627 stored Seeds=213870 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StationSmall#4552 stored Seeds=198101 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StationSmall#4552 stored Seeds=198101 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#4532 stored Seeds=41000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#16009 stored Seeds=179973 (ok=true) | desired_amount=65000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#4544 stored Seeds=62400 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: SpaceElevator#16171 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#1073 stored Seeds=56107 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#1073 stored Seeds=56107 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#15963 stored Seeds=180000 (ok=true) | desired_amount=70000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalLanderRocket#4641 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#4087 stored Seeds=180000 (ok=true) | desired_amount=90000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StationSmall#6286 stored Seeds=163376 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StationSmall#6286 stored Seeds=163376 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#6315 stored Seeds=180000 (ok=true) | desired_amount=80000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#1471 stored Seeds=143455 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#1471 stored Seeds=143455 (ok=true) | desired_amount=14000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalStorageDepot#2870 stored Seeds=269829 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalStorageDepot#2870 stored Seeds=269829 (ok=true) | desired_amount=30000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StorageSeeds#7005 stored Seeds=180000 (ok=true) | desired_amount=35000 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalZeusRocket#1063 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalZeusRocket#1061 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: UniversalZeusRocket#1064 stored Seeds=0 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StationSmall#4792 stored Seeds=211858 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StationSmall#4792 stored Seeds=211858 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: StationSmall#4842 stored Seeds=200917 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: StationSmall#4842 stored Seeds=200917 (ok=true) | desired_amount=nil | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: MechanizedDepotSeeds#3789 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[mod] [C48V] DEPOT at close :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+[C48V] DEPOT at close :: MechanizedDepotSeeds#2776 stored Seeds=4000000 (ok=true) | desired_amount=0 | ⛔ a supply request's desired_amount is what it KEEPS BACK (StorageDepot.lua:466), so 0 means 'give everything' — it is NOT a reason to withhold
+						Lua 0:03:36:603
+[mod] [C48V] VEG at close :: 3561 live VegetationTaskRequester(s) on the map
+[C48V] VEG at close :: 3561 live VegetationTaskRequester(s) on the map
+[mod] [C48V] VEG at close :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48V] VEG at close :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true; TaskRequester default is 100, SurfaceDeposit overrides to 150) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+						Lua 0:03:36:604
+[mod] [C48V] VEG at close :: OFFER SIZES (preset:amount x count) over 400 of 3561 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:184 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x382, Bush:32 x1, Bush:76 x1, Bush:8 x1
+[C48V] VEG at close :: OFFER SIZES (preset:amount x count) over 400 of 3561 requester(s) ⚠️ CAPPED at 400 — the rest were NOT sampled, so this is a sample of the distribution, not the whole of it :: Bush:136 x1, Bush:156 x1, Bush:176 x1, Bush:184 x1, Bush:228 x1, Bush:244 x1, Bush:252 x1, Bush:260 x1, Bush:268 x2, Bush:272 x1, Bush:274 x1, Bush:278 x3, Bush:280 x382, Bush:32 x1, Bush:76 x1, Bush:8 x1
+						Lua 0:03:36:608
+[mod] [C48V] VEG at close :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=270 · DroneHubExtender#1360 r=50 working=true veg=310 · DroneHub#1457 r=50 working=true veg=381 · DroneHubExtender#2341 r=50 working=true veg=261 · DroneHubExtender#2869 r=50 working=true veg=336 · UniversalZeusRocket#1063 r=35 working=true veg=240 | ⭐⭐ 545 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5520 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG at close :: OpenFarm#15779 (FARM) ⭐ SERVING COVERAGE: 6 centre(s)/extender(s) — DroneHub#1078 r=50 working=true veg=270 · DroneHubExtender#1360 r=50 working=true veg=310 · DroneHub#1457 r=50 working=true veg=381 · DroneHubExtender#2341 r=50 working=true veg=261 · DroneHubExtender#2869 r=50 working=true veg=336 · UniversalZeusRocket#1063 r=35 working=true veg=240 | ⭐⭐ 545 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 5520 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG at close :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 171 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG at close :: OpenFarm#15779 (FARM) LOCAL DENSITY PROXY: 171 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+						Lua 0:03:36:609
+[mod] [C48V] VEG at close :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=512 | ⭐⭐ 512 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 906 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[C48V] VEG at close :: OpenFarm#15974 (FARM) ⭐ SERVING COVERAGE: 1 centre(s)/extender(s) — DroneHub#8591 r=50 working=true veg=512 | ⭐⭐ 512 DISTINCT VegetationTaskRequester(s) reachable (deduplicated by handle) | 906 TaskRequester(s) of every kind in the same areas (sum, NOT deduplicated) — ⭐ THIS IS THE COMPARISON: the complaining farm should hold many and the silent one few
+[mod] [C48V] VEG at close :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 133 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[C48V] VEG at close :: OpenFarm#15974 (FARM) LOCAL DENSITY PROXY: 133 offer(s) within a fixed 35-hex radius of the farm itself (ok=true) — ⚠️ a proxy for 'is this farm standing in thicker vegetation', NOT the drone search area
+[mod] [C48V] REPORT ⛔ NOT CLAIMED: that a drone CHOSE a vegetation offer over a depot. This leg measures offer counts, depot stock and delivery sizes. If the depots sit flat while a farm's buffer sawtooths on small deliveries, that is strong circumstantial evidence — it is not a read of the drone's decision.
+[C48V] REPORT ⛔ NOT CLAIMED: that a drone CHOSE a vegetation offer over a depot. This leg measures offer counts, depot stock and delivery sizes. If the depots sit flat while a farm's buffer sawtooths on small deliveries, that is strong circumstantial evidence — it is not a read of the drone's decision.
+[mod] [C48V] REPORT ⚠️ CONFOUNDS: cheats enabled, oversized terraforming speed-run colony, drone carry dial at +2 (a trip is 3000, not the vanilla 1000).
+[C48V] REPORT ⚠️ CONFOUNDS: cheats enabled, oversized terraforming speed-run colony, drone carry dial at +2 (a trip is 3000, not the vanilla 1000).
+[mod] [C48V] TRY C47.Report ok=true result=true
+[C48V] TRY C47.Report ok=true result=true
+[mod] [C48V] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=20x | loads_this_process=1 | mode=REAL | note=at close
+[C48V] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=20x | loads_this_process=1 | mode=REAL | note=at close
+[mod] [C48V] CONDITIONS opt-in pack=8/8 active
+[C48V] CONDITIONS opt-in pack=8/8 active
+[mod] [C48V] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[C48V] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48V] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48V] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[mod] [C48V] CLOCK close :: GameTime()=276275666 (383.71 sols since game start) | UIColony.day=384 hour=23 | speed=20x | RealTime()=203160
+[C48V] CLOCK close :: GameTime()=276275666 (383.71 sols since game start) | UIColony.day=384 hour=23 | speed=20x | RealTime()=203160
+[mod] [C48V] ERRORWATCH C48V — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== c47-farm C48V ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one (owner rule 2026-08-01). stage_at_close=reporting loads_this_process=1 mode=REAL
+[C48V] ERRORWATCH C48V — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== c47-farm C48V ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one (owner rule 2026-08-01). stage_at_close=reporting loads_this_process=1 mode=REAL
+[mod] [C48V] === c47-farm C48V === DONE. ⛔ Nothing was saved.
+[C48V] === c47-farm C48V === DONE. ⛔ Nothing was saved.
+						Lua 0:03:39:599
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:03:39:603
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:03:39:960
+
+
+*** Debug::Done()
+Time (ms)	219960
+
+
