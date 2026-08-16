@@ -103,6 +103,24 @@ owed input stays here no matter how struck-through it looks.
     top-up ("gleaner") idea in the opt-in mod remains the remedy that fixes
     the waste without touching the choice.** → `agent/bugs/C48.md`.
 
+    ✅✅ **AND YOU CLOSED THE LAST LOOSE END THE SAME EVENING, 2026-08-16 —
+    nothing owed, recorded here because it is your call and it kills an option
+    nobody should reach for again.** Your words: *"I don't think a buffer will
+    fix it because they don't fill the current buffer as of now"* and *"we can
+    retire that for the bug fix mod, and leave it solely for the opt in mod."*
+    ⇒ **The "just give the farm a bigger seed buffer" fix is dead**, and it was
+    the cheapest-looking one on the list. You are right and our own numbers say
+    so: the farm never fills the 5000 it already has, because every delivery is
+    one bush's 280 seeds against a drone that can carry 3000. Raising the
+    ceiling to 10000 would leave a bigger buffer sitting at 400. ⇒ **The old
+    warning "don't fix C47 until C48 is measured, a bigger buffer would hide
+    it" is retired with it** — a buffer that never fills can't hide anything.
+    ⇒ The whole farm family is now **solely the opt-in mod's**, the buffer shape
+    is struck there too so the gleaner work can't inherit it, and the fix pack
+    keeps only the records and the probe. Nothing is built, nothing is owed.
+    → `agent/bugs/C47.md` (shapes section), opt-in
+    `agent/reports/SEED_LOGISTICS_HANDOFF.md` §2.
+
     ~~**When you saw the endless "waiting for Seeds" popups — had you just done
     something to those farms?**~~
 

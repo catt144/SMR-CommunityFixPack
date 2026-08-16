@@ -543,15 +543,41 @@ module's own maps — byte-identical in all three.
   self-deactivation must be safe silently.
 - Mod Options is the one universal surface (gamepad-native) — anything a
   console player must be able to steer goes there or nowhere.
-- Any enabled mod blocks ALL achievements on those platforms (not on
-  Steam/PC) — a storefront disclosure, not a code concern, but never write
-  player-facing text that contradicts it.
+- Any enabled mod blocks ALL achievements on **exactly** `Platform.playstation`,
+  `Platform.xbox` and `Platform.windows_store` — `DoModsBlockAchievements()`,
+  `CommonLua/Classes/Achievement.lua:61-63`, consumed at `:77` (`"mods loaded"`)
+  and `Lua/UI/SaveLoad.lua:102`. ⚠️ **Say "Steam and other PC versions", NOT
+  "PC"** — the Microsoft Store (Game Pass) IS a PC platform and IS blocked; this
+  line said "not on Steam/PC" until 2026-08-16 and that wording would have
+  misled a Game Pass player. The public pages already say it correctly
+  (`content/faq.md`, `content/install.md`). A storefront disclosure, not a code
+  concern, but never write player-facing text that contradicts it.
+  ⭐ **We cannot cause it and cannot ever cause it:** the pack touches none of
+  the five blockers (modding tools active · a game rule with
+  `DisableAchievements` · cheats used/enabled · tutorial active · mods-loaded on
+  the three platforms above), and `UnableToUnlockAchievementReasons` is on
+  `ModMsgBlacklist` (`CommonLua/Classes/Mod.lua:1439`) so mod code cannot
+  subscribe to it at all. The savegame's `blocking_achievements` flag comes only
+  from game rules (`CommonLua/UI/SaveLoadUI.lua:442`), never from mods.
 
 ## 8. Release hygiene
 
 - One fix per `Code/Fix_*.lua` file; file name matches the Register id; every
   file listed explicitly in `metadata.lua` `code`.
 - `00_Core.lua` must load first (list order in metadata controls load order).
+  ⚠️ That is INTRA-mod order and is ours to set. **INTER-mod order is not**
+  (`EF-054`): it is the player's enable order, decided before a line of our Lua
+  runs, with no priority field and no way to request a position.
+  ⚖️ **We PREFER to load first, and the reason is deference, not precedence**
+  (owner, 2026-08-16): first = innermost = we patch the vanilla we verified,
+  every later mod wraps us, and a mod that replaces the function outright wins
+  cleanly. Loading last would wrap another mod's implementation and apply a
+  vanilla-derived fix to code we never inspected. ⛔ **Never build on it** — the
+  deference is already structural (call-through wrappers + `EF-054`
+  order-independence), nothing breaks at any position, and there is deliberately
+  no player-facing load-order instruction: the Mod Manager's visible list is a
+  cosmetic title sort, so a player could not verify following one. Owner ruling
+  the same day: note it, watch for a real conflict, create no new problems.
 - Before release: verify each target against the shipping `Packs\Lua.fpk`
   (see WORKFLOW.md), test each fix in-game, update agent/bugs/ statuses, credit
   prior art (ChoGGi's Fix Bugs mod documented several of these bug families
