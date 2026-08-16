@@ -274,11 +274,23 @@ function C47.InstallWrapper()
 		say("WRAP ⛔ TaskRequestHub.FindTask did not resolve — THE DECISION LOG IS OFF and every pairing verdict is UNSAMPLED.")
 		return false
 	end
-	C47.Label("FORCED", "a LOG-ONLY wrapper on TaskRequestHub.FindTask",
+	C47.Label("FORCED", "a LOG-ONLY wrapper on FindTask, on EVERY class carrying it",
 		"calls the original, returns its values unchanged, restored at close — the single patched path of this leg")
+	-- ⛔⛔ DEFECT IN THIS FILE, CAUGHT BY ITS OWN FIRST LAUNCH (2026-08-16 00:32,
+	--    archived as c48pair1) AND REPAIRED HERE — the FOURTH bite of the same
+	--    trap in this chain: DefineClass FLATTENS inherited values into subclass
+	--    tables for lookup speed (classes.lua:988). `DroneHub.FindTask` is a
+	--    flattened COPY, so patching only `TaskRequestHub.FindTask` intercepted
+	--    NOTHING — 0 calls seen across a 10-game-hour window. The repair patches
+	--    every class in g_Classes whose FindTask resolves to the same shipped
+	--    function, remembering per class whether the key was OWN (flattened) or
+	--    inherited, so the restore puts back exactly what was there. The proof
+	--    of wiring is read off live hub INSTANCES below, not assumed.
 	C47.pair = fresh_pair_state()
 	C47.orig_findtask = hub_class.FindTask
-	hub_class.FindTask = function(hub, agent, flags)
+	C47.patched = {}
+	local wrapper
+	wrapper = function(hub, agent, flags)
 		local r, pr, res, amt, prio = C47.orig_findtask(hub, agent, flags)
 		local ok = pcall(function()
 			local P = C47.pair
@@ -326,17 +338,46 @@ function C47.InstallWrapper()
 		if not ok then C47.pair.wrap_errors = (C47.pair.wrap_errors or 0) + 1 end
 		return r, pr, res, amt, prio
 	end
-	say("WRAP installed :: TaskRequestHub.FindTask (class method, sole definition tree-wide, _TaskRequest.lua:72-83) — log-only, original called and returned unchanged")
-	return true
+	-- patch every class whose FindTask IS the shipped function — flattened own
+	-- keys and inheriting classes alike get an own-key wrapper.
+	local orig = C47.orig_findtask
+	local patched_names = {}
+	for name, cls in pairs(classes) do
+		if type(cls) == "table" then
+			local ok_f, f = pcall(function() return cls.FindTask end)
+			if ok_f and f == orig then
+				C47.patched[#C47.patched + 1] = { cls = cls, had_own = rawget(cls, "FindTask") ~= nil, name = tostring(name) }
+				cls.FindTask = wrapper
+				patched_names[#patched_names + 1] = tostring(name)
+			end
+		end
+	end
+	table.sort(patched_names)
+	say(fmt("WRAP installed on %d class(es) carrying the shipped FindTask (_TaskRequest.lua:72-83): %s — log-only, original called and returned unchanged",
+		#C47.patched, table.concat(patched_names, ", ")))
+	-- ⭐ the wiring PROOF: resolved off live hub instances, never assumed
+	local wired, unwired = 0, 0
+	for _, hub in ipairs(C47.hubs or empty_table) do
+		local ok_r, f = pcall(function() return hub.FindTask end)
+		if ok_r and f == wrapper then wired = wired + 1 else unwired = unwired + 1 end
+	end
+	say(fmt("WRAP wiring proof :: %d of %d live hub instances resolve FindTask to the wrapper, %d do NOT — ⛔ if any read unwired, their pairings are invisible to this log and the verdicts must say so",
+		wired, wired + unwired, unwired))
+	return wired > 0
 end
 
 function C47.RestoreWrapper()
-	local classes = rawget(_G, "g_Classes")
-	local hub_class = classes and classes.TaskRequestHub
-	if hub_class and C47.orig_findtask then
-		hub_class.FindTask = C47.orig_findtask
-		say("WRAP RESTORED :: TaskRequestHub.FindTask is the shipped function again; nothing persists (this leg never saves)")
+	for _, rec in ipairs(C47.patched or empty_table) do
+		if rec.had_own then
+			rec.cls.FindTask = C47.orig_findtask
+		else
+			rec.cls.FindTask = nil    -- the key was inherited; remove our shadow
+		end
 	end
+	if C47.patched and #C47.patched > 0 then
+		say(fmt("WRAP RESTORED on %d class(es) :: FindTask is the shipped function again everywhere; nothing persists (this leg never saves)", #C47.patched))
+	end
+	C47.patched = {}
 end
 
 ---- consumer sampling ---------------------------------------------------------

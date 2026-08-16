@@ -8,7 +8,38 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
-## 2026-08-15 (late) — the brake intervention: the first leg in this family allowed to change one thing changed it perfectly, and the thing it measured refused to move
+## 2026-08-16 — the pairing log: 985 matchmaker decisions witnessed at the one seam they all cross, and the owner's last-resort theory is proven categorically
+
+**This session (Fable), on the owner's go, and the case belongs to them.** In
+one evening of conversation the owner built a better control than any
+instrument here (a diner raised in the worst traffic on the map, bulk-filled
+to the brim in seconds — killing the demand-side theory this session had just
+proposed), drew a flight path that put a drone seven times past a stocked
+depot, generalized the whole case with four drones hauling harvest food past
+full warehouses, and corrected the record's own gloss on desired amounts. The
+leg that followed wrapped `TaskRequestHub:FindTask` — log-only, restored at
+close — after its first launch caught nothing and taught the flattened-class
+trap its fourth lesson (`classes.lua:988`; repaired to patch all 48 carrier
+classes, with a 19-of-19 live-instance wiring proof). Launch 2 witnessed
+25,184 calls and 985 supply-demand pairings on the owner's own colony:
+**Seeds chose a non-depot source 479 times of 479, and in 399 of those a
+fully-stocked, assignable depot sat nearer to the drone and lost** — while
+every one of the 34 depots offered its entire stock the whole window
+(confirming the owner's desired-amount reading with data and striking the
+c48veg gloss). Food showed the same rule wherever loose food existed and
+depots serving only the remainder; the mega-dome diner drained at farm rates
+(~48,000/sol) and never hiccuped, retiring the "shops are slow" assumption by
+measurement; and 125 of the seed pairings delivered INTO depots — the hoard
+grows from the landscape it refuses to spend. Bucket order was eliminated
+(higher-bucket depots also lost), distance and demand were already cleared, so
+one discriminator is left standing and it is stamped on every depot request in
+the shipped code: **`rfStorageDepot` — the matchmaker defers flagged storage
+behind every other source, categorically. Deliberate reserve machinery whose
+cost degenerates into never-serve on a terraformed map.** C48 graduates to
+measured-mechanism-characterized; design-versus-defect is the owner's ruling
+with no deadline; the gleaner next door survives every twist of this case as
+the remedy that fixes the trip instead of the choice; and the save contract
+held byte-for-byte through both launches.
 
 **This session (Fable), continuing from the terminal audit, on two owner
 rulings given in conversation.** First ruling — *"I am not going to manipulate

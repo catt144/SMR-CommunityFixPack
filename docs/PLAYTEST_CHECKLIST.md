@@ -83,6 +83,26 @@ owed input stays here no matter how struck-through it looks.
     mod is now the one remedy still standing. Nothing is built; nothing new is
     owed from you. → `agent/bugs/C48.md` (the full readings).
 
+    ⭐⭐ **CASE CLOSED — mechanism proven, 2026-08-16 (your go, your controls):**
+    we put a log on the exact spot where every drone receives its assignment
+    and watched **985 real decisions** on your own colony. For seeds, the
+    matchmaker picked the landscape over storage **479 times out of 479** — and
+    in **399** of those, a *full, available* depot sat **closer to the drone**
+    and lost anyway (one drone flew 7× past a stocked depot for a single bush).
+    Your reading was right on every count: **storage depots are a hard last
+    resort** — the network only touches them when no loose source exists, which
+    for food happens constantly (so your diners get bulk deliveries and never
+    starve — we measured one draining ~48,000/sol and keeping up fine) but for
+    seeds on a terraformed map happens *never*, because the bushes never run
+    out. Your "desired amount" understanding was also confirmed with data (it
+    withholds nothing from consumers), and your depots turn out to *restock
+    themselves from bushes* — that's why your seed hoard keeps growing. **This
+    is deliberate engine machinery with a cost the designers never priced on a
+    terraformed map. Whether that's a bug or a design cost is your ruling to
+    make, whenever you want to make it — nothing ships either way, and the
+    top-up ("gleaner") idea in the opt-in mod remains the remedy that fixes
+    the waste without touching the choice.** → `agent/bugs/C48.md`.
+
     ~~**When you saw the endless "waiting for Seeds" popups — had you just done
     something to those farms?**~~
 

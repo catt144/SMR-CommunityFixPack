@@ -1,0 +1,1022 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	44%
+Disk Free      	741185 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:074
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:078
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:673
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:817
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:02:015
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:735
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:792
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:792
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:795
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:18:145
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:150
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [C48P] [C48P] 98_C48Pair loaded — self-driving in 1 tick.
+[C48P] [C48P] 98_C48Pair loaded — self-driving in 1 tick.
+						Lua 0:00:18:151
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:18:152
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+						Lua 0:00:18:153
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+						Lua 0:00:18:154
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:18:155
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+						Lua 0:00:18:156
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+						Lua 0:00:18:157
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+						Lua 0:00:18:158
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+						Lua 0:00:18:159
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+						Lua 0:00:18:160
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+						Lua 0:00:18:161
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:704
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:780
+Reloading done in 977 ms
+						Lua 0:00:19:108
+[preset] Preset postprocess took 60 ms.
+						Lua 0:00:19:159
+479 / 479 particle streams loaded in 47 ms.
+						Lua 0:00:19:160
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:354
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:426
+[mod] [C48P] === c48-pairing C48P === payload loaded. Staged save: C48PAIR.savegame.sav						Lua 0:00:19:427
+
+[C48P] === c48-pairing C48P === payload loaded. Staged save: C48PAIR.savegame.sav
+						Lua 0:00:19:435
+[PdxSDK] Started up. Took 1632
+						Lua 0:00:19:465
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:897
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:898
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:997
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:998
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:891
+[mod] [C48P] CONDITIONS pack=75/75 active | map= | speed=1x | loads_this_process=0 | mode=REAL | note=main menu, before the load
+[C48P] CONDITIONS pack=75/75 active | map= | speed=1x | loads_this_process=0 | mode=REAL | note=main menu, before the load
+[mod] [C48P] CONDITIONS opt-in pack=8/8 active
+[C48P] CONDITIONS opt-in pack=8/8 active
+[mod] [C48P] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[C48P] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48P] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48P] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+						Lua 0:00:21:988
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:21:990
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:22:017
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:23:837
+*** Assets reloaded in 1.8 s, read 202.1 MB, read speed 109.4 MB/s, average read 4949 bytes.
+						Lua 0:00:29:783
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:29:792
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:29:816
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: paradox, Japan
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:29:832
+Game Loaded in 7844 ms
+						Lua 0:00:29:865
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:041
+Game loaded on map BlankBigCanyonCMix_09 in 9150 ms
+[mod] [C48P] LOAD OK #1 file=C48PAIR.savegame.sav — LoadGame returned no error
+[C48P] LOAD OK #1 file=C48PAIR.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:342
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:040
+[mod] [C48P] TRY UIColony:SetGameSpeed(3) ok=true result=3
+[C48P] TRY UIColony:SetGameSpeed(3) ok=true result=3
+						Lua 0:00:47:041
+[mod] [C48P] READ speed after load: before=1x after=3x | wanted=3x | RUNNING=true — the whole sampling window below is VOID if this is not the wanted speed (a loaded save arrives PAUSED: corun-pt15 rule C4)
+[C48P] READ speed after load: before=1x after=3x | wanted=3x | RUNNING=true — the whole sampling window below is VOID if this is not the wanted speed (a loaded save arrives PAUSED: corun-pt15 rule C4)
+[mod] [C48P] TRY load C48PAIR.savegame.sav (yielding) ok=true result=true
+[C48P] TRY load C48PAIR.savegame.sav (yielding) ok=true result=true
+[mod] [C48P] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=3x | loads_this_process=1 | mode=REAL | note=after the load
+[C48P] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=3x | loads_this_process=1 | mode=REAL | note=after the load
+[mod] [C48P] CONDITIONS opt-in pack=8/8 active
+[C48P] CONDITIONS opt-in pack=8/8 active
+[mod] [C48P] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[C48P] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48P] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48P] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[mod] [C48P] ORGANIC :: census of consumers, depots and hubs :: reads only
+[C48P] ORGANIC :: census of consumers, depots and hubs :: reads only
+[mod] [C48P] CLOCK census :: GameTime()=275838997 (383.10 sols since game start) | UIColony.day=384 hour=8 | speed=3x | RealTime()=34709
+[C48P] CLOCK census :: GameTime()=275838997 (383.10 sols since game start) | UIColony.day=384 hour=8 | speed=3x | RealTime()=34709
+						Lua 0:00:47:042
+[mod] [C48P] READ C48P-population(consuming buildings) = 100 | population=100 | APPLICABLE=true | witness=CurrentMap:MapGet('Building') filtered on DoesHaveConsumption(), walked this load
+[C48P] READ C48P-population(consuming buildings) = 100 | population=100 | APPLICABLE=true | witness=CurrentMap:MapGet('Building') filtered on DoesHaveConsumption(), walked this load
+[mod] [C48P] CENSUS CONSUMER [1] ForestationPlant#16192 :: resource=Seeds | stored=9185 of 10000 | working=true
+[C48P] CENSUS CONSUMER [1] ForestationPlant#16192 :: resource=Seeds | stored=9185 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [2] ForestationPlant#15554 :: resource=Seeds | stored=9203 of 10000 | working=true
+[C48P] CENSUS CONSUMER [2] ForestationPlant#15554 :: resource=Seeds | stored=9203 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [3] MegaMall#9011 :: resource=Food | stored=19200 of 20000 | working=true
+[C48P] CENSUS CONSUMER [3] MegaMall#9011 :: resource=Food | stored=19200 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [4] ShopsElectronics#9012 :: resource=Electronics | stored=4800 of 5000 | working=true
+[C48P] CENSUS CONSUMER [4] ShopsElectronics#9012 :: resource=Electronics | stored=4800 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [5] ShopsFood#9016 :: resource=Food | stored=9200 of 10000 | working=true
+[C48P] CENSUS CONSUMER [5] ShopsFood#9016 :: resource=Food | stored=9200 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [6] Diner#9019 :: resource=Food | stored=9600 of 10000 | working=true
+[C48P] CENSUS CONSUMER [6] Diner#9019 :: resource=Food | stored=9600 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [7] ForestationPlant#14627 :: resource=Seeds | stored=8510 of 10000 | working=true
+[C48P] CENSUS CONSUMER [7] ForestationPlant#14627 :: resource=Seeds | stored=8510 of 10000 | working=true
+						Lua 0:00:47:043
+[mod] [C48P] CENSUS CONSUMER [8] ForestationPlant#15556 :: resource=Seeds | stored=8710 of 10000 | working=true
+[C48P] CENSUS CONSUMER [8] ForestationPlant#15556 :: resource=Seeds | stored=8710 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [9] ForestationPlant#15565 :: resource=Seeds | stored=8744 of 10000 | working=true
+[C48P] CENSUS CONSUMER [9] ForestationPlant#15565 :: resource=Seeds | stored=8744 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [10] ForestationPlant#14623 :: resource=Seeds | stored=9122 of 10000 | working=true
+[C48P] CENSUS CONSUMER [10] ForestationPlant#14623 :: resource=Seeds | stored=9122 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [11] ForestationPlant#15549 :: resource=Seeds | stored=9259 of 10000 | working=true
+[C48P] CENSUS CONSUMER [11] ForestationPlant#15549 :: resource=Seeds | stored=9259 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [12] ForestationPlant#14628 :: resource=Seeds | stored=8696 of 10000 | working=true
+[C48P] CENSUS CONSUMER [12] ForestationPlant#14628 :: resource=Seeds | stored=8696 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [13] ShuttleHub#8345 :: resource=Fuel | stored=8810 of 10000 | working=true
+[C48P] CENSUS CONSUMER [13] ShuttleHub#8345 :: resource=Fuel | stored=8810 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [14] ShopsJewelry#8322 :: resource=Polymers | stored=4600 of 5000 | working=true
+[C48P] CENSUS CONSUMER [14] ShopsJewelry#8322 :: resource=Polymers | stored=4600 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [15] ShopsFood#8323 :: resource=Food | stored=9600 of 10000 | working=true
+[C48P] CENSUS CONSUMER [15] ShopsFood#8323 :: resource=Food | stored=9600 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [16] Diner#8326 :: resource=Food | stored=9200 of 10000 | working=true
+[C48P] CENSUS CONSUMER [16] Diner#8326 :: resource=Food | stored=9200 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [17] MegaMall#8329 :: resource=Food | stored=20000 of 20000 | working=true
+[C48P] CENSUS CONSUMER [17] MegaMall#8329 :: resource=Food | stored=20000 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [18] ForestationPlant#15563 :: resource=Seeds | stored=8682 of 10000 | working=true
+[C48P] CENSUS CONSUMER [18] ForestationPlant#15563 :: resource=Seeds | stored=8682 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [19] ForestationPlant#6836 :: resource=Seeds | stored=9145 of 10000 | working=true
+[C48P] CENSUS CONSUMER [19] ForestationPlant#6836 :: resource=Seeds | stored=9145 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [20] Diner#8332 :: resource=Food | stored=9600 of 10000 | working=true
+[C48P] CENSUS CONSUMER [20] Diner#8332 :: resource=Food | stored=9600 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [21] ForestationPlant#14625 :: resource=Seeds | stored=9043 of 10000 | working=true
+[C48P] CENSUS CONSUMER [21] ForestationPlant#14625 :: resource=Seeds | stored=9043 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [22] ForestationPlant#15547 :: resource=Seeds | stored=9086 of 10000 | working=true
+[C48P] CENSUS CONSUMER [22] ForestationPlant#15547 :: resource=Seeds | stored=9086 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [23] ForestationPlant#14629 :: resource=Seeds | stored=9177 of 10000 | working=true
+[C48P] CENSUS CONSUMER [23] ForestationPlant#14629 :: resource=Seeds | stored=9177 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [24] ForestationPlant#6620 :: resource=Seeds | stored=9115 of 10000 | working=true
+[C48P] CENSUS CONSUMER [24] ForestationPlant#6620 :: resource=Seeds | stored=9115 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [25] ForestationPlant#6958 :: resource=Seeds | stored=9113 of 10000 | working=true
+[C48P] CENSUS CONSUMER [25] ForestationPlant#6958 :: resource=Seeds | stored=9113 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [26] ForestationPlant#6622 :: resource=Seeds | stored=9202 of 10000 | working=true
+[C48P] CENSUS CONSUMER [26] ForestationPlant#6622 :: resource=Seeds | stored=9202 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [27] ForestationPlant#3790 :: resource=Seeds | stored=9053 of 10000 | working=true
+[C48P] CENSUS CONSUMER [27] ForestationPlant#3790 :: resource=Seeds | stored=9053 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [28] PolymerPlant#3574 :: resource=Fuel | stored=4340 of 5000 | working=true
+[C48P] CENSUS CONSUMER [28] PolymerPlant#3574 :: resource=Fuel | stored=4340 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [29] PolymerPlant#6993 :: resource=Fuel | stored=4532 of 5000 | working=true
+[C48P] CENSUS CONSUMER [29] PolymerPlant#6993 :: resource=Fuel | stored=4532 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [30] ElectronicsFactory#4682 :: resource=PreciousMetals | stored=4086 of 5000 | working=true
+[C48P] CENSUS CONSUMER [30] ElectronicsFactory#4682 :: resource=PreciousMetals | stored=4086 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [31] MachinePartsFactory#4670 :: resource=Metals | stored=3843 of 5000 | working=true
+[C48P] CENSUS CONSUMER [31] MachinePartsFactory#4670 :: resource=Metals | stored=3843 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [32] MegaMall#3059 :: resource=Food | stored=19800 of 20000 | working=true
+[C48P] CENSUS CONSUMER [32] MegaMall#3059 :: resource=Food | stored=19800 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [33] ShopsFood#3060 :: resource=Food | stored=9200 of 10000 | working=true
+[C48P] CENSUS CONSUMER [33] ShopsFood#3060 :: resource=Food | stored=9200 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [34] Diner#3065 :: resource=Food | stored=9400 of 10000 | working=true
+[C48P] CENSUS CONSUMER [34] Diner#3065 :: resource=Food | stored=9400 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [35] ForestationPlant#15047 :: resource=Seeds | stored=9175 of 10000 | working=true
+[C48P] CENSUS CONSUMER [35] ForestationPlant#15047 :: resource=Seeds | stored=9175 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [36] MegaMall#2723 :: resource=Food | stored=19600 of 20000 | working=true
+[C48P] CENSUS CONSUMER [36] MegaMall#2723 :: resource=Food | stored=19600 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [37] Diner#2724 :: resource=Food | stored=10000 of 10000 | working=true
+[C48P] CENSUS CONSUMER [37] Diner#2724 :: resource=Food | stored=10000 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [38] ShuttleHub#8570 :: resource=Fuel | stored=8708 of 10000 | working=true
+[C48P] CENSUS CONSUMER [38] ShuttleHub#8570 :: resource=Fuel | stored=8708 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [39] ShopsFood_Small#2722 :: resource=Food | stored=3400 of 4000 | working=true
+[C48P] CENSUS CONSUMER [39] ShopsFood_Small#2722 :: resource=Food | stored=3400 of 4000 | working=true
+[mod] [C48P] CENSUS CONSUMER [40] ElectronicsFactory#7671 :: resource=PreciousMetals | stored=4068 of 5000 | working=true
+[C48P] CENSUS CONSUMER [40] ElectronicsFactory#7671 :: resource=PreciousMetals | stored=4068 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [41] ShuttleHub#4646 :: resource=Fuel | stored=10000 of 10000 | working=true
+[C48P] CENSUS CONSUMER [41] ShuttleHub#4646 :: resource=Fuel | stored=10000 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [42] ForestationPlant#16155 :: resource=Seeds | stored=9058 of 10000 | working=true
+[C48P] CENSUS CONSUMER [42] ForestationPlant#16155 :: resource=Seeds | stored=9058 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [43] ForestationPlant#15043 :: resource=Seeds | stored=8637 of 10000 | working=true
+[C48P] CENSUS CONSUMER [43] ForestationPlant#15043 :: resource=Seeds | stored=8637 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [44] ForestationPlant#15050 :: resource=Seeds | stored=9120 of 10000 | working=true
+[C48P] CENSUS CONSUMER [44] ForestationPlant#15050 :: resource=Seeds | stored=9120 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [45] ForestationPlant#15052 :: resource=Seeds | stored=9136 of 10000 | working=true
+[C48P] CENSUS CONSUMER [45] ForestationPlant#15052 :: resource=Seeds | stored=9136 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [46] Diner#8661 :: resource=Food | stored=10000 of 10000 | working=true
+[C48P] CENSUS CONSUMER [46] Diner#8661 :: resource=Food | stored=10000 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [47] ShopsFood#8663 :: resource=Food | stored=9960 of 10000 | working=true
+[C48P] CENSUS CONSUMER [47] ShopsFood#8663 :: resource=Food | stored=9960 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [48] ForestationPlant#16008 :: resource=Seeds | stored=8776 of 10000 | working=true
+[C48P] CENSUS CONSUMER [48] ForestationPlant#16008 :: resource=Seeds | stored=8776 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [49] ArtWorkshop#8669 :: resource=Polymers | stored=6000 of 6000 | working=true
+[C48P] CENSUS CONSUMER [49] ArtWorkshop#8669 :: resource=Polymers | stored=6000 of 6000 | working=true
+[mod] [C48P] CENSUS CONSUMER [50] MegaMall#8670 :: resource=Food | stored=19920 of 20000 | working=true
+[C48P] CENSUS CONSUMER [50] MegaMall#8670 :: resource=Food | stored=19920 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [51] BioroboticsWorkshop#8672 :: resource=MachineParts | stored=4538 of 6000 | working=true
+[C48P] CENSUS CONSUMER [51] BioroboticsWorkshop#8672 :: resource=MachineParts | stored=4538 of 6000 | working=true
+[mod] [C48P] CENSUS CONSUMER [52] ElectronicsFactory_Small#16002 :: resource=PreciousMetals | stored=4724 of 5000 | working=true
+[C48P] CENSUS CONSUMER [52] ElectronicsFactory_Small#16002 :: resource=PreciousMetals | stored=4724 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [53] VRWorkshop#8674 :: resource=Electronics | stored=6000 of 6000 | working=true
+[C48P] CENSUS CONSUMER [53] VRWorkshop#8674 :: resource=Electronics | stored=6000 of 6000 | working=true
+[mod] [C48P] CENSUS CONSUMER [54] ElectronicsFactory#8675 :: resource=PreciousMetals | stored=4833 of 5000 | working=false
+[C48P] CENSUS CONSUMER [54] ElectronicsFactory#8675 :: resource=PreciousMetals | stored=4833 of 5000 | working=false
+[mod] [C48P] CENSUS CONSUMER [55] OpenFarm#15974 :: resource=Seeds | stored=2600 of 5000 | working=true
+[C48P] CENSUS CONSUMER [55] OpenFarm#15974 :: resource=Seeds | stored=2600 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [56] TVStudioWorkshopCCP1#8676 :: resource=Electronics | stored=5000 of 5000 | working=true
+[C48P] CENSUS CONSUMER [56] TVStudioWorkshopCCP1#8676 :: resource=Electronics | stored=5000 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [57] PolymerPlant#8677 :: resource=Fuel | stored=4730 of 5000 | working=true
+[C48P] CENSUS CONSUMER [57] PolymerPlant#8677 :: resource=Fuel | stored=4730 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [58] PolymerPlant#16000 :: resource=Fuel | stored=4826 of 5000 | working=true
+[C48P] CENSUS CONSUMER [58] PolymerPlant#16000 :: resource=Fuel | stored=4826 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [59] ForestationPlant#15099 :: resource=Seeds | stored=9139 of 10000 | working=true
+[C48P] CENSUS CONSUMER [59] ForestationPlant#15099 :: resource=Seeds | stored=9139 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [60] ForestationPlant#7016 :: resource=Seeds | stored=9550 of 10000 | working=true
+[C48P] CENSUS CONSUMER [60] ForestationPlant#7016 :: resource=Seeds | stored=9550 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [61] ForestationPlant#16011 :: resource=Seeds | stored=9105 of 10000 | working=true
+[C48P] CENSUS CONSUMER [61] ForestationPlant#16011 :: resource=Seeds | stored=9105 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [62] CarbonateProcessor#14608 :: resource=WasteRock | stored=17500 of 20000 | working=true
+[C48P] CENSUS CONSUMER [62] CarbonateProcessor#14608 :: resource=WasteRock | stored=17500 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [63] ForestationPlant#15817 :: resource=Seeds | stored=9076 of 10000 | working=true						Lua 0:00:47:044
+
+[C48P] CENSUS CONSUMER [63] ForestationPlant#15817 :: resource=Seeds | stored=9076 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [64] ForestationPlant#15098 :: resource=Seeds | stored=9162 of 10000 | working=true
+[C48P] CENSUS CONSUMER [64] ForestationPlant#15098 :: resource=Seeds | stored=9162 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [65] CarbonateProcessor#1597 :: resource=WasteRock | stored=20000 of 20000 | working=true
+[C48P] CENSUS CONSUMER [65] CarbonateProcessor#1597 :: resource=WasteRock | stored=20000 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [66] CarbonateProcessor#14610 :: resource=WasteRock | stored=20000 of 20000 | working=true
+[C48P] CENSUS CONSUMER [66] CarbonateProcessor#14610 :: resource=WasteRock | stored=20000 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [67] ForestationPlant#15810 :: resource=Seeds | stored=9196 of 10000 | working=true
+[C48P] CENSUS CONSUMER [67] ForestationPlant#15810 :: resource=Seeds | stored=9196 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [68] OpenFarm#15779 :: resource=Seeds | stored=3665 of 5000 | working=true
+[C48P] CENSUS CONSUMER [68] OpenFarm#15779 :: resource=Seeds | stored=3665 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [69] ReconCenter#2766 :: resource=Electronics | stored=20000 of 20000 | working=true
+[C48P] CENSUS CONSUMER [69] ReconCenter#2766 :: resource=Electronics | stored=20000 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [70] ForestationPlant#4089 :: resource=Seeds | stored=9136 of 10000 | working=true
+[C48P] CENSUS CONSUMER [70] ForestationPlant#4089 :: resource=Seeds | stored=9136 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [71] ForestationPlant#2793 :: resource=Seeds | stored=8933 of 10000 | working=true
+[C48P] CENSUS CONSUMER [71] ForestationPlant#2793 :: resource=Seeds | stored=8933 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [72] ShuttleHub#8568 :: resource=Fuel | stored=9250 of 10000 | working=true
+[C48P] CENSUS CONSUMER [72] ShuttleHub#8568 :: resource=Fuel | stored=9250 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [73] ForestationPlant#7004 :: resource=Seeds | stored=9145 of 10000 | working=true
+[C48P] CENSUS CONSUMER [73] ForestationPlant#7004 :: resource=Seeds | stored=9145 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [74] ShuttleHub#8565 :: resource=Fuel | stored=9250 of 10000 | working=true
+[C48P] CENSUS CONSUMER [74] ShuttleHub#8565 :: resource=Fuel | stored=9250 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [75] ShuttleHub#1563 :: resource=Fuel | stored=9395 of 10000 | working=true
+[C48P] CENSUS CONSUMER [75] ShuttleHub#1563 :: resource=Fuel | stored=9395 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [76] Diner#1542 :: resource=Food | stored=10000 of 10000 | working=true
+[C48P] CENSUS CONSUMER [76] Diner#1542 :: resource=Food | stored=10000 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [77] ShopsFood_Small#1539 :: resource=Food | stored=4000 of 4000 | working=true
+[C48P] CENSUS CONSUMER [77] ShopsFood_Small#1539 :: resource=Food | stored=4000 of 4000 | working=true
+[mod] [C48P] CENSUS CONSUMER [78] GHGFactory#1596 :: resource=Fuel | stored=9520 of 10000 | working=true
+[C48P] CENSUS CONSUMER [78] GHGFactory#1596 :: resource=Fuel | stored=9520 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [79] TVStudioWorkshopCCP1#4951 :: resource=Electronics | stored=5000 of 5000 | working=true
+[C48P] CENSUS CONSUMER [79] TVStudioWorkshopCCP1#4951 :: resource=Electronics | stored=5000 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [80] MegaMall#6297 :: resource=Food | stored=19200 of 20000 | working=true
+[C48P] CENSUS CONSUMER [80] MegaMall#6297 :: resource=Food | stored=19200 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [81] ShopsFood#15763 :: resource=Food | stored=9000 of 10000 | working=true
+[C48P] CENSUS CONSUMER [81] ShopsFood#15763 :: resource=Food | stored=9000 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [82] Diner#5341 :: resource=Food | stored=9800 of 10000 | working=true
+[C48P] CENSUS CONSUMER [82] Diner#5341 :: resource=Food | stored=9800 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [83] MegaMall#2900 :: resource=Food | stored=20000 of 20000 | working=true
+[C48P] CENSUS CONSUMER [83] MegaMall#2900 :: resource=Food | stored=20000 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [84] ShopsElectronics#2902 :: resource=Electronics | stored=4600 of 5000 | working=true
+[C48P] CENSUS CONSUMER [84] ShopsElectronics#2902 :: resource=Electronics | stored=4600 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [85] ShopsFood#2901 :: resource=Food | stored=10000 of 10000 | working=true
+[C48P] CENSUS CONSUMER [85] ShopsFood#2901 :: resource=Food | stored=10000 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [86] MegaMall#4955 :: resource=Food | stored=20000 of 20000 | working=true
+[C48P] CENSUS CONSUMER [86] MegaMall#4955 :: resource=Food | stored=20000 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [87] ShopsElectronics#6314 :: resource=Electronics | stored=4400 of 5000 | working=true
+[C48P] CENSUS CONSUMER [87] ShopsElectronics#6314 :: resource=Electronics | stored=4400 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [88] Diner#5339 :: resource=Food | stored=10000 of 10000 | working=true
+[C48P] CENSUS CONSUMER [88] Diner#5339 :: resource=Food | stored=10000 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [89] ShopsJewelry#5329 :: resource=Polymers | stored=4400 of 5000 | working=true
+[C48P] CENSUS CONSUMER [89] ShopsJewelry#5329 :: resource=Polymers | stored=4400 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [90] ForestationPlant#6325 :: resource=Seeds | stored=9500 of 10000 | working=true
+[C48P] CENSUS CONSUMER [90] ForestationPlant#6325 :: resource=Seeds | stored=9500 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [91] ElectronicsFactory#2845 :: resource=PreciousMetals | stored=4846 of 5000 | working=true
+[C48P] CENSUS CONSUMER [91] ElectronicsFactory#2845 :: resource=PreciousMetals | stored=4846 of 5000 | working=true
+[mod] [C48P] CENSUS CONSUMER [92] GHGFactory#1590 :: resource=Fuel | stored=9160 of 10000 | working=true
+[C48P] CENSUS CONSUMER [92] GHGFactory#1590 :: resource=Fuel | stored=9160 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [93] ForestationPlant#6324 :: resource=Seeds | stored=9160 of 10000 | working=true
+[C48P] CENSUS CONSUMER [93] ForestationPlant#6324 :: resource=Seeds | stored=9160 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [94] ShopsFood#5340 :: resource=Food | stored=9400 of 10000 | working=true
+[C48P] CENSUS CONSUMER [94] ShopsFood#5340 :: resource=Food | stored=9400 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [95] MegaMall#5327 :: resource=Food | stored=19400 of 20000 | working=true
+[C48P] CENSUS CONSUMER [95] MegaMall#5327 :: resource=Food | stored=19400 of 20000 | working=true
+[mod] [C48P] CENSUS CONSUMER [96] Diner#2903 :: resource=Food | stored=9800 of 10000 | working=true
+[C48P] CENSUS CONSUMER [96] Diner#2903 :: resource=Food | stored=9800 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [97] Diner#2850 :: resource=Food | stored=10000 of 10000 | working=true
+[C48P] CENSUS CONSUMER [97] Diner#2850 :: resource=Food | stored=10000 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [98] ShuttleHub#8564 :: resource=Fuel | stored=9309 of 10000 | working=true
+[C48P] CENSUS CONSUMER [98] ShuttleHub#8564 :: resource=Fuel | stored=9309 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [99] ForestationPlant#16077 :: resource=Seeds | stored=8752 of 10000 | working=true
+[C48P] CENSUS CONSUMER [99] ForestationPlant#16077 :: resource=Seeds | stored=8752 of 10000 | working=true
+[mod] [C48P] CENSUS CONSUMER [100] ForestationPlant#16076 :: resource=Seeds | stored=8639 of 10000 | working=true
+[C48P] CENSUS CONSUMER [100] ForestationPlant#16076 :: resource=Seeds | stored=8639 of 10000 | working=true
+						Lua 0:00:47:046
+[mod] [C48P] READ C48P-population(Seeds depots) = 34 | population=34 | APPLICABLE=true | witness=map walk, DoesAcceptResource('Seeds')
+[C48P] READ C48P-population(Seeds depots) = 34 | population=34 | APPLICABLE=true | witness=map walk, DoesAcceptResource('Seeds')
+[mod] [C48P] READ C48P-population(Food depots) = 34 | population=34 | APPLICABLE=true | witness=map walk, DoesAcceptResource('Food')
+[C48P] READ C48P-population(Food depots) = 34 | population=34 | APPLICABLE=true | witness=map walk, DoesAcceptResource('Food')
+[mod] [C48P] DEPOT census [Seeds] StationSmall#12472 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StationSmall#12472 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#9296 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=15000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#9296 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=15000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#14612 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=65000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#14612 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=65000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#14619 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=8000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#14619 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=8000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StationSmall#12496 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StationSmall#12496 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#6617 :: stored=179994 | supply request actual=179994 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=90000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#6617 :: stored=179994 | supply request actual=179994 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=90000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#6615 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=5000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#6615 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=5000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StationSmall#12631 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StationSmall#12631 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#15037 :: stored=179960 | supply request actual=179960 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=80000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#15037 :: stored=179960 | supply request actual=179960 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=80000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#15036 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=8000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#15036 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=8000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#15986 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=50000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#15986 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=50000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#7017 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=30000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#7017 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=30000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StationSmall#4627 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StationSmall#4627 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StationSmall#4552 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StationSmall#4552 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#4532 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#4532 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#16009 :: stored=179973 | supply request actual=179973 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=65000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#16009 :: stored=179973 | supply request actual=179973 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=65000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#4544 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#4544 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] SpaceElevator#16171 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] SpaceElevator#16171 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#1073 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#1073 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#15963 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=70000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#15963 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=70000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalLanderRocket#4641 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalLanderRocket#4641 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#4087 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=90000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#4087 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=90000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StationSmall#6286 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StationSmall#6286 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#6315 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=80000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#6315 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=80000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#1471 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=14000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#1471 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=14000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalStorageDepot#2870 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=30000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalStorageDepot#2870 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=30000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+						Lua 0:00:47:047
+[mod] [C48P] DEPOT census [Seeds] StorageSeeds#7005 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=35000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StorageSeeds#7005 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=35000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalZeusRocket#1063 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalZeusRocket#1063 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalZeusRocket#1061 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalZeusRocket#1061 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] UniversalZeusRocket#1064 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] UniversalZeusRocket#1064 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StationSmall#4792 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StationSmall#4792 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] StationSmall#4842 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] StationSmall#4842 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] MechanizedDepotSeeds#3789 :: stored=4000000 | supply request actual=nil (ok=true) assignable=nil (ok=true) flags=no-request-resolved | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] MechanizedDepotSeeds#3789 :: stored=4000000 | supply request actual=nil (ok=true) assignable=nil (ok=true) flags=no-request-resolved | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT census [Seeds] MechanizedDepotSeeds#2776 :: stored=4000000 | supply request actual=nil (ok=true) assignable=nil (ok=true) flags=no-request-resolved | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT census [Seeds] MechanizedDepotSeeds#2776 :: stored=4000000 | supply request actual=nil (ok=true) assignable=nil (ok=true) flags=no-request-resolved | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+						Lua 0:00:47:049
+[mod] [C48P] READ C48P-population(DroneControl hubs) = 19 | population=19 | APPLICABLE=true | witness=CurrentMap:MapGet('DroneControl')
+[C48P] READ C48P-population(DroneControl hubs) = 19 | population=19 | APPLICABLE=true | witness=CurrentMap:MapGet('DroneControl')
+[mod] [C48P] TRY leg Census (yielding) ok=true result=true
+[C48P] TRY leg Census (yielding) ok=true result=true
+[mod] [C48P] FORCED :: a LOG-ONLY wrapper on TaskRequestHub.FindTask :: calls the original, returns its values unchanged, restored at close — the single patched path of this leg
+[C48P] FORCED :: a LOG-ONLY wrapper on TaskRequestHub.FindTask :: calls the original, returns its values unchanged, restored at close — the single patched path of this leg
+[mod] [C48P] WRAP installed :: TaskRequestHub.FindTask (class method, sole definition tree-wide, _TaskRequest.lua:72-83) — log-only, original called and returned unchanged
+[C48P] WRAP installed :: TaskRequestHub.FindTask (class method, sole definition tree-wide, _TaskRequest.lua:72-83) — log-only, original called and returned unchanged
+[mod] [C48P] TRY leg InstallWrapper (yielding) ok=true result=true
+[C48P] TRY leg InstallWrapper (yielding) ok=true result=true
+[mod] [C48P] WINDOW OPEN :: GameTime=275838997 | target +300000 game ms | speed=3x | consumer sampling every 500 real ms | decision log LIVE
+[C48P] WINDOW OPEN :: GameTime=275838997 | target +300000 game ms | speed=3x | consumer sampling every 500 real ms | decision log LIVE
+[mod] [C48P] QUEUES window open :: Elevator#9430 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x2 | p1: veg-offer x170
+[C48P] QUEUES window open :: Elevator#9430 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x2 | p1: veg-offer x170
+[mod] [C48P] QUEUES window open :: DroneHub#9437 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x2 | p1: veg-offer x309
+[C48P] QUEUES window open :: DroneHub#9437 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x2 | p1: veg-offer x309
+						Lua 0:00:47:050
+[mod] [C48P] QUEUES window open :: DroneHub#8285 'Seeds' supply by priority bucket :: p0: depot x1 | p1: veg-offer x287
+[C48P] QUEUES window open :: DroneHub#8285 'Seeds' supply by priority bucket :: p0: depot x1 | p1: veg-offer x287
+[mod] [C48P] QUEUES window open :: DroneHub#14618 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x469
+[C48P] QUEUES window open :: DroneHub#14618 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x469
+[mod] [C48P] QUEUES window open :: DroneHub#6619 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x116
+[C48P] QUEUES window open :: DroneHub#6619 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x116
+						Lua 0:00:47:051
+[mod] [C48P] QUEUES window open :: DroneHub#3564 'Seeds' supply by priority bucket :: p0: depot x1, loose-pile x1 | p1: veg-offer x460
+[C48P] QUEUES window open :: DroneHub#3564 'Seeds' supply by priority bucket :: p0: depot x1, loose-pile x1 | p1: veg-offer x460
+[mod] [C48P] QUEUES window open :: DroneHub#2608 'Seeds' supply by priority bucket :: p0: depot x1, loose-pile x1 | p1: veg-offer x594
+[C48P] QUEUES window open :: DroneHub#2608 'Seeds' supply by priority bucket :: p0: depot x1, loose-pile x1 | p1: veg-offer x594
+						Lua 0:00:47:052
+[mod] [C48P] QUEUES window open :: DroneHub#15029 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x284
+[C48P] QUEUES window open :: DroneHub#15029 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x284
+[mod] [C48P] QUEUES window open :: DroneHub#4230 'Seeds' supply by priority bucket :: p0: depot x3 | p1: veg-offer x333
+[C48P] QUEUES window open :: DroneHub#4230 'Seeds' supply by priority bucket :: p0: depot x3 | p1: veg-offer x333
+						Lua 0:00:47:053
+[mod] [C48P] QUEUES window open :: DroneHub#8591 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x5 | p1: veg-offer x456 | p2: depot x1
+[C48P] QUEUES window open :: DroneHub#8591 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x5 | p1: veg-offer x456 | p2: depot x1
+[mod] [C48P] QUEUES window open :: RCRover#2000003944 'Seeds' supply by priority bucket :: p0: depot x3 | p1: veg-offer x90
+[C48P] QUEUES window open :: RCRover#2000003944 'Seeds' supply by priority bucket :: p0: depot x3 | p1: veg-offer x90
+[mod] [C48P] QUEUES window open :: DroneHub#1078 'Seeds' supply by priority bucket :: p0: depot x5, loose-pile x1 | p1: veg-offer x440 | p2: depot x2
+[C48P] QUEUES window open :: DroneHub#1078 'Seeds' supply by priority bucket :: p0: depot x5, loose-pile x1 | p1: veg-offer x440 | p2: depot x2
+						Lua 0:00:47:054
+[mod] [C48P] QUEUES window open :: UniversalLanderRocket#4641 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p1: veg-offer x471 | p2: depot x2
+[C48P] QUEUES window open :: UniversalLanderRocket#4641 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p1: veg-offer x471 | p2: depot x2
+[mod] [C48P] QUEUES window open :: UniversalZeusRocket#1063 'Seeds' supply by priority bucket :: p0: depot x2, loose-pile x1 | p1: veg-offer x188 | p2: depot x1
+[C48P] QUEUES window open :: UniversalZeusRocket#1063 'Seeds' supply by priority bucket :: p0: depot x2, loose-pile x1 | p1: veg-offer x188 | p2: depot x1
+[mod] [C48P] QUEUES window open :: DroneHub#1457 'Seeds' supply by priority bucket :: p0: depot x5, loose-pile x1 | p1: veg-offer x401 | p2: depot x1
+[C48P] QUEUES window open :: DroneHub#1457 'Seeds' supply by priority bucket :: p0: depot x5, loose-pile x1 | p1: veg-offer x401 | p2: depot x1
+						Lua 0:00:47:055
+[mod] [C48P] QUEUES window open :: DroneHub#2074 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p1: veg-offer x543 | p2: depot x2
+[C48P] QUEUES window open :: DroneHub#2074 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p1: veg-offer x543 | p2: depot x2
+[mod] [C48P] QUEUES window open :: UniversalZeusRocket#1061 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x262 | p3: depot x1
+[C48P] QUEUES window open :: UniversalZeusRocket#1061 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x262 | p3: depot x1
+[mod] [C48P] QUEUES window open :: UniversalZeusRocket#1064 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p1: veg-offer x321 | p2: depot x2
+[C48P] QUEUES window open :: UniversalZeusRocket#1064 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p1: veg-offer x321 | p2: depot x2
+						Lua 0:00:47:056
+[mod] [C48P] QUEUES window open :: DroneHub#4967 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x250 | p3: depot x1
+[C48P] QUEUES window open :: DroneHub#4967 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x250 | p3: depot x1
+[mod] [C48P] QUEUES window open :: Elevator#9430 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x3
+[C48P] QUEUES window open :: Elevator#9430 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x3
+[mod] [C48P] QUEUES window open :: DroneHub#9437 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x3
+[C48P] QUEUES window open :: DroneHub#9437 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x3
+[mod] [C48P] QUEUES window open :: DroneHub#8285 'Food' supply by priority bucket :: p0: depot x3
+[C48P] QUEUES window open :: DroneHub#8285 'Food' supply by priority bucket :: p0: depot x3
+[mod] [C48P] QUEUES window open :: DroneHub#14618 'Food' supply by priority bucket :: p0: depot x1
+[C48P] QUEUES window open :: DroneHub#14618 'Food' supply by priority bucket :: p0: depot x1
+[mod] [C48P] QUEUES window open :: DroneHub#6619 'Food' supply by priority bucket :: p0: depot x1
+[C48P] QUEUES window open :: DroneHub#6619 'Food' supply by priority bucket :: p0: depot x1
+[mod] [C48P] QUEUES window open :: DroneHub#3564 'Food' supply by priority bucket :: p0: depot x3, loose-pile x1 | p2: loose-pile x9
+[C48P] QUEUES window open :: DroneHub#3564 'Food' supply by priority bucket :: p0: depot x3, loose-pile x1 | p2: loose-pile x9
+[mod] [C48P] QUEUES window open :: DroneHub#2608 'Food' supply by priority bucket :: p0: depot x3, loose-pile x1 | p2: loose-pile x9
+[C48P] QUEUES window open :: DroneHub#2608 'Food' supply by priority bucket :: p0: depot x3, loose-pile x1 | p2: loose-pile x9
+[mod] [C48P] QUEUES window open :: DroneHub#15029 'Food' supply by priority bucket :: p0: depot x1
+[C48P] QUEUES window open :: DroneHub#15029 'Food' supply by priority bucket :: p0: depot x1
+[mod] [C48P] QUEUES window open :: DroneHub#4230 'Food' supply by priority bucket :: p0: depot x2
+[C48P] QUEUES window open :: DroneHub#4230 'Food' supply by priority bucket :: p0: depot x2
+[mod] [C48P] QUEUES window open :: DroneHub#8591 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p1: veg-offer x34 | p2: depot x1, loose-pile x1
+[C48P] QUEUES window open :: DroneHub#8591 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p1: veg-offer x34 | p2: depot x1, loose-pile x1
+[mod] [C48P] QUEUES window open :: RCRover#2000003944 'Food' supply by priority bucket :: p0: depot x3
+[C48P] QUEUES window open :: RCRover#2000003944 'Food' supply by priority bucket :: p0: depot x3
+[mod] [C48P] QUEUES window open :: DroneHub#1078 'Food' supply by priority bucket :: p0: depot x4, loose-pile x1 | p1: veg-offer x29 | p2: depot x3, loose-pile x9
+[C48P] QUEUES window open :: DroneHub#1078 'Food' supply by priority bucket :: p0: depot x4, loose-pile x1 | p1: veg-offer x29 | p2: depot x3, loose-pile x9
+[mod] [C48P] QUEUES window open :: UniversalLanderRocket#4641 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p2: depot x2, loose-pile x1
+[C48P] QUEUES window open :: UniversalLanderRocket#4641 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p2: depot x2, loose-pile x1
+[mod] [C48P] QUEUES window open :: UniversalZeusRocket#1063 'Food' supply by priority bucket :: p0: depot x2, loose-pile x1 | p1: veg-offer x29 | p2: depot x1, loose-pile x6
+[C48P] QUEUES window open :: UniversalZeusRocket#1063 'Food' supply by priority bucket :: p0: depot x2, loose-pile x1 | p1: veg-offer x29 | p2: depot x1, loose-pile x6
+[mod] [C48P] QUEUES window open :: DroneHub#1457 'Food' supply by priority bucket :: p0: depot x4, loose-pile x1 | p1: veg-offer x29 | p2: depot x2, loose-pile x9
+[C48P] QUEUES window open :: DroneHub#1457 'Food' supply by priority bucket :: p0: depot x4, loose-pile x1 | p1: veg-offer x29 | p2: depot x2, loose-pile x9
+[mod] [C48P] QUEUES window open :: DroneHub#2074 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p2: depot x2, loose-pile x1
+[C48P] QUEUES window open :: DroneHub#2074 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p2: depot x2, loose-pile x1
+[mod] [C48P] QUEUES window open :: UniversalZeusRocket#1061 'Food' supply by priority bucket :: p0: depot x2 | p3: depot x1
+[C48P] QUEUES window open :: UniversalZeusRocket#1061 'Food' supply by priority bucket :: p0: depot x2 | p3: depot x1
+[mod] [C48P] QUEUES window open :: UniversalZeusRocket#1064 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p2: depot x2, loose-pile x1
+[C48P] QUEUES window open :: UniversalZeusRocket#1064 'Food' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p2: depot x2, loose-pile x1
+[mod] [C48P] QUEUES window open :: DroneHub#4967 'Food' supply by priority bucket :: p0: depot x2 | p3: depot x1
+[C48P] QUEUES window open :: DroneHub#4967 'Food' supply by priority bucket :: p0: depot x2 | p3: depot x1
+						Lua 0:02:27:040
+[mod] [C48P] WINDOW CLOSED :: game 300000 ms (10 h) | complete=true
+[C48P] WINDOW CLOSED :: game 300000 ms (10 h) | complete=true
+[mod] [C48P] QUEUES window close :: Elevator#9430 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x2 | p1: veg-offer x170
+[C48P] QUEUES window close :: Elevator#9430 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x2 | p1: veg-offer x170
+						Lua 0:02:27:041
+[mod] [C48P] QUEUES window close :: DroneHub#9437 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x2 | p1: veg-offer x308
+[C48P] QUEUES window close :: DroneHub#9437 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: building x1, depot x2 | p1: veg-offer x308
+[mod] [C48P] QUEUES window close :: DroneHub#8285 'Seeds' supply by priority bucket :: p0: depot x1 | p1: veg-offer x296
+[C48P] QUEUES window close :: DroneHub#8285 'Seeds' supply by priority bucket :: p0: depot x1 | p1: veg-offer x296
+[mod] [C48P] QUEUES window close :: DroneHub#14618 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x474
+[C48P] QUEUES window close :: DroneHub#14618 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x474
+						Lua 0:02:27:042
+[mod] [C48P] QUEUES window close :: DroneHub#6619 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x119
+[C48P] QUEUES window close :: DroneHub#6619 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x119
+[mod] [C48P] QUEUES window close :: DroneHub#3564 'Seeds' supply by priority bucket :: p0: depot x1, loose-pile x1 | p1: veg-offer x461
+[C48P] QUEUES window close :: DroneHub#3564 'Seeds' supply by priority bucket :: p0: depot x1, loose-pile x1 | p1: veg-offer x461
+						Lua 0:02:27:043
+[mod] [C48P] QUEUES window close :: DroneHub#2608 'Seeds' supply by priority bucket :: p0: depot x1, loose-pile x1 | p1: veg-offer x597
+[C48P] QUEUES window close :: DroneHub#2608 'Seeds' supply by priority bucket :: p0: depot x1, loose-pile x1 | p1: veg-offer x597
+[mod] [C48P] QUEUES window close :: DroneHub#15029 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x296
+[C48P] QUEUES window close :: DroneHub#15029 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x296
+[mod] [C48P] QUEUES window close :: DroneHub#4230 'Seeds' supply by priority bucket :: p0: depot x3 | p1: veg-offer x337
+[C48P] QUEUES window close :: DroneHub#4230 'Seeds' supply by priority bucket :: p0: depot x3 | p1: veg-offer x337
+						Lua 0:02:27:044
+[mod] [C48P] QUEUES window close :: DroneHub#8591 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x5 | p1: veg-offer x518 | p2: depot x1
+[C48P] QUEUES window close :: DroneHub#8591 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x5 | p1: veg-offer x518 | p2: depot x1
+[mod] [C48P] QUEUES window close :: RCRover#2000003944 'Seeds' supply by priority bucket :: p0: depot x3 | p1: veg-offer x111
+[C48P] QUEUES window close :: RCRover#2000003944 'Seeds' supply by priority bucket :: p0: depot x3 | p1: veg-offer x111
+						Lua 0:02:27:045
+[mod] [C48P] QUEUES window close :: DroneHub#1078 'Seeds' supply by priority bucket :: p0: depot x5, loose-pile x1 | p1: veg-offer x470 | p2: depot x2
+[C48P] QUEUES window close :: DroneHub#1078 'Seeds' supply by priority bucket :: p0: depot x5, loose-pile x1 | p1: veg-offer x470 | p2: depot x2
+[mod] [C48P] QUEUES window close :: UniversalLanderRocket#4641 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p1: veg-offer x488 | p2: depot x2
+[C48P] QUEUES window close :: UniversalLanderRocket#4641 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p1: veg-offer x488 | p2: depot x2
+						Lua 0:02:27:046
+[mod] [C48P] QUEUES window close :: UniversalZeusRocket#1063 'Seeds' supply by priority bucket :: p0: depot x2, loose-pile x1 | p1: veg-offer x222 | p2: depot x1
+[C48P] QUEUES window close :: UniversalZeusRocket#1063 'Seeds' supply by priority bucket :: p0: depot x2, loose-pile x1 | p1: veg-offer x222 | p2: depot x1
+[mod] [C48P] QUEUES window close :: DroneHub#1457 'Seeds' supply by priority bucket :: p0: depot x5, loose-pile x1 | p1: veg-offer x425 | p2: depot x1
+[C48P] QUEUES window close :: DroneHub#1457 'Seeds' supply by priority bucket :: p0: depot x5, loose-pile x1 | p1: veg-offer x425 | p2: depot x1
+[mod] [C48P] QUEUES window close :: DroneHub#2074 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p1: veg-offer x550 | p2: depot x2
+[C48P] QUEUES window close :: DroneHub#2074 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x4 | p1: veg-offer x550 | p2: depot x2
+						Lua 0:02:27:047
+[mod] [C48P] QUEUES window close :: UniversalZeusRocket#1061 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x262 | p3: depot x1
+[C48P] QUEUES window close :: UniversalZeusRocket#1061 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x262 | p3: depot x1
+[mod] [C48P] QUEUES window close :: UniversalZeusRocket#1064 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p1: veg-offer x322 | p2: depot x2
+[C48P] QUEUES window close :: UniversalZeusRocket#1064 'Seeds' supply by priority bucket :: p-1: loose-pile x1 | p0: depot x3 | p1: veg-offer x322 | p2: depot x2
+[mod] [C48P] QUEUES window close :: DroneHub#4967 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x246 | p3: depot x1
+[C48P] QUEUES window close :: DroneHub#4967 'Seeds' supply by priority bucket :: p0: depot x2 | p1: veg-offer x246 | p3: depot x1
+[mod] [C48P] TRY leg RunWindow (yielding) ok=true result=true
+[C48P] TRY leg RunWindow (yielding) ok=true result=true
+[mod] [C48P] REPORT SPAN :: consumer samples=201 at 500 ms | frozen at=not frozen | FindTask calls seen=0, of them supply+demand pairings=0 | wrapper errors=0
+[C48P] REPORT SPAN :: consumer samples=201 at 500 ms | frozen at=not frozen | FindTask calls seen=0, of them supply+demand pairings=0 | wrapper errors=0
+[mod] [C48P] REPORT pairings by resource :: 
+[C48P] REPORT pairings by resource :: 
+[mod] [C48P] REPORT 'Seeds' DECISIONS :: NONE SAMPLED — ⛔ a zero here is UNSAMPLED, not 'no pairings happen'
+[C48P] REPORT 'Seeds' DECISIONS :: NONE SAMPLED — ⛔ a zero here is UNSAMPLED, not 'no pairings happen'
+[mod] [C48P] REPORT 'Food' DECISIONS :: NONE SAMPLED — ⛔ a zero here is UNSAMPLED, not 'no pairings happen'
+[C48P] REPORT 'Food' DECISIONS :: NONE SAMPLED — ⛔ a zero here is UNSAMPLED, not 'no pairings happen'
+[mod] [C48P] REPORT CONSUMER ForestationPlant#16192 (Seeds) :: min=8865 max=9275 | stalled 0 of 201 | deliveries=3 totalling 840 | sizes: 280x3 | drains=5 totalling 750
+[C48P] REPORT CONSUMER ForestationPlant#16192 (Seeds) :: min=8865 max=9275 | stalled 0 of 201 | deliveries=3 totalling 840 | sizes: 280x3 | drains=5 totalling 750
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15554 (Seeds) :: min=8543 max=9263 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15554 (Seeds) :: min=8543 max=9263 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER MegaMall#9011 (Food) :: min=14800 max=20000 | stalled 0 of 201 | deliveries=7 totalling 7800 | sizes: 1000x5, 1200x1, 1600x1 | drains=22 totalling 7200
+[C48P] REPORT CONSUMER MegaMall#9011 (Food) :: min=14800 max=20000 | stalled 0 of 201 | deliveries=7 totalling 7800 | sizes: 1000x5, 1200x1, 1600x1 | drains=22 totalling 7200
+						Lua 0:02:27:048
+[mod] [C48P] REPORT CONSUMER ShopsElectronics#9012 (Electronics) :: min=2400 max=5000 | stalled 0 of 201 | deliveries=2 totalling 2600 | sizes: 1000x1, 1600x1 | drains=9 totalling 2400
+[C48P] REPORT CONSUMER ShopsElectronics#9012 (Electronics) :: min=2400 max=5000 | stalled 0 of 201 | deliveries=2 totalling 2600 | sizes: 1000x1, 1600x1 | drains=9 totalling 2400
+[mod] [C48P] REPORT CONSUMER ShopsFood#9016 (Food) :: min=3600 max=9800 | stalled 0 of 201 | deliveries=14 totalling 13400 | sizes: 600x2, 800x5, 1000x4, 1200x2, 1800x1 | drains=40 totalling 12800
+[C48P] REPORT CONSUMER ShopsFood#9016 (Food) :: min=3600 max=9800 | stalled 0 of 201 | deliveries=14 totalling 13400 | sizes: 600x2, 800x5, 1000x4, 1200x2, 1800x1 | drains=40 totalling 12800
+[mod] [C48P] REPORT CONSUMER Diner#9019 (Food) :: min=9000 max=9800 | stalled 0 of 201 | deliveries=1 totalling 800 | sizes: 800x1 | drains=4 totalling 1200
+[C48P] REPORT CONSUMER Diner#9019 (Food) :: min=9000 max=9800 | stalled 0 of 201 | deliveries=1 totalling 800 | sizes: 800x1 | drains=4 totalling 1200
+[mod] [C48P] REPORT CONSUMER ForestationPlant#14627 (Seeds) :: min=8510 max=9250 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#14627 (Seeds) :: min=8510 max=9250 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15556 (Seeds) :: min=8550 max=9270 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15556 (Seeds) :: min=8550 max=9270 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15565 (Seeds) :: min=8524 max=9264 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15565 (Seeds) :: min=8524 max=9264 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#14623 (Seeds) :: min=8522 max=9242 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#14623 (Seeds) :: min=8522 max=9242 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15549 (Seeds) :: min=8939 max=9259 | stalled 0 of 201 | deliveries=2 totalling 560 | sizes: 280x2 | drains=5 totalling 750
+[C48P] REPORT CONSUMER ForestationPlant#15549 (Seeds) :: min=8939 max=9259 | stalled 0 of 201 | deliveries=2 totalling 560 | sizes: 280x2 | drains=5 totalling 750
+[mod] [C48P] REPORT CONSUMER ForestationPlant#14628 (Seeds) :: min=8536 max=9256 | stalled 0 of 201 | deliveries=6 totalling 2520 | sizes: 280x3, 560x3 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#14628 (Seeds) :: min=8536 max=9256 | stalled 0 of 201 | deliveries=6 totalling 2520 | sizes: 280x3, 560x3 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ShuttleHub#8345 (Fuel) :: min=8304 max=10000 | stalled 0 of 201 | deliveries=5 totalling 6555 | sizes: 1111x1, 1112x1, 1190x1, 1446x1, 1696x1 | drains=9 totalling 5365
+[C48P] REPORT CONSUMER ShuttleHub#8345 (Fuel) :: min=8304 max=10000 | stalled 0 of 201 | deliveries=5 totalling 6555 | sizes: 1111x1, 1112x1, 1190x1, 1446x1, 1696x1 | drains=9 totalling 5365
+[mod] [C48P] REPORT CONSUMER ShopsJewelry#8322 (Polymers) :: min=3400 max=5000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 800x1, 1000x1, 1200x1 | drains=13 totalling 3000
+[C48P] REPORT CONSUMER ShopsJewelry#8322 (Polymers) :: min=3400 max=5000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 800x1, 1000x1, 1200x1 | drains=13 totalling 3000
+[mod] [C48P] REPORT CONSUMER ShopsFood#8323 (Food) :: min=8000 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 800x1, 1000x1, 1200x1 | drains=10 totalling 2600
+[C48P] REPORT CONSUMER ShopsFood#8323 (Food) :: min=8000 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 800x1, 1000x1, 1200x1 | drains=10 totalling 2600
+[mod] [C48P] REPORT CONSUMER Diner#8326 (Food) :: min=3400 max=10000 | stalled 0 of 201 | deliveries=21 totalling 20400 | sizes: 200x1, 600x3, 800x5, 1000x6, 1200x3, 1400x2, 2000x1 | drains=50 totalling 19600
+[C48P] REPORT CONSUMER Diner#8326 (Food) :: min=3400 max=10000 | stalled 0 of 201 | deliveries=21 totalling 20400 | sizes: 200x1, 600x3, 800x5, 1000x6, 1200x3, 1400x2, 2000x1 | drains=50 totalling 19600
+[mod] [C48P] REPORT CONSUMER MegaMall#8329 (Food) :: min=17800 max=20000 | stalled 0 of 201 | deliveries=5 totalling 5200 | sizes: 1000x4, 1200x1 | drains=17 totalling 6000
+[C48P] REPORT CONSUMER MegaMall#8329 (Food) :: min=17800 max=20000 | stalled 0 of 201 | deliveries=5 totalling 5200 | sizes: 1000x4, 1200x1 | drains=17 totalling 6000
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15563 (Seeds) :: min=8522 max=9242 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15563 (Seeds) :: min=8522 max=9242 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#6836 (Seeds) :: min=8881 max=9197 | stalled 0 of 201 | deliveries=20 totalling 654 | sizes: 2x1, 4x5, 6x12, 280x2 | drains=5 totalling 746
+[C48P] REPORT CONSUMER ForestationPlant#6836 (Seeds) :: min=8881 max=9197 | stalled 0 of 201 | deliveries=20 totalling 654 | sizes: 2x1, 4x5, 6x12, 280x2 | drains=5 totalling 746
+[mod] [C48P] REPORT CONSUMER Diner#8332 (Food) :: min=8800 max=9800 | stalled 0 of 201 | deliveries=2 totalling 1800 | sizes: 800x1, 1000x1 | drains=6 totalling 1600
+[C48P] REPORT CONSUMER Diner#8332 (Food) :: min=8800 max=9800 | stalled 0 of 201 | deliveries=2 totalling 1800 | sizes: 800x1, 1000x1 | drains=6 totalling 1600
+[mod] [C48P] REPORT CONSUMER ForestationPlant#14625 (Seeds) :: min=8503 max=9223 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#14625 (Seeds) :: min=8503 max=9223 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15547 (Seeds) :: min=8896 max=9216 | stalled 0 of 201 | deliveries=2 totalling 560 | sizes: 280x2 | drains=5 totalling 750
+[C48P] REPORT CONSUMER ForestationPlant#15547 (Seeds) :: min=8896 max=9216 | stalled 0 of 201 | deliveries=2 totalling 560 | sizes: 280x2 | drains=5 totalling 750
+[mod] [C48P] REPORT CONSUMER ForestationPlant#14629 (Seeds) :: min=8517 max=9237 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#14629 (Seeds) :: min=8517 max=9237 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#6620 (Seeds) :: min=8939 max=9269 | stalled 0 of 201 | deliveries=21 totalling 654 | sizes: 2x3, 4x4, 6x12, 280x2 | drains=5 totalling 500
+[C48P] REPORT CONSUMER ForestationPlant#6620 (Seeds) :: min=8939 max=9269 | stalled 0 of 201 | deliveries=21 totalling 654 | sizes: 2x3, 4x4, 6x12, 280x2 | drains=5 totalling 500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#6958 (Seeds) :: min=8937 max=9263 | stalled 0 of 201 | deliveries=20 totalling 650 | sizes: 2x4, 4x4, 6x10, 280x1, 286x1 | drains=5 totalling 500
+[C48P] REPORT CONSUMER ForestationPlant#6958 (Seeds) :: min=8937 max=9263 | stalled 0 of 201 | deliveries=20 totalling 650 | sizes: 2x4, 4x4, 6x10, 280x1, 286x1 | drains=5 totalling 500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#6622 (Seeds) :: min=8944 max=9240 | stalled 0 of 201 | deliveries=20 totalling 376 | sizes: 2x2, 4x5, 6x12, 280x1 | drains=5 totalling 500
+[C48P] REPORT CONSUMER ForestationPlant#6622 (Seeds) :: min=8944 max=9240 | stalled 0 of 201 | deliveries=20 totalling 376 | sizes: 2x2, 4x5, 6x12, 280x1 | drains=5 totalling 500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#3790 (Seeds) :: min=8953 max=9233 | stalled 0 of 201 | deliveries=1 totalling 280 | sizes: 280x1 | drains=3 totalling 350
+[C48P] REPORT CONSUMER ForestationPlant#3790 (Seeds) :: min=8953 max=9233 | stalled 0 of 201 | deliveries=1 totalling 280 | sizes: 280x1 | drains=3 totalling 350
+[mod] [C48P] REPORT CONSUMER PolymerPlant#3574 (Fuel) :: min=3704 max=5000 | stalled 0 of 201 | deliveries=5 totalling 5214 | sizes: 996x1, 1050x1, 1056x3 | drains=39 totalling 5454
+[C48P] REPORT CONSUMER PolymerPlant#3574 (Fuel) :: min=3704 max=5000 | stalled 0 of 201 | deliveries=5 totalling 5214 | sizes: 996x1, 1050x1, 1056x3 | drains=39 totalling 5454
+[mod] [C48P] REPORT CONSUMER PolymerPlant#6993 (Fuel) :: min=3596 max=5000 | stalled 0 of 201 | deliveries=5 totalling 5359 | sizes: 1023x1, 1060x1, 1092x3 | drains=40 totalling 5808
+[C48P] REPORT CONSUMER PolymerPlant#6993 (Fuel) :: min=3596 max=5000 | stalled 0 of 201 | deliveries=5 totalling 5359 | sizes: 1023x1, 1060x1, 1092x3 | drains=40 totalling 5808
+[mod] [C48P] REPORT CONSUMER ElectronicsFactory#4682 (PreciousMetals) :: min=3434 max=4612 | stalled 0 of 201 | deliveries=1 totalling 1178 | sizes: 1178x1 | drains=40 totalling 1252
+[C48P] REPORT CONSUMER ElectronicsFactory#4682 (PreciousMetals) :: min=3434 max=4612 | stalled 0 of 201 | deliveries=1 totalling 1178 | sizes: 1178x1 | drains=40 totalling 1252
+[mod] [C48P] REPORT CONSUMER MachinePartsFactory#4670 (Metals) :: min=3408 max=4803 | stalled 0 of 201 | deliveries=7 totalling 8080 | sizes: 985x1, 1157x1, 1182x2, 1186x1, 1194x2 | drains=39 totalling 7719
+[C48P] REPORT CONSUMER MachinePartsFactory#4670 (Metals) :: min=3408 max=4803 | stalled 0 of 201 | deliveries=7 totalling 8080 | sizes: 985x1, 1157x1, 1182x2, 1186x1, 1194x2 | drains=39 totalling 7719
+[mod] [C48P] REPORT CONSUMER MegaMall#3059 (Food) :: min=17800 max=20000 | stalled 0 of 201 | deliveries=8 totalling 8200 | sizes: 800x1, 1000x5, 1200x2 | drains=29 totalling 8400
+[C48P] REPORT CONSUMER MegaMall#3059 (Food) :: min=17800 max=20000 | stalled 0 of 201 | deliveries=8 totalling 8200 | sizes: 800x1, 1000x5, 1200x2 | drains=29 totalling 8400
+[mod] [C48P] REPORT CONSUMER ShopsFood#3060 (Food) :: min=7000 max=10000 | stalled 0 of 201 | deliveries=8 totalling 7400 | sizes: 600x1, 800x2, 1000x4, 1200x1 | drains=28 totalling 7000
+[C48P] REPORT CONSUMER ShopsFood#3060 (Food) :: min=7000 max=10000 | stalled 0 of 201 | deliveries=8 totalling 7400 | sizes: 600x1, 800x2, 1000x4, 1200x1 | drains=28 totalling 7000
+[mod] [C48P] REPORT CONSUMER Diner#3065 (Food) :: min=4200 max=9400 | stalled 0 of 201 | deliveries=22 totalling 18200 | sizes: 200x1, 400x1, 600x7, 800x4, 1000x7, 1200x1, 2000x1 | drains=56 totalling 18600
+[C48P] REPORT CONSUMER Diner#3065 (Food) :: min=4200 max=9400 | stalled 0 of 201 | deliveries=22 totalling 18200 | sizes: 200x1, 400x1, 600x7, 800x4, 1000x7, 1200x1, 2000x1 | drains=56 totalling 18600
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15047 (Seeds) :: min=8595 max=9295 | stalled 0 of 201 | deliveries=13 totalling 2440 | sizes: 40x5, 280x8 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15047 (Seeds) :: min=8595 max=9295 | stalled 0 of 201 | deliveries=13 totalling 2440 | sizes: 40x5, 280x8 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER MegaMall#2723 (Food) :: min=17200 max=19800 | stalled 0 of 201 | deliveries=9 totalling 8200 | sizes: 400x1, 800x1, 1000x7 | drains=31 totalling 8000
+[C48P] REPORT CONSUMER MegaMall#2723 (Food) :: min=17200 max=19800 | stalled 0 of 201 | deliveries=9 totalling 8200 | sizes: 400x1, 800x1, 1000x7 | drains=31 totalling 8000
+[mod] [C48P] REPORT CONSUMER Diner#2724 (Food) :: min=7000 max=10000 | stalled 0 of 201 | deliveries=7 totalling 7800 | sizes: 800x1, 1000x5, 2000x1 | drains=29 totalling 7800
+[C48P] REPORT CONSUMER Diner#2724 (Food) :: min=7000 max=10000 | stalled 0 of 201 | deliveries=7 totalling 7800 | sizes: 800x1, 1000x5, 2000x1 | drains=29 totalling 7800
+[mod] [C48P] REPORT CONSUMER ShuttleHub#8570 (Fuel) :: min=6885 max=10000 | stalled 0 of 201 | deliveries=3 totalling 4407 | sizes: 1292x1, 1370x1, 1745x1 | drains=7 totalling 3618
+[C48P] REPORT CONSUMER ShuttleHub#8570 (Fuel) :: min=6885 max=10000 | stalled 0 of 201 | deliveries=3 totalling 4407 | sizes: 1292x1, 1370x1, 1745x1 | drains=7 totalling 3618
+[mod] [C48P] REPORT CONSUMER ShopsFood_Small#2722 (Food) :: min=800 max=4000 | stalled 0 of 201 | deliveries=11 totalling 10000 | sizes: 600x2, 800x1, 1000x8 | drains=41 totalling 10400
+[C48P] REPORT CONSUMER ShopsFood_Small#2722 (Food) :: min=800 max=4000 | stalled 0 of 201 | deliveries=11 totalling 10000 | sizes: 600x2, 800x1, 1000x8 | drains=41 totalling 10400
+[mod] [C48P] REPORT CONSUMER ElectronicsFactory#7671 (PreciousMetals) :: min=3183 max=4844 | stalled 0 of 201 | deliveries=2 totalling 1696 | sizes: 374x1, 1322x1 | drains=40 totalling 1529
+[C48P] REPORT CONSUMER ElectronicsFactory#7671 (PreciousMetals) :: min=3183 max=4844 | stalled 0 of 201 | deliveries=2 totalling 1696 | sizes: 374x1, 1322x1 | drains=40 totalling 1529
+[mod] [C48P] REPORT CONSUMER ShuttleHub#4646 (Fuel) :: min=8341 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1160 | sizes: 1160x1 | drains=4 totalling 1659
+[C48P] REPORT CONSUMER ShuttleHub#4646 (Fuel) :: min=8341 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1160 | sizes: 1160x1 | drains=4 totalling 1659
+[mod] [C48P] REPORT CONSUMER ForestationPlant#16155 (Seeds) :: min=8518 max=9238 | stalled 0 of 201 | deliveries=7 totalling 2520 | sizes: 280x5, 560x2 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#16155 (Seeds) :: min=8518 max=9238 | stalled 0 of 201 | deliveries=7 totalling 2520 | sizes: 280x5, 560x2 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15043 (Seeds) :: min=8537 max=9257 | stalled 0 of 201 | deliveries=13 totalling 2440 | sizes: 40x5, 280x8 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15043 (Seeds) :: min=8537 max=9257 | stalled 0 of 201 | deliveries=13 totalling 2440 | sizes: 40x5, 280x8 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15050 (Seeds) :: min=8920 max=9290 | stalled 0 of 201 | deliveries=7 totalling 760 | sizes: 40x5, 280x2 | drains=5 totalling 750
+[C48P] REPORT CONSUMER ForestationPlant#15050 (Seeds) :: min=8920 max=9290 | stalled 0 of 201 | deliveries=7 totalling 760 | sizes: 40x5, 280x2 | drains=5 totalling 750
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15052 (Seeds) :: min=8556 max=9256 | stalled 0 of 201 | deliveries=13 totalling 2440 | sizes: 40x5, 280x8 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15052 (Seeds) :: min=8556 max=9256 | stalled 0 of 201 | deliveries=13 totalling 2440 | sizes: 40x5, 280x8 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER Diner#8661 (Food) :: min=5271 max=10000 | stalled 0 of 201 | deliveries=7 totalling 6729 | sizes: 71x1, 600x1, 1000x2, 1129x2, 1800x1 | drains=23 totalling 7329
+[C48P] REPORT CONSUMER Diner#8661 (Food) :: min=5271 max=10000 | stalled 0 of 201 | deliveries=7 totalling 6729 | sizes: 71x1, 600x1, 1000x2, 1129x2, 1800x1 | drains=23 totalling 7329
+						Lua 0:02:27:049
+[mod] [C48P] REPORT CONSUMER ShopsFood#8663 (Food) :: min=3800 max=9960 | stalled 0 of 201 | deliveries=17 totalling 16960 | sizes: 120x1, 600x1, 680x1, 800x4, 840x1, 1000x3, 1200x3, 1320x1, 1600x1, 2000x1 | drains=53 totalling 17720
+[C48P] REPORT CONSUMER ShopsFood#8663 (Food) :: min=3800 max=9960 | stalled 0 of 201 | deliveries=17 totalling 16960 | sizes: 120x1, 600x1, 680x1, 800x4, 840x1, 1000x3, 1200x3, 1320x1, 1600x1, 2000x1 | drains=53 totalling 17720
+[mod] [C48P] REPORT CONSUMER ForestationPlant#16008 (Seeds) :: min=8553 max=9227 | stalled 0 of 201 | deliveries=21 totalling 2870 | sizes: 3x1, 13x1, 14x2, 27x7, 171x1, 199x1, 280x7, 307x1 | drains=5 totalling 2473
+[C48P] REPORT CONSUMER ForestationPlant#16008 (Seeds) :: min=8553 max=9227 | stalled 0 of 201 | deliveries=21 totalling 2870 | sizes: 3x1, 13x1, 14x2, 27x7, 171x1, 199x1, 280x7, 307x1 | drains=5 totalling 2473
+[mod] [C48P] REPORT CONSUMER ArtWorkshop#8669 (Polymers) :: min=4500 max=6000 | stalled 0 of 201 | deliveries=1 totalling 1500 | sizes: 1500x1 | drains=1 totalling 1500
+[C48P] REPORT CONSUMER ArtWorkshop#8669 (Polymers) :: min=4500 max=6000 | stalled 0 of 201 | deliveries=1 totalling 1500 | sizes: 1500x1 | drains=1 totalling 1500
+[mod] [C48P] REPORT CONSUMER MegaMall#8670 (Food) :: min=16000 max=20000 | stalled 0 of 201 | deliveries=12 totalling 8222 | sizes: 71x2, 80x1, 400x1, 600x1, 800x1, 1000x5, 1200x1 | drains=24 totalling 8600
+[C48P] REPORT CONSUMER MegaMall#8670 (Food) :: min=16000 max=20000 | stalled 0 of 201 | deliveries=12 totalling 8222 | sizes: 71x2, 80x1, 400x1, 600x1, 800x1, 1000x5, 1200x1 | drains=24 totalling 8600
+[mod] [C48P] REPORT CONSUMER BioroboticsWorkshop#8672 (MachineParts) :: min=4500 max=6000 | stalled 0 of 201 | deliveries=2 totalling 2962 | sizes: 1462x1, 1500x1 | drains=1 totalling 1500
+[C48P] REPORT CONSUMER BioroboticsWorkshop#8672 (MachineParts) :: min=4500 max=6000 | stalled 0 of 201 | deliveries=2 totalling 2962 | sizes: 1462x1, 1500x1 | drains=1 totalling 1500
+[mod] [C48P] REPORT CONSUMER ElectronicsFactory_Small#16002 (PreciousMetals) :: min=4209 max=4724 | stalled 0 of 201 | deliveries=0 totalling 0 | sizes: (none) | drains=40 totalling 515
+[C48P] REPORT CONSUMER ElectronicsFactory_Small#16002 (PreciousMetals) :: min=4209 max=4724 | stalled 0 of 201 | deliveries=0 totalling 0 | sizes: (none) | drains=40 totalling 515
+[mod] [C48P] REPORT CONSUMER VRWorkshop#8674 (Electronics) :: min=4500 max=6000 | stalled 0 of 201 | deliveries=1 totalling 1500 | sizes: 1500x1 | drains=1 totalling 1500
+[C48P] REPORT CONSUMER VRWorkshop#8674 (Electronics) :: min=4500 max=6000 | stalled 0 of 201 | deliveries=1 totalling 1500 | sizes: 1500x1 | drains=1 totalling 1500
+[mod] [C48P] REPORT CONSUMER ElectronicsFactory#8675 (PreciousMetals) :: min=3999 max=4970 | stalled 20 of 201 | deliveries=1 totalling 971 | sizes: 971x1 | drains=36 totalling 1044
+[C48P] REPORT CONSUMER ElectronicsFactory#8675 (PreciousMetals) :: min=3999 max=4970 | stalled 20 of 201 | deliveries=1 totalling 971 | sizes: 971x1 | drains=36 totalling 1044
+[mod] [C48P] REPORT CONSUMER OpenFarm#15974 (Seeds) :: min=2221 max=4520 | stalled 0 of 201 | deliveries=37 totalling 12131 | sizes: 221x1, 280x31, 331x1, 560x3, 1219x1 | drains=25 totalling 11531
+[C48P] REPORT CONSUMER OpenFarm#15974 (Seeds) :: min=2221 max=4520 | stalled 0 of 201 | deliveries=37 totalling 12131 | sizes: 221x1, 280x31, 331x1, 560x3, 1219x1 | drains=25 totalling 11531
+[mod] [C48P] REPORT CONSUMER TVStudioWorkshopCCP1#8676 (Electronics) :: min=4000 max=5000 | stalled 0 of 201 | deliveries=1 totalling 1000 | sizes: 1000x1 | drains=1 totalling 1000
+[C48P] REPORT CONSUMER TVStudioWorkshopCCP1#8676 (Electronics) :: min=4000 max=5000 | stalled 0 of 201 | deliveries=1 totalling 1000 | sizes: 1000x1 | drains=1 totalling 1000
+[mod] [C48P] REPORT CONSUMER PolymerPlant#8677 (Fuel) :: min=3920 max=5000 | stalled 93 of 201 | deliveries=3 totalling 2486 | sizes: 461x1, 945x1, 1080x1 | drains=21 totalling 2784
+[C48P] REPORT CONSUMER PolymerPlant#8677 (Fuel) :: min=3920 max=5000 | stalled 93 of 201 | deliveries=3 totalling 2486 | sizes: 461x1, 945x1, 1080x1 | drains=21 totalling 2784
+[mod] [C48P] REPORT CONSUMER PolymerPlant#16000 (Fuel) :: min=3287 max=5000 | stalled 0 of 201 | deliveries=7 totalling 6684 | sizes: 27x1, 870x1, 945x1, 1044x1, 1125x1, 1134x1, 1539x1 | drains=38 totalling 6888
+[C48P] REPORT CONSUMER PolymerPlant#16000 (Fuel) :: min=3287 max=5000 | stalled 0 of 201 | deliveries=7 totalling 6684 | sizes: 27x1, 870x1, 945x1, 1044x1, 1125x1, 1134x1, 1539x1 | drains=38 totalling 6888
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15099 (Seeds) :: min=8559 max=9219 | stalled 0 of 201 | deliveries=11 totalling 2360 | sizes: 40x3, 280x8 | drains=5 totalling 2460
+[C48P] REPORT CONSUMER ForestationPlant#15099 (Seeds) :: min=8559 max=9219 | stalled 0 of 201 | deliveries=11 totalling 2360 | sizes: 40x3, 280x8 | drains=5 totalling 2460
+[mod] [C48P] REPORT CONSUMER ForestationPlant#7016 (Seeds) :: min=8950 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1050 | sizes: 1050x1 | drains=5 totalling 750
+[C48P] REPORT CONSUMER ForestationPlant#7016 (Seeds) :: min=8950 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1050 | sizes: 1050x1 | drains=5 totalling 750
+[mod] [C48P] REPORT CONSUMER ForestationPlant#16011 (Seeds) :: min=8505 max=9225 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#16011 (Seeds) :: min=8505 max=9225 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER CarbonateProcessor#14608 (WasteRock) :: min=17500 max=20000 | stalled 0 of 201 | deliveries=10 totalling 25000 | sizes: 2500x10 | drains=10 totalling 25000
+[C48P] REPORT CONSUMER CarbonateProcessor#14608 (WasteRock) :: min=17500 max=20000 | stalled 0 of 201 | deliveries=10 totalling 25000 | sizes: 2500x10 | drains=10 totalling 25000
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15817 (Seeds) :: min=8575 max=9289 | stalled 0 of 201 | deliveries=20 totalling 2533 | sizes: 13x2, 24x1, 27x9, 280x8 | drains=5 totalling 2486
+[C48P] REPORT CONSUMER ForestationPlant#15817 (Seeds) :: min=8575 max=9289 | stalled 0 of 201 | deliveries=20 totalling 2533 | sizes: 13x2, 24x1, 27x9, 280x8 | drains=5 totalling 2486
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15098 (Seeds) :: min=8582 max=9242 | stalled 0 of 201 | deliveries=12 totalling 2400 | sizes: 40x4, 280x8 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15098 (Seeds) :: min=8582 max=9242 | stalled 0 of 201 | deliveries=12 totalling 2400 | sizes: 40x4, 280x8 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER CarbonateProcessor#1597 (WasteRock) :: min=17500 max=20000 | stalled 0 of 201 | deliveries=10 totalling 25000 | sizes: 2500x10 | drains=10 totalling 25000
+[C48P] REPORT CONSUMER CarbonateProcessor#1597 (WasteRock) :: min=17500 max=20000 | stalled 0 of 201 | deliveries=10 totalling 25000 | sizes: 2500x10 | drains=10 totalling 25000
+[mod] [C48P] REPORT CONSUMER CarbonateProcessor#14610 (WasteRock) :: min=17500 max=20000 | stalled 0 of 201 | deliveries=10 totalling 25000 | sizes: 2500x10 | drains=10 totalling 25000
+[C48P] REPORT CONSUMER CarbonateProcessor#14610 (WasteRock) :: min=17500 max=20000 | stalled 0 of 201 | deliveries=10 totalling 25000 | sizes: 2500x10 | drains=10 totalling 25000
+[mod] [C48P] REPORT CONSUMER ForestationPlant#15810 (Seeds) :: min=8557 max=9299 | stalled 0 of 201 | deliveries=21 totalling 2524 | sizes: 3x1, 13x1, 14x2, 24x1, 27x8, 280x8 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#15810 (Seeds) :: min=8557 max=9299 | stalled 0 of 201 | deliveries=21 totalling 2524 | sizes: 3x1, 13x1, 14x2, 24x1, 27x8, 280x8 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER OpenFarm#15779 (Seeds) :: min=85 max=4025 | stalled 9 of 201 | deliveries=55 totalling 21285 | sizes: 80x1, 180x1, 280x34, 420x1, 560x16, 840x1, 1285x1 | drains=25 totalling 22125
+[C48P] REPORT CONSUMER OpenFarm#15779 (Seeds) :: min=85 max=4025 | stalled 9 of 201 | deliveries=55 totalling 21285 | sizes: 80x1, 180x1, 280x34, 420x1, 560x16, 840x1, 1285x1 | drains=25 totalling 22125
+[mod] [C48P] REPORT CONSUMER ForestationPlant#4089 (Seeds) :: min=8936 max=9216 | stalled 0 of 201 | deliveries=1 totalling 280 | sizes: 280x1 | drains=4 totalling 400
+[C48P] REPORT CONSUMER ForestationPlant#4089 (Seeds) :: min=8936 max=9216 | stalled 0 of 201 | deliveries=1 totalling 280 | sizes: 280x1 | drains=4 totalling 400
+[mod] [C48P] REPORT CONSUMER ForestationPlant#2793 (Seeds) :: min=8913 max=9213 | stalled 0 of 201 | deliveries=2 totalling 560 | sizes: 280x2 | drains=4 totalling 400
+[C48P] REPORT CONSUMER ForestationPlant#2793 (Seeds) :: min=8913 max=9213 | stalled 0 of 201 | deliveries=2 totalling 560 | sizes: 280x2 | drains=4 totalling 400
+[mod] [C48P] REPORT CONSUMER ShuttleHub#8568 (Fuel) :: min=8500 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3990 | sizes: 1166x1, 1324x1, 1500x1 | drains=5 totalling 3240
+[C48P] REPORT CONSUMER ShuttleHub#8568 (Fuel) :: min=8500 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3990 | sizes: 1166x1, 1324x1, 1500x1 | drains=5 totalling 3240
+[mod] [C48P] REPORT CONSUMER ForestationPlant#7004 (Seeds) :: min=8925 max=9225 | stalled 0 of 201 | deliveries=2 totalling 560 | sizes: 280x2 | drains=5 totalling 500
+[C48P] REPORT CONSUMER ForestationPlant#7004 (Seeds) :: min=8925 max=9225 | stalled 0 of 201 | deliveries=2 totalling 560 | sizes: 280x2 | drains=5 totalling 500
+[mod] [C48P] REPORT CONSUMER ShuttleHub#8565 (Fuel) :: min=8728 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1272 | sizes: 1272x1 | drains=2 totalling 1208
+[C48P] REPORT CONSUMER ShuttleHub#8565 (Fuel) :: min=8728 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1272 | sizes: 1272x1 | drains=2 totalling 1208
+[mod] [C48P] REPORT CONSUMER ShuttleHub#1563 (Fuel) :: min=7972 max=10000 | stalled 0 of 201 | deliveries=3 totalling 4996 | sizes: 1355x1, 1613x1, 2028x1 | drains=8 totalling 5141
+[C48P] REPORT CONSUMER ShuttleHub#1563 (Fuel) :: min=7972 max=10000 | stalled 0 of 201 | deliveries=3 totalling 4996 | sizes: 1355x1, 1613x1, 2028x1 | drains=8 totalling 5141
+[mod] [C48P] REPORT CONSUMER Diner#1542 (Food) :: min=8600 max=10000 | stalled 0 of 201 | deliveries=2 totalling 2000 | sizes: 1000x2 | drains=7 totalling 2400
+[C48P] REPORT CONSUMER Diner#1542 (Food) :: min=8600 max=10000 | stalled 0 of 201 | deliveries=2 totalling 2000 | sizes: 1000x2 | drains=7 totalling 2400
+[mod] [C48P] REPORT CONSUMER ShopsFood_Small#1539 (Food) :: min=1800 max=4000 | stalled 0 of 201 | deliveries=7 totalling 7000 | sizes: 800x1, 1000x5, 1200x1 | drains=26 totalling 7600
+[C48P] REPORT CONSUMER ShopsFood_Small#1539 (Food) :: min=1800 max=4000 | stalled 0 of 201 | deliveries=7 totalling 7000 | sizes: 800x1, 1000x5, 1200x1 | drains=26 totalling 7600
+[mod] [C48P] REPORT CONSUMER GHGFactory#1596 (Fuel) :: min=8920 max=9940 | stalled 0 of 201 | deliveries=1 totalling 1020 | sizes: 1020x1 | drains=10 totalling 600
+[C48P] REPORT CONSUMER GHGFactory#1596 (Fuel) :: min=8920 max=9940 | stalled 0 of 201 | deliveries=1 totalling 1020 | sizes: 1020x1 | drains=10 totalling 600
+[mod] [C48P] REPORT CONSUMER TVStudioWorkshopCCP1#4951 (Electronics) :: min=4000 max=5000 | stalled 0 of 201 | deliveries=1 totalling 1000 | sizes: 1000x1 | drains=1 totalling 1000
+[C48P] REPORT CONSUMER TVStudioWorkshopCCP1#4951 (Electronics) :: min=4000 max=5000 | stalled 0 of 201 | deliveries=1 totalling 1000 | sizes: 1000x1 | drains=1 totalling 1000
+[mod] [C48P] REPORT CONSUMER MegaMall#6297 (Food) :: min=18000 max=20000 | stalled 0 of 201 | deliveries=7 totalling 6800 | sizes: 600x2, 1000x4, 1600x1 | drains=16 totalling 6000
+[C48P] REPORT CONSUMER MegaMall#6297 (Food) :: min=18000 max=20000 | stalled 0 of 201 | deliveries=7 totalling 6800 | sizes: 600x2, 1000x4, 1600x1 | drains=16 totalling 6000
+[mod] [C48P] REPORT CONSUMER ShopsFood#15763 (Food) :: min=8600 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 1000x3 | drains=11 totalling 2200
+[C48P] REPORT CONSUMER ShopsFood#15763 (Food) :: min=8600 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 1000x3 | drains=11 totalling 2200
+[mod] [C48P] REPORT CONSUMER Diner#5341 (Food) :: min=6600 max=10000 | stalled 0 of 201 | deliveries=20 totalling 17800 | sizes: 200x1, 600x4, 800x2, 1000x10, 1200x3 | drains=52 totalling 17800
+[C48P] REPORT CONSUMER Diner#5341 (Food) :: min=6600 max=10000 | stalled 0 of 201 | deliveries=20 totalling 17800 | sizes: 200x1, 600x4, 800x2, 1000x10, 1200x3 | drains=52 totalling 17800
+[mod] [C48P] REPORT CONSUMER MegaMall#2900 (Food) :: min=17800 max=20000 | stalled 0 of 201 | deliveries=7 totalling 3400 | sizes: 200x3, 400x2, 800x1, 1200x1 | drains=23 totalling 5000
+[C48P] REPORT CONSUMER MegaMall#2900 (Food) :: min=17800 max=20000 | stalled 0 of 201 | deliveries=7 totalling 3400 | sizes: 200x3, 400x2, 800x1, 1200x1 | drains=23 totalling 5000
+[mod] [C48P] REPORT CONSUMER ShopsElectronics#2902 (Electronics) :: min=3600 max=5000 | stalled 0 of 201 | deliveries=2 totalling 2000 | sizes: 1000x2 | drains=9 totalling 2200
+[C48P] REPORT CONSUMER ShopsElectronics#2902 (Electronics) :: min=3600 max=5000 | stalled 0 of 201 | deliveries=2 totalling 2000 | sizes: 1000x2 | drains=9 totalling 2200
+[mod] [C48P] REPORT CONSUMER ShopsFood#2901 (Food) :: min=7200 max=10000 | stalled 0 of 201 | deliveries=10 totalling 6200 | sizes: 200x2, 250x1, 400x1, 440x1, 800x2, 1000x2, 1110x1 | drains=24 totalling 6200
+[C48P] REPORT CONSUMER ShopsFood#2901 (Food) :: min=7200 max=10000 | stalled 0 of 201 | deliveries=10 totalling 6200 | sizes: 200x2, 250x1, 400x1, 440x1, 800x2, 1000x2, 1110x1 | drains=24 totalling 6200
+[mod] [C48P] REPORT CONSUMER MegaMall#4955 (Food) :: min=17400 max=20000 | stalled 0 of 201 | deliveries=8 totalling 5100 | sizes: 100x1, 200x2, 400x1, 1000x3, 1200x1 | drains=23 totalling 6600
+[C48P] REPORT CONSUMER MegaMall#4955 (Food) :: min=17400 max=20000 | stalled 0 of 201 | deliveries=8 totalling 5100 | sizes: 100x1, 200x2, 400x1, 1000x3, 1200x1 | drains=23 totalling 6600
+[mod] [C48P] REPORT CONSUMER ShopsElectronics#6314 (Electronics) :: min=3600 max=5000 | stalled 0 of 201 | deliveries=3 totalling 2800 | sizes: 800x1, 1000x2 | drains=12 totalling 3000
+[C48P] REPORT CONSUMER ShopsElectronics#6314 (Electronics) :: min=3600 max=5000 | stalled 0 of 201 | deliveries=3 totalling 2800 | sizes: 800x1, 1000x2 | drains=12 totalling 3000
+[mod] [C48P] REPORT CONSUMER Diner#5339 (Food) :: min=8400 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 1000x3 | drains=10 totalling 3000
+[C48P] REPORT CONSUMER Diner#5339 (Food) :: min=8400 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 1000x3 | drains=10 totalling 3000
+[mod] [C48P] REPORT CONSUMER ShopsJewelry#5329 (Polymers) :: min=3200 max=5000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 1000x3 | drains=14 totalling 3200
+[C48P] REPORT CONSUMER ShopsJewelry#5329 (Polymers) :: min=3200 max=5000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 1000x3 | drains=14 totalling 3200
+[mod] [C48P] REPORT CONSUMER ForestationPlant#6325 (Seeds) :: min=8680 max=10000 | stalled 0 of 201 | deliveries=5 totalling 2020 | sizes: 180x1, 280x3, 1000x1 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#6325 (Seeds) :: min=8680 max=10000 | stalled 0 of 201 | deliveries=5 totalling 2020 | sizes: 180x1, 280x3, 1000x1 | drains=5 totalling 2500
+						Lua 0:02:27:050
+[mod] [C48P] REPORT CONSUMER ElectronicsFactory#2845 (PreciousMetals) :: min=4473 max=4897 | stalled 0 of 201 | deliveries=3 totalling 911 | sizes: 108x1, 384x1, 419x1 | drains=39 totalling 1027
+[C48P] REPORT CONSUMER ElectronicsFactory#2845 (PreciousMetals) :: min=4473 max=4897 | stalled 0 of 201 | deliveries=3 totalling 911 | sizes: 108x1, 384x1, 419x1 | drains=39 totalling 1027
+[mod] [C48P] REPORT CONSUMER GHGFactory#1590 (Fuel) :: min=8980 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1020 | sizes: 1020x1 | drains=10 totalling 600
+[C48P] REPORT CONSUMER GHGFactory#1590 (Fuel) :: min=8980 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1020 | sizes: 1020x1 | drains=10 totalling 600
+[mod] [C48P] REPORT CONSUMER ForestationPlant#6324 (Seeds) :: min=8960 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1040 | sizes: 1040x1 | drains=5 totalling 500
+[C48P] REPORT CONSUMER ForestationPlant#6324 (Seeds) :: min=8960 max=10000 | stalled 0 of 201 | deliveries=1 totalling 1040 | sizes: 1040x1 | drains=5 totalling 500
+[mod] [C48P] REPORT CONSUMER ShopsFood#5340 (Food) :: min=8600 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 1000x3 | drains=12 totalling 2800
+[C48P] REPORT CONSUMER ShopsFood#5340 (Food) :: min=8600 max=10000 | stalled 0 of 201 | deliveries=3 totalling 3000 | sizes: 1000x3 | drains=12 totalling 2800
+[mod] [C48P] REPORT CONSUMER MegaMall#5327 (Food) :: min=18200 max=20000 | stalled 0 of 201 | deliveries=8 totalling 7400 | sizes: 600x1, 800x2, 1000x4, 1200x1 | drains=26 totalling 6800
+[C48P] REPORT CONSUMER MegaMall#5327 (Food) :: min=18200 max=20000 | stalled 0 of 201 | deliveries=8 totalling 7400 | sizes: 600x1, 800x2, 1000x4, 1200x1 | drains=26 totalling 6800
+[mod] [C48P] REPORT CONSUMER Diner#2903 (Food) :: min=8400 max=10000 | stalled 0 of 201 | deliveries=6 totalling 2600 | sizes: 200x4, 400x1, 1400x1 | drains=9 totalling 2400
+[C48P] REPORT CONSUMER Diner#2903 (Food) :: min=8400 max=10000 | stalled 0 of 201 | deliveries=6 totalling 2600 | sizes: 200x4, 400x1, 1400x1 | drains=9 totalling 2400
+[mod] [C48P] REPORT CONSUMER Diner#2850 (Food) :: min=4000 max=10000 | stalled 0 of 201 | deliveries=27 totalling 13250 | sizes: 200x11, 400x3, 450x1, 600x5, 800x3, 1000x4 | drains=41 totalling 13400
+[C48P] REPORT CONSUMER Diner#2850 (Food) :: min=4000 max=10000 | stalled 0 of 201 | deliveries=27 totalling 13250 | sizes: 200x11, 400x3, 450x1, 600x5, 800x3, 1000x4 | drains=41 totalling 13400
+[mod] [C48P] REPORT CONSUMER ShuttleHub#8564 (Fuel) :: min=7205 max=10000 | stalled 0 of 201 | deliveries=4 totalling 5835 | sizes: 1354x1, 1441x1, 1493x1, 1547x1 | drains=8 totalling 5562
+[C48P] REPORT CONSUMER ShuttleHub#8564 (Fuel) :: min=7205 max=10000 | stalled 0 of 201 | deliveries=4 totalling 5835 | sizes: 1354x1, 1441x1, 1493x1, 1547x1 | drains=8 totalling 5562
+[mod] [C48P] REPORT CONSUMER ForestationPlant#16077 (Seeds) :: min=8532 max=9272 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#16077 (Seeds) :: min=8532 max=9272 | stalled 0 of 201 | deliveries=9 totalling 2520 | sizes: 280x9 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMER ForestationPlant#16076 (Seeds) :: min=8479 max=9199 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[C48P] REPORT CONSUMER ForestationPlant#16076 (Seeds) :: min=8479 max=9199 | stalled 0 of 201 | deliveries=8 totalling 2520 | sizes: 280x7, 560x1 | drains=5 totalling 2500
+[mod] [C48P] REPORT CONSUMERS :: 1 silent consumer(s) (no delivery, drain or stall in the window) — counted, not hidden
+[C48P] REPORT CONSUMERS :: 1 silent consumer(s) (no delivery, drain or stall in the window) — counted, not hidden
+[mod] [C48P] DEPOT close [Seeds] StationSmall#12472 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StationSmall#12472 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#9296 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=15000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#9296 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=15000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#14612 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=65000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#14612 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=65000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#14619 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=8000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#14619 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=8000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StationSmall#12496 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StationSmall#12496 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#6617 :: stored=179994 | supply request actual=179994 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=90000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#6617 :: stored=179994 | supply request actual=179994 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=90000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#6615 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=5000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#6615 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=5000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StationSmall#12631 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StationSmall#12631 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#15037 :: stored=179960 | supply request actual=179960 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=80000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#15037 :: stored=179960 | supply request actual=179960 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=80000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#15036 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=8000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#15036 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=8000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#15986 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=50000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#15986 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=50000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#7017 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=30000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#7017 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=30000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StationSmall#4627 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StationSmall#4627 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StationSmall#4552 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StationSmall#4552 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#4532 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#4532 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#16009 :: stored=179973 | supply request actual=179973 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=65000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#16009 :: stored=179973 | supply request actual=179973 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=65000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#4544 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#4544 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] SpaceElevator#16171 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] SpaceElevator#16171 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#1073 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#1073 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#15963 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=70000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#15963 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=70000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalLanderRocket#4641 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalLanderRocket#4641 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#4087 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=90000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#4087 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=90000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StationSmall#6286 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StationSmall#6286 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#6315 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=80000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#6315 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=80000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#1471 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=14000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+						Lua 0:02:27:051
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#1471 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=14000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalStorageDepot#2870 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=30000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalStorageDepot#2870 :: stored=30000 | supply request actual=30000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=30000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StorageSeeds#7005 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=35000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StorageSeeds#7005 :: stored=180000 | supply request actual=180000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=35000 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalZeusRocket#1063 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalZeusRocket#1063 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalZeusRocket#1061 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalZeusRocket#1061 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] UniversalZeusRocket#1064 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] UniversalZeusRocket#1064 :: stored=0 | supply request actual=0 (ok=true) assignable=false (ok=true) flags=rfSupply+rfPostInQueue | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StationSmall#4792 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StationSmall#4792 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] StationSmall#4842 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] StationSmall#4842 :: stored=60000 | supply request actual=60000 (ok=true) assignable=true (ok=true) flags=rfSupply+rfStorageDepot | desired_amount=nil | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] MechanizedDepotSeeds#3789 :: stored=4000000 | supply request actual=nil (ok=true) assignable=nil (ok=true) flags=no-request-resolved | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] MechanizedDepotSeeds#3789 :: stored=4000000 | supply request actual=nil (ok=true) assignable=nil (ok=true) flags=no-request-resolved | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] DEPOT close [Seeds] MechanizedDepotSeeds#2776 :: stored=4000000 | supply request actual=nil (ok=true) assignable=nil (ok=true) flags=no-request-resolved | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[C48P] DEPOT close [Seeds] MechanizedDepotSeeds#2776 :: stored=4000000 | supply request actual=nil (ok=true) assignable=nil (ok=true) flags=no-request-resolved | desired_amount=0 | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data
+[mod] [C48P] REPORT ⛔ NOT CLAIMED: the C matcher's internal scan order. What IS read: its OUTPUT — every pairing it returned, with the counterfactual nearest-assignable-depot beside each. Classification and distance are Lua-side arithmetic on those outputs.
+[C48P] REPORT ⛔ NOT CLAIMED: the C matcher's internal scan order. What IS read: its OUTPUT — every pairing it returned, with the counterfactual nearest-assignable-depot beside each. Classification and distance are Lua-side arithmetic on those outputs.
+[mod] [C48P] REPORT ⚠️ CONFOUNDS: cheats enabled, oversized terraforming speed-run colony, drone carry dial at +2, one save, one speed, one window.
+[C48P] REPORT ⚠️ CONFOUNDS: cheats enabled, oversized terraforming speed-run colony, drone carry dial at +2, one save, one speed, one window.
+[mod] [C48P] TRY C47.Report ok=true result=true
+[C48P] TRY C47.Report ok=true result=true
+[mod] [C48P] WRAP RESTORED :: TaskRequestHub.FindTask is the shipped function again; nothing persists (this leg never saves)
+[C48P] WRAP RESTORED :: TaskRequestHub.FindTask is the shipped function again; nothing persists (this leg never saves)
+[mod] [C48P] TRY C47.RestoreWrapper ok=true result=nil
+[C48P] TRY C47.RestoreWrapper ok=true result=nil
+[mod] [C48P] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=3x | loads_this_process=1 | mode=REAL | note=at close
+[C48P] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=3x | loads_this_process=1 | mode=REAL | note=at close
+[mod] [C48P] CONDITIONS opt-in pack=8/8 active
+[C48P] CONDITIONS opt-in pack=8/8 active
+[mod] [C48P] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[C48P] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48P] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48P] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[mod] [C48P] CLOCK close :: GameTime()=276138997 (383.52 sols since game start) | UIColony.day=384 hour=18 | speed=3x | RealTime()=134709
+[C48P] CLOCK close :: GameTime()=276138997 (383.52 sols since game start) | UIColony.day=384 hour=18 | speed=3x | RealTime()=134709
+[mod] [C48P] ERRORWATCH C48P — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== c47-farm C48P ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one (owner rule 2026-08-01). stage_at_close=reporting loads_this_process=1 mode=REAL
+[C48P] ERRORWATCH C48P — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== c47-farm C48P ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one (owner rule 2026-08-01). stage_at_close=reporting loads_this_process=1 mode=REAL
+[mod] [C48P] === c48-pairing C48P === DONE. ⛔ Nothing was saved: this run never calls SaveGame, so the staged copy on disk is byte-identical to the one staged before the launch.
+[C48P] === c48-pairing C48P === DONE. ⛔ Nothing was saved: this run never calls SaveGame, so the staged copy on disk is byte-identical to the one staged before the launch.
+						Lua 0:02:30:040
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:02:30:042
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:02:30:419
+
+
+*** Debug::Done()
+Time (ms)	150419
+
+
