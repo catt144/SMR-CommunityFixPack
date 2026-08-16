@@ -46,7 +46,9 @@ owed input stays here no matter how struck-through it looks.
     the free-hex transient I had proposed. We then watched your save together and
     **the symptom reproduced**: your Potato farm was **stopped for 52% of the
     session** with its seed buffer hitting a true zero, while your other farm and
-    all 36 Forestation Plants never stopped once. You typed the banner sighting
+    all 36 Forestation Plants never stopped for want of Seeds. *(Audit precision,
+    2026-08-15: late in the sitting one Forestation Plant did stop twice — for
+    power/malfunction, nothing to do with seeds.)* You typed the banner sighting
     into the log, so for the first time this project can say a player *saw* it
     rather than that a counter fired.
 
@@ -73,8 +75,11 @@ owed input stays here no matter how struck-through it looks.
 
     **Why it is the only thing left to ask.** We ran your save `C47FARM` seven
     times unattended tonight (your cost: zero) and watched both of your Open
-    Farms for 15 in-game hours — about 51 planting ticks. **The buffer never
-    once hit empty.** The Potato farm's lowest reading was 305 of 5000; the
+    Farms for 15 in-game hours — about 51 planting ticks. **The sampled buffer
+    never once read empty** *(the sitting later proved it did touch zero
+    briefly — 2, 0 and 4 times across the runs — between our polls; the point
+    that this is nothing like what you saw still stands)*. The Potato farm's
+    lowest reading was 305 of 5000; the
     other farm's was 1661, and that one never raised a single "not working"
     event in any run. The Potato farm raised 2, then 0, then 4. That is nothing
     like what you saw.

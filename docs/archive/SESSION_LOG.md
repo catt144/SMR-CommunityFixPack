@@ -8,7 +8,31 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
-## 2026-08-15 — the unattended-3 terminal audit: both builds sustained, every count re-trued, and a live collision with the owner sitting that found the F85 dialog dead-coded
+## 2026-08-15 — the c47-farm terminal audit: four bodies of work sustained end to end, one harness fact filed, and the chain's folder burned
+
+**This session (Fable).** Backward QA of the whole `c47-farm` chain — the
+unattended C47 leg (4 suite + 3 sampler launches), the attended sitting on the
+owner's live `C47FARM`, the C48 vegetation-supply leg with the owner's speed
+ladder, and the permanent wave-11 probe — artefacts first, briefs last (both
+consumed prompts re-read out of git history, `576e736^` / `a21bf53^`; every ask
+delivered). All ten archived logs re-counted from their verdict lines AND
+byte-verified MD5-identical against the game's own copies; every route
+re-derived at Src by symbol search: the template asymmetry (one
+`vegetation_interval` assignment tree-wide), the tick derivation, the
+free-hex spend condition, the crop rotation, `QueueVoice`'s text-keyed
+RealTime cooldown, `supply_dist_modifier`'s single override, Bush's
+200×1.4=280, and the P1-reversal keystone — `reason=Consumption` fires only at
+`stored==0` (`Building.lua:612-613`), so the unattended leg's own adds proved
+the zeros its polling missed. **Every verdict sustained** (C47 P1–P8, all four
+sitting corrections, C48 P1–P6, both probe FAILs = own disclosed defects, SKIP
+set identical by name, prediction commits proven to precede launches in git).
+Filed **`EF-057`** — a sampled extremum is not an extremum — the generalisation
+the audit brief noted was owed. Three corrections: the sitting's "~13×" rate
+gap re-labelled a peak-slice figure (whole-window ~3×, verdict stands); the
+control-min cell 84%→8,383 (83.8%); and **C47's front matter was still
+pre-sitting, so the generated INDEX row was telling the reversed story** —
+evidence/row_status/heading tag re-trued, plus two item-33 residue lines on the
+checklist scoped to what was actually measured. Chain closed; folder deleted.
 
 **The audit (this session, Fable).** Both builds re-derived at Src
 1.0.7.396349 from scratch, the route not the citations: F85's `dont_pause` has
