@@ -2114,7 +2114,18 @@ separate steps.
 judging lists are preserved in the archive snapshot — the rebuild's
 verification leg is derived from them.
 
-### PT-10 — Open-roof drone observation (F55) · Status: unrun · ❓ open question · **mode: co-run** (routing 2026-08-04 — your eyes: clumping + screenshots; setup rig-driven)
+### PT-10 — Open-roof drone observation (F55) · Status: ✅✅ **RUN 2026-08-16, ATTENDED, BY THE OWNER — ❓ OPEN QUESTION CLOSED** · **no longer needs a co-run**
+> ⭐⭐ **Answered, and better than the bar.** Owner ran it twice on their own
+> colony — once via `CheatOpenAllDomes()`, once by reaching breathable
+> atmosphere *organically* (Atmosphere 100% / Temperature 84.09%, Open Domes law
+> actually passed). Drones **enter, service and TRANSIT** open domes (they
+> pathfind straight through to tasks on the far side), a `dome_required`
+> Amphitheater read 9% deterioration / last serviced 17 h, and there is **no
+> clustering**. ⇒ The dome-entrance PF-tunnel concern is **disproven**, not just
+> un-actionable. ⛔ It did **not** exercise the fix itself (that needs a drone
+> that already failed an approach), so F55 was NOT promoted to
+> `tested-attended`. Full write-up + the confound argument: [F55](agent/bugs/F55.md).
+> ⚖️ Nothing owed from you; the promotion question is yours if you ever want it.
 **Bug:** no expected answer — either result is useful data. The forever-cache
 half is fixed and probe-verified; whether opening a dome's roof destroys the
 dome-entrance attaches carrying the only drone pathfinding tunnels in is engine
