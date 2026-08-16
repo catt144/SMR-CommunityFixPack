@@ -1,0 +1,530 @@
+-- SMR Community Fix Pack — Test Kit :: C48 PAIRING-DECISION LOG.  TEMPORARY
+--
+-- Declared by: the 2026-08-16 owner go ("I am out of the game, its a go"), leg
+-- folder docs/agent/prompts/c48-pairing/. UNATTENDED: self-drives, loads a
+-- STAGED COPY, sets a speed, quits. Pairs with 97_C47Common.lua (unchanged).
+-- Arm with:  C48P_ARM.ps1 arm-pair
+--
+-- WHAT THIS LEG READS, AND WHY IT IS THE ONE THAT CAN RULE. Every earlier leg
+-- measured what ARRIVED (delivery sizes, depot totals). This one reads the
+-- DECISION: `TaskRequestHub:FindTask` (_TaskRequest.lua:72-83) is the single
+-- Lua seam through which every drone receives its pairing from the C matcher —
+-- a log-only wrapper there sees (supply, demand, resource, amount) for every
+-- assignment in the colony, WITHOUT changing any of them. The owner's three
+-- observations drive the three questions:
+--   1. their marked-up path: a drone bypassed a stocked seed depot beside the
+--      farm for a distant bush ⇒ per Seeds pairing, log the chosen source AND
+--      the nearest ASSIGNABLE depot at that same moment, from the DRONE's
+--      position — was a depot genuinely available and nearer, and did it lose?
+--   2. their four-drone food observation: drones bypass full depots for
+--      harvest piles on the ground ⇒ classify every chosen source by CLASS
+--      (vegetation offer / loose+producer pile / depot / other) for Seeds AND
+--      Food — is "loose before storage" a cross-resource ordering?
+--   3. their desired_amount correction: depots mark their traffic with
+--      const.rfStorageDepot (StorageDepot.lua:67) and desired_amount feeds
+--      BOTH requests (:466-467) ⇒ read every Seeds/Food depot's live request
+--      amounts against stored and desired, so rebalancing-vs-consumer gets
+--      data instead of duelling glosses. ⚠️ This leg's record CORRECTS the
+--      c48veg instrument's gloss ("keeps back ⇒ not offered"): the owner's
+--      play-observation says consumers draw freely and the flag machinery
+--      supports them; the C-side effect is what these reads bound.
+--
+-- ⛔⛔ THE ONE PATCHED PATH, DECLARED: this leg installs a LOG-ONLY wrapper on
+--    TaskRequestHub.FindTask (class method, sole definition tree-wide). It
+--    calls the original and returns its values UNCHANGED — the matcher's
+--    behaviour is not altered by observation — and it is RESTORED at close.
+--    Everything else is reads. It never saves, never mutates a request, never
+--    touches a building, and the staged copy must be byte-identical after.
+--
+-- ⚠️ Perf discipline: FindTask fires constantly (every idle drone, ~2 s). The
+--    wrapper does counter work only; the expensive counterfactual (34-depot
+--    scan) runs only for Seeds/Food supply+demand pairings, and detailed log
+--    lines are capped with the overflow aggregated — capped, SAID, never
+--    silently dropped.
+
+local say = C47.Say
+local fmt = C47.Fmt
+local idof = C47.IdOf
+
+C47.tag  = "C48P"
+C47.mode = "REAL"
+
+local STAGED_SAVE = "C48PAIR.savegame.sav"
+
+C47.speed       = 3
+C47.sample_ms   = 500
+C47.window_gt   = 10 * 30000      -- 10 game hours, one window
+C47.max_real_ms = 15 * 60 * 1000
+C47.watchdog    = 25 * 60 * 1000
+C47.freeze_samples = 60
+C47.detail_cap  = 300             -- detailed pairing lines; beyond = aggregated
+
+-- file-scope state
+C47.consumers   = nil
+C47.seed_depots = nil
+C47.food_depots = nil
+C47.hubs        = nil
+C47.pair        = nil
+C47.orig_findtask = nil
+C47.samples     = 0
+C47.frozen_at   = nil
+
+---- flag decoding -------------------------------------------------------------
+
+local FLAG_NAMES = { "rfSupply", "rfDemand", "rfWork", "rfCanExecuteAlone",
+	"rfPostInQueue", "rfWaitToFill", "rfStorageDepot" }
+local function flags_of(req)
+	local out = {}
+	for _, name in ipairs(FLAG_NAMES) do
+		local v = rawget(const, name)
+		local ok, set = pcall(function() return v and req:IsAnyFlagSet(v) end)
+		if ok and set then out[#out + 1] = name end
+	end
+	return #out > 0 and table.concat(out, "+") or "none-of-known"
+end
+
+---- source classification ------------------------------------------------------
+
+local function class_of(obj)
+	if not obj then return "nil-source" end
+	local ok, r = pcall(function()
+		if obj:IsKindOf("VegetationTaskRequester") then return "veg-offer" end
+		if obj:IsKindOf("SurfaceDepositGroup") or obj:IsKindOf("SurfaceDeposit") then return "surface-deposit" end
+		if obj:IsKindOf("MechanizedDepot") then return "depot-mechanized" end
+		if obj:IsKindOf("UniversalStorageDepotBase") or obj:IsKindOf("StorageDepot") then return "depot" end
+		if obj:IsKindOf("ResourceStockpileBase") then return "loose-pile" end
+		if obj:IsKindOf("Building") then return "building" end
+		return "other"
+	end)
+	local ok2, cn = pcall(function() return obj.class end)
+	return (ok and r or "class-read-failed") .. "(" .. (ok2 and tostring(cn) or "?") .. ")"
+end
+
+local function dist2d(a, b)
+	local ok, d = pcall(function() return a:GetDist2D(b) end)
+	return ok and d or nil
+end
+
+---- census --------------------------------------------------------------------
+
+local function depot_rows(resource)
+	local rows, seen = {}, {}
+	local map = rawget(_G, "CurrentMap")
+	for _, cls in ipairs{ "StorageDepot", "UniversalStorageDepot", "MechanizedDepot", "StorageSeeds", "StationSmall" } do
+		local ok, list = pcall(function() return map and map:MapGet("map", cls) end)
+		if ok and type(list) == "table" then
+			for _, d in ipairs(list) do
+				local h = rawget(d, "handle")
+				local ok_a, acc = pcall(function() return d:DoesAcceptResource(resource) end)
+				if h and not seen[h] and ok_a and acc then
+					seen[h] = true
+					-- the depot's live supply request for this resource, however the class stores it
+					local ok_r, req = pcall(function()
+						if type(d.supply) == "table" and d.supply[resource] then return d.supply[resource] end
+						if d.supply_request then return d.supply_request end
+						return nil
+					end)
+					rows[#rows + 1] = { obj = d, req = (ok_r and req) or nil }
+				end
+			end
+		end
+	end
+	return rows
+end
+
+function C47.DepotDetail(when, rows, resource)
+	for _, row in ipairs(rows) do
+		local d = row.obj
+		local ok_s, stored = pcall(function()
+			local f = d["GetStored_" .. resource]
+			if f then return f(d) end
+			if d.GetStoredAmount then return d:GetStoredAmount(resource) end
+			return (d.stockpiled_amount or empty_table)[resource]
+		end)
+		local req = row.req
+		local ok_amt, amt = pcall(function() return req and req:GetActualAmount() end)
+		local ok_can, can = pcall(function() return req and req:CanAssignUnit() end)
+		say(fmt("DEPOT %s [%s] %s :: stored=%s | supply request actual=%s (ok=%s) assignable=%s (ok=%s) flags=%s | desired_amount=%s | ⚠️ the c48veg gloss ('desired = kept back from everyone') is UNDER CORRECTION — the owner's observed rule is that consumers draw freely and desired protects against depot-to-depot rebalancing; these paired reads are the data",
+			tostring(when), tostring(resource), idof(d), tostring(ok_s and stored),
+			tostring(ok_amt and amt), tostring(ok_amt), tostring(ok_can and can), tostring(ok_can),
+			req and flags_of(req) or "no-request-resolved",
+			tostring(rawget(d, "desired_amount"))))
+	end
+end
+
+function C47.Census()
+	if not C47.Guard("Census") then return false end
+	C47.Label("ORGANIC", "census of consumers, depots and hubs", "reads only")
+	C47.Now("census")
+
+	-- every consuming building on the map
+	C47.consumers = {}
+	local map = rawget(_G, "CurrentMap")
+	local ok_b, blds = pcall(function() return map:MapGet("map", "Building") end)
+	if ok_b and type(blds) == "table" then
+		for _, b in ipairs(blds) do
+			local ok_c, has = pcall(function() return b:DoesHaveConsumption() end)
+			if ok_c and has then
+				C47.consumers[#C47.consumers + 1] = { obj = b, win = nil,
+					res = tostring(rawget(b, "consumption_resource_type") or (pcall(function() return b.consumption_resource_type end) and b.consumption_resource_type)) }
+			end
+		end
+	end
+	C47.Applicable("C48P-population(consuming buildings)", #C47.consumers, #C47.consumers,
+		"CurrentMap:MapGet('Building') filtered on DoesHaveConsumption(), walked this load")
+	for i, rec in ipairs(C47.consumers) do
+		local b = rec.obj
+		say(fmt("CENSUS CONSUMER [%d] %s :: resource=%s | stored=%s of %s | working=%s",
+			i, idof(b), tostring(rec.res),
+			tostring(rawget(b, "consumption_stored_resources")),
+			tostring(select(2, pcall(function() return b.consumption_max_storage end))),
+			tostring(rawget(b, "working"))))
+	end
+
+	C47.seed_depots = depot_rows("Seeds")
+	C47.food_depots = depot_rows("Food")
+	C47.Applicable("C48P-population(Seeds depots)", #C47.seed_depots, #C47.seed_depots, "map walk, DoesAcceptResource('Seeds')")
+	C47.Applicable("C48P-population(Food depots)", #C47.food_depots, #C47.food_depots, "map walk, DoesAcceptResource('Food')")
+	C47.DepotDetail("census", C47.seed_depots, "Seeds")
+
+	-- the hubs whose queues get censused
+	C47.hubs = {}
+	local ok_h, hubs = pcall(function() return map:MapGet("map", "DroneControl") end)
+	if ok_h and type(hubs) == "table" then
+		for _, h in ipairs(hubs) do C47.hubs[#C47.hubs + 1] = h end
+	end
+	C47.Applicable("C48P-population(DroneControl hubs)", #C47.hubs, #C47.hubs, "CurrentMap:MapGet('DroneControl')")
+	return #C47.consumers > 0
+end
+
+---- ⭐ the queue census: where each source class actually sits -----------------
+
+function C47.QueueCensus(when, resource)
+	local maxp = rawget(_G, "MaxBuildingPriority") or 3
+	for _, hub in ipairs(C47.hubs or empty_table) do
+		local ok, sq = pcall(function() return hub.supply_queues end)
+		if ok and type(sq) == "table" then
+			local parts, total = {}, 0
+			for p = -1, maxp do
+				local bucket = sq[p]
+				local rq = type(bucket) == "table" and bucket[resource]
+				if type(rq) == "table" and #rq > 0 then
+					local by = {}
+					for _, req in ipairs(rq) do
+						local ok_s, src = pcall(function() return req:GetSource() end)
+						local cls = class_of(ok_s and src or nil)
+						local short = cls:match("^[^(]+") or cls
+						by[short] = (by[short] or 0) + 1
+						total = total + 1
+					end
+					local inner = {}
+					for k, c in pairs(by) do inner[#inner + 1] = fmt("%s x%d", k, c) end
+					table.sort(inner)
+					parts[#parts + 1] = fmt("p%d: %s", p, table.concat(inner, ", "))
+				end
+			end
+			if total > 0 then
+				say(fmt("QUEUES %s :: %s '%s' supply by priority bucket :: %s",
+					tostring(when), idof(hub), tostring(resource), table.concat(parts, " | ")))
+			end
+		end
+	end
+end
+
+---- ⭐⭐ the decision log: the FindTask wrapper ---------------------------------
+
+local function fresh_pair_state()
+	return {
+		calls = 0, paired = 0,
+		by_res = {},          -- resource -> count of supply+demand pairings
+		detail = {},          -- resource -> { by_src_class = {}, by_dest_class = {},
+		                      --   veg_with_nearer_depot = 0, veg_no_nearer_depot = 0,
+		                      --   depot_chosen = 0, lines = 0 }
+	}
+end
+
+local function detail_for(res)
+	local d = C47.pair.detail[res]
+	if not d then
+		d = { by_src_class = {}, by_dest_class = {}, veg_with_nearer_depot = 0,
+			veg_no_nearer_depot = 0, depot_chosen = 0, lines = 0, sum_src_dist = 0, dist_n = 0 }
+		C47.pair.detail[res] = d
+	end
+	return d
+end
+
+local function nearest_assignable_depot(rows, agent)
+	local best, best_d = nil, nil
+	for _, row in ipairs(rows or empty_table) do
+		local req = row.req
+		local ok_a, amt = pcall(function() return req and req:GetActualAmount() end)
+		local ok_c, can = pcall(function() return req and req:CanAssignUnit() end)
+		if ok_a and type(amt) == "number" and amt > 0 and ok_c and can then
+			local d = dist2d(agent, row.obj)
+			if d and (not best_d or d < best_d) then best, best_d = row, d end
+		end
+	end
+	return best, best_d
+end
+
+function C47.InstallWrapper()
+	local classes = rawget(_G, "g_Classes")
+	local hub_class = classes and classes.TaskRequestHub
+	if not (hub_class and hub_class.FindTask) then
+		say("WRAP ⛔ TaskRequestHub.FindTask did not resolve — THE DECISION LOG IS OFF and every pairing verdict is UNSAMPLED.")
+		return false
+	end
+	C47.Label("FORCED", "a LOG-ONLY wrapper on TaskRequestHub.FindTask",
+		"calls the original, returns its values unchanged, restored at close — the single patched path of this leg")
+	C47.pair = fresh_pair_state()
+	C47.orig_findtask = hub_class.FindTask
+	hub_class.FindTask = function(hub, agent, flags)
+		local r, pr, res, amt, prio = C47.orig_findtask(hub, agent, flags)
+		local ok = pcall(function()
+			local P = C47.pair
+			if not P then return end
+			P.calls = P.calls + 1
+			if not (r and pr and res) then return end
+			P.paired = P.paired + 1
+			P.by_res[res] = (P.by_res[res] or 0) + 1
+			if res ~= "Seeds" and res ~= "Food" then return end
+			local rfS = rawget(const, "rfSupply")
+			if not (rfS and r:IsAnyFlagSet(rfS)) then return end
+			local D = detail_for(res)
+			local src = r:GetSource(agent)
+			local dest = pr:GetSource(agent)
+			local src_cls = class_of(src)
+			local dest_cls = class_of(dest)
+			local src_short = src_cls:match("^[^(]+") or src_cls
+			local dest_short = dest_cls:match("^[^(]+") or dest_cls
+			D.by_src_class[src_short] = (D.by_src_class[src_short] or 0) + 1
+			D.by_dest_class[dest_short] = (D.by_dest_class[dest_short] or 0) + 1
+			local src_d = agent and src and dist2d(agent, src) or nil
+			if src_d then D.sum_src_dist = D.sum_src_dist + src_d; D.dist_n = D.dist_n + 1 end
+			local rows = (res == "Seeds") and C47.seed_depots or C47.food_depots
+			-- ⛔ multiple returns: never route these through `and/or`, which
+			--    truncates to one value — the first draft of this line did, and
+			--    would have zeroed the counterfactual column silently.
+			local ndep, ndep_d
+			if agent then ndep, ndep_d = nearest_assignable_depot(rows, agent) end
+			if src_short == "depot" or src_short == "depot-mechanized" then
+				D.depot_chosen = D.depot_chosen + 1
+			elseif src_d and ndep_d then
+				if ndep_d < src_d then D.veg_with_nearer_depot = D.veg_with_nearer_depot + 1
+				else D.veg_no_nearer_depot = D.veg_no_nearer_depot + 1 end
+			end
+			if D.lines < C47.detail_cap then
+				D.lines = D.lines + 1
+				say(fmt("PAIR %s :: drone=%s | chose %s dist=%s amt=%s flags=%s | dest %s | nearest ASSIGNABLE depot=%s dist=%s | %s",
+					tostring(res), idof(agent), src_cls, tostring(src_d), tostring(amt),
+					flags_of(r), dest_cls,
+					ndep and idof(ndep.obj) or "NONE-ASSIGNABLE", tostring(ndep_d),
+					(src_short ~= "depot" and src_short ~= "depot-mechanized" and ndep_d and src_d and ndep_d < src_d)
+						and "⭐⭐ NON-DEPOT WON WITH A NEARER ASSIGNABLE DEPOT AVAILABLE" or "-"))
+			end
+		end)
+		if not ok then C47.pair.wrap_errors = (C47.pair.wrap_errors or 0) + 1 end
+		return r, pr, res, amt, prio
+	end
+	say("WRAP installed :: TaskRequestHub.FindTask (class method, sole definition tree-wide, _TaskRequest.lua:72-83) — log-only, original called and returned unchanged")
+	return true
+end
+
+function C47.RestoreWrapper()
+	local classes = rawget(_G, "g_Classes")
+	local hub_class = classes and classes.TaskRequestHub
+	if hub_class and C47.orig_findtask then
+		hub_class.FindTask = C47.orig_findtask
+		say("WRAP RESTORED :: TaskRequestHub.FindTask is the shipped function again; nothing persists (this leg never saves)")
+	end
+end
+
+---- consumer sampling ---------------------------------------------------------
+
+local function fresh_win()
+	return { min = nil, max = nil, last_buf = nil, n = 0, stalled = 0,
+		deliveries = 0, delivered = 0, sizes = {}, drains = 0, drain_total = 0 }
+end
+
+local function sample_once()
+	C47.samples = C47.samples + 1
+	for _, rec in ipairs(C47.consumers or empty_table) do
+		local w = rec.win
+		if w then
+			local cur = rawget(rec.obj, "consumption_stored_resources")
+			if type(cur) == "number" then
+				w.n = w.n + 1
+				if not w.min or cur < w.min then w.min = cur end
+				if not w.max or cur > w.max then w.max = cur end
+				if w.last_buf and cur > w.last_buf then
+					local size = cur - w.last_buf
+					w.deliveries = w.deliveries + 1
+					w.delivered = w.delivered + size
+					w.sizes[size] = (w.sizes[size] or 0) + 1
+				elseif w.last_buf and cur < w.last_buf then
+					w.drains = w.drains + 1
+					w.drain_total = w.drain_total + (w.last_buf - cur)
+				end
+				w.last_buf = cur
+			end
+			if not rawget(rec.obj, "working") then w.stalled = w.stalled + 1 end
+		end
+	end
+end
+
+function C47.RunWindow()
+	if not C47.Guard("Window") then return false end
+	for _, rec in ipairs(C47.consumers or empty_table) do rec.win = fresh_win() end
+	local start_gt, start_rt = GameTime(), RealTime()
+	say(fmt("WINDOW OPEN :: GameTime=%d | target +%d game ms | speed=%sx | consumer sampling every %d real ms | decision log LIVE",
+		start_gt, C47.window_gt, tostring(GetTimeFactor() / const.DefaultTimeFactor), C47.sample_ms))
+	C47.QueueCensus("window open", "Seeds")
+	C47.QueueCensus("window open", "Food")
+	local target = start_gt + C47.window_gt
+	local last_gt, still, complete = start_gt, 0, true
+	while true do
+		sample_once()
+		local gt, rt = GameTime(), RealTime()
+		if gt == last_gt then
+			still = still + 1
+			if still == C47.freeze_samples then
+				say("WINDOW ⛔ CLOCK STOPPED — window is PARTIAL.")
+				C47.FreezeDiagnostic("clock stopped")
+				C47.frozen_at = gt
+				complete = false
+				break
+			end
+		else still = 0; last_gt = gt end
+		if gt - target >= 0 then break end
+		if rt - (start_rt + C47.max_real_ms) >= 0 then
+			say("WINDOW ⛔ REAL-TIME CAP — window is PARTIAL.")
+			complete = false
+			break
+		end
+		Sleep(C47.sample_ms)
+	end
+	local end_gt = GameTime()
+	C47.win_span = { start_gt = start_gt, end_gt = end_gt, complete = complete }
+	say(fmt("WINDOW CLOSED :: game %d ms (%s h) | complete=%s",
+		end_gt - start_gt, tostring((end_gt - start_gt) / C47.MS_PER_HOUR), tostring(complete)))
+	C47.QueueCensus("window close", "Seeds")
+	return complete
+end
+
+---- report --------------------------------------------------------------------
+
+function C47.Report()
+	local P = C47.pair
+	say(fmt("REPORT SPAN :: consumer samples=%d at %d ms | frozen at=%s | FindTask calls seen=%s, of them supply+demand pairings=%s | wrapper errors=%s",
+		C47.samples, C47.sample_ms, tostring(C47.frozen_at or "not frozen"),
+		tostring(P and P.calls), tostring(P and P.paired), tostring(P and (P.wrap_errors or 0))))
+	if P then
+		local rl = {}
+		for res, c in pairs(P.by_res) do rl[#rl + 1] = fmt("%s=%d", tostring(res), c) end
+		table.sort(rl)
+		say("REPORT pairings by resource :: " .. table.concat(rl, ", "))
+		for _, res in ipairs{ "Seeds", "Food" } do
+			local D = P.detail[res]
+			if D then
+				local src_parts, dest_parts = {}, {}
+				for k, c in pairs(D.by_src_class) do src_parts[#src_parts + 1] = fmt("%s x%d", k, c) end
+				for k, c in pairs(D.by_dest_class) do dest_parts[#dest_parts + 1] = fmt("%s x%d", k, c) end
+				table.sort(src_parts); table.sort(dest_parts)
+				say(fmt("REPORT ⭐⭐ '%s' DECISIONS :: chosen source classes: %s | destinations: %s | ⭐ non-depot chosen WITH a nearer assignable depot=%d vs without=%d | depot chosen=%d | mean chosen-source distance=%s | detailed lines=%d of cap %d%s",
+					res, table.concat(src_parts, ", "), table.concat(dest_parts, ", "),
+					D.veg_with_nearer_depot, D.veg_no_nearer_depot, D.depot_chosen,
+					D.dist_n > 0 and tostring(D.sum_src_dist / D.dist_n) or "n/a",
+					D.lines, C47.detail_cap,
+					D.lines >= C47.detail_cap and " ⚠️ CAP HIT — later pairings are in these counters but not line-logged" or ""))
+			else
+				say(fmt("REPORT '%s' DECISIONS :: NONE SAMPLED — ⛔ a zero here is UNSAMPLED, not 'no pairings happen'", res))
+			end
+		end
+	end
+	-- consumers: report every one that had any traffic; count the silent ones
+	local silent = 0
+	for _, rec in ipairs(C47.consumers or empty_table) do
+		local w = rec.win
+		if w and (w.deliveries > 0 or w.drains > 0 or w.stalled > 0) then
+			local sizes, parts = {}, {}
+			for s, c in pairs(w.sizes) do sizes[#sizes + 1] = { s = s, c = c } end
+			table.sort(sizes, function(a, b) return a.s < b.s end)
+			for _, e in ipairs(sizes) do parts[#parts + 1] = fmt("%dx%d", e.s, e.c) end
+			say(fmt("REPORT CONSUMER %s (%s) :: min=%s max=%s | stalled %d of %d | deliveries=%d totalling %d | sizes: %s | drains=%d totalling %d",
+				idof(rec.obj), tostring(rec.res), tostring(w.min), tostring(w.max),
+				w.stalled, w.n, w.deliveries, w.delivered,
+				#parts > 0 and table.concat(parts, ", ") or "(none)",
+				w.drains, w.drain_total))
+		else
+			silent = silent + 1
+		end
+	end
+	say(fmt("REPORT CONSUMERS :: %d silent consumer(s) (no delivery, drain or stall in the window) — counted, not hidden", silent))
+	C47.DepotDetail("close", C47.seed_depots, "Seeds")
+	say("REPORT ⛔ NOT CLAIMED: the C matcher's internal scan order. What IS read: its OUTPUT — every pairing it returned, with the counterfactual nearest-assignable-depot beside each. Classification and distance are Lua-side arithmetic on those outputs.")
+	say("REPORT ⚠️ CONFOUNDS: cheats enabled, oversized terraforming speed-run colony, drone carry dial at +2, one save, one speed, one window.")
+	return true
+end
+
+---- the leg body ---------------------------------------------------------------
+
+function C47.Boot()
+	CreateRealTimeThread(function()
+		Sleep(1)
+		say("=== c48-pairing C48P === payload loaded. Staged save: " .. STAGED_SAVE)
+		CreateRealTimeThread(function()
+			local deadline = RealTime() + C47.watchdog
+			while C47.stage ~= "done" do
+				if RealTime() - deadline >= 0 then
+					say("TIMEOUT " .. tostring(C47.stage))
+					pcall(C47.Report)
+					pcall(C47.RestoreWrapper)
+					local f = rawget(_G, "FlushLogFile"); if f then f() end
+					Sleep(1000) quit() return
+				end
+				Sleep(1000)
+			end
+		end)
+		if rawget(_G, "ShowStartGamePopup") then ShowStartGamePopup = function() end end
+		C47.stage = "waiting-menu"
+		if not C47.WaitFor(5 * 60 * 1000, function() return not not GetPreGameMainMenu() end) then
+			say("TIMEOUT waiting-menu") C47.stage = "done" Sleep(2000) quit() return
+		end
+		Sleep(2000)
+		C47.ReadConditions("main menu, before the load")
+		C47.stage = "loading"
+		local ok, res = C47.TryYield("load " .. STAGED_SAVE, function()
+			return C47.Load(STAGED_SAVE, C47.speed)
+		end)
+		if not (ok and res) then
+			say("⛔ LOAD FAILED or the speed did not take — nothing below this line exists.")
+			C47.ErrorWatchNote() C47.stage = "done" Sleep(2000) quit() return
+		end
+		C47.ReadConditions("after the load")
+		C47.stage = "census"
+		local ok_c, res_c = C47.TryYield("leg Census", C47.Census)
+		if not (ok_c and res_c) then
+			C47.ErrorWatchNote() C47.stage = "done" Sleep(2000) quit() return
+		end
+		C47.stage = "wrapping"
+		local ok_w, wired = C47.TryYield("leg InstallWrapper", C47.InstallWrapper)
+		if not (ok_w and wired) then
+			say("⛔ THE WRAPPER DID NOT INSTALL — the window still runs for the consumer census, but every pairing verdict is UNSAMPLED.")
+		end
+		C47.stage = "sampling"
+		C47.TryYield("leg RunWindow", C47.RunWindow)
+		C47.stage = "reporting"
+		C47.Try("C47.Report", C47.Report)
+		C47.Try("C47.RestoreWrapper", C47.RestoreWrapper)
+		C47.ReadConditions("at close")
+		C47.Now("close")
+		C47.ErrorWatchNote()
+		say("=== c48-pairing C48P === DONE. ⛔ Nothing was saved: this run never calls SaveGame, so the staged copy on disk is byte-identical to the one staged before the launch.")
+		C47.stage = "done"
+		Sleep(3000)
+		quit()
+	end)
+end
+
+say("[C48P] 98_C48Pair loaded — self-driving in 1 tick.")
+C47.Boot()

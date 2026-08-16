@@ -1,0 +1,160 @@
+# c48-pairing ARM / DISARM script.  Parked source; copy to a scratch .ps1 and run.
+#
+# Inherits every lesson of C47_ARM.ps1 / C48B_ARM.ps1 (rule C11, the G5
+# read-back gate, the S3 ASCII-only body, the no-BOM metadata write, and the
+# family strip pattern Code/9[78]_C4[78] which matches 98_C48Pair too).
+#
+#   Usage:  .\C48P_ARM.ps1 arm-pair    # 97_C47Common + 98_C48Pair: the decision-log leg
+#           .\C48P_ARM.ps1 disarm     # removes everything this script can add
+#
+# ------------------------------------------------------------------------------
+# THE GATE SHAPE FOR THIS LEG: one declared LOG-ONLY wrapper, zero mutations.
+#
+#   The brake leg's gate allowed a declared mutation set. This leg's gate goes
+#   back the other way: it must contain the FindTask wrapper AND its restore,
+#   and it must contain NO mutating call at all - not the brake leg's rebuild
+#   calls, not a save, not a farm touch. A pairing log that changed pairings
+#   would be worthless.
+# ------------------------------------------------------------------------------
+
+param([Parameter(Mandatory = $true)][ValidateSet("arm-pair", "disarm")][string]$mode)
+
+$ErrorActionPreference = "Stop"
+$park = "c:\Dev\SMR-BugFixPack\docs\agent\prompts\c48-pairing"
+$kit  = "c:\Dev\SMR-BugFixPack-TestKit"
+$meta = Join-Path $kit "metadata.lua"
+$noBom = New-Object System.Text.UTF8Encoding($false)
+
+$common  = @{ src = "97_C47Common.lua.txt"; dst = "Code\97_C47Common.lua" }
+$payload = @{ src = "98_C48Pair.lua.txt"; dst = "Code\98_C48Pair.lua" }
+$pairs   = @()
+if ($mode -eq "arm-pair") { $pairs = @($common, $payload) }
+
+$autorunLine = 'Code/96_AutoRunFlag.lua'
+
+# --- clean slate every time ---------------------------------------------------
+foreach ($p in @($common, $payload)) {
+  $f = Join-Path $kit $p.dst
+  if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force; Write-Output ("DELETED " + $p.dst) }
+}
+$lines = Get-Content -LiteralPath $meta -Encoding UTF8
+$kept = @()
+foreach ($l in $lines) {
+  if ($l -match 'Code/9[78]_C4[78]') { continue }
+  if ($l -match [regex]::Escape($autorunLine)) { continue }
+  $kept += $l
+}
+[System.IO.File]::WriteAllLines($meta, $kept, $noBom)
+Write-Output ("metadata.lua: stripped " + ($lines.Count - $kept.Count) + " arming line(s)")
+
+# --- arm ----------------------------------------------------------------------
+if ($mode -ne "disarm") {
+  foreach ($p in $pairs) {
+    Copy-Item -LiteralPath (Join-Path $park $p.src) -Destination (Join-Path $kit $p.dst) -Force
+    Write-Output ("WROTE " + $p.dst)
+  }
+  $lines = Get-Content -LiteralPath $meta -Encoding UTF8
+  $out = New-Object System.Collections.Generic.List[string]
+  $inserted = $false
+  foreach ($l in $lines) {
+    $out.Add($l)
+    if (-not $inserted -and $l -match '99_FixtureCarry\.lua') {
+      foreach ($p in $pairs) {
+        $leaf = Split-Path $p.dst -Leaf
+        $out.Add(("`t`t`"Code/" + $leaf + "`",  -- TEMPORARY c48-pairing"))
+      }
+      $inserted = $true
+    }
+  }
+  if (-not $inserted) { Write-Output "ARM FAIL: anchor 99_FixtureCarry.lua not found"; exit 1 }
+  [System.IO.File]::WriteAllLines($meta, $out, $noBom)
+  Write-Output "WROTE metadata.lua (no BOM)"
+}
+
+# ---- gate --------------------------------------------------------------------
+$fail = $false
+$m = Get-Content -LiteralPath $meta -Raw -Encoding UTF8
+
+if ($m -match [regex]::Escape('"Code/61_Probes_Wave11.lua"')) {
+  Write-Output "GATE OK       metadata still lists the permanent Code/61_Probes_Wave11.lua"
+} else {
+  Write-Output "GATE FAIL: metadata no longer lists Code/61_Probes_Wave11.lua"; $fail = $true
+}
+if (Test-Path -LiteralPath (Join-Path $kit "Code\61_Probes_Wave11.lua")) {
+  Write-Output "GATE OK       Code/61_Probes_Wave11.lua is on disk"
+} else {
+  Write-Output "GATE FAIL: Code/61_Probes_Wave11.lua is missing from disk"; $fail = $true
+}
+
+if ($mode -eq "arm-pair") {
+  if ($m -match [regex]::Escape('"' + $autorunLine + '"')) {
+    Write-Output "ARM GATE FAIL: 96_AutoRunFlag is still listed"; $fail = $true
+  } else { Write-Output "ARM GATE OK   96_AutoRunFlag is NOT listed" }
+  foreach ($p in $pairs) {
+    $f = Join-Path $kit $p.dst
+    if (-not (Test-Path -LiteralPath $f)) { Write-Output ("ARM GATE FAIL: missing " + $p.dst); $fail = $true; continue }
+    $t = Get-Content -LiteralPath $f -Raw -Encoding UTF8
+    if ($t -notmatch 'TEMPORARY') { Write-Output ("ARM GATE FAIL: no TEMPORARY marker in " + $p.dst); $fail = $true }
+    else { Write-Output ("ARM GATE OK   " + $p.dst) }
+    if ($m -match [regex]::Escape('"Code/' + (Split-Path $p.dst -Leaf) + '"')) { Write-Output ("ARM GATE OK   metadata lists " + $p.dst) }
+    else { Write-Output ("ARM GATE FAIL: metadata does not list " + $p.dst); $fail = $true }
+  }
+
+  $pt = Get-Content -LiteralPath (Join-Path $kit $payload.dst) -Raw -Encoding UTF8
+  $pc = ($pt -split "`r?`n" | ForEach-Object { ($_ -replace '--.*$', '') } | Where-Object { $_.Trim() -ne '' }) -join "`n"
+  $pc = $pc -replace 'OnMsg\.[A-Za-z_]\w*', 'OnMsgHandler'
+
+  if ($pc -match '(?m)^\s*C47\.Boot\s*\(') { Write-Output "ARM GATE OK   payload self-drives (C47.Boot() at file scope)" }
+  else { Write-Output "ARM GATE FAIL: payload does not call C47.Boot() at file scope"; $fail = $true }
+  if ($pc -match 'quit\s*\(') { Write-Output "ARM GATE OK   payload quits the process itself" }
+  else { Write-Output "ARM GATE FAIL: payload never calls quit()"; $fail = $true }
+
+  # ZERO mutations: everything the brake leg was allowed is banned again here.
+  $w = @()
+  foreach ($banned in @('GetCurrentHarvestType', 'SaveGame', 'CheatFill', 'SetHarvestType',
+                        'PlaceVegetation', 'Consume_Internal', 'DoneObject', 'SetAmount', 'AddAmount',
+                        'RemoveBuilding', 'AddBuilding', 'CreateResourceRequests', 'SetPriority',
+                        'ClearFlags', 'AddFlags')) {
+    if ($pc -match ([regex]::Escape($banned) + '\s*\(')) { $w += $banned }
+  }
+  if ($w.Count -gt 0) { Write-Output ("ARM GATE FAIL: the payload CALLS " + ($w -join ", ") + " - this leg is a LOG, it may mutate nothing"); $fail = $true }
+  else { Write-Output "ARM GATE OK   payload mutates nothing (no request/building/save/flag call)" }
+
+  # THE DECLARED-WRAPPER GATE: the one patched path must be present, labelled
+  # FORCED, and restored.
+  foreach ($needed in @('orig_findtask', 'RestoreWrapper', 'InstallWrapper')) {
+    if ($pc -match [regex]::Escape($needed)) { Write-Output ("ARM GATE OK   wrapper machinery present: " + $needed) }
+    else { Write-Output ("ARM GATE FAIL: wrapper machinery missing: " + $needed); $fail = $true }
+  }
+  if ($pt -match '"FORCED"') { Write-Output "ARM GATE OK   the wrapper install is labelled FORCED" }
+  else { Write-Output "ARM GATE FAIL: no FORCED label on the wrapper install"; $fail = $true }
+  if ($pc -match 'FindTask') { Write-Output "ARM GATE OK   the wrapper targets FindTask (the decision seam)" }
+  else { Write-Output "ARM GATE FAIL: payload never mentions FindTask"; $fail = $true }
+  # the counterfactual column must exist, or the owner's path question goes unanswered
+  if ($pc -match 'nearest_assignable_depot') { Write-Output "ARM GATE OK   the nearest-assignable-depot counterfactual is present" }
+  else { Write-Output "ARM GATE FAIL: no nearest-assignable-depot counterfactual"; $fail = $true }
+
+  # G1 resolution cross-check
+  $ct = Get-Content -LiteralPath (Join-Path $kit $common.dst) -Raw -Encoding UTF8
+  $both = $ct + "`n" + $pt
+  $defined = @{}
+  foreach ($mm in [regex]::Matches($both, '(?m)^\s*function\s+C47\.([A-Za-z_]\w*)')) { $defined[$mm.Groups[1].Value] = $true }
+  foreach ($mm in [regex]::Matches($both, '(?m)^\s*C47\.([A-Za-z_]\w*)\s*=')) { $defined[$mm.Groups[1].Value] = $true }
+  $used = @{}
+  foreach ($mm in [regex]::Matches($pc, 'C47\.([A-Za-z_]\w*)')) { $used[$mm.Groups[1].Value] = $true }
+  $un = @(); foreach ($k in $used.Keys) { if (-not $defined.ContainsKey($k)) { $un += $k } }
+  if ($un.Count -gt 0) { Write-Output ("ARM GATE FAIL: unresolved C47.* names: " + ($un -join ", ")); $fail = $true }
+  else { Write-Output ("ARM GATE OK   all " + $used.Count + " C47.* names resolve") }
+}
+
+if ($mode -eq "disarm") {
+  foreach ($p in @($common, $payload)) {
+    if (Test-Path -LiteralPath (Join-Path $kit $p.dst)) { Write-Output ("DISARM FAIL: still present " + $p.dst); $fail = $true }
+  }
+  if ($m -match 'Code/9[678]_(C4[78]|AutoRunFlag)') { Write-Output "DISARM FAIL: metadata still lists an arming line"; $fail = $true }
+  if (-not $fail) { Write-Output "DISARM OK - kit is clean, and the permanent wave-11 probe is intact" }
+}
+
+if ($fail) { Write-Output "GATE RESULT: FAIL - DO NOT LAUNCH"; exit 1 }
+Write-Output "GATE RESULT: PASS"
+exit 0
