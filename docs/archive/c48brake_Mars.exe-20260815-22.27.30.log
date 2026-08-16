@@ -1,0 +1,445 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	49%
+Disk Free      	741856 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:070
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:073
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:616
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:759
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:956
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:700
+*** audio info
+Audio Endpoint                 	Headphones (3- A50 Game)
+						Lua 0:00:02:727
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:720
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:722
+[mod] Loaded mod def Community Fix Pack (id SMR_CommunityFixPack, v1.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:18:068
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:18:069
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:074
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:075
+[mod] [C48B] [C48B] 98_C48Brake loaded — self-driving in 1 tick.
+[C48B] [C48B] 98_C48Brake loaded — self-driving in 1 tick.
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+						Lua 0:00:18:076
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+						Lua 0:00:18:077
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+						Lua 0:00:18:078
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+						Lua 0:00:18:079
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+						Lua 0:00:18:080
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+						Lua 0:00:18:081
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+						Lua 0:00:18:082
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+						Lua 0:00:18:083
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+						Lua 0:00:18:084
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+						Lua 0:00:18:085
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+						Lua 0:00:18:086
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:18:665
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:738
+Reloading done in 1007 ms
+						Lua 0:00:19:095
+[preset] Preset postprocess took 87 ms.
+						Lua 0:00:19:154
+479 / 479 particle streams loaded in 55 ms.
+						Lua 0:00:19:156
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:19:345
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+						Lua 0:00:19:346
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:19:401
+[mod] [C48B] === c48-brake C48B === payload loaded. Staged save: C48BRAKE.savegame.sav
+[C48B] === c48-brake C48B === payload loaded. Staged save: C48BRAKE.savegame.sav
+						Lua 0:00:19:402
+[PdxSDK] Started up. Took 1672
+						Lua 0:00:19:428
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:500
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:705
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:706
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:221
+[mod] [C48B] CONDITIONS pack=75/75 active | map= | speed=1x | loads_this_process=0 | mode=REAL | note=main menu, before the load
+[C48B] CONDITIONS pack=75/75 active | map= | speed=1x | loads_this_process=0 | mode=REAL | note=main menu, before the load
+[mod] [C48B] CONDITIONS opt-in pack=8/8 active
+[C48B] CONDITIONS opt-in pack=8/8 active
+						Lua 0:00:21:222
+[mod] [C48B] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[C48B] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48B] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48B] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+						Lua 0:00:21:324
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:21:332
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:358
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:24:298
+*** Assets reloaded in 3.0 s, read 202.1 MB, read speed 68.2 MB/s, average read 4948 bytes.
+						Lua 0:00:30:238
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:30:246
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:30:270
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:30:286
+Game Loaded in 8963 ms
+						Lua 0:00:30:334
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:31:221
+Game loaded on map BlankBigCanyonCMix_09 in 9999 ms
+[mod] [C48B] LOAD OK #1 file=C48BRAKE.savegame.sav — LoadGame returned no error
+[C48B] LOAD OK #1 file=C48BRAKE.savegame.sav — LoadGame returned no error
+						Lua 0:00:33:522
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:220
+[mod] [C48B] TRY UIColony:SetGameSpeed(3) ok=true result=3
+						Lua 0:00:46:221
+[C48B] TRY UIColony:SetGameSpeed(3) ok=true result=3
+						Lua 0:00:47:220
+[mod] [C48B] READ speed after load: before=1x after=3x | wanted=3x | RUNNING=true — the whole sampling window below is VOID if this is not the wanted speed (a loaded save arrives PAUSED: corun-pt15 rule C4)
+[C48B] READ speed after load: before=1x after=3x | wanted=3x | RUNNING=true — the whole sampling window below is VOID if this is not the wanted speed (a loaded save arrives PAUSED: corun-pt15 rule C4)
+[mod] [C48B] TRY load C48BRAKE.savegame.sav (yielding) ok=true result=true
+[C48B] TRY load C48BRAKE.savegame.sav (yielding) ok=true result=true
+[mod] [C48B] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=3x | loads_this_process=1 | mode=REAL | note=after the load
+[C48B] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=3x | loads_this_process=1 | mode=REAL | note=after the load
+[mod] [C48B] CONDITIONS opt-in pack=8/8 active
+[C48B] CONDITIONS opt-in pack=8/8 active
+[mod] [C48B] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[C48B] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48B] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48B] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[mod] [C48B] ORGANIC :: census of farms and Seeds depots :: reads only; the interventions below are separately labelled FORCED
+[C48B] ORGANIC :: census of farms and Seeds depots :: reads only; the interventions below are separately labelled FORCED
+[mod] [C48B] CLOCK census :: GameTime()=275838943 (383.10 sols since game start) | UIColony.day=384 hour=8 | speed=3x | RealTime()=34408
+[C48B] CLOCK census :: GameTime()=275838943 (383.10 sols since game start) | UIColony.day=384 hour=8 | speed=3x | RealTime()=34408
+[mod] [C48B] CENSUS FARM [1] OpenFarm#15779 :: stored=3665 of 5000 | consumption_amount=400 | tick=9000 ms | working=true | serving centres+extenders=6
+[C48B] CENSUS FARM [1] OpenFarm#15779 :: stored=3665 of 5000 | consumption_amount=400 | tick=9000 ms | working=true | serving centres+extenders=6
+[mod] [C48B] CENSUS FARM [2] OpenFarm#15974 :: stored=2600 of 5000 | consumption_amount=400 | tick=9000 ms | working=true | serving centres+extenders=1
+[C48B] CENSUS FARM [2] OpenFarm#15974 :: stored=2600 of 5000 | consumption_amount=400 | tick=9000 ms | working=true | serving centres+extenders=1
+[mod] [C48B] READ C48B-population(OpenFarmBase) = 2 | population=2 | APPLICABLE=true | witness=city labels walked this load
+[C48B] READ C48B-population(OpenFarmBase) = 2 | population=2 | APPLICABLE=true | witness=city labels walked this load
+						Lua 0:00:47:221
+[mod] [C48B] READ C48B-population(Seeds-accepting depots) = 34 | population=34 | APPLICABLE=true | witness=CurrentMap:MapGet over four depot classes, filtered on DoesAcceptResource('Seeds')
+[C48B] READ C48B-population(Seeds-accepting depots) = 34 | population=34 | APPLICABLE=true | witness=CurrentMap:MapGet over four depot classes, filtered on DoesAcceptResource('Seeds')
+						Lua 0:00:47:223
+[mod] [C48B] VEG census :: 3580 live VegetationTaskRequester(s) on the map
+[C48B] VEG census :: 3580 live VegetationTaskRequester(s) on the map
+[mod] [C48B] VEG census :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG census :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG census :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG census :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG census :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=260 | preset=Bush
+[C48B] VEG census :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=260 | preset=Bush
+[mod] [C48B] TRY leg Census (yielding) ok=true result=true
+[C48B] TRY leg Census (yielding) ok=true result=true
+						Lua 0:00:47:225
+[mod] [C48B] VEG window 'baseline' open :: 3580 live VegetationTaskRequester(s) on the map
+[C48B] VEG window 'baseline' open :: 3580 live VegetationTaskRequester(s) on the map
+[mod] [C48B] VEG window 'baseline' open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'baseline' open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG window 'baseline' open :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'baseline' open :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG window 'baseline' open :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=260 | preset=Bush
+[C48B] VEG window 'baseline' open :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=260 | preset=Bush
+[mod] [C48B] WINDOW 'baseline' OPEN :: GameTime=275838943 | target +150000 game ms | speed=3x | sampling every 200 real ms
+[C48B] WINDOW 'baseline' OPEN :: GameTime=275838943 | target +150000 game ms | speed=3x | sampling every 200 real ms
+						Lua 0:01:37:222
+[mod] [C48B] WINDOW 'baseline' CLOSED :: game 150000 ms (5 h) | real 50000 ms | complete=true
+[C48B] WINDOW 'baseline' CLOSED :: game 150000 ms (5 h) | real 50000 ms | complete=true
+[mod] [C48B] DEPOTS window 'baseline' :: total 12400609 → 12397484 (Δ -3125 over 34/34 readable depots) | unmoved=20 fell=8 rose=6 | biggest fall StationSmall#12472 -23696 | biggest rise StationSmall#12496 18788
+[C48B] DEPOTS window 'baseline' :: total 12400609 → 12397484 (Δ -3125 over 34/34 readable depots) | unmoved=20 fell=8 rose=6 | biggest fall StationSmall#12472 -23696 | biggest rise StationSmall#12496 18788
+						Lua 0:01:37:224
+[mod] [C48B] VEG window 'baseline' close :: 3390 live VegetationTaskRequester(s) on the map
+[C48B] VEG window 'baseline' close :: 3390 live VegetationTaskRequester(s) on the map
+[mod] [C48B] VEG window 'baseline' close :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'baseline' close :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG window 'baseline' close :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'baseline' close :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG window 'baseline' close :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=260 | preset=Bush
+[C48B] VEG window 'baseline' close :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=100 (ok=true) | priority=1 (ok=true) | request actual amount=260 | preset=Bush
+[mod] [C48B] TRY window baseline (yielding) ok=true result=true
+[C48B] TRY window baseline (yielding) ok=true result=true
+[mod] [C48B] FORCED :: supply_dist_modifier 100 → 150 on VegetationTaskRequester, plus a request rebuild per live requester :: the ONLY mutations this leg makes; the class value is restored before quit and nothing is ever saved to disk
+[C48B] FORCED :: supply_dist_modifier 100 → 150 on VegetationTaskRequester, plus a request rebuild per live requester :: the ONLY mutations this leg makes; the class value is restored before quit and nothing is ever saved to disk
+[mod] [C48B] BRAKE class value before=100 (expected 100, inherited from TaskRequester, _TaskRequest.lua:96)
+[C48B] BRAKE class value before=100 (expected 100, inherited from TaskRequester, _TaskRequest.lua:96)
+[mod] [C48B] BRAKE class value set to 150 — the SurfaceDeposit number and rationale (SurfaceDeposit.lua:84)
+[C48B] BRAKE class value set to 150 — the SurfaceDeposit number and rationale (SurfaceDeposit.lua:84)
+						Lua 0:01:37:227
+[mod] [C48B] BRAKE rebuilding 3390 live requester(s): per requester, centres:RemoveBuilding → fresh CreateResourceRequests (bakes the new modifier via Request_New) → centres:AddBuilding — the TaskRequester:SetPriority re-registration template (_TaskRequest.lua:157-181)
+[C48B] BRAKE rebuilding 3390 live requester(s): per requester, centres:RemoveBuilding → fresh CreateResourceRequests (bakes the new modifier via Request_New) → centres:AddBuilding — the TaskRequester:SetPriority re-registration template (_TaskRequest.lua:157-181)
+						Lua 0:01:37:291
+[mod] [C48B] BRAKE REBUILD :: total=3390 rebuilt=3390 failed=0 skipped=0 | request identity unchanged=0 | old-vs-new amount mismatches=134 (net Δ +55364 seeds — soil drift between creation times, COUNTED not absorbed) | ⭐ INTERVENTION TOOK=true (bar: ≥90% rebuilt)
+[C48B] BRAKE REBUILD :: total=3390 rebuilt=3390 failed=0 skipped=0 | request identity unchanged=0 | old-vs-new amount mismatches=134 (net Δ +55364 seeds — soil drift between creation times, COUNTED not absorbed) | ⭐ INTERVENTION TOOK=true (bar: ≥90% rebuilt)
+						Lua 0:01:37:294
+[mod] [C48B] VEG after brake :: 3390 live VegetationTaskRequester(s) on the map
+[C48B] VEG after brake :: 3390 live VegetationTaskRequester(s) on the map
+[mod] [C48B] VEG after brake :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG after brake :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG after brake :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG after brake :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG after brake :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG after brake :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] BRAKE ⚠️ RemoveBuilding idles any drone that was heading to a rebuilt requester (DroneControl.lua:720-728) — a one-time transient, which is what the settle gap before window 2 exists to absorb.
+[C48B] BRAKE ⚠️ RemoveBuilding idles any drone that was heading to a rebuilt requester (DroneControl.lua:720-728) — a one-time transient, which is what the settle gap before window 2 exists to absorb.
+[mod] [C48B] TRY leg ApplyBrake (yielding) ok=true result=true
+[C48B] TRY leg ApplyBrake (yielding) ok=true result=true
+						Lua 0:01:42:234
+[mod] [C48B] SETTLE done :: 15000 game ms absorbed (drones idled by the rebuild have re-tasked)
+[C48B] SETTLE done :: 15000 game ms absorbed (drones idled by the rebuild have re-tasked)
+						Lua 0:01:42:236
+[mod] [C48B] VEG window 'braked' open :: 3387 live VegetationTaskRequester(s) on the map
+[C48B] VEG window 'braked' open :: 3387 live VegetationTaskRequester(s) on the map
+[mod] [C48B] VEG window 'braked' open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'braked' open :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG window 'braked' open :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'braked' open :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG window 'braked' open :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'braked' open :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] WINDOW 'braked' OPEN :: GameTime=276003982 | target +150000 game ms | speed=3x | sampling every 200 real ms
+[C48B] WINDOW 'braked' OPEN :: GameTime=276003982 | target +150000 game ms | speed=3x | sampling every 200 real ms
+						Lua 0:02:32:234
+[mod] [C48B] WINDOW 'braked' CLOSED :: game 150000 ms (5 h) | real 50000 ms | complete=true
+[C48B] WINDOW 'braked' CLOSED :: game 150000 ms (5 h) | real 50000 ms | complete=true
+[mod] [C48B] DEPOTS window 'braked' :: total 12376659 → 12363001 (Δ -13658 over 34/34 readable depots) | unmoved=22 fell=5 rose=7 | biggest fall StationSmall#12496 -37093 | biggest rise StationSmall#4552 29951
+[C48B] DEPOTS window 'braked' :: total 12376659 → 12363001 (Δ -13658 over 34/34 readable depots) | unmoved=22 fell=5 rose=7 | biggest fall StationSmall#12496 -37093 | biggest rise StationSmall#4552 29951
+						Lua 0:02:32:237
+[mod] [C48B] VEG window 'braked' close :: 3702 live VegetationTaskRequester(s) on the map
+[C48B] VEG window 'braked' close :: 3702 live VegetationTaskRequester(s) on the map
+[mod] [C48B] VEG window 'braked' close :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'braked' close :: sample VegetationTaskRequester#2000057731 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG window 'braked' close :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'braked' close :: sample VegetationTaskRequester#2000072772 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] VEG window 'braked' close :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[C48B] VEG window 'braked' close :: sample VegetationTaskRequester#2000053949 | supply_dist_modifier=150 (ok=true) | priority=1 (ok=true) | request actual amount=280 | preset=Bush
+[mod] [C48B] TRY window braked (yielding) ok=true result=true
+[C48B] TRY window braked (yielding) ok=true result=true
+[mod] [C48B] REPORT SPAN :: samples=502 at 200 ms | frozen at=not frozen | windows=2
+[C48B] REPORT SPAN :: samples=502 at 200 ms | frozen at=not frozen | windows=2
+[mod] [C48B] REPORT WINDOW 'baseline' OpenFarm#15779 :: complete=true | game 150000 ms (5 h) | buffer min=1365 max=4085 | stalled 0 of 251 | deliveries=29 totalling 8760 (mean 302) | ⭐ exactly-280=25 (86% of deliveries) | ⭐ bulk ≥2000=0 | drains=11 totalling 9620 (per game hour 1924)
+[C48B] REPORT WINDOW 'baseline' OpenFarm#15779 :: complete=true | game 150000 ms (5 h) | buffer min=1365 max=4085 | stalled 0 of 251 | deliveries=29 totalling 8760 (mean 302) | ⭐ exactly-280=25 (86% of deliveries) | ⭐ bulk ≥2000=0 | drains=11 totalling 9620 (per game hour 1924)
+[mod] [C48B] REPORT WINDOW 'baseline' OpenFarm#15779 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 80x1, 280x25, 560x3 — the 280-wall collapsing and/or ≥2000 arrivals appearing in the braked window is the discriminator; ⚠️ a single 2000-2800 value can also be a Broadleaf offer (2000 × soil), so the wall share and the depot totals carry the verdict together
+[C48B] REPORT WINDOW 'baseline' OpenFarm#15779 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 80x1, 280x25, 560x3 — the 280-wall collapsing and/or ≥2000 arrivals appearing in the braked window is the discriminator; ⚠️ a single 2000-2800 value can also be a Broadleaf offer (2000 × soil), so the wall share and the depot totals carry the verdict together
+[mod] [C48B] REPORT WINDOW 'baseline' OpenFarm#15974 :: complete=true | game 150000 ms (5 h) | buffer min=2221 max=4141 | stalled 0 of 251 | deliveries=24 totalling 8221 (mean 342) | ⭐ exactly-280=20 (83% of deliveries) | ⭐ bulk ≥2000=0 | drains=11 totalling 7120 (per game hour 1424)
+[C48B] REPORT WINDOW 'baseline' OpenFarm#15974 :: complete=true | game 150000 ms (5 h) | buffer min=2221 max=4141 | stalled 0 of 251 | deliveries=24 totalling 8221 (mean 342) | ⭐ exactly-280=20 (83% of deliveries) | ⭐ bulk ≥2000=0 | drains=11 totalling 7120 (per game hour 1424)
+[mod] [C48B] REPORT WINDOW 'baseline' OpenFarm#15974 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 80x1, 280x20, 560x2, 1421x1 — the 280-wall collapsing and/or ≥2000 arrivals appearing in the braked window is the discriminator; ⚠️ a single 2000-2800 value can also be a Broadleaf offer (2000 × soil), so the wall share and the depot totals carry the verdict together
+[C48B] REPORT WINDOW 'baseline' OpenFarm#15974 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 80x1, 280x20, 560x2, 1421x1 — the 280-wall collapsing and/or ≥2000 arrivals appearing in the braked window is the discriminator; ⚠️ a single 2000-2800 value can also be a Broadleaf offer (2000 × soil), so the wall share and the depot totals carry the verdict together
+[mod] [C48B] DEPOTS window 'baseline' (re-emitted) :: total 12400609 → 12397484 (Δ -3125 over 34/34 readable depots) | unmoved=20 fell=8 rose=6 | biggest fall StationSmall#12472 -23696 | biggest rise StationSmall#12496 18788
+[C48B] DEPOTS window 'baseline' (re-emitted) :: total 12400609 → 12397484 (Δ -3125 over 34/34 readable depots) | unmoved=20 fell=8 rose=6 | biggest fall StationSmall#12472 -23696 | biggest rise StationSmall#12496 18788
+[mod] [C48B] REPORT WINDOW 'braked' OpenFarm#15779 :: complete=true | game 150000 ms (5 h) | buffer min=1425 max=4085 | stalled 0 of 251 | deliveries=26 totalling 8120 (mean 312) | ⭐ exactly-280=23 (88% of deliveries) | ⭐ bulk ≥2000=0 | drains=8 totalling 5600 (per game hour 1120)
+[C48B] REPORT WINDOW 'braked' OpenFarm#15779 :: complete=true | game 150000 ms (5 h) | buffer min=1425 max=4085 | stalled 0 of 251 | deliveries=26 totalling 8120 (mean 312) | ⭐ exactly-280=23 (88% of deliveries) | ⭐ bulk ≥2000=0 | drains=8 totalling 5600 (per game hour 1120)
+[mod] [C48B] REPORT WINDOW 'braked' OpenFarm#15779 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 280x23, 560x3 — the 280-wall collapsing and/or ≥2000 arrivals appearing in the braked window is the discriminator; ⚠️ a single 2000-2800 value can also be a Broadleaf offer (2000 × soil), so the wall share and the depot totals carry the verdict together
+[C48B] REPORT WINDOW 'braked' OpenFarm#15779 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 280x23, 560x3 — the 280-wall collapsing and/or ≥2000 arrivals appearing in the braked window is the discriminator; ⚠️ a single 2000-2800 value can also be a Broadleaf offer (2000 × soil), so the wall share and the depot totals carry the verdict together
+[mod] [C48B] REPORT WINDOW 'braked' OpenFarm#15974 :: complete=true | game 150000 ms (5 h) | buffer min=2261 max=5000 | stalled 0 of 251 | deliveries=19 totalling 9400 (mean 494) | ⭐ exactly-280=13 (68% of deliveries) | ⭐ bulk ≥2000=0 | drains=14 totalling 9700 (per game hour 1940)
+[C48B] REPORT WINDOW 'braked' OpenFarm#15974 :: complete=true | game 150000 ms (5 h) | buffer min=2261 max=5000 | stalled 0 of 251 | deliveries=19 totalling 9400 (mean 494) | ⭐ exactly-280=13 (68% of deliveries) | ⭐ bulk ≥2000=0 | drains=14 totalling 9700 (per game hour 1940)
+[mod] [C48B] REPORT WINDOW 'braked' OpenFarm#15974 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 141x1, 280x13, 560x1, 1061x1, 1100x1, 1359x1, 1539x1 — the 280-wall collapsing and/or ≥2000 arrivals appearing in the braked window is the discriminator; ⚠️ a single 2000-2800 value can also be a Broadleaf offer (2000 × soil), so the wall share and the depot totals carry the verdict together
+[C48B] REPORT WINDOW 'braked' OpenFarm#15974 :: ⭐ DELIVERY SIZE DISTRIBUTION (size x count): 141x1, 280x13, 560x1, 1061x1, 1100x1, 1359x1, 1539x1 — the 280-wall collapsing and/or ≥2000 arrivals appearing in the braked window is the discriminator; ⚠️ a single 2000-2800 value can also be a Broadleaf offer (2000 × soil), so the wall share and the depot totals carry the verdict together
+[mod] [C48B] DEPOTS window 'braked' (re-emitted) :: total 12376659 → 12363001 (Δ -13658 over 34/34 readable depots) | unmoved=22 fell=5 rose=7 | biggest fall StationSmall#12496 -37093 | biggest rise StationSmall#4552 29951
+[C48B] DEPOTS window 'braked' (re-emitted) :: total 12376659 → 12363001 (Δ -13658 over 34/34 readable depots) | unmoved=22 fell=5 rose=7 | biggest fall StationSmall#12496 -37093 | biggest rise StationSmall#4552 29951
+[mod] [C48B] REPORT ⛔ NOT CLAIMED: a drone's DECISION is still unread (the pairing is C-side). What this leg reads is whether the developers' own brake number CHANGES the routing signature — delivery sizes and depot totals — under an intervention, on this one save.
+[C48B] REPORT ⛔ NOT CLAIMED: a drone's DECISION is still unread (the pairing is C-side). What this leg reads is whether the developers' own brake number CHANGES the routing signature — delivery sizes and depot totals — under an intervention, on this one save.
+[mod] [C48B] REPORT ⚠️ CONFOUNDS: cheats enabled, oversized terraforming speed-run colony, drone carry dial at +2 (a trip is 3000, not the vanilla 1000), one save, one map, windows ordered in time (baseline first).
+[C48B] REPORT ⚠️ CONFOUNDS: cheats enabled, oversized terraforming speed-run colony, drone carry dial at +2 (a trip is 3000, not the vanilla 1000), one save, one map, windows ordered in time (baseline first).
+[mod] [C48B] TRY C47.Report ok=true result=true
+[C48B] TRY C47.Report ok=true result=true
+[mod] [C48B] BRAKE class value RESTORED to 100 — live requests created under 150 keep it until this process exits; nothing persists (this leg never saves)
+[C48B] BRAKE class value RESTORED to 100 — live requests created under 150 keep it until this process exits; nothing persists (this leg never saves)
+[mod] [C48B] TRY C47.RestoreBrake ok=true result=nil
+[C48B] TRY C47.RestoreBrake ok=true result=nil
+[mod] [C48B] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=3x | loads_this_process=1 | mode=REAL | note=at close
+[C48B] CONDITIONS pack=75/75 active | map=BlankBigCanyonCMix_09 | speed=3x | loads_this_process=1 | mode=REAL | note=at close
+[mod] [C48B] CONDITIONS opt-in pack=8/8 active
+[C48B] CONDITIONS opt-in pack=8/8 active
+[mod] [C48B] CONDITIONS save-rescue mod = NOT PRESENT in this process						Lua 0:02:32:238
+
+[C48B] CONDITIONS save-rescue mod = NOT PRESENT in this process
+[mod] [C48B] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[C48B] GATE banner-path :: Opt_AcknowledgedWarnings is ACTIVE (detail='') — ⚖️ BY OWNER RULING this is deliberate: it was on when the symptom was observed, so it is part of the configuration under test, not a contaminant to be removed. ⭐ It suppresses only a building it has STAMPED, stamps only on player dismissal, and CLEARS the stamp on that building's next recovery (Opt_AcknowledgedWarnings.lua:124-129) — so a flapping building clears its own acknowledgment every cycle and cannot be quieted by it. Engagement is MEASURED below via the ack-flag read, never assumed.
+[mod] [C48B] CLOCK close :: GameTime()=276153982 (383.54 sols since game start) | UIColony.day=384 hour=19 | speed=3x | RealTime()=139421
+[C48B] CLOCK close :: GameTime()=276153982 (383.54 sols since game start) | UIColony.day=384 hour=19 | speed=3x | RealTime()=139421
+[mod] [C48B] ERRORWATCH C48B — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== c47-farm C48B ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one (owner rule 2026-08-01). stage_at_close=reporting loads_this_process=1 mode=REAL
+[C48B] ERRORWATCH C48B — every engine error line (the bracketed LUA-ERROR marker) in this log between the '=== c47-farm C48B ===' banner and this line happened inside this run. Report every unexplained line verbatim with its position and its age; never discount one (owner rule 2026-08-01). stage_at_close=reporting loads_this_process=1 mode=REAL
+[mod] [C48B] === c48-brake C48B === DONE. ⛔ Nothing was saved: this run never calls SaveGame, so the staged copy on disk is byte-identical to the one staged before the launch.
+[C48B] === c48-brake C48B === DONE. ⛔ Nothing was saved: this run never calls SaveGame, so the staged copy on disk is byte-identical to the one staged before the launch.
+						Lua 0:02:35:233
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:02:35:237
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:02:35:637
+
+
+*** Debug::Done()
+Time (ms)	155637
+
+

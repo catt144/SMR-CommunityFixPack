@@ -70,6 +70,19 @@ owed input stays here no matter how struck-through it looks.
     zero-cost unattended run I have already built the instrument for.
     → `agent/bugs/C48.md`, and the original question is kept below.
 
+    ℹ️ **Update, 2026-08-15 late (the test you authorized — no decision owed):**
+    the intervention ran. We applied the developers' own 50% distance penalty to
+    every vegetation seed offer on a staged copy — all 3,390 of them, provably —
+    and **the routing did not change at all**: your farms went right on eating
+    280-seed crumbs from the landscape while 12.4 million seeds sat in storage.
+    So the "just add the missing brake" fix is dead — on a map as green as
+    yours, distance isn't why drones choose the landscape. The cause sits
+    deeper (in the engine's own supply pairing, which modding can't read), the
+    trickle costs you drone efficiency but never starved a farm in any
+    unattended window, and the seeds-only "top-up" idea parked in the opt-in
+    mod is now the one remedy still standing. Nothing is built; nothing new is
+    owed from you. → `agent/bugs/C48.md` (the full readings).
+
     ~~**When you saw the endless "waiting for Seeds" popups — had you just done
     something to those farms?**~~
 

@@ -8,7 +8,33 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
-## 2026-08-15 — the c47-farm terminal audit: four bodies of work sustained end to end, one harness fact filed, and the chain's folder burned
+## 2026-08-15 (late) — the brake intervention: the first leg in this family allowed to change one thing changed it perfectly, and the thing it measured refused to move
+
+**This session (Fable), continuing from the terminal audit, on two owner
+rulings given in conversation.** First ruling — *"I am not going to manipulate
+drone behavior on a bug fix mod"* — sent the behavioral remedies next door: the
+seeds-only gleaner and the scattered-source brake are recorded in the opt-in
+repo (`DRONE_OVERHAUL_OPTIONS.md` §I+J, FUTURE_IDEAS #7) with their seams
+verified against Src. Second ruling — *"your test is a go"* — authorized the
+`c48-brake` leg: predictions pushed before launch (`d385ae2`), a fresh staged
+copy of `C47FARM`, all three autosaves pre-copied, and a payload whose arm gate
+flips the family's no-mutation rule into an exactly-the-declared-mutation rule.
+One launch, 0 `[LUA ERROR]`. The intervention was total and provable: 3,390 of
+3,390 live vegetation seed requests rebuilt through the vanilla SetPriority
+re-registration template with the developers' own 150 brake baked in, live
+instances reading 150 in every scan, the class value restored at close, and
+the save contract held whole. **And the routing did not move.** The 280-crumb
+wall stood in the braked window, not one bulk delivery reached a farm, the
+depots' twelve million seeds stayed functionally untouched by farm traffic —
+the pre-registered falsifier fired exactly as written, and option J is dead by
+measurement: on a carpeted map, distance is not why drones feed farms from the
+landscape. The cause moves to the two things Lua cannot read (`priority = 1`'s
+weight in the C-side pairing, and the pairing itself); the gleaner survives
+strengthened; C48 stays a candidate; nothing shipped, nothing owed from the
+owner. One marginal self-caught blemish disclosed: farm A's drain drifted
+1.8 points past the pre-registered ±40% fairness bar (hex saturation), so the
+refutation rests on farm B's clean window pair and the volume-independent
+size-shape evidence — which say the same thing.
 
 **This session (Fable).** Backward QA of the whole `c47-farm` chain — the
 unattended C47 leg (4 suite + 3 sampler launches), the attended sitting on the
