@@ -38,6 +38,70 @@ these used to be filed only in agent reports, which is where you never read.
 sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
+### ⭐⭐ NEW 2026-08-16 — "ONE MOD FIX ALL": I checked the other community mod against the game's code. Four real bugs we had missed. **One call from you: build them now, or after launch?**
+
+34. ❓ **THE ONLY QUESTION: do these get built before you upload, or after?**
+    You said you'd like ours to be *"fully fledged, one mod fix all"*, so I took
+    `fredware`'s **SMR Community Fixes** — 15 fixes, 8 of which we already
+    cover — and adjudicated the other **seven** against the game's own code. I
+    did **not** install their mod (a third mod would have wrecked the baselines
+    every gate in this project is measured against); I read a copy of their
+    source to find out *where to look*, then reached every verdict myself from
+    the shipped game files. **No fix code was written and nothing under `Code/`
+    changed.**
+
+    **Four are real bugs we had missed, and are now on the record:**
+    * **`C51` — three bits of the interface can never be translated, and the
+      translations are sitting right there in the game's own files.** This is
+      the strongest one and the only one I could *prove* rather than argue: I
+      opened the shipped German language pack and the German text for
+      "OVERALL TERRAFORMING PROGRESS" and the rocket's "Back to Earth" button
+      **is in there** — the game just never asks for it. Nine languages ship;
+      any non-English player sees three English strings in an otherwise
+      translated UI. Repairing this loses nothing in any language.
+    * **`C52` — the in-game Mod Manager can never show a mod's screenshots.**
+      The download loop reads a variable that has gone out of scope one screen
+      earlier, so it fails on the first image, every time — and the developers
+      left `-- todo: this is not working` in the file twice, directly above it.
+      ⚠️ **One piece of this touches your upload:** the thumbnail cache is keyed
+      on mod id + version and never re-checks. **If you ever swap a preview
+      image after publishing without also bumping the mod version, players who
+      already saw it keep the old picture forever.** Nothing to decide — just
+      worth knowing before step ④.
+    * **`C50` — SpaceY gives +20 Drone Hub command capacity and never says so.**
+      It is the only sponsor in the game with a bonus its description hides; the
+      other five that have bonuses all describe every one of theirs, three with
+      the exact number. ⚠️ The obvious fix is a trap — replacing that text would
+      hand eight languages an English description to gain one English line.
+    * **`C49` — a soil-overlay bug that is real in the code and unreachable by
+      any player.** The function that picks the overlay has a misplaced
+      bracket — but the mode it fails to guard has **no button, no keybind and
+      no caller anywhere in the game**. Filed honestly as latent. This is the
+      third time here that "it's in the source" turned out not to mean "a player
+      can hit it".
+
+    **One I rejected**: their *Restore Clustered Lights* blames an assertion
+    that lives in the engine's C++, not in any code we can read. I could not
+    confirm or refute it, their own module says it is unproven, and their remedy
+    changes behaviour rather than repairing a defect. Written up with reasons
+    rather than filed.
+
+    **Two we already knew about** (Jumbo Cave `C25`, Lander cargo `C35`).
+    ⭐ The Lander one **paid off**: their module named a function ours had not
+    followed, I re-checked, and **they were right and our record was
+    incomplete** — confirming a payload edit doesn't just disconnect drones, it
+    actively interrupts them, and the game's own code contains an assertion
+    saying a drone on the ramp must never reach that line. Our entry is
+    corrected and strengthened.
+
+    ⇒ **My recommendation, and it is only a recommendation: investigate now
+    (done), build after launch.** Adding four to five modules is not a tidy-up —
+    each one costs a save-safety pass, a probe, a suite re-measure and three
+    store surfaces, which is a release-delaying body of work. Nothing here is a
+    release gate and nothing is broken by waiting. **"One mod fixes all" stays
+    the direction either way.**
+    → `agent/reports/SMRCF_COVERAGE_SWEEP.md`, entries `C49`–`C52`.
+
 ### ⭐⭐ NEW 2026-08-15 (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from you would explain that.
 
 33. ✅✅ **ANSWERED BY YOU THE SAME EVENING, AT THE KEYBOARD — and then you went
