@@ -41,6 +41,19 @@ with no deadline; the gleaner next door survives every twist of this case as
 the remedy that fixes the trip instead of the choice; and the save contract
 held byte-for-byte through both launches.
 
+**Same session, the ruling and the handoff.** The owner ruled it in their own
+words — bug territory in practice even if not logic, and drone judgment is
+the opt-in house's to tinker with — so the whole family moved next door in
+one commit: a full handoff report carrying the case history, the owner's
+pairing-policy doctrine designed as §K (bank the crumbs to warehouses, feed
+buildings from warehouses, a starvation fallback that never lets policy
+outrank survival, farm-only or colony-wide scope) plus the one-flag probe
+ordered to run before anything bigger, and the parking lot amended. What this
+repo keeps is what it is for: the measurement records, the open speed
+question, the permanent probe — and three new engine facts (`EF-058/059/060`)
+so the flattening trap, the reserve semantics with their corollaries, and the
+FindTask policy levers are on the shelf for whatever needs them next.
+
 **This session (Fable), continuing from the terminal audit, on two owner
 rulings given in conversation.** First ruling — *"I am not going to manipulate
 drone behavior on a bug fix mod"* — sent the behavioral remedies next door: the
