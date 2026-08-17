@@ -270,3 +270,10 @@ card does not say passing, and rule 6 is why.
 probes added with that chain's two modules; the suite read `80/0/16/0` of 96,
 SKIP set unchanged BY NAME from the list above. The must-not-drift rule is
 unchanged.)*
+*(⚠️ 2026-08-16 checkup: between that note and today the card briefly said
+**95** — the item-31 prediction when F85's probe left — but the `C47` wave-11
+probe landed the same day and the measured launch read `80/0/16/0` **of 96**
+(`archive/c47suite4_*`, gates `75/75` + `8/8`, SKIP set still the 16 names
+above, with F85's probe out and the wave-11 probe in among the 80). The card
+says 96 again, re-emitted, and this time from a reading rather than a
+prediction.)*

@@ -74,7 +74,7 @@ that quietly rewrites the inside of the same function is beyond it, which is why
 we watch official patches and update rather than promising the pack retires
 itself. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
-suite of 95 checks is run against the game with the pack and without it.
+suite of 96 checks is run against the game with the pack and without it.
 
 **And what does not.** We cannot test every combination of other mods, every
 colony shape, every save state or every future game patch. If a save matters to
@@ -291,6 +291,14 @@ its probe are preserved verbatim, with a re-arm trigger, in
 `SHELVED_F85_DISTRESS_PAUSE.md`; if it is ever re-applied, every number here
 moves back by one and the card bullet must be **rewritten, not restored**.
 
+⛔ **2026-08-16 public-docs checkup: that "96 → 95" was a PREDICTION and it did
+not survive the measurement.** The `C47` wave-11 probe (`61_Probes_Wave11.lua`)
+landed the same day F85's probe left, and the real launch read **`80/0/16/0` of
+96** (`archive/c47suite4_*`, 2026-08-15, gates `75/75` + `8/8`, SKIP set
+unchanged BY NAME). The card's sentence is corrected to **96**, re-emitted
+2026-08-16 — the 95 sat on this card and its release copy for a day because it
+was inherited from the prediction instead of re-emitted.
+
 5. No change to the tier-1 save-footprint list: both new modules persist
    NOTHING (F85 Layer 3, C39 Layer 2 by construction — stated on both modules
    and both entries), so the enumerated footprint is unchanged.
@@ -352,7 +360,7 @@ release prep re-checks portal limits anyway and can adopt the shape wording then
 | save footprint enumeration | `D13_EXPOSED_SET.md` §2b rows D1–D11 (fix-pack rows only), MEASURED where marked; §2c for the negative half |
 | ~~the engine's mod-reference notice on the next load, self-clearing~~ **STRUCK from the card 2026-08-14 (checklist 29, owner-ruled)**: the measured line is LOG-only and the on-screen warning skips `optional_mod` mods — no player of this mod ever sees it | `D13_EXPOSED_SET.md` §10.9(4) — whose "sees one notice" aside was a rig-console inference; route: `Mod.lua:1199` (ModLog), `SavegameMetadata.lua:97-99` (optional filter) |
 | repairs already applied stay | §2b D10 (`SMRFixPack_F35_*`) + D11, both on the KEEP list (§5) |
-| suite of **95** checks, modded vs unmodded | `python tools/doccheck.py --emit-counts`, re-emitted 2026-08-15 **after the item-31 removal** (94 → 96 with both `unattended-3` probes, then → **95** when F85's probe left with its module); A/B pair `WORKFLOW.md:274` |
+| suite of **96** checks, modded vs unmodded | `python tools/doccheck.py --emit-counts`, re-emitted 2026-08-16: `TestKit probes: 96`; measured `80/0/16/0` of 96 (`archive/c47suite4_*`, 2026-08-15). History: 94 → 96 (`unattended-3` probes) → 95 (item-31 **prediction**, F85's probe out) → 96 (the `C47` wave-11 probe landed the same day); A/B pair `WORKFLOW.md:274` |
 | **five** judgment calls (briefly six on 2026-08-15, reverted the same day) | the five modules by name: `Fix_DroneUnreachableForever` · `Fix_DustSicknessBiorobots` · `Fix_ShelterReflex` · `Fix_PayloadTemplateRefill` · `Fix_DustDevilSpawnGate`. ⛔ `Fix_DistressPopupPause` was the sixth for a few hours and is **REMOVED** (owner ruling, checklist 31 — its popup is dead-coded out of retail); census re-run 2026-08-15 after the removal |
 | Automation-policy disclosure paragraph | `C39.md` §2026-08-15 (owner ruling: scope ships as built, disclosure still owed); building names are DISPLAY names re-read at the templates 2026-08-15 (`BottomlessPitResearchCenter` displays as **"Experiment 1: Big Drop"** — never call it "the Bottomless Pit" in player text); consumers `SecurityStation.lua:13`, `DroneFactory.lua:75-79`, `BottomlessPitResearchCenter.lua:45`, `TVStudioWorkshop.lua:100`, `ArtWorkshop.lua:24` |
 | ~~distress-call judgment bullet~~ **DELETED from the card 2026-08-15 (checklist 31, owner-ruled) along with its module** | `F85.md` §2026-08-15 (later): `DistressCallPopup`'s sole caller is compiled behind a literal `local cond = false` (`POIAdditionalContent.generated.lua:89-111`), so no player can raise that dialog and the fix could never fire. Module + probe preserved verbatim in `SHELVED_F85_DISTRESS_PAUSE.md` |

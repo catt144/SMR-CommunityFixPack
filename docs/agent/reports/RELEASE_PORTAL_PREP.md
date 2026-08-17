@@ -30,6 +30,14 @@ costs nothing, touches nothing else. No rescue-mod art exists or is needed
 (17 hold-off); if the contingency fires, the C1 template makes a third in
 minutes.
 
+⚠️ **One catch on ever swapping that image later (`C52`, filed 2026-08-16): the
+in-game mod browser caches preview thumbnails keyed on mod id + version only,
+with no revalidation** (`ParadoxMods.lua:221-225`). Replace a preview after
+publication *without a version bump* and every player who has already seen the
+old image keeps it permanently; new players get the new one. So a post-launch
+art swap should ride a version bump — which any real update gives you for free.
+Upload-day choice of image is unaffected.
+
 ### (b) + (c) ✅✅ ALL FIVE CALLS RULED 2026-08-14 AND APPLIED — nothing here waits on you any more
 
 | item | ruling | applied |
@@ -89,9 +97,16 @@ STORE file after the change):
 
 | card | characters | words |
 |---|---|---|
-| Community Fix Pack | **11,542** | 2,011 |
+| Community Fix Pack | **11,209** | 1,957 |
 | Opt-In Modules | 15,907 | 2,774 |
 | ~~Save Rescue~~ *(contingency draft, not pasted)* | 4,202 | 792 |
+
+⛔ *(Fix-pack cell CORRECTED 2026-08-16 by the public-docs checkup: the 08-15
+"11,581 → 11,542" re-measure subtracted the count edits but **never the deleted
+distress bullet itself** (~54 words). Re-measured today over the actual paste
+block — marker lines dropped, same method that reproduces the other two cells
+exactly: **11,209 characters, 1,957 words**. The body also now says "96 checks"
+(same length as "95"). Direction is smaller, so no limit risk moves.)*
 
 ---
 
@@ -132,7 +147,9 @@ moved; the other cells were re-measured unchanged.)*
 ⛔ **RE-MEASURED AGAIN 2026-08-15 (later), after the item-31 removal: back to
 "Five", 843 → 844.** The F85 module was pulled (its popup is dead-coded out of
 retail), so the judgment-call count reverted everywhere. The **card** lost its
-distress bullet with it and re-measures **11,581 → 11,542 characters**. Both
+distress bullet with it and re-measures **11,581 → 11,542 characters** *(⛔ that
+11,542 was itself wrong — it never subtracted the deleted bullet; the true
+figure is **11,209**, see the corrected table in §2)*. Both
 figures above are the post-removal ones; no other cell moved.
 → `agent/bugs/F85.md` §2026-08-15, `SHELVED_F85_DISTRESS_PAUSE.md`.
 

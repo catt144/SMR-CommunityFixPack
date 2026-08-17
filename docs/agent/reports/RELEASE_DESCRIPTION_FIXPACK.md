@@ -145,7 +145,7 @@ that quietly rewrites the inside of the same function is beyond it, which is why
 we watch official patches and update rather than promising the pack retires
 itself. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
-suite of 95 checks is run against the game with the pack and without it.
+suite of 96 checks is run against the game with the pack and without it.
 
 **And what does not.** We cannot test every combination of other mods, every
 colony shape, every save state or every future game patch. If a save matters to
@@ -300,6 +300,15 @@ prose):**
 | count in the text | re-emitted | source |
 |---|---|---|
 | "an automated suite of **94** checks" | `python tools/doccheck.py --emit-counts`, 2026-08-14: `TestKit probes: 94` | the emitter, this session |
+
+*(⚠️ 2026-08-16 public-docs checkup: the suite row above is the assembly-time
+record and the number has moved twice since — 94 → 96 (`unattended-3`'s two
+probes) → 95 (a **prediction** written the day F85's probe left, item 31) →
+**96 measured**: the `C47` wave-11 probe landed the same day and the real launch
+read `80/0/16/0` of 96 (`archive/c47suite4_*`, 2026-08-15), gates `75/75` + `8/8`.
+Re-emitted 2026-08-16: `TestKit probes: 96`. The player text above now says 96;
+the 95 had been inherited from the prediction, never re-emitted — the exact
+failure rule 3 exists to stop.)*
 | "**Five** of them are judgment calls" | re-derived at the audited fix list, 2026-08-14: exactly five entries carry the `— *judgment call*` title mark (`content/fix-list.md:95, 283, 323, 344, 669`), and they are the same five the card bullets | the shipped page, independently of the card |
 | "game version **1.0.7.396349**" | `EF-014`; `STATE.md`'s pinned build line | the fact, not prose |
 

@@ -278,6 +278,17 @@ never inherited from the block above):
 * `mkdocs build --strict` **GREEN** after these edits, no warnings; `site/`
   build artefact removed again (it is not committed).
 
+⛔ **2026-08-16 public-docs checkup — two corrections to the block above.**
+(1) The judgment-call sweep was NOT complete as recorded: it missed
+`content/faq.md`'s *"Does this change game balance?"* bullet (still "Six … in
+three") and the landing page's *"six fixes are judgment calls"* sentence — a
+player-visible self-contradiction on the FAQ for a day. Both fixed to
+**Five … in two**. (2) "Suite: 95 checks" was the item-31 **prediction**; the
+measured launch read `80/0/16/0` **of 96** (`archive/c47suite4_*`, 2026-08-15 —
+the `C47` wave-11 probe landed the same day F85's left). Card + source corrected
+to **96**, re-emitted 2026-08-16. The site never carried a suite count, so no
+site page moved for (2).
+
 ⭐ **If the module is ever re-applied** (`SHELVED_F85_DISTRESS_PAUSE.md` §2 has
 the re-arm trigger), every count above moves back by one and the fix-list entry
 must be **rewritten, not restored** — the struck text's "What you saw" framing

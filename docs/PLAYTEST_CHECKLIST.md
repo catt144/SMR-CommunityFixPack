@@ -150,19 +150,42 @@ owed input stays here no matter how struck-through it looks.
     * Assume more survived the same sweep — counts moved on six surfaces at once
       that day.
 
-    ⇒ **`agent/prompts/PUBLIC_DOCS_CHECKUP_fable.md` is written and waiting**,
-    and unlike the four chains it is **time-sensitive: these pages ship the
-    moment you upload.** It sweeps all five site pages, the three store cards
-    and the three in-mod descriptions for accuracy, forgotten updates,
-    readability and flow — plus a route check on every "you can do X"
-    instruction, which is the class of error you overturned once before after
-    three reviews had passed it. It costs you nothing to run.
+    ✅✅ **THE CHECKUP RAN 2026-08-16 AND IS CONSUMED** (brief deleted; grave
+    `git show <sha>:docs/agent/prompts/PUBLIC_DOCS_CHECKUP_fable.md`). What it
+    found beyond the three seeds, all fixed the same sitting:
 
-    ⭐ It also carries one genuinely new note for your upload sheet: the mod
-    browser caches preview images by mod id **and version only**, so **if you
-    ever swap a preview after publishing without bumping the version, everyone
-    who already saw it keeps the old picture.** Worth knowing while you are
-    standing at the upload form.
+    * **The removal sweep had missed more than one sentence.** The FAQ's
+      balance answer also said *"in three of them the game's code is not
+      wrong"* (now **two**), and the **landing page** still said six judgment
+      calls (now **five**). Both were player-visible.
+    * **A third stale record:** the metadata-strings report still quoted the
+      fix-pack blurb saying "Six" as *"as shipped"*, when the live file says
+      Five. Corrected, with the miss recorded.
+    * **A fourth find, on your launch sheet:** the fix-pack card's body size
+      was wrong — the 08-15 re-measure (11,542 characters / 2,011 words)
+      never subtracted the deleted distress bullet. Measured today: **11,209 /
+      1,957**, by the same method that reproduces the other two cards' cells
+      exactly. Smaller, so no character-limit risk moves.
+    * **Verified rather than inherited:** the achievements wording is the
+      correct "Steam and other PC versions" form on every public surface
+      (re-read at the game's own code, not from our records) · the item-29
+      notice STRIKE held everywhere · no public page has grown load-order
+      advice · the `%AppData%` log path the pages name exists on a real
+      machine · both STORE↔RELEASE card pairs re-proven **VERBATIM** by
+      actual diff after the edits · all twelve metadata string counts match
+      the sheet · `doccheck` and `mkdocs --strict` GREEN.
+    * **Readability, since you asked for it explicitly:** read cold as a
+      stranger arriving from a store link, the five pages hold — one voice,
+      problem-first FAQ order, searchable fix list. That is a judgment, not a
+      measurement; no accurate sentence was traded for a smoother one, and
+      zero pure-style edits were made.
+
+    ⭐ The preview-image note is now **on the ④ sheet itself** (§0(a)): the mod
+    browser caches preview images by mod id **and version only**, so swapping
+    a preview after publishing without a version bump leaves everyone who
+    already saw it on the old picture. Upload-day image choice is unaffected.
+
+    ⇒ **The pages are ready to upload as they now stand.**
 
 ### ⭐⭐ NEW 2026-08-15 (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from you would explain that.
 
