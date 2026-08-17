@@ -6,7 +6,11 @@ Job 1's "+1".**
 ✅ **RULED 2026-08-14 (checklist 17): NOT published at launch — held in reserve.**
 The owner's word: hold off publishing, and launch it **if post-release reports
 show players stuck with the problem it solves**. Both other cards stand without
-it (the opt-in card's fill-in was deleted per its default). **This file is the
+it (the opt-in card's fill-in was deleted per its default). ℹ️ *2026-08-17
+solo-launch note: this card's opt-in mentions are deliberately NOT parked — the
+contingency that publishes this tool is dial residue, which only the opt-in
+mod's dials can create, so in every world where this card ships the opt-in mod
+is already live and the mentions are correct.* **This file is the
 ready draft for that contingency** — if the day comes, item 28 (the dialog text,
 plus the audit's save-step line) is decided then, before upload. Item 28 was
 closed "ship as built" by the same ruling.

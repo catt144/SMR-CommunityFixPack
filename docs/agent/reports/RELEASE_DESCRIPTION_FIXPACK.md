@@ -15,20 +15,26 @@ needs and a report does not: **every hole rendered as an unmissable `>>> FILL-IN
 
 ---
 
-## Before you paste — the four fill-ins, and what each one needs
+## Before you paste — the three fill-ins, and what each one needs
 
 Each marker appears in the text as `>>> FILL-IN n — … <<<` on its own line.
 **Every one of them is a link that does not exist yet**, so each has a
 *delete-instead* answer that is always safe.
 
+⚖️ **FILL-IN 2 is PARKED, 2026-08-17 (solo launch):** it was the store link to
+the opt-in mod, and the sentence that carried it left the card when the owner
+ruled the fix pack ships alone. Marker and sentence are VERBATIM in
+`PARKED_OPTIN_REFERENCES.md` (P40b/P40c); the numbering below keeps its gap on
+purpose so a restore does not renumber anything.
+
 | n | where | needs | if it does not exist yet |
 |---|---|---|---|
 | **1** | end of "What it fixes" intro | link to the **fix list** page | ⛔ **delete the whole marker line.** The section reads correctly without it — it is an offer of more detail, not a promise |
-| **2** | "You do not need anything else" bullet | **store link** to *Community Fix Pack: Opt-In Modules* | delete the marker. The sentence already names the mod, which is enough for a search |
+| ~~2~~ | *(parked 2026-08-17 — see note above)* | — | — |
 | **3** | end of "Damage that already happened" | link to the **save-repair detail** | ⛔ delete the marker line |
 | **4** | end of "Other mods" | link to the **for-modders page** | ⛔ delete the marker line. ⚠️ This one is the weakest without its link — the paragraph says an identifier exists and does not give it. That is deliberate (rule 4 bars identifiers from player text), but if the site is not on, consider deleting the *whole* second paragraph of "Other mods" rather than leaving a dead-end offer |
 
-### The site links (1, 3, 4) — what they resolve to
+### The site links (1, 3, 4) — what they resolve to (all that remain)
 
 The site is **built and terminal-audited** (`SITE_BUILD_AUDIT.md`, 2026-08-14)
 and lives at `C:\Dev\SMR-CommunityMods\content\`, five pages. ⛔ **Nothing is on
@@ -53,16 +59,13 @@ GitHub prints the real address on the repository's Pages settings screen the
 moment you enable it. Copy it from there.** (`use_directory_urls` is left at its
 default `true`, which is why every path above ends in `/` and not `.md`.)
 
-### The store link (2)
+### ~~The store link (2)~~ — PARKED 2026-08-17
 
-Does not exist until you have uploaded the other mod and the portal has given it
-a URL. **Upload both mods first, then come back and fill this in** — the
-portal-prep sheet sequences it.
-
-⚠️ There is a **second**, optional place a companion-mod link fits: the last
-sentence of *"Removing the pack"*, which tells the reader to read that mod's
-uninstall note. It is left unmarked on purpose — one link per page is enough and
-two invites a dead one. Add it only if your portal makes links cheap.
+The opt-in mod does not publish at this launch, so there is no other mod to
+link and no sentence left to hang a link on. When it does publish, restore
+P40b/P40c from `PARKED_OPTIN_REFERENCES.md` and this section with them (its
+original text is under the same ids' "now reads" notes there). The old
+second-link note about *"Removing the pack"* went with its sentence (P40d).
 
 ---
 
@@ -117,15 +120,11 @@ want this.**
 - **It fixes bugs rather than rebalancing the game.** Almost every fix targets
   something we verified in the game's own code: the code says one thing, does
   another, and we make it do what it says. Preferences and features are not in
-  here; they live in a separate mod you do not need. **Five of them are judgment
-  calls rather than plain repairs** — in two of those the game's code is not
-  wrong at all and we made a call anyway, and one of them changes how the game
-  feels. All five are listed further down, with our reasoning, rather than
-  quietly folded in.
-- **You do not need anything else.** The pack works on its own. There is a
-  companion mod, *Community Fix Pack: Opt-In Modules*, and neither mod needs the
-  other — each works alone, and they work together.
->>> FILL-IN 2 — store link to the opt-in mod, or DELETE THIS LINE <<<
+  here. **Five of them are judgment calls rather than plain repairs** — in two
+  of those the game's code is not wrong at all and we made a call anyway, and
+  one of them changes how the game feels. All five are listed further down,
+  with our reasoning, rather than quietly folded in.
+- **You do not need anything else.** The pack works on its own.
 - **You can take it out again.** It is built to be safe to add or remove at any
   time. Remove it and the bugs it was holding back come back; repairs it already
   made to your save stay made.
@@ -244,10 +243,7 @@ fields listed at the top sit there unread by the unmodded game — a couple of
 them clear themselves the next time you save. If a save happened to catch the pack
 part-way through a piece of work, that leftover finishes on the game's own code
 and stops. Turning this pack off in the mod manager takes effect after you
-restart the game. If you also use *Community Fix
-Pack: Opt-In Modules*, read the uninstall note on that mod's page before you
-remove **it**: it has settings that leave something behind in your save, and its
-page tells you the two steps that avoid it.
+restart the game.
 
 ### Other mods
 
@@ -323,3 +319,9 @@ player words instead, which is a different artifact from the derivation.
 placed at the companion-mod sentence, which the card's notes enumerate as hole 3
 but never marked in the text). Marker lines are not player text and every one of
 them says how to delete itself.
+
+*(⚖️ 2026-08-17, solo launch: the two files were edited in LOCKSTEP — the
+separate-mod clause, the companion-mod bullet tail and the uninstall
+cross-reference left both player-text blocks identically, and FILL-IN 2 left
+this file with its sentence. VERBATIM pairing re-proven by diff after the
+edits; removed text is in `PARKED_OPTIN_REFERENCES.md` P40a–P40d.)*

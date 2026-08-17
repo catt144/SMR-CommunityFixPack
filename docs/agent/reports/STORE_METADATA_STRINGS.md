@@ -1,5 +1,10 @@
 # `metadata.lua` strings ×2 — drafted, and the corrections APPLIED
 
+> ⚖️ **2026-08-17 — SOLO LAUNCH.** The opt-in mod does not publish at this
+> launch (owner ruling, checklist 35). Its section below stays as the record
+> for the day it does; the fix-pack `description` block carries its own dated
+> note. Removed wordings: `PARKED_OPTIN_REFERENCES.md`.
+
 **Built 2026-08-13 by `agent/prompts/public-docs/03_BUILD_STORE.md` (Job 4).**
 Full pages: `STORE_FIXPACK.md` · `STORE_OPTIN.md`.
 
@@ -41,14 +46,21 @@ checks Paradox Mods' and Steam's limits before pasting.
 > Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect
 > verified in the game's own code — the code says one thing, does another, and
 > the fix makes it do what it says. It fixes bugs rather than rebalancing the
-> game: preferences and features live in a separate mod, Community Fix Pack:
-> Opt-In Modules, and neither mod needs the other. Nothing is patched on disk;
-> the mod wraps the game's own code at runtime and no game files are modified.
-> Safe to add to a save you have already played — the pack writes almost nothing
-> into your savegame, and removing it simply lets the original bugs come back.
-> Every fix checks the game's code before it patches anything and stands down if
-> an official patch changes what it was written for. Five of the fixes are
-> judgment calls rather than plain repairs, and the mod page says which and why.
+> game: preferences and features are deliberately not in it. Nothing is patched
+> on disk; the mod wraps the game's own code at runtime and no game files are
+> modified. Safe to add to a save you have already played — the pack writes
+> almost nothing into your savegame, and removing it simply lets the original
+> bugs come back. Every fix checks the game's code before it patches anything
+> and stands down if an official patch changes what it was written for. Five of
+> the fixes are judgment calls rather than plain repairs, and the mod page says
+> which and why.
+
+*(⚖️ 2026-08-17, solo launch: the separate-mod clause left this string — the
+opt-in mod does not publish at this launch and a string that ships inside the
+mod must not name a mod nobody can install. `last_changes` likewise: now
+"Initial release." — its previous form named the opt-in mod. Both previous
+wordings are VERBATIM in `PARKED_OPTIN_REFERENCES.md` P38/P39. The quoted block
+above matches the applied string, which is the authority.)*
 
 *(⚖️ 2026-08-15, `unattended-3` terminal audit: "Five of the fixes" → "Six" —
 the F85 distress-popup flip ships disclosed as a design-judgment tweak.

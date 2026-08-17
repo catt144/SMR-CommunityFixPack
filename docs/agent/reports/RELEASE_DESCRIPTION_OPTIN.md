@@ -1,5 +1,12 @@
 # Release description — Community Fix Pack: Opt-In Modules (the file the owner pastes from at ④)
 
+> ⛔⛔ **PARKED 2026-08-17 — NOT UPLOADED AT THIS LAUNCH.** The owner ruled the
+> fix pack ships ALONE; the opt-in mod is not ready and nothing publishes from
+> its repo. **The body below stays exactly as audited** — it is the paste
+> source for the day the opt-in launches. Restore path: the checklist in
+> `PARKED_OPTIN_REFERENCES.md` (which also holds every fix-pack-side and
+> site-side reference that was removed for the solo launch).
+
 **Assembled 2026-08-14 by `agent/prompts/release-3/01_BUILD_DESCRIPTIONS.md`.**
 Supersedes `docs/archive/MOD_DESCRIPTION.md`'s "Optional modules" section for
 this product; nothing was carried across from that frozen file.

@@ -293,3 +293,44 @@ site page moved for (2).
 the re-arm trigger), every count above moves back by one and the fix-list entry
 must be **rewritten, not restored** — the struck text's "What you saw" framing
 was never true and would not become true just because the feature came back.
+
+---
+
+## ⚖️ 2026-08-17 — SOLO-LAUNCH PARKING (owner ruling, checklist 35): every opt-in reference left the five pages
+
+The owner ruled the fix pack launches ALONE, which invalidated the two-mod
+framing this audit certified. All five pages were edited to describe one mod
+standing on its own; **every removed passage is VERBATIM (byte-compared before
+deletion) in `PARKED_OPTIN_REFERENCES.md` P1–P37**, with the restore trigger
+(*the opt-in mod publishes*) and a per-surface restore checklist.
+
+* ⭐ **The scope was 3× the survey.** The brief's grep counted 10 site hits on
+  "opt-in"; the pages held ~30 passages saying "optional mod / optional pack /
+  second mod / both mods" that no such grep catches — among them THREE whole
+  FAQ questions (toggles-reset, classic rockets, second Artificial Sun), the
+  Retirement-Dome hotel question (its answer turns on an opt-in policy), the
+  drone-dial uninstall warning, install.md's whole "The optional modules"
+  section, and the landing page's two-mod tab group.
+* **Fix-list entries: 77, UNTOUCHED** — only the closing boundary paragraph
+  moved (it no longer names the destination mod; the boundary itself is still
+  stated). Coverage statement (74 of 75) unchanged.
+* **FAQ questions: −5** (toggles-reset, classic rockets, second Artificial
+  Sun, Retirement-Dome hotel, "Do I need both mods?" — counted at the page,
+  19 `###` headings → 14, both counted at the page); the "Building Not
+  Working" explainer stays, ending
+  at the design critique — the question it answers is answered without the
+  opt-in remedy pointer.
+* **Landing page restructured smallest-possible**: "Which one is which" tab
+  group → a plain "What is in it" section carrying the fix-pack tab's prose
+  minus *"This is the one most people want"*; heading "three things" → "two
+  things" ("Do I need both?" left with its section).
+* **for-modders**: opt-in veto example, repo link, `ListFixes` twin and the
+  prefix-warning paragraph parked; the Save-data section's "exception" is now
+  the fix pack's own restored-bonus item (the original's was the opt-in dial —
+  restore whole, do not merge; noted on P35).
+* **A4 hole check**: each page re-read end-to-end after editing; the test was
+  "makes sense to someone who has never heard of a second mod". No dangling
+  anchors (`faq.md#how-do-i-get-it-out` and
+  `install.md#what-it-puts-in-your-save` both survive).
+* `mkdocs build --strict` **GREEN** after these edits; `site/` artefact not
+  committed. Site `README.md` swept in the same pass (opt-in table row parked).

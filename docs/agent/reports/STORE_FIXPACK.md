@@ -47,14 +47,11 @@ want this.**
 - **It fixes bugs rather than rebalancing the game.** Almost every fix targets
   something we verified in the game's own code: the code says one thing, does
   another, and we make it do what it says. Preferences and features are not in
-  here; they live in a separate mod you do not need. **Five of them are judgment
-  calls rather than plain repairs** — in two of those the game's code is not
-  wrong at all and we made a call anyway, and one of them changes how the game
-  feels. All five are listed further down, with our reasoning, rather than
-  quietly folded in.
-- **You do not need anything else.** The pack works on its own. There is a
-  companion mod, *Community Fix Pack: Opt-In Modules*, and neither mod needs the
-  other — each works alone, and they work together.
+  here. **Five of them are judgment calls rather than plain repairs** — in two
+  of those the game's code is not wrong at all and we made a call anyway, and
+  one of them changes how the game feels. All five are listed further down,
+  with our reasoning, rather than quietly folded in.
+- **You do not need anything else.** The pack works on its own.
 - **You can take it out again.** It is built to be safe to add or remove at any
   time. Remove it and the bugs it was holding back come back; repairs it already
   made to your save stay made.
@@ -172,10 +169,7 @@ fields listed at the top sit there unread by the unmodded game — a couple of
 them clear themselves the next time you save. If a save happened to catch the pack
 part-way through a piece of work, that leftover finishes on the game's own code
 and stops. Turning this pack off in the mod manager takes effect after you
-restart the game. If you also use *Community Fix
-Pack: Opt-In Modules*, read the uninstall note on that mod's page before you
-remove **it**: it has settings that leave something behind in your save, and its
-page tells you the two steps that avoid it.
+restart the game.
 
 ### Other mods
 
@@ -223,7 +217,7 @@ platform, what happened, when it started, whether it survives a save and reload
 |---|---|---|
 | 1 | **Site links ×3** (fix list · save-repair detail · for-modders page) | the site is `workflow_dispatch` only and Pages is off; links exist when the owner turns it on |
 | 2 | ~~**The fifth judgment-call bullet** — the dust-devil scale word~~ ✅ **CLOSED 2026-08-13 by the owner** (*"change any wordings to their accurate versions"*). The bullet is in the text above, in the phrasing approved 08-02: *"on some map settings"*. ✅ Checklist line struck by the terminal audit 2026-08-13 after re-deriving the bullet from `F97.md` | done |
-| 3 | **Store links** to the companion mod | do not exist until upload (design §12 hole 8) |
+| 3 | **Store links** to the companion mod | do not exist until upload (design §12 hole 8) — ⚖️ **PARKED 2026-08-17**: the opt-in mod does not publish at this launch and its sentence left the card (`PARKED_OPTIN_REFERENCES.md` P40a–P40d) |
 | 4 | **The uninstall-cleanliness sentence** | ⛔ deliberately **not placed** — Reading A vs B is an owner call at launch (design §8) |
 
 ### 22b — closed by the owner 2026-08-13, and what is still owed

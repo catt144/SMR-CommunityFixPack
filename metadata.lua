@@ -8,7 +8,14 @@ return PlaceObj('ModDef', {
 	-- sibling mod by its dead working title "Community Opt-In Pack". Both are
 	-- corrected below. Full pages + the claim traces: docs/agent/reports/
 	-- STORE_FIXPACK.md and STORE_METADATA_STRINGS.md.
-	'description', "Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect verified in the game's own code — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs rather than rebalancing the game: preferences and features live in a separate mod, Community Fix Pack: Opt-In Modules, and neither mod needs the other. Nothing is patched on disk; the mod wraps the game's own code at runtime and no game files are modified. Safe to add to a save you have already played — the pack writes almost nothing into your savegame, and removing it simply lets the original bugs come back. Every fix checks the game's code before it patches anything and stands down if an official patch changes what it was written for. Five of the fixes are judgment calls rather than plain repairs, and the mod page says which and why.",
+	-- ⚖️ 2026-08-17 (SHIP_SOLO_PREP): the owner ruled the fix pack LAUNCHES ALONE
+	-- — the opt-in mod is not ready and does not publish. Both player strings
+	-- below (`description`, `last_changes`) therefore no longer name it: a string
+	-- that ships inside the mod cannot be changed without a version bump and a
+	-- re-upload, and it must not name a mod no player can install. The removed
+	-- wordings are VERBATIM in docs/agent/reports/PARKED_OPTIN_REFERENCES.md
+	-- (P38/P39) with the restore trigger and checklist.
+	'description', "Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect verified in the game's own code — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs rather than rebalancing the game: preferences and features are deliberately not in it. Nothing is patched on disk; the mod wraps the game's own code at runtime and no game files are modified. Safe to add to a save you have already played — the pack writes almost nothing into your savegame, and removing it simply lets the original bugs come back. Every fix checks the game's code before it patches anything and stands down if an official patch changes what it was written for. Five of the fixes are judgment calls rather than plain repairs, and the mod page says which and why.",
 	'short_description', "Bug fixes for Surviving Mars: Relaunched — it repairs defects verified in the game's own code rather than rebalancing the game, and it is safe to add to a save you have already played.",
 	-- ⚠️ `last_changes` no longer quotes a fix COUNT, on purpose: every previous
 	-- wording carried one and it drifted every time a fix was retired or added
@@ -30,7 +37,7 @@ return PlaceObj('ModDef', {
 	-- string. A player told to look for that name would find nothing on any
 	-- store. Licence: the owner's standing 22b word ("change any wordings to
 	-- their accurate versions"); text-only, no behaviour, no version bump.
-	'last_changes', "Initial release: the bug fixes. The optional modules moved to their own mod, Community Fix Pack: Opt-In Modules.",
+	'last_changes', "Initial release.",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	'version', 1,

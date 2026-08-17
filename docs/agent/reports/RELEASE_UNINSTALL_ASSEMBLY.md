@@ -142,6 +142,12 @@ repairs, not leftovers:** the Large Wind Turbine bonus the game's own patch
 migration dropped, and a one-shot mark that stops a track repair being done
 twice. Deleting either would bring its bug back with no mod left to fix it.
 
+*(⚖️ 2026-08-17, solo launch: the section below is REFERENCE for the day the
+opt-in mod publishes — it ships on no surface at this launch. The fix-pack
+section above stands alone and is the whole shipped uninstall story. The
+fix-pack card's cross-reference to the opt-in uninstall note was parked —
+`PARKED_OPTIN_REFERENCES.md` P40d.)*
+
 ### Removing the Opt-In Modules — do this one thing first
 
 ⚠️ **If either drone dial is off its base setting, deal with it before you
