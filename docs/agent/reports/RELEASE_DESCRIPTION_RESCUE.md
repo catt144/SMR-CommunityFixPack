@@ -22,10 +22,14 @@ closed "ship as built" by the same ruling.
    it"* — ruled then as "Community Fix Pack: Save Rescue"; the family was
    renamed Community → Relaunched and the owner ruled "rename them now" the
    same day, checklist 36; `metadata.lua` `title` edited in its repo) — so the
-   three mods sort together, as the opt-in pack already does. ⛔ Still owed at
-   publish: this mod's `description`/`short_description` still name the old
-   family — sweep them then, along with this card and every player-visible
-   string. ⛔ Mod id / global / log tag are save contract and do NOT change.
+   three mods sort together, as the opt-in pack already does. ✅ **The string
+   sweep landed early too (2026-08-17, owner's widened license):** its
+   `description`/`short_description` and every player-visible string in
+   `Code/10_SaveRescue.lua` (dialogs, skip reasons, the registration title)
+   now carry the new family name, renamed in place. ⚠️ The dialog text
+   therefore differs from the 08-14 witnessed readings — the item-28
+   re-witness launch below covers that whenever the contingency fires.
+   ⛔ Mod id / global / log tag are save contract and do NOT change.
 2. Re-decide item 28's dialog text (the drone-dial line buried third of six).
 3. Add the audit's **save-step** sentence to the on-screen dialog string — the
    "load once … delete it again" flow never tells the player to SAVE, and only

@@ -395,8 +395,10 @@ never marked in the text.
 
 ### Routed, not fixed here
 
-⚠️ `Opt_DroneOverhaul.lua`'s header comment in the other repo still names the old
-*"Options → Mod Options → Community Fix Pack"* path — the display-name sweep
+✅ **FIXED 2026-08-17** (owner's widened rename license, "fix any references you
+recommend"): the header now reads *"Options → Mod Options → Relaunched Fix
+Pack: Opt-In Modules"*. ~~`Opt_DroneOverhaul.lua`'s header comment in the other repo still names the old
+*"Options → Mod Options → Community Fix Pack"* path~~ — the display-name sweep
 missed a wrapped line. Code comment, never shipped to a player (`docs/` and
 comments are not the Mod Options page), carried forward from `STORE_OPTIN.md`'s
 own note. Still open.

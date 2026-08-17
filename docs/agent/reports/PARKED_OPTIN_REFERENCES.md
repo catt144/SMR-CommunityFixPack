@@ -65,13 +65,13 @@ upload (they cannot change without a re-upload).
 11. Editing done → re-measure, re-prove, doccheck + `mkdocs --strict`, and
     update checklist item 35 + `STATE.md`.
 
-⚠️ **Added by the 2026-08-17 rename:** before the opt-in uploads, check its
-repo's `metadata.lua` — the `title` was renamed the same day (owner's "rename
-them now" ruling), but its `short_description` and `description` still say
-*Community Fix Pack* and must be brought to the *Relaunched Fix Pack* family
-first (`STORE_METADATA_STRINGS.md` carries the ready wordings and its own
-rename note). The blocks below already speak the new name — see the integrity
-note above "The passages, VERBATIM".
+⚠️ **Added by the 2026-08-17 rename, closed the same day:** the opt-in repo's
+`metadata.lua` is fully on the new family name — `title` on the owner's
+"rename them now" ruling, and the `short_description`/`description`/
+`last_changes` strings renamed in place under the owner's widened license
+("fix any references that you recommend"). Nothing is owed here at restore
+time beyond the normal checks; the blocks below already speak the new name —
+see the integrity note above "The passages, VERBATIM".
 
 ## Already-proven at parking time (2026-08-17)
 

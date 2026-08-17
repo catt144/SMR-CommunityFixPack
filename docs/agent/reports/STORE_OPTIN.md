@@ -345,6 +345,9 @@ genuinely useful.
 * The player text above is copied into `C:\Dev\SMR-OptInPack` at release prep,
   and its `metadata.lua` `description` / `short_description` replaced with the
   strings drafted in `STORE_METADATA_STRINGS.md`.
-* ⚠️ `Opt_DroneOverhaul.lua`'s header still names the old *"Options → Mod
+* ✅ ~~`Opt_DroneOverhaul.lua`'s header still names the old *"Options → Mod
   Options → Community Fix Pack"* path (the display-name sweep missed a wrapped
-  line). Code comment, other repo, harmless to players — routed, not fixed here.
+  line). Code comment, other repo, harmless to players — routed, not fixed
+  here.~~ **FIXED 2026-08-17** under the owner's widened rename license: it now
+  names *"Relaunched Fix Pack: Opt-In Modules"* — both the stale family name
+  and the missing suffix corrected in one edit.

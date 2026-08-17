@@ -58,10 +58,22 @@ completed tests move whole to
     name on purpose — CLAUDE.md now carries the translate-mentally note.
 
     ✅ ~~The one timing call routed to you: the other two mods' internal
-    titles~~ — **ruled above: renamed now, applied.** The description strings
-    in both sibling repos stay for their own launch sessions (tripwires in
-    place: the park record's restore step, `STORE_METADATA_STRINGS`' rename
-    note, and a comment in each sibling `metadata.lua`).
+    titles~~ — **ruled above: renamed now, applied.** ⭐ **And your follow-up
+    ("fix any references that you recommend") finished the job the same
+    sitting:** both sibling repos are now swept end to end — metadata strings,
+    the on-screen dialogs and rollover titles, code headers, READMEs, LICENSEs
+    and their own CLAUDE notes all say *Relaunched Fix Pack*, with
+    translate-mentally notes added so their records keep the old name honestly.
+    Two genuinely stale non-name claims found on the way were fixed and
+    annotated: the opt-in's `Opt_DroneOverhaul` header (old path, missing
+    suffix) and the rescue `CLAUDE.md` still claiming the attended pass was
+    owed (it passed 2026-08-14). ⚠️ One consequence carried forward, not
+    hidden: the rescue tool's dialog text changed after its witnessed readings,
+    so if that contingency ever fires, the already-required item-28 re-witness
+    launch covers the new wording too. **This repo's README was also rewritten
+    to current truth** — the ghost optional-modules section is gone, every
+    count is this sitting's emitted number, and the false "disable via
+    console" claim is replaced with the real veto-mod mechanism.
 
     ⚠️ **One small call I did not make for you.** The mod's internal id and its
     log tag both still say `CommunityFixPack`. Neither is something a player

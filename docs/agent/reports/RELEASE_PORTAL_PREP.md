@@ -191,17 +191,24 @@ counter or refuse the field, and both answers arrive in two seconds.
 | mod | `title` | `short_description` | `description` | `last_changes` |
 |---|---|---|---|---|
 | Relaunched Fix Pack | **19** | 184 | **779** | **16** |
-| ~~Opt-In Modules~~ *(parked)* | **35** | 177 | 884 | 100 |
-| ~~Save Rescue~~ *(hold-off)* | **32** | 147 | 732 | 442 |
+| ~~Opt-In Modules~~ *(parked)* | **35** | **178** | **889** | **101** |
+| ~~Save Rescue~~ *(hold-off)* | **32** | **148** | **734** | 442 |
 
 ⭐ *(`title` cells re-measured 2026-08-17 after the rename: fix pack
 "Community Fix Pack" 18 → "Relaunched Fix Pack" **19**; and on the owner's
 same-day "rename them now" ruling (checklist 36) the sibling titles were
 applied in their repos — opt-in "Relaunched Fix Pack: Opt-In Modules" **35**,
 rescue "Relaunched Fix Pack: Save Rescue" **32** (the item-26 pre-approved
-family form, landing early on the owner's word). ⛔ Title lines only: both
-siblings' `description`/`short_description` still say Community and are swept
-at THEIR publish — comments in each file force it.)*
+family form, landing early on the owner's word). ⭐ Later the same day, under
+the owner's widened license, the sibling STRING cells moved too — renamed in
+place and re-measured: opt-in 178 / 889 / 101, rescue 148 / 734 / 442-unmoved.
+⚠️ One honest discrepancy surfaced by the re-measure: the opt-in `description`
+measured **888 BEFORE the rename** against the recorded 884, by the same
+code-point count that reproduces every other cell in this table exactly — this
+is the one string carrying the two-code-point ⚠️ and the →, so the 08-14
+count evidently normalized those differently. The 889 above is the code-point
+count; the string itself last changed before the 08-14 audit, and every limit
+stays check-at-paste regardless.)*
 
 ⭐ *(Fix-pack `description` and `last_changes` re-measured 2026-08-17 after the
 solo-launch parking: 844 → **779** and 112 → **16** ("Initial release."). The
@@ -289,9 +296,9 @@ directory** (checked in all three). Only the site repo does, and it is not a mod
 | item | what | when |
 |---|---|---|
 | **Store links into the site** | `content/install.md` opens with *"No store links yet — this page gets the links when they exist."* One admonition to replace, plus store buttons on the landing page if wanted | step 2, after upload |
-| **Save Rescue's repo README is stale** | its "Status" section still says nobody has watched the dialogs and *"that sitting is scheduled"* — it ran 2026-08-14 and passed. It understates rather than overstates, so nothing is misleading a player, but it is a public page contradicting the record | any time; routed to this chain's audit |
-| **`Opt_DroneOverhaul.lua`'s header comment** names the old *"Mod Options → Community Fix Pack"* path | a code comment in the other repo, never seen by a player | any time |
-| **This repo's own `README.md` is stale far beyond its name** (found by the 2026-08-17 rename's end-to-end read) | it still advertises the optional modules that moved OUT on 08-12 as if this pack carried them, says "91 verified findings" against today's 167 rows, links the retired `docs/BUGS.md`/`docs/STATUS.md` paths, and says "in development, not yet released". The rename touched only its three name occurrences. GitHub-only surface (excluded from the package), but the site's for-modders page links to the repo, so a curious player can reach it | its own sitting, before or shortly after upload; counts must be re-emitted, not copied |
+| ✅ ~~**Save Rescue's repo README is stale**~~ | **CLOSED 2026-08-17** — re-read at source: its Status section already carries the 2026-08-14 attended pass, witnessed dialogs included; whoever fixed it never retired this row. ⚠️ The genuinely stale line was in that repo's `CLAUDE.md` ("attended pass still owed"), corrected 2026-08-17 with the correction noted in place | done |
+| ✅ ~~**`Opt_DroneOverhaul.lua`'s header comment** names the old *"Mod Options → Community Fix Pack"* path~~ | **FIXED 2026-08-17** under the owner's widened rename license — now *"Relaunched Fix Pack: Opt-In Modules"* (family name and missing suffix both corrected) | done |
+| ✅ ~~**This repo's own `README.md` is stale far beyond its name**~~ | **REWRITTEN 2026-08-17** on the owner's instruction ("update the readme with whatever is needed"): the ghost optional-modules section is gone, every count re-emitted this sitting (75 modules · 96 checks · 167 tracked findings), the false console-disable claim replaced with the accurate veto-mod mechanism, install/restart/achievements wording aligned to the audited surfaces, and the bug-report route (item 27) added | done |
 
 ⛔ **The site's five pages are terminal-audited and are not edited in passing.**
 Anything found in them is filed, which is why the first row above is a filed task

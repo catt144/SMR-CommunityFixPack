@@ -82,10 +82,13 @@ raise it.
 > section.** The display-name family was renamed *Community Fix Pack* →
 > *Relaunched Fix Pack* (owner ruling, checklist 36). The quoted strings below
 > are updated to the NEW name. The opt-in repo's `metadata.lua` `title` was
-> renamed the same day (owner's "rename them now" ruling), **but its
-> `short_description` and `description` still carry the old name** — string
-> edits beyond the title were fenced. Before the opt-in ever uploads, those
-> two strings must be brought to match these blocks. Original wording, preserved for the record: every
+> renamed the same day (owner's "rename them now" ruling), and later that day —
+> under the owner's widened license ("fix any references that you recommend") —
+> its `short_description`, `description` and `last_changes` were renamed **in
+> place** too, so no live string anywhere carries the old family name. The
+> richer description DRAFT below (tier-0 lede, second-sun clause, spelled-out
+> Mod Options path) remains release-prep's option at the opt-in's own launch,
+> unchanged in status. Original wording, preserved for the record: every
 > *"Relaunched Fix Pack"* in the two blocks below read *"Community Fix Pack"*
 > as applied 2026-08-13.
 
