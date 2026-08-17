@@ -102,6 +102,40 @@ owed input stays here no matter how struck-through it looks.
     the direction either way.**
     → `agent/reports/SMRCF_COVERAGE_SWEEP.md`, entries `C49`–`C52`.
 
+    ⭐⭐ **UPDATE, same day — THE CHAINS ARE WRITTEN AND WAITING. Nothing has
+    been built and nothing has run.** You asked for chains for everything we can
+    fix, simple ones combined, complex ones standalone, and the underground
+    cave on its own. That is four chains, 13 prompts, drafted and committed:
+
+    | chain | subject | prompts | **your time** |
+    |---|---|---|---|
+    | **A** `smrcf-verify` | answers every open question at once, arms two detectors | 2 | **zero** |
+    | **B** `smrcf-text` | SpaceY + localization (+ dust devils if A clears it) | 3 | ~15 min |
+    | **C** `smrcf-modbrowser` | the mod browser's three defects | 4 | ~15 min |
+    | **D** `jumbo-cave` | the underground cave, solo as you asked | 4 | one playthrough segment |
+
+    **A runs first and costs you nothing.** Three of the four currently rest on
+    questions nobody has answered — are those dust-devil markers actually on the
+    map, does the screenshot downloader exist, can we drive map generation from
+    Lua. A settles all of them in one unattended launch, and if the answers come
+    back wrong then B, C and D get smaller or disappear. **B, C and D are
+    independent of each other and can run in any order.**
+
+    ⭐ Your "stack the deck" idea is written into D as its method, with the one
+    line it must not cross: **we turn up the rock density the game's own
+    generator reads and let the game place them — we never place a rock
+    ourselves**, because then we would only be testing our own placement. And
+    the confound you would have hit is pre-registered: at high density rocks can
+    block rocks, so when one strands we record what is *around* it. Terrain means
+    the bug is real; other rocks means we only proved the consequence.
+
+    ⇒ **Still nothing owed from you except the original question: now or after
+    launch?** My answer is unchanged — after. ⛔ And one small thing is owed
+    from me either way: **`C49` should be flipped to `wontfix — unreachable`**,
+    which is what our own policy says for a defect no player can reach. Say the
+    word and it is a one-line change.
+    → `agent/prompts/SMRCF_CHAIN_SET.md` has the map and the kickoff lines.
+
 ### ⭐⭐ NEW 2026-08-15 (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from you would explain that.
 
 33. ✅✅ **ANSWERED BY YOU THE SAME EVENING, AT THE KEYBOARD — and then you went

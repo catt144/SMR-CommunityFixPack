@@ -1,0 +1,99 @@
+# Chain D — `jumbo-cave` · `C25`, solo by owner instruction
+
+*"the jump underground should be a solo issue chain"* — owner, 2026-08-16.
+Map: `agent/prompts/SMRCF_CHAIN_SET.md`. ⛔ **Gated on chain A.**
+
+## Manifest
+
+| # | file | model | owner needed? | what it drains |
+|---|---|---|---|---|
+| 01 | `01_FEASIBILITY_opus.md` | volume tier | no | finds the rock-density parameter; proves or kills the seed search; finds a `JumboCave` seed |
+| 02 | `02_STAGE_opus.md` | volume tier | no | generates the deck-stacked colony, verifies it, hands the owner a ready save |
+| 03 | `03_SITTING_owner.md` | volume tier | **YES — one playthrough segment** | the owner builds the Reinforcements; the detector watches |
+| 04 | `04_AUDIT_fable.md` | top tier | no | adversarial backward QA; adjudicates the discriminator; empties the folder |
+
+⚠️ 03 is **attended** and is marked so at authoring time, per `CHAIN_METHOD` §3
+(*"a prompt that needs the keyboard"* — split attended and unattended halves up
+front). 01, 02 and 04 cost the owner nothing.
+
+## The case, in one paragraph
+
+`C25`: a Jumbo Cave Reinforcements construction site can wedge forever on Waste
+Rock no drone can reach. **The consequence chain is fully source-verified** — a
+failed `WasteRockObstructor:DroneApproach` files the rock at
+`unreachable_buildings[building] = GameTime() + max_int`, the developers' own
+comment reading *"mark it so it is basically unreachable forever"*
+(`Lua/Units/Drone.lua:840`); the site's only retest is
+`ConstructionSite:OnWasteRockObstructorCleared`, which runs only when a rock is
+actually cleared; and the Buried Wonder scenario parks on
+`while not (UndergroundMap.City.labels["JumboCaveReinforcementStructure"]) do
+Sleep(3000 …) end` (`BuriedWonder_Jumbo_Cave_106.generated.lua:104-106`),
+costing the player the completion message, the next objective and a **Medium
+Dome prefab**. ⛔ **What is NOT verified is the trigger**: that cave geometry
+actually strands a rock. That is this chain's entire subject.
+
+⭐ **And it does not self-heal.** Only two callers bump the unreachables version
+— `LandscapeFixBuildable` (`Landscaping.lua:326`) and a building **demolition**
+(`Building.lua:523`). Ordinary construction does not. The `5 * DayDuration`
+cleanup constant cannot mature an entry written as `GameTime() + max_int`.
+
+## The method — the owner's design, and the line it must not cross
+
+Owner, 2026-08-16: *"these rocks are generated content, and the game generates
+them, so why can't we generate them, stack the deck in our favor."* Confirmed at
+source: `WasteRockObstructor` is a **`Deposition`** — map scatter
+(`Lua/Decor.lua:97-98`, entity `class_parent = "Deposition,WasteRockObstructor"`,
+removed as decor by `Landscaping.lua:404`). Construction sites only *discover*
+what generation scattered (`HexGetUnits(map, …, "WasteRockObstructor")`).
+
+⛔⛔ **THE LINE, AND IT IS THE WHOLE VALIDITY OF THIS CHAIN:**
+
+> **Turn up the density the game's own scatter uses, and let the game place the
+> rocks.** ✅ Same algorithm, more samples — legitimate accelerated sampling of
+> the shipped placement distribution.
+>
+> **Place rocks ourselves where we think they will strand.** ❌ Proves nothing.
+> We already know a rock can be made unreachable (walling one in with buildings
+> does it). The open question is whether *the game's* placement does it.
+
+## ⚖️ The pre-registered discriminator — write it down before any run
+
+At high density **rocks can block rocks**. So when a rock strands, the question
+is what stranded it:
+
+| what surrounds the stranded rock | verdict |
+|---|---|
+| **terrain** — cave wall, ledge, impassable floor | ⭐ **trigger demonstrated.** `C25` upgrades end to end |
+| **other rocks** | consequence proven live, trigger still open — honestly labelled, not oversold |
+| nothing strands at elevated density | strong evidence the geometry does not do this; `C25` heads toward `wontfix` the way `C49` did |
+
+**All three outcomes are useful.** That is what makes this a test rather than a
+fishing trip. The neighbouring-hex capture must happen **at failure time** or the
+discriminator is lost — chain A's detector is built to do exactly that.
+
+## Binding chain rules
+
+Identical to `smrcf-verify/README.md` §"Binding chain rules" (staleness check ·
+inbox/outbox · route-don't-drop · self-split · file your own instruments'
+defects · `WORKFLOW` 1–7 · predictions before runs · archive logs with
+`git add -f`), plus three specific to this chain:
+
+10. ⛔ **No fix code anywhere in this chain.** `C25` is an unbuilt candidate. If
+    the trigger is demonstrated, the *fix* is a separate decision and a separate
+    chain — and fredware's remedy (delete the blocker through the vanilla
+    destruction path) is a design we have not adjudicated.
+11. ⛔ **`EF-056`: pre-copy every autosave before loading any copy of a real
+    campaign.** It has already eaten one of the owner's files.
+12. **Nothing generated by this chain touches the owner's save directory** except
+    the one staged colony 02 hands over, and that one is named, disclosed, and
+    listed in the close-out.
+
+## Stop conditions for the whole chain
+
+- Chain A said map generation is **not** drivable from Lua → 01 re-plans the
+  approach or kills the chain. **A clean abort that records why is the gate
+  working** (`CHAIN_METHOD` §5-D); 04 carries a pre-written reduced form.
+- No seed yields a `JumboCave` in a reasonable sweep → record the frequency
+  measured, route to the owner, stop.
+- The density parameter cannot be reached without editing game files → **STOP.**
+  `FIX_POLICY`: we never modify the game installation.
