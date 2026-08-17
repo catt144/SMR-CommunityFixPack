@@ -258,6 +258,13 @@ function SMRFixPack.DataPatch(id, opts)
 		if entry and (entry.status == "active" or entry.status == "inactive") then
 			entry.status = "active"
 			entry.detail = ""
+			-- same leak as run_apply's success branch, same day, same reason:
+			-- healing undoes the latch, so it must undo the latch's mark too.
+			-- MEASURED on SaintBlessing, whose two latch sites differ — the
+			-- first non-benign, the second `benign` (Fix_SaintBlessing.lua
+			-- :121-125) — so the sequence latch -> heal -> benign-latch left a
+			-- working module flagged as patch rot.
+			entry.update_suspect = nil
 		end
 	end
 	local function run()
@@ -361,6 +368,17 @@ local function run_apply(id, def, entry)
 		entry.status = "active"
 		entry.detail = ""
 		entry.installed = true
+		-- ⛔ 2026-08-17, FOUND AT THE UPLOAD SITTING: clearing this is not
+		-- cosmetic. `Require` marks `update_suspect` on a target-shape failure
+		-- (:158-159), and several modules FAIL A PASS AND THEN SUCCEED — the
+		-- first pass runs before the class hierarchy is flattened, which is
+		-- documented and benign. Without this line the mark outlived the
+		-- success, and `UpdateSuspects` reads it on ANY later `inactive` —
+		-- including a `latch(..., "benign")`, whose whole point is to say the
+		-- data is verifiably already-correct. The player-facing consequence is
+		-- a dialog claiming the game code changed and inviting them to look for
+		-- a newer version, over a module that is working.
+		entry.update_suspect = nil
 		log("%s: applied", id)
 	end
 end
@@ -377,9 +395,23 @@ end
 -- explaining why it deactivated itself (not an error — e.g. "already fixed").
 function SMRFixPack.Register(id, def)
 	local entry = { title = def.title, status = "pending", detail = "" }
+	-- ⛔ 2026-08-17, MEASURED AT THE UPLOAD SITTING: the append below used to be
+	-- unconditional, and `SMRFixPack` itself is deliberately preserved across a
+	-- Lua reload (`rawget(_G, ...) or {...}`, :17). So every `ReloadLua` re-ran
+	-- every Register and pushed a SECOND copy of each id into `order`, while
+	-- `fixes[id]` was replaced in place — one module, two order entries pointing
+	-- at one shared entry. Everything that walks `order` then double-counted:
+	-- `ListFixes` prints twice, `ApplyModOptions` reconciles twice, and
+	-- `UpdateSuspects` emitted the same suspect once per copy — the observed
+	-- "2 of this mod's modules ... NoHomeless, NoHomeless" over ONE module
+	-- (1 `inactive` line, 2 `applied` lines, in the same log).
+	-- Guard on `fixes[id]` BEFORE the overwrite: a known id means re-registration.
+	local reregistered = SMRFixPack.fixes[id] ~= nil
 	SMRFixPack.fixes[id] = entry
 	SMRFixPack.defs[id] = def
-	SMRFixPack.order[#SMRFixPack.order + 1] = id
+	if not reregistered then
+		SMRFixPack.order[#SMRFixPack.order + 1] = id
+	end
 
 	if SMRFixPack_Disabled[id] then
 		entry.status = "disabled"
