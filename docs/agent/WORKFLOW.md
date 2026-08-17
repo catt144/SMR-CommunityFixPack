@@ -927,6 +927,66 @@ say what the owner reads afterwards. Owner-facing record of the decision:
      assignment / preset-field / own-thread) — a live game means persisted-body
      version skew is a standing failure mode, not a launch-time one.
 
+## Release marking — tags, not branches (adopted 2026-08-17)
+
+**What is live on the portal is a fixed point in history, so it is marked with a
+TAG.** `main` is *latest verified work*; the tag is *what shipped*. Main sitting
+ahead of the published version is the NORMAL state of a mod repo — the reference
+mod we surveyed publishes from tags and runs seven versions ahead on `main`.
+
+⛔ **No standing `testing`/`published` branch, and the reasons are specific to
+this repo — re-read them before anyone proposes one again:**
+
+1. **The junction makes the checked-out tree the running mod.**
+   `%AppData%\Surviving Mars Relaunched\Mods\SMR-BugFixPack` is a directory
+   junction into the dev repo, so whatever is checked out is what the game
+   loads. Every gate reading this project treats as load-bearing (`75/75`, the
+   suite counts, the SKIP set BY NAME) would silently become "…on whichever
+   branch was last checked out."
+2. **The truth-bearing documents are rewritten in place, not appended.**
+   `STATE.md` has a hard 60-line cap with an eviction rule; `bugs/INDEX.md` and
+   `facts/INDEX.md` are GENERATED. Parallel long-lived branches means every
+   merge conflicts on exactly those files, and a badly-resolved `INDEX.md`
+   merge is a red doccheck at best and a wrong index at worst.
+3. **Uploading is manual** (in-game Mod Editor / portal, no CI), so "main holds
+   unshipped code" only bites if you upload carelessly — and tagging at upload
+   removes that.
+
+**At upload, per mod:**
+
+```
+git tag -a fixpack-v<major>.<minor>.<version> -m "uploaded <portal> <date>"
+git push origin <tag>
+```
+
+- Tag names: `fixpack-`, `optin-`, `rescue-` + the version `PackVersion` reads,
+  which is `version_major.version_minor.version` from `metadata.lua`.
+- ⛔ **The tag and `metadata.lua` must agree.** A tag whose version does not
+  match the tree it points at is worse than no tag.
+- Record portal version → commit sha on the ④ sheet
+  (`agent/reports/RELEASE_PORTAL_PREP.md`) in the same pass.
+
+**To reproduce what a player is running** — never disturb `main`:
+
+```
+git worktree add ../SMR-FixPack-shipped fixpack-v1.0.1
+```
+…then point the junction at that worktree for the investigation and put it back
+afterwards. ⚠️ While it is pointed there, **the rig is running the shipped code,
+not `main`** — no suite reading taken in that window describes current work.
+
+**Hotfix path**, created the day it is needed and not before:
+
+```
+git checkout -b hotfix/fixpack-1.0.2 fixpack-v1.0.1
+```
+…fix, ship, tag, merge back to `main`.
+
+⚖️ **When a short-lived branch IS justified:** a single chain producing code
+nobody is sure about (a `FIX_POLICY` §1.5 full replacement is the standing
+example). Branch per chain, code only, merged within days — ⛔ **doc changes
+still go to `main` directly**, or reason 2 above bites.
+
 ## Authoring a prompt / job brief — required elements
 
 Every brief written for another session (`*_PROMPT.md`, `*_BRIEF.md`,

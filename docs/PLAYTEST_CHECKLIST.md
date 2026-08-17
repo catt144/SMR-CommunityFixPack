@@ -29,6 +29,51 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⛔⛔ NEW 2026-08-17 — SOLO LAUNCH: two small calls, and one thing that must happen BEFORE you upload
+
+35. ❓ **Two questions, both quick, and a prompt that does the work once you
+    answer.** You ruled the fix pack ships alone and the opt-in is not ready.
+    **That invalidates the "pages ready to upload" verdict from yesterday** —
+    it was checked for a two-mod launch, and our public docs currently talk
+    about the opt-in mod as though a player can go and get it.
+
+    ⭐ **The good news: it's 22 references across 8 surfaces, not a rewrite.**
+    Two sentences on the landing page, one each on install / FAQ / fix list,
+    four modder-facing bits, six in the store card. **Nothing structural.**
+
+    ⛔ **The one that actually matters** is `metadata.lua`'s changelog line:
+    *"Initial release: the bug fixes. The optional modules moved to their own
+    mod, Community Fix Pack: Opt-In Modules."* That string **ships inside the
+    mod**, players see it, and **it cannot be changed without a version bump and
+    a re-upload.** It has to be right before you press upload, not after.
+
+    **Q1 — "coming soon", or say nothing?** My recommendation is **say
+    nothing**. A "coming soon" is a promise with no date on a mod you just said
+    isn't ready, and it re-couples the two products in the reader's head — which
+    is the opposite of what you asked for. Bringing it all back later is
+    mechanical, because every removed passage gets stored verbatim with a
+    restore checklist (same treatment the F85 module got — not "it's in git
+    history"). ⇒ **If you do want a teaser, it goes in one place, the site FAQ,
+    and never on the store card or in `metadata.lua`** — those two are the
+    expensive ones to change later.
+
+    **Q2 — is the fix pack's first release 1.0.1 or 1.0.0?** It currently reads
+    **1.0.1** (`version_major=1, version_minor=0, version=1`). The opt-in is a
+    clean 1.0.0. Harmless either way since no player ever saw a 1.0.0 — but it
+    should be what you meant, and I won't change it without your word.
+
+    ⇒ `agent/prompts/SHIP_SOLO_PREP_fable.md` is written and does all of it —
+    parks the references, builds the restore record, re-measures every count the
+    edits move, re-proves the store↔source pairing, and tags the release. It
+    also verifies something I have *not* assumed: that the fix pack genuinely
+    stands alone **in code**, not just in prose.
+
+    ✅ **Already done, no action needed:** the release procedure is now written
+    into `WORKFLOW.md` (tags mark what shipped, `main` keeps moving — same
+    pattern the other community mod uses), and the stale `wave4` branch is
+    deleted (it was fully merged, zero unique commits).
+
+
 Things that need **your** call, not an agent's. One line each plus where the
 reasoning lives; **an agent strikes a line the moment you decide** — just say so
 in any session. Added 2026-08-03 by the docs-restructure chain (spec §7 / R10):
