@@ -40,7 +40,10 @@ return PlaceObj('ModDef', {
 	'last_changes', "Initial release.",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
-	'version', 1,
+	-- ✅ RULED 2026-08-17 (owner, checklist 35 Q2: "lets go with 1.0.0"):
+	-- first public release is a clean 1.0.0, matching the opt-in ruling's
+	-- logic. PackVersion renders version_major.version_minor.version.
+	'version', 0,
 	'version_major', 1,
 	'version_minor', 0,
 	'lua_revision', 350453,

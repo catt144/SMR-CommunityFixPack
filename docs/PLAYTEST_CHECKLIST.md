@@ -57,13 +57,14 @@ completed tests move whole to
     store card or `metadata.lua`, the two expensive-to-change surfaces.
     Nothing else moves if you flip this.
 
-    ❓ **Q2 — STILL YOURS, and now the only thing between you and upload: is
-    the first release 1.0.1 or 1.0.0?** It currently renders **1.0.1**
-    (`version_major=1, version_minor=0, version=1`). **Recommendation:
-    1.0.0** — same logic as your opt-in "we go 1.0" ruling; a clean first
-    number for a clean first release. It is one line in `metadata.lua` plus
-    moving the tag, cheap ONLY before you upload. If 1.0.1 was what you meant,
-    say so and nothing changes.
+    ✅ **Q2 — RULED 2026-08-17 ("lets go with 1.0.0") AND APPLIED THE SAME
+    HOUR:** `metadata.lua` now renders **1.0.0** (`version=0`), the tag moved
+    to `fixpack-v1.0.0` (the interim `fixpack-v1.0.1` deleted, local and
+    remote), and the ④ sheet says so. **Nothing on this item is owed any
+    more — ④ is decision-free: upload the fix pack, link, Pages.** Your
+    follow-up question was also acted on: the opt-in repo's STATE now carries
+    the restore obligation, so the session that launches that mod cannot miss
+    `PARKED_OPTIN_REFERENCES.md`.
 
     ✅ **Already done earlier, no action needed:** release procedure in
     `WORKFLOW.md` (tags mark what shipped), stale `wave4` branch deleted.

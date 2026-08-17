@@ -6,11 +6,9 @@
 > → its store link into the site → Pages.** Opt-in rows below are struck or
 > marked *PARKED*, never deleted — they are the record for the day it ships.
 > Every removed player-facing passage: `PARKED_OPTIN_REFERENCES.md`.
-> ❓ **One decision reopened before you upload — checklist 35 Q2:** the fix
-> pack's version renders **1.0.1** (`version_major=1, version_minor=0,
-> version=1`); recommendation is a clean **1.0.0** for a first release (same
-> reasoning as your opt-in "we go 1.0" ruling) — one line in `metadata.lua`
-> plus moving the tag, and only cheap BEFORE the upload.
+> ✅ **The version call is RULED AND APPLIED — 2026-08-17, owner: "lets go
+> with 1.0.0."** `metadata.lua` now `version=0` ⇒ renders **1.0.0**; the tag
+> moved with it (`fixpack-v1.0.0`). ④ owes no decisions.
 
 **Built 2026-08-14 by `agent/prompts/release-3/01_BUILD_DESCRIPTIONS.md`, Job 3.**
 Read top to bottom. Everything below was measured or re-derived this session;
@@ -64,8 +62,9 @@ Upload-day choice of image is unaffected.
 
 ⇒ ~~**④ is now decision-free AND art-complete: upload two mods (with their FINAL
 previews from §0(a)) → links → Pages.**~~ ⚖️ **SUPERSEDED 2026-08-17: upload ONE
-mod (the fix pack, with its FINAL preview) → link → Pages — and one decision is
-reopened first, the version call in the banner above (checklist 35 Q2).**
+mod (the fix pack, with its FINAL preview) → link → Pages.** ✅ The version call
+that briefly reopened ④ was ruled the same day (1.0.0, banner above) — **④ is
+decision-free again.**
 
 ---
 
@@ -243,7 +242,7 @@ directory** (checked in all three). Only the site repo does, and it is not a mod
 
 | mod | ships as | its changelog says | note |
 |---|---|---|---|
-| Community Fix Pack | ⚠️ renders **1.0.1** (`version_major=1, version_minor=0, version=1`) | "Initial release." | ❓ **REOPENED 2026-08-17 (checklist 35 Q2)** — this table's old "1.0" cell read major.minor only and hid the third digit. Recommendation: a clean **1.0.0** (set `'version', 0` — same reasoning as your opt-in ruling); harmless either way, but it must be deliberate, and it is one line + a tag move ONLY before the upload |
+| Community Fix Pack | ✅ **1.0.0** (`version_major=1, version_minor=0, version=0`) | "Initial release." | ✅ **RULED 2026-08-17 ("lets go with 1.0.0") and APPLIED** — the table's old "1.0" cell had read major.minor only and hid a third digit rendering 1.0.1; caught at solo-launch prep, routed, ruled the same day. Tag moved to `fixpack-v1.0.0` |
 | ~~Opt-In Modules~~ *(parked)* | **1.0** | "Initial release" | ✅ **RULED 2026-08-14 ("we go 1.0, especially with the amount of QA we have done") and APPLIED** — `metadata.lua` now 1.0.0 |
 | ~~Save Rescue~~ | **0.1** | "Initial pre-release" | ✅ consistent; not publishing at launch (item 17 hold-off) |
 
@@ -296,5 +295,5 @@ standing rules are live:
 | Packaging | ✅ item 23 done, measured (fix pack ships **79**) |
 | Site | ✅ built + audited + item-29 strike + 2026-08-17 one-mod parking applied, `mkdocs --strict` GREEN, ⛔ **nothing on the web**; needs step 2 then step 3 |
 | Preview art | ✅ **chosen 2026-08-14 — C1**, fix-pack FINAL file named in §0(a), size verified under both limits |
-| Decisions owed by you | **1** — the version call (checklist 35 Q2, banner above); everything else ruled |
-| Release tag | `fixpack-v1.0.1` placed 2026-08-17 on the final pre-upload tree (`WORKFLOW.md` §"Release marking"); ⛔ if you rule 1.0.0, the metadata line changes and the tag MOVES with it — record portal version → commit sha here at upload |
+| Decisions owed by you | **0** — the version call was ruled 1.0.0 the day it was raised |
+| Release tag | **`fixpack-v1.0.0`** placed 2026-08-17 on the final pre-upload tree (`WORKFLOW.md` §"Release marking"; the interim `fixpack-v1.0.1` tag was deleted when the ruling landed) — record portal version → commit sha here at upload |

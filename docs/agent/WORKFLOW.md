@@ -969,7 +969,7 @@ git push origin <tag>
 **To reproduce what a player is running** — never disturb `main`:
 
 ```
-git worktree add ../SMR-FixPack-shipped fixpack-v1.0.1
+git worktree add ../SMR-FixPack-shipped fixpack-v1.0.0
 ```
 …then point the junction at that worktree for the investigation and put it back
 afterwards. ⚠️ While it is pointed there, **the rig is running the shipped code,
@@ -978,7 +978,7 @@ not `main`** — no suite reading taken in that window describes current work.
 **Hotfix path**, created the day it is needed and not before:
 
 ```
-git checkout -b hotfix/fixpack-1.0.2 fixpack-v1.0.1
+git checkout -b hotfix/fixpack-1.0.1 fixpack-v1.0.0
 ```
 …fix, ship, tag, merge back to `main`.
 
