@@ -29,6 +29,38 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐ NEW 2026-08-17 — THE RENAME IS DECIDED AND WRITTEN. One 30-second check is yours.
+
+36. ❓ **Search the in-game Mod Manager for "Relaunched Fix Pack" before it goes
+    out.** You picked the name, I swept for collisions and found none — but the
+    Paradox Mods catalogue is the one place I genuinely cannot read (those pages
+    are built by JavaScript and no search engine has them). **Thirty seconds in
+    the Mod Manager settles it and nothing else can.**
+
+    ✅ **Everything else is decided and the prompt is written.**
+    `agent/prompts/RENAME_RELAUNCHED_FIX_PACK_fable.md` renames the display name
+    across every live surface — 72 occurrences in 26 files here, plus the site —
+    and **⛔ touches no GitHub repo, remote or org**, exactly as you ruled.
+
+    ⭐ **For the record, since it will come up:** we are not the ones who copied.
+    Our first commit is **24 July** with the tracker already carrying 29
+    findings; his repository starts **4 August**. Two people reached for the same
+    plain words. The prompt is explicit that this rename is courtesy and clarity,
+    and that **no public page of ours mentions his mod or explains why we
+    renamed.**
+
+    ⚠️ **One small call I did not make for you, inside the prompt.** The mod's
+    internal id and its log tag both still say `CommunityFixPack`. Neither is
+    something a player ever searches. **My recommendation is to leave both
+    alone** — for the same reason you gave about GitHub: risk without reward.
+    Every archived log and every baseline this project compares against greps
+    that exact bracketed token, the Save Rescue tool removes things by name, and
+    changing it would make no future test comparable to any past one. A bug
+    reporter might briefly wonder why the log says one thing and the mod says
+    another; that is the entire downside.
+
+    ⇒ **Nothing else is owed from you on the rename.**
+
 ### ⛔⛔ 2026-08-17 — SOLO LAUNCH: ✅ the parking work is DONE; one question left before you upload
 
 35. ✅ **The prep prompt ran the same evening and everything mechanical is
