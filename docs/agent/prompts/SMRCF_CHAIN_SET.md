@@ -69,6 +69,18 @@ including the two leads we rejected and the one we killed, is
 `C:\Dev\_ref\smr-community-fixes` is not ours to maintain: never a submodule,
 never committed, never named in a shipped doc.
 
+## ⭐ And one standalone prompt, outside the set — run it BEFORE ④
+
+`agent/prompts/PUBLIC_DOCS_CHECKUP_fable.md` — a pre-upload sweep of every
+player-facing surface (site ×5, three store cards, three `metadata.lua`
+descriptions) for accuracy, forgotten updates, readability and flow. **Not part
+of any chain, not gated on anything, and unlike everything above it is
+time-sensitive**: these pages ship the moment ④ happens.
+
+It already carries three confirmed findings as seeds — a live page that
+contradicts itself about how many fixes are judgment calls, and a suite count
+that is wrong on two surfaces for the second time.
+
 ## Kickoff lines
 
 Start any chain by opening a fresh session at the named file and saying so:
@@ -77,3 +89,4 @@ Start any chain by opening a fresh session at the named file and saying so:
 - **B** → `docs/agent/prompts/smrcf-text/01_BUILD_opus.md` — *"run the smrcf text chain"*
 - **C** → `docs/agent/prompts/smrcf-modbrowser/01_SPEC_fable.md` — *"run the mod browser chain"*
 - **D** → `docs/agent/prompts/jumbo-cave/01_FEASIBILITY_opus.md` — *"run the jumbo cave chain"*
+- **docs checkup** → `docs/agent/prompts/PUBLIC_DOCS_CHECKUP_fable.md` — *"run the public docs checkup"*

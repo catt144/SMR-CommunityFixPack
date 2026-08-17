@@ -136,6 +136,34 @@ owed input stays here no matter how struck-through it looks.
     word and it is a one-line change.
     → `agent/prompts/SMRCF_CHAIN_SET.md` has the map and the kickoff lines.
 
+    ⚠️⚠️ **AND ONE THING THAT IS *NOT* POST-LAUNCH — I FOUND STALE TEXT ON THE
+    LIVE PAGES WHILE WRITING THESE.** You asked for a checkup of the public
+    docs; ten minutes into scoping it, three things were already wrong:
+    * **The FAQ contradicts itself about how many fixes are judgment calls** —
+      it says *"Six fixes are judgment calls"* in one paragraph and *"Five"*
+      fifteen lines later, and five is correct. That is the F85 removal sweep
+      missing an instance, and it is on a page a player reads.
+    * **"A suite of 95 checks"** appears on the store card **and** in its source
+      record. The measured number is **96**. 95 was a prediction we made when
+      F85 came out; the real re-measurement came back higher because the farm
+      probe landed. This number has now been wrong twice.
+    * Assume more survived the same sweep — counts moved on six surfaces at once
+      that day.
+
+    ⇒ **`agent/prompts/PUBLIC_DOCS_CHECKUP_fable.md` is written and waiting**,
+    and unlike the four chains it is **time-sensitive: these pages ship the
+    moment you upload.** It sweeps all five site pages, the three store cards
+    and the three in-mod descriptions for accuracy, forgotten updates,
+    readability and flow — plus a route check on every "you can do X"
+    instruction, which is the class of error you overturned once before after
+    three reviews had passed it. It costs you nothing to run.
+
+    ⭐ It also carries one genuinely new note for your upload sheet: the mod
+    browser caches preview images by mod id **and version only**, so **if you
+    ever swap a preview after publishing without bumping the version, everyone
+    who already saw it keeps the old picture.** Worth knowing while you are
+    standing at the upload form.
+
 ### ⭐⭐ NEW 2026-08-15 (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from you would explain that.
 
 33. ✅✅ **ANSWERED BY YOU THE SAME EVENING, AT THE KEYBOARD — and then you went
