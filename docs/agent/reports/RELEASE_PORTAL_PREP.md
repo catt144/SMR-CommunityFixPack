@@ -37,6 +37,12 @@ candidates without opening the game (designed Mars backdrops, no screenshot
 needed), and **you picked C1 for both mods, 2026-08-14**. The files to upload:
 
 * `docs/agent/reports/preview_art/FINAL_fixpack_preview.png` (40 KB)
+  ⭐ **2026-08-17, at the sitting: this is now WIRED IN, not just chosen.** It was
+  copied to the mod root as `preview.png` (1024×1024, 44,322 bytes) and
+  `metadata.lua` gained `'image', "Mod/SMR_CommunityFixPack/preview.png"` —
+  ⛔ without it the Paradox upload is hard-rejected before it packs anything
+  (§0.5(a)). The `preview_art/` copy stays as the record; the root copy is what
+  ships (packaging **79 → 80**, §4).
 * ~~`docs/agent/reports/preview_art/FINAL_optin_preview.png` (37 KB)~~ —
   *PARKED 2026-08-17: not uploaded at this launch; stays chosen for the day
   the opt-in ships*
@@ -87,6 +93,75 @@ decision-free again.**
 
 ---
 
+## 0.5 ⛔⛔ UPLOAD MECHANICS — READ BEFORE YOU OPEN THE MOD EDITOR (added 2026-08-17 at the sitting)
+
+**Three things about the game's own upload code decide whether you ship 1.0.0 or
+1.0.1, and none of them were on this sheet before.** All read at Src, by symbol.
+
+### (a) ✅ FIXED THIS SITTING — the upload would have been hard-rejected
+
+`metadata.lua` had **no `image` field at all**, and `ParadoxMods.lua:39-42`
+fails the upload before it packs anything: *"Missing mod Preview image"*. Steam
+does not reject, but uploads with no thumbnail (`SteamWorkshop.lua:113`).
+⇒ The chosen art is now wired in: `preview.png` at the **mod root**, referenced
+as `'image', "Mod/SMR_CommunityFixPack/preview.png"`.
+
+⚠️ **It was written BY HAND, on purpose — do not re-set it in the Mod Editor.**
+`content_path` is `ModContentPath .. id .. "/"` (`Mod.lua:1758`) and the folder is
+mounted there (`:859-860`), so that path resolves; and because the string starts
+with `Mod/`, `FixRelativePaths` skips it (`:577`) and nothing is rewritten in
+memory on load. **The mod therefore loads CLEAN** — which is the entire point,
+per (b).
+
+### (b) ⛔⛔ EVERY MOD EDITOR SAVE BUMPS THE VERSION
+
+`ModDef:SaveDef` runs **`self.version = self.version + 1`** (`Mod.lua:967`) on
+every save that is not `serialize_only`. Our `version=0` ⇒ a single save ships
+**1.0.1**, against the owner's ruled 1.0.0, and orphans the `fixpack-v1.0.0` tag.
+`ValidateModBeforeUpload` *forces* that save if the mod is dirty
+(`GedModEditor.lua:836-844`), and a save also **regenerates `metadata.lua` from
+memory — every hand-written comment in it is lost**. ✅ `ignore_files` SURVIVES
+(a real saved property, `Mod.lua:255`), so item 23 is not at risk.
+
+⇒ **At the editor, before pressing anything: confirm the version reads 1.0.0 and
+the preview thumbnail is populated. If you are prompted *"The mod needs to be
+saved before uploading"*, STOP** — something dirtied the mod and the number is
+about to move.
+
+### (c) ⛔⛔ THE TWO PORTALS SAVE AT DIFFERENT MOMENTS ⇒ PARADOX GOES FIRST
+
+Both portals call `SaveWholeMod()` unavoidably on a *first* upload (`steam_id`
+defaults to 0, `SteamMods.lua:50-61`; `pdx_id` unset). **But not at the same
+point in the sequence, and that decides what is inside the package:**
+
+| portal | when it saves | what the portal receives |
+|---|---|---|
+| **Paradox Mods** | **AFTER** the content upload returns — `mod.pdx_id = res.ModId; mod:SaveWholeMod()` (`ParadoxMods.lua:167-173`) | ✅ the pack is built from the tree **exactly as tagged, at 1.0.0** |
+| **Steam Workshop** | **BEFORE** packing — `Steam_PrepareForUpload` creates the item then saves (`SteamWorkshop.lua:17-22`), and `CreatePackageForUpload` runs after | ⛔ the bump is **inside** the package ⇒ ships **1.0.1** |
+
+⇒ ⛔ **Paradox Mods first is not a preference.** Steam first would bump the tree
+to 1.0.1 and Paradox would then receive 1.0.2.
+
+**After the Paradox upload the tree sits at `version=1`.** For Steam to also ship
+1.0.0: close the game, set `version = -1` on disk, relaunch — Steam's forced save
+lands it on 0 and packs 1.0.0. ⚖️ **Owner's call**; the alternative is accepting
+Steam at 1.0.1, and it can be decided after Paradox is done. ⛔ Do not run both
+uploads in one session without deciding: Steam would ship **1.0.2**.
+
+⚠️ **Cosmetic, but you will see it.** Paradox is sent
+`VersionDisplayName = tostring(mod.version)` (`ParadoxMods.lua:156`) — the
+**revision integer alone**, so the portal page gets `"0"`, not `"1.0.0"`. The
+in-game browser renders the real 1.0.0 from `PackVersion`. Edit that field on the
+portal page if it lets you.
+
+### (d) ⭐ Two ids get written back, and they are how updates find the store entries
+
+The forced saves write `pdx_id` / `PdxMod` / `pdx_version` and `steam_id` into
+`metadata.lua`. **Commit them.** Losing them means a future update cannot target
+the published mod. Restore the stripped comments from git in the same commit.
+
+---
+
 ## 1. The order of operations — links only exist after the step that creates them
 
 ⛔ **Do not reorder these.** Each step's output is the next step's input, and
@@ -94,7 +169,7 @@ doing them backwards means going back to edit a live page.
 
 | # | step | what it creates | who |
 |---|---|---|---|
-| 1 | **Upload the fix pack** (⛔ not the opt-in — parked 2026-08-17; ⛔ not Save Rescue — held in reserve, item 17) | ⭐ the **store URL**. It does not exist until now | you |
+| 1 | **Upload the fix pack** — ⛔ **Paradox Mods FIRST, Steam second (§0.5(c))**; ⛔ not the opt-in (parked 2026-08-17); ⛔ not Save Rescue (held in reserve, item 17) | ⭐ the **store URL**, one per portal. It does not exist until now | you |
 | 2 | **Put the store links into the site pages** | the site stops saying "no store links yet" | ⛔ **agent work, ~10 min, already filed** — see §5 |
 | 3 | **Switch GitHub Pages on** | ⭐ the **site URL**. GitHub prints it on the Pages settings screen — copy it from there, do not type it | you |
 | 4 | **Fill the site links into the store card** and re-save it | the card's FILL-IN markers close | you |
@@ -273,6 +348,21 @@ file list, so the true figure is **79 = 76 `Code/*.lua` + `items.lua` +
 `metadata.lua` + `LICENSE`**. Counts re-emitted with `--emit-counts`, not
 hand-adjusted.
 
+⭐ **2026-08-17 AT THE SITTING — IT NOW SHIPS 80.** `preview.png` was added at the
+mod root to satisfy the `image` field (§0.5(a)), so **80 = 76 `Code/*.lua` +
+`items.lua` + `metadata.lua` + `LICENSE` + `preview.png`**. ⛔ Re-simulated over
+the real tree against the shipped `ignore_files` (same method as the table
+above), not hand-adjusted — the run enumerated 7,726 files and filtered 7,646,
+and the 76 `Code/*.lua` reconciles to `doccheck --emit-counts` exactly.
+⚠️ **Still a SIMULATION, not the engine.** `MatchWildcard` has no Lua body, so
+whether `*` crosses `/` — which decides whether `*/docs/*` filters the whole
+`docs/` tree or only its top level — remains the open question
+`WORKFLOW.md` §882-887 has owed since 08-13. **One `DbgPackMod` run at the
+sitting settles it, and the console is free inside the Mod Editor**
+(`archive/CHEATS_INVENTORY.md`). ⛔ Do it BEFORE the upload, and note
+`DbgPackMod` itself calls `SaveWholeMod()` if the mod is dirty (§0.5(b)) — so the
+version guard applies to it too.
+
 ⚠️ **`LICENSE` still ships, deliberately.** Item 23 listed it among the misses,
 but the rescue mod — built later — states *"LICENSE ships on purpose"*, and a
 licence inside the package is right. All three now agree. **Say the word if you
@@ -295,7 +385,7 @@ directory** (checked in all three). Only the site repo does, and it is not a mod
 
 | item | what | when |
 |---|---|---|
-| **Store links into the site** | `content/install.md` opens with *"No store links yet — this page gets the links when they exist."* One admonition to replace, plus store buttons on the landing page if wanted | step 2, after upload |
+| **Store links into the site** | `content/install.md` opens with *"No store links yet — this page gets the links when they exist."* One admonition to replace, plus store buttons on the landing page if wanted. ⭐ **2026-08-17: the owner is uploading to BOTH portals, so this is TWO links (Paradox Mods + Steam Workshop), not one** — the page's wording must carry both | step 2, after upload |
 | ✅ ~~**Save Rescue's repo README is stale**~~ | **CLOSED 2026-08-17** — re-read at source: its Status section already carries the 2026-08-14 attended pass, witnessed dialogs included; whoever fixed it never retired this row. ⚠️ The genuinely stale line was in that repo's `CLAUDE.md` ("attended pass still owed"), corrected 2026-08-17 with the correction noted in place | done |
 | ✅ ~~**`Opt_DroneOverhaul.lua`'s header comment** names the old *"Mod Options → Community Fix Pack"* path~~ | **FIXED 2026-08-17** under the owner's widened rename license — now *"Relaunched Fix Pack: Opt-In Modules"* (family name and missing suffix both corrected) | done |
 | ✅ ~~**This repo's own `README.md` is stale far beyond its name**~~ | **REWRITTEN 2026-08-17** on the owner's instruction ("update the readme with whatever is needed"): the ghost optional-modules section is gone, every count re-emitted this sitting (75 modules · 96 checks · 167 tracked findings), the false console-disable claim replaced with the accurate veto-mod mechanism, install/restart/achievements wording aligned to the audited surfaces, and the bug-report route (item 27) added | done |
@@ -308,17 +398,41 @@ and not something already done.
 
 ## 6. Save hygiene at the sitting — `EF-051`, and whether it touches you
 
-**It does not touch ④ as scoped.** Uploading a mod page, pasting text and
-switching Pages on never open the game and never touch a savegame.
+⛔⛔ **CORRECTED 2026-08-17 AT THE SITTING — THE PARAGRAPH BELOW WAS WRONG, AND
+IT WAS WRONG IN THE DIRECTION THAT COSTS A FILE.** It said ④ never opens the
+game. **It does: the upload route IS the in-game Mod Editor**
+(`WORKFLOW.md:901`; `CreatePackageForUpload` is game-side,
+`GedModEditor.lua:678-741`). ⇒ **`EF-056` is LIVE for this sitting.**
+
+✅ **Pre-copy DONE 2026-08-17 before any launch.** The two autosave-tagged files
+on disk — `Autosave Sol 406` (56,195,934 B, MD5 `392cbaaa…`) and
+`Autosave Sol 411` (56,195,463 B, MD5 `2c645da1…`) — were byte-copied and
+verified MD5-identical. ⛔ **The copies live OUTSIDE the save directory**, because
+`EF-056`'s own amendment says a byte copy of an autosave *is* an autosave to the
+rotation: copies kept inside would join the firing line.
+⚠️ **Reconcile by name after EVERY launch, not just the one you expect to fire.**
+ℹ️ Exposure is genuinely low if the sitting never loads a campaign (the rotation
+is driven by a loaded campaign's own autosave timer) — but "probably won't fire"
+is how `Autosave Sol 306` was lost, and the pre-copy costs seconds.
+
+~~**It does not touch ④ as scoped.** Uploading a mod page, pasting text and
+switching Pages on never open the game and never touch a savegame.~~
 
 ⚠️ **It touches ④ the moment the capture sitting rides along** (§0(a) — and it
 probably should, since the preview art needs the game anyway). In that case, both
 standing rules are live:
 
-* ⛔ **`EF-051` — Steam Cloud is ON**, at your own request and temporarily, so a
+* ⛔ ~~**`EF-051` — Steam Cloud is ON**, at your own request and temporarily, so a
   save deleted with the game closed comes back on the next launch. Nothing is
-  called *gone*; close-outs say **"deleted, listing verified"**. `CP60RT` and
-  `Autosave Sol 311` are **HELD** and must survive the day.
+  called *gone*; close-outs say **"deleted, listing verified"**.~~ ⚖️ **STALE,
+  corrected 2026-08-17: the `EF-051` hold was LIFTED 08-14 (owner: cloud OFF)** —
+  "gone — NAMED listing" is allowed again, and the falsifier is any stray at the
+  next launch. `CP60RT` is **HELD** and present. ⚠️ **`Autosave Sol 311` is NOT on
+  disk** and is removed from the held list here: the autosaves have since rotated
+  ~100 sols on (406/411), so this is old rotation and nothing from this sitting —
+  but a held list naming a file that no longer exists is worse than no list.
+  Save directory stood at **81** files at the pre-copy (last by-name
+  reconciliation was 77, 08-15).
 * ⛔ **`EF-056` — a byte copy of an autosave is still an autosave**, and its
   rotation deletes real ones. It ate `Autosave Sol 306` for good and took
   `Sol 311` twice more during the last sitting. **Pre-copy every autosave before
@@ -336,7 +450,10 @@ standing rules are live:
 | Save Rescue card | ✅ **held in reserve** (17 hold-off) — audit-corrected contingency draft, nothing pasted at launch |
 | Uninstall story | ✅ reconciled; **four** defects in the inherited draft found and corrected — three by assembly, the missing save step by the audit (`RELEASE_UNINSTALL_ASSEMBLY.md` §2) |
 | `metadata.lua` (fix pack) | ✅ solo-launch strings applied and re-counted 2026-08-17 (779 / 16); no opt-in reference survives in any player string |
-| Packaging | ✅ item 23 done, measured (fix pack ships **79**) |
+| Packaging | ✅ item 23 done, re-simulated 2026-08-17 (fix pack ships **80** — 79 + the new `preview.png`); ⚠️ the `*/docs/*` wildcard question is still owed one `DbgPackMod` run at the sitting (§4) |
+| Preview `image` field | ✅ **ADDED 2026-08-17** — was MISSING and would have hard-rejected the Paradox upload (§0.5(a)); written by hand so the mod loads clean |
+| Version guard | ⛔ **LIVE RISK, §0.5(b)+(c)** — any editor save bumps 1.0.0 → 1.0.1. **Paradox Mods uploads FIRST**; Steam's own prepare saves before packing, so it needs `version = -1` in a fresh session to also ship 1.0.0 ⇒ ⚖️ **one owner call, decidable after Paradox** |
+| `EF-056` pre-copy | ✅ **DONE 2026-08-17** — both autosave-tagged files copied outside the save dir, MD5-verified (§6). ⛔ §6's "④ never opens the game" was wrong and is corrected |
 | Site | ✅ built + audited + item-29 strike + 2026-08-17 one-mod parking applied, `mkdocs --strict` GREEN, ⛔ **nothing on the web**; needs step 2 then step 3 |
 | Preview art | ✅ **chosen 2026-08-14 — C1**, re-lettered 2026-08-17 to the new name (§0(a)), fix-pack FINAL file named in §0(a), size verified under both limits |
 | Decisions owed by you | **0** — the version call was ruled 1.0.0 the day it was raised |

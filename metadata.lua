@@ -47,6 +47,24 @@ return PlaceObj('ModDef', {
 	'last_changes', "Initial release.",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
+	-- ⭐ ADDED 2026-08-17 AT THE UPLOAD SITTING (④ step 1). Without it the
+	-- Paradox Mods upload is HARD-REJECTED before it packs anything —
+	-- `ParadoxMods.lua:39-42` fails on `mod.image == ""` with "Missing mod
+	-- Preview image"; Steam does not reject but uploads with no thumbnail
+	-- (`SteamWorkshop.lua:113`). The file is the C1 art chosen 2026-08-14 and
+	-- re-lettered 2026-08-17 for the rename, copied to the mod root from
+	-- docs/agent/reports/preview_art/FINAL_fixpack_preview.png (1024×1024,
+	-- 44,322 bytes — under both recorded limits, PDX ≤2 MB / Steam ≤1 MB).
+	-- ⚠️ WRITTEN BY HAND, NOT SET IN THE MOD EDITOR, AND THE PATH FORM MATTERS:
+	-- `content_path` is `ModContentPath .. id .. "/"` (Mod.lua:1758) and the
+	-- folder is mounted there (Mod.lua:859-860), so this resolves. Starting the
+	-- string with `Mod/` also makes `FixRelativePaths` skip it (Mod.lua:577), so
+	-- nothing is rewritten in memory on load and the mod stays CLEAN — which is
+	-- the whole point: any Mod Editor save runs `self.version = self.version + 1`
+	-- (Mod.lua:967) and would ship 1.0.1 against the owner's ruled 1.0.0.
+	-- ⛔ The copy at docs/agent/reports/preview_art/ is the RECORD and stays;
+	-- this root copy is what ships (packaging 79 → 80).
+	'image', "Mod/SMR_CommunityFixPack/preview.png",
 	-- ✅ RULED 2026-08-17 (owner, checklist 35 Q2: "lets go with 1.0.0"):
 	-- first public release is a clean 1.0.0, matching the opt-in ruling's
 	-- logic. PackVersion renders version_major.version_minor.version.
