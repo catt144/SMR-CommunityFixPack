@@ -1,4 +1,4 @@
-# Manual Playtest Checklist — Community Fix Pack
+# Manual Playtest Checklist — Relaunched Fix Pack
 
 **Who this is for:** the project owner, playing the real retail game **with a
 live agent session alongside**. This file is the work list and nothing else:
@@ -29,37 +29,60 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⭐ NEW 2026-08-17 — THE RENAME IS DECIDED AND WRITTEN. One 30-second check is yours.
+### ⭐ 2026-08-17 — THE RENAME IS DONE, EVERYWHERE A PERSON LOOKS. ✅ Your two calls came back the same day; nothing is owed.
 
-36. ❓ **Search the in-game Mod Manager for "Relaunched Fix Pack" before it goes
-    out.** You picked the name, I swept for collisions and found none — but the
-    Paradox Mods catalogue is the one place I genuinely cannot read (those pages
-    are built by JavaScript and no search engine has them). **Thirty seconds in
-    the Mod Manager settles it and nothing else can.**
+36. ✅ **RULED 2026-08-17, both calls, same sitting.** (1) **You searched the
+    in-game Mod Manager and "Relaunched Fix Pack" is free** — the one check no
+    tool could run, done; the name is committed. (2) **Sibling titles: "rename
+    them now"** — applied the same hour, one title line in each repo: the
+    opt-in `metadata.lua` now says *"Relaunched Fix Pack: Opt-In Modules"* and
+    Save Rescue's says *"Relaunched Fix Pack: Save Rescue"* (the family form
+    you pre-approved in item 26, landing early on your word). ⛔ Title lines
+    only, per the fence — each file's `description` still names the old family
+    and carries a comment forcing that sweep before it ever uploads.
+    ~~Search the in-game Mod Manager for "Relaunched Fix Pack" before it goes
+    out — the Paradox Mods catalogue is the one place I genuinely cannot read.~~
 
-    ✅ **Everything else is decided and the prompt is written.**
-    `agent/prompts/RENAME_RELAUNCHED_FIX_PACK_fable.md` renames the display name
-    across every live surface — 72 occurrences in 26 files here, plus the site —
-    and **⛔ touches no GitHub repo, remote or org**, exactly as you ruled.
+    ✅ **The rename itself is DONE, same day** — every live surface in both
+    repos now says **Relaunched Fix Pack**: the `metadata.lua` title that
+    ships, the store card and its source record (re-proven identical by diff),
+    the site's five pages, both playtest docs, the launch sheet, the in-game
+    "fixes stood down" dialog, README and LICENSE. The true count was **113
+    occurrences in 43 files** against the prompt's surveyed 72 — line-wrapped
+    names hide from search — **and two of them were pictures: both preview
+    images had the old name painted into the art.** They are re-lettered in
+    the same design and typeface, and the originals are kept beside them.
+    Every count the text moved was re-measured (title 18 → 19 characters; card
+    body 10,781 → 10,782; nothing else moved), and **⛔ no GitHub repo, remote
+    or org was touched**, exactly as you ruled. Historical records keep the old
+    name on purpose — CLAUDE.md now carries the translate-mentally note.
 
-    ⭐ **For the record, since it will come up:** we are not the ones who copied.
-    Our first commit is **24 July** with the tracker already carrying 29
-    findings; his repository starts **4 August**. Two people reached for the same
-    plain words. The prompt is explicit that this rename is courtesy and clarity,
-    and that **no public page of ours mentions his mod or explains why we
-    renamed.**
+    ✅ ~~The one timing call routed to you: the other two mods' internal
+    titles~~ — **ruled above: renamed now, applied.** The description strings
+    in both sibling repos stay for their own launch sessions (tripwires in
+    place: the park record's restore step, `STORE_METADATA_STRINGS`' rename
+    note, and a comment in each sibling `metadata.lua`).
 
-    ⚠️ **One small call I did not make for you, inside the prompt.** The mod's
-    internal id and its log tag both still say `CommunityFixPack`. Neither is
-    something a player ever searches. **My recommendation is to leave both
-    alone** — for the same reason you gave about GitHub: risk without reward.
-    Every archived log and every baseline this project compares against greps
-    that exact bracketed token, the Save Rescue tool removes things by name, and
-    changing it would make no future test comparable to any past one. A bug
-    reporter might briefly wonder why the log says one thing and the mod says
-    another; that is the entire downside.
+    ⚠️ **One small call I did not make for you.** The mod's internal id and its
+    log tag both still say `CommunityFixPack`. Neither is something a player
+    ever searches. **My recommendation is to leave both alone** — for the same
+    reason you gave about GitHub: risk without reward. Every archived log and
+    every baseline this project compares against greps that exact bracketed
+    token, the Save Rescue tool removes things by name, and changing it would
+    make no future test comparable to any past one. A bug reporter might
+    briefly wonder why the log says one thing and the mod says another; that
+    is the entire downside.
 
-    ⇒ **Nothing else is owed from you on the rename.**
+    ⭐ **For the record, since it will come up:** we are not the ones who
+    copied. Our first commit is **24 July** with the tracker already carrying
+    29 findings; his repository starts **4 August**. Two people reached for the
+    same plain words. This rename is courtesy and clarity, and **no public page
+    of ours mentions his mod or explains why we renamed.** *(While in there:
+    two records cited his mod as Paradox Mods 153410 — that is his older *Bug
+    Fixes* mod; corrected to 154004 per your screenshot.)*
+
+    ⇒ **Owed from you: the Mod Manager search above, and the sibling-titles
+    timing call. Nothing else.**
 
 ### ⛔⛔ 2026-08-17 — SOLO LAUNCH: ✅ the parking work is DONE; one question left before you upload
 
@@ -1107,7 +1130,9 @@ open decisions are back to the **3** standing non-release items.)*
     is now archived in the repo (it was load-bearing and only on the rotation).
     ✅ ~~Still yours, none blocking: the display name · the OFF default~~
     **BOTH DECIDED 2026-08-13, your rulings:** display name =
-    **"Community Fix Pack: Opt-In Modules"** (family-prefixed so the two mods
+    **"Community Fix Pack: Opt-In Modules"** *(the family prefix was renamed by
+    your 2026-08-17 ruling, item 36 — the name is now "Relaunched Fix Pack:
+    Opt-In Modules")* (family-prefixed so the two mods
     sort together — swept the same day across all 15 player-visible sites in
     11 files, parse sweep GREEN, pushed `e17586b`; mod id / global / log tag
     unchanged, they are save contract) · **default-OFF RATIFIED** (as built
@@ -1258,7 +1283,9 @@ deleted when the chain closes).
     disappears the next time you save. It will be said plainly in the mod's
     description rather than papered over.
     ✅ **RULED 2026-08-15: the display name becomes "Community Fix Pack: Save
-    Rescue" — pre-approved, applied only IF the tool ever publishes.** Your
+    Rescue" — pre-approved, applied only IF the tool ever publishes** *(the
+    family prefix was renamed by your 2026-08-17 ruling, item 36, so the name
+    to apply at publish is now "Relaunched Fix Pack: Save Rescue")*. Your
     words: *"This is fine for if we ever need it."* ⛔ **Deliberately NOT applied
     today:** item 17 holds the tool unpublished, so the rename rides the
     pre-upload pass that the contingency already mandates — the same pass that
@@ -2846,7 +2873,7 @@ open debt. → [F86](agent/bugs/F86.md), `agent/FIX_POLICY.md` §3.
 minutes.
 **Setup:**
 1. Play a few sols, save.
-2. Quit → disable the Community Fix Pack ONLY in the Mod Manager (Test Kit
+2. Quit → disable the Relaunched Fix Pack ONLY in the Mod Manager (Test Kit
    stays) → restart, load.
 3. 10 minutes of ordinary play, one save/reload — the save must behave
    normally (the original bugs coming back is expected and fine).

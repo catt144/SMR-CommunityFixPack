@@ -11,7 +11,9 @@ same commit (`git show <sha>:docs/agent/prompts/COVERAGE_SWEEP_SMRCF.md`).
 
 The owner asked for the pack to be *"fully fledged, one mod fix all"*. A
 title-to-title comparison on 2026-08-16 put `fredware`'s **SMR Community Fixes**
-(Paradox Mods 153410) at 15 modules, eight overlapping our corpus and seven not.
+(Paradox Mods **154004** — ⚠️ this record originally said 153410, which is his
+older *Bug Fixes* mod for the original game; corrected 2026-08-17 against the
+owner's screenshot) at 15 modules, eight overlapping our corpus and seven not.
 Those seven were the subject. The method was the owner's own framing:
 
 > *"The only thing I am proposing is we look at his fixes, compare it to game

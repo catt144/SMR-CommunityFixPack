@@ -1,4 +1,4 @@
-# Community Fix Pack — Surviving Mars: Relaunched
+# Relaunched Fix Pack — Surviving Mars: Relaunched
 
 A bug-fix mod: every fix repairs a verified defect in the game's shipped Lua,
 patched at runtime; no game files are modified. Map of the tree:
@@ -18,6 +18,10 @@ is GENERATED — edit the entry or fact file, never the index** (line-1 banner).
 > `docs/agent/ENGINE_FACTS.md` → `docs/agent/facts/`. Pre-restructure
 > documents cite the old paths; translate mentally, do not edit records.
 > Renamed 2026-08-03: `FABLE_NEXT_PROMPT.md` → `agent/prompts/GENERAL_USE_PROMPT.md`.
+> 2026-08-17: the pack was renamed **Community Fix Pack → Relaunched Fix Pack**
+> (display name only; the mod `id` and `[CommunityFixPack]` log tag are
+> unchanged). Earlier records use the old name — translate mentally, do not
+> edit records.
 
 Before committing doc changes run `python tools/doccheck.py`; red blocks. Set up
 once: `git config core.hooksPath tools/hooks`. **Owner decisions go in

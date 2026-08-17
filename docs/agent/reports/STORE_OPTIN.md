@@ -1,4 +1,4 @@
-# Store description — Community Fix Pack: Opt-In Modules (build, release item ③)
+# Store description — Relaunched Fix Pack: Opt-In Modules (build, release item ③)
 
 **Built 2026-08-13 by `agent/prompts/public-docs/03_BUILD_STORE.md`**, in the
 same voice and the same sitting as `STORE_FIXPACK.md`. Design:
@@ -18,12 +18,12 @@ is governed by chain rule 4. `⛔ HOLE` markers are not publishable.
 
 ═══════════════════════════ PLAYER TEXT — BEGIN ═══════════════════════════
 
-## Community Fix Pack: Opt-In Modules — Surviving Mars: Relaunched
+## Relaunched Fix Pack: Opt-In Modules — Surviving Mars: Relaunched
 
 Eight opt-in modules for *Surviving Mars: Relaunched* — every one of them off,
 or sitting at the game's own setting, until you turn it on.
 
-**What this is, and why it is a separate mod.** Its companion, the *Community
+**What this is, and why it is a separate mod.** Its companion, the *Relaunched
 Fix Pack*, sticks to repairing defects in the game's own code: it carries no
 preferences and no features, and where it had to make a judgment call it says so
 on its own page. These eight are the other side of that line — they change
@@ -42,7 +42,7 @@ a defect the game never had to handle. It is described below.)*
   they are settings, not switches, and their base positions are ordinary vanilla
   behaviour.
 - **The switches are in the game, on every platform.** *Options → Mod Options →
-  Community Fix Pack: Opt-In Modules*, from the main menu or in game, and they
+  Relaunched Fix Pack: Opt-In Modules*, from the main menu or in game, and they
   work with a controller. Toggles take effect as soon as you press Apply, in
   both directions — no restart needed. *(Turning the whole mod itself on or off
   in the mod manager is different: that takes effect after you restart the

@@ -1,4 +1,4 @@
-# Store description — Community Fix Pack (build, release item ③)
+# Store description — Relaunched Fix Pack (build, release item ③)
 
 **Built 2026-08-13 by `agent/prompts/public-docs/03_BUILD_STORE.md`.** Design:
 `PUBLIC_DOCS_DESIGN.md` (§4 tiers, §4.2 order, §4.4 no count, §4.5 vocabulary).
@@ -21,7 +21,7 @@ by guessing.**
 
 ═══════════════════════════ PLAYER TEXT — BEGIN ═══════════════════════════
 
-## Community Fix Pack — Surviving Mars: Relaunched
+## Relaunched Fix Pack — Surviving Mars: Relaunched
 
 Bug fixes for *Surviving Mars: Relaunched* — it repairs defects in the game's
 own code rather than rebalancing the game, and it is safe to add to a save you

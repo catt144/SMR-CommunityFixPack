@@ -25,7 +25,7 @@ defects.** Anything else drafted here needs the sweeps before it ships.
 
 | file | what was wrong |
 |---|---|
-| fix pack `metadata.lua` | *"Individual fixes can be disabled on PC (via the console or a companion mod)"* — **the console half is false** (`PUBLIC_DOCS_DESIGN.md` §9.1, owner-caught). It also named the sibling mod by its **dead working title**, *"Community Opt-In Pack"*; the decided name is *"Community Fix Pack: Opt-In Modules"* |
+| fix pack `metadata.lua` | *"Individual fixes can be disabled on PC (via the console or a companion mod)"* — **the console half is false** (`PUBLIC_DOCS_DESIGN.md` §9.1, owner-caught). It also named the sibling mod by its **dead working title**, *"Community Opt-In Pack"*; the name decided 2026-08-13 was *"Community Fix Pack: Opt-In Modules"* (renamed with the whole family 2026-08-17: now *"Relaunched Fix Pack: Opt-In Modules"*) |
 | opt-in `metadata.lua` | one clause of the uninstall instruction was incomplete in the way that costs a player their save — corrected in place; the rest is accurate but pre-dates the tiering |
 
 ⚠️ Neither string was counted against a store character limit; release prep
@@ -78,11 +78,22 @@ raise it.
 
 ## Opt-in modules — `SMR_CommunityOptInPack`
 
+> ⚖️ **2026-08-17 RENAME NOTE — read before pasting anything from this
+> section.** The display-name family was renamed *Community Fix Pack* →
+> *Relaunched Fix Pack* (owner ruling, checklist 36). The quoted strings below
+> are updated to the NEW name. The opt-in repo's `metadata.lua` `title` was
+> renamed the same day (owner's "rename them now" ruling), **but its
+> `short_description` and `description` still carry the old name** — string
+> edits beyond the title were fenced. Before the opt-in ever uploads, those
+> two strings must be brought to match these blocks. Original wording, preserved for the record: every
+> *"Relaunched Fix Pack"* in the two blocks below read *"Community Fix Pack"*
+> as applied 2026-08-13.
+
 **`short_description`** (tier 0, one sentence):
 
 > Eight opt-in modules for Surviving Mars: Relaunched — every one of them off,
 > or at the game's own setting, until you turn it on in Mod Options; works with
-> or without the Community Fix Pack.
+> or without the Relaunched Fix Pack.
 
 **`description`**:
 
@@ -94,11 +105,11 @@ raise it.
 > closest-hub-first drone dispatch overhaul (experimental), automatic cohort
 > housing for Seniors and Children, a Nursery/Retirement Dome policy, and two
 > drone stat dials for speed and carry capacity. Everything is switched in
-> Options → Mod Options → Community Fix Pack: Opt-In Modules, on every platform
+> Options → Mod Options → Relaunched Fix Pack: Opt-In Modules, on every platform
 > and with a controller, and toggles take effect immediately. Nothing is patched
 > on disk: the mod wraps the game's own code at runtime, and a module you leave
 > off behaves exactly like the unmodded game. Works with or without the
-> Community Fix Pack — neither needs the other. One thing to know before you
+> Relaunched Fix Pack — neither needs the other. One thing to know before you
 > ever uninstall: set both drone dials back to base and then save, because
 > setting them to base clears the boost from the colony you are playing and
 > saving is what clears it from the file.

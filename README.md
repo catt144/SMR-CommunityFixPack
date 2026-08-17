@@ -1,4 +1,4 @@
-# Community Fix Pack — Surviving Mars: Relaunched
+# Relaunched Fix Pack — Surviving Mars: Relaunched
 
 A bug-fix mod for Surviving Mars: Relaunched. Every fix targets a **verified
 defect in the game's shipped Lua source** — no balance changes, no opinions,
@@ -84,7 +84,7 @@ The full defect tracker (91 verified findings and counting) lives in
 ## For players
 
 Install to `%AppData%\Surviving Mars Relaunched\Mods\` and enable
-"Community Fix Pack" in the Mod Manager. To disable a single fix, create a tiny
+"Relaunched Fix Pack" in the Mod Manager. To disable a single fix, create a tiny
 mod that loads before this one containing e.g.
 `SMRFixPack_Disabled = { CaveInsNoDisasters = true }`, or run it in the console.
 Console command `SMRFixPack.ListFixes()` shows what's active.
@@ -101,7 +101,7 @@ the game handles like any other.
 ### Optional modules (off by default)
 
 Some things players ask for are deliberate design changes rather than bugs, so
-they ship switched off. Enable them in **Options → Mod Options → Community Fix
+they ship switched off. Enable them in **Options → Mod Options → Relaunched Fix
 Pack** (main menu or pause menu; toggles take effect immediately, both
 directions). Other mods can pre-seed the override table before this mod loads:
 

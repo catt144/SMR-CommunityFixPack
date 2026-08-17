@@ -16,11 +16,16 @@ plus the audit's save-step line) is decided then, before upload. Item 28 was
 closed "ship as built" by the same ruling.
 
 ⭐ **PRE-UPLOAD CHECKLIST for that day, owner-ruled, do not skip:**
-1. ✅ **Display name becomes "Community Fix Pack: Save Rescue"** (owner
-   2026-08-15, checklist 26: *"This is fine for if we ever need it"*) — so the
-   three mods sort together, as the opt-in pack already does. One line in
-   `metadata.lua`; sweep this card and every player-visible string with it.
-   ⛔ Mod id / global / log tag are save contract and do NOT change.
+1. ✅✅ **Display name "Relaunched Fix Pack: Save Rescue" — ALREADY APPLIED
+   2026-08-17**, ahead of any publish (the family-prefix form the owner
+   pre-approved 2026-08-15, checklist 26: *"This is fine for if we ever need
+   it"* — ruled then as "Community Fix Pack: Save Rescue"; the family was
+   renamed Community → Relaunched and the owner ruled "rename them now" the
+   same day, checklist 36; `metadata.lua` `title` edited in its repo) — so the
+   three mods sort together, as the opt-in pack already does. ⛔ Still owed at
+   publish: this mod's `description`/`short_description` still name the old
+   family — sweep them then, along with this card and every player-visible
+   string. ⛔ Mod id / global / log tag are save contract and do NOT change.
 2. Re-decide item 28's dialog text (the drone-dial line buried third of six).
 3. Add the audit's **save-step** sentence to the on-screen dialog string — the
    "load once … delete it again" flow never tells the player to SAVE, and only
@@ -57,8 +62,8 @@ is OFF and the publish workflow is `workflow_dispatch`-only.
 
 ## Save Rescue — Surviving Mars: Relaunched
 
-A one-shot cleanup tool for savegames that were played with the **Community Fix
-Pack** or the **Community Fix Pack: Opt-In Modules** and then lost them. Load
+A one-shot cleanup tool for savegames that were played with the **Relaunched
+Fix Pack** or the **Relaunched Fix Pack: Opt-In Modules** and then lost them. Load
 your save once, read what it tells you, save your game, and you can delete it
 again.
 
@@ -110,8 +115,8 @@ which is why you can delete the tool once you have saved.
 
 ### Which versions it knows about
 
-The list of what to remove was derived over the Community Fix Pack and the
-Community Fix Pack: Opt-In Modules as they stood when this tool was built, and
+The list of what to remove was derived over the Relaunched Fix Pack and the
+Relaunched Fix Pack: Opt-In Modules as they stood when this tool was built, and
 it includes older names that only earlier builds of those mods ever wrote — the
 too-old case is the one it is built for. It cannot tell which version of a pack
 wrote your save, so it does not try: **if you were using a Fix Pack released

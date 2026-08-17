@@ -1,4 +1,4 @@
-# Release description — Community Fix Pack (the file the owner pastes from at ④)
+# Release description — Relaunched Fix Pack (the file the owner pastes from at ④)
 
 **Assembled 2026-08-14 by `agent/prompts/release-3/01_BUILD_DESCRIPTIONS.md`.**
 This **supersedes `docs/archive/MOD_DESCRIPTION.md`** for this product. That file
@@ -94,7 +94,7 @@ way you rule.
 
 ═══════════════════════════ PLAYER TEXT — BEGIN ═══════════════════════════
 
-## Community Fix Pack — Surviving Mars: Relaunched
+## Relaunched Fix Pack — Surviving Mars: Relaunched
 
 Bug fixes for *Surviving Mars: Relaunched* — it repairs defects in the game's
 own code rather than rebalancing the game, and it is safe to add to a save you

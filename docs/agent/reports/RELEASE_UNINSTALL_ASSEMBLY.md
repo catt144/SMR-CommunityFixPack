@@ -119,7 +119,7 @@ later reader does not re-find it and file it twice.
 
 ═══════════════════════════ PLAYER TEXT — BEGIN ═══════════════════════════
 
-### Removing the Community Fix Pack
+### Removing the Relaunched Fix Pack
 
 1. **Back up your saves first.** Always, for any mod change — this is not
    specific to us.

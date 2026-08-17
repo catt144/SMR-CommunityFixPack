@@ -1,5 +1,12 @@
 return PlaceObj('ModDef', {
-	'title', "Community Fix Pack",
+	-- ⭐ RENAMED 2026-08-17 (owner ruling, checklist 36): "Community Fix Pack"
+	-- → "Relaunched Fix Pack", before first upload — a same-purpose mod named
+	-- "SMR Community Fixes" already exists on Paradox Mods (154004) and the
+	-- shared word invited mis-routed reports both ways. Display name ONLY: the
+	-- mod `id` below and the `[CommunityFixPack]` log tag are deliberately
+	-- unchanged (every archived log and gate baseline greps them; nothing
+	-- player-searchable contains them).
+	'title', "Relaunched Fix Pack",
 	-- ⚠️ REWRITTEN 2026-08-13 (owner instruction, public-docs chain prompt 3).
 	-- The previous `description` carried TWO defects that would have shipped:
 	-- it told players individual fixes can be disabled "via the console", which

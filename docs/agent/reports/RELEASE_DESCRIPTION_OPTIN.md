@@ -1,4 +1,4 @@
-# Release description — Community Fix Pack: Opt-In Modules (the file the owner pastes from at ④)
+# Release description — Relaunched Fix Pack: Opt-In Modules (the file the owner pastes from at ④)
 
 > ⛔⛔ **PARKED 2026-08-17 — NOT UPLOADED AT THIS LAUNCH.** The owner ruled the
 > fix pack ships ALONE; the opt-in mod is not ready and nothing publishes from
@@ -26,7 +26,7 @@ portal-prep sheet). ⛔ **Not published. Rule 5.**
 
 | n | where | needs | if it does not exist yet |
 |---|---|---|---|
-| **1** | "You do not need the fix pack for this" bullet | **store link** to the *Community Fix Pack* | delete the marker line — the sentence names the mod already |
+| **1** | "You do not need the fix pack for this" bullet | **store link** to the *Relaunched Fix Pack* | delete the marker line — the sentence names the mod already |
 | **2** | ~~end of "Your save, and removing the mod"~~ | ✅ **RESOLVED 2026-08-14 — owner ruled checklist 17 "hold off": the marker is DELETED from the text below**, per its default | nothing to do. The drafted sentence below stays as the ready text if Save Rescue ever launches as a contingency |
 | **3** | end of the "Acknowledged warnings" block | *optional* site link to the FAQ's fuller answer | delete the marker line. It is an offer of more detail, nothing depends on it |
 
@@ -75,12 +75,12 @@ a second thing to break.
 
 ═══════════════════════════ PLAYER TEXT — BEGIN ═══════════════════════════
 
-## Community Fix Pack: Opt-In Modules — Surviving Mars: Relaunched
+## Relaunched Fix Pack: Opt-In Modules — Surviving Mars: Relaunched
 
 Eight opt-in modules for *Surviving Mars: Relaunched* — every one of them off,
 or sitting at the game's own setting, until you turn it on.
 
-**What this is, and why it is a separate mod.** Its companion, the *Community
+**What this is, and why it is a separate mod.** Its companion, the *Relaunched
 Fix Pack*, sticks to repairing defects in the game's own code: it carries no
 preferences and no features, and where it had to make a judgment call it says so
 on its own page. These eight are the other side of that line — they change
@@ -94,13 +94,13 @@ a defect the game never had to handle. It is described below.)*
   works on its own, and they work together. We ran both ways round and measured
   it: this mod with the fix pack uninstalled, and the fix pack with this one
   uninstalled.
->>> FILL-IN 1 — store link to the Community Fix Pack, or DELETE THIS LINE <<<
+>>> FILL-IN 1 — store link to the Relaunched Fix Pack, or DELETE THIS LINE <<<
 - **Everything is off until you switch it on.** Seven modules ship off. The two
   drone dials ship at the game's own values, where they do exactly nothing —
   they are settings, not switches, and their base positions are ordinary vanilla
   behaviour.
 - **The switches are in the game, on every platform.** *Options → Mod Options →
-  Community Fix Pack: Opt-In Modules*, from the main menu or in game, and they
+  Relaunched Fix Pack: Opt-In Modules*, from the main menu or in game, and they
   work with a controller. Toggles take effect as soon as you press Apply, in
   both directions — no restart needed. *(Turning the whole mod itself on or off
   in the mod manager is different: that takes effect after you restart the

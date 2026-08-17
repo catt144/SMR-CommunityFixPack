@@ -65,6 +65,14 @@ upload (they cannot change without a re-upload).
 11. Editing done → re-measure, re-prove, doccheck + `mkdocs --strict`, and
     update checklist item 35 + `STATE.md`.
 
+⚠️ **Added by the 2026-08-17 rename:** before the opt-in uploads, check its
+repo's `metadata.lua` — the `title` was renamed the same day (owner's "rename
+them now" ruling), but its `short_description` and `description` still say
+*Community Fix Pack* and must be brought to the *Relaunched Fix Pack* family
+first (`STORE_METADATA_STRINGS.md` carries the ready wordings and its own
+rename note). The blocks below already speak the new name — see the integrity
+note above "The passages, VERBATIM".
+
 ## Already-proven at parking time (2026-08-17)
 
 | claim | proof |
@@ -90,11 +98,28 @@ Each block is the exact pre-edit text. `src=` names the file it came from;
 even if the page drifts. Blocks were byte-compared against the pre-edit files
 before the deletions were made.
 
+> ⚖️ **ONE DELIBERATE EDIT TO THE "VERBATIM" BLOCKS — 2026-08-17, the rename**
+> (owner ruling, checklist 36; brief
+> `git show <sha>:docs/agent/prompts/RENAME_RELAUNCHED_FIX_PACK_fable.md` §4c).
+> The pack was renamed **Community Fix Pack → Relaunched Fix Pack** before
+> first upload. Restoring the old name onto a live page under the new brand is
+> exactly the trap this record could have set, so **the display name inside the
+> blocks below was updated to the new name — and nothing else was touched.**
+> The blocks are now *restore-ready text*, byte-identical to the 2026-08-17
+> parking originals **except** for this one uniform substitution:
+> every *"Relaunched Fix Pack"* (**14 occurrences**: P1's "now reads" note,
+> and the blocks P1 · P6 ×2 · P11 · P19 ×2 · P28 · P33 · P37 · P38 · P39 ·
+> P40b · P40d) read *"Community Fix Pack"* in the original. No other word, space or line break
+> changed; the true originals are recoverable by reversing that substitution,
+> or exactly at the parking commit (`git log --follow` on this file).
+> ⛔ Future editors: if you change a block for any reason, extend this note —
+> a "verbatim" claim that drifts silently is worse than no record.
+
 ## Site — `C:\Dev\SMR-CommunityMods`
 
 ### P1 · `content/index.md` — the two-mod intro (page opening, after the H1)
 
-Now reads: *"The **Community Fix Pack** repairs defects in the game's own code
+Now reads: *"The **Relaunched Fix Pack** repairs defects in the game's own code
 rather than rebalancing the game, and it is built to be added to a save you
 have already played."* (one mod, one sentence).
 
@@ -102,7 +127,7 @@ have already played."* (one mod, one sentence).
 ````text
 Two mods, and they are deliberately different things.
 
-The **Community Fix Pack** repairs defects in the game's own code rather than
+The **Relaunched Fix Pack** repairs defects in the game's own code rather than
 rebalancing the game, and it is built to be added to a save you have already
 played. The **Opt-In Modules** mod is the other side of that line: optional
 changes to designed behaviour, every one of them off, or sitting at the game's
@@ -161,7 +186,7 @@ to compare to). The opt-in tab is fully parked.
 ````text
 ## Which one is which
 
-=== "Community Fix Pack"
+=== "Relaunched Fix Pack"
 
     Bug fixes only. Nothing to configure, nothing to switch on — it works the
     moment it loads. This is the one most people want.
@@ -173,7 +198,7 @@ to compare to). The opt-in tab is fully parked.
 
     [Every fix in it →](fix-list.md)
 
-=== "Community Fix Pack: Opt-In Modules"
+=== "Relaunched Fix Pack: Opt-In Modules"
 
     Eight optional modules — things the developers deliberately decided against,
     or that we merely disagree with. Seven ship switched off; the two drone dials
@@ -246,7 +271,7 @@ contrast).
 
 Seven of the optional mod's eight modules ship switched off. The eighth is a pair
 of drone dials, which ship at the game's own values, where they do nothing at all
-until you move them. Everything lives in **Options → Mod Options → Community Fix
+until you move them. Everything lives in **Options → Mod Options → Relaunched Fix
 Pack: Opt-In Modules**, reachable from the main menu or in game, and it works with
 a controller.
 
@@ -358,8 +383,8 @@ Removed whole.
 ````text
 ### Do I need both mods?
 
-No. The **Community Fix Pack** is bug fixes and works entirely on its own. The
-**Community Fix Pack: Opt-In Modules** is a separate mod of optional changes,
+No. The **Relaunched Fix Pack** is bug fixes and works entirely on its own. The
+**Relaunched Fix Pack: Opt-In Modules** is a separate mod of optional changes,
 also standing on its own. Neither needs the other, and they work together.
 
 If you only want your bugs fixed, install the fix pack and stop there.
@@ -499,7 +524,7 @@ is unnamed.
 <!-- VERBATIM src="content/fix-list.md" -->
 ````text
 **Things we merely disagree with.** Preferences, quality-of-life changes and
-behaviour the game clearly intends live in a separate mod, *Community Fix Pack:
+behaviour the game clearly intends live in a separate mod, *Relaunched Fix Pack:
 Opt-In Modules*, which you do not need to install. Seven of its eight modules
 ship switched off; the eighth is a pair of drone dials that sit at the game's own
 values, where they do nothing at all until you move them.
@@ -563,7 +588,7 @@ same tree."*
 
 <!-- VERBATIM src="content/for-modders.md" -->
 ````text
-- [Community Fix Pack repository](https://github.com/catt144/SMR-CommunityFixPack)
+- [Relaunched Fix Pack repository](https://github.com/catt144/SMR-CommunityFixPack)
 - [Opt-In Modules repository](https://github.com/catt144/SMR-CommunityOptInPack)
 
 Those repositories are public on purpose. Every fix carries a header explaining
@@ -646,7 +671,7 @@ so would be false). The repo link itself is public and unchanged.
 
 <!-- VERBATIM src="README.md" -->
 ````text
-| **Community Fix Pack: Opt-In Modules** | [`catt144/SMR-CommunityOptInPack`](https://github.com/catt144/SMR-CommunityOptInPack) | optional changes to how the game behaves, all off until you turn them on |
+| **Relaunched Fix Pack: Opt-In Modules** | [`catt144/SMR-CommunityOptInPack`](https://github.com/catt144/SMR-CommunityOptInPack) | optional changes to how the game behaves, all off until you turn them on |
 ````
 
 ## Fix pack — `c:\Dev\SMR-BugFixPack`
@@ -661,7 +686,7 @@ mod and was found by this prompt's own re-survey.
 
 <!-- VERBATIM src="metadata.lua" -->
 ````text
-	'description', "Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect verified in the game's own code — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs rather than rebalancing the game: preferences and features live in a separate mod, Community Fix Pack: Opt-In Modules, and neither mod needs the other. Nothing is patched on disk; the mod wraps the game's own code at runtime and no game files are modified. Safe to add to a save you have already played — the pack writes almost nothing into your savegame, and removing it simply lets the original bugs come back. Every fix checks the game's code before it patches anything and stands down if an official patch changes what it was written for. Five of the fixes are judgment calls rather than plain repairs, and the mod page says which and why.",
+	'description', "Bug fixes for Surviving Mars: Relaunched. Almost every fix targets a defect verified in the game's own code — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs rather than rebalancing the game: preferences and features live in a separate mod, Relaunched Fix Pack: Opt-In Modules, and neither mod needs the other. Nothing is patched on disk; the mod wraps the game's own code at runtime and no game files are modified. Safe to add to a save you have already played — the pack writes almost nothing into your savegame, and removing it simply lets the original bugs come back. Every fix checks the game's code before it patches anything and stands down if an official patch changes what it was written for. Five of the fixes are judgment calls rather than plain repairs, and the mod page says which and why.",
 ````
 
 ### P39 · `metadata.lua` — the `last_changes` player string
@@ -671,7 +696,7 @@ this back; a changelog describes the release it ships with. Context only.
 
 <!-- VERBATIM src="metadata.lua" -->
 ````text
-	'last_changes', "Initial release: the bug fixes. The optional modules moved to their own mod, Community Fix Pack: Opt-In Modules.",
+	'last_changes', "Initial release: the bug fixes. The optional modules moved to their own mod, Relaunched Fix Pack: Opt-In Modules.",
 ````
 
 ### P40 · the store card — `RELEASE_DESCRIPTION_FIXPACK.md` + `STORE_FIXPACK.md` (identical player text, both edited in lockstep)
@@ -697,7 +722,7 @@ need anything else.** The pack works on its own."*
 <!-- VERBATIM src="docs/agent/reports/STORE_FIXPACK.md" -->
 ````text
 - **You do not need anything else.** The pack works on its own. There is a
-  companion mod, *Community Fix Pack: Opt-In Modules*, and neither mod needs the
+  companion mod, *Relaunched Fix Pack: Opt-In Modules*, and neither mod needs the
   other — each works alone, and they work together.
 ````
 
@@ -715,7 +740,7 @@ at *"…takes effect after you restart the game."*
 <!-- VERBATIM src="docs/agent/reports/STORE_FIXPACK.md" -->
 ````text
  Turning this pack off in the mod manager takes effect after you
-restart the game. If you also use *Community Fix
+restart the game. If you also use *Relaunched Fix
 Pack: Opt-In Modules*, read the uninstall note on that mod's page before you
 remove **it**: it has settings that leave something behind in your save, and its
 page tells you the two steps that avoid it.

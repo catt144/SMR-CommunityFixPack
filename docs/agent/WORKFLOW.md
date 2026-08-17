@@ -94,7 +94,7 @@ New-Item -ItemType Directory -Force "$env:APPDATA\Surviving Mars Relaunched\Mods
 New-Item -ItemType Junction -Path "$env:APPDATA\Surviving Mars Relaunched\Mods\SMR-BugFixPack" -Target "C:\Dev\SMR-BugFixPack"
 ```
 
-Then enable "Community Fix Pack" in the game's Mod Manager. After editing Lua,
+Then enable "Relaunched Fix Pack" in the game's Mod Manager. After editing Lua,
 restart the game. **Opt-module first-enable caveat is FIXED (audit 2026-07-29):**
 hooks now install at file scope, so a first mid-session Mod Options enable
 works without a relaunch.

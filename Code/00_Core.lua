@@ -1,4 +1,4 @@
--- Community Fix Pack — core registry.
+-- Relaunched Fix Pack — core registry.
 --
 -- Every fix lives in its own Code/Fix_*.lua file and registers here. Design goals:
 --   * Mod-compatible: fixes prefer wrapping/chaining originals over replacement,
@@ -509,9 +509,9 @@ CreateRealTimeThread(function()
 	local wait_message = rawget(_G, "WaitMessage")
 	if type(wait_message) == "function" then
 		wait_message(nil,
-			Untranslated("Community Fix Pack"),
+			Untranslated("Relaunched Fix Pack"),
 			Untranslated(string.format(
-				"%d of this pack's fixes found that the game code they patch has changed — usually after a game update — and switched themselves off for safety.\n\nFixes that cannot detect such changes may still need attention: if the game was recently updated, check for a new version of the Community Fix Pack.\n\nSwitched off: %s", #suspects, list)))
+				"%d of this pack's fixes found that the game code they patch has changed — usually after a game update — and switched themselves off for safety.\n\nFixes that cannot detect such changes may still need attention: if the game was recently updated, check for a new version of the Relaunched Fix Pack.\n\nSwitched off: %s", #suspects, list)))
 	end
 end)
 

@@ -473,7 +473,7 @@ console at the main menu — so no mod-side or console-side path exists.
    `code` list. Do **not** arm `96_AutoRunFlag.lua` as well.
 3. Launch as usual (`-smrautorun` is carried by habit and is ignored — the leg
    stands the normal autorun down so it cannot start a colony pack-less).
-4. At the main menu: **Mods → tick "Community Fix Pack" → close the dialog.**
+4. At the main menu: **Mods → tick "Relaunched Fix Pack" → close the dialog.**
 5. Walk away. The harness sees `ModsReloaded`, builds a colony, runs the whole
    probe suite and quits, exactly like an unattended leg.
 6. Disarm by re-commenting the line.

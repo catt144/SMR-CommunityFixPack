@@ -9,6 +9,13 @@
 > ✅ **The version call is RULED AND APPLIED — 2026-08-17, owner: "lets go
 > with 1.0.0."** `metadata.lua` now `version=0` ⇒ renders **1.0.0**; the tag
 > moved with it (`fixpack-v1.0.0`). ④ owes no decisions.
+> ⭐ **RENAMED 2026-08-17 (owner ruling, checklist 36): the product you are
+> uploading is "Relaunched Fix Pack"** — `metadata.lua` `title` already says
+> so; if the portal asks for a display name separately, type exactly that.
+> The mod `id` (`SMR_CommunityFixPack`) and the `[CommunityFixPack]` log tag
+> deliberately did not change, and the GitHub repos keep their names — repo
+> URLs reading `SMR-CommunityFixPack` under a mod called *Relaunched Fix Pack*
+> is normal, product names and repo names differ constantly.
 
 **Built 2026-08-14 by `agent/prompts/release-3/01_BUILD_DESCRIPTIONS.md`, Job 3.**
 Read top to bottom. Everything below was measured or re-derived this session;
@@ -36,6 +43,18 @@ needed), and **you picked C1 for both mods, 2026-08-14**. The files to upload:
 
 Both 1024×1024, far under the recorded limits (**Paradox Mods ≤ 2 MB, Steam
 ≤ 1 MB**). The four unchosen candidates stay in the same folder as alternates.
+
+⭐ **RE-LETTERED 2026-08-17 for the rename** — the art itself had the old name
+painted in (the fix-pack title read "COMMUNITY / FIX PACK"; the opt-in's kicker
+read "COMMUNITY FIX PACK"), a surface no text grep could see. Both FINAL files
+now carry **RELAUNCHED FIX PACK** in the same C1 design: only the affected text
+line was repainted (background rebuilt, star field preserved from the same
+image, typeface matched to the original — Bahnschrift SemiBold Condensed,
+0.90 IoU against the untouched "FIX PACK" line). The 2026-08-14 originals are
+preserved beside them as `fixpack_C1_communityname_2026-08-14.png` /
+`optin_C1_communityname_2026-08-14.png`. ⚠️ The four unchosen alternates keep
+the old lettering on purpose (they are the record of the candidates offered);
+re-letter before use if one is ever promoted.
 ℹ️ The floor stays replaceable: if a capture sitting ever produces real vistas
 (Pass G), the same lettering drops onto one and the portal image is swapped —
 costs nothing, touches nothing else. No rescue-mod art exists or is needed
@@ -95,7 +114,7 @@ other) become available at the end of step 1, not step 4.~~ *(PARKED 2026-08-17
 
 | product | paste this | into |
 |---|---|---|
-| **Community Fix Pack** | `RELEASE_DESCRIPTION_FIXPACK.md`, everything between the two `═══ PLAYER TEXT ═══` rules | the mod page body |
+| **Relaunched Fix Pack** | `RELEASE_DESCRIPTION_FIXPACK.md`, everything between the two `═══ PLAYER TEXT ═══` rules | the mod page body |
 | ~~Opt-In Modules~~ | ⚖️ **PARKED 2026-08-17** — not uploaded at this launch; its card keeps waiting as the audited paste source | — |
 | ~~Save Rescue~~ | ✅ 17 ruled **hold off** — nothing pasted; the card waits as the contingency draft | — |
 
@@ -116,9 +135,17 @@ STORE file after the change):
 
 | card | characters | words |
 |---|---|---|
-| Community Fix Pack | **10,781** | **1,881** |
+| Relaunched Fix Pack | **10,782** | **1,881** |
 | ~~Opt-In Modules~~ *(parked, not pasted)* | 15,907 | 2,774 |
 | ~~Save Rescue~~ *(contingency draft, not pasted)* | 4,202 | 792 |
+
+⭐ *(Fix-pack cell re-measured 2026-08-17 AGAIN after the rename: the paste
+body's H1 is the one place the display name appears in it, so "Community" →
+"Relaunched" moves it exactly +1 character: 10,781 → **10,782**, words
+unchanged at 1,881 — measured by the same method, which first reproduced the
+pre-rename 10,781/1,881 from git HEAD exactly. VERBATIM vs the STORE block
+re-proven after the edit: the pair's diff is line-identical to the pre-rename
+diff — only the documented marker/HOLE lines.)*
 
 ⭐ *(Fix-pack cell re-measured 2026-08-17 after the solo-launch parking removed
 the separate-mod clause, the companion-mod bullet tail, FILL-IN 2 and the
@@ -163,9 +190,18 @@ counter or refuse the field, and both answers arrive in two seconds.
 
 | mod | `title` | `short_description` | `description` | `last_changes` |
 |---|---|---|---|---|
-| Community Fix Pack | 18 | 184 | **779** | **16** |
-| ~~Opt-In Modules~~ *(parked)* | 34 | 177 | 884 | 100 |
-| ~~Save Rescue~~ *(hold-off)* | 11 | 147 | 732 | 442 |
+| Relaunched Fix Pack | **19** | 184 | **779** | **16** |
+| ~~Opt-In Modules~~ *(parked)* | **35** | 177 | 884 | 100 |
+| ~~Save Rescue~~ *(hold-off)* | **32** | 147 | 732 | 442 |
+
+⭐ *(`title` cells re-measured 2026-08-17 after the rename: fix pack
+"Community Fix Pack" 18 → "Relaunched Fix Pack" **19**; and on the owner's
+same-day "rename them now" ruling (checklist 36) the sibling titles were
+applied in their repos — opt-in "Relaunched Fix Pack: Opt-In Modules" **35**,
+rescue "Relaunched Fix Pack: Save Rescue" **32** (the item-26 pre-approved
+family form, landing early on the owner's word). ⛔ Title lines only: both
+siblings' `description`/`short_description` still say Community and are swept
+at THEIR publish — comments in each file force it.)*
 
 ⭐ *(Fix-pack `description` and `last_changes` re-measured 2026-08-17 after the
 solo-launch parking: 844 → **779** and 112 → **16** ("Initial release."). The
@@ -211,7 +247,7 @@ real trees, before and after:
 
 | mod | files shipped BEFORE | AFTER | what stopped shipping |
 |---|---|---|---|
-| Community Fix Pack | **90** | **78** | `CLAUDE.md`, `.gitattributes`, all **10** files of `tools/` |
+| Relaunched Fix Pack | **90** | **78** | `CLAUDE.md`, `.gitattributes`, all **10** files of `tools/` |
 | ~~Opt-In Modules~~ *(parked — not uploaded at this launch)* | **22** | **12** | `CLAUDE.md`, `.gitattributes`, all **8** files of `tools/` |
 | Save Rescue | **4** | **4** | nothing — it was already clean, built after the lesson |
 
@@ -242,7 +278,7 @@ directory** (checked in all three). Only the site repo does, and it is not a mod
 
 | mod | ships as | its changelog says | note |
 |---|---|---|---|
-| Community Fix Pack | ✅ **1.0.0** (`version_major=1, version_minor=0, version=0`) | "Initial release." | ✅ **RULED 2026-08-17 ("lets go with 1.0.0") and APPLIED** — the table's old "1.0" cell had read major.minor only and hid a third digit rendering 1.0.1; caught at solo-launch prep, routed, ruled the same day. Tag moved to `fixpack-v1.0.0` |
+| Relaunched Fix Pack | ✅ **1.0.0** (`version_major=1, version_minor=0, version=0`) | "Initial release." | ✅ **RULED 2026-08-17 ("lets go with 1.0.0") and APPLIED** — the table's old "1.0" cell had read major.minor only and hid a third digit rendering 1.0.1; caught at solo-launch prep, routed, ruled the same day. Tag moved to `fixpack-v1.0.0` |
 | ~~Opt-In Modules~~ *(parked)* | **1.0** | "Initial release" | ✅ **RULED 2026-08-14 ("we go 1.0, especially with the amount of QA we have done") and APPLIED** — `metadata.lua` now 1.0.0 |
 | ~~Save Rescue~~ | **0.1** | "Initial pre-release" | ✅ consistent; not publishing at launch (item 17 hold-off) |
 
@@ -255,6 +291,7 @@ directory** (checked in all three). Only the site repo does, and it is not a mod
 | **Store links into the site** | `content/install.md` opens with *"No store links yet — this page gets the links when they exist."* One admonition to replace, plus store buttons on the landing page if wanted | step 2, after upload |
 | **Save Rescue's repo README is stale** | its "Status" section still says nobody has watched the dialogs and *"that sitting is scheduled"* — it ran 2026-08-14 and passed. It understates rather than overstates, so nothing is misleading a player, but it is a public page contradicting the record | any time; routed to this chain's audit |
 | **`Opt_DroneOverhaul.lua`'s header comment** names the old *"Mod Options → Community Fix Pack"* path | a code comment in the other repo, never seen by a player | any time |
+| **This repo's own `README.md` is stale far beyond its name** (found by the 2026-08-17 rename's end-to-end read) | it still advertises the optional modules that moved OUT on 08-12 as if this pack carried them, says "91 verified findings" against today's 167 rows, links the retired `docs/BUGS.md`/`docs/STATUS.md` paths, and says "in development, not yet released". The rename touched only its three name occurrences. GitHub-only surface (excluded from the package), but the site's for-modders page links to the repo, so a curious player can reach it | its own sitting, before or shortly after upload; counts must be re-emitted, not copied |
 
 ⛔ **The site's five pages are terminal-audited and are not edited in passing.**
 Anything found in them is filed, which is why the first row above is a filed task
@@ -294,6 +331,6 @@ standing rules are live:
 | `metadata.lua` (fix pack) | ✅ solo-launch strings applied and re-counted 2026-08-17 (779 / 16); no opt-in reference survives in any player string |
 | Packaging | ✅ item 23 done, measured (fix pack ships **79**) |
 | Site | ✅ built + audited + item-29 strike + 2026-08-17 one-mod parking applied, `mkdocs --strict` GREEN, ⛔ **nothing on the web**; needs step 2 then step 3 |
-| Preview art | ✅ **chosen 2026-08-14 — C1**, fix-pack FINAL file named in §0(a), size verified under both limits |
+| Preview art | ✅ **chosen 2026-08-14 — C1**, re-lettered 2026-08-17 to the new name (§0(a)), fix-pack FINAL file named in §0(a), size verified under both limits |
 | Decisions owed by you | **0** — the version call was ruled 1.0.0 the day it was raised |
 | Release tag | **`fixpack-v1.0.0`** placed 2026-08-17 on the final pre-upload tree (`WORKFLOW.md` §"Release marking"; the interim `fixpack-v1.0.1` tag was deleted when the ruling landed) — record portal version → commit sha here at upload |
