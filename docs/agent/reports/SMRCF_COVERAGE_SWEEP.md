@@ -67,12 +67,23 @@ whether a string is actually translated) and [`EF-064`](../facts/EF-064.md)
   while the identical English text ships under two ids that every pack does.
   Two controls (7-of-7 siblings enrolled; 9 raw literals against 633 `T()`)
   rule out "that is just how XDefs work". Repair shape here is loss-free.
-- **`C52`** — mod screenshots and thumbnails. Their stated mechanism is
-  **refuted by our own `EF-008`**; the real cause is a `local mod_prefix` read
-  outside the block that declares it (`ParadoxMods.lua:222` vs `:257`) with the
-  developers' own `-- todo: this is not working` sitting directly above it, plus
-  a second defect — a thumbnail cache keyed on mod id + version with no
-  revalidation, which is release-relevant to us.
+- **`C52`** — the Mod Manager detail path, **three defects**. Their stated
+  mechanism is **refuted by our own `EF-008`**; the real cause of the missing
+  screenshots is a `local mod_prefix` read outside the block that declares it
+  (`ParadoxMods.lua:222` vs `:257`) with the developers' own
+  `-- todo: this is not working` sitting directly above it. Second: a thumbnail
+  cache keyed on mod id + version with no revalidation, release-relevant to us.
+  ⚠️⚠️ **Third, added by a same-day correction the owner forced** — this page and
+  the entry both first closed the description half as *"a deliberate
+  deactivation, not a defect"*. **Wrong.** The owner's distinction is what broke
+  it: *a design choice and a planned-but-deferred fix are different things*, and
+  commented-out working code is evidence of the second. `HTMLParser`'s disabled
+  hyperlink branch carries **two** §4 hard tells — a computed value consumed by
+  nothing (`GetRGBA(self.HyperlinkColor)`, `:109`) and an exact sibling
+  contradiction (`MarkdownParser.lua:49` ships the same line live) — with the
+  consuming UI already wired for `OpenUrl`. ⛔ Re-enabling is still not a
+  one-liner: the comment may itself be a workaround for XText instability, so
+  the shape is "re-enable and observe", never "uncomment it".
 
 ## The rejection — #15 Restore Clustered Lights
 
