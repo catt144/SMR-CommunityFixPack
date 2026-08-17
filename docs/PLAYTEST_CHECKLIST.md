@@ -29,6 +29,65 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⛔⛔ 2026-08-17 — THE UPLOAD IS PAUSED ON YOUR OWN WORD. Two defects found at the sitting and fixed; two questions for you.
+
+37. ⛔ **What happened, in plain words.** You opened the Mod Editor to upload,
+    and a dialog appeared from the *other* mod saying *"2 of this mod's modules
+    found that the game code they patch has changed… Switched off: NoHomeless,
+    NoHomeless"*. You asked whether that was only there because the opt-in mod
+    was switched on. It was — five separate controls confirm it, and **a player
+    installing the fix pack alone could never see that particular box.** But
+    reading *why* it said the same name twice found **two real defects in code
+    the fix pack ships too**, and you overrode the recommendation to ship and
+    fix later: *"I don't want to launch with an immediate planned 1.0.1 fix
+    routed for launch. I want us to be clean period."* Both are now fixed.
+
+    * **The false alarm.** A module that fails one start-up pass and succeeds on
+      the next — normal, documented, happens every launch — kept a "suspect"
+      mark that nothing cleared. Any later stand-down then read that stale mark
+      and would have shown a player a box on a **brand-new release** claiming
+      the game's code had changed and inviting them to go find a newer version,
+      about a fix that had just worked. It never fired, by timing rather than by
+      correctness. ⛔ It would have been a bad first impression that was also
+      simply false.
+    * **The double name.** Our own registry appended a module twice whenever the
+      game reloaded its scripts, so one module was counted and listed twice.
+      That is why it said "2" and named NoHomeless twice when only one module
+      had stood down.
+
+    ✅ **Both fixed in `Code/00_Core.lua` (`2f077e8`); `metadata.lua` untouched,
+    so this is NOT a 1.0.1 — nothing has been published, and 1.0.0 is simply
+    what 1.0.0 now is.** ⛔ **Nothing is verified yet in a running game**, and
+    the release tag is deliberately parked one commit behind until it is.
+
+    ⭐ **Your audit is written and waiting: `agent/prompts/PRERELEASE_MOD_AUDIT_fable.md`**
+    — your ask, *"a top level pre release sweep of the mod… the mod as one
+    organism instead of looking at individual pieces."* It re-reads today's two
+    fixes hostilely (including a planted criticism of one of them) and then runs
+    eleven organism passes nobody has ever run here: do our own 75 modules patch
+    the same things and fight each other · does any module wrap itself twice when
+    the game reloads · what does a player actually **see** on a first launch ·
+    what does the pack write into a save **in total** rather than one module at a
+    time · is F85 the only fix whose target is unreachable on retail. It runs its
+    own launches at zero cost to you and leaves you a short list for the
+    opt-in-off pass you said you wanted to do yourself.
+
+    ❓ **Q1 — mirror the two fixes into the opt-in pack now, or leave them?**
+    Both defects are identical in that mod's own core — it is where the dialog
+    came from. It is parked and not uploading, so this does not gate tonight.
+    **Recommendation: yes, now**, while the diagnosis is fresh; the alternative
+    is that its launch session rediscovers this from scratch. ⚠️ Its own gates
+    would need re-running, which is why it is your call and not mine.
+
+    ❓ **Q2 — Steam's version number.** ⛔ Decide **after** Paradox, not now.
+    Paradox Mods saves *after* it uploads, so it receives a clean **1.0.0**.
+    Steam saves *before* it packs, so a straight second upload would ship
+    **1.0.1**. Getting Steam to 1.0.0 as well costs one extra restart and a
+    one-field edit. **Recommendation: take the extra restart** — you ruled a
+    clean first number for exactly the reason it is worth keeping on both
+    stores — but it is genuinely a shrug either way and you lose nothing by
+    deciding when you get there.
+
 ### ⭐ 2026-08-17 — THE RENAME IS DONE, EVERYWHERE A PERSON LOOKS. ✅ Your two calls came back the same day; nothing is owed.
 
 36. ✅ **RULED 2026-08-17, both calls, same sitting.** (1) **You searched the
