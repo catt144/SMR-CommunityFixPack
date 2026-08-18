@@ -57,3 +57,108 @@ Recorded here so the terminal audit has the full body of work in one place.
 
 **What the seed could NOT reach:** everything in the ledger's seed row — no module
 was read, nothing was run in a game, and the mod has never been loaded packed.
+
+
+---
+
+# LINK 1 — lens L1 (structure & collision) — 2026-08-17
+
+**Artifact:** `docs/agent/reports/L1_COLLISION_MAP.md` (the symbol->patchers map,
+plus the C1/C2/C3 analyses and the five exposure shapes).
+**Launch-blocking: NO.** **Code changed: NONE** — reasons in the artifact, section 5.
+
+## L1-F1 — `Colonist:Idle` is wrapped twice; the order is load-bearing and unrecorded
+
+The only same-symbol double-wrap in the pack, found mechanically (C2 over 50
+class-method targets). `Fix_ShelterReflex:57-58` and `Fix_ArrivalDeaths:170-171`.
+
+Load order = `metadata.lua` `code` list order: ShelterReflex at line 130,
+ArrivalDeaths at line 138 => **ArrivalDeaths is OUTER, which is the safe order**,
+because ArrivalDeaths only assigns fields and always delegates (`:200`) while
+ShelterReflex can `self:SetCommand("Rest")`, which by its own comment "kills this
+thread; never returns" (`:70`). Swap the two `metadata.lua` lines and the F53b
+dome re-choice is skipped for any colonist meeting the shelter precondition.
+
+Nothing records the dependency: neither header names the other, `FIX_POLICY` 8
+covers only "00_Core first", and the `metadata.lua` list carries no note.
+
+- Route: verified at source both ways. Order verified in `metadata.lua`.
+- UNMEASURED: whether one colonist can satisfy both preconditions at once
+  (`self.arriving` + valid working residence + outside >= half oxygen budget +
+  non-breathable atmosphere). No game was run. The order dependency is real
+  regardless of whether the overlap is.
+- Routed to the owner as checklist item 38 (a decision about whether to pin the
+  order before launch or after).
+
+## L1-F2 — F73(a) does not reach `NaturalistHabitat`
+
+`Fix_ShelterReflex` replaces `MicroGHabitatAutoResolve:IsSuitable`.
+`NaturalHabitatBase:IsSuitable` (`NaturalHabitat.lua:33`) declares the identical
+un-fixed vanilla body, and `classes.lua:608` skips parents' values for a member a
+class declares itself -- including the `AutoResolveMethods.IsSuitable = "and"`
+combination (`Building.lua:14`). `NaturalistHabitat.__parents = {"NaturalHabitatBase"}`.
+
+Of the 4 descendants: `MicroGHabitat` covered, `MicroGHabitatBase` covered,
+`NaturalHabitatBase` NOT, `NaturalistHabitat` NOT.
+
+- Coverage gap, not a defect in shipped code. No fix written: a new fix needs a
+  `FIX_POLICY` 4 entry with intent + reachability tier, which is a build.
+- UNMEASURED: whether the F73(a) harm is actually reachable on a Naturalist
+  Habitat (does it depend on life support the same way?). Not investigated.
+
+## L1-F3 — F66's recovery reclaim does not run when a `Station` dies
+
+`Fix_TrackConnectorPingPong` wraps `TrackConnectedObjBase:Done`. `Station:Done`
+(`Station.lua:134-153`) declares its own body and does NOT call the parent, and
+`Done` is absent from the 58-member `AutoResolveMethods` list (enumerated in full).
+
+Of `TrackConnectedObjBase`'s 6 descendants, `Station` is the only shadowed one;
+`StationBig`, `StationSmall`, `TrackTunnel`, `TrackTunnelBase`, `UniversalTunnel`
+all reach the reclaim.
+
+- The PRIMARY F66 fix is unaffected: it replaces `CreateConnectorElements`, which
+  no descendant declares. Stations do get the ping-pong repair itself.
+- UNMEASURED: how much the reclaim matters for a station in practice.
+
+## L1-F4 — three engine routes re-derived that nothing here records
+
+Candidates for `agent/facts/`:
+1. `OnMsg` is additive (`cthreads.lua:64-72`, appends to `message_to_staticfuncs`)
+   AND `message_to_staticfuncs` is a plain file-local, NOT under `FirstLoad`, so
+   handlers do NOT survive `ReloadLua` -- the exact opposite of `SMRFixPack.order`,
+   which does, and which is why it double-listed every module until `2f077e8`.
+2. `classes.lua:608` -- a class that declares a member itself never takes a
+   parent's value for it, auto-resolve included.
+3. `AutoResolveMethods` has 58 members; `Done`/`Init`/`GameInit` are NOT among
+   them, and `IsSuitable` is the ONLY one of the 58 that any of our 50
+   class-method targets touches.
+
+## Refuted, each with its route (recorded so a later link does not re-spend the time)
+
+- `Building:OnDemolish` (Fix_TrainsToVoid, gated to Station): 10 subclasses
+  declare `OnDemolish`, NONE on Station's ancestor chain. Header claim re-derived,
+  holds.
+- `Building:SetDome` (Fix_GhostFarmOxygen, gated to FarmBase): `Residence` and
+  `TrainingBuilding` shadow it, neither is a FarmBase ancestor.
+- `CargoTransporterNew:UpdateCargoResourceRequests` (Fix_RocketDroneChurn):
+  `UniversalRocketBase` overrides BUT calls the parent explicitly at
+  `UniversalRocket.lua:1684`. Landers reach the patch.
+- `RCTransport:CanInteractWithObject` / `:InteractWithObject`
+  (Fix_RocketInteractGuard): all three subclasses override and all tail-call the
+  parent (`RCHarvester:127`/`:139`, `RCConstructorBase:353`/`:372`,
+  `RCTerraformer` via `RCConstructorBase`).
+- `OnModifiableValueChanged` on `ElectricityStorage`/`WaterStorage`/`AirStorage`
+  (Fix_StorageRateModifiers): nothing shadows it across 2+4+4 descendants. This
+  was the static map's one blind spot (runtime `TARGETS` loop) -- closed by
+  reading the module, not waived.
+- Track family: `TrackBase` / `TrackGridElement` / `TrackConnectedObjBase` are
+  SIBLINGS, not a chain. No cross-module fight.
+- 16 global replacements, 16 distinct symbols -- no two modules replace the same
+  global.
+- Preset fields: no two modules write the same one. The one shared preset GROUP
+  (`Presets.MapSettings.DustDevils`, two modules) is clean -- SpawnGate copies,
+  DescrMap reads.
+- Own threads: 7 sites, 6 modules, no shared handle.
+- POSITIVE: `Fix_DustDevilSpawnGate:250-258` restores its swapped global only
+  `if cur == wrapper`, so it cannot clobber a later replacement by another module
+  or another mod. The right shape; the benchmark for lens L8.

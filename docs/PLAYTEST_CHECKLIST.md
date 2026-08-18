@@ -114,6 +114,51 @@ completed tests move whole to
     stores — but it is genuinely a shrug either way and you lose nothing by
     deciding when you get there.
 
+### ⭐ 2026-08-17 — SWEEP CHAIN, LINK 1 REPORTED. Nothing blocks launch. One small call for you, and it can wait.
+
+38. ⭐ **Link 1 of your chain is done — lens 1 of 8, "structure & collision".**
+    The question it asked, which no brief here had asked before: **do our own 75
+    modules step on each other?** To answer it properly I built the thing the
+    project has always described and never produced — a map of *every symbol the
+    pack patches and which module patches it* — and then checked it against the
+    game's own class tree. It is committed as
+    `agent/reports/L1_COLLISION_MAP.md`.
+
+    ✅ **Nothing blocks launch, and I changed no code.** The pack does not fight
+    itself: 16 global replacements, 16 different globals; no two modules write
+    the same preset field; no two share a thread. The eleven modules that all
+    hook "game loaded" don't overwrite each other — the engine appends them —
+    which I re-derived from the engine source rather than trusting the comment.
+
+    **Three things worth knowing, none urgent:**
+
+    * ⚠️ **Two fixes wrap the same colonist function, and which one wins depends
+      on the order they are listed in `metadata.lua`.** Right now the order is
+      the *safe* one — but by luck, not by design, and nothing anywhere says so.
+      If that list is ever reordered, alphabetised, or regenerated, one fix could
+      start silently skipping the other. ⛔ I have **not** proven a player can
+      actually hit the overlap; that needs a running game.
+    * ⚠️ **Two fixes cover slightly less than you'd assume.** The asteroid-habitat
+      fix doesn't reach the *Naturalist Habitat* building, and the track-connector
+      fix's secondary "let the neighbours reclaim the hex" step doesn't run when a
+      **Station** is destroyed — in both cases the game defines its own version of
+      the function we patched, so ours is never consulted. ⭐ **Both are "we do
+      less than we could", never "we do something wrong",** and the *main*
+      track-connector repair does reach stations.
+
+    ❓ **Q — the only thing I need from you: pin the wrapper order now, or after
+    launch?** Recording it costs one comment line in a file that ships, three days
+    before a first release. **Recommendation: after launch.** The order is
+    correct today, the risk is a future edit rather than this build, and I would
+    rather not touch the shipped tree for a note. Say the word and I'll do it now
+    instead — it is a one-line change either way.
+
+    ⛔ **What link 1 did NOT look at,** so this is not read as a clean bill:
+    nothing was run in a game; the two 08-17 core fixes still have not executed
+    once; save footprint, uninstall, what a player sees, failure containment,
+    packed-vs-unpacked, and any other mod are all untouched — those are lenses
+    2–8. The chain has **not** converged; it has finished one lens of eight.
+
 ### ⭐ 2026-08-17 — THE RENAME IS DONE, EVERYWHERE A PERSON LOOKS. ✅ Your two calls came back the same day; nothing is owed.
 
 36. ✅ **RULED 2026-08-17, both calls, same sitting.** (1) **You searched the

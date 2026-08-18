@@ -28,6 +28,25 @@ class method · table slot · global assignment · preset field · own thread.
 - ⛔ **This map has never been produced.** Commit it as an artifact under
   `docs/agent/reports/`, not as a sentence in a report.
 
+> ⭐ **Added by link 1 (2026-08-17), and it is the whole reason the map found
+> anything: RESOLVE THE FILE-LOCAL ALIAS FIRST.** Modules capture targets as
+> locals (`local C = rawget(_G,"Colonist")`) and then write `function C:Idle`. A
+> plain grep reports `C:Idle`, which cannot be joined across files — so a naive
+> sweep sees **zero** same-symbol collisions and reports the pack clean. The
+> first pass of link 1's own script did exactly that. Build the alias map per
+> file, then resolve every patch site through it.
+>
+> ⭐ **And ask the inheritance question, not just the same-symbol question.** The
+> map's most valuable output was not the one double-wrap; it was **C1** — for
+> every `Parent:Method` we patch, which subclasses in Src declare their own
+> `Method` and therefore never see our repair. Two real coverage gaps came from
+> that check and from nothing else. Each C1 hit is decided by one thing: **read
+> the subclass override and see whether it calls the parent.** 5 of 8 did, and
+> were clean. ⛔ Do not stop at the shadow list — it over-reports badly.
+>
+> ⚠️ **Link 1 left the preset-field half NON-mechanical** (enumerated by reading
+> 13 modules). A later link that wants depth there should extract it properly.
+
 ## L2 · Lifecycle & idempotency
 
 `ReloadLua` re-runs every module's `apply`. The 2026-08-17 fix stopped `order`
@@ -134,3 +153,11 @@ Assume another mod is installed that is not ours and not friendly.
   stand-down machinery report something true, or something that blames the game?
 - `EF-054` (wrapper ordering, mod-id keying) and `EF-058` (the flattened-class
   trap — bit this project **four** times) are the known shapes.
+
+> ⭐ **Added by link 1: the pack already contains the benchmark shape — measure
+> the rest against it.** `Fix_DustDevilSpawnGate:250-258` swaps a global and, when
+> restoring, re-reads the live value and only swaps back **`if cur == wrapper`** —
+> so a replacement installed *after* ours by another mod is left alone instead of
+> being clobbered. That is the correct save/restore discipline. ⛔ Link 1 did NOT
+> sweep whether the pack's other 15 global replacements hold to it; that sweep is
+> this lens's, and it is a concrete, mechanical job.
