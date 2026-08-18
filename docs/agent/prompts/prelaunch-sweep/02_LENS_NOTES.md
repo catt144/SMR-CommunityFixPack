@@ -79,6 +79,42 @@ Every module was verified alone. ⛔ **Nobody has summed them.**
   (`RELEASE_UNINSTALL_ASSEMBLY.md`): latched heals, rains migration, layer-2
   residue, the engine's savegame-mod-ref line. Does it hold together?
 
+> ⭐⭐ **Added by link 3 (2026-08-18) — ASK WHAT THE CENSUS WAS KEYED ON. This
+> generalises past L3 and is the question that produced this link's only
+> non-cosmetic finding.** The authoritative exposed-set derivation swept
+> persisted state using the `SMRFixPack_*` token as its grep key, because
+> `FIX_POLICY` §3 says that is how we name what we persist. ⇒ **the naming rule
+> is not a style preference, it is the key the census runs on**, and the single
+> site that breaks the rule is structurally invisible to the census meant to
+> enumerate it. The pack had exactly one, and the record actively *cleared* the
+> global it lives in. **Whenever you inherit a count, find the KEY it was
+> gathered with and ask what that key cannot see** — then test membership a way
+> that does not depend on the convention. Here that was: take every field name
+> the pack writes on a non-local carrier and test it against the whole shipped
+> tree (4,446 files / 131,363 tokens). A name absent from Src is ours, whatever
+> it is called.
+>
+> ⚠️ **What a re-take of L3 owes, in priority order.** ① **13 of the 18
+> load-time passes were never cross-read against the game's own 237
+> `SavegameFixups`** — only the 5-module track cluster was. The hazard is real
+> and documented (`90_SaveSanitizer:315-324` was bitten by it once), and §6.1 of
+> `reports/L3_SAVE_FOOTPRINT.md` establishes it is live on exactly one load per
+> save: the first load of a save that still owes that fixup — which is the
+> population the repairs target. Unswept: the meteors/storm pair, the
+> rains/disaster pair, the three preset-patch heals. ② **Nobody has ever walked
+> an uninstall, let alone a REINSTALL** (uninstall → play → save → reinstall).
+> The reinstall route is where the exit law bites, and it is a real player
+> action — Paradox Mods replaces the folder on update. ③ **The simultaneous
+> liveness of the six game-time threads has never been measured by anything**,
+> so "how much is in a save at once" still has no upper bound a reader can point
+> to. ④ The opt-in pack's own footprint (D12–D15) was not re-derived.
+>
+> ⭐ **And the shape that made the exit legible, offered as a template:** stop
+> asking "does this site persist" per module and ask **"who owns the CARRIER".**
+> A persisted name of ours survives uninstall iff its carrier is vanilla's — one
+> line that sorts all twelve keys, and it is the inverse of what one shipped
+> header had been disclosing for weeks.
+
 ## L4 · Player experience
 
 **What does a player actually SEE and READ?** The answer should be **nothing** —
