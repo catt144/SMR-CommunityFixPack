@@ -578,3 +578,162 @@ that way.
 the ledger's unreached column for this link alone lists thirteen unswept
 load-time passes, the whole uninstall and reinstall walk, and every measured
 figure in this territory. No clause of §5 is invoked.
+
+---
+
+# Link 4 — lens L4, player experience (2026-08-18)
+
+⛔ **Record-only link** (spec §4). **Nothing blocks launch. Zero code changed.**
+Counts unmoved (76/75/96/167); `metadata.lua` untouched.
+
+**Artifact:** `docs/agent/reports/L4_PLAYER_SURFACES.md` · instrument
+`tools/l4_player_surfaces.py`.
+**Configuration:** dev tree, unpacked, source-derived + Src read by symbol +
+the archived log corpus (all-three-mods rig). ⛔ **No launch.**
+
+## ⚠️ Fence breach — disclosed
+
+I ran `tail -5` on `SWEEP_FINDINGS.md` to find the append point and saw **2
+lines** of link 3's closing paragraph (its non-convergence statement — coverage,
+not a finding verdict). Deliberate act, so it is reportable under
+`00_CHAIN_SPEC.md` §2 regardless of what the lines contained. It came after all
+five censuses and every adjudication below were complete, so it cannot have
+anchored them. `wc -l` alone was the correct tool and is what I should have used.
+
+## The shape of the answer
+
+The lens notes say the answer should be **nothing**, and it very nearly is. The
+pack mints **no** notification, popup, banner or voice line of its own — all 17
+screen call sites raise a surface the game already owns (artifact §1.1). It has
+exactly **one designed screen surface**, and both real defects live in it.
+
+## L4-F1 — the update-report dialog names internal identifiers, not the titles it already has
+
+`00_Core.lua:569`, `table.concat(suspects, ", ")` over ids from
+`SMRFixPack.order` (`:537`). The player reads *"Switched off:
+AstrogeologistExtractors, SaintBlessing"*.
+
+- **Measured:** all **75/75** registered modules supply a `title` — a plain
+  English sentence in the same register the fix list is written in. The registry
+  has it; the dialog does not use it.
+- **Measured:** module ids appear on **no player-facing surface** — over the
+  site's five pages they occur only in `for-modders.md` (:33 :43 :45, all
+  `SMRFixPack_Disabled` examples) and the README's for-modders section. Fix list,
+  FAQ, install, landing and the store card use prose only.
+- ⛔ **Sharpened by `FIX_POLICY` §7:** on Xbox / PlayStation / MS Store there is
+  no log, no console and no file access ⇒ **this dialog is the pack's only
+  player-facing surface on console**, and the id list is the one form of the
+  information a console player cannot resolve.
+- Same class as this project's own recorded trap — `BottomlessPitResearchCenter`
+  renders as *"Experiment 1: Big Drop"* on every player surface (08-15).
+
+**Not blocking. Owner-shaped (the pack's voice) ⇒ routed, batched with F2, as
+checklist item 41.** Recommended shape: id + title, or title alone.
+
+## L4-F2 — the dialog's sentence is false for the `error` case, and it blames the game
+
+`UpdateSuspects` makes `status == "error"` a suspect unconditionally
+(`:527-528`). `error` means `def.apply` **threw under `pcall`**
+(`run_apply`, `:388-392`) — our own defect, or another mod's interference (the L8
+shape). It is never evidence of a game update. The dialog nevertheless says, in
+one undifferentiated sentence, that the fixes *"found that the game code they
+patch has changed — usually after a game update"* and invites the player to
+*"check for a new version of the Relaunched Fix Pack."* The log line at `:570`
+carries the same wording.
+
+⇒ on a crash of ours we would **attribute it to a Paradox patch** and send the
+player after a version that does not exist, instead of reporting the bug. This is
+the house rule *"'not caused by our leg' is an attribution verdict, not a
+dismissal"* pointed outward at the game.
+
+**Latent** — 0 `error` statuses in the 57 archived logs — but it is exactly the
+case the dialog exists for. **Not blocking. Batched into checklist item 41.**
+
+## L4-F3 — `ctx.heal()` is the pack's only status transition that writes no log line
+
+Every other transition logs: apply success `:412`, apply threw `:392`, apply
+declined `:396`, pre-load veto `:448`, `ctx.latch` `:279`, and all four Mod
+Options transitions (`:474` `:483` `:487` `:500`). `ctx.heal()` (`:281-294`)
+logs nothing.
+
+**Measured, and not hypothetical: 56 of the 57 pack-carrying logs in
+`docs/archive/*.log` carry `SaintBlessing: inactive (no dome-colonists trait
+presets)`, which is false by the end of the same load.** In `c48pair2` the module
+heals **642 ms later** (Lua `0:00:18:398` → `0:00:19:040`, lines 171 → 185) and
+the recovery is implied only by a *different* line (`corrected 1 …`). Nothing in
+the log ever states the module is active again.
+
+Two heal sites log nothing at all — `Fix_DustDevilSpawnGate:308`,
+`Fix_DustDevilsDescrMap:112` — so on a `DataChanged` re-fire after a latch those
+modules' logs would end on `inactive` with no counterpart line whatever.
+
+The FAQ asks players to attach a log to a bug report and the owner reads logs for
+triage. ⛔ **Not cosmetic** — it corrupts triage and has already contaminated 56
+archived logs — but **nothing a player experiences in game changes.**
+**Not blocking. Not owner-shaped** ⇒ terminal audit: one `log()` inside
+`ctx.heal()`.
+
+## Verified positives — four things nobody had checked
+
+1. ⭐ **The never-executed dialog's mechanism holds, re-derived at Src.**
+   `update report:` (`:570`, logged *before* the dialog) has **0 occurrences in
+   all 57 pack-carrying archived logs** — counted, not inherited. Four checks,
+   none previously made: signature `WaitMessage(parent, caption, text, …)`
+   matches our `(nil, caption, text)` (`StdDialogs.lua:617`) · `parent = nil`
+   resolves via `parent or terminal.desktop` (`:596`) · our `Untranslated(…)` is
+   **double-wrapped** by `CreateMessageDialog` (`:542-543`) and that is a
+   **no-op**, because `Untranslated` returns any `IsT` value unchanged
+   (`localization.lua:339`) · the OK action carries `ActionGamepad = "ButtonA"`
+   (`:570`), so `FIX_POLICY` §7's console reasoning holds.
+2. ⭐ **The verdict-string fence does not leak.** All **181** strings that can
+   become an entry `detail` were censused and crossed with `UpdateSuspects`' four
+   substring tests (`:532-535`). **72 match, and every one is a genuine
+   target-shape failure that also sets the `update_suspect` mark — the two routes
+   agree on all 72.** No benign verdict trips a substring, so no working module
+   can fire the false-update dialog by wording alone. This is the aggregate check
+   the 2026-08-17 defect earned.
+3. ⭐ **The card's blanket claim holds — checked per row, not asserted.** *"Every
+   fix checks the game's code before it patches anything"*: 69 modules route
+   through `SMRFixPack.Require`; the other **7** each carry a bespoke
+   precondition check, read at source individually
+   (`DustSicknessBiorobots:122` · `ExtenderFlapChurn:73-75` ·
+   `IndependenceTerraforming:72` · `LastTransmissionStorage:108` ·
+   `SequenceLatents:136` · `ShelterReflex:79` · `StorageRateModifiers:75`).
+4. ⭐ **`F98`'s player-surface consequence is contained**, which only this lens
+   could confirm: the store card does not promise the tech-description fix (0
+   hits in `RELEASE_DESCRIPTION_FIXPACK` / `STORE_FIXPACK`) and the site fix list
+   deliberately omits it ⇒ **the pack never promises a player something `F98`
+   fails to deliver.** The only residue is an `applied` log line.
+   Separately, `Fix_GraphConsumedCaption`'s `T{8979, …}` was verified
+   **byte-for-byte** against `Lua/X/ColonyControlCenter.lua:181-186` — same id,
+   same literal — so localised builds are unaffected.
+   And the **tag-vs-name route does not break**: no player-facing page names
+   `[CommunityFixPack]`; the FAQ asks players to *attach* a log, never to find
+   our lines in one.
+
+## Log noise, measured
+
+**82** `[CommunityFixPack]` lines in a full load (`c48pair2`, all-three-mods rig)
+= **75** `<id>: applied` + **7** substantive (6 repair reports + the one stale
+`inactive` of F3). Nothing alarming, nothing false but that line.
+
+## ⛔ Convergence — NOT reached, and the cap is the wrong reason to stop
+
+Four lenses of eight are done. **L5–L8 are untouched**, no §5 clause is invoked,
+and the ledger's unreached column is longer than this link's findings list.
+
+⛔ **I am link 4 of a cap of 5, and I do not believe one more link closes this.**
+The three remaining lenses after link 5 each own a named, never-swept job with a
+live precedent:
+
+- **L6** — dead-coded targets, *"is F85 the only one?"*, still unswept; the
+  `player-route ≠ source citation` shape has been the finding **three** times,
+  and `F98` is a fourth instance of the same family found from a different angle.
+- **L7** — packed-vs-unpacked, and **configuration B has never been run in the
+  history of this project**.
+- **L8** — the **15** global replacements link 1 explicitly did **not** sweep for
+  the save/restore discipline `Fix_DustDevilSpawnGate:250-258` demonstrates.
+
+⇒ **Recommendation to the owner: raise the cap to 8 so the rotation completes.**
+Stopping at 5 would leave three lenses unasked, and `00_CHAIN_SPEC.md` §5 names
+reporting a cap as convergence as the worst outcome this design can produce.

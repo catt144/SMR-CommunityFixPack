@@ -128,6 +128,48 @@ appeared on screen during an upload sitting.
 - ⚠️ Read it as **a player who arrived from a store link and knows nothing**, not
   as someone who knows what the mod is for.
 
+> ⭐⭐ **Added by link 4 (2026-08-18) — ASK WHERE THE SURFACE'S WORDS COME FROM,
+> NOT WHETHER THE SURFACE WORKS. This generalises past L4 and it is the question
+> that produced both of this link's real findings.** The pack has exactly one
+> designed screen surface and the obvious questions about it (does it fire, does
+> it fire twice, does it fire falsely) had all been asked. Nobody had asked the
+> boring one: **what STRING does it print, and where did that string come from?**
+> Two answers, both defects. It prints `table.concat(suspects, ", ")` — internal
+> module ids — while the registry beside it carries a plain-English `title` for
+> all 75 modules; and its single sentence covers `status == "error"` as well as
+> `inactive`, so a crash of **ours** is announced to the player as a **game
+> update**. ⇒ **A surface that works is not a surface that is honest.** Trace
+> every player-read string back to the variable it is built from and ask what
+> else can be in that variable.
+>
+> ⭐ **And the corollary that found the third one: enumerate the STATE
+> TRANSITIONS, then ask which of them is silent.** Every status change in
+> `00_Core` writes a log line except `ctx.heal()`, which writes none — so a log
+> can end on a false `inactive`. That is not visible in any single module; it is
+> visible in one table of transitions against one column of log lines, and the
+> archive then measures it (56 of 57 logs carry the stale line). **Whenever a
+> component reports its state, list the transitions and diff them against the
+> reports.**
+>
+> ⚠️ **What a re-take of L4 owes, in priority order.** ① **The one designed
+> surface has never executed** — 0 occurrences in 57 archived logs — so every
+> claim about it, including this link's four Src re-derivations, is source-only.
+> The first configuration that makes it fire is worth staging deliberately.
+> ② ⛔ **No console platform has ever been touched by this project**, and
+> `FIX_POLICY` §7 makes that dialog the ONLY player-facing surface there — the
+> highest-leverage unreached territory in this lens by a distance. ③ **No
+> non-English run, ever**: two re-used translation ids ship on player screens and
+> neither was tested against `Local\*.fpk`, though `tools/flpk_extract.py` and the
+> `C51` precedent make it a cheap, mechanical job. ④ **The aggregate notification
+> RATE** — one module deliberately revives a warning class vanilla could never
+> fire, and nobody has watched a colony with it on.
+>
+> ⭐ **A negative worth inheriting so it is not re-derived:** the pack mints **no**
+> notification, popup, banner or voice line of its own. All 17 screen call sites
+> raise a surface the game already owns, inside vanilla-body copies. The player
+> experience of this pack is, by construction, the game's own — which is why the
+> two defects both landed in the one place the pack speaks with its own voice.
+
 ## L5 · Failure & containment
 
 Every module routes through `00_Core`.

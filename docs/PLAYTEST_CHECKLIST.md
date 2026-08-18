@@ -114,6 +114,69 @@ completed tests move whole to
     stores — but it is genuinely a shrug either way and you lose nothing by
     deciding when you get there.
 
+### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 4 REPORTED. Nothing blocks launch. No code changed. One wording call, and one bigger question about the chain itself.
+
+41. ⭐ **Link 4 — lens 4 of 8, "player experience".** The question: **what does a
+    player actually SEE and READ?** The answer should be *nothing*, and it very
+    nearly is — the pack raises **no** notification, popup, banner or voice line
+    of its own. Everything it can put on screen is a box the game already owns.
+
+    **But there is one place the mod speaks in its own voice**, and it is the box
+    you saw at the upload sitting: the message that appears when a fix has stood
+    itself down after a game update. **Two things about its wording need you,
+    because it is the mod's only voice — and on Xbox and PlayStation it is the
+    only thing a player can ever see from us at all** (no log, no console there).
+
+    * **It lists our internal file names, not the fixes.** It would say
+      *"Switched off: AstrogeologistExtractors, SaintBlessing"*. Those names
+      appear on **no page a player can reach** — not the mod page, not the fix
+      list, not the FAQ. Meanwhile every one of the 75 modules already carries a
+      plain-English title in the same style the fix list uses ("Command Center
+      graph captions count maintenance, like the bars do"). We have the readable
+      version and print the unreadable one. *(Same trap as the Bottomless Pit
+      building that actually displays as "Experiment 1: Big Drop".)*
+    * **If one of our fixes crashes, the box blames the game.** The message is
+      one sentence covering every reason a fix switched off, and it says the game
+      code "has changed — usually after a game update" and tells the player to go
+      look for a newer version of our mod. That is right when a patch really did
+      move something. It is **wrong** when the cause was a bug in **our** code or
+      a clash with another mod — we would be pointing at Paradox for our own
+      mistake and sending the player after a version that does not exist.
+
+    ⛔ **Neither can happen today** — this box has never once appeared in any of
+    the 57 recorded sessions, and no fix has ever crashed in one. This is about
+    what it would say on the day it does.
+
+    **Recommendation: fix both, in the terminal audit, as one small text change**
+    — print the readable titles, and say "switched themselves off" without
+    blaming a game update unless we actually detected one. It is words only, in a
+    box no player has yet seen, so the risk of touching it is about as low as a
+    code change gets. Say the word and it goes in the audit's list.
+
+    **Nothing else needs you.** A third finding — our log never writes a line when
+    a fix *recovers*, so 56 of 57 recorded logs end up saying a module is switched
+    off when it is actually working — is a plain repair with no decision in it,
+    and it is routed to the audit. Three other things were checked and came back
+    clean: the mod-page claim that *every* fix inspects the game's code first is
+    true for all 75 (checked one by one); the "five judgment calls" count matches
+    on every surface; and the box's plumbing was traced through the game's own
+    code for the first time and works.
+
+    ⭐⭐ **The bigger question — and it is a real one.** Your chain has a cap of
+    **five** links, and I am the fourth. **Four of the eight lenses would still be
+    unasked**, and each of the remaining three owns a job with a track record:
+    the "does the mod promise anything it doesn't deliver" lens (we have found
+    that class of mistake **four** times now, most recently this session); the
+    "packed install" lens, which covers the fact that **the mod has never once
+    been loaded the way a player will load it**; and the "another mod is
+    installed too" lens, which link 1 explicitly left 15 unchecked items for.
+
+    **Recommendation: raise the cap to 8 and let the rotation finish.** Your own
+    spec says stopping because you hit the cap and calling it "we found
+    everything" is the worst thing this design can do — so I am saying plainly
+    that I do **not** think one more link closes it. Each link is unattended and
+    costs you only the moment you spend kicking it off.
+
 ### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 3 REPORTED. Nothing blocks launch. No code changed. One call for you, and it is a small one.
 
 40. ⭐ **Link 3 — lens 3 of 8, "save & exit".** The question: **not "is each fix
