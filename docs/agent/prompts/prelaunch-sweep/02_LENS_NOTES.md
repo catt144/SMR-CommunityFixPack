@@ -1,0 +1,136 @@
+# Lens notes — the detailed questions, one block per lens
+
+⛔ **RE-RUNNABLE reference, not a job.** `01_LINK.md` is the job. This file exists
+so a link taking lens `Lx` inherits the specific questions rather than
+re-inventing them.
+
+⛔ **These are a FLOOR, not a ceiling.** Every under-count in this project's
+history happened because *the brief never asked*. If your lens suggests a question
+that is not written here, **that question is the valuable one** — ask it, and add
+it to this file at close-out so the next link inherits it.
+
+⚠️ Where a question cannot be answered from source: ⛔ **never convert "no
+evidence of a problem" into "no problem."** It goes in the ledger's *NOT reached*
+column.
+
+---
+
+## L1 · Structure & collision
+
+⭐ **Build the map, mechanically: every symbol the pack patches → which module(s)
+patch it.** Cover all five exposure shapes (`WORKFLOW` §"fpk verification"):
+class method · table slot · global assignment · preset field · own thread.
+
+- **Any symbol with more than one patcher is a finding.** Per-module review
+  cannot see this — each module only knows its own target.
+- Where two modules share a target: does order change behaviour? Is one's wrapper
+  defeated by the other's?
+- ⛔ **This map has never been produced.** Commit it as an artifact under
+  `docs/agent/reports/`, not as a sentence in a report.
+
+## L2 · Lifecycle & idempotency
+
+`ReloadLua` re-runs every module's `apply`. The 2026-08-17 fix stopped `order`
+growing; ⛔ **it did not change the fact that apply runs again.**
+
+- ⛔⛔ **Does any module wrap its own wrapper on a second apply?** A double wrapper
+  doubles an effect. `C39` measured *"our delta 0 at every read (no double-pay)"*
+  on a **single** load — the two-apply case is a different question and appears
+  never to have been asked.
+- `DataPatch` sites carry a `ctx.patched` guard. **Plain §1.4 wrappers may not.**
+  Sweep every one.
+- **Answer the reachability question at Src rather than assuming it:** a player
+  disabling a mod needs a full restart (D13), so **what else calls `ReloadLua` on
+  a retail install?** Name the callers.
+- Ordering: `ClassesBuilt` / `DataLoaded` / `ModsReloaded` / `DataChanged`
+  (`SMRFixPack.OnDataReady`) — is every module's assumption about which fires
+  first actually true?
+
+## L3 · Save & exit
+
+The card tells players the pack *"writes almost nothing into your savegame."*
+Every module was verified alone. ⛔ **Nobody has summed them.**
+
+- What is the **total** footprint across all 75 — measured, not reasoned?
+- Does `90_SaveSanitizer`'s coverage match the **current** module set, or the set
+  it was written against?
+- `FIX_POLICY` §3a is a HARD RULE (owner, 2026-07-31). Does the pack obey it **in
+  aggregate**?
+- Uninstall takes all 75 out at once, and the story was **assembled from pieces**
+  (`RELEASE_UNINSTALL_ASSEMBLY.md`): latched heals, rains migration, layer-2
+  residue, the engine's savegame-mod-ref line. Does it hold together?
+
+## L4 · Player experience
+
+**What does a player actually SEE and READ?** The answer should be **nothing** —
+and the 2026-08-17 defect was exactly this class, caught only because a box
+appeared on screen during an upload sitting.
+
+- First launch through to a loaded save: dialogs, notifications, banners.
+- Log lines a curious player could stumble into — is any of it alarming or false?
+- In-game wording anywhere the mod speaks (the stand-down dialog is the only
+  designed one — is it?).
+- ⚠️ Read it as **a player who arrived from a store link and knows nothing**, not
+  as someone who knows what the mod is for.
+
+## L5 · Failure & containment
+
+Every module routes through `00_Core`.
+
+- One module's `apply` throws — are the other 74 unaffected? (`run_apply` pcalls;
+  verify, and check the **runtime** paths too, not just apply.)
+- An installed **wrapper** throws mid-game — what does the player experience?
+  `FIX_POLICY` §2 says *fail safe, never loud*. Is that true **in aggregate**?
+- An `OnMsg` handler throwing is swallowed by `procall` (`cthreads.lua:20`) —
+  the named **F87 failure mode**: reporting `active` while having done nothing.
+  How many modules could be in that state right now and nobody would know?
+
+## L6 · Promise vs behaviour
+
+Five surfaces must agree and have drifted before: `bugs/INDEX.md` ·
+`metadata.lua` `code` · `items.lua` · the shipped `.fpk` · the card/site/README.
+
+- Any module shipping with no entry? Any entry promising a fix not in the package?
+  (The `F24`/`F28` class — bullets promising **deleted** fixes — has happened.)
+- ⛔ **Dead-coded targets: is F85 the only one?** Its dialog's sole caller sits
+  behind a literal `local cond = false`. **Nobody has swept for a second
+  instance**, and *player-route ≠ source citation* has been the finding **three**
+  times.
+- The **veto route** the README began advertising on 2026-08-17: does
+  `SMRFixPack_Disabled` actually stop **all 75**, including modules that patch at
+  load without going through `WhenActive`? ⭐ *"You can X" needs a route check* —
+  a citation proving the mechanism exists is a **different** check, and the owner
+  has overturned a line three reviews passed on exactly this.
+
+## L7 · Environment & namespace
+
+- **Enumerate every global the pack creates or writes.** Expected: `SMRFixPack`,
+  `SMRFixPack_Disabled`, `SMRFixPack_Optional`. ⛔ Any accidental global is a
+  collision risk with other mods — and other mods are on this rig by ruling.
+  `EF-064` is relevant (`ProtectedPropertyObject` protects nothing in retail).
+- ⭐ **Packed vs unpacked.** A player gets `MountPack` + `def.packed = true` +
+  `metadata.lua` read from **inside** the archive (`Mod.lua:1724-1740`). We have
+  only ever run `MountFolder` through a junction. See
+  `98_LAUNCH_REHEARSAL.md` §4.
+- ⭐ **What has the TestKit been hiding?** It loads innermost, **mutates `_G`**
+  (`SMRTest.SetGlobal`, the loggers), registers a UI action and enables the
+  console — and **every gate reading this project owns was taken with it loaded.**
+- Console platforms (`FIX_POLICY` §7): achievements block on exactly
+  playstation / xbox / **windows_store** (`Achievement.lua:61-63`) ⇒ say *"Steam
+  and other PC versions"*, ⛔ never bare "PC".
+
+## L8 · Adversarial / hostile modder
+
+Assume another mod is installed that is not ours and not friendly.
+
+- It wraps what we wrap, and loads **before** us. Then: **after** us. What breaks?
+- ⚠️ Inter-mod order is the player's **enable** order, decided before our Lua
+  runs; there is no priority field and enabling APPENDS (`ModManager.lua:36`),
+  while the visible list is a **cosmetic title sort** (`Mod.lua:1674`) — so a
+  player cannot verify any advice we gave. ⛔ Load order must NOT appear as player
+  advice (owner ruling 2026-08-16); this lens is about **resilience**, not
+  guidance.
+- If a conflict does occur, **whose fault does it look like** — and does our
+  stand-down machinery report something true, or something that blames the game?
+- `EF-054` (wrapper ordering, mod-id keying) and `EF-058` (the flattened-class
+  trap — bit this project **four** times) are the known shapes.

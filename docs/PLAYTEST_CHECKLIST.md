@@ -60,17 +60,43 @@ completed tests move whole to
     what 1.0.0 now is.** ⛔ **Nothing is verified yet in a running game**, and
     the release tag is deliberately parked one commit behind until it is.
 
-    ⭐ **Your audit is written and waiting: `agent/prompts/PRERELEASE_MOD_AUDIT_fable.md`**
-    — your ask, *"a top level pre release sweep of the mod… the mod as one
-    organism instead of looking at individual pieces."* It re-reads today's two
-    fixes hostilely (including a planted criticism of one of them) and then runs
-    eleven organism passes nobody has ever run here: do our own 75 modules patch
-    the same things and fight each other · does any module wrap itself twice when
-    the game reloads · what does a player actually **see** on a first launch ·
-    what does the pack write into a save **in total** rather than one module at a
-    time · is F85 the only fix whose target is unreachable on retail. It runs its
-    own launches at zero cost to you and leaves you a short list for the
-    opt-in-off pass you said you wanted to do yourself.
+    ⭐⭐ **Your chain is built and waiting: `agent/prompts/prelaunch-sweep/`** —
+    your design, *"a chain that is self replicating… it doesn't stop until a
+    chain finds nothing,"* with three changes I'd argue for and you can overrule:
+
+    * ⛔ **Blinding the next session does not work in this repo** — our own rules
+      make it read `git log` and STATE, and our commit messages are essays. So
+      links are blind on **findings** (`SWEEP_FINDINGS.md`, forbidden) and
+      sighted on **coverage** (`SWEEP_LEDGER.md`, required). Chain commits use
+      deliberately boring one-line subjects so a staleness check can't leak.
+    * ⭐ **Vary the question, not the sweep.** Eight lenses, one per link. The
+      reason is your own observation: tonight's finds came from asking something
+      no brief had asked, not from sweeping harder. Five identical sweeps mostly
+      re-cover the comfortable ground.
+    * ⚠️ **"Until one finds nothing" is not safe on its own** — silence has two
+      causes, and one of them is a shallow sweep. So it stops on *nothing new in
+      **unswept** territory*, or two cosmetic-only links, or a cap of 5 — and the
+      terminal audit must **name which**, because reporting a cap as a clean bill
+      is the worst thing this design could do.
+
+    Links 1–2 may fix; 3+ record only (each fix adds risk to a release
+    candidate), except launch-blocking findings, which are fixed at any link.
+    **Each link reports to you and stops; you kick off the next.** The Fable
+    terminal audit reads everything, re-reads today's fixes hostilely, does its
+    own final sweep, and issues the upload verdict.
+
+    ⭐ **Plus the two things you added, which are the best part of it.** The
+    launch **dry run** (`98_LAUNCH_REHEARSAL.md`): ⛔ nothing may touch a portal
+    API — the first API call is the one that *creates the listing*, so "every
+    step up to publish" isn't the safe line — but the upload's **validation** is
+    separable from its transmission, so `tools/upload_preflight.py` now runs all
+    six Paradox guards plus Steam's size limits locally, **in seconds, forever.**
+    I proved it catches tonight's blocker by deleting the field again. And your
+    A/B call is written in as you framed it: **A is information, B is the gate.**
+    ⛔ B is the first time in this project's history the mod will be run the way a
+    player receives it — **packed, junction pulled, TestKit and opt-in off.**
+    Every gate number we own was taken unpacked with a third mod loaded that
+    rewrites globals.
 
     ❓ **Q1 — mirror the two fixes into the opt-in pack now, or leave them?**
     Both defects are identical in that mod's own core — it is where the dialog
