@@ -114,6 +114,31 @@ completed tests move whole to
     stores — but it is genuinely a shrug either way and you lose nothing by
     deciding when you get there.
 
+### ⭐ 2026-08-18 — STATE.md WAS EVICTED ON YOUR DIRECTION. One decision: where to set its size caps, now with real numbers.
+
+42. ⭐ **What happened.** The agents' one mandatory-read file had quietly grown
+    to **~130KB (~33,000 tokens)** — every session paid that before doing any
+    work, and its 60-line budget was being satisfied while being defeated
+    (single lines had become thousand-word walls). On your direction it was
+    evicted: STATE.md is now a kernel (current position · hazards · your
+    rulings in force · pointers), the six days of closed history moved to the
+    session log as digests with grep tags, nothing was deleted (the full old
+    file is readable forever via git), and a standing cleanup prompt
+    (`agent/prompts/STATE_EVICTION.md`) exists so you can fire future
+    evictions with one line.
+
+    **The measured number you asked for: the clean kernel is 4.5KB ≈ ~1,200
+    tokens** — about 27× smaller. ❓ **The decision: the two caps.** Per your
+    design, doccheck gets a **warn** threshold (crossing it puts one flag line
+    in your after-run report; you fire the eviction prompt at your leisure)
+    and a **hard** cap (commit blocks; the backstop if flags get ignored).
+    **Recommendation: warn at 9KB (2× the clean size — real room to grow
+    between cleanups) and hard at 18KB (4× — even ignored, a session's boot
+    read never exceeds ~4,600 tokens, vs the 33,000 this week).** The existing
+    60-line rule stays as a secondary screen-length check. Numbers are one
+    constant each in doccheck — say "9 and 18", "10 and 20", or anything else,
+    and the guard goes in with your figures.
+
 ### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 4 REPORTED. Nothing blocks launch. No code changed. One wording call, and one bigger question about the chain itself.
 
 41. ⭐ **Link 4 — lens 4 of 8, "player experience".** The question: **what does a

@@ -8,6 +8,118 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-18 — STATE.md evicted to a kernel: six days of closed history move here (owner-directed)
+
+tags: item-17 item-26 item-27 item-28 item-29 item-30 item-31 item-32 item-33
+item-34 item-35 item-36 item-37 item-38 item-39 item-40 item-41 D13 F85 C39
+C47 C48 C49 C50 C51 C52 EF-051 EF-054 EF-055 EF-056 EF-057 EF-058 EF-059
+EF-060 EF-061 EF-062 EF-063 EF-064 PT-10 PT-62 2f077e8 7824cbc
+
+**Why this entry exists.** STATE.md — nominally 61 lines — had accreted to
+~130KB / ~33k tokens, taxing every session's context before work began, and
+its 60-line budget was being satisfied while being defeated (single lines grew
+into thousand-word walls). The owner directed an eviction: STATE becomes a
+kernel (status + pointer, never derivation) and the closed history moves here
+as digests. **The full pre-eviction file is preserved verbatim at
+`git show d30a10d:docs/agent/STATE.md`** — every claim below is a digest of
+that grave, which remains the authoritative wording. Standing procedure for
+future evictions: `agent/prompts/STATE_EVICTION.md`.
+
+Digests of the evicted efforts, newest first:
+
+- **08-17/18 — pre-launch sweep chain, links 1–4 consumed** (owner design:
+  8 lenses, one per link, blind on findings / sighted on coverage). L1
+  structure/collision → `reports/L1_COLLISION_MAP.md`; L2
+  lifecycle/idempotency → `reports/L2_LIFECYCLE_MAP.md` (one `00_Core.lua`
+  fix: reload-persistent `data_edited` memo); L3 save/exit →
+  `reports/L3_SAVE_FOOTPRINT.md`; L4 player experience →
+  `reports/L4_PLAYER_SURFACES.md`. Verdicts live in the chain's findings
+  ledger (forbidden to links) and those reports — deliberately not restated
+  here. Items 38 (resolved same day — load-order guard in doccheck), 39, 40,
+  41 raised; nothing found blocks launch through link 4.
+- **08-17 — ④ upload sitting opened and PAUSED on the owner's word.** Prep
+  `7824cbc` (= the tag): missing `image` field found and fixed, real `.fpk`
+  built and listed (80 files; the `*/docs/*` wildcard question settled by
+  measurement), `tools/upload_preflight.py` born later in the sweep design.
+  A dialog read instead of waved past → 2 organism-level defects in
+  `00_Core.lua` fixed in `2f077e8` (stale `update_suspect` never cleared ×2
+  sites → false "game code changed" box possible on a fresh release; registry
+  double-append on every `ReloadLua`). Owner overrode ship-now-fix-later
+  (*"clean period"*). Checklist item 37 carries the full plain-language
+  account + Q1/Q2.
+- **08-17 — rename: Community Fix Pack → RELAUNCHED FIX PACK** (display only;
+  collision with fredware's *SMR Community Fixes*, Paradox 154004). True
+  census 113 occurrences / 43 files across both repos incl. both preview
+  PNGs re-lettered; mod `id` + `[CommunityFixPack]` log tag KEPT (routed,
+  item 36); sibling titles renamed same day on owner's word; fix-pack README
+  rewritten to current truth. Record: the item-36 block + commit messages.
+- **08-17 — SOLO LAUNCH RULED: the fix pack ships alone at 1.0.0.**
+  SHIP_SOLO_PREP consumed (grave via git): ~46 opt-in passages parked
+  verbatim in `reports/PARKED_OPTIN_REFERENCES.md` with restore trigger;
+  version 1.0.0 set, tag moved to `fixpack-v1.0.0`; card re-measured
+  10,781/1,881, description 779. Restore obligation recorded in the opt-in
+  repo's STATE.
+- **08-16 — public-docs checkup** (owner ask; brief grave via git): item-31
+  stragglers fixed (Six→FIVE ×3), "95 checks" prediction → 96 measured
+  (`c47suite4_*`: `80/0/16/0` of 96, gates `75/75`+`8/8`), ④ sheet fix-pack
+  body cell corrected to 11,209/1,957 measured.
+- **08-16 — SMRCF coverage sweep** (their mod never installed; reference
+  clone kept): C49–C52 filed, 1 rejected, C35 materially upgraded, EF-063/064
+  filed, EF-039 stale caveat struck. Report
+  `reports/SMRCF_COVERAGE_SWEEP.md`; fresh-context QA owed before any lead
+  becomes code (→ item 34, rec AFTER launch).
+- **08-15/16 — the seed-logistics family (C47/C48), owned end-to-end and then
+  handed off.** Chains `c47-farm` (+ attended sitting; C47 took a screen
+  claim; C48 filed off the owner's find) and the `c48-brake` / `c48-pairing`
+  legs: option J refuted by falsifier, then 985 witnessed pairings proved
+  `rfStorageDepot` reserve semantics categorically. EF-057–060 filed. Owner
+  rulings: family → opt-in repo (`SEED_LOGISTICS_HANDOFF.md`), no fix code
+  here ever; C47's shapes retired here (shape 1 refuted outright). Ours:
+  records, the wave-11 probe, the unrun descending-ladder speed leg. Full
+  narratives already below in this file (08-16 entries) and in the entries.
+- **08-16 — rig facts + closures:** PT-10 ran attended (drones enter/service
+  open domes — F55's open question DISPROVEN, F55 itself NOT promoted);
+  EF-061/062 filed; load-order question adjudicated NOTED-NOT-ACTED
+  (deference-not-precedence, no player advice — EF-054 + FIX_POLICY §8);
+  achievements phrasing tightened ("Steam and other PC versions").
+- **08-15 — F85+C39 built and verified (`unattended-3` chain, audit
+  sustained), then F85 REMOVED the same week:** C39's paused bracket measured
+  the repair at 2.008× with control unmoved; F85 flag-flip verified — then
+  item 31 found its dialog dead-coded in retail (`local cond = false`,
+  `POIAdditionalContent.generated.lua:89-111`) → module shelved whole in
+  `reports/SHELVED_F85_DISTRESS_PAUSE.md` (verbatim code + re-arm trigger),
+  entry `wontfix`, counts 75 modules / 76 files / 96 probes. Item 30: C39
+  ships as built, all 8 families. Third instance of *player-route ≠ source
+  citation*.
+- **08-15 — status vocabulary split (26b, owner-amended):**
+  `tested-attended` / `tested-unattended` built into doccheck + WORKFLOW;
+  bare `tested` = legacy, closed to new work; retro-pass ruled OUT. Item 32:
+  stray `U2RT1` deleted, EF-051 falsifier stands. Item 26 leftover: rescue
+  display name pre-approved (applied 08-17 with the family rename).
+- **08-14 — release-3 chain + the ④ sheet:** RELEASE_DESCRIPTION_{FIXPACK,
+  OPTIN,RESCUE} diff-proven verbatim, RELEASE_UNINSTALL_ASSEMBLY,
+  RELEASE_PORTAL_PREP; terminal audit caught 3 (rescue save-step, per-mod
+  stand-down contradiction, item-29 LOG-only notice claim). All 5 ④ calls
+  ruled same day (29 struck everywhere, 17 rescue = contingency only, 28
+  ship-as-built).
+- **08-13/14 — D13 built, verified, `tested` via the combined sitting** (34
+  owner-minutes): third mod `SMR-CommunitySaveRescue` exists (junction
+  pulled, not a rig mod); after-sweep on a native witness removed 1566
+  matching a pre-committed prediction; F102 local half closed. EF-055 limit
+  found (junction round-trip cost one owner visit). Records:
+  `D13_EXPOSED_SET.md` §10, `reports/D13_VERIFICATION.md`, `archive/rs_*`,
+  `archive/cs_*`.
+- **08-12/13 — the opt-in split closed:** second mod `C:\Dev\SMR-OptInPack`
+  (D01–D07/D09/D12 moved out as tombstones here), audit sustained, save
+  contract held, no-retraining test passed. Ship line frozen 08-12 (owner,
+  checklist 14); trains = option A, queue closed.
+- **Standing gate/baseline history evicted with the above:** the a2 baseline
+  `74/74`+`8/8` → `78/0/16/0` of 94 (08-13) → `80/0/16/0` of 96 measured
+  08-15 (`c47suite4_*`) — supersession chain retired; only the current
+  reading survives in STATE. PT-62 remainder → D12 (opt-in repo); F42
+  wontfix; D08 speced-unbuilt; F76 → C41; F11 settled P2; F99/C42 rate-only;
+  riders C42/F99/F80/F96-R2 → post-release watch.
+
 ## 2026-08-16 — the pairing log: 985 matchmaker decisions witnessed at the one seam they all cross, and the owner's last-resort theory is proven categorically
 
 **This session (Fable), on the owner's go, and the case belongs to them.** In
