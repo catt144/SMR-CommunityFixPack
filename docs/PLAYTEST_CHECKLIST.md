@@ -127,17 +127,19 @@ completed tests move whole to
     (`agent/prompts/STATE_EVICTION.md`) exists so you can fire future
     evictions with one line.
 
-    **The measured number you asked for: the clean kernel is 4.5KB ≈ ~1,200
-    tokens** — about 27× smaller. ❓ **The decision: the two caps.** Per your
-    design, doccheck gets a **warn** threshold (crossing it puts one flag line
-    in your after-run report; you fire the eviction prompt at your leisure)
-    and a **hard** cap (commit blocks; the backstop if flags get ignored).
-    **Recommendation: warn at 9KB (2× the clean size — real room to grow
-    between cleanups) and hard at 18KB (4× — even ignored, a session's boot
-    read never exceeds ~4,600 tokens, vs the 33,000 this week).** The existing
-    60-line rule stays as a secondary screen-length check. Numbers are one
-    constant each in doccheck — say "9 and 18", "10 and 20", or anything else,
-    and the guard goes in with your figures.
+    **The measured numbers you asked for: old file 71,077 bytes = 33,066
+    tokens (its emoji-heavy prose cost ~2.2 bytes/token); clean kernel 4,524
+    bytes ≈ 1,200–2,000 tokens** — a 16–27× cut. ❓ **The decision: the two
+    caps.** Per your design, doccheck gets a **warn** threshold (crossing it
+    puts one flag line in your after-run report; you fire the eviction prompt
+    at your leisure) and a **hard** cap (commit blocks; the backstop if flags
+    get ignored). **Recommendation: warn at 9KB (2× the clean size — real
+    room to grow between cleanups) and hard at 18KB (4× — even ignored, a
+    boot read stays under ~8,400 tokens at the old file's worst density,
+    typically ~4,500, vs this week's 33,000).** The existing 60-line rule
+    stays as a secondary screen-length check. Numbers are one constant each
+    in doccheck — say "9 and 18", "10 and 20", or anything else, and the
+    guard goes in with your figures.
 
 ### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 4 REPORTED. Nothing blocks launch. No code changed. One wording call, and one bigger question about the chain itself.
 
