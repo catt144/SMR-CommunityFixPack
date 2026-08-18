@@ -379,3 +379,202 @@ pre-registered in a pushed commit, probe-hygiene sweep after.
 - **Checklist 39** — should the deactivation dialog re-fire after a Mod Manager
   visit, or show once per process? (recommendation: **once per process, keep the
   log line every load**; it is what `00_Core.lua:528` already promises.)
+
+---
+
+# Link 3 — lens L3, save & exit (2026-08-18)
+
+**Nothing found blocks launch. ZERO code changed** — link 3 is record-only
+(`00_CHAIN_SPEC.md` §4) and no finding met the launch-blocking exception.
+Artifact: `reports/L3_SAVE_FOOTPRINT.md`. Instrument:
+`tools/l3_save_footprint.py`. Config: dev tree, unpacked, source-derived; **no
+launch**, nothing read off a real save.
+
+⚠️ **Own-instrument defects, disclosed before any count is used.** (1) The
+handler regex matched only `OnMsg.X = f` and missed `function OnMsg.X() … end`,
+hiding **two** `PostLoadGame` passes from the load-order table. (2) A
+string-blanked scan lost **4** of the 13 `SMRFixPack_*` tokens, which live only
+inside string literals. Both found by cross-checking the census against a plain
+grep, both fixed and commented in the script; every count below is post-fix.
+Neither changed a verdict.
+
+---
+
+## L3-F1 · ⭐ `smr_shuttles` — the one persisted key that breaks the naming rule, and the exposed-set row that is wrong because of it
+
+**Severity: not harmful, not launch-blocking. It is a RECORD defect plus an
+undispositioned site.** → routed, checklist item 40.
+
+`Fix_ShuttleTransportCache:88` writes `entry.smr_shuttles = with_shuttles` onto
+the cache-entry table stored at `t[pos]` inside `g_TransportationModeToCommunityCache`,
+which is `GameVar(…, false)` at `Lua\Units\Colonist.lua:2478`. ⇒ a mod-authored
+boolean under a mod-authored key travels in every savegame.
+
+⛔ **`D13_EXPOSED_SET.md` §2c lists that global among those whose contents are
+"indistinguishable from vanilla's own and carry nothing of ours." For this
+global that is false.**
+
+⭐ **Why the authoritative derivation could not have caught it, and the general
+lesson:** §1.1 swept route-(c) persisted state with the **`SMRFixPack_*` token
+as its grep key**. `FIX_POLICY` §3's naming rule is therefore **not a style
+preference — it is the key the census runs on**, and the single site that breaks
+it is structurally invisible to the census that is supposed to enumerate it.
+
+**Generalised mechanically, so this is not one anecdote:** all **66** field names
+the pack writes on non-local carriers were tested against the entire shipped tree
+(**4,446** Src `.lua` files, **131,363** distinct tokens). **9** are absent from
+Src. 6 follow the convention. Of the 3 that do not, `ever_changed` and
+`update_suspect` are on mod tables (`ctx`, `SMRFixPack.fixes[id]`) and are not
+persisted. **`smr_shuttles` is the only one.** ⇒ the breach is real and it is
+singular; the census now exists to keep it that way.
+
+**The cost, adjudicated rather than asserted:** vanilla reads the entry with
+`table.unpack` (`Colonist.lua:2537`), which takes the array part only, so the key
+is inert after uninstall — the module's own header says exactly this (`:22-24`)
+and is accurate. The whole cache is dropped on `TrainRoutesRebuilt` /
+`DomesConnected` / `DomesDisconnected` (`:2480-2488`), so the residue is
+transient. **Three-tier ethos level 2 at worst, plausibly level 1.**
+
+⇒ The finding is not the behaviour. It is that `FIX_POLICY` §3a says *"A site
+with no recorded disposition blocks release by default; a site with one does not,
+whichever way it went"* — and this site has none, because it was never on a list.
+**Recording the disposition is a docs act and is what this link does**; the
+owner's call is whether the recorded disposition discharges §3a or whether they
+want the key renamed to `SMRFixPack_shuttles` first (a one-line code change,
+which link 3 may not make).
+
+## L3-F2 · ⭐⭐ The exit law, and the shipped header that states it backwards
+
+**Severity: a wrong disclosure inside a shipped code comment. No player surface
+repeats it.** Record-only; no route needed.
+
+Re-derived at Src this session rather than cited: `OnMsg.PersistSave` writes
+`data[k]` for every key of `PersistableGlobals`, and `OnMsg.PersistLoad` restores
+only keys of `PersistableGlobals` (`CommonLua\Core\persist.lua:119-143`).
+`GameVar` is what puts a name in that table, and `GameVar` only runs when our
+file loads.
+
+> ⭐ **THE LAW, stated nowhere on record until now: a persisted name of ours
+> survives uninstall if and only if its CARRIER is vanilla's. The only two of the
+> pack's twelve persisted keys that vanish are the two whose carrier is a
+> `GameVar` we registered ourselves** — `SMRFixPack_MeteorLatch` and
+> `SMRFixPack_FirstAsteroidPrefabs`. The full per-name table is artifact §7.
+
+⛔ **`Fix_MeteorFrequency:36-37` discloses the opposite**, as an accepted
+residual: *"the SMRFixPack_MeteorLatch GameVar stays in the save after uninstall
+as inert data (prior art: GromGor's `MeteorsFixed` GameVar, C31)."* Repeated at
+`:69-70`. Precisely: the save file the player already holds still contains the
+value in its blob, but it is never restored without the pack and is omitted from
+the next save. ⇒ **we disclose a residual we do not leave.**
+
+⭐ **The pack contains both the wrong and the right statement of the same
+mechanism.** `Fix_FirstAsteroidPrefabs:95-101` gets it right and cites
+`persist.lua:135-142`. And the player-facing route is already correct —
+`RELEASE_UNINSTALL_ASSEMBLY.md` §1 records *"the one version-stamped name is
+dropped by the engine on the first load without the pack."* ⇒ **the defect is
+confined to a code comment.** That bound is why this is not routed.
+
+## L3-F3 · The meteor heal's stated invariant is not what the mechanism delivers
+
+**Severity: bounded, arguably correct behaviour; the INVARIANT is misstated.**
+Record-only.
+
+`Fix_MeteorFrequency:42-51` promises *"one restart per save lineage per
+version"* — the latch holds the last-healed pack version. By L3-F2 the latch is
+erased by any save written without the pack. ⇒ on **uninstall → play → save →
+reinstall**, and on the Mod-Manager disable → enable route that spans one save
+(`EF-002` state (4); D13's state (4)), the latch reads `false ≠ version`, the
+heal runs again, and `RestartGlobalGameTimeThread("Meteors")` **re-rolls the
+35–115 h meteor timer**.
+
+**Stated fairly:** one re-roll per reinstall cycle. F88 — the defect this design
+exists to prevent — was one re-roll **per load**, which is what made it silent
+and permanent. A single re-roll on a reinstall is bounded and arguably desirable
+(a reinstall *should* clear persisted old bodies). ⛔ **Not harmful, not
+launch-blocking.** The guarantee is per save lineage per version **per continuous
+installation**, and nothing on record says so.
+
+## L3-F4 · `90_SaveSanitizer` sets its F48 one-shot flag BEFORE the pass, so a decline latches permanently
+
+**Severity: latent — reachable only after a game update moves two globals.**
+Record-only; the one-line repair is a code change.
+
+`:337-342` sets `colony[F48_FLAG] = true` and *then* calls
+`repair_station_connectors`. That function has a deliberate decline branch
+(`:249-252`) for when `ProcessTrackElements` / `ResolveMap` are no longer
+globals — the design that keeps a moved API from deactivating the F35 and F03
+repairs alongside it. The flag is already set by then, and it lives on
+`UIColony`, so **the decline is permanent for that save**: a later pack build
+that handles the moved API would find the flag set and never run. The same holds
+for a raise the `pcall` swallows.
+
+The flag's own stated contract (`:212-214`) is *"a save this pass has already
+re-ordered is never re-ordered again"* — but it is also set on a save the pass
+declined to re-order. F35 and F03 are unaffected (they re-derive every load).
+
+## L3-F5 · `90_SaveSanitizer`'s scoping header is stale in both directions
+
+**Severity: cosmetic — a factual list inside a shipped comment.** Record-only.
+
+`:5-7` names 8 modules as carrying *"their own LoadGame pass in their own file"*
+(F02, F45, F37, F58, F06, F38, F39, F40). Measured against the tree: **17** do.
+
+* **11 unlisted:** F44, F18, F81, F78, F81b, F83, F92, F95, F102, F65, F49.
+* **F39 has no module in `Code/` at all** — the id occurs in the whole shipped
+  tree only inside this comment; `bugs/INDEX.md` records it `folded`.
+* **F58's pass is `OnMsg.NewDay`** (`Fix_StaleReservations:59`), not a load pass.
+
+Nothing behaves wrongly — it is a scoping note, not a coverage claim — but it is
+the only place a reader is told where this module's boundary sits.
+
+---
+
+## Positive results, recorded because they are load-bearing and were re-derived
+
+1. ⭐ **D13 §3's open Rule-6f routing is DISCHARGED, and nothing on record says
+   so.** That routing named E5/E6/E7 (`CrystalMysteryHang`, `ExtenderFlapChurn`,
+   `TrackConnectorPingPong`) as carrying **no** §3a orphan gate. All three carry
+   one today — `:78`, `:96`, `:179` — read this session, not taken from the
+   headers that claim the 2026-08-13 rewrite. Over all **six** game-time thread
+   sites: 4 gated, 1 gate-free by construction (`Fix_RainsDeadlock:195` passes
+   **vanilla's** `RainsDisasterLoop` as the entry body, so no mod code is in that
+   thread), 1 un-gated with a recorded accepted disposition
+   (`Fix_BombardmentSpread:137`, all-vanilla body that completes the volley and
+   clears `map.g_IncomingMissiles` at `:152`).
+2. ⭐ **The 11 persisted names re-derived from the tree reproduce D13's rows
+   D1–D11 with ZERO membership difference**, and the two module changes since
+   that derivation (`Fix_DistressPopupPause` in and out, C39
+   `Fix_AutomationLawCompensation` in) **added no persisted name**. C39's header
+   declares "Layer 2 by construction, nothing persisted" (`:96-102`) and the
+   census agrees.
+3. ⛔ **0 `OnMsg.SaveGameStart` and 0 `OnMsg.SaveGameDone` in all 76 files.**
+   §3a layer 1 is entirely unused — a positive result under *"build it last, and
+   only for what survives the other two layers"*. Its consequence, which is the
+   honest form of "aggregate save footprint": **nothing is torn down before a
+   save, so the footprint is exactly whatever is live when the player saves**,
+   and the simultaneous liveness of the six game-time threads has never been
+   measured by anything.
+4. **`SavegameFixups` gating re-derived** (`SavegameFixup.lua:10`, `:24-50`):
+   **237** shipped fixups, run in **alphabetical** order via `sorted_pairs` —
+   which is why the devs prefixed `A_StationConnectorElements3` — each once,
+   gated by `AppliedSavegameFixups`, which is itself a **`GameVar`**. ⇒ the
+   "our `LoadGame` pass runs before a shipped fixup" hazard that
+   `90_SaveSanitizer:315-324` was bitten by is live on exactly one load per save:
+   the first load of a save that still owes that fixup — which is precisely the
+   population the repair passes target.
+
+## A hypothesis formed and REFUTED at source, recorded so it is not re-formed
+
+The F48 pass calls `ProcessTrackElements` on every track, and F45 exists because
+`false < number` raises in a `node_idx` sort. It looked as though F48 could trip
+the F45 defect on a save where `Fix_BrokenTrackSalvage` is vetoed. **Refuted:**
+`OrderTrackElements` (`Tracks.lua:520-639`) does not sort by `node_idx` at all —
+it walks the hex grid and renumbers at `:632-633`. The defect is not reachable
+that way.
+
+## Stopping rule
+
+⛔ **Not convergence.** Three lenses of eight are done; L4–L8 are untouched, and
+the ledger's unreached column for this link alone lists thirteen unswept
+load-time passes, the whole uninstall and reinstall walk, and every measured
+figure in this territory. No clause of §5 is invoked.

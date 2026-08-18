@@ -114,6 +114,74 @@ completed tests move whole to
     stores — but it is genuinely a shrug either way and you lose nothing by
     deciding when you get there.
 
+### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 3 REPORTED. Nothing blocks launch. No code changed. One call for you, and it is a small one.
+
+40. ⭐ **Link 3 — lens 3 of 8, "save & exit".** The question: **not "is each fix
+    save-safe" — every module was checked alone — but "what does the whole pack
+    put into one savegame, and what happens to all of it at once when someone
+    removes the mod?"** Nobody had added them up.
+
+    **The one thing that needs you.** The pack keeps a small amount of its own
+    bookkeeping inside your savegame — eleven named items, and our own rule says
+    every one of them must be called `SMRFixPack_something` so that a sweep can
+    find them all. **One does not follow that rule.** A single flag written by
+    the Shuttle Hub fix is called `smr_shuttles`, and because our master list of
+    "everything of ours that ends up in a save" was built by searching for the
+    `SMRFixPack_` name, that one item was never on the list — the list even says
+    explicitly that the place it lives contains *"nothing of ours"*.
+
+    ⛔ **It is harmless, and I want to be plain about that before the question.**
+    It is one true/false value tucked onto a cache entry. The game ignores it
+    completely when the mod is gone, and the whole cache it sits in is thrown
+    away and rebuilt the next time a dome is connected or a train route is
+    rebuilt — so it does not even survive long. It changes nothing a player can
+    see, and it does not block launch.
+
+    ❓ **The call.** Your own hard rule from 2026-08-01 is that *every* place the
+    mod can leave something in a save gets a written decision — and a place with
+    no written decision blocks release by default, whichever way the decision
+    goes. This one now has a written decision (it is recorded, with its reasons,
+    in `agent/reports/L3_SAVE_FOOTPRINT.md`). So:
+
+    * **(a) Accept it as recorded — RECOMMENDED.** The decision is written, the
+      thing is harmless and short-lived, and nothing in the shipped code changes.
+      This is the cheapest option and it satisfies the rule as you wrote it.
+    * **(b) Rename it to `SMRFixPack_shuttles` first.** One word in one line of
+      one file. It buys tidiness — every future sweep would find it — at the
+      cost of touching the release candidate again, which is the thing you have
+      been deliberately not doing.
+
+    ⚠️ I could not make this change myself either way: from link 3 onward the
+    chain only records what it finds, so that the final review sees every finding
+    together before anything is edited.
+
+    **Four smaller things found, all recorded, none needing you.** A comment in
+    the meteor fix says one of our savegame flags *"stays in your save after
+    uninstall"* — it does the opposite, the game drops it, so we have been
+    describing more leftovers than we actually leave (the player-facing uninstall
+    text already had this right). The knock-on: uninstalling and later
+    reinstalling re-rolls the meteor timer once, which is bounded and arguably
+    what you would want anyway. The savegame-repair module sets its "already
+    done" marker *before* doing the work, so if a future game update ever moves
+    the two functions it needs, it would mark the save done without having done
+    it. And a comment in that same module lists 8 fixes as carrying their own
+    load-time repair when the real number is 17 — one of the 8 no longer exists
+    as a module at all.
+
+    ⭐ **One genuinely good result worth telling you.** An older audit left an
+    open question about three of our background timers having no "the mod is
+    gone, stop cleanly" guard. All three have one now — checked by reading the
+    code, not by trusting the notes — and across all six of the pack's background
+    timers there is exactly one without a guard, which has a written decision
+    already and cleans up after itself regardless. That question can be closed.
+
+    ⛔ **What I could not reach, so you know what this did not cover.** Nothing
+    was run in a game — no save was opened and nothing was weighed, so every
+    *measured* number in this area is still the older one. Of the 18 repair
+    passes that run when you load a save, I cross-checked 5 against the game's
+    own 237 built-in save repairs; the other 13 are unchecked for interference.
+    And nobody has ever actually walked an uninstall, let alone a reinstall.
+
 ### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 2 REPORTED. Nothing blocks launch. One real defect found and fixed; one small call for you, and it can wait.
 
 39. ⭐ **Link 2 — lens 2 of 8, "lifecycle & idempotency".** The question: **what
