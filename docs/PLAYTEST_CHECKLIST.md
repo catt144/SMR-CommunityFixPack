@@ -146,12 +146,24 @@ completed tests move whole to
       less than we could", never "we do something wrong",** and the *main*
       track-connector repair does reach stations.
 
-    ❓ **Q — the only thing I need from you: pin the wrapper order now, or after
-    launch?** Recording it costs one comment line in a file that ships, three days
-    before a first release. **Recommendation: after launch.** The order is
-    correct today, the risk is a future edit rather than this build, and I would
-    rather not touch the shipped tree for a note. Say the word and I'll do it now
-    instead — it is a one-line change either way.
+    ✅ **RESOLVED SAME DAY — nothing is owed, and you do not need to answer this.**
+    You asked whether the fix was mine or the final audit's. It was mine (links
+    1–2 may fix), and asking the question exposed that **my recommendation was
+    answering the wrong version of it.** I had priced "pin the order" as *a
+    comment in a file that ships* — which is why I said wait. There is a version
+    that ships **nothing**: `*/tools/*` is excluded from the package, so a guard
+    in `tools/doccheck.py` touches no byte a player receives.
+
+    ⭐ **So it is enforced now, not documented.** `doccheck` fails **red** if
+    those two entries are ever reordered, and prints the reason. That is strictly
+    better than the comment I was hesitating over: a comment explains the rule to
+    whoever happens to read it, and the guard stops the mistake.
+
+    **Proven, not asserted:** I swapped the two entries — doccheck went red and
+    exited 1 (so the commit hook blocks it); restored — `metadata.lua` is
+    **byte-identical to HEAD** and doccheck is green. `upload_preflight` still
+    passes 20/20. ⛔ **Zero shipped files changed**; the release candidate is the
+    same bytes it was this morning.
 
     ⛔ **What link 1 did NOT look at,** so this is not read as a clean bill:
     nothing was run in a game; the two 08-17 core fixes still have not executed

@@ -582,6 +582,75 @@ def testkit_tree(out):
     return True
 
 
+# ---------------------------------------------------------------------------
+# Load-order constraints (sweep chain link 1, lens L1, 2026-08-17)
+#
+# `metadata.lua`'s `code` list IS the intra-mod load order (FIX_POLICY §8), and
+# it is ours to set. Where two modules wrap the SAME function, the LAST one
+# listed installs LAST and therefore wraps the other — it is the OUTER wrapper,
+# and it is the only one guaranteed to run.
+#
+# So an ordering here is load-bearing whenever the inner wrapper can decline to
+# call through. Nothing else in this repo enforces that, and the list is exactly
+# the kind of thing a rename, an alphabetisation or a regenerated file reorders
+# silently. This check is the enforcement.
+#
+# ⛔ It lives in tools/ ON PURPOSE: `*/tools/*` is in `metadata.lua`'s
+# `ignore_files`, so nothing here ships and the release candidate is untouched.
+# Recording the rule as a comment inside Code/ or metadata.lua would have been a
+# change to the tree under test for no runtime benefit.
+LOAD_ORDER_RULES = [
+    {
+        "before": "Code/Fix_ShelterReflex.lua",
+        "after": "Code/Fix_ArrivalDeaths.lua",
+        "symbol": "Colonist:Idle",
+        "why": "both wrap Colonist:Idle. ShelterReflex's wrapper can call "
+               "self:SetCommand(\"Rest\"), which kills the thread and NEVER "
+               "returns (Fix_ShelterReflex.lua:70) — so it must be the INNER "
+               "wrapper. ArrivalDeaths only assigns emigration_dome/elevator "
+               "and always delegates (Fix_ArrivalDeaths.lua:200), so it is safe "
+               "OUTER. Reversed, a colonist meeting the shelter precondition "
+               "would skip F53b's dome re-choice entirely.",
+    },
+]
+
+
+def load_order(out):
+    """Two modules wrapping one function: the list order decides which wins."""
+    path = os.path.join(REPO, "metadata.lua")
+    try:
+        with open(path, encoding="utf-8-sig", errors="replace") as fh:
+            text = fh.read()
+    except OSError as exc:
+        out.append("LOAD ORDER: not checked (%s)" % exc)
+        return True
+    listed = re.findall(r'"(Code/[^"]+\.lua)"', text)
+    index = {}
+    for pos, name in enumerate(listed):
+        index.setdefault(name, pos)
+
+    ok = True
+    checked = 0
+    for rule in LOAD_ORDER_RULES:
+        first, second = rule["before"], rule["after"]
+        if first not in index or second not in index:
+            out.append("  RED  load order: %s or %s is not in metadata.lua's "
+                       "code list — the %s constraint cannot be checked"
+                       % (first, second, rule["symbol"]))
+            ok = False
+            continue
+        checked += 1
+        if index[first] >= index[second]:
+            out.append("  RED  load order VIOLATED for %s: %s (position %d) "
+                       "must be listed BEFORE %s (position %d) — %s"
+                       % (rule["symbol"], first, index[first],
+                          second, index[second], rule["why"]))
+            ok = False
+    out.append("LOAD ORDER: %d shared-symbol constraint(s) checked, %d file(s) "
+               "in the code list" % (checked, len(listed)))
+    return ok
+
+
 def counts_block(counts):
     """A STATE-ready block; commit bodies may paste it verbatim."""
     lines = [
@@ -635,6 +704,7 @@ def main():
     ok = check_state_and_stubs(out) and ok
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok
+    ok = load_order(out) and ok
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
 
     if args.verify_split:

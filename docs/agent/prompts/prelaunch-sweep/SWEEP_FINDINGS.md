@@ -162,3 +162,33 @@ Candidates for `agent/facts/`:
 - POSITIVE: `Fix_DustDevilSpawnGate:250-258` restores its swapped global only
   `if cur == wrapper`, so it cannot clobber a later replacement by another module
   or another mod. The right shape; the benchmark for lens L8.
+
+## L1-F1 — RESOLVED SAME DAY (2026-08-17), and the resolution corrected the finding's own routing
+
+The owner asked whether the fix was link 1's or the terminal audit's. It was
+link 1's (spec section 4: links 1-2 may fix), and the question exposed that the
+recommendation attached to L1-F1 above was priced against the WRONG remedy:
+"a comment in metadata.lua / the module headers", i.e. a change to the shipped
+tree, which is why it was recommended for after launch.
+
+`*/tools/*` is in `metadata.lua`'s `ignore_files` (re-derived at source; the
+chain seed's real `.fpk` listing had already measured tools/ at zero files), so
+a guard in `tools/doccheck.py` ships nothing at all.
+
+APPLIED: `LOAD_ORDER_RULES` + `load_order()` in `tools/doccheck.py`. Reordering
+the two `Colonist:Idle` wrappers in `metadata.lua`'s code list now fails doccheck
+RED and exits 1, so the commit hook blocks it, and the failure prints the reason.
+Written as a general table so later links append constraints rather than
+special-casing.
+
+FALSIFIER: entries swapped -> RED, exit 1, reason printed. Restored ->
+`metadata.lua` byte-identical to HEAD (`git diff --quiet` clean), doccheck GREEN,
+`upload_preflight` still 20 checked / 0 FAIL.
+
+ZERO shipped files changed. The release candidate is the same bytes it was.
+
+The generalisable lesson, for the terminal audit: "this fix would touch the
+shipped tree" was true of the remedy I had in mind and false of the problem. The
+scoping question is not "fix or don't" but "is there a form of this fix that
+lands outside the package" -- and for anything enforcement-shaped, `tools/` is
+that form.
