@@ -14,6 +14,14 @@ what the stopping rule reads, and it is what the terminal audit reports to the
 owner as the honest product of the whole effort. An empty `NOT reached` cell is
 almost always a lie — say what you could not see.
 
+⚠️ **Write that column as TERRITORY, not as findings.** *"Whether two shelter
+preconditions can co-occur on one colonist — needs a running game"* says
+everything the next link needs; *"whether **L1-F1**'s two preconditions can
+co-occur"* names a finding in a file every link is required to read. Link 1's row
+does the second, which is part of why the fence was found to be partial
+(`00_CHAIN_SPEC.md` §2, 2026-08-18 amendment). ⛔ This is a light preference, not
+a disclosure rule — do not file a contamination report over it.
+
 ---
 
 ## Lenses (`00_CHAIN_SPEC.md` §3) — take the first one not yet claimed

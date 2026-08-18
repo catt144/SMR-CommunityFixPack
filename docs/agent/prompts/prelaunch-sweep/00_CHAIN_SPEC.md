@@ -42,7 +42,7 @@ messages are **three-paragraph essays** that explain exactly what was found and
 why. A link that obeys the house rules learns everything the previous link found,
 in more detail than the owner's report.
 
-⇒ **The chain resolves this in three ways, and all three are binding:**
+⇒ **The chain resolves this in three ways:**
 
 1. **Blind on VERDICTS, sighted on COVERAGE.** Findings live in
    `SWEEP_FINDINGS.md`, which a link ⛔ **may not open**. Coverage lives in
@@ -50,13 +50,59 @@ in more detail than the owner's report.
    chain converge; blind sweeps cannot, because five sessions can each cover the
    comfortable 60% and never touch the awkward 40%.
 2. ⭐ **Chain links break the house essay-commit convention on purpose.** Subject
-   line is exactly `sweep: link N — lens <name> — see SWEEP_FINDINGS.md`, detail
-   in the body. That way the next link can run `git log --oneline` for staleness
-   **without being contaminated**, and reading a prior link's commit *body*
-   becomes a single, nameable, forbidden act rather than an accident.
+   line is exactly `sweep: link N — lens <name> — see SWEEP_FINDINGS.md`, and
+   ⛔ **it names no finding** — detail goes in the body.
+   ⚠️ **This drifted on the very first link:** `e5c6e8a` shipped as
+   *"…structure & collision — **L1-F1 enforced**, see SWEEP_FINDINGS.md"*, which
+   leaks a finding id into `git log --oneline`, the one command every link runs
+   first. Keep the subject boring; that is its entire job.
 3. **Replace fake blinding with the rule we already have** — *recorded facts are
    claims too; re-derive the ROUTE, not the citations.* Treating a prior fix as a
    claim to be re-derived is strictly stronger than pretending you cannot see it.
+
+### ⚖️ AMENDED 2026-08-18 — resolution 1 is PARTIAL, and saying otherwise was the error
+
+**Link 2 found the hole and it is real: `STATE.md` is a mandatory read (CLAUDE.md
+*and* `01_LINK.md`'s own read path) and links write their verdicts into it.** A
+link is therefore contaminated **by the brief's own instructions**. Measured
+2026-08-18, the leak is on **six** surfaces, not one:
+
+`STATE.md` (L1-F1…F4 in full, with file:line verdicts) · ⛔ `SWEEP_LEDGER.md`'s
+own *NOT reached* column (link 1's cell names **L1-F1** by id) · the checklist
+(item 38, in owner prose) · `reports/L1_COLLISION_MAP.md` · `tools/doccheck.py`
+(link 1's `LOAD_ORDER_RULES`, visible to every link that runs it) · and the commit
+subject above.
+
+⛔ **The response is NOT to plug the leak.** Sealing it means degrading `STATE.md`
+— a document that serves the whole project, not this chain — into coverage-only
+prose. **An accurate STATE is worth more than a sealed fence.**
+
+⭐ **The response is to stop over-claiming, because blinding was never the
+mechanism that produces the effect this chain exists for.** Every case in §1 —
+`SHIP_SOLO_PREP`, `RENAME`, the upload sitting — was a **fully sighted** session
+finding what a previous **fully sighted** session missed. The fresh-eyes effect
+comes from asking a **new question**, never from ignorance of prior answers.
+
+**And this chain ran the experiment.** Link 2 was contaminated — it read STATE
+carrying all four of link 1's findings — and it still found a defect link 1
+missed, *and* identified this hole, which link 1 did not. ⇒ **Contamination did
+not suppress the effect. The lens rotation did the work.**
+
+⇒ **What is actually load-bearing, in order:** ① the **lens rotation** ② the
+**coverage ledger** ③ re-derivation of prior claims. The findings fence is ④ —
+kept because it is cheap and it prevents **method** anchoring (*"link 1 grepped,
+so I'll grep"*), which is a different and still-real risk — but it is ⛔ **not
+what makes this chain work, and no report may describe the chain as "blind."**
+
+⇒ ⛔ **The contamination-disclosure ritual is DROPPED for `STATE.md`, the ledger,
+the checklist, `reports/` and `doccheck`.** A link cannot disclose its way out of
+a mandatory read, and false confessions pollute the only convergence signal the
+chain has. **Deliberately opening `SWEEP_FINDINGS.md` or a sweep commit body is
+still a nameable act and is still reported.**
+
+⚖️ **For the terminal audit:** the hole is established — do not re-litigate it.
+**Rule instead on whether this amendment was the right call**, and on whether any
+link's findings show signs of having been anchored by a prior link's verdicts.
 
 ## 3 · The lens rotation — pick the next unused one
 

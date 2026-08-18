@@ -21,16 +21,26 @@ python tools/upload_preflight.py
 grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/
 ```
 
-⛔⛔ **THE CONTAMINATION FENCE — the chain's whole design rests on this.**
+⛔ **THE CONTAMINATION FENCE — and ⚖️ read `00_CHAIN_SPEC.md` §2's 2026-08-18
+amendment before you weigh it, because the fence is NOT what makes this chain
+work.**
 
 * ✅ **MUST read:** `SWEEP_LEDGER.md` (what previous links covered and, crucially,
   what they did **not** reach).
-* ⛔ **MUST NOT read:** `SWEEP_FINDINGS.md`, or the **commit body** of any
-  `sweep: link …` commit. Their subject lines are deliberately uninformative so
-  `--oneline` is safe; `git log -p` and `git show` on those commits are **not**.
-* ⚠️ If you read one by accident, **say so in your report.** A contaminated link
-  is still useful; a contaminated link that hides it corrupts the chain's only
-  convergence signal.
+* ⛔ **MUST NOT deliberately read:** `SWEEP_FINDINGS.md`, or the **commit body**
+  of any `sweep: link …` commit. Subjects are kept boring so `--oneline` is safe;
+  `git log -p` and `git show` on those commits are **not**. Opening either on
+  purpose is a nameable act — **report it.**
+* ⚖️ **You WILL be partially contaminated anyway, by this brief's own read path,
+  and that is accepted.** `STATE.md` is mandatory and carries prior links'
+  verdicts; so do the ledger's *NOT reached* column, the checklist, `reports/`
+  artifacts and `doccheck` output. ⛔ **Do NOT file a contamination disclosure for
+  any of those** — you cannot disclose your way out of a mandatory read, and false
+  confessions pollute the chain's only convergence signal.
+* ⭐ **What is asked of you instead:** treat every prior verdict you happen to see
+  as **a claim to be re-derived**, never as ground already covered. Blinding was
+  never the mechanism here — **the lens rotation is.** Link 2 read all of link 1's
+  findings and still found what link 1 missed.
 
 **Read path (file granularity):** `docs/agent/STATE.md` · `Code/00_Core.lua` ·
 `docs/agent/FIX_POLICY.md` §1, §2, §3+§3a, §6, §8 · `docs/agent/WORKFLOW.md`
@@ -131,14 +141,19 @@ you take in any other configuration are **re-derived, not compared.**
 
 ## 8 · Close-out
 
-One commit, and ⛔ **the subject line is fixed by the spec**:
+One commit, and ⛔ **the subject line is fixed by the spec and NAMES NO FINDING**:
 
 ```
 sweep: link N — lens <name> — see SWEEP_FINDINGS.md
 ```
 
-Detail goes in the **body** (which the next link is forbidden to read). The commit
-carries:
+⚠️ **This drifted on the very first link.** `e5c6e8a` shipped as
+*"…structure & collision — **L1-F1 enforced**, see SWEEP_FINDINGS.md"*, putting a
+finding id into `git log --oneline` — the one command every link runs first. The
+subject has exactly one job: be boring enough that a staleness check is safe.
+⛔ No finding ids, no verdicts, no counts. Detail goes in the **body**.
+
+The commit carries:
 
 - your fixes, each with its falsifier evidence;
 - artifacts under `docs/agent/reports/`;
