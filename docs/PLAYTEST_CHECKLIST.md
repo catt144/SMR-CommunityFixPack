@@ -114,7 +114,7 @@ completed tests move whole to
     stores — but it is genuinely a shrug either way and you lose nothing by
     deciding when you get there.
 
-### ⭐ 2026-08-18 — STATE.md WAS EVICTED ON YOUR DIRECTION. One decision: where to set its size caps, now with real numbers.
+### ✅✅ 2026-08-18 — STATE.md WAS EVICTED ON YOUR DIRECTION, AND YOU RULED THE CAPS THE SAME DAY. Nothing here is owed from you.
 
 42. ⭐ **What happened.** The agents' one mandatory-read file had quietly grown
     to **~130KB (~33,000 tokens)** — every session paid that before doing any
@@ -129,17 +129,22 @@ completed tests move whole to
 
     **The measured numbers you asked for: old file 71,077 bytes = 33,066
     tokens (its emoji-heavy prose cost ~2.2 bytes/token); clean kernel 4,524
-    bytes ≈ 1,200–2,000 tokens** — a 16–27× cut. ❓ **The decision: the two
-    caps.** Per your design, doccheck gets a **warn** threshold (crossing it
-    puts one flag line in your after-run report; you fire the eviction prompt
-    at your leisure) and a **hard** cap (commit blocks; the backstop if flags
-    get ignored). **Recommendation: warn at 9KB (2× the clean size — real
-    room to grow between cleanups) and hard at 18KB (4× — even ignored, a
-    boot read stays under ~8,400 tokens at the old file's worst density,
-    typically ~4,500, vs this week's 33,000).** The existing 60-line rule
-    stays as a secondary screen-length check. Numbers are one constant each
-    in doccheck — say "9 and 18", "10 and 20", or anything else, and the
-    guard goes in with your figures.
+    bytes ≈ 1,200–2,000 tokens** — a 16–27× cut.
+
+    ✅✅ **RULED SAME DAY** — you asked whether the line budget still matters
+    (*"Is the line budget even important anymore if we are capping the token
+    size?"*) and ruled: *"format it in the most efficient and safest way
+    possible because the token cap will do the read job."* **Applied:** the
+    60-line budget is RETIRED; doccheck now enforces **warn 9KB** (the flag
+    line must be copied verbatim into your after-run report; you fire the
+    eviction prompt at your leisure), **hard 18KB** (commit blocks — even
+    ignored, a boot read stays under ~8,400 tokens at the old file's worst
+    density vs this week's 33,000), and a **200-byte per-line cap** so walls
+    can never return inside the budget. STATE.md was reflowed to
+    one-fact-per-line, the eviction prompt carries your formatting rule, and
+    both new checks were falsifier-proven before this note was written. All
+    three numbers are adjacent constants in `tools/doccheck.py` — retuning
+    is one edit whenever you want.
 
 ### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 4 REPORTED. Nothing blocks launch. No code changed. One wording call, and one bigger question about the chain itself.
 

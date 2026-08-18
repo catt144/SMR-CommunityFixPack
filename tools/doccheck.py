@@ -11,7 +11,7 @@ blob in git.
 v3 (prompt 3, 2026-08-03): the tree moved. Adds the docs/ root allowlist,
 checked BOTH DIRECTIONS **against the README map itself** (the list is PARSED
 out of docs/README.md, never duplicated here, so the map cannot drift from the
-folder it documents); the STATE.md line budget; stub presence; and the same
+folder it documents); the STATE.md byte budget; stub presence; and the same
 front-matter + INDEX-freshness treatment for the 43 files under
 docs/agent/facts/.
 
@@ -40,7 +40,18 @@ README = os.path.join(DOCS, "README.md")
 STATE = os.path.join(DOCS, "agent", "STATE.md")
 CODE = os.path.join(REPO, "Code")
 
-STATE_MAX_LINES = 60
+# 2026-08-18 owner ruling (checklist 42): STATE.md is budgeted in BYTES, not
+# lines. The 60-line budget was satisfied while being defeated — single lines
+# grew into thousand-word walls and the file reached 71,077 B = 33,066 tokens
+# (emoji-dense prose costs ~2.2 B/token). Bytes are the resource a session
+# actually spends at boot. Crossing WARN prints a warn line that close-out
+# reports must copy to the owner verbatim; the owner then fires
+# agent/prompts/STATE_EVICTION.md. The hard cap is the backstop if flags go
+# unread. The per-line cap keeps lines atomic (grep/diff/Edit-safe) so walls
+# cannot return inside the budget; never widen lines to satisfy anything.
+STATE_WARN_BYTES = 9 * 1024
+STATE_MAX_BYTES = 18 * 1024
+STATE_MAX_LINE_BYTES = 200
 
 # The standing prompt is instructions, not a logbook (rule added 2026-08-04
 # after two sittings appended their lessons to it — the habit that grew the
@@ -405,17 +416,30 @@ def check_root(out):
 
 
 def check_state_and_stubs(out):
-    """STATE.md's line budget, and the three stubs spec §3e requires."""
+    """STATE.md's byte budget (checklist 42), and the three stubs spec §3e requires."""
     red = []
+    warns = []
     if not os.path.exists(STATE):
         red.append("docs/agent/STATE.md is missing — it is the mandatory read")
         n_state = None
     else:
-        n_state = len(read(STATE))
-        if n_state > STATE_MAX_LINES:
-            red.append("STATE.md is %d lines, budget is %d — it is a one-screen "
-                       "current-state doc; the narrative belongs in "
-                       "archive/SESSION_LOG.md" % (n_state, STATE_MAX_LINES))
+        with open(STATE, "rb") as f:
+            raw = f.read()
+        n_state = len(raw)
+        if n_state > STATE_MAX_BYTES:
+            red.append("STATE.md is %d bytes, hard cap is %d — run "
+                       "agent/prompts/STATE_EVICTION.md; history belongs in "
+                       "archive/SESSION_LOG.md" % (n_state, STATE_MAX_BYTES))
+        elif n_state > STATE_WARN_BYTES:
+            warns.append("STATE.md is %d bytes, warn threshold is %d — copy "
+                         "this line VERBATIM into the owner report; the owner "
+                         "fires agent/prompts/STATE_EVICTION.md"
+                         % (n_state, STATE_WARN_BYTES))
+        for i, ln in enumerate(raw.split(b"\n"), 1):
+            if len(ln) > STATE_MAX_LINE_BYTES:
+                red.append("STATE.md line %d is %d bytes, per-line cap is %d — "
+                           "one fact per line; walls defeat grep, diff and "
+                           "audit" % (i, len(ln), STATE_MAX_LINE_BYTES))
     if os.path.exists(GENERAL_USE):
         n_gu = len(read(GENERAL_USE))
         if n_gu > GENERAL_USE_MAX_LINES:
@@ -439,10 +463,13 @@ def check_state_and_stubs(out):
             red.append("%s: the stub does not say MOVED" % rel)
         if target not in text:
             red.append("%s: the stub does not point at %s" % (rel, target))
-    out.append("STATE + STUBS: STATE.md %s/%d lines; %d stubs present and "
-               "pointing"
-               % ("?" if n_state is None else n_state, STATE_MAX_LINES,
+    out.append("STATE + STUBS: STATE.md %s bytes (warn %d, hard %d, line %d); "
+               "%d stubs present and pointing"
+               % ("?" if n_state is None else n_state, STATE_WARN_BYTES,
+                  STATE_MAX_BYTES, STATE_MAX_LINE_BYTES,
                   len([p for p in STUBS if os.path.exists(p)])))
+    for line in warns:
+        out.append("  warn " + line)
     for line in red:
         out.append("  RED  " + line)
     return not red

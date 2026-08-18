@@ -7,8 +7,16 @@ reasoning record is that conversation and the first run's SESSION_LOG entry.
 **The problem this prompt exists for:** STATE.md is the one mandatory read, so
 every close-out is tempted to wedge its verdicts there — presence in STATE has
 felt like the only guaranteed audience. Left alone, the file compounds (it hit
-~33k tokens / 130KB on 2026-08-18 while satisfying its 60-line budget). The
-cure is not a summary pass; it is enforcing the push/pull boundary below.
+71,077 bytes = 33,066 tokens on 2026-08-18 while satisfying its then 60-line
+budget — lines became walls). The cure is not a summary pass; it is enforcing
+the push/pull boundary below.
+
+**Formatting (owner ruling 2026-08-18, checklist 42): most efficient and
+safest, nothing else.** doccheck's byte caps do the reading-cost job, so
+format purely for machine safety: one fact per line, every line under the
+per-line byte cap, stable IDs (`F##`/`EF-###`/`H-##`/item numbers) so grep
+lands, no decorative prose, and NEVER widen or pack lines to satisfy any
+budget — if content doesn't fit, evict, don't compress.
 
 ## The boundary — what earns push (stays in STATE)
 
@@ -45,11 +53,13 @@ Everything else is pull: `SESSION_LOG` (history), `agent/reports/` (evidence),
    findings ledger (forbidden to links) and reports.
 4. Rewrite STATE.md to the kernel. Keep the mandatory-read header, the grave
    pointer, and the read-path pointers.
-5. Verify: `python tools/doccheck.py` GREEN; every hazard passes the admission
-   test; no "superseded"/"⇒" chains remain; open decisions match the
-   checklist; the emitted block is byte-identical to `--emit-counts` output.
-6. Measure the clean file (bytes, and tokens ≈ bytes/4) and put both numbers
-   in the report to the owner, beside the pre-eviction size.
+5. Verify: `python tools/doccheck.py` GREEN (it enforces the warn/hard byte
+   caps and the per-line cap); every hazard passes the admission test; no
+   "superseded"/"⇒" chains remain; open decisions match the checklist; the
+   emitted block is byte-identical to `--emit-counts` output.
+6. Measure the clean file (bytes; tokens ≈ bytes/2 for emoji-dense prose to
+   bytes/4 for plain text — the 08-18 file measured 2.15 B/token) and put the
+   numbers in the report to the owner, beside the pre-eviction size.
 7. Commit (boring subject — the sweep fence may be live) and push.
 
 ## Rules
