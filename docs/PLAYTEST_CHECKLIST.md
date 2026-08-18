@@ -114,6 +114,74 @@ completed tests move whole to
     stores — but it is genuinely a shrug either way and you lose nothing by
     deciding when you get there.
 
+### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 2 REPORTED. Nothing blocks launch. One real defect found and fixed; one small call for you, and it can wait.
+
+39. ⭐ **Link 2 — lens 2 of 8, "lifecycle & idempotency".** The question: **what
+    happens the second time our code runs in one session?** The game re-runs every
+    mod's scripts whenever you close the Mod Manager after changing anything — so
+    "the second time" is not a corner case, it is what happens to any player who
+    turns on a second mod.
+
+    ⛔ **It found a real one, and it was already sitting in your own logs.** Two
+    archived sessions — both ones where you took a Mod-Manager tick — show the
+    pack loading **twice**. Comparing the two halves of those sessions gives the
+    same answer in both, and it is the *entire* difference between them:
+    **four modules switch themselves off the second time, each giving a reason
+    that is not true** — *"the shipped presets are already correct"*, *"the
+    shipped tech already matches its own param1"*, and two more like it. The data
+    **is** correct, because those four modules corrected it the first time round
+    and the correction survived the reload. What did not survive was each module's
+    memory of having made it.
+
+    **Why it matters, and it is not the wording.** Three of our *save-repair*
+    passes only run while their module reads "on". So a player with an older save
+    who happens to have visited the Mod Manager that session silently does not get
+    the Astrogeologist extractor bonus applied to their existing colony, does not
+    get the Independent Terraforming discount corrected from 10% to the 20% it
+    advertises, and does not get their dome Saints' blessing re-filed. Nothing
+    errors, nothing is shown, it just quietly doesn't happen.
+
+    ✅ **Fixed in `Code/00_Core.lua`.** The "have I already changed this data?"
+    memory now lives for the whole session instead of for one script load.
+    ⛔ `metadata.lua` untouched, no module added or removed, every count unchanged
+    — this is still 1.0.0.
+
+    ✅ **It is a relative of the two defects from your upload sitting, but not the
+    same one, and the good news is that your dialog cannot fire from it** — all
+    four of these stand-downs are the flavour the code marks "harmless", so no
+    player sees a "check for a new version" box because of it.
+
+    **Proven, not asserted:** I built a harness (`tools/l2_reload_sim.py`) that
+    runs the pack's own shipped code twice in one process. Before proving anything
+    it has to earn trust, so first it reproduces your two archived sessions
+    exactly — all five of their first-load lines, word for word, and all four of
+    the false second-load lines. Then: with the fix in, the four false lines are
+    gone and all four modules stay on. And a control in the other direction — if a
+    future game patch genuinely fixed this data itself, all four still correctly
+    say "already correct". ⛔ **This is not a launch.** It runs our real code
+    against a stand-in for the game.
+
+    ❓ **The one call for you (it can wait, and "leave it" is a fine answer).**
+    Our "some fixes switched themselves off" dialog is created fresh each time the
+    game reloads scripts. So if that dialog ever *does* have something to say,
+    a player who opens the Mod Manager again gets shown it **again**. The code's
+    own comment calls it "a one-time dialog", so today it doesn't do what it says.
+    **Recommendation: show the box at most once per session, keep writing the line
+    to the log every time** — that keeps the diagnostic and drops the repeat.
+    ⚠️ I did **not** just do it: it changes what a player sees, in a release
+    candidate, and it is a judgment call about what the pack *should* do rather
+    than a defect. Also worth knowing: that dialog has **never once appeared** in
+    any of the 58 logs we have archived.
+
+    ⛔ **What link 2 did NOT look at.** Nothing was run in a game — so the fix
+    above, and both of the 08-17 fixes, still have not executed inside Surviving
+    Mars even once. I have written down the shape of the single unattended run
+    that would verify all three at the same time, but I did not build it. Also
+    untouched: a third-and-later reload, whether a reload can happen mid-colony,
+    the TestKit's own behaviour, save footprint and uninstall, what a player sees,
+    failure containment, packed-vs-unpacked, and any other mod. **Two lenses of
+    eight. The chain has not converged.**
+
 ### ⭐ 2026-08-17 — SWEEP CHAIN, LINK 1 REPORTED. Nothing blocks launch. One small call for you, and it can wait.
 
 38. ⭐ **Link 1 of your chain is done — lens 1 of 8, "structure & collision".**

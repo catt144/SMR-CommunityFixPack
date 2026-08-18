@@ -18,8 +18,11 @@ SMRFixPack = rawget(_G, "SMRFixPack") or {
 	fixes = {},        -- id -> { title, status, detail, installed, update_suspect }
 	order = {},        -- registration order, for ListFixes()
 	defs = {},         -- id -> the Register def (for Mod Options reconciliation)
+	data_edited = {},  -- id -> true once a DataPatch pass edited shipped data in
+	                   -- THIS PROCESS; see DataPatch's ever_changed seed
 }
 SMRFixPack.defs = SMRFixPack.defs or {}
+SMRFixPack.data_edited = SMRFixPack.data_edited or {}
 
 -- The one true logger — Phase 4 (audit C2) hoisted the copy previously cloned
 -- in 11 fix files; migrated call sites alias it (`local log = SMRFixPack.Log`).
@@ -214,7 +217,9 @@ end
 --   * ctx.ever_changed — sites set it after changing shipped data and return
 --     early on the DataChanged(false) the engine posts right after every
 --     DataLoaded (the B3 lesson: nothing-left-to-do then is SUCCESS, not
---     "shipped data already correct");
+--     "shipped data already correct"). ⛔ It is seeded from, and written back
+--     to, SMRFixPack.data_edited so it spans a Lua RELOAD as well — see the
+--     block above run() for why that is not optional;
 --   * ctx.latch(detail[, log_suffix]) — flip the entry inactive; detail is
 --     always a string, never nil (the PT-51 ListFixes crash);
 --   * ctx.heal() — restore an "inactive" mislabel to active with "" detail;
@@ -238,9 +243,29 @@ end
 --   * ModsReloaded  (Mod.lua:2193)     — belt for the enable path: fired after
 --     both the Lua reload and the item load.
 --   * DataChanged                      — Mod Editor / re-fire re-arm, unchanged.
+-- ⛔ 2026-08-18, MEASURED IN TWO ARCHIVED SESSIONS (`spowner_*`, `rs_ownertick_*`,
+-- both 148 `applied` lines = 2 x 74): `ever_changed` used to start false on every
+-- Lua load, and that is the wrong lifetime. `ReloadLua` re-executes mod code in
+-- the SAME process (lib.lua:353-382 -> autorun.lua `ModsLoadCode()`), which a
+-- player reaches by closing the Mod Manager after ANY change (ModManager.lua:162
+-- -> Mod.lua:2145) — but the tables these passes edit are NOT rebuilt: `Presets`
+-- is `rawget(_G,"Presets") or {}` (Preset.lua:1339-1340) and `LoadData` is not
+-- re-run by autorun. So the second pass finds the data ALREADY CORRECT — because
+-- WE corrected it — sees changed == 0 with a fresh `ever_changed`, and falls to
+-- the site's "shipped data is already right" latch, which is false.
+-- The whole second-load delta in both archived sessions is exactly that: four
+-- modules going `inactive` over a reason that is not true. The cost is not
+-- cosmetic — three save-repair paths are gated on the entry reading `active`
+-- (Fix_AstrogeologistExtractors:174 and Fix_SaintBlessing:151 via WhenActive,
+-- Fix_IndependenceTerraforming:128 by its own status test), so they stop running
+-- for the rest of the session.
+-- Seeding from a per-PROCESS memo makes the B3 branch ("nothing left to change is
+-- SUCCESS") span the reload, which is the lifetime it always meant. A new process
+-- starts with an empty table, so a game update that genuinely fixes the shipped
+-- data still latches benign on the first load, exactly as before.
 function SMRFixPack.DataPatch(id, opts)
-	local ctx = { patched = false, ever_changed = false, data_loaded = false,
-		classes_built = false }
+	local ctx = { patched = false, data_loaded = false, classes_built = false,
+		ever_changed = SMRFixPack.data_edited[id] or false }
 	function ctx.latch(detail, log_suffix, benign)
 		local entry = SMRFixPack.fixes[id]
 		if entry then
@@ -291,6 +316,11 @@ function SMRFixPack.DataPatch(id, opts)
 			ctx.patched = true   -- do not re-throw on every later trigger
 			log("%s: FAILED to patch data: %s", id, tostring(err))
 		end
+		-- Write the memo back on the SAME table SMRFixPack lives on, which is the
+		-- one thing here that survives a Lua reload (:17). Latch-only, never
+		-- cleared: "we have edited this data in this process" cannot become false
+		-- while the process lives.
+		if ctx.ever_changed then SMRFixPack.data_edited[id] = true end
 	end
 	-- The engine's own flag (Dlc.lua:51/:663 — declared under FirstLoad, so it
 	-- SURVIVES a Lua reload) is the only way to learn the presets were loaded
