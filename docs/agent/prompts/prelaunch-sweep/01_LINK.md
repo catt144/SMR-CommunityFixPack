@@ -95,7 +95,21 @@ your report says so in its **first sentence**.
 repos · add an instrument to `Code/` (it contaminates the tree under test) ·
 change what the mod promises.
 
-## 5 · Verification, if you changed code
+## 5 · Verification — ⛔ and the launch obligation, added 2026-08-18
+
+⛔⛔ **READ `00_CHAIN_SPEC.md` §6.5 BEFORE YOU DECIDE NOT TO LAUNCH.** Links 1–4
+swept four lenses and **not one opened the game**. Each declared it honestly, and
+that is precisely how the hole was found: launches were permitted and never
+obliged, so every link took the cheap path and discharged its duty by *declaring*
+the gap rather than closing it.
+
+⇒ **If your lens has accumulated *"needs a running game"* items — your own, or
+inherited from the ledger — you must EITHER take a launch OR state in your report
+why you refused.** ⛔ Saying nothing is not available.
+
+⚠️ A refusal is a legitimate answer (the state is bespoke, the sitting is too
+expensive, the question needs a save nobody has). **Say which.** An honest refusal
+is worth more than a launch that measures the wrong thing.
 
 Unattended launches are yours to run; owner cost is zero.
 

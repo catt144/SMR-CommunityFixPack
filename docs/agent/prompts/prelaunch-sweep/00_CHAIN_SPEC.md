@@ -144,10 +144,21 @@ contaminate the tree under test) · change what the mod PROMISES (route it).
 1. A link finds nothing new **in territory the ledger marks unswept**, *and* the
    ledger shows no unswept area of consequence remaining.
 2. **Two consecutive links** return only cosmetic findings.
-3. The hard cap is reached — **5 links**, unless the owner raises it.
+3. The hard cap is reached — ⚖️ **8 links** (raised from 5, owner, 2026-08-18).
 
 ⛔ **A link that returns "nothing found" while the ledger still lists unswept
 territory has NOT converged — it has run out of lens.** Say that plainly.
+
+### ⚖️ AMENDED 2026-08-18 — the cap was 5, and 5 was arithmetically broken
+
+**Eight lenses under a cap of five means the pool can never exhaust**, so the
+chain was *guaranteed* to stop on clause 3 — which this spec itself says is not
+convergence. The cap made the only good stopping clauses unreachable. It is now
+**8, one per lens**, so clause 1 or 2 is actually attainable.
+
+⛔ **8 is structural, not a number to raise again.** A further raise means
+re-running lenses, which needs its own justification — a cap that rises whenever
+it is reached is not a cap.
 
 ## 6 · The terminal gate — A then B, and B is the one that matters
 
@@ -172,6 +183,36 @@ for the opt-in's launch.
 `80/0/16/0`, `75/75`, `8/8`, all ~60 archived launches — was taken with the mod
 **unpacked via a junction** and a **third mod loaded that mutates `_G`**. Full
 procedure and B's pass criteria: `98_LAUNCH_REHEARSAL.md`.
+
+## 6.5 · ⛔⛔ THE LAUNCH OBLIGATION — added 2026-08-18, after four links and zero launches
+
+**Links 1–4 ran L1 through L4 and NOT ONE opened the game.** Every one declared it
+honestly and in detail — those NOT-reached columns are exemplary, which is exactly
+how the pattern became visible:
+
+> L1 *"neither core fix has yet executed"* · L2 *"remain unexecuted in Surviving
+> Mars"* · L3 *"Nothing was run in a game. No save was opened, no footprint was
+> weighed, no object counted"* · L4 *"Nothing was run in a game — **fourth link
+> running**"*
+
+⛔ **That is a defect in this spec, not four lazy sessions.** Launches were
+*permitted* and never *obliged*, so the cheap path was always available and always
+taken, and a link discharged its duty by **declaring** the gap instead of closing
+it. The chain was producing an excellent reading of the mod and **zero evidence
+about the running mod** — while the two `2f077e8` core fixes that paused this
+upload had still never executed, and while the release gate itself (run B) is a
+launch.
+
+⇒ **THE RULE.** A link whose lens has accumulated *"needs a running game"* items —
+its own, or inherited from the ledger — must **either take a launch, or state in
+its report why it refused.** ⛔ Silence is no longer an option. This is the same
+move that makes the NOT-reached column work: turn a silent default into a
+declared decision.
+
+⇒ **AND THE BACKLOG IS DISCHARGED SEPARATELY:** `97_VERIFICATION_LAUNCH.md` pulls
+**run A forward** out of the terminal rehearsal and runs it now. A is diagnostic,
+not the gate, so running it early is safe and re-running it later is cheap.
+⛔ **Run B stays terminal — it must test the final tree.**
 
 ## 7 · Standing rules every link inherits
 
