@@ -55,6 +55,39 @@ completed tests move whole to
     diagnosis is fresh, rather than making each mod's launch session rediscover it.
     ℹ️ Nothing owed beyond that ruling.
 
+### ⚠️ 2026-08-19 — the launch test's own first question could not fail. Already fixed; nothing owed unless you disagree.
+
+49. ⚠️ **The final launch test had a check that was incapable of failing, and I
+    changed it.** ⇒ **Nothing to do** — this is the "what happened" note, and a
+    single call is yours only if you dislike the change.
+
+    **What happened, in plain words.** Before this mod goes out, there is a final
+    test — "run B" — that loads the mod **the way a player receives it**: zipped
+    into a single package file, rather than through the shortcut we develop
+    against. It has ten pass criteria and the **first** one is *"the mod loads
+    packed"*, because if that is wrong, the other nine measured the wrong thing.
+
+    The way that first check was written, it was satisfied by *"the mod printed
+    its usual lines in the log"* — which it does **either way**. So if the
+    shortcut had been left in place by mistake, the test would have quietly
+    measured our development copy, ticked the box, and every number after it
+    would have been wrong while looking right.
+
+    **What I changed.** The game itself writes down which way it loaded the mod,
+    in one log line, in plain words: `packed` or `unpacked`. The check now reads
+    that line. ⭐ **And I checked our own history: 66 recorded sessions carry that
+    line, and all 66 say `unpacked`.** So "this mod has never once been loaded
+    the way a player will load it" is no longer something we believe — it is
+    something the logs say, in a line anyone can search for.
+
+    I also wrote down a related trap in the test's instructions: if the shortcut
+    **and** the packaged copy are both present, the game silently prefers the
+    **shortcut**. So "remove the shortcut first" is not tidiness, it is the
+    difference between a real test and a fake one.
+
+    ℹ️ **The only thing that is yours:** if you would rather the first check stay
+    loose, say so and I will put it back. Otherwise nothing is owed here.
+
 ### ⛔⛔ 2026-08-19 — the upload would have shipped one fix missing, on Steam. Already fixed; two small wording calls are yours.
 
 46. ⛔⛔ **A fix would have vanished from the Steam release, and the check that

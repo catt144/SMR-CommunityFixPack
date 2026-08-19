@@ -18,9 +18,20 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   - **Link 6 consumed 08-19: L6 promise vs behaviour**, no launch (refusal reasoned: its two open
     questions need mod code that reads an undeclared global, and a second mod loading in an
     order nobody can set). ⛔ **It found and FIXED the chain's first launch blocker** (`36d8817`).
-  - ⛔ **Launch blockers found so far: 1, fixed.** Artifacts `reports/L1..L6_*.md`; fact `EF-065`.
+  - **Link 7 consumed 08-19: L7 environment & namespace**, no launch (refusal reasoned: the live `_G`
+    is the only remaining evidence and console/probe/instrument are all barred; the packed case IS run B).
+    Global map taken from the COMPILER (`tools/l7_env_map.py`, Lua 5.3 bytecode, control 23/23).
+  - ⛔ **Launch blockers found so far: 1, fixed.** Artifacts `reports/L1..L7_*.md`; fact `EF-065`.
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
-  - Owner kicks each step; next = link 7 (environment & namespace; cap 8).
+  - Owner kicks each step; next = link 8 (adversarial / hostile modder) = **the cap**.
+- ⛔ **Gate B criterion 1 could not fail; FIXED 08-19** — it read "packed" off `[CommunityFixPack]` lines,
+  true unpacked too. Now reads `Mod.lua:1849`'s mode line. **MEASURED: 66 of 66 archived sessions say
+  `unpacked`, zero `packed`.** ⚠️ Junction + packed folder both present ⇒ **unpacked WINS** at equal
+  version (`Mod.lua:1770`), silently. No packed build exists on disk; stage 2 packaging is outstanding.
+- **Namespace settled 08-19 (source):** the pack owns **5** globals (3 + 2 `GameVar`s), writes 21 vanilla
+  names, trips **neither** engine assert, creates **zero** env shadows, never reads `Platform`; pack and
+  TestKit are **disjoint on writes both ways** and the pack reads nothing the kit provides (first such
+  evidence in 7 links). `content_path` is `Mod/<id>/` **packed and unpacked alike** — closes an L5 worry.
 - ⛔ **`items.lua` is a RELEASE GATE, not bookkeeping** (08-19): `SaveDef` rebuilds `metadata.lua`'s
   `code` list SOLELY from its items (`Mod.lua:816-840`, `:973`) and BOTH portals force that save on a
   first upload — Steam's runs BEFORE packing. A module absent from `items.lua` ships absent.

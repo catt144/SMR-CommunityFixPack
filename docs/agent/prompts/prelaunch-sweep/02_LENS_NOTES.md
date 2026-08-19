@@ -288,10 +288,15 @@ Five surfaces must agree and have drifted before: `bugs/INDEX.md` ·
 
 ## L7 · Environment & namespace
 
-- **Enumerate every global the pack creates or writes.** Expected: `SMRFixPack`,
-  `SMRFixPack_Disabled`, `SMRFixPack_Optional`. ⛔ Any accidental global is a
-  collision risk with other mods — and other mods are on this rig by ruling.
-  `EF-064` is relevant (`ProtectedPropertyObject` protects nothing in retail).
+- **Enumerate every global the pack creates or writes.** ⚖️ **CORRECTED by link 7
+  (2026-08-19): this bullet said "Expected: `SMRFixPack`, `SMRFixPack_Disabled`,
+  `SMRFixPack_Optional`" and the real set is FIVE** — those three plus the two
+  `GameVar`s `SMRFixPack_MeteorLatch` (`Fix_MeteorFrequency.lua:76`) and
+  `SMRFixPack_FirstAsteroidPrefabs` (`Fix_FirstAsteroidPrefabs.lua:115`, declared
+  through an alias `GameVar(FLAG, false)` a plain grep cannot join). Both are
+  deliberate and headered; the *expectation* was what was wrong. ⛔ Any accidental
+  global is a collision risk with other mods — and other mods are on this rig by
+  ruling. `EF-064` is relevant (`ProtectedPropertyObject` protects nothing in retail).
 - ⭐ **Packed vs unpacked.** A player gets `MountPack` + `def.packed = true` +
   `metadata.lua` read from **inside** the archive (`Mod.lua:1724-1740`). We have
   only ever run `MountFolder` through a junction. See
@@ -302,6 +307,61 @@ Five surfaces must agree and have drifted before: `bugs/INDEX.md` ·
 - Console platforms (`FIX_POLICY` §7): achievements block on exactly
   playstation / xbox / **windows_store** (`Achievement.lua:61-63`) ⇒ say *"Steam
   and other PC versions"*, ⛔ never bare "PC".
+
+> ⭐⭐ **Added by link 7 (2026-08-19) — WHEN A QUESTION IS DECIDED BY SCOPE, DO
+> NOT ASK A PATTERN. ASK THE COMPILER. This generalises past L7 and it is what
+> made everything below cheap.** "Enumerate every global" reads like a grep job
+> and is not one: whether `x = 1` is a global or a local is decided by **scope**,
+> and the same eight characters are a local write inside `local x` and a global
+> write outside it. This project has three sessions on record of extractors that
+> were wrong in exactly that way, one of which would have inverted a verdict.
+> But Lua 5.2+ compiles every global access to an indexed access on the `_ENV`
+> upvalue, so the bytecode carries the answer with no ambiguity at all —
+> `SETTABUP`/`GETTABUP` where the upvalue is named `_ENV`. `lupa` is already a
+> dependency (`tools/l2_reload_sim.py`), and `tools/l7_env_map.py` is ~250 lines
+> that cannot be fooled by shadowing, nested closures, method definitions,
+> for-loop variables, parameters or `local _ENV`. ⇒ **Before hand-rolling a
+> scanner, ask whether a real compiler or parser already decides the thing you
+> are about to approximate.**
+>
+> ⭐ **And the corollary that produced this link's gate finding: A CRITERION IS A
+> CLAIM TOO — read what its EVIDENCE COLUMN actually tests.** Link 6 established
+> *"a guard is a claim too"* about `upload_preflight`. Point it at the release
+> gate itself: `98_LAUNCH_REHEARSAL.md` criterion 1 said *"the mod loads
+> **packed**"* and offered *"`[CommunityFixPack]` lines exist at all"* as its
+> evidence — lines that are equally present unpacked. The criterion certifying
+> that run B measured the player's configuration **could not fail**. The engine
+> prints the fact plainly (`Mod.lua:1849`), and 66 of 66 archived sessions say
+> `unpacked`. ⇒ **For every pass criterion anywhere, ask whether its evidence
+> can come out NO. One that cannot is not a criterion.**
+>
+> ⚠️ **What a re-take of L7 owes, in priority order.** ① ⛔ **The runtime `_G`
+> has never been enumerated by anything.** This link proves what the *source*
+> writes; the live-process global set has never been listed or diffed against
+> vanilla, and that is the direct falsifier for "no sixth name". It needs one
+> console line or one probe — both barred pre-launch, so it is **post-launch
+> work, deliberately parked**, not an oversight. ② **`CheckModPackSignature` was
+> not read**, so whether the packed branch is even taken on this rig is open —
+> and it gates everything about configuration B. ③ **The TestKit was swept for
+> NAMESPACE only**; its second-load behaviour and its own containment are still
+> unswept after seven links, and it is the one component measured to emit
+> `[LUA ERROR]` lines of its own. ④ **No console platform, ever** — that the pack
+> never reads `Platform` is a real result but a different claim from behaving
+> correctly there.
+>
+> ⭐ **Negatives worth inheriting so they are not re-derived** (all re-derived at
+> Src this link, artifact §2–§5): neither engine assert is reachable by this pack
+> — no write can trip the strict-global create-assert (every nested-scope write
+> targets a `GameVar` or a file-scope global function), and no read can trip the
+> undefined-global assert (all 187 read names resolve, because every
+> possibly-absent name is reached through `rawget(_G, "…")` and never bare). The
+> pack creates **zero** env-table shadows. `writes ∩ ModEnvBlacklist = ∅`.
+> **`content_path` is `"Mod/<id>/"` in BOTH the packed and unpacked cases**
+> (`Mod.lua:1755` + `ModContentPath` `:6`), which closes link 5's open worry that
+> `EF-065`'s mod-flag match might behave differently in run B. And the pack and
+> the TestKit are **disjoint on global writes in both directions**, with the pack
+> reading nothing the kit provides — the first evidence that six links' worth of
+> "the TestKit was loaded for every reading" is not hiding a dependency.
 
 ## L8 · Adversarial / hostile modder
 

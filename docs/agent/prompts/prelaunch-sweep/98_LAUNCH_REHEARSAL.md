@@ -133,6 +133,19 @@ pack behaves identically without it.
    read **from inside the archive**.
    ⚠️ **Determine what `CheckModPackSignature` does first** — if it returns true
    the branch is not taken and your rehearsal is not the player's path.
+   ⛔⛔ **AND WHY STEP 1 IS NOT OPTIONAL — added 2026-08-19 (link 7), re-derived
+   at Src.** If the junction and the packed folder are BOTH present, both defs
+   load and collide on `new_mods[def.id]`; the tie-break is
+   `if cmp < 0 or (cmp == 0 and old.packed and not def.packed)` (`Mod.lua:1770`)
+   ⇒ **at equal version the UNPACKED copy wins.** Both are 1.0.0, so leaving the
+   junction in place does not produce a warning or an error — it silently hands
+   run B the dev tree, which is the exact configuration B exists to stop
+   trusting. Two witnesses, both free: the id appears in `multiple_sources` and
+   raises `ModMessage("Mod %s loaded from %s (%s)")` (`:1800`), and criterion 1's
+   mode line says `unpacked`. ⚠️ Note the packed/unpacked branches are `if`/
+   `elseif` on ONE folder (`:1724`/`:1748`), so a single folder is never
+   ambiguous — the hazard is strictly **two folders carrying one id.**
+
 3. ⭐ **Run it under TWO folder names, and this is a real test, not pedantry.**
    First load computes `hpk_mounted_path = ModContentPath .. (prev_id or
    folder_name) .. "/"` — **the FOLDER NAME, not the mod id** — then caches the id
@@ -151,7 +164,7 @@ Everything below is readable from the log file and the screen.
 
 | # | criterion | how it is read |
 |---|---|---|
-| 1 | the mod loads **packed** | `[CommunityFixPack]` lines exist at all |
+| 1 | the mod loads **packed** | ⛔⛔ **CORRECTED 2026-08-19 (link 7) — this cell's evidence did not test this cell's claim, and it is the one criterion that decides whether the other nine mean anything.** It read *"`[CommunityFixPack]` lines exist at all"*, which is equally true of the **unpacked** tree — so a B run whose junction pull was incomplete would have measured the dev tree and scored this GREEN. ⇒ **Read the engine's own mode line instead:** `ModPrint("once", "Loaded mod def %s (id %s, v%s) %s from %s", …, mod.packed and "packed" or "unpacked", …)` (`Mod.lua:1849`), which prints the `def.packed` flag set at `:1734`. ⭐ **MEASURED over `docs/archive/*.log`: 66 archived sessions carry this line for `id SMR_CommunityFixPack` and ⛔ ALL 66 say `unpacked from appdata`; `packed` has never once appeared.** That is the seed note's "never loaded packed" upgraded from an assertion to a named witness. ⇒ **B passes criterion 1 only on `… (id SMR_CommunityFixPack, v1.00-000) packed from …`.** `[CommunityFixPack]` lines existing is criterion 2's evidence, not this one's. | log: `grep "Loaded mod def" <log>` — the word must be `packed` |
 | 2 | **every module** registers | install-witness lines **BY NAME**, ⛔ not a total; the name set must equal run A's |
 | 3 | ⚖️ **no NEW / UNATTRIBUTED `[LUA ERROR]`** — ⛔ *corrected 2026-08-19 (link 5): this cell said `0 [LUA ERROR]`, and criterion 3's own "any of 1–7 failing blocks the upload" would have used a vanilla line to block a clean release.* ⚠️⚠️ **BUT LINK 5'S EVIDENCE SENTENCE WAS ITSELF WRONG AND IS CORRECTED HERE (2026-08-19, owner review).** It read *"no build of this game can ever satisfy [zero] on this rig"* and *"every one of the 73 archived logs … carry them."* ⛔ **Re-measured over `docs/archive/*.log`: 21 of 73 carry at least one; 52 carry NONE.** So zero is not only satisfiable, it is the **common** case, and ⛔ **a B run that produces zero is normal and must not be read as suspicious.** The errors are session/map dependent, not universal — `Lua/Flight.lua:465` `objects_to_mark` + `:479` `objects_to_unmark`, vanilla synthetic-map noise documented since 2026-08-03. ⭐ *The rule link 5 wrote is right and stands; only its justification was inherited rather than measured — the exact failure it had just caught the interlude committing.* ⛔ **And the count is NOT the constant the interlude's R5 called "reproduced": the same configuration on the same build produced 48 / 59 / 48 across legs A / B / C, because the line fires per marked object and scales with session activity.** ⇒ **Compare the SHAPE, never the count**: exactly two sites, both `Flight.lua`, nothing else. ⭐ **Any third site, or any line whose message or stack contains our content path, is the real failure — that one is `EF-065`'s route and it also puts a message box on the player's screen.** | log; `grep -c "LUA ERROR"` then read every distinct message |
 | 4 | ⛔ **no `update report:` line** | `00_Core.lua:540` logs **before** it shows the dialog, so its ABSENCE is the falsifier for the 08-17 false-alarm defect — no console needed |

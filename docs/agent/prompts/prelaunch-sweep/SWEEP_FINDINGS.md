@@ -1019,3 +1019,189 @@ order with no priority field and no way to request a position (`EF-054`,
 - ⛔ **Three own-instrument defects were found and fixed before any count was taken**
   (artifact §5.2), one of which would have inverted the veto verdict. A fourth is
   disclosed as a limit: the member census is blind to string dispatch.
+
+
+---
+
+## Link 7 — L7 environment & namespace (2026-08-19)
+
+Artifact: `docs/agent/reports/L7_ENVIRONMENT_MAP.md`. Instrument:
+`tools/l7_env_map.py` (new) — the global map taken from the **compiler**
+(Lua 5.3 bytecode, `SETTABUP`/`GETTABUP` on `_ENV`), control battery 23/23
+before any count was taken. Configuration: dev tree, unpacked, source-derived
+at Src by symbol + all archived logs; **no launch** (refusal reasoned,
+artifact §7).
+
+### L7-F1 — ⛔ THE RELEASE GATE'S CRITERION 1 COULD NOT FAIL. **FIXED THIS LINK.**
+
+`98_LAUNCH_REHEARSAL.md` criterion 1 is *"the mod loads **packed**"* and its
+evidence column read *"`[CommunityFixPack]` lines exist at all"*. Those lines
+are equally present when the mod loads **unpacked** — so the one criterion whose
+job is to certify that run B measured the player's configuration would have
+scored GREEN on the dev tree, and the other nine criteria would have inherited
+that false premise.
+
+The engine prints the fact directly: `ModPrint("once", "Loaded mod def %s (id
+%s, v%s) %s from %s", …, mod.packed and "packed" or "unpacked", …)`
+(`Mod.lua:1849`), off the `def.packed` flag set at `:1734`.
+
+⭐ **MEASURED over `docs/archive/*.log`: 66 sessions carry that line for
+`id SMR_CommunityFixPack`; ALL 66 say `unpacked from appdata`. `packed` has
+never appeared once.** The seed note's *"never loaded packed"* is now a named,
+greppable witness instead of an assertion.
+
+**Disposition: FIXED IN PLACE** — a record, which spec §4's 2026-08-19
+clarification explicitly permits (record-only means `Code/`, `metadata.lua`,
+`items.lua`). Criterion 1 now reads the mode line; `[CommunityFixPack]` lines
+existing is returned to criterion 2, where it belongs.
+⚖️ **Not launch-blocking today** — nothing is published and B has not run. It
+would have produced a false pass the first time B ran, which is why it was not
+left for the terminal audit.
+
+### L7-F2 — ⛔ AND THE CONFIGURATION HAZARD THAT WOULD HAVE TRIGGERED IT. **RECORDED IN STAGE 4.**
+
+If the junction and a packed folder are **both** present, both defs load and
+collide on `new_mods[def.id]`; the tie-break is `if cmp < 0 or (cmp == 0 and
+old.packed and not def.packed)` (`Mod.lua:1770`) ⇒ **at equal version the
+UNPACKED copy wins.** Both are 1.0.0, so an incomplete junction pull hands run B
+the dev tree with **no warning and no error**.
+
+Two free witnesses: the id enters `multiple_sources` and raises
+`ModMessage("Mod %s loaded from %s (%s)")` (`:1800`); and criterion 1's mode line
+says `unpacked`. ⚠️ The packed/unpacked branches are `if`/`elseif` on ONE folder
+(`:1724`/`:1748`), so a single folder is never ambiguous — the hazard is strictly
+**two folders carrying one id**. Route: written into `98_LAUNCH_REHEARSAL.md`
+stage 4 step 2, where the gate runner will actually read it.
+
+⚠️ Rig state read this session: `AppData/…/Mods/` holds three junctions
+(`SMR-BugFixPack`, `SMR-BugFixPack-TestKit`, `SMR-OptInPack` — the last restored
+2026-08-19 00:30, still owing an owner tick per `H-08`). **No packed build of
+this mod exists anywhere on disk**, so stage 2 packaging is outstanding, not
+merely unverified.
+
+### L7-F3 — ⚠️ Three global FUNCTION replacements bypass the pack's own §1.4b read-back. **RECORD ONLY.**
+
+`SMRFixPack.SetGlobal` exists to carry the read-back `FIX_POLICY` §1.4b makes
+mandatory. 13 sites use it; three replace a vanilla global function by bare
+assignment instead:
+`Fix_ShuttleTransportCache.lua:52` (`FindTransportationModeToCommunity`) ·
+`Fix_LandscapeUnitFilter.lua:62` (`LandscapeForEachUnit`) ·
+`Fix_WispRewards.lua:30` (`SetLightTrapMode`).
+
+⚖️ **Severity stated with the condition SAMPLED, not assumed.** The only way
+`ModEnvMeta.__newindex` can fail to land a write is a **blacklisted key**, and
+this link mechanically proved `writes ∩ ModEnvBlacklist = ∅` over all 149
+blacklist entries. ⇒ the failure mode §1.4b guards against is **excluded here**,
+not merely unobserved. **Policy-consistency finding, not a behaviour defect;
+⛔ not launch-blocking.** Route: terminal audit, with the whole finding set
+visible — it is three one-line changes, and it is exactly the kind of edit spec
+§4 says has plausibly negative expected value on a release candidate.
+
+### L7-F4 — ⚠️ The lens brief expected three pack globals. There are five. **CALIBRATION.**
+
+`02_LENS_NOTES.md` L7 says *"Expected: `SMRFixPack`, `SMRFixPack_Disabled`,
+`SMRFixPack_Optional`"*. The complete set is those three **plus two `GameVar`s**:
+`SMRFixPack_MeteorLatch` (`Fix_MeteorFrequency.lua:76`) and
+`SMRFixPack_FirstAsteroidPrefabs` (`Fix_FirstAsteroidPrefabs.lua:115`, declared
+through the alias `GameVar(FLAG, false)` that a plain grep cannot join).
+
+Both are deliberate, headered, and already counted by L3's persisted-state
+census — they are new only to **this lens's stated expectation**, which is what
+needed correcting. ⛔ **No sixth name exists.** Route: the lens-notes L7 block is
+corrected this link, so link 8 and any re-take inherit the right number.
+
+### L7-F5 — ⭐⭐ NEGATIVE WORTH INHERITING: the TestKit has NOT been holding the pack up.
+
+Six consecutive links ended *"TestKit tree excluded"*. It is swept here for
+namespace, with the same instrument (20 files, 7 write sites, 2,062 read sites):
+
+| question | answer |
+|---|---|
+| pack **reads** a global only the TestKit creates | ⛔ **NONE** |
+| pack **writes** a name the TestKit also writes | ⛔ **NONE** |
+| TestKit **writes** a name the pack also writes | ⛔ **NONE** |
+
+The kit adds 6 session globals (`SMRTest`, `SMRAutoRun`, `SMRTest_AutoRunEnabled`,
+`SMRTest_EnablePathLeg`, `SMRTest_EnablePathRunning`,
+`SMRTest_EnablePathSawPackOff`), neuters `ShowStartGamePopup` outright for
+autorun legs (`95_AutoRun.lua:265` — so **every archived leg ran with a vanilla
+popup suppressed**), and swaps three vanilla globals around specific probes,
+restoring each (`MeteorsDisaster` `90_Loggers.lua:76`/`:83`; `RequestAssignUnit`
+and `RequestUnitFulfill` `91_Stress.lua:366`/`:372`, restored `:383-384`).
+
+⚠️ **Scope, so it is not over-read:** this is a **static namespace** result. It
+does not say run B will pass. It says the specific failure mode *"the pack
+silently depends on something only the instrument supplied"* is **excluded** —
+previously unmeasured and unexcludable, and the single most useful thing to know
+before B.
+
+### L7-F6 — ⭐ NEGATIVES WORTH INHERITING: neither engine assert can be reached by this pack.
+
+All re-derived at Src this session (`Mod.lua:1546-1611`), not inherited:
+
+* **No write can trip the strict-global create-assert.** The assert needs
+  `not Loading` AND `PersistableGlobals[key] == nil` AND the name currently nil.
+  All 8 vanilla names the pack writes from nested scope are `GameVar`s
+  (`Lua/Meteors.lua:38`/`:39`, `Lua/MapSettings.lua:125`,
+  `Lua/Units/Colonist.lua:2478`, `Lua/TerraformingDisasters.lua:323`) or
+  file-scope global functions; our own two nested writes are `GameVar`-declared,
+  which puts them in `PersistableGlobals` and rawsets them non-nil at declaration
+  (`lib.lua:1049-1055`).
+* **No read can trip the undefined-global assert.** All **187** distinct global
+  names the pack reads were crossed against the whole shipped tree (4,446 Src
+  files, 10,956 definitions, plus a second indentation-tolerant pass — the first
+  pass under-detected 11 names and that is disclosed in the artifact). Every one
+  resolves: Lua base library, documented engine C exports (`EF-014`'s
+  `GatherTransportableResources` among them), or engine-managed env keys
+  (`CurrentModOptions`, `EF-004`; `TechDef`, a preset `GlobalMap` container,
+  read only inside a wrapper gated on a researched tech).
+  ⭐ The reason is structural, not luck: every possibly-absent name
+  (`Mods`, `WaitMessage`, `GetPreGameMainMenu`, `ModLog`, `FlushLogFile`) is read
+  through `rawget(_G, "…")` and appears in the bare-read set **not at all**.
+* **Zero env-table shadows.** `safe_rawget` prefers an own key over real `_G`, so
+  a `rawset(_G, k, v)` would make our reads diverge from the game's. The pack has
+  exactly one `rawset(_G, …)` site (`Fix_FirstAsteroidPrefabs.lua:129`) and it
+  writes **nil** — it clears a shadow rather than creating one.
+* **No blacklist collision.** `writes ∩ ModEnvBlacklist = ∅`; the four
+  blacklisted names the pack reads (`Msg`, `OnMsg`, `_G`, `rawget`) all have
+  own-key overrides installed by `LuaModEnv` (`Mod.lua:1600-1607`). This upgrades
+  `EF-006`'s hand-checked *"uses no blacklisted API"* to mechanical over 76 files.
+* **No platform-conditional code at all** — `Platform` is never read by any of
+  the 76 files, so `FIX_POLICY` §7's constraints cannot be violated by a platform
+  branch. ⚠️ That is a different claim from "it behaves correctly on console."
+
+### L7-F7 — ⭐ `content_path` is configuration-INVARIANT. **CLOSES AN INHERITED OPEN ITEM.**
+
+Link 5's row left open: *"`content_path` in the PACKED case was not compared to
+the unpacked one, so the engine's mod-flag match may behave differently in
+configuration B — the gate."* `EF-065`'s player-facing *"Mod Flagged"* box is
+keyed on it.
+
+Re-derived: **both branches converge on one line.** `Mod.lua:1755` sets
+`def.content_path = ModContentPath .. def.id .. "/"` and `ModContentPath = "Mod/"`
+is a constant (`Mod.lua:6`); the packed/unpacked branches (`:1724-1740`/`:1748`)
+differ only in where the def is read from, and `MountContent` (`:857-862`) mounts
+either the pack or the folder **at that same path**.
+⇒ `content_path` is `"Mod/SMR_CommunityFixPack/"` in both configurations, and
+`ReportModLuaError`'s match behaves identically in run B. **Answered by source; it
+does not need the gate to settle it.** Route: `EF-065` may carry this at the
+terminal audit's discretion — not amended here, because that fact's text is not
+wrong, only silent on the packed case.
+
+### L7-F8 — observation, logged so it is not re-discovered as alarming
+
+63 archived logs name the pack `v1.00-001`; the 3 newest name it `v1.00-000`,
+which matches the frozen `metadata.lua` (`version 0`, `version_major 1`,
+`version_minor 0`). The revision was reset 1 → 0 before the freeze.
+⛔ **No consequence**: nothing is published, so no player has ever seen `-001`,
+and `CompareVersion` only matters between two installed copies. Recorded per the
+house rule that a log line is never silently discounted. **No route needed.**
+
+### L7-F9 — cosmetic, not edited
+
+`docs/PLAYTEST_HELP.md:26` heads an item *"Achievements stay ON with mods on PC"*
+— a bare "PC" of the kind `FIX_POLICY` §7 warns about — but qualifies it in the
+same sentence (*"they are mod-blocked only on console/MS Store"*), so the claim
+is accurate. It is an owner-facing doc, not a player surface, and `README.md:51`
+words the player-facing version correctly (*"Steam and other PC versions"*).
+⇒ **Loose, not wrong. Left alone** — a human doc is not edited on a cosmetic.
