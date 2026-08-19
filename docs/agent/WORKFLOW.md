@@ -67,12 +67,16 @@ Two mechanical rules that came with the same restructure:
    you stopped halfway.
 7. **Run `python tools/doccheck.py` before committing doc changes** — red
    blocks. One-time setup: `git config core.hooksPath tools/hooks`.
-8. **STATE.md's 60-line cap comes with an eviction rule** (adopted 2026-08-03,
-   standing-prompts redesign O7). To add a line at the cap, evict in the same
-   commit: resolved or superseded material moves to
-   `docs/archive/SESSION_LOG.md` (append-only, newest-first). Evict history,
-   never obligations — open gates, holds, owner decisions and the counts
-   block stay.
+8. **STATE.md is BYTE-budgeted with an eviction rule** (owner ruling 2026-08-18,
+   checklist 42; the 2026-08-03 60-line cap is RETIRED — it was satisfied while
+   being defeated). doccheck enforces warn/hard byte caps plus a per-line cap;
+   a doccheck WARN must be copied VERBATIM into the owner report, and the owner
+   fires `agent/prompts/STATE_EVICTION.md`. Format for machine efficiency and
+   safety: one fact per line, never widen or pack lines to satisfy a budget —
+   evict, don't compress. Resolved or superseded material moves to
+   `docs/archive/SESSION_LOG.md` (append-only, newest-first, `tags:` line).
+   Evict history, never obligations — open gates, holds, owner decisions and
+   the counts block stay.
 
 ## Layout
 
@@ -944,7 +948,7 @@ this repo — re-read them before anyone proposes one again:**
    suite counts, the SKIP set BY NAME) would silently become "…on whichever
    branch was last checked out."
 2. **The truth-bearing documents are rewritten in place, not appended.**
-   `STATE.md` has a hard 60-line cap with an eviction rule; `bugs/INDEX.md` and
+   `STATE.md` has hard byte caps with an eviction rule; `bugs/INDEX.md` and
    `facts/INDEX.md` are GENERATED. Parallel long-lived branches means every
    merge conflicts on exactly those files, and a badly-resolved `INDEX.md`
    merge is a red doccheck at best and a wrong index at worst.

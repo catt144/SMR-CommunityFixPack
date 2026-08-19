@@ -348,5 +348,5 @@ them). Parse sweep before any commit touching Lua: python + luaparser,
 **End of a drone session:** record findings on the D06 entry and in
 `DRONE_PRIORITY_SYSTEM.md`, add a `SESSION_LOG` leg, **update this prompt in
 place**, and — if the general state changed — say so in `agent/STATE.md`
-(hard-capped at 60 lines; eviction rule in `WORKFLOW.md` mechanical rule 8).
+(byte-capped by doccheck; eviction rule in `WORKFLOW.md` mechanical rule 8).
 Then summarize for the owner.

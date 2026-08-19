@@ -1,4 +1,4 @@
-# General playtest-standby prompt (model-agnostic) — full pass 2026-08-04
+# General playtest-standby prompt (model-agnostic) — full pass 2026-08-04, instruction corrections 2026-08-19
 
 Paste everything below into a fresh Claude Code session — **any Claude model;
 the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
@@ -17,9 +17,9 @@ the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
 > entries, never here.
 
 > 🗂 **THIS PROMPT IS FOR LIVE PLAYTEST SITTINGS ONLY** — the campaign is the
-> main line of work. Standing non-playtest work: `agent/STATE.md` and
-> `CHAIN_QA_REPORT.md` §8. `FIX_POLICY.md` §3a binds any code any session
-> writes. Drone work is separately owned by
+> main line of work. Standing non-playtest work: `agent/STATE.md` (the kernel
+> names the active chain and next step). `FIX_POLICY.md` §3a binds any code
+> any session writes. Drone work is separately owned by
 > `docs/agent/prompts/DRONE_PROJECT_PROMPT.md`.
 
 > 📁 **LAYOUT** — `docs/README.md` is the map (`CLAUDE.md`, auto-loaded,
@@ -74,9 +74,9 @@ fail**.
   save-safety, §2 enable-path) — open it before writing any fix, and **judge
   by enumeration, never by an entry's own words.**
 - **Account state: READ IT, NEVER ASSUME IT** — the leg's own
-  `fix pack present: N/74 fixes active` line and `SMRFixPack.ListFixes()`
-  are the only valid reads; toggles AND dials. This sentence has gone stale
-  repeatedly; the reading is the truth, this file never is.
+  `fix pack present: N/<total> fixes active` line and `SMRFixPack.ListFixes()`
+  are the only valid reads; toggles AND dials. The total moves (it has gone
+  stale here repeatedly); the reading is the truth, this file never is.
 - **Cheat discipline is `PLAYTEST_HELP.md`'s** ("Cheating without
   contaminating results" — incl. the sanctioned speed techs): cheat the
   setup, never the mechanism under observation; fixture saves only.
@@ -117,10 +117,12 @@ would guess. The three that must bind before you have read anything:
 6. `docs/agent/reports/REACHABILITY_AUDIT.md` "Challenge review" — before
    writing ANY new fix: tier vocabulary, hard tells, injection-evidence rule.
 
-**End of session:** update `agent/STATE.md`. **STATE.md is hard-capped at 60
-lines (doccheck red), so adding means evicting** (`WORKFLOW.md` mechanical
-rule 8): move resolved or superseded lines to `docs/archive/SESSION_LOG.md` —
-append-only, newest-first — in the same commit; never evict open gates, holds,
-owner decisions or the counts block. Route any lesson per the logbook rule at
+**End of session:** update `agent/STATE.md`. **STATE.md is BYTE-capped by
+doccheck (warn + hard red + per-line), so adding means evicting** (`WORKFLOW.md`
+mechanical rule 8; owner ruling 08-18): one fact per line, never widen or pack
+lines; move resolved or superseded lines to `docs/archive/SESSION_LOG.md` —
+append-only, newest-first — in the same commit; a doccheck WARN is copied
+VERBATIM into the owner summary; never evict open gates, holds, owner
+decisions or the counts block. Route any lesson per the logbook rule at
 the top. Then commit, push, summarize. Work too big for the sitting was FILED
 as you went (job 3) — say where.

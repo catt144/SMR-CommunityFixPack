@@ -167,7 +167,7 @@ One commit: corrections and applied findings, each with its falsifier · your
 final-sweep artifact · `SWEEP_LEDGER.md` closed with a convergence ruling ·
 `RELEASE_PORTAL_PREP.md` updated wherever your measurements move it ·
 owner-shaped items on `docs/PLAYTEST_CHECKLIST.md` · `STATE.md` extended, not
-grown (60-line cap) · logs archived (`R8`) · `doccheck` GREEN · ⭐ **move
+grown (byte caps, doccheck-enforced) · logs archived (`R8`) · `doccheck` GREEN · ⭐ **move
 `fixpack-v1.0.0` onto the verified tree, local and remote (`--force`), if and only
 if you clear it** — the tag must mark what actually gets packed, and it is
 deliberately parked behind HEAD until then · `git rm` this file and

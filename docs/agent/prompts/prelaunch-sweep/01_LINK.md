@@ -175,8 +175,8 @@ The commit carries:
   NOT reach** (the column the stopping rule depends on). ⛔ No verdicts here;
 - **`SWEEP_FINDINGS.md` appended** — everything you found, with routes;
 - owner-shaped items on `docs/PLAYTEST_CHECKLIST.md`;
-- `STATE.md` extended, not grown (60-line cap — evict resolved material to
-  `archive/SESSION_LOG.md`, never an obligation);
+- `STATE.md` extended, not grown (byte caps, doccheck-enforced — evict resolved
+  material to `archive/SESSION_LOG.md`, never an obligation);
 - load-bearing logs archived (`R8`);
 - `python tools/doccheck.py` GREEN.
 

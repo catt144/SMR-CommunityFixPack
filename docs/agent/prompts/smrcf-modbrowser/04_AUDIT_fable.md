@@ -77,7 +77,7 @@ correction to a shipped module is allowed and must be disclosed as one.
 
 ## 6 · Close-out — the folder-empty gate
 One commit: corrections applied · `C52` in step with what actually shipped ·
-`STATE.md` extended (60-line cap; evict resolved material, never an obligation) ·
+`STATE.md` extended (byte caps, doccheck-enforced; evict resolved material, never an obligation) ·
 counts re-emitted by the tool · doccheck GREEN (+ `mkdocs --strict` if public
 pages moved) · `git rm` this file — **the folder must end EMPTY** · grave named ·
 push.

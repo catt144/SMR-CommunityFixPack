@@ -77,7 +77,7 @@ allowed and must be disclosed as one) · ⛔ no launching the game.
 
 ## 6 · Close-out — the folder-empty gate
 One commit: corrections applied · entries and heading tags in step · `STATE.md`
-extended (60-line cap; evict resolved material, never an obligation) · card/site/
+extended (byte caps, doccheck-enforced; evict resolved material, never an obligation) · card/site/
 `metadata.lua` swept **if anything shipped** · counts re-emitted by the tool ·
 doccheck GREEN (and `mkdocs --strict` if public pages moved) · `git rm` this file
 — **the folder must end EMPTY** · grave named · push.

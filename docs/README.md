@@ -15,7 +15,7 @@ docs/
   README.md               this map
   BUGS.md · STATUS.md     3-line stubs pointing at where they went
   agent/
-    STATE.md              READ FIRST. Current state only, ≤60 lines
+    STATE.md              READ FIRST. Current-state kernel, byte-budgeted (doccheck)
     WORKFLOW.md           process rules — commits, probe hygiene, todo discipline
     FIX_POLICY.md         what may be built, and how
     bugs/                 defect truth — one file per entry

@@ -89,8 +89,8 @@ destruction path) has never been adjudicated by us.
 
 ## 8 · Close-out — the folder-empty gate
 One commit: adjudication written onto `C25` with provenance per row · corrections
-applied · `STATE.md` extended (60-line cap; evict resolved material to
-`archive/SESSION_LOG.md`, never an obligation) · checklist updated · doccheck
+applied · `STATE.md` extended (byte caps, doccheck-enforced; evict resolved material
+to `archive/SESSION_LOG.md`, never an obligation) · checklist updated · doccheck
 GREEN · `git rm` this file — **the folder must end EMPTY** · grave named · push.
 
 **End the owner report with the kickoff line for the next queued chain**

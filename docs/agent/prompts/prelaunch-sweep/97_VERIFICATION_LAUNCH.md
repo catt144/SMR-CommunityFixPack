@@ -188,7 +188,7 @@ Carrying: your prediction commit (pushed **before** the launches) · logs archiv
 (`R8`) · **`SWEEP_LEDGER.md` appended with an *interlude* row** — ⛔ claim no lens,
 and write *NOT reached* as **territory, not findings** · `SWEEP_FINDINGS.md`
 appended · owner-shaped items on `docs/PLAYTEST_CHECKLIST.md` · `STATE.md`
-extended, not grown (60-line cap) · `doccheck` GREEN · `git rm` this file · commit
+extended, not grown (byte caps, doccheck-enforced) · `doccheck` GREEN · `git rm` this file · commit
 naming the grave · push.
 
 **Then the owner report:**

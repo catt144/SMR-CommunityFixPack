@@ -112,8 +112,8 @@ to the owner**, not something you do.
 
 ## 7 · Close-out — the folder-empty gate
 
-One commit: corrections applied · `STATE.md` extended (60-line cap — evict
-resolved material to `archive/SESSION_LOG.md`, never evict an obligation) ·
+One commit: corrections applied · `STATE.md` extended (byte caps, doccheck-enforced —
+evict resolved material to `archive/SESSION_LOG.md`, never evict an obligation) ·
 checklist item 34 updated with what the probe answered · `python
 tools/doccheck.py` GREEN · `git rm` this file — **the folder must end EMPTY** ·
 commit naming the grave · push.
