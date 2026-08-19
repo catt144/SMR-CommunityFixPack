@@ -800,3 +800,100 @@ baseline**, documented as vanilla synthetic-map noise since 2026-08-03.
 Attribution: vanilla, aged ≥16 days, count reproduced — reported, not dismissed.
 `MeteorFrequency: WATCHDOG` likewise present identically in the baseline and
 probe-driven.
+
+---
+
+## Link 5 — lens L5, failure & containment (2026-08-19)
+
+Artifact `reports/L5_CONTAINMENT_MAP.md` (full derivation for every row);
+instrument `tools/l5_containment.py`. Configuration: dev tree, unpacked,
+source-derived at `ModTools\Src` 1.0.7.396349 + 73 archived retail logs.
+**No launch** — refusal reasoned in the artifact §7 and in the report.
+
+⛔ **Nothing found blocks launch.** One record was corrected in place; all code
+findings are RECORD ONLY per spec §4.
+
+### L5-F1 · `SMRFixPack.OnDataReady` swallows its callback's throw — `00_Core.lua:372`, `:380`
+`DataPatch` pcalls its pass and names the F87 failure mode in a comment
+(`00_Core.lua:305-318`). `OnDataReady`, eleven lines later, calls `fn()` bare
+inside `OnMsg` handlers, so `Msg`'s `procall` (`cthreads.lua:20`) swallows the
+throw: module stays `active`, `detail` stays `""`, no log line. Consumers:
+`Fix_FirstAsteroidPrefabs:237`, `Fix_TechDescriptionBuilding` x2 (the latter is
+already a proven no-op, `F98`/`EF-039`, so live exposure is luck not design).
+**Hard tell:** sibling contradiction, same file, same reason, same engine route.
+**Fix shape:** mirror `DataPatch:309-318` — pcall, `status="error"`, log.
+**Route:** record only; terminal audit.
+
+### L5-F2 · `Register` indexes `SMRFixPack_Disabled` with no type guard — `00_Core.lua:446`
+`:11`/`:15`/`:17` adopt three foreign-writable globals and keep any truthy value.
+`WhenActive:187-188` and `DataPatch.run:302-303` both guard with
+`type(disabled) == "table"`; `Register:446` does not, and `:24-25` indexes
+`SMRFixPack` unguarded. `Register` runs at every module's file scope ⇒ a
+non-table truthy `SMRFixPack_Disabled` throws in **all 75 files at once**
+(75 modules ABSENT + a message box listing 75 errors); a non-table `SMRFixPack`
+takes the whole pack down at `:24`, before the logger exists.
+**Reachable** only by a pre-load foreign write — but the README advertises
+`SMRFixPack_Disabled["<id>"] = true`, and the misreading `SMRFixPack_Disabled = true`
+lands here at the next `ReloadLua` (which a player triggers by closing the Mod
+Manager). **Fix shape:** three `type(...) ~= "table"` resets at `:11-25`.
+⚠️ **Overlaps L8** — flagged so L8 does not re-derive it. **Route:** record only.
+
+### L5-F3 · Three load-time repairs walk player data with no per-item guard
+14 message handlers iterate; the pack already owns the correct shape
+(`Fix_TrainMinors:141`, `Fix_TrackTunnelPowerBridge:164` — a per-ITEM pcall).
+Without one, a throw on item k is swallowed by `procall` and items k+1..n are
+abandoned with no log line and the entry still `active`.
+- `Fix_SaintBlessing:151` — `AllMapsForEach(true,"Colonist",...)`, every colonist
+- `Fix_TrackSalvageWipe:304` — `AllMapsForEach(true,"TrackGridElement",...)`
+- `Fix_StaleReservations:61` — plain Lua `for` over every Residence x `reserved`
+⚖️ **Severity is half-unmeasured:** the first two reach objects through
+`map:MapForEach`, a **C export**, and whether the C loop procalls per object is
+not derivable from Lua. `Fix_StaleReservations` has no such ambiguity — the
+remainder is abandoned, certainly. **One console line settles all three**, routed
+to checklist 44. **Not blocking:** an abandoned repair leaves vanilla state, and
+72 pack-carrying logs show none of the three throwing. **Route:** record only.
+
+### L5-F4 · Run B's criterion 3 was unsatisfiable — `98_LAUNCH_REHEARSAL.md:156` ✅ CORRECTED IN THIS COMMIT
+The release gate required `0 [LUA ERROR]` and closes "Any of 1-7 failing blocks
+the upload." MEASURED: 73/73 archived logs carry them; the three 08-19 legs read
+**49 / 60 / 49** (`Flight.lua:465` x48/59/48 + `:479` x1). `01_LINK.md` §6 was
+corrected for exactly this on 2026-08-19 and the rehearsal was not.
+⭐ Also: `reports/97_VERIFICATION_LAUNCH.md` R5 calls the count "reproduced"
+while disclosing 48 vs 59 in the same sentence — `Flight:Mark` fires per marked
+object, so the number tracks session activity. **The stable signature is the
+SHAPE (exactly two sites, both `Flight.lua`), never the count.** Criterion 3 now
+says so, with the measured baseline and the `EF-065` escalation.
+**Record fix, not code** — spec §4 clarification, 2026-08-19.
+
+### L5-F5 · `FIX_POLICY` §2's both-checks rule is not met by 4 delegated handler bodies
+`MeteorsWatchdogCheck:121`, `IndependenceTerraformingSweep:127`,
+`StormWedgeCheck:98` test `status == "active"` but not `SMRFixPack_Disabled[id]`;
+`Fix_CrystalMysteryHang:105` (`OnMsg.MysteryEnd` -> `stop_repeater`) tests
+neither. §2 requires both. Pre-load vetoes ARE covered (Register latches
+`status="disabled"`), so the gap is **mid-session veto only**.
+⚠️ `Fix_MeteorFrequency:164-169` does both in the same file as `:157`, which does
+not. **Cosmetic-to-minor. Route:** record only.
+
+### L5-C1 · CANDIDATE, vanilla, not ours — `Lua/TerraformingDisasters.lua:411`
+`[LUA ERROR] attempt to index a boolean value (upvalue 'old_threads')`, 1 of 73
+logs, 2026-08-04. `UpdateRainsThreads` reads the `RainsDisasterThreads` **GameVar**
+(`:323`, `false` with no live session) into an upvalue at `:376` and indexes it at
+`:411`; its **one caller tree-wide** is `DelayedCall(0, UpdateRainsThreads, ...)`
+(`:488`), deferred into a real-time thread (`lib.lua:1811`). Session teardown
+between schedule and fire ⇒ throw. **Attribution shown:** no pack site assigns
+that container; `Fix_RainsDeadlock:126-134` only *repairs* a non-table one; the
+sole caller is vanilla's. ⚠️ **What I cannot show:** that our leg did not change
+the timing that opened the window; 1 occurrence is not a rate.
+**Deliberately NOT filed as a `bugs/` row mid-chain** — count churn before launch
+for no benefit; the terminal audit files with the whole set visible.
+
+### New record: `EF-065` — the engine's two player-facing mod-error boxes
+Neither has a call site in our code, so no census of `Code/` can see them.
+(a) `ReportModLuaError` (`Mod.lua:2958-2993`, live in retail — gated
+`if not Platform.asserts`) pops "Mod-related problem detected ... Mod Flagged:
+<title>" on any uncaught error whose message OR stack contains our
+`content_path`, once per mod id per process. (b) a file-scope throw is caught by
+`pdofile` (`lib.lua:242-251`), collected by `ModDef:LoadCode` (`:490-520`) and
+shown by `ModsLoadCode` (`:2254-2275`). **MEASURED NEGATIVE: 0 occurrences of
+either in all 73 archived logs.** ⇒ "fail safe, never loud" holds only where our
+code sits inside a pcall we own.

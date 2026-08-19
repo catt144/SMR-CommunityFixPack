@@ -153,7 +153,7 @@ Everything below is readable from the log file and the screen.
 |---|---|---|
 | 1 | the mod loads **packed** | `[CommunityFixPack]` lines exist at all |
 | 2 | **every module** registers | install-witness lines **BY NAME**, ⛔ not a total; the name set must equal run A's |
-| 3 | `0 [LUA ERROR]` | log |
+| 3 | ⚖️ **no NEW / UNATTRIBUTED `[LUA ERROR]`** — ⛔ *corrected 2026-08-19 (link 5): this cell said `0 [LUA ERROR]`, which **no build of this game can ever satisfy on this rig** and which criterion 3's own "any of 1–7 failing blocks the upload" would therefore have used to block a clean release.* **MEASURED: every one of the 73 archived logs and all three 08-19 verification legs carry them** — `Lua/Flight.lua:465` `objects_to_mark` + `:479` `objects_to_unmark`, vanilla synthetic-map noise documented since 2026-08-03. ⛔ **And the count is NOT the constant the interlude's R5 called "reproduced": the same configuration on the same build produced 48 / 59 / 48 across legs A / B / C, because the line fires per marked object and scales with session activity.** ⇒ **Compare the SHAPE, never the count**: exactly two sites, both `Flight.lua`, nothing else. ⭐ **Any third site, or any line whose message or stack contains our content path, is the real failure — that one is `EF-065`'s route and it also puts a message box on the player's screen.** | log; `grep -c "LUA ERROR"` then read every distinct message |
 | 4 | ⛔ **no `update report:` line** | `00_Core.lua:540` logs **before** it shows the dialog, so its ABSENCE is the falsifier for the 08-17 false-alarm defect — no console needed |
 | 5 | ⛔ **nothing on screen** | no dialog, no notification, first launch through to a loaded save |
 | 6 | version renders **1.0.0** | Mod Manager |

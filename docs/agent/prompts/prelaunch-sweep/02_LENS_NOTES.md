@@ -182,6 +182,47 @@ Every module routes through `00_Core`.
   the named **F87 failure mode**: reporting `active` while having done nothing.
   How many modules could be in that state right now and nobody would know?
 
+> ⭐⭐ **Added by link 5 (2026-08-19) — ASK WHO OWNS THE FAILURE SURFACE, NOT WHAT
+> THE COMPONENT DOES WHEN IT FAILS. This generalises past L5 and it is the
+> question that produced everything this link found.** The three bullets above
+> are all asked *about the pack's own code*, and the pack's whole fail-safe story
+> is told about `apply` — one of **six** entry classes. Ask instead: *for each
+> way the engine can enter our code, who is holding the pcall?* The map then
+> inverts. The two loudest failure surfaces this pack has are **raised by the
+> engine, keyed on our mod's `content_path`, with no call site of ours involved**
+> (`EF-065`): an uncaught runtime error whose stack touches our path pops
+> *"Mod-related problem detected … Mod Flagged: Relaunched Fix Pack"*, and a
+> file-scope throw pops the load-errors box. ⇒ **L4's census of 17 screen call
+> sites in `Code/` was correct and structurally could not see either.** A
+> component's failure surface is not necessarily in the component.
+>
+> ⭐ **Corollary that found the widest blast radius: a throw at FILE SCOPE does
+> not make a module `inactive` — it makes it ABSENT.** `Register` never runs, so
+> the id is in neither `fixes` nor `order`, and `ListFixes` / `UpdateSuspects`
+> are structurally blind to it. **Whenever a component reports its own health,
+> ask what a failure looks like that removes the reporter.**
+>
+> ⚠️ **What a re-take of L5 owes, in priority order.** ① **The 53 method wrappers
+> were never traced to their callers** — "who holds the pcall at a wrapper" is
+> answered structurally and not per site; that is a concrete, mechanical ~53-row
+> job and it is the largest unswept surface in this lens. ② ⛔ **Whether
+> `map:MapForEach`'s C loop `procall`s its callback per object** decides whether
+> three unguarded load-time repairs lose one object or the rest of the colony —
+> one console line settles it (routed, checklist 44). ③ **Whether
+> `OnMsg.OnLuaError` fires for a THREAD error** (`cthreads.lua:137-141` raises
+> `OnThreadError`, a different message) — if not, the pack's 8 threads are
+> quieter than its wrappers, which is a design lever nobody has had. ④ The
+> TestKit's own containment, excluded here for the fifth time and the one
+> component measured to have emitted `[LUA ERROR]` lines of its own.
+>
+> ⭐ **Two donor shapes the pack already contains — measure the rest against
+> them.** `Fix_ExtenderFlapChurn:70-104` is how to install OUTSIDE apply's pcall
+> (probe the target into `install_error`, gate the install, `return install_error`
+> from apply) — it is the only module that does, and it cannot throw.
+> `Fix_TrainMinors:141` / `Fix_TrackTunnelPowerBridge:164` are the **per-ITEM**
+> `pcall` inside a sweep, so one bad object costs one object instead of the whole
+> repair. Three sweeps do not hold to it.
+
 ## L6 · Promise vs behaviour
 
 Five surfaces must agree and have drifted before: `bugs/INDEX.md` ·

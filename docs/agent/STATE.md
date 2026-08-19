@@ -13,9 +13,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   - Links 1–4 consumed: L1 structure · L2 lifecycle · L3 save/exit · L4 player experience.
   - **97 verification-launch interlude consumed 08-19** (no lens, rotation intact): 3 retail autorun legs,
     `reports/97_VERIFICATION_LAUNCH.md`, logs `archive/vl97a/b/c_*`.
-  - **Nothing blocks launch so far.** Artifacts `reports/L1..L4_*.md`.
+  - **Link 5 consumed 08-19: L5 failure/containment**, no launch (refusal reasoned: every open
+    question needs the pack to throw, and `Code/` edits, probes and the console are all barred).
+  - **Nothing blocks launch so far.** Artifacts `reports/L1..L5_*.md`; new fact `EF-065`.
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
-  - Owner kicks each step; next = link 5 (failure/containment; cap 5→8 ruled).
+  - Owner kicks each step; next = link 6 (promise vs behaviour; cap 8).
 - ⭐ **The pack HAS now run post-`2f077e8`:** 72/0/24/0 of 96 opt-in-absent, `75/75` active, 0 FAIL, 0 dialog;
   88 of 96 probes hold their exact verdict vs the pre-fix baseline `c47suite4`. Apply cost 75 modules ≈0.57 s.
 - ⛔ **Still UNVERIFIED (needs ONE console sitting, checklist 44):** `2f077e8` fix ① (mark unreadable while the
@@ -23,6 +25,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⛔⛔ **Gate B has NEVER run** (packed install, junction pulled, TestKit+opt-in off) — THE release gate
   (owner: A = information, B = the gate). ⚠️ **B must budget an owner Mod-Manager tick after the junction swap
   and read the gate line first** — see H-08, or B reads as a catastrophic failure that is account state.
+  - ⚖️ B's criterion 3 was `0 [LUA ERROR]`, **unsatisfiable** (48–60 vanilla `Flight.lua` lines every launch);
+    corrected 08-19 to no NEW/UNATTRIBUTED, **compare the SHAPE (2 sites) never the count**.
   - Every suite number ever taken is unpacked, TestKit-on, single-load (L2).
   - Baseline `80/0/16/0` of 96 (`archive/c47suite4_*`), gates `75/75`+`8/8`; rig runs cheats.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):

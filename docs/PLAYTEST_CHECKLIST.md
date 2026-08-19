@@ -207,6 +207,29 @@ completed tests move whole to
     Anything other than the expected values is a launch-blocker and I want to see
     it before you upload anything.
 
+    ⭐ **Two extra lines, ~20 seconds, added 2026-08-19 by the failure-and-
+    containment sweep — same sitting, nothing else needed.** Neither changes
+    anything; both just print. They are optional, but line 6 is the only way to
+    settle a question three of our fixes depend on.
+
+    6. `local n = 0 local ok = pcall(function() AllMapsForEach(true, "Colonist", function(c) n = n + 1 if n == 2 then local t t.x = 1 end end) end) print("L5 MapForEach:", ok, n)`
+       — **what it means.** Three of our repairs walk every colonist (or every
+       track piece) in the colony and fix what they find. If one object goes
+       wrong halfway through, does the game skip that one object and carry on, or
+       does it silently abandon the rest of the list? Nobody knows, because that
+       loop lives in the game's C code and cannot be read. This line deliberately
+       breaks the **second** item and prints what happened.
+       *`true` and a number bigger than 2* → it carries on, and this is a
+       non-issue. *`false 2`* → it abandons the rest, and three of our fixes want
+       a small change before the next release. **Either answer is worth having**;
+       neither is a launch-blocker.
+    7. `print("L5 errbox:", config.DisableErrorReporting, ReportedMods)`
+       — the game has its own pop-up that says *"Mod-related problem detected…
+       Mod Flagged: Relaunched Fix Pack"* whenever a script error touches our
+       folder. We only found it this week and it has **never fired** in any of
+       our 73 recorded sessions. This prints whether it is switched on at all on
+       your machine. Expect `nil` and `false` (or `nil nil`).
+
 ### ✅✅ 2026-08-18 — STATE.md WAS EVICTED ON YOUR DIRECTION, AND YOU RULED THE CAPS THE SAME DAY. Nothing here is owed from you.
 
 42. ⭐ **What happened.** The agents' one mandatory-read file had quietly grown
