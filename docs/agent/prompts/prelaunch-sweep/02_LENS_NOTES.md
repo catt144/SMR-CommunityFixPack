@@ -386,3 +386,63 @@ Assume another mod is installed that is not ours and not friendly.
 > being clobbered. That is the correct save/restore discipline. ⛔ Link 1 did NOT
 > sweep whether the pack's other 15 global replacements hold to it; that sweep is
 > this lens's, and it is a concrete, mechanical job.
+>
+> ⚖️ **SWEPT by link 8 (2026-08-19), and the benchmark is HALF right — read the
+> other branch of the helper link 1 quoted.** Only **2** of the 16 global
+> replacements have a restore path at all, both the same helper. The `not want`
+> branch is exactly as praised. ⛔ The `want` branch — `if want and cur ~= wrapper
+> then _G.X = wrapper end` — has **no** such check: `cur ~= wrapper` is not a
+> safety test, it is *"have we been displaced"*, and it overwrites whatever is
+> there, captures nothing, logs nothing, and fires from the `DataPatch` runner on
+> the **ordinary cold-boot `DataLoaded`**. ⇒ **Whenever a prior link nominates a
+> shape as the benchmark, read every branch of it — the praised half and the
+> unpraised half can disagree.**
+>
+> ⭐⭐ **Added by link 8 (2026-08-19) — ASK WHAT THE COMPONENT ACCEPTS, NOT ONLY
+> WHAT IT DOES. This generalises past L8 and it is the question that produced the
+> widest blast radius in the chain.** The four bullets above all ask about the
+> pack's *behaviour under* another mod — its wrappers, its ordering, its blame.
+> Every one of them assumes the foreign mod reaches us **through the functions we
+> patch**. It doesn't have to. `00_Core.lua:11`/`:15`/`:17` read three globals with
+> `rawget(_G, "…") or {}`, which is not a defensive idiom — it is a **published
+> contract** (`README.md:71`, under a "For modders" heading) saying *another mod
+> may create this before we load and we will adopt it*. ⇒ **Three globals are an
+> API whose values are supplied by code this project does not control, and in
+> eight links nothing had ever fed them anything but a well-formed table.** A
+> hostile modder does not need to out-think a wrapper; they need to hand us a
+> value that is not a table. `SMRFixPack_Disabled = true` — the natural misreading
+> of our own sentence — throws at `00_Core.lua:446`, which runs at **file scope in
+> all 75 modules**, and takes the entire pack down at once.
+>
+> ⭐ **And the corollary that made it worth a harness rather than a paragraph:
+> EXECUTE THE SHIPPED SOURCE UNDER THE HOSTILE VALUE.** L2 already proved a
+> `lupa` harness over real `Code/` files is admissible evidence here. Reproduce
+> the engine's containment — one `pcall` per file, because that is `pdofile`
+> (`lib.lua:242-251`) — and the harness then distinguishes **ABSENT** from
+> `error`, which is the distinction `EF-065` (b) says the pack's own reporting
+> cannot make. ⛔ **Write the controls first**: the documented veto value must
+> produce the documented log line, and the empty case must veto nothing, before
+> a single hostile row is evidence about anything.
+>
+> ⚠️ **What a re-take of L8 owes, in priority order.** ① **The census that ISN'T a
+> census: preset-FIELD patches.** L1 left them non-mechanical, L6 left them
+> unswept for dead targets, L8 leaves them unswept for foreign contention — three
+> lenses, one surface, no sweep. ② **The one available foreign observation** — a
+> leg with the opt-in pack loaded, which wraps two of the same methods (`EF-054`).
+> Blocked on an owner tick (`H-08`), asked on the checklist, recommended **after**
+> run B. ③ **`ReportModLuaError`'s batching** — one box listing several mods, or
+> one box per mod? It turns on `CreateRealTimeThread`'s start semantics, which is
+> a C export and is not in `cthreads.lua`. ④ **Link 1's C1 check against a FOREIGN
+> subclass** — structurally impossible from `ModTools\Src`, so it is unbounded
+> rather than open.
+>
+> ⭐ **Negatives worth inheriting so they are not re-derived** (all source-derived
+> at Src this link, artifact §4–§5): **`EF-058`'s flattened-class trap does NOT
+> bite the pack** — mod code executes at `autorun.lua:423` strictly before
+> `classes.lua`'s `function OnMsg.Autorun()` flattens, so all 50 method patches
+> are copied *down* into subclasses; the trap is keyed on **install time**, and
+> all four recorded bites were runtime-installed instruments (`EF-058` amended in
+> place). And **a foreign WRAPPER trips none of the pack's 238 shape checks**,
+> because wrapping preserves the type ⇒ the pack is blind to being wrapped and
+> cannot false-latch over it; only a **destructive** foreign action (nil, rename,
+> remove) reaches the stand-down dialog.

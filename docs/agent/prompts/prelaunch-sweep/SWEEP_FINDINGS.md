@@ -1205,3 +1205,213 @@ same sentence (*"they are mod-blocked only on console/MS Store"*), so the claim
 is accurate. It is an owner-facing doc, not a player surface, and `README.md:51`
 words the player-facing version correctly (*"Steam and other PC versions"*).
 ⇒ **Loose, not wrong. Left alone** — a human doc is not edited on a cosmetic.
+
+---
+
+## Link 8 — lens L8, adversarial / hostile modder (2026-08-19)
+
+⛔ **Nothing here blocks launch.** Every finding below needs a third party — a
+foreign mod, a fork, or a console line before our load — to supply the condition.
+The shipping configuration is green in both controls of the harness.
+
+Derivation: `reports/L8_ADVERSARIAL_MAP.md`. Instruments (both new, both
+control-tested before use): `tools/l8_hostile_input.py` (2 controls pass),
+`tools/l8_deference_map.py` (`--selftest` 11/11).
+⛔ **No third-party mod was installed** — standing baseline policy; every
+foreign-mod result is source-derived by construction.
+
+### L8-F1 — `SMRFixPack_Disabled` is indexed with no type guard at the one site that runs 75 times at file scope
+
+`00_Core.lua:446` — `if SMRFixPack_Disabled[id] then` — runs inside `Register`,
+and `Register` is called at **column 0 in all 75 fix files** (measured: 75 of 76
+`SMRFixPack.Register(` occurrences are at column 0; the 76th is the definition).
+`:11` adopts whatever a foreign mod left in the global (`rawget(...) or {}`), so a
+non-table value reaches `:446` intact.
+
+MEASURED on the shipped source under Lua 5.4, with `pdofile`'s per-file pcall
+reproduced (`lib.lua:242-251`):
+
+| seeded value | modules lost |
+|---|---|
+| `SMRFixPack_Disabled = true` | **75 of 75** |
+| `SMRFixPack_Disabled` with a throwing `__index` | **75 of 75** |
+
+⭐ **And the pack's own health surface reports nothing true.** `Register` reaches
+`:440-443` before it throws, so all 75 ids sit in `fixes`/`order` with status
+`pending` — a status no other path produces. `UpdateSuspects` (`:521-541`) tests
+only `error` and `inactive`, so `pending` is **not suspect**, the stand-down
+dialog never fires, and `ListFixes()` prints 75 `[pending]` lines. The engine is
+loud (75 collected load errors); we are silent and wrong.
+
+⛔ The same guard is present and correct at **four** other sites
+(`00_Core.lua:187-188`, `:302-303`, `Fix_DustDevilSpawnGate.lua:333-334`,
+`Fix_MeteorFrequency.lua:168-169`) — all four run *inside* a pcall someone owns.
+The two unguarded sites (`:446` and `:55`) are the two that run **outside** every
+pcall the pack owns.
+
+`00_Core.lua:55` (`SMRFixPack_Optional[id]`, same shape) is **latent, not live**:
+its only caller is the `def.optional` branch at `:467` and there are 0
+optional-gated files today.
+
+**ROUTE:** terminal audit. The repair is a two-line type guard at `:446` and `:55`
+(or a normalising `type(...) == "table" or {}` at `:11`/`:15`). ⛔ Record-only at
+link 8; `Code/` is barred and this is not launch-blocking.
+
+### L8-F2 — the `SMRFixPack` sub-table defence is inverted
+
+`00_Core.lua:24-25` re-fills `defs` and `data_edited` (`SMRFixPack.defs =
+SMRFixPack.defs or {}`), but `fixes` and `order` get no such line — and
+**`fixes`/`order` are the two indexed at file scope** (`:439`, `:443`).
+
+MEASURED, same harness:
+
+| seeded value | result |
+|---|---|
+| `SMRFixPack = true` | ⛔ **all 76 files dead, including `00_Core` itself** (`:24`) |
+| `SMRFixPack = {}` — a fork, a second copy, a shim | ⛔ **75 of 75 dead** at `:439`; `00_Core` survives *because* of `:24-25` |
+| `SMRFixPack = {fixes={}, order={}}` | ✅ loads and registers normally |
+
+⇒ The two sub-tables that were defended are the two that did not need it at file
+scope; the two that needed it have nothing. The last row is the proof.
+
+**ROUTE:** terminal audit, alongside L8-F1 — same file, same class of repair.
+
+### L8-F3 — two well-formed veto values fail silently
+
+`SMRFixPack_Disabled = "DustDevilSpawnGate"` (a string is indexable via the string
+metatable) and `SMRFixPack_Disabled = {"DustDevilSpawnGate"}` (a list, keyed `[1]`)
+both throw nothing, log nothing, and **veto nothing**. The modder believes the fix
+is off; it is running.
+
+⚠️ `README.md:71` says *"Setting a fix's identifier in that global table"*, which
+is a fair reading of the list form. This is a **wording + robustness** pair, and it
+sits beside link 6's separate finding about the same published snippet.
+
+**ROUTE:** terminal audit (code) + owner (README wording). Not filed as a defect
+against the code alone.
+
+### L8-F4 — the deference census: 24 of 66 patch sites are full replacements, and nobody had a number
+
+`tools/l8_deference_map.py`, alias-resolved (five forms). The sound direction: a
+module with **no textual reference anywhere** to the prior value of its target
+**cannot** chain, so the tool emits a lower bound on replacements and never an
+upper bound on chaining; `reads-prior` rows are candidates and were read by hand.
+
+| kind | sites | REPLACES | reads-prior |
+|---|---|---|---|
+| global function | 16 | **11 (69%)** | 5 |
+| class method | 50 | **13 (26%)** | 37 |
+| **total** | **66** | ⛔ **24 (36%)** | 42 |
+
+⛔ **This is NOT a policy violation and must not be written up as one.**
+`FIX_POLICY` §1.5 sanctions full replacement and names this exact consequence
+itself (*"the fixes most likely to clash with other mods"*). Every replacement
+sampled carries the §1.5-mandated Src-file-and-lines header — **the "accidental
+clobber" hypothesis is refuted, not merely unobserved.**
+
+⭐ **What it IS:** §1.5 says *"keep the list short"* and **the list has never been
+counted.** A soft bound with no measurement cannot be checked — L6's *"a guard is
+a claim too"*, pointed at a budget.
+
+⚠️ **And two published surfaces state the preference as the practice:**
+`README.md:66` *"chain rather than clobber"*, and `00_Core.lua:4-6` *"so other
+mods that hook the same functions keep working"* — the second asserts an outcome
+for other mods that holds at 42 sites and does not hold at 24.
+
+**ROUTE:** owner (wording, on the checklist). The 24 replacements themselves are
+correct §1.5 decisions and are **not** proposed for change.
+
+### L8-F5 — the pack's own restore benchmark re-installs rudely, on the ordinary cold-boot path
+
+Link 1 nominated `Fix_DustDevilSpawnGate:250-258` as the correct save/restore
+discipline and assigned the sweep of the rest here. Result: **exactly two** of the
+16 global replacements have any restore path (`Fix_DustDevilSpawnGate`,
+`Fix_DustDevilsDescrMap:73-81`), both the same helper.
+
+The **restore** branch is exactly as praised — re-read the live value, swap back
+only `if cur == wrapper`, so a later replacement is left alone. ⛔ **The
+re-install branch has no such check:**
+
+    if want and cur ~= wrapper then _G.OverrideDisasterDescriptor = wrapper end
+
+`cur ~= wrapper` is not a safety test — it is *"have we been displaced"*, and its
+answer is *"put ours back."* Whatever `cur` held is **overwritten, never captured**
+(`orig` still holds the pre-us value) and **nothing is logged**.
+
+`set_installed(true)` is called from the `DataPatch` pass (`:307`), which the
+shared runner fires on `ClassesBuilt` / `DataLoaded` / `ModsReloaded` /
+`DataChanged` (`00_Core.lua:334-354`). Cold boot, traced:
+
+    ModsLoadCode()   ...our apply installs `wrapper`
+                     ...a foreign mod enabled AFTER us installs its own  <- displaced
+    Msg("ClassesBuilt")  presets empty -> pass returns early
+    Msg("DataLoaded")    pass runs -> set_installed(true) -> OVERWRITTEN, silently
+
+⇒ The two modules that gained a re-install path to survive **their own** latch/heal
+cycle gained, with it, the **only mechanism in the pack that un-does someone
+else's patch after they installed it** — and it contradicts `EF-054`'s recorded
+design intent (*"a mod that replaces the function outright simply wins… the
+correct outcome"*) on the one path where the pack can contradict it.
+
+⚖️ Blast radius **2 globals** (`OverrideDisasterDescriptor`, `GetDustDevilsDescr`).
+⛔ Not launch-blocking — needs a foreign mod on one of those two names.
+
+**ROUTE:** terminal audit. Candidate repair: capture in the `want` branch too, or
+decline to re-install when `cur` is neither `wrapper` nor `orig`. ⚠️ Both change
+behaviour of a working module, which is exactly the risk spec §4 switched to
+record-only for.
+
+### L8-F6 — under a foreign conflict, both blame surfaces point at us
+
+**(a) The engine's box.** Re-derived at Src this session
+(`Mod.lua:3001-3015`), whose own comment reads *"rough estimation based on call
+stack"*: `OnMsg.OnLuaError` flags **every** mod whose `content_path` appears in the
+error **or the stack**. Our 42 chaining wrappers are *designed* to be on the stack
+of what they wrap ⇒ **a foreign mod that loaded before us and throws inside its own
+wrapper puts our path on the stack and the box names us.** The message is built as
+a **list** (`mods_str = table.concat(mods, "\n")`, `:2981-2992`), so the surface
+names several mods at once with no ordering and no blame. ⛔ Not actionable — the
+engine owns it, we have no call site, `config.DisableErrorReporting` is the only
+switch. Recorded so a wild *"the fix pack broke my game"* report is read correctly.
+
+**(b) Our own dialog.** Counted over `Code/`: **238 shape checks** (113 `global=` +
+106 `class=` + 19 `path=`) against **7 `test=`** content checks, in 69 modules.
+Shape checks fail with *"…not found (game update changed it?)"* and set
+`update_suspect` (`00_Core.lua:157-163`) ⇒ **a foreign mod that removes, renames
+or nils a symbol we depend on produces a player box blaming a game update and
+sending the player to look for a fix-pack version that will not exist.** The 7
+`test` entries deliberately cannot reach it (`:160-162`) — correct design.
+
+⭐ **Negative worth inheriting:** a foreign *wrapper* trips none of the 238,
+because wrapping preserves the type. The pack is blind to being wrapped — no false
+stand-down — and only a **destructive** foreign action reaches the dialog.
+
+⚠️ L4 already found this sentence dishonest for a different cause (`status ==
+"error"` announced as a game update). This is a **third** cause of the same
+sentence. **Recorded as a third input to an open wording decision, not as a new
+defect.**
+
+### L8-R1 — record correction (not a finding): `EF-058` amended in place
+
+The flattened-class trap is keyed on **install time relative to `Msg("Autorun")`**.
+Re-derived at Src: `ModsLoadCode()` is a direct call at `autorun.lua:423`, and
+flattening happens in `classes.lua`'s `function OnMsg.Autorun()` ⇒ mod load
+strictly precedes flattening, so the pack's **50** method patches (all at file
+scope or inside a synchronous `Register` apply) are copied **down** into subclasses
+and are safe by construction. ⛔ The amendment weakens nothing: all four recorded
+bites were **runtime-installed instruments**, where the trap is exactly as live as
+before. Permitted by spec §4's 2026-08-19 clarification (records, not code).
+
+### L8-A1 — the launch ask (spec §6.5), routed to the owner
+
+⛔ **Not a refusal.** There is a launch worth taking for this lens and it is named
+exactly: **a leg with the opt-in pack loaded.** It wraps two of the same methods we
+wrap (`UniversalRocketBase:GetFuelResourceRequest`, `Drone:CleanUnreachables`,
+`EF-054`) and is the only two-independently-authored-wrappers-on-one-method
+observation this project can ever make. It is blocked on an **owner Mod-Manager
+tick** (`EF-055`, `H-08`) which an agent may not spend. **Asked on the checklist,
+with predictions written in advance.**
+
+⚠️ What was NOT done and why: another run-A leg. Fix pack + TestKit with the opt-in
+absent ran **three times** on 08-19 and contains **zero** foreign wrappers — it
+would measure nothing this lens asks.

@@ -29,6 +29,77 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚠️ 2026-08-19 — two calls from the last sweep link. Neither blocks launch; one is a wording call, one is a "when", and my recommendation on the second is *not yet*.
+
+50. ⚠️ **Two sentences we publish promise other mods more than the code delivers.
+    Your call on the wording; nothing else changes.**
+
+    **What we say.** The README's "For modders" section says the pack will
+    *"chain rather than clobber"*, and the top of `Code/00_Core.lua` — which ships
+    inside the mod, so a curious modder reads it — says fixes *"prefer
+    wrapping/chaining originals over replacement, **so other mods that hook the
+    same functions keep working**."*
+
+    **What the code does.** I counted it, mechanically, for the first time: of the
+    66 places the pack patches something, **42 chain** (they call the original, so
+    another mod's version of that function still runs) and **24 replace it
+    outright** (they don't, so it doesn't). That is 11 of the 16 global functions
+    and 13 of the 50 class methods.
+
+    ⛔ **This is not a rule being broken.** Our own house rules explicitly allow a
+    full replacement when the bug sits mid-function and can't be hooked, and they
+    already warn that those are *"the fixes most likely to clash with other
+    mods."* Every replacement I sampled carries the header the rule demands,
+    naming the game file and lines it was copied from. These are deliberate,
+    documented decisions and **I am not proposing to change any of them.**
+
+    ⭐ **What is new is the number.** The rule says "keep the list short" and
+    nobody had ever counted the list. 24 is the count. Whether 24 is short is your
+    judgement, not mine.
+
+    ⇒ **The decision is only about the two sentences.** The first ("chain rather
+    than clobber") describes a preference as if it were a practice. The second is
+    the one that actually matters, because it promises an **outcome for other
+    mods** — and that outcome is true at 42 sites and false at 24.
+    **Recommendation:** soften the `00_Core.lua` sentence to say the pack chains
+    *where it can* and copies a corrected body where the bug can't be hooked. It
+    costs one line, it is true, and it is the sentence a modder quotes back at us
+    if something clashes. ℹ️ Same visit could carry the veto-snippet wording note
+    below.
+
+    ⚠️ **A smaller one riding along, same file.** The README says to disable a fix
+    by *"setting a fix's identifier in that global table."* Read literally that
+    invites `SMRFixPack_Disabled = {"DustDevilSpawnGate"}` — a **list** — which is
+    a perfectly valid table, throws nothing, logs nothing, and **does not disable
+    anything.** The person walks away believing they turned a fix off. The example
+    directly under that sentence is correct; the sentence above it is what misleads.
+    One clarifying half-sentence fixes it.
+
+51. ⚠️ **There is one test worth running that I could not run, and my
+    recommendation is to run it AFTER launch, not before. Your call on the timing.**
+
+    **The test.** Every claim this pack makes about getting along with other mods
+    is derived from reading code. Nothing has ever been *watched* — no second mod
+    has ever been in the process while we measured anything. The one second mod we
+    can legitimately use is **our own opt-in pack**, which patches two of the same
+    functions the fix pack patches. A single unattended run with both loaded would
+    be the only time this project ever sees two independently-written patches
+    stacked on one function.
+
+    **Why I did not run it.** The opt-in pack is currently switched off in your
+    account, and putting a mod's folder back does **not** switch it back on — that
+    takes you ticking it in the Mod Manager and restarting. That is a cost only you
+    can pay, and spending it unattended is the one thing our own hazard list says
+    never to do.
+
+    ⇒ ⛔ **Recommendation: don't do it yet.** The final release test ("run B")
+    needs the opt-in **off**, and it is the gate. This compatibility test is
+    information, not a gate — by your own ruling. Turning the opt-in on now means
+    turning it off again before run B, for a result that cannot block the launch
+    either way. **Cleanest order: run B first, launch, then this.**
+    ℹ️ Nothing owed today. The tick itself is still owed whenever you next open the
+    Mod Manager (that is item 43); this just says what it would buy.
+
 ### ⚠️ 2026-08-19 — the SAME defect class, in the third mod. Not today's problem; do not let it be forgotten.
 
 48. ⚠️ **The Save Rescue mod has no `items.lua` at all**, against a 2-entry code

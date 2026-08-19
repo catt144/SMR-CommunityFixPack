@@ -21,9 +21,18 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   - **Link 7 consumed 08-19: L7 environment & namespace**, no launch (refusal reasoned: the live `_G`
     is the only remaining evidence and console/probe/instrument are all barred; the packed case IS run B).
     Global map taken from the COMPILER (`tools/l7_env_map.py`, Lua 5.3 bytecode, control 23/23).
-  - ⛔ **Launch blockers found so far: 1, fixed.** Artifacts `reports/L1..L7_*.md`; fact `EF-065`.
+  - **Link 8 consumed 08-19: L8 adversarial/hostile modder — ⛔ THE CAP; the lens pool is EXHAUSTED.**
+    No launch, and the refusal is an owner-costed **ask**, not a decline: the only foreign-wrapper
+    observation available is a both-packs leg needing an owner tick (`H-08`); recommended AFTER run B.
+    Instruments `tools/l8_hostile_input.py` (2 controls) + `tools/l8_deference_map.py` (selftest 11/11).
+    Amended `EF-058` in place (the trap is keyed on install time; mod load precedes flattening).
+  - ⛔ **Launch blockers found so far: 1, fixed.** Artifacts `reports/L1..L8_*.md`; fact `EF-065`.
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
-  - Owner kicks each step; next = link 8 (adversarial / hostile modder) = **the cap**.
+  - ⛔⛔ **Next = the TERMINAL AUDIT (`99_TERMINAL_AUDIT_fable.md`), NOT another lens.** Link 8's §9
+    reads all 8 ledger rows for it: **unswept territory of consequence REMAINS** — run B/packed,
+    warm-save + uninstall/reinstall, preset-FIELD patches (3 lenses named it, none swept it),
+    the 53 wrappers' callers, 13 of 18 load passes vs the 237 SavegameFixups, the TestKit's own
+    containment. ⛔ **A link never ruled on convergence and none may; the audit does.**
 - ⛔ **Gate B criterion 1 could not fail; FIXED 08-19** — it read "packed" off `[CommunityFixPack]` lines,
   true unpacked too. Now reads `Mod.lua:1849`'s mode line. **MEASURED: 66 of 66 archived sessions say
   `unpacked`, zero `packed`.** ⚠️ Junction + packed folder both present ⇒ **unpacked WINS** at equal
