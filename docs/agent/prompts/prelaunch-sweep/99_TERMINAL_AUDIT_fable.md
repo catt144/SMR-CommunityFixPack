@@ -142,6 +142,66 @@ means the mod is clean.** State which clause the chain stopped on:
 ⛔ **A chain that stopped on clause 3 and is reported as clause 1 is the worst
 outcome this design can produce.** It would launder a cap into a clean bill.
 
+## 5a · ⛔ APPLYING FINDINGS INVALIDATES THE GATE — and how to discharge that cheaply
+
+**Run B scored 10/10 on the tree as it stands** (2026-08-19,
+`archive/runB_Mars.exe-20260819-17.20.44-*.log`). Every finding links 3–8
+recorded is queued for you, and they land in **`Code/00_Core.lua`** — the file
+all 75 modules route through. ⇒ ⛔ **The moment you edit it, the artifact run B
+validated is no longer the artifact that would ship.** That is definitional, not
+probabilistic, and this brief did not anticipate it: §4 says links record and the
+audit applies, but the gate ran *before* the applying.
+
+### What the queue actually is
+
+⭐ **Known defects, unknown reachability.** They are measurements, not worries —
+L8 seeded `SMRFixPack_Disabled = true` into the shipped source and lost **75 of
+75** modules; seeded `SMRFixPack = {}` and lost 75 while `00_Core` survived.
+⛔ **But every one is gated behind a third party** that does not exist in the
+shipping configuration: a foreign mod writing our globals before we load, a
+modder mis-reading the README, a foreign mod on one of two specific globals.
+**None is reachable by a player running this pack alone.**
+*(`L5-F3` is already OFF this queue — act 1 measured `AllMapsForEach` returning
+`true 2085` with an object deliberately broken, so the three colonist-walking
+fixes need no change.)*
+
+### ⭐ The cheap discharge, and it rests on run B's own best result
+
+**Run B proved the 75 applied module names PACKED are set-identical to the
+UNPACKED run — packing changes no behaviour.** ⇒ **packed-vs-unpacked is no
+longer an open variable**, so verifying an edit in the *unpacked* configuration
+tells you what the packed one would do.
+
+Unpacked verification is **run A** — TestKit on, opt-in off — **unattended, zero
+owner cost.** One launch confirms 75 `applied` by name, no new `[LUA ERROR]`, and
+the suite compared **by name** against `72/0/24/0`.
+
+⇒ **The recommended route:**
+
+> **Apply → verify with one unattended run A → carry it across to packed on run
+> B's own finding, and state that argument explicitly rather than leaving it
+> implicit.**
+
+⛔ **The carry-over argument holds ONLY while no fix touches the packaging
+surface** — the `code` list, `items.lua`, `metadata.lua`, or the file set. If one
+does, the argument breaks and **run B genuinely needs re-running** (a two-act
+owner sitting). Check this per change; do not assume it.
+
+⚠️ **Each queued fix is a happy-path no-op by construction** — a type guard, a
+`pcall`, two `or {}` refills; in the normal case the table is already a table and
+nothing throws. ⛔ **That is also exactly what one says before a regression**, and
+`00_Core.lua` is the one file where being wrong takes down all 75 at once, which
+L8 did not argue but measured. **Verify; do not reason.**
+
+### What is still the owner's, not yours
+
+⚖️ **Whether to apply at all.** The owner overruled ship-now-fix-later once
+(*"I want us to be clean period"*) — but that was a defect **players would see**
+on a brand-new release. This queue needs a hostile third party. ⛔ **Do not assume
+the same ruling repeats.** Route it to `docs/PLAYTEST_CHECKLIST.md` with the
+options and a recommendation: apply + run-A verify (above) · apply nothing and
+defer to 1.0.1 · apply and re-run B.
+
 ## 6 · Scope fence
 
 **IN:** verifying and correcting the links' work · applying findings links 3+ only
