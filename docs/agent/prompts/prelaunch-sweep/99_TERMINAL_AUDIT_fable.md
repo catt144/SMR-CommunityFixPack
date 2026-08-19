@@ -36,6 +36,24 @@ sweep. One for the verdict.
 
 ## 2 · Part A — audit every link's work
 
+⭐ **RUN THIS PART AS A FAN-OUT (added 2026-08-19, owner design).** Verifying N
+already-settled findings is the one job in this chain that is genuinely parallel:
+the findings are fixed, they do not compound, and each verification is
+independent. ⛔ *Discovery* compounds and must stay sequential — that is why the
+sweep was not fanned out (`CHAIN_METHOD.md` §5a).
+
+**If your harness gives you subagents, spawn one per finding** (or per link, for
+small sets) and have each **try to REFUTE**, not to confirm — default to *refuted*
+when uncertain, and kill a finding on majority refutation. ⭐ Where a finding can
+fail in more than one way, give each verifier a **distinct lens** (does the route
+re-derive · does it reproduce · does it matter to a player) rather than N
+identical skeptics.
+
+⚠️ **If your harness has no subagents, do it serially — the concurrency is not the
+point.** What is required is that each finding is checked **independently of the
+report that produced it**, and that the check is adversarial rather than
+confirmatory.
+
 For each link, independently:
 
 - **Re-derive the ROUTE, not the citations.** *Recorded facts are claims too* —
@@ -176,6 +194,13 @@ grown (byte caps, doccheck-enforced) · logs archived (`R8`) · `doccheck` GREEN
 if you clear it** — the tag must mark what actually gets packed, and it is
 deliberately parked behind HEAD until then · `git rm` this file and
 `98_LAUNCH_REHEARSAL.md` if it has run · commit naming both graves · push.
+
+⛔⛔ **AND YOU DO NOT DELETE `99b_VERDICT_REVIEW_fable.md`** — added 2026-08-19 on
+the owner's design. **Your verdict is reviewed by a second, independent Fable
+before it is acted on.** You are the only session that has seen the whole body of
+work, which makes you the single point of failure this chain has left; one session
+ruling alone on whether a mod ships is exactly the shape this project distrusts
+everywhere else. ⇒ **Hand off, do not sign off.**
 
 **Then the owner report**, and the last sentence is the deliverable:
 

@@ -276,6 +276,71 @@ Lessons this run banked, beyond the shapes above:
   close-out cites `git show <sha>:<path>` for the full text, so deletion
   costs nothing.
 
+## 5a · ⭐ Parallel vs sequential — the rule the 2026-08-17 sweep chain earned
+
+**Owner question, 2026-08-19, while link 5 ran:** *"why do we separate this out so
+much? Why not have Fable trigger all lenses at once and assign a sub agent to
+each lens, judge all the lenses, write up a report, and send it to a stage 2 chain
+and have another adversarial Fable rule on it?"*
+
+⛔ **First, the correction that decides the answer: lenses are NOT partitions of
+the work.** L1 and L2 both read all 76 files. A lens is *a different question
+asked over the whole subject*, not a slice of it. So fan-out is not splitting a
+job across workers — it is asking N questions at once instead of in sequence.
+
+### What fan-out genuinely buys
+
+⭐ **Real blinding, for free.** The sweep chain proved a fence cannot be enforced
+sequentially in this repo (`prelaunch-sweep/00_CHAIN_SPEC.md` §2): `STATE.md` is a
+mandatory read and carries prior verdicts. **Parallel agents cannot read each
+other's findings because the findings do not exist yet.** Fan-out gets by
+construction the property the fence failed to enforce. Plus one kickoff instead of
+N, one report instead of N, and wall-clock collapse — a large win on owner
+attention, which is the scarce resource.
+
+### ⛔ What it costs, and it is the thing that actually produced results
+
+**Every good finding in that chain came from COMPOUNDING:**
+
+* link 2 found the fence hole **because** it read link 1's verdicts in STATE;
+* the verification interlude exists **because** links 1–4 each wrote *"no
+  launch"*, and the pattern was only visible **stacked up**;
+* that interlude then found a junction/account-state defect in a procedure written
+  **after** the lenses that never looked at it.
+
+⛔ **In a parallel round none of those happen** — eight agents report at t=0,
+nobody watches four declarations accumulate, and the synthesiser is reading
+reports rather than doing the work. Three more: the **coverage ledger stops
+functioning** (its job is *"go where the last one did not"*); **fixes cannot run
+concurrently** on a shared core file without each verifying against a tree the
+others are mutating; and the **stopping rule dies**, because *repeat-until-dry*
+needs iteration and one round has no convergence signal at all.
+
+### ⇒ The rule
+
+> ⭐ **Fan-out is a poor fit for DISCOVERY THAT COMPOUNDS, and an excellent fit for
+> VERIFYING A FIXED FINDING SET.**
+>
+> **Sequential for the sweep · parallel for the audit.**
+
+### The hybrid, for the next effort of this size
+
+1. **Stage 1 — parallel, FIND-ONLY.** Fan the lenses out. Genuinely blind, cheap,
+   fast. ⛔ No fixes: concurrent edits to a shared core cannot be verified.
+2. **Synthesis (Fable).** Judge, dedupe, rank — and ⭐ **hunt the cross-lens
+   pattern deliberately**, because that is the thing sequential links produce by
+   accident and a parallel round produces not at all. *"What did every lens
+   assume?"* is the question that replaces compounding.
+3. **Stage 2 — sequential, SHORT.** The synthesis names the 2–3 questions nobody
+   asked; those get sequential links, because those are where compounding pays.
+4. **Adversarial ruling.** A second, independent Fable whose job is to **refute
+   the verdict**, not to redo the work.
+
+⚠️ **Timing matters more than architecture.** This rule was adopted with three
+lenses left to run, and the existing chain was deliberately **not** converted:
+converting mid-flight would have saved two kickoffs and discarded a ledger built
+on sequential assumptions. **Choose the shape before link 1, not after link 5.**
+
 ## 6 · The two sentences to keep if everything else is lost
 
 **Structure work so that finishing is the only way a prompt can disappear,
