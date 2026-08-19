@@ -318,6 +318,22 @@ return {
 		'name', "Fix_ExoticDepositSign",
 		'CodeFileName', "Code/Fix_ExoticDepositSign.lua",
 	}),
+	-- ⛔ ADDED 2026-08-19 (pre-launch sweep, link 6 — LAUNCH-BLOCKING). The
+	-- module shipped in `metadata.lua`'s `code` list on 2026-08-15 and its
+	-- ModItemCode was never written, so this file held 75 entries against 76
+	-- code lines. That is the exact failure the header above describes:
+	-- `SaveDef` rebuilds `code` SOLELY from these items (`ModDef:UpdateCode`,
+	-- Mod.lua:816-840 — `local code = false`, then one entry per item, no disk
+	-- scan; `SaveDef` calls it at :973), and BOTH portals force a
+	-- `SaveWholeMod` on a first upload — Steam's runs in step 1 of `UploadMod`,
+	-- BEFORE `CreatePackageForUpload` (`Steam_PrepareForUpload`,
+	-- SteamWorkshop.lua:17-22; GedModEditor.lua:786-793). Steam would therefore
+	-- have shipped a `code` list with this file missing, and the automation-law
+	-- compensation fix would never have loaded for a single player.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_AutomationLawCompensation",
+		'CodeFileName', "Code/Fix_AutomationLawCompensation.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",

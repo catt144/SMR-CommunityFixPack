@@ -168,12 +168,34 @@ def main():
 
     items_path = os.path.join(mod_dir, "items.lua")
     if os.path.isfile(items_path):
-        n_items = len(re.findall(r"ModItemCode", open(items_path, encoding="utf-8").read()))
-        check(n_items == len(code),
-              "items.lua has one ModItemCode per code entry (editor round-trip safety)",
-              "%d == %d" % (n_items, len(code)),
-              "%d ModItemCode vs %d code entries — a SaveWholeMod would regenerate a "
-              "DIFFERENT code list (WORKFLOW 'Release steps')" % (n_items, len(code)))
+        # ⛔ 2026-08-19 (pre-launch sweep, link 6): this guard used to count the
+        # bare string "ModItemCode" over the whole file, which counts the
+        # header COMMENT that explains the guard. items.lua then read 76
+        # against a 76-entry `code` list while holding only 75 real entries —
+        # two errors cancelling, and the one guard between a missing module and
+        # the store said PASS. Parse the entries, and compare the ORDER too:
+        # `ModDef:UpdateCode` (Mod.lua:816-840) rebuilds `code` by walking the
+        # items in index order and nothing else, so both membership and
+        # sequence are what a SaveWholeMod would write.
+        items_text = open(items_path, encoding="utf-8").read()
+        item_files = [
+            m.group(1) for m in re.finditer(
+                r"PlaceObj\(\s*'ModItemCode'\s*,\s*\{.*?'CodeFileName'\s*,\s*\"([^\"]+)\"",
+                items_text, re.S)]
+        missing = [c for c in code if c not in item_files]
+        extra = [c for c in item_files if c not in code]
+        order_ok = item_files == list(code)
+        check(order_ok,
+              "items.lua ModItemCode list == metadata `code`, same files, same order",
+              "%d entries, in order" % len(item_files),
+              "%d ModItemCode vs %d code entries — a SaveWholeMod REBUILDS `code` "
+              "from these items alone (Mod.lua:816-840, called at :973), and both "
+              "portals force one on a first upload (Steam BEFORE packing, "
+              "SteamWorkshop.lua:17-22). in `code` but no item (WOULD STOP LOADING): "
+              "%s | item with no `code` line: %s%s"
+              % (len(item_files), len(code), missing or "none", extra or "none",
+                 "" if (missing or extra) else " | same set, DIFFERENT ORDER — a "
+                 "round-trip would reorder the load sequence"))
 
     # ── report ───────────────────────────────────────────────────────────────
     width = max(len(g) for _, g, _ in rows)
