@@ -29,6 +29,39 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚠️ 2026-08-19 — run B now has an ATTENDED moment in it. Nothing to decide; something to know.
+
+45. ⚠️ **The launch rehearsal is no longer zero-cost to you, and finding that out
+    early is the good news.** The verification launch measured something nobody
+    knew: **pulling a mod's junction disables it in account state, and putting the
+    junction back does NOT re-enable it** — proven across two relaunches, and the
+    mod vanishes *silently*. Run B was written to pull the fix pack's junction the
+    same way, so as designed it would have shown the pack **absent** and read as a
+    catastrophic failure of the mod — when it was a failure of my procedure.
+    ⇒ Run B now budgets **one Mod-Manager tick from you** after the swap, and
+    reads the gate line before believing any other number.
+
+    ⭐ **Two console lines ride along on that same visit, and they are the last
+    outstanding verification of the two fixes that paused this upload.** The
+    console is blacklisted in unattended runs, so this visit is the only place
+    they can happen — and they now cost nothing extra:
+    `print(SMRFixPack.fixes.SaintBlessing.update_suspect)` (expect `nil`) and a
+    duplicate check on the module list after forcing a second script load.
+
+    ⛔ **Why they were not done already, and it is not an oversight:** the
+    falsifier I wrote for those fixes could not work. It used the pack's own
+    `UpdateSuspects()`, which reads the suspect mark **only** on modules that are
+    switched off — so a stale mark on a *working* module is invisible to it. The
+    verification session ran it, got a clean `0`, and **refused to call the fixes
+    verified**, which is exactly right and better than the brief it was given.
+
+    ℹ️ **Nothing owed by you** beyond being at the keyboard for that one moment.
+
+    ⚖️ *Recorded so nobody does it casually later:* the obvious permanent fix —
+    add a Test Kit probe that checks this every run — is **post-launch work**.
+    Adding a probe moves the suite count 96 → 97, and *"a suite of 96 checks"* is
+    printed on the store card. That number has already been wrong twice.
+
 ### ⛔⛔ 2026-08-17 — THE UPLOAD IS PAUSED ON YOUR OWN WORD. Two defects found at the sitting and fixed; two questions for you.
 
 37. ⛔ **What happened, in plain words.** You opened the Mod Editor to upload,

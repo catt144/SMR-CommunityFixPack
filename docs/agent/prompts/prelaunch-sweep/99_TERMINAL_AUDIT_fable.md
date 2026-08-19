@@ -145,8 +145,12 @@ owner with a recommendation of AFTER).
 - **Run B (`98_LAUNCH_REHEARSAL.md`) was never completed** → ⛔ **you cannot issue
   an upload verdict.** B is the gate; without it you have no evidence about the
   configuration a player receives.
-- `doccheck` red · `[LUA ERROR]` in any launch · save directory fails to
-  reconcile → stop, and restore from the pre-copy first.
+- `doccheck` red · save directory fails to reconcile → stop, and restore from the
+  pre-copy first.
+- ⚖️ **A NEW or UNATTRIBUTED `[LUA ERROR]`** → stop. ⛔ *Corrected 2026-08-19:*
+  not *any* error — this rig carries **49 pre-existing vanilla ones every launch**
+  (48× `Flight.lua:465` + 1× `:479`, documented since 2026-08-03). Attribution
+  must be **shown** (line, age, reproduced count), never asserted.
 
 ## 8 · ⛔ What you may NOT claim
 

@@ -132,6 +132,20 @@ expected value of another edit to `00_Core.lua` is plausibly negative. ⚠️ **
 exception:** a **launch-blocking** finding is fixed immediately at any link, and
 the report says so in its first sentence.
 
+⚖️ **CLARIFIED 2026-08-19 — "record only" means CODE, not records.** Correcting a
+`docs/agent/facts/` entry that your own measurement disproves is ✅ **expected**,
+not a scope breach — *recorded facts are claims too*, and the verification launch
+was right to amend `EF-055` in place when it measured that fact's stated cause was
+not necessary. ⛔ What record-only forbids is changing **shipped behaviour**:
+`Code/`, `metadata.lua`, `items.lua`.
+
+⛔⛔ **AND ONE TRAP THAT LOOKS HARMLESS: adding a TestKit probe is NOT free
+pre-launch.** The suite count is a **player-facing claim** — *"a suite of 96
+checks"* on the store card (`RELEASE_DESCRIPTION_FIXPACK.md:147`) and its audited
+source. A new probe makes it 97 and puts a wrong number on the card — the same
+count that already survived **two** corrections as "95 checks". ⇒ **Probe ideas
+are recorded as post-launch work, not built now**, however good they are.
+
 ⛔ **No link may:** bump the version · publish anything · touch the opt-in or
 rescue repos · edit `docs/archive/` · add an instrument to `Code/` (it would
 contaminate the tree under test) · change what the mod PROMISES (route it).

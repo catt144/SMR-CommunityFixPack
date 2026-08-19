@@ -133,7 +133,16 @@ you take in any other configuration are **re-derived, not compared.**
 - A finding needs a decision about what the mod should *do* → route to
   `docs/PLAYTEST_CHECKLIST.md` → *"Decisions waiting on you"*. **An ask recorded
   only in an agent doc is not asked.**
-- `doccheck` red, or a launch produces `[LUA ERROR]` → stop and report.
+- `doccheck` red → stop and report.
+- ⚖️ **A launch produces a NEW or UNATTRIBUTED `[LUA ERROR]` → stop and report.**
+  ⛔ *Corrected 2026-08-19: this rule used to say "any `[LUA ERROR]`", which was
+  unrunnable* — this rig carries **49 pre-existing vanilla errors every launch**
+  (48× `Flight.lua:465` + 1× `:479`, synthetic-map noise documented since
+  2026-08-03). The verification launch proceeded through three launches and was
+  right to. ⇒ **The test is new, or unexplained, or a changed count** — and
+  ⛔ *"not caused by our leg"* is an **attribution verdict you must show**
+  (name the line, its age, and that you reproduced the baseline count), never a
+  dismissal.
 - The save directory does not reconcile → **restore from your pre-copy first**,
   before anything else.
 - You contaminated yourself on the fence → report it, keep going.

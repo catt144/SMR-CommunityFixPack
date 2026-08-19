@@ -94,8 +94,38 @@ pack behaves identically without it.
 
 **Build the player's configuration:**
 
-1. ⛔ **Pull the fix-pack junction** (`EF-055` — agent-side, real uninstall, zero
-   owner cost). Record what you pulled so you can restore it.
+1. ⛔ **Pull the fix-pack junction** (`EF-055` — agent-side, real uninstall).
+   Record what you pulled so you can restore it.
+
+   ⛔⛔ **CORRECTED 2026-08-19 — THIS STEP HAD A HOLE THAT WOULD HAVE READ AS A
+   CATASTROPHIC B FAILURE, and the verification launch found it before you ran.**
+   Pulling a junction **disables that mod in account state**, and ⛔ **restoring
+   the junction does NOT bring it back** — measured across two relaunches on the
+   opt-in pack: the def loads, the code never runs, and the mod vanishes
+   **silently** (no non-modal log line, contrary to what `EF-055` used to say;
+   `account.dat` was rewritten). ⇒ **"Zero owner cost" was wrong for this step.**
+
+   ⇒ **BUDGET AN OWNER MOD-MANAGER TICK after the swap**, and ⛔ **read the gate
+   line FIRST — before you believe any other number.** A B run that reports the
+   pack absent is measuring your own procedure, not the mod.
+
+   ⭐ **And use that owner visit for the two reads nothing else can reach**, since
+   the console is blacklisted unattended (`Mod.lua:1285`) and the visit is now
+   unavoidable anyway:
+
+   ```lua
+   print("fix (1):", SMRFixPack.fixes.SaintBlessing.update_suspect)   -- expect nil
+   DbgPackMod(Mods.SMR_CommunityFixPack, false)                        -- forces the 2nd Lua load
+   local seen, dup = {}, {} for _, id in ipairs(SMRFixPack.order) do if seen[id] then dup[#dup+1] = id end seen[id] = true end print("fix (2): order", #SMRFixPack.order, "dupes", #dup)
+   ```
+
+   ⛔ **These are the ONLY outstanding verification of the two `2f077e8` core
+   fixes that paused this upload.** The verification launch proved `UpdateSuspects()`
+   **cannot** falsify fix ① — it reads `update_suspect` only on `error`/`inactive`
+   entries (`00_Core.lua:527-536`), so a stale mark on an `active` entry is
+   invisible to it. Expect `nil` and `75` / `0`.
+   ⚠️ Confirm `IsDirty()` is false before `DbgPackMod` — a forced save bumps 1.0.0
+   to 1.0.1.
 2. Create a mod folder under `AppData/Mods/` containing **only** the stage-2
    `ModContent.fpk`. The loader takes the packed branch on
    `io.exists(pack_path) and not CheckModPackSignature(pack_path)`
