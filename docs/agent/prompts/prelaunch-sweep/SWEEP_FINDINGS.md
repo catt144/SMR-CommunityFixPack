@@ -897,3 +897,125 @@ Neither has a call site in our code, so no census of `Code/` can see them.
 shown by `ModsLoadCode` (`:2254-2275`). **MEASURED NEGATIVE: 0 occurrences of
 either in all 73 archived logs.** ⇒ "fail safe, never loud" holds only where our
 code sits inside a pcall we own.
+
+
+---
+
+## Link 6 — L6, promise vs behaviour (2026-08-19)
+
+Artifact: `docs/agent/reports/L6_PROMISE_MAP.md`.
+Extractors: `tools/l6_promise_map.py`, `tools/l6_reachability.py`.
+Config: dev tree, unpacked, source-derived at Src + the 76-log archive; **no launch** (refusal reasoned, artifact §7).
+
+### ⛔⛔ L6-F1 — LAUNCH-BLOCKING, FIXED THIS LINK (spec §4 exception) — commit `36d8817`
+
+`items.lua` held **75** `ModItemCode` entries against `metadata.lua`'s **76**-entry `code`
+list: `Code/Fix_AutomationLawCompensation.lua` had no item. It entered `code` with
+`92fe101` (2026-08-15); `items.lua`'s previous touch (`0efb87e`) predates that.
+
+**Route, re-derived at Src by symbol** (full table, artifact §0):
+`UploadMod` runs `prepare_fn` → `CreatePackageForUpload` → `upload_fn`
+(`GedModEditor.lua:772-824`); `Steam_PrepareForUpload` calls `SaveWholeMod()` inside
+step 1 on a first upload (`SteamWorkshop.lua:17-22`); `SaveWholeMod` → `SaveDef()` with
+no argument (`Mod.lua:1140-1157`) → `UpdateCode()` (`:973`), which rebuilds `self.code`
+**solely** by walking the mod items in index order and **never scans disk**
+(`:816-840`, `ForEachModItem` `:716-728`).
+
+⇒ **Steam would have packed a 75-entry `code` list and the automation-law fix would
+never have loaded for any player.** Paradox's *first* package escapes (its save runs
+after the upload, `ParadoxMods.lua:167-173`) but still rewrites the tree, so the
+documented Paradox-then-Steam order (`RELEASE_PORTAL_PREP.md` §0.5(c)) loses the module
+on Steam and on every later update to either portal.
+
+⚠️ Cost is evidenced, not argued: this is the module reading `applied` + probe `PASS` in
+all three 2026-08-19 retail legs (`archive/vl97a/b/c_*`, `75 applied` each).
+
+**Fixed:** the item, at metadata's own position. Falsifiers in the artifact.
+
+### ⛔ L6-F2 — the guard for exactly this reported PASS — FIXED, same commit
+
+`tools/upload_preflight.py:171` counted the bare string `"ModItemCode"` over the whole
+file, which counts the **header comment at `items.lua:16` that explains the guard**.
+75 real + 1 comment = 76 = `code`. Two errors cancelling. Wrong in both directions:
+the same arithmetic reports a **phantom** mismatch on the sibling opt-in repo, whose
+`items.lua` is correct (9/9, same order — checked read-only).
+**Fixed:** parses the entries, compares the **ordered** list (order is load-bearing via
+`ForEachModItem`). Falsified three ways; restored tree = 20 checked, 0 FAIL.
+
+### ⚠️ L6-F3 — the published veto snippet reads a global that does not exist yet — ROUTED, record-only
+
+`README.md:75-78` and the site's `for-modders.md:31-34` both publish
+`SMRFixPack_Disabled = SMRFixPack_Disabled or {}`. The right-hand read is a **bare read
+of a name that by construction is not in `_G` yet**; it routes through
+`ModEnvMeta.__index` and falls to the `assert` at `Mod.lua:1553`, which — unlike
+`__newindex`'s at `:1560` — carries **no `Loading` guard**.
+⭐ The pack's own five reads all use `rawget(_G, "SMRFixPack_Disabled")` precisely to
+avoid this (`00_Core.lua:11,187,302`, `Fix_DustDevilSpawnGate:333`,
+`Fix_MeteorFrequency:168`). **We publish the one shape our own code is written to avoid.**
+Functionally harmless (nil is returned after the assert); the cost is a log line whose
+loudness is build-dependent — measured in MarsDebug (`C43`), ⛔ **UNMEASURED in retail**,
+and the archive is **not** a control (artifact §4: the condition was never sampled).
+**Route:** one-word doc fix on two public pages, owner's to apply. Checklist 45.
+
+### ⚠️ L6-F4 — `EF-008` is unqualified about builds — NOTE ADDED, not reversed
+
+`EF-008` says `error()`/`assert()` in mod code *"REPORT AND CONTINUE"*, with no build
+qualifier and no `verified` date; `FIX_POLICY` §6 rests on it. `autorun.lua:243` —
+*"Platform.asserts is set in all debug builds"* — and `Mod.lua:2951`'s
+`if not Platform.asserts` both indicate the behaviour is build-specific. The advice is
+right either way; the fact's **scope** exceeds its evidence. A dated scope note was
+added to the fact. ⛔ Nothing reversed — this is a reading, not a measurement.
+
+### ⚠️ L6-F5 — `F98`'s INDEX row states the dev route; the retail route is one step earlier — NOTE ADDED
+
+⚠️ **Corrected mid-link against the entry itself.** I first wrote that `F98` had the
+route wrong; it does not. Its **body already carries the retail measurement** (probe
+`SKIP` on `Mars.exe`, reason *"the tech has no description T"*, vs `PASS` on
+`MarsDebug.exe`). What is one-sided is its **`row_status`** — the line that reaches
+`INDEX.md` and that a future session reads first — which says the no-op is
+`tech.description = T(id, CORRECTED)` writing back the same id. **That assignment never
+executes in retail:** `localization.lua:270-272` returns light userdata whenever
+`TranslationTable[id]` exists, so `Fix_TechDescriptionBuilding.lua:66`'s
+`type(desc) == "table"` is **false** and the module returns at its own guard.
+⚠️ **The actionable part neither row nor body states:** the queued repair is a
+`ModItemLocTable` entry chosen against the row's route — **any repair that keeps that
+guard is dead in retail regardless of the loc table.** Appended to the entry body;
+nothing built.
+
+### ⚠️ L6-F6 — two exact limits on the veto promise — RECORDED, deliberately not fixed
+
+(a) **`GameVar` declarations are not vetoed** (`Fix_MeteorFrequency:76`,
+`Fix_FirstAsteroidPrefabs:115`) — a save made with a fully vetoed pack still carries two
+persisted names. "Vetoed" and "absent" are not the same thing in the save and nothing
+says so. (b) **6 of the 7 ungated `function OnMsg.X()` handlers check registry status
+only, not the veto table**, where `FIX_POLICY` §2 requires both. For the **pre-load**
+veto — the only advertised route — `Register` has already latched `"disabled"`, so the
+outcome is identical. ⛔ Not fixed: seven edits to a release candidate for zero
+behaviour change is the wrong trade at link 6.
+
+### ⚠️ L6-F7 — the modder page's ordering claim omits that the order is not settable — ROUTED
+
+`for-modders.md:36-38` says it *"does not matter whether yours or ours is created
+first — only that the values are set before our code runs."* Both halves true; together
+they require the modder's mod to **load before ours**, which is the player's enable
+order with no priority field and no way to request a position (`EF-054`,
+`FIX_POLICY` §8). The page does not say so. ⚖️ Owner's wording call. Checklist 45.
+
+### ✅ Negatives worth inheriting (each mechanical, each stated with its method)
+
+- **75 of 75 Register ids match the published filename rule**, alias-resolved. Zero
+  mismatches, so the modder-facing derivation is exactly true.
+- **The veto route holds for all 75.** Every file-scope site was read: 19 go through
+  `WhenActive`, the rest self-check status or are vacuous state resets (artifact §3.2).
+- **A foreign mod's write DOES reach us.** `ModEnvMeta.__newindex`'s
+  `rawset(original_G, …)` (`Mod.lua:1562`) runs in every branch, and `ModsLoadCode()`
+  sits between `Loading = true` and `Loading = false` (`autorun.lua:1, 423, 560`) so the
+  create-assert is suppressed for all mod code, ours and theirs.
+- **No second F85.** All 13 global replacements carry live shipped references (the four
+  thinnest read to their callers and one level up); no member is dead.
+- **The fix list tracks the current module set** — both 2026-08-15 changes are
+  reflected — carries **exactly five** judgment-call entries as four surfaces promise,
+  and carries **no** entry for the one module recorded as a retail no-op.
+- ⛔ **Three own-instrument defects were found and fixed before any count was taken**
+  (artifact §5.2), one of which would have inverted the veto verdict. A fourth is
+  disclosed as a limit: the member census is blind to string dispatch.

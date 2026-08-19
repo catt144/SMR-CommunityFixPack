@@ -94,17 +94,24 @@ def register_span(text):
 
 # Sites that run or install pack work.  Each is tagged with the veto gate that
 # covers it; a site with gate "-" is one SMRFixPack_Disabled does not reach.
+# ⛔ OWN-INSTRUMENT DEFECT, found and fixed 2026-08-19 before any count below was
+# taken. The ungated-OnMsg pattern was a negative lookahead behind `=\s*`, and
+# `\s*` backtracks to zero width — so the lookahead was tested at the SPACE
+# after `=` and always succeeded. Every `OnMsg.X = SMRFixPack.WhenActive(...)`
+# read as UNGATED: 27 sites, where the true ungated set is 7. A lookahead cannot
+# be trusted behind a variable-width quantifier; match the whole line and
+# classify the right-hand side in code instead. The `^\s*` in the `function`
+# forms was a second, cosmetic instance — `\s` eats the preceding newline, which
+# is why those rows reported line-1.
+ONMSG = re.compile(r'^[ \t]*(?:(function)[ \t]+)?OnMsg\.(\w+)[ \t]*(=?)[ \t]*(.*)$', re.M)
+
 SITE_PATTERNS = [
-    # OnMsg registrations, both shipped spellings
-    ("onmsg_whenactive", re.compile(r'^\s*(?:function\s+)?OnMsg\.(\w+)\s*=\s*SMRFixPack\.WhenActive\b', re.M)),
-    ("onmsg_bare_assign", re.compile(r'^\s*OnMsg\.(\w+)\s*=\s*(?!SMRFixPack\.WhenActive)', re.M)),
-    ("onmsg_bare_func", re.compile(r'^\s*function\s+OnMsg\.(\w+)\s*\(', re.M)),
     ("ondataready", re.compile(r'SMRFixPack\.OnDataReady\s*\(')),
     ("datapatch", re.compile(r'SMRFixPack\.DataPatch\s*\(')),
-    ("gamevar", re.compile(r'^\s*GameVar\s*\(', re.M)),
+    ("gamevar", re.compile(r'^[ \t]*GameVar\s*\(', re.M)),
     ("realtime_thread", re.compile(r'CreateRealTimeThread\s*\(')),
     ("gametime_thread", re.compile(r'CreateGameTimeThread\s*\(')),
-    ("method_decl", re.compile(r'^\s*function\s+([A-Za-z_][\w]*)[:.]([A-Za-z_][\w]*)\s*\(', re.M)),
+    ("method_decl", re.compile(r'^[ \t]*function[ \t]+([A-Za-z_][\w]*)[:.]([A-Za-z_][\w]*)[ \t]*\(', re.M)),
 ]
 
 # a handler body that re-reads the veto itself (FIX_POLICY §2, the A1 lesson)
@@ -112,8 +119,26 @@ SELF_VETO = re.compile(r'SMRFixPack_Disabled')
 SELF_ACTIVE = re.compile(r'SMRFixPack\.IsActive\s*\(')
 
 
+def decomment(text):
+    """Blank the body of every `--` comment, preserving line and column offsets.
+
+    ⛔ OWN-INSTRUMENT DEFECT, found and fixed 2026-08-19 before any count below
+    was taken: the site scan ran over the raw file, so a thread constructor
+    QUOTED IN A HEADER counted as a real site — `Fix_RainsDeadlock:11` is the
+    vanilla defect the module exists to describe, reproduced verbatim in its
+    own header comment. This project's headers quote shipped code constantly,
+    so a census that cannot tell a quotation from a call over-reports exactly
+    where the reading is most careful.
+    """
+    out = []
+    for line in text.split("\n"):
+        i = line.find("--")
+        out.append(line if i < 0 else line[:i] + " " * (len(line) - i))
+    return "\n".join(out)
+
+
 def scan_module(path):
-    text = read(path)
+    text = decomment(read(path))
     fname = os.path.basename(path)
     stem = fname[:-4]
     rid, how = register_id(text)
@@ -124,6 +149,19 @@ def scan_module(path):
         return "apply" if span and span[0] <= pos < span[1] else "file"
 
     sites = []
+    for m in ONMSG.finditer(text):
+        is_func, msg, eq, rhs = m.groups()
+        if is_func:
+            kind = "onmsg_bare_func"          # `function OnMsg.X()` — never wrapped
+        elif "SMRFixPack.WhenActive" in rhs:
+            kind = "onmsg_whenactive"
+        elif eq:
+            kind = "onmsg_bare_assign"
+        else:
+            continue                           # a read of OnMsg.X, not a registration
+        sites.append({"kind": kind, "name": msg,
+                      "line": text.count("\n", 0, m.start()) + 1,
+                      "scope": scope(m.start())})
     for kind, rx in SITE_PATTERNS:
         for m in rx.finditer(text):
             line = text.count("\n", 0, m.start()) + 1

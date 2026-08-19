@@ -29,6 +29,63 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⛔⛔ 2026-08-19 — the upload would have shipped one fix missing, on Steam. Already fixed; two small wording calls are yours.
+
+46. ⛔⛔ **A fix would have vanished from the Steam release, and the check that
+    was supposed to catch it said "pass".** ⇒ **Nothing to do — it is fixed and
+    pushed.** This is the "what happened" you asked to always get.
+
+    **What happened, in plain words.** The mod carries two lists of its own code
+    files. One is the list the game reads to decide what to load; the other is
+    the list the in-game Mod Editor keeps. They are supposed to be identical.
+    When the automation-law fix was built on the 15th it went into the first list
+    and nobody added it to the second. **The Mod Editor rebuilds the first list
+    from the second every time it saves** — and *uploading* forces a save. On
+    Steam that save happens **before** the mod is packed, so Steam would have
+    received a mod that simply does not contain the automation-law fix. Paradox's
+    very first upload would have escaped, because its save happens afterwards —
+    but that save still rewrites the folder on your disk, so the Steam upload
+    that follows, and every future update to either store, would have shipped
+    without it.
+
+    **Why it wasn't caught.** `tools/upload_preflight.py` has a guard for exactly
+    this. It counted the words "ModItemCode" in the file — and one of those words
+    is in the **comment at the top of the file explaining the guard**. 75 real
+    entries plus one comment made 76, which matched, so it printed PASS. Two
+    mistakes cancelling each other out. The guard now reads the actual entries
+    and checks their order too, and I proved it by putting the fault back (it
+    fails, and names the file that would have gone missing) and by scrambling the
+    order (it fails, and says so).
+
+    ⚠️ **The same broken arithmetic was reporting a *phantom* problem on the
+    Opt-In pack**, whose list is in fact correct. That is fixed by the same
+    change. And the Save Rescue mod has **no** editor list at all — probably fine
+    for a different reason, but I did not verify it and it is not this chain's
+    repo to touch. Worth one look before it ever uploads.
+
+47. ⚖️ **Two wording calls on the modder page — your call, ten minutes, and
+    neither blocks launch.** Both are on `README.md` and the site's
+    "For modders" page, which say the same thing in the same words.
+
+    **(a) The example code we publish trips the game's own strict-globals
+    check.** We tell a modder to write
+    `SMRFixPack_Disabled = SMRFixPack_Disabled or {}`. Reading a name that does
+    not exist yet is exactly what the game complains about — and our own code
+    never does it: every place the pack reads that table it uses the safe form,
+    `rawget(_G, "SMRFixPack_Disabled")`. The snippet still *works*; the cost is a
+    line in the log, and I could not establish whether the retail build even
+    prints it (the one time we have seen it was a debug build). **Suggested:
+    publish the safe form, since it is the same one line our code already uses.**
+
+    **(b) The page tells a modder the load order does not matter, and it does.**
+    It says it *"does not matter whether yours or ours is created first — only
+    that the values are set before our code runs."* Both halves are true, but
+    together they require the modder's mod to load **before** this one — which is
+    the player's enable order, with no priority field and no way to ask for a
+    position. **Suggested: say that plainly on the modder page.** ⚠️ This is a
+    *modder*-facing page, so it does not touch your standing rule that players
+    never get load-order advice.
+
 ### ⚠️ 2026-08-19 — run B now has an ATTENDED moment in it. Nothing to decide; something to know.
 
 45. ⚠️ **The launch rehearsal is no longer zero-cost to you, and finding that out

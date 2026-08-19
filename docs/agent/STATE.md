@@ -15,9 +15,16 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
     `reports/97_VERIFICATION_LAUNCH.md`, logs `archive/vl97a/b/c_*`.
   - **Link 5 consumed 08-19: L5 failure/containment**, no launch (refusal reasoned: every open
     question needs the pack to throw, and `Code/` edits, probes and the console are all barred).
-  - **Nothing blocks launch so far.** Artifacts `reports/L1..L5_*.md`; new fact `EF-065`.
+  - **Link 6 consumed 08-19: L6 promise vs behaviour**, no launch (refusal reasoned: its two open
+    questions need mod code that reads an undeclared global, and a second mod loading in an
+    order nobody can set). ⛔ **It found and FIXED the chain's first launch blocker** (`36d8817`).
+  - ⛔ **Launch blockers found so far: 1, fixed.** Artifacts `reports/L1..L6_*.md`; fact `EF-065`.
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
-  - Owner kicks each step; next = link 6 (promise vs behaviour; cap 8).
+  - Owner kicks each step; next = link 7 (environment & namespace; cap 8).
+- ⛔ **`items.lua` is a RELEASE GATE, not bookkeeping** (08-19): `SaveDef` rebuilds `metadata.lua`'s
+  `code` list SOLELY from its items (`Mod.lua:816-840`, `:973`) and BOTH portals force that save on a
+  first upload — Steam's runs BEFORE packing. A module absent from `items.lua` ships absent.
+  `upload_preflight` now compares the ordered lists; its old guard counted its own header comment.
 - ⭐ **The pack HAS now run post-`2f077e8`:** 72/0/24/0 of 96 opt-in-absent, `75/75` active, 0 FAIL, 0 dialog;
   88 of 96 probes hold their exact verdict vs the pre-fix baseline `c47suite4`. Apply cost 75 modules ≈0.57 s.
 - ⛔ **Still UNVERIFIED (needs ONE console sitting, checklist 44):** `2f077e8` fix ① (mark unreadable while the

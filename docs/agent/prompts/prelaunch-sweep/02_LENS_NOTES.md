@@ -240,6 +240,52 @@ Five surfaces must agree and have drifted before: `bugs/INDEX.md` ·
   a citation proving the mechanism exists is a **different** check, and the owner
   has overturned a line three reviews passed on exactly this.
 
+> ⭐⭐ **Added by link 6 (2026-08-19) — ASK WHAT REWRITES THE SURFACE, NOT
+> WHETHER THE SURFACES AGREE TODAY. This generalises past L6 and it is the
+> question that produced this chain's first launch blocker.** The five surfaces
+> above are treated as five things to *compare*, and comparing them is how the
+> `F24`/`F28` class was caught. But one of them — `metadata.lua`'s `code` list —
+> is not authored, it is **DERIVED**: `ModDef:SaveDef` rebuilds it solely from
+> `items.lua`'s items (`Mod.lua:816-840`, called at `:973`), with no disk scan,
+> and **both portals force that save on a first upload** — Steam's *before*
+> packing (`SteamWorkshop.lua:17-22`, `GedModEditor.lua:772-824`). ⇒ **The
+> surfaces agreeing on disk today says nothing about what the store receives.**
+> `items.lua` had 75 entries against a 76-entry `code` list and the mod would
+> have shipped a fix missing. **For every surface, ask: who writes this, and does
+> anything rewrite it between here and the player?**
+>
+> ⭐ **And the corollary that explains why nobody had caught it: A GUARD IS A
+> CLAIM TOO — go read the guard, not its verdict.** `upload_preflight.py` has a
+> check for exactly this defect and it printed PASS, because it counted the
+> string `"ModItemCode"` over the whole file including **the header comment that
+> explains the guard**. 75 real + 1 comment = 76. Two errors cancelling. This is
+> L3's *"ask what the census key cannot see"* pointed at our own tooling: **when
+> a guard covers the thing you are checking, re-derive what it measures before
+> you let it stand in for the check.** Same day, the same lens's own extractors
+> were wrong three times — one of which (a negative lookahead behind `\s*`, which
+> backtracks) would have inverted the veto verdict.
+>
+> ⚠️ **What a re-take of L6 owes, in priority order.** ① **Preset-FIELD patches
+> are unswept for dead targets.** The dead-code sweep covers 13 global
+> replacements and 55 class/table members against 4,446 Src files; a preset field
+> we write that nothing READS is the same defect class and is invisible to a
+> call-shaped census — link 1 left the same half non-mechanical. ② **The veto has
+> never been exercised by an actual foreign mod**; every verdict about it is
+> source-derived. ③ **`ListFixes()` has never been observed** — the surface the
+> README points a modder at, 0 occurrences in the archive. ④ **Whether an assert
+> in mod code reports at all in a RETAIL build** — `EF-008` is unqualified,
+> `autorun.lua:243` says it is build-specific, and this project's one measurement
+> is a MarsDebug log.
+>
+> ⭐ **A negative worth inheriting so it is not re-derived:** a **foreign** mod's
+> write to one of our globals DOES reach us. `ModEnvMeta.__newindex`'s
+> `rawset(original_G, …)` runs in every branch (`Mod.lua:1562`, the `EF-064`
+> shape), and `ModsLoadCode()` sits between `Loading = true` and
+> `Loading = false` (`autorun.lua:1`/`:423`/`:560`), so the strict-global
+> create-assert is suppressed for **all** mod code, ours and theirs. The read
+> assert at `:1553` has **no** such guard — which is why every read of the veto
+> table inside `Code/` uses `rawget(_G, …)` and why the snippet we publish should.
+
 ## L7 · Environment & namespace
 
 - **Enumerate every global the pack creates or writes.** Expected: `SMRFixPack`,

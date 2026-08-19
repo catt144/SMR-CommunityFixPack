@@ -20,7 +20,7 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-005 | Engine Lua tolerates `#nil`/`next(nil)`/`ipairs(false)` (verified from working code | — | 2026-07-29 | 4 | [EF-005.md](EF-005.md) |
 | EF-006 | Mods run in a sandbox (LuaModEnv) on ALL platforms | — | 2026-07-29 | 10 | [EF-006.md](EF-006.md) |
 | EF-007 | `Msg`/`OnMsg` are PER-ENV OWN KEYS and cannot be stubbed or deleted from mod code | 2026-08-01 | 2026-08-01 | 13 | [EF-007.md](EF-007.md) |
-| EF-008 | `error()` and `assert()` do NOT unwind mod code — they report and execution continues | — | 2026-07-29 | 5 | [EF-008.md](EF-008.md) |
+| EF-008 | `error()` and `assert()` do NOT unwind mod code — they report and execution continues | — | 2026-08-19 | 18 | [EF-008.md](EF-008.md) |
 | EF-009 | `rawset(_G, k, v)` from mod code writes only into the mod's own env table | — | 2026-07-29 | 5 | [EF-009.md](EF-009.md) |
 | EF-010 | CORRECTION of an earlier "fact": `debug.getinfo` is NOT available in mod code | — | 2026-08-01 | 6 | [EF-010.md](EF-010.md) |
 | EF-011 | Patch points that work: `PeriodicRepeatInfo[name]` slots (THREAD/SLEEP/FUNC/COND = | — | 2026-07-29 | 5 | [EF-011.md](EF-011.md) |
