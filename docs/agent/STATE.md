@@ -63,10 +63,22 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
     (`ModEditor.lua:62-69`; `GedOpPackMod` → `DbgPackMod`, `GedModEditor.lua:863`). ⚠️ It loads a **scratch
     colony**, so "pack at the main menu" is impossible — accepted, since that rule protected the owner's colony.
     ⚠️ `MarsDebug.exe` is the **Ged host process**, not a build swap; retail `Mars.exe` was used throughout.
+- ⭐⭐ **RUN B RAN 08-19 (attended) — 9 of 10 criteria PASS, c9 UNRUN. ⛔ NOT a convergence call, not an upload OK.**
+  `1` **`packed from appdata`** (first ever; 66 archived all `unpacked`) · `2` **75 applied by name** ·
+  `3` **ZERO `[LUA ERROR]`** · `4` 0 `update report:` · `5` 2 screen events, **both vanilla + attributed**
+  (`Welcome to Mars`; *"missing or outdated: …Test Kit"*, our own untick) · `6` `v1.00-000` ·
+  `7` ⭐ **preview RENDERS packed** (attended, first test of the hand-written path) · `8` round trip
+  `C47FARM`→`c47farmreload`, witnesses reappear, 0 new errors · `10` saves 81→82, autosaves MD5-identical.
+  - ⭐⭐ **PACKED ≡ UNPACKED at module level: the 75 applied names are SET-IDENTICAL to `vl97a`** (0 either side).
+  - ⛔ **`c9` (uninstall holds for all 75) NOT RUN** — needs its own owner tick; it is the only gap.
+  - ℹ️ `C47FARM`'s header says the pack was `v1.00-001` and `MeteorFrequency` healed `latch 1.0.1 -> 1.0.0`
+    (`Fix_MeteorFrequency.lua:178`) ⇒ that save predates the version reset. **Dev-rig history, nothing shipped**;
+    F88's one-shot heal firing correctly on it is a pass, not a fault.
 - ⛔ **RIG IS STAGED, NOT NORMAL (08-19).** Fix-pack junction **PULLED**; packed install at
-  `%APPDATA%\…\Mods\SMR_CommunityFixPack\ModContent.fpk` (362,894 B, MD5 `8dcb0692…`).
+  `%APPDATA%\…\Mods\SMR_CommunityFixPack\ModContent.fpk` (362,894 B, MD5 `8dcb0692…`, 80/80 byte-identical).
   Restore = `cmd /c mklink /J "%APPDATA%\Surviving Mars Relaunched\Mods\SMR-BugFixPack" "C:\Dev\SMR-BugFixPack"`
-  **plus an owner re-tick** (`H-08`). TestKit junction still present and **must be unticked** for B.
+  ⚠️ **no re-tick needed if the id keeps a folder** — swapping folder-for-folder under one id **KEPT the enable**
+  (measured; refines `EF-055`/`H-08`, which describe an id that VANISHES). TestKit + Opt-In are **unticked** now.
   - ⛔ **B has NO DRIVER** — every unattended primitive lives in the TestKit and B turns it off ⇒ criteria
     **5/7/8/9 are owner work**; 1/2/3/4/6/10 survive a boot-and-close leg. **Two game sessions, not one visit.**
   - ⭐ **Packer is byte-faithful** (all 80 extracted: 78 identical to disk, the 2 = `git diff 7824cbc..HEAD`).
