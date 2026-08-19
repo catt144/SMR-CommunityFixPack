@@ -13,7 +13,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   - Links 1–4 consumed: L1 structure · L2 lifecycle · L3 save/exit · L4 player experience.
   - **Nothing blocks launch so far.** Artifacts `reports/L1..L4_*.md`.
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
-  - Owner kicks each link; next = link 5 (failure/containment).
+  - Owner kicks each step; next = `97_VERIFICATION_LAUNCH.md` interlude (run A pulled forward, spec §6.5 launch
+    obligation — no lens, record-only except launch-blocking), then link 5 (failure/containment, pending item-41 cap ruling).
 - ⛔ **Unverified in any running game:** `00_Core.lua` fixes `2f077e8` (stale update-suspect ×2 · registry double-append)
   and link 2's reload fix (`data_edited` memo). No launch since 08-17.
 - ⛔⛔ **Gate B has NEVER run** (packed install, junction pulled, TestKit+opt-in off) — THE release gate
