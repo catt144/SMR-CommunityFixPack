@@ -120,14 +120,27 @@ completed tests move whole to
     **⭐ ACT 2 — about three minutes, and this one is looking, not typing.**
 
     1. Start the game → **Mods** → untick and re-tick **"Relaunched Fix Pack"** →
+       ⛔ **and untick "Community Fix Pack — Test Kit" and leave it off** →
        close the dialog → **restart the game**. Unavoidable: taking the shortcut
        out costs the mod its enable and putting things back does not buy it back
        (item 45, and the same thing that bit the Opt-In pack in item 43).
+       ⛔⛔ **THE TEST-KIT UNTICK WAS MISSING FROM THIS STEP UNTIL 2026-08-19 AND
+       ITS ABSENCE WOULD HAVE VOIDED THE WHOLE GATE.** Run B *is* "test kit off"
+       by definition (`00_CHAIN_SPEC.md` §6) — with the kit left on you get a
+       packed run A, which is not the configuration a player receives and not the
+       thing this gate exists to test. Steps 2 and 3 below both already say
+       *"with the kit off"*, so the script assumed the untick it never asked for.
+       ℹ️ The Opt-In pack needs no action — it is already off and stays off.
     2. **While you are on that screen, three looks, all free:**
        - **Is there a picture** beside the Relaunched Fix Pack entry? That image
          path was hand-written against the loose-files install and **has never
          been seen on the packed one**.
-       - Does the version read **1.0.0**?
+       - Does the version read **`1.00-000`**? ⚠️ **Corrected 2026-08-19 — this
+         said "1.0.0", which that screen never prints.** The Mods Manager was
+         seen tonight rendering `version 1.00-000`, because `GetVersionString`
+         is `"%d.%02d-%03d"` (`Mod.lua:1176-1178`). `1.00-000` **is** 1.0.0 under
+         that format and is the PASS; the plain `1.0.0` is a different surface.
+         ⛔ A `1.00-001` means the version moved — stop.
        - **Anything of ours on screen that should not be** — a dialog, a
          notification? ⚠️ Expect the game's own *"Welcome to Mars, Commander!"*
          box when a game starts: that one is vanilla, our test kit has been
