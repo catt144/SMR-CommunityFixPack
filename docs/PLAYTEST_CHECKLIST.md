@@ -29,6 +29,122 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⛔⛔ 2026-08-19 — THE RELEASE CHECK CANNOT START WITHOUT YOU, AND HERE IS THE WHOLE SCRIPT. Nothing found tonight blocks launch. Everything the gate still owes is in one item.
+
+52. ⛔ **The final release check needs your hands twice, and I can now say exactly
+    why nobody has ever run it.**
+
+    **What the check is.** Run B tests the mod the way a *player* receives it:
+    squeezed into one archive file and installed like a download, with our test
+    kit switched off. Every reading this project owns was taken the other way —
+    the mod spread out as loose files through a developer shortcut, with the test
+    kit loaded. Your ruling stands: the green test suite is information, **this**
+    is the gate.
+
+    **Why it stalled.** To test the archive I first have to *build* it. The
+    game's build command, `DbgPackMod`, is on a list of things mod code is
+    forbidden to call — so neither our mod nor our test kit can build it — and an
+    unattended session cannot type into the console. **Building the archive is a
+    console line, the console is you, and the entire gate sits behind it.**
+
+    **And it is two sittings, not one.** The archive cannot exist until you make
+    it; the install cannot exist until the archive does; the Mod-Manager tick and
+    the "is the picture there" look cannot happen until the install does. I had
+    planned this as one visit and that was simply wrong.
+
+    ---
+
+    **⭐ ACT 1 — about four minutes, at the keyboard. Nothing here uploads,
+    publishes, or touches either store.**
+
+    Load any save with a real colony (`C47FARM` is fine). Press Enter for the
+    console. In this order:
+
+    1. `print(Mods.SMR_CommunityFixPack.version, Mods.SMR_CommunityFixPack:IsDirty())`
+       — must print **`1  false`**. ⛔ If it says `true`, **stop and tell me**:
+       step 5 would bump us to 1.0.1 and you ruled 1.0.0.
+    2. `print(SMRFixPack.fixes.SaintBlessing.update_suspect, #SMRFixPack.order)`
+       — expect **`nil  75`**. *(That `nil` is core fix ① proven.)*
+    3. `local n = 0 local ok = pcall(function() AllMapsForEach(true, "Colonist", function(c) n = n + 1 if n == 2 then local t t.x = 1 end end) end) print("L5 MapForEach:", ok, n)`
+       — three of our repairs walk every colonist and fix what they find. If one
+       object goes wrong halfway, does the game skip it and carry on, or silently
+       abandon the rest of the list? That loop lives in the game's C code and
+       cannot be read. This breaks the **second** item on purpose.
+       *`true` and a number above 2* → it carries on, non-issue. *`false 2`* →
+       it abandons the rest, and three fixes want a small change next release.
+       **Neither answer blocks launch; both are worth having.**
+    4. `print("L5 errbox:", config.DisableErrorReporting, ReportedMods)`
+       — whether the game's own *"Mod Flagged"* pop-up is even switched on here.
+       Expect `nil false` (or `nil nil`).
+
+    ⛔ **Now quit to the MAIN MENU before the next line, and this ordering is not
+    fussiness.** Step 5 reloads every script in the game, and nobody has ever
+    measured what a mid-game script reload does to a live colony — the two
+    sessions in our records that ever did it were both at a menu. Steps 1–4 need
+    a colony; step 5 must not have one.
+
+    5. `DbgPackMod(Mods.SMR_CommunityFixPack, false)` — **this builds the
+       archive** and forces the second script load. A few seconds. It does not
+       upload anything and does not touch either store.
+    6. `print(SMRFixPack.fixes.SaintBlessing.status, SMRFixPack.fixes.SaintBlessing.update_suspect, #SMRFixPack.order, #SMRFixPack.UpdateSuspects())`
+       — expect **`active  nil  75  0`**. *(The `75` is core fix ② proven — it
+       used to become 150. The `0` is the box confirmed not to fire.)*
+    7. Optional, ~30 s: `*r SMRTest.RunAll()` — a prediction nobody has tested:
+       **2 false failures** after a reload. Either answer is worth having.
+
+    **Then quit the game and paste me what 1–4, 6 and (if you ran it) 7 printed.**
+    Anything other than the expected values is a launch-blocker and I want to see
+    it before anything is uploaded.
+
+    ⚠️ **Your autosaves are already copied** — both `Autosave Sol 406/411`,
+    byte-verified, parked outside the save folder — so act 1 is safe to start
+    whenever you like.
+
+    ---
+
+    **BETWEEN THE ACTS — my side, no time from you.** I check the archive holds
+    exactly the 80 files it should and that packing altered none of them, then I
+    install it the way a download installs and take the developer shortcut out.
+    *(Both checks are already built and already proven against the archive you
+    made on 08-17 — see the note at the bottom.)*
+
+    **⭐ ACT 2 — about three minutes, and this one is looking, not typing.**
+
+    1. Start the game → **Mods** → untick and re-tick **"Relaunched Fix Pack"** →
+       close the dialog → **restart the game**. Unavoidable: taking the shortcut
+       out costs the mod its enable and putting things back does not buy it back
+       (item 45, and the same thing that bit the Opt-In pack in item 43).
+    2. **While you are on that screen, three looks, all free:**
+       - **Is there a picture** beside the Relaunched Fix Pack entry? That image
+         path was hand-written against the loose-files install and **has never
+         been seen on the packed one**.
+       - Does the version read **1.0.0**?
+       - **Anything of ours on screen that should not be** — a dialog, a
+         notification? ⚠️ Expect the game's own *"Welcome to Mars, Commander!"*
+         box when a game starts: that one is vanilla, our test kit has been
+         hiding it for every unattended run, and with the kit off it is back.
+         **It is not ours and not a failure.**
+    3. Then load a **named** save (not an autosave), let a few sols pass, save
+       under a **new** name, and load that back. That is the save round trip, and
+       with the test kit off it cannot be scripted — it has to be you.
+    4. Quit, tell me it is done, and I read the log and score the gate.
+
+    ---
+
+    ⛔ **What no part of this touches: Paradox or Steam.** The first call to
+    either store's API *creates the listing* — there is no "everything but the
+    last click" — so the rehearsal goes nowhere near one, by design.
+
+    ℹ️ **What I did get done without you tonight**, so act 1 is the only thing
+    standing between us and a scored gate: the pre-upload check passes all 20
+    guards; the archive's expected contents are now predicted by a tool that
+    reproduces your 08-17 archive exactly, 80 files out of 80; **packing was
+    proven not to alter a single one of our files** (78 of 80 byte-identical to
+    disk, and the 2 that differ are exactly the two files we have edited since);
+    and **four of the gate's ten pass criteria were repaired before anyone scored
+    them** — one asked for a number the game never prints, one had arithmetic
+    that would have sent a runner hunting a module that does not exist.
+
 ### ⚠️ 2026-08-19 — two calls from the last sweep link. Neither blocks launch; one is a wording call, one is a "when", and my recommendation on the second is *not yet*.
 
 50. ⚠️ **Two sentences we publish promise other mods more than the code delivers.

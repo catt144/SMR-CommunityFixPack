@@ -1415,3 +1415,219 @@ with predictions written in advance.**
 ⚠️ What was NOT done and why: another run-A leg. Fix pack + TestKit with the opt-in
 absent ran **three times** on 08-19 and contains **zero** foreign wrappers — it
 would measure nothing this lens asks.
+
+
+---
+
+# ⛔ LAUNCH REHEARSAL (`98_LAUNCH_REHEARSAL.md`) — 2026-08-19
+
+⛔ **NOT A LINK. No lens taken, rotation undisturbed.** This is the A/B gate
+runner reporting from a run that **stopped at stage 2**. Findings are numbered
+`LR-Fn` so they cannot collide with a link's `Ln-Fn`.
+
+⛔ **LAUNCH-BLOCKING FINDINGS: NONE.** Nothing here is a defect in the shipped
+mod. LR-F1, LR-F2 and LR-F10 block **the gate**, which is a different thing, and
+they are procedural rather than in `Code/`.
+
+**Fence note (declared, per spec §2's surviving clause):** `SWEEP_FINDINGS.md`
+was **not** opened and no sweep commit body was read. `L5-F3`'s console line was
+obtained from `reports/L5_CONTAINMENT_MAP.md` §4/§7 and `PLAYTEST_CHECKLIST.md`
+item 44, both of which the brief pointed at.
+
+## LR-F1 ⛔⛔ Stage 2 cannot be executed by an agent — `DbgPackMod` is blacklisted, and the whole gate is behind one console line
+
+`ModEnvBlacklist` carries **`DbgPackMod = true`** (`Mod.lua:1322`, in the
+"file operations" block) and **`ReloadLua = true`** (`:1274`).
+`ModEnvMeta.__index` opens `if env_blacklist[key] then return end`
+(`:1546-1547`), so a blacklisted name reads **`nil`** in every mod environment —
+`safe_rawget` repeats the test at `:1577-1583`. ⇒ **no mod code can call it**:
+not `Code/` (barred anyway), not a TestKit probe (barred by the 96-count rule),
+not a TestKit autorun step (which is the one route nothing had ruled out, and it
+is closed by the engine, not by policy). The console is the only route and an
+unattended session cannot type into it — the same wall `checklist 44` hit and the
+same one links 5, 6 and 7 each refused a launch over.
+
+⇒ **The brief's instruction *"No packed build of this mod exists anywhere on
+disk … You are building it"* is not executable.** Routed: `PLAYTEST_CHECKLIST.md`
+item 52, act 1.
+
+## LR-F2 ⛔ The single-owner-visit plan is impossible; the gate is two game sessions with an agent step between
+
+The brief loads four jobs onto one visit — the Mod-Manager tick, the two
+core-fix console reads, L5-F3's `MapForEach` line, criterion 7's look at the
+preview. **They cannot share a visit.** The packed install cannot exist until
+the owner packs (LR-F1); the tick and criterion 7 are *about* the packed
+install. ⇒ act 1 (pack + all console reads) → agent reconciles and stages →
+act 2 (tick + the looks + the save round trip). Rewritten in §4 of the brief and
+scripted as one walk-through in item 52.
+
+## LR-F3 ⚠️ A packed build DOES exist on disk, and it was built by the Mod Editor, not by a console `DbgPackMod`
+
+`%LOCALAPPDATA%\Temp\Surviving Mars Relaunched\ModUpload\Pack\ModContent.fpk`
+— **359,353 bytes, 2026-08-17 19:34:59, md5 `458801c65cc9d4e12eb941517c6918bb`,
+80 entries.** The brief says none exists anywhere; the correct statement is that
+none exists **that is current**.
+
+⭐ **And its provenance matters more than its existence.** The session that
+produced it is `logs/MarsDebug.exe-20260817-19.30.31`, whose only Lua line is
+**`Initializing ged app: ModEditor`** — the owner clicked *pack* in the Mod
+Editor. ⇒ the **Ged route is PROVEN and the console route has never been run**,
+which is the opposite of what stage 2 assumed, and it is why item 52 warns about
+`IsDirty()` and the mid-game reload rather than treating the line as routine.
+
+## LR-F4 ⭐ MEASURED: the engine's packer is byte-faithful — a packed-vs-unpacked worry class retired without a launch
+
+All 80 entries extracted (through `flpk_extract.py`'s own `extract()`) and
+byte-compared to the working tree: **78 byte-identical, 2 differ**, and the two
+are exactly `git diff 7824cbc..HEAD` — `Code/00_Core.lua` and `items.lua`.
+
+⇒ packing applies **no transformation**: no line-ending rewrite, no minify, no
+re-encode, and zstd round-trips exactly. Whatever else differs between the
+packed and unpacked cases, **it is not the bytes of our Lua** — which is a
+result stage 5 explicitly asked this rehearsal to hunt for and nothing else in
+the project would have produced. It also makes the existing artifact's staleness
+**exact**: a rebuild changes those two files and nothing else.
+
+## LR-F5 ⭐ The file-list prediction is now controlled, not asserted
+
+`tools/pack_predict.py` reimplements `GedModEditor.lua:716-732` (recursive list
+minus `ignore_files`, `*` crossing `/`) and reproduces the real engine-built
+archive **80/80 by name**. Run against the current tree it also predicts 80 —
+76 `Code/*.lua` + `items.lua` + `metadata.lua` + `LICENSE` + `preview.png`, with
+`.git` (260 files), `docs/` (403), `tools/` (20), `.claude` (1), `README.md`,
+`CLAUDE.md`, `.gitignore`, `.gitattributes` all excluded. Three patterns match
+nothing (`*.svn/*`, `*/Source/*`, `*/SourceData/*`) — harmless, recorded so the
+next reader does not treat them as coverage. `tools/pack_list.py` reads a real
+archive and reconciles by name **and by content**.
+
+⛔ **One own-instrument defect found and disclosed.** `pack_list`'s content
+reconcile was first written as a hand-rolled "scan the region for zstd frame
+magics" pass; it reported **7** files differing where the project's own
+extractor reports **2** — the magic bytes occur inside compressed data, so the
+naive split silently truncated multi-chunk files. Fixed by routing through
+`flpk_extract.extract()` before any number above was taken.
+
+## LR-F6 ✅ `CheckModPackSignature` answered — stage 4.2's flag and link 7's open item 4 both close
+
+`CheckModPackSignature` opens `if not AreModSignaturesRequired() then return
+false, true end` (`Mod.lua:87-89`), and `AreModSignaturesRequired` is
+`return Platform.playstation` (`:49-52`). ⇒ on PC it returns `false`
+immediately, so `io.exists(pack_path) and not CheckModPackSignature(pack_path)`
+(`:1724`) **takes the packed branch**. Mod signing is a PlayStation-only
+concern; no `.sign` file is needed and none is produced.
+
+## LR-F7 ⛔ Criterion 2's derivation is wrong twice and yields the wrong number
+
+The cell says *"the 75 ids in `metadata.lua`'s `code` list minus
+`00_Core`/`90_SaveSanitizer`"*. The `code` list holds **76** entries, not 75;
+and `90_SaveSanitizer` **does** emit an `applied` line
+(`vl97a_…:152` — `[CommunityFixPack] SaveSanitizer: applied`). That recipe
+computes **74** and would send a runner hunting a module that does not exist.
+**MEASURED: exactly 75 `applied` lines per load.** The number was right, the
+route to it was not — the same failure mode the chain has caught three times.
+
+## LR-F8 ⛔ Criterion 6 asks for a token its own evidence line never prints
+
+`ModDef:GetVersionString()` is `string.format("%d.%02d-%03d", version_major,
+version_minor, version)` (`Mod.lua:1176-1178`), so the mode line at `:1849`
+reads **`v1.00-000`** and the string `1.0.0` appears nowhere on it. A runner
+told to confirm "1.0.0" there cannot distinguish a pass from a missing line.
+**PASS is the literal `v1.00-000`.** *(The player-facing `1.0.0` is
+`PackVersion`, a different surface, which is why the Mod-Manager look stays in
+act 2.)*
+
+## LR-F9 ⚠️ Criterion 3's "any third site is the real failure" is refuted by the corpus it cites
+
+Re-measured over all 73 `docs/archive/*.log`: `Flight.lua … objects_to_mark`
+**418**, `objects_to_unmark` **7** — **plus four non-`Flight` sites already
+present and already attributed**: `TrackElement.lua … 'TestMeteor'` (3),
+`GedGameObjectEditor.lua … 'GetSpotNameColor'` (2), `GridObject.lua …
+'GetShapePoints'` (1), `upvalue 'old_threads'` (1). ⇒ a third site is an
+**attribution job**, not an automatic gate failure; the decisive test is the one
+the cell already names — our content path in the message or stack.
+
+✅ **Both of the owner's 08-19 numbers re-measured and confirmed:** 21 of 73 logs
+carry ≥1 `LUA ERROR`, **52 carry none**; and 66 of 66 mode lines for
+`id SMR_CommunityFixPack` say `unpacked`, `packed` never once.
+
+## LR-F10 ⛔⛔ Run B has no driver — four of its ten criteria are owner work, not log reading
+
+Every unattended primitive this rig owns — staged-copy load by filename, in-run
+`SaveGame`, scripted state reads, speed control, the watchdog — runs from a
+`CreateRealTimeThread` **inside the TestKit**, and Mod-Manager / main-menu
+driving is **descoped by owner rule** (`WORKFLOW.md` capability envelope: *"the
+enable click stays human"*). **Run B turns the TestKit off.** ⇒ B cannot load a
+save, cannot save, cannot read a variable and cannot quit itself.
+
+| criteria | who |
+|---|---|
+| 1 · 2 · 3 · 4 · 6 · 10 | agent, from a boot-and-close leg + the log |
+| 5 · 7 | ⛔ owner — screen events |
+| 8 · 9 | ⛔ owner end to end — UI driving, not log reading |
+
+⚠️ The brief's *"everything below is readable from the log file and the screen"*
+is literally true and smuggles a human in through the word **screen**. *"B looks;
+it does not poke"* stands; **who does the looking** was never stated.
+
+## LR-F11 ⭐ Criterion 5 is half log-decidable and never said so
+
+The pack's one designed screen surface logs at `00_Core.lua:540` **before** it
+draws — the same mechanism criterion 4 leans on — and L4's census measured that
+the pack raises no notification, popup, banner or voice line of its own. ⇒
+absence of that line is a positive log-side negative covering everything the
+pack can author; the attended half is only *"was anything else on screen"*.
+
+## LR-F12 ⚠️ The 08-17 upload sitting's logs are not in the archive corpus
+
+`logs/Mars.exe-20260817-19.26.13`, `…-19.29.38` and five
+`MarsDebug.exe-20260817-*` live only in
+`%APPDATA%\Surviving Mars Relaunched\logs`. ⇒ every *"all 73 archived logs"*
+count in this chain — link 5's error census, link 6's build table, link 7's
+66-log packed/unpacked witness — **excludes the one sitting in which the mod was
+packed and an upload was attempted.** Not a defect in any link, which counted
+what was there; but the corpus should absorb them before the terminal audit
+calls the log evidence complete.
+
+## LR-F13 ⚠️ `ipairs(mod_def.entities)` is safe, and only a measurement says so
+
+`ModDef.entities` declares `default = false` (`Mod.lua:273`) and our
+`metadata.lua` carries no `entities` field, yet `CreatePackageForUpload` runs
+`for _, entity in ipairs(mod_def.entities)` (`GedModEditor.lua:707`) — which
+throws on a boolean. It evidently does not, and the reason is **measurable
+rather than derivable**: `ModsReloadItems` runs `next(mod.entities)` unguarded
+for **every** enabled mod on every launch (`:2101-2102`, `:2114-2115`), and 66
+archived launches carry no such error. ⇒ the field is a table at runtime.
+Recorded because the owner's act-1 line 5 depends on it and nothing had checked.
+
+## LR-F14 ⚠️ The owner recipe's own ordering runs the one risky step in the one place nobody has measured
+
+`checklist 44` says *"Any save, any colony"* and puts `DbgPackMod` at step 3 —
+but `DbgPackMod` → `CreatePackageForUpload` calls **`ReloadLua()`**
+(`GedModEditor.lua:713`) **before** it packs, and a **mid-game** `ReloadLua` is
+exactly L2's unmeasured territory (its ledger row: every caller it found is
+main-menu or Ged). Meanwhile `L5-F3`'s line needs a **loaded colony**
+(`AllMapsForEach(true, "Colonist", …)`). ⇒ the reads split: colony-dependent
+lines first, then **back to the main menu** for the reload. Item 52 orders them
+that way and says why.
+
+## What this rehearsal did NOT reach
+
+* ⛔ **Run B, entirely.** Not one criterion was scored. The gate is unrun and
+  this session did not change that — it made the block explicit and costed it.
+* ⛔ **No launch, and no `EF-056` exposure.** Nothing was pulled, staged,
+  enabled or disabled; the rig is exactly as found. Both autosaves were
+  nonetheless pre-copied (MD5-verified, `_ref/EF056_precopy_20260819_gate`) with
+  a name census, so act 1 can start without a preparation step.
+* ⛔ **Run A's falsifier block** — console, therefore owner. A's suite half was
+  deliberately **not** re-run: `Code/` and `metadata.lua` are byte-identical to
+  the tree the 08-19 legs ran, and `items.lua` is not read at game load
+  (`ModDef:LoadCode` iterates `self.code`, `Mod.lua:498-517`; `LoadItems` is
+  Mod-Editor-only, `:590-591`). A re-run is the same experiment at the cost of a
+  real save exposure.
+* ⛔ **Criteria 7 and 8 remain the two nobody has evidence for at all** — the
+  preview image has never been *seen* on the packed path (though it is now
+  source-settled to *resolve* there in all three folder-name cases), and no save
+  round trip has ever been taken with this pack packed.
+* ⛔ **Whether the packed branch behaves as derived** — `MountPack`, `def.packed`,
+  `metadata.lua` read from inside the archive. LR-F6 says the branch is *taken*;
+  nothing has watched it run.

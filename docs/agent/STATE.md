@@ -28,15 +28,16 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
     Amended `EF-058` in place (the trap is keyed on install time; mod load precedes flattening).
   - ⛔ **Launch blockers found so far: 1, fixed.** Artifacts `reports/L1..L8_*.md`; fact `EF-065`.
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
+  - **Launch rehearsal consumed 08-19** (no lens, rotation intact) — stage 1 green, **stage 2 owner-blocked**;
+    no launch, no `EF-056` exposure, rig untouched. Its gate block is below.
   - ⛔⛔ **Next = the TERMINAL AUDIT (`99_TERMINAL_AUDIT_fable.md`), NOT another lens.** Link 8's §9
     reads all 8 ledger rows for it: **unswept territory of consequence REMAINS** — run B/packed,
     warm-save + uninstall/reinstall, preset-FIELD patches (3 lenses named it, none swept it),
     the 53 wrappers' callers, 13 of 18 load passes vs the 237 SavegameFixups, the TestKit's own
     containment. ⛔ **A link never ruled on convergence and none may; the audit does.**
-- ⛔ **Gate B criterion 1 could not fail; FIXED 08-19** — it read "packed" off `[CommunityFixPack]` lines,
-  true unpacked too. Now reads `Mod.lua:1849`'s mode line. **MEASURED: 66 of 66 archived sessions say
-  `unpacked`, zero `packed`.** ⚠️ Junction + packed folder both present ⇒ **unpacked WINS** at equal
-  version (`Mod.lua:1770`), silently. No packed build exists on disk; stage 2 packaging is outstanding.
+- ⛔ **Gate B criterion 1 fixed 08-19** (it read "packed" off lines equally true unpacked); now `Mod.lua:1849`'s
+  mode line, **66/66 archived say `unpacked`, zero `packed`**. ⚠️ Junction + packed folder both present ⇒
+  **unpacked WINS** at equal version (`Mod.lua:1770`), silently.
 - **Namespace settled 08-19 (source):** the pack owns **5** globals (3 + 2 `GameVar`s), writes 21 vanilla
   names, trips **neither** engine assert, creates **zero** env shadows, never reads `Platform`; pack and
   TestKit are **disjoint on writes both ways** and the pack reads nothing the kit provides (first such
@@ -47,15 +48,25 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `upload_preflight` now compares the ordered lists; its old guard counted its own header comment.
 - ⭐ **The pack HAS now run post-`2f077e8`:** 72/0/24/0 of 96 opt-in-absent, `75/75` active, 0 FAIL, 0 dialog;
   88 of 96 probes hold their exact verdict vs the pre-fix baseline `c47suite4`. Apply cost 75 modules ≈0.57 s.
-- ⛔ **Still UNVERIFIED (needs ONE console sitting, checklist 44):** `2f077e8` fix ① (mark unreadable while the
-  entry ends `active`) · fix ② and L2's reload prediction and link 2's `data_edited` memo (all need one `ReloadLua`).
-- ⛔⛔ **Gate B has NEVER run** (packed install, junction pulled, TestKit+opt-in off) — THE release gate
-  (owner: A = information, B = the gate). ⚠️ **B must budget an owner Mod-Manager tick after the junction swap
-  and read the gate line first** — see H-08, or B reads as a catastrophic failure that is account state.
-  - ⚖️ B's criterion 3 was `0 [LUA ERROR]`, **unsatisfiable** (48–60 vanilla `Flight.lua` lines every launch);
-    corrected 08-19 to no NEW/UNATTRIBUTED, **compare the SHAPE (2 sites) never the count**.
-  - Every suite number ever taken is unpacked, TestKit-on, single-load (L2).
-  - Baseline `80/0/16/0` of 96 (`archive/c47suite4_*`), gates `75/75`+`8/8`; rig runs cheats.
+- ⛔ **Still UNVERIFIED (needs ONE console sitting — now checklist 52 act 1, which supersedes 44's ordering):**
+  `2f077e8` fix ① (mark unreadable while the entry ends `active`) · fix ② + L2's reload prediction + link 2's
+  `data_edited` memo (all need one `ReloadLua`) · L5's `MapForEach` line. ⚠️ Run the reload at the **main menu**:
+  `DbgPackMod` reloads Lua before packing (`GedModEditor.lua:713`) and a mid-game reload is L2's unmeasured case.
+- ⛔⛔ **Gate B STILL UNRUN, and the 08-19 rehearsal found why it cannot even start.**
+  `98_LAUNCH_REHEARSAL.md` **PARKED at stage 2, ⛔ NOT consumed**; findings `LR-F1..F14`; owner script = **checklist 52**.
+  - ⛔ **`DbgPackMod` + `ReloadLua` are `ModEnvBlacklist` keys** (`Mod.lua:1322`/`:1274`, `__index` `:1546`) ⇒ no mod
+    code, probe or TestKit step can build the `.fpk`. Console only = **owner only**; the gate is behind one line.
+  - ⛔ **B has NO DRIVER** — every unattended primitive lives in the TestKit and B turns it off ⇒ criteria
+    **5/7/8/9 are owner work**; 1/2/3/4/6/10 survive a boot-and-close leg. **Two game sessions, not one visit.**
+  - ⭐ **Packer is byte-faithful** (all 80 extracted: 78 identical to disk, the 2 = `git diff 7824cbc..HEAD`).
+    `tools/pack_predict.py` reproduces the real 08-17 `.fpk` **80/80**; `tools/pack_list.py` reads+reconciles.
+    ⚠️ That `.fpk` EXISTS (`TmpData`, 08-17 19:34, built via **Ged**, not console) but predates `2f077e8` — rebuild.
+  - ✅ `CheckModPackSignature` ⇒ `Platform.playstation` = false on PC ⇒ **packed branch IS taken** (closes L7 item 4).
+  - ⚖️ Criteria audited before scoring, **4 of 10 repaired**: c2's derivation gave 74 (truth **75 = 76 − `00_Core`**
+    alone; `90_SaveSanitizer` DOES emit `applied`) · c6 wanted `1.0.0`, the log prints **`v1.00-000`** · c3's "any
+    third site fails" refuted (4 attributed non-`Flight` sites; **21/73** carry ≥1, **52 none**) · c5 half log-decidable.
+  - Every suite number ever taken is unpacked, TestKit-on, single-load (L2). Baseline `80/0/16/0` of 96
+    (`archive/c47suite4_*`), gates `75/75`+`8/8`; rig runs cheats.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
   34 (C49–C52 timing; QA owed first) · 37 Q1 (mirror core fixes to opt-in) · 37 Q2 (Steam version, after Paradox) ·
   39 (dialog re-fire) · 40 (`smr_shuttles` name) · 41 (dialog wording + sweep cap 5→8).
