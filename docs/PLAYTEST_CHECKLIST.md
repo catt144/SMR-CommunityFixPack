@@ -29,6 +29,32 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚠️ 2026-08-19 — the SAME defect class, in the third mod. Not today's problem; do not let it be forgotten.
+
+48. ⚠️ **The Save Rescue mod has no `items.lua` at all**, against a 2-entry code
+    list (`Code/00_Core.lua`, `Code/10_SaveRescue.lua`). Item 46 explains why that
+    file matters: uploading forces the editor to save, and the save **rebuilds the
+    list of code files to load from the items file alone — it never looks at the
+    disk.** The fix pack had one item missing and would have shipped a fix that
+    never loaded. The rescue mod has **no items file whatsoever**.
+
+    ✅ **This does not touch tonight.** The rescue mod is the held-in-reserve
+    contingency (item 17) and is not publishing. The opt-in pack was checked and is
+    **correct** (9 for 9).
+
+    ⛔ **But it must be settled before that mod ever uploads**, and the sweep
+    chain's own rules forbid its sessions from touching sibling repos, so this
+    would otherwise be lost. ⚠️ I have **not** derived what the game actually does
+    when the file is absent — it may refuse to rebuild rather than rebuild empty,
+    which would be harmless. **That question is the work**, and it is twenty
+    minutes with the source, not a guess to be recorded as a fact.
+
+    ⇒ **Folded into your item 37 Q1** (*"mirror the core fixes into the opt-in pack
+    now, or leave them?"*): whatever you rule there, the same visit should carry
+    this. **Recommendation unchanged — do the sibling work in one pass**, while the
+    diagnosis is fresh, rather than making each mod's launch session rediscover it.
+    ℹ️ Nothing owed beyond that ruling.
+
 ### ⛔⛔ 2026-08-19 — the upload would have shipped one fix missing, on Steam. Already fixed; two small wording calls are yours.
 
 46. ⛔⛔ **A fix would have vanished from the Steam release, and the check that
