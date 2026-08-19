@@ -52,10 +52,21 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `2f077e8` fix ① (mark unreadable while the entry ends `active`) · fix ② + L2's reload prediction + link 2's
   `data_edited` memo (all need one `ReloadLua`) · L5's `MapForEach` line. ⚠️ Run the reload at the **main menu**:
   `DbgPackMod` reloads Lua before packing (`GedModEditor.lua:713`) and a mid-game reload is L2's unmeasured case.
-- ⛔⛔ **Gate B STILL UNRUN, and the 08-19 rehearsal found why it cannot even start.**
-  `98_LAUNCH_REHEARSAL.md` **PARKED at stage 2, ⛔ NOT consumed**; findings `LR-F1..F14`; owner script = **checklist 52**.
-  - ⛔ **`DbgPackMod` + `ReloadLua` are `ModEnvBlacklist` keys** (`Mod.lua:1322`/`:1274`, `__index` `:1546`) ⇒ no mod
-    code, probe or TestKit step can build the `.fpk`. Console only = **owner only**; the gate is behind one line.
+- ⭐⭐ **ACT 1 DONE 08-19 (attended). BOTH `2f077e8` core fixes PROVEN; archive built + verified 80/80.**
+  `98_LAUNCH_REHEARSAL.md` un-parked; ⛔ **still NOT consumed — run B is UNSCORED**; owner script = **checklist 52**.
+  - Fix ① `update_suspect nil`; fix ② `order 75` (**not 150**) after a real `Reloading done in 1358 ms`.
+    L5 `AllMapsForEach` = `true 2085` ⇒ the C loop absorbs a per-object error and carries on; no fix wanted.
+  - ⛔⛔ **THE CONSOLE IS NOT A ROUTE, AND `ModEnvBlacklist` WAS THE WRONG DIAGNOSIS.** MEASURED on retail:
+    `DbgPackMod` **and** `ReloadLua` are **nil in `_G` at the console**, though both ship in `Lua.fpk` with
+    unconditional defs ⇒ the blacklist only ever explained *mod* code, never the console.
+    ⭐ **Only working route = the Ged UI:** Mods Manager → Edit (`Ctrl-E`) → Mod Editor → **File → Pack Mod**
+    (`ModEditor.lua:62-69`; `GedOpPackMod` → `DbgPackMod`, `GedModEditor.lua:863`). ⚠️ It loads a **scratch
+    colony**, so "pack at the main menu" is impossible — accepted, since that rule protected the owner's colony.
+    ⚠️ `MarsDebug.exe` is the **Ged host process**, not a build swap; retail `Mars.exe` was used throughout.
+- ⛔ **RIG IS STAGED, NOT NORMAL (08-19).** Fix-pack junction **PULLED**; packed install at
+  `%APPDATA%\…\Mods\SMR_CommunityFixPack\ModContent.fpk` (362,894 B, MD5 `8dcb0692…`).
+  Restore = `cmd /c mklink /J "%APPDATA%\Surviving Mars Relaunched\Mods\SMR-BugFixPack" "C:\Dev\SMR-BugFixPack"`
+  **plus an owner re-tick** (`H-08`). TestKit junction still present and **must be unticked** for B.
   - ⛔ **B has NO DRIVER** — every unattended primitive lives in the TestKit and B turns it off ⇒ criteria
     **5/7/8/9 are owner work**; 1/2/3/4/6/10 survive a boot-and-close leg. **Two game sessions, not one visit.**
   - ⭐ **Packer is byte-faithful** (all 80 extracted: 78 identical to disk, the 2 = `git diff 7824cbc..HEAD`).
