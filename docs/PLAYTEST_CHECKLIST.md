@@ -61,8 +61,17 @@ completed tests move whole to
     console. In this order:
 
     1. `print(Mods.SMR_CommunityFixPack.version, Mods.SMR_CommunityFixPack:IsDirty())`
-       — must print **`1  false`**. ⛔ If it says `true`, **stop and tell me**:
-       step 5 would bump us to 1.0.1 and you ruled 1.0.0.
+       — must print **`0  false`**.
+       ⛔⛔ **CORRECTED 2026-08-19 — this line said `1  false`, and it was
+       inverted on the exact thing it exists to catch.** `version` is the third
+       digit only (`metadata.lua` holds `'version', 0`, which is what renders as
+       1.0.**0**), and the 08-19 console read returned `0 false`. As written, a
+       correct `0` would have stopped you for no reason — and a `1`, which **is**
+       the 1.0.1 bump this step guards against, would have been read as fine and
+       waved through to upload.
+       ⇒ **`0` = 1.0.0, which is what you ruled. ⛔ A `1` means the version has
+       already moved — stop.** And `IsDirty()` must be **`false`**: if it says
+       `true`, stop too, because step 5 would force a save and bump it.
     2. `print(SMRFixPack.fixes.SaintBlessing.update_suspect, #SMRFixPack.order)`
        — expect **`nil  75`**. *(That `nil` is core fix ① proven.)*
     3. `local n = 0 local ok = pcall(function() AllMapsForEach(true, "Colonist", function(c) n = n + 1 if n == 2 then local t t.x = 1 end end) end) print("L5 MapForEach:", ok, n)`
