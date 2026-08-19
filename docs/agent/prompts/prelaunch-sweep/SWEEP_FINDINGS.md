@@ -1631,3 +1631,98 @@ that way and says why.
 * ⛔ **Whether the packed branch behaves as derived** — `MountPack`, `def.packed`,
   `metadata.lua` read from inside the archive. LR-F6 says the branch is *taken*;
   nothing has watched it run.
+
+---
+
+# RUN B — RAN AND SCORED 2026-08-19 (attended). ⭐⭐ 10 of 10.
+
+⚖️ **Everything in the "did NOT reach" block above is now reached**, except where
+noted below. The rehearsal is consumed in the same commit as this entry.
+
+## LR-F15 ⛔⛔ The park's premise was wrong: the console was NEVER the route
+
+The park (and `checklist 44`/`52` act 1 step 5) rested on *"`DbgPackMod` is
+`ModEnvBlacklist`'d, so only the console can call it, and the console is the
+owner."* **MEASURED on retail `Mars.exe`: `DbgPackMod` AND `ReloadLua` are both
+`nil` in `_G` at the console** — direct call, not just `rawget`. Both ship inside
+`Packs/Lua.fpk` with **unconditional top-level definitions** (extracted and read
+with the project's own `flpk_extract`), so "stripped retail build" is *also*
+wrong as an explanation. ⛔ `ModEnvBlacklist` only ever governed **mod code**; it
+never said anything about the console, and three sessions inherited that
+conflation. ⚠️ **Two owner launches were spent on it before it was measured.**
+
+⭐ **The route that works is the Ged UI:** Mods Manager → **Edit** (`Ctrl-E`) →
+Mod Editor → **File → Pack Mod** (`ModEditor.lua:62-69` → `GedOpPackMod` →
+`DbgPackMod`, `GedModEditor.lua:863`). It is a **menu item with no icon and no
+toolbar button**, which is exactly why it read as "no pack option".
+⚠️ It loads a **scratch colony**, so act 1's "pack at the main menu" ordering is
+**unreachable by this route**. Accepted rather than worked around: that rule
+existed to protect the owner's *live* colony, and none is loaded on the editor
+map. ⇒ **`LR-F14`'s ordering fix is right for a console route that does not exist.**
+
+⚠️ `MarsDebug.exe` is the **Ged host process**, not a different build the owner
+must launch — three `MarsDebug` processes were alive while `Mars.exe` ran the game.
+
+## LR-F16 ⭐⭐ PACKED ≡ UNPACKED at module level — the result the rehearsal existed for
+
+The 75 `applied` module names in run B (packed) are **set-identical** to
+`vl97a`'s (unpacked junction): **0 names only-packed, 0 only-unpacked**. Stage 5
+called a packed/unpacked behavioural difference *"the single most valuable thing
+this rehearsal can produce."* **There is none**, and that is now measured rather
+than assumed.
+
+## LR-F17 The ten criteria, by name
+
+`1` **`packed from appdata`** — ⭐ first in project history; 66 archived sessions all
+say `unpacked` · `2` **75 `applied` by name**, `SaveSanitizer` among them (confirming
+`75 = 76 − 00_Core`), `SaintBlessing`'s pre-registered benign cycle intact ·
+`3` ⭐ **ZERO `[LUA ERROR]`** · `4` 0 `update report:` (+ act 1's `#UpdateSuspects()==0`
+as the decisive read) · `5` two screen events, **both vanilla and attributed**
+(`Welcome to Mars`; *"missing or outdated: …Test Kit"*, caused by our own untick) ·
+`6` `v1.00-000` on the mode line **and** the Mods screen · `7` ⭐ **preview RENDERS
+packed** — first ever test of a path hand-written against the unpacked install ·
+`8` `C47FARM` → `c47farmreload` → reload, witnesses reappear, 0 new errors ·
+`9` ⭐ **uninstall holds for all 75 at once**: all three defs *"present, but not
+loaded"*, **0 `[CommunityFixPack]` output**, 0 errors across load/sols/save/reload
+into `c47farmnomod` · `10` saves 81→83 (both new files the owner's own), autosaves
+MD5-identical throughout.
+
+## LR-F18 ⚠️ A LOG TRAP: that mod line prints two DIFFERENT objects
+
+`ModDefPersist` (`Mod.lua:1195-1208`) has two branches and they do not print the
+same thing:
+* *"present, but not loaded"* → `mod_def:GetModLabel()` = **the INSTALLED def**.
+* *"loaded with a different version"* → `mod_info:GetModLabel()` = **the SAVE's
+  record**, then the installed version.
+
+⇒ The same unmodified save printed `Community Fix Pack … v1.00-001` in one log and
+`Relaunched Fix Pack … v1.00-000` in the next. ⛔ **That reads as "the save was
+silently rewritten" and it is not** — `C47FARM`'s mtime is unchanged (2026-08-15
+14:47:46). Only the first branch tells you anything about the save.
+
+## LR-F19 `EF-055`/`H-08` is narrower than recorded — a swapped id KEEPS its enable
+
+Pulling the fix-pack junction did **not** cost the enable, because the packed
+folder carried the **same mod id**. ⇒ *"a junction pull costs the enable"* holds
+for an id that **vanishes**, not one that is **replaced folder-for-folder**. The
+budgeted owner re-tick was unnecessary. ⚠️ `H-08`'s hazard still stands as written
+for the opt-in case that produced it.
+
+## LR-F20 ⚠️ An instrument lied during scoring, and it lied GREEN
+
+The first packed-vs-unpacked name comparison used `grep -P`, which this locale
+rejects (`-P supports only unibyte and UTF-8 locales`). **Both name lists came
+back empty and the equality check compared nothing to nothing and reported
+"identical".** Caught and redone with `sed`; `LR-F16` is the real measurement.
+⇒ **A comparison that can pass on empty input is not a comparison.** Same family
+as `pack_list`'s disclosed defect and `upload_preflight`'s old guard that counted
+its own header comment — the third self-flattering instrument in this chain.
+
+## What run B still did NOT reach
+
+* ⛔ **The portal-shaped folder name.** Run B used the **id-matching** folder
+  (`SMR_CommunityFixPack`) to keep *packed* the only new variable. Stage 4 step 3's
+  second case — a `pdx_<id>_<version>`-shaped name — is **unrun**; it is
+  source-settled to land on the same `content_path` (all three cases), so this is a
+  confirmation, not a discovery.
+* ⛔ **Nothing was uploaded, transmitted, or logged in.** No portal API was touched.

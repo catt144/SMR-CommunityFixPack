@@ -70,15 +70,17 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `7` ⭐ **preview RENDERS packed** (attended, first test of the hand-written path) · `8` round trip
   `C47FARM`→`c47farmreload`, witnesses reappear, 0 new errors · `10` saves 81→82, autosaves MD5-identical.
   - ⭐⭐ **PACKED ≡ UNPACKED at module level: the 75 applied names are SET-IDENTICAL to `vl97a`** (0 either side).
-  - ⛔ **`c9` (uninstall holds for all 75) NOT RUN** — needs its own owner tick; it is the only gap.
+  - ⭐ **`c9` RAN: uninstall holds for all 75 at once** — all defs *"present, but not loaded"*, **0 pack output**,
+    0 errors across load/sols/save/reload (`c47farmnomod`). ⇒ ⭐⭐ **10 of 10.**
   - ℹ️ `C47FARM`'s header says the pack was `v1.00-001` and `MeteorFrequency` healed `latch 1.0.1 -> 1.0.0`
     (`Fix_MeteorFrequency.lua:178`) ⇒ that save predates the version reset. **Dev-rig history, nothing shipped**;
     F88's one-shot heal firing correctly on it is a pass, not a fault.
-- ⛔ **RIG IS STAGED, NOT NORMAL (08-19).** Fix-pack junction **PULLED**; packed install at
-  `%APPDATA%\…\Mods\SMR_CommunityFixPack\ModContent.fpk` (362,894 B, MD5 `8dcb0692…`, 80/80 byte-identical).
-  Restore = `cmd /c mklink /J "%APPDATA%\Surviving Mars Relaunched\Mods\SMR-BugFixPack" "C:\Dev\SMR-BugFixPack"`
-  ⚠️ **no re-tick needed if the id keeps a folder** — swapping folder-for-folder under one id **KEPT the enable**
-  (measured; refines `EF-055`/`H-08`, which describe an id that VANISHES). TestKit + Opt-In are **unticked** now.
+- ✅ **RIG RESTORED on disk (08-19)**: staged packed folder deleted, fix-pack junction re-created; all **3
+  junctions** present. ⛔ **But all three mods are UNTICKED in account state** (`c9` turned them off) ⇒
+  **the next session needs an owner tick** to re-enable fix pack + TestKit before any suite number means
+  anything. Archive kept at `%LOCALAPPDATA%\Temp\…\ModUpload\Pack\ModContent.fpk` (362,894 B, `8dcb0692…`).
+  ⚠️ **`EF-055`/`H-08` NARROWED (measured):** a junction pull costs the enable when the **id vanishes**; swapping
+  folder-for-folder under the **same id KEEPS** it — no re-tick was needed for the packed swap.
   - ⛔ **B has NO DRIVER** — every unattended primitive lives in the TestKit and B turns it off ⇒ criteria
     **5/7/8/9 are owner work**; 1/2/3/4/6/10 survive a boot-and-close leg. **Two game sessions, not one visit.**
   - ⭐ **Packer is byte-faithful** (all 80 extracted: 78 identical to disk, the 2 = `git diff 7824cbc..HEAD`).

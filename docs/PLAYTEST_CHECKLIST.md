@@ -29,7 +29,26 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⛔⛔ 2026-08-19 — THE RELEASE CHECK CANNOT START WITHOUT YOU, AND HERE IS THE WHOLE SCRIPT. Nothing found tonight blocks launch. Everything the gate still owes is in one item.
+### ✅ 2026-08-19 — THE RELEASE CHECK IS DONE. You ran both acts; the gate scored **10 of 10**. Nothing below is owed from you — item 52 is kept as the record of what was run.
+
+> ⭐⭐ **DONE 2026-08-19, attended, both acts.** Both core fixes proven (fix ②
+> needed a real `Reloading done in 1358 ms`), archive rebuilt (**80 files, 80
+> byte-identical to the tree**), and run B scored **10/10** — including the three
+> nobody had ever tested: it loads **`packed`** (66 archived sessions all said
+> `unpacked`), the **preview image renders** on the packed path, and **uninstall
+> holds for all 75 at once**. ⭐ The 75 module names are **set-identical** packed
+> vs unpacked, so packing changes nothing.
+>
+> ⚠️ **What act 1 got wrong and cost you two launches:** step 5's
+> `DbgPackMod(...)` at the console **cannot work** — that function is not in `_G`
+> on retail at all, and neither is `ReloadLua`. The blacklist story was never
+> about the console. **The route is Mods Manager → Edit (Ctrl-E) → Mod Editor →
+> File → Pack Mod**, a menu item with no button, which is why you couldn't find it.
+>
+> ⛔ **This is not "the upload will succeed."** Nobody logged in, nothing was
+> transmitted, no listing exists. Next is the terminal audit, not an upload.
+> ⛔ **Your mods are all unticked** — re-tick the fix pack and Test Kit before the
+> next session's numbers mean anything.
 
 52. ⛔ **The final release check needs your hands twice, and I can now say exactly
     why nobody has ever run it.**
