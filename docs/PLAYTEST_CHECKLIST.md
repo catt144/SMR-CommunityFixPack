@@ -114,6 +114,66 @@ completed tests move whole to
     stores — but it is genuinely a shrug either way and you lose nothing by
     deciding when you get there.
 
+### ⛔ 2026-08-19 — THE VERIFICATION LAUNCH RAN: the mod is running clean in a real game. Nothing blocks launch. Two things need your hands, and one of them is a mess I made.
+
+43. ⛔ **I broke the Opt-In pack's enable state, and I could not put it back.**
+    Telling you straight, the way the autosave deletion was told to you.
+
+    To run the suite "as a player will have it" I needed the Opt-In pack absent.
+    Changing that switch properly needs the Mod Manager, which needs you — so I
+    used the documented reversible trick instead: remove the folder shortcut, let
+    the game not find it, put the shortcut back afterwards. **The putting-back
+    did not work.** The game now sees the Opt-In pack sitting there, lists it,
+    and **never runs a line of it**. I relaunched twice to be sure. Our own notes
+    said this could happen; they blamed it on a Mod Manager visit in the middle,
+    and there wasn't one this time, so the note was wrong about why.
+
+    **The fix is one minute of yours and there is no other route:** open the game
+    → **Mods** → untick and re-tick **"Relaunched Fix Pack: Opt-In Modules"** →
+    close the dialog → **restart the game**. If it comes back, its own line in
+    the log reads `opt-in pack present: 8/8 modules active`.
+
+    ⚠️ **The Fix Pack itself is completely unaffected** — it ran perfectly in all
+    three launches. And this is worth knowing before launch day for a second
+    reason: **the final release check (run B) plans to pull the Fix Pack's
+    shortcut exactly the same way.** If it does that, the packed mod may sit
+    there not running, and the check would look like a disaster that is really
+    this same switch. That is now written into the rehearsal's own notes.
+
+44. ⭐ **Two minutes at the keyboard finishes the two core fixes — four sessions
+    have now been unable to.** The two defects you paused the upload over were
+    fixed on 08-17 and have **still not been proven fixed**, and I can now say
+    exactly why: proving them needs the game's console, and an unattended
+    session cannot type into it. Everything else about them is done.
+
+    The good news first: **the fixed code definitely runs.** In tonight's
+    launches the exact sequence that used to leave the false flag behind played
+    out in the log, the repair line executed, and the module ended up healthy —
+    all 75 fixes active, no error, no box on screen. What I cannot read from
+    outside the game is the one leftover flag itself, and whether the second
+    defect (a fix being counted twice) is gone, because that one only shows up
+    when the game reloads its scripts mid-session.
+
+    **The recipe. Any save, any colony, press Enter for the console, type these.**
+
+    1. `print(Mods.SMR_CommunityFixPack.version, Mods.SMR_CommunityFixPack:IsDirty())`
+       — must print **`1  false`**. ⛔ If it says `true`, **stop and tell me**:
+       the next line would bump us to 1.0.1 and you ruled 1.0.0.
+    2. `print(SMRFixPack.fixes.SaintBlessing.update_suspect, #SMRFixPack.order)`
+       — expect **`nil  75`**. *(That `nil` is core fix ① proven.)*
+    3. `DbgPackMod(Mods.SMR_CommunityFixPack, false)` — this is the reload. It
+       does not upload anything and does not touch either store.
+    4. `print(SMRFixPack.fixes.SaintBlessing.status, SMRFixPack.fixes.SaintBlessing.update_suspect, #SMRFixPack.order, #SMRFixPack.UpdateSuspects())`
+       — expect **`active  nil  75  0`**. *(The `75` is core fix ② proven — it
+       used to become 150. The `0` is the box confirmed not to fire.)*
+    5. Optional, ~30 s, and it settles a prediction nobody has ever tested:
+       `*r SMRTest.RunAll()` — link 2 predicted **2 false failures** after a
+       reload. Either answer is worth having.
+
+    **Paste me back what those four lines printed and the core fixes are closed.**
+    Anything other than the expected values is a launch-blocker and I want to see
+    it before you upload anything.
+
 ### ✅✅ 2026-08-18 — STATE.md WAS EVICTED ON YOUR DIRECTION, AND YOU RULED THE CAPS THE SAME DAY. Nothing here is owed from you.
 
 42. ⭐ **What happened.** The agents' one mandatory-read file had quietly grown

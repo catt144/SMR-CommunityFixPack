@@ -11,14 +11,18 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⭐⭐ **④ upload sitting PAUSED mid-sitting on the owner's word — NOTHING IS PUBLISHED.** Upload is owner-attended.
 - **Active: pre-launch sweep chain `agent/prompts/prelaunch-sweep/`.**
   - Links 1–4 consumed: L1 structure · L2 lifecycle · L3 save/exit · L4 player experience.
+  - **97 verification-launch interlude consumed 08-19** (no lens, rotation intact): 3 retail autorun legs,
+    `reports/97_VERIFICATION_LAUNCH.md`, logs `archive/vl97a/b/c_*`.
   - **Nothing blocks launch so far.** Artifacts `reports/L1..L4_*.md`.
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
-  - Owner kicks each step; next = `97_VERIFICATION_LAUNCH.md` interlude (run A pulled forward, spec §6.5 launch
-    obligation — no lens, record-only except launch-blocking), then link 5 (failure/containment, pending item-41 cap ruling).
-- ⛔ **Unverified in any running game:** `00_Core.lua` fixes `2f077e8` (stale update-suspect ×2 · registry double-append)
-  and link 2's reload fix (`data_edited` memo). No launch since 08-17.
+  - Owner kicks each step; next = link 5 (failure/containment; cap 5→8 ruled).
+- ⭐ **The pack HAS now run post-`2f077e8`:** 72/0/24/0 of 96 opt-in-absent, `75/75` active, 0 FAIL, 0 dialog;
+  88 of 96 probes hold their exact verdict vs the pre-fix baseline `c47suite4`. Apply cost 75 modules ≈0.57 s.
+- ⛔ **Still UNVERIFIED (needs ONE console sitting, checklist 44):** `2f077e8` fix ① (mark unreadable while the
+  entry ends `active`) · fix ② and L2's reload prediction and link 2's `data_edited` memo (all need one `ReloadLua`).
 - ⛔⛔ **Gate B has NEVER run** (packed install, junction pulled, TestKit+opt-in off) — THE release gate
-  (owner: A = information, B = the gate).
+  (owner: A = information, B = the gate). ⚠️ **B must budget an owner Mod-Manager tick after the junction swap
+  and read the gate line first** — see H-08, or B reads as a catastrophic failure that is account state.
   - Every suite number ever taken is unpacked, TestKit-on, single-load (L2).
   - Baseline `80/0/16/0` of 96 (`archive/c47suite4_*`), gates `75/75`+`8/8`; rig runs cheats.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
@@ -41,6 +45,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   **deletes the owner's autosaves** — pre-copy every autosave first.
 - **H-07** The opt-in pack does **NOT** publish and gates nothing; ~46 parked references restore via
   `reports/PARKED_OPTIN_REFERENCES.md` at ITS launch (obligation in that repo).
+- **H-08** ⛔ **Pulling a mod's junction COSTS its enable and restoring the folder does NOT buy it back**
+  (`EF-055`, settled 08-19 with no Mod-Manager visit anywhere). Recovery = owner tick + restart, never an agent's.
+  Never pull one to reach a configuration without booking that cost. **The opt-in pack is in that state now**
+  (checklist 43).
 
 ## Rules in force (owner rulings; bodies in checklist/SESSION_LOG)
 - Ship line FROZEN (08-12): `fixed` + suite + self-checks + verified save-safety IS the bar.

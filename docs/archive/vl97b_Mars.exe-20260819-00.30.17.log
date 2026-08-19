@@ -1,0 +1,1209 @@
+					Render 0:00:00:006
+*** executable info
+					Render 0:00:00:007
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	42%
+Disk Free      	742402 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:069
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:073
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:466
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:599
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:792
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:441
+*** audio info
+Audio Endpoint                 	Headphones (3- A50 Game)
+						Lua 0:00:02:466
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:463
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:465
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:17:811
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:812
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:816
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:817
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+						Lua 0:00:17:818
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+						Lua 0:00:17:819
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:17:820
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+						Lua 0:00:17:821
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+						Lua 0:00:17:822
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+						Lua 0:00:17:823
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+						Lua 0:00:17:824
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+						Lua 0:00:17:825
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:18:364
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:438
+Reloading done in 965 ms
+						Lua 0:00:18:758
+[preset] Preset postprocess took 51 ms.
+						Lua 0:00:18:805
+479 / 479 particle streams loaded in 43 ms.
+						Lua 0:00:18:806
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+						Lua 0:00:19:002
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+						Lua 0:00:19:057
+[mod] [SMRAUTO] armed (flag file Code/96_AutoRunFlag.lua)
+[SMRAUTO] armed (flag file Code/96_AutoRunFlag.lua)
+[mod] [SMRAUTO] ShowStartGamePopup neutered for the unattended run
+[SMRAUTO] ShowStartGamePopup neutered for the unattended run
+[PdxSDK] Started up. Took 1584
+						Lua 0:00:19:080
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:19:516
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:517
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:602
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:534
+Game Seed:  5kTJ9byC 2426540929054903445 
+						Lua 0:00:21:567
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:591
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:23:320
+*** Assets reloaded in 1.8 s, read 202.1 MB, read speed 115.3 MB/s, average read 4949 bytes.
+						Lua 0:00:24:958
+game_settings:
+    sponsor: IMM
+    profile: rocketscientist
+    founding_faction: MarsDemocraticParty
+    rival_colonies: NASA, Japan, paradox
+    mystery_random: DiggersMystery
+    game_rules: (none)
+more_game_settings: save_game_id: nil, mystery: random, coordinates: 21S143W, landing_spot: , logo: IMM
+map_conditions: altitude: 2071, temperature: -15, cold_wave: 36, dust_devils: 89, dust_storm: 0, meteors: 36
+map_resources: concrete: 109, metals: 73, precious_metals: 73, water: 146
+						Lua 0:00:24:968
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:24:979
+MapLoadRandom:  -917521505148089585 
+						Lua 0:00:26:200
+Map (slot 1) changed to "BlankBigTerraceCMix_14" in 4640 ms.
+						Lua 0:00:29:230
+[LUA ERROR] Lua/Flight.lua:479: attempt to index a boolean value (field 'objects_to_unmark')
+  Lua/Flight.lua(479):  method Unmark
+  Lua/UniversalRocket.lua(268):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(244):   <>
+        --- end of stack
+Locals:
+	                self |   object Flight
+	                 obj |   object UniversalZeusRocket at invalid pos on map 1
+						Lua 0:00:29:806
+MapLoadRandom:  7934786865971955568 
+						Lua 0:00:30:559
+Map (slot 2) changed to "BlankUnderground_03" in 1309 ms.
+						Lua 0:00:34:760
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object BottomlessPit at (298000, 301368) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+						Lua 0:00:34:761
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object JumboCave at (358000, 424340) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object SurfacePassage at (180500, 298770) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+						Lua 0:00:34:762
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object SurfacePassage at (411500, 241614) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (233500, 113446) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (244500, 113446) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (234500, 115178) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (243500, 116910) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (229000, 147220) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (234000, 148952) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (138000, 181860) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+						Lua 0:00:34:763
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (140000, 185324) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (140500, 189654) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (457500, 191386) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (462500, 196582) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (459500, 198314) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (466500, 201778) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (199500, 203510) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (196000, 209572) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (195500, 208706) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (387500, 231222) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (384500, 232954) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (381500, 234686) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (211500, 297038) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (207500, 298770) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (213000, 304832) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+						Lua 0:00:34:764
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (362000, 308296) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (357500, 309162) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (447500, 355926) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (453500, 355926) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (456500, 361122) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (222000, 370648) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (227000, 370648) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (467500, 373246) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (233000, 377576) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (464000, 377576) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (466500, 383638) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (180500, 160210) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (242000, 169736) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+						Lua 0:00:34:765
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (282500, 194850) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (401000, 197448) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (357500, 215634) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (415500, 227758) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (136000, 230356) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (357500, 232954) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (144500, 234686) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (206500, 243346) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+						Lua 0:00:34:766
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (269500, 276254) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (253000, 280584) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (344000, 299636) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (170000, 320420) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (434000, 334276) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (488000, 348132) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (322000, 349864) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (398500, 383638) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (232500, 392298) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (170000, 394896) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+						Lua 0:00:34:767
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (417500, 414814) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (215000, 426072) on map 2
+	   Flight_IsMarkable | function 0x0000011F62F10850
+						Lua 0:00:34:781
+starting sector selected: B3
+						Lua 0:00:34:782
+starting sector selected: C3
+						Lua 0:00:36:079
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:37:080
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:04:774
+[mod] [SMRAUTO] BEGIN
+[SMRAUTO] BEGIN
+[mod] [SMRTest] ---- RunAll (all probes) ----
+[SMRTest] ---- RunAll (all probes) ----
+[mod] [SMRTest] fix pack present: 75/75 fixes active
+[SMRTest] fix pack present: 75/75 fixes active
+[mod] [SMRTest] opt-in pack NOT loaded — its probes SKIP (a separate, optional mod)
+[SMRTest] opt-in pack NOT loaded — its probes SKIP (a separate, optional mod)
+[mod] [SMRTest] save-rescue NOT loaded — its probes SKIP (a separate cleanup mod, absent by design)
+[SMRTest] save-rescue NOT loaded — its probes SKIP (a separate cleanup mod, absent by design)
+[mod] [SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[mod] [CommunityFixPack] MeteorFrequency: WATCHDOG — no meteor resolved for 99 game hours (thread ALIVE but stuck); restarting onto vanilla's body
+[mod] [SMRTest] PASS  MeteorFrequency          [behavior] wrapper stretches only the Meteors thread's roll; body copy gone; watchdog restarts a stalled thread and spares a fresh one
+[SMRTest] PASS  MeteorFrequency          [behavior] wrapper stretches only the Meteors thread's roll; body copy gone; watchdog restarts a stalled thread and spares a fresh one
+[mod] [SMRTest] PASS  UpgradeModifierLeak      [behavior] modifier turned off
+[SMRTest] PASS  UpgradeModifierLeak      [behavior] modifier turned off
+[mod] [SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[mod] [SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[mod] [SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+						Lua 0:01:04:775
+[mod] [SMRTest] PASS  TouristApplicants        [behavior] 1-star 147 < 2-star 320 over 400 rolls
+[SMRTest] PASS  TouristApplicants        [behavior] 1-star 147 < 2-star 320 over 400 rolls
+[mod] [SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[mod] [SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready
+[SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready
+[mod] [SMRTest] PASS  LanderCargoRatchet       [behavior] request 300000 >= 300000 aboard
+[SMRTest] PASS  LanderCargoRatchet       [behavior] request 300000 >= 300000 aboard
+[mod] [SMRTest] PASS  LanderReturnFuel         [behavior] parked lander keeps 3500 fuel requested
+[SMRTest] PASS  LanderReturnFuel         [behavior] parked lander keeps 3500 fuel requested
+[mod] [SMRTest] PASS  ShelterReflex            [behavior] life-support blip tolerated; Idle wrapper unverified (introspection unavailable (retail sandbox))
+[SMRTest] PASS  ShelterReflex            [behavior] life-support blip tolerated; Idle wrapper unverified (introspection unavailable (retail sandbox))
+						Lua 0:01:04:776
+[mod] [SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[mod] [SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[mod] [SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[mod] [SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[mod] [SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[mod] [SMRTest] PASS  DroneUnreachableForever  [behavior] failure normalised to now+0 ms; expires after 3600000 ms
+[SMRTest] PASS  DroneUnreachableForever  [behavior] failure normalised to now+0 ms; expires after 3600000 ms
+[mod] [SMRTest] F58: 0 residence(s) hold 0 reserved slot(s); 0 are clearly stale
+[SMRTest] F58: 0 residence(s) hold 0 reserved slot(s); 0 are clearly stale
+[mod] [SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (0 reserved slot(s) in this save, 0 clearly stale)
+[SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (0 reserved slot(s) in this save, 0 clearly stale)
+[mod] [SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: DiggersMystery)
+[SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: DiggersMystery)
+[mod] [SMRTest] PASS  TouristSatisfaction      [behavior] 0->100 pays 40000, 100->0 charges -40000
+[SMRTest] PASS  TouristSatisfaction      [behavior] 0->100 pays 40000, 100->0 charges -40000
+[mod] [SMRTest] PASS  TrainPlatformWedge       [behavior] stale passenger removed and ticket discarded
+[SMRTest] PASS  TrainPlatformWedge       [behavior] stale passenger removed and ticket discarded
+[mod] [SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+						Lua 0:01:04:777
+[mod] [SMRTest] PASS  CommandCenterNumbers     [behavior] all 11 getters present
+[SMRTest] PASS  CommandCenterNumbers     [behavior] all 11 getters present
+[mod] [SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[mod] [SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20) but never overrides a configured one
+[SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20) but never overrides a configured one
+[mod] [SMRTest] SKIP  ClassicRockets           [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  ClassicRockets           [behavior] opt-in mod not installed or module not present
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine label (+100% electricity_production)
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine_Large label (+100% electricity_production)
+[mod] [SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[mod] [CommunityFixPack] SaveSanitizer: removed 1 leaked upgrade modifier(s) from salvaged buildings
+[mod] [SMRTest] PASS  SaveSanitizerUpgradeLeak [behavior] orphaned upgrade bonus removed; live building's and unrelated modifiers untouched
+[SMRTest] PASS  SaveSanitizerUpgradeLeak [behavior] orphaned upgrade bonus removed; live building's and unrelated modifiers untouched
+[mod] [SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[mod] [SMRTest] PASS  SmallLandscapeSites      [behavior] two-hex site returns 2 destinations, nine-hex site still returns the closest 5
+[SMRTest] PASS  SmallLandscapeSites      [behavior] two-hex site returns 2 destinations, nine-hex site still returns the closest 5
+[mod] [SMRTest] PASS  DomeFreeSpaceMismatch    [behavior] tally follows the player's switch, matching ChooseResidence
+[SMRTest] PASS  DomeFreeSpaceMismatch    [behavior] tally follows the player's switch, matching ChooseResidence
+[mod] [SMRTest] PASS  FreedHousingNotice       [behavior] vacated home notifies the dome's homeless; a residence with no free slot does not
+[SMRTest] PASS  FreedHousingNotice       [behavior] vacated home notifies the dome's homeless; a residence with no free slot does not
+[mod] [SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[mod] [SMRTest] PASS  AsteroidLanderAvailable  [behavior] busy-but-unassigned landers on the pad count; assigned and off-world ones do not
+[SMRTest] PASS  AsteroidLanderAvailable  [behavior] busy-but-unassigned landers on the pad count; assigned and off-world ones do not
+[mod] [SMRTest] PASS  AutoExportPriority       [behavior] the scarce hold goes to PreciousMinerals; with room to spare both are still requested
+[SMRTest] PASS  AutoExportPriority       [behavior] the scarce hold goes to PreciousMinerals; with room to spare both are still requested
+[mod] [SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[mod] [SMRTest] PASS  GeneForging              [behavior] Gene Forging +50, Gene Selection +100, both +150
+[SMRTest] PASS  GeneForging              [behavior] Gene Forging +50, Gene Selection +100, both +150
+[mod] [SMRTest] PASS  DustSicknessDamage       [behavior] damage rolls 5..14 instead of a flat 10
+[SMRTest] PASS  DustSicknessDamage       [behavior] damage rolls 5..14 instead of a flat 10
+[mod] [SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[mod] [SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[mod] [SMRTest] PASS  UniversityOvertraining   [behavior] automated extractor needs 0, manned extractor still needs 12
+[SMRTest] PASS  UniversityOvertraining   [behavior] automated extractor needs 0, manned extractor still needs 12
+[mod] [SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped
+[SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped
+[mod] [SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[mod] [SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex; an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex; an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[mod] [SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[mod] [SMRTest] PASS  GridGlobalStorage        [behavior] 1h reserve reads 180000, empty reads 0, 100h reads 3000000 (2-sol mark is 1440000)
+[SMRTest] PASS  GridGlobalStorage        [behavior] 1h reserve reads 180000, empty reads 0, 100h reads 3000000 (2-sol mark is 1440000)
+						Lua 0:01:04:778
+[mod] [SMRTest] PASS  LastTransmissionStorage  [behavior] all 6 storage conditions are on Condition and read their own grid
+[SMRTest] PASS  LastTransmissionStorage  [behavior] all 6 storage conditions are on Condition and read their own grid
+[mod] [SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[mod] [SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[mod] [SMRTest] PASS  MoraleComfortTooltip     [behavior] Comfort reads 69 (below the 70 mark); other stats untouched
+[SMRTest] PASS  MoraleComfortTooltip     [behavior] Comfort reads 69 (below the 70 mark); other stats untouched
+[mod] [SMRTest] PASS  StorageRateModifiers     [behavior] rates reached the element (7777/8888), UpdateStorage ran 2 time(s)
+[SMRTest] PASS  StorageRateModifiers     [behavior] rates reached the element (7777/8888), UpdateStorage ran 2 time(s)
+[mod] [SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[mod] [SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Lazy (Negative) raises the notification
+[SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Lazy (Negative) raises the notification
+[mod] [CommunityFixPack] IndependenceTerraforming: corrected the already-researched tech's stored discount from 10% to 20% (savegame sweep)
+[mod] [SMRTest] PASS  IndependenceTerraforming [behavior] discount is 20%, matching param1; the savegame sweep replaces a stale stored modifier and leaves a correct one alone
+[SMRTest] PASS  IndependenceTerraforming [behavior] discount is 20%, matching param1; the savegame sweep replaces a stale stored modifier and leaves a correct one alone
+[mod] [SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[mod] [SMRTest] PASS  LayoutTechLock           [behavior] locked entries drop; researched, prefab-package and owned-prefab entries and grid runs all survive
+[SMRTest] PASS  LayoutTechLock           [behavior] locked entries drop; researched, prefab-package and owned-prefab entries and grid runs all survive
+[mod] [SMRTest] PASS  TrainMinors              [behavior] train cap recomputed 4->1, 40->2, 0->0
+[SMRTest] PASS  TrainMinors              [behavior] train cap recomputed 4->1, 40->2, 0->0
+[mod] [SMRTest] PASS  DroneTransportMinors     [behavior] weak keys restored; count corrected 4 -> 2
+[SMRTest] PASS  DroneTransportMinors     [behavior] weak keys restored; count corrected 4 -> 2
+[mod] [SMRTest] set_global refused 'IsNearDome' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[SMRTest] set_global refused 'IsNearDome' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[mod] [SMRTest] set_global refused 'AddAreaRubble' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[SMRTest] set_global refused 'AddAreaRubble' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[mod] [SMRTest] SKIP  AnomalyCaveInMap         [behavior] stub target undeclared on this build: AddAreaRubble, IsNearDome — steps 1-3 held (the false map was declined, SMRFixPack.AnomalyCaveInMap.IsUsableMap is installed, and a usable map still reached the shipped body), but the cave-in ran against the shipped rubble/dome helpers rather than this probe's stand-ins, so the last step is not the controlled exercise it claims to be
+[SMRTest] SKIP  AnomalyCaveInMap         [behavior] stub target undeclared on this build: AddAreaRubble, IsNearDome — steps 1-3 held (the false map was declined, SMRFixPack.AnomalyCaveInMap.IsUsableMap is installed, and a usable map still reached the shipped body), but the cave-in ran against the shipped rubble/dome helpers rather than this probe's stand-ins, so the last step is not the controlled exercise it claims to be
+[mod] [SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[mod] [SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[mod] [CommunityFixPack] DisasterPredictionLeak: cleared stranded prediction flag 'DisasterMeteorStorm' (no live notification behind it)
+[mod] [SMRTest] PASS  DisasterPredictionLeak   [behavior] stranded flag cleared, notification-backed flag kept (1 cleared)
+[SMRTest] PASS  DisasterPredictionLeak   [behavior] stranded flag cleared, notification-backed flag kept (1 cleared)
+[mod] [SMRTest] PASS  MeteorStormWedge         [behavior] all four watchdog states correct: no-storm, live storm protected, signature arms, sustained heals
+[SMRTest] PASS  MeteorStormWedge         [behavior] all four watchdog states correct: no-storm, live storm protected, signature arms, sustained heals
+[mod] [CommunityFixPack] RainsDeadlock: stale-ACTIVE rain 'probe_legacy' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)
+[mod] [CommunityFixPack] RainsDeadlock: 'probe_legacy' rain loop migrated onto vanilla's body (settings 'Toxic_VeryLow', version 1.0.0)
+[mod] [SMRTest] PASS  RainsDeadlock            [behavior] 1 loop(s) migrated and stamped, current-version entry untouched, stale-ACTIVE healed (no unique-type preset in the live group: id-less sub-check skipped)
+[SMRTest] PASS  RainsDeadlock            [behavior] 1 loop(s) migrated and stamped, current-version entry untouched, stale-ACTIVE healed (no unique-type preset in the live group: id-less sub-check skipped)
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: First Asteroid prefabs recovered after a save/load (3 granted)
+[mod] [SMRTest] PASS  FirstAsteroidPrefabs     [behavior] stranded save granted 1/1/1 and latched; already-healed and non-FirstAsteroid states granted nothing
+[SMRTest] PASS  FirstAsteroidPrefabs     [behavior] stranded save granted 1/1/1 and latched; already-healed and non-FirstAsteroid states granted nothing
+						Lua 0:01:04:779
+[mod] [SMRTest] PASS  UpdateReport             [behavior] healthy registry clean; 4 rot shapes flagged, 4 healthy shapes ignored
+[SMRTest] PASS  UpdateReport             [behavior] healthy registry clean; 4 rot shapes flagged, 4 healthy shapes ignored
+[mod] [SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+[SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+[mod] [SMRTest] PASS  SaintBlessing            [behavior] Saint's modifier now names TraitReligious (no Saint in a dome in this save, so the live half had nothing to read)
+[SMRTest] PASS  SaintBlessing            [behavior] Saint's modifier now names TraitReligious (no Saint in a dome in this save, so the live half had nothing to read)
+[mod] [SMRTest] PASS  DustDevilsDescrMap       [behavior] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins
+[SMRTest] PASS  DustDevilsDescrMap       [behavior] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins
+[mod] [SMRTest] PASS  AsteroidVisitPrecedence  [behavior] supply rockets no longer open the picker; landers and F72's unloading case still do
+[SMRTest] PASS  AsteroidVisitPrecedence  [behavior] supply rockets no longer open the picker; landers and F72's unloading case still do
+[mod] [SMRTest] PASS  AstrogeologistExtractors [behavior] all 12 buildable extractors are paid (12 Effect_ModifyLabel entries on the profile)
+[SMRTest] PASS  AstrogeologistExtractors [behavior] all 12 buildable extractors are paid (12 Effect_ModifyLabel entries on the profile)
+[mod] [SMRTest] PASS  SinkholeIndestructible   [behavior] Sinkhole is indestructible on the class and the template; 0 instance(s) inspected, none overriding
+[SMRTest] PASS  SinkholeIndestructible   [behavior] Sinkhole is indestructible on the class and the template; 0 instance(s) inspected, none overriding
+[mod] [SMRTest] PASS  DustStormBreakMapFilter  [behavior] merged fragments are filtered to MainMap connectors, single-map fragments pass straight through, and the persisted array is restored by identity in both cases
+[SMRTest] PASS  DustStormBreakMapFilter  [behavior] merged fragments are filtered to MainMap connectors, single-map fragments pass straight through, and the persisted array is restored by identity in both cases
+						Lua 0:01:04:780
+[mod] [SMRTest] PASS  DustDevilSpawnGate       [behavior] the authored 6..8 range is reachable on a passed gate and the count is exactly 0 on a failed one, the shared preset is copied not mutated, class-default properties survive the copy, and full-chance presets, other disasters and nil all pass through untouched
+[SMRTest] PASS  DustDevilSpawnGate       [behavior] the authored 6..8 range is reachable on a passed gate and the count is exactly 0 on a failed one, the shared preset is copied not mutated, class-default properties survive the copy, and full-chance presets, other disasters and nil all pass through untouched
+[mod] [SMRTest] PASS  AutomationLawCompensation [behavior] the measured 12->6 subject gets exactly +100 (100 -> 200, the ~2x the Diner control was measured riding to), the remainder lands on the first worker only, the correction is blind to the overtime flag so post-loop additives cannot be scaled, the Max(performance,25) floor holds, and all nine negative controls read 0 — already-compensated classes, unlabelled buildings, foreign max_workers modifiers, no active law, automated/shrouded/zero-post/unstaffed workplaces, and the two-law shape the ruling does not cover. ⛔ NOT claimed: a live in-game reading — that is prompt 02's paused bracket
+[SMRTest] PASS  AutomationLawCompensation [behavior] the measured 12->6 subject gets exactly +100 (100 -> 200, the ~2x the Diner control was measured riding to), the remainder lands on the first worker only, the correction is blind to the overtime flag so post-loop additives cannot be scaled, the Max(performance,25) floor holds, and all nine negative controls read 0 — already-compensated classes, unlabelled buildings, foreign max_workers modifiers, no active law, automated/shrouded/zero-post/unstaffed workplaces, and the two-law shape the ruling does not cover. ⛔ NOT claimed: a live in-game reading — that is prompt 02's paused bracket
+[mod] [SMRTest] PASS  C47OpenFarmSeedBufferShape [behavior] OpenFarm INHERITS its seed buffer (5000 = 5 x const.ResourceScale, no own key in its BuildingTemplate preset) while ForestationPlant SETS 10000, and the override runs the other way round on cadence — OpenFarm sets vegetation_interval 3 against the class default 20, which ForestationPlant does not touch. Ratios re-derived live and cross-multiplied: storage 2:1, cadence 20:3 (6.67x), ticks 9000 ms vs 60000 ms from MulDivRound(interval, HourDuration=30000, scale=10). Drone carry: the shipped ConstDef still DECLARES 1 (⇒ a vanilla trip is 1000 Seeds, since the Seeds resource sets no carry_amount override), while this process's LIVE g_Consts reads 1 — ⚠️ if those differ, a label modifier is raising it, and on this project's own rig that modifier is our opt-in module Opt_DroneStatDials (D09), not a game change. All 5 Vegetable crop costs match, and the owner's two fixture selections still sum to 1100 and 700 seeds over three rotated hexes (means ~367 and 233). ⛔ WHAT THIS DOES NOT PROVE: these are TEMPLATE NUMBERS read out of the running game, nothing more. It is not evidence that any farm ever ran dry, not evidence of a popup, a banner or a voice line, and not evidence that this is a defect at all — no code comment ties the two fields, C47 remains a CANDIDATE, and this probe passes identically with the fix pack on or off.
+[SMRTest] PASS  C47OpenFarmSeedBufferShape [behavior] OpenFarm INHERITS its seed buffer (5000 = 5 x const.ResourceScale, no own key in its BuildingTemplate preset) while ForestationPlant SETS 10000, and the override runs the other way round on cadence — OpenFarm sets vegetation_interval 3 against the class default 20, which ForestationPlant does not touch. Ratios re-derived live and cross-multiplied: storage 2:1, cadence 20:3 (6.67x), ticks 9000 ms vs 60000 ms from MulDivRound(interval, HourDuration=30000, scale=10). Drone carry: the shipped ConstDef still DECLARES 1 (⇒ a vanilla trip is 1000 Seeds, since the Seeds resource sets no carry_amount override), while this process's LIVE g_Consts reads 1 — ⚠️ if those differ, a label modifier is raising it, and on this project's own rig that modifier is our opt-in module Opt_DroneStatDials (D09), not a game change. All 5 Vegetable crop costs match, and the owner's two fixture selections still sum to 1100 and 700 seeds over three rotated hexes (means ~367 and 233). ⛔ WHAT THIS DOES NOT PROVE: these are TEMPLATE NUMBERS read out of the running game, nothing more. It is not evidence that any farm ever ran dry, not evidence of a popup, a banner or a voice line, and not evidence that this is a defect at all — no code comment ties the two fields, C47 remains a CANDIDATE, and this probe passes identically with the fix pack on or off.
+[mod] [SMRTest] SKIP  AcknowledgedWarnings     [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  AcknowledgedWarnings     [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  ResidencyControl         [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  ResidencyControl         [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  MultipleSuns             [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  MultipleSuns             [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  CohortHousing            [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  CohortHousing            [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  NoHomeless               [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  NoHomeless               [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  DroneStatDials           [behavior] opt-in mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  DroneStatDials           [behavior] opt-in mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  OptionsMenuOptIn         [behavior] opt-in mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  OptionsMenuOptIn         [behavior] opt-in mod not installed (separate mod — not a failure)
+[mod] [SMRTest] PASS  OptionsMenuFixPack       [behavior] fix pack declares no default_options and no option items, and none of the 8 moved ids is in its registry
+[SMRTest] PASS  OptionsMenuFixPack       [behavior] fix pack declares no default_options and no option items, and none of the 8 moved ids is in its registry
+[mod] [SMRTest] SKIP  SaveRescueCleanPass      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueCleanPass      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueStandDown      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueStandDown      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueIdempotent     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueIdempotent     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueHealBounds     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueHealBounds     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueSelfClean      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueSelfClean      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueResidueTable   [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueResidueTable   [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] ---- 72 PASS, 0 FAIL, 24 SKIP, 0 ERROR ----
+[SMRTest] ---- 72 PASS, 0 FAIL, 24 SKIP, 0 ERROR ----
+[mod] [SMRAUTO] END
+[SMRAUTO] END
+[mod] [SMRAUTO] done
+[SMRAUTO] done
+						Lua 0:01:07:774
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:07:775
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:08:033
+
+
+*** Debug::Done()
+Time (ms)	68033
+
+

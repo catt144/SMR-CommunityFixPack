@@ -737,3 +737,66 @@ live precedent:
 ⇒ **Recommendation to the owner: raise the cap to 8 so the rotation completes.**
 Stopping at 5 would leave three lenses unasked, and `00_CHAIN_SPEC.md` §5 names
 reporting a cap as convergence as the worst outcome this design can produce.
+
+---
+
+## Verification launch (interlude, no lens) — 2026-08-19
+
+Full derivation and every raw line: `reports/97_VERIFICATION_LAUNCH.md`.
+Legs: `archive/vl97a/b/c_Mars.exe-20260819-*.log`. Predictions pushed first
+(`1844095`). **Record-only; nothing was fixed, and nothing found blocks launch.**
+
+**VL-1 · ⛔ The two core fixes are still NOT verified, and the reason is a
+readability limit, not a missing launch.** `2f077e8`'s code ran three times in
+retail. Fix ①'s failing sequence executed in full — `Fix_SaintBlessing.lua:121`
+non-benign latch (sets the mark, `00_Core.lua:277`) → `:113 ctx.heal()`, one of
+the two lines the fix added — and the entry ended **`active`** (`75/75`). But
+`UpdateSuspects` reads only `error`/`inactive` entries (`:527-536`), so a stale
+mark on an `active` entry is **invisible to the probe that would report it**.
+⇒ `PASS UpdateReport` is true and **uninformative** for fix ①. **One console
+read settles it:** `print(SMRFixPack.fixes.SaintBlessing.update_suspect)` → `nil`.
+Fix ② and L2's reload prediction and link 2's `data_edited` fix **all three**
+need the same single second Lua load. ⛔ Unreachable unattended (`ConsoleExec`
+and `debug` blacklisted, `Mod.lua:1285`).
+
+**VL-2 · ⚠️⚠️ `98_LAUNCH_REHEARSAL.md`'s procedure has a hole that would have
+read as a catastrophic B failure.** Pulling the **opt-in** junction disabled that
+mod in account state; **restoring the junction did not bring it back** across two
+relaunches (def loads, code never runs, `opt-in pack NOT loaded`). Run B pulls
+the **fix pack's** junction the same way. ⇒ **B must budget an owner Mod-Manager
+tick after the swap and read the gate line before believing any other number.**
+Not a defect in the pack — a defect in the planned procedure, found in advance.
+
+**VL-3 · `EF-055` refined twice by measurement.** Its recorded cause (a round
+trip *"spanning an owner Mod-Manager visit"*) is **not** necessary — there was no
+visit here. And its *"skipped with a non-modal log line"* did not happen: the mod
+vanished **silently**. Fact amended in place; `account.dat` rewritten at 00:30.
+
+**VL-4 · No regression from `2f077e8` is visible in the suite, by name.** 96
+probes diffed against `c47suite4` (the last suite before the core fixes, same
+harness, same build): **8 verdict changes, all PASS → SKIP, all opt-in-family**.
+The other **88 hold exactly**. `72/0/24/0` in the opt-in-absent configuration,
+reproduced identically three times.
+
+**VL-5 · The opt-in-absent SKIP set, BY NAME** (answers what `98` needs):
+`AcknowledgedWarnings` · `ClassicRockets` · `CohortHousing` · `DroneStatDials` ·
+`MultipleSuns` · `NoHomeless` · `OptionsMenuOptIn` · `ResidencyControl`.
+⭐ **`OptionsMenuFixPack` PASSES** — the pack's own options page does not depend
+on the opt-in mod. Pre-registration named the wrong 8 (predicted
+`60_Probes_Opt.lua`'s list); the count was right, two names were not.
+
+**VL-6 · First aggregate runtime cost this project has ever measured.** All 75
+modules register and apply in **≈0.57 s**; the data-patch/heal work completes by
+**≈1.3 s** (`Lua` clock markers, `EF-045`-safe). The pack writes **81 log lines
+at load**, 90 across a session, of a 1,070-line log.
+
+**VL-7 · Positive control on H-02.** The running game reports the pack at
+**1.0.0** (`RainsDeadlock: … version 1.0.0`, where the 08-15 baseline said
+`1.0.1`). `metadata.lua` was never opened and no editor save occurred.
+
+**VL-8 · cosmetic / non-finding, recorded so nobody re-derives it.** 48×
+`Flight.lua:465` + 1× `:479` `[LUA ERROR]` — **the identical split to the 08-15
+baseline**, documented as vanilla synthetic-map noise since 2026-08-03.
+Attribution: vanilla, aged ≥16 days, count reproduced — reported, not dismissed.
+`MeteorFrequency: WATCHDOG` likewise present identically in the baseline and
+probe-driven.
