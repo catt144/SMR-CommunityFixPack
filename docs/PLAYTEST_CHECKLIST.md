@@ -29,6 +29,39 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚠️ 2026-08-20 — C50 IS BUILT, AND IT TOUCHES THREE SCREENS RATHER THAN THE TWO ITS BRIEF NAMED. Your sitting in link 4 changes slightly.
+
+59. ⚠️ **What I found, and the call I made without stopping you.** The brief for
+    `C50` named two places SpaceY's description gets assembled and said to append
+    at both. I re-derived that list before building — the brief told me to prove
+    the caller counts myself — and **it was wrong in both directions**:
+
+    | screen | what happens now |
+    |---|---|
+    | the pre-game **mission summary panel** | bullet added ✅ *(in the brief)* |
+    | the **rollover when you hover a sponsor** in the picker | bullet added ✅ *(NOT in the brief — a live screen the record had never named)* |
+    | the **challenge landing-spot screen** (3 shipped Challenges use SpaceY) | bullet added ✅ *(NOT in the brief either)* |
+    | the "in-game mission profile" the brief listed | ⛔ **left alone — that function has zero callers anywhere in the game.** It is dead code; the in-game profile dialog does not show sponsor effects at all. |
+
+    **My call:** build all three live screens, skip the dead one. Fixing one of
+    three would have left the defect visible on the other two, and `FIX_POLICY`
+    §4a bars shipping code for a function no shipped caller reaches (the F28
+    lesson — we retired a fix over exactly that once). ⚖️ **If you would rather
+    it stayed to the two the brief named, say so and I will cut it back** — the
+    third site is one wrapper and comes out cleanly.
+
+    ⭐ **What changes for your ~30-minute sitting (link 4).** The bullet is now
+    visible in **two places without starting a game**: the sponsor summary panel
+    *and* the hover rollover on the sponsor list — so you get two independent
+    looks for free while you are already on that screen. The third, the challenge
+    landing spot, needs a SpaceY **Challenge** started; ⚖️ **that is the one I
+    would skip unless you want it** — it is the same code on a screen you would
+    otherwise have no reason to open, and the probe already checks the wrapper is
+    installed there.
+
+    ⛔ **Nothing about this moves the store card's "five judgment calls" count** —
+    your 08-20 ruling that `C50` is a plain repair still stands and is untouched.
+
 ### ⭐⭐ 2026-08-20 — THE PLAN CHANGED ON YOUR RULING: C50+C51 ship IN 1.0.0, C52 is frozen, and the chain that closes this repo is written and waiting.
 
 58. ⭐⭐ **Your ruling, and what is now sitting ready.** *"C52 is going frozen may

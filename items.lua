@@ -341,6 +341,11 @@ return {
 		'name', "Fix_LocalizedUIText",
 		'CodeFileName', "Code/Fix_LocalizedUIText.lua",
 	}),
+	-- Added 2026-08-20 (close-out chain, link 2 — C50), same rule as above.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_SpaceYDroneCapBullet",
+		'CodeFileName', "Code/Fix_SpaceYDroneCapBullet.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",

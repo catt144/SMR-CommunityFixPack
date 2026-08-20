@@ -191,6 +191,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_ExoticDepositSign.lua",
 		"Code/Fix_AutomationLawCompensation.lua",
 		"Code/Fix_LocalizedUIText.lua",
+		"Code/Fix_SpaceYDroneCapBullet.lua",
 		"Code/90_SaveSanitizer.lua",
 	},
 	'TagGameplay', true,

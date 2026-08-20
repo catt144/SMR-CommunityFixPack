@@ -98,4 +98,62 @@ and the warning that link 4 is the one that needs their hands.**
 
 ## Notes from upstream
 
-- *(links 1–2 append here)*
+- **2026-08-20, link 2 (`C50`, built and consumed).** Counts after link 2, emitted:
+  **77 registered modules · 78 `Code/*.lua` · 98 probes** — so §2(c)'s "probes only
+  if links 1–2 added any" resolves to **97 → 98** (link 1 added wave 12, link 2
+  added wave 13). `upload_preflight` read **0 FAIL, 78 entries in order**.
+  ⇒ `pack_predict` should read **82**; that number is unchanged by this link.
+- ⚠️ **`C50` reaches THREE player-facing screens, not the one the fix list will
+  want to imply**, and §2(b)'s entry must not overstate or understate it: the
+  pre-game **mission summary panel**, the **rollover on the sponsor picker**, and
+  the **challenge landing-spot screen**. A fourth function the record called a
+  render site (`GetMissonProfileText`) has **zero callers in the whole game** and is
+  deliberately not touched. Full derivation + the caller table: `agent/bugs/C50.md`,
+  the *BUILT 2026-08-20* section. ⭐ The owner has an open note about this
+  (**checklist 59**) — read it before writing player-facing wording, because it
+  contains the one place they may still cut the third screen.
+- ⭐ **The player-facing sentence to describe `C50` is genuinely awkward, and this is
+  the link that owns it.** Nothing was re-worded and no behaviour was added: SpaceY
+  already granted +20 Drone Hub Drone capacity and simply never said so. ⛔ Do not
+  write anything that reads as a balance change or a new feature, and ⛔ do not
+  quote "40" as the number — it is `base + the preset's modifier`, computed at
+  render time, and the base is not ours to promise.
+- **The bullet borrows shipped translation id `4706`** (the `CommandCenterMaxDrones`
+  ConstDef help). That is disclosed in the code header and the entry. ⚠️ If any page
+  quotes the wording, quote it as *the game's own description of that setting*, not
+  as our sentence.
+- ⭐ **`4706` was re-verified across all NINE packs this session**, not just German,
+  with `tools/flpk_extract.py` — the extractor takes seconds and the recipe is in
+  link 2's notes below. Link 1's English-fallback derivation (empty `Translation`
+  column ≠ missing record) held up unchanged.
+- ⚠️ **`Game.csv` is 23,090 records + 1 header row**; earlier notes said 23,090 and a
+  header-inclusive count reads 23,091. Both are right about different things — do
+  not "correct" either into the other.
+
+- **2026-08-20, link 1 (`C51`, built and consumed).** Counts after link 1, emitted:
+  **76 registered modules · 77 `Code/*.lua` · 97 probes**.
+- ⛔ **`python tools/split_bugs.py --write` ABORTS** — it is the one-time migration
+  tool, not the regenerator, despite `INDEX.md`'s line-1 banner. A status flip DOES
+  change the index row, so `doccheck` goes RED until you rewrite it. What works:
+  ```python
+  import sys, io; sys.path.insert(0, 'tools')
+  import split_bugs as sb
+  lines = sb.render_index(sb.load_from_dir())
+  io.open('docs/agent/bugs/INDEX.md','w',encoding='utf-8',newline='\n').write('\n'.join(lines)+'\n')
+  ```
+  Then `git diff --stat` it: **one row per flipped entry.** The resulting
+  `warn <ID>: the frozen index-row cell says 'filed', entry says 'fixed'` is the
+  house pattern (`C43`, `F100`, now `C50`+`C51`), not a problem.
+- **The extractor is seconds, use it:** `sys.path.insert(0,'tools'); import
+  flpk_extract as fx; fx.extract(r'A:\SteamLibrary\steamapps\common\Project Spark\Local\German.fpk', out)`.
+- ⚠️ **`Src` is under the install dir literally named `Project Spark`** (`EF-014`);
+  the `Surviving Mars` folder's `ModTools` has no `Src` and is a decoy. Confirmed
+  again by both build links.
+- **The TestKit is a SEPARATE REPO** (`C:\Dev\SMR-BugFixPack-TestKit`) — its own
+  commit, its own push; `doccheck` only report-warns on its dirty tree. Waves **12**
+  and **13** are taken.
+- ⛔ **Do not assume a target has one implementor or one caller.** Link 1 found five
+  undocumented subclasses; link 2 found two undocumented render sites and one
+  documented site with no callers at all. In both cases the brief's own caller count
+  was wrong, and in both cases the whole-tree grep is what caught it. Grep the
+  FIELD, not one spelling of it.
