@@ -8,8 +8,16 @@ before it is *built, unobserved*. ⛔ Nothing in this chain may be called verifi
 until this sitting produces a log and a screen reading.
 
 ⚖️ **"Basic testing" is the owner's ruling (checklist 57) and it is the bar
-here.** ⛔ No run B, no suite marathon, no multi-day leg. One launch, two screens,
-one language switch, the logs archived.
+here.** ⛔ No run B, no suite marathon, no multi-day leg. One sitting, four
+screens, one language switch, the logs archived.
+
+⛔⛔ **AMENDED 2026-08-20 BY THE PRE-SITTING REVIEW — §2 BELOW WAS WRITTEN AGAINST
+A RECORD THAT IS NO LONGER TRUE.** It said "two screens" and named one sponsor
+reading, because when it was written the record said `C50` had two render sites.
+**It has three, and one of them is not on the sponsor screen at all** (checklist
+59, link 2's re-derivation, re-verified at Src by the review). ⇒ **§2a supersedes
+§2's step 2, and §2b is the ordering §2 never gave.** Everything else in §2
+stands.
 
 ## 0 · Read path + preparation you do BEFORE the owner sits down
 
@@ -64,6 +72,63 @@ if it differs.**
 5. **Switch back to English**, confirm the screens return to normal.
 6. **Suite, only if it is free** (`*r SMRTest.RunAll()`): a green-or-explained
    result, not a number to chase. ⛔ Do not turn this into a gate.
+
+## 2a · ⛔ `C50` has THREE render sites — name all three, skip by name
+
+The built module wraps three live sites and deliberately leaves a fourth,
+**dead**, function alone. ⛔ *"I looked at SpaceY's description"* does not say
+which of them was seen. Re-verified at Src by the pre-sitting review:
+
+| # | screen | how the owner reaches it | needs a save? |
+|---|---|---|---|
+| 1 | pre-game **mission summary panel** (`GetSponsorSummary` → `PGMissionSummaryDlg`) | new game → sponsor chosen → the summary panel | ⛔ no |
+| 2 | **hover rollover on the sponsor picker** (`GetSponsorDescr` → `GetSponsorEntryRollover` → `XPGMission.lua:158`) | same screen, hover SpaceY in the list | ⛔ no |
+| 3 | **challenge landing-spot screen** (`LandingSiteObject:GetMissionSponsorEffect` → the `<MissionSponsorEffect>` tag, `PGChallengeLandingSpotRemastered.generated.lua:611`) | start one of the **3 shipped Challenges that set `sponsor = "SpaceY"`** | ⛔ no, but it is a separate flow |
+| — | `GetMissonProfileText` | ⛔ **not wrapped — zero callers in all of Src.** Nothing to look at | — |
+
+⇒ **1 and 2 are two independent looks on one screen, free.** ⚖️ **3 is the one
+checklist 59 recommends skipping** — same code, a screen the owner would
+otherwise not open. **If it is skipped, the report says so BY NAME** and the
+audit inherits it as an unobserved site, not as a pass.
+
+⭐ **What a failure looks like here, specifically.** The bullet is built as
+`T{"<bullet> <drone_cap_help> (<CommandCenterMaxDrones>)", context}` — a
+tag-only string with a context table. ⚠️ **That exact form appears NOWHERE in the
+shipped game** (whole-tree search, `T{"<` → 0 hits); the review traced every
+function in its path and each one handles it, but **this sitting is its first
+proof.** So:
+
+- ✅ **working:** a bullet reading like *"Maximum number of Drones a Drone Hub can
+  control (**100**)"* — real sentence, real number.
+- ⛔ **the tags did not resolve:** literal angle brackets on screen —
+  `<drone_cap_help>` or `<CommandCenterMaxDrones>` — or a `{#4706}`-shaped token,
+  or the sentence present with an empty `()`. **Any of those means the context
+  did not bind. Report it verbatim; do not paraphrase what it "looked like".**
+- ⛔ **the regression that would matter more:** SpaceY's **first** bullet losing
+  its cargo number. That is the failure route 2 would have caused, and it is the
+  reason the preset is untouched — check it every time you look at a sponsor
+  screen.
+
+## 2b · Ordering — the language switch costs a restart, so do each language once
+
+§2 lists the readings but not the order, and the wrong order pays for the restart
+twice. ⚠️ **The two `C51` readings need a loaded save** (a terraforming overview
+to open, and a **Universal Rocket** present for the *Back to Earth* rollover),
+while all three `C50` sites are **pre-game**. So:
+
+1. **English, pre-game:** sites 1 and 2 (and 3 if taken).
+2. **English, in-game:** load a save that has a rocket → terraforming overview →
+   *Back to Earth* rollover. ⛔ Expect **no visible change** — that is the reading.
+3. **Switch to German, restart.**
+4. **German, pre-game:** the same sponsor readings — the bullet's borrowed
+   sentence should now be German.
+5. **German, in-game:** reload the same save → the same two `C51` screens, now in
+   German. ⭐ This is the only step in the chain that can see `C51` at all.
+6. **Switch back to English, restart**, confirm normal.
+
+⚠️ **Pick the save before the sitting starts** and say which it is in the report —
+`EF-056` pre-copy applies to it, and hunting for a rocket mid-sitting is how a
+thirty-minute plan becomes ninety.
 
 ## 3 · After the sitting
 
