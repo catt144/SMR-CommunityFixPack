@@ -86,6 +86,31 @@ completed tests move whole to
     1.0.1-or-later.** ⛔ All of them touch `Code/`, so building any of them before
     the upload breaks byte-identity with what run B packed and re-opens the gate.
 
+    ⭐⭐ **UPDATE, same day — you asked me to go deeper on `C50`, and the deep
+    reading changed the answer twice.** Full derivation in `agent/bugs/C50.md`
+    ("REPAIR-ROUTE ANALYSIS"); the three things that matter to your decision:
+
+    * ⛔ **The safe-looking fix I described this morning is NOT safe here.**
+      Appending to the description turns it into a "concatenated" string, and the
+      game's own text function *throws away the lookup table* when it sees one —
+      so SpaceY's first bullet, which fills in its rocket's cargo number from that
+      table, would lose the number it prints. **Breaking bullet 1 to complete
+      bullet 3 is not a repair.** Both facts read at source this session.
+    * ⭐ **But there is a route that survives, and it is better than "one English
+      line".** Leave the sponsor text alone and add our bullet in the *screen* that
+      shows it (two places show it). And the added bullet does **not** have to be
+      English: the game already ships a translated sentence for exactly this —
+      *"Maximum number of Drones a Drone Hub can control"* is a real record in all
+      nine languages (I read the German). Even the number can come from the game's
+      own table, so it stays right if a patch ever changes the base value. ⇒ **a
+      fully translated bullet, no English anywhere, nothing rewritten.**
+    * ⚠️ **So the decision is not technical any more — it is editorial.** Nothing
+      behaves wrongly; the +20 is granted either way. This would be the first fix
+      in the pack that **writes a sentence the developers never wrote**, rather
+      than correcting one they got wrong. That is a *judgment call* in our own
+      sense of the word, and your description on the store page says how many of
+      those the pack contains.
+
 ### ✅ 2026-08-20 — your two rulings are carried out. Nothing owed back; this is the receipt.
 
 55. ✅ **Both sibling decisions are done, in the siblings' own repos, and neither
