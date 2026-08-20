@@ -69,6 +69,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Rules in force (owner rulings; bodies in checklist/SESSION_LOG)
 - Ship line FROZEN (08-12): `fixed` + suite + self-checks + verified save-safety IS the bar.
 - A green suite does NOT authorise an upload — config B is the gate (08-17).
+- ⛔ **The gate was ONE-TIME, not a per-change tax (08-20, item 57).** Post-release = patch-note-driven
+  maintenance: `items.lua` entry (H-10) + one boot `applied` log + doccheck counts. ⛔ Never quote
+  `FIX_POLICY` §3a's per-module cost for a single added fix — run B / lens sweep / audit return only for a
+  **major overhaul**.
 - Both-mods-loaded is the rig's normal config (08-12).
 - Status words: `tested-attended`/`tested-unattended`; bare `tested` = legacy, closed to new work,
   never bulk-upgraded (08-15). Screen claims need an attended witness.

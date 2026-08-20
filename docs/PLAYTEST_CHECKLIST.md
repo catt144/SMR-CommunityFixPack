@@ -29,6 +29,40 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚖️⚖️ 2026-08-20 — YOU RULED THE POST-RELEASE TESTING MODEL, and corrected a cost I had been quoting wrong.
+
+57. ⚖️ **STANDING RULING — the release gate was a one-time cost, not a per-change
+    tax.** Your words: *"I do not plan to do a major lens sweep and b leg like we
+    did for pre release unless we have to do a major overhaul of the mod again…
+    My post release plans is basic checks from patch notes to see if we need to
+    remove, or change fixes, and add new fixes if there are new bugs. We won't
+    most likely run multi day tests ever again."*
+
+    ⛔ **This corrects me, and future sessions should not repeat my error.** I
+    priced a single UI-text module using `FIX_POLICY` §3a's per-module cost —
+    save-safety pass, probe, suite re-measure, three store surfaces. Most of that
+    was the **release gate amortised across 75 modules**, and it does not recur
+    for one added fix on a shipped mod. Quoting it made a cheap change look
+    expensive, which is the opposite of useful.
+
+    ✅ **What a normal post-release change actually owes**, and it is short:
+    * the `items.lua` entry for any new module (**H-10** — this is the one that
+      would have shipped a fix that never loads; it is a ten-second check, and it
+      is not ceremony);
+    * one boot log showing the new module reports `applied`;
+    * a language-switched look **only** for a fix that cannot be seen in English
+      (`C51` is the sole example on the books);
+    * `doccheck` counts re-emitted, never hand-typed.
+
+    ⛔ **What does NOT recur:** run B, the eight-lens sweep, the terminal audit,
+    the multi-day gate. Those bought a first impression, which happens once.
+    ⇒ They come back only for what you named: **a major overhaul.**
+
+    ℹ️ Your other observation, recorded because it is the pack's premise: *"if
+    paradox tested as extensively as we do as the actual paid developer, there
+    would be no need for us."* The bar being higher than the developer's was right
+    for the launch; it is not right for every later line of text.
+
 ### ⭐ 2026-08-20 — C49 is RETIRED on your word, and I measured how hard C50/C51 actually are. Item 34's "now or after" is still yours.
 
 56. ✅ **`C49` → `wontfix — unreachable`, done.** Your words: *"c49 wontfix -
