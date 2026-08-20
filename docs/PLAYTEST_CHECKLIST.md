@@ -138,12 +138,19 @@ completed tests move whole to
       nine languages (I read the German). Even the number can come from the game's
       own table, so it stays right if a patch ever changes the base value. ⇒ **a
       fully translated bullet, no English anywhere, nothing rewritten.**
-    * ⚠️ **So the decision is not technical any more — it is editorial.** Nothing
-      behaves wrongly; the +20 is granted either way. This would be the first fix
-      in the pack that **writes a sentence the developers never wrote**, rather
-      than correcting one they got wrong. That is a *judgment call* in our own
-      sense of the word, and your description on the store page says how many of
-      those the pack contains.
+    * ⛔ **~~So the decision is not technical any more — it is editorial… that is a
+      *judgment call* in our own sense of the word.~~ WRONG, AND YOU OVERTURNED IT
+      THE SAME HOUR.** You said a genuine defect is by definition a bug, and our
+      own published definition agrees with you: a judgment call is one that
+      *"required deciding what the game meant"*, where *"there is no coding
+      error"* or where *"we added a behaviour the game does not have"*. **Neither
+      applies.** The 5-of-6 sponsor control settles what the game meant, and the
+      `+20` is granted and working — the description contradicts the preset it
+      lives in, which is your store card's own test. The pack also **already**
+      ships a description repair (`Fix_TechDescriptionBuilding`, F25) that carries
+      no judgment-call mark. ⇒ **`C50` is a plain repair, and the "five judgment
+      calls" line on your store page does not move if it ships.** Correction
+      recorded in `agent/bugs/C50.md`.
 
 ### ✅ 2026-08-20 — your two rulings are carried out. Nothing owed back; this is the receipt.
 
