@@ -118,4 +118,54 @@ GREEN · `git rm` this file · push.
 
 ## Notes from upstream
 
-- *(link 1 appends here)*
+- **2026-08-20, link 1 (`C51`, built and consumed).** Counts after link 1, emitted:
+  **76 registered modules · 77 `Code/*.lua` · 97 probes**. You make it **77 / 78**;
+  the probe count moves only if you add one.
+- ⛔ **`python tools/split_bugs.py --write` ABORTS** ("no entry headings found — is
+  this the pre-split file?") — it is the one-time migration tool, not the
+  regenerator, despite what `INDEX.md`'s line-1 banner says. A status flip DOES
+  change the index row (the status column is derived, not the frozen `row_status`
+  cell), so `doccheck` goes RED until you rewrite it. What works, and produces
+  exactly the bytes `doccheck` compares against:
+  ```python
+  import sys, io; sys.path.insert(0, 'tools')
+  import split_bugs as sb
+  lines = sb.render_index(sb.load_from_dir())
+  io.open('docs/agent/bugs/INDEX.md','w',encoding='utf-8',newline='\n').write('\n'.join(lines)+'\n')
+  ```
+  Then `git diff --stat` it: **one row should change.** Expect a new
+  `warn C50: the frozen index-row cell says 'filed', entry says 'fixed'` — that
+  warn is the house pattern for every flipped entry (`C43`, `F100`), not a problem.
+- **Insertion point in both lists:** immediately before `Code/90_SaveSanitizer.lua`,
+  which must stay LAST. `upload_preflight` proves the two lists agree; it read
+  **0 FAIL, 77 entries in order** after link 1.
+- ⭐ **Your `EF-039` ground is firmer than the entry says, and it is worth reading
+  before you pick route C.** Link 1 re-derived the packs and went one step past the
+  citations: `TranslationTable` is populated for **every row in a pack, in every
+  language**, because `csv_load_fields` maps CSV col 2 → `text` / col 3 →
+  `translated_new` (`CommonLua/Core/localization.lua:920`) and `ProcessLoadedTables`
+  (`:938-960`) resolves **English** as `{ translated_new, TEXT, translated }`. So an
+  empty `Translation` column in `English.fpk` (22,266 of 23,090 rows have one) is
+  **not** a missing record — it falls back to the English source. ⇒ any id present in
+  the pack resolves in all nine languages, and `shipped_T .. Untranslated("…")`
+  concatenation therefore appends to real translated text everywhere, not just where
+  a translator filled a cell. Full derivation: `agent/bugs/C51.md`, the
+  *RE-DERIVED 2026-08-20* section.
+- **The extractor is seconds, use it:** `sys.path.insert(0,'tools'); import
+  flpk_extract as fx; fx.extract(r'A:\SteamLibrary\steamapps\common\Project Spark\Local\German.fpk', out)`.
+  ⚠️ `Game.csv` is **43,110 physical lines but 23,090 CSV records** — quoted fields
+  carry newlines. Do not quote the line count as a record count; the entry used to.
+- ⚠️ **`Src` is under the install dir literally named `Project Spark`** (`EF-014`);
+  the `Surviving Mars` folder's `ModTools` has no `Src` and is a decoy. Confirmed
+  again this session.
+- **The TestKit is a SEPARATE REPO** (`C:\Dev\SMR-BugFixPack-TestKit`), so a probe is
+  its own commit and its own push — `doccheck` only report-warns on its dirty tree.
+  Link 1 took wave **12** (`Code/62_Probes_Wave12.lua`, registered in that repo's
+  `metadata.lua` `code` list); you are wave **13** if you add one.
+- **House shape for a class-method wrap, now proven out in `Fix_LocalizedUIText`:**
+  mod code loads while `_G.<Class>` is still the **classdef** (`classes.lua:71`,
+  swapped for the built class at `:1085`), so an `apply()`-time wrap is a
+  classdef-time install and propagates through flattening — which is what makes it
+  reach subclasses. ⛔ Do not assume a target has one implementor:
+  `customUniversalRocket` turned out to have **five subclasses** that declare no
+  `Init` of their own, and the brief's "one caller each" note did not mention them.

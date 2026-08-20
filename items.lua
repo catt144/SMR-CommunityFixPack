@@ -334,6 +334,13 @@ return {
 		'name', "Fix_AutomationLawCompensation",
 		'CodeFileName', "Code/Fix_AutomationLawCompensation.lua",
 	}),
+	-- Added 2026-08-20 (close-out chain, link 1 — C51). Written by hand, in the
+	-- same position it takes in `metadata.lua`'s `code` list, per the header
+	-- above and H-10: a module absent from this file SHIPS ABSENT.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LocalizedUIText",
+		'CodeFileName', "Code/Fix_LocalizedUIText.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",

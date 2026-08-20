@@ -9,7 +9,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Now
 - ⭐⭐ **Release = the fix pack ALONE at 1.0.0 (owner 08-17).**
 - ⭐⭐ **④ upload sitting PAUSED mid-sitting on the owner's word — NOTHING IS PUBLISHED.** Upload is owner-attended.
-- ⛔⛔ **NEXT = the close-out chain `agent/prompts/closeout-1.0.0/` (5 links), owner-ruled 08-20 (checklist 58):
+- ⛔⛔ **NEXT = the close-out chain `agent/prompts/closeout-1.0.0/` (5 links; ⭐ link 1 CONSUMED 08-20 —
+  `C51` BUILT and ⛔ UNOBSERVED), owner-ruled 08-20 (checklist 58):
   `C50`+`C51` ship IN 1.0.0, `C52` is `parked`/FROZEN.** Link 4 is an attended ~30-min sitting; link 5 (Fable)
   audits, MOVES THE TAG and rules ship-or-revert. ⛔ The upload waits for link 5, then the owner.
   ⚠️ **Two modules will change the shipping surface** ⇒ ⛔ STATE's `.fpk` line below (md5 `8dcb0692…`, 80/80)
@@ -90,9 +91,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 75 registered (75 default-active, 0 optional-gated files)
-- Code/*.lua files: 76
-- TestKit probes: 96
+- modules: 76 registered (76 default-active, 0 optional-gated files)
+- Code/*.lua files: 77
+- TestKit probes: 97
 - BUGS index rows: 103 F + 12 D + 53 C
 ```
 Re-emit after any change; game pinned **1.0.7.396349** (`EF-014`).
