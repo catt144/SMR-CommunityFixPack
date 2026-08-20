@@ -9,6 +9,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Now
 - ⭐⭐ **Release = the fix pack ALONE at 1.0.0 (owner 08-17).**
 - ⭐⭐ **④ upload sitting PAUSED mid-sitting on the owner's word — NOTHING IS PUBLISHED.** Upload is owner-attended.
+- ⛔⛔ **NEXT = the close-out chain `agent/prompts/closeout-1.0.0/` (5 links), owner-ruled 08-20 (checklist 58):
+  `C50`+`C51` ship IN 1.0.0, `C52` is `parked`/FROZEN.** Link 4 is an attended ~30-min sitting; link 5 (Fable)
+  audits, MOVES THE TAG and rules ship-or-revert. ⛔ The upload waits for link 5, then the owner.
+  ⚠️ **Two modules will change the shipping surface** ⇒ ⛔ STATE's `.fpk` line below (md5 `8dcb0692…`, 80/80)
+  and `RELEASE_PORTAL_PREP` §0.5(f) go STALE the moment link 1 commits; link 3 owns correcting them (expect **82**).
+- ⇒ **After link 5 this repo is CLOSED** — no queued 1.0.1; next effort is the **opt-in pack** (owner 08-20).
 - ⭐⭐ **99b VERDICT REVIEW consumed 08-19 — ruling UPHELD.** Run-B criteria, the act-1 core-fix reads and two
   audit verifications re-derived from primary evidence; only wording broke (VR-1…VR-6, chain `SWEEP_FINDINGS.md`).
   **The upload now waits on the owner alone** (checklist 54; delivered-bytes check added, PORTAL_PREP §0.5(f)).

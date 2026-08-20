@@ -29,6 +29,56 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐⭐ 2026-08-20 — THE PLAN CHANGED ON YOUR RULING: C50+C51 ship IN 1.0.0, C52 is frozen, and the chain that closes this repo is written and waiting.
+
+58. ⭐⭐ **Your ruling, and what is now sitting ready.** *"C52 is going frozen may
+    revisit at a later date. C50-C51 we are going to close out and launch. With
+    basic testing. One chain to do both, with a testing chain right before the
+    fable audit… I don't want to upload and move right into 1.0.1 work. I would
+    rather shift resources and start working on the opt in."*
+
+    ✅ **`C52` is `parked` — frozen, reversible, and fenced.** No session may open
+    it without a fresh word from you. ⚠️ One piece of it is *not* parked because it
+    is not a code fix: the mod browser caches preview art on **id + version**, so
+    if you ever replace the preview after publishing **without a version bump**,
+    everyone who already saw it keeps the old picture forever. That lives on the
+    upload sheet now.
+
+    ⭐ **The chain is written: `agent/prompts/closeout-1.0.0/`, five links.**
+
+    | # | link | needs you? | what it does |
+    |---|---|---|---|
+    | 1 | build `C51` | no | the three untranslatable strings |
+    | 2 | build `C50` | no | the SpaceY bullet |
+    | 3 | surfaces | no | the two fix-list entries, counts, the stale pack fingerprint |
+    | 4 | ⭐ **the sitting** | **YES, ~30 min** | the only eyes either fix ever gets |
+    | 5 | Fable audit | no | breaks it, moves the tag, rules ship-or-revert |
+
+    **Kick off link 1 with:** `docs/agent/prompts/closeout-1.0.0/01_BUILD_C51.md`
+    — each link ends by handing you the next line, and link 5 ends by handing you
+    the opt-in.
+
+    ⭐ **What your sitting in link 4 actually is:** one launch. Check both modules
+    say `applied`; look at SpaceY's description on the sponsor screen (the new
+    bullet, *and* the first bullet's cargo number, which is the one thing that
+    could have broken); glance at the terraforming panel and the rocket's *Back to
+    Earth* rollover, where you should see **no change at all**; then switch the
+    game to German, look at the same three things, and switch back. ⭐ That German
+    look is the only way `C51` is visible to anybody, and it is also the first time
+    this project will have watched a translated string render in another language
+    — a gap our own records have carried open since 2026-08-02.
+
+    ⚠️ **Two consequences of building before launch, stated up front, neither a
+    surprise:** the release tag will **move** in link 5 (it currently marks bytes
+    measured in run B, and two new modules invalidate that), and the recorded pack
+    fingerprint — the md5 you were told to checksum your download against — goes
+    stale, so link 3 rewrites that check to use the md5 recorded when *you* pack.
+    ⛔ Nothing about the upload route changes: still Paradox first, still
+    `IsDirty()` false and 1.0.0 on screen before anything is pressed.
+
+    ⇒ **After link 5 this repo is closed** — nothing queued, nothing owed, until a
+    player report, a real problem, or a game patch. Which is the point.
+
 ### ⚖️⚖️ 2026-08-20 — YOU RULED THE POST-RELEASE TESTING MODEL, and corrected a cost I had been quoting wrong.
 
 57. ⚖️ **STANDING RULING — the release gate was a one-time cost, not a per-change
