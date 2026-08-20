@@ -174,7 +174,7 @@ UI-only), so a player on an older game build loads the pack gated only by its
 own shape checks. Reachability low (Steam auto-updates; the final SM patch is
 years old); no action, recorded so nobody re-derives it.
 
-### (d) ⭐ Two ids get written back, and they are how updates find the store entries
+### (e) ⭐ Two ids get written back, and they are how updates find the store entries
 
 The forced saves write `pdx_id` / `PdxMod` / `pdx_version` and `steam_id` into
 `metadata.lua`. **Commit them.** Losing them means a future update cannot target
