@@ -29,6 +29,63 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐ 2026-08-20 — C49 is RETIRED on your word, and I measured how hard C50/C51 actually are. Item 34's "now or after" is still yours.
+
+56. ✅ **`C49` → `wontfix — unreachable`, done.** Your words: *"c49 wontfix -
+    unreachable is right, get it off our list and retire it."* The entry keeps the
+    reading and records the retirement, with the one falsifier that would bring it
+    back named: non-vanilla code assigning `show_overlay = "soil_solid"` — a mod
+    or the console, which is the only route there has ever been.
+
+    ⭐ **And I stopped guessing at C50/C51 and went to the shipped language data.**
+    You said these look simple and that fredware's modules should let us validate
+    quickly. **Half right, and the half that isn't is the important one.** Every id
+    below was looked up this session in the real `German.fpk`, extracted with our
+    own tool:
+
+    | id | who uses it | in the German pack? |
+    |---|---|---|
+    | `914616772802` | the terraforming heading's *unused* record | ✅ *TERRAFORMING-GESAMTFORTSCHRITT* |
+    | `407456913268` / `316233855405` | *Back to Earth* title/text, unused records | ✅ *Zurück zur Erde* / full sentence |
+    | `885571832096` / `807999655245` | the ids the button **actually** uses | ⛔ **absent — 0 hits, both** |
+    | `880574954148` | SpaceY's shipped description | ✅ present and translated |
+    | `981267450064` | **fredware's replacement SpaceY text** | ⛔ **absent — 0 hits** |
+
+    * ✅ **`C51` is as simple as it looks, and it is loss-free.** Nothing is
+      re-worded — three UI elements get pointed at ids whose translations already
+      ship. I verified the two hook points at source myself: `TerraformingOverall`
+      and `customUniversalRocket` are both real classes with an `Init`, and the
+      rocket button carries `Id = "idBackToEarth"`, so that half needs no text
+      matching at all. It writes nothing to a save. ⚠️ **Two catches, both small.**
+      The terraforming heading has *no* Id, so the only handle is its literal
+      English text — fine on a frozen game, fragile in principle. And **an English
+      player sees no change whatsoever**, so proving it works means switching the
+      game to another language for one look. Scope is exactly three strings; the
+      *COLONY DATA* heading and two Options strings have no record in any pack and
+      are a different, bigger job.
+    * ⛔ **`C50` is the opposite: trivial defect, no free fix — and fredware's
+      module is the one route we must NOT copy.** Their fix swaps the description
+      for `T(981267450064, …)`, and that id is in **no** language pack, so under
+      `EF-039` all eight non-English languages would render the English literal.
+      Our entry predicted this; the lookup above confirms it. What is left: append
+      an untranslated English sentence to the shipped translated text (safe, but
+      one English line inside eight translated descriptions), or ship our own
+      per-language table (`ModItemLocTable`, which overrides the shared table for
+      vanilla and every other mod), or leave it. ⇒ **This one is a judgement call
+      about which harm you accept, not a coding problem, and no amount of testing
+      settles it.**
+    * ⚠️ **`C52` — your memory is right, it is the risky one.** Three defects, and
+      only one is cleanly ours: re-enabling the hyperlink path *may reinstate the
+      fault the developers' comment was working around; the thumbnail cache is not
+      fixable from a mod at all (it is upload discipline — bump the version when
+      you swap art); and even the screenshot loop's diagnosis differs from theirs,
+      because our own `EF-008`/`EF-064` refutes their stated mechanism.
+
+    ⇒ **Still your call and unchanged in shape: `C51` is a genuinely small, safe
+    module; `C50` needs a ruling from you before anyone writes a line; `C52` is
+    1.0.1-or-later.** ⛔ All of them touch `Code/`, so building any of them before
+    the upload breaks byte-identity with what run B packed and re-opens the gate.
+
 ### ✅ 2026-08-20 — your two rulings are carried out. Nothing owed back; this is the receipt.
 
 55. ✅ **Both sibling decisions are done, in the siblings' own repos, and neither
@@ -1216,6 +1273,9 @@ owed input stays here no matter how struck-through it looks.
     from me either way: **`C49` should be flipped to `wontfix — unreachable`**,
     which is what our own policy says for a defect no player can reach. Say the
     word and it is a one-line change.
+    ✅ **RULED AND DONE 2026-08-20 — `C49` is retired `wontfix — unreachable`.**
+    The C50/C51/C52 complexity you asked about the same day is measured in
+    **item 56**; the "now or after" question here is still open.
     → `agent/prompts/SMRCF_CHAIN_SET.md` has the map and the kickoff lines.
 
     ⚠️⚠️ **AND ONE THING THAT IS *NOT* POST-LAUNCH — I FOUND STALE TEXT ON THE
