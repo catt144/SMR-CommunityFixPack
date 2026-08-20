@@ -2,114 +2,42 @@
 
 Kernel only: status + pointer, never derivation.
 Eviction procedure: `agent/prompts/STATE_EVICTION.md` (byte-budgeted by doccheck; owner ruling, checklist 42).
-History newest-first in `docs/archive/SESSION_LOG.md`; full pre-eviction STATE = `git show d30a10d:docs/agent/STATE.md`.
+History newest-first in `docs/archive/SESSION_LOG.md`; full pre-eviction STATE = `git show 2a7ba46:docs/agent/STATE.md`.
 Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `docs/README.md`.
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
 - ⭐⭐ **Release = the fix pack ALONE at 1.0.0 (owner 08-17).**
 - ⭐⭐ **④ upload sitting PAUSED mid-sitting on the owner's word — NOTHING IS PUBLISHED.** Upload is owner-attended.
-- **Active: pre-launch sweep chain `agent/prompts/prelaunch-sweep/`.**
-  - Links 1–4 consumed: L1 structure · L2 lifecycle · L3 save/exit · L4 player experience.
-  - **97 verification-launch interlude consumed 08-19** (no lens, rotation intact): 3 retail autorun legs,
-    `reports/97_VERIFICATION_LAUNCH.md`, logs `archive/vl97a/b/c_*`.
-  - **Link 5 consumed 08-19: L5 failure/containment**, no launch (refusal reasoned: every open
-    question needs the pack to throw, and `Code/` edits, probes and the console are all barred).
-  - **Link 6 consumed 08-19: L6 promise vs behaviour**, no launch (refusal reasoned: its two open
-    questions need mod code that reads an undeclared global, and a second mod loading in an
-    order nobody can set). ⛔ **It found and FIXED the chain's first launch blocker** (`36d8817`).
-  - **Link 7 consumed 08-19: L7 environment & namespace**, no launch (refusal reasoned: the live `_G`
-    is the only remaining evidence and console/probe/instrument are all barred; the packed case IS run B).
-    Global map taken from the COMPILER (`tools/l7_env_map.py`, Lua 5.3 bytecode, control 23/23).
-  - **Link 8 consumed 08-19: L8 adversarial/hostile modder — ⛔ THE CAP; the lens pool is EXHAUSTED.**
-    No launch, and the refusal is an owner-costed **ask**, not a decline: the only foreign-wrapper
-    observation available is a both-packs leg needing an owner tick (`H-08`); recommended AFTER run B.
-    Instruments `tools/l8_hostile_input.py` (2 controls) + `tools/l8_deference_map.py` (selftest 11/11).
-    Amended `EF-058` in place (the trap is keyed on install time; mod load precedes flattening).
-  - ⛔ **Launch blockers found so far: 1, fixed.** Artifacts `reports/L1..L8_*.md`; fact `EF-065`.
-  - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
-  - **Launch rehearsal consumed 08-19** (no lens, rotation intact) — stage 1 green, **stage 2 owner-blocked**;
-    no launch, no `EF-056` exposure, rig untouched. Its gate block is below.
-  - ⭐⭐ **TERMINAL AUDIT CONSUMED 08-19** (`reports/99_TERMINAL_AUDIT.md`; brief deleted). Part A = the
-    owner-designed fan-out (10 adversarial verifiers). **Verdict: UPLOAD, on convergence clause 3 (the cap,
-    named as such).** 3 findings refuted (L1-F3 phantom — `Done` is a CombineMethod; L3-F2's charge;
-    L8-F4's deference census — tool quarantined), StaleReservations per-item guard REOPENED (the act-1
-    measurement never covered its plain loop), console-story mechanism inverted-and-solved (retail console
-    IS blacklist-governed, `console.lua:45-56`), EF-055/EF-065 amended, preset-field surface swept CLEAN
-    (9 writes/6 modules, 0 collisions, 0 foreign fields, `tools/audit_preset_fields.py`). Hardening queue
-    routed = checklist 53 (recommend defer to 1.0.1). Archive absorbed to 80 logs (`sit0817_*`,
-    `runBprep_*`, `runBc9_*`).
-  - ⛔⛔ **Next = `99b_VERDICT_REVIEW_fable.md` — an independent session tries to break the verdict
-    BEFORE it is acted on. The upload waits on 99b, then the owner.**
-- ⛔ **Gate B criterion 1 fixed 08-19** (it read "packed" off lines equally true unpacked); now `Mod.lua:1849`'s
-  mode line. Audit recount: **69 unpacked + 7 no-mode-line; zero packed before run B** (the "66/66" was an
-  under-count of the same fact). ⚠️ Junction + packed folder both present ⇒ **unpacked WINS** at equal
-  version (`Mod.lua:1770`), silently.
-- **Namespace settled 08-19 (source):** the pack owns **5** globals (3 + 2 `GameVar`s), writes 21 vanilla
-  names, trips **neither** engine assert, creates **zero** env shadows, never reads `Platform`; pack and
-  TestKit are **disjoint on writes both ways** and the pack reads nothing the kit provides (first such
-  evidence in 7 links). `content_path` is `Mod/<id>/` **packed and unpacked alike** — closes an L5 worry.
-- ⛔ **`items.lua` is a RELEASE GATE, not bookkeeping** (08-19): `SaveDef` rebuilds `metadata.lua`'s
-  `code` list SOLELY from its items (`Mod.lua:816-840`, `:973`) and BOTH portals force that save on a
-  first upload — Steam's runs BEFORE packing. A module absent from `items.lua` ships absent.
-  `upload_preflight` now compares the ordered lists; its old guard counted its own header comment.
-- ⭐ **The pack HAS now run post-`2f077e8`:** 72/0/24/0 of 96 opt-in-absent, `75/75` active, 0 FAIL, 0 dialog;
-  88 of 96 probes hold their exact verdict vs the pre-fix baseline `c47suite4`. Apply cost 75 modules ≈0.57 s.
-- ⛔ **Still UNVERIFIED (needs ONE console sitting — now checklist 52 act 1, which supersedes 44's ordering):**
-  `2f077e8` fix ① (mark unreadable while the entry ends `active`) · fix ② + L2's reload prediction + link 2's
-  `data_edited` memo (all need one `ReloadLua`) · L5's `MapForEach` line. ⚠️ Run the reload at the **main menu**:
-  `DbgPackMod` reloads Lua before packing (`GedModEditor.lua:713`) and a mid-game reload is L2's unmeasured case.
-- ⭐⭐ **ACT 1 DONE 08-19 (attended). BOTH `2f077e8` core fixes PROVEN; archive built + verified 80/80.**
-  `98_LAUNCH_REHEARSAL.md` un-parked; ⛔ **still NOT consumed — run B is UNSCORED**; owner script = **checklist 52**.
-  - Fix ① `update_suspect nil`; fix ② `order 75` (**not 150**) after a real `Reloading done in 1358 ms`.
-    L5 `AllMapsForEach` = `true 2085` ⇒ the C loop absorbs a per-object error and carries on; no fix wanted.
-  - ⛔⛔ **THE CONSOLE IS NOT A ROUTE, AND `ModEnvBlacklist` WAS THE WRONG DIAGNOSIS.** MEASURED on retail:
-    `DbgPackMod` **and** `ReloadLua` are **nil in `_G` at the console**, though both ship in `Lua.fpk` with
-    unconditional defs ⇒ the blacklist only ever explained *mod* code, never the console.
-    ⭐ **Only working route = the Ged UI:** Mods Manager → Edit (`Ctrl-E`) → Mod Editor → **File → Pack Mod**
-    (`ModEditor.lua:62-69`; `GedOpPackMod` → `DbgPackMod`, `GedModEditor.lua:863`). ⚠️ It loads a **scratch
-    colony**, so "pack at the main menu" is impossible — accepted, since that rule protected the owner's colony.
-    ⚠️ `MarsDebug.exe` is the **Ged host process**, not a build swap; retail `Mars.exe` was used throughout.
-- ⭐⭐ **RUN B RAN 08-19 (attended) — 9 of 10 criteria PASS, c9 UNRUN. ⛔ NOT a convergence call, not an upload OK.**
-  `1` **`packed from appdata`** (first ever; 66 archived all `unpacked`) · `2` **75 applied by name** ·
-  `3` **ZERO `[LUA ERROR]`** · `4` 0 `update report:` · `5` 2 screen events, **both vanilla + attributed**
-  (`Welcome to Mars`; *"missing or outdated: …Test Kit"*, our own untick) · `6` `v1.00-000` ·
-  `7` ⭐ **preview RENDERS packed** (attended, first test of the hand-written path) · `8` round trip
-  `C47FARM`→`c47farmreload`, witnesses reappear, 0 new errors · `10` saves 81→82, autosaves MD5-identical.
-  - ⭐⭐ **PACKED ≡ UNPACKED at module level: the 75 applied names are SET-IDENTICAL to `vl97a`** (0 either side).
-  - ⭐ **`c9` RAN: uninstall holds for all 75 at once** — all defs *"present, but not loaded"*, **0 pack output**,
-    0 errors across load/sols/save/reload (`c47farmnomod`). ⇒ ⭐⭐ **10 of 10.**
-  - ℹ️ `C47FARM`'s header says the pack was `v1.00-001` and `MeteorFrequency` healed `latch 1.0.1 -> 1.0.0`
-    (`Fix_MeteorFrequency.lua:178`) ⇒ that save predates the version reset. **Dev-rig history, nothing shipped**;
-    F88's one-shot heal firing correctly on it is a pass, not a fault.
-- ✅ **RIG RESTORED (08-19)**: staged packed folder deleted, all **3 junctions** present. ✅ **Fix pack +
-  TestKit RE-TICKED** (observed: live log 21:23, both loading unpacked, 0 errors — the earlier "all three
-  unticked" line was stale); opt-in still off (checklist 43). Archive kept at
-  `%LOCALAPPDATA%\Temp\…\ModUpload\Pack\ModContent.fpk` (362,894 B, `8dcb0692…`) — audit re-verified
-  **80/80 byte-identical** to the tagged tree.
-  ⚠️ **`EF-055`/`H-08` NARROWED (measured):** a junction pull costs the enable when the **id vanishes**; swapping
-  folder-for-folder under the **same id KEEPS** it — no re-tick was needed for the packed swap.
-  - ⛔ **B has NO DRIVER** — every unattended primitive lives in the TestKit and B turns it off ⇒ criteria
-    **5/7/8/9 are owner work**; 1/2/3/4/6/10 survive a boot-and-close leg. **Two game sessions, not one visit.**
-  - ⭐ **Packer is byte-faithful** (all 80 extracted: 78 identical to disk, the 2 = `git diff 7824cbc..HEAD`).
-    `tools/pack_predict.py` reproduces the real 08-17 `.fpk` **80/80**; `tools/pack_list.py` reads+reconciles.
-    ⚠️ That `.fpk` EXISTS (`TmpData`, 08-17 19:34, built via **Ged**, not console) but predates `2f077e8` — rebuild.
-  - ✅ `CheckModPackSignature` ⇒ `Platform.playstation` = false on PC ⇒ **packed branch IS taken** (closes L7 item 4).
-  - ⚖️ Criteria audited before scoring, **4 of 10 repaired**: c2's derivation gave 74 (truth **75 = 76 − `00_Core`**
-    alone; `90_SaveSanitizer` DOES emit `applied`) · c6 wanted `1.0.0`, the log prints **`v1.00-000`** · c3's "any
-    third site fails" refuted (4 attributed non-`Flight` sites; **21/73** carry ≥1, **52 none**) · c5 half log-decidable.
-  - Every suite number ever taken is unpacked, TestKit-on, single-load (L2). Baseline `80/0/16/0` of 96
-    (`archive/c47suite4_*`), gates `75/75`+`8/8`; rig runs cheats.
+- ⛔⛔ **Next = `agent/prompts/prelaunch-sweep/99b_VERDICT_REVIEW_fable.md`**, an independent session that tries
+  to break the audit's verdict BEFORE it is acted on. **The upload waits on 99b, then the owner.**
+- ⭐⭐ **Terminal audit consumed 08-19 — verdict UPLOAD**, taken on convergence clause 3 (the cap, named as a cap,
+  not as cleanliness). Record `reports/99_TERMINAL_AUDIT.md`; owner-facing = checklist 53.
+- ⭐⭐ **Release gate PASSED: run B scored 10 of 10** (08-19, attended; packed, TestKit off, opt-in off).
+  ⭐ **Packed ≡ unpacked at module level** — the 75 applied names are set-identical to the unpacked leg.
+- ⭐⭐ **Both `2f077e8` core fixes PROVEN in a running game** (act 1, attended): `update_suspect` nil, `#order` 75.
+- **Pre-launch sweep chain `agent/prompts/prelaunch-sweep/` is CLOSED — links 1–8 consumed, lens pool EXHAUSTED**,
+  plus 2 no-lens interludes (97 verification launch, 98 launch rehearsal). ⛔ **1 launch blocker, found and fixed.**
+  - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md` · reports `reports/L1..L8_*.md`,
+    `97_VERIFICATION_LAUNCH.md`, `98_LAUNCH_REHEARSAL.md`. STATE carries no link verdicts (H-05).
+- ⭐ **Shipping artifact:** `.fpk` 362,894 B, md5 `8dcb0692…`, at
+  `%LOCALAPPDATA%\Temp\…\ModUpload\Pack\ModContent.fpk` — **80/80 byte-identical** to the tree tag `fixpack-v1.0.0`
+  marks. Predictor `tools/pack_predict.py`, reader `tools/pack_list.py`, upload guard `tools/upload_preflight.py`.
+- ⛔ **The console is NOT a route to pack or reload** — `DbgPackMod`/`ReloadLua` are both nil in `_G` at the retail
+  console (measured). Only route = Mods Manager → Edit (`Ctrl-E`) → **File → Pack Mod**; ⚠️ it loads a scratch colony.
+- ✅ **Rig restored 08-19:** all 3 junctions present, fix pack + TestKit re-ticked, opt-in pack still OFF
+  (checklist 43). Rig runs cheats. Baseline suite `80/0/16/0` of 96 (`archive/c47suite4_*`), gates `75/75`+`8/8`.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
-  34 (C49–C52 timing; QA owed first) · 37 Q1 (mirror core fixes to opt-in) · 37 Q2 (Steam version, after Paradox) ·
-  39 (dialog re-fire) · 40 (`smr_shuttles` name) · 41 (dialog wording + sweep cap 5→8).
-- Watches: C47 speed thread (descending ladder, unrun) · C48 CANDIDATE (opt-in territory; no seed-family fix code here,
-  08-16) · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 post-release · EF-051 falsifier = any stray save at next launch.
+  53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
+  wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
+  40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q1 (mirror core fixes to opt-in) · 37 Q2 (Steam, after
+  Paradox) · 34 (C49–C52 timing; QA owed first).
+- Watches: C47 speed thread (descending ladder, unrun) · C48 CANDIDATE (opt-in territory; no seed-family fix code
+  here, 08-16) · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 post-release · EF-051 falsifier = any stray save.
 
 ## Hazards — each names an action an agent could take unattended; never do it
-- **H-01** Tag `fixpack-v1.0.0` was MOVED by the terminal audit (08-19, brief §9 authority) onto its
-  close-out commit — shipped surface byte-identical to the run-B-verified `.fpk` (80/80). It now marks
-  what actually gets packed. Never move it again without an equivalent gate.
+- **H-01** Tag `fixpack-v1.0.0` was MOVED onto its close-out commit by the terminal audit (08-19, brief §9
+  authority) and now marks what actually gets packed. Never move it again without an equivalent gate.
 - **H-02** `metadata.lua` is **FROZEN** at 1.0.0 — no version bump, no Mod Editor save
   (every editor save runs `version = version + 1`, `Mod.lua:967`).
 - **H-03** No script/console in a launched game may touch a portal API — the FIRST call **creates the listing**
@@ -119,18 +47,22 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   links 3+ RECORD ONLY except launch-blocking. STATE carries no link verdicts.
 - **H-06** `EF-056`: loading a COPY of a campaign still runs that campaign's autosave rotation and
   **deletes the owner's autosaves** — pre-copy every autosave first.
-- **H-07** The opt-in pack does **NOT** publish and gates nothing; ~46 parked references restore via
-  `reports/PARKED_OPTIN_REFERENCES.md` at ITS launch (obligation in that repo).
+- **H-07** Never restore the ~46 parked opt-in references here before the opt-in pack launches; that is ITS
+  launch obligation, recorded in that repo. Verbatim parking: `reports/PARKED_OPTIN_REFERENCES.md`.
 - **H-08** ⛔ **Pulling a mod's junction COSTS its enable and restoring the folder does NOT buy it back**
-  (`EF-055`, settled 08-19 with no Mod-Manager visit anywhere). Recovery = owner tick + restart, never an agent's.
-  Never pull one to reach a configuration without booking that cost. **The opt-in pack is in that state now**
-  (checklist 43).
+  (`EF-055`). Recovery = owner tick + restart, never an agent's. Never pull one to reach a configuration without
+  booking that cost. ⚠️ NARROWED 08-19: the cost lands when the **id vanishes**; a folder-for-folder swap under
+  the **same id KEEPS** the enable. **The opt-in pack is in that state now** (checklist 43).
+- **H-09** Never stage a packed folder beside a live junction to reach a packed reading: with both present at
+  equal version the **unpacked one WINS**, silently (`Mod.lua:1770`), and the leg measures nothing.
+- **H-10** Never add, rename or drop a `Code/*.lua` module without updating `items.lua` — `SaveDef` rebuilds
+  `metadata.lua`'s `code` list SOLELY from its items (`Mod.lua:816-840`, `:973`) and both portals force that save
+  on a first upload (Steam's BEFORE packing), so a module absent from `items.lua` **ships absent** (checklist 46).
 
 ## Rules in force (owner rulings; bodies in checklist/SESSION_LOG)
 - Ship line FROZEN (08-12): `fixed` + suite + self-checks + verified save-safety IS the bar.
 - A green suite does NOT authorise an upload — config B is the gate (08-17).
-- Both-mods-loaded is the rig's normal config (08-12); AMENDED inside the sweep chain only:
-  A/B readings are re-derived, never compared to three-mod baselines.
+- Both-mods-loaded is the rig's normal config (08-12).
 - Status words: `tested-attended`/`tested-unattended`; bare `tested` = legacy, closed to new work,
   never bulk-upgraded (08-15). Screen claims need an attended witness.
 - ⛔ SKIPs BY NAME, never a total.

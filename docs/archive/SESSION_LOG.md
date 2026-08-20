@@ -8,6 +8,132 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-19 — the pre-launch chain closed, the release gate passed, the verdict is UPLOAD; STATE evicted again
+
+tags: item-34 item-37 item-39 item-40 item-41 item-42 item-43 item-44 item-45
+item-46 item-47 item-48 item-49 item-50 item-51 item-52 item-53 F88 EF-014
+EF-051 EF-055 EF-056 EF-058 EF-065 2f077e8 7824cbc 91a444b 36d8817 2a7ba46
+d30a10d
+
+**Why this entry exists.** STATE.md crossed its warn cap again (13,607 B against
+9,216) and the whole of 08-19 — the busiest day the project has had — had never
+been archived. The owner fired `agent/prompts/STATE_EVICTION.md`. **The full
+pre-eviction file is preserved verbatim at
+`git show 2a7ba46:docs/agent/STATE.md`**, which remains the authoritative
+wording for every digest below; the previous grave is `d30a10d` (08-18 entry).
+
+Digests of the evicted efforts, newest first:
+
+- **08-19 — the TERMINAL AUDIT, and the verdict.** `reports/99_TERMINAL_AUDIT.md`
+  (brief consumed and deleted). Part A was the owner-designed fan-out: 10
+  independent verifier sessions, each briefed to *refute* rather than confirm.
+  **Verdict: UPLOAD**, taken on convergence clause 3 — the cap — and named as a
+  cap, not as cleanliness. Three findings refuted, one previously-settled item
+  REOPENED (the `Fix_StaleReservations` per-item guard: the act-1 console
+  measurement that cleared its two siblings never covered it, because it is a
+  plain loop and not a map walk), the console story inverted and then solved
+  (the retail console IS blacklist-governed, `console.lua:45-56`), `EF-055` and
+  `EF-065` amended in place, one measuring tool quarantined for flattering
+  itself, and the preset-field surface swept CLEAN (9 writes across 6 modules,
+  0 collisions, 0 foreign fields, `tools/audit_preset_fields.py`). The tag
+  `fixpack-v1.0.0` was MOVED onto the close-out commit under the brief's §9
+  authority — the shipped surface is byte-identical to the run-B-verified
+  package. The hardening queue was routed to the owner as checklist 53 with a
+  recommendation to defer the whole thing to 1.0.1; the archive was absorbed to
+  80 logs. ⛔ The verdict is NOT yet acted on: `99b_VERDICT_REVIEW_fable.md`
+  exists to try to break it first, and that review is what STATE now points at.
+- **08-19 — the release gate: act 1, then run B, 10 of 10.** Owner script was
+  checklist 52; the rehearsal that specified it is `reports/98_LAUNCH_REHEARSAL.md`
+  (stage 1 green, stage 2 owner-blocked, later un-parked and consumed by the run
+  itself). Act 1 (attended) proved BOTH `2f077e8` core fixes in a running game —
+  `update_suspect` read `nil`, `#order` read 75 after a real reload — and
+  discharged L5's `AllMapsForEach` question (`true 2085`: the C loop absorbs a
+  per-object error and carries on; no fix wanted). Run B then ran the player's
+  configuration for the first time ever — **packed**, TestKit off, opt-in off —
+  and scored **10 of 10**: packed-from-appdata, 75 applied by name, zero
+  `[LUA ERROR]`, both screen events vanilla and attributed, the hand-written
+  preview rendering packed, a clean save/reload round trip, and `c9`'s uninstall
+  holding for all 75 defs at once with 0 pack output. ⭐ **Packed ≡ unpacked at
+  module level: the 75 applied names are set-identical to the unpacked leg**
+  (`archive/vl97a`), 0 either side. Before scoring, the criteria were audited
+  and **4 of 10 repaired** — criterion 1 had been reading "packed" off lines
+  equally true unpacked (the recount: 69 unpacked + 7 no-mode-line, zero packed
+  before run B; the old "66/66" was an under-count of the same fact), c2's
+  derivation gave 74 against a truth of 75, c6 wanted `1.0.0` where the log
+  prints `v1.00-000`, and c3's "any third site fails" was refuted outright.
+  Logs `archive/runB_*`, `archive/runBc9_*`, `archive/runBprep_*`.
+- **08-19 — the console is not a route, and the packing route that is.** MEASURED
+  on retail: `DbgPackMod` and `ReloadLua` are both **nil in `_G` at the console**
+  though both ship in `Lua.fpk` with unconditional definitions — so
+  `ModEnvBlacklist`, the standing diagnosis, only ever explained *mod* code and
+  never the console (the audit later supplied the real mechanism). The only
+  working route is the Ged UI: Mods Manager → Edit (`Ctrl-E`) → Mod Editor →
+  **File → Pack Mod** (`ModEditor.lua:62-69`, `GedOpPackMod` → `DbgPackMod`,
+  `GedModEditor.lua:863`). ⚠️ It loads a scratch colony, so "pack at the main
+  menu" is impossible — accepted, since that rule existed to protect the owner's
+  colony and a scratch colony does that better. `MarsDebug.exe` is the Ged host
+  process, not a build swap; retail `Mars.exe` was used throughout.
+- **08-19 — `items.lua` turned out to be a RELEASE GATE, not bookkeeping**
+  (checklist 46, the day's most serious find). `SaveDef` rebuilds
+  `metadata.lua`'s `code` list SOLELY from its items (`Mod.lua:816-840`, `:973`)
+  and BOTH portals force that save on a first upload — Steam's runs BEFORE
+  packing — so a module absent from `items.lua` ships absent. A fix would have
+  vanished from the Steam release. `tools/upload_preflight.py` now compares the
+  ordered lists; its old guard had been counting its own header comment. The
+  same defect class was then found in the Opt-In pack (fixed by the same change)
+  and the Save Rescue mod was found to have no editor list at all — recorded as
+  checklist 48 rather than fixed, since it is not this chain's repo.
+- **08-19 — pre-launch sweep chain CLOSED: links 5–8 consumed, the lens pool is
+  EXHAUSTED.** L5 failure/containment, L6 promise vs behaviour, L7 environment &
+  namespace, L8 adversarial/hostile modder →
+  `reports/L{5,6,7,8}_*.md`. Per the chain's own fence, verdicts are NOT restated
+  here: they live in the chain's findings ledger (forbidden to links) and those
+  reports. Structural facts only: none of the four launched, each refusal was
+  reasoned in its report, and L8's refusal was an owner-costed *ask* rather than
+  a decline. ⛔ **The chain found and fixed exactly one launch blocker across all
+  eight links** (`36d8817`, at link 6). Instruments born in these links:
+  `tools/l7_env_map.py` (global map taken from the Lua 5.3 bytecode compiler
+  rather than a running game, control 23/23), `tools/l8_hostile_input.py` (2
+  controls), `tools/l8_deference_map.py` (selftest 11/11 — this is the tool the
+  terminal audit later quarantined). `EF-058` was amended in place (the flattened
+  -class trap is keyed on install time, and mod load precedes flattening).
+  Namespace settled from source: the pack owns 5 globals (3 + 2 `GameVar`s),
+  writes 21 vanilla names, trips neither engine assert, creates zero env shadows,
+  never reads `Platform`; pack and TestKit are disjoint on writes in both
+  directions and the pack reads nothing the kit provides — the first such
+  evidence in seven links. `content_path` is `Mod/<id>/` packed and unpacked
+  alike, which closed an L5 worry. `CheckModPackSignature` ⇒
+  `Platform.playstation` is false on PC ⇒ the packed branch IS taken (closed L7
+  item 4).
+- **08-19 — the 97 verification-launch interlude** (no lens, rotation intact):
+  3 retail autorun legs with predictions pre-registered before the launches,
+  `reports/97_VERIFICATION_LAUNCH.md`, logs `archive/vl97a/b/c_*`. First
+  evidence that the pack runs post-`2f077e8`: 72/0/24/0 of 96 with opt-in
+  absent, `75/75` active, 0 FAIL, 0 dialog, 88 of 96 probes holding their exact
+  verdict against the pre-fix baseline; apply cost 75 modules ≈ 0.57 s. It also
+  earned three corrections, one of them against its own brief.
+- **08-19 — rig facts.** The packer is byte-faithful (all 80 entries extracted;
+  78 identical to disk, the 2 = `git diff 7824cbc..HEAD`); `tools/pack_predict.py`
+  reproduces the real 08-17 `.fpk` 80/80 and `tools/pack_list.py` reads and
+  reconciles one. That 08-17 `.fpk` predated `2f077e8` and was superseded by the
+  run-B package, which the audit re-verified at 362,894 B / md5 `8dcb0692…` /
+  80 of 80 byte-identical to the tree at `91a444b`. ⚠️ **`EF-055` NARROWED by
+  measurement:** a junction pull costs the mod's enable when the **id vanishes**;
+  swapping folder-for-folder under the **same id KEEPS** it — so the packed swap
+  needed no re-tick, and the earlier "all three unticked" reading was stale. The
+  rig was restored the same day (staged packed folder deleted, all 3 junctions
+  present, fix pack + TestKit re-ticked, opt-in still off per checklist 43).
+  ℹ️ `C47FARM`'s header says the pack was `v1.00-001` and `MeteorFrequency`
+  healed `latch 1.0.1 -> 1.0.0` (`Fix_MeteorFrequency.lua:178`) — that save
+  predates the version reset, it is dev-rig history and nothing shipped, and
+  F88's one-shot heal firing on it is a pass rather than a fault.
+- **08-19 — checklist traffic.** Items 45–53 raised; 44 superseded by 52 (which
+  in turn superseded 44's ordering); 49 recorded a launch-test check that was
+  incapable of failing, already fixed. Still open and carried into the new
+  STATE: 34, 37 Q1/Q2, 39, 40, 41, 43, 47, 50, 51, 53.
+
+---
+
 ## 2026-08-18 — STATE.md evicted to a kernel: six days of closed history move here (owner-directed)
 
 tags: item-17 item-26 item-27 item-28 item-29 item-30 item-31 item-32 item-33
