@@ -84,6 +84,11 @@ completed tests move whole to
     it stayed to the two the brief named, say so and I will cut it back** — the
     third site is one wrapper and comes out cleanly.
 
+    ⚖️⚖️ **RULED 2026-08-20: KEEP all three sites** (owner: *"keep 59"*). ⇒ No code
+    changes; the challenge landing-spot wrapper ships. ⭐ **Looking at it during the
+    sitting stays optional** — §2a of the test brief says that if it is not opened,
+    the report names it as an unobserved site rather than counting it as a pass.
+
     ⭐ **What changes for your ~30-minute sitting (link 4).** The bullet is now
     visible in **two places without starting a game**: the sponsor summary panel
     *and* the hover rollover on the sponsor list — so you get two independent
