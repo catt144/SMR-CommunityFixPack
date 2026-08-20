@@ -90,3 +90,19 @@ remainder is reachable by a player running this pack alone on the pinned build
 in English on PC — which is the configuration 1.0.0 ships into, and is why the
 upload verdict (`reports/99_TERMINAL_AUDIT.md` §5) is YES on a clause-3 chain.
 The verdict awaits the independent ruling of `99b_VERDICT_REVIEW_fable.md`.
+
+### ⚖️ 99b VERDICT REVIEW, 2026-08-19 — the ruling is **UPHELD**, clause 3 stands as ruled
+
+The independent review (brief consumed; findings `SWEEP_FINDINGS.md` VR-1…VR-6)
+re-derived run B's log-decidable criteria from primary logs with a fresh
+instrument, located and re-read the direct core-fix console reads, walked two
+audit verifications at Src, and broke nothing but wording. **One correction to
+the ruling above:** its last sentence is true only of the populations it names —
+the upload's real audience also includes console (`FIX_POLICY` §7), non-English
+and multi-mod players, for whom the remainder is reachable. The verdict survives
+because each remainder item is **individually bounded** (platform-unconditional
+code, English-fallback text, third-party-gated queue), not because no shipping
+player can reach it. The chain's one never-asked question with a free discharge
+— does the player receive the bytes we uploaded? — is now
+`RELEASE_PORTAL_PREP.md` §0.5(f). ⛔ The tag does not move; the shipped surface
+is diff-verified identical from tag to this commit.

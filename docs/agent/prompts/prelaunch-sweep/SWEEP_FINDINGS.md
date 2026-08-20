@@ -1766,3 +1766,112 @@ clear-on-success provably hides no genuine rot.
 console platforms · non-English · foreign-mod interleaving (policy) · TestKit
 containment/second-load · the 53 wrappers' callers per-site · StaleReservations
 per-item guard (reopened) · long-session cost.
+
+---
+
+# VERDICT REVIEW (99b) — 2026-08-19. ⭐⭐ RULING: **UPHELD.**
+
+Independent adversarial ruling on the terminal audit's verdict (owner design;
+brief `99b_VERDICT_REVIEW_fable.md`, consumed in this commit). ⛔ Nothing was
+re-swept. Every check below is a spot-walk or a re-derivation from primary
+evidence, and the audit's own verdict text was read **last**, after the view
+below was formed.
+
+**The upload verdict stands. No challenge broke it.** Four record defects found
+and repaired here (VR-1…VR-4), two log lines attributed (VR-5), one post-upload
+check added (VR-6). ⛔ The tag stays where the audit put it — verified, not
+assumed: `git diff fixpack-v1.0.0..HEAD` over `Code/ metadata.lua items.lua
+preview.png LICENSE` is **empty**, run this session.
+
+## Verified independently BEFORE reading the audit's verdict
+
+- shipped surface byte-identical `868c7c8 → HEAD` **and** tag → HEAD (both
+  diffs empty); `ModContent.fpk` re-hashed md5 `8dcb0692…`, 362,894 B — matches
+  STATE; `upload_preflight` re-run 20/0; doccheck GREEN.
+- **Run B's log-decidable criteria re-derived from `runB_*`/`runBc9_*` with a
+  fresh instrument** (python, not the chain's tooling — LR-F20 is why): 75
+  `applied` by name, **set-identical to vl97a in both directions**; 0
+  `[LUA ERROR]`; 0 `update report:`; mode line `packed from appdata`; 0
+  `SMRTEST` lines with the TestKit def *"present, but not loaded"*; c9 shows
+  all three defs declining and **0** pack lines. All reproduce.
+- Both audit spot-checks **walked at Src, not cited**: `DefineCombinedMethod
+  ("Done", "procall_parents_last", "InitDone")` sits at `PropertyObject.lua:1664`
+  (TA-1 holds), and `IsTooNew` has exactly **two** call sites tree-wide, both
+  Mod-Manager UI, none on the load path (TA-12 holds).
+
+## The five challenges
+
+**C1 · Is the convergence clause honest? YES — with one wording defect (VR-3).**
+The cap is named as a cap in the ledger ruling, in STATE, in the commit subject
+and in the audit §4; clause 1 is claimed nowhere; the unreached list is
+enumerated per item. Checked against the ledger myself: unswept territory of
+consequence remains and every surface says so. ⛔ Not laundered. The defect is
+the rider — see VR-3.
+
+**C2 · Does run B support the verdict? YES.** Real player configuration
+(packed, junction pulled, TestKit and opt-in off — all read off the primary
+log, not the report); the owner tick was budgeted and then measured unnecessary
+(LR-F19, same-id swap keeps the enable); the gate line was criterion 1 and read
+first; all ten criteria named (LR-F17); criterion 4's falsifier line absent in
+a log that also shows the mark-setting SaintBlessing cycle ran. The
+packed-vs-unpacked comparison is a real measurement — re-done here with a
+fresh instrument after LR-F20's grep lied green once. One label defect: VR-4.
+
+**C3 · Are the core fixes verified, or merely not-falsified? VERIFIED — by
+direct reads, which this review located in the primary logs and re-read.**
+`Mars.exe-20260819-15.18.19`: the non-benign latch fired (line 155, sets the
+mark), healed (168), and the attended console read at 264 returned
+`status: active suspect: nil order: 75 suspects: 0` — the direct field read,
+informative precisely because the mark WAS set that session.
+`MarsDebug.exe-20260819-15.55.38`: a genuine second Lua load (second `applied`
+block at 343, `Reloading done in 1358 ms` at 356) and then `order: 75` — not
+150, against the archive's measured pre-fix 148 = 2×74. ⛔ Neither log was in
+`docs/archive/` — the strongest evidence in the release was one log-rotation
+from unrecoverable. **Fixed: VR-1.**
+
+**C4 · Did the audit overstate? Twice in wording, never in substance.** The §8
+forbidden-claims list passes: "clean" and "compatible with other mods" are
+explicitly disclaimed, counts were re-emitted, attended-word criteria are named
+as such, and both spot-checked verifications re-derive cleanly at Src. The two
+wording defects are VR-2 and VR-3. The audit's corrections themselves were
+checked where they could be: the tag-move argument re-verified by diff, the
+"66/66" recount's operative fact confirmed (zero packed loads before run B),
+and TA-1/TA-12 walked.
+
+**C5 · What did the whole chain never ask? THE DELIVERY LEG.** Eight lenses,
+two interludes, the gate and the audit all stop at the upload boundary. The
+portal-prep sheet has post-upload checks (VersionDisplayName, the audit's own
+RequiredGameVersion item) — so post-upload was in scope — yet **nothing
+verifies that what a player downloads is what we uploaded**, and the whole
+chain's byte-fidelity work (LR-F4, 80/80, md5) ends at the local `.fpk`.
+Discharge is nearly free and uses existing tools: **VR-6.** Runner-up, named
+per the brief's "least confident" clause: post-launch detection — nothing
+records how the owner would learn of a bad first impression (portal comments?
+cadence?) in the window where it can still be softened.
+
+## VR findings
+
+| # | finding | severity | disposition |
+|---|---|---|---|
+| VR-1 | The two act-1 logs carrying the direct core-fix reads (`suspect: nil`, `order: 75` post-reload) were never archived — evidence existed only in the rotating live-logs folder | real (record) | **fixed here**: archived as `act1_Mars.exe-20260819-15.18.19-…` and `act1ged_MarsDebug.exe-20260819-15.55.38-…`, MD5-verified copies; corpus now 82 |
+| VR-2 | Audit §5's *"everything else stands on logs this repo now archives"* was FALSE for the core-fix reads until VR-1 — they stood on the owner's word plus unarchived files | record | true as of this commit; noted so the sentence is not cited from before it |
+| VR-3 | The ruling's rider — *"nothing in the remainder is reachable by a player running this pack alone on the pinned build in English on PC, which is the configuration 1.0.0 ships into"* — scopes away populations the upload actually reaches: console players (FIX_POLICY §7 exists because they are real), non-English players, and multi-mod players. The verdict survives because each remainder item is **individually bounded** (platform-unconditional code — L7-F6; English-fallback text; third-party-gated queue), NOT because no shipping player can reach the remainder | record (wording) | corrected in the ledger's 99b note; checklist 54 states it to the owner |
+| VR-4 | LR-F17 criterion 4 labels `#UpdateSuspects()==0` "the decisive read" — the read that CANNOT see a stale mark on an `active` entry (the chain's own documented trap, VL-1). The decisive read is the direct field read `suspect: nil`, taken in the same console line, so the evidence is complete and only the label is wrong | cosmetic (record) | recorded here; do not cite `UpdateSuspects()==0` as decisive for fix ① |
+| VR-5 | The act-1 session's suite shows 2 ERROR probes nothing had attributed: `RocketDroneChurn` — `g_Consts` indexed as boolean at `Fix_RocketDroneChurn.lua:67`, an UNMARKED VANILLA-COPY line identical to Src `CargoTransporterNew.lua:1254`, thrown only in a no-game context a player's game cannot invoke the method in; and `DroneUnreachableForever` — vanilla `Drone.lua:884`, probe-context. Neither is a shipped defect; both are the suite run in an unsupported context (console-driven, no game loaded) | cosmetic (attribution) | recorded per "never silently discount a log line"; no route |
+| VR-6 | ⭐ C5's discharge: a **delivered-bytes check** after each portal upload — subscribe back, md5 the downloaded `.fpk` against `8dcb0692…` (or `tools/pack_list.py` reconcile). ⛔ FILE-level only, never behavioral: the local junction wins silently at equal version (`H-09`), so a launch proves nothing about the downloaded copy | new check | added as `RELEASE_PORTAL_PREP.md` §0.5(f) |
+
+## ⚖️ Was the chain worth its cost? (my own verdict, not the audit's)
+
+**For this release: yes — on the strength of one finding and one structure.**
+L6-F1 (a fix silently missing from every Steam install) would have shipped
+under every earlier process this project ran, and only a lens asking
+"promise vs behaviour" found it. The coverage ledger is the other keeper: it is
+the only reason the cap could be ruled honestly. Against that, eight links
+found **zero player-reachable defects in shipped code**, the chain's real error
+rate lived in its corrections (two reversed twice) and its instruments (four
+lied green), and this review — built to break the verdict — broke only wording.
+**For a future release of this size: keep the lens rotation, the ledger, the
+gate, and the terminal fan-out; cut links whose lens has no launch obligation,
+and give corrections the same adversarial pass as findings from the start.**
+The owner's between-links gate cost little and caught the cap-raise decision at
+exactly the right moment; keep that too.

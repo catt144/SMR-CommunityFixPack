@@ -180,6 +180,21 @@ The forced saves write `pdx_id` / `PdxMod` / `pdx_version` and `steam_id` into
 `metadata.lua`. **Commit them.** Losing them means a future update cannot target
 the published mod. Restore the stripped comments from git in the same commit.
 
+### (f) ⭐ CHECK AFTER EACH UPLOAD — the delivered bytes (verdict review, 2026-08-19)
+
+Every byte-fidelity check in the release chain ends at the **local** `.fpk`
+(md5 `8dcb0692…`, 362,894 B, 80/80 against the tagged tree). Nothing verifies
+the leg the player actually receives: portal → download. After the listing is
+live, **subscribe back / download the pack and md5 the delivered `.fpk`**
+against `8dcb0692…` (or reconcile with `tools/pack_list.py` if the portal
+re-wraps the archive — then compare the 80 entries by content, which is what
+actually matters). ⛔ **File-level only, never behavioral:** with the dev
+junction present, the unpacked copy wins silently at equal version
+(`Mod.lua:1770`, hazard `H-09`), so a launch with a subscribed copy installed
+proves nothing about the downloaded bytes. If the download is not reachable as
+a file on this rig, record that here with the route that was tried and move on
+— the check is cheap insurance, not a gate.
+
 ---
 
 ## 1. The order of operations — links only exist after the step that creates them

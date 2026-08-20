@@ -29,7 +29,42 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⭐⭐ 2026-08-19 — THE TERMINAL AUDIT IS DONE AND THE VERDICT IS **UPLOAD**. One decision is yours, and it is not urgent: harden now or in 1.0.1.
+### ⭐⭐ 2026-08-19 — THE VERDICT REVIEW IS DONE: **UPHELD**. The upload now waits only on you.
+
+54. ⭐⭐ **I tried to break the audit's upload verdict and could not.** A second,
+    independent session ruled on it as your design required — not by trusting
+    the audit, but by re-checking its evidence from the primary sources before
+    reading its reasoning. What was re-verified first-hand: the shipped files
+    are byte-identical from the release gate's commit (and from the release
+    tag) to today; the built package re-hashes to the recorded fingerprint;
+    your 10-of-10 gate's log-readable results all reproduce under a freshly
+    written checker (including the packed-vs-unpacked comparison, redone
+    because a tool once lied "identical" on empty input); and the two console
+    reads you took in act 1 — the ones that proved both core fixes — were
+    found in the live game logs and re-read. **Verdict: UPHELD. Upload when
+    you are ready.** Full record: `SWEEP_FINDINGS.md` (VR-1…VR-6).
+
+    **Three things worth ten seconds each, none needing a decision:**
+
+    * ⭐ **Your act-1 console evidence was one log-rotation from being lost** —
+      the two logs holding the `suspect: nil` / `order: 75` reads were never
+      archived. They are now (`docs/archive/act1_*`), copied and checksummed.
+    * ⚠️ **One honesty correction to the audit's wording, not its verdict.**
+      Its "no player this ships to can reach the unswept remainder" line
+      quietly assumes an English-PC-solo audience; the portal also serves
+      console, non-English and multi-mod players. The verdict still holds —
+      each unswept item was individually bounded (the code never branches on
+      platform, our text falls back to English, the hardening queue all needs
+      a hostile third mod) — but that is *why* it holds, and the record now
+      says so.
+    * ⭐ **One new post-upload step added to the upload sheet** (§0.5(f), takes
+      a minute): after the listing is live, download your own mod once and
+      checksum it. Everything the chain verified stops at the file we upload;
+      nothing yet confirms players receive those same bytes.
+
+    ⚠️ Also: mid-review, the game's account state showed fix pack + TestKit
+    re-ticked (21:23 log) — no launch was taken and nothing was changed on the
+    rig by this session.
 
 53. ⭐ **The audit's verdict: upload the mod exactly as it stands.** A second,
     independent session (`99b_VERDICT_REVIEW_fable.md`) will try to break that

@@ -9,13 +9,15 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Now
 - ⭐⭐ **Release = the fix pack ALONE at 1.0.0 (owner 08-17).**
 - ⭐⭐ **④ upload sitting PAUSED mid-sitting on the owner's word — NOTHING IS PUBLISHED.** Upload is owner-attended.
-- ⛔⛔ **Next = `agent/prompts/prelaunch-sweep/99b_VERDICT_REVIEW_fable.md`**, an independent session that tries
-  to break the audit's verdict BEFORE it is acted on. **The upload waits on 99b, then the owner.**
+- ⭐⭐ **99b VERDICT REVIEW consumed 08-19 — ruling UPHELD.** Run-B criteria, the act-1 core-fix reads and two
+  audit verifications re-derived from primary evidence; only wording broke (VR-1…VR-6, chain `SWEEP_FINDINGS.md`).
+  **The upload now waits on the owner alone** (checklist 54; delivered-bytes check added, PORTAL_PREP §0.5(f)).
 - ⭐⭐ **Terminal audit consumed 08-19 — verdict UPLOAD**, taken on convergence clause 3 (the cap, named as a cap,
   not as cleanliness). Record `reports/99_TERMINAL_AUDIT.md`; owner-facing = checklist 53.
 - ⭐⭐ **Release gate PASSED: run B scored 10 of 10** (08-19, attended; packed, TestKit off, opt-in off).
   ⭐ **Packed ≡ unpacked at module level** — the 75 applied names are set-identical to the unpacked leg.
 - ⭐⭐ **Both `2f077e8` core fixes PROVEN in a running game** (act 1, attended): `update_suspect` nil, `#order` 75.
+  Evidence logs archived 08-19 by 99b (`archive/act1_*`) — they had lived only in the rotating live-logs dir.
 - **Pre-launch sweep chain `agent/prompts/prelaunch-sweep/` is CLOSED — links 1–8 consumed, lens pool EXHAUSTED**,
   plus 2 no-lens interludes (97 verification launch, 98 launch rehearsal). ⛔ **1 launch blocker, found and fixed.**
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md` · reports `reports/L1..L8_*.md`,
