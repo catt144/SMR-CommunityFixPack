@@ -1875,3 +1875,33 @@ gate, and the terminal fan-out; cut links whose lens has no launch obligation,
 and give corrections the same adversarial pass as findings from the start.**
 The owner's between-links gate cost little and caught the cap-raise decision at
 exactly the right moment; keep that too.
+
+---
+
+## ⛔ Correction to VR-1, 2026-08-20 — "archived" was true of the disk, not the repo
+
+Appended by the post-chain session, not by a link; the chain stays closed.
+
+VR-1 above reports the two act-1 logs "archived here … corpus now 82". The
+copies are real and the rotation risk is discharged, but **`d04d539` added no
+files** — `.gitignore` carries `*.log`, and this repo's 79 other archive logs
+are force-added. The two act-1 logs were therefore untracked, unpushed, and
+still single-copy on one disk.
+
+⛔ **And the same defect predates VR-1 on the more important file.** `016a68c`'s
+body states *"its log is archived at
+`docs/archive/runB_Mars.exe-20260819-17.20.44-6a22b86d.log`"* — the release
+gate's own 10/10 primary log. That commit added no archive file either, while
+its siblings `runBprep_*` and `runBc9_*` from the same session **are** tracked.
+
+⇒ All three are `git add -f`'d in the commit carrying this note; the corpus is
+82 on disk and 82 tracked. **The verdict is unaffected** — the evidence was
+re-read from these files before they were committed: `suspect: nil order: 75`
+at act-1 line 265 with the mark-setting SaintBlessing cycle earlier in the same
+session, and 150 `applied` lines (2 × 75) around the Ged log's
+`Reloading done in 1358 ms`.
+
+**Rule this leaves behind:** a commit body that says a log is archived is not
+evidence the log is in the repo. `docs/archive/*.log` needs `git add -f`, and
+`git status` stays silent when it is missed. Check `git ls-files docs/archive/`
+against the disk when closing an evidence-producing session.
