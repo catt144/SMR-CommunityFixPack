@@ -29,6 +29,128 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⛔⛔ 2026-08-20 — YOUR SITTING IS READY TO RUN, and preparing it found ONE REAL DEFECT IN `C50`. One call from you before you launch; the script is written and waiting below.
+
+61. ⛔⛔ **The thing I found, and it needs your word before the sitting.** `C50`
+    was recorded — twice now, and by me — as touching **pre-game screens only**.
+    While writing your script I traced the panel it patches and **it is also an
+    in-game screen**, and on that screen **the number it prints is wrong**.
+
+    **What is actually true.** The pre-game mission summary panel is not built in
+    one place. The game builds the same panel again for the **in-game Mission
+    Profile dialog — the Goals button on your HUD**. Both go through the exact
+    function `C50` wraps. So the bullet appears in a running game too, which
+    nobody intended and nothing recorded.
+
+    ⛔ **And in a running game the arithmetic double-counts.** The base Drone Hub
+    capacity is **20**. SpaceY adds **+20**. Pre-game that gives the right answer,
+    **40**. But once a colony exists, the game has *already* applied SpaceY's +20
+    to the live value — so the fix reads 40, adds 20 again, and prints **60**.
+    The real cap is 40. ⚠️ **The safety check inside the fix cannot catch this**:
+    it only asks "is the number bigger than the baseline", and 60 is bigger than
+    40, so it passes happily.
+
+    ⚖️ **How much does it matter?** Honestly: **little, but it is wrong.** You
+    only ever see it if you play **SpaceY** *and* open the Goals/Mission Profile
+    panel mid-game. It changes no save, breaks nothing, and every pre-game screen
+    — the three the sitting is actually about — shows the correct **40**.
+    ⛔ But it is a wrong number that we introduced, on a screen a player can
+    reach, and the site's fix page already promises this fix is a plain repair.
+
+    ⭐⭐ **My recommendation: fix it, and it is about six lines.** Have the fix
+    **stand down when a game is running** — the bullet then appears on the
+    pre-game sponsor screens exactly as designed, and the in-game Goals panel
+    goes back to showing vanilla. That matches what the module already says about
+    itself ("it is pre-game UI text"), it is the smallest possible change, and
+    the sitting can confirm it by opening the Goals panel and seeing no bullet.
+
+    ⚖️ **Your options:**
+
+    | | what happens |
+    |---|---|
+    | **A — fix it now (recommended)** | ~6 lines + a corrected header. Adds maybe 10 minutes before your sitting, and the sitting then checks it for free (open Goals, expect no bullet). |
+    | **B — ship it as-is, file the defect** | `C50` ships with a wrong number on one in-game panel for SpaceY players. Recorded as a known defect for the opt-in effort. Costs you nothing today. |
+    | **C — pull `C50` out of 1.0.0** | `C51` ships alone. ⛔ Its site fix-list entry has to come out too. I do **not** recommend this — the defect is small and the pre-game repair is sound. |
+
+    ⚠️ **Note on the fence:** link 4's brief says code changes are out *unless the
+    sitting finds a fix broken*. I found this **before** the sitting, from the
+    source, not from a screen — so I am asking rather than just doing it.
+
+    ⭐ **Nothing about this blocks you from starting.** If you pick **B**, the
+    script below runs unchanged, right now.
+
+62. ⭐ **Your script — about half an hour, one launch, two language settings.**
+    Everything is prepared: predictions are written down and committed *before*
+    the game opens (`docs/agent/reports/04_ATTENDED_SITTING.md`), and ⚠️ **both
+    your autosaves are already byte-copied out of the save directory** (`Sol 406`
+    and `Sol 411`, `EF-056`) — reconcile them by name when you are done.
+
+    ⛔ **One thing I need from you first: which save.** Two of the readings need a
+    loaded game with **a Universal Rocket sitting idle on Mars** and the
+    **planetary view** available. I can see your saves but not inside them —
+    `c47farmnomod` and `c47farmreload` are the most recent. **Tell me which one
+    has an idle rocket** and I will name it in the record.
+
+    **① English, pre-game — the two free `C50` looks.**
+    New game → sponsor selection → **SpaceY**.
+    - ✅ Expect the summary panel's SpaceY description to carry a **new fourth
+      bullet: *"Maximum number of Drones a Drone Hub can control (40)"*.**
+      ⭐ **The number should be 40.** (The brief's example said 100 — that was an
+      illustration, not the real value.)
+    - ✅ Now **hover SpaceY in the sponsor list** — the rollover is a second,
+      independent look at the same repair. Same bullet, same 40.
+    - ⛔ **Read the FIRST bullet both times too:** *"Dragon Rocket - has smaller
+      cargo capacity **(a number)** but is faster and requires less fuel."* If
+      that number is gone, or you see raw `<cargo>`, **stop and tell me** — that
+      is the failure the whole design was built to avoid.
+    - ⛔ If you see literal `<drone_cap_help>`, `<CommandCenterMaxDrones>`, a
+      `{#4706}` token, or an empty `()` — **tell me exactly what the screen says,
+      word for word.** Do not summarise it.
+
+    **② English, in-game — the `C51` "nothing changed" reading.**
+    Load the save → open the **planetary view** (the Mars/planet button) → then
+    select your idle **Universal Rocket** and hover its **Back to Earth** button.
+    - ✅ Expect **no visible difference at all**, on both. That *is* the reading —
+      the site page promises English players see nothing change, and this is the
+      step that checks exactly that.
+    - ⚠️ **If the Back to Earth button is not on the rocket's panel**, the rocket
+      is busy. It only shows on a Universal Rocket that is **idle with no
+      destination set** (not loading, not launching, not an asteroid Lander).
+      Cancel its flight and it comes back.
+    - *(If you took option A above: also click the HUD **Goals** button here and
+      tell me whether the sponsor block shows a Drone Hub bullet. Expect **none**.)*
+
+    **③ Switch the game language to German. Restart if it asks.**
+
+    **④ German, pre-game — the same two sponsor looks.**
+    - ✅ Expect the bullet's sentence **in German**: *"Maximale Anzahl an Drohnen,
+      die ein Drohnen-Hub kontrollieren kann (40)"*.
+
+    **⑤ German, in-game — ⭐ the only step that can see `C51` at all.**
+    Reload the same save → planetary view → rocket rollover.
+    - ✅ Expect the heading as **`TERRAFORMING-GESAMTFORTSCHRITT`** and the rocket
+      rollover title as **`Zurück zur Erde`**.
+    - ⭐ **This is the first time in this project's history that anyone has watched
+      a shipped translation id render in another language.** Whatever it shows,
+      it closes a note that has been open since 2026-08-02 — so tell me even if
+      it looks boring.
+
+    **⑥ Switch back to English, restart, confirm the screens look normal again.**
+
+    **⑦ Optional, your call (this is item 60):** `*r SMRTest.RunAll()` — a minute
+    or two, and it turns the store card's "98 checks" into a measured number.
+    ⭐ **Run it if the sitting went smoothly; skip it if you are out of patience.**
+    Either way I record which.
+
+    ⚖️ **The challenge landing-spot screen is the one I recommend skipping**
+    (your item 59 ruling already allows this). It is the same code on a screen
+    you would otherwise never open. If you skip it I record it **by name** as an
+    unobserved site, not as a pass.
+
+    ⭐ **When you are done: tell me what you saw in your own words** — I am not
+    allowed to write down any screen reading you did not report to me, and I will
+    not.
+
 ### ⚠️ 2026-08-20 — THE PAGES AND THE RELEASE SHEET ARE CAUGHT UP (link 3 done). One small thing wants your word, and the next link is the one that needs your hands.
 
 60. ⭐ **What moved, in one breath.** The site's fix list now has entries for both
