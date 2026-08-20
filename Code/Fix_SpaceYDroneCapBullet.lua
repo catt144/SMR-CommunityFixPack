@@ -51,7 +51,12 @@
 --
 --   LIVE  GetSponsorSummary            Lua\PreGameMission.lua:574
 --         1 caller — Lua\XDef\PGMissionSummaryDlg.generated.lua:116, the
---         pre-game mission summary panel.
+--         mission summary panel. ⛔ AMENDED 2026-08-20: that PANEL has TWO
+--         instantiation sites, and only one of them is pre-game —
+--         PGMissionSponsorRemastered.generated.lua:609 (pre-game) and
+--         MissionProfileDlgRemastered.generated.lua:342 (the IN-GAME Goals
+--         dialog, Lua\X\HUD.lua:283-288). One caller, two screens. See
+--         `in_running_game` for why the second one is declined.
 --   LIVE  GetSponsorDescr              Lua\PreGameMission.lua:644
 --         1 caller — GetSponsorEntryRollover (:700), itself called once from
 --         Lua\X\XPGMission.lua:158: the rollover on the sponsor picker.
@@ -93,9 +98,15 @@
 -- rendering and let the <CommandCenterMaxDrones> tag resolve out of that table.
 -- If a patch changes the base const, the bullet changes with it.
 -- ⚠️ Like every other bullet on those screens, the value is the PRE-GAME one:
--- g_Consts still holds the base there, so the sponsor's +20 shows once. All
--- three sites are pre-game screens; that is vanilla's own semantics for
--- <initial_rockets> and the rest, inherited, not introduced.
+-- g_Consts still holds the base there, so the sponsor's +20 shows once.
+-- ⛔ CORRECTED 2026-08-20 (link 4 preparation, owner-ruled at checklist 61):
+-- this paragraph used to end "All three sites are pre-game screens" and THAT WAS
+-- FALSE. Site 1's panel is rebuilt by the in-game Mission Profile dialog, where
+-- g_Consts already carries the sponsor's modifier and the number would be
+-- double-counted. The module now stands down while a game is running — see
+-- `in_running_game` below for the full derivation. The three WRAPPERS are still
+-- the three named above; it is the SCREENS that were miscounted, and the miss
+-- was in the record twice before anyone looked.
 --
 -- Our template string contains no English of ours: "\n<bullet> <drone_cap_help>
 -- (<CommandCenterMaxDrones>)" is tags and punctuation only (IsTagsAndPunctuation,
@@ -221,8 +232,45 @@ end
 
 ---- the bullet ------------------------------------------------------------
 
+-- ⛔ THIS BULLET CAN ONLY BE BUILT WHERE `g_Consts` STILL HOLDS THE UNMODIFIED
+-- BASE, and that is pre-game only. In a running game the sponsor's own
+-- Effect_ModifyLabel has ALREADY been applied to `g_Consts` — `Colony.lua:76`
+-- puts `g_Consts` in the "Consts" label and `Effect_ModifyLabel:OnApplyEffect`
+-- sets a Modifier on every object in that label (`MarsGameEffects.lua:161-172`)
+-- — so `GetModifiedConsts`, which computes `MulDivRound(g_Consts[Prop], …) +
+-- Amount` (`PreGameMission.lua:518-532`), adds the same +20 a SECOND time:
+--     pre-game   base 20 → value 40   ✅ the true cap
+--     in-game    base 40 → value 60   ⛔ the cap is 40; SpaceY's bonus twice
+-- ⚠️ And the `value <= base` test below CANNOT catch it — it is satisfied by
+-- the very double-count that causes it (60 > 40).
+--
+-- ⚠️ This is not hypothetical, and the site list two sessions had recorded is
+-- what hid it. `PGMissionSummaryDlg` — the panel site 1 feeds — is instantiated
+-- TWICE: at `PGMissionSponsorRemastered.generated.lua:609` (pre-game) and at
+-- `MissionProfileDlgRemastered.generated.lua:342`, the ⛔ IN-GAME Mission
+-- Profile dialog opened by the HUD's Goals button (`Lua\X\HUD.lua:283-288`).
+-- Its context update calls `GetSponsorSummary(entry)` whenever `MainCity` is
+-- set (`PGMissionSummaryDlg.generated.lua:108-120`), and `g_CurrentMissionParams`
+-- survives the savegame (`PreGameMission.lua:316, :321`), so the running game's
+-- sponsor entry is live there.
+--
+-- ⇒ We stand down while a game is running and the player sees vanilla on that
+-- panel. `MainCity` is the game's OWN pre-game/in-game discriminator on this
+-- exact panel (`:110`), which is why it is the handle used here rather than a
+-- test of our own invention. Fixing the number instead of declining would mean
+-- re-implementing the game's modifier arithmetic, which this module exists to
+-- avoid (see the header: the number is never ours).
+-- ⚖️ Owner-ruled 2026-08-20 (checklist 61) before the fix was ever observed.
+local function in_running_game()
+	return rawget(_G, "MainCity") and true or false
+end
+
 -- Build the missing bullet for `sponsor`, or return nil having recorded why.
 local function bullet_for(sponsor, site)
+	if in_running_game() then
+		return note_decline(site,
+			"a game is running, so the Drone Hub capacity already includes SpaceY's own bonus and this bullet would count it twice — nothing was added (this repair is for the pre-game sponsor screens)")
+	end
 	local id_of = rawget(_G, "TGetID")
 	if type(id_of) ~= "function" then
 		return note_decline(site,

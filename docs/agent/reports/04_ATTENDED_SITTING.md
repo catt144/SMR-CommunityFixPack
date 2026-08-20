@@ -213,6 +213,56 @@ colony**, or the in-game Mission Profile opened on one.
 
 ---
 
+## 4b · ⚖️ RULED AND BUILT, still before any launch — what §4 now predicts instead
+
+**Owner ruling 2026-08-20 (checklist 61): fix it.** Chosen over ship-and-file and
+over pulling `C50`. ⛔ §4 above is left exactly as written — it was the
+pre-registration and it is not edited after the fact. This section is what
+changed underneath it.
+
+**The change** (`Code/Fix_SpaceYDroneCapBullet.lua`, parse-clean): `bullet_for`
+declines while a game is running, keyed on `MainCity` — the game's own
+pre-game/in-game discriminator on this very panel
+(`PGMissionSummaryDlg.generated.lua:110`). Two header claims that this proved
+false were corrected in place rather than quietly dropped.
+
+⇒ **REVISED PREDICTIONS:**
+
+* ✅ Pre-game (all three `C50` sites): **unchanged — the bullet, with 40.**
+* ✅ In-game Goals / Mission Profile dialog on a **SpaceY** colony: **no bullet
+  at all**, vanilla text, and one log line:
+  `[CommunityFixPack] SpaceYDroneCapBullet: a game is running, so the Drone Hub capacity already includes SpaceY's own bonus and this bullet would count it twice — nothing was added (this repair is for the pre-game sponsor screens)`
+* ⚠️ In-game on a **non-SpaceY** colony: **nothing at all, and no log line** —
+  `ours(sponsor)` gates before `bullet_for` is ever reached.
+
+⛔ **CONSEQUENCE FOR THE SITTING, AND IT MATTERS.** The owner's save (`C47FARM`)
+is not a SpaceY colony, so *"open Goals and see no bullet"* would have been true
+before the fix as well. **That check proves nothing there** and must not be
+reported as if it did. The control that does work on any save, in ~20 seconds:
+
+```
+*r local sp = table.find_value(MissionParams.idMissionSponsor.items, "id", "SpaceY")
+   ModLog(tostring(SMRFixPack.SpaceYDroneCapBullet.bullet_for(sp, "probe")))
+   ModLog(SMRFixPack.SpaceYDroneCapBullet.stats.probe.reason)
+```
+
+✅ Expect **`nil`** and the running-game reason. Before the fix this printed a
+rendered bullet. ⚠️ It drives the `probe` bucket, so it cannot disturb the three
+real sites' counters.
+
+**The probe was changed too** (`SMR-BugFixPack-TestKit`, separate repo, separate
+commit — not shipped, not part of the 82-file pack). ⭐ **It had reproduced the
+fix's own arithmetic** — clause 3 derives the number as
+`g_Consts[PROP] + modifier.Amount`, exactly what `GetModifiedConsts` does — so it
+agreed with the defect and reported PASS. It now branches on a running game and
+asserts the stand-down instead, and clause 7 no longer reads a running-game
+decline as a site that never worked. Probe count is unchanged at **98**.
+
+⚠️ **What is still unproven and must not be claimed:** nobody has yet seen the
+in-game panel on a SpaceY colony, before or after. The fix is argued from source
+plus the console control above. Seeing it would need a SpaceY game started and
+landed — out of the sitting's ruled bar unless the owner wants it.
+
 ## 5 · What a silent failure looks like, so it is not read as a pass
 
 * ⛔ **Tags did not resolve** — literal `<drone_cap_help>` or

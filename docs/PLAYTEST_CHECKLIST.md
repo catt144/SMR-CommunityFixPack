@@ -85,11 +85,13 @@ completed tests move whole to
     your autosaves are already byte-copied out of the save directory** (`Sol 406`
     and `Sol 411`, `EF-056`) — reconcile them by name when you are done.
 
-    ⛔ **One thing I need from you first: which save.** Two of the readings need a
-    loaded game with **a Universal Rocket sitting idle on Mars** and the
-    **planetary view** available. I can see your saves but not inside them —
-    `c47farmnomod` and `c47farmreload` are the most recent. **Tell me which one
-    has an idle rocket** and I will name it in the record.
+    ✅ **Save: `C47FARM`** — your word, 2026-08-20. Two of the readings need it
+    loaded, with a **Universal Rocket sitting idle on Mars** and the **planetary
+    view** available.
+
+    ⚖️ **Item 61 is RULED and BUILT.** You chose the fix; it is in, it parses,
+    doccheck is GREEN and `upload_preflight` still reads 0 FAIL with 78 entries in
+    order. Step ② below carries the one check that confirms it.
 
     **① English, pre-game — the two free `C50` looks.**
     New game → sponsor selection → **SpaceY**.
@@ -117,8 +119,21 @@ completed tests move whole to
       is busy. It only shows on a Universal Rocket that is **idle with no
       destination set** (not loading, not launching, not an asteroid Lander).
       Cancel its flight and it comes back.
-    - *(If you took option A above: also click the HUD **Goals** button here and
-      tell me whether the sponsor block shows a Drone Hub bullet. Expect **none**.)*
+    - ⭐ **And the 20-second check on the defect you just ruled** (item 61 — it is
+      built, parse-clean, and in). ⚠️ **Do not just look at the Goals panel** — I
+      wrote that first and it was wrong: `c47farm` is not a SpaceY colony, so the
+      panel would look identical whether or not the repair works. Paste this
+      instead, anywhere in the loaded game:
+
+      ```
+      *r local sp = table.find_value(MissionParams.idMissionSponsor.items, "id", "SpaceY")
+         ModLog(tostring(SMRFixPack.SpaceYDroneCapBullet.bullet_for(sp, "probe")))
+         ModLog(SMRFixPack.SpaceYDroneCapBullet.stats.probe.reason)
+      ```
+
+      ✅ Expect **`nil`** and then a line saying *a game is running…*. Before the
+      fix this printed a bullet with the wrong number in it. That is the whole
+      proof, and it cannot disturb the three real screens.
 
     **③ Switch the game language to German. Restart if it asks.**
 
