@@ -182,13 +182,39 @@ the published mod. Restore the stripped comments from git in the same commit.
 
 ### (f) ⭐ CHECK AFTER EACH UPLOAD — the delivered bytes (verdict review, 2026-08-19)
 
-Every byte-fidelity check in the release chain ends at the **local** `.fpk`
-(md5 `8dcb0692…`, 362,894 B, 80/80 against the tagged tree). Nothing verifies
-the leg the player actually receives: portal → download. After the listing is
-live, **subscribe back / download the pack and md5 the delivered `.fpk`**
-against `8dcb0692…` (or reconcile with `tools/pack_list.py` if the portal
-re-wraps the archive — then compare the 80 entries by content, which is what
-actually matters). ⛔ **File-level only, never behavioral:** with the dev
+Every byte-fidelity check in the release chain ends at the **local** `.fpk`.
+Nothing verifies the leg the player actually receives: portal → download.
+
+⛔⛔ **THE MD5 THIS CHECK USED TO NAME IS GONE, AND NO AGENT CAN SUPPLY THE NEW
+ONE.** This step read *"md5 the download against `8dcb0692…`"* until 2026-08-20.
+That hash belonged to the 08-17 archive of an 80-file tree; the close-out chain
+added `Fix_LocalizedUIText.lua` and `Fix_SpaceYDroneCapBullet.lua`, so **the
+pack you are about to build is a different file and would fail that check on a
+perfectly correct upload.** A replacement hash exists only after *you* pack —
+⛔ **never accept one written into this sheet by a session that did not compute
+it from a real `.fpk`.**
+
+⇒ **At the sitting, in this order:**
+
+1. **When you pack** (Mods Manager → Edit → File → Pack Mod), before uploading,
+   record the archive's own fingerprint here — it is the only reference the
+   delivered-bytes check can have:
+
+   | packed | md5 | bytes | entries |
+   |---|---|---|---|
+   | *(fill in at the sitting)* | | | |
+
+   The expected **entry count is 82** — `python tools/pack_predict.py .`,
+   re-derived 2026-08-20 = 78 `Code/*.lua` + `items.lua` + `metadata.lua` +
+   `LICENSE` + `preview.png`. ⚠️ A different number means stop, not adjust.
+   ⛔ Bytes and md5 are **not** predictable and are not written above on purpose.
+
+2. **After the listing is live**, subscribe back / download the pack and md5 the
+   delivered `.fpk` **against the row you filled in at step 1** (or reconcile
+   with `tools/pack_list.py` if the portal re-wraps the archive — then compare
+   the 82 entries by content, which is what actually matters).
+
+⛔ **File-level only, never behavioral:** with the dev
 junction present, the unpacked copy wins silently at equal version
 (`Mod.lua:1770`, hazard `H-09`), so a launch with a subscribed copy installed
 proves nothing about the downloaded bytes. If the download is not reachable as
@@ -397,6 +423,19 @@ sitting settles it, and the console is free inside the Mod Editor**
 (`archive/CHEATS_INVENTORY.md`). ⛔ Do it BEFORE the upload, and note
 `DbgPackMod` itself calls `SaveWholeMod()` if the mod is dirty (§0.5(b)) — so the
 version guard applies to it too.
+
+⛔ **2026-08-20 (close-out chain link 3) — IT WILL SHIP 82, AND THE 80 ABOVE IS
+NOW HISTORY.** `C51`'s `Fix_LocalizedUIText.lua` and `C50`'s
+`Fix_SpaceYDroneCapBullet.lua` landed on 08-20, so **82 = 78 `Code/*.lua` +
+`items.lua` + `metadata.lua` + `LICENSE` + `preview.png`** — emitted by
+`python tools/pack_predict.py .`, with the 78 reconciling to `doccheck
+--emit-counts` and to `upload_preflight`'s two-list agreement (0 FAIL, 78 entries
+in order) exactly. ⛔ **This is a PREDICTION of the next pack, not a reading of
+one.** The 08-17 archive is superseded and no `.fpk` of the current tree exists
+anywhere — ⇒ **every hash and byte size this sheet records belongs to the 80-file
+tree and none of them applies to the upload you are about to make** (§0.5(f),
+rewritten the same day for exactly that reason). The paragraphs above are left as
+they were written; they are correct about the days they describe.
 
 ⚠️ **`LICENSE` still ships, deliberately.** Item 23 listed it among the misses,
 but the rescue mod — built later — states *"LICENSE ships on purpose"*, and a

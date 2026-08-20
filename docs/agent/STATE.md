@@ -9,12 +9,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Now
 - ⭐⭐ **Release = the fix pack ALONE at 1.0.0 (owner 08-17).**
 - ⭐⭐ **④ upload sitting PAUSED mid-sitting on the owner's word — NOTHING IS PUBLISHED.** Upload is owner-attended.
-- ⛔⛔ **NEXT = the close-out chain `agent/prompts/closeout-1.0.0/` (5 links; ⭐ links 1+2 CONSUMED 08-20 —
-  `C51` and `C50` BUILT, both ⛔ UNOBSERVED), owner-ruled 08-20 (checklist 58):
-  `C50`+`C51` ship IN 1.0.0, `C52` is `parked`/FROZEN.** Link 4 is an attended ~30-min sitting; link 5 (Fable)
-  audits, MOVES THE TAG and rules ship-or-revert. ⛔ The upload waits for link 5, then the owner.
-  ⚠️ **Two modules will change the shipping surface** ⇒ ⛔ STATE's `.fpk` line below (md5 `8dcb0692…`, 80/80)
-  and `RELEASE_PORTAL_PREP` §0.5(f) ARE STALE — both modules have landed; link 3 owns correcting them (expect **82**).
+- ⛔⛔ **NEXT = the close-out chain `agent/prompts/closeout-1.0.0/` (5 links; ⭐ links 1+2+3 CONSUMED 08-20 —
+  `C51` and `C50` BUILT, both ⛔ UNOBSERVED; surfaces done), owner-ruled 08-20 (checklist 58):
+  `C50`+`C51` ship IN 1.0.0, `C52` is `parked`/FROZEN.** ⛔ **NEXT LINK = `04_TEST.md`, an attended ~30-min
+  sitting — the only eyes either fix gets**; link 5 (Fable) audits, MOVES THE TAG and rules ship-or-revert.
+  ⛔ The upload waits for link 5, then the owner.
 - ⇒ **After link 5 this repo is CLOSED** — no queued 1.0.1; next effort is the **opt-in pack** (owner 08-20).
 - ⭐⭐ **99b VERDICT REVIEW consumed 08-19 — ruling UPHELD.** Run-B criteria, the act-1 core-fix reads and two
   audit verifications re-derived from primary evidence; only wording broke (VR-1…VR-6, chain `SWEEP_FINDINGS.md`).
@@ -29,9 +28,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   plus 2 no-lens interludes (97 verification launch, 98 launch rehearsal). ⛔ **1 launch blocker, found and fixed.**
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md` · reports `reports/L1..L8_*.md`,
     `97_VERIFICATION_LAUNCH.md`, `98_LAUNCH_REHEARSAL.md`. STATE carries no link verdicts (H-05).
-- ⭐ **Shipping artifact:** `.fpk` 362,894 B, md5 `8dcb0692…`, at
-  `%LOCALAPPDATA%\Temp\…\ModUpload\Pack\ModContent.fpk` — **80/80 byte-identical** to the tree tag `fixpack-v1.0.0`
-  marks. Predictor `tools/pack_predict.py`, reader `tools/pack_list.py`, upload guard `tools/upload_preflight.py`.
+- ⛔ **Shipping artifact: NO PACKED `.fpk` MATCHES THIS TREE** (link 3, 08-20). The 08-17 archive — 362,894 B,
+  md5 `8dcb0692…`, 80/80 against the tag — is SUPERSEDED by `C50`+`C51`. Expected shape **82 files = 78
+  `Code/*.lua` + `items.lua` + `metadata.lua` + `LICENSE` + `preview.png`** (`tools/pack_predict.py`, emitted).
+  ⛔ **The new md5/bytes exist only after the owner packs at the sitting — never quote one**; `PORTAL_PREP`
+  §0.5(f) now records it there. Reader `tools/pack_list.py`, upload guard `tools/upload_preflight.py`.
 - ⛔ **The console is NOT a route to pack or reload** — `DbgPackMod`/`ReloadLua` are both nil in `_G` at the retail
   console (measured). Only route = Mods Manager → Edit (`Ctrl-E`) → **File → Pack Mod**; ⚠️ it loads a scratch colony.
 - ✅ **Rig restored 08-19:** all 3 junctions present, fix pack + TestKit re-ticked, opt-in pack still OFF

@@ -1,5 +1,18 @@
 # Chain B — `smrcf-text` · the simple combined chain
 
+> ⛔⛔ **2026-08-20 — DO NOT RUN THIS CHAIN. `C50` AND `C51` ARE ALREADY BUILT
+> AND SHIP IN 1.0.0.** The owner reversed the post-launch premise (checklist 58)
+> and `closeout-1.0.0/` links 1–2 built both on 08-20 —
+> `Code/Fix_LocalizedUIText.lua` and `Code/Fix_SpaceYDroneCapBullet.lua`, both
+> registered in `items.lua` + `metadata.lua`, `upload_preflight` 0 FAIL. Running
+> this chain's `01_BUILD_opus.md` would rebuild shipped modules. ⚠️ **Two of its
+> readings were also overturned by that build and are wrong here:** `C50` has
+> **three** live render sites, not two (`agent/bugs/C50.md`), and the replacement
+> ids were re-verified across **all nine** packs, not just German
+> (`agent/bugs/C51.md`). ⭐ **What is NOT consumed: the dust-devil marker gate**
+> this chain carried as a rider — it is still owed and still gated on chain A.
+> ⛔ The module counts below are era-stale (they read 76; the tree is at 77).
+
 `C50` + `C51`, plus the dust-devil marker gate **if and only if chain A clears
 it**. Map: `agent/prompts/SMRCF_CHAIN_SET.md`. ⛔ **Gated on chain A.**
 

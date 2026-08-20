@@ -108,4 +108,49 @@ anything unexplained in the log · **the kickoff line for `05_AUDIT_fable.md`.**
 
 ## Notes from upstream
 
-- *(links 1–3 append here)*
+- **2026-08-20, link 3 (surfaces, consumed).** Counts are UNCHANGED by this link
+  and re-emitted at its close: **77 registered modules · 78 `Code/*.lua` · 98
+  probes**; `upload_preflight` **0 FAIL, 78 entries in order**; `pack_predict`
+  **82 files**. ⛔ Re-emit anyway — never carry one of these forward by hand.
+- ⭐⭐ **THE PLAYER-FACING PAGES NOW DESCRIBE CODE NOBODY HAS WATCHED, AND THAT IS
+  THIS SITTING'S REAL STAKE.** Two entries went onto the site's fix list
+  (`C:\Dev\SMR-CommunityMods`, **separate history, separate commit**) saying what
+  both fixes do. ⇒ **if the sitting finds either fix broken, its site entry is a
+  false promise and has to come out in the same breath** — say so loudly in the
+  report, because the site repo is not in this repo's commit and is easy to
+  forget. The audit (link 5) inherits that obligation.
+- ⚠️ **What the `C51` entry promises, so step 3 can check exactly it:** *"if you
+  play in English, this fix changes nothing you can see."* ⇒ step 3's expected
+  reading is not merely "no crash" — it is **no visible difference**, and the
+  German step is what the entry's other half rests on.
+- ⚠️ **The `C50` entry is deliberately screen-agnostic** — *"while you are
+  choosing a sponsor"*, no enumeration, and ⛔ **no number quoted**. ⇒ if the owner
+  takes checklist 59's option to cut the challenge landing-spot site, **no site
+  edit follows**. It also means the sitting cannot falsify the page by looking at
+  only one of the two sponsor-screen readings.
+- ⚖️ **One number is EMITTED BUT NOT MEASURED and it is on the store card:** the
+  card now says *"an automated suite of **98** checks"* (was 96 — waves 12+13).
+  The last A/B reading is `80/0/16/0` of 96, 08-15. ⇒ **§2 step 6 is the only
+  thing that can close that gap.** Owner-facing as checklist **60** with a
+  recommendation (run it if the sitting is smooth, skip it otherwise); if it runs,
+  ⭐ **record the reading and tell link 5**, and if it does not, say so BY NAME.
+- **The stale fingerprint is fixed and it did NOT become a number:**
+  `RELEASE_PORTAL_PREP` §0.5(f) now carries an empty md5/bytes/entries row the
+  owner fills **when they pack at the upload sitting** (not here — link 4 does not
+  pack, `FIX_POLICY`/§4 fence). Expected entry count **82**; ⛔ a session that
+  writes an md5 it did not compute from a real `.fpk` has broken the check.
+- **Superseded chains were banner-fenced, not deleted** (`prompts/SMRCF_CHAIN_SET.md`,
+  `prompts/smrcf-text/README.md`): they still told a session to *build* `C50` and
+  `C51`. ⚠️ Their recorded readings are also wrong now — chain B says `C50` has
+  two render sites; it has three.
+- `mkdocs build --strict` **GREEN, zero warnings**, after the site edits; `site/`
+  is not committed.
+
+- *(links 1–2's notes were consumed with `03_SURFACES.md`; the survivors that
+  matter here are above, plus: `Src` is under the install dir literally named
+  `Project Spark` (`EF-014`), the TestKit is a SEPARATE REPO
+  `C:\Dev\SMR-BugFixPack-TestKit` with waves **12 and 13** taken, and
+  `python tools/split_bugs.py --write` ABORTS — regenerate `bugs/INDEX.md` with
+  `sb.render_index(sb.load_from_dir())` instead, then expect one
+  `warn <ID>: the frozen index-row cell says 'filed'…` per flipped entry, which is
+  the house pattern and not a problem.)*

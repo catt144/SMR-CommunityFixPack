@@ -144,7 +144,7 @@ that quietly rewrites the inside of the same function is beyond it, which is why
 we watch official patches and update rather than promising the pack retires
 itself. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
-suite of 96 checks is run against the game with the pack and without it.
+suite of 98 checks is run against the game with the pack and without it.
 
 **And what does not.** We cannot test every combination of other mods, every
 colony shape, every save state or every future game patch. If a save matters to
@@ -305,6 +305,14 @@ read `80/0/16/0` of 96 (`archive/c47suite4_*`, 2026-08-15), gates `75/75` + `8/8
 Re-emitted 2026-08-16: `TestKit probes: 96`. The player text above now says 96;
 the 95 had been inherited from the prediction, never re-emitted — the exact
 failure rule 3 exists to stop.)*
+
+*(⚠️ **2026-08-20, close-out chain link 3: 96 → 98.** `C51`'s wave-12 probe and
+`C50`'s wave-13 probe landed on 08-20; re-emitted the same day,
+`TestKit probes: 98`, and the player text above now says 98. ⛔ **Emitted, not
+measured at 98** — no A/B pair has been run since 08-15's `80/0/16/0` of 96, and
+link 4's suite step is optional by the owner's ruling 57. The full note, and what
+link 5 would need to make it a measured claim, is in `STORE_FIXPACK.md` beside
+the 08-16 correction.)*
 | "**Five** of them are judgment calls" | re-derived at the audited fix list, 2026-08-14: exactly five entries carry the `— *judgment call*` title mark (`content/fix-list.md:95, 283, 323, 344, 669`), and they are the same five the card bullets | the shipped page, independently of the card |
 | "game version **1.0.7.396349**" | `EF-014`; `STATE.md`'s pinned build line | the fact, not prose |
 

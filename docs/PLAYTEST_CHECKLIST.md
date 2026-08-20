@@ -29,6 +29,40 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚠️ 2026-08-20 — THE PAGES AND THE RELEASE SHEET ARE CAUGHT UP (link 3 done). One small thing wants your word, and the next link is the one that needs your hands.
+
+60. ⭐ **What moved, in one breath.** The site's fix list now has entries for both
+    new fixes; the md5 you were told to checksum your download against is gone and
+    replaced with a blank you fill in when you pack; and the counts everywhere now
+    read what the emitter says. **Nothing you have to do about any of that.**
+
+    ⛔ **The one number I could not honestly finish.** The store card says *"an
+    automated suite of N checks is run against the game with the pack and without
+    it."* The suite grew from 96 to **98** when the two new fixes brought a check
+    each, so the card now says 98 — **but nobody has run it at 98.** The last real
+    A/B measurement is `80/0/16/0` of **96**, from 08-15, and link 4's script
+    makes the suite step optional on purpose because you ruled the basic-testing
+    bar (item 57).
+
+    ⚖️ **Your call, and it is genuinely small:** at the sitting, `*r
+    SMRTest.RunAll()` costs a minute or two and turns the card's 98 into something
+    measured — or say the word and it stays a statement about the suite the pack
+    ships with, which is what it literally says and is true either way. ⭐ **My
+    recommendation: run it if the sitting is going smoothly, skip it if anything
+    else is eating the half hour.** The two new fixes are checked by their own
+    probes inside it, so it is not wasted either way.
+
+    ⚠️ **A trap I found and defused while sweeping:** the four `smrcf-*` chain
+    folders from 08-16 still told a future session to *build* `C50` and `C51`.
+    They now carry a banner saying both shipped on 08-20 and that chain B must
+    not be run. `C52`'s chain is banner-fenced as frozen too. Nothing was
+    deleted — chain A and the jumbo-cave chain are untouched and still owed.
+
+    ⭐⭐ **Next: `docs/agent/prompts/closeout-1.0.0/04_TEST.md` — this is the one
+    that needs you, about half an hour, one launch.** Everything in the pack right
+    now is built and **unobserved**; that sitting is the only eyes either fix ever
+    gets before it ships.
+
 ### ⚠️ 2026-08-20 — C50 IS BUILT, AND IT TOUCHES THREE SCREENS RATHER THAN THE TWO ITS BRIEF NAMED. Your sitting in link 4 changes slightly.
 
 59. ⚠️ **What I found, and the call I made without stopping you.** The brief for

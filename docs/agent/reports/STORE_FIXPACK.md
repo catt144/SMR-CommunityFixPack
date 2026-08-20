@@ -71,7 +71,7 @@ that quietly rewrites the inside of the same function is beyond it, which is why
 we watch official patches and update rather than promising the pack retires
 itself. Nothing is patched on disk; the mod wraps
 the game's own code while it runs, and no game files are modified. An automated
-suite of 96 checks is run against the game with the pack and without it.
+suite of 98 checks is run against the game with the pack and without it.
 
 **And what does not.** We cannot test every combination of other mods, every
 colony shape, every save state or every future game patch. If a save matters to
@@ -293,6 +293,19 @@ unchanged BY NAME). The card's sentence is corrected to **96**, re-emitted
 2026-08-16 — the 95 sat on this card and its release copy for a day because it
 was inherited from the prediction instead of re-emitted.
 
+⚠️ **2026-08-20 (close-out chain link 3): the suite count moves again, 96 → 98,
+and this time the number is EMITTED BUT NOT YET RUN.** `C51`'s wave-12 probe and
+`C50`'s wave-13 probe landed on 08-20, so `python tools/doccheck.py
+--emit-counts` reads **`TestKit probes: 98`** and the card's sentence is
+corrected to match. ⛔ **What has NOT happened is an A/B pair at 98** — the last
+measured reading is still `80/0/16/0` **of 96** (08-15). Link 4's script makes
+the suite optional on purpose (*"only if it is free… do not turn this into a
+gate"*, owner ruling 57), so the run that would measure 98 may not happen before
+launch. ⇒ **the sentence is a claim about the suite the pack ships with, which is
+98 checks; if link 5 wants it to be a claim about a measurement, the sitting has
+to run `SMRTest.RunAll()` and the number has to be re-read from that log.** The
+2026-08-16 lesson above is the reason this is written down rather than assumed.
+
 5. No change to the tier-1 save-footprint list: both new modules persist
    NOTHING (F85 Layer 3, C39 Layer 2 by construction — stated on both modules
    and both entries), so the enumerated footprint is unchanged.
@@ -354,7 +367,7 @@ release prep re-checks portal limits anyway and can adopt the shape wording then
 | save footprint enumeration | `D13_EXPOSED_SET.md` §2b rows D1–D11 (fix-pack rows only), MEASURED where marked; §2c for the negative half |
 | ~~the engine's mod-reference notice on the next load, self-clearing~~ **STRUCK from the card 2026-08-14 (checklist 29, owner-ruled)**: the measured line is LOG-only and the on-screen warning skips `optional_mod` mods — no player of this mod ever sees it | `D13_EXPOSED_SET.md` §10.9(4) — whose "sees one notice" aside was a rig-console inference; route: `Mod.lua:1199` (ModLog), `SavegameMetadata.lua:97-99` (optional filter) |
 | repairs already applied stay | §2b D10 (`SMRFixPack_F35_*`) + D11, both on the KEEP list (§5) |
-| suite of **96** checks, modded vs unmodded | `python tools/doccheck.py --emit-counts`, re-emitted 2026-08-16: `TestKit probes: 96`; measured `80/0/16/0` of 96 (`archive/c47suite4_*`, 2026-08-15). History: 94 → 96 (`unattended-3` probes) → 95 (item-31 **prediction**, F85's probe out) → 96 (the `C47` wave-11 probe landed the same day); A/B pair `WORKFLOW.md:274` |
+| suite of **98** checks, modded vs unmodded | `python tools/doccheck.py --emit-counts`, re-emitted 2026-08-20: `TestKit probes: 98` (`C51` wave 12 + `C50` wave 13). ⛔ **EMITTED, NOT MEASURED at 98** — the last A/B reading is `80/0/16/0` of **96** (`archive/c47suite4_*`, 2026-08-15) and link 4's suite step is optional by owner ruling 57. History: 94 → 96 (`unattended-3` probes) → 95 (item-31 **prediction**, F85's probe out) → 96 (the `C47` wave-11 probe landed the same day) → 98; A/B pair `WORKFLOW.md:274` |
 | **five** judgment calls (briefly six on 2026-08-15, reverted the same day) | the five modules by name: `Fix_DroneUnreachableForever` · `Fix_DustSicknessBiorobots` · `Fix_ShelterReflex` · `Fix_PayloadTemplateRefill` · `Fix_DustDevilSpawnGate`. ⛔ `Fix_DistressPopupPause` was the sixth for a few hours and is **REMOVED** (owner ruling, checklist 31 — its popup is dead-coded out of retail); census re-run 2026-08-15 after the removal |
 | Automation-policy disclosure paragraph | `C39.md` §2026-08-15 (owner ruling: scope ships as built, disclosure still owed); building names are DISPLAY names re-read at the templates 2026-08-15 (`BottomlessPitResearchCenter` displays as **"Experiment 1: Big Drop"** — never call it "the Bottomless Pit" in player text); consumers `SecurityStation.lua:13`, `DroneFactory.lua:75-79`, `BottomlessPitResearchCenter.lua:45`, `TVStudioWorkshop.lua:100`, `ArtWorkshop.lua:24` |
 | ~~distress-call judgment bullet~~ **DELETED from the card 2026-08-15 (checklist 31, owner-ruled) along with its module** | `F85.md` §2026-08-15 (later): `DistressCallPopup`'s sole caller is compiled behind a literal `local cond = false` (`POIAdditionalContent.generated.lua:89-111`), so no player can raise that dialog and the fix could never fire. Module + probe preserved verbatim in `SHELVED_F85_DISTRESS_PAUSE.md` |

@@ -334,3 +334,49 @@ deletion) in `PARKED_OPTIN_REFERENCES.md` P1–P37**, with the restore trigger
   `install.md#what-it-puts-in-your-save` both survive).
 * `mkdocs build --strict` **GREEN** after these edits; `site/` artefact not
   committed. Site `README.md` swept in the same pass (opt-in table row parked).
+
+---
+
+## 2026-08-20 — two entries added by the close-out chain (`C50` + `C51`), and one section renamed
+
+Close-out chain link 3 (`closeout-1.0.0/03_SURFACES.md`). The owner reversed the
+build-after-launch plan (checklist 58), so two modules landed in the pack on
+08-20 and the fix list owed them entries — the `L6-F1` class of miss (a page and
+a build disagreeing) is exactly what this catches.
+
+* **Fix-list entries: 77 → 79.** `C50` (SpaceY's undescribed Drone Hub capacity)
+  and `C51` (three UI strings that could never be translated). ⛔ **Neither is a
+  judgment call** — the census is unchanged at **five** `??? question` entries,
+  recounted at the page this session (`content/fix-list.md:95, 283, 323, 344,
+  698`), and the *"Five of the fixes are judgment calls"* sentence was not
+  touched on any surface. Both use `??? success`, both carry the house
+  *What you saw / What was wrong / After the fix* shape.
+* ⚠️ **Section renamed rather than added: "The numbers on your screen" → "The
+  text and numbers on your screen"**, and both entries went in it. A separate
+  *Descriptions and translations* section was written first and **withdrawn**:
+  `PUBLIC_DOCS_DESIGN.md` §4.3 says to merge any category under ~4 entries, and
+  it would have held two. The bucket is the design's own *Interface & numbers*,
+  which was always meant to hold interface text; the title had narrowed it. Now
+  **7 entries**, and no anchor anywhere links to the old heading (checked across
+  both repos, `site/` excluded).
+* `content/index.md`'s coverage sentence follows the rename — *"…story
+  sequences, and the text and numbers on your screen"*. ⚠️ That sentence is the
+  de-parked body of **P6**; the parked verbatim is untouched and still restorable
+  (`PARKED_OPTIN_REFERENCES.md`, drift noted there).
+* ⭐ **The `C51` entry states the thing that is easy to leave out: an English
+  player sees NO change at all.** Its *Worth knowing* line says so in bold rather
+  than implying a repair anyone can watch. ⛔ Neither entry names fredware's mod
+  (`EF-054`, `FIX_POLICY` §8) — the credit lives in both code headers and both
+  bug entries, which is where the policy puts it.
+* ⚠️ **`C50`'s wording is deliberately screen-agnostic** — *"while you are
+  choosing a sponsor"*, never an enumeration. The fix reaches three live sites
+  and **checklist 59 leaves the owner free to cut the third** (the challenge
+  landing spot); the sentence stays true either way. It also ⛔ quotes no number,
+  because the figure is `base + the preset's modifier` computed at render time.
+* ⛔ **Both entries describe UNOBSERVED code.** Nothing on either page has been
+  seen on a screen; link 4 is the first eyes and link 5 rules ship-or-revert.
+* `mkdocs build --strict` **GREEN**, zero warnings; `site/` artefact not
+  committed. Coverage both ways was not re-run as a full sweep — ⛔ **the 74-of-75
+  statement above is era-stale and was NOT re-derived here**; what was checked is
+  that the two new modules now have entries and that the judgment-call census
+  still reads five.

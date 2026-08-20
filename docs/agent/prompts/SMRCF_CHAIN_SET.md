@@ -5,6 +5,18 @@ owner's instruction: *"I want to write up chains for everything we found we can
 fix, if the others are simple they can be combined chains. Complex can be stand
 alone. the jump underground should be a solo issue chain."*
 
+> ⛔⛔ **2026-08-20 — THIS MAP IS THREE-QUARTERS OVERTAKEN. Read this before
+> acting on any row below.** The owner reversed the "post-launch" premise
+> (checklist 58) and the close-out chain `closeout-1.0.0/` did the work instead:
+> **`C50` and `C51` are BUILT and IN 1.0.0** (`Code/Fix_SpaceYDroneCapBullet.lua`,
+> `Code/Fix_LocalizedUIText.lua`, 08-20) ⇒ ⛔ **chain B must not be run — it would
+> rebuild shipped modules**; **`C52` is `parked`/FROZEN by the same ruling** ⇒ ⛔
+> chain C is fenced, not merely gated; **`C49` is retired `wontfix`** (owner,
+> 08-20). What survives untouched: chain A (`smrcf-verify/`), chain D
+> (`jumbo-cave/`), and the dust-devil marker gate that chain B was carrying as a
+> rider. ⛔ The counts quoted throughout this set are era-stale (they read 74–76
+> modules; the tree is at 77) — re-emit, never read one from here.
+
 **This file is a map, not a chain.** It is NOT self-consuming — it is deleted by
 the LAST chain of the set to close, and its grave named there. Each chain
 folder below self-consumes normally.

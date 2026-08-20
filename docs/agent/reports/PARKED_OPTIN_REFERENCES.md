@@ -182,6 +182,14 @@ Now reads: a plain `## What is in it` prose section carrying the fix-pack tab's
 content minus *"This is the one most people want."* (a comparison with nothing
 to compare to). The opt-in tab is fully parked.
 
+⚠️ **Drift, 2026-08-20 (close-out chain link 3):** the live sentence's last
+clause moved with a fix-list section rename — *"…and the numbers on your
+screen"* → *"…and the text and numbers on your screen"* (`C50`/`C51` entries;
+`SITE_BUILD_AUDIT.md`, same date). ⛔ The verbatim below is **unchanged and still
+what gets restored**; on the day it is restored, carry that one clause forward
+rather than reverting it, or the page will name a section heading that no longer
+exists.
+
 <!-- VERBATIM src="content/index.md" -->
 ````text
 ## Which one is which
