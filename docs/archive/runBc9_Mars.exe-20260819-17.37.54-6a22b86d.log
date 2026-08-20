@@ -1,0 +1,157 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	44%
+Disk Free      	740211 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:102
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:104
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:435
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:564
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:760
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:392
+*** audio info
+Audio Endpoint                 	Headphones (3- A50 Game)
+						Lua 0:00:02:417
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:420
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:423
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-000) packed from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:17:735
+[preset] Preset postprocess took 47 ms.
+						Lua 0:00:17:780
+479 / 479 particle streams loaded in 41 ms.
+						Lua 0:00:18:627
+[PdxSDK] Started up. Took 1197
+						Lua 0:00:19:039
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:040
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:179
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:33:425
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:33:426
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:33:449
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:36:183
+*** Assets reloaded in 2.8 s, read 202.1 MB, read speed 73.3 MB/s, average read 4948 bytes.
+						Lua 0:00:38:684
+
+Load anyway : The following mods are missing or outdated:
+
+<color em>Community Fix Pack — Test Kit</color>
+
+Some features may not work. 
+
+						Lua 0:00:44:313
+Unpersist missing permanent: Mod/SMR_CommunityFixPack | Fallback permanent: table: 0000016D518EB070 [7]
+						Lua 0:00:44:348
+[mod] This savegame tries to load Mod Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001), which is present, but not loaded
+[mod] This savegame tries to load Mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-000), which is present, but not loaded
+[mod] This savegame tries to load Mod Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000), which is present, but not loaded
+						Lua 0:00:47:298
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:00:47:313
+Game Loaded in 13889 ms
+						Lua 0:00:48:064
+Game loaded on map BlankBigCanyonCMix_09 in 14729 ms
+						Lua 0:06:28:623
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+						Lua 0:06:33:872
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: ProsperityForMars
+    rival_colonies: Japan, paradox
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: HdmSxGs6kyd0uz6-, mystery: none, coordinates: 0N107E, landing_spot: , logo: USA
+map_conditions: altitude: -583, temperature: -1, cold_wave: 0, dust_devils: 66, dust_storm: 102, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 176
+						Lua 0:06:33:887
+Game Loaded in 5264 ms
+						Lua 0:06:34:340
+Game loaded on map BlankBigCanyonCMix_09 in 5838 ms
+						Lua 0:07:28:677
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:07:28:680
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:07:29:048
+
+
+*** Debug::Done()
+Time (ms)	449048
+
+

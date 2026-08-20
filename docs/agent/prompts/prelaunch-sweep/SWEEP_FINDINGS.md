@@ -1726,3 +1726,43 @@ its own header comment — the third self-flattering instrument in this chain.
   source-settled to land on the same `content_path` (all three cases), so this is a
   confirmation, not a discovery.
 * ⛔ **Nothing was uploaded, transmitted, or logged in.** No portal API was touched.
+
+---
+
+# TERMINAL AUDIT — 2026-08-19. Part A ran as the owner-designed fan-out: ten adversarial verifiers, refute-by-default.
+
+Full record with per-verdict evidence: `reports/99_TERMINAL_AUDIT.md`. This
+entry is the findings-format summary. **Verdict: UPLOAD — the tree run B
+validated is fit to ship as it stands. Convergence: clause 3 (the cap), stated
+as such — we stopped counting, not because there was nothing left.**
+The verdict awaits `99b_VERDICT_REVIEW_fable.md` before it is acted on.
+
+| # | finding | severity | route | disposition |
+|---|---|---|---|---|
+| TA-1 | ⛔ L1-F3 is REFUTED: `Done` is a CombineMethods entry (`PropertyObject.lua:1664`, `procall_parents_last`) — the F66 reclaim DOES run when a Station dies; the recorded coverage gap is phantom (link 1 never checked the second combining registry) | record | re-derived at Src by the L1 verifier | corrected here; no code was ever changed over it |
+| TA-2 | ⛔ The audit brief's queue note "the three colonist-walking fixes need no change" is REFUTED for `Fix_StaleReservations:61` — a plain-Lua `OnMsg.NewDay` sweep with no MapForEach; the act-1 measurement never covered it | real, third-party/corrupt-object-gated | read + containment walked by the L5 verifier | REOPENED; queued, checklist 53 |
+| TA-3 | ⛔ L8-F4's deference census is REFUTED as stated: `l8_deference_map.py` misses `local orig = Name` captures; ≥4 of 11 global REPLACES rows actually chain; tool prints 67 sites vs recorded 66 | record / instrument | re-run + spot-reads by the L8 verifier | census quarantined — may not be cited until the tool is repaired; the fourth self-flattering instrument this chain has caught |
+| TA-4 | ⛔ The console-story correction's mechanism was INVERTED: the retail console IS `ModEnvBlacklist`-governed (`console.lua:45-56` wraps a LuaModEnv); "nil in `_G`" conflated the console env with `_G`; both functions ship gated true in retail `Lua.fpk` (extracted) | record | corrections verifier, mechanism + artifact extraction | re-recorded in the artifact §1; Ged route stands on measurement AND mechanism |
+| TA-5 | EF-065 half-refuted: the LoadCode error box is DEAD CODE on this title (`ModsPreGameMenuOpen` never set; `Msg("PreGameMenuOpen")` never raised) ⇒ a file-scope module loss is silent on screen; also `pending`-not-absent nuance; also `content_path` config-invariant | record | L5 + L8 verifiers | EF-065 amended in place |
+| TA-6 | L3-F2's charge against `Fix_MeteorFrequency:36-37` is REFUTED — the comment correctly describes the already-written save; link 3 overstated | record | L3 verifier | corrected here |
+| TA-7 | Two NEW latent mark-outlives-verdict sites: `ApplyModOptions` re-activation (`00_Core.lua:481-483`, needs `def.optional` — 0 ship) and benign-latch-directly-after-non-benign-latch (no intervening heal) | latent | Part B + L4 verifier | queued, checklist 53 |
+| TA-8 | L2-F5's prediction undercounts: a reloaded pre-fix suite shows 3 false FAILs, not 2 (IndependenceTerraforming probe routes a status check) | record | L2 verifier | corrected here; moot post-fix |
+| TA-9 | Run B evidence re-verified from primary logs: all log-decidable criteria HOLD; "first packed load ever" narrowed to "first in the B configuration" (the 17:11 setup leg loaded packed 9 min earlier, cleanly); c9's log was scored but never archived | record | run-B verifier, python comparisons | logs absorbed: `runBprep_*`, `runBc9_*`, `sit0817_*` (4 of LR-F12's 7 — the other 3 rotated away); corpus now 80 |
+| TA-10 | "66 of 66 unpacked" under-counted the corpus: precise recount = 69 unpacked + 7 sessions with no fix-pack mode line (+ run B packed); operative fact (zero packed before run B) unchanged | record | L7 + run-B verifiers | corrected here |
+| TA-11 | ⭐ Part C census: preset-field writes = 9 rows / 6 modules, ZERO cross-module collisions, ZERO mod-invented field names (`tools/audit_preset_fields.py`, selftest 8/8; own instrument defect — rawget-idiom blindness — found and fixed before any count) | positive | terminal audit's own sweep | the surface three lenses named and none swept is now swept |
+| TA-12 | ⭐ The question no lens asked: build-version gating. `IsTooNew` is never called on the load path — an older-build player loads the pack engine-ungated, shape-checks-only; and the in-game browser's "only compatible" filter keys on a portal-side `RequiredGameVersion` the upload never sends | real, low reach | re-derived at Src (`Mod.lua:902-906`, `ModManager.lua:224/230/908`) | recorded; check-at-upload item in `RELEASE_PORTAL_PREP.md` §0.5 |
+| TA-13 | EF-055's narrowing was unpropagated (STATE only) and carries a bundled variable (same-id vs no-launch-while-absent coincide in all experiments) | record | corrections verifier | fact amended in place, caveat disclosed |
+| TA-14 | L5-C1's teardown-window trigger story is refuted (`_fixup.lua` makes the thread map-owned; maps unload before the GameVar flips); the observed error is real, mechanism open | record | L5 verifier | filed as C53 with exactly that status |
+
+**Everything else HOLDS** — links 2, 6, 7 in full (L2's fix earned the
+strongest verification in the set, including the cross-fix thrash check the
+design accepted as its residual risk; L6-F1's launch-blocking call was correct
+and understated; L7 23/23 controls), links 1/3/4/5/8 with the corrections
+above, all six chain corrections audited (C-a inverted mechanism aside, all
+hold), and both `2f077e8` core fixes survive the hostile re-read — the
+clear-on-success provably hides no genuine rot.
+
+**What the terminal audit could NOT reach** mirrors the ledger's closing row:
+console platforms · non-English · foreign-mod interleaving (policy) · TestKit
+containment/second-load · the 53 wrappers' callers per-site · StaleReservations
+per-item guard (reopened) · long-session cost.

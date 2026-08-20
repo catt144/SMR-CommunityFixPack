@@ -68,3 +68,25 @@ and does not re-do it.
 - ⛔ every gate reading this project owns was taken with the TestKit loaded, and
   the TestKit **mutates `_G`**;
 - ⛔ no aggregate anything: save footprint, runtime cost, collision map.
+
+---
+
+## LEDGER CLOSED — terminal audit, 2026-08-19
+
+| link | lens | scope actually covered | depth | ⭐ NOT reached | config | commit |
+|---|---|---|---|---|---|---|
+| *(terminal audit — closes the chain)* | — (`99_TERMINAL_AUDIT_fable.md`, consumed) | ⭐ **Part A as the owner-designed fan-out: ten adversarial verifiers** (one per link + the chain's own corrections + the run-B evidence), each refuting rather than confirming, each re-deriving routes at Src independently of the report that produced the finding. Part B: hostile re-read of both `2f077e8` core fixes plus the B3 table, every row re-measured or discharged attended. Part C: **the preset-field surface three lenses named and none swept, swept** (`tools/audit_preset_fields.py`, 121 containers from Src at runtime, selftest 8/8): 9 writes / 6 modules, 0 collisions, 0 mod-invented fields; and the question no lens asked — build-version gating (`IsTooNew` never on the load path; portal `RequiredGameVersion` never sent). Run-B evidence re-verified from primary logs in python; the packed artifact reconciled 80/80 by content against the tagged tree. Archive absorbed to 80 logs (`sit0817_*`, `runBprep_*`, `runBc9_*`). Outcomes: 3 findings refuted (L1-F3, L3-F2's charge, L8-F4's census), 1 queue item reopened (StaleReservations), 2 new latent mark sites, 2 records inverted-then-corrected (console mechanism, EF-065's dead box), EF-055/EF-065 amended. | **adversarial per finding, mechanical where a census existed** — every verdict in `reports/99_TERMINAL_AUDIT.md` names its verifier evidence; 4th self-flattering instrument caught (deference census) and quarantined | ⛔ **Console platforms** — never touched by anything, and the C1 dialog is the only player surface there. ⛔ **Non-English** — no localized run ever. ⛔ **Foreign-mod interleaving** — source-derived only, by standing policy; the H-08 both-packs leg stays an owner ask. ⛔ **TestKit containment and second-load** — namespace only, after nine sessions. ⛔ **The 53 wrappers' callers, per-site.** ⛔ **`Fix_StaleReservations` per-item guard** — reopened by this audit. ⛔ **Long-session/steady-state cost** — load cost is measured, a running colony's is not. | fix pack + TestKit ticked, opt-in off (run-A shape); no launch this session | *(this commit)* |
+
+### ⛔ CONVERGENCE RULING — clause 3, the hard cap. NOT convergence.
+
+The chain stopped because the lens pool exhausted at the owner's cap of 8
+(`00_CHAIN_SPEC.md` §5.3), while the ledger still carried unswept territory of
+consequence — link 8 said so and was right. **We stopped counting, not because
+there was nothing left.** Since the cap: run B closed packed/warm-save/
+uninstall (10 of 10, re-verified), and the terminal audit closed preset-field
+patches (clean). What remains is the NOT-reached column above; clause 1 is
+unavailable while it is non-empty, and clause 2 never fired. ⚠️ Nothing in the
+remainder is reachable by a player running this pack alone on the pinned build
+in English on PC — which is the configuration 1.0.0 ships into, and is why the
+upload verdict (`reports/99_TERMINAL_AUDIT.md` §5) is YES on a clause-3 chain.
+The verdict awaits the independent ruling of `99b_VERDICT_REVIEW_fable.md`.

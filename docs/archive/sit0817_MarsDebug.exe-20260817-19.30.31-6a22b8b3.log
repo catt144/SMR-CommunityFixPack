@@ -1,0 +1,85 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b8b3
+Date:          	Fri Jun  5 07:53:23 2026
+Command line:  	-ged=1698492083773200798 -address=127.0.0.1:44000
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	52%
+Disk Free      	746919 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:008
+Drive type for game installation: SSD, savegames: SSD
+*** Ged!
+
+					Render 0:00:00:013
+Language: English
+					Render 0:00:01:528
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:662
+
+Libs: DevToolsPublic, DebugAdapter 
+
+					Render 0:00:01:677
+
+Platform: asserts, cheats, debug, desktop, editor, ged, goldmaster, paradox, pc, steam
+
+					Render 0:00:01:784
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:01:819
+Lua revision: 0
+Assets revision: 31031
+Steam AppID: <unknown>
+						Lua 0:00:01:845
+ChangeVideoMode request: 1100 x 900 0 Hz, Windowed, vsync: on
+					Render 0:00:01:864
+ChangeVideoMode end.
+						Lua 0:00:01:867
+Initializing ged app: ModEditor
+						Lua 0:15:30:527
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:15:30:528
+[QUIT] Waiting the game state to finish...
+						Lua 0:15:30:546
+[QUIT] Game state finished.
+[QUIT] Stopping game state thread...
+[Sound] Stopping...
+					Render 0:15:30:563
+[Sound] Done.
+					Render 0:15:30:574
+Hook 'Shader :: CompileEffect' not found!
+					Render 0:15:30:678
+
+
+*** Debug::Done()
+Time (ms)	930678
+
+

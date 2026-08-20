@@ -30,14 +30,21 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   - Findings `SWEEP_FINDINGS.md` (⛔ forbidden to links) · coverage `SWEEP_LEDGER.md`.
   - **Launch rehearsal consumed 08-19** (no lens, rotation intact) — stage 1 green, **stage 2 owner-blocked**;
     no launch, no `EF-056` exposure, rig untouched. Its gate block is below.
-  - ⛔⛔ **Next = the TERMINAL AUDIT (`99_TERMINAL_AUDIT_fable.md`), NOT another lens.** Link 8's §9
-    reads all 8 ledger rows for it: **unswept territory of consequence REMAINS** — run B/packed,
-    warm-save + uninstall/reinstall, preset-FIELD patches (3 lenses named it, none swept it),
-    the 53 wrappers' callers, 13 of 18 load passes vs the 237 SavegameFixups, the TestKit's own
-    containment. ⛔ **A link never ruled on convergence and none may; the audit does.**
+  - ⭐⭐ **TERMINAL AUDIT CONSUMED 08-19** (`reports/99_TERMINAL_AUDIT.md`; brief deleted). Part A = the
+    owner-designed fan-out (10 adversarial verifiers). **Verdict: UPLOAD, on convergence clause 3 (the cap,
+    named as such).** 3 findings refuted (L1-F3 phantom — `Done` is a CombineMethod; L3-F2's charge;
+    L8-F4's deference census — tool quarantined), StaleReservations per-item guard REOPENED (the act-1
+    measurement never covered its plain loop), console-story mechanism inverted-and-solved (retail console
+    IS blacklist-governed, `console.lua:45-56`), EF-055/EF-065 amended, preset-field surface swept CLEAN
+    (9 writes/6 modules, 0 collisions, 0 foreign fields, `tools/audit_preset_fields.py`). Hardening queue
+    routed = checklist 53 (recommend defer to 1.0.1). Archive absorbed to 80 logs (`sit0817_*`,
+    `runBprep_*`, `runBc9_*`).
+  - ⛔⛔ **Next = `99b_VERDICT_REVIEW_fable.md` — an independent session tries to break the verdict
+    BEFORE it is acted on. The upload waits on 99b, then the owner.**
 - ⛔ **Gate B criterion 1 fixed 08-19** (it read "packed" off lines equally true unpacked); now `Mod.lua:1849`'s
-  mode line, **66/66 archived say `unpacked`, zero `packed`**. ⚠️ Junction + packed folder both present ⇒
-  **unpacked WINS** at equal version (`Mod.lua:1770`), silently.
+  mode line. Audit recount: **69 unpacked + 7 no-mode-line; zero packed before run B** (the "66/66" was an
+  under-count of the same fact). ⚠️ Junction + packed folder both present ⇒ **unpacked WINS** at equal
+  version (`Mod.lua:1770`), silently.
 - **Namespace settled 08-19 (source):** the pack owns **5** globals (3 + 2 `GameVar`s), writes 21 vanilla
   names, trips **neither** engine assert, creates **zero** env shadows, never reads `Platform`; pack and
   TestKit are **disjoint on writes both ways** and the pack reads nothing the kit provides (first such
@@ -75,10 +82,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   - ℹ️ `C47FARM`'s header says the pack was `v1.00-001` and `MeteorFrequency` healed `latch 1.0.1 -> 1.0.0`
     (`Fix_MeteorFrequency.lua:178`) ⇒ that save predates the version reset. **Dev-rig history, nothing shipped**;
     F88's one-shot heal firing correctly on it is a pass, not a fault.
-- ✅ **RIG RESTORED on disk (08-19)**: staged packed folder deleted, fix-pack junction re-created; all **3
-  junctions** present. ⛔ **But all three mods are UNTICKED in account state** (`c9` turned them off) ⇒
-  **the next session needs an owner tick** to re-enable fix pack + TestKit before any suite number means
-  anything. Archive kept at `%LOCALAPPDATA%\Temp\…\ModUpload\Pack\ModContent.fpk` (362,894 B, `8dcb0692…`).
+- ✅ **RIG RESTORED (08-19)**: staged packed folder deleted, all **3 junctions** present. ✅ **Fix pack +
+  TestKit RE-TICKED** (observed: live log 21:23, both loading unpacked, 0 errors — the earlier "all three
+  unticked" line was stale); opt-in still off (checklist 43). Archive kept at
+  `%LOCALAPPDATA%\Temp\…\ModUpload\Pack\ModContent.fpk` (362,894 B, `8dcb0692…`) — audit re-verified
+  **80/80 byte-identical** to the tagged tree.
   ⚠️ **`EF-055`/`H-08` NARROWED (measured):** a junction pull costs the enable when the **id vanishes**; swapping
   folder-for-folder under the **same id KEEPS** it — no re-tick was needed for the packed swap.
   - ⛔ **B has NO DRIVER** — every unattended primitive lives in the TestKit and B turns it off ⇒ criteria
@@ -99,8 +107,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   08-16) · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 post-release · EF-051 falsifier = any stray save at next launch.
 
 ## Hazards — each names an action an agent could take unattended; never do it
-- **H-01** Tag `fixpack-v1.0.0` sits at `7824cbc`, one commit behind HEAD, **ON PURPOSE** (fixes unverified).
-  Never move, re-push, or "fix" it.
+- **H-01** Tag `fixpack-v1.0.0` was MOVED by the terminal audit (08-19, brief §9 authority) onto its
+  close-out commit — shipped surface byte-identical to the run-B-verified `.fpk` (80/80). It now marks
+  what actually gets packed. Never move it again without an equivalent gate.
 - **H-02** `metadata.lua` is **FROZEN** at 1.0.0 — no version bump, no Mod Editor save
   (every editor save runs `version = version + 1`, `Mod.lua:967`).
 - **H-03** No script/console in a launched game may touch a portal API — the FIRST call **creates the listing**
@@ -135,6 +144,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 75 registered (75 default-active, 0 optional-gated files)
 - Code/*.lua files: 76
 - TestKit probes: 96
-- BUGS index rows: 103 F + 12 D + 52 C
+- BUGS index rows: 103 F + 12 D + 53 C
 ```
 Re-emit after any change; game pinned **1.0.7.396349** (`EF-014`).

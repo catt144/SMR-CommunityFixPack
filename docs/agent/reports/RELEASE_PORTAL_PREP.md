@@ -154,6 +154,26 @@ uploads in one session without deciding: Steam would ship **1.0.2**.
 in-game browser renders the real 1.0.0 from `PackVersion`. Edit that field on the
 portal page if it lets you.
 
+### (d) ⚠️ CHECK AFTER THE PARADOX UPLOAD — the portal's "required game version" field (terminal audit, 2026-08-19)
+
+The in-game browser's **"only compatible"** filter keys on a portal-side
+`RequiredGameVersion` (`ModsUIIsModCompatible`, `ModManager.lua:230-234`:
+`version >= ModMinLuaRevision and version <= LuaRevision`), and **the upload
+code never sends one** (`RequiredGameVersion` appears nowhere in
+`ParadoxMods.lua`'s upload params). Absent ⇒ the check reads `false` and the
+pack is **hidden from any player who enables that filter** (default off,
+`:908`, so most players are unaffected). ⇒ After the upload, look for a
+required-game-version field on the portal page and set it to **350453** (the
+value in our `metadata.lua` `lua_revision`, equal to this build's
+`ModMinLuaRevision`, `Mod.lua:15`). If the portal has no such field, record
+that here and move on — nothing else to do.
+
+Related, recorded by the same audit (`reports/99_TERMINAL_AUDIT.md` §3b): the
+engine never blocks a too-new mod on the **load** path (`IsTooNew` is
+UI-only), so a player on an older game build loads the pack gated only by its
+own shape checks. Reachability low (Steam auto-updates; the final SM patch is
+years old); no action, recorded so nobody re-derives it.
+
 ### (d) ⭐ Two ids get written back, and they are how updates find the store entries
 
 The forced saves write `pdx_id` / `PdxMod` / `pdx_version` and `steam_id` into

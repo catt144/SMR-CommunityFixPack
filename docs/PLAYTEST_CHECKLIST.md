@@ -29,6 +29,63 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐⭐ 2026-08-19 — THE TERMINAL AUDIT IS DONE AND THE VERDICT IS **UPLOAD**. One decision is yours, and it is not urgent: harden now or in 1.0.1.
+
+53. ⭐ **The audit's verdict: upload the mod exactly as it stands.** A second,
+    independent session (`99b_VERDICT_REVIEW_fable.md`) will try to break that
+    verdict before you act on it — that review is the next session to run, and
+    the upload waits for it, not for anything below.
+
+    **What the audit did.** Ten independent verifier sessions each tried to
+    *refute* the chain's findings rather than confirm them (your fan-out
+    design). Most findings survived. Three did not: one recorded "gap" turns
+    out not to exist (the game combines `Done` methods, so the track-station
+    reclaim works after all — the error was in our favor); one measuring tool
+    was flattering itself (its "24 full replacements" number is wrong — at
+    least 4 of them actually chain politely; the tool is quarantined); and one
+    code comment we accused of being backwards was right all along. The two
+    core fixes that paused the upload survived a hostile re-read completely.
+    The full record is `docs/agent/reports/99_TERMINAL_AUDIT.md`.
+
+    **Said plainly, because the rules require it:** the sweep chain stopped at
+    its cap with territory still unswept — console platforms, non-English,
+    other people's mods, long sessions. That is *"we stopped counting"*, not
+    *"it is clean"*. But none of the remainder can touch a player running this
+    pack alone on the current game build, which is who 1.0.0 ships to, and the
+    release gate you ran covers exactly that player. That is what the YES
+    rests on.
+
+    ❓ **The one call that is yours — the recorded hardening queue.** The
+    sweep recorded a short list of code guards (all in `00_Core.lua` plus one
+    module): they only matter if another mod, or a modder following our README
+    wrongly, writes into our globals — a player alone can never trigger them.
+    Applying them now would edit the exact file your 10-of-10 gate just
+    validated. Three options:
+
+    * ⭐ **Recommended: ship 1.0.0 as validated; do the whole queue as one
+      1.0.1 hardening pass** verified by one unattended launch. The gate stays
+      exactly what it measured; the queue's defects need a hostile third party
+      that a fresh release does not have. (Your *"clean period"* ruling was
+      about a defect players would see — none of these is.)
+    * **Apply now + one unattended verification launch** — run B proved packed
+      behaves identically to unpacked, so the unattended launch carries over;
+      cheap, but the shipped file is no longer byte-for-byte the one the gate
+      ran.
+    * **Apply now + re-run the full two-act gate** — the strict option; costs
+      you another sitting.
+
+    ⚠️ One queue item was *wrongly marked settled* and the audit reopened it:
+    the daily stale-reservation sweep has no per-item guard (the console test
+    that cleared its two siblings never covered it — it's a plain loop, not a
+    map walk). It's in the same queue, same third-party gating logic... except
+    corruption, not a mod, is its trigger, which is why it's queued and not
+    urgent: a throw there just leaves vanilla's own stale state in place.
+
+    ⚠️ **One check-at-upload item added** (it's in the upload sheet §0.5): after
+    the Paradox upload, check the portal listing has a "required game version"
+    — the game never sends one, and players who turn on the mod browser's
+    "only compatible" filter would otherwise never see the pack.
+
 ### ✅ 2026-08-19 — THE RELEASE CHECK IS DONE. You ran both acts; the gate scored **10 of 10**. Nothing below is owed from you — item 52 is kept as the record of what was run.
 
 > ⭐⭐ **DONE 2026-08-19, attended, both acts.** Both core fixes proven (fix ②
