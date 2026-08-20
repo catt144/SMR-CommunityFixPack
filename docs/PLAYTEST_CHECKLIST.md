@@ -29,6 +29,46 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-08-20 — your two rulings are carried out. Nothing owed back; this is the receipt.
+
+55. ✅ **Both sibling decisions are done, in the siblings' own repos, and neither
+    touched the fix pack's shipping files.** Your words: *"You can mirror the two
+    core fixes for the opt in. For the rescue mod I would just note it in its
+    file system as a gate if we ever need to launch it."*
+
+    * ✅ **Opt-in pack — the two core fixes are mirrored** (`SMR-OptInPack`
+      `2cedf7d`). Both repairs landed in its own `00_Core.lua`, parse-swept and
+      doccheck green, and the mirror was *checked* rather than assumed: with
+      comments stripped and the namespace normalised, the three edited sites are
+      now code-identical to ours. ⚠️ **Not verified in a running game there** —
+      nothing was launched, and its STATE now carries the one boot check its
+      launch session owes (that its eight modules register once each after a
+      script reload). ⚠️ One honest split you should know: the double-name fix is
+      the half that was actually *measured* on that mod (its `NoHomeless` is the
+      module the dialog named twice); the false-alarm fix is **pre-emptive**
+      there, because no module of its own currently uses the code path that
+      leaves the stale mark. It is mirrored anyway — same design, and the next
+      module to use that path would inherit the defect.
+    * ✅ **Rescue mod — the gate is written where a launch session cannot miss
+      it** (`SMR-CommunitySaveRescue` `9c912b3`, in its `CLAUDE.md`, the file
+      every session reads first). It states the verified fact (no `items.lua`,
+      2-entry code list), the mechanism as *our claim with its citations*, and —
+      in the words that stop it being repeated as fact — that **the consequence
+      is still not derived**: nobody has read what the game does when the file is
+      *missing* rather than *incomplete*, and it may simply refuse to rebuild,
+      which would be harmless. The gate's outcome is binary: a citation-backed
+      showing that absence is harmless, or an `items.lua` written and re-verified
+      after the forced save.
+    * ℹ️ **A small gift to that future session, bought by my own detour:** the
+      game source is under an install folder literally named **`Project Spark`**;
+      the old `Surviving Mars` folder has a `ModTools` with *no* `Src` and is a
+      decoy. `EF-014` said so and I walked into it anyway, so the exact path is
+      now pasted into the gate. The derivation is minutes, not the twenty I
+      quoted you, if you ever want it done early — say the word.
+
+    ⇒ **Your remaining list is unchanged and short: re-tick the three mods, then
+    upload — Paradox first.**
+
 ### ⭐⭐ 2026-08-19 — THE VERDICT REVIEW IS DONE: **UPHELD**. The upload now waits only on you.
 
 54. ⭐⭐ **I tried to break the audit's upload verdict and could not.** A second,
@@ -375,6 +415,11 @@ completed tests move whole to
     diagnosis is fresh, rather than making each mod's launch session rediscover it.
     ℹ️ Nothing owed beyond that ruling.
 
+    ⚖️ **RULED 2026-08-20: record it as a gate in that mod's own repo, do not
+    derive it now.** Written into `SMR-CommunitySaveRescue`'s `CLAUDE.md`
+    (`9c912b3`) — the undecided consequence is carried openly as undecided, and
+    the source path for whoever discharges it is pasted in. Receipt: **item 55**.
+
 ### ⚠️ 2026-08-19 — the launch test's own first question could not fail. Already fixed; nothing owed unless you disagree.
 
 49. ⚠️ **The final launch test had a check that was incapable of failing, and I
@@ -573,6 +618,10 @@ completed tests move whole to
     **Recommendation: yes, now**, while the diagnosis is fresh; the alternative
     is that its launch session rediscovers this from scratch. ⚠️ Its own gates
     would need re-running, which is why it is your call and not mine.
+
+    ⚖️ **RULED 2026-08-20: yes, mirror them.** Done in `SMR-OptInPack`
+    (`2cedf7d`), nothing in this repo touched — the receipt, including what is
+    measured there versus pre-emptive, is **item 55**.
 
     ❓ **Q2 — Steam's version number.** ⛔ Decide **after** Paradox, not now.
     Paradox Mods saves *after* it uploads, so it receives a clean **1.0.0**.

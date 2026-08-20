@@ -32,8 +32,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
-  40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q1 (mirror core fixes to opt-in) · 37 Q2 (Steam, after
-  Paradox) · 34 (C49–C52 timing; QA owed first).
+  40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q2 (Steam, after Paradox) ·
+  34 (C49–C52 timing; QA owed first).
+- ✅ **Sibling rulings CARRIED OUT 08-20 (checklist 55)** — no fix-pack file touched, shipping surface re-diffed
+  empty: the two `2f077e8` core fixes are MIRRORED into `SMR-OptInPack` (`2cedf7d`, parse+doccheck green, sites
+  code-identical after namespace normalisation; ⛔ unverified in a running game there), and the rescue mod's
+  missing `items.lua` is a LAUNCH GATE in `SMR-CommunitySaveRescue/CLAUDE.md` (`9c912b3`) with its consequence
+  carried as ⛔ NOT DERIVED. Src path (`EF-014`) is `…\Project Spark\ModTools\Src\CommonLua\Classes\Mod.lua`.
 - Watches: C47 speed thread (descending ladder, unrun) · C48 CANDIDATE (opt-in territory; no seed-family fix code
   here, 08-16) · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 post-release · EF-051 falsifier = any stray save.
 
