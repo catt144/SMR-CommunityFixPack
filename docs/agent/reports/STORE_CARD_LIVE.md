@@ -14,8 +14,36 @@ modder info and it being mod friendly."*
 
 ## What this pays off, beyond the ask
 
-- ⛔ **No counts anywhere.** Every earlier surface carried one and every one
-  drifted (68 → 66 → 67 → …). This card cannot go stale that way.
+- ⚖️ **COUNTS: reversed by the owner, same evening.** The first draft carried none,
+  on the grounds that every earlier surface's number drifted (68 → 66 → 67 → …).
+  The owner then asked for *"a total number of bugs fixed"* and an indication of
+  how many are invisible. ⇒ Two numbers are used and **both are checkable by the
+  reader on the page the card links to**, which is the only thing that makes a
+  count safe here:
+  - **79** — entries on the fix list. Emitted, not typed: `grep -c '^??? '`, and
+    the section tally sums to the same (18+11+9+9+7+7+7+7+4). ⚠️ It is worded as
+    *"seventy-nine repairs"*, not *"79 bugs"* — one entry covers two defects
+    ("Two story-scripting defects…"), so entries is the honest unit.
+  - **4** — the fix list's own audited section *"Under the hood: these four repair
+    things you cannot see today."* ⛔ Not a classification invented for the card.
+  - ⛔ **MAINTENANCE DEBT ACCEPTED KNOWINGLY:** adding a fix now means editing two
+    store pages as well as the site, or the number is a lie. That is the cost the
+    no-counts draft was avoiding; the owner priced it and chose findability.
+- ⛔⛔ **TWO OVERCLAIMS CAUGHT AND CUT before this was pasted — the owner asked for
+  "possible crashes" and the record does not support the word.**
+  - *"Arriving at an asteroid with subsurface Exotic Minerals froze it"* was in the
+    first draft's headliners. ⛔ The fix list's own entry says: *"we could not
+    reproduce the freeze on our own hardware, so we cannot tell you this cures
+    it"* — a Linux/NVIDIA report, fix removes the likely cause, cure unclaimed.
+    **Cut.**
+  - *"Completing the last milestone crashed the game"* is the fix list's heading,
+    but that entry's own **What you saw** is *"the end-of-game milestone popup
+    never arriving"* — a script erroring mid-count, which in this engine aborts a
+    function rather than killing the client. **Reworded to the symptom.**
+  - ⇒ **The pack repairs no confirmed client crash, and the card must not imply
+    one.** What it does repair, and what the opening now leads with instead:
+    irreversible losses, colonist deaths, things that stop forever, and silent
+    arithmetic.
 - ✅ **Checklist 47(a)** — the published veto snippet used
   `SMRFixPack_Disabled = SMRFixPack_Disabled or {}`, which reads a name that may
   not exist and trips the engine's strict-global guard. **The safe form is used
@@ -67,16 +95,32 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Every fix in this pack repairs something the game's own code gets wrong — the
-code says one thing, does another, and the fix makes it do what it says. It
-fixes bugs; it does not rebalance the game. Preferences and features are
-deliberately not in it.
+Seventy-nine repairs, each one written up on the fix list with what you would
+have seen and what was actually wrong. Every one targets something the game's
+own code gets wrong — the code says one thing, does another, and the fix makes
+it do what it says. It fixes bugs; it does not rebalance the game. Preferences
+and features are deliberately not in it.
+
+Some of them you could hardly miss: an entire train line and every train on it
+deleted by salvaging a single hex, colonists suffocating on a walk between two
+domes, a lander that unloaded its own return fuel and could never come home.
+
+More of them you would never have blamed on a bug, because the game looked
+perfectly normal while the arithmetic underneath it was wrong — a trait's
+colony-wide bonus that never reached a single colonist, upgrade bonuses left
+behind by demolished buildings and stacking every time you rebuilt, a technology
+charging 10% where its own text promises 20%, a Comfort penalty billed for
+longer than the journey actually took.
+
+And four of them repair things you cannot see at all today: real defects that
+the shipped numbers happen to hide, which another mod, a game patch or a DLC
+could walk straight into.
 
 
 SOME OF WHAT IT FIXES
 
-· Completing the last milestone crashed the game.
-· Arriving at an asteroid with subsurface Exotic Minerals froze it.
+· The end-of-game popup never arrived in games with No Terraforming or No Politics.
+· Eleven rows of the Command Center's resource panel rendered as blank space.
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
 · A dome sat half empty and still refused to house anyone.
@@ -146,12 +190,18 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-Every fix in this pack repairs something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Seventy-nine repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+
+Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, a lander that unloaded its own return fuel and could never come home.
+
+More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a trait's colony-wide bonus that never reached a single colonist, upgrade bonuses left behind by demolished buildings and stacking every time you rebuilt, a technology charging 10% where its own text promises 20%, a Comfort penalty billed for longer than the journey actually took.
+
+And [b]four[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
 [h2]Some of what it fixes[/h2]
 [list]
-[*]Completing the last milestone crashed the game.
-[*]Arriving at an asteroid with subsurface Exotic Minerals froze it.
+[*]The end-of-game popup never arrived in games with No Terraforming or No Politics.
+[*]Eleven rows of the Command Center's resource panel rendered as blank space.
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]A dome sat half empty and still refused to house anyone.
