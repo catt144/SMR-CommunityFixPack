@@ -8,6 +8,164 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-20 — the close-out chain ran end to end and the verdict is SHIP; STATE evicted to a kernel again
+
+tags: item-34 item-37 item-39 item-40 item-41 item-43 item-47 item-50 item-51
+item-53 item-54 item-55 item-56 item-57 item-58 item-59 item-60 item-61 item-62
+item-63 item-64 item-65 item-66 item-67 item-68 C49 C50 C51 C52 EF-014 EF-039
+EF-051 EF-055 EF-056 EF-066 2326bd3 4cc20f1 7c57584 b091d71 72e7c21 a854d9b
+544d9d6 2cabce7 2a879f4 68b8bf7 11ed886 42936dd 5d7153e a57158a 8ba2694 3b78913
+d04d539 2a7ba46 2cedf7d 9c912b3
+
+**Why this entry exists.** doccheck WARNed on STATE.md's size — `warn STATE.md
+is 9941 bytes, warn threshold is 9216` — and the whole of 08-20, the day the
+close-out chain ran from design to verdict, had never been archived. The owner
+fired `agent/prompts/STATE_EVICTION.md`. **The full pre-eviction file is
+preserved verbatim at `git show 2326bd3:docs/agent/STATE.md`**, which remains the
+authoritative wording for every digest below; the previous grave is `2a7ba46`
+(08-19 entry).
+
+Digests of the evicted efforts, newest first:
+
+- **08-20 — close-out link 5, the terminal audit: VERDICT SHIP.** `2326bd3`.
+  ⚠️ This link left **no report file** — its record is that commit's message,
+  checklist 66, and the fact it filed. Brief and chain README `git rm`'d per the
+  self-consuming rule (grave: `git show 68b8bf7:docs/agent/prompts/closeout-1.0.0/05_AUDIT_fable.md`).
+  Five challenges tried and all held: `C50`'s regression warning (the module only
+  ever **reads** `preset.effect` — one line — so the T-constructor short-circuit
+  route is structurally unreachable, and the owner's own row-4 reading is the
+  screen proof), evidence provenance (every `tested-attended` word traced to a
+  named watcher/screen/language/log), H-10 (`items.lua` ≡ metadata `code` ≡ disk,
+  **78 = 78 = 78** in identical order, `pack_predict` **82**), the frozen things
+  (`version` still `0`, `C52` still `parked`, no opt-in passage restored, no
+  player surface naming the other mod, **nothing published** — no portal line in
+  any log), and the sitting's own wrong turn. ⛔ **Zero launch blockers.** The
+  cost chosen was the ship-side one — the two fixes go out on the one attended
+  sitting rather than a re-run gate — because the owner had ruled the gate
+  one-time (item 57) and ruled the fixes into 1.0.0 (item 58). The tag
+  `fixpack-v1.0.0` MOVED onto this commit, the second move in two days, under the
+  brief's own authority; what it stands on now is the attended sitting, **not run
+  B**, which two new modules outdated (H-01). Re-derivation filed as **`EF-066`**:
+  a built class's `Init` is never the function anyone assigned — `Init`/`Done` are
+  *combined* methods recomposed per class at build time (`classes.lua:1602-1676`),
+  which is both why `C51`'s single parent wrap reached the Zeus rocket and why the
+  wave-12 probe's *"a later mod has chained on top of ours"* names a cause that
+  **cannot** be the cause (no later mod exists; TestKit-only, other repo). ⭐ The
+  question the whole chain never asked (the audit's C5, recorded in `EF-066`): the
+  pack wraps ~60 (class, method) targets and **nobody has ever enumerated which of
+  them have shipped subclasses that override the wrapped method**. Failure mode is
+  under-coverage — the unreached subclass keeps vanilla, defect included — never
+  new harm, which is why it did not block 1.0.0. ⚖️ Its own retrospective: five
+  prompts for two text fixes was worth it **narrowly, and not for the planned
+  reason** — the builds needed no chain, but link 4's prep caught `C50` printing a
+  wrong number on a screen no record had ever named and the sitting caught `C51`'s
+  rocket half having never worked at all. A future two-fix change should be a
+  **two-link** chain: build, then attended-test-plus-audit in one.
+- **08-20 — close-out link 4, THE ATTENDED SITTING: both fixes seen working, in
+  two languages.** `b091d71` (predictions committed before the game opened),
+  `7c57584` (a code change mid-sitting), `4cc20f1` (close-out). Report
+  `reports/04_ATTENDED_SITTING.md`; logs `archive/link4{en,de,lang}_*`. Owner at
+  the keyboard, two launches plus a language-change restart. Readings: `C50`'s new
+  bullet on **both** pre-game sponsor screens reading **(40)** — the number
+  pre-registered before launch — and in German byte-for-byte what `flpk_extract`
+  predicted from the pack; SpaceY's first bullet kept its **(40,000)** cargo
+  figure, which was the regression route the check existed for; `C51` showed **no
+  visible English change**, which is what the site page promises and therefore what
+  had to be confirmed, and in German gave `TERRAFORMING-GESAMTFORTSCHRITT`,
+  `Zurück zur Erde` and a `2 of 2 strings` log line. Boot read **77 applied** (up
+  from 75, with the one standing `SaintBlessing: inactive`); suite **74 PASS · 0
+  FAIL · 24 SKIP · 0 ERROR of 98**, all 24 skips named (8 opt-in, 6 save-rescue, 8
+  retail sandbox, 2 odds and ends) — item 60 discharged, the store card's "98
+  checks" is measured now. ⭐⭐ **`EF-039`'s standing unobserved note CLOSED,
+  positively and by both routes it distinguishes** — a repointed shipped id and a
+  borrowed one in a `T{tag, context}` form that appears nowhere in the shipped game
+  both rendered German on screen; ⚠️ German is still the ONLY localisation anyone
+  has *seen*, the other 7 packs remain CSV-measured. ⚖️ **Two code changes happened
+  during the sitting:** `C50` now stands down while a game runs (owner ruling, item
+  61 — the in-game Goals panel double-counted the sponsor bonus, printing 60 for a
+  cap of 40), and `C51`'s rocket half was a ⛔ **NO-OP as built** — it had never
+  worked in any session, searching for the Back to Earth button in the wrong place
+  — now fixed with `XWindow:ResolveId`. ⛔⛔ **The method lesson, recorded because
+  it is one:** the agent talked itself into a theory that rocket subclasses don't
+  inherit the fix, built a change for it, and on that change appearing to fail
+  **recommended cutting the rocket half from 1.0.0** — the owner's very next
+  screenshot showed it working. What saved it was the owner's question, *"why can't
+  you detect it when I press the button and trace it back?"*; that tracer settled in
+  one shot what three rounds of source-reading had got wrong (see `EF-066`).
+  ⛔ **SKIPPED BY NAME, never counted as passes:** the challenge landing-spot
+  screen, and the in-game Mission Profile on a SpaceY colony. ℹ️ The `[LUA ERROR]`
+  in those logs is the agent's console tracer using a function the mod sandbox does
+  not have, contained and flagged so the audit would not misread it; the owner's
+  autosaves reconciled by name (`Sol 406`, `Sol 411`, byte-identical to the
+  pre-launch copies), `C47FARM` untouched.
+- **08-20 — close-out links 1 and 2, the two builds.** `C51` →
+  `Code/Fix_LocalizedUIText.lua` (`2a879f4`): three strings repointed at ids the
+  game already ships, and the English case turned out to be the part that was not
+  on record. `C50` → `Code/Fix_SpaceYDroneCapBullet.lua` (`2cabce7`): the brief
+  named two screens and the build found **three live ones plus one function nobody
+  calls** — caught by a review of the sitting script that had inherited the brief's
+  count (`a854d9b`). Both builds updated `items.lua` and metadata's `code` list in
+  the same commit, which is the whole of H-10. Entries `bugs/C50.md`, `bugs/C51.md`
+  carry the derivations; `5d7153e` records that `C50`'s "safe" remedy was the unsafe
+  one for this field and the lossy one turned out not to be lossy, `11ed886` that
+  calling `C50` a judgment call rather than a plain repair was the agent's error.
+- **08-20 — close-out link 3, the public surfaces** (`544d9d6`). ⛔ The most
+  serious find: `RELEASE_PORTAL_PREP` §0.5(f) told the owner to md5 their
+  downloaded pack against a **recorded number**, and that number had gone stale the
+  moment link 1 committed — the check **would have failed on a correct upload**.
+  It is now a blank row filled in *at pack time* instead of a number anyone
+  invents. Site and store surfaces caught up to two new fixes
+  (`SITE_BUILD_AUDIT.md`, `STORE_FIXPACK.md`, `RELEASE_DESCRIPTION_FIXPACK.md`,
+  `PARKED_OPTIN_REFERENCES.md`). One call the link made without stopping the owner
+  was routed as item 59 and later **ruled keep**, no code moving for it
+  (`72e7c21`).
+- **08-20 — the chain itself, and the ruling that shaped it** (`68b8bf7`, item
+  58). The owner reversed the build-after-launch plan and gave the reason, which is
+  the part that shaped everything: they did not want to upload and walk straight
+  into 1.0.1 work — they wanted this repo closed and their attention on the opt-in
+  pack until a player report, a real problem or a game patch says otherwise. So
+  `C50`+`C51` ship in 1.0.0, tested basically, and the chain ends by handing the
+  opt-in over rather than queueing more work here. `C52` is **`parked`** — frozen
+  and reversible, not `wontfix` — and fenced so no session opens it without a fresh
+  ruling. ⚠️ One piece of `C52` does **not** park, because it is not a code fix at
+  all: the mod browser keys its preview cache on **id + version with no
+  revalidation**, so replacing the art after publication without a version bump
+  strands every player who already saw the old image — that belongs to upload
+  discipline and is pointed at the release sheet. Five prompts rather than fewer
+  put model placement in the owner's hands per `CHAIN_METHOD` 4.0.
+- **08-20 — rulings and sheet traffic.** Item **57**, a STANDING RULING: the
+  release gate was a **one-time cost, not a per-change tax** (`42936dd`) — the
+  agent had been quoting `FIX_POLICY` §3a's per-module price for a single added
+  fix; post-release is patch-note-driven maintenance (`items.lua` entry + one boot
+  `applied` log + doccheck counts), and run B / lens sweep / audit return only for
+  a major overhaul. Item **56**: `C49` → `wontfix — unreachable` on the owner's
+  word, and the two the owner thought were easy got **measured instead of
+  estimated** (`a57158a`). Item **55** (`8ba2694`): both sibling rulings carried
+  out in the siblings' own repos with no fix-pack file touched and the shipping
+  surface re-diffed empty — the two `2f077e8` core fixes MIRRORED into
+  `SMR-OptInPack` (`2cedf7d`, parse + doccheck green, sites code-identical after
+  namespace normalisation; ⛔ **unverified in a running game there**), and the
+  rescue mod's missing `items.lua` made a **LAUNCH GATE** in
+  `SMR-CommunitySaveRescue/CLAUDE.md` (`9c912b3`) with its consequence carried as
+  ⛔ NOT DERIVED. The `ModTools` Src path used throughout is `EF-014`'s.
+- **08-19 (late) — the verdict review, and three logs that were never where they
+  were said to be.** `99b_VERDICT_REVIEW_fable.md` consumed (`d04d539`): the
+  08-19 terminal audit's UPLOAD ruling was attacked and came back **UPHELD** —
+  run-B criteria, the act-1 core-fix reads and two audit verifications all
+  re-derived from primary evidence, with only wording broken. Per the sweep
+  chain's own fence its findings are NOT restated here: they live in
+  `prompts/prelaunch-sweep/SWEEP_FINDINGS.md` (VR-1…VR-6) and the ledger.
+  Separately (`3b78913`) three evidence logs that earlier records called archived
+  had **never been in the repo** — `archive/act1_*`, `archive/act1ged_*` and
+  `archive/runB_*` were only ever in the rotating live-logs dir, and are now
+  committed.
+- **08-20 — checklist traffic.** Items 54–68 raised. 34 discharged by 56+58; 60
+  discharged by the sitting; 66 is the SHIP receipt, 67 the restated upload
+  sitting, 68 the opt-in kickoff. Still open and carried into the new STATE: 37
+  Q2, 39, 40, 41, 43, 47, 50, 51, 53.
+
+---
+
 ## 2026-08-19 — the pre-launch chain closed, the release gate passed, the verdict is UPLOAD; STATE evicted again
 
 tags: item-34 item-37 item-39 item-40 item-41 item-42 item-43 item-44 item-45
