@@ -67,6 +67,22 @@ completed tests move whole to
     (`Mod.lua:265`). It reads **20 checked · 0 FAIL** again, and prints
     `PackVersion 1.0.2`.
 
+    ✅⭐ **YOU SUBSCRIBED, SO THE DELIVERED-BYTES CHECK RAN — the first time this
+    project has ever verified what a player actually receives.** Every byte check
+    before it stopped at the file we upload.
+
+    **Steam: checked, and clean.** The downloaded copy is **385,131 B**, matching
+    the page; **82 entries**; and against our tree **80 are byte-identical and
+    exactly 2 differ — `metadata.lua` and `items.lua`**, the two files that save
+    rewrote. ⇒ **All 78 code files a Steam player gets are byte-for-byte the ones
+    you watched working.** I read `version` out of the archive itself: **`2`**, so
+    Steam is confirmed **1.0.2** by measurement rather than reasoning.
+
+    ⏳ **Paradox needs one more thing from you, and it is small.** Subscribing on
+    the website downloads nothing — `PdxMods\` holds only an empty `temp_pdx`; the
+    game fetches it at startup. ⇒ **Next time you launch, it lands on disk and I
+    read its version the same way**, which closes the question below for good.
+
     ⛔⛔ **AND ONE THING I TOLD YOU ABOVE MAY BE WRONG — I am flagging it rather
     than leaving it.** I said Paradox holds 1.0.0. The Paradox browse card reads
     **376 KB**, which is Steam's 385,131 B in KiB — *not* our 391,567 B pack. If

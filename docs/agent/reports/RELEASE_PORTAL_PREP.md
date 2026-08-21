@@ -287,6 +287,35 @@ BOTH, AND A STRAIGHT md5 COMPARE WOULD READ AS A FAILURE ON THE OTHER.**
 the comments in two non-code files. ⚠️ Do not "fix" this by re-uploading: a
 further upload bumps again and would make it worse, not better.
 
+### ✅ DELIVERED-BYTES CHECK, RUN 2026-08-20 — the first one this project has ever taken
+
+The owner subscribed to both. ⭐ **This is `VR-6`/C5 discharged for real** — every
+byte-fidelity check before it stopped at the local `.fpk`.
+
+**STEAM — ✅ CHECKED AND SETTLED.** Downloaded copy at
+`A:\SteamLibrary\steamapps\workshop\content\3215050\3787202810\ModContent.fpk`:
+
+| reading | value |
+|---|---|
+| size | **385,131 B** — matches the store page exactly |
+| md5 | `2e86e5362ee4101e664a02826dc12d75` ⚠️ **not** our pack's `6621384b…`, and that is CORRECT |
+| entries | **82** |
+| vs the tree | **80 byte-identical, 2 differ — and the 2 are exactly `metadata.lua` and `items.lua`** |
+| `version` **inside the archive** | **`2`** ⇒ Steam ships **1.0.2**, read from the file, not inferred |
+
+⇒ **All 78 `Code/*.lua` files a Steam player receives are byte-identical to the
+tagged tree.** The only differences are the two files that forced save rewrote —
+one integer and the stripped comments. ✅ Nothing is wrong with the Steam
+listing.
+
+**PARADOX — ⏳ STILL OPEN, and it cannot be closed from the website.**
+Subscribing there creates no local file: `%APPDATA%\Surviving Mars Relaunched\
+PdxMods\` holds only an empty `temp_pdx`. The game pulls the mod at startup. ⇒ To
+settle it, **launch the game once**, then read `version` out of the downloaded
+`metadata.lua` the same way. ⚠️ `H-09` still applies to any *behavioural* reading
+— with the dev junction present the unpacked copy wins silently — but this is a
+file read and is unaffected.
+
 ⛔⛔ **OPEN, AND THE TABLE ABOVE IS THE SIDE THAT MIGHT BE WRONG — the two
 portals report almost the SAME size, and the reasoning says they should not.**
 Observed on the live pages 2026-08-20: Steam **385,131 B**; the Paradox browse
