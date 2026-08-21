@@ -91,6 +91,28 @@ completed tests move whole to
        §0.5(e) — the id-writeback commit; §0.5(f) — md5 your downloaded pack
        **against the row you filled in at step 3**.
 
+69. ⭐ **What to fire, and when — asked 2026-08-20 after the eviction.**
+
+    ⛔ **For the upload itself: nothing.** No agent can publish, so there is no
+    prompt to run. It is you, item **67**'s five steps, and
+    `reports/RELEASE_PORTAL_PREP.md` §0.5 open beside you.
+
+    ✅ **After the listing exists, fire
+    `docs/agent/prompts/POST_UPLOAD_CLOSE.md`** — written 08-20 for exactly that
+    moment. It exists because the writeback is not a copy-paste: the forced save
+    that writes `pdx_id`/`steam_id` into `metadata.lua` also **regenerates that
+    file from memory and strips every hand-written comment in it**, so the ids
+    have to be committed *and* the prose restored in the same commit. It also
+    ⛔ forbids the tempting mistake of "correcting" `version` back to 0 — after
+    Paradox the tree sits at `1` by design, and normalising it would lie about
+    what is published.
+
+    ⚠️ **Nothing else is owed by that prompt** — it does the three sheet checks
+    (§0.5(d) game version, (f) delivered bytes), closes STATE and the records,
+    and hands off to the opt-in. It routes **37 Q2** (Steam's number) back to you
+    rather than deciding it, because that call is only decidable once Paradox is
+    done.
+
 68. ⭐ **The opt-in effort starts on your word** — your stated next priority
     (*"shift resources and start working on the opt in"*). Its first session
     must read **that repo's own STATE** and its standing pre-upload
