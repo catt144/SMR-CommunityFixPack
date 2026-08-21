@@ -29,6 +29,75 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐⭐ 2026-08-20 — THE AUDIT IS DONE. VERDICT: SHIP. The repo's active work ends here; the upload sitting is yours whenever you want it.
+
+66. ⭐⭐ **SHIP.** Both fixes go in 1.0.0; the tag is moved onto this ruling's
+    commit and now stands on **your attended sitting** (plus your one-time
+    release-gate ruling, item 57) — not on run B, which two new modules
+    outdated. I found **no launch blocker**. What I tried to break, and what
+    happened:
+
+    | challenge | what I did | result |
+    |---|---|---|
+    | the C50 regression warning | re-read the module: `preset.effect` is only ever **read** (one line), never written; your row-4 reading — first bullet **(40,000)** intact on both screens — is the screen proof | ✅ holds |
+    | evidence provenance | traced every `tested-attended` word to who/screen/language/log; C51's claim rests on the **German** readings, never the English pass | ✅ holds |
+    | H-10 (ships absent) | compared `items.lua`, metadata's `code` list and disk **myself**: 78 = 78 = 78, identical order, both new modules present; `pack_predict` **82** | ✅ holds |
+    | frozen things | `version` still `0` · `C52` still `parked` · no opt-in passage restored · no player surface names the other mod · **nothing published** (no portal line in any log) | ✅ holds |
+    | the sitting's own wrong turn | re-derived the rocket-subclass story **from the engine's class builder at Src** — the report's marked correction is right, and the suite message *"a later mod has chained on top of ours"* is provably wrong about the cause (it's the engine composing `Init`; no later mod exists). Recorded as fact `EF-066` | ✅ report honest |
+
+    ⚠️ **Named, not blockers:** the challenge landing-spot screen and the
+    SpaceY in-game Goals panel remain unobserved (your item 59/63 skips); the
+    English rocket-rollover reading predates the mid-sitting repair, so
+    "English players see no change" on the final build rests on the measured
+    language data, not a screen — the mechanism makes it byte-identical.
+
+    ⭐ **The question this chain never asked (my C5):** the pack wraps ~60
+    class methods, and **nobody has ever checked which of them have subclasses
+    that override the wrapped method** — a subclass that does keeps vanilla,
+    fix and all. C51's rocket half is the only place that question ever
+    surfaced, and it cost that fix its whole working life until your tracer
+    caught it. The safe part: a missed subclass means *the bug stays vanilla
+    there*, never new harm. It's recorded in `EF-066` as opt-in-era
+    maintenance, not a launch item.
+
+    ⚖️ **Was five prompts for two text fixes worth it? Yes — narrowly, and
+    not for the reason planned.** The builds alone didn't need a chain. But
+    link 4's prep caught C50 printing a wrong number on a screen no record
+    had ever named, and the sitting caught C51's rocket half having never
+    worked at all. Both would have shipped broken under "just build and
+    upload." The chain's cost was mostly the two build links; its value was
+    the two catches. A future two-fix change should be a **two-link** chain:
+    build, then attended-test-plus-audit in one.
+
+    ⚠️ Housekeeping line, emitted after my edits and copied verbatim as it
+    requires: **`warn STATE.md is 9941 bytes, warn threshold is 9216 — copy
+    this line VERBATIM into the owner report; the owner fires
+    agent/prompts/STATE_EVICTION.md`** — fire the eviction prompt whenever
+    convenient; nothing about the upload waits on it.
+
+67. ⭐⭐ **Your upload sitting, restated — nothing else stands between you and
+    the release:**
+
+    1. **Re-tick the mods** in the Mod Manager (the junction pull cost the
+       enables; restart after ticking).
+    2. ⛔ Before anything is pressed: **`IsDirty()` false and `1.0.0` on
+       screen.**
+    3. Pack via **Mods Manager → Edit (`Ctrl-E`) → File → Pack Mod** — ⛔ no
+       console route exists. Expect **82 files**; a different count means
+       stop, not adjust. Record the md5/bytes in §0.5(f)'s blank row **at
+       pack time**.
+    4. ⛔ **Paradox Mods FIRST**, Steam second.
+    5. Then the sheet's §0.5(d) — game version **350453** on the portal page;
+       §0.5(e) — the id-writeback commit; §0.5(f) — md5 your downloaded pack
+       **against the row you filled in at step 3**.
+
+68. ⭐ **The opt-in effort starts on your word** — your stated next priority
+    (*"shift resources and start working on the opt in"*). Its first session
+    must read **that repo's own STATE** and its standing pre-upload
+    obligation: `reports/PARKED_OPTIN_REFERENCES.md` (~46 parked passages
+    that restore only when the opt-in pack launches). I have deliberately not
+    scoped it further — that's its own repo's job.
+
 ### ✅✅ 2026-08-20 — YOUR SITTING IS DONE AND BOTH FIXES WORK. Nothing here is owed from you; this is the receipt.
 
 63. ⭐⭐ **You saw both fixes working, in two languages.** Every reading passed:

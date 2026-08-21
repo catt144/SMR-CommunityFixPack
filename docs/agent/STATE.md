@@ -9,9 +9,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Now
 - ⭐⭐ **Release = the fix pack ALONE at 1.0.0 (owner 08-17).**
 - ⭐⭐ **④ upload sitting PAUSED mid-sitting on the owner's word — NOTHING IS PUBLISHED.** Upload is owner-attended.
-- ⛔⛔ **NEXT = close-out chain `agent/prompts/closeout-1.0.0/` (⭐ links 1-4 CONSUMED 08-20), owner-ruled
-  (checklist 58): `C50`+`C51` ship IN 1.0.0, `C52` `parked`/FROZEN.** ⛔ **NEXT LINK = `05_AUDIT_fable.md`** —
-  audits, MOVES THE TAG, rules ship-or-revert. Upload waits for it, then the owner.
+- ⭐⭐ **⑤ TERMINAL AUDIT (link 5) CONSUMED 08-20 — VERDICT: SHIP; TAG MOVED (H-01).** Close-out chain fully
+  consumed; `C50`+`C51` IN 1.0.0 (checklist 58), `C52` `parked`/FROZEN. All five challenges held; 0 blockers;
+  audit re-derivation = `EF-066` (composed `Init` — wave-12 probe's "later mod" line misattributes; TestKit-only).
+  **The upload waits on the owner alone** — ruling receipt checklist 66; sitting steps `RELEASE_PORTAL_PREP` §0.5.
 - ⭐⭐ **④ SITTING RAN 08-20 ATTENDED: BOTH FIXES WORK AND WERE SEEN, IN ENGLISH AND GERMAN.** Both now
   `tested-attended`; 77 applied; suite **74/0/24/0 of 98** (checklist 60 discharged). Report
   `reports/04_ATTENDED_SITTING.md`; logs `archive/link4{en,de,lang}_*`. ⛔ SKIPPED BY NAME: `C50`'s
@@ -21,7 +22,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ NO-OP as built — the button is not a direct child — and now uses `XWindow:ResolveId`.
 - ⭐⭐ **`EF-039`'s standing unobserved note CLOSED, positively** — repointed AND borrowed shipped ids both
   rendered German on screen. ⚠️ German only; the other 7 packs remain CSV-measured, not seen.
-- ⇒ **After link 5 this repo is CLOSED** — no queued 1.0.1; next effort is the **opt-in pack** (owner 08-20).
+- ⇒ **This repo is CLOSED once the owner uploads** — no queued 1.0.1; next effort is the **opt-in pack**
+  (owner 08-20; its kickoff reads = that repo's own STATE + `reports/PARKED_OPTIN_REFERENCES.md`).
 - ⭐⭐ **99b VERDICT REVIEW consumed 08-19 — ruling UPHELD.** Run-B criteria, the act-1 core-fix reads and two
   audit verifications re-derived from primary evidence; only wording broke (VR-1…VR-6, chain `SWEEP_FINDINGS.md`).
   **The upload now waits on the owner alone** (checklist 54; delivered-bytes check added, PORTAL_PREP §0.5(f)).
@@ -47,8 +49,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
-  40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q2 (Steam, after Paradox) ·
-  34 (C49–C52 timing; QA owed first).
+  40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q2 (Steam, after Paradox). 34 DISCHARGED by 56+58.
 - ✅ **Sibling rulings CARRIED OUT 08-20 (checklist 55)** — no fix-pack file touched, shipping surface re-diffed
   empty: the two `2f077e8` core fixes are MIRRORED into `SMR-OptInPack` (`2cedf7d`, parse+doccheck green, sites
   code-identical after namespace normalisation; ⛔ unverified in a running game there), and the rescue mod's
@@ -58,8 +59,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   here, 08-16) · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 post-release · EF-051 falsifier = any stray save.
 
 ## Hazards — each names an action an agent could take unattended; never do it
-- **H-01** Tag `fixpack-v1.0.0` was MOVED onto its close-out commit by the terminal audit (08-19, brief §9
-  authority) and now marks what actually gets packed. Never move it again without an equivalent gate.
+- **H-01** Tag `fixpack-v1.0.0` was MOVED AGAIN 08-20 onto the close-out audit's commit (link 5 §3 authority;
+  first move 08-19) and now marks what actually gets packed. ⛔ Its gate is the ATTENDED SITTING + the one-time
+  release-gate ruling (checklist 57), NOT run B alone. Never move it again without an equivalent gate.
 - **H-02** `metadata.lua` is **FROZEN** at 1.0.0 — no version bump, no Mod Editor save
   (every editor save runs `version = version + 1`, `Mod.lua:967`).
 - **H-03** No script/console in a launched game may touch a portal API — the FIRST call **creates the listing**
