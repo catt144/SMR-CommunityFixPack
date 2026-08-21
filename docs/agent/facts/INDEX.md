@@ -51,7 +51,7 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-036 | `Init` and `Done` are COMBINED methods with OPPOSITE order | 2026-08-02 | 2026-08-02 | 11 | [EF-036.md](EF-036.md) |
 | EF-037 | Pin release is guarded, and `TogglePin()` without `force` is a no-op for any class whose `CanBeUnpinned()` is false. | — | 2026-08-02 | 11 | [EF-037.md](EF-037.md) |
 | EF-038 | The fastest PLAYER-REACHABLE game speed is 5×, not the 20× that `const.ultraGameSpeed` advertises. | — | 2026-08-02 | 15 | [EF-038.md](EF-038.md) |
-| EF-039 | RE-USING A SHIPPED TRANSLATION ID TO CHANGE TEXT IS A NO-OP IN RETAIL — the engine discards the replacement literal at… | 2026-08-02 | 2026-08-02 | 57 | [EF-039.md](EF-039.md) |
+| EF-039 | RE-USING A SHIPPED TRANSLATION ID TO CHANGE TEXT IS A NO-OP IN RETAIL — the engine discards the replacement literal at… | 2026-08-20 | 2026-08-20 | 84 | [EF-039.md](EF-039.md) |
 | EF-040 | `GameRandom:Random` — BOTH FORMS MEASURED 2026-08-02 (PT-61 phase 4.0b), on `SessionRandom` in a live retail colony, 20… | 2026-08-02 | 2026-08-02 | 36 | [EF-040.md](EF-040.md) |
 | EF-041 | UI coordinate spaces: `XWindow.box` and `terminal.GetMousePos()` are ONE space (desktop pixels); `scale` multiplies SIZ… | 2026-08-02 | 2026-08-02 | 19 | [EF-041.md](EF-041.md) |
 | EF-042 | `UIL.GetSafeArea()` returns FOUR ABSOLUTE NUMBERS (x1, y1, x2, y2), and on PC it equals the whole screen. | 2026-08-02 | 2026-08-02 | 15 | [EF-042.md](EF-042.md) |

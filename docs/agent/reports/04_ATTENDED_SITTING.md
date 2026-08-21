@@ -281,7 +281,142 @@ landed — out of the sitting's ruled bar unless the owner wants it.
 
 ---
 
-## 6 · Results
+## 6 · Results — RAN 2026-08-20, attended, owner at the keyboard
 
-⛔ **NOT YET RUN.** The sitting has not happened; nothing above has been seen on
-a screen. Results are appended here at close-out.
+⭐⭐ **BOTH FIXES WORK, AND BOTH WERE SEEN — including in German.** Two launches:
+an English session (`link4en_…19.40.49`) and a German one (`link4de_…20.12.50`),
+plus the language-change restart (`link4lang_…20.12.19`). All three archived and
+`git add -f`'d; `docs/archive/` reconciles 105 tracked = 105 on disk, nothing
+ignored-but-present.
+
+### 6.1 · The readings, screen by screen
+
+| # | reading | verdict |
+|---|---|---|
+| 1 | boot, both languages | ✅ **77 `applied`** (predicted 77, was 75); the single `inactive` is `SaintBlessing`, the standing pattern |
+| 2 | `C50` sponsor **rollover**, EN | ✅ bullet present, **(40)** — the predicted number |
+| 3 | `C50` **summary panel**, EN | ✅ same bullet, **(40)** |
+| 4 | `C50` first bullet (the regression check), EN | ✅ `Dragon Rocket … (40,000)` intact |
+| 5 | `C50` rollover + summary, **DE** | ✅ **`Maximale Anzahl an Drohnen, die ein Drohnen-Hub kontrollieren kann (40)`** — byte-for-byte the German the pack extraction predicted |
+| 6 | `C50` in-game stand-down | ✅ console: `nil` + the running-game reason |
+| 7 | `C51` heading, EN | ✅ **no visible change** — exactly the promise the site entry makes |
+| 8 | `C51` heading, **DE** | ✅ **`TERRAFORMING-GESAMTFORTSCHRITT`** |
+| 9 | `C51` rocket rollover, EN | ✅ no visible change |
+| 10 | `C51` rocket rollover, **DE** | ✅ **`Zurück zur Erde`** / `Schicke die Rakete ohne Ressourcen direkt zurück zur Erde.` + log `2 of 2 strings` |
+| 11 | suite (`SMRTest.RunAll()`) | ✅ **74 PASS · 0 FAIL · 24 SKIP · 0 ERROR** of 98 |
+
+⭐ **The two `C50` sponsor readings are provably different code paths, not one
+screen twice:** between the rollover and the summary, *Starting Rockets* moved
+5 → 6 and *Research per Sol* 200 → 3,200 (commander + game rules, which only
+`GetSponsorSummary` folds in) while **our number stayed 40 in both**. That is
+also the live control on the module's decision to omit the commander when
+computing the value — until today an argument from source.
+
+### 6.2 · ⭐⭐ `EF-039`'s standing note is CLOSED, positively
+
+*"No leg has watched a shipped-id string render in a non-English language"* —
+discharged twice over in one sitting: `C50`'s **borrowed** id 4706 rendered German
+(row 5), and `C51`'s **repointed** ids rendered German (rows 8, 10). ⭐ Row 8 is
+the strongest single proof in the sitting: the terraforming heading is a raw Lua
+string with no id and no `Translate` flag in vanilla, so there is **no path** by
+which it becomes German on its own. It is German because of our code.
+
+⭐ And the suite independently confirmed the defect is real, in German:
+> *the XDef's own unenrolled id still falls back to its embedded English
+> ('Back to Earth'), which is what a player sees today*
+
+### 6.3 · ⛔ Code changed DURING the sitting — three times, and why
+
+| # | change | who ruled it | verified by |
+|---|---|---|---|
+| 1 | `C50` stands down in a running game | ⚖️ **owner, checklist 61** | row 6 + the wave-13 probe's stand-down clause |
+| 2 | `C51` finds the button with `XWindow:ResolveId` | fence §4 (the sitting found the fix broken) | row 10 |
+| 3 | `C51` install loop over six rocket classes | same | ⚠️ **repaired nothing — see below** |
+
+⛔ **Change 3 was built on a conclusion that was WRONG, and the verifying run is
+what said so.** From `stats.rocket` reading `0/1` this session concluded the five
+rocket subclasses each carry their own composed `Init` and that a parent wrapper
+never reaches them. The verifying boot logged `wrapped on 1 rocket class(es):
+customUniversalRocket` — the subclasses are **absent from `_G` at apply time**, so
+only the parent was ever wrapped — **and the Zeus rocket patched anyway.** ⇒ the
+parent wrapper does reach subclass panels; `0/1` was a thin count with a story
+read into it. **Change 2 alone was the repair.**
+
+⚠️ The loop is kept **because it is precisely the code that was verified**, and
+its rationale comment is rewritten to say the above rather than the false claim.
+⛔ **Comments only were edited after verification — the runtime code is
+byte-identical to what rows 1-11 measured.**
+
+⚠️ **A conclusion this session nearly acted on:** with change 3 apparently having
+failed, the recommendation put to the owner was to **cut `C51`'s rocket half and
+ship heading-only**. The owner's next screenshot showed `Zurück zur Erde`. ⇒ a
+working fix was one message from being cut on a bad inference. Recorded because
+the near-miss is the lesson, not the outcome.
+
+⭐ **The method that actually resolved it was the owner's, not this session's.**
+Asked why the cause could not be *watched* instead of reasoned about, a console
+tracer on all six classes produced `kids=5 resolve=InfopanelButton
+title=885571832096` in one shot — which killed the direct-child assumption,
+proved `ResolveId` reaches the control, and confirmed the ids were unrepaired.
+Three static readings had been wrong; the first measurement was right.
+
+### 6.4 · ⛔ NOT observed — by name, never as a pass
+
+- ⛔ **`C50`'s third render site, the challenge landing-spot screen.** Never
+  opened. The probe confirms *"all three install points hold a wrapper"*, and
+  checklist 59 (owner-ruled) makes looking optional — but **no human has seen
+  that screen** and this entry does not claim otherwise.
+- ⛔ **The in-game Mission Profile panel on a SpaceY colony.** The stand-down is
+  proven by console and probe; the *screen* was never opened on a SpaceY game.
+  `C47FARM` is a **USA** colony (`logo: USA`), which is why the "open Goals and
+  see no bullet" check was withdrawn — it would have looked identical either way.
+- ⚠️ **Step ⑥, the English restore, has no fresh-boot log.** The owner reported
+  switching back and confirming; the game was closed without a further launch, so
+  there is **no logged English session after the switch**. English was the
+  sitting's starting state and was fully observed at rows 2-4, 7, 9; this is a
+  tidy-up step, not a fix reading. Recorded as reported, not as observed.
+
+### 6.5 · The whole log, attributed — nothing discounted
+
+- ⚠️ **`[LUA ERROR] … attempt to call a nil value (global 'unpack')`** in
+  `link4en_`. ⛔ **THIS IS THIS SESSION'S OWN CONSOLE SNIPPET, NOT THE PACK.**
+  `unpack` is nil in the mod sandbox; the tracer used it. It was contained by the
+  engine's `procall`, fired *after* its useful readings, and no pack file
+  contains the word. ⛔ **The audit must not read it as pack behaviour.**
+- ⚠️ `[ResManager Error] … LawOfficeDoor_opening.hgacl` / `_idle.hgacl`, both
+  sessions — **vanilla's own missing animation asset.** Cannot be ours: the pack
+  ships no assets at all (82 files, all Lua + metadata + LICENSE + preview).
+- ⚠️ `This savegame tries to load … Opt-In Modules … present, but not loaded` —
+  **expected**: `C47FARM` was saved with the opt-in pack on and it is deliberately
+  unticked (checklist 43).
+- ⚠️ `[Braze] SessionStart error …` ×6 — the game's telemetry client with no
+  network. Present in every log this project has ever taken.
+- ⚠️ `[SMRTest] no debug.getinfo (mod sandbox)` — standing, and the reason 8 of
+  the 24 suite skips are skips.
+
+### 6.6 · Suite — the store card's number is now measured
+
+**`74 PASS · 0 FAIL · 24 SKIP · 0 ERROR`** = **98**, in German, on a loaded save.
+⇒ checklist 60 is discharged: the card's *"an automated suite of 98 checks"* is
+no longer an unmeasured claim. Prior reading was `80/0/16/0` of 96 (08-15).
+
+⚠️ **The +8 skips are configuration, not regression**, and every one is named:
+8 retail-sandbox introspection · 8 opt-in mod absent · 6 save-rescue mod absent ·
+1 tech with no description `T` · 1 undeclared stub target. **24 accounted for,
+0 unexplained.**
+
+⚠️ **One wording flaw found in the `LocalizedUIText` probe, for link 5.** It
+reports *"a later mod has chained on top of ours on TerraformingOverall,
+customUniversalRocket — legitimate"*. **No later mod exists here**; the live
+`Init` is simply not the raw function either party assigned, because the class
+builder composes it. The probe is right to pass, but its explanation names a
+cause that is not the cause. Not fixed here — it is a message, not a verdict.
+
+### 6.7 · Rig state at close
+
+✅ `EF-056` discharged both ways: pre-copied before the first launch, and
+reconciled by name after the last — `Autosave Sol 406` (56,195,934 B) and
+`Autosave Sol 411` (56,195,463 B) present, byte-identical to the held copies.
+**Nothing was lost.** `C47FARM` untouched (mtime still 2026-08-15).
+⚠️ Cheats and both mods are the rig's normal config; no reading above intersects
+anything a cheat changed.

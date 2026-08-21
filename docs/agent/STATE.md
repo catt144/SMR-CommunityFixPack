@@ -9,11 +9,18 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Now
 - ⭐⭐ **Release = the fix pack ALONE at 1.0.0 (owner 08-17).**
 - ⭐⭐ **④ upload sitting PAUSED mid-sitting on the owner's word — NOTHING IS PUBLISHED.** Upload is owner-attended.
-- ⛔⛔ **NEXT = the close-out chain `agent/prompts/closeout-1.0.0/` (5 links; ⭐ links 1+2+3 CONSUMED 08-20 —
-  `C51` and `C50` BUILT, both ⛔ UNOBSERVED; surfaces done), owner-ruled 08-20 (checklist 58):
-  `C50`+`C51` ship IN 1.0.0, `C52` is `parked`/FROZEN.** ⛔ **NEXT LINK = `04_TEST.md`, an attended ~30-min
-  sitting — the only eyes either fix gets**; link 5 (Fable) audits, MOVES THE TAG and rules ship-or-revert.
-  ⛔ The upload waits for link 5, then the owner.
+- ⛔⛔ **NEXT = close-out chain `agent/prompts/closeout-1.0.0/` (⭐ links 1-4 CONSUMED 08-20), owner-ruled
+  (checklist 58): `C50`+`C51` ship IN 1.0.0, `C52` `parked`/FROZEN.** ⛔ **NEXT LINK = `05_AUDIT_fable.md`** —
+  audits, MOVES THE TAG, rules ship-or-revert. Upload waits for it, then the owner.
+- ⭐⭐ **④ SITTING RAN 08-20 ATTENDED: BOTH FIXES WORK AND WERE SEEN, IN ENGLISH AND GERMAN.** Both now
+  `tested-attended`; 77 applied; suite **74/0/24/0 of 98** (checklist 60 discharged). Report
+  `reports/04_ATTENDED_SITTING.md`; logs `archive/link4{en,de,lang}_*`. ⛔ SKIPPED BY NAME: `C50`'s
+  challenge landing-spot site, and the in-game Mission Profile on a SpaceY colony.
+- ⚖️ **Two code changes DURING that sitting.** `C50` now stands down while a game runs (owner, checklist 61 —
+  the in-game Goals panel double-counted the sponsor bonus: 60 for a cap of 40). `C51`'s rocket half was a
+  ⛔ NO-OP as built — the button is not a direct child — and now uses `XWindow:ResolveId`.
+- ⭐⭐ **`EF-039`'s standing unobserved note CLOSED, positively** — repointed AND borrowed shipped ids both
+  rendered German on screen. ⚠️ German only; the other 7 packs remain CSV-measured, not seen.
 - ⇒ **After link 5 this repo is CLOSED** — no queued 1.0.1; next effort is the **opt-in pack** (owner 08-20).
 - ⭐⭐ **99b VERDICT REVIEW consumed 08-19 — ruling UPHELD.** Run-B criteria, the act-1 core-fix reads and two
   audit verifications re-derived from primary evidence; only wording broke (VR-1…VR-6, chain `SWEEP_FINDINGS.md`).

@@ -60,15 +60,22 @@
 -- replaced it first, THAT version is our original and their work stays in the
 -- chain — call it first, and correct the controls it built. Mod code loads
 -- before class flattening (`_G.<Class>` is still the classdef, classes.lua:71,
--- swapped for the built class at :1085), so this is a classdef-time install and
--- it propagates through flattening — which matters, because
--- `customUniversalRocket` has FIVE subclasses that declare no `Init` of their
--- own (Dragon/Lander/Refugee/Trade/Zeus, Data\XDef\customUniversal*Rocket.lua).
--- They all inherit the repair.
+-- swapped for the built class at :1085), so this is a classdef-time install.
+-- ⛔ CORRECTED 2026-08-20 AT THE SITTING: this paragraph used to end *"it
+-- propagates through flattening … They all inherit the repair."* **It does not,
+-- and that sentence cost this half of the fix its entire working life.** The
+-- five subclasses (Dragon/Lander/Refugee/Trade/Zeus) declare no `Init` of their
+-- own, but each BUILT class carries a composed `Init` of its own that does not
+-- dispatch through the parent's — so a wrapper on `customUniversalRocket` never
+-- runs for any of them. Measured, not argued: see `ROCKET_CLASSES` below. Every
+-- class is now wrapped individually.
 --
 -- ── Handles (FIX_POLICY §2) ───────────────────────────────────────────────
--- The rocket button carries `Id = "idBackToEarth"` (:25) and is a DIRECT child
--- of the window Init built, so it is found by id — never by text. ⛔ The
+-- The rocket button carries `Id = "idBackToEarth"` (:25), so it is found by id
+-- — never by text. ⛔ CORRECTED 2026-08-20: it is NOT "a DIRECT child of the
+-- window Init built", as this line used to say; it is resolved through the
+-- panel's `IdNode` with the engine's own `XWindow:ResolveId`. See
+-- `patch_rocket` for the measurement that overturned it. ⛔ The
 -- terraforming heading has NO id: its only possible handle is the English
 -- literal it renders, so that is what we match, and we match it exactly and
 -- only on a plain Lua string. The consequence is deliberate and is the safe
@@ -113,6 +120,38 @@ local TERRA_ID      = 914616772802
 -- Miss 2 — the button. BROKEN = the id the XDef uses and no pack contains;
 -- GOOD = the enrolled id carrying the identical English text.
 local ROCKET_BUTTON  = "idBackToEarth"
+
+-- ⚠️ READ THIS BEFORE "SIMPLIFYING" THE LOOP BELOW — and read what it does NOT
+-- claim. Mid-sitting I concluded that the five subclasses each carry their own
+-- composed `Init` and that a wrapper on the parent therefore never reaches them,
+-- from `stats.rocket` sitting at `0/1` while Zeus panels were opened. ⛔ THAT
+-- CONCLUSION WAS WRONG, and the verifying run is the thing that says so: this
+-- loop found only ONE class in `_G` at install time —
+--     LocalizedUIText: Back to Earth rollover wrapped on 1 rocket class(es): customUniversalRocket
+-- — and the Zeus rocket's rollover patched anyway, `2 of 2 strings`, confirmed
+-- on a German screen. ⇒ **Wrapping the parent DOES reach the subclass panels.**
+-- The `0/1` was a thin count, not a mechanism, and I read a story into it.
+--
+-- ⇒ The ONE thing that was ever broken here is the button lookup, fixed in
+-- `patch_rocket`. This loop is not what repaired the fix.
+--
+-- It is kept because it is exactly the code that was verified in that run, and
+-- verified code is not worth re-cutting before a release for tidiness. Its real
+-- behaviour today: it wraps `customUniversalRocket` and finds the other five
+-- absent from `_G` at apply time, which costs five nil lookups. If a future
+-- build defines them earlier they would be wrapped too, and the id tests below
+-- make a second pass on one control a no-op.
+local ROCKET_CLASSES = {
+	"customUniversalRocket",
+	-- ⚠️ Absent from `_G` at apply time in build 1.0.7.396349 (measured). Listed
+	-- so a build that defines them earlier is covered, NOT because inheritance
+	-- was shown to fail — see above.
+	"customUniversalDragonRocket",
+	"customUniversalLanderRocket",
+	"customUniversalRefugeeRocket",
+	"customUniversalTradeRocket",
+	"customUniversalZeusRocket",
+}
 local TITLE_BROKEN, TITLE_GOOD = 885571832096, 407456913268
 local TEXT_BROKEN,  TEXT_GOOD  = 807999655245, 316233855405
 local TITLE_EN = "Back to Earth"
@@ -208,17 +247,27 @@ end
 
 ---- miss 2 — the button using ids no pack knows ---------------------------
 
+-- ⛔ NOT a direct-child scan, and the reason is MEASURED, not reasoned.
+-- This function used to walk `ipairs(win)` looking for `child.Id`, on the
+-- header's claim that the button "is a DIRECT child of the window Init built".
+-- ⛔ THAT CLAIM WAS FALSE AND IT MADE THIS HALF OF THE FIX A NO-OP FROM THE DAY
+-- IT WAS WRITTEN. Instrumented live at the 2026-08-20 attended sitting, at the
+-- exact instant this function runs:
+--     customUniversalZeusRocket kids=5 resolve=InfopanelButton title=885571832096
+-- — five children, all `InfopanelSection`, and NOT one button among them, even
+-- though the XDef passes `self` as each button's parent. The infopanel moves
+-- them; by the time our chain gets its turn they are gone from the array.
+--
+-- `XWindow:ResolveId` is the engine's OWN lookup for exactly this and it is not
+-- fooled by the move: `SetParent` registers `Id` on the nearest `IdNode`
+-- ancestor (`XWindow.lua:206-240`) — here `ipBuilding`, read off the live stack
+-- — and `ResolveId` reads it back from there (`:264-277`). The same measurement
+-- proves it works at this moment: `resolve=InfopanelButton`.
 local function patch_rocket(win)
-	local btn
-	for _, child in ipairs(win) do
-		if type(child) == "table" and child.Id == ROCKET_BUTTON then
-			btn = child
-			break
-		end
-	end
-	if not btn then
+	local btn = type(win.ResolveId) == "function" and win:ResolveId(ROCKET_BUTTON)
+	if type(btn) ~= "table" then
 		return note_decline("rocket",
-			"the Back to Earth button (Id " .. ROCKET_BUTTON .. ") was not built by this panel — nothing changed (a game update renamed or removed it, or another mod rebuilt the panel)")
+			"the Back to Earth button (Id " .. ROCKET_BUTTON .. ") could not be resolved from this panel — nothing changed (a game update renamed or removed it, or another mod rebuilt the panel)")
 	end
 	if type(btn.SetRolloverTitle) ~= "function" or type(btn.SetRolloverText) ~= "function" then
 		return note_decline("rocket", "the Back to Earth button has no rollover setters — nothing changed")
@@ -299,21 +348,37 @@ SMRFixPack.Register(ID, {
 		if installed then return end
 
 		local terra_orig  = TerraformingOverall.Init
-		local rocket_orig = customUniversalRocket.Init
 		local terra_init  = chain(terra_orig, patch_heading, "heading")
-		local rocket_init = chain(rocket_orig, patch_rocket, "rocket")
+		TerraformingOverall.Init = terra_init
 
-		TerraformingOverall.Init  = terra_init
-		customUniversalRocket.Init = rocket_init
-
-		-- Read back, the way §1.4b requires of a replacement: if either write
-		-- did not land, say so instead of reporting active over nothing.
+		-- Read back, the way §1.4b requires of a replacement: if the write did
+		-- not land, say so instead of reporting active over nothing.
 		if TerraformingOverall.Init ~= terra_init then
 			return "could not install the TerraformingOverall.Init wrapper"
 		end
-		if customUniversalRocket.Init ~= rocket_init then
-			return "could not install the customUniversalRocket.Init wrapper"
+
+		-- One wrapper per rocket class, each read back. A class that is absent
+		-- from this build is skipped rather than failed — the subclasses are
+		-- content, and content can move between patches.
+		local rocket_origs, rocket_inits, wrapped = {}, {}, {}
+		for _, name in ipairs(ROCKET_CLASSES) do
+			local cls = rawget(_G, name)
+			if type(cls) == "table" and type(cls.Init) == "function" then
+				local orig = cls.Init
+				local new  = chain(orig, patch_rocket, "rocket")
+				cls.Init = new
+				if cls.Init ~= new then
+					return "could not install the " .. name .. ".Init wrapper"
+				end
+				rocket_origs[name], rocket_inits[name] = orig, new
+				wrapped[#wrapped + 1] = name
+			end
 		end
+		if #wrapped == 0 then
+			return "no customUniversalRocket class in this build carries an Init — the Back to Earth rollover cannot be reached"
+		end
+		log("%s: Back to Earth rollover wrapped on %d rocket class(es): %s",
+			ID, #wrapped, table.concat(wrapped, ", "))
 		installed = true
 
 		-- The probe's surface. Both the wrapper AND the original are exposed so
@@ -322,11 +387,15 @@ SMRFixPack.Register(ID, {
 		-- that is neither means a later mod chained on top of us, which is the
 		-- system working and must never read as a failure.
 		SMRFixPack.LocalizedUIText = {
-			stats       = stats,
-			terra_init  = terra_init,
-			rocket_init = rocket_init,
-			terra_orig  = terra_orig,
-			rocket_orig = rocket_orig,
+			stats        = stats,
+			terra_init   = terra_init,
+			terra_orig   = terra_orig,
+			rocket_inits = rocket_inits,
+			rocket_origs = rocket_origs,
+			wrapped      = wrapped,
+			-- Kept so the wave-12 probe's single-class read still resolves.
+			rocket_init  = rocket_inits.customUniversalRocket,
+			rocket_orig  = rocket_origs.customUniversalRocket,
 			ids = {
 				heading      = TERRA_ID,
 				title_broken = TITLE_BROKEN, title_good = TITLE_GOOD,

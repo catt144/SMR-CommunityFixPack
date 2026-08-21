@@ -29,7 +29,74 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⛔⛔ 2026-08-20 — YOUR SITTING IS READY TO RUN, and preparing it found ONE REAL DEFECT IN `C50`. One call from you before you launch; the script is written and waiting below.
+### ✅✅ 2026-08-20 — YOUR SITTING IS DONE AND BOTH FIXES WORK. Nothing here is owed from you; this is the receipt.
+
+63. ⭐⭐ **You saw both fixes working, in two languages.** Every reading passed:
+
+    | what you looked at | what it said |
+    |---|---|
+    | SpaceY rollover + summary, English | the new bullet, **(40)** — the number I predicted before you launched |
+    | SpaceY rollover + summary, German | **Maximale Anzahl an Drohnen, die ein Drohnen-Hub kontrollieren kann (40)** |
+    | SpaceY's first bullet, both | **(40,000)** cargo intact — the regression that mattered most didn't happen |
+    | terraforming heading, English | no visible change — exactly what the site page promises |
+    | terraforming heading, German | **TERRAFORMING-GESAMTFORTSCHRITT** |
+    | Back to Earth rollover, German | **Zurück zur Erde** |
+    | the suite | **74 PASS · 0 FAIL · 24 SKIP · 0 ERROR** of 98 |
+
+    ⭐⭐ **The single most valuable thing you did:** the German heading. In vanilla
+    that text is a raw code string with no translation attached at all — there is
+    no way it becomes German by itself. It is German *because of our fix*. That
+    also closes a question this project has carried since **2 August**: nobody had
+    ever watched one of these repairs render in another language. Now we have,
+    twice.
+
+    ⚠️ **The suite's 24 skips are all "another mod isn't loaded"** — 8 opt-in, 6
+    save-rescue, 8 retail sandbox, 2 odds and ends. **0 failures, 0 errors.** Your
+    store card's "98 checks" is now a measured number instead of a claim (item 60,
+    closed).
+
+    ⛔ **Two things nobody looked at, named rather than counted as passes:** the
+    challenge landing-spot screen, and the in-game Mission Profile on a SpaceY
+    colony. Both are the same code seen working elsewhere; neither is a launch
+    item.
+
+64. ⚖️ **Two code changes happened while you sat there, and you should know what
+    they were.**
+
+    - **`C50`** — the double-count you ruled on (item 61). Built, and confirmed by
+      both the console and the suite: the in-game panel now shows vanilla.
+    - **`C51`'s rocket half was a no-op as shipped-in-progress.** It had *never*
+      worked, in any session. It searched for the Back to Earth button in the
+      wrong place. It now uses the engine's own lookup, and you watched the result
+      in German.
+
+    ⛔⛔ **And one thing I got badly wrong, which you should hear plainly.** I
+    talked myself into a theory that rocket subclasses don't inherit the fix,
+    built a change for it, and when that change looked like it failed I
+    **recommended cutting the rocket half from 1.0.0**. Your very next screenshot
+    showed it working. A good fix was one message away from being deleted on my
+    bad inference.
+
+    ⭐ **What saved it was your question** — *"why can't you detect it when I press
+    the button and trace it back?"* That tracer answered in one shot what three
+    rounds of me reading source got wrong. Recorded in the report as the method
+    lesson, because it is one.
+
+65. ⚠️ **Two small things for the record, neither needing anything from you.**
+
+    - **The `[LUA ERROR]` in your logs is mine, not the pack's.** My console
+      tracer used a function the mod sandbox doesn't have. It was contained, and
+      it's flagged in the report so the audit doesn't misread it.
+    - **Your autosaves are intact** — `Sol 406` and `Sol 411`, byte-identical to
+      the copies I took before the first launch, reconciled by name. `C47FARM`
+      untouched.
+
+    ⭐⭐ **Next: `docs/agent/prompts/closeout-1.0.0/05_AUDIT_fable.md` — the last
+    link.** It reviews everything adversarially, moves the release tag, and rules
+    ship-or-revert. **It does not need you.** After it, the upload sitting is
+    yours whenever you want it.
+
+### ⛔⛔ 2026-08-20 — the sitting's prep found a real defect in `C50` (RULED: fix it). Kept as the record of the call.
 
 61. ⛔⛔ **The thing I found, and it needs your word before the sitting.** `C50`
     was recorded — twice now, and by me — as touching **pre-game screens only**.
