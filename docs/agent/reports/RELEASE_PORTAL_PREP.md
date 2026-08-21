@@ -202,7 +202,17 @@ it from a real `.fpk`.**
 
    | packed | md5 | bytes | entries |
    |---|---|---|---|
-   | *(fill in at the sitting)* | | | |
+   | **2026-08-20 21:46:38** | **`6621384b99ff17b894ef4c1578fbb5e2`** | **391,567** | **82** |
+
+   ✅ **FILLED IN AT THE SITTING, computed from the real archive** at
+   `%LOCALAPPDATA%\Temp\Surviving Mars Relaunched\ModUpload\Pack\ModContent.fpk`
+   — not predicted, not carried from any record. ⭐ **And it was reconciled
+   against the tree in the same breath: `pack_list.py --tree .` reports
+   `82 byte-identical to disk, 0 differ`**, both new modules among them
+   (`Fix_LocalizedUIText.lua`, `Fix_SpaceYDroneCapBullet.lua`). ⇒ the artifact
+   the portal receives IS the tagged tree, entry for entry.
+   *(sha256 first 32, if a portal ever offers that instead:
+   `4b03f079413927d30c4986cd3f229f2e`)*
 
    The expected **entry count is 82** — `python tools/pack_predict.py .`,
    re-derived 2026-08-20 = 78 `Code/*.lua` + `items.lua` + `metadata.lua` +
