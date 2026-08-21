@@ -29,6 +29,52 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐⭐⭐ 2026-08-20 — IT IS PUBLISHED, ON BOTH PORTALS. The ids are committed. One number came out differently on each store, and that was mechanical, not a mistake.
+
+71. ⭐⭐⭐ **Live.** Paradox Mods **156049** · Steam Workshop **3787202810**. Both
+    ids are now in `metadata.lua` and committed — ⛔ **that is how every future
+    update finds the listings instead of creating a second one.**
+
+    ⚠️ **The two stores show different version numbers for identical code, and
+    nothing went wrong.** Paradox saves *after* the upload returns, so it got the
+    package built at `version 0` → **1.0.0**, exactly as you ruled. Steam saves
+    *before* it packs, so its bump landed **inside** the archive → **1.0.2**.
+    Running both in one sitting is what produced the gap; the sheet predicted it
+    (§0.5(c)) and it is now on the record rather than a mystery for later.
+    ⇒ **This retires item 37 Q2** — Steam's number was decided by circumstance.
+    ⛔ **Do not re-upload to tidy it.** Another upload bumps again and makes the
+    two further apart, not closer.
+
+    ℹ️ Steam's file is **385,131 B** against our packed **391,567 B**. Also
+    expected: that same forced save stripped every comment out of `metadata.lua`
+    and `items.lua` before packing them. **The 78 code files are byte-identical
+    on both portals** — only one integer and two files' comments differ.
+    ⇒ The delivered-bytes check (§0.5(f)) now says so: md5 **against Paradox
+    only**; Steam reconciles by entry list, not by hash.
+
+    ✅ **Repaired here, and it is the writeback the sheet warned about:** the
+    saves stripped ~140 lines of comments from those two files. `items.lua` had
+    **zero** value changes and was restored whole; `metadata.lua` kept its six new
+    fields and its `version 2` and got every comment back, with the split above
+    written into the file where the next reader meets it.
+
+    ⛔ **One tool defect found while doing it.** `upload_preflight` reported
+    **20 checks before the upload and 18 after** — `SaveDef` omits properties at
+    their default, so publishing deleted `version_minor`, and the guard printing
+    *"PackVersion a player sees"* silently dropped both version lines. The tool
+    went quiet about the version at the exact moment the version got complicated.
+    Fixed: a missing minor now reads as `0`, mirroring the engine's own default
+    (`Mod.lua:265`). It reads **20 checked · 0 FAIL** again, and prints
+    `PackVersion 1.0.2`.
+
+    ⇒ **Still owed on the live listings, all yours:** §0.5(d) the required game
+    version **350453** on the Paradox page if it offers the field · §0.5(f) the
+    download checksum · then the site: I put both store links in, you switch
+    Pages on, and the site link goes back onto the two store pages (§1 steps
+    2–4). ⭐ **Say the word and I'll do the store-links step now** — I have both
+    ids; I only need the Paradox page URL in the form your browser shows it,
+    because I will not construct a store URL from a pattern.
+
 ### ⭐⭐ 2026-08-20 — THE AUDIT IS DONE. VERDICT: SHIP. The repo's active work ends here; the upload sitting is yours whenever you want it.
 
 66. ⭐⭐ **SHIP.** Both fixes go in 1.0.0; the tag is moved onto this ruling's

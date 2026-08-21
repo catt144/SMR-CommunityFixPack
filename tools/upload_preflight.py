@@ -137,8 +137,19 @@ def main():
               "%s bytes" % f"{sz:,}", "missing or over 1 MB (%s)" % sz)
 
     # ── version, and what a player actually sees ─────────────────────────────
-    vmaj, vmin, vrev = (md.get("version_major"), md.get("version_minor"), md.get("version"))
-    if None not in (vmaj, vmin, vrev):
+    # ⛔ 2026-08-20: these three READ AS ABSENT once a real upload has happened.
+    # `SaveDef` omits any property still at its default, and `version_minor`'s
+    # default is 0 (`Mod.lua:265`) — so the forced save that publishes the mod
+    # deletes the field, and the `None not in (...)` guard below used to drop BOTH
+    # version notes silently. The tool went quiet on the version at the exact
+    # moment the version stopped being obvious (Paradox 1.0.0 / Steam 1.0.2 out of
+    # one sitting). Defaulting a missing value to 0 mirrors the engine's own
+    # default and keeps the reporting alive; None is kept only for `version`
+    # itself, whose absence would be a genuinely broken file.
+    vmaj = md.get("version_major", 0) or 0
+    vmin = md.get("version_minor", 0) or 0
+    vrev = md.get("version")
+    if vrev is not None:
         note("PackVersion a player sees", "%d.%d.%d  (version_major.version_minor.version)"
              % (vmaj, vmin, vrev))
         note("VersionDisplayName sent to PDX", "%r — the REVISION ALONE, not the full "

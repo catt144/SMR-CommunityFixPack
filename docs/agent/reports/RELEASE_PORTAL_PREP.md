@@ -224,6 +224,18 @@ it from a real `.fpk`.**
    with `tools/pack_list.py` if the portal re-wraps the archive — then compare
    the 82 entries by content, which is what actually matters).
 
+⛔⛔ **2026-08-20, AFTER THE REAL UPLOADS — THE ROW ABOVE MATCHES ONE PORTAL, NOT
+BOTH, AND A STRAIGHT md5 COMPARE WOULD READ AS A FAILURE ON THE OTHER.**
+
+| portal | what it actually received | compare how |
+|---|---|---|
+| **Paradox Mods** (`pdx_id` 156049) | the package built **before** its save — `version = 0`, comments intact ⇒ **1.0.0** | ✅ md5 against the row above (`6621384b…`, 391,567 B) |
+| **Steam** (`steam_id` 3787202810) | ⛔ **a DIFFERENT archive.** Steam saves *before* packing, so its copy carries `version = 2` **and** the comment-stripped `metadata.lua`/`items.lua` that save produced ⇒ **1.0.2**, and the page reports **385,131 B** against our 391,567 | ⛔ **never md5 against the row** — reconcile with `pack_list.py`: expect the same **82** entries and the same 78 `Code/*.lua` **byte-identical**; only `metadata.lua` and `items.lua` legitimately differ |
+
+⇒ **The code both portals ship is identical.** What differs is one integer and
+the comments in two non-code files. ⚠️ Do not "fix" this by re-uploading: a
+further upload bumps again and would make it worse, not better.
+
 ⛔ **File-level only, never behavioral:** with the dev
 junction present, the unpacked copy wins silently at equal version
 (`Mod.lua:1770`, hazard `H-09`), so a launch with a subscribed copy installed

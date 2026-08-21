@@ -68,9 +68,26 @@ return PlaceObj('ModDef', {
 	-- ✅ RULED 2026-08-17 (owner, checklist 35 Q2: "lets go with 1.0.0"):
 	-- first public release is a clean 1.0.0, matching the opt-in ruling's
 	-- logic. PackVersion renders version_major.version_minor.version.
-	'version', 0,
+	-- ⛔⛔ MOVED BY THE UPLOADS THEMSELVES, 2026-08-20 — DO NOT "CORRECT" IT BACK.
+	-- Both portals force `SaveWholeMod` on a first upload and every save runs
+	-- `version = version + 1` (`Mod.lua:967`), but they save at DIFFERENT points,
+	-- which is why the two stores hold different numbers for identical code:
+	--   * Paradox Mods saves AFTER the content upload returns
+	--     (`ParadoxMods.lua:167-173`) ⇒ it received the package built at
+	--     `version = 0` and its listing is **1.0.0**, exactly as ruled. The save
+	--     then left the tree at 1.
+	--   * Steam saves BEFORE packing (`SteamWorkshop.lua:17-22`, then
+	--     `CreatePackageForUpload`) ⇒ the bump to 2 is INSIDE the archive Steam
+	--     got, so that listing is **1.0.2**, and its file is 385,131 B against
+	--     our 391,567 B pack because the same save also stripped every comment
+	--     from this file and `items.lua` before packing them.
+	-- ⇒ The tree now sits at 2. That is the honest record of what shipped;
+	-- resetting it to 0 would make this file lie about the published listings.
+	-- ⚠️ `version_minor` is absent below because `SaveDef` omits default-valued
+	-- properties — it was `0`, and `PackVersion` still renders
+	-- version_major.version_minor.version.
+	'version', 2,
 	'version_major', 1,
-	'version_minor', 0,
 	'lua_revision', 350453,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
 	-- nag players who removed it with the missing-mods prompt
@@ -194,5 +211,26 @@ return PlaceObj('ModDef', {
 		"Code/Fix_SpaceYDroneCapBullet.lua",
 		"Code/90_SaveSanitizer.lua",
 	},
+	-- ⭐⭐ WRITTEN BY THE UPLOADS, 2026-08-20 — THESE ARE HOW EVERY FUTURE UPDATE
+	-- FINDS THE PUBLISHED LISTINGS. ⛔ Losing them means a later release cannot
+	-- target the live mod and would create a SECOND listing instead.
+	--   `saved` / `code_hash` / `saved_with_revision` are the editor's own
+	--   bookkeeping; `code_hash` is what the dirty check compares against
+	--   (`GedEditedObject:IsDirty`), so it is kept exactly as written.
+	--   `pdx_id` 156049 — the Paradox Mods listing.
+	--   `pdx_version` "1" — ⚠️ the REVISION ALONE at save time, not the pack's
+	--   version; the portal page shows it as a bare "1" (`ParadoxMods.lua:156`),
+	--   while the in-game browser renders the real PackVersion from the archive.
+	--   `steam_id` "3787202810" — the Steam Workshop item.
+	-- ⚠️ Every comment in this file and in `items.lua` was STRIPPED by the forced
+	-- saves and restored here from git in the same commit; that will happen again
+	-- on every future upload, and restoring them is part of the writeback step
+	-- (`reports/RELEASE_PORTAL_PREP.md` §0.5(e)).
+	'saved_with_revision', 396349,
+	'saved', 1787277099,
+	'code_hash', 7654233260534035516,
+	'pdx_id', 156049,
+	'pdx_version', "1",
+	'steam_id', "3787202810",
 	'TagGameplay', true,
 })

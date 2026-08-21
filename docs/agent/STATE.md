@@ -7,9 +7,15 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
-- ⭐⭐ **Release = the fix pack ALONE at 1.0.0 (owner 08-17). The code is DONE; the verdict is SHIP (08-20).**
-- ⭐⭐ **④ upload sitting PAUSED on the owner's word — NOTHING IS PUBLISHED.** Owner-attended; it waits on them alone.
-  Steps: checklist 67 · `reports/RELEASE_PORTAL_PREP.md` §0.5.
+- ⭐⭐⭐ **PUBLISHED 2026-08-20 — ④ IS DONE, BOTH PORTALS, by the owner.** Paradox Mods `pdx_id` **156049**
+  ships **1.0.0**; Steam `steam_id` **3787202810** ships **1.0.2** — same 78 modules, byte-identical code.
+  ⚠️ The split is mechanical, not a mistake: Paradox saves AFTER upload, Steam saves BEFORE packing, so running
+  both in one sitting put the bump inside Steam's archive (checklist 71; `PORTAL_PREP` §0.5(c)). ⛔ Do NOT
+  re-upload to "fix" the number — a further upload bumps again. This retires 37 Q2, decided by circumstance.
+- ⛔ **Owed on the live listings** (owner's hands): `PORTAL_PREP` §0.5(d) required game version **350453** ·
+  §0.5(f) delivered-bytes ⚠️ **Paradox only** against md5 `6621384b…`/391,567 B; ⛔ Steam's archive legitimately
+  differs (385,131 B — its save stripped comments and bumped the version before packing) · then §1 steps 2–4:
+  store links into the site, Pages on, site link back onto both store pages.
 - ⭐⭐ **Close-out chain (5 links) CONSUMED 08-20 — VERDICT SHIP, 0 launch blockers; all 5 challenges held.**
   `C50`+`C51` IN 1.0.0 (checklist 58), `C52` `parked`/FROZEN. Ruling receipt checklist 66.
   ⚠️ Link 5 left NO report: its record is commit `2326bd3`'s message + fact `EF-066`.
@@ -45,7 +51,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   (every editor save runs `version = version + 1`, `Mod.lua:967`).
 - **H-03** No script/console in a launched game may touch a portal API — the FIRST call **creates the listing**
   (`SteamWorkshop.lua:17-22`). Safe: `DbgPackMod`, `tools/upload_preflight.py`. Paradox before Steam.
-- **H-04** Never strike ④/release holds or call the pack ready — ④ is not imminent without the owner's word.
+- **H-04** ✅ **DISCHARGED 2026-08-20 — the owner uploaded; ④ is done and this is the one moment striking it is
+  correct.** It stays listed because its successor binds: ⛔ **never call a FUTURE release ready, and never treat
+  "published" as covering anything the owner has not done** — the post-upload items above are still open.
 - **H-05** Sweep fence, still binding after both chains closed: no session reads
   `prompts/prelaunch-sweep/SWEEP_FINDINGS.md` or the link reports to reach a verdict, and neither STATE nor
   SESSION_LOG ever restates a link verdict — point at the ledger instead.
