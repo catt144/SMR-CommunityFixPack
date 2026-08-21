@@ -48,10 +48,14 @@ up as text.
 
 | link | status |
 |---|---|
-| Paradox Mods page | ✅ **confirmed by the owner**: `https://mods.paradoxplaza.com/mods/156049/Any` |
+| Paradox Mods page | ✅ **owner-supplied, pasted from their browser**: `https://mods.paradoxplaza.com/mods/156049/Any` |
+| Steam Workshop page | ✅ **owner-verified 2026-08-20 — they opened it and it resolves**: `https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810` *(it was written as the conventional form for item `3787202810` and held open as unverified until that click)* |
 | Source code (fix pack) | ✅ confirmed from `git remote`: `https://github.com/catt144/SMR-CommunityFixPack` |
-| Steam Workshop page | ⚠️ **`https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810` is the standard form for item `3787202810` — ⛔ NOT verified; copy it from your address bar before pasting** |
-| The full fix list | ⛔ **the site is not live yet** (Pages is still off). ⇒ Until it is, use the repo file, which works today: `https://github.com/catt144/SMR-CommunityMods/blob/main/content/fix-list.md` — swap in the site URL at §1 step 4 |
+| The full fix list | ⏳ **needs the site.** Pages source is set to GitHub Actions; the first workflow run prints the URL. The build implies `…/fix-list/`, ⛔ **which is derived, not read** — take the deployed URL. Fallback that works today: `https://github.com/catt144/SMR-CommunityMods/blob/main/content/fix-list.md` |
+
+✅ **Both store links are LIVE on the site** as of `SMR-CommunityMods` `c4e55c4`
+(installing page buttons + landing page line), with the console route named —
+Paradox Mods serves Xbox and PlayStation, which a console player cannot infer.
 
 ---
 
