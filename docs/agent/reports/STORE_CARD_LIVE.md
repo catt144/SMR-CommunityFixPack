@@ -176,9 +176,6 @@ which includes every Xbox and PlayStation player — the tracker is the route.
 On console there is nothing to attach in the first place, and a plain
 description in your own words is genuinely useful.
 
-Please don't use the mod browser's "Report" button for a bug — it flags the
-mod for Paradox's moderation team and never reaches us.
-
 
 FOR MODDERS
 
