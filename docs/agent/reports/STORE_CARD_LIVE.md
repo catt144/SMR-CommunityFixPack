@@ -72,14 +72,15 @@ BBCode variant — Steam Workshop is widely BBCode-capable, but ⚠️ **this pr
 has not confirmed it**, so check the preview and revert to plain if the tags show
 up as text.
 
-## Links block — ⚠️ two are confirmed, two are not
+## Links block — every link, and how each one was confirmed
 
 | link | status |
 |---|---|
 | Paradox Mods page | ✅ **owner-supplied, pasted from their browser**: `https://mods.paradoxplaza.com/mods/156049/Any` |
 | Steam Workshop page | ✅ **owner-verified 2026-08-20 — they opened it and it resolves**: `https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810` *(it was written as the conventional form for item `3787202810` and held open as unverified until that click)* |
 | Source code (fix pack) | ✅ confirmed from `git remote`: `https://github.com/catt144/SMR-CommunityFixPack` |
-| The full fix list | ⏳ **needs the site.** Pages source is set to GitHub Actions; the first workflow run prints the URL. The build implies `…/fix-list/`, ⛔ **which is derived, not read** — take the deployed URL. Fallback that works today: `https://github.com/catt144/SMR-CommunityMods/blob/main/content/fix-list.md` |
+| The full fix list | ✅ **LIVE and verified 2026-08-20**: `https://catt144.github.io/SMR-CommunityMods/fix-list/` returns **HTTP 200**, and the live page carries both 08-20 fixes. The URL was derived from the Pages domain + the built path and then **checked rather than trusted** — it happened to be right |
+| Issue tracker | ⚠️ `https://github.com/catt144/SMR-CommunityFixPack/issues` — already linked from the site's FAQ since 2026-08-13, ⛔ **but nobody in this project has recorded clicking it.** One click before this goes on two store pages |
 
 ✅ **Both store links are LIVE on the site** as of `SMR-CommunityMods` `c4e55c4`
 (installing page buttons + landing page line), with the console route named —
@@ -158,6 +159,24 @@ HOW IT WORKS
   quietly.
 
 
+FOUND A BUG, OR ONE THIS PACK DID NOT FIX?
+
+Reports are read and acted on, and a save file where it reliably happens is
+worth more than any description of it.
+
+· Issue tracker — the route for everyone, and the only one that can carry a
+  save file or a log:
+  https://github.com/catt144/SMR-CommunityFixPack/issues
+  It needs a free GitHub account and works from a browser on any device.
+
+· On Steam you can also just use the comments on the mod's page.
+
+This page has no comment section, so if you installed from Paradox Mods —
+which includes every Xbox and PlayStation player — the tracker is the route.
+On console there is nothing to attach in the first place, and a plain
+description in your own words is genuinely useful.
+
+
 FOR MODDERS
 
 The pack is built to share the game with your mod rather than take it over. It
@@ -229,6 +248,13 @@ And [b]four[/b] of them repair things you cannot see at all today: real defects 
 [*][b]Safe to add to a save you have already played.[/b] It writes almost nothing into your savegame, and removing it simply lets the original bugs come back.
 [*][b]It stands down instead of guessing.[/b] Every fix checks the game's code before it touches anything, and switches itself off if an official patch changes what it was written for.
 [*]A few fixes are judgment calls rather than plain repairs. Those are marked on the fix list, with the reasoning.
+[/list]
+
+[h2]Found a bug, or one this pack did not fix?[/h2]
+Reports are read and acted on, and a save file where it reliably happens is worth more than any description of it.
+[list]
+[*][b]The comments below[/b] — easiest if you are on Steam, and no extra account needed.
+[*][b]The issue tracker[/b] — [url=https://github.com/catt144/SMR-CommunityFixPack/issues]github.com/catt144/SMR-CommunityFixPack/issues[/url]. Comment sections cannot carry files, so this is the only place a save or a log can actually reach us. Free GitHub account, works from any browser.
 [/list]
 
 [h2]For modders[/h2]
