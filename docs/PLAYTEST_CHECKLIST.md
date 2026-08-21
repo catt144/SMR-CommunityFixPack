@@ -80,8 +80,9 @@ completed tests move whole to
 
     1. **Re-tick the mods** in the Mod Manager (the junction pull cost the
        enables; restart after ticking).
-    2. ⛔ Before anything is pressed: **`IsDirty()` false and `1.0.0` on
-       screen.**
+    2. ⛔ Before anything is pressed: **not dirty, and `1.0.0` on screen.**
+       ⇒ see item **70** for the exact command and what each answer means —
+       ⚠️ **`nil` is a PASS**, and the sheet used to imply it was not.
     3. Pack via **Mods Manager → Edit (`Ctrl-E`) → File → Pack Mod** — ⛔ no
        console route exists. Expect **82 files**; a different count means
        stop, not adjust. Record the md5/bytes in §0.5(f)'s blank row **at
@@ -90,6 +91,45 @@ completed tests move whole to
     5. Then the sheet's §0.5(d) — game version **350453** on the portal page;
        §0.5(e) — the id-writeback commit; §0.5(f) — md5 your downloaded pack
        **against the row you filled in at step 3**.
+
+70. ⛔ **The dirty check, exactly — asked 2026-08-20, and the sheet's expected
+    value was wrong in the same way the version digit was wrong on 08-19.**
+
+    **The command, in the in-game console (Enter, in a loaded colony):**
+
+    ```
+    print(Mods.SMR_CommunityFixPack.version, Mods.SMR_CommunityFixPack:IsDirty())
+    ```
+
+    **How to read the two values:**
+
+    | value | meaning |
+    |---|---|
+    | first — `0` | ✅ **1.0.0**, which is what you ruled. ⛔ A `1` means the version already moved — **stop.** |
+    | second — `nil` | ✅ **PASS.** Nothing has dirtied it, and the mod has not been opened in the Mod Editor this session. |
+    | second — `false` | ✅ **PASS.** Opened and hashed, unchanged. |
+    | second — `true` | ⛔ **STOP.** The upload would force a save and bump you to 1.0.1. |
+
+    ⚠️ **Why `nil` had to be spelled out.** `IsDirty` is
+    `return old_hash and (old_hash == 0 or old_hash ~= data.current_hash)`
+    (`CommonLua/GedEditedObject.lua:93-98`, read at Src 08-20). If `old_hash` is
+    unset — which it is until the mod is opened in the editor — the whole
+    expression is **`nil`**, not `false`. The **only** archived reading this
+    project has, act 1 on 08-19, is exactly that: `dirty: nil`
+    (`archive/act1_Mars.exe-…15.18.19…:258`). ⛔ The sheet said *"must be
+    `false`"*, so a correct `nil` would have read as a failure and stalled you —
+    the same shape of error as the `1`/`0` inversion corrected on 08-19.
+    ℹ️ Item 44's step 1 said *"the 08-19 console read returned `0 false`"*; no
+    archived log contains that string, and the reading it cites shows `nil`.
+    Corrected there too.
+
+    ⭐ **The check that matters more, and it needs no console at all.** Whatever
+    the console says, the real guard is the editor's own behaviour: **if the Mod
+    Editor prompts *"The mod needs to be saved before uploading"*, STOP** — that
+    prompt IS the forced save (`ValidateModBeforeUpload`,
+    `GedModEditor.lua:836-844`), and it is the thing that would bump the version
+    inside the package. The console read is the early warning; the prompt is the
+    tripwire.
 
 69. ⭐ **What to fire, and when — asked 2026-08-20 after the eviction.**
 
@@ -761,8 +801,16 @@ completed tests move whole to
        the 1.0.1 bump this step guards against, would have been read as fine and
        waved through to upload.
        ⇒ **`0` = 1.0.0, which is what you ruled. ⛔ A `1` means the version has
-       already moved — stop.** And `IsDirty()` must be **`false`**: if it says
+       already moved — stop.** And `IsDirty()` must be **not-`true`**: if it says
        `true`, stop too, because step 5 would force a save and bump it.
+       ⛔⛔ **CORRECTED AGAIN 2026-08-20 — the second value was wrong here too.**
+       This said *"must be `false`"* and cited a `0 false` console read; **no
+       archived log contains that string.** The one reading on record is
+       `dirty: nil` (`archive/act1_…15.18.19…:258`), and `nil` is the CORRECT
+       clean answer whenever the mod has not been opened in the Mod Editor this
+       session (`IsDirty` returns `old_hash and …`, and `old_hash` is unset —
+       `CommonLua/GedEditedObject.lua:93-98`). ⇒ **`nil` and `false` both PASS;
+       only `true` stops you.** Full reading table: item **70**.
     2. `print(SMRFixPack.fixes.SaintBlessing.update_suspect, #SMRFixPack.order)`
        — expect **`nil  75`**. *(That `nil` is core fix ① proven.)*
     3. `local n = 0 local ok = pcall(function() AllMapsForEach(true, "Colonist", function(c) n = n + 1 if n == 2 then local t t.x = 1 end end) end) print("L5 MapForEach:", ok, n)`
