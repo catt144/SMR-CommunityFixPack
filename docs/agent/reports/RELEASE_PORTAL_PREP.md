@@ -308,7 +308,27 @@ tagged tree.** The only differences are the two files that forced save rewrote �
 one integer and the stripped comments. ✅ Nothing is wrong with the Steam
 listing.
 
-**PARADOX — ⏳ STILL OPEN, and it cannot be closed from the website.**
+**PARADOX — ✅ CLOSED 2026-08-20 22:43, AND IT IS A PERFECT PASS.** The game
+fetched it at startup into `%APPDATA%\Surviving Mars Relaunched\PdxMods\
+pdx_156049_1\ModContent.fpk`:
+
+| reading | value |
+|---|---|
+| size | **391,567 B** — ⭐ **byte-identical to the archive we packed at 21:46** |
+| md5 | **`6621384b99ff17b894ef4c1578fbb5e2`** — the row filled in at the sitting, matching exactly |
+| `version` inside | **`0`** ⇒ **Paradox ships 1.0.0**, and the portal page's own `MOD VER. 0` agrees |
+
+⇒ ⛔ **The size worry is dead and the earlier record was right after all.** What a
+Paradox player downloads is the same file, bit for bit, that this repo built and
+hashed. The browse card's *"376 KB"* / detail page's *"375.84 KB"* is portal
+accounting, not the artifact — the artifact is identical.
+
+⇒ **Both portals are now checked against primary evidence:** Paradox identical;
+Steam identical in all 78 code files with only `metadata.lua`/`items.lua`
+differing, for the documented reason. **§0.5(f) is discharged for this release.**
+
+⛔ ~~**PARADOX — STILL OPEN, and it cannot be closed from the website.**~~
+*(superseded above; kept because the route it records is real and non-obvious)*
 Subscribing there creates no local file: `%APPDATA%\Surviving Mars Relaunched\
 PdxMods\` holds only an empty `temp_pdx`. The game pulls the mod at startup. ⇒ To
 settle it, **launch the game once**, then read `version` out of the downloaded
