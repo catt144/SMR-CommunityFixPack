@@ -59,7 +59,10 @@ Paradox Mods serves Xbox and PlayStation, which a console player cannot infer.
 
 ---
 
-## ═══ PLAIN TEXT — paste this into both portals ═══
+## ═══ PARADOX MODS — plain text, paste as-is ═══
+
+⚠️ The cross-link at the foot points at STEAM. The Steam version below points
+back at Paradox. ⛔ Do not paste the same block on both.
 
 ```
 Bug fixes for Surviving Mars: Relaunched.
@@ -95,7 +98,7 @@ tourism, research, storylines and the interface.
 
 The full list — every fix, what you would have seen, and what was actually
 wrong — is here:
->>> FILL-IN A — the full fix list <<<
+https://catt144.github.io/SMR-CommunityMods/fix-list/
 
 
 HOW IT WORKS
@@ -132,10 +135,11 @@ nothing. "Before the pack loads" means your mod has to load first.
 Source, and the reasoning behind every fix:
 https://github.com/catt144/SMR-CommunityFixPack
 
->>> FILL-IN B — the other store page's link <<<
+Also on the Steam Workshop:
+https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 
-## ═══ STEAM BBCODE VARIANT — optional, check the preview ═══
+## ═══ STEAM WORKSHOP — BBCode; fall back to the plain block if tags render literally ═══
 
 ⚠️ Same words. Only try this after the plain version is safely in place.
 
@@ -167,7 +171,7 @@ Every fix in this pack repairs something the game's own code gets wrong — the 
 … and a good deal more, including quieter repairs to drones, shuttles, domes, tourism, research, storylines and the interface.
 
 [b]The full list[/b] — every fix, what you would have seen, and what was actually wrong:
-[url=>>> FILL-IN A <<<]the complete fix list[/url]
+[url=https://catt144.github.io/SMR-CommunityMods/fix-list/]the complete fix list[/url]
 
 [h2]How it works[/h2]
 [list]
@@ -186,7 +190,7 @@ SMRFixPack_Disabled["DustDevilSpawnGate"] = true[/code]
 The id is the key, not a list entry — a plain list looks valid and switches off nothing. "Before the pack loads" means your mod has to load first.
 
 [b]Source, and the reasoning behind every fix:[/b] [url=https://github.com/catt144/SMR-CommunityFixPack]github.com/catt144/SMR-CommunityFixPack[/url]
-[url=>>> FILL-IN B <<<]Also on Paradox Mods[/url]
+[url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 ```
 
 ## Provenance of the headliners
