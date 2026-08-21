@@ -109,8 +109,8 @@ More of them you would never have blamed on a bug, because the game looked
 perfectly normal while the arithmetic underneath it was wrong — a trait's
 colony-wide bonus that never reached a single colonist, upgrade bonuses left
 behind by demolished buildings and stacking every time you rebuilt, a technology
-charging 10% where its own text promises 20%, a Comfort penalty billed for
-longer than the journey actually took.
+providing a 10% discount where its own text promises 20%, a Comfort penalty
+billed for longer than the journey actually took.
 
 And four of them repair things you cannot see at all today: real defects that
 the shipped numbers happen to hide, which another mod, a game patch or a DLC
@@ -194,7 +194,7 @@ Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, a lander that unloaded its own return fuel and could never come home.
 
-More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a trait's colony-wide bonus that never reached a single colonist, upgrade bonuses left behind by demolished buildings and stacking every time you rebuilt, a technology charging 10% where its own text promises 20%, a Comfort penalty billed for longer than the journey actually took.
+More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a trait's colony-wide bonus that never reached a single colonist, upgrade bonuses left behind by demolished buildings and stacking every time you rebuilt, a technology providing a 10% discount where its own text promises 20%, a Comfort penalty billed for longer than the journey actually took.
 
 And [b]four[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
