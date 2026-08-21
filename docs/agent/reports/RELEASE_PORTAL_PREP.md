@@ -180,6 +180,44 @@ The forced saves write `pdx_id` / `PdxMod` / `pdx_version` and `steam_id` into
 `metadata.lua`. **Commit them.** Losing them means a future update cannot target
 the published mod. Restore the stripped comments from git in the same commit.
 
+### (h) ⛔ THE EXTERNAL LINKS FIELD IS TYPE-VALIDATED — a deep GitHub URL is rejected (2026-08-20)
+
+Hit live at the sitting: pasting
+`https://github.com/catt144/SMR-CommunityFixPack/issues` into Paradox's
+**EXTERNAL LINKS** box returns *"Unsupported external links… Supported link types
+are Discord, YouTube, Twitch, X, GitHub, PayPal, Patreon, Ko-fi, Buy Me a Coffee,
+Crowdin, GitLab, GoFundMe, Bluesky."*
+
+⚠️ **GitHub IS supported — the URL is the problem, not the host.** The game ships
+the pattern the type is recognised by (`CommonLua/Data/ModLinkDef.lua:26-36`):
+
+```lua
+LinkType = "github",
+Patterns = {
+    "^https://(github%.com/[_%w]+)",
+    "^https://www%.(github%.com/[_%w]+)",
+},
+```
+
+The captured group is **profile-level** — `github.com/<user>`, where `[_%w]+` is
+alphanumerics and underscore, ⛔ **no hyphen and no slash.** The portal's own
+validator is evidently at least as strict as this and rejects the deep path.
+
+⇒ **What to put in the field, in order:**
+1. `https://github.com/catt144/SMR-CommunityFixPack` — the repo root; try first.
+2. `https://github.com/catt144` — the profile, which is exactly the shape the
+   shipped pattern captures. Falls back cleanly if (1) is refused.
+
+⭐ **AND THE ISSUES LINK IS NOT LOST — it belongs in the DESCRIPTION, not the
+field.** Only `external_links` is validated (`ModDef:GetExternalLinkError`,
+`Mod.lua:393-404`); the description body is free text and is never link-checked.
+The store card already carries the `/issues` URL in its reporting section, which
+is the right place for it — and the only place that works, since Paradox has no
+comments at all (`EF-067`).
+
+⚠️ Also enforced by the same code path: **duplicate link types are rejected**
+(one link per type) and **a mod may carry at most 10 tags** (`ModDef:GetError`).
+
 ### (g) ⚠️ TAGS ARE IN `metadata.lua`, so adding one is not free (2026-08-20)
 
 Asked at the sitting: *"do we need any tags?"* The pack ships exactly one —
