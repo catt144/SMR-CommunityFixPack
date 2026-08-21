@@ -67,6 +67,24 @@ completed tests move whole to
     (`Mod.lua:265`). It reads **20 checked · 0 FAIL** again, and prints
     `PackVersion 1.0.2`.
 
+    ⛔⛔ **AND ONE THING I TOLD YOU ABOVE MAY BE WRONG — I am flagging it rather
+    than leaving it.** I said Paradox holds 1.0.0. The Paradox browse card reads
+    **376 KB**, which is Steam's 385,131 B in KiB — *not* our 391,567 B pack. If
+    Paradox received the same stripped, bumped archive Steam did, then it is
+    **not** 1.0.0 and the version story is one number, not two. The counter-
+    evidence is real: `pdx_version` came back `"1"`, which is only reachable if
+    Paradox saved *after* uploading a version-0 tree. ⇒ **One download settles
+    it** — §0.5(f) already asks you to pull the published copy; when you do, I
+    read the `version` inside its `metadata.lua` and correct the record either
+    way. ⚠️ Until then, do not repeat "Paradox is 1.0.0" as settled, including
+    anywhere on the store pages.
+
+    ℹ️ **Also on that card, worth your eye, not mine to change:** the author
+    renders as **`cat144`**, while `metadata.lua` says `catt144`. Portals
+    usually show the *account* name rather than the metadata field, so this is
+    probably just your Paradox account — but if it is a typo in the account, it
+    is the kind of thing that is easier to fix on day one than later.
+
     ⇒ **Still owed on the live listings, all yours:** §0.5(d) the required game
     version **350453** on the Paradox page if it offers the field · §0.5(f) the
     download checksum · then the site: I put both store links in, you switch

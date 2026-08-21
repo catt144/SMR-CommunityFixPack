@@ -180,6 +180,57 @@ The forced saves write `pdx_id` / `PdxMod` / `pdx_version` and `steam_id` into
 `metadata.lua`. **Commit them.** Losing them means a future update cannot target
 the published mod. Restore the stripped comments from git in the same commit.
 
+### (g) ⚠️ TAGS ARE IN `metadata.lua`, so adding one is not free (2026-08-20)
+
+Asked at the sitting: *"do we need any tags?"* The pack ships exactly one —
+**Gameplay** — and it is live on both portals.
+
+**The mechanism, read at Src.** Tags are boolean properties on `ModDef`, one per
+entry in `PredefinedModTags` (21 of them, `Lua/Mod.lua:6-27`), injected as
+properties at `ClassesGenerate` (`:34-42`). `ModDef:GetTags` returns the display
+name of every one set true (`:44-52`), and the Paradox upload sends
+`Tags = mod:GetTags()` (`ParadoxMods.lua:160`). ⇒ **A tag change is a
+`metadata.lua` change ⇒ an editor save ⇒ `version = version + 1` ⇒ a re-upload.**
+⛔ Never worth a version bump on its own.
+
+⚖️ **The free route, if it exists: the portal's own management page.** If Paradox
+(or Steam) lets you tick tags on the website, they cost nothing — ⛔ **this has
+NOT been checked and must not be assumed.** Check there first; only consider the
+metadata route if a genuine future update is already bumping the version anyway.
+
+**What is defensible for this pack, if the free route exists:**
+
+| tag | verdict |
+|---|---|
+| **Gameplay** | ✅ already set, and correct |
+| **Interface** | ⚖️ defensible — `C51` repairs UI text, `C50` adds a description bullet, several fixes repair UI behaviour |
+| **Translations** | ⛔ **no.** `C51` repairs localization *routing*, but a player filtering that tag wants a language pack. Mis-tagging buys a wrong-expectation report, not a subscriber |
+| Buildings · Research · Crops · Terraforming · Traits · Law · Faction | ⛔ **no.** The pack fixes bugs in those areas but adds no content; tagging into them puts a fix pack in front of people browsing for new things to build, which is the first impression this launch spent months protecting |
+| Other | ⛔ no |
+
+⚖️ **OWNER RULING 2026-08-20: *"It's worth a version bump if no one can find our
+mod."*** ⇒ The version number does **not** outrank discoverability, and that
+settles the priority. But two things come before spending the bump:
+
+1. ⛔ **Check the portal's own management page first.** If tags are editable
+   there, the bump buys nothing. Unverified, 30 seconds to settle.
+2. ⚠️ **A re-upload is not one number.** Repeating the two-portal sequence
+   re-runs the same save choreography: Paradox saves after (tree 2→3), Steam
+   saves before packing (3→4) ⇒ the two stores drift **further** apart, not
+   closer. If a bump is taken, set the on-disk `version` deliberately before each
+   upload (the §0.5(c) route) so both listings land on the same number, and
+   ⛔ re-run `tools/upload_preflight.py` and `pack_predict` first.
+
+⭐ **And the two biggest discoverability levers cost nothing and are already
+owed**, so take them before any bump: the **full card paste** into both store
+pages (§2 — the pages currently show only the short `metadata.lua` blurb, while
+portal search indexes the body), and the **site + Pages** (§1 steps 2–4).
+
+⇒ **Gameplay alone is honest; Interface is the only addition worth having.** If
+the free route exists, take both. If it does not, fold the tag change into the
+first real update rather than shipping a bump for tags alone — unless the free
+levers above have been taken and findability is still the problem.
+
 ### (f) ⭐ CHECK AFTER EACH UPLOAD — the delivered bytes (verdict review, 2026-08-19)
 
 Every byte-fidelity check in the release chain ends at the **local** `.fpk`.
@@ -235,6 +286,24 @@ BOTH, AND A STRAIGHT md5 COMPARE WOULD READ AS A FAILURE ON THE OTHER.**
 ⇒ **The code both portals ship is identical.** What differs is one integer and
 the comments in two non-code files. ⚠️ Do not "fix" this by re-uploading: a
 further upload bumps again and would make it worse, not better.
+
+⛔⛔ **OPEN, AND THE TABLE ABOVE IS THE SIDE THAT MIGHT BE WRONG — the two
+portals report almost the SAME size, and the reasoning says they should not.**
+Observed on the live pages 2026-08-20: Steam **385,131 B**; the Paradox browse
+card **376 KB**, which is `385,131 / 1024 = 376.1 KiB` — Steam's file, not our
+391,567 B pack.
+
+- The evidence FOR "Paradox got the version-0 pack": `pdx_version` came back
+  **`"1"`**, which is the value only reachable if Paradox's save ran *after* its
+  upload, from a tree that was still at 0.
+- The evidence AGAINST: that size.
+
+⇒ ⛔ **Do not repeat "Paradox is 1.0.0" as settled until this is resolved.** The
+resolver is already on this sheet and costs one download: **§0.5(f)** — pull the
+Paradox copy and read its `metadata.lua` with `tools/pack_list.py`. The `version`
+integer inside that archive is the answer, and it is not derivable from here.
+⚠️ It is possible Paradox re-compresses or re-wraps server-side, which would
+explain the size with the version untouched — also only decidable by looking.
 
 ⛔ **File-level only, never behavioral:** with the dev
 junction present, the unpacked copy wins silently at equal version
