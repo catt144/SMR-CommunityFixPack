@@ -355,3 +355,102 @@ this leg's entire result.** A probe that could fail turned a derivation into a
 reversal in one boot. That is an argument for the rule, but it is your call
 whether two instances is enough base, and `WORKFLOW.md` is where it would bind.
 ⚠️ The untracked-folder hazard above is a second, unrelated rule candidate.
+
+---
+
+### Appended 2026-08-24 by the session that AUTHORED this chain (reviewing `01`'s output, before `02` was fired)
+
+⛔ **I am not neutral here: I endorsed F106's mechanism to the owner and I was
+wrong.** I verified the copy branch (`classes.lua:700-709`) and `Building.lua:157`
+and reported that as "verified the core claim." I never checked the **timing**
+premise, which is the half that turned real engine behaviour into a claimed
+defect. `rawget=own-copy` is true — my check was correct and irrelevant, because
+the copy contains our wrapper. **Re-derive the ROUTE, not the citations** — treat
+everything below as claims too.
+
+#### ⭐⭐ ONE CITATION `01` HANDS YOU WILL NOT CHECK OUT — read this before Pass B
+
+`01` tells you *"the whole leg turns on those three line numbers"* and names
+`autorun.lua:423 vs :557`. **`:557` is wrong**, in `01`'s notes, in `F106` and in
+`F107` (three places).
+
+* `autorun.lua:556-557` is `function OnMsg.Autorun()` … `MsgClear("Autorun")` —
+  a **handler**, not the raise.
+* The raise is **`CommonLua/Core/lib.lua:371`**: `dofile("CommonLua/Core/autorun.lua")`
+  then `Msg("Autorun")` on the next line.
+
+⭐ **The conclusion is UNAFFECTED and in fact stronger.** `lib.lua:371` shows
+`autorun.lua` runs to completion — including `ModsLoadCode()` at `:423` — *before*
+the message fires, which is exactly the ordering `01` claims. ⛔ **Do not
+resurrect F106 over this.** Correct the line number in both entries; do not touch
+the verdict. Verified independently this session.
+
+#### ⭐⭐⭐ The strongest rule candidate for your Pass E — `Require` completeness
+
+`Require` already knows this failure by name and would have caught F107 at apply
+time. `Fix_LandscapeCostRefresh` declares:
+
+```lua
+{ class = "ConstructionSite",          method = "RefreshConstructionResources" },  -- the DECLARING class
+{ class = "<leaf>",                    method = "GatherConstructionResources"  },  -- x3, the gatherers
+```
+
+It **never declares** `{ class = "<leaf>", method = "RefreshConstructionResources" }`
+— the thing it actually wraps and captures `prev` from. Had it done so,
+`find_declaring_ancestor` (`00_Core.lua:82-97`) would have fired the check at
+`:132-137`:
+
+> `self-check targets %s but %s declares %s — authoring error, not a game update (FIX_POLICY §2)`
+
+⇒ The gap is not the mechanism. **`Require` validates what the author DECLARES,
+not what the module WRAPS**, and the two diverged silently. The rule:
+*every wrapped `(class, method)` must appear in that module's `Require` block* —
+and it is **statically checkable**: `tools/harvest_wrap_targets.py` already
+extracts declared targets; a second harvest of assignment sites lets `doccheck`
+go red on a mismatch **at commit time, with no game needed**. That would have
+caught F107 before it was committed.
+
+⚖️ I think this beats the probe rule as this chain's durable product, because it
+is enforceable rather than advisory. Both can land. Your call.
+
+#### ⚠️ `00_Core.lua:80-81` already documented the refuted premise
+
+Three lines above `find_declaring_ancestor`: *"classdefs carry `__parents`
+(classes.lua:61); post-flattening the walk is harmless…"* — **our own core stated
+that the pack operates on classdefs.** F106 was refutable by reading our own file,
+without a launch. That bears on Pass E: the deeper miss may not be probe design
+but that nobody re-read the module doing the wrapping.
+
+#### ⚠️ F107's severity contradicts a house precedent — reconcile or distinguish
+
+F49's **"Recorded latent (wave-5 screening, no fix)"** — `DivRound(cost, res)`, a
+real typo in genuinely unreachable code — was deliberately **NOT fixed**, on the
+stated grounds that *"writing a fix for it would be the F10 mistake."* F107 is
+also unreachable on shipped data (F105's own reader sweep). As written, the record
+makes two opposite calls on the same shape.
+
+I think F107 is still right to fix, for a reason it does not state: **F49's dead
+code is vanilla's, F107's is OURS**, and `EF-065`(a) means a raise inside our own
+file names us in the player's popup — the exact misattribution F104 and F105 were
+both about. Put that distinction in the entry, or cite and distinguish F49.
+
+#### Two smaller items
+
+* **Checklist 74(a)'s widening may be a robustness GAIN, not merely harmless.**
+  `GatherConstructionResources` creates `construction_resources` **and**
+  `construction_costs_at_start` together (`ConstructionSite.lua:639-640`), so for
+  an ordinary site the guard can only fire in the ungathered state — where the
+  vanilla body would index `construction_resources == false` at `:670` anyway.
+  ⛔ **My derivation, this session, UNVERIFIED.** Check it before it reaches the
+  owner's decision; if it holds it belongs in the repair's header, not in a report.
+* **Is F107's "the pack's ONLY module with this shape" measured or static?** The
+  entry says static audit. The harvester already walks all 105 targets — ask
+  whether uniqueness can be made a measurement cheaply, or state plainly that it
+  is a static read.
+
+#### Owed work that is OUT of this chain's scope — route it, do not let it go quiet
+
+**F105 has still never been reproduced end to end.** The guard is measured; the
+field route (a cost tech sweeping a real levelling site on a real map) is not, and
+it needs an attended sitting. It is not yours to run — name it in your close-out
+so it does not vanish between F105 reading `fixed` and F107 taking the attention.
