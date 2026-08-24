@@ -49,9 +49,15 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⚠️ The split is mechanical, not a mistake: Paradox saves AFTER upload, Steam saves BEFORE packing, so running
   both in one sitting put the bump inside Steam's archive (checklist 71; `PORTAL_PREP` §0.5(c)). ⛔ Do NOT
   re-upload to "fix" the number — a further upload bumps again. This retires 37 Q2, decided by circumstance.
-- ⛔ **Owed on the live listings** (owner's hands): `PORTAL_PREP` §0.5(d) required game version **350453** ·
-  §0.5(f) delivered-bytes ⚠️ **Paradox only** against md5 `6621384b…`/391,567 B; ⛔ Steam's archive legitimately
-  differs (385,131 B — its save stripped comments and bumped the version before packing).
+- ⛔ **Owed on the live listings** (owner's hands). ✅ **§0.5(d) DISCHARGED 08-24 — it was never a task:**
+  the page reads **350453** automatically (`RecommendedGameVersion = lua_revision`, `ParadoxMods.lua:153`);
+  the 08-19 audit grepped `RequiredGameVersion`, the wrong parameter name, and invented the obligation.
+  §0.5(f) Paradox 1.0.x captured: **MOD VER 2 · 382.57 KB · changelog v2 posted 21:55**.
+  ⛔⛔ **RE-PASTE BOTH CARD BODIES — EVERY upload OVERWRITES the page text** from `metadata.lua`
+  (`LongDescription`/`ShortDescription`/`DisplayName`/`Tags`; Steam sends the same). MEASURED 08-24: the
+  1.0.x upload wiped the pasted Paradox body back to the short description. **PER-UPLOAD, forever.**
+  ⚠️ Both store bodies are currently the short `metadata.lua` description ⇒ **no count claim is live**,
+  which is the only reason the undeployed site is not already falsifying a card.
   ✅ §1 steps 2–4 DONE (store links in the site, Pages ON, card carries site links, 0 FILL-IN markers left).
 - ⚠️ **SITE IS ONE COMMIT BEHIND AND IT IS F105's — checklist 79.** `publish-site.yml` is `workflow_dispatch`
   ONLY by design, so committing the site never publishes it. Deployed `a97b8b0` = **79** fix-list entries,
