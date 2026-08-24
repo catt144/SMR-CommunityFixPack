@@ -121,9 +121,26 @@ never write as though the page is updated.
 
 ## 3 · `metadata.lua` — the strings that ship INSIDE the mod
 
-* **`last_changes`** — this is the changelog a player reads on the store. It must
-  name what changed **in this version**, in a player's words. ⛔ Do not let it
-  keep saying `"Initial release."` after the first patch.
+* **`last_changes`** — ⛔⛔ **CORRECTED 2026-08-24 by the owner: this is not "the
+  changelog a player reads", it is the PER-VERSION CHANGE-NOTE ENTRY on BOTH
+  storefronts**, and both are surfaces players expect to see move when you ship.
+  Sent automatically at upload, archived there permanently:
+
+  | portal | code | surface |
+  |---|---|---|
+  | Paradox Mods | `ChangeLog = last_changes` (`ParadoxMods.lua:151`) | the **CHANGELOG** panel on the mod page |
+  | Steam Workshop | `change_note = mod.last_changes` (`SteamWorkshop.lua:114`) | the **Change Notes** tab |
+
+  Nothing is pasted — but three rules follow and the first draft of this sheet
+  had none of them:
+  1. ⛔ **Rewrite it before EVERY upload.** It is not rolling copy. Leave it alone
+     and the next upload files a *duplicate* note under a new version number.
+  2. ⛔ **Keep it terse.** The field is `editor = "text", lines = 3`
+     (`Mod.lua:254`), and the observed house style on both stores is a dashed
+     line or two. A paragraph renders as a wall in those panels.
+  3. ⛔ **It is HISTORICAL.** It describes the version it ships with, forever —
+     never write it in the present tense of the pack as a whole.
+  ⛔ And do not let it keep saying `"Initial release."` after the first patch.
 * **`description` / `short_description`** — only if the fix changes a *claim*
   (e.g. the judgment-call count, or a promise about save safety). Most fixes do
   not touch these.
@@ -132,6 +149,13 @@ never write as though the page is updated.
 
 ⛔ **Version numbers are the sitting's, never yours** (`H-02`). Hand-editing these
 strings is ordinary agent work; hand-editing `version` is not.
+
+⚠️ **PACKING IS NOT SAVING — measured 2026-08-24.** After File → Pack Mod the
+tree was untouched: `git status` clean, `version` still `2`, all 135 comment
+lines intact. The force-save that bumps the version and regenerates
+`metadata.lua` from memory is `ValidateModBeforeUpload`, which runs at **upload**
+(`GedModEditor.lua:836-844`). ⇒ the `git diff metadata.lua` check for stripped
+comments belongs **after the upload**, not after the pack.
 
 ---
 

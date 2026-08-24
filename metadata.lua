@@ -49,6 +49,16 @@ return PlaceObj('ModDef', {
 	-- live listings still show. ⚠️ It is the CHANGELOG a player reads on the
 	-- store, so it must describe THIS version, not the pack. Player's words, no
 	-- fix ids, no counts (counts drift, see the comment above `last_changes`).
+	-- ⛔ IT IS NOT A DESCRIPTION — it is the PER-VERSION CHANGE-NOTE ENTRY on BOTH
+	-- storefronts, sent automatically at upload and archived there forever:
+	--   Paradox  `ChangeLog = last_changes`   (`ParadoxMods.lua:151`)  -> CHANGELOG panel
+	--   Steam    `change_note = last_changes` (`SteamWorkshop.lua:114`) -> Change Notes tab
+	-- ⇒ three consequences. (1) REWRITE IT BEFORE EVERY upload or the next one
+	-- posts a duplicate entry under a new version. (2) Keep it TERSE — the field
+	-- is `lines = 3` (`Mod.lua:254`) and the house style on both stores is a
+	-- dashed line or two, not a paragraph. (3) It is HISTORICAL: it describes the
+	-- version it ships with, forever, so never write it in the present tense of
+	-- the pack as a whole.
 	-- ⛔ F107 is deliberately absent: it was a defect in our own fix for F105,
 	-- found and repaired before either ever reached a player, so naming it on a
 	-- store page would describe a problem nobody could have had.
@@ -56,7 +66,7 @@ return PlaceObj('ModDef', {
 	-- to their accurate versions"); text-only, no behaviour, and `H-02` as
 	-- reworded 2026-08-24 puts hand edits to this string squarely in scope while
 	-- leaving the version bump to the owner's sitting.
-	'last_changes', "Fixes a base-game error that interrupted research: finishing a technology that reduces building costs threw an error if a terrain-levelling or rock-clearing job was running anywhere on the map. Landscaping areas are now skipped by that cost refresh, which never applied to them — their work is measured in volume of rock, not resources. Safe to install on a save this is already happening in; the landscaping job can stay where it is.",
+	'last_changes', "- Fixed a base-game error when a technology that reduces building costs finished researching while a terrain-levelling or rock-clearing job was active anywhere on the map.\n- Safe to install on a save where this is already happening; the levelling job can stay where it is.",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	-- ⭐ ADDED 2026-08-17 AT THE UPLOAD SITTING (④ step 1). Without it the
