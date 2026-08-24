@@ -12,13 +12,15 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   byte-identical, so no fixed build exists. We are NAMED only as a stack pass-through (`EF-065`(a)).
   Owed: reporter reply + their confirmation, then close. ⚠️ PN is ENABLED on the rig (`H-08`) — untick
   before any clean leg. Its unmaintained state is logged as an opt-in candidate in THAT repo's FUTURE_IDEAS.
-- **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled in-session "number 1 fix priority",
-  checklist 72 receipted). Boot `applied` verified, 0 errors (`archive/f105_*.log`). ⛔ Entry corrected:
-  triggers are 3 techs ONLY (laws/story bits never sweep); `ClearWasteRockConstructionSite` shares the crash.
-  ⚠️ Live listings now ONE module behind the tree — a 1.0.x upload sitting is owed at the owner's convenience.
-- **F106 ⚠️ NEW, derived-unmeasured (checklist 74).** The class builder COPIES inherited methods into
-  subclass tables, so post-build parent-class wraps miss subclass instances; `Fix_SmallLandscapeSites`
-  (F33) is suspect no-op. One console read settles it (probe in the entry); rides the next sitting.
+- **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled "number 1 fix priority", checklist 72).
+  Guard MEASURED reached on all 3 leaves 08-24 (`archive/f106_*.log`). ⛔ Triggers are 3 techs ONLY.
+  ⚠️ Live listings ONE module behind; that module carries **F107** — fix before the 1.0.x upload or ship knowing.
+- **F107 ⛔ NEW, MEASURED 08-24, owner call OPEN (checklist 74).** `Fix_LandscapeCostRefresh` captures `prev` as
+  **nil** on all 3 leaf classdefs (they don't declare the method) ⇒ crash IS fixed, delegation is dead code
+  that raises if reached. Pack's ONLY instance (static audit). Rec: one wrap on `ConstructionSite`. NOT built.
+- **F106 ✅ CLOSED — REFUTED 08-24 by measurement**, filed and refuted same day. The pack applies at file-LOAD,
+  BEFORE the builder (`00_Core.lua:452` < `autorun.lua:557`), so the builder copies OUR wrap down; F33 clean.
+  ⛔ `classes.lua:986-988` states the split INVERTED — never cite it. ⛔ Only `DataPatch` waits for ClassesBuilt.
 - **Blame surface (checklist 73)** — `EF-065`(a) fires whenever ANY error throws under one of our ~60
   wrapped targets. 2 field sightings in one day, neither ours. Options tiered on checklist 73.
 
@@ -39,6 +41,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Report `reports/04_ATTENDED_SITTING.md`; logs `archive/link4{en,de,lang}_*`.
   ⛔ SKIPPED BY NAME: `C50`'s challenge landing-spot site, and the in-game Mission Profile on a SpaceY colony.
 - **A 1.0.x update IS queued since 2026-08-24** (F105's module; supersedes 08-20's "no queued 1.0.1").
+  ⛔ **That module carries F107 — checklist 74 decides whether the upload waits for the repair.**
   After that upload the next effort is the **opt-in pack** (owner 08-20, checklist 68); its kickoff reads
   that repo's own STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
 - ⛔ **Shipping artifact: NO PACKED `.fpk` MATCHES THIS TREE.** Expected shape **82 files = 78 `Code/*.lua` +
@@ -50,11 +53,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **Rig at the 08-20 sitting: all 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF** (checklist 43).
   The rig runs cheats — the normal config.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
+  **74 (F107 — repair before the 1.0.x upload, or upload knowing; rec (a), one wrap on `ConstructionSite`)** ·
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
   40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q2 (Steam, after Paradox).
-- Watches: `EF-066`'s unswept question is now **F106 + checklist 74** (sharpened 08-24: the copy branch
-  misses ALL subclass instances, not just overriders; F33 the first suspect) ·
+- Watches: `EF-066` SWEPT 08-24 — **105** declared targets (not ~60), 97 reach every subclass; the 8 leftovers
+  are re-declaring subclasses (biggest: `Fix_ShuttleHubOffAvailable` misses ~578 under `Building`). ⛔ Which of
+  them are ever INSTANTIATED is NOT measured and checklist 74 stays half open on it ·
   ⚠️ German is the ONLY localisation ever SEEN; the other 7 packs stay CSV-measured (`EF-039`) · TestKit wave-12
   clause 1 taxonomy (other repo, `EF-066`) · C47 speed thread (descending ladder, unrun) · C48 CANDIDATE (opt-in
   territory; no seed-family fix code here) · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 post-release ·
@@ -108,7 +113,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 BUILD STATE (emitted by tools/doccheck.py)
 - modules: 78 registered (78 default-active, 0 optional-gated files)
 - Code/*.lua files: 79
-- TestKit probes: 98
-- BUGS index rows: 106 F + 12 D + 53 C
+- TestKit probes: 100
+- BUGS index rows: 107 F + 12 D + 53 C
 ```
 Re-emit after any change; game pinned **1.0.7.396349** (`EF-014`).

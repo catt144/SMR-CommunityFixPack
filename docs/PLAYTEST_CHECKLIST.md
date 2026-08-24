@@ -52,22 +52,71 @@ rock-clearing jobs) crashes the same way, not just levelling.
   site, research a dome-cost tech, watch `ConstructionSite.lua:673` stay
   silent) rides your next sitting if you want the attended upgrade.
 
-74. **The new question — some of our fixes may not reach the objects they aim
-    at, and one shipped fix is now a named suspect.** Deriving F105's fix shape
-    forced a read of the engine's class builder: for most class chains it
-    COPIES inherited methods into each subclass at build time, so a wrap the
-    pack installs later on a parent class is invisible to subclass instances.
-    F105's own fix already dodges this (installed per leaf class). But
-    `Fix_SmallLandscapeSites` (F33, the small-site drone crash) wraps exactly
-    such a parent — **derived, not yet measured, its fix may never have run.**
-    → [agent/bugs/F106.md](agent/bugs/F106.md)
-    **What settles it:** ONE console read in any booted colony (the exact line
-    is in the entry). If confirmed, the follow-up is an audit of all ~60
-    class-method wrap targets and per-leaf re-installs where needed.
-    ❓ **Your call:** (a) probe-only at the next sitting, then decide; (b) if
-    confirmed, audit now; (c) if confirmed, audit at the opt-in-era maintenance
-    window (`EF-066`'s original schedule). My recommendation: **(a), then (b)**
-    — F33's crash is player-visible and its fix is currently claimed shipped.
+74. ✅ **MEASURED AND ANSWERED 2026-08-24 — and the answer is the opposite of
+    the question. It cost you nothing: the run was unattended.**
+    **The good news first: nothing was broken by the mechanism I was worried
+    about.** I filed F106 saying that most of our ~60 fixes might be silent
+    no-ops, because the game copies inherited methods into each subclass before
+    our code could patch them. **That was wrong, and it is now measured wrong.**
+    Our fixes are applied *earlier* in the boot than I believed — before the game
+    builds its classes, not after — so the game copies **our** patched version
+    down into every subclass. `Fix_SmallLandscapeSites` (F33) is fine and always
+    was; the sweep checked all **105** wrap targets and 97 of them reach every
+    subclass. → [agent/bugs/F106.md](agent/bugs/F106.md) (closed, refuted) ·
+    report [agent/reports/F106_DISPATCH_SWEEP.md](agent/reports/F106_DISPATCH_SWEEP.md)
+    · log `agent`-side `docs/archive/f106_Mars.exe-20260824-02.32.27.log`
+    · suite `75 PASS / 1 FAIL / 24 SKIP / 0 ERROR` of 100, gate `78/78 applied`.
+
+    ⛔ **The bad news, and the only thing here that needs you: the same run found
+    a real defect in the F105 module you ruled on yesterday.**
+    `Fix_LandscapeCostRefresh` was written to "check, then hand off to the
+    game's own code". Because of the same early-apply timing, the hand-off
+    captured **nothing** — it holds a nil where the game's function should be. In
+    practice: **the crash you asked me to fix IS fixed** (the check fires and
+    returns, which is the whole repair), but the hand-off half is dead code that
+    would throw an error *inside our own file* if anything ever reached it.
+    Nothing shipped is affected — this module is not on the live listings yet —
+    but it is **the one module the queued 1.0.x upload exists to deliver**.
+    → [agent/bugs/F107.md](agent/bugs/F107.md) (measured, not derived)
+
+    ❓ **Your call — one question, three options.**
+    * **(a) Repair it before the upload** *(my recommendation)*. The repair is
+      small and, ironically, it is the shape **you** were originally offered on
+      item 72: **one wrap on `ConstructionSite`** instead of three on the leaf
+      classes. It is now measured to reach all 13 relevant classes. One module
+      touched, one boot log to confirm, then the upload goes as planned.
+      ⚠️ It widens the guard to ordinary construction sites too — harmless by
+      construction, but it is a behaviour surface and that is why I am asking
+      rather than deciding.
+    * **(b) Upload as-is, repair in the next patch.** Defensible: the reported
+      crash really is fixed and the dead branch is unreachable on shipped data.
+      The cost is that the pack carries a latent error in its own file, and
+      `EF-065`(a) means any such error names **us** in the player's popup — the
+      exact misattribution F104 and F105 were both about.
+    * **(c) Repair it with the minimal change** — keep the three installs, just
+      take the game's function from the class that actually declares it. Smallest
+      diff, no behaviour-surface change, but it leaves the shape that caused the
+      bug in place.
+    ⛔ I have **not** built any of these. The chain that found it was forbidden
+    from writing fix code, deliberately, so that the finding and the fix are
+    separate decisions.
+
+    ⚠️ **One thing this run canNOT tell you, and no run so far can.** The sweep
+    lists which subclasses do not receive one of our patches; it does **not**
+    say which of those subclasses ever actually exist in a game. So the "audit"
+    half of this item is **not complete and is not closed** — what is closed is
+    the alarm that the mechanism was breaking everything.
+    For the record, the leftovers it did find are the *old* known question
+    (`EF-066`): 8 targets where a subclass writes its own version of the method
+    we patched, so it keeps the game's behaviour instead of ours. That is
+    under-coverage, never new harm. The largest is
+    `Fix_ShuttleHubOffAvailable`, whose wrap on `BaseBuilding` is overridden by
+    `Building` and so misses ~578 building classes; also
+    `Fix_GhostFarmOxygen`'s wrap misses residences, research labs, training
+    buildings and water reclamation spires. **None of these is new, none is a
+    regression, and none needs you now** — they are per-fix coverage questions
+    for the opt-in-era maintenance window, exactly where `EF-066` always put
+    them.
 
 ### ⭐⭐ 2026-08-23 — THE FIRST FIELD REPORTS ARRIVED. Two GitHub issues, one reporter, and the pack was named in both. Neither error was ours.
 
