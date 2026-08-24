@@ -89,6 +89,27 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   ITSELF — checking an inherited method on a subclass finds nil and silently
   deactivates the fix. Verify where the method is declared in Src and check
   that class.
+- ⛔ **EVERY `(class, method)` PAIR A MODULE INSTALLS ON OR CAPTURES FROM MUST
+  APPEAR IN THAT MODULE'S OWN `Require` BLOCK (the F107 rule, adopted
+  2026-08-24).** `Require` validates what the author DECLARES, never what the
+  module WRAPS, and the two diverged silently: `Fix_LandscapeCostRefresh`
+  required `ConstructionSite.RefreshConstructionResources` (the declaring
+  class) plus the three leaves' gatherers, then captured
+  `local prev = <leaf>.RefreshConstructionResources` — a pair it never
+  declared — and `prev` was nil on every boot (F107). Had the installed pair
+  been in the block, the `{class, method}` check would have FAILED at apply
+  time and `find_declaring_ancestor` (`00_Core.lua:132-137`) would have named
+  the authoring error, with no game launch needed. Corollary for captures:
+  take the original from the class that DECLARES the method (mind the F64
+  lesson above — the classdef you install on and the classdef that declares
+  the method are different tables at apply time). Statically enforced for the
+  shape that can produce a nil `prev`: `python tools/harvest_wrap_targets.py
+  --check`, run by doccheck, goes RED on a capture-AND-install site whose pair
+  is absent from its module's Require block (a full replacement with no
+  capture is outside the check and guards existence with the inline
+  sanity-check this section already requires). Pre-rule sites verified benign
+  at Src 2026-08-24 are allowlisted in the tool with their citations; F107's
+  three rows are allowlisted as a FILED DEFECT and leave with its repair.
 - ⛔ **NO `apply()` MAY ASSUME A COLD BOOT (the F87 rule, 2026-07-31).** A mod is
   never auto-enabled: the player ticks it at the main menu of a process that is
   already running, the engine does an **in-place reload**

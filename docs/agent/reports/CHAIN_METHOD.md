@@ -166,6 +166,14 @@ emptiness is the objective done-condition. The final prompt is always an
    route-don't-drop (unsure → STOP AND ASK), self-split, defect filing,
    drift-evidence capture, WORKFLOW elements 1–7, commit convention, any
    sealed documents.
+   ⛔ **COMMIT the folder in the authoring session, before any prompt fires**
+   (adopted 2026-08-24, f106-dispatch): every chain mechanic assumes git —
+   prompts `git rm` themselves, and a damaged prompt is restored with
+   `git checkout --` — and BOTH silently no-op on an untracked folder.
+   f106-dispatch ran untracked: an append script truncated `02`'s body, the
+   restore was a no-op, the file had to be reconstructed from a session's
+   memory (fidelity unprovable), and `01` could not `git rm` its own grave.
+   An uncommitted chain folder is unprotected evidence.
 2. **Prompt bodies**, each with: staleness check first (`git log` + `git
    pull`); the job; a **scope fence** (in/out); **stop conditions**; **"what
    may not be claimed"** (the honesty rail — the single best guard against

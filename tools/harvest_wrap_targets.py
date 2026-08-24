@@ -132,6 +132,122 @@ def harvest():
     return found
 
 
+# ---------------------------------------------------------------------------
+# --check: the F107 rule (FIX_POLICY §2, adopted 2026-08-24 by the f106-dispatch
+# terminal audit).
+#
+# A module that CAPTURES a method off a class table and INSTALLS a replacement
+# under the same name is wrapping that (class, method) pair — and `Require`
+# validates only what the author DECLARES, so a pair wrapped but never declared
+# bypasses the one check that would have caught a nil `prev` at apply time
+# (F107: `Fix_LandscapeCostRefresh` captured `<leaf>.RefreshConstructionResources`,
+# declared only `ConstructionSite.…`, and `prev` was nil on every boot).
+#
+# The detector is PRECISION-FIRST: it flags only the capture+install shape,
+# resolving class aliases of the pack's stylised forms —
+#     local A = rawget(_G, "Class")     local A = Class
+#     for _, cls in ipairs({ "C1", … }) do local A = rawget(_G, cls)
+# — and skips what it cannot resolve. Misses stay misses (the static audit on
+# F107 records that limitation); a hit is real. RED means: add the pair to the
+# module's Require block, or — with a reason — to the allowlist below.
+# ---------------------------------------------------------------------------
+
+# (module, class, method) -> reason. Every entry carries its own justification;
+# an entry without a Src citation (or a filed defect id) does not belong here.
+CHECK_ALLOWLIST = {
+    # The pack's ONE nil-prev defect, filed and measured — allowlisted so the
+    # tree stays committable while checklist 74 decides the repair. Remove
+    # these three rows in the commit that repairs F107.
+    ("Fix_LandscapeCostRefresh", "LandscapeConstructionSite", "RefreshConstructionResources"):
+        "F107 — filed defect, awaiting checklist 74; remove with the repair",
+    ("Fix_LandscapeCostRefresh", "ClearWasteRockConstructionSite", "RefreshConstructionResources"):
+        "F107 — filed defect, awaiting checklist 74; remove with the repair",
+    ("Fix_LandscapeCostRefresh", "TerrainPaintConstructionSite", "RefreshConstructionResources"):
+        "F107 — filed defect, awaiting checklist 74; remove with the repair",
+    # Pre-rule wrap sites verified benign at Src 2026-08-24 (each class DECLARES
+    # the method it wraps, so `prev` is real): audit of chain f106-dispatch.
+    ("Fix_DroneTransportMinors", "DroneControl", "UpdateRocketsInternal"):
+        "declares it — DroneControl.lua:613 (audit 2026-08-24)",
+    ("Fix_ExtenderFlapChurn", "DroneHubExtenderBase", "UpdateUplinkRequesters"):
+        "declares it — DroneHubExtender.lua:109 (audit 2026-08-24)",
+    ("Fix_SequenceLatents", "SA_GetLabelToRegister", "SAExec"):
+        "declares it — SA_Filters.lua:30 (audit 2026-08-24)",
+    ("Fix_SequenceLatents", "AlienDigger", "GameInit"):
+        "declares it — Diggers.lua:87 (audit 2026-08-24)",
+    ("Fix_ShelterReflex", "Colonist", "Idle"):
+        "declares it — Colonist.lua:1770 (audit 2026-08-24)",
+    # (Fix_ShelterReflex's MicroGHabitatAutoResolve.IsSuitable is a full
+    # replacement with NO capture — outside this check's shape by design; its
+    # existence guard is the inline type check at Fix_ShelterReflex.lua:41.)
+}
+
+_NOT_CLASSES = {"SMRFixPack", "SMRTest", "_G"}
+
+
+def _aliases(src):
+    """-> {local name: set of class names it can hold}, per file."""
+    out = {}
+    for m in re.finditer(r'local\s+(\w+)\s*=\s*rawget\(_G,\s*"(\w+)"\s*\)', src):
+        out.setdefault(m.group(1), set()).add(m.group(2))
+    for m in re.finditer(r'local\s+(\w+)\s*=\s*([A-Z]\w*)[ \t]*$', src, re.M):
+        out.setdefault(m.group(1), set()).add(m.group(2))
+    # loop form: for _, cls in ipairs({ "A", "B" }) do local C = rawget(_G, cls)
+    lists = {}
+    for m in re.finditer(r'for\s+\w+\s*,\s*(\w+)\s+in\s+ipairs\(\s*\{([^}]*)\}', src):
+        names = re.findall(r'"(\w+)"', m.group(2))
+        if names:
+            lists.setdefault(m.group(1), set()).update(names)
+    for m in re.finditer(r'local\s+(\w+)\s*=\s*rawget\(_G,\s*(\w+)\s*\)', src):
+        if m.group(2) in lists:
+            out.setdefault(m.group(1), set()).update(lists[m.group(2)])
+    return out
+
+
+def _resolve(name, aliases):
+    """-> the set of class names an identifier can denote, or empty."""
+    if name in aliases:
+        return aliases[name] - _NOT_CLASSES
+    if name in _NOT_CLASSES:
+        return set()
+    # a bare identifier used directly as a class (Building, Colonist, …):
+    # capitalised and long enough not to be an unresolved one-letter alias.
+    if re.fullmatch(r"[A-Z]\w{2,}", name):
+        return {name}
+    return set()
+
+
+def check():
+    """-> (violations, allowlisted) — each a list of (module, class, method, note)."""
+    declared = {}
+    for mod, c, m in harvest():
+        declared.setdefault(mod, set()).add((c, m))
+
+    violations, allowlisted = [], []
+    for name in sorted(os.listdir(CODE)):
+        if not name.endswith(".lua"):
+            continue
+        mod = name[:-4]
+        with open(os.path.join(CODE, name), encoding="utf-8") as fh:
+            src = strip_comments(fh.read())
+        aliases = _aliases(src)
+        captures = set(re.findall(r'local\s+\w+\s*=\s*(\w+)\.([A-Za-z_]\w*)[ \t]*$',
+                                  src, re.M))
+        installs = set(re.findall(r'(\w+)\.([A-Za-z_]\w*)\s*=\s*function', src))
+        installs |= set(re.findall(r'function\s+(\w+)[:.]([A-Za-z_]\w*)', src))
+        for ident, method in sorted(captures & installs):
+            for cls in sorted(_resolve(ident, aliases)):
+                if (cls, method) in declared.get(mod, set()):
+                    continue
+                reason = CHECK_ALLOWLIST.get((mod, cls, method))
+                if reason is not None:
+                    allowlisted.append((mod, cls, method, reason))
+                else:
+                    violations.append((mod, cls, method,
+                                       "wrapped (captured + installed) but not in "
+                                       "this module's Require block — FIX_POLICY §2"))
+    return violations, allowlisted
+
+
 def main():
     rows = harvest()
     pairs = sorted(set((c, m) for _, c, m in rows))
@@ -142,6 +258,15 @@ def main():
             print('\t{ %-32s %-38s %-40s },'
                   % ('"%s",' % mod, '"%s",' % c, '"%s"' % m))
         return
+    if mode == "--check":
+        violations, allowlisted = check()
+        for mod, c, m, reason in allowlisted:
+            print("  allowlisted  %-28s %s.%s — %s" % (mod, c, m, reason))
+        for mod, c, m, note in violations:
+            print("  RED  %-28s %s.%s — %s" % (mod, c, m, note))
+        print("WRAP CHECK: %d wrap site(s) outside Require, %d allowlisted"
+              % (len(violations), len(allowlisted)))
+        sys.exit(1 if violations else 0)
     if mode == "--list":
         for mod, c, m in rows:
             print("  %-34s %s.%s" % (mod, c, m))

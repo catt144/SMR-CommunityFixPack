@@ -237,6 +237,23 @@ logbook):**
   flagged dome was *required* to receive, so it could not fail; F11's `nil`
   reading only meant something because `#units` and `holder` were read in the
   same breath, ruling out an empty list and a call that never fired.
+- ⛔ **A probe must reach the code the way PRODUCTION reaches it, and must not
+  compute its expectation with the fix's own logic** (adopted 2026-08-24,
+  f106-dispatch Pass E — two independent false-greens of the same family).
+  A probe that indexes the table the fix patched cannot fail on a broken
+  dispatch: the F33 probe called `GetClosestDests` straight off the patched
+  base-class table and printed PASS from 2026-07 through the day F106 named
+  the module a suspected no-op (TestKit `e896243`). A probe that derives its
+  expected number with the patched arithmetic passes over the defect by
+  construction (the C50 probe, TestKit `8feaf59`). So: dispatch through the
+  production route (an instance-shaped table carrying the built class as its
+  metatable resolves identically, with zero map footprint), and compute
+  expectations independently — vanilla's algorithm or hand-derived constants.
+  Corollary for guard probes: also assert the guard still DELEGATES
+  (`LandscapeCostGuard` clause 2 — the clause that found F107; clause 1 alone
+  passes for a wrapper that swallows every call). The F33 probe's repair is
+  what turned F106 from a standing derivation into a one-boot reversal: a
+  probe that can fail is the difference between a derivation and an answer.
 - **When a test's trigger is a selection you cannot steer, delete the lottery:**
   invoke the shipped call site directly on a chosen target and settle the
   selection half by reconstructing the pool and reading it (F11's

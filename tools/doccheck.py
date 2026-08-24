@@ -678,6 +678,24 @@ def load_order(out):
     return ok
 
 
+def wrap_targets_check(out):
+    """FIX_POLICY §2, the F107 rule (2026-08-24): every capture+install wrap
+    site must declare its (class, method) pair in its module's Require block.
+    The detector and its allowlist live in harvest_wrap_targets.py."""
+    try:
+        import harvest_wrap_targets as hwt
+        violations, allowlisted = hwt.check()
+    except Exception as exc:                          # a tool bug must report, not crash the gate
+        out.append("WRAP CHECK: not checked (%s)" % exc)
+        return True
+    out.append("WRAP CHECK: %d wrap site(s) outside Require, %d allowlisted "
+               "(FIX_POLICY §2; detector+allowlist in tools/harvest_wrap_targets.py)"
+               % (len(violations), len(allowlisted)))
+    for mod, c, m, note in violations:
+        out.append("  RED  %s wraps %s.%s — %s" % (mod, c, m, note))
+    return not violations
+
+
 def counts_block(counts):
     """A STATE-ready block; commit bodies may paste it verbatim."""
     lines = [
@@ -732,6 +750,7 @@ def main():
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok
     ok = load_order(out) and ok
+    ok = wrap_targets_check(out) and ok
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
 
     if args.verify_split:
