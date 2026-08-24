@@ -241,7 +241,25 @@ If the fix answers an open field report, the reply is part of shipping it.
    only safe *"because the reader can check it on the page the card links to."*
    Paste a card claiming **eighty** while the deployed site still lists
    **seventy-nine** and the card is falsifiable by the first person who counts.
-   ⇒ **The site deploy MUST precede the card paste.** Check it, do not assume:
+   ⛔⛔ **RULED 2026-08-24 BY THE OWNER — THE ORDER IS THE OTHER WAY ROUND, AND
+   THIS LINE USED TO SAY THE WRONG THING.** It said *"the site deploy MUST precede
+   the card paste."* Owner: *"people have to actually go to GitHub to see changes,
+   Mod upload → store pages → then GitHub is priority during an update."*
+
+   ⇒ **UPDATE ORDER: mod upload → store pages → site deploy.** The reasoning is
+   audience reach, and it beats the reasoning this sheet had:
+   * Every upload **wipes both store bodies** back to `metadata.lua`'s short
+     description (§2). That is a visible regression on the page **every visitor
+     lands on**, and it lasts exactly as long as the paste is delayed.
+   * The count mismatch is a **theoretical** exposure: it costs someone only if
+     they read *"Eighty repairs"*, click through to the fix list, and count.
+   ⇒ Do not hold the store pages hostage to a deploy. Paste, then deploy.
+
+   ⚠️ **The count constraint is not cancelled, it is REPRICED.** It still binds
+   that the two must agree; what changed is which one waits. Keep the window
+   inside the same sitting, and if the deploy is going to slip to another day,
+   that is when the mismatch is worth caring about — say so in the report rather
+   than leaving it silent. Check the deployed state, do not assume:
    ```bash
    # what is actually deployed = head_sha of the newest successful run
    #   api.github.com/repos/catt144/SMR-CommunityMods/actions/runs?per_page=5
@@ -272,7 +290,9 @@ If the fix answers an open field report, the reply is part of shipping it.
 [ ] what was ACTUALLY posted diffed against what is now measured; overreaches recorded
 [ ] faq.md judgment-call count still true (3 places) if this fix is a judgment call
 [ ] doccheck GREEN, both repos committed
+[ ] ORDER: mod upload -> store pages -> site deploy (owner ruling 2026-08-24)
+[ ] both card bodies RE-PASTED after the upload (every upload wipes them)
 [ ] site DEPLOY checked, not just committed — publish-site.yml is manual-only
-[ ] deployed entry count == card's count word BEFORE the card is pasted
+[ ] deployed entry count == card's count word, same sitting; flag it if the deploy slips
 [ ] owner report separates "true in the tree" from "needs your hands"
 ```
