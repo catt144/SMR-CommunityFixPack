@@ -19,6 +19,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ Triggers are 3 techs ONLY. ⛔ CORRECTION: each raise logs TWICE (uncaught `[LUA ERROR]` **+** console
   `pcall`) — 6+6 leg C, 7+7 leg A — so the uncaught path DOES fire. What never fires is `ReportModLuaError`
   (`Mod Flagged` = 0 in all 3): pack OFF ⇒ no name to match. ⇒ checklist 73 = pack ON + module OFF, cheap.
+  ⭐⭐ **Leg D = INSTALL-AFTER-THE-FACT, clean** (`f105_legD_*.log`): save made WITH the defect already fired,
+  pack ticked on, full exit, reload → applied, **zero `:673`**. ⇒ a player needs NO clean save; evidence for
+  "safe to add to an existing save" for this defect, and the empirical case for checklist 72(a) over (b).
+  ⛔ NOT a repair — the site stays broken, the guard makes it harmless. ⚠️ "EXACTLY 3 techs" is the LABEL-SWEEP
+  set only; `OnMsg.ConstructionCostChanged` (`ConstructionSite.lua:2832`) is a 2nd, class-filtered reader route,
+  not ruled out by measurement — same guard covers it.
   ⚠️ Live listings ONE module behind; that module's **F107** is REPAIRED and RIG-VERIFIED (see F107 above).
 - **F107 ✅ FIXED + RIG-VERIFIED 08-24 (checklist 74(a), receipt 76).** Was: `prev` **nil** on all 3 leaf
   classdefs ⇒ delegation dead code. Now ONE wrap on `ConstructionSite`, which declares it (`:665`).

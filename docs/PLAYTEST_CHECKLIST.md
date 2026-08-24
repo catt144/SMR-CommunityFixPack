@@ -130,6 +130,22 @@ rock-clearing jobs) crashes the same way, not just levelling.
     in the stack to match. So seeing the real player popup needs **pack ON with
     this one module disabled** — no console trickery required, and the uncaught
     path is already measured firing.
+    ⭐⭐ **And a fourth leg you designed, which is the one that matters to players.**
+    You saved *after* the defect had fired (`Post 105-dirty`), ticked the pack on,
+    fully exited, relaunched and loaded it — the exact position of someone who hits
+    this bug and *then* installs the pack. **Applied, zero errors.**
+    ⇒ **A player does not need a clean save.** They can hit F105, install the pack
+    afterwards, and carry on in the same colony. That is measured evidence for the
+    store page's "safe to add to a save you have already played" — for this defect.
+    ⛔ I tried to caveat that the guard might not have been *called* during that
+    load; **you were right that this is semantics against effect** and I dropped it.
+    The wrap is a permanent shield on the reader, so called-or-not it is installed
+    for every later call and no future trigger can raise while the pack is on.
+    ⛔ Still not a repair: the site stays broken and the guard makes it harmless, so
+    uninstalling brings the defect back — which is what the store text already says.
+    ⭐ It also settles **item 72**'s shape question with a measurement instead of an
+    argument: shape (b), initialising the writer, could never have helped that save,
+    because the gatherer ran long before it existed. Only guarding the reader does.
     → [agent/bugs/F105.md](agent/bugs/F105.md), section "THE FIELD ROUTE, REPRODUCED"
     ℹ️ ⚠️ One loose thread I am not dropping: leg A's log line 107,
     `Unpersist missing permanent: Mod/SMR_CommunityFixPack`. It is what PROVED
