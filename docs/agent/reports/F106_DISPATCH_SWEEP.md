@@ -72,6 +72,13 @@ this leg, and not of the pack. ⚠️ It is nonetheless a genuine vanilla nil-gu
 gap (`objects_to_mark` is a boolean class default being indexed) and it is
 already carried on `F49` and `C47`; nothing new is claimed and nothing is filed.
 
+⚖️ Audit completion 2026-08-24 — "none" above under-enumerated: the log also
+carries 2 × `[Braze] SessionStart error` (telemetry host unresolvable) and
+2 × `[ResManager Error] … LawOfficeDoor_*.hgacl` (missing vanilla animation
+files). Aged: both appear at exactly 2 in every archived `Mars.exe` leg back to
+`corun1_*` (2026-08-04), pack on or off, save or new colony — ambient boot
+noise three weeks old, intersecting no reading of this leg.
+
 ## 2 · The reversal, and the source read that explains it
 
 **`F106` said:** the class builder COPIES an unflagged parent's members into each
@@ -94,7 +101,7 @@ SMRTEST-F33DISPATCH TerrainPaintConstructionSite:   rawget=own-copy resolved==ba
 |---|---|
 | `SMRFixPack.Register` calls `run_apply` **inline**, nothing defers it | `Code/00_Core.lua:452` (`run_apply` at `:387`) |
 | mod files are loaded by `ModsLoadCode()` | `CommonLua/Core/autorun.lua:423` |
-| `Msg("Autorun")` — which the class builder hangs off — is raised **later** | `autorun.lua:557`; builder at `CommonLua/Core/classes.lua:980` |
+| `Msg("Autorun")` — which the class builder hangs off — is raised **later** | `lib.lua:371` (the line after `dofile("CommonLua/Core/autorun.lua")` at `:370`); builder at `CommonLua/Core/classes.lua:980`. ⚖️ Audit correction 2026-08-24: this row originally cited `autorun.lua:557`, which is the `OnMsg.Autorun` HANDLER, not the raise; `lib.lua:371` is the tree's only raise and makes the ordering strictly stronger |
 | at that moment `_G[classname]` is the raw **classdef**, with no metatable | `classes.lua` `define`: `rawset(_G, class, class_def)` |
 | the builder then copies members down | `ResolveValues`, `classes.lua:693-729` |
 
@@ -206,10 +213,12 @@ Two hand re-derivations, one hit and one clean, as the audit brief requires:
 
 ### Readings taken rather than assumed
 
-* **`ClassNonInheritableMembers` is UNREADABLE from mod code** — the sweep
-  printed `{ UNREADABLE }`. It is a real global (`classes.lua:1-8`) but a mod
-  environment cannot see it. The builder's other skip set, `noncopyable`
-  (`= { __hierarchy_cache }`), is a file-local: not readable at all.
+* **`ClassNonInheritableMembers` read `{ UNREADABLE }`** — it is a real global
+  (`classes.lua:1-8`). ⚖️ Audit correction 2026-08-24: the cause is not the mod
+  environment — the builder erases the global (`ClassNonInheritableMembers =
+  nil`, `classes.lua:1091`) once classes are built, so it is nil for every
+  reader after boot. The builder's other skip set, `noncopyable`
+  (`= { __hierarchy_cache }`, `:11-13`), is a file-local: not readable at all.
 * **`__hierarchy_cache` is not readable at runtime**, so the probe does not try.
   It is in `noncopyable` (never written onto a built class) and `classdefs` is
   discarded at `classes.lua:1089`. The runtime substitute is the metatable link —

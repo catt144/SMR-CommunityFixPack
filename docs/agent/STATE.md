@@ -19,7 +19,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   **nil** on all 3 leaf classdefs (they don't declare the method) ⇒ crash IS fixed, delegation is dead code
   that raises if reached. Pack's ONLY instance (static audit). Rec: one wrap on `ConstructionSite`. NOT built.
 - **F106 ✅ CLOSED — REFUTED 08-24 by measurement**, filed and refuted same day. The pack applies at file-LOAD,
-  BEFORE the builder (`00_Core.lua:452` < `autorun.lua:557`), so the builder copies OUR wrap down; F33 clean.
+  BEFORE the builder (`00_Core.lua:452` < raise `lib.lua:371`), so the builder copies OUR wrap down; F33 clean.
   ⛔ `classes.lua:986-988` states the split INVERTED — never cite it. ⛔ Only `DataPatch` waits for ClassesBuilt.
 - **Blame surface (checklist 73)** — `EF-065`(a) fires whenever ANY error throws under one of our ~60
   wrapped targets. 2 field sightings in one day, neither ours. Options tiered on checklist 73.

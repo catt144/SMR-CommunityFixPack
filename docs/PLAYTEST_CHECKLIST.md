@@ -87,7 +87,9 @@ rock-clearing jobs) crashes the same way, not just levelling.
       touched, one boot log to confirm, then the upload goes as planned.
       ⚠️ It widens the guard to ordinary construction sites too — harmless by
       construction, but it is a behaviour surface and that is why I am asking
-      rather than deciding.
+      rather than deciding. (Audit-checked 08-24: in the one state where the
+      widened guard changes anything, the game's own code would have crashed —
+      so the widening can only ever prevent an error, never cause one.)
     * **(b) Upload as-is, repair in the next patch.** Defensible: the reported
       crash really is fixed and the dead branch is unreachable on shipped data.
       The cost is that the pack carries a latent error in its own file, and
@@ -123,8 +125,11 @@ rock-clearing jobs) crashes the same way, not just levelling.
 72. ✅ **RULED 2026-08-24, in-session ("number 1 fix priority") — BUILT AND
     BOOT-VERIFIED the same day; receipt in the 2026-08-24 section above.**
     ⚠️ Kept as filed for the record; note the recommendation's mechanism was
-    corrected during the build — the single reader wrap could not have reached
-    the landscape classes (F106), so the fix installs per leaf class.
+    "corrected" during the build — the single reader wrap was believed unable to
+    reach the landscape classes (F106), so the fix installs per leaf class.
+    ⛔ 08-24: that belief was measured WRONG (F106 refuted, item 74) — the
+    single wrap you were originally offered would have worked, and the per-leaf
+    shape it was traded for carries F107.
     **F105 — do we fix the landscaping crash, or leave it?**
     A real vanilla defect, no mod needed: a terrain-levelling site never
     initialises `construction_costs_at_start`, so researching any tech that
