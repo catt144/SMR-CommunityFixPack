@@ -154,6 +154,28 @@ uploads in one session without deciding: Steam would ship **1.0.2**.
 in-game browser renders the real 1.0.0 from `PackVersion`. Edit that field on the
 portal page if it lets you.
 
+### (d) ✅ **DISCHARGED 2026-08-24 — MEASURED ON THE LIVE PAGE. There is nothing to do, and there never was.**
+
+The 1.0.x update's Paradox page reads **SUGGESTED GAME VER. 350453** with no
+manual step taken. The reason is one line of the upload params this sheet had
+not read: `RecommendedGameVersion = tostring(mod.lua_revision)`
+(`ParadoxMods.lua:153`). ⇒ the portal DOES receive a version, automatically,
+from `metadata.lua`'s `lua_revision` — which `upload_preflight.py` already
+pins to `ModMinLuaRevision`.
+
+⛔ **The 2026-08-19 audit's premise was wrong**, and it is worth naming why so the
+next reader does not re-derive it: it searched `ParadoxMods.lua` for
+`RequiredGameVersion` and, not finding that spelling, concluded no version was
+sent. The parameter is `RecommendedGameVersion`. A single-name grep decided a
+recorded fact, and the fact stood for five days.
+
+⭐ Also captured from the same page (§0.5(f)): **MOD VER. 2**, **SIZE 382.57 KB**,
+LAST UPDATED 2026-08-24 18:00, CHANGELOG **v2** posted 21:55, platforms Windows /
+Xbox X|S / PS5, tag Gameplay. The MOD VER confirms the version arithmetic derived
+from the one-bump save: Paradox received the package built at `version = 2`.
+
+<details><summary>The original item, kept for the record</summary>
+
 ### (d) ⚠️ CHECK AFTER THE PARADOX UPLOAD — the portal's "required game version" field (terminal audit, 2026-08-19)
 
 The in-game browser's **"only compatible"** filter keys on a portal-side
@@ -173,6 +195,8 @@ engine never blocks a too-new mod on the **load** path (`IsTooNew` is
 UI-only), so a player on an older game build loads the pack gated only by its
 own shape checks. Reachability low (Steam auto-updates; the final SM patch is
 years old); no action, recorded so nobody re-derives it.
+
+</details>
 
 ### (e) ⭐ Two ids get written back, and they are how updates find the store entries
 

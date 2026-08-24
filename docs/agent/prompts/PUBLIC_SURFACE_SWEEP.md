@@ -117,6 +117,24 @@ Also check, in both blocks:
 the live pages — **the owner pastes them at a sitting.** Say so in the report;
 never write as though the page is updated.
 
+⛔⛔ **AND THE PASTE IS PER-UPLOAD, NOT ONCE — measured 2026-08-24 on the live
+Paradox page, which came back showing `metadata.lua`'s short `description`
+with the whole hand-pasted card body gone.** Both portals send the page text as
+upload parameters, so **every upload overwrites whatever a human pasted**:
+
+| | Paradox (`ParadoxMods.lua:149-160`) | Steam (`SteamWorkshop.lua:107-118`) |
+|---|---|---|
+| body | `LongDescription = mod.description` | `description = mod.description` |
+| summary | `ShortDescription = mod.short_description` | — |
+| title | `DisplayName = mod.title` | `title = mod.title` |
+| tags | `Tags = mod:GetTags()` | `tags = mod:GetTags()` |
+
+⇒ **Re-paste both card bodies AFTER every upload, never before, and never
+assume last release's paste survived.** ⛔ The window between the upload and the
+paste is a window where the store page contradicts the card — keep it short.
+⚠️ It also means `metadata.lua`'s `description` is what a visitor sees by
+default, so it must stand alone as a page body even though the card replaces it.
+
 ---
 
 ## 3 · `metadata.lua` — the strings that ship INSIDE the mod
