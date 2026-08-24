@@ -51,8 +51,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   re-upload to "fix" the number — a further upload bumps again. This retires 37 Q2, decided by circumstance.
 - ⛔ **Owed on the live listings** (owner's hands): `PORTAL_PREP` §0.5(d) required game version **350453** ·
   §0.5(f) delivered-bytes ⚠️ **Paradox only** against md5 `6621384b…`/391,567 B; ⛔ Steam's archive legitimately
-  differs (385,131 B — its save stripped comments and bumped the version before packing) · then §1 steps 2–4:
-  store links into the site, Pages on, site link back onto both store pages.
+  differs (385,131 B — its save stripped comments and bumped the version before packing).
+  ✅ §1 steps 2–4 DONE (store links in the site, Pages ON, card carries site links, 0 FILL-IN markers left).
+- ⚠️ **SITE IS ONE COMMIT BEHIND AND IT IS F105's — checklist 79.** `publish-site.yml` is `workflow_dispatch`
+  ONLY by design, so committing the site never publishes it. Deployed `a97b8b0` = **79** fix-list entries,
+  repo `abe46c9` = **80**; the cards say "Eighty repairs". ⛔ **DEPLOY BEFORE PASTING THE CARDS** or the count
+  is falsifiable on the page the card links to. Derive the live count from the deployed commit, never off the page.
 - ⭐⭐ **Close-out chain (5 links) CONSUMED 08-20 — VERDICT SHIP, 0 launch blockers; all 5 challenges held.**
   `C50`+`C51` IN 1.0.0 (checklist 58), `C52` `parked`/FROZEN. Ruling receipt checklist 66.
   ⚠️ Link 5 left NO report: its record is commit `2326bd3`'s message + fact `EF-066`.

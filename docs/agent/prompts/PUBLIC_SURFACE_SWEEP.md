@@ -190,6 +190,25 @@ If the fix answers an open field report, the reply is part of shipping it.
 2. `python tools/upload_preflight.py` — 0 FAIL.
 3. Commit **both repos**. ⛔ The site repo is `C:\Dev\SMR-CommunityMods`; the
    TestKit repo is local-only by design and is not part of this sweep.
+4. ⛔⛔ **COMMITTING THE SITE IS NOT PUBLISHING IT — AND THIS SHEET MISSED THAT
+   UNTIL 2026-08-24.** `publish-site.yml` is **`workflow_dispatch` only, by
+   design** (public-docs chain rule 5: publishing is an owner act); the `push:`
+   trigger is commented out. So a committed, pushed fix-list entry is **still
+   invisible to every player** until the owner runs *Actions → Publish docs site
+   → Run workflow*. ⭐ That collides head-on with §2: the store card's count is
+   only safe *"because the reader can check it on the page the card links to."*
+   Paste a card claiming **eighty** while the deployed site still lists
+   **seventy-nine** and the card is falsifiable by the first person who counts.
+   ⇒ **The site deploy MUST precede the card paste.** Check it, do not assume:
+   ```bash
+   # what is actually deployed = head_sha of the newest successful run
+   #   api.github.com/repos/catt144/SMR-CommunityMods/actions/runs?per_page=5
+   git -C /c/Dev/SMR-CommunityMods log --oneline <deployed_sha>..HEAD -- content/
+   git -C /c/Dev/SMR-CommunityMods show <deployed_sha>:content/fix-list.md | grep -c '^??? '
+   ```
+   ⭐ Derive the live count from the **deployed commit locally** — never by
+   counting a rendered page. Found live on 2026-08-24: deployed `a97b8b0` = 79
+   entries, repo HEAD `abe46c9` = 80, the one undeployed commit being F105's.
 4. In the owner report, separate **what is now true in the tree** from **what
    still needs the owner's hands** (pasting cards, posting the reply, uploading).
 
@@ -211,5 +230,7 @@ If the fix answers an open field report, the reply is part of shipping it.
 [ ] what was ACTUALLY posted diffed against what is now measured; overreaches recorded
 [ ] faq.md judgment-call count still true (3 places) if this fix is a judgment call
 [ ] doccheck GREEN, both repos committed
+[ ] site DEPLOY checked, not just committed — publish-site.yml is manual-only
+[ ] deployed entry count == card's count word BEFORE the card is pasted
 [ ] owner report separates "true in the tree" from "needs your hands"
 ```

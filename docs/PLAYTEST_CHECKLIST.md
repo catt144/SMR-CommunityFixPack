@@ -29,6 +29,30 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚠️ 2026-08-24 — ONE BUTTON, AND IT HAS TO HAPPEN BEFORE YOU PASTE THE STORE CARDS. The live site is one commit behind, and that commit is F105's.
+
+79. ⚠️ **Run *Actions → Publish docs site → Run workflow* on `SMR-CommunityMods`.**
+    Everything is committed and pushed; **none of it is public.** The publish
+    workflow is `workflow_dispatch`-only **on purpose** — publishing is your act,
+    public-docs chain rule 5 — so the F105 entry has been sitting live-invisible
+    since it was written.
+
+    | | commit | fix-list entries |
+    |---|---|---|
+    | **what players see now** | `a97b8b0` (deployed 08-21) | **79** |
+    | what the repo holds | `abe46c9` | **80** |
+
+    Counted from the deployed commit locally, not off the web page.
+
+    ⛔ **Why the order matters:** the store cards say **"Eighty repairs"**, and the
+    only reason we allow a count on a store page at all is that the reader can
+    check it on the page the card links to. Paste the cards first and the very
+    first person who counts finds seventy-nine. **Deploy, then paste.**
+
+    ✅ Nothing else about the site is owed — Pages is on, the store links are in
+    the pages, the card carries the site links, and no FILL-IN markers remain.
+    This is one button, and it costs you about a minute.
+
 ### ⛔ 2026-08-24 — ITEM 78 IS WITHDRAWN. I asked you to decide something you had already done, on a tool reading that was wrong. Both reporters are answered. Nothing is owed.
 
 78. ⛔ **WITHDRAWN — the finding was false and the fault was mine.** I reported
