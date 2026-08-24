@@ -15,11 +15,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled "number 1 fix priority", checklist 72).
   Guard MEASURED reached on all 3 leaves 08-24 (`archive/f106_*.log`). ⛔ Triggers are 3 techs ONLY.
   ⛔ Crash-path repro (levelling site + cost tech) has NEVER run — guard measured, field route not.
-  ⚠️ Live listings ONE module behind; that module's **F107** is REPAIRED but UNBOOTED (see F107 above).
-- **F107 ✅ BUILT 08-24 (checklist 74(a), receipt 76).** Was: `prev` **nil** on all 3 leaf classdefs ⇒ delegation
-  dead code. Now ONE wrap on `ConstructionSite`, which declares it (`:665`); Require pair matches, the 3 allowlist
-  rows are GONE, doccheck GREEN. ⛔ NOT boot-verified — owed: one `applied` line + `LandscapeCostGuard` clause 2
-  flips PASS with clause 1 STILL PASS. Widening re-verified at Src independently: it can only prevent an error.
+  ⚠️ Live listings ONE module behind; that module's **F107** is REPAIRED and RIG-VERIFIED (see F107 above).
+- **F107 ✅ FIXED + RIG-VERIFIED 08-24 (checklist 74(a), receipt 76).** Was: `prev` **nil** on all 3 leaf
+  classdefs ⇒ delegation dead code. Now ONE wrap on `ConstructionSite`, which declares it (`:665`).
+  MEASURED unattended (`archive/f107_*.log`): suite **76/0/24/0** of 100, gate 78/78, clause 1 STILL PASS ×3,
+  new clause 3 proves the widening (ungathered ok, gathered `set_to=90 start_cost=50`), sweep `UNREACHED=3 ⇒ 0`
+  and TOTAL `clean=97 ⇒ 98`. Zero unexplained error lines. ⛔ Field route STILL untested (F105).
 - **F106 ✅ CLOSED — REFUTED 08-24 by measurement**, filed and refuted same day. The pack applies at file-LOAD,
   BEFORE the builder (`00_Core.lua:452` < raise `lib.lua:371`), so the builder copies OUR wrap down; F33 clean.
   ⛔ `classes.lua:986-988` states the split INVERTED — never cite it. ⛔ Only `DataPatch` waits for ClassesBuilt.
@@ -43,7 +44,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Report `reports/04_ATTENDED_SITTING.md`; logs `archive/link4{en,de,lang}_*`.
   ⛔ SKIPPED BY NAME: `C50`'s challenge landing-spot site, and the in-game Mission Profile on a SpaceY colony.
 - **A 1.0.x update IS queued since 2026-08-24** (F105's module; supersedes 08-20's "no queued 1.0.1").
-  ⛔ **Now blocked on `H-02` (checklist 75) and on ONE boot verifying the F107 repair — no decision left in it.**
+  ⛔ **Now blocked on `H-02` ALONE (checklist 75) — the F107 boot is DONE. One ruling, then the sitting.**
   After that upload the next effort is the **opt-in pack** (owner 08-20, checklist 68); its kickoff reads
   that repo's own STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
 - ⛔ **Shipping artifact: NO PACKED `.fpk` MATCHES THIS TREE.** Expected shape **82 files = 78 `Code/*.lua` +
@@ -56,7 +57,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   The rig runs cheats — the normal config.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
   **75 (⛔ `H-02` forbids the 1.0.x bump as written — lift or reword; blocks the upload)** ·
-  76 (confirm (a) was a ruling not a leaning, + the owed boot) ·
+  76 (confirm (a) was a ruling not a leaning; the boot is done) ·
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
   40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q2 (Steam, after Paradox).

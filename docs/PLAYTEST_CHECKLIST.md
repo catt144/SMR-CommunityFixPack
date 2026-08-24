@@ -121,15 +121,34 @@ rock-clearing jobs) crashes the same way, not just levelling.
     * **The header's refuted F106 premise and the banned `classes.lua:986-988`
       citation are gone**, replaced by the measured file-load ordering; the
       `Track.lua:651` "only writer" precision is in too.
-    ⚠️ **NOT boot-verified — that is why F107 says `built` and not `fixed`.**
-    Owed, and it is ~2 minutes of your next launch: one boot showing
-    `[CommunityFixPack] LandscapeCostRefresh: applied` with no error lines, and
-    TestKit's `LandscapeCostGuard` re-run — **clause 2 must flip to PASS and
-    clause 1 must STAY PASS.** A run where clause 1 broke would mean the repair
-    traded one defect for another, and nothing else checks that.
-    ❓ **The one thing to confirm: I read your "I'd take (a)" as the ruling and
+    ✅ **VERIFIED ON THE RIG 2026-08-24, unattended — F107 is `fixed`, not
+    `built`.** You launched; the TestKit autorun harness did the rest (boot ->
+    generate a map -> start a colony -> all 100 probes -> quit itself). Log
+    `docs/archive/f107_Mars.exe-20260824-13.07.00.log`.
+    * **Suite `76 PASS / 0 FAIL / 24 SKIP / 0 ERROR` of 100**, gate `78/78
+      applied`, `[SMRAUTO] BEGIN..END` clean. The previous leg was `75/1/24/0`
+      and that single FAIL was this probe.
+    * ⭐ **Clause 1 stayed PASS on all three leaves** — that is the half that
+      mattered. A repair that traded one defect for another would show clause 1
+      broken, and nothing else in the suite checks it.
+    * ⭐ **The dispatch sweep agreed independently of the probe**: the three
+      leaves went from `UNREACHED=3 (own-copy 3)` — unreached because the module
+      had overwritten them itself — to `UNREACHED=0`, reach 5 -> 8. Sweep total
+      `clean=97` -> **`98`**. That is the inheritance mechanism measured without
+      reference to the probe's verdict.
+    * ⭐ **The widening you ruled in is no longer a reading.** Clause 3 ran on
+      `ConstructionSite` itself: ungathered `ok=true` (where vanilla raises at
+      `:670`), gathered `ok=true set_to=90 start_cost=50` (delegated identically
+      to vanilla). Two static derivations had agreed on that; now it has run.
+    * **Zero unexplained error lines.** The `Flight.lua:465/:479` asserts in the
+      log are the known synthetic-map ones, present in the control leg too.
+    ⛔ **Still NOT established, and no run so far touches it:** the field route —
+    a levelling site on a real map plus a `*_Construction` cost tech. F105 has
+    never been reproduced end to end. That is unchanged by this leg and rides
+    your next organic sitting if you want it.
+    ❓ **One thing still open: I read your "I'd take (a)" as the ruling and
     built it.** If that was a leaning rather than a decision, say so — it is one
-    `git revert` and nothing outside this tree has moved.
+    `git revert`, though the tree is now measured green on it.
 
 74. ✅ **MEASURED AND ANSWERED 2026-08-24 — and the answer is the opposite of
     the question. It cost you nothing: the run was unattended.**
