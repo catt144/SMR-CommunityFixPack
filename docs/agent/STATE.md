@@ -10,7 +10,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **F104 ⛔ NOT OURS, pending closure.** Passage Network's `CreateDomeNetworks` override returns nothing;
   vanilla indexes the nil (`Passage.lua:1117`). ⭐ CONFIRMED live on the rig 08-23. Steam+Paradox builds
   byte-identical, so no fixed build exists. We are NAMED only as a stack pass-through (`EF-065`(a)).
-  Owed: reporter reply (DRAFTED, `reports/FIELD_REPORT_REPLIES.md`) + their confirmation, then close. ⚠️ PN is ENABLED on the rig (`H-08`) — untick
+  ⚠️ **Tracker issue #1 "Colonist stuck homeless" is ALREADY CLOSED with ZERO comments** (read 08-24) — the
+  drafted reply was NEVER posted, so the reporter has no answer; posting it now means commenting on a closed
+  issue, the owner's call. F105 = issue **#2**, OPEN. ⚠️ PN is ENABLED on the rig (`H-08`) — untick
   before any clean leg. Its unmaintained state is logged as an opt-in candidate in THAT repo's FUTURE_IDEAS.
 - **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled "number 1 fix priority", checklist 72).
   ⭐⭐ **FIELD ROUTE REPRODUCED + FIX VERIFIED, attended A/B 08-24** — `archive/f105_leg{A,B}_*.log`:
@@ -55,12 +57,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ SKIPPED BY NAME: `C50`'s challenge landing-spot site, and the in-game Mission Profile on a SpaceY colony.
 - **A 1.0.x update IS queued since 2026-08-24** (F105's module; supersedes 08-20's "no queued 1.0.1").
   ✅ **UNBLOCKED 08-24: `H-02` reworded by owner ruling (checklist 75), F107 built + rig-verified.
-  Nothing is owed but the OWNER'S SITTING** — ⚠️ plus `last_changes`, which still reads "Initial release."
-  and is a hand edit an agent may make (see `H-02`).
+  Nothing is owed but the OWNER'S SITTING** — ✅ `last_changes` REWRITTEN for F105 08-24 (no longer
+  "Initial release."); public-surface sweep re-run 08-24, every surface consistent (`prompts/PUBLIC_SURFACE_SWEEP.md`).
   After that upload the next effort is the **opt-in pack** (owner 08-20, checklist 68); its kickoff reads
   that repo's own STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
-- ⛔ **Shipping artifact: NO PACKED `.fpk` MATCHES THIS TREE.** Expected shape **82 files = 78 `Code/*.lua` +
-  `items.lua` + `metadata.lua` + `LICENSE` + `preview.png`** (`tools/pack_predict.py`, emitted).
+- ⛔ **Shipping artifact: NO PACKED `.fpk` MATCHES THIS TREE.** Expected shape **83 files = 79 `Code/*.lua` +
+  `items.lua` + `metadata.lua` + `LICENSE` + `preview.png`** (`tools/pack_predict.py .`, re-emitted 08-24 — F105's
+  module made it 79; the old "82 = 78" was one module stale).
   ⛔ **The md5/bytes exist only after the owner packs at the sitting — never quote one**; the blank row that
   receives them is `PORTAL_PREP` §0.5(f). Reader `tools/pack_list.py`, upload guard `tools/upload_preflight.py`.
 - ⛔ **The console is NOT a route to pack or reload** — `DbgPackMod`/`ReloadLua` are both nil in `_G` at the retail

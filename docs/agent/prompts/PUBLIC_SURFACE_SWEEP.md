@@ -16,6 +16,15 @@ reads, and a fix missing from any of them is a fix nobody knows about.
    site copy are derived from it, never the other way round.
 3. Decide the **player-facing symptom sentence** first — the words the player
    would use, not ours. Everything else on this list is downstream of it.
+4. ⛔ **First ask whether the fix has a player surface AT ALL.** A repair to the
+   pack's own code in a module that **never shipped** gets **NO entry anywhere on
+   this list** — no fix-list row, no headliner, no `last_changes` line — because
+   no player ever ran the broken version. F107 (2026-08-24) is the worked example:
+   it is `fixed`, it is real, it changed shipping code, and it is correctly absent
+   from every surface below. Writing it up would invent a bug players never had
+   and inflate the count the store card stakes its credibility on. What such a fix
+   *does* touch is §3's `code` list and `items.lua` if it added or renamed a
+   module. Say so explicitly in the report, so the next reader does not re-open it.
 
 ---
 
@@ -55,8 +64,26 @@ The section tally **must** sum to the total. If it does not, an entry is
 orphaned above the first `## `.
 
 ⚠️ Also check `content/index.md`, `content/faq.md`, `content/install.md`,
-`content/for-modders.md` for any claim the new fix falsifies. As of 2026-08-24
-**none of them states a count** — that is deliberate, keep it that way.
+`content/for-modders.md` for any claim the new fix falsifies.
+
+⛔ **CORRECTED 2026-08-24 by re-running this sweep — the first draft of this line
+said "none of them states a count", and that is FALSE.** None states a *fix*
+count, which is the deliberate part; but `content/faq.md` states the
+**judgment-call count in three places** and they must move together:
+
+```bash
+grep -n 'judgment call' /c/Dev/SMR-CommunityMods/content/faq.md
+grep -c '^??? .*judgment call\*"$' /c/Dev/SMR-CommunityMods/content/fix-list.md
+```
+* `faq.md:151` — *"**Five fixes are judgment calls**"*
+* `faq.md:164-168` — the question *"Which fixes are judgment calls?"*, whose
+  answer **names all five**; a sixth would have to be named here too
+* `faq.md:28` — *"**Four other** judgment calls"*, a count relative to the one
+  named above it
+
+⇒ a new **judgment-call** fix falsifies `faq.md` in three places even though it
+touches no numeral on any other page. A plain repair falsifies none of them.
+Verified consistent 2026-08-24: five marked on the fix list, five on `faq.md`.
 
 ---
 
@@ -71,8 +98,10 @@ orphaned above the first `## `.
 
 Both carry the same claims. Edit **both**, then diff them by eye.
 
-**The count is a WORD, not a numeral** — *"Seventy-nine repairs"* — and it is
-derived from §1's `grep -c`. Update it in both blocks. ⭐ The count is only safe
+**The count is a WORD, not a numeral** — *"Eighty repairs"*, spelled out — and it
+is derived from §1's `grep -c`, never from the last value written here (this line
+itself said *"Seventy-nine"* one sweep after that stopped being true). Update it
+in both blocks. ⭐ The count is only safe
 because the reader can check it on the page the card links to; if that link ever
 breaks, the count must come out.
 
@@ -118,8 +147,23 @@ If the fix answers an open field report, the reply is part of shipping it.
   rather than soften it.
 * Name the other mod plainly if one is the cause — owner ruling 2026-08-23.
   `FIX_POLICY` §8 binds store pages and load-order advice, not issue replies.
-* ⚠️ Put the **issue number** in the entry's front matter when you have it. F104
-  and F105 both went days without one, so neither could be found from the issue.
+* ✅ **Issue numbers CAPTURED 2026-08-24 — #1 = F104 "Colonist stuck homeless",
+  #2 = F105 "Error when completing milestone"** (both `github.com/catt144/SMR-CommunityFixPack/issues`,
+  reporter Keelai, owner assigned). Tie a number to an entry by its **attached
+  log name**, not its title: #2's `Mars.exe-20260824-00.01.27-6a22b86d.log` is the
+  log F105 was derived from.
+* ⛔ **CORRECTED 2026-08-24: record the number in `row_status`, NOT in a new
+  front-matter key.** `split_bugs.render_entry` writes only the eleven
+  `FRONT_FIELDS`, so an added `issue:` key is **silently dropped** the next time
+  entries are rendered — the earlier wording here would have created a fact that
+  evaporates. `row_status` is rendered *and* carried into `INDEX.md`. After
+  editing it, regenerate the index (`load_from_dir` + `render_index`), never by
+  hand.
+* ⛔ **Read the issue's live STATE before writing the reply into the plan — a
+  drafted reply is not a posted one.** Sweeping on 2026-08-24 found **#1 already
+  CLOSED with zero comments**: the reporter got no answer at all, and posting
+  Draft A now means commenting on a closed issue. ⚠️ Do not assert who closed it;
+  the closing actor is not shown on the page.
 
 ---
 
@@ -135,6 +179,7 @@ If the fix answers an open field report, the reply is part of shipping it.
 ## 6 · The checklist, condensed
 
 ```
+[ ] does this fix have a player surface at all? (unshipped pack defect => none)
 [ ] fix-list.md entry added, in the player's section
 [ ] grep -c '^??? ' re-derived; section tally sums
 [ ] other site pages checked for falsified claims
@@ -144,7 +189,9 @@ If the fix answers an open field report, the reply is part of shipping it.
 [ ] metadata.lua description/short_description checked (usually untouched)
 [ ] items.lua / code list — upload_preflight 0 FAIL
 [ ] field-report reply updated; caveats struck only where a leg witnessed them
-[ ] issue number recorded in the bug entry's front matter
+[ ] issue number recorded in the entry's row_status (NOT front matter), index regenerated
+[ ] issue's LIVE state read — open/closed, comment count — before planning the reply
+[ ] faq.md judgment-call count still true (3 places) if this fix is a judgment call
 [ ] doccheck GREEN, both repos committed
 [ ] owner report separates "true in the tree" from "needs your hands"
 ```

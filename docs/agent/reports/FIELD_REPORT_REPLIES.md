@@ -11,11 +11,26 @@ in a transcript. Written 2026-08-24.
 
 * Both issues are from **the same reporter (Keelai)**, opened 2026-08-23 against
   the live listings — **the first field reports the pack has ever received.**
-* ⛔ **The GitHub issue numbers and exact titles were never captured.** The owner
-  referred to the F105 one as *"Error when completing milestone"*. F104 is the
-  earlier one about colonists not auto-moving. If you touch these entries, ask
-  for the numbers and record them in the front matter so the tracker and the bug
-  list line up.
+* ✅ **CAPTURED 2026-08-24, read off the tracker** (`github.com/catt144/SMR-CommunityFixPack/issues`),
+  which retires the "never captured" gap this file carried:
+
+  | issue | title | entry | state on 2026-08-24 |
+  |---|---|---|---|
+  | **#1** | *"Colonist stuck homeless"* | **F104** | ⚠️ **CLOSED**, **zero comments** |
+  | **#2** | *"Error when completing milestone"* | **F105** | OPEN, labels `bug` + `Fix in progress`, zero comments |
+
+  The mapping is not from the titles alone: #2's attached log is
+  `Mars.exe-20260824-00.01.27-6a22b86d.log`, which is the log `F105` was derived
+  from. Both are assigned to the owner.
+* ⛔ **#1 IS ALREADY CLOSED AND DRAFT A WAS NEVER POSTED** — zero comments means
+  the reporter got no answer at all, only a closed issue. That is the opposite of
+  the ruling this file exists to carry ("it's not fair to users to just say it's
+  not our issue"). ⚠️ The closing actor is not shown on the issue page; do not
+  assert who closed it. Posting Draft A now means commenting on a **closed**
+  issue — the owner's call, and the reason this is on the checklist rather than
+  done. Recording the numbers goes in **`row_status`**, not a new front-matter
+  key: `split_bugs.render_entry` writes only `FRONT_FIELDS`, so an added key is
+  silently dropped the next time entries are rendered.
 * ⚖️ **OWNER RULING 2026-08-23, and it is why these drafts name the other mod:**
   *"We can't just say it's not our mod, we need to explain that it's the other
   mod, and why… it's not fair to users to just say it's not our issue, we don't
@@ -120,7 +135,7 @@ do not add a sentence that does.
 
 | Item | Where |
 |---|---|
-| Post Draft A, get reporter confirmation, close F104 | `F104` "What is owed" |
-| Post Draft B (after the 1.0.x upload, or before with the wording as-is) | `F105` |
-| Capture the two GitHub issue numbers + titles into both entries' front matter | here, unresolved |
+| ⚠️ Post Draft A **onto a CLOSED issue (#1)** — or reopen it first; the reporter has had no answer | `F104` "What is owed" |
+| Post Draft B onto **#2** (after the 1.0.x upload, or before with the wording as-is) | `F105` |
+| ~~Capture the two GitHub issue numbers + titles~~ ✅ **DONE 2026-08-24** — #1=F104, #2=F105, recorded in both `row_status` cells | here, resolved |
 | F105 end-to-end repro — attended, rides a sitting | `F105`; not a blocker for either reply |

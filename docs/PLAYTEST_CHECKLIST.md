@@ -29,6 +29,46 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚠️ 2026-08-24 — THE PUBLIC-SURFACE SWEEP WAS RE-RUN AND EVERY PLAYER-FACING SURFACE IS CONSISTENT. But it read the tracker for the first time, and one reporter has been left without an answer.
+
+78. ⚠️ **Issue #1 is closed and we never replied to it. One call from you.**
+    Running `agent/prompts/PUBLIC_SURFACE_SWEEP.md` end to end finally captured
+    the two GitHub issue numbers — the gap three documents had carried for days:
+
+    | issue | title | our entry | state, read 2026-08-24 |
+    |---|---|---|---|
+    | **#1** | *"Colonist stuck homeless"* | **F104** (Passage Network, not ours) | ⚠️ **CLOSED**, **zero comments** |
+    | **#2** | *"Error when completing milestone"* | **F105** (fixed, in the queued update) | OPEN, `bug` + `Fix in progress`, zero comments |
+
+    ⛔ **Zero comments on #1 means Keelai got no answer at all — just a closed
+    issue.** Draft A has been sitting written and unposted in
+    `agent/reports/FIELD_REPORT_REPLIES.md`; it is the reply that explains the
+    error was Passage Network's and why our name was on the warning box. That is
+    the exact thing your 2026-08-23 ruling said we owe people: *"it's not fair to
+    users to just say it's not our issue."* Right now we did not even say that.
+    ⚠️ I can't see **who** closed it — GitHub doesn't show the closing actor on
+    that page — so I'm not assuming it was you, and nothing here is a criticism
+    of the call. The question is only what happens next.
+
+    **(a) Reopen #1, post Draft A, let Keelai close it.** ⭐ My recommendation.
+    The reply is written and every claim in it is derived at source and confirmed
+    live on the rig. It costs you a paste.
+    **(b) Post Draft A as a comment on the closed issue.** Same words, no reopen.
+    GitHub allows it and the reporter is still notified. Cheaper, slightly odd
+    to read.
+    **(c) Leave it closed and silent.** Honest option if you closed it
+    deliberately as not-ours and consider it handled — but it is the one that
+    contradicts the 08-23 ruling, so I want it said out loud rather than assumed.
+
+    ⚠️ Whichever you pick, **Draft A still has one open sub-decision from before**:
+    its "hunch about shuttles" paragraph is the only claim in either draft never
+    verified on a running game. Cut it and the reply still stands.
+
+    **On #2 (F105):** nothing owed from you yet. Draft B says *"it's fixed, and we
+    reproduced your error on our own machine to prove it"* — true, and the legs
+    back it. It should be posted **after** the 1.0.x upload so "the next update"
+    means something a player can install.
+
 ### ✅ 2026-08-24 — RULED AND APPLIED. The hazard is reworded; nothing blocks the update but your sitting.
 
 75. ✅ **RULED 2026-08-24, in-session, and APPLIED the same hour.** Your words:
