@@ -11,6 +11,8 @@ docs/
   PLAYTEST_CHECKLIST.md   the PT tests, the reporting protocol, and
                           "Decisions waiting on you" — the owner's file
   PLAYTEST_HELP.md        playtest reference: console facts, commands, fixtures
+  UPLOAD_WORKFLOW.md      owner's step-by-step for putting an update live:
+                          pack, upload, store pages, publish the site
   FUTURE_IDEAS.md         parking lot, NOT a backlog. Nothing in it is work
   README.md               this map
   BUGS.md · STATUS.md     3-line stubs pointing at where they went

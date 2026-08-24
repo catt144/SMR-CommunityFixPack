@@ -5,9 +5,9 @@ patched at runtime; no game files are modified. Map of the tree:
 `docs/README.md`. **Mandatory read, every session: `docs/agent/STATE.md`** —
 build state, open gates, active holds.
 
-**Folder contract** (doccheck enforces it). `docs/` root holds ONLY the four
-human files (PLAYTEST_CHECKLIST, PLAYTEST_HELP, FUTURE_IDEAS, README), the
-BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`
+**Folder contract** (doccheck enforces it). `docs/` root holds ONLY the five
+human files (PLAYTEST_CHECKLIST, PLAYTEST_HELP, UPLOAD_WORKFLOW, FUTURE_IDEAS,
+README), the BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`
 (`bugs/`, `facts/`, `reports/`, `prompts/`, STATE/WORKFLOW/FIX_POLICY);
 `docs/archive/` is append-only, never edited. **`INDEX.md` in `bugs/`+`facts/`
 is GENERATED — edit the entry or fact file, never the index** (line-1 banner).
