@@ -106,7 +106,7 @@ Give it a minute, then check the fix list page shows the new entry.
 
 ## 5 · Tell the agent
 
-Three things, and then you are done:
+Four things, and then you are done:
 
 1. The **version number each store shows**.
 2. **Whether the descriptions filled themselves**, or you had to paste. This is
