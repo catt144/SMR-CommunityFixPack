@@ -75,7 +75,14 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ **The md5/bytes exist only after the owner packs at the sitting — never quote one**; the blank row that
   receives them is `PORTAL_PREP` §0.5(f). Reader `tools/pack_list.py`, upload guard `tools/upload_preflight.py`.
 - ⛔ **The console is NOT a route to pack or reload** — `DbgPackMod`/`ReloadLua` are both nil in `_G` at the retail
-  console (measured). Only route = Mods Manager → Edit (`Ctrl-E`) → **File → Pack Mod**; ⚠️ it loads a scratch colony.
+  console (measured). ⛔ **CORRECTED 2026-08-24 at the sitting — the route this line gave was WRONG and cost the
+  owner time.** It is NOT "Mods Manager → Edit (`Ctrl-E`)": `Ctrl-E` is the MAP editor's *Selection editor*
+  (`EditorShortcuts.generated.lua:727`), and MOD MANAGER is a different main-menu entry.
+  ✅ **Real route: main menu → `MOD EDITOR`** (own bottom-toolbar button, `idModEditor`,
+  `PGMenuRemastered.generated.lua:134`) → it prompts *"Opening the mod editor requires a restart of the game"* →
+  **Yes** → `ModsRestartApp("debug_mode")` restarts INTO the editor → **File → Pack Mod**.
+  ⭐ That restart re-reads `metadata.lua` from disk, so a hand edit lands without a separate relaunch.
+  ⚠️ The "debugging mode for mod creators" launch option skips the restart next time.
 - ✅ **Rig at the 08-20 sitting: all 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF** (checklist 43).
   The rig runs cheats — the normal config.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
