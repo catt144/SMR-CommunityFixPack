@@ -144,6 +144,40 @@ do not add a sentence that does.
 
 ---
 
+## Draft C — the #2 follow-up, for when 1.0.x is live (2026-08-24)
+
+⭐ **This is the one to post.** Draft B below is superseded: it was written as a
+*first* reply, and #2 already has a full explanation the reporter has thanked us
+for. Re-explaining would be noise. This is short on purpose.
+
+⚠️ **It is written to avoid all four overreaches in the posted reply** (listed
+under "What was actually posted"). It never says *repairs*, never says *only
+three technologies*, never claims anything about a warning box, and never claims
+a clean install.
+
+> This is live now — it went out to both the Steam and Paradox listings today.
+>
+> Since I last replied I managed to reproduce your error here, which I hadn't been able to do before: with the fix off, finishing a cost technology while a levelling job is running throws the same `ConstructionSite.lua:673` you saw. With the fix on, nothing.
+>
+> I also checked the case that matters for you specifically — a save where this is already happening, with the pack installed afterwards. It loads clean and carries on; the levelling job can stay where it is and nothing needs demolishing.
+>
+> Thanks again for the log. It's the whole reason this was findable.
+
+**Notes for whoever posts it:**
+
+* ⛔ **No version number.** The two stores legitimately show different numbers and
+  explaining that to a reporter is noise they did not ask for.
+* ⛔ **No date beyond "today"**, and only post it on the day of the upload.
+* ✅ *"stops it happening / loads clean and carries on"* — never *"repairs your
+  save"*. Leg D witnessed the outcome; nothing repairs the save.
+* ✅ *"the same `ConstructionSite.lua:673` you saw"* is safe: their own log names
+  that line, and legs A and C reproduced it 14 and 12 times.
+* ⇒ After posting, the issue can be **closed**. `F105` is `fixed`, rig-verified,
+  and the reporter has already acknowledged the explanation. The `Fix in
+  progress` label comes off.
+
+---
+
 ## What was actually posted (the record — read this before drafting anything new)
 
 Pulled from the API 2026-08-24. **Both reporters replied and both are content.**
@@ -197,6 +231,6 @@ have no reporter goodwill to spend and no thread to correct them in.
 |---|---|
 | ~~Post Draft A, get reporter confirmation, close F104~~ ✅ **DONE 2026-08-24** — posted 03:40Z, confirmed 19:24Z, entry now `closed` | `F104`, discharged |
 | ~~Capture the two GitHub issue numbers + titles~~ ✅ **DONE 2026-08-24** — #1=F104, #2=F105, in both `row_status` cells | here, resolved |
-| ⚠️ **Optional, owner's call:** a short follow-up on **#2** when 1.0.x is live — *"this is out now"*. The explanation is already posted and accepted, so this is courtesy, not a debt | `F105` |
+| ⭐ **NOW DUE — 1.0.x went live 2026-08-24.** Post **Draft C** on #2, then close the issue and drop `Fix in progress` | `F105`, Draft C above |
 | ⛔ Draft B is now **unposted and superseded** — keep it as the accurate wording for any FUTURE reply, since the posted text has the four overreaches listed above | here |
 | F105 end-to-end repro — attended, rides a sitting | `F105`; not a blocker for either reply |
