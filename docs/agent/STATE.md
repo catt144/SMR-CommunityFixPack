@@ -7,12 +7,16 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Post-launch issues — field reports against the LIVE listings (newest first; entries carry the derivation)
-- **F104 ⛔ NOT OURS, pending closure.** Passage Network's `CreateDomeNetworks` override returns nothing;
+- **F104 ✅ CLOSED 08-24 — NOT OURS, and fully discharged.** Reply POSTED on GitHub issue **#1** 03:40Z,
+  issue closed 06:01Z (`completed`), **reporter CONFIRMED 19:24Z** ("i had a hunch that mod might be the
+  problem but thanks for checking"). Passage Network's `CreateDomeNetworks` override returns nothing;
   vanilla indexes the nil (`Passage.lua:1117`). ⭐ CONFIRMED live on the rig 08-23. Steam+Paradox builds
   byte-identical, so no fixed build exists. We are NAMED only as a stack pass-through (`EF-065`(a)).
-  ⚠️ **Tracker issue #1 "Colonist stuck homeless" is ALREADY CLOSED with ZERO comments** (read 08-24) — the
-  drafted reply was NEVER posted, so the reporter has no answer; posting it now means commenting on a closed
-  issue, the owner's call. F105 = issue **#2**, OPEN. ⚠️ PN is ENABLED on the rig (`H-08`) — untick
+  ⛔ **NEVER read the tracker through the issue's HTML page — 3 fetches returned "zero comments" when there
+  were 3, and a whole owner-facing finding was built on it. Use `api.github.com/.../issues/<n>/comments`;
+  the list endpoint's `comments` count is the control.** F105 = issue **#2**, OPEN, and it ALREADY has a
+  posted explanation (08-24T06:04:29Z, NOT Draft B, 4 sentences stronger than the tree — itemised in
+  `reports/FIELD_REPORT_REPLIES.md`, ⛔ never copy them to a player surface). ⚠️ PN is ENABLED on the rig (`H-08`) — untick
   before any clean leg. Its unmaintained state is logged as an opt-in candidate in THAT repo's FUTURE_IDEAS.
 - **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled "number 1 fix priority", checklist 72).
   ⭐⭐ **FIELD ROUTE REPRODUCED + FIX VERIFIED, attended A/B 08-24** — `archive/f105_leg{A,B}_*.log`:

@@ -5,32 +5,45 @@ file exists because these drafts were written in a session and **posting them is
 the owner's action, not an agent's**. Without this file they would have lived only
 in a transcript. Written 2026-08-24.
 
-⛔ **NOT POSTED as of 2026-08-24.** Strike this line when they are.
+✅ **BOTH ARE ANSWERED AND BOTH REPORTERS REPLIED — 2026-08-24.** This file is now
+a *record*, not a queue. Draft A went up verbatim on #1; #2 got a **different**
+reply, written before Draft B existed. See "What was actually posted" below.
+(This line replaces "⛔ NOT POSTED as of 2026-08-24", which was true when written
+and stopped being true the same day.)
 
 ## Context a fresh session needs
 
 * Both issues are from **the same reporter (Keelai)**, opened 2026-08-23 against
   the live listings — **the first field reports the pack has ever received.**
-* ✅ **CAPTURED 2026-08-24, read off the tracker** (`github.com/catt144/SMR-CommunityFixPack/issues`),
-  which retires the "never captured" gap this file carried:
+* ✅ **CAPTURED 2026-08-24**, which retires the "never captured" gap this file
+  carried:
 
-  | issue | title | entry | state on 2026-08-24 |
+  | issue | title | entry | state, 2026-08-24 |
   |---|---|---|---|
-  | **#1** | *"Colonist stuck homeless"* | **F104** | ⚠️ **CLOSED**, **zero comments** |
-  | **#2** | *"Error when completing milestone"* | **F105** | OPEN, labels `bug` + `Fix in progress`, zero comments |
+  | **#1** | *"Colonist stuck homeless"* | **F104** | **CLOSED** 06:01:47Z (`completed`), 3 comments, reporter confirmed |
+  | **#2** | *"Error when completing milestone"* | **F105** | OPEN, `bug` + `Fix in progress`, 3 comments, reporter acknowledged |
 
   The mapping is not from the titles alone: #2's attached log is
   `Mars.exe-20260824-00.01.27-6a22b86d.log`, which is the log `F105` was derived
   from. Both are assigned to the owner.
-* ⛔ **#1 IS ALREADY CLOSED AND DRAFT A WAS NEVER POSTED** — zero comments means
-  the reporter got no answer at all, only a closed issue. That is the opposite of
-  the ruling this file exists to carry ("it's not fair to users to just say it's
-  not our issue"). ⚠️ The closing actor is not shown on the issue page; do not
-  assert who closed it. Posting Draft A now means commenting on a **closed**
-  issue — the owner's call, and the reason this is on the checklist rather than
-  done. Recording the numbers goes in **`row_status`**, not a new front-matter
-  key: `split_bugs.render_entry` writes only `FRONT_FIELDS`, so an added key is
-  silently dropped the next time entries are rendered.
+* ⛔⛔ **READ THE TRACKER THROUGH THE JSON API. NEVER THROUGH THE ISSUE PAGE.**
+  This is the hardest-won line in this file. A sweep on 2026-08-24 fetched issue
+  #1's rendered HTML **three times** — including once with a cache-busting URL —
+  and every fetch reported **zero comments**. The issue had three. On that reading
+  the sweep recorded "the reporter got no answer at all", wrote it into `F104`,
+  `F105`, `STATE.md`, this file and a checklist item asking the owner to decide
+  what to do about a silence that never existed. The owner corrected it in one
+  sentence. ⇒ Use:
+  ```
+  api.github.com/repos/catt144/SMR-CommunityFixPack/issues?state=all      # numbers, state, COMMENT COUNT
+  api.github.com/repos/catt144/SMR-CommunityFixPack/issues/<n>/comments   # the comments themselves
+  ```
+  ⭐ The `comments` **count** in the issues list is the cheap control: if it is
+  non-zero and your reader shows you nothing, **your reader is lying**, not the
+  tracker. A rendered page is a derived surface; the API is the record.
+* ⛔ Record issue numbers in **`row_status`**, not a new front-matter key:
+  `split_bugs.render_entry` writes only the eleven `FRONT_FIELDS`, so an added
+  `issue:` key is silently dropped the next time entries are rendered.
 * ⚖️ **OWNER RULING 2026-08-23, and it is why these drafts name the other mod:**
   *"We can't just say it's not our mod, we need to explain that it's the other
   mod, and why… it's not fair to users to just say it's not our issue, we don't
@@ -131,11 +144,59 @@ do not add a sentence that does.
 
 ---
 
+## What was actually posted (the record — read this before drafting anything new)
+
+Pulled from the API 2026-08-24. **Both reporters replied and both are content.**
+
+**Issue #1 / F104** — Draft A below went up essentially verbatim.
+| when | who | what |
+|---|---|---|
+| 08-23T13:28:55Z | Keelai | *"Also appears when changing workplace."* — the workplace half of the symptom, volunteered |
+| 08-24T03:40:35Z | owner | **Draft A**, naming Passage Network |
+| 08-24T06:01:47Z | — | issue closed, `state_reason: completed` |
+| 08-24T19:24:28Z | Keelai | *"Yeah i had a hunch that mod might be the problem but thanks for checking :)"* |
+
+⇒ `F104`'s closure gate (a reply **and** the reporter's confirmation) is met, and
+the entry is `closed`.
+
+**Issue #2 / F105** — ⚠️ **the posted reply is NOT Draft B.**
+| when | who | what |
+|---|---|---|
+| 08-24T01:57:13Z | owner | asks for a save + which store the modlist came from |
+| 08-24T06:04:29Z | owner | **a full F105 explanation, written before the rig legs ran** |
+| 08-24T19:23:00Z | Keelai | *"Nice and thanks :) ill try and include both save and log in the future"* |
+
+⭐ It is a good reply and the reporter is satisfied; nothing here needs a
+correction posted. But it was written **hours before** legs A–D, so four of its
+sentences are **stronger than what the tree can now support**. ⛔ **Do not copy
+any of them onto the fix list, a store card or `last_changes`** — those surfaces
+have no reporter goodwill to spend and no thread to correct them in.
+
+1. ⛔ *"It also **repairs saves** that already have a levelling job in the broken
+   state"* — **we do not repair anything.** `F105`: the site stays broken, the
+   guard makes it harmless. The *player outcome* in that sentence is right and is
+   witnessed (leg D: install after the fact, zero `:673`, nothing to demolish) —
+   the mechanism is not. Say **"stops it happening on a save it is already
+   happening in"**, never "repairs".
+2. ⚠️ *"**Only three** technologies in the game carry the effect"* — that is the
+   `Effect_ModifyLabel` label-sweep set only. `OnMsg.ConstructionCostChanged`
+   (`ConstructionSite.lua:2832`) is a second, class-filtered reader route **not
+   ruled out by measurement**. The same guard covers it, so the fix claim is
+   unaffected — the *"only"* is what overreaches.
+3. ⚠️ *"it would just go **quietly to the log with no warning box**"* — the
+   measured half is `Mod Flagged` = 0 with the pack off, in all three legs, and
+   the raise still logging uncaught. The absence of a **box on screen** was never
+   recorded by a witness, and screen claims need an attended one.
+4. ⚠️ *"it happens with **no mods installed at all**"* — derived at source
+   (`ConstructionSite.lua:673` is vanilla), and every pack-OFF leg still ran with
+   the rig's other junctions present. Never witnessed on a clean install.
+
 ## Owed, and where it is tracked
 
 | Item | Where |
 |---|---|
-| ⚠️ Post Draft A **onto a CLOSED issue (#1)** — or reopen it first; the reporter has had no answer | `F104` "What is owed" |
-| Post Draft B onto **#2** (after the 1.0.x upload, or before with the wording as-is) | `F105` |
-| ~~Capture the two GitHub issue numbers + titles~~ ✅ **DONE 2026-08-24** — #1=F104, #2=F105, recorded in both `row_status` cells | here, resolved |
+| ~~Post Draft A, get reporter confirmation, close F104~~ ✅ **DONE 2026-08-24** — posted 03:40Z, confirmed 19:24Z, entry now `closed` | `F104`, discharged |
+| ~~Capture the two GitHub issue numbers + titles~~ ✅ **DONE 2026-08-24** — #1=F104, #2=F105, in both `row_status` cells | here, resolved |
+| ⚠️ **Optional, owner's call:** a short follow-up on **#2** when 1.0.x is live — *"this is out now"*. The explanation is already posted and accepted, so this is courtesy, not a debt | `F105` |
+| ⛔ Draft B is now **unposted and superseded** — keep it as the accurate wording for any FUTURE reply, since the posted text has the four overreaches listed above | here |
 | F105 end-to-end repro — attended, rides a sitting | `F105`; not a blocker for either reply |

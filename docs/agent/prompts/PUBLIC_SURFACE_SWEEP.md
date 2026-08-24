@@ -159,11 +159,28 @@ If the fix answers an open field report, the reply is part of shipping it.
   evaporates. `row_status` is rendered *and* carried into `INDEX.md`. After
   editing it, regenerate the index (`load_from_dir` + `render_index`), never by
   hand.
-* ⛔ **Read the issue's live STATE before writing the reply into the plan — a
-  drafted reply is not a posted one.** Sweeping on 2026-08-24 found **#1 already
-  CLOSED with zero comments**: the reporter got no answer at all, and posting
-  Draft A now means commenting on a closed issue. ⚠️ Do not assert who closed it;
-  the closing actor is not shown on the page.
+* ⛔⛔ **READ THE TRACKER THROUGH THE JSON API, NEVER THROUGH THE ISSUE PAGE.**
+  ```
+  api.github.com/repos/catt144/SMR-CommunityFixPack/issues?state=all      # state + COMMENT COUNT
+  api.github.com/repos/catt144/SMR-CommunityFixPack/issues/<n>/comments   # the comments
+  ```
+  This sweep's own first run fetched issue #1's rendered HTML **three times**,
+  once with a cache-busting URL, and got **zero comments** every time. There were
+  three — including the posted reply and the reporter thanking us for it. On that
+  reading it reported to the owner that a reporter had been left unanswered, and
+  wrote that into four documents. ⭐ **The control is free and it was skipped:**
+  the list endpoint's `comments` count. If it is non-zero and your reader shows
+  nothing, **your reader is wrong**, not the tracker. Generalise it — a rendered
+  page is a derived surface, and this file's whole doctrine is that derived
+  surfaces are checked against the record, not trusted.
+* ⛔ **A drafted reply is not a posted one — and a posted one may not be the
+  draft.** Check what is actually on the thread before planning anything. On
+  2026-08-24 #1 had Draft A verbatim, while **#2 had a different, earlier reply
+  that was never in this repo at all**, written before the verifying legs ran and
+  carrying four claims stronger than the tree could support. ⇒ When the owner has
+  already answered, your job is not to draft — it is to **diff what was said
+  against what is now measured**, and record any sentence that must not migrate
+  onto the fix list, a store card or `last_changes`.
 
 ---
 
@@ -190,7 +207,8 @@ If the fix answers an open field report, the reply is part of shipping it.
 [ ] items.lua / code list — upload_preflight 0 FAIL
 [ ] field-report reply updated; caveats struck only where a leg witnessed them
 [ ] issue number recorded in the entry's row_status (NOT front matter), index regenerated
-[ ] issue's LIVE state read — open/closed, comment count — before planning the reply
+[ ] tracker read via the JSON API, NOT the issue page; comment count used as the control
+[ ] what was ACTUALLY posted diffed against what is now measured; overreaches recorded
 [ ] faq.md judgment-call count still true (3 places) if this fix is a judgment call
 [ ] doccheck GREEN, both repos committed
 [ ] owner report separates "true in the tree" from "needs your hands"
