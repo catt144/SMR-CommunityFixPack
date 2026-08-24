@@ -20,9 +20,10 @@ modder info and it being mod friendly."*
   how many are invisible. ⇒ Two numbers are used and **both are checkable by the
   reader on the page the card links to**, which is the only thing that makes a
   count safe here:
-  - **79** — entries on the fix list. Emitted, not typed: `grep -c '^??? '`, and
-    the section tally sums to the same (18+11+9+9+7+7+7+7+4). ⚠️ It is worded as
-    *"seventy-nine repairs"*, not *"79 bugs"* — one entry covers two defects
+  - **80** — entries on the fix list (was 79; **+1 on 2026-08-24, F105's
+    landscaping error**). Emitted, not typed: `grep -c '^??? '`, and the section
+    tally sums to the same (18+11+9+9+8+7+7+7+4). ⚠️ It is worded as
+    *"eighty repairs"*, not *"80 bugs"* — one entry covers two defects
     ("Two story-scripting defects…"), so entries is the honest unit.
   - **4** — the fix list's own audited section *"Under the hood: these four repair
     things you cannot see today."* ⛔ Not a classification invented for the card.
@@ -96,7 +97,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Seventy-nine repairs, each one written up on the fix list with what you would
+Eighty repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -136,6 +137,7 @@ SOME OF WHAT IT FIXES
 · Salvaging an upgraded building left its bonuses behind forever.
 · You were never warned about running out of Food or maintenance resources.
 · Independent Terraforming gave half the discount it advertises.
+· Researching a technology threw an error while a landscaping job was running.
 · Three pieces of interface text stayed in English in every other language.
 
 … and a good deal more, including quieter repairs to drones, shuttles, domes,
@@ -209,7 +211,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Seventy-nine repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Eighty repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, a lander that unloaded its own return fuel and could never come home.
 
@@ -235,6 +237,7 @@ And [b]four[/b] of them repair things you cannot see at all today: real defects 
 [*]Salvaging an upgraded building left its bonuses behind forever.
 [*]You were never warned about running out of Food or maintenance resources.
 [*]Independent Terraforming gave half the discount it advertises.
+[*]Researching a technology threw an error while a landscaping job was running.
 [*]Three pieces of interface text stayed in English in every other language.
 [/list]
 … and a good deal more, including quieter repairs to drones, shuttles, domes, tourism, research, storylines and the interface.
@@ -268,6 +271,24 @@ The id is the key, not a list entry — a plain list looks valid and switches of
 [b]Source, and the reasoning behind every fix:[/b] [url=https://github.com/catt144/SMR-CommunityFixPack]github.com/catt144/SMR-CommunityFixPack[/url]
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 ```
+
+## ⭐ 2026-08-24 — one headliner added, and why it qualifies
+
+**"Researching a technology threw an error while a landscaping job was running"**
+(F105). It clears the bar the rest of this list is held to — *player-facing and
+recognisable* — on three counts the others mostly manage one of:
+
+* **A player SAW it.** It is the only entry on either card that came from a field
+  report against the live listings rather than from our own reading.
+* **It is reproduced.** Four attended legs on 2026-08-24 — pack off, 14 and 12
+  raises; pack on, zero (`F105`, section "THE FIELD ROUTE, REPRODUCED").
+* **It answers the question a reader of this card is most likely to have**, which
+  is whether installing the pack mid-game is safe. Leg D measured exactly that.
+
+⛔ The count moved 79 → 80 with it. Re-derived, never typed:
+`grep -c '^??? ' content/fix-list.md` in `C:\Dev\SMR-CommunityMods`.
+⛔ These blocks are our RECORD of what gets pasted — the live pages do not change
+until the owner pastes them at a sitting.
 
 ## Provenance of the headliners
 

@@ -59,10 +59,13 @@ carry only proven material** — the rest stands without it.
 
 ## Draft B — F105 ("Error when completing milestone")
 
-⭐ **Updated 2026-08-24:** the fix is no longer merely written — the guard is
-**measured reached** on all three landscape leaf classes
-(`archive/f106_Mars.exe-20260824-02.32.27.log`). The wording below already
-reflects that.
+⭐⭐ **Updated 2026-08-24 (second pass) — REPRODUCED AND VERIFIED, attended.**
+The fix is no longer written, nor merely measured on a stand-in: the defect was
+made to happen on our own rig and the fix was watched to stop it, across four
+legs (`archive/f105_leg{A,B,C,D}_*.log`; `F105` §"THE FIELD ROUTE, REPRODUCED").
+⇒ **Both caveats this draft used to carry are now DISCHARGED**, and the wording
+below is strengthened accordingly — see the note under it for exactly which
+sentence each leg bought.
 
 > Thanks for the log — that's what made this solvable, and it turned out to be worth chasing.
 >
@@ -74,21 +77,42 @@ reflects that.
 >
 > **Why the Fix Pack got named.** The game doesn't work out which mod caused an error — it flags any mod whose name appears anywhere in the crash report. The Fix Pack patches a function that happened to sit in the chain between your milestone and the crash, so our name is in the report. Without the Fix Pack installed you'd get the same error; it would just go quietly to the log with no warning box. We're looking at what we can do to make that less misleading, but the guess is the game's, not ours.
 >
-> **We've written a fix.** It's in our code now and verified working, and it goes out in the next update to both the Steam and Paradox listings. It skips the pointless cost refresh on landscaping sites, which have nothing to refresh — their work is measured in volume, not resources. It also repairs saves that already have a levelling job in the broken state, so you won't need to demolish anything.
+> **It's fixed, and we reproduced your error on our own machine to prove it.** With the fix off we get your exact error — `ConstructionSite.lua:673` — the moment a cost technology completes with a levelling job running. With the fix on, nothing. It skips the cost refresh on landscaping areas, which have nothing to refresh: their work is measured in volume of rock, not resources. Every other construction site is refreshed exactly as before.
+>
+> **You don't need a clean save.** We tested that specifically — saved a colony that was already throwing this error, installed the pack, and loaded it. Clean. Your levelling job can stay where it is; nothing needs demolishing.
+>
+> It goes out in the next update to both the Steam and Paradox listings.
 >
 > Worth knowing: this was reachable in the base game long before our mod existed, and as far as we can find nobody had reported it. So thank you — that log was genuinely useful.
 
-⚠️ **Two constraints on Draft B:**
+⚠️ **Constraints on Draft B — one still binds, two are discharged.**
 
-1. ⛔ **It promises "the next update", never a date, deliberately.** The tree is one
-   module ahead of both live listings and that upload has not happened
-   (`H-04`'s successor: never treat a claim as covering what the owner has not
-   done). Do not tighten this wording.
-2. ⚠️ **The save-repair sentence is derived, not witnessed.** The guard shape was
-   chosen partly because it heals sites already saved broken, and the guard is now
-   measured to fire — but **F105 has never been reproduced end to end** (a cost
-   tech sweeping a real levelling site). Cut that sentence if you want the reply
-   to assert only what has been observed.
+1. ⛔ **STILL BINDING. It promises "the next update", never a date, deliberately.**
+   The tree is one module ahead of both live listings and that upload has not
+   happened (`H-04`'s successor: never treat a claim as covering what the owner
+   has not done). ⛔ Do not tighten this wording, and do not post a version
+   number — `H-02` leaves the version to the sitting, so nobody knows it yet.
+2. ✅ **DISCHARGED 2026-08-24 — "we reproduced your error".** Legs A and C, pack
+   off: 14 and 12 raises of `ConstructionSite.lua:673`, from a real Flatten job
+   worked by real drones, state verified at the console before the trigger was
+   fired. Leg B, pack on: zero. This draft may now say *reproduced*, which the
+   previous version could not.
+3. ✅ **DISCHARGED 2026-08-24 — the save sentence.** It used to read "repairs
+   saves that already have a levelling job in the broken state", which was
+   derived from the fix's shape and never witnessed. **Leg D witnessed the thing
+   that matters to the reporter**: a save made while the error was live, pack
+   installed afterwards, loaded clean.
+   ⚠️ **The wording changed with it, and the change is not cosmetic.** We now say
+   *"you don't need a clean save"* rather than *"it repairs saves"* — because the
+   pack does **not** repair the save. The site stays in its broken state; the
+   guard makes that harmless. Uninstall the pack and the error comes back. The
+   old wording promised a repair we do not perform.
+
+⚠️ **Still not shown, so still not claimed anywhere in this draft:** what the
+error looks like to a player who is *not* driving it from the console. Every leg
+fired the trigger through the console, and the reporter's own popup came from
+research completing on the game thread. Nothing in the reply depends on that, but
+do not add a sentence that does.
 
 ---
 

@@ -44,7 +44,19 @@ return PlaceObj('ModDef', {
 	-- string. A player told to look for that name would find nothing on any
 	-- store. Licence: the owner's standing 22b word ("change any wordings to
 	-- their accurate versions"); text-only, no behaviour, no version bump.
-	'last_changes', "Initial release.",
+	-- ⭐ REWRITTEN 2026-08-24 for the first patch. Until now this said
+	-- "Initial release.", which is what the 1.0.0 upload shipped and what both
+	-- live listings still show. ⚠️ It is the CHANGELOG a player reads on the
+	-- store, so it must describe THIS version, not the pack. Player's words, no
+	-- fix ids, no counts (counts drift, see the comment above `last_changes`).
+	-- ⛔ F107 is deliberately absent: it was a defect in our own fix for F105,
+	-- found and repaired before either ever reached a player, so naming it on a
+	-- store page would describe a problem nobody could have had.
+	-- Licence for this edit: the owner's standing 22b word ("change any wordings
+	-- to their accurate versions"); text-only, no behaviour, and `H-02` as
+	-- reworded 2026-08-24 puts hand edits to this string squarely in scope while
+	-- leaving the version bump to the owner's sitting.
+	'last_changes', "Fixes a base-game error that interrupted research: finishing a technology that reduces building costs threw an error if a terrain-levelling or rock-clearing job was running anywhere on the map. Landscaping areas are now skipped by that cost refresh, which never applied to them — their work is measured in volume of rock, not resources. Safe to install on a save this is already happening in; the landscaping job can stay where it is.",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	-- ⭐ ADDED 2026-08-17 AT THE UPLOAD SITTING (④ step 1). Without it the
