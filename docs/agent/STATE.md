@@ -54,7 +54,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Report `reports/04_ATTENDED_SITTING.md`; logs `archive/link4{en,de,lang}_*`.
   ⛔ SKIPPED BY NAME: `C50`'s challenge landing-spot site, and the in-game Mission Profile on a SpaceY colony.
 - **A 1.0.x update IS queued since 2026-08-24** (F105's module; supersedes 08-20's "no queued 1.0.1").
-  ⛔ **Now blocked on `H-02` ALONE (checklist 75) — the F107 boot is DONE. One ruling, then the sitting.**
+  ✅ **UNBLOCKED 08-24: `H-02` reworded by owner ruling (checklist 75), F107 built + rig-verified.
+  Nothing is owed but the OWNER'S SITTING** — ⚠️ plus `last_changes`, which still reads "Initial release."
+  and is a hand edit an agent may make (see `H-02`).
   After that upload the next effort is the **opt-in pack** (owner 08-20, checklist 68); its kickoff reads
   that repo's own STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
 - ⛔ **Shipping artifact: NO PACKED `.fpk` MATCHES THIS TREE.** Expected shape **82 files = 78 `Code/*.lua` +
@@ -66,7 +68,6 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **Rig at the 08-20 sitting: all 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF** (checklist 43).
   The rig runs cheats — the normal config.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
-  **75 (⛔ `H-02` forbids the 1.0.x bump as written — lift or reword; blocks the upload)** ·
   76 (confirm (a) was a ruling not a leaning; the boot is done) ·
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
@@ -83,10 +84,16 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **H-01** Tag `fixpack-v1.0.0` was MOVED AGAIN 08-20 onto the close-out audit's commit and now marks what actually
   gets packed. ⛔ Its gate is the ATTENDED SITTING + the one-time release-gate ruling (checklist 57), NOT run B.
   Never move it again without an equivalent gate.
-- **H-02** `metadata.lua` is **FROZEN** at 1.0.0 — no version bump, no Mod Editor save
-  (every editor save runs `version = version + 1`, `Mod.lua:967`). ⚠️ **As written this FORBIDS the queued
-  1.0.x update, which requires a bump.** The freeze protected the 1.0.0 upload; lifting it for the update
-  era is an OWNER ruling, not an agent's — **checklist 75**. Until ruled, the hazard binds.
+- **H-02** `metadata.lua`'s **version is the SITTING's to set — never an agent's, and never by hand.**
+  ⭐ **The 1.0.0 FREEZE IS RETIRED (owner ruling 2026-08-24, checklist 75).** Standing rule: **open field
+  reports + a patch being prepared = a patch cycle, and NO freeze is assumed.** A freeze that survives into a
+  patch cycle blocks the thing the pack exists to do. ⛔ What still binds is mechanical, not a policy:
+  (1) an agent NEVER opens the Mod Editor — every save runs `version = version + 1` (`Mod.lua:967`) and
+  `ValidateModBeforeUpload` force-saves a dirty mod (`GedModEditor.lua:836-844`), so the bump is the sitting's;
+  (2) an agent NEVER hand-sets `version`/`version_major`/`version_minor` — the sitting bumps automatically and a
+  hand-set value on top DOUBLE-bumps, widening the portal gap checklist 71 says never to chase.
+  ✅ Every OTHER hand edit to `metadata.lua` (the `code` list per `H-10`, `last_changes`, descriptions) is
+  ordinary agent work and always was.
 - **H-03** No script/console in a launched game may touch a portal API — the FIRST call **creates the listing**
   (`SteamWorkshop.lua:17-22`). Safe: `DbgPackMod`, `tools/upload_preflight.py`. Paradox before Steam.
 - **H-04** ✅ **DISCHARGED 2026-08-20 — the owner uploaded; ④ is done and this is the one moment striking it is

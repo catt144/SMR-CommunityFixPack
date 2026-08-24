@@ -29,9 +29,34 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⛔ 2026-08-24 — THE UPDATE IS BLOCKED BY ONE OF YOUR OWN HAZARDS, and only you can lift it.
+### ✅ 2026-08-24 — RULED AND APPLIED. The hazard is reworded; nothing blocks the update but your sitting.
 
-75. ⛔ **`H-02` forbids the 1.0.x update as written. It needs your ruling before
+75. ✅ **RULED 2026-08-24, in-session, and APPLIED the same hour.** Your words:
+    *"if we have open bug reports and we are preparing a patch that should be
+    assumed we are off a freeze."* ⭐ **That is a better rule than the one I
+    drafted**, and it names what was actually wrong with `H-02`: it was written
+    as a *state* ("frozen at 1.0.0") when it should have been about *who and
+    how*. A freeze that survives into a patch cycle blocks the thing the pack
+    exists to do.
+    **`H-02` now reads:** the version is the **sitting's** to set, never an
+    agent's and never by hand; open field reports plus a patch in preparation
+    means a patch cycle and **no freeze is assumed**.
+    ⛔ **What I kept, because it is mechanical rather than policy** — an agent
+    never opens the Mod Editor (every save runs `version = version + 1`,
+    `Mod.lua:967`, and `ValidateModBeforeUpload` force-saves a dirty mod), and an
+    agent never hand-sets the version numbers, because the sitting bumps
+    automatically and a hand-set value on top **double-bumps** and widens the
+    portal gap item 71 says never to chase.
+    ✅ Every other hand edit to `metadata.lua` — the `code` list, `last_changes`,
+    descriptions — is ordinary agent work and always was.
+    ⚠️ **One thing left before the sitting, and it is mine:** `last_changes` still
+    says `"Initial release."` That string ships inside the mod and is the patch
+    note players read. It is a text-only hand edit, no bump — say go and it is
+    two minutes.
+
+    <details><summary>The original item, kept for the record</summary>
+
+    ⛔ **`H-02` forbids the 1.0.x update as written. It needs your ruling before
     any agent can prepare the upload.**
     The hazard reads *"`metadata.lua` is FROZEN at 1.0.0 — no version bump, no Mod
     Editor save."* It existed to protect the 1.0.0 upload from an accidental bump.
@@ -67,6 +92,8 @@ completed tests move whole to
     > only the owner, at a sitting, and the sitting ends the exemption.
     ⛔ **An agent cannot apply this** — it is your ruling to make, which is the
     whole reason this item exists. Say the word and it lands in one edit.
+
+    </details>
 
     ⚠️ **Unrelated, and it needs your hands too — the reporter's GitHub issue
     numbers were never captured.** F104 and F105 both cite "GitHub, Keelai" with
