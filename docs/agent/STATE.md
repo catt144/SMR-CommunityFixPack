@@ -15,8 +15,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled "number 1 fix priority", checklist 72).
   ⭐⭐ **FIELD ROUTE REPRODUCED + FIX VERIFIED, attended A/B 08-24** — `archive/f105_leg{A,B}_*.log`:
   pack OFF = **14 × `:673`** raises (real Flatten job, `state=clean`, live `.WasteRock`, verified BEFORE firing);
-  pack ON = **zero**. ⛔ Triggers are 3 techs ONLY. ⛔ Both legs fired from the console (`ConsoleExec` `pcall`),
-  so the PLAYER-FACING popup is still unseen — that is checklist 73's config (pack ON + module OFF), not this.
+  pack ON = **zero**; leg C is a 2nd pack-OFF control, **12 raises, `[CommunityFixPack]` 0 hits** (cleanest).
+  ⛔ Triggers are 3 techs ONLY. ⛔ CORRECTION: each raise logs TWICE (uncaught `[LUA ERROR]` **+** console
+  `pcall`) — 6+6 leg C, 7+7 leg A — so the uncaught path DOES fire. What never fires is `ReportModLuaError`
+  (`Mod Flagged` = 0 in all 3): pack OFF ⇒ no name to match. ⇒ checklist 73 = pack ON + module OFF, cheap.
   ⚠️ Live listings ONE module behind; that module's **F107** is REPAIRED and RIG-VERIFIED (see F107 above).
 - **F107 ✅ FIXED + RIG-VERIFIED 08-24 (checklist 74(a), receipt 76).** Was: `prev` **nil** on all 3 leaf
   classdefs ⇒ delegation dead code. Now ONE wrap on `ConstructionSite`, which declares it (`:665`).

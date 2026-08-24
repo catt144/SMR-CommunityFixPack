@@ -117,13 +117,19 @@ rock-clearing jobs) crashes the same way, not just levelling.
     classes not yet built — which `FIX_POLICY` §2 calls "every player's first
     run". The unattended harness leg was a cold boot; both paths are now covered
     for this module.
-    ⛔ **One thing this did NOT show, and I will not let it read as if it did:
-    the player-facing popup.** Both legs fired from the console, and
-    `ConsoleExec` wraps everything in `pcall` (`console.lua:60`) — which is
-    exactly what made leg A's raise *visible*, so it hides nothing, but it also
-    means the raise never reached the engine's uncaught handler. Seeing what the
-    reporter saw needs pack ON with this one module disabled — that is
-    **checklist 73**'s blame-surface measurement, and it is now cheap.
+    ⭐ **A third pack-OFF leg (leg C) came in after the write-up and CORRECTED
+    the write-up.** `f105_legC_*.log`: 12 raises, and `[CommunityFixPack]` appears
+    **zero** times — the cleanest control of the three, no re-tick to explain.
+    ⛔ **It also refuted something I had just told you.** I wrote that the console's
+    `pcall` meant the raise "never reached the engine's uncaught handler". Wrong:
+    every raise is logged **twice**, adjacent — 6 uncaught `[LUA ERROR]` plus 6
+    console-caught in leg C, and 7 + 7 in leg A when I went back and counted.
+    ⭐ **Which makes item 73 cheaper than I told you.** The thing that has never
+    fired is not the uncaught path — it is `ReportModLuaError`. `Mod Flagged` is
+    zero in all three legs simply because with the pack OFF there is no mod name
+    in the stack to match. So seeing the real player popup needs **pack ON with
+    this one module disabled** — no console trickery required, and the uncaught
+    path is already measured firing.
     → [agent/bugs/F105.md](agent/bugs/F105.md), section "THE FIELD ROUTE, REPRODUCED"
     ℹ️ ⚠️ One loose thread I am not dropping: leg A's log line 107,
     `Unpersist missing permanent: Mod/SMR_CommunityFixPack`. It is what PROVED
