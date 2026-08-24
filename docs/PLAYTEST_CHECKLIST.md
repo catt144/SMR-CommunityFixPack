@@ -29,6 +29,31 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⛔ 2026-08-24 — THE UPDATE IS BLOCKED BY ONE OF YOUR OWN HAZARDS, and only you can lift it.
+
+75. ⛔ **`H-02` forbids the 1.0.x update as written. It needs your ruling before
+    any agent can prepare the upload.**
+    The hazard reads *"`metadata.lua` is FROZEN at 1.0.0 — no version bump, no Mod
+    Editor save."* It existed to protect the 1.0.0 upload from an accidental bump.
+    **A real update requires exactly that bump**, so as written it blocks the thing
+    it was never meant to block. An agent obeying STATE will refuse; an agent
+    ignoring a hazard is worse. ⇒ **Rule it, don't leave it ambiguous.**
+    ❓ **The call:** does `H-02` become *"frozen except at an owner-run upload
+    sitting"*, or is it discharged like `H-04` was and replaced by a successor
+    that guards the same accident? ⚖️ I'd take the first — the accident it
+    prevents (a stray editor save silently bumping the version between sittings)
+    is still real between updates.
+
+    ℹ️ **Everything else about the deploy is already written down and needs no
+    decision from you** — this item exists only because a hazard cannot be lifted
+    by an agent. The sequence, the two-portal version mechanics, and the three
+    checks still owed from the *first* upload are in
+    [agent/reports/RELEASE_PORTAL_PREP.md](agent/reports/RELEASE_PORTAL_PREP.md)
+    §0.5(c)(d)(f) and §1; the pack route is Mods Manager → Edit (`Ctrl-E`) →
+    File → Pack Mod (⛔ the console is not a route).
+    ⚠️ **Item 74 comes first** — it decides whether the module you are uploading
+    is the repaired one.
+
 ### ⭐⭐ 2026-08-24 — F105 IS FIXED ON YOUR WORD, AND BUILDING IT EXPOSED A NEW QUESTION. One receipt, one call.
 
 **The receipt (item 72 — RULED by you, in-session: "This is a number 1 fix

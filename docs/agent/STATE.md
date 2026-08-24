@@ -10,10 +10,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **F104 ⛔ NOT OURS, pending closure.** Passage Network's `CreateDomeNetworks` override returns nothing;
   vanilla indexes the nil (`Passage.lua:1117`). ⭐ CONFIRMED live on the rig 08-23. Steam+Paradox builds
   byte-identical, so no fixed build exists. We are NAMED only as a stack pass-through (`EF-065`(a)).
-  Owed: reporter reply + their confirmation, then close. ⚠️ PN is ENABLED on the rig (`H-08`) — untick
+  Owed: reporter reply (DRAFTED, `reports/FIELD_REPORT_REPLIES.md`) + their confirmation, then close. ⚠️ PN is ENABLED on the rig (`H-08`) — untick
   before any clean leg. Its unmaintained state is logged as an opt-in candidate in THAT repo's FUTURE_IDEAS.
 - **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled "number 1 fix priority", checklist 72).
   Guard MEASURED reached on all 3 leaves 08-24 (`archive/f106_*.log`). ⛔ Triggers are 3 techs ONLY.
+  ⛔ Crash-path repro (levelling site + cost tech) has NEVER run — guard measured, field route not.
   ⚠️ Live listings ONE module behind; that module carries **F107** — fix before the 1.0.x upload or ship knowing.
 - **F107 ⛔ NEW, MEASURED 08-24, owner call OPEN (checklist 74).** `Fix_LandscapeCostRefresh` captures `prev` as
   **nil** on all 3 leaf classdefs (they don't declare the method) ⇒ crash IS fixed, delegation is dead code
@@ -21,8 +22,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **F106 ✅ CLOSED — REFUTED 08-24 by measurement**, filed and refuted same day. The pack applies at file-LOAD,
   BEFORE the builder (`00_Core.lua:452` < raise `lib.lua:371`), so the builder copies OUR wrap down; F33 clean.
   ⛔ `classes.lua:986-988` states the split INVERTED — never cite it. ⛔ Only `DataPatch` waits for ClassesBuilt.
-- **Blame surface (checklist 73)** — `EF-065`(a) fires whenever ANY error throws under one of our ~60
-  wrapped targets. 2 field sightings in one day, neither ours. Options tiered on checklist 73.
+- **Blame surface (checklist 73)** — `EF-065`(a) fires whenever ANY error throws under one of our
+  wrapped targets (**105 measured**, not the ~60 estimated). 2 field sightings 08-23/24, neither ours. Checklist 73.
 
 ## Now
 - ⭐⭐⭐ **PUBLISHED 2026-08-20 — ④ IS DONE, BOTH PORTALS, by the owner.** Paradox Mods `pdx_id` **156049**
@@ -53,6 +54,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **Rig at the 08-20 sitting: all 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF** (checklist 43).
   The rig runs cheats — the normal config.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
+  **75 (⛔ `H-02` forbids the 1.0.x bump as written — lift or reword; blocks the upload)** ·
   **74 (F107 — repair before the 1.0.x upload, or upload knowing; rec (a), one wrap on `ConstructionSite`)** ·
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
@@ -70,7 +72,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   gets packed. ⛔ Its gate is the ATTENDED SITTING + the one-time release-gate ruling (checklist 57), NOT run B.
   Never move it again without an equivalent gate.
 - **H-02** `metadata.lua` is **FROZEN** at 1.0.0 — no version bump, no Mod Editor save
-  (every editor save runs `version = version + 1`, `Mod.lua:967`).
+  (every editor save runs `version = version + 1`, `Mod.lua:967`). ⚠️ **As written this FORBIDS the queued
+  1.0.x update, which requires a bump.** The freeze protected the 1.0.0 upload; lifting it for the update
+  era is an OWNER ruling, not an agent's — **checklist 75**. Until ruled, the hazard binds.
 - **H-03** No script/console in a launched game may touch a portal API — the FIRST call **creates the listing**
   (`SteamWorkshop.lua:17-22`). Safe: `DbgPackMod`, `tools/upload_preflight.py`. Paradox before Steam.
 - **H-04** ✅ **DISCHARGED 2026-08-20 — the owner uploaded; ④ is done and this is the one moment striking it is
