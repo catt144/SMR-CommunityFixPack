@@ -99,6 +99,38 @@ rock-clearing jobs) crashes the same way, not just levelling.
   site, research a dome-cost tech, watch `ConstructionSite.lua:673` stay
   silent) rides your next sitting if you want the attended upgrade.
 
+### ⭐⭐⭐ 2026-08-24 — F105 IS REPRODUCED ON OUR OWN RIG, AND THE FIX WAS WATCHED TO STOP IT. Nothing is owed; this is a receipt.
+
+77. ⭐⭐ **The one thing every F105 document said had never been done, is done —
+    and you did it in about twenty minutes.** Until today the whole of F105 was
+    read off the shipped Lua against a stranger's log. Now:
+    * **Leg A, pack OFF — the defect fires. 14 raises of
+      `ConstructionSite.lua:673`** (`docs/archive/f105_legA_Mars.exe-20260824-15.28.06.log`,
+      lines 147-388). A real Flatten job, worked by real drones to
+      `state = clean` with a live WasteRock request, **state verified at the
+      console before firing rather than assumed**, then a cost tech researched.
+    * **Leg B, pack ON — it does not.** Zero `:673` in the entire session
+      (`f105_legB_Mars.exe-20260824-16.07.29.log`), with a landscape site active
+      and **Mars Nouveau researched** — which you confirmed on the tech screen.
+    ⭐ **Your mid-leg re-tick covered a third thing for free.** Enabling the pack
+    on an already-running process is the `F87` **enable path** — presets loaded,
+    classes not yet built — which `FIX_POLICY` §2 calls "every player's first
+    run". The unattended harness leg was a cold boot; both paths are now covered
+    for this module.
+    ⛔ **One thing this did NOT show, and I will not let it read as if it did:
+    the player-facing popup.** Both legs fired from the console, and
+    `ConsoleExec` wraps everything in `pcall` (`console.lua:60`) — which is
+    exactly what made leg A's raise *visible*, so it hides nothing, but it also
+    means the raise never reached the engine's uncaught handler. Seeing what the
+    reporter saw needs pack ON with this one module disabled — that is
+    **checklist 73**'s blame-surface measurement, and it is now cheap.
+    → [agent/bugs/F105.md](agent/bugs/F105.md), section "THE FIELD ROUTE, REPRODUCED"
+    ℹ️ ⚠️ One loose thread I am not dropping: leg A's log line 107,
+    `Unpersist missing permanent: Mod/SMR_CommunityFixPack`. It is what PROVED
+    the pack was off — but it also says a save carries a persisted reference to
+    our code, and `FIX_POLICY` §3a's posture is that it should not. Filed for a
+    look after the upload; nothing about it blocks anything.
+
 ### ⭐ 2026-08-24 — F107 IS REPAIRED. One module, one wrap, doccheck green — and one thing to check I read you right.
 
 76. ✅ **BUILT on your item-74 (a), same session — `Fix_LandscapeCostRefresh`

@@ -13,8 +13,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owed: reporter reply (DRAFTED, `reports/FIELD_REPORT_REPLIES.md`) + their confirmation, then close. ⚠️ PN is ENABLED on the rig (`H-08`) — untick
   before any clean leg. Its unmaintained state is logged as an opt-in candidate in THAT repo's FUTURE_IDEAS.
 - **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled "number 1 fix priority", checklist 72).
-  Guard MEASURED reached on all 3 leaves 08-24 (`archive/f106_*.log`). ⛔ Triggers are 3 techs ONLY.
-  ⛔ Crash-path repro (levelling site + cost tech) has NEVER run — guard measured, field route not.
+  ⭐⭐ **FIELD ROUTE REPRODUCED + FIX VERIFIED, attended A/B 08-24** — `archive/f105_leg{A,B}_*.log`:
+  pack OFF = **14 × `:673`** raises (real Flatten job, `state=clean`, live `.WasteRock`, verified BEFORE firing);
+  pack ON = **zero**. ⛔ Triggers are 3 techs ONLY. ⛔ Both legs fired from the console (`ConsoleExec` `pcall`),
+  so the PLAYER-FACING popup is still unseen — that is checklist 73's config (pack ON + module OFF), not this.
   ⚠️ Live listings ONE module behind; that module's **F107** is REPAIRED and RIG-VERIFIED (see F107 above).
 - **F107 ✅ FIXED + RIG-VERIFIED 08-24 (checklist 74(a), receipt 76).** Was: `prev` **nil** on all 3 leaf
   classdefs ⇒ delegation dead code. Now ONE wrap on `ConstructionSite`, which declares it (`:665`).
